@@ -20,21 +20,60 @@
 			}
 			.test-articles-list span {
 				display: inline-block;
-				width: 8em;
 				line-height: 2em;
+				margin-right: 2em;
 			}
-			.test-article-header span {
-				font-weight: bold;
-			}
-			.test-article > span:nth-child(1),
-			.test-article-header > span:nth-child(1) {
+			.test-article > span:nth-child(1) {
 				width: 14em !important;
 			}
 		</style>
 	</head>
 	<body>
-		<h2>Default Endpoints</h2>
+		<h2>Pages</h2>
 
+		<ul id="default-endpoints">
+			<li>
+				<a
+					href="/Article/https://www.theguardian.com/travel/2024/apr/03/walking-londons-unsung-river-nature-culture-and-moments-of-wonder-along-the-river-lea"
+					>🌍 Article</a
+				>
+			</li>
+			<li>
+				<a
+					href="/AppsArticle/https://www.theguardian.com/travel/2024/apr/03/walking-londons-unsung-river-nature-culture-and-moments-of-wonder-along-the-river-lea"
+					>📱 Apps Article</a
+				>
+			</li>
+			<li>
+				<a href="/Front/https://www.theguardian.com/international"
+					>🖼️ Front</a
+				>
+			</li>
+			<li>
+				<a
+					href="/TagPage/https://www.theguardian.com/tone/minutebyminute"
+					>🏷️ Tag Page</a
+				>
+			</li>
+			<li>
+				<a
+					href="/Interactive/https://www.theguardian.com/global-development/ng-interactive/2022/jun/09/the-black-sea-blockade-mapping-the-impact-of-war-in-ukraine-on-the-worlds-food-supply-interactive"
+					>✨ Interactive</a
+				>
+			</li>
+			<li>
+				<a
+					href="/AppsInteractive/https://www.theguardian.com/global-development/ng-interactive/2022/jun/09/the-black-sea-blockade-mapping-the-impact-of-war-in-ukraine-on-the-worlds-food-supply-interactive"
+					>💫 Apps Interactive</a
+				>
+			</li>
+			<li>
+				<a
+					href="/EmailNewsletters/https://api.nextgen.guardianapps.co.uk/email-newsletters"
+					>📧 Email Newsletters</a
+				>
+			</li>
+		</ul>
 		<form name="url-form">
 			<input
 				type="url"
@@ -45,69 +84,6 @@
 			/>
 			<input type="submit" value="Add" />
 		</form>
-
-		<ul id="default-endpoints">
-			<li>
-				<a
-					href="/Article/https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
-					>Article</a
-				>
-			</li>
-			<li>
-				<a
-					href="/AMPArticle/https://amp.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance"
-					>⚡️Article</a
-				>
-			</li>
-			<li>
-				<a
-					href="/Interactive/https://www.theguardian.com/global-development/ng-interactive/2022/jun/09/the-black-sea-blockade-mapping-the-impact-of-war-in-ukraine-on-the-worlds-food-supply-interactive"
-					>Interactive</a
-				>
-			</li>
-			<li>
-				<a
-					href="/AMPInteractive/https://www.theguardian.com/world/2021/mar/24/how-a-container-ship-blocked-the-suez-canal-visual-guide"
-					>⚡️Interactive</a
-				>
-			</li>
-			<li>
-				<a
-					href="/AppsInteractive/https://www.theguardian.com/global-development/ng-interactive/2022/jun/09/the-black-sea-blockade-mapping-the-impact-of-war-in-ukraine-on-the-worlds-food-supply-interactive"
-					>Apps Interactive</a
-				>
-			</li>
-			<li>
-				<a href="/Front/https://www.theguardian.com/international"
-					>International Front</a
-				>
-				(<a href="/FrontJSON/https://www.theguardian.com/international"
-					>Enhanced JSON</a
-				>)
-			</li>
-			<li>
-				<a
-					href="/TagPage/https://www.theguardian.com/tone/minutebyminute"
-					>Tag Page</a
-				>
-				(<a
-					href="/FrontJSON/https://www.theguardian.com/tone/minutebyminute"
-					>Enhanced JSON</a
-				>)
-			</li>
-			<li>
-				<a
-					href="/AppsArticle/https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
-					>📱 Apps Article</a
-				>
-			</li>
-			<li>
-				<a
-					href="/EmailNewsletters/https://api.nextgen.guardianapps.co.uk/email-newsletters"
-					>📧 All Newsletters page</a
-				>
-			</li>
-		</ul>
 
 		<section>
 			<h2>Article Examples</h2>
@@ -307,12 +283,9 @@
 				<table>
 					<thead>
 						<tr>
-							<th rowspan="2">Headline</th>
-							<th rowspan="2">Description</th>
-							<th rowspan="2">Format</th>
-							<th colspan="3">Links</th>
-						</tr>
-						<tr>
+							<th>Headline</th>
+							<th>Description</th>
+							<th>Format</th>
 							<th>DEV</th>
 							<th>CODE</th>
 							<th>PROD</th>
@@ -341,7 +314,6 @@
 					<td class="links">
 						<article-link product="dotcom" env="DEV"></article-link>
 						<article-link product="apps" env="DEV"></article-link>
-						<article-link product="amp" env="DEV"></article-link>
 					</td>
 					<td class="links">
 						<article-link
@@ -349,7 +321,6 @@
 							env="CODE"
 						></article-link>
 						<article-link product="apps" env="CODE"></article-link>
-						<article-link product="amp" env="CODE"></article-link>
 					</td>
 					<td class="links">
 						<article-link
@@ -357,7 +328,6 @@
 							env="PROD"
 						></article-link>
 						<article-link product="apps" env="PROD"></article-link>
-						<article-link product="amp" env="PROD"></article-link>
 					</td>
 				</tr>
 			</template>
@@ -401,27 +371,11 @@
 
 		<h2>Test Articles By Element</h2>
 
-		<div id="test-articles-by-element" class="test-articles-list">
-			<div class="test-article-header">
-				<span>type</span>
-				<span>local</span>
-				<span>local-amp</span>
-				<span>production</span>
-				<span>production-amp</span>
-			</div>
-		</div>
+		<div id="test-articles-by-element" class="test-articles-list"></div>
 
 		<h2>Test Articles By Atom Type</h2>
 
-		<div id="test-articles-by-atom-type" class="test-articles-list">
-			<div class="test-article-header">
-				<span>type</span>
-				<span>local</span>
-				<span>local-amp</span>
-				<span>production</span>
-				<span>production-amp</span>
-			</div>
-		</div>
+		<div id="test-articles-by-atom-type" class="test-articles-list"></div>
 
 		<h2>Test Articles By Element (Missing)</h2>
 		<ul>
@@ -733,10 +687,9 @@
 			const makeTestArticle = (a) => `
 			             <div class="test-article">
 			                 <span>${a.name}</span>
-			                 <span><a href="/Article/https://www.theguardian.com${a.article}">🔗</a> <a href="/Article/http://localhost:9000${a.article}">🔗(local FE)</a></span>
-			                 <span><a href="/AMPArticle/https://www.theguardian.com${a.article}">🔗</a> <a href="/AMPArticle/http://localhost:9000${a.article}">🔗(local FE)</a></span>
-			                 <span><a href="https://www.theguardian.com${a.article}">example</a></span>
-			                 <span><a href="https://amp.theguardian.com${a.article}">example</a></span>
+			                 <span><a href="/Article/https://www.theguardian.com${a.article}">local</a></span>
+							 <span><a href="/Article/http://localhost:9000${a.article}">local FE</a></span>
+			                 <span><a href="https://www.theguardian.com${a.article}">prod</a></span>
 			             </div>
 			         `;
 
@@ -916,7 +869,7 @@
 
 			class ArticleLink extends HTMLElement {
 				/**
-				 * @typedef {'dotcom' | 'apps' | 'amp'} Product
+				 * @typedef {'dotcom' | 'apps'} Product
 				 * @typedef {'PROD' | 'CODE' | 'DEV'} Env
 				 */
 
@@ -938,8 +891,6 @@
 						case 'dotcom':
 						case 'apps':
 							return 'https://www.theguardian.com';
-						case 'amp':
-							return 'https://amp.theguardian.com';
 					}
 				}
 
@@ -952,8 +903,6 @@
 						case 'dotcom':
 						case 'apps':
 							return 'https://m.code.dev-theguardian.com';
-						case 'amp':
-							return 'https://amp.code.dev-theguardian.com';
 					}
 				}
 
@@ -977,8 +926,6 @@
 							return '/Article';
 						case 'apps':
 							return '/AppsArticle';
-						case 'amp':
-							return '/AMPArticle';
 					}
 				}
 
@@ -1027,8 +974,6 @@
 							return '🌍 Dotcom';
 						case 'apps':
 							return '📱 Apps';
-						case 'amp':
-							return '⚡️ AMP';
 					}
 				}
 
@@ -1081,13 +1026,9 @@
 					const env = this.getAttribute('env');
 					const href = this.getAttribute('href');
 
-					if (
-						product !== 'dotcom' &&
-						product !== 'apps' &&
-						product !== 'amp'
-					) {
+					if (product !== 'dotcom' && product !== 'apps') {
 						this.textContent =
-							"article-link error: 'product' must be one of: 'dotcom', 'apps' or 'amp'";
+							"article-link error: 'product' must be one of: 'dotcom' or 'apps'";
 						return;
 					}
 

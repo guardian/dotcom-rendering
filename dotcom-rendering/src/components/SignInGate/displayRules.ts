@@ -11,9 +11,7 @@ import type { CanShowGateProps } from './types';
 export const isNPageOrHigherPageView = (n = 2): boolean => {
 	// get daily read article count array from local storage
 	const [dailyCount = {} as DailyArticle] = getDailyArticleCount() ?? [];
-
 	const { count = 0 } = dailyCount;
-
 	return count >= n;
 };
 
