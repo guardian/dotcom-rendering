@@ -21,5 +21,7 @@
  * why, thanks!
  */
 module.exports = {
-	configOverrides: {},
+	configOverrides: {
+		serverSideABTests: {},
+	},
 };

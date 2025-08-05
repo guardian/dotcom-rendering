@@ -97,7 +97,7 @@ export const Live: FEArticle = {
 					},
 				],
 			},
-			elementId: 'b49b671f-aebf-4ec6-b3e7-82e194341098',
+			elementId: '90df723a-b6d3-44dd-a915-d9f1603d0db8',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -296,17 +296,17 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>That’s it for our live coverage of Nasa’s celebratory news conference and Q&amp;A following the successful landing of the rover Perseverance on Mars.</p>',
-					elementId: 'c4f8871d-cb3b-4eba-84a7-4b6fc957563e',
+					elementId: '17ffcd20-aa33-4aa6-9f93-830b811d338e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>To recap:</p>',
-					elementId: 'bdf7c20a-be45-4ebb-9319-6cad773e493e',
+					elementId: 'd4f6c334-803c-4305-9f2c-228e0b603060',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li>The rover is “healthy” and undergoing systems testing.</li>\n <li>It already has beamed back stunning photos from the surface of <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> promising significant scientific discoveries ahead.</li>\n <li>The images include the first color images beamed directly from Mars as opposed to images touched up later.</li>\n <li>The rover documented its own touchdown via an ingenious system of booster rockets and a “space crane”.</li>\n <li>It landed in a “pool-table flat” crater in a prime location for searching for traces of ancient life.</li>\n <li>The wheeled rover could begin to move around its new home as early as late February.</li>\n <li>The rover’s mini helicopter could launch as early as April.</li>\n <li>Its broad mission is to stay on Mars for a couple years, gather data and harvest samples to be collected and returned to Earth on a future mission.</li>\n <li>The point is to determine whether there was life on Mars and subsidiary questions.</li>\n <li>The team at Nasa is very happy and excited, “on cloud nine” in a “weird, dreamlike state”... with lots of work ahead.</li>\n</ul>',
-					elementId: 'a98247ae-5063-4933-8635-4f6dc2f6be05',
+					elementId: '9a9cfaff-56c2-42e7-b4c0-87548ef8467b',
 				},
 			],
 			attributes: {
@@ -404,7 +404,7 @@ export const Live: FEArticle = {
 							},
 						],
 					},
-					elementId: '8efbd229-c8e0-4524-be53-b795d69f06b6',
+					elementId: 'b461eb27-6bd4-438f-a15e-9ab2b6a5cb46',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -668,12 +668,12 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Steltzner is showing some of the most fantastic images from space explorations past, from moonshots to the Hubble telescope.</p>',
-					elementId: '87e985dd-43c6-4d17-9c2d-7fd78a00d346',
+					elementId: '9e31a97f-171a-41ca-b4a5-309ea3e5ee9a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>He proposes an image of the dangling Perseverance Rover taken yesterday – it looks like a futuristic marionette – as the next entry in this cosmic scrapbook. <br></p>',
-					elementId: 'a4384266-63e1-4006-96f7-104517845f61',
+					elementId: '67255136-3b61-40ff-972c-b89f931017a8',
 				},
 			],
 			attributes: {
@@ -699,33 +699,33 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Members of the National Aeronautics and <a href="https://www.theguardian.com/science/space" data-component="auto-linked-tag">Space</a> Administration (Nasa) team that put a rover on Mars on Thursday are preparing to host a news conference and answer questions about the mission.</p>',
-					elementId: 'd74a1e48-5e71-4f2f-a90a-8be11af4cb29',
+					elementId: '64e9eb58-0e2e-49ab-a1da-d3ea98ac6b75',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The rover, called Perseverance or Percy for short, is on <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> to search for signs of ancient life and collect samples to be returned by a future mission. About the size of a car, the wheeled rover is equipped with cameras, microphones, drills and even a small helicopter.</p>',
-					elementId: 'aa18b5f2-0972-428d-8393-10a79f3789ab',
+					elementId: '295bf438-3620-4aaa-be20-7219d4c7efd3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Guardian science correspondent Natalie Grover reports of Percy’s mission:</p>',
-					elementId: '48288e9b-bba6-4654-a935-bff841ec7564',
+					elementId: '95b83721-c854-4ba2-9a5e-9efce69ee7c6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 					html: '<blockquote class="quoted">\n <p>Previous Mars missions including <a href="https://viewer.gutools.co.uk/science/2013/jul/28/curiosity-rover-descent-mars-nasa">Curiosity</a> and Opportunity have suggested Mars was once a wet planet with an environment likely to have been supportive of life billions of years ago. Astrobiologists hope this latest mission can offer some evidence to prove whether that was the case.</p>\n</blockquote>',
-					elementId: '96cdc0c1-8845-45bd-b911-e68fac50155f',
+					elementId: 'c9e364cf-4a31-420f-92fd-29d2bb8ef863',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The <a href="https://www.theguardian.com/science/nasa" data-component="auto-linked-tag">Nasa</a> scientists appear to feel they may be tantalizingly close to a discovery that could change the way we see the universe and our home in it. Here was the scene in the control room near Los Angeles just before 1pm local time on Thursday when Percy’s safe touchdown on Mars was confirmed:<br></p>',
-					elementId: 'c4b29083-863d-4019-9ed4-1fab6bc67615',
+					elementId: '2acdf6b0-3f4d-42b4-b0cc-c6483382e101',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
 					source: 'YouTube',
 					originalUrl: 'https://www.youtube.com/watch?v=Ew24GrPKi3Y',
-					elementId: 'f948902e-bd1a-4cc6-8f04-c6ae975dace6',
+					elementId: 'bc5fd1e0-79ad-4314-add0-c6b3abda5089',
 					width: 460,
 					embedUrl:
 						'https://www.youtube-nocookie.com/embed/Ew24GrPKi3Y?wmode=opaque&feature=oembed',
@@ -739,12 +739,12 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The robotic vehicle sailed through space for nearly seven months, covering 293m miles (472m km) before piercing the Martian atmosphere at 12,000mph (19,000km/h) to begin its approach to touchdown on the planet’s surface.</p>',
-					elementId: '137dc823-aa0b-4abc-bb63-205a8ae77cf3',
+					elementId: '46e99914-c8b1-4cde-90f8-b563c73dd54d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Thank you for joining our live coverage.</p>',
-					elementId: '73ebb027-a8cf-4b66-a7c2-5bb70bcb4092',
+					elementId: '7842e08d-8073-40ae-b22e-5a30e24d9a38',
 				},
 			],
 			attributes: {
@@ -773,17 +773,17 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>That’s it for our live coverage of Nasa’s celebratory news conference and Q&amp;A following the successful landing of the rover Perseverance on Mars.</p>',
-					elementId: '7df26a94-dde1-47a7-a966-05307a8e215b',
+					elementId: '2f1291d5-32dc-498b-ac7c-65fe3d2f8ade',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>To recap:</p>',
-					elementId: '2a17c682-449b-417f-83cf-6ac0406560d3',
+					elementId: '2a4990c5-0b66-49d9-9daf-04d34e8eb878',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li>The rover is “healthy” and undergoing systems testing.</li>\n <li>It already has beamed back stunning photos from the surface of <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> promising significant scientific discoveries ahead.</li>\n <li>The images include the first color images beamed directly from Mars as opposed to images touched up later.</li>\n <li>The rover documented its own touchdown via an ingenious system of booster rockets and a “space crane”.</li>\n <li>It landed in a “pool-table flat” crater in a prime location for searching for traces of ancient life.</li>\n <li>The wheeled rover could begin to move around its new home as early as late February.</li>\n <li>The rover’s mini helicopter could launch as early as April.</li>\n <li>Its broad mission is to stay on Mars for a couple years, gather data and harvest samples to be collected and returned to Earth on a future mission.</li>\n <li>The point is to determine whether there was life on Mars and subsidiary questions.</li>\n <li>The team at Nasa is very happy and excited, “on cloud nine” in a “weird, dreamlike state”... with lots of work ahead.</li>\n</ul>',
-					elementId: 'e20e02fb-c2a8-48f5-80dd-0edfcd52cb8c',
+					elementId: '552df960-a18b-4c09-8c1f-200d39054f60',
 				},
 			],
 			attributes: {
@@ -809,7 +809,7 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>#TBT</p>',
-					elementId: '579d842c-3a3c-48bc-8ad9-797bddf51fe0',
+					elementId: 'af1f18bb-39a9-48b1-a968-ea958e0bc254',
 				},
 				{
 					expired: false,
@@ -837,7 +837,7 @@ export const Live: FEArticle = {
 						},
 					],
 					id: '60606947-4f1f-4343-9bb7-000e91502129',
-					elementId: '7d9419e9-2757-4ba0-b364-db1a41186a26',
+					elementId: '4def53dc-f1dd-4cc5-b4c6-513c1ff6fa2b',
 					duration: 142,
 					_type: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
 					mediaTitle:
@@ -867,13 +867,13 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>#FF</p>',
-					elementId: '9834fd63-1caf-4930-96a1-23d37f7145fc',
+					elementId: '4dfac9de-bdfa-4590-8e8b-438eac704ba0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
 					source: 'Twitter',
 					id: '1362831783444717568',
-					elementId: 'df807799-d7bf-44aa-8ef9-e1a540ffeb2d',
+					elementId: '5632f974-6401-4038-b7b1-eeba7011d40e',
 					hasMedia: false,
 					role: 'inline',
 					url: 'https://twitter.com/NASAPersevere/status/1362831783444717568',
@@ -884,7 +884,7 @@ export const Live: FEArticle = {
 					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
 					source: 'Twitter',
 					id: '1362839907824136193',
-					elementId: '9a0d886f-8070-41ca-a347-1def2845bb5b',
+					elementId: '915cdc94-cfbd-4eea-a73f-d1bd83f03a81',
 					hasMedia: false,
 					role: 'inline',
 					url: 'https://twitter.com/NASAPersevere/status/1362839907824136193',
@@ -914,7 +914,7 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Have you typed “<a href="https://www.google.com/search?q=perseverance&amp;oq=pers&amp;aqs=chrome.0.69i59j69i57j0l3j46j69i60j69i61.1091j0j7&amp;sourceid=chrome&amp;ie=UTF-8">perseverance</a>” into Google today?</p>',
-					elementId: '14e7d273-5455-4cb3-9042-4e60d84b0a84',
+					elementId: '541a019e-adb4-4ed3-975b-fa2fdf0c2842',
 				},
 			],
 			attributes: {
@@ -939,12 +939,12 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Now that Perseverance persevered through the “seven minutes of terror” – a new era of space exploration has officially begun.</p>',
-					elementId: 'df54d80e-01c9-4481-bb8a-d16e3744f10f',
+					elementId: 'fe45e8c7-5278-420c-8a67-dbdd38de4683',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Next up, the science team will make crucial decisions on which direction to take the rover in as it kicks off its search for ancient life. <br></p>',
-					elementId: '1b291b69-67e4-41b3-99c9-d66a39c8de60',
+					elementId: 'bcd1d81a-6e71-4459-a989-5e4323dbd52c',
 				},
 			],
 			attributes: {
@@ -973,17 +973,17 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The event is concluding. They’ll be back for a 2pm ET news conference on Monday. Mission updates can be found meanwhile on the <a href="https://mars.nasa.gov/mars2020/">Nasa web site</a>.</p>',
-					elementId: 'c00bb539-baa3-4dec-8a9b-08a218d6dce9',
+					elementId: '144c8e97-ee4a-4d8a-88a5-45e4af95a443',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>McGregor signs off:</p>',
-					elementId: '877a0e8e-7237-474e-a2dd-811d5a8fb5bc',
+					elementId: 'b9476134-fe82-4be0-b767-cea78be78d0c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“Everyone have a great day, on Earth and on <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a>.”</p>',
-					elementId: '2e7c91b1-307a-41ca-9651-6975edc9b540',
+					elementId: 'cc021d35-065c-48af-a50d-14e3fdb88b3d',
 				},
 			],
 			attributes: {
@@ -1008,12 +1008,12 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Nasa scientists have worked for years to support this mission, and kept things going despite the ongoing coronavirus disruption.</p>',
-					elementId: '7345e7b2-f0ec-4538-8dff-16d04ece91d7',
+					elementId: '9d66c068-23bf-44cf-9e75-5d9be5a63292',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>After the landing success yesterday, one team says they had a “socially distanced ice cream” event, while the engineering team had a virtual happy hour! <br></p>',
-					elementId: '87c46388-ba51-440f-9cd3-6f1314eaaa2d',
+					elementId: '64528fa5-e670-46dc-95c6-e453100d1a5c',
 				},
 			],
 			attributes: {
@@ -1042,17 +1042,17 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Next question: <strong>How did you celebrate?</strong></p>',
-					elementId: '1c07b49f-1f8c-4c7c-ad0e-39944bdbf58a',
+					elementId: 'd40e35fb-988d-4e40-96d1-c8426f8a2b87',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Answers include:</p>',
-					elementId: 'd8050c92-ce45-48f0-9333-6435d929518f',
+					elementId: '04aef65e-2ba4-4d94-8403-eaa9fad15dc3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li>Virtual happy hour</li>\n <li>“Socially distanced consumption of ice cream outdoors”</li>\n <li>“I went home and just passed out from just the excitement of the day”</li>\n <li>“In the coming days I’ll definitely be having a glass of wine”</li>\n <li>“It was super-exciting”</li>\n <li>“We’re working two shifts a day almost 20 hours a day... it is kind of a really cool thing”</li>\n <li>“Business as usual for a science team working on a <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> rover”</li>\n</ul>',
-					elementId: '8d83b799-5970-44c6-b38e-95174b07f389',
+					elementId: 'dcaa5e2a-6a15-4827-b343-29c6c405e9cb',
 				},
 			],
 			attributes: {
@@ -1077,27 +1077,27 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Another key question: <strong>When will the rover drive? </strong></p>',
-					elementId: '2d64c115-4b8f-4fe2-baf6-bb2f4a405c81',
+					elementId: 'f93c9e0f-7cae-4497-89e1-f45049541052',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“We’re anticipating the earliest... would be sol 8 or 9... our current best estimate.</p>',
-					elementId: 'cbee8f89-7a2c-4aed-93fd-c607a06eceb9',
+					elementId: '969eb102-9db5-4de5-9763-fee718582819',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“Maybe a short drive just to check everything out...</p>',
-					elementId: '53494c6a-d269-4375-b581-bf57c36e07b4',
+					elementId: '2a1ce4a8-9d99-4b0d-b659-2a44c9b8cdf7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“We’ll also be figuring out the route and direction we need to go.”</p>',
-					elementId: 'e2b442e6-a5d1-4fe5-81f4-d255994908c1',
+					elementId: 'fe44a0af-2df0-4b84-b79a-b3f185aa060b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>That means rover could rove before February is out.</p>',
-					elementId: '1918c7d9-5ca4-4816-941b-522756373984',
+					elementId: 'be9787d5-f8e2-4d00-b022-43a8711ce9b2',
 				},
 			],
 			attributes: {
@@ -1122,7 +1122,7 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The team members have described their fascination with the holes in the rocks visible next to the rover’s wheel in this photograph just released by <a href="https://www.theguardian.com/science/nasa" data-component="auto-linked-tag">Nasa</a>. It is unknown whether the holes indicate volcanic or sedimentary rock.</p>',
-					elementId: '1cffa759-ca3d-47c5-adf7-8273c798625c',
+					elementId: '4dcb189d-a6c2-4529-9568-05f6bfa53677',
 				},
 				{
 					displayCredit: true,
@@ -1193,7 +1193,7 @@ export const Live: FEArticle = {
 							},
 						],
 					},
-					elementId: '76d3d191-2221-4816-bfb9-9c7ec9dd2479',
+					elementId: '4e978efa-b35a-493c-b0f0-fcfc5e215c2e',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -1456,12 +1456,12 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Attached to the rover’s belly is a diminutive helicopter called Ingenuity.</p>',
-					elementId: 'e37649bb-7306-4b32-98c1-570b8ad5ef58',
+					elementId: '105c6230-1156-4392-a25b-b8da9df63e83',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The 1.8kg drone-like rotorcraft is the first flying machine ever sent to another planet — it has the ability to take colour pictures and video. The rover can also take images of Ingenuity. <br></p>',
-					elementId: '6e4a28b5-00c0-4015-9dcc-09dfdc882354',
+					elementId: 'cbbb8e6f-8ab8-47df-8408-e9f9f17d8a7c',
 				},
 				{
 					displayCredit: true,
@@ -1532,7 +1532,7 @@ export const Live: FEArticle = {
 							},
 						],
 					},
-					elementId: 'c1cb8823-e0ba-4f64-8727-5b074a64c7a3',
+					elementId: 'ab589538-8d8d-4132-ad93-dad2d358f009',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -1799,12 +1799,12 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Key question: <strong>how long till they fly the helicopter?</strong></p>',
-					elementId: '31b0aa99-3c5a-4aad-a417-230e2d11b177',
+					elementId: '9cd4b716-6f21-4f3c-8362-d3c85702f9f3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“Caveat caveat caveat,” the scientist says. “Super-fast” would be “sol 60.” With a sol being 37 minutes longer than and earth days, that would be 60 earth days plus 37 hours = 61 days, 13 hours. Sometime in April. Best-case scenario.</p>',
-					elementId: 'eaabd868-5122-4f9f-b0e4-ffb87f00cb8c',
+					elementId: '33ba7b4c-8831-4e66-8809-2a876cdb4659',
 				},
 			],
 			attributes: {
@@ -1895,7 +1895,7 @@ export const Live: FEArticle = {
 							},
 						],
 					},
-					elementId: 'c8ceda71-e555-4921-b2a2-78b1700e7391',
+					elementId: '9409fec3-7022-423b-8d14-046c5b9ad008',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2307,7 +2307,7 @@ export const Live: FEArticle = {
 			},
 			isAccessibleForFree: true,
 			image: [
-				'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+				'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=df568dd2914da2449857393ee177d976',
 				'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
 				'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
 				'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
@@ -2357,7 +2357,7 @@ export const Live: FEArticle = {
 					},
 					isAccessibleForFree: true,
 					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=df568dd2914da2449857393ee177d976',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
@@ -2407,7 +2407,7 @@ export const Live: FEArticle = {
 					},
 					isAccessibleForFree: true,
 					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=df568dd2914da2449857393ee177d976',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
@@ -2456,7 +2456,7 @@ export const Live: FEArticle = {
 					},
 					isAccessibleForFree: true,
 					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=df568dd2914da2449857393ee177d976',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
@@ -2505,7 +2505,7 @@ export const Live: FEArticle = {
 					},
 					isAccessibleForFree: true,
 					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=df568dd2914da2449857393ee177d976',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
@@ -2555,7 +2555,7 @@ export const Live: FEArticle = {
 					},
 					isAccessibleForFree: true,
 					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=df568dd2914da2449857393ee177d976',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
@@ -2605,7 +2605,7 @@ export const Live: FEArticle = {
 					},
 					isAccessibleForFree: true,
 					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=df568dd2914da2449857393ee177d976',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
@@ -2655,7 +2655,7 @@ export const Live: FEArticle = {
 					},
 					isAccessibleForFree: true,
 					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=df568dd2914da2449857393ee177d976',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
@@ -2705,7 +2705,7 @@ export const Live: FEArticle = {
 					},
 					isAccessibleForFree: true,
 					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=df568dd2914da2449857393ee177d976',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
@@ -2755,7 +2755,7 @@ export const Live: FEArticle = {
 					},
 					isAccessibleForFree: true,
 					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=df568dd2914da2449857393ee177d976',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
@@ -2805,7 +2805,7 @@ export const Live: FEArticle = {
 					},
 					isAccessibleForFree: true,
 					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=df568dd2914da2449857393ee177d976',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
@@ -2855,7 +2855,7 @@ export const Live: FEArticle = {
 					},
 					isAccessibleForFree: true,
 					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=df568dd2914da2449857393ee177d976',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
@@ -2905,7 +2905,7 @@ export const Live: FEArticle = {
 					},
 					isAccessibleForFree: true,
 					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=df568dd2914da2449857393ee177d976',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
@@ -2955,7 +2955,7 @@ export const Live: FEArticle = {
 					},
 					isAccessibleForFree: true,
 					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=df568dd2914da2449857393ee177d976',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
 						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
@@ -2999,7 +2999,7 @@ export const Live: FEArticle = {
 			'https://www.theguardian.com/profile/tommccarthy,https://www.theguardian.com/profile/natalie-grover',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+			'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=df568dd2914da2449857393ee177d976',
 		'al:ios:url':
 			'gnmguardian://science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
@@ -3032,7 +3032,7 @@ export const Live: FEArticle = {
 		'twitter:app:url:iphone':
 			'gnmguardian://science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates?contenttype=Article&source=twitter',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&s=37ffd2c6ec44a4f5f66d88d8d3ec5e21',
+			'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&s=79e933e7522429f5d3b2a0b3f7ab24fa',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
 			'gnmguardian://science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates?contenttype=Article&source=twitter',
@@ -3195,6 +3195,7 @@ export const Live: FEArticle = {
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},
+		serverSideABTests: {},
 		edition: 'UK',
 		ipsosTag: 'environment',
 		isLiveBlog: false,
@@ -3541,7 +3542,7 @@ export const Live: FEArticle = {
 								url: '/world/europe-news',
 							},
 							{
-								title: 'US',
+								title: 'US news',
 								url: '/us-news',
 								longTitle: 'US news',
 							},
@@ -3621,6 +3622,11 @@ export const Live: FEArticle = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
+							},
+							{
+								title: 'Euro 2025',
+								url: '/football/women-s-euro-2025',
+								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -3795,6 +3801,11 @@ export const Live: FEArticle = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
+							},
+							{
+								title: 'Euro 2025',
+								url: '/football/women-s-euro-2025',
+								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -4025,28 +4036,6 @@ export const Live: FEArticle = {
 				url: 'https://www.theguardian.com/insidetheguardian',
 			},
 			{
-				title: 'The Observer',
-				url: '/observer',
-				children: [
-					{
-						title: 'Comment',
-						url: '/theobserver/news/comment',
-					},
-					{
-						title: 'The New Review',
-						url: '/theobserver/new-review',
-					},
-					{
-						title: 'Observer Magazine',
-						url: '/theobserver/magazine',
-					},
-					{
-						title: 'Observer Food Monthly',
-						url: '/theobserver/foodmonthly',
-					},
-				],
-			},
-			{
 				title: 'Guardian Weekly',
 				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
 			},
@@ -4063,16 +4052,12 @@ export const Live: FEArticle = {
 						url: '/crosswords/series/quick',
 					},
 					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
+						title: 'Sunday quick',
+						url: '/crosswords/series/sunday-quick',
 					},
 					{
 						title: 'Quick cryptic',
 						url: '/crosswords/series/quick-cryptic',
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
 					},
 					{
 						title: 'Quiptic',
@@ -4085,10 +4070,6 @@ export const Live: FEArticle = {
 					{
 						title: 'Prize',
 						url: '/crosswords/series/prize',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
 					},
 					{
 						title: 'Genius',
@@ -4111,6 +4092,10 @@ export const Live: FEArticle = {
 			{
 				title: 'Corrections',
 				url: '/theguardian/series/corrections-and-clarifications',
+			},
+			{
+				title: 'Tips',
+				url: 'https://www.theguardian.com/tips',
 			},
 		],
 		brandExtensions: [
@@ -4226,7 +4211,7 @@ export const Live: FEArticle = {
 							url: '/world/europe-news',
 						},
 						{
-							title: 'US',
+							title: 'US news',
 							url: '/us-news',
 							longTitle: 'US news',
 						},
@@ -4306,6 +4291,11 @@ export const Live: FEArticle = {
 							title: 'Clubs',
 							url: '/football/teams',
 							longTitle: 'football/teams',
+						},
+						{
+							title: 'Euro 2025',
+							url: '/football/women-s-euro-2025',
+							longTitle: 'football/women-s-euro-2025',
 						},
 					],
 				},
@@ -4610,6 +4600,18 @@ export const Live: FEArticle = {
 					text: 'Patrons',
 					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
 					dataLinkName: 'uk : footer : patrons',
+					extraClasses: '',
+				},
+				{
+					text: 'Tips',
+					url: 'https://www.theguardian.com/tips',
+					dataLinkName: 'uk : footer : tips',
+					extraClasses: '',
+				},
+				{
+					text: 'Accessibility settings',
+					url: '/help/accessibility-help',
+					dataLinkName: 'accessibility settings',
 					extraClasses: '',
 				},
 			],

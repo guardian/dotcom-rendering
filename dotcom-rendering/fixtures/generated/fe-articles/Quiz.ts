@@ -95,7 +95,7 @@ export const Quiz: FEArticle = {
 					},
 				],
 			},
-			elementId: 'd325f909-47e7-4bb1-8800-9d59233c4f7c',
+			elementId: '75e695e6-4787-42ec-81d3-e72e6a6291b4',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -897,7 +897,7 @@ export const Quiz: FEArticle = {
 							minScore: 2,
 						},
 					],
-					elementId: 'e584f02d-b9e5-462e-9b3f-e56f040176e0',
+					elementId: 'd66ccece-245f-44f4-ab87-c1f732639a80',
 					quizType: 'knowledge',
 					id: '2c6bf552-2827-4256-b3a0-f557d215c394',
 				},
@@ -1038,7 +1038,7 @@ export const Quiz: FEArticle = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&enable=upscale&s=12fbd80759f91fb562e7819bf510eece',
+				'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&enable=upscale&s=4590b3081f945ab1953444865dc8d5c0',
 				'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=cc710fa17ceb3118da80de944db21d58',
 				'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=d964ed03e6bac980b75f841237eea274',
 				'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&quality=85&auto=format&fit=max&s=1ee3ad5bfb9fc0fbd0d3f1a6d23ee38c',
@@ -1072,7 +1072,7 @@ export const Quiz: FEArticle = {
 		'article:author': 'https://www.theguardian.com/profile/steven-pye',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&enable=upscale&s=12fbd80759f91fb562e7819bf510eece',
+			'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&enable=upscale&s=4590b3081f945ab1953444865dc8d5c0',
 		'al:ios:url':
 			'gnmguardian://football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
@@ -1103,7 +1103,7 @@ export const Quiz: FEArticle = {
 		'twitter:app:url:iphone':
 			'gnmguardian://football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s?contenttype=Article&source=twitter',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&s=88d634a0db2b368186f0b87d8ce006be',
+			'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&s=6d6632918a9dc75236e0b0a15bcf86c7',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
 			'gnmguardian://football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s?contenttype=Article&source=twitter',
@@ -1266,6 +1266,7 @@ export const Quiz: FEArticle = {
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},
+		serverSideABTests: {},
 		edition: 'UK',
 		ipsosTag: 'environment',
 		isLiveBlog: false,
@@ -1612,7 +1613,7 @@ export const Quiz: FEArticle = {
 								url: '/world/europe-news',
 							},
 							{
-								title: 'US',
+								title: 'US news',
 								url: '/us-news',
 								longTitle: 'US news',
 							},
@@ -1692,6 +1693,11 @@ export const Quiz: FEArticle = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
+							},
+							{
+								title: 'Euro 2025',
+								url: '/football/women-s-euro-2025',
+								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -1866,6 +1872,11 @@ export const Quiz: FEArticle = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
+							},
+							{
+								title: 'Euro 2025',
+								url: '/football/women-s-euro-2025',
+								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -2096,28 +2107,6 @@ export const Quiz: FEArticle = {
 				url: 'https://www.theguardian.com/insidetheguardian',
 			},
 			{
-				title: 'The Observer',
-				url: '/observer',
-				children: [
-					{
-						title: 'Comment',
-						url: '/theobserver/news/comment',
-					},
-					{
-						title: 'The New Review',
-						url: '/theobserver/new-review',
-					},
-					{
-						title: 'Observer Magazine',
-						url: '/theobserver/magazine',
-					},
-					{
-						title: 'Observer Food Monthly',
-						url: '/theobserver/foodmonthly',
-					},
-				],
-			},
-			{
 				title: 'Guardian Weekly',
 				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
 			},
@@ -2134,16 +2123,12 @@ export const Quiz: FEArticle = {
 						url: '/crosswords/series/quick',
 					},
 					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
+						title: 'Sunday quick',
+						url: '/crosswords/series/sunday-quick',
 					},
 					{
 						title: 'Quick cryptic',
 						url: '/crosswords/series/quick-cryptic',
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
 					},
 					{
 						title: 'Quiptic',
@@ -2156,10 +2141,6 @@ export const Quiz: FEArticle = {
 					{
 						title: 'Prize',
 						url: '/crosswords/series/prize',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
 					},
 					{
 						title: 'Genius',
@@ -2182,6 +2163,10 @@ export const Quiz: FEArticle = {
 			{
 				title: 'Corrections',
 				url: '/theguardian/series/corrections-and-clarifications',
+			},
+			{
+				title: 'Tips',
+				url: 'https://www.theguardian.com/tips',
 			},
 		],
 		brandExtensions: [
@@ -2259,6 +2244,11 @@ export const Quiz: FEArticle = {
 						url: '/football/teams',
 						longTitle: 'football/teams',
 					},
+					{
+						title: 'Euro 2025',
+						url: '/football/women-s-euro-2025',
+						longTitle: 'football/women-s-euro-2025',
+					},
 				],
 			},
 			links: [
@@ -2291,6 +2281,11 @@ export const Quiz: FEArticle = {
 					title: 'Clubs',
 					url: '/football/teams',
 					longTitle: 'football/teams',
+				},
+				{
+					title: 'Euro 2025',
+					url: '/football/women-s-euro-2025',
+					longTitle: 'football/women-s-euro-2025',
 				},
 			],
 		},
@@ -2491,6 +2486,18 @@ export const Quiz: FEArticle = {
 					text: 'Patrons',
 					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
 					dataLinkName: 'uk : footer : patrons',
+					extraClasses: '',
+				},
+				{
+					text: 'Tips',
+					url: 'https://www.theguardian.com/tips',
+					dataLinkName: 'uk : footer : tips',
+					extraClasses: '',
+				},
+				{
+					text: 'Accessibility settings',
+					url: '/help/accessibility-help',
+					dataLinkName: 'accessibility settings',
 					extraClasses: '',
 				},
 			],

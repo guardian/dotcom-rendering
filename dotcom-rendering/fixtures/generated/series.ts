@@ -19,113 +19,17 @@ export const series = {
 	url: 'https://www.theguardian.com/tv-and-radio/series/tv-review',
 	trails: [
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2025/apr/07/what-they-found-review-sam-mendess-debut-documentary-has-the-power-to-change-viewers-for-ever',
+			url: 'https://www.theguardian.com/tv-and-radio/2025/aug/04/what-happened-at-hiroshima-review-this-rushed-flimsy-look-at-a-world-changing-atrocity-isnt-good-enough',
 			linkText:
-				'What They Found review – Sam Mendes’s debut documentary has the power to change viewers for ever',
-			showByline: false,
-			byline: 'Jack Seale',
-			masterImage:
-				'https://media.guim.co.uk/521a40133ab2183a5527c8d637e0041c808cac9f/619_0_1429_858/master/1429.jpg',
-			image: 'https://i.guim.co.uk/img/media/521a40133ab2183a5527c8d637e0041c808cac9f/619_0_1429_858/master/1429.jpg?width=300&quality=85&auto=format&fit=max&s=20b7b0c93aad7e415e78201712edb6f2',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/521a40133ab2183a5527c8d637e0041c808cac9f/619_0_1429_858/master/1429.jpg?width=300&quality=85&auto=format&fit=max&s=20b7b0c93aad7e415e78201712edb6f2',
-				'460': 'https://i.guim.co.uk/img/media/521a40133ab2183a5527c8d637e0041c808cac9f/619_0_1429_858/master/1429.jpg?width=460&quality=85&auto=format&fit=max&s=f7b7397937153e2de6343ff6767f7944',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2025-04-07T21:40:29.000Z',
-			headline:
-				'What They Found review – Sam Mendes’s debut documentary has the power to change viewers for ever',
-			shortUrl: 'https://www.theguardian.com/p/x2xgj5',
-			starRating: 4,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/x2xgj5',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2025/apr/07/the-white-lotus-season-three-finale-review-the-shows-least-satisfying-ending-ever',
-			linkText:
-				'The White Lotus season three finale review – the show’s least satisfying ending ever',
-			showByline: false,
-			byline: 'Stuart Heritage',
-			masterImage:
-				'https://media.guim.co.uk/e3eaa84aceabc572f78af8ce78c193f484b0f6a0/0_396_6000_3600/master/6000.jpg',
-			image: 'https://i.guim.co.uk/img/media/e3eaa84aceabc572f78af8ce78c193f484b0f6a0/0_396_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=bc17e1f94ca97edb6a7f094d654b81a3',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/e3eaa84aceabc572f78af8ce78c193f484b0f6a0/0_396_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=bc17e1f94ca97edb6a7f094d654b81a3',
-				'460': 'https://i.guim.co.uk/img/media/e3eaa84aceabc572f78af8ce78c193f484b0f6a0/0_396_6000_3600/master/6000.jpg?width=460&quality=85&auto=format&fit=max&s=d3de3cba8e7690e2a96a76f33b8e707a',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2025-04-07T21:40:28.000Z',
-			headline:
-				'The White Lotus season three finale review – the show’s least satisfying ending ever',
-			shortUrl: 'https://www.theguardian.com/p/x2xh5e',
-			starRating: 3,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/x2xh5e',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2025/apr/07/simon-schama-the-road-to-auschwitz-review-this-gripping-show-isnt-afraid-to-ask-awkward-questions',
-			linkText:
-				'Simon Schama: The Road to Auschwitz review – this gripping show isn’t afraid to ask awkward questions',
-			showByline: false,
-			byline: 'Rachel Aroesti',
-			masterImage:
-				'https://media.guim.co.uk/44e70b9f05ed8c2f572832a187f8c7f6087e69a8/108_0_3672_2204/master/3672.jpg',
-			image: 'https://i.guim.co.uk/img/media/44e70b9f05ed8c2f572832a187f8c7f6087e69a8/108_0_3672_2204/master/3672.jpg?width=300&quality=85&auto=format&fit=max&s=96582485cd7d18a2460151ae12c49f7c',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/44e70b9f05ed8c2f572832a187f8c7f6087e69a8/108_0_3672_2204/master/3672.jpg?width=300&quality=85&auto=format&fit=max&s=96582485cd7d18a2460151ae12c49f7c',
-				'460': 'https://i.guim.co.uk/img/media/44e70b9f05ed8c2f572832a187f8c7f6087e69a8/108_0_3672_2204/master/3672.jpg?width=460&quality=85&auto=format&fit=max&s=4b81454ecc9552c3f3e87f99e5fc582a',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2025-04-07T21:00:28.000Z',
-			headline:
-				'Simon Schama: The Road to Auschwitz review – this gripping show isn’t afraid to ask awkward questions',
-			shortUrl: 'https://www.theguardian.com/p/x2xxxf',
-			starRating: 4,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/x2xxxf',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2025/apr/07/reunion-review-this-excellent-british-sign-language-thriller-is-an-absolute-revelation',
-			linkText:
-				'Reunion review – this excellent British Sign Language thriller is an absolute revelation',
+				'What Happened at Hiroshima review – this rushed, flimsy look at a world-changing atrocity isn’t good enough',
 			showByline: false,
 			byline: 'Lucy Mangan',
 			masterImage:
-				'https://media.guim.co.uk/a68f72526d20b880afd014d942d08287e2c6a00b/0_305_4582_2749/master/4582.jpg',
-			image: 'https://i.guim.co.uk/img/media/a68f72526d20b880afd014d942d08287e2c6a00b/0_305_4582_2749/master/4582.jpg?width=300&quality=85&auto=format&fit=max&s=8093384f54d7b8a3c1bdad58a66f2c7d',
+				'https://media.guim.co.uk/4ca67545386b246d53faf98c7030c40a849f69f9/327_0_1844_1475/master/1844.jpg',
+			image: 'https://i.guim.co.uk/img/media/4ca67545386b246d53faf98c7030c40a849f69f9/327_0_1844_1475/master/1844.jpg?width=300&quality=85&auto=format&fit=max&s=8e713fbe07c92f5cfdb451316f627f25',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/a68f72526d20b880afd014d942d08287e2c6a00b/0_305_4582_2749/master/4582.jpg?width=300&quality=85&auto=format&fit=max&s=8093384f54d7b8a3c1bdad58a66f2c7d',
-				'460': 'https://i.guim.co.uk/img/media/a68f72526d20b880afd014d942d08287e2c6a00b/0_305_4582_2749/master/4582.jpg?width=460&quality=85&auto=format&fit=max&s=62034b5c245d42836ce75419cfa8fad0',
+				'300': 'https://i.guim.co.uk/img/media/4ca67545386b246d53faf98c7030c40a849f69f9/327_0_1844_1475/master/1844.jpg?width=300&quality=85&auto=format&fit=max&s=8e713fbe07c92f5cfdb451316f627f25',
+				'460': 'https://i.guim.co.uk/img/media/4ca67545386b246d53faf98c7030c40a849f69f9/327_0_1844_1475/master/1844.jpg?width=460&quality=85&auto=format&fit=max&s=e48b3f3d35c17bc0d4b8809272ea4f35',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -135,61 +39,29 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2025-04-07T21:00:27.000Z',
+			webPublicationDate: '2025-08-04T20:00:31.000Z',
 			headline:
-				'Reunion review – this excellent British Sign Language thriller is an absolute revelation',
-			shortUrl: 'https://www.theguardian.com/p/x2vyfv',
-			starRating: 4,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/x2vyfv',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2025/apr/04/austin-review-uk-aussie-sitcom-bbc',
-			linkText:
-				'Austin review – a tedious sitcom that thinks ‘colossal clodhumping fink’ is something British people say',
-			showByline: false,
-			byline: 'Rachel Aroesti',
-			masterImage:
-				'https://media.guim.co.uk/702b3a49a9cc3c965919c66136eed0bdd9570cd6/295_444_3695_2217/master/3695.jpg',
-			image: 'https://i.guim.co.uk/img/media/702b3a49a9cc3c965919c66136eed0bdd9570cd6/295_444_3695_2217/master/3695.jpg?width=300&quality=85&auto=format&fit=max&s=867d74d1e80afe8002caa83865f711f2',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/702b3a49a9cc3c965919c66136eed0bdd9570cd6/295_444_3695_2217/master/3695.jpg?width=300&quality=85&auto=format&fit=max&s=867d74d1e80afe8002caa83865f711f2',
-				'460': 'https://i.guim.co.uk/img/media/702b3a49a9cc3c965919c66136eed0bdd9570cd6/295_444_3695_2217/master/3695.jpg?width=460&quality=85&auto=format&fit=max&s=00445e8ee0fa885db902cfdf0fbe639d',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2025-04-04T21:00:03.000Z',
-			headline:
-				'Austin review – a tedious sitcom that thinks ‘colossal clodhumping fink’ is something British people say',
-			shortUrl: 'https://www.theguardian.com/p/x2v4bp',
+				'What Happened at Hiroshima review – this rushed, flimsy look at a world-changing atrocity isn’t good enough',
+			shortUrl: 'https://www.theguardian.com/p/x2qce2',
 			starRating: 2,
 			discussion: {
 				isCommentable: false,
 				isClosedForComments: true,
-				discussionId: '/p/x2v4bp',
+				discussionId: '/p/x2qce2',
 			},
 		},
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2025/apr/04/dying-for-sex-review-michelle-williams-erotic-journey-is-revolutionary-tv',
+			url: 'https://www.theguardian.com/tv-and-radio/2025/aug/03/lucy-letby-beyond-reasonable-doubt-review-documentary-itv1-itvx',
 			linkText:
-				'Dying for Sex review – Michelle Williams’ erotic journey is revolutionary TV',
+				'Lucy Letby: Beyond Reasonable Doubt? review – one of the most meticulous documentaries in years',
 			showByline: false,
 			byline: 'Lucy Mangan',
 			masterImage:
-				'https://media.guim.co.uk/62344490168af934624125361ce5dc7020d3f7d0/0_2_3000_1800/master/3000.jpg',
-			image: 'https://i.guim.co.uk/img/media/62344490168af934624125361ce5dc7020d3f7d0/0_2_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=73dae9103864ac60379e7d68ada8122c',
+				'https://media.guim.co.uk/6707939a5c48b3b9ce4359a5b81126e809e5962b/126_353_1219_974/master/1219.jpg',
+			image: 'https://i.guim.co.uk/img/media/6707939a5c48b3b9ce4359a5b81126e809e5962b/126_353_1219_974/master/1219.jpg?width=300&quality=85&auto=format&fit=max&s=b3c35238fd501a9cc1c42a44bd5d8fc8',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/62344490168af934624125361ce5dc7020d3f7d0/0_2_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=73dae9103864ac60379e7d68ada8122c',
-				'460': 'https://i.guim.co.uk/img/media/62344490168af934624125361ce5dc7020d3f7d0/0_2_3000_1800/master/3000.jpg?width=460&quality=85&auto=format&fit=max&s=2932b37a879a176f3906be88e9da9d98',
+				'300': 'https://i.guim.co.uk/img/media/6707939a5c48b3b9ce4359a5b81126e809e5962b/126_353_1219_974/master/1219.jpg?width=300&quality=85&auto=format&fit=max&s=b3c35238fd501a9cc1c42a44bd5d8fc8',
+				'460': 'https://i.guim.co.uk/img/media/6707939a5c48b3b9ce4359a5b81126e809e5962b/126_353_1219_974/master/1219.jpg?width=460&quality=85&auto=format&fit=max&s=dfe96b16af70ad6e3d03b675296dc777',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -199,29 +71,29 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2025-04-04T04:00:44.000Z',
+			webPublicationDate: '2025-08-03T22:30:52.000Z',
 			headline:
-				'Dying for Sex review – Michelle Williams’ erotic journey is revolutionary TV',
-			shortUrl: 'https://www.theguardian.com/p/x2vfhq',
+				'Lucy Letby: Beyond Reasonable Doubt? review – one of the most meticulous documentaries in years',
+			shortUrl: 'https://www.theguardian.com/p/x2ph5g',
 			starRating: 5,
 			discussion: {
 				isCommentable: false,
 				isClosedForComments: true,
-				discussionId: '/p/x2vfhq',
+				discussionId: '/p/x2ph5g',
 			},
 		},
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2025/apr/03/dispatches-delivered-to-a-predator-al-fayed-fixer-channel-4-review',
+			url: 'https://www.theguardian.com/tv-and-radio/2025/aug/03/parenthood-review-david-attenborough-bbc',
 			linkText:
-				'Delivered to a Predator: Al Fayed’s Fixer review – this startling tale urgently needed telling',
+				'Parenthood review – one of the crabs in David Attenborough’s new naturefest is like a 1940s movie villain',
 			showByline: false,
 			byline: 'Jack Seale',
 			masterImage:
-				'https://media.guim.co.uk/96a61912cb10258f84def75b6aba271267ad0e13/0_21_3286_1973/master/3286.jpg',
-			image: 'https://i.guim.co.uk/img/media/96a61912cb10258f84def75b6aba271267ad0e13/0_21_3286_1973/master/3286.jpg?width=300&quality=85&auto=format&fit=max&s=3761fb31d72f7a176a112074c8fe5b93',
+				'https://media.guim.co.uk/c25e8f0b7d8108ce1fe7e779f1112d022790498f/654_0_3571_2857/master/3571.jpg',
+			image: 'https://i.guim.co.uk/img/media/c25e8f0b7d8108ce1fe7e779f1112d022790498f/654_0_3571_2857/master/3571.jpg?width=300&quality=85&auto=format&fit=max&s=b62909c555bb7dd3c8d7fa6bbbdf252f',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/96a61912cb10258f84def75b6aba271267ad0e13/0_21_3286_1973/master/3286.jpg?width=300&quality=85&auto=format&fit=max&s=3761fb31d72f7a176a112074c8fe5b93',
-				'460': 'https://i.guim.co.uk/img/media/96a61912cb10258f84def75b6aba271267ad0e13/0_21_3286_1973/master/3286.jpg?width=460&quality=85&auto=format&fit=max&s=3684bd2cdcf93d35e507396e917e8905',
+				'300': 'https://i.guim.co.uk/img/media/c25e8f0b7d8108ce1fe7e779f1112d022790498f/654_0_3571_2857/master/3571.jpg?width=300&quality=85&auto=format&fit=max&s=b62909c555bb7dd3c8d7fa6bbbdf252f',
+				'460': 'https://i.guim.co.uk/img/media/c25e8f0b7d8108ce1fe7e779f1112d022790498f/654_0_3571_2857/master/3571.jpg?width=460&quality=85&auto=format&fit=max&s=b2ee2aa82cd3f7177d41fe4806d23d8d',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -231,29 +103,221 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2025-04-03T22:00:35.000Z',
+			webPublicationDate: '2025-08-03T19:20:48.000Z',
 			headline:
-				'Delivered to a Predator: Al Fayed’s Fixer review – this startling tale urgently needed telling',
-			shortUrl: 'https://www.theguardian.com/p/x2vycz',
-			starRating: 5,
+				'Parenthood review – one of the crabs in David Attenborough’s new naturefest is like a 1940s movie villain',
+			shortUrl: 'https://www.theguardian.com/p/x2papx',
+			starRating: 3,
 			discussion: {
 				isCommentable: false,
 				isClosedForComments: true,
-				discussionId: '/p/x2vycz',
+				discussionId: '/p/x2papx',
 			},
 		},
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2025/apr/03/mhairi-black-being-me-again-review-the-former-mp-is-a-force-of-nature-in-this-excellent-documentary',
+			url: 'https://www.theguardian.com/tv-and-radio/2025/aug/02/the-count-of-monte-cristo-review-series-jeremy-irons-sam-claflin',
 			linkText:
-				'Mhairi Black: Being Me Again review – the former MP is a force of nature in this excellent documentary',
+				'The Count of Monte Cristo review – you’ll have to pause every 45 seconds to shake your head at its daftness',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			masterImage:
+				'https://media.guim.co.uk/1f7ca5bec87f2d632213ebb9c7e6ed8bc6a28913/334_0_5200_4160/master/5200.jpg',
+			image: 'https://i.guim.co.uk/img/media/1f7ca5bec87f2d632213ebb9c7e6ed8bc6a28913/334_0_5200_4160/master/5200.jpg?width=300&quality=85&auto=format&fit=max&s=08ffffb29c375fc20705bd4f5923bd15',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/1f7ca5bec87f2d632213ebb9c7e6ed8bc6a28913/334_0_5200_4160/master/5200.jpg?width=300&quality=85&auto=format&fit=max&s=08ffffb29c375fc20705bd4f5923bd15',
+				'460': 'https://i.guim.co.uk/img/media/1f7ca5bec87f2d632213ebb9c7e6ed8bc6a28913/334_0_5200_4160/master/5200.jpg?width=460&quality=85&auto=format&fit=max&s=31a2b98d1127e9412339aac5f06edb1c',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2025-08-02T21:10:21.000Z',
+			headline:
+				'The Count of Monte Cristo review – you’ll have to pause every 45 seconds to shake your head at its daftness',
+			shortUrl: 'https://www.theguardian.com/p/x2pgeh',
+			starRating: 2,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/x2pgeh',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2025/aug/01/chief-of-war-review-jason-momoa-is-an-underwater-shark-wrestler-in-this-gory-historical-epic',
+			linkText:
+				'Chief of War review – Jason Momoa is an underwater shark wrestler in this gory historical epic',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			masterImage:
+				'https://media.guim.co.uk/459eb52f15ee253425e7eae54cb971cced40bec8/995_0_4956_3967/master/4956.jpg',
+			image: 'https://i.guim.co.uk/img/media/459eb52f15ee253425e7eae54cb971cced40bec8/995_0_4956_3967/master/4956.jpg?width=300&quality=85&auto=format&fit=max&s=cda362068310c5d792ea5bec88ec84bc',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/459eb52f15ee253425e7eae54cb971cced40bec8/995_0_4956_3967/master/4956.jpg?width=300&quality=85&auto=format&fit=max&s=cda362068310c5d792ea5bec88ec84bc',
+				'460': 'https://i.guim.co.uk/img/media/459eb52f15ee253425e7eae54cb971cced40bec8/995_0_4956_3967/master/4956.jpg?width=460&quality=85&auto=format&fit=max&s=8ef63d9528419841108684a5071ef079',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2025-08-01T04:00:16.000Z',
+			headline:
+				'Chief of War review – Jason Momoa is an underwater shark wrestler in this gory historical epic',
+			shortUrl: 'https://www.theguardian.com/p/x2papb',
+			starRating: 3,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/x2papb',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2025/jul/31/leanne-review-sitcom-netflix',
+			linkText:
+				'Leanne review – you can’t help but love the star of this terribly written, joke-free sitcom',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			masterImage:
+				'https://media.guim.co.uk/a142cf6c8d001b704d258d3532b20936a7028953/527_190_3511_2809/master/3511.jpg',
+			image: 'https://i.guim.co.uk/img/media/a142cf6c8d001b704d258d3532b20936a7028953/527_190_3511_2809/master/3511.jpg?width=300&quality=85&auto=format&fit=max&s=9b04f9952a9ec6109f3403f520a76192',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/a142cf6c8d001b704d258d3532b20936a7028953/527_190_3511_2809/master/3511.jpg?width=300&quality=85&auto=format&fit=max&s=9b04f9952a9ec6109f3403f520a76192',
+				'460': 'https://i.guim.co.uk/img/media/a142cf6c8d001b704d258d3532b20936a7028953/527_190_3511_2809/master/3511.jpg?width=460&quality=85&auto=format&fit=max&s=a835b5dc62447b6cb21806d7daac4b0e',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2025-07-31T07:01:41.000Z',
+			headline:
+				'Leanne review – you can’t help but love the star of this terribly written, joke-free sitcom',
+			shortUrl: 'https://www.theguardian.com/p/x2p6ab',
+			starRating: 3,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/x2p6ab',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2025/jul/30/destination-x-review-rob-brydon-the-traitors-meets-race-across-the-world',
+			linkText:
+				'Destination X review – the BBC’s big new reality competition will make you feel like you’re hallucinating',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			masterImage:
+				'https://media.guim.co.uk/0da011a4ebfad26a5b3d3e72dd17ea9f9dd81138/436_0_3535_2828/master/3535.jpg',
+			image: 'https://i.guim.co.uk/img/media/0da011a4ebfad26a5b3d3e72dd17ea9f9dd81138/436_0_3535_2828/master/3535.jpg?width=300&quality=85&auto=format&fit=max&s=b0d15241d16dd75994376589fc19e408',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/0da011a4ebfad26a5b3d3e72dd17ea9f9dd81138/436_0_3535_2828/master/3535.jpg?width=300&quality=85&auto=format&fit=max&s=b0d15241d16dd75994376589fc19e408',
+				'460': 'https://i.guim.co.uk/img/media/0da011a4ebfad26a5b3d3e72dd17ea9f9dd81138/436_0_3535_2828/master/3535.jpg?width=460&quality=85&auto=format&fit=max&s=e569593a7771203424604c2709525987',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2025-07-30T21:00:29.000Z',
+			headline:
+				'Destination X review – the BBC’s big new reality competition will make you feel like you’re hallucinating',
+			shortUrl: 'https://www.theguardian.com/p/x2zqzy',
+			starRating: 3,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/x2zqzy',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2025/jul/29/1000-men-and-me-the-bonnie-blue-story-review-channel-4-documentary',
+			linkText:
+				'1000 Men and Me: The Bonnie Blue Story review – the troubling tale of sex with 1,057 men in 12 hours',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			masterImage:
+				'https://media.guim.co.uk/392513fa0f1a7c3e1713da3c2132bb6eaccba592/688_0_6880_5504/master/6880.jpg',
+			image: 'https://i.guim.co.uk/img/media/392513fa0f1a7c3e1713da3c2132bb6eaccba592/688_0_6880_5504/master/6880.jpg?width=300&quality=85&auto=format&fit=max&s=347169b42230389434965887d44797e0',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/392513fa0f1a7c3e1713da3c2132bb6eaccba592/688_0_6880_5504/master/6880.jpg?width=300&quality=85&auto=format&fit=max&s=347169b42230389434965887d44797e0',
+				'460': 'https://i.guim.co.uk/img/media/392513fa0f1a7c3e1713da3c2132bb6eaccba592/688_0_6880_5504/master/6880.jpg?width=460&quality=85&auto=format&fit=max&s=ab347f104b7f49489f2127d8462d3e2c',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2025-07-29T22:25:43.000Z',
+			headline:
+				'1000 Men and Me: The Bonnie Blue Story review – the troubling tale of sex with 1,057 men in 12 hours',
+			shortUrl: 'https://www.theguardian.com/p/x2p5fv',
+			starRating: 3,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/x2p5fv',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2025/jul/29/kamikaze-an-untold-history-review-a-bewilderingly-brutal-act-of-collective-desperation-recalled',
+			linkText:
+				'Kamikaze: An Untold History review – a bewilderingly brutal act of collective desperation recalled',
+			showByline: false,
+			byline: 'Jack Seale',
+			masterImage:
+				'https://media.guim.co.uk/53b6022312c5db95720dba02a4a4110385eb2541/846_0_3277_2623/master/3277.jpg',
+			image: 'https://i.guim.co.uk/img/media/53b6022312c5db95720dba02a4a4110385eb2541/846_0_3277_2623/master/3277.jpg?width=300&quality=85&auto=format&fit=max&s=957797173aeec8edf59be0d340084f03',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/53b6022312c5db95720dba02a4a4110385eb2541/846_0_3277_2623/master/3277.jpg?width=300&quality=85&auto=format&fit=max&s=957797173aeec8edf59be0d340084f03',
+				'460': 'https://i.guim.co.uk/img/media/53b6022312c5db95720dba02a4a4110385eb2541/846_0_3277_2623/master/3277.jpg?width=460&quality=85&auto=format&fit=max&s=7e8f359aa970faf01f5f7cec02e3b008',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2025-07-29T08:05:37.000Z',
+			headline:
+				'Kamikaze: An Untold History review – a bewilderingly brutal act of collective desperation recalled',
+			shortUrl: 'https://www.theguardian.com/p/x2zqhv',
+			starRating: 3,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/x2zqhv',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2025/jul/27/operation-dark-phone-by-text-review-do-we-really-need-to-see-these-criminals-on-the-toilet',
+			linkText:
+				'Operation Dark Phone: Murder by Text review – do we really need to see these criminals on the toilet?',
 			showByline: false,
 			byline: 'Hannah J Davies',
 			masterImage:
-				'https://media.guim.co.uk/3808be65ff9209f9e0a33566eb66db6195b4c57b/0_212_6240_3744/master/6240.jpg',
-			image: 'https://i.guim.co.uk/img/media/3808be65ff9209f9e0a33566eb66db6195b4c57b/0_212_6240_3744/master/6240.jpg?width=300&quality=85&auto=format&fit=max&s=8209fe9c29616613dcf76dc1af548bc4',
+				'https://media.guim.co.uk/198477cf25640a8b130977298dabb1e6ce628199/285_0_1350_1080/master/1350.jpg',
+			image: 'https://i.guim.co.uk/img/media/198477cf25640a8b130977298dabb1e6ce628199/285_0_1350_1080/master/1350.jpg?width=300&quality=85&auto=format&fit=max&s=1aceeeda35b3410c3343e1084d8f7dd8',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/3808be65ff9209f9e0a33566eb66db6195b4c57b/0_212_6240_3744/master/6240.jpg?width=300&quality=85&auto=format&fit=max&s=8209fe9c29616613dcf76dc1af548bc4',
-				'460': 'https://i.guim.co.uk/img/media/3808be65ff9209f9e0a33566eb66db6195b4c57b/0_212_6240_3744/master/6240.jpg?width=460&quality=85&auto=format&fit=max&s=2f8f43b592820cd6328914ce8ed5ae09',
+				'300': 'https://i.guim.co.uk/img/media/198477cf25640a8b130977298dabb1e6ce628199/285_0_1350_1080/master/1350.jpg?width=300&quality=85&auto=format&fit=max&s=1aceeeda35b3410c3343e1084d8f7dd8',
+				'460': 'https://i.guim.co.uk/img/media/198477cf25640a8b130977298dabb1e6ce628199/285_0_1350_1080/master/1350.jpg?width=460&quality=85&auto=format&fit=max&s=82da451b1bf58359299c92456cecd3fd',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -263,79 +327,15 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2025-04-03T19:00:31.000Z',
+			webPublicationDate: '2025-07-27T21:10:31.000Z',
 			headline:
-				'Mhairi Black: Being Me Again review – the former MP is a force of nature in this excellent documentary',
-			shortUrl: 'https://www.theguardian.com/p/x2v9gx',
-			starRating: 4,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/x2v9gx',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2025/apr/03/the-bondsman-review-the-scariest-thing-about-kevin-bacons-demonic-thriller-his-singing',
-			linkText:
-				'The Bondsman review – the scariest thing about Kevin Bacon’s demonic thriller? His singing',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			masterImage:
-				'https://media.guim.co.uk/6699dd54d3fbbeff26c714401031f2cecc389e36/9_33_2439_1464/master/2439.jpg',
-			image: 'https://i.guim.co.uk/img/media/6699dd54d3fbbeff26c714401031f2cecc389e36/9_33_2439_1464/master/2439.jpg?width=300&quality=85&auto=format&fit=max&s=7c9c59f86a4316104d3e2d36a6dad931',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/6699dd54d3fbbeff26c714401031f2cecc389e36/9_33_2439_1464/master/2439.jpg?width=300&quality=85&auto=format&fit=max&s=7c9c59f86a4316104d3e2d36a6dad931',
-				'460': 'https://i.guim.co.uk/img/media/6699dd54d3fbbeff26c714401031f2cecc389e36/9_33_2439_1464/master/2439.jpg?width=460&quality=85&auto=format&fit=max&s=9837c3f21b9d26b9eb63e13e90ec3cfe',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2025-04-03T04:00:22.000Z',
-			headline:
-				'The Bondsman review – the scariest thing about Kevin Bacon’s demonic thriller? His singing',
-			shortUrl: 'https://www.theguardian.com/p/x2vf3z',
+				'Operation Dark Phone: Murder by Text review – do we really need to see these criminals on the toilet?',
+			shortUrl: 'https://www.theguardian.com/p/x2nptp',
 			starRating: 3,
 			discussion: {
 				isCommentable: false,
 				isClosedForComments: true,
-				discussionId: '/p/x2vf3z',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2025/apr/01/stacey-and-joe-review-bbc-stacey-solomon',
-			linkText:
-				'Stacey & Joe review – Solomon’s husband is absolutely useless',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			masterImage:
-				'https://media.guim.co.uk/926e2fb50a1d7f978efe6825e50be75096ed2a4d/120_0_1800_1080/master/1800.jpg',
-			image: 'https://i.guim.co.uk/img/media/926e2fb50a1d7f978efe6825e50be75096ed2a4d/120_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=7c3e4523f5ef316c656248ff33bffd01',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/926e2fb50a1d7f978efe6825e50be75096ed2a4d/120_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=7c3e4523f5ef316c656248ff33bffd01',
-				'460': 'https://i.guim.co.uk/img/media/926e2fb50a1d7f978efe6825e50be75096ed2a4d/120_0_1800_1080/master/1800.jpg?width=460&quality=85&auto=format&fit=max&s=1b195538e7b79965fa495731a12d925e',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2025-04-01T20:00:51.000Z',
-			headline:
-				'Stacey & Joe review – Solomon’s husband is absolutely useless',
-			shortUrl: 'https://www.theguardian.com/p/x2v2ck',
-			starRating: 3,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/x2v2ck',
+				discussionId: '/p/x2nptp',
 			},
 		},
 	],

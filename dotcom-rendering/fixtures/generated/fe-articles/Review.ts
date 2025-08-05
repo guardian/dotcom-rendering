@@ -97,7 +97,7 @@ export const Review: FEArticle = {
 					},
 				],
 			},
-			elementId: '1f1d6050-65dc-4ecd-967b-8bdc83b25886',
+			elementId: '833094fb-fc09-4bd8-a083-e876d34b4c2a',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -297,18 +297,18 @@ export const Review: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The new season of <a href="https://www.theguardian.com/tv-and-radio/2019/jan/17/sex-education-asa-butterfield-gillian-anderson-netflix">Sex Education</a> (Netflix) opens with a bravura sequence that swiftly takes its place in the pantheon of peen-based comedy greats. Suffice to say that since we left Otis at the end of the <a href="https://www.theguardian.com/tv-and-radio/2019/jan/11/sex-education-review-netflix-asa-butterfield-gillian-anderson">glorious inaugural run</a> having successfully masturbated for the first time, he has taken gleefully to his new hobby and – I don’t know if you know the French expression to encourage reluctant diners, “the appetite comes with eating”? – but we need to come up with the carnal equivalent for his joyful daily pursuits of the big O.</p>',
-					elementId: 'dd594dc1-1acd-412d-b48d-bb66138a21c5',
+					elementId: '670703e9-e7c5-4900-b422-5c8bf417eee2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The scene establishes the tone of the new season – furiously fast, furiously funny, and not for the faint of heart any more than the first series was. And, just like the first series, it underpins the comedy arising from the sixth form students’ sexual escapades, experiments and baffled queries (“My cum tastes like kimchi! Why do I have a fermented dick?”) with deeper explorations of the main characters and the emotional pressures engendered by bigger problems.</p>',
-					elementId: '478ff3f3-2726-495f-bf32-fb30e1f6d676',
+					elementId: 'b6a27f47-aa38-4a22-8e10-e93bc3a5b7b4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
 					source: 'YouTube',
 					originalUrl: 'https://www.youtube.com/watch?v=qZhb0Vl_BaM',
-					elementId: '31ab2b4b-ac2b-42cb-93bd-ff89bffa15cd',
+					elementId: 'a4979510-e58c-47b3-a001-1eae275d2254',
 					width: 460,
 					embedUrl:
 						'https://www.youtube-nocookie.com/embed/qZhb0Vl_BaM?wmode=opaque&feature=oembed',
@@ -322,7 +322,7 @@ export const Review: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>With the help of Miss Sands, Maeve (Emma Mackey) finagles her way back into school and the special ability programme. All she has to do thereafter is wrestle with her unwelcoming and far more privileged peers and the return of her errant mother Erin (Anne-Marie Duff), allegedly clean for a year and with a three-year-old half-sister in tow. Otis (<a href="https://www.theguardian.com/tv-and-radio/2019/dec/28/sex-education-asa-butterfield-feel-more-confident-talking-about-sex">Asa Butterfield</a>) must negotiate his new relationship with Ola (Patricia Allison) while his mother Jean (Gillian Anderson, given a whole heap more to do this time round and rightly relishing every moment) throws more spanners in to his sexual works by dating Ola’s dad. Adam – poor beleaguered Adam (Connor Swindells) – is unjustly expelled from military school and sent back home to a dead-end job and his ever more hateful father. Swindells gives an extraordinary performance with what amounts to barely a hundred lines in the entire eight episodes, and if your heart doesn’t break at at least three points for him then I have no use for you. I don’t want to spoil Eric’s storyline because it doesn’t get going until a few episodes in, but <a href="https://www.theguardian.com/culture/2020/jan/05/ncuti-gatwa-i-will-say-yes-to-anything-sex-education">Ncuti Gatwa</a> remains the find of the age and handles everything thrown at him with such deftness and authenticity that you can only boggle at the fact that Laurie Nunn’s creation is his first major role.</p>',
-					elementId: '2ff4480e-9cc3-413d-8c2d-221441eca36a',
+					elementId: 'ff24f5a4-c94d-4fa5-925b-51d5290a319b',
 				},
 				{
 					displayCredit: true,
@@ -393,7 +393,7 @@ export const Review: FEArticle = {
 							},
 						],
 					},
-					elementId: '1940e5a7-73fb-4a21-ac69-522a4b02d81e',
+					elementId: '66fc495c-4d12-4eae-b520-986d8d6201a5',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -636,12 +636,12 @@ export const Review: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Every performer is wonderful, not least because the script is wonderful, playing the sex for laughs and the search for intimacy as something serious, good and noble. Not a single character is a cipher – even the smallest parts have a sketched backstory and some good gags. It’s all of a piece with the charm and generosity of spirit that suffuses the whole thing. <a href="https://www.theguardian.com/tv-and-radio/sex-education" data-component="auto-linked-tag">Sex Education</a> sets so many conventions cheerily but firmly aside that you feel like an entire forest of received wisdom is being clear-cut. Light floods in, new growth springs up. Such a sense of revelry and optimism abounds that you can feel it doing your heart and soul good as you watch. And all without missing a comic or emotional beat or deviating from its moral core, which urges us all to connect.</p>',
-					elementId: '12789978-41bf-4397-91d2-53552aa615fc',
+					elementId: '2a3d3b63-eb9d-4385-9122-f5509ce0235b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>So welcome once more, Otis (and your newly excitable penis), Maeve with her troubles to seek, Jackson (Kedar Williams-Stirling) whose mental health plummets to new lows as his swimming career reaches new heights, Aimee through whose experience on a local bus the issue of sexual assault is channelled, and all the magnificent rest of you. Nobody does it better. In fact, nobody does anything quite like it at all.</p>',
-					elementId: '3af5d48e-1f1e-4a5e-bf47-92e006f45738',
+					elementId: '8a94134d-04aa-4d2b-9d74-494f5249270d',
 				},
 			],
 			attributes: {
@@ -863,7 +863,7 @@ export const Review: FEArticle = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/39892d930be2203c5ea452d130772c0279f7dc0c/0_400_6000_3600/master/6000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&enable=upscale&s=0cefc2df4f6d58ec34838c99bf0fb00c',
+				'https://i.guim.co.uk/img/media/39892d930be2203c5ea452d130772c0279f7dc0c/0_400_6000_3600/master/6000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&enable=upscale&s=7f62295ff33f8ec054329fe37a8c345a',
 				'https://i.guim.co.uk/img/media/39892d930be2203c5ea452d130772c0279f7dc0c/0_400_6000_3600/master/6000.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=4f4e2516a7f6f60f04f60964681c7ecc',
 				'https://i.guim.co.uk/img/media/39892d930be2203c5ea452d130772c0279f7dc0c/0_400_6000_3600/master/6000.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=b5fa77902bb2ee9f695e729f7f8eec93',
 				'https://i.guim.co.uk/img/media/39892d930be2203c5ea452d130772c0279f7dc0c/0_400_6000_3600/master/6000.jpg?width=1200&quality=85&auto=format&fit=max&s=1cfe36937c0709d2d1b462099be41bc7',
@@ -898,7 +898,7 @@ export const Review: FEArticle = {
 		'article:author': 'https://www.theguardian.com/profile/lucymangan',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/39892d930be2203c5ea452d130772c0279f7dc0c/0_400_6000_3600/master/6000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&enable=upscale&s=0cefc2df4f6d58ec34838c99bf0fb00c',
+			'https://i.guim.co.uk/img/media/39892d930be2203c5ea452d130772c0279f7dc0c/0_400_6000_3600/master/6000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&enable=upscale&s=7f62295ff33f8ec054329fe37a8c345a',
 		'al:ios:url':
 			'gnmguardian://tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
@@ -932,7 +932,7 @@ export const Review: FEArticle = {
 		'twitter:app:url:iphone':
 			'gnmguardian://tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix?contenttype=Article&source=twitter',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/39892d930be2203c5ea452d130772c0279f7dc0c/0_400_6000_3600/master/6000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&s=821533729d8aa0982438e21d6f1f1216',
+			'https://i.guim.co.uk/img/media/39892d930be2203c5ea452d130772c0279f7dc0c/0_400_6000_3600/master/6000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&s=1ba36b4d96362fbc83c94f2bc86329d2',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
 			'gnmguardian://tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix?contenttype=Article&source=twitter',
@@ -1095,6 +1095,7 @@ export const Review: FEArticle = {
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},
+		serverSideABTests: {},
 		edition: 'UK',
 		ipsosTag: 'environment',
 		isLiveBlog: false,
@@ -1477,7 +1478,7 @@ export const Review: FEArticle = {
 								url: '/world/europe-news',
 							},
 							{
-								title: 'US',
+								title: 'US news',
 								url: '/us-news',
 								longTitle: 'US news',
 							},
@@ -1557,6 +1558,11 @@ export const Review: FEArticle = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
+							},
+							{
+								title: 'Euro 2025',
+								url: '/football/women-s-euro-2025',
+								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -1731,6 +1737,11 @@ export const Review: FEArticle = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
+							},
+							{
+								title: 'Euro 2025',
+								url: '/football/women-s-euro-2025',
+								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -1961,28 +1972,6 @@ export const Review: FEArticle = {
 				url: 'https://www.theguardian.com/insidetheguardian',
 			},
 			{
-				title: 'The Observer',
-				url: '/observer',
-				children: [
-					{
-						title: 'Comment',
-						url: '/theobserver/news/comment',
-					},
-					{
-						title: 'The New Review',
-						url: '/theobserver/new-review',
-					},
-					{
-						title: 'Observer Magazine',
-						url: '/theobserver/magazine',
-					},
-					{
-						title: 'Observer Food Monthly',
-						url: '/theobserver/foodmonthly',
-					},
-				],
-			},
-			{
 				title: 'Guardian Weekly',
 				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
 			},
@@ -1999,16 +1988,12 @@ export const Review: FEArticle = {
 						url: '/crosswords/series/quick',
 					},
 					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
+						title: 'Sunday quick',
+						url: '/crosswords/series/sunday-quick',
 					},
 					{
 						title: 'Quick cryptic',
 						url: '/crosswords/series/quick-cryptic',
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
 					},
 					{
 						title: 'Quiptic',
@@ -2021,10 +2006,6 @@ export const Review: FEArticle = {
 					{
 						title: 'Prize',
 						url: '/crosswords/series/prize',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
 					},
 					{
 						title: 'Genius',
@@ -2047,6 +2028,10 @@ export const Review: FEArticle = {
 			{
 				title: 'Corrections',
 				url: '/theguardian/series/corrections-and-clarifications',
+			},
+			{
+				title: 'Tips',
+				url: 'https://www.theguardian.com/tips',
 			},
 		],
 		brandExtensions: [
@@ -2322,6 +2307,18 @@ export const Review: FEArticle = {
 					text: 'Patrons',
 					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
 					dataLinkName: 'uk : footer : patrons',
+					extraClasses: '',
+				},
+				{
+					text: 'Tips',
+					url: 'https://www.theguardian.com/tips',
+					dataLinkName: 'uk : footer : tips',
+					extraClasses: '',
+				},
+				{
+					text: 'Accessibility settings',
+					url: '/help/accessibility-help',
+					dataLinkName: 'accessibility settings',
 					extraClasses: '',
 				},
 			],
