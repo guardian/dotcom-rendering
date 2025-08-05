@@ -12,6 +12,7 @@ import {
 	textSans17,
 	textSans20,
 	textSans24,
+	textSansBold15,
 } from '@guardian/source/foundations';
 import sanitise from 'sanitize-html';
 import { grid } from '../../src/grid';
@@ -83,6 +84,11 @@ const decideFont = ({ display, design, theme }: ArticleFormat) => {
 	const isLabs = theme === ArticleSpecial.Labs;
 	switch (design) {
 		case ArticleDesign.Gallery:
+			if (isLabs) {
+				return css`
+					${textSansBold15};
+				`;
+			}
 			return css`
 				${headlineBold17}
 			`;
