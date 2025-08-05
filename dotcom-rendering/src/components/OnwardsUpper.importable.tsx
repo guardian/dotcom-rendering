@@ -103,11 +103,11 @@ const containerUrls = {
 		EUR: 'uk/commentisfree/regular-stories',
 	},
 	culture: {
-		UK: 'uk/culture/regular-stories',
+		UK: '2771a8ab-952a-4bbc-9aa0-6863fed77712',
 		US: 'us/culture/regular-stories',
 		AU: 'au/culture/regular-stories',
-		INT: 'uk/culture/regular-stories',
-		EUR: 'uk/culture/regular-stories',
+		INT: '2771a8ab-952a-4bbc-9aa0-6863fed77712',
+		EUR: '2771a8ab-952a-4bbc-9aa0-6863fed77712',
 	},
 	lifestyle: {
 		UK: '5011-3940-8793-33a9',

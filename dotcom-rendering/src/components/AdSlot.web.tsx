@@ -115,7 +115,7 @@ const topAboveNavContainerStyles = css`
 	display: block;
 `;
 
-const topAboveNavContainerVaraintStyles = css`
+const topAboveNavContainerVariantStyles = css`
 	padding-bottom: ${space[5]}px;
 	position: relative;
 	margin: 0 auto;
@@ -127,6 +127,25 @@ const topAboveNavContainerVaraintStyles = css`
 	/* Remove the min-height when the ad has rendered, so that the container can shrink if the ad is smaller */
 	&[top-above-nav-ad-rendered='true'] {
 		min-height: auto;
+	}
+
+	/* Ad placeholder grey box rendered while loading the ad */
+	&:not([top-above-nav-ad-rendered='true']) {
+		::before {
+			content: '';
+			position: absolute;
+			height: 250px;
+			width: 728px;
+			top: ${labelHeight}px;
+			left: 50%;
+			transform: translateX(-50%);
+			background-color: ${palette.neutral[93]};
+		}
+		${from.desktop} {
+			::before {
+				width: 970px;
+			}
+		}
 	}
 `;
 
@@ -600,7 +619,7 @@ export const AdSlot = ({
 				<AdSlotWrapper
 					css={
 						isIn250ReservationVariant
-							? topAboveNavContainerVaraintStyles
+							? topAboveNavContainerVariantStyles
 							: topAboveNavContainerStyles
 					}
 				>

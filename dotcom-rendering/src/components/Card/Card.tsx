@@ -708,7 +708,9 @@ export const Card = ({
 						(imagePositionOnMobile === 'bottom' ||
 							isMediaCard(format)))
 				}
-				fillBackgroundOnDesktop={isBetaContainer && isMediaCard(format)}
+				fillBackgroundOnDesktop={
+					isBetaContainer && isMediaCardOrNewsletter
+				}
 			/>
 		);
 
