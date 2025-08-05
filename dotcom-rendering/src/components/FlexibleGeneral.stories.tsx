@@ -2,10 +2,13 @@ import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
+	audioTrails,
+	galleryTrails,
 	getSublinks,
 	loopVideoCard,
 	opinionTrails,
 	trails,
+	videoTrails,
 } from '../../fixtures/manual/trails';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { customMockFetch } from '../lib/mockRESTCalls';
@@ -54,7 +57,9 @@ const standardCards = standards.map((card, index) => {
 
 	switch (index + 1) {
 		case 2:
-			return enhanceCardFields({ supportingContent: getSublinks(2) });
+			return enhanceCardFields({
+				supportingContent: getSublinks(2),
+			});
 		case 3:
 			return enhanceCardFields({
 				boostLevel: 'boost',
@@ -437,13 +442,13 @@ const slideshowCard = {
 	],
 } satisfies DCRFrontCard;
 
-export const DefaultSplashWithLiveUpdatesAndSlideshow: Story = {
-	name: 'Standard splash with live updates and slideshow',
+// Boost level is ignored for slideshows
+export const SplashWithLiveUpdatesAndSlideshow: Story = {
+	name: 'Splash with live updates and slideshow',
 	args: {
-		frontSectionTitle: 'Standard splash with live updates and slideshow',
+		frontSectionTitle: 'Splash with live updates and slideshow',
 		groupedTrails: {
 			...emptyGroupedTrails,
-
 			splash: [{ ...slideshowCard }],
 		},
 	},
@@ -455,18 +460,13 @@ export const StandardCards: Story = {
 		frontSectionTitle: 'Standard cards',
 		groupedTrails: {
 			...emptyGroupedTrails,
-			standard: trails.slice(0, 4),
-		},
-	},
-};
-
-export const OpinionStandardCards: Story = {
-	name: 'Opinion standard cards',
-	args: {
-		frontSectionTitle: 'Opinion standard cards',
-		groupedTrails: {
-			...emptyGroupedTrails,
-			standard: opinionTrails.slice(0, 2),
+			standard: [
+				...trails.slice(0, 4),
+				...opinionTrails.slice(0, 2),
+				...audioTrails.slice(0, 2),
+				...galleryTrails.slice(0, 2),
+				...videoTrails.slice(0, 2),
+			],
 		},
 	},
 };
@@ -556,6 +556,21 @@ export const LoopVideoCards: Story = {
 			...emptyGroupedTrails,
 			splash: [loopVideoCard],
 			standard: [loopVideoCard], // Loop video is disabled at standard card size
+		},
+	},
+};
+
+export const StandardBoostedMediaCardWithSublinks: Story = {
+	name: 'Standard boosted media card with sublinks',
+	args: {
+		frontSectionTitle: 'Standard boosted media card with sublinks',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			standard: [trails[1]].map((card) => ({
+				...card,
+				boostLevel: 'boost',
+				supportingContent: getSublinks(2),
+			})),
 		},
 	},
 };

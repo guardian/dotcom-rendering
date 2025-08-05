@@ -137,11 +137,16 @@ const topAboveNavContainerVariantStyles = css`
 			content: '';
 			position: absolute;
 			height: 250px;
-			width: 970px;
+			width: 728px;
 			top: ${labelHeight}px;
 			left: 50%;
 			transform: translateX(-50%);
 			background-color: ${palette.neutral[93]};
+		}
+		${from.desktop} {
+			::before {
+				width: 970px;
+			}
 		}
 	}
 `;
