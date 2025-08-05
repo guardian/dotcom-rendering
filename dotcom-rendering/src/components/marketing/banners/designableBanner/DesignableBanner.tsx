@@ -451,15 +451,11 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 							</div>
 						)}
 						{(!isInABTest || isCollapsed) && (
-							<div css={styles.closeButtonABOverrides}>
-								<DesignableBannerCloseButton
-									onCloseClick={onCloseClick}
-									settings={
-										templateSettings.closeButtonSettings
-									}
-									isInABTest={isInABTest}
-								/>
-							</div>
+							<DesignableBannerCloseButton
+								onCloseClick={onCloseClick}
+								settings={templateSettings.closeButtonSettings}
+								isInABTest={isInABTest}
+							/>
 						)}
 					</div>
 
@@ -718,10 +714,6 @@ const styles = {
 		${from.desktop} {
 			margin-top: ${space[5]}px;
 		}
-	`,
-	closeButtonABOverrides: css`
-		justify-self: start;
-		align-self: start;
 	`,
 	headerContainer: (background: string, bannerHasImage: boolean) => css`
 		align-self: stretch;
