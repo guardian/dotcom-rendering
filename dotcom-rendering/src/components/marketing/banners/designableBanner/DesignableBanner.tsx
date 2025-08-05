@@ -541,10 +541,10 @@ const styles = {
 			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
 			grid-template-columns: auto max(${phabletContentMaxWidth} auto);
 			grid-template-areas:
-				'. close-button .'
-				'. copy-container .'
-				'. ${cardsImageOrSpaceTemplateString} .'
-				'. cta-container .';
+				'.	close-button						.'
+				'.	copy-container						.'
+				'.	${cardsImageOrSpaceTemplateString}	.'
+				'.	cta-container						.';
 		}
 		${from.phablet} {
 			max-width: 740px;
@@ -556,9 +556,9 @@ const styles = {
 				);
 			grid-template-rows: auto auto auto;
 			grid-template-areas:
-				'. 	copy-container 						close-button'
-				'. 	${cardsImageOrSpaceTemplateString} 	.'
-				'. 	cta-container 						.';
+				'.	copy-container						close-button'
+				'.	${cardsImageOrSpaceTemplateString}	.'
+				'.	cta-container						.';
 		}
 		${from.desktop} {
 			max-width: 980px;
@@ -568,8 +568,8 @@ const styles = {
 			grid-template-rows: auto auto;
 
 			grid-template-areas:
-				'copy-container 	${cardsImageOrSpaceTemplateString} 	close-button'
-				'cta-container 		${cardsImageOrSpaceTemplateString} 	.			';
+				'copy-container		${cardsImageOrSpaceTemplateString}	close-button'
+				'cta-container		${cardsImageOrSpaceTemplateString}	.';
 		}
 		${from.leftCol} {
 			max-width: 1140px;
@@ -605,10 +605,10 @@ const styles = {
 			padding: ${space[2]}px ${space[3]}px 0 ${space[3]}px;
 			grid-template-columns: auto max(${phabletContentMaxWidth} auto);
 			grid-template-areas:
-				'. close-button .'
-				'. copy-container .'
-				'. ${cardsImageOrSpaceTemplateString} .'
-				'. cta-container .';
+				'.	close-button						.'
+				'.	copy-container						.'
+				'.	${cardsImageOrSpaceTemplateString}	.'
+				'.	cta-container						.';
 		}
 		${from.phablet} {
 			max-width: 740px;
@@ -621,9 +621,9 @@ const styles = {
 				minmax(0, 0.5fr);
 			grid-template-rows: auto auto;
 			grid-template-areas:
-				'. copy-container close-button .'
-				'. ${cardsImageOrSpaceTemplateString} ${cardsImageOrSpaceTemplateString} .'
-				'. cta-container cta-container .';
+				'.	copy-container						close-button						.'
+				'.	${cardsImageOrSpaceTemplateString}	${cardsImageOrSpaceTemplateString}	.'
+				'.	cta-container						cta-container						.';
 		}
 		${from.desktop} {
 			max-width: 980px;
@@ -632,8 +632,8 @@ const styles = {
 			grid-template-rows: auto auto;
 
 			grid-template-areas:
-				'copy-container 	${cardsImageOrSpaceTemplateString} 	close-button'
-				'cta-container 		${cardsImageOrSpaceTemplateString} 	.			';
+				'copy-container		${cardsImageOrSpaceTemplateString}	close-button'
+				'cta-container		${cardsImageOrSpaceTemplateString}	.';
 		}
 		${from.leftCol} {
 			max-width: 1140px;
@@ -699,14 +699,18 @@ const styles = {
 		flex-direction: row;
 		justify-content: space-around;
 		column-gap: ${space[0]}px;
+		padding-right: ${space[2]}px;
+		justify-self: end;
+
 		${until.phablet} {
-			padding-right: ${space[2]}px;
-			justify-self: end;
 			position: sticky;
 			top: ${space[2]}px;
 		}
 		${from.phablet} {
-			margin-top: ${space[2]}px;
+			margin-top: ${space[3]}px;
+		}
+		${from.desktop} {
+			margin-top: ${space[4]}px;
 		}
 	`,
 	headerContainer: (background: string, bannerHasImage: boolean) => css`
