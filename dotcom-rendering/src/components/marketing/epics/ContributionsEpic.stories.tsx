@@ -8,7 +8,10 @@ import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
 import React from 'react';
-import { choiceCardsSettings } from '../lib/storybook';
+import {
+	choiceCardsSettings,
+	choiceCardsWithDestinationUrl,
+} from '../lib/storybook';
 import { ContributionsEpicUnvalidated as ContributionsEpic } from './ContributionsEpic';
 import { props } from './utils/storybook';
 
@@ -378,6 +381,20 @@ export const WithParagraphLinks: Story = {
 				'Our editorial independence means we set our own agenda and voice our own opinions. Guardian journalism is free from commercial and political bias and not influenced by billionaire owners or shareholders. This means we can give a voice to those less heard, explore where others turn away, and rigorously challenge those in power.',
 				'We hope you will consider supporting us today. We need your support to keep delivering quality journalism that’s open and independent. Every reader contribution, however big or small, is so valuable. ',
 			],
+		},
+	},
+};
+
+export const WithThreeTierChoiceCardsAndCustomDestinationUrl: Story = {
+	name: 'ContributionsEpic with three tier choice cards and custom destination URL',
+	args: {
+		...meta.args,
+		variant: {
+			...props.variant,
+			name: 'THREE_TIER_CHOICE_CARDS',
+			secondaryCta: undefined,
+			showChoiceCards: true,
+			choiceCardsSettings: choiceCardsWithDestinationUrl,
 		},
 	},
 };

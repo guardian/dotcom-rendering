@@ -49,7 +49,6 @@ interface AppsProps extends CommonProps {
 type HeaderProps = {
 	article: ArticleDeprecated;
 	NAV: NavType;
-	format: ArticleFormat;
 	renderAds?: boolean;
 };
 
@@ -143,13 +142,7 @@ const Renderer = ({
 	return <div css={adStyles}>{output}</div>;
 };
 
-const NavHeader = ({ article, NAV, format, renderAds }: HeaderProps) => {
-	// Typically immersives use the slim nav, but this switch is used to force
-	// the full nav - typically during special events such as Project 200, or
-	// the Euros. The motivation is to better onboard new visitors; interactives
-	// often reach readers who are less familiar with the Guardian.
-	const showSlimNav = !article.config.switches.interactiveFullHeaderSwitch;
-
+const NavHeader = ({ article, NAV, renderAds }: HeaderProps) => {
 	return (
 		<section
 			/* Note, some interactives require this - e.g. https://www.theguardian.com/environment/ng-interactive/2015/jun/05/carbon-bomb-the-coal-boom-choking-china. */
@@ -169,12 +162,7 @@ const NavHeader = ({ article, NAV, format, renderAds }: HeaderProps) => {
 							shouldCenter={false}
 							element="aside"
 						>
-							<HeaderAdSlot
-								isPaidContent={!!article.config.isPaidContent}
-								shouldHideReaderRevenue={
-									!!article.config.shouldHideReaderRevenue
-								}
-							/>
+							<HeaderAdSlot abTests={article.config.abTests} />
 						</Section>
 					</div>
 				</Stuck>
@@ -188,8 +176,8 @@ const NavHeader = ({ article, NAV, format, renderAds }: HeaderProps) => {
 				discussionApiUrl={article.config.discussionApiUrl}
 				idApiUrl={article.config.idApiUrl}
 				contributionsServiceUrl={article.contributionsServiceUrl}
-				showSubNav={format.theme !== ArticleSpecial.Labs}
-				showSlimNav={showSlimNav}
+				showSubNav={false}
+				showSlimNav={true}
 				hasPageSkin={false}
 				hasPageSkinContentSelfConstrain={false}
 				pageId={article.pageId}
@@ -237,7 +225,6 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 						<NavHeader
 							article={article}
 							NAV={props.NAV}
-							format={format}
 							renderAds={renderAds}
 						/>
 

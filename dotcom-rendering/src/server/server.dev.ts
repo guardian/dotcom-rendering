@@ -10,17 +10,11 @@ import {
 } from './handler.article.apps';
 import {
 	handleArticle,
-	handleArticleJson,
 	handleBlocks,
 	handleInteractive,
 } from './handler.article.web';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
-import {
-	handleFront,
-	handleFrontJson,
-	handleTagPage,
-	handleTagPageJson,
-} from './handler.front.web';
+import { handleFront, handleTagPage } from './handler.front.web';
 import {
 	handleCricketMatchPage,
 	handleFootballMatchListPage,
@@ -96,36 +90,30 @@ const renderer = Router();
 // populates req.body with the content data from a production
 // URL if req.params.url is present
 renderer.use(getContentFromURLMiddleware);
-renderer.get('/Article/*', handleArticle);
-renderer.get('/ArticleJson/*', handleArticleJson);
-renderer.get('/AMPArticle/*', handleAMPArticle);
-renderer.get('/Interactive/*', handleInteractive);
-renderer.get('/AMPInteractive/*', handleAMPArticle);
-renderer.get('/Blocks/*', handleBlocks);
-renderer.get('/Front/*', handleFront);
-renderer.get('/FrontJSON/*', handleFrontJson);
-renderer.get('/TagPage/*', handleTagPage);
-renderer.get('/TagPageJSON/*', handleTagPageJson);
-renderer.get('/EmailNewsletters/*', handleAllEditorialNewslettersPage);
-renderer.get('/AppsArticle/*', handleAppsArticle);
-renderer.get('/AppsInteractive/*', handleAppsInteractive);
-renderer.get('/AppsBlocks/*', handleAppsBlocks);
-renderer.get('/EditionsCrossword/*', handleEditionsCrossword);
-renderer.get('/FootballMatchListPage/*', handleFootballMatchListPage);
-renderer.get('/FootballTablesPage/*', handleFootballTablesPage);
-renderer.get('/CricketMatchPage/*', handleCricketMatchPage);
-renderer.get('/FootballMatchSummaryPage/*', handleFootballMatchPage);
+renderer.get('/Article/*url', handleArticle);
+renderer.get('/AMPArticle/*url', handleAMPArticle);
+renderer.get('/Interactive/*url', handleInteractive);
+renderer.get('/AMPInteractive/*url', handleAMPArticle);
+renderer.get('/Blocks/*url', handleBlocks);
+renderer.get('/Front/*url', handleFront);
+renderer.get('/TagPage/*url', handleTagPage);
+renderer.get('/EmailNewsletters/*url', handleAllEditorialNewslettersPage);
+renderer.get('/AppsArticle/*url', handleAppsArticle);
+renderer.get('/AppsInteractive/*url', handleAppsInteractive);
+renderer.get('/AppsBlocks/*url', handleAppsBlocks);
+renderer.get('/EditionsCrossword/*url', handleEditionsCrossword);
+renderer.get('/FootballMatchListPage/*url', handleFootballMatchListPage);
+renderer.get('/FootballTablesPage/*url', handleFootballTablesPage);
+renderer.get('/CricketMatchPage/*url', handleCricketMatchPage);
+renderer.get('/FootballMatchSummaryPage/*url', handleFootballMatchPage);
 // POST routes for running frontend locally
 renderer.post('/Article', handleArticle);
-renderer.post('/ArticleJson', handleArticleJson);
 renderer.post('/AMPArticle', handleAMPArticle);
 renderer.post('/Interactive', handleInteractive);
 renderer.post('/AMPInteractive', handleAMPArticle);
 renderer.post('/Blocks', handleBlocks);
 renderer.post('/Front', handleFront);
-renderer.post('/FrontJSON', handleFrontJson);
 renderer.post('/TagPage', handleTagPage);
-renderer.post('/TagPageJSON', handleTagPageJson);
 renderer.post('/EmailNewsletters', handleAllEditorialNewslettersPage);
 renderer.post('/AppsArticle', handleAppsArticle);
 renderer.post('/AppsInteractive', handleAppsInteractive);

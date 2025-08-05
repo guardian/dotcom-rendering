@@ -407,12 +407,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								shouldCenter={false}
 							>
 								<HeaderAdSlot
-									isPaidContent={
-										!!article.config.isPaidContent
-									}
-									shouldHideReaderRevenue={
-										!!article.config.shouldHideReaderRevenue
-									}
+									abTests={article.config.abTests}
 								/>
 							</Section>
 						</Stuck>
@@ -460,7 +455,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				)}
 				<Section
 					fullWidth={true}
-					data-print-layout="hide"
 					showTopBorder={false}
 					backgroundColour={themePalette('--article-background')}
 					borderColour={themePalette('--article-border')}
@@ -524,6 +518,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									editionId={article.editionId}
 									hideCaption={isMedia}
 									shouldHideAds={article.shouldHideAds}
+									contentType={article.contentType}
 								/>
 							</div>
 						</GridItem>
@@ -848,7 +843,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				{isWeb && renderAds && !isLabs && (
 					<Section
 						fullWidth={true}
-						data-print-layout="hide"
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
@@ -915,7 +909,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<Section
 						fullWidth={true}
 						sectionId="comments"
-						data-print-layout="hide"
 						element="section"
 						backgroundColour={themePalette(
 							'--discussion-section-background',
@@ -947,7 +940,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						padContent={false}
 						verticalMargins={false}
 						element="aside"
-						data-print-layout="hide"
 						data-link-name="most-popular"
 						data-component="most-popular"
 						backgroundColour={themePalette(
@@ -973,7 +965,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				{isWeb && renderAds && !isLabs && (
 					<Section
 						fullWidth={true}
-						data-print-layout="hide"
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
@@ -992,7 +983,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					{props.NAV.subNavSections && (
 						<Section
 							fullWidth={true}
-							data-print-layout="hide"
 							padSides={false}
 							element="aside"
 						>
@@ -1010,7 +1000,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					)}
 					<Section
 						fullWidth={true}
-						data-print-layout="hide"
 						padSides={false}
 						backgroundColour={sourcePalette.brand[400]}
 						borderColour={sourcePalette.brand[600]}
@@ -1063,7 +1052,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				<>
 					<Section
 						fullWidth={true}
-						data-print-layout="hide"
 						backgroundColour={themePalette('--ad-background')}
 						borderColour={themePalette('--article-border')}
 						padSides={false}

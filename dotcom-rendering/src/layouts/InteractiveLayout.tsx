@@ -273,13 +273,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										shouldCenter={false}
 									>
 										<HeaderAdSlot
-											isPaidContent={
-												!!article.config.isPaidContent
-											}
-											shouldHideReaderRevenue={
-												!!article.config
-													.shouldHideReaderRevenue
-											}
+											abTests={article.config.abTests}
 										/>
 									</Section>
 								</div>
@@ -294,8 +288,8 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							discussionApiUrl={article.config.discussionApiUrl}
 							idApiUrl={article.config.idApiUrl}
 							contributionsServiceUrl={contributionsServiceUrl}
-							showSubNav={format.theme !== ArticleSpecial.Labs}
-							showSlimNav={false}
+							showSlimNav={true}
+							showSubNav={false}
 							hasPageSkin={false}
 							hasPageSkinContentSelfConstrain={false}
 							pageId={article.pageId}
@@ -329,7 +323,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				)}
 				<Section
 					fullWidth={true}
-					data-print-layout="hide"
 					showTopBorder={false}
 					backgroundColour={themePalette('--article-background')}
 					borderColour={themePalette('--article-border')}
@@ -630,7 +623,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				{isWeb && renderAds && (
 					<Section
 						fullWidth={true}
-						data-print-layout="hide"
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
@@ -699,7 +691,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 					<Section
 						fullWidth={true}
 						sectionId="comments"
-						data-print-layout="hide"
 						element="section"
 						backgroundColour={themePalette(
 							'--discussion-section-background',
@@ -731,7 +722,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						padContent={false}
 						verticalMargins={false}
 						element="aside"
-						data-print-layout="hide"
 						data-link-name="most-popular"
 						data-component="most-popular"
 						backgroundColour={themePalette(
@@ -758,7 +748,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				{isWeb && renderAds && (
 					<Section
 						fullWidth={true}
-						data-print-layout="hide"
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
@@ -774,12 +763,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 			</main>
 
 			{isWeb && props.NAV.subNavSections && (
-				<Section
-					fullWidth={true}
-					data-print-layout="hide"
-					padSides={false}
-					element="aside"
-				>
+				<Section fullWidth={true} padSides={false} element="aside">
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
 						<SubNav
 							subNavSections={props.NAV.subNavSections}
@@ -794,7 +778,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				<>
 					<Section
 						fullWidth={true}
-						data-print-layout="hide"
 						padSides={false}
 						backgroundColour={sourcePalette.brand[400]}
 						borderColour={sourcePalette.brand[600]}
@@ -846,7 +829,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 			{isApps && (
 				<Section
 					fullWidth={true}
-					data-print-layout="hide"
 					backgroundColour={themePalette('--apps-footer-background')}
 					borderColour={themePalette('--article-border')}
 					padSides={false}

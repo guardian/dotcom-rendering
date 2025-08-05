@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { VideoAtom } from './VideoAtom';
 
 const meta = {
@@ -25,6 +26,13 @@ export const Default = {
 				mimeType: 'video/mp4',
 			},
 		],
+		isMainMedia: false,
+		format: {
+			theme: Pillar.News,
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+		},
+		caption: 'This is a video caption',
 	},
 	decorators: [
 		(Story) => (

@@ -5,7 +5,11 @@ import type {
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
-import { choiceCardsSettings } from '../../../lib/storybook';
+import {
+	choiceCardsSettings,
+	choiceCardsWithDestinationUrl,
+	choiceCardsWithDestinationUrlTwoCards,
+} from '../../../lib/storybook';
 import {
 	contentNoHeading,
 	design,
@@ -278,6 +282,60 @@ export const NoChoiceCardOrImage: Story = {
 		design: {
 			...design,
 			visual: undefined,
+		},
+	},
+};
+
+export const WithDestinationUrlAllCards: Story = {
+	name: 'With destinationUrl on all choice cards',
+	args: {
+		...meta.args,
+		design: {
+			...design,
+			visual: {
+				kind: 'ChoiceCards',
+				buttonColour: stringToHexColour('E5E5E5'),
+			},
+		},
+		tracking: {
+			...tracking,
+			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
+		},
+		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings: choiceCardsWithDestinationUrl,
+	},
+	parameters: {
+		docs: {
+			description: {
+				story: 'All choice cards have a destinationUrl configured. The banner should use these custom URLs instead of constructing URLs with product parameters.',
+			},
+		},
+	},
+};
+
+export const WithDestinationUrlTwoCards: Story = {
+	name: 'With destinationUrl in two choice cards',
+	args: {
+		...meta.args,
+		design: {
+			...design,
+			visual: {
+				kind: 'ChoiceCards',
+				buttonColour: stringToHexColour('E5E5E5'),
+			},
+		},
+		tracking: {
+			...tracking,
+			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
+		},
+		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings: choiceCardsWithDestinationUrlTwoCards,
+	},
+	parameters: {
+		docs: {
+			description: {
+				story: 'All choice cards have a destinationUrl configured. The banner should use these custom URLs instead of constructing URLs with product parameters.',
+			},
 		},
 	},
 };

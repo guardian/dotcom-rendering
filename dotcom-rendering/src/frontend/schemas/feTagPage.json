@@ -1389,6 +1389,20 @@
                         "allImages"
                     ]
                 },
+                "trailImage": {
+                    "type": "object",
+                    "properties": {
+                        "allImages": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Image"
+                            }
+                        }
+                    },
+                    "required": [
+                        "allImages"
+                    ]
+                },
                 "expired": {
                     "type": "boolean"
                 },

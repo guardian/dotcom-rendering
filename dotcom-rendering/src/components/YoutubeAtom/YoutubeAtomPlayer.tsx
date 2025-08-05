@@ -1,6 +1,6 @@
 import { css, Global } from '@emotion/react';
 import type { Participations } from '@guardian/ab-core';
-import { buildImaAdTagUrl } from '@guardian/commercial';
+import { buildImaAdTagUrl } from '@guardian/commercial-core';
 import type { ConsentState } from '@guardian/libs';
 import { log } from '@guardian/libs';
 import {

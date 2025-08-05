@@ -39,6 +39,7 @@ export const ScrollableFeature = ({
 		>
 			{trails.map((card) => {
 				const isLoopingVideo = card.mainMedia?.type === 'LoopVideo';
+
 				return (
 					<ScrollableCarousel.Item key={card.url}>
 						<FeatureCard

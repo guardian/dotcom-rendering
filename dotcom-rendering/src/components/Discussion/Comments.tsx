@@ -96,7 +96,7 @@ const writeMutes = (mutes: string[]) => {
 	storage.local.set('gu.prefs.discussion.mutes', mutes);
 };
 
-/** Dispatches a custom event which is handled by @guardian/commercial */
+/** Dispatches a custom event which is handled by @guardian/commercial-core */
 const dispatchCommentsStateChange = () =>
 	document.dispatchEvent(new CustomEvent('comments-state-change'));
 

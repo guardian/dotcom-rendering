@@ -214,28 +214,7 @@ export const Withimage = () => {
 				index={0}
 				expired={false}
 				duration={333}
-				posterImage={[
-					{
-						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/2000.jpg',
-						width: 2000,
-					},
-					{
-						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/1000.jpg',
-						width: 1000,
-					},
-					{
-						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/500.jpg',
-						width: 500,
-					},
-					{
-						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/140.jpg',
-						width: 140,
-					},
-					{
-						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/4255.jpg',
-						width: 4255,
-					},
-				]}
+				posterImage="https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/4255.jpg"
 				height={259}
 				width={460}
 				stickyVideos={false}
@@ -280,28 +259,7 @@ export const WithPosterAndOverlayImage = () => {
 				expired={false}
 				overrideImage="https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/500.jpg?quality=85&auto=format&fit=max&s=17c70ec70002ea34886fd6c2605cd81e"
 				duration={333}
-				posterImage={[
-					{
-						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/2000.jpg',
-						width: 2000,
-					},
-					{
-						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/1000.jpg',
-						width: 1000,
-					},
-					{
-						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/500.jpg',
-						width: 500,
-					},
-					{
-						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/140.jpg',
-						width: 140,
-					},
-					{
-						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/4255.jpg',
-						width: 4255,
-					},
-				]}
+				posterImage="https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/4255.jpg"
 				height={259}
 				width={460}
 				stickyVideos={false}
@@ -347,28 +305,7 @@ export const WithShowMainVideoFlagOff = () => {
 				expired={false}
 				overrideImage="https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/500.jpg?quality=85&auto=format&fit=max&s=17c70ec70002ea34886fd6c2605cd81e"
 				duration={333}
-				posterImage={[
-					{
-						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/2000.jpg',
-						width: 2000,
-					},
-					{
-						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/1000.jpg',
-						width: 1000,
-					},
-					{
-						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/500.jpg',
-						width: 500,
-					},
-					{
-						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/140.jpg',
-						width: 140,
-					},
-					{
-						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/4255.jpg',
-						width: 4255,
-					},
-				]}
+				posterImage="https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/4255.jpg"
 				height={259}
 				width={460}
 				stickyVideos={false}

@@ -396,7 +396,7 @@ app.use('/assets', express.static(path.resolve(__dirname, '../assets')));
 app.use('/assets', express.static(path.resolve(__dirname, '../dist/assets')));
 app.use(compression());
 
-app.all('*', (request, response, next) => {
+app.all('/{*splat}', (request, response, next) => {
 	const start = Date.now();
 
 	response.once('finish', () => {
@@ -409,22 +409,29 @@ app.all('*', (request, response, next) => {
 	next();
 });
 
-app.get('/healthcheck', (_req, res) => res.send('Ok'));
+app.get('/healthcheck', (_req, res) => {
+	res.status(200).send('Ok');
+});
 
-app.get('/favicon.ico', (_, res) => res.status(404).end());
-app.get('/fontSize.css', (_, res) => res.status(404).end());
+app.get('/favicon.ico', (_, res) => {
+	res.sendStatus(404);
+});
+
+app.get('/fontSize.css', (_, res) => {
+	res.sendStatus(404);
+});
 
 /**
 To enable testing in the mobile device emulators,
 this route handler adds compatability with DCR's route for apps articles.
 The DCR route follows the pattern:
-/AppsArticle/https://www.theguardian.com/cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked
+AppsArticle/https://www.theguardian.com/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth
 */
 app.get(
-	'/AppsArticle/*',
+	'/AppsArticle/*url',
 	express.raw(),
 	(req, res, next) => {
-		const contentWebUrl = req.params[0];
+		const contentWebUrl = req.originalUrl.split('/').slice(2).join('/');
 		const articleId = new URL(contentWebUrl).pathname;
 		req.params = {
 			0: articleId,
@@ -436,15 +443,12 @@ app.get(
 );
 
 app.get(
-	'/:edition(uk|us|au|europe|international)?/rendered-items/*',
+	['/:edition/rendered-items/*path', '/rendered-items/*path'],
 	express.raw(),
 	serveArticleGet,
 );
-app.get(
-	'/:edition(uk|us|au|europe|international)?/*',
-	express.raw(),
-	serveArticleGet,
-);
+
+app.get(['/:edition/*path', '/*path'], express.raw(), serveArticleGet);
 
 app.post('/article', express.raw(), serveArticlePost);
 

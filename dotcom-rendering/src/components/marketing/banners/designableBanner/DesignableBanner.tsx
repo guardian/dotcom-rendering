@@ -23,14 +23,14 @@ import type {
 	Image,
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
 	removeMediaRulePrefix,
 	useMatchMedia,
 } from '../../../../lib/useMatchMedia';
 import { getChoiceCards } from '../../lib/choiceCards';
 import type { ReactComponent } from '../../lib/ReactComponent';
-import { addChoiceCardsProductParams } from '../../lib/tracking';
+import { getChoiceCardUrl } from '../../lib/tracking';
 import { ThreeTierChoiceCards } from '../../shared/ThreeTierChoiceCards';
 import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
 import type { BannerRenderProps } from '../common/types';
@@ -40,7 +40,13 @@ import { DesignableBannerCloseButton } from './components/DesignableBannerCloseB
 import { DesignableBannerCtas } from './components/DesignableBannerCtas';
 import { DesignableBannerHeader } from './components/DesignableBannerHeader';
 import { DesignableBannerVisual } from './components/DesignableBannerVisual';
-import type { BannerTemplateSettings, ChoiceCardSettings } from './settings';
+import type {
+	BannerTemplateSettings,
+	ChoiceCardSettings,
+	CtaSettings,
+	CtaStateSettings,
+} from './settings';
+import { buttonThemes } from './styles/buttonStyles';
 import { templateSpacing } from './styles/templateStyles';
 
 const buildImageSettings = (
@@ -108,20 +114,7 @@ const buildChoiceCardSettings = (
 	return undefined;
 };
 
-const buildUrlForThreeTierChoiceCards = (
-	baseUrl: string,
-	selectedProduct: ChoiceCard['product'],
-) => {
-	return selectedProduct.supportTier === 'OneOff'
-		? baseUrl
-		: addChoiceCardsProductParams(
-				baseUrl,
-				selectedProduct.supportTier,
-				selectedProduct.ratePlan,
-		  );
-};
-
-const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
+const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	content,
 	onCloseClick,
 	articleCounts,
@@ -144,6 +137,14 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		);
 	}, []);
 
+	const bannerRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		if (bannerRef.current) {
+			bannerRef.current.focus();
+		}
+	}, []);
+
 	useEffect(() => {
 		if (iosAppBannerPresent) {
 			// send ophan event
@@ -160,11 +161,11 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 	}, [iosAppBannerPresent, submitComponentEvent]);
 
 	const choiceCards = getChoiceCards(isTabletOrAbove, choiceCardsSettings);
-	const defaultProduct = choiceCards?.find((cc) => cc.isDefault)?.product;
-	const [
-		threeTierChoiceCardSelectedProduct,
-		setThreeTierChoiceCardSelectedProduct,
-	] = useState<ChoiceCard['product'] | undefined>(defaultProduct);
+	const defaultChoiceCard = choiceCards?.find((cc) => cc.isDefault);
+
+	const [selectedChoiceCard, setSelectedChoiceCard] = useState<
+		ChoiceCard | undefined
+	>(defaultChoiceCard);
 
 	// We can't render anything without a design
 	if (!design) {
@@ -188,6 +189,15 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 		? 'main-image'
 		: '.';
 
+	// TODO: I assume we're planning on making this adjustable in RRCP in future.
+	const choiceCardButtonCtaStateSettings: CtaStateSettings = {
+		backgroundColour: palette.brandAlt[400],
+		textColour: 'inherit',
+	};
+	const choiceCardButtonSettings: CtaSettings = {
+		default: choiceCardButtonCtaStateSettings,
+	};
+
 	const templateSettings: BannerTemplateSettings = {
 		containerSettings: {
 			backgroundColour: hexColourToString(basic.background),
@@ -204,12 +214,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 				),
 				textColour: hexColourToString(primaryCta.default.text),
 			},
-			hover: {
-				backgroundColour: hexColourToString(
-					primaryCta.hover.background,
-				),
-				textColour: hexColourToString(primaryCta.hover.text),
-			},
 		},
 		secondaryCtaSettings: {
 			default: {
@@ -220,17 +224,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 				border: `1px solid ${
 					secondaryCta.default.border
 						? hexColourToString(secondaryCta.default.border)
-						: undefined
-				}`,
-			},
-			hover: {
-				backgroundColour: hexColourToString(
-					secondaryCta.hover.background,
-				),
-				textColour: hexColourToString(secondaryCta.hover.text),
-				border: `1px solid ${
-					secondaryCta.hover.border
-						? hexColourToString(secondaryCta.hover.border)
 						: undefined
 				}`,
 			},
@@ -245,17 +238,6 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					closeButton.default.border
 						? hexColourToString(closeButton.default.border)
 						: specialReport[100]
-				}`,
-			},
-			hover: {
-				backgroundColour: hexColourToString(
-					closeButton.hover.background,
-				),
-				textColour: hexColourToString(closeButton.hover.text),
-				border: `1px solid ${
-					closeButton.hover.border
-						? hexColourToString(closeButton.hover.border)
-						: neutral[100]
 				}`,
 			},
 		},
@@ -301,6 +283,9 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 
 	return (
 		<div
+			ref={bannerRef}
+			role="alert"
+			tabIndex={-1}
 			css={styles.outerContainer(
 				templateSettings.containerSettings.backgroundColour,
 				iosAppBannerPresent,
@@ -379,7 +364,7 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 					</div>
 				)}
 
-				{!threeTierChoiceCardSelectedProduct && (
+				{!selectedChoiceCard && (
 					<div css={styles.outerImageCtaContainer}>
 						<div css={styles.innerImageCtaContainer}>
 							<DesignableBannerCtas
@@ -405,29 +390,29 @@ const DesignableBannerV2: ReactComponent<BannerRenderProps> = ({
 				</div>
 
 				{choiceCards &&
-					threeTierChoiceCardSelectedProduct &&
+					selectedChoiceCard &&
 					mainOrMobileContent.primaryCta && (
 						<div css={styles.threeTierChoiceCardsContainer}>
 							<ThreeTierChoiceCards
-								selectedProduct={
-									threeTierChoiceCardSelectedProduct
-								}
-								setSelectedProduct={
-									setThreeTierChoiceCardSelectedProduct
-								}
+								selectedChoiceCard={selectedChoiceCard}
+								setSelectedChoiceCard={setSelectedChoiceCard}
 								choices={choiceCards}
 								id={'banner'}
 							/>
 
 							<div css={styles.ctaContainer}>
 								<LinkButton
-									href={buildUrlForThreeTierChoiceCards(
+									href={getChoiceCardUrl(
+										selectedChoiceCard,
 										mainOrMobileContent.primaryCta.ctaUrl,
-										threeTierChoiceCardSelectedProduct,
 									)}
 									onClick={onCtaClick}
-									priority="tertiary"
+									priority="primary"
 									cssOverrides={styles.linkButtonStyles}
+									theme={buttonThemes(
+										choiceCardButtonSettings,
+										'primary',
+									)}
 									icon={<SvgArrowRightStraight />}
 									iconSide="right"
 									target="_blank"
@@ -818,7 +803,6 @@ const styles = {
 		}
 	`,
 	linkButtonStyles: css`
-		background-color: ${palette.brandAlt[400]};
 		border-color: ${palette.brandAlt[400]};
 		width: 100%;
 	`,
@@ -827,16 +811,10 @@ const styles = {
 	`,
 };
 
-const unvalidated = bannerWrapper(DesignableBannerV2, 'designable-banner');
-const validated = validatedBannerWrapper(
-	DesignableBannerV2,
-	'designable-banner',
-);
+const unvalidated = bannerWrapper(DesignableBanner, 'designable-banner');
+const validated = validatedBannerWrapper(DesignableBanner, 'designable-banner');
 
 export {
-	validated as DesignableBannerV2,
-	unvalidated as DesignableBannerUnvalidatedV2,
-	// temporarily until we can rename banner coming in through SDC
 	validated as DesignableBanner,
 	unvalidated as DesignableBannerUnvalidated,
 };

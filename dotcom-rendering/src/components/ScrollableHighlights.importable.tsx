@@ -47,12 +47,15 @@ const carouselStyles = css`
 		scroll-padding-left: 240px;
 	}
 	${from.leftCol} {
-		scroll-padding-left: 80px;
+		scroll-padding-left: 160px;
+		padding-left: 160px;
 	}
 
 	${from.wide} {
 		scroll-padding-left: 240px;
+		padding-left: 240px;
 	}
+
 	/**
 	* Hide scrollbars
 	* See: https://stackoverflow.com/a/38994837
@@ -71,20 +74,12 @@ const itemStyles = css`
 	margin: ${space[3]}px 10px;
 	:first-child {
 		${from.tablet} {
-			margin-left: 0px;
+			margin-left: 0;
 		}
-
-		/**
-		* From left col we add space to the left margin to the first
-		* child so that the first card in the carousel aligns
-		* with the start of the pages content in the grid.
-		*/
-		${from.leftCol} {
-			padding-left: 160px; /** 160 === 2 columns and 2 column gaps  */
-		}
-		${from.wide} {
-			padding-left: 0;
-			margin-left: 240px; /** 240 === 3 columns and 3 column gaps  */
+	}
+	:last-child {
+		${from.tablet} {
+			margin-right: 0;
 		}
 	}
 `;
@@ -172,6 +167,7 @@ const getOphanInfo = (frontId?: string) => {
 	const ophanComponentName = ophanComponentId('highlights');
 	const ophanComponentLink = `container-${0} | ${ophanComponentName}`;
 	const ophanFrontName = `Front | /${frontId}`;
+
 	return {
 		ophanComponentName,
 		ophanComponentLink,
@@ -192,6 +188,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 		const cardWidth =
 			carouselRef.current.querySelector('li')?.offsetWidth ?? 0;
 		const offset = direction === 'left' ? -cardWidth : cardWidth;
+
 		carouselRef.current.scrollBy({
 			left: offset,
 			behavior: 'smooth',

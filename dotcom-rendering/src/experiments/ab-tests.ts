@@ -1,11 +1,7 @@
 import type { ABTest } from '@guardian/ab-core';
 import { abTestTest } from './tests/ab-test-test';
-import { adBlockAsk } from './tests/ad-block-ask';
 import { auxiaSignInGate } from './tests/auxia-sign-in-gate';
-import { consentlessAds } from './tests/consentless-ads';
-import { integrateIma } from './tests/integrate-ima';
-import { mpuWhenNoEpic } from './tests/mpu-when-no-epic';
-import { optimiseSpacefinderInline } from './tests/optimise-spacefinder-inline';
+import { googleOneTap } from './tests/google-one-tap';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
 import { userBenefitsApi } from './tests/user-benefits-api';
@@ -16,11 +12,7 @@ export const tests: ABTest[] = [
 	abTestTest,
 	signInGateMainVariant,
 	signInGateMainControl,
-	consentlessAds,
-	integrateIma,
-	mpuWhenNoEpic,
-	adBlockAsk,
-	optimiseSpacefinderInline,
 	userBenefitsApi,
 	auxiaSignInGate,
+	googleOneTap,
 ];

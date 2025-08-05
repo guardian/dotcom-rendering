@@ -1,7 +1,11 @@
 import { isUndefined } from '@guardian/libs';
 import type { Loading } from '../components/CardPicture';
 import { FrontCard } from '../components/FrontCard';
-import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
+import type {
+	AspectRatio,
+	DCRContainerPalette,
+	DCRFrontCard,
+} from '../types/front';
 
 type TrailProps = {
 	trail: DCRFrontCard;
@@ -10,6 +14,7 @@ type TrailProps = {
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 	isTagPage?: boolean;
+	aspectRatio?: AspectRatio;
 };
 
 /**
@@ -51,6 +56,7 @@ export const Card100Media50 = ({
 	imageLoading,
 	isTagPage,
 	absoluteServerTimes,
+	aspectRatio,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -78,6 +84,7 @@ export const Card100Media50 = ({
 					? 'horizontal'
 					: 'vertical'
 			}
+			aspectRatio={aspectRatio}
 		/>
 	);
 };
@@ -103,6 +110,7 @@ export const Card100Media75 = ({
 	imageLoading,
 	isTagPage,
 	absoluteServerTimes,
+	aspectRatio,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -130,6 +138,7 @@ export const Card100Media75 = ({
 					? 'horizontal'
 					: 'vertical'
 			}
+			aspectRatio={aspectRatio}
 		/>
 	);
 };
@@ -156,6 +165,7 @@ export const Card100Media100 = ({
 	imageLoading,
 	isTagPage,
 	absoluteServerTimes,
+	aspectRatio,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -171,6 +181,7 @@ export const Card100Media100 = ({
 			isTagPage={isTagPage}
 			supportingContent={trail.supportingContent?.slice(0, 4)}
 			supportingContentAlignment="horizontal"
+			aspectRatio={aspectRatio}
 		/>
 	);
 };
@@ -198,6 +209,7 @@ export const Card100Media100Tall = ({
 	imageLoading,
 	isTagPage,
 	absoluteServerTimes,
+	aspectRatio,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -214,6 +226,7 @@ export const Card100Media100Tall = ({
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 			supportingContentAlignment="vertical"
 			trailText={trail.trailText}
+			aspectRatio={aspectRatio}
 		/>
 	);
 };
@@ -239,6 +252,7 @@ export const Card75Media50Right = ({
 	imageLoading,
 	isTagPage,
 	absoluteServerTimes,
+	aspectRatio,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -259,6 +273,7 @@ export const Card75Media50Right = ({
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'small', tablet: 'xsmall' }}
+			aspectRatio={aspectRatio}
 		/>
 	);
 };
@@ -284,6 +299,7 @@ export const Card75Media50Left = ({
 	imageLoading,
 	isTagPage,
 	absoluteServerTimes,
+	aspectRatio,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -304,6 +320,7 @@ export const Card75Media50Left = ({
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'small', tablet: 'xsmall' }}
+			aspectRatio={aspectRatio}
 		/>
 	);
 };
@@ -329,6 +346,7 @@ export const Card25Media25 = ({
 	imageLoading,
 	isTagPage,
 	absoluteServerTimes,
+	aspectRatio,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -345,6 +363,7 @@ export const Card25Media25 = ({
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'xsmall', tablet: 'xxsmall' }}
 			canPlayInline={false}
+			aspectRatio={aspectRatio}
 		/>
 	);
 };
@@ -370,6 +389,7 @@ export const Card25Media25SmallHeadline = ({
 	imageLoading,
 	isTagPage,
 	absoluteServerTimes,
+	aspectRatio,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -386,6 +406,7 @@ export const Card25Media25SmallHeadline = ({
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'xxsmall', tablet: 'xxsmall' }}
 			canPlayInline={false}
+			aspectRatio={aspectRatio}
 		/>
 	);
 };
@@ -412,6 +433,7 @@ export const Card25Media25Tall = ({
 	imageLoading,
 	isTagPage,
 	absoluteServerTimes,
+	aspectRatio,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -434,6 +456,7 @@ export const Card25Media25Tall = ({
 			}
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 			canPlayInline={false}
+			aspectRatio={aspectRatio}
 		/>
 	);
 };
@@ -459,6 +482,7 @@ export const Card25Media25TallNoTrail = ({
 	imageLoading,
 	isTagPage,
 	absoluteServerTimes,
+	aspectRatio,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -474,6 +498,7 @@ export const Card25Media25TallNoTrail = ({
 			headlineSizes={{ desktop: 'xsmall', tablet: 'xxsmall' }}
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 			canPlayInline={false}
+			aspectRatio={aspectRatio}
 		/>
 	);
 };
@@ -499,6 +524,7 @@ export const Card25Media25TallSmallHeadline = ({
 	imageLoading,
 	isTagPage,
 	absoluteServerTimes,
+	aspectRatio,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -514,6 +540,7 @@ export const Card25Media25TallSmallHeadline = ({
 			headlineSizes={{ desktop: 'xxsmall', tablet: 'xxsmall' }}
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 			canPlayInline={false}
+			aspectRatio={aspectRatio}
 		/>
 	);
 };
@@ -539,6 +566,7 @@ export const Card50Media50 = ({
 	imageLoading,
 	isTagPage,
 	absoluteServerTimes,
+	aspectRatio,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -554,6 +582,7 @@ export const Card50Media50 = ({
 			absoluteServerTimes={absoluteServerTimes}
 			supportingContent={trail.supportingContent?.slice(0, 3)}
 			supportingContentAlignment="horizontal"
+			aspectRatio={aspectRatio}
 		/>
 	);
 };
@@ -580,6 +609,7 @@ export const Card50Media50Tall = ({
 	imageLoading,
 	isTagPage,
 	absoluteServerTimes,
+	aspectRatio,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -596,6 +626,7 @@ export const Card50Media50Tall = ({
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'small', tablet: 'xsmall' }}
+			aspectRatio={aspectRatio}
 		/>
 	);
 };
@@ -621,6 +652,7 @@ export const Card66Media66 = ({
 	imageLoading,
 	isTagPage,
 	absoluteServerTimes,
+	aspectRatio,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -635,6 +667,7 @@ export const Card66Media66 = ({
 			imageSize="large"
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
+			aspectRatio={aspectRatio}
 		/>
 	);
 };
@@ -660,6 +693,7 @@ export const Card33Media33 = ({
 	imageLoading,
 	isTagPage,
 	absoluteServerTimes,
+	aspectRatio,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -674,6 +708,7 @@ export const Card33Media33 = ({
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'xsmall', tablet: 'xxsmall' }}
+			aspectRatio={aspectRatio}
 		/>
 	);
 };
@@ -698,6 +733,7 @@ export const Card33Media33Tall = ({
 	imageLoading,
 	isTagPage,
 	absoluteServerTimes,
+	aspectRatio,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -713,6 +749,7 @@ export const Card33Media33Tall = ({
 			headlineSizes={{ desktop: 'xsmall', tablet: 'xxsmall' }}
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 			supportingContentAlignment="vertical"
+			aspectRatio={aspectRatio}
 		/>
 	);
 };
@@ -738,6 +775,7 @@ export const Card33Media33MobileTopTall = ({
 	imageLoading,
 	isTagPage,
 	absoluteServerTimes,
+	aspectRatio,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -754,6 +792,7 @@ export const Card33Media33MobileTopTall = ({
 			headlineSizes={{ desktop: 'xsmall', tablet: 'xsmall' }}
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 			supportingContentAlignment="vertical"
+			aspectRatio={aspectRatio}
 		/>
 	);
 };
@@ -776,6 +815,7 @@ export const CardDefault = ({
 	containerPalette,
 	absoluteServerTimes,
 	isTagPage,
+	aspectRatio,
 }: Omit<TrailProps, 'imageLoading'>) => {
 	return (
 		<FrontCard
@@ -789,6 +829,7 @@ export const CardDefault = ({
 			headlineSizes={{ desktop: 'xxsmall' }}
 			canPlayInline={false}
 			isTagPage={isTagPage}
+			aspectRatio={aspectRatio}
 		/>
 	);
 };
@@ -812,6 +853,7 @@ export const CardDefaultMedia = ({
 	imageLoading,
 	isTagPage,
 	absoluteServerTimes,
+	aspectRatio,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -826,6 +868,7 @@ export const CardDefaultMedia = ({
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'xxsmall' }}
 			canPlayInline={false}
+			aspectRatio={aspectRatio}
 		/>
 	);
 };
@@ -849,6 +892,7 @@ export const CardDefaultMediaMobile = ({
 	imageLoading,
 	isTagPage,
 	absoluteServerTimes,
+	aspectRatio,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -863,6 +907,7 @@ export const CardDefaultMediaMobile = ({
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'xxsmall' }}
 			canPlayInline={false}
+			aspectRatio={aspectRatio}
 		/>
 	);
 };

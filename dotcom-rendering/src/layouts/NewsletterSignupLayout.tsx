@@ -227,12 +227,7 @@ export const NewsletterSignupLayout = ({
 							padSides={false}
 							shouldCenter={false}
 						>
-							<HeaderAdSlot
-								isPaidContent={!!article.config.isPaidContent}
-								shouldHideReaderRevenue={
-									!!article.config.shouldHideReaderRevenue
-								}
-							/>
+							<HeaderAdSlot abTests={article.config.abTests} />
 						</Section>
 					</Stuck>
 				)}
@@ -472,7 +467,6 @@ export const NewsletterSignupLayout = ({
 
 			<Section
 				fullWidth={true}
-				data-print-layout="hide"
 				padSides={false}
 				showTopBorder={false}
 				backgroundColour={sourcePalette.brand[400]}

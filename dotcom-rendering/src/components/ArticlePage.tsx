@@ -90,6 +90,11 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			<Island priority="enhancement" defer={{ until: 'idle' }}>
 				<FocusStyles />
 			</Island>
+			{!!frontendData.affiliateLinksDisclaimer && (
+				<Island priority="feature" defer={{ until: 'idle' }}>
+					<EnhanceAffiliateLinks />
+				</Island>
+			)}
 			{(format.design === ArticleDesign.LiveBlog ||
 				format.design === ArticleDesign.DeadBlog) && (
 				<SkipTo id={'key-events-carousel'} label="Skip to key events" />
@@ -131,11 +136,6 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							serverSideTests={frontendData.config.abTests}
 						/>
 					</Island>
-					{!!frontendData.affiliateLinksDisclaimer && (
-						<Island priority="feature" defer={{ until: 'idle' }}>
-							<EnhanceAffiliateLinks />
-						</Island>
-					)}
 				</>
 			)}
 			{renderingTarget === 'Web' ? (
@@ -177,15 +177,13 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			)}
 			{renderingTarget === 'Apps' ? (
 				<DecideLayout
-					article={frontendData}
-					format={format}
+					article={props.article}
 					renderingTarget={renderingTarget}
 				/>
 			) : (
 				<DecideLayout
-					article={frontendData}
+					article={props.article}
 					NAV={props.NAV}
-					format={format}
 					renderingTarget={renderingTarget}
 				/>
 			)}

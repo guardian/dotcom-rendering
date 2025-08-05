@@ -12,17 +12,11 @@ import {
 } from './handler.article.apps';
 import {
 	handleArticle,
-	handleArticleJson,
 	handleBlocks,
 	handleInteractive,
 } from './handler.article.web';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
-import {
-	handleFront,
-	handleFrontJson,
-	handleTagPage,
-	handleTagPageJson,
-} from './handler.front.web';
+import { handleFront, handleTagPage } from './handler.front.web';
 import {
 	handleCricketMatchPage,
 	handleFootballMatchListPage,
@@ -71,9 +65,7 @@ export const prodServer = (): void => {
 	app.post('/AMPInteractive', logRenderTime, handleAMPArticle);
 	app.post('/Blocks', logRenderTime, handleBlocks);
 	app.post('/Front', logRenderTime, handleFront);
-	app.post('/FrontJSON', logRenderTime, handleFrontJson);
 	app.post('/TagPage', logRenderTime, handleTagPage);
-	app.post('/TagPageJSON', logRenderTime, handleTagPageJson);
 	app.post(
 		'/FootballMatchListPage',
 		logRenderTime,
@@ -99,44 +91,31 @@ export const prodServer = (): void => {
 
 	// These GET's are for checking any given URL directly from PROD
 	app.get(
-		'/Article/*',
+		'/Article/*url',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleArticle,
 	);
-	app.use('/ArticleJson/*', handleArticleJson);
 
 	app.get(
-		'/AMPArticle/*',
+		'/AMPArticle/*url',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleAMPArticle,
 	);
 
 	app.get(
-		'/Front/*',
+		'/Front/*url',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleFront,
 	);
-	app.get(
-		'/FrontJSON/*',
-		logRenderTime,
-		getContentFromURLMiddleware,
-		handleFrontJson,
-	);
 
 	app.get(
-		'/TagPage/*',
+		'/TagPage/*url',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleTagPage,
-	);
-	app.get(
-		'/TagPageJSON/*',
-		logRenderTime,
-		getContentFromURLMiddleware,
-		handleTagPageJson,
 	);
 
 	app.get(
@@ -147,14 +126,14 @@ export const prodServer = (): void => {
 	);
 
 	app.get(
-		'/AppsArticle/*',
+		'/AppsArticle/*url',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleAppsArticle,
 	);
 
 	app.get(
-		'/AppsInteractive/*',
+		'/AppsInteractive/*url',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleAppsInteractive,

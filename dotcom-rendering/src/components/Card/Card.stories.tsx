@@ -9,7 +9,10 @@ import {
 	Pillar,
 } from '../../lib/articleFormat';
 import type { Branding } from '../../types/branding';
-import type { DCRContainerPalette } from '../../types/front';
+import type {
+	DCRContainerPalette,
+	DCRSupportingContent,
+} from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
 import { ContainerOverrides } from '../ContainerOverrides';
 import { FrontSection } from '../FrontSection';
@@ -64,10 +67,7 @@ const mainVideo: MainMedia = {
 	title: '’I care, but I don’t care’: Life after the Queen’s death | Anywhere but Westminster',
 	expired: false,
 	duration: 200,
-	images: [480, 640, 960, 1024, 1200].map((width) => ({
-		url: `https://i.guim.co.uk/img/media/2eb01d138eb8fba6e59ce7589a60e3ff984f6a7a/0_0_1920_1080/1920.jpg?width=${width}&quality=45&dpr=2&s=none`,
-		width,
-	})),
+	image: `https://i.guim.co.uk/img/media/2eb01d138eb8fba6e59ce7589a60e3ff984f6a7a/0_0_1920_1080/1920.jpg?width=1200&quality=45&dpr=2&s=none`,
 	width: 480,
 	height: 288,
 	origin: 'The Guardian',
@@ -82,6 +82,19 @@ const mainGallery: MainMedia = {
 	type: 'Gallery',
 	count: '5',
 };
+
+const twoSublinks: DCRSupportingContent[] = [
+	{
+		...aBasicLink,
+		headline: 'Headline 1',
+		kickerText: 'Kicker',
+	},
+	{
+		...aBasicLink,
+		headline: 'Headline 2',
+		kickerText: 'Kicker',
+	},
+];
 
 const CardWrapper = ({ children }: { children: React.ReactNode }) => {
 	return (
@@ -348,23 +361,48 @@ export const WithMediaTypeAndSublinks = () => {
 						design: ArticleDesign.Video,
 						theme: Pillar.Sport,
 					}}
-					containerType="flexible/general"
 					mainMedia={{ ...mainVideo, duration: 30 }}
 					headlineText="Video"
-					imagePositionOnDesktop="top"
-					imagePositionOnMobile="left"
-					supportingContent={[
-						{
-							...aBasicLink,
-							headline: 'Headline 1',
-							kickerText: 'Kicker',
-						},
-						{
-							...aBasicLink,
-							headline: 'Headline 2',
-							kickerText: 'Kicker',
-						},
-					]}
+					supportingContent={twoSublinks}
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Video,
+						theme: Pillar.Sport,
+					}}
+					mainMedia={{ ...mainVideo, duration: 0 }}
+					headlineText="Video without duration"
+					supportingContent={twoSublinks}
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Audio,
+						theme: Pillar.Sport,
+					}}
+					mainMedia={mainAudio}
+					headlineText="Audio"
+					supportingContent={twoSublinks}
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Gallery,
+						theme: Pillar.Sport,
+					}}
+					mainMedia={mainGallery}
+					headlineText="Gallery"
+					supportingContent={twoSublinks}
 				/>
 			</CardWrapper>
 		</CardGroup>
@@ -1568,7 +1606,7 @@ export const WithATinyGap = () => {
 						imagePositionOnDesktop="left"
 						format={{
 							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Gallery,
+							design: ArticleDesign.Standard,
 							theme: Pillar.Sport,
 						}}
 					/>
@@ -1767,18 +1805,7 @@ export const WithBetaContainerAndSublinks = () => {
 					{...basicCardProps}
 					containerType="flexible/general"
 					imagePositionOnMobile="bottom"
-					supportingContent={[
-						{
-							...aBasicLink,
-							headline: 'Headline 1',
-							kickerText: 'Kicker',
-						},
-						{
-							...aBasicLink,
-							headline: 'Headline 2',
-							kickerText: 'Kicker',
-						},
-					]}
+					supportingContent={twoSublinks}
 				/>
 			</CardWrapper>
 		</CardGroup>
@@ -1794,18 +1821,7 @@ export const WithBetaContainerAndSublinksNoImage = () => {
 					image={undefined}
 					containerType="flexible/general"
 					imagePositionOnMobile="bottom"
-					supportingContent={[
-						{
-							...aBasicLink,
-							headline: 'Headline 1',
-							kickerText: 'Kicker',
-						},
-						{
-							...aBasicLink,
-							headline: 'Headline 2',
-							kickerText: 'Kicker',
-						},
-					]}
+					supportingContent={twoSublinks}
 				/>
 			</CardWrapper>
 		</CardGroup>

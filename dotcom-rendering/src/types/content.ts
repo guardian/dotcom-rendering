@@ -393,6 +393,13 @@ export interface ListItem {
 	bylineHtml?: string;
 }
 
+export interface LinkBlockElement {
+	_type: 'model.dotcomrendering.pageElements.LinkBlockElement';
+	url: string;
+	label: string;
+	linkType: 'ProductButton';
+}
+
 export interface ListBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ListBlockElement';
 	listElementType:
@@ -792,6 +799,7 @@ export type FEElement =
 	| InteractiveBlockElement
 	| ItemLinkBlockElement
 	| KeyTakeawaysBlockElement
+	| LinkBlockElement
 	| ListBlockElement
 	| MapBlockElement
 	| MediaAtomBlockElement

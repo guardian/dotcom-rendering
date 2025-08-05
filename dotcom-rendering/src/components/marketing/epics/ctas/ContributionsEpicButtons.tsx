@@ -18,9 +18,8 @@ import { useEffect } from 'react';
 import { useIsInView } from '../../../../lib/useIsInView';
 import { hasSetReminder } from '../../lib/reminders';
 import {
-	addChoiceCardsOneTimeParams,
-	addChoiceCardsProductParams,
 	enrichSupportUrl,
+	getChoiceCardUrl,
 	isSupportUrl,
 } from '../../lib/tracking';
 import {
@@ -139,7 +138,7 @@ interface ContributionsEpicButtonsProps {
 	submitComponentEvent?: (event: ComponentEvent) => void;
 	isReminderActive: boolean;
 	isSignedIn: boolean;
-	threeTierChoiceCardSelectedProduct?: ChoiceCard['product'];
+	threeTierSelectedChoiceCard?: ChoiceCard;
 	amountsTestName?: string;
 	amountsVariantName?: string;
 	promoCodes: string[];
@@ -153,7 +152,7 @@ export const ContributionsEpicButtons = ({
 	submitComponentEvent,
 	isReminderActive,
 	isSignedIn,
-	threeTierChoiceCardSelectedProduct,
+	threeTierSelectedChoiceCard,
 	amountsTestName,
 	amountsVariantName,
 	promoCodes,
@@ -179,25 +178,14 @@ export const ContributionsEpicButtons = ({
 	}
 
 	const getCta = (cta: Cta): Cta => {
-		if (threeTierChoiceCardSelectedProduct) {
-			if (threeTierChoiceCardSelectedProduct.supportTier === 'OneOff') {
-				return {
-					text: cta.text,
-					baseUrl: addChoiceCardsOneTimeParams(cta.baseUrl),
-				};
-			}
-
-			return {
-				text: cta.text,
-				baseUrl: addChoiceCardsProductParams(
-					cta.baseUrl,
-					threeTierChoiceCardSelectedProduct.supportTier,
-					threeTierChoiceCardSelectedProduct.ratePlan,
-				),
-			};
+		if (!threeTierSelectedChoiceCard?.product) {
+			return cta;
 		}
 
-		return cta;
+		return {
+			text: cta.text,
+			baseUrl: getChoiceCardUrl(threeTierSelectedChoiceCard, cta.baseUrl),
+		};
 	};
 
 	const openReminder = () => {

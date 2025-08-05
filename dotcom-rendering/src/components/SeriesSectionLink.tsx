@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	between,
 	from,
 	headlineBold17,
 	headlineBold20,
@@ -169,6 +170,10 @@ const sectionPadding = (design: ArticleDesign) => {
 	if (design === ArticleDesign.Gallery) {
 		return css`
 			padding: 0 ${space[2]}px 0 ${space[3]}px;
+
+			${between.mobileLandscape.and.tablet} {
+				padding-left: ${space[5]}px;
+			}
 		`;
 	}
 	return css`

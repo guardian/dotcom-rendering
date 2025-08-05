@@ -105,7 +105,12 @@ const decideLeftContent = (front: Front, collection: DCRCollectionType) => {
 
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
-		config: { isPaidContent, hasPageSkin: hasPageSkinConfig, pageId },
+		config: {
+			isPaidContent,
+			hasPageSkin: hasPageSkinConfig,
+			pageId,
+			abTests,
+		},
 		editionId,
 	} = front;
 
@@ -135,6 +140,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
 	const { absoluteServerTimes = false } = front.config.switches;
+
+	const isInNoBoostsVariant = abTests.noBoostsVariant === 'variant';
 
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
@@ -199,10 +206,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								'--article-section-background',
 							)}
 						>
-							<HeaderAdSlot
-								isPaidContent={!!front.config.isPaidContent}
-								shouldHideReaderRevenue={false}
-							/>
+							<HeaderAdSlot abTests={abTests} />
 						</Section>
 					</Stuck>
 				)}
@@ -746,6 +750,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
+									isInNoBoostsAbTestVariant={
+										pageId === 'uk' && isInNoBoostsVariant
+									}
 								/>
 							</FrontSection>
 
@@ -793,7 +800,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				<Section
 					fullWidth={true}
 					showTopBorder={hasPageSkin}
-					data-print-layout="hide"
 					padSides={false}
 					element="aside"
 					backgroundColour={schemePalette(
@@ -813,7 +819,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 			<Section
 				fullWidth={true}
-				data-print-layout="hide"
 				padSides={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}

@@ -19,7 +19,7 @@ import type { ComponentEventParams } from './SignInGate/componentEventTracking';
 import { submitComponentEventTracking } from './SignInGate/componentEventTracking';
 import { retrieveDismissedCount } from './SignInGate/dismissGate';
 import { pageIdIsAllowedForGating } from './SignInGate/displayRules';
-import { SignInGateAuxia } from './SignInGate/gateDesigns/SignInGateAuxia';
+import { SignInGateAuxiaV1 } from './SignInGate/gateDesigns/SignInGateAuxiaV1';
 import { signInGateComponent as gateLegacyComponent } from './SignInGate/gates/main-control';
 import type {
 	AuxiaAPIResponseDataUserTreatment,
@@ -32,6 +32,7 @@ import type {
 	AuxiaProxyLogTreatmentInteractionPayload,
 	CanShowGateProps,
 	CurrentSignInGateABTest,
+	ShowGateValues,
 } from './SignInGate/types';
 
 // ------------------------------------------------------------------------------------------
@@ -290,7 +291,8 @@ const fetchProxyGetTreatments = async (
 	mvtId: number,
 	should_show_legacy_gate_tmp: boolean,
 	hasConsented: boolean,
-	shouldNotServeMandatory: boolean,
+	shouldServeDismissible: boolean,
+	showDefaultGate: ShowGateValues,
 ): Promise<AuxiaProxyGetTreatmentsResponse> => {
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
 	const articleIdentifier = `www.theguardian.com/${pageId}`;
@@ -313,7 +315,8 @@ const fetchProxyGetTreatments = async (
 		mvtId,
 		should_show_legacy_gate_tmp,
 		hasConsented,
-		shouldNotServeMandatory,
+		shouldServeDismissible,
+		showDefaultGate,
 	};
 	const params = {
 		method: 'POST',
@@ -328,10 +331,10 @@ const fetchProxyGetTreatments = async (
 	return Promise.resolve(response);
 };
 
-const decideShouldNotServeMandatory = (): boolean => {
+const decideShouldServeDismissible = (): boolean => {
 	// Return a boolean indicating whether or not we accept mandatory gates for this call.
-	// If the answer is `false` this doesn't decide whether the gate should be displayed or not,
-	// it only means that if a gate is returned, then it must be mandatory.
+	// If the answer is `true` this doesn't decide whether the gate should be displayed or not,
+	// it only means that if a gate is returned, then it must be dismissible (not be mandatory).
 
 	// Now the question is how do we decide the answer ?
 	// We return false if the following query parameter is present in the url:
@@ -339,11 +342,34 @@ const decideShouldNotServeMandatory = (): boolean => {
 
 	// This may be extended in the future.
 
-	// const params = new URLSearchParams(window.location.search);
-	// const value: string | null = params.get('utm_source');
-	// return value === 'newsshowcase';
+	const params = new URLSearchParams(window.location.search);
+	const value: string | null = params.get('utm_source');
+	return value === 'newsshowcase';
+};
 
-	return false;
+const decideShowDefaultGate = (): ShowGateValues => {
+	// In order to facilitate internal testing, this function observes a query parameter which forces
+	// the display of a sign-in gate, namely the default gu gate. If this returns true then
+	// the default gate is going to be displayed. Note that this applies to both auxia and
+	// non auxia audiences. In particular because it also applies to auxia audiences, for which
+	// the value of should_show_legacy_gate_tmp is ignored, then the information will come to
+	// the SDC server as a new parameter in the GetTreatments payload.
+
+	// to trigger gate display, the url should have query parameter `showgate=true`
+
+	const params = new URLSearchParams(window.location.search);
+	const value: string | null = params.get('showgate');
+
+	if (value === null) {
+		return undefined;
+	}
+
+	const validValues = ['true', 'dismissible', 'mandatory'];
+	if (validValues.includes(value)) {
+		return value as ShowGateValues;
+	}
+
+	return undefined;
 };
 
 const buildAuxiaGateDisplayData = async (
@@ -383,7 +409,9 @@ const buildAuxiaGateDisplayData = async (
 		);
 	}
 
-	const shouldNotServeMandatory = decideShouldNotServeMandatory();
+	const shouldServeDismissible = decideShouldServeDismissible();
+
+	const showDefaultGate = decideShowDefaultGate();
 
 	const response = await fetchProxyGetTreatments(
 		contributionsServiceUrl,
@@ -400,7 +428,8 @@ const buildAuxiaGateDisplayData = async (
 		readerPersonalData.mvtId,
 		should_show_legacy_gate_tmp,
 		readerPersonalData.hasConsented,
-		shouldNotServeMandatory,
+		shouldServeDismissible,
+		showDefaultGate,
 	);
 
 	if (response.status && response.data) {
@@ -450,9 +479,23 @@ const auxiaLogTreatmentInteraction = async (
 		method: 'POST',
 		headers,
 		body: JSON.stringify(payload),
+		keepalive: true,
 	};
 
-	await fetch(url, params);
+	try {
+		const response = await fetch(url, params);
+		if (!response.ok) {
+			const error = new Error(
+				`Failed to log treatment interaction: ${response.status}`,
+			);
+			window.guardian.modules.sentry.reportError(error, 'sign-in-gate');
+		}
+	} catch (error) {
+		const errorReport = new Error(`Error logging treatment interaction`, {
+			cause: error,
+		});
+		window.guardian.modules.sentry.reportError(errorReport, 'sign-in-gate');
+	}
 };
 
 const buildAbTestTrackingAuxiaVariant = (
@@ -615,7 +658,18 @@ const SignInGateSelectorAuxia = ({
 								interactionType,
 								actionName,
 								auxiaGateDisplayData.browserId,
-							);
+							).catch((error) => {
+								const errorReport = new Error(
+									`Failed to log treatment interaction`,
+									{
+										cause: error,
+									},
+								);
+								window.guardian.modules.sentry.reportError(
+									errorReport,
+									'sign-in-gate',
+								);
+							});
 						}}
 					/>
 				)}
@@ -647,7 +701,16 @@ const ShowSignInGateAuxia = ({
 			'',
 			browserId,
 		).catch((error) => {
-			console.error('Failed to log treatment interaction:', error);
+			const errorReport = new Error(
+				`Failed to log treatment interaction`,
+				{
+					cause: error,
+				},
+			);
+			window.guardian.modules.sentry.reportError(
+				errorReport,
+				'sign-in-gate',
+			);
 		});
 
 		void submitComponentEventTracking(
@@ -664,20 +727,22 @@ const ShowSignInGateAuxia = ({
 	}, [componentId]);
 
 	return (
-		<SignInGateAuxia
-			guUrl={host}
-			signInUrl={signInUrl}
-			dismissGate={() => {
-				setShowGate(false);
-			}}
-			abTest={abTest}
-			ophanComponentId={componentId}
-			checkoutCompleteCookieData={checkoutCompleteCookieData}
-			personaliseSignInGateAfterCheckoutSwitch={
-				personaliseSignInGateAfterCheckoutSwitch
-			}
-			userTreatment={userTreatment}
-			logTreatmentInteractionCall={logTreatmentInteractionCall}
-		/>
+		<>
+			<SignInGateAuxiaV1
+				guUrl={host}
+				signInUrl={signInUrl}
+				dismissGate={() => {
+					setShowGate(false);
+				}}
+				abTest={abTest}
+				ophanComponentId={componentId}
+				checkoutCompleteCookieData={checkoutCompleteCookieData}
+				personaliseSignInGateAfterCheckoutSwitch={
+					personaliseSignInGateAfterCheckoutSwitch
+				}
+				userTreatment={userTreatment}
+				logTreatmentInteractionCall={logTreatmentInteractionCall}
+			/>
+		</>
 	);
 };

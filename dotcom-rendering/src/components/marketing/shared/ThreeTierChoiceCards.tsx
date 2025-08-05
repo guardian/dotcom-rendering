@@ -148,17 +148,15 @@ const ChoiceCardPill = ({
 };
 
 type ThreeTierChoiceCardsProps = {
-	selectedProduct: ChoiceCard['product'];
-	setSelectedProduct: Dispatch<
-		SetStateAction<ChoiceCard['product'] | undefined>
-	>;
+	selectedChoiceCard: ChoiceCard;
+	setSelectedChoiceCard: Dispatch<SetStateAction<ChoiceCard | undefined>>;
 	choices: ChoiceCard[];
 	id: string; // uniquely identify this choice cards component to avoid conflicting with others
 };
 
 export const ThreeTierChoiceCards = ({
-	selectedProduct,
-	setSelectedProduct,
+	selectedChoiceCard,
+	setSelectedChoiceCard,
 	choices,
 	id,
 }: ThreeTierChoiceCardsProps) => {
@@ -169,88 +167,85 @@ export const ThreeTierChoiceCards = ({
 			`}
 		>
 			<Stack space={3}>
-				{choices.map(
-					({ product, label, benefitsLabel, benefits, pill }) => {
-						const { supportTier } = product;
+				{choices.map((card) => {
+					const { product, label, benefitsLabel, benefits, pill } =
+						card;
+					const { supportTier } = product;
 
-						const isSelected = (): boolean => {
+					const isSelected = (): boolean => {
+						if (
+							product.supportTier ===
+							selectedChoiceCard.product.supportTier
+						) {
 							if (
-								product.supportTier ===
-								selectedProduct.supportTier
+								product.supportTier !== 'OneOff' &&
+								selectedChoiceCard.product.supportTier !==
+									'OneOff'
 							) {
-								if (
-									product.supportTier !== 'OneOff' &&
-									selectedProduct.supportTier !== 'OneOff'
-								) {
-									return (
-										product.ratePlan ===
-										selectedProduct.ratePlan
-									);
-								} else {
-									return true;
-								}
+								return (
+									product.ratePlan ===
+									selectedChoiceCard.product.ratePlan
+								);
 							} else {
-								return false;
+								return true;
 							}
-						};
-						const selected = isSelected();
+						} else {
+							return false;
+						}
+					};
+					const selected = isSelected();
 
-						// Each radioId must be unique to the component and choice, e.g. "choicecard-epic-Contribution-Monthly"
-						const radioId = `choicecard-${id}-${supportTier}${
-							supportTier !== 'OneOff'
-								? `-${product.ratePlan}`
-								: ''
-						}`;
+					// Each radioId must be unique to the component and choice, e.g. "choicecard-epic-Contribution-Monthly"
+					const radioId = `choicecard-${id}-${supportTier}${
+						supportTier !== 'OneOff' ? `-${product.ratePlan}` : ''
+					}`;
 
-						return (
-							<div
-								key={supportTier}
-								css={css`
-									position: relative;
-									background-color: inherit;
-								`}
+					return (
+						<div
+							key={supportTier}
+							css={css`
+								position: relative;
+								background-color: inherit;
+							`}
+						>
+							{pill && <ChoiceCardPill pill={pill} />}
+							<label
+								css={supportTierChoiceCardStyles(selected)}
+								htmlFor={radioId}
 							>
-								{pill && <ChoiceCardPill pill={pill} />}
-								<label
-									css={supportTierChoiceCardStyles(selected)}
-									htmlFor={radioId}
-								>
-									<Radio
-										label={
-											<span
-												dangerouslySetInnerHTML={{
-													__html: sanitise(label),
-												}}
+								<Radio
+									label={
+										<span
+											dangerouslySetInnerHTML={{
+												__html: sanitise(label),
+											}}
+										/>
+									}
+									id={radioId}
+									value={radioId}
+									cssOverrides={labelOverrideStyles(selected)}
+									supporting={
+										selected ? (
+											<SupportingBenefits
+												benefitsLabel={
+													benefitsLabel as
+														| string
+														| undefined
+												}
+												benefits={benefits}
 											/>
-										}
-										id={radioId}
-										value={radioId}
-										cssOverrides={labelOverrideStyles(
-											selected,
-										)}
-										supporting={
-											selected ? (
-												<SupportingBenefits
-													benefitsLabel={
-														benefitsLabel as
-															| string
-															| undefined
-													}
-													benefits={benefits}
-												/>
-											) : undefined
-										}
-										checked={selected}
-										onChange={() => {
-											setSelectedProduct(product);
-										}}
-										theme={customRadioTheme}
-									/>
-								</label>
-							</div>
-						);
-					},
-				)}
+										) : undefined
+									}
+									checked={selected}
+									onChange={() => {
+										setSelectedChoiceCard(card);
+									}}
+									theme={customRadioTheme}
+								/>
+							</label>
+						</div>
+					);
+				})}
 			</Stack>
 		</RadioGroup>
 	);

@@ -96,23 +96,5 @@ test.describe('Embeds', () => {
 			await expectToBeVisible(page, embedSelector);
 			await expect(embedLocator).toContainText('Liverpool');
 		});
-
-		// Skipping for now as the change to the affiliate disclaimer block has been reverted
-		// https://github.com/guardian/frontend/pull/26749
-		test.skip('should render the affiliate disclaimer block', async ({
-			page,
-		}) => {
-			await loadPage({
-				page,
-				path: '/Article/https://www.theguardian.com/music/2020/jun/15/pet-shop-boys-where-to-start-in-their-back-catalogue',
-			});
-			await cmpAcceptAll(page);
-
-			const selector = '[data-testid="affiliate-disclaimer"]';
-			const locator = page.locator(selector);
-			await locator.scrollIntoViewIfNeeded();
-			await expectToBeVisible(page, selector);
-			await expect(locator).toContainText('affiliate link');
-		});
 	});
 });

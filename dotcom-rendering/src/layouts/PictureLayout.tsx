@@ -293,12 +293,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 								shouldCenter={false}
 							>
 								<HeaderAdSlot
-									isPaidContent={
-										!!article.config.isPaidContent
-									}
-									shouldHideReaderRevenue={
-										!!article.config.shouldHideReaderRevenue
-									}
+									abTests={article.config.abTests}
 								/>
 							</Section>
 						</Stuck>
@@ -663,7 +658,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						padContent={false}
 						verticalMargins={false}
 						element="aside"
-						data-print-layout="hide"
 						data-link-name="most-popular"
 						data-component="most-popular"
 						backgroundColour={themePalette(
@@ -770,7 +764,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 			{isApps && (
 				<Section
 					fullWidth={true}
-					data-print-layout="hide"
 					backgroundColour={themePalette('--apps-footer-background')}
 					borderColour={themePalette('--article-border')}
 					padSides={false}

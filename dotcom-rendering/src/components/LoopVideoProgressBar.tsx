@@ -18,7 +18,10 @@ const foregroundStyles = (progressPercentage: number) => css`
 	width: ${progressPercentage}%;
 	z-index: ${getZIndex('loop-video-progress-bar-foreground')};
 	background-color: ${palette('--loop-video-progress-bar-value')};
-	transition: width 0.25s linear;
+	/**
+	 * Don't show a transition when the progress bar returns to the start.
+	 */
+	transition: ${progressPercentage < 1 ? 'none' : `width 0.25s linear`};
 `;
 
 type Props = {
@@ -31,7 +34,7 @@ type Props = {
  * A progress bar for the loop video component.
  *
  * Q. Why don't we use the <progress /> element?
- * A. It was not possible to properly style the native progress element in safari.
+ * A. It was not possible to properly style the native progress element in Safari.
  */
 export const LoopVideoProgressBar = ({
 	videoId,
@@ -40,10 +43,24 @@ export const LoopVideoProgressBar = ({
 }: Props) => {
 	if (duration <= 0) return null;
 
-	const progressPercentage = (currentTime * 100) / duration;
+	/**
+	 * We achieve a smooth progress bar by using CSS transitions. Given that
+	 * onTimeUpdate firesevery 250ms or so, this means that the time on the
+	 * progress bar is always about 0.25s behind and begins 0.25s late.
+	 * Therefore, when calculating the progress percentage, we take 0.25s off the duration.
+	 *
+	 * Videos less than a second in duration will have no adjustment.
+	 */
+	const adjustedDuration = duration > 1 ? duration - 0.25 : duration;
+
+	const progressPercentage = Math.min(
+		(currentTime * 100) / adjustedDuration,
+		100,
+	);
 	if (Number.isNaN(progressPercentage)) {
 		return null;
 	}
+
 	const roundedProgressPercentage = Number(progressPercentage.toFixed(2));
 
 	return (

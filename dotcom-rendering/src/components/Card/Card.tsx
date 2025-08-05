@@ -38,7 +38,6 @@ import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
 import { LoopVideo } from '../LoopVideo.importable';
-import { MediaMeta } from '../MediaMeta';
 import { Pill } from '../Pill';
 import { Slideshow } from '../Slideshow';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
@@ -265,14 +264,12 @@ const getMedia = ({
 		return {
 			type: 'loop-video',
 			mainMedia,
-			...(imageUrl && { imageUrl }),
 		} as const;
 	}
 	if (mainMedia?.type === 'Video' && canPlayInline) {
 		return {
 			type: 'video',
 			mainMedia,
-			...(imageUrl && { imageUrl }),
 		} as const;
 	}
 	if (slideshowImages) return { type: 'slideshow', slideshowImages } as const;
@@ -556,8 +553,7 @@ export const Card = ({
 -	 */
 	const isMediaCardOrNewsletter = isMediaCard(format) || isNewsletter;
 
-	// Currently pills are only shown within beta containers.
-	const showPill = isBetaContainer && isMediaCardOrNewsletter;
+	const showPill = isMediaCardOrNewsletter;
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -712,7 +708,9 @@ export const Card = ({
 						(imagePositionOnMobile === 'bottom' ||
 							isMediaCard(format)))
 				}
-				fillBackgroundOnDesktop={isBetaContainer && isMediaCard(format)}
+				fillBackgroundOnDesktop={
+					isBetaContainer && isMediaCardOrNewsletter
+				}
 			/>
 		);
 
@@ -801,15 +799,6 @@ export const Card = ({
 							cardHasImage={!!image}
 						/>
 					) : null}
-					{!showPill &&
-						!!mainMedia &&
-						mainMedia.type !== 'Video' &&
-						mainMedia.type !== 'LoopVideo' && (
-							<MediaMeta
-								mediaType={mainMedia.type}
-								hasKicker={!!kickerText}
-							/>
-						)}
 				</div>
 			)}
 
@@ -827,7 +816,7 @@ export const Card = ({
 				 * Waveform for podcasts is absolutely positioned at bottom of
 				 * card, behind everything else
 				 */}
-				{isBetaContainer && mainMedia?.type === 'Audio' && (
+				{mainMedia?.type === 'Audio' && (
 					<div
 						css={waveformWrapper(
 							imagePositionOnMobile,
@@ -848,6 +837,7 @@ export const Card = ({
 							media.type === 'slideshow' && isFlexibleContainer
 						}
 						padImage={isMediaCardOrNewsletter && isBetaContainer}
+						isBetaContainer={isBetaContainer}
 					>
 						{media.type === 'slideshow' &&
 							(isFlexibleContainer ? (
@@ -885,6 +875,7 @@ export const Card = ({
 								imagePositionOnDesktop={imagePositionOnDesktop}
 								imagePositionOnMobile={imagePositionOnMobile}
 								isBetaContainer={isBetaContainer}
+								isFlexibleContainer={isFlexibleContainer}
 							>
 								<Avatar
 									src={media.avatarUrl}
@@ -897,26 +888,21 @@ export const Card = ({
 						)}
 						{media.type === 'loop-video' && (
 							<Island
-								priority="feature"
+								priority="critical"
 								defer={{ until: 'visible' }}
 							>
 								<LoopVideo
 									src={media.mainMedia.videoId}
+									atomId={media.mainMedia.atomId}
+									uniqueId={uniqueId}
 									height={media.mainMedia.height}
 									width={media.mainMedia.width}
-									thumbnailImage={
-										media.mainMedia.thumbnailImage ?? ''
-									}
-									fallbackImageComponent={
-										<CardPicture
-											mainImage={media.imageUrl ?? ''}
-											imageSize={imageSize}
-											loading={imageLoading}
-											alt={media.imageAltText}
-											aspectRatio={aspectRatio}
-										/>
-									}
-									uniqueId={uniqueId}
+									posterImage={media.mainMedia.image ?? ''}
+									fallbackImage={media.mainMedia.image ?? ''}
+									fallbackImageSize={imageSize}
+									fallbackImageLoading={imageLoading}
+									fallbackImageAlt={media.imageAltText}
+									fallbackImageAspectRatio="5:4"
 								/>
 							</Island>
 						)}
@@ -945,16 +931,14 @@ export const Card = ({
 												}
 												index={index}
 												duration={
-													isBetaContainer &&
 													isVideoArticle
 														? undefined
 														: media.mainMedia
 																.duration
 												}
 												posterImage={
-													media.mainMedia.images
+													media.mainMedia.image
 												}
-												overrideImage={media.imageUrl}
 												width={media.mainMedia.width}
 												height={media.mainMedia.height}
 												origin={media.mainMedia.origin}
@@ -974,8 +958,13 @@ export const Card = ({
 													containerType ===
 													'fixed/video'
 												}
-												//** TODO: IMPROVE THIS MAPPING */
-												// image size defaults to small if not provided. However, if the headline size is large or greater, we want to assume the image is also large so that the play icon is correctly sized.
+												/*
+												 * TODO: IMPROVE THIS MAPPING
+												 *
+												 * Image size defaults to small if not provided. However, if the
+												 * headline size is large or greater, we want to assume the image
+												 * is also large so that the play icon is correctly sized.
+												 */
 												iconSizeOnDesktop={
 													[
 														'small',
@@ -1013,15 +1002,7 @@ export const Card = ({
 									<div>
 										<CardPicture
 											mainImage={
-												media.imageUrl
-													? media.imageUrl
-													: media.mainMedia.images.reduce(
-															(prev, current) =>
-																prev.width >
-																current.width
-																	? prev
-																	: current,
-													  ).url
+												media.mainMedia.image ?? ''
 											}
 											imageSize={imageSize}
 											alt={headlineText}
@@ -1043,28 +1024,26 @@ export const Card = ({
 									roundedCorners={isOnwardContent}
 									aspectRatio={aspectRatio}
 								/>
-								{(isVideoMainMedia ||
-									(isVideoArticle && !isBetaContainer)) &&
-									mainMedia.duration > 0 && (
-										<div
-											css={css`
-												position: absolute;
-												top: ${space[2]}px;
-												right: ${space[2]}px;
-											`}
-										>
-											<Pill
-												content={secondsToDuration(
-													mainMedia.duration,
-												)}
-												icon={
-													<SvgMediaControlsPlay
-														width={18}
-													/>
-												}
-											/>
-										</div>
-									)}
+								{isVideoMainMedia && mainMedia.duration > 0 && (
+									<div
+										css={css`
+											position: absolute;
+											top: ${space[2]}px;
+											right: ${space[2]}px;
+										`}
+									>
+										<Pill
+											content={secondsToDuration(
+												mainMedia.duration,
+											)}
+											icon={
+												<SvgMediaControlsPlay
+													width={18}
+												/>
+											}
+										/>
+									</div>
+								)}
 							</>
 						)}
 						{media.type === 'crossword' && (
@@ -1164,14 +1143,6 @@ export const Card = ({
 											cardHasImage={!!image}
 										/>
 									) : null}
-									{!showPill &&
-										!!mainMedia &&
-										mainMedia.type !== 'Video' && (
-											<MediaMeta
-												mediaType={mainMedia.type}
-												hasKicker={!!kickerText}
-											/>
-										)}
 								</HeadlineWrapper>
 							)}
 

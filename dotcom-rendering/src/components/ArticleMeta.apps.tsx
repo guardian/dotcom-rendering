@@ -201,6 +201,23 @@ const stretchLines = css`
 	grid-column: 1 / -1;
 `;
 
+const galleryMetaContainer = css`
+	${grid.column.centre}
+	padding-bottom: ${space[2]}px;
+	${from.tablet} {
+		position: relative;
+		&::before {
+			content: '';
+			position: absolute;
+			left: -10px;
+			top: 0;
+			bottom: 0;
+			width: 1px;
+			background-color: ${themePalette('--article-border')};
+		}
+	}
+`;
+
 export const ArticleMetaApps = ({
 	branding,
 	format,
@@ -227,6 +244,7 @@ export const ArticleMetaApps = ({
 	const isAnalysis = format.design === ArticleDesign.Analysis;
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 	const isGallery = format.design === ArticleDesign.Gallery;
+	const isVideo = format.design === ArticleDesign.Video;
 
 	const shouldShowFollowButtons = (layoutOrDesignType: boolean) =>
 		layoutOrDesignType && !!byline && !isUndefined(soleContributor);
@@ -237,6 +255,9 @@ export const ArticleMetaApps = ({
 	const isImmersiveOrAnalysisWithMultipleAuthors =
 		(isAnalysis || isImmersive) && !!byline && isUndefined(soleContributor);
 
+	const shouldShowListenToArticleButton =
+		!!pageId && !(isLiveBlog || isPicture || isGallery || isVideo);
+
 	return (
 		<div
 			className={
@@ -244,13 +265,7 @@ export const ArticleMetaApps = ({
 			}
 			css={[
 				metaContainerMargins,
-				isGallery ? grid.column.centre : undefined,
-				isGallery
-					? {
-							marginLeft: space[3],
-							paddingBottom: space[2],
-					  }
-					: undefined,
+				isGallery ? galleryMetaContainer : undefined,
 			]}
 		>
 			<div
@@ -354,7 +369,7 @@ export const ArticleMetaApps = ({
 					</MetaGridBranding>
 				)}
 			</div>
-			{pageId !== undefined && (
+			{shouldShowListenToArticleButton && (
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<ListenToArticle articleId={pageId} />
 				</Island>

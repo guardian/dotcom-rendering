@@ -1,8 +1,14 @@
 import { css } from '@emotion/react';
-import { log } from '@guardian/libs';
+import { log, storage } from '@guardian/libs';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import {
+	getOphan,
+	submitClickComponentEvent,
+	submitComponentEvent,
+} from '../client/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
+import { generateImageURL } from '../lib/image';
 import { useIsInView } from '../lib/useIsInView';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
 import type { CustomPlayEventDetail } from '../lib/video';
@@ -10,9 +16,11 @@ import {
 	customLoopPlayAudioEventName,
 	customYoutubePlayEventName,
 } from '../lib/video';
+import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
-import type { PLAYER_STATES } from './LoopVideoPlayer';
+import type { PLAYER_STATES, PlayerStates } from './LoopVideoPlayer';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
+import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
 const videoContainerStyles = css`
 	z-index: ${getZIndex('loop-video-container')};
@@ -31,22 +39,65 @@ export const dispatchCustomPlayAudioEvent = (uniqueId: string) => {
 	);
 };
 
+const logAndReportError = (src: string, error: Error) => {
+	const message = `Autoplay failure for loop video. Source: ${src} could not be played. Error: ${String(
+		error,
+	)}`;
+
+	if (error instanceof Error) {
+		window.guardian.modules.sentry.reportError(
+			new Error(message),
+			'loop-video',
+		);
+	}
+
+	log('dotcom', message);
+};
+
+const dispatchOphanAttentionEvent = (
+	eventType: 'videoPlaying' | 'videoPause',
+) => {
+	const event = new Event(eventType, { bubbles: true });
+	document.dispatchEvent(event);
+};
+
+const getOptimisedPosterImage = (mainImage: string): string => {
+	const resolution = window.devicePixelRatio >= 2 ? 'high' : 'low';
+
+	return generateImageURL({
+		mainImage,
+		imageWidth: 940, // The widest a looping video can be: Flexible special, giga-boosted
+		resolution,
+		aspectRatio: '5:4',
+	});
+};
+
 type Props = {
 	src: string;
+	atomId: string;
 	uniqueId: string;
-	width: number;
 	height: number;
-	thumbnailImage: string;
-	fallbackImageComponent: JSX.Element;
+	width: number;
+	posterImage: string;
+	fallbackImage: CardPictureProps['mainImage'];
+	fallbackImageSize: CardPictureProps['imageSize'];
+	fallbackImageLoading: CardPictureProps['loading'];
+	fallbackImageAlt: CardPictureProps['alt'];
+	fallbackImageAspectRatio: CardPictureProps['aspectRatio'];
 };
 
 export const LoopVideo = ({
 	src,
+	atomId,
 	uniqueId,
-	width,
 	height,
-	thumbnailImage,
-	fallbackImageComponent,
+	width,
+	posterImage,
+	fallbackImage,
+	fallbackImageSize,
+	fallbackImageLoading,
+	fallbackImageAlt,
+	fallbackImageAspectRatio,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -55,9 +106,7 @@ export const LoopVideo = ({
 	const [isMuted, setIsMuted] = useState(true);
 	const [showPlayIcon, setShowPlayIcon] = useState(false);
 	const [preloadPartialData, setPreloadPartialData] = useState(false);
-	const [posterImage, setPosterImage] = useState<string | undefined>(
-		undefined,
-	);
+	const [showPosterImage, setShowPosterImage] = useState<boolean>(false);
 	const [currentTime, setCurrentTime] = useState(0);
 	const [playerState, setPlayerState] =
 		useState<(typeof PLAYER_STATES)[number]>('NOT_STARTED');
@@ -72,16 +121,80 @@ export const LoopVideo = ({
 	 */
 	const [hasBeenInView, setHasBeenInView] = useState(false);
 
+	const VISIBILITY_THRESHOLD = 0.5;
+
 	const [isInView, setNode] = useIsInView({
 		repeat: true,
-		threshold: 0.5,
+		threshold: VISIBILITY_THRESHOLD,
 	});
+
+	const playVideo = useCallback(async () => {
+		if (!vidRef.current) return;
+
+		/** https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay#example_handling_play_failures */
+		const startPlayPromise = vidRef.current.play();
+
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- In earlier versions of the HTML specification, play() didn't return a value
+		if (startPlayPromise !== undefined) {
+			await startPlayPromise
+				.then(() => {
+					// Autoplay succeeded
+					dispatchOphanAttentionEvent('videoPlaying');
+					setPlayerState('PLAYING');
+				})
+				.catch((error: Error) => {
+					// Autoplay failed
+					logAndReportError(src, error);
+					setShowPosterImage(true);
+					setPlayerState('PAUSED_BY_BROWSER');
+				});
+		}
+	}, [src]);
+
+	const pauseVideo = (
+		reason: Extract<
+			PlayerStates,
+			| 'PAUSED_BY_USER'
+			| 'PAUSED_BY_INTERSECTION_OBSERVER'
+			| 'PAUSED_BY_BROWSER'
+		>,
+	) => {
+		if (!vidRef.current) return;
+
+		if (reason === 'PAUSED_BY_INTERSECTION_OBSERVER') {
+			setIsMuted(true);
+		}
+
+		setPlayerState(reason);
+		dispatchOphanAttentionEvent('videoPause');
+		void vidRef.current.pause();
+	};
+
+	const playPauseVideo = () => {
+		if (playerState === 'PLAYING') {
+			if (isInView) {
+				pauseVideo('PAUSED_BY_USER');
+			}
+		} else {
+			void playVideo();
+		}
+	};
+
+	const FallbackImageComponent = (
+		<CardPicture
+			mainImage={fallbackImage}
+			imageSize={fallbackImageSize}
+			loading={fallbackImageLoading}
+			aspectRatio={fallbackImageAspectRatio}
+			alt={fallbackImageAlt}
+		/>
+	);
 
 	/**
 	 * Setup.
 	 *
-	 * Register the users motion preferences.
-	 * Creates event listeners to control playback when there are multiple videos.
+	 * 1. Register the user's motion preferences.
+	 * 2. Creates event listeners to control playback when there are multiple videos.
 	 */
 	useEffect(() => {
 		/**
@@ -90,7 +203,17 @@ export const LoopVideo = ({
 		const userPrefersReducedMotion = window.matchMedia(
 			'(prefers-reduced-motion: reduce)',
 		).matches;
-		setIsAutoplayAllowed(!userPrefersReducedMotion);
+
+		const autoplayPreference = storage.local.get(
+			'gu.prefs.accessibility.autoplay-video',
+		);
+		/**
+		 * `autoplayPreference` is explicitly `false`
+		 *  when the user has said they don't want autoplay video.
+		 */
+		setIsAutoplayAllowed(
+			!userPrefersReducedMotion && autoplayPreference !== false,
+		);
 
 		/**
 		 * Mutes the current video when another video is unmuted
@@ -110,7 +233,7 @@ export const LoopVideo = ({
 		};
 
 		/**
-		 * Mute the current video when a Youtube video is played
+		 * Mute the current video when a YouTube video is played
 		 * Triggered by the CustomEvent in YoutubeAtomPlayer.
 		 */
 		const handleCustomPlayYoutubeEvent = () => {
@@ -138,11 +261,51 @@ export const LoopVideo = ({
 		};
 	}, [uniqueId]);
 
+	/**
+	 * Initiates attention tracking for ophan
+	 */
+	useEffect(() => {
+		const video = vidRef.current;
+		if (!video) return;
+		const trackAttention = async () => {
+			try {
+				const ophan = await getOphan('Web');
+				ophan.trackComponentAttention(
+					`gu-video-loop-${atomId}`,
+					video,
+					VISIBILITY_THRESHOLD,
+					true,
+				);
+			} catch (error) {
+				console.error('Failed to track video attention:', error);
+			}
+		};
+
+		void trackAttention();
+	}, [atomId]);
+
+	/**
+	 * Keeps track of whether the video has been in view or not.
+	 */
 	useEffect(() => {
 		if (isInView && !hasBeenInView) {
+			/**
+			 * Track the first time the video comes into view.
+			 */
+			void submitComponentEvent(
+				{
+					component: {
+						componentType: 'LOOP_VIDEO',
+						id: `gu-video-loop-${atomId}`,
+					},
+					action: 'VIEW',
+				},
+				'Web',
+			);
+
 			setHasBeenInView(true);
 		}
-	}, [isInView, hasBeenInView]);
+	}, [isInView, hasBeenInView, atomId]);
 
 	/**
 	 * Autoplay the video when it comes into view.
@@ -158,14 +321,29 @@ export const LoopVideo = ({
 			(playerState === 'NOT_STARTED' ||
 				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER')
 		) {
-			setPlayerState('PLAYING');
-			void vidRef.current.play();
+			/**
+			 * Check if the video has not been in view before tracking the play.
+			 * This is so we only track the first play.
+			 */
+			if (!hasBeenInView) {
+				ophanTrackerWeb(atomId, 'loop')('play');
+			}
+
+			void playVideo();
 		}
-	}, [isInView, isPlayable, playerState, isAutoplayAllowed]);
+	}, [
+		isAutoplayAllowed,
+		isInView,
+		isPlayable,
+		playerState,
+		playVideo,
+		hasBeenInView,
+		atomId,
+	]);
 
 	/**
-	 * Stops playback when the video is scrolled out of view, resumes playbacks
-	 * when the video is back in the viewport.
+	 * Stops playback when the video is scrolled out of view.
+	 * Resumes playback when the video is back in the viewport.
 	 */
 	useEffect(() => {
 		if (!vidRef.current || !hasBeenInView) return;
@@ -173,24 +351,20 @@ export const LoopVideo = ({
 		const isNoLongerInView =
 			playerState === 'PLAYING' && isInView === false;
 		if (isNoLongerInView) {
-			setPlayerState('PAUSED_BY_INTERSECTION_OBSERVER');
-			void vidRef.current.pause();
-			setIsMuted(true);
+			pauseVideo('PAUSED_BY_INTERSECTION_OBSERVER');
 		}
 
 		/**
 		 * If a user action paused the video, they have indicated
 		 * that they don't want to watch the video. Therefore, don't
-		 * resume the video when it comes back in view
+		 * resume the video when it comes back in view.
 		 */
 		const isBackInView =
 			playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' && isInView;
 		if (isBackInView) {
-			setPlayerState('PLAYING');
-
-			void vidRef.current.play();
+			void playVideo();
 		}
-	}, [isInView, hasBeenInView, playerState]);
+	}, [isInView, hasBeenInView, playerState, playVideo]);
 
 	/**
 	 * Show the play icon when the video is not playing, except for when it is scrolled
@@ -200,8 +374,8 @@ export const LoopVideo = ({
 	useEffect(() => {
 		const shouldShowPlayIcon =
 			playerState === 'PAUSED_BY_USER' ||
-			(!isAutoplayAllowed && playerState === 'NOT_STARTED');
-
+			playerState === 'PAUSED_BY_BROWSER' ||
+			(playerState === 'NOT_STARTED' && !isAutoplayAllowed);
 		setShowPlayIcon(shouldShowPlayIcon);
 	}, [playerState, isAutoplayAllowed]);
 
@@ -217,9 +391,9 @@ export const LoopVideo = ({
 			isAutoplayAllowed === false ||
 			(isInView === false && !hasBeenInView)
 		) {
-			setPosterImage(thumbnailImage);
+			setShowPosterImage(true);
 		}
-	}, [isAutoplayAllowed, isInView, hasBeenInView, thumbnailImage]);
+	}, [isAutoplayAllowed, isInView, hasBeenInView]);
 
 	/**
 	 * We almost always want to preload some of the video data. If a user has prefers-reduced-motion
@@ -232,29 +406,13 @@ export const LoopVideo = ({
 
 	if (renderingTarget !== 'Web') return null;
 
-	if (adapted) return fallbackImageComponent;
+	if (adapted) {
+		return FallbackImageComponent;
+	}
 
-	const playVideo = () => {
-		if (!vidRef.current) return;
-
-		setPlayerState('PLAYING');
-		void vidRef.current.play();
-	};
-
-	const pauseVideo = () => {
-		if (!vidRef.current) return;
-
-		setPlayerState('PAUSED_BY_USER');
-		void vidRef.current.pause();
-	};
-
-	const playPauseVideo = () => {
-		if (playerState === 'PLAYING') {
-			if (isInView) {
-				pauseVideo();
-			}
-		} else {
-			playVideo();
+	const handleCanPlay = () => {
+		if (!isPlayable) {
+			setIsPlayable(true);
 		}
 	};
 
@@ -264,6 +422,8 @@ export const LoopVideo = ({
 	};
 
 	const handleAudioClick = (event: React.SyntheticEvent) => {
+		void submitClickComponentEvent(event.currentTarget, renderingTarget);
+
 		event.stopPropagation(); // Don't pause the video
 
 		if (isMuted) {
@@ -275,12 +435,34 @@ export const LoopVideo = ({
 		}
 	};
 
+	/**
+	 * If the video was paused and we know that it wasn't paused by the user
+	 * or the intersection observer, we can deduce that it was paused by the
+	 * browser. Therefore we need to apply the pause state to the video.
+	 */
+	const handlePause = () => {
+		if (
+			playerState === 'PAUSED_BY_USER' ||
+			playerState === 'PAUSED_BY_INTERSECTION_OBSERVER'
+		) {
+			return;
+		}
+
+		pauseVideo('PAUSED_BY_BROWSER');
+	};
+
+	/**
+	 * If the video could not be loaded due to an error, report to
+	 * Sentry and log in the console.
+	 */
 	const onError = () => {
+		const message = `Loop video could not be played. source: ${src}`;
+
 		window.guardian.modules.sentry.reportError(
-			new Error(`Loop video could not be played. source: ${src}`),
+			new Error(message),
 			'loop-video',
 		);
-		log('dotcom', `Loop video could not be played. source: ${src}`);
+		log('dotcom', message);
 	};
 
 	const seekForward = () => {
@@ -318,7 +500,7 @@ export const LoopVideo = ({
 				playPauseVideo();
 				break;
 			case 'Escape':
-				pauseVideo();
+				pauseVideo('PAUSED_BY_USER');
 				break;
 			case 'ArrowRight':
 				seekForward();
@@ -334,34 +516,41 @@ export const LoopVideo = ({
 
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
 
+	const optimisedPosterImage = showPosterImage
+		? getOptimisedPosterImage(posterImage)
+		: undefined;
+
 	return (
-		<div
+		<figure
 			ref={setNode}
 			css={videoContainerStyles}
 			className="loop-video-container"
+			data-component="gu-video-loop"
 		>
 			<LoopVideoPlayer
 				src={src}
+				atomId={atomId}
 				uniqueId={uniqueId}
 				width={width}
 				height={height}
-				posterImage={posterImage}
-				fallbackImageComponent={fallbackImageComponent}
+				posterImage={optimisedPosterImage}
+				FallbackImageComponent={FallbackImageComponent}
 				currentTime={currentTime}
 				setCurrentTime={setCurrentTime}
 				ref={vidRef}
 				isPlayable={isPlayable}
-				setIsPlayable={setIsPlayable}
 				playerState={playerState}
 				isMuted={isMuted}
+				handleCanPlay={handleCanPlay}
 				handlePlayPauseClick={handlePlayPauseClick}
 				handleAudioClick={handleAudioClick}
 				handleKeyDown={handleKeyDown}
+				handlePause={handlePause}
 				onError={onError}
 				AudioIcon={AudioIcon}
 				preloadPartialData={preloadPartialData}
 				showPlayIcon={showPlayIcon}
 			/>
-		</div>
+		</figure>
 	);
 };

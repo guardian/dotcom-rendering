@@ -6,8 +6,8 @@ import { sendReact } from '../send';
 
 const liveApps = express.Router();
 
-liveApps.get('/', sendReact('Live Apps', LiveApps));
-liveApps.get('/article', sendReact('Article', Article));
-liveApps.get('/interactive', sendReact('Interactive', Interactive));
+liveApps.get('/', sendReact('Live Apps', <LiveApps />));
+liveApps.get('/article', sendReact('Article', <Article />));
+liveApps.get('/interactive', sendReact('Interactive', <Interactive />));
 
 export { liveApps };

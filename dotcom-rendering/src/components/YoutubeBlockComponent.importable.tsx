@@ -1,7 +1,6 @@
 import type { ConsentState } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
-import { getLargestImageSize } from '../lib/image';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
 import type { AdTargeting } from '../types/commercial';
@@ -26,10 +25,7 @@ type Props = {
 	format: ArticleFormat;
 	hideCaption?: boolean;
 	overrideImage?: string;
-	posterImage?: {
-		url: string;
-		width: number;
-	}[];
+	posterImage?: string;
 	isMainMedia?: boolean;
 	height?: number;
 	width?: number;
@@ -58,6 +54,7 @@ type Props = {
 	isImmersive?: boolean;
 	byline?: string;
 	showByline?: boolean;
+	contentType?: string;
 };
 
 export const YoutubeBlockComponent = ({
@@ -69,7 +66,7 @@ export const YoutubeBlockComponent = ({
 	format,
 	hideCaption,
 	overrideImage,
-	posterImage = [],
+	posterImage = '',
 	expired,
 	isMainMedia,
 	height = 259,
@@ -99,6 +96,7 @@ export const YoutubeBlockComponent = ({
 	isImmersive,
 	byline,
 	showByline,
+	contentType,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -111,17 +109,21 @@ export const YoutubeBlockComponent = ({
 	const abTestParticipations = abTests?.participations ?? {};
 
 	/**
-	 * It's possible to have duplicate video atoms on the same page
-	 * For example liveblogs can have the same video for the main media and in a subsequent block
+	 * It's possible to have duplicate video atoms on the same page.
+	 * For example, liveblogs can have the same video for the main media and in a subsequent block
 	 * We need to ensure a unique id for each YouTube player on the page.
 	 */
 	const uniqueId = `${assetId}-${index}`;
 
-	/**
-	 * We do our own image optimization in DCR and only need 1 image.
-	 * Pick the largest image available to us to avoid up-scaling later.
-	 */
-	const largestPosterImage = getLargestImageSize(posterImage)?.url;
+	// We need Video articles generated directly from Media Atom Maker
+	// to always show their poster (16:9) image, but in other cases
+	// use the override image (often supplied as 5:4 then cropped to 16:9)
+	const getPosterImage = () => {
+		if (contentType && contentType.toLowerCase() === 'video') {
+			return posterImage;
+		}
+		return overrideImage ?? posterImage;
+	};
 
 	useEffect(() => {
 		if (renderingTarget === 'Web') {
@@ -168,7 +170,7 @@ export const YoutubeBlockComponent = ({
 				atomId={id}
 				videoId={assetId}
 				uniqueId={uniqueId}
-				image={overrideImage ?? largestPosterImage}
+				image={getPosterImage()}
 				alt={altText ?? mediaTitle ?? ''}
 				adTargeting={
 					enableAds && renderingTarget === 'Web'
@@ -182,7 +184,7 @@ export const YoutubeBlockComponent = ({
 				duration={duration}
 				eventEmitters={
 					renderingTarget === 'Web'
-						? [ophanTrackerWeb(id)]
+						? [ophanTrackerWeb(id, 'youtube')]
 						: [ophanTrackerApps(id)]
 				}
 				format={format}

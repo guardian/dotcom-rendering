@@ -71,7 +71,6 @@ export const AllEditorialNewslettersPageLayout = ({
 
 			<Section
 				fullWidth={true}
-				data-print-layout="hide"
 				padSides={false}
 				backgroundColour={sourcePalette.brand[400]}
 				borderColour={sourcePalette.brand[600]}
