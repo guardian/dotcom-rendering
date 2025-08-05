@@ -9,7 +9,10 @@ import {
 	Pillar,
 } from '../../lib/articleFormat';
 import type { Branding } from '../../types/branding';
-import type { DCRContainerPalette } from '../../types/front';
+import type {
+	DCRContainerPalette,
+	DCRSupportingContent,
+} from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
 import { ContainerOverrides } from '../ContainerOverrides';
 import { FrontSection } from '../FrontSection';
@@ -79,6 +82,19 @@ const mainGallery: MainMedia = {
 	type: 'Gallery',
 	count: '5',
 };
+
+const twoSublinks: DCRSupportingContent[] = [
+	{
+		...aBasicLink,
+		headline: 'Headline 1',
+		kickerText: 'Kicker',
+	},
+	{
+		...aBasicLink,
+		headline: 'Headline 2',
+		kickerText: 'Kicker',
+	},
+];
 
 const CardWrapper = ({ children }: { children: React.ReactNode }) => {
 	return (
@@ -345,23 +361,48 @@ export const WithMediaTypeAndSublinks = () => {
 						design: ArticleDesign.Video,
 						theme: Pillar.Sport,
 					}}
-					containerType="flexible/general"
 					mainMedia={{ ...mainVideo, duration: 30 }}
 					headlineText="Video"
-					imagePositionOnDesktop="top"
-					imagePositionOnMobile="left"
-					supportingContent={[
-						{
-							...aBasicLink,
-							headline: 'Headline 1',
-							kickerText: 'Kicker',
-						},
-						{
-							...aBasicLink,
-							headline: 'Headline 2',
-							kickerText: 'Kicker',
-						},
-					]}
+					supportingContent={twoSublinks}
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Video,
+						theme: Pillar.Sport,
+					}}
+					mainMedia={{ ...mainVideo, duration: 0 }}
+					headlineText="Video without duration"
+					supportingContent={twoSublinks}
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Audio,
+						theme: Pillar.Sport,
+					}}
+					mainMedia={mainAudio}
+					headlineText="Audio"
+					supportingContent={twoSublinks}
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Gallery,
+						theme: Pillar.Sport,
+					}}
+					mainMedia={mainGallery}
+					headlineText="Gallery"
+					supportingContent={twoSublinks}
 				/>
 			</CardWrapper>
 		</CardGroup>
@@ -1764,18 +1805,7 @@ export const WithBetaContainerAndSublinks = () => {
 					{...basicCardProps}
 					containerType="flexible/general"
 					imagePositionOnMobile="bottom"
-					supportingContent={[
-						{
-							...aBasicLink,
-							headline: 'Headline 1',
-							kickerText: 'Kicker',
-						},
-						{
-							...aBasicLink,
-							headline: 'Headline 2',
-							kickerText: 'Kicker',
-						},
-					]}
+					supportingContent={twoSublinks}
 				/>
 			</CardWrapper>
 		</CardGroup>
@@ -1791,18 +1821,7 @@ export const WithBetaContainerAndSublinksNoImage = () => {
 					image={undefined}
 					containerType="flexible/general"
 					imagePositionOnMobile="bottom"
-					supportingContent={[
-						{
-							...aBasicLink,
-							headline: 'Headline 1',
-							kickerText: 'Kicker',
-						},
-						{
-							...aBasicLink,
-							headline: 'Headline 2',
-							kickerText: 'Kicker',
-						},
-					]}
+					supportingContent={twoSublinks}
 				/>
 			</CardWrapper>
 		</CardGroup>
