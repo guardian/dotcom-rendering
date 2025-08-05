@@ -80,6 +80,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 					pageIsSensitive={front.config.isSensitive}
 					isDev={!!front.config.isDev}
 					serverSideTests={front.config.abTests}
+					serverSideABTests={front.config.serverSideABTests}
 				/>
 			</Island>
 
