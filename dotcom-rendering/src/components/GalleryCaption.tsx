@@ -21,6 +21,7 @@ const styles = css`
 	color: ${palette('--caption-text')};
 	${textSans12}
 	padding-bottom: ${space[6]}px;
+	padding-top: ${space[5]}px;
 
 	${between.tablet.and.desktop} {
 		padding-left: ${space[5]}px;
@@ -89,14 +90,20 @@ export const GalleryCaption = ({
 					{credit}
 				</small>
 			)}
-			<Island priority="feature" defer={{ until: 'visible' }}>
-				<ShareButton
-					format={format}
-					pageId={pageId}
-					webTitle={webTitle}
-					context="ImageCaption"
-				/>
-			</Island>
+			<div
+				css={css`
+					padding-top: ${space[2]}px;
+				`}
+			>
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<ShareButton
+						format={format}
+						pageId={pageId}
+						webTitle={webTitle}
+						context="ImageCaption"
+					/>
+				</Island>
+			</div>
 		</figcaption>
 	);
 };

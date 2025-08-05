@@ -4655,6 +4655,22 @@ const affiliateDisclaimerBackgroundHoverLight: PaletteFunction = ({
 const affiliateDisclaimerBackgroundHoverDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
 
+const affiliateDisclaimerTextLight: PaletteFunction = () => {
+	return sourcePalette.neutral[86];
+};
+
+const affiliateDisclaimerTextDark: PaletteFunction = () => {
+	return sourcePalette.neutral[73];
+};
+
+const affiliateDisclaimerTextHoverLight: PaletteFunction = () => {
+	return sourcePalette.neutral[73];
+};
+
+const affiliateDisclaimerTextHoverDark: PaletteFunction = () => {
+	return sourcePalette.neutral[86];
+};
+
 const seriesTitleBackgroundLight: PaletteFunction = ({
 	theme,
 	display,
@@ -6099,6 +6115,14 @@ const paletteColours = {
 	'--affiliate-disclaimer-background-hover': {
 		light: affiliateDisclaimerBackgroundHoverLight,
 		dark: affiliateDisclaimerBackgroundHoverDark,
+	},
+	'--affiliate-disclaimer-text': {
+		light: affiliateDisclaimerTextLight,
+		dark: affiliateDisclaimerTextDark,
+	},
+	'--affiliate-disclaimer-text-hover': {
+		light: affiliateDisclaimerTextHoverLight,
+		dark: affiliateDisclaimerTextHoverDark,
 	},
 	'--age-warning-background': {
 		light: ageWarningBackgroundLight,
