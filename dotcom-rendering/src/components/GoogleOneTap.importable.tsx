@@ -1,25 +1,71 @@
 import { log } from '@guardian/libs';
-import { useEffect } from 'react';
 import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
+import { useConsent } from '../lib/useConsent';
+import { useOnce } from '../lib/useOnce';
 import type { StageType } from '../types/config';
 
-const getFedCMProviders = (stage: StageType): IdentityProviderConfig[] => {
+/**
+ * Detect the current stage of the application based on the hostname.
+ *
+ * We do have a `window.guardian.config.stage` field, but it is based on the
+ * environment of the article that DCR is rendering, which may not be the same as environment
+ * DCR is running in.
+ *
+ * For example, running DCR locally and loading `https://r.thegulocal.com/Front/https://www.theguardian.com/international` will
+ * give a stage of `PROD` as the article is in PROD, but DCR is running in `DEV`.
+ * @returns
+ */
+const getStage = (): StageType => {
+	if (window.location.hostname === 'm.code.dev-theguardian.com') {
+		return 'CODE';
+	} else if (
+		['r.thegulocal.com', 'localhost'].includes(window.location.hostname)
+	) {
+		return 'DEV';
+	}
+
+	return 'PROD';
+};
+
+const getRedirectUrl = ({
+	stage,
+	token,
+}: {
+	stage: StageType;
+	token: string;
+}): string => {
+	const profileDomain = {
+		PROD: 'https://www.theguardian.com',
+		CODE: 'https://m.code.dev-theguardian.com',
+		DEV: 'https://r.thegulocal.com',
+	}[stage];
+	const queryParams = new URLSearchParams({
+		token,
+		returnUrl: window.location.href,
+	});
+
+	return `${profileDomain}/signin/google?${queryParams.toString()}`;
+};
+
+const getProviders = (stage: StageType): IdentityProviderConfig[] => {
 	switch (stage) {
-		// case 'PROD':
-		// 	return [
-		// 		{
-		// 			configURL: 'https://accounts.google.com/gsi/fedcm.json',
-		// 			clientId: '774465807556.apps.googleusercontent.com',
-		// 		},
-		// 	];
-		// case 'CODE':
-		// 	return [
-		// 		{
-		// 			configURL: 'https://accounts.google.com/gsi/fedcm.json',
-		// 			clientId: '774465807556-pkevncqpfs9486ms0bo5q1f2g9vhpior.apps.googleusercontent.com',
-		// 		},
-		// 	];
+		case 'PROD':
+			return [
+				{
+					configURL: 'https://accounts.google.com/gsi/fedcm.json',
+					clientId: '774465807556.apps.googleusercontent.com',
+				},
+			];
+		case 'CODE':
+			return [
+				{
+					configURL: 'https://accounts.google.com/gsi/fedcm.json',
+					// TODO: m.code.dev-theguardian.com is not a supported origin for this Client ID
+					clientId:
+						'774465807556-pkevncqpfs9486ms0bo5q1f2g9vhpior.apps.googleusercontent.com',
+				},
+			];
 		default:
 			return [
 				{
@@ -42,6 +88,7 @@ type IdentityProviderConfig = {
 
 type CredentialsProvider = {
 	get: (options: {
+		mediation: 'required';
 		identity: {
 			context: 'signin';
 			providers: IdentityProviderConfig[];
@@ -50,35 +97,17 @@ type CredentialsProvider = {
 };
 
 export const GoogleOneTap = () => {
-	const isSignedIn = useIsSignedIn();
+	const consent = useConsent();
+	const isSignedIn = useIsSignedIn() === true;
 	const abTests = useAB();
 	const isUserInTest = abTests?.api.isUserInVariant(
 		'GoogleOneTap',
 		'variant',
 	);
 
-	// TODO: Wait till CMP dismissed
-
-	useEffect(() => {
+	useOnce(() => {
 		// Only initialize Google One Tap if the user is in the AB test. Currently 0% of users are in the test.
 		if (!isUserInTest) return;
-
-		// FedCM has no knowledge of the user's auth state, so we need to check
-		// if the user is already signed in before initializing it.
-		if (isSignedIn === true) {
-			log(
-				'identity',
-				'User is already signed in, skipping Google One Tap initialization',
-			);
-			return;
-		} else if (isSignedIn === 'Pending') {
-			// If the auth status is still pending, we don't want to initialize Google One Tap yet.
-			log(
-				'identity',
-				'User auth state is still pending, delaying Google One Tap initialization',
-			);
-			return;
-		}
 
 		/**
 		 * Firefox does not support the FedCM API at the time of writting,
@@ -93,12 +122,12 @@ export const GoogleOneTap = () => {
 		 * as an indicator of FedCM support.
 		 */
 		if (!('IdentityCredential' in window)) {
-			// TODO:
+			// TODO: Track Ophan "FedCM" unsupported event here.
 			log('identity', 'FedCM API not supported in this browser');
 			return;
 		}
 
-		// TODO: Check if browser supports FedCM before initializing and track in Ophan if not.
+		const stage = getStage();
 
 		/**
 		 * Typescripts built-in DOM types do not include the full `CredentialsProvider`
@@ -110,11 +139,21 @@ export const GoogleOneTap = () => {
 		const credentialsProvider = window.navigator
 			.credentials as unknown as CredentialsProvider;
 
+		log('identity', 'Initializing FedCM');
 		void credentialsProvider
 			.get({
+				/**.
+				 * Default `mediation` is "optional" which auto-authenticates the user if they have already interacted with FedCM
+				 * prompt on a previous page view.
+				 *
+				 * In practice this shouldn't happen as we won't trigger the prompt if the user is already signed in. But just in
+				 * case, we set `mediation` to "required" to ensure the user isn't put in a login loop where they are signed in,
+				 * FedCM auto-authenticates them, and they're sent to Gateway to get a new Okta token.
+				 */
+				mediation: 'required',
 				identity: {
 					context: 'signin',
-					providers: getFedCMProviders(window.guardian.config.stage),
+					providers: getProviders(stage),
 				},
 			})
 			.catch((error) => {
@@ -141,16 +180,22 @@ export const GoogleOneTap = () => {
 			.then((credentials) => {
 				if (credentials) {
 					// TODO: Track Ophan "FedCM" success event here.
-					// TODO: Redirect to Gateway with credentials token.
 					log('identity', 'FedCM credentials received', {
 						credentials,
 					});
+
+					window.location.replace(
+						getRedirectUrl({
+							stage,
+							token: credentials.token,
+						}),
+					);
 				} else {
 					// TODO: Track Ophan "FedCM" skip event here.
 					log('identity', 'No FedCM credentials received');
 				}
 			});
-	}, [isSignedIn, isUserInTest]);
+	}, [isSignedIn, isUserInTest, consent]);
 
 	return <></>;
 };
