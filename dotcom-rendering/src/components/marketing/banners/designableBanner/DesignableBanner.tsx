@@ -473,7 +473,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 										id={'banner'}
 									/>
 								)}
-								<div css={styles.ctaContainer}>
+								<div css={styles.ctaContainer(isCollapsed)}>
 									<LinkButton
 										href={getChoiceCardUrl(
 											selectedChoiceCard,
@@ -909,7 +909,7 @@ const styles = {
 		}
 	`,
 	/* choice card CTA container */
-	ctaContainer: css`
+	ctaContainer: (isCollapsed: boolean) => css`
 		grid-area: cc_cta;
 		display: flex;
 		align-items: center;
@@ -949,7 +949,7 @@ const styles = {
 			flex-direction: row;
 			margin-bottom: ${space[6]}px;
 			gap: 0;
-			margin-top: ${space[3]}px;
+			margin-top: ${isCollapsed ? `${space[6]}px` : `${space[3]}px`};
 			margin-right: 0;
 			margin-left: 0;
 
