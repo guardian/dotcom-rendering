@@ -99,12 +99,6 @@ const paddingBetaContainerStyles = (
 	}
 `;
 
-const padRightStyles = css`
-	${from.tablet} {
-		padding-right: ${space[5]}px;
-	}
-`;
-
 const getImageDirection = (
 	imagePosition: ImagePositionType,
 ): ImageDirection => {
@@ -127,7 +121,6 @@ type Props = {
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	padContent?: 'small' | 'large';
-	padRight?: boolean;
 };
 
 export const ContentWrapper = ({
@@ -138,7 +131,6 @@ export const ContentWrapper = ({
 	imagePositionOnDesktop,
 	imagePositionOnMobile,
 	padContent,
-	padRight = false,
 }: Props) => {
 	const imageDirectionDesktop = getImageDirection(imagePositionOnDesktop);
 	const paddingSpace = padContent === 'small' ? 1 : 2;
@@ -161,7 +153,6 @@ export const ContentWrapper = ({
 						imagePositionOnDesktop,
 						paddingSpace,
 					),
-				padRight && padRightStyles,
 			]}
 		>
 			{children}

@@ -169,9 +169,9 @@ const supportingQuoteCss = css`
 	margin-right: 10px;
 	margin-bottom: 14px;
 	clear: left;
-	float: left;
 
 	${from.phablet} {
+		float: left;
 		width: 40%;
 	}
 

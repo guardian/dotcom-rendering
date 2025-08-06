@@ -469,6 +469,7 @@ export const audioTrails: [DCRFrontCard, DCRFrontCard] = [
 			altText:
 				"TOPSHOT-FBL-EUR-C1-MILAN-FEYENOORD<br>TOPSHOT - Polish referee Szymon Marciniak gives a red card to AC Milan's French defender #19 Theo Hernandez (R) during the UEFA Champions League knockout round play-off second leg football match between AC Milan and Feyenoord at San Siro stadium in Milan, on February 18, 2025. (Photo by Piero CRUCIATTI / AFP) (Photo by PIERO CRUCIATTI/AFP via Getty Images)",
 		},
+		supportingContent: getSublinks(2),
 	},
 ];
 
@@ -541,6 +542,7 @@ export const galleryTrails: [DCRFrontCard, DCRFrontCard] = [
 			src: 'https://media.guim.co.uk/69ac2383ea611126b54373865dac3e7e77981d7e/0_39_5500_3302/master/5500.jpg',
 			altText: 'A group of people in the street, some looking worried',
 		},
+		supportingContent: getSublinks(2),
 	},
 ];
 

@@ -425,6 +425,10 @@ const getDataLinkNameCarouselButton = (
 	return `${isVideoContainer ? 'video-container' : arrowName}-${direction}`;
 };
 
+const cleanTitle = (title: string) => {
+	return title.replace('More', '').trimStart();
+};
+
 const Title = ({
 	title,
 	isCuratedContent,
@@ -453,7 +457,9 @@ const Title = ({
 	) : (
 		<h2 css={headerStyles}>
 			{isCuratedContent ? 'More from ' : ''}
-			<span css={titleStyle(isCuratedContent)}>{title}</span>
+			<span css={titleStyle(isCuratedContent)}>
+				{isCuratedContent ? cleanTitle(title) : title}
+			</span>
 		</h2>
 	);
 

@@ -1885,6 +1885,8 @@ const articleInnerAdLabelsTextLight: PaletteFunction = ({ design, theme }) => {
 				default:
 					return sourcePalette.neutral[86];
 			}
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[86];
 		default:
 			return sourcePalette.neutral[46];
 	}
@@ -1908,6 +1910,8 @@ const articleInnerAdBackgroundLight: PaletteFunction = ({ design, theme }) => {
 			}
 		case ArticleDesign.LiveBlog:
 			return sourcePalette.neutral[93];
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[7];
 		default:
 			return sourcePalette.neutral[97];
 	}
@@ -1916,6 +1920,8 @@ const articleInnerAdBackgroundDark: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
 			return sourcePalette.neutral[7];
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[10];
 		default:
 			return sourcePalette.neutral[20];
 	}
@@ -1933,6 +1939,8 @@ const articleInnerAdBorderLight: PaletteFunction = ({ design, theme }) => {
 				default:
 					return sourcePalette.neutral[20];
 			}
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[20];
 		default:
 			return sourcePalette.neutral[86];
 	}
@@ -4347,15 +4355,11 @@ const linkKickerTextLight: PaletteFunction = ({ design, theme }) => {
 const linkKickerTextDark: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
-			return sourcePalette.news[500];
 		case Pillar.Opinion:
-			return sourcePalette.opinion[500];
 		case Pillar.Sport:
-			return sourcePalette.sport[500];
 		case Pillar.Culture:
-			return sourcePalette.culture[500];
 		case Pillar.Lifestyle:
-			return sourcePalette.lifestyle[500];
+			return pillarPalette(theme, 500);
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.news[500];
 		case ArticleSpecial.Labs:
@@ -4658,6 +4662,22 @@ const affiliateDisclaimerBackgroundHoverLight: PaletteFunction = ({
 };
 const affiliateDisclaimerBackgroundHoverDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
+
+const affiliateDisclaimerTextLight: PaletteFunction = () => {
+	return sourcePalette.neutral[86];
+};
+
+const affiliateDisclaimerTextDark: PaletteFunction = () => {
+	return sourcePalette.neutral[73];
+};
+
+const affiliateDisclaimerTextHoverLight: PaletteFunction = () => {
+	return sourcePalette.neutral[73];
+};
+
+const affiliateDisclaimerTextHoverDark: PaletteFunction = () => {
+	return sourcePalette.neutral[86];
+};
 
 const seriesTitleBackgroundLight: PaletteFunction = ({
 	theme,
@@ -6103,6 +6123,14 @@ const paletteColours = {
 	'--affiliate-disclaimer-background-hover': {
 		light: affiliateDisclaimerBackgroundHoverLight,
 		dark: affiliateDisclaimerBackgroundHoverDark,
+	},
+	'--affiliate-disclaimer-text': {
+		light: affiliateDisclaimerTextLight,
+		dark: affiliateDisclaimerTextDark,
+	},
+	'--affiliate-disclaimer-text-hover': {
+		light: affiliateDisclaimerTextHoverLight,
+		dark: affiliateDisclaimerTextHoverDark,
 	},
 	'--age-warning-background': {
 		light: ageWarningBackgroundLight,

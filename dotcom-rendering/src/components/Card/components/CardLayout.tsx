@@ -23,6 +23,7 @@ type Props = {
 
 const containerStyles = css`
 	display: flex;
+	position: relative;
 	flex-basis: 100%;
 `;
 

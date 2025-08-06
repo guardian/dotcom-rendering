@@ -601,6 +601,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 													article.config.shortUrlId
 												}
 											/>
+											{!!article.affiliateLinksDisclaimer && (
+												<AffiliateDisclaimer />
+											)}
 										</Hide>
 									</>
 								) : (
