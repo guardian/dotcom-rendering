@@ -1608,7 +1608,6 @@
 			"prebidOzone": true,
 			"ampLiveblogSwitch": true,
 			"ampAmazon": true,
-			"prebidAdYouLike": true,
 			"mostViewedFronts": true,
 			"optOutAdvertising": true,
 			"abSignInGateMainControl": true,
