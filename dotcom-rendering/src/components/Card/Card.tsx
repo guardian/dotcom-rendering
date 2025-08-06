@@ -666,7 +666,7 @@ export const Card = ({
 			imagePositionOnMobile === 'bottom'
 		) {
 			return {
-				row: 'tiny',
+				row: showLivePlayable ? 'small' : 'tiny',
 				column: 'large',
 			};
 		}
