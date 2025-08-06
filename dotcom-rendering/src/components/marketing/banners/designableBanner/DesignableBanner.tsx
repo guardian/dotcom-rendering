@@ -171,10 +171,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		ChoiceCard | undefined
 	>(defaultChoiceCard);
 
-	// TODO: set to correct ab test and variant names
-	const isInABTest =
-		tracking.abTestName === 'THREE_TIER_CHOICE_CARDS' &&
-		tracking.abTestVariant == 'BANNER_V2';
+	const isCollapsableBanner = tracking.abTestVariant == 'COLLAPSABLE_V1';
 
 	const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
@@ -314,7 +311,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 			>
 				<div
 					css={
-						isInABTest && isCollapsed
+						isCollapsableBanner && isCollapsed
 							? styles.collapsedLayoutOverrides(
 									cardsImageOrSpaceTemplateString,
 							  )
@@ -340,7 +337,9 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								headlineSize={
 									design.fonts?.heading.size ?? 'medium'
 								}
-								isCollapsedForABTest={isInABTest && isCollapsed}
+								isCollapsedForABTest={
+									isCollapsableBanner && isCollapsed
+								}
 							/>
 						</div>
 						{showAboveArticleCount && (
@@ -373,7 +372,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									/>
 								</div>
 							)}
-						{(!isInABTest || !isCollapsed) && (
+						{(!isCollapsableBanner || !isCollapsed) && (
 							<div css={templateSpacing.bannerBodyCopy}>
 								<div css={styles.bodyCopyOverrides}>
 									<DesignableBannerBody
@@ -418,12 +417,12 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 
 					<div
 						css={
-							isInABTest
+							isCollapsableBanner
 								? styles.closeAndCollapseButtonContainer
 								: styles.closeButtonContainer
 						}
 					>
-						{isInABTest && (
+						{isCollapsableBanner && (
 							<div
 								id="collapseable-button"
 								css={styles.collapsableButtonContainer}
@@ -450,11 +449,11 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								</Button>
 							</div>
 						)}
-						{(!isInABTest || isCollapsed) && (
+						{(!isCollapsableBanner || isCollapsed) && (
 							<DesignableBannerCloseButton
 								onCloseClick={onCloseClick}
 								settings={templateSettings.closeButtonSettings}
-								isInABTest={isInABTest}
+								isInABTest={isCollapsableBanner}
 							/>
 						)}
 					</div>
@@ -463,7 +462,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						selectedChoiceCard &&
 						mainOrMobileContent.primaryCta && (
 							<div css={styles.threeTierChoiceCardsContainer}>
-								{(!isInABTest || !isCollapsed) && (
+								{(!isCollapsableBanner || !isCollapsed) && (
 									<ThreeTierChoiceCards
 										selectedChoiceCard={selectedChoiceCard}
 										setSelectedChoiceCard={
