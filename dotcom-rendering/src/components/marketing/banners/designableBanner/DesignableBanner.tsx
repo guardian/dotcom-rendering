@@ -983,7 +983,9 @@ const styles = {
 	`,
 	collapsableButtonContainer: css`
 		margin-left: ${space[2]}px;
-		margin-top: ${space[1]}px;
+		${from.desktop} {
+			margin-top: ${space[1]}px;
+		}
 	`,
 	iconOverrides: css`
 		background-color: ${palette.brand[400]};

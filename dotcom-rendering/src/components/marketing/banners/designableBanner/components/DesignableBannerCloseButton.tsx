@@ -4,7 +4,7 @@
  * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/designableBanner/components/DesignableBannerCloseButton.tsx
  */
 import { css } from '@emotion/react';
-import { space } from '@guardian/source/foundations';
+import { from, space } from '@guardian/source/foundations';
 import {
 	Button,
 	LinkButton,
@@ -85,6 +85,8 @@ const styles = {
 		font-size: 16px;
 		border-radius: unset;
 		background-color: inherit;
-		margin-top: ${space[1]}px;
+		${from.desktop} {
+			margin-top: ${space[1]}px;
+		}
 	`,
 };
