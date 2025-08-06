@@ -206,14 +206,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		default: choiceCardButtonCtaStateSettings,
 	};
 
-	const collapsableButtonCtaStateSettings: CtaStateSettings = {
-		backgroundColour: palette.brand[400],
-		textColour: 'inherit',
-	};
-	const collapsableButtonSettings: CtaSettings = {
-		default: collapsableButtonCtaStateSettings,
-	};
-
 	const templateSettings: BannerTemplateSettings = {
 		containerSettings: {
 			backgroundColour: hexColourToString(basic.background),
@@ -440,7 +432,13 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									}
 									size="small"
 									theme={buttonThemes(
-										collapsableButtonSettings,
+										{
+											default: {
+												backgroundColour:
+													palette.brand[400],
+												textColour: 'inherit',
+											},
+										},
 										'tertiary',
 									)}
 									hideLabel={true}
