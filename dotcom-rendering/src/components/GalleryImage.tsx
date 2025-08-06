@@ -36,8 +36,8 @@ const styles = css`
 `;
 
 const galleryBodyImageStyles = css`
+	display: flex;
 	${grid.column.all}
-	position: relative;
 
 	${from.tablet} {
 		${grid.column.centre}
@@ -75,24 +75,31 @@ export const GalleryImage = ({
 	return (
 		<figure css={styles}>
 			<div css={galleryBodyImageStyles}>
-				<Picture
-					alt={image.data.alt ?? ''}
-					format={format}
-					role={image.role}
-					master={asset.url}
-					width={width}
-					height={height}
-					loading="lazy"
-				/>
-				{renderingTarget === 'Web' && !isUndefined(image.position) && (
-					<LightboxLink
-						role={image.role}
+				<div
+					css={css`
+						position: relative;
+					`}
+				>
+					<Picture
+						alt={image.data.alt ?? ''}
 						format={format}
-						elementId={image.elementId}
-						isMainMedia={false}
-						position={image.position}
+						role={image.role}
+						master={asset.url}
+						width={width}
+						height={height}
+						loading="lazy"
 					/>
-				)}
+					{renderingTarget === 'Web' &&
+						!isUndefined(image.position) && (
+							<LightboxLink
+								role={image.role}
+								format={format}
+								elementId={image.elementId}
+								isMainMedia={false}
+								position={image.position}
+							/>
+						)}
+				</div>
 			</div>
 
 			<GalleryCaption
