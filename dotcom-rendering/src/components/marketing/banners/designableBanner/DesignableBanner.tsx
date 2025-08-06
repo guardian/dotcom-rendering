@@ -173,7 +173,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		ChoiceCard | undefined
 	>(defaultChoiceCard);
 
-	const isCollapsableBanner = tracking.abTestVariant == 'COLLAPSABLE_V1';
+	const isCollapsableBanner = tracking.abTestVariant === 'COLLAPSABLE_V1';
 
 	const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
