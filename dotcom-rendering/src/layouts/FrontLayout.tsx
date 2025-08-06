@@ -550,12 +550,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						);
 					}
 
-					if (
-						collection.collectionType === 'fixed/video' ||
-						collection.containerPalette === 'PodcastPalette'
-					) {
-						const containerPalette =
-							collection.containerPalette ?? 'MediaPalette';
+					if (collection.containerPalette === 'PodcastPalette') {
+						const containerPalette = collection.containerPalette;
 
 						return (
 							<Fragment key={ophanName}>
@@ -582,10 +578,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										}
 										fullWidth={true}
 										padBottom={true}
-										showSideBorders={
-											collection.collectionType !==
-											'fixed/video'
-										}
+										showSideBorders={true}
 										showTopBorder={index > 0}
 										padContent={false}
 										url={collection.href}
@@ -596,11 +589,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										backgroundColour={schemePalette(
 											'--front-container-background',
 										)}
-										innerBackgroundColour={
-											containerPalette === 'MediaPalette'
-												? sourcePalette.neutral[0]
-												: undefined
-										}
+										innerBackgroundColour={undefined}
 										hasPageSkin={hasPageSkin}
 									>
 										<Island
