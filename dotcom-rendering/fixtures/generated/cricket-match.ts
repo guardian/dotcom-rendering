@@ -1835,7 +1835,6 @@ export const cricketMatchData: FECricketMatchPage = {
 			prebidOzone: true,
 			ampLiveblogSwitch: false,
 			ampAmazon: false,
-			prebidAdYouLike: false,
 			mostViewedFronts: true,
 			optOutAdvertising: true,
 			abSignInGateMainControl: true,
