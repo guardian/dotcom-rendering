@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { allModes } from '../../.storybook/modes';
 import { Gallery as GalleryFixture } from '../../fixtures/generated/fe-articles/Gallery';
 import { WithBranding } from '../components/ArticleMeta.web.stories';
 import { ArticleDesign } from '../lib/articleFormat';
@@ -10,6 +11,13 @@ import { GalleryLayout } from './GalleryLayout';
 const meta = {
 	title: 'Layouts/Gallery',
 	component: GalleryLayout,
+	parameters: {
+		chromatic: {
+			modes: {
+				'light wide': allModes['light wide'],
+			},
+		},
+	},
 } satisfies Meta<typeof GalleryLayout>;
 
 export default meta;
