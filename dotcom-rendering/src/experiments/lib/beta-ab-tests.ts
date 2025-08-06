@@ -1,7 +1,10 @@
+import { isUndefined } from '@guardian/libs';
 import { isServer } from '../../lib/isServer';
 
 export interface BetaABTestAPI {
-	isUserInTest: (testId: string, variantId: string) => boolean;
+	getParticipations: () => ABParticipations;
+	isUserInTest: (testId: string) => boolean;
+	isUserInTestGroup: (testId: string, groupId: string) => boolean;
 	trackABTests: (
 		ophanRecord: OphanRecordFunction,
 		errorReporter: ErrorReporter,
@@ -52,8 +55,16 @@ export class BetaABTests implements BetaABTestAPI {
 		}
 	}
 
-	isUserInTest(testId: string, variantId: string): boolean {
-		return this.participations[testId] === variantId;
+	getParticipations(): ABParticipations {
+		return this.participations;
+	}
+
+	isUserInTest(testId: string): boolean {
+		return !isUndefined(this.participations[testId]);
+	}
+
+	isUserInTestGroup(testId: string, groupId: string): boolean {
+		return this.participations[testId] === groupId;
 	}
 
 	trackABTests(
