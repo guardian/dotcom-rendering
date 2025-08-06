@@ -22,7 +22,9 @@ type IndexedSlot =
 	| 'fronts-banner'
 	| 'liveblog-inline'
 	| 'liveblog-inline-mobile'
-	| 'mobile-front';
+	| 'mobile-front'
+	| 'gallery-inline'
+	| 'gallery-inline-mobile';
 
 // TODO move to commercial
 type SlotNamesWithPageSkin = SlotName | 'pageskin';
@@ -422,6 +424,29 @@ const mobileStickyAdStylesFullWidth = css`
 
 const crosswordBannerMobileAdStyles = css`
 	min-height: ${getMinHeight(adSizes.mobilesticky.height)}px;
+`;
+
+const galleryInlineAdStyles = css`
+	margin: ${space[3]}px auto;
+	min-height: ${getMinHeight(adSizes.mpu.height)}px;
+
+	&.ad-slot--fluid {
+		margin: ${space[3]}px auto;
+	}
+`;
+
+/*** The top-above-nav-mobile and inline slots label should be dark even in light mode.
+ * Other slots will stay the same as the mentioned ad slots are
+ * the only ones to overlay the dark section of Gallery pages.
+ */
+const galleryInlineAdLabelStyles = css`
+	.ad-slot--dark[data-label-show='true']:not(
+			.ad-slot--interscroller
+		)::before {
+		background-color: ${schemedPalette('--ad-background-article-inner')};
+		border-top-color: ${schemedPalette('--ad-border-article-inner')};
+		color: ${schemedPalette('--ad-labels-text-article-inner')};
+	}
 `;
 
 const AdSlotWrapper = ({
@@ -907,6 +932,57 @@ export const AdSlot = ({
 						data-name="crossword-banner-mobile"
 						data-testid="slot"
 						aria-hidden="true"
+					/>
+				</AdSlotWrapper>
+			);
+		}
+		case 'gallery-inline': {
+			const advertId = `inline${index + 1}`;
+			return (
+				<AdSlotWrapper css={[labelStyles, galleryInlineAdLabelStyles]}>
+					<div
+						id={`dfp-ad--${advertId}`}
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							`ad-slot--${advertId}`,
+							'ad-slot--gallery-inline',
+							'ad-slot--dark',
+							'hide-until-tablet',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={galleryInlineAdStyles}
+						data-link-name={`ad slot ${advertId}`}
+						data-name={advertId}
+						aria-hidden="true"
+						data-label-show="true"
+						data-testid="slot"
+					/>
+				</AdSlotWrapper>
+			);
+		}
+		case 'gallery-inline-mobile': {
+			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
+			return (
+				<AdSlotWrapper css={[labelStyles, galleryInlineAdLabelStyles]}>
+					<div
+						id={`dfp-ad--${advertId}--mobile`}
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							`ad-slot--${advertId}`,
+							'ad-slot--gallery-inline',
+							'ad-slot--dark',
+							'ad-slot--mobile',
+							'mobile-only',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={galleryInlineAdStyles}
+						data-link-name={`ad slot ${advertId}`}
+						data-name={advertId}
+						aria-hidden="true"
+						data-label-show="true"
+						data-testid="slot"
 					/>
 				</AdSlotWrapper>
 			);
