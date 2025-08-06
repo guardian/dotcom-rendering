@@ -4,6 +4,7 @@ import {
 	breakpoints,
 	from,
 	textSans12,
+	textSansBold12,
 } from '@guardian/source/foundations';
 import {
 	ArticleDesign,
@@ -50,14 +51,18 @@ const labelAdvertisingPartnerStyle = css`
 	padding-bottom: 1px;
 `;
 
-const labelStyle = css`
-	${textSans12}
-	color: ${palette('--branding-label-text')};
+const labelStyle = (design: ArticleDesign) => {
+	const fontStyle =
+		design === ArticleDesign.Gallery ? textSansBold12 : textSans12;
+	return css`
+		${fontStyle}
+		color: ${palette('--branding-label-text')};
 
-	a {
-		color: inherit;
-	}
-`;
+		a {
+			color: inherit;
+		}
+	`;
+};
 
 const liveBlogLabelStyle = css`
 	color: ${palette('--standfirst-text')};
@@ -234,7 +239,7 @@ export const Branding = ({ branding, format }: Props) => {
 		>
 			<div
 				css={[
-					labelStyle,
+					labelStyle(format.design),
 					isAdvertisingPartnerOrExclusive &&
 						labelAdvertisingPartnerStyle,
 					isLiveBlog && liveBlogLabelStyle,
