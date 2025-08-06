@@ -274,9 +274,9 @@ export const auxiaV2Modal = () => {
 		treatmentTrackingId: 'test-tracking-id',
 		surface: 'test-surface',
 		treatmentContent: JSON.stringify({
-			title: 'Sign in to continue reading',
-			subtitle: 'Register for free and continue reading',
-			body: 'Create your free Guardian account to access exclusive content and features.',
+			title: 'A small step for great Journalism. Sign in.',
+			subtitle: "It's free and only takes 30 seconds.",
+			body: '',
 			first_cta_name: 'Create account',
 			first_cta_link: 'https://profile.theguardian.com/register',
 			second_cta_name: 'Not now',
@@ -314,4 +314,4 @@ export const auxiaV2Modal = () => {
 	);
 };
 
-auxiaV2Modal.storyName = 'auxia_v2_modal';
+auxiaV2Modal.storyName = 'sign_in_gate_auxia_v2_modal_dismissable';

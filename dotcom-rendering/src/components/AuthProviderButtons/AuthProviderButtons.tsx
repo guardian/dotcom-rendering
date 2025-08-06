@@ -14,6 +14,7 @@ import {
 import React from 'react';
 import { buildUrlWithQueryParams } from '../../lib/routeUtils';
 import type { IsNativeApp, QueryParams } from './types';
+import { AuxiaGateVersion } from '../SignInGate/types';
 
 type AuthButtonProvider = 'social' | 'email';
 
@@ -22,6 +23,7 @@ type AuthProviderButtonsProps = {
 	isNativeApp?: IsNativeApp;
 	providers: AuthButtonProvider[];
 	onClick?: (provider: AuthButtonProvider) => void;
+	signInGateVersion?: AuxiaGateVersion;
 };
 
 type AuthProviderButtonProps = {
@@ -35,13 +37,13 @@ type AuthProviderButtonProps = {
 // The gap between elements in the main section of MinimalLayout.
 export const SECTION_GAP = remSpace[3]; // 12px
 
-export const mainSectionStyles = css`
+export const mainSectionStyles = (signInGateVersion: AuxiaGateVersion) => css`
 	display: flex;
 	flex-direction: column;
 	gap: ${SECTION_GAP};
 
 	${from.phablet} {
-		flex-direction: row;
+		flex-direction: ${signInGateVersion === 'v1' ? 'row' : 'column'};
 	}
 `;
 
@@ -152,10 +154,11 @@ export const AuthProviderButtons = ({
 	isNativeApp,
 	providers,
 	onClick,
+	signInGateVersion = 'v1',
 }: AuthProviderButtonsProps) => {
 	const buttonOrder = getButtonOrder(isNativeApp);
 	return (
-		<div css={mainSectionStyles}>
+		<div css={mainSectionStyles(signInGateVersion)}>
 			{providers.includes('social') &&
 				buttonOrder.map((socialProvider) => (
 					<SocialButton

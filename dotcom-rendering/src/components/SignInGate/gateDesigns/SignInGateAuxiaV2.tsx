@@ -1,10 +1,12 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headlineMedium24,
+	headlineMedium28,
 	headlineMedium34,
+	headlineMedium42,
 	palette,
 	space,
+	textSans14,
 	textSans15,
 	textSans17,
 	textSansBold15,
@@ -23,7 +25,7 @@ const DividerWithOr = () => {
 	return (
 		<div css={dividerContainer}>
 			<hr css={line} />
-			<span css={orText}>or</span>
+			<span css={orText}>or continue with</span>
 			<hr css={line} />
 		</div>
 	);
@@ -108,109 +110,153 @@ export const SignInGateAuxiaV2 = ({
 			data-testid="sign-in-gate-modal-overlay"
 		>
 			<div css={modalContainer} data-testid="sign-in-gate-main">
-				<div css={topBar}>
-					<SvgGuardianLogo textColor="#041F4A" width={96} />
+				<div css={topContainer}>
+					<div css={topBar}>
+						<SvgGuardianLogo textColor="#041F4A" width={96} />
 
-					{isDismissible && (
-						<button
-							type="button"
-							data-testid="sign-in-gate-main_dismiss"
-							data-ignore="global-link-styling"
-							css={dismissButtonStyles}
-							onClick={() => {
-								dismissGate();
-								trackLink(
-									ophanComponentId,
-									'not-now',
-									renderingTarget,
-									abTest,
-								);
-								void logTreatmentInteractionCall(
-									'DISMISSED',
-									'',
-								);
-							}}
-						>
-							<SvgCross size="xsmall" />
-						</button>
-					)}
+						{isDismissible && (
+							<button
+								type="button"
+								data-testid="sign-in-gate-main_dismiss"
+								data-ignore="global-link-styling"
+								css={dismissButtonStyles}
+								onClick={() => {
+									dismissGate();
+									trackLink(
+										ophanComponentId,
+										'not-now',
+										renderingTarget,
+										abTest,
+									);
+									void logTreatmentInteractionCall(
+										'DISMISSED',
+										'',
+									);
+								}}
+							>
+								<SvgCross size="xsmall" />
+							</button>
+						)}
+					</div>
+
+					<div css={headerSection}>
+						<div css={headerCopy}>
+							<h2 css={subHeadingStyles}>{title}</h2>
+							{has(subtitle) && (
+								<p css={descriptionText}>{subtitle}</p>
+							)}
+							{has(body) && <p css={descriptionText}>{body}</p>}
+						</div>
+						<img
+							css={headerImage}
+							src="https://media.guim.co.uk/04283a980cd4559eba0501ab25e41ff2f0bd8e20/33_1_277_284/277.png"
+							alt="The Guardian logo"
+						/>
+					</div>
 				</div>
+				<div css={contentContainer}>
+					<div css={actionsSection}>
+						<div css={signInTopBar}>
+							<h2 css={subHeadingStyles}>Sign in</h2>
 
-				<h2 css={subHeadingStyles}>{title}</h2>
+							{isDismissible && (
+								<button
+									type="button"
+									data-testid="sign-in-gate-main_dismiss"
+									data-ignore="global-link-styling"
+									css={signInDismissButtonStyles}
+									onClick={() => {
+										dismissGate();
+										trackLink(
+											ophanComponentId,
+											'not-now',
+											renderingTarget,
+											abTest,
+										);
+										void logTreatmentInteractionCall(
+											'DISMISSED',
+											'',
+										);
+									}}
+								>
+									<SvgCross size="xsmall" />
+								</button>
+							)}
+						</div>
+						<div css={emailContainer}>
+							<AuthProviderButtons
+								queryParams={{ returnUrl: signInUrl }}
+								providers={['email']}
+								onClick={(provider) => {
+									trackLink(
+										ophanComponentId,
+										`sign-in-${provider}-${dismissStatusLabel}`,
+										renderingTarget,
+										abTest,
+									);
+									void logTreatmentInteractionCall(
+										'CLICKED',
+										'SIGN-IN-LINK',
+									);
+								}}
+								signInGateVersion="v2"
+							/>
+						</div>
 
-				{has(subtitle) && <p css={descriptionText}>{subtitle}</p>}
-				{has(body) && <p css={descriptionText}>{body}</p>}
+						<DividerWithOr />
 
-				<div css={socialContainer}>
-					<AuthProviderButtons
-						queryParams={{ returnUrl: signInUrl }}
-						providers={['social']}
-						onClick={(provider) => {
-							trackLink(
-								ophanComponentId,
-								`sign-in-${provider}-${dismissStatusLabel}`,
-								renderingTarget,
-								abTest,
-							);
-							void logTreatmentInteractionCall(
-								'CLICKED',
-								'SIGN-IN-LINK',
-							);
-						}}
-					/>
+						<div css={socialContainer}>
+							<AuthProviderButtons
+								queryParams={{ returnUrl: signInUrl }}
+								providers={['social']}
+								onClick={(provider) => {
+									trackLink(
+										ophanComponentId,
+										`sign-in-${provider}-${dismissStatusLabel}`,
+										renderingTarget,
+										abTest,
+									);
+									void logTreatmentInteractionCall(
+										'CLICKED',
+										'SIGN-IN-LINK',
+									);
+								}}
+								signInGateVersion="v2"
+							/>
+						</div>
+
+						<div css={termsBox}>
+							<InformationBox>
+								<GuardianTerms />
+							</InformationBox>
+						</div>
+
+						{has(firstCtaName) && has(firstCtaLink) && (
+							<p css={createAccountText}>
+								Not signed in before?{' '}
+								<ExternalLink
+									href={firstCtaLink}
+									onClick={() => {
+										trackLink(
+											ophanComponentId,
+											`register-link-${dismissStatusLabel}`,
+											renderingTarget,
+											abTest,
+										);
+										void logTreatmentInteractionCall(
+											'CLICKED',
+											'REGISTER-LINK',
+										);
+									}}
+									data-testid="sign-in-gate-main_register"
+									data-ignore="global-link-styling"
+								>
+									{firstCtaName}
+								</ExternalLink>
+							</p>
+						)}
+					</div>
 				</div>
-
-				<DividerWithOr />
-
-				<div css={emailContainer}>
-					<AuthProviderButtons
-						queryParams={{ returnUrl: signInUrl }}
-						providers={['email']}
-						onClick={(provider) => {
-							trackLink(
-								ophanComponentId,
-								`sign-in-${provider}-${dismissStatusLabel}`,
-								renderingTarget,
-								abTest,
-							);
-							void logTreatmentInteractionCall(
-								'CLICKED',
-								'SIGN-IN-LINK',
-							);
-						}}
-					/>
-				</div>
-
-				<div css={termsBox}>
-					<InformationBox>
-						<GuardianTerms />
-					</InformationBox>
-				</div>
-
-				{has(firstCtaName) && has(firstCtaLink) && (
-					<p css={createAccountText}>
-						Not signed in before?{' '}
-						<ExternalLink
-							href={firstCtaLink}
-							onClick={() => {
-								trackLink(
-									ophanComponentId,
-									`register-link-${dismissStatusLabel}`,
-									renderingTarget,
-									abTest,
-								);
-								void logTreatmentInteractionCall(
-									'CLICKED',
-									'REGISTER-LINK',
-								);
-							}}
-							data-testid="sign-in-gate-main_register"
-							data-ignore="global-link-styling"
-						>
-							{firstCtaName}
-						</ExternalLink>
-					</p>
-				)}
 			</div>
 		</div>
 	);
@@ -233,26 +279,129 @@ const modalOverlay = css`
 
 const modalContainer = css`
 	background: white;
-	border-radius: 4px;
-	max-width: 617px;
+	border-radius: ${space[4]}px;
+	display: flex;
+	flex-direction: column;
+	gap: ${space[2]}px;
+	max-width: 900px;
 	width: 100%;
 	max-height: 90vh;
 	overflow-y: auto;
-	padding: ${space[4]}px;
+	padding: ${space[3]}px;
 	position: relative;
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 
-	${from.tablet} {
-		padding: ${space[6]}px;
+	${from.phablet} {
+		max-width: 460px;
+		padding: 0;
 	}
+
+	${from.desktop} {
+		max-width: 940px;
+		max-height: 600px;
+		flex-direction: row;
+		gap: 0;
+	}
+`;
+
+// --- New Layout Containers ---
+const topContainer = css`
+	display: flex;
+	flex-direction: column;
+
+	${from.phablet} {
+		border-bottom: 0.5px solid ${palette.brand[400]};
+		padding: ${space[4]}px;
+	}
+
+	${from.desktop} {
+		border-bottom: 0;
+		border-right: 0.5px solid ${palette.brand[400]};
+		flex-direction: column-reverse;
+		gap: ${space[8]}px;
+	}
+`;
+
+const contentContainer = css`
+	display: flex;
+	flex-direction: column;
+	gap: ${space[5]}px;
+
+	${from.phablet} {
+		padding: ${space[4]}px;
+	}
+
+	${from.desktop} {
+		flex-direction: row;
+		gap: ${space[6]}px;
+		padding: ${space[6]}px ${space[10]}px;
+	}
+`;
+
+const headerSection = css`
+	display: flex;
+	flex-direction: row;
+	flex: 1;
+
+	${from.desktop} {
+		flex-direction: column-reverse;
+		padding-right: ${space[4]}px;
+	}
+`;
+
+const headerCopy = css`
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	gap: ${space[4]}px;
+	${from.desktop} {
+		gap: ${space[5]}px;
+	}
+`;
+
+const headerImage = css`
+	display: none;
+	${from.phablet} {
+		align-self: flex-end;
+		display: inline-flex;
+		width: 158px;
+	}
+
+	${from.desktop} {
+		align-self: center;
+		width: 280px;
+	}
+`;
+
+const actionsSection = css`
+	flex: 1;
 `;
 
 // --- Existing Styling ---
 const topBar = css`
 	display: flex;
+	flex-direction: row-reverse;
 	justify-content: space-between;
-	padding: 0 0 ${space[4]}px;
-	border-bottom: 1px solid ${palette.neutral[86]};
+	padding: 0 0 ${space[6]}px;
+
+	${from.desktop} {
+		padding: 0;
+	}
+`;
+
+const signInTopBar = css`
+	display: none;
+
+	${from.desktop} {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		padding: 0 0 ${space[4]}px;
+
+		h2 {
+			${headlineMedium34};
+		}
+	}
 `;
 
 const dismissButtonStyles = css`
@@ -260,33 +409,60 @@ const dismissButtonStyles = css`
 	border: none;
 	cursor: pointer;
 	padding: 0;
+
+	${from.desktop} {
+		display: none;
+	}
+`;
+
+const signInDismissButtonStyles = css`
+	display: none;
+
+	${from.desktop} {
+		display: inline-flex;
+		background: transparent;
+		border: none;
+		cursor: pointer;
+		padding: 0;
+	}
 `;
 
 const subHeadingStyles = css`
-	${headlineMedium24};
+	${headlineMedium28};
 	color: ${palette.brand[400]};
-	padding: ${space[2]}px 0 ${space[3]}px;
 	white-space: pre-line;
+	margin-top: 0; /* Remove default margin for better spacing */
 
 	${from.phablet} {
 		${headlineMedium34};
 		padding: ${space[2]}px 0 ${space[5]}px;
 	}
+
+	${from.desktop} {
+		${headlineMedium42};
+		padding: 0;
+	}
 `;
 
 const descriptionText = css`
-	${textSans15};
-	padding-bottom: ${space[6]}px;
+	${textSans14};
 	white-space: pre-line;
 
 	${from.phablet} {
+		${textSans15};
+	}
+
+	${from.desktop} {
 		${textSans17};
-		padding-bottom: ${space[5]}px;
 	}
 `;
 
 const socialContainer = css`
-	padding-bottom: ${space[5]}px;
+	padding-bottom: ${space[3]}px;
+
+	${from.desktop} {
+		padding-bottom: ${space[5]}px;
+	}
 `;
 
 const emailContainer = css`
@@ -295,19 +471,26 @@ const emailContainer = css`
 	${from.phablet} {
 		padding-bottom: ${space[3]}px;
 	}
+
+	${from.desktop} {
+		padding-bottom: ${space[4]}px;
+	}
 `;
 
 const termsBox = css`
-	padding-bottom: ${space[4]}px;
+	padding-bottom: ${space[3]}px;
 
 	${from.phablet} {
-		padding-bottom: ${space[3]}px;
+		margin-bottom: ${space[3]}px;
+		padding-bottom: ${space[4]}px;
+		border-bottom: 1px solid ${palette.neutral[86]};
 	}
 `;
 
 const createAccountText = css`
 	${textSans15};
 	color: ${palette.neutral[10]};
+	margin-bottom: 0;
 
 	a {
 		${textSansBold15};
@@ -318,7 +501,7 @@ const dividerContainer = css`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 0 8px 12px;
+	padding-bottom: ${space[4]}px;
 `;
 
 const line = css`
