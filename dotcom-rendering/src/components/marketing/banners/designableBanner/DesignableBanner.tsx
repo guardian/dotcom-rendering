@@ -655,7 +655,7 @@ const styles = {
 		${from.wide} {
 			max-width: 1300px;
 			/* the vertical line aligns with that of standard article */
-			grid-template-columns: 219px 1px min(500px) min(380px) auto;
+			grid-template-columns: 219px 1px min(460px) min(380px) auto;
 			grid-template-rows: auto auto;
 			grid-template-areas:
 				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button '
@@ -714,11 +714,15 @@ const styles = {
 			justify-content: space-around;
 			column-gap: ${space[0]}px;
 			padding-right: ${space[2]}px;
-			justify-self: end;
+			justify-self: start;
 			margin-top: ${space[2]}px;
 		}
 		${from.desktop} {
 			margin-top: ${space[5]}px;
+			display: flex;
+			justify-content: space-between;
+			justify-self: end;
+			width: 100%;
 		}
 	`,
 	headerContainer: (background: string, bannerHasImage: boolean) => css`
@@ -978,9 +982,8 @@ const styles = {
 		margin-bottom: ${space[3]}px;
 	`,
 	collapsableButtonContainer: css`
-		grid-area: collapseable;
-		padding-left: ${space[2]}px;
-		justify-self: end;
+		margin-left: ${space[2]}px;
+		margin-top: ${space[1]}px;
 	`,
 	iconOverrides: css`
 		background-color: ${palette.brand[400]};
