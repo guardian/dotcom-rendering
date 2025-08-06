@@ -20,6 +20,7 @@ const styles = css`
 	${grid.column.centre}
 	color: ${palette('--caption-text')};
 	${textSans12}
+	padding-top: ${space[2]}px;
 	padding-bottom: ${space[6]}px;
 	padding-top: ${space[5]}px;
 
