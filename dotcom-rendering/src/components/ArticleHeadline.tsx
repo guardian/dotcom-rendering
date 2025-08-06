@@ -143,14 +143,27 @@ const invertedFontLineHeight = css`
 	}
 `;
 
-const labsFont = css`
-	${textSansBold28};
-	line-height: 2rem;
-	${from.tablet} {
-		${textSansBold34};
-		line-height: 2.375rem;
+const labsFont = (design: ArticleDesign) => {
+	if (design === ArticleDesign.Gallery) {
+		return css`
+			${textSansBold34};
+			line-height: 2.1875rem;
+			${from.desktop} {
+				${textSansBold34};
+				font-size: 50px;
+				line-height: 3.125rem;
+			}
+		`;
 	}
-`;
+	return css`
+		${textSansBold28};
+		line-height: 2rem;
+		${from.tablet} {
+			${textSansBold34};
+			line-height: 2.375rem;
+		}
+	`;
+};
 
 const jumboLabsFont = css`
 	${textSansBold34};
@@ -426,7 +439,7 @@ export const ArticleHeadline = ({
 								<h1
 									css={[
 										format.theme === ArticleSpecial.Labs
-											? labsFont
+											? labsFont(format.design)
 											: headlineFont(format),
 										invertedText,
 										css`
@@ -508,7 +521,7 @@ export const ArticleHeadline = ({
 						<h1
 							css={[
 								format.theme === ArticleSpecial.Labs
-									? labsFont
+									? labsFont(format.design)
 									: headlineFont(format),
 								topPadding,
 								css`
@@ -549,7 +562,7 @@ export const ArticleHeadline = ({
 								<h1
 									css={[
 										format.theme === ArticleSpecial.Labs
-											? labsFont
+											? labsFont(format.design)
 											: headlineFont(format),
 										topPadding,
 										css`
@@ -584,7 +597,7 @@ export const ArticleHeadline = ({
 								<h1
 									css={[
 										format.theme === ArticleSpecial.Labs
-											? labsFont
+											? labsFont(format.design)
 											: headlineFont(format),
 										topPadding,
 										css`
@@ -626,7 +639,7 @@ export const ArticleHeadline = ({
 								<h1
 									css={[
 										format.theme === ArticleSpecial.Labs
-											? labsFont
+											? labsFont(format.design)
 											: headlineFont(format),
 										topPadding,
 										css`
@@ -667,7 +680,7 @@ export const ArticleHeadline = ({
 								<h1
 									css={[
 										format.theme === ArticleSpecial.Labs
-											? labsFont
+											? labsFont(format.design)
 											: headlineFont(format),
 										invertedWrapper,
 										invertedFontLineHeight,
@@ -718,7 +731,7 @@ export const ArticleHeadline = ({
 								<h1
 									css={[
 										format.theme === ArticleSpecial.Labs
-											? labsFont
+											? labsFont(format.design)
 											: headlineFont(format),
 										topPadding,
 										css`
@@ -760,7 +773,7 @@ export const ArticleHeadline = ({
 								<h1
 									css={[
 										format.theme === ArticleSpecial.Labs
-											? labsFont
+											? labsFont(format.design)
 											: headlineFont(format),
 										css`
 											color: ${isMatch
@@ -805,7 +818,7 @@ export const ArticleHeadline = ({
 									}
 									css={[
 										format.theme === ArticleSpecial.Labs
-											? labsFont
+											? labsFont(format.design)
 											: headlineFont(format),
 										topPadding,
 										css`
@@ -832,7 +845,7 @@ export const ArticleHeadline = ({
 							<h1
 								css={[
 									format.theme === ArticleSpecial.Labs
-										? labsFont
+										? labsFont(format.design)
 										: headlineFont(format),
 									topPadding,
 									css`
@@ -859,7 +872,7 @@ export const ArticleHeadline = ({
 								<h1
 									css={[
 										format.theme === ArticleSpecial.Labs
-											? labsFont
+											? labsFont(format.design)
 											: headlineFont(format),
 										css`
 											color: ${themePalette(
@@ -905,7 +918,7 @@ export const ArticleHeadline = ({
 								<h1
 									css={[
 										format.theme === ArticleSpecial.Labs
-											? labsFont
+											? labsFont(format.design)
 											: headlineFont(format),
 										topPadding,
 										css`
