@@ -53,6 +53,10 @@ const collapsedStyles = css`
 	${from.mobileLandscape} {
 		max-width: calc(100% - 70px);
 	}
+
+	${from.desktop} {
+		max-width: 100%;
+	}
 `;
 
 const fontStyle = css`
