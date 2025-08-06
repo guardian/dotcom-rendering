@@ -623,8 +623,8 @@ const styles = {
 			grid-template-columns:
 				minmax(0, 0.5fr)
 				${phabletContentMaxWidth}
-				max-content
-				minmax(0, 0.5fr);
+				1fr
+				0;
 			grid-template-rows: auto auto;
 			grid-template-areas:
 				'.	copy-container						close-button						.'
@@ -702,27 +702,21 @@ const styles = {
 		/* Layout changes only here */
 		grid-area: close-button;
 		display: flex;
+		justify-content: space-between;
 
 		${until.phablet} {
 			flex-direction: row-reverse;
-			justify-content: space-between;
 			position: sticky;
 			top: ${space[2]}px;
 		}
 		${from.phablet} {
 			flex-direction: row;
-			justify-content: space-around;
 			column-gap: ${space[0]}px;
 			padding-right: ${space[2]}px;
-			justify-self: start;
 			margin-top: ${space[2]}px;
 		}
 		${from.desktop} {
 			margin-top: ${space[5]}px;
-			display: flex;
-			justify-content: space-between;
-			justify-self: end;
-			width: 100%;
 		}
 	`,
 	headerContainer: (background: string, bannerHasImage: boolean) => css`
