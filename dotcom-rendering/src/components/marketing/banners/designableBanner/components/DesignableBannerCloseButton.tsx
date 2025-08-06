@@ -15,13 +15,13 @@ import { buttonStyles, buttonThemes } from '../styles/buttonStyles';
 interface DesignableBannerCloseButtonProps {
 	onCloseClick: () => void;
 	settings: CtaSettings;
-	isInABTest?: boolean;
+	isCollapsableBanner?: boolean;
 }
 
 export function DesignableBannerCloseButton({
 	onCloseClick,
 	settings,
-	isInABTest = false,
+	isCollapsableBanner = false,
 }: DesignableBannerCloseButtonProps): JSX.Element {
 	return (
 		<div
@@ -29,7 +29,7 @@ export function DesignableBannerCloseButton({
 				${styles.container}
 			`}
 		>
-			{isInABTest ? (
+			{isCollapsableBanner ? (
 				<LinkButton
 					onClick={onCloseClick}
 					cssOverrides={buttonStyles(

@@ -449,7 +449,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						<DesignableBannerCloseButton
 							onCloseClick={onCloseClick}
 							settings={templateSettings.closeButtonSettings}
-							isInABTest={isCollapsableBanner}
+							isCollapsableBanner={isCollapsableBanner}
 						/>
 					)}
 				</div>
