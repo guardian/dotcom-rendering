@@ -5,6 +5,13 @@ import type { Handler } from 'express';
 const isStringTuple = (_: [string, unknown]): _ is [string, string] =>
 	typeof _[1] === 'string';
 
+const allowedOrigins = [
+	'https://www.theguardian.com',
+	'https://m.code.dev-theguardian.com',
+	'https://m.thegulocal.com',
+	'http://localhost:9000',
+];
+
 /**
  * Get DCR content from a `theguardian.com` URL.
  * Takes in optional `X-Gu-*` headers to send.
@@ -16,6 +23,17 @@ async function getContentFromURL(
 ): Promise<{ config: unknown; cookies: string[] }> {
 	// searchParams will only work for the first set of query params because 'url' is already a query param itself
 	const searchparams = url.searchParams.toString();
+
+	// Prevent requests to unknown origins
+	if (!allowedOrigins.includes(url.origin)) {
+		throw new Error(
+			`Origin ${
+				url.origin
+			} is not allowed. Allowed origins are: ${allowedOrigins.join(
+				', ',
+			)}`,
+		);
+	}
 
 	// Reconstruct the parsed url adding .json?dcr which we need to force dcr to return json
 	const jsonUrl = `${url.origin}${url.pathname}.json?dcr=true&${searchparams}`;
