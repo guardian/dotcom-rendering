@@ -120,6 +120,8 @@ const buildChoiceCardSettings = (
 const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	content,
 	onCloseClick,
+	onCollapseClick,
+	onExpandClick,
 	articleCounts,
 	onCtaClick,
 	onSecondaryCtaClick,
@@ -174,6 +176,15 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	const isCollapsableBanner = tracking.abTestVariant == 'COLLAPSABLE_V1';
 
 	const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
+
+	const handleSetIsCollapsed = (collapsed: boolean) => {
+		setIsCollapsed(collapsed);
+		if (collapsed) {
+			onCollapseClick();
+		} else {
+			onExpandClick();
+		}
+	};
 
 	// We can't render anything without a design
 	if (!design) {
@@ -418,7 +429,9 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 							css={styles.collapsableButtonContainer}
 						>
 							<Button
-								onClick={() => setIsCollapsed(!isCollapsed)}
+								onClick={() =>
+									handleSetIsCollapsed(!isCollapsed)
+								}
 								cssOverrides={styles.iconOverrides}
 								priority="tertiary"
 								icon={
