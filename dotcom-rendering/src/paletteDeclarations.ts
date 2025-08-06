@@ -2040,7 +2040,7 @@ const brandingLinkDark: PaletteFunction = ({ design, theme }) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
-					return sourcePalette.specialReport[500];
+					return sourcePalette.neutral[73];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
@@ -3821,6 +3821,9 @@ const liveBlockBorderBottomDark: PaletteFunction = () =>
 const subMetaLabelTextLight: PaletteFunction = ({ theme, design }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
+			if (design === ArticleDesign.Gallery) {
+				return sourcePalette.neutral[60];
+			}
 			return sourcePalette.neutral[7];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[300];
@@ -3837,9 +3840,8 @@ const subMetaLabelTextLight: PaletteFunction = ({ theme, design }) => {
 				case ArticleDesign.Picture:
 				case ArticleDesign.Video:
 				case ArticleDesign.Audio:
-					return sourcePalette.neutral[60];
 				case ArticleDesign.Gallery:
-					return sourcePalette.neutral[73];
+					return sourcePalette.neutral[60];
 				default:
 					return sourcePalette.neutral[46];
 			}
