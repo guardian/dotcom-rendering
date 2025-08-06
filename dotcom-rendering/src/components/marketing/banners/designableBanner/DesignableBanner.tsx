@@ -453,9 +453,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									'tertiary',
 								)}
 								hideLabel={true}
-							>
-								isCollapsed ? ( Open ) : ( Close )
-							</Button>
+							/>
 						</div>
 					)}
 					{(!isCollapsableBanner || isCollapsed) && (
