@@ -1835,7 +1835,6 @@ export const cricketMatchData: FECricketMatchPage = {
 			prebidOzone: true,
 			ampLiveblogSwitch: false,
 			ampAmazon: false,
-			prebidAdYouLike: false,
 			mostViewedFronts: true,
 			optOutAdvertising: true,
 			abSignInGateMainControl: true,
@@ -1962,7 +1961,6 @@ export const cricketMatchData: FECricketMatchPage = {
 		calloutsUrl:
 			'https://callouts.guardianapis.com/formstack-campaign/submit',
 		isPreview: false,
-		serverSideABTests: {},
 	},
 	pageFooter: {
 		footerLinks: [

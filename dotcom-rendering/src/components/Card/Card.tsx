@@ -638,13 +638,6 @@ export const Card = ({
 			};
 		}
 
-		if (isFlexSplash) {
-			return {
-				row: 'small',
-				column: 'none',
-			};
-		}
-
 		if (!isBetaContainer) {
 			/**
 			 * Media cards have 4px padding around the content so we have a
@@ -673,7 +666,7 @@ export const Card = ({
 			imagePositionOnMobile === 'bottom'
 		) {
 			return {
-				row: 'tiny',
+				row: showLivePlayable ? 'small' : 'tiny',
 				column: 'large',
 			};
 		}
@@ -1092,11 +1085,6 @@ export const Card = ({
 							isBetaContainer,
 							isOnwardContent,
 						)}
-						padRight={
-							!!isFlexSplash &&
-							image &&
-							imagePositionOnDesktop === 'right'
-						}
 					>
 						{/* This div is needed to keep the headline and trail text justified at the start */}
 						<div
