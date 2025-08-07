@@ -221,7 +221,6 @@ export const testCollectionsUs = [
 	{
 		...defaultValues,
 		collectionType: 'fixed/medium/slow-VII',
-		containerPalette: 'PodcastPalette',
 		displayName: 'Podcasts',
 	},
 	{
