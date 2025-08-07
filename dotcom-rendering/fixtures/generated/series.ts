@@ -19,6 +19,102 @@ export const series = {
 	url: 'https://www.theguardian.com/tv-and-radio/series/tv-review',
 	trails: [
 		{
+			url: 'https://www.theguardian.com/tv-and-radio/2025/aug/06/wednesday-season-two-review-jenna-ortega-netflix-tim-burton-steve-buscemi',
+			linkText:
+				'Wednesday season two review – Jenna Ortega’s charisma could power 1,000 hearses',
+			showByline: false,
+			byline: 'Sarah Dempster',
+			masterImage:
+				'https://media.guim.co.uk/c258e50a6056de19d992f2a43197d602fcee8785/222_0_3000_2400/master/3000.jpg',
+			image: 'https://i.guim.co.uk/img/media/c258e50a6056de19d992f2a43197d602fcee8785/222_0_3000_2400/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=b2309ec5c8e861afb8a637f700ed48e9',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/c258e50a6056de19d992f2a43197d602fcee8785/222_0_3000_2400/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=b2309ec5c8e861afb8a637f700ed48e9',
+				'460': 'https://i.guim.co.uk/img/media/c258e50a6056de19d992f2a43197d602fcee8785/222_0_3000_2400/master/3000.jpg?width=460&quality=85&auto=format&fit=max&s=a6aef368f12e5e652cfd5e00bf3b8016',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2025-08-06T07:01:48.000Z',
+			headline:
+				'Wednesday season two review – Jenna Ortega’s charisma could power 1,000 hearses',
+			shortUrl: 'https://www.theguardian.com/p/x2qdcv',
+			starRating: 4,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/x2qdcv',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2025/aug/06/platonic-season-two-review-seth-rogen-and-rose-byrne',
+			linkText:
+				'Platonic season two review: Seth Rogen and Rose Byrne stop at nothing to make you laugh – and it’s joyful TV',
+			showByline: false,
+			byline: 'Rachel Aroesti',
+			masterImage:
+				'https://media.guim.co.uk/83a262e6cda69af5b46585c6cdac347c24ecd015/58_0_5000_4000/master/5000.jpg',
+			image: 'https://i.guim.co.uk/img/media/83a262e6cda69af5b46585c6cdac347c24ecd015/58_0_5000_4000/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=6372c09c64b113ffa54bc83a5c2ddab6',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/83a262e6cda69af5b46585c6cdac347c24ecd015/58_0_5000_4000/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=6372c09c64b113ffa54bc83a5c2ddab6',
+				'460': 'https://i.guim.co.uk/img/media/83a262e6cda69af5b46585c6cdac347c24ecd015/58_0_5000_4000/master/5000.jpg?width=460&quality=85&auto=format&fit=max&s=2f75173584f7680ae69ceee3fd38a03f',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2025-08-06T04:00:46.000Z',
+			headline:
+				'Platonic season two review: Seth Rogen and Rose Byrne stop at nothing to make you laugh – and it’s joyful TV',
+			shortUrl: 'https://www.theguardian.com/p/x2p6x7',
+			starRating: 4,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/x2p6x7',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2025/aug/05/king-of-the-hill-review-cartoon-comedy-returns-disney',
+			linkText:
+				'King of the Hill review – this charming comedy returns after 15 years … and it’s more welcome than ever',
+			showByline: false,
+			byline: 'Phil Harrison',
+			masterImage:
+				'https://media.guim.co.uk/51a41192ac56057c535c639b0bcdf1f859d9e13f/268_0_1350_1080/master/1350.jpg',
+			image: 'https://i.guim.co.uk/img/media/51a41192ac56057c535c639b0bcdf1f859d9e13f/268_0_1350_1080/master/1350.jpg?width=300&quality=85&auto=format&fit=max&s=1ebf44e21f5a51bc8540861f08ccc5a7',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/51a41192ac56057c535c639b0bcdf1f859d9e13f/268_0_1350_1080/master/1350.jpg?width=300&quality=85&auto=format&fit=max&s=1ebf44e21f5a51bc8540861f08ccc5a7',
+				'460': 'https://i.guim.co.uk/img/media/51a41192ac56057c535c639b0bcdf1f859d9e13f/268_0_1350_1080/master/1350.jpg?width=460&quality=85&auto=format&fit=max&s=9067ab56673a6f71b002426fbfed26c2',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2025-08-05T14:24:37.000Z',
+			headline:
+				'King of the Hill review – this charming comedy returns after 15 years … and it’s more welcome than ever',
+			shortUrl: 'https://www.theguardian.com/p/x2qhfd',
+			starRating: 4,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/x2qhfd',
+			},
+		},
+		{
 			url: 'https://www.theguardian.com/tv-and-radio/2025/aug/04/what-happened-at-hiroshima-review-this-rushed-flimsy-look-at-a-world-changing-atrocity-isnt-good-enough',
 			linkText:
 				'What Happened at Hiroshima review – this rushed, flimsy look at a world-changing atrocity isn’t good enough',
@@ -240,102 +336,6 @@ export const series = {
 				isCommentable: false,
 				isClosedForComments: true,
 				discussionId: '/p/x2zqzy',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2025/jul/29/1000-men-and-me-the-bonnie-blue-story-review-channel-4-documentary',
-			linkText:
-				'1000 Men and Me: The Bonnie Blue Story review – the troubling tale of sex with 1,057 men in 12 hours',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			masterImage:
-				'https://media.guim.co.uk/392513fa0f1a7c3e1713da3c2132bb6eaccba592/688_0_6880_5504/master/6880.jpg',
-			image: 'https://i.guim.co.uk/img/media/392513fa0f1a7c3e1713da3c2132bb6eaccba592/688_0_6880_5504/master/6880.jpg?width=300&quality=85&auto=format&fit=max&s=347169b42230389434965887d44797e0',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/392513fa0f1a7c3e1713da3c2132bb6eaccba592/688_0_6880_5504/master/6880.jpg?width=300&quality=85&auto=format&fit=max&s=347169b42230389434965887d44797e0',
-				'460': 'https://i.guim.co.uk/img/media/392513fa0f1a7c3e1713da3c2132bb6eaccba592/688_0_6880_5504/master/6880.jpg?width=460&quality=85&auto=format&fit=max&s=ab347f104b7f49489f2127d8462d3e2c',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2025-07-29T22:25:43.000Z',
-			headline:
-				'1000 Men and Me: The Bonnie Blue Story review – the troubling tale of sex with 1,057 men in 12 hours',
-			shortUrl: 'https://www.theguardian.com/p/x2p5fv',
-			starRating: 3,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/x2p5fv',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2025/jul/29/kamikaze-an-untold-history-review-a-bewilderingly-brutal-act-of-collective-desperation-recalled',
-			linkText:
-				'Kamikaze: An Untold History review – a bewilderingly brutal act of collective desperation recalled',
-			showByline: false,
-			byline: 'Jack Seale',
-			masterImage:
-				'https://media.guim.co.uk/53b6022312c5db95720dba02a4a4110385eb2541/846_0_3277_2623/master/3277.jpg',
-			image: 'https://i.guim.co.uk/img/media/53b6022312c5db95720dba02a4a4110385eb2541/846_0_3277_2623/master/3277.jpg?width=300&quality=85&auto=format&fit=max&s=957797173aeec8edf59be0d340084f03',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/53b6022312c5db95720dba02a4a4110385eb2541/846_0_3277_2623/master/3277.jpg?width=300&quality=85&auto=format&fit=max&s=957797173aeec8edf59be0d340084f03',
-				'460': 'https://i.guim.co.uk/img/media/53b6022312c5db95720dba02a4a4110385eb2541/846_0_3277_2623/master/3277.jpg?width=460&quality=85&auto=format&fit=max&s=7e8f359aa970faf01f5f7cec02e3b008',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2025-07-29T08:05:37.000Z',
-			headline:
-				'Kamikaze: An Untold History review – a bewilderingly brutal act of collective desperation recalled',
-			shortUrl: 'https://www.theguardian.com/p/x2zqhv',
-			starRating: 3,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/x2zqhv',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2025/jul/27/operation-dark-phone-by-text-review-do-we-really-need-to-see-these-criminals-on-the-toilet',
-			linkText:
-				'Operation Dark Phone: Murder by Text review – do we really need to see these criminals on the toilet?',
-			showByline: false,
-			byline: 'Hannah J Davies',
-			masterImage:
-				'https://media.guim.co.uk/198477cf25640a8b130977298dabb1e6ce628199/285_0_1350_1080/master/1350.jpg',
-			image: 'https://i.guim.co.uk/img/media/198477cf25640a8b130977298dabb1e6ce628199/285_0_1350_1080/master/1350.jpg?width=300&quality=85&auto=format&fit=max&s=1aceeeda35b3410c3343e1084d8f7dd8',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/198477cf25640a8b130977298dabb1e6ce628199/285_0_1350_1080/master/1350.jpg?width=300&quality=85&auto=format&fit=max&s=1aceeeda35b3410c3343e1084d8f7dd8',
-				'460': 'https://i.guim.co.uk/img/media/198477cf25640a8b130977298dabb1e6ce628199/285_0_1350_1080/master/1350.jpg?width=460&quality=85&auto=format&fit=max&s=82da451b1bf58359299c92456cecd3fd',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2025-07-27T21:10:31.000Z',
-			headline:
-				'Operation Dark Phone: Murder by Text review – do we really need to see these criminals on the toilet?',
-			shortUrl: 'https://www.theguardian.com/p/x2nptp',
-			starRating: 3,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/x2nptp',
 			},
 		},
 	],

@@ -97,7 +97,7 @@ export const GalleryLabs: FEArticle = {
 					},
 				],
 			},
-			elementId: 'f46006e0-15d1-4a5e-8c98-8b26503b3878',
+			elementId: '2fbf0173-6525-4bbc-8d4f-9778dd9171dc',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -368,7 +368,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: '7da83b50-9e93-462d-8bfb-6b1f7f7a0dbb',
+					elementId: '92d7e707-5002-42a8-ae8a-48d43739e06c',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -683,7 +683,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: '17a330c9-528d-4e9b-8b27-daa5742ce4eb',
+					elementId: '3f08ddf3-1d72-4f37-b2cc-c309125637d9',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -998,7 +998,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: '8ee69d8b-de3e-4eb4-a3d2-be4906f3da88',
+					elementId: '6a5efa3e-d3e8-4cfe-9ade-e8ff90dfe604',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -1313,7 +1313,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: 'c7505fa1-c16b-4a28-906a-8b962d1688f0',
+					elementId: '6b6f3735-d030-4a88-a3bc-04de1c5cc843',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -1628,7 +1628,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: 'f793fa77-1a3d-4fd7-87bc-ceb0ecec7e68',
+					elementId: 'ba3379bb-da21-4110-8774-908610045faf',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -1943,7 +1943,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: '83a8026f-efec-4cfb-a8f7-ea75aa220847',
+					elementId: 'ed6b7836-9014-4160-a528-cfd647040879',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2258,7 +2258,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: '61faf7fc-333e-477f-826a-f1d947074a7e',
+					elementId: 'cbcf8909-6976-4c78-8472-5463522b2640',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2573,7 +2573,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: 'fa308558-3090-43bd-98c2-c91da525d949',
+					elementId: '8d7f2a76-ad26-4a51-8bad-f9a1140518f9',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2888,7 +2888,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: '71b63f38-3762-4a47-a0b4-45b0398e1e6b',
+					elementId: 'cea85493-8421-485a-81b9-7251844603a8',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -3197,7 +3197,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: 'a8fa69cc-2aa1-4d0c-bd96-daec7b7297a5',
+					elementId: '2436e4d0-b7b8-4953-a212-793e1c2558f6',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -3512,7 +3512,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: '53c75e2c-8e73-4b5c-8204-fdfe08494621',
+					elementId: '465dfe0c-284b-4ba9-a193-15104b529dd4',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -3827,7 +3827,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: '1aaecb43-45e9-4672-9fd9-94b563431440',
+					elementId: 'f90b1609-d7e4-426d-a6a0-63e95e44cc8b',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -4818,7 +4818,7 @@ export const GalleryLabs: FEArticle = {
 				},
 			],
 		},
-		elementId: 'ce8d6060-662e-4d98-88d2-b6c84b2d3e95',
+		elementId: '30ed45cf-3759-4dae-8590-36cfde06bf61',
 		imageSources: [],
 		data: {
 			copyright: '',

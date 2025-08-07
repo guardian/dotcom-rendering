@@ -16,202 +16,41 @@ import type { FEFootballMatchListPage } from '../../src/frontend/feFootballMatch
 export const footballData: FEFootballMatchListPage = {
 	matchesList: [
 		{
-			date: '2025-08-05',
+			date: '2025-08-07',
 			competitionMatches: [
 				{
 					competitionSummary: {
-						id: '301',
-						url: '/football/carabao-cup',
-						fullName: 'Carabao Cup',
+						id: '102',
+						url: '/football/leagueonefootball',
+						fullName: 'League One',
 						nation: 'English',
-						tableDividers: [],
+						tableDividers: [2, 6, 20],
 					},
 					matches: [
 						{
-							id: '4512334',
-							date: '2025-08-05T19:45:00+01:00[Europe/London]',
-							competition: {
-								id: '301',
-								name: 'Carabao Cup 25/26',
-							},
+							id: '4508481',
+							date: '2025-08-07T20:00:00+01:00[Europe/London]',
 							stage: {
 								stageNumber: '1',
 							},
 							round: {
 								roundNumber: '1',
-								name: 'Carabao Cup Preliminary Round',
+								name: 'League',
 							},
 							leg: '1',
-							liveMatch: false,
-							result: false,
-							previewAvailable: false,
-							reportAvailable: false,
-							lineupsAvailable: false,
-							matchStatus: '-',
 							homeTeam: {
-								id: '1204',
-								name: 'Accrington',
+								id: '35',
+								name: 'Port Vale',
 							},
 							awayTeam: {
-								id: '32',
-								name: 'Oldham',
+								id: '52',
+								name: 'Cardiff',
 							},
 							venue: {
-								id: '1373',
-								name: 'Wham Stadium',
-							},
-							type: 'MatchDay',
-						},
-					],
-				},
-				{
-					competitionSummary: {
-						id: '501',
-						url: '/football/champions-league-qualifying',
-						fullName: 'Champions League qualifying',
-						nation: 'European',
-						tableDividers: [],
-					},
-					matches: [
-						{
-							id: '4516714',
-							date: '2025-08-05T18:00:00+01:00[Europe/London]',
-							competition: {
-								id: '501',
-								name: 'UEFA Champions League Qualifying 25/26',
-							},
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '5',
-								name: 'Third Round',
-							},
-							leg: '1',
-							liveMatch: false,
-							result: false,
-							previewAvailable: false,
-							reportAvailable: false,
-							lineupsAvailable: false,
-							matchStatus: '-',
-							homeTeam: {
-								id: '26237',
-								name: 'Malmo FF',
-							},
-							awayTeam: {
-								id: '26412',
-								name: 'Copenhagen',
-							},
-							venue: {
-								id: '1361',
-								name: 'Eleda Stadion',
-							},
-							type: 'MatchDay',
-						},
-						{
-							id: '4516568',
-							date: '2025-08-05T19:00:00+01:00[Europe/London]',
-							competition: {
-								id: '501',
-								name: 'UEFA Champions League Qualifying 25/26',
-							},
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '5',
-								name: 'Third Round',
-							},
-							leg: '1',
-							liveMatch: false,
-							result: false,
-							previewAvailable: false,
-							reportAvailable: false,
-							lineupsAvailable: false,
-							matchStatus: '-',
-							homeTeam: {
-								id: '7012',
-								name: 'Dynamo Kyiv',
-							},
-							awayTeam: {
-								id: '43481',
-								name: 'AE Pafos',
-							},
-							venue: {
-								id: '2021',
-								name: 'NSC Olimpiyskiy',
-							},
-							type: 'MatchDay',
-						},
-						{
-							id: '4516574',
-							date: '2025-08-05T19:00:00+01:00[Europe/London]',
-							competition: {
-								id: '501',
-								name: 'UEFA Champions League Qualifying 25/26',
-							},
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '5',
-								name: 'Third Round',
-							},
-							leg: '1',
-							liveMatch: false,
-							result: false,
-							previewAvailable: false,
-							reportAvailable: false,
-							lineupsAvailable: false,
-							matchStatus: '-',
-							homeTeam: {
-								id: '49779',
-								name: 'Shkendija',
-							},
-							awayTeam: {
-								id: '43545',
-								name: 'Qarabag FK',
-							},
-							venue: {
-								id: '7184',
-								name: 'City Stadium Tetovo',
-							},
-							type: 'MatchDay',
-						},
-						{
-							id: '4516572',
-							date: '2025-08-05T19:45:00+01:00[Europe/London]',
-							competition: {
-								id: '501',
-								name: 'UEFA Champions League Qualifying 25/26',
-							},
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '5',
-								name: 'Third Round',
-							},
-							leg: '1',
-							liveMatch: false,
-							result: false,
-							previewAvailable: false,
-							reportAvailable: false,
-							lineupsAvailable: false,
-							matchStatus: '-',
-							homeTeam: {
 								id: '101',
-								name: 'Rangers',
+								name: 'Vale Park',
 							},
-							awayTeam: {
-								id: '38336',
-								name: 'Viktoria',
-							},
-							venue: {
-								id: '7918',
-								name: 'Ibrox Stadium',
-							},
-							type: 'MatchDay',
+							type: 'Fixture',
 						},
 					],
 				},
@@ -221,14 +60,8 @@ export const footballData: FEFootballMatchListPage = {
 	filters: {
 		English: [
 			{
-				name: 'Carabao Cup',
-				url: '/football/carabao-cup/live',
-			},
-		],
-		European: [
-			{
-				name: 'Champions League qualifying',
-				url: '/football/champions-league-qualifying/live',
+				name: 'League One',
+				url: '/football/leagueonefootball/live',
 			},
 		],
 	},
@@ -1150,6 +983,7 @@ export const footballData: FEFootballMatchListPage = {
 			prebidBidCache: true,
 		},
 		abTests: {},
+		serverSideABTests: {},
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		stage: 'PROD',
 		frontendAssetsFullURL: 'https://assets.guim.co.uk/',
@@ -1169,7 +1003,7 @@ export const footballData: FEFootballMatchListPage = {
 		forecastsapiurl: '/weatherapi/forecast',
 		supportUrl: 'https://support.theguardian.com',
 		commercialBundleUrl:
-			'https://assets.guim.co.uk/commercial/b46e5e342ee9d3f9e36a/graun.standalone.commercial.js',
+			'https://assets.guim.co.uk/commercial/d05ba48ca72061c05d80/graun.standalone.commercial.js',
 		idOAuthUrl: 'https://oauth.theguardian.com',
 		webTitle: 'Live matches',
 		isFront: false,
@@ -1248,7 +1082,6 @@ export const footballData: FEFootballMatchListPage = {
 		calloutsUrl:
 			'https://callouts.guardianapis.com/formstack-campaign/submit',
 		isPreview: false,
-		serverSideABTests: {},
 	},
 	pageFooter: {
 		footerLinks: [
