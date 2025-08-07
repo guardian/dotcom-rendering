@@ -6,9 +6,6 @@ import {
 } from '@guardian/source/foundations';
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
-import { Carousel } from '../components/Carousel.importable';
-import { useConfig } from '../components/ConfigContext';
-import { ContainerOverrides } from '../components/ContainerOverrides';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
 import { EditionSwitcherBanner } from '../components/EditionSwitcherBanner.importable';
@@ -113,8 +110,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		},
 		editionId,
 	} = front;
-
-	const { renderingTarget } = useConfig();
 
 	const renderAds = canRenderAds(front);
 
