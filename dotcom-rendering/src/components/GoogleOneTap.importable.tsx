@@ -14,7 +14,7 @@ type CredentialsProvider = {
 	get: (options: {
 		mediation: 'required';
 		identity: {
-			context: 'signin';
+			context: 'continue';
 			providers: IdentityProviderConfig[];
 		};
 	}) => Promise<{ token: string }>;
@@ -85,7 +85,17 @@ const getProviders = (stage: StageType): IdentityProviderConfig[] => {
 	}
 };
 
-export const initializeFedCM = async (): Promise<void> => {
+export const initializeFedCM = async ({
+	isSignedIn,
+	isInTest,
+}: {
+	isSignedIn?: boolean;
+	isInTest?: boolean;
+}): Promise<void> => {
+	// Only initialize Google One Tap if the user is in the AB test. Currently 0% of users are in the test.
+	if (!isInTest) return;
+	if (isSignedIn) return;
+
 	/**
 	 * Firefox does not support the FedCM API at the time of writting,
 	 * and it seems like it will not support it in the near future.
@@ -125,7 +135,7 @@ export const initializeFedCM = async (): Promise<void> => {
 			 */
 			mediation: 'required',
 			identity: {
-				context: 'signin',
+				context: 'continue',
 				providers: getProviders(stage),
 			},
 		})
@@ -174,17 +184,20 @@ export const GoogleOneTap = () => {
 	// We don't care what consent we get, we just want to make sure Google One Tap is not shown above the consent banner.
 	// TODO: FedCM doesn't require cookies? Do we need to check consent?
 	const consent = useConsent();
-	const isSignedIn = useIsSignedIn() === true;
+	const isSignedIn = useIsSignedIn();
+	// useIsSignedIn returns 'Pending' until the auth status is known.
+	// We don't want to initialize FedCM until we know the auth status, so we pass `undefined` to `useOnce` if it is 'Pending'
+	// to stop it from initializing.
+	const isSignedInWithoutPending =
+		isSignedIn !== 'Pending' ? isSignedIn : undefined;
 	const isInTest = useAB()?.api.isUserInVariant('GoogleOneTap', 'variant');
 
 	useOnce(() => {
-		// Only initialize Google One Tap if the user is in the AB test. Currently 0% of users are in the test.
-		if (!isInTest) return;
-		if (!isSignedIn) return;
-
-		log('identity', 'Initializing FedCM');
-		void initializeFedCM();
-	}, [isSignedIn, isInTest, consent]);
+		void initializeFedCM({
+			isSignedIn: isSignedInWithoutPending,
+			isInTest,
+		});
+	}, [isSignedInWithoutPending, isInTest, consent]);
 
 	return <></>;
 };
