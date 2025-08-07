@@ -5,35 +5,16 @@ import type { Handler } from 'express';
 const isStringTuple = (_: [string, unknown]): _ is [string, string] =>
 	typeof _[1] === 'string';
 
-const allowedOrigins = [
-	'https://www.theguardian.com',
-	'https://m.code.dev-theguardian.com',
-	'https://m.thegulocal.com',
-	'http://localhost:9000',
-];
-
 /**
  * Get DCR content from a `theguardian.com` URL.
  * Takes in optional `X-Gu-*` headers to send.
- * Returns the parsed JSON config and any cookies set by the request.
  */
 async function getContentFromURL(
 	url: URL,
 	_headers: IncomingHttpHeaders,
-): Promise<{ config: unknown; cookies: string[] }> {
+): Promise<unknown> {
 	// searchParams will only work for the first set of query params because 'url' is already a query param itself
 	const searchparams = url.searchParams.toString();
-
-	// Prevent requests to unknown origins
-	if (!allowedOrigins.includes(url.origin)) {
-		throw new Error(
-			`Origin ${
-				url.origin
-			} is not allowed. Allowed origins are: ${allowedOrigins.join(
-				', ',
-			)}`,
-		);
-	}
 
 	// Reconstruct the parsed url adding .json?dcr which we need to force dcr to return json
 	const jsonUrl = `${url.origin}${url.pathname}.json?dcr=true&${searchparams}`;
@@ -49,13 +30,10 @@ async function getContentFromURL(
 			.filter(isStringTuple),
 	);
 
-	const { cookies, json } = await fetch(jsonUrl, { headers })
-		.then(async (response) => {
-			return {
-				json: (await response.json()) as unknown,
-				cookies: response.headers.getSetCookie(),
-			};
-		})
+	// pick all the keys from the JSON except `html`
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- we don't want `html` in the config
+	const { html, ...config } = await fetch(jsonUrl, { headers })
+		.then((response) => response.json())
 		.catch((error) => {
 			if (isObject(error) && error.type === 'invalid-json') {
 				throw new Error(
@@ -65,11 +43,7 @@ async function getContentFromURL(
 			throw error;
 		});
 
-	// pick all the keys from the JSON except `html`
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- we don't want `html` in the config
-	const { html, ...config } = json as Record<string, unknown>;
-
-	return { config, cookies };
+	return config;
 }
 
 /**
@@ -91,14 +65,8 @@ export const getContentFromURLMiddleware: Handler = async (req, res, next) => {
 			const url = new URL(
 				'https://www.theguardian.com/crosswords/digital-edition',
 			);
-			const { config, cookies } = await getContentFromURL(
-				url,
-				req.headers,
-			);
-			req.body = config;
-			for (const cookie of cookies) {
-				res.append('Set-Cookie', cookie);
-			}
+			const content = await getContentFromURL(url, req.headers);
+			req.body = content;
 			next();
 		} catch (error) {
 			console.error(error);
@@ -120,14 +88,7 @@ export const getContentFromURLMiddleware: Handler = async (req, res, next) => {
 			}
 
 			try {
-				const { config, cookies } = await getContentFromURL(
-					sourceURL,
-					req.headers,
-				);
-				req.body = config;
-				for (const cookie of cookies) {
-					res.append('Set-Cookie', cookie);
-				}
+				req.body = await getContentFromURL(sourceURL, req.headers);
 			} catch (error) {
 				console.error(error);
 				next(error);
