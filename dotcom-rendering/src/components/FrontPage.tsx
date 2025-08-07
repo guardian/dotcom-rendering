@@ -12,6 +12,7 @@ import { BrazeMessaging } from './BrazeMessaging.importable';
 import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
 import { FocusStyles } from './FocusStyles.importable';
+import { GoogleOneTap } from './GoogleOneTap.importable';
 import { Island } from './Island';
 import { Metrics } from './Metrics.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
@@ -19,7 +20,6 @@ import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
 import { ShowHideContainers } from './ShowHideContainers.importable';
 import { SkipTo } from './SkipTo';
-import { GoogleOneTap } from './GoogleOneTap.importable';
 
 type Props = {
 	front: Front;
