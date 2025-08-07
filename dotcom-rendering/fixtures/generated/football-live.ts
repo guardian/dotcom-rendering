@@ -16,20 +16,20 @@ import type { FEFootballMatchListPage } from '../../src/frontend/feFootballMatch
 export const footballData: FEFootballMatchListPage = {
 	matchesList: [
 		{
-			date: '2025-08-07',
+			date: '2025-04-28',
 			competitionMatches: [
 				{
 					competitionSummary: {
-						id: '102',
-						url: '/football/leagueonefootball',
-						fullName: 'League One',
-						nation: 'English',
-						tableDividers: [2, 6, 20],
+						id: '635',
+						url: '/football/serieafootball',
+						fullName: 'Serie A',
+						nation: 'European',
+						tableDividers: [4, 6, 17],
 					},
 					matches: [
 						{
-							id: '4508481',
-							date: '2025-08-07T20:00:00+01:00[Europe/London]',
+							id: '4496403',
+							date: '2025-04-28T17:30:00+01:00[Europe/London]',
 							stage: {
 								stageNumber: '1',
 							},
@@ -39,16 +39,102 @@ export const footballData: FEFootballMatchListPage = {
 							},
 							leg: '1',
 							homeTeam: {
-								id: '35',
-								name: 'Port Vale',
+								id: '26360',
+								name: 'Udinese',
 							},
 							awayTeam: {
-								id: '52',
-								name: 'Cardiff',
+								id: '26371',
+								name: 'Bologna',
 							},
 							venue: {
-								id: '101',
-								name: 'Vale Park',
+								id: '503',
+								name: 'Stadio Friuli',
+							},
+							type: 'Fixture',
+						},
+						{
+							id: '4496764',
+							date: '2025-04-28T19:45:00+01:00[Europe/London]',
+							stage: {
+								stageNumber: '1',
+							},
+							round: {
+								roundNumber: '1',
+								name: 'League',
+							},
+							leg: '1',
+							homeTeam: {
+								id: '26362',
+								name: 'Lazio',
+							},
+							awayTeam: {
+								id: '26358',
+								name: 'Parma',
+							},
+							venue: {
+								id: '7617',
+								name: 'Stadio Olimpico',
+							},
+							type: 'Fixture',
+						},
+						{
+							id: '4496404',
+							date: '2025-04-28T19:45:00+01:00[Europe/London]',
+							stage: {
+								stageNumber: '1',
+							},
+							round: {
+								roundNumber: '1',
+								name: 'League',
+							},
+							leg: '1',
+							homeTeam: {
+								id: '27648',
+								name: 'Verona',
+							},
+							awayTeam: {
+								id: '26474',
+								name: 'Cagliari',
+							},
+							venue: {
+								id: '963',
+								name: 'Marcantonio Bentegodi',
+							},
+							type: 'Fixture',
+						},
+					],
+				},
+				{
+					competitionSummary: {
+						id: '101',
+						url: '/football/championship',
+						fullName: 'Championship',
+						nation: 'English',
+						tableDividers: [2, 6, 21],
+					},
+					matches: [
+						{
+							id: '4494466',
+							date: '2025-04-28T20:00:00+01:00[Europe/London]',
+							stage: {
+								stageNumber: '1',
+							},
+							round: {
+								roundNumber: '1',
+								name: 'League',
+							},
+							leg: '1',
+							homeTeam: {
+								id: '28',
+								name: 'Leeds',
+							},
+							awayTeam: {
+								id: '49',
+								name: 'Bristol City',
+							},
+							venue: {
+								id: '86',
+								name: 'Elland Road',
 							},
 							type: 'Fixture',
 						},
@@ -60,8 +146,14 @@ export const footballData: FEFootballMatchListPage = {
 	filters: {
 		English: [
 			{
-				name: 'League One',
-				url: '/football/leagueonefootball/live',
+				name: 'Championship',
+				url: '/football/championship/live',
+			},
+		],
+		European: [
+			{
+				name: 'Serie A',
+				url: '/football/serieafootball/live',
 			},
 		],
 	},
@@ -145,7 +237,7 @@ export const footballData: FEFootballMatchListPage = {
 								url: '/world/europe-news',
 							},
 							{
-								title: 'US news',
+								title: 'US',
 								url: '/us-news',
 								longTitle: 'US news',
 							},
@@ -225,11 +317,6 @@ export const footballData: FEFootballMatchListPage = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
-							},
-							{
-								title: 'Euro 2025',
-								url: '/football/women-s-euro-2025',
-								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -404,11 +491,6 @@ export const footballData: FEFootballMatchListPage = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
-							},
-							{
-								title: 'Euro 2025',
-								url: '/football/women-s-euro-2025',
-								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -696,10 +778,6 @@ export const footballData: FEFootballMatchListPage = {
 				title: 'Corrections',
 				url: '/theguardian/series/corrections-and-clarifications',
 			},
-			{
-				title: 'Tips',
-				url: 'https://www.theguardian.com/tips',
-			},
 		],
 		brandExtensions: [
 			{
@@ -776,11 +854,6 @@ export const footballData: FEFootballMatchListPage = {
 						url: '/football/teams',
 						longTitle: 'football/teams',
 					},
-					{
-						title: 'Euro 2025',
-						url: '/football/women-s-euro-2025',
-						longTitle: 'football/women-s-euro-2025',
-					},
 				],
 			},
 			links: [
@@ -813,11 +886,6 @@ export const footballData: FEFootballMatchListPage = {
 					title: 'Clubs',
 					url: '/football/teams',
 					longTitle: 'football/teams',
-				},
-				{
-					title: 'Euro 2025',
-					url: '/football/women-s-euro-2025',
-					longTitle: 'football/women-s-euro-2025',
 				},
 			],
 		},
@@ -890,7 +958,6 @@ export const footballData: FEFootballMatchListPage = {
 			adaptiveSite: true,
 			prebidPermutiveAudience: true,
 			compareVariantDecision: false,
-			abPrebidAdUnit: false,
 			enableSentryReporting: true,
 			lazyLoadContainers: true,
 			ampArticleSwitch: false,
@@ -901,15 +968,16 @@ export const footballData: FEFootballMatchListPage = {
 			darkModeWeb: true,
 			targeting: true,
 			remoteHeader: true,
-			ampPrebidOzone: false,
 			slotBodyEnd: true,
+			ampPrebidOzone: false,
+			extendedMostPopularFronts: true,
 			emailInlineInFooter: true,
 			showNewPrivacyWordingOnEmailSignupEmbeds: true,
 			prebidAnalytics: true,
 			extendedMostPopular: true,
 			ampContentAbTesting: false,
 			prebidCriteo: true,
-			noBoosts: true,
+			abPrebidMultibid: true,
 			imrWorldwide: true,
 			acast: true,
 			twitterUwt: true,
@@ -918,6 +986,7 @@ export const footballData: FEFootballMatchListPage = {
 			ampPrebidPubmatic: false,
 			a9HeaderBidding: true,
 			prebidAppnexus: true,
+			europeBetaFrontTest2: true,
 			enableDiscussionSwitch: true,
 			prebidXaxis: true,
 			stickyVideos: true,
@@ -925,7 +994,6 @@ export const footballData: FEFootballMatchListPage = {
 			discussionAllPageSize: true,
 			prebidUserSync: true,
 			audioOnwardJourneySwitch: true,
-			dcrJavascriptBundle: false,
 			brazeTaylorReport: false,
 			callouts: true,
 			sentinelLogger: true,
@@ -937,12 +1005,12 @@ export const footballData: FEFootballMatchListPage = {
 			ampLiveblogSwitch: false,
 			ampAmazon: false,
 			mostViewedFronts: true,
+			abA9BidResponseWinner: true,
 			optOutAdvertising: true,
 			abSignInGateMainControl: true,
 			googleSearch: true,
 			brazeSwitch: true,
 			prebidKargo: true,
-			abAdmiralAdblockRecovery: true,
 			consentManagement: true,
 			idProfileNavigation: true,
 			confiantAdVerification: true,
@@ -958,7 +1026,6 @@ export const footballData: FEFootballMatchListPage = {
 			liveBlogTopSponsorship: true,
 			lineItemJobs: true,
 			ophan: true,
-			abGoogleOneTap: false,
 			crosswordSvgThumbnails: true,
 			prebidTriplelift: true,
 			prebidPubmatic: true,
@@ -967,12 +1034,10 @@ export const footballData: FEFootballMatchListPage = {
 			enhanceTweets: true,
 			prebidIndexExchange: true,
 			prebidOpenx: true,
-			loopingVideo: true,
 			prebidHeaderBidding: true,
 			idCookieRefresh: true,
 			discussionPageSize: true,
 			smartAppBanner: false,
-			topAboveNav250Reservation: true,
 			historyTags: true,
 			brazeContentCards: true,
 			remoteBanner: true,
@@ -980,16 +1045,19 @@ export const footballData: FEFootballMatchListPage = {
 			prebidSmart: true,
 			shouldLoadGoogletag: true,
 			inizio: true,
+			europeBetaFront: true,
 			prebidBidCache: true,
 		},
-		abTests: {},
+		abTests: {
+			europeBetaFrontTest2Variant: 'variant',
+		},
 		serverSideABTests: {},
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		stage: 'PROD',
 		frontendAssetsFullURL: 'https://assets.guim.co.uk/',
 		ampIframeUrl:
 			'https://assets.guim.co.uk/data/vendor/2533d5cb94302889e6a8f1b24b5329e7/amp-iframe.html',
-		googleRecaptchaSiteKey: '6Le7mFsrAAAAAD07aRCTHZe9u0EfvOiNe8Y0DMMV',
+		googleRecaptchaSiteKey: '6LdzlmsdAAAAALFH63cBVagSFPuuHXQ9OfpIDdMc',
 		fbAppId: '180444840287',
 		facebookIaAdUnitRoot: 'facebook-instant-articles',
 		locationapiurl: '/weatherapi/locations?query=',
@@ -1003,7 +1071,7 @@ export const footballData: FEFootballMatchListPage = {
 		forecastsapiurl: '/weatherapi/forecast',
 		supportUrl: 'https://support.theguardian.com',
 		commercialBundleUrl:
-			'https://assets.guim.co.uk/commercial/d05ba48ca72061c05d80/graun.standalone.commercial.js',
+			'https://assets.guim.co.uk/commercial/3047aee80994211e1b89/graun.standalone.commercial.js',
 		idOAuthUrl: 'https://oauth.theguardian.com',
 		webTitle: 'Live matches',
 		isFront: false,
@@ -1226,18 +1294,6 @@ export const footballData: FEFootballMatchListPage = {
 					text: 'Patrons',
 					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
 					dataLinkName: 'uk : footer : patrons',
-					extraClasses: '',
-				},
-				{
-					text: 'Tips',
-					url: 'https://www.theguardian.com/tips',
-					dataLinkName: 'uk : footer : tips',
-					extraClasses: '',
-				},
-				{
-					text: 'Accessibility settings',
-					url: '/help/accessibility-help',
-					dataLinkName: 'accessibility settings',
 					extraClasses: '',
 				},
 			],
