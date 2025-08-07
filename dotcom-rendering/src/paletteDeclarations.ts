@@ -6096,6 +6096,20 @@ const featureCardKickerText: PaletteFunction = ({ theme }) => {
 			return pillarPalette(theme, 600);
 	}
 };
+const featureCardQuoteIcon: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.neutral[86];
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(theme, 600);
+	}
+};
 
 const pillText: PaletteFunction = () => sourcePalette.neutral[100];
 const pillBackground: PaletteFunction = () =>
@@ -6899,6 +6913,10 @@ const paletteColours = {
 	'--feature-card-kicker-text': {
 		light: featureCardKickerText,
 		dark: featureCardKickerText,
+	},
+	'--feature-card-quote-icon': {
+		light: featureCardQuoteIcon,
+		dark: featureCardQuoteIcon,
 	},
 	'--feature-card-trail-text': {
 		light: () => sourcePalette.neutral[86],

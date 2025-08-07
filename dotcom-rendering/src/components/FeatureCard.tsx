@@ -607,6 +607,9 @@ export const FeatureCard = ({
 												kickerColour={palette(
 													'--feature-card-kicker-text',
 												)}
+												quoteColour={palette(
+													'--feature-card-quote-icon',
+												)}
 											/>
 										</div>
 
