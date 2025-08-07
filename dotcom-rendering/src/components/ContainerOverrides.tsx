@@ -30,8 +30,6 @@ const cardHeadlineLight: ContainerFunction = (
 			return sourcePalette.specialReportAlt[100];
 		case 'Branded':
 			return sourcePalette.neutral[20];
-		case 'MediaPalette':
-			return sourcePalette.neutral[100];
 	}
 };
 const cardHeadlineDark: ContainerFunction = (
@@ -58,8 +56,6 @@ const cardHeadlineDark: ContainerFunction = (
 			return sourcePalette.specialReportAlt[700];
 		case 'Branded':
 			return sourcePalette.neutral[86];
-		case 'MediaPalette':
-			return sourcePalette.neutral[100];
 	}
 };
 
@@ -87,8 +83,6 @@ const cardTrailTextLight: ContainerFunction = (
 			return sourcePalette.specialReportAlt[100];
 		case 'Branded':
 			return sourcePalette.neutral[20];
-		case 'MediaPalette':
-			return sourcePalette.neutral[100];
 	}
 };
 const cardTrailTextDark: ContainerFunction = (
@@ -115,8 +109,6 @@ const cardTrailTextDark: ContainerFunction = (
 			return sourcePalette.specialReportAlt[700];
 		case 'Branded':
 			return sourcePalette.neutral[86];
-		case 'MediaPalette':
-			return sourcePalette.neutral[100];
 	}
 };
 
@@ -142,8 +134,6 @@ const cardKickerTextLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.specialReportAlt[100];
 		case 'Branded':
 			return sourcePalette.labs[200];
-		case 'MediaPalette':
-			return sourcePalette.neutral[7];
 	}
 };
 
@@ -169,8 +159,6 @@ const cardKickerTextDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.specialReportAlt[700];
 		case 'Branded':
 			return sourcePalette.labs[400];
-		case 'MediaPalette':
-			return sourcePalette.neutral[7];
 	}
 };
 
@@ -196,8 +184,6 @@ const kickerTextLiveLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.specialReportAlt[700];
 		case 'Branded':
 			return sourcePalette.neutral[97];
-		case 'MediaPalette':
-			return 'inherit';
 	}
 };
 
@@ -223,8 +209,6 @@ const kickerTextLiveDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.specialReportAlt[100];
 		case 'Branded':
 			return sourcePalette.neutral[20];
-		case 'MediaPalette':
-			return 'inherit';
 	}
 };
 
@@ -250,8 +234,6 @@ const kickerBackgroundLiveLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.specialReportAlt[100];
 		case 'Branded':
 			return sourcePalette.labs[200];
-		case 'MediaPalette':
-			return sourcePalette.neutral[7];
 	}
 };
 const kickerBackgroundLiveDark: ContainerFunction = (containerPalette) => {
@@ -276,8 +258,6 @@ const kickerBackgroundLiveDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.specialReportAlt[700];
 		case 'Branded':
 			return sourcePalette.labs[400];
-		case 'MediaPalette':
-			return sourcePalette.neutral[7];
 	}
 };
 
@@ -303,8 +283,6 @@ const sectionToggleButtonLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[60];
 		case 'Branded':
 			return sourcePalette.neutral[7];
-		case 'MediaPalette':
-			return sourcePalette.neutral[46];
 	}
 };
 const sectionToggleButtonDark: ContainerFunction = (containerPalette) => {
@@ -329,8 +307,6 @@ const sectionToggleButtonDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[60];
 		case 'Branded':
 			return sourcePalette.neutral[7];
-		case 'MediaPalette':
-			return sourcePalette.neutral[46];
 	}
 };
 const sectionToggleButtonHoverLight: ContainerFunction = (containerPalette) => {
@@ -355,8 +331,6 @@ const sectionToggleButtonHoverLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[93];
 		case 'Branded':
 			return sourcePalette.neutral[20];
-		case 'MediaPalette':
-			return sourcePalette.neutral[7];
 	}
 };
 const sectionToggleButtonHoverDark: ContainerFunction = (containerPalette) => {
@@ -380,8 +354,6 @@ const sectionToggleButtonHoverDark: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return 'inherit';
 		case 'Branded':
-			return 'inherit';
-		case 'MediaPalette':
 			return 'inherit';
 	}
 };
@@ -407,8 +379,6 @@ const cardBorderTopLight: ContainerFunction = (containerPalette) => {
 			return transparentColour(sourcePalette.neutral[46], 0.3);
 		case 'Branded':
 			return sourcePalette.neutral[73];
-		case 'MediaPalette':
-			return sourcePalette.neutral[46];
 	}
 };
 
@@ -432,8 +402,6 @@ const cardBorderTopDark: ContainerFunction = (containerPalette) => {
 			return transparentColour(sourcePalette.neutral[46], 0.3);
 		case 'Branded':
 			return sourcePalette.neutral[60];
-		case 'MediaPalette':
-			return sourcePalette.neutral[46];
 	}
 };
 
@@ -466,8 +434,6 @@ const articleBorderLight: ContainerFunction = (containerPalette) => {
 			return transparentColour(sourcePalette.neutral[46], 0.3);
 		case 'Branded':
 			return sourcePalette.neutral[73];
-		case 'MediaPalette':
-			return sourcePalette.neutral[46];
 	}
 };
 
@@ -490,8 +456,6 @@ const articleBorderDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[38];
 		case 'Branded':
 			return sourcePalette.neutral[38];
-		case 'MediaPalette':
-			return sourcePalette.neutral[46];
 	}
 };
 
@@ -517,8 +481,6 @@ const cardBackgroundLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.specialReportAlt[800];
 		case 'Branded':
 			return palette('--section-background');
-		case 'MediaPalette':
-			return sourcePalette.neutral[0];
 	}
 };
 
@@ -536,8 +498,6 @@ const cardBackgroundDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.specialReportAlt[100];
 		case 'Branded':
 			return palette('--section-background');
-		case 'MediaPalette':
-			return sourcePalette.neutral[0];
 		case 'BreakingPalette':
 			return palette('--section-background');
 		case 'SombreAltPalette':
@@ -560,7 +520,6 @@ const cardMediaWaveformLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[46];
 		case 'LongRunningPalette':
 		case 'EventPalette':
-		case 'MediaPalette':
 		case 'Branded':
 			return sourcePalette.neutral[86];
 		case 'LongRunningAltPalette':
@@ -582,7 +541,6 @@ const cardMediaWaveformDark: ContainerFunction = (containerPalette) => {
 		case 'SombreAltPalette':
 		case 'EventPalette':
 		case 'SpecialReportAltPalette':
-		case 'MediaPalette':
 		case 'Branded':
 			return sourcePalette.neutral[38];
 		case 'LongRunningPalette':
@@ -616,8 +574,6 @@ const sectionBackgroundLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.specialReportAlt[800];
 		case 'Branded':
 			return sourcePalette.neutral[93];
-		case 'MediaPalette':
-			return 'transparent';
 	}
 };
 
@@ -642,8 +598,6 @@ const sectionBackgroundDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.specialReportAlt[100];
 		case 'Branded':
 			return sourcePalette.neutral[20];
-		case 'MediaPalette':
-			return sectionBackgroundLight(containerPalette);
 	}
 };
 
@@ -660,7 +614,6 @@ const sectionBackgroundLeftLight: ContainerFunction = (containerPalette) => {
 		case 'LongRunningAltPalette':
 		case 'SombreAltPalette':
 		case 'SpecialReportAltPalette':
-		case 'MediaPalette':
 			return palette('--section-background');
 	}
 };
@@ -678,7 +631,6 @@ const sectionBackgroundLeftDark: ContainerFunction = (containerPalette) => {
 		case 'LongRunningAltPalette':
 		case 'SombreAltPalette':
 		case 'SpecialReportAltPalette':
-		case 'MediaPalette':
 			return palette('--section-background');
 	}
 };
@@ -704,8 +656,6 @@ const cardBorderSupportingLight: ContainerFunction = (containerPalette) => {
 			return transparentColour(sourcePalette.neutral[46], 0.3);
 		case 'Branded':
 			return sourcePalette.neutral[73];
-		case 'MediaPalette':
-			return sourcePalette.neutral[46];
 	}
 };
 const cardBorderSupportingDark: ContainerFunction = (containerPalette) => {
@@ -728,8 +678,6 @@ const cardBorderSupportingDark: ContainerFunction = (containerPalette) => {
 			return transparentColour(sourcePalette.neutral[46], 0.3);
 		case 'Branded':
 			return sourcePalette.neutral[46];
-		case 'MediaPalette':
-			return sourcePalette.neutral[46];
 	}
 };
 
@@ -750,8 +698,6 @@ const sectionBorderLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.news[600];
 		case 'SpecialReportAltPalette':
 			return transparentColour(sourcePalette.neutral[46], 0.3);
-		case 'MediaPalette':
-			return sourcePalette.neutral[46];
 	}
 };
 const sectionBorderDark: ContainerFunction = (containerPalette) => {
@@ -773,8 +719,6 @@ const sectionBorderDark: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return transparentColour(sourcePalette.neutral[46], 0.3);
 		case 'Branded':
-			return sourcePalette.neutral[46];
-		case 'MediaPalette':
 			return sourcePalette.neutral[46];
 	}
 };
@@ -801,8 +745,6 @@ const sectionDateLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.specialReportAlt[100];
 		case 'Branded':
 			return sourcePalette.neutral[100];
-		case 'MediaPalette':
-			return sourcePalette.neutral[100];
 	}
 };
 
@@ -824,8 +766,6 @@ const sectionDateDark: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[700];
 		case 'Branded':
-			return sourcePalette.neutral[100];
-		case 'MediaPalette':
 			return sourcePalette.neutral[100];
 	}
 };
@@ -853,8 +793,6 @@ const sectionTitleLight: ContainerFunction = (containerPalette) => {
 		// Branded is expected to be used with LabsSection
 		case 'Branded':
 			return sourcePalette.neutral[100];
-		case 'MediaPalette':
-			return sourcePalette.neutral[100];
 	}
 };
 
@@ -880,8 +818,6 @@ const sectionTitleDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.specialReportAlt[700];
 		case 'Branded':
 			return sourcePalette.neutral[97];
-		case 'MediaPalette':
-			return sourcePalette.neutral[100];
 	}
 };
 
@@ -898,7 +834,6 @@ const treatTextLight: ContainerFunction = (containerPalette) => {
 		case 'SombrePalette':
 		case 'BreakingPalette':
 		case 'SpecialReportAltPalette':
-		case 'MediaPalette':
 			return 'inherit';
 	}
 };
@@ -916,64 +851,36 @@ const treatTextDark: ContainerFunction = (containerPalette) => {
 		case 'SombrePalette':
 		case 'BreakingPalette':
 		case 'SpecialReportAltPalette':
-		case 'MediaPalette':
 			return 'inherit';
 	}
 };
 
-const carouselDotLight: ContainerFunction = (containerPalette) => {
-	switch (containerPalette) {
-		case 'MediaPalette':
-			return sourcePalette.neutral[86];
-		default:
-			return sourcePalette.brandAlt[400];
-	}
+const carouselDotLight: ContainerFunction = () => {
+	return sourcePalette.brandAlt[400];
 };
 
-const carouselDotDark: ContainerFunction = (containerPalette) => {
-	switch (containerPalette) {
-		case 'MediaPalette':
-			return carouselDotLight(containerPalette);
-		default:
-			return sourcePalette.brandAlt[400];
-	}
+const carouselDotDark: ContainerFunction = () => {
+	return sourcePalette.brandAlt[400];
 };
 
-const carouselActiveDotLight: ContainerFunction = (containerPalette) => {
-	switch (containerPalette) {
-		case 'MediaPalette':
-			return sourcePalette.brandAlt[400];
-		default:
-			return sourcePalette.news[400];
-	}
+const carouselActiveDotLight: ContainerFunction = () => {
+	return sourcePalette.news[400];
 };
 
-const carouselActiveDotDark: ContainerFunction = (containerPalette) => {
-	switch (containerPalette) {
-		default:
-			return sourcePalette.news[400];
-	}
+const carouselActiveDotDark: ContainerFunction = () => {
+	return sourcePalette.news[400];
 };
 
-const carouselArrow: ContainerFunction = (containerPalette) => {
-	switch (containerPalette) {
-		default:
-			return sourcePalette.neutral[7];
-	}
+const carouselArrow: ContainerFunction = () => {
+	return sourcePalette.neutral[7];
 };
 
-const carouselArrowBackground: ContainerFunction = (containerPalette) => {
-	switch (containerPalette) {
-		default:
-			return sourcePalette.brandAlt[400];
-	}
+const carouselArrowBackground: ContainerFunction = () => {
+	return sourcePalette.brandAlt[400];
 };
 
-const carouselArrowBackgroundHover: ContainerFunction = (containerPalette) => {
-	switch (containerPalette) {
-		default:
-			return sourcePalette.brandAlt[200];
-	}
+const carouselArrowBackgroundHover: ContainerFunction = () => {
+	return sourcePalette.brandAlt[200];
 };
 
 const carouselChevronLight: ContainerFunction = (containerPalette) =>
