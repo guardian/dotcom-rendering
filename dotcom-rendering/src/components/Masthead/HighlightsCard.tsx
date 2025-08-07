@@ -157,6 +157,7 @@ export const HighlightsCard = ({
 						showQuotes={showQuotedHeadline}
 						headlineColour={palette('--highlights-card-headline')}
 						kickerColour={palette('--highlights-card-kicker-text')}
+						quoteColour={palette('--highlights-card-quote-icon')}
 					/>
 
 					{!isUndefined(starRating) && (
