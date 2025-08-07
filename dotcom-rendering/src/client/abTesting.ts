@@ -10,13 +10,13 @@ type ABParticipations = {
  * get client-side AB test state from the cookie
  */
 const getClientParticipations = (): ABParticipations => {
-	const userTestBuckets = getCookie({
+	const clientParticipations = getCookie({
 		name: AB_COOKIE_NAME,
 		shouldMemoize: true,
 	});
 
-	if (userTestBuckets) {
-		return userTestBuckets
+	if (clientParticipations) {
+		return clientParticipations
 			.split(',')
 			.reduce<ABParticipations>((participations, abTestStatus) => {
 				const [testId, groupId] = abTestStatus.split(':');
