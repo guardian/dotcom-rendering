@@ -71,7 +71,7 @@ describe('GoogleOneTap', () => {
 
 		expect(navigatorGet).toHaveBeenCalledWith({
 			identity: {
-				context: 'signin',
+				context: 'continue',
 				providers: [
 					{
 						clientId: '774465807556.apps.googleusercontent.com',
@@ -103,7 +103,7 @@ describe('GoogleOneTap', () => {
 
 		expect(navigatorGet).toHaveBeenCalledWith({
 			identity: {
-				context: 'signin',
+				context: 'continue',
 				providers: [
 					{
 						clientId: '774465807556.apps.googleusercontent.com',
@@ -136,7 +136,7 @@ describe('GoogleOneTap', () => {
 
 		expect(navigatorGet).toHaveBeenCalledWith({
 			identity: {
-				context: 'signin',
+				context: 'continue',
 				providers: [
 					{
 						clientId: '774465807556.apps.googleusercontent.com',
