@@ -946,7 +946,6 @@ export const Card = ({
 												pauseOffscreenVideo={
 													pauseOffscreenVideo
 												}
-												showTextOverlay={false}
 												/*
 												 * TODO: IMPROVE THIS MAPPING
 												 *
