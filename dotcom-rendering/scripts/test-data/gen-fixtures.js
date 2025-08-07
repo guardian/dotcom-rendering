@@ -334,8 +334,6 @@ requests.push(
 			delete json.config.userBenefitsApiUrl;
 			delete json.config.frontendSentryDsn;
 
-			json.config.serverSideABTests = {};
-
 			const footballMatchListPage = validateAsFootballMatchListPage(json);
 
 			// Write the new frontend fixture data
@@ -378,8 +376,6 @@ requests.push(
 			delete json.config.isAdFree;
 			delete json.config.userBenefitsApiUrl;
 			delete json.config.frontendSentryDsn;
-
-			json.config.serverSideABTests = {};
 
 			const cricketMatchData = validateAsCricketMatchPageType(json);
 
