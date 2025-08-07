@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	headlineMedium20,
 	headlineMedium28,
 	headlineMedium34,
 	headlineMedium42,
@@ -106,13 +107,21 @@ export const SignInGateAuxiaV2 = ({
 	return (
 		<div
 			css={modalOverlay}
+			className={dismissStatusLabel}
 			onClick={handleBackdropClick}
 			data-testid="sign-in-gate-modal-overlay"
 		>
 			<div css={modalContainer} data-testid="sign-in-gate-main">
 				<div css={topContainer}>
 					<div css={topBar}>
-						<SvgGuardianLogo textColor="#041F4A" width={96} />
+						<SvgGuardianLogo
+							textColor={
+								isDismissible
+									? palette.brand[300]
+									: palette.neutral[100]
+							}
+							width={96}
+						/>
 
 						{isDismissible && (
 							<button
@@ -302,6 +311,11 @@ const modalContainer = css`
 		flex-direction: row;
 		gap: 0;
 	}
+
+	.non-dismissible & {
+		gap: 0;
+		padding: 0;
+	}
 `;
 
 // --- New Layout Containers ---
@@ -315,10 +329,31 @@ const topContainer = css`
 	}
 
 	${from.desktop} {
+		border-bottom: 0.5px solid ${palette.brand[400]};
+		padding: ${space[4]}px;
+	}
+
+	${from.desktop} {
 		border-bottom: 0;
 		border-right: 0.5px solid ${palette.brand[400]};
 		flex-direction: column-reverse;
 		gap: ${space[8]}px;
+	}
+
+	.non-dismissible & {
+		background: ${palette.brand[400]};
+		padding: ${space[3]}px;
+
+		${from.phablet} {
+			border: 0;
+			padding: ${space[4]}px;
+		}
+
+		${from.desktop} {
+			border: 0;
+			max-width: 470px;
+			padding: ${space[6]}px ${space[4]}px ${space[4]}px ${space[8]}px;
+		}
 	}
 `;
 
@@ -335,6 +370,18 @@ const contentContainer = css`
 		flex-direction: row;
 		gap: ${space[6]}px;
 		padding: ${space[6]}px ${space[10]}px;
+	}
+
+	.non-dismissible & {
+		padding: ${space[3]}px;
+
+		${from.phablet} {
+			padding: ${space[4]}px;
+		}
+
+		${from.desktop} {
+			padding: ${space[6]}px ${space[10]}px;
+		}
 	}
 `;
 
@@ -371,6 +418,9 @@ const headerImage = css`
 		align-self: center;
 		width: 280px;
 	}
+	.non-dismissible & {
+		display: none;
+	}
 `;
 
 const actionsSection = css`
@@ -400,6 +450,15 @@ const signInTopBar = css`
 
 		h2 {
 			${headlineMedium34};
+		}
+	}
+
+	.non-dismissible & {
+		${from.desktop} {
+			h2 {
+				${headlineMedium34};
+				color: ${palette.brand[400]};
+			}
 		}
 	}
 `;
@@ -442,6 +501,21 @@ const subHeadingStyles = css`
 		${headlineMedium42};
 		padding: 0;
 	}
+
+	.non-dismissible & {
+		${headlineMedium20};
+		color: ${palette.neutral[100]};
+
+		${from.phablet} {
+			${headlineMedium28};
+			padding: ${space[1]}px 0 0;
+		}
+
+		${from.desktop} {
+			${headlineMedium42};
+			padding: 0;
+		}
+	}
 `;
 
 const descriptionText = css`
@@ -454,6 +528,10 @@ const descriptionText = css`
 
 	${from.desktop} {
 		${textSans17};
+	}
+
+	.non-dismissible & {
+		color: ${palette.neutral[100]};
 	}
 `;
 

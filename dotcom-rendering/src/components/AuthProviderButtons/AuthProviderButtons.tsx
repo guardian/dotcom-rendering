@@ -13,8 +13,8 @@ import {
 } from '@guardian/source/react-components';
 import React from 'react';
 import { buildUrlWithQueryParams } from '../../lib/routeUtils';
+import type { AuxiaGateVersion } from '../SignInGate/types';
 import type { IsNativeApp, QueryParams } from './types';
-import { AuxiaGateVersion } from '../SignInGate/types';
 
 type AuthButtonProvider = 'social' | 'email';
 

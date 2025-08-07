@@ -268,7 +268,7 @@ export const signInGateSelectorStoryNoTreatment = () => {
 signInGateSelectorStoryNoTreatment.storyName =
 	'sign_in_gate_selector_no_treatment';
 
-export const auxiaV2Modal = () => {
+export const auxiaV2DismissibleModal = () => {
 	const mockUserTreatment: AuxiaAPIResponseDataUserTreatment = {
 		treatmentId: 'test-treatment-id',
 		treatmentTrackingId: 'test-tracking-id',
@@ -314,4 +314,54 @@ export const auxiaV2Modal = () => {
 	);
 };
 
-auxiaV2Modal.storyName = 'sign_in_gate_auxia_v2_modal_dismissable';
+auxiaV2DismissibleModal.storyName = 'sign_in_gate_auxia_v2_modal_dismissible';
+
+export const auxiaV2NonDismissibleModal = () => {
+	const mockUserTreatment: AuxiaAPIResponseDataUserTreatment = {
+		treatmentId: 'test-treatment-id',
+		treatmentTrackingId: 'test-tracking-id',
+		surface: 'test-surface',
+		treatmentContent: JSON.stringify({
+			title: 'Sorry for the interruption. We believe in free, independent journalism for all. Sign in or register to keep reading.',
+			subtitle:
+				"Once you are signed in, we'll bring you back here shortly.",
+			body: '',
+			first_cta_name: 'Create account',
+			first_cta_link: 'https://profile.theguardian.com/register',
+			second_cta_name: '',
+		}),
+		rank: '1',
+		contentLanguageCode: 'en',
+		treatmentType: 'test-type',
+	};
+
+	return (
+		<Section fullWidth={true}>
+			<SignInGateAuxiaV2
+				signInUrl="https://profile.theguardian.com/signin"
+				dismissGate={() => console.log('Gate dismissed')}
+				abTest={{
+					name: 'AuxiaSignInGate',
+					variant: 'test-variant',
+					id: 'test-id',
+				}}
+				ophanComponentId="test-component-id"
+				userTreatment={mockUserTreatment}
+				logTreatmentInteractionCall={async (
+					interactionType,
+					actionName,
+				) => {
+					console.log(
+						'Treatment interaction:',
+						interactionType,
+						actionName,
+					);
+				}}
+				guUrl="https://www.theguardian.com/"
+			/>
+		</Section>
+	);
+};
+
+auxiaV2NonDismissibleModal.storyName =
+	'sign_in_gate_auxia_v2_modal_non_dismissible';
