@@ -180,6 +180,7 @@ export const initializeFedCM = async ({
 	}
 };
 
+// TODO: GoogleOneTap is currently only used on the front page, but we do probably want to use it on other pages in the future.
 export const GoogleOneTap = () => {
 	// We don't care what consent we get, we just want to make sure Google One Tap is not shown above the consent banner.
 	// TODO: FedCM doesn't require cookies? Do we need to check consent?
