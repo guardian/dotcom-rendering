@@ -5738,7 +5738,12 @@ const highlightsContainerBackgroundLight: PaletteFunction = () =>
 const highlightsContainerBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
 
-const hghlightsContainerBorderLight: PaletteFunction = () =>
+const highlightsContainerSeparatorLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const highlightsContainerSeparatorDark: PaletteFunction = () =>
+	sourcePalette.neutral[46];
+
+const highlightsContainerBorderLight: PaletteFunction = () =>
 	sourcePalette.neutral[60];
 const highlightsContainerBorderDark: PaletteFunction = () =>
 	sourcePalette.neutral[46];
@@ -6963,7 +6968,7 @@ const paletteColours = {
 		dark: highlightsContainerBackgroundDark,
 	},
 	'--highlights-container-border': {
-		light: hghlightsContainerBorderLight,
+		light: highlightsContainerBorderLight,
 		dark: highlightsContainerBorderDark,
 	},
 	'--highlights-container-end-fade': {
@@ -6973,6 +6978,10 @@ const paletteColours = {
 	'--highlights-container-mid-fade': {
 		light: highlightContainerMidFadeLight,
 		dark: highlightContainerMidFadeDark,
+	},
+	'--highlights-container-separator': {
+		light: highlightsContainerSeparatorLight,
+		dark: highlightsContainerSeparatorDark,
 	},
 	'--highlights-container-start-fade': {
 		light: highlightContainerStartLight,

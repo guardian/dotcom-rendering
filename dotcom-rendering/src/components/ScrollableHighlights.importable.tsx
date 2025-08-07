@@ -91,7 +91,7 @@ const verticalLineStyles = css`
 		bottom: 0;
 		right: -10px;
 		width: 1px;
-		background-color: ${palette('--card-border-top')};
+		background-color: ${palette('--highlights-container-separator')};
 		transform: translateX(-50%);
 	}
 `;
