@@ -48,6 +48,9 @@ type Props = {
 	headlineColour?: string;
 	/** Optional override of the standard card kicker colour */
 	kickerColour?: string;
+
+	/** Optional override of the standard card quote colour */
+	quoteIconColour?: string;
 	kickerImage?: PodcastSeriesImage;
 };
 
@@ -190,6 +193,7 @@ export const CardHeadline = ({
 	isExternalLink,
 	headlineColour = palette('--card-headline'),
 	kickerColour = palette('--card-kicker-text'),
+	quoteIconColour = palette('--card-kicker-text'),
 	kickerImage,
 }: Props) => {
 	// The link is only applied directly to the headline if it is a sublink
@@ -220,7 +224,7 @@ export const CardHeadline = ({
 						image={kickerImage}
 					/>
 				)}
-				{showQuotes && <QuoteIcon colour={kickerColour} />}
+				{showQuotes && <QuoteIcon colour={quoteIconColour} />}
 				<span
 					css={css`
 						color: ${headlineColour};

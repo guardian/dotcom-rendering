@@ -156,6 +156,7 @@ export const HighlightsCard = ({
 						isExternalLink={isExternalLink}
 						showQuotes={showQuotedHeadline}
 						headlineColour={palette('--highlights-card-headline')}
+						quoteIconColour={palette('--highlights-card-headline')}
 						kickerColour={palette('--highlights-card-kicker-text')}
 					/>
 
