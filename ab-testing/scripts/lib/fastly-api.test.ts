@@ -6,7 +6,6 @@ import {
 import { stub, Stub } from 'jsr:@std/testing/mock';
 
 const mockConfig = {
-	apiToken: 'test-token',
 	serviceName: 'test-service',
 	serviceId: 'test-service-id',
 	mvtDictionaryId: 'test-mvt-dictionary-id',
@@ -19,6 +18,9 @@ const mockConfig = {
 stub(Deno.env, 'get', (key: string) => {
 	if (key === 'FASTLY_AB_TESTING_CONFIG') {
 		return JSON.stringify(mockConfig);
+	}
+	if (key === 'FASTLY_API_TOKEN') {
+		return 'test-api-token';
 	}
 });
 
