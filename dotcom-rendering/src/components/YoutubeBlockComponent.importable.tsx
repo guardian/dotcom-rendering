@@ -34,7 +34,6 @@ type Props = {
 	stickyVideos: boolean;
 	kickerText?: string;
 	pauseOffscreenVideo?: boolean;
-	showTextOverlay: boolean;
 	iconSizeOnDesktop: PlayButtonSize;
 	iconSizeOnMobile: PlayButtonSize;
 	hidePillOnMobile: boolean;
@@ -76,7 +75,6 @@ export const YoutubeBlockComponent = ({
 	stickyVideos,
 	kickerText,
 	pauseOffscreenVideo = false,
-	showTextOverlay,
 	iconSizeOnDesktop,
 	iconSizeOnMobile,
 	hidePillOnMobile,
@@ -194,7 +192,6 @@ export const YoutubeBlockComponent = ({
 				abTestParticipations={abTestParticipations}
 				kicker={kickerText}
 				shouldPauseOutOfView={pauseOffscreenVideo}
-				showTextOverlay={showTextOverlay}
 				iconSizeOnDesktop={iconSizeOnDesktop}
 				iconSizeOnMobile={iconSizeOnMobile}
 				hidePillOnMobile={hidePillOnMobile}

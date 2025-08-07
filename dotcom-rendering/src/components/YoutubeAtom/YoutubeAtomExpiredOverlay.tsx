@@ -49,6 +49,16 @@ const expiredSVGWrapperStyles = css`
 	}
 `;
 
+const expiredOverlayMarginStyles = css`
+	margin-top: 16px;
+	margin-bottom: 16px;
+`;
+
+const expiredOverlayTextStyles = css`
+	${textEgyptian17};
+	line-height: 1.15;
+`;
+
 export const YoutubeAtomExpiredOverlay = ({
 	format,
 	hideCaption,
@@ -57,23 +67,13 @@ export const YoutubeAtomExpiredOverlay = ({
 	overrideImage,
 }: Props) => {
 	return (
-		<figure
-			css={css`
-				margin-top: 16px;
-				margin-bottom: 16px;
-			`}
-		>
+		<figure css={expiredOverlayMarginStyles}>
 			<div css={expiredOverlayStyles(overrideImage)}>
 				<div css={expiredTextWrapperStyles}>
 					<div css={expiredSVGWrapperStyles}>
 						<SvgAlertRound />
 					</div>
-					<p
-						css={css`
-							${textEgyptian17}
-							line-height: 1.15;
-						`}
-					>
+					<p css={expiredOverlayTextStyles}>
 						This video has been removed. This could be because it
 						launched early, our rights have expired, there was a
 						legal issue, or for another reason.

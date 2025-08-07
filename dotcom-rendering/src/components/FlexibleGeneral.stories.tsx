@@ -39,7 +39,8 @@ const splashCard = {
 	kickerText: 'Kicker for splash card',
 };
 
-/** This creates a list of 8 standard cards which contain:
+/**
+ * This creates a list of 8 standard cards which contain:
  * - a card with sublinks
  * - a media card
  * - a boosted card
@@ -173,13 +174,17 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const SplashWithStandards: Story = {
-	name: 'Splash with standard cards',
+	name: 'Splash with big and standard cards',
 	args: {
-		frontSectionTitle: 'Splash with stardards',
+		frontSectionTitle: 'Splash with standards',
 		groupedTrails: {
 			...emptyGroupedTrails,
 			splash: [{ ...splashCard, supportingContent: [] }],
-			standard: standardCards,
+			standard: standardCards.map((card, index) => ({
+				...card,
+				isBoosted: index === 0,
+				boostLevel: index === 0 ? 'boost' : 'default',
+			})),
 		},
 	},
 };
@@ -373,12 +378,6 @@ export const SplashWithImageSupression: Story = {
 
 export const SplashWithLiveUpdates: Story = {
 	name: 'Splash with live updates',
-	args: {
-		groupedTrails: {
-			...emptyGroupedTrails,
-			splash: [{ ...splashCard, image: undefined }],
-		},
-	},
 	render: (args) => {
 		global.fetch = mockLatestLinksReqFetch;
 		const Section = ({
@@ -410,6 +409,42 @@ export const SplashWithLiveUpdates: Story = {
 				<Section title="Boosted" boostLevel="boost" />
 				<Section title="Mega boosted" boostLevel="megaboost" />
 				<Section title="Giga boosted" boostLevel="gigaboost" />
+			</>
+		);
+	},
+};
+
+export const StandardBoostedWithLiveUpdates: Story = {
+	name: 'Standard boosted with live updates',
+	render: (args) => {
+		global.fetch = mockLatestLinksReqFetch;
+		const Section = ({
+			title,
+			boostLevel,
+		}: {
+			title: string;
+			boostLevel: BoostLevel;
+		}) => (
+			<FrontSection
+				title={title}
+				discussionApiUrl={discussionApiUrl}
+				editionId="UK"
+				showTopBorder={true}
+			>
+				<FlexibleGeneral
+					{...args}
+					groupedTrails={{
+						...emptyGroupedTrails,
+						standard: [{ ...liveUpdatesCard, boostLevel }],
+					}}
+				/>
+			</FrontSection>
+		);
+
+		return (
+			<>
+				<Section title="Boosted" boostLevel="boost" />
+				<Section title="Megaboosted" boostLevel="megaboost" />
 			</>
 		);
 	},

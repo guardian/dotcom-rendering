@@ -52,7 +52,6 @@ describe('YoutubeAtom', () => {
 					iconSizeOnDesktop="large"
 					iconSizeOnMobile="large"
 					hidePillOnMobile={false}
-					showTextOverlay={false}
 					renderingTarget="Web"
 				/>
 			</ConfigProvider>
@@ -93,7 +92,6 @@ describe('YoutubeAtom', () => {
 					iconSizeOnDesktop="large"
 					iconSizeOnMobile="large"
 					hidePillOnMobile={false}
-					showTextOverlay={false}
 					renderingTarget="Web"
 				/>
 			</ConfigProvider>
@@ -141,7 +139,6 @@ describe('YoutubeAtom', () => {
 					iconSizeOnDesktop="large"
 					iconSizeOnMobile="large"
 					hidePillOnMobile={false}
-					showTextOverlay={false}
 					renderingTarget="Web"
 				/>
 			</ConfigProvider>
@@ -184,7 +181,6 @@ describe('YoutubeAtom', () => {
 					iconSizeOnDesktop="large"
 					iconSizeOnMobile="large"
 					hidePillOnMobile={false}
-					showTextOverlay={false}
 					renderingTarget="Web"
 				/>
 			</ConfigProvider>
@@ -225,7 +221,6 @@ describe('YoutubeAtom', () => {
 					iconSizeOnDesktop="large"
 					iconSizeOnMobile="large"
 					hidePillOnMobile={false}
-					showTextOverlay={false}
 					renderingTarget="Web"
 				/>
 			</ConfigProvider>
@@ -267,7 +262,6 @@ describe('YoutubeAtom', () => {
 					iconSizeOnDesktop="large"
 					iconSizeOnMobile="large"
 					hidePillOnMobile={false}
-					showTextOverlay={false}
 					renderingTarget="Web"
 				/>
 			</ConfigProvider>
@@ -307,7 +301,6 @@ describe('YoutubeAtom', () => {
 					iconSizeOnDesktop="large"
 					iconSizeOnMobile="large"
 					hidePillOnMobile={false}
-					showTextOverlay={false}
 					renderingTarget="Web"
 				/>
 			</ConfigProvider>
@@ -351,7 +344,6 @@ describe('YoutubeAtom', () => {
 						iconSizeOnDesktop="small"
 						iconSizeOnMobile="small"
 						hidePillOnMobile={false}
-						showTextOverlay={false}
 						renderingTarget="Web"
 					/>
 					<YoutubeAtom
@@ -374,7 +366,6 @@ describe('YoutubeAtom', () => {
 						iconSizeOnDesktop="small"
 						iconSizeOnMobile="small"
 						hidePillOnMobile={false}
-						showTextOverlay={false}
 						renderingTarget="Web"
 					/>
 				</ConfigProvider>
