@@ -1177,6 +1177,7 @@ export const WhenVideoWithPlayButton = () => {
 		</Section>
 	);
 };
+
 export const WithLetterDesign = () => {
 	return (
 		<CardWrapper>
@@ -1193,8 +1194,6 @@ export const WithLetterDesign = () => {
 		</CardWrapper>
 	);
 };
-
-WithLetterDesign.storyName = 'WithLetterDesign';
 
 export const WithLetterDesignAndShowQuotedHeadline = () => {
 	return (
@@ -1213,9 +1212,6 @@ export const WithLetterDesignAndShowQuotedHeadline = () => {
 		</CardWrapper>
 	);
 };
-
-WithLetterDesignAndShowQuotedHeadline.storyName =
-	'WithLetterDesignAndShowQuotedHeadline';
 
 const containerPalettes = [
 	'InvestigationPalette',
@@ -1789,6 +1785,26 @@ export const WithAVerticalGapWhenScrollableSmallContainer = () => {
 						discussionId={'p/d8ex5'}
 					/>
 				</div>
+			</CardWrapper>
+		</>
+	);
+};
+
+export const WithHeadlineContainingLongWord = () => {
+	return (
+		<>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: Pillar.News,
+					}}
+					imagePositionOnDesktop="left"
+					imageSize="medium"
+					headlineText="BBCSSO/Wigglesworth/Batsashvili review – detailed and monumental Bruckner"
+				/>
 			</CardWrapper>
 		</>
 	);
