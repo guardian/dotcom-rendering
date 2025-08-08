@@ -467,13 +467,13 @@ export const Sources = ({ sources }: { sources: ImageSource[] }) => {
 
 const styles = ({ design }: ArticleFormat, isLightbox: boolean) => {
 	if (design === ArticleDesign.Gallery) {
-		return css(css`
+		return css`
 			img {
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
 			}
-		`);
+		`;
 	}
 	return isLightbox ? flex : block;
 };
