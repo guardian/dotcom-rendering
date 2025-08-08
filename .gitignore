@@ -56,3 +56,11 @@ k6-v*arm64
 test-results/
 playwright-report/
 playwright/.cache/
+
+# svelte output
+.svelte-kit
+ab-testing/frontend/output
+
+# vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
