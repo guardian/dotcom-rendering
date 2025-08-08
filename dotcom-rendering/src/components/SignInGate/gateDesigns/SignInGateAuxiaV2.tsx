@@ -91,24 +91,36 @@ export const SignInGateAuxiaV2 = ({
 		logTreatmentInteractionCall,
 	]);
 
-	const handleBackdropClick = (event: React.MouseEvent) => {
-		if (event.target === event.currentTarget && isDismissible) {
-			dismissGate();
-			trackLink(
-				ophanComponentId,
-				'backdrop-dismiss',
-				renderingTarget,
-				abTest,
-			);
-			void logTreatmentInteractionCall('DISMISSED', '');
+	const handleBackdropClick = (
+		event: React.MouseEvent | React.KeyboardEvent,
+	) => {
+		const isValid =
+			((event.type === 'keyup' &&
+				(event as React.KeyboardEvent).key === 'Escape') ||
+				event.target === event.currentTarget) &&
+			isDismissible;
+
+		if (!isValid) {
+			return;
 		}
+
+		dismissGate();
+		trackLink(
+			ophanComponentId,
+			'backdrop-dismiss',
+			renderingTarget,
+			abTest,
+		);
+		void logTreatmentInteractionCall('DISMISSED', '');
 	};
 
 	return (
+		// eslint-disable-next-line jsx-a11y/no-static-element-interactions -- div needs click and keyup handlers for modal backdrop dismiss functionality
 		<div
 			css={modalOverlay}
 			className={dismissStatusLabel}
 			onClick={handleBackdropClick}
+			onKeyUp={handleBackdropClick}
 			data-testid="sign-in-gate-modal-overlay"
 		>
 			<div css={modalContainer} data-testid="sign-in-gate-main">
@@ -156,6 +168,7 @@ export const SignInGateAuxiaV2 = ({
 							)}
 							{has(body) && <p css={descriptionText}>{body}</p>}
 						</div>
+
 						<img
 							css={headerImage}
 							src="https://media.guim.co.uk/04283a980cd4559eba0501ab25e41ff2f0bd8e20/33_1_277_284/277.png"
@@ -291,7 +304,7 @@ const modalContainer = css`
 	border-radius: ${space[4]}px;
 	display: flex;
 	flex-direction: column;
-	gap: ${space[2]}px;
+	gap: ${space[4]}px;
 	max-width: 900px;
 	width: 100%;
 	max-height: 90vh;
@@ -301,15 +314,16 @@ const modalContainer = css`
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 
 	${from.phablet} {
+		gap: ${space[2]}px;
 		max-width: 460px;
 		padding: 0;
 	}
 
 	${from.desktop} {
-		max-width: 940px;
-		max-height: 600px;
 		flex-direction: row;
 		gap: 0;
+		height: 600px;
+		max-width: 940px;
 	}
 
 	.non-dismissible & {
@@ -325,19 +339,16 @@ const topContainer = css`
 
 	${from.phablet} {
 		border-bottom: 0.5px solid ${palette.brand[400]};
-		padding: ${space[4]}px;
-	}
-
-	${from.desktop} {
-		border-bottom: 0.5px solid ${palette.brand[400]};
-		padding: ${space[4]}px;
+		padding: ${space[4]}px ${space[4]}px 0 ${space[4]}px;
 	}
 
 	${from.desktop} {
 		border-bottom: 0;
 		border-right: 0.5px solid ${palette.brand[400]};
 		flex-direction: column-reverse;
-		gap: ${space[8]}px;
+		justify-content: space-between;
+		padding: ${space[6]}px ${space[4]}px ${space[4]}px ${space[8]}px;
+		width: 470px;
 	}
 
 	.non-dismissible & {
@@ -351,8 +362,8 @@ const topContainer = css`
 
 		${from.desktop} {
 			border: 0;
-			max-width: 470px;
 			padding: ${space[6]}px ${space[4]}px ${space[4]}px ${space[8]}px;
+			width: 470px;
 		}
 	}
 `;
@@ -370,6 +381,7 @@ const contentContainer = css`
 		flex-direction: row;
 		gap: ${space[6]}px;
 		padding: ${space[6]}px ${space[10]}px;
+		width: 470px;
 	}
 
 	.non-dismissible & {
@@ -381,6 +393,7 @@ const contentContainer = css`
 
 		${from.desktop} {
 			padding: ${space[6]}px ${space[10]}px;
+			width: 470px;
 		}
 	}
 `;
@@ -388,11 +401,12 @@ const contentContainer = css`
 const headerSection = css`
 	display: flex;
 	flex-direction: row;
-	flex: 1;
 
 	${from.desktop} {
 		flex-direction: column-reverse;
+		gap: ${space[6]}px;
 		padding-right: ${space[4]}px;
+		max-width: 100%;
 	}
 `;
 
@@ -408,16 +422,22 @@ const headerCopy = css`
 
 const headerImage = css`
 	display: none;
+
 	${from.phablet} {
 		align-self: flex-end;
-		display: inline-flex;
-		width: 158px;
+		display: block;
+		max-width: 158px;
+		width: 100%;
 	}
 
 	${from.desktop} {
 		align-self: center;
-		width: 280px;
+		max-height: 276px;
+		max-width: 284px;
+		width: 100%;
+		object-fit: contain;
 	}
+
 	.non-dismissible & {
 		display: none;
 	}
@@ -524,6 +544,7 @@ const descriptionText = css`
 
 	${from.phablet} {
 		${textSans15};
+		padding-bottom: ${space[4]}px;
 	}
 
 	${from.desktop} {
@@ -532,6 +553,10 @@ const descriptionText = css`
 
 	.non-dismissible & {
 		color: ${palette.neutral[100]};
+
+		${from.phablet} {
+			padding: 0;
+		}
 	}
 `;
 

@@ -2,15 +2,11 @@ import { type EditionId } from '../../lib/edition';
 import type { TagType } from '../../types/tag';
 import { Section } from '../Section';
 import { SignInGateSelector } from '../SignInGateSelector.importable';
-import { SignInGateAuxiaV2 } from './gateDesigns/SignInGateAuxiaV2';
 import { SignInGateCustomizableText } from './gateDesigns/SignInGateCustomizableText';
 import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
 import { SignInGateMainCheckoutComplete } from './gateDesigns/SignInGateMainCheckoutComplete';
-import type {
-	AuxiaAPIResponseDataUserTreatment,
-	CheckoutCompleteCookieData,
-} from './types';
+import type { CheckoutCompleteCookieData } from './types';
 import { ALL_PRODUCTS, ALL_USER_TYPES } from './types';
 
 export default {
@@ -161,12 +157,12 @@ signInGateMainCheckoutCompletePersonalisedCopy.argTypes = {
 	},
 };
 
-export const signInGateSelectorStoryDismissable = () => {
-	const tags: TagType[] = [
-		{ id: 'politics/politics', type: 'Keyword', title: 'Politics' },
-		{ id: 'world/europe-news', type: 'Keyword', title: 'Europe News' },
-	];
+const tags: TagType[] = [
+	{ id: 'politics/politics', type: 'Keyword', title: 'Politics' },
+	{ id: 'world/europe-news', type: 'Keyword', title: 'Europe News' },
+];
 
+export const signInGateSelectorStoryDismissable = () => {
 	return (
 		<Section fullWidth={true}>
 			<SignInGateSelector
@@ -189,11 +185,6 @@ signInGateSelectorStoryDismissable.storyName =
 	'sign_in_gate_selector_dismissable';
 
 export const signInGateSelectorStoryNonDismissable = () => {
-	const tags: TagType[] = [
-		{ id: 'politics/politics', type: 'Keyword', title: 'Politics' },
-		{ id: 'world/europe-news', type: 'Keyword', title: 'Europe News' },
-	];
-
 	return (
 		<Section fullWidth={true}>
 			<SignInGateSelector
@@ -216,11 +207,6 @@ signInGateSelectorStoryNonDismissable.storyName =
 	'sign_in_gate_selector_non_dismissable';
 
 export const signInGateSelectorStoryLegacy = () => {
-	const tags: TagType[] = [
-		{ id: 'politics/politics', type: 'Keyword', title: 'Politics' },
-		{ id: 'world/europe-news', type: 'Keyword', title: 'Europe News' },
-	];
-
 	return (
 		<Section fullWidth={true}>
 			<SignInGateSelector
@@ -242,11 +228,6 @@ export const signInGateSelectorStoryLegacy = () => {
 signInGateSelectorStoryLegacy.storyName = 'sign_in_gate_selector_legacy';
 
 export const signInGateSelectorStoryNoTreatment = () => {
-	const tags: TagType[] = [
-		{ id: 'politics/politics', type: 'Keyword', title: 'Politics' },
-		{ id: 'world/europe-news', type: 'Keyword', title: 'Europe News' },
-	];
-
 	return (
 		<Section fullWidth={true}>
 			<SignInGateSelector
@@ -269,46 +250,20 @@ signInGateSelectorStoryNoTreatment.storyName =
 	'sign_in_gate_selector_no_treatment';
 
 export const auxiaV2DismissibleModal = () => {
-	const mockUserTreatment: AuxiaAPIResponseDataUserTreatment = {
-		treatmentId: 'test-treatment-id',
-		treatmentTrackingId: 'test-tracking-id',
-		surface: 'test-surface',
-		treatmentContent: JSON.stringify({
-			title: 'A small step for great Journalism. Sign in.',
-			subtitle: "It's free and only takes 30 seconds.",
-			body: '',
-			first_cta_name: 'Create account',
-			first_cta_link: 'https://profile.theguardian.com/register',
-			second_cta_name: 'Not now',
-		}),
-		rank: '1',
-		contentLanguageCode: 'en',
-		treatmentType: 'test-type',
-	};
-
 	return (
 		<Section fullWidth={true}>
-			<SignInGateAuxiaV2
-				signInUrl="https://profile.theguardian.com/signin"
-				dismissGate={() => console.log('Gate dismissed')}
-				abTest={{
-					name: 'AuxiaSignInGate',
-					variant: 'test-variant',
-					id: 'test-id',
-				}}
-				ophanComponentId="test-component-id"
-				userTreatment={mockUserTreatment}
-				logTreatmentInteractionCall={async (
-					interactionType,
-					actionName,
-				) => {
-					console.log(
-						'Treatment interaction:',
-						interactionType,
-						actionName,
-					);
-				}}
-				guUrl="https://www.theguardian.com/"
+			<SignInGateSelector
+				contentType="Article"
+				sectionId="dismissable"
+				tags={tags}
+				isPaidContent={false}
+				isPreview={false}
+				pageId="dismissable-v2"
+				host="https://www.theguardian.com"
+				idUrl="https://profile.theguardian.com"
+				contributionsServiceUrl="https://contributions.guardianapis.com"
+				editionId={'UK' as EditionId}
+				signInGateVersion="v2"
 			/>
 		</Section>
 	);
@@ -317,47 +272,20 @@ export const auxiaV2DismissibleModal = () => {
 auxiaV2DismissibleModal.storyName = 'sign_in_gate_auxia_v2_modal_dismissible';
 
 export const auxiaV2NonDismissibleModal = () => {
-	const mockUserTreatment: AuxiaAPIResponseDataUserTreatment = {
-		treatmentId: 'test-treatment-id',
-		treatmentTrackingId: 'test-tracking-id',
-		surface: 'test-surface',
-		treatmentContent: JSON.stringify({
-			title: 'Sorry for the interruption. We believe in free, independent journalism for all. Sign in or register to keep reading.',
-			subtitle:
-				"Once you are signed in, we'll bring you back here shortly.",
-			body: '',
-			first_cta_name: 'Create account',
-			first_cta_link: 'https://profile.theguardian.com/register',
-			second_cta_name: '',
-		}),
-		rank: '1',
-		contentLanguageCode: 'en',
-		treatmentType: 'test-type',
-	};
-
 	return (
 		<Section fullWidth={true}>
-			<SignInGateAuxiaV2
-				signInUrl="https://profile.theguardian.com/signin"
-				dismissGate={() => console.log('Gate dismissed')}
-				abTest={{
-					name: 'AuxiaSignInGate',
-					variant: 'test-variant',
-					id: 'test-id',
-				}}
-				ophanComponentId="test-component-id"
-				userTreatment={mockUserTreatment}
-				logTreatmentInteractionCall={async (
-					interactionType,
-					actionName,
-				) => {
-					console.log(
-						'Treatment interaction:',
-						interactionType,
-						actionName,
-					);
-				}}
-				guUrl="https://www.theguardian.com/"
+			<SignInGateSelector
+				contentType="Article"
+				sectionId="non-dismissable"
+				tags={tags}
+				isPaidContent={false}
+				isPreview={false}
+				pageId="non-dismissable-v2"
+				host="https://www.theguardian.com"
+				idUrl="https://profile.theguardian.com"
+				contributionsServiceUrl="https://contributions.guardianapis.com"
+				editionId={'UK' as EditionId}
+				signInGateVersion="v2"
 			/>
 		</Section>
 	);
