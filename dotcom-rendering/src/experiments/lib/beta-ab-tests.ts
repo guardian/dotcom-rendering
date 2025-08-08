@@ -1,5 +1,4 @@
 import { isUndefined } from '@guardian/libs';
-import { isServer } from '../../lib/isServer';
 
 export interface BetaABTestAPI {
 	getParticipations: () => ABParticipations;
@@ -27,9 +26,15 @@ type OphanRecordFunction = (send: Record<string, OphanABPayload>) => void;
 
 type ErrorReporter = (e: unknown) => void;
 
-type BetaABTestsConfig = {
-	serverSideABTests: Record<string, string>;
-};
+type BetaABTestsConfig =
+	| {
+			isServer: true;
+			serverSideABTests: Record<string, string>;
+	  }
+	| {
+			isServer: false;
+			serverSideABTests?: never;
+	  };
 
 /**
  * generate an A/B event for Ophan
@@ -46,7 +51,7 @@ const makeABEvent = (variantName: string, complete: boolean): OphanABEvent => {
 export class BetaABTests implements BetaABTestAPI {
 	private participations: ABParticipations;
 
-	constructor({ serverSideABTests }: BetaABTestsConfig) {
+	constructor({ isServer, serverSideABTests }: BetaABTestsConfig) {
 		if (isServer) {
 			this.participations = serverSideABTests;
 		} else {

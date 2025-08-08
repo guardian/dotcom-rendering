@@ -7,6 +7,7 @@ import { tests } from '../experiments/ab-tests';
 import { runnableTestsToParticipations } from '../experiments/lib/ab-participations';
 import { BetaABTests } from '../experiments/lib/beta-ab-tests';
 import { getForcedParticipationsFromUrl } from '../lib/getAbUrlHash';
+import { isServer } from '../lib/isServer';
 import { setABTests, setBetaABTests } from '../lib/useAB';
 import type { ABTestSwitches } from '../model/enhance-switches';
 import type { ServerSideTests } from '../types/config';
@@ -92,9 +93,14 @@ export const SetABTests = ({
 
 	const betaAb = useMemo(
 		() =>
-			new BetaABTests({
-				serverSideABTests,
-			}),
+			new BetaABTests(
+				isServer
+					? {
+							serverSideABTests,
+							isServer: true,
+					  }
+					: { isServer: false },
+			),
 		[serverSideABTests],
 	);
 
