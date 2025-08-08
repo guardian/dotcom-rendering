@@ -58,7 +58,7 @@ const buildReaderRevenueEpicConfig = (
 ): CandidateConfig<ModuleData<EpicProps>> => {
 	return {
 		candidate: {
-			id: 'reader-revenue-banner',
+			id: 'reader-revenue-epic',
 			canShow: () => canShowReaderRevenueEpic(canShowData),
 			show: (data: ModuleData<EpicProps>) => () => {
 				return <ReaderRevenueEpic {...data} />;
