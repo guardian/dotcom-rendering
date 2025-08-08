@@ -45,7 +45,6 @@ export type Props = {
 	abTestParticipations: Participations;
 	kicker?: string;
 	shouldPauseOutOfView?: boolean;
-	showTextOverlay: boolean;
 	iconSizeOnDesktop: PlayButtonSize;
 	iconSizeOnMobile: PlayButtonSize;
 	hidePillOnMobile: boolean;
@@ -101,7 +100,6 @@ export const YoutubeAtom = ({
 	kicker,
 	format,
 	shouldPauseOutOfView = false,
-	showTextOverlay,
 	iconSizeOnDesktop,
 	iconSizeOnMobile,
 	hidePillOnMobile,
@@ -280,9 +278,7 @@ export const YoutubeAtom = ({
 								duration={duration}
 								title={title}
 								onClick={() => setOverlayClicked(true)}
-								kicker={kicker}
 								format={format}
-								showTextOverlay={showTextOverlay}
 								iconSizeOnDesktop={iconSizeOnDesktop}
 								iconSizeOnMobile={iconSizeOnMobile}
 								hidePillOnMobile={hidePillOnMobile}
