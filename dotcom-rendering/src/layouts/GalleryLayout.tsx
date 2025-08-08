@@ -23,17 +23,19 @@ import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { grid } from '../grid';
 import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
+import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
 import { getAdPositions } from '../lib/getGalleryAdPositions';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { Gallery } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { Stuck } from './lib/stickiness';
+import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface Props {
 	gallery: Gallery;
@@ -154,6 +156,8 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const renderAds = canRenderAds(frontendData);
+
+	const contributionsServiceUrl = getContributionsServiceUrl(frontendData);
 
 	const adPositions: number[] = renderAds
 		? getAdPositions(gallery.images)
@@ -367,22 +371,52 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 				</Section>
 			)}
 			{isWeb && (
-				<Section
-					fullWidth={true}
-					padSides={false}
-					backgroundColour={sourcePalette.brand[400]}
-					borderColour={sourcePalette.brand[600]}
-					showSideBorders={false}
-					element="footer"
-				>
-					<Footer
-						pageFooter={frontendData.pageFooter}
-						selectedPillar={props.NAV.selectedPillar}
-						pillars={props.NAV.pillars}
-						urls={frontendData.nav.readerRevenueLinks.footer}
-						editionId={frontendData.editionId}
-					/>
-				</Section>
+				<>
+					<Section
+						fullWidth={true}
+						padSides={false}
+						backgroundColour={sourcePalette.brand[400]}
+						borderColour={sourcePalette.brand[600]}
+						showSideBorders={false}
+						element="footer"
+					>
+						<Footer
+							pageFooter={frontendData.pageFooter}
+							selectedPillar={props.NAV.selectedPillar}
+							pillars={props.NAV.pillars}
+							urls={frontendData.nav.readerRevenueLinks.footer}
+							editionId={frontendData.editionId}
+						/>
+					</Section>
+					<BannerWrapper data-print-layout="hide">
+						<Island priority="feature" defer={{ until: 'idle' }}>
+							<StickyBottomBanner
+								contentType={frontendData.contentType}
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
+								idApiUrl={frontendData.config.idApiUrl}
+								isMinuteArticle={
+									frontendData.pageType.isMinuteArticle
+								}
+								isPaidContent={
+									frontendData.pageType.isPaidContent
+								}
+								isPreview={!!frontendData.config.isPreview}
+								isSensitive={frontendData.config.isSensitive}
+								pageId={frontendData.pageId}
+								sectionId={frontendData.config.section}
+								shouldHideReaderRevenue={
+									frontendData.shouldHideReaderRevenue
+								}
+								remoteBannerSwitch={
+									!!frontendData.config.switches.remoteBanner
+								}
+								tags={frontendData.tags}
+							/>
+						</Island>
+					</BannerWrapper>
+				</>
 			)}
 			{isApps && (
 				<div
