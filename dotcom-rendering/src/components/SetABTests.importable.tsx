@@ -91,20 +91,18 @@ export const SetABTests = ({
 			});
 	}, [renderingTarget]);
 
-	const betaAb = useMemo(
-		() =>
-			new BetaABTests(
-				isServer
-					? {
-							serverSideABTests,
-							isServer: true,
-					  }
-					: { isServer: false },
-			),
-		[serverSideABTests],
-	);
-
-	setBetaABTests(betaAb);
+	const betaAb = useMemo(() => {
+		const betaAB = new BetaABTests(
+			isServer
+				? {
+						serverSideABTests,
+						isServer: true,
+				  }
+				: { isServer: false },
+		);
+		setBetaABTests(betaAB);
+		return betaAB;
+	}, [serverSideABTests]);
 
 	useEffect(() => {
 		if (!ophan) return;
