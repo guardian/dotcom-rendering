@@ -225,7 +225,7 @@ export const ThreeTierChoiceCards = ({
 									value={radioId}
 									cssOverrides={labelOverrideStyles(selected)}
 									supporting={
-										selected ? (
+										selected && (
 											<SupportingBenefits
 												benefitsLabel={
 													benefitsLabel as
@@ -234,7 +234,7 @@ export const ThreeTierChoiceCards = ({
 												}
 												benefits={benefits}
 											/>
-										) : undefined
+										)
 									}
 									checked={selected}
 									onChange={() => {

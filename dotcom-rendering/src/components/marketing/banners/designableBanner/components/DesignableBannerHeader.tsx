@@ -7,6 +7,7 @@ import { css } from '@emotion/react';
 import {
 	from,
 	headlineMedium17,
+	headlineMedium24,
 	headlineMedium28,
 	headlineMedium34,
 	headlineMedium42,
@@ -27,6 +28,7 @@ interface DesignableBannerHeaderProps {
 	mobileHeading: JSX.Element | JSX.Element[] | null;
 	headerSettings: HeaderSettings | undefined;
 	headlineSize: 'small' | 'medium' | 'large';
+	isCollapsedForABTest: boolean;
 }
 
 export function DesignableBannerHeader({
@@ -34,9 +36,14 @@ export function DesignableBannerHeader({
 	mobileHeading,
 	headerSettings,
 	headlineSize,
+	isCollapsedForABTest = false,
 }: DesignableBannerHeaderProps): JSX.Element {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
-	const styles = getStyles(headerSettings, headlineSize);
+	const styles = getStyles(
+		headerSettings,
+		headlineSize,
+		isCollapsedForABTest,
+	);
 
 	const resolveImage = (settings: Image) => {
 		return (
@@ -45,7 +52,13 @@ export function DesignableBannerHeader({
 	};
 
 	const resolveCopy = () => {
-		return <h2>{isTabletOrAbove ? heading : mobileHeading}</h2>;
+		return (
+			<h2>
+				{isTabletOrAbove && !isCollapsedForABTest
+					? heading
+					: mobileHeading}
+			</h2>
+		);
 	};
 
 	return (
@@ -62,14 +75,27 @@ export function DesignableBannerHeader({
 const getStyles = (
 	headerSettings: HeaderSettings | undefined,
 	headlineSize: 'small' | 'medium' | 'large',
+	isCollapsedForABTest: boolean,
 ) => {
 	const color = headerSettings?.textColour ?? neutral[0];
 	const copyTopMargin = headerSettings?.headerImage ? space[1] : space[1];
-	const containerMargin = headerSettings?.headerImage ? `${space[6]}px` : '0';
+	const containerMargin =
+		isCollapsedForABTest || headerSettings?.headerImage
+			? `${space[6]}px`
+			: '0';
+
 	const mobileHeadlineSize =
-		headlineSize === 'small'
+		headlineSize === 'small' || isCollapsedForABTest
 			? `${headlineMedium17}`
 			: `${headlineMedium28}`;
+
+	const phabletHeadline = isCollapsedForABTest
+		? `${headlineMedium24}`
+		: `${headlineMedium34}`;
+
+	const leftColHeadline = isCollapsedForABTest
+		? `${headlineMedium24}`
+		: `${headlineMedium42}`;
 
 	return {
 		container: css`
@@ -86,11 +112,11 @@ const getStyles = (
 				}
 
 				${from.phablet} {
-					${headlineMedium34}
+					${phabletHeadline};
 				}
 
 				${from.leftCol} {
-					${headlineMedium42}
+					${leftColHeadline};
 				}
 			}
 		`,

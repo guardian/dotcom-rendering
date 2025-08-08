@@ -49,6 +49,8 @@ function getComponentIds(bannerId: BannerId) {
 		reminderCta: `${bannerId} : reminder-cta`,
 		reminderSet: `${bannerId} : reminder-set`,
 		reminderClose: `${bannerId} : reminder-close`,
+		collapse: `${bannerId} : collapse`,
+		expand: `${bannerId} : expand`,
 	};
 }
 
@@ -298,6 +300,8 @@ const withBannerData =
 		const onCloseClick = clickHandlerFor(componentIds.close, true);
 		const onNotNowClick = clickHandlerFor(componentIds.notNow, true);
 		const onSignInClick = clickHandlerFor(componentIds.signIn, false);
+		const onCollapseClick = clickHandlerFor(componentIds.collapse, false);
+		const onExpandClick = clickHandlerFor(componentIds.expand, false);
 
 		try {
 			const renderedContent = content && buildRenderedContent(content);
@@ -316,6 +320,8 @@ const withBannerData =
 					onCloseClick,
 					onSignInClick,
 					onNotNowClick,
+					onCollapseClick,
+					onExpandClick,
 					content: {
 						mainContent: renderedContent,
 						mobileContent: renderedMobileContent ?? renderedContent,

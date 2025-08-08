@@ -339,3 +339,23 @@ export const WithDestinationUrlTwoCards: Story = {
 		},
 	},
 };
+
+export const CollapsableWithThreeTierChoiceCards: Story = {
+	name: 'Collapsable with three tier choice cards',
+	args: {
+		...meta.args,
+		design: {
+			...design,
+			visual: {
+				kind: 'ChoiceCards',
+				buttonColour: stringToHexColour('E5E5E5'),
+			},
+		},
+		tracking: {
+			...tracking,
+			abTestVariant: 'COLLAPSABLE_V1',
+		},
+		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings,
+	},
+};
