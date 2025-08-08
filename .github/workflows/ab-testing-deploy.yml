@@ -32,4 +32,4 @@ jobs:
           deno-version: v2.3
 
       - name: Deploy
-        run: deno run deploy --stage=prod
+        run: deno run deploy

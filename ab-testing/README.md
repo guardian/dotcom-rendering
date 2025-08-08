@@ -25,9 +25,19 @@ When you create a PR that modifies the `abTest.ts` file, a git hook and CI will 
 
 When your PR is merged, the AB test will be automatically deployed to Fastly and be available at the same time as your changes.
 
+## Guidelines for AB Tests
+
 ### Naming Conventions
 
 AB tests should be prefixed with the team associated with the test, for example `webex-example-test`. This helps to identify the team responsible for the test and is enforce by typescript validation.
+
+### Test Size and Groups
+
+The `audienceSize` is the size of the whole test and is divided between the test groups that you specify. The "resolution" of sizing is down to 0.1%, so groups will be rounded to the nearest 0.1%.
+
+Convention is to have groups named control and variant, but you can name them as you wish.
+
+A single group is also possible, for example if you're rolling out a new feature and don't need a control.
 
 ### Client vs Server Side Tests
 
