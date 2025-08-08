@@ -136,6 +136,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const { absoluteServerTimes = false } = front.config.switches;
 
+	const isInOpinionNoAvatarVariant =
+		abTests.opinionNoAvatarVariant === 'variant' && front.isNetworkFront;
+
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
 			case 'scrollable/feature':
@@ -634,6 +637,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
+									isInOpinionNoAvatarVariant={
+										collection.displayName === 'Opinion' &&
+										isInOpinionNoAvatarVariant
+									}
 								/>
 							</FrontSection>
 
