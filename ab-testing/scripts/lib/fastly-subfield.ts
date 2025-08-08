@@ -29,7 +29,8 @@ const stringifyFastlySubfield = (
 		})
 		.join(',');
 
-/** * Parses a Fastly subfield string into an object.
+/**
+ * Parses a Fastly subfield string into an object.
  * https://www.fastly.com/documentation/reference/vcl/functions/miscellaneous/subfield/
  */
 const parseFastlySubfield = (str: string): Record<string, string | number> => {
