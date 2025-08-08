@@ -289,6 +289,7 @@ export const DecideContainer = ({
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
+						isInOpinionNoAvatarVariant={isInOpinionNoAvatarVariant}
 					/>
 				</Island>
 			);
