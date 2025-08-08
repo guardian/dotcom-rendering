@@ -52,6 +52,15 @@ void (async () => {
 	);
 
 	void startup(
+		'abTesting',
+		() =>
+			import(/* webpackMode: 'eager' */ './abTesting').then(
+				({ initABTesting }) => initABTesting(),
+			),
+		{ priority: 'critical' },
+	);
+
+	void startup(
 		'dynamicImport',
 		() =>
 			import(/* webpackMode: "eager" */ './dynamicImport').then(

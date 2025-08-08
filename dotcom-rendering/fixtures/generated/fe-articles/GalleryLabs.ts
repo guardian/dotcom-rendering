@@ -18,7 +18,7 @@ export const GalleryLabs: FEArticle = {
 	headline:
 		'Mysterious islands, medieval castles and Monet’s gardens: 12 must-see places in Normandy – in pictures',
 	standfirst:
-		'<p>Boasting history, breathtaking scenery and picturesque villages, a getaway in northern France is sure to delight every type of holidaymaker.</p>\n<p><em>Discover more about Normandy and how to get there aboard Brittany Ferries’ new hybrid-LNG powered ship, Guillaume de Normandie: visit <a href="https://www.brittany-ferries.co.uk/feature/explore-normandy?utm_medium=article&amp;utm_source=the_guardian&amp;utm_campaign=atout_brittany_2025_come_and_stay&amp;utm_content=come_and_stay+article+generic" rel="nofollow">brittany-ferries.co.uk</a></em></p>',
+		'<p>Boasting history, breathtaking scenery and picturesque villages, a getaway in northern France is sure to delight every type of holidaymaker.</p>\n<p><em>It’s not too late to book your summer holiday. Discover more about Normandy and how to get there aboard Brittany Ferries’ new hybrid-LNG powered ship, Guillaume de Normandie</em>.<em> Visit </em><a href="https://brittany-ferries.co.uk/holidays/seasonal/summer" rel="nofollow"><em>brittany-ferries.co.uk/holidays/seasonal/summer</em></a></p>',
 	webTitle:
 		'Mysterious islands, medieval castles and Monet’s gardens: 12 must-see places in Normandy – in pictures',
 	mainMediaElements: [
@@ -97,7 +97,7 @@ export const GalleryLabs: FEArticle = {
 					},
 				],
 			},
-			elementId: '9a9b9e4b-8b1f-45a6-b83e-417b86740c60',
+			elementId: '2fbf0173-6525-4bbc-8d4f-9778dd9171dc',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -281,7 +281,7 @@ export const GalleryLabs: FEArticle = {
 			],
 			data: {
 				alt: "This image is taken in the Mont Saint-Michel during the high tides. It's an aerial view of the sunset. You can see the Minch, the Couesnon and the Mont Saint-Michel in the foreground.",
-				caption: 'Mont Saint-Michel.',
+				caption: '<h2></h2>Mont Saint-Michel.',
 				credit: 'Photograph: MathieuRivrin/Getty Images',
 			},
 		},
@@ -368,7 +368,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: '74877f93-0e2c-4d18-8dab-8aedc50d283a',
+					elementId: '92d7e707-5002-42a8-ae8a-48d43739e06c',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -604,7 +604,7 @@ export const GalleryLabs: FEArticle = {
 					data: {
 						alt: 'Tatihou Island with the Vauban tower from above',
 						caption:
-							'<strong>Tatihou island<br></strong>Tatihou island is an uninhabited tidal island off the Cotentin peninsula, reached by amphibious boat or on foot at low tide – when you might catch a glimpse of the wrecks of naval ships sunk in 1692 after the Battle of La Hougue. An island nature reserve, it’s home to more than 150 species of birds, and also boasts a <a href="https://en.normandie-tourisme.fr/museums-and-heritage-sites/tatihou-maritime-museum/" rel="nofollow">maritime museum</a> housed in a former lazaretto (the island was used for quarantining plague victims in the 18th century), <a href="https://normandygiteholidays.com/the-vauban-tower-on-tatihou-island/" rel="nofollow">the Vauban’s tower</a>, and a windswept <a href="https://en.normandie-tourisme.fr/museums-and-heritage-sites/tatihou-island-maritime-gardens/" rel="nofollow">botanic garden</a> where plants thrive despite the salty air.',
+							'<h2>Tatihou island</h2>Tatihou island is an uninhabited tidal island off the Cotentin peninsula, reached by amphibious boat or on foot at low tide – when you might catch a glimpse of the wrecks of naval ships sunk in 1692 after the Battle of La Hougue. An island nature reserve, it’s home to more than 150 species of birds, and also boasts a <a href="https://en.normandie-tourisme.fr/museums-and-heritage-sites/tatihou-maritime-museum/" rel="nofollow">maritime museum</a> housed in a former lazaretto (the island was used for quarantining plague victims in the 18th century), <a href="https://normandygiteholidays.com/the-vauban-tower-on-tatihou-island/" rel="nofollow">the Vauban’s tower</a>, and a windswept <a href="https://en.normandie-tourisme.fr/museums-and-heritage-sites/tatihou-island-maritime-gardens/" rel="nofollow">botanic garden</a> where plants thrive despite the salty air.',
 						credit: 'Photograph: Herve Lenain/Alamy',
 					},
 				},
@@ -683,7 +683,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: 'cc906f43-61c9-4372-b0c4-e96c00fcc53f',
+					elementId: '3f08ddf3-1d72-4f37-b2cc-c309125637d9',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -919,7 +919,7 @@ export const GalleryLabs: FEArticle = {
 					data: {
 						alt: 'Dieppe Castle above the city',
 						caption:
-							'<strong>Dieppe seafront<br></strong>Dieppe’s seafront tells a story of resilience, from its days as a fashionable resort for Parisians to its role in the ill-fated 1942 allied raid, which you can learn about at the <a href="https://en.normandie-tourisme.fr/museums-and-heritage-sites/memorial-du-19-aout-1942/" rel="nofollow">memorial museum</a>. A broad esplanade stretches along the pebble beach, overlooked by grand 19th-century villas and a clifftop chateau housing a <a href="https://uk.dieppetourisme.com/offers/musee-de-dieppe-chateau-dieppe-en-3027618/" rel="nofollow">museum</a>. Fishermen unload their catch near the quayside restaurants, where locals queue for <em>moules-frites</em>. On Saturdays, the town hosts <a href="https://en.normandie-tourisme.fr/dieppe-market/" rel="nofollow">Normandy’s largest street market</a>, a feast of regional cheeses, cider, and seafood.',
+							'<h2>Dieppe seafront</h2>Dieppe’s seafront tells a story of resilience, from its days as a fashionable resort for Parisians to its role in the ill-fated 1942 allied raid, which you can learn about at the <a href="https://en.normandie-tourisme.fr/museums-and-heritage-sites/memorial-du-19-aout-1942/" rel="nofollow">memorial museum</a>. A broad esplanade stretches along the pebble beach, overlooked by grand 19th-century villas and a clifftop chateau housing a <a href="https://uk.dieppetourisme.com/offers/musee-de-dieppe-chateau-dieppe-en-3027618/" rel="nofollow">museum</a>. Fishermen unload their catch near the quayside restaurants, where locals queue for <em>moules-frites</em>. On Saturdays, the town hosts <a href="https://en.normandie-tourisme.fr/dieppe-market/" rel="nofollow">Normandy’s largest street market</a>, a feast of regional cheeses, cider, and seafood.',
 						credit: 'Photograph: Roland Brack/4Corners Images',
 					},
 				},
@@ -998,7 +998,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: '12e74cd9-8c5a-4e09-9bd3-d962279eda8d',
+					elementId: '6a5efa3e-d3e8-4cfe-9ade-e8ff90dfe604',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -1234,7 +1234,7 @@ export const GalleryLabs: FEArticle = {
 					data: {
 						alt: 'France, Normandy, Omaha Beach, Basse-Normandie, D-Day, Monument of the D-Day landings on Omaha beach at sunset',
 						caption:
-							'<strong>Omaha beach<br></strong>Omaha beach is vast and windswept, its golden sands stretching far beyond the second world war memorials that mark its past. Omaha was the most heavily fortified of the five landing beaches that stretch along Normandy’s coast. The <a href="https://www.abmc.gov/cemeteries-memorials/about-normandy-american-cemetery/" rel="nofollow">Normandy American Cemetery</a> stands on the cliffs above, a stark reminder of the large number of US soldiers that lost their lives. Inland, the <a href="https://en.normandie-tourisme.fr/museums-and-heritage-sites/overlord-museum-omaha-beach/" rel="nofollow">Overlord Museum</a> fills in the details, with tanks and personal artefacts bringing D-day to life. Visit in the early morning for a moment of quiet before the coach tours arrive.',
+							'<h2>Omaha beach</h2>Omaha beach is vast and windswept, its golden sands stretching far beyond the second world war memorials that mark its past. Omaha was the most heavily fortified of the five landing beaches that stretch along Normandy’s coast. The <a href="https://www.abmc.gov/cemeteries-memorials/about-normandy-american-cemetery/" rel="nofollow">Normandy American Cemetery</a> stands on the cliffs above, a stark reminder of the large number of US soldiers that lost their lives. Inland, the <a href="https://en.normandie-tourisme.fr/museums-and-heritage-sites/overlord-museum-omaha-beach/" rel="nofollow">Overlord Museum</a> fills in the details, with tanks and personal artefacts bringing D-day to life. Visit in the early morning for a moment of quiet before the coach tours arrive.',
 						credit: 'Photograph: Claudio Leolini/4Corners Images',
 					},
 				},
@@ -1313,7 +1313,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: '2c643304-321d-4255-bfd1-c057421d1c66',
+					elementId: '6b6f3735-d030-4a88-a3bc-04de1c5cc843',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -1549,7 +1549,7 @@ export const GalleryLabs: FEArticle = {
 					data: {
 						alt: 'An aerial image of sunset at Mont Saint-Michel during high tide.',
 						caption:
-							'<strong>Mont-Saint-Michel<br></strong>For centuries one of Europe’s major pilgrimage destinations, Mont-Saint-Michel is a Unesco world heritage site, as is its beautiful bay. The <a href="https://www.abbaye-mont-saint-michel.fr/" rel="nofollow">medieval abbey</a>, a masterpiece of stonework, dominates the skyline – the climb is steep, but the views from the top stretch across vast sandbanks and shifting waters. Visitors can also walk the ramparts and explore the village of half-timbered houses, creperies and inns. Make time to try a traditional souffle omelette at <a href="https://lamerepoulard.com/en/home2/" rel="nofollow">La Mère Poulard</a>, or stay overnight to see the island’s true character emerge after the day-trippers leave.',
+							'<h2>Mont-Saint-Michel</h2>For centuries one of Europe’s major pilgrimage destinations, Mont-Saint-Michel is a Unesco world heritage site, as is its beautiful bay. The <a href="https://www.abbaye-mont-saint-michel.fr/" rel="nofollow">medieval abbey</a>, a masterpiece of stonework, dominates the skyline – the climb is steep, but the views from the top stretch across vast sandbanks and shifting waters. Visitors can also walk the ramparts and explore the village of half-timbered houses, creperies and inns. Make time to try a traditional souffle omelette at <a href="https://lamerepoulard.com/en/home2/" rel="nofollow">La Mère Poulard</a>, or stay overnight to see the island’s true character emerge after the day-trippers leave.',
 						credit: 'Photograph: MathieuRivrin/Getty Images',
 					},
 				},
@@ -1628,7 +1628,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: 'cd50b801-4501-4b92-8357-3444470c96db',
+					elementId: 'ba3379bb-da21-4110-8774-908610045faf',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -1864,7 +1864,7 @@ export const GalleryLabs: FEArticle = {
 					data: {
 						alt: 'Village of Beuvron-en-Auge, Cider Route, Department of Calvados, Lower Normandy',
 						caption:
-							'<strong>Beuvron-en-Auge<br></strong>Beuvron-en-Auge looks like a postcard but lives like a village. A <a href="https://en.normandie-tourisme.fr/museums-and-heritage-sites/village-sauvegarde-de-beuvron-en-auge/" rel="nofollow">16th-century manor house</a>, the 18th-century former Boule d’Or inn, and half-timbered houses from the 17th and 18th centuries make a meander here a journey through French history. Former homes of cider makers and cheese merchants now hold antique shops and restaurants serving <em>camembert rôti</em> and local cider. In spring, wisteria flowers across the facades, and in autumn, apple harvests bring a festival atmosphere. The <a href="https://routeducidre.com/" rel="nofollow">Route du Cidre</a> passes right through, making Beuvron an ideal stop for tastings at nearby orchards.',
+							'<h2>Beuvron-en-Auge</h2>Beuvron-en-Auge looks like a postcard but lives like a village. A <a href="https://en.normandie-tourisme.fr/museums-and-heritage-sites/village-sauvegarde-de-beuvron-en-auge/" rel="nofollow">16th-century manor house</a>, the 18th-century former Boule d’Or inn, and half-timbered houses from the 17th and 18th centuries make a meander here a journey through French history. Former homes of cider makers and cheese merchants now hold antique shops and restaurants serving <em>camembert rôti</em> and local cider. In spring, wisteria flowers across the facades, and in autumn, apple harvests bring a festival atmosphere. The <a href="https://routeducidre.com/" rel="nofollow">Route du Cidre</a> passes right through, making Beuvron an ideal stop for tastings at nearby orchards.',
 						credit: 'Photograph: Günter Gräfenhain/4Corners Images',
 					},
 				},
@@ -1943,7 +1943,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: 'f3237cdb-0e58-4cec-a312-a40324114232',
+					elementId: 'ed6b7836-9014-4160-a528-cfd647040879',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2179,7 +2179,7 @@ export const GalleryLabs: FEArticle = {
 					data: {
 						alt: 'Japanese Bridge in the Water Garden of Claude Monet in Giverny',
 						caption:
-							'<strong>Giverny<br></strong>In <a href="https://claudemonetgiverny.fr/" rel="nofollow">Claude Monet’s gardens in Giverny</a>, you’ll find the lily pond, shaded by Japanese willows, that he made <a href="https://www.nationalgallery.org.uk/paintings/claude-monet-the-water-lily-pond" rel="nofollow">world-famous in his paintings</a>. Monet was so particular that he commanded a dedicated team of gardeners to remove dead lily pads before he started painting each day. Beyond the gardens, the <a href="https://www.mdig.fr/" rel="nofollow">Musée des Impressionnismes Giverny</a> explores the movement Monet helped define, while the village itself offers a slower pace, with walking trails through the Seine valley’s soft green landscapes.',
+							'<h2>Giverny</h2>In <a href="https://claudemonetgiverny.fr/" rel="nofollow">Claude Monet’s gardens in Giverny</a>, you’ll find the lily pond, shaded by Japanese willows, that he made <a href="https://www.nationalgallery.org.uk/paintings/claude-monet-the-water-lily-pond" rel="nofollow">world-famous in his paintings</a>. Monet was so particular that he commanded a dedicated team of gardeners to remove dead lily pads before he started painting each day. Beyond the gardens, the <a href="https://www.mdig.fr/" rel="nofollow">Musée des Impressionnismes Giverny</a> explores the movement Monet helped define, while the village itself offers a slower pace, with walking trails through the Seine valley’s soft green landscapes.',
 						credit: 'Photograph: Susanne Kremer/4Corners Images',
 					},
 				},
@@ -2258,7 +2258,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: 'de49fd9c-1b9f-4d99-bd79-8e1246079399',
+					elementId: 'cbcf8909-6976-4c78-8472-5463522b2640',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2494,7 +2494,7 @@ export const GalleryLabs: FEArticle = {
 					data: {
 						alt: 'France, Normandy, Rouen, Haute-Normandie, Seine-Maritime, Jumièges Abbey',
 						caption:
-							'<strong>Abbaye de Jumièges<br></strong>The ruins of <a href="https://www.abbayedejumieges.fr/" rel="nofollow">Abbaye de Jumièges</a> are a skeleton of white limestone, their scale hinting at the grandeur of the abbey before the French Revolution. Despite its roofless state, the structure still impresses: arches soar into the sky and empty windows frame nothing but blue. Walking through its remains, you sense the ambition of Norman builders who raised it in the seventh century. In the 19th century, visitors would picnic among the fallen stones, imagining themselves in a gothic novel, and Victor Hugo called it France’s most beautiful ruin.',
+							'<h2>Abbaye de Jumièges</h2>The ruins of <a href="https://www.abbayedejumieges.fr/" rel="nofollow">Abbaye de Jumièges</a> are a skeleton of white limestone, their scale hinting at the grandeur of the abbey before the French Revolution. Despite its roofless state, the structure still impresses: arches soar into the sky and empty windows frame nothing but blue. Walking through its remains, you sense the ambition of Norman builders who raised it in the seventh century. In the 19th century, visitors would picnic among the fallen stones, imagining themselves in a gothic novel, and Victor Hugo called it France’s most beautiful ruin.',
 						credit: 'Photograph: Luigi Vaccarella/4Corners Images',
 					},
 				},
@@ -2573,7 +2573,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: '7267a5b3-7f0a-465c-a0eb-05b84d4d1998',
+					elementId: '8d7f2a76-ad26-4a51-8bad-f9a1140518f9',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2809,7 +2809,7 @@ export const GalleryLabs: FEArticle = {
 					data: {
 						alt: 'Honfleur harbour in Normandy, France. Colourful houses and their reflection in water',
 						caption:
-							'<strong>Honfleur harbour<br></strong>Honfleur’s harbour is a painter’s dream, and for good reason: tall, narrow houses in soft shades of grey and ochre line the <a href="https://www.ot-honfleur.fr/en/Honfleur/unmissable-in-honfleur/the-old-pond/" rel="nofollow">Vieux Bassin</a>, their slate roofs crammed together as if holding each other up – and they repeat again in the water’s reflection. Painters Eugène Boudin, Monet and Gustave Courbet all captured the shifting reflections on canvas. Today, fishing boats bob alongside expensive yachts, while cafes spill on to the quays, serving seafood platters stacked with oysters and prawns.',
+							'<h2>Honfleur harbour</h2>Honfleur’s harbour is a painter’s dream, and for good reason: tall, narrow houses in soft shades of grey and ochre line the <a href="https://www.ot-honfleur.fr/en/Honfleur/unmissable-in-honfleur/the-old-pond/" rel="nofollow">Vieux Bassin</a>, their slate roofs crammed together as if holding each other up – and they repeat again in the water’s reflection. Painters Eugène Boudin, Monet and Gustave Courbet all captured the shifting reflections on canvas. Today, fishing boats bob alongside expensive yachts, while cafes spill on to the quays, serving seafood platters stacked with oysters and prawns.',
 						credit: 'Photograph: dvoevnore/Shutterstock',
 					},
 				},
@@ -2888,7 +2888,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: '4505aca6-fe9b-410e-bfdc-3f8bdf86d988',
+					elementId: 'cea85493-8421-485a-81b9-7251844603a8',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -3124,7 +3124,7 @@ export const GalleryLabs: FEArticle = {
 					data: {
 						alt: 'Detail of the Bayeux Tapestry, Bayeux Museum',
 						caption:
-							'<strong>Bayeux Tapestry<br></strong>The <a href="https://www.bayeuxmuseum.com/en/the-bayeux-tapestry/" rel="nofollow">Bayeux Tapestry</a> is both an artwork and a political statement, an 11th-century propaganda piece embroidered with great skill. The scenes unfold like a medieval comic strip, from Halley’s comet streaking through the sky to King Harold’s fatal arrow at Hastings. Housed in a purpose-built museum, which will be closed for renovation at the end of the summer, the embroidery stretches for 70 metres, with captions in Latin narrating the conquest.',
+							'<h2>Bayeux Tapestry</h2>The <a href="https://www.bayeuxmuseum.com/en/the-bayeux-tapestry/" rel="nofollow">Bayeux Tapestry</a> is both an artwork and a political statement, an 11th-century propaganda piece embroidered with great skill. The scenes unfold like a medieval comic strip, from Halley’s comet streaking through the sky to King Harold’s fatal arrow at Hastings. Housed in a purpose-built museum, which will be closed for renovation at the end of the summer, the embroidery stretches for 70 metres, with captions in Latin narrating the conquest.',
 						credit: 'Photograph: Bayeux Museum',
 					},
 				},
@@ -3197,7 +3197,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: '3eb69e0f-2527-42d6-8a68-511e95d479ca',
+					elementId: '2436e4d0-b7b8-4953-a212-793e1c2558f6',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -3433,7 +3433,7 @@ export const GalleryLabs: FEArticle = {
 					data: {
 						alt: 'View of Rouen Cathedral facade at sunset',
 						caption:
-							'<strong>Rouen Cathedral<br></strong><a href="https://en.visiterouen.com/heritages/history/the-cathedral-intimate-and-flamboyant/" rel="nofollow">Rouen Cathedral</a> dominates the skyline with its delicate lacework of stone and the tallest spire in France. Monet painted it more than <a href="https://www.metmuseum.org/art/collection/search/437124#:~:text=Monet%20painted%20more%20than%20thirty,the%20atmosphere%20and%20light%20palpable." rel="nofollow">30 times</a>, capturing how light and weather transformed the facade. The stained glass filters light into shifting patterns. Walk around the back to find the Saint-Romain Tower, a remnant of an earlier structure, and the oldest part of this constantly evolving masterpiece. Rouen Cathedral literally has the heart of Richard the Lionheart. His <a href="https://www.worldhistory.org/image/11552/tomb-of-richard-is-heart-rouen/" rel="nofollow">embalmed heart</a> was placed in a lead box inside the cathedral.',
+							'<h2>Rouen Cathedral</h2><a href="https://en.visiterouen.com/heritages/history/the-cathedral-intimate-and-flamboyant/" rel="nofollow">Rouen Cathedral</a> dominates the skyline with its delicate lacework of stone and the tallest spire in France. Monet painted it more than <a href="https://www.metmuseum.org/art/collection/search/437124#:~:text=Monet%20painted%20more%20than%20thirty,the%20atmosphere%20and%20light%20palpable." rel="nofollow">30 times</a>, capturing how light and weather transformed the facade. The stained glass filters light into shifting patterns. Walk around the back to find the Saint-Romain Tower, a remnant of an earlier structure, and the oldest part of this constantly evolving masterpiece. Rouen Cathedral literally has the heart of Richard the Lionheart. His <a href="https://www.worldhistory.org/image/11552/tomb-of-richard-is-heart-rouen/" rel="nofollow">embalmed heart</a> was placed in a lead box inside the cathedral.',
 						credit: 'Photograph: Valerie2000/Shutterstock',
 					},
 				},
@@ -3512,7 +3512,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: 'bc24147f-5d73-4e56-854a-0e7908f25276',
+					elementId: '465dfe0c-284b-4ba9-a193-15104b529dd4',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -3748,7 +3748,7 @@ export const GalleryLabs: FEArticle = {
 					data: {
 						alt: 'Chausey Isands, aerial view',
 						caption:
-							'<strong>Chausey Islands<br></strong>You’ve no doubt heard of the British Channel Islands, but did you know that France has its own Channel Islands. Chausey, 51 miles from Jersey, remains remarkably undeveloped. At high tide, 52 islets dot the water; at low tide, the sea retreats to reveal 365 of them. The main island, Grande Île, has no cars, making it a haven for walkers and kayakers. The granite here once built Mont-Saint-Michel, but now fishing plays a major role in the local economy. Seals bask on the rocks, seabirds nest in the cliffs, and visitors come for nothing more than fresh air and a sense of escape.',
+							'<h2>Chausey Islands</h2>You’ve no doubt heard of the British Channel Islands, but did you know that France has its own Channel Islands. Chausey, 51 miles from Jersey, remains remarkably undeveloped. At high tide, 52 islets dot the water; at low tide, the sea retreats to reveal 365 of them. The main island, Grande Île, has no cars, making it a haven for walkers and kayakers. The granite here once built Mont-Saint-Michel, but now fishing plays a major role in the local economy. Seals bask on the rocks, seabirds nest in the cliffs, and visitors come for nothing more than fresh air and a sense of escape.',
 						credit: 'Photograph: Tuul & Bruno Morandi/Getty Images',
 					},
 				},
@@ -3827,7 +3827,7 @@ export const GalleryLabs: FEArticle = {
 							},
 						],
 					},
-					elementId: 'eb1a443a-bd54-483f-a7aa-a6edd1e708be',
+					elementId: 'f90b1609-d7e4-426d-a6a0-63e95e44cc8b',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -4063,7 +4063,7 @@ export const GalleryLabs: FEArticle = {
 					data: {
 						alt: 'Barfleur, Les Plus Beaux Villages de France',
 						caption:
-							'<strong>Barfleur<br></strong>In the village of Barfleur, fishing boats bring in the day’s catch before sunrise, and at lunchtime locals tuck into mussels straight from the harbour. The granite houses, built solid against the wind, mostly date from the 17th and 18th centuries, but the town itself goes back to the middle ages, when this was one of Normandy’s key ports. The Romanesque church of <a href="https://www.stnicholascenter.org/gazetteer/1238" rel="nofollow">Saint-Nicolas</a> stands firm against storms coming in off the Channel, while the nearby <a href="https://phare-de-gatteville.fr/" rel="nofollow">Gatteville Lighthouse</a> offers a climb worth the effort; 365 steps to a view that stretches from the Cotentin peninsula to the open sea.',
+							'<h2>Barfleur</h2>In the village of Barfleur, fishing boats bring in the day’s catch before sunrise, and at lunchtime locals tuck into mussels straight from the harbour. The granite houses, built solid against the wind, mostly date from the 17th and 18th centuries, but the town itself goes back to the middle ages, when this was one of Normandy’s key ports. The Romanesque church of <a href="https://www.stnicholascenter.org/gazetteer/1238" rel="nofollow">Saint-Nicolas</a> stands firm against storms coming in off the Channel, while the nearby <a href="https://phare-de-gatteville.fr/" rel="nofollow">Gatteville Lighthouse</a> offers a climb worth the effort; 365 steps to a view that stretches from the Cotentin peninsula to the open sea.',
 						credit: 'Photograph: Herve Lenain/Alamy',
 					},
 				},
@@ -4079,7 +4079,7 @@ export const GalleryLabs: FEArticle = {
 			blockLastUpdatedDisplay: '10.08 BST',
 			contributors: [],
 			primaryDateLine: 'Mon 28 Apr 2025 11.35 BST',
-			secondaryDateLine: 'Last modified on Mon 28 Apr 2025 12.57 BST',
+			secondaryDateLine: 'Last modified on Wed 2 Jul 2025 16.04 BST',
 		},
 	],
 	author: {
@@ -4090,7 +4090,7 @@ export const GalleryLabs: FEArticle = {
 	webPublicationDateDeprecated: '2025-04-28T10:35:06.000Z',
 	webPublicationDateDisplay: 'Mon 28 Apr 2025 11.35 BST',
 	webPublicationSecondaryDateDisplay:
-		'Last modified on Mon 28 Apr 2025 12.57 BST',
+		'Last modified on Wed 2 Jul 2025 16.04 BST',
 	editionLongForm: 'UK edition',
 	editionId: 'UK',
 	pageId: 'uncommon-holidays/gallery/2025/apr/28/mysterious-islands-medieval-castles-monets-gardens-must-see-places-normandy-in-pictures',
@@ -4192,7 +4192,7 @@ export const GalleryLabs: FEArticle = {
 			datePublished: '2025-04-28T10:35:06.000Z',
 			headline:
 				'Mysterious islands, medieval castles and Monet’s gardens: 12 must-see places in Normandy – in pictures',
-			dateModified: '2025-04-28T11:57:39.000Z',
+			dateModified: '2025-07-02T15:04:24.000Z',
 			mainEntityOfPage:
 				'https://www.theguardian.com/uncommon-holidays/gallery/2025/apr/28/mysterious-islands-medieval-castles-monets-gardens-must-see-places-normandy-in-pictures',
 		},
@@ -4218,7 +4218,7 @@ export const GalleryLabs: FEArticle = {
 		'og:title':
 			'Mysterious islands, medieval castles and Monet’s gardens: 12 must-see places in Normandy – in pictures',
 		'fb:app_id': '180444840287',
-		'article:modified_time': '2025-04-28T11:57:39.000Z',
+		'article:modified_time': '2025-07-02T15:04:24.000Z',
 		'og:image:height': '420',
 		'og:description':
 			'Boasting history, breathtaking scenery and picturesque villages, a getaway in northern France is sure to delight every type of holidaymaker',
@@ -4407,6 +4407,7 @@ export const GalleryLabs: FEArticle = {
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},
+		serverSideABTests: {},
 		edition: 'UK',
 		ipsosTag: 'environment',
 		isLiveBlog: false,
@@ -4817,7 +4818,7 @@ export const GalleryLabs: FEArticle = {
 				},
 			],
 		},
-		elementId: '04b3ff2f-e962-4bc9-acff-ef94afddd25f',
+		elementId: '30ed45cf-3759-4dae-8590-36cfde06bf61',
 		imageSources: [],
 		data: {
 			copyright: '',
@@ -4908,7 +4909,7 @@ export const GalleryLabs: FEArticle = {
 								url: '/world/europe-news',
 							},
 							{
-								title: 'US',
+								title: 'US news',
 								url: '/us-news',
 								longTitle: 'US news',
 							},
@@ -4988,6 +4989,11 @@ export const GalleryLabs: FEArticle = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
+							},
+							{
+								title: 'Euro 2025',
+								url: '/football/women-s-euro-2025',
+								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -5162,6 +5168,11 @@ export const GalleryLabs: FEArticle = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
+							},
+							{
+								title: 'Euro 2025',
+								url: '/football/women-s-euro-2025',
+								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -5695,6 +5706,12 @@ export const GalleryLabs: FEArticle = {
 					text: 'Tips',
 					url: 'https://www.theguardian.com/tips',
 					dataLinkName: 'uk : footer : tips',
+					extraClasses: '',
+				},
+				{
+					text: 'Accessibility settings',
+					url: '/help/accessibility-help',
+					dataLinkName: 'accessibility settings',
 					extraClasses: '',
 				},
 			],

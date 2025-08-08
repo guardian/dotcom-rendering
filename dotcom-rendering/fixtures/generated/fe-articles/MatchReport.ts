@@ -85,7 +85,7 @@ export const MatchReport: FEArticle = {
 					},
 				],
 			},
-			elementId: '1d7ef813-e682-47e5-b15f-0e11ea505b68',
+			elementId: '396bdf1f-3ea0-41ef-80df-60bb7f7d060a',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -285,55 +285,55 @@ export const MatchReport: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>When does a blip become something more major? Whatever this sticky patch is for <a href="https://www.theguardian.com/football/norwichcity" data-component="auto-linked-tag">Norwich City</a>, it is impossible to ignore the changing landscape at the top of the Championship after Swansea cut their lead at the summit to two points courtesy of goals by André Ayew and Conor Hourihane.</p>',
-					elementId: '6d0dd844-10bc-4ce7-b156-7f4a124ec730',
+					elementId: 'a1626ca1-f934-45ed-a15e-f7ec7ed6b012',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Norwich may have fired blanks for the fourth successive game but Hourihane is on quite the streak, with a superb strike here his third goal since arriving on loan from Aston Villa a fortnight ago. It looks an increasingly shrewd piece of business.</p>',
-					elementId: '60f1f9e5-f426-4551-807b-76dc1187e1ae',
+					elementId: '53fcbc3e-8a93-450d-ba76-62e3453cd76f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Swansea have a game in hand on the leaders but Brentford and Reading, both of whom also have games up their sleeve, will be equally encouraged by a Norwich team stuck in a rut. Ayew capitalised on an uncharacteristic error by Tim Krul to open the scoring before Hourihane sent a rasping strike beyond the Norwich goalkeeper from distance after the interval.</p>',
-					elementId: '7e82b918-8d6a-49c3-98f1-3c8ed4b84761',
+					elementId: '89923474-902d-4376-b30e-7704a988015d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
 					prefix: 'Related: ',
 					text: "Tim Krul: 'The way we play at Norwich is similar to Holland'",
-					elementId: 'c507394a-e094-43c2-bdb0-57e5de56c5e5',
+					elementId: '98bbf152-de24-48f2-8913-0a7c0738c754',
 					role: 'thumbnail',
 					url: 'https://www.theguardian.com/football/football-league-blog/2021/jan/29/tim-krul-way-we-play-norwich-similar-holland-netherlands-goalkeeper',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Swansea should have had a late penalty too, but the referee Simon Hooper waved away appeals despite Ben Gibson appearing to fell the substitute Jordan Morris after Grant Hanley collided with the all-action Connor Roberts.</p>',
-					elementId: '46665bf7-41ef-4e0e-a12b-0b21699f5b32',
+					elementId: 'e4538573-c1e9-427d-b8e1-f01bd94cb3e6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>On the eve of this game, Swansea’s unpopular American owners gave a rare interview in which they broke their silence on a multitude of longstanding issues but also made a point of stressing they have not been “taking a victory lap” on the back of their impressive start under Steve Cooper.</p>',
-					elementId: '7e6fc1f6-bc65-4ebf-afb0-3f71a6b4533c',
+					elementId: '69e0d36f-ef26-449e-ab41-96d6e09168c4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“There were no expectations at the start of the season so I think it would be unfair to start doing it [building them] now with 19 games to go,” Cooper said. “There are clubs not even in the top 10 with much more resources than us but we’re going well and enjoying the journey and that’s how we work.”</p>',
-					elementId: 'e11b46ba-cd88-422f-abca-38d74ffb3426',
+					elementId: '3ca5895d-8dad-4aa9-9351-7a964c730664',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Perhaps it was kidology but Daniel Farke had been at pains to play down the significance of the occasion after stuttering to a point at Millwall on Tuesday. Todd Cantwell, among those of interest to the watching England Under-21s manager Aidy Boothroyd, showed touches of class, setting Teemu Pukki free with a wonderfully weighted pass and later Kenny McLean after twirling away from Matt Grimes but the killer instinct again eluded them.</p>',
-					elementId: 'f7339a4a-4757-47b6-a3a2-f5b9549a2f85',
+					elementId: 'e6ed7196-c602-4633-8f05-e44202004352',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Swansea seized the advantage three minutes before the interval but the goal was a tragicomedy from a Norwich perspective. Krul flapped at Roberts’ in-swinging corner and when the ball dropped, Marc Guehi, another player on Boothroyd’s radar, scooped the ball away from the Norwich goalkeeper’s grasp, allowing Swansea to feast on the leftovers. Jake Bidwell tried his luck and then Ayew fired in his ninth goal of the season. Farke sought a response and Freddie Woodman saved superbly to keep out Grant Hanley’s header on the brink of the interval after the captain met Przemyslaw Placheta’s free-kick.</p>',
-					elementId: '7f8ad45a-e647-4336-8f9a-090112de2893',
+					elementId: 'bcbd001e-e16a-4d90-8222-b010e3060dcc',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Krul came out early to limber up for the second half but, before Norwich had a chance to write the wrongs, they found themselves two goals down. Jay Fulton gobbled up possession following a loose pass by McLean and played a sliderule pass infield to Hourihane, who joined on loan last month in search of regular game time. The midfielder steadied himself with first touch and then arrowed a piercing left-footed strike into the corner with his second.</p>',
-					elementId: 'd0de30e0-5d1b-46cf-96cc-e0d15a2dea5d',
+					elementId: '32a583d0-072d-4e0d-ad0f-92f6fd18ffc6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -344,19 +344,19 @@ export const MatchReport: FEArticle = {
 					alt: 'Fiver',
 					caption:
 						'<strong>The Fiver: sign up and get our daily football email.</strong>',
-					elementId: '6d40f51d-371c-45c1-bb2d-ab064b5b3d6e',
+					elementId: 'b7fea048-2d8d-4ab6-9e13-29fc5fd57572',
 					isThirdPartyTracking: false,
 					html: '<iframe id="the-fiver" name="the-fiver" src="https://www.theguardian.com/email/form/plaintone/the-fiver" scrolling="no" seamless="" class="iframed--overflow-hidden email-sub__iframe" height="52px" frameborder="0" data-component="email-embed--the-fiver"></iframe>',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“We didn’t think he was going to come in and score three goals in first three league games, but we’ll take it,” said Cooper. “As soon as it fell to Conor I think everybody in the stadium thought ‘there’s a good chance of this going in.’ Once we lost Morgan [Gibbs-White, who returned to Wolves], I felt we needed a player you fancy to get goals. Conor’s numbers are really good.”</p>',
-					elementId: '04055439-196f-437c-8390-087948938ff7',
+					elementId: '69e13b3c-f921-4243-83b0-bece388de350',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Krul shook his head in disbelief and Farke admitted his players are hurting. “When you lose such a spotlight game, of course, you are disappointed,” he said. “I will allow my players to be disappointed because it’s important to feel this and be greedy for this next game. We want this winning feeling back.”</p>',
-					elementId: 'a8dca620-c861-4287-8eca-40430e7efea4',
+					elementId: '74f1c904-1093-425c-a436-aaf9cfd856e5',
 				},
 			],
 			attributes: {
@@ -520,7 +520,7 @@ export const MatchReport: FEArticle = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjEucG5n&enable=upscale&s=56e65bb6e8d87820d1825d27e918307a',
+				'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjEucG5n&enable=upscale&s=f23caf33ed65807cf78a2faf5a1b8263',
 				'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=4d76500f0c4bff87eb6979e12fc4eaf4',
 				'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=4933194a6d7519d92ed3cf410aa9f8a8',
 				'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1200&quality=85&auto=format&fit=max&s=56ea2121d733fa61be9fa2792b52aefa',
@@ -555,7 +555,7 @@ export const MatchReport: FEArticle = {
 		'article:author': 'https://www.theguardian.com/profile/ben-fisher',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjEucG5n&enable=upscale&s=56e65bb6e8d87820d1825d27e918307a',
+			'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjEucG5n&enable=upscale&s=f23caf33ed65807cf78a2faf5a1b8263',
 		'al:ios:url':
 			'gnmguardian://football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
@@ -587,7 +587,7 @@ export const MatchReport: FEArticle = {
 		'twitter:app:url:iphone':
 			'gnmguardian://football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top?contenttype=Article&source=twitter',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjEucG5n&s=fac538280c3c4151e299730e9cdc0098',
+			'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjEucG5n&s=3d80e01aa44c1f7e02d737e6a1211d0a',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
 			'gnmguardian://football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top?contenttype=Article&source=twitter',
@@ -749,6 +749,7 @@ export const MatchReport: FEArticle = {
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},
+		serverSideABTests: {},
 		edition: 'UK',
 		ipsosTag: 'environment',
 		isLiveBlog: false,
@@ -1085,7 +1086,7 @@ export const MatchReport: FEArticle = {
 								url: '/world/europe-news',
 							},
 							{
-								title: 'US',
+								title: 'US news',
 								url: '/us-news',
 								longTitle: 'US news',
 							},
@@ -1165,6 +1166,11 @@ export const MatchReport: FEArticle = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
+							},
+							{
+								title: 'Euro 2025',
+								url: '/football/women-s-euro-2025',
+								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -1339,6 +1345,11 @@ export const MatchReport: FEArticle = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
+							},
+							{
+								title: 'Euro 2025',
+								url: '/football/women-s-euro-2025',
+								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -1569,28 +1580,6 @@ export const MatchReport: FEArticle = {
 				url: 'https://www.theguardian.com/insidetheguardian',
 			},
 			{
-				title: 'The Observer',
-				url: '/observer',
-				children: [
-					{
-						title: 'Comment',
-						url: '/theobserver/news/comment',
-					},
-					{
-						title: 'The New Review',
-						url: '/theobserver/new-review',
-					},
-					{
-						title: 'Observer Magazine',
-						url: '/theobserver/magazine',
-					},
-					{
-						title: 'Observer Food Monthly',
-						url: '/theobserver/foodmonthly',
-					},
-				],
-			},
-			{
 				title: 'Guardian Weekly',
 				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
 			},
@@ -1607,16 +1596,12 @@ export const MatchReport: FEArticle = {
 						url: '/crosswords/series/quick',
 					},
 					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
+						title: 'Sunday quick',
+						url: '/crosswords/series/sunday-quick',
 					},
 					{
 						title: 'Quick cryptic',
 						url: '/crosswords/series/quick-cryptic',
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
 					},
 					{
 						title: 'Quiptic',
@@ -1629,10 +1614,6 @@ export const MatchReport: FEArticle = {
 					{
 						title: 'Prize',
 						url: '/crosswords/series/prize',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
 					},
 					{
 						title: 'Genius',
@@ -1655,6 +1636,10 @@ export const MatchReport: FEArticle = {
 			{
 				title: 'Corrections',
 				url: '/theguardian/series/corrections-and-clarifications',
+			},
+			{
+				title: 'Tips',
+				url: 'https://www.theguardian.com/tips',
 			},
 		],
 		brandExtensions: [
@@ -1770,7 +1755,7 @@ export const MatchReport: FEArticle = {
 							url: '/world/europe-news',
 						},
 						{
-							title: 'US',
+							title: 'US news',
 							url: '/us-news',
 							longTitle: 'US news',
 						},
@@ -1850,6 +1835,11 @@ export const MatchReport: FEArticle = {
 							title: 'Clubs',
 							url: '/football/teams',
 							longTitle: 'football/teams',
+						},
+						{
+							title: 'Euro 2025',
+							url: '/football/women-s-euro-2025',
+							longTitle: 'football/women-s-euro-2025',
 						},
 					],
 				},
@@ -2154,6 +2144,18 @@ export const MatchReport: FEArticle = {
 					text: 'Patrons',
 					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
 					dataLinkName: 'uk : footer : patrons',
+					extraClasses: '',
+				},
+				{
+					text: 'Tips',
+					url: 'https://www.theguardian.com/tips',
+					dataLinkName: 'uk : footer : tips',
+					extraClasses: '',
+				},
+				{
+					text: 'Accessibility settings',
+					url: '/help/accessibility-help',
+					dataLinkName: 'accessibility settings',
 					extraClasses: '',
 				},
 			],
