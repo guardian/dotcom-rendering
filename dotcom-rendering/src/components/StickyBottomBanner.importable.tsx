@@ -310,9 +310,9 @@ export const StickyBottomBanner = ({
 		};
 
 		pickMessage(bannerConfig, renderingTarget)
-			.then((PickedBanner: () => MaybeFC) =>
-				setSelectedBanner(PickedBanner),
-			)
+			.then((PickedBanner: () => MaybeFC) => {
+				setSelectedBanner(PickedBanner);
+			})
 			.catch((e) =>
 				console.error(
 					`StickyBottomBanner pickMessage - error: ${String(e)}`,

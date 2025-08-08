@@ -164,18 +164,26 @@ export const pickMessage = (
 			.then((winner) => {
 				clearAllTimeouts(candidateConfigsWithTimeout);
 
+				log(
+					'supporterRevenue',
+					`pickMessage for ${name}: ${JSON.stringify(winner)}}`,
+				);
+				document.dispatchEvent(
+					new CustomEvent<{
+						type: string;
+						winner: string | null;
+					}>('supporterRevenue:messagePicker', {
+						detail: {
+							type: name,
+							winner: winner?.candidate.id ?? null,
+						},
+					}),
+				);
+
 				if (winner === null) {
-					log(
-						'supporterRevenue',
-						`pickMessage for ${name}: no winner, returning default value`,
-					);
 					resolve(defaultShow);
 				} else {
 					const { candidate, meta } = winner;
-					log(
-						'supporterRevenue',
-						`pickMessage for ${name}: winner is ${candidate.id}`,
-					);
 					resolve(() => candidate.show(meta));
 				}
 			})
