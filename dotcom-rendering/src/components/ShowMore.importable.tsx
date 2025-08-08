@@ -180,7 +180,7 @@ export const ShowMore = ({
 												desktop: 'xxsmall',
 											}}
 											imageLoading="eager"
-											absoluteServerTimes={false}
+											serverTime={false}
 										/>
 									</LI>
 								);

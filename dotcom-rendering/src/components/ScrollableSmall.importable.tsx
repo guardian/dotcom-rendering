@@ -11,7 +11,7 @@ type Props = {
 	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes?: boolean;
+	serverTime?: number;
 	imageLoading: 'lazy' | 'eager';
 	containerType: DCRContainerType;
 	aspectRatio: AspectRatio;
@@ -55,7 +55,7 @@ export const ScrollableSmall = ({
 	trails,
 	containerPalette,
 	containerType,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 	showAge,
 	aspectRatio,
@@ -82,7 +82,7 @@ export const ScrollableSmall = ({
 						<FrontCard
 							trail={trail}
 							imageLoading={imageLoading}
-							absoluteServerTimes={!!absoluteServerTimes}
+							serverTime={serverTime}
 							containerPalette={containerPalette}
 							containerType={containerType}
 							showAge={!!showAge}

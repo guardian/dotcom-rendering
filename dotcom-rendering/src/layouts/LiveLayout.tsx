@@ -293,7 +293,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const showComments = article.isCommentable && !isPaidContent;
 
-	const { absoluteServerTimes = false } = article.config.switches;
+	const { serverTime = false } = article.config.switches;
 
 	return (
 		<>
@@ -566,7 +566,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									keyEvents={article.keyEvents}
 									filterKeyEvents={article.filterKeyEvents}
 									id={'key-events-carousel-desktop'}
-									absoluteServerTimes={absoluteServerTimes}
+									serverTime={serverTime}
 									renderingTarget={renderingTarget}
 								/>
 							</Island>
@@ -978,7 +978,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									discussionApiUrl={
 										article.config.discussionApiUrl
 									}
-									absoluteServerTimes={absoluteServerTimes}
+									serverTime={serverTime}
 									renderingTarget={renderingTarget}
 								/>
 							</Island>
@@ -1004,7 +1004,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							editionId={article.editionId}
 							shortUrlId={article.config.shortUrlId}
 							discussionApiUrl={article.config.discussionApiUrl}
-							absoluteServerTimes={absoluteServerTimes}
+							serverTime={serverTime}
 							renderingTarget={renderingTarget}
 						/>
 					</Island>

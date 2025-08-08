@@ -213,7 +213,7 @@ export const NewsletterSignupLayout = ({
 	const renderAds = canRenderAds(article);
 	const isWeb = renderingTarget === 'Web';
 
-	const { absoluteServerTimes = false } = article.config.switches;
+	const { serverTime = false } = article.config.switches;
 
 	return (
 		<>
@@ -435,7 +435,7 @@ export const NewsletterSignupLayout = ({
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
-								absoluteServerTimes={absoluteServerTimes}
+								serverTime={serverTime}
 								renderingTarget={renderingTarget}
 							/>
 						</Island>
@@ -459,7 +459,7 @@ export const NewsletterSignupLayout = ({
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 					/>
 				</Island>

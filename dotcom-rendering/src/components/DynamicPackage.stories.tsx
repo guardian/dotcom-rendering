@@ -36,7 +36,6 @@ const meta = {
 		groupedTrails: defaultGroupedTrails,
 		containerPalette: 'LongRunningPalette',
 		imageLoading: 'eager',
-		absoluteServerTimes: true,
 		showAge: false,
 	},
 	render: (args) => (
@@ -53,7 +52,7 @@ const meta = {
 		>
 			<DynamicPackage
 				groupedTrails={args.groupedTrails}
-				absoluteServerTimes={args.absoluteServerTimes}
+				serverTime={args.serverTime}
 				imageLoading={args.imageLoading}
 				containerPalette={args.containerPalette}
 				showAge={args.showAge}

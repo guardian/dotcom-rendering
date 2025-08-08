@@ -44,7 +44,7 @@ type Props = {
 	isVideoArticle?: boolean;
 	webPublicationDate?: string;
 	showClock?: boolean;
-	absoluteServerTimes?: boolean;
+	serverTime?: number;
 	linkTo?: string;
 	discussionApiUrl?: string;
 	discussionId?: string;
@@ -85,7 +85,7 @@ export const YoutubeBlockComponent = ({
 	isVideoArticle,
 	webPublicationDate,
 	showClock,
-	absoluteServerTimes,
+	serverTime,
 	linkTo,
 	discussionApiUrl,
 	discussionId,
@@ -203,7 +203,7 @@ export const YoutubeBlockComponent = ({
 				isVideoArticle={isVideoArticle}
 				webPublicationDate={webPublicationDate}
 				showClock={!!showClock}
-				absoluteServerTimes={absoluteServerTimes}
+				serverTime={serverTime}
 				linkTo={linkTo}
 				discussionId={discussionId}
 				discussionApiUrl={discussionApiUrl}

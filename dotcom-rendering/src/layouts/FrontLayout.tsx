@@ -134,7 +134,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
-	const { absoluteServerTimes = false } = front.config.switches;
+	const { serverTime = false } = front.config.switches;
 
 	const isInNoBoostsVariant = abTests.noBoostsVariant === 'variant';
 
@@ -170,7 +170,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					]}
 					groupedTrails={highlightsCollection.grouped}
 					showAge={false}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading="eager"
 					aspectRatio={
 						highlightsCollection.aspectRatio ??
@@ -503,9 +503,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											collection.containerPalette
 										}
 										imageLoading={imageLoading}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
+										serverTime={serverTime}
 										aspectRatio={
 											collection.aspectRatio ??
 											fallbackAspectRatio(
@@ -626,7 +624,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										)
 									}
 									imageLoading={imageLoading}
-									absoluteServerTimes={absoluteServerTimes}
+									serverTime={serverTime}
 									aspectRatio={
 										collection.aspectRatio ??
 										fallbackAspectRatio(

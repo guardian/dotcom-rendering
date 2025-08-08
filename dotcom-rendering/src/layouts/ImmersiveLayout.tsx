@@ -308,7 +308,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
-	const { absoluteServerTimes = false } = article.config.switches;
+	const { serverTime = false } = article.config.switches;
 
 	return (
 		<>
@@ -812,7 +812,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
-								absoluteServerTimes={absoluteServerTimes}
+								serverTime={serverTime}
 								renderingTarget={renderingTarget}
 							/>
 						</Island>
@@ -836,7 +836,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 					/>
 				</Island>

@@ -144,7 +144,7 @@ export const AudioLayout = (props: WebProps) => {
 
 	const showBodyEndSlot = parse(article.slotMachineFlags ?? '').showBodyEnd;
 
-	const { absoluteServerTimes = false } = article.config.switches;
+	const { serverTime = false } = article.config.switches;
 
 	const showComments = article.isCommentable && !isPaidContent;
 
@@ -490,7 +490,7 @@ export const AudioLayout = (props: WebProps) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
-								absoluteServerTimes={absoluteServerTimes}
+								serverTime={serverTime}
 								renderingTarget={renderingTarget}
 							/>
 						</Island>
@@ -514,7 +514,7 @@ export const AudioLayout = (props: WebProps) => {
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 					/>
 				</Island>

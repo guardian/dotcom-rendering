@@ -11,7 +11,6 @@ export const Default = () => (
 		blockId="#block-60300f5f8f08ad21ea60071e"
 		isPinnedPost={false}
 		isOriginalPinnedPost={false}
-		absoluteServerTimes={true}
 	/>
 );
 
@@ -22,7 +21,6 @@ export const WithFirstPublishedDisplay = () => (
 		blockId="#block-60300f5f8f08ad21ea60071e"
 		isPinnedPost={false}
 		isOriginalPinnedPost={false}
-		absoluteServerTimes={true}
 	/>
 );
 
@@ -32,7 +30,6 @@ export const PinnedPost = () => (
 		blockId="#block-60300f5f8f08ad21ea60071e"
 		isPinnedPost={true}
 		isOriginalPinnedPost={false}
-		absoluteServerTimes={true}
 	/>
 );
 
@@ -42,6 +39,5 @@ export const OriginalPinnedPost = () => (
 		blockId="#block-60300f5f8f08ad21ea60071e"
 		isPinnedPost={false}
 		isOriginalPinnedPost={true}
-		absoluteServerTimes={true}
 	/>
 );

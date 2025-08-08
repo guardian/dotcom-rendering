@@ -239,7 +239,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	const { absoluteServerTimes = false } = article.config.switches;
+	const { serverTime = false } = article.config.switches;
 
 	const renderAds = canRenderAds(article);
 
@@ -658,7 +658,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
-								absoluteServerTimes={absoluteServerTimes}
+								serverTime={serverTime}
 								renderingTarget={renderingTarget}
 							/>
 						</Island>
@@ -682,7 +682,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 					/>
 				</Island>

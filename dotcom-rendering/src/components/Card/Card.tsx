@@ -75,7 +75,7 @@ export type Position = 'inner' | 'outer' | 'none';
 export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	headlineText: string;
 	headlineSizes?: ResponsiveFontSize;
 	showQuotedHeadline?: boolean;
@@ -402,7 +402,7 @@ export const Card = ({
 	onwardsSource,
 	pauseOffscreenVideo = false,
 	showVideo = true,
-	absoluteServerTimes,
+	serverTime,
 	isTagPage = false,
 	aspectRatio,
 	index = 0,
@@ -460,7 +460,7 @@ export const Card = ({
 					isWithinTwelveHours: withinTwelveHours,
 				}}
 				showClock={showClock}
-				absoluteServerTimes={absoluteServerTimes}
+				serverTime={serverTime}
 				isTagPage={isTagPage}
 			/>
 		);
@@ -1192,9 +1192,7 @@ export const Card = ({
 												: supportingContentAlignment
 										}
 										containerPalette={containerPalette}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
+										serverTime={serverTime}
 										displayHeader={isFlexibleContainer}
 										directionOnMobile={
 											isFlexibleContainer
@@ -1248,7 +1246,7 @@ export const Card = ({
 									: supportingContentAlignment
 							}
 							containerPalette={containerPalette}
-							absoluteServerTimes={absoluteServerTimes}
+							serverTime={serverTime}
 							displayHeader={isFlexibleContainer}
 							directionOnMobile={'horizontal'}
 						></LatestLinks>

@@ -10,7 +10,7 @@ import type {
 type TrailProps = {
 	trail: DCRFrontCard;
 	imageLoading: Loading;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 	isTagPage?: boolean;
@@ -55,7 +55,7 @@ export const Card100Media50 = ({
 	containerPalette,
 	imageLoading,
 	isTagPage,
-	absoluteServerTimes,
+	serverTime,
 	aspectRatio,
 }: TrailProps) => {
 	return (
@@ -65,7 +65,7 @@ export const Card100Media50 = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
-			absoluteServerTimes={absoluteServerTimes}
+			serverTime={serverTime}
 			headlineSizes={{ desktop: 'medium', tablet: 'xxsmall' }}
 			image={trail.image}
 			imageSize="medium"
@@ -109,7 +109,7 @@ export const Card100Media75 = ({
 	containerPalette,
 	imageLoading,
 	isTagPage,
-	absoluteServerTimes,
+	serverTime,
 	aspectRatio,
 }: TrailProps) => {
 	return (
@@ -117,7 +117,7 @@ export const Card100Media75 = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
-			absoluteServerTimes={absoluteServerTimes}
+			serverTime={serverTime}
 			headlineSizes={{ desktop: 'medium', tablet: 'xsmall' }}
 			image={trail.image}
 			imageSize="jumbo"
@@ -164,7 +164,7 @@ export const Card100Media100 = ({
 	containerPalette,
 	imageLoading,
 	isTagPage,
-	absoluteServerTimes,
+	serverTime,
 	aspectRatio,
 }: TrailProps) => {
 	return (
@@ -172,7 +172,7 @@ export const Card100Media100 = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
-			absoluteServerTimes={absoluteServerTimes}
+			serverTime={serverTime}
 			headlineSizes={{ desktop: 'medium', tablet: 'xsmall' }}
 			image={trail.image}
 			imagePositionOnDesktop="top"
@@ -208,7 +208,7 @@ export const Card100Media100Tall = ({
 	containerPalette,
 	imageLoading,
 	isTagPage,
-	absoluteServerTimes,
+	serverTime,
 	aspectRatio,
 }: TrailProps) => {
 	return (
@@ -216,7 +216,7 @@ export const Card100Media100Tall = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
-			absoluteServerTimes={absoluteServerTimes}
+			serverTime={serverTime}
 			headlineSizes={{ desktop: 'xsmall', tablet: 'xsmall' }}
 			image={trail.image}
 			imagePositionOnDesktop="top"
@@ -251,7 +251,7 @@ export const Card75Media50Right = ({
 	containerPalette,
 	imageLoading,
 	isTagPage,
-	absoluteServerTimes,
+	serverTime,
 	aspectRatio,
 }: TrailProps) => {
 	return (
@@ -259,7 +259,7 @@ export const Card75Media50Right = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
-			absoluteServerTimes={absoluteServerTimes}
+			serverTime={serverTime}
 			trailText={trail.trailText}
 			supportingContent={trail.supportingContent?.slice(0, 3)}
 			supportingContentAlignment={
@@ -298,7 +298,7 @@ export const Card75Media50Left = ({
 	containerPalette,
 	imageLoading,
 	isTagPage,
-	absoluteServerTimes,
+	serverTime,
 	aspectRatio,
 }: TrailProps) => {
 	return (
@@ -306,7 +306,7 @@ export const Card75Media50Left = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
-			absoluteServerTimes={absoluteServerTimes}
+			serverTime={serverTime}
 			trailText={trail.trailText}
 			supportingContent={trail.supportingContent?.slice(0, 3)}
 			supportingContentAlignment={
@@ -345,7 +345,7 @@ export const Card25Media25 = ({
 	containerPalette,
 	imageLoading,
 	isTagPage,
-	absoluteServerTimes,
+	serverTime,
 	aspectRatio,
 }: TrailProps) => {
 	return (
@@ -355,7 +355,7 @@ export const Card25Media25 = ({
 			supportingContentAlignment="vertical"
 			containerPalette={containerPalette}
 			showAge={showAge}
-			absoluteServerTimes={absoluteServerTimes}
+			serverTime={serverTime}
 			imagePositionOnDesktop="top"
 			imagePositionOnMobile="left"
 			imageSize="small"
@@ -388,7 +388,7 @@ export const Card25Media25SmallHeadline = ({
 	containerPalette,
 	imageLoading,
 	isTagPage,
-	absoluteServerTimes,
+	serverTime,
 	aspectRatio,
 }: TrailProps) => {
 	return (
@@ -398,7 +398,7 @@ export const Card25Media25SmallHeadline = ({
 			supportingContentAlignment="vertical"
 			containerPalette={containerPalette}
 			showAge={showAge}
-			absoluteServerTimes={absoluteServerTimes}
+			serverTime={serverTime}
 			imagePositionOnDesktop="top"
 			imagePositionOnMobile="left"
 			imageSize="small"
@@ -432,7 +432,7 @@ export const Card25Media25Tall = ({
 	containerPalette,
 	imageLoading,
 	isTagPage,
-	absoluteServerTimes,
+	serverTime,
 	aspectRatio,
 }: TrailProps) => {
 	return (
@@ -440,7 +440,7 @@ export const Card25Media25Tall = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
-			absoluteServerTimes={absoluteServerTimes}
+			serverTime={serverTime}
 			imagePositionOnDesktop="top"
 			imagePositionOnMobile="left"
 			imageSize="small"
@@ -481,7 +481,7 @@ export const Card25Media25TallNoTrail = ({
 	containerPalette,
 	imageLoading,
 	isTagPage,
-	absoluteServerTimes,
+	serverTime,
 	aspectRatio,
 }: TrailProps) => {
 	return (
@@ -489,7 +489,7 @@ export const Card25Media25TallNoTrail = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
-			absoluteServerTimes={absoluteServerTimes}
+			serverTime={serverTime}
 			imagePositionOnDesktop="top"
 			imagePositionOnMobile="left"
 			imageSize="small"
@@ -523,7 +523,7 @@ export const Card25Media25TallSmallHeadline = ({
 	containerPalette,
 	imageLoading,
 	isTagPage,
-	absoluteServerTimes,
+	serverTime,
 	aspectRatio,
 }: TrailProps) => {
 	return (
@@ -531,7 +531,7 @@ export const Card25Media25TallSmallHeadline = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
-			absoluteServerTimes={absoluteServerTimes}
+			serverTime={serverTime}
 			imagePositionOnDesktop="top"
 			imagePositionOnMobile="left"
 			imageSize="small"
@@ -565,7 +565,7 @@ export const Card50Media50 = ({
 	containerPalette,
 	imageLoading,
 	isTagPage,
-	absoluteServerTimes,
+	serverTime,
 	aspectRatio,
 }: TrailProps) => {
 	return (
@@ -579,7 +579,7 @@ export const Card50Media50 = ({
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
 			showAge={showAge}
-			absoluteServerTimes={absoluteServerTimes}
+			serverTime={serverTime}
 			supportingContent={trail.supportingContent?.slice(0, 3)}
 			supportingContentAlignment="horizontal"
 			aspectRatio={aspectRatio}
@@ -608,7 +608,7 @@ export const Card50Media50Tall = ({
 	containerPalette,
 	imageLoading,
 	isTagPage,
-	absoluteServerTimes,
+	serverTime,
 	aspectRatio,
 }: TrailProps) => {
 	return (
@@ -616,7 +616,7 @@ export const Card50Media50Tall = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
-			absoluteServerTimes={absoluteServerTimes}
+			serverTime={serverTime}
 			trailText={trail.trailText}
 			supportingContent={trail.supportingContent?.slice(0, 3)}
 			supportingContentAlignment="horizontal"
@@ -651,7 +651,7 @@ export const Card66Media66 = ({
 	containerPalette,
 	imageLoading,
 	isTagPage,
-	absoluteServerTimes,
+	serverTime,
 	aspectRatio,
 }: TrailProps) => {
 	return (
@@ -659,7 +659,7 @@ export const Card66Media66 = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
-			absoluteServerTimes={absoluteServerTimes}
+			serverTime={serverTime}
 			trailText={trail.trailText}
 			headlineSizes={{ desktop: 'xsmall', tablet: 'xxsmall' }}
 			imagePositionOnDesktop="top"
@@ -692,7 +692,7 @@ export const Card33Media33 = ({
 	containerPalette,
 	imageLoading,
 	isTagPage,
-	absoluteServerTimes,
+	serverTime,
 	aspectRatio,
 }: TrailProps) => {
 	return (
@@ -700,7 +700,7 @@ export const Card33Media33 = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
-			absoluteServerTimes={absoluteServerTimes}
+			serverTime={serverTime}
 			trailText={trail.trailText}
 			imageSize="medium"
 			imagePositionOnDesktop="top"
@@ -732,7 +732,7 @@ export const Card33Media33Tall = ({
 	containerPalette,
 	imageLoading,
 	isTagPage,
-	absoluteServerTimes,
+	serverTime,
 	aspectRatio,
 }: TrailProps) => {
 	return (
@@ -740,7 +740,7 @@ export const Card33Media33Tall = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
-			absoluteServerTimes={absoluteServerTimes}
+			serverTime={serverTime}
 			imageSize="medium"
 			imagePositionOnDesktop="top"
 			imagePositionOnMobile="left"
@@ -774,7 +774,7 @@ export const Card33Media33MobileTopTall = ({
 	containerPalette,
 	imageLoading,
 	isTagPage,
-	absoluteServerTimes,
+	serverTime,
 	aspectRatio,
 }: TrailProps) => {
 	return (
@@ -782,7 +782,7 @@ export const Card33Media33MobileTopTall = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
-			absoluteServerTimes={absoluteServerTimes}
+			serverTime={serverTime}
 			trailText={trail.trailText}
 			imageSize="medium"
 			imagePositionOnDesktop="top"
@@ -813,7 +813,7 @@ export const CardDefault = ({
 	trail,
 	showAge,
 	containerPalette,
-	absoluteServerTimes,
+	serverTime,
 	isTagPage,
 	aspectRatio,
 }: Omit<TrailProps, 'imageLoading'>) => {
@@ -822,7 +822,7 @@ export const CardDefault = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
-			absoluteServerTimes={absoluteServerTimes}
+			serverTime={serverTime}
 			image={undefined}
 			imageLoading={'lazy'}
 			avatarUrl={undefined}
@@ -852,7 +852,7 @@ export const CardDefaultMedia = ({
 	containerPalette,
 	imageLoading,
 	isTagPage,
-	absoluteServerTimes,
+	serverTime,
 	aspectRatio,
 }: TrailProps) => {
 	return (
@@ -860,7 +860,7 @@ export const CardDefaultMedia = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
-			absoluteServerTimes={absoluteServerTimes}
+			serverTime={serverTime}
 			imageSize="small"
 			imagePositionOnDesktop="left"
 			imagePositionOnMobile="none"
@@ -891,7 +891,7 @@ export const CardDefaultMediaMobile = ({
 	containerPalette,
 	imageLoading,
 	isTagPage,
-	absoluteServerTimes,
+	serverTime,
 	aspectRatio,
 }: TrailProps) => {
 	return (
@@ -899,7 +899,7 @@ export const CardDefaultMediaMobile = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
-			absoluteServerTimes={absoluteServerTimes}
+			serverTime={serverTime}
 			imageSize="small"
 			imagePositionOnDesktop="left"
 			imagePositionOnMobile="left"
