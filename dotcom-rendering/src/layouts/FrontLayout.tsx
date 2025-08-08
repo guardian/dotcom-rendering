@@ -136,7 +136,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const { absoluteServerTimes = false } = front.config.switches;
 
-	const isInNoBoostsVariant = abTests.noBoostsVariant === 'variant';
+	const isInOpinionNoAvatarVariant =
+		abTests.opinionNoAvatarVariant === 'variant' && front.isNetworkFront;
 
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
@@ -636,8 +637,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
-									isInNoBoostsAbTestVariant={
-										pageId === 'uk' && isInNoBoostsVariant
+									isInOpinionNoAvatarVariant={
+										collection.displayName === 'Opinion' &&
+										isInOpinionNoAvatarVariant
 									}
 								/>
 							</FrontSection>
