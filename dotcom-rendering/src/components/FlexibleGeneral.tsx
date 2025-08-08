@@ -21,7 +21,6 @@ import type { ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
 import { FeatureCard } from './FeatureCard';
 import { FrontCard } from './FrontCard';
-import { Hide } from './Hide';
 import type { Alignment } from './SupportingContent';
 
 type Props = {
@@ -33,7 +32,6 @@ type Props = {
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
-	isInNoBoostsAbTestVariant?: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -582,7 +580,6 @@ export const FlexibleGeneral = ({
 	aspectRatio,
 	containerLevel = 'Primary',
 	collectionId,
-	isInNoBoostsAbTestVariant,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
 		...snap,
@@ -616,48 +613,7 @@ export const FlexibleGeneral = ({
 			{groupedCards.map((row, i) => {
 				switch (row.layout) {
 					case 'oneCardFullWidth':
-						return isInNoBoostsAbTestVariant ? (
-							<>
-								<Hide when="above" breakpoint="tablet">
-									<HalfWidthCardLayout
-										key={row.cards[0]?.uniqueId}
-										cards={row.cards}
-										containerPalette={containerPalette}
-										showAge={showAge}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
-										imageLoading={imageLoading}
-										isFirstRow={!splash.length && i === 0}
-										isFirstStandardRow={i === 0}
-										aspectRatio={aspectRatio}
-										isLastRow={
-											i === groupedCards.length - 1
-										}
-										containerLevel={containerLevel}
-									/>
-								</Hide>
-								<Hide when="below" breakpoint="tablet">
-									<FullWidthCardLayout
-										key={row.cards[0]?.uniqueId}
-										cards={row.cards}
-										containerPalette={containerPalette}
-										showAge={showAge}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
-										imageLoading={imageLoading}
-										aspectRatio={aspectRatio}
-										isFirstRow={!splash.length && i === 0}
-										isLastRow={
-											i === groupedCards.length - 1
-										}
-										containerLevel={containerLevel}
-										collectionId={collectionId}
-									/>
-								</Hide>
-							</>
-						) : (
+						return (
 							<FullWidthCardLayout
 								key={row.cards[0]?.uniqueId}
 								cards={row.cards}
