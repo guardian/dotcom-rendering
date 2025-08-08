@@ -15,6 +15,12 @@ updates:
       - dependency-name: 'aws-cdk'
       - dependency-name: 'aws-cdk-lib'
       - dependency-name: 'constructs'
+      # The `check-node-versions` script enforces that this package is kept in
+      # sync with our Node major version, so we want dependabot to ignore major
+      # version updates, but still allow smaller updates.
+      - dependency-name: '@types/node'
+        update-types:
+          - 'version-update:semver-major'
 
     open-pull-requests-limit: 10
     groups:
