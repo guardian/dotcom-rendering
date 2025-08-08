@@ -20,11 +20,13 @@ import { submitComponentEventTracking } from './SignInGate/componentEventTrackin
 import { retrieveDismissedCount } from './SignInGate/dismissGate';
 import { pageIdIsAllowedForGating } from './SignInGate/displayRules';
 import { SignInGateAuxiaV1 } from './SignInGate/gateDesigns/SignInGateAuxiaV1';
+import { SignInGateAuxiaV2 } from './SignInGate/gateDesigns/SignInGateAuxiaV2';
 import { signInGateComponent as gateLegacyComponent } from './SignInGate/gates/main-control';
 import type {
 	AuxiaAPIResponseDataUserTreatment,
 	AuxiaGateDisplayData,
 	AuxiaGateReaderPersonalData,
+	AuxiaGateVersion,
 	AuxiaInteractionActionName,
 	AuxiaInteractionInteractionType,
 	AuxiaProxyGetTreatmentsPayload,
@@ -50,6 +52,7 @@ type Props = {
 	idUrl?: string;
 	contributionsServiceUrl: string;
 	editionId: EditionId;
+	signInGateVersion?: AuxiaGateVersion;
 };
 
 // function to generate the profile.theguardian.com url with tracking params
@@ -146,6 +149,7 @@ export const SignInGateSelector = ({
 	idUrl = 'https://profile.theguardian.com',
 	contributionsServiceUrl,
 	editionId,
+	signInGateVersion,
 }: Props) => {
 	const abTestAPI = useAB()?.api;
 	const userIsInAuxiaExperiment = !!abTestAPI?.isUserInVariant(
@@ -170,6 +174,7 @@ export const SignInGateSelector = ({
 			sectionId={sectionId}
 			tags={tags}
 			isAuxiaAudience={userIsInAuxiaExperiment}
+			signInGateVersion={signInGateVersion}
 		/>
 	);
 };
@@ -209,6 +214,7 @@ type PropsAuxia = {
 	sectionId: string;
 	tags: TagType[];
 	isAuxiaAudience: boolean; // [1]
+	signInGateVersion?: AuxiaGateVersion;
 };
 
 // [1] If true, it indicates that we are using the component for the regular Auxia share of the Audience
@@ -228,6 +234,7 @@ interface ShowSignInGateAuxiaProps {
 		interactionType: AuxiaInteractionInteractionType,
 		actionName: AuxiaInteractionActionName,
 	) => Promise<void>;
+	signInGateVersion?: AuxiaGateVersion;
 }
 
 const decideIsSupporter = (): boolean => {
@@ -512,6 +519,24 @@ const buildAbTestTrackingAuxiaVariant = (
 	};
 };
 
+const getAuxiaGateVersion = (
+	signInGateVersion?: AuxiaGateVersion,
+): AuxiaGateVersion => {
+	if (signInGateVersion) {
+		return signInGateVersion;
+	}
+
+	const params = new URLSearchParams(window.location.search);
+	const version = params.get('auxia_gate_version');
+
+	if (version === 'v2') {
+		return 'v2';
+	}
+
+	// Default to v1
+	return 'v1';
+};
+
 const SignInGateSelectorAuxia = ({
 	host = 'https://theguardian.com/',
 	pageId,
@@ -524,6 +549,7 @@ const SignInGateSelectorAuxia = ({
 	sectionId,
 	tags,
 	isAuxiaAudience,
+	signInGateVersion,
 }: PropsAuxia) => {
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
@@ -671,6 +697,7 @@ const SignInGateSelectorAuxia = ({
 								);
 							});
 						}}
+						signInGateVersion={signInGateVersion}
 					/>
 				)}
 		</>
@@ -688,10 +715,14 @@ const ShowSignInGateAuxia = ({
 	treatmentId,
 	renderingTarget,
 	logTreatmentInteractionCall,
+	signInGateVersion,
 }: ShowSignInGateAuxiaProps) => {
 	const componentId = 'main_variant_5';
 	const checkoutCompleteCookieData = undefined;
 	const personaliseSignInGateAfterCheckoutSwitch = undefined;
+
+	// Get the gate version configuration
+	const gateVersion = getAuxiaGateVersion(signInGateVersion);
 
 	useOnce(() => {
 		void auxiaLogTreatmentInteraction(
@@ -717,32 +748,36 @@ const ShowSignInGateAuxia = ({
 			{
 				component: {
 					componentType: 'SIGN_IN_GATE',
-					id: treatmentId,
+					id: `${treatmentId}_${gateVersion}`, // Include version in tracking
 				},
 				action: 'VIEW',
 				abTest: buildAbTestTrackingAuxiaVariant(treatmentId),
 			},
 			renderingTarget,
 		);
-	}, [componentId]);
+	}, [componentId, gateVersion]);
+
+	const commonProps = {
+		guUrl: host,
+		signInUrl,
+		dismissGate: () => {
+			setShowGate(false);
+		},
+		abTest,
+		ophanComponentId: componentId,
+		checkoutCompleteCookieData,
+		personaliseSignInGateAfterCheckoutSwitch,
+		userTreatment,
+		logTreatmentInteractionCall,
+	};
 
 	return (
 		<>
-			<SignInGateAuxiaV1
-				guUrl={host}
-				signInUrl={signInUrl}
-				dismissGate={() => {
-					setShowGate(false);
-				}}
-				abTest={abTest}
-				ophanComponentId={componentId}
-				checkoutCompleteCookieData={checkoutCompleteCookieData}
-				personaliseSignInGateAfterCheckoutSwitch={
-					personaliseSignInGateAfterCheckoutSwitch
-				}
-				userTreatment={userTreatment}
-				logTreatmentInteractionCall={logTreatmentInteractionCall}
-			/>
+			{gateVersion === 'v2' ? (
+				<SignInGateAuxiaV2 {...commonProps} />
+			) : (
+				<SignInGateAuxiaV1 {...commonProps} />
+			)}
 		</>
 	);
 };
