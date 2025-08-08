@@ -299,6 +299,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 								format={format}
 								pageId={frontendData.pageId}
 								webTitle={frontendData.webTitle}
+								renderingTarget={props.renderingTarget}
 							/>
 							{isWeb && shouldShowAds && (
 								<div css={galleryItemAdvertStyles}>
