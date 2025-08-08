@@ -7,7 +7,9 @@ import { getImage } from '../lib/image';
 import { palette } from '../palette';
 import { type ImageBlockElement } from '../types/content';
 import { type RenderingTarget } from '../types/renderingTarget';
+import { AppsLightboxImage } from './AppsLightboxImage.importable';
 import { GalleryCaption } from './GalleryCaption';
+import { Island } from './Island';
 import { LightboxLink } from './LightboxLink';
 import { Picture } from './Picture';
 
@@ -84,15 +86,30 @@ export const GalleryImage = ({
 					maxWidth: `calc(${width / height} * 96vh)`,
 				}}
 			>
-				<Picture
-					alt={image.data.alt ?? ''}
-					format={format}
-					role={image.role}
-					master={asset.url}
-					width={width}
-					height={height}
-					loading="lazy"
-				/>
+				{renderingTarget === 'Apps' ? (
+					<Island priority="critical">
+						<AppsLightboxImage
+							elementId={image.elementId}
+							role={image.role}
+							format={format}
+							master={asset.url}
+							alt={image.data.alt ?? ''}
+							width={width}
+							height={height}
+							loading={'lazy'}
+						/>
+					</Island>
+				) : (
+					<Picture
+						alt={image.data.alt ?? ''}
+						format={format}
+						role={image.role}
+						master={asset.url}
+						width={width}
+						height={height}
+						loading="lazy"
+					/>
+				)}
 				{renderingTarget === 'Web' && !isUndefined(image.position) && (
 					<LightboxLink
 						role={image.role}
