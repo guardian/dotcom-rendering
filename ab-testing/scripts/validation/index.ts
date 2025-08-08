@@ -1,11 +1,16 @@
 import { ABTests } from '../../abTest.ts';
 import { ABTest } from '../../types.ts';
 import { limitServerSideTests } from './limitServerSide.ts';
+import { uniqueName } from './uniqueName.ts';
 import { allExpirationsValid } from './validExpiration.ts';
 
 type ValidationFunction = (tests: ABTest[]) => boolean;
 
-const rules: ValidationFunction[] = [limitServerSideTests, allExpirationsValid];
+const rules: ValidationFunction[] = [
+	limitServerSideTests,
+	allExpirationsValid,
+	uniqueName,
+];
 
 function validateTests(testList: ABTest[]) {
 	return rules.every((rule) => rule(testList));
