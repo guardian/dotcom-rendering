@@ -498,7 +498,9 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									target="_blank"
 									rel="noopener noreferrer"
 								>
-									Continue
+									{isCollapsed
+										? mainOrMobileContent.primaryCta.ctaText
+										: 'Continue'}
 								</LinkButton>
 							</div>
 						</div>
