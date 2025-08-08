@@ -85,13 +85,14 @@ type Props = {
 	currentTime: number;
 	setCurrentTime: Dispatch<SetStateAction<number>>;
 	isMuted: boolean;
+	handleLoadedData: (event: SyntheticEvent) => void;
 	handleCanPlay: (event: SyntheticEvent) => void;
 	handlePlayPauseClick: (event: SyntheticEvent) => void;
 	handleAudioClick: (event: SyntheticEvent) => void;
 	handleKeyDown: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
 	handlePause: (event: SyntheticEvent) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
-	AudioIcon: (iconProps: IconProps) => JSX.Element;
+	AudioIcon: ((iconProps: IconProps) => JSX.Element) | null;
 	posterImage?: string;
 	preloadPartialData: boolean;
 	showPlayIcon: boolean;
@@ -116,6 +117,7 @@ export const LoopVideoPlayer = forwardRef(
 			currentTime,
 			setCurrentTime,
 			isMuted,
+			handleLoadedData,
 			handleCanPlay,
 			handlePlayPauseClick,
 			handleAudioClick,
@@ -150,6 +152,7 @@ export const LoopVideoPlayer = forwardRef(
 					muted={isMuted}
 					playsInline={true}
 					poster={posterImage}
+					onLoadedData={handleLoadedData}
 					onCanPlay={handleCanPlay}
 					onCanPlayThrough={handleCanPlay}
 					onTimeUpdate={() => {
@@ -193,30 +196,32 @@ export const LoopVideoPlayer = forwardRef(
 							duration={ref.current.duration}
 						/>
 						{/* Audio icon */}
-						<button
-							type="button"
-							onClick={handleAudioClick}
-							css={audioButtonStyles}
-							data-link-name={`gu-video-loop-${
-								isMuted ? 'unmute' : 'mute'
-							}-${atomId}`}
-						>
-							<div
-								css={audioIconContainerStyles}
-								data-testId={`${
+						{AudioIcon && (
+							<button
+								type="button"
+								onClick={handleAudioClick}
+								css={audioButtonStyles}
+								data-link-name={`gu-video-loop-${
 									isMuted ? 'unmute' : 'mute'
-								}-icon`}
+								}-${atomId}`}
 							>
-								<AudioIcon
-									size="xsmall"
-									theme={{
-										fill: palette(
-											'--loop-video-audio-icon',
-										),
-									}}
-								/>
-							</div>
-						</button>
+								<div
+									css={audioIconContainerStyles}
+									data-testId={`${
+										isMuted ? 'unmute' : 'mute'
+									}-icon`}
+								>
+									<AudioIcon
+										size="xsmall"
+										theme={{
+											fill: palette(
+												'--loop-video-audio-icon',
+											),
+										}}
+									/>
+								</div>
+							</button>
+						)}
 					</>
 				)}
 			</>

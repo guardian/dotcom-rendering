@@ -58,7 +58,6 @@ export type FEContainer =
 	| 'fixed/small/slow-V-mpu'
 	| 'fixed/small/slow-V-third'
 	| 'fixed/thrasher'
-	| 'fixed/video'
 	| 'nav/list'
 	| 'nav/media-list'
 	| 'news/most-popular'
