@@ -161,6 +161,7 @@ export interface ReaderRevenueDevUtils {
 	showMeTheBanner: ReaderRevenueDevUtil;
 	showNextVariant: ReaderRevenueDevUtil;
 	showPreviousVariant: ReaderRevenueDevUtil;
+	bannerToShow?: string;
 }
 
 const getForcedVariant = (type: 'epic' | 'banner'): string | null => {
