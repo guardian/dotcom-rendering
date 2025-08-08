@@ -36,7 +36,8 @@ const styles = css`
 `;
 
 const galleryBodyImageStyles = css`
-	display: flex;
+	display: inline;
+	position: relative;
 	${grid.column.all}
 
 	${from.tablet} {
@@ -74,32 +75,33 @@ export const GalleryImage = ({
 
 	return (
 		<figure css={styles}>
-			<div css={galleryBodyImageStyles}>
-				<div
-					css={css`
-						position: relative;
-					`}
-				>
-					<Picture
-						alt={image.data.alt ?? ''}
-						format={format}
+			<div
+				css={galleryBodyImageStyles}
+				/**
+				 * This ensures that the image height never goes above 96vh.
+				 */
+				style={{
+					maxWidth: `calc(${width / height} * 96vh)`,
+				}}
+			>
+				<Picture
+					alt={image.data.alt ?? ''}
+					format={format}
+					role={image.role}
+					master={asset.url}
+					width={width}
+					height={height}
+					loading="lazy"
+				/>
+				{renderingTarget === 'Web' && !isUndefined(image.position) && (
+					<LightboxLink
 						role={image.role}
-						master={asset.url}
-						width={width}
-						height={height}
-						loading="lazy"
+						format={format}
+						elementId={image.elementId}
+						isMainMedia={false}
+						position={image.position}
 					/>
-					{renderingTarget === 'Web' &&
-						!isUndefined(image.position) && (
-							<LightboxLink
-								role={image.role}
-								format={format}
-								elementId={image.elementId}
-								isMainMedia={false}
-								position={image.position}
-							/>
-						)}
-				</div>
+				)}
 			</div>
 
 			<GalleryCaption

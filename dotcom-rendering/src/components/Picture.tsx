@@ -1,12 +1,6 @@
 import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source/foundations';
-import {
-	type CSSProperties,
-	Fragment,
-	useCallback,
-	useEffect,
-	useState,
-} from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -471,19 +465,6 @@ export const Sources = ({ sources }: { sources: ImageSource[] }) => {
 	);
 };
 
-/**
- * This ensures that the image height never goes above 96vh.
- * The ratio parameter should be width:height.
- */
-const imageMaxWidth = (
-	design: ArticleDesign,
-	ratio: number,
-	isMainMedia: boolean,
-): CSSProperties | undefined =>
-	design === ArticleDesign.Gallery && !isMainMedia
-		? { maxWidth: `calc(${ratio} * 96vh)` }
-		: undefined;
-
 const styles = ({ design }: ArticleFormat, isLightbox: boolean) => {
 	if (design === ArticleDesign.Gallery) {
 		return css(css`
@@ -595,7 +576,6 @@ export const Picture = ({
 				height={fallbackSource.width * ratio}
 				loading={Picture.disableLazyLoading ? undefined : loading}
 				css={isLightbox ? flex : block}
-				style={imageMaxWidth(format.design, 1 / ratio, isMainMedia)}
 			/>
 		</picture>
 	);
