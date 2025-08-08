@@ -638,7 +638,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
 									isInOpinionNoAvatarVariant={
-										collection.displayName === 'Opinion' &&
+										(collection.displayName === 'Opinion' ||
+											collection.displayName ===
+												'More opinion') &&
 										isInOpinionNoAvatarVariant
 									}
 								/>
