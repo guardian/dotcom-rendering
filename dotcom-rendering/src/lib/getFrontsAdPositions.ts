@@ -269,11 +269,7 @@ const getFlexibleSpecialHeight = (grouped: DCRGroupedTrails) => {
  * A result of 6 indicates a container is at least double the height of a typical desktop viewport.
  */
 const getCollectionHeight = (collection: AdCandidate): number => {
-	const { collectionType, containerPalette, grouped } = collection;
-
-	if (containerPalette === 'PodcastPalette') {
-		return 1.5;
-	}
+	const { collectionType, grouped } = collection;
 
 	// The height of some dynamic layouts depends on the sizes of the cards that are passed to them.
 	const groupedCounts = {
@@ -305,7 +301,6 @@ const getCollectionHeight = (collection: AdCandidate): number => {
 		case 'fixed/small/slow-V-third':
 		case 'fixed/small/slow-V-half':
 		case 'fixed/small/fast-VIII':
-		case 'fixed/video':
 		case 'scrollable/feature':
 			return 1.5;
 

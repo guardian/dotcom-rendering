@@ -50,7 +50,6 @@ const carouselStyles = css`
 		scroll-padding-left: 160px;
 		padding-left: 160px;
 	}
-
 	${from.wide} {
 		scroll-padding-left: 240px;
 		padding-left: 240px;
@@ -71,7 +70,7 @@ const itemStyles = css`
 	scroll-snap-align: start;
 	grid-area: span 1;
 	position: relative;
-	margin: ${space[3]}px 10px;
+	margin: ${space[2]}px 10px ${space[3]}px;
 	:first-child {
 		${from.tablet} {
 			margin-left: 0;
@@ -92,7 +91,7 @@ const verticalLineStyles = css`
 		bottom: 0;
 		right: -10px;
 		width: 1px;
-		background-color: ${palette('--card-border-top')};
+		background-color: ${palette('--highlights-container-separator')};
 		transform: translateX(-50%);
 	}
 `;
@@ -162,7 +161,7 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 /**
  * Typically, Ophan tracking data gets determined in the front layout component.
  * As the highlights exists outside of this front layout (in the header), we need to construct these fields here.
- * */
+ */
 const getOphanInfo = (frontId?: string) => {
 	const ophanComponentName = ophanComponentId('highlights');
 	const ophanComponentLink = `container-${0} | ${ophanComponentName}`;

@@ -443,7 +443,6 @@ export const FeatureCard = ({
 										kickerText={kickerText}
 										trailText={trailText}
 										isVideoArticle={isVideoArticle}
-										showTextOverlay={false}
 										hidePillOnMobile={false}
 										iconSizeOnDesktop="large"
 										iconSizeOnMobile="large"
@@ -607,6 +606,9 @@ export const FeatureCard = ({
 												)}
 												kickerColour={palette(
 													'--feature-card-kicker-text',
+												)}
+												quoteColour={palette(
+													'--feature-card-quote-icon',
 												)}
 											/>
 										</div>

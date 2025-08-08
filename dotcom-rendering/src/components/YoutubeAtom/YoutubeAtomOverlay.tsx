@@ -1,12 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import {
-	from,
-	headlineMedium17,
-	headlineMedium20,
-	palette as sourcePalette,
-	space,
-} from '@guardian/source/foundations';
+import { space } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../../lib/articleFormat';
 import { secondsToDuration } from '../../lib/formatTime';
 import { palette } from '../../palette';
@@ -14,7 +8,6 @@ import type { AspectRatio } from '../../types/front';
 import type { PlayButtonSize } from '../Card/components/PlayIcon';
 import { PlayIcon } from '../Card/components/PlayIcon';
 import { FormatBoundary } from '../FormatBoundary';
-import { Kicker } from '../Kicker';
 import { Pill } from '../Pill';
 import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
 import { YoutubeAtomPicture } from './YoutubeAtomPicture';
@@ -62,31 +55,6 @@ const liveBulletStyles = css`
 	margin-right: ${space[1]}px;
 `;
 
-const textOverlayStyles = css`
-	position: absolute;
-	background: linear-gradient(
-		180deg,
-		rgba(0, 0, 0, 0) 0%,
-		rgba(0, 0, 0, 0.7) 25%
-	);
-	width: 100%;
-	bottom: 0;
-	color: ${sourcePalette.neutral[100]};
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	text-align: start;
-	padding: ${space[2]}px;
-	padding-top: ${space[9]}px;
-`;
-
-const titleStyles = css`
-	${headlineMedium17};
-	${from.tablet} {
-		${headlineMedium20};
-	}
-`;
-
 type Props = {
 	uniqueId: string;
 	height: number;
@@ -95,13 +63,11 @@ type Props = {
 	format: ArticleFormat;
 	alt: string;
 	hidePillOnMobile: boolean;
-	showTextOverlay: boolean;
 	iconSizeOnDesktop: PlayButtonSize;
 	iconSizeOnMobile: PlayButtonSize;
 	title?: string;
 	image?: string;
 	duration?: number; // in seconds
-	kicker?: string;
 	aspectRatio?: AspectRatio;
 };
 
@@ -113,13 +79,11 @@ export const YoutubeAtomOverlay = ({
 	format,
 	alt,
 	hidePillOnMobile,
-	showTextOverlay,
 	iconSizeOnDesktop,
 	iconSizeOnMobile,
 	title,
 	image,
 	duration,
-	kicker,
 	aspectRatio,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
@@ -184,18 +148,6 @@ export const YoutubeAtomOverlay = ({
 					iconSizeOnDesktop={iconSizeOnDesktop}
 					iconSizeOnMobile={iconSizeOnMobile}
 				/>
-				{showTextOverlay && (
-					<div css={textOverlayStyles}>
-						{!!kicker && (
-							<Kicker
-								text={kicker}
-								color={palette('--youtube-overlay-kicker')}
-								fontWeight="bold"
-							/>
-						)}
-						<div css={titleStyles}>{title}</div>
-					</div>
-				)}
 			</button>
 		</FormatBoundary>
 	);
