@@ -136,7 +136,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const { absoluteServerTimes = false } = front.config.switches;
 
-	const isInNoBoostsVariant = abTests.noBoostsVariant === 'variant';
+	/**
+	 * We are running an AB test which replaces the avatar for the card image
+	 * in the Opinion and More opinion collections on network fronts.
+	 */
+	const isInOpinionNoAvatarVariant = (collectionName: string) =>
+		abTests.opinionNoAvatarVariant === 'variant' &&
+		front.isNetworkFront &&
+		(collectionName === 'Opinion' || collectionName === 'More opinion');
 
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
@@ -636,9 +643,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
-									isInNoBoostsAbTestVariant={
-										pageId === 'uk' && isInNoBoostsVariant
-									}
+									isInOpinionNoAvatarVariant={isInOpinionNoAvatarVariant(
+										collection.displayName,
+									)}
 								/>
 							</FrontSection>
 
