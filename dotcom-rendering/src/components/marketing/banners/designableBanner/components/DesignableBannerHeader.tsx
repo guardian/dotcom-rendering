@@ -7,6 +7,7 @@ import { css } from '@emotion/react';
 import {
 	from,
 	headlineMedium17,
+	headlineMedium24,
 	headlineMedium28,
 	headlineMedium34,
 	headlineMedium42,
@@ -84,16 +85,16 @@ const getStyles = (
 			: '0';
 
 	const mobileHeadlineSize =
-		headlineSize === 'small'
+		headlineSize === 'small' || isCollapsedForABTest
 			? `${headlineMedium17}`
 			: `${headlineMedium28}`;
 
 	const phabletHeadline = isCollapsedForABTest
-		? `${mobileHeadlineSize}`
+		? `${headlineMedium24}`
 		: `${headlineMedium34}`;
 
 	const leftColHeadline = isCollapsedForABTest
-		? `${mobileHeadlineSize}`
+		? `${headlineMedium24}`
 		: `${headlineMedium42}`;
 
 	return {
