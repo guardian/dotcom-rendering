@@ -1,4 +1,4 @@
-import { getCookie, isUndefined } from '@guardian/libs';
+import { getCookie, isUndefined, storage } from '@guardian/libs';
 import { useState } from 'react';
 import {
 	hasCmpConsentForBrowserId,
@@ -376,7 +376,15 @@ const decideShowDefaultGate = (): ShowGateValues => {
 
 const getGateDisplayCount = (): number => {
 	// TODO: retrieve the number of time the page has been displayed
-	return 0;
+	const count = storage.local.get('gate_display_count') as number;
+	return count;
+};
+
+const incrementGateDisplayCount = () => {
+	const count = getGateDisplayCount();
+	const now = new Date();
+	const oneYearFromNow = new Date(now.getTime() + 365 * 86400);
+	storage.local.set('gate_display_count', count + 1, oneYearFromNow);
 };
 
 const buildAuxiaGateDisplayData = async (
@@ -732,6 +740,10 @@ const ShowSignInGateAuxia = ({
 			},
 			renderingTarget,
 		);
+
+		// Once the gate is being displayed we need to update
+		// the tracking of the number of times the gate has been displayed
+		incrementGateDisplayCount();
 	}, [componentId]);
 
 	return (
