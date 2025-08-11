@@ -45,19 +45,18 @@ export const ListenToArticle = ({ articleId }: Props) => {
 			])
 				.then(
 					([
-						AbParticipations,
+						abParticipations,
 						isAvailable,
 						isPlaying,
 						durationSeconds,
 					]) => {
 						// AB TESTING native start
-						const variant = AbParticipations.get(
+						const variant = abParticipations.get(
 							'l2a_article_button_test',
 						);
 						if (variant === 'no-button') {
 							setShowButton(false);
-						}
-						if (variant === 'with-duration') {
+						} else if (variant === 'with-duration') {
 							setAudioDurationSeconds(
 								typeof durationSeconds === 'number' &&
 									durationSeconds > 0
@@ -65,8 +64,7 @@ export const ListenToArticle = ({ articleId }: Props) => {
 									: undefined,
 							);
 							setShowButton(isAvailable && !isPlaying);
-						}
-						if (variant === 'without-duration') {
+						} else if (variant === 'without-duration') {
 							setShowButton(isAvailable && !isPlaying);
 						}
 						// AB TESTING native ends
