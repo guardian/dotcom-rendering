@@ -1,6 +1,7 @@
 import { isString } from '@guardian/libs';
 import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
+import { DateTimeProvider } from '../components/DateTimeContext';
 import { LiveBlogRenderer } from '../components/LiveBlogRenderer';
 import {
 	ArticleDesign,
@@ -58,13 +59,17 @@ export const renderHtml = ({
 		editionId: frontendData.editionId,
 	};
 
+	const serverTime = Date.now();
+
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
-			<ArticlePage
-				article={article}
-				NAV={NAV}
-				renderingTarget={renderingTarget}
-			/>
+			<DateTimeProvider value={serverTime}>
+				<ArticlePage
+					article={article}
+					NAV={NAV}
+					renderingTarget={renderingTarget}
+				/>
+			</DateTimeProvider>
 		</ConfigProvider>,
 	);
 
