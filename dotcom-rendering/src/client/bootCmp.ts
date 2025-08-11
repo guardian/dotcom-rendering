@@ -65,6 +65,14 @@ const initialiseCmp = async () => {
 	// If user has the "reject all" benefit then show the reduced, "non-advertised" list
 	const useNonAdvertisedList = allowRejectAll(isUserSignedIn);
 
+	const isInSourcepointGeolocationTestCookie = getCookie({
+		name: 'X-GU-Experiment-0perc-B',
+	}); // Get cookie
+	const isInSourcepointGeolocationTest =
+		isInSourcepointGeolocationTestCookie !== null
+			? Boolean(isInSourcepointGeolocationTestCookie)
+			: undefined;
+
 	const country = code ?? undefined;
 	cmp.init({
 		pubData: {
@@ -76,6 +84,7 @@ const initialiseCmp = async () => {
 		country,
 		useNonAdvertisedList,
 		isUserSignedIn,
+		isInSourcepointGeolocationTest,
 	});
 	log('dotcom', 'CMP initialised');
 };
