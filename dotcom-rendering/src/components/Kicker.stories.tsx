@@ -19,8 +19,6 @@ const containerPalettes = [
 	'BreakingPalette',
 	'SpecialReportAltPalette',
 	'Branded',
-	'MediaPalette',
-	'PodcastPalette',
 ] as const satisfies readonly DCRContainerPalette[];
 
 const kickerWrapperStyles: CSSProperties = {

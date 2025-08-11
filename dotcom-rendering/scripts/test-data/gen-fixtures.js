@@ -248,7 +248,7 @@ requests.push(
 	// your browser's devtools, and find a similar looking `api.nextgen` request, and copy
 	// that URL in here.
 	fetch(
-		'https://api.nextgen.guardianapps.co.uk/football/api/match-nav/2025/04/07/29/31.json?dcr=true&page=football%2F2025%2Fapr%2F07%2Fjacob-murphys-lightning-double-helps-newcastle-blow-away-flimsy-leicester',
+		'https://api.nextgen.guardianapps.co.uk/football/api/match-nav/2025/07/08/35854/7699.json?dcr=true&page=football%2F2025%2Fjul%2F08%2Fgermany-denmark-women-euro-2025-group-c-match-report',
 	)
 		.then((res) => res.json())
 		.then((json) => {
@@ -364,7 +364,7 @@ requests.push(
 requests.push(
 	// This match data will expire after two months, find a new match if this needs updating
 	fetch(
-		'https://www.theguardian.com/sport/cricket/match/2025-03-26/australia-women-s-cricket-team.json?dcr',
+		'https://www.theguardian.com/sport/cricket/match/2025-08-04/england-cricket-team.json?dcr',
 	)
 		.then((res) => res.json())
 		.then((json) => {

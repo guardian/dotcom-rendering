@@ -109,7 +109,7 @@ export const testCollectionsUk = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/video',
+		collectionType: 'scrollable/feature',
 		displayName: 'Videos',
 	},
 	{
@@ -221,7 +221,6 @@ export const testCollectionsUs = [
 	{
 		...defaultValues,
 		collectionType: 'fixed/medium/slow-VII',
-		containerPalette: 'PodcastPalette',
 		displayName: 'Podcasts',
 	},
 	{
@@ -257,7 +256,7 @@ export const testCollectionsUs = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/video',
+		collectionType: 'scrollable/feature',
 		displayName: 'Video',
 	},
 	{

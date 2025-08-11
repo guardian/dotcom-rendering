@@ -187,7 +187,6 @@ export const textBlockStyles = (format: ArticleFormat) => css`
 	li {
 		margin-bottom: ${remSpace[1]};
 		padding-left: ${remSpace[5]};
-		display: flow-root;
 
 		p {
 			margin: -1.5rem 0 0 0;

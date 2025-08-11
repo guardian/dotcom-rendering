@@ -2,10 +2,13 @@ import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
+	audioTrails,
+	galleryTrails,
 	getSublinks,
 	loopVideoCard,
 	opinionTrails,
 	trails,
+	videoTrails,
 } from '../../fixtures/manual/trails';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { customMockFetch } from '../lib/mockRESTCalls';
@@ -36,7 +39,8 @@ const splashCard = {
 	kickerText: 'Kicker for splash card',
 };
 
-/** This creates a list of 8 standard cards which contain:
+/**
+ * This creates a list of 8 standard cards which contain:
  * - a card with sublinks
  * - a media card
  * - a boosted card
@@ -54,7 +58,9 @@ const standardCards = standards.map((card, index) => {
 
 	switch (index + 1) {
 		case 2:
-			return enhanceCardFields({ supportingContent: getSublinks(2) });
+			return enhanceCardFields({
+				supportingContent: getSublinks(2),
+			});
 		case 3:
 			return enhanceCardFields({
 				boostLevel: 'boost',
@@ -168,13 +174,17 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const SplashWithStandards: Story = {
-	name: 'Splash with standard cards',
+	name: 'Splash with big and standard cards',
 	args: {
-		frontSectionTitle: 'Splash with stardards',
+		frontSectionTitle: 'Splash with standards',
 		groupedTrails: {
 			...emptyGroupedTrails,
 			splash: [{ ...splashCard, supportingContent: [] }],
-			standard: standardCards,
+			standard: standardCards.map((card, index) => ({
+				...card,
+				isBoosted: index === 0,
+				boostLevel: index === 0 ? 'boost' : 'default',
+			})),
 		},
 	},
 };
@@ -368,12 +378,6 @@ export const SplashWithImageSupression: Story = {
 
 export const SplashWithLiveUpdates: Story = {
 	name: 'Splash with live updates',
-	args: {
-		groupedTrails: {
-			...emptyGroupedTrails,
-			splash: [{ ...splashCard, image: undefined }],
-		},
-	},
 	render: (args) => {
 		global.fetch = mockLatestLinksReqFetch;
 		const Section = ({
@@ -410,6 +414,42 @@ export const SplashWithLiveUpdates: Story = {
 	},
 };
 
+export const StandardBoostedWithLiveUpdates: Story = {
+	name: 'Standard boosted with live updates',
+	render: (args) => {
+		global.fetch = mockLatestLinksReqFetch;
+		const Section = ({
+			title,
+			boostLevel,
+		}: {
+			title: string;
+			boostLevel: BoostLevel;
+		}) => (
+			<FrontSection
+				title={title}
+				discussionApiUrl={discussionApiUrl}
+				editionId="UK"
+				showTopBorder={true}
+			>
+				<FlexibleGeneral
+					{...args}
+					groupedTrails={{
+						...emptyGroupedTrails,
+						standard: [{ ...liveUpdatesCard, boostLevel }],
+					}}
+				/>
+			</FrontSection>
+		);
+
+		return (
+			<>
+				<Section title="Boosted" boostLevel="boost" />
+				<Section title="Megaboosted" boostLevel="megaboost" />
+			</>
+		);
+	},
+};
+
 const slideshowCard = {
 	...liveUpdatesCard,
 	mainMedia: undefined,
@@ -437,13 +477,13 @@ const slideshowCard = {
 	],
 } satisfies DCRFrontCard;
 
-export const DefaultSplashWithLiveUpdatesAndSlideshow: Story = {
-	name: 'Standard splash with live updates and slideshow',
+// Boost level is ignored for slideshows
+export const SplashWithLiveUpdatesAndSlideshow: Story = {
+	name: 'Splash with live updates and slideshow',
 	args: {
-		frontSectionTitle: 'Standard splash with live updates and slideshow',
+		frontSectionTitle: 'Splash with live updates and slideshow',
 		groupedTrails: {
 			...emptyGroupedTrails,
-
 			splash: [{ ...slideshowCard }],
 		},
 	},
@@ -455,18 +495,13 @@ export const StandardCards: Story = {
 		frontSectionTitle: 'Standard cards',
 		groupedTrails: {
 			...emptyGroupedTrails,
-			standard: trails.slice(0, 4),
-		},
-	},
-};
-
-export const OpinionStandardCards: Story = {
-	name: 'Opinion standard cards',
-	args: {
-		frontSectionTitle: 'Opinion standard cards',
-		groupedTrails: {
-			...emptyGroupedTrails,
-			standard: opinionTrails.slice(0, 2),
+			standard: [
+				...trails.slice(0, 4),
+				...opinionTrails.slice(0, 2),
+				...audioTrails.slice(0, 2),
+				...galleryTrails.slice(0, 2),
+				...videoTrails.slice(0, 2),
+			],
 		},
 	},
 };
@@ -482,10 +517,7 @@ const containerPalettes = [
 	'SombreAltPalette',
 	'SpecialReportAltPalette',
 	'Branded',
-] as const satisfies readonly Omit<
-	DCRContainerPalette,
-	'MediaPalette' | 'PodcastPalette'
->[];
+] as const satisfies readonly DCRContainerPalette[];
 
 export const WithSpecialPaletteVariations = {
 	name: 'With special palette variations',
@@ -556,6 +588,21 @@ export const LoopVideoCards: Story = {
 			...emptyGroupedTrails,
 			splash: [loopVideoCard],
 			standard: [loopVideoCard], // Loop video is disabled at standard card size
+		},
+	},
+};
+
+export const StandardBoostedMediaCardWithSublinks: Story = {
+	name: 'Standard boosted media card with sublinks',
+	args: {
+		frontSectionTitle: 'Standard boosted media card with sublinks',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			standard: [trails[1]].map((card) => ({
+				...card,
+				boostLevel: 'boost',
+				supportingContent: getSublinks(2),
+			})),
 		},
 	},
 };
