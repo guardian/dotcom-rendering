@@ -157,12 +157,12 @@ signInGateMainCheckoutCompletePersonalisedCopy.argTypes = {
 	},
 };
 
-export const signInGateSelectorStoryDismissable = () => {
-	const tags: TagType[] = [
-		{ id: 'politics/politics', type: 'Keyword', title: 'Politics' },
-		{ id: 'world/europe-news', type: 'Keyword', title: 'Europe News' },
-	];
+const tags: TagType[] = [
+	{ id: 'politics/politics', type: 'Keyword', title: 'Politics' },
+	{ id: 'world/europe-news', type: 'Keyword', title: 'Europe News' },
+];
 
+export const signInGateSelectorStoryDismissable = () => {
 	return (
 		<Section fullWidth={true}>
 			<SignInGateSelector
@@ -185,11 +185,6 @@ signInGateSelectorStoryDismissable.storyName =
 	'sign_in_gate_selector_dismissable';
 
 export const signInGateSelectorStoryNonDismissable = () => {
-	const tags: TagType[] = [
-		{ id: 'politics/politics', type: 'Keyword', title: 'Politics' },
-		{ id: 'world/europe-news', type: 'Keyword', title: 'Europe News' },
-	];
-
 	return (
 		<Section fullWidth={true}>
 			<SignInGateSelector
@@ -212,11 +207,6 @@ signInGateSelectorStoryNonDismissable.storyName =
 	'sign_in_gate_selector_non_dismissable';
 
 export const signInGateSelectorStoryLegacy = () => {
-	const tags: TagType[] = [
-		{ id: 'politics/politics', type: 'Keyword', title: 'Politics' },
-		{ id: 'world/europe-news', type: 'Keyword', title: 'Europe News' },
-	];
-
 	return (
 		<Section fullWidth={true}>
 			<SignInGateSelector
@@ -238,11 +228,6 @@ export const signInGateSelectorStoryLegacy = () => {
 signInGateSelectorStoryLegacy.storyName = 'sign_in_gate_selector_legacy';
 
 export const signInGateSelectorStoryNoTreatment = () => {
-	const tags: TagType[] = [
-		{ id: 'politics/politics', type: 'Keyword', title: 'Politics' },
-		{ id: 'world/europe-news', type: 'Keyword', title: 'Europe News' },
-	];
-
 	return (
 		<Section fullWidth={true}>
 			<SignInGateSelector
@@ -263,3 +248,48 @@ export const signInGateSelectorStoryNoTreatment = () => {
 
 signInGateSelectorStoryNoTreatment.storyName =
 	'sign_in_gate_selector_no_treatment';
+
+export const auxiaV2DismissibleModal = () => {
+	return (
+		<Section fullWidth={true}>
+			<SignInGateSelector
+				contentType="Article"
+				sectionId="dismissable"
+				tags={tags}
+				isPaidContent={false}
+				isPreview={false}
+				pageId="dismissable-v2"
+				host="https://www.theguardian.com"
+				idUrl="https://profile.theguardian.com"
+				contributionsServiceUrl="https://contributions.guardianapis.com"
+				editionId={'UK' as EditionId}
+				signInGateVersion="v2"
+			/>
+		</Section>
+	);
+};
+
+auxiaV2DismissibleModal.storyName = 'sign_in_gate_auxia_v2_modal_dismissible';
+
+export const auxiaV2NonDismissibleModal = () => {
+	return (
+		<Section fullWidth={true}>
+			<SignInGateSelector
+				contentType="Article"
+				sectionId="non-dismissable"
+				tags={tags}
+				isPaidContent={false}
+				isPreview={false}
+				pageId="non-dismissable-v2"
+				host="https://www.theguardian.com"
+				idUrl="https://profile.theguardian.com"
+				contributionsServiceUrl="https://contributions.guardianapis.com"
+				editionId={'UK' as EditionId}
+				signInGateVersion="v2"
+			/>
+		</Section>
+	);
+};
+
+auxiaV2NonDismissibleModal.storyName =
+	'sign_in_gate_auxia_v2_modal_non_dismissible';
