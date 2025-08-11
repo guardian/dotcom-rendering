@@ -1,6 +1,7 @@
 import { doHydration } from './islands/doHydration';
 import { getEmotionCache } from './islands/emotion';
 import { getConfig } from './islands/getConfig';
+import { getDateTime } from './islands/getDateTime';
 import { getName } from './islands/getName';
 import { getProps } from './islands/getProps';
 
@@ -21,12 +22,20 @@ const forceHydration = async (): Promise<void> => {
 		// Read the props and config from where they have been serialised in the dom using an Island
 		const props = getProps(guElement);
 		const config = getConfig();
+		const dateTime = getDateTime(guElement);
 
 		// Now that we have the props as an object, tell Discussion we want it to expand itself
 		props.expanded = true;
 
 		// Force hydration
-		await doHydration(name, props, guElement, getEmotionCache(), config);
+		await doHydration(
+			name,
+			props,
+			guElement,
+			getEmotionCache(),
+			config,
+			dateTime,
+		);
 	} catch (err) {
 		// Do nothing
 	}
