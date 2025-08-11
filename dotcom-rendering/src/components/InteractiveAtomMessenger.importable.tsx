@@ -31,7 +31,7 @@ const interactiveMessageSchema = variant('kind', [
  * It needs to send information to an adjoining `InteractiveAtom`
  */
 export const InteractiveAtomMessenger = ({ id }: Props) => {
-	const [container, setContainer] = useState<HTMLDivElement>();
+	const [container, setContainer] = useState<HTMLElement>();
 	const [iframe, setIframe] = useState<HTMLIFrameElement>();
 	const [scroll, setScroll] = useState(0);
 	const [height, setHeight] = useState(0);
@@ -53,7 +53,7 @@ export const InteractiveAtomMessenger = ({ id }: Props) => {
 	}, [id]);
 
 	useEffect(() => {
-		if (!(iframe?.parentElement instanceof HTMLDivElement)) return;
+		if (!iframe?.parentElement) return;
 
 		setContainer(iframe.parentElement);
 	}, [iframe]);

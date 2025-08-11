@@ -10,7 +10,9 @@ describe('parse', () => {
 			'Expected parsing cricket match to succeed',
 		);
 		expect(parsedResult.awayTeam.lineup.length).toBe(11);
-		expect(parsedResult.innings.length).toBe(2);
+		expect(parsedResult.innings.length).toBe(
+			cricketMatchData.cricketMatch.innings.length,
+		);
 	});
 
 	it('reverses the innings for display', () => {
@@ -19,12 +21,28 @@ describe('parse', () => {
 			'Expected parsing cricket match to succeed',
 		);
 
-		expect(parsedResult.innings[1]?.description).toBe(
-			cricketMatchData.cricketMatch.innings[0]?.description,
+		const secondToLastInning =
+			cricketMatchData.cricketMatch.innings[
+				cricketMatchData.cricketMatch.innings.length - 2
+			];
+		const parsedSecondInning = parsedResult.innings[1];
+
+		expect(parsedSecondInning?.description).toBe(
+			secondToLastInning?.description,
 		);
 
-		expect(parsedResult.innings[0]?.fallOfWickets.length).toBe(8);
-		expect(parsedResult.innings[0]?.inningsTotals.wickets).toBe(8);
+		const lastInning =
+			cricketMatchData.cricketMatch.innings[
+				cricketMatchData.cricketMatch.innings.length - 1
+			];
+		const parsedFirstInning = parsedResult.innings[0];
+
+		expect(parsedFirstInning?.fallOfWickets.length).toBe(
+			lastInning?.fallOfWicket.length,
+		);
+		expect(parsedFirstInning?.inningsTotals.wickets).toBe(
+			lastInning?.fallOfWicket.length,
+		);
 	});
 
 	it('calculates the number of wickets fallen', () => {
@@ -33,8 +51,18 @@ describe('parse', () => {
 			'Expected parsing cricket match to succeed',
 		);
 
-		expect(parsedResult.innings[0]?.fallOfWickets.length).toBe(8);
-		expect(parsedResult.innings[0]?.inningsTotals.wickets).toBe(8);
+		const inning =
+			cricketMatchData.cricketMatch.innings[
+				cricketMatchData.cricketMatch.innings.length - 1
+			];
+		const parsedInning = parsedResult.innings[0];
+
+		expect(parsedInning?.fallOfWickets.length).toBe(
+			inning?.fallOfWicket.length,
+		);
+		expect(parsedInning?.inningsTotals.wickets).toBe(
+			inning?.fallOfWicket.length,
+		);
 	});
 
 	it('returns an error if home and away team cannot be determined', () => {

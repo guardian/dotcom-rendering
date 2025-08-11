@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	between,
 	from,
 	space,
 	textSans12,
@@ -211,9 +212,23 @@ const captionLink = css`
 
 const galleryStyles = css`
 	${grid.column.centre}
+	margin-bottom: 0;
+	padding-bottom: 6px;
 	${from.leftCol} {
 		${grid.column.left}
 		grid-row-start: 8;
+	}
+	${between.tablet.and.leftCol} {
+		position: relative;
+		&::before {
+			content: '';
+			position: absolute;
+			left: -10px;
+			top: 0;
+			bottom: 0;
+			width: 1px;
+			background-color: ${palette('--article-border')};
+		}
 	}
 `;
 

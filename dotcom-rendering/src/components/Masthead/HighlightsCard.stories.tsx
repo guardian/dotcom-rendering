@@ -62,6 +62,37 @@ const CardWrapper = ({ children }: { children: React.ReactNode }) => {
 
 export const Default = {};
 
+export const WithQuotes: Story = {
+	name: 'With Quotes',
+	args: {
+		showQuotedHeadline: true,
+	},
+	render: (args) => {
+		const Card = ({ pillar }: { pillar: Pillar }) => (
+			<CardWrapper>
+				<HighlightsCard
+					{...args}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: pillar,
+					}}
+				/>
+			</CardWrapper>
+		);
+
+		return (
+			<>
+				<Card pillar={Pillar.News} />
+				<Card pillar={Pillar.Opinion} />
+				<Card pillar={Pillar.Sport} />
+				<Card pillar={Pillar.Culture} />
+				<Card pillar={Pillar.Lifestyle} />
+			</>
+		);
+	},
+};
+
 export const WithAvatar: Story = {
 	args: {
 		avatarUrl:
