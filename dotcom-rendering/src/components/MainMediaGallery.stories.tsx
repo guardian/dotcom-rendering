@@ -22,6 +22,7 @@ export const Default = {
 			display: ArticleDisplay.Standard,
 			theme: Pillar.News,
 		},
+		renderingTarget: 'Web',
 	},
 } satisfies Story;
 
