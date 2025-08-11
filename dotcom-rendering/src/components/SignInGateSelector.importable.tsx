@@ -293,6 +293,7 @@ const fetchProxyGetTreatments = async (
 	hasConsented: boolean,
 	shouldServeDismissible: boolean,
 	showDefaultGate: ShowGateValues,
+	gateDisplayCount: number,
 ): Promise<AuxiaProxyGetTreatmentsResponse> => {
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
 	const articleIdentifier = `www.theguardian.com/${pageId}`;
@@ -317,6 +318,7 @@ const fetchProxyGetTreatments = async (
 		hasConsented,
 		shouldServeDismissible,
 		showDefaultGate,
+		gateDisplayCount,
 	};
 	const params = {
 		method: 'POST',
@@ -372,6 +374,11 @@ const decideShowDefaultGate = (): ShowGateValues => {
 	return undefined;
 };
 
+const getGateDisplayCount = (): number => {
+	// TODO: retrieve the number of time the page has been displayed
+	return 0;
+};
+
 const buildAuxiaGateDisplayData = async (
 	contributionsServiceUrl: string,
 	pageId: string,
@@ -410,8 +417,8 @@ const buildAuxiaGateDisplayData = async (
 	}
 
 	const shouldServeDismissible = decideShouldServeDismissible();
-
 	const showDefaultGate = decideShowDefaultGate();
+	const gateDisplayCount = getGateDisplayCount();
 
 	const response = await fetchProxyGetTreatments(
 		contributionsServiceUrl,
@@ -430,6 +437,7 @@ const buildAuxiaGateDisplayData = async (
 		readerPersonalData.hasConsented,
 		shouldServeDismissible,
 		showDefaultGate,
+		gateDisplayCount,
 	);
 
 	if (response.status && response.data) {
