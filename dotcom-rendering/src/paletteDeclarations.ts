@@ -3977,7 +3977,12 @@ const subMetaBackgroundDark: PaletteFunction = ({ design, theme }) => {
 const subMetaTextLight: PaletteFunction = ({ design, theme }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
-			return sourcePalette.neutral[7];
+			switch (design) {
+				case ArticleDesign.Gallery:
+					return sourcePalette.neutral[86];
+				default:
+					return sourcePalette.neutral[7];
+			}
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[100];
 		default:
@@ -4053,7 +4058,12 @@ const subMetaTextHoverLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.Picture:
 			switch (theme) {
 				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[100];
+					switch (design) {
+						case ArticleDesign.Gallery:
+							return sourcePalette.neutral[7];
+						default:
+							return sourcePalette.neutral[100];
+					}
 				default:
 					return sourcePalette.neutral[7];
 			}

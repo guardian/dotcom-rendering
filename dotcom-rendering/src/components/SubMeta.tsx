@@ -62,22 +62,6 @@ const listStyles = css`
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1.5rem 0.25rem;
-	background-image: repeating-linear-gradient(
-			to bottom,
-			${palette('--sub-meta-background')} 0px,
-			${palette('--sub-meta-background')} 2.25rem,
-			transparent 2.25rem,
-			transparent 2.3125rem,
-			${palette('--sub-meta-background')} 2.3125rem,
-			${palette('--sub-meta-background')} 3rem
-		),
-		repeating-linear-gradient(
-			to right,
-			${palette('--article-border')} 0px,
-			${palette('--article-border')} 0.1875rem,
-			transparent 0.1875rem,
-			transparent 0.3125rem
-		);
 	background-position: top;
 	background-repeat: no-repeat;
 `;
