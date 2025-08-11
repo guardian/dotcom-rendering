@@ -147,6 +147,8 @@ export type Props = {
 	trailTextSize?: TrailTextSize;
 	/** A kicker image is seperate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
+	isInLoopingVideoTestVariant?: boolean;
+	isInLoopingVideoTestControl?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -250,6 +252,7 @@ const getMedia = ({
 	mainMedia,
 	canPlayInline,
 	isBetaContainer,
+	isInLoopingVideoTestControl,
 }: {
 	imageUrl?: string;
 	imageAltText?: string;
@@ -259,8 +262,13 @@ const getMedia = ({
 	mainMedia?: MainMedia;
 	canPlayInline?: boolean;
 	isBetaContainer: boolean;
+	isInLoopingVideoTestControl: boolean;
 }) => {
-	if (mainMedia?.type === 'LoopVideo' && canPlayInline) {
+	if (
+		mainMedia?.type === 'LoopVideo' &&
+		!isInLoopingVideoTestControl &&
+		canPlayInline
+	) {
 		return {
 			type: 'loop-video',
 			mainMedia,
@@ -412,6 +420,8 @@ export const Card = ({
 	showTopBarMobile = true,
 	trailTextSize,
 	showKickerImage = false,
+	isInLoopingVideoTestVariant = false,
+	isInLoopingVideoTestControl = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -564,6 +574,7 @@ export const Card = ({
 		mainMedia,
 		canPlayInline,
 		isBetaContainer,
+		isInLoopingVideoTestControl,
 	});
 
 	/**
@@ -896,6 +907,9 @@ export const Card = ({
 									fallbackImageAlt={media.imageAltText}
 									fallbackImageAspectRatio="5:4"
 									linkTo={linkTo}
+									isInLoopingVideoTestVariant={
+										isInLoopingVideoTestVariant
+									}
 								/>
 							</Island>
 						)}
@@ -1012,6 +1026,9 @@ export const Card = ({
 									loading={imageLoading}
 									roundedCorners={isOnwardContent}
 									aspectRatio={aspectRatio}
+									isInLoopingVideoTestControl={
+										isInLoopingVideoTestControl
+									}
 								/>
 								{isVideoMainMedia && mainMedia.duration > 0 && (
 									<div
