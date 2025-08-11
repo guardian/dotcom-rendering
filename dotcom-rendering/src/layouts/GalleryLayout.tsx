@@ -210,6 +210,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					<MainMediaGallery
 						mainMedia={gallery.mainMedia}
 						format={format}
+						renderingTarget={props.renderingTarget}
 					/>
 					<ArticleTitle
 						format={format}
