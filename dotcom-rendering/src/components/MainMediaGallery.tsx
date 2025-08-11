@@ -19,6 +19,7 @@ type Props = {
 
 const styles = css`
 	${grid.column.all}
+	position: relative;
 	height: calc(80vh - 48px);
 	grid-row: 1/8;
 	${from.desktop} {
@@ -56,7 +57,7 @@ export const MainMediaGallery = ({
 						alt={mainMedia.data.alt ?? ''}
 						width={width}
 						height={height}
-						loading={'lazy'}
+						loading="eager"
 					/>
 				</Island>
 			) : (
@@ -76,7 +77,7 @@ export const MainMediaGallery = ({
 					role={mainMedia.role}
 					format={format}
 					elementId={mainMedia.elementId}
-					isMainMedia={false}
+					isMainMedia={true}
 					position={mainMedia.position}
 				/>
 			)}
