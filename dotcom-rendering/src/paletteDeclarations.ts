@@ -3919,13 +3919,15 @@ const subMetaBackgroundLight: PaletteFunction = ({
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
-		case ArticleDesign.Gallery:
 			switch (theme) {
 				case ArticleSpecial.Labs:
 					return sourcePalette.neutral[86];
 				default:
 					return sourcePalette.neutral[7];
 			}
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[7];
+
 		default:
 			switch (theme) {
 				case ArticleSpecial.SpecialReport:
