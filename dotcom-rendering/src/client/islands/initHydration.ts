@@ -3,6 +3,7 @@ import { isUndefined } from '@guardian/libs';
 import { schedule } from '../../lib/scheduler';
 import { doHydration } from './doHydration';
 import { getConfig } from './getConfig';
+import { getDateTime } from './getDateTime';
 import { getName } from './getName';
 import { getPriority } from './getPriority';
 import { getProps } from './getProps';
@@ -10,8 +11,6 @@ import { onInteraction } from './onInteraction';
 import { onNavigation } from './onNavigation';
 import { whenIdle } from './whenIdle';
 import { whenVisible } from './whenVisible';
-import get from 'lodash.get';
-import { getDateTime } from './getDateTime';
 
 /**
  * The hash values that we want to use to trigger hydration are different
