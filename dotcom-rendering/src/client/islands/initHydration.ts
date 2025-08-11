@@ -10,6 +10,8 @@ import { onInteraction } from './onInteraction';
 import { onNavigation } from './onNavigation';
 import { whenIdle } from './whenIdle';
 import { whenVisible } from './whenVisible';
+import get from 'lodash.get';
+import { getDateTime } from './getDateTime';
 
 /**
  * The hash values that we want to use to trigger hydration are different
@@ -41,6 +43,7 @@ export const initHydration = async (
 	const props = getProps(element);
 	const config = getConfig();
 	const priority = getPriority(element);
+	const dateTime = getDateTime(element);
 
 	if (!name) return;
 	if (isUndefined(priority)) return;
@@ -48,7 +51,15 @@ export const initHydration = async (
 	const scheduleHydration = () =>
 		schedule(
 			name,
-			() => doHydration(name, props, element, emotionCache, config),
+			() =>
+				doHydration(
+					name,
+					props,
+					element,
+					emotionCache,
+					config,
+					dateTime,
+				),
 			{ priority },
 		);
 
