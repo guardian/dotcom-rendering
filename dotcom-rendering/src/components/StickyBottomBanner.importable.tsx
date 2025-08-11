@@ -303,7 +303,9 @@ export const StickyBottomBanner = ({
 			name: 'banner',
 		};
 
-		pickMessage(bannerConfig, renderingTarget)
+		const defaultShow = () => <div id="StickyBottomBanner-empty" />;
+
+		pickMessage(bannerConfig, renderingTarget, () => defaultShow)
 			.then((PickedBanner: () => MaybeFC) =>
 				setSelectedBanner(PickedBanner),
 			)

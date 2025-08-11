@@ -114,8 +114,6 @@ const timeoutify = <T>(
 const clearAllTimeouts = (messages: CandidateConfigWithTimeout<any>[]) =>
 	messages.map((m) => m.cancelTimeout());
 
-const defaultShow = () => null;
-
 interface PendingMessage<T> {
 	candidateConfig: CandidateConfigWithTimeout<T>;
 	canShow: Promise<CanShowResult<T>>;
@@ -126,10 +124,13 @@ interface WinningMessage<T> {
 	candidate: Candidate<T>;
 }
 
+type PickedMessage = () => MaybeFC;
+
 export const pickMessage = (
 	{ candidates, name }: SlotConfig,
 	renderingTarget: RenderingTarget,
-): Promise<() => MaybeFC> =>
+	defaultShow: PickedMessage = () => null,
+): Promise<PickedMessage> =>
 	new Promise((resolve) => {
 		const candidateConfigsWithTimeout = candidates.map((c) =>
 			timeoutify(c, name, renderingTarget),
