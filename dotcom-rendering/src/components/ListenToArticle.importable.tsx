@@ -33,7 +33,7 @@ export const ListenToArticle = ({ articleId }: Props) => {
 		number | undefined
 	>(undefined);
 
-	const isBridgetCompatible = useIsBridgetCompatible('8.6.0'); // TODO ab test bump
+	const isBridgetCompatible = useIsBridgetCompatible('8.7.0');
 	useEffect(() => {
 		if (isBridgetCompatible) {
 			Promise.all([
