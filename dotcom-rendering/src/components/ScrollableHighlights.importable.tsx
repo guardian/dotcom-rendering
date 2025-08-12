@@ -19,8 +19,9 @@ type Props = {
 };
 
 const containerStyles = css`
+	padding: ${space[2]}px 0 ${space[3]}px;
 	${from.tablet} {
-		padding: 0 ${space[5]}px;
+		padding: ${space[2]}px ${space[5]}px;
 	}
 	${from.wide} {
 		padding-right: 100px;
@@ -29,6 +30,8 @@ const containerStyles = css`
 
 const carouselStyles = css`
 	display: grid;
+	gap: 10px;
+	padding: 0 10px;
 	grid-auto-columns: 1fr;
 	grid-auto-flow: column;
 	overflow-x: auto;
@@ -37,11 +40,12 @@ const carouselStyles = css`
 	scroll-behavior: smooth;
 	overscroll-behavior-x: contain;
 	overscroll-behavior-y: auto;
-	${until.tablet} {
-		scroll-padding-left: 10px;
-	}
+	scroll-padding-left: 10px;
+
 	${from.tablet} {
+		padding: 0;
 		scroll-padding-left: 120px;
+		gap: ${space[5]}px;
 	}
 	${from.desktop} {
 		scroll-padding-left: 240px;
@@ -70,17 +74,6 @@ const itemStyles = css`
 	scroll-snap-align: start;
 	grid-area: span 1;
 	position: relative;
-	margin: ${space[2]}px 10px ${space[3]}px;
-	:first-child {
-		${from.tablet} {
-			margin-left: 0;
-		}
-	}
-	:last-child {
-		${from.tablet} {
-			margin-right: 0;
-		}
-	}
 `;
 
 const verticalLineStyles = css`
