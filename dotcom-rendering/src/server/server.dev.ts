@@ -1,4 +1,5 @@
 import { type Handler, Router } from 'express';
+import { home } from '../devServer/routers/home';
 import { pages } from '../devServer/routers/pages';
 import { targets } from '../devServer/routers/targets';
 import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslettersPage.web';
@@ -125,6 +126,7 @@ renderer.post('/CricketMatchPage', handleCricketMatchPage);
 renderer.post('/FootballMatchSummaryPage', handleFootballMatchPage);
 
 const router = Router();
+router.use('/home', home);
 router.use('/pages', pages);
 router.use('/targets', targets);
 router.use(renderer);
