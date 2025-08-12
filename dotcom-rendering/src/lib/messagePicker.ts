@@ -1,4 +1,4 @@
-import { isUndefined, startPerformanceMeasure } from '@guardian/libs';
+import { isUndefined, log, startPerformanceMeasure } from '@guardian/libs';
 import { getOphan } from '../client/ophan/ophan';
 import type { RenderingTarget } from '../types/renderingTarget';
 
@@ -163,6 +163,22 @@ export const pickMessage = (
 		winnerResult
 			.then((winner) => {
 				clearAllTimeouts(candidateConfigsWithTimeout);
+
+				log(
+					'supporterRevenue',
+					`pickMessage for ${name}: ${JSON.stringify(winner)}}`,
+				);
+				document.dispatchEvent(
+					new CustomEvent<{
+						type: string;
+						winner: string | null;
+					}>('supporterRevenue:messagePicker', {
+						detail: {
+							type: name,
+							winner: winner?.candidate.id ?? null,
+						},
+					}),
+				);
 
 				if (winner === null) {
 					resolve(defaultShow);
