@@ -187,15 +187,20 @@ export const enhanceAdPlaceholders =
 		shouldHideAds: boolean,
 	) =>
 	(elements: FEElement[]): FEElement[] => {
+		if (shouldHideAds) return elements;
+
+		// In galleries the AdPlaceholders are inserted in both
+		// Web & App because the same logic is used for both
+		if (format.design === ArticleDesign.Gallery) {
+			return insertAdPlaceholdersForGallery(elements);
+		}
+
 		if (
 			renderingTarget === 'Apps' &&
-			!shouldHideAds &&
 			format.design !== ArticleDesign.LiveBlog &&
 			format.design !== ArticleDesign.DeadBlog
 		) {
-			return format.design === ArticleDesign.Gallery
-				? insertAdPlaceholdersForGallery(elements)
-				: insertAdPlaceholders(elements);
+			return insertAdPlaceholders(elements);
 		}
 
 		return elements;
