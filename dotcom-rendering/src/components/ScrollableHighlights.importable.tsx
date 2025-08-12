@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, space, until } from '@guardian/source/foundations';
+import { from, space } from '@guardian/source/foundations';
 import {
 	Button,
 	Hide,
@@ -28,10 +28,15 @@ const containerStyles = css`
 	}
 `;
 
+const cardGap = 10;
+const horizontalPaddingMobile = 10;
+const horizontalPaddingMobileLandscape = 20;
+
 const carouselStyles = css`
 	display: grid;
-	gap: 10px;
-	padding: 0 10px;
+	gap: ${cardGap}px;
+	padding: 0 ${horizontalPaddingMobile}px;
+	scroll-padding-left: ${horizontalPaddingMobile}px;
 	grid-auto-columns: 1fr;
 	grid-auto-flow: column;
 	overflow-x: auto;
@@ -40,8 +45,11 @@ const carouselStyles = css`
 	scroll-behavior: smooth;
 	overscroll-behavior-x: contain;
 	overscroll-behavior-y: auto;
-	scroll-padding-left: 10px;
 
+	${from.mobileLandscape} {
+		padding: 0 ${horizontalPaddingMobileLandscape}px;
+		scroll-padding-left: ${horizontalPaddingMobileLandscape}px;
+	}
 	${from.tablet} {
 		padding: 0;
 		scroll-padding-left: 120px;
@@ -133,20 +141,50 @@ const nextButtonFadeStyles = css`
  * @returns {string} - The CSS styles for the grid layout.
  */
 const generateCarouselColumnStyles = (totalCards: number) => {
-	const peepingCardWidth = space[8];
+	const peepingCardWidthMobile = 150; // Screens below 375px. Only one card is fully visible;
+	const peepingCardWidthMobileMedium = space[8];
 
 	return css`
-		${until.mobileMedium} {
-			grid-template-columns: repeat(${totalCards}, 70%) max(30%);
-		}
-
+		grid-template-columns: repeat(
+			${totalCards},
+			max(
+				180px,
+				calc(
+					100vw -
+						(
+							${horizontalPaddingMobile +
+							cardGap +
+							peepingCardWidthMobile}px
+						)
+				)
+			)
+		);
 		${from.mobileMedium} {
 			grid-template-columns: repeat(
 				${totalCards},
-				calc((100% - ${peepingCardWidth}px) / 2)
+				calc(
+					(
+							100vw -
+								${horizontalPaddingMobile +
+								2 * cardGap +
+								peepingCardWidthMobileMedium}px
+						) / 2
+				)
 			);
 		}
-
+		${from.mobileLandscape} {
+			grid-template-columns: repeat(
+				${totalCards},
+				calc(
+					(
+							100vw -
+								${horizontalPaddingMobileLandscape +
+								2 * cardGap +
+								peepingCardWidthMobileMedium}px
+						) / 2
+				)
+			);
+		}
 		${from.tablet} {
 			grid-template-columns: repeat(${totalCards}, 1fr);
 		}
