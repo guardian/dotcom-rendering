@@ -14,6 +14,7 @@ import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Caption } from '../components/Caption';
+import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { DesktopAdSlot, MobileAdSlot } from '../components/GalleryAdSlots';
 import { GalleryImage } from '../components/GalleryImage';
@@ -162,6 +163,9 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 	const adPositions: number[] = renderAds
 		? getAdPositions(gallery.images)
 		: [];
+
+	const showComments =
+		frontendData.isCommentable && !frontendData.config.isPaidContent;
 
 	return (
 		<>
@@ -328,7 +332,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						</Fragment>
 					);
 				})}
-				;
+
 				<SubMeta
 					format={format}
 					subMetaKeywordLinks={frontendData.subMetaKeywordLinks}
@@ -355,6 +359,36 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						data-print-layout="hide"
 						position="merchandising-high"
 						display={format.display}
+					/>
+				</Section>
+			)}
+			{/** More Galleries container goes here */}
+			{showComments && (
+				<Section
+					fullWidth={true}
+					sectionId="comments"
+					element="section"
+					backgroundColour={themePalette(
+						'--discussion-section-background',
+					)}
+					borderColour={themePalette('--article-border')}
+					fontColour={themePalette('--discussion-text')}
+				>
+					<DiscussionLayout
+						discussionApiUrl={frontendData.config.discussionApiUrl}
+						shortUrlId={frontendData.config.shortUrlId}
+						format={format}
+						discussionD2Uid={frontendData.config.discussionD2Uid}
+						discussionApiClientHeader={
+							frontendData.config.discussionApiClientHeader
+						}
+						enableDiscussionSwitch={
+							!!frontendData.config.switches
+								.enableDiscussionSwitch
+						}
+						isAdFreeUser={frontendData.isAdFreeUser}
+						shouldHideAds={frontendData.shouldHideAds}
+						idApiUrl={frontendData.config.idApiUrl}
 					/>
 				</Section>
 			)}
