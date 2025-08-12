@@ -85,12 +85,12 @@ const itemStyles = css`
 
 const verticalLineStyles = css`
 	${from.tablet} {
-		:not(:last-child)::after {
+		:not(:first-child)::before {
 			content: '';
 			position: absolute;
 			top: 0;
 			bottom: 0;
-			right: -10px;
+			left: -10px;
 			width: 1px;
 			background-color: ${palette('--highlights-container-separator')};
 			transform: translateX(-50%);
