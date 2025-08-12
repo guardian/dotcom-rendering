@@ -3645,7 +3645,6 @@ const shareButtonLiveBlogMobileMetaLight: PaletteFunction = ({
 
 const shareButtonHoverLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
-		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 		case ArticleDesign.Picture:
@@ -3655,6 +3654,8 @@ const shareButtonHoverLight: PaletteFunction = ({ design, theme }) => {
 				default:
 					return sourcePalette.neutral[7];
 			}
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[7];
 		default:
 			return sourcePalette.neutral[100];
 	}
