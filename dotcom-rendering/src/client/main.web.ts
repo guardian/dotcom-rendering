@@ -51,6 +51,12 @@ void (async () => {
 		},
 	);
 
+	/**
+	 * window.guardian.modules.abTests needs to be added to the window ASAP
+	 * so that other scripts on the page i.e. commercial can use it
+	 *
+	 * This will move to lib once we're happy with it
+	 */
 	void startup(
 		'abTesting',
 		() =>
