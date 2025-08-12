@@ -212,7 +212,7 @@ const captionLink = css`
 
 const galleryStyles = css`
 	${grid.column.centre};
-	${textSans12};
+	${textSans14};
 
 	margin-bottom: 0;
 	padding-bottom: 6px;
