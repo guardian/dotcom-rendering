@@ -38,6 +38,7 @@ const container = css`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	height: 100%;
 	column-gap: ${space[2]}px;
 	/** Relative positioning is required to absolutely position the card link overlay */
 	position: relative;
@@ -57,10 +58,8 @@ const container = css`
 	}
 	${between.mobileMedium.and.tablet} {
 		min-height: 194px;
-		height: 100%;
 	}
 	${from.tablet} {
-		height: 100%;
 		width: 160px;
 		padding: 10px 10px 0 10px;
 	}
