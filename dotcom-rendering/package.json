@@ -47,7 +47,6 @@
 		"@guardian/tsconfig": "0.2.0",
 		"@playwright/test": "1.52.0",
 		"@sentry/browser": "10.3.0",
-		"@sentry/integrations": "7.75.1",
 		"@storybook/addon-essentials": "8.6.14",
 		"@storybook/addon-interactions": "8.6.14",
 		"@storybook/addon-webpack5-compiler-swc": "3.0.0",

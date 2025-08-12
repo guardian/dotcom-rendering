@@ -355,9 +355,6 @@ importers:
       '@sentry/browser':
         specifier: 10.3.0
         version: 10.3.0
-      '@sentry/integrations':
-        specifier: 7.75.1
-        version: 7.75.1
       '@storybook/addon-essentials':
         specifier: 8.6.14
         version: 8.6.14(@types/react@18.3.1)(storybook@8.6.14)
@@ -5715,36 +5712,6 @@ packages:
   /@sentry/core@10.3.0:
     resolution: {integrity: sha512-FEFCqiGkzJrm6TNJvhyjhc4rpC1Kmo/abYOACRd6MLvm8GBz41eFFKxsNxGZAUA3Fk1tR2mPfXIHOJzS0ulVww==}
     engines: {node: '>=18'}
-    dev: false
-
-  /@sentry/core@7.75.1:
-    resolution: {integrity: sha512-Kw4KyKBxbxbh8OKO0S11Tm0gWP+6AaXXYrsq3hp8H338l/wOmIzyckmCbUrc/XJeoRqaFLJbdcCrcUEDZUvsVQ==}
-    engines: {node: '>=8'}
-    dependencies:
-      '@sentry/types': 7.75.1
-      '@sentry/utils': 7.75.1
-    dev: false
-
-  /@sentry/integrations@7.75.1:
-    resolution: {integrity: sha512-qSCyTNX3DiL1aYRmdq10LRhPLfh1KJYKhbmGszC1PII4mt9FbLVmC8fSXiDbhgiuSUKKrDE+J2lC//w688lvHw==}
-    engines: {node: '>=8'}
-    dependencies:
-      '@sentry/core': 7.75.1
-      '@sentry/types': 7.75.1
-      '@sentry/utils': 7.75.1
-      localforage: 1.10.0
-    dev: false
-
-  /@sentry/types@7.75.1:
-    resolution: {integrity: sha512-km+ygqgMDaFfTrbQwdhrptFqx0Oq15jZABqIoIpbaOCkCAMm+tyCqrFS8dTfaq5wpCktqWOy2qU/DOpppO99Cg==}
-    engines: {node: '>=8'}
-    dev: false
-
-  /@sentry/utils@7.75.1:
-    resolution: {integrity: sha512-QzW2eRjY20epD//9/tQ0FTNwdAL6XZi+LyJNUQIeK3NMnc5NgHrgpxId87gmFq8cNx47utH1Blub8RuMbKqiwQ==}
-    engines: {node: '>=8'}
-    dependencies:
-      '@sentry/types': 7.75.1
     dev: false
 
   /@sinclair/typebox@0.27.8:
@@ -13635,10 +13602,6 @@ packages:
     engines: {node: '>= 4'}
     dev: false
 
-  /immediate@3.0.6:
-    resolution: {integrity: sha512-XXOFtyqDjNDAQxVfYxuF7g9Il/IbWmmlQg2MYKOH8ExIT1qg6xc4zyS3HaEEATgs1btfzxq15ciUiY7gjSXRGQ==}
-    dev: false
-
   /import-fresh@3.3.1:
     resolution: {integrity: sha512-TR3KfrTZTYLPB6jUjfx6MF9WcWrHL9su5TObK4ZkYgBdWKPOFoSoQIdEuTuR82pmtxH2spWG9h6etwfr1pLBqQ==}
     engines: {node: '>=6'}
@@ -15043,12 +15006,6 @@ packages:
       type-check: 0.4.0
     dev: false
 
-  /lie@3.1.1:
-    resolution: {integrity: sha512-RiNhHysUjhrDQntfYSfY4MU24coXXdEOgw9WGcKHNeEwffDYbF//u87M1EWaMGzuFoSbqW0C9C6lEEhDOAswfw==}
-    dependencies:
-      immediate: 3.0.6
-    dev: false
-
   /lilconfig@3.0.0:
     resolution: {integrity: sha512-K2U4W2Ff5ibV7j7ydLr+zLAkIg5JJ4lPn1Ltsdt+Tz/IjQ8buJ55pZAxoP34lqIiwtF9iAvtLv3JGv7CAyAg+g==}
     engines: {node: '>=14'}
@@ -15111,12 +15068,6 @@ packages:
       big.js: 5.2.2
       emojis-list: 3.0.0
       json5: 1.0.2
-    dev: false
-
-  /localforage@1.10.0:
-    resolution: {integrity: sha512-14/H1aX7hzBBmmh7sGPd+AOMkkIrHM3Z1PAyGgZigA1H1p5O5ANnMyWzvpAETtG68/dC4pC0ncy3+PPGzXZHPg==}
-    dependencies:
-      lie: 3.1.1
     dev: false
 
   /locate-path@5.0.0:
