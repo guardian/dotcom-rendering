@@ -18,7 +18,12 @@ import {
 	type TableOfContentsItem,
 } from '../model/enhanceTableOfContents';
 import { enhancePinnedPost } from '../model/pinnedPost';
-import type { FEElement, ImageBlockElement, ImageForLightbox } from './content';
+import type {
+	AdPlaceholderBlockElement,
+	FEElement,
+	ImageBlockElement,
+	ImageForLightbox,
+} from './content';
 import { type RenderingTarget } from './renderingTarget';
 
 /**
@@ -40,7 +45,7 @@ export type ArticleFields = {
 
 export type Gallery = ArticleFields & {
 	design: ArticleDesign.Gallery;
-	images: ImageBlockElement[];
+	images: (ImageBlockElement | AdPlaceholderBlockElement)[];
 	mainMedia: ImageBlockElement;
 };
 
@@ -134,7 +139,9 @@ export const enhanceArticleType = (
 				block.elements.filter(
 					(element) =>
 						element._type ===
-						'model.dotcomrendering.pageElements.ImageBlockElement',
+							'model.dotcomrendering.pageElements.ImageBlockElement' ||
+						element._type ===
+							'model.dotcomrendering.pageElements.AdPlaceholderBlockElement',
 				),
 			),
 			mainMedia: getGalleryMainMedia(
