@@ -69,6 +69,52 @@ const insertPlaceholder = (
 	return [...prevElements, placeholder, currentElement];
 };
 
+type ReducerAccumulatorGallery = {
+	elements: FEElement[];
+	elementCounter: number;
+};
+
+/**
+ * Insert ad placeholders for gallery articles.
+ * Gallery-specific rules:
+ * - Place ads after every 4th image
+ * - Start placing ads after the 4th image
+ * @param elements - The array of elements to enhance
+ * @returns The enhanced array of elements with ad placeholders inserted
+ */
+const insertAdPlaceholdersForGallery = (elements: FEElement[]): FEElement[] => {
+	const elementsWithReducerContext = elements.reduce(
+		(
+			prev: ReducerAccumulatorGallery,
+			currentElement: FEElement,
+		): ReducerAccumulatorGallery => {
+			const elementCounter =
+				currentElement._type ===
+				'model.dotcomrendering.pageElements.ImageBlockElement'
+					? prev.elementCounter + 1
+					: prev.elementCounter;
+
+			const shouldInsertAd = elementCounter % 4 === 0;
+
+			const currentElements = [...prev.elements, currentElement];
+
+			return {
+				elements: shouldInsertAd
+					? insertPlaceholder(prev.elements, currentElement)
+					: currentElements,
+				elementCounter,
+			};
+		},
+		// Initial value for reducer function
+		{
+			elements: [],
+			elementCounter: 0,
+		},
+	);
+
+	return elementsWithReducerContext.elements;
+};
+
 /**
  * - elementCounter: the number of paragraphs and images that we've counted when considering ad insertion
  * - lastAdIndex: the index of the most recently inserted ad, used to calculate the elements between subsequent ads
@@ -140,10 +186,17 @@ export const enhanceAdPlaceholders =
 		renderingTarget: RenderingTarget,
 		shouldHideAds: boolean,
 	) =>
-	(elements: FEElement[]): FEElement[] =>
-		renderingTarget === 'Apps' &&
-		!shouldHideAds &&
-		format.design !== ArticleDesign.LiveBlog &&
-		format.design !== ArticleDesign.DeadBlog
-			? insertAdPlaceholders(elements)
-			: elements;
+	(elements: FEElement[]): FEElement[] => {
+		if (
+			renderingTarget === 'Apps' &&
+			!shouldHideAds &&
+			format.design !== ArticleDesign.LiveBlog &&
+			format.design !== ArticleDesign.DeadBlog
+		) {
+			return format.design === ArticleDesign.Gallery
+				? insertAdPlaceholdersForGallery(elements)
+				: insertAdPlaceholders(elements);
+		}
+
+		return elements;
+	};
