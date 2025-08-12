@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { getInteractionClient } from '../lib/bridgetApi';
 import { unifyPageContent } from '../lib/unifyPageContent';
 import { palette } from '../palette';
 import { useConfig } from './ConfigContext';
@@ -47,11 +48,18 @@ export const InteractiveAtom = ({
 }: InteractiveAtomType) => {
 	const { renderingTarget } = useConfig();
 
+	const isApps = renderingTarget === 'Apps';
+
+	const onTouchStart = () => getInteractionClient().disableArticleSwipe(true);
+	const onTouchEnd = () => getInteractionClient().disableArticleSwipe(false);
+
 	return (
 		<div
 			css={[containerStyles, !!isMainMedia && fullHeightStyles]}
 			data-atom-id={id}
 			data-atom-type="interactive"
+			onTouchStart={isApps ? onTouchStart : undefined}
+			onTouchEnd={isApps ? onTouchEnd : undefined}
 		>
 			<Island
 				priority="feature"
