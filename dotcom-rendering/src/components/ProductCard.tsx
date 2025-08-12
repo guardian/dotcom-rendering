@@ -1,12 +1,14 @@
 import { css } from '@emotion/react';
 import {
 	headlineBold24,
+	headlineMedium17,
 	palette,
 	space,
 	textSans17,
-	textSansBold17,
+	textSansBold15,
 } from '@guardian/source/foundations';
-import { ProductLinkButton } from './ProductLinkButton';
+import { SvgArrowRightStraight } from '@guardian/source/react-components';
+import { PillarButton } from './Discussion/PillarButton';
 
 export type Product = {
 	name: string;
@@ -14,7 +16,6 @@ export type Product = {
 	image?: string;
 	description: string;
 	url: string;
-	cta: string;
 };
 
 const card = css`
@@ -22,17 +23,16 @@ const card = css`
 	flex-direction: column;
 	background: #fff;
 	padding: 10px;
-	width: 260px;
-	box-shadow: 0 2px 8px ${palette.neutral[86]}22;
+	width: 260px; //not accurate as one in situ width will be determined by ratio
 `;
 
 const overallHeadingStyle = css`
 	${headlineBold24};
-	color: ${palette.lifestyle[400]};
+	color: ${palette.lifestyle[300]};
 `;
 
 const titleStyle = css`
-	${textSansBold17};
+	${headlineMedium17};
 `;
 
 const descriptionStyle = css`
@@ -41,12 +41,27 @@ const descriptionStyle = css`
 	margin-bottom: ${space[3]}px;
 `;
 
+const buttonOverride = css`
+	button {
+		background-color: ${palette.lifestyle[300]} !important;
+	}
+	button:hover {
+		background-color: ${palette.lifestyle[400]} !important;
+	}
+`;
+
+const readMoreStyle = css`
+	${textSansBold15};
+	color: ${palette.lifestyle[400]};
+	text-decoration: underline;
+	text-decoration-color: #dcdcdc; //todo find actual import
+`;
+
 export const ProductCard = ({
 	name,
 	reviewHeading,
 	description,
 	url,
-	cta,
 	image,
 }: Product) => (
 	<div css={card}>
@@ -54,6 +69,7 @@ export const ProductCard = ({
 			<span css={overallHeadingStyle}>{reviewHeading}</span>
 		)}
 		<div css={titleStyle}>{name}</div>
+		<div css={readMoreStyle}>Read more</div>
 		{!!image && (
 			<img
 				src={image}
@@ -66,6 +82,17 @@ export const ProductCard = ({
 			/>
 		)}
 		<div css={descriptionStyle}>{description}</div>
-		<ProductLinkButton label={cta} url={url} />
+		<div css={buttonOverride}>
+			<PillarButton
+				priority="primary"
+				icon={<SvgArrowRightStraight />}
+				iconSide="right"
+				linkName="product-card-cta"
+				onClick={() => void window.open(url, '_blank', 'noopener')}
+				size="small"
+			>
+				Shop Now
+			</PillarButton>
+		</div>
 	</div>
 );
