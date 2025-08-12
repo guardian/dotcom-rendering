@@ -1,6 +1,5 @@
 import * as Sentry from '@sentry/browser';
 import type { BrowserOptions } from '@sentry/browser';
-import { CaptureConsole } from '@sentry/integrations';
 import { BUILD_VARIANT, dcrJavascriptBundle } from '../../../webpack/bundles';
 import type { ReportError } from '../../types/sentry';
 
@@ -44,7 +43,7 @@ Sentry.init({
 	allowUrls,
 	dsn: dcrSentryDsn,
 	environment: stage || 'DEV',
-	integrations: [new CaptureConsole({ levels: ['error'] })],
+	integrations: [Sentry.captureConsoleIntegration({ levels: ['error'] })],
 	maxBreadcrumbs: 50,
 	// sampleRate: // We use Math.random in init.ts to sample errors
 });
