@@ -6,9 +6,6 @@ import {
 } from '@guardian/source/foundations';
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
-import { Carousel } from '../components/Carousel.importable';
-import { useConfig } from '../components/ConfigContext';
-import { ContainerOverrides } from '../components/ContainerOverrides';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
 import { EditionSwitcherBanner } from '../components/EditionSwitcherBanner.importable';
@@ -114,8 +111,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		editionId,
 	} = front;
 
-	const { renderingTarget } = useConfig();
-
 	const renderAds = canRenderAds(front);
 
 	const hasPageSkin = renderAds && hasPageSkinConfig;
@@ -140,8 +135,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
 	const { absoluteServerTimes = false } = front.config.switches;
-
-	const isInNoBoostsVariant = abTests.noBoostsVariant === 'variant';
 
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
@@ -550,115 +543,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						);
 					}
 
-					if (
-						collection.collectionType === 'fixed/video' ||
-						collection.containerPalette === 'PodcastPalette'
-					) {
-						const containerPalette =
-							collection.containerPalette ?? 'MediaPalette';
-
-						return (
-							<Fragment key={ophanName}>
-								{desktopAdPositions.includes(index) && (
-									<FrontsBannerAdSlot
-										renderAds={renderAds}
-										hasPageSkin={hasPageSkin}
-										adSlotIndex={desktopAdPositions.indexOf(
-											index,
-										)}
-									/>
-								)}
-
-								<ContainerOverrides
-									containerPalette={containerPalette}
-								>
-									<Section
-										title={collection.displayName}
-										sectionId={`container-${ophanName}`}
-										ophanComponentName={ophanName}
-										ophanComponentLink={ophanComponentLink}
-										containerName={
-											collection.collectionType
-										}
-										fullWidth={true}
-										padBottom={true}
-										showSideBorders={
-											collection.collectionType !==
-											'fixed/video'
-										}
-										showTopBorder={index > 0}
-										padContent={false}
-										url={collection.href}
-										showDateHeader={
-											collection.config.showDateHeader
-										}
-										editionId={front.editionId}
-										backgroundColour={schemePalette(
-											'--front-container-background',
-										)}
-										innerBackgroundColour={
-											containerPalette === 'MediaPalette'
-												? sourcePalette.neutral[0]
-												: undefined
-										}
-										hasPageSkin={hasPageSkin}
-									>
-										<Island
-											priority="feature"
-											defer={{ until: 'visible' }}
-										>
-											<Carousel
-												isOnwardContent={false}
-												heading={collection.displayName}
-												trails={trails}
-												onwardsSource={'unknown-source'}
-												palette={containerPalette}
-												leftColSize={'compact'}
-												containerType={
-													collection.collectionType
-												}
-												hasPageSkin={hasPageSkin}
-												url={collection.href}
-												discussionApiUrl={
-													front.config
-														.discussionApiUrl
-												}
-												absoluteServerTimes={
-													absoluteServerTimes
-												}
-												renderingTarget={
-													renderingTarget
-												}
-											/>
-										</Island>
-									</Section>
-								</ContainerOverrides>
-
-								{mobileAdPositions.includes(index) && (
-									<MobileAdSlot
-										renderAds={renderAds}
-										adSlotIndex={mobileAdPositions.indexOf(
-											index,
-										)}
-									/>
-								)}
-
-								{index === merchHighAdPosition && (
-									<MerchHighAdSlot
-										renderAds={renderAds}
-										collectionCount={
-											filteredCollections.length
-										}
-										isPaidContent={
-											!!front.pressedPage.frontProperties
-												.isPaidContent
-										}
-									/>
-								)}
-							</Fragment>
-						);
-					}
-
 					return (
 						<Fragment key={ophanName}>
 							{desktopAdPositions.includes(index) && (
@@ -750,9 +634,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
-									isInNoBoostsAbTestVariant={
-										pageId === 'uk' && isInNoBoostsVariant
-									}
 								/>
 							</FrontSection>
 

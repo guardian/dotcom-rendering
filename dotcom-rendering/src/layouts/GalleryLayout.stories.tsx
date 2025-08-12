@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { allModes } from '../../.storybook/modes';
 import { Gallery as GalleryFixture } from '../../fixtures/generated/fe-articles/Gallery';
 import { WithBranding } from '../components/ArticleMeta.web.stories';
 import { ArticleDesign } from '../lib/articleFormat';
@@ -10,16 +11,24 @@ import { GalleryLayout } from './GalleryLayout';
 const meta = {
 	title: 'Layouts/Gallery',
 	component: GalleryLayout,
+	parameters: {
+		chromatic: {
+			modes: {
+				'light wide': allModes['light wide'],
+			},
+		},
+	},
 } satisfies Meta<typeof GalleryLayout>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const addBranding = (gallery: Gallery): Gallery => ({
+const addBrandingAndAffiliateDisclaimer = (gallery: Gallery): Gallery => ({
 	...gallery,
 	frontendData: {
 		...gallery.frontendData,
+		affiliateLinksDisclaimer: 'true',
 		webPublicationDateDeprecated: '2020-03-28T07:27:19.000Z',
 		commercialProperties: {
 			...gallery.frontendData.commercialProperties,
@@ -40,7 +49,7 @@ if (appsArticle.design !== ArticleDesign.Gallery) {
 export const Apps = {
 	args: {
 		renderingTarget: 'Apps',
-		gallery: addBranding(appsArticle),
+		gallery: addBrandingAndAffiliateDisclaimer(appsArticle),
 	},
 	parameters: {
 		formats: [
@@ -69,7 +78,7 @@ export const Web = {
 			...extractNAV(webArticle.frontendData.nav),
 			selectedPillar: getCurrentPillar(webArticle.frontendData),
 		},
-		gallery: addBranding(webArticle),
+		gallery: addBrandingAndAffiliateDisclaimer(webArticle),
 	},
 	parameters: {
 		formats: [

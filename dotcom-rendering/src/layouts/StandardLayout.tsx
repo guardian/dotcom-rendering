@@ -646,6 +646,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 												}
 											/>
 										</div>
+										{!!article.affiliateLinksDisclaimer && (
+											<AffiliateDisclaimer />
+										)}
 									</Hide>
 								</>
 							) : (

@@ -149,7 +149,6 @@ const baseConfiguration = {
 	iconSizeOnDesktop: 'large',
 	iconSizeOnMobile: 'large',
 	hidePillOnMobile: false,
-	showTextOverlay: false,
 	consentState: consentGiven,
 	renderingTarget: 'Web',
 } satisfies Partial<Props>;

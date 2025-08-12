@@ -47,12 +47,14 @@ const carouselStyles = css`
 		scroll-padding-left: 240px;
 	}
 	${from.leftCol} {
-		scroll-padding-left: 80px;
+		scroll-padding-left: 160px;
+		padding-left: 160px;
 	}
-
 	${from.wide} {
 		scroll-padding-left: 240px;
+		padding-left: 240px;
 	}
+
 	/**
 	* Hide scrollbars
 	* See: https://stackoverflow.com/a/38994837
@@ -68,27 +70,16 @@ const itemStyles = css`
 	scroll-snap-align: start;
 	grid-area: span 1;
 	position: relative;
-	margin: ${space[3]}px 10px;
+	margin: ${space[2]}px 10px ${space[3]}px;
 	:first-child {
 		${from.tablet} {
 			margin-left: 0;
 		}
-
-		/**
-		* From left col we add space to the left margin to the first
-		* child so that the first card in the carousel aligns
-		* with the start of the pages content in the grid.
-		*/
-		${from.leftCol} {
-			padding-left: 160px; /** 160 === 2 columns and 2 column gaps  */
-		}
-		${from.wide} {
-			padding-left: 0;
-			margin-left: 240px; /** 240 === 3 columns and 3 column gaps  */
-		}
 	}
 	:last-child {
-		margin-right: 0;
+		${from.tablet} {
+			margin-right: 0;
+		}
 	}
 `;
 
@@ -100,7 +91,7 @@ const verticalLineStyles = css`
 		bottom: 0;
 		right: -10px;
 		width: 1px;
-		background-color: ${palette('--card-border-top')};
+		background-color: ${palette('--highlights-container-separator')};
 		transform: translateX(-50%);
 	}
 `;
@@ -170,7 +161,7 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 /**
  * Typically, Ophan tracking data gets determined in the front layout component.
  * As the highlights exists outside of this front layout (in the header), we need to construct these fields here.
- * */
+ */
 const getOphanInfo = (frontId?: string) => {
 	const ophanComponentName = ophanComponentId('highlights');
 	const ophanComponentLink = `container-${0} | ${ophanComponentName}`;
@@ -196,6 +187,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 		const cardWidth =
 			carouselRef.current.querySelector('li')?.offsetWidth ?? 0;
 		const offset = direction === 'left' ? -cardWidth : cardWidth;
+
 		carouselRef.current.scrollBy({
 			left: offset,
 			behavior: 'smooth',

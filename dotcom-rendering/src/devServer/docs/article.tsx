@@ -142,10 +142,10 @@ const Format = () => (
 			<dt>Theme</dt>
 			<dd>
 				Primarily influences the fonts and colours of an article. It can
-				can be thought of as a superset of "pillar", i.e. all the
-				pillars are considered themes, but there are some additional
-				themes that are not pillars. The values are:{' '}
-				{formatValues(Pillar)}, {formatValues(ArticleSpecial)}.
+				be thought of as a superset of "pillar", i.e. all the pillars
+				are considered themes, but there are some additional themes that
+				are not pillars. The values are: {formatValues(Pillar)},{' '}
+				{formatValues(ArticleSpecial)}.
 			</dd>
 		</dl>
 		<p>

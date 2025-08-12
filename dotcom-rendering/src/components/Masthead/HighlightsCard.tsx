@@ -9,15 +9,14 @@ import { palette } from '../../palette';
 import type { StarRating as Rating } from '../../types/content';
 import type { DCRFrontImage } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
-import { Avatar } from '../Avatar';
 import { CardLink } from '../Card/components/CardLink';
 import { CardHeadline } from '../CardHeadline';
 import type { Loading } from '../CardPicture';
-import { CardPicture } from '../CardPicture';
 import { FormatBoundary } from '../FormatBoundary';
 import { Pill } from '../Pill';
 import { StarRating } from '../StarRating/StarRating';
 import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
+import { HighlightsCardImage } from './HighlightsCardImage';
 
 export type HighlightsCardProps = {
 	linkTo: string;
@@ -35,29 +34,29 @@ export type HighlightsCardProps = {
 	starRating?: Rating;
 };
 
-const gridContainer = css`
-	display: grid;
-	background-color: ${palette('--highlights-container-background')};
-	/** Relative positioning is required to absolutely
-	position the card link overlay */
-	position: relative;
+const container = css`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 	column-gap: ${space[2]}px;
-	grid-template-areas:
-		'headline headline'
-		'media-icon media-icon'
-		'. image';
+	/** Relative positioning is required to absolutely position the card link overlay */
+	position: relative;
+	padding: 10px 10px 0 10px;
+	background-color: ${palette('--highlights-card-background')};
 
-	/* Applied word-break: break-word to prevent text overflow
-	and ensure long words break onto the next line.
-	This is important since the highlights card can only take up a set portion
-	of the screen to allow for the peeping card on mobile and grid layout
-	on larger breakpoints, and the image has a fixed width on all breakpoints. */
+	/**
+	 * Applied word-break: break-word to prevent text overflow and ensure long words break
+	 * onto the next line. This is important since the highlights card can only take up a
+	 * set portion of the screen to allow for the peeping card on mobile and layout
+	 * on larger breakpoints, and the image has a fixed width on all breakpoints.
+	 */
 	word-break: break-word;
+
 	${until.mobileMedium} {
 		min-height: 174px;
 	}
 
-	${between.mobileMedium.and.desktop} {
+	${between.mobileMedium.and.tablet} {
 		min-height: 194px;
 		height: 100%;
 	}
@@ -67,42 +66,14 @@ const gridContainer = css`
 		width: 160px;
 	}
 
+	${from.tablet} {
+		width: 280px;
+		flex-direction: row;
+	}
+
 	${from.desktop} {
 		width: 300px;
-		grid-template-areas:
-			'headline 	image'
-			'media-icon image';
 	}
-`;
-
-const headline = css`
-	grid-area: headline;
-	margin-bottom: ${space[1]}px;
-`;
-
-const mediaIcon = css`
-	grid-area: media-icon;
-	display: flex;
-	align-items: flex-end;
-`;
-
-const imageArea = css`
-	grid-area: image;
-	height: 112px;
-	width: 112px;
-	align-self: end;
-	position: relative;
-	${until.desktop} {
-		margin-top: ${space[2]}px;
-	}
-	${from.desktop} {
-		align-self: start;
-	}
-`;
-
-/** Avatar alignment is an exception and should align with the bottom of the card *if* there is a gap.*/
-const avatarAlignmentStyles = css`
-	align-self: end;
 `;
 
 const hoverStyles = css`
@@ -124,97 +95,22 @@ const hoverStyles = css`
 	}
 `;
 
-const starWrapper = css`
-	background-color: ${palette('--star-rating-background')};
-	color: ${palette('--star-rating-fill')};
-	width: fit-content;
-	grid-area: media-icon;
-	align-self: flex-end;
+const content = css`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: ${space[1]}px;
+
+	${from.tablet} {
+		padding-bottom: 10px;
+	}
 `;
-
-const decideImage = (
-	imageLoading: Loading,
-	image?: DCRFrontImage,
-	avatarUrl?: string,
-	byline?: string,
-	mainMedia?: MainMedia,
-) => {
-	if (!image && !avatarUrl) {
-		return null;
-	}
-
-	if (avatarUrl) {
-		return (
-			<Avatar
-				src={avatarUrl}
-				alt={byline ?? ''}
-				shape="cutout"
-				imageSize="large"
-			/>
-		);
-	}
-
-	if (mainMedia?.type === 'Audio' && mainMedia.podcastImage?.src) {
-		return (
-			<>
-				<CardPicture
-					imageSize="medium"
-					mainImage={mainMedia.podcastImage.src}
-					alt={mainMedia.podcastImage.altText}
-					loading={imageLoading}
-					isCircular={false}
-					aspectRatio="1:1"
-				/>
-				<div className="image-overlay" />
-			</>
-		);
-	}
-
-	if (!image) {
-		return null;
-	}
-
-	return (
-		<>
-			<CardPicture
-				imageSize="highlights-card"
-				mainImage={image.src}
-				alt={image.altText}
-				loading={imageLoading}
-				isCircular={true}
-				aspectRatio="1:1"
-			/>
-			{/* This image overlay is styled when the CardLink is hovered */}
-			<div className="image-overlay circular" />
-		</>
-	);
-};
-
-const MediaPill = ({ mainMedia }: { mainMedia: MainMedia }) => (
-	<div css={mediaIcon}>
-		{mainMedia.type === 'Video' && (
-			<Pill
-				content={secondsToDuration(mainMedia.duration)}
-				prefix="Video"
-				icon={<SvgMediaControlsPlay width={18} />}
-			/>
-		)}
-		{mainMedia.type === 'Audio' && (
-			<Pill
-				content={mainMedia.duration}
-				prefix="Podcast"
-				icon={<SvgMediaControlsPlay width={18} />}
-			/>
-		)}
-		{mainMedia.type === 'Gallery' && (
-			<Pill
-				content={mainMedia.count}
-				prefix="Gallery"
-				icon={<SvgCamera />}
-			/>
-		)}
-	</div>
-);
+const starWrapper = css`
+	width: fit-content;
+	margin-top: ${space[1]}px;
+	color: ${palette('--star-rating-fill')};
+	background-color: ${palette('--star-rating-background')};
+`;
 
 export const HighlightsCard = ({
 	linkTo,
@@ -235,7 +131,7 @@ export const HighlightsCard = ({
 
 	return (
 		<FormatBoundary format={format}>
-			<div css={[gridContainer, hoverStyles]}>
+			<div css={[container, hoverStyles]}>
 				<CardLink
 					linkTo={linkTo}
 					headlineText={headlineText}
@@ -243,12 +139,12 @@ export const HighlightsCard = ({
 					isExternalLink={isExternalLink}
 				/>
 
-				<div css={headline}>
+				<div css={content}>
 					<CardHeadline
 						headlineText={headlineText}
 						format={format}
 						fontSizes={{
-							desktop: 'xsmall',
+							desktop: 'xxsmall',
 							tablet: 'xxsmall',
 							mobileMedium: 'xxsmall',
 							mobile: 'tiny',
@@ -261,28 +157,53 @@ export const HighlightsCard = ({
 						showQuotes={showQuotedHeadline}
 						headlineColour={palette('--highlights-card-headline')}
 						kickerColour={palette('--highlights-card-kicker-text')}
+						quoteColour={palette('--highlights-card-quote-icon')}
 					/>
-				</div>
 
-				{!isUndefined(starRating) ? (
-					<div css={starWrapper}>
-						<StarRating rating={starRating} size="small" />
-					</div>
-				) : null}
+					{!isUndefined(starRating) && (
+						<div css={starWrapper}>
+							<StarRating rating={starRating} size="small" />
+						</div>
+					)}
 
-				{!!mainMedia && isMediaCard && (
-					<MediaPill mainMedia={mainMedia} />
-				)}
-
-				<div css={[imageArea, avatarUrl && avatarAlignmentStyles]}>
-					{decideImage(
-						imageLoading,
-						image,
-						avatarUrl,
-						byline,
-						mainMedia,
+					{!!mainMedia && isMediaCard && (
+						<div>
+							{mainMedia.type === 'Video' && (
+								<Pill
+									content={secondsToDuration(
+										mainMedia.duration,
+									)}
+									prefix="Video"
+									icon={<SvgMediaControlsPlay width={18} />}
+								/>
+							)}
+							{mainMedia.type === 'Audio' && (
+								<Pill
+									content={mainMedia.duration}
+									prefix="Podcast"
+									icon={<SvgMediaControlsPlay width={18} />}
+								/>
+							)}
+							{mainMedia.type === 'Gallery' && (
+								<Pill
+									content={mainMedia.count}
+									prefix="Gallery"
+									icon={<SvgCamera />}
+								/>
+							)}
+						</div>
 					)}
 				</div>
+
+				{(!!avatarUrl || !!image) && (
+					<HighlightsCardImage
+						imageLoading={imageLoading}
+						image={image}
+						avatarUrl={avatarUrl}
+						byline={byline}
+						mainMedia={mainMedia}
+					/>
+				)}
 			</div>
 		</FormatBoundary>
 	);
