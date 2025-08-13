@@ -27,6 +27,8 @@ type Props = {
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
+	isInLoopingVideoTestVariant?: boolean;
+	isInLoopingVideoTestControl?: boolean;
 };
 
 type BoostProperties = {
@@ -117,6 +119,8 @@ type OneCardLayoutProps = {
 	isLastRow: boolean;
 	isFirstRow: boolean;
 	containerLevel: DCRContainerLevel;
+	isInLoopingVideoTestVariant?: boolean;
+	isInLoopingVideoTestControl?: boolean;
 };
 
 export const OneCardLayout = ({
@@ -129,6 +133,8 @@ export const OneCardLayout = ({
 	isLastRow,
 	isFirstRow,
 	containerLevel,
+	isInLoopingVideoTestVariant = false,
+	isInLoopingVideoTestControl = false,
 }: OneCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -177,6 +183,8 @@ export const OneCardLayout = ({
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
+					isInLoopingVideoTestVariant={isInLoopingVideoTestVariant}
+					isInLoopingVideoTestControl={isInLoopingVideoTestControl}
 				/>
 			</LI>
 		</UL>
@@ -273,6 +281,8 @@ export const FlexibleSpecial = ({
 	aspectRatio,
 	containerLevel = 'Primary',
 	collectionId,
+	isInLoopingVideoTestVariant,
+	isInLoopingVideoTestControl,
 }: Props) => {
 	const snaps = [...groupedTrails.snap].slice(0, 1).map((snap) => ({
 		...snap,
@@ -299,6 +309,8 @@ export const FlexibleSpecial = ({
 				isFirstRow={true}
 				isLastRow={splash.length === 0 && cards.length === 0}
 				containerLevel={containerLevel}
+				isInLoopingVideoTestVariant={isInLoopingVideoTestVariant}
+				isInLoopingVideoTestControl={isInLoopingVideoTestControl}
 			/>
 			<OneCardLayout
 				cards={splash}
@@ -310,6 +322,8 @@ export const FlexibleSpecial = ({
 				isLastRow={cards.length === 0}
 				isFirstRow={!isNonEmptyArray(snaps)}
 				containerLevel={containerLevel}
+				isInLoopingVideoTestVariant={isInLoopingVideoTestVariant}
+				isInLoopingVideoTestControl={isInLoopingVideoTestControl}
 			/>
 			<TwoOrFourCardLayout
 				cards={cards}
