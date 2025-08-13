@@ -173,7 +173,7 @@ export const ImageWrapper = ({
 			css={[
 				(imageType === 'slideshow' ||
 					imageType === 'picture' ||
-					imageType === 'video' ||
+					imageType === 'youtube-video' ||
 					imageType === 'loop-video') &&
 					isHorizontalOnDesktop &&
 					flexBasisStyles({
