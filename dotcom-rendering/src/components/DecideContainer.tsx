@@ -48,6 +48,7 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
+	isInOpinionNoAvatarVariant?: boolean;
 };
 
 export const DecideContainer = ({
@@ -63,6 +64,7 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
+	isInOpinionNoAvatarVariant,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -268,6 +270,7 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
+					isInOpinionNoAvatarVariant={isInOpinionNoAvatarVariant}
 				/>
 			);
 		case 'scrollable/small':
@@ -297,6 +300,7 @@ export const DecideContainer = ({
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
+						isInOpinionNoAvatarVariant={isInOpinionNoAvatarVariant}
 					/>
 				</Island>
 			);
