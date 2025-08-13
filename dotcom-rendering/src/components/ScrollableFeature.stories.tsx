@@ -61,7 +61,7 @@ const trails = new Array(6)
 
 const meta = {
 	component: ScrollableFeature,
-	title: 'Components/ScrollableFeature',
+	title: 'Front Containers/ScrollableFeature',
 	parameters: {
 		chromatic: {
 			viewports: [
