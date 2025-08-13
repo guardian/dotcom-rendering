@@ -69,6 +69,16 @@ const insertPlaceholder = (
 	return [...prevElements, placeholder, currentElement];
 };
 
+const insertPlaceholderAfterCurrentElement = (
+	prevElements: FEElement[],
+	currentElement: FEElement,
+): FEElement[] => {
+	const placeholder: AdPlaceholderBlockElement = {
+		_type: 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement',
+	};
+	return [...prevElements, currentElement, placeholder];
+};
+
 type ReducerAccumulatorGallery = {
 	elements: FEElement[];
 	elementCounter: number;
@@ -100,7 +110,10 @@ const insertAdPlaceholdersForGallery = (elements: FEElement[]): FEElement[] => {
 
 			return {
 				elements: shouldInsertAd
-					? insertPlaceholder(prev.elements, currentElement)
+					? insertPlaceholderAfterCurrentElement(
+							prev.elements,
+							currentElement,
+					  )
 					: currentElements,
 				elementCounter,
 			};
