@@ -71,7 +71,7 @@ const initialiseCmp = async () => {
 	const isInSourcepointGeolocationTest =
 		isInSourcepointGeolocationTestCookie !== null
 			? Boolean(isInSourcepointGeolocationTestCookie)
-			: undefined;
+			: false;
 
 	const country = code ?? undefined;
 	cmp.init({
