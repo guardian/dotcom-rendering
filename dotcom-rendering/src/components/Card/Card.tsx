@@ -268,7 +268,7 @@ const getMedia = ({
 	}
 	if (mainMedia?.type === 'Video' && canPlayInline) {
 		return {
-			type: 'video',
+			type: 'youtube-video',
 			mainMedia,
 		} as const;
 	}
@@ -899,7 +899,7 @@ export const Card = ({
 								/>
 							</Island>
 						)}
-						{media.type === 'video' && (
+						{media.type === 'youtube-video' && (
 							<>
 								{showVideo ? (
 									<div

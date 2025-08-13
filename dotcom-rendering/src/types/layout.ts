@@ -26,7 +26,7 @@ export type CardImageType =
 	| 'avatar'
 	| 'crossword'
 	| 'slideshow'
-	| 'video'
+	| 'youtube-video'
 	| 'loop-video'
 	| 'podcast';
 
