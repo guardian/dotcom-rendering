@@ -58,14 +58,34 @@ export type Group = `${number}` | `${number}+`;
  *
  * @see {JSX.IntrinsicAttributes}
  */
+
+type MediaType =
+	| 'podcast'
+	| 'loop-video'
+	| 'youtube-video'
+	| 'slideshow'
+	| 'avatar'
+	| 'crossword'
+	| 'picture'
+	| 'none';
+
 export const getDataLinkNameCard = (
 	format: ArticleFormat,
 	group: Group,
 	index: number,
+	mediaType: MediaType = 'none',
 	cardStyle?: FEFrontCardStyle,
 ): string =>
 	[
 		getLinkType(format, cardStyle),
 		`group-${group}`,
 		`card-@${Math.max(index + 1, 1)}`,
+		`media-${mediaType}`,
 	].join(' | ');
+
+export const replaceLinkNameMedia = (
+	dataLinkName: string,
+	mediaType: MediaType,
+): string => {
+	return dataLinkName.replace(/media-none/, `media-${mediaType}`);
+};
