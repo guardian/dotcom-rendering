@@ -895,6 +895,7 @@ export const Card = ({
 									fallbackImageLoading={imageLoading}
 									fallbackImageAlt={media.imageAltText}
 									fallbackImageAspectRatio="5:4"
+									linkTo={linkTo}
 								/>
 							</Island>
 						)}
