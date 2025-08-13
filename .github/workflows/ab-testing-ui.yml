@@ -1,4 +1,4 @@
-name: 🦕 AB testing
+name: 🦕 AB testing UI
 on:
   pull_request:
     paths:
@@ -32,7 +32,7 @@ jobs:
           if-no-files-found: error
 
   riff-raff:
-    name: Upload Riff Raff Artifacts
+    name: AB testing Riffraff upload
     runs-on: ubuntu-latest
     permissions:
       id-token: write

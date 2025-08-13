@@ -9,9 +9,10 @@
 
 	const { tests }: Props = $props();
 
-	function daysToExpiry(expires: Date) {
+	function daysToExpiry(expires: string) {
 		const today = new Date();
-		const differenceInMilliseconds = expires.getTime() - today.getTime();
+		const expiresDate = new Date(expires);
+		const differenceInMilliseconds = expiresDate.getTime() - today.getTime();
 		const differenceInDays =
 			differenceInMilliseconds / (1000 * 60 * 60 * 24);
 		return Math.floor(differenceInDays);
@@ -44,7 +45,7 @@
 					</td>
 					<td>{daysToExpiry(test.expirationDate)} days</td>
 					<td>{test.audienceSize * 100}%</td>
-					<td>{test.audienceOffset ?? 0}</td>
+					<td>0</td>
 					<td><OphanLink testName={test.name} /></td>
 				</tr>
 				<tr>

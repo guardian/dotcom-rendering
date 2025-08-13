@@ -12,8 +12,47 @@
 	// Account for legend bar and vertical padding in chart height
 	const chartHeight = tests.length * BAR_HEIGHT + BAR_HEIGHT + 16;
 
-	function getOffset(test: ABTest) {
-		return test.audienceOffset ?? 0;
+	const testSpaces = ['A', 'B', 'C'];
+
+	const testsBySpace = testSpaces.map((space) => {
+		if (space === 'A') {
+			return tests.filter(
+				(test) => test.audienceSpace === space || !test.audienceSpace,
+			);
+		} else {
+			return tests.filter((test) => test.audienceSpace === space);
+		}
+	});
+
+	console.log(testsBySpace);
+
+
+	function getBars(testList: ABTest[], spaceIndex: number) {
+		return testList.reduce<Array<Record<string, number | string>>>(
+			(barsList, test, index) => {
+				const previousBar = barsList.slice(-1)[0];
+				const offset: number = Number(previousBar?.width ?? 0);
+				const relativeIndex = index + spaceIndex;
+				return [
+					...barsList,
+					{
+						x: offset,
+						y: relativeIndex * BAR_HEIGHT + BAR_HEIGHT,
+						width: getSize(test),
+						name: test.name,
+						segments: `${offset}% to ${offset + testSegmentEnd(
+							test,
+						)}%`,
+					},
+				];
+			},
+			[],
+		);
+	}
+
+	function getOffset(test: ABTest, previousTest?: ABTest) {
+		const previousSize = previousTest ? getSize(previousTest) : 0;
+		return previousSize ?? 0;
 	}
 
 	function getSize(test: ABTest) {
@@ -21,7 +60,7 @@
 	}
 
 	function testSegmentEnd(test: ABTest) {
-		return getOffset(test) + getSize(test);
+		return getSize(test);
 	}
 </script>
 
@@ -40,19 +79,16 @@
 			<text x="75%" y="50%">75%</text>
 		</g>
 	</svg>
-	{#each tests as test, index}
-		<svg
-			x={`${getOffset(test)}%`}
-			y={index * BAR_HEIGHT + BAR_HEIGHT}
-			width={`${getSize(test)}%`}
-			height={BAR_HEIGHT}
-		>
-			<g class="bar">
-				<rect height={BAR_HEIGHT} width="100%" rx="4" />
-				<text class="name" x="50%" y="50%">{test.name}</text>
-				<text class="segments" x="50%" y="50%">{getOffset(test)}% to {testSegmentEnd(test)}%</text>
-			</g>
-		</svg>
+	{#each testsBySpace as testsInSpace, spaceIndex}
+		{#each getBars(testsInSpace, spaceIndex) as bar}
+			<svg x={`${bar.x}%`} y={bar.y} width={`${bar.width}%`} height={BAR_HEIGHT}>
+				<g class="bar">
+					<rect height={BAR_HEIGHT} width="100%" rx="4" />
+					<text class="name" x="50%" y="50%">{bar.name}</text>
+					<text class="segments" x="50%" y="50%">{bar.segments}</text>
+				</g>
+			</svg>
+		{/each}
 	{/each}
 </svg>
 
