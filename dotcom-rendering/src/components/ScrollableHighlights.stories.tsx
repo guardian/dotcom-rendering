@@ -5,7 +5,7 @@ import { ScrollableHighlights } from './ScrollableHighlights.importable';
 import { Section } from './Section';
 
 const meta: Meta<typeof ScrollableHighlights> = {
-	title: 'Components/Masthead/ScrollableHighlights',
+	title: 'Front Containers/ScrollableHighlights',
 	component: ScrollableHighlights,
 	parameters: {
 		chromatic: {

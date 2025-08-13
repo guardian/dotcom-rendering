@@ -6,7 +6,7 @@ import { FrontSection } from './FrontSection';
 
 export default {
 	component: FixedSmallSlowIV,
-	title: 'Components/FixedSmallSlowIV',
+	title: 'Front Containers/Deprecated Containers/FixedSmallSlowIV',
 	parameters: {
 		chromatic: {
 			viewports: [
