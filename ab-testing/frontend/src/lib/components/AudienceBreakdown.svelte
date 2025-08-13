@@ -24,9 +24,6 @@
 		}
 	});
 
-	console.log(testsBySpace);
-
-
 	function getBars(testList: ABTest[], spaceIndex: number) {
 		return testList.reduce<Array<Record<string, number | string>>>(
 			(barsList, test, index) => {
@@ -40,9 +37,9 @@
 						y: relativeIndex * BAR_HEIGHT + BAR_HEIGHT,
 						width: getSize(test),
 						name: test.name,
-						segments: `${offset}% to ${offset + testSegmentEnd(
-							test,
-						)}%`,
+						segments: `${offset}% to ${
+							offset + testSegmentEnd(test)
+						}%`,
 					},
 				];
 			},
@@ -50,9 +47,13 @@
 		);
 	}
 
-	function getOffset(test: ABTest, previousTest?: ABTest) {
-		const previousSize = previousTest ? getSize(previousTest) : 0;
-		return previousSize ?? 0;
+	function getBars2(testsBySpace: ABTest[][]) {
+		return testsBySpace.reduce<Array<Record<string, number | string>>>(
+			(barsList, testsInSpace) => {
+				return [...barsList, ...getBars(testsInSpace, barsList.length)];
+			},
+			[],
+		);
 	}
 
 	function getSize(test: ABTest) {
@@ -79,16 +80,19 @@
 			<text x="75%" y="50%">75%</text>
 		</g>
 	</svg>
-	{#each testsBySpace as testsInSpace, spaceIndex}
-		{#each getBars(testsInSpace, spaceIndex) as bar}
-			<svg x={`${bar.x}%`} y={bar.y} width={`${bar.width}%`} height={BAR_HEIGHT}>
-				<g class="bar">
-					<rect height={BAR_HEIGHT} width="100%" rx="4" />
-					<text class="name" x="50%" y="50%">{bar.name}</text>
-					<text class="segments" x="50%" y="50%">{bar.segments}</text>
-				</g>
-			</svg>
-		{/each}
+	{#each getBars2(testsBySpace) as bar}
+		<svg
+			x={`${bar.x}%`}
+			y={bar.y}
+			width={`${bar.width}%`}
+			height={BAR_HEIGHT}
+		>
+			<g class="bar">
+				<rect height={BAR_HEIGHT} width="100%" rx="4" />
+				<text class="name" x="50%" y="50%">{bar.name}</text>
+				<text class="segments" x="50%" y="50%">{bar.segments}</text>
+			</g>
+		</svg>
 	{/each}
 </svg>
 
