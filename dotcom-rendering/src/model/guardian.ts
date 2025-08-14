@@ -47,6 +47,7 @@ export interface Guardian {
 		};
 		switches: Switches;
 		tests: ServerSideTests;
+		serverSideABTests: Record<string, string>;
 		ophan: {
 			pageViewId: string;
 			browserId: string;
@@ -55,6 +56,16 @@ export interface Guardian {
 	modules: {
 		sentry: {
 			reportError: ReportError;
+		};
+		/**
+		 * The 'abTests' is for use by external scripts that need to
+		 * access A/B test information. Do not use this directly
+		 * in DCR, instead use the `useAB` hook as it is csr/ssr aware.
+		 */
+		abTests?: {
+			getParticipations: () => Record<string, string>;
+			isUserInTest: (testId: string) => boolean;
+			isUserInTestGroup: (testId: string, variantId: string) => boolean;
 		};
 	};
 	adBlockers: unknown;
@@ -81,6 +92,7 @@ export const createGuardian = ({
 	googletagUrl,
 	switches,
 	abTests,
+	serverSideABTests,
 	editionId,
 	contentType,
 	brazeApiKey,
@@ -99,6 +111,7 @@ export const createGuardian = ({
 	googletagUrl: string;
 	switches: Switches;
 	abTests: ServerSideTests;
+	serverSideABTests: Record<string, string>;
 	editionId: EditionId;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
@@ -147,6 +160,7 @@ export const createGuardian = ({
 			},
 			switches,
 			tests: abTests,
+			serverSideABTests,
 			ophan: {
 				pageViewId: '',
 				browserId: '',
@@ -160,6 +174,11 @@ export const createGuardian = ({
 		modules: {
 			sentry: {
 				reportError: () => null,
+			},
+			abTests: {
+				getParticipations: () => ({}),
+				isUserInTest: () => false,
+				isUserInTestGroup: () => false,
 			},
 		},
 	};
