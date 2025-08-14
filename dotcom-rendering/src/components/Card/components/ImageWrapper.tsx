@@ -180,6 +180,7 @@ export const ImageWrapper = ({
 }: Props) => {
 	const isHorizontalOnDesktop = isHorizontal(imagePositionOnDesktop);
 	const isHorizontalOnMobile = isHorizontal(imagePositionOnMobile);
+	const hasOverlay = imageType === 'picture' || imageType === 'slideshow';
 
 	return (
 		<div
@@ -224,23 +225,22 @@ export const ImageWrapper = ({
 			<>
 				{children}
 				{/* This image overlay is styled when the CardLink is hovered */}
-				{(imageType === 'picture' || imageType === 'slideshow') &&
-					!hideImageOverlay && (
-						<div
-							css={[
-								imageOverlayContainerStyles,
-								padImage &&
-									imagePaddingStyles(
-										imagePositionOnDesktop,
-										imagePositionOnMobile,
-									),
-							]}
-						>
-							{/* This child div is needed as the hover background colour covers the padded
+				{hasOverlay && !hideImageOverlay && (
+					<div
+						css={[
+							imageOverlayContainerStyles,
+							padImage &&
+								imagePaddingStyles(
+									imagePositionOnDesktop,
+									imagePositionOnMobile,
+								),
+						]}
+					>
+						{/* This child div is needed as the hover background colour covers the padded
 							    area around the image when the hover styles are applied to the top-level div */}
-							<div className="image-overlay" />
-						</div>
-					)}
+						<div className="image-overlay" />
+					</div>
+				)}
 			</>
 		</div>
 	);
