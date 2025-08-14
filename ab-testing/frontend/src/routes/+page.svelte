@@ -9,6 +9,9 @@
 
 <h1 class="headline">A/B Tests</h1>
 <section>
+	<p>This page provides an overview of currently running A/B tests on theguardian.com. Please note that the audience segment allocations displayed for non-overlapping tests may not correspond to the actual allocation of MVT IDs, but simply represents how much of the audience is included in each test.</p>
+</section>
+<section>
 	<h2 class="sub-headline">Client-side Tests</h2>
 	<AudienceBreakdown tests={clientSideTests} />
 	<Table tests={clientSideTests} />

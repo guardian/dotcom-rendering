@@ -44,17 +44,6 @@ export const ABTests: ABTest[] = [
 		groups: ['control', 'variant'],
 	},
 	{
-		name: 'commercial-server-side-test-2',
-		description:
-			'Show new ad block ask component in ad slots when we detect ad blocker usage',
-		owners: ['commercial.dev@guardian.co.uk'],
-		status: 'ON',
-		expirationDate: '2050-12-30',
-		type: 'server',
-		audienceSize: 10 / 100,
-		groups: ['control', 'variant'],
-	},
-	{
 		name: 'commercial-large-overlap-test',
 		description:
 			'Allows viewing the beta version of the Europe network front',
