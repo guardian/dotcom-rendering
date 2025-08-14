@@ -147,6 +147,8 @@ export type Props = {
 	trailTextSize?: TrailTextSize;
 	/** A kicker image is seperate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
+	/** Determines if the headline should be positioned within the content or outside the content */
+	headlinePosition?: 'inner' | 'outer';
 	isInLoopingVideoTestVariant?: boolean;
 	isInLoopingVideoTestControl?: boolean;
 };
@@ -326,36 +328,6 @@ const decideSublinkPosition = (
 	return alignment === 'vertical' ? 'inner' : 'outer';
 };
 
-const getHeadlinePosition = ({
-	isFlexSplash,
-	containerType,
-	showLivePlayable,
-	isMediaCardOrNewsletter,
-}: {
-	containerType?: DCRContainerType;
-	isFlexSplash?: boolean;
-	showLivePlayable: boolean;
-	isMediaCardOrNewsletter: boolean;
-}) => {
-	if (isMediaCardOrNewsletter) {
-		return 'inner';
-	}
-
-	if (containerType === 'flexible/special' && isFlexSplash) {
-		return 'outer';
-	}
-
-	if (
-		containerType === 'flexible/general' &&
-		isFlexSplash &&
-		showLivePlayable
-	) {
-		return 'outer';
-	}
-
-	return 'inner';
-};
-
 const liveBulletStyles = css`
 	width: 9px;
 	height: 9px;
@@ -420,6 +392,7 @@ export const Card = ({
 	showTopBarMobile = true,
 	trailTextSize,
 	showKickerImage = false,
+	headlinePosition = 'inner',
 	isInLoopingVideoTestVariant = false,
 	isInLoopingVideoTestControl = false,
 }: Props) => {
@@ -615,13 +588,6 @@ export const Card = ({
 		if (isFlexibleContainer) return { mobile: 'small' };
 		return { mobile: 'medium' };
 	};
-
-	const headlinePosition = getHeadlinePosition({
-		containerType,
-		isFlexSplash,
-		showLivePlayable,
-		isMediaCardOrNewsletter,
-	});
 
 	const hideTrailTextUntil = () => {
 		if (isFlexibleContainer) {

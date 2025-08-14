@@ -285,7 +285,7 @@ export const LoopVideoCards: Story = {
 		frontSectionTitle: 'Looping video',
 		groupedTrails: {
 			...emptyGroupedTrails,
-			snap: [loopVideoCard],
+			snap: [],
 			standard: [loopVideoCard],
 		},
 		collectionId: 1,

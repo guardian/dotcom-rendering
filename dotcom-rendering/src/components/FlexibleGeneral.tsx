@@ -339,6 +339,7 @@ const SplashCardLayout = ({
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
+					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
 					isInLoopingVideoTestVariant={isInLoopingVideoTestVariant}
 					isInLoopingVideoTestControl={isInLoopingVideoTestControl}
 				/>
