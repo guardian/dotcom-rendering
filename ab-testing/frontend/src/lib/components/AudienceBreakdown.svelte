@@ -5,6 +5,14 @@
 		tests: ABTest[];
 	}
 
+	type ABTestBarData = {
+		x: number;
+		y: number;
+		width: number;
+		name: string;
+		segments: string;
+	};
+
 	const { tests }: Props = $props();
 
 	const BAR_HEIGHT = 40;
@@ -24,22 +32,22 @@
 		}
 	});
 
-	function getBars(testList: ABTest[], spaceIndex: number) {
-		return testList.reduce<Array<Record<string, number | string>>>(
+	function getBars(testList: ABTest[], rowPosition: number) {
+		return testList.reduce<Array<ABTestBarData>>(
 			(barsList, test, index) => {
 				const previousBar = barsList.slice(-1)[0];
 				const offset: number = Number(previousBar?.width ?? 0);
-				const relativeIndex = index + spaceIndex;
+				const rowYLevel = index + rowPosition;
+				const testSize = getSize(test);
+
 				return [
 					...barsList,
 					{
 						x: offset,
-						y: relativeIndex * BAR_HEIGHT + BAR_HEIGHT,
-						width: getSize(test),
+						y: rowYLevel * BAR_HEIGHT + BAR_HEIGHT,
+						width: testSize,
 						name: test.name,
-						segments: `${offset}% to ${
-							offset + testSegmentEnd(test)
-						}%`,
+						segments: `${offset}% to ${offset + testSize}%`,
 					},
 				];
 			},
@@ -47,8 +55,8 @@
 		);
 	}
 
-	function getBars2(testsBySpace: ABTest[][]) {
-		return testsBySpace.reduce<Array<Record<string, number | string>>>(
+	function getAllRows(testsBySpace: ABTest[][]) {
+		return testsBySpace.reduce<Array<ABTestBarData>>(
 			(barsList, testsInSpace) => {
 				return [...barsList, ...getBars(testsInSpace, barsList.length)];
 			},
@@ -58,10 +66,6 @@
 
 	function getSize(test: ABTest) {
 		return test.audienceSize * 100;
-	}
-
-	function testSegmentEnd(test: ABTest) {
-		return getSize(test);
 	}
 </script>
 
@@ -80,7 +84,7 @@
 			<text x="75%" y="50%">75%</text>
 		</g>
 	</svg>
-	{#each getBars2(testsBySpace) as bar}
+	{#each getAllRows(testsBySpace) as bar}
 		<svg
 			x={`${bar.x}%`}
 			y={bar.y}
