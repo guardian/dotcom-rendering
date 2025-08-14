@@ -1,5 +1,5 @@
 import type { FEFrontCardStyle } from '../frontend/feFront';
-import type { RichLinkCardType } from '../types/layout';
+import type { CardMediaType, RichLinkCardType } from '../types/layout';
 import {
 	ArticleDesign,
 	type ArticleFormat,
@@ -58,6 +58,7 @@ export type Group = `${number}` | `${number}+`;
  *
  * @see {JSX.IntrinsicAttributes}
  */
+
 export const getDataLinkNameCard = (
 	format: ArticleFormat,
 	group: Group,
@@ -69,3 +70,12 @@ export const getDataLinkNameCard = (
 		`group-${group}`,
 		`card-@${Math.max(index + 1, 1)}`,
 	].join(' | ');
+
+type MediaType = CardMediaType | 'none';
+
+export const appendLinkNameMedia = (
+	dataLinkName: string,
+	mediaType: MediaType,
+): string => {
+	return `${dataLinkName} | media-${mediaType}`;
+};

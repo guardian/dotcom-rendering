@@ -13,6 +13,7 @@ import {
 } from '../../lib/articleFormat';
 import { isMediaCard } from '../../lib/cardHelpers';
 import { isWithinTwelveHours, secondsToDuration } from '../../lib/formatTime';
+import { appendLinkNameMedia } from '../../lib/getDataLinkName';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { BETA_CONTAINERS } from '../../model/enhanceCollections';
@@ -278,7 +279,7 @@ const getMedia = ({
 	}
 	if (mainMedia?.type === 'Video' && canPlayInline) {
 		return {
-			type: 'video',
+			type: 'youtube-video',
 			mainMedia,
 		} as const;
 	}
@@ -550,6 +551,11 @@ export const Card = ({
 		isInLoopingVideoTestControl,
 	});
 
+	const resolvedDataLinkName =
+		media && dataLinkName
+			? appendLinkNameMedia(dataLinkName, media.type)
+			: dataLinkName;
+
 	/**
 	 * For opinion type cards with avatars (which aren't onwards content)
 	 * we render the footer in a different location
@@ -734,7 +740,7 @@ export const Card = ({
 			<CardLink
 				linkTo={linkTo}
 				headlineText={headlineText}
-				dataLinkName={dataLinkName}
+				dataLinkName={resolvedDataLinkName}
 				isExternalLink={isExternalLink}
 			/>
 			{headlinePosition === 'outer' && (
@@ -879,7 +885,7 @@ export const Card = ({
 								/>
 							</Island>
 						)}
-						{media.type === 'video' && (
+						{media.type === 'youtube-video' && (
 							<>
 								{showVideo ? (
 									<div
