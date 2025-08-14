@@ -12,7 +12,7 @@ import { BrazeMessaging } from './BrazeMessaging.importable';
 import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
 import { FocusStyles } from './FocusStyles.importable';
-import { GoogleOneTap } from './GoogleOneTap.importable';
+import { GoogleOneTap, isInGoogleOneTapTest } from './GoogleOneTap.importable';
 import { Island } from './Island';
 import { Metrics } from './Metrics.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
@@ -92,9 +92,11 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			<Island priority="feature" defer={{ until: 'idle' }}>
 				<ReaderRevenueDev shouldHideReaderRevenue={false} />
 			</Island>
-			<Island priority="enhancement" defer={{ until: 'idle' }}>
-				<GoogleOneTap />
-			</Island>
+			{isInGoogleOneTapTest(front.config.abTests) && (
+				<Island priority="enhancement" defer={{ until: 'idle' }}>
+					<GoogleOneTap />
+				</Island>
+			)}
 			{darkModeAvailable && (
 				<DarkModeMessage>
 					Dark mode is a work-in-progress.

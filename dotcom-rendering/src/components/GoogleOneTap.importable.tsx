@@ -1,9 +1,8 @@
 import { log } from '@guardian/libs';
-import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useConsent } from '../lib/useConsent';
 import { useOnce } from '../lib/useOnce';
-import type { StageType } from '../types/config';
+import type { ServerSideTests, StageType } from '../types/config';
 
 type IdentityProviderConfig = {
 	configURL: string;
@@ -19,6 +18,9 @@ type CredentialsProvider = {
 		};
 	}) => Promise<{ token: string }>;
 };
+
+export const isInGoogleOneTapTest = (tests: ServerSideTests): boolean =>
+	tests['googleOneTapVariant'] === 'variant';
 
 /**
  * Detect the current stage of the application based on the hostname.
@@ -87,13 +89,10 @@ const getProviders = (stage: StageType): IdentityProviderConfig[] => {
 
 export const initializeFedCM = async ({
 	isSignedIn,
-	isInTest,
 }: {
 	isSignedIn?: boolean;
 	isInTest?: boolean;
 }): Promise<void> => {
-	// Only initialize Google One Tap if the user is in the AB test. Currently 0% of users are in the test.
-	if (!isInTest) return;
 	if (isSignedIn) return;
 
 	/**
@@ -191,14 +190,12 @@ export const GoogleOneTap = () => {
 	// to stop it from initializing.
 	const isSignedInWithoutPending =
 		isSignedIn !== 'Pending' ? isSignedIn : undefined;
-	const isInTest = useAB()?.api.isUserInVariant('GoogleOneTap', 'variant');
 
 	useOnce(() => {
 		void initializeFedCM({
 			isSignedIn: isSignedInWithoutPending,
-			isInTest,
 		});
-	}, [isSignedInWithoutPending, isInTest, consent]);
+	}, [isSignedInWithoutPending, consent]);
 
 	return <></>;
 };

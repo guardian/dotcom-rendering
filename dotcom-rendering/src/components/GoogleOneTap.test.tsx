@@ -67,7 +67,7 @@ describe('GoogleOneTap', () => {
 			replace: locationReplace,
 		});
 
-		await initializeFedCM({ isSignedIn: false, isInTest: true });
+		await initializeFedCM({ isSignedIn: false });
 
 		expect(navigatorGet).toHaveBeenCalledWith({
 			identity: {
@@ -99,7 +99,7 @@ describe('GoogleOneTap', () => {
 			replace: locationReplace,
 		});
 
-		await initializeFedCM({ isSignedIn: false, isInTest: true });
+		await initializeFedCM({ isSignedIn: false });
 
 		expect(navigatorGet).toHaveBeenCalledWith({
 			identity: {
@@ -130,9 +130,9 @@ describe('GoogleOneTap', () => {
 			replace: locationReplace,
 		});
 
-		await expect(
-			initializeFedCM({ isSignedIn: false, isInTest: true }),
-		).rejects.toThrow('window.navigator.credentials.get failed');
+		await expect(initializeFedCM({ isSignedIn: false })).rejects.toThrow(
+			'window.navigator.credentials.get failed',
+		);
 
 		expect(navigatorGet).toHaveBeenCalledWith({
 			identity: {
@@ -161,7 +161,7 @@ describe('GoogleOneTap', () => {
 			enableFedCM: false,
 		});
 
-		await initializeFedCM({ isSignedIn: false, isInTest: true });
+		await initializeFedCM({ isSignedIn: false });
 
 		expect(navigatorGet).not.toHaveBeenCalled();
 		expect(locationReplace).not.toHaveBeenCalled();
@@ -176,7 +176,7 @@ describe('GoogleOneTap', () => {
 			replace: locationReplace,
 		});
 
-		await initializeFedCM({ isSignedIn: true, isInTest: true });
+		await initializeFedCM({ isSignedIn: true });
 
 		expect(navigatorGet).not.toHaveBeenCalled();
 		expect(locationReplace).not.toHaveBeenCalled();
@@ -191,7 +191,7 @@ describe('GoogleOneTap', () => {
 			replace: locationReplace,
 		});
 
-		await initializeFedCM({ isSignedIn: true, isInTest: true });
+		await initializeFedCM({ isSignedIn: true });
 
 		expect(navigatorGet).not.toHaveBeenCalled();
 		expect(locationReplace).not.toHaveBeenCalled();
