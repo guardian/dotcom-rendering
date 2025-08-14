@@ -152,6 +152,9 @@ const fixImageWidth = ({
 	`}
 `;
 
+const isHorizontal = (position: ImagePositionType) =>
+	position === 'left' || position === 'right';
+
 export const ImageWrapper = ({
 	children,
 	imageSize,
@@ -163,10 +166,8 @@ export const ImageWrapper = ({
 	padImage,
 	isBetaContainer,
 }: Props) => {
-	const isHorizontalOnDesktop =
-		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
-	const isHorizontalOnMobile =
-		imagePositionOnMobile === 'left' || imagePositionOnMobile === 'right';
+	const isHorizontalOnDesktop = isHorizontal(imagePositionOnDesktop);
+	const isHorizontalOnMobile = isHorizontal(imagePositionOnMobile);
 
 	return (
 		<div
