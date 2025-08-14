@@ -126,6 +126,7 @@ export const CopyNativeShareButton = ({
 				sharedButtonStyles(sizeXSmall),
 				isLiveBlogMeta && liveBlogMobileMeta(isCopied),
 			])}
+			data-gu-name="share-button"
 		>
 			{isCopied ? 'Link copied' : 'Share'}
 		</Button>
