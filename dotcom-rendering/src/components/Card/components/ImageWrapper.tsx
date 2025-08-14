@@ -161,6 +161,12 @@ const fixImageWidth = ({
 const isHorizontal = (position: ImagePositionType) =>
 	position === 'left' || position === 'right';
 
+const hasVisualMedia = (imageType?: CardMediaType) =>
+	imageType === 'picture' ||
+	imageType === 'slideshow' ||
+	imageType === 'youtube-video' ||
+	imageType === 'loop-video';
+
 export const ImageWrapper = ({
 	children,
 	imageSize,
@@ -178,10 +184,7 @@ export const ImageWrapper = ({
 	return (
 		<div
 			css={[
-				(imageType === 'slideshow' ||
-					imageType === 'picture' ||
-					imageType === 'youtube-video' ||
-					imageType === 'loop-video') &&
+				hasVisualMedia(imageType) &&
 					isHorizontalOnDesktop &&
 					flexBasisStyles({
 						imageSize,
