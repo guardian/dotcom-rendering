@@ -12,6 +12,7 @@ yarn-error.log*
 # Dependency directories
 node_modules
 .yarn
+.svelte-kit
 
 # IDE files
 .idea
