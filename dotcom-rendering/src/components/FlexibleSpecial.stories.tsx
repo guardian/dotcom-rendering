@@ -4,6 +4,7 @@ import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
 	loopVideoCard,
 	opinionTrails,
+	snapLink,
 	trails,
 } from '../../fixtures/manual/trails';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
@@ -287,6 +288,18 @@ export const LoopVideoCards: Story = {
 			...emptyGroupedTrails,
 			snap: [loopVideoCard],
 			standard: [loopVideoCard],
+		},
+		collectionId: 1,
+	},
+};
+
+export const SnapCard: Story = {
+	name: 'With snap link',
+	args: {
+		frontSectionTitle: 'Snap link example',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			snap: [snapLink],
 		},
 		collectionId: 1,
 	},
