@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
-import type { CardImageType } from '../../../types/layout';
+import type { CardMediaType } from '../../../types/layout';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
 const sizingStyles = css`
@@ -21,7 +21,7 @@ const flexBasisStyles = ({
 	isBetaContainer,
 }: {
 	imageSize: ImageSizeType;
-	imageType?: CardImageType;
+	imageType?: CardMediaType;
 	isBetaContainer: boolean;
 }): SerializedStyles => {
 	if (imageType === 'avatar') {
@@ -115,7 +115,7 @@ const getImageDirection = (
 
 type Props = {
 	children: React.ReactNode;
-	imageType?: CardImageType;
+	imageType?: CardMediaType;
 	imageSize: ImageSizeType;
 	isBetaContainer: boolean;
 	imagePositionOnDesktop: ImagePositionType;

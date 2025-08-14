@@ -13,6 +13,7 @@ import {
 } from '../../lib/articleFormat';
 import { isMediaCard } from '../../lib/cardHelpers';
 import { isWithinTwelveHours, secondsToDuration } from '../../lib/formatTime';
+import { appendLinkNameMedia } from '../../lib/getDataLinkName';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { BETA_CONTAINERS } from '../../model/enhanceCollections';
@@ -128,7 +129,6 @@ export type Props = {
 	liveUpdatesAlignment?: Alignment;
 	liveUpdatesPosition?: Position;
 	onwardsSource?: OnwardsSource;
-	pauseOffscreenVideo?: boolean;
 	showVideo?: boolean;
 	isTagPage?: boolean;
 	/** Allows the consumer to set an aspect ratio on the image of 5:3, 5:4, 4:5 or 1:1 */
@@ -147,6 +147,8 @@ export type Props = {
 	trailTextSize?: TrailTextSize;
 	/** A kicker image is seperate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
+	/** Determines if the headline should be positioned within the content or outside the content */
+	headlinePosition?: 'inner' | 'outer';
 	isInLoopingVideoTestVariant?: boolean;
 	isInLoopingVideoTestControl?: boolean;
 };
@@ -276,7 +278,7 @@ const getMedia = ({
 	}
 	if (mainMedia?.type === 'Video' && canPlayInline) {
 		return {
-			type: 'video',
+			type: 'youtube-video',
 			mainMedia,
 		} as const;
 	}
@@ -324,36 +326,6 @@ const decideSublinkPosition = (
 	}
 
 	return alignment === 'vertical' ? 'inner' : 'outer';
-};
-
-const getHeadlinePosition = ({
-	isFlexSplash,
-	containerType,
-	showLivePlayable,
-	isMediaCardOrNewsletter,
-}: {
-	containerType?: DCRContainerType;
-	isFlexSplash?: boolean;
-	showLivePlayable: boolean;
-	isMediaCardOrNewsletter: boolean;
-}) => {
-	if (isMediaCardOrNewsletter) {
-		return 'inner';
-	}
-
-	if (containerType === 'flexible/special' && isFlexSplash) {
-		return 'outer';
-	}
-
-	if (
-		containerType === 'flexible/general' &&
-		isFlexSplash &&
-		showLivePlayable
-	) {
-		return 'outer';
-	}
-
-	return 'inner';
 };
 
 const liveBulletStyles = css`
@@ -408,7 +380,6 @@ export const Card = ({
 	liveUpdatesAlignment = 'vertical',
 	liveUpdatesPosition = 'inner',
 	onwardsSource,
-	pauseOffscreenVideo = false,
 	showVideo = true,
 	absoluteServerTimes,
 	isTagPage = false,
@@ -420,6 +391,7 @@ export const Card = ({
 	showTopBarMobile = true,
 	trailTextSize,
 	showKickerImage = false,
+	headlinePosition = 'inner',
 	isInLoopingVideoTestVariant = false,
 	isInLoopingVideoTestControl = false,
 }: Props) => {
@@ -577,6 +549,11 @@ export const Card = ({
 		isInLoopingVideoTestControl,
 	});
 
+	const resolvedDataLinkName =
+		media && dataLinkName
+			? appendLinkNameMedia(dataLinkName, media.type)
+			: dataLinkName;
+
 	/**
 	 * For opinion type cards with avatars (which aren't onwards content)
 	 * we render the footer in a different location
@@ -615,13 +592,6 @@ export const Card = ({
 		if (isFlexibleContainer) return { mobile: 'small' };
 		return { mobile: 'medium' };
 	};
-
-	const headlinePosition = getHeadlinePosition({
-		containerType,
-		isFlexSplash,
-		showLivePlayable,
-		isMediaCardOrNewsletter,
-	});
 
 	const hideTrailTextUntil = () => {
 		if (isFlexibleContainer) {
@@ -768,7 +738,7 @@ export const Card = ({
 			<CardLink
 				linkTo={linkTo}
 				headlineText={headlineText}
-				dataLinkName={dataLinkName}
+				dataLinkName={resolvedDataLinkName}
 				isExternalLink={isExternalLink}
 			/>
 			{headlinePosition === 'outer' && (
@@ -913,7 +883,7 @@ export const Card = ({
 								/>
 							</Island>
 						)}
-						{media.type === 'video' && (
+						{media.type === 'youtube-video' && (
 							<>
 								{showVideo ? (
 									<div
@@ -958,9 +928,6 @@ export const Card = ({
 												hideCaption={true}
 												stickyVideos={false}
 												kickerText={kickerText}
-												pauseOffscreenVideo={
-													pauseOffscreenVideo
-												}
 												/*
 												 * TODO: IMPROVE THIS MAPPING
 												 *

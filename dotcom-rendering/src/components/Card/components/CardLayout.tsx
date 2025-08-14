@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import { from, space } from '@guardian/source/foundations';
-import type { CardImageType } from '../../../types/layout';
+import type { CardMediaType } from '../../../types/layout';
 import type { ImagePositionType } from './ImageWrapper';
 
 export type GapSize = 'none' | 'tiny' | 'small' | 'medium' | 'large';
@@ -11,7 +11,7 @@ export type GapSizes = { row: GapSize; column: GapSize };
 type Props = {
 	children: React.ReactNode;
 	cardBackgroundColour: string;
-	imageType: CardImageType | undefined;
+	imageType: CardMediaType | undefined;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	minWidthInPixels?: number;
