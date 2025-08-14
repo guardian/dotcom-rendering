@@ -68,7 +68,7 @@ const liveUpdatesCard = {
 
 const meta = {
 	component: FlexibleSpecial,
-	title: 'Components/FlexibleSpecial',
+	title: 'Front Containers/FlexibleSpecial',
 	parameters: {
 		chromatic: {
 			viewports: [

@@ -116,6 +116,8 @@ type Props = {
 	fallbackImageLoading: CardPictureProps['loading'];
 	fallbackImageAlt: CardPictureProps['alt'];
 	fallbackImageAspectRatio: CardPictureProps['aspectRatio'];
+	linkTo: string;
+	isInLoopingVideoTestVariant?: boolean;
 };
 
 export const LoopVideo = ({
@@ -130,6 +132,8 @@ export const LoopVideo = ({
 	fallbackImageLoading,
 	fallbackImageAlt,
 	fallbackImageAspectRatio,
+	linkTo,
+	isInLoopingVideoTestVariant,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -333,6 +337,7 @@ export const LoopVideo = ({
 					component: {
 						componentType: 'LOOP_VIDEO',
 						id: `gu-video-loop-${atomId}`,
+						labels: [linkTo],
 					},
 					action: 'VIEW',
 				},
@@ -341,7 +346,7 @@ export const LoopVideo = ({
 
 			setHasBeenInView(true);
 		}
-	}, [isInView, hasBeenInView, atomId]);
+	}, [isInView, hasBeenInView, atomId, linkTo]);
 
 	/**
 	 * Handle play/pause, when instigated by the browser.
@@ -599,6 +604,7 @@ export const LoopVideo = ({
 				AudioIcon={hasAudio ? AudioIcon : null}
 				preloadPartialData={preloadPartialData}
 				showPlayIcon={showPlayIcon}
+				isInLoopingVideoTestVariant={isInLoopingVideoTestVariant}
 			/>
 		</figure>
 	);

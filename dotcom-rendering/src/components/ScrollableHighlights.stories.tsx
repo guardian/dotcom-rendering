@@ -1,11 +1,22 @@
+import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { defaultCard, trails } from '../../fixtures/manual/highlights-trails';
 import { ScrollableHighlights } from './ScrollableHighlights.importable';
 import { Section } from './Section';
 
 const meta: Meta<typeof ScrollableHighlights> = {
-	title: 'Components/Masthead/ScrollableHighlights',
+	title: 'Front Containers/ScrollableHighlights',
 	component: ScrollableHighlights,
+	parameters: {
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.mobileLandscape,
+				breakpoints.tablet,
+				breakpoints.wide,
+			],
+		},
+	},
 	render: ({ ...args }) => (
 		<Section
 			shouldCenter={true}

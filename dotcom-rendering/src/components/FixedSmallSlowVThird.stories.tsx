@@ -6,7 +6,7 @@ import { FrontSection } from './FrontSection';
 
 export default {
 	component: FixedSmallSlowVThird,
-	title: 'Components/FixedSmallSlowVThird',
+	title: 'Front Containers/Deprecated Containers/FixedSmallSlowVThird',
 	parameters: {
 		chromatic: {
 			viewports: [

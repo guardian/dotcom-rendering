@@ -29,38 +29,50 @@ const fixedWidthsPageSkin = css`
 	}
 `;
 
-const advertMargin = (hasHideButton: boolean, isDeeplyRead: boolean) => css`
-	margin-top: 9px;
-	${from.desktop} {
-		margin-top: 0;
-		margin-left: 10px;
+const advertMargin = (
+	hasHideButton: boolean,
+	isDeeplyRead: boolean,
+	isLiveblog: boolean,
+	hasPageskin: boolean,
+) => {
+	if (hasPageskin) {
+		return css`
+			margin: 9px 0 0 10px;
+		`;
 	}
-	${from.leftCol} {
-		margin-top: 10px;
-	}
-	${from.wide} {
-		margin-left: 16px;
-	}
-	${hasHideButton && from.leftCol} {
-		margin-top: 2px;
-	}
-	${hasHideButton && from.wide} {
-		margin-top: 36px;
-	}
-	${hasHideButton && isDeeplyRead && from.desktop} {
+	return css`
 		margin-top: 9px;
-	}
-	${hasHideButton && isDeeplyRead && from.leftCol} {
-		margin-top: 38px;
-	}
-	${hasHideButton && isDeeplyRead && from.wide} {
-		margin-top: 54px;
-	}
-`;
-
-const advertMarginWithPageSkin = css`
-	margin: 9px 0 0 10px;
-`;
+		${from.desktop} {
+			margin-top: 0;
+			margin-left: 10px;
+		}
+		${from.leftCol} {
+			margin-top: 10px;
+		}
+		${from.wide} {
+			margin-left: 16px;
+		}
+		/* Due to the larger left column on liveblogs we hide the ad slot at leftcol to prevent overflow */
+		${isLiveblog && between.leftCol.and.wide} {
+			display: none;
+		}
+		${hasHideButton && from.leftCol} {
+			margin-top: 2px;
+		}
+		${hasHideButton && from.wide} {
+			margin-top: 36px;
+		}
+		${hasHideButton && isDeeplyRead && from.desktop} {
+			margin-top: 9px;
+		}
+		${hasHideButton && isDeeplyRead && from.leftCol} {
+			margin-top: 38px;
+		}
+		${hasHideButton && isDeeplyRead && from.wide} {
+			margin-top: 54px;
+		}
+	`;
+};
 
 const frontStyles = (hasPageSkin: boolean) => css`
 	${from.wide} {
@@ -89,6 +101,7 @@ type Props = {
 	isFront?: boolean;
 	renderAds?: boolean;
 	isDeeplyRead?: boolean;
+	isLiveblog?: boolean;
 };
 
 export const MostViewedFooterLayout = ({
@@ -97,6 +110,7 @@ export const MostViewedFooterLayout = ({
 	renderAds,
 	hasPageSkin = false,
 	isDeeplyRead = false,
+	isLiveblog = false,
 }: Props) => {
 	return (
 		<div
@@ -115,11 +129,12 @@ export const MostViewedFooterLayout = ({
 			</div>
 			{renderAds && (
 				<div
-					css={
-						hasPageSkin
-							? advertMarginWithPageSkin
-							: advertMargin(!!isFront, isDeeplyRead)
-					}
+					css={advertMargin(
+						!!isFront,
+						isDeeplyRead,
+						isLiveblog,
+						hasPageSkin,
+					)}
 				>
 					<AdSlot position="mostpop" />
 				</div>
