@@ -19,7 +19,6 @@ import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
-import { useSignInGateWillShow } from '../lib/useSignInGateWillShow';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
@@ -32,6 +31,10 @@ import {
 	ReaderRevenueBanner,
 } from './StickyBottomBanner/ReaderRevenueBanner';
 import type { CanShowFunctionType } from './StickyBottomBanner/ReaderRevenueBanner';
+import {
+	canShowSignInGatePortal,
+	SignInGatePortal,
+} from './StickyBottomBanner/SignInGatePortal';
 
 type Props = {
 	contentType: string;
@@ -46,6 +49,13 @@ type Props = {
 	idApiUrl: string;
 
 	pageId: string;
+	host?: string;
+};
+
+type BrazeMeta = {
+	dataFromBraze: { [key: string]: string };
+	logImpressionWithBraze: () => void;
+	logButtonClickWithBraze: (id: number) => void;
 };
 
 type RRBannerConfig = {
@@ -91,7 +101,6 @@ const buildRRBannerConfigWith = ({
 		countryCode,
 		isPreview,
 		asyncArticleCounts,
-		signInGateWillShow = false,
 		contentType,
 		sectionId,
 		shouldHideReaderRevenue,
@@ -109,7 +118,6 @@ const buildRRBannerConfigWith = ({
 		countryCode: CountryCode;
 		isPreview: boolean;
 		asyncArticleCounts: Promise<ArticleCounts | undefined>;
-		signInGateWillShow?: boolean;
 		contentType: string;
 		sectionId: string;
 		shouldHideReaderRevenue: boolean;
@@ -155,7 +163,6 @@ const buildRRBannerConfigWith = ({
 						isPreview,
 						idApiUrl,
 						renderingTarget,
-						signInGateWillShow,
 						asyncArticleCounts,
 						ophanPageViewId,
 						pageId,
@@ -168,6 +175,33 @@ const buildRRBannerConfigWith = ({
 		};
 	};
 };
+
+const buildSignInGateConfig = (
+	isSignedIn: boolean | undefined,
+	isPaidContent: boolean,
+	isPreview: boolean,
+	contentType: string,
+	sectionId: string,
+	tags: TagType[],
+	host?: string,
+): CandidateConfig<void> => ({
+	candidate: {
+		id: 'sign-in-gate-portal',
+		canShow: () =>
+			canShowSignInGatePortal(isSignedIn, isPaidContent, isPreview),
+		show: () => () => (
+			<SignInGatePortal
+				host={host}
+				contentType={contentType}
+				sectionId={sectionId}
+				tags={tags}
+				isPaidContent={isPaidContent}
+				isPreview={isPreview}
+			/>
+		),
+	},
+	timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
+});
 
 const buildReaderRevenueBannerConfig = (isEnabled: boolean) =>
 	buildRRBannerConfigWith({
@@ -183,7 +217,7 @@ const buildBrazeBanner = (
 	idApiUrl: string,
 	tags: TagType[],
 	shouldHideReaderRevenue: boolean,
-): CandidateConfig<any> => ({
+): CandidateConfig<BrazeMeta> => ({
 	candidate: {
 		id: 'braze-banner',
 		canShow: () =>
@@ -193,7 +227,7 @@ const buildBrazeBanner = (
 				tags,
 				shouldHideReaderRevenue,
 			),
-		show: (meta: any) => () => (
+		show: (meta: BrazeMeta) => () => (
 			<BrazeBanner meta={meta} idApiUrl={idApiUrl} />
 		),
 	},
@@ -224,6 +258,7 @@ export const StickyBottomBanner = ({
 	idApiUrl,
 	pageId,
 	remoteBannerSwitch,
+	host,
 }: Props & {
 	remoteBannerSwitch: boolean;
 	isSensitive: boolean;
@@ -238,15 +273,6 @@ export const StickyBottomBanner = ({
 	const [SelectedBanner, setSelectedBanner] = useState<MaybeFC | null>(null);
 	const [asyncArticleCounts, setAsyncArticleCounts] =
 		useState<Promise<ArticleCounts | undefined>>();
-	const signInGateWillShow = useSignInGateWillShow({
-		isSignedIn: isSignedIn === true,
-		contentType,
-		sectionId,
-		tags,
-		isPaidContent,
-		isPreview,
-		currentLocaleCode: countryCode,
-	});
 
 	useEffect(() => {
 		setAsyncArticleCounts(getArticleCounts(pageId, tags, contentType));
@@ -259,7 +285,6 @@ export const StickyBottomBanner = ({
 			isUndefined(isSignedIn) ||
 			isUndefined(brazeMessages) ||
 			isUndefined(asyncArticleCounts) ||
-			isUndefined(signInGateWillShow) ||
 			isUndefined(ophanPageViewId) ||
 			isSignedIn === 'Pending'
 		) {
@@ -274,7 +299,6 @@ export const StickyBottomBanner = ({
 			countryCode,
 			isPreview,
 			asyncArticleCounts,
-			signInGateWillShow,
 			contentType,
 			sectionId,
 			shouldHideReaderRevenue,
@@ -298,8 +322,19 @@ export const StickyBottomBanner = ({
 			tags,
 			shouldHideReaderRevenue,
 		);
+
+		const signInGate = buildSignInGateConfig(
+			isSignedIn,
+			isPaidContent,
+			isPreview,
+			contentType,
+			sectionId,
+			tags,
+			host,
+		);
+
 		const bannerConfig: SlotConfig = {
-			candidates: [CMP, brazeBanner, readerRevenue],
+			candidates: [CMP, signInGate, brazeBanner, readerRevenue],
 			name: 'banner',
 		};
 
@@ -307,11 +342,16 @@ export const StickyBottomBanner = ({
 			.then((PickedBanner: () => MaybeFC) =>
 				setSelectedBanner(PickedBanner),
 			)
-			.catch((e) =>
-				console.error(
-					`StickyBottomBanner pickMessage - error: ${String(e)}`,
-				),
-			);
+			.catch((e) => {
+				// Report error to Sentry
+				const msg = `StickyBottomBanner pickMessage - error: ${String(
+					e,
+				)}`;
+				window.guardian.modules.sentry.reportError(
+					new Error(msg),
+					'sticky-bottom-banner',
+				);
+			});
 	}, [
 		isSignedIn,
 		countryCode,
@@ -328,10 +368,10 @@ export const StickyBottomBanner = ({
 		renderingTarget,
 		sectionId,
 		shouldHideReaderRevenue,
-		signInGateWillShow,
 		tags,
 		ophanPageViewId,
 		pageId,
+		host,
 	]);
 
 	if (SelectedBanner) {

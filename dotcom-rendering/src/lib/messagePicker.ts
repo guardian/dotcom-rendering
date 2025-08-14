@@ -131,6 +131,7 @@ export const pickMessage = (
 	renderingTarget: RenderingTarget,
 ): Promise<() => MaybeFC> =>
 	new Promise((resolve) => {
+		console.log('pickMessage', { candidates, name, renderingTarget });
 		const candidateConfigsWithTimeout = candidates.map((c) =>
 			timeoutify(c, name, renderingTarget),
 		);
@@ -167,11 +168,13 @@ export const pickMessage = (
 				if (winner === null) {
 					resolve(defaultShow);
 				} else {
-					const { candidate, meta } = winner;
-					resolve(() => candidate.show(meta));
+					resolve(() => winner.candidate.show(winner.meta));
 				}
 			})
-			.catch((e) =>
-				console.error(`pickMessage winner - error: ${String(e)}`),
-			);
+			.catch((e) => {
+				// Report error to console for debugging message picker issues
+				// eslint-disable-next-line no-console -- Required for debugging message picker failures
+				console.error(`pickMessage winner - error: ${String(e)}`, e);
+				resolve(defaultShow); // Resolve with defaultShow instead of not resolving
+			});
 	});

@@ -65,7 +65,6 @@ type CanShowProps = BaseProps & {
 	remoteBannerConfig: boolean;
 	isPreview: boolean;
 	idApiUrl: string;
-	signInGateWillShow: boolean;
 	asyncArticleCounts: Promise<ArticleCounts | undefined>;
 	renderingTarget: RenderingTarget;
 	ophanPageViewId: string;
@@ -185,19 +184,13 @@ export const canShowRRBanner: CanShowFunctionType<
 	abandonedBasketBannerLastClosedAt,
 	isPreview,
 	renderingTarget,
-	signInGateWillShow,
 	asyncArticleCounts,
 	ophanPageViewId,
 	pageId,
 }) => {
 	if (!remoteBannerConfig) return { show: false };
 
-	if (
-		shouldHideReaderRevenue ||
-		isPaidContent ||
-		isPreview ||
-		signInGateWillShow
-	) {
+	if (shouldHideReaderRevenue || isPaidContent || isPreview) {
 		// We never serve Reader Revenue banners in this case
 		return { show: false };
 	}

@@ -642,6 +642,7 @@ export const AudioLayout = (props: WebProps) => {
 								!!article.config.switches.remoteBanner
 							}
 							tags={article.tags}
+							host={host}
 						/>
 					</Island>
 				</BannerWrapper>
