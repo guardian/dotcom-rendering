@@ -326,7 +326,6 @@ export const enhanceCards = (
 			format,
 			group,
 			offset + index,
-			'none', // we don't know the media type for the card yet, so we set it to none and overwrite at the card level.
 			faciaCard.card.cardStyle.type,
 		);
 

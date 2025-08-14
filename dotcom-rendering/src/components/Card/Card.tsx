@@ -13,7 +13,7 @@ import {
 } from '../../lib/articleFormat';
 import { isMediaCard } from '../../lib/cardHelpers';
 import { isWithinTwelveHours, secondsToDuration } from '../../lib/formatTime';
-import { replaceLinkNameMedia } from '../../lib/getDataLinkName';
+import { appendLinkNameMedia } from '../../lib/getDataLinkName';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { BETA_CONTAINERS } from '../../model/enhanceCollections';
@@ -569,7 +569,7 @@ export const Card = ({
 
 	const resolvedDataLinkName =
 		media && dataLinkName
-			? replaceLinkNameMedia(dataLinkName, media.type)
+			? appendLinkNameMedia(dataLinkName, media.type)
 			: dataLinkName;
 
 	/**

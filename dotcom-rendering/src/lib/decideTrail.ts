@@ -16,11 +16,6 @@ export const decideTrail = (trail: FETrailType, index = 0): TrailType => {
 		...trail,
 		image,
 		format,
-		dataLinkName: getDataLinkNameCard(
-			format,
-			'0',
-			index,
-			image ? 'picture' : 'none',
-		),
+		dataLinkName: getDataLinkNameCard(format, '0', index),
 	};
 };

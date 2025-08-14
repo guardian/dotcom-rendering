@@ -59,25 +59,23 @@ export type Group = `${number}` | `${number}+`;
  * @see {JSX.IntrinsicAttributes}
  */
 
-type MediaType = CardMediaType | 'none';
-
 export const getDataLinkNameCard = (
 	format: ArticleFormat,
 	group: Group,
 	index: number,
-	mediaType: MediaType = 'none',
 	cardStyle?: FEFrontCardStyle,
 ): string =>
 	[
 		getLinkType(format, cardStyle),
 		`group-${group}`,
 		`card-@${Math.max(index + 1, 1)}`,
-		`media-${mediaType}`,
 	].join(' | ');
 
-export const replaceLinkNameMedia = (
+type MediaType = CardMediaType | 'none';
+
+export const appendLinkNameMedia = (
 	dataLinkName: string,
 	mediaType: MediaType,
 ): string => {
-	return dataLinkName.replace(/media-none/, `media-${mediaType}`);
+	return `${dataLinkName} | media-${mediaType}`;
 };
