@@ -130,6 +130,12 @@ const fixImageWidthStyles = (width: number) => css`
 	align-self: flex-start;
 `;
 
+const hideOnMobileStyles = css`
+	${until.tablet} {
+		display: none;
+	}
+`;
+
 const fixImageWidth = ({
 	mobile,
 	tablet,
@@ -187,13 +193,10 @@ export const ImageWrapper = ({
 						justify-content: flex-end;
 					`,
 				/* If no image position for mobile is provided then hide the image */
-				imagePositionOnMobile === 'none' &&
-					css`
-						${until.tablet} {
-							display: none;
-						}
-					`,
+				imagePositionOnMobile === 'none' && hideOnMobileStyles,
+
 				isHorizontalOnMobile && fixImageWidth(imageFixedSizes),
+
 				isHorizontalOnDesktop &&
 					css`
 						${from.tablet} {
