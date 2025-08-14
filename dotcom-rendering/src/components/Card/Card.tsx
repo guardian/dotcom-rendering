@@ -129,7 +129,6 @@ export type Props = {
 	liveUpdatesAlignment?: Alignment;
 	liveUpdatesPosition?: Position;
 	onwardsSource?: OnwardsSource;
-	pauseOffscreenVideo?: boolean;
 	showVideo?: boolean;
 	isTagPage?: boolean;
 	/** Allows the consumer to set an aspect ratio on the image of 5:3, 5:4, 4:5 or 1:1 */
@@ -381,7 +380,6 @@ export const Card = ({
 	liveUpdatesAlignment = 'vertical',
 	liveUpdatesPosition = 'inner',
 	onwardsSource,
-	pauseOffscreenVideo = false,
 	showVideo = true,
 	absoluteServerTimes,
 	isTagPage = false,
@@ -930,9 +928,6 @@ export const Card = ({
 												hideCaption={true}
 												stickyVideos={false}
 												kickerText={kickerText}
-												pauseOffscreenVideo={
-													pauseOffscreenVideo
-												}
 												/*
 												 * TODO: IMPROVE THIS MAPPING
 												 *
