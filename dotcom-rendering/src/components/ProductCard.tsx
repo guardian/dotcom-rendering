@@ -6,6 +6,7 @@ import {
 	space,
 	textSans17,
 	textSansBold15,
+	textSansBold17,
 } from '@guardian/source/foundations';
 import { SvgArrowRightStraight } from '@guardian/source/react-components';
 import { PillarButton } from './Discussion/PillarButton';
@@ -14,8 +15,10 @@ export type Product = {
 	name: string;
 	reviewHeading: string;
 	image?: string;
-	description: string;
 	url: string;
+	//need to consider the price, currency symbol and the retailer being passed through
+	price: string;
+	retailer: string;
 };
 
 const card = css`
@@ -35,10 +38,34 @@ const titleStyle = css`
 	${headlineMedium17};
 `;
 
+const priceRowStyle = css`
+	display: flex;
+	align-items: baseline;
+	gap: 4px;
+`;
+
 const descriptionStyle = css`
 	${textSans17};
 	color: ${palette.neutral[20]};
 	margin-bottom: ${space[3]}px;
+`;
+
+const priceStyle = css`
+	${textSansBold17};
+	color: ${palette.neutral[20]};
+	margin-bottom: ${space[3]}px;
+`;
+
+const retailerLinkStyle = css`
+	${textSans17};
+	color: ${palette.neutral[20]};
+	margin-bottom: ${space[3]}px;
+	text-decoration: underline;
+	text-decoration-color: ${palette.neutral[20]};
+	&:hover {
+		color: ${palette.lifestyle[400]};
+		text-decoration-color: ${palette.lifestyle[400]};
+	}
 `;
 
 const buttonOverride = css`
@@ -60,9 +87,10 @@ const readMoreStyle = css`
 export const ProductCard = ({
 	name,
 	reviewHeading,
-	description,
 	url,
 	image,
+	price,
+	retailer,
 }: Product) => (
 	<div css={card}>
 		{reviewHeading.trim() && (
@@ -71,17 +99,39 @@ export const ProductCard = ({
 		<div css={titleStyle}>{name}</div>
 		<div css={readMoreStyle}>Read more</div>
 		{!!image && (
-			<img
-				src={image}
-				alt={name}
-				css={{
-					width: '100%',
-					borderRadius: '6px',
+			<a
+				href={url}
+				target="_blank"
+				rel="noopener noreferrer"
+				style={{
+					display: 'block',
 					marginBottom: '12px',
+					borderRadius: '6px',
 				}}
-			/>
+			>
+				<img
+					src={image}
+					alt={name}
+					css={{
+						width: '100%',
+						borderRadius: '6px',
+						display: 'block',
+					}}
+				/>
+			</a>
 		)}
-		<div css={descriptionStyle}>{description}</div>
+		<div css={priceRowStyle}>
+			<div css={priceStyle}>{price} </div>
+			<div css={descriptionStyle}> from </div>
+			<a
+				css={retailerLinkStyle}
+				href={url}
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				{retailer}
+			</a>
+		</div>
 		<div css={buttonOverride}>
 			<PillarButton
 				priority="primary"
