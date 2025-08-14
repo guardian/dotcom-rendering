@@ -6,6 +6,7 @@ const buildNewsletterSignUpFormData = (
 	emailAddress: string,
 	newsletterIdOrList: string | string[],
 	recaptchaToken: string,
+	marketingOptIn?: boolean,
 ): FormData => {
 	const pageRef = window.location.origin + window.location.pathname;
 	const refViewId = window.guardian.ophan?.pageViewId ?? '';
@@ -27,6 +28,10 @@ const buildNewsletterSignUpFormData = (
 	formData.append('name', '');
 	if (window.guardian.config.switches.emailSignupRecaptcha) {
 		formData.append('g-recaptcha-response', recaptchaToken);
+	}
+
+	if (marketingOptIn) {
+		formData.append('marketing', 'true');
 	}
 
 	return formData;
@@ -61,11 +66,13 @@ export const requestMultipleSignUps = async (
 	emailAddress: string,
 	newsletterIds: string[],
 	recaptchaToken: string,
+	marketingOptIn?: boolean,
 ): Promise<Response> => {
 	const data = buildNewsletterSignUpFormData(
 		emailAddress,
 		newsletterIds,
 		recaptchaToken,
+		marketingOptIn,
 	);
 
 	return await postFormData(
@@ -78,11 +85,13 @@ export const requestSingleSignUp = async (
 	emailAddress: string,
 	newsletterId: string,
 	recaptchaToken: string,
+	marketingOptIn?: boolean,
 ): Promise<Response> => {
 	const data = buildNewsletterSignUpFormData(
 		emailAddress,
 		newsletterId,
 		recaptchaToken,
+		marketingOptIn,
 	);
 
 	return await postFormData(

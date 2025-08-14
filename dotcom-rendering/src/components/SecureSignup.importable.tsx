@@ -4,6 +4,8 @@ import type { ComponentEvent, TAction } from '@guardian/ophan-tracker-js';
 import { space, until } from '@guardian/source/foundations';
 import {
 	Button,
+	Checkbox,
+	CheckboxGroup,
 	InlineError,
 	InlineSuccess,
 	Link,
@@ -93,6 +95,13 @@ const errorContainerStyles = css`
 		:hover {
 			background-color: ${palette('--recaptcha-button-hover')};
 		}
+	}
+`;
+
+const optInCheckboxTextSmall = css`
+	label > div {
+		font-size: 13px;
+		line-height: 16px;
 	}
 `;
 
@@ -267,6 +276,7 @@ export const SecureSignup = ({
 	const [errorMessage, setErrorMessage] = useState<string | undefined>(
 		undefined,
 	);
+	const [marketingOptIn, setMarketingOptIn] = useState<boolean>(true);
 
 	useEffect(() => {
 		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
@@ -282,9 +292,15 @@ export const SecureSignup = ({
 		const emailAddress: string = input?.value ?? '';
 
 		sendTracking(newsletterId, 'form-submission', renderingTarget, abTest);
+
+		const formData = buildFormData(emailAddress, newsletterId, token);
+		if (marketingOptIn) {
+			formData.append('marketing', 'true');
+		}
+
 		const response = await postFormData(
 			window.guardian.config.page.ajaxUrl + '/email',
-			buildFormData(emailAddress, newsletterId, token),
+			formData,
 		);
 
 		// The response body could be accessed with await response.text()
@@ -383,6 +399,19 @@ export const SecureSignup = ({
 					type="email"
 					value={signedInUserEmail}
 				/>
+				<CheckboxGroup
+					name="marketing-preferences"
+					label="Marketing preferences"
+					hideLabel={true}
+					cssOverrides={optInCheckboxTextSmall}
+				>
+					<Checkbox
+						label="Receive information on our products and ways to support and enjoy our journalism. Untick to opt out."
+						value="marketing-opt-in"
+						checked={marketingOptIn}
+						onChange={(e) => setMarketingOptIn(e.target.checked)}
+					/>
+				</CheckboxGroup>
 				<Button onClick={handleClick} size="small" type="submit">
 					Sign up
 				</Button>

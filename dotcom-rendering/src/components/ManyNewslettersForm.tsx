@@ -5,7 +5,12 @@ import {
 	palette,
 	space,
 } from '@guardian/source/foundations';
-import { Button, TextInput } from '@guardian/source/react-components';
+import {
+	Button,
+	Checkbox,
+	CheckboxGroup,
+	TextInput,
+} from '@guardian/source/react-components';
 import { type ChangeEventHandler, useState } from 'react';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
@@ -16,6 +21,8 @@ interface FormProps {
 	handleTextInput: ChangeEventHandler<HTMLInputElement>;
 	handleSubmitButton: { (): Promise<void> | void };
 	newsletterCount: number;
+	marketingOptIn: boolean;
+	setMarketingOptIn: (value: boolean) => void;
 }
 
 // The design brief requires the layout of the form to align with the
@@ -49,7 +56,7 @@ const formFieldsStyle = css`
 		flex-basis: ${2 * CARD_CONTAINER_WIDTH - CARD_CONTAINER_PADDING * 2}px;
 		flex-direction: row;
 		flex-shrink: 0;
-		align-items: flex-end;
+		align-items: last baseline;
 	}
 `;
 
@@ -59,6 +66,20 @@ const inputWrapperStyle = css`
 		margin-bottom: 0;
 		margin-right: ${space[2]}px;
 		flex-basis: 296px;
+	}
+`;
+
+const inputAndOptInWrapperStyle = css`
+	${from.desktop} {
+		flex-basis: 296px;
+		margin-right: ${space[2]}px;
+	}
+`;
+
+const optInCheckboxTextSmall = css`
+	label > div {
+		font-size: 13px;
+		line-height: 16px;
 	}
 `;
 
@@ -114,6 +135,8 @@ export const ManyNewslettersForm = ({
 	handleTextInput,
 	handleSubmitButton,
 	newsletterCount,
+	marketingOptIn,
+	setMarketingOptIn,
 }: FormProps) => {
 	const [formHasFocus, setFormHasFocus] = useState(false);
 	const hidePrivacyOnMobile = !formHasFocus && email.length === 0;
@@ -157,15 +180,43 @@ export const ManyNewslettersForm = ({
 			<div css={formFieldsStyle}>
 				{status !== 'Success' ? (
 					<>
-						<span css={inputWrapperStyle}>
-							<TextInput
-								label="Enter your email"
-								value={email}
-								onChange={handleTextInput}
-								error={errorMessage}
-								disabled={status === 'Loading'}
-							/>
-						</span>
+						<div css={inputAndOptInWrapperStyle}>
+							<span css={inputWrapperStyle}>
+								<TextInput
+									label="Enter your email"
+									value={email}
+									onChange={handleTextInput}
+									error={errorMessage}
+									disabled={status === 'Loading'}
+								/>
+							</span>
+							<div>
+								<CheckboxGroup
+									name="marketing-preferences"
+									label="Marketing preferences"
+									hideLabel={true}
+									cssOverrides={optInCheckboxTextSmall}
+								>
+									<Checkbox
+										label="Receive information on our products and ways to support and enjoy our journalism. Untick to opt out."
+										value="marketing-opt-in"
+										checked={marketingOptIn}
+										onChange={(e) =>
+											setMarketingOptIn(e.target.checked)
+										}
+										theme={{
+											fillUnselected:
+												palette.neutral[100],
+											borderUnselected:
+												palette.neutral[46],
+											fillSelected: palette.brand[500],
+											borderSelected: palette.brand[500],
+											borderHover: palette.brand[500],
+										}}
+									/>
+								</CheckboxGroup>
+							</div>
+						</div>
 						<Button
 							aria-label={ariaLabel}
 							isLoading={status === 'Loading'}

@@ -137,6 +137,7 @@ export const ManyNewsletterSignUp = ({
 	>([]);
 	const [status, setStatus] = useState<FormStatus>('NotSent');
 	const [email, setEmail] = useState('');
+	const [marketingOptIn, setMarketingOptIn] = useState(true);
 	const reCaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 
 	const userCanInteract = status !== 'Success' && status !== 'Loading';
@@ -242,6 +243,7 @@ export const ManyNewsletterSignUp = ({
 			email,
 			identityNames,
 			reCaptchaToken,
+			marketingOptIn,
 		).catch(() => {
 			return undefined;
 		});
@@ -384,6 +386,8 @@ export const ManyNewsletterSignUp = ({
 								status,
 							}}
 							newsletterCount={newslettersToSignUpFor.length}
+							marketingOptIn={marketingOptIn}
+							setMarketingOptIn={setMarketingOptIn}
 						/>
 						<div css={desktopClearButtonWrapperStyle}>
 							<ClearButton removeAll={removeAll} />
