@@ -7,6 +7,8 @@ import {
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { Fragment } from 'react';
+import { AdPlaceholder } from '../components/AdPlaceholder.apps';
+import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -205,6 +207,11 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					backgroundColor: themePalette('--article-background'),
 				}}
 			>
+				{isApps && renderAds && (
+					<Island priority="critical">
+						<AdPortals />
+					</Island>
+				)}
 				<div css={border}>Labs header</div>
 				<header css={headerStyles}>
 					<MainMediaGallery
@@ -325,6 +332,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 									<div css={galleryBorder}></div>
 								</div>
 							)}
+							{isApps && shouldShowAds && <AdPlaceholder />}
 						</Fragment>
 					);
 				})}
