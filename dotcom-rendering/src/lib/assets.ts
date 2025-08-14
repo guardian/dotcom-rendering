@@ -123,6 +123,17 @@ export const EDITIONS_CROSSWORD_SCRIPT = getScriptRegex(
 
 export const generateScriptTags = (scripts: string[]): string[] =>
 	scripts.filter(isString).map((script) => {
+		// Fix to run enable Bridget on local Android emulator
+		if (isDev ?? script.match(APPS_SCRIPT)) {
+			return [
+				`<script type="module" src="${script}"></script>`,
+				`<script type="module" src="${script.replace(
+					'localhost',
+					'10.0.2.2',
+				)}"></script>`,
+			].join('\n');
+		}
+
 		if (
 			script.match(WEB) ??
 			script.match(WEB_VARIANT_SCRIPT) ??
