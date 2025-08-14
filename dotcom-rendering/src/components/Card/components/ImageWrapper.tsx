@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
-import type { CardImageType } from '../../../types/layout';
+import type { CardMediaType } from '../../../types/layout';
 
 const imageFixedSize = {
 	tiny: 86,
@@ -34,7 +34,7 @@ type Props = {
 	children: React.ReactNode;
 	imageSize: ImageSizeType;
 	imageFixedSizes?: ImageFixedSizeOptions;
-	imageType?: CardImageType;
+	imageType?: CardMediaType;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	/**

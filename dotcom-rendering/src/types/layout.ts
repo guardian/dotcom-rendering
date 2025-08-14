@@ -21,7 +21,7 @@ export type RichLinkCardType =
 	| 'external'
 	| 'news';
 
-export type CardImageType =
+export type CardMediaType =
 	| 'picture'
 	| 'avatar'
 	| 'crossword'
