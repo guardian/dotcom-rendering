@@ -34,34 +34,6 @@ export const groupCards = (
 	isLoopingVideoTest: boolean,
 ): DCRGroupedTrails => {
 	switch (container) {
-		case 'dynamic/slow-mpu': {
-			const big = curated.filter(({ card }) => card.group === '1');
-			return {
-				// Only big and standard cards are supported on dynamic/slow-mpu
-				snap: [],
-				// Splash is not supported on these container types
-				splash: [],
-				huge: [],
-				veryBig: [],
-				big: enhanceCards(big, {
-					cardInTagPage: false,
-					editionId,
-					discussionApiUrl,
-				}),
-				standard: enhanceCards(
-					// Backfilled cards will always be treated as 'standard' cards
-					curated
-						.filter(({ card }) => card.group === '0')
-						.concat(backfill),
-					{
-						cardInTagPage: false,
-						offset: big.length,
-						editionId,
-						discussionApiUrl,
-					},
-				),
-			};
-		}
 		case 'dynamic/fast':
 		case 'dynamic/slow': {
 			const huge = curated.filter(({ card }) => card.group === '3');
