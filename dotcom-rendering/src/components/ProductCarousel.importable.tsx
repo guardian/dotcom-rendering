@@ -84,42 +84,29 @@ const SvgChevronRightSingle = () => (
 );
 
 export const ProductCarousel = ({ products }: { products: Product[] }) => {
-	const listRef = useRef<HTMLUListElement>(null);
 	const carouselRef = useRef<HTMLUListElement>(null);
 	const [index, setIndex] = useState(0);
 
-	const getItems = (): HTMLElement[] => {
-		const { current } = carouselRef;
-		if (!current) return [];
-		return Array.from(current.children) as HTMLElement[];
-	};
-
-	const getIndex = (): number => {
-		const { current } = carouselRef;
-		const offsets = getItems().map((el) => el.offsetLeft);
-		const [offset] = offsets;
-		if (!current || isUndefined(offset)) return 0;
-		const scrolled = current.scrollLeft + offset;
-		const active = offsets.findIndex((el) => el >= scrolled);
-		return Math.max(0, active);
-	};
-
-	const getSetIndex = () => setIndex(getIndex());
-
-	const goToIndex = (newIndex: number) => {
+	const scrollToIndex = (newIndex: number) => {
 		const { current } = carouselRef;
 		if (!current) return;
-		const offsets = getItems().map((el) => el.offsetLeft);
-		current.scrollTo({ left: offsets[newIndex] });
-		getSetIndex();
+		const item = current.children[newIndex] as HTMLElement | undefined;
+		if (item) {
+			item.scrollIntoView({
+				behavior: 'smooth',
+				inline: 'start',
+				block: 'nearest',
+			});
+			setIndex(newIndex);
+		}
 	};
 
 	const prev = () => {
-		if (index > 0) goToIndex(index - 1);
+		if (index > 0) scrollToIndex(index - 1);
 	};
 
 	const next = () => {
-		if (index < products.length - 1) goToIndex(index + 1);
+		if (index < products.length - 1) scrollToIndex(index + 1);
 	};
 
 	return (
@@ -149,7 +136,7 @@ export const ProductCarousel = ({ products }: { products: Product[] }) => {
 					<SvgChevronRightSingle />
 				</button>
 			</div>
-			<ul css={carouselStyle} ref={listRef}>
+			<ul css={carouselStyle} ref={carouselRef}>
 				{products.map((product, i) => (
 					<li key={i}>
 						<ProductCard {...product} />
