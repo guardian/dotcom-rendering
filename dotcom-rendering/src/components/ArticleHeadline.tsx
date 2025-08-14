@@ -152,6 +152,16 @@ const labsFont = css`
 	}
 `;
 
+const labsGalleryFont = css`
+	${textSansBold34};
+	line-height: 2.1875rem;
+	${from.desktop} {
+		${textSansBold34};
+		font-size: 50px;
+		line-height: 3.125rem;
+	}
+`;
+
 const jumboLabsFont = css`
 	${textSansBold34};
 	font-size: 3.125rem;
@@ -859,7 +869,7 @@ export const ArticleHeadline = ({
 								<h1
 									css={[
 										format.theme === ArticleSpecial.Labs
-											? labsFont
+											? labsGalleryFont
 											: headlineFont(format),
 										css`
 											color: ${themePalette(

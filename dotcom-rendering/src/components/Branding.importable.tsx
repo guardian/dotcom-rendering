@@ -4,6 +4,7 @@ import {
 	breakpoints,
 	from,
 	textSans12,
+	textSansBold12,
 } from '@guardian/source/foundations';
 import {
 	ArticleDesign,
@@ -235,6 +236,10 @@ export const Branding = ({ branding, format }: Props) => {
 			<div
 				css={[
 					labelStyle,
+					format.design === ArticleDesign.Gallery &&
+						css`
+							${textSansBold12}
+						`,
 					isAdvertisingPartnerOrExclusive &&
 						labelAdvertisingPartnerStyle,
 					isLiveBlog && liveBlogLabelStyle,
