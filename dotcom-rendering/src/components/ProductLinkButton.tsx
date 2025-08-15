@@ -1,3 +1,4 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
 import {
@@ -8,6 +9,7 @@ import {
 type ProductLinkButtonProps = {
 	label: string;
 	url: string;
+	cssOverrides?: SerializedStyles;
 };
 
 const linkButtonStyles = css`
@@ -19,7 +21,11 @@ const linkButtonStyles = css`
 	overflow-wrap: break-word;
 `;
 
-export const ProductLinkButton = ({ label, url }: ProductLinkButtonProps) => {
+export const ProductLinkButton = ({
+	label,
+	url,
+	cssOverrides,
+}: ProductLinkButtonProps) => {
 	return (
 		<LinkButton
 			href={url}
@@ -31,7 +37,7 @@ export const ProductLinkButton = ({ label, url }: ProductLinkButtonProps) => {
 			data-ignore="global-link-styling"
 			data-link-name="in body link"
 			data-spacefinder-role="inline"
-			cssOverrides={[linkButtonStyles]}
+			cssOverrides={[linkButtonStyles, cssOverrides]}
 		>
 			{label}
 		</LinkButton>
