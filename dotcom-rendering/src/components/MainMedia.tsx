@@ -89,6 +89,7 @@ type Props = {
 	editionId: EditionId;
 	shouldHideAds: boolean;
 	contentType?: string;
+	contentLayout?: string;
 };
 
 export const MainMedia = ({
@@ -107,6 +108,7 @@ export const MainMedia = ({
 	editionId,
 	shouldHideAds,
 	contentType,
+	contentLayout,
 }: Props) => {
 	return (
 		<div css={[mainMedia, chooseWrapper(format)]}>
@@ -131,6 +133,7 @@ export const MainMedia = ({
 					editionId={editionId}
 					shouldHideAds={shouldHideAds}
 					contentType={contentType}
+					contentLayout={contentLayout}
 				/>
 			))}
 		</div>

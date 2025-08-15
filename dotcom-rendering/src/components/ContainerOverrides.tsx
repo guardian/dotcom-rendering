@@ -136,8 +136,56 @@ const cardKickerTextLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.labs[200];
 	}
 };
-
 const cardKickerTextDark: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'InvestigationPalette':
+			return cardKickerTextLight(containerPalette);
+		case 'LongRunningPalette':
+			return sourcePalette.news[600];
+		case 'LongRunningAltPalette':
+			return sourcePalette.news[550];
+		case 'SombrePalette':
+			return sourcePalette.brand[800];
+		case 'SombreAltPalette':
+			return sourcePalette.news[500];
+		case 'BreakingPalette':
+			return sourcePalette.news[600];
+		case 'EventPalette':
+			return sourcePalette.specialReportAlt[300];
+		case 'EventAltPalette':
+			return sourcePalette.news[600];
+		case 'SpecialReportAltPalette':
+			return sourcePalette.specialReportAlt[700];
+		case 'Branded':
+			return sourcePalette.labs[400];
+	}
+};
+
+const cardQuoteIconLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'InvestigationPalette':
+			return sourcePalette.brandAlt[400];
+		case 'LongRunningPalette':
+			return sourcePalette.news[400];
+		case 'LongRunningAltPalette':
+			return sourcePalette.news[400];
+		case 'SombrePalette':
+			return sourcePalette.brand[800];
+		case 'SombreAltPalette':
+			return sourcePalette.news[500];
+		case 'BreakingPalette':
+			return sourcePalette.news[600];
+		case 'EventPalette':
+			return sourcePalette.specialReportAlt[200];
+		case 'EventAltPalette':
+			return sourcePalette.news[400];
+		case 'SpecialReportAltPalette':
+			return sourcePalette.specialReportAlt[100];
+		case 'Branded':
+			return sourcePalette.labs[200];
+	}
+};
+const cardQuoteIconDark: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'InvestigationPalette':
 			return cardKickerTextLight(containerPalette);
@@ -952,6 +1000,10 @@ const containerColours = {
 	'--card-kicker-text': {
 		light: cardKickerTextLight,
 		dark: cardKickerTextDark,
+	},
+	'--card-quote-icon': {
+		light: cardQuoteIconLight,
+		dark: cardQuoteIconDark,
 	},
 	'--card-media-background': {
 		light: cardMediaBackgroundLight,

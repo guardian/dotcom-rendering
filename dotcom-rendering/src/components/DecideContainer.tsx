@@ -48,7 +48,8 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
-	isInNoBoostsAbTestVariant?: boolean;
+	isInLoopingVideoTestVariant?: boolean;
+	isInLoopingVideoTestControl?: boolean;
 };
 
 export const DecideContainer = ({
@@ -64,7 +65,8 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
-	isInNoBoostsAbTestVariant,
+	isInLoopingVideoTestVariant,
+	isInLoopingVideoTestControl,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -257,6 +259,8 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
+					isInLoopingVideoTestVariant={isInLoopingVideoTestVariant}
+					isInLoopingVideoTestControl={isInLoopingVideoTestControl}
 				/>
 			);
 		case 'flexible/general':
@@ -270,7 +274,8 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
-					isInNoBoostsAbTestVariant={isInNoBoostsAbTestVariant}
+					isInLoopingVideoTestVariant={isInLoopingVideoTestVariant}
+					isInLoopingVideoTestControl={isInLoopingVideoTestControl}
 				/>
 			);
 		case 'scrollable/small':

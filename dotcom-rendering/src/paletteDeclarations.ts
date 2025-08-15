@@ -2603,8 +2603,41 @@ const cardKickerTextLight: PaletteFunction = (format) => {
 			return sourcePalette.specialReportAlt[200];
 	}
 };
-
 const cardKickerTextDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Lifestyle:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 500);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.news[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
+
+const cardQuoteIconLight: PaletteFunction = (format) => {
+	switch (format.theme) {
+		case Pillar.Opinion:
+			return pillarPalette(format.theme, 300);
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+		case Pillar.News:
+			return pillarPalette(format.theme, 400);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.news[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
+const cardQuoteIconDark: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
 		case Pillar.Lifestyle:
@@ -5738,7 +5771,12 @@ const highlightsContainerBackgroundLight: PaletteFunction = () =>
 const highlightsContainerBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
 
-const hghlightsContainerBorderLight: PaletteFunction = () =>
+const highlightsContainerSeparatorLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const highlightsContainerSeparatorDark: PaletteFunction = () =>
+	sourcePalette.neutral[46];
+
+const highlightsContainerBorderLight: PaletteFunction = () =>
 	sourcePalette.neutral[60];
 const highlightsContainerBorderDark: PaletteFunction = () =>
 	sourcePalette.neutral[46];
@@ -5797,8 +5835,26 @@ const highlightsCardHeadlineLight: PaletteFunction = (format) => {
 			return sourcePalette.specialReportAlt[200];
 	}
 };
-
 const highlightsCardHeadlineDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
+const highlightsCardQuoteIconLight: PaletteFunction = (format) => {
+	switch (format.theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(format.theme, 400);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.news[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
+const highlightsCardQuoteIconDark: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 
 const highlightContainerStartLight: PaletteFunction = () =>
@@ -6032,6 +6088,20 @@ const editorialButtonText: PaletteFunction = (format: ArticleFormat) => {
 };
 
 const featureCardKickerText: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.neutral[86];
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(theme, 600);
+	}
+};
+const featureCardQuoteIcon: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
 		case ArticleSpecial.SpecialReport:
@@ -6436,6 +6506,10 @@ const paletteColours = {
 	'--card-media-waveform': {
 		light: cardMediaWaveformLight,
 		dark: cardMediaWaveformDark,
+	},
+	'--card-quote-icon': {
+		light: cardQuoteIconLight,
+		dark: cardQuoteIconDark,
 	},
 	'--card-sublinks-background': {
 		light: cardSublinksBackgroundLight,
@@ -6845,6 +6919,10 @@ const paletteColours = {
 		light: featureCardKickerText,
 		dark: featureCardKickerText,
 	},
+	'--feature-card-quote-icon': {
+		light: featureCardQuoteIcon,
+		dark: featureCardQuoteIcon,
+	},
 	'--feature-card-trail-text': {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[20],
@@ -6958,12 +7036,16 @@ const paletteColours = {
 		light: highlightsCardKickerTextLight,
 		dark: highlightsCardKickerTextDark,
 	},
+	'--highlights-card-quote-icon': {
+		light: highlightsCardQuoteIconLight,
+		dark: highlightsCardQuoteIconDark,
+	},
 	'--highlights-container-background': {
 		light: highlightsContainerBackgroundLight,
 		dark: highlightsContainerBackgroundDark,
 	},
 	'--highlights-container-border': {
-		light: hghlightsContainerBorderLight,
+		light: highlightsContainerBorderLight,
 		dark: highlightsContainerBorderDark,
 	},
 	'--highlights-container-end-fade': {
@@ -6973,6 +7055,10 @@ const paletteColours = {
 	'--highlights-container-mid-fade': {
 		light: highlightContainerMidFadeLight,
 		dark: highlightContainerMidFadeDark,
+	},
+	'--highlights-container-separator': {
+		light: highlightsContainerSeparatorLight,
+		dark: highlightsContainerSeparatorDark,
 	},
 	'--highlights-container-start-fade': {
 		light: highlightContainerStartLight,

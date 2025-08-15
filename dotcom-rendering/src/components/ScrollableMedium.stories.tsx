@@ -7,7 +7,7 @@ import { FrontSection } from './FrontSection';
 import { ScrollableMedium } from './ScrollableMedium.importable';
 
 const meta = {
-	title: 'Components/ScrollableMedium',
+	title: 'Front Containers/ScrollableMedium',
 	component: ScrollableMedium,
 	parameters: {
 		chromatic: {

@@ -38,10 +38,11 @@ const container = css`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	height: 100%;
 	column-gap: ${space[2]}px;
 	/** Relative positioning is required to absolutely position the card link overlay */
 	position: relative;
-	padding: 10px 10px 0 10px;
+	padding: ${space[2]}px ${space[2]}px 0 ${space[2]}px;
 	background-color: ${palette('--highlights-card-background')};
 
 	/**
@@ -55,22 +56,17 @@ const container = css`
 	${until.mobileMedium} {
 		min-height: 174px;
 	}
-
 	${between.mobileMedium.and.tablet} {
 		min-height: 194px;
-		height: 100%;
 	}
-
 	${from.tablet} {
-		height: 100%;
 		width: 160px;
+		padding: 10px 10px 0 10px;
 	}
-
 	${from.tablet} {
 		width: 280px;
 		flex-direction: row;
 	}
-
 	${from.desktop} {
 		width: 300px;
 	}
@@ -105,6 +101,7 @@ const content = css`
 		padding-bottom: 10px;
 	}
 `;
+
 const starWrapper = css`
 	width: fit-content;
 	margin-top: ${space[1]}px;
@@ -157,6 +154,7 @@ export const HighlightsCard = ({
 						showQuotes={showQuotedHeadline}
 						headlineColour={palette('--highlights-card-headline')}
 						kickerColour={palette('--highlights-card-kicker-text')}
+						quoteColour={palette('--highlights-card-quote-icon')}
 					/>
 
 					{!isUndefined(starRating) && (

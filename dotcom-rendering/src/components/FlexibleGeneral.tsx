@@ -21,7 +21,6 @@ import type { ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
 import { FeatureCard } from './FeatureCard';
 import { FrontCard } from './FrontCard';
-import { Hide } from './Hide';
 import type { Alignment } from './SupportingContent';
 
 type Props = {
@@ -33,7 +32,8 @@ type Props = {
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
-	isInNoBoostsAbTestVariant?: boolean;
+	isInLoopingVideoTestVariant?: boolean;
+	isInLoopingVideoTestControl?: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -243,6 +243,8 @@ type SplashCardLayoutProps = {
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
+	isInLoopingVideoTestVariant?: boolean;
+	isInLoopingVideoTestControl?: boolean;
 };
 
 const SplashCardLayout = ({
@@ -255,6 +257,8 @@ const SplashCardLayout = ({
 	isLastRow,
 	containerLevel,
 	collectionId,
+	isInLoopingVideoTestVariant = false,
+	isInLoopingVideoTestControl = false,
 }: SplashCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -335,6 +339,9 @@ const SplashCardLayout = ({
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
+					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
+					isInLoopingVideoTestVariant={isInLoopingVideoTestVariant}
+					isInLoopingVideoTestControl={isInLoopingVideoTestControl}
 				/>
 			</LI>
 		</UL>
@@ -397,6 +404,8 @@ type FullWidthCardLayoutProps = {
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
+	isInLoopingVideoTestVariant?: boolean;
+	isInLoopingVideoTestControl?: boolean;
 };
 
 const FullWidthCardLayout = ({
@@ -410,6 +419,8 @@ const FullWidthCardLayout = ({
 	isLastRow,
 	containerLevel,
 	collectionId,
+	isInLoopingVideoTestVariant = false,
+	isInLoopingVideoTestControl = false,
 }: FullWidthCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -482,6 +493,8 @@ const FullWidthCardLayout = ({
 					liveUpdatesPosition={liveUpdatesPosition}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
+					isInLoopingVideoTestVariant={isInLoopingVideoTestVariant}
+					isInLoopingVideoTestControl={isInLoopingVideoTestControl}
 				/>
 			</LI>
 		</UL>
@@ -582,7 +595,8 @@ export const FlexibleGeneral = ({
 	aspectRatio,
 	containerLevel = 'Primary',
 	collectionId,
-	isInNoBoostsAbTestVariant,
+	isInLoopingVideoTestVariant = false,
+	isInLoopingVideoTestControl = false,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
 		...snap,
@@ -611,53 +625,14 @@ export const FlexibleGeneral = ({
 					isLastRow={cards.length === 0}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
+					isInLoopingVideoTestVariant={isInLoopingVideoTestVariant}
+					isInLoopingVideoTestControl={isInLoopingVideoTestControl}
 				/>
 			)}
 			{groupedCards.map((row, i) => {
 				switch (row.layout) {
 					case 'oneCardFullWidth':
-						return isInNoBoostsAbTestVariant ? (
-							<>
-								<Hide when="above" breakpoint="tablet">
-									<HalfWidthCardLayout
-										key={row.cards[0]?.uniqueId}
-										cards={row.cards}
-										containerPalette={containerPalette}
-										showAge={showAge}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
-										imageLoading={imageLoading}
-										isFirstRow={!splash.length && i === 0}
-										isFirstStandardRow={i === 0}
-										aspectRatio={aspectRatio}
-										isLastRow={
-											i === groupedCards.length - 1
-										}
-										containerLevel={containerLevel}
-									/>
-								</Hide>
-								<Hide when="below" breakpoint="tablet">
-									<FullWidthCardLayout
-										key={row.cards[0]?.uniqueId}
-										cards={row.cards}
-										containerPalette={containerPalette}
-										showAge={showAge}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
-										imageLoading={imageLoading}
-										aspectRatio={aspectRatio}
-										isFirstRow={!splash.length && i === 0}
-										isLastRow={
-											i === groupedCards.length - 1
-										}
-										containerLevel={containerLevel}
-										collectionId={collectionId}
-									/>
-								</Hide>
-							</>
-						) : (
+						return (
 							<FullWidthCardLayout
 								key={row.cards[0]?.uniqueId}
 								cards={row.cards}
@@ -670,6 +645,12 @@ export const FlexibleGeneral = ({
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
 								collectionId={collectionId}
+								isInLoopingVideoTestVariant={
+									isInLoopingVideoTestVariant
+								}
+								isInLoopingVideoTestControl={
+									isInLoopingVideoTestControl
+								}
 							/>
 						);
 

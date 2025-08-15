@@ -107,6 +107,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			hasPageSkin: hasPageSkinConfig,
 			pageId,
 			abTests,
+			switches: { absoluteServerTimes = false },
 		},
 		editionId,
 	} = front;
@@ -134,9 +135,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
-	const { absoluteServerTimes = false } = front.config.switches;
-
-	const isInNoBoostsVariant = abTests.noBoostsVariant === 'variant';
+	const isInLoopingVideoTestVariant =
+		abTests.loopingVideoVariant === 'variant';
+	const isInLoopingVideoTestControl =
+		abTests.loopingVideoControl === 'control';
 
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
@@ -636,8 +638,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
-									isInNoBoostsAbTestVariant={
-										pageId === 'uk' && isInNoBoostsVariant
+									isInLoopingVideoTestVariant={
+										isInLoopingVideoTestVariant
+									}
+									isInLoopingVideoTestControl={
+										isInLoopingVideoTestControl
 									}
 								/>
 							</FrontSection>
