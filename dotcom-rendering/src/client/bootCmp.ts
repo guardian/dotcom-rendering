@@ -65,6 +65,10 @@ const initialiseCmp = async () => {
 	// If user has the "reject all" benefit then show the reduced, "non-advertised" list
 	const useNonAdvertisedList = allowRejectAll(isUserSignedIn);
 
+	const isInSourcepointGeolocationTest =
+		window.guardian.config.tests['consentGeolocationTestVariant'] ===
+		'variant';
+
 	const country = code ?? undefined;
 	cmp.init({
 		pubData: {
@@ -76,6 +80,7 @@ const initialiseCmp = async () => {
 		country,
 		useNonAdvertisedList,
 		isUserSignedIn,
+		isInSourcepointGeolocationTest,
 	});
 	log('dotcom', 'CMP initialised');
 };
