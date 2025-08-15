@@ -30,6 +30,7 @@ const card = css`
 	display: grid;
 	max-width: 100%;
 	min-width: 100%;
+	row-gap: ${space[4]}px;
 	grid-template-columns: 117px 1fr;
 	> * strong {
 		font-weight: 700;
@@ -40,8 +41,8 @@ const card = css`
 const productInfoContainer = css`
 	white-space: normal;
 	display: grid;
-	gap: ${space[1]}px;
-	padding-bottom: ${space[2]}px;
+	height: 117px;
+	min-height: fit-content;
 `;
 
 const primaryHeading = css`
@@ -54,6 +55,7 @@ const secondaryHeading = css`
 
 const priceRowStyle = css`
 	${textSans17};
+	padding-bottom: ${space[2]}px;
 `;
 const statisticsContainer = css`
 	grid-column: span 2;

@@ -8,7 +8,6 @@ const meta = {
 	component: InlineProductCard,
 	title: 'Components/InlineProductCard',
 	parameters: {
-		layout: 'padded',
 		chromatic: {
 			viewports: [
 				breakpoints.mobile,
