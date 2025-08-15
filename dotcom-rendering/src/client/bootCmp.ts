@@ -65,13 +65,9 @@ const initialiseCmp = async () => {
 	// If user has the "reject all" benefit then show the reduced, "non-advertised" list
 	const useNonAdvertisedList = allowRejectAll(isUserSignedIn);
 
-	const isInSourcepointGeolocationTestCookie = getCookie({
-		name: 'X-GU-Experiment-0perc-B',
-	}); // Get cookie
 	const isInSourcepointGeolocationTest =
-		isInSourcepointGeolocationTestCookie !== null
-			? Boolean(isInSourcepointGeolocationTestCookie)
-			: false;
+		window.guardian.config.tests['consentGeolocationTestVariant'] ===
+		'variant';
 
 	const country = code ?? undefined;
 	cmp.init({
