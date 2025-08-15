@@ -4,6 +4,7 @@ import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
 	loopVideoCard,
 	opinionTrails,
+	snapLink,
 	trails,
 } from '../../fixtures/manual/trails';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
@@ -68,7 +69,7 @@ const liveUpdatesCard = {
 
 const meta = {
 	component: FlexibleSpecial,
-	title: 'Components/FlexibleSpecial',
+	title: 'Front Containers/FlexibleSpecial',
 	parameters: {
 		chromatic: {
 			viewports: [
@@ -285,8 +286,20 @@ export const LoopVideoCards: Story = {
 		frontSectionTitle: 'Looping video',
 		groupedTrails: {
 			...emptyGroupedTrails,
-			snap: [loopVideoCard],
+			snap: [],
 			standard: [loopVideoCard],
+		},
+		collectionId: 1,
+	},
+};
+
+export const SnapCard: Story = {
+	name: 'With snap link',
+	args: {
+		frontSectionTitle: 'Snap link example',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			snap: [snapLink],
 		},
 		collectionId: 1,
 	},

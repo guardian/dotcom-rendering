@@ -7,7 +7,7 @@ import { FrontSection } from './FrontSection';
 import { ScrollableSmall } from './ScrollableSmall.importable';
 
 const meta = {
-	title: 'Components/ScrollableSmall',
+	title: 'Front Containers/ScrollableSmall',
 	component: ScrollableSmall,
 	parameters: {
 		chromatic: {

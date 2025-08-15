@@ -8,7 +8,7 @@ import { StaticMediumFour } from './StaticMediumFour';
 
 const meta = {
 	component: StaticMediumFour,
-	title: 'Components/StaticMediumFour',
+	title: 'Front Containers/StaticMediumFour',
 	parameters: {
 		chromatic: {
 			viewports: [

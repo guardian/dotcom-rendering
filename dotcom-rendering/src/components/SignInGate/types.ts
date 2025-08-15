@@ -126,6 +126,7 @@ export interface AuxiaProxyGetTreatmentsPayload {
 	hasConsented: boolean;
 	shouldServeDismissible: boolean; // [2]
 	showDefaultGate: ShowGateValues; // [3]
+	gateDisplayCount: number;
 }
 
 // [1]
