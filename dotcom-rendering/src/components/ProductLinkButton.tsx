@@ -1,3 +1,4 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
 import {
@@ -8,6 +9,7 @@ import {
 type ProductLinkButtonProps = {
 	label: string;
 	url: string;
+	cssOverrides?: SerializedStyles;
 	dataComponent?: string;
 };
 
@@ -24,6 +26,7 @@ export const ProductLinkButton = ({
 	label,
 	url,
 	dataComponent = 'in-body-product-link-button',
+	cssOverrides,
 }: ProductLinkButtonProps) => {
 	return (
 		<LinkButton
@@ -36,7 +39,7 @@ export const ProductLinkButton = ({
 			data-ignore="global-link-styling"
 			data-link-name="in body link"
 			data-spacefinder-role="inline"
-			cssOverrides={[linkButtonStyles]}
+			cssOverrides={[linkButtonStyles, cssOverrides]}
 			data-component={dataComponent}
 		>
 			{label}
