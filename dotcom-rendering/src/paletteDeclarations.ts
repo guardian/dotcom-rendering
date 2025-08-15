@@ -5042,6 +5042,11 @@ const privacyTextSupportingSubduedLight: PaletteFunction = () =>
 const privacyTextSupportingSubduedDark: PaletteFunction = () =>
 	sourcePalette.neutral[60];
 
+const productCardBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const productCardBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+
 const privacyTextRegularLight: PaletteFunction = () => sourcePalette.neutral[7];
 const privacyTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 const witnessTitleText: PaletteFunction = ({ theme }) => {
@@ -7379,6 +7384,10 @@ const paletteColours = {
 	'--privacy-text-supporting-subdued': {
 		light: privacyTextSupportingSubduedLight,
 		dark: privacyTextSupportingSubduedDark,
+	},
+	'--product-card-background': {
+		light: productCardBackgroundLight,
+		dark: productCardBackgroundDark,
 	},
 	'--pullquote-background': {
 		light: pullQuoteBackgroundLight,

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import {
-	headlineMedium17,
+	headlineMedium20,
 	space,
 	textSans14,
 	textSans17,
@@ -13,7 +13,7 @@ export type Statistics = {
 	value: string;
 };
 
-export type LeftColProductCardProps = {
+export type InlineProductCardProps = {
 	brandName: string;
 	productName: string;
 	image: string;
@@ -24,11 +24,13 @@ export type LeftColProductCardProps = {
 };
 
 const card = css`
+	background-color: ${palette('--product-card-background')};
+	padding: ${space[4]}px;
+	column-gap: ${space[2]}px;
 	display: grid;
-	grid-template-columns: 1fr;
-	padding: 10px;
-	width: 220px;
-
+	max-width: 100%;
+	min-width: 100%;
+	grid-template-columns: 117px 1fr;
 	> * strong {
 		font-weight: 700;
 	}
@@ -36,13 +38,14 @@ const card = css`
 `;
 
 const productInfoContainer = css`
+	white-space: normal;
 	display: grid;
-	row-gap: ${space[1]}px;
+	gap: ${space[1]}px;
 	padding-bottom: ${space[2]}px;
 `;
 
 const primaryHeading = css`
-	${headlineMedium17};
+	${headlineMedium20};
 `;
 
 const secondaryHeading = css`
@@ -52,17 +55,13 @@ const secondaryHeading = css`
 const priceRowStyle = css`
 	${textSans17};
 `;
-
-const buttonOverride = css`
-	padding-bottom: ${space[4]}px;
-	min-width: 100%;
-`;
-
 const statisticsContainer = css`
+	grid-column: span 2;
 	border-top: 1px solid ${palette('--section-border')};
 	padding-top: ${space[3]}px;
 	display: grid;
-	row-gap: ${space[2]}px;
+	grid-template-columns: 1fr 1fr;
+	gap: ${space[2]}px;
 `;
 
 const Statistic = ({ name, value }: Statistics) => (
@@ -76,7 +75,7 @@ const Statistic = ({ name, value }: Statistics) => (
 	</div>
 );
 
-export const LeftColProductCard = ({
+export const InlineProductCard = ({
 	brandName,
 	productName,
 	image,
@@ -84,30 +83,32 @@ export const LeftColProductCard = ({
 	price,
 	retailer,
 	statistics,
-}: LeftColProductCardProps) => (
+}: InlineProductCardProps) => (
 	<div css={card}>
-		{!!image && (
-			<a
-				href={url}
-				target="_blank"
-				rel="noopener noreferrer"
-				style={{
-					display: 'block',
-					marginBottom: '12px',
-					borderRadius: '6px',
-				}}
-			>
-				<img
-					src={image}
-					alt={productName}
-					css={{
-						width: '100%',
-						borderRadius: '6px',
+		<div>
+			{!!image && (
+				<a
+					href={url}
+					target="_blank"
+					rel="noopener noreferrer"
+					style={{
 						display: 'block',
+						marginBottom: '12px',
+						borderRadius: '6px',
 					}}
-				/>
-			</a>
-		)}
+				>
+					<img
+						src={image}
+						alt={productName}
+						css={{
+							width: '100%',
+							borderRadius: '6px',
+							display: 'block',
+						}}
+					/>
+				</a>
+			)}
+		</div>
 		<div css={productInfoContainer}>
 			<span css={primaryHeading}>{brandName}</span>
 			<span css={secondaryHeading}>{productName}</span>
@@ -130,17 +131,13 @@ export const LeftColProductCard = ({
 					{retailer}
 				</a>
 			</span>
-		</div>
-		<div css={buttonOverride}>
 			<ProductLinkButton
 				label={'Shop Now'}
-				url={url}
 				size={'small'}
-				cssOverrides={css`
-					min-width: 100%;
-				`}
+				url={url}
 			></ProductLinkButton>
 		</div>
+
 		<div css={statisticsContainer}>
 			{statistics.map((statistic) => (
 				<Statistic

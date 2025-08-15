@@ -1,14 +1,17 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
+import type { ThemeButton } from '@guardian/source/react-components';
 import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
+import { palette } from '../palette';
 
 type ProductLinkButtonProps = {
 	label: string;
 	url: string;
+	size?: 'default' | 'small';
 	cssOverrides?: SerializedStyles;
 };
 
@@ -21,9 +24,15 @@ const linkButtonStyles = css`
 	overflow-wrap: break-word;
 `;
 
+export const theme: Partial<ThemeButton> = {
+	backgroundPrimary: palette('--discussion-primary-button-background'),
+	backgroundPrimaryHover: palette('--discussion-button-background-hover'),
+};
+
 export const ProductLinkButton = ({
 	label,
 	url,
+	size = 'default',
 	cssOverrides,
 }: ProductLinkButtonProps) => {
 	return (
@@ -34,10 +43,15 @@ export const ProductLinkButton = ({
 			iconSide="right"
 			aria-label={`Open ${label} in a new tab`}
 			icon={<SvgArrowRightStraight />}
+			theme={theme}
 			data-ignore="global-link-styling"
 			data-link-name="in body link"
 			data-spacefinder-role="inline"
-			cssOverrides={[linkButtonStyles, cssOverrides]}
+			size={size}
+			cssOverrides={[
+				linkButtonStyles,
+				...(cssOverrides ? [cssOverrides] : []),
+			]}
 		>
 			{label}
 		</LinkButton>
