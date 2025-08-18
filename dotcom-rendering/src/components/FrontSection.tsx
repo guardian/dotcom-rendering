@@ -624,7 +624,7 @@ export const FrontSection = ({
 				data-component={ophanComponentName}
 				data-container-name={containerName}
 				data-container-level={containerLevel}
-				data-tracking={true}
+				data-collection-tracking={true}
 				css={[
 					fallbackStyles,
 					containerStylesUntilLeftCol,

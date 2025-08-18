@@ -24,6 +24,7 @@ import { LabsHeader } from '../components/LabsHeader';
 import { LabsSection } from '../components/LabsSection';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
+import { SectionTracker } from '../components/SectionTracker.importable';
 import { Snap } from '../components/Snap';
 import { SnapCssSandbox } from '../components/SnapCssSandbox';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
@@ -51,7 +52,6 @@ import type {
 } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-import { SectionTracker } from '../components/SectionTracker.importable';
 
 interface Props {
 	front: Front;
@@ -191,9 +191,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	return (
 		<>
-			<Island priority={'critical'}>
-				<SectionTracker />
-			</Island>
 			<div data-print-layout="hide" id="bannerandheader">
 				{renderAds && (
 					<Stuck>
@@ -750,6 +747,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					/>
 				</Island>
 			</BannerWrapper>
+
+			<Island priority="enhancement" defer={{ until: 'idle' }}>
+				<SectionTracker />
+			</Island>
 		</>
 	);
 };
