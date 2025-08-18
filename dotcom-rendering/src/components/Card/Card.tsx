@@ -13,6 +13,7 @@ import {
 } from '../../lib/articleFormat';
 import { isMediaCard } from '../../lib/cardHelpers';
 import { isWithinTwelveHours, secondsToDuration } from '../../lib/formatTime';
+import { appendLinkNameMedia } from '../../lib/getDataLinkName';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { BETA_CONTAINERS } from '../../model/enhanceCollections';
@@ -128,7 +129,6 @@ export type Props = {
 	liveUpdatesAlignment?: Alignment;
 	liveUpdatesPosition?: Position;
 	onwardsSource?: OnwardsSource;
-	pauseOffscreenVideo?: boolean;
 	showVideo?: boolean;
 	isTagPage?: boolean;
 	/** Allows the consumer to set an aspect ratio on the image of 5:3, 5:4, 4:5 or 1:1 */
@@ -147,6 +147,10 @@ export type Props = {
 	trailTextSize?: TrailTextSize;
 	/** A kicker image is seperate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
+	/** Determines if the headline should be positioned within the content or outside the content */
+	headlinePosition?: 'inner' | 'outer';
+	isInLoopingVideoTestVariant?: boolean;
+	isInLoopingVideoTestControl?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -250,6 +254,7 @@ const getMedia = ({
 	mainMedia,
 	canPlayInline,
 	isBetaContainer,
+	isInLoopingVideoTestControl,
 }: {
 	imageUrl?: string;
 	imageAltText?: string;
@@ -259,8 +264,13 @@ const getMedia = ({
 	mainMedia?: MainMedia;
 	canPlayInline?: boolean;
 	isBetaContainer: boolean;
+	isInLoopingVideoTestControl: boolean;
 }) => {
-	if (mainMedia?.type === 'LoopVideo' && canPlayInline) {
+	if (
+		mainMedia?.type === 'LoopVideo' &&
+		!isInLoopingVideoTestControl &&
+		canPlayInline
+	) {
 		return {
 			type: 'loop-video',
 			mainMedia,
@@ -268,7 +278,7 @@ const getMedia = ({
 	}
 	if (mainMedia?.type === 'Video' && canPlayInline) {
 		return {
-			type: 'video',
+			type: 'youtube-video',
 			mainMedia,
 		} as const;
 	}
@@ -316,36 +326,6 @@ const decideSublinkPosition = (
 	}
 
 	return alignment === 'vertical' ? 'inner' : 'outer';
-};
-
-const getHeadlinePosition = ({
-	isFlexSplash,
-	containerType,
-	showLivePlayable,
-	isMediaCardOrNewsletter,
-}: {
-	containerType?: DCRContainerType;
-	isFlexSplash?: boolean;
-	showLivePlayable: boolean;
-	isMediaCardOrNewsletter: boolean;
-}) => {
-	if (isMediaCardOrNewsletter) {
-		return 'inner';
-	}
-
-	if (containerType === 'flexible/special' && isFlexSplash) {
-		return 'outer';
-	}
-
-	if (
-		containerType === 'flexible/general' &&
-		isFlexSplash &&
-		showLivePlayable
-	) {
-		return 'outer';
-	}
-
-	return 'inner';
 };
 
 const liveBulletStyles = css`
@@ -400,7 +380,6 @@ export const Card = ({
 	liveUpdatesAlignment = 'vertical',
 	liveUpdatesPosition = 'inner',
 	onwardsSource,
-	pauseOffscreenVideo = false,
 	showVideo = true,
 	absoluteServerTimes,
 	isTagPage = false,
@@ -412,6 +391,9 @@ export const Card = ({
 	showTopBarMobile = true,
 	trailTextSize,
 	showKickerImage = false,
+	headlinePosition = 'inner',
+	isInLoopingVideoTestVariant = false,
+	isInLoopingVideoTestControl = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -564,7 +546,13 @@ export const Card = ({
 		mainMedia,
 		canPlayInline,
 		isBetaContainer,
+		isInLoopingVideoTestControl,
 	});
+
+	const resolvedDataLinkName =
+		media && dataLinkName
+			? appendLinkNameMedia(dataLinkName, media.type)
+			: dataLinkName;
 
 	/**
 	 * For opinion type cards with avatars (which aren't onwards content)
@@ -604,13 +592,6 @@ export const Card = ({
 		if (isFlexibleContainer) return { mobile: 'small' };
 		return { mobile: 'medium' };
 	};
-
-	const headlinePosition = getHeadlinePosition({
-		containerType,
-		isFlexSplash,
-		showLivePlayable,
-		isMediaCardOrNewsletter,
-	});
 
 	const hideTrailTextUntil = () => {
 		if (isFlexibleContainer) {
@@ -757,7 +738,7 @@ export const Card = ({
 			<CardLink
 				linkTo={linkTo}
 				headlineText={headlineText}
-				dataLinkName={dataLinkName}
+				dataLinkName={resolvedDataLinkName}
 				isExternalLink={isExternalLink}
 			/>
 			{headlinePosition === 'outer' && (
@@ -895,10 +876,14 @@ export const Card = ({
 									fallbackImageLoading={imageLoading}
 									fallbackImageAlt={media.imageAltText}
 									fallbackImageAspectRatio="5:4"
+									linkTo={linkTo}
+									isInLoopingVideoTestVariant={
+										isInLoopingVideoTestVariant
+									}
 								/>
 							</Island>
 						)}
-						{media.type === 'video' && (
+						{media.type === 'youtube-video' && (
 							<>
 								{showVideo ? (
 									<div
@@ -943,9 +928,6 @@ export const Card = ({
 												hideCaption={true}
 												stickyVideos={false}
 												kickerText={kickerText}
-												pauseOffscreenVideo={
-													pauseOffscreenVideo
-												}
 												/*
 												 * TODO: IMPROVE THIS MAPPING
 												 *
@@ -1011,6 +993,9 @@ export const Card = ({
 									loading={imageLoading}
 									roundedCorners={isOnwardContent}
 									aspectRatio={aspectRatio}
+									isInLoopingVideoTestControl={
+										isInLoopingVideoTestControl
+									}
 								/>
 								{isVideoMainMedia && mainMedia.duration > 0 && (
 									<div
