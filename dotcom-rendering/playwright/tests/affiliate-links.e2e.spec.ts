@@ -34,7 +34,7 @@ test.describe('Affiliate links', () => {
 			const skimlinkLocator = page.locator(skimlinkSelector).first();
 			const skimlinkRelAttribute =
 				await skimlinkLocator.getAttribute('rel');
-			expect(skimlinkRelAttribute).toBe('sponsored');
+			expect(skimlinkRelAttribute).toBe('sponsored noreferrer noopener');
 		});
 
 		test('skimlinks should contain the xcust URL parameter', async ({
