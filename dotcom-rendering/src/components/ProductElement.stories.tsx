@@ -380,6 +380,7 @@ const meta = {
 	component: ProductElement,
 	title: 'Components/ProductElement',
 	parameters: {
+		layout: 'padded',
 		formats: [
 			{
 				design: ArticleDesign.Review,

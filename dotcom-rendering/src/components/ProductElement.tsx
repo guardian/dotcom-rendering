@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { headlineBold20 } from '@guardian/source/foundations';
 import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
@@ -7,7 +6,7 @@ import { RenderArticleElement } from '../lib/renderElement';
 import type { FEElement } from '../types/content';
 import { InlineProductCard } from './InlineProductCard';
 import { LeftColProductCard } from './LeftColProductCard';
-import { palette } from '../palette';
+import { subheadingStyles } from './Subheading';
 
 export type Product = {
 	primaryHeadline: string;
@@ -36,20 +35,10 @@ export const ProductElement = ({
 	return (
 		<div
 			css={css`
-				${grid.container}
+				${grid.paddedContainer}
 				position: relative;
 			`}
 		>
-			<h2
-				css={css`
-					color: ${palette('--headline-colour')};
-					${headlineBold20};
-					${grid.column.centre};
-				`}
-				dangerouslySetInnerHTML={{
-					__html: product.primaryHeadline + product.secondaryHeadline,
-				}}
-			/>
 			<div
 				css={css`
 					//make full height of the container
@@ -72,6 +61,13 @@ export const ProductElement = ({
 					${grid.column.centre}
 				`}
 			>
+				<h2
+					css={subheadingStyles(format)}
+					dangerouslySetInnerHTML={{
+						__html:
+							product.primaryHeadline + product.secondaryHeadline,
+					}}
+				/>
 				{product.content.map((element, index) => (
 					<RenderArticleElement
 						// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
