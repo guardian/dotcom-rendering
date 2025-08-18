@@ -14,7 +14,6 @@ type LoadPageOptions = {
 	waitUntil?: 'domcontentloaded' | 'load';
 	region?: 'GB' | 'US' | 'AU' | 'INT';
 	preventSupportBanner?: boolean;
-	useSecure?: boolean;
 	overrides?: {
 		configOverrides?: Record<string, unknown>;
 		switchOverrides?: Record<string, unknown>;
@@ -31,18 +30,17 @@ const getDcrPostUrl = (path: string) => `${ORIGIN}/${path.split('/')[1]}`;
 
 const getFrontendUrl = (path: string) => {
 	const secondSlashIndex = path.indexOf('/', 1);
-	return `${path.substring(secondSlashIndex + 1)}.json?dcr`;
+	const contentUrl = path.substring(secondSlashIndex + 1);
+	return `${contentUrl}.json?dcr`;
 };
 
 const getDcrUrl = ({
 	path,
 	queryParamsOn,
 	queryParams,
-	fragment,
 }: Required<
-	Pick<LoadPageParams, 'path' | 'useSecure' | 'queryParamsOn' | 'queryParams'>
-> &
-	Pick<LoadPageParams, 'fragment'>): string => {
+	Pick<LoadPageParams, 'path' | 'queryParamsOn' | 'queryParams'>
+>): string => {
 	const paramsString = queryParamsOn
 		? `?${new URLSearchParams({
 				adtest: 'fixed-puppies-ci',
@@ -50,7 +48,7 @@ const getDcrUrl = ({
 		  }).toString()}`
 		: '';
 
-	return `${ORIGIN}${path}${paramsString}${fragment ?? ''}`;
+	return `${ORIGIN}${path}${paramsString}`;
 };
 
 const getFrontendArticle = async (
@@ -90,7 +88,6 @@ const loadPage = async ({
 	waitUntil = 'domcontentloaded',
 	region = 'GB',
 	preventSupportBanner = true,
-	useSecure = false,
 	overrides = {},
 }: LoadPageParams): Promise<void> => {
 	await page.addInitScript(
@@ -119,8 +116,7 @@ const loadPage = async ({
 		? Promise.resolve(overrides.article)
 		: getFrontendArticle(path));
 
-	// Apply the overrides to the article config and switches and then send the
-	// modified JSON payload to DCR
+	// Apply the overrides to the article config and switches
 	const postData = {
 		...frontendArticle,
 		config: {
@@ -135,16 +131,17 @@ const loadPage = async ({
 
 	const dcrUrl = getDcrUrl({
 		path,
-		useSecure,
 		queryParamsOn,
 		queryParams,
-		fragment,
 	});
 
+	// Override the request to the DCR URL to use a POST method
+	// with the overridden payload
 	await page.route(dcrUrl, async (route) => {
 		await route.continue({
 			method: 'POST',
 			headers: {
+				...route.request().headers(),
 				'Content-Type': 'application/json',
 			},
 			postData,
@@ -152,7 +149,7 @@ const loadPage = async ({
 		});
 	});
 
-	await page.goto(dcrUrl, { waitUntil });
+	await page.goto(`${dcrUrl}${fragment ?? ''}`, { waitUntil });
 };
 
 /**
