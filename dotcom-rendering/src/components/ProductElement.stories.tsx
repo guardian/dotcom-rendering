@@ -1,12 +1,11 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { Product } from './ProductElement';
 import { ProductElement } from './ProductElement';
 
 const product: Product = {
-	primaryHeadline:
-		'<em><strong>Best fan overall:<br></strong></em><strong>AirCraft Lume</strong>',
-	secondaryHeadline: '',
+	primaryHeadline: '<em><strong>Best fan overall:<br></strong></em>',
+	secondaryHeadline: '<strong>AirCraft Lume</strong>',
 	brandName: 'AirCraft',
 	productName: 'Lume',
 	image: 'https://media.guim.co.uk/ed32f52c10d742be18c4ff1b218dce611e71f57e/500_0_3000_3000/master/3000.jpg',
@@ -383,17 +382,17 @@ const meta = {
 	parameters: {
 		formats: [
 			{
-				design: 'Standard',
-				display: 'Standard',
-				theme: 'Lifestyle',
+				design: ArticleDesign.Review,
+				display: ArticleDesign.Review,
+				theme: Pillar.Lifestyle,
 			},
 		],
 	},
 	args: {
 		product,
 		format: {
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Review,
+			display: ArticleDisplay.Showcase,
 			theme: Pillar.Lifestyle,
 		},
 		editionId: 'UK',
@@ -403,3 +402,37 @@ const meta = {
 export default meta;
 
 export const Default = {};
+
+export const MultipleProducts: StoryFn = () => {
+	return (
+		<>
+			<ProductElement
+				product={product}
+				editionId="UK"
+				format={{
+					design: ArticleDesign.Review,
+					display: ArticleDisplay.Showcase,
+					theme: Pillar.Lifestyle,
+				}}
+			/>
+			<ProductElement
+				product={product}
+				editionId="UK"
+				format={{
+					design: ArticleDesign.Review,
+					display: ArticleDisplay.Showcase,
+					theme: Pillar.Lifestyle,
+				}}
+			/>
+			<ProductElement
+				product={product}
+				editionId="UK"
+				format={{
+					design: ArticleDesign.Review,
+					display: ArticleDisplay.Showcase,
+					theme: Pillar.Lifestyle,
+				}}
+			/>
+		</>
+	);
+};

@@ -5,7 +5,9 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { FEElement } from '../types/content';
+import { InlineProductCard } from './InlineProductCard';
 import { LeftColProductCard } from './LeftColProductCard';
+import { palette } from '../palette';
 
 export type Product = {
 	primaryHeadline: string;
@@ -34,20 +36,25 @@ export const ProductElement = ({
 	return (
 		<div
 			css={css`
-				${grid.paddedContainer}
+				${grid.container}
 				position: relative;
 			`}
 		>
 			<h2
 				css={css`
-					${headlineBold20}
-					${grid.column.centre}
+					color: ${palette('--headline-colour')};
+					${headlineBold20};
+					${grid.column.centre};
 				`}
-				dangerouslySetInnerHTML={{ __html: product.primaryHeadline }}
+				dangerouslySetInnerHTML={{
+					__html: product.primaryHeadline + product.secondaryHeadline,
+				}}
 			/>
 			<div
 				css={css`
+					//make full height of the container
 					${grid.column.left}
+					height: 100%;
 				`}
 			>
 				<LeftColProductCard
@@ -85,6 +92,15 @@ export const ProductElement = ({
 					/>
 				))}
 			</div>
+			<InlineProductCard
+				brandName={product.brandName}
+				productName={product.productName}
+				image={product.image}
+				url={product.url}
+				price={product.price}
+				retailer={product.retailer}
+				statistics={product.statistics}
+			/>
 		</div>
 	);
 };
