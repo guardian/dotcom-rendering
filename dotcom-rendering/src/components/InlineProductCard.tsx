@@ -1,10 +1,12 @@
 import { css } from '@emotion/react';
 import {
+	from,
 	headlineMedium20,
 	space,
 	textSans14,
 	textSans17,
 } from '@guardian/source/foundations';
+import { grid } from '../grid';
 import { palette } from '../palette';
 import { ProductLinkButton } from './ProductLinkButton';
 
@@ -13,17 +15,8 @@ export type Statistics = {
 	value: string;
 };
 
-export type InlineProductCardProps = {
-	brandName: string;
-	productName: string;
-	image: string;
-	url: string;
-	price: string;
-	retailer: string;
-	statistics: Statistics[];
-};
-
 const card = css`
+	${grid.column.centre}
 	background-color: ${palette('--product-card-background')};
 	padding: ${space[4]}px;
 	column-gap: ${space[2]}px;
@@ -36,7 +29,20 @@ const card = css`
 		font-weight: 700;
 	}
 	border-top: 1px solid ${palette('--section-border-lifestyle')};
+	${from.wide} {
+		display: none;
+	}
 `;
+
+export type InlineProductCardProps = {
+	brandName: string;
+	productName: string;
+	image: string;
+	url: string;
+	price: string;
+	retailer: string;
+	statistics: Statistics[];
+};
 
 const productInfoContainer = css`
 	white-space: normal;

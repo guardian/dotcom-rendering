@@ -1,10 +1,12 @@
 import { css } from '@emotion/react';
 import {
+	from,
 	headlineMedium17,
 	space,
 	textSans14,
 	textSans17,
 } from '@guardian/source/foundations';
+import { grid } from '../grid';
 import { palette } from '../palette';
 import { ProductLinkButton } from './ProductLinkButton';
 
@@ -24,7 +26,13 @@ export type LeftColProductCardProps = {
 };
 
 const card = css`
-	display: grid;
+	top: 0;
+	position: sticky;
+	display: none;
+	${from.wide} {
+		display: block;
+	}
+	${grid.column.left}
 	grid-template-columns: 1fr;
 	padding: 10px;
 	width: 220px;
