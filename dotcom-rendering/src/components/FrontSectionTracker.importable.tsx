@@ -74,17 +74,19 @@ export const FrontSectionTracker = () => {
 		const callback = (entries: IntersectionObserverEntry[]) => {
 			for (const entry of entries) {
 				if (entry.isIntersecting) {
-					const sectionName = entry.target.id;
-					if (!viewedCollections.has(sectionName)) {
-						setCollectionAsViewed(sectionName);
-						reportViewEvent(sectionName);
+					const collectionName = entry.target.id;
+					if (!viewedCollections.has(collectionName)) {
+						setCollectionAsViewed(collectionName);
+						reportViewEvent(collectionName);
 						observer.unobserve(entry.target);
 					}
 				}
 			}
 		};
-
-		const observer = new IntersectionObserver(callback);
+		const options = {
+			rootMargin: '-100px',
+		};
+		const observer = new IntersectionObserver(callback, options);
 
 		for (const collection of collectionElements) {
 			observer.observe(collection);
