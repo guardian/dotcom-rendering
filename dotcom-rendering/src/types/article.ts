@@ -45,7 +45,7 @@ export type ArticleFields = {
 
 export type Gallery = ArticleFields & {
 	design: ArticleDesign.Gallery;
-	images: (ImageBlockElement | AdPlaceholderBlockElement)[];
+	bodyElements: (ImageBlockElement | AdPlaceholderBlockElement)[];
 	mainMedia: ImageBlockElement;
 };
 
@@ -135,7 +135,7 @@ export const enhanceArticleType = (
 			design,
 			display: format.display,
 			theme: format.theme,
-			images: blocks.flatMap((block) =>
+			bodyElements: blocks.flatMap((block) =>
 				block.elements.filter(
 					(element) =>
 						element._type ===

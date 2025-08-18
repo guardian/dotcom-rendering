@@ -106,15 +106,13 @@ const insertAdPlaceholdersForGallery = (elements: FEElement[]): FEElement[] => {
 
 			const shouldInsertAd = imageBlockElementCounter % 4 === 0;
 
-			const currentElements = [...prev.elements, currentElement];
-
 			return {
 				elements: shouldInsertAd
 					? insertPlaceholderAfterCurrentElement(
 							prev.elements,
 							currentElement,
 					  )
-					: currentElements,
+					: [...prev.elements, currentElement],
 				imageBlockElementCounter,
 			};
 		},

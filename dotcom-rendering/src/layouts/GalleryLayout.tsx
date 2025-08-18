@@ -292,7 +292,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						) : null}
 					</div>
 				</header>
-				{gallery.images.map((element, index) => {
+				{gallery.bodyElements.map((element, index) => {
 					const isImage =
 						element._type ===
 						'model.dotcomrendering.pageElements.ImageBlockElement';
