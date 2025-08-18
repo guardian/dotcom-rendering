@@ -11,7 +11,7 @@ const getCollectionElements = (): HTMLElement[] => {
 const reportInsertEvent = (elements: HTMLElement[]) => {
 	for (const [index, element] of elements.entries()) {
 		const sectionName = element.id;
-		if (sectionName === '') return;
+		if (sectionName === '') continue;
 
 		const distanceFromTop = (
 			element.getBoundingClientRect().top + window.pageYOffset
@@ -65,6 +65,8 @@ const setCollectionAsViewed = (id: string) => {
  */
 export const FrontSectionTracker = () => {
 	useEffect(() => {
+		if (!('IntersectionObserver' in window)) return;
+
 		const collectionElements: HTMLElement[] = getCollectionElements();
 
 		void reportInsertEvent(collectionElements);
@@ -76,6 +78,7 @@ export const FrontSectionTracker = () => {
 					if (!viewedCollections.has(sectionName)) {
 						setCollectionAsViewed(sectionName);
 						reportViewEvent(sectionName);
+						observer.unobserve(entry.target);
 					}
 				}
 			}

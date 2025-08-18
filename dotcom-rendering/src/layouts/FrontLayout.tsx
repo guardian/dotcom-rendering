@@ -748,7 +748,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				</Island>
 			</BannerWrapper>
 
-			<Island priority="enhancement" defer={{ until: 'idle' }}>
+			<Island priority="feature" defer={{ until: 'idle' }}>
 				<FrontSectionTracker />
 			</Island>
 		</>
