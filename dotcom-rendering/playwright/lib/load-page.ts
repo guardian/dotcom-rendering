@@ -26,36 +26,23 @@ type LoadPageParams = {
 	path: string;
 } & LoadPageOptions;
 
-const getDcrPostUrl = (path: string) => `${ORIGIN}/${path.split('/')[1]}`;
-
 const getFrontendUrl = (path: string) => {
 	const secondSlashIndex = path.indexOf('/', 1);
 	const contentUrl = path.substring(secondSlashIndex + 1);
-	return `${contentUrl}.json?dcr`;
-};
-
-const getDcrUrl = ({
-	path,
-	queryParamsOn,
-	queryParams,
-}: Required<
-	Pick<LoadPageParams, 'path' | 'queryParamsOn' | 'queryParams'>
->): string => {
-	const paramsString = queryParamsOn
-		? `?${new URLSearchParams({
-				adtest: 'fixed-puppies-ci',
-				...queryParams,
-		  }).toString()}`
-		: '';
-
-	return `${ORIGIN}${path}${paramsString}`;
+	return `${contentUrl}.json`;
 };
 
 const getFrontendArticle = async (
 	url: string,
+	queryParams: LoadPageParams['queryParams'],
 ): Promise<FEArticle | FEFront> => {
 	try {
-		const response = await fetch(getFrontendUrl(url));
+		const paramsString = `${new URLSearchParams({
+			dcr: 'true',
+			...queryParams,
+		}).toString()}`;
+		const frontendUrl = `${getFrontendUrl(url)}?${paramsString}`;
+		const response = await fetch(frontendUrl);
 		if (!response.ok) {
 			throw new Error(
 				`Failed to fetch article JSON from ${url}: ${response.statusText}`,
@@ -75,6 +62,23 @@ const getFrontendArticle = async (
 		);
 	}
 };
+
+const getDcrUrl = ({
+	path,
+	queryParamsOn,
+	queryParams,
+}: Pick<LoadPageParams, 'path' | 'queryParamsOn' | 'queryParams'>): string => {
+	const paramsString = queryParamsOn
+		? `?${new URLSearchParams({
+				adtest: 'fixed-puppies-ci',
+				...queryParams,
+		  }).toString()}`
+		: '';
+
+	return `${ORIGIN}${path}${paramsString}`;
+};
+
+const getDcrPostUrl = (path: string) => `${ORIGIN}/${path.split('/')[1]}`;
 
 /**
  * Loads a page in Playwright and centralises setup
@@ -114,7 +118,7 @@ const loadPage = async ({
 	// If overrides exist, but no article fixture we fetch it from Frontend
 	const frontendArticle = await (overrides.article
 		? Promise.resolve(overrides.article)
-		: getFrontendArticle(path));
+		: getFrontendArticle(path, queryParams));
 
 	// Apply the overrides to the article config and switches
 	const postData = {
