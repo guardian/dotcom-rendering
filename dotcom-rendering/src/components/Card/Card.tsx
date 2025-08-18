@@ -40,7 +40,6 @@ import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
 import { LoopVideo } from '../LoopVideo.importable';
 import { Pill } from '../Pill';
-import { Slideshow } from '../Slideshow';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
 import { Snap } from '../Snap';
 import { SnapCssSandbox } from '../SnapCssSandbox';
@@ -806,42 +805,31 @@ export const Card = ({
 						imageType={media.type}
 						imagePositionOnDesktop={imagePositionOnDesktop}
 						imagePositionOnMobile={imagePositionOnMobile}
-						hideImageOverlay={
-							media.type === 'slideshow' && isFlexibleContainer
-						}
+						hideImageOverlay={media.type === 'slideshow'}
 						padImage={isMediaCardOrNewsletter && isBetaContainer}
 						isBetaContainer={isBetaContainer}
 					>
-						{media.type === 'slideshow' &&
-							(isFlexibleContainer ? (
-								<div
-									css={css`
-										position: relative;
-										z-index: ${getZIndex(
-											'card-nested-link',
-										)};
-									`}
+						{media.type === 'slideshow' && (
+							<div
+								css={css`
+									position: relative;
+									z-index: ${getZIndex('card-nested-link')};
+								`}
+							>
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
 								>
-									<Island
-										priority="feature"
-										defer={{ until: 'visible' }}
-									>
-										<SlideshowCarousel
-											images={media.slideshowImages}
-											imageSize={imageSize}
-											hasNavigationBackgroundColour={
-												!!hasSublinks
-											}
-										/>
-									</Island>
-								</div>
-							) : (
-								<Slideshow
-									images={media.slideshowImages}
-									imageSize={imageSize}
-									isDynamo={isDynamo}
-								/>
-							))}
+									<SlideshowCarousel
+										images={media.slideshowImages}
+										imageSize={imageSize}
+										hasNavigationBackgroundColour={
+											!!hasSublinks
+										}
+									/>
+								</Island>
+							</div>
+						)}
 						{media.type === 'avatar' && (
 							<AvatarContainer
 								imageSize={imageSize}
