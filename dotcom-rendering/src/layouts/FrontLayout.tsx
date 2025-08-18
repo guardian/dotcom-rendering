@@ -18,13 +18,13 @@ import {
 	MobileAdSlot,
 } from '../components/FrontsAdSlots';
 import { FrontSection } from '../components/FrontSection';
+import { FrontSectionTracker } from '../components/FrontSectionTracker.importable';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { LabsSection } from '../components/LabsSection';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
-import { SectionTracker } from '../components/SectionTracker.importable';
 import { Snap } from '../components/Snap';
 import { SnapCssSandbox } from '../components/SnapCssSandbox';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
@@ -749,7 +749,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			</BannerWrapper>
 
 			<Island priority="enhancement" defer={{ until: 'idle' }}>
-				<SectionTracker />
+				<FrontSectionTracker />
 			</Island>
 		</>
 	);
