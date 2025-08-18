@@ -211,7 +211,9 @@ const captionLink = css`
 `;
 
 const galleryStyles = css`
-	${grid.column.centre}
+	${grid.column.centre};
+	${textSans14};
+
 	margin-bottom: 0;
 	padding-bottom: 6px;
 	${from.leftCol} {
