@@ -19,6 +19,7 @@ import { DesktopAdSlot, MobileAdSlot } from '../components/GalleryAdSlots';
 import { GalleryImage } from '../components/GalleryImage';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
+import { LabsHeader } from '../components/LabsHeader';
 import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
@@ -50,12 +51,6 @@ interface WebProps extends Props {
 interface AppProps extends Props {
 	renderingTarget: 'Apps';
 }
-
-const border = css({
-	borderWidth: 1,
-	borderStyle: 'solid',
-	color: '#ccc',
-});
 
 const headerStyles = css`
 	${grid.container}
@@ -140,6 +135,23 @@ const galleryBorder = css`
 
 export const GalleryLayout = (props: WebProps | AppProps) => {
 	const { gallery, renderingTarget } = props;
+
+	const {
+		config: {
+			abTests,
+			idUrl,
+			mmaUrl,
+			discussionApiUrl,
+			idApiUrl,
+			shortUrlId,
+			isPreview,
+			isSensitive,
+			section,
+			switches,
+		},
+		editionId,
+	} = gallery.frontendData;
+
 	const frontendData = gallery.frontendData;
 
 	const isWeb = renderingTarget === 'Web';
@@ -176,23 +188,21 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot
-									abTests={frontendData.config.abTests}
-								/>
+								<HeaderAdSlot abTests={abTests} />
 							</Section>
 						</Stuck>
 					)}
 					<Masthead
 						nav={props.NAV}
-						editionId={frontendData.editionId}
-						idUrl={frontendData.config.idUrl}
-						mmaUrl={frontendData.config.mmaUrl}
-						discussionApiUrl={frontendData.config.discussionApiUrl}
-						idApiUrl={frontendData.config.idApiUrl}
+						editionId={editionId}
+						idUrl={idUrl}
+						mmaUrl={mmaUrl}
+						discussionApiUrl={discussionApiUrl}
+						idApiUrl={idApiUrl}
 						contributionsServiceUrl={
 							frontendData.contributionsServiceUrl
 						}
-						showSubNav={false}
+						showSubNav={!isLabs}
 						showSlimNav={true}
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}
@@ -200,12 +210,27 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					/>
 				</div>
 			)}
+
+			{format.theme === ArticleSpecial.Labs && (
+				<Stuck>
+					<Section
+						fullWidth={true}
+						showTopBorder={false}
+						backgroundColour={sourcePalette.labs[400]}
+						borderColour={sourcePalette.neutral[60]}
+						sectionId="labs-header"
+						element="aside"
+					>
+						<LabsHeader editionId={editionId} />
+					</Section>
+				</Stuck>
+			)}
+
 			<main
 				css={{
 					backgroundColor: themePalette('--article-background'),
 				}}
 			>
-				<div css={border}>Labs header</div>
 				<header css={headerStyles}>
 					<MainMediaGallery
 						mainMedia={gallery.mainMedia}
@@ -257,10 +282,8 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 									frontendData.webPublicationSecondaryDateDisplay
 								}
 								isCommentable={frontendData.isCommentable}
-								discussionApiUrl={
-									frontendData.config.discussionApiUrl
-								}
-								shortUrlId={frontendData.config.shortUrlId}
+								discussionApiUrl={discussionApiUrl}
+								shortUrlId={shortUrlId}
 							/>
 						) : null}
 						{isApps ? (
@@ -281,10 +304,8 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 									frontendData.webPublicationSecondaryDateDisplay
 								}
 								isCommentable={frontendData.isCommentable}
-								discussionApiUrl={
-									frontendData.config.discussionApiUrl
-								}
-								shortUrlId={frontendData.config.shortUrlId}
+								discussionApiUrl={discussionApiUrl}
+								shortUrlId={shortUrlId}
 							/>
 						) : null}
 					</div>
@@ -396,23 +417,21 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 								contributionsServiceUrl={
 									contributionsServiceUrl
 								}
-								idApiUrl={frontendData.config.idApiUrl}
+								idApiUrl={idApiUrl}
 								isMinuteArticle={
 									frontendData.pageType.isMinuteArticle
 								}
 								isPaidContent={
 									frontendData.pageType.isPaidContent
 								}
-								isPreview={!!frontendData.config.isPreview}
-								isSensitive={frontendData.config.isSensitive}
+								isPreview={!!isPreview}
+								isSensitive={isSensitive}
 								pageId={frontendData.pageId}
-								sectionId={frontendData.config.section}
+								sectionId={section}
 								shouldHideReaderRevenue={
 									frontendData.shouldHideReaderRevenue
 								}
-								remoteBannerSwitch={
-									!!frontendData.config.switches.remoteBanner
-								}
+								remoteBannerSwitch={!!switches.remoteBanner}
 								tags={frontendData.tags}
 							/>
 						</Island>
