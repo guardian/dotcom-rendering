@@ -1,4 +1,4 @@
-import type { Page } from '@playwright/test';
+import type { Cookie, Page } from '@playwright/test';
 import { ORIGIN } from '../../playwright.config';
 import type { FEArticle } from '../../src/frontend/feArticle';
 import type { FEFront } from '../../src/frontend/feFront';
@@ -34,6 +34,7 @@ const getFrontendUrl = (path: string) => {
 
 const getFrontendArticle = async (
 	url: string,
+	cookies: Cookie[],
 	queryParams: LoadPageParams['queryParams'],
 ): Promise<FEArticle | FEFront> => {
 	try {
@@ -42,7 +43,8 @@ const getFrontendArticle = async (
 			...queryParams,
 		}).toString()}`;
 		const frontendUrl = `${getFrontendUrl(url)}?${paramsString}`;
-		const response = await fetch(frontendUrl);
+		const cookie = cookies.map((c) => `${c.name}=${c.value}`).join('; ');
+		const response = await fetch(frontendUrl, { headers: { cookie } });
 		if (!response.ok) {
 			throw new Error(
 				`Failed to fetch article JSON from ${url}: ${response.statusText}`,
@@ -115,10 +117,12 @@ const loadPage = async ({
 		},
 	);
 
+	const cookies = await page.context().cookies();
+
 	// If overrides exist, but no article fixture we fetch it from Frontend
 	const frontendArticle = await (overrides.article
 		? Promise.resolve(overrides.article)
-		: getFrontendArticle(path, queryParams));
+		: getFrontendArticle(path, cookies, queryParams));
 
 	// Apply the overrides to the article config and switches
 	const postData = {
