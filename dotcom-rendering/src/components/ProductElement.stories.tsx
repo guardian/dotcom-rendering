@@ -752,14 +752,6 @@ const product: Product = {
 			html: '<p><strong>It’s a shame that … </strong>there’s nowhere to stow the remote control when it’s not in use.</p>',
 			elementId: 'dfdb1862-d836-4950-ac8c-14dd4a446e1c',
 		},
-		{
-			_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
-			prefix: 'Related: ',
-			text: 'Beat the heat: 14 expert tips for keeping cool in hot weather',
-			elementId: '4ec187b3-d93b-4878-9f9d-96d2378b196f',
-			role: 'thumbnail',
-			url: 'https://www.theguardian.com/thefilter/2025/jun/19/how-to-keep-cool-hot-weather',
-		},
 	],
 };
 
