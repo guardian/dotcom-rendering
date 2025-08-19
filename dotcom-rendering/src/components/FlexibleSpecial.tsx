@@ -140,7 +140,7 @@ export const OneCardLayout = ({
 }: OneCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
-	console.log(card);
+
 	const {
 		headlineSizes,
 		imagePositionOnDesktop,
