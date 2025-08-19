@@ -196,8 +196,9 @@ const titleContainerStyle = css`
 
 const paragraphStyle = css`
 	${headlineMedium17}
-	color: ${palette.neutral[46]};
 `;
+
+// 	color: ${palette.neutral[46]};
 
 const titleStyle = css`
 	${headlineBold20};

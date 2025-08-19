@@ -10,6 +10,50 @@ import { ErrorSummary } from '@guardian/source-development-kitchen/react-compone
 import { Footer } from './ExpandableAtom/Footer';
 import { title } from 'process';
 import { TagPageAICarousel } from './TagPageAICarousel';
+import { ScrollableFeature } from './ScrollableFeature.importable';
+import { FeatureCard } from './FeatureCard';
+
+const card = {
+	format: {
+		design: 0,
+		display: 0,
+		theme: 2,
+	},
+	dataLinkName: 'news | group-0 | card-@1',
+	url: '/sport/2025/jul/09/christian-horner-sacked-by-red-bull-after-20-years-as-principal-at-f1-team',
+	headline:
+		'Christian Horner sacked by Red Bull after 20 years as principal at F1 team',
+	trailText:
+		'The Red Bull team principal Christian Horner has been sacked by the Formula One team after 20 years at the helm',
+	webPublicationDate: '2025-07-09T09:32:28.000Z',
+	supportingContent: [],
+	discussionApiUrl:
+		'https://discussion.code.dev-theguardian.com/discussion-api',
+	byline: 'Giles Richards',
+	showByline: false,
+	snapData: {},
+	isBoosted: false,
+	boostLevel: undefined,
+	isImmersive: false,
+	isCrossword: false,
+	isNewsletter: false,
+	showQuotedHeadline: false,
+	showLivePlayable: false,
+	isExternalLink: false,
+	showVideo: false,
+	image: {
+		src: 'https://media.guim.co.uk/b90da4c7724b3532c5ae2fb639d745afa5d8a563/334_0_3215_2572/master/3215.jpg',
+		altText: 'Christian Horner',
+	},
+};
+
+const containerPalette = undefined;
+const absoluteServerTimes = true;
+const imageLoading = 'eager';
+const aspectRatio = '4:5';
+const collectionId = 1;
+const isInHideTrailsAbTest = false;
+
 export type VignetteType =
 	| 'storySoFar'
 	| 'timeline'
@@ -20,6 +64,7 @@ export type VignetteType =
 export type Vignette = {
 	vignetteType: VignetteType;
 	title: string; //used in ssf or key question title
+	keyQuestion?: string; //used in key question
 	description?: string; //used in story so far or key question description
 	article?: {
 		//used as if you read one thing in ssf or pivotal article in dd
@@ -51,8 +96,9 @@ export type StorylineSample = {
 const paddingStyles = css`
 	padding-bottom: 20px;
 	padding-top: 10px;
-	margin-right: -400px;
+	margin-right: -320px;
 `;
+//adjust margin depending on the width of the screen
 
 const genData = {
 	earliestArticle: '2025-07-23T07:00:45Z',
@@ -120,7 +166,7 @@ const grid = css`
 	padding: 2rem;
 `;
 
-const card = css`
+const cardCss = css`
 	background: #fff;
 	border-radius: 16px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -129,27 +175,11 @@ const card = css`
 	flex-direction: column;
 `;
 
-const image = css`
-	width: 100%;
-	height: 200px;
-	object-fit: cover;
-`;
-
 const content = css`
 	padding: 1.5rem;
 	display: flex;
 	flex-direction: column;
 	gap: 0.75rem;
-`;
-
-const name = css`
-	font-size: 1.25rem;
-	font-weight: 600;
-`;
-
-const quote = css`
-	font-style: italic;
-	color: #444;
 `;
 
 const link = css`
@@ -163,18 +193,13 @@ const link = css`
 	}
 `;
 
-const credit = css`
-	font-size: 0.75rem;
-	color: #888;
-`;
-
 const NewsHighlights = ({ data }: { data: any }) => {
 	return (
 		<>
 			<div>{genData.otherNotes}</div>
 			<div css={grid}>
 				{genData.results.map((result: any, index: number) => (
-					<div key={index} css={card}>
+					<div key={index} css={cardCss}>
 						<div css={content}>
 							{result.title}
 							{result.description}
@@ -301,11 +326,11 @@ export const TagPageAI = ({ tag }: { tag?: string }) => {
 				vignetteType: 'deeperDive',
 				title: 'Deeper Dive into Key Themes',
 				keyQuote:
-					'The Belgian Grand Prix at Spa-Francorchamps is a testament to the enduring appeal of traditional circuits in the face of modern challenges.',
+					'"The Belgian Grand Prix at Spa-Francorchamps is a testament to the enduring appeal of traditional circuits in the face of modern challenges."',
 				article: {
 					url: 'https://www.theguardian.com/sport/2025/jul/25/red-bull-go-full-throttle-for-laurent-mekies-as-enthralling-new-era-begins-at-spa',
 					heading:
-						'Red Bull Racing enters a new era with Laurent Mekies at the helm',
+						'Red Bull Racing enters a new era with Laurent Mekies',
 					summary:
 						'Red Bull Racing embarks on a new chapter with Laurent Mekies as team principal, marking a significant shift in the team’s leadership.',
 				},
@@ -335,8 +360,10 @@ export const TagPageAI = ({ tag }: { tag?: string }) => {
 			{
 				vignetteType: 'keyQuestion',
 				title: 'Key Question for Fans',
-				description:
+				keyQuestion:
 					'What does the future hold for iconic circuits like Spa-Francorchamps in the evolving world of Formula 1?',
+				description:
+					'As F1 continues to evolve, the future of traditional circuits like Spa-Francorchamps remains uncertain. Will they adapt to modern demands or fade away?',
 				article: {
 					url: 'https://www.theguardian.com/sport/2025/jul/23/f1s-heart-and-soul-lies-in-spa-but-the-clamour-for-glamour-puts-it-at-risk',
 					heading: 'The future of Spa-Francorchamps in Formula 1',
@@ -376,7 +403,6 @@ export const TagPageAI = ({ tag }: { tag?: string }) => {
 	}) => {
 		return (
 			<div>
-				<h1>{storylineSample.storylineTitle}</h1>
 				<TagPageAICarousel
 					content={storylineSample}
 					hasNavigationBackgroundColour={false}
@@ -386,7 +412,11 @@ export const TagPageAI = ({ tag }: { tag?: string }) => {
 	};
 
 	return (
-		<div>
+		<div
+			css={css`
+				margin-bottom: 1rem;
+			`}
+		>
 			<div
 				css={css`
 					display: flex;
@@ -425,18 +455,82 @@ export const TagPageAI = ({ tag }: { tag?: string }) => {
 			{/* <h1>What are the key themes over the past week?</h1> */}
 			{/* <h1>Storyline: {sampleData.storylineTitle}</h1> */}
 			<div style={paddingStyles}>
-				<pre
+				{/* <pre
 					css={css`
 						white-space: pre-wrap;
 						word-break: break-word;
 						padding-bottom: 20px;
 					`}
-				>
-					{/* {localData} */}
+				> */}
 
-					{/* <NewsHighlights data={localData} /> */}
-					<StorylineCarousel storylineSample={storylineSample} />
-				</pre>
+				{/* <NewsHighlights data={localData} /> */}
+
+				<h1
+					css={css`
+						margin-bottom: 0.5rem;
+						color: rgb(184, 5, 5);
+						font-size: 24px;
+						font-family: Guardian Headline;
+						font-weight: 700;
+					`}
+				>
+					{storylineSample.storylineTitle}
+				</h1>
+				<div
+					css={css`
+						display: flex;
+						flex-direction: row;
+						gap: 1rem;
+					`}
+				>
+					<div
+						css={css`
+							width: 28%;
+						`}
+					>
+						<FeatureCard
+							linkTo={card.url}
+							format={card.format}
+							headlineText={card.headline}
+							byline={card.byline}
+							showByline={card.showByline}
+							webPublicationDate={card.webPublicationDate}
+							showClock={false}
+							image={card.image}
+							canPlayInline={false}
+							dataLinkName={card.dataLinkName}
+							discussionApiUrl={card.discussionApiUrl}
+							isExternalLink={card.isExternalLink}
+							containerPalette={containerPalette}
+							absoluteServerTimes={absoluteServerTimes}
+							imageLoading={imageLoading}
+							aspectRatio={aspectRatio}
+							imageSize="feature"
+							headlineSizes={{
+								desktop: 'xsmall',
+								tablet: 'xxsmall',
+								mobile: 'xsmall',
+							}}
+							trailText={undefined}
+							collectionId={collectionId}
+							isNewsletter={card.isNewsletter}
+							showQuotes={card.showQuotedHeadline}
+							showVideo={card.showVideo}
+							isInHideTrailsAbTest={isInHideTrailsAbTest}
+						/>
+					</div>
+					<div
+						css={css`
+							width: 72%;
+							height: 100%;
+						`}
+					>
+						<StorylineCarousel storylineSample={storylineSample} />
+					</div>
+				</div>
+				{/* <NewsHighlights data={localData} /> */}
+
+				{/* </pre> */}
 			</div>
 		</div>
 	);

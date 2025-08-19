@@ -33,6 +33,17 @@ export const ScrollableFeature = ({
 	collectionId,
 	isInHideTrailsAbTest,
 }: Props) => {
+	console.log('here');
+	console.log(
+		'ScrollableFeature',
+		trails,
+		containerPalette,
+		absoluteServerTimes,
+		imageLoading,
+		aspectRatio,
+		collectionId,
+		isInHideTrailsAbTest,
+	);
 	return (
 		<ScrollableCarousel
 			carouselLength={trails.length}
