@@ -18,6 +18,7 @@ import {
 	type TableOfContentsItem,
 } from '../model/enhanceTableOfContents';
 import { enhancePinnedPost } from '../model/pinnedPost';
+import { parse as parseStoryPackage, type StoryPackage } from '../storyPackage';
 import type { FEElement, ImageBlockElement, ImageForLightbox } from './content';
 import { type RenderingTarget } from './renderingTarget';
 
@@ -36,6 +37,7 @@ export type ArticleFields = {
 	frontendData: ArticleDeprecated;
 	display: ArticleDisplay;
 	theme: ArticleTheme;
+	storyPackage: StoryPackage | undefined;
 };
 
 export type Gallery = ArticleFields & {
@@ -105,6 +107,8 @@ export const enhanceArticleType = (
 		data.main,
 	)(data.mainMediaElements);
 
+	const storyPackage = parseStoryPackage(data.storyPackage);
+
 	if (format.design === ArticleDesign.Gallery) {
 		const design = ArticleDesign.Gallery;
 
@@ -141,6 +145,7 @@ export const enhanceArticleType = (
 				mainMediaElements,
 				data.trailPicture,
 			),
+			storyPackage,
 		};
 	}
 
@@ -148,6 +153,7 @@ export const enhanceArticleType = (
 		design: format.design,
 		display: format.display,
 		theme: format.theme,
+		storyPackage,
 		frontendData: {
 			...data,
 			mainMediaElements,

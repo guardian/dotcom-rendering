@@ -14,6 +14,7 @@ import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Caption } from '../components/Caption';
+import { Carousel } from '../components/Carousel.importable';
 import { Footer } from '../components/Footer';
 import { DesktopAdSlot, MobileAdSlot } from '../components/GalleryAdSlots';
 import { GalleryImage } from '../components/GalleryImage';
@@ -33,7 +34,7 @@ import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
 import { getAdPositions } from '../lib/getGalleryAdPositions';
 import type { NavType } from '../model/extract-nav';
-import { palette as themePalette } from '../palette';
+import { palette } from '../palette';
 import type { Gallery } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
@@ -54,10 +55,10 @@ interface AppProps extends Props {
 
 const headerStyles = css`
 	${grid.container}
-	background-color: ${themePalette('--article-inner-background')};
+	background-color: ${palette('--article-inner-background')};
 
 	${from.tablet} {
-		border-bottom: 1px solid ${themePalette('--article-border')};
+		border-bottom: 1px solid ${palette('--article-border')};
 	}
 `;
 
@@ -73,7 +74,7 @@ const metaAndDisclaimerContainer = css`
 			top: 0;
 			bottom: 0;
 			width: 1px;
-			background-color: ${themePalette('--article-border')};
+			background-color: ${palette('--article-border')};
 		}
 	}
 `;
@@ -81,11 +82,11 @@ const metaAndDisclaimerContainer = css`
 const galleryItemAdvertStyles = css`
 	${grid.paddedContainer}
 	grid-auto-flow: row dense;
-	background-color: ${themePalette('--article-inner-background')};
+	background-color: ${palette('--article-inner-background')};
 
 	${from.tablet} {
-		border-left: 1px solid ${themePalette('--article-border')};
-		border-right: 1px solid ${themePalette('--article-border')};
+		border-left: 1px solid ${palette('--article-border')};
+		border-right: 1px solid ${palette('--article-border')};
 	}
 `;
 
@@ -114,7 +115,7 @@ const galleryBorder = css`
 			top: 0;
 			bottom: 0;
 			width: 1px;
-			background-color: ${themePalette('--article-border')};
+			background-color: ${palette('--article-border')};
 		}
 	}
 
@@ -128,7 +129,7 @@ const galleryBorder = css`
 			top: 0;
 			bottom: 0;
 			width: 1px;
-			background-color: ${themePalette('--article-border')};
+			background-color: ${palette('--article-border')};
 		}
 	}
 `;
@@ -168,6 +169,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const renderAds = canRenderAds(frontendData);
+	const showMerchandisingHigh = isWeb && renderAds && !isLabs;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(frontendData);
 
@@ -228,7 +230,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 
 			<main
 				css={{
-					backgroundColor: themePalette('--article-background'),
+					backgroundColor: palette('--article-background'),
 				}}
 			>
 				<header css={headerStyles}>
@@ -362,14 +364,15 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					}
 				/>
 			</main>
-			{isWeb && renderAds && !isLabs && (
+			{/* More galleries container */}
+			{showMerchandisingHigh && (
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
 					padSides={false}
 					showTopBorder={false}
 					showSideBorders={false}
-					backgroundColour={themePalette('--ad-background')}
+					backgroundColour={palette('--ad-background')}
 					element="aside"
 				>
 					<AdSlot
@@ -379,6 +382,14 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					/>
 				</Section>
 			)}
+			<StoryPackage
+				absoluteServerTimes={switches['absoluteServerTimes'] ?? false}
+				discussionApiUrl={discussionApiUrl}
+				format={format}
+				renderingTarget={renderingTarget}
+				storyPackage={gallery.storyPackage}
+				topBorder={showMerchandisingHigh}
+			/>
 			{/** Most Popular container goes here */}
 			{isWeb && renderAds && !isLabs && (
 				<Section
@@ -386,7 +397,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					padSides={false}
 					showTopBorder={false}
 					showSideBorders={false}
-					backgroundColour={themePalette('--ad-background')}
+					backgroundColour={palette('--ad-background')}
 					element="aside"
 				>
 					<AdSlot position="merchandising" display={format.display} />
@@ -441,9 +452,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 			{isApps && (
 				<div
 					css={{
-						backgroundColor: themePalette(
-							'--apps-footer-background',
-						),
+						backgroundColor: palette('--apps-footer-background'),
 					}}
 				>
 					<Island priority="critical">
@@ -454,3 +463,40 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 		</>
 	);
 };
+
+const StoryPackage = ({
+	storyPackage,
+	format,
+	discussionApiUrl,
+	absoluteServerTimes,
+	renderingTarget,
+	topBorder,
+}: {
+	storyPackage: Gallery['storyPackage'];
+	format: ArticleFormat;
+	discussionApiUrl: string;
+	absoluteServerTimes: boolean;
+	renderingTarget: RenderingTarget;
+	topBorder: boolean;
+}) =>
+	storyPackage === undefined ? null : (
+		<Section
+			fullWidth={true}
+			backgroundColour={palette('--article-section-background')}
+			borderColour={palette('--onward-content-border')}
+			showTopBorder={topBorder}
+		>
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<Carousel
+					heading={storyPackage.heading}
+					trails={storyPackage.trails}
+					onwardsSource="more-on-this-story"
+					format={format}
+					leftColSize="compact"
+					discussionApiUrl={discussionApiUrl}
+					absoluteServerTimes={absoluteServerTimes}
+					renderingTarget={renderingTarget}
+				/>
+			</Island>
+		</Section>
+	);
