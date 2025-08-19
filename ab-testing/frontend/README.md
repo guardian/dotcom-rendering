@@ -4,7 +4,7 @@ This is a simple UI showing the key details of currently active A/B tests and th
 
 ## Developing
 
-Install dependencies with `deno install` (or `pnpm install`), then start a development server:
+Install dependencies with `deno install`, then start a development server:
 
 ```bash
 deno run dev

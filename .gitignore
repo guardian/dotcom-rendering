@@ -57,3 +57,6 @@ k6-v*arm64
 test-results/
 playwright-report/
 playwright/.cache/
+
+# svelte output
+ab-testing/frontend/output
