@@ -1,0 +1,52 @@
+import type { FEMediaAsset, FEMediaAtom } from '../frontend/feFront';
+import { getActiveMediaAtom } from './enhanceCards';
+
+describe('Enhance Cards', () => {
+	it('filters out m3u8 assets until supported by DCR', () => {
+		const isLoopingVideoTest = true;
+		const videoReplace = true;
+		const assets: FEMediaAsset[] = [
+			{
+				id: 'https://guim-example.co.uk/atomID-1.m3u8',
+				version: 1,
+				platform: 'Url',
+				mimeType: 'application/vnd.apple.mpegurl',
+			},
+			{
+				id: 'https://guim-example.co.uk/atomID-1.mp4',
+				version: 1,
+				platform: 'Url',
+				mimeType: 'video/mp4',
+			},
+		];
+		const mediaAtom: FEMediaAtom = {
+			id: 'atomID',
+			assets,
+			title: 'Example video',
+			duration: 15,
+			source: '',
+			posterImage: { allImages: [] },
+			trailImage: { allImages: [] },
+			expired: false,
+			activeVersion: 1,
+		};
+		const cardTrailImage = '';
+
+		expect(
+			getActiveMediaAtom(
+				isLoopingVideoTest,
+				videoReplace,
+				mediaAtom,
+				cardTrailImage,
+			),
+		).toEqual({
+			atomId: 'atomID',
+			duration: 15,
+			height: 400,
+			image: '',
+			type: 'LoopVideo',
+			videoId: 'https://guim-example.co.uk/atomID-1.mp4',
+			width: 500,
+		});
+	});
+});
