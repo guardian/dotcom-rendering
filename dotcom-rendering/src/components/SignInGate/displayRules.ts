@@ -33,6 +33,7 @@ export const isValidSection = (sectionId?: string): boolean => {
 		'help',
 		'guardian-live-australia',
 		'gnm-archive',
+		'thefilter',
 	];
 
 	// we check for invalid section by reducing the above array, and then NOT the result so we know
