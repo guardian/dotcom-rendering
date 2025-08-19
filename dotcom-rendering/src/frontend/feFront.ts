@@ -106,7 +106,7 @@ export type FEFrontCardStyle =
 	| 'DefaultCardstyle';
 
 /** @see https://github.com/guardian/frontend/blob/0bf69f55a/common/app/model/content/Atom.scala#L191-L196 */
-interface FEMediaAsset {
+export interface FEMediaAsset {
 	id: string;
 	version: number;
 	platform: string;
