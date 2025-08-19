@@ -26,7 +26,7 @@ export type LeftColProductCardProps = {
 };
 
 const card = css`
-	top: 0;
+	top: ${space[3]}px;
 	position: sticky;
 	display: none;
 	${from.wide} {

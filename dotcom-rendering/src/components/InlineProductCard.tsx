@@ -6,7 +6,6 @@ import {
 	textSans14,
 	textSans17,
 } from '@guardian/source/foundations';
-import { grid } from '../grid';
 import { palette } from '../palette';
 import { ProductLinkButton } from './ProductLinkButton';
 
@@ -16,7 +15,6 @@ export type Statistics = {
 };
 
 const card = css`
-	${grid.column.centre}
 	background-color: ${palette('--product-card-background')};
 	padding: ${space[4]}px;
 	column-gap: ${space[2]}px;
