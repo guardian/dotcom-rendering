@@ -84,14 +84,6 @@ const doesVideoHaveAudio = (video: HTMLVideoElement): boolean => {
 		!('webkitAudioDecodedByteCount' in video) &&
 		!('audioTracks' in video)
 	) {
-		// Gather data on what browsers do not support these properties.
-		window.guardian.modules.sentry.reportError(
-			new Error(
-				'Could not determine if video has audio. This is likely due to the browser not supporting the necessary properties.',
-			),
-			'loop-video',
-		);
-
 		return true;
 	}
 
