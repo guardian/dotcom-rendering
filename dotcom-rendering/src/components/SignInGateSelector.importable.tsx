@@ -375,9 +375,14 @@ const decideShowDefaultGate = (): ShowGateValues => {
 };
 
 const getGateDisplayCount = (): number => {
-	const rawValue = storage.local.getRaw('gate_display_count');
-	const count = parseInt(rawValue ?? '0', 10);
-	return count;
+	const count = parseInt(
+		storage.local.getRaw('gate_display_count') ?? '0',
+		10,
+	);
+	if (Number.isInteger(count)) {
+		return count;
+	}
+	return 0;
 };
 
 const incrementGateDisplayCount = () => {
