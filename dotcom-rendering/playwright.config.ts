@@ -40,12 +40,13 @@ export default defineConfig({
 			use: { ...devices['Desktop Chrome'] },
 		},
 	],
-	webServer: {
-		// On CI the server is already started so a no-op
-		command: isDev ? 'make dev' : ':',
-		url: ORIGIN,
-		reuseExistingServer: true,
-		stdout: 'pipe',
-		stderr: 'pipe',
-	},
+	webServer: isDev
+		? {
+				command: 'make dev',
+				url: ORIGIN,
+				reuseExistingServer: true,
+				stdout: 'pipe',
+				stderr: 'pipe',
+		  }
+		: undefined,
 });
