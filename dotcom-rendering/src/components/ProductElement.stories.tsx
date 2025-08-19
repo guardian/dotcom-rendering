@@ -19,7 +19,6 @@ const product2: Product = {
 		{ name: 'Remote control', value: 'Yes' },
 		{ name: 'Peak noise level on test', value: '50dB' },
 		{ name: 'Power use on top setting', value: '16W' },
-		{ name: 'Air speed on top setting', value: '4m/s' },
 	],
 	content: [
 		{
