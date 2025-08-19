@@ -192,16 +192,18 @@ const decideMediaAtomImage = (
  * @see https://github.com/guardian/frontend/pull/26247 for inspiration
  */
 
-const getActiveMediaAtom = (
+export const getActiveMediaAtom = (
 	isLoopingVideoTest: boolean,
 	videoReplace: boolean,
 	mediaAtom?: FEMediaAtom,
 	cardTrailImage?: string,
 ): MainMedia | undefined => {
 	if (mediaAtom) {
-		const asset = mediaAtom.assets.find(
-			({ version }) => version === mediaAtom.activeVersion,
-		);
+		const m3u8MimeType = 'application/vnd.apple.mpegurl';
+		const asset = mediaAtom.assets
+			// filter out m3u8 assets, as these are not yet supported by DCR
+			.filter((_) => _.mimeType !== m3u8MimeType)
+			.find(({ version }) => version === mediaAtom.activeVersion);
 
 		const image = decideMediaAtomImage(
 			videoReplace,
