@@ -13,7 +13,7 @@ test.describe('Signed out readers', () => {
 		await loadPage({
 			page,
 			path: '/Article',
-			overrides: { article: standardArticle },
+			overrides: { feFixture: standardArticle },
 		});
 
 		await waitForIsland(page, 'DiscussionWeb');

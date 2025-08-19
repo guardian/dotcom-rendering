@@ -17,7 +17,7 @@ type LoadPageOptions = {
 	overrides?: {
 		configOverrides?: Record<string, unknown>;
 		switchOverrides?: Record<string, unknown>;
-		article?: FEArticle;
+		feFixture?: FEArticle | FEFront;
 	};
 };
 
@@ -91,7 +91,7 @@ const validateJson = (path: string, json: unknown): FEArticle | FEFront => {
 	} else if (path.startsWith('/Front')) {
 		return validateAsFEFront(json);
 	}
-	throw new Error(`Unsupported URL for validating article: ${path}`);
+	throw new Error(`Unsupported URL for validating payload for: ${path}`);
 };
 
 /**
@@ -164,22 +164,22 @@ const loadPage = async ({
 
 	const cookies = await page.context().cookies();
 
-	// If overrides exist, but no article fixture we fetch it from Frontend
-	const frontendPage = await (overrides.article
-		? Promise.resolve(overrides.article)
+	// If overrides exist, but no fixture is provided we fetch it from Frontend
+	const frontendModel = await (overrides.feFixture
+		? Promise.resolve(overrides.feFixture)
 		: validateJson(
 				path,
 				await getFrontendJson(path, cookies, queryParams),
 		  ));
 
-	// Apply the overrides to the article config and switches
+	// Apply the config and switch overrides
 	const postData = {
-		...frontendPage,
+		...frontendModel,
 		config: {
-			...frontendPage.config,
+			...frontendModel.config,
 			...overrides.configOverrides,
 			switches: {
-				...frontendPage.config.switches,
+				...frontendModel.config.switches,
 				...overrides.switchOverrides,
 			},
 		},

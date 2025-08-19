@@ -3,12 +3,10 @@ import { defineConfig, devices } from '@playwright/test';
 const isDev = process.env.NODE_ENV !== 'production';
 
 /**
- * Server port
- * 	local development: 3030
- * 	CI: 9000
+ * The server port for local development or CI
  */
 export const PORT = isDev ? 3030 : 9000;
-export const ORIGIN = `http://localhost:9000`;
+export const ORIGIN = `http://localhost:${PORT}`;
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -23,7 +21,7 @@ export default defineConfig({
 	// Retry on CI only
 	retries: process.env.CI ? 3 : 1,
 	// Workers run tests files in parallel
-	workers: process.env.CI ? 4 : undefined,
+	workers: process.env.CI ? 4 : 2,
 	// Reporter to use. See https://playwright.dev/docs/test-reporters
 	reporter: [['line'], ['html', { open: 'never' }]],
 	// Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions
@@ -42,12 +40,12 @@ export default defineConfig({
 			use: { ...devices['Desktop Chrome'] },
 		},
 	],
-	// webServer: {
-	// 	// On CI the server is already started so a no-op
-	// 	command: ':',
-	// 	url: ORIGIN,
-	// 	reuseExistingServer: true,
-	// 	stdout: 'pipe',
-	// 	stderr: 'pipe',
-	// },
+	webServer: {
+		// On CI the server is already started so a no-op
+		command: isDev ? 'make dev' : ':',
+		url: ORIGIN,
+		reuseExistingServer: true,
+		stdout: 'pipe',
+		stderr: 'pipe',
+	},
 });

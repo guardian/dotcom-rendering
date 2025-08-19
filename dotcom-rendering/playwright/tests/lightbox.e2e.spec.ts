@@ -77,7 +77,7 @@ test.describe('Lightbox', () => {
 		await loadPage({
 			page,
 			path: '/Article',
-			overrides: { article: photoEssayArticle },
+			overrides: { feFixture: photoEssayArticle },
 		});
 
 		await expectToNotBeVisible(page, '#gu-lightbox');
@@ -102,7 +102,7 @@ test.describe('Lightbox', () => {
 		await loadPage({
 			page,
 			path: '/Article',
-			overrides: { article: photoEssayArticle },
+			overrides: { feFixture: photoEssayArticle },
 		});
 
 		await expectToNotBeVisible(page, '#gu-lightbox');
@@ -124,7 +124,7 @@ test.describe('Lightbox', () => {
 		await loadPage({
 			page,
 			path: '/Article',
-			overrides: { article: photoEssayArticle },
+			overrides: { feFixture: photoEssayArticle },
 		});
 
 		await page.locator('article img').first().click({ force: true });
@@ -173,7 +173,7 @@ test.describe('Lightbox', () => {
 		await loadPage({
 			page,
 			path: '/Article',
-			overrides: { article: photoEssayArticle },
+			overrides: { feFixture: photoEssayArticle },
 		});
 
 		await expectToNotBeVisible(page, '#gu-lightbox');
@@ -265,7 +265,7 @@ test.describe('Lightbox', () => {
 		await loadPage({
 			page,
 			path: '/Article',
-			overrides: { article: photoEssayArticle },
+			overrides: { feFixture: photoEssayArticle },
 		});
 
 		// eq(6) here means the 7th button is clicked (base zero)
@@ -308,7 +308,7 @@ test.describe('Lightbox', () => {
 		await loadPage({
 			page,
 			path: '/Article',
-			overrides: { article: photoEssayArticle },
+			overrides: { feFixture: photoEssayArticle },
 		});
 
 		await page.locator('button.open-lightbox').nth(1).click();
@@ -359,7 +359,7 @@ test.describe('Lightbox', () => {
 		await loadPage({
 			page,
 			path: '/Article',
-			overrides: { article: photoEssayArticle },
+			overrides: { feFixture: photoEssayArticle },
 		});
 
 		await page.locator('button.open-lightbox').nth(1).click();
@@ -405,7 +405,7 @@ test.describe('Lightbox', () => {
 		await loadPage({
 			page,
 			path: '/Article',
-			overrides: { article: LiveBlog },
+			overrides: { feFixture: LiveBlog },
 		});
 
 		await page.locator('button.open-lightbox').nth(1).click();
@@ -436,7 +436,7 @@ test.describe('Lightbox', () => {
 		await loadPage({
 			page,
 			path: '/Article',
-			overrides: { article: photoEssayArticle },
+			overrides: { feFixture: photoEssayArticle },
 		});
 
 		await page.locator('button.open-lightbox').nth(1).click();
@@ -470,7 +470,7 @@ test.describe('Lightbox', () => {
 		await loadPage({
 			page,
 			path: '/Article',
-			overrides: { article: photoEssayArticle },
+			overrides: { feFixture: photoEssayArticle },
 		});
 
 		await expectToNotBeVisible(page, '#gu-lightbox');
