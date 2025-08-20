@@ -30,24 +30,43 @@ const flexBasisStyles = ({
 		`;
 	}
 
+	if (!isBetaContainer) {
+		switch (imageSize) {
+			default:
+			case 'small':
+				return css`
+					flex-basis: 75%;
+					${between.tablet.and.desktop} {
+						flex-basis: 60%;
+					}
+					${from.desktop} {
+						flex-basis: 70%;
+					}
+				`;
+			case 'medium':
+				return css`
+					${from.tablet} {
+						flex-basis: 50%;
+					}
+				`;
+			case 'large':
+				return css`
+					${from.tablet} {
+						flex-basis: 34%;
+					}
+				`;
+			case 'jumbo':
+				return css`
+					${from.tablet} {
+						flex-basis: 25%;
+					}
+				`;
+		}
+	}
+
 	switch (imageSize) {
 		default:
 		case 'small':
-			return isBetaContainer
-				? css`
-						${from.tablet} {
-							flex-basis: 50%;
-						}
-				  `
-				: css`
-						flex-basis: 75%;
-						${between.tablet.and.desktop} {
-							flex-basis: 60%;
-						}
-						${from.desktop} {
-							flex-basis: 70%;
-						}
-				  `;
 		case 'medium':
 			return css`
 				${from.tablet} {
@@ -57,14 +76,24 @@ const flexBasisStyles = ({
 		case 'large':
 			return css`
 				${from.tablet} {
-					flex-basis: 34%;
+					flex-basis: 220px;
+				}
+				${from.desktop} {
+					flex-basis: 300px;
+				}
+			`;
+		case 'xlarge':
+			return css`
+				${from.tablet} {
+					flex-basis: 160px;
+				}
+				${from.desktop} {
+					flex-basis: 220px;
 				}
 			`;
 		case 'jumbo':
 			return css`
-				${from.tablet} {
-					flex-basis: 25%;
-				}
+				flex-basis: 100%;
 			`;
 	}
 };
