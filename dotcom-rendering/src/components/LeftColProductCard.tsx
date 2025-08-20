@@ -105,6 +105,7 @@ export const LeftColProductCard = ({
 					borderRadius: '6px',
 				}}
 			>
+				//todo -- make this a proper image generateSources() etc.
 				<img
 					src={image}
 					alt={productName}
@@ -117,9 +118,9 @@ export const LeftColProductCard = ({
 			</a>
 		)}
 		<div css={productInfoContainer}>
-			<span css={primaryHeading}>{brandName}</span>
-			<span css={secondaryHeading}>{productName}</span>
-			<span css={priceRowStyle}>
+			<div css={primaryHeading}>{brandName}</div>
+			<div css={secondaryHeading}>{productName}</div>
+			<div css={priceRowStyle}>
 				<strong>{price}</strong> from{' '}
 				<a
 					css={css`
@@ -137,7 +138,7 @@ export const LeftColProductCard = ({
 				>
 					{retailer}
 				</a>
-			</span>
+			</div>
 		</div>
 		<div css={buttonOverride}>
 			<ProductLinkButton
@@ -149,14 +150,16 @@ export const LeftColProductCard = ({
 				`}
 			></ProductLinkButton>
 		</div>
-		<div css={statisticsContainer}>
-			{statistics.map((statistic) => (
-				<Statistic
-					key={statistic.name}
-					name={statistic.name}
-					value={statistic.value}
-				/>
-			))}
-		</div>
+		{statistics.length > 0 && (
+			<div css={statisticsContainer}>
+				{statistics.map((statistic) => (
+					<Statistic
+						key={statistic.name}
+						name={statistic.name}
+						value={statistic.value}
+					/>
+				))}
+			</div>
+		)}
 	</div>
 );

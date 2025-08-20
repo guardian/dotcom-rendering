@@ -25,8 +25,10 @@ const linkButtonStyles = css`
 `;
 
 export const theme: Partial<ThemeButton> = {
-	backgroundPrimary: palette('--discussion-primary-button-background'),
-	backgroundPrimaryHover: palette('--discussion-button-background-hover'),
+	backgroundPrimary: palette('--product-button-primary-background'),
+	backgroundPrimaryHover: palette(
+		'--product-button-primary-background-hover',
+	),
 };
 
 export const ProductLinkButton = ({

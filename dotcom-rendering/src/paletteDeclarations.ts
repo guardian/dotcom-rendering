@@ -5358,6 +5358,15 @@ const discussionSubduedDark: PaletteFunction = () => sourcePalette.neutral[60];
 const discussionLinkLight: PaletteFunction = () => sourcePalette.brand[500];
 const discussionLinkDark: PaletteFunction = () => sourcePalette.brand[800];
 
+const productButtonPrimaryBackgroundLight: PaletteFunction = (format) =>
+	discussionPrimaryButtonBackgroundLight(format);
+const productButtonPrimaryBackgroundDark: PaletteFunction = (format) =>
+	discussionPrimaryButtonBackgroundDark(format);
+const productButtonPrimaryBackgroundHoverLight: PaletteFunction = (format) =>
+	discussionButtonHover(format);
+const productButtonPrimaryBackgroundHoverDark: PaletteFunction = (format) =>
+	discussionButtonHover(format);
+
 const discussionPrimaryButtonBackgroundLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
@@ -7404,6 +7413,14 @@ const paletteColours = {
 	'--privacy-text-supporting-subdued': {
 		light: privacyTextSupportingSubduedLight,
 		dark: privacyTextSupportingSubduedDark,
+	},
+	'--product-button-primary-background': {
+		light: productButtonPrimaryBackgroundLight,
+		dark: productButtonPrimaryBackgroundDark,
+	},
+	'--product-button-primary-background-hover': {
+		light: productButtonPrimaryBackgroundHoverLight,
+		dark: productButtonPrimaryBackgroundHoverDark,
 	},
 	'--product-card-background': {
 		light: productCardBackgroundLight,
