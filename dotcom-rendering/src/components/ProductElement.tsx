@@ -67,20 +67,22 @@ export const ProductElement = ({
 				position: relative;
 			`}
 		>
-			<h2
-				css={[
-					subheadingStyles(format),
-					css`
-						padding-left: 10px;
-						${grid.column.centre};
-					`,
-					borderStyles,
-				]}
-			>
-				<em>{product.primaryHeadline}:</em>
-				<br />
-				{product.secondaryHeadline}
-			</h2>
+			{(!!product.primaryHeadline || !!product.secondaryHeadline) && (
+				<h2
+					css={[
+						subheadingStyles(format),
+						css`
+							padding-left: 10px;
+							${grid.column.centre};
+						`,
+						borderStyles,
+					]}
+				>
+					<em>{product.primaryHeadline}:</em>
+					<br />
+					{product.secondaryHeadline}
+				</h2>
+			)}
 			<div
 				css={css`
 					//make full height of the container
