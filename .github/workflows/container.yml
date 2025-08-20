@@ -19,6 +19,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v4.5.0
+
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
 
@@ -36,7 +39,7 @@ jobs:
         uses: redhat-actions/buildah-build@v2.13
         with:
           image: dotcom-rendering
-          tags: ${{ github.sha }}
+          tags: ${{ github.sha }} ${{ env.GITHUB_REF_SLUG }}
           context: ./
           containerfiles: ./dotcom-rendering/Containerfile
 
