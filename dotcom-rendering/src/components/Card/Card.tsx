@@ -96,9 +96,14 @@ export type Props = {
 	showClock?: boolean;
 	mainMedia?: MainMedia;
 	/**
-	 * Note YouTube recommends a minimum width of 480px @see https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-youtube-player-size
-	 * At 300px or below, the player will begin to lose functionality e.g. volume controls being omitted.
-	 * Youtube requires a minimum width 200px.
+	 * For interactive media (e.g., video or slideshow), certain card sizes are restricted from displaying
+	 * the interactive content because controls may be unavailable or inaccessible at those sizes.
+	 *
+	 * Note:
+	 * - YouTube recommends a minimum embed width of 480px
+	 *   @see https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-youtube-player-size
+	 * - At widths of 300px or below, the player may lose functionality (e.g., volume controls may be omitted).
+	 * - YouTube requires an absolute minimum width of 200px.
 	 */
 	canPlayInline?: boolean;
 	kickerText?: string;
@@ -281,7 +286,9 @@ const getMedia = ({
 			mainMedia,
 		} as const;
 	}
-	if (slideshowImages) return { type: 'slideshow', slideshowImages } as const;
+	if (slideshowImages && canPlayInline) {
+		return { type: 'slideshow', slideshowImages } as const;
+	}
 	if (avatarUrl) return { type: 'avatar', avatarUrl } as const;
 	if (
 		mainMedia?.type === 'Audio' &&
@@ -353,7 +360,7 @@ export const Card = ({
 	avatarUrl,
 	showClock,
 	mainMedia,
-	canPlayInline,
+	canPlayInline = false,
 	kickerText,
 	showPulsingDot,
 	starRating,

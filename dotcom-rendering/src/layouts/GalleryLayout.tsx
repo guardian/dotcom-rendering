@@ -7,6 +7,8 @@ import {
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { Fragment } from 'react';
+import { AdPlaceholder } from '../components/AdPlaceholder.apps';
+import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -14,6 +16,7 @@ import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Caption } from '../components/Caption';
+import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { DesktopAdSlot, MobileAdSlot } from '../components/GalleryAdSlots';
 import { GalleryImage } from '../components/GalleryImage';
@@ -31,7 +34,6 @@ import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
-import { getAdPositions } from '../lib/getGalleryAdPositions';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { Gallery } from '../types/article';
@@ -171,9 +173,8 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(frontendData);
 
-	const adPositions: number[] = renderAds
-		? getAdPositions(gallery.images)
-		: [];
+	const showComments =
+		frontendData.isCommentable && !frontendData.config.isPaidContent;
 
 	return (
 		<>
@@ -231,6 +232,11 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					backgroundColor: themePalette('--article-background'),
 				}}
 			>
+				{isApps && renderAds && (
+					<Island priority="critical">
+						<AdPortals />
+					</Island>
+				)}
 				<header css={headerStyles}>
 					<MainMediaGallery
 						mainMedia={gallery.mainMedia}
@@ -310,46 +316,56 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						) : null}
 					</div>
 				</header>
-				{gallery.images.map((element, idx) => {
-					const index = idx + 1;
-					const shouldShowAds = adPositions.includes(index);
-
+				{gallery.bodyElements.map((element, index) => {
+					const isImage =
+						element._type ===
+						'model.dotcomrendering.pageElements.ImageBlockElement';
+					const shouldShowAds =
+						element._type ===
+						'model.dotcomrendering.pageElements.AdPlaceholderBlockElement';
 					return (
-						<Fragment key={element.elementId}>
-							<GalleryImage
-								image={element}
-								format={format}
-								pageId={frontendData.pageId}
-								webTitle={frontendData.webTitle}
-								renderingTarget={props.renderingTarget}
-							/>
-							{isWeb && shouldShowAds && (
-								<div css={galleryItemAdvertStyles}>
-									<div css={galleryInlineAdContainerStyles}>
-										<Hide until="tablet">
-											<DesktopAdSlot
-												renderAds={renderAds}
-												adSlotIndex={adPositions.indexOf(
-													index,
-												)}
-											/>
-										</Hide>
-										<Hide from="tablet">
-											<MobileAdSlot
-												renderAds={renderAds}
-												adSlotIndex={adPositions.indexOf(
-													index,
-												)}
-											/>
-										</Hide>
-									</div>
-									<div css={galleryBorder}></div>
-								</div>
+						<Fragment key={isImage ? element.elementId : index}>
+							{isImage && (
+								<GalleryImage
+									image={element}
+									format={format}
+									pageId={frontendData.pageId}
+									webTitle={frontendData.webTitle}
+									renderingTarget={props.renderingTarget}
+								/>
+							)}
+							{shouldShowAds && renderAds && (
+								<>
+									{isWeb && (
+										<div css={galleryItemAdvertStyles}>
+											<div
+												css={
+													galleryInlineAdContainerStyles
+												}
+											>
+												<Hide until="tablet">
+													<DesktopAdSlot
+														renderAds={renderAds}
+														adSlotIndex={index}
+													/>
+												</Hide>
+												<Hide from="tablet">
+													<MobileAdSlot
+														renderAds={renderAds}
+														adSlotIndex={index}
+													/>
+												</Hide>
+											</div>
+											<div css={galleryBorder}></div>
+										</div>
+									)}
+									{isApps && <AdPlaceholder />}
+								</>
 							)}
 						</Fragment>
 					);
 				})}
-				;
+
 				<SubMeta
 					format={format}
 					subMetaKeywordLinks={frontendData.subMetaKeywordLinks}
@@ -376,6 +392,36 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						data-print-layout="hide"
 						position="merchandising-high"
 						display={format.display}
+					/>
+				</Section>
+			)}
+			{/** More Galleries container goes here */}
+			{showComments && (
+				<Section
+					fullWidth={true}
+					sectionId="comments"
+					element="section"
+					backgroundColour={themePalette(
+						'--discussion-section-background',
+					)}
+					borderColour={themePalette('--article-border')}
+					fontColour={themePalette('--discussion-text')}
+				>
+					<DiscussionLayout
+						discussionApiUrl={frontendData.config.discussionApiUrl}
+						shortUrlId={frontendData.config.shortUrlId}
+						format={format}
+						discussionD2Uid={frontendData.config.discussionD2Uid}
+						discussionApiClientHeader={
+							frontendData.config.discussionApiClientHeader
+						}
+						enableDiscussionSwitch={
+							!!frontendData.config.switches
+								.enableDiscussionSwitch
+						}
+						isAdFreeUser={frontendData.isAdFreeUser}
+						shouldHideAds={frontendData.shouldHideAds}
+						idApiUrl={frontendData.config.idApiUrl}
 					/>
 				</Section>
 			)}
