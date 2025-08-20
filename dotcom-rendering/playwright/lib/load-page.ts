@@ -39,8 +39,8 @@ const getFrontendJsonUrl = (path: string) => {
 };
 
 /**
- * @param path The Frontend URL to fetch the JSON payload
- *		e.g. `https://www.theguardian.com/world/2025/aug/19/the-big-church-move-sweden-kiruna-kyrka`
+ * @param path The path for a DCR endpoint path
+ *		e.g. `/Article/https://www.theguardian.com/world/2025/aug/19/the-big-church-move-sweden-kiruna-kyrka`
  * @param cookies Cookies to send with the request
  *		e.g. `GU_EDITION=US`
  * @param queryParams Query parameters to append to the request
