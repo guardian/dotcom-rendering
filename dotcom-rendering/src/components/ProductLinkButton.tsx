@@ -1,7 +1,10 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import type { ThemeButton } from '@guardian/source/react-components';
+import type {
+	ButtonPriority,
+	ThemeButton,
+} from '@guardian/source/react-components';
 import {
 	LinkButton,
 	SvgArrowRightStraight,
@@ -13,6 +16,7 @@ type ProductLinkButtonProps = {
 	url: string;
 	size?: 'default' | 'small';
 	cssOverrides?: SerializedStyles;
+	priority?: ButtonPriority;
 };
 
 const linkButtonStyles = css`
@@ -29,6 +33,9 @@ export const theme: Partial<ThemeButton> = {
 	backgroundPrimaryHover: palette(
 		'--product-button-primary-background-hover',
 	),
+	// todo: make a new palette variable for this
+	textTertiary: palette('--product-button-primary-background'),
+	borderTertiary: palette('--product-button-primary-background'),
 };
 
 export const ProductLinkButton = ({
@@ -36,6 +43,7 @@ export const ProductLinkButton = ({
 	url,
 	size = 'default',
 	cssOverrides,
+	priority = 'primary',
 }: ProductLinkButtonProps) => {
 	return (
 		<LinkButton
@@ -43,6 +51,7 @@ export const ProductLinkButton = ({
 			rel="sponsored noreferrer noopener"
 			target="_blank"
 			iconSide="right"
+			priority={priority}
 			aria-label={`Open ${label} in a new tab`}
 			icon={<SvgArrowRightStraight />}
 			theme={theme}
