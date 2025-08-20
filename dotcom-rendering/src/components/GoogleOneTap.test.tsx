@@ -1,58 +1,90 @@
 import { getRedirectUrl, initializeFedCM } from './GoogleOneTap.importable';
 
 const mockWindow = ({
-	replace,
 	get,
 	enableFedCM = true,
 }: {
-	replace: jest.Mock;
 	get: jest.Mock;
 	enableFedCM?: boolean;
-}) =>
-	Object.defineProperty(globalThis, 'window', {
-		value: {
-			location: {
-				href: 'https://www.theguardian.com/uk',
-				hostname: 'm.code.theguardian.com',
-				replace,
-			},
-			navigator: { credentials: { get } },
-			...(enableFedCM ? { IdentityCredential: 'mock value' } : {}),
+}) => {
+	const form = {
+		submit: jest.fn(),
+		appendChild: jest.fn(),
+		method: undefined,
+		action: undefined,
+	};
+	const input = {
+		submit: jest.fn(),
+		type: undefined,
+		name: undefined,
+		value: undefined,
+	};
+
+	const window = {
+		location: {
+			href: 'https://www.theguardian.com/uk',
+			hostname: 'm.code.theguardian.com',
 		},
+		navigator: { credentials: { get } },
+		...(enableFedCM ? { IdentityCredential: 'mock value' } : {}),
+	};
+
+	const document = {
+		createElement: jest.fn((element) => {
+			if (element === 'form') {
+				return form;
+			} else if (element === 'input') {
+				return input;
+			} else {
+				throw new Error(`Unsupported element: ${element}`);
+			}
+		}),
+		addEventListener: jest.fn(),
+		body: {
+			appendChild: jest.fn(),
+		},
+	};
+
+	Object.defineProperty(globalThis, 'window', {
+		value: window,
 		writable: true,
 	});
+	Object.defineProperty(globalThis, 'document', {
+		value: document,
+		writable: true,
+	});
+
+	return { form, input };
+};
 
 describe('GoogleOneTap', () => {
 	it('should return the correct signin URL after constructing it with the provided stage and token', () => {
 		expect(
 			getRedirectUrl({
 				stage: 'PROD',
-				token: 'test-token',
 				currentLocation: 'https://www.theguardian.com/uk',
 			}),
 		).toEqual(
-			'https://profile.theguardian.com/signin/google?token=test-token&returnUrl=https%3A%2F%2Fwww.theguardian.com%2Fuk',
+			'https://profile.theguardian.com/signin/google-one-tap?returnUrl=https%3A%2F%2Fwww.theguardian.com%2Fuk',
 		);
 
 		expect(
 			getRedirectUrl({
 				stage: 'CODE',
-				token: 'test-token',
 				currentLocation: 'https://m.code.dev-theguardian.com/uk',
 			}),
 		).toEqual(
-			'https://profile.code.dev-theguardian.com/signin/google?token=test-token&returnUrl=https%3A%2F%2Fm.code.dev-theguardian.com%2Fuk',
+			'https://profile.code.dev-theguardian.com/signin/google-one-tap?returnUrl=https%3A%2F%2Fm.code.dev-theguardian.com%2Fuk',
 		);
 
 		expect(
 			getRedirectUrl({
 				stage: 'DEV',
-				token: 'test-token',
 				currentLocation:
 					'http://localhost/Front/https://m.code.dev-theguardian.com/uk',
 			}),
 		).toEqual(
-			'https://profile.thegulocal.com/signin/google?token=test-token&returnUrl=http%3A%2F%2Flocalhost%2FFront%2Fhttps%3A%2F%2Fm.code.dev-theguardian.com%2Fuk',
+			'https://profile.thegulocal.com/signin/google-one-tap?returnUrl=http%3A%2F%2Flocalhost%2FFront%2Fhttps%3A%2F%2Fm.code.dev-theguardian.com%2Fuk',
 		);
 	});
 
@@ -60,31 +92,23 @@ describe('GoogleOneTap', () => {
 		const navigatorGet = jest.fn(() =>
 			Promise.resolve({ token: 'test-token' }),
 		);
-		const locationReplace = jest.fn();
 
-		mockWindow({
+		const { form, input } = mockWindow({
 			get: navigatorGet,
-			replace: locationReplace,
 		});
 
 		await initializeFedCM({ isSignedIn: false });
 
-		expect(navigatorGet).toHaveBeenCalledWith({
-			identity: {
-				context: 'continue',
-				providers: [
-					{
-						clientId: '774465807556.apps.googleusercontent.com',
-						configURL: 'https://accounts.google.com/gsi/fedcm.json',
-					},
-				],
-			},
-			mediation: 'required',
-		});
-
-		expect(locationReplace).toHaveBeenCalledWith(
-			'https://profile.theguardian.com/signin/google?token=test-token&returnUrl=https%3A%2F%2Fwww.theguardian.com%2Fuk',
+		expect(form.action).toBe(
+			'https://profile.theguardian.com/signin/google-one-tap?returnUrl=https%3A%2F%2Fwww.theguardian.com%2Fuk',
 		);
+		expect(form.method).toBe('POST');
+
+		expect(input.type).toBe('hidden');
+		expect(input.name).toBe('token');
+		expect(input.value).toBe('test-token');
+
+		expect(form.submit).toHaveBeenCalled();
 	});
 
 	it('should initializeFedCM and not redirect to Gateway with token on failure', async () => {
@@ -92,11 +116,9 @@ describe('GoogleOneTap', () => {
 		error.name = 'NetworkError';
 
 		const navigatorGet = jest.fn(() => Promise.reject(error));
-		const locationReplace = jest.fn();
 
-		mockWindow({
+		const { form } = mockWindow({
 			get: navigatorGet,
-			replace: locationReplace,
 		});
 
 		await initializeFedCM({ isSignedIn: false });
@@ -115,7 +137,7 @@ describe('GoogleOneTap', () => {
 		});
 
 		// Don't redirect whenever there is a "NetworkError" (aka user declined prompt)
-		expect(locationReplace).not.toHaveBeenCalled();
+		expect(form.submit).not.toHaveBeenCalled();
 	});
 
 	it('should initializeFedCM and throw error when unexpected', async () => {
@@ -123,11 +145,9 @@ describe('GoogleOneTap', () => {
 		error.name = 'DOMException';
 
 		const navigatorGet = jest.fn(() => Promise.reject(error));
-		const locationReplace = jest.fn();
 
-		mockWindow({
+		const { form } = mockWindow({
 			get: navigatorGet,
-			replace: locationReplace,
 		});
 
 		await expect(initializeFedCM({ isSignedIn: false })).rejects.toThrow(
@@ -148,52 +168,46 @@ describe('GoogleOneTap', () => {
 		});
 
 		// Don't redirect whenever there is an unexpected error
-		expect(locationReplace).not.toHaveBeenCalled();
+		expect(form.submit).not.toHaveBeenCalled();
 	});
 
 	it('should not initializeFedCM when FedCM is unsupported', async () => {
 		const navigatorGet = jest.fn();
-		const locationReplace = jest.fn();
 
-		mockWindow({
+		const { form } = mockWindow({
 			get: navigatorGet,
-			replace: locationReplace,
 			enableFedCM: false,
 		});
 
 		await initializeFedCM({ isSignedIn: false });
 
 		expect(navigatorGet).not.toHaveBeenCalled();
-		expect(locationReplace).not.toHaveBeenCalled();
+		expect(form.submit).not.toHaveBeenCalled();
 	});
 
 	it('should not initializeFedCM when user is signed in', async () => {
 		const navigatorGet = jest.fn();
-		const locationReplace = jest.fn();
 
-		mockWindow({
+		const { form } = mockWindow({
 			get: navigatorGet,
-			replace: locationReplace,
 		});
 
 		await initializeFedCM({ isSignedIn: true });
 
 		expect(navigatorGet).not.toHaveBeenCalled();
-		expect(locationReplace).not.toHaveBeenCalled();
+		expect(form.submit).not.toHaveBeenCalled();
 	});
 
 	it('should not initializeFedCM when user is not in test', async () => {
 		const navigatorGet = jest.fn();
-		const locationReplace = jest.fn();
 
-		mockWindow({
+		const { form } = mockWindow({
 			get: navigatorGet,
-			replace: locationReplace,
 		});
 
 		await initializeFedCM({ isSignedIn: true });
 
 		expect(navigatorGet).not.toHaveBeenCalled();
-		expect(locationReplace).not.toHaveBeenCalled();
+		expect(form.submit).not.toHaveBeenCalled();
 	});
 });

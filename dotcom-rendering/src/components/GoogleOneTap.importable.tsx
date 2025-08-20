@@ -44,11 +44,9 @@ const getStage = (hostname: string): StageType => {
 
 export const getRedirectUrl = ({
 	stage,
-	token,
 	currentLocation,
 }: {
 	stage: StageType;
-	token: string;
 	currentLocation: string;
 }): string => {
 	const profileDomain = {
@@ -57,11 +55,10 @@ export const getRedirectUrl = ({
 		DEV: 'https://profile.thegulocal.com',
 	}[stage];
 	const queryParams = new URLSearchParams({
-		token,
 		returnUrl: currentLocation,
 	});
 
-	return `${profileDomain}/signin/google?${queryParams.toString()}`;
+	return `${profileDomain}/signin/google-one-tap?${queryParams.toString()}`;
 };
 
 // TODO: Do we want to use different Google Client IDs for One Tap than we use for social sign in?
@@ -85,6 +82,32 @@ const getProviders = (stage: StageType): IdentityProviderConfig[] => {
 				},
 			];
 	}
+};
+
+/**
+ * Submits the Google One Tap token to the Gateway.
+ *
+ * This is done via a form submission in order to redirect the user to Gateway
+ * in a POST request. This way we avoid including the token in the URL,
+ * which could be logged or cached and potentially expose
+ * the user's Google One Tap token.
+ *
+ * @param {string} url - The URL to submit the form to.
+ * @param {string} token - The Google One Tap token to submit.
+ */
+const submitGoogleOneTapToken = (url: string, token: string) => {
+	const form = document.createElement('form');
+	form.method = 'POST';
+	form.action = url;
+
+	const tokenInput = document.createElement('input');
+	tokenInput.type = 'hidden';
+	tokenInput.name = 'token';
+	tokenInput.value = token;
+	form.appendChild(tokenInput);
+	document.body.appendChild(form);
+
+	form.submit();
 };
 
 export const initializeFedCM = async ({
@@ -166,12 +189,9 @@ export const initializeFedCM = async ({
 			credentials,
 		});
 
-		window.location.replace(
-			getRedirectUrl({
-				stage,
-				token: credentials.token,
-				currentLocation: window.location.href,
-			}),
+		submitGoogleOneTapToken(
+			getRedirectUrl({ stage, currentLocation: window.location.href }),
+			credentials.token,
 		);
 	} else {
 		// TODO: Track Ophan "FedCM" skip event here.
