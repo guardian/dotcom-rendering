@@ -19,8 +19,8 @@ const calculateDistanceFromTop = (collection: HTMLElement) => {
 
 const reportInsertEvent = (elements: HTMLElement[]) => {
 	for (const [index, element] of elements.entries()) {
-		const sectionName = element.id;
-		if (sectionName === '') continue;
+		const sectionName = element.getAttribute('data-component');
+		if (sectionName === null) continue;
 
 		const ophanComponentEvent: ComponentEvent = {
 			component: {
@@ -48,6 +48,9 @@ const reportInsertEvent = (elements: HTMLElement[]) => {
 };
 
 const reportViewEvent = (element: HTMLElement) => {
+	const sectionName = element.getAttribute('data-component');
+	if (sectionName === null) return;
+
 	const ophanComponentEvent: ComponentEvent = {
 		component: {
 			componentType: 'CONTAINER',
@@ -58,7 +61,7 @@ const reportViewEvent = (element: HTMLElement) => {
 			 * - The total height of the page in pixels
 			 */
 			labels: [
-				element.id,
+				sectionName,
 				calculateDistanceFromTop(element),
 				document.body.offsetHeight.toString(),
 			],
