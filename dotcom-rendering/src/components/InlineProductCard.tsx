@@ -175,14 +175,16 @@ export const InlineProductCard = ({
 				)}
 			</div>
 		</div>
-		<div css={statisticsContainer}>
-			{statistics.map((statistic) => (
-				<Statistic
-					key={statistic.name}
-					name={statistic.name}
-					value={statistic.value}
-				/>
-			))}
-		</div>
+		{statistics.length > 0 && (
+			<div css={statisticsContainer}>
+				{statistics.map((statistic) => (
+					<Statistic
+						key={statistic.name}
+						name={statistic.name}
+						value={statistic.value}
+					/>
+				))}
+			</div>
+		)}
 	</div>
 );
