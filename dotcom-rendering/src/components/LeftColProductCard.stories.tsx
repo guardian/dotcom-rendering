@@ -40,3 +40,7 @@ const sampleProductCard: LeftColProductCardProps = {
 };
 
 export const Default = () => <LeftColProductCard {...sampleProductCard} />;
+
+export const WithNoStatistics = () => (
+	<LeftColProductCard {...sampleProductCard} statistics={[]} />
+);
