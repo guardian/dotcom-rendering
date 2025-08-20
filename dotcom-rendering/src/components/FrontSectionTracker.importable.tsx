@@ -30,12 +30,14 @@ const reportInsertEvent = (elements: HTMLElement[]) => {
 				 * Labels:
 				 * - The name of the collection
 				 * - The number of the collection in the list (the top collection is 1)
-				 * - The distance from the top of the collection to the top of the page
+				 * - The distance from the top of the collection to the top of the page in pixels
+				 * - The total height of the page in pixels
 				 */
 				labels: [
 					sectionName,
 					(index + 1).toString(),
 					calculateDistanceFromTop(element),
+					document.body.offsetHeight.toString(),
 				],
 			},
 			action: 'INSERT',
@@ -52,9 +54,14 @@ const reportViewEvent = (element: HTMLElement) => {
 			/**
 			 * Labels:
 			 * - The name of the collection
-			 * - The distance from the top of the collection to the top of the page
+			 * - The distance from the top of the collection to the top of the page in pixels
+			 * - The total height of the page in pixels
 			 */
-			labels: [element.id, calculateDistanceFromTop(element)],
+			labels: [
+				element.id,
+				calculateDistanceFromTop(element),
+				document.body.offsetHeight.toString(),
+			],
 		},
 		action: 'VIEW',
 	};
