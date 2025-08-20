@@ -34,9 +34,6 @@
 	"pnpm": {
 		"patchedDependencies": {
 			"webpack-manifest-plugin@5.0.0": "patches/webpack-manifest-plugin@5.0.0.patch"
-		},
-		"overrides": {
-			"@guardian/support-dotcom-components@7.7.0>@guardian/ophan-tracker-js": "2.4.1"
 		}
 	}
 }
