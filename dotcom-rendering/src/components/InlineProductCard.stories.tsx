@@ -30,9 +30,14 @@ export default meta;
 
 const sampleProductCard: InlineProductCardProps = {
 	image: 'https://i.guim.co.uk/img/media/d8755abe62a318b62e2736b98383bf11762d6c91/0_0_2562_2562/master/2562.jpg?width=620&dpr=2&s=none&crop=none',
-	url: 'https://go.skimresources.com/?id=114047X1572903&url=https%3A%2F%2Fwww.waitrose.com%2Fecom%2Fproducts%2Fkenko-mayonnaise%2F424830-807548-807549&sref=https://www.theguardian.com/thefilter/2025/jun/07/best-supermarket-mayonnaise-tom-hunt&xcust=referrer%7Cwww.theguardian.com%7CaccountId%7C114047X1572903',
-	price: '£4.40',
-	retailer: 'Waitrose',
+	primaryUrl:
+		'https://go.skimresources.com/?id=114047X1572903&url=https%3A%2F%2Fwww.waitrose.com%2Fecom%2Fproducts%2Fkenko-mayonnaise%2F424830-807548-807549&sref=https://www.theguardian.com/thefilter/2025/jun/07/best-supermarket-mayonnaise-tom-hunt&xcust=referrer%7Cwww.theguardian.com%7CaccountId%7C114047X1572903',
+	primaryCTA: '£4.40 for 300g at Waitrose',
+	primaryPrice: '£4.40',
+	primaryRetailer: 'Waitrose',
+	secondaryCTA: '£5.00 at Ocado',
+	secondaryUrl:
+		'https://www.ocado.com/products/kenko-japanese-mayonnaise/534467011',
 	brandName: 'Kenko',
 	productName: 'Japanese mayonnaise',
 	statistics: [

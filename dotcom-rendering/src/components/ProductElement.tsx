@@ -19,6 +19,7 @@ export type Product = {
 	url: string;
 	price: string;
 	retailer: string;
+	cta: string;
 	statistics: {
 		name: string;
 		value: string;
@@ -155,9 +156,10 @@ export const ProductElement = ({
 					brandName={product.brandName}
 					productName={product.productName}
 					image={product.image}
-					url={product.url}
-					price={product.price}
-					retailer={product.retailer}
+					primaryUrl={product.url}
+					primaryPrice={product.price}
+					primaryRetailer={product.retailer}
+					primaryCTA={product.cta}
 					statistics={product.statistics}
 				/>
 			</div>

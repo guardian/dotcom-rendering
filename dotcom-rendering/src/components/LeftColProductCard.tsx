@@ -84,6 +84,8 @@ const Statistic = ({ name, value }: Statistics) => (
 	</div>
 );
 
+//todo -- make this a proper image generateSources() etc.
+
 export const LeftColProductCard = ({
 	brandName,
 	productName,
@@ -105,7 +107,6 @@ export const LeftColProductCard = ({
 					borderRadius: '6px',
 				}}
 			>
-				//todo -- make this a proper image generateSources() etc.
 				<img
 					src={image}
 					alt={productName}

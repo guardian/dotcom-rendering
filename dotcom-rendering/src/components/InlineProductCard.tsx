@@ -22,7 +22,7 @@ const card = css`
 	max-width: 100%;
 	min-width: 100%;
 	row-gap: ${space[4]}px;
-	grid-template-columns: 117px 1fr;
+	grid-template-columns: 1fr 1fr;
 	> * strong {
 		font-weight: 700;
 	}
@@ -36,9 +36,12 @@ export type InlineProductCardProps = {
 	brandName: string;
 	productName: string;
 	image: string;
-	url: string;
-	price: string;
-	retailer: string;
+	primaryCTA: string;
+	primaryUrl: string;
+	primaryPrice: string;
+	primaryRetailer: string;
+	secondaryCTA?: string;
+	secondaryUrl?: string;
 	statistics: Statistics[];
 };
 
@@ -85,16 +88,23 @@ export const InlineProductCard = ({
 	brandName,
 	productName,
 	image,
-	url,
-	price,
-	retailer,
+	primaryCTA,
+	primaryUrl,
+	primaryPrice,
+	primaryRetailer,
+	secondaryCTA,
+	secondaryUrl,
 	statistics,
 }: InlineProductCardProps) => (
 	<div css={card}>
-		<div>
+		<div
+			css={css`
+				width: 165px;
+			`}
+		>
 			{!!image && (
 				<a
-					href={url}
+					href={primaryUrl}
 					target="_blank"
 					rel="noopener noreferrer"
 					style={{
@@ -109,7 +119,6 @@ export const InlineProductCard = ({
 						css={{
 							width: '100%',
 							borderRadius: '6px',
-							display: 'block',
 						}}
 					/>
 				</a>
@@ -119,7 +128,7 @@ export const InlineProductCard = ({
 			<span css={primaryHeading}>{brandName}</span>
 			<span css={secondaryHeading}>{productName}</span>
 			<span css={priceRowStyle}>
-				<strong>{price}</strong> from{' '}
+				<strong>{primaryPrice}</strong> from{' '}
 				<a
 					css={css`
 						color: ${palette('--article-text')};
@@ -132,18 +141,44 @@ export const InlineProductCard = ({
 								${palette('--article-text')};
 						}
 					`}
-					href={url}
+					href={primaryUrl}
 				>
-					{retailer}
+					{primaryRetailer}
 				</a>
 			</span>
-			<ProductLinkButton
-				label={'Shop Now'}
-				size={'small'}
-				url={url}
-			></ProductLinkButton>
 		</div>
-
+		<div
+			css={css`
+				grid-column: span 2;
+			`}
+		>
+			<div
+				css={css`
+					padding-bottom: 10px;
+					width: 100%;
+				`}
+			>
+				<ProductLinkButton
+					label={primaryCTA}
+					url={primaryUrl}
+					cssOverrides={css`
+						width: 100%;
+					`}
+				></ProductLinkButton>
+			</div>
+			<div>
+				{!!secondaryCTA && !!secondaryUrl && (
+					<ProductLinkButton
+						cssOverrides={css`
+							width: 100%;
+						`}
+						label={secondaryCTA}
+						url={secondaryUrl}
+						priority={'tertiary'}
+					/>
+				)}
+			</div>
+		</div>
 		<div css={statisticsContainer}>
 			{statistics.map((statistic) => (
 				<Statistic

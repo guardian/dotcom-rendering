@@ -10,6 +10,7 @@ const product2: Product = {
 	productName: 'Devola 16" Desk Fan',
 	image: 'https://i.guim.co.uk/img/media/52cb96deaf8a5dc676bc5cf8cc50a94a5cadcb66/1000_0_3000_3000/master/3000.jpg?width=620&dpr=2&s=none&crop=none',
 	url: 'https://www.amazon.co.uk/Devola-16-Inch-Desk-Fan/dp/B0B3Z9K5XH?tag=theguardianbookshop-21&ascsubtag=trd-10001-1b2f-00000-00000-a0000-00000-00000-00000',
+	cta: '£29.99 at Amazon',
 	price: '£29.99',
 	retailer: 'Amazon',
 	statistics: [
@@ -389,6 +390,7 @@ const product: Product = {
 	url: 'https://www.aircraft.com/lume',
 	price: '£199.99',
 	retailer: 'AirCraft',
+	cta: 'Buy now',
 	statistics: [
 		{ name: 'Style', value: 'Pedestal (or desk)' },
 		{ name: 'Dimensions', value: '37 x 28 x 95cm (WDH)' },
