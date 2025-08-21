@@ -345,7 +345,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 							}
 						/>
 					</div>
-					{showAboveArticleCount && (
+					{showAboveArticleCount && !isCollapsed && (
 						<div css={styles.articleCountContainer}>
 							<DesignableBannerArticleCount
 								numArticles={articleCounts.forTargetedWeeks}

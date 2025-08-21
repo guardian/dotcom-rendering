@@ -358,6 +358,9 @@ export const CollapsableWithThreeTierChoiceCards: Story = {
 		choiceCardAmounts: regularChoiceCardAmounts,
 		choiceCardsSettings,
 		tickerSettings,
+		separateArticleCountSettings: {
+			type: 'above',
+		},
 	},
 };
 
