@@ -7,6 +7,7 @@ import type { FEElement } from '../types/content';
 import { InlineProductCard } from './InlineProductCard';
 import { LeftColProductCard } from './LeftColProductCard';
 import { subheadingStyles } from './Subheading';
+import { ReactNode } from 'react';
 
 export type Product = {
 	primaryHeadline: string;
@@ -27,6 +28,21 @@ export type Product = {
 	content: FEElement[];
 };
 
+const LeftColProductCardContainer = ({ children }: { children: ReactNode }) => (
+	<div
+		css={css`
+			display: none;
+			${from.wide} {
+				position: absolute;
+				left: -240px;
+				height: 100%;
+				display: block;
+			}
+		`}
+	>
+		{children}
+	</div>
+);
 export const ProductElement = ({
 	product,
 	editionId,
@@ -49,17 +65,7 @@ export const ProductElement = ({
 					{product.secondaryHeadline}
 				</h2>
 			)}
-			<div
-				css={css`
-					position: absolute;
-					left: -240px;
-					height: 100%;
-					display: none;
-					${from.wide} {
-						display: block;
-					}
-				`}
-			>
+			<LeftColProductCardContainer>
 				<LeftColProductCard
 					brandName={product.brandName}
 					productName={product.productName}
@@ -69,7 +75,7 @@ export const ProductElement = ({
 					retailer={product.retailer}
 					statistics={product.statistics}
 				/>
-			</div>
+			</LeftColProductCardContainer>
 			{product.content.map((element, index) => (
 				<RenderArticleElement
 					// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
