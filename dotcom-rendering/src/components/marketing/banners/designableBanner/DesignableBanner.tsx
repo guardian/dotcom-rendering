@@ -355,6 +355,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						</div>
 					)}
 					{tickerSettings?.tickerData &&
+						!isCollapsed &&
 						templateSettings.tickerStylingSettings && (
 							<div css={templateSpacing.bannerTicker}>
 								<Ticker
@@ -389,7 +390,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 					)}
 				</div>
 
-				{templateSettings.imageSettings && (
+				{templateSettings.imageSettings && !isCollapsed && (
 					<div css={styles.bannerVisualContainer}>
 						<DesignableBannerVisual
 							settings={templateSettings.imageSettings}

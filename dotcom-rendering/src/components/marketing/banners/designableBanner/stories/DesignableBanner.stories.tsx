@@ -357,5 +357,21 @@ export const CollapsableWithThreeTierChoiceCards: Story = {
 		},
 		choiceCardAmounts: regularChoiceCardAmounts,
 		choiceCardsSettings,
+		tickerSettings,
+	},
+};
+
+export const CollapsableWithMainImage: Story = {
+	name: 'Collapsable with main image',
+	args: {
+		...meta.args,
+		design: {
+			...design,
+			visual: regularImage,
+		},
+		tracking: {
+			...tracking,
+			abTestVariant: 'COLLAPSABLE_V1',
+		},
 	},
 };
