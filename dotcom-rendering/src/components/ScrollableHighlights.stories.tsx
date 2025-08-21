@@ -11,6 +11,7 @@ const meta: Meta<typeof ScrollableHighlights> = {
 		chromatic: {
 			viewports: [
 				breakpoints.mobile,
+				breakpoints.mobileMedium,
 				breakpoints.mobileLandscape,
 				breakpoints.tablet,
 				breakpoints.wide,
