@@ -3,7 +3,7 @@ import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
 import { allowRejectAll, cmpAcceptAll, cmpRejectAll } from '../lib/cmp';
 import { waitForIsland } from '../lib/islands';
-import { fetchAndloadPageWithOverrides } from '../lib/load-page';
+import { loadPage } from '../lib/load-page';
 import { expectToBeVisible, expectToNotExist } from '../lib/locators';
 
 type YouTubeEmbedConfig = {
@@ -122,11 +122,11 @@ const muteYouTube = async (page: Page, iframeSelector: string) => {
 test.describe.skip('YouTube Atom', () => {
 	// Skipping because the video in this article has stopped working. Investigation needed!
 	test.skip('plays main media video: skipped', async ({ page }) => {
-		await fetchAndloadPageWithOverrides(
+		await loadPage({
 			page,
-			'https://www.theguardian.com/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents',
-			{ switchOverrides: { youtubeIma: false } },
-		);
+			path: '/Article/https://www.theguardian.com/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents',
+			overrides: { switchOverrides: { youtubeIma: false } },
+		});
 		await cmpAcceptAll(page);
 
 		await waitForIsland(page, 'YoutubeBlockComponent');
@@ -173,11 +173,12 @@ test.describe.skip('YouTube Atom', () => {
 	});
 
 	test.skip('plays main media video', async ({ page }) => {
-		await fetchAndloadPageWithOverrides(
+		await loadPage({
 			page,
-			'https://www.theguardian.com/us-news/article/2024/may/30/trump-trial-hush-money-verdict',
-			{ switchOverrides: { youtubeIma: false } },
-		);
+			path: '/Article/https://www.theguardian.com/us-news/article/2024/may/30/trump-trial-hush-money-verdict',
+			overrides: { switchOverrides: { youtubeIma: false } },
+		});
+
 		await cmpAcceptAll(page);
 
 		await waitForIsland(page, 'YoutubeBlockComponent');
@@ -224,11 +225,11 @@ test.describe.skip('YouTube Atom', () => {
 	});
 
 	test.skip('plays in body video', async ({ page }) => {
-		await fetchAndloadPageWithOverrides(
+		await loadPage({
 			page,
-			'https://www.theguardian.com/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
-			{ switchOverrides: { youtubeIma: false } },
-		);
+			path: '/Article/https://www.theguardian.com/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
+			overrides: { switchOverrides: { youtubeIma: false } },
+		});
 		await cmpAcceptAll(page);
 
 		await waitForIsland(page, 'YoutubeBlockComponent');
@@ -277,11 +278,11 @@ test.describe.skip('YouTube Atom', () => {
 	test('each video plays when the same video exists both in body and in main media of a blog', async ({
 		page,
 	}) => {
-		await fetchAndloadPageWithOverrides(
+		await loadPage({
 			page,
-			'https://www.theguardian.com/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates',
-			{ switchOverrides: { youtubeIma: false } },
-		);
+			path: '/Article/https://www.theguardian.com/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates',
+			overrides: { switchOverrides: { youtubeIma: false } },
+		});
 		await cmpAcceptAll(page);
 
 		// Wait for hydration of all videos
@@ -387,11 +388,11 @@ test.describe.skip('YouTube Atom', () => {
 	}) => {
 		await allowRejectAll(context);
 
-		await fetchAndloadPageWithOverrides(
+		await loadPage({
 			page,
-			'https://www.theguardian.com/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
-			{ switchOverrides: { youtubeIma: false } },
-		);
+			path: '/Article/https://www.theguardian.com/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
+			overrides: { switchOverrides: { youtubeIma: false } },
+		});
 
 		await cmpRejectAll(page);
 
@@ -441,11 +442,11 @@ test.describe.skip('YouTube Atom', () => {
 	test('video is sticky when the user plays a video then scrolls the video out of the viewport', async ({
 		page,
 	}) => {
-		await fetchAndloadPageWithOverrides(
+		await loadPage({
 			page,
-			'https://www.theguardian.com/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates',
-			{ switchOverrides: { youtubeIma: false } },
-		);
+			path: '/Article/https://www.theguardian.com/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates',
+			overrides: { switchOverrides: { youtubeIma: false } },
+		});
 		await cmpAcceptAll(page);
 
 		// Wait for hydration of all videos

@@ -2,15 +2,19 @@ import { expect, test } from '@playwright/test';
 import { Standard as standardArticle } from '../../fixtures/generated/fe-articles/Standard';
 import { disableCMP } from '../lib/cmp';
 import { waitForIsland } from '../lib/islands';
-import { loadPageWithOverrides } from '../lib/load-page';
+import { loadPage } from '../lib/load-page';
 
-test.describe('Signed in readers', () => {
+test.describe('Signed out readers', () => {
 	test('should not display signed in texts when users are not signed in', async ({
 		context,
 		page,
 	}) => {
 		await disableCMP(context);
-		await loadPageWithOverrides(page, standardArticle);
+		await loadPage({
+			page,
+			path: '/Article',
+			overrides: { feFixture: standardArticle },
+		});
 
 		await waitForIsland(page, 'DiscussionWeb');
 
