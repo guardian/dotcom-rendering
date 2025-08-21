@@ -505,6 +505,7 @@ export const CrosswordLayout = (props: Props) => {
 							!!article.config.switches.remoteBanner
 						}
 						tags={article.tags}
+						host={host}
 					/>
 				</Island>
 			</BannerWrapper>
