@@ -35,6 +35,9 @@ const card = css`
 		width: 220px;
 		border-top: 1px solid ${palette('--section-border-lifestyle')};
 	}
+	strong {
+		font-weight: 700;
+	}
 `;
 
 const productInfoContainer = css`

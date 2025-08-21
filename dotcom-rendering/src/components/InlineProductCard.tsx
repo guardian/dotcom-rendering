@@ -23,7 +23,7 @@ const card = css`
 	min-width: 100%;
 	row-gap: ${space[4]}px;
 	grid-template-columns: 1fr 1fr;
-	> * strong {
+	strong {
 		font-weight: 700;
 	}
 	border-top: 1px solid ${palette('--section-border-lifestyle')};
