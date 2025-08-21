@@ -128,7 +128,8 @@ describe('GoogleOneTap', () => {
 				context: 'continue',
 				providers: [
 					{
-						clientId: '774465807556.apps.googleusercontent.com',
+						clientId:
+							'774465807556-4d50ur6svcjj90l7fe6i0bnp4t4qhkga.apps.googleusercontent.com',
 						configURL: 'https://accounts.google.com/gsi/fedcm.json',
 					},
 				],
@@ -159,7 +160,8 @@ describe('GoogleOneTap', () => {
 				context: 'continue',
 				providers: [
 					{
-						clientId: '774465807556.apps.googleusercontent.com',
+						clientId:
+							'774465807556-4d50ur6svcjj90l7fe6i0bnp4t4qhkga.apps.googleusercontent.com',
 						configURL: 'https://accounts.google.com/gsi/fedcm.json',
 					},
 				],
