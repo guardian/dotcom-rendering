@@ -6,7 +6,6 @@ import {
 	textSans14,
 	textSans17,
 } from '@guardian/source/foundations';
-import { grid } from '../grid';
 import { palette } from '../palette';
 import { ProductLinkButton } from './ProductLinkButton';
 
@@ -32,8 +31,8 @@ const card = css`
 	${from.wide} {
 		display: block;
 	}
-	${grid.column.left}
 	grid-template-columns: 1fr;
+	margin-top: 10px;
 	padding: 10px;
 	width: 220px;
 
@@ -111,7 +110,8 @@ export const LeftColProductCard = ({
 					src={image}
 					alt={productName}
 					css={{
-						width: '100%',
+						width: '200px',
+						height: '200px',
 						borderRadius: '6px',
 						display: 'block',
 					}}
