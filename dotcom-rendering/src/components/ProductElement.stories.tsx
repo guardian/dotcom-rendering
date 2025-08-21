@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { ArticleContainer } from './ArticleContainer';
@@ -1120,6 +1121,11 @@ const meta = {
 				shouldCenter={true}
 				showSideBorders={true}
 				centralBorder={'full'}
+				css={css`
+					strong {
+						font-weight: bold;
+					}
+				`}
 				format={{
 					design: ArticleDesign.Review,
 					display: ArticleDisplay.Showcase,

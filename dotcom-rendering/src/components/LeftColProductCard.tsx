@@ -25,21 +25,16 @@ export type LeftColProductCardProps = {
 };
 
 const card = css`
-	top: ${space[3]}px;
-	position: sticky;
 	display: none;
 	${from.wide} {
+		top: ${space[3]}px;
+		position: sticky;
 		display: block;
+		margin-top: 10px;
+		padding: 10px;
+		width: 220px;
+		border-top: 1px solid ${palette('--section-border-lifestyle')};
 	}
-	grid-template-columns: 1fr;
-	margin-top: 10px;
-	padding: 10px;
-	width: 220px;
-
-	> * strong {
-		font-weight: 700;
-	}
-	border-top: 1px solid ${palette('--section-border-lifestyle')};
 `;
 
 const productInfoContainer = css`
@@ -79,7 +74,8 @@ const Statistic = ({ name, value }: Statistics) => (
 			margin-top: 4px;
 		`}
 	>
-		{name}: <br /> <strong>{value}</strong>
+		{name}:<br />
+		<strong>{value}</strong>
 	</div>
 );
 
