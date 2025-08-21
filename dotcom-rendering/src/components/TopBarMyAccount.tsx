@@ -262,9 +262,9 @@ export const TopBarMyAccount = ({
 }: MyAccountProps) => {
 	const { renderingTarget } = useConfig();
 
-	return (
-		<>
-			{authStatus.kind === 'SignedIn' ? (
+	switch (authStatus.kind) {
+		case 'SignedIn':
+			return (
 				<SignedInBraze
 					mmaUrl={mmaUrl}
 					idUrl={idUrl}
@@ -273,9 +273,10 @@ export const TopBarMyAccount = ({
 					authStatus={authStatus}
 					renderingTarget={renderingTarget}
 				/>
-			) : (
-				<SignIn idUrl={idUrl} />
-			)}
-		</>
-	);
+			);
+		case 'SignedOut':
+			return <SignIn idUrl={idUrl} />;
+		default:
+			return null;
+	}
 };
