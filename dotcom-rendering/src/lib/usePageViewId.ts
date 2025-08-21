@@ -17,5 +17,6 @@ export const usePageViewId = (
 			});
 	}, [renderingTarget]);
 
+	console.log('====> fetched pageViewId from usePageViewId hook', id);
 	return id;
 };
