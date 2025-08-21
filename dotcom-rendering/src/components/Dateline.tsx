@@ -53,7 +53,11 @@ export const Dateline = ({
 	};
 	if (secondaryDateline && !secondaryDateline.includes(primaryDateline)) {
 		return (
-			<details css={datelineStyles} style={mobileColour}>
+			<details
+				css={datelineStyles}
+				style={mobileColour}
+				data-gu-name="dateline"
+			>
 				<summary css={primaryStyles}>
 					<span css={hoverUnderline}>{primaryDateline}</span>
 				</summary>
@@ -62,7 +66,7 @@ export const Dateline = ({
 		);
 	}
 	return (
-		<div css={datelineStyles} style={mobileColour}>
+		<div css={datelineStyles} style={mobileColour} data-gu-name="dateline">
 			{primaryDateline}
 		</div>
 	);
