@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	from,
 	headlineMedium20,
 	space,
 	textSans14,
@@ -26,6 +27,9 @@ const card = css`
 		font-weight: 700;
 	}
 	border-top: 1px solid ${palette('--section-border-lifestyle')};
+	${from.wide} {
+		display: none;
+	}
 `;
 
 export type InlineProductCardProps = {
@@ -112,10 +116,10 @@ export const InlineProductCard = ({
 					<img
 						src={image}
 						alt={productName}
-						css={{
-							width: '100%',
-							borderRadius: '6px',
-						}}
+						css={css`
+							width: 165px;
+							height: 165px;
+						`}
 					/>
 				</a>
 			)}

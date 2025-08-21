@@ -6,7 +6,6 @@ import {
 	textSans14,
 	textSans17,
 } from '@guardian/source/foundations';
-import { grid } from '../grid';
 import { palette } from '../palette';
 import { ProductLinkButton } from './ProductLinkButton';
 
@@ -26,21 +25,16 @@ export type LeftColProductCardProps = {
 };
 
 const card = css`
-	top: ${space[3]}px;
-	position: sticky;
 	display: none;
 	${from.wide} {
+		top: ${space[3]}px;
+		position: sticky;
 		display: block;
+		margin-top: 10px;
+		padding: 10px;
+		width: 220px;
+		border-top: 1px solid ${palette('--section-border-lifestyle')};
 	}
-	${grid.column.left}
-	grid-template-columns: 1fr;
-	padding: 10px;
-	width: 220px;
-
-	> * strong {
-		font-weight: 700;
-	}
-	border-top: 1px solid ${palette('--section-border-lifestyle')};
 `;
 
 const productInfoContainer = css`
@@ -80,7 +74,8 @@ const Statistic = ({ name, value }: Statistics) => (
 			margin-top: 4px;
 		`}
 	>
-		{name}: <br /> <strong>{value}</strong>
+		{name}:<br />
+		<strong>{value}</strong>
 	</div>
 );
 
@@ -111,7 +106,8 @@ export const LeftColProductCard = ({
 					src={image}
 					alt={productName}
 					css={{
-						width: '100%',
+						width: '200px',
+						height: '200px',
 						borderRadius: '6px',
 						display: 'block',
 					}}

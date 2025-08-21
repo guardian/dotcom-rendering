@@ -1,7 +1,10 @@
+import { css } from '@emotion/react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { ArticleContainer } from './ArticleContainer';
 import type { Product } from './ProductElement';
 import { ProductElement } from './ProductElement';
+import { Section as SectionComponent } from './Section';
 
 const product2: Product = {
 	primaryHeadline: 'Best budget fan and best desk fan',
@@ -13,6 +16,9 @@ const product2: Product = {
 	cta: '£29.99 at Amazon',
 	price: '£29.99',
 	retailer: 'Amazon',
+	secondaryUrl:
+		'https://www.amazon.co.uk/Devola-16-Inch-Desk-Fan/dp/B0B3Z9K5XH?tag=theguardianbookshop-21&ascsubtag=trd-10001-1b2f-00000-00000-a0000-00000-00000-00000',
+	secondaryCTA: '£32.99 at Devola',
 	statistics: [
 		{ name: 'Style', value: 'desk' },
 		{ name: 'Dimensions', value: '30 x 21 x 31cm (WDH)' },
@@ -390,7 +396,10 @@ const product: Product = {
 	url: 'https://www.aircraft.com/lume',
 	price: '£199.99',
 	retailer: 'AirCraft',
-	cta: 'Buy now',
+	cta: '£199.99 at AirCraft',
+	secondaryUrl:
+		'https://www.amazon.co.uk/Devola-16-Inch-Desk-Fan/dp/B0B3Z9K5XH?tag=theguardianbookshop-21&ascsubtag=trd-10001-1b2f-00000-00000-a0000-00000-00000-00000',
+	secondaryCTA: '£132.99 at Amazon',
 	statistics: [
 		{ name: 'Style', value: 'Pedestal (or desk)' },
 		{ name: 'Dimensions', value: '37 x 28 x 95cm (WDH)' },
@@ -1106,6 +1115,35 @@ const meta = {
 		},
 		editionId: 'UK',
 	},
+	decorators: [
+		(Story) => (
+			<SectionComponent
+				shouldCenter={true}
+				showSideBorders={true}
+				centralBorder={'full'}
+				css={css`
+					strong {
+						font-weight: bold;
+					}
+				`}
+				format={{
+					design: ArticleDesign.Review,
+					display: ArticleDisplay.Showcase,
+					theme: Pillar.Lifestyle,
+				}}
+			>
+				<ArticleContainer
+					format={{
+						design: ArticleDesign.Review,
+						display: ArticleDisplay.Showcase,
+						theme: Pillar.Lifestyle,
+					}}
+				>
+					<Story />
+				</ArticleContainer>
+			</SectionComponent>
+		),
+	],
 } satisfies Meta<typeof ProductElement>;
 
 export default meta;
