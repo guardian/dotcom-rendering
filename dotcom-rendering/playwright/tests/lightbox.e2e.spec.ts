@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 import { Live as LiveBlog } from '../../fixtures/generated/fe-articles/Live';
 import { PhotoEssay as photoEssayArticle } from '../../fixtures/generated/fe-articles/PhotoEssay';
 import { disableCMP } from '../lib/cmp';
-import { loadPageWithOverrides } from '../lib/load-page';
+import { loadPage } from '../lib/load-page';
 import { expectToBeVisible, expectToNotBeVisible } from '../lib/locators';
 
 // LIGHTBOX RL notes
@@ -74,7 +74,11 @@ test.describe('Lightbox', () => {
 		page,
 	}) => {
 		await disableCMP(context);
-		await loadPageWithOverrides(page, photoEssayArticle);
+		await loadPage({
+			page,
+			path: '/Article',
+			overrides: { feFixture: photoEssayArticle },
+		});
 
 		await expectToNotBeVisible(page, '#gu-lightbox');
 
@@ -95,7 +99,11 @@ test.describe('Lightbox', () => {
 		page,
 	}) => {
 		await disableCMP(context);
-		await loadPageWithOverrides(page, photoEssayArticle);
+		await loadPage({
+			page,
+			path: '/Article',
+			overrides: { feFixture: photoEssayArticle },
+		});
 
 		await expectToNotBeVisible(page, '#gu-lightbox');
 
@@ -113,7 +121,11 @@ test.describe('Lightbox', () => {
 
 	test('should trap focus', async ({ context, page }) => {
 		await disableCMP(context);
-		await loadPageWithOverrides(page, photoEssayArticle);
+		await loadPage({
+			page,
+			path: '/Article',
+			overrides: { feFixture: photoEssayArticle },
+		});
 
 		await page.locator('article img').first().click({ force: true });
 		await expectToBeVisible(page, '#gu-lightbox');
@@ -158,7 +170,11 @@ test.describe('Lightbox', () => {
 		page,
 	}) => {
 		await disableCMP(context);
-		await loadPageWithOverrides(page, photoEssayArticle);
+		await loadPage({
+			page,
+			path: '/Article',
+			overrides: { feFixture: photoEssayArticle },
+		});
 
 		await expectToNotBeVisible(page, '#gu-lightbox');
 
@@ -246,7 +262,11 @@ test.describe('Lightbox', () => {
 		}
 
 		await disableCMP(context);
-		await loadPageWithOverrides(page, photoEssayArticle);
+		await loadPage({
+			page,
+			path: '/Article',
+			overrides: { feFixture: photoEssayArticle },
+		});
 
 		// eq(6) here means the 7th button is clicked (base zero)
 		await page.locator('button.open-lightbox').nth(6).click();
@@ -285,7 +305,11 @@ test.describe('Lightbox', () => {
 		page,
 	}) => {
 		await disableCMP(context);
-		await loadPageWithOverrides(page, photoEssayArticle);
+		await loadPage({
+			page,
+			path: '/Article',
+			overrides: { feFixture: photoEssayArticle },
+		});
 
 		await page.locator('button.open-lightbox').nth(1).click();
 		await expectToBeVisible(page, '#gu-lightbox');
@@ -332,7 +356,11 @@ test.describe('Lightbox', () => {
 		page,
 	}) => {
 		await disableCMP(context);
-		await loadPageWithOverrides(page, photoEssayArticle);
+		await loadPage({
+			page,
+			path: '/Article',
+			overrides: { feFixture: photoEssayArticle },
+		});
 
 		await page.locator('button.open-lightbox').nth(1).click();
 		await expectToBeVisible(page, '#gu-lightbox');
@@ -374,7 +402,11 @@ test.describe('Lightbox', () => {
 		page,
 	}) => {
 		await disableCMP(context);
-		await loadPageWithOverrides(page, LiveBlog);
+		await loadPage({
+			page,
+			path: '/Article',
+			overrides: { feFixture: LiveBlog },
+		});
 
 		await page.locator('button.open-lightbox').nth(1).click();
 		await expectToBeVisible(page, '#gu-lightbox');
@@ -401,7 +433,11 @@ test.describe('Lightbox', () => {
 		page,
 	}) => {
 		await disableCMP(context);
-		await loadPageWithOverrides(page, photoEssayArticle);
+		await loadPage({
+			page,
+			path: '/Article',
+			overrides: { feFixture: photoEssayArticle },
+		});
 
 		await page.locator('button.open-lightbox').nth(1).click();
 		await expectToBeVisible(page, '#gu-lightbox');
@@ -431,7 +467,11 @@ test.describe('Lightbox', () => {
 		page,
 	}) => {
 		await disableCMP(context);
-		await loadPageWithOverrides(page, photoEssayArticle);
+		await loadPage({
+			page,
+			path: '/Article',
+			overrides: { feFixture: photoEssayArticle },
+		});
 
 		await expectToNotBeVisible(page, '#gu-lightbox');
 		// Open lightbox using the second button on the page (the first is main media)
