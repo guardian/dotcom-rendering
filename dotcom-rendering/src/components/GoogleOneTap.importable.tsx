@@ -64,14 +64,14 @@ export const getRedirectUrl = ({
 	return `${profileDomain}/signin/google?${queryParams.toString()}`;
 };
 
-// TODO: Do we want to use different Google Client IDs for One Tap than we use for social sign in?
 const getProviders = (stage: StageType): IdentityProviderConfig[] => {
 	switch (stage) {
 		case 'PROD':
 			return [
 				{
 					configURL: 'https://accounts.google.com/gsi/fedcm.json',
-					clientId: '774465807556.apps.googleusercontent.com',
+					clientId:
+						'774465807556-4d50ur6svcjj90l7fe6i0bnp4t4qhkga.apps.googleusercontent.com',
 				},
 			];
 		case 'CODE':
@@ -79,9 +79,8 @@ const getProviders = (stage: StageType): IdentityProviderConfig[] => {
 			return [
 				{
 					configURL: 'https://accounts.google.com/gsi/fedcm.json',
-					// TODO: m.code.dev-theguardian.com is not a supported origin for this Client ID
 					clientId:
-						'774465807556-pkevncqpfs9486ms0bo5q1f2g9vhpior.apps.googleusercontent.com',
+						'774465807556-h24eigcs027mj7sunatfem926c4310jo.apps.googleusercontent.com',
 				},
 			];
 	}
