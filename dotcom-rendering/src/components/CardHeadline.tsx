@@ -227,7 +227,7 @@ export const CardHeadline = ({
 					css={css`
 						color: ${headlineColour};
 					`}
-					className="show-underline"
+					className="show-underline headline-text"
 				>
 					{headlineText}
 					{isExternalLink && (
