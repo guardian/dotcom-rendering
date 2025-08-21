@@ -334,7 +334,6 @@ https://workforus.theguardian.com/careers/product-engineering/
                                 return Math.floor(Math.random() * 36).toString(36);
                             }),
                     };
-					console.log("=======> SETTING OPHAN PAGE VIEW ID IN window.guardian.config.ophan.pageViewId:", window.guardian.config.ophan.pageViewId)
                 </script>
 
                 <script>
