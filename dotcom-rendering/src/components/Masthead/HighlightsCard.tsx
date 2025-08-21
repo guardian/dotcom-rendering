@@ -100,6 +100,13 @@ const content = css`
 	${from.tablet} {
 		padding-bottom: 10px;
 	}
+
+	/* We're deliberately using a font-size that is not in Source at a particular breakpoint */
+	${between.mobileMedium.and.mobileLandscape} {
+		.headline-text {
+			font-size: 1rem;
+		}
+	}
 `;
 
 const starWrapper = css`
@@ -144,7 +151,7 @@ export const HighlightsCard = ({
 							desktop: 'xxsmall',
 							tablet: 'xxsmall',
 							mobileMedium: 'xxsmall',
-							mobile: 'tiny',
+							mobile: 'xxxsmall',
 						}}
 						showPulsingDot={
 							format.design === ArticleDesign.LiveBlog
