@@ -59,6 +59,7 @@ export const generateImageURL = ({
 	aspectRatio?: string;
 	cropOffset?: { x: number; y: number };
 }): string => {
+	console.log(`mainImage: ${mainImage}`);
 	const url = new URL(mainImage);
 	const offset = cropOffset
 		? `,offset-x${cropOffset.x},offset-y${cropOffset.y}`
@@ -74,9 +75,12 @@ export const generateImageURL = ({
 
 	const domain = isCodeGridUrl(url) ? 'i.guimcode.co.uk' : 'i.guim.co.uk';
 
-	return `https://${domain}/img/${getServiceFromUrl(url)}${
+	const res = `https://${domain}/img/${getServiceFromUrl(url)}${
 		url.pathname
 	}?${params.toString()}`;
+
+	console.log(`res url: ${res}`);
+	return res;
 };
 
 export const isSupported = (imageUrl: string): boolean => {
