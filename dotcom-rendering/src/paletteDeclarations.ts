@@ -6162,6 +6162,15 @@ const crosswordCluesHeaderBorderBottom: PaletteFunction = () =>
 const crosswordTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 const crosswordTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
+const onwardContentBorderLight: PaletteFunction = (format) => {
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[86];
+		default:
+			return articleBorderLight(format);
+	}
+};
+
 // ----- Palette ----- //
 
 /**
@@ -7351,6 +7360,10 @@ const paletteColours = {
 	'--numbered-list-title': {
 		light: numberedListTitleLight,
 		dark: numberedListTitleDark,
+	},
+	'--onward-content-border': {
+		light: onwardContentBorderLight,
+		dark: () => sourcePalette.neutral[20],
 	},
 	'--pagination-text': {
 		light: paginationTextLight,

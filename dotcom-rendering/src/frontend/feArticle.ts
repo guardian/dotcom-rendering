@@ -84,10 +84,7 @@ export interface FEArticle {
 	hasRelated: boolean;
 	publication: string; // TODO: check who uses?
 	hasStoryPackage: boolean;
-	storyPackage?: {
-		trails: FETrailType[];
-		heading: string;
-	};
+	storyPackage?: FEStoryPackage;
 	onwards?: FEOnwards[];
 	beaconURL: string;
 	isCommentable: boolean;
@@ -196,4 +193,9 @@ export type FEFormat = {
 	design: FEDesign;
 	theme: FETheme;
 	display: FEDisplay;
+};
+
+export type FEStoryPackage = {
+	heading: string;
+	trails: FETrailType[];
 };
