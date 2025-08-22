@@ -153,8 +153,6 @@ export type Props = {
 	showKickerImage?: boolean;
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
-	isInLoopingVideoTestVariant?: boolean;
-	isInLoopingVideoTestControl?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -258,7 +256,6 @@ const getMedia = ({
 	mainMedia,
 	canPlayInline,
 	isBetaContainer,
-	isInLoopingVideoTestControl,
 }: {
 	imageUrl?: string;
 	imageAltText?: string;
@@ -268,13 +265,8 @@ const getMedia = ({
 	mainMedia?: MainMedia;
 	canPlayInline?: boolean;
 	isBetaContainer: boolean;
-	isInLoopingVideoTestControl: boolean;
 }) => {
-	if (
-		mainMedia?.type === 'LoopVideo' &&
-		!isInLoopingVideoTestControl &&
-		canPlayInline
-	) {
+	if (mainMedia?.type === 'LoopVideo' && canPlayInline) {
 		return {
 			type: 'loop-video',
 			mainMedia,
@@ -398,8 +390,6 @@ export const Card = ({
 	trailTextSize,
 	showKickerImage = false,
 	headlinePosition = 'inner',
-	isInLoopingVideoTestVariant = false,
-	isInLoopingVideoTestControl = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -552,7 +542,6 @@ export const Card = ({
 		mainMedia,
 		canPlayInline,
 		isBetaContainer,
-		isInLoopingVideoTestControl,
 	});
 
 	const resolvedDataLinkName =
@@ -872,9 +861,6 @@ export const Card = ({
 									fallbackImageAlt={media.imageAltText}
 									fallbackImageAspectRatio="5:4"
 									linkTo={linkTo}
-									isInLoopingVideoTestVariant={
-										isInLoopingVideoTestVariant
-									}
 								/>
 							</Island>
 						)}
@@ -988,9 +974,6 @@ export const Card = ({
 									loading={imageLoading}
 									roundedCorners={isOnwardContent}
 									aspectRatio={aspectRatio}
-									isInLoopingVideoTestControl={
-										isInLoopingVideoTestControl
-									}
 								/>
 								{isVideoMainMedia && mainMedia.duration > 0 && (
 									<div

@@ -32,8 +32,6 @@ type Props = {
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
-	isInLoopingVideoTestVariant?: boolean;
-	isInLoopingVideoTestControl?: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -243,8 +241,6 @@ type SplashCardLayoutProps = {
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
-	isInLoopingVideoTestVariant?: boolean;
-	isInLoopingVideoTestControl?: boolean;
 };
 
 const SplashCardLayout = ({
@@ -257,8 +253,6 @@ const SplashCardLayout = ({
 	isLastRow,
 	containerLevel,
 	collectionId,
-	isInLoopingVideoTestVariant = false,
-	isInLoopingVideoTestControl = false,
 }: SplashCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -340,8 +334,6 @@ const SplashCardLayout = ({
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
-					isInLoopingVideoTestVariant={isInLoopingVideoTestVariant}
-					isInLoopingVideoTestControl={isInLoopingVideoTestControl}
 				/>
 			</LI>
 		</UL>
@@ -404,8 +396,6 @@ type FullWidthCardLayoutProps = {
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
-	isInLoopingVideoTestVariant?: boolean;
-	isInLoopingVideoTestControl?: boolean;
 };
 
 const FullWidthCardLayout = ({
@@ -419,8 +409,6 @@ const FullWidthCardLayout = ({
 	isLastRow,
 	containerLevel,
 	collectionId,
-	isInLoopingVideoTestVariant = false,
-	isInLoopingVideoTestControl = false,
 }: FullWidthCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -493,8 +481,6 @@ const FullWidthCardLayout = ({
 					liveUpdatesPosition={liveUpdatesPosition}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
-					isInLoopingVideoTestVariant={isInLoopingVideoTestVariant}
-					isInLoopingVideoTestControl={isInLoopingVideoTestControl}
 				/>
 			</LI>
 		</UL>
@@ -595,8 +581,6 @@ export const FlexibleGeneral = ({
 	aspectRatio,
 	containerLevel = 'Primary',
 	collectionId,
-	isInLoopingVideoTestVariant = false,
-	isInLoopingVideoTestControl = false,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
 		...snap,
@@ -625,8 +609,6 @@ export const FlexibleGeneral = ({
 					isLastRow={cards.length === 0}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
-					isInLoopingVideoTestVariant={isInLoopingVideoTestVariant}
-					isInLoopingVideoTestControl={isInLoopingVideoTestControl}
 				/>
 			)}
 			{groupedCards.map((row, i) => {
@@ -645,12 +627,6 @@ export const FlexibleGeneral = ({
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
 								collectionId={collectionId}
-								isInLoopingVideoTestVariant={
-									isInLoopingVideoTestVariant
-								}
-								isInLoopingVideoTestControl={
-									isInLoopingVideoTestControl
-								}
 							/>
 						);
 

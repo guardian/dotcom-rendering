@@ -3,7 +3,6 @@ import { getActiveMediaAtom } from './enhanceCards';
 
 describe('Enhance Cards', () => {
 	it('filters out m3u8 assets until supported by DCR', () => {
-		const isLoopingVideoTest = true;
 		const videoReplace = true;
 		const assets: FEMediaAsset[] = [
 			{
@@ -33,12 +32,7 @@ describe('Enhance Cards', () => {
 		const cardTrailImage = '';
 
 		expect(
-			getActiveMediaAtom(
-				isLoopingVideoTest,
-				videoReplace,
-				mediaAtom,
-				cardTrailImage,
-			),
+			getActiveMediaAtom(videoReplace, mediaAtom, cardTrailImage),
 		).toEqual({
 			atomId: 'atomID',
 			duration: 15,

@@ -193,7 +193,6 @@ const decideMediaAtomImage = (
  */
 
 export const getActiveMediaAtom = (
-	isLoopingVideoTest: boolean,
 	videoReplace: boolean,
 	mediaAtom?: FEMediaAtom,
 	cardTrailImage?: string,
@@ -211,7 +210,7 @@ export const getActiveMediaAtom = (
 			cardTrailImage,
 		);
 
-		if (asset?.platform === 'Url' && isLoopingVideoTest) {
+		if (asset?.platform === 'Url') {
 			return {
 				type: 'LoopVideo',
 				atomId: mediaAtom.id,
@@ -246,7 +245,6 @@ export const getActiveMediaAtom = (
 
 const decideMedia = (
 	format: ArticleFormat,
-	isLoopingVideoTest: boolean,
 	showMainVideo?: boolean,
 	mediaAtom?: FEMediaAtom,
 	galleryCount: number = 0,
@@ -259,12 +257,7 @@ const decideMedia = (
 	// If the showVideo toggle is enabled in the fronts tool,
 	// we should return the active mediaAtom regardless of the design
 	if (!!showMainVideo || !!videoReplace) {
-		return getActiveMediaAtom(
-			isLoopingVideoTest,
-			!!videoReplace,
-			mediaAtom,
-			cardImage,
-		);
+		return getActiveMediaAtom(!!videoReplace, mediaAtom, cardImage);
 	}
 
 	switch (format.design) {
@@ -279,12 +272,7 @@ const decideMedia = (
 			};
 
 		case ArticleDesign.Video: {
-			return getActiveMediaAtom(
-				isLoopingVideoTest,
-				false,
-				mediaAtom,
-				cardImage,
-			);
+			return getActiveMediaAtom(false, mediaAtom, cardImage);
 		}
 
 		default:
@@ -300,7 +288,6 @@ export const enhanceCards = (
 		editionId,
 		pageId,
 		discussionApiUrl,
-		isLoopingVideoTest = false,
 	}: {
 		cardInTagPage: boolean;
 		/** Used for the data link name to indicate card position in container */
@@ -308,7 +295,6 @@ export const enhanceCards = (
 		editionId: EditionId;
 		pageId?: string;
 		discussionApiUrl: string;
-		isLoopingVideoTest?: boolean;
 	},
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
@@ -353,7 +339,6 @@ export const enhanceCards = (
 
 		const mainMedia = decideMedia(
 			format,
-			isLoopingVideoTest,
 			faciaCard.properties.showMainVideo ??
 				faciaCard.properties.mediaSelect?.showMainVideo,
 			faciaCard.mediaAtom ??
