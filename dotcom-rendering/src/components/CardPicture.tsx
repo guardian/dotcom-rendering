@@ -18,7 +18,6 @@ export type Props = {
 	isCircular?: boolean;
 	aspectRatio?: AspectRatio;
 	mobileAspectRatio?: AspectRatio;
-	isInLoopingVideoTestControl?: boolean;
 };
 
 /**
@@ -211,7 +210,6 @@ export const CardPicture = ({
 	isCircular,
 	aspectRatio = '5:3',
 	mobileAspectRatio,
-	isInLoopingVideoTestControl,
 }: Props) => {
 	if (mainImage === '') {
 		return null;
@@ -226,11 +224,6 @@ export const CardPicture = ({
 
 	return (
 		<picture
-			data-component={
-				isInLoopingVideoTestControl
-					? 'loop-video-player-control'
-					: undefined
-			}
 			data-size={imageSize}
 			css={[
 				block,

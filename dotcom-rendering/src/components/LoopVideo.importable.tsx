@@ -117,7 +117,6 @@ type Props = {
 	fallbackImageAlt: CardPictureProps['alt'];
 	fallbackImageAspectRatio: CardPictureProps['aspectRatio'];
 	linkTo: string;
-	isInLoopingVideoTestVariant?: boolean;
 };
 
 export const LoopVideo = ({
@@ -133,7 +132,6 @@ export const LoopVideo = ({
 	fallbackImageAlt,
 	fallbackImageAspectRatio,
 	linkTo,
-	isInLoopingVideoTestVariant,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -604,7 +602,6 @@ export const LoopVideo = ({
 				AudioIcon={hasAudio ? AudioIcon : null}
 				preloadPartialData={preloadPartialData}
 				showPlayIcon={showPlayIcon}
-				isInLoopingVideoTestVariant={isInLoopingVideoTestVariant}
 			/>
 		</figure>
 	);
