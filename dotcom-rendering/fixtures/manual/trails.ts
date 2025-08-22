@@ -255,16 +255,27 @@ export const trails: [
 	},
 	{
 		...defaultCardProps,
-		url: 'https://www.theguardian.com/world/2021/feb/16/contact-tracing-alone-has-little-impact-on-curbing-covid-spread-report-finds',
-		byline: 'Nicola Davis and Natalie Grover',
-		image: {
-			src: 'https://media.guim.co.uk/046002abfc13c8cf7f0c40454349eb0e95d842b2/0_147_3884_2331/master/3884.jpg',
-			altText: 'Dido Harding',
+		format: { design: 3, display: 0, theme: 2 },
+		url: '/football/audio/2025/feb/19/celtic-bayern-munich-champions-league-chaos-football-weekly-podcast',
+		headline: 'Celtic’s heartbreak and Champions League playoff chaos ',
+		dataLinkName: 'media | group-0 | card-@1',
+		trailText:
+			'Max Rushden is joined by Barry Glendenning, Paul Watson, Nick Ames, Ewan Murray and Jim Burke to discuss the latest Champions League playoff games, Everton’s new ground and much more',
+		webPublicationDate: '2025-02-19T14:11:54.000Z',
+		kickerText: 'Football Weekly',
+		mainMedia: {
+			type: 'Audio',
+			duration: '54:52',
+			podcastImage: {
+				src: 'https://uploads.guim.co.uk/2024/08/01/FootballWeekly_FINAL_3000_(1).jpg',
+				altText: 'Football Weekly',
+			},
 		},
-		webPublicationDate: '2021-02-16T18:22:53.000Z',
-		headline:
-			'Contact tracing alone has little impact on curbing Covid spread, report finds',
-		dataLinkName: 'news | group-0 | card-@1',
+		image: {
+			src: 'https://media.guim.co.uk/01ded462d3dd730467bdfd652decda4117d925da/0_0_2074_1244/master/2074.jpg',
+			altText:
+				"TOPSHOT-FBL-EUR-C1-MILAN-FEYENOORD<br>TOPSHOT - Polish referee Szymon Marciniak gives a red card to AC Milan's French defender #19 Theo Hernandez (R) during the UEFA Champions League knockout round play-off second leg football match between AC Milan and Feyenoord at San Siro stadium in Milan, on February 18, 2025. (Photo by Piero CRUCIATTI / AFP) (Photo by PIERO CRUCIATTI/AFP via Getty Images)",
+		},
 	},
 	{
 		...defaultCardProps,

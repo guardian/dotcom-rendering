@@ -549,7 +549,13 @@ export const LoopVideoCards: Story = {
 		groupedTrails: {
 			...emptyGroupedTrails,
 			splash: [loopVideoCard],
-			standard: [loopVideoCard], // Loop video is disabled at standard card size
+			standard: [
+				{
+					...loopVideoCard,
+					headline:
+						'Image fallback - the standard half-width card is too small for video',
+				},
+			],
 		},
 	},
 };
