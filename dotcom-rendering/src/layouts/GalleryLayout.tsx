@@ -412,11 +412,11 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					fullWidth={true}
 					sectionId="comments"
 					element="section"
-					backgroundColour={themePalette(
+					backgroundColour={palette(
 						'--discussion-section-background',
 					)}
-					borderColour={themePalette('--article-border')}
-					fontColour={themePalette('--discussion-text')}
+					borderColour={palette('--article-border')}
+					fontColour={palette('--discussion-text')}
 				>
 					<DiscussionLayout
 						discussionApiUrl={frontendData.config.discussionApiUrl}
