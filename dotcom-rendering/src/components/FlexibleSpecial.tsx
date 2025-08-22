@@ -9,7 +9,10 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import type { ImagePositionType } from './Card/components/ImageWrapper';
+import type {
+	ImagePositionType,
+	ImageSizeType,
+} from './Card/components/ImageWrapper';
 import { LI } from './Card/components/LI';
 import type { TrailTextSize } from './Card/components/TrailText';
 import { UL } from './Card/components/UL';
@@ -33,6 +36,7 @@ type Props = {
 
 type BoostProperties = {
 	headlineSizes: ResponsiveFontSize;
+	imageSize: ImageSizeType;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	supportingContentAlignment: Alignment;
@@ -59,6 +63,7 @@ const determineCardProperties = (
 					tablet: 'large',
 					mobile: 'medium',
 				},
+				imageSize: 'xlarge',
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				supportingContentAlignment:
@@ -73,6 +78,7 @@ const determineCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'large',
 				},
+				imageSize: 'xlarge',
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				supportingContentAlignment:
@@ -87,6 +93,7 @@ const determineCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'xlarge',
 				},
+				imageSize: 'jumbo',
 				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				supportingContentAlignment: 'horizontal',
@@ -100,6 +107,7 @@ const determineCardProperties = (
 					tablet: 'xxlarge',
 					mobile: 'xxlarge',
 				},
+				imageSize: 'jumbo',
 				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				supportingContentAlignment: 'horizontal',
@@ -143,6 +151,7 @@ export const OneCardLayout = ({
 
 	const {
 		headlineSizes,
+		imageSize,
 		imagePositionOnDesktop,
 		imagePositionOnMobile,
 		supportingContentAlignment,
@@ -166,7 +175,7 @@ export const OneCardLayout = ({
 					headlineSizes={headlineSizes}
 					imagePositionOnDesktop={imagePositionOnDesktop}
 					imagePositionOnMobile={imagePositionOnMobile}
-					imageSize={'jumbo'}
+					imageSize={imageSize}
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
 					supportingContentAlignment={supportingContentAlignment}

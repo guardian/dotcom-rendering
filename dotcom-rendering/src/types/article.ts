@@ -19,7 +19,12 @@ import {
 } from '../model/enhanceTableOfContents';
 import { enhancePinnedPost } from '../model/pinnedPost';
 import { parse as parseStoryPackage, type StoryPackage } from '../storyPackage';
-import type { FEElement, ImageBlockElement, ImageForLightbox } from './content';
+import type {
+	AdPlaceholderBlockElement,
+	FEElement,
+	ImageBlockElement,
+	ImageForLightbox,
+} from './content';
 import { type RenderingTarget } from './renderingTarget';
 
 /**
@@ -42,7 +47,7 @@ export type ArticleFields = {
 
 export type Gallery = ArticleFields & {
 	design: ArticleDesign.Gallery;
-	images: ImageBlockElement[];
+	bodyElements: (ImageBlockElement | AdPlaceholderBlockElement)[];
 	mainMedia: ImageBlockElement;
 };
 
@@ -134,11 +139,13 @@ export const enhanceArticleType = (
 			design,
 			display: format.display,
 			theme: format.theme,
-			images: blocks.flatMap((block) =>
+			bodyElements: blocks.flatMap((block) =>
 				block.elements.filter(
 					(element) =>
 						element._type ===
-						'model.dotcomrendering.pageElements.ImageBlockElement',
+							'model.dotcomrendering.pageElements.ImageBlockElement' ||
+						element._type ===
+							'model.dotcomrendering.pageElements.AdPlaceholderBlockElement',
 				),
 			),
 			mainMedia: getGalleryMainMedia(

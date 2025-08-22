@@ -5887,8 +5887,16 @@ const highlightContainerMidFadeLight: PaletteFunction = () =>
 const highlightContainerMidFadeDark: PaletteFunction = () =>
 	transparentColour(sourcePalette.neutral[10], 0.6);
 
-const highlightContainerEndFadeLight: PaletteFunction = () => 'transparent';
-const highlightContainerEndFadeDark: PaletteFunction = () => 'transparent';
+/**
+ * Why not 'transparent'?
+ *
+ * Older versions of Safari (v14 and lower) misinterpret "transparent"
+ * when used in gradients: https://css-tricks.com/thing-know-gradients-transparent-black/
+ */
+const highlightContainerEndFadeLight: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[100], 0);
+const highlightContainerEndFadeDark: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[10], 0);
 
 const pinnedPostBorderLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {

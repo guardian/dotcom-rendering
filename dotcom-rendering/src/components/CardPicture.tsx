@@ -24,8 +24,6 @@ export type Props = {
 /**
  * **WIP – Some size may be unaccounted for**
  *
- * Currently, this only handles the five (5) image sizes of `ImageSizeType`.
- *
  * This method should cover all use cases with a lot more precision once
  * implemented thoroughly
  */
@@ -68,6 +66,18 @@ const decideImageWidths = (
 			];
 
 		case 'large':
+			return [
+				{ breakpoint: breakpoints.mobile, width: 465, aspectRatio },
+				{
+					breakpoint: breakpoints.mobileLandscape,
+					width: 480,
+					aspectRatio,
+				},
+				{ breakpoint: breakpoints.tablet, width: 460, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 620, aspectRatio },
+			];
+
+		case 'xlarge':
 			return [
 				{ breakpoint: breakpoints.mobile, width: 465, aspectRatio },
 				{
