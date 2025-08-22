@@ -11,7 +11,12 @@ import {
 	CheckboxGroup,
 	TextInput,
 } from '@guardian/source/react-components';
-import { type ChangeEventHandler, useState } from 'react';
+import {
+	type ChangeEventHandler,
+	type ReactEventHandler,
+	useState,
+} from 'react';
+import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 
@@ -21,8 +26,14 @@ interface FormProps {
 	handleTextInput: ChangeEventHandler<HTMLInputElement>;
 	handleSubmitButton: { (): Promise<void> | void };
 	newsletterCount: number;
-	marketingOptIn: boolean;
+	marketingOptIn?: boolean;
 	setMarketingOptIn: (value: boolean) => void;
+	// Captcha props
+	useReCaptcha?: boolean;
+	captchaSiteKey?: string;
+	visibleRecaptcha?: boolean;
+	reCaptchaRef?: React.RefObject<ReactGoogleRecaptcha>;
+	handleCaptchaError?: ReactEventHandler<HTMLDivElement>;
 }
 
 // The design brief requires the layout of the form to align with the
@@ -137,9 +148,18 @@ export const ManyNewslettersForm = ({
 	newsletterCount,
 	marketingOptIn,
 	setMarketingOptIn,
+	useReCaptcha = false,
+	captchaSiteKey,
+	visibleRecaptcha = false,
+	reCaptchaRef,
+	handleCaptchaError,
 }: FormProps) => {
 	const [formHasFocus, setFormHasFocus] = useState(false);
+	const [firstInteractionOccurred, setFirstInteractionOccurred] =
+		useState(false);
 	const hidePrivacyOnMobile = !formHasFocus && email.length === 0;
+
+	const isMarketingOptInVisible = marketingOptIn !== undefined;
 
 	const ariaLabel =
 		newsletterCount === 1
@@ -188,34 +208,66 @@ export const ManyNewslettersForm = ({
 									onChange={handleTextInput}
 									error={errorMessage}
 									disabled={status === 'Loading'}
+									onFocus={() =>
+										setFirstInteractionOccurred(true)
+									}
 								/>
 							</span>
-							<div>
-								<CheckboxGroup
-									name="marketing-preferences"
-									label="Marketing preferences"
-									hideLabel={true}
-									cssOverrides={optInCheckboxTextSmall}
-								>
-									<Checkbox
-										label="Receive information on our products and ways to support and enjoy our journalism. Untick to opt out."
-										value="marketing-opt-in"
-										checked={marketingOptIn}
-										onChange={(e) =>
-											setMarketingOptIn(e.target.checked)
+							{isMarketingOptInVisible && (
+								<div>
+									<CheckboxGroup
+										name="marketing-preferences"
+										label="Marketing preferences"
+										hideLabel={true}
+										cssOverrides={optInCheckboxTextSmall}
+									>
+										<Checkbox
+											label="Receive information on our products and ways to support and enjoy our journalism. Untick to opt out."
+											value="marketing-opt-in"
+											checked={marketingOptIn}
+											onChange={(e) =>
+												setMarketingOptIn(
+													e.target.checked,
+												)
+											}
+											theme={{
+												fillUnselected:
+													palette.neutral[100],
+												borderUnselected:
+													palette.neutral[46],
+												fillSelected:
+													palette.brand[500],
+												borderSelected:
+													palette.brand[500],
+												borderHover: palette.brand[500],
+											}}
+										/>
+									</CheckboxGroup>
+								</div>
+							)}
+							{useReCaptcha && !!captchaSiteKey && (
+								<div
+									css={css`
+										.grecaptcha-badge {
+											visibility: hidden;
 										}
-										theme={{
-											fillUnselected:
-												palette.neutral[100],
-											borderUnselected:
-												palette.neutral[46],
-											fillSelected: palette.brand[500],
-											borderSelected: palette.brand[500],
-											borderHover: palette.brand[500],
-										}}
-									/>
-								</CheckboxGroup>
-							</div>
+									`}
+								>
+									{(!visibleRecaptcha ||
+										firstInteractionOccurred) && (
+										<ReactGoogleRecaptcha
+											sitekey={captchaSiteKey}
+											ref={reCaptchaRef}
+											onError={handleCaptchaError}
+											size={
+												visibleRecaptcha
+													? 'normal'
+													: 'invisible'
+											}
+										/>
+									)}
+								</div>
+							)}
 						</div>
 						<Button
 							aria-label={ariaLabel}

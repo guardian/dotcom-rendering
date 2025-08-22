@@ -30,8 +30,8 @@ const buildNewsletterSignUpFormData = (
 		formData.append('g-recaptcha-response', recaptchaToken);
 	}
 
-	if (marketingOptIn) {
-		formData.append('marketing', 'true');
+	if (marketingOptIn !== undefined) {
+		formData.append('marketing', marketingOptIn ? 'true' : 'false');
 	}
 
 	return formData;

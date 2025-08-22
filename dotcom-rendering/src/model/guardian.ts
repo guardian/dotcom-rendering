@@ -85,6 +85,7 @@ export const createGuardian = ({
 	contentType,
 	brazeApiKey,
 	googleRecaptchaSiteKey,
+	googleRecaptchaSiteKeyVisible,
 	unknownConfig = {},
 }: {
 	stage: StageType;
@@ -105,6 +106,7 @@ export const createGuardian = ({
 	contentType?: string;
 	brazeApiKey?: string;
 	googleRecaptchaSiteKey?: string;
+	googleRecaptchaSiteKeyVisible?: string;
 	/**
 	 * In the case of articles we don't know the exact values that need to exist
 	 * on the window.guardian.config.page property so rather than filter them we
@@ -141,6 +143,7 @@ export const createGuardian = ({
 				isPaidContent: !!isPaidContent,
 				brazeApiKey,
 				googleRecaptchaSiteKey,
+				googleRecaptchaSiteKeyVisible,
 			}),
 			libs: {
 				googletag: googletagUrl,
