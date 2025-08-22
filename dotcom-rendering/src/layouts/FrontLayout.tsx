@@ -84,12 +84,10 @@ const isToggleable = (
 	return index != 0 && !isNavList(collection);
 };
 
-const decideLeftContent = (front: Front, collection: DCRCollectionType) => {
+const decideLeftContent = (pageId: string, collection: DCRCollectionType) => {
 	// show CPScott?
 	if (
-		['uk/commentisfree', 'au/commentisfree'].includes(
-			front.config.pageId,
-		) &&
+		['uk/commentisfree', 'au/commentisfree'].includes(pageId) &&
 		collection.displayName.toLowerCase() === 'opinion'
 	) {
 		return <CPScottHeader />;
@@ -102,21 +100,25 @@ const decideLeftContent = (front: Front, collection: DCRCollectionType) => {
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
 		config: {
-			isPaidContent,
+			discussionApiUrl,
 			hasPageSkin: hasPageSkinConfig,
+			isPaidContent,
 			pageId,
 			abTests,
+			switches,
 		},
+		deeplyRead,
 		editionId,
+		isNetworkFront,
+		pressedPage,
+		serverTime,
 	} = front;
-
-	const serverTime = front.serverTime;
 
 	const renderAds = canRenderAds(front);
 
 	const hasPageSkin = renderAds && hasPageSkinConfig;
 
-	const filteredCollections = front.pressedPage.collections.filter(
+	const filteredCollections = pressedPage.collections.filter(
 		(collection) => !isHighlights(collection),
 	);
 
@@ -131,7 +133,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		: [];
 
 	const showMostPopular =
-		front.isNetworkFront && front.deeplyRead && front.deeplyRead.length > 0;
+		isNetworkFront && deeplyRead && deeplyRead.length > 0;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
@@ -163,8 +165,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	};
 
 	const Highlights = () => {
-		const highlightsCollection =
-			front.pressedPage.collections.find(isHighlights);
+		const highlightsCollection = pressedPage.collections.find(isHighlights);
 
 		return (
 			!!highlightsCollection && (
@@ -185,7 +186,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					sectionId={ophanComponentId(
 						highlightsCollection.displayName,
 					)}
-					frontId={front.pressedPage.id}
+					frontId={pressedPage.id}
 					collectionId={0}
 				/>
 			)
@@ -224,10 +225,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				<Masthead
 					nav={NAV}
 					highlights={<Highlights />}
-					editionId={front.editionId}
+					editionId={editionId}
 					idUrl={front.config.idUrl}
 					mmaUrl={front.config.mmaUrl}
-					discussionApiUrl={front.config.discussionApiUrl}
+					discussionApiUrl={discussionApiUrl}
 					contributionsServiceUrl={contributionsServiceUrl}
 					idApiUrl={front.config.idApiUrl}
 					showSubNav={!isPaidContent}
@@ -252,7 +253,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 			<main
 				data-layout="FrontLayout"
-				data-link-name={`Front | /${front.pressedPage.id}`}
+				data-link-name={`Front | /${pressedPage.id}`}
 				id="maincontent"
 				css={hasPageSkin && pageSkinContainer}
 			>
@@ -347,7 +348,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											filteredCollections.length
 										}
 										isPaidContent={
-											!!front.pressedPage.frontProperties
+											!!pressedPage.frontProperties
 												.isPaidContent
 										}
 									/>
@@ -359,10 +360,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					if (
 						collection.collectionType === 'news/most-popular' &&
 						!isPaidContent &&
-						front.config.switches.mostViewedFronts
+						switches.mostViewedFronts
 					) {
 						const deeplyReadData = showMostPopular
-							? front.deeplyRead
+							? deeplyRead
 							: undefined;
 
 						return (
@@ -400,21 +401,19 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									showDateHeader={
 										collection.config.showDateHeader
 									}
-									editionId={front.editionId}
+									editionId={editionId}
 									treats={collection.treats}
 									data-print-layout="hide"
 									hasPageSkin={hasPageSkin}
-									discussionApiUrl={
-										front.config.discussionApiUrl
-									}
+									discussionApiUrl={discussionApiUrl}
 								>
 									<FrontMostViewed
 										displayName={collection.displayName}
 										trails={trails}
 										mostViewed={front.mostViewed}
-										isNetworkFront={front.isNetworkFront}
+										isNetworkFront={isNetworkFront}
 										deeplyRead={deeplyReadData}
-										editionId={front.editionId}
+										editionId={editionId}
 										hasPageSkin={hasPageSkin}
 										isFront={true}
 										renderAds={renderAds}
@@ -442,7 +441,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								<LabsSection
 									title={collection.displayName}
 									collectionId={collection.id}
-									pageId={front.pressedPage.id}
+									pageId={pressedPage.id}
 									ajaxUrl={front.config.ajaxUrl}
 									sectionId={`container-${ophanName}`}
 									ophanComponentName={ophanName}
@@ -455,9 +454,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									)}
 									data-print-layout="hide"
 									hasPageSkin={hasPageSkin}
-									discussionApiUrl={
-										front.config.discussionApiUrl
-									}
+									discussionApiUrl={discussionApiUrl}
 									editionId={editionId}
 								>
 									<DecideContainer
@@ -502,7 +499,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											filteredCollections.length
 										}
 										isPaidContent={
-											!!front.pressedPage.frontProperties
+											!!pressedPage.frontProperties
 												.isPaidContent
 										}
 									/>
@@ -539,26 +536,26 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								toggleable={isToggleable(
 									index,
 									collection,
-									front.isNetworkFront,
+									isNetworkFront,
 								)}
 								leftContent={decideLeftContent(
-									front,
+									pageId,
 									collection,
 								)}
 								sectionId={ophanName}
 								collectionId={collection.id}
-								pageId={front.pressedPage.id}
+								pageId={pressedPage.id}
 								showDateHeader={
 									collection.config.showDateHeader
 								}
-								editionId={front.editionId}
+								editionId={editionId}
 								treats={collection.treats}
 								canShowMore={collection.canShowMore}
 								ajaxUrl={front.config.ajaxUrl}
 								isOnPaidContentFront={isPaidContent}
 								targetedTerritory={collection.targetedTerritory}
 								hasPageSkin={hasPageSkin}
-								discussionApiUrl={front.config.discussionApiUrl}
+								discussionApiUrl={discussionApiUrl}
 								collectionBranding={
 									collection.collectionBranding
 								}
@@ -624,7 +621,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									renderAds={renderAds}
 									collectionCount={filteredCollections.length}
 									isPaidContent={
-										!!front.pressedPage.frontProperties
+										!!pressedPage.frontProperties
 											.isPaidContent
 									}
 								/>
@@ -685,7 +682,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
 					urls={front.nav.readerRevenueLinks.footer}
-					editionId={front.editionId}
+					editionId={editionId}
 				/>
 			</Section>
 
@@ -696,15 +693,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={front.config.idApiUrl}
 						isMinuteArticle={false}
-						isPaidContent={!!front.config.isPaidContent}
+						isPaidContent={!!isPaidContent}
 						isPreview={front.config.isPreview}
 						isSensitive={front.config.isSensitive}
-						pageId={front.pressedPage.id}
+						pageId={pressedPage.id}
 						sectionId={front.config.section}
 						shouldHideReaderRevenue={false} // never defined for fronts
-						remoteBannerSwitch={
-							!!front.config.switches.remoteBanner
-						}
+						remoteBannerSwitch={!!switches.remoteBanner}
 						tags={[]} // a front doesn't have tags
 					/>
 				</Island>
