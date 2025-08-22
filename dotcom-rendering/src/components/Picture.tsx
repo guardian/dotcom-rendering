@@ -20,7 +20,8 @@ export type Orientation = 'portrait' | 'landscape';
 type PictureRoleType =
 	| RoleType
 	// Custom image role types that are used but do not come from CAPI / FE
-	| 'podcastCover';
+	| 'podcastCover'
+	| 'productCard';
 
 type Props = {
 	role: PictureRoleType;
@@ -268,6 +269,11 @@ const decideImageWidths = ({
 					{ breakpoint: breakpoints.mobile, width: 140 },
 					{ breakpoint: breakpoints.wide, width: 219 },
 				];
+			case 'productCard':
+				return [
+					{ breakpoint: breakpoints.mobile, width: 165 },
+					{ breakpoint: breakpoints.wide, width: 220 },
+				];
 			case 'inline':
 			default:
 				return [
@@ -347,6 +353,16 @@ const decideImageWidths = ({
 				];
 			case 'halfWidth':
 				return [{ breakpoint: breakpoints.mobile, width: 445 }];
+			case 'podcastCover':
+				return [
+					{ breakpoint: breakpoints.mobile, width: 140 },
+					{ breakpoint: breakpoints.wide, width: 219 },
+				];
+			case 'productCard':
+				return [
+					{ breakpoint: breakpoints.mobile, width: 165 },
+					{ breakpoint: breakpoints.wide, width: 220 },
+				];
 			case 'inline':
 			default:
 				return [

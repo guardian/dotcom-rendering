@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
+import type { ReactNode } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
 import { RenderArticleElement } from '../lib/renderElement';
@@ -7,7 +8,6 @@ import type { FEElement } from '../types/content';
 import { InlineProductCard } from './InlineProductCard';
 import { LeftColProductCard } from './LeftColProductCard';
 import { subheadingStyles } from './Subheading';
-import { ReactNode } from 'react';
 
 export type Product = {
 	primaryHeadline: string;
@@ -96,6 +96,7 @@ export const ProductElement = ({
 				/>
 			))}
 			<InlineProductCard
+				format={format}
 				brandName={product.brandName}
 				productName={product.productName}
 				image={product.image}

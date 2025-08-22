@@ -6,7 +6,10 @@ import {
 	textSans14,
 	textSans17,
 } from '@guardian/source/foundations';
+import type { ReactNode } from 'react';
+import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
+import { Picture } from './Picture';
 import { ProductLinkButton } from './ProductLinkButton';
 
 export type Statistics = {
@@ -33,6 +36,7 @@ const card = css`
 `;
 
 export type InlineProductCardProps = {
+	format: ArticleFormat;
 	brandName: string;
 	productName: string;
 	image: string;
@@ -46,6 +50,7 @@ export type InlineProductCardProps = {
 };
 
 const productInfoContainer = css`
+	${textSans17};
 	white-space: normal;
 	display: grid;
 	height: 117px;
@@ -56,14 +61,6 @@ const primaryHeading = css`
 	${headlineMedium20};
 `;
 
-const secondaryHeading = css`
-	${textSans17};
-`;
-
-const priceRowStyle = css`
-	${textSans17};
-	padding-bottom: ${space[2]}px;
-`;
 const statisticsContainer = css`
 	grid-column: span 2;
 	border-top: 1px solid ${palette('--section-border')};
@@ -84,7 +81,38 @@ const Statistic = ({ name, value }: Statistics) => (
 	</div>
 );
 
+const ButtonContainer = ({ children }: { children: ReactNode }) => (
+	<div
+		css={css`
+			grid-column: span 2;
+		`}
+	>
+		{children}
+	</div>
+);
+
+const RetailerLink = ({ url, retailer }: { url: string; retailer: string }) => (
+	<a
+		css={css`
+			color: ${palette('--article-text')};
+			border-bottom: 1px solid ${palette('--article-link-border')};
+			text-decoration: none;
+			:hover,
+			:active {
+				border-bottom: 1px solid ${palette('--article-text')};
+			}
+		`}
+		href={url}
+	>
+		{retailer}
+	</a>
+);
+const ProductInfoContainer = ({ children }: { children: ReactNode }) => (
+	<div css={productInfoContainer}>{children}</div>
+);
+
 export const InlineProductCard = ({
+	format,
 	brandName,
 	productName,
 	image,
@@ -97,88 +125,45 @@ export const InlineProductCard = ({
 	statistics,
 }: InlineProductCardProps) => (
 	<div css={card}>
-		<div
-			css={css`
-				width: 165px;
-			`}
-		>
-			{!!image && (
-				<a
-					href={primaryUrl}
-					target="_blank"
-					rel="noopener noreferrer"
-					style={{
-						display: 'block',
-						marginBottom: '12px',
-						borderRadius: '6px',
-					}}
-				>
-					<img
-						src={image}
-						alt={productName}
-						css={css`
-							width: 165px;
-							height: 165px;
-						`}
-					/>
-				</a>
-			)}
-		</div>
-		<div css={productInfoContainer}>
-			<span css={primaryHeading}>{brandName}</span>
-			<span css={secondaryHeading}>{productName}</span>
-			<span css={priceRowStyle}>
+		{!!image && (
+			<Picture
+				role={'productCard'}
+				format={format}
+				master={image}
+				alt={productName + brandName}
+				height={1}
+				width={1}
+				loading={'eager'}
+			/>
+		)}
+		<ProductInfoContainer>
+			<div css={primaryHeading}>{brandName}</div>
+			<div>{productName}</div>
+			<div>
 				<strong>{primaryPrice}</strong> from{' '}
-				<a
-					css={css`
-						color: ${palette('--article-text')};
-						border-bottom: 1px solid
-							${palette('--article-link-border')};
-						text-decoration: none;
-						:hover,
-						:active {
-							border-bottom: 1px solid
-								${palette('--article-text')};
-						}
-					`}
-					href={primaryUrl}
-				>
-					{primaryRetailer}
-				</a>
-			</span>
-		</div>
-		<div
-			css={css`
-				grid-column: span 2;
-			`}
-		>
-			<div
-				css={css`
-					padding-bottom: 10px;
+				<RetailerLink url={primaryUrl} retailer={primaryRetailer} />
+			</div>
+		</ProductInfoContainer>
+		<ButtonContainer>
+			<ProductLinkButton
+				label={primaryCTA}
+				url={primaryUrl}
+				cssOverrides={css`
 					width: 100%;
+					margin-bottom: 10px;
 				`}
-			>
+			/>
+			{!!secondaryCTA && !!secondaryUrl && (
 				<ProductLinkButton
-					label={primaryCTA}
-					url={primaryUrl}
 					cssOverrides={css`
 						width: 100%;
 					`}
-				></ProductLinkButton>
-			</div>
-			<div>
-				{!!secondaryCTA && !!secondaryUrl && (
-					<ProductLinkButton
-						cssOverrides={css`
-							width: 100%;
-						`}
-						label={secondaryCTA}
-						url={secondaryUrl}
-						priority={'tertiary'}
-					/>
-				)}
-			</div>
-		</div>
+					label={secondaryCTA}
+					url={secondaryUrl}
+					priority={'tertiary'}
+				/>
+			)}
+		</ButtonContainer>
 		{statistics.length > 0 && (
 			<div css={statisticsContainer}>
 				{statistics.map((statistic) => (
