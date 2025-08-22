@@ -4816,6 +4816,9 @@
                 "googleRecaptchaSiteKey": {
                     "type": "string"
                 },
+                "googleRecaptchaSiteKeyVisible": {
+                    "type": "string"
+                },
                 "pageId": {
                     "type": "string"
                 },
