@@ -192,7 +192,7 @@ export const SlideshowCarousel = ({
 	const slideshowImageCount = slideshowImages.length;
 
 	return (
-		<div>
+		<div className="slideshow-carousel">
 			<ul
 				ref={carouselRef}
 				css={carouselStyles}
