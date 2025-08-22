@@ -158,6 +158,7 @@ export const renderSportPage = (sportData: SportDataPage) => {
 			googletagUrl: sportData.config.googletagUrl,
 			switches: sportData.config.switches,
 			abTests: sportData.config.abTests,
+			serverSideABTests: sportData.config.serverSideABTests,
 			brazeApiKey: sportData.config.brazeApiKey,
 			isPaidContent: sportData.config.isPaidContent,
 			contentType: sportData.config.contentType,
