@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { space, textSansBold12 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { secondsToDuration } from '../lib/formatTime';
-import type { ImagePositionType } from './Card/components/ImageWrapper';
+import type { MediaPositionType } from './Card/components/MediaWrapper';
 
 const durationStyles = css`
 	position: absolute;
@@ -16,19 +16,22 @@ const durationStyles = css`
 	${textSansBold12};
 `;
 
+type Props = {
+	mediaDuration: number;
+	mediaPositionOnDesktop?: MediaPositionType;
+	mediaPositionOnMobile?: MediaPositionType;
+};
+
 export const MediaDuration = ({
 	mediaDuration,
-	imagePositionOnDesktop,
-	imagePositionOnMobile,
-}: {
-	mediaDuration: number;
-	imagePositionOnDesktop?: ImagePositionType;
-	imagePositionOnMobile?: ImagePositionType;
-}) => {
-	if (imagePositionOnDesktop === 'left') {
+	mediaPositionOnDesktop,
+	mediaPositionOnMobile,
+}: Props) => {
+	if (mediaPositionOnDesktop === 'left') {
 		return null;
 	}
-	if (imagePositionOnMobile === 'left') {
+
+	if (mediaPositionOnMobile === 'left') {
 		return (
 			<Hide until="tablet">
 				<div css={durationStyles}>

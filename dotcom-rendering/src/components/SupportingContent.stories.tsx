@@ -30,7 +30,7 @@ const basicCardProps: CardProps = {
 		src: 'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_0_5472_3648/master/5472.jpg',
 		altText: 'some alt text',
 	},
-	imagePositionOnDesktop: 'top',
+	mediaPositionOnDesktop: 'top',
 	isExternalLink: false,
 	showLivePlayable: false,
 	canPlayInline: true,
@@ -134,7 +134,7 @@ export const Themes = () => {
 						},
 					},
 				]}
-				imagePositionOnDesktop="top"
+				mediaPositionOnDesktop="top"
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -170,7 +170,7 @@ export const Vertical = () => {
 						headline: 'Vertical 3',
 					},
 				]}
-				imagePositionOnDesktop="top"
+				mediaPositionOnDesktop="top"
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -207,8 +207,8 @@ export const Horizontal = () => {
 						headline: 'Horizontal 3',
 					},
 				]}
-				imagePositionOnDesktop="right"
-				imageSize="large"
+				mediaPositionOnDesktop="right"
+				mediaSize="large"
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -245,7 +245,7 @@ export const HorizontalOnMobile = () => {
 						headline: 'Horizontal 3',
 					},
 				]}
-				imagePositionOnDesktop="right"
+				mediaPositionOnDesktop="right"
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -298,8 +298,8 @@ export const LongText = () => {
 						kickerText: 'Long',
 					},
 				]}
-				imagePositionOnDesktop="left"
-				imageSize="large"
+				mediaPositionOnDesktop="left"
+				mediaSize="large"
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -349,8 +349,8 @@ export const MoreThanThree = () => {
 						kickerText: 'Kicker',
 					},
 				]}
-				imagePositionOnDesktop="left"
-				imageSize="large"
+				mediaPositionOnDesktop="left"
+				mediaSize="large"
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -379,8 +379,8 @@ export const OneSublink = () => {
 						kickerText: 'Kicker',
 					},
 				]}
-				imagePositionOnDesktop="left"
-				imageSize="large"
+				mediaPositionOnDesktop="left"
+				mediaSize="large"
 				trailText="When the image is positioned horizontally and there is only one sublink, it appears under the headline"
 				format={{
 					display: ArticleDisplay.Standard,
@@ -415,8 +415,8 @@ export const TwoSublinks = () => {
 						kickerText: 'Kicker',
 					},
 				]}
-				imagePositionOnDesktop="left"
-				imageSize="large"
+				mediaPositionOnDesktop="left"
+				mediaSize="large"
 				trailText="When there are only two sublinks they appear under the headline vertically stacked"
 				format={{
 					display: ArticleDisplay.Standard,
@@ -451,8 +451,8 @@ export const LiveSublink = () => {
 						},
 					},
 				]}
-				imagePositionOnDesktop="left"
-				imageSize="large"
+				mediaPositionOnDesktop="left"
+				mediaSize="large"
 				trailText="When the image is positioned horizontally and there is only one sublink, it appears under the headline"
 				format={{
 					display: ArticleDisplay.Standard,

@@ -3,27 +3,27 @@ import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
 import type { CardMediaType } from '../../../types/layout';
 
-const imageFixedSize = {
+const mediaFixedSize = {
 	tiny: 86,
 	small: 122.5,
 	medium: 125,
 };
 
-type ImageFixedSize = keyof typeof imageFixedSize;
+type MediaFixedSize = keyof typeof mediaFixedSize;
 
-export type ImageFixedSizeOptions = {
-	mobile: ImageFixedSize;
-	tablet?: ImageFixedSize;
-	desktop?: ImageFixedSize;
+export type MediaFixedSizeOptions = {
+	mobile: MediaFixedSize;
+	tablet?: MediaFixedSize;
+	desktop?: MediaFixedSize;
 };
 
-export type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
-export type ImageSizeType =
+export type MediaPositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
+export type MediaSizeType =
 	| 'small'
 	| 'medium'
 	| 'large'
-	| 'jumbo'
 	| 'xlarge'
+	| 'jumbo'
 	| 'carousel'
 	| 'podcast'
 	| 'highlights-card'
@@ -33,19 +33,19 @@ export type ImageSizeType =
 
 type Props = {
 	children: React.ReactNode;
-	imageSize: ImageSizeType;
-	imageFixedSizes?: ImageFixedSizeOptions;
-	imageType?: CardMediaType;
-	imagePositionOnDesktop: ImagePositionType;
-	imagePositionOnMobile: ImagePositionType;
+	mediaSize: MediaSizeType;
+	mediaFixedSizes?: MediaFixedSizeOptions;
+	mediaType?: CardMediaType;
+	mediaPositionOnDesktop: MediaPositionType;
+	mediaPositionOnMobile: MediaPositionType;
 	/**
 	 * Forces hiding the image overlay added to pictures & slideshows on hover.
 	 * This is to allow hiding the overlay on slideshow carousels where we don't
 	 * want it to be shown whilst retaining it for existing slideshows.
 	 */
 	hideImageOverlay?: boolean;
-	padImage?: boolean;
 	isBetaContainer?: boolean;
+	padMedia?: boolean;
 };
 
 const imageOverlayContainerStyles = css`
@@ -57,39 +57,39 @@ const imageOverlayContainerStyles = css`
 `;
 
 /**
- * There is no padding on the side of the image where the text is.
+ * There is zero padding on the side of the media where the text is.
  */
-const imagePaddingStyles = (
-	imagePositionOnDesktop: ImagePositionType,
-	imagePositionOnMobile: ImagePositionType,
+const mediaPaddingStyles = (
+	mediaPositionOnDesktop: MediaPositionType,
+	mediaPositionOnMobile: MediaPositionType,
 ) => css`
 	${until.tablet} {
-		padding-left: ${imagePositionOnMobile !== 'right' && `${space[2]}px`};
-		padding-right: ${imagePositionOnMobile !== 'left' && `${space[2]}px`};
-		padding-top: ${imagePositionOnMobile !== 'bottom' && `${space[2]}px`};
-		padding-bottom: ${imagePositionOnMobile !== 'top' && `${space[2]}px`};
+		padding-left: ${mediaPositionOnMobile !== 'right' && `${space[2]}px`};
+		padding-right: ${mediaPositionOnMobile !== 'left' && `${space[2]}px`};
+		padding-top: ${mediaPositionOnMobile !== 'bottom' && `${space[2]}px`};
+		padding-bottom: ${mediaPositionOnMobile !== 'top' && `${space[2]}px`};
 	}
 	${from.tablet} {
-		padding-left: ${imagePositionOnDesktop !== 'right' && `${space[2]}px`};
-		padding-right: ${imagePositionOnDesktop !== 'left' && `${space[2]}px`};
-		padding-top: ${imagePositionOnDesktop !== 'bottom' && `${space[2]}px`};
-		padding-bottom: ${imagePositionOnDesktop !== 'top' && `${space[2]}px`};
+		padding-left: ${mediaPositionOnDesktop !== 'right' && `${space[2]}px`};
+		padding-right: ${mediaPositionOnDesktop !== 'left' && `${space[2]}px`};
+		padding-top: ${mediaPositionOnDesktop !== 'bottom' && `${space[2]}px`};
+		padding-bottom: ${mediaPositionOnDesktop !== 'top' && `${space[2]}px`};
 	}
 `;
 
 /**
- * This function works in partnership with its sibling in `ContentWrapper`. If you
- * change any values here be sure to update that file as well.
+ * This function works in partnership with its sibling in `ContentWrapper`.
+ * If you change any values here be sure to update that file as well.
  */
 const flexBasisStyles = ({
-	imageSize,
+	mediaSize,
 	isBetaContainer,
 }: {
-	imageSize: ImageSizeType;
+	mediaSize: MediaSizeType;
 	isBetaContainer: boolean;
 }): SerializedStyles => {
 	if (!isBetaContainer) {
-		switch (imageSize) {
+		switch (mediaSize) {
 			default:
 			case 'small':
 				return css`
@@ -116,7 +116,7 @@ const flexBasisStyles = ({
 		}
 	}
 
-	switch (imageSize) {
+	switch (mediaSize) {
 		default:
 		case 'small':
 		case 'medium':
@@ -148,81 +148,81 @@ const flexBasisStyles = ({
 	}
 };
 /**
- * Below tablet, we fix the size of the image and add a margin around it.
+ * Below tablet, we fix the size of the media and add a margin around it.
  * The corresponding content flex grows to fill the space.
  *
- * Fixed images sizes can optionally be applied at tablet and desktop.
+ * Fixed media sizes can optionally be applied at tablet and desktop.
  */
-const fixImageWidthStyles = (width: number) => css`
+const fixMediaWidthStyles = (width: number) => css`
 	width: ${width}px;
 	flex-shrink: 0;
 	flex-basis: unset;
 	align-self: flex-start;
 `;
 
-const fixImageWidth = ({
+const fixMediaWidth = ({
 	mobile,
 	tablet,
 	desktop,
-}: ImageFixedSizeOptions) => css`
+}: MediaFixedSizeOptions) => css`
 	${until.tablet} {
-		${fixImageWidthStyles(imageFixedSize[mobile])}
+		${fixMediaWidthStyles(mediaFixedSize[mobile])}
 	}
 	${tablet &&
 	css`
 		${between.tablet.and.desktop} {
-			${fixImageWidthStyles(imageFixedSize[tablet])}
+			${fixMediaWidthStyles(mediaFixedSize[tablet])}
 		}
 	`}
 	${desktop &&
 	css`
 		${from.desktop} {
-			${fixImageWidthStyles(imageFixedSize[desktop])}
+			${fixMediaWidthStyles(mediaFixedSize[desktop])}
 		}
 	`}
 `;
 
-export const ImageWrapper = ({
+export const MediaWrapper = ({
 	children,
-	imageSize,
-	imageFixedSizes = { mobile: 'medium' },
-	imageType,
-	imagePositionOnDesktop,
-	imagePositionOnMobile,
+	mediaSize,
+	mediaFixedSizes = { mobile: 'medium' },
+	mediaType,
+	mediaPositionOnDesktop,
+	mediaPositionOnMobile,
 	hideImageOverlay,
-	padImage,
-	isBetaContainer,
+	isBetaContainer = false,
+	padMedia,
 }: Props) => {
 	const isHorizontalOnDesktop =
-		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
+		mediaPositionOnDesktop === 'left' || mediaPositionOnDesktop === 'right';
 	const isHorizontalOnMobile =
-		imagePositionOnMobile === 'left' || imagePositionOnMobile === 'right';
+		mediaPositionOnMobile === 'left' || mediaPositionOnMobile === 'right';
 
 	return (
 		<div
 			css={[
-				(imageType === 'slideshow' ||
-					imageType === 'picture' ||
-					imageType === 'youtube-video' ||
-					imageType === 'loop-video') &&
+				(mediaType === 'slideshow' ||
+					mediaType === 'picture' ||
+					mediaType === 'youtube-video' ||
+					mediaType === 'loop-video') &&
 					isHorizontalOnDesktop &&
 					flexBasisStyles({
-						imageSize,
-						isBetaContainer: !!isBetaContainer,
+						mediaSize,
+						isBetaContainer,
 					}),
-				imageType === 'avatar' &&
+				mediaType === 'avatar' &&
 					css`
 						display: flex;
 						justify-content: flex-end;
 					`,
-				/* If no image position for mobile is provided then hide the image */
-				imagePositionOnMobile === 'none' &&
+				/* If no media position for mobile is provided then hide the media */
+				mediaPositionOnMobile === 'none' &&
 					css`
 						${until.tablet} {
 							display: none;
 						}
 					`,
-				isHorizontalOnMobile && fixImageWidth(imageFixedSizes),
+				isHorizontalOnMobile && fixMediaWidth(mediaFixedSizes),
 				isHorizontalOnDesktop &&
 					css`
 						${from.tablet} {
@@ -237,25 +237,25 @@ export const ImageWrapper = ({
 						display: block;
 					}
 				`,
-				padImage &&
-					imagePaddingStyles(
-						imagePositionOnDesktop,
-						imagePositionOnMobile,
+				padMedia &&
+					mediaPaddingStyles(
+						mediaPositionOnDesktop,
+						mediaPositionOnMobile,
 					),
 			]}
 		>
 			<>
 				{children}
 				{/* This image overlay is styled when the CardLink is hovered */}
-				{(imageType === 'picture' || imageType === 'slideshow') &&
+				{(mediaType === 'picture' || mediaType === 'slideshow') &&
 					!hideImageOverlay && (
 						<div
 							css={[
 								imageOverlayContainerStyles,
-								padImage &&
-									imagePaddingStyles(
-										imagePositionOnDesktop,
-										imagePositionOnMobile,
+								padMedia &&
+									mediaPaddingStyles(
+										mediaPositionOnDesktop,
+										mediaPositionOnMobile,
 									),
 							]}
 						>

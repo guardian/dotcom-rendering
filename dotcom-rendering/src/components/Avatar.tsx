@@ -3,7 +3,7 @@ import { breakpoints } from '@guardian/source/foundations';
 import { Fragment } from 'react';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { palette } from '../palette';
-import type { ImageSizeType } from './Card/components/ImageWrapper';
+import type { MediaSizeType } from './Card/components/MediaWrapper';
 import {
 	generateSources,
 	getFallbackSource,
@@ -56,11 +56,11 @@ type Props = {
 	src: string;
 	alt: string;
 	shape?: AvatarShape;
-	imageSize?: ImageSizeType;
+	imageSize?: MediaSizeType;
 };
 
 const decideImageWidths = (
-	imageSize: ImageSizeType,
+	imageSize: MediaSizeType,
 ): [ImageWidthType, ...ImageWidthType[]] => {
 	switch (imageSize) {
 		case 'small':

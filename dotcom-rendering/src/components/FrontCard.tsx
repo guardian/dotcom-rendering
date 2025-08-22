@@ -17,10 +17,9 @@ type Props = {
  * commonly overridden params to make it easier for a developer to know if they actually need to override these values.
  *
  * @param props
- * @param [props.headlineSize] - Defaults to "medium"
- * @param [props.imagePosition] - Defaults to "top"
- * @param [props.imagePositionOnMobile] - Defaults to "left"
- * @param [props.imageSize] - Defaults to "small"
+ * @param [props.mediaPositionOnDesktop] - Defaults to "top"
+ * @param [props.mediaPositionOnMobile] - Defaults to "left"
+ * @param [props.mediaSize] - Defaults to "small"
  * @param [props.supportingContent] - Defaults to undefined, set to trail.supportingContent if you want this card to show sublinks.
  * @param [props.trailText] - Defaults to undefined, set to `trail.trailText` if you want this card to show trail text.
  */
