@@ -418,7 +418,7 @@ export const SecureSignup = ({
 						cssOverrides={optInCheckboxTextSmall}
 					>
 						<Checkbox
-							label="Receive information on our products and ways to support and enjoy our journalism. Untick to opt out."
+							label="Get updates about our journalism and ways to support and enjoy our work."
 							value="marketing-opt-in"
 							checked={marketingOptIn}
 							onChange={(e) =>
