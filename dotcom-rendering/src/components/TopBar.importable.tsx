@@ -147,61 +147,69 @@ export const TopBar = ({
 					/>
 				</TopBarLinkContainer>
 
-				<Hide until="desktop">
-					<TopBarLinkContainer>
-						<TopBarLink
-							dataLinkName={nestedOphanComponents(
-								'header',
-								'topbar',
-								'printsubs',
-							)}
-							href={printSubscriptionsHref}
-						>
-							Print subscriptions
-						</TopBarLink>
-					</TopBarLinkContainer>
-				</Hide>
-
-				<Hide until="desktop">
-					<TopBarLinkContainer>
-						{
-							/** We replace "Search jobs" with "Newsletters" for AU and US editions */
-							['AU', 'US'].includes(editionId) ? (
+				{authStatus.kind !== 'Pending' && (
+					<>
+						<Hide until="desktop">
+							<TopBarLinkContainer>
 								<TopBarLink
 									dataLinkName={nestedOphanComponents(
 										'header',
 										'topbar',
-										'newsletters',
+										'printsubs',
 									)}
-									href="/email-newsletters"
+									href={printSubscriptionsHref}
 								>
-									Newsletters
+									Print subscriptions
 								</TopBarLink>
-							) : (
-								<TopBarLink
-									dataLinkName={nestedOphanComponents(
-										'header',
-										'topbar',
-										'job-cta',
-									)}
-									href="https://jobs.theguardian.com"
-								>
-									Search jobs
-								</TopBarLink>
-							)
-						}
-					</TopBarLinkContainer>
-				</Hide>
+							</TopBarLinkContainer>
+						</Hide>
 
-				<TopBarLinkContainer isLastChild={true}>
-					<TopBarMyAccount
-						mmaUrl={mmaUrl ?? 'https://manage.theguardian.com'}
-						idUrl={idUrl ?? 'https://profile.theguardian.com'}
-						discussionApiUrl={discussionApiUrl}
-						idApiUrl={idApiUrl}
-						authStatus={authStatus}
-					/>
-				</TopBarLinkContainer>
+						<Hide until="desktop">
+							<TopBarLinkContainer>
+								{
+									/** We replace "Search jobs" with "Newsletters" for AU and US editions */
+									['AU', 'US'].includes(editionId) ? (
+										<TopBarLink
+											dataLinkName={nestedOphanComponents(
+												'header',
+												'topbar',
+												'newsletters',
+											)}
+											href="/email-newsletters"
+										>
+											Newsletters
+										</TopBarLink>
+									) : (
+										<TopBarLink
+											dataLinkName={nestedOphanComponents(
+												'header',
+												'topbar',
+												'job-cta',
+											)}
+											href="https://jobs.theguardian.com"
+										>
+											Search jobs
+										</TopBarLink>
+									)
+								}
+							</TopBarLinkContainer>
+						</Hide>
+
+						<TopBarLinkContainer isLastChild={true}>
+							<TopBarMyAccount
+								mmaUrl={
+									mmaUrl ?? 'https://manage.theguardian.com'
+								}
+								idUrl={
+									idUrl ?? 'https://profile.theguardian.com'
+								}
+								discussionApiUrl={discussionApiUrl}
+								idApiUrl={idApiUrl}
+								authStatus={authStatus}
+							/>
+						</TopBarLinkContainer>
+					</>
+				)}
 			</div>
 		</Grid>
 	);
