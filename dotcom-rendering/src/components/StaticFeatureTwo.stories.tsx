@@ -13,7 +13,7 @@ import { StaticFeatureTwo } from './StaticFeatureTwo';
 
 const meta = {
 	component: StaticFeatureTwo,
-	title: 'Components/StaticFeatureTwo',
+	title: 'Front Containers/StaticFeatureTwo',
 	parameters: {
 		chromatic: {
 			viewports: [

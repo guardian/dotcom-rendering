@@ -10,7 +10,6 @@ import type {
 import { DynamicFast } from './DynamicFast';
 import { DynamicPackage } from './DynamicPackage';
 import { DynamicSlow } from './DynamicSlow';
-import { DynamicSlowMPU } from './DynamicSlowMPU';
 import { FixedLargeSlowXIV } from './FixedLargeSlowXIV';
 import { FixedMediumFastXI } from './FixedMediumFastXI';
 import { FixedMediumFastXII } from './FixedMediumFastXII';
@@ -78,16 +77,6 @@ export const DecideContainer = ({
 		case 'dynamic/slow':
 			return (
 				<DynamicSlow
-					groupedTrails={groupedTrails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'dynamic/slow-mpu':
-			return (
-				<DynamicSlowMPU
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}

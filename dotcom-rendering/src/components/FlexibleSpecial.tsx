@@ -9,7 +9,10 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import type { ImagePositionType } from './Card/components/ImageWrapper';
+import type {
+	ImagePositionType,
+	ImageSizeType,
+} from './Card/components/ImageWrapper';
 import { LI } from './Card/components/LI';
 import type { TrailTextSize } from './Card/components/TrailText';
 import { UL } from './Card/components/UL';
@@ -31,6 +34,7 @@ type Props = {
 
 type BoostProperties = {
 	headlineSizes: ResponsiveFontSize;
+	imageSize: ImageSizeType;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	supportingContentAlignment: Alignment;
@@ -57,6 +61,7 @@ const determineCardProperties = (
 					tablet: 'large',
 					mobile: 'medium',
 				},
+				imageSize: 'xlarge',
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				supportingContentAlignment:
@@ -71,6 +76,7 @@ const determineCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'large',
 				},
+				imageSize: 'xlarge',
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				supportingContentAlignment:
@@ -85,6 +91,7 @@ const determineCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'xlarge',
 				},
+				imageSize: 'jumbo',
 				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				supportingContentAlignment: 'horizontal',
@@ -98,6 +105,7 @@ const determineCardProperties = (
 					tablet: 'xxlarge',
 					mobile: 'xxlarge',
 				},
+				imageSize: 'jumbo',
 				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
 				supportingContentAlignment: 'horizontal',
@@ -117,6 +125,7 @@ type OneCardLayoutProps = {
 	isLastRow: boolean;
 	isFirstRow: boolean;
 	containerLevel: DCRContainerLevel;
+	isSplashCard?: boolean;
 };
 
 export const OneCardLayout = ({
@@ -129,12 +138,14 @@ export const OneCardLayout = ({
 	isLastRow,
 	isFirstRow,
 	containerLevel,
+	isSplashCard,
 }: OneCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
 
 	const {
 		headlineSizes,
+		imageSize,
 		imagePositionOnDesktop,
 		imagePositionOnMobile,
 		supportingContentAlignment,
@@ -158,7 +169,7 @@ export const OneCardLayout = ({
 					headlineSizes={headlineSizes}
 					imagePositionOnDesktop={imagePositionOnDesktop}
 					imagePositionOnMobile={imagePositionOnMobile}
-					imageSize={'jumbo'}
+					imageSize={imageSize}
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
 					supportingContentAlignment={supportingContentAlignment}
@@ -177,6 +188,7 @@ export const OneCardLayout = ({
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
+					headlinePosition={isSplashCard ? 'outer' : 'inner'}
 				/>
 			</LI>
 		</UL>
@@ -289,28 +301,35 @@ export const FlexibleSpecial = ({
 
 	return (
 		<>
-			<OneCardLayout
-				cards={snaps}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				absoluteServerTimes={absoluteServerTimes}
-				imageLoading={imageLoading}
-				aspectRatio={aspectRatio}
-				isFirstRow={true}
-				isLastRow={splash.length === 0 && cards.length === 0}
-				containerLevel={containerLevel}
-			/>
-			<OneCardLayout
-				cards={splash}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				absoluteServerTimes={absoluteServerTimes}
-				imageLoading={imageLoading}
-				aspectRatio={aspectRatio}
-				isLastRow={cards.length === 0}
-				isFirstRow={!isNonEmptyArray(snaps)}
-				containerLevel={containerLevel}
-			/>
+			{isNonEmptyArray(snaps) && (
+				<OneCardLayout
+					cards={snaps}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
+					imageLoading={imageLoading}
+					aspectRatio={aspectRatio}
+					isFirstRow={true}
+					isLastRow={splash.length === 0 && cards.length === 0}
+					containerLevel={containerLevel}
+					isSplashCard={false}
+				/>
+			)}
+			{isNonEmptyArray(splash) && (
+				<OneCardLayout
+					cards={splash}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
+					imageLoading={imageLoading}
+					aspectRatio={aspectRatio}
+					isLastRow={cards.length === 0}
+					isFirstRow={!isNonEmptyArray(snaps)}
+					containerLevel={containerLevel}
+					isSplashCard={true}
+				/>
+			)}
+
 			<TwoOrFourCardLayout
 				cards={cards}
 				containerPalette={containerPalette}

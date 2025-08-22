@@ -7,6 +7,8 @@ import {
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { Fragment } from 'react';
+import { AdPlaceholder } from '../components/AdPlaceholder.apps';
+import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -14,11 +16,14 @@ import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Caption } from '../components/Caption';
+import { Carousel } from '../components/Carousel.importable';
+import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { DesktopAdSlot, MobileAdSlot } from '../components/GalleryAdSlots';
 import { GalleryImage } from '../components/GalleryImage';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
+import { LabsHeader } from '../components/LabsHeader';
 import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
@@ -30,9 +35,8 @@ import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
-import { getAdPositions } from '../lib/getGalleryAdPositions';
 import type { NavType } from '../model/extract-nav';
-import { palette as themePalette } from '../palette';
+import { palette } from '../palette';
 import type { Gallery } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
@@ -51,18 +55,12 @@ interface AppProps extends Props {
 	renderingTarget: 'Apps';
 }
 
-const border = css({
-	borderWidth: 1,
-	borderStyle: 'solid',
-	color: '#ccc',
-});
-
 const headerStyles = css`
 	${grid.container}
-	background-color: ${themePalette('--article-inner-background')};
+	background-color: ${palette('--article-inner-background')};
 
 	${from.tablet} {
-		border-bottom: 1px solid ${themePalette('--article-border')};
+		border-bottom: 1px solid ${palette('--article-border')};
 	}
 `;
 
@@ -78,7 +76,7 @@ const metaAndDisclaimerContainer = css`
 			top: 0;
 			bottom: 0;
 			width: 1px;
-			background-color: ${themePalette('--article-border')};
+			background-color: ${palette('--article-border')};
 		}
 	}
 `;
@@ -86,11 +84,11 @@ const metaAndDisclaimerContainer = css`
 const galleryItemAdvertStyles = css`
 	${grid.paddedContainer}
 	grid-auto-flow: row dense;
-	background-color: ${themePalette('--article-inner-background')};
+	background-color: ${palette('--article-inner-background')};
 
 	${from.tablet} {
-		border-left: 1px solid ${themePalette('--article-border')};
-		border-right: 1px solid ${themePalette('--article-border')};
+		border-left: 1px solid ${palette('--article-border')};
+		border-right: 1px solid ${palette('--article-border')};
 	}
 `;
 
@@ -119,7 +117,7 @@ const galleryBorder = css`
 			top: 0;
 			bottom: 0;
 			width: 1px;
-			background-color: ${themePalette('--article-border')};
+			background-color: ${palette('--article-border')};
 		}
 	}
 
@@ -133,13 +131,30 @@ const galleryBorder = css`
 			top: 0;
 			bottom: 0;
 			width: 1px;
-			background-color: ${themePalette('--article-border')};
+			background-color: ${palette('--article-border')};
 		}
 	}
 `;
 
 export const GalleryLayout = (props: WebProps | AppProps) => {
 	const { gallery, renderingTarget } = props;
+
+	const {
+		config: {
+			abTests,
+			idUrl,
+			mmaUrl,
+			discussionApiUrl,
+			idApiUrl,
+			shortUrlId,
+			isPreview,
+			isSensitive,
+			section,
+			switches,
+		},
+		editionId,
+	} = gallery.frontendData;
+
 	const frontendData = gallery.frontendData;
 
 	const isWeb = renderingTarget === 'Web';
@@ -156,12 +171,12 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const renderAds = canRenderAds(frontendData);
+	const showMerchandisingHigh = isWeb && renderAds && !isLabs;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(frontendData);
 
-	const adPositions: number[] = renderAds
-		? getAdPositions(gallery.images)
-		: [];
+	const showComments =
+		frontendData.isCommentable && !frontendData.config.isPaidContent;
 
 	return (
 		<>
@@ -176,23 +191,21 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot
-									abTests={frontendData.config.abTests}
-								/>
+								<HeaderAdSlot abTests={abTests} />
 							</Section>
 						</Stuck>
 					)}
 					<Masthead
 						nav={props.NAV}
-						editionId={frontendData.editionId}
-						idUrl={frontendData.config.idUrl}
-						mmaUrl={frontendData.config.mmaUrl}
-						discussionApiUrl={frontendData.config.discussionApiUrl}
-						idApiUrl={frontendData.config.idApiUrl}
+						editionId={editionId}
+						idUrl={idUrl}
+						mmaUrl={mmaUrl}
+						discussionApiUrl={discussionApiUrl}
+						idApiUrl={idApiUrl}
 						contributionsServiceUrl={
 							frontendData.contributionsServiceUrl
 						}
-						showSubNav={false}
+						showSubNav={!isLabs}
 						showSlimNav={true}
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}
@@ -200,16 +213,37 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					/>
 				</div>
 			)}
+
+			{format.theme === ArticleSpecial.Labs && (
+				<Stuck>
+					<Section
+						fullWidth={true}
+						showTopBorder={false}
+						backgroundColour={sourcePalette.labs[400]}
+						borderColour={sourcePalette.neutral[60]}
+						sectionId="labs-header"
+						element="aside"
+					>
+						<LabsHeader editionId={editionId} />
+					</Section>
+				</Stuck>
+			)}
+
 			<main
 				css={{
-					backgroundColor: themePalette('--article-background'),
+					backgroundColor: palette('--article-background'),
 				}}
 			>
-				<div css={border}>Labs header</div>
+				{isApps && renderAds && (
+					<Island priority="critical">
+						<AdPortals />
+					</Island>
+				)}
 				<header css={headerStyles}>
 					<MainMediaGallery
 						mainMedia={gallery.mainMedia}
 						format={format}
+						renderingTarget={props.renderingTarget}
 					/>
 					<ArticleTitle
 						format={format}
@@ -256,10 +290,8 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 									frontendData.webPublicationSecondaryDateDisplay
 								}
 								isCommentable={frontendData.isCommentable}
-								discussionApiUrl={
-									frontendData.config.discussionApiUrl
-								}
-								shortUrlId={frontendData.config.shortUrlId}
+								discussionApiUrl={discussionApiUrl}
+								shortUrlId={shortUrlId}
 							/>
 						) : null}
 						{isApps ? (
@@ -280,53 +312,62 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 									frontendData.webPublicationSecondaryDateDisplay
 								}
 								isCommentable={frontendData.isCommentable}
-								discussionApiUrl={
-									frontendData.config.discussionApiUrl
-								}
-								shortUrlId={frontendData.config.shortUrlId}
+								discussionApiUrl={discussionApiUrl}
+								shortUrlId={shortUrlId}
 							/>
 						) : null}
 					</div>
 				</header>
-				{gallery.images.map((element, idx) => {
-					const index = idx + 1;
-					const shouldShowAds = adPositions.includes(index);
-
+				{gallery.bodyElements.map((element, index) => {
+					const isImage =
+						element._type ===
+						'model.dotcomrendering.pageElements.ImageBlockElement';
+					const shouldShowAds =
+						element._type ===
+						'model.dotcomrendering.pageElements.AdPlaceholderBlockElement';
 					return (
-						<Fragment key={element.elementId}>
-							<GalleryImage
-								image={element}
-								format={format}
-								pageId={frontendData.pageId}
-								webTitle={frontendData.webTitle}
-							/>
-							{isWeb && shouldShowAds && (
-								<div css={galleryItemAdvertStyles}>
-									<div css={galleryInlineAdContainerStyles}>
-										<Hide until="tablet">
-											<DesktopAdSlot
-												renderAds={renderAds}
-												adSlotIndex={adPositions.indexOf(
-													index,
-												)}
-											/>
-										</Hide>
-										<Hide from="tablet">
-											<MobileAdSlot
-												renderAds={renderAds}
-												adSlotIndex={adPositions.indexOf(
-													index,
-												)}
-											/>
-										</Hide>
-									</div>
-									<div css={galleryBorder}></div>
-								</div>
+						<Fragment key={isImage ? element.elementId : index}>
+							{isImage && (
+								<GalleryImage
+									image={element}
+									format={format}
+									pageId={frontendData.pageId}
+									webTitle={frontendData.webTitle}
+									renderingTarget={props.renderingTarget}
+								/>
+							)}
+							{shouldShowAds && renderAds && (
+								<>
+									{isWeb && (
+										<div css={galleryItemAdvertStyles}>
+											<div
+												css={
+													galleryInlineAdContainerStyles
+												}
+											>
+												<Hide until="tablet">
+													<DesktopAdSlot
+														renderAds={renderAds}
+														adSlotIndex={index}
+													/>
+												</Hide>
+												<Hide from="tablet">
+													<MobileAdSlot
+														renderAds={renderAds}
+														adSlotIndex={index}
+													/>
+												</Hide>
+											</div>
+											<div css={galleryBorder}></div>
+										</div>
+									)}
+									{isApps && <AdPlaceholder />}
+								</>
 							)}
 						</Fragment>
 					);
 				})}
-				;
+
 				<SubMeta
 					format={format}
 					subMetaKeywordLinks={frontendData.subMetaKeywordLinks}
@@ -339,20 +380,59 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					}
 				/>
 			</main>
-			{isWeb && renderAds && !isLabs && (
+			{/* More galleries container */}
+			{showMerchandisingHigh && (
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
 					padSides={false}
 					showTopBorder={false}
 					showSideBorders={false}
-					backgroundColour={themePalette('--ad-background')}
+					backgroundColour={palette('--ad-background')}
 					element="aside"
 				>
 					<AdSlot
 						data-print-layout="hide"
 						position="merchandising-high"
 						display={format.display}
+					/>
+				</Section>
+			)}
+			<StoryPackage
+				absoluteServerTimes={switches['absoluteServerTimes'] ?? false}
+				discussionApiUrl={discussionApiUrl}
+				format={format}
+				renderingTarget={renderingTarget}
+				storyPackage={gallery.storyPackage}
+				topBorder={showMerchandisingHigh}
+			/>
+			{/** More Galleries container goes here */}
+			{showComments && (
+				<Section
+					fullWidth={true}
+					sectionId="comments"
+					element="section"
+					backgroundColour={palette(
+						'--discussion-section-background',
+					)}
+					borderColour={palette('--article-border')}
+					fontColour={palette('--discussion-text')}
+				>
+					<DiscussionLayout
+						discussionApiUrl={frontendData.config.discussionApiUrl}
+						shortUrlId={frontendData.config.shortUrlId}
+						format={format}
+						discussionD2Uid={frontendData.config.discussionD2Uid}
+						discussionApiClientHeader={
+							frontendData.config.discussionApiClientHeader
+						}
+						enableDiscussionSwitch={
+							!!frontendData.config.switches
+								.enableDiscussionSwitch
+						}
+						isAdFreeUser={frontendData.isAdFreeUser}
+						shouldHideAds={frontendData.shouldHideAds}
+						idApiUrl={frontendData.config.idApiUrl}
 					/>
 				</Section>
 			)}
@@ -363,7 +443,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					padSides={false}
 					showTopBorder={false}
 					showSideBorders={false}
-					backgroundColour={themePalette('--ad-background')}
+					backgroundColour={palette('--ad-background')}
 					element="aside"
 				>
 					<AdSlot position="merchandising" display={format.display} />
@@ -394,23 +474,21 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 								contributionsServiceUrl={
 									contributionsServiceUrl
 								}
-								idApiUrl={frontendData.config.idApiUrl}
+								idApiUrl={idApiUrl}
 								isMinuteArticle={
 									frontendData.pageType.isMinuteArticle
 								}
 								isPaidContent={
 									frontendData.pageType.isPaidContent
 								}
-								isPreview={!!frontendData.config.isPreview}
-								isSensitive={frontendData.config.isSensitive}
+								isPreview={!!isPreview}
+								isSensitive={isSensitive}
 								pageId={frontendData.pageId}
-								sectionId={frontendData.config.section}
+								sectionId={section}
 								shouldHideReaderRevenue={
 									frontendData.shouldHideReaderRevenue
 								}
-								remoteBannerSwitch={
-									!!frontendData.config.switches.remoteBanner
-								}
+								remoteBannerSwitch={!!switches.remoteBanner}
 								tags={frontendData.tags}
 							/>
 						</Island>
@@ -420,9 +498,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 			{isApps && (
 				<div
 					css={{
-						backgroundColor: themePalette(
-							'--apps-footer-background',
-						),
+						backgroundColor: palette('--apps-footer-background'),
 					}}
 				>
 					<Island priority="critical">
@@ -433,3 +509,40 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 		</>
 	);
 };
+
+const StoryPackage = ({
+	storyPackage,
+	format,
+	discussionApiUrl,
+	absoluteServerTimes,
+	renderingTarget,
+	topBorder,
+}: {
+	storyPackage: Gallery['storyPackage'];
+	format: ArticleFormat;
+	discussionApiUrl: string;
+	absoluteServerTimes: boolean;
+	renderingTarget: RenderingTarget;
+	topBorder: boolean;
+}) =>
+	storyPackage === undefined ? null : (
+		<Section
+			fullWidth={true}
+			backgroundColour={palette('--article-section-background')}
+			borderColour={palette('--onward-content-border')}
+			showTopBorder={topBorder}
+		>
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<Carousel
+					heading={storyPackage.heading}
+					trails={storyPackage.trails}
+					onwardsSource="more-on-this-story"
+					format={format}
+					leftColSize="compact"
+					discussionApiUrl={discussionApiUrl}
+					absoluteServerTimes={absoluteServerTimes}
+					renderingTarget={renderingTarget}
+				/>
+			</Island>
+		</Section>
+	);

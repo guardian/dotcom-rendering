@@ -190,7 +190,7 @@ const decideSplashCardProperties = (
 				},
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
-				imageSize: avatarUrl ? 'large' : 'jumbo',
+				imageSize: avatarUrl ? 'large' : 'xlarge',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
@@ -333,6 +333,7 @@ const SplashCardLayout = ({
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
+					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
 				/>
 			</LI>
 		</UL>
@@ -363,7 +364,7 @@ const decideCardProperties = (
 					tablet: 'small',
 					mobile: 'medium',
 				},
-				imageSize: 'jumbo',
+				imageSize: 'xlarge',
 				liveUpdatesPosition: 'outer',
 				supportingContentAlignment:
 					supportingContentLength >= 2 ? 'horizontal' : 'vertical',

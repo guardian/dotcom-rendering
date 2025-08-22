@@ -116,6 +116,7 @@ const roleCss = {
 		@media (max-width: 23.4rem) {
 			width: 100%;
 			box-sizing: border-box;
+			float: none;
 
 			img,
 			.avatar {

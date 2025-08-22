@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
-import type { CardImageType } from '../../../types/layout';
+import type { CardMediaType } from '../../../types/layout';
 
 const imageFixedSize = {
 	tiny: 86,
@@ -23,6 +23,7 @@ export type ImageSizeType =
 	| 'medium'
 	| 'large'
 	| 'jumbo'
+	| 'xlarge'
 	| 'carousel'
 	| 'podcast'
 	| 'highlights-card'
@@ -34,7 +35,7 @@ type Props = {
 	children: React.ReactNode;
 	imageSize: ImageSizeType;
 	imageFixedSizes?: ImageFixedSizeOptions;
-	imageType?: CardImageType;
+	imageType?: CardMediaType;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	/**
@@ -87,33 +88,62 @@ const flexBasisStyles = ({
 	imageSize: ImageSizeType;
 	isBetaContainer: boolean;
 }): SerializedStyles => {
+	if (!isBetaContainer) {
+		switch (imageSize) {
+			default:
+			case 'small':
+				return css`
+					flex-basis: 25%;
+					${between.tablet.and.desktop} {
+						flex-basis: 40%;
+					}
+					${from.desktop} {
+						flex-basis: 30%;
+					}
+				`;
+			case 'medium':
+				return css`
+					flex-basis: 50%;
+				`;
+			case 'large':
+				return css`
+					flex-basis: 66%;
+				`;
+			case 'jumbo':
+				return css`
+					flex-basis: 75%;
+				`;
+		}
+	}
+
 	switch (imageSize) {
 		default:
 		case 'small':
-			return isBetaContainer
-				? css`
-						flex-basis: 50%;
-				  `
-				: css`
-						flex-basis: 25%;
-						${between.tablet.and.desktop} {
-							flex-basis: 40%;
-						}
-						${from.desktop} {
-							flex-basis: 30%;
-						}
-				  `;
 		case 'medium':
 			return css`
 				flex-basis: 50%;
 			`;
 		case 'large':
 			return css`
-				flex-basis: 66%;
+				${from.tablet} {
+					flex-basis: 460px;
+				}
+				${from.desktop} {
+					flex-basis: 620px;
+				}
+			`;
+		case 'xlarge':
+			return css`
+				${from.tablet} {
+					flex-basis: 520px;
+				}
+				${from.desktop} {
+					flex-basis: 700px;
+				}
 			`;
 		case 'jumbo':
 			return css`
-				flex-basis: 75%;
+				flex-basis: 100%;
 			`;
 	}
 };
@@ -173,7 +203,7 @@ export const ImageWrapper = ({
 			css={[
 				(imageType === 'slideshow' ||
 					imageType === 'picture' ||
-					imageType === 'video' ||
+					imageType === 'youtube-video' ||
 					imageType === 'loop-video') &&
 					isHorizontalOnDesktop &&
 					flexBasisStyles({

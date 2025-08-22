@@ -13,6 +13,7 @@ import {
 } from '../../lib/articleFormat';
 import { isMediaCard } from '../../lib/cardHelpers';
 import { isWithinTwelveHours, secondsToDuration } from '../../lib/formatTime';
+import { appendLinkNameMedia } from '../../lib/getDataLinkName';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { BETA_CONTAINERS } from '../../model/enhanceCollections';
@@ -39,7 +40,6 @@ import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
 import { LoopVideo } from '../LoopVideo.importable';
 import { Pill } from '../Pill';
-import { Slideshow } from '../Slideshow';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
 import { Snap } from '../Snap';
 import { SnapCssSandbox } from '../SnapCssSandbox';
@@ -96,9 +96,14 @@ export type Props = {
 	showClock?: boolean;
 	mainMedia?: MainMedia;
 	/**
-	 * Note YouTube recommends a minimum width of 480px @see https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-youtube-player-size
-	 * At 300px or below, the player will begin to lose functionality e.g. volume controls being omitted.
-	 * Youtube requires a minimum width 200px.
+	 * For interactive media (e.g., video or slideshow), certain card sizes are restricted from displaying
+	 * the interactive content because controls may be unavailable or inaccessible at those sizes.
+	 *
+	 * Note:
+	 * - YouTube recommends a minimum embed width of 480px
+	 *   @see https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-youtube-player-size
+	 * - At widths of 300px or below, the player may lose functionality (e.g., volume controls may be omitted).
+	 * - YouTube requires an absolute minimum width of 200px.
 	 */
 	canPlayInline?: boolean;
 	kickerText?: string;
@@ -128,7 +133,6 @@ export type Props = {
 	liveUpdatesAlignment?: Alignment;
 	liveUpdatesPosition?: Position;
 	onwardsSource?: OnwardsSource;
-	pauseOffscreenVideo?: boolean;
 	showVideo?: boolean;
 	isTagPage?: boolean;
 	/** Allows the consumer to set an aspect ratio on the image of 5:3, 5:4, 4:5 or 1:1 */
@@ -147,6 +151,8 @@ export type Props = {
 	trailTextSize?: TrailTextSize;
 	/** A kicker image is seperate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
+	/** Determines if the headline should be positioned within the content or outside the content */
+	headlinePosition?: 'inner' | 'outer';
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -268,11 +274,13 @@ const getMedia = ({
 	}
 	if (mainMedia?.type === 'Video' && canPlayInline) {
 		return {
-			type: 'video',
+			type: 'youtube-video',
 			mainMedia,
 		} as const;
 	}
-	if (slideshowImages) return { type: 'slideshow', slideshowImages } as const;
+	if (slideshowImages && canPlayInline) {
+		return { type: 'slideshow', slideshowImages } as const;
+	}
 	if (avatarUrl) return { type: 'avatar', avatarUrl } as const;
 	if (
 		mainMedia?.type === 'Audio' &&
@@ -318,36 +326,6 @@ const decideSublinkPosition = (
 	return alignment === 'vertical' ? 'inner' : 'outer';
 };
 
-const getHeadlinePosition = ({
-	isFlexSplash,
-	containerType,
-	showLivePlayable,
-	isMediaCardOrNewsletter,
-}: {
-	containerType?: DCRContainerType;
-	isFlexSplash?: boolean;
-	showLivePlayable: boolean;
-	isMediaCardOrNewsletter: boolean;
-}) => {
-	if (isMediaCardOrNewsletter) {
-		return 'inner';
-	}
-
-	if (containerType === 'flexible/special' && isFlexSplash) {
-		return 'outer';
-	}
-
-	if (
-		containerType === 'flexible/general' &&
-		isFlexSplash &&
-		showLivePlayable
-	) {
-		return 'outer';
-	}
-
-	return 'inner';
-};
-
 const liveBulletStyles = css`
 	width: 9px;
 	height: 9px;
@@ -374,7 +352,7 @@ export const Card = ({
 	avatarUrl,
 	showClock,
 	mainMedia,
-	canPlayInline,
+	canPlayInline = false,
 	kickerText,
 	showPulsingDot,
 	starRating,
@@ -400,7 +378,6 @@ export const Card = ({
 	liveUpdatesAlignment = 'vertical',
 	liveUpdatesPosition = 'inner',
 	onwardsSource,
-	pauseOffscreenVideo = false,
 	showVideo = true,
 	absoluteServerTimes,
 	isTagPage = false,
@@ -412,6 +389,7 @@ export const Card = ({
 	showTopBarMobile = true,
 	trailTextSize,
 	showKickerImage = false,
+	headlinePosition = 'inner',
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -566,6 +544,11 @@ export const Card = ({
 		isBetaContainer,
 	});
 
+	const resolvedDataLinkName =
+		media && dataLinkName
+			? appendLinkNameMedia(dataLinkName, media.type)
+			: dataLinkName;
+
 	/**
 	 * For opinion type cards with avatars (which aren't onwards content)
 	 * we render the footer in a different location
@@ -604,13 +587,6 @@ export const Card = ({
 		if (isFlexibleContainer) return { mobile: 'small' };
 		return { mobile: 'medium' };
 	};
-
-	const headlinePosition = getHeadlinePosition({
-		containerType,
-		isFlexSplash,
-		showLivePlayable,
-		isMediaCardOrNewsletter,
-	});
 
 	const hideTrailTextUntil = () => {
 		if (isFlexibleContainer) {
@@ -757,7 +733,7 @@ export const Card = ({
 			<CardLink
 				linkTo={linkTo}
 				headlineText={headlineText}
-				dataLinkName={dataLinkName}
+				dataLinkName={resolvedDataLinkName}
 				isExternalLink={isExternalLink}
 			/>
 			{headlinePosition === 'outer' && (
@@ -825,42 +801,31 @@ export const Card = ({
 						imageType={media.type}
 						imagePositionOnDesktop={imagePositionOnDesktop}
 						imagePositionOnMobile={imagePositionOnMobile}
-						hideImageOverlay={
-							media.type === 'slideshow' && isFlexibleContainer
-						}
+						hideImageOverlay={media.type === 'slideshow'}
 						padImage={isMediaCardOrNewsletter && isBetaContainer}
 						isBetaContainer={isBetaContainer}
 					>
-						{media.type === 'slideshow' &&
-							(isFlexibleContainer ? (
-								<div
-									css={css`
-										position: relative;
-										z-index: ${getZIndex(
-											'card-nested-link',
-										)};
-									`}
+						{media.type === 'slideshow' && (
+							<div
+								css={css`
+									position: relative;
+									z-index: ${getZIndex('card-nested-link')};
+								`}
+							>
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
 								>
-									<Island
-										priority="feature"
-										defer={{ until: 'visible' }}
-									>
-										<SlideshowCarousel
-											images={media.slideshowImages}
-											imageSize={imageSize}
-											hasNavigationBackgroundColour={
-												!!hasSublinks
-											}
-										/>
-									</Island>
-								</div>
-							) : (
-								<Slideshow
-									images={media.slideshowImages}
-									imageSize={imageSize}
-									isDynamo={isDynamo}
-								/>
-							))}
+									<SlideshowCarousel
+										images={media.slideshowImages}
+										imageSize={imageSize}
+										hasNavigationBackgroundColour={
+											!!hasSublinks
+										}
+									/>
+								</Island>
+							</div>
+						)}
 						{media.type === 'avatar' && (
 							<AvatarContainer
 								imageSize={imageSize}
@@ -895,10 +860,11 @@ export const Card = ({
 									fallbackImageLoading={imageLoading}
 									fallbackImageAlt={media.imageAltText}
 									fallbackImageAspectRatio="5:4"
+									linkTo={linkTo}
 								/>
 							</Island>
 						)}
-						{media.type === 'video' && (
+						{media.type === 'youtube-video' && (
 							<>
 								{showVideo ? (
 									<div
@@ -943,9 +909,6 @@ export const Card = ({
 												hideCaption={true}
 												stickyVideos={false}
 												kickerText={kickerText}
-												pauseOffscreenVideo={
-													pauseOffscreenVideo
-												}
 												/*
 												 * TODO: IMPROVE THIS MAPPING
 												 *

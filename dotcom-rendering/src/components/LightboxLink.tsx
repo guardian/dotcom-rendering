@@ -151,7 +151,8 @@ export const LightboxLink = ({
 						`,
 					decideSize(role, format),
 					isMainMedia &&
-						format.display === ArticleDisplay.Immersive &&
+						(format.display === ArticleDisplay.Immersive ||
+							format.design === ArticleDesign.Gallery) &&
 						visuallyHidden,
 				]}
 			>

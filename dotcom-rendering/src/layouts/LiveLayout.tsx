@@ -1059,6 +1059,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						>
 							<MostViewedFooterLayout
 								renderAds={isWeb && renderAds}
+								isLiveblog={true}
 							>
 								<Island
 									priority="feature"

@@ -1,8 +1,13 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { from, space } from '@guardian/source/foundations';
+import {
+	from,
+	palette as sourcePalette,
+	space,
+} from '@guardian/source/foundations';
 import type { ArticleFormat } from '../../lib/articleFormat';
 import { secondsToDuration } from '../../lib/formatTime';
+import { transparentColour } from '../../lib/transparentColour';
 import { palette } from '../../palette';
 import type { AspectRatio } from '../../types/front';
 import { CardFooter } from '../Card/components/CardFooter';
@@ -75,6 +80,9 @@ const textOverlayStyles = css`
 	${overlayMaskGradientStyles('180deg')};
 
 	backdrop-filter: blur(12px) brightness(0.5);
+	@supports not (backdrop-filter: blur(12px)) {
+		background-color: ${transparentColour(sourcePalette.neutral[10], 0.7)};
+	}
 `;
 
 /**
@@ -87,7 +95,6 @@ const immersiveOverlayStyles = css`
 		height: 100%;
 		width: 268px;
 		padding: ${space[2]}px ${space[12]}px ${space[2]}px ${space[2]}px;
-		backdrop-filter: blur(12px) brightness(0.5);
 		${overlayMaskGradientStyles('270deg')}
 	}
 `;
