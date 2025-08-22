@@ -15,7 +15,7 @@ const meta = {
 	parameters: {
 		chromatic: {
 			modes: {
-				'light wide': allModes['light wide'],
+				'light leftCol': allModes['light leftCol'],
 			},
 		},
 	},
