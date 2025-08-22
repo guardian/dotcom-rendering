@@ -108,6 +108,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			hasPageSkin: hasPageSkinConfig,
 			pageId,
 			abTests,
+			switches: { absoluteServerTimes = false },
 		},
 		editionId,
 	} = front;
@@ -134,8 +135,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		front.isNetworkFront && front.deeplyRead && front.deeplyRead.length > 0;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
-
-	const { absoluteServerTimes = false } = front.config.switches;
 
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
