@@ -101,7 +101,10 @@ const content = css`
 		padding-bottom: 10px;
 	}
 
-	/* We're deliberately using a font-size that is not in Source at a particular breakpoint */
+	/**
+	 * We're deliberately using a font-size that is not in Source so that
+	 * the headline doesn't exceed three lines across all mobile breakpoints
+	 */
 	${between.mobileMedium.and.mobileLandscape} {
 		.headline-text {
 			font-size: 1rem;
