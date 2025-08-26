@@ -3,14 +3,14 @@ import { breakpoints, space, until } from '@guardian/source/foundations';
 import type { ImgHTMLAttributes } from 'react';
 import React from 'react';
 import type { AspectRatio } from '../types/front';
-import type { ImageSizeType } from './Card/components/ImageWrapper';
+import type { MediaSizeType } from './Card/components/MediaWrapper';
 import type { ImageWidthType } from './Picture';
 import { generateSources, getFallbackSource } from './Picture';
 
 export type Loading = NonNullable<ImgHTMLAttributes<unknown>['loading']>;
 
 export type Props = {
-	imageSize: ImageSizeType;
+	imageSize: MediaSizeType;
 	mainImage: string;
 	loading: Loading;
 	alt?: string;
@@ -27,7 +27,7 @@ export type Props = {
  * implemented thoroughly
  */
 const decideImageWidths = (
-	imageSize: ImageSizeType,
+	imageSize: MediaSizeType,
 	aspectRatio: AspectRatio,
 ): [ImageWidthType, ...ImageWidthType[]] => {
 	switch (imageSize) {

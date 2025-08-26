@@ -9,11 +9,11 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import type {
-	ImagePositionType,
-	ImageSizeType,
-} from './Card/components/ImageWrapper';
 import { LI } from './Card/components/LI';
+import type {
+	MediaPositionType,
+	MediaSizeType,
+} from './Card/components/MediaWrapper';
 import type { TrailTextSize } from './Card/components/TrailText';
 import { UL } from './Card/components/UL';
 import type { ResponsiveFontSize } from './CardHeadline';
@@ -34,9 +34,9 @@ type Props = {
 
 type BoostProperties = {
 	headlineSizes: ResponsiveFontSize;
-	imageSize: ImageSizeType;
-	imagePositionOnDesktop: ImagePositionType;
-	imagePositionOnMobile: ImagePositionType;
+	mediaSize: MediaSizeType;
+	mediaPositionOnDesktop: MediaPositionType;
+	mediaPositionOnMobile: MediaPositionType;
 	supportingContentAlignment: Alignment;
 	liveUpdatesAlignment: Alignment;
 	trailTextSize: TrailTextSize;
@@ -61,9 +61,9 @@ const determineCardProperties = (
 					tablet: 'large',
 					mobile: 'medium',
 				},
-				imageSize: 'xlarge',
-				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
+				mediaSize: 'xlarge',
+				mediaPositionOnDesktop: 'right',
+				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
@@ -76,9 +76,9 @@ const determineCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'large',
 				},
-				imageSize: 'xlarge',
-				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
+				mediaSize: 'xlarge',
+				mediaPositionOnDesktop: 'right',
+				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
@@ -91,9 +91,9 @@ const determineCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'xlarge',
 				},
-				imageSize: 'jumbo',
-				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
-				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
+				mediaSize: 'jumbo',
+				mediaPositionOnDesktop: mediaCard ? 'top' : 'bottom',
+				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
@@ -105,9 +105,9 @@ const determineCardProperties = (
 					tablet: 'xxlarge',
 					mobile: 'xxlarge',
 				},
-				imageSize: 'jumbo',
-				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
-				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
+				mediaSize: 'jumbo',
+				mediaPositionOnDesktop: mediaCard ? 'top' : 'bottom',
+				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
@@ -145,9 +145,9 @@ export const OneCardLayout = ({
 
 	const {
 		headlineSizes,
-		imageSize,
-		imagePositionOnDesktop,
-		imagePositionOnMobile,
+		mediaSize,
+		mediaPositionOnDesktop,
+		mediaPositionOnMobile,
 		supportingContentAlignment,
 		liveUpdatesAlignment,
 		trailTextSize,
@@ -167,9 +167,9 @@ export const OneCardLayout = ({
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
 					headlineSizes={headlineSizes}
-					imagePositionOnDesktop={imagePositionOnDesktop}
-					imagePositionOnMobile={imagePositionOnMobile}
-					imageSize={imageSize}
+					mediaSize={mediaSize}
+					mediaPositionOnDesktop={mediaPositionOnDesktop}
+					mediaPositionOnMobile={mediaPositionOnMobile}
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
 					supportingContentAlignment={supportingContentAlignment}
@@ -251,13 +251,13 @@ const TwoOrFourCardLayout = ({
 							absoluteServerTimes={absoluteServerTimes}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
-							imagePositionOnDesktop={getImagePosition(
+							mediaPositionOnDesktop={getImagePosition(
 								hasTwoOrFewerCards,
 								isMediaCard(card.format) || !!card.isNewsletter,
 							)}
 							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
 							supportingContent={undefined}
-							imageSize="small"
+							mediaSize="small"
 							aspectRatio={aspectRatio}
 							kickerText={card.kickerText}
 							showLivePlayable={false}
