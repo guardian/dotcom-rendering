@@ -1,4 +1,9 @@
+import { submitComponentEvent as submitComponentEventMock } from '../client/ophan/ophan';
 import { getRedirectUrl, initializeFedCM } from './GoogleOneTap.importable';
+
+jest.mock('../client/ophan/ophan', () => ({
+	submitComponentEvent: jest.fn(),
+}));
 
 const mockWindow = ({
 	replace,
@@ -23,6 +28,10 @@ const mockWindow = ({
 	});
 
 describe('GoogleOneTap', () => {
+	beforeEach(() => {
+		jest.clearAllMocks();
+	});
+
 	it('should return the correct signin URL after constructing it with the provided stage and token', () => {
 		expect(
 			getRedirectUrl({
@@ -85,6 +94,29 @@ describe('GoogleOneTap', () => {
 		expect(locationReplace).toHaveBeenCalledWith(
 			'https://profile.theguardian.com/signin/google?token=test-token&returnUrl=https%3A%2F%2Fwww.theguardian.com%2Fuk',
 		);
+
+		expect(submitComponentEventMock).toHaveBeenNthCalledWith(
+			1,
+			{
+				component: {
+					componentType: 'SIGN_IN_GOOGLE_ONE_TAP',
+				},
+				action: 'DETECT',
+				value: 'SUPPORTED',
+			},
+			'Web',
+		);
+
+		expect(submitComponentEventMock).toHaveBeenNthCalledWith(
+			2,
+			{
+				component: {
+					componentType: 'SIGN_IN_GOOGLE_ONE_TAP',
+				},
+				action: 'SIGN_IN',
+			},
+			'Web',
+		);
 	});
 
 	it('should initializeFedCM and not redirect to Gateway with token on failure', async () => {
@@ -100,6 +132,29 @@ describe('GoogleOneTap', () => {
 		});
 
 		await initializeFedCM({ isSignedIn: false });
+
+		expect(submitComponentEventMock).toHaveBeenNthCalledWith(
+			1,
+			{
+				component: {
+					componentType: 'SIGN_IN_GOOGLE_ONE_TAP',
+				},
+				action: 'DETECT',
+				value: 'SUPPORTED',
+			},
+			'Web',
+		);
+
+		expect(submitComponentEventMock).toHaveBeenNthCalledWith(
+			2,
+			{
+				component: {
+					componentType: 'SIGN_IN_GOOGLE_ONE_TAP',
+				},
+				action: 'CLOSE',
+			},
+			'Web',
+		);
 
 		expect(navigatorGet).toHaveBeenCalledWith({
 			identity: {
@@ -135,6 +190,18 @@ describe('GoogleOneTap', () => {
 			'window.navigator.credentials.get failed',
 		);
 
+		expect(submitComponentEventMock).toHaveBeenNthCalledWith(
+			1,
+			{
+				component: {
+					componentType: 'SIGN_IN_GOOGLE_ONE_TAP',
+				},
+				action: 'DETECT',
+				value: 'SUPPORTED',
+			},
+			'Web',
+		);
+
 		expect(navigatorGet).toHaveBeenCalledWith({
 			identity: {
 				context: 'continue',
@@ -165,6 +232,18 @@ describe('GoogleOneTap', () => {
 
 		await initializeFedCM({ isSignedIn: false });
 
+		expect(submitComponentEventMock).toHaveBeenCalledTimes(1);
+		expect(submitComponentEventMock).toHaveBeenCalledWith(
+			{
+				component: {
+					componentType: 'SIGN_IN_GOOGLE_ONE_TAP',
+				},
+				action: 'DETECT',
+				value: 'NOT_SUPPORTED',
+			},
+			'Web',
+		);
+
 		expect(navigatorGet).not.toHaveBeenCalled();
 		expect(locationReplace).not.toHaveBeenCalled();
 	});
@@ -194,6 +273,18 @@ describe('GoogleOneTap', () => {
 		});
 
 		await initializeFedCM({ isSignedIn: true });
+		
+		expect(submitComponentEventMock).toHaveBeenCalledTimes(1);
+		expect(submitComponentEventMock).toHaveBeenCalledWith(
+			{
+				component: {
+					componentType: 'SIGN_IN_GOOGLE_ONE_TAP',
+				},
+				action: 'DETECT',
+				value: 'SUPPORTED',
+			},
+			'Web',
+		);
 
 		expect(navigatorGet).not.toHaveBeenCalled();
 		expect(locationReplace).not.toHaveBeenCalled();
