@@ -55,7 +55,11 @@ const hoverStyles = css`
 
 	/** We want to prevent the general hover styles applying when
 	    a click won't result in navigating to the main article */
-	:has(ul.sublinks:hover, .loop-video-container:hover) {
+	:has(
+			ul.sublinks:hover,
+			.loop-video-container:hover,
+			.slideshow-carousel:hover
+		) {
 		.card-headline .show-underline {
 			text-decoration: none;
 		}
