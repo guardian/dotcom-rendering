@@ -1,4 +1,6 @@
 import { log } from '@guardian/libs';
+import type { TAction, TComponentType } from '@guardian/ophan-tracker-js';
+import { submitComponentEvent } from '../client/ophan/ophan';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useConsent } from '../lib/useConsent';
 import { useOnce } from '../lib/useOnce';
@@ -92,6 +94,25 @@ export const initializeFedCM = async ({
 	isSignedIn?: boolean;
 	isInTest?: boolean;
 }): Promise<void> => {
+	const isSupported = 'IdentityCredential' in window;
+
+	void submitComponentEvent(
+		{
+			// TODO: @guardian/ophan-tracker-js@v2.4.1 has some changes to how page views are tracked
+			// unrelated to Google One Tap which isn't safe to be released yet. Upgrade this once
+			// v2.4.1 is safe to use.
+			action: 'DETECT' as TAction,
+			component: {
+				// TODO: @guardian/ophan-tracker-js@v2.4.1 has some changes to how page views are tracked
+				// unrelated to Google One Tap which isn't safe to be released yet. Upgrade this once
+				// v2.4.1 is safe to use.
+				componentType: 'SIGN_IN_GOOGLE_ONE_TAP' as TComponentType,
+			},
+			value: isSupported ? 'SUPPORTED' : 'NOT_SUPPORTED',
+		},
+		'Web',
+	);
+
 	if (isSignedIn) return;
 
 	/**
@@ -103,8 +124,7 @@ export const initializeFedCM = async ({
 	 *
 	 * See: https://bugzilla.mozilla.org/show_bug.cgi?id=1803629
 	 */
-	if (!('IdentityCredential' in window)) {
-		// TODO: Track Ophan "FedCM" unsupported event here.
+	if (!isSupported) {
 		log('identity', 'FedCM API not supported in this browser');
 		return;
 	}
@@ -160,10 +180,22 @@ export const initializeFedCM = async ({
 		});
 
 	if (credentials) {
-		// TODO: Track Ophan "FedCM" success event here.
 		log('identity', 'FedCM credentials received', {
 			credentials,
 		});
+
+		await submitComponentEvent(
+			{
+				action: 'SIGN_IN',
+				component: {
+					// TODO: @guardian/ophan-tracker-js@v2.4.1 has some changes to how page views are tracked
+					// unrelated to Google One Tap which isn't safe to be released yet. Upgrade this once
+					// v2.4.1 is safe to use.
+					componentType: 'SIGN_IN_GOOGLE_ONE_TAP' as TComponentType,
+				},
+			},
+			'Web',
+		);
 
 		window.location.replace(
 			getRedirectUrl({
@@ -173,7 +205,18 @@ export const initializeFedCM = async ({
 			}),
 		);
 	} else {
-		// TODO: Track Ophan "FedCM" skip event here.
+		void submitComponentEvent(
+			{
+				action: 'CLOSE',
+				component: {
+					// TODO: @guardian/ophan-tracker-js@v2.4.1 has some changes to how page views are tracked
+					// unrelated to Google One Tap which isn't safe to be released yet. Upgrade this once
+					// v2.4.1 is safe to use.
+					componentType: 'SIGN_IN_GOOGLE_ONE_TAP' as TComponentType,
+				},
+			},
+			'Web',
+		);
 		log('identity', 'No FedCM credentials received');
 	}
 };
