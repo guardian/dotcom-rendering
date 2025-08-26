@@ -10,7 +10,6 @@ import type {
 import { DynamicFast } from './DynamicFast';
 import { DynamicPackage } from './DynamicPackage';
 import { DynamicSlow } from './DynamicSlow';
-import { DynamicSlowMPU } from './DynamicSlowMPU';
 import { FixedLargeSlowXIV } from './FixedLargeSlowXIV';
 import { FixedMediumFastXI } from './FixedMediumFastXI';
 import { FixedMediumFastXII } from './FixedMediumFastXII';
@@ -48,8 +47,6 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
-	isInLoopingVideoTestVariant?: boolean;
-	isInLoopingVideoTestControl?: boolean;
 };
 
 export const DecideContainer = ({
@@ -65,8 +62,6 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
-	isInLoopingVideoTestVariant,
-	isInLoopingVideoTestControl,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -82,16 +77,6 @@ export const DecideContainer = ({
 		case 'dynamic/slow':
 			return (
 				<DynamicSlow
-					groupedTrails={groupedTrails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'dynamic/slow-mpu':
-			return (
-				<DynamicSlowMPU
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
@@ -259,8 +244,6 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
-					isInLoopingVideoTestVariant={isInLoopingVideoTestVariant}
-					isInLoopingVideoTestControl={isInLoopingVideoTestControl}
 				/>
 			);
 		case 'flexible/general':
@@ -274,8 +257,6 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
-					isInLoopingVideoTestVariant={isInLoopingVideoTestVariant}
-					isInLoopingVideoTestControl={isInLoopingVideoTestControl}
 				/>
 			);
 		case 'scrollable/small':

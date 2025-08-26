@@ -187,6 +187,7 @@ export const WebStandardLifestyleReviewLight: Story = {
 			display: WebStandardStandardNewsLight.args.article.display,
 			theme: Pillar.Lifestyle,
 			design: ArticleDesign.Review,
+			storyPackage: undefined,
 		},
 	},
 	parameters: webParameters,

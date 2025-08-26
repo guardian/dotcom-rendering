@@ -20,22 +20,23 @@ const baseCardStyles = css`
 	flex-direction: column;
 	justify-content: space-between;
 	width: 100%;
-	/* We absolutely position the faux link
-		so this is required here */
+	/* We absolutely position the faux link so this is required here */
 	position: relative;
 
-	/* Target Safari 10.1 */
-	/* https://www.browserstack.com/guide/create-browser-specific-css */
+	/*
+	 * Target Safari 10.1 to 14.0
+	 * https://www.browserstack.com/guide/create-browser-specific-css
+	 * Flexbox with gap is not supported until Safari 14.1
+	 */
 	@media not all and (min-resolution: 0.001dpcm) {
-		@supports (-webkit-appearance: none) and
-			(not (stroke-color: transparent)) {
+		@supports (-webkit-appearance: none) and (not (display: flex; gap: 1em)) {
 			display: grid;
 			grid-auto-rows: min-content;
 			align-content: start;
 		}
 	}
 
-	/* a tag specific styles */
+	/* <a /> tag specific styles */
 	color: inherit;
 	text-decoration: none;
 `;
@@ -54,7 +55,11 @@ const hoverStyles = css`
 
 	/** We want to prevent the general hover styles applying when
 	    a click won't result in navigating to the main article */
-	:has(ul.sublinks:hover, .loop-video-container:hover) {
+	:has(
+			ul.sublinks:hover,
+			.loop-video-container:hover,
+			.slideshow-carousel:hover
+		) {
 		.card-headline .show-underline {
 			text-decoration: none;
 		}

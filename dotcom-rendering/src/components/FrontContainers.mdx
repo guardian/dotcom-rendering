@@ -1,0 +1,62 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as StaticMediumFour from './StaticMediumFour.stories';
+import * as FlexibleGeneral from './FlexibleGeneral.stories';
+
+<Meta title="Front Containers/Docs" />
+
+# Front Containers
+
+Fronts are comprised of "containers", which are themselves made up of a list of "cards". For the most part these cards represent articles, although there are special kinds of cards known as "snaplinks", which are discussed in more detail in [Flexible Special and Snaplinks](#flexible-special-and-snaplinks).
+
+There are several different types of containers, and each is handled by a separate React component. Most of them have relatively simple layouts, and accept a small number of cards. For example, the `StaticMediumFour` container, with four cards, can be seen here:
+
+<Canvas of={StaticMediumFour.Four} />
+
+*Note that any scrolling is due to the storybook Canvas limiting the width, and in normal usage this container does not include a scrollbar.*
+
+It can also take fewer cards, in which case the layout stays much the same and the extra cards are simply not shown:
+
+<Canvas of={StaticMediumFour.Two} />
+
+This behaviour is typical of most container types; their layout is generally static and the dimensions of each card are the same. However, for the "flexible" containers the layout rules are different.
+
+## Flexible General
+
+The `FlexibleGeneral` container type is more complex than most other containers described above. The cards are split into two categories, "standard" and "splash", and they can also be "boosted". These properties can cause each card's dimensions, and the container layout more generally, to vary.
+
+<Canvas of={FlexibleGeneral.SplashWithStandards} story={{ inline: false, height: '500px' }} />
+
+### Splash Cards
+
+A splash card is a single, large card that will appear at the top of the container if it is present. It will look different to the other cards, which are referred to as standard cards in this case.
+
+<Canvas of={FlexibleGeneral.SplashWithSublinks} story={{ inline: false, height: '500px' }} />
+
+### Boosting
+
+Any card in a flexible general container can be boosted, to make it appear more prominent. It will have its font sizes increased, and may take up more space in the layout. There are several levels of boosting; any of them can be applied to splash cards, whereas only a subset are available for standard cards. An example of a splash card being boosted can be seen here:
+
+<Canvas of={FlexibleGeneral.SplashBoostLevels} story={{ inline: false, height: '500px' }} />
+
+While a standard card being boosted can be seen here:
+
+<Canvas of={FlexibleGeneral.StandardBoostedWithLiveUpdates} story={{ inline: false, height: '500px' }} />
+
+The fronts tool also has additional card categories that provide a convenient way to set the boost level of cards, but these are translated into normal boost properties by the time the data reaches the container component.
+
+## Flexible Special and Snaplinks
+
+The concepts of splash cards and boosts covered in [Flexible General](#flexible-general) are also present for `FlexibleSpecial`, although here boosts can only be applied to splash cards, not standard ones. The `FlexibleSpecial` container can also contain "snaps" (a.k.a. snaplinks), which are a way of creating cards that do not correspond to articles. For example, interactive atoms are added to fronts as snaplinks. More information on this can be found in the [facia-tool docs](https://github.com/guardian/facia-tool/blob/main/docs/Glossary.md#snaplinks).
+
+## Container Palettes
+
+By default, front containers have a standard colour scheme in both light and dark mode. However, it's possible for a container to be assigned a particular "container palette", changing this colour scheme. This feature is available for most container types; for example, here is the `StaticMediumFour` container mentioned above, this time with a number of different palettes applied:
+
+{ /* The div works around an issue where this story does not render when "inline" is set to false, as in the Canvas elements above */ }
+<div style={{ height: '500px', overflow: 'scroll' }}>
+    <Canvas of={StaticMediumFour.WithSpecialPaletteVariations} />
+</div>
+
+## Deprecated Containers
+
+In 2025 we rolled out a redesign of fronts across dotcom and the apps. This redesign introduced a new set of container types, and deprecated most container types that had existed before this point. However, there are numerous fronts and it takes time to update them all to use the new types, so many of the old ones still exist. We are slowly migrating all the fronts over, and when a deprecated container type is no longer used anywhere it is removed completely from the relevant codebases.

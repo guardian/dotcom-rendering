@@ -18,7 +18,13 @@ import {
 	type TableOfContentsItem,
 } from '../model/enhanceTableOfContents';
 import { enhancePinnedPost } from '../model/pinnedPost';
-import type { FEElement, ImageBlockElement, ImageForLightbox } from './content';
+import { parse as parseStoryPackage, type StoryPackage } from '../storyPackage';
+import type {
+	AdPlaceholderBlockElement,
+	FEElement,
+	ImageBlockElement,
+	ImageForLightbox,
+} from './content';
 import { type RenderingTarget } from './renderingTarget';
 
 /**
@@ -36,11 +42,12 @@ export type ArticleFields = {
 	frontendData: ArticleDeprecated;
 	display: ArticleDisplay;
 	theme: ArticleTheme;
+	storyPackage: StoryPackage | undefined;
 };
 
 export type Gallery = ArticleFields & {
 	design: ArticleDesign.Gallery;
-	images: ImageBlockElement[];
+	bodyElements: (ImageBlockElement | AdPlaceholderBlockElement)[];
 	mainMedia: ImageBlockElement;
 };
 
@@ -105,6 +112,8 @@ export const enhanceArticleType = (
 		data.main,
 	)(data.mainMediaElements);
 
+	const storyPackage = parseStoryPackage(data.storyPackage);
+
 	if (format.design === ArticleDesign.Gallery) {
 		const design = ArticleDesign.Gallery;
 
@@ -130,17 +139,20 @@ export const enhanceArticleType = (
 			design,
 			display: format.display,
 			theme: format.theme,
-			images: blocks.flatMap((block) =>
+			bodyElements: blocks.flatMap((block) =>
 				block.elements.filter(
 					(element) =>
 						element._type ===
-						'model.dotcomrendering.pageElements.ImageBlockElement',
+							'model.dotcomrendering.pageElements.ImageBlockElement' ||
+						element._type ===
+							'model.dotcomrendering.pageElements.AdPlaceholderBlockElement',
 				),
 			),
 			mainMedia: getGalleryMainMedia(
 				mainMediaElements,
 				data.trailPicture,
 			),
+			storyPackage,
 		};
 	}
 
@@ -148,6 +160,7 @@ export const enhanceArticleType = (
 		design: format.design,
 		display: format.display,
 		theme: format.theme,
+		storyPackage,
 		frontendData: {
 			...data,
 			mainMediaElements,
