@@ -4,6 +4,7 @@ import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
 	loopVideoCard,
 	opinionTrails,
+	slideshowCard,
 	snapLink,
 	trails,
 } from '../../fixtures/manual/trails';
@@ -300,6 +301,19 @@ export const SnapCard: Story = {
 		groupedTrails: {
 			...emptyGroupedTrails,
 			snap: [snapLink],
+		},
+		collectionId: 1,
+	},
+};
+
+export const Slideshow: Story = {
+	name: 'With a slideshow',
+	args: {
+		frontSectionTitle: 'Flexible Special with a slideshow',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			snap: [],
+			standard: [slideshowCard],
 		},
 		collectionId: 1,
 	},

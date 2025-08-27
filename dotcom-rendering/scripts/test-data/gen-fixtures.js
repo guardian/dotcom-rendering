@@ -302,11 +302,10 @@ requests.push(
 		.then((res) => res.json())
 		.then((json) => {
 			// Write the new fixture data
-			const contents = `${HEADER}export const storyPackage = ${JSON.stringify(
-				json,
-				null,
-				4,
-			)}`;
+			const contents = `${HEADER}
+			import type { FEStoryPackage } from '../../src/frontend/feArticle';
+			
+			export const storyPackage: FEStoryPackage = ${JSON.stringify(json, null, 4)}`;
 			return fs.writeFile(
 				`${root}/fixtures/generated/story-package.ts`,
 				contents,

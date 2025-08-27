@@ -5901,8 +5901,16 @@ const highlightContainerMidFadeLight: PaletteFunction = () =>
 const highlightContainerMidFadeDark: PaletteFunction = () =>
 	transparentColour(sourcePalette.neutral[10], 0.6);
 
-const highlightContainerEndFadeLight: PaletteFunction = () => 'transparent';
-const highlightContainerEndFadeDark: PaletteFunction = () => 'transparent';
+/**
+ * Why not 'transparent'?
+ *
+ * Older versions of Safari (v14 and lower) misinterpret "transparent"
+ * when used in gradients: https://css-tricks.com/thing-know-gradients-transparent-black/
+ */
+const highlightContainerEndFadeLight: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[100], 0);
+const highlightContainerEndFadeDark: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[10], 0);
 
 const pinnedPostBorderLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
@@ -6167,6 +6175,15 @@ const crosswordCluesHeaderBorderBottom: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 const crosswordTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 const crosswordTextDark: PaletteFunction = () => sourcePalette.neutral[86];
+
+const onwardContentBorderLight: PaletteFunction = (format) => {
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[86];
+		default:
+			return articleBorderLight(format);
+	}
+};
 
 // ----- Palette ----- //
 
@@ -7357,6 +7374,10 @@ const paletteColours = {
 	'--numbered-list-title': {
 		light: numberedListTitleLight,
 		dark: numberedListTitleDark,
+	},
+	'--onward-content-border': {
+		light: onwardContentBorderLight,
+		dark: () => sourcePalette.neutral[20],
 	},
 	'--pagination-text': {
 		light: paginationTextLight,

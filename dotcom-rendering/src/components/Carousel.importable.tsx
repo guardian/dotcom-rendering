@@ -509,7 +509,7 @@ const CarouselCard = ({
 				webPublicationDate={webPublicationDate}
 				kickerText={kickerText}
 				image={image}
-				imageSize={'carousel'}
+				mediaSize={'carousel'}
 				showClock={!isOnwardContent && true}
 				showAge={true}
 				showQuotedHeadline={format.design === ArticleDesign.Comment}
@@ -525,13 +525,14 @@ const CarouselCard = ({
 				imageLoading={imageLoading}
 				discussionApiUrl={discussionApiUrl}
 				isOnwardContent={isOnwardContent}
-				imagePositionOnDesktop={cardImagePosition}
-				imagePositionOnMobile={cardImagePosition}
+				mediaPositionOnDesktop={cardImagePosition}
+				mediaPositionOnMobile={cardImagePosition}
 				absoluteServerTimes={absoluteServerTimes}
 				starRating={starRating}
 				index={index}
 				showTopBarDesktop={!isOnwardContent}
 				showTopBarMobile={!isOnwardContent}
+				aspectRatio={'5:4'}
 			/>
 		</LI>
 	);

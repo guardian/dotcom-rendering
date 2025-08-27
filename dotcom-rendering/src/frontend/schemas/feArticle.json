@@ -223,14 +223,14 @@
         "storyPackage": {
             "type": "object",
             "properties": {
+                "heading": {
+                    "type": "string"
+                },
                 "trails": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/FETrailType"
                     }
-                },
-                "heading": {
-                    "type": "string"
                 }
             },
             "required": [
