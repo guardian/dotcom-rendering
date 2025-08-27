@@ -86,6 +86,9 @@ const decideImageWidths = (
 				{ breakpoint: breakpoints.tablet, width: 160 },
 				{ breakpoint: breakpoints.desktop, width: 190 },
 			];
+		/* Avatars on cards in the highlights container are fixed to 98px on all breakpoints */
+		case 'highlights-card':
+			return [{ breakpoint: breakpoints.mobile, width: 98 }];
 	}
 };
 
