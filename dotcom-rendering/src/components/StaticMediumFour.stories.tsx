@@ -8,7 +8,7 @@ import { StaticMediumFour } from './StaticMediumFour';
 
 const meta = {
 	component: StaticMediumFour,
-	title: 'Components/StaticMediumFour',
+	title: 'Front Containers/StaticMediumFour',
 	parameters: {
 		chromatic: {
 			viewports: [
@@ -83,7 +83,7 @@ const containerPalettes = [
 	'SombreAltPalette',
 	'SpecialReportAltPalette',
 	'Branded',
-] as const satisfies readonly Omit<DCRContainerPalette, 'MediaPalette'>[];
+] as const satisfies readonly DCRContainerPalette[];
 
 export const WithSpecialPaletteVariations = {
 	parameters: {

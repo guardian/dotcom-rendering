@@ -13,7 +13,7 @@ import { StaticFeatureTwo } from './StaticFeatureTwo';
 
 const meta = {
 	component: StaticFeatureTwo,
-	title: 'Components/StaticFeatureTwo',
+	title: 'Front Containers/StaticFeatureTwo',
 	parameters: {
 		chromatic: {
 			viewports: [
@@ -59,7 +59,7 @@ const containerPalettes = [
 	'SombreAltPalette',
 	'SpecialReportAltPalette',
 	'Branded',
-] as const satisfies readonly Omit<DCRContainerPalette, 'MediaPalette'>[];
+] as const satisfies readonly DCRContainerPalette[];
 
 const audioCards = audioTrails.slice(0, 2);
 export const Audio = {

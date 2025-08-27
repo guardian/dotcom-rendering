@@ -45,7 +45,7 @@ export const HighlightsCardImage = ({
 					src={avatarUrl}
 					alt={byline ?? ''}
 					shape="cutout"
-					imageSize="large"
+					imageSize="highlights-card"
 				/>
 			</div>
 		);
@@ -56,7 +56,7 @@ export const HighlightsCardImage = ({
 			return (
 				<div css={[imageStyles, nonAvatarImageStyles]}>
 					<CardPicture
-						imageSize="medium"
+						imageSize="highlights-card"
 						mainImage={mainMedia.podcastImage.src}
 						alt={mainMedia.podcastImage.altText}
 						loading={imageLoading}

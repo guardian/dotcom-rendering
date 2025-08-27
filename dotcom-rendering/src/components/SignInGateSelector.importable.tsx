@@ -1,4 +1,4 @@
-import { getCookie, isUndefined } from '@guardian/libs';
+import { getCookie, isUndefined, storage } from '@guardian/libs';
 import { useState } from 'react';
 import {
 	hasCmpConsentForBrowserId,
@@ -293,6 +293,7 @@ const fetchProxyGetTreatments = async (
 	hasConsented: boolean,
 	shouldServeDismissible: boolean,
 	showDefaultGate: ShowGateValues,
+	gateDisplayCount: number,
 ): Promise<AuxiaProxyGetTreatmentsResponse> => {
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
 	const articleIdentifier = `www.theguardian.com/${pageId}`;
@@ -317,6 +318,7 @@ const fetchProxyGetTreatments = async (
 		hasConsented,
 		shouldServeDismissible,
 		showDefaultGate,
+		gateDisplayCount,
 	};
 	const params = {
 		method: 'POST',
@@ -372,6 +374,25 @@ const decideShowDefaultGate = (): ShowGateValues => {
 	return undefined;
 };
 
+const getGateDisplayCount = (): number => {
+	const count = parseInt(
+		storage.local.getRaw('gate_display_count') ?? '0',
+		10,
+	);
+	if (Number.isInteger(count)) {
+		return count;
+	}
+	return 0;
+};
+
+const incrementGateDisplayCount = () => {
+	const count = getGateDisplayCount();
+	const newCount = count + 1;
+	// Using `storage.local.set`, instead of `storage.local.setRaw`
+	// because `setRaw` doesn't allow for specifying the duration.
+	storage.local.setRaw('gate_display_count', newCount.toString());
+};
+
 const buildAuxiaGateDisplayData = async (
 	contributionsServiceUrl: string,
 	pageId: string,
@@ -410,8 +431,8 @@ const buildAuxiaGateDisplayData = async (
 	}
 
 	const shouldServeDismissible = decideShouldServeDismissible();
-
 	const showDefaultGate = decideShowDefaultGate();
+	const gateDisplayCount = getGateDisplayCount();
 
 	const response = await fetchProxyGetTreatments(
 		contributionsServiceUrl,
@@ -430,6 +451,7 @@ const buildAuxiaGateDisplayData = async (
 		readerPersonalData.hasConsented,
 		shouldServeDismissible,
 		showDefaultGate,
+		gateDisplayCount,
 	);
 
 	if (response.status && response.data) {
@@ -724,6 +746,10 @@ const ShowSignInGateAuxia = ({
 			},
 			renderingTarget,
 		);
+
+		// Once the gate is being displayed we need to update
+		// the tracking of the number of times the gate has been displayed
+		incrementGateDisplayCount();
 	}, [componentId]);
 
 	return (

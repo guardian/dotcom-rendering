@@ -7,7 +7,7 @@ import { FrontSection } from './FrontSection';
 
 export default {
 	component: DynamicFast,
-	title: 'Components/DynamicFast',
+	title: 'Front Containers/Deprecated Containers/DynamicFast',
 	parameters: {
 		chromatic: {
 			viewports: [

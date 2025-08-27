@@ -11,7 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-export const storyPackage = {
+import type { FEStoryPackage } from '../../src/frontend/feArticle';
+
+export const storyPackage: FEStoryPackage = {
 	heading: 'More on this story',
 	trails: [
 		{

@@ -10,18 +10,17 @@ import type {
 	DCRGroupedTrails,
 } from '../types/front';
 import type { Position } from './Card/Card';
-import type {
-	ImagePositionType,
-	ImageSizeType,
-} from './Card/components/ImageWrapper';
 import { LI } from './Card/components/LI';
+import type {
+	MediaPositionType,
+	MediaSizeType,
+} from './Card/components/MediaWrapper';
 import type { TrailTextSize } from './Card/components/TrailText';
 import { UL } from './Card/components/UL';
 import type { ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
 import { FeatureCard } from './FeatureCard';
 import { FrontCard } from './FrontCard';
-import { Hide } from './Hide';
 import type { Alignment } from './SupportingContent';
 
 type Props = {
@@ -33,7 +32,6 @@ type Props = {
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
-	isInNoBoostsAbTestVariant?: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -146,9 +144,9 @@ const ImmersiveCardLayout = ({
 
 type BoostedSplashProperties = {
 	headlineSizes: ResponsiveFontSize;
-	imagePositionOnDesktop: ImagePositionType;
-	imagePositionOnMobile: ImagePositionType;
-	imageSize: ImageSizeType;
+	mediaPositionOnDesktop: MediaPositionType;
+	mediaPositionOnMobile: MediaPositionType;
+	mediaSize: MediaSizeType;
 	supportingContentAlignment: Alignment;
 	liveUpdatesAlignment: Alignment;
 	trailTextSize: TrailTextSize;
@@ -175,9 +173,9 @@ const decideSplashCardProperties = (
 					tablet: 'medium',
 					mobile: 'medium',
 				},
-				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
-				imageSize: 'large',
+				mediaPositionOnDesktop: 'right',
+				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
+				mediaSize: 'large',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
@@ -190,9 +188,9 @@ const decideSplashCardProperties = (
 					tablet: 'large',
 					mobile: 'large',
 				},
-				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
-				imageSize: avatarUrl ? 'large' : 'jumbo',
+				mediaPositionOnDesktop: 'right',
+				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
+				mediaSize: avatarUrl ? 'large' : 'xlarge',
 				supportingContentAlignment:
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
@@ -207,9 +205,9 @@ const decideSplashCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'xlarge',
 				},
-				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
-				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
-				imageSize: 'jumbo',
+				mediaPositionOnDesktop: mediaCard ? 'top' : 'bottom',
+				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
+				mediaSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
@@ -223,9 +221,9 @@ const decideSplashCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'xxlarge',
 				},
-				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
-				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
-				imageSize: 'jumbo',
+				mediaPositionOnDesktop: mediaCard ? 'top' : 'bottom',
+				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
+				mediaSize: 'jumbo',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
@@ -280,9 +278,9 @@ const SplashCardLayout = ({
 
 	const {
 		headlineSizes,
-		imagePositionOnDesktop,
-		imagePositionOnMobile,
-		imageSize,
+		mediaPositionOnDesktop,
+		mediaPositionOnMobile,
+		mediaSize,
 		supportingContentAlignment,
 		liveUpdatesAlignment,
 		trailTextSize,
@@ -311,9 +309,9 @@ const SplashCardLayout = ({
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
 					headlineSizes={headlineSizes}
-					imagePositionOnDesktop={imagePositionOnDesktop}
-					imagePositionOnMobile={imagePositionOnMobile}
-					imageSize={imageSize}
+					mediaPositionOnDesktop={mediaPositionOnDesktop}
+					mediaPositionOnMobile={mediaPositionOnMobile}
+					mediaSize={mediaSize}
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
 					supportingContentAlignment={
@@ -335,6 +333,7 @@ const SplashCardLayout = ({
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
+					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
 				/>
 			</LI>
 		</UL>
@@ -343,7 +342,7 @@ const SplashCardLayout = ({
 
 type BoostedCardProperties = {
 	headlineSizes: ResponsiveFontSize;
-	imageSize: ImageSizeType;
+	mediaSize: MediaSizeType;
 	liveUpdatesPosition: Position;
 	supportingContentAlignment: Alignment;
 };
@@ -365,7 +364,7 @@ const decideCardProperties = (
 					tablet: 'small',
 					mobile: 'medium',
 				},
-				imageSize: 'jumbo',
+				mediaSize: 'xlarge',
 				liveUpdatesPosition: 'outer',
 				supportingContentAlignment:
 					supportingContentLength >= 2 ? 'horizontal' : 'vertical',
@@ -378,7 +377,7 @@ const decideCardProperties = (
 					tablet: 'small',
 					mobile: 'small',
 				},
-				imageSize: avatarUrl ? 'large' : 'medium',
+				mediaSize: avatarUrl ? 'large' : 'medium',
 				liveUpdatesPosition: 'inner',
 				supportingContentAlignment:
 					supportingContentLength >= 2 ? 'horizontal' : 'vertical',
@@ -416,7 +415,7 @@ const FullWidthCardLayout = ({
 
 	const {
 		headlineSizes,
-		imageSize,
+		mediaSize,
 		supportingContentAlignment,
 		liveUpdatesPosition,
 	} = decideCardProperties(
@@ -456,11 +455,11 @@ const FullWidthCardLayout = ({
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
 					headlineSizes={headlineSizes}
-					imagePositionOnDesktop="right"
-					imagePositionOnMobile={
+					mediaPositionOnDesktop="right"
+					mediaPositionOnMobile={
 						isMediaCard(card.format) ? 'top' : 'bottom'
 					}
-					imageSize={imageSize}
+					mediaSize={mediaSize}
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
 					supportingContentAlignment={
@@ -544,14 +543,14 @@ const HalfWidthCardLayout = ({
 							absoluteServerTimes={absoluteServerTimes}
 							image={card.image}
 							imageLoading={imageLoading}
-							imagePositionOnDesktop="left"
+							mediaPositionOnDesktop="left"
 							supportingContent={card.supportingContent?.slice(
 								0,
 								2,
 							)}
 							supportingContentAlignment="vertical"
 							supportingContentPosition="outer"
-							imageSize="small"
+							mediaSize="small"
 							aspectRatio={aspectRatio}
 							kickerText={card.kickerText}
 							showLivePlayable={false}
@@ -582,7 +581,6 @@ export const FlexibleGeneral = ({
 	aspectRatio,
 	containerLevel = 'Primary',
 	collectionId,
-	isInNoBoostsAbTestVariant,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
 		...snap,
@@ -616,48 +614,7 @@ export const FlexibleGeneral = ({
 			{groupedCards.map((row, i) => {
 				switch (row.layout) {
 					case 'oneCardFullWidth':
-						return isInNoBoostsAbTestVariant ? (
-							<>
-								<Hide when="above" breakpoint="tablet">
-									<HalfWidthCardLayout
-										key={row.cards[0]?.uniqueId}
-										cards={row.cards}
-										containerPalette={containerPalette}
-										showAge={showAge}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
-										imageLoading={imageLoading}
-										isFirstRow={!splash.length && i === 0}
-										isFirstStandardRow={i === 0}
-										aspectRatio={aspectRatio}
-										isLastRow={
-											i === groupedCards.length - 1
-										}
-										containerLevel={containerLevel}
-									/>
-								</Hide>
-								<Hide when="below" breakpoint="tablet">
-									<FullWidthCardLayout
-										key={row.cards[0]?.uniqueId}
-										cards={row.cards}
-										containerPalette={containerPalette}
-										showAge={showAge}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
-										imageLoading={imageLoading}
-										aspectRatio={aspectRatio}
-										isFirstRow={!splash.length && i === 0}
-										isLastRow={
-											i === groupedCards.length - 1
-										}
-										containerLevel={containerLevel}
-										collectionId={collectionId}
-									/>
-								</Hide>
-							</>
-						) : (
+						return (
 							<FullWidthCardLayout
 								key={row.cards[0]?.uniqueId}
 								cards={row.cards}

@@ -7,6 +7,7 @@ import {
 	getSublinks,
 	loopVideoCard,
 	opinionTrails,
+	slideshowCard,
 	trails,
 	videoTrails,
 } from '../../fixtures/manual/trails';
@@ -138,7 +139,7 @@ type FlexibleGeneralArgsAndCustomArgs = React.ComponentProps<
 
 const meta = {
 	component: FlexibleGeneral,
-	title: 'Components/FlexibleGeneral',
+	title: 'Front Containers/FlexibleGeneral',
 	parameters: {
 		chromatic: {
 			viewports: [
@@ -450,45 +451,6 @@ export const StandardBoostedWithLiveUpdates: Story = {
 	},
 };
 
-const slideshowCard = {
-	...liveUpdatesCard,
-	mainMedia: undefined,
-	slideshowImages: [
-		{
-			imageSrc:
-				'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/1000.jpg',
-		},
-		{
-			imageSrc:
-				'https://media.guim.co.uk/77e960298d4339e047eac5c1986d0f3214f6285d/419_447_4772_2863/master/4772.jpg',
-		},
-		{
-			imageSrc:
-				'https://media.guim.co.uk/df5aea6391e21b5a5d2d25fd9aad81d497f99d42/0_45_3062_1837/master/3062.jpg',
-		},
-		{
-			imageSrc:
-				'https://media.guim.co.uk/5ebec1a8d662f0da39887dae16e4b2720379246e/0_0_5000_3000/master/5000.jpg',
-		},
-		{
-			imageSrc:
-				'https://media.guim.co.uk/77e960298d4339e047eac5c1986d0f3214f6285d/419_447_4772_2863/master/4772.jpg',
-		},
-	],
-} satisfies DCRFrontCard;
-
-// Boost level is ignored for slideshows
-export const SplashWithLiveUpdatesAndSlideshow: Story = {
-	name: 'Splash with live updates and slideshow',
-	args: {
-		frontSectionTitle: 'Splash with live updates and slideshow',
-		groupedTrails: {
-			...emptyGroupedTrails,
-			splash: [{ ...slideshowCard }],
-		},
-	},
-};
-
 export const StandardCards: Story = {
 	name: 'Standard cards',
 	args: {
@@ -517,7 +479,7 @@ const containerPalettes = [
 	'SombreAltPalette',
 	'SpecialReportAltPalette',
 	'Branded',
-] as const satisfies readonly Omit<DCRContainerPalette, 'MediaPalette'>[];
+] as const satisfies readonly DCRContainerPalette[];
 
 export const WithSpecialPaletteVariations = {
 	name: 'With special palette variations',
@@ -604,5 +566,54 @@ export const StandardBoostedMediaCardWithSublinks: Story = {
 				supportingContent: getSublinks(2),
 			})),
 		},
+	},
+};
+
+// All splash boost levels support slideshows.
+export const SplashWithSlideshow: Story = {
+	name: 'Splash with a slideshow',
+	args: {
+		frontSectionTitle: 'Flexible General Splash card with a slideshow',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			splash: [
+				{
+					...slideshowCard,
+					boostLevel: 'default',
+					headline: 'Default splash card with a slideshow',
+				},
+			],
+		},
+		collectionId: 1,
+	},
+};
+
+export const StandardCardWithSlideshow: Story = {
+	name: 'Standard card with a slideshow',
+	args: {
+		frontSectionTitle:
+			'Flexible General standard card with a slideshow at each boost level',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			standard: [
+				{
+					...slideshowCard,
+					boostLevel: 'default',
+					headline:
+						'Image fallback - default card is too small for a slideshow',
+				},
+				{
+					...slideshowCard,
+					boostLevel: 'boost',
+					headline: 'Boosted card with a slideshow',
+				},
+				{
+					...slideshowCard,
+					boostLevel: 'megaboost',
+					headline: 'MegaBoosted card with a slideshow',
+				},
+			],
+		},
+		collectionId: 1,
 	},
 };
