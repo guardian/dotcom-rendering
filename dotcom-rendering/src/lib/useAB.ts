@@ -8,7 +8,12 @@ type ABTests = {
 	participations: Participations;
 };
 
+/**
+ * A promise which never resolves, used to initialise the SWR hook.
+ * The actual value is set later via the `setABTests` function.
+ */
 const apiPromise = new Promise<ABTests>(() => {});
+const betaAPIPromise = new Promise<BetaABTestAPI>(() => {});
 const key = 'ab-tests';
 
 /**
@@ -29,10 +34,7 @@ export const setABTests = ({ api, participations }: ABTests): void => {
 };
 
 export const useBetaAB = (): BetaABTestAPI | undefined => {
-	const { data } = useSWRImmutable(
-		'beta-ab-tests',
-		() => new Promise<BetaABTestAPI>(() => {}),
-	);
+	const { data } = useSWRImmutable('beta-ab-tests', () => betaAPIPromise);
 	return data;
 };
 
