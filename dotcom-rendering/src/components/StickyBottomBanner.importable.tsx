@@ -1,3 +1,4 @@
+import type { ABTestAPI } from '@guardian/ab-core';
 import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
@@ -9,12 +10,14 @@ import type { BannerProps } from '@guardian/support-dotcom-components/dist/share
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';
 import type { ArticleCounts } from '../lib/articleCount';
+import type { EditionId } from '../lib/edition';
 import type {
 	CandidateConfig,
 	MaybeFC,
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
+import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
@@ -50,6 +53,7 @@ type Props = {
 
 	pageId: string;
 	host?: string;
+	abTestAPI?: ABTestAPI; // Optional prop for testing (e.g., Storybook)
 };
 
 type BrazeMeta = {
@@ -75,19 +79,43 @@ const DEFAULT_BANNER_TIMEOUT_MILLIS = 2000;
 const buildCmpBannerConfig = (): CandidateConfig<void> => ({
 	candidate: {
 		id: 'cmpUi',
-		canShow: () =>
-			cmp
-				.willShowPrivacyMessage()
-				.then((result) =>
-					result ? { show: true, meta: undefined } : { show: false },
-				),
+		canShow: () => {
+			// In Storybook environment, CMP APIs may not be available
+			// Return false immediately to avoid hanging
+			if (
+				typeof window !== 'undefined' &&
+				(window.location.hostname === 'localhost' ||
+					window.location.hostname === '127.0.0.1')
+			) {
+				// eslint-disable-next-line no-console -- Required for debugging CMP issues
+				console.log(
+					'CMP: Detected Storybook/localhost environment, skipping CMP check',
+				);
+				return Promise.resolve({ show: false as const });
+			}
+
+			try {
+				return cmp
+					.willShowPrivacyMessage()
+					.then((result) => {
+						return result
+							? { show: true as const, meta: undefined }
+							: { show: false as const };
+					})
+					.catch(() => {
+						return { show: false as const };
+					});
+			} catch (error) {
+				return Promise.resolve({ show: false as const });
+			}
+		},
 		show: () => {
 			// New CMP is not a react component and is shown outside of react's world
 			// so render nothing if it will show
 			return null;
 		},
 	},
-	timeoutMillis: null,
+	timeoutMillis: 1, // Add 1-millisecond timeout to prevent hanging in problematic environments
 });
 
 const buildRRBannerConfigWith = ({
@@ -183,12 +211,23 @@ const buildSignInGateConfig = (
 	contentType: string,
 	sectionId: string,
 	tags: TagType[],
+	pageId: string,
+	contributionsServiceUrl: string,
+	editionId: EditionId,
+	idUrl: string,
 	host?: string,
+	abTestAPI?: ABTestAPI,
 ): CandidateConfig<void> => ({
 	candidate: {
 		id: 'sign-in-gate-portal',
 		canShow: () =>
-			canShowSignInGatePortal(isSignedIn, isPaidContent, isPreview),
+			canShowSignInGatePortal(
+				isSignedIn,
+				isPaidContent,
+				isPreview,
+				pageId,
+				abTestAPI,
+			),
 		show: () => () => (
 			<SignInGatePortal
 				host={host}
@@ -197,6 +236,11 @@ const buildSignInGateConfig = (
 				tags={tags}
 				isPaidContent={isPaidContent}
 				isPreview={isPreview}
+				pageId={pageId}
+				contributionsServiceUrl={contributionsServiceUrl}
+				editionId={editionId}
+				idUrl={idUrl}
+				abTestAPI={abTestAPI}
 			/>
 		),
 	},
@@ -259,12 +303,17 @@ export const StickyBottomBanner = ({
 	pageId,
 	remoteBannerSwitch,
 	host,
+	abTestAPI: propAbTestAPI, // Optional prop for testing
 }: Props & {
 	remoteBannerSwitch: boolean;
 	isSensitive: boolean;
 }) => {
-	const { renderingTarget } = useConfig();
+	const { renderingTarget, editionId } = useConfig();
 	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
+	const hookAbTestAPI = useAB()?.api;
+
+	// Use prop abTestAPI if provided, otherwise fall back to hook
+	const abTestAPI = propAbTestAPI ?? hookAbTestAPI;
 
 	const countryCode = useCountryCode('sticky-bottom-banner');
 	const isSignedIn = useIsSignedIn();
@@ -330,7 +379,12 @@ export const StickyBottomBanner = ({
 			contentType,
 			sectionId,
 			tags,
+			pageId,
+			contributionsServiceUrl,
+			editionId,
+			idApiUrl, // Using idApiUrl as idUrl
 			host,
+			abTestAPI,
 		);
 
 		const bannerConfig: SlotConfig = {
@@ -359,6 +413,7 @@ export const StickyBottomBanner = ({
 		asyncArticleCounts,
 		contentType,
 		contributionsServiceUrl,
+		editionId,
 		idApiUrl,
 		isMinuteArticle,
 		isPaidContent,
@@ -372,6 +427,7 @@ export const StickyBottomBanner = ({
 		ophanPageViewId,
 		pageId,
 		host,
+		abTestAPI,
 	]);
 
 	if (SelectedBanner) {

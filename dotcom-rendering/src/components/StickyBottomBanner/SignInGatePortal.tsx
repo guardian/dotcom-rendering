@@ -1,20 +1,20 @@
-import { useEffect, useState } from 'react';
+import type { ABTestAPI } from '@guardian/ab-core';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
+import type { EditionId } from '../../lib/edition';
 import type { CanShowResult } from '../../lib/messagePicker';
-import { useSignInGateSelector } from '../../lib/useSignInGateSelector';
+import { useAB } from '../../lib/useAB';
+import { useAuthStatus } from '../../lib/useAuthStatus';
 import type { TagType } from '../../types/tag';
-
-type SignInGatePortalCandidate = {
-	gateElement: JSX.Element;
-	targetElement: Element;
-};
+import { pageIdIsAllowedForGating } from '../SignInGate/displayRules';
+import { SignInGateSelector } from '../SignInGateSelector.importable';
 
 /**
- * SignInGatePortal component that renders a sign-in gate using React portal
- * into the designated gate position in the article content.
+ * SignInGatePortal - Portal wrapper for SignInGateSelector
  *
- * This component is designed to be used within the message picker system
- * to coordinate with banners and prevent both from showing simultaneously.
+ * This component wraps the existing SignInGateSelector in a portal
+ * so it can be controlled by the StickyBottomBanner message picker
+ * while maintaining all the existing Auxia logic.
  */
 export const SignInGatePortal = ({
 	host = 'https://theguardian.com/',
@@ -23,6 +23,11 @@ export const SignInGatePortal = ({
 	tags,
 	isPaidContent,
 	isPreview,
+	pageId,
+	contributionsServiceUrl,
+	editionId,
+	idUrl,
+	abTestAPI, // Accept abTestAPI as prop to avoid hook issues in Storybook
 }: {
 	host?: string;
 	contentType: string;
@@ -30,89 +35,115 @@ export const SignInGatePortal = ({
 	tags: TagType[];
 	isPaidContent: boolean;
 	isPreview: boolean;
+	pageId: string;
+	contributionsServiceUrl: string;
+	editionId: EditionId;
+	idUrl: string;
+	abTestAPI?: ABTestAPI; // Optional prop for Storybook
 }) => {
-	const [gateCandidate, setGateCandidate] =
-		useState<SignInGatePortalCandidate | null>(null);
-	const gateSelector = useSignInGateSelector();
+	const [shouldShowGate, setShouldShowGate] = useState<boolean>(false);
+	const [targetElement, setTargetElement] = useState<HTMLElement | null>(
+		null,
+	);
+
+	const authStatus = useAuthStatus();
+	const isSignedOut = useMemo(
+		() => authStatus.kind === 'SignedOut',
+		[authStatus.kind],
+	);
+
+	// Use provided abTestAPI prop or fall back to hook
+	const hookResult = useAB();
+	const finalAbTestAPI = abTestAPI ?? hookResult?.api;
+
+	// CRITICAL: Memoize isAuxiaAudience to prevent infinite loops
+	const isAuxiaAudience = useMemo(() => {
+		if (!finalAbTestAPI) {
+			return false;
+		}
+
+		try {
+			const result = !!finalAbTestAPI.isUserInVariant(
+				'AuxiaSignInGate',
+				'auxia-signin-gate',
+			);
+			return result;
+		} catch (error) {
+			// eslint-disable-next-line no-console -- Required for debugging gate coordination
+			console.error(
+				'❌ SignInGatePortal: Error in memoized Auxia check:',
+				error,
+			);
+			return false;
+		}
+	}, [finalAbTestAPI]);
+
+	// Memoize page ID check to prevent recalculation
+	const pageIdAllowed = useMemo(() => {
+		return pageIdIsAllowedForGating(pageId);
+	}, [pageId]);
+
+	// Stable event handler using useCallback
+	const handleGateDismissed = useCallback(() => {
+		setShouldShowGate(false);
+	}, []);
 
 	useEffect(() => {
-		// Find the sign-in gate placeholder in the DOM
-		const targetElement = document.getElementById('sign-in-gate');
+		const element = document.getElementById('sign-in-gate');
+		setTargetElement(element);
 
-		if (!targetElement || !gateSelector) {
-			setGateCandidate(null);
-			return;
-		}
+		// Check all the conditions that would prevent the gate from showing
+		const shouldShow = !!(
+			element &&
+			pageIdAllowed &&
+			!isPreview &&
+			!isPaidContent &&
+			isSignedOut &&
+			isAuxiaAudience
+		);
 
-		const [gateVariant, currentTest] = gateSelector;
+		setShouldShowGate(shouldShow);
 
-		if (!gateVariant || !currentTest || !gateVariant.gate) {
-			setGateCandidate(null);
-			return;
-		}
+		// Listen for gate dismissal events using our stable handler
+		document.addEventListener(
+			'article:sign-in-gate-dismissed',
+			handleGateDismissed,
+		);
 
-		// Check if the gate can show based on the variant's canShow logic
-		void gateVariant
-			.canShow({
-				isSignedIn: false, // If we get here, we know user is not signed in
-				currentTest,
-				contentType,
-				sectionId,
-				tags,
-				isPaidContent,
-				isPreview,
-				currentLocaleCode: undefined, // This should be passed as prop in real implementation
-			})
-			.then((canShow) => {
-				if (!canShow || !gateVariant.gate) {
-					setGateCandidate(null);
-					return;
-				}
-
-				// Create the gate element using the gate variant
-				const gateElement = gateVariant.gate({
-					signInUrl: `${host}/signin`, // Basic implementation
-					registerUrl: `${host}/register`, // Basic implementation
-					guUrl: host,
-					dismissGate: () => {
-						// Handle gate dismissal
-						setGateCandidate(null);
-						document.dispatchEvent(
-							new CustomEvent('article:sign-in-gate-dismissed'),
-						);
-					},
-					ophanComponentId: 'sign-in-gate-portal',
-					abTest: currentTest,
-				});
-
-				setGateCandidate({
-					gateElement,
-					targetElement,
-				});
-			})
-			.catch(() => {
-				// If canShow fails, don't show the gate
-				setGateCandidate(null);
-			});
+		return () => {
+			document.removeEventListener(
+				'article:sign-in-gate-dismissed',
+				handleGateDismissed,
+			);
+		};
 	}, [
-		gateSelector,
-		host,
-		contentType,
-		sectionId,
-		tags,
-		isPaidContent,
+		pageIdAllowed,
 		isPreview,
+		isPaidContent,
+		isSignedOut,
+		isAuxiaAudience,
+		handleGateDismissed,
 	]);
 
-	// Render the gate using createPortal if we have a valid candidate
-	if (gateCandidate) {
-		return createPortal(
-			gateCandidate.gateElement,
-			gateCandidate.targetElement,
-		);
+	if (!(shouldShowGate && targetElement)) {
+		return null;
 	}
 
-	return null;
+	return createPortal(
+		<SignInGateSelector
+			contentType={contentType}
+			sectionId={sectionId}
+			tags={tags}
+			isPaidContent={isPaidContent}
+			isPreview={isPreview}
+			host={host}
+			pageId={pageId}
+			idUrl={idUrl}
+			contributionsServiceUrl={contributionsServiceUrl}
+			editionId={editionId}
+		/>,
+		targetElement,
+	);
 };
 
 /**
@@ -124,6 +155,8 @@ export const canShowSignInGatePortal = (
 	isSignedIn: boolean | undefined,
 	isPaidContent: boolean,
 	isPreview: boolean,
+	pageId?: string,
+	abTestAPI?: ABTestAPI,
 ): Promise<CanShowResult<void>> => {
 	// Check if the sign-in gate placeholder exists in the DOM
 	const targetElement = document.getElementById('sign-in-gate');
@@ -132,13 +165,35 @@ export const canShowSignInGatePortal = (
 		return Promise.resolve({ show: false });
 	}
 
-	// Early returns for conditions that prevent gate showing
 	if (isPaidContent || isPreview || isSignedIn) {
 		return Promise.resolve({ show: false });
 	}
 
-	// For now, we'll return true to allow the gate to show
-	// The actual gate logic will determine if it should be displayed
-	// based on the sign-in gate selector logic
-	return Promise.resolve({ show: true, meta: undefined });
+	if (pageId && !pageIdIsAllowedForGating(pageId)) {
+		return Promise.resolve({ show: false });
+	}
+
+	if (!abTestAPI) {
+		return Promise.resolve({ show: true, meta: undefined });
+	}
+
+	try {
+		const isAuxiaAudience = !!abTestAPI.isUserInVariant(
+			'AuxiaSignInGate',
+			'auxia-signin-gate',
+		);
+
+		if (!isAuxiaAudience) {
+			return Promise.resolve({ show: false });
+		}
+
+		return Promise.resolve({ show: true, meta: undefined });
+	} catch (error) {
+		// eslint-disable-next-line no-console -- Required for debugging gate coordination
+		console.error(
+			'canShowSignInGatePortal: Error checking AB test:',
+			error,
+		);
+		return Promise.resolve({ show: false });
+	}
 };
