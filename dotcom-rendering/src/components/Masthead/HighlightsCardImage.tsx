@@ -10,9 +10,7 @@ const imageStyles = css`
 	position: relative;
 	align-self: flex-end;
 	flex-shrink: 0;
-	height: 98px;
 	width: 98px;
-
 	${until.tablet} {
 		margin-top: ${space[2]}px;
 	}
