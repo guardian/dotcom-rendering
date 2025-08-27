@@ -439,14 +439,24 @@ export const LoopVideo = ({
 	 * Handle the case where the user navigates back to the page.
 	 */
 	useEffect(() => {
-		window.addEventListener('pageshow', function (event) {
+		const handleRestoreFromCache = (event: PageTransitionEvent) => {
 			if (event.persisted) {
 				setIsAutoplayAllowed(doesUserPermitAutoplay());
 				setIsRestoredFromBFCache(true);
 			} else {
 				setIsRestoredFromBFCache(false);
 			}
+		};
+
+		window.addEventListener('pageshow', function (event) {
+			handleRestoreFromCache(event);
 		});
+
+		return () => {
+			window.removeEventListener('pageshow', function (event) {
+				handleRestoreFromCache(event);
+			});
+		};
 	}, []);
 
 	if (renderingTarget !== 'Web') return null;
