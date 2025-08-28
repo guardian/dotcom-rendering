@@ -29,7 +29,7 @@ export const ABTests: ABTest[] = [
 		status: 'ON',
 		expirationDate: '2050-12-30',
 		type: 'client',
-		audienceSize: 10 / 100,
+		audienceSize: 0 / 100,
 		groups: ['control', 'variant'],
 	},
 	{
@@ -40,22 +40,7 @@ export const ABTests: ABTest[] = [
 		status: 'ON',
 		expirationDate: '2050-12-30',
 		type: 'server',
-		audienceSize: 10 / 100,
+		audienceSize: 0 / 100,
 		groups: ['control', 'variant'],
-	},
-	{
-		name: 'commercial-large-overlap-test',
-		description:
-			'Allows viewing the beta version of the Europe network front',
-		owners: [
-			'project.fairground@theguardian.com',
-			'dotcom.platform@theguardian.com',
-		],
-		status: 'ON',
-		expirationDate: '2050-12-30',
-		type: 'server',
-		audienceSize: 50 / 100,
-		groups: ['control', 'variant'],
-		audienceSpace: 'B',
 	},
 ];
