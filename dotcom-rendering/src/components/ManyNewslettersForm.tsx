@@ -5,22 +5,18 @@ import {
 	palette,
 	space,
 } from '@guardian/source/foundations';
-import {
-	Button,
-	Checkbox,
-	CheckboxGroup,
-	TextInput,
-} from '@guardian/source/react-components';
+import { Button } from '@guardian/source/react-components';
 import {
 	type ChangeEventHandler,
 	type ReactEventHandler,
 	useState,
 } from 'react';
-import ReactGoogleRecaptcha from 'react-google-recaptcha';
+import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
+import { ManyNewslettersFormFields } from './ManyNewslettersFormFields';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 
-interface FormProps {
+export interface FormProps {
 	status: 'NotSent' | 'Loading' | 'Success' | 'Failed' | 'InvalidEmail';
 	email: string;
 	handleTextInput: ChangeEventHandler<HTMLInputElement>;
@@ -68,29 +64,6 @@ const formFieldsStyle = css`
 		flex-direction: row;
 		flex-shrink: 0;
 		align-items: last baseline;
-	}
-`;
-
-const inputWrapperStyle = css`
-	margin-bottom: ${space[2]}px;
-	${from.desktop} {
-		margin-bottom: 0;
-		margin-right: ${space[2]}px;
-		flex-basis: 296px;
-	}
-`;
-
-const inputAndOptInWrapperStyle = css`
-	${from.desktop} {
-		flex-basis: 296px;
-		margin-right: ${space[2]}px;
-	}
-`;
-
-const optInCheckboxTextSmall = css`
-	label > div {
-		font-size: 13px;
-		line-height: 16px;
 	}
 `;
 
@@ -155,23 +128,12 @@ export const ManyNewslettersForm = ({
 	handleCaptchaError,
 }: FormProps) => {
 	const [formHasFocus, setFormHasFocus] = useState(false);
-	const [firstInteractionOccurred, setFirstInteractionOccurred] =
-		useState(false);
 	const hidePrivacyOnMobile = !formHasFocus && email.length === 0;
-
-	const isMarketingOptInVisible = marketingOptIn !== undefined;
 
 	const ariaLabel =
 		newsletterCount === 1
 			? 'Sign up for the newsletter you selected'
 			: `Sign up for the ${newsletterCount} newsletters you selected`;
-
-	const errorMessage =
-		status === 'Failed'
-			? 'Sign up failed. Please try again'
-			: status === 'InvalidEmail'
-			? 'Please enter a valid email address'
-			: undefined;
 
 	return (
 		<form
@@ -200,75 +162,18 @@ export const ManyNewslettersForm = ({
 			<div css={formFieldsStyle}>
 				{status !== 'Success' ? (
 					<>
-						<div css={inputAndOptInWrapperStyle}>
-							<span css={inputWrapperStyle}>
-								<TextInput
-									label="Enter your email"
-									value={email}
-									onChange={handleTextInput}
-									error={errorMessage}
-									disabled={status === 'Loading'}
-									onFocus={() =>
-										setFirstInteractionOccurred(true)
-									}
-								/>
-							</span>
-							{isMarketingOptInVisible && (
-								<div>
-									<CheckboxGroup
-										name="marketing-preferences"
-										label="Marketing preferences"
-										hideLabel={true}
-										cssOverrides={optInCheckboxTextSmall}
-									>
-										<Checkbox
-											label="Get updates about our journalism and ways to support and enjoy our work."
-											value="marketing-opt-in"
-											checked={marketingOptIn}
-											onChange={(e) =>
-												setMarketingOptIn(
-													e.target.checked,
-												)
-											}
-											theme={{
-												fillUnselected:
-													palette.neutral[100],
-												borderUnselected:
-													palette.neutral[46],
-												fillSelected:
-													palette.brand[500],
-												borderSelected:
-													palette.brand[500],
-												borderHover: palette.brand[500],
-											}}
-										/>
-									</CheckboxGroup>
-								</div>
-							)}
-							{useReCaptcha && !!captchaSiteKey && (
-								<div
-									css={css`
-										.grecaptcha-badge {
-											visibility: hidden;
-										}
-									`}
-								>
-									{(!visibleRecaptcha ||
-										firstInteractionOccurred) && (
-										<ReactGoogleRecaptcha
-											sitekey={captchaSiteKey}
-											ref={reCaptchaRef}
-											onError={handleCaptchaError}
-											size={
-												visibleRecaptcha
-													? 'normal'
-													: 'invisible'
-											}
-										/>
-									)}
-								</div>
-							)}
-						</div>
+						<ManyNewslettersFormFields
+							status={status}
+							email={email}
+							handleTextInput={handleTextInput}
+							marketingOptIn={marketingOptIn}
+							setMarketingOptIn={setMarketingOptIn}
+							useReCaptcha={useReCaptcha}
+							captchaSiteKey={captchaSiteKey}
+							visibleRecaptcha={visibleRecaptcha}
+							reCaptchaRef={reCaptchaRef}
+							handleCaptchaError={handleCaptchaError}
+						/>
 						<Button
 							aria-label={ariaLabel}
 							isLoading={status === 'Loading'}
