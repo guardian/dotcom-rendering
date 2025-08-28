@@ -1,5 +1,6 @@
 import { ABTests } from '../../abTest.ts';
 import { ABTest } from '../../types.ts';
+import { enoughSpace } from './enoughSpace.ts';
 import { limitServerSideTests } from './limitServerSide.ts';
 import { uniqueName } from './uniqueName.ts';
 import { allExpirationsValid } from './validExpiration.ts';
@@ -10,6 +11,7 @@ const rules: ValidationFunction[] = [
 	limitServerSideTests,
 	allExpirationsValid,
 	uniqueName,
+	enoughSpace,
 ];
 
 function validateTests(testList: ABTest[]) {
