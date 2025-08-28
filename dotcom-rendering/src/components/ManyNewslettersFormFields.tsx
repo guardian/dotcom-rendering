@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, palette, space } from '@guardian/source/foundations';
+import { from, palette, space, textSans14 } from '@guardian/source/foundations';
 import {
 	Checkbox,
 	CheckboxGroup,
@@ -28,7 +28,7 @@ const inputAndOptInWrapperStyle = css`
 
 const optInCheckboxTextSmall = css`
 	label > div {
-		font-size: 13px;
+		${textSans14};
 		line-height: 16px;
 	}
 `;

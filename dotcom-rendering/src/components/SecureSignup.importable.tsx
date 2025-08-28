@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
 import type { ComponentEvent, TAction } from '@guardian/ophan-tracker-js';
-import { space, until } from '@guardian/source/foundations';
+import { space, textSans14, until } from '@guardian/source/foundations';
 import {
 	Button,
 	Checkbox,
@@ -101,7 +101,7 @@ const errorContainerStyles = css`
 
 const optInCheckboxTextSmall = css`
 	label > div {
-		font-size: 13px;
+		${textSans14};
 		line-height: 16px;
 	}
 `;
