@@ -2,7 +2,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
 import type { CardMediaType } from '../../../types/layout';
-import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
+import type { MediaPositionType, MediaSizeType } from './MediaWrapper';
 
 const sizingStyles = css`
 	display: flex;
@@ -12,26 +12,26 @@ const sizingStyles = css`
 `;
 
 /**
- * This function works in partnership with its sibling in `ImageWrapper`. If you
- * change any values here be sure to update that file as well.
+ * This function works in partnership with its sibling in `MediaWrapper`.
+ * If you change any values here be sure to update that file as well.
  */
 const flexBasisStyles = ({
-	imageSize,
-	imageType,
+	mediaSize,
+	mediaType,
 	isBetaContainer,
 }: {
-	imageSize: ImageSizeType;
-	imageType?: CardMediaType;
+	mediaSize: MediaSizeType;
+	mediaType?: CardMediaType;
 	isBetaContainer: boolean;
 }): SerializedStyles => {
-	if (imageType === 'avatar') {
+	if (mediaType === 'avatar') {
 		return css`
 			flex-basis: 100%;
 		`;
 	}
 
 	if (!isBetaContainer) {
-		switch (imageSize) {
+		switch (mediaSize) {
 			default:
 			case 'small':
 				return css`
@@ -64,7 +64,7 @@ const flexBasisStyles = ({
 		}
 	}
 
-	switch (imageSize) {
+	switch (mediaSize) {
 		default:
 		case 'small':
 		case 'medium':
@@ -98,44 +98,44 @@ const flexBasisStyles = ({
 	}
 };
 
-type ImageDirection = 'vertical' | 'horizontal' | 'none';
-
 /**
- * There is no padding on the side of the image where the text is.
+ * There is no padding on the side of the media where the text is.
  */
 const paddingBetaContainerStyles = (
-	imagePositionMobile: ImagePositionType,
-	imagePositionDesktop: ImagePositionType,
+	mediaPositionMobile: MediaPositionType,
+	mediaPositionDesktop: MediaPositionType,
 	padding: 1 | 2,
 ) => css`
 	${until.tablet} {
-		padding-left: ${imagePositionMobile !== 'left' &&
+		padding-left: ${mediaPositionMobile !== 'left' &&
 		`${space[padding]}px`};
-		padding-right: ${imagePositionMobile !== 'right' &&
+		padding-right: ${mediaPositionMobile !== 'right' &&
 		`${space[padding]}px`};
-		padding-top: ${imagePositionMobile !== 'top' && `${space[padding]}px`};
-		padding-bottom: ${imagePositionMobile !== 'bottom' &&
+		padding-top: ${mediaPositionMobile !== 'top' && `${space[padding]}px`};
+		padding-bottom: ${mediaPositionMobile !== 'bottom' &&
 		`${space[padding]}px`};
 	}
 	${from.tablet} {
-		padding-left: ${imagePositionDesktop !== 'left' &&
+		padding-left: ${mediaPositionDesktop !== 'left' &&
 		`${space[padding]}px`};
-		padding-right: ${imagePositionDesktop !== 'right' &&
+		padding-right: ${mediaPositionDesktop !== 'right' &&
 		`${space[padding]}px`};
-		padding-top: ${imagePositionDesktop !== 'top' && `${space[padding]}px`};
-		padding-bottom: ${imagePositionDesktop !== 'bottom' &&
+		padding-top: ${mediaPositionDesktop !== 'top' && `${space[padding]}px`};
+		padding-bottom: ${mediaPositionDesktop !== 'bottom' &&
 		`${space[padding]}px`};
 	}
 `;
 
-const getImageDirection = (
-	imagePosition: ImagePositionType,
-): ImageDirection => {
-	if (imagePosition === 'top' || imagePosition === 'bottom') {
+type MediaDirection = 'vertical' | 'horizontal' | 'none';
+
+const getMediaDirection = (
+	mediaPosition: MediaPositionType,
+): MediaDirection => {
+	if (mediaPosition === 'top' || mediaPosition === 'bottom') {
 		return 'vertical';
 	}
 
-	if (imagePosition === 'left' || imagePosition === 'right') {
+	if (mediaPosition === 'left' || mediaPosition === 'right') {
 		return 'horizontal';
 	}
 
@@ -144,32 +144,36 @@ const getImageDirection = (
 
 type Props = {
 	children: React.ReactNode;
-	imageType?: CardMediaType;
-	imageSize: ImageSizeType;
+	mediaType?: CardMediaType;
+	mediaSize: MediaSizeType;
 	isBetaContainer: boolean;
-	imagePositionOnDesktop: ImagePositionType;
-	imagePositionOnMobile: ImagePositionType;
+	mediaPositionOnDesktop: MediaPositionType;
+	mediaPositionOnMobile: MediaPositionType;
 	padContent?: 'small' | 'large';
 };
 
 export const ContentWrapper = ({
 	children,
-	imageType,
-	imageSize,
+	mediaType,
+	mediaSize,
 	isBetaContainer,
-	imagePositionOnDesktop,
-	imagePositionOnMobile,
+	mediaPositionOnDesktop,
+	mediaPositionOnMobile,
 	padContent,
 }: Props) => {
-	const imageDirectionDesktop = getImageDirection(imagePositionOnDesktop);
+	const mediaDirectionDesktop = getMediaDirection(mediaPositionOnDesktop);
 	const paddingSpace = padContent === 'small' ? 1 : 2;
 
 	return (
 		<div
 			css={[
 				sizingStyles,
-				imageDirectionDesktop === 'horizontal' &&
-					flexBasisStyles({ imageSize, imageType, isBetaContainer }),
+				mediaDirectionDesktop === 'horizontal' &&
+					flexBasisStyles({
+						mediaSize,
+						mediaType,
+						isBetaContainer,
+					}),
 				padContent &&
 					!isBetaContainer &&
 					css`
@@ -178,8 +182,8 @@ export const ContentWrapper = ({
 				padContent &&
 					isBetaContainer &&
 					paddingBetaContainerStyles(
-						imagePositionOnMobile,
-						imagePositionOnDesktop,
+						mediaPositionOnMobile,
+						mediaPositionOnDesktop,
 						paddingSpace,
 					),
 			]}
