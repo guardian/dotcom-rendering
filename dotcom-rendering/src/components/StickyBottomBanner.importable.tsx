@@ -1,4 +1,3 @@
-import type { ABTestAPI } from '@guardian/ab-core';
 import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
@@ -17,7 +16,6 @@ import type {
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
-import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
@@ -53,7 +51,6 @@ type Props = {
 
 	pageId: string;
 	host?: string;
-	abTestAPI?: ABTestAPI; // Optional prop for testing (e.g., Storybook)
 };
 
 type BrazeMeta = {
@@ -216,7 +213,6 @@ const buildSignInGateConfig = (
 	editionId: EditionId,
 	idUrl: string,
 	host?: string,
-	abTestAPI?: ABTestAPI,
 ): CandidateConfig<void> => ({
 	candidate: {
 		id: 'sign-in-gate-portal',
@@ -226,7 +222,6 @@ const buildSignInGateConfig = (
 				isPaidContent,
 				isPreview,
 				pageId,
-				abTestAPI,
 			),
 		show: () => () => (
 			<SignInGatePortal
@@ -240,7 +235,6 @@ const buildSignInGateConfig = (
 				contributionsServiceUrl={contributionsServiceUrl}
 				editionId={editionId}
 				idUrl={idUrl}
-				abTestAPI={abTestAPI}
 			/>
 		),
 	},
@@ -303,17 +297,12 @@ export const StickyBottomBanner = ({
 	pageId,
 	remoteBannerSwitch,
 	host,
-	abTestAPI: propAbTestAPI, // Optional prop for testing
 }: Props & {
 	remoteBannerSwitch: boolean;
 	isSensitive: boolean;
 }) => {
 	const { renderingTarget, editionId } = useConfig();
 	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
-	const hookAbTestAPI = useAB()?.api;
-
-	// Use prop abTestAPI if provided, otherwise fall back to hook
-	const abTestAPI = propAbTestAPI ?? hookAbTestAPI;
 
 	const countryCode = useCountryCode('sticky-bottom-banner');
 	const isSignedIn = useIsSignedIn();
@@ -384,7 +373,6 @@ export const StickyBottomBanner = ({
 			editionId,
 			idApiUrl, // Using idApiUrl as idUrl
 			host,
-			abTestAPI,
 		);
 
 		const bannerConfig: SlotConfig = {
@@ -427,7 +415,6 @@ export const StickyBottomBanner = ({
 		ophanPageViewId,
 		pageId,
 		host,
-		abTestAPI,
 	]);
 
 	if (SelectedBanner) {

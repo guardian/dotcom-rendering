@@ -1,9 +1,7 @@
-import type { ABTestAPI } from '@guardian/ab-core';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { EditionId } from '../../lib/edition';
 import type { CanShowResult } from '../../lib/messagePicker';
-import { useAB } from '../../lib/useAB';
 import { useAuthStatus } from '../../lib/useAuthStatus';
 import type { TagType } from '../../types/tag';
 import { Island } from '../Island';
@@ -28,7 +26,6 @@ export const SignInGatePortal = ({
 	contributionsServiceUrl,
 	editionId,
 	idUrl,
-	abTestAPI, // Accept abTestAPI as prop to avoid hook issues in Storybook
 }: {
 	host?: string;
 	contentType: string;
@@ -40,7 +37,6 @@ export const SignInGatePortal = ({
 	contributionsServiceUrl: string;
 	editionId: EditionId;
 	idUrl: string;
-	abTestAPI?: ABTestAPI; // Optional prop for Storybook
 }) => {
 	const [shouldShowGate, setShouldShowGate] = useState<boolean>(false);
 	const [targetElement, setTargetElement] = useState<HTMLElement | null>(
@@ -52,32 +48,6 @@ export const SignInGatePortal = ({
 		() => authStatus.kind === 'SignedOut',
 		[authStatus.kind],
 	);
-
-	// Use provided abTestAPI prop or fall back to hook
-	const hookResult = useAB();
-	const finalAbTestAPI = abTestAPI ?? hookResult?.api;
-
-	// CRITICAL: Memoize isAuxiaAudience to prevent infinite loops
-	const isAuxiaAudience = useMemo(() => {
-		if (!finalAbTestAPI) {
-			return false;
-		}
-
-		try {
-			const result = !!finalAbTestAPI.isUserInVariant(
-				'AuxiaSignInGate',
-				'auxia-signin-gate',
-			);
-			return result;
-		} catch (error) {
-			// eslint-disable-next-line no-console -- Required for debugging gate coordination
-			console.error(
-				'❌ SignInGatePortal: Error in memoized Auxia check:',
-				error,
-			);
-			return false;
-		}
-	}, [finalAbTestAPI]);
 
 	// Memoize page ID check to prevent recalculation
 	const pageIdAllowed = useMemo(() => {
@@ -99,8 +69,7 @@ export const SignInGatePortal = ({
 			pageIdAllowed &&
 			!isPreview &&
 			!isPaidContent &&
-			isSignedOut &&
-			isAuxiaAudience
+			isSignedOut
 		);
 
 		setShouldShowGate(shouldShow);
@@ -122,7 +91,6 @@ export const SignInGatePortal = ({
 		isPreview,
 		isPaidContent,
 		isSignedOut,
-		isAuxiaAudience,
 		handleGateDismissed,
 	]);
 
@@ -159,7 +127,6 @@ export const canShowSignInGatePortal = (
 	isPaidContent: boolean,
 	isPreview: boolean,
 	pageId?: string,
-	abTestAPI?: ABTestAPI,
 ): Promise<CanShowResult<void>> => {
 	// Check if the sign-in gate placeholder exists in the DOM
 	const targetElement = document.getElementById('sign-in-gate');
@@ -176,27 +143,5 @@ export const canShowSignInGatePortal = (
 		return Promise.resolve({ show: false });
 	}
 
-	if (!abTestAPI) {
-		return Promise.resolve({ show: true, meta: undefined });
-	}
-
-	try {
-		const isAuxiaAudience = !!abTestAPI.isUserInVariant(
-			'AuxiaSignInGate',
-			'auxia-signin-gate',
-		);
-
-		if (!isAuxiaAudience) {
-			return Promise.resolve({ show: false });
-		}
-
-		return Promise.resolve({ show: true, meta: undefined });
-	} catch (error) {
-		// eslint-disable-next-line no-console -- Required for debugging gate coordination
-		console.error(
-			'canShowSignInGatePortal: Error checking AB test:',
-			error,
-		);
-		return Promise.resolve({ show: false });
-	}
+	return Promise.resolve({ show: true, meta: undefined });
 };

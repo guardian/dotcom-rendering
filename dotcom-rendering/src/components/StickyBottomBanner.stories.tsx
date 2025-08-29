@@ -1,18 +1,6 @@
-import type { ABTestAPI } from '@guardian/ab-core';
 import type { Meta, StoryObj } from '@storybook/react';
 import { ConfigProvider } from './ConfigContext';
 import { StickyBottomBanner as StickyBottomBannerComponent } from './StickyBottomBanner.importable';
-
-// Create a static mock AB test API to avoid useAB hook calls
-const createMockAbTestAPI = (forceAuxia: boolean): ABTestAPI => ({
-	isUserInVariant: () => forceAuxia,
-	allRunnableTests: () => [],
-	runnableTest: () => null,
-	firstRunnableTest: () => null,
-	registerCompleteEvents: () => undefined,
-	registerImpressionEvents: () => undefined,
-	trackABTests: () => undefined,
-});
 
 /**
  * StickyBottomBanner is a complex component that coordinates the display of various types of messages
@@ -67,12 +55,6 @@ const meta = {
 
 export default meta;
 
-/**
- * Story that forces the sign-in gate to appear through a static mocked API.
- *
- * Uses a static mock of the AB test API to avoid repeated useAB calls
- * and allow the sign-in gate to appear correctly.
- */
 export const WithMockedAuxiaExperiment: StoryObj = {
 	args: {
 		contentType: 'Article',
@@ -88,7 +70,5 @@ export const WithMockedAuxiaExperiment: StoryObj = {
 		isPreview: false,
 		showSignInGateForExpiredSubscribers: false,
 		pageId: 'world/2023/oct/31/test-article', // Valid pageId for gating
-		// Pass the mocked AB test API directly as prop
-		abTestAPI: createMockAbTestAPI(true),
 	},
 };

@@ -9,7 +9,6 @@ import type { EditionId } from '../lib/edition';
 import { getLocaleCode } from '../lib/getCountryCode';
 import { isUserLoggedIn } from '../lib/identity';
 import { constructQuery } from '../lib/querystring';
-import { useAB } from '../lib/useAB';
 import { useOnce } from '../lib/useOnce';
 import { usePageViewId } from '../lib/usePageViewId';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -20,7 +19,6 @@ import { submitComponentEventTracking } from './SignInGate/componentEventTrackin
 import { retrieveDismissedCount } from './SignInGate/dismissGate';
 import { pageIdIsAllowedForGating } from './SignInGate/displayRules';
 import { SignInGateAuxiaV1 } from './SignInGate/gateDesigns/SignInGateAuxiaV1';
-import { signInGateComponent as gateLegacyComponent } from './SignInGate/gates/main-control';
 import type {
 	AuxiaAPIResponseDataUserTreatment,
 	AuxiaGateDisplayData,
@@ -30,7 +28,6 @@ import type {
 	AuxiaProxyGetTreatmentsPayload,
 	AuxiaProxyGetTreatmentsResponse,
 	AuxiaProxyLogTreatmentInteractionPayload,
-	CanShowGateProps,
 	CurrentSignInGateABTest,
 	ShowGateValues,
 } from './SignInGate/types';
@@ -95,46 +92,6 @@ const generateGatewayUrl = (
 // Auxia Integration Experiment //
 // -------------------------------
 
-const decideShouldShowLegacyGate = async (
-	contentType: string,
-	sectionId: string,
-	tags: TagType[],
-	isPaidContent: boolean,
-	isPreview: boolean,
-): Promise<boolean> => {
-	/*
-		Date: 14th May
-		Author: Pascal
-
-		As part of moving the control of gate display from the client side to SDC (support dotcom components)
-		We introduce this function that is going to compute the value of `should_show_legacy_gate_tmp`, which is
-		then passed to SDC.
-
-		It basically needs to reproduce all the logic in the existing SignInGateSelectorDefault, which has a
-		convoluted set of hooks controlling display, but that the logic of can be reversed engineered.
-	*/
-
-	const isSignedIn: boolean = await isUserLoggedIn();
-	const currentTest: CurrentSignInGateABTest = {
-		name: 'SignInGateMainControl',
-		variant: 'main-control-5',
-		id: 'SignInGateMainControl',
-	};
-	const countryCode = (await getLocaleCode()) ?? undefined;
-
-	const input: CanShowGateProps = {
-		isSignedIn,
-		currentTest,
-		contentType,
-		sectionId,
-		tags,
-		isPaidContent,
-		isPreview,
-		currentLocaleCode: countryCode,
-	};
-	return gateLegacyComponent.canShow(input);
-};
-
 export const SignInGateSelector = ({
 	contentType,
 	sectionId = '',
@@ -147,12 +104,6 @@ export const SignInGateSelector = ({
 	contributionsServiceUrl,
 	editionId,
 }: Props) => {
-	const abTestAPI = useAB()?.api;
-	const userIsInAuxiaExperiment = !!abTestAPI?.isUserInVariant(
-		'AuxiaSignInGate',
-		'auxia-signin-gate',
-	);
-
 	if (!pageIdIsAllowedForGating(pageId)) {
 		return <></>;
 	}
@@ -169,7 +120,6 @@ export const SignInGateSelector = ({
 			contentType={contentType}
 			sectionId={sectionId}
 			tags={tags}
-			isAuxiaAudience={userIsInAuxiaExperiment}
 		/>
 	);
 };
@@ -208,7 +158,6 @@ type PropsAuxia = {
 	contentType: string;
 	sectionId: string;
 	tags: TagType[];
-	isAuxiaAudience: boolean; // [1]
 };
 
 // [1] If true, it indicates that we are using the component for the regular Auxia share of the Audience
@@ -289,7 +238,6 @@ const fetchProxyGetTreatments = async (
 	gateDismissCount: number,
 	countryCode: string,
 	mvtId: number,
-	should_show_legacy_gate_tmp: boolean,
 	hasConsented: boolean,
 	shouldServeDismissible: boolean,
 	showDefaultGate: ShowGateValues,
@@ -314,7 +262,7 @@ const fetchProxyGetTreatments = async (
 		gateDismissCount,
 		countryCode,
 		mvtId,
-		should_show_legacy_gate_tmp,
+		should_show_legacy_gate_tmp: false,
 		hasConsented,
 		shouldServeDismissible,
 		showDefaultGate,
@@ -402,34 +350,12 @@ const buildAuxiaGateDisplayData = async (
 	sectionId: string,
 	tags: TagType[],
 	gateDismissCount: number,
-	isAuxiaAudience: boolean, // [1]
 ): Promise<AuxiaGateDisplayData | undefined> => {
 	// [1] If true, it indicates that we are using the component for the regular Auxia share of the Audience
 	// otherwise, if false, it means that we are using the component to display the legacy gate.
 
 	const readerPersonalData = await decideAuxiaProxyReaderPersonalData();
 	const tagIds = tags.map((tag) => tag.id);
-
-	let should_show_legacy_gate_tmp;
-
-	if (isAuxiaAudience) {
-		should_show_legacy_gate_tmp = false;
-		// The actual value is irrelevant in this case, but we have the convention to set it to false here
-	} else {
-		// The two times the function `buildAuxiaGateDisplayData` is called
-		// it's behind a
-		// (!isSignedIn && !isPreview && !isPaidContent)
-		// guard. So we don't need to pass `isPreview` and `isPaidContent` to it, we know
-		// they are both false.
-
-		should_show_legacy_gate_tmp = await decideShouldShowLegacyGate(
-			contentType,
-			sectionId,
-			tags,
-			false,
-			false,
-		);
-	}
 
 	const shouldServeDismissible = decideShouldServeDismissible();
 	const showDefaultGate = decideShowDefaultGate();
@@ -448,7 +374,6 @@ const buildAuxiaGateDisplayData = async (
 		gateDismissCount,
 		readerPersonalData.countryCode,
 		readerPersonalData.mvtId,
-		should_show_legacy_gate_tmp,
 		readerPersonalData.hasConsented,
 		shouldServeDismissible,
 		showDefaultGate,
@@ -546,7 +471,6 @@ const SignInGateSelectorAuxia = ({
 	contentType,
 	sectionId,
 	tags,
-	isAuxiaAudience,
 }: PropsAuxia) => {
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
@@ -597,7 +521,6 @@ const SignInGateSelectorAuxia = ({
 					sectionId,
 					tags,
 					retrieveDismissedCount(abTest.variant, abTest.name),
-					isAuxiaAudience,
 				);
 				if (data !== undefined) {
 					setAuxiaGateDisplayData(data);
