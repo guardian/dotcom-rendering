@@ -6,6 +6,7 @@ import type { CanShowResult } from '../../lib/messagePicker';
 import { useAB } from '../../lib/useAB';
 import { useAuthStatus } from '../../lib/useAuthStatus';
 import type { TagType } from '../../types/tag';
+import { Island } from '../Island';
 import { pageIdIsAllowedForGating } from '../SignInGate/displayRules';
 import { SignInGateSelector } from '../SignInGateSelector.importable';
 
@@ -130,18 +131,20 @@ export const SignInGatePortal = ({
 	}
 
 	return createPortal(
-		<SignInGateSelector
-			contentType={contentType}
-			sectionId={sectionId}
-			tags={tags}
-			isPaidContent={isPaidContent}
-			isPreview={isPreview}
-			host={host}
-			pageId={pageId}
-			idUrl={idUrl}
-			contributionsServiceUrl={contributionsServiceUrl}
-			editionId={editionId}
-		/>,
+		<Island priority="feature" defer={{ until: 'visible' }}>
+			<SignInGateSelector
+				contentType={contentType}
+				sectionId={sectionId}
+				tags={tags}
+				isPaidContent={isPaidContent}
+				isPreview={isPreview}
+				host={host}
+				pageId={pageId}
+				idUrl={idUrl}
+				contributionsServiceUrl={contributionsServiceUrl}
+				editionId={editionId}
+			/>
+		</Island>,
 		targetElement,
 	);
 };
