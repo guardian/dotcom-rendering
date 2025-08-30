@@ -294,6 +294,7 @@ const fetchProxyGetTreatments = async (
 	shouldServeDismissible: boolean,
 	showDefaultGate: ShowGateValues,
 	gateDisplayCount: number,
+	hideSupportMessagingTimestamp: number | undefined,
 ): Promise<AuxiaProxyGetTreatmentsResponse> => {
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
 	const articleIdentifier = `www.theguardian.com/${pageId}`;
@@ -319,6 +320,7 @@ const fetchProxyGetTreatments = async (
 		shouldServeDismissible,
 		showDefaultGate,
 		gateDisplayCount,
+		hideSupportMessagingTimestamp,
 	};
 	const params = {
 		method: 'POST',
@@ -393,6 +395,17 @@ const incrementGateDisplayCount = () => {
 	storage.local.setRaw('gate_display_count', newCount.toString());
 };
 
+const decideHideSupportMessagingTimestamp = (): number | undefined => {
+	const timestamp = parseInt(
+		storage.local.getRaw('gu_hide_support_messaging') ?? '0',
+		10,
+	);
+	if (Number.isInteger(timestamp)) {
+		return timestamp;
+	}
+	return undefined;
+};
+
 const buildAuxiaGateDisplayData = async (
 	contributionsServiceUrl: string,
 	pageId: string,
@@ -434,6 +447,8 @@ const buildAuxiaGateDisplayData = async (
 	const showDefaultGate = decideShowDefaultGate();
 	const gateDisplayCount = getGateDisplayCount();
 
+	const hideSupportMessagingTimestamp = decideHideSupportMessagingTimestamp();
+
 	const response = await fetchProxyGetTreatments(
 		contributionsServiceUrl,
 		pageId,
@@ -452,6 +467,7 @@ const buildAuxiaGateDisplayData = async (
 		shouldServeDismissible,
 		showDefaultGate,
 		gateDisplayCount,
+		hideSupportMessagingTimestamp,
 	);
 
 	if (response.status && response.data) {

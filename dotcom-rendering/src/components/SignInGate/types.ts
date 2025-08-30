@@ -127,6 +127,7 @@ export interface AuxiaProxyGetTreatmentsPayload {
 	shouldServeDismissible: boolean; // [2]
 	showDefaultGate: ShowGateValues; // [3]
 	gateDisplayCount: number;
+	hideSupportMessagingTimestamp: number | undefined; // [4]
 }
 
 // [1]
@@ -162,6 +163,16 @@ export interface AuxiaProxyGetTreatmentsPayload {
 // the mandatory variant of the gu default gate.
 
 // Note that this attributes override the value of should_show_legacy_gate_tmp.
+
+// [4]
+
+// date: 30th August 2025
+// author: Pascal
+
+// `hideSupportMessagingTimestamp: number | undefined` was introduced to implement the effect
+// of not showing the gate if the reader has performed a single contribution in the past 30 days.
+// It is either undefined or return the timestamp carried by cookie `gu_hide_support_messaging`
+// See: https://github.com/guardian/support-frontend/blob/7a5c0f9209054c24934b876771392531c261f51c/support-frontend/assets/helpers/storage/contributionsCookies.ts#L11
 
 export interface AuxiaProxyGetTreatmentsResponse {
 	status: boolean;
