@@ -294,6 +294,7 @@ const fetchProxyGetTreatments = async (
 	shouldServeDismissible: boolean,
 	showDefaultGate: ShowGateValues,
 	gateDisplayCount: number,
+	hideSupportMessagingTimestamp: number | undefined,
 ): Promise<AuxiaProxyGetTreatmentsResponse> => {
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
 	const articleIdentifier = `www.theguardian.com/${pageId}`;
@@ -319,6 +320,7 @@ const fetchProxyGetTreatments = async (
 		shouldServeDismissible,
 		showDefaultGate,
 		gateDisplayCount,
+		hideSupportMessagingTimestamp,
 	};
 	const params = {
 		method: 'POST',
@@ -393,6 +395,32 @@ const incrementGateDisplayCount = () => {
 	storage.local.setRaw('gate_display_count', newCount.toString());
 };
 
+const decideHideSupportMessagingTimestamp = (): number | undefined => {
+	// Date: 1 September 2025
+	//
+	// This cookie is overloaded in the following way:
+	// If the user has performed single contribution, then the value is the
+	// timestamp of the event. But if the user has performed a recurring
+	// contribution, then the value is a future timestamp.
+	//
+	// Ideally we would correct the semantics of the cookie, but for the moment
+	// we are simply going to ignore the value if it's in the future. We
+	// are making this adjustment here, but will also mirror it in SDC
+
+	const rawValue: string | null = storage.local.getRaw(
+		'gu_hide_support_messaging',
+	);
+	if (rawValue === null) {
+		return undefined;
+	}
+	const timestamp = parseInt(rawValue, 10);
+	const now = Date.now(); // current time in milliseconds since epoch
+	if (Number.isInteger(timestamp) && timestamp < now) {
+		return timestamp;
+	}
+	return undefined;
+};
+
 const buildAuxiaGateDisplayData = async (
 	contributionsServiceUrl: string,
 	pageId: string,
@@ -434,6 +462,8 @@ const buildAuxiaGateDisplayData = async (
 	const showDefaultGate = decideShowDefaultGate();
 	const gateDisplayCount = getGateDisplayCount();
 
+	const hideSupportMessagingTimestamp = decideHideSupportMessagingTimestamp();
+
 	const response = await fetchProxyGetTreatments(
 		contributionsServiceUrl,
 		pageId,
@@ -452,6 +482,7 @@ const buildAuxiaGateDisplayData = async (
 		shouldServeDismissible,
 		showDefaultGate,
 		gateDisplayCount,
+		hideSupportMessagingTimestamp,
 	);
 
 	if (response.status && response.data) {

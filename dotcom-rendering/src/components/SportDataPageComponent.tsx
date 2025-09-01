@@ -72,6 +72,7 @@ export const SportDataPageComponent = ({ sportData }: Props) => {
 					pageIsSensitive={sportData.config.isSensitive}
 					isDev={!!sportData.config.isDev}
 					serverSideTests={sportData.config.abTests}
+					serverSideABTests={sportData.config.serverSideABTests}
 				/>
 			</Island>
 			<Island priority="critical">

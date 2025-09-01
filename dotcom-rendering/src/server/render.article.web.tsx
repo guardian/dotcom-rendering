@@ -132,6 +132,7 @@ export const renderHtml = ({
 		googletagUrl: frontendData.config.googletagUrl,
 		switches: frontendData.config.switches,
 		abTests: frontendData.config.abTests,
+		serverSideABTests: frontendData.config.serverSideABTests,
 		brazeApiKey: frontendData.config.brazeApiKey,
 		isPaidContent: frontendData.pageType.isPaidContent,
 		contentType: frontendData.contentType,
