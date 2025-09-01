@@ -1,9 +1,15 @@
 import { css } from '@emotion/react';
-import { from, space, until } from '@guardian/source/foundations';
+import {
+	from,
+	palette as sourcePalette,
+	space,
+	until,
+} from '@guardian/source/foundations';
 import { Hide, SvgMediaControlsPlay } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { secondsToDuration } from '../lib/formatTime';
 import { getZIndex } from '../lib/getZIndex';
+import { transparentColour } from '../lib/transparentColour';
 import { palette } from '../palette';
 import type { StarRating as Rating } from '../types/content';
 import type {
@@ -15,10 +21,7 @@ import type {
 import type { MainMedia } from '../types/mainMedia';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
-import type {
-	ImagePositionType,
-	ImageSizeType,
-} from './Card/components/ImageWrapper';
+import type { MediaSizeType } from './Card/components/MediaWrapper';
 import { TrailText } from './Card/components/TrailText';
 import { CardHeadline, type ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
@@ -148,6 +151,9 @@ const overlayStyles = css`
 	gap: ${space[1]}px;
 	padding: 64px ${space[2]}px ${space[2]}px;
 	backdrop-filter: blur(12px) brightness(0.5);
+	@supports not (backdrop-filter: blur(12px)) {
+		background-color: ${transparentColour(sourcePalette.neutral[10], 0.7)};
+	}
 	${overlayMaskGradientStyles('180deg')};
 
 	/* Ensure the waveform is behind the other elements, e.g. headline, pill */
@@ -164,7 +170,6 @@ const immersiveOverlayStyles = css`
 		* 48px is to point at which the gradient can go behind the content whilst maintaining accessibility.
 		*/
 		padding: ${space[2]}px ${space[12]}px ${space[2]}px ${space[2]}px;
-		backdrop-filter: blur(12px) brightness(0.5);
 		${overlayMaskGradientStyles('270deg')}
 	}
 `;
@@ -287,10 +292,8 @@ export type Props = {
 	showByline?: boolean;
 	webPublicationDate?: string;
 	image?: DCRFrontImage;
-	imagePositionOnDesktop?: ImagePositionType /** TODO Remove this prop  */;
-	imagePositionOnMobile?: ImagePositionType /** TODO Remove this prop  */;
 	/** Size is ignored when position = 'top' because in that case the image flows based on width */
-	imageSize: ImageSizeType;
+	imageSize: MediaSizeType;
 	imageLoading: Loading;
 	showClock?: boolean;
 	mainMedia?: MainMedia;
@@ -343,8 +346,6 @@ export const FeatureCard = ({
 	showByline,
 	webPublicationDate,
 	image,
-	imagePositionOnDesktop = 'top',
-	imagePositionOnMobile = 'left',
 	imageSize,
 	trailText,
 	imageLoading,
@@ -507,11 +508,11 @@ export const FeatureCard = ({
 													mediaDuration={
 														mainMedia.duration
 													}
-													imagePositionOnDesktop={
-														imagePositionOnDesktop
+													mediaPositionOnDesktop={
+														'top'
 													}
-													imagePositionOnMobile={
-														imagePositionOnMobile
+													mediaPositionOnMobile={
+														'left'
 													}
 												/>
 											)}

@@ -38,10 +38,11 @@ const container = css`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	height: 100%;
 	column-gap: ${space[2]}px;
 	/** Relative positioning is required to absolutely position the card link overlay */
 	position: relative;
-	padding: 10px 10px 0 10px;
+	padding: ${space[2]}px ${space[2]}px 0 ${space[2]}px;
 	background-color: ${palette('--highlights-card-background')};
 
 	/**
@@ -55,22 +56,17 @@ const container = css`
 	${until.mobileMedium} {
 		min-height: 174px;
 	}
-
 	${between.mobileMedium.and.tablet} {
 		min-height: 194px;
-		height: 100%;
 	}
-
 	${from.tablet} {
-		height: 100%;
 		width: 160px;
+		padding: 10px 10px 0 10px;
 	}
-
 	${from.tablet} {
 		width: 280px;
 		flex-direction: row;
 	}
-
 	${from.desktop} {
 		width: 300px;
 	}
@@ -104,7 +100,18 @@ const content = css`
 	${from.tablet} {
 		padding-bottom: 10px;
 	}
+
+	/**
+	 * We're deliberately using a font-size that is not in Source so that
+	 * the headline doesn't exceed three lines across all mobile breakpoints
+	 */
+	${between.mobileMedium.and.mobileLandscape} {
+		.headline-text {
+			font-size: 1rem;
+		}
+	}
 `;
+
 const starWrapper = css`
 	width: fit-content;
 	margin-top: ${space[1]}px;
@@ -147,7 +154,7 @@ export const HighlightsCard = ({
 							desktop: 'xxsmall',
 							tablet: 'xxsmall',
 							mobileMedium: 'xxsmall',
-							mobile: 'tiny',
+							mobile: 'xxxsmall',
 						}}
 						showPulsingDot={
 							format.design === ArticleDesign.LiveBlog

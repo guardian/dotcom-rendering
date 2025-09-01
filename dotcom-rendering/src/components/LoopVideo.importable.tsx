@@ -116,6 +116,7 @@ type Props = {
 	fallbackImageLoading: CardPictureProps['loading'];
 	fallbackImageAlt: CardPictureProps['alt'];
 	fallbackImageAspectRatio: CardPictureProps['aspectRatio'];
+	linkTo: string;
 };
 
 export const LoopVideo = ({
@@ -130,6 +131,7 @@ export const LoopVideo = ({
 	fallbackImageLoading,
 	fallbackImageAlt,
 	fallbackImageAspectRatio,
+	linkTo,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -146,7 +148,7 @@ export const LoopVideo = ({
 	const [isAutoplayAllowed, setIsAutoplayAllowed] = useState<boolean | null>(
 		null,
 	);
-	const [isRestoredFromBFCache, setIsRestoredFromBFCache] = useState(false);
+	const [hasPageBecomeActive, setHasPageBecomeActive] = useState(false);
 
 	/**
 	 * Keep a track of whether the video has been in view. We only
@@ -276,6 +278,28 @@ export const LoopVideo = ({
 			setIsMuted(true);
 		};
 
+		/**
+		 * When the page is restored from BFCache, we need to retrigger autoplay,
+		 * as the video player state will be PAUSED_BY_BROWSER.
+		 */
+		const handleRestoreFromCache = (event: PageTransitionEvent) => {
+			if (event.persisted) {
+				setIsAutoplayAllowed(doesUserPermitAutoplay());
+				setHasPageBecomeActive(true);
+			} else {
+				setHasPageBecomeActive(false);
+			}
+		};
+
+		/**
+		 * When a user navigates away from the page and the page is hidden, the video will be
+		 * paused by the browser, as the video is not visible. (e.g. switched tab, minimised window).
+		 * When the page becomes visible again, we need to retrigger autoplay.
+		 */
+		const handlePageBecomesVisible = () => {
+			setHasPageBecomeActive(true);
+		};
+
 		document.addEventListener(
 			customLoopPlayAudioEventName,
 			handleCustomPlayAudioEvent,
@@ -284,6 +308,14 @@ export const LoopVideo = ({
 			customYoutubePlayEventName,
 			handleCustomPlayYoutubeEvent,
 		);
+		window.addEventListener('pageshow', function (event) {
+			handleRestoreFromCache(event);
+		});
+		document.addEventListener('visibilitychange', () => {
+			if (document.visibilityState === 'visible') {
+				handlePageBecomesVisible();
+			}
+		});
 
 		return () => {
 			document.removeEventListener(
@@ -294,6 +326,12 @@ export const LoopVideo = ({
 				customYoutubePlayEventName,
 				handleCustomPlayYoutubeEvent,
 			);
+			window.removeEventListener('pageshow', function (event) {
+				handleRestoreFromCache(event);
+			});
+			document.removeEventListener('visibilitychange', () => {
+				handlePageBecomesVisible();
+			});
 		};
 	}, [uniqueId]);
 
@@ -333,6 +371,7 @@ export const LoopVideo = ({
 					component: {
 						componentType: 'LOOP_VIDEO',
 						id: `gu-video-loop-${atomId}`,
+						labels: [linkTo],
 					},
 					action: 'VIEW',
 				},
@@ -341,7 +380,7 @@ export const LoopVideo = ({
 
 			setHasBeenInView(true);
 		}
-	}, [isInView, hasBeenInView, atomId]);
+	}, [isInView, hasBeenInView, atomId, linkTo]);
 
 	/**
 	 * Handle play/pause, when instigated by the browser.
@@ -370,7 +409,7 @@ export const LoopVideo = ({
 			isInView &&
 			(playerState === 'NOT_STARTED' ||
 				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' ||
-				(isRestoredFromBFCache && playerState === 'PAUSED_BY_BROWSER'))
+				(hasPageBecomeActive && playerState === 'PAUSED_BY_BROWSER'))
 		) {
 			/**
 			 * Check if the video has not been in view before tracking the play.
@@ -380,7 +419,7 @@ export const LoopVideo = ({
 				ophanTrackerWeb(atomId, 'loop')('play');
 			}
 
-			setIsRestoredFromBFCache(false);
+			setHasPageBecomeActive(false);
 			void playVideo();
 		}
 	}, [
@@ -390,7 +429,7 @@ export const LoopVideo = ({
 		playerState,
 		playVideo,
 		hasBeenInView,
-		isRestoredFromBFCache,
+		hasPageBecomeActive,
 		atomId,
 	]);
 
@@ -431,20 +470,6 @@ export const LoopVideo = ({
 	useEffect(() => {
 		setPreloadPartialData(isAutoplayAllowed === false || !!isInView);
 	}, [isAutoplayAllowed, isInView]);
-
-	/**
-	 * Handle the case where the user navigates back to the page.
-	 */
-	useEffect(() => {
-		window.addEventListener('pageshow', function (event) {
-			if (event.persisted) {
-				setIsAutoplayAllowed(doesUserPermitAutoplay());
-				setIsRestoredFromBFCache(true);
-			} else {
-				setIsRestoredFromBFCache(false);
-			}
-		});
-	}, []);
 
 	if (renderingTarget !== 'Web') return null;
 
