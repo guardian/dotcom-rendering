@@ -407,10 +407,13 @@ const decideHideSupportMessagingTimestamp = (): number | undefined => {
 	// we are simply going to ignore the value if it's in the future. We
 	// are making this adjustment here, but will also mirror it in SDC
 
-	const timestamp = parseInt(
-		storage.local.getRaw('gu_hide_support_messaging') ?? '0',
-		10,
+	const rawValue: string | null = storage.local.getRaw(
+		'gu_hide_support_messaging',
 	);
+	if (rawValue === null) {
+		return undefined;
+	}
+	const timestamp = parseInt(rawValue, 10);
 	const now = Date.now(); // current time in milliseconds since epoch
 	if (Number.isInteger(timestamp) && timestamp < now) {
 		return timestamp;
