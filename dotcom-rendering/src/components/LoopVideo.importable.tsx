@@ -593,8 +593,6 @@ export const LoopVideo = ({
 		? getOptimisedPosterImage(posterImage)
 		: undefined;
 
-	console.log('playerState', playerState, new Date().getSeconds());
-
 	return (
 		<figure
 			ref={setNode}
