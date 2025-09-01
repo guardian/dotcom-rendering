@@ -1,11 +1,9 @@
 import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
 import type { ComponentEvent, TAction } from '@guardian/ophan-tracker-js';
-import { space, textSans14, until } from '@guardian/source/foundations';
+import { space, until } from '@guardian/source/foundations';
 import {
 	Button,
-	Checkbox,
-	CheckboxGroup,
 	InlineError,
 	InlineSuccess,
 	Link,
@@ -21,7 +19,6 @@ import { useEffect, useRef, useState } from 'react';
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
-import { useIsSignedIn } from '../lib/useAuthStatus';
 import { palette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
@@ -96,13 +93,6 @@ const errorContainerStyles = css`
 		:hover {
 			background-color: ${palette('--recaptcha-button-hover')};
 		}
-	}
-`;
-
-const optInCheckboxTextSmall = css`
-	label > div {
-		${textSans14};
-		line-height: 16px;
 	}
 `;
 
@@ -277,16 +267,6 @@ export const SecureSignup = ({
 	const [errorMessage, setErrorMessage] = useState<string | undefined>(
 		undefined,
 	);
-	const [marketingOptIn, setMarketingOptIn] = useState<boolean | undefined>(
-		undefined,
-	);
-	const isSignedIn = useIsSignedIn();
-
-	useEffect(() => {
-		if (isSignedIn !== 'Pending' && !isSignedIn) {
-			setMarketingOptIn(true);
-		}
-	}, [isSignedIn]);
 
 	useEffect(() => {
 		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
@@ -302,16 +282,9 @@ export const SecureSignup = ({
 		const emailAddress: string = input?.value ?? '';
 
 		sendTracking(newsletterId, 'form-submission', renderingTarget, abTest);
-
-		const formData = buildFormData(emailAddress, newsletterId, token);
-
-		if (marketingOptIn !== undefined) {
-			formData.append('marketing', marketingOptIn ? 'true' : 'false');
-		}
-
 		const response = await postFormData(
 			window.guardian.config.page.ajaxUrl + '/email',
-			formData,
+			buildFormData(emailAddress, newsletterId, token),
 		);
 
 		// The response body could be accessed with await response.text()
@@ -410,23 +383,6 @@ export const SecureSignup = ({
 					type="email"
 					value={signedInUserEmail}
 				/>
-				{isSignedIn === false && (
-					<CheckboxGroup
-						name="marketing-preferences"
-						label="Marketing preferences"
-						hideLabel={true}
-						cssOverrides={optInCheckboxTextSmall}
-					>
-						<Checkbox
-							label="Get updates about our journalism and ways to support and enjoy our work."
-							value="marketing-opt-in"
-							checked={marketingOptIn}
-							onChange={(e) =>
-								setMarketingOptIn(e.target.checked)
-							}
-						/>
-					</CheckboxGroup>
-				)}
 				<Button onClick={handleClick} size="small" type="submit">
 					Sign up
 				</Button>
