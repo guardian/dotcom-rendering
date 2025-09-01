@@ -51,6 +51,7 @@ export interface ConfigType extends CommercialConfigType {
 	dcrSentryDsn: string;
 	switches: Switches;
 	abTests: ServerSideTests;
+	serverSideABTests: Record<string, string>;
 	dfpAccountId: string;
 	commercialBundleUrl: string;
 	revisionNumber: string;

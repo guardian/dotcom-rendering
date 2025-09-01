@@ -1,12 +1,14 @@
 import type { CoreAPIConfig } from '@guardian/ab-core';
 import { AB } from '@guardian/ab-core';
 import { getCookie, isUndefined, log } from '@guardian/libs';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { getOphan } from '../client/ophan/ophan';
 import { tests } from '../experiments/ab-tests';
 import { runnableTestsToParticipations } from '../experiments/lib/ab-participations';
+import { BetaABTests } from '../experiments/lib/beta-ab-tests';
 import { getForcedParticipationsFromUrl } from '../lib/getAbUrlHash';
-import { setABTests } from '../lib/useAB';
+import { isServer } from '../lib/isServer';
+import { setABTests, setBetaABTests } from '../lib/useAB';
 import type { ABTestSwitches } from '../model/enhance-switches';
 import type { ServerSideTests } from '../types/config';
 import { useConfig } from './ConfigContext';
@@ -17,6 +19,7 @@ type Props = {
 	isDev: boolean;
 	pageIsSensitive: CoreAPIConfig['pageIsSensitive'];
 	serverSideTests: ServerSideTests;
+	serverSideABTests: Record<string, string>;
 };
 
 const mvtMinValue = 1;
@@ -49,6 +52,12 @@ const getLocalMvtId = () =>
 		}),
 	);
 
+const errorReporter = (e: unknown) =>
+	window.guardian.modules.sentry.reportError(
+		e instanceof Error ? e : Error(String(e)),
+		'ab-tests',
+	);
+
 /**
  * Initialises the values of `useAB` and sends relevant Ophan events.
  *
@@ -66,6 +75,7 @@ export const SetABTests = ({
 	abTestSwitches,
 	forcedTestVariants,
 	serverSideTests,
+	serverSideABTests,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const [ophan, setOphan] = useState<Awaited<ReturnType<typeof getOphan>>>();
@@ -80,6 +90,19 @@ export const SetABTests = ({
 				);
 			});
 	}, [renderingTarget]);
+
+	const betaAb = useMemo(() => {
+		const betaAB = new BetaABTests(
+			isServer
+				? {
+						serverSideABTests,
+						isServer: true,
+				  }
+				: { isServer: false },
+		);
+		setBetaABTests(betaAB);
+		return betaAB;
+	}, [serverSideABTests]);
 
 	useEffect(() => {
 		if (!ophan) return;
@@ -106,11 +129,7 @@ export const SetABTests = ({
 			forcedTestVariants: allForcedTestVariants,
 			ophanRecord: ophan.record,
 			serverSideTests,
-			errorReporter: (e) =>
-				window.guardian.modules.sentry.reportError(
-					e instanceof Error ? e : Error(String(e)),
-					'ab-tests',
-				),
+			errorReporter,
 		});
 		const allRunnableTests = ab.allRunnableTests(tests);
 		const participations = runnableTestsToParticipations(allRunnableTests);
@@ -123,6 +142,9 @@ export const SetABTests = ({
 		ab.trackABTests(allRunnableTests);
 		ab.registerImpressionEvents(allRunnableTests);
 		ab.registerCompleteEvents(allRunnableTests);
+
+		betaAb.trackABTests(ophan.record, errorReporter);
+
 		log('dotcom', 'AB tests initialised');
 	}, [
 		abTestSwitches,
@@ -131,6 +153,7 @@ export const SetABTests = ({
 		pageIsSensitive,
 		ophan,
 		serverSideTests,
+		betaAb,
 	]);
 
 	// we don’t render anything
