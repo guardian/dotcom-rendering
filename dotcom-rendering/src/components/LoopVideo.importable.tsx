@@ -279,7 +279,8 @@ export const LoopVideo = ({
 		};
 
 		/**
-		 * Handle the case where the page is restored from the cache.
+		 * When the page is restored from BFCache, we need to retrigger autoplay,
+		 * as the video player state will be PAUSED_BY_BROWSER.
 		 */
 		const handleRestoreFromCache = (event: PageTransitionEvent) => {
 			if (event.persisted) {
@@ -291,7 +292,9 @@ export const LoopVideo = ({
 		};
 
 		/**
-		 * Handle the case where the user navigates back to the page.
+		 * When a user navigates away from the page and the page is hidden, the video will be
+		 * paused by the browser, as the video is not visible. (e.g. switched tab, minimised window).
+		 * When the page becomes visible again, we need to retrigger autoplay.
 		 */
 		const handlePageBecomesVisible = () => {
 			setHasPageBecomeActive(true);
@@ -589,6 +592,8 @@ export const LoopVideo = ({
 	const optimisedPosterImage = showPosterImage
 		? getOptimisedPosterImage(posterImage)
 		: undefined;
+
+	console.log('playerState', playerState, new Date().getSeconds());
 
 	return (
 		<figure
