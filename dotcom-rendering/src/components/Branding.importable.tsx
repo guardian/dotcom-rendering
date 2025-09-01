@@ -4,6 +4,7 @@ import {
 	breakpoints,
 	from,
 	textSans12,
+	textSansBold12,
 } from '@guardian/source/foundations';
 import {
 	ArticleDesign,
@@ -65,6 +66,10 @@ const liveBlogLabelStyle = css`
 	${from.desktop} {
 		color: ${palette('--branding-label-text')};
 	}
+`;
+
+const galleryLabelStyle = css`
+	${textSansBold12}
 `;
 
 const brandingLogoAdvertisingPartnerStyle = css`
@@ -208,6 +213,7 @@ type Props = {
 export const Branding = ({ branding, format }: Props) => {
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 	const isInteractive = format.design === ArticleDesign.Interactive;
+	const isGallery = format.design === ArticleDesign.Gallery;
 
 	const { ophanComponentName, ophanComponentLink } = getOphanComponents({
 		branding,
@@ -235,6 +241,7 @@ export const Branding = ({ branding, format }: Props) => {
 			<div
 				css={[
 					labelStyle,
+					isGallery && galleryLabelStyle,
 					isAdvertisingPartnerOrExclusive &&
 						labelAdvertisingPartnerStyle,
 					isLiveBlog && liveBlogLabelStyle,

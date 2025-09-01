@@ -96,7 +96,6 @@ type Props = {
 	posterImage?: string;
 	preloadPartialData: boolean;
 	showPlayIcon: boolean;
-	isInLoopingVideoTestVariant?: boolean;
 };
 
 /**
@@ -128,7 +127,6 @@ export const LoopVideoPlayer = forwardRef(
 			AudioIcon,
 			preloadPartialData,
 			showPlayIcon,
-			isInLoopingVideoTestVariant,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -149,11 +147,6 @@ export const LoopVideoPlayer = forwardRef(
 						showPlayIcon ? 'play' : 'pause'
 					}-${atomId}`}
 					data-chromatic="ignore"
-					data-component={
-						isInLoopingVideoTestVariant
-							? 'loop-video-player-variant'
-							: undefined
-					}
 					preload={preloadPartialData ? 'metadata' : 'none'}
 					loop={true}
 					muted={isMuted}

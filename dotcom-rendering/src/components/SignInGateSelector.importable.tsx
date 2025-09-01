@@ -323,23 +323,22 @@ const decideShowDefaultGate = (): ShowGateValues => {
 };
 
 const getGateDisplayCount = (): number => {
-	const rawValue = storage.local.getRaw('gate_display_count');
-	const count = parseInt(rawValue ?? '0', 10);
-	return count;
+	const count = parseInt(
+		storage.local.getRaw('gate_display_count') ?? '0',
+		10,
+	);
+	if (Number.isInteger(count)) {
+		return count;
+	}
+	return 0;
 };
 
 const incrementGateDisplayCount = () => {
 	const count = getGateDisplayCount();
-	const now = new Date();
-	const oneYearFromNow = new Date(now.getTime() + 365 * 86400);
 	const newCount = count + 1;
 	// Using `storage.local.set`, instead of `storage.local.setRaw`
 	// because `setRaw` doesn't allow for specifying the duration.
-	storage.local.set(
-		'gate_display_count',
-		newCount.toString(),
-		oneYearFromNow,
-	);
+	storage.local.setRaw('gate_display_count', newCount.toString());
 };
 
 const buildAuxiaGateDisplayData = async (
