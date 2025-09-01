@@ -177,6 +177,9 @@
                 },
                 "googleRecaptchaSiteKey": {
                     "type": "string"
+                },
+                "googleRecaptchaSiteKeyVisible": {
+                    "type": "string"
                 }
             },
             "required": [

@@ -87,4 +87,5 @@ export interface ConfigType extends CommercialConfigType {
 	isLive?: boolean;
 	isPreview?: boolean;
 	googleRecaptchaSiteKey?: string;
+	googleRecaptchaSiteKeyVisible?: string;
 }
