@@ -112,7 +112,7 @@ const buildCmpBannerConfig = (): CandidateConfig<void> => ({
 			return null;
 		},
 	},
-	timeoutMillis: 1, // Add 1-millisecond timeout to prevent hanging in problematic environments
+	timeoutMillis: null,
 });
 
 const buildRRBannerConfigWith = ({
