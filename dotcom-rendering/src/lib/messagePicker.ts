@@ -155,25 +155,34 @@ export async function pickMessage(
 	);
 
 	try {
-		for (const config of candidateConfigsWithTimeout) {
-			try {
-				const result = await config.candidate.canShow();
-				config.cancelTimeout();
+		const settled = await Promise.allSettled(
+			candidateConfigsWithTimeout.map((config) =>
+				config.candidate.canShow(),
+			),
+		);
 
-				if (result.show) {
-					clearAllTimeouts(candidateConfigsWithTimeout);
-					const { candidate } = config;
-					return () => candidate.show(result.meta);
-				}
-			} catch (error) {
-				if (error instanceof Error) {
-					window.guardian.modules.sentry.reportError(
-						error,
-						`pickMessage: error checking ${config.candidate.id}`,
-					);
-				}
+		for (let i = 0; i < candidateConfigsWithTimeout.length; i++) {
+			const config = candidateConfigsWithTimeout[i];
+			const result = settled[i];
 
-				config.cancelTimeout();
+			config?.cancelTimeout();
+
+			if (
+				result?.status === 'rejected' &&
+				result.reason instanceof Error
+			) {
+				window.guardian.modules.sentry.reportError(
+					result.reason,
+					`pickMessage: error checking ${config?.candidate.id}`,
+				);
+				continue;
+			}
+
+			const canShowResult =
+				result?.status === 'fulfilled' ? result.value : undefined;
+			if (canShowResult?.show) {
+				clearAllTimeouts(candidateConfigsWithTimeout);
+				return () => config?.candidate.show(canShowResult.meta) ?? null;
 			}
 		}
 
