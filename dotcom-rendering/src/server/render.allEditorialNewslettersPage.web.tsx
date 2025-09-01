@@ -79,6 +79,8 @@ export const renderEditorialNewslettersPage = ({
 		serverSideABTests: newslettersPage.config.serverSideABTests,
 		brazeApiKey: newslettersPage.config.brazeApiKey,
 		googleRecaptchaSiteKey: newslettersPage.config.googleRecaptchaSiteKey,
+		googleRecaptchaSiteKeyVisible:
+			newslettersPage.config.googleRecaptchaSiteKeyVisible,
 	});
 
 	const pageHtml = htmlPageTemplate({
