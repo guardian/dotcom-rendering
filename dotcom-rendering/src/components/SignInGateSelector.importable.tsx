@@ -396,11 +396,23 @@ const incrementGateDisplayCount = () => {
 };
 
 const decideHideSupportMessagingTimestamp = (): number | undefined => {
+	// Date: 1 September 2025
+	//
+	// This cookie is overloaded in the following way:
+	// If the user has performed single contribution, then the value is the
+	// timestamp of the event. But if the user has performed a recurring
+	// contribution, then the value is a future timestamp.
+	//
+	// Ideally we would correct the semantics of the cookie, but for the moment
+	// we are simply going to ignore the value if it's in the future. We
+	// are making this adjustment here, but will also mirror it in SDC
+
 	const timestamp = parseInt(
 		storage.local.getRaw('gu_hide_support_messaging') ?? '0',
 		10,
 	);
-	if (Number.isInteger(timestamp)) {
+	const now = Date.now(); // current time in milliseconds since epoch
+	if (Number.isInteger(timestamp) && timestamp < now) {
 		return timestamp;
 	}
 	return undefined;
