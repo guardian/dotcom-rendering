@@ -49,7 +49,7 @@ import type {
 	CtaSettings,
 	CtaStateSettings,
 } from './settings';
-import { buttonThemes } from './styles/buttonStyles';
+import { buttonStyles, buttonThemes } from './styles/buttonStyles';
 import { templateSpacing } from './styles/templateStyles';
 
 const buildImageSettings = (
@@ -174,16 +174,21 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	>(defaultChoiceCard);
 
 	const isCollapsableBanner =
-		tracking.abTestVariant.includes('COLLAPSABLE_V1');
+		tracking.abTestVariant.includes('COLLAPSABLE_V1') ||
+		tracking.abTestVariant.includes('COLLAPSABLE_V2_MAYBE_LATER');
 
 	const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
 	const handleSetIsCollapsed = (collapsed: boolean) => {
 		setIsCollapsed(collapsed);
 		if (collapsed) {
-			onCollapseClick();
+			if (typeof onCollapseClick === 'function') {
+				(onCollapseClick as () => void)();
+			}
 		} else {
-			onExpandClick();
+			if (typeof onExpandClick === 'function') {
+				(onExpandClick as () => void)();
+			}
 		}
 	};
 
@@ -301,6 +306,12 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 			separateArticleCount) &&
 		articleCounts.forTargetedWeeks >= 5;
 
+	// Add detection for the new "Maybe later" AB variant and pass flag to CTAs.
+	// This reuses the existing onCloseClick handler (same behaviour as the Close link).
+	const isMaybeLaterVariant = tracking.abTestVariant.includes(
+		'COLLAPSABLE_V2_MAYBE_LATER',
+	);
+
 	return (
 		<div
 			ref={bannerRef}
@@ -401,21 +412,50 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 				)}
 
 				{!selectedChoiceCard && (
-					<div css={styles.outerImageCtaContainer}>
-						<div css={styles.innerImageCtaContainer}>
-							<DesignableBannerCtas
-								mainOrMobileContent={mainOrMobileContent}
-								onPrimaryCtaClick={onCtaClick}
-								onSecondaryCtaClick={onSecondaryCtaClick}
-								primaryCtaSettings={
-									templateSettings.primaryCtaSettings
-								}
-								secondaryCtaSettings={
-									templateSettings.secondaryCtaSettings
-								}
-							/>
+					<>
+						<div css={styles.outerImageCtaContainer}>
+							<div css={styles.innerImageCtaContainer}>
+								<DesignableBannerCtas
+									mainOrMobileContent={mainOrMobileContent}
+									onPrimaryCtaClick={onCtaClick}
+									onSecondaryCtaClick={onSecondaryCtaClick}
+									primaryCtaSettings={
+										templateSettings.primaryCtaSettings
+									}
+									secondaryCtaSettings={
+										templateSettings.secondaryCtaSettings
+									}
+								/>
+							</div>
 						</div>
-					</div>
+						{isMaybeLaterVariant &&
+							isCollapsed &&
+							typeof onCloseClick === 'function' && (
+								<div
+									css={styles.maybeLaterContainer(
+										cardsImageOrSpaceTemplateString,
+									)}
+								>
+									<LinkButton
+										onClick={onCloseClick}
+										size="small"
+										priority="tertiary"
+										cssOverrides={[
+											buttonStyles(
+												templateSettings.secondaryCtaSettings,
+											),
+											styles.maybeLaterButton,
+										]}
+										theme={buttonThemes(
+											templateSettings.secondaryCtaSettings,
+											'tertiary',
+										)}
+									>
+										Maybe later
+									</LinkButton>
+								</div>
+							)}
+					</>
 				)}
 
 				<div
@@ -458,13 +498,14 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 							/>
 						</div>
 					)}
-					{(!isCollapsableBanner || isCollapsed) && (
-						<DesignableBannerCloseButton
-							onCloseClick={onCloseClick}
-							settings={templateSettings.closeButtonSettings}
-							isCollapsableBanner={isCollapsableBanner}
-						/>
-					)}
+					{(!isCollapsableBanner || isCollapsed) &&
+						!isMaybeLaterVariant && (
+							<DesignableBannerCloseButton
+								onCloseClick={onCloseClick}
+								settings={templateSettings.closeButtonSettings}
+								isCollapsableBanner={isCollapsableBanner}
+							/>
+						)}
 				</div>
 
 				{choiceCards &&
@@ -503,6 +544,27 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 										? mainOrMobileContent.primaryCta.ctaText
 										: 'Continue'}
 								</LinkButton>
+								{isMaybeLaterVariant &&
+									isCollapsed &&
+									typeof onCloseClick === 'function' && (
+										<LinkButton
+											onClick={onCloseClick}
+											size="small"
+											priority="tertiary"
+											cssOverrides={[
+												buttonStyles(
+													templateSettings.secondaryCtaSettings,
+												),
+												styles.maybeLaterButton,
+											]}
+											theme={buttonThemes(
+												templateSettings.secondaryCtaSettings,
+												'tertiary',
+											)}
+										>
+											Maybe later
+										</LinkButton>
+									)}
 							</div>
 						</div>
 					)}
@@ -973,6 +1035,25 @@ const styles = {
 	linkButtonStyles: css`
 		border-color: ${palette.brandAlt[400]};
 		width: 100%;
+	`,
+	maybeLaterContainer: (cardsImageOrSpaceTemplateString: string) => css`
+		grid-area: ${cardsImageOrSpaceTemplateString};
+		justify-self: start;
+		align-self: end;
+		margin-bottom: ${space[2]}px;
+	`,
+	maybeLaterButton: css`
+		width: 92px;
+
+		${from.desktop} {
+			width: 118px;
+		}
+
+		/* ensure it doesn't adopt the full-width rule */
+		> a,
+		& {
+			width: inherit;
+		}
 	`,
 	articleCountContainer: css`
 		margin-bottom: ${space[3]}px;
