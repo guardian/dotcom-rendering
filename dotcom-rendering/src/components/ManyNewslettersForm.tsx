@@ -37,7 +37,10 @@ export interface FormProps {
 const CARD_CONTAINER_WIDTH = 240;
 const CARD_CONTAINER_PADDING = 10;
 
-const formFrameStyle = css`
+const formFrameStyle = (visibleRecaptcha: boolean) => css`
+	background-color: ${visibleRecaptcha
+		? palette.neutral[100]
+		: 'transparent'};
 	border: ${palette.brand[400]} 2px dashed;
 	border-radius: 12px;
 	padding: ${space[2]}px;
@@ -53,7 +56,7 @@ const formFrameStyle = css`
 	}
 `;
 
-const formFieldsStyle = css`
+const formFieldsStyle = (visibleRecaptcha: boolean) => css`
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
@@ -61,9 +64,9 @@ const formFieldsStyle = css`
 
 	${from.desktop} {
 		flex-basis: ${2 * CARD_CONTAINER_WIDTH - CARD_CONTAINER_PADDING * 2}px;
-		flex-direction: row;
+		flex-direction: ${visibleRecaptcha ? 'column' : 'row'};
 		flex-shrink: 0;
-		align-items: last baseline;
+		align-items: ${visibleRecaptcha ? 'stretch' : 'last baseline'};
 	}
 `;
 
@@ -85,13 +88,14 @@ const formAsideStyle = (hideOnMobile: boolean) => css`
 	}
 `;
 
-const signUpButtonStyle = css`
+const signUpButtonStyle = (visibleRecaptcha: boolean) => css`
 	justify-content: center;
 	background-color: ${palette.neutral[0]};
 	border-color: ${palette.neutral[0]};
 
 	${from.desktop} {
-		flex-basis: 110px;
+		margin-right: ${visibleRecaptcha ? space[2] : 0}px;
+		flex-basis: ${visibleRecaptcha ? 'unset' : '110px'};
 	}
 
 	&:hover {
@@ -139,7 +143,7 @@ export const ManyNewslettersForm = ({
 		<form
 			aria-label="sign-up confirmation form"
 			aria-live="polite"
-			css={formFrameStyle}
+			css={formFrameStyle(visibleRecaptcha)}
 			onSubmit={(submitEvent) => {
 				submitEvent.preventDefault();
 			}}
@@ -159,7 +163,7 @@ export const ManyNewslettersForm = ({
 				</InlineSkipToWrapper>
 			</aside>
 
-			<div css={formFieldsStyle}>
+			<div css={formFieldsStyle(visibleRecaptcha)}>
 				{status !== 'Success' ? (
 					<>
 						<ManyNewslettersFormFields
@@ -181,7 +185,7 @@ export const ManyNewslettersForm = ({
 							onClick={() => {
 								void handleSubmitButton();
 							}}
-							cssOverrides={signUpButtonStyle}
+							cssOverrides={signUpButtonStyle(visibleRecaptcha)}
 						>
 							Sign up
 						</Button>

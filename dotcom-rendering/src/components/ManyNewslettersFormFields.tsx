@@ -19,9 +19,9 @@ const inputWrapperStyle = css`
 	}
 `;
 
-const inputAndOptInWrapperStyle = css`
+const inputAndOptInWrapperStyle = (visibleRecaptcha: boolean) => css`
 	${from.desktop} {
-		flex-basis: 296px;
+		flex-basis: ${visibleRecaptcha ? 'unset' : '296px'};
 		margin-right: ${space[2]}px;
 	}
 `;
@@ -44,7 +44,7 @@ export const ManyNewslettersFormFields: FC<ManyNewslettersFormFieldsProps> = ({
 	setMarketingOptIn,
 	useReCaptcha,
 	captchaSiteKey,
-	visibleRecaptcha,
+	visibleRecaptcha = false,
 	reCaptchaRef,
 	handleCaptchaError,
 }) => {
@@ -61,7 +61,7 @@ export const ManyNewslettersFormFields: FC<ManyNewslettersFormFieldsProps> = ({
 			: undefined;
 
 	return (
-		<div css={inputAndOptInWrapperStyle}>
+		<div css={inputAndOptInWrapperStyle(visibleRecaptcha)}>
 			<span css={inputWrapperStyle}>
 				<TextInput
 					label="Enter your email"
@@ -97,6 +97,18 @@ export const ManyNewslettersFormFields: FC<ManyNewslettersFormFieldsProps> = ({
 			{useReCaptcha && !!captchaSiteKey && (
 				<div
 					css={css`
+						margin-bottom: ${visibleRecaptcha &&
+						firstInteractionOccurred
+							? space[3]
+							: 0}px;
+						padding: ${visibleRecaptcha && firstInteractionOccurred
+							? space[2]
+							: 0}px;
+						background-color: ${visibleRecaptcha &&
+						firstInteractionOccurred
+							? palette.neutral[93]
+							: 'transparent'};
+
 						.grecaptcha-badge {
 							visibility: hidden;
 						}
@@ -109,6 +121,13 @@ export const ManyNewslettersFormFields: FC<ManyNewslettersFormFieldsProps> = ({
 							onError={handleCaptchaError}
 							size={visibleRecaptcha ? 'normal' : 'invisible'}
 						/>
+					)}
+					{visibleRecaptcha && firstInteractionOccurred && (
+						<span css={[textSans14]}>
+							By ticking this box, you agree to let Google perform
+							a security check to confirm you are a human. Please
+							refer to their terms and privacy policies.
+						</span>
 					)}
 				</div>
 			)}
