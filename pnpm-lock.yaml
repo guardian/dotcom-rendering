@@ -344,8 +344,8 @@ importers:
         specifier: 18.1.1
         version: 18.1.1(@emotion/react@11.14.0)(@guardian/libs@25.2.0)(@guardian/source@10.2.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/support-dotcom-components':
-        specifier: 7.7.0
-        version: 7.7.0(@guardian/libs@25.2.0)(zod@3.22.4)
+        specifier: 7.8.0
+        version: 7.8.0(@guardian/libs@25.2.0)(@guardian/ophan-tracker-js@2.4.4)(zod@3.22.4)
       '@guardian/tsconfig':
         specifier: 0.2.0
         version: 0.2.0
@@ -5060,13 +5060,6 @@ packages:
       typescript: 5.5.3
     dev: false
 
-  /@guardian/ophan-tracker-js@2.3.1:
-    resolution: {integrity: sha512-AvxBTQMe2MC2ssLSuxCxEA8+1lAK3IEZaVOsjsZeX0l0orIc6tBmpuENFjdhd+NV61p0BJQRWqw7b8EQY2HfSA==}
-    engines: {node: '>=16'}
-    dependencies:
-      '@guardian/tsconfig': 1.0.0
-    dev: false
-
   /@guardian/ophan-tracker-js@2.4.4:
     resolution: {integrity: sha512-7Nd9p1cuEaXSkisxTQuR6VUX9yxYvEeBMv9HBwAJ/BFUMDprPQhnr5oDGZVnAyd6iVzvCPoH4BN5hkICYP60cg==}
     engines: {node: '>=16'}
@@ -5245,10 +5238,11 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/support-dotcom-components@7.7.0(@guardian/libs@25.2.0)(zod@3.22.4):
-    resolution: {integrity: sha512-yVDJ//dFSIZtU8vuR07iHhco8+cCp6ClYUHBIPpXgljXUBhkURcLIEYgccUssKylrWu5HfbzWuEGH5hOi1eXDw==}
+  /@guardian/support-dotcom-components@7.8.0(@guardian/libs@25.2.0)(@guardian/ophan-tracker-js@2.4.4)(zod@3.22.4):
+    resolution: {integrity: sha512-IC/a2Pc+zvMsyVBxjZhgTy7sT6VoRJSLgjEyRihGTS+IsdrQYDSbsk0WUsW+jNv8WnXpdsUbH4LeUHuZoT5WHg==}
     peerDependencies:
       '@guardian/libs': ^22.0.0
+      '@guardian/ophan-tracker-js': ^2.4.1
       zod: ^3.22.4
     dependencies:
       '@aws-sdk/client-cloudwatch': 3.841.0
@@ -5258,7 +5252,7 @@ packages:
       '@aws-sdk/credential-providers': 3.840.0
       '@aws-sdk/lib-dynamodb': 3.840.0(@aws-sdk/client-dynamodb@3.840.0)
       '@guardian/libs': 25.2.0(@guardian/ophan-tracker-js@2.4.4)(tslib@2.6.2)(typescript@5.5.3)
-      '@guardian/ophan-tracker-js': 2.3.1
+      '@guardian/ophan-tracker-js': 2.4.4
       compression: 1.7.4
       cors: 2.8.5
       date-fns: 2.30.0
