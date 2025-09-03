@@ -1882,6 +1882,7 @@ export const cricketMatchData: FECricketMatchPage = {
 			prebidBidCache: true,
 		},
 		abTests: {},
+		serverSideABTests: {},
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		stage: 'PROD',
 		frontendAssetsFullURL: 'https://assets.guim.co.uk/',
@@ -1901,7 +1902,7 @@ export const cricketMatchData: FECricketMatchPage = {
 		forecastsapiurl: '/weatherapi/forecast',
 		supportUrl: 'https://support.theguardian.com',
 		commercialBundleUrl:
-			'https://assets.guim.co.uk/commercial/b46e5e342ee9d3f9e36a/graun.standalone.commercial.js',
+			'https://assets.guim.co.uk/commercial/d05ba48ca72061c05d80/graun.standalone.commercial.js',
 		idOAuthUrl: 'https://oauth.theguardian.com',
 		webTitle: 'Fifth Test Match, The Kia Oval',
 		isFront: false,

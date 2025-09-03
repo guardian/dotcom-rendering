@@ -96,6 +96,7 @@ export const LiveblogNotifications = ({ id, displayName }: Props) => {
 					}
 				}
 			`}
+			data-gu-name="liveblog-notifications"
 		>
 			<FollowNotificationsButton
 				isFollowing={isFollowingNotifications ?? false}
