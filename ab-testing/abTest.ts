@@ -31,6 +31,7 @@ export const ABTests: ABTest[] = [
 		type: 'client',
 		audienceSize: 10 / 100,
 		groups: ['control', 'variant'],
+		shouldForceMetricsCollection: true,
 	},
 	{
 		name: 'commercial-server-side-test',

@@ -9,6 +9,7 @@ import {
 	initCoreWebVitals,
 } from '@guardian/core-web-vitals';
 import { getCookie, isString, isUndefined } from '@guardian/libs';
+import { ABTests } from 'ab-testing';
 import { useCallback, useEffect, useState } from 'react';
 import { useAB, useBetaAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
@@ -30,6 +31,15 @@ const willRecordCoreWebVitals = Math.random() < sampling;
 const clientSideTestsToForceMetrics: ABTest[] = [
 	/* keep array multi-line */
 ];
+
+const shouldCollectMetricsForBetaTest = (testParticipations: string[]) => {
+	const participationConfigs = ABTests.filter((test) =>
+		testParticipations.includes(test.name),
+	);
+	return participationConfigs.some(
+		(test) => test.shouldForceMetricsCollection,
+	);
+};
 
 const useBrowserId = () => {
 	const [browserId, setBrowserId] = useState<string>();
@@ -91,18 +101,20 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 
 	const betaParticipations = betaABTest?.getParticipations() ?? {};
 
-	const userInBetaABTest = Object.keys(betaParticipations).length > 0;
+	const collectBetaTestMetrics = shouldCollectMetricsForBetaTest(
+		Object.keys(betaParticipations),
+	);
 
 	const shouldBypassSampling = useCallback(
 		(api: ABTestAPI) =>
 			willRecordCoreWebVitals ||
 			userInServerSideTest ||
-			userInBetaABTest ||
+			collectBetaTestMetrics ||
 			clientSideTestsToForceMetrics.some((test) =>
 				api.runnableTest(test),
 			),
 
-		[userInServerSideTest, userInBetaABTest],
+		[userInServerSideTest, collectBetaTestMetrics],
 	);
 
 	useEffect(
