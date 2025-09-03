@@ -1,8 +1,10 @@
+import type { CountryCode } from '@guardian/libs';
 import { log } from '@guardian/libs';
 import type { TAction, TComponentType } from '@guardian/ophan-tracker-js';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useConsent } from '../lib/useConsent';
+import { useCountryCode } from '../lib/useCountryCode';
 import { useOnce } from '../lib/useOnce';
 import type { ServerSideTests, StageType } from '../types/config';
 
@@ -108,9 +110,10 @@ const getProviders = (stage: StageType): IdentityProviderConfig[] => {
 
 export const initializeFedCM = async ({
 	isSignedIn,
+	countryCode,
 }: {
 	isSignedIn?: boolean;
-	isInTest?: boolean;
+	countryCode?: CountryCode;
 }): Promise<void> => {
 	const isSupported = 'IdentityCredential' in window;
 
@@ -131,6 +134,8 @@ export const initializeFedCM = async ({
 		'Web',
 	);
 
+	// TODO: Expand Google One Tap to outside Ireland
+	if (countryCode !== 'IE') return;
 	if (isSignedIn) return;
 
 	/**
@@ -256,6 +261,7 @@ export const GoogleOneTap = () => {
 	// TODO: FedCM doesn't require cookies? Do we need to check consent?
 	const consent = useConsent();
 	const isSignedIn = useIsSignedIn();
+	const countryCode = useCountryCode('google-one-tap');
 	// useIsSignedIn returns 'Pending' until the auth status is known.
 	// We don't want to initialize FedCM until we know the auth status, so we pass `undefined` to `useOnce` if it is 'Pending'
 	// to stop it from initializing.
@@ -265,6 +271,7 @@ export const GoogleOneTap = () => {
 	useOnce(() => {
 		void initializeFedCM({
 			isSignedIn: isSignedInWithoutPending,
+			countryCode,
 		});
 	}, [isSignedInWithoutPending, consent]);
 
