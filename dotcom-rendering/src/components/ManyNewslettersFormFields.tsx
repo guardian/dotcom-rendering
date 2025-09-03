@@ -33,6 +33,23 @@ const optInCheckboxTextSmall = css`
 	}
 `;
 
+const recaptchaContainerStyle = (
+	visibleRecaptcha: boolean,
+	firstInteractionOccurred: boolean,
+) => css`
+	margin-bottom: ${visibleRecaptcha && firstInteractionOccurred
+		? space[3]
+		: 0}px;
+	padding: ${visibleRecaptcha && firstInteractionOccurred ? space[2] : 0}px;
+	background-color: ${visibleRecaptcha && firstInteractionOccurred
+		? palette.neutral[93]
+		: 'transparent'};
+
+	.grecaptcha-badge {
+		visibility: hidden;
+	}
+`;
+
 export interface ManyNewslettersFormFieldsProps
 	extends Omit<FormProps, 'handleSubmitButton' | 'newsletterCount'> {}
 
@@ -96,23 +113,10 @@ export const ManyNewslettersFormFields: FC<ManyNewslettersFormFieldsProps> = ({
 			)}
 			{useReCaptcha && !!captchaSiteKey && (
 				<div
-					css={css`
-						margin-bottom: ${visibleRecaptcha &&
-						firstInteractionOccurred
-							? space[3]
-							: 0}px;
-						padding: ${visibleRecaptcha && firstInteractionOccurred
-							? space[2]
-							: 0}px;
-						background-color: ${visibleRecaptcha &&
-						firstInteractionOccurred
-							? palette.neutral[93]
-							: 'transparent'};
-
-						.grecaptcha-badge {
-							visibility: hidden;
-						}
-					`}
+					css={recaptchaContainerStyle(
+						visibleRecaptcha,
+						firstInteractionOccurred,
+					)}
 				>
 					{(!visibleRecaptcha || firstInteractionOccurred) && (
 						<ReactGoogleRecaptcha
