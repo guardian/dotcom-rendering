@@ -10,9 +10,7 @@ const imageStyles = css`
 	position: relative;
 	align-self: flex-end;
 	flex-shrink: 0;
-	height: 98px;
 	width: 98px;
-
 	${until.tablet} {
 		margin-top: ${space[2]}px;
 	}
@@ -45,7 +43,7 @@ export const HighlightsCardImage = ({
 					src={avatarUrl}
 					alt={byline ?? ''}
 					shape="cutout"
-					imageSize="large"
+					imageSize="highlights-card"
 				/>
 			</div>
 		);
@@ -56,7 +54,7 @@ export const HighlightsCardImage = ({
 			return (
 				<div css={[imageStyles, nonAvatarImageStyles]}>
 					<CardPicture
-						imageSize="medium"
+						imageSize="highlights-card"
 						mainImage={mainMedia.podcastImage.src}
 						alt={mainMedia.podcastImage.altText}
 						loading={imageLoading}

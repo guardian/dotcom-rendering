@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import {
 	headlineMedium17,
 	palette as sourcePalette,
+	textEgyptianItalic17,
 	textSansItalic17,
 	until,
 } from '@guardian/source/foundations';
@@ -69,10 +70,16 @@ const bylineStyles = (format: ArticleFormat) => {
 	}
 };
 
-const labsBylineStyles = css`
-	${textSansItalic17};
-	line-height: 1.4;
-`;
+const labsBylineStyles = (design: ArticleDesign) => {
+	const textStyle =
+		design === ArticleDesign.Gallery
+			? textEgyptianItalic17
+			: textSansItalic17;
+	return css`
+		${textStyle};
+		line-height: 1.4;
+	`;
+};
 
 type Props = {
 	byline?: string;
@@ -86,6 +93,7 @@ export const Contributor = ({ byline, tags, format, source }: Props) => (
 		aria-label="Contributor info"
 		data-component="meta-byline"
 		data-link-name="byline"
+		data-gu-name="byline"
 	>
 		{format.design !== ArticleDesign.Interview && (
 			<div
@@ -96,7 +104,8 @@ export const Contributor = ({ byline, tags, format, source }: Props) => (
 				}
 				css={[
 					bylineStyles(format),
-					format.theme === ArticleSpecial.Labs && labsBylineStyles,
+					format.theme === ArticleSpecial.Labs &&
+						labsBylineStyles(format.design),
 					format.design === ArticleDesign.LiveBlog &&
 						standfirstColourBelowDesktop,
 				]}

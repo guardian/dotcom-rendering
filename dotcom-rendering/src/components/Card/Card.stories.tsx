@@ -40,7 +40,7 @@ const basicCardProps: CardProps = {
 		src: 'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
 		altText: 'alt text',
 	},
-	imagePositionOnDesktop: 'top',
+	mediaPositionOnDesktop: 'top',
 	showAge: true,
 	isExternalLink: false,
 	canPlayInline: true,
@@ -48,6 +48,7 @@ const basicCardProps: CardProps = {
 	discussionApiUrl: 'https://discussion.theguardian.com/discussion-api/',
 	showVideo: true,
 	absoluteServerTimes: true,
+	headlinePosition: 'inner',
 };
 
 const aBasicLink = {
@@ -284,7 +285,7 @@ export const WithExternalLink = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePositionOnDesktop="right"
+					mediaPositionOnDesktop="right"
 					kickerText="Instagram"
 					headlineSizes={{ desktop: 'medium', tablet: 'small' }}
 					headlineText="Follow The Guardian now"
@@ -458,23 +459,23 @@ export const WithDifferentImagePositions = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePositionOnDesktop="left"
-					imageSize="large"
+					mediaPositionOnDesktop="left"
+					mediaSize="large"
 					headlineText="left"
 				/>
 			</CardWrapper>
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePositionOnDesktop="right"
-					imageSize="large"
+					mediaPositionOnDesktop="right"
+					mediaSize="large"
 					headlineText="right"
 				/>
 			</CardWrapper>
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePositionOnDesktop="top"
+					mediaPositionOnDesktop="top"
 					headlineText="top"
 				/>
 			</CardWrapper>
@@ -488,33 +489,33 @@ export const WithDifferentImageSizes = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePositionOnDesktop="left"
+					mediaPositionOnDesktop="left"
 					headlineText="small"
-					imageSize="small"
+					mediaSize="small"
 				/>
 			</CardWrapper>
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePositionOnDesktop="left"
+					mediaPositionOnDesktop="left"
 					headlineText="medium"
-					imageSize="medium"
+					mediaSize="medium"
 				/>
 			</CardWrapper>
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePositionOnDesktop="left"
+					mediaPositionOnDesktop="left"
 					headlineText="large"
-					imageSize="large"
+					mediaSize="large"
 				/>
 			</CardWrapper>
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePositionOnDesktop="left"
+					mediaPositionOnDesktop="left"
 					headlineText="jumbo"
-					imageSize="jumbo"
+					mediaSize="jumbo"
 				/>
 			</CardWrapper>
 		</>
@@ -629,7 +630,7 @@ export const WhenVerticalAndThemeOpinion = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="top"
+					mediaPositionOnDesktop="top"
 					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
@@ -648,7 +649,7 @@ export const WithSublinksWhenVerticalAndSpecialReport = () => {
 						design: ArticleDesign.Comment,
 						theme: ArticleSpecial.SpecialReport,
 					}}
-					imagePositionOnDesktop="top"
+					mediaPositionOnDesktop="top"
 					supportingContent={[
 						{
 							...aBasicLink,
@@ -689,7 +690,7 @@ export const WhenHorizontalAndOpinion = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="right"
+					mediaPositionOnDesktop="right"
 					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
@@ -701,7 +702,7 @@ export const WhenHorizontalAndOpinion = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="right"
+					mediaPositionOnDesktop="right"
 					supportingContentAlignment="horizontal"
 					supportingContent={[
 						{
@@ -734,7 +735,7 @@ export const WhenHorizontalAndOpinion = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="right"
+					mediaPositionOnDesktop="right"
 					supportingContent={[
 						{
 							...aBasicLink,
@@ -755,8 +756,8 @@ export const WhenNewsWithMoreThanTwoSublinks = () => {
 		<CardWrapper>
 			<Card
 				{...basicCardProps}
-				imagePositionOnDesktop="right"
-				imageSize="large"
+				mediaPositionOnDesktop="right"
+				mediaSize="large"
 				supportingContentAlignment="horizontal"
 				supportingContent={[
 					{
@@ -791,8 +792,8 @@ export const WhenHorizontalOpinionWithSmallImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="left"
-					imageSize="small"
+					mediaPositionOnDesktop="left"
+					mediaSize="small"
 					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
@@ -804,8 +805,8 @@ export const WhenHorizontalOpinionWithSmallImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="left"
-					imageSize="small"
+					mediaPositionOnDesktop="left"
+					mediaSize="small"
 					supportingContentAlignment="horizontal"
 					supportingContent={[
 						{
@@ -845,8 +846,8 @@ export const WhenHorizontalOpinionWithMediumImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="left"
-					imageSize="medium"
+					mediaPositionOnDesktop="left"
+					mediaSize="medium"
 					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
@@ -858,8 +859,8 @@ export const WhenHorizontalOpinionWithMediumImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="left"
-					imageSize="medium"
+					mediaPositionOnDesktop="left"
+					mediaSize="medium"
 					supportingContentAlignment="horizontal"
 					supportingContent={[
 						{
@@ -899,8 +900,8 @@ export const WhenHorizontalOpinionWithLargeImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="left"
-					imageSize="large"
+					mediaPositionOnDesktop="left"
+					mediaSize="large"
 					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
@@ -912,8 +913,8 @@ export const WhenHorizontalOpinionWithLargeImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="left"
-					imageSize="large"
+					mediaPositionOnDesktop="left"
+					mediaSize="large"
 					supportingContentAlignment="horizontal"
 					supportingContent={[
 						{
@@ -953,8 +954,8 @@ export const WhenHorizontalOpinionWithJumboImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="left"
-					imageSize="jumbo"
+					mediaPositionOnDesktop="left"
+					mediaSize="jumbo"
 					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
@@ -966,8 +967,8 @@ export const WhenHorizontalOpinionWithJumboImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="left"
-					imageSize="jumbo"
+					mediaPositionOnDesktop="left"
+					mediaSize="jumbo"
 					supportingContentAlignment="horizontal"
 					supportingContent={[
 						{
@@ -1007,7 +1008,7 @@ export const WhenOpinionWithImageAtBottom = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePositionOnDesktop="bottom"
+					mediaPositionOnDesktop="bottom"
 					supportingContent={[
 						{
 							...aBasicLink,
@@ -1047,9 +1048,9 @@ export const WhenVideoWithPlayButton = () => {
 							design: ArticleDesign.Video,
 							theme: Pillar.News,
 						}}
-						imagePositionOnDesktop="top"
-						imageSize="jumbo"
-						imagePositionOnMobile="top"
+						mediaPositionOnDesktop="top"
+						mediaSize="jumbo"
+						mediaPositionOnMobile="top"
 						mainMedia={mainVideo}
 					/>
 				</LI>
@@ -1063,9 +1064,9 @@ export const WhenVideoWithPlayButton = () => {
 							design: ArticleDesign.Video,
 							theme: Pillar.News,
 						}}
-						imagePositionOnDesktop="right"
-						imageSize="large"
-						imagePositionOnMobile="top"
+						mediaPositionOnDesktop="right"
+						mediaSize="large"
+						mediaPositionOnMobile="top"
 						mainMedia={mainVideo}
 					/>
 				</LI>
@@ -1077,7 +1078,7 @@ export const WhenVideoWithPlayButton = () => {
 							design: ArticleDesign.Video,
 							theme: Pillar.News,
 						}}
-						imagePositionOnDesktop="top"
+						mediaPositionOnDesktop="top"
 						mainMedia={mainVideo}
 						canPlayInline={false}
 					/>
@@ -1092,9 +1093,9 @@ export const WhenVideoWithPlayButton = () => {
 							design: ArticleDesign.Video,
 							theme: Pillar.News,
 						}}
-						imagePositionOnDesktop="top"
-						imageSize="medium"
-						imagePositionOnMobile="bottom"
+						mediaPositionOnDesktop="top"
+						mediaSize="medium"
+						mediaPositionOnMobile="bottom"
 						mainMedia={mainVideo}
 					/>
 				</LI>
@@ -1108,7 +1109,7 @@ export const WhenVideoWithPlayButton = () => {
 									design: ArticleDesign.Video,
 									theme: Pillar.News,
 								}}
-								imagePositionOnDesktop="left"
+								mediaPositionOnDesktop="left"
 								mainMedia={mainVideo}
 								canPlayInline={false}
 							/>
@@ -1121,7 +1122,7 @@ export const WhenVideoWithPlayButton = () => {
 									design: ArticleDesign.Video,
 									theme: Pillar.News,
 								}}
-								imagePositionOnDesktop="right"
+								mediaPositionOnDesktop="right"
 								mainMedia={mainVideo}
 								canPlayInline={false}
 							/>
@@ -1135,7 +1136,7 @@ export const WhenVideoWithPlayButton = () => {
 									design: ArticleDesign.Video,
 									theme: Pillar.News,
 								}}
-								imagePositionOnDesktop="right"
+								mediaPositionOnDesktop="right"
 								mainMedia={mainVideo}
 								canPlayInline={false}
 							/>
@@ -1153,9 +1154,9 @@ export const WhenVideoWithPlayButton = () => {
 							design: ArticleDesign.Video,
 							theme: Pillar.News,
 						}}
-						imagePositionOnDesktop="right"
-						imageSize="large"
-						imagePositionOnMobile="top"
+						mediaPositionOnDesktop="right"
+						mediaSize="large"
+						mediaPositionOnMobile="top"
 						mainMedia={mainVideo}
 					/>
 				</LI>
@@ -1167,9 +1168,9 @@ export const WhenVideoWithPlayButton = () => {
 							design: ArticleDesign.Video,
 							theme: Pillar.News,
 						}}
-						imagePositionOnDesktop="top"
-						imagePositionOnMobile="left"
-						imageSize="medium"
+						mediaPositionOnDesktop="top"
+						mediaPositionOnMobile="left"
+						mediaSize="medium"
 						mainMedia={mainVideo}
 					/>
 				</LI>
@@ -1276,9 +1277,9 @@ export const WithBranding = () => {
 							headlineText="guardian.org branding on a Standard card"
 							kickerText="Kicker"
 							trailText=""
-							imagePositionOnDesktop="top"
-							imagePositionOnMobile="left"
-							imageSize="small"
+							mediaPositionOnDesktop="top"
+							mediaPositionOnMobile="left"
+							mediaSize="small"
 							containerPalette={containerPalette}
 							branding={branding}
 						/>
@@ -1294,9 +1295,9 @@ export const WithBranding = () => {
 							kickerText="Kicker"
 							headlineText="guardian.org branding on a Gallery card"
 							trailText=""
-							imagePositionOnDesktop="top"
-							imagePositionOnMobile="left"
-							imageSize="small"
+							mediaPositionOnDesktop="top"
+							mediaPositionOnMobile="left"
+							mediaSize="small"
 							mainMedia={mainGallery}
 							containerPalette={containerPalette}
 							branding={branding}
@@ -1313,9 +1314,9 @@ export const WithBranding = () => {
 							headlineText="guardian.org branding does not appear on non Labs articles"
 							kickerText="Kicker"
 							trailText=""
-							imagePositionOnDesktop="top"
-							imagePositionOnMobile="left"
-							imageSize="small"
+							mediaPositionOnDesktop="top"
+							mediaPositionOnMobile="left"
+							mediaSize="small"
 							containerPalette={containerPalette}
 							branding={branding}
 						/>
@@ -1348,9 +1349,9 @@ export const WithSpecialPaletteVariations = () => {
 					}
 					kickerText="Live kicker"
 					showPulsingDot={true}
-					imagePositionOnDesktop="right"
-					imageSize="large"
-					imagePositionOnMobile="top"
+					mediaPositionOnDesktop="right"
+					mediaSize="large"
+					mediaPositionOnMobile="top"
 					containerPalette={containerPalette}
 					discussionId="/p/d8ex5"
 					discussionApiUrl="https://discussion.theguardian.com/discussion-api"
@@ -1375,9 +1376,9 @@ export const WithSpecialPaletteVariations = () => {
 					headlineText="Audio"
 					kickerText="Kicker"
 					trailText=""
-					imagePositionOnDesktop="top"
-					imagePositionOnMobile="left"
-					imageSize="medium"
+					mediaPositionOnDesktop="top"
+					mediaPositionOnMobile="left"
+					mediaSize="medium"
 					mainMedia={mainAudio}
 					containerPalette={containerPalette}
 				/>
@@ -1450,9 +1451,9 @@ export const DynamoWithSpecialPaletteVariations = () => {
 				isDynamo={true}
 				kickerText="Main kicker"
 				headlineSizes={{ desktop: 'medium', tablet: 'small' }}
-				imagePositionOnDesktop="bottom"
-				imagePositionOnMobile="bottom"
-				imageSize="large"
+				mediaPositionOnDesktop="bottom"
+				mediaPositionOnMobile="bottom"
+				mediaSize="large"
 				supportingContent={[
 					{
 						...aBasicLink,
@@ -1573,7 +1574,7 @@ export const WithNoGap = () => {
 				>
 					<Card
 						{...basicCardProps}
-						imagePositionOnDesktop="left"
+						mediaPositionOnDesktop="left"
 						isOnwardContent={true}
 						showTopBarDesktop={false}
 						showTopBarMobile={false}
@@ -1600,7 +1601,7 @@ export const WithATinyGap = () => {
 				>
 					<Card
 						{...basicCardProps}
-						imagePositionOnDesktop="left"
+						mediaPositionOnDesktop="left"
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -1624,7 +1625,7 @@ export const WithASmallGap = () => {
 				>
 					<Card
 						{...basicCardProps}
-						imagePositionOnDesktop="left"
+						mediaPositionOnDesktop="left"
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -1649,7 +1650,7 @@ export const WithAMediumGap = () => {
 					<Card
 						{...basicCardProps}
 						containerType={'scrollable/small'}
-						imagePositionOnDesktop="left"
+						mediaPositionOnDesktop="left"
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -1674,7 +1675,7 @@ export const WithALargeGap = () => {
 					<Card
 						{...basicCardProps}
 						containerType={'flexible/special'}
-						imagePositionOnDesktop="left"
+						mediaPositionOnDesktop="left"
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -1703,7 +1704,7 @@ export const WithNoVerticalGap = () => {
 						isOnwardContent={true}
 						showTopBarDesktop={false}
 						showTopBarMobile={false}
-						imagePositionOnDesktop="bottom"
+						mediaPositionOnDesktop="bottom"
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -1728,7 +1729,7 @@ export const WithAVerticalGapWhenLegacyContainer = () => {
 					<Card
 						{...basicCardProps}
 						containerType={'dynamic/fast'}
-						imagePositionOnDesktop="bottom"
+						mediaPositionOnDesktop="bottom"
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -1754,7 +1755,7 @@ export const WithAVerticalGapWhenBetaContainer = () => {
 					<Card
 						{...basicCardProps}
 						containerType={'flexible/special'}
-						imagePositionOnDesktop="bottom"
+						mediaPositionOnDesktop="bottom"
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -1780,7 +1781,7 @@ export const WithAVerticalGapWhenScrollableSmallContainer = () => {
 					<Card
 						{...basicCardProps}
 						containerType={'scrollable/small'}
-						imagePositionOnDesktop="bottom"
+						mediaPositionOnDesktop="bottom"
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
@@ -1801,7 +1802,7 @@ export const WithBetaContainerAndSublinks = () => {
 				<Card
 					{...basicCardProps}
 					containerType="flexible/general"
-					imagePositionOnMobile="bottom"
+					mediaPositionOnMobile="bottom"
 					supportingContent={twoSublinks}
 				/>
 			</CardWrapper>
@@ -1817,7 +1818,7 @@ export const WithBetaContainerAndSublinksNoImage = () => {
 					{...basicCardProps}
 					image={undefined}
 					containerType="flexible/general"
-					imagePositionOnMobile="bottom"
+					mediaPositionOnMobile="bottom"
 					supportingContent={twoSublinks}
 				/>
 			</CardWrapper>

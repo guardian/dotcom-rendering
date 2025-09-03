@@ -76,8 +76,12 @@ export const renderEditorialNewslettersPage = ({
 		googletagUrl: newslettersPage.config.googletagUrl,
 		switches: newslettersPage.config.switches,
 		abTests: newslettersPage.config.abTests,
+		serverSideABTests: newslettersPage.config.serverSideABTests,
 		brazeApiKey: newslettersPage.config.brazeApiKey,
 		googleRecaptchaSiteKey: newslettersPage.config.googleRecaptchaSiteKey,
+		googleRecaptchaSiteKeyVisible:
+			newslettersPage.config.googleRecaptchaSiteKeyVisible,
+		unknownConfig: {},
 	});
 
 	const pageHtml = htmlPageTemplate({

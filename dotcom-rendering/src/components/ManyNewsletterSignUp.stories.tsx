@@ -43,6 +43,7 @@ export const Default = () => {
 			/>
 			<ManyNewsletterSignUp
 				useReCaptcha={false}
+				visibleRecaptcha={false}
 				captchaSiteKey="TEST_RECAPTCHA_SITE_KEY"
 			/>
 		</>

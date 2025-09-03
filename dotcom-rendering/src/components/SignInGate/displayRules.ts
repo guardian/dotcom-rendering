@@ -33,6 +33,7 @@ export const isValidSection = (sectionId?: string): boolean => {
 		'help',
 		'guardian-live-australia',
 		'gnm-archive',
+		'thefilter',
 	];
 
 	// we check for invalid section by reducing the above array, and then NOT the result so we know
@@ -57,6 +58,18 @@ export const hasRequiredConsents = (): Promise<boolean> =>
 		.then(({ canTarget }: ConsentState) => canTarget)
 		.catch(() => false);
 
+export const pageMetaDataMakesItEligibleForGateDisplay = (
+	contentType: string,
+	sectionId: string | undefined,
+	tags: TagType[],
+): boolean => {
+	return (
+		isValidContentType(contentType) &&
+		isValidSection(sectionId) &&
+		isValidTag(tags)
+	);
+};
+
 export const canShowSignInGate = ({
 	isSignedIn,
 	currentTest,
@@ -65,8 +78,17 @@ export const canShowSignInGate = ({
 	tags,
 	isPaidContent,
 	isPreview,
-}: CanShowGateProps): Promise<boolean> =>
-	Promise.resolve(
+}: CanShowGateProps): Promise<boolean> => {
+	// This check is functionally identical to the same check in SDC
+	// This logically ensures that SDC will get a subset of the pages for which
+	// pageMetaDataMakesItEligibleForGateDisplay return true
+	if (
+		!pageMetaDataMakesItEligibleForGateDisplay(contentType, sectionId, tags)
+	) {
+		return Promise.resolve(false);
+	}
+
+	return Promise.resolve(
 		!isSignedIn &&
 			!hasUserDismissedGateMoreThanCount(
 				currentTest.variant,
@@ -74,14 +96,12 @@ export const canShowSignInGate = ({
 				5,
 			) &&
 			isNPageOrHigherPageView(3) &&
-			isValidContentType(contentType) &&
-			isValidSection(sectionId) &&
-			isValidTag(tags) &&
 			// hide the sign in gate on isPaidContent
 			!isPaidContent &&
 			// hide the sign in gate on internal tools preview &&
 			!isPreview,
 	);
+};
 
 export const canShowSignInGateMandatory: ({
 	isSignedIn,

@@ -18,6 +18,7 @@ import {
 	MobileAdSlot,
 } from '../components/FrontsAdSlots';
 import { FrontSection } from '../components/FrontSection';
+import { FrontSectionTracker } from '../components/FrontSectionTracker.importable';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
@@ -134,11 +135,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		front.isNetworkFront && front.deeplyRead && front.deeplyRead.length > 0;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
-
-	const isInLoopingVideoTestVariant =
-		abTests.loopingVideoVariant === 'variant';
-	const isInLoopingVideoTestControl =
-		abTests.loopingVideoControl === 'control';
 
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
@@ -638,12 +634,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
-									isInLoopingVideoTestVariant={
-										isInLoopingVideoTestVariant
-									}
-									isInLoopingVideoTestControl={
-										isInLoopingVideoTestControl
-									}
 								/>
 							</FrontSection>
 
@@ -746,6 +736,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					/>
 				</Island>
 			</BannerWrapper>
+
+			<Island priority="feature" defer={{ until: 'idle' }}>
+				<FrontSectionTracker />
+			</Island>
 		</>
 	);
 };
