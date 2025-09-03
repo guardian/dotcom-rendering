@@ -1,4 +1,4 @@
-import { getCookie, isUndefined } from '@guardian/libs';
+import { getCookie, isUndefined, storage } from '@guardian/libs';
 import { useState } from 'react';
 import {
 	hasCmpConsentForBrowserId,
@@ -293,6 +293,8 @@ const fetchProxyGetTreatments = async (
 	hasConsented: boolean,
 	shouldServeDismissible: boolean,
 	showDefaultGate: ShowGateValues,
+	gateDisplayCount: number,
+	hideSupportMessagingTimestamp: number | undefined,
 ): Promise<AuxiaProxyGetTreatmentsResponse> => {
 	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
 	const articleIdentifier = `www.theguardian.com/${pageId}`;
@@ -317,6 +319,8 @@ const fetchProxyGetTreatments = async (
 		hasConsented,
 		shouldServeDismissible,
 		showDefaultGate,
+		gateDisplayCount,
+		hideSupportMessagingTimestamp,
 	};
 	const params = {
 		method: 'POST',
@@ -372,6 +376,51 @@ const decideShowDefaultGate = (): ShowGateValues => {
 	return undefined;
 };
 
+const getGateDisplayCount = (): number => {
+	const count = parseInt(
+		storage.local.getRaw('gate_display_count') ?? '0',
+		10,
+	);
+	if (Number.isInteger(count)) {
+		return count;
+	}
+	return 0;
+};
+
+const incrementGateDisplayCount = () => {
+	const count = getGateDisplayCount();
+	const newCount = count + 1;
+	// Using `storage.local.set`, instead of `storage.local.setRaw`
+	// because `setRaw` doesn't allow for specifying the duration.
+	storage.local.setRaw('gate_display_count', newCount.toString());
+};
+
+const decideHideSupportMessagingTimestamp = (): number | undefined => {
+	// Date: 1 September 2025
+	//
+	// This cookie is overloaded in the following way:
+	// If the user has performed single contribution, then the value is the
+	// timestamp of the event. But if the user has performed a recurring
+	// contribution, then the value is a future timestamp.
+	//
+	// Ideally we would correct the semantics of the cookie, but for the moment
+	// we are simply going to ignore the value if it's in the future. We
+	// are making this adjustment here, but will also mirror it in SDC
+
+	const rawValue: string | null = storage.local.getRaw(
+		'gu_hide_support_messaging',
+	);
+	if (rawValue === null) {
+		return undefined;
+	}
+	const timestamp = parseInt(rawValue, 10);
+	const now = Date.now(); // current time in milliseconds since epoch
+	if (Number.isInteger(timestamp) && timestamp < now) {
+		return timestamp;
+	}
+	return undefined;
+};
+
 const buildAuxiaGateDisplayData = async (
 	contributionsServiceUrl: string,
 	pageId: string,
@@ -410,8 +459,10 @@ const buildAuxiaGateDisplayData = async (
 	}
 
 	const shouldServeDismissible = decideShouldServeDismissible();
-
 	const showDefaultGate = decideShowDefaultGate();
+	const gateDisplayCount = getGateDisplayCount();
+
+	const hideSupportMessagingTimestamp = decideHideSupportMessagingTimestamp();
 
 	const response = await fetchProxyGetTreatments(
 		contributionsServiceUrl,
@@ -430,6 +481,8 @@ const buildAuxiaGateDisplayData = async (
 		readerPersonalData.hasConsented,
 		shouldServeDismissible,
 		showDefaultGate,
+		gateDisplayCount,
+		hideSupportMessagingTimestamp,
 	);
 
 	if (response.status && response.data) {
@@ -724,6 +777,10 @@ const ShowSignInGateAuxia = ({
 			},
 			renderingTarget,
 		);
+
+		// Once the gate is being displayed we need to update
+		// the tracking of the number of times the gate has been displayed
+		incrementGateDisplayCount();
 	}, [componentId]);
 
 	return (

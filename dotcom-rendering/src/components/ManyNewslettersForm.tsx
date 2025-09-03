@@ -5,17 +5,31 @@ import {
 	palette,
 	space,
 } from '@guardian/source/foundations';
-import { Button, TextInput } from '@guardian/source/react-components';
-import { type ChangeEventHandler, useState } from 'react';
+import { Button } from '@guardian/source/react-components';
+import {
+	type ChangeEventHandler,
+	type ReactEventHandler,
+	useState,
+} from 'react';
+import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
+import { ManyNewslettersFormFields } from './ManyNewslettersFormFields';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 
-interface FormProps {
+export interface FormProps {
 	status: 'NotSent' | 'Loading' | 'Success' | 'Failed' | 'InvalidEmail';
 	email: string;
 	handleTextInput: ChangeEventHandler<HTMLInputElement>;
 	handleSubmitButton: { (): Promise<void> | void };
 	newsletterCount: number;
+	marketingOptIn?: boolean;
+	setMarketingOptIn: (value: boolean) => void;
+	// Captcha props
+	useReCaptcha?: boolean;
+	captchaSiteKey?: string;
+	visibleRecaptcha?: boolean;
+	reCaptchaRef?: React.RefObject<ReactGoogleRecaptcha>;
+	handleCaptchaError?: ReactEventHandler<HTMLDivElement>;
 }
 
 // The design brief requires the layout of the form to align with the
@@ -49,16 +63,7 @@ const formFieldsStyle = css`
 		flex-basis: ${2 * CARD_CONTAINER_WIDTH - CARD_CONTAINER_PADDING * 2}px;
 		flex-direction: row;
 		flex-shrink: 0;
-		align-items: flex-end;
-	}
-`;
-
-const inputWrapperStyle = css`
-	margin-bottom: ${space[2]}px;
-	${from.desktop} {
-		margin-bottom: 0;
-		margin-right: ${space[2]}px;
-		flex-basis: 296px;
+		align-items: last baseline;
 	}
 `;
 
@@ -114,6 +119,13 @@ export const ManyNewslettersForm = ({
 	handleTextInput,
 	handleSubmitButton,
 	newsletterCount,
+	marketingOptIn,
+	setMarketingOptIn,
+	useReCaptcha = false,
+	captchaSiteKey,
+	visibleRecaptcha = false,
+	reCaptchaRef,
+	handleCaptchaError,
 }: FormProps) => {
 	const [formHasFocus, setFormHasFocus] = useState(false);
 	const hidePrivacyOnMobile = !formHasFocus && email.length === 0;
@@ -122,13 +134,6 @@ export const ManyNewslettersForm = ({
 		newsletterCount === 1
 			? 'Sign up for the newsletter you selected'
 			: `Sign up for the ${newsletterCount} newsletters you selected`;
-
-	const errorMessage =
-		status === 'Failed'
-			? 'Sign up failed. Please try again'
-			: status === 'InvalidEmail'
-			? 'Please enter a valid email address'
-			: undefined;
 
 	return (
 		<form
@@ -157,15 +162,18 @@ export const ManyNewslettersForm = ({
 			<div css={formFieldsStyle}>
 				{status !== 'Success' ? (
 					<>
-						<span css={inputWrapperStyle}>
-							<TextInput
-								label="Enter your email"
-								value={email}
-								onChange={handleTextInput}
-								error={errorMessage}
-								disabled={status === 'Loading'}
-							/>
-						</span>
+						<ManyNewslettersFormFields
+							status={status}
+							email={email}
+							handleTextInput={handleTextInput}
+							marketingOptIn={marketingOptIn}
+							setMarketingOptIn={setMarketingOptIn}
+							useReCaptcha={useReCaptcha}
+							captchaSiteKey={captchaSiteKey}
+							visibleRecaptcha={visibleRecaptcha}
+							reCaptchaRef={reCaptchaRef}
+							handleCaptchaError={handleCaptchaError}
+						/>
 						<Button
 							aria-label={ariaLabel}
 							isLoading={status === 'Loading'}

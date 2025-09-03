@@ -15,6 +15,7 @@ type FENewslettersConfigType = {
 	dcrSentryDsn: string; // used in dotcom-rendering/src/client/sentryLoader/sentry.ts
 	switches: Switches;
 	abTests: ServerSideTests;
+	serverSideABTests: Record<string, string>;
 	dfpAccountId: string;
 	commercialBundleUrl: string;
 	revisionNumber: string;
@@ -43,6 +44,7 @@ type FENewslettersConfigType = {
 	// isLive?: boolean;
 	// isPreview?: boolean;
 	googleRecaptchaSiteKey?: string;
+	googleRecaptchaSiteKeyVisible?: string;
 };
 
 export interface FENewslettersPageType {

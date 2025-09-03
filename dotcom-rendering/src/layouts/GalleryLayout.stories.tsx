@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { allModes } from '../../.storybook/modes';
 import { Gallery as GalleryFixture } from '../../fixtures/generated/fe-articles/Gallery';
+import { storyPackage } from '../../fixtures/generated/story-package';
 import { WithBranding } from '../components/ArticleMeta.web.stories';
 import { ArticleDesign } from '../lib/articleFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
@@ -10,16 +12,24 @@ import { GalleryLayout } from './GalleryLayout';
 const meta = {
 	title: 'Layouts/Gallery',
 	component: GalleryLayout,
+	parameters: {
+		chromatic: {
+			modes: {
+				'light leftCol': allModes['light leftCol'],
+			},
+		},
+	},
 } satisfies Meta<typeof GalleryLayout>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const addBranding = (gallery: Gallery): Gallery => ({
+const addBrandingAndAffiliateDisclaimer = (gallery: Gallery): Gallery => ({
 	...gallery,
 	frontendData: {
 		...gallery.frontendData,
+		affiliateLinksDisclaimer: 'true',
 		webPublicationDateDeprecated: '2020-03-28T07:27:19.000Z',
 		commercialProperties: {
 			...gallery.frontendData.commercialProperties,
@@ -31,7 +41,13 @@ const addBranding = (gallery: Gallery): Gallery => ({
 	},
 });
 
-const appsArticle = enhanceArticleType(GalleryFixture, 'Apps');
+const appsArticle = enhanceArticleType(
+	{
+		...GalleryFixture,
+		storyPackage,
+	},
+	'Apps',
+);
 
 if (appsArticle.design !== ArticleDesign.Gallery) {
 	throw new Error('Expected gallery');
@@ -40,7 +56,7 @@ if (appsArticle.design !== ArticleDesign.Gallery) {
 export const Apps = {
 	args: {
 		renderingTarget: 'Apps',
-		gallery: addBranding(appsArticle),
+		gallery: addBrandingAndAffiliateDisclaimer(appsArticle),
 	},
 	parameters: {
 		formats: [
@@ -56,7 +72,13 @@ export const Apps = {
 	},
 } satisfies Story;
 
-const webArticle = enhanceArticleType(GalleryFixture, 'Web');
+const webArticle = enhanceArticleType(
+	{
+		...GalleryFixture,
+		storyPackage,
+	},
+	'Web',
+);
 
 if (webArticle.design !== ArticleDesign.Gallery) {
 	throw new Error('Expected gallery');
@@ -69,7 +91,7 @@ export const Web = {
 			...extractNAV(webArticle.frontendData.nav),
 			selectedPillar: getCurrentPillar(webArticle.frontendData),
 		},
-		gallery: addBranding(webArticle),
+		gallery: addBrandingAndAffiliateDisclaimer(webArticle),
 	},
 	parameters: {
 		formats: [

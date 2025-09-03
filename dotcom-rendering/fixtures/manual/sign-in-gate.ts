@@ -8,7 +8,7 @@ export const mockAuxiaResponseDismissible = {
 			treatmentContent: JSON.stringify({
 				title: 'Like uninterrupted reading?\nSo do we. Sign in.',
 				subtitle:
-					"Sign in to keep reading. It's free, and we'll bring you right back here in under a minute.",
+					"Sign in to keep reading.\n\nIt's free, and we'll bring you right back here in under a minute.",
 				body: '',
 				first_cta_name: 'Create a free account',
 				first_cta_link: 'https://profile.theguardian.com/register',

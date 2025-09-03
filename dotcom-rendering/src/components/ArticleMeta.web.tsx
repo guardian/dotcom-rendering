@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
-import { grid } from '../../src/grid';
 import type { FEArticle } from '../frontend/feArticle';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
@@ -184,28 +183,11 @@ export const metaContainer = (format: ArticleFormat) => {
 								}
 						  `;
 				case ArticleDesign.LiveBlog:
-				case ArticleDesign.DeadBlog: {
+				case ArticleDesign.DeadBlog:
+				case ArticleDesign.Gallery: {
 					return '';
 				}
-				case ArticleDesign.Gallery:
-					return css`
-						${grid.column.centre}
-						padding-bottom: ${space[3]}px;
-						${from.tablet} {
-							position: relative;
-							&::before {
-								content: '';
-								position: absolute;
-								left: -10px;
-								top: 0;
-								bottom: 0;
-								width: 1px;
-								background-color: ${themePalette(
-									'--article-border',
-								)};
-							}
-						}
-					`;
+
 				default:
 					return defaultMargins;
 			}

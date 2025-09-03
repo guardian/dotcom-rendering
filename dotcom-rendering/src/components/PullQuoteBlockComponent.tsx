@@ -169,9 +169,9 @@ const supportingQuoteCss = css`
 	margin-right: 10px;
 	margin-bottom: 14px;
 	clear: left;
-	float: left;
 
 	${from.phablet} {
+		float: left;
 		width: 40%;
 	}
 
@@ -269,6 +269,7 @@ export const PullQuoteBlockComponent = ({
 				alignmentCss(role, format),
 			]}
 			data-spacefinder-role={role}
+			data-gu-name="pullquote"
 		>
 			<QuoteIcon colour={palette('--pullquote-icon')} />
 			<blockquote

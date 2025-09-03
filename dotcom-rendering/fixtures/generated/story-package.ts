@@ -11,7 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-export const storyPackage = {
+import type { FEStoryPackage } from '../../src/frontend/feArticle';
+
+export const storyPackage: FEStoryPackage = {
 	heading: 'More on this story',
 	trails: [
 		{
@@ -27,6 +29,7 @@ export const storyPackage = {
 				'300': 'https://i.guim.co.uk/img/media/af51ca2f6882f843b13137215eb1f7e5fdfad0ca/0_101_5000_2999/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=95029e0339ea030921a04c3b985b2b2f',
 				'460': 'https://i.guim.co.uk/img/media/af51ca2f6882f843b13137215eb1f7e5fdfad0ca/0_101_5000_2999/master/5000.jpg?width=460&quality=85&auto=format&fit=max&s=619a035d4b617b560bfe87ce8d22d082',
 			},
+			ageWarning: '4 months',
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
@@ -57,6 +60,7 @@ export const storyPackage = {
 				'300': 'https://i.guim.co.uk/img/media/5b6e800d93c76bc1271d56123a8c9d110ba47674/117_0_1813_1088/master/1813.jpg?width=300&quality=85&auto=format&fit=max&s=169ff6115706bd01a071c45cb3b6ee53',
 				'460': 'https://i.guim.co.uk/img/media/5b6e800d93c76bc1271d56123a8c9d110ba47674/117_0_1813_1088/master/1813.jpg?width=460&quality=85&auto=format&fit=max&s=1e15dc6960917c9c6b5e4ee237a86c03',
 			},
+			ageWarning: '4 months',
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
@@ -87,7 +91,7 @@ export const storyPackage = {
 				'300': 'https://i.guim.co.uk/img/media/03a426971087db53b7c7205bb7d2302f6f3cf316/65_0_3918_2352/master/3918.jpg?width=300&quality=85&auto=format&fit=max&s=1df2ae2c2b299e58546c907fd4625d2f',
 				'460': 'https://i.guim.co.uk/img/media/03a426971087db53b7c7205bb7d2302f6f3cf316/65_0_3918_2352/master/3918.jpg?width=460&quality=85&auto=format&fit=max&s=622458b6cf927eee41d8910a120b01ca',
 			},
-			ageWarning: '1 month',
+			ageWarning: '5 months',
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
@@ -119,7 +123,7 @@ export const storyPackage = {
 				'300': 'https://i.guim.co.uk/img/media/90ad9605e403e2cd3bbbdc50099bf9c60493f290/0_486_2465_1478/master/2465.jpg?width=300&quality=85&auto=format&fit=max&s=21072c7f9ec779b369505e68486c593d',
 				'460': 'https://i.guim.co.uk/img/media/90ad9605e403e2cd3bbbdc50099bf9c60493f290/0_486_2465_1478/master/2465.jpg?width=460&quality=85&auto=format&fit=max&s=1a0819bca386721b448ff0db6828b1bd',
 			},
-			ageWarning: '1 month',
+			ageWarning: '4 months',
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
@@ -182,7 +186,7 @@ export const storyPackage = {
 				'300': 'https://i.guim.co.uk/img/media/d4adfc46ea3dca163794ab3150083b4a2b5e01c2/2820_459_5372_3224/master/5372.jpg?width=300&quality=85&auto=format&fit=max&s=c658e3dff5140ca5ff63db21baf80a88',
 				'460': 'https://i.guim.co.uk/img/media/d4adfc46ea3dca163794ab3150083b4a2b5e01c2/2820_459_5372_3224/master/5372.jpg?width=460&quality=85&auto=format&fit=max&s=88a6c5f45ae4c9bd60bd44cf5ea7461f',
 			},
-			ageWarning: '3 months',
+			ageWarning: '7 months',
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
@@ -214,7 +218,7 @@ export const storyPackage = {
 				'300': 'https://i.guim.co.uk/img/media/6a4802c7019c7820ede1b30a12e07f38f93996b0/0_193_1508_905/master/1508.jpg?width=300&quality=85&auto=format&fit=max&s=0295cb7c52637a1ded449de3b4d35e98',
 				'460': 'https://i.guim.co.uk/img/media/6a4802c7019c7820ede1b30a12e07f38f93996b0/0_193_1508_905/master/1508.jpg?width=460&quality=85&auto=format&fit=max&s=15e28135035fcd7e16a11a00a5bd8597',
 			},
-			ageWarning: '5 months',
+			ageWarning: '9 months',
 			isLiveBlog: false,
 			pillar: 'culture',
 			designType: 'Article',
@@ -277,7 +281,7 @@ export const storyPackage = {
 				'300': 'https://i.guim.co.uk/img/media/cb104f179bfea5600302c686523eb10e1aeec8c4/0_116_2814_1688/master/2814.jpg?width=300&quality=85&auto=format&fit=max&s=0cdb18a1f56510b00729cdd2ade54724',
 				'460': 'https://i.guim.co.uk/img/media/cb104f179bfea5600302c686523eb10e1aeec8c4/0_116_2814_1688/master/2814.jpg?width=460&quality=85&auto=format&fit=max&s=d92e9b7657d8e48b720d7275e9e64d51',
 			},
-			ageWarning: '7 months',
+			ageWarning: '11 months',
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',

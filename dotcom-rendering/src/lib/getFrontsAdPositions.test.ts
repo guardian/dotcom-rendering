@@ -81,7 +81,7 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (2)
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (4)
-			{ ...testCollection, collectionType: 'dynamic/slow-mpu' },
+			{ ...testCollection, collectionType: 'dynamic/fast' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-I' }, // Ad position (6)
 			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (8)
@@ -111,15 +111,15 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'dynamic/fast' },
 			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (11)
-			{ ...testCollection, collectionType: 'dynamic/slow-mpu' },
+			{ ...testCollection, collectionType: 'dynamic/fast' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (14)
-			{ ...testCollection, collectionType: 'dynamic/slow-mpu' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
-			{ ...testCollection, collectionType: 'fixed/video' }, // Ad position (17)
+			{ ...testCollection, collectionType: 'scrollable/feature' }, // Ad position (17)
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (19)
-			{ ...testCollection, collectionType: 'dynamic/slow-mpu' },
+			{ ...testCollection, collectionType: 'dynamic/fast' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ignored - is before merch high position
 			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ignored - is merch high position
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
@@ -136,21 +136,21 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ad position (0)
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
 			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ad position (2)
-			{ ...testCollection, collectionType: 'dynamic/slow-mpu' },
+			{ ...testCollection, collectionType: 'dynamic/fast' },
 			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (5)
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
 			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ad position (7)
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
-			{ ...testCollection, collectionType: 'dynamic/slow-mpu' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (11)
-			{ ...testCollection, collectionType: 'dynamic/slow-mpu' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
-			{ ...testCollection, collectionType: 'dynamic/slow-mpu' }, // Ad position (14)
+			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ad position (14)
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (16)
-			{ ...testCollection, collectionType: 'fixed/video' },
+			{ ...testCollection, collectionType: 'scrollable/feature' },
 			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ignored - is merch high position
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
@@ -166,7 +166,7 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ad position (0)
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (2)
-			{ ...testCollection, collectionType: 'dynamic/slow-mpu' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
 			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ad position (5)
 			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ignored - before thrasher
@@ -180,7 +180,7 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ad position (14)
 			{ ...testCollection, collectionType: 'dynamic/fast' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-V-mpu' }, // Ad position (16)
-			{ ...testCollection, collectionType: 'fixed/video' },
+			{ ...testCollection, collectionType: 'scrollable/feature' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-III' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ignored - is merch high position
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container

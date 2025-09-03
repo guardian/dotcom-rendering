@@ -80,7 +80,7 @@ export const Recipe: FEArticle = {
 					},
 				],
 			},
-			elementId: '49741997-a39e-4d78-bc17-ecb6af63d439',
+			elementId: 'b6de76b2-3320-4d82-8992-75a82421b694',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -280,62 +280,62 @@ export const Recipe: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The world of pancakes is so vast, it is hard to think that on <a href="https://en.wikipedia.org/wiki/Shrove_Tuesday">Pancake Day</a>, there could be only one type proffered across the world. Of course, traditionally, pancakes were a way to use up eggs and animal fats before the Lent fast, but with those ingredients off the table in vegan cooking, a new array of pancakes can take centre stage. Today’s offering is for <em>cong you bing</em>, a flaky, coiled, spring onion pancake ubiquitous across China. It’s as enjoyable to make as it is to eat and, happily, there’s no whiff of abstinence about it.</p>',
-					elementId: '2ff04e36-4e38-4afe-90c9-b7f9493df8e5',
+					elementId: 'c96dcd88-1531-49f3-9ffe-158bba7293c1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Spring onion pancakes with sesame sauce</h2>',
-					elementId: '077a3f81-a70a-4f9b-9782-e605cb99c9a3',
+					elementId: '6338873b-49fd-48e4-9851-fefd51c92dab',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Prep <strong>5 min<br></strong>Rest <strong>30 min<br></strong>Cook<strong> 1 hr<br></strong>Makes <strong>4, to serve 2 for lunch</strong></p>',
-					elementId: '6cec7e93-56f1-40a3-92c1-61e425299fc2',
+					elementId: '75809805-364b-4c34-bce2-33931f85fedd',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Making these involves a particular set of processes that includes binding, rolling, folding, squashing and frying. I would have had trouble learning them by myself during the pandemic were it not for the help of a library of online cooks, and in particular Wei Guo of the wonderful <a href="https://redhousespice.com/">Red House Spice blog</a>.</p>',
-					elementId: '8c48bb9b-17f0-47bf-95b1-fd8bc22d682a',
+					elementId: 'a3270451-de52-400b-aeb6-4daac90c5c33',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>For the pancakes<br><strong>275g plain flour</strong>, plus 2 tbsp extra<br><strong>Fine sea salt<br>\n   Coconut oil</strong><br><strong>½ tsp Chinese five spice</strong> powder – I like <a href="https://bart.co.uk/products/chinese-five-spice-powder">Bart Ingredients</a> <br><strong>6 spring onions</strong>, trimmed and finely sliced</p>',
-					elementId: '86cade76-0b81-4d1e-bf6f-f24af122c22f',
+					elementId: '26b421ee-b506-4426-8029-32274d6d5225',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>For the sesame sauce<br><strong>30g tahini<br>\n   75g sweet white miso</strong> – I like <a href="https://www.clearspring.co.uk/products/organic-japanese-sweet-white-miso-paste-pasteurised">Clearspring</a><br><strong>1 tbsp toasted sesame oil<br>\n   2 tbsp white-wine vinegar<br>\n   ½ tsp chilli oil sediment plus 1 tbsp oil </strong>– I like <a href="https://uk.lkk.com/products/chiu-chow-chilli-oil">Lee Kum Kee</a></p>',
-					elementId: 'acbbd9de-9b54-4c04-b164-1c410c539f9f',
+					elementId: '6991fe0a-99e3-49c0-a4d5-c98eb0fb6cce',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Fill and boil half a kettle of water. In a large heatproof bowl, use a fork to mix the flour, a big pinch of salt and 165ml freshly boiled water until it comes together into a rough dough and is cool enough to handle. Knead for five minutes, then cover with a clean tea towel and set aside to rest for 30 minutes.</p>',
-					elementId: 'd6dc7ecc-2c22-4b9c-8291-4787ca9cbd9d',
+					elementId: 'd11cf441-0ad7-4207-abb1-c2575d547835',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>While the dough is resting, prepare the filling. Melt two tablespoons of coconut oil in a nonstick pan, then pour into a small heatproof bowl. Put the pan to one side, but don’t wash it up – you’ll use it again later, to cook the pancakes. Add the five spice, the two extra tablespoons of flour and a quarter-teaspoon of salt to the melted oil, stir to combine and set aside.</p>',
-					elementId: '5e1c7a12-6c43-438a-837c-4bb4d880b4e3',
+					elementId: '8b7c6ba7-41ae-4103-83fc-5d24161e359e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Mix all the sauce ingredients in a small bowl, add two tablespoons of cold water to loosen it a little, and set aside.</p>',
-					elementId: '576042a0-cccf-4396-9f85-22693763bd8d',
+					elementId: '416f519d-0f8f-4bfc-ba31-ef234b07b8f7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Once the dough has rested, rub a little coconut oil on a worktop and on a rolling pin, then roll the dough into a roughly 20cm x 30cm rectangle. Spread the five spice mix evenly over the top (take care not to tear the dough) and sprinkle the sliced spring onions on top of that. Starting at one short end of the dough rectangle, roll up the whole thing into a tight cigar. Move the dough sausage so it’s horizontally in line with the edge of the worktop, then cut into four even slices. Put the slices cut side down on the worktop and, using the greased rolling pin, gently press each slice into a round pancake shape measuring about 13cm across.</p>',
-					elementId: '82076d8b-5501-4f8e-a714-e86dbd23b2f5',
+					elementId: '74d22391-7bf7-4fc0-85af-51e6e191b8e5',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>When you are ready to cook the pancakes, melt two tablespoons of coconut oil in the nonstick pan, gently lift in one pancake and cook for three to four minutes on each side, until golden brown all over. Remove from the pan and keep somewhere warm while you repeat with the remaining oil and pancakes (keep a close eye on the heat under the pan – you may need to reduce it to make sure the pan doesn’t get too hot).</p>',
-					elementId: 'd112392f-1c6a-4998-8c62-30f44774f878',
+					elementId: '8aefa103-a83f-4e59-95fe-1d2c2aab778d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Serve the pancakes hot with the sauce for dipping or drizzling over the top.</p>',
-					elementId: '4883b4a5-9af3-4f28-a815-047dad11142f',
+					elementId: '04a314e3-f57e-4812-ba73-a722d2e5b07d',
 				},
 			],
 			attributes: {
@@ -446,9 +446,9 @@ export const Recipe: FEArticle = {
 			type: 'Contributor',
 			title: 'Meera Sodha',
 			bylineImageUrl:
-				'https://i.guim.co.uk/img/uploads/2018/01/29/Meera-Sodha.jpg?width=300&quality=85&auto=format&fit=max&s=6eb81b918326c680e4d6f61f75a9de4e',
+				'https://i.guim.co.uk/img/uploads/2025/07/02/Meera_Sodha.jpg?width=300&quality=85&auto=format&fit=max&s=cf1e2357238c2057a10440548204da30',
 			bylineLargeImageUrl:
-				'https://i.guim.co.uk/img/uploads/2018/01/29/Meera_Sodha,_L.png?width=300&quality=85&auto=format&fit=max&s=135136df516ad3a2a8ca0ccfb446a904',
+				'https://i.guim.co.uk/img/uploads/2025/07/02/Meera_Sodha.png?width=300&quality=85&auto=format&fit=max&s=af6ee1ad88b1bb33adf850ba6b691654',
 		},
 		{
 			id: 'publication/theguardian',
@@ -550,7 +550,7 @@ export const Recipe: FEArticle = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=f29b111275893797cff74c084755aca1',
+				'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=55ad9850b660c1b8a42fc528722f4bbc',
 				'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=9dc1dcd25475025daa5c87bd12a35761',
 				'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=5f74068db4e833bc2746941c4240a323',
 				'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&quality=85&auto=format&fit=max&s=13e43d46439a7085e9731dda87d5c949',
@@ -655,7 +655,7 @@ export const Recipe: FEArticle = {
 		'article:author': 'https://www.theguardian.com/profile/meera-sodha',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=f29b111275893797cff74c084755aca1',
+			'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=55ad9850b660c1b8a42fc528722f4bbc',
 		'al:ios:url':
 			'gnmguardian://food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
@@ -688,7 +688,7 @@ export const Recipe: FEArticle = {
 		'twitter:app:url:iphone':
 			'gnmguardian://food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes?contenttype=Article&source=twitter',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=ec72ab6b5b0af60af5e401be7fbb9b85',
+			'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=8833e292fc2ffd9912aec091ef5eaa1b',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
 			'gnmguardian://food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes?contenttype=Article&source=twitter',
@@ -742,7 +742,6 @@ export const Recipe: FEArticle = {
 			relatedContent: true,
 			thirdPartyEmbedTracking: true,
 			prebidOzone: true,
-			prebidAdYouLike: true,
 			mostViewedFronts: true,
 			abSignInGateMainControl: true,
 			ampPrebid: true,
@@ -851,6 +850,7 @@ export const Recipe: FEArticle = {
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},
+		serverSideABTests: {},
 		edition: 'UK',
 		ipsosTag: 'environment',
 		isLiveBlog: false,
@@ -1227,7 +1227,7 @@ export const Recipe: FEArticle = {
 								url: '/world/europe-news',
 							},
 							{
-								title: 'US',
+								title: 'US news',
 								url: '/us-news',
 								longTitle: 'US news',
 							},
@@ -1307,6 +1307,11 @@ export const Recipe: FEArticle = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
+							},
+							{
+								title: 'Euro 2025',
+								url: '/football/women-s-euro-2025',
+								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -1481,6 +1486,11 @@ export const Recipe: FEArticle = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
+							},
+							{
+								title: 'Euro 2025',
+								url: '/football/women-s-euro-2025',
+								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -1711,28 +1721,6 @@ export const Recipe: FEArticle = {
 				url: 'https://www.theguardian.com/insidetheguardian',
 			},
 			{
-				title: 'The Observer',
-				url: '/observer',
-				children: [
-					{
-						title: 'Comment',
-						url: '/theobserver/news/comment',
-					},
-					{
-						title: 'The New Review',
-						url: '/theobserver/new-review',
-					},
-					{
-						title: 'Observer Magazine',
-						url: '/theobserver/magazine',
-					},
-					{
-						title: 'Observer Food Monthly',
-						url: '/theobserver/foodmonthly',
-					},
-				],
-			},
-			{
 				title: 'Guardian Weekly',
 				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
 			},
@@ -1749,16 +1737,12 @@ export const Recipe: FEArticle = {
 						url: '/crosswords/series/quick',
 					},
 					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
+						title: 'Sunday quick',
+						url: '/crosswords/series/sunday-quick',
 					},
 					{
 						title: 'Quick cryptic',
 						url: '/crosswords/series/quick-cryptic',
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
 					},
 					{
 						title: 'Quiptic',
@@ -1771,10 +1755,6 @@ export const Recipe: FEArticle = {
 					{
 						title: 'Prize',
 						url: '/crosswords/series/prize',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
 					},
 					{
 						title: 'Genius',
@@ -1797,6 +1777,10 @@ export const Recipe: FEArticle = {
 			{
 				title: 'Corrections',
 				url: '/theguardian/series/corrections-and-clarifications',
+			},
+			{
+				title: 'Tips',
+				url: 'https://www.theguardian.com/tips',
 			},
 		],
 		brandExtensions: [
@@ -2128,6 +2112,18 @@ export const Recipe: FEArticle = {
 					text: 'Patrons',
 					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
 					dataLinkName: 'uk : footer : patrons',
+					extraClasses: '',
+				},
+				{
+					text: 'Tips',
+					url: 'https://www.theguardian.com/tips',
+					dataLinkName: 'uk : footer : tips',
+					extraClasses: '',
+				},
+				{
+					text: 'Accessibility settings',
+					url: '/help/accessibility-help',
+					dataLinkName: 'accessibility settings',
 					extraClasses: '',
 				},
 			],

@@ -2,10 +2,14 @@ import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
+	audioTrails,
+	galleryTrails,
 	getSublinks,
 	loopVideoCard,
 	opinionTrails,
+	slideshowCard,
 	trails,
+	videoTrails,
 } from '../../fixtures/manual/trails';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { customMockFetch } from '../lib/mockRESTCalls';
@@ -36,7 +40,8 @@ const splashCard = {
 	kickerText: 'Kicker for splash card',
 };
 
-/** This creates a list of 8 standard cards which contain:
+/**
+ * This creates a list of 8 standard cards which contain:
  * - a card with sublinks
  * - a media card
  * - a boosted card
@@ -54,7 +59,9 @@ const standardCards = standards.map((card, index) => {
 
 	switch (index + 1) {
 		case 2:
-			return enhanceCardFields({ supportingContent: getSublinks(2) });
+			return enhanceCardFields({
+				supportingContent: getSublinks(2),
+			});
 		case 3:
 			return enhanceCardFields({
 				boostLevel: 'boost',
@@ -132,7 +139,7 @@ type FlexibleGeneralArgsAndCustomArgs = React.ComponentProps<
 
 const meta = {
 	component: FlexibleGeneral,
-	title: 'Components/FlexibleGeneral',
+	title: 'Front Containers/FlexibleGeneral',
 	parameters: {
 		chromatic: {
 			viewports: [
@@ -168,13 +175,17 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const SplashWithStandards: Story = {
-	name: 'Splash with standard cards',
+	name: 'Splash with big and standard cards',
 	args: {
-		frontSectionTitle: 'Splash with stardards',
+		frontSectionTitle: 'Splash with standards',
 		groupedTrails: {
 			...emptyGroupedTrails,
 			splash: [{ ...splashCard, supportingContent: [] }],
-			standard: standardCards,
+			standard: standardCards.map((card, index) => ({
+				...card,
+				isBoosted: index === 0,
+				boostLevel: index === 0 ? 'boost' : 'default',
+			})),
 		},
 	},
 };
@@ -368,12 +379,6 @@ export const SplashWithImageSupression: Story = {
 
 export const SplashWithLiveUpdates: Story = {
 	name: 'Splash with live updates',
-	args: {
-		groupedTrails: {
-			...emptyGroupedTrails,
-			splash: [{ ...splashCard, image: undefined }],
-		},
-	},
 	render: (args) => {
 		global.fetch = mockLatestLinksReqFetch;
 		const Section = ({
@@ -410,42 +415,39 @@ export const SplashWithLiveUpdates: Story = {
 	},
 };
 
-const slideshowCard = {
-	...liveUpdatesCard,
-	mainMedia: undefined,
-	slideshowImages: [
-		{
-			imageSrc:
-				'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/1000.jpg',
-		},
-		{
-			imageSrc:
-				'https://media.guim.co.uk/77e960298d4339e047eac5c1986d0f3214f6285d/419_447_4772_2863/master/4772.jpg',
-		},
-		{
-			imageSrc:
-				'https://media.guim.co.uk/df5aea6391e21b5a5d2d25fd9aad81d497f99d42/0_45_3062_1837/master/3062.jpg',
-		},
-		{
-			imageSrc:
-				'https://media.guim.co.uk/5ebec1a8d662f0da39887dae16e4b2720379246e/0_0_5000_3000/master/5000.jpg',
-		},
-		{
-			imageSrc:
-				'https://media.guim.co.uk/77e960298d4339e047eac5c1986d0f3214f6285d/419_447_4772_2863/master/4772.jpg',
-		},
-	],
-} satisfies DCRFrontCard;
+export const StandardBoostedWithLiveUpdates: Story = {
+	name: 'Standard boosted with live updates',
+	render: (args) => {
+		global.fetch = mockLatestLinksReqFetch;
+		const Section = ({
+			title,
+			boostLevel,
+		}: {
+			title: string;
+			boostLevel: BoostLevel;
+		}) => (
+			<FrontSection
+				title={title}
+				discussionApiUrl={discussionApiUrl}
+				editionId="UK"
+				showTopBorder={true}
+			>
+				<FlexibleGeneral
+					{...args}
+					groupedTrails={{
+						...emptyGroupedTrails,
+						standard: [{ ...liveUpdatesCard, boostLevel }],
+					}}
+				/>
+			</FrontSection>
+		);
 
-export const DefaultSplashWithLiveUpdatesAndSlideshow: Story = {
-	name: 'Standard splash with live updates and slideshow',
-	args: {
-		frontSectionTitle: 'Standard splash with live updates and slideshow',
-		groupedTrails: {
-			...emptyGroupedTrails,
-
-			splash: [{ ...slideshowCard }],
-		},
+		return (
+			<>
+				<Section title="Boosted" boostLevel="boost" />
+				<Section title="Megaboosted" boostLevel="megaboost" />
+			</>
+		);
 	},
 };
 
@@ -455,18 +457,13 @@ export const StandardCards: Story = {
 		frontSectionTitle: 'Standard cards',
 		groupedTrails: {
 			...emptyGroupedTrails,
-			standard: trails.slice(0, 4),
-		},
-	},
-};
-
-export const OpinionStandardCards: Story = {
-	name: 'Opinion standard cards',
-	args: {
-		frontSectionTitle: 'Opinion standard cards',
-		groupedTrails: {
-			...emptyGroupedTrails,
-			standard: opinionTrails.slice(0, 2),
+			standard: [
+				...trails.slice(0, 4),
+				...opinionTrails.slice(0, 2),
+				...audioTrails.slice(0, 2),
+				...galleryTrails.slice(0, 2),
+				...videoTrails.slice(0, 2),
+			],
 		},
 	},
 };
@@ -482,10 +479,7 @@ const containerPalettes = [
 	'SombreAltPalette',
 	'SpecialReportAltPalette',
 	'Branded',
-] as const satisfies readonly Omit<
-	DCRContainerPalette,
-	'MediaPalette' | 'PodcastPalette'
->[];
+] as const satisfies readonly DCRContainerPalette[];
 
 export const WithSpecialPaletteVariations = {
 	name: 'With special palette variations',
@@ -557,5 +551,69 @@ export const LoopVideoCards: Story = {
 			splash: [loopVideoCard],
 			standard: [loopVideoCard], // Loop video is disabled at standard card size
 		},
+	},
+};
+
+export const StandardBoostedMediaCardWithSublinks: Story = {
+	name: 'Standard boosted media card with sublinks',
+	args: {
+		frontSectionTitle: 'Standard boosted media card with sublinks',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			standard: [trails[1]].map((card) => ({
+				...card,
+				boostLevel: 'boost',
+				supportingContent: getSublinks(2),
+			})),
+		},
+	},
+};
+
+// All splash boost levels support slideshows.
+export const SplashWithSlideshow: Story = {
+	name: 'Splash with a slideshow',
+	args: {
+		frontSectionTitle: 'Flexible General Splash card with a slideshow',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			splash: [
+				{
+					...slideshowCard,
+					boostLevel: 'default',
+					headline: 'Default splash card with a slideshow',
+				},
+			],
+		},
+		collectionId: 1,
+	},
+};
+
+export const StandardCardWithSlideshow: Story = {
+	name: 'Standard card with a slideshow',
+	args: {
+		frontSectionTitle:
+			'Flexible General standard card with a slideshow at each boost level',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			standard: [
+				{
+					...slideshowCard,
+					boostLevel: 'default',
+					headline:
+						'Image fallback - default card is too small for a slideshow',
+				},
+				{
+					...slideshowCard,
+					boostLevel: 'boost',
+					headline: 'Boosted card with a slideshow',
+				},
+				{
+					...slideshowCard,
+					boostLevel: 'megaboost',
+					headline: 'MegaBoosted card with a slideshow',
+				},
+			],
+		},
+		collectionId: 1,
 	},
 };

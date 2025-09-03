@@ -89,7 +89,7 @@ export const Gallery: FEArticle = {
 					},
 				],
 			},
-			elementId: '58de52b4-e864-4999-8c7b-bca0feae8afc',
+			elementId: 'bb9f7669-5158-44e5-9260-4092cf36f483',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -273,7 +273,8 @@ export const Gallery: FEArticle = {
 			],
 			data: {
 				alt: 'People take cover as smoke erupts and debris flies off a building',
-				caption: 'An Israeli strike hits a building in Gaza City.',
+				caption:
+					'<h2></h2>An Israeli strike hits a building in Gaza City.',
 				credit: 'Photograph: Jehad Alshrafi/AP',
 			},
 		},
@@ -354,7 +355,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '3fec7bb4-e700-4e3d-8588-785fe27ec273',
+					elementId: '18bddf90-8f0d-414e-987e-f86a723705b2',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -590,7 +591,7 @@ export const Gallery: FEArticle = {
 					data: {
 						alt: 'Large fires burn and dense smoke billows up from a wooded landscape',
 						caption:
-							'<strong>Alberta, Canada</strong><br>Smoke rises from a wildfire near Bison Lake. <a href="https://www.theguardian.com/us-news/2025/jun/04/canada-wildfire-smoke-air-quality">Wildfires in Canada</a>, which have been sparked by <a href="https://www.gov.mb.ca/conservation_fire/Fire-Situation/daily-firesituation.html">human and natural causes</a>, have prompted at least 25,000 residents in three Canadian provinces to evacuate in recent days.',
+							'<h2>Alberta, Canada</h2>Smoke rises from a wildfire near Bison Lake. <a href="https://www.theguardian.com/us-news/2025/jun/04/canada-wildfire-smoke-air-quality">Wildfires in Canada</a>, which have been sparked by <a href="https://www.gov.mb.ca/conservation_fire/Fire-Situation/daily-firesituation.html">human and natural causes</a>, have prompted at least 25,000 residents in three Canadian provinces to evacuate in recent days.',
 						credit: 'Photograph: Alberta Wildfire/Reuters',
 					},
 				},
@@ -663,7 +664,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: 'c562b571-8b35-4b48-98fd-f0702ef47898',
+					elementId: '18156cdb-7465-4715-8040-4807364b68f4',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -899,7 +900,7 @@ export const Gallery: FEArticle = {
 					data: {
 						alt: 'A man walks his dogs across a wide road against a backdrop of dark smoke in the sky',
 						caption:
-							'<strong>British Columbia, Canada</strong><br>A man takes his dogs out for a walk under wildfire smoke off Highway 97, north of Buckinghorse River in British Columbia. Smoke from <a href="https://www.theguardian.com/us-news/2025/may/30/canada-wildfires-air-quality">wildfires in Canada</a> has also spread across several states in the US including the eastern seaboard, prompting some to issue air-quality alerts.',
+							'<h2>British Columbia, Canada</h2>A man takes his dogs out for a walk under wildfire smoke off Highway 97, north of Buckinghorse River in British Columbia. Smoke from <a href="https://www.theguardian.com/us-news/2025/may/30/canada-wildfires-air-quality">wildfires in Canada</a> has also spread across several states in the US including the eastern seaboard, prompting some to issue air-quality alerts.',
 						credit: 'Photograph: Nasuna Stuart-Ulin/The Canadian Press/AP',
 					},
 				},
@@ -972,7 +973,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '5ff5f586-7951-4915-95c3-ec06def8f0d4',
+					elementId: '46f233b8-8980-4b2c-ad36-b91b14dbd162',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -1208,7 +1209,7 @@ export const Gallery: FEArticle = {
 					data: {
 						alt: 'Four people walk in water up to the waist as the sun begins to rise',
 						caption:
-							'<strong>Gravelines, France<br></strong>People wade into the sea to board a dinghy to cross the Channel. <a href="https://www.theguardian.com/uk-news/2025/jun/06/uk-taxpayers-face-extra-costs-as-france-plans-channel-small-boat-interceptions">More than 1,100 people made the crossing to the UK in small boats</a> last Saturday, official data shows – the highest number recorded in a single day this year.',
+							'<h2>Gravelines, France</h2>People wade into the sea to board a dinghy to cross the Channel. <a href="https://www.theguardian.com/uk-news/2025/jun/06/uk-taxpayers-face-extra-costs-as-france-plans-channel-small-boat-interceptions">More than 1,100 people made the crossing to the UK in small boats</a> last Saturday, official data shows – the highest number recorded in a single day this year.',
 						credit: 'Photograph: Carl Court/Getty Images',
 					},
 				},
@@ -1281,7 +1282,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '928626b3-5a57-44f0-9efe-b695a6a4d2a7',
+					elementId: '6d5d16df-ac3c-449b-bf05-e3c4b489b866',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -1517,7 +1518,7 @@ export const Gallery: FEArticle = {
 					data: {
 						alt: 'A boy sits by a woman hugging the body of a victim killed during an airstrike',
 						caption:
-							'<strong>Gaza</strong><br>A boy at al-Shifa hospital in Gaza City sits by a woman mourning a victim killed during overnight Israeli airstrikes. <a href="https://www.theguardian.com/world/2025/jun/04/us-vetoes-gaza-ceasefire-un-security-council">The US this week vetoed</a> a UN security council resolution calling for an ‘immediate, unconditional and permanent ceasefire’ in Gaza, while the other 14 countries on the council voted in favour.',
+							'<h2>Gaza</h2>A boy at al-Shifa hospital in Gaza City sits by a woman mourning a victim killed during overnight Israeli airstrikes. <a href="https://www.theguardian.com/world/2025/jun/04/us-vetoes-gaza-ceasefire-un-security-council">The US this week vetoed</a> a UN security council resolution calling for an ‘immediate, unconditional and permanent ceasefire’ in Gaza, while the other 14 countries on the council voted in favour.',
 						credit: 'Photograph: Omar Al-Qattaa/AFP/Getty Images',
 					},
 				},
@@ -1590,7 +1591,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: 'a21f0cbb-b1c7-4179-b5b1-d09a5e1b2efb',
+					elementId: '71a0243b-bf62-4d1f-a7ef-67505925fc1e',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -1826,7 +1827,7 @@ export const Gallery: FEArticle = {
 					data: {
 						alt: 'Mona al-Raqab holds a plastic bottle to the mouth of her son, Osama, as he lies under a blanket',
 						caption:
-							'<strong>Khan Younis, Gaza</strong><br>Five-year-old Osama al-Raqab, suffering from severe malnutrition, undergoes treatment at the Nasser hospital in Khan Younis. His mother, Mona al-Raqab, says Osama’s weight has dropped to 9kg. In May, a global hunger monitor said <a href="https://www.theguardian.com/world/2025/jun/04/israel-warns-palestinians-against-travel-on-roads-to-gaza-aid-hubs-labelling-them-combat-zones">half a million people in Gaza faced starvation</a>.',
+							'<h2>Khan Younis, Gaza</h2>Five-year-old Osama al-Raqab, suffering from severe malnutrition, undergoes treatment at the Nasser hospital in Khan Younis. His mother, Mona al-Raqab, says Osama’s weight has dropped to 9kg. In May, a global hunger monitor said <a href="https://www.theguardian.com/world/2025/jun/04/israel-warns-palestinians-against-travel-on-roads-to-gaza-aid-hubs-labelling-them-combat-zones">half a million people in Gaza faced starvation</a>.',
 						credit: 'Photograph: Haitham Imad/EPA',
 					},
 				},
@@ -1899,7 +1900,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '55d147d2-695e-43ec-8809-0a6440585c71',
+					elementId: '37086e2e-1447-4d3e-8643-e75450ce0ca2',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2135,7 +2136,7 @@ export const Gallery: FEArticle = {
 					data: {
 						alt: 'A Palestinian man runs across a road through smoky air',
 						caption:
-							'<strong>Gaza</strong><br>A man runs near the site of an Israeli strike on a house in Gaza City. At least <a href="https://www.theguardian.com/world/2025/jun/04/israel-warns-palestinians-against-travel-on-roads-to-gaza-aid-hubs-labelling-them-combat-zones">48 people were killed by Israeli bombardment</a> across the Gaza Strip on Wednesday, including 14 in a single strike on a tent sheltering displaced people, the civil defence agency said. Israel’s military campaign has killed more than 54,000 people in Gaza, mostly women and children, according to Gaza’s health ministry.',
+							'<h2>Gaza</h2>A man runs near the site of an Israeli strike on a house in Gaza City. At least <a href="https://www.theguardian.com/world/2025/jun/04/israel-warns-palestinians-against-travel-on-roads-to-gaza-aid-hubs-labelling-them-combat-zones">48 people were killed by Israeli bombardment</a> across the Gaza Strip on Wednesday, including 14 in a single strike on a tent sheltering displaced people, the civil defence agency said. Israel’s military campaign has killed more than 54,000 people in Gaza, mostly women and children, according to Gaza’s health ministry.',
 						credit: 'Photograph: Mahmoud Issa/Reuters',
 					},
 				},
@@ -2208,7 +2209,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '77991483-e375-4b80-804b-d6541612c4b5',
+					elementId: '8fcbbb62-e471-4095-9def-e9f6c83c1fa2',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2444,7 +2445,7 @@ export const Gallery: FEArticle = {
 					data: {
 						alt: 'People take cover as smoke erupts and debris flies off a building',
 						caption:
-							'<strong>Gaza</strong><br>An Israeli strike hits a building in Gaza City.',
+							'<h2>Gaza</h2>An Israeli strike hits a building in Gaza City.',
 						credit: 'Photograph: Jehad Alshrafi/AP',
 					},
 				},
@@ -2517,7 +2518,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '05e726a9-5aa1-4c77-81e2-cfad977d7c01',
+					elementId: '72847404-1736-4d54-bca4-114102aa033b',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2753,7 +2754,7 @@ export const Gallery: FEArticle = {
 					data: {
 						alt: 'An aerial view of floating debris and houses submerged under water',
 						caption:
-							'<strong>Blatten, Switzerland</strong><br>Destroyed houses submerged in water from the Lonza River in the aftermath of an avalanche caused by the collapse of the Birch glacier. <a href="https://www.theguardian.com/environment/2025/jun/01/this-is-ground-zero-for-blatten-the-tiny-swiss-village-engulfed-by-a-mountain">‘Blatten has been wiped away. Erased, obliterated, destroyed, stamped into the ground,’</a> said the village’s mayor, Matthias Bellwald. ‘The memories preserved in countless books, photo albums, documentation – everything is gone. In short, this is ground zero for Blatten.’',
+							'<h2>Blatten, Switzerland</h2>Destroyed houses submerged in water from the Lonza River in the aftermath of an avalanche caused by the collapse of the Birch glacier. <a href="https://www.theguardian.com/environment/2025/jun/01/this-is-ground-zero-for-blatten-the-tiny-swiss-village-engulfed-by-a-mountain">‘Blatten has been wiped away. Erased, obliterated, destroyed, stamped into the ground,’</a> said the village’s mayor, Matthias Bellwald. ‘The memories preserved in countless books, photo albums, documentation – everything is gone. In short, this is ground zero for Blatten.’',
 						credit: 'Photograph: Michael Buholzer/EPA',
 					},
 				},
@@ -2816,7 +2817,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '1227d084-c17b-4458-9d1c-3cab220886da',
+					elementId: 'd384bd09-1201-4075-9554-9df02166f691',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -3052,7 +3053,7 @@ export const Gallery: FEArticle = {
 					data: {
 						alt: 'A satellite image of blast wreckage next to planes on an airfield',
 						caption:
-							'<strong>Usolye-Sibirskoye, Russia</strong><br>A satellite image shows a destroyed Tupolev Tu-95 aircraft at the Belaya airbase near Usolye-Sibirskoye in the Irkutsk oblast. <a href="https://www.theguardian.com/world/2025/jun/01/ukraine-launches-major-drone-attack-on-russian-bombers-security-official-says">Ukraine launched a drone attack against Russian military bombers in Siberia</a>, striking more than 40 warplanes thousands of miles from Ukrainian territory after it smuggled the drones, hidden in the roofs of wooden sheds, to the perimeter of the airfields.',
+							'<h2>Usolye-Sibirskoye, Russia</h2>A satellite image shows a destroyed Tupolev Tu-95 aircraft at the Belaya airbase near Usolye-Sibirskoye in the Irkutsk oblast. <a href="https://www.theguardian.com/world/2025/jun/01/ukraine-launches-major-drone-attack-on-russian-bombers-security-official-says">Ukraine launched a drone attack against Russian military bombers in Siberia</a>, striking more than 40 warplanes thousands of miles from Ukrainian territory after it smuggled the drones, hidden in the roofs of wooden sheds, to the perimeter of the airfields.',
 						credit: 'Photograph: ©2025 Maxar Technologies/EPA',
 					},
 				},
@@ -3125,7 +3126,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '9461ff4e-637c-403c-8ea8-86c7412dde32',
+					elementId: 'c28a4346-9e54-44d2-ab65-225776141b5c',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -3361,7 +3362,7 @@ export const Gallery: FEArticle = {
 					data: {
 						alt: 'A stork perches with outstretched wings next to two chicks in a nest on a metal mast',
 						caption:
-							'<strong>Bouée, France</strong><br>A stork stands over two chicks in a nest on a mast for high-voltage lines in the Loire-Atlantique department of western France.',
+							'<h2>Bouée, France</h2>A stork stands over two chicks in a nest on a mast for high-voltage lines in the Loire-Atlantique department of western France.',
 						credit: 'Photograph: Loïc Venance/AFP/Getty Images',
 					},
 				},
@@ -3434,7 +3435,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '1b21b6cd-3c71-4b21-8c00-dcdcd856fba2',
+					elementId: '808a4ed8-22df-4060-b4d5-dc1caf8703ee',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -3670,7 +3671,7 @@ export const Gallery: FEArticle = {
 					data: {
 						alt: 'People mostly dressed in white kneel in prayer in circular rows',
 						caption:
-							'<strong>Mecca, Saudi Arabia</strong><br>Muslims pray around the Kaaba, Islam’s holiest shrine, on the first day of Eid al-Adha, the feast of sacrifice.',
+							'<h2>Mecca, Saudi Arabia</h2>Muslims pray around the Kaaba, Islam’s holiest shrine, on the first day of Eid al-Adha, the feast of sacrifice.',
 						credit: 'Photograph: AFP/Getty Images',
 					},
 				},
@@ -3743,7 +3744,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '2788fd8b-b623-4d54-8af1-9bb82b7a1540',
+					elementId: '7d85db6b-e9dd-4231-b4ba-099e4f3ba38c',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -3979,7 +3980,7 @@ export const Gallery: FEArticle = {
 					data: {
 						alt: 'A crying child hugged by an adult in a crowd of people',
 						caption:
-							'<strong>Beit Lahiya, Gaza</strong><br>A child sheds tears during the funeral ceremony for Palestinians killed by Israeli airstrikes on a vehicle on the first day of Eid al-Adha.',
+							'<h2>Beit Lahiya, Gaza</h2>A child sheds tears during the funeral ceremony for Palestinians killed by Israeli airstrikes on a vehicle on the first day of Eid al-Adha.',
 						credit: 'Photograph: Abdalhkem Abu Riash/Anadolu/Getty Images',
 					},
 				},
@@ -4052,7 +4053,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '39de984c-3bfb-4130-a85c-bdcba957bdc4',
+					elementId: '4409674e-0cc2-414e-84a4-14c568b51eb2',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -4288,7 +4289,7 @@ export const Gallery: FEArticle = {
 					data: {
 						alt: 'Muslim faithful gather to celebrate Eid al-Adha, the Muslim feast of sacrifice, in Béthune',
 						caption:
-							'<strong>Béthune, France</strong><br>Muslims gather to celebrate Eid al-Adha, the feast of sacrifice, in the Pas-de-Calais department of northern France.',
+							'<h2>Béthune, France</h2>Muslims gather to celebrate Eid al-Adha, the feast of sacrifice, in the Pas-de-Calais department of northern France.',
 						credit: 'Photograph: Sameer Al-Doumy/AFP/Getty Images',
 					},
 				},
@@ -4361,7 +4362,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: 'ff5413a3-d53a-49ee-96b1-d2ba20b88446',
+					elementId: '8b03ca69-51c4-49c8-8086-c1e41eb8b5fa',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -4597,7 +4598,7 @@ export const Gallery: FEArticle = {
 					data: {
 						alt: 'A large crowd of pilgrims pray at the edge of the Quema River',
 						caption:
-							'<strong>Aznalcázar, Spain</strong><br>Pilgrims pray at the Quema River near Aznalcázar on their way to the shrine of El Rocío, Andalusia, during the annual pilgrimage made by hundreds of thousands of devotees of the Virgen del Rocío.',
+							'<h2>Aznalcázar, Spain</h2>Pilgrims pray at the Quema River near Aznalcázar on their way to the shrine of El Rocío, Andalusia, during the annual pilgrimage made by hundreds of thousands of devotees of the Virgen del Rocío.',
 						credit: 'Photograph: Emilio Morenatti/AP',
 					},
 				},
@@ -4670,7 +4671,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: 'e2e0f8c9-dc2c-45f4-87fb-b8ecc1d1c4b7',
+					elementId: '1415aa6c-780a-4463-8822-452b6059bce1',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -4906,7 +4907,7 @@ export const Gallery: FEArticle = {
 					data: {
 						alt: 'A man holds a wallet and a pink piece of paper as others queue behind him',
 						caption:
-							'<strong>Gitega, Burundi</strong><br>People queue outside Musama primary school to cast their votes in the Burundian legislative elections.',
+							'<h2>Gitega, Burundi</h2>People queue outside Musama primary school to cast their votes in the Burundian legislative elections.',
 						credit: 'Photograph: Berthier Mugiraneza/AP',
 					},
 				},
@@ -4979,7 +4980,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: 'bd48a9dd-b811-4181-8611-35acf449004b',
+					elementId: '574a3365-d8ef-4e29-b39c-23041da02ea3',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -5215,7 +5216,7 @@ export const Gallery: FEArticle = {
 					data: {
 						alt: 'Novak Djokovic looks down as he prepares to serve',
 						caption:
-							'<strong>Paris, France</strong><br>Serbia’s Novak Djokovic prepares to serve against Germany’s Alexander Zverev in their French Open quarter-final at Roland Garros. <a href="https://www.theguardian.com/sport/2025/jun/04/french-open-jannik-sinner-alexander-bublik-novak-djokovic-semis">Djokovic outplayed the third-seed Zverev</a> to return to the tournament’s semi-finals. He is the oldest man to reach the French Open semi-finals since Pancho Gonzales in 1968 and he has now reached 51 grand slam semi-finals, extending his own all-time record. ‘Tonight is one of those reasons why I still keep playing,’ he said.',
+							'<h2>Paris, France</h2>Serbia’s Novak Djokovic prepares to serve against Germany’s Alexander Zverev in their French Open quarter-final at Roland Garros. <a href="https://www.theguardian.com/sport/2025/jun/04/french-open-jannik-sinner-alexander-bublik-novak-djokovic-semis">Djokovic outplayed the third-seed Zverev</a> to return to the tournament’s semi-finals. He is the oldest man to reach the French Open semi-finals since Pancho Gonzales in 1968 and he has now reached 51 grand slam semi-finals, extending his own all-time record. ‘Tonight is one of those reasons why I still keep playing,’ he said.',
 						credit: 'Photograph: Lindsey Wasson/AP',
 					},
 				},
@@ -5288,7 +5289,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '5e8228d7-7af3-4509-9a65-c0e4b1ad50a0',
+					elementId: 'a0091116-c89a-4f5e-829f-2f428174a75c',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -5524,7 +5525,7 @@ export const Gallery: FEArticle = {
 					data: {
 						alt: 'Aryna Sabalenka makes a forehand shot on a clay court at Roland Garros',
 						caption:
-							'<strong>Paris, France<br></strong>The Belarusian tennis player Aryna Sabalenka makes a forehand return to China’s Zheng Qinwen during their quarter-final at the French Open. <a href="https://www.theguardian.com/sport/2025/jun/03/iga-swiatek-elina-svitolina-french-open-quarter-finals-tennis">Sabalenka, the world No 1, edged past Zheng</a>, the eighth seed, 7-6 (3), 6-3 to end the Olympic gold medalist’s 10-match winning streak at Roland Garros.',
+							'<h2>Paris, France</h2>The Belarusian tennis player Aryna Sabalenka makes a forehand return to China’s Zheng Qinwen during their quarter-final at the French Open. <a href="https://www.theguardian.com/sport/2025/jun/03/iga-swiatek-elina-svitolina-french-open-quarter-finals-tennis">Sabalenka, the world No 1, edged past Zheng</a>, the eighth seed, 7-6 (3), 6-3 to end the Olympic gold medalist’s 10-match winning streak at Roland Garros.',
 						credit: 'Photograph: Julien de Rosa/AFP/Getty Images',
 					},
 				},
@@ -5597,7 +5598,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: 'd2420738-26f0-4a44-a2e5-a0ec0016bb28',
+					elementId: '39811db4-8883-42e4-bde5-07316abae9fc',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -5833,7 +5834,7 @@ export const Gallery: FEArticle = {
 					data: {
 						alt: 'Paris Saint-Germain supporters celebrate in thick clouds of grey smoke',
 						caption:
-							'<strong>Paris, France</strong><br>Paris Saint-Germain supporters celebrate their team’s second goal against Inter Milan as they watch the <a href="https://www.theguardian.com/football/2025/may/31/psg-win-champions-league-for-first-time-with-record-5-0-final-hammering-of-inter">Champions League final</a>, held in Munich, on a large screen at Parc des Princes.',
+							'<h2>Paris, France</h2>Paris Saint-Germain supporters celebrate their team’s second goal against Inter Milan as they watch the <a href="https://www.theguardian.com/football/2025/may/31/psg-win-champions-league-for-first-time-with-record-5-0-final-hammering-of-inter">Champions League final</a>, held in Munich, on a large screen at Parc des Princes.',
 						credit: 'Photograph: Thibaud Moritz/AFP/Getty Images',
 					},
 				},
@@ -5906,7 +5907,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: 'b28c80d5-8ce3-4789-b4d5-a255086b1576',
+					elementId: '246fc0c5-465b-4d3c-b8eb-e5f762fd5ece',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -6142,7 +6143,7 @@ export const Gallery: FEArticle = {
 					data: {
 						alt: 'Spectators lining a mountain road urge Simon Yates on as he cycles uphill',
 						caption:
-							'<strong>Piedmont, Italy</strong><br>Britain’s Simon Yates pedals up the Colle delle Finestre climb during stage 20 of the Giro d’Italia, from Verrès to Sestriere. <a href="https://www.theguardian.com/sport/2025/jun/01/giro-ditalia-winner-simon-yates-hails-huge-moment-in-my-career">Yates reflected on a ‘sweet success’</a> he had been targeting for much of his life after a spectacular and decisive coup in Saturday’s final mountain stage ensured he would ride to victory in the Giro on Sunday. He said: ‘I’ve spent a lot of my life targeting this race. There’s been a lot of setbacks, and it has been hard to deal with. I’m in disbelief that I have finally managed to pull it off.’',
+							'<h2>Piedmont, Italy</h2>Britain’s Simon Yates pedals up the Colle delle Finestre climb during stage 20 of the Giro d’Italia, from Verrès to Sestriere. <a href="https://www.theguardian.com/sport/2025/jun/01/giro-ditalia-winner-simon-yates-hails-huge-moment-in-my-career">Yates reflected on a ‘sweet success’</a> he had been targeting for much of his life after a spectacular and decisive coup in Saturday’s final mountain stage ensured he would ride to victory in the Giro on Sunday. He said: ‘I’ve spent a lot of my life targeting this race. There’s been a lot of setbacks, and it has been hard to deal with. I’m in disbelief that I have finally managed to pull it off.’',
 						credit: 'Photograph: Luca Bettini/AFP/Getty Images',
 					},
 				},
@@ -6205,7 +6206,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '3108fafa-4db6-46ec-ab4f-4eba0db9bdd2',
+					elementId: '06126bb0-32e9-4f89-8769-bd64293b6227',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -6441,7 +6442,7 @@ export const Gallery: FEArticle = {
 					data: {
 						alt: 'An elephant wanders through a shop filled with food, drink and gas canisters',
 						caption:
-							'<strong>Nakhon Ratchasima, Thailand</strong><br>An elephant, named Plai Biang Lek, walks through a shop in Nakhon Ratchasima province.',
+							'<h2>Nakhon Ratchasima, Thailand</h2>An elephant, named Plai Biang Lek, walks through a shop in Nakhon Ratchasima province.',
 						credit: 'Photograph: Kanokporn Sriboon/AP',
 					},
 				},
@@ -6580,7 +6581,7 @@ export const Gallery: FEArticle = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/2fae2046e4b61e01e958d83ce7512a6aeb9d2e87/0_0_5000_4000/master/5000.png?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=8eeef901b60564e1e8b029c52837809b',
+				'https://i.guim.co.uk/img/media/2fae2046e4b61e01e958d83ce7512a6aeb9d2e87/0_0_5000_4000/master/5000.png?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=7d81d806d94409345aa5866ffe0bc6e4',
 				'https://i.guim.co.uk/img/media/2fae2046e4b61e01e958d83ce7512a6aeb9d2e87/0_0_5000_4000/master/5000.png?width=1200&height=1200&quality=85&auto=format&fit=crop&s=728f3046f17dd3c38f40214078fc7966',
 				'https://i.guim.co.uk/img/media/2fae2046e4b61e01e958d83ce7512a6aeb9d2e87/0_0_5000_4000/master/5000.png?width=1200&height=900&quality=85&auto=format&fit=crop&s=af04c89ab9c45c0c820fec2363b79e72',
 				'https://i.guim.co.uk/img/media/2fae2046e4b61e01e958d83ce7512a6aeb9d2e87/0_0_5000_4000/master/5000.png?width=1200&quality=85&auto=format&fit=max&s=3df73783224e7e808224460ef840e45e',
@@ -6614,7 +6615,7 @@ export const Gallery: FEArticle = {
 		'article:author': 'https://www.theguardian.com/profile/jim-powell',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/2fae2046e4b61e01e958d83ce7512a6aeb9d2e87/0_0_5000_4000/master/5000.png?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=8eeef901b60564e1e8b029c52837809b',
+			'https://i.guim.co.uk/img/media/2fae2046e4b61e01e958d83ce7512a6aeb9d2e87/0_0_5000_4000/master/5000.png?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=7d81d806d94409345aa5866ffe0bc6e4',
 		'al:ios:url':
 			'gnmguardian://artanddesign/gallery/2025/jun/06/the-week-around-the-world-in-20-pictures?contenttype=Article&source=applinks',
 		'og:title': 'The week around the world in 20 pictures',
@@ -6645,7 +6646,7 @@ export const Gallery: FEArticle = {
 		'twitter:title': 'The week around the world in 20 pictures',
 		'twitter:app:name:ipad': 'The Guardian',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/2fae2046e4b61e01e958d83ce7512a6aeb9d2e87/0_0_5000_4000/master/5000.png?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=5a6fdc93edebd1d00ddc7d0f13e92bbb',
+			'https://i.guim.co.uk/img/media/2fae2046e4b61e01e958d83ce7512a6aeb9d2e87/0_0_5000_4000/master/5000.png?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=db308aad7b630be53e0c1fb51e738093',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
 			'gnmguardian://artanddesign/gallery/2025/jun/06/the-week-around-the-world-in-20-pictures?contenttype=Article&source=twitter',
@@ -6699,7 +6700,6 @@ export const Gallery: FEArticle = {
 			relatedContent: true,
 			thirdPartyEmbedTracking: true,
 			prebidOzone: true,
-			prebidAdYouLike: true,
 			mostViewedFronts: true,
 			abSignInGateMainControl: true,
 			ampPrebid: true,
@@ -6808,6 +6808,7 @@ export const Gallery: FEArticle = {
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},
+		serverSideABTests: {},
 		edition: 'UK',
 		ipsosTag: 'environment',
 		isLiveBlog: false,
@@ -7077,8 +7078,8 @@ export const Gallery: FEArticle = {
 					index: 21,
 					fields: {
 						isMaster: 'true',
-						width: '5000',
 						height: '4000',
+						width: '5000',
 					},
 					mediaType: 'Image',
 					url: 'https://media.guim.co.uk/2fae2046e4b61e01e958d83ce7512a6aeb9d2e87/0_0_5000_4000/master/5000.png',
@@ -7086,8 +7087,8 @@ export const Gallery: FEArticle = {
 				{
 					index: 21,
 					fields: {
-						width: '5000',
 						height: '4000',
+						width: '5000',
 					},
 					mediaType: 'Image',
 					url: 'https://media.guim.co.uk/2fae2046e4b61e01e958d83ce7512a6aeb9d2e87/0_0_5000_4000/5000.png',
@@ -7095,21 +7096,21 @@ export const Gallery: FEArticle = {
 				{
 					index: 21,
 					fields: {
-						width: '500',
 						height: '400',
+						width: '500',
 					},
 					mediaType: 'Image',
 					url: 'https://media.guim.co.uk/2fae2046e4b61e01e958d83ce7512a6aeb9d2e87/0_0_5000_4000/500.png',
 				},
 			],
 		},
-		elementId: '8fcf3141-4551-42a4-9612-2f6c6d2c27ad',
+		elementId: 'f66f2172-93ff-4877-9571-babf956c928b',
 		imageSources: [],
 		data: {
 			copyright: '',
-			alt: 'People take cover as smoke erupts and debris flies off a building',
+			alt: '',
 			caption: '',
-			credit: 'Composite: Jehad Alshrafi/AP',
+			credit: '',
 		},
 	},
 	trailText:
@@ -7194,7 +7195,7 @@ export const Gallery: FEArticle = {
 								url: '/world/europe-news',
 							},
 							{
-								title: 'US',
+								title: 'US news',
 								url: '/us-news',
 								longTitle: 'US news',
 							},
@@ -7274,6 +7275,11 @@ export const Gallery: FEArticle = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
+							},
+							{
+								title: 'Euro 2025',
+								url: '/football/women-s-euro-2025',
+								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -7448,6 +7454,11 @@ export const Gallery: FEArticle = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
+							},
+							{
+								title: 'Euro 2025',
+								url: '/football/women-s-euro-2025',
+								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -8019,6 +8030,12 @@ export const Gallery: FEArticle = {
 					text: 'Tips',
 					url: 'https://www.theguardian.com/tips',
 					dataLinkName: 'uk : footer : tips',
+					extraClasses: '',
+				},
+				{
+					text: 'Accessibility settings',
+					url: '/help/accessibility-help',
+					dataLinkName: 'accessibility settings',
 					extraClasses: '',
 				},
 			],

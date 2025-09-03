@@ -1,4 +1,4 @@
-import { ABTest } from './types.ts';
+import type { ABTest } from './types';
 
 /**
  * Tests are defined here. They will be assigned mvt ranges based on the

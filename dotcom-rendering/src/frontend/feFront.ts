@@ -43,7 +43,6 @@ export type FEContainer =
 	| 'dynamic/fast'
 	| 'dynamic/package'
 	| 'dynamic/slow'
-	| 'dynamic/slow-mpu'
 	| 'fixed/large/slow-XIV'
 	| 'fixed/medium/fast-XI'
 	| 'fixed/medium/fast-XII'
@@ -58,7 +57,6 @@ export type FEContainer =
 	| 'fixed/small/slow-V-mpu'
 	| 'fixed/small/slow-V-third'
 	| 'fixed/thrasher'
-	| 'fixed/video'
 	| 'nav/list'
 	| 'nav/media-list'
 	| 'news/most-popular'
@@ -108,7 +106,7 @@ export type FEFrontCardStyle =
 	| 'DefaultCardstyle';
 
 /** @see https://github.com/guardian/frontend/blob/0bf69f55a/common/app/model/content/Atom.scala#L191-L196 */
-interface FEMediaAsset {
+export interface FEMediaAsset {
 	id: string;
 	version: number;
 	platform: string;
@@ -340,6 +338,7 @@ export type FEFrontConfig = {
 	sharedAdTargeting: SharedAdTargeting;
 	buildNumber: string;
 	abTests: ServerSideTests;
+	serverSideABTests: Record<string, string>;
 	pbIndexSites: { [key: string]: unknown }[];
 	ampIframeUrl: string;
 	beaconUrl: string;

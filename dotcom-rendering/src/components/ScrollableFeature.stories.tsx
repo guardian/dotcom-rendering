@@ -61,7 +61,7 @@ const trails = new Array(6)
 
 const meta = {
 	component: ScrollableFeature,
-	title: 'Components/ScrollableFeature',
+	title: 'Front Containers/ScrollableFeature',
 	parameters: {
 		chromatic: {
 			viewports: [
@@ -133,10 +133,7 @@ const containerPalettes = [
 	'SombreAltPalette',
 	'SpecialReportAltPalette',
 	'Branded',
-] as const satisfies readonly Omit<
-	DCRContainerPalette,
-	'MediaPalette' | 'PodcastPalette'
->[];
+] as const satisfies readonly DCRContainerPalette[];
 
 export const WithSpecialPaletteVariations = {
 	parameters: {

@@ -72,6 +72,38 @@ const getOptimisedPosterImage = (mainImage: string): string => {
 	});
 };
 
+/**
+ * Runs a series of browser-specific checks to determine if the video has audio.
+ */
+const doesVideoHaveAudio = (video: HTMLVideoElement): boolean => {
+	// If there exists a browser that does not support any of these properties, we are
+	// unable to detect whether the video has audio. Therefore, we assume it has audio,
+	// so that the unmute/mute icon is displayed.
+	if (
+		!('mozHasAudio' in video) &&
+		!('webkitAudioDecodedByteCount' in video) &&
+		!('audioTracks' in video)
+	) {
+		// Gather data on what browsers do not support these properties.
+		window.guardian.modules.sentry.reportError(
+			new Error(
+				'Could not determine if video has audio. This is likely due to the browser not supporting the necessary properties.',
+			),
+			'loop-video',
+		);
+
+		return true;
+	}
+
+	return (
+		('mozHasAudio' in video && Boolean(video.mozHasAudio)) ||
+		('webkitAudioDecodedByteCount' in video &&
+			Boolean(video.webkitAudioDecodedByteCount)) ||
+		('audioTracks' in video &&
+			Boolean((video.audioTracks as { length: number }).length))
+	);
+};
+
 type Props = {
 	src: string;
 	atomId: string;
@@ -84,6 +116,7 @@ type Props = {
 	fallbackImageLoading: CardPictureProps['loading'];
 	fallbackImageAlt: CardPictureProps['alt'];
 	fallbackImageAspectRatio: CardPictureProps['aspectRatio'];
+	linkTo: string;
 };
 
 export const LoopVideo = ({
@@ -98,22 +131,24 @@ export const LoopVideo = ({
 	fallbackImageLoading,
 	fallbackImageAlt,
 	fallbackImageAspectRatio,
+	linkTo,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
 	const vidRef = useRef<HTMLVideoElement>(null);
 	const [isPlayable, setIsPlayable] = useState(false);
 	const [isMuted, setIsMuted] = useState(true);
+	const [hasAudio, setHasAudio] = useState(true);
 	const [showPlayIcon, setShowPlayIcon] = useState(false);
 	const [preloadPartialData, setPreloadPartialData] = useState(false);
 	const [showPosterImage, setShowPosterImage] = useState<boolean>(false);
 	const [currentTime, setCurrentTime] = useState(0);
 	const [playerState, setPlayerState] =
 		useState<(typeof PLAYER_STATES)[number]>('NOT_STARTED');
-
 	const [isAutoplayAllowed, setIsAutoplayAllowed] = useState<boolean | null>(
 		null,
 	);
+	const [hasPageBecomeActive, setHasPageBecomeActive] = useState(false);
 
 	/**
 	 * Keep a track of whether the video has been in view. We only
@@ -190,13 +225,7 @@ export const LoopVideo = ({
 		/>
 	);
 
-	/**
-	 * Setup.
-	 *
-	 * 1. Register the user's motion preferences.
-	 * 2. Creates event listeners to control playback when there are multiple videos.
-	 */
-	useEffect(() => {
+	const doesUserPermitAutoplay = (): boolean => {
 		/**
 		 * The user indicates a preference for reduced motion: https://web.dev/articles/prefers-reduced-motion
 		 */
@@ -204,16 +233,25 @@ export const LoopVideo = ({
 			'(prefers-reduced-motion: reduce)',
 		).matches;
 
+		/**
+		 * The user can set this on their Accessibility Settings page.
+		 * Explicitly `false` when the user has said they don't want autoplay video.
+		 */
 		const autoplayPreference = storage.local.get(
 			'gu.prefs.accessibility.autoplay-video',
 		);
-		/**
-		 * `autoplayPreference` is explicitly `false`
-		 *  when the user has said they don't want autoplay video.
-		 */
-		setIsAutoplayAllowed(
-			!userPrefersReducedMotion && autoplayPreference !== false,
-		);
+
+		return !userPrefersReducedMotion && autoplayPreference !== false;
+	};
+
+	/**
+	 * Setup.
+	 *
+	 * 1. Determine whether we can autoplay video.
+	 * 2. Creates event listeners to control playback when there are multiple videos.
+	 */
+	useEffect(() => {
+		setIsAutoplayAllowed(doesUserPermitAutoplay());
 
 		/**
 		 * Mutes the current video when another video is unmuted
@@ -240,6 +278,28 @@ export const LoopVideo = ({
 			setIsMuted(true);
 		};
 
+		/**
+		 * When the page is restored from BFCache, we need to retrigger autoplay,
+		 * as the video player state will be PAUSED_BY_BROWSER.
+		 */
+		const handleRestoreFromCache = (event: PageTransitionEvent) => {
+			if (event.persisted) {
+				setIsAutoplayAllowed(doesUserPermitAutoplay());
+				setHasPageBecomeActive(true);
+			} else {
+				setHasPageBecomeActive(false);
+			}
+		};
+
+		/**
+		 * When a user navigates away from the page and the page is hidden, the video will be
+		 * paused by the browser, as the video is not visible. (e.g. switched tab, minimised window).
+		 * When the page becomes visible again, we need to retrigger autoplay.
+		 */
+		const handlePageBecomesVisible = () => {
+			setHasPageBecomeActive(true);
+		};
+
 		document.addEventListener(
 			customLoopPlayAudioEventName,
 			handleCustomPlayAudioEvent,
@@ -248,6 +308,14 @@ export const LoopVideo = ({
 			customYoutubePlayEventName,
 			handleCustomPlayYoutubeEvent,
 		);
+		window.addEventListener('pageshow', function (event) {
+			handleRestoreFromCache(event);
+		});
+		document.addEventListener('visibilitychange', () => {
+			if (document.visibilityState === 'visible') {
+				handlePageBecomesVisible();
+			}
+		});
 
 		return () => {
 			document.removeEventListener(
@@ -258,6 +326,12 @@ export const LoopVideo = ({
 				customYoutubePlayEventName,
 				handleCustomPlayYoutubeEvent,
 			);
+			window.removeEventListener('pageshow', function (event) {
+				handleRestoreFromCache(event);
+			});
+			document.removeEventListener('visibilitychange', () => {
+				handlePageBecomesVisible();
+			});
 		};
 	}, [uniqueId]);
 
@@ -277,7 +351,7 @@ export const LoopVideo = ({
 					true,
 				);
 			} catch (error) {
-				console.error('Failed to track video attention:', error);
+				log('dotcom', 'Failed to track video attention:', error);
 			}
 		};
 
@@ -297,6 +371,7 @@ export const LoopVideo = ({
 					component: {
 						componentType: 'LOOP_VIDEO',
 						id: `gu-video-loop-${atomId}`,
+						labels: [linkTo],
 					},
 					action: 'VIEW',
 				},
@@ -305,21 +380,36 @@ export const LoopVideo = ({
 
 			setHasBeenInView(true);
 		}
-	}, [isInView, hasBeenInView, atomId]);
+	}, [isInView, hasBeenInView, atomId, linkTo]);
 
 	/**
-	 * Autoplay the video when it comes into view.
+	 * Handle play/pause, when instigated by the browser.
 	 */
 	useEffect(() => {
-		if (!vidRef.current || isAutoplayAllowed === false) {
+		if (!vidRef.current || !isPlayable) {
 			return;
 		}
 
+		/**
+		 * Stops playback when the video is scrolled out of view.
+		 */
+		const isNoLongerInView =
+			playerState === 'PLAYING' && hasBeenInView && isInView === false;
+		if (isNoLongerInView) {
+			pauseVideo('PAUSED_BY_INTERSECTION_OBSERVER');
+			return;
+		}
+
+		/**
+		 * Autoplay/resume playback when the player comes into view or when
+		 * the page has been restored from the BFCache.
+		 */
 		if (
+			isAutoplayAllowed &&
 			isInView &&
-			isPlayable &&
 			(playerState === 'NOT_STARTED' ||
-				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER')
+				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' ||
+				(hasPageBecomeActive && playerState === 'PAUSED_BY_BROWSER'))
 		) {
 			/**
 			 * Check if the video has not been in view before tracking the play.
@@ -329,6 +419,7 @@ export const LoopVideo = ({
 				ophanTrackerWeb(atomId, 'loop')('play');
 			}
 
+			setHasPageBecomeActive(false);
 			void playVideo();
 		}
 	}, [
@@ -338,33 +429,9 @@ export const LoopVideo = ({
 		playerState,
 		playVideo,
 		hasBeenInView,
+		hasPageBecomeActive,
 		atomId,
 	]);
-
-	/**
-	 * Stops playback when the video is scrolled out of view.
-	 * Resumes playback when the video is back in the viewport.
-	 */
-	useEffect(() => {
-		if (!vidRef.current || !hasBeenInView) return;
-
-		const isNoLongerInView =
-			playerState === 'PLAYING' && isInView === false;
-		if (isNoLongerInView) {
-			pauseVideo('PAUSED_BY_INTERSECTION_OBSERVER');
-		}
-
-		/**
-		 * If a user action paused the video, they have indicated
-		 * that they don't want to watch the video. Therefore, don't
-		 * resume the video when it comes back in view.
-		 */
-		const isBackInView =
-			playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' && isInView;
-		if (isBackInView) {
-			void playVideo();
-		}
-	}, [isInView, hasBeenInView, playerState, playVideo]);
 
 	/**
 	 * Show the play icon when the video is not playing, except for when it is scrolled
@@ -409,6 +476,12 @@ export const LoopVideo = ({
 	if (adapted) {
 		return FallbackImageComponent;
 	}
+
+	const handleLoadedData = () => {
+		if (vidRef.current) {
+			setHasAudio(doesVideoHaveAudio(vidRef.current));
+		}
+	};
 
 	const handleCanPlay = () => {
 		if (!isPlayable) {
@@ -541,13 +614,14 @@ export const LoopVideo = ({
 				isPlayable={isPlayable}
 				playerState={playerState}
 				isMuted={isMuted}
+				handleLoadedData={handleLoadedData}
 				handleCanPlay={handleCanPlay}
 				handlePlayPauseClick={handlePlayPauseClick}
 				handleAudioClick={handleAudioClick}
 				handleKeyDown={handleKeyDown}
 				handlePause={handlePause}
 				onError={onError}
-				AudioIcon={AudioIcon}
+				AudioIcon={hasAudio ? AudioIcon : null}
 				preloadPartialData={preloadPartialData}
 				showPlayIcon={showPlayIcon}
 			/>

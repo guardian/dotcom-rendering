@@ -17,6 +17,7 @@ type Props = {
 	containerType: DCRContainerType;
 	aspectRatio: AspectRatio;
 	sectionId: string;
+	isInOpinionNoAvatarVariant?: boolean;
 };
 
 /**
@@ -35,6 +36,7 @@ export const ScrollableMedium = ({
 	showAge,
 	aspectRatio,
 	sectionId,
+	isInOpinionNoAvatarVariant,
 }: Props) => {
 	return (
 		<ScrollableCarousel
@@ -51,7 +53,12 @@ export const ScrollableMedium = ({
 				return (
 					<ScrollableCarousel.Item key={trail.url}>
 						<FrontCard
-							trail={trail}
+							trail={{
+								...trail,
+								avatarUrl: isInOpinionNoAvatarVariant
+									? undefined
+									: trail.avatarUrl,
+							}}
 							imageLoading={imageLoading}
 							absoluteServerTimes={!!absoluteServerTimes}
 							containerPalette={containerPalette}
@@ -61,9 +68,9 @@ export const ScrollableMedium = ({
 								desktop: 'xsmall',
 								tablet: 'xxsmall',
 							}}
-							imagePositionOnDesktop={imagePosition}
-							imagePositionOnMobile={imagePosition}
-							imageSize="medium"
+							mediaPositionOnDesktop={imagePosition}
+							mediaPositionOnMobile={imagePosition}
+							mediaSize="medium"
 							trailText={undefined} // unsupported
 							supportingContent={undefined} // unsupported
 							aspectRatio={aspectRatio}

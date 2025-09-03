@@ -12,6 +12,7 @@ import { BrazeMessaging } from './BrazeMessaging.importable';
 import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
 import { FocusStyles } from './FocusStyles.importable';
+import { GoogleOneTap, isInGoogleOneTapTest } from './GoogleOneTap.importable';
 import { Island } from './Island';
 import { Metrics } from './Metrics.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
@@ -80,9 +81,9 @@ export const FrontPage = ({ front, NAV }: Props) => {
 					pageIsSensitive={front.config.isSensitive}
 					isDev={!!front.config.isDev}
 					serverSideTests={front.config.abTests}
+					serverSideABTests={front.config.serverSideABTests}
 				/>
 			</Island>
-
 			<Island priority="critical">
 				<SetAdTargeting adTargeting={adTargeting} />
 			</Island>
@@ -92,6 +93,11 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			<Island priority="feature" defer={{ until: 'idle' }}>
 				<ReaderRevenueDev shouldHideReaderRevenue={false} />
 			</Island>
+			{isInGoogleOneTapTest(front.config.abTests) && (
+				<Island priority="enhancement" defer={{ until: 'idle' }}>
+					<GoogleOneTap />
+				</Island>
+			)}
 			{darkModeAvailable && (
 				<DarkModeMessage>
 					Dark mode is a work-in-progress.

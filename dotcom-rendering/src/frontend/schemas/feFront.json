@@ -68,6 +68,9 @@
                     "description": "Narrowest representation of the server-side tests\nobject shape, which is [defined in `frontend`](https://github.com/guardian/frontend/blob/23743723030a041e4f4f59fa265ee2be0bb51825/common/app/experiments/ExperimentsDefinition.scala#L24-L26).\n\n**Note:** This type is not support by JSON-schema, it evaluates as `object`",
                     "type": "object"
                 },
+                "serverSideABTests": {
+                    "$ref": "#/definitions/Record<string,string>"
+                },
                 "pbIndexSites": {
                     "type": "array",
                     "items": {
@@ -333,6 +336,7 @@
                 "section",
                 "sentryHost",
                 "sentryPublicApiKey",
+                "serverSideABTests",
                 "sharedAdTargeting",
                 "shouldHideAdverts",
                 "stage",
@@ -3358,7 +3362,6 @@
                 "dynamic/fast",
                 "dynamic/package",
                 "dynamic/slow",
-                "dynamic/slow-mpu",
                 "fixed/large/slow-XIV",
                 "fixed/medium/fast-XI",
                 "fixed/medium/fast-XII",
@@ -3373,7 +3376,6 @@
                 "fixed/small/slow-V-mpu",
                 "fixed/small/slow-V-third",
                 "fixed/thrasher",
-                "fixed/video",
                 "flexible/general",
                 "flexible/special",
                 "nav/list",
@@ -3613,6 +3615,9 @@
             }
         },
         "SharedAdTargeting": {
+            "type": "object"
+        },
+        "Record<string,string>": {
             "type": "object"
         },
         "StageType": {

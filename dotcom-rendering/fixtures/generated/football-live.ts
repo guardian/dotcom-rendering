@@ -1004,7 +1004,6 @@ export const footballData: FEFootballMatchListPage = {
 			prebidOzone: true,
 			ampLiveblogSwitch: false,
 			ampAmazon: false,
-			prebidAdYouLike: true,
 			mostViewedFronts: true,
 			abA9BidResponseWinner: true,
 			optOutAdvertising: true,
@@ -1052,6 +1051,7 @@ export const footballData: FEFootballMatchListPage = {
 		abTests: {
 			europeBetaFrontTest2Variant: 'variant',
 		},
+		serverSideABTests: {},
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		stage: 'PROD',
 		frontendAssetsFullURL: 'https://assets.guim.co.uk/',

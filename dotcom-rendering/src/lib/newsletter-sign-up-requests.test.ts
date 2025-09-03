@@ -63,6 +63,7 @@ describe('requestMultipleSignUps', () => {
 			TEST_EMAIL,
 			TEST_NEWSLETTER_IDS,
 			TEST_RECAPTCHA_TOKEN,
+			true,
 		);
 		const [url, requestInit]: [string, RequestInit | undefined] = (
 			global.fetch as jest.Mock
@@ -88,6 +89,7 @@ describe('requestMultipleSignUps', () => {
 			TEST_EMAIL,
 			TEST_NEWSLETTER_IDS,
 			TEST_RECAPTCHA_TOKEN,
+			true,
 		);
 
 		const [, requestInit]: [string, RequestInit | undefined] = (
