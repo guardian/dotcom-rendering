@@ -1,5 +1,9 @@
 import { submitComponentEvent as submitComponentEventMock } from '../client/ophan/ophan';
-import { getRedirectUrl, initializeFedCM } from './GoogleOneTap.importable';
+import {
+	extractEmailFromToken,
+	getRedirectUrl,
+	initializeFedCM,
+} from './GoogleOneTap.importable';
 
 jest.mock('../client/ophan/ophan', () => ({
 	submitComponentEvent: jest.fn(),
@@ -36,38 +40,52 @@ describe('GoogleOneTap', () => {
 		expect(
 			getRedirectUrl({
 				stage: 'PROD',
-				token: 'test-token',
+				signInEmail: 'valid@email.com',
 				currentLocation: 'https://www.theguardian.com/uk',
 			}),
 		).toEqual(
-			'https://profile.theguardian.com/signin/google?token=test-token&returnUrl=https%3A%2F%2Fwww.theguardian.com%2Fuk',
+			'https://profile.theguardian.com/signin/google?signInEmail=valid%40email.com&returnUrl=https%3A%2F%2Fwww.theguardian.com%2Fuk',
 		);
 
 		expect(
 			getRedirectUrl({
 				stage: 'CODE',
-				token: 'test-token',
+				signInEmail: 'valid@email.com',
 				currentLocation: 'https://m.code.dev-theguardian.com/uk',
 			}),
 		).toEqual(
-			'https://profile.code.dev-theguardian.com/signin/google?token=test-token&returnUrl=https%3A%2F%2Fm.code.dev-theguardian.com%2Fuk',
+			'https://profile.code.dev-theguardian.com/signin/google?signInEmail=valid%40email.com&returnUrl=https%3A%2F%2Fm.code.dev-theguardian.com%2Fuk',
 		);
 
 		expect(
 			getRedirectUrl({
 				stage: 'DEV',
-				token: 'test-token',
+				signInEmail: 'valid@email.com',
 				currentLocation:
 					'http://localhost/Front/https://m.code.dev-theguardian.com/uk',
 			}),
 		).toEqual(
-			'https://profile.thegulocal.com/signin/google?token=test-token&returnUrl=http%3A%2F%2Flocalhost%2FFront%2Fhttps%3A%2F%2Fm.code.dev-theguardian.com%2Fuk',
+			'https://profile.thegulocal.com/signin/google?signInEmail=valid%40email.com&returnUrl=http%3A%2F%2Flocalhost%2FFront%2Fhttps%3A%2F%2Fm.code.dev-theguardian.com%2Fuk',
 		);
+	});
+
+	it('should return email address from a valid JWT token', () => {
+		expect(
+			extractEmailFromToken(
+				'NULL.eyJlbWFpbCI6InZhbGlkQGVtYWlsLmNvbSJ9.NULL',
+			),
+		).toEqual('valid@email.com');
+	});
+
+	it('should return undefined from a malformed JWT token', () => {
+		expect(extractEmailFromToken('NULL')).toEqual(undefined);
 	});
 
 	it('should initializeFedCM and redirect to Gateway with token on success', async () => {
 		const navigatorGet = jest.fn(() =>
-			Promise.resolve({ token: 'test-token' }),
+			Promise.resolve({
+				token: 'NULL.eyJlbWFpbCI6InZhbGlkQGVtYWlsLmNvbSJ9.NULL',
+			}),
 		);
 		const locationReplace = jest.fn();
 
@@ -83,7 +101,8 @@ describe('GoogleOneTap', () => {
 				context: 'continue',
 				providers: [
 					{
-						clientId: '774465807556.apps.googleusercontent.com',
+						clientId:
+							'774465807556-4d50ur6svcjj90l7fe6i0bnp4t4qhkga.apps.googleusercontent.com',
 						configURL: 'https://accounts.google.com/gsi/fedcm.json',
 					},
 				],
@@ -92,7 +111,7 @@ describe('GoogleOneTap', () => {
 		});
 
 		expect(locationReplace).toHaveBeenCalledWith(
-			'https://profile.theguardian.com/signin/google?token=test-token&returnUrl=https%3A%2F%2Fwww.theguardian.com%2Fuk',
+			'https://profile.theguardian.com/signin/google?signInEmail=valid%40email.com&returnUrl=https%3A%2F%2Fwww.theguardian.com%2Fuk',
 		);
 
 		expect(submitComponentEventMock).toHaveBeenNthCalledWith(
@@ -273,7 +292,7 @@ describe('GoogleOneTap', () => {
 		});
 
 		await initializeFedCM({ isSignedIn: true });
-		
+
 		expect(submitComponentEventMock).toHaveBeenCalledTimes(1);
 		expect(submitComponentEventMock).toHaveBeenCalledWith(
 			{
