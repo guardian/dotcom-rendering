@@ -44,13 +44,31 @@ const getStage = (hostname: string): StageType => {
 	return 'PROD';
 };
 
+/**
+ * Extract the readers email address from a JWT token.
+ *
+ * As we're not using the token for authentication we don't need to verify the signature,
+ * if the user wants to spoof a token it doesn't matter as they can only sign in as themselves.
+ *
+ * @param token A JWT Token
+ * @returns extracted email address
+ */
+export const extractEmailFromToken = (token: string): string | undefined => {
+	const payload = token.split('.')[1];
+	if (!payload) return;
+	const decoded = atob(payload);
+	const parsed = JSON.parse(decoded) as Record<string, unknown>;
+	if (typeof parsed.email !== 'string') return;
+	return parsed.email;
+};
+
 export const getRedirectUrl = ({
 	stage,
-	token,
+	signInEmail,
 	currentLocation,
 }: {
 	stage: StageType;
-	token: string;
+	signInEmail: string;
 	currentLocation: string;
 }): string => {
 	const profileDomain = {
@@ -59,7 +77,7 @@ export const getRedirectUrl = ({
 		DEV: 'https://profile.thegulocal.com',
 	}[stage];
 	const queryParams = new URLSearchParams({
-		token,
+		signInEmail,
 		returnUrl: currentLocation,
 	});
 
@@ -184,6 +202,17 @@ export const initializeFedCM = async ({
 			credentials,
 		});
 
+		const signInEmail = extractEmailFromToken(credentials.token);
+		if (signInEmail) {
+			log('identity', `FedCM ID token for ${signInEmail} received`);
+		} else {
+			log(
+				'identity',
+				'FedCM token received but email could not be extracted from token',
+			);
+			return;
+		}
+
 		await submitComponentEvent(
 			{
 				action: 'SIGN_IN',
@@ -200,7 +229,7 @@ export const initializeFedCM = async ({
 		window.location.replace(
 			getRedirectUrl({
 				stage,
-				token: credentials.token,
+				signInEmail,
 				currentLocation: window.location.href,
 			}),
 		);
