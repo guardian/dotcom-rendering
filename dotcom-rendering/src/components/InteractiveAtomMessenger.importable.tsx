@@ -62,11 +62,18 @@ export const InteractiveAtomMessenger = ({ id }: Props) => {
 		if (!iframe) return;
 		if (!container) return;
 
+		let timeout: ReturnType<typeof requestAnimationFrame> | null = null;
+
 		const scrollListener = () => {
-			const rect = container.getBoundingClientRect();
-			if (rect.top > 0) return setScroll(0);
-			if (rect.top < -rect.height) return setScroll(1);
-			setScroll(-rect.top);
+			if (timeout != null) {
+				cancelAnimationFrame(timeout);
+			}
+			timeout = requestAnimationFrame(() => {
+				const rect = container.getBoundingClientRect();
+				if (rect.top > 0) return setScroll(0);
+				if (rect.top < -rect.height) return setScroll(1);
+				setScroll(-rect.top);
+			});
 		};
 
 		const messageListener = (event: MessageEvent<unknown>) => {
@@ -89,10 +96,11 @@ export const InteractiveAtomMessenger = ({ id }: Props) => {
 			}
 		};
 
-		window.addEventListener('scroll', scrollListener);
+		window.addEventListener('scroll', scrollListener, { passive: true });
 		window.addEventListener('message', messageListener);
 
 		return () => {
+			if (timeout != null) cancelAnimationFrame(timeout);
 			window.removeEventListener('scroll', scrollListener);
 			window.removeEventListener('message', messageListener);
 		};
