@@ -32,7 +32,7 @@ const clientSideTestsToForceMetrics: ABTest[] = [
 	/* keep array multi-line */
 ];
 
-const shouldCollectMetricsForBetaTest = (testParticipations: string[]) => {
+const shouldCollectMetricsForBetaTests = (testParticipations: string[]) => {
 	const participationConfigs = ABTests.filter((test) =>
 		testParticipations.includes(test.name),
 	);
@@ -101,7 +101,7 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 
 	const betaParticipations = betaABTest?.getParticipations() ?? {};
 
-	const collectBetaTestMetrics = shouldCollectMetricsForBetaTest(
+	const collectBetaTestMetrics = shouldCollectMetricsForBetaTests(
 		Object.keys(betaParticipations),
 	);
 

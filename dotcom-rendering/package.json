@@ -19,7 +19,6 @@
 		"build-storybook": "storybook build"
 	},
 	"dependencies": {
-		"ab-testing": "workspace:ab-testing",
 		"@aws-sdk/client-cloudwatch": "3.621.0",
 		"@babel/helper-compilation-targets": "7.27.2",
 		"@braze/web-sdk": "5.8.1",
@@ -99,6 +98,7 @@
 		"@types/webpack-env": "1.18.8",
 		"@types/webpack-node-externals": "3.0.4",
 		"@types/youtube": "0.0.50",
+		"ab-testing": "workspace:ab-testing",
 		"ajv": "8.17.1",
 		"ajv-formats": "2.1.1",
 		"amphtml-validator": "1.0.35",

@@ -37,8 +37,9 @@ type ABTest = {
 	audienceSpace?: 'A' | 'B' | 'C';
 	/** Test group definition */
 	groups: string[];
-	/** For client-side tests only. Bypasses sampling to force metrics collection for this test
-	 *  See DCR Metrics component for end usage
+	/** For client-side tests only
+	 * Bypasses sampling to force metrics collection for this test
+	 * See DCR Metrics component for end usage
 	 */
 	shouldForceMetricsCollection?: boolean;
 };
