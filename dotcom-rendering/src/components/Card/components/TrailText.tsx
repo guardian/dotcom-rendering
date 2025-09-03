@@ -11,14 +11,16 @@ import { palette } from '../../../palette';
 
 export type TrailTextSize = 'regular' | 'large';
 
-const trailTextStyles = css`
-	display: flex;
-	flex-direction: column;
+const trailTextStyles = (hideUntil?: 'tablet' | 'desktop' | 'mobile') => {
+	return css`
+		display: flex;
+		flex-direction: column;
 
-	${until.tablet} {
-		display: none;
-	}
-`;
+		${hideUntil === 'mobile' ? until.mobile : until.tablet} {
+			display: none;
+		}
+	`;
+};
 
 const bottomPadding = css`
 	padding-bottom: ${space[2]}px;
@@ -44,7 +46,7 @@ type Props = {
 	/** Optionally overrides the trail text colour */
 	trailTextColour?: string;
 	/** Controls visibility of trail text on various breakpoints */
-	hideUntil?: 'tablet' | 'desktop';
+	hideUntil?: 'tablet' | 'desktop' | 'mobile';
 	/** Defaults to `true`. Adds padding to the bottom of the trail text */
 	padBottom?: boolean;
 	/** Adds padding to the top of the trail text */
@@ -62,7 +64,7 @@ export const TrailText = ({
 	const trailText = (
 		<div
 			css={[
-				trailTextStyles,
+				trailTextStyles(hideUntil),
 				css`
 					color: ${trailTextColour};
 				`,

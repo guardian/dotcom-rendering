@@ -7361,9 +7361,21 @@ const paletteColours = {
 		light: numberedListTitleLight,
 		dark: numberedListTitleDark,
 	},
+	'--onward-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[0],
+	},
+	'--onward-card-background': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[20],
+	},
 	'--onward-content-border': {
 		light: onwardContentBorderLight,
 		dark: () => sourcePalette.neutral[20],
+	},
+	'--onward-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
 	},
 	'--pagination-text': {
 		light: paginationTextLight,

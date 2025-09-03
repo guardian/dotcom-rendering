@@ -18,6 +18,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Caption } from '../components/Caption';
 import { Carousel } from '../components/Carousel.importable';
 import { DiscussionLayout } from '../components/DiscussionLayout';
+import { FetchOnwardsData } from '../components/FetchOnwardsData.importable';
 import { Footer } from '../components/Footer';
 import { DesktopAdSlot, MobileAdSlot } from '../components/GalleryAdSlots';
 import { GalleryImage } from '../components/GalleryImage';
@@ -379,6 +380,20 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						frontendData.showBottomSocialButtons && isWeb
 					}
 				/>
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<FetchOnwardsData
+						url={`${gallery.frontendData.config.ajaxUrl}/gallery/most-viewed.json?dcr=true`} // TODO: Fix the url for the app version too
+						limit={5}
+						onwardsSource={'more-galleries'}
+						format={format}
+						discussionApiUrl={discussionApiUrl}
+						absoluteServerTimes={
+							switches['absoluteServerTimes'] ?? false
+						}
+						renderingTarget={renderingTarget}
+						isAdFreeUser={frontendData.isAdFreeUser}
+					/>
+				</Island>
 			</main>
 			{/* More galleries container */}
 			{showMerchandisingHigh && (

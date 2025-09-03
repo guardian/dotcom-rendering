@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { isNonNullable } from '@guardian/libs';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
-import { decideTrail } from '../lib/decideTrail';
+import { decideTrail, decideTrailWithMasterImage } from '../lib/decideTrail';
 import { useApi } from '../lib/useApi';
 import { addDiscussionIds } from '../lib/useCommentCount';
 import { palette } from '../palette';
@@ -9,6 +9,7 @@ import type { OnwardsSource } from '../types/onwards';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { FETrailType, TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
+import { MoreGalleries } from './MoreGalleries';
 import { Placeholder } from './Placeholder';
 
 type Props = {
@@ -40,11 +41,12 @@ const buildTrails = (
 	trails: FETrailType[],
 	trailLimit: number,
 	isAdFreeUser: boolean,
+	withMasterImage = false,
 ): TrailType[] => {
 	return trails
 		.filter((trailType) => !(isTrailPaidContent(trailType) && isAdFreeUser))
 		.slice(0, trailLimit)
-		.map(decideTrail);
+		.map(withMasterImage ? decideTrailWithMasterImage : decideTrail);
 };
 
 export const FetchOnwardsData = ({
@@ -83,22 +85,32 @@ export const FetchOnwardsData = ({
 
 	return (
 		<div css={minHeight}>
-			<Carousel
-				heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
-				trails={buildTrails(data.trails, limit, isAdFreeUser)}
-				description={data.description}
-				onwardsSource={onwardsSource}
-				format={format}
-				leftColSize={
-					format.design === ArticleDesign.LiveBlog ||
-					format.design === ArticleDesign.DeadBlog
-						? 'wide'
-						: 'compact'
-				}
-				discussionApiUrl={discussionApiUrl}
-				absoluteServerTimes={absoluteServerTimes}
-				renderingTarget={renderingTarget}
-			/>
+			{onwardsSource === 'more-galleries' ? (
+				<MoreGalleries
+					absoluteServerTimes={absoluteServerTimes}
+					trails={buildTrails(data.trails, limit, isAdFreeUser, true)}
+					discussionApiUrl={discussionApiUrl}
+					heading={'More Galleries'}
+					onwardsSource={onwardsSource}
+				/>
+			) : (
+				<Carousel
+					heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
+					trails={buildTrails(data.trails, limit, isAdFreeUser)}
+					description={data.description}
+					onwardsSource={onwardsSource}
+					format={format}
+					leftColSize={
+						format.design === ArticleDesign.LiveBlog ||
+						format.design === ArticleDesign.DeadBlog
+							? 'wide'
+							: 'compact'
+					}
+					discussionApiUrl={discussionApiUrl}
+					absoluteServerTimes={absoluteServerTimes}
+					renderingTarget={renderingTarget}
+				/>
+			)}
 		</div>
 	);
 };
