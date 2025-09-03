@@ -177,6 +177,12 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		tracking.abTestVariant.includes('COLLAPSABLE_V1') ||
 		tracking.abTestVariant.includes('COLLAPSABLE_V2_MAYBE_LATER');
 
+	const contextClassName = tracking.abTestVariant.includes(
+		'COLLAPSABLE_V2_MAYBE_LATER',
+	)
+		? 'maybe-later'
+		: '';
+
 	const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
 	const handleSetIsCollapsed = (collapsed: boolean) => {
@@ -322,6 +328,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 				iosAppBannerPresent,
 				templateSettings.containerSettings.textColor,
 			)}
+			className={contextClassName}
 		>
 			<div
 				css={
@@ -425,36 +432,16 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									secondaryCtaSettings={
 										templateSettings.secondaryCtaSettings
 									}
+									onCloseClick={
+										isMaybeLaterVariant &&
+										isCollapsed &&
+										typeof onCloseClick === 'function'
+											? onCloseClick
+											: undefined
+									}
 								/>
 							</div>
 						</div>
-						{isMaybeLaterVariant &&
-							isCollapsed &&
-							typeof onCloseClick === 'function' && (
-								<div
-									css={styles.maybeLaterContainer(
-										cardsImageOrSpaceTemplateString,
-									)}
-								>
-									<LinkButton
-										onClick={onCloseClick}
-										size="small"
-										priority="tertiary"
-										cssOverrides={[
-											buttonStyles(
-												templateSettings.secondaryCtaSettings,
-											),
-											styles.maybeLaterButton,
-										]}
-										theme={buttonThemes(
-											templateSettings.secondaryCtaSettings,
-											'tertiary',
-										)}
-									>
-										Maybe later
-									</LinkButton>
-								</div>
-							)}
 					</>
 				)}
 
@@ -547,23 +534,26 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								{isMaybeLaterVariant &&
 									isCollapsed &&
 									typeof onCloseClick === 'function' && (
-										<LinkButton
-											onClick={onCloseClick}
-											size="small"
-											priority="tertiary"
-											cssOverrides={[
-												buttonStyles(
-													templateSettings.secondaryCtaSettings,
-												),
-												styles.maybeLaterButton,
-											]}
-											theme={buttonThemes(
-												templateSettings.secondaryCtaSettings,
-												'tertiary',
-											)}
+										<div
+											css={styles.maybeLaterButtonSizing}
 										>
-											Maybe later
-										</LinkButton>
+											<LinkButton
+												onClick={onCloseClick}
+												priority="tertiary"
+												cssOverrides={[
+													buttonStyles(
+														templateSettings.secondaryCtaSettings,
+													),
+													styles.maybeLaterButton,
+												]}
+												theme={buttonThemes(
+													templateSettings.secondaryCtaSettings,
+													'tertiary',
+												)}
+											>
+												Maybe later
+											</LinkButton>
+										</div>
 									)}
 							</div>
 						</div>
@@ -626,7 +616,7 @@ const styles = {
 				);
 			grid-template-rows: auto auto auto;
 			grid-template-areas:
-				'.	copy-container						close-button						.'
+				'.	copy-container						close-button			close-button'
 				'.	${cardsImageOrSpaceTemplateString}	${cardsImageOrSpaceTemplateString}	.'
 				'.	cta-container						cta-container						.';
 		}
@@ -782,6 +772,10 @@ const styles = {
 		${from.desktop} {
 			margin-top: ${space[5]}px;
 		}
+
+		.maybe-later & {
+			flex-direction: row-reverse;
+		}
 	`,
 	headerContainer: (background: string, bannerHasImage: boolean) => css`
 		align-self: stretch;
@@ -906,6 +900,7 @@ const styles = {
 			margin-left: 0px;
 			flex-direction: row;
 			flex-wrap: nowrap;
+			justify-content: start;
 		}
 	`,
 	bodyCopyOverrides: css`
@@ -987,6 +982,10 @@ const styles = {
 		gap: ${space[4]}px;
 		margin-top: ${space[3]}px;
 
+		.maybe-later & {
+			flex-direction: row;
+		}
+
 		${until.phablet} {
 			width: 100vw;
 			position: sticky;
@@ -1018,7 +1017,7 @@ const styles = {
 		${from.desktop} {
 			flex-direction: row;
 			margin-bottom: ${space[6]}px;
-			gap: 0;
+			gap: ${space[2]}px;
 			margin-top: ${isCollapsed ? `${space[6]}px` : `${space[3]}px`};
 			margin-right: 0;
 			margin-left: 0;
@@ -1042,18 +1041,14 @@ const styles = {
 		align-self: end;
 		margin-bottom: ${space[2]}px;
 	`,
-	maybeLaterButton: css`
-		width: 92px;
-
+	maybeLaterButtonSizing: css`
+		width: 142px;
 		${from.desktop} {
 			width: 118px;
 		}
-
-		/* ensure it doesn't adopt the full-width rule */
-		> a,
-		& {
-			width: inherit;
-		}
+	`,
+	maybeLaterButton: css`
+		width: 100%;
 	`,
 	articleCountContainer: css`
 		margin-bottom: ${space[3]}px;
