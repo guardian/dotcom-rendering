@@ -33,15 +33,10 @@ const optInCheckboxTextSmall = css`
 	}
 `;
 
-const recaptchaContainerStyle = (
-	visibleRecaptcha: boolean,
-	firstInteractionOccurred: boolean,
-) => css`
-	margin-bottom: ${visibleRecaptcha && firstInteractionOccurred
-		? space[3]
-		: 0}px;
-	padding: ${visibleRecaptcha && firstInteractionOccurred ? space[2] : 0}px;
-	background-color: ${visibleRecaptcha && firstInteractionOccurred
+const recaptchaContainerStyle = (showRecaptchaContainer: boolean) => css`
+	margin-bottom: ${showRecaptchaContainer ? space[3] : 0}px;
+	padding: ${showRecaptchaContainer ? space[2] : 0}px;
+	background-color: ${showRecaptchaContainer
 		? palette.neutral[93]
 		: 'transparent'};
 
@@ -114,8 +109,7 @@ export const ManyNewslettersFormFields: FC<ManyNewslettersFormFieldsProps> = ({
 			{useReCaptcha && !!captchaSiteKey && (
 				<div
 					css={recaptchaContainerStyle(
-						visibleRecaptcha,
-						firstInteractionOccurred,
+						visibleRecaptcha && firstInteractionOccurred,
 					)}
 				>
 					{(!visibleRecaptcha || firstInteractionOccurred) && (
