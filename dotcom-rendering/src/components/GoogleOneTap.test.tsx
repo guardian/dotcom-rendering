@@ -94,7 +94,7 @@ describe('GoogleOneTap', () => {
 			replace: locationReplace,
 		});
 
-		await initializeFedCM({ isSignedIn: false });
+		await initializeFedCM({ isSignedIn: false, countryCode: 'IE' });
 
 		expect(navigatorGet).toHaveBeenCalledWith({
 			identity: {
@@ -150,7 +150,7 @@ describe('GoogleOneTap', () => {
 			replace: locationReplace,
 		});
 
-		await initializeFedCM({ isSignedIn: false });
+		await initializeFedCM({ isSignedIn: false, countryCode: 'IE' });
 
 		expect(submitComponentEventMock).toHaveBeenNthCalledWith(
 			1,
@@ -205,9 +205,9 @@ describe('GoogleOneTap', () => {
 			replace: locationReplace,
 		});
 
-		await expect(initializeFedCM({ isSignedIn: false })).rejects.toThrow(
-			'window.navigator.credentials.get failed',
-		);
+		await expect(
+			initializeFedCM({ isSignedIn: false, countryCode: 'IE' }),
+		).rejects.toThrow('window.navigator.credentials.get failed');
 
 		expect(submitComponentEventMock).toHaveBeenNthCalledWith(
 			1,
@@ -249,7 +249,7 @@ describe('GoogleOneTap', () => {
 			enableFedCM: false,
 		});
 
-		await initializeFedCM({ isSignedIn: false });
+		await initializeFedCM({ isSignedIn: false, countryCode: 'IE' });
 
 		expect(submitComponentEventMock).toHaveBeenCalledTimes(1);
 		expect(submitComponentEventMock).toHaveBeenCalledWith(
@@ -276,13 +276,13 @@ describe('GoogleOneTap', () => {
 			replace: locationReplace,
 		});
 
-		await initializeFedCM({ isSignedIn: true });
+		await initializeFedCM({ isSignedIn: true, countryCode: 'IE' });
 
 		expect(navigatorGet).not.toHaveBeenCalled();
 		expect(locationReplace).not.toHaveBeenCalled();
 	});
 
-	it('should not initializeFedCM when user is not in test', async () => {
+	it('should not initializeFedCM when user is not in Ireland', async () => {
 		const navigatorGet = jest.fn();
 		const locationReplace = jest.fn();
 
@@ -291,7 +291,7 @@ describe('GoogleOneTap', () => {
 			replace: locationReplace,
 		});
 
-		await initializeFedCM({ isSignedIn: true });
+		await initializeFedCM({ isSignedIn: false, countryCode: 'GB' });
 
 		expect(submitComponentEventMock).toHaveBeenCalledTimes(1);
 		expect(submitComponentEventMock).toHaveBeenCalledWith(
