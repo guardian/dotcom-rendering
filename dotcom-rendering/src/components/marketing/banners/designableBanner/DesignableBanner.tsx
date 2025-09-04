@@ -984,6 +984,7 @@ const styles = {
 
 		.maybe-later & {
 			flex-direction: row;
+			padding: ${space[3]}px;
 		}
 
 		${until.phablet} {
