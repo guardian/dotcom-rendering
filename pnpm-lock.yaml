@@ -32,6 +32,8 @@ importers:
         specifier: 2.6.2
         version: 2.6.2
 
+  ab-testing: {}
+
   apps-rendering:
     dependencies:
       '@aws-sdk/client-ssm':
@@ -295,6 +297,9 @@ importers:
       '@guardian/ab-core':
         specifier: 8.0.0
         version: 8.0.0(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/ab-testing':
+        specifier: workspace:ab-testing
+        version: link:../ab-testing
       '@guardian/braze-components':
         specifier: 22.2.0
         version: 22.2.0(@emotion/react@11.14.0)(@guardian/libs@25.3.0)(@guardian/source@10.2.0)(react@18.3.1)
