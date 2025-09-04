@@ -47,6 +47,7 @@ import { palette as schemePalette } from '../palette';
 import type {
 	DCRCollectionType,
 	DCRContainerType,
+	DCRFrontCard,
 	DCRGroupedTrails,
 	Front,
 } from '../types/front';
@@ -99,6 +100,41 @@ const decideLeftContent = (front: Front, collection: DCRCollectionType) => {
 
 	// show nothing!
 	return null;
+};
+
+const stripTrailBrandingIfContainerHasBranding = (
+	collection: DCRCollectionType,
+): DCRCollectionType => {
+	const shouldStripBranding = isPaidContentSameBranding(
+		collection.collectionBranding,
+	);
+	const stripBrandingFromTrails = (trails: DCRFrontCard[]): DCRFrontCard[] =>
+		trails.map((t) => ({
+			...t,
+			branding: undefined,
+		}));
+	const stripBrandingFromGroupedTrails = (
+		grouped: DCRGroupedTrails,
+	): DCRGroupedTrails => {
+		const groupedEntries = Object.entries(grouped).map(([key, value]) => [
+			key,
+			stripBrandingFromTrails(value),
+		]);
+		return Object.fromEntries(groupedEntries) as DCRGroupedTrails;
+	};
+
+	return shouldStripBranding
+		? {
+				...collection,
+				// Remove the branding from each of the cards in a paid content
+				// collection if they are the same.
+				curated: stripBrandingFromTrails(collection.curated),
+				backfill: stripBrandingFromTrails(collection.backfill),
+				// We also need to remove the branding for the cards in grouped
+				// trails for dynamic containers
+				grouped: stripBrandingFromGroupedTrails(collection.grouped),
+		  }
+		: collection;
 };
 
 export const FrontLayout = ({ front, NAV }: Props) => {
@@ -266,7 +302,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					</Island>
 				)}
 
-				{filteredCollections.map((collection, index) => {
+				{filteredCollections.map((rawCollection, index) => {
+					// Strip branding from cards if we are going to show it at the container level instead
+					const collection =
+						stripTrailBrandingIfContainerHasBranding(rawCollection);
+
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(
 						collection.backfill,
@@ -283,48 +323,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						index + 1
 					} | ${ophanName}`;
 					const mostPopularTitle = 'Most popular';
-
-					// Remove the branding from each of the cards in a paid content
-					// collection if they are the same.
-					const trailsWithoutBranding = isPaidContentSameBranding(
-						collection.collectionBranding,
-					)
-						? trails.map((labTrail) => ({
-								...labTrail,
-								branding: undefined,
-						  }))
-						: trails;
-
-					// We also need to remove the branding for the cards in grouped
-					// trails for dynamic containers
-					const groupedWithoutBranding: DCRGroupedTrails = (() => {
-						if (
-							isPaidContentSameBranding(
-								collection.collectionBranding,
-							)
-						) {
-							const groupedTrailsWithoutBranding: DCRGroupedTrails =
-								{
-									snap: [],
-									huge: [],
-									veryBig: [],
-									big: [],
-									standard: [],
-									splash: [],
-								};
-							for (const key of Object.keys(
-								collection.grouped,
-							) as (keyof DCRGroupedTrails)[]) {
-								groupedTrailsWithoutBranding[key] =
-									collection.grouped[key].map((labTrail) => ({
-										...labTrail,
-										branding: undefined,
-									}));
-							}
-							return groupedTrailsWithoutBranding;
-						}
-						return collection.grouped;
-					})();
 
 					if (collection.collectionType === 'scrollable/highlights') {
 						// Highlights are rendered in the Masthead component
@@ -501,7 +499,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									editionId={editionId}
 								>
 									<DecideContainer
-										trails={trailsWithoutBranding}
+										trails={trails}
 										groupedTrails={collection.grouped}
 										containerType={
 											collection.collectionType
@@ -621,8 +619,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								)}
 							>
 								<DecideContainer
-									trails={trailsWithoutBranding}
-									groupedTrails={groupedWithoutBranding}
+									trails={trails}
+									groupedTrails={collection.grouped}
 									containerType={collection.collectionType}
 									containerPalette={
 										collection.containerPalette
