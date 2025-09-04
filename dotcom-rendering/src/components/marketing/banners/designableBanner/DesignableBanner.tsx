@@ -972,6 +972,7 @@ const styles = {
 
 		.maybe-later & {
 			flex-direction: row;
+			flex-wrap: wrap;
 			padding: ${space[3]}px;
 		}
 
@@ -987,7 +988,7 @@ const styles = {
 			margin-left: -${space[3]}px;
 
 			a {
-				width: calc(100% - 24px);
+				flex: 1 1 0;
 			}
 		}
 
@@ -1031,7 +1032,7 @@ const styles = {
 		margin-bottom: ${space[2]}px;
 	`,
 	maybeLaterButtonSizing: css`
-		width: 142px;
+		flex: 1 1 0;
 		${from.desktop} {
 			width: 118px;
 		}
