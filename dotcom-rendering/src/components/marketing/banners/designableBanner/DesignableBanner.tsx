@@ -523,30 +523,26 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 										? mainOrMobileContent.primaryCta.ctaText
 										: 'Continue'}
 								</LinkButton>
-								{isMaybeLaterVariant &&
-									isCollapsed &&
-									typeof onCloseClick === 'function' && (
-										<div
-											css={styles.maybeLaterButtonSizing}
-										>
-											<LinkButton
-												onClick={onCloseClick}
-												priority="tertiary"
-												cssOverrides={[
-													buttonStyles(
-														templateSettings.secondaryCtaSettings,
-													),
-													styles.maybeLaterButton,
-												]}
-												theme={buttonThemes(
+								{isMaybeLaterVariant && isCollapsed && (
+									<div css={styles.maybeLaterButtonSizing}>
+										<LinkButton
+											onClick={onCloseClick}
+											priority="tertiary"
+											cssOverrides={[
+												buttonStyles(
 													templateSettings.secondaryCtaSettings,
-													'tertiary',
-												)}
-											>
-												Maybe later
-											</LinkButton>
-										</div>
-									)}
+												),
+												styles.maybeLaterButton,
+											]}
+											theme={buttonThemes(
+												templateSettings.secondaryCtaSettings,
+												'tertiary',
+											)}
+										>
+											Maybe later
+										</LinkButton>
+									</div>
+								)}
 							</div>
 						</div>
 					)}
