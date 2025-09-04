@@ -428,9 +428,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									templateSettings.secondaryCtaSettings
 								}
 								onCloseClick={
-									isMaybeLaterVariant &&
-									isCollapsed &&
-									typeof onCloseClick === 'function'
+									isMaybeLaterVariant && isCollapsed
 										? onCloseClick
 										: undefined
 								}
