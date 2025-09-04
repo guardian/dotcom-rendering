@@ -155,7 +155,7 @@ type ThreeTierChoiceCardsProps = {
 	setSelectedChoiceCard: Dispatch<SetStateAction<ChoiceCard | undefined>>;
 	choices: ChoiceCard[];
 	id: 'epic' | 'banner'; // uniquely identify this choice cards component to avoid conflicting with others
-	submitComponentEvent?: (componentEvent: ComponentEvent) => Promise<void>;
+	submitComponentEvent?: (componentEvent: ComponentEvent) => void;
 };
 
 export const ThreeTierChoiceCards = ({
