@@ -188,13 +188,9 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	const handleSetIsCollapsed = (collapsed: boolean) => {
 		setIsCollapsed(collapsed);
 		if (collapsed) {
-			if (typeof onCollapseClick === 'function') {
-				(onCollapseClick as () => void)();
-			}
+			onCollapseClick();
 		} else {
-			if (typeof onExpandClick === 'function') {
-				(onExpandClick as () => void)();
-			}
+			onExpandClick();
 		}
 	};
 
@@ -419,30 +415,28 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 				)}
 
 				{!selectedChoiceCard && (
-					<>
-						<div css={styles.outerImageCtaContainer}>
-							<div css={styles.innerImageCtaContainer}>
-								<DesignableBannerCtas
-									mainOrMobileContent={mainOrMobileContent}
-									onPrimaryCtaClick={onCtaClick}
-									onSecondaryCtaClick={onSecondaryCtaClick}
-									primaryCtaSettings={
-										templateSettings.primaryCtaSettings
-									}
-									secondaryCtaSettings={
-										templateSettings.secondaryCtaSettings
-									}
-									onCloseClick={
-										isMaybeLaterVariant &&
-										isCollapsed &&
-										typeof onCloseClick === 'function'
-											? onCloseClick
-											: undefined
-									}
-								/>
-							</div>
+					<div css={styles.outerImageCtaContainer}>
+						<div css={styles.innerImageCtaContainer}>
+							<DesignableBannerCtas
+								mainOrMobileContent={mainOrMobileContent}
+								onPrimaryCtaClick={onCtaClick}
+								onSecondaryCtaClick={onSecondaryCtaClick}
+								primaryCtaSettings={
+									templateSettings.primaryCtaSettings
+								}
+								secondaryCtaSettings={
+									templateSettings.secondaryCtaSettings
+								}
+								onCloseClick={
+									isMaybeLaterVariant &&
+									isCollapsed &&
+									typeof onCloseClick === 'function'
+										? onCloseClick
+										: undefined
+								}
+							/>
 						</div>
-					</>
+					</div>
 				)}
 
 				<div
