@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import {
 	palette,
 	space,
@@ -19,7 +20,9 @@ import { hexColourToString } from '@guardian/support-dotcom-components';
 import type { HexColour } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import type { Dispatch, SetStateAction } from 'react';
+import { useEffect } from 'react';
 import sanitise from 'sanitize-html';
+import { useIsInView } from '../../../lib/useIsInView';
 
 const supportTierChoiceCardStyles = (selected: boolean) => css`
 	display: block;
@@ -151,7 +154,8 @@ type ThreeTierChoiceCardsProps = {
 	selectedChoiceCard: ChoiceCard;
 	setSelectedChoiceCard: Dispatch<SetStateAction<ChoiceCard | undefined>>;
 	choices: ChoiceCard[];
-	id: string; // uniquely identify this choice cards component to avoid conflicting with others
+	id: 'epic' | 'banner'; // uniquely identify this choice cards component to avoid conflicting with others
+	submitComponentEvent?: (componentEvent: ComponentEvent) => Promise<void>;
 };
 
 export const ThreeTierChoiceCards = ({
@@ -159,94 +163,135 @@ export const ThreeTierChoiceCards = ({
 	setSelectedChoiceCard,
 	choices,
 	id,
+	submitComponentEvent,
 }: ThreeTierChoiceCardsProps) => {
+	const [hasBeenSeen, setNode] = useIsInView({
+		debounce: true,
+		threshold: 0,
+	});
+
+	useEffect(() => {
+		if (submitComponentEvent) {
+			void submitComponentEvent({
+				component: {
+					componentType: 'ACQUISITIONS_OTHER',
+					id: `${id}-choice-cards`,
+				},
+				action: 'INSERT',
+			});
+		}
+	}, [id, submitComponentEvent]);
+
+	useEffect(() => {
+		if (hasBeenSeen && submitComponentEvent) {
+			void submitComponentEvent({
+				component: {
+					componentType: 'ACQUISITIONS_OTHER',
+					id: `${id}-choice-cards`,
+				},
+				action: 'VIEW',
+			});
+		}
+	}, [hasBeenSeen, id, submitComponentEvent]);
+
 	return (
-		<RadioGroup
-			cssOverrides={css`
-				margin-top: ${space[6]}px;
-			`}
-		>
-			<Stack space={3}>
-				{choices.map((card) => {
-					const { product, label, benefitsLabel, benefits, pill } =
-						card;
-					const { supportTier } = product;
+		<div ref={setNode}>
+			<RadioGroup
+				cssOverrides={css`
+					margin-top: ${space[6]}px;
+				`}
+			>
+				<Stack space={3}>
+					{choices.map((card) => {
+						const {
+							product,
+							label,
+							benefitsLabel,
+							benefits,
+							pill,
+						} = card;
+						const { supportTier } = product;
 
-					const isSelected = (): boolean => {
-						if (
-							product.supportTier ===
-							selectedChoiceCard.product.supportTier
-						) {
+						const isSelected = (): boolean => {
 							if (
-								product.supportTier !== 'OneOff' &&
-								selectedChoiceCard.product.supportTier !==
-									'OneOff'
+								product.supportTier ===
+								selectedChoiceCard.product.supportTier
 							) {
-								return (
-									product.ratePlan ===
-									selectedChoiceCard.product.ratePlan
-								);
+								if (
+									product.supportTier !== 'OneOff' &&
+									selectedChoiceCard.product.supportTier !==
+										'OneOff'
+								) {
+									return (
+										product.ratePlan ===
+										selectedChoiceCard.product.ratePlan
+									);
+								} else {
+									return true;
+								}
 							} else {
-								return true;
+								return false;
 							}
-						} else {
-							return false;
-						}
-					};
-					const selected = isSelected();
+						};
+						const selected = isSelected();
 
-					// Each radioId must be unique to the component and choice, e.g. "choicecard-epic-Contribution-Monthly"
-					const radioId = `choicecard-${id}-${supportTier}${
-						supportTier !== 'OneOff' ? `-${product.ratePlan}` : ''
-					}`;
+						// Each radioId must be unique to the component and choice, e.g. "choicecard-epic-Contribution-Monthly"
+						const radioId = `choicecard-${id}-${supportTier}${
+							supportTier !== 'OneOff'
+								? `-${product.ratePlan}`
+								: ''
+						}`;
 
-					return (
-						<div
-							key={supportTier}
-							css={css`
-								position: relative;
-								background-color: inherit;
-							`}
-						>
-							{pill && <ChoiceCardPill pill={pill} />}
-							<label
-								css={supportTierChoiceCardStyles(selected)}
-								htmlFor={radioId}
+						return (
+							<div
+								key={supportTier}
+								css={css`
+									position: relative;
+									background-color: inherit;
+								`}
 							>
-								<Radio
-									label={
-										<span
-											dangerouslySetInnerHTML={{
-												__html: sanitise(label),
-											}}
-										/>
-									}
-									id={radioId}
-									value={radioId}
-									cssOverrides={labelOverrideStyles(selected)}
-									supporting={
-										selected && (
-											<SupportingBenefits
-												benefitsLabel={
-													benefitsLabel as
-														| string
-														| undefined
-												}
-												benefits={benefits}
+								{pill && <ChoiceCardPill pill={pill} />}
+								<label
+									css={supportTierChoiceCardStyles(selected)}
+									htmlFor={radioId}
+								>
+									<Radio
+										label={
+											<span
+												dangerouslySetInnerHTML={{
+													__html: sanitise(label),
+												}}
 											/>
-										)
-									}
-									checked={selected}
-									onChange={() => {
-										setSelectedChoiceCard(card);
-									}}
-									theme={customRadioTheme}
-								/>
-							</label>
-						</div>
-					);
-				})}
-			</Stack>
-		</RadioGroup>
+										}
+										id={radioId}
+										value={radioId}
+										cssOverrides={labelOverrideStyles(
+											selected,
+										)}
+										supporting={
+											selected && (
+												<SupportingBenefits
+													benefitsLabel={
+														benefitsLabel as
+															| string
+															| undefined
+													}
+													benefits={benefits}
+												/>
+											)
+										}
+										checked={selected}
+										onChange={() => {
+											setSelectedChoiceCard(card);
+										}}
+										theme={customRadioTheme}
+									/>
+								</label>
+							</div>
+						);
+					})}
+				</Stack>
+			</RadioGroup>
+		</div>
 	);
 };
