@@ -31,7 +31,7 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { ArticleDisplay } from '../lib/articleFormat';
-import { badgeFromBranding, isPaidContentSameBranding } from '../lib/branding';
+import { badgeFromBranding } from '../lib/branding';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { editionList } from '../lib/edition';
@@ -47,8 +47,6 @@ import { palette as schemePalette } from '../palette';
 import type {
 	DCRCollectionType,
 	DCRContainerType,
-	DCRFrontCard,
-	DCRGroupedTrails,
 	Front,
 } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
@@ -100,41 +98,6 @@ const decideLeftContent = (front: Front, collection: DCRCollectionType) => {
 
 	// show nothing!
 	return null;
-};
-
-const stripTrailBrandingIfContainerHasBranding = (
-	collection: DCRCollectionType,
-): DCRCollectionType => {
-	const shouldStripBranding = isPaidContentSameBranding(
-		collection.collectionBranding,
-	);
-	const stripBrandingFromTrails = (trails: DCRFrontCard[]): DCRFrontCard[] =>
-		trails.map((t) => ({
-			...t,
-			branding: undefined,
-		}));
-	const stripBrandingFromGroupedTrails = (
-		grouped: DCRGroupedTrails,
-	): DCRGroupedTrails => {
-		const groupedEntries = Object.entries(grouped).map(([key, value]) => [
-			key,
-			stripBrandingFromTrails(value),
-		]);
-		return Object.fromEntries(groupedEntries) as DCRGroupedTrails;
-	};
-
-	return shouldStripBranding
-		? {
-				...collection,
-				// Remove the branding from each of the cards in a paid content
-				// collection if they are the same.
-				curated: stripBrandingFromTrails(collection.curated),
-				backfill: stripBrandingFromTrails(collection.backfill),
-				// We also need to remove the branding for the cards in grouped
-				// trails for dynamic containers
-				grouped: stripBrandingFromGroupedTrails(collection.grouped),
-		  }
-		: collection;
 };
 
 export const FrontLayout = ({ front, NAV }: Props) => {
@@ -302,11 +265,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					</Island>
 				)}
 
-				{filteredCollections.map((rawCollection, index) => {
-					// Strip branding from cards if we are going to show it at the container level instead
-					const collection =
-						stripTrailBrandingIfContainerHasBranding(rawCollection);
-
+				{filteredCollections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(
 						collection.backfill,
