@@ -1,4 +1,5 @@
 import type { ABTest, ABTestAPI } from '@guardian/ab-core';
+import { ABTests } from '@guardian/ab-testing';
 import {
 	bypassCommercialMetricsSampling,
 	EventTimer,
@@ -9,7 +10,6 @@ import {
 	initCoreWebVitals,
 } from '@guardian/core-web-vitals';
 import { getCookie, isString, isUndefined } from '@guardian/libs';
-import { ABTests } from 'ab-testing';
 import { useCallback, useEffect, useState } from 'react';
 import { useAB, useBetaAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
@@ -32,11 +32,11 @@ const clientSideTestsToForceMetrics: ABTest[] = [
 	/* keep array multi-line */
 ];
 
-const shouldCollectMetricsForBetaTests = (testParticipations: string[]) => {
-	const participationConfigs = ABTests.filter((test) =>
-		testParticipations.includes(test.name),
+const shouldCollectMetricsForBetaTests = (userTestParticipations: string[]) => {
+	const userParticipationConfigs = ABTests.filter((test) =>
+		userTestParticipations.includes(test.name),
 	);
-	return participationConfigs.some(
+	return userParticipationConfigs.some(
 		(test) => test.shouldForceMetricsCollection,
 	);
 };
@@ -99,10 +99,10 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 
 	const userInServerSideTest = Object.keys(tests).length > 0;
 
-	const betaParticipations = betaABTest?.getParticipations() ?? {};
+	const userBetaParticipations = betaABTest?.getParticipations() ?? {};
 
 	const collectBetaTestMetrics = shouldCollectMetricsForBetaTests(
-		Object.keys(betaParticipations),
+		Object.keys(userBetaParticipations),
 	);
 
 	const shouldBypassSampling = useCallback(

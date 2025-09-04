@@ -1,5 +1,5 @@
 {
-	"name": "ab-testing",
+	"name": "@guardian/ab-testing",
 	"version": "1.0.0",
 	"description": "A/B test definitions and configuration",
 	"main": "index.ts",
