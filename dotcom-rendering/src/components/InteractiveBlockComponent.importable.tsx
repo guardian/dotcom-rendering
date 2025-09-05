@@ -131,23 +131,23 @@ const wrapperStyle = ({
 		: ''}
 `;
 
-const datawrapperRoleStyles = (role: RoleType): SerializedStyles | null => {
+const atomRoleStyles = (role: RoleType): SerializedStyles | null => {
 	switch (role) {
 		case 'inline':
-			return datawrapperRoleCss.inline;
+			return atomRoleCss.inline;
 		case 'supporting':
-			return datawrapperRoleCss.supporting;
+			return atomRoleCss.supporting;
 		case 'immersive':
-			return datawrapperRoleCss.immersive;
+			return atomRoleCss.immersive;
 		case 'showcase':
-			return datawrapperRoleCss.showcase;
+			return atomRoleCss.showcase;
 		case 'thumbnail':
 		case 'halfWidth':
 			return null;
 	}
 };
 
-const datawrapperRoleCss = {
+const atomRoleCss = {
 	inline: css`
 		margin-top: ${space[6]}px;
 		margin-bottom: ${space[6]}px;
@@ -183,6 +183,7 @@ const datawrapperRoleCss = {
 	showcase: css`
 		margin-top: ${space[6]}px;
 		margin-bottom: ${space[6]}px;
+		background-color: red;
 
 		${from.leftCol} {
 			margin-bottom: ${space[4]}px;
@@ -440,12 +441,15 @@ export const InteractiveBlockComponent = ({
 					isMainMedia
 						? mainMediaFigureStyles
 						: defaultRoleStyles(role, format),
-					isDatawrapperGraphic ? datawrapperRoleStyles(role) : null,
+					isDatawrapperGraphic || isUploaderEmbedPath
+						? atomRoleStyles(role)
+						: null,
 					wrapperStyle({
 						format,
 						role,
 						loaded,
-						isDatawrapperGraphic,
+						isDatawrapperGraphic:
+							isDatawrapperGraphic || isUploaderEmbedPath,
 					}),
 				]}
 				className={interactiveLegacyFigureClasses(
