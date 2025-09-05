@@ -72,7 +72,7 @@ export const InteractiveAtomMessenger = ({ id }: Props) => {
 				const rect = container.getBoundingClientRect();
 				if (rect.top > 0) return setScroll(0);
 				if (rect.top < -rect.height) return setScroll(1);
-				setScroll(-rect.top);
+				setScroll(-Math.round(rect.top));
 			});
 		};
 

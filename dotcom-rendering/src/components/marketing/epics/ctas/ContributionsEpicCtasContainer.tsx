@@ -55,6 +55,7 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 					setSelectedChoiceCard={setSelectedChoiceCard}
 					choices={choiceCards}
 					id={'epic'}
+					submitComponentEvent={submitComponentEvent}
 				/>
 			)}
 			<ContributionsEpicButtons

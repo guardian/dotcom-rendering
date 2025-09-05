@@ -499,6 +499,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									}
 									choices={choiceCards}
 									id={'banner'}
+									submitComponentEvent={submitComponentEvent}
 								/>
 							)}
 							<div css={styles.ctaContainer(isCollapsed)}>
