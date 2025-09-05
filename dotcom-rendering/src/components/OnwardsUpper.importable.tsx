@@ -303,9 +303,6 @@ export const OnwardsUpper = ({
 		? getContainerDataUrl(pillar, editionId, ajaxUrl)
 		: undefined;
 
-	console.log(`url: ${url}`);
-	console.log(`curatedDataUrl: ${curatedDataUrl}`);
-
 	return (
 		<div css={onwardsWrapper}>
 			{!!url && (

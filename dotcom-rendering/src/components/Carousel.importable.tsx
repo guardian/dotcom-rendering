@@ -880,8 +880,6 @@ export const Carousel = ({
 		return null;
 	}
 
-	console.log('*************************** rendering related contents');
-
 	return (
 		<CarouselColours props={props}>
 			<div

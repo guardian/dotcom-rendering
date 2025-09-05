@@ -34,6 +34,8 @@ interface BaseTrailType {
 	galleryCount?: number;
 }
 
+// export type BaseTrailType = Output<typeof BaseTrailTypeSchema> // TODO
+
 export interface TrailType extends BaseTrailType {
 	palette?: never;
 	format: ArticleFormat;
@@ -64,6 +66,8 @@ export interface FETrailType extends BaseTrailType {
 	masterImage?: string;
 	image?: string;
 }
+
+// export type FETrailType = Output<typeof FETrailTypeSchema>; // TODO
 
 export interface TrailTabType {
 	heading: string;
