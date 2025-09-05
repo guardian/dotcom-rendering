@@ -1012,6 +1012,10 @@ const styles = {
 			margin-right: 0;
 			margin-left: 0;
 
+			.maybe-later & {
+				flex-wrap: nowrap;
+			}
+
 			a {
 				width: 100%;
 			}
