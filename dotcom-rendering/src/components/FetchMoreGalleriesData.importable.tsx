@@ -74,12 +74,7 @@ const buildTrails = (
 		});
 };
 
-const delay = (delayInms: number) => {
-	return new Promise((resolve) => setTimeout(resolve, delayInms));
-};
-
 const fetchJson = async (ajaxUrl: string): Promise<MoreGalleriesResponse> => {
-	await delay(2000);
 	const fetchResponse = await fetch(ajaxUrl);
 	if (!fetchResponse.ok) {
 		throw new Error(`HTTP error! status: ${fetchResponse.status}`);
