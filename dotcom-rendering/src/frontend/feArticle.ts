@@ -1,4 +1,5 @@
 import { type CrosswordProps } from '@guardian/react-crossword';
+import { literal, object, type Output, union } from 'valibot';
 import type { EditionId } from '../lib/edition';
 import type { FEArticleBadgeType } from '../types/badge';
 import type { Block } from '../types/blocks';
@@ -135,65 +136,70 @@ type PageType = {
 	isSensitive: boolean;
 };
 
-type ThemePillar =
-	| 'NewsPillar'
-	| 'OpinionPillar'
-	| 'SportPillar'
-	| 'CulturePillar'
-	| 'LifestylePillar';
-
-type ThemeSpecial = 'SpecialReportTheme' | 'Labs' | 'SpecialReportAltTheme';
-type FETheme = ThemePillar | ThemeSpecial;
+const FEThemeSchema = union([
+	literal('NewsPillar'),
+	literal('OpinionPillar'),
+	literal('SportPillar'),
+	literal('CulturePillar'),
+	literal('LifestylePillar'),
+	literal('SpecialReportTheme'),
+	literal('Labs'),
+	literal('SpecialReportAltTheme'),
+]);
 
 /**
  * FEDesign is what frontend gives (originating in the capi scala client) us on the Format field
  * https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Design.scala
  */
-type FEDesign =
-	| 'ArticleDesign'
-	| 'PictureDesign'
-	| 'GalleryDesign'
-	| 'AudioDesign'
-	| 'VideoDesign'
-	| 'CrosswordDesign'
-	| 'ReviewDesign'
-	| 'AnalysisDesign'
-	| 'CommentDesign'
-	| 'ExplainerDesign'
-	| 'LetterDesign'
-	| 'FeatureDesign'
-	| 'LiveBlogDesign'
-	| 'DeadBlogDesign'
-	| 'RecipeDesign'
-	| 'MatchReportDesign'
-	| 'InterviewDesign'
-	| 'EditorialDesign'
-	| 'QuizDesign'
-	| 'InteractiveDesign'
-	| 'PhotoEssayDesign'
-	| 'ObituaryDesign'
-	| 'FullPageInteractiveDesign'
-	| 'NewsletterSignupDesign'
-	| 'TimelineDesign'
-	| 'ProfileDesign';
+const FEDesignSchema = union([
+	literal('ArticleDesign'),
+	literal('PictureDesign'),
+	literal('GalleryDesign'),
+	literal('AudioDesign'),
+	literal('VideoDesign'),
+	literal('CrosswordDesign'),
+	literal('ReviewDesign'),
+	literal('AnalysisDesign'),
+	literal('CommentDesign'),
+	literal('ExplainerDesign'),
+	literal('LetterDesign'),
+	literal('FeatureDesign'),
+	literal('LiveBlogDesign'),
+	literal('DeadBlogDesign'),
+	literal('RecipeDesign'),
+	literal('MatchReportDesign'),
+	literal('InterviewDesign'),
+	literal('EditorialDesign'),
+	literal('QuizDesign'),
+	literal('InteractiveDesign'),
+	literal('PhotoEssayDesign'),
+	literal('ObituaryDesign'),
+	literal('FullPageInteractiveDesign'),
+	literal('NewsletterSignupDesign'),
+	literal('TimelineDesign'),
+	literal('ProfileDesign'),
+]);
 
 /** FEDisplay is the display information passed through from frontend (originating in the capi scala client) and dictates the display style of the content e.g. Immersive
 https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Display.scala */
-type FEDisplay =
-	| 'StandardDisplay'
-	| 'ImmersiveDisplay'
-	| 'ShowcaseDisplay'
-	| 'NumberedListDisplay';
+const FEDisplaySchema = union([
+	literal('StandardDisplay'),
+	literal('ImmersiveDisplay'),
+	literal('ShowcaseDisplay'),
+	literal('NumberedListDisplay'),
+]);
 
 /**
  * FEFormat is the stringified version of Format passed through from Frontend.
  * It gets converted to the `@guardian/libs` format on platform
  */
-export type FEFormat = {
-	design: FEDesign;
-	theme: FETheme;
-	display: FEDisplay;
-};
+export type FEFormat = Output<typeof FEFormatSchema>;
+
+export const FEFormatSchema = object({
+	design: FEDesignSchema,
+	theme: FEThemeSchema,
+	display: FEDisplaySchema,
+});
 
 export type FEStoryPackage = {
 	heading: string;

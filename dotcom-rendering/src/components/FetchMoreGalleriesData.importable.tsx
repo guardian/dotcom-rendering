@@ -10,7 +10,7 @@ import { type DCRFrontImage } from '../types/front';
 import { type MainMedia } from '../types/mainMedia';
 import type { OnwardsSource } from '../types/onwards';
 import type { FETrailType, TrailType } from '../types/trails';
-import { FETrailTypeSchema } from '../types/valibotSchemas/trails';
+import { FETrailTypeSchema } from '../types/trails';
 import { MoreGalleries } from './MoreGalleries';
 import { Placeholder } from './Placeholder';
 
