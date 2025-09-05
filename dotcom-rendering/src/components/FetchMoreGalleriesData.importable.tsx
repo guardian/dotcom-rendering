@@ -34,11 +34,29 @@ const minHeight = css`
 	min-height: 300px;
 `;
 
-const getMedia = (galleryCount: number | undefined): MainMedia | undefined => {
+const getMedia = (galleryCount?: number): MainMedia | undefined => {
 	if (typeof galleryCount === 'number') {
 		return { type: 'Gallery', count: galleryCount.toString() };
 	}
 	return undefined;
+};
+
+const toGalleryTrail = (trail: FETrailType, index: number): TrailType => {
+	const format = decideFormat(trail.format);
+	const image: DCRFrontImage | undefined = trail.masterImage
+		? {
+				src: trail.masterImage,
+				altText: '',
+		  }
+		: undefined;
+
+	return {
+		...trail,
+		image,
+		format,
+		dataLinkName: getDataLinkNameCard(format, '0', index),
+		mainMedia: getMedia(trail.galleryCount),
+	};
 };
 
 const buildTrails = (
@@ -55,23 +73,7 @@ const buildTrails = (
 				),
 		)
 		.slice(0, trailLimit)
-		.map((trail, index) => {
-			const format = decideFormat(trail.format);
-			const image: DCRFrontImage | undefined = trail.masterImage
-				? {
-						src: trail.masterImage,
-						altText: '',
-				  }
-				: undefined;
-
-			return {
-				...trail,
-				image,
-				format,
-				dataLinkName: getDataLinkNameCard(format, '0', index),
-				mainMedia: getMedia(trail.galleryCount),
-			};
-		});
+		.map(toGalleryTrail);
 };
 
 const fetchJson = async (ajaxUrl: string): Promise<MoreGalleriesResponse> => {
@@ -111,13 +113,13 @@ export const FetchMoreGalleriesData = ({
 	const [data, setData] = useState<MoreGalleriesResponse | undefined>(
 		undefined,
 	);
-	const [error, setError] = useState<Error | null>(null);
+	const [error, setError] = useState<Error | undefined>(undefined);
 
 	useEffect(() => {
 		fetchJson(url)
 			.then((fetchedData) => {
 				setData(fetchedData);
-				setError(null);
+				setError(undefined);
 			})
 			.catch((err) => {
 				setError(
@@ -130,7 +132,7 @@ export const FetchMoreGalleriesData = ({
 	if (error) {
 		// Send the error to Sentry and then prevent the element from rendering
 		window.guardian.modules.sentry.reportError(error, 'more-galleries');
-		return null;
+		return undefined;
 	}
 
 	if (!data?.trails) {
