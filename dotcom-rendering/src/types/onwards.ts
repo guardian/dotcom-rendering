@@ -24,3 +24,5 @@ export type OnwardsSource =
 	| 'curated-content'
 	| 'newsletters-page'
 	| 'unknown-source'; // We should never see this in the analytics data!
+
+export type OnwardContainerType = 'more-galleries';
