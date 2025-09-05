@@ -234,7 +234,7 @@ const MoreGalleriesSplashCard = ({
 		},
 		imagePositionOnDesktop: 'right',
 		imagePositionOnMobile: 'top',
-		imageSize: 'large',
+		imageSize: 'medium',
 		isFlexSplash: true,
 	};
 	return (

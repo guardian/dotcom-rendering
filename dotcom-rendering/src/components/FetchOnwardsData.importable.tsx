@@ -90,7 +90,7 @@ export const FetchOnwardsData = ({
 					absoluteServerTimes={absoluteServerTimes}
 					trails={buildTrails(data.trails, limit, isAdFreeUser, true)}
 					discussionApiUrl={discussionApiUrl}
-					heading={'More Galleries'}
+					heading="More galleries"
 					onwardsSource={onwardsSource}
 				/>
 			) : (

@@ -591,10 +591,8 @@ export const Card = ({
 	};
 
 	const hideTrailTextUntil = () => {
-		if (isFlexibleContainer) {
+		if (isFlexibleContainer || (isOnwardContainer && isFlexSplash)) {
 			return undefined;
-		} else if (isOnwardContainer && isFlexSplash) {
-			return 'mobile';
 		} else if (
 			imageSize === 'large' &&
 			imagePositionOnDesktop === 'right' &&
