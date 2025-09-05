@@ -1,4 +1,4 @@
-import { isUndefined, startPerformanceMeasure } from '@guardian/libs';
+import { startPerformanceMeasure } from '@guardian/libs';
 import { getOphan } from '../client/ophan/ophan';
 import type { RenderingTarget } from '../types/renderingTarget';
 
@@ -57,8 +57,8 @@ const timeoutify = <T>(
 ): CandidateConfigWithTimeout<T> => {
 	let timer: number | undefined;
 
-	const canShow = (): Promise<CanShowResult<T>> =>
-		new Promise((resolve) => {
+	const canShow = (): Promise<CanShowResult<T>> => {
+		return new Promise((resolve) => {
 			const perfName = `messagePicker-canShow-${candidateConfig.candidate.id}`;
 			const { endPerformanceMeasure } = startPerformanceMeasure(
 				'tx',
@@ -72,34 +72,53 @@ const timeoutify = <T>(
 						slotName,
 						renderingTarget,
 					);
+					cancelTimeout();
 					resolve({ show: false });
 				}, candidateConfig.timeoutMillis);
 			}
 
-			candidateConfig.candidate
-				.canShow()
-				.then((result) => {
-					resolve(result);
+			try {
+				candidateConfig.candidate
+					.canShow()
+					.then((result) => {
+						resolve(result);
 
-					const canShowTimeTaken = endPerformanceMeasure();
+						const canShowTimeTaken = endPerformanceMeasure();
 
-					if (candidateConfig.reportTiming) {
-						void getOphan(renderingTarget).then((ophan) => {
-							ophan.record({
-								// @ts-expect-error -- the relevant team should remove this call as it is dropped by Ophan
-								// see https://github.com/guardian/dotcom-rendering/pull/11438 further context
-								component: perfName,
-								value: canShowTimeTaken,
+						if (candidateConfig.reportTiming) {
+							void getOphan(renderingTarget).then((ophan) => {
+								ophan.record({
+									// @ts-expect-error -- the relevant team should remove this call as it is dropped by Ophan
+									// see https://github.com/guardian/dotcom-rendering/pull/11438 further context
+									component: perfName,
+									value: canShowTimeTaken,
+								});
 							});
-						});
-					}
-				})
-				.catch((e) =>
-					console.error(`timeoutify candidate - error: ${String(e)}`),
-				);
+						}
+					})
+					.catch((e) => {
+						console.error(
+							`timeoutify candidate - error: ${String(e)}`,
+						);
+						resolve({ show: false });
+					})
+					.finally(() => {
+						cancelTimeout();
+					});
+			} catch (error) {
+				console.error(`timeoutify candidate - error: ${String(error)}`);
+				cancelTimeout();
+				resolve({ show: false });
+			}
 		});
+	};
 
-	const cancelTimeout = () => !isUndefined(timer) && clearTimeout(timer);
+	const cancelTimeout = () => {
+		if (timer !== undefined) {
+			clearTimeout(timer);
+			timer = undefined;
+		}
+	};
 
 	return {
 		...candidateConfig,
@@ -111,67 +130,71 @@ const timeoutify = <T>(
 	};
 };
 
-const clearAllTimeouts = (messages: CandidateConfigWithTimeout<any>[]) =>
-	messages.map((m) => m.cancelTimeout());
+const clearAllTimeouts = (
+	candidateConfigs: CandidateConfigWithTimeout<any>[],
+) => {
+	for (const config of candidateConfigs) {
+		config.cancelTimeout();
+	}
+};
 
 const defaultShow = () => null;
 
-interface PendingMessage<T> {
-	candidateConfig: CandidateConfigWithTimeout<T>;
-	canShow: Promise<CanShowResult<T>>;
-}
-
-interface WinningMessage<T> {
-	meta: T;
-	candidate: Candidate<T>;
-}
-
-export const pickMessage = (
+/**
+ * Sequential message picker that respects priority order.
+ *
+ * This processes candidates one by one in the order they appear in the array,
+ * ensuring that higher priority messages are always checked first.
+ */
+export async function pickMessage(
 	{ candidates, name }: SlotConfig,
 	renderingTarget: RenderingTarget,
-): Promise<() => MaybeFC> =>
-	new Promise((resolve) => {
-		const candidateConfigsWithTimeout = candidates.map((c) =>
-			timeoutify(c, name, renderingTarget),
-		);
-		const results: PendingMessage<any>[] = candidateConfigsWithTimeout.map(
-			(candidateConfig) => ({
-				candidateConfig,
-				canShow: candidateConfig.candidate.canShow(),
-			}),
+): Promise<() => MaybeFC> {
+	const candidateConfigsWithTimeout = candidates.map((c) =>
+		timeoutify(c, name, renderingTarget),
+	);
+
+	try {
+		const settled = await Promise.allSettled(
+			candidateConfigsWithTimeout.map((config) =>
+				config.candidate.canShow(),
+			),
 		);
 
-		const winnerResult = results.reduce<
-			Promise<WinningMessage<any> | null>
-		>(async (winningMessageSoFar, { candidateConfig, canShow }) => {
-			if (await winningMessageSoFar) {
-				return winningMessageSoFar;
+		for (let i = 0; i < candidateConfigsWithTimeout.length; i++) {
+			const config = candidateConfigsWithTimeout[i];
+			const result = settled[i];
+
+			config?.cancelTimeout();
+
+			if (
+				result?.status === 'rejected' &&
+				result.reason instanceof Error
+			) {
+				window.guardian.modules.sentry.reportError(
+					result.reason,
+					`pickMessage: error checking ${config?.candidate.id}`,
+				);
+				continue;
 			}
 
-			const result = await canShow;
-			candidateConfig.cancelTimeout();
-			if (result.show) {
-				return {
-					candidate: candidateConfig.candidate,
-					meta: result.meta,
-				};
-			}
-
-			return winningMessageSoFar;
-		}, Promise.resolve(null));
-
-		winnerResult
-			.then((winner) => {
+			const canShowResult =
+				result?.status === 'fulfilled' ? result.value : undefined;
+			if (canShowResult?.show) {
 				clearAllTimeouts(candidateConfigsWithTimeout);
+				return () => config?.candidate.show(canShowResult.meta) ?? null;
+			}
+		}
 
-				if (winner === null) {
-					resolve(defaultShow);
-				} else {
-					const { candidate, meta } = winner;
-					resolve(() => candidate.show(meta));
-				}
-			})
-			.catch((e) =>
-				console.error(`pickMessage winner - error: ${String(e)}`),
+		return defaultShow;
+	} catch (fatal) {
+		if (fatal instanceof Error) {
+			window.guardian.modules.sentry.reportError(
+				fatal,
+				`pickMessage: fatal error`,
 			);
-	});
+		}
+		clearAllTimeouts(candidateConfigsWithTimeout);
+		return defaultShow;
+	}
+}

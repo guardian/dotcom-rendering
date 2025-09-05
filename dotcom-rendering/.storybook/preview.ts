@@ -56,7 +56,7 @@ style.appendChild(document.createTextNode(css));
 // Could this be better? Sure, we could investigate ways to really, truly server side
 // render in Storybook but for now this (and some of the other steps we take around
 // hydration) achieve what we need
-window.guardian = {
+(window as any).guardian = {
 	config: {
 		ophan: {
 			pageViewId: 'mockPageViewId',
