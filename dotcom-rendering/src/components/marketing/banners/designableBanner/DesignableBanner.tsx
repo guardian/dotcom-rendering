@@ -49,7 +49,7 @@ import type {
 	CtaSettings,
 	CtaStateSettings,
 } from './settings';
-import { buttonThemes } from './styles/buttonStyles';
+import { buttonStyles, buttonThemes } from './styles/buttonStyles';
 import { templateSpacing } from './styles/templateStyles';
 
 const buildImageSettings = (
@@ -174,7 +174,14 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	>(defaultChoiceCard);
 
 	const isCollapsableBanner =
-		tracking.abTestVariant.includes('COLLAPSABLE_V1');
+		tracking.abTestVariant.includes('COLLAPSABLE_V1') ||
+		tracking.abTestVariant.includes('COLLAPSABLE_V2_MAYBE_LATER');
+
+	const contextClassName = tracking.abTestVariant.includes(
+		'COLLAPSABLE_V2_MAYBE_LATER',
+	)
+		? 'maybe-later'
+		: '';
 
 	const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
@@ -301,6 +308,12 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 			separateArticleCount) &&
 		articleCounts.forTargetedWeeks >= 5;
 
+	// Add detection for the new "Maybe later" AB variant and pass flag to CTAs.
+	// This reuses the existing onCloseClick handler (same behaviour as the Close link).
+	const isMaybeLaterVariant = tracking.abTestVariant.includes(
+		'COLLAPSABLE_V2_MAYBE_LATER',
+	);
+
 	return (
 		<div
 			ref={bannerRef}
@@ -311,6 +324,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 				iosAppBannerPresent,
 				templateSettings.containerSettings.textColor,
 			)}
+			className={contextClassName}
 		>
 			<div
 				css={
@@ -413,6 +427,11 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								secondaryCtaSettings={
 									templateSettings.secondaryCtaSettings
 								}
+								onCloseClick={
+									isMaybeLaterVariant && isCollapsed
+										? onCloseClick
+										: undefined
+								}
 							/>
 						</div>
 					</div>
@@ -458,13 +477,14 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 							/>
 						</div>
 					)}
-					{(!isCollapsableBanner || isCollapsed) && (
-						<DesignableBannerCloseButton
-							onCloseClick={onCloseClick}
-							settings={templateSettings.closeButtonSettings}
-							isCollapsableBanner={isCollapsableBanner}
-						/>
-					)}
+					{(!isCollapsableBanner || isCollapsed) &&
+						!isMaybeLaterVariant && (
+							<DesignableBannerCloseButton
+								onCloseClick={onCloseClick}
+								settings={templateSettings.closeButtonSettings}
+								isCollapsableBanner={isCollapsableBanner}
+							/>
+						)}
 				</div>
 
 				{choiceCards &&
@@ -504,6 +524,26 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 										? mainOrMobileContent.primaryCta.ctaText
 										: 'Continue'}
 								</LinkButton>
+								{isMaybeLaterVariant && isCollapsed && (
+									<div css={styles.maybeLaterButtonSizing}>
+										<LinkButton
+											onClick={onCloseClick}
+											priority="tertiary"
+											cssOverrides={[
+												buttonStyles(
+													templateSettings.secondaryCtaSettings,
+												),
+												styles.maybeLaterButton,
+											]}
+											theme={buttonThemes(
+												templateSettings.secondaryCtaSettings,
+												'tertiary',
+											)}
+										>
+											Maybe later
+										</LinkButton>
+									</div>
+								)}
 							</div>
 						</div>
 					)}
@@ -565,7 +605,7 @@ const styles = {
 				);
 			grid-template-rows: auto auto auto;
 			grid-template-areas:
-				'.	copy-container						close-button						.'
+				'.	copy-container						close-button			close-button'
 				'.	${cardsImageOrSpaceTemplateString}	${cardsImageOrSpaceTemplateString}	.'
 				'.	cta-container						cta-container						.';
 		}
@@ -721,6 +761,10 @@ const styles = {
 		${from.desktop} {
 			margin-top: ${space[5]}px;
 		}
+
+		.maybe-later & {
+			flex-direction: row-reverse;
+		}
 	`,
 	headerContainer: (background: string, bannerHasImage: boolean) => css`
 		align-self: stretch;
@@ -845,6 +889,7 @@ const styles = {
 			margin-left: 0px;
 			flex-direction: row;
 			flex-wrap: nowrap;
+			justify-content: start;
 		}
 	`,
 	bodyCopyOverrides: css`
@@ -926,6 +971,12 @@ const styles = {
 		gap: ${space[4]}px;
 		margin-top: ${space[3]}px;
 
+		.maybe-later & {
+			flex-direction: row;
+			flex-wrap: wrap;
+			padding: ${space[3]}px;
+		}
+
 		${until.phablet} {
 			width: 100vw;
 			position: sticky;
@@ -938,7 +989,7 @@ const styles = {
 			margin-left: -${space[3]}px;
 
 			a {
-				width: calc(100% - 24px);
+				flex: 1 1 0;
 			}
 		}
 
@@ -957,10 +1008,14 @@ const styles = {
 		${from.desktop} {
 			flex-direction: row;
 			margin-bottom: ${space[6]}px;
-			gap: 0;
+			gap: ${space[2]}px;
 			margin-top: ${isCollapsed ? `${space[6]}px` : `${space[3]}px`};
 			margin-right: 0;
 			margin-left: 0;
+
+			.maybe-later & {
+				flex-wrap: nowrap;
+			}
 
 			a {
 				width: 100%;
@@ -973,6 +1028,21 @@ const styles = {
 	`,
 	linkButtonStyles: css`
 		border-color: ${palette.brandAlt[400]};
+		width: 100%;
+	`,
+	maybeLaterContainer: (cardsImageOrSpaceTemplateString: string) => css`
+		grid-area: ${cardsImageOrSpaceTemplateString};
+		justify-self: start;
+		align-self: end;
+		margin-bottom: ${space[2]}px;
+	`,
+	maybeLaterButtonSizing: css`
+		flex: 1 1 0;
+		${from.desktop} {
+			width: 118px;
+		}
+	`,
+	maybeLaterButton: css`
 		width: 100%;
 	`,
 	articleCountContainer: css`

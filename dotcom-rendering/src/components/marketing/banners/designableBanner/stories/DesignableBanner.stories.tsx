@@ -378,3 +378,42 @@ export const CollapsableWithMainImage: Story = {
 		},
 	},
 };
+
+export const CollapsableMaybeLaterVariant: Story = {
+	name: 'Collapsable - Maybe later variant',
+	args: {
+		...meta.args,
+		design: {
+			...design,
+			visual: regularImage,
+		},
+		tracking: {
+			...tracking,
+			abTestVariant: 'COLLAPSABLE_V2_MAYBE_LATER',
+		},
+	},
+};
+
+export const CollapsableWithThreeTierChoiceCardsMaybeLaterVariant: Story = {
+	name: 'Collapsable with three tier choice cards - Maybe later variant',
+	args: {
+		...meta.args,
+		design: {
+			...design,
+			visual: {
+				kind: 'ChoiceCards',
+				buttonColour: stringToHexColour('E5E5E5'),
+			},
+		},
+		tracking: {
+			...tracking,
+			abTestVariant: 'COLLAPSABLE_V2_MAYBE_LATER',
+		},
+		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings,
+		tickerSettings,
+		separateArticleCountSettings: {
+			type: 'above',
+		},
+	},
+};

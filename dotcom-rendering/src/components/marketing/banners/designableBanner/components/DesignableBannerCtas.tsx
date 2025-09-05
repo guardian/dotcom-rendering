@@ -15,6 +15,7 @@ interface DesignableBannerCtasProps {
 	onSecondaryCtaClick: () => void;
 	primaryCtaSettings: CtaSettings;
 	secondaryCtaSettings: CtaSettings;
+	onCloseClick?: () => void;
 }
 
 export function DesignableBannerCtas({
@@ -23,6 +24,7 @@ export function DesignableBannerCtas({
 	onSecondaryCtaClick,
 	primaryCtaSettings,
 	secondaryCtaSettings,
+	onCloseClick,
 }: DesignableBannerCtasProps): JSX.Element {
 	const { primaryCta, secondaryCta } = mainOrMobileContent;
 
@@ -52,6 +54,17 @@ export function DesignableBannerCtas({
 					{secondaryCta.cta.ctaText}
 				</LinkButton>
 			)}
+			{onCloseClick ? (
+				<LinkButton
+					onClick={onCloseClick}
+					size="small"
+					priority="tertiary"
+					cssOverrides={[buttonStyles(secondaryCtaSettings)]}
+					theme={buttonThemes(secondaryCtaSettings, 'tertiary')}
+				>
+					Maybe later
+				</LinkButton>
+			) : null}
 		</>
 	);
 }
