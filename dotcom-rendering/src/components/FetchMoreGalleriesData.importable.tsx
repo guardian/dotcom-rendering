@@ -138,7 +138,18 @@ export const FetchMoreGalleriesData = ({
 	if (!data?.trails) {
 		return (
 			<Placeholder
-				height={720} // best guess at typical height // TODO: this is different value for different breakpoints!!!
+				heights={
+					new Map([
+						['mobile', 1020],
+						['mobileMedium', 1040],
+						['mobileLandscape', 1100],
+						['phablet', 1200],
+						['tablet', 700],
+						['desktop', 800],
+						['leftCol', 740],
+						['wide', 790],
+					])
+				}
 				shouldShimmer={false}
 				backgroundColor={palette('--onward-background')}
 			/>
