@@ -621,7 +621,7 @@ const sectionBackgroundLight: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[800];
 		case 'Branded':
-			return sourcePalette.neutral[93];
+			return sourcePalette.neutral[100];
 	}
 };
 
@@ -652,7 +652,7 @@ const sectionBackgroundDark: ContainerFunction = (containerPalette) => {
 const sectionBackgroundLeftLight: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'Branded':
-			return sourcePalette.labs[400];
+			return sourcePalette.labs[700];
 		case 'InvestigationPalette':
 		case 'LongRunningPalette':
 		case 'SombrePalette':
@@ -840,7 +840,7 @@ const sectionTitleLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.specialReportAlt[100];
 		// Branded is expected to be used with LabsSection
 		case 'Branded':
-			return sourcePalette.neutral[100];
+			return sourcePalette.neutral[0];
 	}
 };
 

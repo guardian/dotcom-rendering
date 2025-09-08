@@ -4,10 +4,10 @@ import {
 	from,
 	palette as sourcePalette,
 	space,
+	textEgyptianBold17,
 	textSans14,
 	textSansBold12,
 	textSansBold14,
-	textSansBold20,
 	until,
 } from '@guardian/source/foundations';
 import {
@@ -175,7 +175,7 @@ const linkStyles = css`
 `;
 
 const headerStyles = css`
-	${textSansBold20};
+	${textEgyptianBold17};
 	color: ${palette('--article-section-title')};
 	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
 `;
@@ -309,6 +309,7 @@ const LabsContainerHeader = ({
 			css={css`
 				${textSansBold14};
 				padding-right: 16px;
+				color: ${sourcePalette.labs[100]};
 			`}
 		>
 			Paid content
