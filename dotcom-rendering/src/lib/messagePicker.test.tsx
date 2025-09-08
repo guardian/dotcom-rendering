@@ -1,4 +1,4 @@
-// using Promise.resolve for flushing microtasks works with fake timers
+import { setImmediate } from 'node:timers';
 import type { CanShowResult, SlotConfig } from './messagePicker';
 import { pickMessage } from './messagePicker';
 
@@ -11,10 +11,10 @@ jest.useFakeTimers();
 
 // Wait for all unsettled promises to complete before finishing the test. Not
 // doing this results in a warning from Jest. Note that it's actually expected
-// that there may be outstanding promises when a test completes because the
+// that there may be outstanding promises when a test completes becuase the the
 // message picker returns when the canShow of a message resolves, even if there
 // are lower priority messages still pending.
-const flushPromises = () => Promise.resolve();
+const flushPromises = () => new Promise(setImmediate);
 afterEach(async () => {
 	await flushPromises();
 	jest.clearAllMocks();
@@ -129,8 +129,6 @@ describe('pickMessage', () => {
 
 		const messagePromise = pickMessage(config, 'Web');
 		jest.advanceTimersByTime(260);
-		await flushPromises();
-		jest.advanceTimersByTime(260);
 		const got = await messagePromise;
 
 		expect(got()).toEqual(ChosenMockComponent);
@@ -183,8 +181,6 @@ describe('pickMessage', () => {
 		};
 
 		const messagePromise = pickMessage(config, 'Web');
-		jest.advanceTimersByTime(260);
-		await flushPromises();
 		jest.advanceTimersByTime(260);
 		const got = await messagePromise;
 

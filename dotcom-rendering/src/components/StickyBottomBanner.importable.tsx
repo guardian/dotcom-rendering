@@ -76,36 +76,12 @@ const DEFAULT_BANNER_TIMEOUT_MILLIS = 2000;
 const buildCmpBannerConfig = (): CandidateConfig<void> => ({
 	candidate: {
 		id: 'cmpUi',
-		canShow: () => {
-			// In Storybook environment, CMP APIs may not be available
-			// Return false immediately to avoid hanging
-			if (
-				typeof window !== 'undefined' &&
-				(window.location.hostname === 'localhost' ||
-					window.location.hostname === '127.0.0.1')
-			) {
-				// eslint-disable-next-line no-console -- Required for debugging CMP issues
-				console.log(
-					'CMP: Detected Storybook/localhost environment, skipping CMP check',
-				);
-				return Promise.resolve({ show: false as const });
-			}
-
-			try {
-				return cmp
-					.willShowPrivacyMessage()
-					.then((result) => {
-						return result
-							? { show: true as const, meta: undefined }
-							: { show: false as const };
-					})
-					.catch(() => {
-						return { show: false as const };
-					});
-			} catch (error) {
-				return Promise.resolve({ show: false as const });
-			}
-		},
+		canShow: () =>
+			cmp
+				.willShowPrivacyMessage()
+				.then((result) =>
+					result ? { show: true, meta: undefined } : { show: false },
+				), // Intentionally there is no catch block because if the CMP fails no other banner can be displayed.
 		show: () => {
 			// New CMP is not a react component and is shown outside of react's world
 			// so render nothing if it will show
