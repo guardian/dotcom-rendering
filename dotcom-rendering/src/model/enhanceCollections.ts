@@ -1,5 +1,8 @@
 import type { FECollection } from '../frontend/feFront';
-import { decideCollectionBranding } from '../lib/branding';
+import {
+	decideCollectionBranding,
+	isPaidContentSameBranding,
+} from '../lib/branding';
 import type { EditionId } from '../lib/edition';
 import type { Branding } from '../types/branding';
 import type { DCRCollectionType } from '../types/front';
@@ -88,6 +91,8 @@ export const enhanceCollections = ({
 					({ type }) => type === 'Branded',
 				) ?? false,
 		});
+		const stripBrandingFromCards =
+			isPaidContentSameBranding(collectionBranding);
 
 		const containerPalette = decideContainerPalette(
 			collection.config.metadata?.map((meta) => meta.type),
@@ -127,16 +132,19 @@ export const enhanceCollections = ({
 				collection.backfill,
 				editionId,
 				discussionApiUrl,
+				stripBrandingFromCards,
 			),
 			curated: enhanceCards(collection.curated, {
 				cardInTagPage: false,
 				editionId,
 				discussionApiUrl,
+				stripBranding: stripBrandingFromCards,
 			}),
 			backfill: enhanceCards(collection.backfill, {
 				cardInTagPage: false,
 				editionId,
 				discussionApiUrl,
+				stripBranding: stripBrandingFromCards,
 			}),
 			treats: enhanceTreats(
 				collection.treats,

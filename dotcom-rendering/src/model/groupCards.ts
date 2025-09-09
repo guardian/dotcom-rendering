@@ -31,6 +31,7 @@ export const groupCards = (
 	backfill: FEFrontCard[],
 	editionId: EditionId,
 	discussionApiUrl: string,
+	stripBranding: boolean = false,
 ): DCRGroupedTrails => {
 	switch (container) {
 		case 'dynamic/fast':
@@ -47,18 +48,21 @@ export const groupCards = (
 					cardInTagPage: false,
 					editionId,
 					discussionApiUrl,
+					stripBranding,
 				}),
 				veryBig: enhanceCards(veryBig, {
 					cardInTagPage: false,
 					offset: huge.length,
 					editionId,
 					discussionApiUrl,
+					stripBranding,
 				}),
 				big: enhanceCards(big, {
 					cardInTagPage: false,
 					offset: huge.length + veryBig.length,
 					editionId,
 					discussionApiUrl,
+					stripBranding,
 				}),
 				standard: enhanceCards(
 					// Backfilled cards will always be treated as 'standard' cards
@@ -91,6 +95,7 @@ export const groupCards = (
 				editionId,
 				discussionApiUrl,
 				offset,
+				stripBranding,
 			});
 
 			return {
@@ -116,6 +121,7 @@ export const groupCards = (
 				editionId,
 				discussionApiUrl,
 				offset,
+				stripBranding,
 			});
 
 			return {
