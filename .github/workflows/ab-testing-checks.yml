@@ -5,11 +5,11 @@ permissions:
 
 on:
   workflow_call:
-    # secrets:
-    #   FASTLY_AB_TESTING_CONFIG:
-    #     required: true
-    #   FASTLY_API_TOKEN:
-    #     required: true
+    secrets:
+      FASTLY_AB_TESTING_CONFIG:
+        required: true
+      FASTLY_API_TOKEN:
+        required: true
 
 jobs:
   checks:
