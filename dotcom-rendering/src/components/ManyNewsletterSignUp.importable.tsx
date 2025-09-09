@@ -12,11 +12,12 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 // Note - the package also exports a component as a named export "ReCAPTCHA",
 // that version will compile and render but is non-functional.
 // Use the default export instead.
-import ReactGoogleRecaptcha from 'react-google-recaptcha';
+import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import {
 	reportTrackingEvent,
 	requestMultipleSignUps,
 } from '../lib/newsletter-sign-up-requests';
+import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useConfig } from './ConfigContext';
 import { Flex } from './Flex';
 import { ManyNewslettersForm } from './ManyNewslettersForm';
@@ -49,7 +50,7 @@ const sectionWrapperStyle = (hide: boolean) => css`
 const desktopClearButtonWrapperStyle = css`
 	display: none;
 	padding-left: ${space[1]}px;
-	margin-right: -10px;
+	padding-right: ${space[1]}px;
 	${from.leftCol} {
 		display: block;
 	}
@@ -121,12 +122,16 @@ const attributeToNumber = (
 type Props = {
 	useReCaptcha: boolean;
 	captchaSiteKey?: string;
+	visibleRecaptcha?: boolean;
 };
 
 export const ManyNewsletterSignUp = ({
 	useReCaptcha,
 	captchaSiteKey,
+	visibleRecaptcha = false,
 }: Props) => {
+	const isSignedIn = useIsSignedIn();
+
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		{
 			/** unique identifier for the newsletter in kebab-case format */
@@ -137,6 +142,9 @@ export const ManyNewsletterSignUp = ({
 	>([]);
 	const [status, setStatus] = useState<FormStatus>('NotSent');
 	const [email, setEmail] = useState('');
+	const [marketingOptIn, setMarketingOptIn] = useState<boolean | undefined>(
+		undefined,
+	);
 	const reCaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 
 	const userCanInteract = status !== 'Success' && status !== 'Loading';
@@ -208,6 +216,12 @@ export const ManyNewsletterSignUp = ({
 	}, [status]);
 
 	useEffect(() => {
+		if (isSignedIn !== 'Pending' && !isSignedIn) {
+			setMarketingOptIn(true);
+		}
+	}, [isSignedIn]);
+
+	useEffect(() => {
 		const signUpButtons = [
 			...document.querySelectorAll(`[data-role=${BUTTON_ROLE}]`),
 		];
@@ -242,9 +256,14 @@ export const ManyNewsletterSignUp = ({
 			email,
 			identityNames,
 			reCaptchaToken,
+			marketingOptIn,
 		).catch(() => {
 			return undefined;
 		});
+
+		const marketingOptInType = marketingOptIn
+			? 'similar-guardian-products-optin'
+			: 'similar-guardian-products-optout';
 
 		if (!response?.ok) {
 			const responseText = response
@@ -256,6 +275,7 @@ export const ManyNewsletterSignUp = ({
 				renderingTarget,
 				{
 					listIds,
+					...(marketingOptIn !== undefined && { marketingOptInType }),
 					// If the backend handles the failure and responds with an informative
 					// error message (E.G. "Service unavailable", "Invalid email" etc) this
 					// should be included in the event data.
@@ -274,6 +294,7 @@ export const ManyNewsletterSignUp = ({
 			renderingTarget,
 			{
 				listIds,
+				...(marketingOptIn !== undefined && { marketingOptInType }),
 			},
 		);
 		setStatus('Success');
@@ -311,9 +332,11 @@ export const ManyNewsletterSignUp = ({
 			'captcha-execute',
 			renderingTarget,
 		);
-		const result = await reCaptchaRef.current.executeAsync();
+		const result = visibleRecaptcha
+			? reCaptchaRef.current.getValue()
+			: await reCaptchaRef.current.executeAsync();
 
-		if (typeof result !== 'string') {
+		if (!result) {
 			void reportTrackingEvent(
 				'ManyNewsletterSignUp',
 				'captcha-failure',
@@ -384,36 +407,17 @@ export const ManyNewsletterSignUp = ({
 								status,
 							}}
 							newsletterCount={newslettersToSignUpFor.length}
+							marketingOptIn={marketingOptIn}
+							setMarketingOptIn={setMarketingOptIn}
+							useReCaptcha={useReCaptcha}
+							captchaSiteKey={captchaSiteKey}
+							visibleRecaptcha={visibleRecaptcha}
+							reCaptchaRef={reCaptchaRef}
+							handleCaptchaError={handleCaptchaError}
 						/>
 						<div css={desktopClearButtonWrapperStyle}>
 							<ClearButton removeAll={removeAll} />
 						</div>
-
-						{useReCaptcha && !!captchaSiteKey && (
-							<div
-								// The Google documentation specifies that if the 'recaptcha-badge' is hidden,
-								// their T+C's must be displayed instead. While this component hides the
-								// badge, the T+C's are inluded in the ManyNewslettersForm component.
-								// https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
-								css={css`
-									.grecaptcha-badge {
-										visibility: hidden;
-									}
-								`}
-							>
-								<ReactGoogleRecaptcha
-									sitekey={captchaSiteKey}
-									ref={reCaptchaRef}
-									onError={handleCaptchaError}
-									size="invisible"
-									// Note - the component supports an onExpired callback
-									// (for when the user completed a challenge, but did
-									// not submit the form before the token expired.
-									// We don't need that here as setting the token
-									// triggers the submission (onChange callback)
-								/>
-							</div>
-						)}
 					</Flex>
 				</div>
 			</Section>

@@ -50,7 +50,7 @@ export const Video: FEArticle = {
 				},
 			],
 			id: 'b71e095c-8863-4a13-a44d-47a090333c51',
-			elementId: '20fbeb90-3150-4e4d-a550-648858214bc4',
+			elementId: '836ca88c-097d-42f3-b2f5-412495e66fa0',
 			overrideImage:
 				'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=700&quality=85&auto=format&fit=max&s=aeafe0f7fe0353c290fceb3b73effa98',
 			duration: 106,
@@ -173,7 +173,7 @@ export const Video: FEArticle = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjMucG5n&enable=upscale&s=3f457853763e7ac48f233c92ac039544',
+				'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjMucG5n&enable=upscale&s=5036b7fbae2c04739e07459278d4c077',
 				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
 				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
 				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
@@ -206,7 +206,7 @@ export const Video: FEArticle = {
 			'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjMucG5n&enable=upscale&s=3f457853763e7ac48f233c92ac039544',
+			'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjMucG5n&enable=upscale&s=5036b7fbae2c04739e07459278d4c077',
 		'al:ios:url':
 			'gnmguardian://sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video?contenttype=Article&source=applinks',
 		'og:title':
@@ -241,7 +241,7 @@ export const Video: FEArticle = {
 		'twitter:app:url:iphone':
 			'gnmguardian://sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video?contenttype=Article&source=twitter',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjMucG5n&s=9fb9bb07a4e465ac3ae3a410f3eb2969',
+			'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjMucG5n&s=8fa01bf467f65bdb6f857082f555bef5',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
 			'gnmguardian://sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video?contenttype=Article&source=twitter',
@@ -403,6 +403,7 @@ export const Video: FEArticle = {
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},
+		serverSideABTests: {},
 		edition: 'UK',
 		ipsosTag: 'environment',
 		isLiveBlog: false,
@@ -714,7 +715,7 @@ export const Video: FEArticle = {
 								url: '/world/europe-news',
 							},
 							{
-								title: 'US',
+								title: 'US news',
 								url: '/us-news',
 								longTitle: 'US news',
 							},
@@ -794,6 +795,11 @@ export const Video: FEArticle = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
+							},
+							{
+								title: 'Euro 2025',
+								url: '/football/women-s-euro-2025',
+								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -968,6 +974,11 @@ export const Video: FEArticle = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
+							},
+							{
+								title: 'Euro 2025',
+								url: '/football/women-s-euro-2025',
+								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -1198,28 +1209,6 @@ export const Video: FEArticle = {
 				url: 'https://www.theguardian.com/insidetheguardian',
 			},
 			{
-				title: 'The Observer',
-				url: '/observer',
-				children: [
-					{
-						title: 'Comment',
-						url: '/theobserver/news/comment',
-					},
-					{
-						title: 'The New Review',
-						url: '/theobserver/new-review',
-					},
-					{
-						title: 'Observer Magazine',
-						url: '/theobserver/magazine',
-					},
-					{
-						title: 'Observer Food Monthly',
-						url: '/theobserver/foodmonthly',
-					},
-				],
-			},
-			{
 				title: 'Guardian Weekly',
 				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
 			},
@@ -1236,16 +1225,12 @@ export const Video: FEArticle = {
 						url: '/crosswords/series/quick',
 					},
 					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
+						title: 'Sunday quick',
+						url: '/crosswords/series/sunday-quick',
 					},
 					{
 						title: 'Quick cryptic',
 						url: '/crosswords/series/quick-cryptic',
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
 					},
 					{
 						title: 'Quiptic',
@@ -1258,10 +1243,6 @@ export const Video: FEArticle = {
 					{
 						title: 'Prize',
 						url: '/crosswords/series/prize',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
 					},
 					{
 						title: 'Genius',
@@ -1284,6 +1265,10 @@ export const Video: FEArticle = {
 			{
 				title: 'Corrections',
 				url: '/theguardian/series/corrections-and-clarifications',
+			},
+			{
+				title: 'Tips',
+				url: 'https://www.theguardian.com/tips',
 			},
 		],
 		brandExtensions: [
@@ -1361,6 +1346,11 @@ export const Video: FEArticle = {
 							title: 'Clubs',
 							url: '/football/teams',
 							longTitle: 'football/teams',
+						},
+						{
+							title: 'Euro 2025',
+							url: '/football/women-s-euro-2025',
+							longTitle: 'football/women-s-euro-2025',
 						},
 					],
 				},
@@ -1603,6 +1593,18 @@ export const Video: FEArticle = {
 					text: 'Patrons',
 					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
 					dataLinkName: 'uk : footer : patrons',
+					extraClasses: '',
+				},
+				{
+					text: 'Tips',
+					url: 'https://www.theguardian.com/tips',
+					dataLinkName: 'uk : footer : tips',
+					extraClasses: '',
+				},
+				{
+					text: 'Accessibility settings',
+					url: '/help/accessibility-help',
+					dataLinkName: 'accessibility settings',
 					extraClasses: '',
 				},
 			],

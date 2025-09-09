@@ -1,4 +1,5 @@
 import type { ABTest, ABTestAPI } from '@guardian/ab-core';
+import { ABTests } from '@guardian/ab-testing';
 import {
 	bypassCommercialMetricsSampling,
 	EventTimer,
@@ -10,7 +11,7 @@ import {
 } from '@guardian/core-web-vitals';
 import { getCookie, isString, isUndefined } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
-import { useAB } from '../lib/useAB';
+import { useAB, useBetaAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useDetectAdBlock } from '../lib/useDetectAdBlock';
 import { usePageViewId } from '../lib/usePageViewId';
@@ -30,6 +31,15 @@ const willRecordCoreWebVitals = Math.random() < sampling;
 const clientSideTestsToForceMetrics: ABTest[] = [
 	/* keep array multi-line */
 ];
+
+const shouldCollectMetricsForBetaTests = (userTestParticipations: string[]) => {
+	const userParticipationConfigs = ABTests.filter((test) =>
+		userTestParticipations.includes(test.name),
+	);
+	return userParticipationConfigs.some(
+		(test) => test.shouldForceMetricsCollection,
+	);
+};
 
 const useBrowserId = () => {
 	const [browserId, setBrowserId] = useState<string>();
@@ -77,6 +87,7 @@ const useDev = () => {
  */
 export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 	const abTestApi = useAB()?.api;
+	const betaABTest = useBetaAB();
 	const adBlockerInUse = useAdBlockInUse();
 	const detectedAdBlocker = useDetectAdBlock();
 
@@ -88,14 +99,22 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 
 	const userInServerSideTest = Object.keys(tests).length > 0;
 
+	const userBetaParticipations = betaABTest?.getParticipations() ?? {};
+
+	const collectBetaTestMetrics = shouldCollectMetricsForBetaTests(
+		Object.keys(userBetaParticipations),
+	);
+
 	const shouldBypassSampling = useCallback(
 		(api: ABTestAPI) =>
 			willRecordCoreWebVitals ||
 			userInServerSideTest ||
+			collectBetaTestMetrics ||
 			clientSideTestsToForceMetrics.some((test) =>
 				api.runnableTest(test),
 			),
-		[userInServerSideTest],
+
+		[userInServerSideTest, collectBetaTestMetrics],
 	);
 
 	useEffect(
