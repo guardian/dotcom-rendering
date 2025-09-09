@@ -1,6 +1,6 @@
 import { isUndefined } from '@guardian/libs';
 import type { BrowserContext, Request } from '@playwright/test';
-import { test } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 import { cmpAcceptAll } from '../lib/cmp';
 import { addCookie } from '../lib/cookies';
 import { loadPage } from '../lib/load-page';
@@ -47,5 +47,43 @@ test.describe('The banner', function () {
 		await cmpAcceptAll(page);
 
 		await rrBannerRequestPromise;
+	});
+});
+
+test.describe('Sign-in gate portal', function () {
+	test('makes a request to the auxia', async ({ page, context }) => {
+		await optOutOfArticleCountConsent(context);
+
+		const auxiaUrl =
+			'https://contributions.guardianapis.com/auxia/get-treatments';
+		const auxiaRequestPromise = page.waitForRequest((request) =>
+			requestBodyHasProperties(request, auxiaUrl, ['isSupporter']),
+		);
+
+		await loadPage({
+			page,
+			path: `/Article/https://www.theguardian.com/politics/2019/nov/20/jeremy-corbyn-boris-johnson-tv-debate-watched-by-67-million-people`,
+			waitUntil: 'domcontentloaded',
+			region: 'GB',
+			preventSupportBanner: false,
+			queryParamsOn: true,
+			queryParams: { showgate: 'true' },
+		});
+
+		await cmpAcceptAll(page);
+
+		await page.evaluate(() => {
+			// Set geolocation to IE to force the sign-in gate to appear
+			window.localStorage.setItem('gu.geo.override', 'IE');
+		});
+
+		await page.reload({ waitUntil: 'domcontentloaded' });
+
+		const signInGateIsland = page.locator('#sign-in-gate');
+		await expect(signInGateIsland).toHaveCount(1, { timeout: 1_000 });
+		// Scroll to the sign-in gate to trigger auxia api call
+		await signInGateIsland.scrollIntoViewIfNeeded();
+
+		await auxiaRequestPromise;
 	});
 });
