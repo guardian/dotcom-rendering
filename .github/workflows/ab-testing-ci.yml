@@ -11,6 +11,3 @@ on:
 jobs:
   checks:
     uses: ./.github/workflows/ab-testing-checks.yml
-    secrets:
-      FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_PROD_AB_TESTING_CONFIG }}
-      FASTLY_API_TOKEN: ${{ secrets.FASTLY_CODE_API_TOKEN }}
