@@ -14,7 +14,7 @@ import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
 import { EnhanceAffiliateLinks } from './EnhanceAffiliateLinks.importable';
 import { FocusStyles } from './FocusStyles.importable';
-import { GoogleOneTap, isInGoogleOneTapTest } from './GoogleOneTap.importable';
+import { GoogleOneTap, isGoogleOneTapEnabled } from './GoogleOneTap.importable';
 import { Island } from './Island';
 import { Lightbox } from './Lightbox';
 import { Metrics } from './Metrics.importable';
@@ -140,7 +140,10 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							}
 						/>
 					</Island>
-					{isInGoogleOneTapTest(frontendData.config.abTests) && (
+					{isGoogleOneTapEnabled(
+						frontendData.config.abTests,
+						frontendData.config.switches,
+					) && (
 						<Island
 							priority="enhancement"
 							defer={{ until: 'idle' }}
