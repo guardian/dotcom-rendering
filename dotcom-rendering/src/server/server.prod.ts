@@ -24,7 +24,6 @@ import {
 	handleFootballTablesPage,
 } from './handler.sportDataPage.web';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
-import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { logger } from './lib/logging';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';
@@ -88,67 +87,6 @@ export const prodServer = (): void => {
 	app.post('/AppsInteractive', logRenderTime, handleAppsInteractive);
 	app.post('/AppsBlocks', logRenderTime, handleAppsBlocks);
 	app.post('/EditionsCrossword', logRenderTime, handleEditionsCrossword);
-
-	// These GET's are for checking any given URL directly from PROD
-	app.get(
-		'/Article/*url',
-		logRenderTime,
-		getContentFromURLMiddleware,
-		handleArticle,
-	);
-
-	app.get(
-		'/AMPArticle/*url',
-		logRenderTime,
-		getContentFromURLMiddleware,
-		handleAMPArticle,
-	);
-
-	app.get(
-		'/Front/*url',
-		logRenderTime,
-		getContentFromURLMiddleware,
-		handleFront,
-	);
-
-	app.get(
-		'/TagPage/*url',
-		logRenderTime,
-		getContentFromURLMiddleware,
-		handleTagPage,
-	);
-
-	app.get(
-		'/EmailNewsletters',
-		logRenderTime,
-		getContentFromURLMiddleware,
-		handleAllEditorialNewslettersPage,
-	);
-
-	app.get(
-		'/AppsArticle/*url',
-		logRenderTime,
-		getContentFromURLMiddleware,
-		handleAppsArticle,
-	);
-
-	app.get(
-		'/AppsInteractive/*url',
-		logRenderTime,
-		getContentFromURLMiddleware,
-		handleAppsInteractive,
-	);
-
-	app.get('/', (req, res) => {
-		res.send(`
-			<!DOCTYPE html>
-			<html>
-			<body>
-				<h1>👋</h1>
-			</body>
-			</html>
-		`);
-	});
 
 	// All params to error handlers must be declared for express to identify them as error middleware
 	// https://expressjs.com/en/api.html#:~:text=Error%2Dhandling%20middleware%20always,see%3A%20Error%20handling

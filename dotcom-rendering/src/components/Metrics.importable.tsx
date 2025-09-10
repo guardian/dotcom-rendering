@@ -1,4 +1,5 @@
 import type { ABTest, ABTestAPI } from '@guardian/ab-core';
+import { ABTests } from '@guardian/ab-testing';
 import {
 	bypassCommercialMetricsSampling,
 	EventTimer,
@@ -30,6 +31,15 @@ const willRecordCoreWebVitals = Math.random() < sampling;
 const clientSideTestsToForceMetrics: ABTest[] = [
 	/* keep array multi-line */
 ];
+
+const shouldCollectMetricsForBetaTests = (userTestParticipations: string[]) => {
+	const userParticipationConfigs = ABTests.filter((test) =>
+		userTestParticipations.includes(test.name),
+	);
+	return userParticipationConfigs.some(
+		(test) => test.shouldForceMetricsCollection,
+	);
+};
 
 const useBrowserId = () => {
 	const [browserId, setBrowserId] = useState<string>();
@@ -89,20 +99,22 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 
 	const userInServerSideTest = Object.keys(tests).length > 0;
 
-	const betaParticipations = betaABTest?.getParticipations() ?? {};
+	const userBetaParticipations = betaABTest?.getParticipations() ?? {};
 
-	const userInBetaABTest = Object.keys(betaParticipations).length > 0;
+	const collectBetaTestMetrics = shouldCollectMetricsForBetaTests(
+		Object.keys(userBetaParticipations),
+	);
 
 	const shouldBypassSampling = useCallback(
 		(api: ABTestAPI) =>
 			willRecordCoreWebVitals ||
 			userInServerSideTest ||
-			userInBetaABTest ||
+			collectBetaTestMetrics ||
 			clientSideTestsToForceMetrics.some((test) =>
 				api.runnableTest(test),
 			),
 
-		[userInServerSideTest, userInBetaABTest],
+		[userInServerSideTest, collectBetaTestMetrics],
 	);
 
 	useEffect(
