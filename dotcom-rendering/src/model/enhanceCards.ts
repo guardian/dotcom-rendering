@@ -288,6 +288,7 @@ export const enhanceCards = (
 		editionId,
 		pageId,
 		discussionApiUrl,
+		stripBranding = false,
 	}: {
 		cardInTagPage: boolean;
 		/** Used for the data link name to indicate card position in container */
@@ -295,6 +296,8 @@ export const enhanceCards = (
 		editionId: EditionId;
 		pageId?: string;
 		discussionApiUrl: string;
+		/** We strip branding from cards if the branding will appear at the collection level instead */
+		stripBranding?: boolean;
 	},
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
@@ -397,7 +400,7 @@ export const enhanceCards = (
 			mainMedia,
 			isExternalLink: faciaCard.card.cardStyle.type === 'ExternalLink',
 			embedUri: faciaCard.properties.embedUri ?? undefined,
-			branding,
+			branding: stripBranding ? undefined : branding,
 			slideshowImages: decideSlideshowImages(faciaCard),
 			showVideo:
 				!!(

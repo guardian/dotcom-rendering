@@ -14,7 +14,7 @@ jobs:
       run:
         working-directory: ab-testing/frontend
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       # https://github.com/denoland/setup-deno#latest-stable-for-a-major
       - uses: denoland/setup-deno@v1
@@ -41,7 +41,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -50,7 +50,7 @@ jobs:
         uses: ./.github/actions/setup-node-env
 
       - name: Fetch build
-        uses: actions/download-artifact@v4.3.0
+        uses: actions/download-artifact@v5.0.0
         with:
           name: ui-build
           path: output/ab-tests.html
