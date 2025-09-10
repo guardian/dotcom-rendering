@@ -11,7 +11,7 @@ import { AlreadyVisited } from './AlreadyVisited.importable';
 import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
 import { FocusStyles } from './FocusStyles.importable';
-import { GoogleOneTap, isInGoogleOneTapTest } from './GoogleOneTap.importable';
+import { GoogleOneTap, isGoogleOneTapEnabled } from './GoogleOneTap.importable';
 import { Island } from './Island';
 import { Metrics } from './Metrics.importable';
 import { SetABTests } from './SetABTests.importable';
@@ -83,7 +83,10 @@ export const TagPage = ({ tagPage, NAV }: Props) => {
 			<Island priority="critical">
 				<SetAdTargeting adTargeting={adTargeting} />
 			</Island>
-			{isInGoogleOneTapTest(tagPage.config.abTests) && (
+			{isGoogleOneTapEnabled(
+				tagPage.config.abTests,
+				tagPage.config.switches,
+			) && (
 				<Island priority="enhancement" defer={{ until: 'idle' }}>
 					<GoogleOneTap />
 				</Island>

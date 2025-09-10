@@ -12,7 +12,7 @@ import { BrazeMessaging } from './BrazeMessaging.importable';
 import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
 import { FocusStyles } from './FocusStyles.importable';
-import { GoogleOneTap, isInGoogleOneTapTest } from './GoogleOneTap.importable';
+import { GoogleOneTap, isGoogleOneTapEnabled } from './GoogleOneTap.importable';
 import { Island } from './Island';
 import { Metrics } from './Metrics.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
@@ -93,7 +93,10 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			<Island priority="feature" defer={{ until: 'idle' }}>
 				<ReaderRevenueDev shouldHideReaderRevenue={false} />
 			</Island>
-			{isInGoogleOneTapTest(front.config.abTests) && (
+			{isGoogleOneTapEnabled(
+				front.config.abTests,
+				front.config.switches,
+			) && (
 				<Island priority="enhancement" defer={{ until: 'idle' }}>
 					<GoogleOneTap />
 				</Island>

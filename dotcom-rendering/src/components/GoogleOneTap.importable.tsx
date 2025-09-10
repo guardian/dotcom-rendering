@@ -6,7 +6,7 @@ import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useConsent } from '../lib/useConsent';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useOnce } from '../lib/useOnce';
-import type { ServerSideTests, StageType } from '../types/config';
+import type { ServerSideTests, StageType, Switches } from '../types/config';
 
 type IdentityProviderConfig = {
 	configURL: string;
@@ -23,8 +23,12 @@ type CredentialsProvider = {
 	}) => Promise<{ token: string }>;
 };
 
-export const isInGoogleOneTapTest = (tests: ServerSideTests): boolean =>
-	tests['googleOneTapVariant'] === 'variant';
+export const isGoogleOneTapEnabled = (
+	tests: ServerSideTests,
+	switches: Switches,
+): boolean =>
+	tests['googleOneTapVariant'] === 'variant' ||
+	switches['googleOneTapSwitch'] === true;
 
 /**
  * Detect the current stage of the application based on the hostname.
