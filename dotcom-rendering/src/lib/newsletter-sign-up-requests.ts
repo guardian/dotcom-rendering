@@ -85,13 +85,11 @@ export const requestSingleSignUp = async (
 	emailAddress: string,
 	newsletterId: string,
 	recaptchaToken: string,
-	marketingOptIn?: boolean,
 ): Promise<Response> => {
 	const data = buildNewsletterSignUpFormData(
 		emailAddress,
 		newsletterId,
 		recaptchaToken,
-		marketingOptIn,
 	);
 
 	return await postFormData(

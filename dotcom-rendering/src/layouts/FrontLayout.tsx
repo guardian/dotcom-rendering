@@ -31,7 +31,7 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { ArticleDisplay } from '../lib/articleFormat';
-import { badgeFromBranding, isPaidContentSameBranding } from '../lib/branding';
+import { badgeFromBranding } from '../lib/branding';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { editionList } from '../lib/edition';
@@ -47,7 +47,6 @@ import { palette as schemePalette } from '../palette';
 import type {
 	DCRCollectionType,
 	DCRContainerType,
-	DCRGroupedTrails,
 	Front,
 } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
@@ -135,6 +134,15 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		front.isNetworkFront && front.deeplyRead && front.deeplyRead.length > 0;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
+
+	/**
+	 * We are running an AB test which replaces the avatar for the card image
+	 * in the Opinion and More opinion collections on network fronts.
+	 */
+	const isInOpinionNoAvatarVariant = (collectionName: string) =>
+		abTests.opinionNoAvatarVariant === 'variant' &&
+		front.isNetworkFront &&
+		(collectionName === 'Opinion' || collectionName === 'More opinion');
 
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
@@ -274,48 +282,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						index + 1
 					} | ${ophanName}`;
 					const mostPopularTitle = 'Most popular';
-
-					// Remove the branding from each of the cards in a paid content
-					// collection if they are the same.
-					const trailsWithoutBranding = isPaidContentSameBranding(
-						collection.collectionBranding,
-					)
-						? trails.map((labTrail) => ({
-								...labTrail,
-								branding: undefined,
-						  }))
-						: trails;
-
-					// We also need to remove the branding for the cards in grouped
-					// trails for dynamic containers
-					const groupedWithoutBranding: DCRGroupedTrails = (() => {
-						if (
-							isPaidContentSameBranding(
-								collection.collectionBranding,
-							)
-						) {
-							const groupedTrailsWithoutBranding: DCRGroupedTrails =
-								{
-									snap: [],
-									huge: [],
-									veryBig: [],
-									big: [],
-									standard: [],
-									splash: [],
-								};
-							for (const key of Object.keys(
-								collection.grouped,
-							) as (keyof DCRGroupedTrails)[]) {
-								groupedTrailsWithoutBranding[key] =
-									collection.grouped[key].map((labTrail) => ({
-										...labTrail,
-										branding: undefined,
-									}));
-							}
-							return groupedTrailsWithoutBranding;
-						}
-						return collection.grouped;
-					})();
 
 					if (collection.collectionType === 'scrollable/highlights') {
 						// Highlights are rendered in the Masthead component
@@ -492,7 +458,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									editionId={editionId}
 								>
 									<DecideContainer
-										trails={trailsWithoutBranding}
+										trails={trails}
 										groupedTrails={collection.grouped}
 										containerType={
 											collection.collectionType
@@ -612,8 +578,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								)}
 							>
 								<DecideContainer
-									trails={trailsWithoutBranding}
-									groupedTrails={groupedWithoutBranding}
+									trails={trails}
+									groupedTrails={collection.grouped}
 									containerType={collection.collectionType}
 									containerPalette={
 										collection.containerPalette
@@ -634,6 +600,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
+									isInOpinionNoAvatarVariant={isInOpinionNoAvatarVariant(
+										collection.displayName,
+									)}
 								/>
 							</FrontSection>
 

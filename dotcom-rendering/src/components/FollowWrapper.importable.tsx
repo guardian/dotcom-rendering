@@ -172,6 +172,7 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 					}
 				}
 			`}
+			data-gu-name="follow"
 		>
 			{showFollowTagButton && (
 				<FollowTagButton

@@ -31,6 +31,7 @@ export const ABTests: ABTest[] = [
 		type: 'client',
 		audienceSize: 10 / 100,
 		groups: ['control', 'variant'],
+		shouldForceMetricsCollection: true,
 	},
 	{
 		name: 'commercial-server-side-test',
@@ -42,6 +43,7 @@ export const ABTests: ABTest[] = [
 		type: 'server',
 		audienceSize: 10 / 100,
 		groups: ['control', 'variant'],
+		shouldForceMetricsCollection: true,
 	},
 	{
 		name: 'commercial-large-overlap-test',
@@ -57,5 +59,6 @@ export const ABTests: ABTest[] = [
 		audienceSize: 50 / 100,
 		groups: ['control', 'variant'],
 		audienceSpace: 'B',
+		shouldForceMetricsCollection: true,
 	},
 ];

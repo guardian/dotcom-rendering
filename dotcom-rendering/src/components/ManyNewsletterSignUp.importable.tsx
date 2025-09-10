@@ -261,6 +261,10 @@ export const ManyNewsletterSignUp = ({
 			return undefined;
 		});
 
+		const marketingOptInType = marketingOptIn
+			? 'similar-guardian-products-optin'
+			: 'similar-guardian-products-optout';
+
 		if (!response?.ok) {
 			const responseText = response
 				? await response.text()
@@ -271,6 +275,7 @@ export const ManyNewsletterSignUp = ({
 				renderingTarget,
 				{
 					listIds,
+					...(marketingOptIn !== undefined && { marketingOptInType }),
 					// If the backend handles the failure and responds with an informative
 					// error message (E.G. "Service unavailable", "Invalid email" etc) this
 					// should be included in the event data.
@@ -289,6 +294,7 @@ export const ManyNewsletterSignUp = ({
 			renderingTarget,
 			{
 				listIds,
+				...(marketingOptIn !== undefined && { marketingOptInType }),
 			},
 		);
 		setStatus('Success');
