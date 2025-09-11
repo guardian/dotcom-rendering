@@ -1154,6 +1154,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									!!article.config.switches.remoteBanner
 								}
 								tags={article.tags}
+								host={article.config.host}
 							/>
 						</Island>
 					</BannerWrapper>
