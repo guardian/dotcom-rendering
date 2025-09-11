@@ -12,10 +12,12 @@ jest.mock('../client/ophan/ophan', () => ({
 const mockWindow = ({
 	replace,
 	get,
+	matchMedia = true,
 	enableFedCM = true,
 }: {
 	replace: jest.Mock;
 	get: jest.Mock;
+	matchMedia?: boolean;
 	enableFedCM?: boolean;
 }) =>
 	Object.defineProperty(globalThis, 'window', {
@@ -25,6 +27,9 @@ const mockWindow = ({
 				hostname: 'm.code.theguardian.com',
 				replace,
 			},
+			matchMedia: () => ({
+				matches: matchMedia,
+			}),
 			navigator: { credentials: { get } },
 			...(enableFedCM ? { IdentityCredential: 'mock value' } : {}),
 		},
@@ -247,6 +252,35 @@ describe('GoogleOneTap', () => {
 			get: navigatorGet,
 			replace: locationReplace,
 			enableFedCM: false,
+		});
+
+		await initializeFedCM({ isSignedIn: false, countryCode: 'IE' });
+
+		expect(submitComponentEventMock).toHaveBeenCalledTimes(1);
+		expect(submitComponentEventMock).toHaveBeenCalledWith(
+			{
+				component: {
+					componentType: 'SIGN_IN_GOOGLE_ONE_TAP',
+				},
+				action: 'DETECT',
+				value: 'NOT_SUPPORTED',
+			},
+			'Web',
+		);
+
+		expect(navigatorGet).not.toHaveBeenCalled();
+		expect(locationReplace).not.toHaveBeenCalled();
+	});
+
+	it('should not initializeFedCM when FedCM on mobile device', async () => {
+		const navigatorGet = jest.fn();
+		const locationReplace = jest.fn();
+
+		mockWindow({
+			get: navigatorGet,
+			replace: locationReplace,
+			enableFedCM: true,
+			matchMedia: false,
 		});
 
 		await initializeFedCM({ isSignedIn: false, countryCode: 'IE' });
