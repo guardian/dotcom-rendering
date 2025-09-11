@@ -1,4 +1,5 @@
 import { submitComponentEvent as submitComponentEventMock } from '../client/ophan/ophan';
+import { error, ok } from '../lib/result';
 import {
 	extractEmailFromToken,
 	getRedirectUrl,
@@ -79,11 +80,11 @@ describe('GoogleOneTap', () => {
 			extractEmailFromToken(
 				'NULL.eyJlbWFpbCI6InZhbGlkQGVtYWlsLmNvbSJ9.NULL',
 			),
-		).toEqual('valid@email.com');
+		).toEqual(ok('valid@email.com'));
 	});
 
 	it('should return undefined from a malformed JWT token', () => {
-		expect(extractEmailFromToken('NULL')).toEqual(undefined);
+		expect(extractEmailFromToken('NULL')).toEqual(error('ParsingError'));
 	});
 
 	it('should initializeFedCM and redirect to Gateway with token on success', async () => {
@@ -144,10 +145,10 @@ describe('GoogleOneTap', () => {
 	});
 
 	it('should initializeFedCM and not redirect to Gateway with token on failure', async () => {
-		const error = new Error('Network Error');
-		error.name = 'NetworkError';
+		const e = new Error('Network Error');
+		e.name = 'NetworkError';
 
-		const navigatorGet = jest.fn(() => Promise.reject(error));
+		const navigatorGet = jest.fn(() => Promise.reject(e));
 		const locationReplace = jest.fn();
 
 		mockWindow({
@@ -199,10 +200,10 @@ describe('GoogleOneTap', () => {
 	});
 
 	it('should initializeFedCM and throw error when unexpected', async () => {
-		const error = new Error('window.navigator.credentials.get failed');
-		error.name = 'DOMException';
+		const e = new Error('window.navigator.credentials.get failed');
+		e.name = 'DOMException';
 
-		const navigatorGet = jest.fn(() => Promise.reject(error));
+		const navigatorGet = jest.fn(() => Promise.reject(e));
 		const locationReplace = jest.fn();
 
 		mockWindow({
