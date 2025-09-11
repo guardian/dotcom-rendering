@@ -45,7 +45,7 @@ export const LoopVideoProgressBar = ({
 
 	/**
 	 * We achieve a smooth progress bar by using CSS transitions. Given that
-	 * onTimeUpdate firesevery 250ms or so, this means that the time on the
+	 * onTimeUpdate fires every 250ms or so, this means that the time on the
 	 * progress bar is always about 0.25s behind and begins 0.25s late.
 	 * Therefore, when calculating the progress percentage, we take 0.25s off the duration.
 	 *

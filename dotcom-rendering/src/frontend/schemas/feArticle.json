@@ -5288,8 +5288,23 @@
                         "atomId": {
                             "type": "string"
                         },
-                        "videoId": {
-                            "type": "string"
+                        "sources": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "src": {
+                                        "type": "string"
+                                    },
+                                    "mimeType": {
+                                        "$ref": "#/definitions/SupportedVideoFileType"
+                                    }
+                                },
+                                "required": [
+                                    "mimeType",
+                                    "src"
+                                ]
+                            }
                         },
                         "height": {
                             "type": "number"
@@ -5308,12 +5323,19 @@
                         "atomId",
                         "duration",
                         "height",
+                        "sources",
                         "type",
-                        "videoId",
                         "width"
                     ]
                 }
             ]
+        },
+        "SupportedVideoFileType": {
+            "enum": [
+                "application/x-mpegURL",
+                "video/mp4"
+            ],
+            "type": "string"
         },
         "Audio": {
             "allOf": [

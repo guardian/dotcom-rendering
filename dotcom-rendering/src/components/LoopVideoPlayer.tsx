@@ -8,6 +8,7 @@ import type {
 	SyntheticEvent,
 } from 'react';
 import { forwardRef } from 'react';
+import type { Source } from '../lib/video';
 import { palette } from '../palette';
 import { narrowPlayIconWidth, PlayIcon } from './Card/components/PlayIcon';
 import { LoopVideoProgressBar } from './LoopVideoProgressBar';
@@ -74,7 +75,7 @@ export const PLAYER_STATES = [
 export type PlayerStates = (typeof PLAYER_STATES)[number];
 
 type Props = {
-	src: string;
+	sources: Source[];
 	atomId: string;
 	uniqueId: string;
 	width: number;
@@ -105,7 +106,7 @@ type Props = {
 export const LoopVideoPlayer = forwardRef(
 	(
 		{
-			src,
+			sources,
 			atomId,
 			uniqueId,
 			width,
@@ -170,9 +171,14 @@ export const LoopVideoPlayer = forwardRef(
 					onKeyDown={handleKeyDown}
 					onError={onError}
 				>
-					{/* Only mp4 is currently supported. Assumes the video file type is mp4. */}
-					{/* The start time is set to 1ms so that Safari will autoplay the video */}
-					<source src={`${src}#t=0.001`} type="video/mp4" />
+					{sources.map((source) => (
+						<source
+							key={source.mimeType}
+							/* The start time is set to 1ms so that Safari will autoplay the video */
+							src={`${source.src}#t=0.001`}
+							type={source.mimeType}
+						/>
+					))}
 					{FallbackImageComponent}
 				</video>
 				{ref && 'current' in ref && ref.current && isPlayable && (
@@ -207,7 +213,7 @@ export const LoopVideoPlayer = forwardRef(
 							>
 								<div
 									css={audioIconContainerStyles}
-									data-testId={`${
+									data-testid={`${
 										isMuted ? 'unmute' : 'mute'
 									}-icon`}
 								>
