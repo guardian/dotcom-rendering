@@ -211,6 +211,10 @@ export const getActiveMediaAtom = (
 			cardTrailImage,
 		);
 
+		/**
+		 * Each version of a media atom will contain assets for self-hosted OR YouTube, but not both.
+		 * Therefore, we check the platform of the first asset and assume the rest are the same.
+		 */
 		if (assets[0]?.platform === 'Url') {
 			/**
 			 * Take one source for each supported video file type.
