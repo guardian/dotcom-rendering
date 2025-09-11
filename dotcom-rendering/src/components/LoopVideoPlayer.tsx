@@ -157,7 +157,6 @@ export const LoopVideoPlayer = forwardRef(
 					onCanPlay={handleCanPlay}
 					onCanPlayThrough={handleCanPlay}
 					onTimeUpdate={() => {
-						// Todo - find out why this isn't firing on native HLS safari
 						if (
 							ref &&
 							'current' in ref &&
