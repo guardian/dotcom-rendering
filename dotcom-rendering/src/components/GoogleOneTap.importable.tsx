@@ -1,7 +1,9 @@
 import type { CountryCode } from '@guardian/libs';
-import { log } from '@guardian/libs';
+import { isObject, log } from '@guardian/libs';
 import type { TAction, TComponentType } from '@guardian/ophan-tracker-js';
 import { submitComponentEvent } from '../client/ophan/ophan';
+import type { Result } from '../lib/result';
+import { error, ok, okOrThrow } from '../lib/result';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useConsent } from '../lib/useConsent';
 import { useCountryCode } from '../lib/useCountryCode';
@@ -59,13 +61,21 @@ const getStage = (hostname: string): StageType => {
  * @param token A JWT Token
  * @returns extracted email address
  */
-export const extractEmailFromToken = (token: string): string | undefined => {
+export const extractEmailFromToken = (
+	token: string,
+): Result<'ParsingError', string> => {
 	const payload = token.split('.')[1];
-	if (!payload) return;
-	const decoded = atob(payload);
-	const parsed = JSON.parse(decoded) as Record<string, unknown>;
-	if (typeof parsed.email !== 'string') return;
-	return parsed.email;
+	if (!payload) return error('ParsingError');
+	try {
+		const decoded = Buffer.from(payload, 'base64').toString();
+		const parsed = JSON.parse(decoded) as unknown;
+		if (!isObject(parsed) || typeof parsed.email !== 'string') {
+			return error('ParsingError');
+		}
+		return ok(parsed.email);
+	} catch (e) {
+		return error('ParsingError');
+	}
 };
 
 export const getRedirectUrl = ({
@@ -189,7 +199,7 @@ export const initializeFedCM = async ({
 				providers: getProviders(stage),
 			},
 		})
-		.catch((error) => {
+		.catch((e) => {
 			/**
 			 * The fedcm API hides issues with the user's federated login state
 			 * behind a generic NetworkError. This error is thrown up to 60
@@ -201,13 +211,13 @@ export const initializeFedCM = async ({
 			 * Unfortunately for us it means we can't differentiate between
 			 * a genuine network error and a user declining the FedCM prompt.
 			 */
-			if (error instanceof Error && error.name === 'NetworkError') {
+			if (e instanceof Error && e.name === 'NetworkError') {
 				log(
 					'identity',
 					'FedCM prompt failed, potentially due to user declining',
 				);
 			} else {
-				throw error;
+				throw e;
 			}
 		});
 
@@ -216,16 +226,10 @@ export const initializeFedCM = async ({
 			credentials,
 		});
 
-		const signInEmail = extractEmailFromToken(credentials.token);
-		if (signInEmail) {
-			log('identity', `FedCM ID token for ${signInEmail} received`);
-		} else {
-			log(
-				'identity',
-				'FedCM token received but email could not be extracted from token',
-			);
-			return;
-		}
+		const signInEmail = okOrThrow(
+			extractEmailFromToken(credentials.token),
+			'Failed to extract email from FedCM token',
+		);
 
 		await submitComponentEvent(
 			{
