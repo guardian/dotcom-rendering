@@ -14,7 +14,9 @@ on:
 jobs:
   ci:
     uses: ./.github/workflows/ab-testing-checks.yml
-
+    secrets:
+      FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_PROD_AB_TESTING_CONFIG }}
+      FASTLY_API_TOKEN: ${{ secrets.FASTLY_PROD_API_TOKEN }}
   deploy:
     name: Deploy PROD
     needs: ci
@@ -29,4 +31,4 @@ jobs:
           stage: prod
         env:
           FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_PROD_AB_TESTING_CONFIG }}
-          FASTLY_API_TOKEN: ${{ secrets.FASTLY_CODE_API_TOKEN }}
+          FASTLY_API_TOKEN: ${{ secrets.FASTLY_PROD_API_TOKEN }}
