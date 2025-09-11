@@ -153,6 +153,7 @@ export type Props = {
 	showKickerImage?: boolean;
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
+	isInHideTrailsAbTest?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -390,6 +391,7 @@ export const Card = ({
 	trailTextSize,
 	showKickerImage = false,
 	headlinePosition = 'inner',
+	isInHideTrailsAbTest = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -1090,14 +1092,16 @@ export const Card = ({
 							</HeadlineWrapper>
 						)}
 
-						{!!trailText && media?.type !== 'podcast' && (
-							<TrailText
-								trailText={trailText}
-								trailTextSize={trailTextSize}
-								padTop={headlinePosition === 'inner'}
-								hideUntil={hideTrailTextUntil()}
-							/>
-						)}
+						{!!trailText &&
+							media?.type !== 'podcast' &&
+							!isInHideTrailsAbTest && (
+								<TrailText
+									trailText={trailText}
+									trailTextSize={trailTextSize}
+									padTop={headlinePosition === 'inner'}
+									hideUntil={hideTrailTextUntil()}
+								/>
+							)}
 
 						{!isOpinionCardWithAvatar && (
 							<>

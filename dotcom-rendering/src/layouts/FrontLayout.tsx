@@ -603,6 +603,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									isInOpinionNoAvatarVariant={isInOpinionNoAvatarVariant(
 										collection.displayName,
 									)}
+									isInHideTrailsAbTest={
+										front.isNetworkFront &&
+										abTests.hideTrailsVariant === 'variant'
+									}
 								/>
 							</FrontSection>
 

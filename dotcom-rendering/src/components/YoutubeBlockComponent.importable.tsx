@@ -55,6 +55,7 @@ type Props = {
 	showByline?: boolean;
 	contentType?: string;
 	contentLayout?: string;
+	isInHideTrailsAbTest?: boolean;
 };
 
 export const YoutubeBlockComponent = ({
@@ -97,6 +98,7 @@ export const YoutubeBlockComponent = ({
 	showByline,
 	contentType,
 	contentLayout,
+	isInHideTrailsAbTest,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -222,6 +224,7 @@ export const YoutubeBlockComponent = ({
 				isImmersive={isImmersive}
 				byline={byline}
 				showByline={showByline}
+				isInHideTrailsAbTest={isInHideTrailsAbTest}
 			/>
 			{!hideCaption && (
 				<Caption
