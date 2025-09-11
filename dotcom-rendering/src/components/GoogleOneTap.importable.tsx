@@ -119,7 +119,12 @@ export const initializeFedCM = async ({
 	isSignedIn?: boolean;
 	countryCode?: CountryCode;
 }): Promise<void> => {
-	const isSupported = 'IdentityCredential' in window;
+	// If the window doesn't support "hover" interactions we assume its a touch only device (e.g. mobile)
+	// and we don't show Google One Tap. This is because mobile browsers render Google One Tap differently
+	// which can potentially cover the reader revenue banner and lead to a poor user experience.
+	const isSupported =
+		'IdentityCredential' in window &&
+		window.matchMedia('(any-hover: hover)').matches;
 
 	void submitComponentEvent(
 		{
