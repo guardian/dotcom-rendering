@@ -121,13 +121,13 @@ export const YoutubeBlockComponent = ({
 		// We need Video articles generated directly from Media Atom Maker
 		// to always show their poster (16:9) image, but in other cases
 		// use the override image (often supplied as 5:4 then cropped to 16:9)
-		if (contentType && contentType.toLowerCase() === 'video') {
+		if (contentType?.toLowerCase() === 'video') {
 			return posterImage;
 		}
 
 		// For Standard Articles with a Video atom for their main media
 		// we need to display the poster image
-		if (contentLayout && contentLayout.toLowerCase() === 'standardlayout') {
+		if (contentLayout?.toLowerCase() === 'standardlayout') {
 			return posterImage;
 		}
 
