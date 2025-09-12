@@ -325,6 +325,14 @@ export const ReaderRevenueBanner = ({
 			});
 	}, [name]);
 
+	// Safe log of props once available
+	useEffect(() => {
+		console.log('🚀 RR Banner props:', props);
+	}, [props]);
+	useEffect(() => {
+		console.log('🚀 RR Banner props email:', props.fetchEmail);
+	}, [props]);
+
 	if (Banner !== null) {
 		return (
 			// The css here is necessary to put the container div in view, so that we can track the view
