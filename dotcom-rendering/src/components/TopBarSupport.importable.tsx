@@ -21,7 +21,6 @@ import {
 	getPurchaseInfo,
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
-import { setAutomat } from '../lib/setAutomat';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
@@ -71,8 +70,6 @@ const ReaderRevenueLinksRemote = ({
 			// We don't yet know the user's supporter status
 			return;
 		}
-
-		setAutomat();
 
 		const requestData: HeaderPayload = {
 			targeting: {

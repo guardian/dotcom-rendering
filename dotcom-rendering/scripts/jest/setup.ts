@@ -48,13 +48,6 @@ const windowGuardian = {
 	functions: {
 		import: (url: string) => import(url),
 	},
-	automat: {
-		react: undefined,
-		preact: undefined,
-		emotion: undefined,
-		emotionCore: undefined,
-		emotionTheming: undefined,
-	},
 	readerRevenue: {
 		changeGeolocation: () => {},
 		showMeTheEpic: () => {},
