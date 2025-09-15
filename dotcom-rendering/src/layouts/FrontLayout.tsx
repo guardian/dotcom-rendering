@@ -135,6 +135,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
+	const isInLabsContainerRedesignVariant =
+		abTests.labsContainerRedesignVariant === 'variant';
+
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
 			case 'scrollable/feature':
@@ -425,7 +428,103 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					}
 
 					if (collection.containerPalette === 'Branded') {
-						return (
+						isInLabsContainerRedesignVariant ? (
+							<Fragment key={ophanName}>
+								<FrontSection
+									title={collection.displayName}
+									description={collection.description}
+									showTopBorder={index > 0}
+									url={
+										collection.href
+											? `https://www.theguardian.com/${collection.href}`
+											: undefined
+									}
+									ophanComponentLink={ophanComponentLink}
+									ophanComponentName={ophanName}
+									containerName={collection.collectionType}
+									containerPalette={
+										collection.containerPalette
+									}
+									toggleable={isToggleable(
+										index,
+										collection,
+										front.isNetworkFront,
+									)}
+									leftContent={decideLeftContent(
+										front,
+										collection,
+									)}
+									sectionId={ophanName}
+									collectionId={collection.id}
+									pageId={front.pressedPage.id}
+									showDateHeader={
+										collection.config.showDateHeader
+									}
+									editionId={front.editionId}
+									treats={collection.treats}
+									canShowMore={collection.canShowMore}
+									ajaxUrl={front.config.ajaxUrl}
+									isOnPaidContentFront={isPaidContent}
+									targetedTerritory={
+										collection.targetedTerritory
+									}
+									hasPageSkin={hasPageSkin}
+									discussionApiUrl={
+										front.config.discussionApiUrl
+									}
+									collectionBranding={
+										collection.collectionBranding
+									}
+									containerLevel={collection.containerLevel}
+									isNextCollectionPrimary={
+										collection.isNextCollectionPrimary
+									}
+									hasNavigationButtons={
+										collection.collectionType ===
+											'scrollable/small' ||
+										collection.collectionType ===
+											'scrollable/medium'
+									}
+									isAboveDesktopAd={desktopAdPositions.includes(
+										index + 1,
+									)}
+									isAboveMobileAd={mobileAdPositions.includes(
+										index,
+									)}
+								>
+									<DecideContainer
+										trails={trails}
+										groupedTrails={collection.grouped}
+										containerType={
+											collection.collectionType
+										}
+										containerPalette={
+											collection.containerPalette
+										}
+										showAge={
+											!hideAge.includes(
+												collection.displayName,
+											)
+										}
+										imageLoading={imageLoading}
+										absoluteServerTimes={
+											absoluteServerTimes
+										}
+										aspectRatio={
+											collection.aspectRatio ??
+											fallbackAspectRatio(
+												collection.collectionType,
+											)
+										}
+										sectionId={ophanName}
+										collectionId={index + 1}
+										containerLevel={
+											collection.containerLevel
+										}
+									/>
+								</FrontSection>
+							</Fragment>
+						) : (
 							<Fragment key={ophanName}>
 								<LabsSection
 									title={collection.displayName}
