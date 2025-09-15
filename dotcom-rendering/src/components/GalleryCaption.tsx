@@ -14,6 +14,8 @@ type Props = {
 	format: ArticleFormat;
 	pageId: string;
 	webTitle: string;
+	/** Position of the image in the gallery used to build share fragment */
+	position?: number;
 };
 
 const styles = css`
@@ -68,6 +70,7 @@ export const GalleryCaption = ({
 	format,
 	pageId,
 	webTitle,
+	position,
 }: Props) => {
 	const emptyCaption = captionHtml === undefined || captionHtml.trim() === '';
 	const hideCredit =
@@ -101,6 +104,11 @@ export const GalleryCaption = ({
 						pageId={pageId}
 						webTitle={webTitle}
 						context="ImageCaption"
+						hash={
+							typeof position === 'number'
+								? `img-${position}`
+								: undefined
+						}
 					/>
 				</Island>
 			</div>

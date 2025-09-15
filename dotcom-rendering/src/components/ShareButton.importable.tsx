@@ -17,6 +17,11 @@ type Props = {
 	size?: Size;
 	pageId: string;
 	blockId?: string;
+	/**
+	 * Optional hash fragment (without the leading '#') to append to the url when sharing.
+	 * If provided this takes precedence over `blockId`.
+	 */
+	hash?: string;
 	webTitle: string;
 	format: ArticleFormat;
 	context: Context;
@@ -86,15 +91,23 @@ const liveBlogMobileMeta = (isCopied: boolean) => css`
 	}
 `;
 
-const getUrl = ({ pageId, blockId }: { pageId: string; blockId?: string }) => {
+const getUrl = ({
+	pageId,
+	blockId,
+	hash,
+}: {
+	pageId: string;
+	blockId?: string;
+	hash?: string;
+}) => {
 	const searchParams = new URLSearchParams({});
 	searchParams.append('CMP', 'share_btn_url');
 	if (blockId) searchParams.append('page', `with:block-${blockId}`);
 
-	const blockHash = blockId ? `#block-${blockId}` : '';
+	const fragment = hash ? `#${hash}` : blockId ? `#block-${blockId}` : '';
 	const paramsString = searchParams.toString();
 	return new URL(
-		`${pageId}${paramsString ? '?' + paramsString : ''}${blockHash}`,
+		`${pageId}${paramsString ? '?' + paramsString : ''}${fragment}`,
 		'https://www.theguardian.com/',
 	).href;
 };
@@ -181,6 +194,7 @@ export const ShareButton = ({
 	size = 'small',
 	pageId,
 	blockId,
+	hash,
 	webTitle,
 	format,
 	context,
@@ -202,9 +216,10 @@ export const ShareButton = ({
 			url: getUrl({
 				pageId,
 				blockId,
+				hash,
 			}),
 		}),
-		[webTitle, pageId, blockId],
+		[webTitle, pageId, blockId, hash],
 	);
 
 	useEffect(() => {
@@ -251,6 +266,7 @@ export const ShareButton = ({
 								getUrl({
 									pageId,
 									blockId,
+									hash,
 								}),
 							)
 							.then(() => {
@@ -269,6 +285,7 @@ export const ShareButton = ({
 					href={`mailto:?subject=${webTitle}&body=${getUrl({
 						pageId,
 						blockId,
+						hash,
 					})}`}
 					size={size}
 					isLiveBlogMeta={isLiveBlogMeta}
