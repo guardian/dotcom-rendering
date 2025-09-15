@@ -1,8 +1,14 @@
-import { log } from '@guardian/libs';
+import type { CountryCode } from '@guardian/libs';
+import { isObject, log } from '@guardian/libs';
+import type { TAction, TComponentType } from '@guardian/ophan-tracker-js';
+import { submitComponentEvent } from '../client/ophan/ophan';
+import type { Result } from '../lib/result';
+import { error, ok, okOrThrow } from '../lib/result';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useConsent } from '../lib/useConsent';
+import { useCountryCode } from '../lib/useCountryCode';
 import { useOnce } from '../lib/useOnce';
-import type { ServerSideTests, StageType } from '../types/config';
+import type { ServerSideTests, StageType, Switches } from '../types/config';
 
 type IdentityProviderConfig = {
 	configURL: string;
@@ -19,8 +25,12 @@ type CredentialsProvider = {
 	}) => Promise<{ token: string }>;
 };
 
-export const isInGoogleOneTapTest = (tests: ServerSideTests): boolean =>
-	tests['googleOneTapVariant'] === 'variant';
+export const isGoogleOneTapEnabled = (
+	tests: ServerSideTests,
+	switches: Switches,
+): boolean =>
+	tests['googleOneTapVariant'] === 'variant' ||
+	switches['googleOneTapSwitch'] === true;
 
 /**
  * Detect the current stage of the application based on the hostname.
@@ -42,13 +52,39 @@ const getStage = (hostname: string): StageType => {
 	return 'PROD';
 };
 
+/**
+ * Extract the readers email address from a JWT token.
+ *
+ * As we're not using the token for authentication we don't need to verify the signature,
+ * if the user wants to spoof a token it doesn't matter as they can only sign in as themselves.
+ *
+ * @param token A JWT Token
+ * @returns extracted email address
+ */
+export const extractEmailFromToken = (
+	token: string,
+): Result<'ParsingError', string> => {
+	const payload = token.split('.')[1];
+	if (!payload) return error('ParsingError');
+	try {
+		const decoded = Buffer.from(payload, 'base64').toString();
+		const parsed = JSON.parse(decoded) as unknown;
+		if (!isObject(parsed) || typeof parsed.email !== 'string') {
+			return error('ParsingError');
+		}
+		return ok(parsed.email);
+	} catch (e) {
+		return error('ParsingError');
+	}
+};
+
 export const getRedirectUrl = ({
 	stage,
-	token,
+	signInEmail,
 	currentLocation,
 }: {
 	stage: StageType;
-	token: string;
+	signInEmail: string;
 	currentLocation: string;
 }): string => {
 	const profileDomain = {
@@ -57,21 +93,21 @@ export const getRedirectUrl = ({
 		DEV: 'https://profile.thegulocal.com',
 	}[stage];
 	const queryParams = new URLSearchParams({
-		token,
+		signInEmail,
 		returnUrl: currentLocation,
 	});
 
 	return `${profileDomain}/signin/google?${queryParams.toString()}`;
 };
 
-// TODO: Do we want to use different Google Client IDs for One Tap than we use for social sign in?
 const getProviders = (stage: StageType): IdentityProviderConfig[] => {
 	switch (stage) {
 		case 'PROD':
 			return [
 				{
 					configURL: 'https://accounts.google.com/gsi/fedcm.json',
-					clientId: '774465807556.apps.googleusercontent.com',
+					clientId:
+						'774465807556-4d50ur6svcjj90l7fe6i0bnp4t4qhkga.apps.googleusercontent.com',
 				},
 			];
 		case 'CODE':
@@ -79,9 +115,8 @@ const getProviders = (stage: StageType): IdentityProviderConfig[] => {
 			return [
 				{
 					configURL: 'https://accounts.google.com/gsi/fedcm.json',
-					// TODO: m.code.dev-theguardian.com is not a supported origin for this Client ID
 					clientId:
-						'774465807556-pkevncqpfs9486ms0bo5q1f2g9vhpior.apps.googleusercontent.com',
+						'774465807556-h24eigcs027mj7sunatfem926c4310jo.apps.googleusercontent.com',
 				},
 			];
 	}
@@ -89,10 +124,37 @@ const getProviders = (stage: StageType): IdentityProviderConfig[] => {
 
 export const initializeFedCM = async ({
 	isSignedIn,
+	countryCode,
 }: {
 	isSignedIn?: boolean;
-	isInTest?: boolean;
+	countryCode?: CountryCode;
 }): Promise<void> => {
+	// If the window doesn't support "hover" interactions we assume its a touch only device (e.g. mobile)
+	// and we don't show Google One Tap. This is because mobile browsers render Google One Tap differently
+	// which can potentially cover the reader revenue banner and lead to a poor user experience.
+	const isSupported =
+		'IdentityCredential' in window &&
+		window.matchMedia('(any-hover: hover)').matches;
+
+	void submitComponentEvent(
+		{
+			// TODO: @guardian/ophan-tracker-js@v2.4.1 has some changes to how page views are tracked
+			// unrelated to Google One Tap which isn't safe to be released yet. Upgrade this once
+			// v2.4.1 is safe to use.
+			action: 'DETECT' as TAction,
+			component: {
+				// TODO: @guardian/ophan-tracker-js@v2.4.1 has some changes to how page views are tracked
+				// unrelated to Google One Tap which isn't safe to be released yet. Upgrade this once
+				// v2.4.1 is safe to use.
+				componentType: 'SIGN_IN_GOOGLE_ONE_TAP' as TComponentType,
+			},
+			value: isSupported ? 'SUPPORTED' : 'NOT_SUPPORTED',
+		},
+		'Web',
+	);
+
+	// TODO: Expand Google One Tap to outside Ireland
+	if (countryCode !== 'IE') return;
 	if (isSignedIn) return;
 
 	/**
@@ -104,8 +166,7 @@ export const initializeFedCM = async ({
 	 *
 	 * See: https://bugzilla.mozilla.org/show_bug.cgi?id=1803629
 	 */
-	if (!('IdentityCredential' in window)) {
-		// TODO: Track Ophan "FedCM" unsupported event here.
+	if (!isSupported) {
 		log('identity', 'FedCM API not supported in this browser');
 		return;
 	}
@@ -138,7 +199,7 @@ export const initializeFedCM = async ({
 				providers: getProviders(stage),
 			},
 		})
-		.catch((error) => {
+		.catch((e) => {
 			/**
 			 * The fedcm API hides issues with the user's federated login state
 			 * behind a generic NetworkError. This error is thrown up to 60
@@ -150,41 +211,68 @@ export const initializeFedCM = async ({
 			 * Unfortunately for us it means we can't differentiate between
 			 * a genuine network error and a user declining the FedCM prompt.
 			 */
-			if (error instanceof Error && error.name === 'NetworkError') {
+			if (e instanceof Error && e.name === 'NetworkError') {
 				log(
 					'identity',
 					'FedCM prompt failed, potentially due to user declining',
 				);
 			} else {
-				throw error;
+				throw e;
 			}
 		});
 
 	if (credentials) {
-		// TODO: Track Ophan "FedCM" success event here.
 		log('identity', 'FedCM credentials received', {
 			credentials,
 		});
 
+		const signInEmail = okOrThrow(
+			extractEmailFromToken(credentials.token),
+			'Failed to extract email from FedCM token',
+		);
+
+		await submitComponentEvent(
+			{
+				action: 'SIGN_IN',
+				component: {
+					// TODO: @guardian/ophan-tracker-js@v2.4.1 has some changes to how page views are tracked
+					// unrelated to Google One Tap which isn't safe to be released yet. Upgrade this once
+					// v2.4.1 is safe to use.
+					componentType: 'SIGN_IN_GOOGLE_ONE_TAP' as TComponentType,
+				},
+			},
+			'Web',
+		);
+
 		window.location.replace(
 			getRedirectUrl({
 				stage,
-				token: credentials.token,
+				signInEmail,
 				currentLocation: window.location.href,
 			}),
 		);
 	} else {
-		// TODO: Track Ophan "FedCM" skip event here.
+		void submitComponentEvent(
+			{
+				action: 'CLOSE',
+				component: {
+					// TODO: @guardian/ophan-tracker-js@v2.4.1 has some changes to how page views are tracked
+					// unrelated to Google One Tap which isn't safe to be released yet. Upgrade this once
+					// v2.4.1 is safe to use.
+					componentType: 'SIGN_IN_GOOGLE_ONE_TAP' as TComponentType,
+				},
+			},
+			'Web',
+		);
 		log('identity', 'No FedCM credentials received');
 	}
 };
 
-// TODO: GoogleOneTap is currently only used on the front page, but we do probably want to use it on other pages in the future.
 export const GoogleOneTap = () => {
 	// We don't care what consent we get, we just want to make sure Google One Tap is not shown above the consent banner.
-	// TODO: FedCM doesn't require cookies? Do we need to check consent?
 	const consent = useConsent();
 	const isSignedIn = useIsSignedIn();
+	const countryCode = useCountryCode('google-one-tap');
 	// useIsSignedIn returns 'Pending' until the auth status is known.
 	// We don't want to initialize FedCM until we know the auth status, so we pass `undefined` to `useOnce` if it is 'Pending'
 	// to stop it from initializing.
@@ -194,6 +282,7 @@ export const GoogleOneTap = () => {
 	useOnce(() => {
 		void initializeFedCM({
 			isSignedIn: isSignedInWithoutPending,
+			countryCode,
 		});
 	}, [isSignedInWithoutPending, consent]);
 
