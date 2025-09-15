@@ -32,7 +32,6 @@ type Props = {
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
-	isInOpinionNoAvatarVariant?: boolean;
 	isInHideTrailsAbTest?: boolean;
 };
 
@@ -597,7 +596,6 @@ export const FlexibleGeneral = ({
 	aspectRatio,
 	containerLevel = 'Primary',
 	collectionId,
-	isInOpinionNoAvatarVariant,
 	isInHideTrailsAbTest,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
@@ -610,9 +608,6 @@ export const FlexibleGeneral = ({
 		.map((standard, i) => ({
 			...standard,
 			uniqueId: `collection-${collectionId}-standard-${i}`,
-			avatarUrl: isInOpinionNoAvatarVariant
-				? undefined
-				: standard.avatarUrl,
 		}));
 
 	const groupedCards = decideCardPositions(cards);
