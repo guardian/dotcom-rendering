@@ -432,9 +432,10 @@ const headerImage = css`
 
 	${from.desktop} {
 		align-self: center;
-		max-height: 276px;
-		max-width: 284px;
+		flex: 1 1 auto;
+		min-height: 0;
 		width: 100%;
+		height: 100%;
 		object-fit: contain;
 	}
 
