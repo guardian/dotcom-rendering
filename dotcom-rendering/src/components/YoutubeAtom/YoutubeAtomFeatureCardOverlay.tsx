@@ -140,6 +140,7 @@ type Props = {
 	isImmersive?: boolean;
 	byline?: string;
 	showByline?: boolean;
+	isInHideTrailsAbTest?: boolean;
 };
 
 export const YoutubeAtomFeatureCardOverlay = ({
@@ -167,6 +168,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 	isImmersive,
 	byline,
 	showByline,
+	isInHideTrailsAbTest,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
@@ -238,7 +240,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 							showByline={showByline}
 						/>
 					)}
-					{!!trailText && (
+					{!!trailText && !isInHideTrailsAbTest && (
 						<div
 							css={css`
 								margin-top: ${space[3]}px;
