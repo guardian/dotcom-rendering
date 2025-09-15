@@ -47,7 +47,6 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
-	isInOpinionNoAvatarVariant?: boolean;
 	isInHideTrailsAbTest?: boolean;
 };
 
@@ -64,7 +63,6 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
-	isInOpinionNoAvatarVariant,
 	isInHideTrailsAbTest,
 }: Props) => {
 	switch (containerType) {
@@ -262,7 +260,6 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
-					isInOpinionNoAvatarVariant={isInOpinionNoAvatarVariant}
 					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 				/>
 			);
@@ -294,7 +291,6 @@ export const DecideContainer = ({
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
-						isInOpinionNoAvatarVariant={isInOpinionNoAvatarVariant}
 						isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 					/>
 				</Island>
