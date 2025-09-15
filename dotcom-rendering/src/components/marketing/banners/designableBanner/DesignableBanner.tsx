@@ -10,8 +10,11 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import {
+	Button,
 	LinkButton,
 	SvgArrowRightStraight,
+	SvgChevronDownSingle,
+	SvgChevronUpSingle,
 	SvgGuardianLogo,
 } from '@guardian/source/react-components';
 import { Ticker } from '@guardian/source-development-kitchen/react-components';
@@ -46,7 +49,7 @@ import type {
 	CtaSettings,
 	CtaStateSettings,
 } from './settings';
-import { buttonThemes } from './styles/buttonStyles';
+import { buttonStyles, buttonThemes } from './styles/buttonStyles';
 import { templateSpacing } from './styles/templateStyles';
 
 const buildImageSettings = (
@@ -117,6 +120,8 @@ const buildChoiceCardSettings = (
 const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	content,
 	onCloseClick,
+	onCollapseClick,
+	onExpandClick,
 	articleCounts,
 	onCtaClick,
 	onSecondaryCtaClick,
@@ -125,6 +130,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	tickerSettings,
 	choiceCardsSettings,
 	submitComponentEvent,
+	tracking,
 	design,
 }: BannerRenderProps): JSX.Element => {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
@@ -166,6 +172,27 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	const [selectedChoiceCard, setSelectedChoiceCard] = useState<
 		ChoiceCard | undefined
 	>(defaultChoiceCard);
+
+	const isCollapsableBanner =
+		tracking.abTestVariant.includes('COLLAPSABLE_V1') ||
+		tracking.abTestVariant.includes('COLLAPSABLE_V2_MAYBE_LATER');
+
+	const contextClassName = tracking.abTestVariant.includes(
+		'COLLAPSABLE_V2_MAYBE_LATER',
+	)
+		? 'maybe-later'
+		: '';
+
+	const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
+
+	const handleSetIsCollapsed = (collapsed: boolean) => {
+		setIsCollapsed(collapsed);
+		if (collapsed) {
+			onCollapseClick();
+		} else {
+			onExpandClick();
+		}
+	};
 
 	// We can't render anything without a design
 	if (!design) {
@@ -281,6 +308,12 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 			separateArticleCount) &&
 		articleCounts.forTargetedWeeks >= 5;
 
+	// Add detection for the new "Maybe later" AB variant and pass flag to CTAs.
+	// This reuses the existing onCloseClick handler (same behaviour as the Close link).
+	const isMaybeLaterVariant = tracking.abTestVariant.includes(
+		'COLLAPSABLE_V2_MAYBE_LATER',
+	);
+
 	return (
 		<div
 			ref={bannerRef}
@@ -291,8 +324,19 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 				iosAppBannerPresent,
 				templateSettings.containerSettings.textColor,
 			)}
+			className={contextClassName}
 		>
-			<div css={styles.layoutOverrides(cardsImageOrSpaceTemplateString)}>
+			<div
+				css={
+					isCollapsableBanner && isCollapsed
+						? styles.collapsedLayoutOverrides(
+								cardsImageOrSpaceTemplateString,
+						  )
+						: styles.layoutOverrides(
+								cardsImageOrSpaceTemplateString,
+						  )
+				}
+			>
 				<div css={styles.guardianLogoContainer}>
 					<SvgGuardianLogo
 						textColor={hexColourToString(basic.logo)}
@@ -310,9 +354,12 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 							headlineSize={
 								design.fonts?.heading.size ?? 'medium'
 							}
+							isCollapsedForABTest={
+								isCollapsableBanner && isCollapsed
+							}
 						/>
 					</div>
-					{showAboveArticleCount && (
+					{showAboveArticleCount && !isCollapsed && (
 						<div css={styles.articleCountContainer}>
 							<DesignableBannerArticleCount
 								numArticles={articleCounts.forTargetedWeeks}
@@ -322,6 +369,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						</div>
 					)}
 					{tickerSettings?.tickerData &&
+						!isCollapsed &&
 						templateSettings.tickerStylingSettings && (
 							<div css={templateSpacing.bannerTicker}>
 								<Ticker
@@ -341,20 +389,22 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								/>
 							</div>
 						)}
-					<div css={templateSpacing.bannerBodyCopy}>
-						<div css={styles.bodyCopyOverrides}>
-							<DesignableBannerBody
-								mainContent={content.mainContent}
-								mobileContent={content.mobileContent}
-								highlightedTextSettings={
-									templateSettings.highlightedTextSettings
-								}
-							/>
+					{(!isCollapsableBanner || !isCollapsed) && (
+						<div css={templateSpacing.bannerBodyCopy}>
+							<div css={styles.bodyCopyOverrides}>
+								<DesignableBannerBody
+									mainContent={content.mainContent}
+									mobileContent={content.mobileContent}
+									highlightedTextSettings={
+										templateSettings.highlightedTextSettings
+									}
+								/>
+							</div>
 						</div>
-					</div>
+					)}
 				</div>
 
-				{templateSettings.imageSettings && (
+				{templateSettings.imageSettings && !isCollapsed && (
 					<div css={styles.bannerVisualContainer}>
 						<DesignableBannerVisual
 							settings={templateSettings.imageSettings}
@@ -377,30 +427,82 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								secondaryCtaSettings={
 									templateSettings.secondaryCtaSettings
 								}
+								onCloseClick={
+									isMaybeLaterVariant && isCollapsed
+										? onCloseClick
+										: undefined
+								}
 							/>
 						</div>
 					</div>
 				)}
 
-				<div css={styles.closeButtonContainer}>
-					<DesignableBannerCloseButton
-						onCloseClick={onCloseClick}
-						settings={templateSettings.closeButtonSettings}
-					/>
+				<div
+					css={
+						isCollapsableBanner
+							? styles.closeAndCollapseButtonContainer
+							: styles.closeButtonContainer
+					}
+				>
+					{isCollapsableBanner && (
+						<div
+							id="collapseable-button"
+							css={styles.collapsableButtonContainer}
+						>
+							<Button
+								onClick={() =>
+									handleSetIsCollapsed(!isCollapsed)
+								}
+								cssOverrides={styles.iconOverrides}
+								priority="tertiary"
+								icon={
+									isCollapsed ? (
+										<SvgChevronUpSingle />
+									) : (
+										<SvgChevronDownSingle />
+									)
+								}
+								size="small"
+								theme={buttonThemes(
+									{
+										default: {
+											backgroundColour:
+												palette.brand[400],
+											textColour: 'inherit',
+										},
+									},
+									'tertiary',
+								)}
+								hideLabel={true}
+							/>
+						</div>
+					)}
+					{(!isCollapsableBanner || isCollapsed) &&
+						!isMaybeLaterVariant && (
+							<DesignableBannerCloseButton
+								onCloseClick={onCloseClick}
+								settings={templateSettings.closeButtonSettings}
+								isCollapsableBanner={isCollapsableBanner}
+							/>
+						)}
 				</div>
 
 				{choiceCards &&
 					selectedChoiceCard &&
 					mainOrMobileContent.primaryCta && (
 						<div css={styles.threeTierChoiceCardsContainer}>
-							<ThreeTierChoiceCards
-								selectedChoiceCard={selectedChoiceCard}
-								setSelectedChoiceCard={setSelectedChoiceCard}
-								choices={choiceCards}
-								id={'banner'}
-							/>
-
-							<div css={styles.ctaContainer}>
+							{(!isCollapsableBanner || !isCollapsed) && (
+								<ThreeTierChoiceCards
+									selectedChoiceCard={selectedChoiceCard}
+									setSelectedChoiceCard={
+										setSelectedChoiceCard
+									}
+									choices={choiceCards}
+									id={'banner'}
+									submitComponentEvent={submitComponentEvent}
+								/>
+							)}
+							<div css={styles.ctaContainer(isCollapsed)}>
 								<LinkButton
 									href={getChoiceCardUrl(
 										selectedChoiceCard,
@@ -418,8 +520,30 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									target="_blank"
 									rel="noopener noreferrer"
 								>
-									Continue
+									{isCollapsed
+										? mainOrMobileContent.primaryCta.ctaText
+										: 'Continue'}
 								</LinkButton>
+								{isMaybeLaterVariant && isCollapsed && (
+									<div css={styles.maybeLaterButtonSizing}>
+										<LinkButton
+											onClick={onCloseClick}
+											priority="tertiary"
+											cssOverrides={[
+												buttonStyles(
+													templateSettings.secondaryCtaSettings,
+												),
+												styles.maybeLaterButton,
+											]}
+											theme={buttonThemes(
+												templateSettings.secondaryCtaSettings,
+												'tertiary',
+											)}
+										>
+											Maybe later
+										</LinkButton>
+									</div>
+								)}
 							</div>
 						</div>
 					)}
@@ -466,24 +590,24 @@ const styles = {
 			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
 			grid-template-columns: auto max(${phabletContentMaxWidth} auto);
 			grid-template-areas:
-				'. close-button .'
-				'. copy-container .'
-				'. ${cardsImageOrSpaceTemplateString} .'
-				'. cta-container .';
+				'.	close-button						.'
+				'.	copy-container						.'
+				'.	${cardsImageOrSpaceTemplateString}	.'
+				'.	cta-container						.';
 		}
 		${from.phablet} {
 			max-width: 740px;
 			margin: 0 auto;
 			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
-			grid-template-columns: minmax(0, 0.5fr) ${phabletContentMaxWidth} minmax(
+			grid-template-columns: minmax(0, 0.5fr) ${phabletContentMaxWidth} max-content minmax(
 					0,
 					0.5fr
 				);
 			grid-template-rows: auto auto auto;
 			grid-template-areas:
-				'. 	copy-container 						close-button'
-				'. 	${cardsImageOrSpaceTemplateString} 	.'
-				'. 	cta-container 						.';
+				'.	copy-container						close-button			close-button'
+				'.	${cardsImageOrSpaceTemplateString}	${cardsImageOrSpaceTemplateString}	.'
+				'.	cta-container						cta-container						.';
 		}
 		${from.desktop} {
 			max-width: 980px;
@@ -493,8 +617,8 @@ const styles = {
 			grid-template-rows: auto auto;
 
 			grid-template-areas:
-				'copy-container 	${cardsImageOrSpaceTemplateString} 	close-button'
-				'cta-container 		${cardsImageOrSpaceTemplateString} 	.			';
+				'copy-container		${cardsImageOrSpaceTemplateString}	close-button'
+				'cta-container		${cardsImageOrSpaceTemplateString}	.';
 		}
 		${from.leftCol} {
 			max-width: 1140px;
@@ -514,6 +638,70 @@ const styles = {
 			grid-template-rows: auto auto;
 			grid-template-areas:
 				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button'
+				'.		vert-line	cta-container	${cardsImageOrSpaceTemplateString}	.';
+		}
+	`,
+	collapsedLayoutOverrides: (cardsImageOrSpaceTemplateString: string) => css`
+		display: grid;
+		background: inherit;
+		position: relative;
+		bottom: 0px;
+
+		/* mobile first */
+		${until.phablet} {
+			max-width: 660px;
+			margin: 0 auto;
+			padding: ${space[2]}px ${space[3]}px 0 ${space[3]}px;
+			grid-template-columns: auto max(${phabletContentMaxWidth} auto);
+			grid-template-areas:
+				'.	close-button						.'
+				'.	copy-container						.'
+				'.	${cardsImageOrSpaceTemplateString}	.'
+				'.	cta-container						.';
+		}
+		${from.phablet} {
+			max-width: 740px;
+			margin: 0 auto;
+			padding: ${space[2]}px ${space[3]}px 0 ${space[3]}px;
+			grid-template-columns:
+				minmax(0, 0.5fr)
+				${phabletContentMaxWidth}
+				1fr
+				0;
+			grid-template-rows: auto auto;
+			grid-template-areas:
+				'.	copy-container						close-button						.'
+				'.	${cardsImageOrSpaceTemplateString}	${cardsImageOrSpaceTemplateString}	.'
+				'.	cta-container						cta-container						.';
+		}
+		${from.desktop} {
+			max-width: 980px;
+			padding: ${space[1]}px ${space[1]}px 0 ${space[3]}px;
+			grid-template-columns: auto 380px auto;
+			grid-template-rows: auto auto;
+
+			grid-template-areas:
+				'copy-container		${cardsImageOrSpaceTemplateString}	close-button'
+				'cta-container		${cardsImageOrSpaceTemplateString}	.';
+		}
+		${from.leftCol} {
+			max-width: 1140px;
+			bottom: 0px;
+			/* the vertical line aligns with that of standard article */
+			grid-column-gap: 10px;
+			grid-template-columns: 140px 1px min(460px) min(380px) auto;
+			grid-template-rows: auto auto;
+			grid-template-areas:
+				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button '
+				'.		vert-line	cta-container	${cardsImageOrSpaceTemplateString}	.';
+		}
+		${from.wide} {
+			max-width: 1300px;
+			/* the vertical line aligns with that of standard article */
+			grid-template-columns: 219px 1px min(460px) min(380px) auto;
+			grid-template-rows: auto auto;
+			grid-template-areas:
+				'logo	vert-line	copy-container	${cardsImageOrSpaceTemplateString}	close-button '
 				'.		vert-line	cta-container	${cardsImageOrSpaceTemplateString}	.';
 		}
 	`,
@@ -551,6 +739,31 @@ const styles = {
 		${from.leftCol} {
 			justify-self: start;
 			padding-left: ${space[8]}px;
+		}
+	`,
+	closeAndCollapseButtonContainer: css`
+		/* Layout changes only here */
+		grid-area: close-button;
+		display: flex;
+		justify-content: space-between;
+
+		${until.phablet} {
+			flex-direction: row-reverse;
+			position: sticky;
+			top: ${space[2]}px;
+		}
+		${from.phablet} {
+			flex-direction: row;
+			column-gap: ${space[0]}px;
+			padding-right: ${space[2]}px;
+			margin-top: ${space[2]}px;
+		}
+		${from.desktop} {
+			margin-top: ${space[5]}px;
+		}
+
+		.maybe-later & {
+			flex-direction: row-reverse;
 		}
 	`,
 	headerContainer: (background: string, bannerHasImage: boolean) => css`
@@ -676,6 +889,7 @@ const styles = {
 			margin-left: 0px;
 			flex-direction: row;
 			flex-wrap: nowrap;
+			justify-content: start;
 		}
 	`,
 	bodyCopyOverrides: css`
@@ -749,12 +963,19 @@ const styles = {
 		}
 	`,
 	/* choice card CTA container */
-	ctaContainer: css`
+	ctaContainer: (isCollapsed: boolean) => css`
+		grid-area: cc_cta;
 		display: flex;
 		align-items: center;
 		flex-direction: column;
 		gap: ${space[4]}px;
 		margin-top: ${space[3]}px;
+
+		.maybe-later & {
+			flex-direction: row;
+			flex-wrap: wrap;
+			padding: ${space[3]}px;
+		}
 
 		${until.phablet} {
 			width: 100vw;
@@ -768,7 +989,7 @@ const styles = {
 			margin-left: -${space[3]}px;
 
 			a {
-				width: calc(100% - 24px);
+				flex: 1 1 0;
 			}
 		}
 
@@ -776,7 +997,6 @@ const styles = {
 			bottom: 0;
 			margin-top: ${space[3]}px;
 			margin-bottom: ${space[6]}px;
-			border-radius: 50px;
 			a {
 				width: 100%;
 			}
@@ -788,10 +1008,14 @@ const styles = {
 		${from.desktop} {
 			flex-direction: row;
 			margin-bottom: ${space[6]}px;
-			gap: 0;
-			margin-top: ${space[3]}px;
+			gap: ${space[2]}px;
+			margin-top: ${isCollapsed ? `${space[6]}px` : `${space[3]}px`};
 			margin-right: 0;
 			margin-left: 0;
+
+			.maybe-later & {
+				flex-wrap: nowrap;
+			}
 
 			a {
 				width: 100%;
@@ -806,8 +1030,37 @@ const styles = {
 		border-color: ${palette.brandAlt[400]};
 		width: 100%;
 	`,
+	maybeLaterContainer: (cardsImageOrSpaceTemplateString: string) => css`
+		grid-area: ${cardsImageOrSpaceTemplateString};
+		justify-self: start;
+		align-self: end;
+		margin-bottom: ${space[2]}px;
+	`,
+	maybeLaterButtonSizing: css`
+		flex: 1 1 0;
+		${from.desktop} {
+			width: 118px;
+		}
+	`,
+	maybeLaterButton: css`
+		width: 100%;
+	`,
 	articleCountContainer: css`
 		margin-bottom: ${space[3]}px;
+	`,
+	collapsableButtonContainer: css`
+		margin-left: ${space[2]}px;
+		${from.desktop} {
+			margin-top: ${space[1]}px;
+		}
+	`,
+	iconOverrides: css`
+		background-color: ${palette.brand[400]};
+		path {
+			fill: white;
+		}
+		margin-top: ${space[1]}px;
+		margin-right: ${space[1]}px;
 	`,
 };
 

@@ -9,8 +9,11 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import type { ImagePositionType } from './Card/components/ImageWrapper';
 import { LI } from './Card/components/LI';
+import type {
+	MediaPositionType,
+	MediaSizeType,
+} from './Card/components/MediaWrapper';
 import type { TrailTextSize } from './Card/components/TrailText';
 import { UL } from './Card/components/UL';
 import type { ResponsiveFontSize } from './CardHeadline';
@@ -27,12 +30,14 @@ type Props = {
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
+	isInHideTrailsAbTest?: boolean;
 };
 
 type BoostProperties = {
 	headlineSizes: ResponsiveFontSize;
-	imagePositionOnDesktop: ImagePositionType;
-	imagePositionOnMobile: ImagePositionType;
+	mediaSize: MediaSizeType;
+	mediaPositionOnDesktop: MediaPositionType;
+	mediaPositionOnMobile: MediaPositionType;
 	supportingContentAlignment: Alignment;
 	liveUpdatesAlignment: Alignment;
 	trailTextSize: TrailTextSize;
@@ -57,8 +62,9 @@ const determineCardProperties = (
 					tablet: 'large',
 					mobile: 'medium',
 				},
-				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
+				mediaSize: 'xlarge',
+				mediaPositionOnDesktop: 'right',
+				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
@@ -71,8 +77,9 @@ const determineCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'large',
 				},
-				imagePositionOnDesktop: 'right',
-				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
+				mediaSize: 'xlarge',
+				mediaPositionOnDesktop: 'right',
+				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
@@ -85,8 +92,9 @@ const determineCardProperties = (
 					tablet: 'xlarge',
 					mobile: 'xlarge',
 				},
-				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
-				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
+				mediaSize: 'jumbo',
+				mediaPositionOnDesktop: mediaCard ? 'top' : 'bottom',
+				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
@@ -98,8 +106,9 @@ const determineCardProperties = (
 					tablet: 'xxlarge',
 					mobile: 'xxlarge',
 				},
-				imagePositionOnDesktop: mediaCard ? 'top' : 'bottom',
-				imagePositionOnMobile: mediaCard ? 'top' : 'bottom',
+				mediaSize: 'jumbo',
+				mediaPositionOnDesktop: mediaCard ? 'top' : 'bottom',
+				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
@@ -117,6 +126,8 @@ type OneCardLayoutProps = {
 	isLastRow: boolean;
 	isFirstRow: boolean;
 	containerLevel: DCRContainerLevel;
+	isSplashCard?: boolean;
+	isInHideTrailsAbTest?: boolean;
 };
 
 export const OneCardLayout = ({
@@ -129,14 +140,17 @@ export const OneCardLayout = ({
 	isLastRow,
 	isFirstRow,
 	containerLevel,
+	isSplashCard,
+	isInHideTrailsAbTest,
 }: OneCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
 
 	const {
 		headlineSizes,
-		imagePositionOnDesktop,
-		imagePositionOnMobile,
+		mediaSize,
+		mediaPositionOnDesktop,
+		mediaPositionOnMobile,
 		supportingContentAlignment,
 		liveUpdatesAlignment,
 		trailTextSize,
@@ -146,6 +160,7 @@ export const OneCardLayout = ({
 		isMediaCard(card.format),
 		!card.image,
 	);
+
 	return (
 		<UL padBottom={!isLastRow} hasLargeSpacing={!isLastRow}>
 			<LI padSides={true}>
@@ -156,9 +171,9 @@ export const OneCardLayout = ({
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
 					headlineSizes={headlineSizes}
-					imagePositionOnDesktop={imagePositionOnDesktop}
-					imagePositionOnMobile={imagePositionOnMobile}
-					imageSize={'jumbo'}
+					mediaSize={mediaSize}
+					mediaPositionOnDesktop={mediaPositionOnDesktop}
+					mediaPositionOnMobile={mediaPositionOnMobile}
 					trailText={card.trailText}
 					supportingContent={card.supportingContent}
 					supportingContentAlignment={supportingContentAlignment}
@@ -177,6 +192,8 @@ export const OneCardLayout = ({
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
+					headlinePosition={isSplashCard ? 'outer' : 'inner'}
+					isInHideTrailsAbTest={isInHideTrailsAbTest}
 				/>
 			</LI>
 		</UL>
@@ -204,6 +221,7 @@ type TwoOrFourCardLayoutProps = {
 	aspectRatio: AspectRatio;
 	isFirstRow: boolean;
 	containerLevel: DCRContainerLevel;
+	isInHideTrailsAbTest?: boolean;
 };
 
 const TwoOrFourCardLayout = ({
@@ -216,6 +234,7 @@ const TwoOrFourCardLayout = ({
 	aspectRatio,
 	isFirstRow,
 	containerLevel,
+	isInHideTrailsAbTest,
 }: TwoOrFourCardLayoutProps) => {
 	if (cards.length === 0) return null;
 	const hasTwoOrFewerCards = cards.length <= 2;
@@ -239,13 +258,13 @@ const TwoOrFourCardLayout = ({
 							absoluteServerTimes={absoluteServerTimes}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
-							imagePositionOnDesktop={getImagePosition(
+							mediaPositionOnDesktop={getImagePosition(
 								hasTwoOrFewerCards,
 								isMediaCard(card.format) || !!card.isNewsletter,
 							)}
 							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
 							supportingContent={undefined}
-							imageSize="small"
+							mediaSize="small"
 							aspectRatio={aspectRatio}
 							kickerText={card.kickerText}
 							showLivePlayable={false}
@@ -256,6 +275,7 @@ const TwoOrFourCardLayout = ({
 									!isMediaCard(card.format))
 							}
 							canPlayInline={false}
+							isInHideTrailsAbTest={isInHideTrailsAbTest}
 						/>
 					</LI>
 				);
@@ -273,6 +293,7 @@ export const FlexibleSpecial = ({
 	aspectRatio,
 	containerLevel = 'Primary',
 	collectionId,
+	isInHideTrailsAbTest,
 }: Props) => {
 	const snaps = [...groupedTrails.snap].slice(0, 1).map((snap) => ({
 		...snap,
@@ -289,28 +310,37 @@ export const FlexibleSpecial = ({
 
 	return (
 		<>
-			<OneCardLayout
-				cards={snaps}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				absoluteServerTimes={absoluteServerTimes}
-				imageLoading={imageLoading}
-				aspectRatio={aspectRatio}
-				isFirstRow={true}
-				isLastRow={splash.length === 0 && cards.length === 0}
-				containerLevel={containerLevel}
-			/>
-			<OneCardLayout
-				cards={splash}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				absoluteServerTimes={absoluteServerTimes}
-				imageLoading={imageLoading}
-				aspectRatio={aspectRatio}
-				isLastRow={cards.length === 0}
-				isFirstRow={!isNonEmptyArray(snaps)}
-				containerLevel={containerLevel}
-			/>
+			{isNonEmptyArray(snaps) && (
+				<OneCardLayout
+					cards={snaps}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
+					imageLoading={imageLoading}
+					aspectRatio={aspectRatio}
+					isFirstRow={true}
+					isLastRow={splash.length === 0 && cards.length === 0}
+					containerLevel={containerLevel}
+					isSplashCard={false}
+					isInHideTrailsAbTest={isInHideTrailsAbTest}
+				/>
+			)}
+			{isNonEmptyArray(splash) && (
+				<OneCardLayout
+					cards={splash}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
+					imageLoading={imageLoading}
+					aspectRatio={aspectRatio}
+					isLastRow={cards.length === 0}
+					isFirstRow={!isNonEmptyArray(snaps)}
+					containerLevel={containerLevel}
+					isSplashCard={true}
+					isInHideTrailsAbTest={isInHideTrailsAbTest}
+				/>
+			)}
+
 			<TwoOrFourCardLayout
 				cards={cards}
 				containerPalette={containerPalette}
@@ -320,6 +350,7 @@ export const FlexibleSpecial = ({
 				aspectRatio={aspectRatio}
 				isFirstRow={!isNonEmptyArray(snaps) && !isNonEmptyArray(splash)}
 				containerLevel={containerLevel}
+				isInHideTrailsAbTest={isInHideTrailsAbTest}
 			/>
 		</>
 	);

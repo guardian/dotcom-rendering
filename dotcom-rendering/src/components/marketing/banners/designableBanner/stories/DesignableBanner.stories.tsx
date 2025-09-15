@@ -339,3 +339,81 @@ export const WithDestinationUrlTwoCards: Story = {
 		},
 	},
 };
+
+export const CollapsableWithThreeTierChoiceCards: Story = {
+	name: 'Collapsable with three tier choice cards',
+	args: {
+		...meta.args,
+		design: {
+			...design,
+			visual: {
+				kind: 'ChoiceCards',
+				buttonColour: stringToHexColour('E5E5E5'),
+			},
+		},
+		tracking: {
+			...tracking,
+			abTestVariant: 'COLLAPSABLE_V1',
+		},
+		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings,
+		tickerSettings,
+		separateArticleCountSettings: {
+			type: 'above',
+		},
+	},
+};
+
+export const CollapsableWithMainImage: Story = {
+	name: 'Collapsable with main image',
+	args: {
+		...meta.args,
+		design: {
+			...design,
+			visual: regularImage,
+		},
+		tracking: {
+			...tracking,
+			abTestVariant: 'COLLAPSABLE_V1',
+		},
+	},
+};
+
+export const CollapsableMaybeLaterVariant: Story = {
+	name: 'Collapsable - Maybe later variant',
+	args: {
+		...meta.args,
+		design: {
+			...design,
+			visual: regularImage,
+		},
+		tracking: {
+			...tracking,
+			abTestVariant: 'COLLAPSABLE_V2_MAYBE_LATER',
+		},
+	},
+};
+
+export const CollapsableWithThreeTierChoiceCardsMaybeLaterVariant: Story = {
+	name: 'Collapsable with three tier choice cards - Maybe later variant',
+	args: {
+		...meta.args,
+		design: {
+			...design,
+			visual: {
+				kind: 'ChoiceCards',
+				buttonColour: stringToHexColour('E5E5E5'),
+			},
+		},
+		tracking: {
+			...tracking,
+			abTestVariant: 'COLLAPSABLE_V2_MAYBE_LATER',
+		},
+		choiceCardAmounts: regularChoiceCardAmounts,
+		choiceCardsSettings,
+		tickerSettings,
+		separateArticleCountSettings: {
+			type: 'above',
+		},
+	},
+};

@@ -3,14 +3,14 @@ import { breakpoints, space, until } from '@guardian/source/foundations';
 import type { ImgHTMLAttributes } from 'react';
 import React from 'react';
 import type { AspectRatio } from '../types/front';
-import type { ImageSizeType } from './Card/components/ImageWrapper';
+import type { MediaSizeType } from './Card/components/MediaWrapper';
 import type { ImageWidthType } from './Picture';
 import { generateSources, getFallbackSource } from './Picture';
 
 export type Loading = NonNullable<ImgHTMLAttributes<unknown>['loading']>;
 
 export type Props = {
-	imageSize: ImageSizeType;
+	imageSize: MediaSizeType;
 	mainImage: string;
 	loading: Loading;
 	alt?: string;
@@ -23,13 +23,11 @@ export type Props = {
 /**
  * **WIP – Some size may be unaccounted for**
  *
- * Currently, this only handles the five (5) image sizes of `ImageSizeType`.
- *
  * This method should cover all use cases with a lot more precision once
  * implemented thoroughly
  */
 const decideImageWidths = (
-	imageSize: ImageSizeType,
+	imageSize: MediaSizeType,
 	aspectRatio: AspectRatio,
 ): [ImageWidthType, ...ImageWidthType[]] => {
 	switch (imageSize) {
@@ -45,9 +43,7 @@ const decideImageWidths = (
 			return [{ breakpoint: breakpoints.mobile, width: 80, aspectRatio }];
 
 		case 'highlights-card':
-			return [
-				{ breakpoint: breakpoints.mobile, width: 112, aspectRatio },
-			];
+			return [{ breakpoint: breakpoints.mobile, width: 98, aspectRatio }];
 
 		case 'carousel':
 			return [
@@ -69,6 +65,18 @@ const decideImageWidths = (
 			];
 
 		case 'large':
+			return [
+				{ breakpoint: breakpoints.mobile, width: 465, aspectRatio },
+				{
+					breakpoint: breakpoints.mobileLandscape,
+					width: 480,
+					aspectRatio,
+				},
+				{ breakpoint: breakpoints.tablet, width: 460, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 620, aspectRatio },
+			];
+
+		case 'xlarge':
 			return [
 				{ breakpoint: breakpoints.mobile, width: 465, aspectRatio },
 				{

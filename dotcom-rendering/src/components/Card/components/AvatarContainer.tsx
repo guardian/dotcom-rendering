@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
-import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
+import type { MediaPositionType, MediaSizeType } from './MediaWrapper';
 
 type Props = {
 	children: React.ReactNode;
-	imageSize: ImageSizeType;
-	imagePositionOnDesktop: ImagePositionType;
-	imagePositionOnMobile: ImagePositionType;
+	imageSize: MediaSizeType;
+	imagePositionOnDesktop: MediaPositionType;
+	imagePositionOnMobile: MediaPositionType;
 	isBetaContainer: boolean;
 	isFlexibleContainer: boolean;
 };
@@ -26,7 +26,7 @@ const largerTopMargin = css`
 `;
 
 const sizingStyles = (
-	imageSize: ImageSizeType,
+	imageSize: MediaSizeType,
 	isBetaContainer: boolean,
 	isFlexibleContainer: boolean,
 	isVerticalOnDesktop: boolean,
@@ -95,6 +95,7 @@ const sizingStyles = (
 						height: 80px;
 				  `;
 		case 'large':
+		case 'xlarge':
 			return css`
 				width: 150px;
 				height: 150px;

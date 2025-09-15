@@ -45,7 +45,6 @@ export type Props = {
 	abTestParticipations: Participations;
 	kicker?: string;
 	shouldPauseOutOfView?: boolean;
-	showTextOverlay: boolean;
 	iconSizeOnDesktop: PlayButtonSize;
 	iconSizeOnMobile: PlayButtonSize;
 	hidePillOnMobile: boolean;
@@ -65,6 +64,7 @@ export type Props = {
 	isImmersive?: boolean;
 	byline?: string;
 	showByline?: boolean;
+	isInHideTrailsAbTest?: boolean;
 };
 
 /**
@@ -101,7 +101,6 @@ export const YoutubeAtom = ({
 	kicker,
 	format,
 	shouldPauseOutOfView = false,
-	showTextOverlay,
 	iconSizeOnDesktop,
 	iconSizeOnMobile,
 	hidePillOnMobile,
@@ -121,6 +120,7 @@ export const YoutubeAtom = ({
 	isImmersive,
 	byline,
 	showByline,
+	isInHideTrailsAbTest,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -269,6 +269,7 @@ export const YoutubeAtom = ({
 								isImmersive={isImmersive}
 								byline={byline}
 								showByline={showByline}
+								isInHideTrailsAbTest={isInHideTrailsAbTest}
 							/>
 						) : (
 							<YoutubeAtomOverlay
@@ -280,9 +281,7 @@ export const YoutubeAtom = ({
 								duration={duration}
 								title={title}
 								onClick={() => setOverlayClicked(true)}
-								kicker={kicker}
 								format={format}
-								showTextOverlay={showTextOverlay}
 								iconSizeOnDesktop={iconSizeOnDesktop}
 								iconSizeOnMobile={iconSizeOnMobile}
 								hidePillOnMobile={hidePillOnMobile}

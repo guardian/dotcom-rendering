@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { from, space, until } from '@guardian/source/foundations';
-import type { DCRContainerType } from '../../../types/front';
-import type { CardImageType } from '../../../types/layout';
-import type { ImagePositionType } from './ImageWrapper';
+import { from, space } from '@guardian/source/foundations';
+import type { CardMediaType } from '../../../types/layout';
+import type { MediaPositionType } from './MediaWrapper';
 
 export type GapSize = 'none' | 'tiny' | 'small' | 'medium' | 'large';
 
@@ -12,32 +11,18 @@ export type GapSizes = { row: GapSize; column: GapSize };
 type Props = {
 	children: React.ReactNode;
 	cardBackgroundColour: string;
-	imageType: CardImageType | undefined;
-	imagePositionOnDesktop: ImagePositionType;
-	imagePositionOnMobile: ImagePositionType;
+	mediaType: CardMediaType | undefined;
+	mediaPositionOnDesktop: MediaPositionType;
+	mediaPositionOnMobile: MediaPositionType;
 	minWidthInPixels?: number;
-	containerType?: DCRContainerType;
 	gapSizes: GapSizes;
 	isBetaContainer: boolean;
 };
 
 const containerStyles = css`
 	display: flex;
+	position: relative;
 	flex-basis: 100%;
-`;
-
-// Until mobile landscape, show 1 card on small screens
-// Above mobile landscape, show 1 full card and min 20vw of second card
-const padding = 20;
-const videoWidth = css`
-	min-width: 300px;
-	max-width: 600px;
-	width: calc(80vw - ${padding}px);
-	overflow: hidden;
-
-	${until.mobileLandscape} {
-		width: calc(100vw - ${padding}px);
-	}
 `;
 
 const minWidth = (minWidthInPixels?: number) => {
@@ -57,21 +42,21 @@ const minWidth = (minWidthInPixels?: number) => {
  * or bottom of the card respectively.
  *
  * A boosted card in a `dynamic/slow` container is an exception to this as it is
- * rendered horizontally on desktop by overriding `imagePositionOnDesktop`
+ * rendered horizontally on desktop by overriding `mediaPositionOnDesktop`
  *
  * `scrollable/medium` is another exception as the medium cards require a
- * vertical layout at all breakpoints so we explicitly check that the image
+ * vertical layout at all breakpoints so we explicitly check that the media
  * position for desktop and mobile are both set to `bottom` to avoid affecting
  * existing layouts where the default position values are relied upon.
  */
 export const decideAvatarPosition = (
-	imagePositionOnMobile: ImagePositionType,
-	imagePositionOnDesktop: ImagePositionType,
+	mediaPositionOnMobile: MediaPositionType,
+	mediaPositionOnDesktop: MediaPositionType,
 	isBetaContainer: boolean,
-): { mobile: ImagePositionType; desktop: ImagePositionType } => {
+): { mobile: MediaPositionType; desktop: MediaPositionType } => {
 	if (
-		imagePositionOnMobile === 'bottom' &&
-		imagePositionOnDesktop === 'bottom'
+		mediaPositionOnMobile === 'bottom' &&
+		mediaPositionOnDesktop === 'bottom'
 	) {
 		return {
 			mobile: 'bottom',
@@ -80,10 +65,10 @@ export const decideAvatarPosition = (
 	}
 
 	if (
-		imagePositionOnDesktop === 'left' ||
-		imagePositionOnDesktop === 'right'
+		mediaPositionOnDesktop === 'left' ||
+		mediaPositionOnDesktop === 'right'
 	) {
-		if (isBetaContainer && imagePositionOnMobile === 'bottom') {
+		if (isBetaContainer && mediaPositionOnMobile === 'bottom') {
 			return {
 				mobile: 'bottom',
 				desktop: 'right',
@@ -101,7 +86,7 @@ export const decideAvatarPosition = (
 	};
 };
 
-const imagePositionMap = {
+const mediaPositionMap = {
 	top: 'column',
 	bottom: 'column-reverse',
 	left: 'row',
@@ -110,39 +95,39 @@ const imagePositionMap = {
 };
 
 const decideFlexDirection = (
-	imagePositionOnMobile: ImagePositionType,
-	imagePositionOnDesktop: ImagePositionType,
+	mediaPositionOnMobile: MediaPositionType,
+	mediaPositionOnDesktop: MediaPositionType,
 	isBetaContainer: boolean,
 	hasAvatar?: boolean,
 ) => {
 	if (!hasAvatar) {
 		return {
-			mobile: imagePositionMap[imagePositionOnMobile],
-			desktop: imagePositionMap[imagePositionOnDesktop],
+			mobile: mediaPositionMap[mediaPositionOnMobile],
+			desktop: mediaPositionMap[mediaPositionOnDesktop],
 		};
 	}
 
 	const { mobile, desktop } = decideAvatarPosition(
-		imagePositionOnMobile,
-		imagePositionOnDesktop,
+		mediaPositionOnMobile,
+		mediaPositionOnDesktop,
 		isBetaContainer,
 	);
 
 	return {
-		mobile: imagePositionMap[mobile],
-		desktop: imagePositionMap[desktop],
+		mobile: mediaPositionMap[mobile],
+		desktop: mediaPositionMap[desktop],
 	};
 };
 
 const decidePosition = (
-	imagePositionOnMobile: ImagePositionType,
-	imagePositionOnDesktop: ImagePositionType,
+	mediaPositionOnMobile: MediaPositionType,
+	mediaPositionOnDesktop: MediaPositionType,
 	isBetaContainer: boolean,
 	hasAvatar?: boolean,
 ) => {
 	const { mobile, desktop } = decideFlexDirection(
-		imagePositionOnMobile,
-		imagePositionOnDesktop,
+		mediaPositionOnMobile,
+		mediaPositionOnDesktop,
 		isBetaContainer,
 		hasAvatar,
 	);
@@ -182,11 +167,10 @@ const decideColumnGap = (gapSize: GapSize) => css`
 export const CardLayout = ({
 	children,
 	cardBackgroundColour,
-	imagePositionOnDesktop,
-	imagePositionOnMobile,
+	mediaPositionOnDesktop,
+	mediaPositionOnMobile,
 	minWidthInPixels,
-	imageType,
-	containerType,
+	mediaType,
 	gapSizes,
 	isBetaContainer,
 }: Props) => {
@@ -194,14 +178,12 @@ export const CardLayout = ({
 		<div
 			css={[
 				containerStyles,
-				containerType === 'fixed/video'
-					? videoWidth
-					: minWidth(minWidthInPixels),
+				minWidth(minWidthInPixels),
 				decidePosition(
-					imagePositionOnMobile,
-					imagePositionOnDesktop,
+					mediaPositionOnMobile,
+					mediaPositionOnDesktop,
 					isBetaContainer,
-					imageType === 'avatar',
+					mediaType === 'avatar',
 				),
 				decideColumnGap(gapSizes.column),
 			]}

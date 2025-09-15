@@ -5,17 +5,31 @@ import {
 	palette,
 	space,
 } from '@guardian/source/foundations';
-import { Button, TextInput } from '@guardian/source/react-components';
-import { type ChangeEventHandler, useState } from 'react';
+import { Button } from '@guardian/source/react-components';
+import {
+	type ChangeEventHandler,
+	type ReactEventHandler,
+	useState,
+} from 'react';
+import type ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
+import { ManyNewslettersFormFields } from './ManyNewslettersFormFields';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 
-interface FormProps {
+export interface FormProps {
 	status: 'NotSent' | 'Loading' | 'Success' | 'Failed' | 'InvalidEmail';
 	email: string;
 	handleTextInput: ChangeEventHandler<HTMLInputElement>;
 	handleSubmitButton: { (): Promise<void> | void };
 	newsletterCount: number;
+	marketingOptIn?: boolean;
+	setMarketingOptIn: (value: boolean) => void;
+	// Captcha props
+	useReCaptcha?: boolean;
+	captchaSiteKey?: string;
+	visibleRecaptcha?: boolean;
+	reCaptchaRef?: React.RefObject<ReactGoogleRecaptcha>;
+	handleCaptchaError?: ReactEventHandler<HTMLDivElement>;
 }
 
 // The design brief requires the layout of the form to align with the
@@ -23,7 +37,10 @@ interface FormProps {
 const CARD_CONTAINER_WIDTH = 240;
 const CARD_CONTAINER_PADDING = 10;
 
-const formFrameStyle = css`
+const formFrameStyle = (visibleRecaptcha: boolean) => css`
+	background-color: ${visibleRecaptcha
+		? palette.neutral[100]
+		: 'transparent'};
 	border: ${palette.brand[400]} 2px dashed;
 	border-radius: 12px;
 	padding: ${space[2]}px;
@@ -39,7 +56,7 @@ const formFrameStyle = css`
 	}
 `;
 
-const formFieldsStyle = css`
+const formFieldsStyle = (visibleRecaptcha: boolean) => css`
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
@@ -47,18 +64,9 @@ const formFieldsStyle = css`
 
 	${from.desktop} {
 		flex-basis: ${2 * CARD_CONTAINER_WIDTH - CARD_CONTAINER_PADDING * 2}px;
-		flex-direction: row;
+		flex-direction: ${visibleRecaptcha ? 'column' : 'row'};
 		flex-shrink: 0;
-		align-items: flex-end;
-	}
-`;
-
-const inputWrapperStyle = css`
-	margin-bottom: ${space[2]}px;
-	${from.desktop} {
-		margin-bottom: 0;
-		margin-right: ${space[2]}px;
-		flex-basis: 296px;
+		align-items: ${visibleRecaptcha ? 'stretch' : 'last baseline'};
 	}
 `;
 
@@ -80,13 +88,14 @@ const formAsideStyle = (hideOnMobile: boolean) => css`
 	}
 `;
 
-const signUpButtonStyle = css`
+const signUpButtonStyle = (visibleRecaptcha: boolean) => css`
 	justify-content: center;
 	background-color: ${palette.neutral[0]};
 	border-color: ${palette.neutral[0]};
 
 	${from.desktop} {
-		flex-basis: 110px;
+		margin-right: ${visibleRecaptcha ? space[2] : 0}px;
+		flex-basis: ${visibleRecaptcha ? 'unset' : '110px'};
 	}
 
 	&:hover {
@@ -114,6 +123,13 @@ export const ManyNewslettersForm = ({
 	handleTextInput,
 	handleSubmitButton,
 	newsletterCount,
+	marketingOptIn,
+	setMarketingOptIn,
+	useReCaptcha = false,
+	captchaSiteKey,
+	visibleRecaptcha = false,
+	reCaptchaRef,
+	handleCaptchaError,
 }: FormProps) => {
 	const [formHasFocus, setFormHasFocus] = useState(false);
 	const hidePrivacyOnMobile = !formHasFocus && email.length === 0;
@@ -123,18 +139,11 @@ export const ManyNewslettersForm = ({
 			? 'Sign up for the newsletter you selected'
 			: `Sign up for the ${newsletterCount} newsletters you selected`;
 
-	const errorMessage =
-		status === 'Failed'
-			? 'Sign up failed. Please try again'
-			: status === 'InvalidEmail'
-			? 'Please enter a valid email address'
-			: undefined;
-
 	return (
 		<form
 			aria-label="sign-up confirmation form"
 			aria-live="polite"
-			css={formFrameStyle}
+			css={formFrameStyle(visibleRecaptcha)}
 			onSubmit={(submitEvent) => {
 				submitEvent.preventDefault();
 			}}
@@ -154,18 +163,21 @@ export const ManyNewslettersForm = ({
 				</InlineSkipToWrapper>
 			</aside>
 
-			<div css={formFieldsStyle}>
+			<div css={formFieldsStyle(visibleRecaptcha)}>
 				{status !== 'Success' ? (
 					<>
-						<span css={inputWrapperStyle}>
-							<TextInput
-								label="Enter your email"
-								value={email}
-								onChange={handleTextInput}
-								error={errorMessage}
-								disabled={status === 'Loading'}
-							/>
-						</span>
+						<ManyNewslettersFormFields
+							status={status}
+							email={email}
+							handleTextInput={handleTextInput}
+							marketingOptIn={marketingOptIn}
+							setMarketingOptIn={setMarketingOptIn}
+							useReCaptcha={useReCaptcha}
+							captchaSiteKey={captchaSiteKey}
+							visibleRecaptcha={visibleRecaptcha}
+							reCaptchaRef={reCaptchaRef}
+							handleCaptchaError={handleCaptchaError}
+						/>
 						<Button
 							aria-label={ariaLabel}
 							isLoading={status === 'Loading'}
@@ -173,7 +185,7 @@ export const ManyNewslettersForm = ({
 							onClick={() => {
 								void handleSubmitButton();
 							}}
-							cssOverrides={signUpButtonStyle}
+							cssOverrides={signUpButtonStyle(visibleRecaptcha)}
 						>
 							Sign up
 						</Button>

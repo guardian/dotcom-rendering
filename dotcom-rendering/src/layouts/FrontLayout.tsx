@@ -6,9 +6,6 @@ import {
 } from '@guardian/source/foundations';
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
-import { Carousel } from '../components/Carousel.importable';
-import { useConfig } from '../components/ConfigContext';
-import { ContainerOverrides } from '../components/ContainerOverrides';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
 import { EditionSwitcherBanner } from '../components/EditionSwitcherBanner.importable';
@@ -21,6 +18,7 @@ import {
 	MobileAdSlot,
 } from '../components/FrontsAdSlots';
 import { FrontSection } from '../components/FrontSection';
+import { FrontSectionTracker } from '../components/FrontSectionTracker.importable';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
@@ -33,7 +31,7 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { ArticleDisplay } from '../lib/articleFormat';
-import { badgeFromBranding, isPaidContentSameBranding } from '../lib/branding';
+import { badgeFromBranding } from '../lib/branding';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { editionList } from '../lib/edition';
@@ -49,7 +47,6 @@ import { palette as schemePalette } from '../palette';
 import type {
 	DCRCollectionType,
 	DCRContainerType,
-	DCRGroupedTrails,
 	Front,
 } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
@@ -110,11 +107,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			hasPageSkin: hasPageSkinConfig,
 			pageId,
 			abTests,
+			switches: { absoluteServerTimes = false },
 		},
 		editionId,
 	} = front;
-
-	const { renderingTarget } = useConfig();
 
 	const renderAds = canRenderAds(front);
 
@@ -138,10 +134,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		front.isNetworkFront && front.deeplyRead && front.deeplyRead.length > 0;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
-
-	const { absoluteServerTimes = false } = front.config.switches;
-
-	const isInNoBoostsVariant = abTests.noBoostsVariant === 'variant';
 
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
@@ -281,48 +273,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						index + 1
 					} | ${ophanName}`;
 					const mostPopularTitle = 'Most popular';
-
-					// Remove the branding from each of the cards in a paid content
-					// collection if they are the same.
-					const trailsWithoutBranding = isPaidContentSameBranding(
-						collection.collectionBranding,
-					)
-						? trails.map((labTrail) => ({
-								...labTrail,
-								branding: undefined,
-						  }))
-						: trails;
-
-					// We also need to remove the branding for the cards in grouped
-					// trails for dynamic containers
-					const groupedWithoutBranding: DCRGroupedTrails = (() => {
-						if (
-							isPaidContentSameBranding(
-								collection.collectionBranding,
-							)
-						) {
-							const groupedTrailsWithoutBranding: DCRGroupedTrails =
-								{
-									snap: [],
-									huge: [],
-									veryBig: [],
-									big: [],
-									standard: [],
-									splash: [],
-								};
-							for (const key of Object.keys(
-								collection.grouped,
-							) as (keyof DCRGroupedTrails)[]) {
-								groupedTrailsWithoutBranding[key] =
-									collection.grouped[key].map((labTrail) => ({
-										...labTrail,
-										branding: undefined,
-									}));
-							}
-							return groupedTrailsWithoutBranding;
-						}
-						return collection.grouped;
-					})();
 
 					if (collection.collectionType === 'scrollable/highlights') {
 						// Highlights are rendered in the Masthead component
@@ -499,7 +449,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									editionId={editionId}
 								>
 									<DecideContainer
-										trails={trailsWithoutBranding}
+										trails={trails}
 										groupedTrails={collection.grouped}
 										containerType={
 											collection.collectionType
@@ -524,115 +474,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										}
 									/>
 								</LabsSection>
-
-								{mobileAdPositions.includes(index) && (
-									<MobileAdSlot
-										renderAds={renderAds}
-										adSlotIndex={mobileAdPositions.indexOf(
-											index,
-										)}
-									/>
-								)}
-
-								{index === merchHighAdPosition && (
-									<MerchHighAdSlot
-										renderAds={renderAds}
-										collectionCount={
-											filteredCollections.length
-										}
-										isPaidContent={
-											!!front.pressedPage.frontProperties
-												.isPaidContent
-										}
-									/>
-								)}
-							</Fragment>
-						);
-					}
-
-					if (
-						collection.collectionType === 'fixed/video' ||
-						collection.containerPalette === 'PodcastPalette'
-					) {
-						const containerPalette =
-							collection.containerPalette ?? 'MediaPalette';
-
-						return (
-							<Fragment key={ophanName}>
-								{desktopAdPositions.includes(index) && (
-									<FrontsBannerAdSlot
-										renderAds={renderAds}
-										hasPageSkin={hasPageSkin}
-										adSlotIndex={desktopAdPositions.indexOf(
-											index,
-										)}
-									/>
-								)}
-
-								<ContainerOverrides
-									containerPalette={containerPalette}
-								>
-									<Section
-										title={collection.displayName}
-										sectionId={`container-${ophanName}`}
-										ophanComponentName={ophanName}
-										ophanComponentLink={ophanComponentLink}
-										containerName={
-											collection.collectionType
-										}
-										fullWidth={true}
-										padBottom={true}
-										showSideBorders={
-											collection.collectionType !==
-											'fixed/video'
-										}
-										showTopBorder={index > 0}
-										padContent={false}
-										url={collection.href}
-										showDateHeader={
-											collection.config.showDateHeader
-										}
-										editionId={front.editionId}
-										backgroundColour={schemePalette(
-											'--front-container-background',
-										)}
-										innerBackgroundColour={
-											containerPalette === 'MediaPalette'
-												? sourcePalette.neutral[0]
-												: undefined
-										}
-										hasPageSkin={hasPageSkin}
-									>
-										<Island
-											priority="feature"
-											defer={{ until: 'visible' }}
-										>
-											<Carousel
-												isOnwardContent={false}
-												heading={collection.displayName}
-												trails={trails}
-												onwardsSource={'unknown-source'}
-												palette={containerPalette}
-												leftColSize={'compact'}
-												containerType={
-													collection.collectionType
-												}
-												hasPageSkin={hasPageSkin}
-												url={collection.href}
-												discussionApiUrl={
-													front.config
-														.discussionApiUrl
-												}
-												absoluteServerTimes={
-													absoluteServerTimes
-												}
-												renderingTarget={
-													renderingTarget
-												}
-											/>
-										</Island>
-									</Section>
-								</ContainerOverrides>
 
 								{mobileAdPositions.includes(index) && (
 									<MobileAdSlot
@@ -728,8 +569,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								)}
 							>
 								<DecideContainer
-									trails={trailsWithoutBranding}
-									groupedTrails={groupedWithoutBranding}
+									trails={trails}
+									groupedTrails={collection.grouped}
 									containerType={collection.collectionType}
 									containerPalette={
 										collection.containerPalette
@@ -750,8 +591,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
-									isInNoBoostsAbTestVariant={
-										pageId === 'uk' && isInNoBoostsVariant
+									isInHideTrailsAbTest={
+										front.isNetworkFront &&
+										abTests.hideTrailsVariant === 'variant'
 									}
 								/>
 							</FrontSection>
@@ -855,6 +697,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					/>
 				</Island>
 			</BannerWrapper>
+
+			<Island priority="feature" defer={{ until: 'idle' }}>
+				<FrontSectionTracker />
+			</Island>
 		</>
 	);
 };

@@ -6,16 +6,16 @@ import type {
 	DCRContainerPalette,
 	DCRFrontCard,
 } from '../types/front';
-import type { ImagePositionType } from './Card/components/ImageWrapper';
 import { LI } from './Card/components/LI';
+import type { MediaPositionType } from './Card/components/MediaWrapper';
 import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
 
-const getImagePositionOnDesktop = (
+const getMediaPositionOnDesktop = (
 	format: ArticleFormat,
 	isNewsletter: boolean,
-): ImagePositionType => {
+): MediaPositionType => {
 	if (isMediaCard(format) || isNewsletter) {
 		return 'top';
 	}
@@ -32,6 +32,7 @@ type Props = {
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
+	isInHideTrailsAbTest?: boolean;
 };
 
 export const StaticMediumFour = ({
@@ -43,6 +44,7 @@ export const StaticMediumFour = ({
 	showImage = true,
 	aspectRatio,
 	containerLevel = 'Primary',
+	isInHideTrailsAbTest,
 }: Props) => {
 	const cards = trails.slice(0, 4);
 
@@ -65,13 +67,13 @@ export const StaticMediumFour = ({
 							absoluteServerTimes={absoluteServerTimes}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
-							imagePositionOnDesktop={getImagePositionOnDesktop(
+							mediaPositionOnDesktop={getMediaPositionOnDesktop(
 								card.format,
 								!!card.isNewsletter,
 							)}
 							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
 							supportingContent={undefined}
-							imageSize="medium"
+							mediaSize="medium"
 							aspectRatio={aspectRatio}
 							kickerText={card.kickerText}
 							showLivePlayable={false}
@@ -82,6 +84,7 @@ export const StaticMediumFour = ({
 									!isMediaCard(card.format))
 							}
 							canPlayInline={false}
+							isInHideTrailsAbTest={isInHideTrailsAbTest}
 						/>
 					</LI>
 				);

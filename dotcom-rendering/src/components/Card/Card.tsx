@@ -13,6 +13,7 @@ import {
 } from '../../lib/articleFormat';
 import { isMediaCard } from '../../lib/cardHelpers';
 import { isWithinTwelveHours, secondsToDuration } from '../../lib/formatTime';
+import { appendLinkNameMedia } from '../../lib/getDataLinkName';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { BETA_CONTAINERS } from '../../model/enhanceCollections';
@@ -39,7 +40,6 @@ import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
 import { LoopVideo } from '../LoopVideo.importable';
 import { Pill } from '../Pill';
-import { Slideshow } from '../Slideshow';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
 import { Snap } from '../Snap';
 import { SnapCssSandbox } from '../SnapCssSandbox';
@@ -62,11 +62,11 @@ import { CardWrapper } from './components/CardWrapper';
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
 import type {
-	ImageFixedSizeOptions,
-	ImagePositionType,
-	ImageSizeType,
-} from './components/ImageWrapper';
-import { ImageWrapper } from './components/ImageWrapper';
+	MediaFixedSizeOptions,
+	MediaPositionType,
+	MediaSizeType,
+} from './components/MediaWrapper';
+import { MediaWrapper } from './components/MediaWrapper';
 import { SvgWaveform } from './components/SvgWaveform';
 import { TrailText, type TrailTextSize } from './components/TrailText';
 
@@ -83,10 +83,10 @@ export type Props = {
 	showByline?: boolean;
 	webPublicationDate?: string;
 	image?: DCRFrontImage;
-	imagePositionOnDesktop?: ImagePositionType;
-	imagePositionOnMobile?: ImagePositionType;
-	/** Size is ignored when position = 'top' because in that case the image flows based on width */
-	imageSize?: ImageSizeType;
+	mediaPositionOnDesktop?: MediaPositionType;
+	mediaPositionOnMobile?: MediaPositionType;
+	/** Size is ignored when position = 'top' because in that case the media flows based on width */
+	mediaSize?: MediaSizeType;
 	imageLoading: Loading;
 	isCrossword?: boolean;
 	isNewsletter?: boolean;
@@ -96,9 +96,14 @@ export type Props = {
 	showClock?: boolean;
 	mainMedia?: MainMedia;
 	/**
-	 * Note YouTube recommends a minimum width of 480px @see https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-youtube-player-size
-	 * At 300px or below, the player will begin to lose functionality e.g. volume controls being omitted.
-	 * Youtube requires a minimum width 200px.
+	 * For interactive media (e.g., video or slideshow), certain card sizes are restricted from displaying
+	 * the interactive content because controls may be unavailable or inaccessible at those sizes.
+	 *
+	 * Note:
+	 * - YouTube recommends a minimum embed width of 480px
+	 *   @see https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-youtube-player-size
+	 * - At widths of 300px or below, the player may lose functionality (e.g., volume controls may be omitted).
+	 * - YouTube requires an absolute minimum width of 200px.
 	 */
 	canPlayInline?: boolean;
 	kickerText?: string;
@@ -128,10 +133,9 @@ export type Props = {
 	liveUpdatesAlignment?: Alignment;
 	liveUpdatesPosition?: Position;
 	onwardsSource?: OnwardsSource;
-	pauseOffscreenVideo?: boolean;
 	showVideo?: boolean;
 	isTagPage?: boolean;
-	/** Allows the consumer to set an aspect ratio on the image of 5:3, 5:4, 4:5 or 1:1 */
+	/** Allows the consumer to set the aspect ratio on the media */
 	aspectRatio?: AspectRatio;
 	/** The index of the card in a carousel */
 	index?: number;
@@ -147,6 +151,9 @@ export type Props = {
 	trailTextSize?: TrailTextSize;
 	/** A kicker image is seperate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
+	/** Determines if the headline should be positioned within the content or outside the content */
+	headlinePosition?: 'inner' | 'outer';
+	isInHideTrailsAbTest?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -173,8 +180,8 @@ const StarRatingComponent = ({
 );
 
 const waveformWrapper = (
-	imagePositionOnMobile?: ImagePositionType,
-	imagePositionOnDesktop?: ImagePositionType,
+	mediaPositionOnMobile?: MediaPositionType,
+	mediaPositionOnDesktop?: MediaPositionType,
 ) => css`
 	position: absolute;
 	left: 0;
@@ -183,12 +190,12 @@ const waveformWrapper = (
 	svg {
 		display: block;
 		width: 100%;
-		height: ${imagePositionOnMobile === 'top' ? 50 : 29}px;
+		height: ${mediaPositionOnMobile === 'top' ? 50 : 29}px;
 		${from.mobileMedium} {
-			height: ${imagePositionOnMobile === 'top' ? 50 : 33}px;
+			height: ${mediaPositionOnMobile === 'top' ? 50 : 33}px;
 		}
 		${from.tablet} {
-			height: ${imagePositionOnDesktop === 'top' ? 50 : 33}px;
+			height: ${mediaPositionOnDesktop === 'top' ? 50 : 33}px;
 		}
 	}
 `;
@@ -212,7 +219,7 @@ const HorizontalDivider = () => (
 	/>
 );
 
-const podcastImageStyles = (imageSize: ImageSizeType) => {
+const podcastImageStyles = (imageSize: MediaSizeType) => {
 	switch (imageSize) {
 		case 'small':
 			return css`
@@ -268,11 +275,13 @@ const getMedia = ({
 	}
 	if (mainMedia?.type === 'Video' && canPlayInline) {
 		return {
-			type: 'video',
+			type: 'youtube-video',
 			mainMedia,
 		} as const;
 	}
-	if (slideshowImages) return { type: 'slideshow', slideshowImages } as const;
+	if (slideshowImages && canPlayInline) {
+		return { type: 'slideshow', slideshowImages } as const;
+	}
 	if (avatarUrl) return { type: 'avatar', avatarUrl } as const;
 	if (
 		mainMedia?.type === 'Audio' &&
@@ -294,7 +303,7 @@ const getMedia = ({
 
 const decideSublinkPosition = (
 	supportingContent?: DCRSupportingContent[],
-	imagePositionOnDesktop?: ImagePositionType,
+	mediaPositionOnDesktop?: MediaPositionType,
 	alignment?: Alignment,
 	supportingContentPosition?: Position,
 	showLivePlayable?: boolean,
@@ -308,44 +317,14 @@ const decideSublinkPosition = (
 	}
 
 	if (
-		imagePositionOnDesktop === 'top' ||
-		imagePositionOnDesktop === 'bottom' ||
+		mediaPositionOnDesktop === 'top' ||
+		mediaPositionOnDesktop === 'bottom' ||
 		showLivePlayable
 	) {
 		return 'outer';
 	}
 
 	return alignment === 'vertical' ? 'inner' : 'outer';
-};
-
-const getHeadlinePosition = ({
-	isFlexSplash,
-	containerType,
-	showLivePlayable,
-	isMediaCardOrNewsletter,
-}: {
-	containerType?: DCRContainerType;
-	isFlexSplash?: boolean;
-	showLivePlayable: boolean;
-	isMediaCardOrNewsletter: boolean;
-}) => {
-	if (isMediaCardOrNewsletter) {
-		return 'inner';
-	}
-
-	if (containerType === 'flexible/special' && isFlexSplash) {
-		return 'outer';
-	}
-
-	if (
-		containerType === 'flexible/general' &&
-		isFlexSplash &&
-		showLivePlayable
-	) {
-		return 'outer';
-	}
-
-	return 'inner';
 };
 
 const liveBulletStyles = css`
@@ -366,15 +345,15 @@ export const Card = ({
 	showByline,
 	webPublicationDate,
 	image,
-	imagePositionOnDesktop = 'top',
-	imagePositionOnMobile = 'left',
-	imageSize = 'small',
+	mediaPositionOnDesktop = 'top',
+	mediaPositionOnMobile = 'left',
+	mediaSize = 'small',
 	imageLoading,
 	trailText,
 	avatarUrl,
 	showClock,
 	mainMedia,
-	canPlayInline,
+	canPlayInline = false,
 	kickerText,
 	showPulsingDot,
 	starRating,
@@ -400,7 +379,6 @@ export const Card = ({
 	liveUpdatesAlignment = 'vertical',
 	liveUpdatesPosition = 'inner',
 	onwardsSource,
-	pauseOffscreenVideo = false,
 	showVideo = true,
 	absoluteServerTimes,
 	isTagPage = false,
@@ -412,11 +390,13 @@ export const Card = ({
 	showTopBarMobile = true,
 	trailTextSize,
 	showKickerImage = false,
+	headlinePosition = 'inner',
+	isInHideTrailsAbTest = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
 		supportingContent,
-		imagePositionOnDesktop,
+		mediaPositionOnDesktop,
 		supportingContentAlignment,
 		supportingContentPosition,
 		showLivePlayable,
@@ -566,6 +546,11 @@ export const Card = ({
 		isBetaContainer,
 	});
 
+	const resolvedDataLinkName =
+		media && dataLinkName
+			? appendLinkNameMedia(dataLinkName, media.type)
+			: dataLinkName;
+
 	/**
 	 * For opinion type cards with avatars (which aren't onwards content)
 	 * we render the footer in a different location
@@ -574,11 +559,11 @@ export const Card = ({
 		isOpinion && !isOnwardContent && media?.type === 'avatar';
 
 	/**
-	 * The avatar position is not always the same as the image position.
+	 * The avatar position is sometimes different.
 	 */
 	const avatarPosition = decideAvatarPosition(
-		imagePositionOnMobile,
-		imagePositionOnDesktop,
+		mediaPositionOnMobile,
+		mediaPositionOnDesktop,
 		isBetaContainer,
 	);
 
@@ -593,7 +578,7 @@ export const Card = ({
 
 	const isSmallCard = containerType === 'scrollable/small';
 
-	const imageFixedSizeOptions = (): ImageFixedSizeOptions => {
+	const mediaFixedSizeOptions = (): MediaFixedSizeOptions => {
 		if (isSmallCard) {
 			return {
 				mobile: 'tiny',
@@ -605,19 +590,12 @@ export const Card = ({
 		return { mobile: 'medium' };
 	};
 
-	const headlinePosition = getHeadlinePosition({
-		containerType,
-		isFlexSplash,
-		showLivePlayable,
-		isMediaCardOrNewsletter,
-	});
-
 	const hideTrailTextUntil = () => {
 		if (isFlexibleContainer) {
 			return undefined;
 		} else if (
-			imageSize === 'large' &&
-			imagePositionOnDesktop === 'right' &&
+			mediaSize === 'large' &&
+			mediaPositionOnDesktop === 'right' &&
 			media?.type !== 'avatar'
 		) {
 			return 'desktop';
@@ -634,13 +612,6 @@ export const Card = ({
 		if (isOnwardContent) {
 			return {
 				row: 'none',
-				column: 'none',
-			};
-		}
-
-		if (isFlexSplash) {
-			return {
-				row: 'small',
 				column: 'none',
 			};
 		}
@@ -669,11 +640,11 @@ export const Card = ({
 		}
 
 		if (
-			imagePositionOnDesktop === 'bottom' ||
-			imagePositionOnMobile === 'bottom'
+			mediaPositionOnDesktop === 'bottom' ||
+			mediaPositionOnMobile === 'bottom'
 		) {
 			return {
-				row: 'tiny',
+				row: showLivePlayable ? 'small' : 'tiny',
 				column: 'large',
 			};
 		}
@@ -705,7 +676,7 @@ export const Card = ({
 					!!isFlexSplash ||
 					(isBetaContainer &&
 						!!image &&
-						(imagePositionOnMobile === 'bottom' ||
+						(mediaPositionOnMobile === 'bottom' ||
 							isMediaCard(format)))
 				}
 				fillBackgroundOnDesktop={
@@ -764,7 +735,7 @@ export const Card = ({
 			<CardLink
 				linkTo={linkTo}
 				headlineText={headlineText}
-				dataLinkName={dataLinkName}
+				dataLinkName={resolvedDataLinkName}
 				isExternalLink={isExternalLink}
 			/>
 			{headlinePosition === 'outer' && (
@@ -804,11 +775,10 @@ export const Card = ({
 
 			<CardLayout
 				cardBackgroundColour={backgroundColour}
-				imagePositionOnDesktop={imagePositionOnDesktop}
-				imagePositionOnMobile={imagePositionOnMobile}
+				mediaPositionOnDesktop={mediaPositionOnDesktop}
+				mediaPositionOnMobile={mediaPositionOnMobile}
 				minWidthInPixels={minWidthInPixels}
-				imageType={media?.type}
-				containerType={containerType}
+				mediaType={media?.type}
 				gapSizes={getGapSizes()}
 				isBetaContainer={isBetaContainer}
 			>
@@ -819,61 +789,50 @@ export const Card = ({
 				{mainMedia?.type === 'Audio' && (
 					<div
 						css={waveformWrapper(
-							imagePositionOnMobile,
-							imagePositionOnDesktop,
+							mediaPositionOnMobile,
+							mediaPositionOnDesktop,
 						)}
 					>
 						<SvgWaveform />
 					</div>
 				)}
 				{media && (
-					<ImageWrapper
-						imageSize={imageSize}
-						imageFixedSizes={imageFixedSizeOptions()}
-						imageType={media.type}
-						imagePositionOnDesktop={imagePositionOnDesktop}
-						imagePositionOnMobile={imagePositionOnMobile}
-						hideImageOverlay={
-							media.type === 'slideshow' && isFlexibleContainer
-						}
-						padImage={isMediaCardOrNewsletter && isBetaContainer}
+					<MediaWrapper
+						mediaSize={mediaSize}
+						mediaFixedSizes={mediaFixedSizeOptions()}
+						mediaType={media.type}
+						mediaPositionOnDesktop={mediaPositionOnDesktop}
+						mediaPositionOnMobile={mediaPositionOnMobile}
+						hideImageOverlay={media.type === 'slideshow'}
+						padMedia={isMediaCardOrNewsletter && isBetaContainer}
 						isBetaContainer={isBetaContainer}
 					>
-						{media.type === 'slideshow' &&
-							(isFlexibleContainer ? (
-								<div
-									css={css`
-										position: relative;
-										z-index: ${getZIndex(
-											'card-nested-link',
-										)};
-									`}
+						{media.type === 'slideshow' && (
+							<div
+								css={css`
+									position: relative;
+									z-index: ${getZIndex('card-nested-link')};
+								`}
+							>
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
 								>
-									<Island
-										priority="feature"
-										defer={{ until: 'visible' }}
-									>
-										<SlideshowCarousel
-											images={media.slideshowImages}
-											imageSize={imageSize}
-											hasNavigationBackgroundColour={
-												!!hasSublinks
-											}
-										/>
-									</Island>
-								</div>
-							) : (
-								<Slideshow
-									images={media.slideshowImages}
-									imageSize={imageSize}
-									isDynamo={isDynamo}
-								/>
-							))}
+									<SlideshowCarousel
+										images={media.slideshowImages}
+										imageSize={mediaSize}
+										hasNavigationBackgroundColour={
+											!!hasSublinks
+										}
+									/>
+								</Island>
+							</div>
+						)}
 						{media.type === 'avatar' && (
 							<AvatarContainer
-								imageSize={imageSize}
-								imagePositionOnDesktop={imagePositionOnDesktop}
-								imagePositionOnMobile={imagePositionOnMobile}
+								imageSize={mediaSize}
+								imagePositionOnDesktop={mediaPositionOnDesktop}
+								imagePositionOnMobile={mediaPositionOnMobile}
 								isBetaContainer={isBetaContainer}
 								isFlexibleContainer={isFlexibleContainer}
 							>
@@ -881,7 +840,7 @@ export const Card = ({
 									src={media.avatarUrl}
 									alt={byline ?? ''}
 									imageSize={
-										isBetaContainer ? imageSize : undefined
+										isBetaContainer ? mediaSize : undefined
 									}
 								/>
 							</AvatarContainer>
@@ -899,14 +858,15 @@ export const Card = ({
 									width={media.mainMedia.width}
 									posterImage={media.mainMedia.image ?? ''}
 									fallbackImage={media.mainMedia.image ?? ''}
-									fallbackImageSize={imageSize}
+									fallbackImageSize={mediaSize}
 									fallbackImageLoading={imageLoading}
 									fallbackImageAlt={media.imageAltText}
 									fallbackImageAspectRatio="5:4"
+									linkTo={linkTo}
 								/>
 							</Island>
 						)}
-						{media.type === 'video' && (
+						{media.type === 'youtube-video' && (
 							<>
 								{showVideo ? (
 									<div
@@ -951,13 +911,6 @@ export const Card = ({
 												hideCaption={true}
 												stickyVideos={false}
 												kickerText={kickerText}
-												pauseOffscreenVideo={
-													pauseOffscreenVideo
-												}
-												showTextOverlay={
-													containerType ===
-													'fixed/video'
-												}
 												/*
 												 * TODO: IMPROVE THIS MAPPING
 												 *
@@ -975,22 +928,22 @@ export const Card = ({
 													].includes(
 														headlineSizes?.desktop ??
 															'',
-													) || imageSize !== 'small'
+													) || mediaSize !== 'small'
 														? 'large'
 														: 'small'
 												}
 												iconSizeOnMobile={
-													imagePositionOnMobile ===
+													mediaPositionOnMobile ===
 														'left' ||
-													imagePositionOnMobile ===
+													mediaPositionOnMobile ===
 														'right'
 														? 'small'
 														: 'large'
 												}
 												hidePillOnMobile={
-													imagePositionOnMobile ===
+													mediaPositionOnMobile ===
 														'left' ||
-													imagePositionOnMobile ===
+													mediaPositionOnMobile ===
 														'right'
 												}
 												enableAds={false}
@@ -1004,7 +957,7 @@ export const Card = ({
 											mainImage={
 												media.mainMedia.image ?? ''
 											}
-											imageSize={imageSize}
+											imageSize={mediaSize}
 											alt={headlineText}
 											loading={imageLoading}
 											roundedCorners={isOnwardContent}
@@ -1018,7 +971,7 @@ export const Card = ({
 							<>
 								<CardPicture
 									mainImage={media.imageUrl}
-									imageSize={imageSize}
+									imageSize={mediaSize}
 									alt={media.imageAltText}
 									loading={imageLoading}
 									roundedCorners={isOnwardContent}
@@ -1052,7 +1005,7 @@ export const Card = ({
 						{media.type === 'podcast' && (
 							<>
 								{media.podcastImage?.src && !showKickerImage ? (
-									<div css={podcastImageStyles(imageSize)}>
+									<div css={podcastImageStyles(mediaSize)}>
 										<CardPicture
 											mainImage={media.podcastImage.src}
 											imageSize="small"
@@ -1065,7 +1018,7 @@ export const Card = ({
 								) : (
 									<CardPicture
 										mainImage={media.trailImage.src ?? ''}
-										imageSize={imageSize}
+										imageSize={mediaSize}
 										alt={media.trailImage.altText}
 										loading={imageLoading}
 										aspectRatio={aspectRatio}
@@ -1073,80 +1026,75 @@ export const Card = ({
 								)}
 							</>
 						)}
-					</ImageWrapper>
+					</MediaWrapper>
 				)}
-
-				{containerType !== 'fixed/video' && (
-					<ContentWrapper
-						imageType={media?.type}
-						imageSize={imageSize}
-						isBetaContainer={isBetaContainer}
-						imagePositionOnDesktop={
-							image ? imagePositionOnDesktop : 'none'
-						}
-						imagePositionOnMobile={
-							image ? imagePositionOnMobile : 'none'
-						}
-						padContent={determinePadContent(
-							isMediaCardOrNewsletter,
-							isBetaContainer,
-							isOnwardContent,
-						)}
-						padRight={
-							!!isFlexSplash &&
-							image &&
-							imagePositionOnDesktop === 'right'
-						}
+				<ContentWrapper
+					mediaType={media?.type}
+					mediaSize={mediaSize}
+					isBetaContainer={isBetaContainer}
+					mediaPositionOnDesktop={
+						image ? mediaPositionOnDesktop : 'none'
+					}
+					mediaPositionOnMobile={
+						image ? mediaPositionOnMobile : 'none'
+					}
+					padContent={determinePadContent(
+						isMediaCardOrNewsletter,
+						isBetaContainer,
+						isOnwardContent,
+					)}
+				>
+					{/* This div is needed to keep the headline and trail text justified at the start */}
+					<div
+						css={css`
+							position: relative;
+							display: flex;
+							flex-direction: column;
+							justify-content: flex-start;
+							flex-grow: 1;
+						`}
 					>
-						{/* This div is needed to keep the headline and trail text justified at the start */}
-						<div
-							css={css`
-								position: relative;
-								display: flex;
-								flex-direction: column;
-								justify-content: flex-start;
-								flex-grow: 1;
-							`}
-						>
-							{headlinePosition === 'inner' && (
-								<HeadlineWrapper>
-									<CardHeadline
-										headlineText={headlineText}
-										format={format}
-										fontSizes={headlineSizes}
-										showQuotes={showQuotes}
-										kickerText={
-											format.design ===
-												ArticleDesign.LiveBlog &&
-											!kickerText
-												? 'Live'
-												: kickerText
-										}
-										showPulsingDot={
-											format.design ===
-												ArticleDesign.LiveBlog ||
-											showPulsingDot
-										}
-										byline={byline}
-										showByline={showByline}
-										isExternalLink={isExternalLink}
-										kickerImage={
-											showKickerImage &&
-											media?.type === 'podcast'
-												? media.podcastImage
-												: undefined
-										}
+						{headlinePosition === 'inner' && (
+							<HeadlineWrapper>
+								<CardHeadline
+									headlineText={headlineText}
+									format={format}
+									fontSizes={headlineSizes}
+									showQuotes={showQuotes}
+									kickerText={
+										format.design ===
+											ArticleDesign.LiveBlog &&
+										!kickerText
+											? 'Live'
+											: kickerText
+									}
+									showPulsingDot={
+										format.design ===
+											ArticleDesign.LiveBlog ||
+										showPulsingDot
+									}
+									byline={byline}
+									showByline={showByline}
+									isExternalLink={isExternalLink}
+									kickerImage={
+										showKickerImage &&
+										media?.type === 'podcast'
+											? media.podcastImage
+											: undefined
+									}
+								/>
+								{!isUndefined(starRating) ? (
+									<StarRatingComponent
+										rating={starRating}
+										cardHasImage={!!image}
 									/>
-									{!isUndefined(starRating) ? (
-										<StarRatingComponent
-											rating={starRating}
-											cardHasImage={!!image}
-										/>
-									) : null}
-								</HeadlineWrapper>
-							)}
+								) : null}
+							</HeadlineWrapper>
+						)}
 
-							{!!trailText && media?.type !== 'podcast' && (
+						{!!trailText &&
+							media?.type !== 'podcast' &&
+							!isInHideTrailsAbTest && (
 								<TrailText
 									trailText={trailText}
 									trailTextSize={trailTextSize}
@@ -1155,91 +1103,87 @@ export const Card = ({
 								/>
 							)}
 
-							{!isOpinionCardWithAvatar && (
-								<>
-									{showPill ? (
-										<>
-											<MediaOrNewsletterPill />
-											{format.theme ===
-												ArticleSpecial.Labs &&
-												branding && (
-													<CardBranding
-														branding={branding}
-														onwardsSource={
-															onwardsSource
-														}
-														containerPalette={
-															containerPalette
-														}
-													/>
-												)}
-										</>
-									) : (
-										<CardFooter
-											format={format}
-											age={decideAge()}
-											commentCount={<CommentCount />}
-											cardBranding={
-												branding ? (
-													<CardBranding
-														branding={branding}
-														onwardsSource={
-															onwardsSource
-														}
-														containerPalette={
-															containerPalette
-														}
-													/>
-												) : undefined
-											}
-											showLivePlayable={showLivePlayable}
-										/>
-									)}
-								</>
-							)}
-							{showLivePlayable &&
-								liveUpdatesPosition === 'inner' && (
-									<Island
-										priority="feature"
-										defer={{ until: 'visible' }}
-									>
-										<LatestLinks
-											id={linkTo}
-											isDynamo={isDynamo}
-											direction={
-												isFlexibleContainer
-													? liveUpdatesAlignment
-													: supportingContentAlignment
-											}
-											containerPalette={containerPalette}
-											absoluteServerTimes={
-												absoluteServerTimes
-											}
-											displayHeader={isFlexibleContainer}
-											directionOnMobile={
-												isFlexibleContainer
-													? 'horizontal'
-													: undefined
-											}
-										></LatestLinks>
-									</Island>
+						{!isOpinionCardWithAvatar && (
+							<>
+								{showPill ? (
+									<>
+										<MediaOrNewsletterPill />
+										{format.theme === ArticleSpecial.Labs &&
+											branding && (
+												<CardBranding
+													branding={branding}
+													onwardsSource={
+														onwardsSource
+													}
+													containerPalette={
+														containerPalette
+													}
+												/>
+											)}
+									</>
+								) : (
+									<CardFooter
+										format={format}
+										age={decideAge()}
+										commentCount={<CommentCount />}
+										cardBranding={
+											branding ? (
+												<CardBranding
+													branding={branding}
+													onwardsSource={
+														onwardsSource
+													}
+													containerPalette={
+														containerPalette
+													}
+												/>
+											) : undefined
+										}
+										showLivePlayable={showLivePlayable}
+									/>
 								)}
-						</div>
-
-						{/* This div is needed to push this content to the bottom of the card */}
-						<div
-							style={isOnwardContent ? { marginTop: 'auto' } : {}}
-						>
-							{decideInnerSublinks()}
-						</div>
-
-						{sublinkPosition === 'outer' &&
-							supportingContentAlignment === 'horizontal' &&
-							imagePositionOnDesktop === 'right' && (
-								<HorizontalDivider />
+							</>
+						)}
+						{showLivePlayable &&
+							liveUpdatesPosition === 'inner' && (
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
+									<LatestLinks
+										id={linkTo}
+										isDynamo={isDynamo}
+										direction={
+											isFlexibleContainer
+												? liveUpdatesAlignment
+												: supportingContentAlignment
+										}
+										containerPalette={containerPalette}
+										absoluteServerTimes={
+											absoluteServerTimes
+										}
+										displayHeader={isFlexibleContainer}
+										directionOnMobile={
+											isFlexibleContainer
+												? 'horizontal'
+												: undefined
+										}
+									></LatestLinks>
+								</Island>
 							)}
-					</ContentWrapper>
-				)}
+					</div>
+
+					{/* This div is needed to push this content to the bottom of the card */}
+					<div style={isOnwardContent ? { marginTop: 'auto' } : {}}>
+						{decideInnerSublinks()}
+					</div>
+
+					{sublinkPosition === 'outer' &&
+						supportingContentAlignment === 'horizontal' &&
+						mediaPositionOnDesktop === 'right' && (
+							<HorizontalDivider />
+						)}
+				</ContentWrapper>
 			</CardLayout>
 
 			<div
@@ -1247,8 +1191,8 @@ export const Card = ({
 					/** We allow this area to take up more space so that cards without
 					 * sublinks next to cards with sublinks have the same meta alignment */
 					isBetaContainer &&
-					(imagePositionOnDesktop === 'left' ||
-						imagePositionOnDesktop === 'right') &&
+					(mediaPositionOnDesktop === 'left' ||
+						mediaPositionOnDesktop === 'right') &&
 					css`
 						${from.tablet} {
 							flex-basis: 100%;

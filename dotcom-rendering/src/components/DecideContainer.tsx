@@ -10,7 +10,6 @@ import type {
 import { DynamicFast } from './DynamicFast';
 import { DynamicPackage } from './DynamicPackage';
 import { DynamicSlow } from './DynamicSlow';
-import { DynamicSlowMPU } from './DynamicSlowMPU';
 import { FixedLargeSlowXIV } from './FixedLargeSlowXIV';
 import { FixedMediumFastXI } from './FixedMediumFastXI';
 import { FixedMediumFastXII } from './FixedMediumFastXII';
@@ -48,7 +47,7 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
-	isInNoBoostsAbTestVariant?: boolean;
+	isInHideTrailsAbTest?: boolean;
 };
 
 export const DecideContainer = ({
@@ -64,7 +63,7 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
-	isInNoBoostsAbTestVariant,
+	isInHideTrailsAbTest,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -80,16 +79,6 @@ export const DecideContainer = ({
 		case 'dynamic/slow':
 			return (
 				<DynamicSlow
-					groupedTrails={groupedTrails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'dynamic/slow-mpu':
-			return (
-				<DynamicSlowMPU
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
@@ -257,6 +246,7 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
+					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 				/>
 			);
 		case 'flexible/general':
@@ -270,7 +260,7 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
-					isInNoBoostsAbTestVariant={isInNoBoostsAbTestVariant}
+					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 				/>
 			);
 		case 'scrollable/small':
@@ -285,6 +275,7 @@ export const DecideContainer = ({
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
+						isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 					/>
 				</Island>
 			);
@@ -300,6 +291,7 @@ export const DecideContainer = ({
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
+						isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 					/>
 				</Island>
 			);
@@ -312,6 +304,7 @@ export const DecideContainer = ({
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
+					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 				/>
 			);
 		case 'scrollable/feature':
@@ -324,6 +317,7 @@ export const DecideContainer = ({
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
 						collectionId={collectionId}
+						isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 					/>
 				</Island>
 			);
@@ -336,6 +330,7 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
+					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 				/>
 			);
 		default:

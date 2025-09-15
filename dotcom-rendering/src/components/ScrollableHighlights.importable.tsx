@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, space, until } from '@guardian/source/foundations';
+import { from, space } from '@guardian/source/foundations';
 import {
 	Button,
 	Hide,
@@ -19,16 +19,24 @@ type Props = {
 };
 
 const containerStyles = css`
+	padding: ${space[2]}px 0 ${space[3]}px;
 	${from.tablet} {
-		padding: 0 ${space[5]}px;
+		padding: ${space[2]}px ${space[5]}px;
 	}
 	${from.wide} {
 		padding-right: 100px;
 	}
 `;
 
+const cardGap = 10;
+const horizontalPaddingMobile = 10;
+const horizontalPaddingMobileLandscape = 20;
+
 const carouselStyles = css`
 	display: grid;
+	gap: ${cardGap}px;
+	padding: 0 ${horizontalPaddingMobile}px;
+	scroll-padding-left: ${horizontalPaddingMobile}px;
 	grid-auto-columns: 1fr;
 	grid-auto-flow: column;
 	overflow-x: auto;
@@ -37,11 +45,15 @@ const carouselStyles = css`
 	scroll-behavior: smooth;
 	overscroll-behavior-x: contain;
 	overscroll-behavior-y: auto;
-	${until.tablet} {
-		scroll-padding-left: 10px;
+
+	${from.mobileLandscape} {
+		padding: 0 ${horizontalPaddingMobileLandscape}px;
+		scroll-padding-left: ${horizontalPaddingMobileLandscape}px;
 	}
 	${from.tablet} {
+		padding: 0;
 		scroll-padding-left: 120px;
+		gap: ${space[5]}px;
 	}
 	${from.desktop} {
 		scroll-padding-left: 240px;
@@ -50,7 +62,6 @@ const carouselStyles = css`
 		scroll-padding-left: 160px;
 		padding-left: 160px;
 	}
-
 	${from.wide} {
 		scroll-padding-left: 240px;
 		padding-left: 240px;
@@ -71,29 +82,20 @@ const itemStyles = css`
 	scroll-snap-align: start;
 	grid-area: span 1;
 	position: relative;
-	margin: ${space[3]}px 10px;
-	:first-child {
-		${from.tablet} {
-			margin-left: 0;
-		}
-	}
-	:last-child {
-		${from.tablet} {
-			margin-right: 0;
-		}
-	}
 `;
 
 const verticalLineStyles = css`
-	:not(:last-child)::after {
-		content: '';
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		right: -10px;
-		width: 1px;
-		background-color: ${palette('--card-border-top')};
-		transform: translateX(-50%);
+	${from.tablet} {
+		:not(:first-child)::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: -10px;
+			width: 1px;
+			background-color: ${palette('--highlights-container-separator')};
+			transform: translateX(-50%);
+		}
 	}
 `;
 
@@ -139,20 +141,50 @@ const nextButtonFadeStyles = css`
  * @returns {string} - The CSS styles for the grid layout.
  */
 const generateCarouselColumnStyles = (totalCards: number) => {
-	const peepingCardWidth = space[8];
+	const peepingCardWidthMobile = 150; // Screens below 375px. Only one card is fully visible;
+	const peepingCardWidthMobileMedium = space[8];
 
 	return css`
-		${until.mobileMedium} {
-			grid-template-columns: repeat(${totalCards}, 70%) max(30%);
-		}
-
+		grid-template-columns: repeat(
+			${totalCards},
+			max(
+				180px,
+				calc(
+					100vw -
+						(
+							${horizontalPaddingMobile +
+							cardGap +
+							peepingCardWidthMobile}px
+						)
+				)
+			)
+		);
 		${from.mobileMedium} {
 			grid-template-columns: repeat(
 				${totalCards},
-				calc((100% - ${peepingCardWidth}px) / 2)
+				calc(
+					(
+							100vw -
+								${horizontalPaddingMobile +
+								2 * cardGap +
+								peepingCardWidthMobileMedium}px
+						) / 2
+				)
 			);
 		}
-
+		${from.mobileLandscape} {
+			grid-template-columns: repeat(
+				${totalCards},
+				calc(
+					(
+							100vw -
+								${horizontalPaddingMobileLandscape +
+								2 * cardGap +
+								peepingCardWidthMobileMedium}px
+						) / 2
+				)
+			);
+		}
 		${from.tablet} {
 			grid-template-columns: repeat(${totalCards}, 1fr);
 		}
@@ -162,7 +194,7 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 /**
  * Typically, Ophan tracking data gets determined in the front layout component.
  * As the highlights exists outside of this front layout (in the header), we need to construct these fields here.
- * */
+ */
 const getOphanInfo = (frontId?: string) => {
 	const ophanComponentName = ophanComponentId('highlights');
 	const ophanComponentLink = `container-${0} | ${ophanComponentName}`;

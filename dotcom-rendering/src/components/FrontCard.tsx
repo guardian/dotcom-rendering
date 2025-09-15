@@ -17,10 +17,9 @@ type Props = {
  * commonly overridden params to make it easier for a developer to know if they actually need to override these values.
  *
  * @param props
- * @param [props.headlineSize] - Defaults to "medium"
- * @param [props.imagePosition] - Defaults to "top"
- * @param [props.imagePositionOnMobile] - Defaults to "left"
- * @param [props.imageSize] - Defaults to "small"
+ * @param [props.mediaPositionOnDesktop] - Defaults to "top"
+ * @param [props.mediaPositionOnMobile] - Defaults to "left"
+ * @param [props.mediaSize] - Defaults to "small"
  * @param [props.supportingContent] - Defaults to undefined, set to trail.supportingContent if you want this card to show sublinks.
  * @param [props.trailText] - Defaults to undefined, set to `trail.trailText` if you want this card to show trail text.
  */
@@ -43,7 +42,6 @@ export const FrontCard = (props: Props) => {
 		image: trail.image,
 		isCrossword: trail.isCrossword,
 		isNewsletter: trail.isNewsletter,
-		canPlayInline: true,
 		starRating: trail.starRating,
 		dataLinkName: trail.dataLinkName,
 		snapData: trail.snapData,
@@ -57,6 +55,7 @@ export const FrontCard = (props: Props) => {
 		showLivePlayable: trail.showLivePlayable,
 		showVideo: trail.showVideo,
 		uniqueId: trail.uniqueId,
+		isInHideTrailsAbTest: trail.isInHideTrailsAbTest,
 	};
 
 	return Card({ ...defaultProps, ...cardProps });

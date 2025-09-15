@@ -17,6 +17,7 @@ type Props = {
 	containerType: DCRContainerType;
 	aspectRatio: AspectRatio;
 	sectionId: string;
+	isInHideTrailsAbTest?: boolean;
 };
 
 /**
@@ -35,6 +36,7 @@ export const ScrollableMedium = ({
 	showAge,
 	aspectRatio,
 	sectionId,
+	isInHideTrailsAbTest,
 }: Props) => {
 	return (
 		<ScrollableCarousel
@@ -61,9 +63,9 @@ export const ScrollableMedium = ({
 								desktop: 'xsmall',
 								tablet: 'xxsmall',
 							}}
-							imagePositionOnDesktop={imagePosition}
-							imagePositionOnMobile={imagePosition}
-							imageSize="medium"
+							mediaPositionOnDesktop={imagePosition}
+							mediaPositionOnMobile={imagePosition}
+							mediaSize="medium"
 							trailText={undefined} // unsupported
 							supportingContent={undefined} // unsupported
 							aspectRatio={aspectRatio}
@@ -72,6 +74,7 @@ export const ScrollableMedium = ({
 							showTopBarDesktop={false}
 							showTopBarMobile={false}
 							canPlayInline={false}
+							isInHideTrailsAbTest={isInHideTrailsAbTest}
 						/>
 					</ScrollableCarousel.Item>
 				);

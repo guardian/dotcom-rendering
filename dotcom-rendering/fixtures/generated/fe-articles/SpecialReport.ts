@@ -97,7 +97,7 @@ export const SpecialReport: FEArticle = {
 					},
 				],
 			},
-			elementId: '2e043b32-608c-45e2-b160-2e518a08d8ab',
+			elementId: '2f83e9de-1258-49e7-8ba1-0371a15e68ce',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -297,85 +297,85 @@ export const SpecialReport: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Put climate on the ballot paper</strong></h2>',
-					elementId: '5b6317e7-f5fe-4f91-8aff-40aacdb2a7a0',
+					elementId: '0461ed8b-cd61-4726-bb19-40a2bda76ab2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Individual actions, such as flying less or buying electric cars, are helpful, but they will be futile without collective political action to slash emissions on a corporate, national and global scale. Politicians need to feel this is a priority for the electorate. That means keeping the subject high on the agenda for MPs with questions, protests, emails, social media posts, lobbying by NGOs and most of all through voting choices. Politicians need to know the public is behind them if they are to take on the petrochemical industry.</p>',
-					elementId: '49cb8323-0f2b-4ef0-80f5-46b6c3e16ad9',
+					elementId: '05004084-23c7-407d-b691-95dc91237bf9',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>End</strong><strong> fossil fuel subsidies</strong></h2>',
-					elementId: '1c42e99b-0608-44aa-8d45-f6ffd01d468b',
+					elementId: 'b36a1f16-8ddd-488a-931e-e8ba0cd54e9c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The coal, oil and gas industries benefit from <a href="https://www.imf.org/en/Publications/WP/Issues/2019/05/02/Global-Fossil-Fuel-Subsidies-Remain-Large-An-Update-Based-on-Country-Level-Estimates-46509">$5tn dollars a year</a> – $10m a minute – according to the International Monetary Fund, which described its own estimate as “shocking”. Even <a href="https://www.iea.org/newsroom/news/2019/june/fossil-fuel-consumption-subsidies-bounced-back-strongly-in-2018.html">direct consumption subsidies for fossil fuels</a> are double those for renewables, which the International Energy Agency says “greatly complicates the task” of tackling the climate crisis. The biggest subsidisers, the G20 nations, pledged in 2009 to end the handouts, but progress has been very limited. The UN secretary general, António Guterres, <a href="https://uk.reuters.com/article/global-climatechange-energy/fossil-fuel-subsidies-are-wrecking-the-world-says-u-n-chief-idUKL8N2345F6">attacked</a> the incentives in May, saying: “What we are doing is using taxpayers’ money … to destroy the world.” Any change has to include provisions for social justice. Cuts in fuel subsidies should not be used as an austerity measure that hurts the poor most.</p>',
-					elementId: '8c7b46ea-79eb-4ca5-bcbb-d081bd8ba9da',
+					elementId: '1e819018-61a1-44cd-a6aa-0081c213b812',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.QABlockElement',
 					credit: '',
 					id: 'e182ee5f-c378-4474-b7da-79f6b0a671b3',
-					elementId: 'fd325ba7-744d-409a-93b4-48bda41f7530',
+					elementId: 'f251637f-537e-440b-ab69-4c0b36edb17f',
 					title: 'What is the polluters project?',
 					html: '<p>The Guardian has collaborated with leading scientists and NGOs to expose, with exclusive data, investigations and analysis, the fossil fuel companies that are perpetuating the climate crisis – some of which have accelerated their extraction of coal, oil and gas even as the devastating impact on the planet and humanity was becoming clear.<br></p><p>The investigation has involved more than 20 Guardian journalists working across the world for the past six months.</p><p>The project focuses on what the companies have extracted from the ground, and the subsequent emissions they are responsible for, since 1965. The analysis, undertaken by Richard Heede at the <a href="http://climateaccountability.org/">Climate Accountability Institute</a>,&nbsp;calculates how much carbon is emitted throughout the supply chain, from extraction to use by consumers. Heede said: "The fact that consumers combust the fuels to carbon dioxide, water, heat and pollutants does not absolve the fossil fuel companies from responsibility for knowingly perpetuating the carbon era and accelerating the climate crisis toward the existential threat it has now become."</p><p>One aim of the project is to move the focus of debate from individual responsibilities to power structures – so our reporters also examined the financial and lobbying structures that let fossil fuel firms keep growing, and discovered which elected politicians were voting for change.&nbsp;</p><p>Another aim of the project is to press governments and corporations to close the gap between ambitious long-term promises and lacklustre short-term action. The UN says the coming decade is crucial if the world is to avoid the most catastrophic consequences of global heating. Reining in our dependence on fossil fuels and dramatically accelerating the transition to renewable energy has never been more urgent.</p>',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Put a price on carbon</strong></h2>',
-					elementId: 'c85c8901-caa6-4feb-a4ca-9236edb41dbf',
+					elementId: '5d3ac3d1-8aa5-45e0-b97e-1483b1f2a161',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The idea of putting a price on carbon has been around since the early 1990s and a cap-and-trade system was incorporated into the 1997 Kyoto protocol. Under cap-and-trade, a limit is set on emissions and businesses issued with permits to emit carbon. Those cutting their emissions fastest can sell spare permits to laggards, while the cap is ratcheted down over time. But success depends on a strict cap and a scarcity of permits, and <a href="https://www.carbonbrief.org/qa-will-reformed-eu-emissions-trading-system-raise-carbon-prices">the EU’s scheme</a> has been widely criticised. An alternative is a tax, which forces companies to factor the damage caused by climate change into their business decisions, and should encourage them to cut waste, cut emissions and use clean technology. The danger is of carbon leakage: that the extra cost in one country might encourage businesses to look elsewhere to site their factories. This can be dealt with by a border adjustment tax, as the <a href="https://uk.reuters.com/article/uk-eu-commission-timmermans-border-tax/incoming-top-eu-climate-official-pledges-to-tax-polluting-imports-idUKKBN1WN23F">EU’s new commissioner pledged</a> this week. Carbon taxes don’t have to create economic losers, either – <a href="https://www.theguardian.com/world/2018/dec/04/how-to-make-a-carbon-tax-popular-give-the-profits-to-the-people">revenue neutral taxes</a> redistribute the money to the people and are advocated by many.<strong>Scale back demand for fossil fuels</strong></p>',
-					elementId: 'e60733b0-0aba-4478-a432-3325b1a1164f',
+					elementId: 'd0daca0e-94ec-49dc-b9c1-035b3ebf11ff',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Oil companies will sell oil for as long as there are buyers. Public shaming and social and political pressure can work to force companies to own up to their activities but most oil and gas around the world is produced by <a href="https://www.theguardian.com/environment/2019/oct/09/secretive-national-oil-companies-climate">national oil companies</a>, and they need no social licence to operate beyond that granted by their governments, which are often autocratic or unresponsive to public opinion. All companies are responsive to economic pressure, however. The only way to cut emissions from oil in the long term is to stop using oil. Reducing demand is driven by government regulation and by technological development (also driven by regulation), such as cheaper solar panels, offshore windfarms, electric cars and improved public transport.</p>',
-					elementId: '5ae3da1a-5cee-4208-83f3-c257fa7ff494',
+					elementId: 'e2cee406-0297-412d-9cdb-b2305fa9e39b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Stop flaring</strong></h2>',
-					elementId: '36f40dc7-2f3b-4828-981f-7f01e344cc73',
+					elementId: '3ecc6396-7b92-487a-8216-cef62ded5a3d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>If oil and gas are to be extracted, the least oil companies can do is extract efficiently. The <a href="https://www.worldbank.org/en/programs/zero-routine-flaring-by-2030">World Bank has estimated</a> that the amount of gas wastefully flared globally each year, if used for power generation instead, could supply all of Africa’s electricity needs. <a href="https://www.ft.com/content/6f8f334e-0ebd-11e9-a3aa-118c761d2745">The FT</a> reported earlier this year that flaring in Texas was lighting up the night sky as producers let off the gas to get the oil to market quickly, to turn a faster buck regardless of the environmental consequences. The World Bank wants an end to routine flaring globally by 2030 – yet <a href="https://www.worldbank.org/en/programs/gasflaringreduction#7">in 2018 it increased</a>.</p>',
-					elementId: '5ffbcb34-d4d3-4b8c-8c4f-41428ad2fbc7',
+					elementId: '103a55ce-1cff-4ce3-9ba8-6fd8cc455629',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Roll out large scale carbon capture and storage</strong></h2>',
-					elementId: '093b684f-e6ef-4733-8f2d-90f488ac803c',
+					elementId: 'aaff9a5c-3233-40f1-b7aa-ab676007da05',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Trapping and burying the CO2 from fossil fuel burning is possible but not yet deployed at scale. Without this, the Intergovernmental Panel on Climate Change says tackling the climate crisis will be much more expensive. Oil companies have the expertise to roll out CCS but say that without a price on carbon emissions there is no commercial incentive. CCS could be used to actually remove CO2 from the atmosphere by growing trees and plants, burning them for electricity, then sequestering the emissions. But the IPCC has warned that doing this at large scale could conflict with growing food.</p>',
-					elementId: '9d8afa4c-1239-42fa-b38f-36103de293fa',
+					elementId: 'fd1dedb0-2f2e-4240-8117-09270340ed5d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Halt investment in fossil fuels</strong></h2>',
-					elementId: 'd9c07ae6-77cd-484c-8b3b-3798c79fdc08',
+					elementId: 'fd4467c8-eed5-4375-a03f-008e6c70fdb9',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The energy transition poses many risks and opportunities for investors, but it cannot be that well-intentioned savers seeking to use their money to support renewable energy businesses and divest from fossil fuels are still inadvertently investing in oil, gas and coal companies. Green investing must be regulated to ensure it really is green.</p>',
-					elementId: '2017c300-db7e-46b9-a57c-af51898045d2',
+					elementId: 'effd78a3-659c-4004-affd-9f03a86dec69',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Establish market metrics on climate change</strong></h2>',
-					elementId: '4efb71d4-5ac2-424c-ad82-12b7f90483b4',
+					elementId: '27049227-f14e-4b87-a908-d30e38842d1f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Nearly three years after the Paris agreement, world markets still have no mandatory, comparable data to measure the risks posed by the climate crisis at a company level. Regulators must act urgently – slow-moving voluntary schemes are not enough. Last week, <a href="https://www.theguardian.com/business/2019/oct/08/corporations-told-to-draw-up-climate-rules-or-have-them-imposed">the governor of the Bank of England warned</a> major corporations that they had two years to agree rules for reporting climate risks before global regulators devised their own and made them compulsory. If markets do not understand what climate change really means for car manufacturers, fossil fuel companies and energy firms, a climate-induced financial crisis is just a matter of time. Investment in fossil fuels must end. The <a href="https://gofossilfree.org/divestment/commitments/">fossil fuel divestment movement</a> now has $11.5tn of assets under management committed to divestment.</p>',
-					elementId: '0e97efcf-7b33-4daf-b63b-5775a15757fc',
+					elementId: '92f7a5fd-7ec7-451f-b058-0517bd94df61',
 				},
 			],
 			attributes: {
@@ -618,7 +618,7 @@ export const SpecialReport: FEArticle = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTkucG5n&enable=upscale&s=21b925d20952e4382d2f267fa87c2e40',
+				'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTkucG5n&enable=upscale&s=09bc80425ceeb7bf158ffb4f686ba5e7',
 				'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=bc4a7dc47c140a706d377f0fc0adf209',
 				'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=371a03ac29737cecdd87eef843b0492c',
 				'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1200&quality=85&auto=format&fit=max&s=265c2f3e1501c89984f9e3b003aa9c1c',
@@ -669,7 +669,7 @@ export const SpecialReport: FEArticle = {
 			'https://www.theguardian.com/profile/fiona-harvey,https://www.theguardian.com/profile/damiancarrington,https://www.theguardian.com/profile/patrick-greenfield,https://www.theguardian.com/profile/jonathanwatts',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTkucG5n&enable=upscale&s=21b925d20952e4382d2f267fa87c2e40',
+			'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTkucG5n&enable=upscale&s=09bc80425ceeb7bf158ffb4f686ba5e7',
 		'al:ios:url':
 			'gnmguardian://environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
@@ -702,7 +702,7 @@ export const SpecialReport: FEArticle = {
 		'twitter:app:url:iphone':
 			'gnmguardian://environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas?contenttype=Article&source=twitter',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTkucG5n&s=f1cc763cfe45a9404caf3f8c7e7cb9d0',
+			'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTkucG5n&s=c96a8fa8c6981f2607ee43a01248bf0c',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
 			'gnmguardian://environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas?contenttype=Article&source=twitter',
@@ -756,7 +756,6 @@ export const SpecialReport: FEArticle = {
 			relatedContent: true,
 			thirdPartyEmbedTracking: true,
 			prebidOzone: true,
-			prebidAdYouLike: true,
 			mostViewedFronts: true,
 			abSignInGateMainControl: true,
 			ampPrebid: true,
@@ -865,6 +864,7 @@ export const SpecialReport: FEArticle = {
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},
+		serverSideABTests: {},
 		edition: 'UK',
 		ipsosTag: 'environment',
 		isLiveBlog: false,
@@ -1286,7 +1286,7 @@ export const SpecialReport: FEArticle = {
 								url: '/world/europe-news',
 							},
 							{
-								title: 'US',
+								title: 'US news',
 								url: '/us-news',
 								longTitle: 'US news',
 							},
@@ -1366,6 +1366,11 @@ export const SpecialReport: FEArticle = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
+							},
+							{
+								title: 'Euro 2025',
+								url: '/football/women-s-euro-2025',
+								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -1540,6 +1545,11 @@ export const SpecialReport: FEArticle = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
+							},
+							{
+								title: 'Euro 2025',
+								url: '/football/women-s-euro-2025',
+								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -1770,28 +1780,6 @@ export const SpecialReport: FEArticle = {
 				url: 'https://www.theguardian.com/insidetheguardian',
 			},
 			{
-				title: 'The Observer',
-				url: '/observer',
-				children: [
-					{
-						title: 'Comment',
-						url: '/theobserver/news/comment',
-					},
-					{
-						title: 'The New Review',
-						url: '/theobserver/new-review',
-					},
-					{
-						title: 'Observer Magazine',
-						url: '/theobserver/magazine',
-					},
-					{
-						title: 'Observer Food Monthly',
-						url: '/theobserver/foodmonthly',
-					},
-				],
-			},
-			{
 				title: 'Guardian Weekly',
 				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
 			},
@@ -1808,16 +1796,12 @@ export const SpecialReport: FEArticle = {
 						url: '/crosswords/series/quick',
 					},
 					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
+						title: 'Sunday quick',
+						url: '/crosswords/series/sunday-quick',
 					},
 					{
 						title: 'Quick cryptic',
 						url: '/crosswords/series/quick-cryptic',
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
 					},
 					{
 						title: 'Quiptic',
@@ -1830,10 +1814,6 @@ export const SpecialReport: FEArticle = {
 					{
 						title: 'Prize',
 						url: '/crosswords/series/prize',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
 					},
 					{
 						title: 'Genius',
@@ -1856,6 +1836,10 @@ export const SpecialReport: FEArticle = {
 			{
 				title: 'Corrections',
 				url: '/theguardian/series/corrections-and-clarifications',
+			},
+			{
+				title: 'Tips',
+				url: 'https://www.theguardian.com/tips',
 			},
 		],
 		brandExtensions: [
@@ -1971,7 +1955,7 @@ export const SpecialReport: FEArticle = {
 							url: '/world/europe-news',
 						},
 						{
-							title: 'US',
+							title: 'US news',
 							url: '/us-news',
 							longTitle: 'US news',
 						},
@@ -2051,6 +2035,11 @@ export const SpecialReport: FEArticle = {
 							title: 'Clubs',
 							url: '/football/teams',
 							longTitle: 'football/teams',
+						},
+						{
+							title: 'Euro 2025',
+							url: '/football/women-s-euro-2025',
+							longTitle: 'football/women-s-euro-2025',
 						},
 					],
 				},
@@ -2355,6 +2344,18 @@ export const SpecialReport: FEArticle = {
 					text: 'Patrons',
 					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
 					dataLinkName: 'uk : footer : patrons',
+					extraClasses: '',
+				},
+				{
+					text: 'Tips',
+					url: 'https://www.theguardian.com/tips',
+					dataLinkName: 'uk : footer : tips',
+					extraClasses: '',
+				},
+				{
+					text: 'Accessibility settings',
+					url: '/help/accessibility-help',
+					dataLinkName: 'accessibility settings',
 					extraClasses: '',
 				},
 			],

@@ -16,6 +16,7 @@ type Props = {
 	containerType: DCRContainerType;
 	aspectRatio: AspectRatio;
 	sectionId: string;
+	isInHideTrailsAbTest?: boolean;
 };
 
 /**
@@ -60,6 +61,7 @@ export const ScrollableSmall = ({
 	showAge,
 	aspectRatio,
 	sectionId,
+	isInHideTrailsAbTest,
 }: Props) => {
 	const mobileBottomCards = [1, 3];
 	const desktopBottomCards = [2, 3];
@@ -90,9 +92,9 @@ export const ScrollableSmall = ({
 								desktop: 'xxsmall',
 								mobile: 'xxxsmall',
 							}}
-							imagePositionOnDesktop="left"
-							imagePositionOnMobile="left"
-							imageSize="small"
+							mediaPositionOnDesktop="left"
+							mediaPositionOnMobile="left"
+							mediaSize="small"
 							trailText={undefined} // unsupported
 							supportingContent={undefined} // unsupported
 							aspectRatio={aspectRatio}
@@ -103,6 +105,7 @@ export const ScrollableSmall = ({
 							)}
 							showTopBarMobile={mobileBottomCards.includes(index)}
 							canPlayInline={false}
+							isInHideTrailsAbTest={isInHideTrailsAbTest}
 						/>
 					</ScrollableCarousel.Item>
 				);

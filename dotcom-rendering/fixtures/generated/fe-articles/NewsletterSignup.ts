@@ -18,7 +18,7 @@ export const NewsletterSignup: FEArticle = {
 	headline:
 		'Sign up for the Moving the Goalposts newsletter: our free women’s football email',
 	standfirst:
-		'<p>Get our roundup of women’s football for free once a week, featuring the insights of experts such as Ada Hegerberg and Magdalena Eriksson</p>',
+		'<p>Get our roundup of women’s football for free twice a week, featuring the insights of experts such as Ada Hegerberg and Magdalena Eriksson</p>',
 	webTitle:
 		'Sign up for the Moving the Goalposts newsletter: our free women’s football email',
 	mainMediaElements: [
@@ -97,7 +97,7 @@ export const NewsletterSignup: FEArticle = {
 					},
 				],
 			},
-			elementId: '0a470d6f-8498-4b20-b522-84f54be93e60',
+			elementId: '905149ea-a72f-4e3f-affc-d8a63f46ef90',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -296,7 +296,7 @@ export const NewsletterSignup: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Join us as we delve deeper into the wonderful world of women’s football in our weekly newsletter. It is informative, entertaining, global, critical – when needed – and, above all, passionate. Written mainly by <a href="https://www.theguardian.com/profile/julia-belas-trindade">Júlia Belas Trindade</a> and <a href="https://www.theguardian.com/profile/sophie-downey">Sophie Downey</a>, expect guest appearances from stars such as Anita Asante, Ada Hegerberg and many more.</p>',
-					elementId: '7b2714d8-4dbf-44b7-bddf-7c4281c8083f',
+					elementId: '90bdb4a0-b039-4218-91fe-b9c7505976c2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -305,24 +305,24 @@ export const NewsletterSignup: FEArticle = {
 					sourceDomain: 'theguardian.com',
 					safe: true,
 					alt: 'Sign up to Moving the Goalposts',
-					elementId: 'e39bc6c8-cc5a-4ae2-aa6c-f49adeda56d6',
+					elementId: 'd1978b54-948c-4c0f-93a7-60841c792dc4',
 					isThirdPartyTracking: false,
 					html: '<iframe id="moving-the-goalposts" name="moving-the-goalposts" src="https://www.theguardian.com/email/form/plaintone/moving-the-goalposts" scrolling="no" seamless="" class="iframed--overflow-hidden email-sub__iframe" height="52px" frameborder="0" data-component="email-embed--moving-the-goalposts"></iframe>',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li>\n  <p>Try our other sports emails: as well as the occasionally funny football email <a href="https://www.theguardian.com/info/2016/jan/05/the-fiver-email-sign-up">The Fiver </a>from Monday to Friday, there are weekly catch-ups for cricket in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-spin">The Spin</a> and rugby union in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-breakdown">The Breakdown</a>, and our seven-day roundup of the best of our sports journalism in <a href="https://www.theguardian.com/sport/2017/may/15/the-recap-sign-up-for-the-best-of-the-guardians-sport-coverage">The Recap</a>.</p></li>\n <li>\n  <p>Living in Australia? Try the <a href="https://www.theguardian.com/info/2015/jun/05/guardian-australia-sport-newsletter-subscribe-by-email">Guardian Australia’s daily sports newsletter</a></p></li>\n</ul>',
-					elementId: 'b44d54ff-25b5-4f9e-b312-f26214f3984a',
+					elementId: '95f78b0e-7d8a-4f88-914d-054b991f5402',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>***</p>',
-					elementId: 'cda57e77-c5ff-40ce-b98d-66fbd6bc931a',
+					elementId: 'aae66466-9ce9-43d6-9415-89a34ac8a795',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong><a href="https://www.theguardian.com/email-newsletters">Explore all our newsletters:</a></strong><a href="https://www.theguardian.com/email-newsletters"> whether you love film, football, fashion or food, we’ve got something for you</a></p>',
-					elementId: '07512485-a812-481b-aabd-17853661b35e',
+					elementId: '40648eff-c271-40c3-b4f2-de907bedd4d7',
 				},
 			],
 			attributes: {
@@ -339,7 +339,7 @@ export const NewsletterSignup: FEArticle = {
 			blockFirstPublishedDisplayNoTimezone: '16.57',
 			contributors: [],
 			primaryDateLine: 'Tue 22 Mar 2022 16.57 GMT',
-			secondaryDateLine: 'Last modified on Thu 13 Jun 2024 13.56 BST',
+			secondaryDateLine: 'Last modified on Wed 16 Jul 2025 10.24 BST',
 		},
 	],
 	author: {
@@ -351,7 +351,7 @@ export const NewsletterSignup: FEArticle = {
 	webPublicationDateDeprecated: '2022-03-22T16:57:35.000Z',
 	webPublicationDateDisplay: 'Tue 22 Mar 2022 16.57 GMT',
 	webPublicationSecondaryDateDisplay:
-		'Last modified on Thu 13 Jun 2024 13.56 BST',
+		'Last modified on Wed 16 Jul 2025 10.24 BST',
 	editionLongForm: 'UK edition',
 	editionId: 'UK',
 	pageId: 'football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
@@ -474,7 +474,7 @@ export const NewsletterSignup: FEArticle = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=9debf69dfe57ad669aedd1d4cc993714',
+				'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=cc7434717dd819611f22058552bb76cd',
 				'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=4777618c39d2b365792b479ed8f70f69',
 				'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=dd8ddc550f2df030773f8476fdcb0d45',
 				'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=1200&quality=85&auto=format&fit=max&s=33b57bbce1a66a264a36748049f549e4',
@@ -489,7 +489,7 @@ export const NewsletterSignup: FEArticle = {
 			datePublished: '2022-03-22T16:57:35.000Z',
 			headline:
 				'Sign up for the Moving the Goalposts newsletter: our free women’s football email',
-			dateModified: '2024-06-13T12:56:56.000Z',
+			dateModified: '2025-07-16T09:24:32.000Z',
 			mainEntityOfPage:
 				'https://www.theguardian.com/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
 		},
@@ -509,17 +509,17 @@ export const NewsletterSignup: FEArticle = {
 		'article:author': 'https://www.theguardian.com/profile/suzanne-wrack',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=9debf69dfe57ad669aedd1d4cc993714',
+			'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=cc7434717dd819611f22058552bb76cd',
 		'al:ios:url':
 			'gnmguardian://football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
 		'og:title':
 			'Sign up for the Moving the Goalposts newsletter: our free women’s football email',
 		'fb:app_id': '180444840287',
-		'article:modified_time': '2024-06-13T12:56:56.000Z',
+		'article:modified_time': '2025-07-16T09:24:32.000Z',
 		'og:image:height': '720',
 		'og:description':
-			'Get our roundup of women’s football for free once a week, featuring the insights of experts such as Ada Hegerberg and Magdalena Eriksson',
+			'Get our roundup of women’s football for free twice a week, featuring the insights of experts such as Ada Hegerberg and Magdalena Eriksson',
 		'og:type': 'article',
 		'al:ios:app_store_id': '409128287',
 		'article:section': 'Football',
@@ -542,7 +542,7 @@ export const NewsletterSignup: FEArticle = {
 		'twitter:app:url:iphone':
 			'gnmguardian://football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts?contenttype=Article&source=twitter',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=dfea9183cf579898db41462193a0cedc',
+			'https://i.guim.co.uk/img/media/f05addc1c6b98dc15f73f332ba340b8f5b5afb9f/0_0_5000_3000/master/5000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=3a10599e4e37f3926d4f84adf8a410f5',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
 			'gnmguardian://football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts?contenttype=Article&source=twitter',
@@ -596,7 +596,6 @@ export const NewsletterSignup: FEArticle = {
 			relatedContent: true,
 			thirdPartyEmbedTracking: true,
 			prebidOzone: true,
-			prebidAdYouLike: true,
 			mostViewedFronts: true,
 			abSignInGateMainControl: true,
 			ampPrebid: true,
@@ -705,6 +704,7 @@ export const NewsletterSignup: FEArticle = {
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},
+		serverSideABTests: {},
 		edition: 'UK',
 		ipsosTag: 'environment',
 		isLiveBlog: false,
@@ -955,7 +955,7 @@ export const NewsletterSignup: FEArticle = {
 		isSensitive: false,
 	},
 	trailText:
-		'Get our roundup of women’s football for free once a week, featuring the insights of experts such as Ada Hegerberg and Magdalena Eriksson',
+		'Get our roundup of women’s football for free twice a week, featuring the insights of experts such as Ada Hegerberg and Magdalena Eriksson',
 	nav: {
 		currentUrl: '/football',
 		pillars: [
@@ -1036,7 +1036,7 @@ export const NewsletterSignup: FEArticle = {
 								url: '/world/europe-news',
 							},
 							{
-								title: 'US',
+								title: 'US news',
 								url: '/us-news',
 								longTitle: 'US news',
 							},
@@ -1116,6 +1116,11 @@ export const NewsletterSignup: FEArticle = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
+							},
+							{
+								title: 'Euro 2025',
+								url: '/football/women-s-euro-2025',
+								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -1290,6 +1295,11 @@ export const NewsletterSignup: FEArticle = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
+							},
+							{
+								title: 'Euro 2025',
+								url: '/football/women-s-euro-2025',
+								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -1520,28 +1530,6 @@ export const NewsletterSignup: FEArticle = {
 				url: 'https://www.theguardian.com/insidetheguardian',
 			},
 			{
-				title: 'The Observer',
-				url: '/observer',
-				children: [
-					{
-						title: 'Comment',
-						url: '/theobserver/news/comment',
-					},
-					{
-						title: 'The New Review',
-						url: '/theobserver/new-review',
-					},
-					{
-						title: 'Observer Magazine',
-						url: '/theobserver/magazine',
-					},
-					{
-						title: 'Observer Food Monthly',
-						url: '/theobserver/foodmonthly',
-					},
-				],
-			},
-			{
 				title: 'Guardian Weekly',
 				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
 			},
@@ -1558,16 +1546,12 @@ export const NewsletterSignup: FEArticle = {
 						url: '/crosswords/series/quick',
 					},
 					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
+						title: 'Sunday quick',
+						url: '/crosswords/series/sunday-quick',
 					},
 					{
 						title: 'Quick cryptic',
 						url: '/crosswords/series/quick-cryptic',
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
 					},
 					{
 						title: 'Quiptic',
@@ -1580,10 +1564,6 @@ export const NewsletterSignup: FEArticle = {
 					{
 						title: 'Prize',
 						url: '/crosswords/series/prize',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
 					},
 					{
 						title: 'Genius',
@@ -1606,6 +1586,10 @@ export const NewsletterSignup: FEArticle = {
 			{
 				title: 'Corrections',
 				url: '/theguardian/series/corrections-and-clarifications',
+			},
+			{
+				title: 'Tips',
+				url: 'https://www.theguardian.com/tips',
 			},
 		],
 		brandExtensions: [
@@ -1683,6 +1667,11 @@ export const NewsletterSignup: FEArticle = {
 						url: '/football/teams',
 						longTitle: 'football/teams',
 					},
+					{
+						title: 'Euro 2025',
+						url: '/football/women-s-euro-2025',
+						longTitle: 'football/women-s-euro-2025',
+					},
 				],
 			},
 			links: [
@@ -1715,6 +1704,11 @@ export const NewsletterSignup: FEArticle = {
 					title: 'Clubs',
 					url: '/football/teams',
 					longTitle: 'football/teams',
+				},
+				{
+					title: 'Euro 2025',
+					url: '/football/women-s-euro-2025',
+					longTitle: 'football/women-s-euro-2025',
 				},
 			],
 		},
@@ -1915,6 +1909,18 @@ export const NewsletterSignup: FEArticle = {
 					text: 'Patrons',
 					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
 					dataLinkName: 'uk : footer : patrons',
+					extraClasses: '',
+				},
+				{
+					text: 'Tips',
+					url: 'https://www.theguardian.com/tips',
+					dataLinkName: 'uk : footer : tips',
+					extraClasses: '',
+				},
+				{
+					text: 'Accessibility settings',
+					url: '/help/accessibility-help',
+					dataLinkName: 'accessibility settings',
 					extraClasses: '',
 				},
 			],

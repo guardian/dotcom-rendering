@@ -11,6 +11,7 @@ import { AlreadyVisited } from './AlreadyVisited.importable';
 import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
 import { FocusStyles } from './FocusStyles.importable';
+import { GoogleOneTap, isGoogleOneTapEnabled } from './GoogleOneTap.importable';
 import { Island } from './Island';
 import { Metrics } from './Metrics.importable';
 import { SetABTests } from './SetABTests.importable';
@@ -76,11 +77,20 @@ export const TagPage = ({ tagPage, NAV }: Props) => {
 					pageIsSensitive={tagPage.config.isSensitive}
 					isDev={!!tagPage.config.isDev}
 					serverSideTests={tagPage.config.abTests}
+					serverSideABTests={tagPage.config.serverSideABTests}
 				/>
 			</Island>
 			<Island priority="critical">
 				<SetAdTargeting adTargeting={adTargeting} />
 			</Island>
+			{isGoogleOneTapEnabled(
+				tagPage.config.abTests,
+				tagPage.config.switches,
+			) && (
+				<Island priority="enhancement" defer={{ until: 'idle' }}>
+					<GoogleOneTap />
+				</Island>
+			)}
 			{darkModeAvailable && (
 				<DarkModeMessage>
 					Dark mode is a work-in-progress.

@@ -31,7 +31,7 @@ const interactiveMessageSchema = variant('kind', [
  * It needs to send information to an adjoining `InteractiveAtom`
  */
 export const InteractiveAtomMessenger = ({ id }: Props) => {
-	const [container, setContainer] = useState<HTMLDivElement>();
+	const [container, setContainer] = useState<HTMLElement>();
 	const [iframe, setIframe] = useState<HTMLIFrameElement>();
 	const [scroll, setScroll] = useState(0);
 	const [height, setHeight] = useState(0);
@@ -53,7 +53,7 @@ export const InteractiveAtomMessenger = ({ id }: Props) => {
 	}, [id]);
 
 	useEffect(() => {
-		if (!(iframe?.parentElement instanceof HTMLDivElement)) return;
+		if (!iframe?.parentElement) return;
 
 		setContainer(iframe.parentElement);
 	}, [iframe]);
@@ -62,11 +62,18 @@ export const InteractiveAtomMessenger = ({ id }: Props) => {
 		if (!iframe) return;
 		if (!container) return;
 
+		let timeout: ReturnType<typeof requestAnimationFrame> | null = null;
+
 		const scrollListener = () => {
-			const rect = container.getBoundingClientRect();
-			if (rect.top > 0) return setScroll(0);
-			if (rect.top < -rect.height) return setScroll(1);
-			setScroll(-rect.top);
+			if (timeout != null) {
+				cancelAnimationFrame(timeout);
+			}
+			timeout = requestAnimationFrame(() => {
+				const rect = container.getBoundingClientRect();
+				if (rect.top > 0) return setScroll(0);
+				if (rect.top < -rect.height) return setScroll(1);
+				setScroll(-Math.round(rect.top));
+			});
 		};
 
 		const messageListener = (event: MessageEvent<unknown>) => {
@@ -89,10 +96,11 @@ export const InteractiveAtomMessenger = ({ id }: Props) => {
 			}
 		};
 
-		window.addEventListener('scroll', scrollListener);
+		window.addEventListener('scroll', scrollListener, { passive: true });
 		window.addEventListener('message', messageListener);
 
 		return () => {
+			if (timeout != null) cancelAnimationFrame(timeout);
 			window.removeEventListener('scroll', scrollListener);
 			window.removeEventListener('message', messageListener);
 		};

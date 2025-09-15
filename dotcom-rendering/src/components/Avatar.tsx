@@ -3,7 +3,7 @@ import { breakpoints } from '@guardian/source/foundations';
 import { Fragment } from 'react';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { palette } from '../palette';
-import type { ImageSizeType } from './Card/components/ImageWrapper';
+import type { MediaSizeType } from './Card/components/MediaWrapper';
 import {
 	generateSources,
 	getFallbackSource,
@@ -56,35 +56,83 @@ type Props = {
 	src: string;
 	alt: string;
 	shape?: AvatarShape;
-	imageSize?: ImageSizeType;
+	imageSize?: MediaSizeType;
 };
 
 const decideImageWidths = (
-	imageSize: ImageSizeType,
+	imageSize: MediaSizeType,
 ): [ImageWidthType, ...ImageWidthType[]] => {
 	switch (imageSize) {
 		case 'small':
-			return [{ breakpoint: breakpoints.mobile, width: 80 }];
+			return [
+				{
+					breakpoint: breakpoints.mobile,
+					width: 80,
+					aspectRatio: '1:1',
+				},
+			];
 
 		case 'medium':
 		default:
 			return [
-				{ breakpoint: breakpoints.mobile, width: 80 },
-				{ breakpoint: breakpoints.desktop, width: 90 },
+				{
+					breakpoint: breakpoints.mobile,
+					width: 80,
+					aspectRatio: '1:1',
+				},
+				{
+					breakpoint: breakpoints.desktop,
+					width: 90,
+					aspectRatio: '1:1',
+				},
 			];
 
 		case 'large':
+		case 'xlarge':
 			return [
-				{ breakpoint: breakpoints.mobile, width: 150 },
-				{ breakpoint: breakpoints.tablet, width: 130 },
-				{ breakpoint: breakpoints.desktop, width: 150 },
+				{
+					breakpoint: breakpoints.mobile,
+					width: 150,
+					aspectRatio: '1:1',
+				},
+				{
+					breakpoint: breakpoints.tablet,
+					width: 130,
+					aspectRatio: '1:1',
+				},
+				{
+					breakpoint: breakpoints.desktop,
+					width: 150,
+					aspectRatio: '1:1',
+				},
 			];
 
 		case 'jumbo':
 			return [
-				{ breakpoint: breakpoints.mobile, width: 180 },
-				{ breakpoint: breakpoints.tablet, width: 160 },
-				{ breakpoint: breakpoints.desktop, width: 190 },
+				{
+					breakpoint: breakpoints.mobile,
+					width: 180,
+					aspectRatio: '1:1',
+				},
+				{
+					breakpoint: breakpoints.tablet,
+					width: 160,
+					aspectRatio: '1:1',
+				},
+				{
+					breakpoint: breakpoints.desktop,
+					width: 190,
+					aspectRatio: '1:1',
+				},
+			];
+		/* Avatars on cards in the highlights container are fixed to 98px on all breakpoints */
+		case 'highlights-card':
+			return [
+				{
+					breakpoint: breakpoints.mobile,
+					width: 98,
+					aspectRatio: '1:1',
+				},
 			];
 	}
 };
