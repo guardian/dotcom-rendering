@@ -4,6 +4,9 @@ export const mockAuxiaResponseDismissible = {
 		userTreatment: {
 			treatmentId: 'auxia-treatment-001',
 			treatmentTrackingId: 'tracking-001',
+			treatmentType: 'treatmentType',
+			rank: '1',
+			contentLanguageCode: 'en-GB',
 			surface: 'signin-gate',
 			treatmentContent: JSON.stringify({
 				title: 'Like uninterrupted reading?\nSo do we. Sign in.',
@@ -24,6 +27,9 @@ export const mockAuxiaResponseNonDismissible = {
 		userTreatment: {
 			treatmentId: 'auxia-treatment-002',
 			treatmentTrackingId: 'tracking-002',
+			treatmentType: 'treatmentType',
+			rank: '1',
+			contentLanguageCode: 'en-GB',
 			surface: 'signin-gate',
 			treatmentContent: JSON.stringify({
 				title: 'Like uninterrupted reading?\nSo do we. Sign in.',
@@ -44,6 +50,9 @@ export const mockAuxiaResponseLegacy = {
 		userTreatment: {
 			treatmentId: 'default-treatment-id', // This triggers legacy gate
 			treatmentTrackingId: 'legacy-tracking',
+			treatmentType: 'treatmentType',
+			rank: '1',
+			contentLanguageCode: 'en-GB',
 			surface: 'signin-gate',
 			treatmentContent: JSON.stringify({
 				title: 'Like uninterrupted reading?\nSo do we. Sign in.',

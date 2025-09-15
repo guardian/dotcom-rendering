@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { buildAuxiaGateDisplayData } from '../../lib/auxia';
 import type { EditionId } from '../../lib/edition';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { useAuthStatus } from '../../lib/useAuthStatus';
 import type { TagType } from '../../types/tag';
 import { Island } from '../Island';
 import { pageIdIsAllowedForGating } from '../SignInGate/displayRules';
+import type { AuxiaGateDisplayData } from '../SignInGate/types';
 import { SignInGateSelector } from '../SignInGateSelector.importable';
 
 /**
@@ -17,26 +19,20 @@ import { SignInGateSelector } from '../SignInGateSelector.importable';
  */
 export const SignInGatePortal = ({
 	host = 'https://theguardian.com/',
-	contentType,
-	sectionId,
-	tags,
 	isPaidContent,
 	isPreview,
 	pageId,
 	contributionsServiceUrl,
-	editionId,
 	idUrl,
+	auxiaGateDisplayData,
 }: {
 	host?: string;
-	contentType: string;
-	sectionId: string;
-	tags: TagType[];
 	isPaidContent: boolean;
 	isPreview: boolean;
 	pageId: string;
 	contributionsServiceUrl: string;
-	editionId: EditionId;
 	idUrl: string;
+	auxiaGateDisplayData?: AuxiaGateDisplayData | undefined;
 }) => {
 	const [shouldShowGate, setShouldShowGate] = useState<boolean>(false);
 	const [targetElement, setTargetElement] = useState<HTMLElement | null>(
@@ -101,16 +97,13 @@ export const SignInGatePortal = ({
 	return createPortal(
 		<Island priority="feature" defer={{ until: 'visible' }}>
 			<SignInGateSelector
-				contentType={contentType}
-				sectionId={sectionId}
-				tags={tags}
 				isPaidContent={isPaidContent}
 				isPreview={isPreview}
 				host={host}
 				pageId={pageId}
 				idUrl={idUrl}
 				contributionsServiceUrl={contributionsServiceUrl}
-				editionId={editionId}
+				auxiaGateDisplayData={auxiaGateDisplayData}
 			/>
 		</Island>,
 		targetElement,
@@ -122,12 +115,18 @@ export const SignInGatePortal = ({
  * This replicates the logic from SignInGateSelector but is adapted
  * for use within the message picker system.
  */
-export const canShowSignInGatePortal = (
+export const canShowSignInGatePortal = async (
 	isSignedIn: boolean | undefined,
 	isPaidContent: boolean,
 	isPreview: boolean,
 	pageId?: string,
-): Promise<CanShowResult<void>> => {
+	contributionsServiceUrl?: string,
+	editionId?: EditionId,
+	contentType?: string,
+	sectionId?: string,
+	tags?: TagType[],
+	retrieveDismissedCount?: (variant: string, name: string) => number,
+): Promise<CanShowResult<AuxiaGateDisplayData | void>> => {
 	// Check if the sign-in gate placeholder exists in the DOM
 	const targetElement = document.getElementById('sign-in-gate');
 
@@ -143,5 +142,37 @@ export const canShowSignInGatePortal = (
 		return Promise.resolve({ show: false });
 	}
 
+	// If required auxia params are present, fetch the auxia proxy data and return it in meta
+	if (
+		contributionsServiceUrl &&
+		editionId !== undefined &&
+		contentType !== undefined &&
+		sectionId !== undefined &&
+		tags !== undefined &&
+		retrieveDismissedCount !== undefined
+	) {
+		try {
+			const auxiaData = await buildAuxiaGateDisplayData(
+				contributionsServiceUrl,
+				pageId ?? '',
+				editionId,
+				contentType,
+				sectionId,
+				tags,
+				retrieveDismissedCount('auxia-signin-gate', 'AuxiaSignInGate'),
+			);
+
+			return {
+				show: auxiaData?.auxiaData.userTreatment !== undefined,
+				meta: auxiaData as AuxiaGateDisplayData,
+			};
+		} catch (e) {
+			// If auxia fetch fails, do not show the gate
+			return { show: false };
+		}
+	}
+
+	// If we don't have the required params to build auxia data, default to showing the gate
+	// This mimics the existing behaviour in SignInGateSelector
 	return Promise.resolve({ show: true, meta: undefined });
 };

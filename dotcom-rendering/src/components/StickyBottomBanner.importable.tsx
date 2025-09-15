@@ -7,8 +7,8 @@ import { cmp, isString, isUndefined, storage } from '@guardian/libs';
 import type { ModuleData } from '@guardian/support-dotcom-components/dist/dotcom/types';
 import type { BannerProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
-import { getArticleCounts } from '../lib/articleCount';
 import type { ArticleCounts } from '../lib/articleCount';
+import { getArticleCounts } from '../lib/articleCount';
 import type { EditionId } from '../lib/edition';
 import type {
 	CandidateConfig,
@@ -23,6 +23,8 @@ import { usePageViewId } from '../lib/usePageViewId';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
+import { retrieveDismissedCount } from './SignInGate/dismissGate';
+import type { AuxiaGateDisplayData } from './SignInGate/types';
 import {
 	BrazeBanner,
 	canShowBrazeBanner,
@@ -189,28 +191,32 @@ const buildSignInGateConfig = (
 	editionId: EditionId,
 	idUrl: string,
 	host?: string,
-): CandidateConfig<void> => ({
+): CandidateConfig<AuxiaGateDisplayData | void> => ({
 	candidate: {
 		id: 'sign-in-gate-portal',
-		canShow: () =>
-			canShowSignInGatePortal(
+		canShow: async () => {
+			return await canShowSignInGatePortal(
 				isSignedIn,
 				isPaidContent,
 				isPreview,
 				pageId,
-			),
-		show: () => () => (
+				contributionsServiceUrl,
+				editionId,
+				contentType,
+				sectionId,
+				tags,
+				retrieveDismissedCount,
+			);
+		},
+		show: (meta: unknown) => () => (
 			<SignInGatePortal
 				host={host}
-				contentType={contentType}
-				sectionId={sectionId}
-				tags={tags}
 				isPaidContent={isPaidContent}
 				isPreview={isPreview}
 				pageId={pageId}
 				contributionsServiceUrl={contributionsServiceUrl}
-				editionId={editionId}
 				idUrl={idUrl}
+				auxiaGateDisplayData={meta as AuxiaGateDisplayData}
 			/>
 		),
 	},

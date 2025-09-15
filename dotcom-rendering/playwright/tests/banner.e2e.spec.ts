@@ -1,6 +1,6 @@
 import { isUndefined } from '@guardian/libs';
 import type { BrowserContext, Request } from '@playwright/test';
-import { expect, test } from '@playwright/test';
+import { test } from '@playwright/test';
 import { cmpAcceptAll } from '../lib/cmp';
 import { addCookie } from '../lib/cookies';
 import { loadPage } from '../lib/load-page';
@@ -78,11 +78,6 @@ test.describe('Sign-in gate portal', function () {
 		});
 
 		await page.reload({ waitUntil: 'domcontentloaded' });
-
-		const signInGateIsland = page.locator('#sign-in-gate');
-		await expect(signInGateIsland).toHaveCount(1, { timeout: 1_000 });
-		// Scroll to the sign-in gate to trigger auxia api call
-		await signInGateIsland.scrollIntoViewIfNeeded();
 
 		await auxiaRequestPromise;
 	});
