@@ -358,6 +358,7 @@ describe('Island: server-side rendering', () => {
 						pageIsSensitive={false}
 						abTestSwitches={{}}
 						serverSideTests={{}}
+						serverSideABTests={{}}
 					/>
 					,
 				</WithConfig>,

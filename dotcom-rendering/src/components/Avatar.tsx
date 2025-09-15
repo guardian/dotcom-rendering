@@ -88,6 +88,7 @@ const decideImageWidths = (
 			];
 
 		case 'large':
+		case 'xlarge':
 			return [
 				{
 					breakpoint: breakpoints.mobile,

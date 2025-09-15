@@ -7,14 +7,22 @@ import type {
 	ShowGateValues,
 } from '../components/SignInGate/types';
 import type { TagType } from '../types/tag';
-import { hasCmpConsentForBrowserId } from './contributions';
+import {
+	hasCmpConsentForBrowserId,
+	shouldHideSupportMessaging,
+} from './contributions';
 import { getDailyArticleCount, getToday } from './dailyArticleCount';
 import type { EditionId } from './edition';
 import { getLocaleCode } from './getCountryCode';
 
 const decideIsSupporter = (): boolean => {
-	// Conservative default until we use the higher-level helper that needs auth state.
-	return true;
+	// nb: We will not be calling the Auxia API if the user is signed in, so we can set isSignedIn to false.
+	const isSignedIn = false;
+	const isSupporter = shouldHideSupportMessaging(isSignedIn);
+	if (isSupporter === 'Pending') {
+		return true;
+	}
+	return isSupporter;
 };
 
 const decideDailyArticleCount = (): number => {
@@ -69,6 +77,7 @@ const fetchProxyGetTreatments = async (
 	shouldServeDismissible: boolean,
 	showDefaultGate: ShowGateValues,
 	gateDisplayCount: number,
+	hideSupportMessagingTimestamp: number | undefined,
 ): Promise<AuxiaProxyGetTreatmentsResponse> => {
 	const articleIdentifier = `www.theguardian.com/${pageId}`;
 	const url = `${contributionsServiceUrl}/auxia/get-treatments`;
@@ -90,6 +99,7 @@ const fetchProxyGetTreatments = async (
 		shouldServeDismissible,
 		showDefaultGate,
 		gateDisplayCount,
+		hideSupportMessagingTimestamp,
 	};
 
 	const params = { method: 'POST', headers, body: JSON.stringify(payload) };
@@ -124,6 +134,32 @@ const getGateDisplayCount = (): number => {
 	return 0;
 };
 
+const decideHideSupportMessagingTimestamp = (): number | undefined => {
+	// Date: 1 September 2025
+	//
+	// This cookie is overloaded in the following way:
+	// If the user has performed single contribution, then the value is the
+	// timestamp of the event. But if the user has performed a recurring
+	// contribution, then the value is a future timestamp.
+	//
+	// Ideally we would correct the semantics of the cookie, but for the moment
+	// we are simply going to ignore the value if it's in the future. We
+	// are making this adjustment here, but will also mirror it in SDC
+
+	const rawValue: string | null = storage.local.getRaw(
+		'gu_hide_support_messaging',
+	);
+	if (rawValue === null) {
+		return undefined;
+	}
+	const timestamp = parseInt(rawValue, 10);
+	const now = Date.now(); // current time in milliseconds since epoch
+	if (Number.isInteger(timestamp) && timestamp < now) {
+		return timestamp;
+	}
+	return undefined;
+};
+
 export const buildAuxiaGateDisplayData = async (
 	contributionsServiceUrl: string,
 	pageId: string,
@@ -138,6 +174,8 @@ export const buildAuxiaGateDisplayData = async (
 	const shouldServeDismissible = decideShouldServeDismissible();
 	const showDefaultGate = decideShowDefaultGate();
 	const gateDisplayCount = getGateDisplayCount();
+
+	const hideSupportMessagingTimestamp = decideHideSupportMessagingTimestamp();
 
 	const response = await fetchProxyGetTreatments(
 		contributionsServiceUrl,
@@ -156,6 +194,7 @@ export const buildAuxiaGateDisplayData = async (
 		shouldServeDismissible,
 		showDefaultGate,
 		gateDisplayCount,
+		hideSupportMessagingTimestamp,
 	);
 
 	if (response.status && response.data) {
