@@ -18,6 +18,7 @@ type Props = {
 	aspectRatio: AspectRatio;
 	sectionId: string;
 	isInOpinionNoAvatarVariant?: boolean;
+	isInHideTrailsAbTest?: boolean;
 };
 
 /**
@@ -37,6 +38,7 @@ export const ScrollableMedium = ({
 	aspectRatio,
 	sectionId,
 	isInOpinionNoAvatarVariant,
+	isInHideTrailsAbTest,
 }: Props) => {
 	return (
 		<ScrollableCarousel
@@ -79,6 +81,7 @@ export const ScrollableMedium = ({
 							showTopBarDesktop={false}
 							showTopBarMobile={false}
 							canPlayInline={false}
+							isInHideTrailsAbTest={isInHideTrailsAbTest}
 						/>
 					</ScrollableCarousel.Item>
 				);
