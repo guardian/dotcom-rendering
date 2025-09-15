@@ -67,7 +67,7 @@ export const extractEmailFromToken = (
 	const payload = token.split('.')[1];
 	if (!payload) return error('ParsingError');
 	try {
-		const decoded = Buffer.from(payload, 'base64').toString();
+		const decoded = atob(payload);
 		const parsed = JSON.parse(decoded) as unknown;
 		if (!isObject(parsed) || typeof parsed.email !== 'string') {
 			return error('ParsingError');
@@ -222,9 +222,7 @@ export const initializeFedCM = async ({
 		});
 
 	if (credentials) {
-		log('identity', 'FedCM credentials received', {
-			credentials,
-		});
+		log('identity', 'FedCM credentials received');
 
 		const signInEmail = okOrThrow(
 			extractEmailFromToken(credentials.token),
