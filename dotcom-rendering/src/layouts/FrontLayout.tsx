@@ -135,15 +135,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
-	/**
-	 * We are running an AB test which replaces the avatar for the card image
-	 * in the Opinion and More opinion collections on network fronts.
-	 */
-	const isInOpinionNoAvatarVariant = (collectionName: string) =>
-		abTests.opinionNoAvatarVariant === 'variant' &&
-		front.isNetworkFront &&
-		(collectionName === 'Opinion' || collectionName === 'More opinion');
-
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
 			case 'scrollable/feature':
@@ -600,9 +591,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
-									isInOpinionNoAvatarVariant={isInOpinionNoAvatarVariant(
-										collection.displayName,
-									)}
+									isInHideTrailsAbTest={
+										front.isNetworkFront &&
+										abTests.hideTrailsVariant === 'variant'
+									}
 								/>
 							</FrontSection>
 

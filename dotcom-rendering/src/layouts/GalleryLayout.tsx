@@ -27,6 +27,8 @@ import { LabsHeader } from '../components/LabsHeader';
 import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
+import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
@@ -462,7 +464,30 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					/>
 				</Section>
 			)}
-			{/** Most Popular container goes here */}
+			{!frontendData.pageType.isPaidContent && (
+				<Section
+					title="Most viewed"
+					padContent={false}
+					verticalMargins={false}
+					element="aside"
+					data-link-name="most-popular"
+					data-component="most-popular"
+					backgroundColour={palette('--article-section-background')}
+					borderColour={palette('--article-border')}
+					fontColour={palette('--article-section-title')}
+				>
+					<MostViewedFooterLayout renderAds={isWeb && renderAds}>
+						<Island priority="feature" defer={{ until: 'visible' }}>
+							<MostViewedFooterData
+								sectionId={frontendData.config.section}
+								ajaxUrl={frontendData.config.ajaxUrl}
+								edition={frontendData.editionId}
+							/>
+						</Island>
+					</MostViewedFooterLayout>
+				</Section>
+			)}
+
 			{isWeb && renderAds && !isLabs && (
 				<Section
 					fullWidth={true}
