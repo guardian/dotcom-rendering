@@ -28,6 +28,7 @@ import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
+import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
@@ -180,6 +181,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 	const showComments =
 		frontendData.isCommentable && !frontendData.config.isPaidContent;
 
+	const { absoluteServerTimes = false } = switches;
 	return (
 		<>
 			{isWeb && (
@@ -401,13 +403,36 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 				</Section>
 			)}
 			<StoryPackage
-				absoluteServerTimes={switches['absoluteServerTimes'] ?? false}
+				absoluteServerTimes={absoluteServerTimes}
 				discussionApiUrl={discussionApiUrl}
 				format={format}
 				renderingTarget={renderingTarget}
 				storyPackage={gallery.storyPackage}
 				topBorder={showMerchandisingHigh}
 			/>
+
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<OnwardsUpper
+					ajaxUrl={frontendData.config.ajaxUrl}
+					hasRelated={frontendData.hasRelated}
+					hasStoryPackage={frontendData.hasStoryPackage}
+					isAdFreeUser={frontendData.isAdFreeUser}
+					pageId={frontendData.pageId}
+					isPaidContent={!!frontendData.config.isPaidContent}
+					showRelatedContent={frontendData.config.showRelatedContent}
+					keywordIds={frontendData.config.keywordIds}
+					contentType={frontendData.contentType}
+					tags={frontendData.tags}
+					format={format}
+					pillar={format.theme}
+					editionId={frontendData.editionId}
+					shortUrlId={frontendData.config.shortUrlId}
+					discussionApiUrl={frontendData.config.discussionApiUrl}
+					absoluteServerTimes={absoluteServerTimes}
+					renderingTarget={renderingTarget}
+				/>
+			</Island>
+
 			{/** More Galleries container goes here */}
 			{showComments && (
 				<Section
