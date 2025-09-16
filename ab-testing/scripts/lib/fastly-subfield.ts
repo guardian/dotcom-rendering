@@ -72,6 +72,7 @@ const stringifyMVTValue = (array: FastlyTestParams[]): string => {
 		subfield[`group:${index}:type`] = item.type;
 		subfield[`group:${index}:exp`] = String(item.exp);
 	});
+	console.log('subfield to be stringified', subfield);
 	return stringifyFastlySubfield(subfield);
 };
 
