@@ -26,7 +26,6 @@ import {
 } from '../../lib/contributions';
 import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import type { CanShowResult } from '../../lib/messagePicker';
-import { setAutomat } from '../../lib/setAutomat';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { TagType } from '../../types/tag';
 
@@ -161,8 +160,6 @@ export const ReaderRevenueEpic = ({ props }: ModuleData<EpicProps>) => {
 	const [Epic, setEpic] = useState<React.ElementType | null>(null);
 
 	useEffect(() => {
-		setAutomat();
-
 		const { endPerformanceMeasure } = startPerformanceMeasure(
 			'supporterRevenue',
 			'contributions-epic-module',
