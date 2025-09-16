@@ -50,12 +50,8 @@ export const SignInGateAuxia = ({
 		return input !== '';
 	};
 
-	/*
-	Whether the gate is dismissible is carried by `secondCtaName` which if it's truthy
-	makes the gate dismissible and otherwise is non dismissible.
-	*/
-
-	const isDismissible = !!secondCtaName;
+	const isDismissible =
+		userTreatment.treatmentType === 'DISMISSABLE_SIGN_IN_GATE';
 	const dismissStatusLabel = isDismissible
 		? 'dismissible'
 		: 'non-dismissible';
