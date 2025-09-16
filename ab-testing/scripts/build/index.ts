@@ -37,6 +37,10 @@ const mvtDictArray = Array.from(
 );
 
 console.log(`Writing ${mvtDictArray.length} MVT groups to ${flags['mvts']}`);
+
+// Ensure the dist folder exists
+await Deno.mkdir('dist', { recursive: true });
+
 // write the abTestDictArray to a file
 await Deno.writeTextFile(
 	flags['ab-tests'],
