@@ -21,6 +21,7 @@ type Props = {
 
 const logoImageStyle = css`
 	max-height: 60px;
+	max-width: 120px;
 	margin-left: ${space[3]}px;
 	vertical-align: middle;
 	height: auto;

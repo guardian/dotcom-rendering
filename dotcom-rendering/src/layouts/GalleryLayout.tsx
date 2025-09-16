@@ -26,6 +26,9 @@ import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
+import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
+import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
+import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
@@ -178,6 +181,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 	const showComments =
 		frontendData.isCommentable && !frontendData.config.isPaidContent;
 
+	const { absoluteServerTimes = false } = switches;
 	return (
 		<>
 			{isWeb && (
@@ -399,13 +403,36 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 				</Section>
 			)}
 			<StoryPackage
-				absoluteServerTimes={switches['absoluteServerTimes'] ?? false}
+				absoluteServerTimes={absoluteServerTimes}
 				discussionApiUrl={discussionApiUrl}
 				format={format}
 				renderingTarget={renderingTarget}
 				storyPackage={gallery.storyPackage}
 				topBorder={showMerchandisingHigh}
 			/>
+
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<OnwardsUpper
+					ajaxUrl={frontendData.config.ajaxUrl}
+					hasRelated={frontendData.hasRelated}
+					hasStoryPackage={frontendData.hasStoryPackage}
+					isAdFreeUser={frontendData.isAdFreeUser}
+					pageId={frontendData.pageId}
+					isPaidContent={!!frontendData.config.isPaidContent}
+					showRelatedContent={frontendData.config.showRelatedContent}
+					keywordIds={frontendData.config.keywordIds}
+					contentType={frontendData.contentType}
+					tags={frontendData.tags}
+					format={format}
+					pillar={format.theme}
+					editionId={frontendData.editionId}
+					shortUrlId={frontendData.config.shortUrlId}
+					discussionApiUrl={frontendData.config.discussionApiUrl}
+					absoluteServerTimes={absoluteServerTimes}
+					renderingTarget={renderingTarget}
+				/>
+			</Island>
+
 			{/** More Galleries container goes here */}
 			{showComments && (
 				<Section
@@ -436,7 +463,30 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					/>
 				</Section>
 			)}
-			{/** Most Popular container goes here */}
+			{!frontendData.pageType.isPaidContent && (
+				<Section
+					title="Most viewed"
+					padContent={false}
+					verticalMargins={false}
+					element="aside"
+					data-link-name="most-popular"
+					data-component="most-popular"
+					backgroundColour={palette('--article-section-background')}
+					borderColour={palette('--article-border')}
+					fontColour={palette('--article-section-title')}
+				>
+					<MostViewedFooterLayout renderAds={isWeb && renderAds}>
+						<Island priority="feature" defer={{ until: 'visible' }}>
+							<MostViewedFooterData
+								sectionId={frontendData.config.section}
+								ajaxUrl={frontendData.config.ajaxUrl}
+								edition={frontendData.editionId}
+							/>
+						</Island>
+					</MostViewedFooterLayout>
+				</Section>
+			)}
+
 			{isWeb && renderAds && !isLabs && (
 				<Section
 					fullWidth={true}
