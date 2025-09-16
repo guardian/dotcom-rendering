@@ -181,6 +181,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 	const showComments =
 		frontendData.isCommentable && !frontendData.config.isPaidContent;
 
+	const { absoluteServerTimes = false } = switches;
 	return (
 		<>
 			{isWeb && (
@@ -402,7 +403,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 				</Section>
 			)}
 			<StoryPackage
-				absoluteServerTimes={switches['absoluteServerTimes'] ?? false}
+				absoluteServerTimes={absoluteServerTimes}
 				discussionApiUrl={discussionApiUrl}
 				format={format}
 				renderingTarget={renderingTarget}
@@ -427,9 +428,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					editionId={frontendData.editionId}
 					shortUrlId={frontendData.config.shortUrlId}
 					discussionApiUrl={frontendData.config.discussionApiUrl}
-					absoluteServerTimes={
-						switches['absoluteServerTimes'] ?? false
-					}
+					absoluteServerTimes={absoluteServerTimes}
 					renderingTarget={renderingTarget}
 				/>
 			</Island>
