@@ -95,6 +95,7 @@ const sizingStyles = (
 						height: 80px;
 				  `;
 		case 'large':
+		case 'xlarge':
 			return css`
 				width: 150px;
 				height: 150px;

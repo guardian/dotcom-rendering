@@ -94,6 +94,7 @@ export const CommentCount = ({ discussionApiUrl, shortUrlId }: Props) => {
 			css={containerStyles}
 			data-testid="comment-counts"
 			value={`${long} comments on this article`}
+			data-gu-name="comment-count"
 		>
 			<a
 				href="#comments"

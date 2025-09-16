@@ -14,6 +14,7 @@ import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
 import { EnhanceAffiliateLinks } from './EnhanceAffiliateLinks.importable';
 import { FocusStyles } from './FocusStyles.importable';
+import { GoogleOneTap, isGoogleOneTapEnabled } from './GoogleOneTap.importable';
 import { Island } from './Island';
 import { Lightbox } from './Lightbox';
 import { Metrics } from './Metrics.importable';
@@ -134,8 +135,22 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							pageIsSensitive={frontendData.config.isSensitive}
 							isDev={!!frontendData.config.isDev}
 							serverSideTests={frontendData.config.abTests}
+							serverSideABTests={
+								frontendData.config.serverSideABTests
+							}
 						/>
 					</Island>
+					{isGoogleOneTapEnabled(
+						frontendData.config.abTests,
+						frontendData.config.switches,
+					) && (
+						<Island
+							priority="enhancement"
+							defer={{ until: 'idle' }}
+						>
+							<GoogleOneTap />
+						</Island>
+					)}
 				</>
 			)}
 			{renderingTarget === 'Web' ? (

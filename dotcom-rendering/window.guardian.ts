@@ -36,12 +36,6 @@ declare global {
 			// by having multiple entrypoints in webpack, meaning we can't guarantee singleton behavior
 			emotionCache?: EmotionCache;
 			ophan?: typeof ophan;
-			// TODO expose as type from Automat client lib
-			automat: {
-				react: any;
-				emotionReact: any;
-				emotionReactJsxRuntime: any;
-			};
 			readerRevenue: ReaderRevenueDevUtils;
 			weeklyArticleCount: WeeklyArticleHistory | undefined;
 			dailyArticleCount: DailyArticleHistory | undefined;
