@@ -1,9 +1,9 @@
 /* eslint-disable no-console -- script */
 /* eslint-disable @typescript-eslint/unbound-method -- path.resolve */
 
+const { execFileSync } = require('node:child_process');
 const fs = require('node:fs/promises');
 const { resolve } = require('node:path');
-const execa = require('execa');
 const { config } = require('../../fixtures/config');
 const { configOverrides } = require('../../fixtures/config-overrides');
 const { switchOverrides } = require('../../fixtures/switch-overrides');
@@ -304,7 +304,7 @@ requests.push(
 			// Write the new fixture data
 			const contents = `${HEADER}
 			import type { FEStoryPackage } from '../../src/frontend/feArticle';
-			
+
 			export const storyPackage: FEStoryPackage = ${JSON.stringify(json, null, 4)}`;
 			return fs.writeFile(
 				`${root}/fixtures/generated/story-package.ts`,
@@ -427,19 +427,19 @@ Promise.allSettled(requests)
 		}
 
 		console.log('Generation complete, formatting successful fixtures...');
-		execa('prettier', [
-			'./fixtures/**/*',
-			'--write',
-			'--log-level',
-			'error',
-		])
-			.then(() => {
-				console.log('✅ Formatting complete.');
-			})
-			.catch((err) => {
-				console.error('\n❌ Failed to format fixtures:\n', err);
-				process.exitCode = 1;
-			});
+
+		try {
+			execFileSync('prettier', [
+				'./fixtures/**/*',
+				'--write',
+				'--log-level',
+				'error',
+			]);
+			console.log('✅ Formatting complete.');
+		} catch (err) {
+			console.error('\n❌ Failed to format fixtures:\n', err);
+			process.exitCode = 1;
+		}
 	})
 	.catch((err) => {
 		console.error('❌ Unexpected error occurred:\n', err);
