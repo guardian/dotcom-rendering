@@ -191,7 +191,7 @@ const buildSignInGateConfig = (
 	editionId: EditionId,
 	idUrl: string,
 	host?: string,
-): CandidateConfig<AuxiaGateDisplayData | void> => ({
+): CandidateConfig<AuxiaGateDisplayData> => ({
 	candidate: {
 		id: 'sign-in-gate-portal',
 		canShow: async () => {
@@ -208,7 +208,7 @@ const buildSignInGateConfig = (
 				retrieveDismissedCount,
 			);
 		},
-		show: (meta: unknown) => () => (
+		show: (meta: AuxiaGateDisplayData) => () => (
 			<SignInGatePortal
 				host={host}
 				isPaidContent={isPaidContent}
@@ -216,7 +216,7 @@ const buildSignInGateConfig = (
 				pageId={pageId}
 				contributionsServiceUrl={contributionsServiceUrl}
 				idUrl={idUrl}
-				auxiaGateDisplayData={meta as AuxiaGateDisplayData}
+				auxiaGateDisplayData={meta}
 			/>
 		),
 	},

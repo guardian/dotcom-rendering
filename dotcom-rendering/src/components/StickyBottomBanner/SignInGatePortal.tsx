@@ -126,7 +126,7 @@ export const canShowSignInGatePortal = async (
 	sectionId?: string,
 	tags?: TagType[],
 	retrieveDismissedCount?: (variant: string, name: string) => number,
-): Promise<CanShowResult<AuxiaGateDisplayData | void>> => {
+): Promise<CanShowResult<AuxiaGateDisplayData>> => {
 	// Check if the sign-in gate placeholder exists in the DOM
 	const targetElement = document.getElementById('sign-in-gate');
 
@@ -142,37 +142,40 @@ export const canShowSignInGatePortal = async (
 		return Promise.resolve({ show: false });
 	}
 
-	// If required auxia params are present, fetch the auxia proxy data and return it in meta
 	if (
-		contributionsServiceUrl &&
-		editionId !== undefined &&
-		contentType !== undefined &&
-		sectionId !== undefined &&
-		tags !== undefined &&
-		retrieveDismissedCount !== undefined
+		!contributionsServiceUrl ||
+		editionId === undefined ||
+		contentType === undefined ||
+		sectionId === undefined ||
+		tags === undefined ||
+		retrieveDismissedCount === undefined
 	) {
-		try {
-			const auxiaData = await buildAuxiaGateDisplayData(
-				contributionsServiceUrl,
-				pageId ?? '',
-				editionId,
-				contentType,
-				sectionId,
-				tags,
-				retrieveDismissedCount('auxia-signin-gate', 'AuxiaSignInGate'),
-			);
-
-			return {
-				show: auxiaData?.auxiaData.userTreatment !== undefined,
-				meta: auxiaData as AuxiaGateDisplayData,
-			};
-		} catch (e) {
-			// If auxia fetch fails, do not show the gate
-			return { show: false };
-		}
+		return Promise.resolve({ show: false });
 	}
 
-	// If we don't have the required params to build auxia data, default to showing the gate
-	// This mimics the existing behaviour in SignInGateSelector
-	return Promise.resolve({ show: true, meta: undefined });
+	try {
+		const auxiaData = await buildAuxiaGateDisplayData(
+			contributionsServiceUrl,
+			pageId ?? '',
+			editionId,
+			contentType,
+			sectionId,
+			tags,
+			retrieveDismissedCount('auxia-signin-gate', 'AuxiaSignInGate'),
+		);
+
+		return {
+			show: auxiaData?.auxiaData.userTreatment !== undefined,
+			meta: auxiaData as AuxiaGateDisplayData,
+		};
+	} catch (e) {
+		const message = `SignInGatePortal canShowSignInGatePortal - error: ${String(
+			e,
+		)}`;
+		window.guardian.modules.sentry.reportError(
+			new Error(message, { cause: e }),
+			'sign-in-gate',
+		);
+		return { show: false };
+	}
 };
