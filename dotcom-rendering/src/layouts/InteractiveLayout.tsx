@@ -272,9 +272,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										padSides={false}
 										shouldCenter={false}
 									>
-										<HeaderAdSlot
-											abTests={article.config.abTests}
-										/>
+										<HeaderAdSlot />
 									</Section>
 								</div>
 							</Stuck>

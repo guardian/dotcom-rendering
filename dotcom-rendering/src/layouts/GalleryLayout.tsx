@@ -144,7 +144,6 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 
 	const {
 		config: {
-			abTests,
 			idUrl,
 			mmaUrl,
 			discussionApiUrl,
@@ -195,7 +194,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot abTests={abTests} />
+								<HeaderAdSlot />
 							</Section>
 						</Stuck>
 					)}

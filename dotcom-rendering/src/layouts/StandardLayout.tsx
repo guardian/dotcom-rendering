@@ -406,9 +406,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot
-									abTests={article.config.abTests}
-								/>
+								<HeaderAdSlot />
 							</Section>
 						</Stuck>
 					)}
