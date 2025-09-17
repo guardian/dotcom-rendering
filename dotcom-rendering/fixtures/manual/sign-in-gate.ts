@@ -1,10 +1,12 @@
+import type { AuxiaAPIResponseDataUserTreatment } from '../../src/components/SignInGate/types';
+
 export const mockAuxiaResponseDismissible = {
 	status: true,
 	data: {
 		userTreatment: {
 			treatmentId: 'auxia-treatment-001',
 			treatmentTrackingId: 'tracking-001',
-			treatmentType: 'treatmentType',
+			treatmentType: 'DISMISSABLE_SIGN_IN_GATE',
 			rank: '1',
 			contentLanguageCode: 'en-GB',
 			surface: 'signin-gate',
@@ -17,7 +19,7 @@ export const mockAuxiaResponseDismissible = {
 				first_cta_link: 'https://profile.theguardian.com/register',
 				second_cta_name: "I'll do it later",
 			}),
-		},
+		} as AuxiaAPIResponseDataUserTreatment,
 	},
 };
 
@@ -27,7 +29,7 @@ export const mockAuxiaResponseNonDismissible = {
 		userTreatment: {
 			treatmentId: 'auxia-treatment-002',
 			treatmentTrackingId: 'tracking-002',
-			treatmentType: 'treatmentType',
+			treatmentType: 'NONDISMISSIBLE_SIGN_IN_GATE',
 			rank: '1',
 			contentLanguageCode: 'en-GB',
 			surface: 'signin-gate',
@@ -40,7 +42,7 @@ export const mockAuxiaResponseNonDismissible = {
 				first_cta_link: 'https://profile.theguardian.com/register',
 				second_cta_name: '', // Empty makes it non-dismissible
 			}),
-		},
+		} as AuxiaAPIResponseDataUserTreatment,
 	},
 };
 
@@ -50,7 +52,7 @@ export const mockAuxiaResponseLegacy = {
 		userTreatment: {
 			treatmentId: 'default-treatment-id', // This triggers legacy gate
 			treatmentTrackingId: 'legacy-tracking',
-			treatmentType: 'treatmentType',
+			treatmentType: 'DISMISSABLE_SIGN_IN_GATE',
 			rank: '1',
 			contentLanguageCode: 'en-GB',
 			surface: 'signin-gate',
@@ -62,7 +64,7 @@ export const mockAuxiaResponseLegacy = {
 				first_cta_link: 'https://profile.theguardian.com/register',
 				second_cta_name: 'Not now',
 			}),
-		},
+		} as AuxiaAPIResponseDataUserTreatment,
 	},
 };
 
