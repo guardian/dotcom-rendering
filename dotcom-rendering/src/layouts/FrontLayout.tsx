@@ -198,7 +198,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								'--article-section-background',
 							)}
 						>
-							<HeaderAdSlot abTests={abTests} />
+							<HeaderAdSlot />
 						</Section>
 					</Stuck>
 				)}

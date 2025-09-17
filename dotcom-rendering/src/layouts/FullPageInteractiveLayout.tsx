@@ -162,7 +162,7 @@ const NavHeader = ({ article, NAV, renderAds }: HeaderProps) => {
 							shouldCenter={false}
 							element="aside"
 						>
-							<HeaderAdSlot abTests={article.config.abTests} />
+							<HeaderAdSlot />
 						</Section>
 					</div>
 				</Stuck>
