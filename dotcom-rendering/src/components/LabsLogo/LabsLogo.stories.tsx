@@ -1,21 +1,11 @@
-// LabsLogo.stories.tsx
-import type { StoryObj } from '@storybook/react';
 import { LabsLogo } from './LabsLogo';
-import type { LabsLogoProps } from './LabsLogo';
 
 export default {
 	title: 'Components/LabsLogo',
 	component: LabsLogo,
 };
 
-export const Default: StoryObj<LabsLogoProps> = {
-	args: { size: 100 },
-};
-
-export const Small = () => <LabsLogo size={50} />;
-export const Large = () => <LabsLogo size={200} />;
-
-export const SizeComparison = () => (
+export const Default = () => (
 	<div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
 		<div>
 			<LabsLogo size={50} />
