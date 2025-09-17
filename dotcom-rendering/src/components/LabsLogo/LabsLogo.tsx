@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { palette } from '@guardian/source/foundations';
 
 const labsLogoContainer = css`
-	background-color: ${palette.labs[200]};
+	background-color: ${palette.labs[100]};
 	border-radius: 50%;
 	position: relative;
 `;
