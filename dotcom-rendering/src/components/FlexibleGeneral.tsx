@@ -32,7 +32,7 @@ type Props = {
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
-	isInOpinionNoAvatarVariant?: boolean;
+	isInHideTrailsAbTest?: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -87,6 +87,7 @@ type ImmersiveCardLayoutProps = {
 	absoluteServerTimes: boolean;
 	imageLoading: Loading;
 	collectionId: number;
+	isInHideTrailsAbTest?: boolean;
 };
 
 /**
@@ -101,6 +102,7 @@ const ImmersiveCardLayout = ({
 	absoluteServerTimes,
 	imageLoading,
 	collectionId,
+	isInHideTrailsAbTest,
 }: ImmersiveCardLayoutProps) => {
 	const isLoopingVideo = card.mainMedia?.type === 'LoopVideo';
 
@@ -137,6 +139,7 @@ const ImmersiveCardLayout = ({
 					supportingContent={card.supportingContent}
 					isImmersive={true}
 					showVideo={card.showVideo}
+					isInHideTrailsAbTest={isInHideTrailsAbTest}
 				/>
 			</LI>
 		</UL>
@@ -242,6 +245,7 @@ type SplashCardLayoutProps = {
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
+	isInHideTrailsAbTest?: boolean;
 };
 
 const SplashCardLayout = ({
@@ -254,6 +258,7 @@ const SplashCardLayout = ({
 	isLastRow,
 	containerLevel,
 	collectionId,
+	isInHideTrailsAbTest,
 }: SplashCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -267,6 +272,7 @@ const SplashCardLayout = ({
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
 				collectionId={collectionId}
+				isInHideTrailsAbTest={isInHideTrailsAbTest}
 			/>
 		);
 	}
@@ -335,6 +341,7 @@ const SplashCardLayout = ({
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
+					isInHideTrailsAbTest={isInHideTrailsAbTest}
 				/>
 			</LI>
 		</UL>
@@ -397,6 +404,7 @@ type FullWidthCardLayoutProps = {
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
+	isInHideTrailsAbTest?: boolean;
 };
 
 const FullWidthCardLayout = ({
@@ -410,6 +418,7 @@ const FullWidthCardLayout = ({
 	isLastRow,
 	containerLevel,
 	collectionId,
+	isInHideTrailsAbTest,
 }: FullWidthCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -435,6 +444,7 @@ const FullWidthCardLayout = ({
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
 				collectionId={collectionId}
+				isInHideTrailsAbTest={isInHideTrailsAbTest}
 			/>
 		);
 	}
@@ -482,6 +492,7 @@ const FullWidthCardLayout = ({
 					liveUpdatesPosition={liveUpdatesPosition}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
+					isInHideTrailsAbTest={isInHideTrailsAbTest}
 				/>
 			</LI>
 		</UL>
@@ -499,6 +510,7 @@ type HalfWidthCardLayoutProps = {
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
+	isInHideTrailsAbTest?: boolean;
 };
 
 const HalfWidthCardLayout = ({
@@ -512,6 +524,7 @@ const HalfWidthCardLayout = ({
 	aspectRatio,
 	isLastRow,
 	containerLevel,
+	isInHideTrailsAbTest,
 }: HalfWidthCardLayoutProps) => {
 	if (cards.length === 0) return null;
 
@@ -565,6 +578,7 @@ const HalfWidthCardLayout = ({
 							trailText={undefined}
 							headlineSizes={undefined}
 							canPlayInline={false}
+							isInHideTrailsAbTest={isInHideTrailsAbTest}
 						/>
 					</LI>
 				);
@@ -582,7 +596,7 @@ export const FlexibleGeneral = ({
 	aspectRatio,
 	containerLevel = 'Primary',
 	collectionId,
-	isInOpinionNoAvatarVariant,
+	isInHideTrailsAbTest,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
 		...snap,
@@ -594,9 +608,6 @@ export const FlexibleGeneral = ({
 		.map((standard, i) => ({
 			...standard,
 			uniqueId: `collection-${collectionId}-standard-${i}`,
-			avatarUrl: isInOpinionNoAvatarVariant
-				? undefined
-				: standard.avatarUrl,
 		}));
 
 	const groupedCards = decideCardPositions(cards);
@@ -614,6 +625,7 @@ export const FlexibleGeneral = ({
 					isLastRow={cards.length === 0}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
+					isInHideTrailsAbTest={isInHideTrailsAbTest}
 				/>
 			)}
 			{groupedCards.map((row, i) => {
@@ -632,6 +644,7 @@ export const FlexibleGeneral = ({
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
 								collectionId={collectionId}
+								isInHideTrailsAbTest={isInHideTrailsAbTest}
 							/>
 						);
 
@@ -651,6 +664,7 @@ export const FlexibleGeneral = ({
 								aspectRatio={aspectRatio}
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
+								isInHideTrailsAbTest={isInHideTrailsAbTest}
 							/>
 						);
 				}

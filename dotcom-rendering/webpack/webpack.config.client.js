@@ -149,10 +149,12 @@ module.exports = ({ build }) => ({
 });
 
 module.exports.transpileExclude = {
+	// Exclude node_modules from transpilation
 	and: [/node_modules/],
+	// Do not exclude i.e. include
 	not: [
-		// Include all @guardian modules, except automat-modules
-		/@guardian\/(?!(automat-modules))/,
+		// Include all @guardian modules
+		/@guardian\//,
 		// Include the dynamic-import-polyfill
 		/dynamic-import-polyfill/,
 		/valibot/,
