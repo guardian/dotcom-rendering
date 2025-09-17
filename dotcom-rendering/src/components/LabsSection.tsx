@@ -21,7 +21,6 @@ import { palette } from '../palette';
 import LabsLogo from '../static/logos/the-guardian-labs.svg';
 import type { DCRBadgeType } from '../types/badge';
 import { Badge } from './Badge';
-import { ContainerOverrides } from './ContainerOverrides';
 import { Details } from './Details';
 import { Island } from './Island';
 import { Section } from './Section';
@@ -75,11 +74,11 @@ type Props = {
 };
 
 const leftColumnBackground = css`
-	background-color: ${palette('--section-background-left')};
+	background-color: ${sourcePalette.labs[400]};
 `;
 
 const contentBackground = css`
-	background-color: ${palette('--section-background')};
+	background-color: ${sourcePalette.neutral[93]};
 `;
 
 const leftColumnWidthFromLeftCol = css`
@@ -167,7 +166,7 @@ const contentSidePaddingFromLeftCol = css`
 
 const linkStyles = css`
 	text-decoration: none;
-	color: ${palette('--article-section-title')};
+	color: ${sourcePalette.neutral[100]};
 
 	:hover {
 		text-decoration: underline;
@@ -176,7 +175,7 @@ const linkStyles = css`
 
 const headerStyles = css`
 	${textSansBold20};
-	color: ${palette('--article-section-title')};
+	color: ${sourcePalette.neutral[100]};
 	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
 `;
 
@@ -195,7 +194,7 @@ const badgeStyles = css`
 
 const paidForByStyles = css`
 	${textSansBold12};
-	color: ${palette('--treat-text')};
+	color: ${sourcePalette.neutral[46]};
 	margin-top: ${space[3]}px;
 	margin-bottom: ${space[1]}px;
 `;
@@ -379,87 +378,81 @@ export const LabsSection = ({
 	editionId,
 }: Props) => {
 	return (
-		<ContainerOverrides containerPalette="Branded">
-			<Section
-				fullWidth={true}
-				sectionId={sectionId}
-				padSides={false}
-				element="section"
-				containerName={containerName}
-				ophanComponentLink={ophanComponentLink}
-				ophanComponentName={ophanComponentName}
-				hasPageSkin={hasPageSkin}
-				borderColour={palette('--section-border')}
-				backgroundColour="transparent"
-				/**
-				 * dumathoin?
-				 * https://github.com/guardian/frontend/pull/17625
-				 * https://forgottenrealms.fandom.com/wiki/Dumathoin
-				 */
-				className={'dumathoin'}
-			>
-				<Container hasPageSkin={hasPageSkin}>
-					<LeftColumn hasPageSkin={hasPageSkin}>
-						<div>
-							<LabsContainerHeader
-								summaryBackgroundColour={
-									sourcePalette.neutral[0]
-								}
-								summaryTextColour={sourcePalette.neutral[97]}
-								summaryTextSecondaryColour={
-									sourcePalette.labs[400]
-								}
-								hasPageSkin={hasPageSkin}
-							/>
-							<GuardianLabsTitle title={title} url={url} />
-						</div>
+		<Section
+			fullWidth={true}
+			sectionId={sectionId}
+			padSides={false}
+			element="section"
+			containerName={containerName}
+			ophanComponentLink={ophanComponentLink}
+			ophanComponentName={ophanComponentName}
+			hasPageSkin={hasPageSkin}
+			borderColour={palette('--section-border')}
+			backgroundColour="transparent"
+			/**
+			 * dumathoin?
+			 * https://github.com/guardian/frontend/pull/17625
+			 * https://forgottenrealms.fandom.com/wiki/Dumathoin
+			 */
+			className={'dumathoin'}
+		>
+			<Container hasPageSkin={hasPageSkin}>
+				<LeftColumn hasPageSkin={hasPageSkin}>
+					<div>
+						<LabsContainerHeader
+							summaryBackgroundColour={sourcePalette.neutral[0]}
+							summaryTextColour={sourcePalette.neutral[97]}
+							summaryTextSecondaryColour={sourcePalette.labs[400]}
+							hasPageSkin={hasPageSkin}
+						/>
+						<GuardianLabsTitle title={title} url={url} />
+					</div>
 
-						<Link
-							href={`https://www.theguardian.com/guardian-labs${getLabsUrlSuffix(
-								editionId,
-							)}`}
-							cssOverrides={css`
-								text-align: right;
-							`}
+					<Link
+						href={`https://www.theguardian.com/guardian-labs${getLabsUrlSuffix(
+							editionId,
+						)}`}
+						cssOverrides={css`
+							text-align: right;
+						`}
+					>
+						<LabsLogo />
+					</Link>
+				</LeftColumn>
+				<Content hasPageSkin={hasPageSkin}>
+					{children}
+					{canShowMore && (
+						<Island
+							priority="feature"
+							defer={{ until: 'interaction' }}
 						>
-							<LabsLogo />
-						</Link>
-					</LeftColumn>
-					<Content hasPageSkin={hasPageSkin}>
-						{children}
-						{canShowMore && (
-							<Island
-								priority="feature"
-								defer={{ until: 'interaction' }}
-							>
-								<ShowMore
-									title={title}
-									sectionId={sectionId}
-									collectionId={collectionId}
-									pageId={pageId}
-									ajaxUrl={ajaxUrl}
-									containerPalette={'Branded'}
-									showAge={true}
-									discussionApiUrl={discussionApiUrl}
-									editionId={editionId}
-								/>
-							</Island>
-						)}
-						{badge && (
-							<div css={badgeStyles}>
-								<div css={paidForByStyles}>Paid for by</div>
-								<Badge
-									imageSrc={badge.imageSrc}
-									href={badge.href}
-									ophanComponentLink={`labs-logo | ${ophanComponentName}`}
-									ophanComponentName={`labs-logo-${ophanComponentName}`}
-									isInLabsSection={true}
-								/>
-							</div>
-						)}
-					</Content>
-				</Container>
-			</Section>
-		</ContainerOverrides>
+							<ShowMore
+								title={title}
+								sectionId={sectionId}
+								collectionId={collectionId}
+								pageId={pageId}
+								ajaxUrl={ajaxUrl}
+								containerPalette={'Branded'}
+								showAge={true}
+								discussionApiUrl={discussionApiUrl}
+								editionId={editionId}
+							/>
+						</Island>
+					)}
+					{badge && (
+						<div css={badgeStyles}>
+							<div css={paidForByStyles}>Paid for by</div>
+							<Badge
+								imageSrc={badge.imageSrc}
+								href={badge.href}
+								ophanComponentLink={`labs-logo | ${ophanComponentName}`}
+								ophanComponentName={`labs-logo-${ophanComponentName}`}
+								isInLabsSection={true}
+							/>
+						</div>
+					)}
+				</Content>
+			</Container>
+		</Section>
 	);
 };
