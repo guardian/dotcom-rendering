@@ -269,7 +269,6 @@ export const DecideContainer = ({
 					<ScrollableSmall
 						trails={trails}
 						imageLoading={imageLoading}
-						containerType={'scrollable/small'}
 						containerPalette={containerPalette}
 						showAge={showAge}
 						absoluteServerTimes={absoluteServerTimes}
@@ -285,7 +284,6 @@ export const DecideContainer = ({
 					<ScrollableMedium
 						trails={trails}
 						imageLoading={imageLoading}
-						containerType={'scrollable/small'}
 						containerPalette={containerPalette}
 						showAge={showAge}
 						absoluteServerTimes={absoluteServerTimes}
