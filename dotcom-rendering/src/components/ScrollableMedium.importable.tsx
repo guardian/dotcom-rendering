@@ -2,7 +2,6 @@ import { isMediaCard } from '../lib/cardHelpers';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
-	DCRContainerType,
 	DCRFrontCard,
 } from '../types/front';
 import { FrontCard } from './FrontCard';
@@ -14,7 +13,6 @@ type Props = {
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 	imageLoading: 'lazy' | 'eager';
-	containerType: DCRContainerType;
 	aspectRatio: AspectRatio;
 	sectionId: string;
 	/** Feature flag for the labs redesign work */
@@ -31,7 +29,6 @@ type Props = {
 export const ScrollableMedium = ({
 	trails,
 	containerPalette,
-	containerType,
 	absoluteServerTimes,
 	imageLoading,
 	showAge,
@@ -58,7 +55,7 @@ export const ScrollableMedium = ({
 							imageLoading={imageLoading}
 							absoluteServerTimes={!!absoluteServerTimes}
 							containerPalette={containerPalette}
-							containerType={containerType}
+							containerType="scrollable/medium"
 							showAge={!!showAge}
 							headlineSizes={{
 								desktop: 'xsmall',
