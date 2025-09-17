@@ -46,6 +46,7 @@ type Props = {
 	sectionId: string;
 	frontId?: string;
 	collectionId: number;
+	isInAllBoostsTest?: boolean;
 	containerLevel?: DCRContainerLevel;
 	isInHideTrailsAbTest?: boolean;
 };
@@ -62,9 +63,39 @@ export const DecideContainer = ({
 	sectionId,
 	frontId,
 	collectionId,
+	isInAllBoostsTest,
 	containerLevel,
 	isInHideTrailsAbTest,
 }: Props) => {
+	if (isInAllBoostsTest) {
+		return (
+			<FlexibleGeneral
+				groupedTrails={
+					containerType === 'flexible/general' ||
+					containerType === 'flexible/special'
+						? groupedTrails
+						: {
+								snap: [],
+								huge: [],
+								veryBig: [],
+								big: [],
+								splash: [],
+								standard: trails,
+						  }
+				}
+				isInAllBoostsTest={true}
+				absoluteServerTimes={absoluteServerTimes}
+				aspectRatio={aspectRatio}
+				collectionId={collectionId}
+				containerLevel={containerLevel}
+				containerPalette={containerPalette}
+				imageLoading={imageLoading}
+				isInHideTrailsAbTest={!!isInHideTrailsAbTest}
+				showAge={showAge}
+			/>
+		);
+	}
+
 	switch (containerType) {
 		case 'dynamic/fast':
 			return (

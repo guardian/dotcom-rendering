@@ -590,6 +590,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 									sectionId={ophanName}
 									collectionId={index + 1}
+									isInAllBoostsTest={
+										front.isNetworkFront &&
+										abTests.allBoostsVariant === 'variant'
+									}
 									containerLevel={collection.containerLevel}
 									isInHideTrailsAbTest={
 										front.isNetworkFront &&
