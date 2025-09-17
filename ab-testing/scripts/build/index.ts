@@ -38,22 +38,16 @@ const mvtDictArray = Array.from(
 
 console.log(`Writing ${mvtDictArray.length} MVT groups to ${flags['mvts']}`);
 
-const distDirName = 'dist';
-
-// Ensure the dist folder exists
-await Deno.mkdir(distDirName, { recursive: true });
-
-// Build absolute output path inside dist/
-const abTestsPath = `${distDirName}/${flags['ab-tests']}`;
+// Ensure the build's destination folder path exists
+for (const path of [flags['mvts'], flags['ab-tests']]) {
+	await Deno.mkdir(dirname(path), { recursive: true });
+}
 
 // write the abTestDictArray to a file
 await Deno.writeTextFile(
-	abTestsPath,
+	flags['ab-tests'],
 	JSON.stringify(abTestGroupKeyValues, null, 2),
 );
 
-// Build absolute output pats inside dist/
-const mvtsPath = `${distDirName}/${flags['mvts']}`;
-
 // write the mvtKVsArray to a file
-await Deno.writeTextFile(mvtsPath, JSON.stringify(mvtDictArray, null, 2));
+await Deno.writeTextFile(flags['mvts'], JSON.stringify(mvtDictArray, null, 2));
