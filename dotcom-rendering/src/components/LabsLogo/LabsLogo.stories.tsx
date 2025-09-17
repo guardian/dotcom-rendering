@@ -12,8 +12,8 @@ export const Default = () => (
 			<p>Small (50px)</p>
 		</div>
 		<div>
-			<LabsLogo size={100} />
-			<p>Default (100px)</p>
+			<LabsLogo />
+			<p>Default (71px)</p>
 		</div>
 		<div>
 			<LabsLogo size={200} />
