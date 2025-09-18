@@ -535,7 +535,10 @@ const styles = {
 		background: ${background};
 		color: ${textColor};
 		bottom: 0px;
+		/* override vh with vsh if supported */
 		max-height: 65vh;
+		/* stylelint-disable-next-line declaration-block-no-duplicate-properties */
+		max-height: 65svh;
 
 		* {
 			box-sizing: border-box;
