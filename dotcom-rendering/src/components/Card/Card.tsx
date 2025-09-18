@@ -1196,7 +1196,6 @@ export const Card = ({
 					css`
 						${from.tablet} {
 							flex-basis: 100%;
-							background-color: ${backgroundColour};
 						}
 					`
 				}
