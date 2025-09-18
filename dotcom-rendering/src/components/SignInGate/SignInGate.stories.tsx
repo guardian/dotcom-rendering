@@ -1,5 +1,8 @@
-import { type EditionId } from '../../lib/edition';
-import type { TagType } from '../../types/tag';
+import {
+	mockAuxiaResponseDismissible,
+	mockAuxiaResponseLegacy,
+	mockAuxiaResponseNonDismissible,
+} from '../../../fixtures/manual/sign-in-gate';
 import { Section } from '../Section';
 import { SignInGateSelector } from '../SignInGateSelector.importable';
 import { SignInGateCustomizableText } from './gateDesigns/SignInGateCustomizableText';
@@ -157,25 +160,24 @@ signInGateMainCheckoutCompletePersonalisedCopy.argTypes = {
 	},
 };
 
-const tags: TagType[] = [
-	{ id: 'politics/politics', type: 'Keyword', title: 'Politics' },
-	{ id: 'world/europe-news', type: 'Keyword', title: 'Europe News' },
-];
-
 export const signInGateSelectorStoryDismissable = () => {
 	return (
 		<Section fullWidth={true}>
 			<SignInGateSelector
-				contentType="Article"
-				sectionId="dismissable"
-				tags={tags}
 				isPaidContent={false}
 				isPreview={false}
 				pageId="dismissable"
 				host="https://www.theguardian.com"
 				idUrl="https://profile.theguardian.com"
 				contributionsServiceUrl="https://contributions.guardianapis.com"
-				editionId={'UK' as EditionId}
+				auxiaGateDisplayData={{
+					browserId: 'test-browser-id',
+					auxiaData: {
+						responseId: 'test-response-id',
+						userTreatment:
+							mockAuxiaResponseDismissible.data.userTreatment,
+					},
+				}}
 			/>
 		</Section>
 	);
@@ -188,16 +190,20 @@ export const signInGateSelectorStoryNonDismissable = () => {
 	return (
 		<Section fullWidth={true}>
 			<SignInGateSelector
-				contentType="Article"
-				sectionId="non-dismissable"
-				tags={tags}
 				isPaidContent={false}
 				isPreview={false}
 				pageId="non-dismissable"
 				host="https://www.theguardian.com"
 				idUrl="https://profile.theguardian.com"
 				contributionsServiceUrl="https://contributions.guardianapis.com"
-				editionId={'UK' as EditionId}
+				auxiaGateDisplayData={{
+					browserId: 'test-browser-id',
+					auxiaData: {
+						responseId: 'test-response-id',
+						userTreatment:
+							mockAuxiaResponseNonDismissible.data.userTreatment,
+					},
+				}}
 			/>
 		</Section>
 	);
@@ -210,16 +216,20 @@ export const signInGateSelectorStoryLegacy = () => {
 	return (
 		<Section fullWidth={true}>
 			<SignInGateSelector
-				contentType="Article"
-				sectionId="legacy"
-				tags={tags}
 				isPaidContent={false}
 				isPreview={false}
 				pageId="legacy"
 				host="https://www.theguardian.com"
 				idUrl="https://profile.theguardian.com"
 				contributionsServiceUrl="https://contributions.guardianapis.com"
-				editionId={'UK' as EditionId}
+				auxiaGateDisplayData={{
+					browserId: 'test-browser-id',
+					auxiaData: {
+						responseId: 'test-response-id',
+						userTreatment:
+							mockAuxiaResponseLegacy.data.userTreatment,
+					},
+				}}
 			/>
 		</Section>
 	);
@@ -231,16 +241,19 @@ export const signInGateSelectorStoryNoTreatment = () => {
 	return (
 		<Section fullWidth={true}>
 			<SignInGateSelector
-				contentType="Article"
-				sectionId="no-treatment"
-				tags={tags}
 				isPaidContent={false}
 				isPreview={false}
 				pageId="no-treatment"
 				host="https://www.theguardian.com"
 				idUrl="https://profile.theguardian.com"
 				contributionsServiceUrl="https://contributions.guardianapis.com"
-				editionId={'UK' as EditionId}
+				auxiaGateDisplayData={{
+					browserId: 'test-browser-id',
+					auxiaData: {
+						responseId: 'test-response-id',
+						userTreatment: undefined,
+					},
+				}}
 			/>
 		</Section>
 	);
@@ -253,17 +266,21 @@ export const auxiaV2DismissibleModal = () => {
 	return (
 		<Section fullWidth={true}>
 			<SignInGateSelector
-				contentType="Article"
-				sectionId="dismissable"
-				tags={tags}
 				isPaidContent={false}
 				isPreview={false}
 				pageId="dismissable-v2"
 				host="https://www.theguardian.com"
 				idUrl="https://profile.theguardian.com"
 				contributionsServiceUrl="https://contributions.guardianapis.com"
-				editionId={'UK' as EditionId}
 				signInGateVersion="v2"
+				auxiaGateDisplayData={{
+					browserId: 'test-browser-id',
+					auxiaData: {
+						responseId: 'test-response-id',
+						userTreatment:
+							mockAuxiaResponseDismissible.data.userTreatment,
+					},
+				}}
 			/>
 		</Section>
 	);
@@ -275,17 +292,21 @@ export const auxiaV2NonDismissibleModal = () => {
 	return (
 		<Section fullWidth={true}>
 			<SignInGateSelector
-				contentType="Article"
-				sectionId="non-dismissable"
-				tags={tags}
 				isPaidContent={false}
 				isPreview={false}
 				pageId="non-dismissable-v2"
 				host="https://www.theguardian.com"
 				idUrl="https://profile.theguardian.com"
 				contributionsServiceUrl="https://contributions.guardianapis.com"
-				editionId={'UK' as EditionId}
 				signInGateVersion="v2"
+				auxiaGateDisplayData={{
+					browserId: 'test-browser-id',
+					auxiaData: {
+						responseId: 'test-response-id',
+						userTreatment:
+							mockAuxiaResponseNonDismissible.data.userTreatment,
+					},
+				}}
 			/>
 		</Section>
 	);

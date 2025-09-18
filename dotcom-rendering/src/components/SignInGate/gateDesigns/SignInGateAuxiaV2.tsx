@@ -51,8 +51,9 @@ export const SignInGateAuxiaV2 = ({
 	} = JSON.parse(userTreatment.treatmentContent) as TreatmentContentDecoded;
 
 	const has = (s?: string) => !!s && s.trim() !== '';
-	const isDismissible =
-		userTreatment.treatmentType === 'DISMISSABLE_SIGN_IN_GATE';
+	const isDismissible = userTreatment.treatmentType.startsWith(
+		'DISMISSABLE_SIGN_IN_GATE',
+	);
 	const dismissStatusLabel = isDismissible
 		? 'dismissible'
 		: 'non-dismissible';

@@ -1871,7 +1871,6 @@ export const cricketMatchData: FECricketMatchPage = {
 			idCookieRefresh: true,
 			discussionPageSize: true,
 			smartAppBanner: false,
-			topAboveNav250Reservation: true,
 			historyTags: true,
 			brazeContentCards: true,
 			remoteBanner: true,

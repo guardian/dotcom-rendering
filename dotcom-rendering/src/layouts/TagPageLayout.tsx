@@ -77,7 +77,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 							padSides={false}
 							shouldCenter={false}
 						>
-							<HeaderAdSlot abTests={tagPage.config.abTests} />
+							<HeaderAdSlot />
 						</Section>
 					</Stuck>
 				)}

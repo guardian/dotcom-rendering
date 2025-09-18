@@ -7,8 +7,9 @@ import { cmp, isString, isUndefined, storage } from '@guardian/libs';
 import type { ModuleData } from '@guardian/support-dotcom-components/dist/dotcom/types';
 import type { BannerProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
-import { getArticleCounts } from '../lib/articleCount';
 import type { ArticleCounts } from '../lib/articleCount';
+import { getArticleCounts } from '../lib/articleCount';
+import type { EditionId } from '../lib/edition';
 import type {
 	CandidateConfig,
 	MaybeFC,
@@ -19,10 +20,11 @@ import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
-import { useSignInGateWillShow } from '../lib/useSignInGateWillShow';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
+import { retrieveDismissedCount } from './SignInGate/dismissGate';
+import type { AuxiaGateDisplayData } from './SignInGate/types';
 import {
 	BrazeBanner,
 	canShowBrazeBanner,
@@ -32,6 +34,10 @@ import {
 	ReaderRevenueBanner,
 } from './StickyBottomBanner/ReaderRevenueBanner';
 import type { CanShowFunctionType } from './StickyBottomBanner/ReaderRevenueBanner';
+import {
+	canShowSignInGatePortal,
+	SignInGatePortal,
+} from './StickyBottomBanner/SignInGatePortal';
 
 type Props = {
 	contentType: string;
@@ -46,6 +52,13 @@ type Props = {
 	idApiUrl: string;
 
 	pageId: string;
+	host?: string;
+};
+
+type BrazeMeta = {
+	dataFromBraze: { [key: string]: string };
+	logImpressionWithBraze: () => void;
+	logButtonClickWithBraze: (id: number) => void;
 };
 
 type RRBannerConfig = {
@@ -70,7 +83,7 @@ const buildCmpBannerConfig = (): CandidateConfig<void> => ({
 				.willShowPrivacyMessage()
 				.then((result) =>
 					result ? { show: true, meta: undefined } : { show: false },
-				),
+				), // Intentionally there is no catch block because if the CMP fails no other banner can be displayed.
 		show: () => {
 			// New CMP is not a react component and is shown outside of react's world
 			// so render nothing if it will show
@@ -91,7 +104,6 @@ const buildRRBannerConfigWith = ({
 		countryCode,
 		isPreview,
 		asyncArticleCounts,
-		signInGateWillShow = false,
 		contentType,
 		sectionId,
 		shouldHideReaderRevenue,
@@ -109,7 +121,6 @@ const buildRRBannerConfigWith = ({
 		countryCode: CountryCode;
 		isPreview: boolean;
 		asyncArticleCounts: Promise<ArticleCounts | undefined>;
-		signInGateWillShow?: boolean;
 		contentType: string;
 		sectionId: string;
 		shouldHideReaderRevenue: boolean;
@@ -155,7 +166,6 @@ const buildRRBannerConfigWith = ({
 						isPreview,
 						idApiUrl,
 						renderingTarget,
-						signInGateWillShow,
 						asyncArticleCounts,
 						ophanPageViewId,
 						pageId,
@@ -168,6 +178,50 @@ const buildRRBannerConfigWith = ({
 		};
 	};
 };
+
+const buildSignInGateConfig = (
+	isSignedIn: boolean | undefined,
+	isPaidContent: boolean,
+	isPreview: boolean,
+	contentType: string,
+	sectionId: string,
+	tags: TagType[],
+	pageId: string,
+	contributionsServiceUrl: string,
+	editionId: EditionId,
+	idUrl: string,
+	host?: string,
+): CandidateConfig<AuxiaGateDisplayData> => ({
+	candidate: {
+		id: 'sign-in-gate-portal',
+		canShow: async () => {
+			return await canShowSignInGatePortal(
+				isSignedIn,
+				isPaidContent,
+				isPreview,
+				pageId,
+				contributionsServiceUrl,
+				editionId,
+				contentType,
+				sectionId,
+				tags,
+				retrieveDismissedCount,
+			);
+		},
+		show: (meta: AuxiaGateDisplayData) => () => (
+			<SignInGatePortal
+				host={host}
+				isPaidContent={isPaidContent}
+				isPreview={isPreview}
+				pageId={pageId}
+				contributionsServiceUrl={contributionsServiceUrl}
+				idUrl={idUrl}
+				auxiaGateDisplayData={meta}
+			/>
+		),
+	},
+	timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
+});
 
 const buildReaderRevenueBannerConfig = (isEnabled: boolean) =>
 	buildRRBannerConfigWith({
@@ -183,7 +237,7 @@ const buildBrazeBanner = (
 	idApiUrl: string,
 	tags: TagType[],
 	shouldHideReaderRevenue: boolean,
-): CandidateConfig<any> => ({
+): CandidateConfig<BrazeMeta> => ({
 	candidate: {
 		id: 'braze-banner',
 		canShow: () =>
@@ -193,7 +247,7 @@ const buildBrazeBanner = (
 				tags,
 				shouldHideReaderRevenue,
 			),
-		show: (meta: any) => () => (
+		show: (meta: BrazeMeta) => () => (
 			<BrazeBanner meta={meta} idApiUrl={idApiUrl} />
 		),
 	},
@@ -224,11 +278,12 @@ export const StickyBottomBanner = ({
 	idApiUrl,
 	pageId,
 	remoteBannerSwitch,
+	host,
 }: Props & {
 	remoteBannerSwitch: boolean;
 	isSensitive: boolean;
 }) => {
-	const { renderingTarget } = useConfig();
+	const { renderingTarget, editionId } = useConfig();
 	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
 
 	const countryCode = useCountryCode('sticky-bottom-banner');
@@ -238,15 +293,6 @@ export const StickyBottomBanner = ({
 	const [SelectedBanner, setSelectedBanner] = useState<MaybeFC | null>(null);
 	const [asyncArticleCounts, setAsyncArticleCounts] =
 		useState<Promise<ArticleCounts | undefined>>();
-	const signInGateWillShow = useSignInGateWillShow({
-		isSignedIn: isSignedIn === true,
-		contentType,
-		sectionId,
-		tags,
-		isPaidContent,
-		isPreview,
-		currentLocaleCode: countryCode,
-	});
 
 	useEffect(() => {
 		setAsyncArticleCounts(getArticleCounts(pageId, tags, contentType));
@@ -259,7 +305,6 @@ export const StickyBottomBanner = ({
 			isUndefined(isSignedIn) ||
 			isUndefined(brazeMessages) ||
 			isUndefined(asyncArticleCounts) ||
-			isUndefined(signInGateWillShow) ||
 			isUndefined(ophanPageViewId) ||
 			isSignedIn === 'Pending'
 		) {
@@ -274,7 +319,6 @@ export const StickyBottomBanner = ({
 			countryCode,
 			isPreview,
 			asyncArticleCounts,
-			signInGateWillShow,
 			contentType,
 			sectionId,
 			shouldHideReaderRevenue,
@@ -298,8 +342,23 @@ export const StickyBottomBanner = ({
 			tags,
 			shouldHideReaderRevenue,
 		);
+
+		const signInGate = buildSignInGateConfig(
+			isSignedIn,
+			isPaidContent,
+			isPreview,
+			contentType,
+			sectionId,
+			tags,
+			pageId,
+			contributionsServiceUrl,
+			editionId,
+			idApiUrl, // Using idApiUrl as idUrl
+			host,
+		);
+
 		const bannerConfig: SlotConfig = {
-			candidates: [CMP, brazeBanner, readerRevenue],
+			candidates: [CMP, signInGate, brazeBanner, readerRevenue],
 			name: 'banner',
 		};
 
@@ -307,11 +366,16 @@ export const StickyBottomBanner = ({
 			.then((PickedBanner: () => MaybeFC) =>
 				setSelectedBanner(PickedBanner),
 			)
-			.catch((e) =>
-				console.error(
-					`StickyBottomBanner pickMessage - error: ${String(e)}`,
-				),
-			);
+			.catch((e) => {
+				// Report error to Sentry
+				const msg = `StickyBottomBanner pickMessage - error: ${String(
+					e,
+				)}`;
+				window.guardian.modules.sentry.reportError(
+					new Error(msg),
+					'sticky-bottom-banner',
+				);
+			});
 	}, [
 		isSignedIn,
 		countryCode,
@@ -319,6 +383,7 @@ export const StickyBottomBanner = ({
 		asyncArticleCounts,
 		contentType,
 		contributionsServiceUrl,
+		editionId,
 		idApiUrl,
 		isMinuteArticle,
 		isPaidContent,
@@ -328,10 +393,10 @@ export const StickyBottomBanner = ({
 		renderingTarget,
 		sectionId,
 		shouldHideReaderRevenue,
-		signInGateWillShow,
 		tags,
 		ophanPageViewId,
 		pageId,
+		host,
 	]);
 
 	if (SelectedBanner) {

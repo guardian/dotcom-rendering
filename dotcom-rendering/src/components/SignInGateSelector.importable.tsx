@@ -1,40 +1,23 @@
 import { getCookie, isUndefined, storage } from '@guardian/libs';
 import { useState } from 'react';
-import {
-	hasCmpConsentForBrowserId,
-	shouldHideSupportMessaging,
-} from '../lib/contributions';
-import { getDailyArticleCount, getToday } from '../lib/dailyArticleCount';
-import type { EditionId } from '../lib/edition';
-import { getLocaleCode } from '../lib/getCountryCode';
-import { isUserLoggedIn } from '../lib/identity';
 import { constructQuery } from '../lib/querystring';
-import { useAB } from '../lib/useAB';
 import { useOnce } from '../lib/useOnce';
 import { usePageViewId } from '../lib/usePageViewId';
 import type { RenderingTarget } from '../types/renderingTarget';
-import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
 import type { ComponentEventParams } from './SignInGate/componentEventTracking';
 import { submitComponentEventTracking } from './SignInGate/componentEventTracking';
-import { retrieveDismissedCount } from './SignInGate/dismissGate';
 import { pageIdIsAllowedForGating } from './SignInGate/displayRules';
 import { SignInGateAuxiaV1 } from './SignInGate/gateDesigns/SignInGateAuxiaV1';
 import { SignInGateAuxiaV2 } from './SignInGate/gateDesigns/SignInGateAuxiaV2';
-import { signInGateComponent as gateLegacyComponent } from './SignInGate/gates/main-control';
 import type {
 	AuxiaAPIResponseDataUserTreatment,
 	AuxiaGateDisplayData,
-	AuxiaGateReaderPersonalData,
 	AuxiaGateVersion,
 	AuxiaInteractionActionName,
 	AuxiaInteractionInteractionType,
-	AuxiaProxyGetTreatmentsPayload,
-	AuxiaProxyGetTreatmentsResponse,
 	AuxiaProxyLogTreatmentInteractionPayload,
-	CanShowGateProps,
 	CurrentSignInGateABTest,
-	ShowGateValues,
 } from './SignInGate/types';
 
 // ------------------------------------------------------------------------------------------
@@ -42,16 +25,13 @@ import type {
 // ------------------------------------------------------------------------------------------
 
 type Props = {
-	contentType: string;
-	sectionId?: string;
-	tags: TagType[];
 	isPaidContent: boolean;
 	isPreview: boolean;
 	host?: string;
 	pageId: string;
 	idUrl?: string;
 	contributionsServiceUrl: string;
-	editionId: EditionId;
+	auxiaGateDisplayData?: AuxiaGateDisplayData | undefined;
 	signInGateVersion?: AuxiaGateVersion;
 };
 
@@ -98,65 +78,16 @@ const generateGatewayUrl = (
 // Auxia Integration Experiment //
 // -------------------------------
 
-const decideShouldShowLegacyGate = async (
-	contentType: string,
-	sectionId: string,
-	tags: TagType[],
-	isPaidContent: boolean,
-	isPreview: boolean,
-): Promise<boolean> => {
-	/*
-		Date: 14th May
-		Author: Pascal
-
-		As part of moving the control of gate display from the client side to SDC (support dotcom components)
-		We introduce this function that is going to compute the value of `should_show_legacy_gate_tmp`, which is
-		then passed to SDC.
-
-		It basically needs to reproduce all the logic in the existing SignInGateSelectorDefault, which has a
-		convoluted set of hooks controlling display, but that the logic of can be reversed engineered.
-	*/
-
-	const isSignedIn: boolean = await isUserLoggedIn();
-	const currentTest: CurrentSignInGateABTest = {
-		name: 'SignInGateMainControl',
-		variant: 'main-control-5',
-		id: 'SignInGateMainControl',
-	};
-	const countryCode = (await getLocaleCode()) ?? undefined;
-
-	const input: CanShowGateProps = {
-		isSignedIn,
-		currentTest,
-		contentType,
-		sectionId,
-		tags,
-		isPaidContent,
-		isPreview,
-		currentLocaleCode: countryCode,
-	};
-	return gateLegacyComponent.canShow(input);
-};
-
 export const SignInGateSelector = ({
-	contentType,
-	sectionId = '',
-	tags,
 	isPaidContent,
 	isPreview,
 	host = 'https://theguardian.com/',
 	pageId, // pageId is the path without starting slash
 	idUrl = 'https://profile.theguardian.com',
 	contributionsServiceUrl,
-	editionId,
+	auxiaGateDisplayData,
 	signInGateVersion,
 }: Props) => {
-	const abTestAPI = useAB()?.api;
-	const userIsInAuxiaExperiment = !!abTestAPI?.isUserInVariant(
-		'AuxiaSignInGate',
-		'auxia-signin-gate',
-	);
-
 	if (!pageIdIsAllowedForGating(pageId)) {
 		return <></>;
 	}
@@ -167,13 +98,9 @@ export const SignInGateSelector = ({
 			pageId={pageId}
 			idUrl={idUrl}
 			contributionsServiceUrl={contributionsServiceUrl}
-			editionId={editionId}
 			isPreview={isPreview}
 			isPaidContent={isPaidContent}
-			contentType={contentType}
-			sectionId={sectionId}
-			tags={tags}
-			isAuxiaAudience={userIsInAuxiaExperiment}
+			auxiaGateDisplayData={auxiaGateDisplayData}
 			signInGateVersion={signInGateVersion}
 		/>
 	);
@@ -207,13 +134,9 @@ type PropsAuxia = {
 	pageId: string;
 	idUrl: string;
 	contributionsServiceUrl: string;
-	editionId: EditionId;
 	isPreview: boolean;
 	isPaidContent: boolean;
-	contentType: string;
-	sectionId: string;
-	tags: TagType[];
-	isAuxiaAudience: boolean; // [1]
+	auxiaGateDisplayData?: AuxiaGateDisplayData;
 	signInGateVersion?: AuxiaGateVersion;
 };
 
@@ -237,271 +160,18 @@ interface ShowSignInGateAuxiaProps {
 	signInGateVersion?: AuxiaGateVersion;
 }
 
-const decideIsSupporter = (): boolean => {
-	// nb: We will not be calling the Auxia API if the user is signed in, so we can set isSignedIn to false.
-	const isSignedIn = false;
-	const isSupporter = shouldHideSupportMessaging(isSignedIn);
-	if (isSupporter === 'Pending') {
-		return true;
-	}
-	return isSupporter;
-};
-
-const decideDailyArticleCount = (): number => {
-	const value = getDailyArticleCount();
-	if (value === undefined) {
-		return 0;
-	}
-	const today = getToday(); // number of days since unix epoch for today date
-	for (const daily of value) {
-		if (daily.day === today) {
-			return daily.count;
-		}
-	}
-	return 0;
-};
-
-const decideAuxiaProxyReaderPersonalData =
-	async (): Promise<AuxiaGateReaderPersonalData> => {
-		const browserId =
-			getCookie({ name: 'bwid', shouldMemoize: true }) ?? undefined;
-		const dailyArticleCount = decideDailyArticleCount();
-		const hasConsented = await hasCmpConsentForBrowserId();
-		const isSupporter = decideIsSupporter();
-		const countryCode = (await getLocaleCode()) ?? ''; // default to empty string
-		const mvtId_str: string =
-			getCookie({ name: 'GU_mvt_id', shouldMemoize: true }) ?? '0';
-		const mvtId: number = parseInt(mvtId_str);
-		const data = {
-			browserId,
-			dailyArticleCount,
-			isSupporter,
-			countryCode,
-			mvtId,
-			hasConsented,
-		};
-		return Promise.resolve(data);
-	};
-
-const fetchProxyGetTreatments = async (
-	contributionsServiceUrl: string,
-	pageId: string,
-	browserId: string | undefined,
-	isSupporter: boolean,
-	dailyArticleCount: number,
-	editionId: EditionId,
-	contentType: string,
-	sectionId: string,
-	tagIds: string[],
-	gateDismissCount: number,
-	countryCode: string,
-	mvtId: number,
-	should_show_legacy_gate_tmp: boolean,
-	hasConsented: boolean,
-	shouldServeDismissible: boolean,
-	showDefaultGate: ShowGateValues,
-	gateDisplayCount: number,
-	hideSupportMessagingTimestamp: number | undefined,
-): Promise<AuxiaProxyGetTreatmentsResponse> => {
-	// pageId example: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
-	const articleIdentifier = `www.theguardian.com/${pageId}`;
-	// articleIdentifier example: 'www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software'
-	const url = `${contributionsServiceUrl}/auxia/get-treatments`;
-	const headers = {
-		'Content-Type': 'application/json',
-	};
-	const payload: AuxiaProxyGetTreatmentsPayload = {
-		browserId,
-		isSupporter,
-		dailyArticleCount,
-		articleIdentifier,
-		editionId,
-		contentType,
-		sectionId,
-		tagIds,
-		gateDismissCount,
-		countryCode,
-		mvtId,
-		should_show_legacy_gate_tmp,
-		hasConsented,
-		shouldServeDismissible,
-		showDefaultGate,
-		gateDisplayCount,
-		hideSupportMessagingTimestamp,
-	};
-	const params = {
-		method: 'POST',
-		headers,
-		body: JSON.stringify(payload),
-	};
-
-	const response_raw = await fetch(url, params);
-	const response =
-		(await response_raw.json()) as AuxiaProxyGetTreatmentsResponse;
-
-	return Promise.resolve(response);
-};
-
-const decideShouldServeDismissible = (): boolean => {
-	// Return a boolean indicating whether or not we accept mandatory gates for this call.
-	// If the answer is `true` this doesn't decide whether the gate should be displayed or not,
-	// it only means that if a gate is returned, then it must be dismissible (not be mandatory).
-
-	// Now the question is how do we decide the answer ?
-	// We return false if the following query parameter is present in the url:
-	// utm_source=newsshowcase
-
-	// This may be extended in the future.
-
-	const params = new URLSearchParams(window.location.search);
-	const value: string | null = params.get('utm_source');
-	return value === 'newsshowcase';
-};
-
-const decideShowDefaultGate = (): ShowGateValues => {
-	// In order to facilitate internal testing, this function observes a query parameter which forces
-	// the display of a sign-in gate, namely the default gu gate. If this returns true then
-	// the default gate is going to be displayed. Note that this applies to both auxia and
-	// non auxia audiences. In particular because it also applies to auxia audiences, for which
-	// the value of should_show_legacy_gate_tmp is ignored, then the information will come to
-	// the SDC server as a new parameter in the GetTreatments payload.
-
-	// to trigger gate display, the url should have query parameter `showgate=true`
-
-	const params = new URLSearchParams(window.location.search);
-	const value: string | null = params.get('showgate');
-
-	if (value === null) {
-		return undefined;
-	}
-
-	const validValues = ['true', 'dismissible', 'mandatory'];
-	if (validValues.includes(value)) {
-		return value as ShowGateValues;
-	}
-
-	return undefined;
-};
-
-const getGateDisplayCount = (): number => {
+const incrementGateDisplayCount = () => {
 	const count = parseInt(
 		storage.local.getRaw('gate_display_count') ?? '0',
 		10,
 	);
-	if (Number.isInteger(count)) {
-		return count;
-	}
-	return 0;
-};
-
-const incrementGateDisplayCount = () => {
-	const count = getGateDisplayCount();
 	const newCount = count + 1;
-	// Using `storage.local.set`, instead of `storage.local.setRaw`
-	// because `setRaw` doesn't allow for specifying the duration.
 	storage.local.setRaw('gate_display_count', newCount.toString());
 };
 
-const decideHideSupportMessagingTimestamp = (): number | undefined => {
-	// Date: 1 September 2025
-	//
-	// This cookie is overloaded in the following way:
-	// If the user has performed single contribution, then the value is the
-	// timestamp of the event. But if the user has performed a recurring
-	// contribution, then the value is a future timestamp.
-	//
-	// Ideally we would correct the semantics of the cookie, but for the moment
-	// we are simply going to ignore the value if it's in the future. We
-	// are making this adjustment here, but will also mirror it in SDC
-
-	const rawValue: string | null = storage.local.getRaw(
-		'gu_hide_support_messaging',
-	);
-	if (rawValue === null) {
-		return undefined;
-	}
-	const timestamp = parseInt(rawValue, 10);
-	const now = Date.now(); // current time in milliseconds since epoch
-	if (Number.isInteger(timestamp) && timestamp < now) {
-		return timestamp;
-	}
-	return undefined;
-};
-
-const buildAuxiaGateDisplayData = async (
-	contributionsServiceUrl: string,
-	pageId: string,
-	editionId: EditionId,
-	contentType: string,
-	sectionId: string,
-	tags: TagType[],
-	gateDismissCount: number,
-	isAuxiaAudience: boolean, // [1]
-): Promise<AuxiaGateDisplayData | undefined> => {
-	// [1] If true, it indicates that we are using the component for the regular Auxia share of the Audience
-	// otherwise, if false, it means that we are using the component to display the legacy gate.
-
-	const readerPersonalData = await decideAuxiaProxyReaderPersonalData();
-	const tagIds = tags.map((tag) => tag.id);
-
-	let should_show_legacy_gate_tmp;
-
-	if (isAuxiaAudience) {
-		should_show_legacy_gate_tmp = false;
-		// The actual value is irrelevant in this case, but we have the convention to set it to false here
-	} else {
-		// The two times the function `buildAuxiaGateDisplayData` is called
-		// it's behind a
-		// (!isSignedIn && !isPreview && !isPaidContent)
-		// guard. So we don't need to pass `isPreview` and `isPaidContent` to it, we know
-		// they are both false.
-
-		should_show_legacy_gate_tmp = await decideShouldShowLegacyGate(
-			contentType,
-			sectionId,
-			tags,
-			false,
-			false,
-		);
-	}
-
-	const shouldServeDismissible = decideShouldServeDismissible();
-	const showDefaultGate = decideShowDefaultGate();
-	const gateDisplayCount = getGateDisplayCount();
-
-	const hideSupportMessagingTimestamp = decideHideSupportMessagingTimestamp();
-
-	const response = await fetchProxyGetTreatments(
-		contributionsServiceUrl,
-		pageId,
-		readerPersonalData.browserId,
-		readerPersonalData.isSupporter,
-		readerPersonalData.dailyArticleCount,
-		editionId,
-		contentType,
-		sectionId,
-		tagIds,
-		gateDismissCount,
-		readerPersonalData.countryCode,
-		readerPersonalData.mvtId,
-		should_show_legacy_gate_tmp,
-		readerPersonalData.hasConsented,
-		shouldServeDismissible,
-		showDefaultGate,
-		gateDisplayCount,
-		hideSupportMessagingTimestamp,
-	);
-
-	if (response.status && response.data) {
-		const answer = {
-			browserId: readerPersonalData.browserId,
-			auxiaData: response.data,
-		};
-		return Promise.resolve(answer);
-	}
-
-	return Promise.resolve(undefined);
-};
+// The Auxia builder and reader helpers have been moved to `src/lib/auxia.ts`.
+// The Auxia selector expects `auxiaGateDisplayData` to be provided by the caller
+// (StickyBottomBanner) via the message picker's meta. Ensure the prop is in scope.
 
 const auxiaLogTreatmentInteraction = async (
 	contributionsServiceUrl: string,
@@ -574,19 +244,33 @@ const buildAbTestTrackingAuxiaVariant = (
 
 const getAuxiaGateVersion = (
 	signInGateVersion?: AuxiaGateVersion,
+	userTreatment?: AuxiaAPIResponseDataUserTreatment,
 ): AuxiaGateVersion => {
 	if (signInGateVersion) {
+		console.log('Using signInGateVersion from props:', signInGateVersion);
 		return signInGateVersion;
 	}
 
 	const params = new URLSearchParams(window.location.search);
 	const version = params.get('auxia_gate_version');
 
-	if (version === 'v2') {
+	console.log('URL param auxia_gate_version:', {
+		version,
+		treatmentType: userTreatment?.treatmentType,
+	});
+
+	if (
+		String(version).toLowerCase().endsWith('v2') ||
+		String(userTreatment?.treatmentType)
+			.toLowerCase()
+			.includes('v2')
+	) {
+		console.log('Using auxiaGateVersion from URL or userTreatment:', 'v2');
 		return 'v2';
 	}
 
 	// Default to v1
+	console.log('Defaulting auxiaGateVersion to:', 'v1');
 	return 'v1';
 };
 
@@ -595,22 +279,14 @@ const SignInGateSelectorAuxia = ({
 	pageId,
 	idUrl,
 	contributionsServiceUrl,
-	editionId,
 	isPreview,
 	isPaidContent,
-	contentType,
-	sectionId,
-	tags,
-	isAuxiaAudience,
+	auxiaGateDisplayData,
 	signInGateVersion,
 }: PropsAuxia) => {
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
 	);
-
-	const [auxiaGateDisplayData, setAuxiaGateDisplayData] = useState<
-		AuxiaGateDisplayData | undefined
-	>(undefined);
 
 	// We are using CurrentSignInGateABTest, with the details of the Auxia experiment,
 	// to allow Ophan tracking
@@ -635,53 +311,7 @@ const SignInGateSelectorAuxia = ({
 		}
 	}, [isGateDismissed]);
 
-	useOnce(() => {
-		void (async () => {
-			// Only make a request to Auxia if user is signed out. This means signed-in users will never receive an Auxia treatment, and therefore never see a sign-in gate
-			const isSignedIn = await isUserLoggedIn();
-
-			// Although the component is returning null if we are in preview or it's a paid content
-			// We need to guard against the API possibly being called before the component returns.
-			// That is because it would count as a content delivery for them, above all if they return a treatment
-			//  without the subsequent Log Treatment notification, which would cause confusion.
-			if (!isSignedIn && !isPreview && !isPaidContent) {
-				const data = await buildAuxiaGateDisplayData(
-					contributionsServiceUrl,
-					pageId,
-					editionId,
-					contentType,
-					sectionId,
-					tags,
-					retrieveDismissedCount(abTest.variant, abTest.name),
-					isAuxiaAudience,
-				);
-				if (data !== undefined) {
-					setAuxiaGateDisplayData(data);
-
-					const treatmentId =
-						data.auxiaData.userTreatment?.treatmentId;
-					if (treatmentId) {
-						// Record the fact that Auxia has returned a treatment. This is not a VIEW event, so we use the RETURN action here
-						void submitComponentEventTracking(
-							{
-								component: {
-									componentType: 'SIGN_IN_GATE',
-									id: treatmentId,
-								},
-								action: 'RETURN',
-								abTest: buildAbTestTrackingAuxiaVariant(
-									treatmentId,
-								),
-							},
-							renderingTarget,
-						);
-					}
-				}
-			}
-		})().catch((error) => {
-			console.error('Error fetching Auxia display data:', error);
-		});
-	}, [abTest, isPaidContent, isPreview]);
+	// auxiaGateDisplayData is expected to be provided by the caller (StickyBottomBanner)
 
 	// We are not showing the gate if we are in preview, it's a paid contents
 	// or the user is signed in or if for some reasons we could not determine the
@@ -775,7 +405,7 @@ const ShowSignInGateAuxia = ({
 	const personaliseSignInGateAfterCheckoutSwitch = undefined;
 
 	// Get the gate version configuration
-	const gateVersion = getAuxiaGateVersion(signInGateVersion);
+	const gateVersion = getAuxiaGateVersion(signInGateVersion, userTreatment);
 
 	useOnce(() => {
 		void auxiaLogTreatmentInteraction(

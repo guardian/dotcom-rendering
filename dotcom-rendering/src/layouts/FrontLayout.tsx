@@ -18,7 +18,6 @@ import {
 	MobileAdSlot,
 } from '../components/FrontsAdSlots';
 import { FrontSection } from '../components/FrontSection';
-import { FrontSectionTracker } from '../components/FrontSectionTracker.importable';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
@@ -135,6 +134,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
+	const showLabsRedesign = !!front.config.switches.guardianLabsRedesign;
+
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
 			case 'scrollable/feature':
@@ -198,7 +199,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								'--article-section-background',
 							)}
 						>
-							<HeaderAdSlot abTests={abTests} />
+							<HeaderAdSlot />
 						</Section>
 					</Stuck>
 				)}
@@ -424,7 +425,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						);
 					}
 
-					if (collection.containerPalette === 'Branded') {
+					if (
+						collection.containerPalette === 'Branded' &&
+						!showLabsRedesign
+					) {
 						return (
 							<Fragment key={ophanName}>
 								<LabsSection
@@ -567,6 +571,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								isAboveMobileAd={mobileAdPositions.includes(
 									index,
 								)}
+								isLabs={
+									collection.containerPalette === 'Branded'
+								}
+								showLabsRedesign={showLabsRedesign}
 							>
 								<DecideContainer
 									trails={trails}
@@ -697,10 +705,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					/>
 				</Island>
 			</BannerWrapper>
-
-			<Island priority="feature" defer={{ until: 'idle' }}>
-				<FrontSectionTracker />
-			</Island>
 		</>
 	);
 };

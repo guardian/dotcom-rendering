@@ -406,9 +406,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot
-									abTests={article.config.abTests}
-								/>
+								<HeaderAdSlot />
 							</Section>
 						</Stuck>
 					)}
@@ -1041,6 +1039,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									!!article.config.switches.remoteBanner
 								}
 								tags={article.tags}
+								host={host}
 							/>
 						</Island>
 					</BannerWrapper>
