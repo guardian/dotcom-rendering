@@ -135,6 +135,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
+	const showLabsRedesign = !!front.config.switches.guardianLabsRedesign;
+
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
 			case 'scrollable/feature':
@@ -198,7 +200,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								'--article-section-background',
 							)}
 						>
-							<HeaderAdSlot abTests={abTests} />
+							<HeaderAdSlot />
 						</Section>
 					</Stuck>
 				)}
@@ -424,7 +426,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						);
 					}
 
-					if (collection.containerPalette === 'Branded') {
+					if (
+						collection.containerPalette === 'Branded' &&
+						!showLabsRedesign
+					) {
 						return (
 							<Fragment key={ophanName}>
 								<LabsSection
@@ -567,6 +572,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								isAboveMobileAd={mobileAdPositions.includes(
 									index,
 								)}
+								isLabs={
+									collection.containerPalette === 'Branded'
+								}
+								showLabsRedesign={showLabsRedesign}
 							>
 								<DecideContainer
 									trails={trails}

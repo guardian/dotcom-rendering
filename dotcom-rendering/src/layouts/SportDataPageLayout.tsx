@@ -93,7 +93,7 @@ export const SportDataPageLayout = ({ sportData }: Props) => {
 							padSides={false}
 							shouldCenter={false}
 						>
-							<HeaderAdSlot abTests={sportData.config.abTests} />
+							<HeaderAdSlot />
 						</Section>
 					</Stuck>
 				)}

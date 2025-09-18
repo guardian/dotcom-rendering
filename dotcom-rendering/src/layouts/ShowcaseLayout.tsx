@@ -264,9 +264,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 										padSides={false}
 										shouldCenter={false}
 									>
-										<HeaderAdSlot
-											abTests={article.config.abTests}
-										/>
+										<HeaderAdSlot />
 									</Section>
 								</Stuck>
 							)}
@@ -302,9 +300,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											showSideBorders={false}
 											padSides={false}
 										>
-											<HeaderAdSlot
-												abTests={article.config.abTests}
-											/>
+											<HeaderAdSlot />
 										</Section>
 									</Stuck>
 								)}

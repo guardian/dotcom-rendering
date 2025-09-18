@@ -309,9 +309,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								shouldCenter={false}
 								element="aside"
 							>
-								<HeaderAdSlot
-									abTests={article.config.abTests}
-								/>
+								<HeaderAdSlot />
 							</Section>
 						</Stuck>
 					)}
