@@ -1,6 +1,7 @@
 import { getCookie, isUndefined, storage } from '@guardian/libs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { constructQuery } from '../lib/querystring';
+import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
 import { usePageViewId } from '../lib/usePageViewId';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -363,45 +364,60 @@ const ShowSignInGateAuxia = ({
 	const checkoutCompleteCookieData = undefined;
 	const personaliseSignInGateAfterCheckoutSwitch = undefined;
 
-	useOnce(() => {
-		void auxiaLogTreatmentInteraction(
-			contributionsServiceUrl,
-			userTreatment,
-			'VIEWED',
-			'',
-			browserId,
-		).catch((error) => {
-			const errorReport = new Error(
-				`Failed to log treatment interaction`,
+	const [hasBeenSeen, setNode] = useIsInView({
+		debounce: true,
+		threshold: 0,
+	});
+
+	useEffect(() => {
+		if (hasBeenSeen) {
+			void auxiaLogTreatmentInteraction(
+				contributionsServiceUrl,
+				userTreatment,
+				'VIEWED',
+				'',
+				browserId,
+			).catch((error) => {
+				const errorReport = new Error(
+					`Failed to log treatment interaction`,
+					{
+						cause: error,
+					},
+				);
+				window.guardian.modules.sentry.reportError(
+					errorReport,
+					'sign-in-gate',
+				);
+			});
+
+			void submitComponentEventTracking(
 				{
-					cause: error,
+					component: {
+						componentType: 'SIGN_IN_GATE',
+						id: treatmentId,
+					},
+					action: 'VIEW',
+					abTest: buildAbTestTrackingAuxiaVariant(treatmentId),
 				},
+				renderingTarget,
 			);
-			window.guardian.modules.sentry.reportError(
-				errorReport,
-				'sign-in-gate',
-			);
-		});
 
-		void submitComponentEventTracking(
-			{
-				component: {
-					componentType: 'SIGN_IN_GATE',
-					id: treatmentId,
-				},
-				action: 'VIEW',
-				abTest: buildAbTestTrackingAuxiaVariant(treatmentId),
-			},
-			renderingTarget,
-		);
-
-		// Once the gate is being displayed we need to update
-		// the tracking of the number of times the gate has been displayed
-		incrementGateDisplayCount();
-	}, [componentId]);
+			// Once the gate is being displayed we need to update
+			// the tracking of the number of times the gate has been displayed
+			incrementGateDisplayCount();
+		}
+	}, [
+		componentId,
+		hasBeenSeen,
+		browserId,
+		contributionsServiceUrl,
+		renderingTarget,
+		treatmentId,
+		userTreatment,
+	]);
 
 	return (
-		<>
+		<div ref={setNode}>
 			<SignInGateAuxiaV1
 				guUrl={host}
 				signInUrl={signInUrl}
@@ -417,6 +433,6 @@ const ShowSignInGateAuxia = ({
 				userTreatment={userTreatment}
 				logTreatmentInteractionCall={logTreatmentInteractionCall}
 			/>
-		</>
+		</div>
 	);
 };
