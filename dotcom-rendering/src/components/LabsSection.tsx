@@ -74,17 +74,11 @@ type Props = {
 };
 
 const leftColumnBackground = css`
-	background-color: ${sourcePalette.labs[400]};
-	@media (prefers-color-scheme: dark) {
-		background-color: ${sourcePalette.labs[200]};
-	}
+	background-color: ${palette('--labs-legacy-section-background-left')};
 `;
 
 const contentBackground = css`
-	background-color: ${sourcePalette.neutral[93]};
-	@media (prefers-color-scheme: dark) {
-		background-color: ${sourcePalette.neutral[20]};
-	}
+	background-color: ${palette('--labs-legacy-section-background')};
 `;
 
 const leftColumnWidthFromLeftCol = css`
@@ -172,10 +166,7 @@ const contentSidePaddingFromLeftCol = css`
 
 const linkStyles = css`
 	text-decoration: none;
-	color: ${sourcePalette.neutral[100]};
-	@media (prefers-color-scheme: dark) {
-		color: ${sourcePalette.neutral[97]};
-	}
+	color: ${palette('--labs-legacy-article-section-title')};
 
 	:hover {
 		text-decoration: underline;
@@ -184,11 +175,8 @@ const linkStyles = css`
 
 const headerStyles = css`
 	${textSansBold20};
-	color: ${sourcePalette.neutral[100]};
+	color: ${palette('--labs-legacy-article-section-title')};
 	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
-	@media (prefers-color-scheme: dark) {
-		color: ${sourcePalette.neutral[97]};
-	}
 `;
 
 const containerMargins = css`
@@ -206,12 +194,9 @@ const badgeStyles = css`
 
 const paidForByStyles = css`
 	${textSansBold12};
-	color: ${sourcePalette.neutral[46]};
+	color: ${palette('--labs-legacy-treat-text')};
 	margin-top: ${space[3]}px;
 	margin-bottom: ${space[1]}px;
-	@media (prefers-color-scheme: dark) {
-		color: ${sourcePalette.neutral[38]};
-	}
 `;
 
 const GuardianLabsTitle = ({ title, url }: { title: string; url?: string }) => {
