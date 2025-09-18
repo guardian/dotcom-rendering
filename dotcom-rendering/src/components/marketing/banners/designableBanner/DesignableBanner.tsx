@@ -135,14 +135,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 }: BannerRenderProps): JSX.Element => {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
 
-	// We can use this to shorten the banner if the "open in app" banner is present
-	const [iosAppBannerPresent, setIosAppBannerPresent] = useState(false);
-	useEffect(() => {
-		setIosAppBannerPresent(
-			window.innerHeight != window.document.documentElement.clientHeight,
-		);
-	}, []);
-
 	const bannerRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -150,21 +142,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 			bannerRef.current.focus();
 		}
 	}, []);
-
-	useEffect(() => {
-		if (iosAppBannerPresent) {
-			// send ophan event
-			if (submitComponentEvent) {
-				submitComponentEvent({
-					component: {
-						componentType: 'ACQUISITIONS_OTHER',
-						id: 'safari-ios-banner-present',
-					},
-					action: 'VIEW',
-				});
-			}
-		}
-	}, [iosAppBannerPresent, submitComponentEvent]);
 
 	const choiceCards = getChoiceCards(isTabletOrAbove, choiceCardsSettings);
 	const defaultChoiceCard = choiceCards?.find((cc) => cc.isDefault);
@@ -321,7 +298,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 			tabIndex={-1}
 			css={styles.outerContainer(
 				templateSettings.containerSettings.backgroundColour,
-				iosAppBannerPresent,
 				templateSettings.containerSettings.textColor,
 			)}
 			className={contextClassName}
@@ -555,15 +531,14 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 const phabletContentMaxWidth = '492px';
 
 const styles = {
-	outerContainer: (
-		background: string,
-		limitHeight: boolean,
-		textColor: string = 'inherit',
-	) => css`
+	outerContainer: (background: string, textColor: string = 'inherit') => css`
 		background: ${background};
 		color: ${textColor};
 		bottom: 0px;
-		${limitHeight ? 'max-height: 60vh;' : ''}
+		/* override vh with vsh if supported */
+		max-height: 65vh;
+		/* stylelint-disable-next-line declaration-block-no-duplicate-properties */
+		max-height: 65svh;
 
 		* {
 			box-sizing: border-box;
