@@ -33,6 +33,7 @@ interface Props {
 	showSlimNav?: boolean;
 	hasPageSkin?: boolean;
 	pageId?: string;
+	wholePictureLogoSwitch?: boolean;
 }
 
 const gridContent = css`
@@ -238,6 +239,7 @@ export const Titlepiece = ({
 	showSlimNav,
 	hasPageSkin,
 	pageId = '',
+	wholePictureLogoSwitch,
 }: Props) => {
 	const { showBanner } = useEditionSwitcherBanner(pageId, editionId);
 
@@ -419,7 +421,13 @@ export const Titlepiece = ({
 			</div>
 
 			{/* Guardian logo */}
-			<Logo hasPageSkin={!!hasPageSkin} showSlimNav={!!showSlimNav} />
+			<Logo
+				showWholePictureLogo={
+					!!wholePictureLogoSwitch && editionId === 'US'
+				}
+				hasPageSkin={!!hasPageSkin}
+				showSlimNav={!!showSlimNav}
+			/>
 
 			{/** Expanded menu checkbox */}
 			<input

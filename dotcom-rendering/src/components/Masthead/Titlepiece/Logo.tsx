@@ -1,8 +1,10 @@
 import { css } from '@emotion/react';
 import { from, space, visuallyHidden } from '@guardian/source/foundations';
-import { SvgGuardianLogo } from '@guardian/source/react-components';
+import { Hide, SvgGuardianLogo } from '@guardian/source/react-components';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import { palette } from '../../../palette';
+import TheWholePictureGuardianLogoSmall from '../../../static/icons/the-guardian-whole-picture-logo-small.svg';
+import TheWholePictureGuardianLogo from '../../../static/icons/the-guardian-whole-picture-logo.svg';
 
 const gridMainColumn = css`
 	grid-column: main-column-start / main-column-end;
@@ -20,6 +22,7 @@ const logoStyles = css`
 	margin-top: ${space[2]}px;
 	margin-bottom: 6px;
 	right: ${veggieBurgerDiameter + space[3]}px;
+
 	${from.mobileMedium} {
 		right: 0;
 	}
@@ -45,6 +48,22 @@ const logoStylesFromLeftCol = css`
 	svg {
 		${from.leftCol} {
 			width: 324px;
+		}
+	}
+`;
+
+const theWholePictureStyles = css`
+	margin-bottom: 2px;
+	${from.tablet} {
+		margin-top: 10px;
+		margin-bottom: 6px;
+	}
+
+	svg {
+		height: auto;
+		width: 173px;
+		${from.tablet} {
+			width: 246px;
 		}
 	}
 `;
@@ -83,15 +102,25 @@ const slimNavLogoOverrides = css`
 `;
 
 type Props = {
+	/**
+	 * We are running a campaign in the US called "The Whole Picture"
+	 * We will use a different logo for the US edition for the duration of this campaign.
+	 */
+	showWholePictureLogo: boolean;
 	hasPageSkin: boolean;
 	showSlimNav: boolean;
 };
 
-export const Logo = ({ hasPageSkin, showSlimNav }: Props) => (
+export const Logo = ({
+	showWholePictureLogo,
+	hasPageSkin,
+	showSlimNav,
+}: Props) => (
 	<div
 		css={[
 			logoStyles,
 			!hasPageSkin && logoStylesFromLeftCol,
+			showWholePictureLogo && theWholePictureStyles,
 			showSlimNav && slimNavLogoOverrides,
 		]}
 	>
@@ -103,7 +132,21 @@ export const Logo = ({ hasPageSkin, showSlimNav }: Props) => (
 			>
 				The Guardian - Back to home
 			</span>
-			<SvgGuardianLogo textColor={palette('--masthead-nav-link-text')} />
+
+			{showWholePictureLogo ? (
+				<>
+					<Hide from="tablet">
+						<TheWholePictureGuardianLogoSmall />
+					</Hide>
+					<Hide until="tablet">
+						<TheWholePictureGuardianLogo />
+					</Hide>
+				</>
+			) : (
+				<SvgGuardianLogo
+					textColor={palette('--masthead-nav-link-text')}
+				/>
+			)}
 		</a>
 	</div>
 );
