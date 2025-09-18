@@ -1,5 +1,5 @@
 import { getCookie, isUndefined, storage } from '@guardian/libs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { constructQuery } from '../lib/querystring';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
@@ -369,7 +369,7 @@ const ShowSignInGateAuxia = ({
 		threshold: 0,
 	});
 
-	useOnce(() => {
+	useEffect(() => {
 		if (hasBeenSeen) {
 			void auxiaLogTreatmentInteraction(
 				contributionsServiceUrl,
@@ -406,7 +406,15 @@ const ShowSignInGateAuxia = ({
 			// the tracking of the number of times the gate has been displayed
 			incrementGateDisplayCount();
 		}
-	}, [componentId, hasBeenSeen]);
+	}, [
+		componentId,
+		hasBeenSeen,
+		browserId,
+		contributionsServiceUrl,
+		renderingTarget,
+		treatmentId,
+		userTreatment,
+	]);
 
 	return (
 		<div ref={setNode}>
