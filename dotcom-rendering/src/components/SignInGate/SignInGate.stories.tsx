@@ -1,5 +1,8 @@
-import { type EditionId } from '../../lib/edition';
-import type { TagType } from '../../types/tag';
+import {
+	mockAuxiaResponseDismissible,
+	mockAuxiaResponseLegacy,
+	mockAuxiaResponseNonDismissible,
+} from '../../../fixtures/manual/sign-in-gate';
 import { Section } from '../Section';
 import { SignInGateSelector } from '../SignInGateSelector.importable';
 import { SignInGateCustomizableText } from './gateDesigns/SignInGateCustomizableText';
@@ -158,24 +161,23 @@ signInGateMainCheckoutCompletePersonalisedCopy.argTypes = {
 };
 
 export const signInGateSelectorStoryDismissable = () => {
-	const tags: TagType[] = [
-		{ id: 'politics/politics', type: 'Keyword', title: 'Politics' },
-		{ id: 'world/europe-news', type: 'Keyword', title: 'Europe News' },
-	];
-
 	return (
 		<Section fullWidth={true}>
 			<SignInGateSelector
-				contentType="Article"
-				sectionId="dismissable"
-				tags={tags}
 				isPaidContent={false}
 				isPreview={false}
 				pageId="dismissable"
 				host="https://www.theguardian.com"
 				idUrl="https://profile.theguardian.com"
 				contributionsServiceUrl="https://contributions.guardianapis.com"
-				editionId={'UK' as EditionId}
+				auxiaGateDisplayData={{
+					browserId: 'test-browser-id',
+					auxiaData: {
+						responseId: 'test-response-id',
+						userTreatment:
+							mockAuxiaResponseDismissible.data.userTreatment,
+					},
+				}}
 			/>
 		</Section>
 	);
@@ -185,24 +187,23 @@ signInGateSelectorStoryDismissable.storyName =
 	'sign_in_gate_selector_dismissable';
 
 export const signInGateSelectorStoryNonDismissable = () => {
-	const tags: TagType[] = [
-		{ id: 'politics/politics', type: 'Keyword', title: 'Politics' },
-		{ id: 'world/europe-news', type: 'Keyword', title: 'Europe News' },
-	];
-
 	return (
 		<Section fullWidth={true}>
 			<SignInGateSelector
-				contentType="Article"
-				sectionId="non-dismissable"
-				tags={tags}
 				isPaidContent={false}
 				isPreview={false}
 				pageId="non-dismissable"
 				host="https://www.theguardian.com"
 				idUrl="https://profile.theguardian.com"
 				contributionsServiceUrl="https://contributions.guardianapis.com"
-				editionId={'UK' as EditionId}
+				auxiaGateDisplayData={{
+					browserId: 'test-browser-id',
+					auxiaData: {
+						responseId: 'test-response-id',
+						userTreatment:
+							mockAuxiaResponseNonDismissible.data.userTreatment,
+					},
+				}}
 			/>
 		</Section>
 	);
@@ -212,24 +213,23 @@ signInGateSelectorStoryNonDismissable.storyName =
 	'sign_in_gate_selector_non_dismissable';
 
 export const signInGateSelectorStoryLegacy = () => {
-	const tags: TagType[] = [
-		{ id: 'politics/politics', type: 'Keyword', title: 'Politics' },
-		{ id: 'world/europe-news', type: 'Keyword', title: 'Europe News' },
-	];
-
 	return (
 		<Section fullWidth={true}>
 			<SignInGateSelector
-				contentType="Article"
-				sectionId="legacy"
-				tags={tags}
 				isPaidContent={false}
 				isPreview={false}
 				pageId="legacy"
 				host="https://www.theguardian.com"
 				idUrl="https://profile.theguardian.com"
 				contributionsServiceUrl="https://contributions.guardianapis.com"
-				editionId={'UK' as EditionId}
+				auxiaGateDisplayData={{
+					browserId: 'test-browser-id',
+					auxiaData: {
+						responseId: 'test-response-id',
+						userTreatment:
+							mockAuxiaResponseLegacy.data.userTreatment,
+					},
+				}}
 			/>
 		</Section>
 	);
@@ -238,24 +238,22 @@ export const signInGateSelectorStoryLegacy = () => {
 signInGateSelectorStoryLegacy.storyName = 'sign_in_gate_selector_legacy';
 
 export const signInGateSelectorStoryNoTreatment = () => {
-	const tags: TagType[] = [
-		{ id: 'politics/politics', type: 'Keyword', title: 'Politics' },
-		{ id: 'world/europe-news', type: 'Keyword', title: 'Europe News' },
-	];
-
 	return (
 		<Section fullWidth={true}>
 			<SignInGateSelector
-				contentType="Article"
-				sectionId="no-treatment"
-				tags={tags}
 				isPaidContent={false}
 				isPreview={false}
 				pageId="no-treatment"
 				host="https://www.theguardian.com"
 				idUrl="https://profile.theguardian.com"
 				contributionsServiceUrl="https://contributions.guardianapis.com"
-				editionId={'UK' as EditionId}
+				auxiaGateDisplayData={{
+					browserId: 'test-browser-id',
+					auxiaData: {
+						responseId: 'test-response-id',
+						userTreatment: undefined,
+					},
+				}}
 			/>
 		</Section>
 	);

@@ -1039,6 +1039,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									!!article.config.switches.remoteBanner
 								}
 								tags={article.tags}
+								host={host}
 							/>
 						</Island>
 					</BannerWrapper>

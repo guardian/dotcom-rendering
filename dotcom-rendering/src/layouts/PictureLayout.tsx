@@ -750,6 +750,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 									!!article.config.switches.remoteBanner
 								}
 								tags={article.tags}
+								host={host}
 							/>
 						</Island>
 					</BannerWrapper>
