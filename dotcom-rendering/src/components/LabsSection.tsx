@@ -79,6 +79,9 @@ const leftColumnBackground = css`
 
 const contentBackground = css`
 	background-color: ${sourcePalette.neutral[93]};
+	@media (prefers-color-scheme: dark) {
+		background-color: ${sourcePalette.neutral[20]};
+	}
 `;
 
 const leftColumnWidthFromLeftCol = css`
