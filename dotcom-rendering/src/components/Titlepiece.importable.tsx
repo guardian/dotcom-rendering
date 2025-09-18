@@ -35,8 +35,6 @@ interface Props {
 	pageId?: string;
 }
 
-const veggieBurgerDiameter = 40;
-
 const gridContent = css`
 	grid-column: content-start / content-end;
 `;
@@ -57,87 +55,6 @@ const editionSwitcherMenuStyles = css`
 const slimNavEditionSwitcherOverrides = css`
 	${until.tablet} {
 		justify-self: start;
-	}
-`;
-
-const logoStyles = css`
-	${gridMainColumn}
-	grid-row: 1;
-	position: relative;
-	display: flex;
-	justify-self: end;
-	align-self: end;
-	margin-top: ${space[2]}px;
-	margin-bottom: 6px;
-	right: ${veggieBurgerDiameter + space[3]}px;
-	${from.mobileMedium} {
-		right: 0;
-	}
-	${from.mobileLandscape} {
-		margin-bottom: ${space[2]}px;
-	}
-
-	svg {
-		width: 152px;
-		${from.mobileMedium} {
-			width: 207px;
-		}
-		${from.tablet} {
-			width: 252px;
-		}
-		${from.desktop} {
-			width: 291px;
-		}
-	}
-`;
-
-const logoStylesFromLeftCol = css`
-	svg {
-		${from.leftCol} {
-			width: 324px;
-		}
-	}
-`;
-
-const slimNavLogoOverrides = css`
-	position: relative;
-	margin-top: ${space[2]}px;
-	margin-bottom: ${space[2]}px;
-	right: ${veggieBurgerDiameter + 6}px;
-
-	${from.mobile} {
-		right: ${veggieBurgerDiameter + 6}px;
-	}
-	${from.mobileMedium} {
-		right: ${veggieBurgerDiameter + 6}px;
-	}
-	${from.mobileLandscape} {
-		margin-top: ${space[1]}px;
-		margin-bottom: ${space[2]}px;
-	}
-	${from.tablet} {
-		right: ${space[8]}px;
-	}
-	${from.desktop} {
-		right: ${space[10]}px;
-	}
-	svg {
-		width: 130px;
-		${from.mobile} {
-			width: 130px;
-		}
-		${from.tablet} {
-			width: 86px;
-		}
-		${from.desktop} {
-			width: 130px;
-		}
-		${from.leftCol} {
-			width: 140px;
-		}
-		${from.wide} {
-			width: 145px;
-		}
 	}
 `;
 
@@ -502,15 +419,7 @@ export const Titlepiece = ({
 			</div>
 
 			{/* Guardian logo */}
-			<div
-				css={[
-					logoStyles,
-					!hasPageSkin && logoStylesFromLeftCol,
-					showSlimNav && slimNavLogoOverrides,
-				]}
-			>
-				<Logo />
-			</div>
+			<Logo hasPageSkin={!!hasPageSkin} showSlimNav={!!showSlimNav} />
 
 			{/** Expanded menu checkbox */}
 			<input
