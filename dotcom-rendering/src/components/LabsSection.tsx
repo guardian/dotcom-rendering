@@ -75,6 +75,9 @@ type Props = {
 
 const leftColumnBackground = css`
 	background-color: ${sourcePalette.labs[400]};
+	@media (prefers-color-scheme: dark) {
+		background-color: ${sourcePalette.labs[200]};
+	}
 `;
 
 const contentBackground = css`
@@ -170,6 +173,9 @@ const contentSidePaddingFromLeftCol = css`
 const linkStyles = css`
 	text-decoration: none;
 	color: ${sourcePalette.neutral[100]};
+	@media (prefers-color-scheme: dark) {
+		color: ${sourcePalette.neutral[97]};
+	}
 
 	:hover {
 		text-decoration: underline;
@@ -180,6 +186,9 @@ const headerStyles = css`
 	${textSansBold20};
 	color: ${sourcePalette.neutral[100]};
 	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
+	@media (prefers-color-scheme: dark) {
+		color: ${sourcePalette.neutral[97]};
+	}
 `;
 
 const containerMargins = css`
@@ -200,6 +209,9 @@ const paidForByStyles = css`
 	color: ${sourcePalette.neutral[46]};
 	margin-top: ${space[3]}px;
 	margin-bottom: ${space[1]}px;
+	@media (prefers-color-scheme: dark) {
+		color: ${sourcePalette.neutral[38]};
+	}
 `;
 
 const GuardianLabsTitle = ({ title, url }: { title: string; url?: string }) => {
