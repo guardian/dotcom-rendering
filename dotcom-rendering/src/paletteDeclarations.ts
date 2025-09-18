@@ -7173,6 +7173,22 @@ const paletteColours = {
 		light: liveKickerTextLight,
 		dark: liveKickerTextDark,
 	},
+	'--labs-legacy-article-section-title': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[97],
+	},
+	'--labs-legacy-section-background': {
+		light: () => sourcePalette.neutral[93],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--labs-legacy-section-background-left': {
+		light: () => sourcePalette.labs[400],
+		dark: () => sourcePalette.labs[200],
+	},
+	'--labs-legacy-treat-text': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[38],
+	},
 	'--last-updated-text': {
 		light: lastUpdatedTextLight,
 		dark: lastUpdatedTextDark,
