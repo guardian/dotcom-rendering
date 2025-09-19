@@ -471,7 +471,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					data-link-name="most-popular"
 					data-component="most-popular"
 					backgroundColour={palette('--article-section-background')}
-					borderColour={palette('--article-border')}
+					borderColour={palette('--article-section-border')}
 					fontColour={palette('--article-section-title')}
 				>
 					<MostViewedFooterLayout renderAds={isWeb && renderAds}>
