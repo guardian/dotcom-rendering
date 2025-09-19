@@ -6,6 +6,13 @@ describe('Enhance Cards', () => {
 		const videoReplace = true;
 		const assets: FEMediaAsset[] = [
 			{
+				id: 'https://guim-example.co.uk/atomID-1.vtt',
+				version: 1,
+				platform: 'Url',
+				mimeType: 'text/vtt',
+				assetType: 'Subtitles',
+			},
+			{
 				id: 'https://guim-example.co.uk/atomID-1.mp4',
 				version: 1,
 				platform: 'Url',

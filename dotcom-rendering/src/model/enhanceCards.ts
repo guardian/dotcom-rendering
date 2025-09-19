@@ -200,9 +200,9 @@ export const getActiveMediaAtom = (
 	cardTrailImage?: string,
 ): MainMedia | undefined => {
 	if (mediaAtom) {
-		const assets = mediaAtom.assets.filter(
-			({ version }) => version === mediaAtom.activeVersion,
-		);
+		const assets = mediaAtom.assets
+			.filter((_) => _.assetType === 'Video')
+			.filter(({ version }) => version === mediaAtom.activeVersion);
 		if (!assets.length) return undefined;
 
 		const image = decideMediaAtomImage(
