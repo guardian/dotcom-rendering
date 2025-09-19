@@ -38,6 +38,9 @@ type InteractiveAtomType = {
 	title: string;
 };
 
+const onTouchStart = () => getInteractionClient().disableArticleSwipe(true);
+const onTouchEnd = () => getInteractionClient().disableArticleSwipe(false);
+
 export const InteractiveAtom = ({
 	id,
 	elementHtml,
@@ -50,35 +53,32 @@ export const InteractiveAtom = ({
 
 	const isApps = renderingTarget === 'Apps';
 
-	const onTouchStart = () => getInteractionClient().disableArticleSwipe(true);
-	const onTouchEnd = () => getInteractionClient().disableArticleSwipe(false);
-
 	return (
-		<div
-			css={[containerStyles, !!isMainMedia && fullHeightStyles]}
-			data-atom-id={id}
-			data-atom-type="interactive"
-			onTouchStart={isApps ? onTouchStart : undefined}
-			onTouchEnd={isApps ? onTouchEnd : undefined}
+		<Island
+			priority="feature"
+			defer={{ until: 'visible', rootMargin: '200px' }}
 		>
-			<Island
-				priority="feature"
-				defer={{ until: 'visible', rootMargin: '200px' }}
+			<div
+				css={[containerStyles, !!isMainMedia && fullHeightStyles]}
+				data-atom-id={id}
+				data-atom-type="interactive"
+				onTouchStart={isApps ? onTouchStart : undefined}
+				onTouchEnd={isApps ? onTouchEnd : undefined}
 			>
 				<InteractiveAtomMessenger id={id} />
-			</Island>
-			<iframe
-				title={title}
-				id={id}
-				css={iframe}
-				srcDoc={unifyPageContent({
-					elementJs,
-					elementCss,
-					elementHtml,
-					renderingTarget,
-				})}
-				frameBorder="0"
-			/>
-		</div>
+				<iframe
+					title={title}
+					id={id}
+					css={iframe}
+					srcDoc={unifyPageContent({
+						elementJs,
+						elementCss,
+						elementHtml,
+						renderingTarget,
+					})}
+					frameBorder="0"
+				/>
+			</div>
+		</Island>
 	);
 };
