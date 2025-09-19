@@ -11,7 +11,6 @@ import libDebounce from 'lodash.debounce';
 import { useRef, useState } from 'react';
 import { interactiveLegacyFigureClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
-import { getInteractionClient } from '../lib/bridgetApi';
 import { useOnce } from '../lib/useOnce';
 import { palette as themePalette } from '../palette';
 import type { RoleType } from '../types/content';
@@ -350,12 +349,6 @@ export const InteractiveBlockComponent = ({
 			? true
 			: false;
 
-	const isApps = renderingTarget === 'Apps';
-
-	const onTouchStart = () => getInteractionClient().disableArticleSwipe(true);
-
-	const onTouchEnd = () => getInteractionClient().disableArticleSwipe(false);
-
 	useOnce(() => {
 		// We've brought the behavior from boot.js into this file to avoid loading 2 extra scripts
 
@@ -462,8 +455,6 @@ export const InteractiveBlockComponent = ({
 				data-alt={alt} // for compatibility with custom boot scripts
 				data-testid={`interactive-element-${encodeURI(alt ?? '')}`}
 				data-spacefinder-role={role}
-				onTouchStart={isApps ? onTouchStart : undefined}
-				onTouchEnd={isApps ? onTouchEnd : undefined}
 			>
 				{!loaded && (
 					<>
