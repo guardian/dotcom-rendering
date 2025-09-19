@@ -134,7 +134,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
-	const showLabsRedesign = !!front.config.switches.guardianLabsRedesign;
+	const showLabsRedesign = true; // !!front.config.switches.guardianLabsRedesign;
 
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
