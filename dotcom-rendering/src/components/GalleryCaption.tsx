@@ -21,7 +21,6 @@ const styles = css`
 	color: ${palette('--caption-text')};
 	${textSans12}
 	padding-bottom: ${space[6]}px;
-	padding-top: ${space[5]}px;
 
 	${between.tablet.and.desktop} {
 		padding-left: ${space[5]}px;
