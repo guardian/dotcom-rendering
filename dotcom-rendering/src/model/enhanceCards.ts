@@ -14,6 +14,8 @@ import type { EditionId } from '../lib/edition';
 import type { Group } from '../lib/getDataLinkName';
 import { getDataLinkNameCard } from '../lib/getDataLinkName';
 import { getLargestImageSize } from '../lib/image';
+import type { SupportedVideoFileType } from '../lib/video';
+import { supportedVideoFileTypes } from '../lib/video';
 import type { Image } from '../types/content';
 import type {
 	DCRFrontCard,
@@ -198,11 +200,10 @@ export const getActiveMediaAtom = (
 	cardTrailImage?: string,
 ): MainMedia | undefined => {
 	if (mediaAtom) {
-		const m3u8MimeType = 'application/vnd.apple.mpegurl';
-		const asset = mediaAtom.assets
-			// filter out m3u8 assets, as these are not yet supported by DCR
-			.filter((_) => _.mimeType !== m3u8MimeType)
-			.find(({ version }) => version === mediaAtom.activeVersion);
+		const assets = mediaAtom.assets.filter(
+			({ version }) => version === mediaAtom.activeVersion,
+		);
+		if (!assets.length) return undefined;
 
 		const image = decideMediaAtomImage(
 			videoReplace,
@@ -210,11 +211,33 @@ export const getActiveMediaAtom = (
 			cardTrailImage,
 		);
 
-		if (asset?.platform === 'Url') {
+		/**
+		 * Each version of a media atom will contain assets for self-hosted OR YouTube, but not both.
+		 * Therefore, we check the platform of the first asset and assume the rest are the same.
+		 */
+		if (assets[0]?.platform === 'Url') {
+			/**
+			 * Take one source for each supported video file type.
+			 */
+			const sources = supportedVideoFileTypes.reduce(
+				(acc, type) => {
+					const source = assets.find(
+						({ mimeType }) => mimeType === type,
+					);
+					if (source) acc.push(source);
+					return acc;
+				},
+				[] as typeof assets,
+			);
+			if (!sources.length) return undefined;
+
 			return {
 				type: 'LoopVideo',
 				atomId: mediaAtom.id,
-				videoId: asset.id,
+				sources: sources.map((source) => ({
+					src: source.id,
+					mimeType: source.mimeType as SupportedVideoFileType,
+				})),
 				duration: mediaAtom.duration ?? 0,
 				// Size fixed to a 5:4 ratio
 				width: 500,
@@ -223,11 +246,14 @@ export const getActiveMediaAtom = (
 			};
 		}
 
-		if (asset?.platform === 'Youtube') {
+		/**
+		 * There should only be one asset for Youtube atoms.
+		 */
+		if (assets[0]?.platform === 'Youtube') {
 			return {
 				type: 'Video',
 				id: mediaAtom.id,
-				videoId: asset.id,
+				videoId: assets[0].id,
 				duration: mediaAtom.duration ?? 0,
 				title: mediaAtom.title,
 				// Size fixed to a 5:3 ratio
