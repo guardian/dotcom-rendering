@@ -4,7 +4,6 @@ import express from 'express';
 import responseTime from 'response-time';
 import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
 import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslettersPage.web';
-import { handleAMPArticle } from './handler.article.amp';
 import {
 	handleAppsArticle,
 	handleAppsBlocks,
@@ -59,9 +58,7 @@ export const prodServer = (): void => {
 	}
 
 	app.post('/Article', logRenderTime, handleArticle);
-	app.post('/AMPArticle', logRenderTime, handleAMPArticle);
 	app.post('/Interactive', logRenderTime, handleInteractive);
-	app.post('/AMPInteractive', logRenderTime, handleAMPArticle);
 	app.post('/Blocks', logRenderTime, handleBlocks);
 	app.post('/Front', logRenderTime, handleFront);
 	app.post('/TagPage', logRenderTime, handleTagPage);

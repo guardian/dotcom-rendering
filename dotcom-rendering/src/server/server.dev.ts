@@ -2,7 +2,6 @@ import { type Handler, Router } from 'express';
 import { pages } from '../devServer/routers/pages';
 import { targets } from '../devServer/routers/targets';
 import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslettersPage.web';
-import { handleAMPArticle } from './handler.article.amp';
 import {
 	handleAppsArticle,
 	handleAppsBlocks,
@@ -91,9 +90,7 @@ const renderer = Router();
 // URL if req.params.url is present
 renderer.use(getContentFromURLMiddleware);
 renderer.get('/Article/*url', handleArticle);
-renderer.get('/AMPArticle/*url', handleAMPArticle);
 renderer.get('/Interactive/*url', handleInteractive);
-renderer.get('/AMPInteractive/*url', handleAMPArticle);
 renderer.get('/Blocks/*url', handleBlocks);
 renderer.get('/Front/*url', handleFront);
 renderer.get('/TagPage/*url', handleTagPage);
@@ -108,9 +105,7 @@ renderer.get('/CricketMatchPage/*url', handleCricketMatchPage);
 renderer.get('/FootballMatchSummaryPage/*url', handleFootballMatchPage);
 // POST routes for running frontend locally
 renderer.post('/Article', handleArticle);
-renderer.post('/AMPArticle', handleAMPArticle);
 renderer.post('/Interactive', handleInteractive);
-renderer.post('/AMPInteractive', handleAMPArticle);
 renderer.post('/Blocks', handleBlocks);
 renderer.post('/Front', handleFront);
 renderer.post('/TagPage', handleTagPage);
