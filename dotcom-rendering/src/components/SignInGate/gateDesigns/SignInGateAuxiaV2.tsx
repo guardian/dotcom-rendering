@@ -47,8 +47,16 @@ export const SignInGateAuxiaV2 = ({
 		const topBannerAd = document.querySelector<HTMLElement>(
 			'.top-banner-ad-container',
 		);
-		const offsetHeight: number = topBannerAd ? topBannerAd.offsetHeight : 0;
-		setOverlayOffset(offsetHeight);
+
+		if (!topBannerAd) {
+			setOverlayOffset(0);
+			return;
+		}
+
+		const rect = topBannerAd.getBoundingClientRect();
+		const touchesTop = rect.top <= 0 && rect.bottom > 0;
+		const offset = touchesTop ? Math.round(rect.bottom) : 0;
+		setOverlayOffset(offset);
 	};
 
 	const {

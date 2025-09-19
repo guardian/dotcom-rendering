@@ -469,7 +469,7 @@ const ShowSignInGateAuxia = ({
 	return (
 		<div ref={setNode}>
 			{gateVersion === 'v2' ? (
-				<SignInGateAuxiaV2 {...commonProps} />
+				hasBeenSeen && <SignInGateAuxiaV2 {...commonProps} />
 			) : (
 				<SignInGateAuxiaV1 {...commonProps} />
 			)}
