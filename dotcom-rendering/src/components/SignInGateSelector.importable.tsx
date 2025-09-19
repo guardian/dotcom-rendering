@@ -1,6 +1,7 @@
 import { getCookie, isUndefined, storage } from '@guardian/libs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { constructQuery } from '../lib/querystring';
+import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
 import { usePageViewId } from '../lib/usePageViewId';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -398,42 +399,58 @@ const ShowSignInGateAuxia = ({
 	// Get the gate version configuration
 	const gateVersion = getAuxiaGateVersion(signInGateVersion, userTreatment);
 
-	useOnce(() => {
-		void auxiaLogTreatmentInteraction(
-			contributionsServiceUrl,
-			userTreatment,
-			'VIEWED',
-			'',
-			browserId,
-		).catch((error) => {
-			const errorReport = new Error(
-				`Failed to log treatment interaction`,
+	const [hasBeenSeen, setNode] = useIsInView({
+		debounce: true,
+		threshold: 0,
+	});
+
+	useEffect(() => {
+		if (hasBeenSeen) {
+			void auxiaLogTreatmentInteraction(
+				contributionsServiceUrl,
+				userTreatment,
+				'VIEWED',
+				'',
+				browserId,
+			).catch((error) => {
+				const errorReport = new Error(
+					`Failed to log treatment interaction`,
+					{
+						cause: error,
+					},
+				);
+				window.guardian.modules.sentry.reportError(
+					errorReport,
+					'sign-in-gate',
+				);
+			});
+
+			void submitComponentEventTracking(
 				{
-					cause: error,
+					component: {
+						componentType: 'SIGN_IN_GATE',
+						id: `${treatmentId}_${gateVersion}`, // Include version in tracking
+					},
+					action: 'VIEW',
+					abTest: buildAbTestTrackingAuxiaVariant(treatmentId),
 				},
+				renderingTarget,
 			);
-			window.guardian.modules.sentry.reportError(
-				errorReport,
-				'sign-in-gate',
-			);
-		});
 
-		void submitComponentEventTracking(
-			{
-				component: {
-					componentType: 'SIGN_IN_GATE',
-					id: `${treatmentId}_${gateVersion}`, // Include version in tracking
-				},
-				action: 'VIEW',
-				abTest: buildAbTestTrackingAuxiaVariant(treatmentId),
-			},
-			renderingTarget,
-		);
-
-		// Once the gate is being displayed we need to update
-		// the tracking of the number of times the gate has been displayed
-		incrementGateDisplayCount();
-	}, [componentId, gateVersion]);
+			// Once the gate is being displayed we need to update
+			// the tracking of the number of times the gate has been displayed
+			incrementGateDisplayCount();
+		}
+	}, [
+		componentId,
+		hasBeenSeen,
+		browserId,
+		contributionsServiceUrl,
+		renderingTarget,
+		treatmentId,
+		userTreatment,
+		gateVersion,
+	]);
 
 	const commonProps = {
 		guUrl: host,
@@ -450,12 +467,12 @@ const ShowSignInGateAuxia = ({
 	};
 
 	return (
-		<>
+		<div ref={setNode}>
 			{gateVersion === 'v2' ? (
 				<SignInGateAuxiaV2 {...commonProps} />
 			) : (
 				<SignInGateAuxiaV1 {...commonProps} />
 			)}
-		</>
+		</div>
 	);
 };
