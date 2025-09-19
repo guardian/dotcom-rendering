@@ -13,7 +13,7 @@ import {
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
 import { Details } from './Details';
-import { LabsLogo } from './GuardianLabs/LabsLogo';
+import { LabsLogo } from './LabsLogo';
 
 type Props = {
 	title: React.ReactNode;
