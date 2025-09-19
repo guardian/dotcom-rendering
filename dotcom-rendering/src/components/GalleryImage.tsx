@@ -128,6 +128,7 @@ export const GalleryImage = ({
 				format={format}
 				pageId={pageId}
 				webTitle={webTitle}
+				position={image.position}
 			/>
 		</figure>
 	);

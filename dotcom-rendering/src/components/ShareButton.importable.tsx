@@ -16,7 +16,16 @@ import { palette as themePalette } from '../palette';
 type Props = {
 	size?: Size;
 	pageId: string;
-	blockId?: string;
+	/**
+	 * Optional hash fragment (without the leading '#'). Example: 'block-abc123' | 'img-5'.
+	 * If provided it will be appended as a URL fragment (#hash)
+	 */
+	hash?: string;
+	/**
+	 * Optional extra query parameters to append to the share URL. Values are stringified.
+	 * Example for live blogs: { page: `with:block-${blockId}` }
+	 */
+	queryParams?: Record<string, string | number | boolean>;
 	webTitle: string;
 	format: ArticleFormat;
 	context: Context;
@@ -86,15 +95,25 @@ const liveBlogMobileMeta = (isCopied: boolean) => css`
 	}
 `;
 
-const getUrl = ({ pageId, blockId }: { pageId: string; blockId?: string }) => {
+const getUrl = ({
+	pageId,
+	hash,
+	queryParams = {},
+}: {
+	pageId: string;
+	hash?: string;
+	queryParams?: Record<string, string | number | boolean>;
+}) => {
 	const searchParams = new URLSearchParams({});
 	searchParams.append('CMP', 'share_btn_url');
-	if (blockId) searchParams.append('page', `with:block-${blockId}`);
+	for (const [key, value] of Object.entries(queryParams)) {
+		searchParams.append(key, String(value));
+	}
 
-	const blockHash = blockId ? `#block-${blockId}` : '';
+	const fragment = hash ? `#${hash.replace(/^#/, '')}` : '';
 	const paramsString = searchParams.toString();
 	return new URL(
-		`${pageId}${paramsString ? '?' + paramsString : ''}${blockHash}`,
+		`${pageId}${paramsString ? '?' + paramsString : ''}${fragment}`,
 		'https://www.theguardian.com/',
 	).href;
 };
@@ -180,7 +199,8 @@ export const EmailLink = ({
 export const ShareButton = ({
 	size = 'small',
 	pageId,
-	blockId,
+	hash,
+	queryParams,
 	webTitle,
 	format,
 	context,
@@ -201,10 +221,11 @@ export const ShareButton = ({
 			text: webTitle,
 			url: getUrl({
 				pageId,
-				blockId,
+				hash,
+				queryParams,
 			}),
 		}),
-		[webTitle, pageId, blockId],
+		[webTitle, pageId, hash, queryParams],
 	);
 
 	useEffect(() => {
@@ -250,7 +271,8 @@ export const ShareButton = ({
 							.writeText(
 								getUrl({
 									pageId,
-									blockId,
+									hash,
+									queryParams,
 								}),
 							)
 							.then(() => {
@@ -268,7 +290,8 @@ export const ShareButton = ({
 				<EmailLink
 					href={`mailto:?subject=${webTitle}&body=${getUrl({
 						pageId,
-						blockId,
+						hash,
+						queryParams,
 					})}`}
 					size={size}
 					isLiveBlogMeta={isLiveBlogMeta}
