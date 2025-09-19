@@ -75,17 +75,14 @@ export const GalleryImage = ({
 		return null;
 	}
 
+	const boundedImageStyles = css`
+		${galleryBodyImageStyles};
+		max-width: calc(${width / height} * 96vh);
+	`;
+
 	return (
 		<figure css={styles}>
-			<div
-				css={galleryBodyImageStyles}
-				/**
-				 * This ensures that the image height never goes above 96vh.
-				 */
-				style={{
-					maxWidth: `calc(${width / height} * 96vh)`,
-				}}
-			>
+			<div css={boundedImageStyles}>
 				{renderingTarget === 'Apps' ? (
 					<Island priority="critical">
 						<AppsLightboxImage
