@@ -8,7 +8,10 @@ import type { TagType } from '../../types/tag';
 import { Island } from '../Island';
 import { pageIdIsAllowedForGating } from '../SignInGate/displayRules';
 import type { AuxiaGateDisplayData } from '../SignInGate/types';
-import { SignInGateSelector } from '../SignInGateSelector.importable';
+import {
+	getAuxiaGateVersion,
+	SignInGateSelector,
+} from '../SignInGateSelector.importable';
 
 /**
  * SignInGatePortal - Portal wrapper for SignInGateSelector
@@ -57,7 +60,11 @@ export const SignInGatePortal = ({
 
 	useEffect(() => {
 		const element = document.getElementById('sign-in-gate');
-		setTargetElement(element);
+		const gateVersion = getAuxiaGateVersion(
+			undefined,
+			auxiaGateDisplayData?.auxiaData.userTreatment,
+		);
+		setTargetElement(gateVersion === 'v2' ? document.body : element);
 
 		// Check all the conditions that would prevent the gate from showing
 		const shouldShow = !!(
@@ -88,11 +95,14 @@ export const SignInGatePortal = ({
 		isPaidContent,
 		isSignedOut,
 		handleGateDismissed,
+		auxiaGateDisplayData,
 	]);
 
 	if (!(shouldShowGate && targetElement)) {
 		return null;
 	}
+
+	console.log({ targetElement });
 
 	return createPortal(
 		<Island priority="feature" defer={{ until: 'visible' }}>

@@ -243,7 +243,7 @@ const buildAbTestTrackingAuxiaVariant = (
 	};
 };
 
-const getAuxiaGateVersion = (
+export const getAuxiaGateVersion = (
 	signInGateVersion?: AuxiaGateVersion,
 	userTreatment?: AuxiaAPIResponseDataUserTreatment,
 ): AuxiaGateVersion => {
@@ -399,10 +399,21 @@ const ShowSignInGateAuxia = ({
 	// Get the gate version configuration
 	const gateVersion = getAuxiaGateVersion(signInGateVersion, userTreatment);
 
+	const [signInGatePlaceholder, setSignInGatePlaceholder] =
+		useState<HTMLElement | null>(null);
+
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
 		threshold: 0,
 	});
+
+	useEffect(() => {
+		const signInGate = document.getElementById('sign-in-gate');
+		if (signInGate) {
+			setSignInGatePlaceholder(signInGate);
+			setNode(signInGate);
+		}
+	}, [setNode, setSignInGatePlaceholder]);
 
 	useEffect(() => {
 		if (hasBeenSeen) {
@@ -467,12 +478,18 @@ const ShowSignInGateAuxia = ({
 	};
 
 	return (
-		<div ref={setNode}>
+		<>
+			<div
+				ref={signInGatePlaceholder ? undefined : setNode}
+				data-testid="sign-in-gate-sentinel"
+				aria-hidden="true"
+				style={{ height: 1, marginTop: -1 }}
+			/>
 			{gateVersion === 'v2' ? (
 				hasBeenSeen && <SignInGateAuxiaV2 {...commonProps} />
 			) : (
 				<SignInGateAuxiaV1 {...commonProps} />
 			)}
-		</div>
+		</>
 	);
 };

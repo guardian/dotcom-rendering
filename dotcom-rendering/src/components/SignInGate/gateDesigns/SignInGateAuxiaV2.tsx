@@ -13,7 +13,7 @@ import {
 	textSansBold15,
 } from '@guardian/source/foundations';
 import { SvgCross, SvgGuardianLogo } from '@guardian/source/react-components';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { AuthProviderButtons } from '../../AuthProviderButtons/AuthProviderButtons';
 import { useConfig } from '../../ConfigContext';
 import { ExternalLink } from '../../ExternalLink/ExternalLink';
@@ -41,23 +41,6 @@ export const SignInGateAuxiaV2 = ({
 	logTreatmentInteractionCall,
 }: SignInGatePropsAuxia) => {
 	const { renderingTarget } = useConfig();
-	const [overlayOffset, setOverlayOffset] = useState<number>(0);
-
-	const handleOverlayOffsetCalculation = () => {
-		const topBannerAd = document.querySelector<HTMLElement>(
-			'.top-banner-ad-container',
-		);
-
-		if (!topBannerAd) {
-			setOverlayOffset(0);
-			return;
-		}
-
-		const rect = topBannerAd.getBoundingClientRect();
-		const touchesTop = rect.top <= 0 && rect.bottom > 0;
-		const offset = touchesTop ? Math.round(rect.bottom) : 0;
-		setOverlayOffset(offset);
-	};
 
 	const {
 		title,
@@ -81,48 +64,6 @@ export const SignInGateAuxiaV2 = ({
 
 		return () => {
 			document.body.style.overflow = '';
-		};
-	}, []);
-
-	useEffect(() => {
-		let animationFrameId: number | null = null;
-		const schedule = () => {
-			if (animationFrameId !== null) return;
-			animationFrameId = requestAnimationFrame(() => {
-				animationFrameId = null;
-				handleOverlayOffsetCalculation();
-			});
-		};
-
-		window.addEventListener('scroll', schedule, { passive: true });
-		window.addEventListener('resize', schedule);
-
-		const mutationObserver = new MutationObserver(schedule);
-		mutationObserver.observe(document.body, {
-			childList: true,
-			subtree: true,
-		});
-
-		const topBannerAd = document.querySelector<HTMLElement>(
-			'.top-banner-ad-container',
-		);
-		const resizeObserver = topBannerAd
-			? new ResizeObserver(schedule)
-			: null;
-		if (topBannerAd && resizeObserver) {
-			resizeObserver.observe(topBannerAd);
-		}
-
-		handleOverlayOffsetCalculation(); // Initial calculation
-
-		return () => {
-			if (animationFrameId !== null) {
-				cancelAnimationFrame(animationFrameId);
-			}
-			window.removeEventListener('resize', schedule);
-			window.removeEventListener('scroll', schedule);
-			mutationObserver.disconnect();
-			resizeObserver?.disconnect();
 		};
 	}, []);
 
@@ -178,7 +119,7 @@ export const SignInGateAuxiaV2 = ({
 	return (
 		// eslint-disable-next-line jsx-a11y/no-static-element-interactions -- div needs click and keyup handlers for modal backdrop dismiss functionality
 		<div
-			css={modalOverlay(overlayOffset)}
+			css={modalOverlay}
 			className={dismissStatusLabel}
 			onClick={handleBackdropClick}
 			onKeyUp={handleBackdropClick}
@@ -346,7 +287,7 @@ export const SignInGateAuxiaV2 = ({
 };
 
 // --- Modal Styling ---
-const modalOverlay = (overlayOffset: number) => css`
+const modalOverlay = css`
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -356,9 +297,8 @@ const modalOverlay = (overlayOffset: number) => css`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	z-index: 1000;
-	padding: ${overlayOffset + space[4]}px ${space[4]}px ${space[4]}px
-		${space[4]}px;
+	z-index: 2000;
+	padding: ${space[4]}px;
 `;
 
 const modalContainer = css`
@@ -496,6 +436,7 @@ const headerImage = css`
 		align-self: center;
 		flex: 1 1 auto;
 		min-height: 0;
+		max-width: 276px;
 		width: 100%;
 		height: 100%;
 		object-fit: contain;
