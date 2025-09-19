@@ -40,7 +40,7 @@ const dividerStylesUntilLeftCol = css`
 	position: relative;
 	${until.leftCol} {
 		margin-right: ${space[4]}px;
-		:after {
+		::after {
 			content: '';
 			position: absolute;
 			top: 0;
