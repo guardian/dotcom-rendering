@@ -1,7 +1,6 @@
 import { isString } from '@guardian/libs';
 import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
-import { isAmpSupported } from '../components/Elements.amp';
 import { LiveBlogRenderer } from '../components/LiveBlogRenderer';
 import {
 	ArticleDesign,
@@ -25,7 +24,6 @@ import type { Article } from '../types/article';
 import type { Config } from '../types/configContext';
 import type { FEElement } from '../types/content';
 import type { FEBlocksRequest } from '../types/frontend';
-import type { TagType } from '../types/tag';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 interface Props {
@@ -42,7 +40,7 @@ const decideTitle = ({ theme, frontendData }: Article): string => {
 export const renderHtml = ({
 	article,
 }: Props): { html: string; prefetchScripts: string[] } => {
-	const { design, display, theme, frontendData } = article;
+	const { design, frontendData } = article;
 	const NAV = {
 		...extractNAV(frontendData.nav),
 		selectedPillar: getCurrentPillar(frontendData),
@@ -143,40 +141,6 @@ export const renderHtml = ({
 		unknownConfig: frontendData.config,
 	});
 
-	const format = {
-		design,
-		display,
-		theme,
-	};
-
-	const getAmpLink = (tags: TagType[]) => {
-		if (
-			design === ArticleDesign.Interactive ||
-			design === ArticleDesign.FullPageInteractive
-		) {
-			return undefined;
-		}
-
-		if (
-			!isAmpSupported({
-				format,
-				tags,
-				elements: frontendData.blocks.flatMap(
-					(block) => block.elements,
-				),
-				switches: frontendData.config.switches,
-				main: frontendData.main,
-			})
-		) {
-			return undefined;
-		}
-
-		return `https://amp.theguardian.com/${frontendData.pageId}`;
-	};
-
-	// Only include AMP link for interactives which have the 'ampinteractive' tag
-	const ampLink = getAmpLink(frontendData.tags);
-
 	const { openGraphData, twitterData } = frontendData;
 	const section = frontendData.config.section;
 	const initTwitter = `
@@ -210,7 +174,6 @@ window.twttr = (function(d, s, id) {
 		title,
 		description: frontendData.trailText,
 		guardian,
-		ampLink,
 		openGraphData,
 		twitterData,
 		section,

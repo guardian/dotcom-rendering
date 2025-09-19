@@ -13,14 +13,3 @@ This is represented in frontend by [InstagramBlockElement](https://github.com/gu
 ## CAPI HTML Output
 
 Absolute tonnes of it wow.
-
-## AMP Cleaned HTML
-
-An amp tag [`<amp-instagram>`](https://www.ampproject.org/docs/reference/components/amp-instagram) exists to represent this content.
-
-It requires the following data:
-
-`data-shortcode` | the URL slug for the embed
-`data-captioned` | whether a caption is displayed
-`width` | the width of the image (not the whole embed)
-`height` | the height of the image (not the whole embed)
