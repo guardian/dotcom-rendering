@@ -322,6 +322,7 @@ const sectionHeadlineFromLeftCol = (borderColour: string) => css`
 			display: block;
 			width: 1px;
 			top: 0;
+			height: 1.875rem;
 			right: -10px;
 			position: absolute;
 			background-color: ${borderColour};
@@ -479,6 +480,16 @@ const secondaryLevelTopBorder = css`
 const carouselNavigationPlaceholder = css`
 	.hidden & {
 		display: none;
+	}
+`;
+
+const labsSectionStyles = css`
+	grid-row: headline;
+	grid-column: title;
+	margin-top: ${space[2]}px;
+	${from.leftCol} {
+		grid-row: content;
+		grid-column: title;
 	}
 `;
 
@@ -668,17 +679,7 @@ export const FrontSection = ({
 				/>
 
 				{isLabs && showLabsRedesign ? (
-					<div
-						css={css`
-							grid-row: headline;
-							grid-column: title;
-							margin-top: ${space[2]}px;
-							${from.leftCol} {
-								grid-row: content;
-								grid-column: title;
-							}
-						`}
-					>
+					<div css={labsSectionStyles}>
 						<LabsSectionHeader title={title} />
 					</div>
 				) : (
