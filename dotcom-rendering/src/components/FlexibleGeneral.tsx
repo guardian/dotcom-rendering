@@ -33,6 +33,7 @@ type Props = {
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
 	isInHideTrailsAbTest?: boolean;
+	isInAllBoostsTest?: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -43,7 +44,10 @@ type GroupedRow = {
 };
 type GroupedCards = GroupedRow[];
 
-export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
+export const decideCardPositions = (
+	cards: DCRFrontCard[],
+	isInAllBoostsTest: boolean,
+): GroupedCards => {
 	const createNewRow = (
 		layout: RowLayout,
 		card: DCRFrontCard,
@@ -61,7 +65,8 @@ export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 		// Early return if the card is boosted or immersive since it takes up a whole row
 		if (
 			card.isImmersive ||
-			(card.boostLevel && card.boostLevel !== 'default')
+			!!(card.boostLevel && card.boostLevel !== 'default') ||
+			isInAllBoostsTest
 		) {
 			return [...acc, createNewRow('oneCardFullWidth', card)];
 		}
@@ -595,6 +600,7 @@ export const FlexibleGeneral = ({
 	imageLoading,
 	aspectRatio,
 	containerLevel = 'Primary',
+	isInAllBoostsTest = false,
 	collectionId,
 	isInHideTrailsAbTest,
 }: Props) => {
@@ -610,7 +616,7 @@ export const FlexibleGeneral = ({
 			uniqueId: `collection-${collectionId}-standard-${i}`,
 		}));
 
-	const groupedCards = decideCardPositions(cards);
+	const groupedCards = decideCardPositions(cards, isInAllBoostsTest);
 
 	return (
 		<>
