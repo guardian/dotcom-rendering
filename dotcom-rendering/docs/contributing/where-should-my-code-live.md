@@ -22,7 +22,7 @@ In DCR, we use file suffixes to help provide some context & information around f
 
 **Rendering Target**
 
-DCR supports rendering for different targets - web, apps & amp.
+DCR supports rendering for different targets - web & apps.
 To mark code which is only to be used for specific rendering target, this should be added to the suffix of the file, e.g `MyComponent.apps.tsx`, `MyLib.amp.ts` or `MyLayout.web.tsx`.
 
 These files all still live in the directories, and the suffixes are used to determine which target that code is for.
