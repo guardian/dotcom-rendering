@@ -10,7 +10,7 @@ import { palette } from '../palette';
 import type { TrailTabType, TrailType } from '../types/trails';
 import { MostViewedFooterItem } from './MostViewedFooterItem';
 
-const thinGreySolid = `1px solid ${palette('--article-border')}`;
+const thinGreySolid = `1px solid ${palette('--article-section-border')}`;
 
 const hidePanel = css`
 	display: none;
@@ -85,7 +85,7 @@ const gridContainer = css`
 
 	/* We set left border on the grid container, and then right border on
     the gridItems to prevent borders doubling up */
-	border-left: 1px solid ${palette('--article-border')};
+	border-left: 1px solid ${palette('--article-section-border')};
 `;
 
 type Props = {

@@ -15,10 +15,10 @@ import { LinkHeadline } from './LinkHeadline';
 const gridItem = css`
 	position: relative;
 
-	border-top: 1px solid ${palette('--article-border')};
+	border-top: 1px solid ${palette('--article-section-border')};
 
 	/* The left border is set on the container */
-	border-right: 1px solid ${palette('--article-border')};
+	border-right: 1px solid ${palette('--article-section-border')};
 	min-height: 52px;
 
 	&:hover {
