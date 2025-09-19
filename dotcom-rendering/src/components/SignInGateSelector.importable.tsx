@@ -247,17 +247,11 @@ const getAuxiaGateVersion = (
 	userTreatment?: AuxiaAPIResponseDataUserTreatment,
 ): AuxiaGateVersion => {
 	if (signInGateVersion) {
-		console.log('Using signInGateVersion from props:', signInGateVersion);
 		return signInGateVersion;
 	}
 
 	const params = new URLSearchParams(window.location.search);
 	const version = params.get('auxia_gate_version');
-
-	console.log('URL param auxia_gate_version:', {
-		version,
-		treatmentType: userTreatment?.treatmentType,
-	});
 
 	if (
 		String(version).toLowerCase().endsWith('v2') ||
@@ -265,13 +259,10 @@ const getAuxiaGateVersion = (
 			.toLowerCase()
 			.includes('v2')
 	) {
-		console.log('Using auxiaGateVersion from URL or userTreatment:', 'v2');
 		return 'v2';
 	}
 
-	// Default to v1
-	console.log('Defaulting auxiaGateVersion to:', 'v1');
-	return 'v1';
+	return 'v1'; // Default to v1
 };
 
 const SignInGateSelectorAuxia = ({
