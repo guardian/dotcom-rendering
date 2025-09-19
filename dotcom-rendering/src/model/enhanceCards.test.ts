@@ -6,16 +6,25 @@ describe('Enhance Cards', () => {
 		const videoReplace = true;
 		const assets: FEMediaAsset[] = [
 			{
+				id: 'https://guim-example.co.uk/atomID-1.vtt',
+				version: 1,
+				platform: 'Url',
+				mimeType: 'text/vtt',
+				assetType: 'Subtitles',
+			},
+			{
 				id: 'https://guim-example.co.uk/atomID-1.m3u8',
 				version: 1,
 				platform: 'Url',
 				mimeType: 'application/vnd.apple.mpegurl',
+				assetType: 'Video',
 			},
 			{
 				id: 'https://guim-example.co.uk/atomID-1.mp4',
 				version: 1,
 				platform: 'Url',
 				mimeType: 'video/mp4',
+				assetType: 'Video',
 			},
 		];
 		const mediaAtom: FEMediaAtom = {
