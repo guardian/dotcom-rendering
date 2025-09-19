@@ -22,7 +22,8 @@ describe('parseVideo', () => {
 	let mediaAtom: MediaAtom;
 	const atomId = 'atomId2';
 	const posterUrl = 'poster-url';
-	const assetId = 'asset-id';
+	const videoAssetId = 'video-asset-id';
+	const subtitlesAssetId = 'subtitles-asset-id';
 	const mediaAtomTitle = 'mediaTitle';
 	const assetVersion = new Int64(2);
 
@@ -44,8 +45,14 @@ describe('parseVideo', () => {
 		mediaAtom = {
 			assets: [
 				{
+					assetType: AssetType.SUBTITLES,
+					id: subtitlesAssetId,
+					version: assetVersion,
+					platform: Platform.YOUTUBE,
+				},
+				{
 					assetType: AssetType.VIDEO,
-					id: assetId,
+					id: videoAssetId,
 					version: assetVersion,
 					platform: Platform.YOUTUBE,
 				},
@@ -79,7 +86,7 @@ describe('parseVideo', () => {
 	test('returns video', () => {
 		const expected = Optional.some({
 			posterUrl: posterUrl,
-			videoId: assetId,
+			videoId: videoAssetId,
 			duration: undefined,
 			atomId: atomId,
 			title: mediaAtomTitle,
