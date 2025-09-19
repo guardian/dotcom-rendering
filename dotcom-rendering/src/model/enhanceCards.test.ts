@@ -10,12 +10,14 @@ describe('Enhance Cards', () => {
 				version: 1,
 				platform: 'Url',
 				mimeType: 'video/mp4',
+				assetType: 'Video',
 			},
 			{
 				id: 'https://guim-example.co.uk/atomID-1.m3u8',
 				version: 1,
 				platform: 'Url',
 				mimeType: 'application/x-mpegURL',
+				assetType: 'Video',
 			},
 		];
 		const mediaAtom: FEMediaAtom = {
