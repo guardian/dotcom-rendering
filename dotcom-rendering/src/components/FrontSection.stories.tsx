@@ -376,6 +376,30 @@ export const WithPaidContentForWholeFront = {
 	},
 };
 
+export const GuardianLabs = {
+	name: 'Guardian Labs',
+	args: {
+		title: 'Section',
+		collectionBranding: {
+			kind: 'paid-content',
+			isFrontBranding: false,
+			branding: {
+				brandingType: {
+					name: 'paid-content',
+				},
+				sponsorName: 'guardian.org',
+				logo,
+				aboutThisLink:
+					'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
+			},
+			isContainerBranding: true,
+			hasMultipleBranding: false,
+		},
+		isLabs: true,
+		showLabsRedesign: true,
+	},
+};
+
 export const PageSkinStory = {
 	name: 'with page skin',
 	args: {

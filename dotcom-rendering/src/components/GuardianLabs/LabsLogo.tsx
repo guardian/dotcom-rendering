@@ -30,7 +30,7 @@ export const LabsLogo = ({ size = 71 }: LabsLogoProps) => {
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 89 47"
-				fill="white"
+				fill={palette.neutral[100]}
 				css={labsLogoSvgText}
 			>
 				<title>Guardian Labs</title>
