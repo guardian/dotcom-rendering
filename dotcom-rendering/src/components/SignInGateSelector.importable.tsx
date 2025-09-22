@@ -477,6 +477,10 @@ const ShowSignInGateAuxia = ({
 		logTreatmentInteractionCall,
 	};
 
+	const shouldShowV2Gate: boolean =
+		typeof process !== 'undefined'
+			? !!process.env.STORYBOOK
+			: hasBeenSeen ?? false;
 	return (
 		<>
 			<div
@@ -486,7 +490,7 @@ const ShowSignInGateAuxia = ({
 				style={{ height: 1, marginTop: -1 }}
 			/>
 			{gateVersion === 'v2' ? (
-				hasBeenSeen && <SignInGateAuxiaV2 {...commonProps} />
+				shouldShowV2Gate && <SignInGateAuxiaV2 {...commonProps} />
 			) : (
 				<SignInGateAuxiaV1 {...commonProps} />
 			)}

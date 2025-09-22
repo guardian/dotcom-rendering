@@ -264,27 +264,25 @@ signInGateSelectorStoryNoTreatment.storyName =
 
 export const auxiaV2DismissibleModal = () => {
 	return (
-		<div id="sign-in-gate">
-			<Section fullWidth={true}>
-				<SignInGateSelector
-					isPaidContent={false}
-					isPreview={false}
-					pageId="dismissable-v2"
-					host="https://www.theguardian.com"
-					idUrl="https://profile.theguardian.com"
-					contributionsServiceUrl="https://contributions.guardianapis.com"
-					signInGateVersion="v2"
-					auxiaGateDisplayData={{
-						browserId: 'test-browser-id',
-						auxiaData: {
-							responseId: 'test-response-id',
-							userTreatment:
-								mockAuxiaResponseDismissible.data.userTreatment,
-						},
-					}}
-				/>
-			</Section>
-		</div>
+		<Section fullWidth={true}>
+			<SignInGateSelector
+				isPaidContent={false}
+				isPreview={false}
+				pageId="dismissable-v2"
+				host="https://www.theguardian.com"
+				idUrl="https://profile.theguardian.com"
+				contributionsServiceUrl="https://contributions.guardianapis.com"
+				signInGateVersion="v2"
+				auxiaGateDisplayData={{
+					browserId: 'test-browser-id',
+					auxiaData: {
+						responseId: 'test-response-id',
+						userTreatment:
+							mockAuxiaResponseDismissible.data.userTreatment,
+					},
+				}}
+			/>
+		</Section>
 	);
 };
 
@@ -292,28 +290,25 @@ auxiaV2DismissibleModal.storyName = 'sign_in_gate_auxia_v2_modal_dismissible';
 
 export const auxiaV2NonDismissibleModal = () => {
 	return (
-		<div id="sign-in-gate">
-			<Section fullWidth={true}>
-				<SignInGateSelector
-					isPaidContent={false}
-					isPreview={false}
-					pageId="non-dismissable-v2"
-					host="https://www.theguardian.com"
-					idUrl="https://profile.theguardian.com"
-					contributionsServiceUrl="https://contributions.guardianapis.com"
-					signInGateVersion="v2"
-					auxiaGateDisplayData={{
-						browserId: 'test-browser-id',
-						auxiaData: {
-							responseId: 'test-response-id',
-							userTreatment:
-								mockAuxiaResponseNonDismissible.data
-									.userTreatment,
-						},
-					}}
-				/>
-			</Section>
-		</div>
+		<Section fullWidth={true}>
+			<SignInGateSelector
+				isPaidContent={false}
+				isPreview={false}
+				pageId="non-dismissable-v2"
+				host="https://www.theguardian.com"
+				idUrl="https://profile.theguardian.com"
+				contributionsServiceUrl="https://contributions.guardianapis.com"
+				signInGateVersion="v2"
+				auxiaGateDisplayData={{
+					browserId: 'test-browser-id',
+					auxiaData: {
+						responseId: 'test-response-id',
+						userTreatment:
+							mockAuxiaResponseNonDismissible.data.userTreatment,
+					},
+				}}
+			/>
+		</Section>
 	);
 };
 

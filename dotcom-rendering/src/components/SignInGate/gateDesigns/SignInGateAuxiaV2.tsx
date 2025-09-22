@@ -14,6 +14,7 @@ import {
 } from '@guardian/source/foundations';
 import { SvgCross, SvgGuardianLogo } from '@guardian/source/react-components';
 import { useEffect } from 'react';
+import { getZIndex } from '../../../lib/getZIndex';
 import { AuthProviderButtons } from '../../AuthProviderButtons/AuthProviderButtons';
 import { useConfig } from '../../ConfigContext';
 import { ExternalLink } from '../../ExternalLink/ExternalLink';
@@ -297,7 +298,7 @@ const modalOverlay = css`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	z-index: 2000;
+	z-index: ${getZIndex('sign-in-gate')};
 	padding: ${space[4]}px;
 `;
 
