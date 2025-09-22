@@ -1,11 +1,16 @@
 import { css, keyframes } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { palette, space } from '@guardian/source/foundations';
+import {
+	type Breakpoint,
+	from,
+	palette,
+	space,
+} from '@guardian/source/foundations';
 
 const BACKGROUND_COLOUR = palette.neutral[93];
 
 type Props = {
-	height: number;
+	heights: Map<Breakpoint, number>;
 	rootId?: string;
 	width?: number;
 	spaceBelow?: 1 | 2 | 3 | 4 | 5 | 6 | 9;
@@ -34,8 +39,19 @@ const shimmerStyles = (backgroundColor: string) => css`
 	background-size: 1500px 100%;
 `;
 
+const heightsMediaQueries = (heights: Map<Breakpoint, number>) =>
+	css(
+		Array.from(heights.entries()).map(
+			([breakpoint, height]: [Breakpoint, number]) => css`
+				${from[breakpoint]} {
+					min-height: ${height}px;
+				}
+			`,
+		),
+	);
+
 export const Placeholder = ({
-	height,
+	heights,
 	rootId,
 	width,
 	spaceBelow,
@@ -51,15 +67,17 @@ export const Placeholder = ({
 		data-name="placeholder"
 	>
 		<div
-			css={css`
-				min-height: ${height}px;
-				width: ${!isUndefined(width) ? `${width}px` : '100%'};
-				margin-bottom: ${spaceBelow && space[spaceBelow]}px;
-				margin-left: ${spaceLeft && space[spaceLeft]}px;
-				background-color: ${backgroundColor};
+			css={[
+				heightsMediaQueries(heights),
+				css`
+					width: ${!isUndefined(width) ? `${width}px` : '100%'};
+					margin-bottom: ${spaceBelow && space[spaceBelow]}px;
+					margin-left: ${spaceLeft && space[spaceLeft]}px;
+					background-color: ${backgroundColor};
 
-				${shouldShimmer && shimmerStyles(backgroundColor)}
-			`}
+					${shouldShimmer && shimmerStyles(backgroundColor)}
+				`,
+			]}
 		/>
 	</div>
 );
