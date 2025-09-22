@@ -48,7 +48,7 @@ export type Podcast = {
 export type PodcastSeriesImage = Output<typeof PodcastSeriesImageSchema>;
 
 export const PodcastSeriesImageSchema = object({
-	type: optional(string()),
+	src: optional(string()),
 	altText: optional(string()),
 });
 
