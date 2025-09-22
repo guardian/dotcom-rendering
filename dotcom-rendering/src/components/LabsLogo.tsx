@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
-import { palette } from '@guardian/source/foundations';
+import { palette as schemePalette } from '../palette';
 
 const labsLogoContainer = css`
-	background-color: ${palette.labs[100]};
+	background-color: ${schemePalette('--labs-logo-background')};
 	border-radius: 50%;
 	position: relative;
 `;
@@ -30,7 +30,7 @@ export const LabsLogo = ({ size = 71 }: LabsLogoProps) => {
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 89 47"
-				fill={palette.neutral[100]}
+				fill={schemePalette('--labs-logo-text')}
 				css={labsLogoSvgText}
 			>
 				<title>Guardian Labs</title>

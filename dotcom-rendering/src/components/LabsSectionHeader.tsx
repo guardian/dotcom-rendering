@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	palette as sourcePalette,
 	space,
 	textSans14,
 	textSansBold15,
@@ -12,17 +11,18 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
+import { palette as schemePalette } from '../palette';
 import { Details } from './Details';
 import { LabsLogo } from './LabsLogo';
 
 type Props = {
-	title: React.ReactNode;
+	title: string;
 };
 
 const headerStyles = css`
 	width: 100%;
 	height: 100%;
-	background-color: ${sourcePalette.labs[700]};
+	background-color: ${schemePalette('--labs-header-background')};
 	padding: ${space[2]}px;
 	display: flex;
 	flex-grow: 1;
@@ -46,7 +46,7 @@ const dividerStylesUntilLeftCol = css`
 			top: 0;
 			bottom: 0;
 			right: -${space[2]}px;
-			border-right: 1px solid ${sourcePalette.neutral[73]};
+			border-right: 1px solid ${schemePalette('--section-border')};
 		}
 	}
 `;
@@ -71,7 +71,7 @@ const labelAndAboutStyles = css`
 
 const labelStyles = css`
 	${textSansBold15}
-	color: ${sourcePalette.labs[100]};
+	color: ${schemePalette('--labs-header-label-text')};
 `;
 
 const aboutStyles = css`
@@ -81,59 +81,59 @@ const aboutStyles = css`
 
 const titleStyles = css`
 	${textSansBold20};
+	color: ${schemePalette('--labs-header-title')};
 `;
 
-export const LabsSectionHeader = ({ title }: Props) => {
-	return (
-		<div css={headerStyles}>
-			<div css={[logoStyles, dividerStylesUntilLeftCol]}>
-				<LabsLogo />
-			</div>
+const detailsStyles = css`
+	background-color: ${schemePalette('--labs-about-dropdown-background')};
+	color: ${schemePalette('--labs-about-dropdown-text')};
+	padding: ${space[5]}px;
+`;
 
-			<div css={textLayoutStyles}>
-				<div css={labelAndAboutStyles}>
-					<span css={labelStyles}>Paid content</span>
-					<div css={aboutStyles}>
-						<Details
-							label="About"
-							labelSize="xsmall"
-							positionStyles={css`
-								right: 0;
-							`}
-						>
-							<div
-								css={css`
-									background-color: ${sourcePalette
-										.labs[600]};
-									color: ${sourcePalette.labs[100]};
-									padding: 20px;
-								`}
-							>
-								<p>
-									Paid content is paid for and controlled by
-									an advertiser and produced by the Guardian
-									Labs team.
-								</p>
-								<br />
-								<LinkButton
-									iconSide="right"
-									size="xsmall"
-									priority="subdued"
-									icon={<SvgArrowRightStraight />}
-									href="https://www.theguardian.com/info/2016/jan/25/content-funding"
-									theme={{
-										textSubdued: sourcePalette.labs[100],
-									}}
-								>
-									Learn more about Guardian Labs content
-								</LinkButton>
-							</div>
-						</Details>
-					</div>
-				</div>
-
-				<div css={titleStyles}>{title}</div>
-			</div>
+export const LabsSectionHeader = ({ title }: Props) => (
+	<div css={headerStyles}>
+		<div css={[logoStyles, dividerStylesUntilLeftCol]}>
+			<LabsLogo />
 		</div>
-	);
-};
+
+		<div css={textLayoutStyles}>
+			<div css={labelAndAboutStyles}>
+				<span css={labelStyles}>Paid content</span>
+				<div css={aboutStyles}>
+					<Details
+						label="About"
+						labelSize="xsmall"
+						positionStyles={css`
+							right: 0;
+						`}
+					>
+						<div css={detailsStyles}>
+							<p>
+								Paid content is paid for and controlled by an
+								advertiser and produced by the Guardian Labs
+								team.
+							</p>
+							<br />
+							<LinkButton
+								iconSide="right"
+								size="xsmall"
+								priority="subdued"
+								icon={<SvgArrowRightStraight />}
+								href="https://www.theguardian.com/info/2016/jan/25/content-funding"
+								theme={{
+									textSubdued: schemePalette(
+										'--labs-about-dropdown-link',
+									),
+								}}
+							>
+								Learn more about Guardian Labs content
+							</LinkButton>
+						</div>
+					</Details>
+				</div>
+			</div>
+
+			<div css={titleStyles}>{title}</div>
+		</div>
+	</div>
+);
