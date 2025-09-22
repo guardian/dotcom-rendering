@@ -19,6 +19,7 @@ import {
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/articleFormat';
+import { getZIndex } from '../lib/getZIndex';
 import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { Hide } from './Hide';
@@ -366,6 +367,8 @@ export const SeriesSectionLink = ({
 								background-color: ${themePalette(
 									'--series-title-background',
 								)};
+								position: relative;
+								z-index: ${getZIndex('articleHeadline')};
 							`,
 							format.design === ArticleDesign.Gallery &&
 								css`
