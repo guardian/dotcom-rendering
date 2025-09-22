@@ -22,6 +22,7 @@ const styles = css`
 	position: relative;
 	height: calc(80vh - 48px);
 	grid-row: 1/8;
+	z-index: 0;
 	${from.desktop} {
 		height: calc(100vh - 48px);
 	}

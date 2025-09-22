@@ -397,6 +397,8 @@ const galleryStyles = css`
 	${grid.between('grid-start', 'centre-column-end')}
 
 	grid-row: 7/9;
+	position: relative;
+	z-index: 2;
 
 	${from.tablet} {
 		${grid.between('centre-column-start', 'grid-end')};
