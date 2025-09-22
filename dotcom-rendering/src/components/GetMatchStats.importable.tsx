@@ -11,7 +11,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const Loading = () => <Placeholder height={800} />;
+const Loading = () => <Placeholder heights={new Map([['mobile', 800]])} />;
 
 const cleanTeamCodes = ({
 	name,
