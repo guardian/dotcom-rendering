@@ -103,7 +103,7 @@ export const DiscussionWeb = (
 			});
 	}, [authStatus, props.discussionApiUrl]);
 
-	if (!hydrated) return <Placeholder height={324} />;
+	if (!hydrated) return <Placeholder heights={new Map([['mobile', 324]])} />;
 
 	return (
 		<Discussion

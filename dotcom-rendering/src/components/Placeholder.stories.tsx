@@ -42,7 +42,7 @@ export default {
 export const Basic = () => {
 	return (
 		<Wrapper>
-			<Placeholder height={200} />
+			<Placeholder heights={new Map([['mobile', 200]])} />
 		</Wrapper>
 	);
 };
@@ -51,7 +51,7 @@ Basic.storyName = 'with 200px height';
 export const Square = () => {
 	return (
 		<Wrapper>
-			<Placeholder height={200} width={200} />
+			<Placeholder heights={new Map([['mobile', 200]])} width={200} />
 		</Wrapper>
 	);
 };
@@ -61,9 +61,21 @@ export const InARow = () => {
 	return (
 		<Wrapper>
 			<Row>
-				<Placeholder height={200} width={200} spaceLeft={2} />
-				<Placeholder height={200} width={200} spaceLeft={2} />
-				<Placeholder height={200} width={200} spaceLeft={2} />
+				<Placeholder
+					heights={new Map([['mobile', 200]])}
+					width={200}
+					spaceLeft={2}
+				/>
+				<Placeholder
+					heights={new Map([['mobile', 200]])}
+					width={200}
+					spaceLeft={2}
+				/>
+				<Placeholder
+					heights={new Map([['mobile', 200]])}
+					width={200}
+					spaceLeft={2}
+				/>
 			</Row>
 		</Wrapper>
 	);
@@ -74,9 +86,18 @@ export const Stacked = () => {
 	return (
 		<Wrapper>
 			<Column>
-				<Placeholder height={200} spaceBelow={5} />
-				<Placeholder height={200} spaceBelow={5} />
-				<Placeholder height={200} spaceBelow={5} />
+				<Placeholder
+					heights={new Map([['mobile', 200]])}
+					spaceBelow={5}
+				/>
+				<Placeholder
+					heights={new Map([['mobile', 200]])}
+					spaceBelow={5}
+				/>
+				<Placeholder
+					heights={new Map([['mobile', 200]])}
+					spaceBelow={5}
+				/>
 			</Column>
 		</Wrapper>
 	);
@@ -86,7 +107,10 @@ Stacked.storyName = 'with elements stacked';
 export const Root = () => {
 	return (
 		<Wrapper>
-			<Placeholder height={200} rootId="usedWithPortals" />
+			<Placeholder
+				heights={new Map([['mobile', 200]])}
+				rootId="usedWithPortals"
+			/>
 		</Wrapper>
 	);
 };
@@ -95,7 +119,10 @@ Root.storyName = 'with rootId set';
 export const NoShimmer = () => {
 	return (
 		<Wrapper>
-			<Placeholder height={200} shouldShimmer={false} />
+			<Placeholder
+				heights={new Map([['mobile', 200]])}
+				shouldShimmer={false}
+			/>
 		</Wrapper>
 	);
 };
@@ -105,7 +132,7 @@ export const Background = () => {
 	return (
 		<Wrapper>
 			<Placeholder
-				height={200}
+				heights={new Map([['mobile', 200]])}
 				shouldShimmer={true}
 				backgroundColor="#ffff00"
 			/>
