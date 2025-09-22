@@ -82,6 +82,14 @@ const aboutStyles = css`
 	${textSans14}
 `;
 
+const positionStyles = css`
+	right: 0;
+	${from.leftCol} {
+		left: 0;
+		right: auto;
+	}
+`;
+
 const detailsStyles = css`
 	background-color: ${schemePalette('--labs-about-dropdown-background')};
 	color: ${schemePalette('--labs-about-dropdown-text')};
@@ -101,9 +109,7 @@ export const LabsSectionHeader = ({ title, url }: Props) => (
 					<Details
 						label="About"
 						labelSize="xsmall"
-						positionStyles={css`
-							right: 0;
-						`}
+						positionStyles={positionStyles}
 					>
 						<div css={detailsStyles}>
 							<p>

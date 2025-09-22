@@ -21,6 +21,10 @@ interface Orientation {
 	orientation?: 'horizontal' | 'vertical';
 }
 
+type SplitThemeOptions = Orientation & {
+	hideFormatHeading?: boolean;
+};
+
 /**
  * The `splitTheme` decorator displays a story simultaneously in both light and
  * dark mode.
@@ -226,6 +230,11 @@ type ThemeProps = {
 	Story: Parameters<Decorator>[0];
 	context: Context;
 	colourScheme: ColourScheme;
+	/**
+	 * For stories without article theming where we fallback to the default theme,
+	 * we can choose to omit the format heading as it's not relevant
+	 */
+	hideFormatHeading?: boolean;
 };
 
 /**
@@ -242,7 +251,13 @@ type ThemeProps = {
  * `colourSchemeBackground` and `colourSchemeTextColour` parameters from the
  * story, or provides defaults when these are not supplied.
  */
-const Theme = ({ formats, Story, context, colourScheme }: ThemeProps) => (
+const Theme = ({
+	formats,
+	Story,
+	context,
+	colourScheme,
+	hideFormatHeading = false,
+}: ThemeProps) => (
 	<div
 		css={{
 			color:
@@ -258,7 +273,12 @@ const Theme = ({ formats, Story, context, colourScheme }: ThemeProps) => (
 		<ThemeHeading colourScheme={colourScheme} />
 		{formats.map((format) => (
 			<>
-				<FormatHeading format={format} colourScheme={colourScheme} />
+				{!hideFormatHeading && (
+					<FormatHeading
+						format={format}
+						colourScheme={colourScheme}
+					/>
+				)}
 				<Palette
 					colourScheme={colourScheme}
 					context={context}
@@ -302,7 +322,10 @@ const Theme = ({ formats, Story, context, colourScheme }: ThemeProps) => (
 export const splitTheme =
 	(
 		formats: ArticleFormat[] = [...defaultFormats],
-		{ orientation = 'horizontal' }: Orientation = {},
+		{
+			orientation = 'horizontal',
+			hideFormatHeading = false,
+		}: SplitThemeOptions = {},
 	): Decorator =>
 	(Story, context) => (
 		<div
@@ -318,12 +341,14 @@ export const splitTheme =
 				formats={formats}
 				Story={Story}
 				context={context}
+				hideFormatHeading={hideFormatHeading}
 			/>
 			<Theme
 				colourScheme="dark"
 				formats={formats}
 				Story={Story}
 				context={context}
+				hideFormatHeading={hideFormatHeading}
 			/>
 		</div>
 	);
