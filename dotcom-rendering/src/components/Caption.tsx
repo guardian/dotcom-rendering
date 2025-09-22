@@ -212,6 +212,9 @@ const captionLink = css`
 
 const galleryStyles = css`
 	${grid.column.centre};
+	display: flex;
+	justify-content: center;
+	align-items: baseline;
 	${textSans14};
 
 	margin-bottom: 0;
@@ -219,6 +222,7 @@ const galleryStyles = css`
 	${from.leftCol} {
 		${grid.column.left}
 		grid-row-start: 8;
+		justify-content: flex-start;
 	}
 	${between.tablet.and.leftCol} {
 		position: relative;
@@ -239,6 +243,10 @@ const CameraIcon = ({ format }: IconProps) => {
 		<span
 			css={[
 				iconStyle,
+				format.design === ArticleDesign.Gallery &&
+					css`
+						flex-shrink: 0;
+					`,
 				(format.display === ArticleDisplay.Immersive ||
 					format.design === ArticleDesign.Gallery) &&
 					hideIconBelowLeftCol,
