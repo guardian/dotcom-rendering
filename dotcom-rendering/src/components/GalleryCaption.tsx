@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { between, from, space, textSans12 } from '@guardian/source/foundations';
+import { between, from, space, textSans14 } from '@guardian/source/foundations';
 import { grid } from '../grid';
 import { type ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
@@ -19,9 +19,8 @@ type Props = {
 const styles = css`
 	${grid.column.centre}
 	color: ${palette('--caption-text')};
-	${textSans12}
+	${textSans14}
 	padding-bottom: ${space[6]}px;
-	padding-top: ${space[5]}px;
 
 	${between.tablet.and.desktop} {
 		padding-left: ${space[5]}px;

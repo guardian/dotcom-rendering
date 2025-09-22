@@ -22,6 +22,19 @@ const renderTextElement = (node: Node, key: number): ReactNode => {
 	const children = Array.from(node.childNodes).map(renderTextElement);
 
 	switch (node.nodeName) {
+		case 'H2':
+			return text === '' ? null : (
+				<h2
+					css={css`
+						display: block;
+						${headlineMedium17}
+						padding: ${space[2]}px 0 ${space[3]}px;
+					`}
+					key={key}
+				>
+					{children}
+				</h2>
+			);
 		case 'STRONG':
 			return text === '' ? null : (
 				<strong
