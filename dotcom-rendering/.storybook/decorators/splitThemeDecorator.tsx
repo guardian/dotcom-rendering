@@ -22,6 +22,7 @@ interface Orientation {
 }
 
 type SplitThemeOptions = Orientation & {
+	/** Allows the format heading to be omitted on the split theme decorator */
 	hideFormatHeading?: boolean;
 };
 

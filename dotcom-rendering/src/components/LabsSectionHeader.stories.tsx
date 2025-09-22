@@ -2,12 +2,10 @@ import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/test';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-} from '../lib/articleFormat';
+	defaultFormats,
+	splitTheme,
+} from '../../.storybook/decorators/splitThemeDecorator';
 import { LabsSectionHeader } from './LabsSectionHeader';
 
 const meta = {
@@ -33,16 +31,10 @@ const meta = {
 		</div>
 	),
 	decorators: [
-		splitTheme(
-			[
-				{
-					theme: ArticleSpecial.Labs,
-					design: ArticleDesign.Feature,
-					display: ArticleDisplay.Standard,
-				},
-			],
-			{ orientation: 'vertical', hideFormatHeading: true },
-		),
+		splitTheme([defaultFormats[0]], {
+			orientation: 'vertical',
+			hideFormatHeading: true,
+		}),
 	],
 } satisfies Meta<typeof LabsSectionHeader>;
 export default meta;
