@@ -22,6 +22,7 @@ type Props = {
 	hasPageSkin?: boolean;
 	hasPageSkinContentSelfConstrain?: boolean;
 	pageId?: string;
+	wholePictureLogoSwitch?: boolean;
 };
 
 /**
@@ -56,6 +57,7 @@ export const Masthead = ({
 	hasPageSkin = false,
 	hasPageSkinContentSelfConstrain = false,
 	pageId,
+	wholePictureLogoSwitch = false,
 }: Props) => (
 	<header data-component="header">
 		<Section
@@ -112,6 +114,7 @@ export const Masthead = ({
 				showSlimNav={showSlimNav}
 				hasPageSkin={hasPageSkin}
 				pageId={pageId}
+				wholePictureLogoSwitch={wholePictureLogoSwitch}
 			/>
 		</Island>
 	</header>
