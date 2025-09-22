@@ -13,6 +13,7 @@ export type Source = {
  */
 export const supportedVideoFileTypes = [
 	'application/x-mpegURL', // HLS format
+	'application/vnd.apple.mpegurl', // Alternative HLS format
 	'video/mp4', // MP4 format
 ] as const;
 

@@ -3966,6 +3966,7 @@
         },
         "SupportedVideoFileType": {
             "enum": [
+                "application/vnd.apple.mpegurl",
                 "application/x-mpegURL",
                 "video/mp4"
             ],
