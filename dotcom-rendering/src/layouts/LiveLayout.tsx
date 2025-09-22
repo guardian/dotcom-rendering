@@ -309,9 +309,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								shouldCenter={false}
 								element="aside"
 							>
-								<HeaderAdSlot
-									abTests={article.config.abTests}
-								/>
+								<HeaderAdSlot />
 							</Section>
 						</Stuck>
 					)}
@@ -1154,6 +1152,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									!!article.config.switches.remoteBanner
 								}
 								tags={article.tags}
+								host={article.config.host}
 							/>
 						</Island>
 					</BannerWrapper>

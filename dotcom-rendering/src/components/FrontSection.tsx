@@ -93,6 +93,10 @@ type Props = {
 	hasNavigationButtons?: boolean;
 	isAboveDesktopAd?: boolean;
 	isAboveMobileAd?: boolean;
+	/** Indicates whether this is a Guardian Labs container */
+	isLabs?: boolean;
+	/** Feature switch for the labs redesign work */
+	showLabsRedesign?: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -592,6 +596,8 @@ export const FrontSection = ({
 	hasNavigationButtons = false,
 	isAboveDesktopAd = false,
 	isAboveMobileAd = false,
+	isLabs = false,
+	showLabsRedesign = false,
 }: Props) => {
 	const isToggleable = toggleable && !!sectionId;
 	const showVerticalRule = !hasPageSkin;
@@ -624,7 +630,6 @@ export const FrontSection = ({
 				data-component={ophanComponentName}
 				data-container-name={containerName}
 				data-container-level={containerLevel}
-				data-collection-tracking={true}
 				css={[
 					fallbackStyles,
 					containerStylesUntilLeftCol,
@@ -677,33 +682,41 @@ export const FrontSection = ({
 							),
 					]}
 				>
-					<FrontSectionTitle
-						title={
-							<ContainerTitle
-								title={title}
-								lightweightHeader={isTagPage}
-								description={description}
-								fontColour={
-									containerLevel === 'Secondary'
-										? schemePalette(
-												'--article-section-secondary-title',
-										  )
-										: articleSectionTitleStyles(
-												title,
-												showSectionColours,
-										  )
+					{!isLabs && !showLabsRedesign && (
+						<>
+							<FrontSectionTitle
+								title={
+									<ContainerTitle
+										title={title}
+										lightweightHeader={isTagPage}
+										description={description}
+										fontColour={
+											containerLevel === 'Secondary'
+												? schemePalette(
+														'--article-section-secondary-title',
+												  )
+												: articleSectionTitleStyles(
+														title,
+														showSectionColours,
+												  )
+										}
+										// On paid fronts the title is not treated as a link
+										url={
+											!isOnPaidContentFront
+												? url
+												: undefined
+										}
+										showDateHeader={showDateHeader}
+										editionId={editionId}
+										containerLevel={containerLevel}
+									/>
 								}
-								// On paid fronts the title is not treated as a link
-								url={!isOnPaidContentFront ? url : undefined}
-								showDateHeader={showDateHeader}
-								editionId={editionId}
-								containerLevel={containerLevel}
+								collectionBranding={collectionBranding}
 							/>
-						}
-						collectionBranding={collectionBranding}
-					/>
 
-					{leftContent}
+							{leftContent}
+						</>
+					)}
 				</div>
 
 				{(isToggleable || hasNavigationButtons) && (
