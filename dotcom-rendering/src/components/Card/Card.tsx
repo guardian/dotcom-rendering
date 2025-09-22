@@ -30,7 +30,7 @@ import type {
 	DCRSupportingContent,
 } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
-import type { OnwardsSource } from '../../types/onwards';
+import type { OnwardContainerType, OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
 import { CardCommentCount } from '../CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from '../CardHeadline';
@@ -120,7 +120,7 @@ export type Props = {
 	supportingContentPosition?: Position;
 	snapData?: DCRSnapType;
 	containerPalette?: DCRContainerPalette;
-	containerType?: DCRContainerType;
+	containerType?: DCRContainerType | OnwardContainerType;
 	showAge?: boolean;
 	discussionApiUrl: string;
 	discussionId?: string;
@@ -576,6 +576,8 @@ export const Card = ({
 		containerType === 'flexible/special' ||
 		containerType === 'flexible/general';
 
+	const isOnwardContainer = containerType === 'more-galleries';
+
 	const isSmallCard = containerType === 'scrollable/small';
 
 	const mediaFixedSizeOptions = (): MediaFixedSizeOptions => {
@@ -593,6 +595,8 @@ export const Card = ({
 	const hideTrailTextUntil = () => {
 		if (isFlexibleContainer) {
 			return undefined;
+		} else if (isOnwardContainer && isFlexSplash) {
+			return 'never';
 		} else if (
 			mediaSize === 'large' &&
 			mediaPositionOnDesktop === 'right' &&
@@ -603,6 +607,10 @@ export const Card = ({
 			return 'tablet';
 		}
 	};
+
+	const shouldShowTrailText = isOnwardContainer
+		? media?.type !== 'podcast' && isFlexSplash
+		: media?.type !== 'podcast';
 
 	/**
 	 * Determines the gap of between card components based on card properties
@@ -1093,7 +1101,7 @@ export const Card = ({
 						)}
 
 						{!!trailText &&
-							media?.type !== 'podcast' &&
+							shouldShowTrailText &&
 							!isInHideTrailsAbTest && (
 								<TrailText
 									trailText={trailText}
