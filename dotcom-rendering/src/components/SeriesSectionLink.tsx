@@ -367,12 +367,12 @@ export const SeriesSectionLink = ({
 								background-color: ${themePalette(
 									'--series-title-background',
 								)};
-								position: relative;
-								z-index: ${getZIndex('articleHeadline')};
 							`,
 							format.design === ArticleDesign.Gallery &&
 								css`
 									display: inline-block;
+									position: relative;
+									z-index: ${getZIndex('articleHeadline')};
 								`,
 							format.display === ArticleDisplay.Immersive &&
 								css`
