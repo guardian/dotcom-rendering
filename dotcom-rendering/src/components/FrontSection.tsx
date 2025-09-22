@@ -721,6 +721,7 @@ export const FrontSection = ({
 									showDateHeader={showDateHeader}
 									editionId={editionId}
 									containerLevel={containerLevel}
+									isLabs={isLabs && showLabsRedesign}
 								/>
 							}
 							collectionBranding={collectionBranding}

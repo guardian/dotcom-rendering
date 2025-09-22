@@ -87,6 +87,7 @@ export default {
 		discussionApiUrl,
 		editionId: 'UK',
 		children: <Placeholder />,
+		url: '/',
 	},
 	render: (args) => <FrontSection {...args} />,
 } satisfies Meta<typeof FrontSection>;

@@ -13,6 +13,7 @@ const meta = {
 	title: 'Components/LabsSectionHeader',
 	args: {
 		title: 'Container Title',
+		url: '/',
 	},
 	render: (args) => <LabsSectionHeader {...args} />,
 	decorators: [

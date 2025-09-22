@@ -4,7 +4,6 @@ import {
 	space,
 	textSans14,
 	textSansBold15,
-	textSansBold20,
 	until,
 } from '@guardian/source/foundations';
 import {
@@ -12,11 +11,15 @@ import {
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
 import { palette as schemePalette } from '../palette';
+import { ContainerTitle } from './ContainerTitle';
 import { Details } from './Details';
 import { LabsLogo } from './LabsLogo';
 
 type Props = {
-	title: string;
+	/** This text will be used as the h2 shown in the left column for the section */
+	title?: string;
+	/** The title can be made into a link using this property */
+	url?: string;
 };
 
 const headerStyles = css`
@@ -79,18 +82,13 @@ const aboutStyles = css`
 	${textSans14}
 `;
 
-const titleStyles = css`
-	${textSansBold20};
-	color: ${schemePalette('--labs-header-title')};
-`;
-
 const detailsStyles = css`
 	background-color: ${schemePalette('--labs-about-dropdown-background')};
 	color: ${schemePalette('--labs-about-dropdown-text')};
 	padding: ${space[5]}px;
 `;
 
-export const LabsSectionHeader = ({ title }: Props) => (
+export const LabsSectionHeader = ({ title, url }: Props) => (
 	<div css={headerStyles}>
 		<div css={[logoStyles, dividerStylesUntilLeftCol]}>
 			<LabsLogo />
@@ -133,7 +131,12 @@ export const LabsSectionHeader = ({ title }: Props) => (
 				</div>
 			</div>
 
-			<div css={titleStyles}>{title}</div>
+			<ContainerTitle
+				title={title}
+				url={url}
+				fontColour={schemePalette('--labs-header-title')}
+				isLabs={true}
+			/>
 		</div>
 	</div>
 );
