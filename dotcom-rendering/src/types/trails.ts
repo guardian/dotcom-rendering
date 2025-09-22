@@ -30,6 +30,8 @@ interface BaseTrailType {
 		discussionId?: string;
 	};
 	mainMedia?: MainMedia;
+	trailText?: string;
+	galleryCount?: number;
 }
 
 export interface TrailType extends BaseTrailType {
