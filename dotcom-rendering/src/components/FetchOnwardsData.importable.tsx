@@ -68,7 +68,7 @@ export const FetchOnwardsData = ({
 	if (!data?.trails) {
 		return (
 			<Placeholder
-				height={340} // best guess at typical height
+				heights={new Map([['mobile', 340]])} // best guess at typical height
 				shouldShimmer={false}
 				backgroundColor={palette('--article-background')}
 			/>
