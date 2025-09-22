@@ -70,19 +70,16 @@ const labelAndAboutStyles = css`
 `;
 
 const labelStyles = css`
-	grid-area: label;
 	${textSansBold15}
 	color: ${sourcePalette.labs[100]};
 `;
 
 const aboutStyles = css`
-	grid-area: about;
 	justify-self: end;
 	${textSans14}
 `;
 
 const titleStyles = css`
-	grid-area: title;
 	${textSansBold20};
 `;
 
