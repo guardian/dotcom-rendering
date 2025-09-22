@@ -869,6 +869,9 @@
                 },
                 {
                     "$ref": "#/definitions/CrosswordElement"
+                },
+                {
+                    "$ref": "#/definitions/ProductBlockElement"
                 }
             ]
         },
@@ -4417,6 +4420,104 @@
         },
         "Record<string,number[]>": {
             "type": "object"
+        },
+        "ProductBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.ProductBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "secondaryProductUrl": {
+                    "type": "string"
+                },
+                "brandName": {
+                    "type": "string"
+                },
+                "secondaryPrice": {
+                    "type": "string"
+                },
+                "primaryProductUrl": {
+                    "type": "string"
+                },
+                "starRating": {
+                    "type": "string"
+                },
+                "productName": {
+                    "type": "string"
+                },
+                "primaryRetailer": {
+                    "type": "string"
+                },
+                "image": {
+                    "$ref": "#/definitions/Image"
+                },
+                "primaryPrice": {
+                    "type": "string"
+                },
+                "primaryCta": {
+                    "type": "string"
+                },
+                "secondaryHeading": {
+                    "type": "string"
+                },
+                "primaryHeading": {
+                    "type": "string"
+                },
+                "secondaryRetailer": {
+                    "type": "string"
+                },
+                "secondaryCta": {
+                    "type": "string"
+                },
+                "statistics": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "value": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "value"
+                        ]
+                    }
+                },
+                "content": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FEElement"
+                    }
+                }
+            },
+            "required": [
+                "_type",
+                "brandName",
+                "content",
+                "elementId",
+                "image",
+                "primaryCta",
+                "primaryHeading",
+                "primaryPrice",
+                "primaryProductUrl",
+                "primaryRetailer",
+                "productName",
+                "secondaryCta",
+                "secondaryHeading",
+                "secondaryPrice",
+                "secondaryProductUrl",
+                "secondaryRetailer",
+                "starRating",
+                "statistics"
+            ]
         },
         "Block": {
             "type": "object",

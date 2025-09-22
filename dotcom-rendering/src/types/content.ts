@@ -469,6 +469,27 @@ export interface InteractiveContentsBlockElement {
 	endDocumentElementId?: string;
 }
 
+export interface ProductBlockElement {
+	_type: 'model.dotcomrendering.pageElements.ProductBlockElement';
+	elementId: string;
+	secondaryProductUrl: string;
+	brandName: string;
+	secondaryPrice: string;
+	primaryProductUrl: string;
+	starRating: string;
+	productName: string;
+	primaryRetailer: string;
+	image: Image;
+	primaryPrice: string;
+	primaryCta: string;
+	secondaryHeading: string;
+	primaryHeading: string;
+	secondaryRetailer: string;
+	secondaryCta: string;
+	statistics: { name: string; value: string }[];
+	content: FEElement[];
+}
+
 interface ProfileAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ProfileAtomBlockElement';
 	elementId: string;
@@ -833,7 +854,8 @@ export type FEElement =
 	| VineBlockElement
 	| YoutubeBlockElement
 	| WitnessTypeBlockElement
-	| CrosswordElement;
+	| CrosswordElement
+	| ProductBlockElement;
 
 // -------------------------------------
 // Misc
