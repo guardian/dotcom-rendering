@@ -1,7 +1,17 @@
 import { type CrosswordProps } from '@guardian/react-crossword';
+import { literal, type Output, union } from 'valibot';
 import type { ArticleFormat } from '../lib/articleFormat';
 
-export type StarRating = 0 | 1 | 2 | 3 | 4 | 5;
+export const StarRatingSchema = union([
+	literal(0),
+	literal(1),
+	literal(2),
+	literal(3),
+	literal(4),
+	literal(5),
+]);
+
+export type StarRating = Output<typeof StarRatingSchema>;
 
 export type BoostLevel = 'default' | 'boost' | 'megaboost' | 'gigaboost';
 

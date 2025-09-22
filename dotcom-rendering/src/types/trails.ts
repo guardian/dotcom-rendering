@@ -1,36 +1,53 @@
-import type { FEFormat } from '../frontend/feArticle';
+import {
+	boolean,
+	number,
+	object,
+	optional,
+	type Output,
+	record,
+	string,
+} from 'valibot';
+import { FEFormatSchema } from '../frontend/feArticle';
 import type { ArticleFormat } from '../lib/articleFormat';
-import type { Branding } from './branding';
-import type { BoostLevel, StarRating } from './content';
-import type { DCRFrontImage, DCRSnapType, DCRSupportingContent } from './front';
-import type { MainMedia } from './mainMedia';
+import { BrandingSchema } from './branding';
+import { type BoostLevel, StarRatingSchema } from './content';
+import {
+	type DCRFrontImage,
+	DCRSnapTypeSchema,
+	type DCRSupportingContent,
+} from './front';
+import { MainMediaSchema } from './mainMedia';
 
-interface BaseTrailType {
-	url: string;
-	headline: string;
-	webPublicationDate?: string;
-	avatarUrl?: string;
-	mediaDuration?: number;
-	ageWarning?: string;
-	byline?: string;
-	showByline?: boolean;
-	kickerText?: string;
-	shortUrl?: string;
-	commentCount?: number;
-	starRating?: StarRating;
-	linkText?: string;
-	branding?: Branding;
-	isSnap?: boolean;
-	isCrossword?: boolean;
-	snapData?: DCRSnapType;
-	showQuotedHeadline?: boolean;
-	discussion?: {
-		isCommentable: boolean;
-		isClosedForComments: boolean;
-		discussionId?: string;
-	};
-	mainMedia?: MainMedia;
-}
+export const DiscussionSchema = object({
+	isCommentable: boolean(),
+	isClosedForComments: boolean(),
+	discussionId: optional(string()),
+});
+
+export type BaseTrailType = Output<typeof BaseTrailTypeSchema>;
+
+export const BaseTrailTypeSchema = object({
+	url: string(),
+	headline: string(),
+	webPublicationDate: optional(string()),
+	avatarUrl: optional(string()),
+	mediaDuration: optional(number()),
+	ageWarning: optional(string()),
+	byline: optional(string()),
+	showByline: optional(boolean()),
+	kickerText: optional(string()),
+	shortUrl: optional(string()),
+	commentCount: optional(number()),
+	starRating: optional(StarRatingSchema),
+	linkText: optional(string()),
+	branding: optional(BrandingSchema),
+	isSnap: optional(boolean()),
+	isCrossword: optional(boolean()),
+	snapData: optional(DCRSnapTypeSchema),
+	showQuotedHeadline: optional(boolean()),
+	discussion: optional(DiscussionSchema),
+	mainMedia: optional(MainMediaSchema),
+});
 
 export interface TrailType extends BaseTrailType {
 	palette?: never;
@@ -45,23 +62,28 @@ export interface TrailType extends BaseTrailType {
 	image?: DCRFrontImage;
 }
 
-export interface FETrailType extends BaseTrailType {
-	format: FEFormat;
+export type FETrailType = Output<typeof FETrailTypeSchema>;
+
+export const FETrailTypeSchema = object({
+	...BaseTrailTypeSchema.entries,
+	format: FEFormatSchema,
 	/**
 	 * @deprecated This type must exist as it's passed by frontend, but we shouldn't use it.
 	 * We should remove this property upstream in the future
 	 */
-	designType?: string;
+	designType: optional(string()),
 	/**
 	 * @deprecated This type must exist as it's passed by frontend, but we shouldn't use it.
 	 * We should remove this property upstream in the future
 	 */
-	pillar?: string;
-	carouselImages?: { [key: string]: string };
-	isLiveBlog?: boolean;
-	masterImage?: string;
-	image?: string;
-}
+	pillar: optional(string()),
+	carouselImages: optional(record(string(), string())),
+	isLiveBlog: optional(boolean()),
+	masterImage: optional(string()),
+	image: optional(string()),
+});
+
+// export type FETrailType = Output<typeof FETrailTypeSchema>; // TODO
 
 export interface TrailTabType {
 	heading: string;

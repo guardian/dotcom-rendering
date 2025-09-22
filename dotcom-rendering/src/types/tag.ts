@@ -1,3 +1,4 @@
+import { object, optional, type Output, string } from 'valibot';
 /**
  * This type comes from `frontend`, hence the FE prefix.
  *
@@ -43,10 +44,12 @@ export type Podcast = {
 	image?: string;
 };
 
-export type PodcastSeriesImage = {
-	src?: string;
-	altText?: string;
-};
+export type PodcastSeriesImage = Output<typeof PodcastSeriesImageSchema>;
+
+export const PodcastSeriesImageSchema = object({
+	src: optional(string()),
+	altText: optional(string()),
+});
 
 export type TagType = {
 	id: string;
