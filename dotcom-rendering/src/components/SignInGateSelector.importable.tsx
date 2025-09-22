@@ -477,10 +477,15 @@ const ShowSignInGateAuxia = ({
 		logTreatmentInteractionCall,
 	};
 
-	const shouldShowV2Gate: boolean =
-		typeof process !== 'undefined'
-			? !!process.env.STORYBOOK
-			: hasBeenSeen ?? false;
+	const [hasScroll, setHasScroll] = useState(false);
+	useEffect(() => {
+		const bodyHeight = document.body.scrollHeight;
+		const documentHeight = document.documentElement.offsetHeight;
+		setHasScroll(bodyHeight > documentHeight);
+	}, []);
+
+	const shouldShowV2Gate = hasBeenSeen ?? !hasScroll;
+
 	return (
 		<>
 			<div
