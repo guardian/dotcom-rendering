@@ -72,9 +72,13 @@ const logoStyles = css`
 	margin-bottom: 6px;
 	right: ${veggieBurgerDiameter + space[3]}px;
 
+	${from.mobileMedium} {
+		right: 0;
+	}
 	${from.mobileLandscape} {
 		margin-bottom: ${space[2]}px;
 	}
+
 	svg {
 		width: 152px;
 		${from.mobileMedium} {
@@ -119,6 +123,10 @@ const slimNavLogoOverrides = css`
 	margin-bottom: ${space[2]}px;
 	right: ${veggieBurgerDiameter + 6}px;
 
+	/** Intentionally duplicated as this needs to _override_ the standard logo styles */
+	${from.mobileMedium} {
+		right: ${veggieBurgerDiameter + 6}px;
+	}
 	${from.mobileLandscape} {
 		margin-top: ${space[1]}px;
 		margin-bottom: ${space[2]}px;
@@ -333,7 +341,8 @@ export const Titlepiece = ({
 }: Props) => {
 	const { showBanner } = useEditionSwitcherBanner(pageId, editionId);
 
-	const showWholePictureLogo = !!wholePictureLogoSwitch && editionId === 'US';
+	const showWholePictureLogo =
+		!!wholePictureLogoSwitch && !showSlimNav && editionId === 'US';
 
 	return (
 		<Grid
