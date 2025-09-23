@@ -6,7 +6,7 @@ import type { NestedArticleElement } from '../lib/renderElement';
 import type { FEElement, ProductBlockElement } from '../types/content';
 import { InlineProductCard } from './InlineProductCard';
 import { LeftColProductCard } from './LeftColProductCard';
-import { subheadingStyles } from './Subheading';
+import { SubheadingBlockComponent } from './SubheadingBlockComponent';
 
 export type Product = {
 	primaryHeadline: string;
@@ -51,23 +51,16 @@ export const ProductElement = ({
 	ArticleElementComponent: NestedArticleElement;
 	format: ArticleFormat;
 }) => {
+	const subheadingHtml = `<h2>${product.primaryHeading || ''} ${
+		product.secondaryHeading || ''
+	}</h2>`;
 	return (
 		<div
 			css={css`
 				position: relative;
 			`}
 		>
-			{(!!product.primaryHeading || !!product.secondaryHeading) && (
-				<h2 css={[subheadingStyles(format)]}>
-					<span
-						dangerouslySetInnerHTML={{
-							__html:
-								product.primaryHeading &&
-								product.secondaryHeading,
-						}}
-					></span>
-				</h2>
-			)}
+			<SubheadingBlockComponent html={subheadingHtml} format={format} />
 			<LeftColProductCardContainer>
 				<LeftColProductCard
 					brandName={product.brandName}
