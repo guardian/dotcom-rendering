@@ -527,8 +527,9 @@ const cardBackgroundLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[7];
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[800];
+		//TODO: Implement Branded properly when picking up the card ticket
 		case 'Branded':
-			return palette('--section-background');
+			return sourcePalette.neutral[93];
 	}
 };
 
@@ -621,7 +622,7 @@ const sectionBackgroundLight: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[800];
 		case 'Branded':
-			return sourcePalette.neutral[93];
+			return sourcePalette.neutral[100];
 	}
 };
 
@@ -840,7 +841,7 @@ const sectionTitleLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.specialReportAlt[100];
 		// Branded is expected to be used with LabsSection
 		case 'Branded':
-			return sourcePalette.neutral[100];
+			return sourcePalette.neutral[0];
 	}
 };
 
