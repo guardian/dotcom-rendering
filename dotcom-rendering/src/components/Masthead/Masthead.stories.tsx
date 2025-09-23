@@ -1,3 +1,4 @@
+import { breakpoints } from '@guardian/source/foundations';
 import type { Meta } from '@storybook/react';
 import { Masthead } from './Masthead';
 import { nav } from './Titlepiece/Nav.mock';
@@ -18,6 +19,15 @@ const meta = {
 		showSlimNav: false,
 		hasPageSkin: false,
 		hasPageSkinContentSelfConstrain: false,
+	},
+	parameters: {
+		chromatic: {
+			viewports: [
+				breakpoints.mobileMedium,
+				breakpoints.desktop,
+				breakpoints.wide,
+			],
+		},
 	},
 } satisfies Meta<typeof Masthead>;
 export default meta;
