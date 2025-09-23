@@ -81,13 +81,18 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 	} = props;
 
 	const doNotIndex = (): boolean => {
-		const isDevelopment = process.env.GU_STAGE !== 'PROD';
+		if (process.env.GU_STAGE !== 'PROD') return true;
+		if (!canonicalUrl) return false;
 
-		const hasNoIndexPattern = Boolean(
-			canonicalUrl?.includes('tracking/commissioningdesk'),
+		const isAllowListed = [
+			'tracking/commissioningdesk/the-filter',
+			'tracking/commissioningdesk/filter-us',
+		].some((allowed) => canonicalUrl.includes(allowed));
+
+		return (
+			canonicalUrl.includes('tracking/commissioningdesk') &&
+			!isAllowListed
 		);
-
-		return isDevelopment || hasNoIndexPattern;
 	};
 
 	/**
