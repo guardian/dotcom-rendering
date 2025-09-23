@@ -130,7 +130,6 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 
 								${from.leftCol} {
 									width: 100%;
-									border-top: none;
 								}
 							`}
 						>
