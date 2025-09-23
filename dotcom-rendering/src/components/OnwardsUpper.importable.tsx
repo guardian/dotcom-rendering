@@ -308,7 +308,7 @@ export const OnwardsUpper = ({
 			{!!url && (
 				<Section
 					fullWidth={true}
-					borderColour={palette('--article-border')}
+					borderColour={palette('--article-section-border')}
 				>
 					<FetchOnwardsData
 						url={url}
@@ -325,7 +325,7 @@ export const OnwardsUpper = ({
 			{!!curatedDataUrl && !isPaidContent && (
 				<Section
 					fullWidth={true}
-					borderColour={palette('--article-border')}
+					borderColour={palette('--article-section-border')}
 				>
 					<FetchOnwardsData
 						url={curatedDataUrl}
