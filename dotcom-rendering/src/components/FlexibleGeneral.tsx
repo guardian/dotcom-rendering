@@ -33,6 +33,7 @@ type Props = {
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
 	isInHideTrailsAbTest?: boolean;
+	showLabsRedesign: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -405,6 +406,7 @@ type FullWidthCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
 	isInHideTrailsAbTest?: boolean;
+	showLabsRedesign: boolean;
 };
 
 const FullWidthCardLayout = ({
@@ -419,6 +421,7 @@ const FullWidthCardLayout = ({
 	containerLevel,
 	collectionId,
 	isInHideTrailsAbTest,
+	showLabsRedesign,
 }: FullWidthCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -493,6 +496,7 @@ const FullWidthCardLayout = ({
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 					isInHideTrailsAbTest={isInHideTrailsAbTest}
+					showLabsRedesign={showLabsRedesign}
 				/>
 			</LI>
 		</UL>
@@ -511,6 +515,7 @@ type HalfWidthCardLayoutProps = {
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	isInHideTrailsAbTest?: boolean;
+	showLabsRedesign: boolean;
 };
 
 const HalfWidthCardLayout = ({
@@ -525,6 +530,7 @@ const HalfWidthCardLayout = ({
 	isLastRow,
 	containerLevel,
 	isInHideTrailsAbTest,
+	showLabsRedesign,
 }: HalfWidthCardLayoutProps) => {
 	if (cards.length === 0) return null;
 
@@ -579,6 +585,7 @@ const HalfWidthCardLayout = ({
 							headlineSizes={undefined}
 							canPlayInline={false}
 							isInHideTrailsAbTest={isInHideTrailsAbTest}
+							showLabsRedesign={showLabsRedesign}
 						/>
 					</LI>
 				);
@@ -597,6 +604,7 @@ export const FlexibleGeneral = ({
 	containerLevel = 'Primary',
 	collectionId,
 	isInHideTrailsAbTest,
+	showLabsRedesign,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
 		...snap,
@@ -645,6 +653,7 @@ export const FlexibleGeneral = ({
 								containerLevel={containerLevel}
 								collectionId={collectionId}
 								isInHideTrailsAbTest={isInHideTrailsAbTest}
+								showLabsRedesign={showLabsRedesign}
 							/>
 						);
 
@@ -665,6 +674,7 @@ export const FlexibleGeneral = ({
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
 								isInHideTrailsAbTest={isInHideTrailsAbTest}
+								showLabsRedesign={showLabsRedesign}
 							/>
 						);
 				}

@@ -227,9 +227,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					hasPageSkin={hasPageSkin}
 					hasPageSkinContentSelfConstrain={true}
 					pageId={pageId}
-					wholePictureLogoSwitch={
-						front.config.switches.wholePictureLogo
-					}
 				/>
 
 				{isPaidContent && (
@@ -479,6 +476,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										containerLevel={
 											collection.containerLevel
 										}
+										showLabsRedesign={showLabsRedesign}
 									/>
 								</LabsSection>
 
@@ -606,6 +604,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										front.isNetworkFront &&
 										abTests.hideTrailsVariant === 'variant'
 									}
+									showLabsRedesign={showLabsRedesign}
 								/>
 							</FrontSection>
 
