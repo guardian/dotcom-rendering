@@ -12,7 +12,7 @@ type SponsoredContentLabelProps = DCRBadgeType & {
 
 const paidForByStyles = css`
 	${textSansBold12};
-	color: ${palette('--labs-legacy-treat-text')};
+	color: ${palette('--labs-header-label-text')};
 	margin-top: ${space[3]}px;
 	margin-bottom: ${space[1]}px;
 `;
