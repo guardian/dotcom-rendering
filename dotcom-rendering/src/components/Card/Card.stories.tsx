@@ -1327,6 +1327,105 @@ export const WithBranding = () => {
 	));
 };
 
+export const WithBrandingAndSublinks = () => {
+	const branding = {
+		brandingType: {
+			name: 'sponsored',
+		},
+		sponsorName: 'theguardian.org',
+		logo: {
+			src: 'https://static.theguardian.com/commercial/sponsor/22/Feb/2024/17ea91fc-659b-4c51-8410-9907241c1710-Guardian.orglogos-for badge.png',
+			dimensions: {
+				width: 280,
+				height: 180,
+			},
+			link: 'https://theguardian.org/',
+			label: 'Supported by',
+		},
+		logoForDarkBackground: {
+			src: 'https://static.theguardian.com/commercial/sponsor/22/Feb/2024/21f5a3a5-30e7-4db7-a09f-031af569454d-guardian.org new logo - white version (3).png',
+			dimensions: {
+				width: 280,
+				height: 180,
+			},
+			link: 'https://theguardian.org/',
+			label: 'Supported by',
+		},
+		aboutThisLink:
+			'https://www.theguardian.com/environment/2023/jan/06/about-animals-farmed-investigating-modern-farming-around-the-world',
+	} satisfies Branding;
+
+	return [undefined, ...containerPalettes].map((containerPalette) => (
+		<ContainerOverrides
+			key={containerPalette}
+			containerPalette={containerPalette}
+		>
+			<Section title={containerPalette ?? 'Standard'}>
+				<UL direction="row" padBottom={true}>
+					<LI percentage={'33.333%'} padSides={true}>
+						<Card
+							{...basicCardProps}
+							format={{
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
+								theme: ArticleSpecial.Labs,
+							}}
+							headlineText="guardian.org branding on a Standard card"
+							kickerText="Kicker"
+							trailText=""
+							mediaPositionOnDesktop="top"
+							mediaPositionOnMobile="left"
+							mediaSize="small"
+							containerPalette={containerPalette}
+							branding={branding}
+							supportingContent={twoSublinks}
+						/>
+					</LI>
+					<LI percentage={'33.333%'} padSides={true}>
+						<Card
+							{...basicCardProps}
+							format={{
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Gallery,
+								theme: ArticleSpecial.Labs,
+							}}
+							kickerText="Kicker"
+							headlineText="guardian.org branding on a Gallery card"
+							trailText=""
+							mediaPositionOnDesktop="top"
+							mediaPositionOnMobile="left"
+							mediaSize="small"
+							mainMedia={mainGallery}
+							containerPalette={containerPalette}
+							branding={branding}
+							supportingContent={twoSublinks}
+						/>
+					</LI>
+					<LI percentage={'33.333%'} padSides={true}>
+						<Card
+							{...basicCardProps}
+							format={{
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
+								theme: Pillar.News,
+							}}
+							headlineText="guardian.org branding does not appear on non Labs articles"
+							kickerText="Kicker"
+							trailText=""
+							mediaPositionOnDesktop="top"
+							mediaPositionOnMobile="left"
+							mediaSize="small"
+							containerPalette={containerPalette}
+							branding={branding}
+							supportingContent={twoSublinks}
+						/>
+					</LI>
+				</UL>
+			</Section>
+		</ContainerOverrides>
+	));
+};
+
 export const WithSpecialPaletteVariations = () => {
 	const Cards = ({
 		containerPalette,
