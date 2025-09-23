@@ -42,9 +42,3 @@ The [BlockNumberCleaner](https://github.com/guardian/frontend/blob/bb83dabb21aea
     -   Something else about quotes.
 -   AffiliateLinksCleaner
     -   Rewrites URLs on applicable links and adds a disclaimer.
--   AttributeCleaner("style")
-    -   Removes inline style on amp articles. Inline style could be in a text block, but it's unlikely.
-
-## AMP Cleaned HTML
-
-This is run through the BodyCleaner and the AMP cleaners.

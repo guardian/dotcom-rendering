@@ -16,7 +16,6 @@ type BaseProps = {
 	title?: string;
 	description?: string;
 	linkedData?: { [key: string]: any };
-	ampLink?: string;
 	openGraphData?: { [key: string]: string };
 	twitterData?: { [key: string]: string };
 	initTwitter?: string;
@@ -66,7 +65,6 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		title = 'The Guardian',
 		description = 'Latest news, sport, business, comment, analysis and reviews from the Guardian, the world&#x27;s leading liberal voice',
 		linkedData,
-		ampLink,
 		openGraphData,
 		twitterData,
 		initTwitter,
@@ -261,13 +259,6 @@ https://workforus.theguardian.com/careers/product-engineering/
                     			${JSON.stringify(linkedData)}
                 			</script>`
 						: '<!-- no linked data -->'
-				}
-
-                <!-- TODO make this conditional when we support more content types -->
-                ${
-					ampLink
-						? `<link rel="amphtml" href="${ampLink}">`
-						: '<!-- no Amp link -->'
 				}
 
 				${renderingTarget === 'Web' ? fontPreloadTags : ''}
