@@ -102,8 +102,6 @@ export const SignInGatePortal = ({
 		return null;
 	}
 
-	console.log({ targetElement });
-
 	return createPortal(
 		<Island priority="feature" defer={{ until: 'visible' }}>
 			<SignInGateSelector
