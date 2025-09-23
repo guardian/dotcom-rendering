@@ -341,8 +341,7 @@ export const Titlepiece = ({
 }: Props) => {
 	const { showBanner } = useEditionSwitcherBanner(pageId, editionId);
 
-	const showWholePictureLogo =
-		!!wholePictureLogoSwitch && !showSlimNav && editionId === 'US';
+	const showWholePictureLogo = !!wholePictureLogoSwitch && editionId === 'US';
 
 	return (
 		<Grid
