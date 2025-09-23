@@ -514,6 +514,9 @@
                 "adUnit": {
                     "type": "string"
                 },
+                "pillar": {
+                    "type": "string"
+                },
                 "avatarApiUrl": {
                     "type": "string"
                 },
@@ -613,9 +616,6 @@
                     "type": "string"
                 },
                 "assetsPath": {
-                    "type": "string"
-                },
-                "pillar": {
                     "type": "string"
                 },
                 "commercialBundleUrl": {

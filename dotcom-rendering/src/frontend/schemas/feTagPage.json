@@ -158,24 +158,7 @@
                                                 ]
                                             },
                                             "format": {
-                                                "description": "FEFormat is the stringified version of Format passed through from Frontend.\nIt gets converted to the `@guardian/libs` format on platform",
-                                                "type": "object",
-                                                "properties": {
-                                                    "design": {
-                                                        "$ref": "#/definitions/FEDesign"
-                                                    },
-                                                    "theme": {
-                                                        "$ref": "#/definitions/FETheme"
-                                                    },
-                                                    "display": {
-                                                        "$ref": "#/definitions/FEDisplay"
-                                                    }
-                                                },
-                                                "required": [
-                                                    "design",
-                                                    "display",
-                                                    "theme"
-                                                ]
+                                                "$ref": "#/definitions/{design:\"ArticleDesign\"|\"PictureDesign\"|\"GalleryDesign\"|\"AudioDesign\"|\"VideoDesign\"|\"CrosswordDesign\"|\"ReviewDesign\"|\"AnalysisDesign\"|\"CommentDesign\"|\"ExplainerDesign\"|\"LetterDesign\"|\"FeatureDesign\"|\"LiveBlogDesign\"|\"DeadBlogDesign\"|\"RecipeDesign\"|\"MatchReportDesign\"|\"InterviewDesign\"|\"EditorialDesign\"|\"QuizDesign\"|\"InteractiveDesign\"|\"PhotoEssayDesign\"|\"ObituaryDesign\"|\"FullPageInteractiveDesign\"|\"NewsletterSignupDesign\"|\"TimelineDesign\"|\"ProfileDesign\";theme:\"NewsPillar\"|\"OpinionPillar\"|\"SportPillar\"|\"CulturePillar\"|\"LifestylePillar\"|\"SpecialReportTheme\"|\"Labs\"|\"SpecialReportAltTheme\";display:\"StandardDisplay\"|\"ImmersiveDisplay\"|\"ShowcaseDisplay\"|\"NumberedListDisplay\";}"
                                             }
                                         },
                                         "required": [
@@ -558,7 +541,15 @@
                                 "type": "string"
                             },
                             "starRating": {
-                                "$ref": "#/definitions/StarRating"
+                                "enum": [
+                                    0,
+                                    1,
+                                    2,
+                                    3,
+                                    4,
+                                    5
+                                ],
+                                "type": "number"
                             },
                             "shortUrlPath": {
                                 "type": "string"
@@ -639,24 +630,7 @@
                         ]
                     },
                     "format": {
-                        "description": "FEFormat is the stringified version of Format passed through from Frontend.\nIt gets converted to the `@guardian/libs` format on platform",
-                        "type": "object",
-                        "properties": {
-                            "design": {
-                                "$ref": "#/definitions/FEDesign"
-                            },
-                            "theme": {
-                                "$ref": "#/definitions/FETheme"
-                            },
-                            "display": {
-                                "$ref": "#/definitions/FEDisplay"
-                            }
-                        },
-                        "required": [
-                            "design",
-                            "display",
-                            "theme"
-                        ]
+                        "$ref": "#/definitions/{design:\"ArticleDesign\"|\"PictureDesign\"|\"GalleryDesign\"|\"AudioDesign\"|\"VideoDesign\"|\"CrosswordDesign\"|\"ReviewDesign\"|\"AnalysisDesign\"|\"CommentDesign\"|\"ExplainerDesign\"|\"LetterDesign\"|\"FeatureDesign\"|\"LiveBlogDesign\"|\"DeadBlogDesign\"|\"RecipeDesign\"|\"MatchReportDesign\"|\"InterviewDesign\"|\"EditorialDesign\"|\"QuizDesign\"|\"InteractiveDesign\"|\"PhotoEssayDesign\"|\"ObituaryDesign\"|\"FullPageInteractiveDesign\"|\"NewsletterSignupDesign\"|\"TimelineDesign\"|\"ProfileDesign\";theme:\"NewsPillar\"|\"OpinionPillar\"|\"SportPillar\"|\"CulturePillar\"|\"LifestylePillar\"|\"SpecialReportTheme\"|\"Labs\"|\"SpecialReportAltTheme\";display:\"StandardDisplay\"|\"ImmersiveDisplay\"|\"ShowcaseDisplay\"|\"NumberedListDisplay\";}"
                     },
                     "enriched": {
                         "type": "object",
@@ -731,24 +705,7 @@
                                     ]
                                 },
                                 "format": {
-                                    "description": "FEFormat is the stringified version of Format passed through from Frontend.\nIt gets converted to the `@guardian/libs` format on platform",
-                                    "type": "object",
-                                    "properties": {
-                                        "design": {
-                                            "$ref": "#/definitions/FEDesign"
-                                        },
-                                        "theme": {
-                                            "$ref": "#/definitions/FETheme"
-                                        },
-                                        "display": {
-                                            "$ref": "#/definitions/FEDisplay"
-                                        }
-                                    },
-                                    "required": [
-                                        "design",
-                                        "display",
-                                        "theme"
-                                    ]
+                                    "$ref": "#/definitions/{design:\"ArticleDesign\"|\"PictureDesign\"|\"GalleryDesign\"|\"AudioDesign\"|\"VideoDesign\"|\"CrosswordDesign\"|\"ReviewDesign\"|\"AnalysisDesign\"|\"CommentDesign\"|\"ExplainerDesign\"|\"LetterDesign\"|\"FeatureDesign\"|\"LiveBlogDesign\"|\"DeadBlogDesign\"|\"RecipeDesign\"|\"MatchReportDesign\"|\"InterviewDesign\"|\"EditorialDesign\"|\"QuizDesign\"|\"InteractiveDesign\"|\"PhotoEssayDesign\"|\"ObituaryDesign\"|\"FullPageInteractiveDesign\"|\"NewsletterSignupDesign\"|\"TimelineDesign\"|\"ProfileDesign\";theme:\"NewsPillar\"|\"OpinionPillar\"|\"SportPillar\"|\"CulturePillar\"|\"LifestylePillar\"|\"SpecialReportTheme\"|\"Labs\"|\"SpecialReportAltTheme\";display:\"StandardDisplay\"|\"ImmersiveDisplay\"|\"ShowcaseDisplay\"|\"NumberedListDisplay\";}"
                                 }
                             },
                             "required": [
@@ -1303,60 +1260,69 @@
         "webURL"
     ],
     "definitions": {
-        "FEDesign": {
-            "description": "FEDesign is what frontend gives (originating in the capi scala client) us on the Format field\nhttps://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Design.scala",
-            "enum": [
-                "AnalysisDesign",
-                "ArticleDesign",
-                "AudioDesign",
-                "CommentDesign",
-                "CrosswordDesign",
-                "DeadBlogDesign",
-                "EditorialDesign",
-                "ExplainerDesign",
-                "FeatureDesign",
-                "FullPageInteractiveDesign",
-                "GalleryDesign",
-                "InteractiveDesign",
-                "InterviewDesign",
-                "LetterDesign",
-                "LiveBlogDesign",
-                "MatchReportDesign",
-                "NewsletterSignupDesign",
-                "ObituaryDesign",
-                "PhotoEssayDesign",
-                "PictureDesign",
-                "ProfileDesign",
-                "QuizDesign",
-                "RecipeDesign",
-                "ReviewDesign",
-                "TimelineDesign",
-                "VideoDesign"
-            ],
-            "type": "string"
-        },
-        "FETheme": {
-            "enum": [
-                "CulturePillar",
-                "Labs",
-                "LifestylePillar",
-                "NewsPillar",
-                "OpinionPillar",
-                "SpecialReportAltTheme",
-                "SpecialReportTheme",
-                "SportPillar"
-            ],
-            "type": "string"
-        },
-        "FEDisplay": {
-            "description": "FEDisplay is the display information passed through from frontend (originating in the capi scala client) and dictates the display style of the content e.g. Immersive\nhttps://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Display.scala",
-            "enum": [
-                "ImmersiveDisplay",
-                "NumberedListDisplay",
-                "ShowcaseDisplay",
-                "StandardDisplay"
-            ],
-            "type": "string"
+        "{design:\"ArticleDesign\"|\"PictureDesign\"|\"GalleryDesign\"|\"AudioDesign\"|\"VideoDesign\"|\"CrosswordDesign\"|\"ReviewDesign\"|\"AnalysisDesign\"|\"CommentDesign\"|\"ExplainerDesign\"|\"LetterDesign\"|\"FeatureDesign\"|\"LiveBlogDesign\"|\"DeadBlogDesign\"|\"RecipeDesign\"|\"MatchReportDesign\"|\"InterviewDesign\"|\"EditorialDesign\"|\"QuizDesign\"|\"InteractiveDesign\"|\"PhotoEssayDesign\"|\"ObituaryDesign\"|\"FullPageInteractiveDesign\"|\"NewsletterSignupDesign\"|\"TimelineDesign\"|\"ProfileDesign\";theme:\"NewsPillar\"|\"OpinionPillar\"|\"SportPillar\"|\"CulturePillar\"|\"LifestylePillar\"|\"SpecialReportTheme\"|\"Labs\"|\"SpecialReportAltTheme\";display:\"StandardDisplay\"|\"ImmersiveDisplay\"|\"ShowcaseDisplay\"|\"NumberedListDisplay\";}": {
+            "description": "FEFormat is the stringified version of Format passed through from Frontend.\nIt gets converted to the `@guardian/libs` format on platform",
+            "type": "object",
+            "properties": {
+                "design": {
+                    "enum": [
+                        "AnalysisDesign",
+                        "ArticleDesign",
+                        "AudioDesign",
+                        "CommentDesign",
+                        "CrosswordDesign",
+                        "DeadBlogDesign",
+                        "EditorialDesign",
+                        "ExplainerDesign",
+                        "FeatureDesign",
+                        "FullPageInteractiveDesign",
+                        "GalleryDesign",
+                        "InteractiveDesign",
+                        "InterviewDesign",
+                        "LetterDesign",
+                        "LiveBlogDesign",
+                        "MatchReportDesign",
+                        "NewsletterSignupDesign",
+                        "ObituaryDesign",
+                        "PhotoEssayDesign",
+                        "PictureDesign",
+                        "ProfileDesign",
+                        "QuizDesign",
+                        "RecipeDesign",
+                        "ReviewDesign",
+                        "TimelineDesign",
+                        "VideoDesign"
+                    ],
+                    "type": "string"
+                },
+                "theme": {
+                    "enum": [
+                        "CulturePillar",
+                        "Labs",
+                        "LifestylePillar",
+                        "NewsPillar",
+                        "OpinionPillar",
+                        "SpecialReportAltTheme",
+                        "SpecialReportTheme",
+                        "SportPillar"
+                    ],
+                    "type": "string"
+                },
+                "display": {
+                    "enum": [
+                        "ImmersiveDisplay",
+                        "NumberedListDisplay",
+                        "ShowcaseDisplay",
+                        "StandardDisplay"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "design",
+                "display",
+                "theme"
+            ]
         },
         "FEMediaAtom": {
             "type": "object",
@@ -1507,7 +1473,7 @@
                     ]
                 },
                 "branding": {
-                    "$ref": "#/definitions/Branding"
+                    "$ref": "#/definitions/{sponsorName:string;logo:{src:string;link:string;label:string;dimensions:{width:number;height:number;};};aboutThisLink:string;brandingType?:{name:\"paid-content\";}|{name:\"foundation\";}|{name:\"sponsored\";};logoForDarkBackground?:{src:string;link:string;label:string;dimensions:{width:number;height:number;};};}"
                 }
             },
             "required": [
@@ -1524,87 +1490,33 @@
             ],
             "type": "string"
         },
-        "Branding": {
+        "{sponsorName:string;logo:{src:string;link:string;label:string;dimensions:{width:number;height:number;};};aboutThisLink:string;brandingType?:{name:\"paid-content\";}|{name:\"foundation\";}|{name:\"sponsored\";};logoForDarkBackground?:{src:string;link:string;label:string;dimensions:{width:number;height:number;};};}": {
             "type": "object",
             "properties": {
-                "brandingType": {
-                    "$ref": "#/definitions/BrandingType"
-                },
                 "sponsorName": {
                     "type": "string"
                 },
                 "logo": {
-                    "type": "object",
-                    "properties": {
-                        "src": {
-                            "type": "string"
-                        },
-                        "link": {
-                            "type": "string"
-                        },
-                        "label": {
-                            "type": "string"
-                        },
-                        "dimensions": {
-                            "type": "object",
-                            "properties": {
-                                "width": {
-                                    "type": "number"
-                                },
-                                "height": {
-                                    "type": "number"
-                                }
-                            },
-                            "required": [
-                                "height",
-                                "width"
-                            ]
-                        }
-                    },
-                    "required": [
-                        "dimensions",
-                        "label",
-                        "link",
-                        "src"
-                    ]
+                    "$ref": "#/definitions/{src:string;link:string;label:string;dimensions:{width:number;height:number;};}"
                 },
                 "aboutThisLink": {
                     "type": "string"
                 },
-                "logoForDarkBackground": {
-                    "type": "object",
-                    "properties": {
-                        "src": {
-                            "type": "string"
+                "brandingType": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/{name:\"paid-content\";}"
                         },
-                        "link": {
-                            "type": "string"
+                        {
+                            "$ref": "#/definitions/{name:\"foundation\";}"
                         },
-                        "label": {
-                            "type": "string"
-                        },
-                        "dimensions": {
-                            "type": "object",
-                            "properties": {
-                                "width": {
-                                    "type": "number"
-                                },
-                                "height": {
-                                    "type": "number"
-                                }
-                            },
-                            "required": [
-                                "height",
-                                "width"
-                            ]
+                        {
+                            "$ref": "#/definitions/{name:\"sponsored\";}"
                         }
-                    },
-                    "required": [
-                        "dimensions",
-                        "label",
-                        "link",
-                        "src"
                     ]
+                },
+                "logoForDarkBackground": {
+                    "$ref": "#/definitions/{src:string;link:string;label:string;dimensions:{width:number;height:number;};}"
                 }
             },
             "required": [
@@ -1613,44 +1525,78 @@
                 "sponsorName"
             ]
         },
-        "BrandingType": {
-            "anyOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "const": "paid-content"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
+        "{src:string;link:string;label:string;dimensions:{width:number;height:number;};}": {
+            "type": "object",
+            "properties": {
+                "src": {
+                    "type": "string"
                 },
-                {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "const": "foundation"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
+                "link": {
+                    "type": "string"
                 },
-                {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "const": "sponsored"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
+                "label": {
+                    "type": "string"
+                },
+                "dimensions": {
+                    "$ref": "#/definitions/{width:number;height:number;}"
                 }
+            },
+            "required": [
+                "dimensions",
+                "label",
+                "link",
+                "src"
+            ]
+        },
+        "{width:number;height:number;}": {
+            "type": "object",
+            "properties": {
+                "width": {
+                    "type": "number"
+                },
+                "height": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "height",
+                "width"
+            ]
+        },
+        "{name:\"paid-content\";}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "const": "paid-content"
+                }
+            },
+            "required": [
+                "name"
+            ]
+        },
+        "{name:\"foundation\";}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "const": "foundation"
+                }
+            },
+            "required": [
+                "name"
+            ]
+        },
+        "{name:\"sponsored\";}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "const": "sponsored"
+                }
+            },
+            "required": [
+                "name"
             ]
         },
         "FEFrontCardStyle": {
@@ -1670,17 +1616,6 @@
                 "SpecialReportAlt"
             ],
             "type": "string"
-        },
-        "StarRating": {
-            "enum": [
-                0,
-                1,
-                2,
-                3,
-                4,
-                5
-            ],
-            "type": "number"
         },
         "BoostLevel": {
             "enum": [
@@ -1914,7 +1849,7 @@
                     }
                 },
                 "branding": {
-                    "$ref": "#/definitions/Branding"
+                    "$ref": "#/definitions/{sponsorName:string;logo:{src:string;link:string;label:string;dimensions:{width:number;height:number;};};aboutThisLink:string;brandingType?:{name:\"paid-content\";}|{name:\"foundation\";}|{name:\"sponsored\";};logoForDarkBackground?:{src:string;link:string;label:string;dimensions:{width:number;height:number;};};}"
                 }
             },
             "required": [
