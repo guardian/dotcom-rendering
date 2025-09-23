@@ -2,9 +2,8 @@ import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import type { ReactNode } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
-import type { EditionId } from '../lib/edition';
-import { RenderArticleElement } from '../lib/renderElement';
-import type { FEElement } from '../types/content';
+import type { NestedArticleElement } from '../lib/renderElement';
+import type { FEElement, ProductBlockElement } from '../types/content';
 import { InlineProductCard } from './InlineProductCard';
 import { LeftColProductCard } from './LeftColProductCard';
 import { subheadingStyles } from './Subheading';
@@ -45,11 +44,11 @@ const LeftColProductCardContainer = ({ children }: { children: ReactNode }) => (
 );
 export const ProductElement = ({
 	product,
-	editionId,
+	ArticleElementComponent,
 	format,
 }: {
-	product: Product;
-	editionId: EditionId;
+	product: ProductBlockElement;
+	ArticleElementComponent: NestedArticleElement;
 	format: ArticleFormat;
 }) => {
 	return (
@@ -58,54 +57,49 @@ export const ProductElement = ({
 				position: relative;
 			`}
 		>
-			{(!!product.primaryHeadline || !!product.secondaryHeadline) && (
+			{(!!product.primaryHeading || !!product.secondaryHeading) && (
 				<h2 css={[subheadingStyles(format)]}>
-					<em>{product.primaryHeadline}:</em>
-					<br />
-					{product.secondaryHeadline}
+					<span
+						dangerouslySetInnerHTML={{
+							__html:
+								product.primaryHeading &&
+								product.secondaryHeading,
+						}}
+					></span>
 				</h2>
 			)}
 			<LeftColProductCardContainer>
 				<LeftColProductCard
 					brandName={product.brandName}
 					productName={product.productName}
-					image={product.image}
-					url={product.url}
-					price={product.price}
-					retailer={product.retailer}
+					image={product.image.url}
+					url={product.primaryProductUrl}
+					price={product.primaryPrice}
+					retailer={product.primaryRetailer}
 					statistics={product.statistics}
 				/>
 			</LeftColProductCardContainer>
 			{product.content.map((element, index) => (
-				<RenderArticleElement
+				<ArticleElementComponent
+					element={element}
 					// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
 					key={index}
-					format={format}
-					element={element}
 					index={index}
+					format={format}
 					isMainMedia={false}
-					pageId=""
-					webTitle=""
-					ajaxUrl=""
-					isAdFreeUser={false}
-					isSensitive={false}
-					switches={{}}
-					abTests={{}}
-					editionId={editionId}
-					shouldHideAds={false}
 				/>
 			))}
 			<InlineProductCard
 				format={format}
 				brandName={product.brandName}
 				productName={product.productName}
-				image={product.image}
-				primaryUrl={product.url}
-				primaryPrice={product.price}
-				primaryRetailer={product.retailer}
-				primaryCTA={product.cta}
-				secondaryCTA={product.secondaryCTA}
-				secondaryUrl={product.secondaryUrl}
+				image={product.image.url}
+				primaryUrl={product.primaryProductUrl}
+				primaryPrice={product.primaryPrice}
+				primaryRetailer={product.primaryRetailer}
+				primaryCTA={product.primaryCta}
+				secondaryCTA={product.secondaryCta}
+				secondaryUrl={product.secondaryProductUrl}
 				statistics={product.statistics}
 			/>
 		</div>
