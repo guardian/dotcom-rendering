@@ -16,6 +16,10 @@ import {
 	textSans15,
 	textSans17,
 	textSans20,
+	textSansBold12,
+	textSansBold15,
+	textSansBold17,
+	textSansBold20,
 	until,
 } from '@guardian/source/foundations';
 import { Link, SvgExternal } from '@guardian/source/react-components';
@@ -50,6 +54,7 @@ type Props = {
 	kickerColour?: string;
 	quoteColour?: string;
 	kickerImage?: PodcastSeriesImage;
+	showLabsRedesign?: boolean;
 };
 
 const sublinkStyles = css`
@@ -106,6 +111,35 @@ const fontFamilies = {
 	},
 } as const;
 
+/** These represent the font groups used by card headline */
+const fontFamiliesLabs = {
+	headlineMedium: {
+		xxxlarge: headlineMedium64,
+		xxlarge: headlineMedium50,
+		xlarge: headlineMedium42,
+		large: headlineMedium34,
+		medium: headlineMedium28,
+		small: headlineMedium24,
+		xsmall: headlineMedium20,
+		xxsmall: headlineMedium17,
+		xxxsmall: headlineMedium15,
+		tiny: headlineMedium14,
+	},
+	/** Line height for sans style headlines for labs is overridden to match that of other headlines (1.15) */
+	textSans: {
+		xxxlarge: `${textSansBold20}\n\tline-height: 1.15;\n`,
+		xxlarge: `${textSansBold20}\n\tline-height: 1.15;\n`,
+		xlarge: `${textSansBold20}\n\tline-height: 1.15;\n`,
+		large: `${textSansBold20}\n\tline-height: 1.15;\n`,
+		medium: `${textSansBold20}\n\tline-height: 1.15;\n`,
+		small: `${textSansBold20}\n\tline-height: 1.15;\n`,
+		xsmall: `${textSansBold20}\n\tline-height: 1.15;\n`,
+		xxsmall: `${textSansBold17}\n\tline-height: 1.15;\n`,
+		xxxsmall: `${textSansBold15}\n\tline-height: 1.15;\n`,
+		tiny: `${textSansBold12}\n\tline-height: 1.15;\n`,
+	},
+} as const;
+
 export enum FontFamily {
 	HeadlineMedium = 'headlineMedium',
 	TextSans = 'textSans',
@@ -120,8 +154,12 @@ export type ResponsiveFontSize = {
 	mobileMedium?: HeadlineSize;
 };
 
-const getFontSize = (sizes: ResponsiveFontSize, family: FontFamily) => {
-	const font = fontFamilies[family];
+const getFontSize = (
+	sizes: ResponsiveFontSize,
+	family: FontFamily,
+	fontSource?: typeof fontFamilies | typeof fontFamiliesLabs,
+) => {
+	const font = (fontSource ?? fontFamilies)[family];
 
 	const { desktop, tablet, mobileMedium, mobile } = sizes;
 
@@ -151,12 +189,17 @@ const getFontSize = (sizes: ResponsiveFontSize, family: FontFamily) => {
 	`;
 };
 
-const getFonts = (format: ArticleFormat, fontSizes: ResponsiveFontSize) => {
-	if (format.theme === ArticleSpecial.Labs) {
-		return getFontSize(fontSizes, FontFamily.TextSans);
-	}
+const getFonts = (
+	format: ArticleFormat,
+	fontSizes: ResponsiveFontSize,
+	showLabsRedesign: boolean,
+) => {
+	const isLabs = format.theme === ArticleSpecial.Labs;
+	const fontSource =
+		isLabs && showLabsRedesign ? fontFamiliesLabs : fontFamilies;
+	const family = isLabs ? FontFamily.TextSans : FontFamily.HeadlineMedium;
 
-	return getFontSize(fontSizes, FontFamily.HeadlineMedium);
+	return getFontSize(fontSizes, family, fontSource);
 };
 
 export const WithLink = ({
@@ -193,11 +236,23 @@ export const CardHeadline = ({
 	kickerColour = palette('--card-kicker-text'),
 	quoteColour = palette('--card-quote-icon'),
 	kickerImage,
+	showLabsRedesign = true,
 }: Props) => {
 	// The link is only applied directly to the headline if it is a sublink
 	const isSublink = !!linkTo;
-
-	const fontStyles = getFonts(format, fontSizes);
+	const fontStyles = getFonts(format, fontSizes, showLabsRedesign);
+	console.log('TEST DCR LOCAL');
+	if (showLabsRedesign && format.theme === ArticleSpecial.Labs) {
+		console.log(`showLabsRedesign ${showLabsRedesign}`);
+		// New Labs styling
+	}
+	if (showLabsRedesign) {
+		console.log(`showLabsRedesign2 ${showLabsRedesign}`);
+		// New Labs styling
+	}
+	console.log('CardHeadline render count:', Math.random()); // Unique identifier per render
+	console.log('Format theme:', format.theme);
+	console.log('showLabsRedesign:', showLabsRedesign);
 
 	return (
 		<WithLink linkTo={linkTo}>

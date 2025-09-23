@@ -48,6 +48,7 @@ type Props = {
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
 	isInHideTrailsAbTest?: boolean;
+	showLabsRedesign?: boolean;
 };
 
 export const DecideContainer = ({
@@ -64,6 +65,7 @@ export const DecideContainer = ({
 	collectionId,
 	containerLevel,
 	isInHideTrailsAbTest,
+	showLabsRedesign,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -261,6 +263,7 @@ export const DecideContainer = ({
 					containerLevel={containerLevel}
 					collectionId={collectionId}
 					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
+					showLabsRedesign={showLabsRedesign ?? false}
 				/>
 			);
 		case 'scrollable/small':

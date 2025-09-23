@@ -654,6 +654,7 @@ export const FrontSection = ({
 	 */
 	return (
 		<ContainerOverrides containerPalette={containerPalette}>
+			<div>TOP OF FRONTSECITON COMP</div>
 			<section
 				id={sectionId}
 				data-link-name={ophanComponentLink}
