@@ -119,24 +119,7 @@
             }
         },
         "format": {
-            "description": "FEFormat is the stringified version of Format passed through from Frontend.\nIt gets converted to the `@guardian/libs` format on platform",
-            "type": "object",
-            "properties": {
-                "design": {
-                    "$ref": "#/definitions/FEDesign"
-                },
-                "theme": {
-                    "$ref": "#/definitions/FETheme"
-                },
-                "display": {
-                    "$ref": "#/definitions/FEDisplay"
-                }
-            },
-            "required": [
-                "design",
-                "display",
-                "theme"
-            ]
+            "$ref": "#/definitions/{design:\"ArticleDesign\"|\"PictureDesign\"|\"GalleryDesign\"|\"AudioDesign\"|\"VideoDesign\"|\"CrosswordDesign\"|\"ReviewDesign\"|\"AnalysisDesign\"|\"CommentDesign\"|\"ExplainerDesign\"|\"LetterDesign\"|\"FeatureDesign\"|\"LiveBlogDesign\"|\"DeadBlogDesign\"|\"RecipeDesign\"|\"MatchReportDesign\"|\"InterviewDesign\"|\"EditorialDesign\"|\"QuizDesign\"|\"InteractiveDesign\"|\"PhotoEssayDesign\"|\"ObituaryDesign\"|\"FullPageInteractiveDesign\"|\"NewsletterSignupDesign\"|\"TimelineDesign\"|\"ProfileDesign\";theme:\"NewsPillar\"|\"OpinionPillar\"|\"SportPillar\"|\"CulturePillar\"|\"LifestylePillar\"|\"SpecialReportTheme\"|\"Labs\"|\"SpecialReportAltTheme\";display:\"StandardDisplay\"|\"ImmersiveDisplay\"|\"ShowcaseDisplay\"|\"NumberedListDisplay\";}"
         },
         "designType": {
             "type": "string"
@@ -229,7 +212,7 @@
                 "trails": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/FETrailType"
+                        "$ref": "#/definitions/{url:string;headline:string;format:{design:\"ArticleDesign\"|\"PictureDesign\"|\"GalleryDesign\"|\"AudioDesign\"|\"VideoDesign\"|\"CrosswordDesign\"|\"ReviewDesign\"|\"AnalysisDesign\"|\"CommentDesign\"|\"ExplainerDesign\"|\"LetterDesign\"|\"FeatureDesign\"|\"LiveBlogDesign\"|\"DeadBlogDesign\"|\"RecipeDesign\"|\"MatchReportDesign\"|\"InterviewDesign\"|\"EditorialDesign\"|\"QuizDesign\"|\"InteractiveDesign\"|\"PhotoEssayDesign\"|\"ObituaryDesign\"|\"FullPageInteractiveDesign\"|\"NewsletterSignupDesign\"|\"TimelineDesign\"|\"ProfileDesign\";theme:\"NewsPillar\"|\"OpinionPillar\"|\"SportPillar\"|\"CulturePillar\"|\"LifestylePillar\"|\"SpecialReportTheme\"|\"Labs\"|\"SpecialReportAltTheme\";display:\"StandardDisplay\"|\"ImmersiveDisplay\"|\"ShowcaseDisplay\"|\"NumberedListDisplay\";};webPublicationDate?:string;avatarUrl?:string;mediaDuration?:number;ageWarning?:string;byline?:string;showByline?:boolean;kickerText?:string;shortUrl?:string;commentCount?:number;starRating?:0|5|4|3|2|1;linkText?:string;branding?:{sponsorName:string;logo:{src:string;link:string;label:string;dimensions:{width:number;height:number;};};aboutThisLink:string;brandingType?:{name:\"paid-content\";}|{name:\"foundation\";}|{name:\"sponsored\";};logoForDarkBackground?:{src:string;link:string;label:string;dimensions:{width:number;height:number;};};};isSnap?:boolean;isCrossword?:boolean;snapData?:{embedHtml?:string;embedCss?:string;embedJs?:string;};showQuotedHeadline?:boolean;discussion?:{isCommentable:boolean;isClosedForComments:boolean;discussionId?:string;};mainMedia?:{width:number;height:number;type:\"Video\";id:string;videoId:string;origin:string;title:string;duration:number;expired:boolean;image?:string;}|{width:number;height:number;type:\"LoopVideo\";videoId:string;duration:number;atomId:string;image?:string;}|{type:\"Audio\";duration:string;podcastImage?:{src?:string;altText?:string;};}|{type:\"Gallery\";count:string;};image?:string;designType?:string;pillar?:string;carouselImages?:{[x:string]:string;};isLiveBlog?:boolean;masterImage?:string;}"
                     }
                 }
             },
@@ -250,7 +233,7 @@
                     "trails": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/definitions/FETrailType"
+                            "$ref": "#/definitions/{url:string;headline:string;format:{design:\"ArticleDesign\"|\"PictureDesign\"|\"GalleryDesign\"|\"AudioDesign\"|\"VideoDesign\"|\"CrosswordDesign\"|\"ReviewDesign\"|\"AnalysisDesign\"|\"CommentDesign\"|\"ExplainerDesign\"|\"LetterDesign\"|\"FeatureDesign\"|\"LiveBlogDesign\"|\"DeadBlogDesign\"|\"RecipeDesign\"|\"MatchReportDesign\"|\"InterviewDesign\"|\"EditorialDesign\"|\"QuizDesign\"|\"InteractiveDesign\"|\"PhotoEssayDesign\"|\"ObituaryDesign\"|\"FullPageInteractiveDesign\"|\"NewsletterSignupDesign\"|\"TimelineDesign\"|\"ProfileDesign\";theme:\"NewsPillar\"|\"OpinionPillar\"|\"SportPillar\"|\"CulturePillar\"|\"LifestylePillar\"|\"SpecialReportTheme\"|\"Labs\"|\"SpecialReportAltTheme\";display:\"StandardDisplay\"|\"ImmersiveDisplay\"|\"ShowcaseDisplay\"|\"NumberedListDisplay\";};webPublicationDate?:string;avatarUrl?:string;mediaDuration?:number;ageWarning?:string;byline?:string;showByline?:boolean;kickerText?:string;shortUrl?:string;commentCount?:number;starRating?:0|5|4|3|2|1;linkText?:string;branding?:{sponsorName:string;logo:{src:string;link:string;label:string;dimensions:{width:number;height:number;};};aboutThisLink:string;brandingType?:{name:\"paid-content\";}|{name:\"foundation\";}|{name:\"sponsored\";};logoForDarkBackground?:{src:string;link:string;label:string;dimensions:{width:number;height:number;};};};isSnap?:boolean;isCrossword?:boolean;snapData?:{embedHtml?:string;embedCss?:string;embedJs?:string;};showQuotedHeadline?:boolean;discussion?:{isCommentable:boolean;isClosedForComments:boolean;discussionId?:string;};mainMedia?:{width:number;height:number;type:\"Video\";id:string;videoId:string;origin:string;title:string;duration:number;expired:boolean;image?:string;}|{width:number;height:number;type:\"LoopVideo\";videoId:string;duration:number;atomId:string;image?:string;}|{type:\"Audio\";duration:string;podcastImage?:{src?:string;altText?:string;};}|{type:\"Gallery\";count:string;};image?:string;designType?:string;pillar?:string;carouselImages?:{[x:string]:string;};isLiveBlog?:boolean;masterImage?:string;}"
                         }
                     },
                     "description": {
@@ -263,24 +246,7 @@
                         "$ref": "#/definitions/OnwardsSource"
                     },
                     "format": {
-                        "description": "FEFormat is the stringified version of Format passed through from Frontend.\nIt gets converted to the `@guardian/libs` format on platform",
-                        "type": "object",
-                        "properties": {
-                            "design": {
-                                "$ref": "#/definitions/FEDesign"
-                            },
-                            "theme": {
-                                "$ref": "#/definitions/FETheme"
-                            },
-                            "display": {
-                                "$ref": "#/definitions/FEDisplay"
-                            }
-                        },
-                        "required": [
-                            "design",
-                            "display",
-                            "theme"
-                        ]
+                        "$ref": "#/definitions/{design:\"ArticleDesign\"|\"PictureDesign\"|\"GalleryDesign\"|\"AudioDesign\"|\"VideoDesign\"|\"CrosswordDesign\"|\"ReviewDesign\"|\"AnalysisDesign\"|\"CommentDesign\"|\"ExplainerDesign\"|\"LetterDesign\"|\"FeatureDesign\"|\"LiveBlogDesign\"|\"DeadBlogDesign\"|\"RecipeDesign\"|\"MatchReportDesign\"|\"InterviewDesign\"|\"EditorialDesign\"|\"QuizDesign\"|\"InteractiveDesign\"|\"PhotoEssayDesign\"|\"ObituaryDesign\"|\"FullPageInteractiveDesign\"|\"NewsletterSignupDesign\"|\"TimelineDesign\"|\"ProfileDesign\";theme:\"NewsPillar\"|\"OpinionPillar\"|\"SportPillar\"|\"CulturePillar\"|\"LifestylePillar\"|\"SpecialReportTheme\"|\"Labs\"|\"SpecialReportAltTheme\";display:\"StandardDisplay\"|\"ImmersiveDisplay\"|\"ShowcaseDisplay\"|\"NumberedListDisplay\";}"
                     },
                     "isCuratedContent": {
                         "type": "boolean"
@@ -304,7 +270,15 @@
             "$ref": "#/definitions/CommercialProperties"
         },
         "starRating": {
-            "$ref": "#/definitions/StarRating"
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "type": "number"
         },
         "audioArticleImage": {
             "$ref": "#/definitions/ImageBlockElement"
@@ -2204,7 +2178,15 @@
                     "type": "string"
                 },
                 "starRating": {
-                    "$ref": "#/definitions/StarRating"
+                    "enum": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
+                    ],
+                    "type": "number"
                 },
                 "isAvatar": {
                     "type": "boolean"
@@ -2267,17 +2249,6 @@
                 "src",
                 "width"
             ]
-        },
-        "StarRating": {
-            "enum": [
-                0,
-                1,
-                2,
-                3,
-                4,
-                5
-            ],
-            "type": "number"
         },
         "InstagramBlockElement": {
             "type": "object",
@@ -3332,7 +3303,15 @@
                     "type": "string"
                 },
                 "rating": {
-                    "$ref": "#/definitions/StarRating"
+                    "enum": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
+                    ],
+                    "type": "number"
                 },
                 "size": {
                     "$ref": "#/definitions/RatingSizeType"
@@ -4576,60 +4555,69 @@
             ],
             "type": "string"
         },
-        "FEDesign": {
-            "description": "FEDesign is what frontend gives (originating in the capi scala client) us on the Format field\nhttps://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Design.scala",
-            "enum": [
-                "AnalysisDesign",
-                "ArticleDesign",
-                "AudioDesign",
-                "CommentDesign",
-                "CrosswordDesign",
-                "DeadBlogDesign",
-                "EditorialDesign",
-                "ExplainerDesign",
-                "FeatureDesign",
-                "FullPageInteractiveDesign",
-                "GalleryDesign",
-                "InteractiveDesign",
-                "InterviewDesign",
-                "LetterDesign",
-                "LiveBlogDesign",
-                "MatchReportDesign",
-                "NewsletterSignupDesign",
-                "ObituaryDesign",
-                "PhotoEssayDesign",
-                "PictureDesign",
-                "ProfileDesign",
-                "QuizDesign",
-                "RecipeDesign",
-                "ReviewDesign",
-                "TimelineDesign",
-                "VideoDesign"
-            ],
-            "type": "string"
-        },
-        "FETheme": {
-            "enum": [
-                "CulturePillar",
-                "Labs",
-                "LifestylePillar",
-                "NewsPillar",
-                "OpinionPillar",
-                "SpecialReportAltTheme",
-                "SpecialReportTheme",
-                "SportPillar"
-            ],
-            "type": "string"
-        },
-        "FEDisplay": {
-            "description": "FEDisplay is the display information passed through from frontend (originating in the capi scala client) and dictates the display style of the content e.g. Immersive\nhttps://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Display.scala",
-            "enum": [
-                "ImmersiveDisplay",
-                "NumberedListDisplay",
-                "ShowcaseDisplay",
-                "StandardDisplay"
-            ],
-            "type": "string"
+        "{design:\"ArticleDesign\"|\"PictureDesign\"|\"GalleryDesign\"|\"AudioDesign\"|\"VideoDesign\"|\"CrosswordDesign\"|\"ReviewDesign\"|\"AnalysisDesign\"|\"CommentDesign\"|\"ExplainerDesign\"|\"LetterDesign\"|\"FeatureDesign\"|\"LiveBlogDesign\"|\"DeadBlogDesign\"|\"RecipeDesign\"|\"MatchReportDesign\"|\"InterviewDesign\"|\"EditorialDesign\"|\"QuizDesign\"|\"InteractiveDesign\"|\"PhotoEssayDesign\"|\"ObituaryDesign\"|\"FullPageInteractiveDesign\"|\"NewsletterSignupDesign\"|\"TimelineDesign\"|\"ProfileDesign\";theme:\"NewsPillar\"|\"OpinionPillar\"|\"SportPillar\"|\"CulturePillar\"|\"LifestylePillar\"|\"SpecialReportTheme\"|\"Labs\"|\"SpecialReportAltTheme\";display:\"StandardDisplay\"|\"ImmersiveDisplay\"|\"ShowcaseDisplay\"|\"NumberedListDisplay\";}": {
+            "description": "FEFormat is the stringified version of Format passed through from Frontend.\nIt gets converted to the `@guardian/libs` format on platform",
+            "type": "object",
+            "properties": {
+                "design": {
+                    "enum": [
+                        "AnalysisDesign",
+                        "ArticleDesign",
+                        "AudioDesign",
+                        "CommentDesign",
+                        "CrosswordDesign",
+                        "DeadBlogDesign",
+                        "EditorialDesign",
+                        "ExplainerDesign",
+                        "FeatureDesign",
+                        "FullPageInteractiveDesign",
+                        "GalleryDesign",
+                        "InteractiveDesign",
+                        "InterviewDesign",
+                        "LetterDesign",
+                        "LiveBlogDesign",
+                        "MatchReportDesign",
+                        "NewsletterSignupDesign",
+                        "ObituaryDesign",
+                        "PhotoEssayDesign",
+                        "PictureDesign",
+                        "ProfileDesign",
+                        "QuizDesign",
+                        "RecipeDesign",
+                        "ReviewDesign",
+                        "TimelineDesign",
+                        "VideoDesign"
+                    ],
+                    "type": "string"
+                },
+                "theme": {
+                    "enum": [
+                        "CulturePillar",
+                        "Labs",
+                        "LifestylePillar",
+                        "NewsPillar",
+                        "OpinionPillar",
+                        "SpecialReportAltTheme",
+                        "SpecialReportTheme",
+                        "SportPillar"
+                    ],
+                    "type": "string"
+                },
+                "display": {
+                    "enum": [
+                        "ImmersiveDisplay",
+                        "NumberedListDisplay",
+                        "ShowcaseDisplay",
+                        "StandardDisplay"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "design",
+                "display",
+                "theme"
+            ]
         },
         "LegacyPillar": {
             "enum": [
@@ -4907,55 +4895,17 @@
         "SharedAdTargeting": {
             "type": "object"
         },
-        "FETrailType": {
+        "{url:string;headline:string;format:{design:\"ArticleDesign\"|\"PictureDesign\"|\"GalleryDesign\"|\"AudioDesign\"|\"VideoDesign\"|\"CrosswordDesign\"|\"ReviewDesign\"|\"AnalysisDesign\"|\"CommentDesign\"|\"ExplainerDesign\"|\"LetterDesign\"|\"FeatureDesign\"|\"LiveBlogDesign\"|\"DeadBlogDesign\"|\"RecipeDesign\"|\"MatchReportDesign\"|\"InterviewDesign\"|\"EditorialDesign\"|\"QuizDesign\"|\"InteractiveDesign\"|\"PhotoEssayDesign\"|\"ObituaryDesign\"|\"FullPageInteractiveDesign\"|\"NewsletterSignupDesign\"|\"TimelineDesign\"|\"ProfileDesign\";theme:\"NewsPillar\"|\"OpinionPillar\"|\"SportPillar\"|\"CulturePillar\"|\"LifestylePillar\"|\"SpecialReportTheme\"|\"Labs\"|\"SpecialReportAltTheme\";display:\"StandardDisplay\"|\"ImmersiveDisplay\"|\"ShowcaseDisplay\"|\"NumberedListDisplay\";};webPublicationDate?:string;avatarUrl?:string;mediaDuration?:number;ageWarning?:string;byline?:string;showByline?:boolean;kickerText?:string;shortUrl?:string;commentCount?:number;starRating?:0|5|4|3|2|1;linkText?:string;branding?:{sponsorName:string;logo:{src:string;link:string;label:string;dimensions:{width:number;height:number;};};aboutThisLink:string;brandingType?:{name:\"paid-content\";}|{name:\"foundation\";}|{name:\"sponsored\";};logoForDarkBackground?:{src:string;link:string;label:string;dimensions:{width:number;height:number;};};};isSnap?:boolean;isCrossword?:boolean;snapData?:{embedHtml?:string;embedCss?:string;embedJs?:string;};showQuotedHeadline?:boolean;discussion?:{isCommentable:boolean;isClosedForComments:boolean;discussionId?:string;};mainMedia?:{width:number;height:number;type:\"Video\";id:string;videoId:string;origin:string;title:string;duration:number;expired:boolean;image?:string;}|{width:number;height:number;type:\"LoopVideo\";videoId:string;duration:number;atomId:string;image?:string;}|{type:\"Audio\";duration:string;podcastImage?:{src?:string;altText?:string;};}|{type:\"Gallery\";count:string;};image?:string;designType?:string;pillar?:string;carouselImages?:{[x:string]:string;};isLiveBlog?:boolean;masterImage?:string;}": {
             "type": "object",
             "properties": {
-                "format": {
-                    "description": "FEFormat is the stringified version of Format passed through from Frontend.\nIt gets converted to the `@guardian/libs` format on platform",
-                    "type": "object",
-                    "properties": {
-                        "design": {
-                            "$ref": "#/definitions/FEDesign"
-                        },
-                        "theme": {
-                            "$ref": "#/definitions/FETheme"
-                        },
-                        "display": {
-                            "$ref": "#/definitions/FEDisplay"
-                        }
-                    },
-                    "required": [
-                        "design",
-                        "display",
-                        "theme"
-                    ]
-                },
-                "designType": {
-                    "type": "string"
-                },
-                "pillar": {
-                    "type": "string"
-                },
-                "carouselImages": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "isLiveBlog": {
-                    "type": "boolean"
-                },
-                "masterImage": {
-                    "type": "string"
-                },
-                "image": {
-                    "type": "string"
-                },
                 "url": {
                     "type": "string"
                 },
                 "headline": {
                     "type": "string"
+                },
+                "format": {
+                    "$ref": "#/definitions/{design:\"ArticleDesign\"|\"PictureDesign\"|\"GalleryDesign\"|\"AudioDesign\"|\"VideoDesign\"|\"CrosswordDesign\"|\"ReviewDesign\"|\"AnalysisDesign\"|\"CommentDesign\"|\"ExplainerDesign\"|\"LetterDesign\"|\"FeatureDesign\"|\"LiveBlogDesign\"|\"DeadBlogDesign\"|\"RecipeDesign\"|\"MatchReportDesign\"|\"InterviewDesign\"|\"EditorialDesign\"|\"QuizDesign\"|\"InteractiveDesign\"|\"PhotoEssayDesign\"|\"ObituaryDesign\"|\"FullPageInteractiveDesign\"|\"NewsletterSignupDesign\"|\"TimelineDesign\"|\"ProfileDesign\";theme:\"NewsPillar\"|\"OpinionPillar\"|\"SportPillar\"|\"CulturePillar\"|\"LifestylePillar\"|\"SpecialReportTheme\"|\"Labs\"|\"SpecialReportAltTheme\";display:\"StandardDisplay\"|\"ImmersiveDisplay\"|\"ShowcaseDisplay\"|\"NumberedListDisplay\";}"
                 },
                 "webPublicationDate": {
                     "type": "string"
@@ -4985,13 +4935,21 @@
                     "type": "number"
                 },
                 "starRating": {
-                    "$ref": "#/definitions/StarRating"
+                    "enum": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
+                    ],
+                    "type": "number"
                 },
                 "linkText": {
                     "type": "string"
                 },
                 "branding": {
-                    "$ref": "#/definitions/Branding"
+                    "$ref": "#/definitions/{sponsorName:string;logo:{src:string;link:string;label:string;dimensions:{width:number;height:number;};};aboutThisLink:string;brandingType?:{name:\"paid-content\";}|{name:\"foundation\";}|{name:\"sponsored\";};logoForDarkBackground?:{src:string;link:string;label:string;dimensions:{width:number;height:number;};};}"
                 },
                 "isSnap": {
                     "type": "boolean"
@@ -5000,42 +4958,47 @@
                     "type": "boolean"
                 },
                 "snapData": {
-                    "type": "object",
-                    "properties": {
-                        "embedHtml": {
-                            "type": "string"
-                        },
-                        "embedCss": {
-                            "type": "string"
-                        },
-                        "embedJs": {
-                            "type": "string"
-                        }
-                    }
+                    "$ref": "#/definitions/{embedHtml?:string;embedCss?:string;embedJs?:string;}"
                 },
                 "showQuotedHeadline": {
                     "type": "boolean"
                 },
                 "discussion": {
-                    "type": "object",
-                    "properties": {
-                        "isCommentable": {
-                            "type": "boolean"
-                        },
-                        "isClosedForComments": {
-                            "type": "boolean"
-                        },
-                        "discussionId": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "isClosedForComments",
-                        "isCommentable"
-                    ]
+                    "$ref": "#/definitions/{isCommentable:boolean;isClosedForComments:boolean;discussionId?:string;}"
                 },
                 "mainMedia": {
-                    "$ref": "#/definitions/MainMedia"
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/{width:number;height:number;type:\"Video\";id:string;videoId:string;origin:string;title:string;duration:number;expired:boolean;image?:string;}"
+                        },
+                        {
+                            "$ref": "#/definitions/{width:number;height:number;type:\"LoopVideo\";videoId:string;duration:number;atomId:string;image?:string;}"
+                        },
+                        {
+                            "$ref": "#/definitions/{type:\"Audio\";duration:string;podcastImage?:{src?:string;altText?:string;};}"
+                        },
+                        {
+                            "$ref": "#/definitions/{type:\"Gallery\";count:string;}"
+                        }
+                    ]
+                },
+                "image": {
+                    "type": "string"
+                },
+                "designType": {
+                    "type": "string"
+                },
+                "pillar": {
+                    "type": "string"
+                },
+                "carouselImages": {
+                    "$ref": "#/definitions/{[x:string]:string;}"
+                },
+                "isLiveBlog": {
+                    "type": "boolean"
+                },
+                "masterImage": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -5044,87 +5007,33 @@
                 "url"
             ]
         },
-        "Branding": {
+        "{sponsorName:string;logo:{src:string;link:string;label:string;dimensions:{width:number;height:number;};};aboutThisLink:string;brandingType?:{name:\"paid-content\";}|{name:\"foundation\";}|{name:\"sponsored\";};logoForDarkBackground?:{src:string;link:string;label:string;dimensions:{width:number;height:number;};};}": {
             "type": "object",
             "properties": {
-                "brandingType": {
-                    "$ref": "#/definitions/BrandingType"
-                },
                 "sponsorName": {
                     "type": "string"
                 },
                 "logo": {
-                    "type": "object",
-                    "properties": {
-                        "src": {
-                            "type": "string"
-                        },
-                        "link": {
-                            "type": "string"
-                        },
-                        "label": {
-                            "type": "string"
-                        },
-                        "dimensions": {
-                            "type": "object",
-                            "properties": {
-                                "width": {
-                                    "type": "number"
-                                },
-                                "height": {
-                                    "type": "number"
-                                }
-                            },
-                            "required": [
-                                "height",
-                                "width"
-                            ]
-                        }
-                    },
-                    "required": [
-                        "dimensions",
-                        "label",
-                        "link",
-                        "src"
-                    ]
+                    "$ref": "#/definitions/{src:string;link:string;label:string;dimensions:{width:number;height:number;};}"
                 },
                 "aboutThisLink": {
                     "type": "string"
                 },
-                "logoForDarkBackground": {
-                    "type": "object",
-                    "properties": {
-                        "src": {
-                            "type": "string"
+                "brandingType": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/{name:\"paid-content\";}"
                         },
-                        "link": {
-                            "type": "string"
+                        {
+                            "$ref": "#/definitions/{name:\"foundation\";}"
                         },
-                        "label": {
-                            "type": "string"
-                        },
-                        "dimensions": {
-                            "type": "object",
-                            "properties": {
-                                "width": {
-                                    "type": "number"
-                                },
-                                "height": {
-                                    "type": "number"
-                                }
-                            },
-                            "required": [
-                                "height",
-                                "width"
-                            ]
+                        {
+                            "$ref": "#/definitions/{name:\"sponsored\";}"
                         }
-                    },
-                    "required": [
-                        "dimensions",
-                        "label",
-                        "link",
-                        "src"
                     ]
+                },
+                "logoForDarkBackground": {
+                    "$ref": "#/definitions/{src:string;link:string;label:string;dimensions:{width:number;height:number;};}"
                 }
             },
             "required": [
@@ -5133,272 +5042,242 @@
                 "sponsorName"
             ]
         },
-        "BrandingType": {
-            "anyOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "const": "paid-content"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
+        "{src:string;link:string;label:string;dimensions:{width:number;height:number;};}": {
+            "type": "object",
+            "properties": {
+                "src": {
+                    "type": "string"
                 },
-                {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "const": "foundation"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
+                "link": {
+                    "type": "string"
                 },
-                {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "const": "sponsored"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
+                "label": {
+                    "type": "string"
+                },
+                "dimensions": {
+                    "$ref": "#/definitions/{width:number;height:number;}"
                 }
+            },
+            "required": [
+                "dimensions",
+                "label",
+                "link",
+                "src"
             ]
         },
-        "MainMedia": {
-            "anyOf": [
-                {
-                    "$ref": "#/definitions/Video",
-                    "description": "For displaying embedded, playable videos directly in cards"
+        "{width:number;height:number;}": {
+            "type": "object",
+            "properties": {
+                "width": {
+                    "type": "number"
                 },
-                {
-                    "$ref": "#/definitions/LoopVideo"
-                },
-                {
-                    "$ref": "#/definitions/Audio"
-                },
-                {
-                    "$ref": "#/definitions/Gallery"
+                "height": {
+                    "type": "number"
                 }
+            },
+            "required": [
+                "height",
+                "width"
             ]
         },
-        "Video": {
-            "description": "For displaying embedded, playable videos directly in cards",
-            "allOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "enum": [
-                                "Audio",
-                                "Gallery",
-                                "LoopVideo",
-                                "Video"
-                            ],
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "type"
-                    ]
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "const": "Video"
-                        },
-                        "id": {
-                            "type": "string"
-                        },
-                        "videoId": {
-                            "type": "string"
-                        },
-                        "height": {
-                            "type": "number"
-                        },
-                        "width": {
-                            "type": "number"
-                        },
-                        "origin": {
-                            "type": "string"
-                        },
-                        "title": {
-                            "type": "string"
-                        },
-                        "duration": {
-                            "type": "number"
-                        },
-                        "expired": {
-                            "type": "boolean"
-                        },
-                        "image": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "duration",
-                        "expired",
-                        "height",
-                        "id",
-                        "origin",
-                        "title",
-                        "type",
-                        "videoId",
-                        "width"
-                    ]
+        "{name:\"paid-content\";}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "const": "paid-content"
                 }
+            },
+            "required": [
+                "name"
             ]
         },
-        "LoopVideo": {
-            "allOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "enum": [
-                                "Audio",
-                                "Gallery",
-                                "LoopVideo",
-                                "Video"
-                            ],
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "type"
-                    ]
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "const": "LoopVideo"
-                        },
-                        "atomId": {
-                            "type": "string"
-                        },
-                        "videoId": {
-                            "type": "string"
-                        },
-                        "height": {
-                            "type": "number"
-                        },
-                        "width": {
-                            "type": "number"
-                        },
-                        "duration": {
-                            "type": "number"
-                        },
-                        "image": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "atomId",
-                        "duration",
-                        "height",
-                        "type",
-                        "videoId",
-                        "width"
-                    ]
+        "{name:\"foundation\";}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "const": "foundation"
                 }
+            },
+            "required": [
+                "name"
             ]
         },
-        "Audio": {
-            "allOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "enum": [
-                                "Audio",
-                                "Gallery",
-                                "LoopVideo",
-                                "Video"
-                            ],
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "type"
-                    ]
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "const": "Audio"
-                        },
-                        "duration": {
-                            "type": "string"
-                        },
-                        "podcastImage": {
-                            "type": "object",
-                            "properties": {
-                                "src": {
-                                    "type": "string"
-                                },
-                                "altText": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    },
-                    "required": [
-                        "duration",
-                        "type"
-                    ]
+        "{name:\"sponsored\";}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "const": "sponsored"
                 }
+            },
+            "required": [
+                "name"
             ]
         },
-        "Gallery": {
-            "allOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "enum": [
-                                "Audio",
-                                "Gallery",
-                                "LoopVideo",
-                                "Video"
-                            ],
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "type"
-                    ]
+        "{embedHtml?:string;embedCss?:string;embedJs?:string;}": {
+            "type": "object",
+            "properties": {
+                "embedHtml": {
+                    "type": "string"
                 },
-                {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "const": "Gallery"
-                        },
-                        "count": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "count",
-                        "type"
-                    ]
+                "embedCss": {
+                    "type": "string"
+                },
+                "embedJs": {
+                    "type": "string"
                 }
+            }
+        },
+        "{isCommentable:boolean;isClosedForComments:boolean;discussionId?:string;}": {
+            "type": "object",
+            "properties": {
+                "isCommentable": {
+                    "type": "boolean"
+                },
+                "isClosedForComments": {
+                    "type": "boolean"
+                },
+                "discussionId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "isClosedForComments",
+                "isCommentable"
             ]
+        },
+        "{width:number;height:number;type:\"Video\";id:string;videoId:string;origin:string;title:string;duration:number;expired:boolean;image?:string;}": {
+            "type": "object",
+            "properties": {
+                "width": {
+                    "type": "number"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "type": {
+                    "type": "string",
+                    "const": "Video"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "videoId": {
+                    "type": "string"
+                },
+                "origin": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "duration": {
+                    "type": "number"
+                },
+                "expired": {
+                    "type": "boolean"
+                },
+                "image": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "duration",
+                "expired",
+                "height",
+                "id",
+                "origin",
+                "title",
+                "type",
+                "videoId",
+                "width"
+            ]
+        },
+        "{width:number;height:number;type:\"LoopVideo\";videoId:string;duration:number;atomId:string;image?:string;}": {
+            "type": "object",
+            "properties": {
+                "width": {
+                    "type": "number"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "type": {
+                    "type": "string",
+                    "const": "LoopVideo"
+                },
+                "videoId": {
+                    "type": "string"
+                },
+                "duration": {
+                    "type": "number"
+                },
+                "atomId": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "atomId",
+                "duration",
+                "height",
+                "type",
+                "videoId",
+                "width"
+            ]
+        },
+        "{type:\"Audio\";duration:string;podcastImage?:{src?:string;altText?:string;};}": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "Audio"
+                },
+                "duration": {
+                    "type": "string"
+                },
+                "podcastImage": {
+                    "$ref": "#/definitions/{src?:string;altText?:string;}"
+                }
+            },
+            "required": [
+                "duration",
+                "type"
+            ]
+        },
+        "{src?:string;altText?:string;}": {
+            "type": "object",
+            "properties": {
+                "src": {
+                    "type": "string"
+                },
+                "altText": {
+                    "type": "string"
+                }
+            }
+        },
+        "{type:\"Gallery\";count:string;}": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "Gallery"
+                },
+                "count": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "count",
+                "type"
+            ]
+        },
+        "{[x:string]:string;}": {
+            "type": "object"
         },
         "OnwardsSource": {
             "enum": [
@@ -5451,7 +5330,7 @@
                     }
                 },
                 "branding": {
-                    "$ref": "#/definitions/Branding"
+                    "$ref": "#/definitions/{sponsorName:string;logo:{src:string;link:string;label:string;dimensions:{width:number;height:number;};};aboutThisLink:string;brandingType?:{name:\"paid-content\";}|{name:\"foundation\";}|{name:\"sponsored\";};logoForDarkBackground?:{src:string;link:string;label:string;dimensions:{width:number;height:number;};};}"
                 }
             },
             "required": [
