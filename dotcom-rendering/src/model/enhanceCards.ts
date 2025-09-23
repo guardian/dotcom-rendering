@@ -200,6 +200,7 @@ export const getActiveMediaAtom = (
 	if (mediaAtom) {
 		const m3u8MimeType = 'application/vnd.apple.mpegurl';
 		const asset = mediaAtom.assets
+			.filter((_) => _.assetType === 'Video')
 			// filter out m3u8 assets, as these are not yet supported by DCR
 			.filter((_) => _.mimeType !== m3u8MimeType)
 			.find(({ version }) => version === mediaAtom.activeVersion);
