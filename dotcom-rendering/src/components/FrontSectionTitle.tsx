@@ -125,7 +125,7 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 								border-top: 1px dotted
 									${sourcePalette.neutral[86]};
 								${textSans12}
-								color: ${sourcePalette.labs[100]};
+								color: ${sourcePalette.neutral[46]};
 								font-weight: bold;
 
 								${from.leftCol} {
