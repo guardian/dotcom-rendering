@@ -25,7 +25,7 @@ type Props = {
 	 * Optional extra query parameters to append to the share URL. Values are stringified.
 	 * Example for live blogs: { page: `with:block-${blockId}` }
 	 */
-	queryParams?: Record<string, string | number | boolean>;
+	queryParams?: URLSearchParams;
 	webTitle: string;
 	format: ArticleFormat;
 	context: Context;
@@ -98,11 +98,11 @@ const liveBlogMobileMeta = (isCopied: boolean) => css`
 const getUrl = ({
 	pageId,
 	hash,
-	queryParams = {},
+	queryParams = new URLSearchParams(),
 }: {
 	pageId: string;
 	hash?: string;
-	queryParams?: Record<string, string | number | boolean>;
+	queryParams?: URLSearchParams;
 }) => {
 	const searchParams = new URLSearchParams({});
 	searchParams.append('CMP', 'share_btn_url');
@@ -268,13 +268,7 @@ export const ShareButton = ({
 				<CopyNativeShareButton
 					onShare={() => {
 						navigator.clipboard
-							.writeText(
-								getUrl({
-									pageId,
-									hash,
-									queryParams,
-								}),
-							)
+							.writeText(shareData.url)
 							.then(() => {
 								setIsCopied(true);
 							})
@@ -288,11 +282,7 @@ export const ShareButton = ({
 		case 'email':
 			return (
 				<EmailLink
-					href={`mailto:?subject=${webTitle}&body=${getUrl({
-						pageId,
-						hash,
-						queryParams,
-					})}`}
+					href={`mailto:?subject=${webTitle}&body=${shareData.url}`}
 					size={size}
 					isLiveBlogMeta={isLiveBlogMeta}
 				/>
