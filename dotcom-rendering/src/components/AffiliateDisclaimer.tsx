@@ -86,24 +86,16 @@ const AffiliateDisclaimer = () => (
 	</Hide>
 );
 
-const AffiliateDisclaimerInline = ({ isAmp = false }) =>
-	isAmp ? (
+const AffiliateDisclaimerInline = () => (
+	<Hide from="leftCol">
 		<aside
 			css={[disclaimerInlineStyles]}
 			data-testid="affiliate-disclaimer-inline"
 		>
 			<DisclaimerText />
 		</aside>
-	) : (
-		<Hide from="leftCol">
-			<aside
-				css={[disclaimerInlineStyles]}
-				data-testid="affiliate-disclaimer-inline"
-			>
-				<DisclaimerText />
-			</aside>
-		</Hide>
-	);
+	</Hide>
+);
 
 const GalleryAffiliateDisclaimer = () => (
 	<aside

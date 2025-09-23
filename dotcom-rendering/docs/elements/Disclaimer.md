@@ -16,7 +16,3 @@ This is represented in frontend by [DisclaimerBlockElement](https://github.com/g
 ## CAPI HTML Output
 
 This is inserted raw into the document.
-
-## AMP Cleaned HTML
-
-This is run through the BodyCleaner and the AMP cleaners.
