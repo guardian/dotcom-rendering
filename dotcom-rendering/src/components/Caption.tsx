@@ -239,8 +239,7 @@ const CameraIcon = ({ format }: IconProps) => {
 		<span
 			css={[
 				iconStyle,
-				(format.display === ArticleDisplay.Immersive ||
-					format.design === ArticleDesign.Gallery) &&
+				format.display === ArticleDisplay.Immersive &&
 					hideIconBelowLeftCol,
 			]}
 		>
