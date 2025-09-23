@@ -75,18 +75,6 @@ export const getContentFromURLMiddleware: Handler = async (req, res, next) => {
 	} else {
 		const sourceURL = parseURL(req.originalUrl);
 		if (sourceURL) {
-			if (
-				req.path.startsWith('/AMP') &&
-				sourceURL.hostname === 'www.theguardian.com'
-			) {
-				res.redirect(
-					req.path.replace(
-						'www.theguardian.com',
-						'amp.theguardian.com',
-					),
-				);
-			}
-
 			try {
 				req.body = await getContentFromURL(sourceURL, req.headers);
 			} catch (error) {
