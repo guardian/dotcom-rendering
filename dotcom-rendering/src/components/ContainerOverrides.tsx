@@ -622,7 +622,7 @@ const sectionBackgroundLight: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[800];
 		case 'Branded':
-			return sourcePalette.neutral[100];
+			return palette('--front-container-background');
 	}
 };
 
@@ -646,7 +646,7 @@ const sectionBackgroundDark: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[100];
 		case 'Branded':
-			return sourcePalette.neutral[20];
+			return palette('--front-container-background');
 	}
 };
 
