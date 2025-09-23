@@ -236,23 +236,11 @@ export const CardHeadline = ({
 	kickerColour = palette('--card-kicker-text'),
 	quoteColour = palette('--card-quote-icon'),
 	kickerImage,
-	showLabsRedesign = true,
+	showLabsRedesign,
 }: Props) => {
 	// The link is only applied directly to the headline if it is a sublink
 	const isSublink = !!linkTo;
-	const fontStyles = getFonts(format, fontSizes, showLabsRedesign);
-	console.log('TEST DCR LOCAL');
-	if (showLabsRedesign && format.theme === ArticleSpecial.Labs) {
-		console.log(`showLabsRedesign ${showLabsRedesign}`);
-		// New Labs styling
-	}
-	if (showLabsRedesign) {
-		console.log(`showLabsRedesign2 ${showLabsRedesign}`);
-		// New Labs styling
-	}
-	console.log('CardHeadline render count:', Math.random()); // Unique identifier per render
-	console.log('Format theme:', format.theme);
-	console.log('showLabsRedesign:', showLabsRedesign);
+	const fontStyles = getFonts(format, fontSizes, showLabsRedesign ?? false);
 
 	return (
 		<WithLink linkTo={linkTo}>

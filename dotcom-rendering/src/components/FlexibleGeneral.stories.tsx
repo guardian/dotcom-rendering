@@ -157,6 +157,7 @@ const meta = {
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
 		collectionId: 1,
+		showLabsRedesign: true,
 	},
 	render: ({ frontSectionTitle, ...args }) => (
 		<FrontSection
