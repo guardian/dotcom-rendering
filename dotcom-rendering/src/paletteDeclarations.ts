@@ -3401,6 +3401,18 @@ const articleBorderLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
+const articleSectionBorderLight: PaletteFunction = (format) => {
+	if (format.design === ArticleDesign.Gallery) {
+		return sourcePalette.neutral[86];
+	}
+
+	return articleBorderLight(format);
+};
+
+const articleSectionBorderDark: PaletteFunction = () => {
+	return sourcePalette.neutral[20];
+};
+
 const footerBorderLight: PaletteFunction = () => {
 	return sourcePalette.neutral[86];
 };
@@ -6339,6 +6351,10 @@ const paletteColours = {
 	'--article-section-background': {
 		light: articleSectionBackgroundLight,
 		dark: articleSectionBackgroundDark,
+	},
+	'--article-section-border': {
+		light: articleSectionBorderLight,
+		dark: articleSectionBorderDark,
 	},
 	'--article-section-secondary-title': {
 		light: articleSectionSecondaryTitleLight,
