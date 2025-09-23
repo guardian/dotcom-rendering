@@ -25,7 +25,7 @@ type Props = {
 	 * Optional extra query parameters to append to the share URL. Values are stringified.
 	 * Example for live blogs: { page: `with:block-${blockId}` }
 	 */
-	queryParams?: URLSearchParams;
+	queryParams?: Record<string, string | number | boolean>;
 	webTitle: string;
 	format: ArticleFormat;
 	context: Context;
@@ -98,11 +98,11 @@ const liveBlogMobileMeta = (isCopied: boolean) => css`
 const getUrl = ({
 	pageId,
 	hash,
-	queryParams = new URLSearchParams(),
+	queryParams = {},
 }: {
 	pageId: string;
 	hash?: string;
-	queryParams?: URLSearchParams;
+	queryParams?: Record<string, string | number | boolean>;
 }) => {
 	const searchParams = new URLSearchParams({});
 	searchParams.append('CMP', 'share_btn_url');
