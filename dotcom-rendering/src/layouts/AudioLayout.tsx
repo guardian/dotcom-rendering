@@ -184,6 +184,9 @@ export const AudioLayout = (props: WebProps) => {
 					showSlimNav={false}
 					hasPageSkinContentSelfConstrain={true}
 					pageId={article.pageId}
+					wholePictureLogoSwitch={
+						article.config.switches.wholePictureLogo
+					}
 				/>
 			</div>
 
