@@ -28,6 +28,7 @@ const cardHeadlineLight: ContainerFunction = (
 			return sourcePalette.neutral[93];
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[100];
+		// TODO: @commercial-dev to update to neutral[7] when launching Redesigned Labs Containers
 		case 'Branded':
 			return sourcePalette.neutral[20];
 	}
@@ -82,6 +83,7 @@ const cardTrailTextLight: ContainerFunction = (
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[100];
 		case 'Branded':
+			// TODO: @commercial-dev to update to palette('--card-trail-text') when launching Redesigned Labs Containers
 			return sourcePalette.neutral[20];
 	}
 };
@@ -108,6 +110,7 @@ const cardTrailTextDark: ContainerFunction = (
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[700];
 		case 'Branded':
+			// TODO: @commercial-dev to update to palette('--card-trail-text') when launching Redesigned Labs Containers
 			return sourcePalette.neutral[86];
 	}
 };
@@ -133,6 +136,7 @@ const cardKickerTextLight: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[100];
 		case 'Branded':
+			// TODO: @commercial-dev to update to labs[100] when launching Redesigned Labs Containers
 			return sourcePalette.labs[200];
 	}
 };
@@ -182,6 +186,7 @@ const cardQuoteIconLight: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[100];
 		case 'Branded':
+			// TODO: @commercial-dev to update to labs[100] when launching Redesigned Labs Containers
 			return sourcePalette.labs[200];
 	}
 };
@@ -330,7 +335,7 @@ const sectionToggleButtonLight: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return sourcePalette.neutral[60];
 		case 'Branded':
-			return sourcePalette.neutral[7];
+			return palette('--section-toggle-button');
 	}
 };
 const sectionToggleButtonDark: ContainerFunction = (containerPalette) => {
@@ -354,7 +359,7 @@ const sectionToggleButtonDark: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return sourcePalette.neutral[60];
 		case 'Branded':
-			return sourcePalette.neutral[7];
+			return palette('--section-toggle-button');
 	}
 };
 const sectionToggleButtonHoverLight: ContainerFunction = (containerPalette) => {
@@ -378,7 +383,7 @@ const sectionToggleButtonHoverLight: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return sourcePalette.neutral[93];
 		case 'Branded':
-			return sourcePalette.neutral[20];
+			return palette('--section-toggle-button-hover');
 	}
 };
 const sectionToggleButtonHoverDark: ContainerFunction = (containerPalette) => {
@@ -527,9 +532,8 @@ const cardBackgroundLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[7];
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[800];
-		//TODO: Implement Branded properly when picking up the card ticket
 		case 'Branded':
-			return sourcePalette.neutral[93];
+			return palette('--section-background');
 	}
 };
 
@@ -569,7 +573,6 @@ const cardMediaWaveformLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[46];
 		case 'LongRunningPalette':
 		case 'EventPalette':
-		case 'Branded':
 			return sourcePalette.neutral[86];
 		case 'LongRunningAltPalette':
 			return sourcePalette.neutral[73];
@@ -579,6 +582,9 @@ const cardMediaWaveformLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.culture[600];
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[800];
+		case 'Branded':
+			// TODO: @commercial-dev to update to palette('--card-media-waveform') when launching Redesigned Labs Containers
+			return sourcePalette.neutral[86];
 	}
 };
 
@@ -590,7 +596,6 @@ const cardMediaWaveformDark: ContainerFunction = (containerPalette) => {
 		case 'SombreAltPalette':
 		case 'EventPalette':
 		case 'SpecialReportAltPalette':
-		case 'Branded':
 			return sourcePalette.neutral[38];
 		case 'LongRunningPalette':
 			return sourcePalette.brand[400];
@@ -598,6 +603,9 @@ const cardMediaWaveformDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.news[300];
 		case 'EventAltPalette':
 			return sourcePalette.culture[300];
+		case 'Branded':
+			// TODO: @commercial-dev to update to palette('--card-media-waveform') when launching Redesigned Labs Containers
+			return sourcePalette.neutral[38];
 	}
 };
 
@@ -622,7 +630,7 @@ const sectionBackgroundLight: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[800];
 		case 'Branded':
-			return palette('--front-container-background');
+			return palette('--section-background');
 	}
 };
 
@@ -646,14 +654,14 @@ const sectionBackgroundDark: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[100];
 		case 'Branded':
-			return palette('--front-container-background');
+			return palette('--section-background');
 	}
 };
 
 const sectionBackgroundLeftLight: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'Branded':
-			return sourcePalette.labs[400];
+			return sourcePalette.labs[700];
 		case 'InvestigationPalette':
 		case 'LongRunningPalette':
 		case 'SombrePalette':
@@ -704,6 +712,7 @@ const cardBorderSupportingLight: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return transparentColour(sourcePalette.neutral[46], 0.3);
 		case 'Branded':
+			// TODO: @commercial-dev to update to palette('--card-border-supporting') when launching Redesigned Labs Containers
 			return sourcePalette.neutral[73];
 	}
 };
@@ -726,6 +735,7 @@ const cardBorderSupportingDark: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return transparentColour(sourcePalette.neutral[46], 0.3);
 		case 'Branded':
+			// TODO: @commercial-dev to update to palette('--card-border-supporting') when launching Redesigned Labs Containers
 			return sourcePalette.neutral[46];
 	}
 };
@@ -793,7 +803,7 @@ const sectionDateLight: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[100];
 		case 'Branded':
-			return sourcePalette.neutral[100];
+			return palette('--section-date');
 	}
 };
 
@@ -815,7 +825,7 @@ const sectionDateDark: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[700];
 		case 'Branded':
-			return sourcePalette.neutral[100];
+			return palette('--section-date');
 	}
 };
 
@@ -841,7 +851,7 @@ const sectionTitleLight: ContainerFunction = (containerPalette) => {
 			return sourcePalette.specialReportAlt[100];
 		// Branded is expected to be used with LabsSection
 		case 'Branded':
-			return sourcePalette.neutral[0];
+			return palette('--article-section-title');
 	}
 };
 
@@ -866,71 +876,26 @@ const sectionTitleDark: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[700];
 		case 'Branded':
-			return sourcePalette.neutral[97];
+			return palette('--article-section-title');
 	}
 };
 
-const treatTextLight: ContainerFunction = (containerPalette) => {
-	switch (containerPalette) {
-		case 'Branded':
-			return sourcePalette.neutral[46];
-		case 'EventPalette':
-		case 'SombreAltPalette':
-		case 'EventAltPalette':
-		case 'InvestigationPalette':
-		case 'LongRunningAltPalette':
-		case 'LongRunningPalette':
-		case 'SombrePalette':
-		case 'BreakingPalette':
-		case 'SpecialReportAltPalette':
-			return 'inherit';
-	}
-};
+const treatTextLight: ContainerFunction = () => 'inherit';
+const treatTextDark: ContainerFunction = () => 'inherit';
 
-const treatTextDark: ContainerFunction = (containerPalette) => {
-	switch (containerPalette) {
-		case 'Branded':
-			return sourcePalette.neutral[38];
-		case 'EventPalette':
-		case 'SombreAltPalette':
-		case 'EventAltPalette':
-		case 'InvestigationPalette':
-		case 'LongRunningAltPalette':
-		case 'LongRunningPalette':
-		case 'SombrePalette':
-		case 'BreakingPalette':
-		case 'SpecialReportAltPalette':
-			return 'inherit';
-	}
-};
+const carouselDotLight: ContainerFunction = () => sourcePalette.brandAlt[400];
+const carouselDotDark: ContainerFunction = () => sourcePalette.brandAlt[400];
 
-const carouselDotLight: ContainerFunction = () => {
-	return sourcePalette.brandAlt[400];
-};
+const carouselActiveDotLight: ContainerFunction = () => sourcePalette.news[400];
+const carouselActiveDotDark: ContainerFunction = () => sourcePalette.news[400];
 
-const carouselDotDark: ContainerFunction = () => {
-	return sourcePalette.brandAlt[400];
-};
+const carouselArrow: ContainerFunction = () => sourcePalette.neutral[7];
 
-const carouselActiveDotLight: ContainerFunction = () => {
-	return sourcePalette.news[400];
-};
+const carouselArrowBackground: ContainerFunction = () =>
+	sourcePalette.brandAlt[400];
 
-const carouselActiveDotDark: ContainerFunction = () => {
-	return sourcePalette.news[400];
-};
-
-const carouselArrow: ContainerFunction = () => {
-	return sourcePalette.neutral[7];
-};
-
-const carouselArrowBackground: ContainerFunction = () => {
-	return sourcePalette.brandAlt[400];
-};
-
-const carouselArrowBackgroundHover: ContainerFunction = () => {
-	return sourcePalette.brandAlt[200];
-};
+const carouselArrowBackgroundHover: ContainerFunction = () =>
+	sourcePalette.brandAlt[200];
 
 const carouselChevronLight: ContainerFunction = (containerPalette) =>
 	cardHeadlineLight(containerPalette);
