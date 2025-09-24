@@ -249,6 +249,7 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
 					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
+					showLabsRedesign={showLabsRedesign}
 				/>
 			);
 		case 'flexible/general':
