@@ -65,7 +65,7 @@ export const DecideContainer = ({
 	collectionId,
 	containerLevel,
 	isInHideTrailsAbTest,
-	showLabsRedesign,
+	showLabsRedesign = false,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -263,7 +263,7 @@ export const DecideContainer = ({
 					containerLevel={containerLevel}
 					collectionId={collectionId}
 					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
-					showLabsRedesign={showLabsRedesign ?? false}
+					showLabsRedesign={showLabsRedesign}
 				/>
 			);
 		case 'scrollable/small':
