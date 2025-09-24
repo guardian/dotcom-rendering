@@ -157,6 +157,9 @@ export const CrosswordLayout = (props: Props) => {
 					hasPageSkin={false}
 					hasPageSkinContentSelfConstrain={false}
 					pageId={article.pageId}
+					wholePictureLogoSwitch={
+						article.config.switches.wholePictureLogo
+					}
 				/>
 			</div>
 

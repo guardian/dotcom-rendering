@@ -181,6 +181,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 		frontendData.isCommentable && !frontendData.config.isPaidContent;
 
 	const { absoluteServerTimes = false } = switches;
+
 	return (
 		<>
 			{isWeb && (
@@ -213,6 +214,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}
 						pageId={frontendData.pageId}
+						wholePictureLogoSwitch={switches.wholePictureLogo}
 					/>
 				</div>
 			)}
