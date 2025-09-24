@@ -6,7 +6,9 @@ import {
 	textSans14,
 	textSans17,
 } from '@guardian/source/foundations';
+import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
+import { Picture } from './Picture';
 import { ProductLinkButton } from './ProductLinkButton';
 
 export type Statistics = {
@@ -22,6 +24,7 @@ export type LeftColProductCardProps = {
 	price: string;
 	retailer: string;
 	statistics: Statistics[];
+	format: ArticleFormat;
 };
 
 const card = css`
@@ -34,6 +37,10 @@ const card = css`
 		padding: 10px;
 		width: 220px;
 		border-top: 1px solid ${palette('--section-border-lifestyle')};
+	}
+	img {
+		height: 200px;
+		width: 200px;
 	}
 	strong {
 		font-weight: 700;
@@ -92,30 +99,19 @@ export const LeftColProductCard = ({
 	price,
 	retailer,
 	statistics,
+	format,
 }: LeftColProductCardProps) => (
 	<div css={card}>
 		{!!image && (
-			<a
-				href={url}
-				target="_blank"
-				rel="noopener noreferrer"
-				style={{
-					display: 'block',
-					marginBottom: '12px',
-					borderRadius: '6px',
-				}}
-			>
-				<img
-					src={image}
-					alt={productName}
-					css={{
-						width: '200px',
-						height: '200px',
-						borderRadius: '6px',
-						display: 'block',
-					}}
-				/>
-			</a>
+			<Picture
+				role={'productCard'}
+				format={format}
+				master={image}
+				alt={productName + brandName}
+				height={220}
+				width={220}
+				loading={'eager'}
+			/>
 		)}
 		<div css={productInfoContainer}>
 			<div css={primaryHeading}>{brandName}</div>
