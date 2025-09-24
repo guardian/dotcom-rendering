@@ -48,6 +48,7 @@ type Props = {
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
 	isInHideTrailsAbTest?: boolean;
+	showLabsRedesign?: boolean;
 };
 
 export const DecideContainer = ({
@@ -64,6 +65,7 @@ export const DecideContainer = ({
 	collectionId,
 	containerLevel,
 	isInHideTrailsAbTest,
+	showLabsRedesign = false,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -247,6 +249,7 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
 					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
+					showLabsRedesign={showLabsRedesign}
 				/>
 			);
 		case 'flexible/general':
@@ -261,6 +264,7 @@ export const DecideContainer = ({
 					containerLevel={containerLevel}
 					collectionId={collectionId}
 					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
+					showLabsRedesign={showLabsRedesign}
 				/>
 			);
 		case 'scrollable/small':

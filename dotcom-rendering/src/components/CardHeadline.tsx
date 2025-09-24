@@ -16,6 +16,10 @@ import {
 	textSans15,
 	textSans17,
 	textSans20,
+	textSansBold12,
+	textSansBold15,
+	textSansBold17,
+	textSansBold20,
 	until,
 } from '@guardian/source/foundations';
 import { Link, SvgExternal } from '@guardian/source/react-components';
@@ -50,6 +54,7 @@ type Props = {
 	kickerColour?: string;
 	quoteColour?: string;
 	kickerImage?: PodcastSeriesImage;
+	showLabsRedesign?: boolean;
 };
 
 const sublinkStyles = css`
@@ -104,11 +109,24 @@ const fontFamilies = {
 		xxxsmall: `${textSans15}\n\tline-height: 1.15;\n`,
 		tiny: `${textSans12}\n\tline-height: 1.15;\n`,
 	},
+	textSansBold: {
+		xxxlarge: `${textSansBold20}\n\tline-height: 1.15;\n`,
+		xxlarge: `${textSansBold20}\n\tline-height: 1.15;\n`,
+		xlarge: `${textSansBold20}\n\tline-height: 1.15;\n`,
+		large: `${textSansBold20}\n\tline-height: 1.15;\n`,
+		medium: `${textSansBold20}\n\tline-height: 1.15;\n`,
+		small: `${textSansBold20}\n\tline-height: 1.15;\n`,
+		xsmall: `${textSansBold20}\n\tline-height: 1.15;\n`,
+		xxsmall: `${textSansBold17}\n\tline-height: 1.15;\n`,
+		xxxsmall: `${textSansBold15}\n\tline-height: 1.15;\n`,
+		tiny: `${textSansBold12}\n\tline-height: 1.15;\n`,
+	},
 } as const;
 
 export enum FontFamily {
 	HeadlineMedium = 'headlineMedium',
 	TextSans = 'textSans',
+	TextSansBold = 'textSansBold',
 }
 
 export type HeadlineSize = keyof typeof fontFamilies.headlineMedium;
@@ -151,12 +169,19 @@ const getFontSize = (sizes: ResponsiveFontSize, family: FontFamily) => {
 	`;
 };
 
-const getFonts = (format: ArticleFormat, fontSizes: ResponsiveFontSize) => {
-	if (format.theme === ArticleSpecial.Labs) {
-		return getFontSize(fontSizes, FontFamily.TextSans);
-	}
+const getFonts = (
+	format: ArticleFormat,
+	fontSizes: ResponsiveFontSize,
+	showLabsRedesign: boolean,
+) => {
+	const isLabs = format.theme === ArticleSpecial.Labs;
+	const family = isLabs
+		? showLabsRedesign
+			? FontFamily.TextSansBold
+			: FontFamily.TextSans
+		: FontFamily.HeadlineMedium;
 
-	return getFontSize(fontSizes, FontFamily.HeadlineMedium);
+	return getFontSize(fontSizes, family);
 };
 
 export const WithLink = ({
@@ -193,11 +218,11 @@ export const CardHeadline = ({
 	kickerColour = palette('--card-kicker-text'),
 	quoteColour = palette('--card-quote-icon'),
 	kickerImage,
+	showLabsRedesign,
 }: Props) => {
 	// The link is only applied directly to the headline if it is a sublink
 	const isSublink = !!linkTo;
-
-	const fontStyles = getFonts(format, fontSizes);
+	const fontStyles = getFonts(format, fontSizes, showLabsRedesign ?? false);
 
 	return (
 		<WithLink linkTo={linkTo}>
