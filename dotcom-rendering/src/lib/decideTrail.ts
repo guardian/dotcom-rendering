@@ -5,9 +5,9 @@ import { getDataLinkNameCard } from './getDataLinkName';
 
 export const decideTrail = (trail: FETrailType, index = 0): TrailType => {
 	const format: ArticleFormat = decideFormat(trail.format);
-	const image: DCRFrontImage | undefined = trail.image
+	const image: DCRFrontImage | undefined = trail.masterImage // Fix this
 		? {
-				src: trail.image,
+				src: trail.masterImage,
 				altText: '', // TODO: Do we get this from frontend?
 		  }
 		: undefined;

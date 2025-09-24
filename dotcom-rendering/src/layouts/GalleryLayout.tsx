@@ -16,7 +16,7 @@ import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Caption } from '../components/Caption';
-import { Carousel } from '../components/Carousel.importable';
+import { CarousableSmallOnwards } from '../components/CarousableSmallOnwards';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FetchMoreGalleriesData } from '../components/FetchMoreGalleriesData.importable';
 import { Footer } from '../components/Footer';
@@ -416,13 +416,12 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					/>
 				</Section>
 			)}
-			<StoryPackage
+			<CarousableSmallOnwards
 				absoluteServerTimes={absoluteServerTimes}
+				trails={gallery.storyPackage?.trails ?? []}
 				discussionApiUrl={discussionApiUrl}
-				format={format}
-				renderingTarget={renderingTarget}
-				storyPackage={gallery.storyPackage}
-				topBorder={showMerchandisingHigh}
+				heading={gallery.storyPackage?.heading ?? 'Marjan'}
+				onwardsSource={'more-on-this-story'}
 			/>
 
 			<Island priority="feature" defer={{ until: 'visible' }}>
@@ -444,6 +443,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					discussionApiUrl={frontendData.config.discussionApiUrl}
 					absoluteServerTimes={absoluteServerTimes}
 					renderingTarget={renderingTarget}
+					shouldHaveSingleSection={true}
 				/>
 			</Island>
 
@@ -573,40 +573,3 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 		</>
 	);
 };
-
-const StoryPackage = ({
-	storyPackage,
-	format,
-	discussionApiUrl,
-	absoluteServerTimes,
-	renderingTarget,
-	topBorder,
-}: {
-	storyPackage: Gallery['storyPackage'];
-	format: ArticleFormat;
-	discussionApiUrl: string;
-	absoluteServerTimes: boolean;
-	renderingTarget: RenderingTarget;
-	topBorder: boolean;
-}) =>
-	storyPackage === undefined ? null : (
-		<Section
-			fullWidth={true}
-			backgroundColour={palette('--article-section-background')}
-			borderColour={palette('--onward-content-border')}
-			showTopBorder={topBorder}
-		>
-			<Island priority="feature" defer={{ until: 'visible' }}>
-				<Carousel
-					heading={storyPackage.heading}
-					trails={storyPackage.trails}
-					onwardsSource="more-on-this-story"
-					format={format}
-					leftColSize="compact"
-					discussionApiUrl={discussionApiUrl}
-					absoluteServerTimes={absoluteServerTimes}
-					renderingTarget={renderingTarget}
-				/>
-			</Island>
-		</Section>
-	);
