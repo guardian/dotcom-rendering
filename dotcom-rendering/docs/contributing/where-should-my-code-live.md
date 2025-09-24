@@ -22,7 +22,7 @@ In DCR, we use file suffixes to help provide some context & information around f
 
 **Rendering Target**
 
-DCR supports rendering for different targets - web, apps & amp.
+DCR supports rendering for different targets - web & apps.
 To mark code which is only to be used for specific rendering target, this should be added to the suffix of the file, e.g `MyComponent.apps.tsx`, `MyLib.amp.ts` or `MyLayout.web.tsx`.
 
 These files all still live in the directories, and the suffixes are used to determine which target that code is for.
@@ -30,7 +30,7 @@ In the case that there's no suffix, it can generally be assumed this code can be
 
 > Note: When this was set up, most web code stayed without suffixes, which means there's a chance it's not compatible with other targets, so be vigilant when using shared code on a new target for the first time.
 
-> Note: Some un-suffixed code might be shared across apps & web, but not AMP, or some other combination, so keep an eye out to see if there's a platform specific version of the file you're working on!
+> Note: Some un-suffixed code might be shared across apps & web or some other combination, so keep an eye out to see if there's a platform specific version of the file you're working on!
 
 **Islands / Client side (P)react**
 

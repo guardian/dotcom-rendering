@@ -101,7 +101,8 @@ export const LiveBlock = ({
 					<ShareButton
 						size="xsmall"
 						pageId={pageId}
-						blockId={block.id}
+						hash={`block-${block.id}`}
+						queryParams={{ page: `with:block-${block.id}` }}
 						webTitle={webTitle}
 						format={format}
 						context="LiveBlock"

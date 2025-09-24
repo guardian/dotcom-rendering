@@ -27,14 +27,4 @@ Appears raw.
 
 If an embed uses `<figure>` tag, then the `ShowAllArticleEmbedsSwitch` can be used with `InBodyElementCleaner` to render a reduced subset of embeds.
 
-## AMP Cleaned HTML
-
-The html included in a potential embed may not be permitted by the AMP specification. For each embed that is renedered in an article we can:
-
--   Transform the embed into something which is valid amp.
--   Remove the embed.
--   Fail to render the article in AMP.
-
-The field `isMandatory` should control whether an embed is removed or if the page is. Dotcom does not currently support this API, so currently a workaround is used by central production to force the page to fail amp validation.
-
 ## Salient Points

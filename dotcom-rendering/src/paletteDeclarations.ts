@@ -3401,6 +3401,18 @@ const articleBorderLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
+const articleSectionBorderLight: PaletteFunction = (format) => {
+	if (format.design === ArticleDesign.Gallery) {
+		return sourcePalette.neutral[86];
+	}
+
+	return articleBorderLight(format);
+};
+
+const articleSectionBorderDark: PaletteFunction = () => {
+	return sourcePalette.neutral[20];
+};
+
 const footerBorderLight: PaletteFunction = () => {
 	return sourcePalette.neutral[86];
 };
@@ -6340,6 +6352,10 @@ const paletteColours = {
 		light: articleSectionBackgroundLight,
 		dark: articleSectionBackgroundDark,
 	},
+	'--article-section-border': {
+		light: articleSectionBorderLight,
+		dark: articleSectionBorderDark,
+	},
 	'--article-section-secondary-title': {
 		light: articleSectionSecondaryTitleLight,
 		dark: articleSectionSecondaryTitleDark,
@@ -7173,6 +7189,30 @@ const paletteColours = {
 		light: liveKickerTextLight,
 		dark: liveKickerTextDark,
 	},
+	'--labs-about-dropdown-background': {
+		light: () => sourcePalette.neutral[93],
+		dark: () => sourcePalette.neutral[0],
+	},
+	'--labs-about-dropdown-link': {
+		light: () => sourcePalette.labs[200],
+		dark: () => sourcePalette.labs[400],
+	},
+	'--labs-about-dropdown-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--labs-header-background': {
+		light: () => sourcePalette.labs[700],
+		dark: () => sourcePalette.labs[100],
+	},
+	'--labs-header-label-text': {
+		light: () => sourcePalette.labs[100],
+		dark: () => sourcePalette.labs[700],
+	},
+	'--labs-header-title': {
+		light: () => sourcePalette.neutral[0],
+		dark: () => sourcePalette.neutral[100],
+	},
 	'--labs-legacy-article-section-title': {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[97],
@@ -7188,6 +7228,14 @@ const paletteColours = {
 	'--labs-legacy-treat-text': {
 		light: () => sourcePalette.neutral[46],
 		dark: () => sourcePalette.neutral[38],
+	},
+	'--labs-logo-background': {
+		light: () => sourcePalette.labs[100],
+		dark: () => sourcePalette.labs[200],
+	},
+	'--labs-logo-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
 	},
 	'--last-updated-text': {
 		light: lastUpdatedTextLight,
