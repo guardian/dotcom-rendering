@@ -2,11 +2,12 @@ import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import type { ReactNode } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
+import { parseHtml } from '../lib/domUtils';
 import type { NestedArticleElement } from '../lib/renderElement';
 import type { FEElement, ProductBlockElement } from '../types/content';
 import { InlineProductCard } from './InlineProductCard';
 import { LeftColProductCard } from './LeftColProductCard';
-import { SubheadingBlockComponent } from './SubheadingBlockComponent';
+import { buildElementTree } from './SubheadingBlockComponent';
 
 export type Product = {
 	primaryHeadline: string;
@@ -51,16 +52,26 @@ export const ProductElement = ({
 	ArticleElementComponent: NestedArticleElement;
 	format: ArticleFormat;
 }) => {
-	const subheadingHtml = `<h2>${product.primaryHeading || ''} ${
-		product.secondaryHeading || ''
-	}</h2>`;
+	const subheadingHtml = parseHtml(
+		`<h2 id="${product.h2Id ?? product.elementId}">${
+			product.primaryHeading || ''
+		} ${product.secondaryHeading || ''}</h2>`,
+	);
+
+	const isSubheading = subheadingHtml.textContent
+		? subheadingHtml.textContent.trim().length > 0
+		: false;
+
 	return (
 		<div
 			css={css`
 				position: relative;
 			`}
 		>
-			<SubheadingBlockComponent html={subheadingHtml} format={format} />
+			{isSubheading &&
+				Array.from(subheadingHtml.childNodes).map(
+					buildElementTree(format),
+				)}
 			<LeftColProductCardContainer>
 				<LeftColProductCard
 					brandName={product.brandName}

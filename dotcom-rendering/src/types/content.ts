@@ -489,6 +489,7 @@ export interface ProductBlockElement {
 	secondaryCta: string;
 	statistics: { name: string; value: string }[];
 	content: FEElement[];
+	h2Id?: string;
 }
 
 interface ProfileAtomBlockElement {
