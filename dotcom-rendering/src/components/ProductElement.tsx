@@ -81,6 +81,7 @@ export const ProductElement = ({
 					price={product.primaryPrice}
 					retailer={product.primaryRetailer}
 					statistics={product.statistics}
+					format={format}
 				/>
 			</LeftColProductCardContainer>
 			{product.content.map((element, index) => (

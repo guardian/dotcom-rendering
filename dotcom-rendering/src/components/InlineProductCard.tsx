@@ -29,6 +29,10 @@ const card = css`
 	strong {
 		font-weight: 700;
 	}
+	img {
+		height: 165px;
+		width: 165px;
+	}
 	border-top: 1px solid ${palette('--section-border-lifestyle')};
 	${from.wide} {
 		display: none;
@@ -131,8 +135,8 @@ export const InlineProductCard = ({
 				format={format}
 				master={image}
 				alt={productName + brandName}
-				height={1}
-				width={1}
+				height={165}
+				width={165}
 				loading={'eager'}
 			/>
 		)}

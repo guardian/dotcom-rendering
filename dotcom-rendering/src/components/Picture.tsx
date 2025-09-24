@@ -271,8 +271,8 @@ const decideImageWidths = ({
 				];
 			case 'productCard':
 				return [
-					{ breakpoint: breakpoints.mobile, width: 165 },
 					{ breakpoint: breakpoints.wide, width: 220 },
+					{ breakpoint: breakpoints.mobile, width: 165 },
 				];
 			case 'inline':
 			default:
