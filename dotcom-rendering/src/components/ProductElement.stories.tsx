@@ -22,7 +22,7 @@ const ArticleElementComponent = getNestedArticleElement({
 const product: ProductBlockElement = {
 	_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
 	elementId: 'b1f6e8e2-3f3a-4f0c-8d1e-5f3e3e3e3e3e',
-	primaryHeading: 'Best fan overall',
+	primaryHeading: '<em>Best fan overall</em>',
 	secondaryHeading: 'AirCraft Lume',
 	brandName: 'AirCraft',
 	productName: 'Lume',
@@ -466,6 +466,39 @@ const meta = {
 export default meta;
 
 export const Default = {};
+
+export const withoutHeading: StoryFn = () => {
+	return (
+		<>
+			<ProductElement
+				product={{
+					...product,
+					primaryHeading: '',
+					secondaryHeading: '',
+				}}
+				format={{
+					design: ArticleDesign.Review,
+					display: ArticleDisplay.Showcase,
+					theme: Pillar.Lifestyle,
+				}}
+				ArticleElementComponent={ArticleElementComponent}
+			/>
+			<ProductElement
+				product={{
+					...product,
+					primaryHeading: `<em></em>`,
+					secondaryHeading: `<strong></strong>`,
+				}}
+				format={{
+					design: ArticleDesign.Review,
+					display: ArticleDisplay.Showcase,
+					theme: Pillar.Lifestyle,
+				}}
+				ArticleElementComponent={ArticleElementComponent}
+			/>
+		</>
+	);
+};
 
 export const MultipleProducts: StoryFn = () => {
 	return (
