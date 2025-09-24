@@ -8,6 +8,7 @@ import { palette } from '../palette';
 import type { OnwardsSource } from '../types/onwards';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { FETrailType, TrailType } from '../types/trails';
+import { CarousableSmallOnwards } from './CarousableSmallOnwards';
 import { Carousel } from './Carousel.importable';
 import { Placeholder } from './Placeholder';
 
@@ -89,22 +90,32 @@ export const FetchOnwardsData = ({
 
 	return (
 		<div css={minHeight}>
-			<Carousel
-				heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
-				trails={trails}
-				description={data.description}
-				onwardsSource={onwardsSource}
-				format={format}
-				leftColSize={
-					format.design === ArticleDesign.LiveBlog ||
-					format.design === ArticleDesign.DeadBlog
-						? 'wide'
-						: 'compact'
-				}
-				discussionApiUrl={discussionApiUrl}
-				absoluteServerTimes={absoluteServerTimes}
-				renderingTarget={renderingTarget}
-			/>
+			{format.design === ArticleDesign.Gallery ? (
+				<CarousableSmallOnwards
+					absoluteServerTimes={absoluteServerTimes}
+					trails={trails}
+					discussionApiUrl={discussionApiUrl}
+					heading={data.heading || data.displayname}
+					onwardsSource={onwardsSource}
+				/>
+			) : (
+				<Carousel
+					heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
+					trails={trails}
+					description={data.description}
+					onwardsSource={onwardsSource}
+					format={format}
+					leftColSize={
+						format.design === ArticleDesign.LiveBlog ||
+						format.design === ArticleDesign.DeadBlog
+							? 'wide'
+							: 'compact'
+					}
+					discussionApiUrl={discussionApiUrl}
+					absoluteServerTimes={absoluteServerTimes}
+					renderingTarget={renderingTarget}
+				/>
+			)}
 		</div>
 	);
 };

@@ -317,6 +317,15 @@ export const OnwardsUpper = ({
 				<Section
 					fullWidth={true}
 					borderColour={palette('--article-section-border')}
+					padSides={
+						format.design === ArticleDesign.Gallery ? false : true
+					}
+					showTopBorder={
+						format.design === ArticleDesign.Gallery ? false : true
+					}
+					showSideBorders={
+						format.design === ArticleDesign.Gallery ? false : true
+					}
 				>
 					<FetchOnwardsData
 						url={url}
@@ -331,24 +340,41 @@ export const OnwardsUpper = ({
 					/>
 				</Section>
 			)}
-			{!!curatedDataUrl && !isPaidContent && canHaveCuratedContent && (
-				<Section
-					fullWidth={true}
-					borderColour={palette('--article-section-border')}
-				>
-					<FetchOnwardsData
-						url={curatedDataUrl}
-						limit={20}
-						onwardsSource="curated-content"
-						format={format}
-						discussionApiUrl={discussionApiUrl}
-						absoluteServerTimes={absoluteServerTimes}
-						renderingTarget={renderingTarget}
-						isAdFreeUser={isAdFreeUser}
-						webURL={webURL}
-					/>
-				</Section>
-			)}
+			{!!curatedDataUrl &&
+				!isPaidContent &&
+				canHaveCuratedContent && (
+					<Section
+						fullWidth={true}
+						borderColour={palette('--article-section-border')}
+						showTopBorder={
+							format.design === ArticleDesign.Gallery
+								? false
+								: true
+						}
+						showSideBorders={
+							format.design === ArticleDesign.Gallery
+								? false
+								: true
+						}
+						padSides={
+							format.design === ArticleDesign.Gallery
+								? false
+								: true
+						}
+					>
+						<FetchOnwardsData
+							url={curatedDataUrl}
+							limit={20}
+							onwardsSource="curated-content"
+							format={format}
+							discussionApiUrl={discussionApiUrl}
+							absoluteServerTimes={absoluteServerTimes}
+							renderingTarget={renderingTarget}
+							isAdFreeUser={isAdFreeUser}
+							webURL={webURL}
+						/>
+					</Section>
+				)}
 		</div>
 	);
 };
