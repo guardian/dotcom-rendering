@@ -309,6 +309,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}
 						pageId={article.pageId}
+						wholePictureLogoSwitch={
+							article.config.switches.wholePictureLogo
+						}
 					/>
 				</div>
 			)}

@@ -859,7 +859,7 @@ export const Card = ({
 								defer={{ until: 'visible' }}
 							>
 								<LoopVideo
-									src={media.mainMedia.videoId}
+									sources={media.mainMedia.sources}
 									atomId={media.mainMedia.atomId}
 									uniqueId={uniqueId}
 									height={media.mainMedia.height}

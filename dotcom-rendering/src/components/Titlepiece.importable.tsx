@@ -59,6 +59,104 @@ const slimNavEditionSwitcherOverrides = css`
 	}
 `;
 
+const veggieBurgerDiameter = 40;
+
+const logoStyles = css`
+	${gridMainColumn}
+	grid-row: 1;
+	position: relative;
+	display: flex;
+	justify-self: end;
+	align-self: end;
+	margin-top: ${space[2]}px;
+	margin-bottom: 6px;
+	right: ${veggieBurgerDiameter + space[3]}px;
+
+	${from.mobileMedium} {
+		right: 0;
+	}
+	${from.mobileLandscape} {
+		margin-bottom: ${space[2]}px;
+	}
+
+	svg {
+		width: 152px;
+		${from.mobileMedium} {
+			width: 207px;
+		}
+		${from.tablet} {
+			width: 252px;
+		}
+		${from.desktop} {
+			width: 291px;
+		}
+	}
+`;
+
+const logoStylesFromLeftCol = css`
+	svg {
+		${from.leftCol} {
+			width: 324px;
+		}
+	}
+`;
+
+const theWholePictureStyles = css`
+	margin-bottom: 2px;
+	${from.tablet} {
+		margin-top: 10px;
+		margin-bottom: 6px;
+	}
+
+	svg {
+		height: auto;
+		width: 173px;
+		${from.tablet} {
+			width: 246px;
+		}
+	}
+`;
+
+const slimNavLogoOverrides = css`
+	position: relative;
+	margin-top: ${space[2]}px;
+	margin-bottom: ${space[2]}px;
+	right: ${veggieBurgerDiameter + 6}px;
+
+	/** Intentionally duplicated as this needs to _override_ the standard logo styles */
+	${from.mobileMedium} {
+		right: ${veggieBurgerDiameter + 6}px;
+	}
+	${from.mobileLandscape} {
+		margin-top: ${space[1]}px;
+		margin-bottom: ${space[2]}px;
+	}
+	${from.tablet} {
+		right: ${space[8]}px;
+	}
+	${from.desktop} {
+		right: ${space[10]}px;
+	}
+	svg {
+		width: 130px;
+		${from.mobile} {
+			width: 130px;
+		}
+		${from.tablet} {
+			width: 86px;
+		}
+		${from.desktop} {
+			width: 130px;
+		}
+		${from.leftCol} {
+			width: 140px;
+		}
+		${from.wide} {
+			width: 145px;
+		}
+	}
+`;
+
 const pillarsNavStyles = css`
 	${gridContent}
 	grid-row: 2;
@@ -243,6 +341,9 @@ export const Titlepiece = ({
 }: Props) => {
 	const { showBanner } = useEditionSwitcherBanner(pageId, editionId);
 
+	const showWholePictureLogo =
+		!!wholePictureLogoSwitch && !showSlimNav && editionId === 'US';
+
 	return (
 		<Grid
 			type="nav"
@@ -421,13 +522,16 @@ export const Titlepiece = ({
 			</div>
 
 			{/* Guardian logo */}
-			<Logo
-				showWholePictureLogo={
-					!!wholePictureLogoSwitch && editionId === 'US'
-				}
-				hasPageSkin={!!hasPageSkin}
-				showSlimNav={!!showSlimNav}
-			/>
+			<div
+				css={[
+					logoStyles,
+					!hasPageSkin && logoStylesFromLeftCol,
+					showSlimNav && slimNavLogoOverrides,
+					showWholePictureLogo && theWholePictureStyles,
+				]}
+			>
+				<Logo showWholePictureLogo={showWholePictureLogo} />
+			</div>
 
 			{/** Expanded menu checkbox */}
 			<input

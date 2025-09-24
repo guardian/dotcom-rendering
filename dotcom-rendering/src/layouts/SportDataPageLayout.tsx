@@ -110,6 +110,9 @@ export const SportDataPageLayout = ({ sportData }: Props) => {
 					showSlimNav={false}
 					hasPageSkin={sportData.config.hasPageSkin}
 					pageId={sportData.config.pageId}
+					wholePictureLogoSwitch={
+						sportData.config.switches.wholePictureLogo
+					}
 				/>
 			</div>
 
