@@ -25,4 +25,4 @@ export type OnwardsSource =
 	| 'newsletters-page'
 	| 'unknown-source'; // We should never see this in the analytics data!
 
-export type OnwardContainerType = 'more-galleries';
+export type OnwardContainerType = 'more-galleries' | 'related-content';
