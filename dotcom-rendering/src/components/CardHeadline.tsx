@@ -109,24 +109,7 @@ const fontFamilies = {
 		xxxsmall: `${textSans15}\n\tline-height: 1.15;\n`,
 		tiny: `${textSans12}\n\tline-height: 1.15;\n`,
 	},
-} as const;
-
-/** These represent the font groups used by card headline */
-const fontFamiliesLabs = {
-	headlineMedium: {
-		xxxlarge: headlineMedium64,
-		xxlarge: headlineMedium50,
-		xlarge: headlineMedium42,
-		large: headlineMedium34,
-		medium: headlineMedium28,
-		small: headlineMedium24,
-		xsmall: headlineMedium20,
-		xxsmall: headlineMedium17,
-		xxxsmall: headlineMedium15,
-		tiny: headlineMedium14,
-	},
-	/** Line height for sans style headlines for labs is overridden to match that of other headlines (1.15) */
-	textSans: {
+	textSansBold: {
 		xxxlarge: `${textSansBold20}\n\tline-height: 1.15;\n`,
 		xxlarge: `${textSansBold20}\n\tline-height: 1.15;\n`,
 		xlarge: `${textSansBold20}\n\tline-height: 1.15;\n`,
@@ -143,6 +126,7 @@ const fontFamiliesLabs = {
 export enum FontFamily {
 	HeadlineMedium = 'headlineMedium',
 	TextSans = 'textSans',
+	TextSansBold = 'textSansBold',
 }
 
 export type HeadlineSize = keyof typeof fontFamilies.headlineMedium;
@@ -154,12 +138,8 @@ export type ResponsiveFontSize = {
 	mobileMedium?: HeadlineSize;
 };
 
-const getFontSize = (
-	sizes: ResponsiveFontSize,
-	family: FontFamily,
-	fontSource?: typeof fontFamilies | typeof fontFamiliesLabs,
-) => {
-	const font = (fontSource ?? fontFamilies)[family];
+const getFontSize = (sizes: ResponsiveFontSize, family: FontFamily) => {
+	const font = fontFamilies[family];
 
 	const { desktop, tablet, mobileMedium, mobile } = sizes;
 
@@ -195,11 +175,13 @@ const getFonts = (
 	showLabsRedesign: boolean,
 ) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
-	const fontSource =
-		isLabs && showLabsRedesign ? fontFamiliesLabs : fontFamilies;
-	const family = isLabs ? FontFamily.TextSans : FontFamily.HeadlineMedium;
+	const family = isLabs
+		? showLabsRedesign
+			? FontFamily.TextSansBold
+			: FontFamily.TextSans
+		: FontFamily.HeadlineMedium;
 
-	return getFontSize(fontSizes, family, fontSource);
+	return getFontSize(fontSizes, family);
 };
 
 export const WithLink = ({
