@@ -440,7 +440,7 @@ const ShowSignInGateAuxia = ({
 				{
 					component: {
 						componentType: 'SIGN_IN_GATE',
-						id: `${treatmentId}_${gateVersion}`, // Include version in tracking
+						id: treatmentId,
 					},
 					action: 'VIEW',
 					abTest: buildAbTestTrackingAuxiaVariant(treatmentId),

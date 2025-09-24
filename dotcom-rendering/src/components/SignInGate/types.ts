@@ -248,7 +248,3 @@ export type SignInGatePropsAuxia = {
 };
 
 export type AuxiaGateVersion = 'v1' | 'v2';
-
-export interface AuxiaGateVersionConfig {
-	version: AuxiaGateVersion;
-}
