@@ -8,7 +8,11 @@ import {
 	SvgShareWeb,
 } from '@guardian/source/react-components';
 import { useEffect, useMemo, useState } from 'react';
-import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '../lib/articleFormat';
 import { transparentColour } from '../lib/transparentColour';
 import { useMatchMedia } from '../lib/useMatchMedia';
 import { palette as themePalette } from '../palette';
@@ -42,6 +46,7 @@ const sharedButtonStyles = (
 ) => css`
 	transition: none;
 	border-color: ${format.design === ArticleDesign.Gallery &&
+	format.theme !== ArticleSpecial.Labs &&
 	context == 'ArticleMeta'
 		? themePalette('--share-button-border-meta')
 		: sizeXSmall
