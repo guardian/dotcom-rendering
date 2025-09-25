@@ -979,7 +979,12 @@ export const tabs = {
 const datelineLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
-			return sourcePalette.neutral[60];
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[86];
+				default:
+					return sourcePalette.neutral[60];
+			}
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
@@ -2738,16 +2743,21 @@ const captionTextDark: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const captionMainMediaTextLight: PaletteFunction = ({ design }) => {
-	switch (design) {
+const captionMainMediaTextLight: PaletteFunction = (format) => {
+	switch (format.design) {
 		case ArticleDesign.Gallery:
-			return sourcePalette.neutral[60];
+			switch (format.theme) {
+				case ArticleSpecial.Labs:
+					return captionTextLight(format);
+				default:
+					return sourcePalette.neutral[60];
+			}
 		default:
-			return sourcePalette.neutral[46];
+			return captionTextLight(format);
 	}
 };
-const captionMainMediaTextDark: PaletteFunction = () =>
-	sourcePalette.neutral[60];
+const captionMainMediaTextDark: PaletteFunction = (format) =>
+	captionTextDark(format);
 
 const captionLink: PaletteFunction = ({ design, theme }) => {
 	if (design === ArticleDesign.Analysis && theme === Pillar.News) {
