@@ -2738,8 +2738,16 @@ const captionTextDark: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const captionPhotoEssayMainMediaTextLight = () => sourcePalette.neutral[46];
-const captionPhotoEssayMainMediaTextDark = () => sourcePalette.neutral[60];
+const captionMainMediaTextLight: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[60];
+		default:
+			return sourcePalette.neutral[46];
+	}
+};
+const captionMainMediaTextDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
 
 const captionLink: PaletteFunction = ({ design, theme }) => {
 	if (design === ArticleDesign.Analysis && theme === Pillar.News) {
@@ -6508,13 +6516,13 @@ const paletteColours = {
 		light: captionLink,
 		dark: captionLink,
 	},
+	'--caption-main-media-text': {
+		light: captionMainMediaTextLight,
+		dark: captionMainMediaTextDark,
+	},
 	'--caption-overlay-text': {
 		light: captionOverlayText,
 		dark: captionOverlayText,
-	},
-	'--caption-photo-essay-main-media-text': {
-		light: captionPhotoEssayMainMediaTextLight,
-		dark: captionPhotoEssayMainMediaTextDark,
 	},
 	'--caption-text': {
 		light: captionTextLight,

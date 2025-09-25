@@ -37,12 +37,14 @@ type IconProps = {
 	format: ArticleFormat;
 };
 
-const captionStyle = css`
+const captionStyle = (isMainMedia: boolean) => css`
 	${textSans14};
 	line-height: 135%;
 	padding-top: 6px;
 	overflow-wrap: break-word;
-	color: ${palette('--caption-text')};
+	color: ${isMainMedia
+		? palette('--caption-main-media-text')
+		: palette('--caption-text')};
 `;
 
 const bottomMarginStyles = css`
@@ -292,7 +294,7 @@ export const Caption = ({
 	const defaultCaption = (
 		<figcaption
 			css={[
-				captionStyle,
+				captionStyle(isMainMedia),
 				shouldLimitWidth && limitedWidth,
 				isOverlaid ? overlaidStyles(format) : bottomMarginStyles,
 				isMainMedia &&
@@ -339,9 +341,7 @@ export const Caption = ({
 							 */
 							line-height: 1.15;
 							color: ${isMainMedia
-								? palette(
-										'--caption-photo-essay-main-media-text',
-								  )
+								? palette('--caption-main-media-text')
 								: palette('--caption-text')};
 							width: 100%;
 							margin-top: ${space[3]}px;
@@ -352,9 +352,7 @@ export const Caption = ({
 								padding-top: ${space[2]}px;
 								border-top: 1px solid
 									${isMainMedia
-										? palette(
-												'--caption-photo-essay-main-media-text',
-										  )
+										? palette('--caption-main-media-text')
 										: palette('--caption-text')};
 							}
 						`,
