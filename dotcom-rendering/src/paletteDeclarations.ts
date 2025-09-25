@@ -3700,6 +3700,18 @@ const shareButtonBorderLight: PaletteFunction = ({ design }) => {
 
 const shareButtonBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
 
+const shareButtonBorderMetaLight: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[38];
+		default:
+			return sourcePalette.neutral[86];
+	}
+};
+
+const shareButtonBorderMetaDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+
 const shareButtonBorderXSmallLight: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
@@ -7696,6 +7708,10 @@ const paletteColours = {
 	'--share-button-border': {
 		light: shareButtonBorderLight,
 		dark: shareButtonBorderDark,
+	},
+	'--share-button-border-meta': {
+		light: shareButtonBorderMetaLight,
+		dark: shareButtonBorderMetaDark,
 	},
 	'--share-button-copied': {
 		light: shareButtonCopiedLight,
