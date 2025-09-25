@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import {
 	headlineMedium17,
-	palette as sourcePalette,
 	textEgyptianItalic17,
 	textSansItalic17,
 	until,
