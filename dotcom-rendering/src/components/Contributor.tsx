@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	headlineMedium17,
+	palette as sourcePalette,
 	textEgyptianItalic17,
 	textSansItalic17,
 	until,
@@ -30,6 +31,16 @@ const standfirstColourBelowDesktop = css`
 	}
 `;
 
+const galleryBylineStyles = css`
+	a {
+		font-style: italic;
+		:hover {
+			text-decoration: none;
+			border-color: ${schemedPalette('--byline-anchor')};
+		}
+	}
+`;
+
 const bylineStyles = (format: ArticleFormat) => {
 	const defaultStyles = css`
 		${headlineMedium17}
@@ -52,17 +63,25 @@ const bylineStyles = (format: ArticleFormat) => {
 
 	switch (format.design) {
 		case ArticleDesign.Gallery:
-			return css`
-				${defaultStyles}
-				a {
-					font-style: italic;
-					:hover {
-						text-decoration: none;
-						border-color: ${schemedPalette('--byline-anchor')};
-					}
-				}
-			`;
+			switch (format.theme) {
+				case ArticleSpecial.Labs: {
+					return css`
+						${defaultStyles}
+						${galleryBylineStyles}
 
+						a {
+							border-bottom: 0.5px solid
+								${sourcePalette.neutral[46]};
+						}
+					`;
+				}
+				default: {
+					return css`
+						${defaultStyles}
+						${galleryBylineStyles}
+					`;
+				}
+			}
 		default:
 			return defaultStyles;
 	}
