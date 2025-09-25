@@ -35,6 +35,7 @@ type Props = {
 
 type IconProps = {
 	format: ArticleFormat;
+	isMainMedia: boolean;
 };
 
 const captionStyle = (isMainMedia: boolean) => css`
@@ -169,8 +170,10 @@ const hideIconBelowLeftCol = css`
 const pictureRatio = (13 / 18) * 100;
 const videoRatio = (23 / 36) * 100;
 
-const iconStyle = css`
-	fill: ${palette('--caption-text')};
+const iconStyle = (format: ArticleFormat, isMainMedia: boolean) => css`
+	fill: ${format.design === ArticleDesign.Gallery && isMainMedia
+		? palette('--caption-main-media-text')
+		: palette('--caption-text')};
 	margin-right: ${space[1]}px;
 	display: inline-block;
 	position: relative;
@@ -262,11 +265,11 @@ const CameraIcon = ({ format }: IconProps) => {
 	);
 };
 
-const VideoIcon = ({ format }: IconProps) => {
+const VideoIcon = ({ format, isMainMedia }: IconProps) => {
 	return (
 		<span
 			css={[
-				iconStyle,
+				iconStyle(format, isMainMedia),
 				format.display === ArticleDisplay.Immersive &&
 					hideIconBelowLeftCol,
 				videoIconStyle,
