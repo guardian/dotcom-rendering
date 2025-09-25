@@ -270,11 +270,15 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						format={format}
 						standfirst={frontendData.standfirst}
 					/>
-					<Caption
-						captionText={captionText}
-						format={format}
-						isMainMedia={true}
-					/>
+
+					<Hide until="leftCol">
+						<Caption
+							captionText={captionText}
+							format={format}
+							isMainMedia={true}
+						/>
+					</Hide>
+
 					<div css={metaAndDisclaimerContainer}>
 						{isWeb ? (
 							<ArticleMeta
@@ -297,6 +301,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 								isCommentable={frontendData.isCommentable}
 								discussionApiUrl={discussionApiUrl}
 								shortUrlId={shortUrlId}
+								captionText={captionText}
 							/>
 						) : null}
 						{isApps ? (

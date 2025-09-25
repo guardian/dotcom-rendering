@@ -3443,7 +3443,7 @@ const articleBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
 
 const straightLinesLight: PaletteFunction = (format) => {
 	if (format.design === ArticleDesign.Gallery) {
-		return sourcePalette.neutral[20];
+		return sourcePalette.neutral[38];
 	}
 	if (format.theme === ArticleSpecial.SpecialReportAlt) {
 		return transparentColour(sourcePalette.neutral[60], 0.3);
