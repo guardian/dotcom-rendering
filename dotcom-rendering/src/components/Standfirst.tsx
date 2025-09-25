@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headlineBold17,
 	headlineLight17,
 	headlineLight20,
 	headlineLight24,
@@ -90,7 +89,7 @@ const decideFont = ({ display, design, theme }: ArticleFormat) => {
 				`;
 			}
 			return css`
-				${headlineBold17}
+				${headlineMedium20}
 			`;
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Comment:
