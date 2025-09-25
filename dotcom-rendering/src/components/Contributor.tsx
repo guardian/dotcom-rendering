@@ -57,7 +57,6 @@ const bylineStyles = (format: ArticleFormat) => {
 				${defaultStyles}
 				a {
 					font-style: italic;
-					border-bottom: 0.5px solid ${sourcePalette.neutral[46]};
 					:hover {
 						text-decoration: none;
 						border-color: ${schemedPalette('--byline-anchor')};
