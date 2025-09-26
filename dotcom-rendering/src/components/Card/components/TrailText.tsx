@@ -11,14 +11,13 @@ import { palette } from '../../../palette';
 
 export type TrailTextSize = 'regular' | 'large';
 
-const trailTextStyles = css`
-	display: flex;
-	flex-direction: column;
-
-	${until.tablet} {
-		display: none;
-	}
-`;
+const trailTextStyles = (hide?: boolean) => {
+	return css`
+		display: flex;
+		flex-direction: column;
+		${hide ? `${until.tablet} { display: none; }` : ''}
+	`;
+};
 
 const bottomPadding = css`
 	padding-bottom: ${space[2]}px;
@@ -49,6 +48,8 @@ type Props = {
 	padBottom?: boolean;
 	/** Adds padding to the top of the trail text */
 	padTop?: boolean;
+	/** hide trail text for specific breakpoints */
+	hideOnSmallBreakpoints?: boolean;
 };
 
 export const TrailText = ({
@@ -58,11 +59,12 @@ export const TrailText = ({
 	hideUntil,
 	padBottom = true,
 	padTop = false,
+	hideOnSmallBreakpoints = true,
 }: Props) => {
 	const trailText = (
 		<div
 			css={[
-				trailTextStyles,
+				trailTextStyles(hideOnSmallBreakpoints),
 				css`
 					color: ${trailTextColour};
 				`,

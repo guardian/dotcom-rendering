@@ -30,7 +30,7 @@ import type {
 	DCRSupportingContent,
 } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
-import type { OnwardsSource } from '../../types/onwards';
+import type { OnwardContainerType, OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
 import { CardCommentCount } from '../CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from '../CardHeadline';
@@ -120,7 +120,7 @@ export type Props = {
 	supportingContentPosition?: Position;
 	snapData?: DCRSnapType;
 	containerPalette?: DCRContainerPalette;
-	containerType?: DCRContainerType;
+	containerType?: DCRContainerType | OnwardContainerType;
 	showAge?: boolean;
 	discussionApiUrl: string;
 	discussionId?: string;
@@ -144,7 +144,7 @@ export type Props = {
 	 * For example, the first splash card in the second collection would be: "collection-1-splash-0"
 	 */
 	uniqueId?: string;
-	/** The Splash card in a flexible container gets a different visual treatment to other cards */
+	/** The Splash card in a flexible or onward container gets a different visual treatment to other cards */
 	isFlexSplash?: boolean;
 	showTopBarDesktop?: boolean;
 	showTopBarMobile?: boolean;
@@ -576,6 +576,8 @@ export const Card = ({
 		containerType === 'flexible/special' ||
 		containerType === 'flexible/general';
 
+	const isOnwardContainer = containerType === 'more-galleries';
+
 	const isSmallCard = containerType === 'scrollable/small';
 
 	const mediaFixedSizeOptions = (): MediaFixedSizeOptions => {
@@ -591,7 +593,7 @@ export const Card = ({
 	};
 
 	const hideTrailTextUntil = () => {
-		if (isFlexibleContainer) {
+		if (isFlexibleContainer || (isOnwardContainer && !!isFlexSplash)) {
 			return undefined;
 		} else if (
 			mediaSize === 'large' &&
@@ -603,6 +605,10 @@ export const Card = ({
 			return 'tablet';
 		}
 	};
+
+	const shouldShowTrailText = isOnwardContainer
+		? media?.type !== 'podcast' && isFlexSplash
+		: media?.type !== 'podcast';
 
 	/**
 	 * Determines the gap of between card components based on card properties
@@ -1093,12 +1099,15 @@ export const Card = ({
 						)}
 
 						{!!trailText &&
-							media?.type !== 'podcast' &&
+							shouldShowTrailText &&
 							!isInHideTrailsAbTest && (
 								<TrailText
 									trailText={trailText}
 									trailTextSize={trailTextSize}
 									padTop={headlinePosition === 'inner'}
+									hideOnSmallBreakpoints={
+										!(isOnwardContainer && isFlexSplash)
+									}
 									hideUntil={hideTrailTextUntil()}
 								/>
 							)}
