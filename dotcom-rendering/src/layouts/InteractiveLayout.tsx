@@ -272,9 +272,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										padSides={false}
 										shouldCenter={false}
 									>
-										<HeaderAdSlot
-											abTests={article.config.abTests}
-										/>
+										<HeaderAdSlot />
 									</Section>
 								</div>
 							</Stuck>
@@ -293,6 +291,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							hasPageSkin={false}
 							hasPageSkinContentSelfConstrain={false}
 							pageId={article.pageId}
+							wholePictureLogoSwitch={
+								article.config.switches.wholePictureLogo
+							}
 						/>
 					</div>
 

@@ -22,7 +22,12 @@ type Story = StoryObj<typeof LoopVideo>;
 export const Default: Story = {
 	name: 'Default',
 	args: {
-		src: 'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
+		sources: [
+			{
+				src: 'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
+				mimeType: 'video/mp4',
+			},
+		],
 		uniqueId: 'test-video-1',
 		atomId: 'test-atom-1',
 		height: 720,
@@ -33,11 +38,33 @@ export const Default: Story = {
 	},
 };
 
+export const WithM3U8File: Story = {
+	name: 'With M3U8 file',
+	args: {
+		...Default.args,
+		sources: [
+			{
+				src: 'https://uploads.guimcode.co.uk/2025/09/01/Loop__Japan_fireball--ace3fcf6-1378-41db-9d21-f3fc07072ab2-1.10.m3u8',
+				mimeType: 'application/x-mpegURL',
+			},
+			{
+				src: 'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
+				mimeType: 'video/mp4',
+			},
+		],
+	},
+};
+
 export const Without5to4Ratio: Story = {
 	name: 'Without 5:4 aspect ratio',
 	args: {
 		...Default.args,
-		src: 'https://uploads.guim.co.uk/2024/10/01/241001HeleneLoop_2.mp4',
+		sources: [
+			{
+				src: 'https://uploads.guim.co.uk/2024/10/01/241001HeleneLoop_2.mp4',
+				mimeType: 'video/mp4',
+			},
+		],
 		height: 1080,
 		width: 1920,
 	},

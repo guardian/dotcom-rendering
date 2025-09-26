@@ -33,9 +33,8 @@ interface Props {
 	showSlimNav?: boolean;
 	hasPageSkin?: boolean;
 	pageId?: string;
+	wholePictureLogoSwitch?: boolean;
 }
-
-const veggieBurgerDiameter = 40;
 
 const gridContent = css`
 	grid-column: content-start / content-end;
@@ -60,6 +59,8 @@ const slimNavEditionSwitcherOverrides = css`
 	}
 `;
 
+const veggieBurgerDiameter = 40;
+
 const logoStyles = css`
 	${gridMainColumn}
 	grid-row: 1;
@@ -70,6 +71,7 @@ const logoStyles = css`
 	margin-top: ${space[2]}px;
 	margin-bottom: 6px;
 	right: ${veggieBurgerDiameter + space[3]}px;
+
 	${from.mobileMedium} {
 		right: 0;
 	}
@@ -99,15 +101,29 @@ const logoStylesFromLeftCol = css`
 	}
 `;
 
+const theWholePictureStyles = css`
+	margin-bottom: 2px;
+	${from.tablet} {
+		margin-top: 10px;
+		margin-bottom: 6px;
+	}
+
+	svg {
+		height: auto;
+		width: 173px;
+		${from.tablet} {
+			width: 246px;
+		}
+	}
+`;
+
 const slimNavLogoOverrides = css`
 	position: relative;
 	margin-top: ${space[2]}px;
 	margin-bottom: ${space[2]}px;
 	right: ${veggieBurgerDiameter + 6}px;
 
-	${from.mobile} {
-		right: ${veggieBurgerDiameter + 6}px;
-	}
+	/** Intentionally duplicated as this needs to _override_ the standard logo styles */
 	${from.mobileMedium} {
 		right: ${veggieBurgerDiameter + 6}px;
 	}
@@ -321,8 +337,12 @@ export const Titlepiece = ({
 	showSlimNav,
 	hasPageSkin,
 	pageId = '',
+	wholePictureLogoSwitch,
 }: Props) => {
 	const { showBanner } = useEditionSwitcherBanner(pageId, editionId);
+
+	const showWholePictureLogo =
+		!!wholePictureLogoSwitch && !showSlimNav && editionId === 'US';
 
 	return (
 		<Grid
@@ -507,9 +527,10 @@ export const Titlepiece = ({
 					logoStyles,
 					!hasPageSkin && logoStylesFromLeftCol,
 					showSlimNav && slimNavLogoOverrides,
+					showWholePictureLogo && theWholePictureStyles,
 				]}
 			>
-				<Logo />
+				<Logo showWholePictureLogo={showWholePictureLogo} />
 			</div>
 
 			{/** Expanded menu checkbox */}

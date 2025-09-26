@@ -208,10 +208,6 @@ This is run through the [PictureCleaner](https://github.com/guardian/frontend/bl
     -   Uses [WidthsByBreakpoint](https://github.com/guardian/frontend/blob/91e117429d865936692de60aa2bea6740bde4f75/common/app/layout/WidthsByBreakpoint.scala#L1) to generate a list of _image_ breakpoints to combine with the media into urls.
     -   Combines the **master** ImageAsset and [breakpoints](https://github.com/guardian/frontend/blob/a101940926699230b8a95a9082aa56327ca98988/common/app/views/support/Profile.scala#L17) to generate [srcset](https://github.com/guardian/frontend/blob/a101940926699230b8a95a9082aa56327ca98988/common/app/views/support/Profile.scala#L240)s.
 
-## AMP Cleaned HTML
-
-This is run through the same cleaners and templates up to `image.scala.html` where it is then rendered using [ampImage](https://github.com/guardian/frontend/blob/f16a4ac50492dc65d7274576840c6993165a2485/common/app/views/fragments/amp/ampImage.scala.html) which uses [getAmpImageUrl](https://github.com/guardian/frontend/blob/a101940926699230b8a95a9082aa56327ca98988/common/app/views/support/Profile.scala#L298) to get a 620px wide crop.
-
 ## Salient points
 
 -   Image URLS need to be rewritten from `media.guim` to `i.guim` on the server.

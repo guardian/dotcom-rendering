@@ -87,6 +87,7 @@ export default {
 		discussionApiUrl,
 		editionId: 'UK',
 		children: <Placeholder />,
+		url: '/',
 	},
 	render: (args) => <FrontSection {...args} />,
 } satisfies Meta<typeof FrontSection>;
@@ -373,6 +374,30 @@ export const WithPaidContentForWholeFront = {
 			isContainerBranding: false,
 			hasMultipleBranding: false,
 		},
+	},
+};
+
+export const GuardianLabs = {
+	name: 'Guardian Labs',
+	args: {
+		title: 'Section',
+		collectionBranding: {
+			kind: 'paid-content',
+			isFrontBranding: false,
+			branding: {
+				brandingType: {
+					name: 'paid-content',
+				},
+				sponsorName: 'guardian.org',
+				logo,
+				aboutThisLink:
+					'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
+			},
+			isContainerBranding: true,
+			hasMultipleBranding: false,
+		},
+		isLabs: true,
+		showLabsRedesign: true,
 	},
 };
 

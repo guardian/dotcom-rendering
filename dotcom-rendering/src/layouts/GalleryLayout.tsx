@@ -144,7 +144,6 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 
 	const {
 		config: {
-			abTests,
 			idUrl,
 			mmaUrl,
 			discussionApiUrl,
@@ -182,6 +181,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 		frontendData.isCommentable && !frontendData.config.isPaidContent;
 
 	const { absoluteServerTimes = false } = switches;
+
 	return (
 		<>
 			{isWeb && (
@@ -195,7 +195,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot abTests={abTests} />
+								<HeaderAdSlot />
 							</Section>
 						</Stuck>
 					)}
@@ -214,6 +214,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}
 						pageId={frontendData.pageId}
+						wholePictureLogoSwitch={switches.wholePictureLogo}
 					/>
 				</div>
 			)}
@@ -472,7 +473,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					data-link-name="most-popular"
 					data-component="most-popular"
 					backgroundColour={palette('--article-section-background')}
-					borderColour={palette('--article-border')}
+					borderColour={palette('--article-section-border')}
 					fontColour={palette('--article-section-title')}
 				>
 					<MostViewedFooterLayout renderAds={isWeb && renderAds}>

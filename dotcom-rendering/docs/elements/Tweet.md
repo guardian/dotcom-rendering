@@ -20,8 +20,6 @@ These are dynamically enhanced on the client side by loading the twitter javascr
 
 ## Article Cleaned HTML
 
-## AMP Cleaned HTML
-
 ## Salient Points
 
 We store enough in CAPI to handle deleted tweets and displaying their images without the twitter js enhancement.

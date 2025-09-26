@@ -168,7 +168,7 @@ export const AudioLayout = (props: WebProps) => {
 							padSides={false}
 							shouldCenter={false}
 						>
-							<HeaderAdSlot abTests={article.config.abTests} />
+							<HeaderAdSlot />
 						</Section>
 					</Stuck>
 				)}
@@ -184,6 +184,9 @@ export const AudioLayout = (props: WebProps) => {
 					showSlimNav={false}
 					hasPageSkinContentSelfConstrain={true}
 					pageId={article.pageId}
+					wholePictureLogoSwitch={
+						article.config.switches.wholePictureLogo
+					}
 				/>
 			</div>
 
@@ -642,6 +645,7 @@ export const AudioLayout = (props: WebProps) => {
 								!!article.config.switches.remoteBanner
 							}
 							tags={article.tags}
+							host={host}
 						/>
 					</Island>
 				</BannerWrapper>

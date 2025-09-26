@@ -1,3 +1,4 @@
+import { breakpoints } from '@guardian/source/foundations';
 import type { Meta } from '@storybook/react';
 import { Masthead } from './Masthead';
 import { nav } from './Titlepiece/Nav.mock';
@@ -19,7 +20,17 @@ const meta = {
 		hasPageSkin: false,
 		hasPageSkinContentSelfConstrain: false,
 	},
+	parameters: {
+		chromatic: {
+			viewports: [
+				breakpoints.mobileMedium,
+				breakpoints.desktop,
+				breakpoints.wide,
+			],
+		},
+	},
 } satisfies Meta<typeof Masthead>;
+
 export default meta;
 
 export const WithoutSubnav = {};
@@ -38,4 +49,31 @@ export const WithPageSkin = {
 
 export const WithPageSkinAndContentSelfContstrain = {
 	args: { hasPageSkinContentSelfConstrain: true },
+};
+
+export const WithUsLogoAndWithoutSubnav = {
+	args: { wholePictureLogoSwitch: true, editionId: 'US' },
+};
+
+export const WithUsLogoAndSubnav = {
+	args: { ...WithUsLogoAndWithoutSubnav.args, showSubNav: true },
+};
+
+export const WithUsLogoAndSlimNav = {
+	args: {
+		...WithUsLogoAndWithoutSubnav.args,
+		showSlimNav: true,
+		displayRoundel: true,
+	},
+};
+
+export const WithUsLogoAndPageSkin = {
+	args: { ...WithUsLogoAndWithoutSubnav.args, hasPageSkin: true },
+};
+
+export const WithUsLogoAndPageSkinAndContentSelfContstrain = {
+	args: {
+		...WithUsLogoAndWithoutSubnav.args,
+		hasPageSkinContentSelfConstrain: true,
+	},
 };
