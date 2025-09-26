@@ -1,8 +1,14 @@
 import type { Meta } from '@storybook/react';
-import { ArticleDesign, Pillar } from '../lib/articleFormat';
+import type { ArticleFormat } from '../lib/articleFormat';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { LeftColProductCardProps } from './LeftColProductCard';
 import { LeftColProductCard } from './LeftColProductCard';
 
+const format: ArticleFormat = {
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.Lifestyle,
+};
 const meta = {
 	component: LeftColProductCard,
 	title: 'Components/LeftColProductCard',
@@ -37,6 +43,7 @@ const sampleProductCard: LeftColProductCardProps = {
 			value: 'sweet, sour, salty and has an umami-rich profile',
 		},
 	],
+	format,
 };
 
 export const Default = () => <LeftColProductCard {...sampleProductCard} />;
