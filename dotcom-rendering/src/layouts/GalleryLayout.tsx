@@ -78,29 +78,23 @@ const captionContainer = css`
 	grid-row: 8;
 `;
 
-const straightLinesStyle = css`
-	${grid.column.left}
-
-	${until.leftCol} {
-		${grid.column.centre};
-	}
-
-	grid-row: 9;
-	align-self: end;
-`;
-
 const standfirstStyles = css`
 	${grid.column.centre}
+
+	${from.leftCol} {
+		width: 75%;
+		grid-row: 10;
+	}
 `;
 
 const metaAndDisclaimerContainer = css`
-	${grid.column.left}
+	${grid.column.centre};
 
-	${until.leftCol} {
-		${grid.column.centre};
+	${from.leftCol} {
+		${grid.column.left}
+		grid-row: 10;
+		padding-top: 10px;
 	}
-
-	/* grid-row: 10; */
 
 	padding-bottom: ${space[6]}px;
 	${from.tablet} {
@@ -108,7 +102,7 @@ const metaAndDisclaimerContainer = css`
 		&::before {
 			content: '';
 			position: absolute;
-			left: -10px;
+			left: -20px;
 			top: 0;
 			bottom: 0;
 			width: 1px;
@@ -316,16 +310,16 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						</Hide>
 					</div>
 
-					<div css={straightLinesStyle}>
-						<Hide until="leftCol">
-							<StraightLines
-								count={4}
-								color={palette('--straight-lines')}
-							/>
-						</Hide>
-					</div>
-
 					<div css={metaAndDisclaimerContainer}>
+						<div>
+							<Hide until="leftCol">
+								<StraightLines
+									count={4}
+									color={palette('--straight-lines')}
+								/>
+							</Hide>
+						</div>
+
 						{isWeb ? (
 							<ArticleMeta
 								branding={
