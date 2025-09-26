@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { FEArticle } from '../frontend/feArticle';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
@@ -17,6 +18,7 @@ import type { FEElement } from '../types/content';
 import type { Podcast, TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { Branding } from './Branding.importable';
+import { Caption } from './Caption';
 import { CommentCount } from './CommentCount.importable';
 import { useConfig } from './ConfigContext';
 import { Contributor } from './Contributor';
@@ -41,6 +43,7 @@ type Props = {
 	isCommentable: boolean;
 	mainMediaElements?: FEElement[];
 	crossword?: FEArticle['crossword'];
+	captionText?: string;
 };
 
 const meta = (format: ArticleFormat) => {
@@ -324,6 +327,7 @@ export const ArticleMeta = ({
 	isCommentable,
 	mainMediaElements,
 	crossword,
+	captionText,
 }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
@@ -403,6 +407,21 @@ export const ArticleMeta = ({
 									source={source}
 								/>
 							)}
+
+							{format.design === ArticleDesign.Gallery ? (
+								<Hide from="leftCol">
+									<Caption
+										captionText={captionText}
+										format={format}
+										isMainMedia={true}
+									/>
+									<StraightLines
+										cssOverrides={stretchLines}
+										count={4}
+										color={themePalette('--straight-lines')}
+									/>
+								</Hide>
+							) : null}
 
 							{crossword?.creator && (
 								<CrosswordSetter

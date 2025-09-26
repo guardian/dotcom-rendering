@@ -4,8 +4,10 @@ import {
 	from,
 	palette as sourcePalette,
 	space,
+	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { Fragment } from 'react';
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
@@ -67,15 +69,40 @@ const headerStyles = css`
 	}
 `;
 
-const metaAndDisclaimerContainer = css`
+const captionContainer = css`
+	${grid.column.left}
+
+	${until.leftCol} {
+		${grid.column.centre};
+	}
+	grid-row: 8;
+`;
+
+const standfirstStyles = css`
 	${grid.column.centre}
+
+	${from.leftCol} {
+		width: 75%;
+		grid-row: 10;
+	}
+`;
+
+const metaAndDisclaimerContainer = css`
+	${grid.column.centre};
+
+	${from.leftCol} {
+		${grid.column.left}
+		grid-row: 10;
+		padding-top: 10px;
+	}
+
 	padding-bottom: ${space[6]}px;
 	${from.tablet} {
 		position: relative;
 		&::before {
 			content: '';
 			position: absolute;
-			left: -10px;
+			left: -20px;
 			top: 0;
 			bottom: 0;
 			width: 1px;
@@ -266,16 +293,33 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 							frontendData.webPublicationDateDeprecated
 						}
 					/>
-					<Standfirst
-						format={format}
-						standfirst={frontendData.standfirst}
-					/>
-					<Caption
-						captionText={captionText}
-						format={format}
-						isMainMedia={true}
-					/>
+					<div css={standfirstStyles}>
+						<Standfirst
+							format={format}
+							standfirst={frontendData.standfirst}
+						/>
+					</div>
+
+					<div css={captionContainer}>
+						<Hide until="leftCol">
+							<Caption
+								captionText={captionText}
+								format={format}
+								isMainMedia={true}
+							/>
+						</Hide>
+					</div>
+
 					<div css={metaAndDisclaimerContainer}>
+						<div>
+							<Hide until="leftCol">
+								<StraightLines
+									count={4}
+									color={palette('--straight-lines')}
+								/>
+							</Hide>
+						</div>
+
 						{isWeb ? (
 							<ArticleMeta
 								branding={
@@ -297,6 +341,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 								isCommentable={frontendData.isCommentable}
 								discussionApiUrl={discussionApiUrl}
 								shortUrlId={shortUrlId}
+								captionText={captionText}
 							/>
 						) : null}
 						{isApps ? (
