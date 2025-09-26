@@ -64,6 +64,26 @@ export const SignInGatePortal = ({
 			undefined,
 			auxiaGateDisplayData?.auxiaData.userTreatment,
 		);
+
+		/**
+		 * - The target mount element is chosen with special handling for Auxia gate v2:
+		 *   when getAuxiaGateVersion(...)= 'v2' the component uses document.body as the portal
+		 *   target instead of the local '#sign-in-gate' element. This is intentional to avoid
+		 *   stacking context and clipping issues that break the expected modal behavior.
+		 *
+		 *   Stacking context rationale for using document.body:
+		 *   - Modern CSS creates local stacking contexts on positioned elements, elements
+		 *     with transforms, or elements with certain CSS properties (e.g. will-change, opacity).
+		 *   - If the portal is mounted inside an ancestor that establishes a stacking context,
+		 *     a fixed-positioned or absolutely positioned modal/overlay inside the gate can be
+		 *     constrained (clipped, hidden behind other content, or assigned an unexpected z-index)
+		 *     relative to outside elements.
+		 *   - Mounting the gate into document.body places it at the top-level of the DOM,
+		 *     ensuring the gate's overlay and z-index are not affected by intermediate stacking
+		 *     contexts or overflow/clip rules, and that fixed positioning behaves consistently
+		 *     across browsers. This prevents the v2 modal from appearing behind headers, being
+		 *     clipped by parent containers, or having incorrect stacking relative to other site UI.
+		 */
 		setTargetElement(gateVersion === 'v2' ? document.body : element);
 
 		// Check all the conditions that would prevent the gate from showing
