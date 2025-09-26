@@ -75,7 +75,7 @@ export const SignInGateAuxiaV1 = ({
 								renderingTarget,
 								abTest,
 							);
-							void logTreatmentInteractionCall('DISMISSED', '');
+							void logTreatmentInteractionCall('DISMISSED');
 						}}
 					>
 						<SvgCross size="xsmall" />

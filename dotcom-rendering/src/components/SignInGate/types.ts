@@ -243,7 +243,7 @@ export type SignInGatePropsAuxia = {
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
 	logTreatmentInteractionCall: (
 		interactionType: AuxiaInteractionInteractionType,
-		actionName: AuxiaInteractionActionName,
+		actionName?: AuxiaInteractionActionName,
 	) => Promise<void>;
 };
 

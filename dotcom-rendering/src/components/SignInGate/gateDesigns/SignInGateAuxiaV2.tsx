@@ -79,7 +79,7 @@ export const SignInGateAuxiaV2 = ({
 					renderingTarget,
 					abTest,
 				);
-				void logTreatmentInteractionCall('DISMISSED', '');
+				void logTreatmentInteractionCall('DISMISSED');
 			}
 		};
 
@@ -114,7 +114,7 @@ export const SignInGateAuxiaV2 = ({
 			renderingTarget,
 			abTest,
 		);
-		void logTreatmentInteractionCall('DISMISSED', '');
+		void logTreatmentInteractionCall('DISMISSED');
 	};
 
 	return (
@@ -154,7 +154,6 @@ export const SignInGateAuxiaV2 = ({
 									);
 									void logTreatmentInteractionCall(
 										'DISMISSED',
-										'',
 									);
 								}}
 							>
@@ -200,7 +199,6 @@ export const SignInGateAuxiaV2 = ({
 										);
 										void logTreatmentInteractionCall(
 											'DISMISSED',
-											'',
 										);
 									}}
 								>

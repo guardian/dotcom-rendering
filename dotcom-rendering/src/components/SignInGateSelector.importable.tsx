@@ -156,7 +156,7 @@ interface ShowSignInGateAuxiaProps {
 	renderingTarget: RenderingTarget;
 	logTreatmentInteractionCall: (
 		interactionType: AuxiaInteractionInteractionType,
-		actionName: AuxiaInteractionActionName,
+		actionName?: AuxiaInteractionActionName,
 	) => Promise<void>;
 	signInGateVersion?: AuxiaGateVersion;
 }
@@ -351,13 +351,13 @@ const SignInGateSelectorAuxia = ({
 						renderingTarget={renderingTarget}
 						logTreatmentInteractionCall={async (
 							interactionType: AuxiaInteractionInteractionType,
-							actionName: AuxiaInteractionActionName,
+							actionName?: AuxiaInteractionActionName,
 						) => {
 							await auxiaLogTreatmentInteraction(
 								contributionsServiceUrl,
 								auxiaGateDisplayData.auxiaData.userTreatment!,
 								interactionType,
-								actionName,
+								actionName ?? '',
 								auxiaGateDisplayData.browserId,
 							).catch((error) => {
 								const errorReport = new Error(

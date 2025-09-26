@@ -102,7 +102,7 @@ export const SignInGateAuxia = ({
 								renderingTarget,
 								abTest,
 							);
-							void logTreatmentInteractionCall('DISMISSED', '');
+							void logTreatmentInteractionCall('DISMISSED');
 						}}
 					>
 						{secondCtaName}
