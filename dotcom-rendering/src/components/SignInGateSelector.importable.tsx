@@ -479,9 +479,13 @@ const ShowSignInGateAuxia = ({
 
 	const [hasScroll, setHasScroll] = useState(false);
 	useEffect(() => {
-		const bodyHeight = document.body.scrollHeight;
-		const documentHeight = document.documentElement.offsetHeight;
-		setHasScroll(bodyHeight > documentHeight);
+		const scrollHeight = Math.max(
+			document.body.scrollHeight,
+			document.documentElement.scrollHeight,
+		);
+		const viewportHeight =
+			window.innerHeight || document.documentElement.clientHeight;
+		setHasScroll(scrollHeight > viewportHeight);
 	}, []);
 
 	const shouldShowV2Gate = hasBeenSeen ?? !hasScroll;
