@@ -979,7 +979,12 @@ export const tabs = {
 const datelineLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
-			return sourcePalette.neutral[86];
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[86];
+				default:
+					return sourcePalette.neutral[60];
+			}
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
@@ -2738,8 +2743,21 @@ const captionTextDark: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const captionPhotoEssayMainMediaTextLight = () => sourcePalette.neutral[46];
-const captionPhotoEssayMainMediaTextDark = () => sourcePalette.neutral[60];
+const captionMainMediaTextLight: PaletteFunction = (format) => {
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+			switch (format.theme) {
+				case ArticleSpecial.Labs:
+					return captionTextLight(format);
+				default:
+					return sourcePalette.neutral[60];
+			}
+		default:
+			return captionTextLight(format);
+	}
+};
+const captionMainMediaTextDark: PaletteFunction = (format) =>
+	captionTextDark(format);
 
 const captionLink: PaletteFunction = ({ design, theme }) => {
 	if (design === ArticleDesign.Analysis && theme === Pillar.News) {
@@ -3691,6 +3709,18 @@ const shareButtonBorderLight: PaletteFunction = ({ design }) => {
 };
 
 const shareButtonBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
+
+const shareButtonBorderMetaLight: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[38];
+		default:
+			return sourcePalette.neutral[86];
+	}
+};
+
+const shareButtonBorderMetaDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
 
 const shareButtonBorderXSmallLight: PaletteFunction = ({ design }) => {
 	switch (design) {
@@ -6508,13 +6538,13 @@ const paletteColours = {
 		light: captionLink,
 		dark: captionLink,
 	},
+	'--caption-main-media-text': {
+		light: captionMainMediaTextLight,
+		dark: captionMainMediaTextDark,
+	},
 	'--caption-overlay-text': {
 		light: captionOverlayText,
 		dark: captionOverlayText,
-	},
-	'--caption-photo-essay-main-media-text': {
-		light: captionPhotoEssayMainMediaTextLight,
-		dark: captionPhotoEssayMainMediaTextDark,
 	},
 	'--caption-text': {
 		light: captionTextLight,
@@ -7688,6 +7718,10 @@ const paletteColours = {
 	'--share-button-border': {
 		light: shareButtonBorderLight,
 		dark: shareButtonBorderDark,
+	},
+	'--share-button-border-meta': {
+		light: shareButtonBorderMetaLight,
+		dark: shareButtonBorderMetaDark,
 	},
 	'--share-button-copied': {
 		light: shareButtonCopiedLight,
