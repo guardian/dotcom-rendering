@@ -90,6 +90,10 @@ const decideFont = ({ display, design, theme }: ArticleFormat) => {
 			}
 			return css`
 				${headlineMedium20}
+
+				${from.leftCol} {
+					${headlineMedium24}
+				}
 			`;
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Comment:

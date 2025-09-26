@@ -4,8 +4,10 @@ import {
 	from,
 	palette as sourcePalette,
 	space,
+	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { Fragment } from 'react';
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
@@ -67,8 +69,39 @@ const headerStyles = css`
 	}
 `;
 
-const metaAndDisclaimerContainer = css`
+const captionContainer = css`
+	${grid.column.left}
+
+	${until.leftCol} {
+		${grid.column.centre};
+	}
+	grid-row: 8;
+`;
+
+const straightLinesStyle = css`
+	${grid.column.left}
+
+	${until.leftCol} {
+		${grid.column.centre};
+	}
+
+	grid-row: 9;
+	align-self: end;
+`;
+
+const standfirstStyles = css`
 	${grid.column.centre}
+`;
+
+const metaAndDisclaimerContainer = css`
+	${grid.column.left}
+
+	${until.leftCol} {
+		${grid.column.centre};
+	}
+
+	/* grid-row: 10; */
+
 	padding-bottom: ${space[6]}px;
 	${from.tablet} {
 		position: relative;
@@ -266,18 +299,31 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 							frontendData.webPublicationDateDeprecated
 						}
 					/>
-					<Standfirst
-						format={format}
-						standfirst={frontendData.standfirst}
-					/>
-
-					<Hide until="leftCol">
-						<Caption
-							captionText={captionText}
+					<div css={standfirstStyles}>
+						<Standfirst
 							format={format}
-							isMainMedia={true}
+							standfirst={frontendData.standfirst}
 						/>
-					</Hide>
+					</div>
+
+					<div css={captionContainer}>
+						<Hide until="leftCol">
+							<Caption
+								captionText={captionText}
+								format={format}
+								isMainMedia={true}
+							/>
+						</Hide>
+					</div>
+
+					<div css={straightLinesStyle}>
+						<Hide until="leftCol">
+							<StraightLines
+								count={4}
+								color={palette('--straight-lines')}
+							/>
+						</Hide>
+					</div>
 
 					<div css={metaAndDisclaimerContainer}>
 						{isWeb ? (
