@@ -11,11 +11,11 @@ import { palette } from '../../../palette';
 
 export type TrailTextSize = 'regular' | 'large';
 
-const trailTextStyles = (hideUntil?: 'tablet' | 'desktop' | 'never') => {
+const trailTextStyles = (hide?: boolean) => {
 	return css`
 		display: flex;
 		flex-direction: column;
-		${hideUntil !== 'never' ? `${until.tablet} { display: none; }` : ''}
+		${hide ? `${until.tablet} { display: none; }` : ''}
 	`;
 };
 
@@ -43,11 +43,13 @@ type Props = {
 	/** Optionally overrides the trail text colour */
 	trailTextColour?: string;
 	/** Controls visibility of trail text on various breakpoints */
-	hideUntil?: 'tablet' | 'desktop' | 'never';
+	hideUntil?: 'tablet' | 'desktop';
 	/** Defaults to `true`. Adds padding to the bottom of the trail text */
 	padBottom?: boolean;
 	/** Adds padding to the top of the trail text */
 	padTop?: boolean;
+	/** hide trail text for specific breakpoints */
+	hideOnSmallBreakpoints?: boolean;
 };
 
 export const TrailText = ({
@@ -57,11 +59,12 @@ export const TrailText = ({
 	hideUntil,
 	padBottom = true,
 	padTop = false,
+	hideOnSmallBreakpoints = true,
 }: Props) => {
 	const trailText = (
 		<div
 			css={[
-				trailTextStyles(hideUntil),
+				trailTextStyles(hideOnSmallBreakpoints),
 				css`
 					color: ${trailTextColour};
 				`,
@@ -78,7 +81,7 @@ export const TrailText = ({
 		</div>
 	);
 
-	return hideUntil && hideUntil !== 'never' ? (
+	return hideUntil ? (
 		<Hide until={hideUntil}>{trailText}</Hide>
 	) : (
 		<>{trailText}</>

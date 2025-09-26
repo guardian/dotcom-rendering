@@ -144,7 +144,7 @@ export type Props = {
 	 * For example, the first splash card in the second collection would be: "collection-1-splash-0"
 	 */
 	uniqueId?: string;
-	/** The Splash card in a flexible container gets a different visual treatment to other cards */
+	/** The Splash card in a flexible or onward container gets a different visual treatment to other cards */
 	isFlexSplash?: boolean;
 	showTopBarDesktop?: boolean;
 	showTopBarMobile?: boolean;
@@ -593,10 +593,8 @@ export const Card = ({
 	};
 
 	const hideTrailTextUntil = () => {
-		if (isFlexibleContainer) {
+		if (isFlexibleContainer || (isOnwardContainer && !!isFlexSplash)) {
 			return undefined;
-		} else if (isOnwardContainer && isFlexSplash) {
-			return 'never';
 		} else if (
 			mediaSize === 'large' &&
 			mediaPositionOnDesktop === 'right' &&
@@ -1107,6 +1105,9 @@ export const Card = ({
 									trailText={trailText}
 									trailTextSize={trailTextSize}
 									padTop={headlinePosition === 'inner'}
+									hideOnSmallBreakpoints={
+										!(isOnwardContainer && isFlexSplash)
+									}
 									hideUntil={hideTrailTextUntil()}
 								/>
 							)}
