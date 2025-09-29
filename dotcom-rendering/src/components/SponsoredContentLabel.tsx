@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, textSansBold12 } from '@guardian/source/foundations';
+import { from, space, textSansBold12 } from '@guardian/source/foundations';
 import { palette } from '../palette';
 import type { DCRBadgeType } from '../types/badge';
 import { Badge } from './Badge';
@@ -21,6 +21,10 @@ const wrapperStyles = css`
 	display: flex;
 	gap: ${space[2]}px;
 	justify-content: end;
+
+	${from.leftCol} {
+		padding-right: 10px;
+	}
 `;
 
 const horizontalStyles = css`

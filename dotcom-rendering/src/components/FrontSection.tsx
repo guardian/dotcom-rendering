@@ -492,8 +492,10 @@ const labsSectionStyles = css`
 	grid-column: title;
 	margin-top: ${space[2]}px;
 	${from.leftCol} {
-		grid-row: content;
+		/* Extend the background from content area to bottom-content area to align with logo */
+		grid-row: content / bottom-content-end;
 		grid-column: title;
+		${bottomPadding};
 	}
 `;
 
