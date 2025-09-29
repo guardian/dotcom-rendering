@@ -253,11 +253,9 @@ function parseAtom(
 			const mediaAtom: MediaAtom = atom.data.media;
 			const { posterUrl, duration, assets, activeVersion, title } =
 				mediaAtom;
-			const videoAssets = assets.filter(
-				(asset) => asset.assetType === AssetType.VIDEO,
-			);
-			const videoId = videoAssets.find(
+			const videoId = assets.find(
 				(asset) =>
+					asset.assetType === AssetType.VIDEO &&
 					asset.version.toNumber() === activeVersion?.toNumber(),
 			)?.id;
 			const caption = docParser(title);
