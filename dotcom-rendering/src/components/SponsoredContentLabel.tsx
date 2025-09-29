@@ -21,9 +21,11 @@ const wrapperStyles = css`
 	display: flex;
 	gap: ${space[2]}px;
 	justify-content: end;
+	padding-top: ${space[4]}px;
 
 	${from.leftCol} {
 		padding-right: 10px;
+		padding-top: ${space[9]}px;
 	}
 `;
 
