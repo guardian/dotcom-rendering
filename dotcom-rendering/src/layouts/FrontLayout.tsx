@@ -574,6 +574,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								isAboveMobileAd={mobileAdPositions.includes(
 									index,
 								)}
+								badge={badgeFromBranding(
+									collection.collectionBranding,
+								)}
 								isLabs={
 									collection.containerPalette === 'Branded'
 								}

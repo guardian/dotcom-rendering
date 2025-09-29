@@ -5,6 +5,7 @@ import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { type EditionId, isNetworkFront } from '../lib/edition';
 import { hideAge } from '../lib/hideAge';
 import { palette as schemePalette } from '../palette';
+import type { DCRBadgeType } from '../types/badge';
 import type { CollectionBranding } from '../types/branding';
 import type {
 	DCRContainerLevel,
@@ -22,6 +23,7 @@ import { Island } from './Island';
 import { LabsSectionHeader } from './LabsSectionHeader';
 import { ShowHideButton } from './ShowHideButton';
 import { ShowMore } from './ShowMore.importable';
+import { SponsoredContentLabel } from './SponsoredContentLabel';
 import { Treats } from './Treats';
 
 type Props = {
@@ -94,6 +96,8 @@ type Props = {
 	hasNavigationButtons?: boolean;
 	isAboveDesktopAd?: boolean;
 	isAboveMobileAd?: boolean;
+	/** A sponsor badge can be displayed under the content cards */
+	badge?: DCRBadgeType;
 	/** Indicates whether this is a Guardian Labs container */
 	isLabs?: boolean;
 	/** Feature switch for the labs redesign work */
@@ -607,6 +611,7 @@ export const FrontSection = ({
 	hasNavigationButtons = false,
 	isAboveDesktopAd = false,
 	isAboveMobileAd = false,
+	badge,
 	isLabs = false,
 	showLabsRedesign = false,
 }: Props) => {
@@ -798,6 +803,13 @@ export const FrontSection = ({
 							/>
 						</Island>
 					) : null}
+					{collectionBranding?.kind === 'paid-content' && badge && (
+						<SponsoredContentLabel
+							imageSrc={badge.imageSrc}
+							href={badge.href}
+							ophanComponentName={ophanComponentName}
+						/>
+					)}
 					{pagination && (
 						<FrontPagination
 							sectionName={pagination.sectionName}
