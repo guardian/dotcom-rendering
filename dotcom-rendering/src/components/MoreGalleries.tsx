@@ -31,7 +31,7 @@ const wrapperStyle = css`
 	justify-content: space-between;
 	overflow: hidden;
 	${from.desktop} {
-		padding-right: 40px;
+		padding-right: ${space[10]}px;
 	}
 `;
 
