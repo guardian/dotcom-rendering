@@ -37,6 +37,9 @@ import { StarRating } from './StarRating/StarRating';
 import { SupportingContent } from './SupportingContent';
 import { WaveForm } from './WaveForm';
 import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
+import { Branding } from 'src/types/branding';
+import { CardBranding } from './Card/components/CardBranding';
+import { OnwardsSource } from 'src/types/onwards';
 
 export type Position = 'inner' | 'outer' | 'none';
 
@@ -310,7 +313,8 @@ export type Props = {
 	/** Used for Ophan tracking */
 	dataLinkName?: string;
 	/** Only used on Labs cards */
-	// branding?: Branding;
+	branding?: Branding;
+	onwardsSource?: OnwardsSource;
 	/** Supporting content refers to sublinks */
 	supportingContent?: DCRSupportingContent[];
 	containerPalette?: DCRContainerPalette;
@@ -357,7 +361,8 @@ export const FeatureCard = ({
 	kickerText,
 	showPulsingDot,
 	dataLinkName,
-	// branding,
+	branding,
+	onwardsSource,
 	supportingContent,
 	containerPalette,
 	discussionApiUrl,
@@ -671,21 +676,19 @@ export const FeatureCard = ({
 													/>
 												) : undefined
 											}
-											/**TODO: Determine if this is needed */
-											// cardBranding={
-											// 	branding ? (
-											// 		<CardBranding
-											// 			branding={branding}
-											// 			format={format}
-											// 			onwardsSource={
-											// 				onwardsSource
-											// 			}
-											// 			containerPalette={
-											// 				containerPalette
-											// 			}
-											// 		/>
-											// 	) : undefined
-											// }
+											cardBranding={
+												branding ? (
+													<CardBranding
+														branding={branding}
+														onwardsSource={
+															onwardsSource
+														}
+														containerPalette={
+															containerPalette
+														}
+													/>
+												) : undefined
+											}
 											showLivePlayable={false}
 											mainMedia={mainMedia}
 											isNewsletter={isNewsletter}
