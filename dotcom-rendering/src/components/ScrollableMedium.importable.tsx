@@ -18,6 +18,8 @@ type Props = {
 	aspectRatio: AspectRatio;
 	sectionId: string;
 	isInHideTrailsAbTest?: boolean;
+	/** Feature flag for the labs redesign work */
+	showLabsRedesign?: boolean;
 };
 
 /**
@@ -37,6 +39,7 @@ export const ScrollableMedium = ({
 	aspectRatio,
 	sectionId,
 	isInHideTrailsAbTest,
+	showLabsRedesign,
 }: Props) => {
 	return (
 		<ScrollableCarousel
@@ -75,6 +78,7 @@ export const ScrollableMedium = ({
 							showTopBarMobile={false}
 							canPlayInline={false}
 							isInHideTrailsAbTest={isInHideTrailsAbTest}
+							showLabsRedesign={showLabsRedesign}
 						/>
 					</ScrollableCarousel.Item>
 				);

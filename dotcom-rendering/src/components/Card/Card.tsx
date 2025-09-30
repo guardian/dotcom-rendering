@@ -154,6 +154,8 @@ export type Props = {
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
 	isInHideTrailsAbTest?: boolean;
+	/** Feature flag for the labs redesign work */
+	showLabsRedesign?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -392,6 +394,7 @@ export const Card = ({
 	showKickerImage = false,
 	headlinePosition = 'inner',
 	isInHideTrailsAbTest = false,
+	showLabsRedesign = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -773,6 +776,7 @@ export const Card = ({
 						byline={byline}
 						showByline={showByline}
 						isExternalLink={isExternalLink}
+						showLabsRedesign={showLabsRedesign}
 					/>
 					{!isUndefined(starRating) ? (
 						<StarRatingComponent
@@ -1092,6 +1096,7 @@ export const Card = ({
 											? media.podcastImage
 											: undefined
 									}
+									showLabsRedesign={showLabsRedesign}
 								/>
 								{!isUndefined(starRating) ? (
 									<StarRatingComponent

@@ -48,6 +48,8 @@ type Props = {
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
 	isInHideTrailsAbTest?: boolean;
+	/** Feature flag for the labs redesign work */
+	showLabsRedesign?: boolean;
 };
 
 export const DecideContainer = ({
@@ -64,6 +66,7 @@ export const DecideContainer = ({
 	collectionId,
 	containerLevel,
 	isInHideTrailsAbTest,
+	showLabsRedesign = false,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -247,6 +250,7 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
 					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
+					showLabsRedesign={!!showLabsRedesign}
 				/>
 			);
 		case 'flexible/general':
@@ -261,6 +265,7 @@ export const DecideContainer = ({
 					containerLevel={containerLevel}
 					collectionId={collectionId}
 					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
+					showLabsRedesign={!!showLabsRedesign}
 				/>
 			);
 		case 'scrollable/small':
@@ -276,6 +281,7 @@ export const DecideContainer = ({
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
 						isInHideTrailsAbTest={!!isInHideTrailsAbTest}
+						showLabsRedesign={!!showLabsRedesign}
 					/>
 				</Island>
 			);
@@ -292,6 +298,7 @@ export const DecideContainer = ({
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
 						isInHideTrailsAbTest={!!isInHideTrailsAbTest}
+						showLabsRedesign={!!showLabsRedesign}
 					/>
 				</Island>
 			);
@@ -305,6 +312,7 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
+					showLabsRedesign={!!showLabsRedesign}
 				/>
 			);
 		case 'scrollable/feature':

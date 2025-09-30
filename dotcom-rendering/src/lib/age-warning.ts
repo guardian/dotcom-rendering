@@ -19,6 +19,7 @@ export const getAgeWarning = (
 		'tone/advertisement-features',
 		'gnm-archive/gnm-archive',
 		'thefilter/series/the-filter',
+		'thefilter-us/series/thefilter-us',
 	];
 	const showAge = !tags.some(({ id }) => tagsWithoutAgeWarning.includes(id));
 
