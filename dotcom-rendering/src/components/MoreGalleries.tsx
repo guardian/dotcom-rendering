@@ -8,7 +8,7 @@ import {
 } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { formatAttrString } from '../lib/formatAttrString';
-import { palette as themePalette } from '../palette';
+import { palette } from '../palette';
 import { type OnwardsSource } from '../types/onwards';
 import { type TrailType } from '../types/trails';
 import { Card } from './Card/Card';
@@ -39,7 +39,6 @@ const containerStyles = css`
 	display: flex;
 	flex-direction: column;
 	position: relative;
-	overflow: hidden; /* Needed for scrolling to work */
 
 	margin-top: ${space[2]}px;
 	padding-bottom: ${space[6]}px;
@@ -47,7 +46,7 @@ const containerStyles = css`
 	margin-left: 0px;
 	margin-right: 0px;
 
-	border-bottom: 1px solid ${themePalette('--onward-content-border')};
+	border-bottom: 1px solid ${palette('--onward-content-border')};
 
 	${from.leftCol} {
 		margin-left: 10px;
@@ -61,7 +60,7 @@ const standardCardStyles = css`
 	position: relative;
 	display: flex;
 	padding: ${space[2]}px;
-	background-color: ${themePalette('--onward-card-background')};
+	background-color: ${palette('--onward-card-background')};
 
 	:not(:first-child)::before {
 		content: '';
@@ -70,7 +69,7 @@ const standardCardStyles = css`
 		bottom: 0;
 		left: -10px; /* shift into the gap */
 		width: 1px;
-		background: ${themePalette('--onward-content-border')};
+		background: ${palette('--onward-content-border')};
 	}
 `;
 
@@ -91,7 +90,7 @@ const standardCardsListStyles = css`
 `;
 
 const headerStyles = css`
-	color: ${themePalette('--carousel-text')};
+	color: ${palette('--carousel-text')};
 	${headlineBold24};
 	padding-bottom: ${space[3]}px;
 	padding-top: ${space[1]}px;
@@ -109,7 +108,7 @@ const headerStylesWithUrl = css`
 `;
 
 const titleStyle = css`
-	color: ${themePalette('--onward-text')};
+	color: ${palette('--onward-text')};
 	display: inline-block;
 	&::first-letter {
 		text-transform: capitalize;
@@ -146,7 +145,7 @@ const getDefaultCardProps = (
 		absoluteServerTimes,
 		imageLoading: 'lazy',
 		trailText: trail.trailText,
-		showAge: false, // TODO
+		showAge: false,
 		containerType: 'more-galleries',
 		showTopBarDesktop: false,
 		showTopBarMobile: false,
@@ -168,8 +167,8 @@ export const MoreGalleries = (props: Props) => {
 	return (
 		<Section
 			fullWidth={true}
-			borderColour={themePalette('--onward-content-border')}
-			backgroundColour={themePalette('--onward-background')}
+			borderColour={palette('--onward-content-border')}
+			backgroundColour={palette('--onward-background')}
 			showTopBorder={false}
 		>
 			<div
@@ -178,8 +177,8 @@ export const MoreGalleries = (props: Props) => {
 			>
 				<LeftColumn
 					size={'compact'}
-					borderColour={themePalette('--onward-content-border')}
-					hasPageSkin={false} // TODO
+					borderColour={palette('--onward-content-border')}
+					hasPageSkin={false}
 				>
 					<Title title={props.heading} url={props.url} />
 				</LeftColumn>
@@ -197,7 +196,7 @@ export const MoreGalleries = (props: Props) => {
 					<Hide when="below" breakpoint="tablet">
 						<StraightLines
 							count={1}
-							color={themePalette('--onward-content-border')}
+							color={palette('--onward-content-border')}
 						/>
 					</Hide>
 
@@ -241,7 +240,7 @@ const MoreGalleriesSplashCard = ({
 		<div
 			css={css`
 				margin-bottom: ${space[6]}px;
-				background-color: ${themePalette('--onward-card-background')};
+				background-color: ${palette('--onward-card-background')};
 				padding: ${space[2]}px;
 			`}
 		>
@@ -257,7 +256,7 @@ const Title = ({ title, url }: { title: string; url?: string }) =>
 				text-decoration: none;
 			`}
 			href={url}
-			data-link-name="section heading" // TODO
+			data-link-name="section heading"
 		>
 			<h2 css={headerStyles}>
 				<span css={[headerStylesWithUrl, titleStyle]}>{title}</span>

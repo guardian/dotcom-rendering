@@ -48,7 +48,7 @@ type Props = {
 	padBottom?: boolean;
 	/** Adds padding to the top of the trail text */
 	padTop?: boolean;
-	/** hide trail text for specific breakpoints */
+	/** hide trail text on small breakpoints */
 	hideOnSmallBreakpoints?: boolean;
 };
 
