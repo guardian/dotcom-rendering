@@ -54,6 +54,7 @@ type Props = {
 	kickerColour?: string;
 	quoteColour?: string;
 	kickerImage?: PodcastSeriesImage;
+	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 };
 
@@ -96,19 +97,10 @@ const fontFamilies = {
 		xxxsmall: headlineMedium15,
 		tiny: headlineMedium14,
 	},
-	/** Line height for sans style headlines for labs is overridden to match that of other headlines (1.15) */
-	textSans: {
-		xxxlarge: `${textSans20}\n\tline-height: 1.15;\n`,
-		xxlarge: `${textSans20}\n\tline-height: 1.15;\n`,
-		xlarge: `${textSans20}\n\tline-height: 1.15;\n`,
-		large: `${textSans20}\n\tline-height: 1.15;\n`,
-		medium: `${textSans20}\n\tline-height: 1.15;\n`,
-		small: `${textSans20}\n\tline-height: 1.15;\n`,
-		xsmall: `${textSans20}\n\tline-height: 1.15;\n`,
-		xxsmall: `${textSans17}\n\tline-height: 1.15;\n`,
-		xxxsmall: `${textSans15}\n\tline-height: 1.15;\n`,
-		tiny: `${textSans12}\n\tline-height: 1.15;\n`,
-	},
+	/**
+	 * Labs styles
+	 * Line height for sans style headlines for labs is overridden to match that of other headlines (1.15)
+	 */
 	textSansBold: {
 		xxxlarge: `${textSansBold20}\n\tline-height: 1.15;\n`,
 		xxlarge: `${textSansBold20}\n\tline-height: 1.15;\n`,
@@ -121,12 +113,28 @@ const fontFamilies = {
 		xxxsmall: `${textSansBold15}\n\tline-height: 1.15;\n`,
 		tiny: `${textSansBold12}\n\tline-height: 1.15;\n`,
 	},
+	/**
+	 * Labs legacy styles
+	 * Line height for sans style headlines for labs is overridden to match that of other headlines (1.15)
+	 */
+	textSans: {
+		xxxlarge: `${textSans20}\n\tline-height: 1.15;\n`,
+		xxlarge: `${textSans20}\n\tline-height: 1.15;\n`,
+		xlarge: `${textSans20}\n\tline-height: 1.15;\n`,
+		large: `${textSans20}\n\tline-height: 1.15;\n`,
+		medium: `${textSans20}\n\tline-height: 1.15;\n`,
+		small: `${textSans20}\n\tline-height: 1.15;\n`,
+		xsmall: `${textSans20}\n\tline-height: 1.15;\n`,
+		xxsmall: `${textSans17}\n\tline-height: 1.15;\n`,
+		xxxsmall: `${textSans15}\n\tline-height: 1.15;\n`,
+		tiny: `${textSans12}\n\tline-height: 1.15;\n`,
+	},
 } as const;
 
 export enum FontFamily {
 	HeadlineMedium = 'headlineMedium',
-	TextSans = 'textSans',
 	TextSansBold = 'textSansBold',
+	TextSans = 'textSans',
 }
 
 export type HeadlineSize = keyof typeof fontFamilies.headlineMedium;
@@ -174,14 +182,13 @@ const getFonts = (
 	fontSizes: ResponsiveFontSize,
 	showLabsRedesign: boolean,
 ) => {
-	const isLabs = format.theme === ArticleSpecial.Labs;
-	const family = isLabs
-		? showLabsRedesign
-			? FontFamily.TextSansBold
-			: FontFamily.TextSans
-		: FontFamily.HeadlineMedium;
+	if (format.theme === ArticleSpecial.Labs) {
+		return showLabsRedesign
+			? getFontSize(fontSizes, FontFamily.TextSansBold)
+			: getFontSize(fontSizes, FontFamily.TextSans);
+	}
 
-	return getFontSize(fontSizes, family);
+	return getFontSize(fontSizes, FontFamily.HeadlineMedium);
 };
 
 export const WithLink = ({
@@ -218,11 +225,12 @@ export const CardHeadline = ({
 	kickerColour = palette('--card-kicker-text'),
 	quoteColour = palette('--card-quote-icon'),
 	kickerImage,
-	showLabsRedesign,
+	showLabsRedesign = false,
 }: Props) => {
 	// The link is only applied directly to the headline if it is a sublink
 	const isSublink = !!linkTo;
-	const fontStyles = getFonts(format, fontSizes, showLabsRedesign ?? false);
+
+	const fontStyles = getFonts(format, fontSizes, showLabsRedesign);
 
 	return (
 		<WithLink linkTo={linkTo}>
