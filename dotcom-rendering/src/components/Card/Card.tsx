@@ -593,17 +593,21 @@ export const Card = ({
 	};
 
 	const hideTrailTextUntil = () => {
-		if (isFlexibleContainer || (isOnwardContainer && !!isFlexSplash)) {
+		if (isFlexibleContainer) {
+			return 'tablet';
+		}
+		if (isOnwardContainer && !!isFlexSplash) {
 			return undefined;
-		} else if (
+		}
+		if (
 			mediaSize === 'large' &&
 			mediaPositionOnDesktop === 'right' &&
 			media?.type !== 'avatar'
 		) {
 			return 'desktop';
-		} else {
-			return 'tablet';
 		}
+
+		return 'tablet';
 	};
 
 	const shouldShowTrailText = isOnwardContainer
@@ -1105,9 +1109,6 @@ export const Card = ({
 									trailText={trailText}
 									trailTextSize={trailTextSize}
 									padTop={headlinePosition === 'inner'}
-									hideOnSmallBreakpoints={
-										!(isOnwardContainer && isFlexSplash)
-									}
 									hideUntil={hideTrailTextUntil()}
 								/>
 							)}

@@ -638,6 +638,7 @@ export const FeatureCard = ({
 														)}
 														trailTextSize="regular"
 														padBottom={false}
+														hideUntil="tablet"
 													/>
 												</div>
 											)}
