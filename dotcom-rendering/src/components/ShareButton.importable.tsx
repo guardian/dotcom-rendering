@@ -8,7 +8,11 @@ import {
 	SvgShareWeb,
 } from '@guardian/source/react-components';
 import { useEffect, useMemo, useState } from 'react';
-import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '../lib/articleFormat';
 import { transparentColour } from '../lib/transparentColour';
 import { useMatchMedia } from '../lib/useMatchMedia';
 import { palette as themePalette } from '../palette';
@@ -35,9 +39,17 @@ type ButtonKind = 'native' | 'copy' | 'email';
 
 type Context = 'ArticleMeta' | 'LiveBlock' | 'SubMeta' | 'ImageCaption';
 
-const sharedButtonStyles = (sizeXSmall: boolean) => css`
+const sharedButtonStyles = (
+	sizeXSmall: boolean,
+	context: Context,
+	format: ArticleFormat,
+) => css`
 	transition: none;
-	border-color: ${sizeXSmall
+	border-color: ${format.design === ArticleDesign.Gallery &&
+	format.theme !== ArticleSpecial.Labs &&
+	context == 'ArticleMeta'
+		? themePalette('--share-button-border-meta')
+		: sizeXSmall
 		? themePalette('--share-button-xsmall-border')
 		: themePalette('--share-button-border')};
 	height: ${sizeXSmall ? '24px' : '36px'};
@@ -123,11 +135,15 @@ export const CopyNativeShareButton = ({
 	size,
 	isLiveBlogMeta,
 	isCopied,
+	context,
+	format,
 }: {
 	onShare: () => void;
 	size?: Size;
 	isLiveBlogMeta: boolean;
 	isCopied: boolean;
+	context: Context;
+	format: ArticleFormat;
 }) => {
 	const sizeXSmall = size === 'xsmall';
 	return (
@@ -142,7 +158,7 @@ export const CopyNativeShareButton = ({
 				...(isCopied
 					? [copiedButtonStyles(sizeXSmall)]
 					: [buttonStyles(sizeXSmall)]),
-				sharedButtonStyles(sizeXSmall),
+				sharedButtonStyles(sizeXSmall, context, format),
 				isLiveBlogMeta && liveBlogMobileMeta(isCopied),
 			])}
 			data-gu-name="share-button"
@@ -156,10 +172,14 @@ export const EmailLink = ({
 	href,
 	size,
 	isLiveBlogMeta,
+	format,
+	context,
 }: {
 	href: string;
 	size?: Size;
 	isLiveBlogMeta: boolean;
+	format: ArticleFormat;
+	context: Context;
 }) => {
 	const sizeXSmall = size === 'xsmall';
 	return (
@@ -172,7 +192,7 @@ export const EmailLink = ({
 			icon={<SvgShareWeb />}
 			cssOverrides={css([
 				buttonStyles(sizeXSmall),
-				sharedButtonStyles(sizeXSmall),
+				sharedButtonStyles(sizeXSmall, context, format),
 				isLiveBlogMeta && liveBlogMobileMeta(false),
 			])}
 		>
@@ -261,6 +281,8 @@ export const ShareButton = ({
 					size={size}
 					isLiveBlogMeta={isLiveBlogMeta}
 					isCopied={isCopied}
+					context={context}
+					format={format}
 				/>
 			);
 		case 'copy':
@@ -277,6 +299,8 @@ export const ShareButton = ({
 					size={size}
 					isLiveBlogMeta={isLiveBlogMeta}
 					isCopied={isCopied}
+					context={context}
+					format={format}
 				/>
 			);
 		case 'email':
@@ -285,6 +309,8 @@ export const ShareButton = ({
 					href={`mailto:?subject=${webTitle}&body=${shareData.url}`}
 					size={size}
 					isLiveBlogMeta={isLiveBlogMeta}
+					context={context}
+					format={format}
 				/>
 			);
 	}
