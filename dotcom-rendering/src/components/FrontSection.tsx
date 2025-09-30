@@ -493,7 +493,12 @@ const labsSectionStyles = css`
 		/* Extend the background from content area to bottom-content area to align with logo */
 		grid-row: content / bottom-content-end;
 		grid-column: title;
-		${bottomPadding};
+	}
+`;
+
+const labsSectionPaddingBottom = css`
+	${from.leftCol} {
+		${bottomPadding}
 	}
 `;
 
@@ -693,7 +698,17 @@ export const FrontSection = ({
 				/>
 
 				{isLabs && showLabsRedesign ? (
-					<div css={labsSectionStyles}>
+					<div
+						css={[
+							labsSectionStyles,
+							isBetaContainer
+								? bottomPaddingBetaContainer(
+										useLargeSpacingMobile,
+										useLargeSpacingDesktop,
+								  )
+								: labsSectionPaddingBottom,
+						]}
+					>
 						<LabsSectionHeader title={title} />
 					</div>
 				) : (
@@ -812,15 +827,17 @@ export const FrontSection = ({
 							/>
 						</Island>
 					) : null}
-					{collectionBranding?.kind === 'paid-content' && badge && (
-						<div css={sponsoredContentLabelWrapper}>
-							<SponsoredContentLabel
-								imageSrc={badge.imageSrc}
-								href={badge.href}
-								ophanComponentName={ophanComponentName}
-							/>
-						</div>
-					)}
+					{isLabs &&
+						collectionBranding?.kind === 'paid-content' &&
+						badge && (
+							<div css={sponsoredContentLabelWrapper}>
+								<SponsoredContentLabel
+									imageSrc={badge.imageSrc}
+									href={badge.href}
+									ophanComponentName={ophanComponentName}
+								/>
+							</div>
+						)}
 					{pagination && (
 						<FrontPagination
 							sectionName={pagination.sectionName}

@@ -401,35 +401,6 @@ export const GuardianLabs = {
 	},
 };
 
-export const GuardianLabsWithContainerLevelBadge = {
-	name: 'Guardian Labs with container level badge (1 brand for all stories)',
-	args: {
-		title: 'Section',
-		collectionBranding: {
-			kind: 'paid-content',
-			isFrontBranding: false,
-			branding: {
-				brandingType: {
-					name: 'paid-content',
-				},
-				sponsorName: 'guardian.org',
-				logo,
-				aboutThisLink:
-					'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
-			},
-			isContainerBranding: true,
-			hasMultipleBranding: false,
-		},
-		badge: {
-			imageSrc:
-				'https://static.theguardian.com/commercial/sponsor/17/Apr/2023/6c577c8c-b60f-4041-baa3-f4852219d3ff-OS_logo_strapline_colour_rgb_280.png',
-			href: 'https://www.theguardian.com/guardian-labs',
-		},
-		isLabs: true,
-		showLabsRedesign: true,
-	},
-};
-
 export const PageSkinStory = {
 	name: 'with page skin',
 	args: {
