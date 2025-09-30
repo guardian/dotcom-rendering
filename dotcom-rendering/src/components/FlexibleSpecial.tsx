@@ -197,7 +197,7 @@ export const OneCardLayout = ({
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 					headlinePosition={isSplashCard ? 'outer' : 'inner'}
 					isInHideTrailsAbTest={isInHideTrailsAbTest}
-					showLabsRedesign={showLabsRedesign} // ← Add this!
+					showLabsRedesign={showLabsRedesign}
 				/>
 			</LI>
 		</UL>
