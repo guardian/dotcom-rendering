@@ -8,6 +8,7 @@ import {
 type ProductLinkButtonProps = {
 	label: string;
 	url: string;
+	dataComponent?: string;
 };
 
 const linkButtonStyles = css`
@@ -19,7 +20,11 @@ const linkButtonStyles = css`
 	overflow-wrap: break-word;
 `;
 
-export const ProductLinkButton = ({ label, url }: ProductLinkButtonProps) => {
+export const ProductLinkButton = ({
+	label,
+	url,
+	dataComponent = 'in-body-product-link-button',
+}: ProductLinkButtonProps) => {
 	return (
 		<LinkButton
 			href={url}
@@ -32,6 +37,7 @@ export const ProductLinkButton = ({ label, url }: ProductLinkButtonProps) => {
 			data-link-name="in body link"
 			data-spacefinder-role="inline"
 			cssOverrides={[linkButtonStyles]}
+			data-component={dataComponent}
 		>
 			{label}
 		</LinkButton>

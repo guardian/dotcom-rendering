@@ -261,3 +261,56 @@ export const signInGateSelectorStoryNoTreatment = () => {
 
 signInGateSelectorStoryNoTreatment.storyName =
 	'sign_in_gate_selector_no_treatment';
+
+export const auxiaV2DismissibleModal = () => {
+	return (
+		<Section fullWidth={true}>
+			<SignInGateSelector
+				isPaidContent={false}
+				isPreview={false}
+				pageId="dismissable-v2"
+				host="https://www.theguardian.com"
+				idUrl="https://profile.theguardian.com"
+				contributionsServiceUrl="https://contributions.guardianapis.com"
+				signInGateVersion="v2"
+				auxiaGateDisplayData={{
+					browserId: 'test-browser-id',
+					auxiaData: {
+						responseId: 'test-response-id',
+						userTreatment:
+							mockAuxiaResponseDismissible.data.userTreatment,
+					},
+				}}
+			/>
+		</Section>
+	);
+};
+
+auxiaV2DismissibleModal.storyName = 'sign_in_gate_auxia_v2_modal_dismissible';
+
+export const auxiaV2NonDismissibleModal = () => {
+	return (
+		<Section fullWidth={true}>
+			<SignInGateSelector
+				isPaidContent={false}
+				isPreview={false}
+				pageId="non-dismissable-v2"
+				host="https://www.theguardian.com"
+				idUrl="https://profile.theguardian.com"
+				contributionsServiceUrl="https://contributions.guardianapis.com"
+				signInGateVersion="v2"
+				auxiaGateDisplayData={{
+					browserId: 'test-browser-id',
+					auxiaData: {
+						responseId: 'test-response-id',
+						userTreatment:
+							mockAuxiaResponseNonDismissible.data.userTreatment,
+					},
+				}}
+			/>
+		</Section>
+	);
+};
+
+auxiaV2NonDismissibleModal.storyName =
+	'sign_in_gate_auxia_v2_modal_non_dismissible';
