@@ -226,6 +226,7 @@ type TwoOrFourCardLayoutProps = {
 	isFirstRow: boolean;
 	containerLevel: DCRContainerLevel;
 	isInHideTrailsAbTest?: boolean;
+	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 };
 
@@ -360,7 +361,7 @@ export const FlexibleSpecial = ({
 				isFirstRow={!isNonEmptyArray(snaps) && !isNonEmptyArray(splash)}
 				containerLevel={containerLevel}
 				isInHideTrailsAbTest={isInHideTrailsAbTest}
-				showLabsRedesign={showLabsRedesign} // ← Add this!
+				showLabsRedesign={showLabsRedesign}
 			/>
 		</>
 	);
