@@ -4496,6 +4496,9 @@
                     "items": {
                         "$ref": "#/definitions/FEElement"
                     }
+                },
+                "h2Id": {
+                    "type": "string"
                 }
             },
             "required": [
