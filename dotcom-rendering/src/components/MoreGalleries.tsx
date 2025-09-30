@@ -77,6 +77,7 @@ const standardCardsListStyles = css`
 	flex-direction: row;
 	gap: 20px;
 	position: relative;
+	position: relative;
 
 	${from.tablet} {
 		padding-top: ${space[2]}px;
