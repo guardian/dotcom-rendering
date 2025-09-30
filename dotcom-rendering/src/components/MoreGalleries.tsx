@@ -46,8 +46,6 @@ const containerStyles = css`
 	margin-left: 0px;
 	margin-right: 0px;
 
-	border-bottom: 1px solid ${palette('--onward-content-border')};
-
 	${from.leftCol} {
 		margin-left: 10px;
 		margin-right: 100px;
@@ -78,6 +76,7 @@ const standardCardsListStyles = css`
 	display: flex;
 	flex-direction: row;
 	gap: 20px;
+	position: relative;
 
 	${from.tablet} {
 		padding-top: ${space[2]}px;
@@ -86,6 +85,16 @@ const standardCardsListStyles = css`
 	${until.tablet} {
 		flex-direction: column;
 		width: 100%;
+	}
+
+	&::before {
+		content: '';
+		position: absolute;
+		left: -11px;
+		top: 0;
+		bottom: 0;
+		width: 1px;
+		background-color: ${palette('--onward-content-border')};
 	}
 `;
 
@@ -239,9 +248,23 @@ const MoreGalleriesSplashCard = ({
 	return (
 		<div
 			css={css`
+				position: relative;
 				margin-bottom: ${space[6]}px;
 				background-color: ${palette('--onward-card-background')};
 				padding: ${space[2]}px;
+				&::before {
+					content: '';
+					position: absolute;
+					left: -11px;
+					top: 0;
+					bottom: 0;
+					width: 1px;
+					background-color: ${palette('--onward-content-border')};
+
+					${until.tablet} {
+						left: -12px;
+					}
+				}
 			`}
 		>
 			{Card({ ...defaultProps, ...cardProps })}
