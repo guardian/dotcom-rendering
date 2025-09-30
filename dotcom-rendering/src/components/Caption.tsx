@@ -210,7 +210,19 @@ const captionLink = css`
 	}
 `;
 
+const galleryCaptionHeadingReset = css`
+	h2 {
+		display: inline;
+		font-weight: bold;
+	}
+	h2::after {
+		content: '';
+		display: block;
+	}
+`;
+
 const galleryStyles = css`
+	${galleryCaptionHeadingReset}
 	${grid.column.centre};
 	${textSans14};
 
