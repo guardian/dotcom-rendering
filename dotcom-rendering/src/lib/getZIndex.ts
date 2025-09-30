@@ -23,6 +23,7 @@
  */
 const indices = [
 	// Modals will go here at the top
+	'sign-in-gate',
 	'lightbox',
 	'youTubeFullscreen',
 

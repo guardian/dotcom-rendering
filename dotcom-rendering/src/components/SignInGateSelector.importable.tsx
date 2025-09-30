@@ -10,9 +10,11 @@ import type { ComponentEventParams } from './SignInGate/componentEventTracking';
 import { submitComponentEventTracking } from './SignInGate/componentEventTracking';
 import { pageIdIsAllowedForGating } from './SignInGate/displayRules';
 import { SignInGateAuxiaV1 } from './SignInGate/gateDesigns/SignInGateAuxiaV1';
+import { SignInGateAuxiaV2 } from './SignInGate/gateDesigns/SignInGateAuxiaV2';
 import type {
 	AuxiaAPIResponseDataUserTreatment,
 	AuxiaGateDisplayData,
+	AuxiaGateVersion,
 	AuxiaInteractionActionName,
 	AuxiaInteractionInteractionType,
 	AuxiaProxyLogTreatmentInteractionPayload,
@@ -31,6 +33,7 @@ type Props = {
 	idUrl?: string;
 	contributionsServiceUrl: string;
 	auxiaGateDisplayData?: AuxiaGateDisplayData | undefined;
+	signInGateVersion?: AuxiaGateVersion;
 };
 
 // function to generate the profile.theguardian.com url with tracking params
@@ -84,6 +87,7 @@ export const SignInGateSelector = ({
 	idUrl = 'https://profile.theguardian.com',
 	contributionsServiceUrl,
 	auxiaGateDisplayData,
+	signInGateVersion,
 }: Props) => {
 	if (!pageIdIsAllowedForGating(pageId)) {
 		return <></>;
@@ -98,6 +102,7 @@ export const SignInGateSelector = ({
 			isPreview={isPreview}
 			isPaidContent={isPaidContent}
 			auxiaGateDisplayData={auxiaGateDisplayData}
+			signInGateVersion={signInGateVersion}
 		/>
 	);
 };
@@ -133,6 +138,7 @@ type PropsAuxia = {
 	isPreview: boolean;
 	isPaidContent: boolean;
 	auxiaGateDisplayData?: AuxiaGateDisplayData;
+	signInGateVersion?: AuxiaGateVersion;
 };
 
 // [1] If true, it indicates that we are using the component for the regular Auxia share of the Audience
@@ -150,8 +156,9 @@ interface ShowSignInGateAuxiaProps {
 	renderingTarget: RenderingTarget;
 	logTreatmentInteractionCall: (
 		interactionType: AuxiaInteractionInteractionType,
-		actionName: AuxiaInteractionActionName,
+		actionName?: AuxiaInteractionActionName,
 	) => Promise<void>;
+	signInGateVersion?: AuxiaGateVersion;
 }
 
 const incrementGateDisplayCount = () => {
@@ -236,16 +243,39 @@ const buildAbTestTrackingAuxiaVariant = (
 	};
 };
 
-const SignInGateSelectorAuxia = (props: PropsAuxia) => {
-	const {
-		host = 'https://theguardian.com/',
-		pageId,
-		idUrl,
-		contributionsServiceUrl,
-		isPreview,
-		isPaidContent,
-		auxiaGateDisplayData,
-	} = props;
+export const getAuxiaGateVersion = (
+	signInGateVersion?: AuxiaGateVersion,
+	userTreatment?: AuxiaAPIResponseDataUserTreatment,
+): AuxiaGateVersion => {
+	if (signInGateVersion) {
+		return signInGateVersion;
+	}
+
+	const params = new URLSearchParams(window.location.search);
+	const version = params.get('auxia_gate_version');
+
+	if (
+		String(version).toLowerCase().endsWith('v2') ||
+		String(userTreatment?.treatmentType)
+			.toLowerCase()
+			.includes('v2')
+	) {
+		return 'v2';
+	}
+
+	return 'v1'; // Default to v1
+};
+
+const SignInGateSelectorAuxia = ({
+	host = 'https://theguardian.com/',
+	pageId,
+	idUrl,
+	contributionsServiceUrl,
+	isPreview,
+	isPaidContent,
+	auxiaGateDisplayData,
+	signInGateVersion,
+}: PropsAuxia) => {
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
 	);
@@ -321,13 +351,13 @@ const SignInGateSelectorAuxia = (props: PropsAuxia) => {
 						renderingTarget={renderingTarget}
 						logTreatmentInteractionCall={async (
 							interactionType: AuxiaInteractionInteractionType,
-							actionName: AuxiaInteractionActionName,
+							actionName?: AuxiaInteractionActionName,
 						) => {
 							await auxiaLogTreatmentInteraction(
 								contributionsServiceUrl,
 								auxiaGateDisplayData.auxiaData.userTreatment!,
 								interactionType,
-								actionName,
+								actionName ?? '',
 								auxiaGateDisplayData.browserId,
 							).catch((error) => {
 								const errorReport = new Error(
@@ -342,12 +372,13 @@ const SignInGateSelectorAuxia = (props: PropsAuxia) => {
 								);
 							});
 						}}
+						signInGateVersion={signInGateVersion}
 					/>
 				)}
 		</>
 	);
 };
-////////////////////////////////////
+
 const ShowSignInGateAuxia = ({
 	host,
 	signInUrl,
@@ -359,15 +390,30 @@ const ShowSignInGateAuxia = ({
 	treatmentId,
 	renderingTarget,
 	logTreatmentInteractionCall,
+	signInGateVersion,
 }: ShowSignInGateAuxiaProps) => {
 	const componentId = 'main_variant_5';
 	const checkoutCompleteCookieData = undefined;
 	const personaliseSignInGateAfterCheckoutSwitch = undefined;
 
+	// Get the gate version configuration
+	const gateVersion = getAuxiaGateVersion(signInGateVersion, userTreatment);
+
+	const [signInGatePlaceholder, setSignInGatePlaceholder] =
+		useState<HTMLElement | null>(null);
+
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
 		threshold: 0,
 	});
+
+	useEffect(() => {
+		const signInGate = document.getElementById('sign-in-gate');
+		if (signInGate) {
+			setSignInGatePlaceholder(signInGate);
+			setNode(signInGate);
+		}
+	}, [setNode, setSignInGatePlaceholder]);
 
 	useEffect(() => {
 		if (hasBeenSeen) {
@@ -414,25 +460,49 @@ const ShowSignInGateAuxia = ({
 		renderingTarget,
 		treatmentId,
 		userTreatment,
+		gateVersion,
 	]);
 
+	const commonProps = {
+		guUrl: host,
+		signInUrl,
+		dismissGate: () => {
+			setShowGate(false);
+		},
+		abTest,
+		ophanComponentId: componentId,
+		checkoutCompleteCookieData,
+		personaliseSignInGateAfterCheckoutSwitch,
+		userTreatment,
+		logTreatmentInteractionCall,
+	};
+
+	const [hasScroll, setHasScroll] = useState(false);
+	useEffect(() => {
+		const scrollHeight = Math.max(
+			document.body.scrollHeight,
+			document.documentElement.scrollHeight,
+		);
+		const viewportHeight =
+			window.innerHeight || document.documentElement.clientHeight;
+		setHasScroll(scrollHeight > viewportHeight);
+	}, []);
+
+	const shouldShowV2Gate = hasBeenSeen ?? !hasScroll;
+
 	return (
-		<div ref={setNode}>
-			<SignInGateAuxiaV1
-				guUrl={host}
-				signInUrl={signInUrl}
-				dismissGate={() => {
-					setShowGate(false);
-				}}
-				abTest={abTest}
-				ophanComponentId={componentId}
-				checkoutCompleteCookieData={checkoutCompleteCookieData}
-				personaliseSignInGateAfterCheckoutSwitch={
-					personaliseSignInGateAfterCheckoutSwitch
-				}
-				userTreatment={userTreatment}
-				logTreatmentInteractionCall={logTreatmentInteractionCall}
+		<>
+			<div
+				ref={signInGatePlaceholder ? undefined : setNode}
+				data-testid="sign-in-gate-sentinel"
+				aria-hidden="true"
+				style={{ height: 1, marginTop: -1 }}
 			/>
-		</div>
+			{gateVersion === 'v2' ? (
+				shouldShowV2Gate && <SignInGateAuxiaV2 {...commonProps} />
+			) : (
+				<SignInGateAuxiaV1 {...commonProps} />
+			)}
+		</>
 	);
 };

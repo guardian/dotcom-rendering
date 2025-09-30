@@ -26,6 +26,7 @@ type Props = {
 	editionId?: EditionId;
 	lightweightHeader?: boolean;
 	containerLevel?: DCRContainerLevel;
+	isLabs?: boolean;
 };
 
 const linkStyles = css`
@@ -47,6 +48,11 @@ const secondaryTitleStyles = css`
 	${from.tablet} {
 		${textSansBold20};
 	}
+`;
+
+const labsTitleStyles = css`
+	${textSansBold20};
+	color: ${schemePalette('--labs-header-title')};
 `;
 
 const headerStylesWithUrl = css`
@@ -111,6 +117,7 @@ export const ContainerTitle = ({
 	editionId,
 	fontColour = schemePalette('--article-section-title'),
 	containerLevel,
+	isLabs = false,
 }: Props) => {
 	if (!title) return null;
 
@@ -135,6 +142,7 @@ export const ContainerTitle = ({
 							containerLevel === 'Primary' && primaryTitleStyles,
 							containerLevel === 'Secondary' &&
 								secondaryTitleStyles,
+							isLabs && labsTitleStyles,
 						]}
 					>
 						{localisedTitle(title, editionId)}
@@ -148,6 +156,7 @@ export const ContainerTitle = ({
 						lightweightHeader && article17,
 						containerLevel === 'Primary' && primaryTitleStyles,
 						containerLevel === 'Secondary' && secondaryTitleStyles,
+						isLabs && labsTitleStyles,
 					]}
 				>
 					{localisedTitle(title, editionId)}

@@ -2,20 +2,20 @@ import type { FEMediaAsset, FEMediaAtom } from '../frontend/feFront';
 import { getActiveMediaAtom } from './enhanceCards';
 
 describe('Enhance Cards', () => {
-	it('filters out m3u8 assets until supported by DCR', () => {
+	it('prioritises m3u8 assets over MP4 assets', () => {
 		const videoReplace = true;
 		const assets: FEMediaAsset[] = [
-			{
-				id: 'https://guim-example.co.uk/atomID-1.m3u8',
-				version: 1,
-				platform: 'Url',
-				mimeType: 'application/vnd.apple.mpegurl',
-			},
 			{
 				id: 'https://guim-example.co.uk/atomID-1.mp4',
 				version: 1,
 				platform: 'Url',
 				mimeType: 'video/mp4',
+			},
+			{
+				id: 'https://guim-example.co.uk/atomID-1.m3u8',
+				version: 1,
+				platform: 'Url',
+				mimeType: 'application/x-mpegURL',
 			},
 		];
 		const mediaAtom: FEMediaAtom = {
@@ -39,7 +39,16 @@ describe('Enhance Cards', () => {
 			height: 400,
 			image: '',
 			type: 'LoopVideo',
-			videoId: 'https://guim-example.co.uk/atomID-1.mp4',
+			sources: [
+				{
+					mimeType: 'application/x-mpegURL',
+					src: 'https://guim-example.co.uk/atomID-1.m3u8',
+				},
+				{
+					mimeType: 'video/mp4',
+					src: 'https://guim-example.co.uk/atomID-1.mp4',
+				},
+			],
 			width: 500,
 		});
 	});

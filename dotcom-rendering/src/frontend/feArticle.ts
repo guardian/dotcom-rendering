@@ -78,7 +78,6 @@ export interface FEArticle {
 	showBottomSocialButtons: boolean;
 	shouldHideReaderRevenue: boolean;
 
-	// AMP specific (for now)
 	guardianBaseURL: string;
 	contentType: string;
 	hasRelated: boolean;
