@@ -483,6 +483,20 @@ export const WithDifferentImagePositions = () => {
 	);
 };
 
+WithDifferentImagePositions.story = {
+	parameters: {
+		viewport: { defaultViewport: 'desktop' },
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.tablet,
+				breakpoints.desktop,
+				breakpoints.wide,
+			],
+		},
+	},
+};
+
 export const WithDifferentImageSizes = () => {
 	return (
 		<>
