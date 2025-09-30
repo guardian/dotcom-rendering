@@ -1113,7 +1113,9 @@ export const Card = ({
 								{showPill ? (
 									<>
 										<MediaOrNewsletterPill />
-										{format.theme === ArticleSpecial.Labs &&
+										{!showLabsRedesign &&
+											format.theme ===
+												ArticleSpecial.Labs &&
 											branding && (
 												<CardBranding
 													branding={branding}
@@ -1132,7 +1134,7 @@ export const Card = ({
 										age={decideAge()}
 										commentCount={<CommentCount />}
 										cardBranding={
-											branding ? (
+											branding && !showLabsRedesign ? (
 												<CardBranding
 													branding={branding}
 													onwardsSource={
@@ -1229,7 +1231,7 @@ export const Card = ({
 
 				{decideOuterSublinks()}
 
-				{isOpinionCardWithAvatar && (
+				{(!!showLabsRedesign || isOpinionCardWithAvatar) && (
 					<CardFooter
 						format={format}
 						age={decideAge()}

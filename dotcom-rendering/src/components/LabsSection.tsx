@@ -190,6 +190,15 @@ const badgeStyles = css`
 	flex-direction: column;
 	align-items: end;
 	padding: ${space[2]}px 10px;
+
+	img {
+		height: auto;
+		width: 100px;
+
+		${from.phablet} {
+			width: 120px;
+		}
+	}
 `;
 
 const paidForByStyles = css`
@@ -443,11 +452,14 @@ export const LabsSection = ({
 						<div css={badgeStyles}>
 							<div css={paidForByStyles}>Paid for by</div>
 							<Badge
-								imageSrc={badge.imageSrc}
-								href={badge.href}
+								logo={{
+									src: badge.imageSrc,
+									link: badge.href,
+									label: 'Guardian Labs Sponsored Content',
+									dimensions: { width: 120, height: 60 },
+								}}
 								ophanComponentLink={`labs-logo | ${ophanComponentName}`}
 								ophanComponentName={`labs-logo-${ophanComponentName}`}
-								isInLabsSection={true}
 							/>
 						</div>
 					)}

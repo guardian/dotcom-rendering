@@ -1,80 +1,79 @@
 import { css } from '@emotion/react';
-import { between, from } from '@guardian/source/foundations';
+import { space } from '@guardian/source/foundations';
+import type { Branding } from '../types/branding';
+import { useConfig } from './ConfigContext';
 
-const frontsSectionBadgeSizingStyles = css`
+// const imageStyles = css`
+// 	display: block;
+// 	width: auto;
+// 	max-width: 100%;
+// 	object-fit: contain;
+// `;
+
+const logoImageStyle = css`
+	max-height: 60px;
+	max-width: 120px;
+	margin-left: ${space[3]}px;
+	vertical-align: middle;
 	height: auto;
-	width: 120px;
-
-	${from.tablet} {
-		width: 140px;
-	}
-
-	${from.leftCol} {
-		width: 200px;
-	}
-`;
-
-const labsSectionBadgeSizingStyles = css`
-	height: auto;
-	width: 100px;
-
-	${from.phablet} {
-		width: 120px;
-	}
-`;
-
-const imageAdvertisingPartnerStyles = css`
-	${between.leftCol.and.wide} {
-		max-width: 130px;
-	}
-`;
-
-const imageStyles = css`
-	display: block;
 	width: auto;
-	max-width: 100%;
-	object-fit: contain;
-`;
-
-const badgeLink = css`
-	text-decoration: none;
 `;
 
 type Props = {
-	imageSrc: string;
-	href: string;
+	logo: Branding['logo'];
+	logoForDarkBackground?: Branding['logoForDarkBackground'];
+	sponsorName?: string;
 	ophanComponentLink?: string;
 	ophanComponentName?: string;
-	isInLabsSection?: boolean;
-	isAdvertisingPartner?: boolean;
 };
 
 export const Badge = ({
-	imageSrc,
-	href,
+	logo,
+	logoForDarkBackground,
+	sponsorName,
 	ophanComponentLink,
 	ophanComponentName,
-	isInLabsSection = false,
-	isAdvertisingPartner = false,
 }: Props) => {
+	const { darkModeAvailable } = useConfig();
+
 	return (
 		<a
-			href={href}
-			data-link-name={ophanComponentLink}
+			href={logo.link}
+			data-sponsor={sponsorName?.toLowerCase()}
+			rel="nofollow"
+			aria-label={`Visit the ${sponsorName} website`}
+			data-testid="card-branding-logo"
 			data-component={ophanComponentName}
-			css={badgeLink}
+			data-link-name={ophanComponentLink}
 		>
-			<img
-				css={[
-					imageStyles,
-					isInLabsSection
-						? labsSectionBadgeSizingStyles
-						: frontsSectionBadgeSizingStyles,
-					isAdvertisingPartner && imageAdvertisingPartnerStyles,
-				]}
-				src={imageSrc}
-				alt={isInLabsSection ? 'Labs sponsor logo' : ''}
-			/>
+			<picture>
+				{darkModeAvailable && logoForDarkBackground && (
+					<source
+						width={logoForDarkBackground.dimensions.width}
+						height={logoForDarkBackground.dimensions.height}
+						srcSet={encodeURI(logoForDarkBackground.src)}
+						media={'(prefers-color-scheme: dark)'}
+					/>
+				)}
+				<img
+					css={logoImageStyle}
+					src={logo.src}
+					alt={sponsorName}
+					width={logo.dimensions.width}
+					height={logo.dimensions.height}
+				/>
+				{/* <img
+					css={[
+						imageStyles,
+						isInLabsSection
+							? labsSectionBadgeSizingStyles
+							: frontsSectionBadgeSizingStyles,
+						isAdvertisingPartner && imageAdvertisingPartnerStyles,
+					]}
+					src={logo.src}
+					alt={isInLabsSection ? 'Labs sponsor logo' : ''}
+				/> */}
+			</picture>
 		</a>
 	);
 };

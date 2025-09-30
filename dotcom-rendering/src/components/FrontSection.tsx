@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
-import { badgeFromBranding } from '../lib/branding';
 import { type EditionId, isNetworkFront } from '../lib/edition';
 import { hideAge } from '../lib/hideAge';
+import { getOphanComponents } from '../lib/labs';
 import { palette as schemePalette } from '../palette';
 import type { CollectionBranding } from '../types/branding';
 import type {
@@ -646,7 +646,6 @@ export const FrontSection = ({
 		!!isNextCollectionPrimary || isAboveDesktopAd;
 
 	const showSectionColours = isNetworkFront(pageId ?? '');
-	const badge = badgeFromBranding(collectionBranding);
 
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
@@ -827,17 +826,28 @@ export const FrontSection = ({
 							/>
 						</Island>
 					) : null}
+
 					{isLabs &&
 						collectionBranding?.kind === 'paid-content' &&
-						badge && (
+						collectionBranding.isContainerBranding && (
 							<div css={sponsoredContentLabelWrapper}>
 								<SponsoredContentLabel
-									imageSrc={badge.imageSrc}
-									href={badge.href}
-									ophanComponentName={ophanComponentName}
+									logo={collectionBranding.branding.logo}
+									logoForDarkBackground={
+										collectionBranding.branding
+											.logoForDarkBackground
+									}
+									sponsorName={
+										collectionBranding.branding.sponsorName
+									}
+									{...getOphanComponents({
+										branding: collectionBranding.branding,
+										locationPrefix: 'front-section',
+									})}
 								/>
 							</div>
 						)}
+
 					{pagination && (
 						<FrontPagination
 							sectionName={pagination.sectionName}

@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	between,
 	from,
 	palette as sourcePalette,
 	textSans12,
@@ -46,6 +47,12 @@ const brandingAdvertisingPartnerStyle = css`
 		padding: 8px;
 		width: auto;
 	}
+
+	img {
+		${between.leftCol.and.wide} {
+			max-width: 130px;
+		}
+	}
 `;
 
 const labelAdvertisingPartnerStyles = css`
@@ -77,6 +84,33 @@ const aboutThisLinkAdvertisingPartnerStyles = css`
 	color: ${sourcePalette.news[400]};
 `;
 
+const badgeStyles = css`
+	img {
+		height: auto;
+		width: 120px;
+
+		${from.tablet} {
+			width: 140px;
+		}
+
+		${from.leftCol} {
+			width: 200px;
+		}
+	}
+`;
+
+const paidContentStyles = css`
+	display: inline-block;
+	border-top: 1px dotted ${sourcePalette.neutral[86]};
+	${textSans12}
+	color: ${sourcePalette.neutral[46]};
+	font-weight: bold;
+
+	${from.leftCol} {
+		width: 100%;
+	}
+`;
+
 export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 	switch (collectionBranding?.kind) {
 		case 'foundation': {
@@ -87,7 +121,7 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 			} = collectionBranding;
 			if (isFrontBranding || isContainerBranding) {
 				return (
-					<>
+					<div css={badgeStyles}>
 						<Hide until="leftCol">
 							<p css={[labelStyles]}>{logo.label}</p>
 							<Badge imageSrc={logo.src} href={logo.link} />
@@ -102,7 +136,7 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 								About this content
 							</a>
 						</div>
-					</>
+					</div>
 				);
 			}
 
@@ -119,22 +153,9 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 				return (
 					<div css={titleStyle}>
 						{title}
-						<div
-							css={css`
-								display: inline-block;
-								border-top: 1px dotted
-									${sourcePalette.neutral[86]};
-								${textSans12}
-								color: ${sourcePalette.neutral[46]};
-								font-weight: bold;
-
-								${from.leftCol} {
-									width: 100%;
-								}
-							`}
-						>
+						<div css={[paidContentStyles, badgeStyles]}>
 							Paid for by
-							<Badge imageSrc={logo.src} href={logo.link} />
+							<Badge logo={logo} logoForDarkBackground={logo} />
 						</div>
 					</div>
 				);
@@ -185,13 +206,7 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 							>
 								{logo.label}
 							</p>
-							<Badge
-								imageSrc={logo.src}
-								href={logo.link}
-								isAdvertisingPartner={
-									isAdvertisingPartnerOrExclusive
-								}
-							/>
+							<Badge logo={logo} logoForDarkBackground={logo} />
 							<a
 								href={aboutThisLink}
 								css={[

@@ -2,15 +2,21 @@ import { css } from '@emotion/react';
 import { space, textSansBold12 } from '@guardian/source/foundations';
 import { palette } from '../palette';
 import type { DCRBadgeType } from '../types/badge';
+import type { Branding } from '../types/branding';
 import { Badge } from './Badge';
 
 type SponsoredContentLabelProps = DCRBadgeType & {
+	logo: Branding['logo'];
+	logoForDarkBackground?: Branding['logoForDarkBackground'];
+	sponsorName: string;
+	labelText?: string;
 	alignment?: 'start' | 'end';
-	ophanComponentName?: string;
 	orientation?: 'horizontal' | 'vertical';
+	ophanComponentName?: string;
+	ophanComponentLink?: string;
 };
 
-const paidForByStyles = css`
+const sponsoredByStyles = css`
 	${textSansBold12};
 	color: ${palette('--labs-header-label-text')};
 	margin-top: ${space[3]}px;
@@ -38,11 +44,14 @@ const verticalStyles = {
 };
 
 export const SponsoredContentLabel = ({
+	logo,
+	logoForDarkBackground,
+	sponsorName,
+	labelText = 'Paid for by',
 	alignment = 'start',
-	imageSrc,
-	href,
-	ophanComponentName,
 	orientation = 'horizontal',
+	ophanComponentLink,
+	ophanComponentName,
 }: SponsoredContentLabelProps) => {
 	return (
 		<div
@@ -53,13 +62,13 @@ export const SponsoredContentLabel = ({
 					: horizontalStyles,
 			]}
 		>
-			<div css={paidForByStyles}>Paid for by</div>
+			<div css={sponsoredByStyles}>{labelText}</div>
 			<Badge
-				href={href}
-				imageSrc={imageSrc}
-				isInLabsSection={true}
-				ophanComponentLink={`labs-logo | ${ophanComponentName}`}
-				ophanComponentName={`labs-logo-${ophanComponentName}`}
+				logo={logo}
+				logoForDarkBackground={logoForDarkBackground}
+				sponsorName={sponsorName}
+				ophanComponentLink={ophanComponentLink}
+				ophanComponentName={ophanComponentName}
 			/>
 		</div>
 	);

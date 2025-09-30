@@ -50,6 +50,7 @@ const reserveSpaceStyles = (mobile: boolean, desktop: boolean) => css`
 
 const labStyles = css`
 	margin-top: ${space[1]}px;
+	max-height: 60px;
 `;
 
 type MainMedia =
