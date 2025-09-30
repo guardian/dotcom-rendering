@@ -499,6 +499,14 @@ const labsSectionStyles = css`
 	}
 `;
 
+const sponsoredContentLabelWrapper = css`
+	margin-top: ${space[4]}px;
+
+	${from.leftCol} {
+		margin-top: ${space[9]}px;
+	}
+`;
+
 /**
  * # Front Container
  *
@@ -806,11 +814,13 @@ export const FrontSection = ({
 						</Island>
 					) : null}
 					{collectionBranding?.kind === 'paid-content' && badge && (
-						<SponsoredContentLabel
-							imageSrc={badge.imageSrc}
-							href={badge.href}
-							ophanComponentName={ophanComponentName}
-						/>
+						<div css={sponsoredContentLabelWrapper}>
+							<SponsoredContentLabel
+								imageSrc={badge.imageSrc}
+								href={badge.href}
+								ophanComponentName={ophanComponentName}
+							/>
+						</div>
 					)}
 					{pagination && (
 						<FrontPagination
