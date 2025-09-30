@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
+import { badgeFromBranding } from '../lib/branding';
 import { type EditionId, isNetworkFront } from '../lib/edition';
 import { hideAge } from '../lib/hideAge';
 import { palette as schemePalette } from '../palette';
@@ -22,6 +23,7 @@ import { Island } from './Island';
 import { LabsSectionHeader } from './LabsSectionHeader';
 import { ShowHideButton } from './ShowHideButton';
 import { ShowMore } from './ShowMore.importable';
+import { SponsoredContentLabel } from './SponsoredContentLabel';
 import { Treats } from './Treats';
 
 type Props = {
@@ -488,8 +490,24 @@ const labsSectionStyles = css`
 	grid-column: title;
 	margin-top: ${space[2]}px;
 	${from.leftCol} {
-		grid-row: content;
+		/* Extend the background from content area to bottom-content area to align with logo */
+		grid-row: content / bottom-content-end;
 		grid-column: title;
+	}
+`;
+
+const labsSectionPaddingBottom = css`
+	${from.leftCol} {
+		${bottomPadding}
+	}
+`;
+
+const sponsoredContentLabelWrapper = css`
+	margin-top: ${space[4]}px;
+
+	${from.leftCol} {
+		margin-top: ${space[9]}px;
+		padding-right: 10px;
 	}
 `;
 
@@ -628,6 +646,7 @@ export const FrontSection = ({
 		!!isNextCollectionPrimary || isAboveDesktopAd;
 
 	const showSectionColours = isNetworkFront(pageId ?? '');
+	const badge = badgeFromBranding(collectionBranding);
 
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
@@ -679,7 +698,17 @@ export const FrontSection = ({
 				/>
 
 				{isLabs && showLabsRedesign ? (
-					<div css={labsSectionStyles}>
+					<div
+						css={[
+							labsSectionStyles,
+							isBetaContainer
+								? bottomPaddingBetaContainer(
+										useLargeSpacingMobile,
+										useLargeSpacingDesktop,
+								  )
+								: labsSectionPaddingBottom,
+						]}
+					>
 						<LabsSectionHeader title={title} />
 					</div>
 				) : (
@@ -798,6 +827,17 @@ export const FrontSection = ({
 							/>
 						</Island>
 					) : null}
+					{isLabs &&
+						collectionBranding?.kind === 'paid-content' &&
+						badge && (
+							<div css={sponsoredContentLabelWrapper}>
+								<SponsoredContentLabel
+									imageSrc={badge.imageSrc}
+									href={badge.href}
+									ophanComponentName={ophanComponentName}
+								/>
+							</div>
+						)}
 					{pagination && (
 						<FrontPagination
 							sectionName={pagination.sectionName}

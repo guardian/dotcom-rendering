@@ -6,7 +6,7 @@ import { Badge } from './Badge';
 
 type SponsoredContentLabelProps = DCRBadgeType & {
 	alignment?: 'start' | 'end';
-	ophanComponentName: string;
+	ophanComponentName?: string;
 	orientation?: 'horizontal' | 'vertical';
 };
 
@@ -20,6 +20,7 @@ const paidForByStyles = css`
 const wrapperStyles = css`
 	display: flex;
 	gap: ${space[2]}px;
+	justify-content: end;
 `;
 
 const horizontalStyles = css`
