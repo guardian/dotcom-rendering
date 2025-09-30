@@ -25,7 +25,7 @@ type Props = {
 
 const sampling = 1 / 100;
 /** defining this here allows to share this with other metrics */
-const willRecordCoreWebVitals = Math.random() < sampling;
+const isInSample = Math.random() < sampling;
 
 // For these tests switch off sampling and collect metrics for 100% of views
 const clientSideTestsToForceMetrics: ABTest[] = [
@@ -107,7 +107,6 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 
 	const shouldBypassSampling = useCallback(
 		(api: ABTestAPI) =>
-			willRecordCoreWebVitals ||
 			userInServerSideTest ||
 			collectBetaTestMetrics ||
 			clientSideTestsToForceMetrics.some((test) =>
@@ -124,7 +123,7 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 			if (isUndefined(isDev)) return;
 			if (isUndefined(pageViewId)) return;
 
-			const bypassSampling = shouldBypassSampling(abTestApi);
+			const recordMetrics = isInSample || shouldBypassSampling(abTestApi);
 
 			/**
 			 * We rely on `bypassSampling` rather than the built-in sampling,
@@ -140,7 +139,7 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 				team: 'dotcom',
 			});
 
-			if (bypassSampling || isDev) {
+			if (recordMetrics || isDev) {
 				void bypassCoreWebVitalsSampling('commercial');
 			}
 		},
@@ -158,7 +157,7 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 			if (isUndefined(isDev)) return;
 			if (isUndefined(pageViewId)) return;
 
-			const bypassSampling = shouldBypassSampling(abTestApi);
+			const recordMetrics = isInSample || shouldBypassSampling(abTestApi);
 
 			// This is a new detection method we are trying, so we want to record it separately to `adBlockerInUse`
 			EventTimer.get().setProperty(
@@ -173,7 +172,7 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 				adBlockerInUse,
 			})
 				.then(() => {
-					if (bypassSampling || isDev) {
+					if (recordMetrics || isDev) {
 						void bypassCommercialMetricsSampling();
 					}
 				})
