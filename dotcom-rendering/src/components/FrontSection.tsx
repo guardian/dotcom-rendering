@@ -2,10 +2,10 @@ import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
+import { badgeFromBranding } from '../lib/branding';
 import { type EditionId, isNetworkFront } from '../lib/edition';
 import { hideAge } from '../lib/hideAge';
 import { palette as schemePalette } from '../palette';
-import type { DCRBadgeType } from '../types/badge';
 import type { CollectionBranding } from '../types/branding';
 import type {
 	DCRContainerLevel,
@@ -96,8 +96,6 @@ type Props = {
 	hasNavigationButtons?: boolean;
 	isAboveDesktopAd?: boolean;
 	isAboveMobileAd?: boolean;
-	/** A sponsor badge can be displayed under the content cards */
-	badge?: DCRBadgeType;
 	/** Indicates whether this is a Guardian Labs container */
 	isLabs?: boolean;
 	/** Feature switch for the labs redesign work */
@@ -504,6 +502,7 @@ const sponsoredContentLabelWrapper = css`
 
 	${from.leftCol} {
 		margin-top: ${space[9]}px;
+		padding-right: 10px;
 	}
 `;
 
@@ -621,7 +620,6 @@ export const FrontSection = ({
 	hasNavigationButtons = false,
 	isAboveDesktopAd = false,
 	isAboveMobileAd = false,
-	badge,
 	isLabs = false,
 	showLabsRedesign = false,
 }: Props) => {
@@ -643,6 +641,7 @@ export const FrontSection = ({
 		!!isNextCollectionPrimary || isAboveDesktopAd;
 
 	const showSectionColours = isNetworkFront(pageId ?? '');
+	const badge = badgeFromBranding(collectionBranding);
 
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
