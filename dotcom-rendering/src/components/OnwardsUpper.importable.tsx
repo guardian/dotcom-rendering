@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
-import { joinUrl } from '@guardian/libs';
+import { isUndefined, joinUrl } from '@guardian/libs';
 import {
+	ArticleDesign,
 	type ArticleFormat,
 	type ArticleTheme,
 	Pillar,
@@ -185,6 +186,7 @@ type Props = {
 	discussionApiUrl: string;
 	absoluteServerTimes: boolean;
 	renderingTarget: RenderingTarget;
+	shouldHaveSingleSection?: boolean;
 };
 
 /**
@@ -220,6 +222,7 @@ export const OnwardsUpper = ({
 	discussionApiUrl,
 	absoluteServerTimes,
 	renderingTarget,
+	shouldHaveSingleSection = false,
 }: Props) => {
 	const isHorizontalScrollingSupported = useIsHorizontalScrollingSupported();
 
@@ -309,6 +312,15 @@ export const OnwardsUpper = ({
 				<Section
 					fullWidth={true}
 					borderColour={palette('--article-section-border')}
+					padSides={
+						format.design === ArticleDesign.Gallery ? false : true
+					}
+					showTopBorder={
+						format.design === ArticleDesign.Gallery ? false : true
+					}
+					showSideBorders={
+						format.design === ArticleDesign.Gallery ? false : true
+					}
 				>
 					<FetchOnwardsData
 						url={url}
@@ -322,25 +334,57 @@ export const OnwardsUpper = ({
 					/>
 				</Section>
 			)}
-			{!!curatedDataUrl && !isPaidContent && (
-				<Section
-					fullWidth={true}
-					borderColour={palette('--article-section-border')}
-				>
-					<FetchOnwardsData
-						url={curatedDataUrl}
-						limit={20}
-						onwardsSource="curated-content"
-						format={format}
-						discussionApiUrl={discussionApiUrl}
-						absoluteServerTimes={absoluteServerTimes}
-						renderingTarget={renderingTarget}
-						isAdFreeUser={isAdFreeUser}
-					/>
-				</Section>
-			)}
+			{!!curatedDataUrl &&
+				!isPaidContent &&
+				canRenderCuratedSection(
+					shouldHaveSingleSection,
+					hasStoryPackage,
+					url,
+				) && (
+					<Section
+						fullWidth={true}
+						borderColour={palette('--article-section-border')}
+						showTopBorder={
+							format.design === ArticleDesign.Gallery
+								? false
+								: true
+						}
+						showSideBorders={
+							format.design === ArticleDesign.Gallery
+								? false
+								: true
+						}
+						padSides={
+							format.design === ArticleDesign.Gallery
+								? false
+								: true
+						}
+					>
+						<FetchOnwardsData
+							url={curatedDataUrl}
+							limit={20}
+							onwardsSource="curated-content"
+							format={format}
+							discussionApiUrl={discussionApiUrl}
+							absoluteServerTimes={absoluteServerTimes}
+							renderingTarget={renderingTarget}
+							isAdFreeUser={isAdFreeUser}
+						/>
+					</Section>
+				)}
 		</div>
 	);
+};
+
+const canRenderCuratedSection = (
+	shouldHaveSingleSection: boolean,
+	hasStoryPackage: boolean,
+	url?: string,
+) => {
+	if (shouldHaveSingleSection) {
+		return isUndefined(url) && !hasStoryPackage;
+	}
+	return true;
 };
 
 export { firstPopularTag };
