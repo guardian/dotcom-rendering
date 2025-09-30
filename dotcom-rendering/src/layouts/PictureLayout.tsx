@@ -292,9 +292,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot
-									abTests={article.config.abTests}
-								/>
+								<HeaderAdSlot />
 							</Section>
 						</Stuck>
 					)}
@@ -311,6 +309,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}
 						pageId={article.pageId}
+						wholePictureLogoSwitch={
+							article.config.switches.wholePictureLogo
+						}
 					/>
 				</div>
 			)}
@@ -752,6 +753,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 									!!article.config.switches.remoteBanner
 								}
 								tags={article.tags}
+								host={host}
 							/>
 						</Island>
 					</BannerWrapper>

@@ -387,13 +387,10 @@ describe('Island: server-side rendering', () => {
 			renderToString(
 				<WithConfig>
 					<SignInGateSelector
-						contentType={''}
-						tags={[]}
 						isPaidContent={false}
 						isPreview={false}
 						pageId={''}
 						contributionsServiceUrl={''}
-						editionId="UK"
 					/>
 				</WithConfig>,
 			),

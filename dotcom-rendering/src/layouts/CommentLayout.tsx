@@ -318,9 +318,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot
-									abTests={article.config.abTests}
-								/>
+								<HeaderAdSlot />
 							</Section>
 						</Stuck>
 					)}
@@ -337,6 +335,9 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}
 						pageId={article.pageId}
+						wholePictureLogoSwitch={
+							article.config.switches.wholePictureLogo
+						}
 					/>
 				</div>
 			)}
@@ -716,7 +717,9 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 				{article.storyPackage && (
 					<Section
 						fullWidth={true}
-						backgroundColour={themePalette('--article-background')}
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
 						borderColour={themePalette('--article-border')}
 					>
 						<Island priority="feature" defer={{ until: 'visible' }}>

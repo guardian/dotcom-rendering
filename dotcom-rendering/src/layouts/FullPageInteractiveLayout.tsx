@@ -162,7 +162,7 @@ const NavHeader = ({ article, NAV, renderAds }: HeaderProps) => {
 							shouldCenter={false}
 							element="aside"
 						>
-							<HeaderAdSlot abTests={article.config.abTests} />
+							<HeaderAdSlot />
 						</Section>
 					</div>
 				</Stuck>
@@ -181,6 +181,9 @@ const NavHeader = ({ article, NAV, renderAds }: HeaderProps) => {
 				hasPageSkin={false}
 				hasPageSkinContentSelfConstrain={false}
 				pageId={article.pageId}
+				wholePictureLogoSwitch={
+					article.config.switches.wholePictureLogo
+				}
 			/>
 		</section>
 	);
@@ -360,6 +363,7 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 									!!article.config.switches.remoteBanner
 								}
 								tags={article.tags}
+								host={host}
 							/>
 						</Island>
 					</BannerWrapper>

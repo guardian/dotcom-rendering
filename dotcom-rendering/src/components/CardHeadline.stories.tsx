@@ -218,6 +218,40 @@ liveStory.decorators = [
 	]),
 ];
 
+export const labsHeaderStyle: StoryObj = ({ format }: StoryProps) => (
+	<>
+		<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
+			<h4>Labs redesign on</h4>
+			<CardHeadline
+				headlineText="This is how a card headline in labs looks"
+				format={format}
+				kickerText="Labs"
+				showLabsRedesign={true}
+			/>
+		</Section>
+
+		<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
+			<h4>Labs redesign off</h4>
+			<CardHeadline
+				headlineText="This is how a card headline in labs looks"
+				format={format}
+				kickerText="Labs"
+				showLabsRedesign={false}
+			/>
+		</Section>
+	</>
+);
+labsHeaderStyle.storyName = 'Labs Headline';
+labsHeaderStyle.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: ArticleSpecial.Labs,
+		},
+	]),
+];
+
 export const noLineBreak: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<CardHeadline

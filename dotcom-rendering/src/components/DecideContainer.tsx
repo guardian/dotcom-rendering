@@ -47,7 +47,9 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
-	isInOpinionNoAvatarVariant?: boolean;
+	isInHideTrailsAbTest?: boolean;
+	/** Feature flag for the labs redesign work */
+	showLabsRedesign?: boolean;
 };
 
 export const DecideContainer = ({
@@ -63,7 +65,8 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
-	isInOpinionNoAvatarVariant,
+	isInHideTrailsAbTest,
+	showLabsRedesign = false,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -246,6 +249,8 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
+					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
+					showLabsRedesign={!!showLabsRedesign}
 				/>
 			);
 		case 'flexible/general':
@@ -259,7 +264,8 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
-					isInOpinionNoAvatarVariant={isInOpinionNoAvatarVariant}
+					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
+					showLabsRedesign={!!showLabsRedesign}
 				/>
 			);
 		case 'scrollable/small':
@@ -274,6 +280,8 @@ export const DecideContainer = ({
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
+						isInHideTrailsAbTest={!!isInHideTrailsAbTest}
+						showLabsRedesign={!!showLabsRedesign}
 					/>
 				</Island>
 			);
@@ -289,7 +297,8 @@ export const DecideContainer = ({
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
-						isInOpinionNoAvatarVariant={isInOpinionNoAvatarVariant}
+						isInHideTrailsAbTest={!!isInHideTrailsAbTest}
+						showLabsRedesign={!!showLabsRedesign}
 					/>
 				</Island>
 			);
@@ -302,6 +311,8 @@ export const DecideContainer = ({
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
+					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
+					showLabsRedesign={!!showLabsRedesign}
 				/>
 			);
 		case 'scrollable/feature':
@@ -314,6 +325,7 @@ export const DecideContainer = ({
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
 						collectionId={collectionId}
+						isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 					/>
 				</Island>
 			);
@@ -326,6 +338,7 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
+					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 				/>
 			);
 		default:

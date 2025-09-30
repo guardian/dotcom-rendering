@@ -1,3 +1,4 @@
+import type { Source } from '../lib/video';
 import type { PodcastSeriesImage } from './tag';
 
 type Media = {
@@ -22,7 +23,7 @@ type Video = Media & {
 type LoopVideo = Media & {
 	type: 'LoopVideo';
 	atomId: string;
-	videoId: string;
+	sources: Source[];
 	height: number;
 	width: number;
 	duration: number;

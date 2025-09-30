@@ -2,8 +2,6 @@
 // if the SignInGateSelector determines a gate should be rendered.
 
 import React from 'react';
-import { Island } from '../components/Island';
-import { SignInGateSelector } from '../components/SignInGateSelector.importable';
 import type { TagType } from '../types/tag';
 import type { EditionId } from './edition';
 
@@ -25,42 +23,13 @@ type Props = {
 
 export const withSignInGateSlot = ({
 	renderedElements,
-	contentType,
-	sectionId,
-	tags,
-	isPaidContent,
-	isPreview,
-	host,
-	pageId,
-	idUrl,
-	contributionsServiceUrl,
-	editionId,
 }: Props): React.ReactNode => {
 	return renderedElements.map((element, i) => {
 		return (
 			<React.Fragment key={element?.key ?? i}>
 				{element}
 				{/* Add the placeholder div after the second article element */}
-				{i === 1 && (
-					<div id="sign-in-gate">
-						<Island priority="feature" defer={{ until: 'visible' }}>
-							<SignInGateSelector
-								contentType={contentType}
-								sectionId={sectionId}
-								tags={tags}
-								isPaidContent={isPaidContent}
-								isPreview={!!isPreview}
-								host={host}
-								pageId={pageId}
-								idUrl={idUrl}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
-								editionId={editionId}
-							/>
-						</Island>
-					</div>
-				)}
+				{i === 1 && <div id="sign-in-gate"></div>}
 			</React.Fragment>
 		);
 	});

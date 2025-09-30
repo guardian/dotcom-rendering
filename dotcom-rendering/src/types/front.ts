@@ -101,6 +101,7 @@ export type DCRFrontCard = {
 	slideshowImages?: DCRSlideshowImage[];
 	showVideo?: boolean;
 	uniqueId?: string;
+	isInHideTrailsAbTest?: boolean;
 };
 
 export type DCRSlideshowImage = {

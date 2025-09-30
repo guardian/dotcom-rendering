@@ -31,35 +31,6 @@ interface PerformanceEntry {
 
 declare namespace JSX {
 	interface IntrinsicElements {
-		// ------------------------------------- //
-		// AMP types                             //
-		// ------------------------------------- //
-		'amp-accordion': any;
-		'amp-ad': any;
-		'amp-analytics': any;
-		'amp-audio': any;
-		'amp-consent': any;
-		'amp-embed': any;
-		'amp-experiment': any;
-		'amp-facebook': any;
-		'amp-form': any;
-		'amp-geo': any;
-		'amp-iframe': any;
-		'amp-img': any;
-		'amp-instagram': any;
-		'amp-list': any;
-		'amp-live-list': any;
-		'amp-pixel': any;
-		'amp-script': any;
-		'amp-sidebar': any;
-		'amp-soundcloud': any;
-		'amp-state': any;
-		'amp-sticky-ad': any;
-		'amp-twitter': any;
-		'amp-video': any;
-		'amp-vimeo': any;
-		'amp-youtube': any;
-
 		/** Island {@link ./src/components/Island.tsx} */
 		'gu-island': import('./src/components/Island.tsx').GuIsland;
 	}

@@ -17,7 +17,9 @@ type Props = {
 	containerType: DCRContainerType;
 	aspectRatio: AspectRatio;
 	sectionId: string;
-	isInOpinionNoAvatarVariant?: boolean;
+	isInHideTrailsAbTest?: boolean;
+	/** Feature flag for the labs redesign work */
+	showLabsRedesign?: boolean;
 };
 
 /**
@@ -36,7 +38,8 @@ export const ScrollableMedium = ({
 	showAge,
 	aspectRatio,
 	sectionId,
-	isInOpinionNoAvatarVariant,
+	isInHideTrailsAbTest,
+	showLabsRedesign,
 }: Props) => {
 	return (
 		<ScrollableCarousel
@@ -53,12 +56,7 @@ export const ScrollableMedium = ({
 				return (
 					<ScrollableCarousel.Item key={trail.url}>
 						<FrontCard
-							trail={{
-								...trail,
-								avatarUrl: isInOpinionNoAvatarVariant
-									? undefined
-									: trail.avatarUrl,
-							}}
+							trail={trail}
 							imageLoading={imageLoading}
 							absoluteServerTimes={!!absoluteServerTimes}
 							containerPalette={containerPalette}
@@ -79,6 +77,8 @@ export const ScrollableMedium = ({
 							showTopBarDesktop={false}
 							showTopBarMobile={false}
 							canPlayInline={false}
+							isInHideTrailsAbTest={isInHideTrailsAbTest}
+							showLabsRedesign={showLabsRedesign}
 						/>
 					</ScrollableCarousel.Item>
 				);

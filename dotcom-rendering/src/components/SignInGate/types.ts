@@ -98,13 +98,17 @@ export interface TreatmentContentDecoded {
 	second_cta_name?: string;
 }
 
+export type AuxiaAPIResponseDataUserTreatmentType =
+	| 'DISMISSABLE_SIGN_IN_GATE'
+	| 'NONDISMISSIBLE_SIGN_IN_GATE';
+
 export interface AuxiaAPIResponseDataUserTreatment {
 	treatmentId: string;
 	treatmentTrackingId: string;
 	rank: string;
 	contentLanguageCode: string;
 	treatmentContent: string;
-	treatmentType: string;
+	treatmentType: AuxiaAPIResponseDataUserTreatmentType;
 	surface: string;
 }
 
@@ -239,6 +243,8 @@ export type SignInGatePropsAuxia = {
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
 	logTreatmentInteractionCall: (
 		interactionType: AuxiaInteractionInteractionType,
-		actionName: AuxiaInteractionActionName,
+		actionName?: AuxiaInteractionActionName,
 	) => Promise<void>;
 };
+
+export type AuxiaGateVersion = 'v1' | 'v2';

@@ -5,9 +5,21 @@
 // 1. That the manifest files are output
 // 2. That the manifest files contain at least the entry points under the expected property
 
+const { readFile } = require('node:fs').promises;
 const find = require('find');
-const loadJsonFile = require('load-json-file');
 const { BUILD_VARIANT } = require('../../webpack/bundles');
+
+/**
+ * Loads a JSON file.
+ * Inspired by https://github.com/sindresorhus/load-json-file/blob/de8256b9010db73c75a1e2036ff96025e94c0b6e/index.js#L6
+ * @param {string} filePath The path to the JSON file.
+ * @returns {Promise<Object>} The parsed JSON object.
+ */
+async function loadJsonFile(filePath) {
+	const buffer = await readFile(filePath);
+	// Unlike `buffer.toString()` and `fs.readFile(path, 'utf8')`, `TextDecoder` will remove BOM.
+	return JSON.parse(new TextDecoder().decode(buffer));
+}
 
 const errorAndThrow = (error) => {
 	console.error(error);

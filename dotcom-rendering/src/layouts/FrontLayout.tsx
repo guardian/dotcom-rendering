@@ -18,7 +18,6 @@ import {
 	MobileAdSlot,
 } from '../components/FrontsAdSlots';
 import { FrontSection } from '../components/FrontSection';
-import { FrontSectionTracker } from '../components/FrontSectionTracker.importable';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
@@ -135,14 +134,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
-	/**
-	 * We are running an AB test which replaces the avatar for the card image
-	 * in the Opinion and More opinion collections on network fronts.
-	 */
-	const isInOpinionNoAvatarVariant = (collectionName: string) =>
-		abTests.opinionNoAvatarVariant === 'variant' &&
-		front.isNetworkFront &&
-		(collectionName === 'Opinion' || collectionName === 'More opinion');
+	const showLabsRedesign = !!front.config.switches.guardianLabsRedesign;
 
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
@@ -207,7 +199,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								'--article-section-background',
 							)}
 						>
-							<HeaderAdSlot abTests={abTests} />
+							<HeaderAdSlot />
 						</Section>
 					</Stuck>
 				)}
@@ -235,6 +227,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					hasPageSkin={hasPageSkin}
 					hasPageSkinContentSelfConstrain={true}
 					pageId={pageId}
+					wholePictureLogoSwitch={
+						front.config.switches.wholePictureLogo
+					}
 				/>
 
 				{isPaidContent && (
@@ -433,7 +428,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						);
 					}
 
-					if (collection.containerPalette === 'Branded') {
+					if (
+						collection.containerPalette === 'Branded' &&
+						!showLabsRedesign
+					) {
 						return (
 							<Fragment key={ophanName}>
 								<LabsSection
@@ -481,6 +479,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										containerLevel={
 											collection.containerLevel
 										}
+										showLabsRedesign={showLabsRedesign}
 									/>
 								</LabsSection>
 
@@ -576,6 +575,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								isAboveMobileAd={mobileAdPositions.includes(
 									index,
 								)}
+								isLabs={
+									collection.containerPalette === 'Branded'
+								}
+								showLabsRedesign={showLabsRedesign}
 							>
 								<DecideContainer
 									trails={trails}
@@ -600,9 +603,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
-									isInOpinionNoAvatarVariant={isInOpinionNoAvatarVariant(
-										collection.displayName,
-									)}
+									isInHideTrailsAbTest={
+										front.isNetworkFront &&
+										abTests.hideTrailsVariant === 'variant'
+									}
+									showLabsRedesign={showLabsRedesign}
 								/>
 							</FrontSection>
 
@@ -705,10 +710,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					/>
 				</Island>
 			</BannerWrapper>
-
-			<Island priority="feature" defer={{ until: 'idle' }}>
-				<FrontSectionTracker />
-			</Island>
 		</>
 	);
 };

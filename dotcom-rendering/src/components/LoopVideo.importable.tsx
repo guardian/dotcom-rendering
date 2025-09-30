@@ -11,15 +11,15 @@ import { getZIndex } from '../lib/getZIndex';
 import { generateImageURL } from '../lib/image';
 import { useIsInView } from '../lib/useIsInView';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
-import type { CustomPlayEventDetail } from '../lib/video';
+import type { CustomPlayEventDetail, Source } from '../lib/video';
 import {
 	customLoopPlayAudioEventName,
 	customYoutubePlayEventName,
 } from '../lib/video';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
-import type { PLAYER_STATES, PlayerStates } from './LoopVideoPlayer';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
+import type { PLAYER_STATES, PlayerStates } from './LoopVideoPlayer';
 import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
 const videoContainerStyles = css`
@@ -105,7 +105,7 @@ const doesVideoHaveAudio = (video: HTMLVideoElement): boolean => {
 };
 
 type Props = {
-	src: string;
+	sources: Source[];
 	atomId: string;
 	uniqueId: string;
 	height: number;
@@ -120,7 +120,7 @@ type Props = {
 };
 
 export const LoopVideo = ({
-	src,
+	sources,
 	atomId,
 	uniqueId,
 	height,
@@ -164,10 +164,11 @@ export const LoopVideo = ({
 	});
 
 	const playVideo = useCallback(async () => {
-		if (!vidRef.current) return;
+		const video = vidRef.current;
+		if (!video) return;
 
 		/** https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay#example_handling_play_failures */
-		const startPlayPromise = vidRef.current.play();
+		const startPlayPromise = video.play();
 
 		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- In earlier versions of the HTML specification, play() didn't return a value
 		if (startPlayPromise !== undefined) {
@@ -179,12 +180,12 @@ export const LoopVideo = ({
 				})
 				.catch((error: Error) => {
 					// Autoplay failed
-					logAndReportError(src, error);
+					logAndReportError(video.src, error);
 					setShowPosterImage(true);
 					setPlayerState('PAUSED_BY_BROWSER');
 				});
 		}
-	}, [src]);
+	}, []);
 
 	const pauseVideo = (
 		reason: Extract<
@@ -529,7 +530,9 @@ export const LoopVideo = ({
 	 * Sentry and log in the console.
 	 */
 	const onError = () => {
-		const message = `Loop video could not be played. source: ${src}`;
+		const message = `Loop video could not be played. source: ${
+			vidRef.current?.currentSrc ?? 'unknown'
+		}`;
 
 		window.guardian.modules.sentry.reportError(
 			new Error(message),
@@ -601,7 +604,7 @@ export const LoopVideo = ({
 			data-component="gu-video-loop"
 		>
 			<LoopVideoPlayer
-				src={src}
+				sources={sources}
 				atomId={atomId}
 				uniqueId={uniqueId}
 				width={width}

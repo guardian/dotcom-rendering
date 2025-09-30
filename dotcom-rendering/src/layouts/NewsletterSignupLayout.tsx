@@ -227,7 +227,7 @@ export const NewsletterSignupLayout = ({
 							padSides={false}
 							shouldCenter={false}
 						>
-							<HeaderAdSlot abTests={article.config.abTests} />
+							<HeaderAdSlot />
 						</Section>
 					</Stuck>
 				)}
@@ -245,6 +245,9 @@ export const NewsletterSignupLayout = ({
 					hasPageSkin={false}
 					hasPageSkinContentSelfConstrain={false}
 					pageId={article.pageId}
+					wholePictureLogoSwitch={
+						article.config.switches.wholePictureLogo
+					}
 				/>
 			</div>
 

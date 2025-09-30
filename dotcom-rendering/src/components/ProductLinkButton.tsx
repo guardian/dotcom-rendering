@@ -17,6 +17,7 @@ type ProductLinkButtonProps = {
 	size?: 'default' | 'small';
 	cssOverrides?: SerializedStyles;
 	priority?: ButtonPriority;
+	dataComponent?: string;
 };
 
 const linkButtonStyles = css`
@@ -44,6 +45,7 @@ export const ProductLinkButton = ({
 	size = 'default',
 	cssOverrides,
 	priority = 'primary',
+	dataComponent = 'in-body-product-link-button',
 }: ProductLinkButtonProps) => {
 	return (
 		<LinkButton
@@ -63,6 +65,7 @@ export const ProductLinkButton = ({
 				linkButtonStyles,
 				...(cssOverrides ? [cssOverrides] : []),
 			]}
+			data-component={dataComponent}
 		>
 			{label}
 		</LinkButton>

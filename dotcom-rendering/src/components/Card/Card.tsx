@@ -153,6 +153,9 @@ export type Props = {
 	showKickerImage?: boolean;
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
+	isInHideTrailsAbTest?: boolean;
+	/** Feature flag for the labs redesign work */
+	showLabsRedesign?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -390,6 +393,8 @@ export const Card = ({
 	trailTextSize,
 	showKickerImage = false,
 	headlinePosition = 'inner',
+	isInHideTrailsAbTest = false,
+	showLabsRedesign = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -761,6 +766,7 @@ export const Card = ({
 						byline={byline}
 						showByline={showByline}
 						isExternalLink={isExternalLink}
+						showLabsRedesign={showLabsRedesign}
 					/>
 					{!isUndefined(starRating) ? (
 						<StarRatingComponent
@@ -849,7 +855,7 @@ export const Card = ({
 								defer={{ until: 'visible' }}
 							>
 								<LoopVideo
-									src={media.mainMedia.videoId}
+									sources={media.mainMedia.sources}
 									atomId={media.mainMedia.atomId}
 									uniqueId={uniqueId}
 									height={media.mainMedia.height}
@@ -1080,6 +1086,7 @@ export const Card = ({
 											? media.podcastImage
 											: undefined
 									}
+									showLabsRedesign={showLabsRedesign}
 								/>
 								{!isUndefined(starRating) ? (
 									<StarRatingComponent
@@ -1090,14 +1097,16 @@ export const Card = ({
 							</HeadlineWrapper>
 						)}
 
-						{!!trailText && media?.type !== 'podcast' && (
-							<TrailText
-								trailText={trailText}
-								trailTextSize={trailTextSize}
-								padTop={headlinePosition === 'inner'}
-								hideUntil={hideTrailTextUntil()}
-							/>
-						)}
+						{!!trailText &&
+							media?.type !== 'podcast' &&
+							!isInHideTrailsAbTest && (
+								<TrailText
+									trailText={trailText}
+									trailTextSize={trailTextSize}
+									padTop={headlinePosition === 'inner'}
+									hideUntil={hideTrailTextUntil()}
+								/>
+							)}
 
 						{!isOpinionCardWithAvatar && (
 							<>
