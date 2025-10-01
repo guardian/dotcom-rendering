@@ -151,6 +151,8 @@ export type Props = {
 	trailTextSize?: TrailTextSize;
 	/** A kicker image is seperate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
+	isInAllBoostsTest?: boolean;
+	fixImageWidth?: boolean;
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
 	/** Feature flag for the labs redesign work */
@@ -391,6 +393,8 @@ export const Card = ({
 	showTopBarMobile = true,
 	trailTextSize,
 	showKickerImage = false,
+	fixImageWidth,
+	isInAllBoostsTest = false,
 	headlinePosition = 'inner',
 	showLabsRedesign = false,
 }: Props) => {
@@ -582,7 +586,7 @@ export const Card = ({
 	const mediaFixedSizeOptions = (): MediaFixedSizeOptions => {
 		if (isSmallCard) {
 			return {
-				mobile: 'tiny',
+				mobile: isInAllBoostsTest ? undefined : 'tiny',
 				tablet: 'small',
 				desktop: 'small',
 			};
@@ -805,6 +809,11 @@ export const Card = ({
 						mediaType={media.type}
 						mediaPositionOnDesktop={mediaPositionOnDesktop}
 						mediaPositionOnMobile={mediaPositionOnMobile}
+						fixImageWidth={
+							fixImageWidth ??
+							(mediaPositionOnMobile === 'left' ||
+								mediaPositionOnMobile === 'right')
+						}
 						hideImageOverlay={media.type === 'slideshow'}
 						padMedia={isMediaCardOrNewsletter && isBetaContainer}
 						isBetaContainer={isBetaContainer}
@@ -837,6 +846,7 @@ export const Card = ({
 								imagePositionOnMobile={mediaPositionOnMobile}
 								isBetaContainer={isBetaContainer}
 								isFlexibleContainer={isFlexibleContainer}
+								isInAllBoostsTest={isInAllBoostsTest}
 							>
 								<Avatar
 									src={media.avatarUrl}
@@ -844,6 +854,7 @@ export const Card = ({
 									imageSize={
 										isBetaContainer ? mediaSize : undefined
 									}
+									isInAllBoostsTest={isInAllBoostsTest}
 								/>
 							</AvatarContainer>
 						)}
@@ -964,6 +975,9 @@ export const Card = ({
 											loading={imageLoading}
 											roundedCorners={isOnwardContent}
 											aspectRatio={aspectRatio}
+											isInAllBoostsTest={
+												isInAllBoostsTest
+											}
 										/>
 									</div>
 								)}
@@ -978,6 +992,7 @@ export const Card = ({
 									loading={imageLoading}
 									roundedCorners={isOnwardContent}
 									aspectRatio={aspectRatio}
+									isInAllBoostsTest={isInAllBoostsTest}
 								/>
 								{isVideoMainMedia && mainMedia.duration > 0 && (
 									<div
@@ -1024,6 +1039,7 @@ export const Card = ({
 										alt={media.trailImage.altText}
 										loading={imageLoading}
 										aspectRatio={aspectRatio}
+										isInAllBoostsTest={isInAllBoostsTest}
 									/>
 								)}
 							</>
