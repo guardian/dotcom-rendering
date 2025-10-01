@@ -16,7 +16,6 @@ type Props = {
 	containerType: DCRContainerType;
 	aspectRatio: AspectRatio;
 	sectionId: string;
-	isInHideTrailsAbTest?: boolean;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 };
@@ -63,7 +62,6 @@ export const ScrollableSmall = ({
 	showAge,
 	aspectRatio,
 	sectionId,
-	isInHideTrailsAbTest,
 	showLabsRedesign,
 }: Props) => {
 	const mobileBottomCards = [1, 3];
@@ -108,7 +106,6 @@ export const ScrollableSmall = ({
 							)}
 							showTopBarMobile={mobileBottomCards.includes(index)}
 							canPlayInline={false}
-							isInHideTrailsAbTest={isInHideTrailsAbTest}
 							showLabsRedesign={showLabsRedesign}
 						/>
 					</ScrollableCarousel.Item>

@@ -105,7 +105,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			isPaidContent,
 			hasPageSkin: hasPageSkinConfig,
 			pageId,
-			abTests,
 			switches: { absoluteServerTimes = false },
 		},
 		editionId,
@@ -603,10 +602,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
-									isInHideTrailsAbTest={
-										front.isNetworkFront &&
-										abTests.hideTrailsVariant === 'variant'
-									}
 									showLabsRedesign={showLabsRedesign}
 								/>
 							</FrontSection>
