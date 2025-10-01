@@ -407,6 +407,7 @@ const headerSection = css`
 		flex-direction: column-reverse;
 		gap: ${space[6]}px;
 		padding-right: ${space[4]}px;
+		max-height: 528px;
 		max-width: 100%;
 	}
 `;

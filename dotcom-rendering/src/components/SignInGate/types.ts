@@ -98,9 +98,13 @@ export interface TreatmentContentDecoded {
 	second_cta_name?: string;
 }
 
+// The treatmentType is how Auxia tells the client which type of gate to display
+// The spelling of "dismissible" is inconsistent here, but this is because the treatments were set up this way in Auxia.
 export type AuxiaAPIResponseDataUserTreatmentType =
 	| 'DISMISSABLE_SIGN_IN_GATE'
-	| 'NONDISMISSIBLE_SIGN_IN_GATE';
+	| 'NONDISMISSIBLE_SIGN_IN_GATE'
+	| 'DISMISSABLE_SIGN_IN_GATE_POPUP'
+	| 'NONDISMISSIBLE_SIGN_IN_GATE_POPUP';
 
 export interface AuxiaAPIResponseDataUserTreatment {
 	treatmentId: string;

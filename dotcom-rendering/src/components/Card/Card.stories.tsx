@@ -483,6 +483,20 @@ export const WithDifferentImagePositions = () => {
 	);
 };
 
+WithDifferentImagePositions.story = {
+	parameters: {
+		viewport: { defaultViewport: 'desktop' },
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.tablet,
+				breakpoints.desktop,
+				breakpoints.wide,
+			],
+		},
+	},
+};
+
 export const WithDifferentImageSizes = () => {
 	return (
 		<>
@@ -1266,7 +1280,7 @@ export const WithBranding = () => {
 		>
 			<Section title={containerPalette ?? 'Standard'}>
 				<UL direction="row" padBottom={true}>
-					<LI percentage={'33.333%'} padSides={true}>
+					<LI percentage={'25%'} padSides={true}>
 						<Card
 							{...basicCardProps}
 							format={{
@@ -1284,7 +1298,7 @@ export const WithBranding = () => {
 							branding={branding}
 						/>
 					</LI>
-					<LI percentage={'33.333%'} padSides={true}>
+					<LI percentage={'25%'} padSides={true}>
 						<Card
 							{...basicCardProps}
 							format={{
@@ -1303,7 +1317,7 @@ export const WithBranding = () => {
 							branding={branding}
 						/>
 					</LI>
-					<LI percentage={'33.333%'} padSides={true}>
+					<LI percentage={'25%'} padSides={true}>
 						<Card
 							{...basicCardProps}
 							format={{
@@ -1319,6 +1333,25 @@ export const WithBranding = () => {
 							mediaSize="small"
 							containerPalette={containerPalette}
 							branding={branding}
+						/>
+					</LI>
+					<LI percentage={'25%'} padSides={true}>
+						<Card
+							{...basicCardProps}
+							format={{
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
+								theme: ArticleSpecial.Labs,
+							}}
+							headlineText="Redesigned Labs card"
+							kickerText="Kicker"
+							trailText=""
+							mediaPositionOnDesktop="top"
+							mediaPositionOnMobile="left"
+							mediaSize="small"
+							containerPalette={containerPalette}
+							branding={branding}
+							showLabsRedesign={true}
 						/>
 					</LI>
 				</UL>

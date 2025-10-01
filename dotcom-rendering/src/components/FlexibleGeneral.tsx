@@ -33,6 +33,8 @@ type Props = {
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
 	isInHideTrailsAbTest?: boolean;
+	/** Feature flag for the labs redesign work */
+	showLabsRedesign?: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -246,6 +248,8 @@ type SplashCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
 	isInHideTrailsAbTest?: boolean;
+	/** Feature flag for the labs redesign work */
+	showLabsRedesign?: boolean;
 };
 
 const SplashCardLayout = ({
@@ -259,6 +263,7 @@ const SplashCardLayout = ({
 	containerLevel,
 	collectionId,
 	isInHideTrailsAbTest,
+	showLabsRedesign,
 }: SplashCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -342,6 +347,7 @@ const SplashCardLayout = ({
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
 					isInHideTrailsAbTest={isInHideTrailsAbTest}
+					showLabsRedesign={showLabsRedesign}
 				/>
 			</LI>
 		</UL>
@@ -405,6 +411,8 @@ type FullWidthCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
 	isInHideTrailsAbTest?: boolean;
+	/** Feature flag for the labs redesign work */
+	showLabsRedesign?: boolean;
 };
 
 const FullWidthCardLayout = ({
@@ -419,6 +427,7 @@ const FullWidthCardLayout = ({
 	containerLevel,
 	collectionId,
 	isInHideTrailsAbTest,
+	showLabsRedesign,
 }: FullWidthCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -493,6 +502,7 @@ const FullWidthCardLayout = ({
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 					isInHideTrailsAbTest={isInHideTrailsAbTest}
+					showLabsRedesign={showLabsRedesign}
 				/>
 			</LI>
 		</UL>
@@ -511,6 +521,8 @@ type HalfWidthCardLayoutProps = {
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	isInHideTrailsAbTest?: boolean;
+	/** Feature flag for the labs redesign work */
+	showLabsRedesign?: boolean;
 };
 
 const HalfWidthCardLayout = ({
@@ -525,6 +537,7 @@ const HalfWidthCardLayout = ({
 	isLastRow,
 	containerLevel,
 	isInHideTrailsAbTest,
+	showLabsRedesign,
 }: HalfWidthCardLayoutProps) => {
 	if (cards.length === 0) return null;
 
@@ -579,6 +592,7 @@ const HalfWidthCardLayout = ({
 							headlineSizes={undefined}
 							canPlayInline={false}
 							isInHideTrailsAbTest={isInHideTrailsAbTest}
+							showLabsRedesign={showLabsRedesign}
 						/>
 					</LI>
 				);
@@ -597,6 +611,7 @@ export const FlexibleGeneral = ({
 	containerLevel = 'Primary',
 	collectionId,
 	isInHideTrailsAbTest,
+	showLabsRedesign,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
 		...snap,
@@ -645,6 +660,7 @@ export const FlexibleGeneral = ({
 								containerLevel={containerLevel}
 								collectionId={collectionId}
 								isInHideTrailsAbTest={isInHideTrailsAbTest}
+								showLabsRedesign={showLabsRedesign}
 							/>
 						);
 
@@ -665,6 +681,7 @@ export const FlexibleGeneral = ({
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
 								isInHideTrailsAbTest={isInHideTrailsAbTest}
+								showLabsRedesign={showLabsRedesign}
 							/>
 						);
 				}
