@@ -1,8 +1,8 @@
 import type { Meta } from '@storybook/react';
-import { SponsoredContentLabel } from './SponsoredContentLabel';
+import { FrontBranding } from './FrontBranding';
 
-const meta: Meta<typeof SponsoredContentLabel> = {
-	component: SponsoredContentLabel,
+const meta: Meta<typeof FrontBranding> = {
+	component: FrontBranding,
 	title: 'Components/SponsoredContentLabel',
 	parameters: {
 		layout: 'centered',

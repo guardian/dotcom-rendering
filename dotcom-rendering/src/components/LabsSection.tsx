@@ -194,10 +194,6 @@ const badgeStyles = css`
 
 	img {
 		height: auto;
-		width: 100px;
-		${from.phablet} {
-			width: 120px;
-		}
 	}
 `;
 

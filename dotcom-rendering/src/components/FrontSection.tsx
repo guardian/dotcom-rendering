@@ -16,13 +16,13 @@ import { isAustralianTerritory, type Territory } from '../types/territory';
 import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
 import { ContainerOverrides } from './ContainerOverrides';
 import { ContainerTitle } from './ContainerTitle';
+import { FrontBranding } from './FrontBranding';
 import { FrontPagination } from './FrontPagination';
 import { FrontSectionTitle } from './FrontSectionTitle';
 import { Island } from './Island';
 import { LabsSectionHeader } from './LabsSectionHeader';
 import { ShowHideButton } from './ShowHideButton';
 import { ShowMore } from './ShowMore.importable';
-import { SponsoredContentLabel } from './SponsoredContentLabel';
 import { Treats } from './Treats';
 
 type Props = {
@@ -830,7 +830,7 @@ export const FrontSection = ({
 						collectionBranding?.kind === 'paid-content' &&
 						!collectionBranding.hasMultipleBranding && (
 							<div css={sponsoredContentLabelWrapper}>
-								<SponsoredContentLabel
+								<FrontBranding
 									branding={collectionBranding.branding}
 									containerPalette={containerPalette}
 								/>

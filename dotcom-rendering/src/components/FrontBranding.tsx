@@ -51,7 +51,7 @@ const verticalStyles = {
 	`,
 };
 
-export const SponsoredContentLabel = ({
+export const FrontBranding = ({
 	branding,
 	alignment = 'start',
 	orientation = 'horizontal',

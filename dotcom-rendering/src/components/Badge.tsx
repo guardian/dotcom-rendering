@@ -1,15 +1,12 @@
 import { css } from '@emotion/react';
-import { space } from '@guardian/source/foundations';
 import type { Branding } from '../types/branding';
 import { useConfig } from './ConfigContext';
 
 const logoImageStyle = css`
 	max-height: 60px;
-	max-width: 120px;
-	margin-left: ${space[3]}px;
-	vertical-align: middle;
 	height: auto;
 	width: auto;
+	vertical-align: middle;
 `;
 
 const badgeLink = css`
