@@ -284,6 +284,17 @@ const decideImageWidths = ({
 					},
 				];
 		}
+	} else if (format.design === ArticleDesign.Gallery) {
+		return [
+			{ breakpoint: breakpoints.mobile, width: 375 },
+			{ breakpoint: breakpoints.mobileMedium, width: 480 },
+			{ breakpoint: breakpoints.mobileLandscape, width: 660 },
+			{ breakpoint: breakpoints.phablet, width: 700 },
+			{ breakpoint: breakpoints.tablet, width: 700 },
+			{ breakpoint: breakpoints.desktop, width: 740 },
+			{ breakpoint: breakpoints.leftCol, width: 940 },
+			{ breakpoint: breakpoints.wide, width: 1020 },
+		];
 	} else {
 		switch (role) {
 			case 'showcase':
