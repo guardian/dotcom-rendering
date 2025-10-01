@@ -210,7 +210,19 @@ const captionLink = css`
 	}
 `;
 
+const galleryCaptionHeadingReset = css`
+	h2 {
+		display: inline;
+		font-weight: bold;
+	}
+	h2::after {
+		content: '';
+		display: block;
+	}
+`;
+
 const galleryStyles = css`
+	${galleryCaptionHeadingReset}
 	${grid.column.centre};
 	${textSans14};
 
@@ -239,8 +251,7 @@ const CameraIcon = ({ format }: IconProps) => {
 		<span
 			css={[
 				iconStyle,
-				(format.display === ArticleDisplay.Immersive ||
-					format.design === ArticleDesign.Gallery) &&
+				format.display === ArticleDisplay.Immersive &&
 					hideIconBelowLeftCol,
 			]}
 		>

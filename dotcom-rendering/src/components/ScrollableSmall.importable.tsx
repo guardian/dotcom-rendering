@@ -17,6 +17,8 @@ type Props = {
 	aspectRatio: AspectRatio;
 	sectionId: string;
 	isInHideTrailsAbTest?: boolean;
+	/** Feature flag for the labs redesign work */
+	showLabsRedesign?: boolean;
 };
 
 /**
@@ -62,6 +64,7 @@ export const ScrollableSmall = ({
 	aspectRatio,
 	sectionId,
 	isInHideTrailsAbTest,
+	showLabsRedesign,
 }: Props) => {
 	const mobileBottomCards = [1, 3];
 	const desktopBottomCards = [2, 3];
@@ -106,6 +109,7 @@ export const ScrollableSmall = ({
 							showTopBarMobile={mobileBottomCards.includes(index)}
 							canPlayInline={false}
 							isInHideTrailsAbTest={isInHideTrailsAbTest}
+							showLabsRedesign={showLabsRedesign}
 						/>
 					</ScrollableCarousel.Item>
 				);

@@ -31,6 +31,7 @@ type Props = {
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
 	isInHideTrailsAbTest?: boolean;
+	showLabsRedesign?: boolean;
 };
 
 type BoostProperties = {
@@ -128,6 +129,7 @@ type OneCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	isSplashCard?: boolean;
 	isInHideTrailsAbTest?: boolean;
+	showLabsRedesign?: boolean;
 };
 
 export const OneCardLayout = ({
@@ -142,6 +144,7 @@ export const OneCardLayout = ({
 	containerLevel,
 	isSplashCard,
 	isInHideTrailsAbTest,
+	showLabsRedesign,
 }: OneCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -194,6 +197,7 @@ export const OneCardLayout = ({
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 					headlinePosition={isSplashCard ? 'outer' : 'inner'}
 					isInHideTrailsAbTest={isInHideTrailsAbTest}
+					showLabsRedesign={showLabsRedesign}
 				/>
 			</LI>
 		</UL>
@@ -222,6 +226,8 @@ type TwoOrFourCardLayoutProps = {
 	isFirstRow: boolean;
 	containerLevel: DCRContainerLevel;
 	isInHideTrailsAbTest?: boolean;
+	/** Feature flag for the labs redesign work */
+	showLabsRedesign?: boolean;
 };
 
 const TwoOrFourCardLayout = ({
@@ -235,6 +241,7 @@ const TwoOrFourCardLayout = ({
 	isFirstRow,
 	containerLevel,
 	isInHideTrailsAbTest,
+	showLabsRedesign,
 }: TwoOrFourCardLayoutProps) => {
 	if (cards.length === 0) return null;
 	const hasTwoOrFewerCards = cards.length <= 2;
@@ -276,6 +283,7 @@ const TwoOrFourCardLayout = ({
 							}
 							canPlayInline={false}
 							isInHideTrailsAbTest={isInHideTrailsAbTest}
+							showLabsRedesign={showLabsRedesign}
 						/>
 					</LI>
 				);
@@ -294,6 +302,7 @@ export const FlexibleSpecial = ({
 	containerLevel = 'Primary',
 	collectionId,
 	isInHideTrailsAbTest,
+	showLabsRedesign,
 }: Props) => {
 	const snaps = [...groupedTrails.snap].slice(0, 1).map((snap) => ({
 		...snap,
@@ -323,6 +332,7 @@ export const FlexibleSpecial = ({
 					containerLevel={containerLevel}
 					isSplashCard={false}
 					isInHideTrailsAbTest={isInHideTrailsAbTest}
+					showLabsRedesign={showLabsRedesign}
 				/>
 			)}
 			{isNonEmptyArray(splash) && (
@@ -351,6 +361,7 @@ export const FlexibleSpecial = ({
 				isFirstRow={!isNonEmptyArray(snaps) && !isNonEmptyArray(splash)}
 				containerLevel={containerLevel}
 				isInHideTrailsAbTest={isInHideTrailsAbTest}
+				showLabsRedesign={showLabsRedesign}
 			/>
 		</>
 	);
