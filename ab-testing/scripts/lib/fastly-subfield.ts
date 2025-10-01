@@ -1,14 +1,16 @@
 import { AUDIENCE_SPACES } from './constants.ts';
 import { FastlyTestParams } from './types.ts';
 
-const validateValue = (value: string | number): void => {
+const validateValue = (value: string | number, allowedColons: number): void => {
 	const stringValue = String(value);
 	if (stringValue.includes(',')) {
 		throw new Error(
 			`Value "${stringValue}" contains invalid character: comma (,)`,
 		);
 	}
-	if (stringValue.includes(':')) {
+
+	if (stringValue.split(':').length > allowedColons + 1) {
+		// ensure the value only contains one colon for subfield parsing
 		throw new Error(
 			`Value "${stringValue}" contains invalid character: colon (:)`,
 		);
@@ -24,7 +26,12 @@ const stringifyFastlySubfield = (
 ) =>
 	Object.entries(obj)
 		.map(([key, value]) => {
-			validateValue(value);
+			// type and expiry keys are not allowed any colons
+			// where as value keys can have one colon (e.g. commercial-server-side-test:control)
+			validateValue(
+				value,
+				key.includes(':type') || key.includes(':exp') ? 0 : 1,
+			);
 			return `${key}=${value}`;
 		})
 		.join(',');
@@ -72,7 +79,6 @@ const stringifyMVTValue = (array: FastlyTestParams[]): string => {
 		subfield[`group:${index}:type`] = item.type;
 		subfield[`group:${index}:exp`] = String(item.exp);
 	});
-	console.log('subfield to be stringified', subfield);
 	return stringifyFastlySubfield(subfield);
 };
 

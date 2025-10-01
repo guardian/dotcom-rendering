@@ -3,6 +3,11 @@ import { AUDIENCE_SPACES, MVT_COUNT } from '../lib/constants.ts';
 import { AllSpace, AudienceSpace, FastlyTestParams } from '../lib/types.ts';
 import { TestGroupMVTManager } from './test-group-mvt-manager.ts';
 
+const getTestGroupName = (
+	test: Pick<ABTest, 'name'> & { group?: string },
+	group?: string,
+) => `${test.name}:${group ?? test.group}`;
+
 export const calculateSpaceUpdates = (
 	audienceSpace: AudienceSpace,
 	tests: ABTest[],
@@ -12,7 +17,7 @@ export const calculateSpaceUpdates = (
 	const updateTestGroups = new Map(
 		tests.flatMap((test) =>
 			test.groups.map((group) => [
-				`${test.name}:${group}`,
+				getTestGroupName(test, group),
 				{
 					name: test.name,
 					type: test.type,
@@ -34,19 +39,17 @@ export const calculateSpaceUpdates = (
 
 	// Add or update tests
 	updateTestGroups.forEach((test) => {
-		const currentTest = testGroupMVTs.getTestGroup(
-			`${test.name}:${test.group}`,
-		);
+		const currentTest = testGroupMVTs.getTestGroup(getTestGroupName(test));
 		if (!currentTest) {
 			console.log(`Adding new test group: ${test.name}:${test.group}`);
 			testGroupMVTs.addTestGroup(
-				`${test.name}:${test.group}`,
+				getTestGroupName(test),
 				test.audienceSize * MVT_COUNT,
 			);
 		} else {
 			console.log(`Resizing test group: ${test.name}:${test.group}`);
 			testGroupMVTs.resizeTestGroup(
-				`${test.name}:${test.group}`,
+				getTestGroupName(test),
 				test.audienceSize * MVT_COUNT,
 			);
 		}
@@ -62,7 +65,7 @@ export const calculateSpaceUpdates = (
 				return [
 					`mvt:${mvt}`,
 					{
-						name: `${test.name}:${test.group}`,
+						name: getTestGroupName(test),
 						type: test.type,
 						exp: Math.floor(
 							new Date(test.expirationDate).getTime() / 1000,

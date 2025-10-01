@@ -54,25 +54,14 @@ Deno.test('stringifyFastlySubfield', async (t) => {
 		);
 	});
 
-	await t.step('should throw error for values containing colons', () => {
-		const obj = { invalid: 'http://example.com' };
-		assertThrows(
-			() => stringifyFastlySubfield(obj),
-			Error,
-			'Value "http://example.com" contains invalid character: colon (:)',
-		);
-	});
-
 	await t.step(
-		'should throw error for numeric values containing invalid characters when converted to string',
+		'should throw error for values containing more than one colon',
 		() => {
-			// This is a contrived example since normal numbers won't contain these characters
-			// but testing the validation logic
-			const obj = { key: '123:456' };
+			const obj = { invalid: 'http://example.com:control' };
 			assertThrows(
 				() => stringifyFastlySubfield(obj),
 				Error,
-				'Value "123:456" contains invalid character: colon (:)',
+				'Value "http://example.com:control" contains invalid character: colon (:)',
 			);
 		},
 	);
