@@ -485,30 +485,18 @@ const carouselNavigationPlaceholder = css`
 	}
 `;
 
-const labsSectionStyles = css`
+const labsSectionHeaderStyles = css`
 	grid-row: headline;
 	grid-column: title;
 	margin-top: ${space[2]}px;
 	${from.leftCol} {
-		/* Extend the background from content area to bottom-content area to align with logo */
-		grid-row: content / bottom-content-end;
+		grid-row: content;
 		grid-column: title;
 	}
 `;
 
-const labsSectionPaddingBottom = css`
-	${from.leftCol} {
-		${bottomPadding}
-	}
-`;
-
 const sponsoredContentLabelWrapper = css`
-	margin-top: ${space[4]}px;
-
-	${from.leftCol} {
-		margin-top: ${space[9]}px;
-		padding-right: 10px;
-	}
+	grid-row: bottom-content;
 `;
 
 /**
@@ -698,17 +686,7 @@ export const FrontSection = ({
 				/>
 
 				{isLabs && showLabsRedesign ? (
-					<div
-						css={[
-							labsSectionStyles,
-							isBetaContainer
-								? bottomPaddingBetaContainer(
-										useLargeSpacingMobile,
-										useLargeSpacingDesktop,
-								  )
-								: labsSectionPaddingBottom,
-						]}
-					>
+					<div css={labsSectionHeaderStyles}>
 						<LabsSectionHeader title={title} />
 					</div>
 				) : (
