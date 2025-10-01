@@ -103,6 +103,7 @@ export const FrontSectionTitle = ({
 				collectionBranding.branding,
 				containerPalette,
 			);
+
 			if (isFrontBranding || isContainerBranding) {
 				return (
 					<>
@@ -126,7 +127,13 @@ export const FrontSectionTitle = ({
 								/>
 							</Hide>
 							{title}
-							<a href={aboutThisLink} css={aboutThisLinkStyles}>
+							<a
+								href={
+									// Sanitise URL before use as href attribute
+									new URL(aboutThisLink).href
+								}
+								css={aboutThisLinkStyles}
+							>
 								About this content
 							</a>
 						</div>

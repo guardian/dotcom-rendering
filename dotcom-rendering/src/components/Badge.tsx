@@ -3,41 +3,6 @@ import { space } from '@guardian/source/foundations';
 import type { Branding } from '../types/branding';
 import { useConfig } from './ConfigContext';
 
-// const frontsSectionBadgeSizingStyles = css`
-// 	height: auto;
-// 	width: 120px;
-
-// 	${from.tablet} {
-// 		width: 140px;
-// 	}
-
-// 	${from.leftCol} {
-// 		width: 200px;
-// 	}
-// `;
-
-// const labsSectionBadgeSizingStyles = css`
-// 	height: auto;
-// 	width: 100px;
-
-// 	${from.phablet} {
-// 		width: 120px;
-// 	}
-// `;
-
-// const imageAdvertisingPartnerStyles = css`
-// 	${between.leftCol.and.wide} {
-// 		max-width: 130px;
-// 	}
-// `;
-
-// const imageStyles = css`
-// 	display: block;
-// 	width: auto;
-// 	max-width: 100%;
-// 	object-fit: contain;
-// `;
-
 const logoImageStyle = css`
 	max-height: 60px;
 	max-width: 120px;
@@ -68,9 +33,12 @@ export const Badge = ({
 }: Props) => {
 	const { darkModeAvailable } = useConfig();
 
+	// Sanitise URL for use as href attribute
+	const href = new URL(logo.link).href;
+
 	return (
 		<a
-			href={logo.link}
+			href={href}
 			data-sponsor={sponsorName.toLowerCase()}
 			rel="nofollow"
 			aria-label={`Visit the ${sponsorName} website`}
@@ -88,17 +56,6 @@ export const Badge = ({
 						media={'(prefers-color-scheme: dark)'}
 					/>
 				)}
-				{/* <img
-					css={[
-						imageStyles,
-						isInLabsSection
-							? labsSectionBadgeSizingStyles
-							: frontsSectionBadgeSizingStyles,
-						isAdvertisingPartner && imageAdvertisingPartnerStyles,
-					]}
-					src={imageSrc}
-					alt={isInLabsSection ? 'Labs sponsor logo' : ''}
-				/>\ */}
 				<img
 					css={logoImageStyle}
 					src={logo.src}
