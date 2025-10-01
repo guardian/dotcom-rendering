@@ -1,7 +1,7 @@
 import type { DCRContainerPalette } from '../types/front';
-import { containerPaletteHasDarkBackground } from './cardHelpers';
+import { hasDarkBackground } from './cardHelpers';
 
-describe('cardHasDarkBackground', () => {
+describe('hasDarkBackground', () => {
 	const testCases = [
 		{
 			containerPalette: undefined,
@@ -35,9 +35,7 @@ describe('cardHasDarkBackground', () => {
 	it.each(testCases)(
 		'returns $expectedResult for $format format, $containerPalette containerPalette',
 		({ containerPalette, expectedResult }) => {
-			expect(containerPaletteHasDarkBackground(containerPalette)).toBe(
-				expectedResult,
-			);
+			expect(hasDarkBackground(containerPalette)).toBe(expectedResult);
 		},
 	);
 });

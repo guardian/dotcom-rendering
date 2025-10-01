@@ -14,7 +14,14 @@ export const isMediaCard = (format: ArticleFormat): boolean => {
 	}
 };
 
-export const containerPaletteHasDarkBackground = (
+/**
+ * Determines whether the application of a container palette override
+ * results in a dark background for the container and cards inside it
+ *
+ * This is primarily used to decide whether to force usage of the logo
+ * for dark mode when it would otherwise be configured as light mode
+ */
+export const hasDarkBackground = (
 	containerPalette?: DCRContainerPalette,
 ): boolean => {
 	switch (containerPalette) {
