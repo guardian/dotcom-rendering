@@ -11,10 +11,28 @@ const meta: Meta<typeof SponsoredContentLabel> = {
 		},
 	},
 	args: {
-		href: '#',
-		imageSrc:
-			'https://static.theguardian.com/commercial/sponsor/22/Aug/2025/52dc0276-c2d9-405c-a686-2577c12914d4-ecover_pos_280.png',
-		ophanComponentName: 'example',
+		branding: {
+			logo: {
+				src: 'https://static.theguardian.com/commercial/sponsor/22/Aug/2025/52dc0276-c2d9-405c-a686-2577c12914d4-ecover_pos_280.png',
+				link: '#',
+				label: 'Paid for',
+				dimensions: {
+					width: 120,
+					height: 60,
+				},
+			},
+			logoForDarkBackground: {
+				src: 'https://static.theguardian.com/commercial/sponsor/22/Aug/2025/52dc0276-c2d9-405c-a686-2577c12914d4-ecover_pos_280.png',
+				link: '#',
+				label: 'Paid for',
+				dimensions: {
+					width: 120,
+					height: 60,
+				},
+			},
+			sponsorName: 'Guardian Org',
+			aboutThisLink: '',
+		},
 	},
 };
 

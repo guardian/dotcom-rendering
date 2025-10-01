@@ -14,7 +14,7 @@ export const isMediaCard = (format: ArticleFormat): boolean => {
 	}
 };
 
-export const cardHasDarkBackground = (
+export const containerPaletteHasDarkBackground = (
 	containerPalette?: DCRContainerPalette,
 ): boolean => {
 	switch (containerPalette) {

@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	between,
 	from,
 	palette as sourcePalette,
 	textSans12,
@@ -7,13 +8,16 @@ import {
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { assertUnreachable } from '../lib/assert-unreachable';
+import { decideBrandingLogo } from '../lib/decideLogo';
 import { palette } from '../palette';
 import type { CollectionBranding } from '../types/branding';
+import type { DCRContainerPalette } from '../types/front';
 import { Badge } from './Badge';
 
 type Props = {
 	title: React.ReactNode;
 	collectionBranding: CollectionBranding | undefined;
+	containerPalette?: DCRContainerPalette;
 };
 
 const titleStyle = css`
@@ -46,6 +50,12 @@ const brandingAdvertisingPartnerStyle = css`
 		padding: 8px;
 		width: auto;
 	}
+
+	img {
+		${between.leftCol.and.wide} {
+			max-width: 130px;
+		}
+	}
 `;
 
 const labelAdvertisingPartnerStyles = css`
@@ -77,28 +87,46 @@ const aboutThisLinkAdvertisingPartnerStyles = css`
 	color: ${sourcePalette.news[400]};
 `;
 
-export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
+export const FrontSectionTitle = ({
+	title,
+	collectionBranding,
+	containerPalette,
+}: Props) => {
 	switch (collectionBranding?.kind) {
 		case 'foundation': {
 			const {
-				branding: { logo, aboutThisLink },
+				branding: { logoForDarkBackground, sponsorName, aboutThisLink },
 				isFrontBranding,
 				isContainerBranding,
 			} = collectionBranding;
+			const logo = decideBrandingLogo(
+				collectionBranding.branding,
+				containerPalette,
+			);
 			if (isFrontBranding || isContainerBranding) {
 				return (
 					<>
 						<Hide until="leftCol">
-							<p css={[labelStyles]}>{logo.label}</p>
-							<Badge imageSrc={logo.src} href={logo.link} />
+							<p css={labelStyles}>{logo.label}</p>
+							<Badge
+								logo={logo}
+								logoForDarkBackground={logoForDarkBackground}
+								sponsorName={sponsorName}
+							/>
 						</Hide>
 						<div css={titleStyle}>
 							<Hide from="leftCol">
-								<p css={[labelStyles]}>{logo.label}</p>
-								<Badge imageSrc={logo.src} href={logo.link} />
+								<p css={labelStyles}>{logo.label}</p>
+								<Badge
+									logo={logo}
+									logoForDarkBackground={
+										logoForDarkBackground
+									}
+									sponsorName={sponsorName}
+								/>
 							</Hide>
 							{title}
-							<a href={aboutThisLink} css={[aboutThisLinkStyles]}>
+							<a href={aboutThisLink} css={aboutThisLinkStyles}>
 								About this content
 							</a>
 						</div>
@@ -110,10 +138,14 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 		}
 		case 'paid-content': {
 			const {
+				branding: { logoForDarkBackground, sponsorName },
 				isFrontBranding,
 				isContainerBranding,
-				branding: { logo },
 			} = collectionBranding;
+			const logo = decideBrandingLogo(
+				collectionBranding.branding,
+				containerPalette,
+			);
 
 			if (isFrontBranding || isContainerBranding) {
 				return (
@@ -134,7 +166,11 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 							`}
 						>
 							Paid for by
-							<Badge imageSrc={logo.src} href={logo.link} />
+							<Badge
+								logo={logo}
+								logoForDarkBackground={logoForDarkBackground}
+								sponsorName={sponsorName}
+							/>
 						</div>
 					</div>
 				);
@@ -143,11 +179,19 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 			return (
 				<>
 					<Hide until="leftCol">
-						<Badge imageSrc={logo.src} href={logo.link} />
+						<Badge
+							logo={logo}
+							logoForDarkBackground={logoForDarkBackground}
+							sponsorName={sponsorName}
+						/>
 					</Hide>
 					<div css={titleStyle}>
 						<Hide from="leftCol">
-							<Badge imageSrc={logo.src} href={logo.link} />
+							<Badge
+								logo={logo}
+								logoForDarkBackground={logoForDarkBackground}
+								sponsorName={sponsorName}
+							/>
 						</Hide>
 						{title}
 					</div>
@@ -156,13 +200,18 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 		}
 		case 'sponsored': {
 			const {
-				branding: { logo, aboutThisLink },
-				isContainerBranding,
+				branding: { logoForDarkBackground, sponsorName, aboutThisLink },
 				isFrontBranding,
+				isContainerBranding,
 			} = collectionBranding;
+			const logo = decideBrandingLogo(
+				collectionBranding.branding,
+				containerPalette,
+			);
 			const isAdvertisingPartnerOrExclusive =
 				logo.label.toLowerCase() === 'advertising partner' ||
 				logo.label.toLowerCase() === 'exclusive advertising partner';
+
 			if (isFrontBranding || isContainerBranding) {
 				return (
 					<div css={titleStyle}>
@@ -186,11 +235,9 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 								{logo.label}
 							</p>
 							<Badge
-								imageSrc={logo.src}
-								href={logo.link}
-								isAdvertisingPartner={
-									isAdvertisingPartnerOrExclusive
-								}
+								logo={logo}
+								logoForDarkBackground={logoForDarkBackground}
+								sponsorName={sponsorName}
 							/>
 							<a
 								href={aboutThisLink}

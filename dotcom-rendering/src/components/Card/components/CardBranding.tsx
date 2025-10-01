@@ -4,29 +4,20 @@ import {
 	textSans12,
 	visuallyHidden,
 } from '@guardian/source/foundations';
-import { useConfig } from '../../../components/ConfigContext';
-import { decideCardLogo } from '../../../lib/decideLogo';
+import { decideBrandingLogo } from '../../../lib/decideLogo';
 import { getZIndex } from '../../../lib/getZIndex';
 import { getOphanComponents } from '../../../lib/labs';
 import { palette as themePalette } from '../../../palette';
 import type { Branding } from '../../../types/branding';
 import type { DCRContainerPalette } from '../../../types/front';
 import type { OnwardsSource } from '../../../types/onwards';
+import { Badge } from '../../Badge';
 
 type Props = {
 	branding: Branding;
 	onwardsSource: OnwardsSource | undefined;
 	containerPalette?: DCRContainerPalette;
 };
-
-const logoImageStyle = css`
-	max-height: 60px;
-	max-width: 120px;
-	margin-left: ${space[3]}px;
-	vertical-align: middle;
-	height: auto;
-	width: auto;
-`;
 
 const brandingWrapperStyle = css`
 	padding-right: ${space[2]}px;
@@ -48,20 +39,14 @@ export const CardBranding = ({
 	onwardsSource,
 	containerPalette,
 }: Props) => {
-	const logo = decideCardLogo(branding, containerPalette);
-
-	const { darkModeAvailable } = useConfig();
-
-	/**
-	 * Only apply click tracking to branding on related content
-	 */
-	const dataAttributes =
-		onwardsSource === 'related-content'
-			? getOphanComponents({
-					branding,
-					locationPrefix: 'article-related-content',
-			  })
-			: undefined;
+	const logo = decideBrandingLogo(branding, containerPalette);
+	const dataAttributes = getOphanComponents({
+		branding,
+		locationPrefix:
+			onwardsSource === 'related-content'
+				? 'article-related-content'
+				: 'front-card',
+	});
 
 	return (
 		<div css={brandingWrapperStyle}>
@@ -75,39 +60,13 @@ export const CardBranding = ({
 					? `This content was paid for by ${branding.sponsorName} and produced by the Guardian Labs team.`
 					: 'This content has been paid for by an advertiser and produced by the Guardian Labs team.'}
 			</span>
-			<a
-				href={logo.link}
-				data-sponsor={branding.sponsorName.toLowerCase()}
-				rel="nofollow"
-				aria-label={`Visit the ${branding.sponsorName} website`}
-				data-testid="card-branding-logo"
-				data-component={dataAttributes?.ophanComponentName}
-				data-link-name={dataAttributes?.ophanComponentLink}
-			>
-				<picture>
-					{darkModeAvailable && branding.logoForDarkBackground && (
-						<source
-							width={
-								branding.logoForDarkBackground.dimensions.width
-							}
-							height={
-								branding.logoForDarkBackground.dimensions.height
-							}
-							srcSet={encodeURI(
-								branding.logoForDarkBackground.src,
-							)}
-							media={'(prefers-color-scheme: dark)'}
-						/>
-					)}
-					<img
-						css={logoImageStyle}
-						src={logo.src}
-						alt={branding.sponsorName}
-						width={logo.dimensions.width}
-						height={logo.dimensions.height}
-					/>
-				</picture>
-			</a>
+			<Badge
+				logo={logo}
+				logoForDarkBackground={branding.logoForDarkBackground}
+				sponsorName={branding.sponsorName}
+				ophanComponentLink={dataAttributes.ophanComponentLink}
+				ophanComponentName={dataAttributes.ophanComponentName}
+			/>
 		</div>
 	);
 };

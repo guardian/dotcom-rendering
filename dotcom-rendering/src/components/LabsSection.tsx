@@ -9,6 +9,7 @@ import {
 	textSansBold14,
 	textSansBold20,
 	until,
+	visuallyHidden,
 } from '@guardian/source/foundations';
 import {
 	Link,
@@ -19,7 +20,7 @@ import type { EditionId } from '../lib/edition';
 import { getLabsUrlSuffix } from '../lib/labs';
 import { palette } from '../palette';
 import LabsLogo from '../static/logos/the-guardian-labs.svg';
-import type { DCRBadgeType } from '../types/badge';
+import type { Branding } from '../types/branding';
 import { Badge } from './Badge';
 import { Details } from './Details';
 import { Island } from './Island';
@@ -60,7 +61,7 @@ type Props = {
 	url?: string;
 
 	/** A sponsor badge can be displayed under the content cards */
-	badge?: DCRBadgeType;
+	branding?: Branding;
 
 	/** Usually the content cards that will be displayed inside the container */
 	children?: React.ReactNode;
@@ -190,6 +191,14 @@ const badgeStyles = css`
 	flex-direction: column;
 	align-items: end;
 	padding: ${space[2]}px 10px;
+
+	img {
+		height: auto;
+		width: 100px;
+		${from.phablet} {
+			width: 120px;
+		}
+	}
 `;
 
 const paidForByStyles = css`
@@ -371,7 +380,7 @@ export const LabsSection = ({
 	containerName,
 	canShowMore,
 	url,
-	badge,
+	branding,
 	children,
 	hasPageSkin = false,
 	discussionApiUrl,
@@ -439,15 +448,26 @@ export const LabsSection = ({
 							/>
 						</Island>
 					)}
-					{badge && (
+					{branding && (
 						<div css={badgeStyles}>
 							<div css={paidForByStyles}>Paid for by</div>
+							<span
+								css={css`
+									${visuallyHidden};
+								`}
+							>
+								{branding.sponsorName
+									? `This content was paid for by ${branding.sponsorName} and produced by the Guardian Labs team.`
+									: 'This content has been paid for by an advertiser and produced by the Guardian Labs team.'}
+							</span>
 							<Badge
-								imageSrc={badge.imageSrc}
-								href={badge.href}
+								logo={branding.logo}
+								logoForDarkBackground={
+									branding.logoForDarkBackground
+								}
+								sponsorName={branding.sponsorName}
 								ophanComponentLink={`labs-logo | ${ophanComponentName}`}
 								ophanComponentName={`labs-logo-${ophanComponentName}`}
-								isInLabsSection={true}
 							/>
 						</div>
 					)}

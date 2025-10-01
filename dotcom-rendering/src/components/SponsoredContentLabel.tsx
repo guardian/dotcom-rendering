@@ -1,16 +1,24 @@
 import { css } from '@emotion/react';
-import { space, textSansBold12 } from '@guardian/source/foundations';
+import {
+	space,
+	textSansBold12,
+	visuallyHidden,
+} from '@guardian/source/foundations';
+import { decideBrandingLogo } from '../lib/decideLogo';
+import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
-import type { DCRBadgeType } from '../types/badge';
+import type { Branding } from '../types/branding';
+import type { DCRContainerPalette } from '../types/front';
 import { Badge } from './Badge';
 
-type SponsoredContentLabelProps = DCRBadgeType & {
+type SponsoredContentLabelProps = {
+	branding: Branding;
 	alignment?: 'start' | 'end';
-	ophanComponentName?: string;
 	orientation?: 'horizontal' | 'vertical';
+	containerPalette?: DCRContainerPalette;
 };
 
-const paidForByStyles = css`
+const labelStyles = css`
 	${textSansBold12};
 	color: ${palette('--labs-header-label-text')};
 	margin-top: ${space[3]}px;
@@ -18,9 +26,15 @@ const paidForByStyles = css`
 `;
 
 const wrapperStyles = css`
+	padding-right: ${space[2]}px;
+	padding-bottom: ${space[2]}px;
 	display: flex;
+	flex: auto;
 	gap: ${space[2]}px;
 	justify-content: end;
+	/* See: https://css-tricks.com/nested-links/ */
+	z-index: ${getZIndex('card-nested-link')};
+	/* position: relative; */
 `;
 
 const horizontalStyles = css`
@@ -38,12 +52,13 @@ const verticalStyles = {
 };
 
 export const SponsoredContentLabel = ({
+	branding,
 	alignment = 'start',
-	imageSrc,
-	href,
-	ophanComponentName,
 	orientation = 'horizontal',
+	containerPalette,
 }: SponsoredContentLabelProps) => {
+	const logo = decideBrandingLogo(branding, containerPalette);
+
 	return (
 		<div
 			css={[
@@ -53,13 +68,20 @@ export const SponsoredContentLabel = ({
 					: horizontalStyles,
 			]}
 		>
-			<div css={paidForByStyles}>Paid for by</div>
+			<div css={labelStyles}>{logo.label}</div>
+			<span
+				css={css`
+					${visuallyHidden};
+				`}
+			>
+				{branding.sponsorName
+					? `This content was paid for by ${branding.sponsorName} and produced by the Guardian Labs team.`
+					: 'This content has been paid for by an advertiser and produced by the Guardian Labs team.'}
+			</span>
 			<Badge
-				href={href}
-				imageSrc={imageSrc}
-				isInLabsSection={true}
-				ophanComponentLink={`labs-logo | ${ophanComponentName}`}
-				ophanComponentName={`labs-logo-${ophanComponentName}`}
+				logo={logo}
+				logoForDarkBackground={branding.logoForDarkBackground}
+				sponsorName={branding.sponsorName}
 			/>
 		</div>
 	);

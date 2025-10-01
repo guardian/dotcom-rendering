@@ -30,7 +30,6 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { ArticleDisplay } from '../lib/articleFormat';
-import { badgeFromBranding } from '../lib/branding';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { editionList } from '../lib/edition';
@@ -445,9 +444,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									containerName={collection.collectionType}
 									canShowMore={collection.canShowMore}
 									url={collection.href}
-									badge={badgeFromBranding(
-										collection.collectionBranding,
-									)}
+									branding={
+										collection.collectionBranding?.branding
+									}
 									data-print-layout="hide"
 									hasPageSkin={hasPageSkin}
 									discussionApiUrl={

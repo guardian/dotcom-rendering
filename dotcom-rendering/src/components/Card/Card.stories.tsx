@@ -1433,10 +1433,18 @@ export const WithSpecialPaletteVariations = () => {
 						ophanComponentName=""
 						pageId=""
 						sectionId=""
-						badge={{
-							imageSrc:
-								'https://static.theguardian.com/commercial/sponsor/22/Feb/2024/17ea91fc-659b-4c51-8410-9907241c1710-Guardian.orglogos-for%20badge.png',
-							href: 'https://theguardian.org',
+						branding={{
+							logo: {
+								src: 'https://static.theguardian.com/commercial/sponsor/22/Feb/2024/17ea91fc-659b-4c51-8410-9907241c1710-Guardian.orglogos-for%20badge.png',
+								link: 'https://theguardian.org',
+								label: 'Paid for',
+								dimensions: {
+									width: 120,
+									height: 60,
+								},
+							},
+							sponsorName: 'Guardian Org',
+							aboutThisLink: '',
 						}}
 					>
 						<Cards
@@ -1541,10 +1549,18 @@ export const DynamoWithSpecialPaletteVariations = () => {
 						ophanComponentName=""
 						pageId=""
 						sectionId=""
-						badge={{
-							imageSrc:
-								'https://static.theguardian.com/commercial/sponsor/22/Feb/2024/17ea91fc-659b-4c51-8410-9907241c1710-Guardian.orglogos-for%20badge.png',
-							href: 'https://theguardian.org',
+						branding={{
+							logo: {
+								src: 'https://static.theguardian.com/commercial/sponsor/22/Feb/2024/17ea91fc-659b-4c51-8410-9907241c1710-Guardian.orglogos-for%20badge.png',
+								link: 'https://theguardian.org',
+								label: 'Paid for',
+								dimensions: {
+									width: 120,
+									height: 60,
+								},
+							},
+							sponsorName: 'Guardian Org',
+							aboutThisLink: '',
 						}}
 					>
 						<DynamoCard

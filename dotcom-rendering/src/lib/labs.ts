@@ -9,7 +9,11 @@ export const getOphanComponents = ({
 	/**
 	 * Allows clicks to be attributed to different areas of content
 	 */
-	locationPrefix: 'article-meta' | 'article-related-content';
+	locationPrefix:
+		| 'article-meta'
+		| 'article-related-content'
+		| 'front-card'
+		| 'front-section';
 }): { ophanComponentName: string; ophanComponentLink: string } => {
 	const formattedSponsorName = branding.sponsorName
 		.toLowerCase()

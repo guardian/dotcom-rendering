@@ -79,10 +79,19 @@ export const WithBadgeStory = () => {
 			pageId={''}
 			ophanComponentName={''}
 			ophanComponentLink={''}
-			badge={{
-				imageSrc:
-					'https://static.theguardian.com/commercial/sponsor/17/Apr/2023/6c577c8c-b60f-4041-baa3-f4852219d3ff-OS_logo_strapline_colour_rgb_280.png',
-				href: 'https://www.theguardian.com/guardian-labs',
+			branding={{
+				logo: {
+					src: 'https://static.theguardian.com/commercial/sponsor/17/Apr/2023/6c577c8c-b60f-4041-baa3-f4852219d3ff-OS_logo_strapline_colour_rgb_280.png',
+					link: 'https://www.theguardian.com/guardian-labs',
+					label: 'Paid for',
+					dimensions: {
+						width: 120,
+						height: 60,
+					},
+				},
+
+				sponsorName: 'Guardian Org',
+				aboutThisLink: '',
 			}}
 			discussionApiUrl={discussionApiUrl}
 			editionId={'UK'}
@@ -112,10 +121,19 @@ export const InContext = () => {
 				pageId={''}
 				ophanComponentName={''}
 				ophanComponentLink={''}
-				badge={{
-					imageSrc:
-						'https://static.theguardian.com/commercial/sponsor/17/Apr/2023/6c577c8c-b60f-4041-baa3-f4852219d3ff-OS_logo_strapline_colour_rgb_280.png',
-					href: 'https://www.theguardian.com/guardian-labs',
+				branding={{
+					logo: {
+						src: 'https://static.theguardian.com/commercial/sponsor/17/Apr/2023/6c577c8c-b60f-4041-baa3-f4852219d3ff-OS_logo_strapline_colour_rgb_280.png',
+						link: 'https://www.theguardian.com/guardian-labs',
+						label: 'Paid for',
+						dimensions: {
+							width: 120,
+							height: 60,
+						},
+					},
+
+					sponsorName: 'Guardian Org',
+					aboutThisLink: '',
 				}}
 				discussionApiUrl={discussionApiUrl}
 				editionId={'UK'}

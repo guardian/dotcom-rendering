@@ -1,12 +1,10 @@
 import { isUndefined } from '@guardian/libs';
-import type { DCRBadgeType } from '../types/badge';
 import type {
 	Branding,
 	BrandingType,
 	CollectionBranding,
 	EditionBranding,
 } from '../types/branding';
-import { assertUnreachable } from './assert-unreachable';
 import type { EditionId } from './edition';
 import type { NonEmptyArray } from './tuple';
 import { isNonEmptyArray } from './tuple';
@@ -100,35 +98,6 @@ export const isPaidContentSameBranding = (
 ): boolean =>
 	collectionBranding?.kind === 'paid-content' &&
 	!collectionBranding.hasMultipleBranding;
-
-export const badgeFromBranding = (
-	collectionBranding: CollectionBranding | undefined,
-): DCRBadgeType | undefined => {
-	switch (collectionBranding?.kind) {
-		case 'paid-content': {
-			if (collectionBranding.hasMultipleBranding) return undefined;
-			const { logo } = collectionBranding.branding;
-			return {
-				imageSrc: logo.src,
-				href: logo.link,
-			};
-		}
-		case 'sponsored':
-		case 'foundation': {
-			const { logo } = collectionBranding.branding;
-			return {
-				imageSrc: logo.src,
-				href: logo.link,
-			};
-		}
-		case undefined: {
-			return undefined;
-		}
-		default: {
-			return assertUnreachable(collectionBranding);
-		}
-	}
-};
 
 export const decideCollectionBranding = ({
 	frontBranding,

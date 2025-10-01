@@ -1,12 +1,12 @@
 import type { Branding } from '../types/branding';
 import type { DCRContainerPalette } from '../types/front';
-import { cardHasDarkBackground } from './cardHelpers';
+import { containerPaletteHasDarkBackground } from './cardHelpers';
 
-export const decideCardLogo = (
+export const decideBrandingLogo = (
 	branding: Branding,
 	containerPalette?: DCRContainerPalette,
 ): Branding['logo'] => {
-	return cardHasDarkBackground(containerPalette) &&
+	return containerPaletteHasDarkBackground(containerPalette) &&
 		branding.logoForDarkBackground
 		? branding.logoForDarkBackground
 		: branding.logo;
