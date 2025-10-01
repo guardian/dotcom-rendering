@@ -15,8 +15,8 @@ import { palette as themePalette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
 import type { FEElement } from '../types/content';
 import type { Podcast, TagType } from '../types/tag';
+import { ArticleBranding } from './ArticleBranding.importable';
 import { Avatar } from './Avatar';
-import { Branding } from './Branding.importable';
 import { CommentCount } from './CommentCount.importable';
 import { useConfig } from './ConfigContext';
 import { Contributor } from './Contributor';
@@ -354,7 +354,7 @@ export const ArticleMeta = ({
 			<div css={meta(format)}>
 				{branding && (
 					<Island priority="feature" defer={{ until: 'visible' }}>
-						<Branding branding={branding} format={format} />
+						<ArticleBranding branding={branding} format={format} />
 					</Island>
 				)}
 				{format.theme === ArticleSpecial.Labs ? (

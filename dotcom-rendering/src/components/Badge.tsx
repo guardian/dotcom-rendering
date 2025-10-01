@@ -33,12 +33,9 @@ export const Badge = ({
 }: Props) => {
 	const { darkModeAvailable } = useConfig();
 
-	// Sanitise URL for use as href attribute
-	const href = new URL(logo.link).href;
-
 	return (
 		<a
-			href={href}
+			href={new URL(logo.link).href}
 			data-sponsor={sponsorName.toLowerCase()}
 			rel="nofollow"
 			aria-label={`Visit the ${sponsorName} website`}
@@ -58,7 +55,7 @@ export const Badge = ({
 				)}
 				<img
 					css={logoImageStyle}
-					src={logo.src}
+					src={new URL(logo.src).href}
 					alt={sponsorName}
 					width={logo.dimensions.width}
 					height={logo.dimensions.height}

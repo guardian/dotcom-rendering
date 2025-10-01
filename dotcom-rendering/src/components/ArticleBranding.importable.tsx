@@ -210,7 +210,7 @@ type Props = {
  *
  * (No visual story exists)
  */
-export const Branding = ({ branding, format }: Props) => {
+export const ArticleBranding = ({ branding, format }: Props) => {
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const isGallery = format.design === ArticleDesign.Gallery;

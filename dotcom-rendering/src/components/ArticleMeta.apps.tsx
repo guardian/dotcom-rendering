@@ -14,9 +14,9 @@ import { getSoleContributor } from '../lib/byline';
 import { palette as themePalette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
 import type { TagType } from '../types/tag';
+import { ArticleBranding } from './ArticleBranding.importable';
 import { shouldShowAvatar, shouldShowContributor } from './ArticleMeta.web';
 import { Avatar } from './Avatar';
-import { Branding } from './Branding.importable';
 import { CommentCount } from './CommentCount.importable';
 import { Contributor } from './Contributor';
 import { Dateline } from './Dateline';
@@ -364,7 +364,10 @@ export const ArticleMetaApps = ({
 				{branding && (
 					<MetaGridBranding>
 						<Island priority="feature" defer={{ until: 'visible' }}>
-							<Branding branding={branding} format={format} />
+							<ArticleBranding
+								branding={branding}
+								format={format}
+							/>
 						</Island>
 					</MetaGridBranding>
 				)}

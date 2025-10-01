@@ -12,8 +12,8 @@ export const getOphanComponents = ({
 	locationPrefix:
 		| 'article-meta'
 		| 'article-related-content'
-		| 'front-card'
-		| 'front-section';
+		| 'front-container'
+		| 'front-card';
 }): { ophanComponentName: string; ophanComponentLink: string } => {
 	const formattedSponsorName = branding.sponsorName
 		.toLowerCase()

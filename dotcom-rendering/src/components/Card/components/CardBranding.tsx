@@ -40,13 +40,17 @@ export const CardBranding = ({
 	containerPalette,
 }: Props) => {
 	const logo = decideBrandingLogo(branding, containerPalette);
-	const dataAttributes = getOphanComponents({
-		branding,
-		locationPrefix:
-			onwardsSource === 'related-content'
-				? 'article-related-content'
-				: 'front-card',
-	});
+
+	/**
+	 * Only apply click tracking to branding on related content
+	 */
+	const dataAttributes =
+		onwardsSource === 'related-content'
+			? getOphanComponents({
+					branding,
+					locationPrefix: 'article-related-content',
+			  })
+			: undefined;
 
 	return (
 		<div css={brandingWrapperStyle}>
@@ -64,8 +68,8 @@ export const CardBranding = ({
 				logo={logo}
 				logoForDarkBackground={branding.logoForDarkBackground}
 				sponsorName={branding.sponsorName}
-				ophanComponentLink={dataAttributes.ophanComponentLink}
-				ophanComponentName={dataAttributes.ophanComponentName}
+				ophanComponentLink={dataAttributes?.ophanComponentLink}
+				ophanComponentName={dataAttributes?.ophanComponentName}
 			/>
 		</div>
 	);
