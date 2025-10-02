@@ -2,13 +2,9 @@
 const path = require('node:path');
 const bodyParser = require('body-parser');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
+const { dim, reset, blue, underline } = require('../../scripts/log');
 
 const port = 3030;
-
-const blue = '\x1b[34m';
-const dim = '\x1b[2m';
-const reset = '\x1b[0m';
-const underline = '\x1b[4m';
 
 console.log(
 	`${dim}DEV server running on${reset} ${blue}${underline}http://localhost:${port}${reset}`,

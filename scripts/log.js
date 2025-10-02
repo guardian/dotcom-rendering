@@ -1,4 +1,4 @@
-// BRANDED LOGGING
+// Formatted logging for console output
 
 const capitalize = (str) =>
 	str.replace(/^([a-z])/, (match) => match.toUpperCase());
@@ -11,6 +11,7 @@ const green = '\x1b[32m';
 const dim = '\x1b[2m';
 const reset = '\x1b[0m';
 const blue = '\x1b[34m';
+const underline = '\x1b[4m';
 
 const colourise = (colour, str) =>
 	process.stdout.isTTY ? `${colour}${str}${reset}` : str;
@@ -42,7 +43,6 @@ if (messages) {
 	}
 }
 
-// exports for modules to use
 module.exports = {
 	log,
 	warn,
@@ -50,4 +50,11 @@ module.exports = {
 	success,
 	colourise,
 	command,
+	red,
+	yellow,
+	green,
+	blue,
+	dim,
+	reset,
+	underline,
 };
