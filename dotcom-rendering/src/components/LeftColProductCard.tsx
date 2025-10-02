@@ -30,10 +30,9 @@ export type LeftColProductCardProps = {
 const card = css`
 	display: none;
 	${from.wide} {
-		top: ${space[3]}px;
 		position: sticky;
 		display: block;
-		margin-top: 10px;
+		margin-top: ${space[3]}px;
 		width: 220px;
 		border-top: 1px solid ${palette('--section-border-lifestyle')};
 	}
