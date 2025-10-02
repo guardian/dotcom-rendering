@@ -22,7 +22,7 @@ export const Disclaimer = () => (
 		will only use the data you provide us for the purpose of the feature and
 		we will delete any personal data when we no longer require it for this
 		purpose. For true anonymity please use our{' '}
-		<a href="https://www.theguardian.com/securedrop">SecureDrop</a> service
+		<a href="https://www.theguardian.com/tips">SecureMessaging</a> service
 		instead.
 	</div>
 );

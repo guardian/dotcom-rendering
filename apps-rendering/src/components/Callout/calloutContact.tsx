@@ -76,10 +76,10 @@ const Disclaimer = ({ contacts }: { contacts: Contact[] }) => {
 		</span>
 	);
 
-	const secureDropText = (
+	const secureMessagingText = (
 		<span css={[info, calloutLinkContainer]}>
 			For true anonymity please use our{' '}
-			<a href="https://www.theguardian.com/securedrop">SecureDrop</a>{' '}
+			<a href="https://www.theguardian.com/tips">SecureMessaging</a>{' '}
 			service instead.
 		</span>
 	);
@@ -88,7 +88,7 @@ const Disclaimer = ({ contacts }: { contacts: Contact[] }) => {
 		<>
 			{contactText}
 			{contacts.some((c) => !!c.guidance) && guidanceText}{' '}
-			{secureDropText}
+			{secureMessagingText}
 		</>
 	);
 };
