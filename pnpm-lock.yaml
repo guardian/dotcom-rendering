@@ -64,8 +64,8 @@ importers:
         specifier: 11.11.0
         version: 11.11.0
       '@guardian/apps-rendering-api-models':
-        specifier: 11.0.0
-        version: 11.0.0
+        specifier: 13.0.1-PREVIEW.fpbump-scrooge-ts.2025-10-02T0957.15fda4f0
+        version: 13.0.1-PREVIEW.fpbump-scrooge-ts.2025-10-02T0957.15fda4f0
       '@guardian/bridget':
         specifier: 7.0.0
         version: 7.0.0
@@ -4743,11 +4743,11 @@ packages:
       typescript: 5.5.3
     dev: false
 
-  /@guardian/apps-rendering-api-models@11.0.0:
-    resolution: {integrity: sha512-cmyMiQK4jSiCX4nN3wHnSqB6StKZ4Gek2q6p3l8g4ZJRq46nl0OcTvNm5/SsrjHPsOArImN9XKiaNP4BVZvRoQ==}
+  /@guardian/apps-rendering-api-models@13.0.1-PREVIEW.fpbump-scrooge-ts.2025-10-02T0957.15fda4f0:
+    resolution: {integrity: sha512-Ai9mdupQTIzBsYZXLN1D/JQUEtUNHr5mTV0AZgkj7VOiVm+DYAM4Psn9vx1AQWAPnEMQElkJ9OQg4y/VUFLpTw==}
     dependencies:
-      '@guardian/content-api-models': 26.0.0
-      '@guardian/content-atom-model': 4.0.4
+      '@guardian/content-api-models': 31.0.0
+      '@guardian/content-atom-model': 6.1.0
       '@guardian/content-entity-model': 3.0.3
       '@guardian/story-packages-model': 2.2.0
       '@types/node-int64': 0.4.32
@@ -4827,40 +4827,12 @@ packages:
       '@types/googletag': 3.3.0
     dev: false
 
-  /@guardian/content-api-models@26.0.0:
-    resolution: {integrity: sha512-41kW0r/aq8LDgrs4sBnBIGeNTzYbqUM+9qYL3y5nR+8pKZJ3lF1NPIcsdcoG1nRhrkhLnqsehfJ/oWgwPPBg/w==}
-    dependencies:
-      '@guardian/content-atom-model': 4.0.4
-      '@guardian/content-entity-model': 3.0.3
-      '@guardian/story-packages-model': 2.2.0
-      '@types/node-int64': 0.4.32
-      '@types/thrift': 0.10.17
-      node-int64: 0.4.0
-      thrift: 0.15.0
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-    dev: false
-
   /@guardian/content-api-models@31.0.0:
     resolution: {integrity: sha512-DlamPrKkfCncpais8gyUdF6oXLLWB1xIXb/J5GUUkeCsNYfffYKU0snae5kPUIKycLZ0AiS5dV6ZOxTPCcM8pw==}
     dependencies:
       '@guardian/content-atom-model': 6.1.0
       '@guardian/content-entity-model': 3.0.3
       '@guardian/story-packages-model': 2.2.0
-      '@types/node-int64': 0.4.32
-      '@types/thrift': 0.10.17
-      node-int64: 0.4.0
-      thrift: 0.15.0
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-    dev: false
-
-  /@guardian/content-atom-model@4.0.4:
-    resolution: {integrity: sha512-B/2oe4h6wYoygKEdcvycgRw4keKglvRu/ma81Ad+Gb5OnBcRTqIoeRmgO2V8BEbrHxPLSjBMI3SimcgbUccBzg==}
-    dependencies:
-      '@guardian/content-entity-model': 3.0.3
       '@types/node-int64': 0.4.32
       '@types/thrift': 0.10.17
       node-int64: 0.4.0
