@@ -3,7 +3,7 @@ import {
 	from,
 	headlineMedium17,
 	space,
-	textSans14,
+	textSans15,
 	textSans17,
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
@@ -20,9 +20,9 @@ export type LeftColProductCardProps = {
 	brandName: string;
 	productName: string;
 	image: string;
-	url: string;
-	price: string;
-	retailer: string;
+	primaryCta: string;
+	primaryUrl: string;
+	primaryPrice: string;
 	statistics: Statistics[];
 	format: ArticleFormat;
 };
@@ -34,13 +34,12 @@ const card = css`
 		position: sticky;
 		display: block;
 		margin-top: 10px;
-		padding: 10px;
 		width: 220px;
 		border-top: 1px solid ${palette('--section-border-lifestyle')};
 	}
 	img {
-		height: 200px;
-		width: 200px;
+		height: 220px;
+		width: 220px;
 	}
 	strong {
 		font-weight: 700;
@@ -50,7 +49,7 @@ const card = css`
 const productInfoContainer = css`
 	display: grid;
 	row-gap: ${space[1]}px;
-	padding-bottom: ${space[2]}px;
+	padding: 0 10px 8px 0;
 `;
 
 const primaryHeading = css`
@@ -73,19 +72,21 @@ const buttonOverride = css`
 const statisticsContainer = css`
 	border-top: 1px solid ${palette('--section-border')};
 	padding-top: ${space[3]}px;
+	padding-bottom: ${space[4]}px;
 	display: grid;
-	row-gap: ${space[2]}px;
+	row-gap: ${space[3]}px;
 `;
 
 const Statistic = ({ name, value }: Statistics) => (
 	<div
 		css={css`
-			${textSans14};
+			${textSans15};
 			margin-top: 4px;
 		`}
 	>
-		{name}:<br />
-		<strong>{value}</strong>
+		<strong>{name}</strong>
+		<br />
+		{value}
 	</div>
 );
 
@@ -95,9 +96,9 @@ export const LeftColProductCard = ({
 	brandName,
 	productName,
 	image,
-	url,
-	price,
-	retailer,
+	primaryCta,
+	primaryUrl,
+	primaryPrice,
 	statistics,
 	format,
 }: LeftColProductCardProps) => (
@@ -117,29 +118,13 @@ export const LeftColProductCard = ({
 			<div css={primaryHeading}>{brandName}</div>
 			<div css={secondaryHeading}>{productName}</div>
 			<div css={priceRowStyle}>
-				<strong>{price}</strong> from{' '}
-				<a
-					css={css`
-						color: ${palette('--article-text')};
-						border-bottom: 1px solid
-							${palette('--article-link-border')};
-						text-decoration: none;
-						:hover,
-						:active {
-							border-bottom: 1px solid
-								${palette('--article-text')};
-						}
-					`}
-					href={url}
-				>
-					{retailer}
-				</a>
+				<strong>{primaryPrice}</strong>
 			</div>
 		</div>
 		<div css={buttonOverride}>
 			<ProductLinkButton
-				label={'Shop Now'}
-				url={url}
+				label={primaryCta}
+				url={primaryUrl}
 				size={'small'}
 				cssOverrides={css`
 					min-width: 100%;
