@@ -79,7 +79,7 @@ const Disclaimer = ({ contacts }: { contacts: Contact[] }) => {
 	const secureMessagingText = (
 		<span css={[info, calloutLinkContainer]}>
 			For true anonymity please use our{' '}
-			<a href="https://www.theguardian.com/tips">SecureMessaging</a>{' '}
+			<a href="https://www.theguardian.com/tips">Secure Messaging</a>{' '}
 			service instead.
 		</span>
 	);
