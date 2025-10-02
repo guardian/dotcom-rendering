@@ -43,13 +43,13 @@ const product: ProductBlockElement = {
 	starRating: 'none-selected',
 	secondaryProductUrl:
 		'https://www.amazon.co.uk/Devola-16-Inch-Desk-Fan/dp/B0B3Z9K5XH?tag=theguardianbookshop-21&ascsubtag=trd-10001-1b2f-00000-00000-a0000-00000-00000-00000',
-	secondaryCta: '£132.99 at Amazon',
+	secondaryCta: 'Buy at Amazon',
 	secondaryPrice: '£132.99',
 	secondaryRetailer: 'Amazon',
 	statistics: [
-		{ name: 'We love', value: 'It packs away pretty small' },
+		{ name: 'What we love', value: 'It packs away pretty small' },
 		{
-			name: 'We dont love',
+			name: "What we don't love",
 			value: 'there’s nowhere to stow the remote control',
 		},
 	],

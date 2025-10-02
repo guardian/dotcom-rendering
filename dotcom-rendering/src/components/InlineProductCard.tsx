@@ -3,7 +3,7 @@ import {
 	from,
 	headlineMedium20,
 	space,
-	textSans14,
+	textSans15,
 	textSans17,
 } from '@guardian/source/foundations';
 import type { ReactNode } from 'react';
@@ -19,8 +19,8 @@ export type Statistics = {
 
 const card = css`
 	background-color: ${palette('--product-card-background')};
-	padding: ${space[4]}px;
-	column-gap: ${space[2]}px;
+	padding: ${space[2]}px ${space[3]}px ${space[3]}px ${space[3]}px;
+	column-gap: 10px;
 	display: grid;
 	max-width: 100%;
 	min-width: 100%;
@@ -47,7 +47,6 @@ export type InlineProductCardProps = {
 	primaryCTA: string;
 	primaryUrl: string;
 	primaryPrice: string;
-	primaryRetailer: string;
 	secondaryCTA?: string;
 	secondaryUrl?: string;
 	statistics: Statistics[];
@@ -55,10 +54,10 @@ export type InlineProductCardProps = {
 
 const productInfoContainer = css`
 	${textSans17};
-	white-space: normal;
-	display: grid;
-	height: 117px;
-	min-height: fit-content;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: ${space[2]}px;
 `;
 
 const primaryHeading = css`
@@ -68,20 +67,19 @@ const primaryHeading = css`
 const statisticsContainer = css`
 	grid-column: span 2;
 	border-top: 1px solid ${palette('--section-border')};
-	padding-top: ${space[3]}px;
 	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: ${space[2]}px;
+	grid-template-columns: 1fr;
+	gap: 2px;
 `;
 
 const Statistic = ({ name, value }: Statistics) => (
 	<div
 		css={css`
-			${textSans14};
-			margin-top: 4px;
+			${textSans15};
+			margin-top: ${space[2]}px;
 		`}
 	>
-		{name}: <br /> <strong>{value}</strong>
+		<strong>{name}</strong> <br /> {value}
 	</div>
 );
 
@@ -89,31 +87,21 @@ const ButtonContainer = ({ children }: { children: ReactNode }) => (
 	<div
 		css={css`
 			grid-column: span 2;
+			display: flex;
+			flex-direction: column;
+			gap: ${space[1]}px;
+			padding-bottom: ${space[2]}px;
 		`}
 	>
 		{children}
 	</div>
 );
 
-const RetailerLink = ({ url, retailer }: { url: string; retailer: string }) => (
-	<a
-		css={css`
-			color: ${palette('--article-text')};
-			border-bottom: 1px solid ${palette('--article-link-border')};
-			text-decoration: none;
-			:hover,
-			:active {
-				border-bottom: 1px solid ${palette('--article-text')};
-			}
-		`}
-		href={url}
-	>
-		{retailer}
-	</a>
-);
 const ProductInfoContainer = ({ children }: { children: ReactNode }) => (
 	<div css={productInfoContainer}>{children}</div>
 );
+
+const stripHtml = (html: string) => html.replace(/<[^>]+>/g, '');
 
 export const InlineProductCard = ({
 	format,
@@ -123,7 +111,6 @@ export const InlineProductCard = ({
 	primaryCTA,
 	primaryUrl,
 	primaryPrice,
-	primaryRetailer,
 	secondaryCTA,
 	secondaryUrl,
 	statistics,
@@ -144,17 +131,15 @@ export const InlineProductCard = ({
 			<div css={primaryHeading}>{brandName}</div>
 			<div>{productName}</div>
 			<div>
-				<strong>{primaryPrice}</strong> from{' '}
-				<RetailerLink url={primaryUrl} retailer={primaryRetailer} />
+				<strong>{primaryPrice}</strong>
 			</div>
 		</ProductInfoContainer>
 		<ButtonContainer>
 			<ProductLinkButton
-				label={primaryCTA}
+				label={stripHtml(primaryCTA)}
 				url={primaryUrl}
 				cssOverrides={css`
 					width: 100%;
-					margin-bottom: 10px;
 				`}
 			/>
 			{!!secondaryCTA && !!secondaryUrl && (
@@ -162,7 +147,7 @@ export const InlineProductCard = ({
 					cssOverrides={css`
 						width: 100%;
 					`}
-					label={secondaryCTA}
+					label={stripHtml(secondaryCTA)}
 					url={secondaryUrl}
 					priority={'tertiary'}
 				/>

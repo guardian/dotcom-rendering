@@ -35,9 +35,9 @@ const sampleProductCard: LeftColProductCardProps = {
 	primaryUrl: 'https://www.aircraft.com/lume',
 	primaryPrice: '£199.99',
 	statistics: [
-		{ name: 'We love', value: 'It packs away pretty small' },
+		{ name: 'What we love', value: 'It packs away pretty small' },
 		{
-			name: 'We dont love',
+			name: "What we don't love",
 			value: 'there’s nowhere to stow the remote control',
 		},
 	],
