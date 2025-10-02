@@ -27,9 +27,9 @@ const success = (...messages) => logIt(messages, green);
 const command = (message) =>
 	console.log(colourise(dim, `$ `) + colourise(blue, message));
 
-// can be used as a normal script too
+// Only run as a script when run directly and not when imported as a module
 const [, , messages, method] = process.argv;
-if (messages) {
+if (require.main === module && messages) {
 	switch (method) {
 		case 'warn':
 			warn(messages);
