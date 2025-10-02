@@ -19,7 +19,6 @@ import {
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/articleFormat';
-import { getZIndex } from '../lib/getZIndex';
 import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { Hide } from './Hide';
@@ -372,7 +371,6 @@ export const SeriesSectionLink = ({
 								css`
 									display: inline-block;
 									position: relative;
-									z-index: ${getZIndex('articleHeadline')};
 								`,
 							format.display === ArticleDisplay.Immersive &&
 								css`

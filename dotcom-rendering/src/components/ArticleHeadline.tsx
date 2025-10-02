@@ -398,7 +398,6 @@ const galleryStyles = css`
 
 	grid-row: 7/9;
 	position: relative;
-	z-index: ${getZIndex('articleHeadline')};
 
 	${from.tablet} {
 		${grid.between('centre-column-start', 'grid-end')};
