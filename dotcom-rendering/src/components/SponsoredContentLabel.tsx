@@ -97,6 +97,7 @@ export const SponsoredContentLabel = ({
 				data-testid="branding-logo"
 				data-component={ophanComponentName}
 				data-link-name={ophanComponentLink}
+				className="branding-logo"
 			>
 				<picture>
 					{darkModeAvailable && branding.logoForDarkBackground && (

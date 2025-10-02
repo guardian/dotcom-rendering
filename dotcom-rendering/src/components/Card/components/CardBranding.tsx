@@ -83,6 +83,7 @@ export const CardBranding = ({
 				data-testid="card-branding-logo"
 				data-component={dataAttributes?.ophanComponentName}
 				data-link-name={dataAttributes?.ophanComponentLink}
+				className="branding-logo"
 			>
 				<picture>
 					{darkModeAvailable && branding.logoForDarkBackground && (
