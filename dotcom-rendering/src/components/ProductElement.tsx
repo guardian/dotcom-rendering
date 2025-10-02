@@ -101,7 +101,6 @@ export const ProductElement = ({
 				image={product.image.url}
 				primaryUrl={product.primaryProductUrl}
 				primaryPrice={product.primaryPrice}
-				primaryRetailer={product.primaryRetailer}
 				primaryCTA={product.primaryCta}
 				secondaryCTA={product.secondaryCta}
 				secondaryUrl={product.secondaryProductUrl}
