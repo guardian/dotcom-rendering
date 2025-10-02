@@ -221,7 +221,7 @@ export const CalloutTermsAndConditions = () => (
 			data-ignore="global-link-styling"
 			href="https://www.theguardian.com/tips"
 		>
-			SecureMessaging
+			Secure Messaging
 		</a>{' '}
 		service instead.
 	</div>
