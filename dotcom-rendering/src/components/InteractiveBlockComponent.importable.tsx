@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
+import { getErrorMessage, isUndefined, log } from '@guardian/libs';
 import {
 	article17,
 	from,
@@ -223,6 +223,23 @@ const setupWindowListeners = (iframe: HTMLIFrameElement) => {
 			try {
 				message = JSON.parse(event.data);
 			} catch (e) {
+				if (
+					// @ts-expect-error
+					window.guardian.config.page.contentId ===
+					'politics/2025/oct/02/could-nigel-farage-really-win-the-next-election-heres-what-the-polls-say'
+				) {
+					log(
+						'dotcom',
+						getErrorMessage(e),
+						'Json parse Failed on in interactiveBlockComponent',
+					);
+				} else {
+					window.guardian.modules.sentry.reportError(
+						// @ts-expect-error
+						e,
+						'Json parse Failed on in interactiveBlockComponent',
+					);
+				}
 				window.guardian.modules.sentry.reportError(
 					// @ts-expect-error
 					e,
