@@ -3,8 +3,7 @@
 const capitalize = (str) =>
 	str.replace(/^([a-z])/, (match) => match.toUpperCase());
 
-// we could use chalk, but this saves needing to pre-install it
-// if this is a first run
+// ANSI escape codes
 // https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
 const red = '\x1b[31m';
 const yellow = '\x1b[33m';
