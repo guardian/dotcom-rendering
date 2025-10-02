@@ -17,7 +17,6 @@ type Props = {
 	containerType: DCRContainerType;
 	aspectRatio: AspectRatio;
 	sectionId: string;
-	isInHideTrailsAbTest?: boolean;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 };
@@ -38,7 +37,6 @@ export const ScrollableMedium = ({
 	showAge,
 	aspectRatio,
 	sectionId,
-	isInHideTrailsAbTest,
 	showLabsRedesign,
 }: Props) => {
 	return (
@@ -77,7 +75,6 @@ export const ScrollableMedium = ({
 							showTopBarDesktop={false}
 							showTopBarMobile={false}
 							canPlayInline={false}
-							isInHideTrailsAbTest={isInHideTrailsAbTest}
 							showLabsRedesign={showLabsRedesign}
 						/>
 					</ScrollableCarousel.Item>

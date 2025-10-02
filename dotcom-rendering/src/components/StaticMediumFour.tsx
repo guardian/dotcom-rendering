@@ -32,7 +32,6 @@ type Props = {
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
-	isInHideTrailsAbTest?: boolean;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 };
@@ -46,7 +45,6 @@ export const StaticMediumFour = ({
 	showImage = true,
 	aspectRatio,
 	containerLevel = 'Primary',
-	isInHideTrailsAbTest,
 	showLabsRedesign,
 }: Props) => {
 	const cards = trails.slice(0, 4);
@@ -87,7 +85,6 @@ export const StaticMediumFour = ({
 									!isMediaCard(card.format))
 							}
 							canPlayInline={false}
-							isInHideTrailsAbTest={isInHideTrailsAbTest}
 							showLabsRedesign={showLabsRedesign}
 						/>
 					</LI>
