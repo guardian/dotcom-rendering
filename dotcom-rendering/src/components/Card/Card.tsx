@@ -581,7 +581,9 @@ export const Card = ({
 		containerType === 'flexible/special' ||
 		containerType === 'flexible/general';
 
-	const isSmallCard = containerType === 'scrollable/small';
+	const isSmallCard =
+		containerType === 'scrollable/small' ||
+		containerType === 'scrollable/medium';
 
 	const mediaFixedSizeOptions = (): MediaFixedSizeOptions => {
 		if (isSmallCard) {
