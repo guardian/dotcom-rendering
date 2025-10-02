@@ -39,7 +39,7 @@ const product: ProductBlockElement = {
 	primaryProductUrl: 'https://www.aircraft.com/lume',
 	primaryPrice: '£199.99',
 	primaryRetailer: 'AirCraft',
-	primaryCta: '£199.99 at AirCraft',
+	primaryCta: 'Buy at AirCraft',
 	starRating: 'none-selected',
 	secondaryProductUrl:
 		'https://www.amazon.co.uk/Devola-16-Inch-Desk-Fan/dp/B0B3Z9K5XH?tag=theguardianbookshop-21&ascsubtag=trd-10001-1b2f-00000-00000-a0000-00000-00000-00000',
@@ -47,15 +47,10 @@ const product: ProductBlockElement = {
 	secondaryPrice: '£132.99',
 	secondaryRetailer: 'Amazon',
 	statistics: [
-		{ name: 'Style', value: 'Pedestal (or desk)' },
-		{ name: 'Dimensions', value: '37 x 28 x 95cm (WDH)' },
-		{ name: 'Number of speeds', value: '12' },
-		{ name: 'Remote control', value: 'Yes' },
-		{ name: 'Peak noise level on test', value: '55dB' },
-		{ name: 'Power use on top setting', value: '18W' },
+		{ name: 'We love', value: 'It packs away pretty small' },
 		{
-			name: 'Air speed on top setting',
-			value: '5.9 metres a second (m/s)',
+			name: 'We dont love',
+			value: 'there’s nowhere to stow the remote control',
 		},
 	],
 	content: [

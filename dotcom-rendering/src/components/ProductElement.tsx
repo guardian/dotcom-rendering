@@ -77,9 +77,9 @@ export const ProductElement = ({
 					brandName={product.brandName}
 					productName={product.productName}
 					image={product.image.url}
-					url={product.primaryProductUrl}
-					price={product.primaryPrice}
-					retailer={product.primaryRetailer}
+					primaryUrl={product.primaryProductUrl}
+					primaryPrice={product.primaryPrice}
+					primaryCta={product.primaryCta}
 					statistics={product.statistics}
 					format={format}
 				/>
