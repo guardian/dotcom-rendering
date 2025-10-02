@@ -3261,9 +3261,13 @@
                 },
                 "mimeType": {
                     "type": "string"
+                },
+                "assetType": {
+                    "type": "string"
                 }
             },
             "required": [
+                "assetType",
                 "id",
                 "platform",
                 "version"
