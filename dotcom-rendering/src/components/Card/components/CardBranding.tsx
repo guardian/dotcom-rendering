@@ -5,7 +5,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import { useConfig } from '../../../components/ConfigContext';
-import { decideCardLogo } from '../../../lib/decideLogo';
+import { decideBrandingLogo } from '../../../lib/decideLogo';
 import { getZIndex } from '../../../lib/getZIndex';
 import { getOphanComponents } from '../../../lib/labs';
 import { palette as themePalette } from '../../../palette';
@@ -48,7 +48,7 @@ export const CardBranding = ({
 	onwardsSource,
 	containerPalette,
 }: Props) => {
-	const logo = decideCardLogo(branding, containerPalette);
+	const logo = decideBrandingLogo(branding, containerPalette);
 
 	const { darkModeAvailable } = useConfig();
 
