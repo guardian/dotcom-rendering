@@ -604,7 +604,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collectionId={index + 1}
 									isInAllBoostsTest={
 										front.isNetworkFront &&
-										abTests.allBoostsVariant !== 'variant'
+										abTests.allBoostsVariant === 'variant'
 									}
 									containerLevel={collection.containerLevel}
 									showLabsRedesign={showLabsRedesign}
