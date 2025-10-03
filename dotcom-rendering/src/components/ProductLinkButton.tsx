@@ -1,13 +1,22 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
+import type {
+	ButtonPriority,
+	ThemeButton,
+} from '@guardian/source/react-components';
 import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
+import { palette } from '../palette';
 
 type ProductLinkButtonProps = {
 	label: string;
 	url: string;
+	size?: 'default' | 'small';
+	cssOverrides?: SerializedStyles;
+	priority?: ButtonPriority;
 	dataComponent?: string;
 };
 
@@ -20,9 +29,22 @@ const linkButtonStyles = css`
 	overflow-wrap: break-word;
 `;
 
+export const theme: Partial<ThemeButton> = {
+	backgroundPrimary: palette('--product-button-primary-background'),
+	backgroundPrimaryHover: palette(
+		'--product-button-primary-background-hover',
+	),
+	// todo: make a new palette variable for this
+	textTertiary: palette('--product-button-primary-background'),
+	borderTertiary: palette('--product-button-primary-background'),
+};
+
 export const ProductLinkButton = ({
 	label,
 	url,
+	size = 'default',
+	cssOverrides,
+	priority = 'primary',
 	dataComponent = 'in-body-product-link-button',
 }: ProductLinkButtonProps) => {
 	return (
@@ -31,12 +53,18 @@ export const ProductLinkButton = ({
 			rel="sponsored noreferrer noopener"
 			target="_blank"
 			iconSide="right"
+			priority={priority}
 			aria-label={`Open ${label} in a new tab`}
 			icon={<SvgArrowRightStraight />}
+			theme={theme}
 			data-ignore="global-link-styling"
 			data-link-name="in body link"
 			data-spacefinder-role="inline"
-			cssOverrides={[linkButtonStyles]}
+			size={size}
+			cssOverrides={[
+				linkButtonStyles,
+				...(cssOverrides ? [cssOverrides] : []),
+			]}
 			data-component={dataComponent}
 		>
 			{label}
