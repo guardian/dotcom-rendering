@@ -191,7 +191,7 @@ export const AudioLayout = (props: WebProps) => {
 			</div>
 
 			{format.theme === ArticleSpecial.Labs && (
-				<Stuck>
+				<Stuck zIndex="subNavBanner">
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
@@ -199,6 +199,9 @@ export const AudioLayout = (props: WebProps) => {
 						borderColour={sourcePalette.neutral[60]}
 						sectionId="labs-header"
 						element="aside"
+						css={css`
+							position: relative;
+						`}
 					>
 						<LabsHeader editionId={editionId} />
 					</Section>

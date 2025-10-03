@@ -298,13 +298,16 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 					</div>
 
 					{format.theme === ArticleSpecial.Labs && (
-						<Stuck>
+						<Stuck zIndex="subNavBanner">
 							<Section
 								fullWidth={true}
 								showTopBorder={false}
 								backgroundColour={sourcePalette.labs[400]}
 								borderColour={sourcePalette.neutral[60]}
 								sectionId="labs-header"
+								css={css`
+									position: relative;
+								`}
 							>
 								<LabsHeader editionId={editionId} />
 							</Section>

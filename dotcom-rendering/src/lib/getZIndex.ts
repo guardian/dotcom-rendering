@@ -71,9 +71,9 @@ const indices = [
 	'searchHeaderLink',
 	'TheGuardian',
 
-	// The edition switcher banner needs to be below the Edition selector
-	// and the myAccount dropdown in the nav
-	'editionSwitcherBanner',
+	// Banners appearing directly under the nav need to be below
+	// the Edition selector and the myAccount dropdown in the nav
+	'subNavBanner',
 
 	// Sticky table of contents element
 	'tableOfContents',
