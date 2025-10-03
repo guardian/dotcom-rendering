@@ -404,9 +404,6 @@ const ShowSignInGateAuxia = ({
 	const checkoutCompleteCookieData = undefined;
 	const personaliseSignInGateAfterCheckoutSwitch = undefined;
 
-	// Get the gate version configuration
-	// const gateVersion = getAuxiaGateVersion(signInGateVersion, userTreatment);
-
 	const [signInGatePlaceholder, setSignInGatePlaceholder] =
 		useState<HTMLElement | null>(null);
 
