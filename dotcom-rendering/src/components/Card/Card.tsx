@@ -734,7 +734,7 @@ export const Card = ({
 	 * Adds appropriate Ophan data attributes based on card context
 	 * Results in a clickable brand logo and sponsorship label
 	 */
-	const getBranding = () => {
+	const LabsBranding = () => {
 		if (!branding) return;
 		const getLocationPrefix = () => {
 			if (!onwardsSource) {
@@ -1189,8 +1189,9 @@ export const Card = ({
 										<MediaOrNewsletterPill />
 										{!showLabsRedesign &&
 											format.theme ===
-												ArticleSpecial.Labs &&
-											getBranding()}
+												ArticleSpecial.Labs && (
+												<LabsBranding />
+											)}
 									</>
 								) : (
 									<CardFooter
@@ -1198,9 +1199,10 @@ export const Card = ({
 										age={decideAge()}
 										commentCount={<CommentCount />}
 										cardBranding={
-											isOnwardContent || !showLabsRedesign
-												? getBranding()
-												: undefined
+											isOnwardContent ||
+											!showLabsRedesign ? (
+												<LabsBranding />
+											) : undefined
 										}
 										showLivePlayable={showLivePlayable}
 									/>
@@ -1294,9 +1296,7 @@ export const Card = ({
 						age={decideAge()}
 						commentCount={<CommentCount />}
 						cardBranding={
-							!showLabsRedesign && branding
-								? getBranding()
-								: undefined
+							!showLabsRedesign ? <LabsBranding /> : undefined
 						}
 						showLivePlayable={showLivePlayable}
 						shouldReserveSpace={{
@@ -1309,8 +1309,7 @@ export const Card = ({
 
 			{showLabsRedesign &&
 				!isOnwardContent &&
-				format.theme === ArticleSpecial.Labs &&
-				getBranding()}
+				format.theme === ArticleSpecial.Labs && <LabsBranding />}
 		</CardWrapper>
 	);
 };
