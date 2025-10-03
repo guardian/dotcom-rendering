@@ -4,7 +4,6 @@ import {
 	space,
 	textSans14,
 	textSans17,
-	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { palette } from '../../../palette';
@@ -14,10 +13,6 @@ export type TrailTextSize = 'regular' | 'large';
 const trailTextStyles = css`
 	display: flex;
 	flex-direction: column;
-
-	${until.tablet} {
-		display: none;
-	}
 `;
 
 const bottomPadding = css`

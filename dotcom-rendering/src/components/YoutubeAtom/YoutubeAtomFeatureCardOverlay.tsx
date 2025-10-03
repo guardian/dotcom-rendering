@@ -252,6 +252,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 								)}
 								trailTextSize="regular"
 								padBottom={false}
+								hideUntil="tablet"
 							/>
 						</div>
 					)}
