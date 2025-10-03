@@ -253,11 +253,14 @@ const buildAbTestTrackingAuxiaVariant = (
 export const getAuxiaGateVersion = (
 	userTreatment?: AuxiaAPIResponseDataUserTreatment,
 ): AuxiaGateVersion => {
-	const params = new URLSearchParams(window.location.search);
-	const version = params.get('auxia_gate_version');
+	let urlParamVersion: string | null = null;
+	if (typeof window !== 'undefined') {
+		const params = new URLSearchParams(window.location.search);
+		urlParamVersion = params.get('auxia_gate_version');
+	}
 
 	if (
-		String(version).toLowerCase().endsWith('v2') ||
+		String(urlParamVersion).toLowerCase().endsWith('v2') ||
 		userTreatment?.treatmentType === 'DISMISSABLE_SIGN_IN_GATE_POPUP' ||
 		userTreatment?.treatmentType === 'NONDISMISSIBLE_SIGN_IN_GATE_POPUP'
 	) {
