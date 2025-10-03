@@ -166,7 +166,7 @@ export const FetchMoreGalleriesData = ({
 				absoluteServerTimes={absoluteServerTimes}
 				trails={buildTrails(data.trails, limit, isAdFreeUser)}
 				discussionApiUrl={discussionApiUrl}
-				headingLink={`${guardianBaseUrl}/inpictures/all`}
+				guardianBaseUrl={guardianBaseUrl}
 			/>
 		</div>
 	);
