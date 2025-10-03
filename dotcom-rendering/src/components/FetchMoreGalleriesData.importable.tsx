@@ -154,7 +154,14 @@ export const FetchMoreGalleriesData = ({
 	);
 
 	return (
-		<div css={minHeight}>
+		<div
+			css={[
+				minHeight,
+				css`
+					background-color: ${palette('--onward-background')};
+				`,
+			]}
+		>
 			<MoreGalleries
 				absoluteServerTimes={absoluteServerTimes}
 				trails={buildTrails(data.trails, limit, isAdFreeUser)}
