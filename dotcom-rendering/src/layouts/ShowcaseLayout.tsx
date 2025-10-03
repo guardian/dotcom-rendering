@@ -332,7 +332,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									/>
 								</Stuck>
 							</div>
-							<Stuck zIndex="stickyAdWrapperLabsHeader">
+							<Stuck zIndex="subNavBanner">
 								<Section
 									fullWidth={true}
 									showTopBorder={false}
