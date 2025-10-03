@@ -5,6 +5,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import { decideBrandingLogo } from '../lib/decideLogo';
+import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
 import type { Branding } from '../types/branding';
 import type { DCRContainerPalette } from '../types/front';
@@ -52,6 +53,11 @@ const verticalStyles = {
 	`,
 };
 
+const linkStyles = css`
+	/* See: https://css-tricks.com/nested-links/ */
+	z-index: ${getZIndex('card-nested-link')};
+`;
+
 /**
  * Component used to display "paid for" label alonside the sponsor logo
  * for a particular set of branding
@@ -90,6 +96,7 @@ export const SponsoredContentLabel = ({
 					: 'This content has been paid for by an advertiser and produced by the Guardian Labs team.'}
 			</span>
 			<a
+				css={linkStyles}
 				href={logo.link}
 				data-sponsor={branding.sponsorName.toLowerCase()}
 				rel="nofollow"
@@ -97,6 +104,7 @@ export const SponsoredContentLabel = ({
 				data-testid="branding-logo"
 				data-component={ophanComponentName}
 				data-link-name={ophanComponentLink}
+				className="branding-logo"
 			>
 				<picture>
 					{darkModeAvailable && branding.logoForDarkBackground && (
