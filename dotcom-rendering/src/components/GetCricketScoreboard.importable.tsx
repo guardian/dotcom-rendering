@@ -10,7 +10,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const Loading = () => <Placeholder height={172} />;
+const Loading = () => <Placeholder heights={new Map([['mobile', 172]])} />;
 
 export const GetCricketScoreboard = ({ matchUrl, format }: Props) => {
 	const options: SWRConfiguration = {

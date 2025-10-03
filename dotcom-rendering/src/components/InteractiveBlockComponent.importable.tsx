@@ -459,7 +459,7 @@ export const InteractiveBlockComponent = ({
 				{!loaded && (
 					<>
 						<Placeholder // removed by HydrateInteractiveOnce
-							height={decideHeight(role)}
+							heights={new Map([['mobile', decideHeight(role)]])}
 							shouldShimmer={false}
 						/>
 						<a
