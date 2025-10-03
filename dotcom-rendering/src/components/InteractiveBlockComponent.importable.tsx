@@ -240,11 +240,6 @@ const setupWindowListeners = (iframe: HTMLIFrameElement) => {
 						'Json parse Failed on in interactiveBlockComponent',
 					);
 				}
-				window.guardian.modules.sentry.reportError(
-					// @ts-expect-error
-					e,
-					'Json parse Failed on in interactiveBlockComponent',
-				);
 			}
 
 			if (isUndefined(message)) {
