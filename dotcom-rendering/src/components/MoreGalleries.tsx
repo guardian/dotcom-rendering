@@ -229,7 +229,7 @@ const MoreGalleriesSplashCard = ({
 		mediaPositionOnDesktop: 'right',
 		mediaPositionOnMobile: 'top',
 		mediaSize: 'medium',
-		isFlexSplash: true,
+		isOnwardSplash: true,
 	};
 	return (
 		<div
