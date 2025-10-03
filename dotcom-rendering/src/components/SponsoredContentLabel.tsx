@@ -34,13 +34,14 @@ const labelStyles = css`
 `;
 
 const wrapperStyles = css`
+	padding-top: ${space[1]}px;
 	display: flex;
-	gap: ${space[2]}px;
 	justify-content: end;
 `;
 
 const horizontalStyles = css`
 	align-items: center;
+	gap: ${space[2]}px;
 `;
 
 const verticalStyles = {
@@ -54,8 +55,13 @@ const verticalStyles = {
 };
 
 const linkStyles = css`
+	height: 60px;
 	/* See: https://css-tricks.com/nested-links/ */
 	z-index: ${getZIndex('card-nested-link')};
+	/** Vertically center the branding within the link */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 `;
 
 /**
