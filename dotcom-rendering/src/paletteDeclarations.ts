@@ -6134,6 +6134,7 @@ const featureCardKickerText: PaletteFunction = ({ theme }) => {
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.neutral[86];
 		case Pillar.News:
+			return sourcePalette.news[800];
 		case Pillar.Opinion:
 		case Pillar.Sport:
 		case Pillar.Culture:
@@ -6148,6 +6149,7 @@ const featureCardQuoteIcon: PaletteFunction = ({ theme }) => {
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.neutral[86];
 		case Pillar.News:
+			return sourcePalette.news[800];
 		case Pillar.Opinion:
 		case Pillar.Sport:
 		case Pillar.Culture:

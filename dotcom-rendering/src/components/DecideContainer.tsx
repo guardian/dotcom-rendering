@@ -47,7 +47,6 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
-	isInHideTrailsAbTest?: boolean;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 };
@@ -65,7 +64,6 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
-	isInHideTrailsAbTest,
 	showLabsRedesign = false,
 }: Props) => {
 	switch (containerType) {
@@ -249,7 +247,6 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
-					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 					showLabsRedesign={!!showLabsRedesign}
 				/>
 			);
@@ -264,7 +261,6 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
-					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 					showLabsRedesign={!!showLabsRedesign}
 				/>
 			);
@@ -280,7 +276,6 @@ export const DecideContainer = ({
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
-						isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 						showLabsRedesign={!!showLabsRedesign}
 					/>
 				</Island>
@@ -297,7 +292,6 @@ export const DecideContainer = ({
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
-						isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 						showLabsRedesign={!!showLabsRedesign}
 					/>
 				</Island>
@@ -311,7 +305,6 @@ export const DecideContainer = ({
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
-					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 					showLabsRedesign={!!showLabsRedesign}
 				/>
 			);
@@ -325,7 +318,6 @@ export const DecideContainer = ({
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
 						collectionId={collectionId}
-						isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 					/>
 				</Island>
 			);
@@ -338,7 +330,6 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
-					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 				/>
 			);
 		default:

@@ -258,7 +258,7 @@ export const getAuxiaGateVersion = (
 		String(version).toLowerCase().endsWith('v2') ||
 		String(userTreatment?.treatmentType)
 			.toLowerCase()
-			.includes('v2')
+			.endsWith('POPUP')
 	) {
 		return 'v2';
 	}

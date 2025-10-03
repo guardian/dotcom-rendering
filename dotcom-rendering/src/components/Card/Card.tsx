@@ -155,7 +155,6 @@ export type Props = {
 	showKickerImage?: boolean;
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
-	isInHideTrailsAbTest?: boolean;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 };
@@ -396,7 +395,6 @@ export const Card = ({
 	trailTextSize,
 	showKickerImage = false,
 	headlinePosition = 'inner',
-	isInHideTrailsAbTest = false,
 	showLabsRedesign = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
@@ -1110,16 +1108,14 @@ export const Card = ({
 							</HeadlineWrapper>
 						)}
 
-						{!!trailText &&
-							shouldShowTrailText &&
-							!isInHideTrailsAbTest && (
-								<TrailText
-									trailText={trailText}
-									trailTextSize={trailTextSize}
-									padTop={headlinePosition === 'inner'}
-									hideUntil={hideTrailTextUntil()}
-								/>
-							)}
+						{!!trailText && shouldShowTrailText && (
+							<TrailText
+								trailText={trailText}
+								trailTextSize={trailTextSize}
+								padTop={headlinePosition === 'inner'}
+								hideUntil={hideTrailTextUntil()}
+							/>
+						)}
 
 						{!isOpinionCardWithAvatar && (
 							<>
