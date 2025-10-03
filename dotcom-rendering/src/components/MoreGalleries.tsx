@@ -7,15 +7,13 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
+import { grid } from '../grid';
 import { formatAttrString } from '../lib/formatAttrString';
 import { palette } from '../palette';
 import { type OnwardsSource } from '../types/onwards';
 import { type TrailType } from '../types/trails';
 import { Card } from './Card/Card';
 import type { Props as CardProps } from './Card/Card';
-import { Hide } from './Hide';
-import { LeftColumn } from './LeftColumn';
-import { Section } from './Section';
 
 type Props = {
 	absoluteServerTimes: boolean;
@@ -23,32 +21,6 @@ type Props = {
 	discussionApiUrl: string;
 	headingLink?: string;
 };
-
-const wrapperStyle = css`
-	display: flex;
-	justify-content: space-between;
-	overflow: hidden;
-	${from.desktop} {
-		padding-right: ${space[10]}px;
-	}
-`;
-
-const containerStyles = css`
-	display: flex;
-	flex-direction: column;
-	position: relative;
-
-	margin-top: ${space[2]}px;
-	padding-bottom: ${space[6]}px;
-
-	margin-left: 0px;
-	margin-right: 0px;
-
-	${from.leftCol} {
-		margin-left: 10px;
-		margin-right: 100px;
-	}
-`;
 
 const standardCardStyles = css`
 	flex: 1;
@@ -69,12 +41,22 @@ const standardCardStyles = css`
 	}
 `;
 
+const titleGridStyle = css`
+	${grid.column.centre}
+	color: ${palette('--caption-text')};
+	align-self: start;
+
+	${from.leftCol} {
+		${grid.column.left}
+	}
+`;
+
 const standardCardsListStyles = css`
 	width: 100%;
 	display: flex;
 	flex-direction: row;
 	gap: 20px;
-	position: relative;
+	margin-bottom: ${space[6]}px;
 
 	${from.tablet} {
 		padding-top: ${space[2]}px;
@@ -84,15 +66,30 @@ const standardCardsListStyles = css`
 		flex-direction: column;
 		width: 100%;
 	}
+	${from.leftCol} {
+		&::before {
+			content: '';
+			position: absolute;
+			left: -11px;
+			top: 8px;
+			bottom: 0;
+			width: 1px;
+			background-color: ${palette('--onward-content-border')};
+		}
+	}
+`;
 
-	&::before {
-		content: '';
-		position: absolute;
-		left: -11px;
-		top: 0;
-		bottom: 0;
-		width: 1px;
-		background-color: ${palette('--onward-content-border')};
+const cardsContainerStyles = css`
+	display: inline;
+	position: relative;
+	${grid.column.centre}
+
+	${from.desktop} {
+		${grid.between('centre-column-start', 'right-column-end')}
+	}
+
+	${from.leftCol} {
+		${grid.between('centre-column-start', 'right-column-end')}
 	}
 `;
 
@@ -172,55 +169,60 @@ export const MoreGalleries = (props: Props) => {
 	);
 
 	return (
-		<Section
-			fullWidth={true}
-			borderColour={palette('--onward-content-border')}
-			backgroundColour={palette('--onward-background')}
-			showTopBorder={false}
+		<section
+			data-component={onwardsSource}
+			data-link={formatAttrString(heading)}
+			css={css`
+				${grid.paddedContainer}
+
+				background-color: ${palette('--onward-background')};
+
+				${until.tablet} {
+					padding-top: ${space[1]}px;
+				}
+
+				${from.tablet} {
+					border-left: 1px solid ${palette('--onward-content-border')};
+					border-right: 1px solid
+						${palette('--onward-content-border')};
+				}
+			`}
 		>
-			<div css={wrapperStyle} data-link-name={formatAttrString(heading)}>
-				<LeftColumn
-					size={'compact'}
-					borderColour={palette('--onward-content-border')}
-					hasPageSkin={false}
-				>
-					<Title title={heading} url={props.headingLink} />
-				</LeftColumn>
-
-				<div
-					css={containerStyles}
-					data-component={onwardsSource}
-					data-link={formatAttrString(heading)}
-				>
-					<Hide when="above" breakpoint="leftCol">
-						<Title title={heading} url={props.headingLink} />
-					</Hide>
-
-					<MoreGalleriesSplashCard defaultProps={defaultProps} />
-					<Hide when="below" breakpoint="tablet">
-						<StraightLines
-							count={1}
-							color={palette('--onward-content-border')}
+			<Title title={heading} url={props.headingLink} />
+			<MoreGalleriesSplashCard defaultProps={defaultProps} />
+			<StraightLines
+				cssOverrides={cardsContainerStyles}
+				count={1}
+				color={palette('--onward-content-border')}
+			/>
+			<ul css={[cardsContainerStyles, standardCardsListStyles]}>
+				{standardCards.map((trail) => (
+					<li key={trail.url} css={standardCardStyles}>
+						<Card
+							{...getDefaultCardProps(
+								trail,
+								props.absoluteServerTimes,
+								props.discussionApiUrl,
+							)}
+							mediaSize="medium"
 						/>
-					</Hide>
-
-					<ul css={standardCardsListStyles}>
-						{standardCards.map((trail) => (
-							<li key={trail.url} css={standardCardStyles}>
-								<Card
-									{...getDefaultCardProps(
-										trail,
-										props.absoluteServerTimes,
-										props.discussionApiUrl,
-									)}
-									mediaSize="medium"
-								/>
-							</li>
-						))}
-					</ul>
-				</div>
-			</div>
-		</Section>
+					</li>
+				))}
+			</ul>
+			<StraightLines
+				cssOverrides={css`
+					${grid.column.all}
+					padding-left: ${space[5]}px;
+					padding-right: ${space[5]}px;
+					${from.leftCol} {
+						padding-left: ${space[2]}px;
+						padding-right: ${space[2]}px;
+					}
+				`}
+				count={1}
+				color={palette('--onward-content-border')}
+			/>
+		</section>
 	);
 };
 
@@ -242,25 +244,27 @@ const MoreGalleriesSplashCard = ({
 	};
 	return (
 		<div
-			css={css`
-				position: relative;
-				margin-bottom: ${space[6]}px;
-				background-color: ${palette('--onward-card-background')};
-				padding: ${space[2]}px;
-				&::before {
-					content: '';
-					position: absolute;
-					left: -11px;
-					top: 0;
-					bottom: 0;
-					width: 1px;
-					background-color: ${palette('--onward-content-border')};
-
-					${until.tablet} {
-						left: -12px;
+			css={[
+				cardsContainerStyles,
+				css`
+					margin-bottom: ${space[6]}px;
+					background-color: ${palette('--onward-card-background')};
+					padding: ${space[2]}px;
+					${from.leftCol} {
+						&::before {
+							content: '';
+							position: absolute;
+							left: -11px;
+							top: 8px;
+							bottom: 0;
+							width: 1px;
+							background-color: ${palette(
+								'--onward-content-border',
+							)};
+						}
 					}
-				}
-			`}
+				`,
+			]}
 		>
 			<Card {...defaultProps} {...cardProps} />
 		</div>
@@ -270,9 +274,12 @@ const MoreGalleriesSplashCard = ({
 const Title = ({ title, url }: { title: string; url?: string }) =>
 	url ? (
 		<a
-			css={css`
-				text-decoration: none;
-			`}
+			css={[
+				titleGridStyle,
+				css`
+					text-decoration: none;
+				`,
+			]}
 			href={url}
 			data-link-name="section heading"
 		>
@@ -281,7 +288,7 @@ const Title = ({ title, url }: { title: string; url?: string }) =>
 			</h2>
 		</a>
 	) : (
-		<h2 css={headerStyles}>
+		<h2 css={[titleGridStyle, headerStyles]}>
 			<span css={titleStyle}>{title}</span>
 		</h2>
 	);
