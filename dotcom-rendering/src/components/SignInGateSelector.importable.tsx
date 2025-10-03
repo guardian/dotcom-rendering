@@ -308,7 +308,7 @@ const SignInGateSelectorAuxia = ({
 			if (signInGateVersion === 'v2') {
 				// Emit modal dismiss event
 				document.dispatchEvent(
-					new CustomEvent('modal-dismissed', {
+					new CustomEvent('modal:close', {
 						detail: {
 							modalType: `sign-in-gate-${signInGateVersion}`,
 						},
@@ -469,7 +469,7 @@ const ShowSignInGateAuxia = ({
 			if (signInGateVersion === 'v2') {
 				// Emit modal view event
 				document.dispatchEvent(
-					new CustomEvent('modal-viewed', {
+					new CustomEvent('modal:open', {
 						detail: {
 							modalType: `sign-in-gate-${signInGateVersion}`,
 						},
