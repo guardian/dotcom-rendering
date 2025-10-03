@@ -1,0 +1,30 @@
+name: 🧪 Deploy CODE AB Testing Config
+
+permissions:
+  contents: read
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ci:
+    uses: ./.github/workflows/ab-testing-checks.yml
+    secrets:
+      FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_CODE_AB_TESTING_CONFIG }}
+      FASTLY_API_TOKEN: ${{ secrets.FASTLY_CODE_API_TOKEN }}
+
+  deploy:
+    name: Deploy CODE
+    needs: ci
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ab-testing
+    steps:
+      - name: Deploy
+        uses: ./.github/workflows/ab-testing-deploy.yml
+        with:
+          stage: code
+        env:
+          FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_CODE_AB_TESTING_CONFIG }}
+          FASTLY_API_TOKEN: ${{ secrets.FASTLY_CODE_API_TOKEN }}
