@@ -305,12 +305,16 @@ const SignInGateSelectorAuxia = ({
 				new CustomEvent('article:sign-in-gate-dismissed'),
 			);
 
-			// Emit event for use by ad slots
-			document.dispatchEvent(
-				new CustomEvent(
-					`article:sign-in-gate-${signInGateVersion}-dismissed`,
-				),
-			);
+			if (signInGateVersion === 'v2') {
+				// Emit modal dismiss event
+				document.dispatchEvent(
+					new CustomEvent('modal-dismissed', {
+						detail: {
+							modalType: `sign-in-gate-${signInGateVersion}`,
+						},
+					}),
+				);
+			}
 		}
 	}, [isGateDismissed]);
 
@@ -463,11 +467,16 @@ const ShowSignInGateAuxia = ({
 			incrementGateDisplayCount();
 
 			// Emit event for use by ad slots
-			document.dispatchEvent(
-				new CustomEvent(
-					`article:sign-in-gate-${signInGateVersion}-viewed`,
-				),
-			);
+			if (signInGateVersion === 'v2') {
+				// Emit modal view event
+				document.dispatchEvent(
+					new CustomEvent('modal-viewed', {
+						detail: {
+							modalType: `sign-in-gate-${signInGateVersion}`,
+						},
+					}),
+				);
+			}
 		}
 	}, [
 		componentId,
