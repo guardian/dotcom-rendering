@@ -1,9 +1,11 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import {
+	between,
 	from,
 	palette as sourcePalette,
 	space,
+	until,
 } from '@guardian/source/foundations';
 import { Hide, Link, SvgCamera } from '@guardian/source/react-components';
 import {
@@ -753,12 +755,45 @@ export const Card = ({
 			: undefined;
 
 		return showLabsRedesign ? (
-			<SponsoredContentLabel
-				branding={branding}
-				containerPalette={containerPalette}
-				ophanComponentLink={dataAttributes?.ophanComponentLink}
-				ophanComponentName={dataAttributes?.ophanComponentName}
-			/>
+			<>
+				{/** All screen sizes apart from tablet have horizontal orientation */}
+				<div
+					css={css`
+						${between.tablet.and.desktop} {
+							display: none;
+						}
+					`}
+				>
+					<SponsoredContentLabel
+						branding={branding}
+						containerPalette={containerPalette}
+						orientation="horizontal"
+						alignment="end"
+						ophanComponentLink={dataAttributes?.ophanComponentLink}
+						ophanComponentName={dataAttributes?.ophanComponentName}
+					/>
+				</div>
+				{/** Tablet sized screens have vertical orientation */}
+				<div
+					css={css`
+						${until.tablet} {
+							display: none;
+						}
+						${from.desktop} {
+							display: none;
+						}
+					`}
+				>
+					<SponsoredContentLabel
+						branding={branding}
+						containerPalette={containerPalette}
+						orientation="vertical"
+						alignment="end"
+						ophanComponentLink={dataAttributes?.ophanComponentLink}
+						ophanComponentName={dataAttributes?.ophanComponentName}
+					/>
+				</div>
+			</>
 		) : (
 			<CardBranding
 				branding={branding}
