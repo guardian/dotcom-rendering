@@ -7,18 +7,17 @@ import { addDiscussionIds } from '../lib/useCommentCount';
 import { palette } from '../palette';
 import { type DCRFrontImage } from '../types/front';
 import { type MainMedia } from '../types/mainMedia';
-import type { OnwardsSource } from '../types/onwards';
 import type { FETrailType, TrailType } from '../types/trails';
 import { MoreGalleries } from './MoreGalleries';
 import { Placeholder } from './Placeholder';
 
 type Props = {
-	url: string;
 	limit: number; // Limit the number of items shown (the api often returns more)
-	onwardsSource: OnwardsSource;
 	discussionApiUrl: string;
 	absoluteServerTimes: boolean;
 	isAdFreeUser: boolean;
+	ajaxUrl: string;
+	guardianBaseUrl: string;
 };
 
 type MoreGalleriesResponse = {
@@ -73,7 +72,8 @@ const buildTrails = (
 };
 
 const fetchJson = async (ajaxUrl: string): Promise<MoreGalleriesResponse> => {
-	const fetchResponse = await fetch(ajaxUrl);
+	const url = `${ajaxUrl}/gallery/most-viewed.json?dcr=true`;
+	const fetchResponse = await fetch(url);
 	if (!fetchResponse.ok) {
 		throw new Error(`HTTP error! status: ${fetchResponse.status}`);
 	}
@@ -91,12 +91,12 @@ const fetchJson = async (ajaxUrl: string): Promise<MoreGalleriesResponse> => {
 };
 
 export const FetchMoreGalleriesData = ({
-	url,
 	limit,
-	onwardsSource,
 	discussionApiUrl,
 	absoluteServerTimes,
 	isAdFreeUser,
+	ajaxUrl,
+	guardianBaseUrl,
 }: Props) => {
 	const [data, setData] = useState<MoreGalleriesResponse | undefined>(
 		undefined,
@@ -104,7 +104,7 @@ export const FetchMoreGalleriesData = ({
 	const [error, setError] = useState<Error | undefined>(undefined);
 
 	useEffect(() => {
-		fetchJson(url)
+		fetchJson(ajaxUrl)
 			.then((fetchedData) => {
 				setData(fetchedData);
 				setError(undefined);
@@ -115,7 +115,7 @@ export const FetchMoreGalleriesData = ({
 				);
 				setData(undefined);
 			});
-	}, [url]);
+	}, [ajaxUrl]);
 
 	if (error) {
 		// Send the error to Sentry and then prevent the element from rendering
@@ -159,8 +159,7 @@ export const FetchMoreGalleriesData = ({
 				absoluteServerTimes={absoluteServerTimes}
 				trails={buildTrails(data.trails, limit, isAdFreeUser)}
 				discussionApiUrl={discussionApiUrl}
-				heading="More galleries"
-				onwardsSource={onwardsSource}
+				headingLink={`${guardianBaseUrl}/inpictures/all`}
 			/>
 		</div>
 	);

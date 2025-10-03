@@ -363,9 +363,9 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 				/>
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<FetchMoreGalleriesData
-						url={`${gallery.frontendData.config.ajaxUrl}/gallery/most-viewed.json?dcr=true`}
+						ajaxUrl={gallery.frontendData.config.ajaxUrl}
+						guardianBaseUrl={gallery.frontendData.guardianBaseURL}
 						limit={5}
-						onwardsSource={'more-galleries'}
 						discussionApiUrl={discussionApiUrl}
 						absoluteServerTimes={
 							switches['absoluteServerTimes'] ?? false
