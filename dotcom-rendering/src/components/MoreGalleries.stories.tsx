@@ -15,14 +15,11 @@ type Story = StoryObj<typeof meta>;
 export const MoreGalleries = {
 	args: {
 		absoluteServerTimes: false,
-		discussionApiUrl:
-			'https://discussion.code.dev-theguardian.com/discussion-api',
-		heading: 'More galleries',
-		url: 'http://localhost:9000/more-galleries',
-		onwardsSource: 'more-galleries',
+		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
+		headingLink: 'https://www.theguardian.com/inpictures/all',
 		trails: [
 			{
-				url: 'http://localhost:9000/environment/gallery/2025/aug/22/week-in-wildlife-a-clumsy-fox-swinging-orangutang-and-rescued-jaguarundi-cub',
+				url: 'https://www.theguardian.com/environment/gallery/2025/aug/22/week-in-wildlife-a-clumsy-fox-swinging-orangutang-and-rescued-jaguarundi-cub',
 				linkText:
 					'Week in wildlife: a clumsy fox, a swinging orangutan and a rescued jaguarundi cub',
 				showByline: false,
@@ -56,11 +53,11 @@ export const MoreGalleries = {
 				),
 				trailText:
 					'Guinness World Records is looking back at the extraordinary feats achieved since its inception - as well as unveiling 70 whacky and unclaimed records ',
-				kickerText: 'Politics', // Get data for this
-				mainMedia: { type: 'Gallery', count: '6' }, // TODO: get data for this
+				kickerText: 'Politics',
+				mainMedia: { type: 'Gallery', count: '6' },
 			},
 			{
-				url: 'http://localhost:9000/money/gallery/2025/aug/22/characterful-cottages-for-sale-in-england-in-pictures',
+				url: 'https://www.theguardian.com/money/gallery/2025/aug/22/characterful-cottages-for-sale-in-england-in-pictures',
 				linkText:
 					'Characterful cottages for sale in England – in pictures',
 				showByline: false,
@@ -94,10 +91,10 @@ export const MoreGalleries = {
 				),
 				trailText:
 					'Picked from a record 60,636 entries, the first images from the Natural History Museum’s wildlife photographer of the year competition have been released. The photographs, which range from a lion facing down a cobra to magnified mould spores, show the diversity, beauty and complexity of the natural world and humanity’s relationship with it',
-				mainMedia: { type: 'Gallery', count: '6' }, // TODO: get data for this
+				mainMedia: { type: 'Gallery', count: '6' },
 			},
 			{
-				url: 'http://localhost:9000/news/gallery/2025/aug/22/sunsets-aid-parachutes-and-giant-pandas-photos-of-the-day-friday',
+				url: 'https://www.theguardian.com/news/gallery/2025/aug/22/sunsets-aid-parachutes-and-giant-pandas-photos-of-the-day-friday',
 				linkText:
 					'Sunsets, aid parachutes and giant pandas: photos of the day – Friday ',
 				showByline: false,
@@ -131,10 +128,10 @@ export const MoreGalleries = {
 				),
 				trailText:
 					'From the mock-Tudor fad of the 1920s to drivers refuelling on a roundabout, each era produces its own distinctive petrol stations – as photographer Philip Butler discovered',
-				mainMedia: { type: 'Gallery', count: '6' }, // TODO: get data for this
+				mainMedia: { type: 'Gallery', count: '6' },
 			},
 			{
-				url: 'http://localhost:9000/fashion/gallery/2025/aug/22/what-to-wear-to-notting-hill-carnival',
+				url: 'https://www.theguardian.com/fashion/gallery/2025/aug/22/what-to-wear-to-notting-hill-carnival',
 				linkText: 'On parade: what to wear to Notting Hill carnival',
 				showByline: false,
 				byline: 'Melanie Wilkinson',
@@ -166,10 +163,10 @@ export const MoreGalleries = {
 				),
 				trailText:
 					'The Guardian’s picture editors select photographs from around the world',
-				mainMedia: { type: 'Gallery', count: '6' }, // TODO: get data for thismainMedia: { type: 'Gallery', count: '6' }, // TODO: get data for this
+				mainMedia: { type: 'Gallery', count: '6' },
 			},
 			{
-				url: 'http://localhost:9000/artanddesign/gallery/2025/aug/21/psychedelic-rock-glass-mountain-michael-lundgren',
+				url: 'https://www.theguardian.com/artanddesign/gallery/2025/aug/21/psychedelic-rock-glass-mountain-michael-lundgren',
 				linkText:
 					'Psychedelic rock! Formations that mess with your mind – in pictures ',
 				showByline: false,
@@ -202,7 +199,7 @@ export const MoreGalleries = {
 				),
 				trailText:
 					'Politicians and their partners put on their best show at this year’s Midwinter Ball, an annual dinner hosted by the Federal Parliamentary Press Gallery in Canberra',
-				mainMedia: { type: 'Gallery', count: '6' }, // TODO: get data for this
+				mainMedia: { type: 'Gallery', count: '6' },
 			},
 		],
 	},

@@ -21,9 +21,7 @@ type Props = {
 	absoluteServerTimes: boolean;
 	trails: TrailType[];
 	discussionApiUrl: string;
-	heading: string;
-	onwardsSource: OnwardsSource;
-	url?: string;
+	headingLink?: string;
 };
 
 const wrapperStyle = css`
@@ -110,9 +108,6 @@ const headerStylesWithUrl = css`
 const titleStyle = css`
 	color: ${palette('--onward-text')};
 	display: inline-block;
-	&::first-letter {
-		text-transform: capitalize;
-	}
 `;
 
 const getDefaultCardProps = (
@@ -158,6 +153,9 @@ export const MoreGalleries = (props: Props) => {
 	const [firstTrail, ...standardCards] = props.trails;
 	if (!firstTrail) return null;
 
+	const heading = 'More galleries';
+	const onwardsSource: OnwardsSource = 'more-galleries';
+
 	const defaultProps = getDefaultCardProps(
 		firstTrail,
 		props.absoluteServerTimes,
@@ -171,25 +169,22 @@ export const MoreGalleries = (props: Props) => {
 			backgroundColour={palette('--onward-background')}
 			showTopBorder={false}
 		>
-			<div
-				css={wrapperStyle}
-				data-link-name={formatAttrString(props.heading)}
-			>
+			<div css={wrapperStyle} data-link-name={formatAttrString(heading)}>
 				<LeftColumn
 					size={'compact'}
 					borderColour={palette('--onward-content-border')}
 					hasPageSkin={false}
 				>
-					<Title title={props.heading} url={props.url} />
+					<Title title={heading} url={props.headingLink} />
 				</LeftColumn>
 
 				<div
 					css={containerStyles}
-					data-component={props.onwardsSource}
-					data-link={formatAttrString(props.heading)}
+					data-component={onwardsSource}
+					data-link={formatAttrString(heading)}
 				>
 					<Hide when="above" breakpoint="leftCol">
-						<Title title={props.heading} url={props.url} />
+						<Title title={heading} url={props.headingLink} />
 					</Hide>
 
 					<MoreGalleriesSplashCard defaultProps={defaultProps} />
@@ -203,14 +198,14 @@ export const MoreGalleries = (props: Props) => {
 					<ul css={standardCardsListStyles}>
 						{standardCards.map((trail) => (
 							<li key={trail.url} css={standardCardStyles}>
-								{Card({
-									...getDefaultCardProps(
+								<Card
+									{...getDefaultCardProps(
 										trail,
 										props.absoluteServerTimes,
 										props.discussionApiUrl,
-									),
-									mediaSize: 'medium',
-								})}
+									)}
+									mediaSize="medium"
+								/>
 							</li>
 						))}
 					</ul>
@@ -244,7 +239,7 @@ const MoreGalleriesSplashCard = ({
 				padding: ${space[2]}px;
 			`}
 		>
-			{Card({ ...defaultProps, ...cardProps })}
+			<Card {...defaultProps} {...cardProps} />
 		</div>
 	);
 };

@@ -7427,7 +7427,7 @@ const paletteColours = {
 	},
 	'--onward-background': {
 		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[0],
+		dark: () => sourcePalette.neutral[10],
 	},
 	'--onward-card-background': {
 		light: () => sourcePalette.neutral[97],
