@@ -251,4 +251,5 @@ export type SignInGatePropsAuxia = {
 	) => Promise<void>;
 };
 
+// v1 is in the article, v2 is a popup
 export type AuxiaGateVersion = 'v1' | 'v2';
