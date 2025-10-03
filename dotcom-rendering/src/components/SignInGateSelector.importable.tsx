@@ -466,7 +466,6 @@ const ShowSignInGateAuxia = ({
 			// the tracking of the number of times the gate has been displayed
 			incrementGateDisplayCount();
 
-			// Emit event for use by ad slots
 			if (signInGateVersion === 'v2') {
 				// Emit modal view event
 				document.dispatchEvent(
