@@ -1190,7 +1190,6 @@ export const Card = ({
 										{!showLabsRedesign &&
 											format.theme ===
 												ArticleSpecial.Labs &&
-											branding &&
 											getBranding()}
 									</>
 								) : (
@@ -1199,9 +1198,7 @@ export const Card = ({
 										age={decideAge()}
 										commentCount={<CommentCount />}
 										cardBranding={
-											(isOnwardContent ||
-												!showLabsRedesign) &&
-											branding
+											isOnwardContent || !showLabsRedesign
 												? getBranding()
 												: undefined
 										}
@@ -1313,7 +1310,6 @@ export const Card = ({
 			{showLabsRedesign &&
 				!isOnwardContent &&
 				format.theme === ArticleSpecial.Labs &&
-				branding &&
 				getBranding()}
 		</CardWrapper>
 	);
