@@ -1164,7 +1164,9 @@ export const Card = ({
 										age={decideAge()}
 										commentCount={<CommentCount />}
 										cardBranding={
-											!showLabsRedesign && branding
+											(isOnwardContent ||
+												!showLabsRedesign) &&
+											branding
 												? getBranding()
 												: undefined
 										}
@@ -1274,6 +1276,7 @@ export const Card = ({
 			</div>
 
 			{showLabsRedesign &&
+				!isOnwardContent &&
 				format.theme === ArticleSpecial.Labs &&
 				branding &&
 				getBranding()}
