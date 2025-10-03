@@ -37,6 +37,7 @@ const wrapperStyles = css`
 	display: flex;
 	gap: ${space[2]}px;
 	justify-content: end;
+	height: 60px;
 `;
 
 const horizontalStyles = css`
