@@ -130,7 +130,10 @@ export const Immersive: Story = {
 export const Labs: Story = {
 	args: {
 		byline: undefined,
-		format: { ...cardProps.format, theme: ArticleSpecial.Labs },
+		format: {
+			...cardProps.format,
+			theme: ArticleSpecial.Labs,
+		},
 		containerPalette: 'Branded',
 		branding: {
 			logo: {
@@ -366,6 +369,14 @@ export const WithSublinks: Story = {
 export const WithSublinksImmersive: Story = {
 	args: {
 		...WithSublinks.args,
+		...Immersive.args,
+	},
+};
+
+export const WithSublinksLabsImmersive: Story = {
+	args: {
+		...WithSublinks.args,
+		...Labs.args,
 		...Immersive.args,
 	},
 };
