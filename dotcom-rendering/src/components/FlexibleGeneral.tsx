@@ -34,6 +34,7 @@ type Props = {
 	collectionId: number;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
+	isInAllBoostsTest?: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -507,6 +508,7 @@ type HalfWidthCardLayoutProps = {
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
+	isInAllBoostsTest?: boolean;
 	containerLevel: DCRContainerLevel;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
@@ -522,6 +524,7 @@ const HalfWidthCardLayout = ({
 	isFirstStandardRow,
 	aspectRatio,
 	isLastRow,
+	isInAllBoostsTest,
 	containerLevel,
 	showLabsRedesign,
 }: HalfWidthCardLayoutProps) => {
@@ -557,6 +560,9 @@ const HalfWidthCardLayout = ({
 							image={card.image}
 							imageLoading={imageLoading}
 							mediaPositionOnDesktop="left"
+							mediaPositionOnMobile={
+								isInAllBoostsTest ? 'bottom' : 'left'
+							}
 							supportingContent={card.supportingContent?.slice(
 								0,
 								2,
@@ -575,9 +581,18 @@ const HalfWidthCardLayout = ({
 								(containerLevel !== 'Primary' && cardIndex > 0)
 							}
 							trailText={undefined}
-							headlineSizes={undefined}
+							headlineSizes={
+								isInAllBoostsTest
+									? {
+											desktop: 'xsmall',
+											tablet: 'xxsmall',
+											mobile: 'small',
+									  }
+									: undefined
+							}
 							canPlayInline={false}
 							showLabsRedesign={showLabsRedesign}
+							isInAllBoostsTest={isInAllBoostsTest}
 						/>
 					</LI>
 				);
@@ -594,6 +609,7 @@ export const FlexibleGeneral = ({
 	imageLoading,
 	aspectRatio,
 	containerLevel = 'Primary',
+	isInAllBoostsTest = false,
 	collectionId,
 	showLabsRedesign,
 }: Props) => {
@@ -661,6 +677,7 @@ export const FlexibleGeneral = ({
 								isFirstStandardRow={i === 0}
 								aspectRatio={aspectRatio}
 								isLastRow={i === groupedCards.length - 1}
+								isInAllBoostsTest={isInAllBoostsTest}
 								containerLevel={containerLevel}
 								showLabsRedesign={showLabsRedesign}
 							/>
