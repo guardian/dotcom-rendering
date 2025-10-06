@@ -45,7 +45,7 @@ import { decideMainMediaCaption } from '../lib/decide-caption';
 import type { EditionId } from '../lib/edition';
 import type { NavType } from '../model/extract-nav';
 import { palette } from '../palette';
-import type { Gallery } from '../types/article';
+import type { ArticleDeprecated, Gallery } from '../types/article';
 import type { ConfigType } from '../types/config';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
@@ -70,23 +70,6 @@ const headerStyles = css`
 
 	${from.tablet} {
 		border-bottom: 1px solid ${palette('--article-border')};
-	}
-`;
-
-const metaAndDisclaimerContainer = css`
-	${grid.column.centre}
-	padding-bottom: ${space[6]}px;
-	${from.tablet} {
-		position: relative;
-		&::before {
-			content: '';
-			position: absolute;
-			left: -10px;
-			top: 0;
-			bottom: 0;
-			width: 1px;
-			background-color: ${palette('--article-border')};
-		}
 	}
 `;
 
@@ -152,7 +135,6 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 		config: {
 			discussionApiUrl,
 			idApiUrl,
-			shortUrlId,
 			isPreview,
 			isSensitive,
 			section,
@@ -243,53 +225,11 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						format={format}
 						isMainMedia={true}
 					/>
-					<div css={metaAndDisclaimerContainer}>
-						{isWeb ? (
-							<ArticleMeta
-								branding={
-									frontendData.commercialProperties[
-										frontendData.editionId
-									].branding
-								}
-								format={format}
-								pageId={frontendData.pageId}
-								webTitle={frontendData.webTitle}
-								byline={frontendData.byline}
-								tags={frontendData.tags}
-								primaryDateline={
-									frontendData.webPublicationDateDisplay
-								}
-								secondaryDateline={
-									frontendData.webPublicationSecondaryDateDisplay
-								}
-								isCommentable={frontendData.isCommentable}
-								discussionApiUrl={discussionApiUrl}
-								shortUrlId={shortUrlId}
-							/>
-						) : null}
-						{isApps ? (
-							<ArticleMetaApps
-								branding={
-									frontendData.commercialProperties[
-										frontendData.editionId
-									].branding
-								}
-								format={format}
-								pageId={frontendData.pageId}
-								byline={frontendData.byline}
-								tags={frontendData.tags}
-								primaryDateline={
-									frontendData.webPublicationDateDisplay
-								}
-								secondaryDateline={
-									frontendData.webPublicationSecondaryDateDisplay
-								}
-								isCommentable={frontendData.isCommentable}
-								discussionApiUrl={discussionApiUrl}
-								shortUrlId={shortUrlId}
-							/>
-						) : null}
-					</div>
+					<Meta
+						renderingTarget={renderingTarget}
+						format={format}
+						frontendData={frontendData}
+					/>
 				</header>
 				{gallery.bodyElements.map((element, index) => {
 					const isImage =
@@ -587,6 +527,75 @@ const GalleryLabsHeader = (props: {
 			</Section>
 		</Stuck>
 	) : null;
+
+const Meta = ({
+	renderingTarget,
+	format,
+	frontendData,
+}: {
+	renderingTarget: RenderingTarget;
+	format: ArticleFormat;
+	frontendData: ArticleDeprecated;
+}) => (
+	<div
+		css={{
+			'&': css(grid.column.centre),
+			paddingBottom: space[6],
+			[from.tablet]: {
+				position: 'relative',
+				'&::before': {
+					content: '""',
+					position: 'absolute',
+					left: -10,
+					top: 0,
+					bottom: 0,
+					width: 1,
+					backgroundColor: palette('--article-border'),
+				},
+			},
+		}}
+	>
+		{renderingTarget === 'Web' ? (
+			<ArticleMeta
+				branding={
+					frontendData.commercialProperties[frontendData.editionId]
+						.branding
+				}
+				format={format}
+				pageId={frontendData.pageId}
+				webTitle={frontendData.webTitle}
+				byline={frontendData.byline}
+				tags={frontendData.tags}
+				primaryDateline={frontendData.webPublicationDateDisplay}
+				secondaryDateline={
+					frontendData.webPublicationSecondaryDateDisplay
+				}
+				isCommentable={frontendData.isCommentable}
+				discussionApiUrl={frontendData.config.discussionApiUrl}
+				shortUrlId={frontendData.config.shortUrlId}
+			/>
+		) : null}
+		{renderingTarget === 'Apps' ? (
+			<ArticleMetaApps
+				branding={
+					frontendData.commercialProperties[frontendData.editionId]
+						.branding
+				}
+				format={format}
+				pageId={frontendData.pageId}
+				byline={frontendData.byline}
+				tags={frontendData.tags}
+				primaryDateline={frontendData.webPublicationDateDisplay}
+				secondaryDateline={
+					frontendData.webPublicationSecondaryDateDisplay
+				}
+				isCommentable={frontendData.isCommentable}
+				discussionApiUrl={frontendData.config.discussionApiUrl}
+				shortUrlId={frontendData.config.shortUrlId}
+			/>
+		) : null}
+	</div>
+);
 
 const StoryPackage = ({
 	storyPackage,
