@@ -100,7 +100,7 @@ const getDefaultCardProps = (
 		dataLinkName: trail.dataLinkName,
 		snapData: trail.snapData,
 		discussionApiUrl,
-		discussionId: trail.discussionId,
+		discussionId: trail.discussion?.discussionId,
 		avatarUrl: trail.avatarUrl,
 		mainMedia: trail.mainMedia,
 		isExternalLink: false,

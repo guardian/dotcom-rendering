@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import { isNonNullable, isObject } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { decideFormat } from '../lib/articleFormat';
@@ -12,7 +11,6 @@ import { MoreGalleries } from './MoreGalleries';
 import { Placeholder } from './Placeholder';
 
 type Props = {
-	limit: number; // Limit the number of items shown (the api often returns more)
 	discussionApiUrl: string;
 	absoluteServerTimes: boolean;
 	isAdFreeUser: boolean;
@@ -24,10 +22,6 @@ type MoreGalleriesResponse = {
 	heading: string;
 	trails: FETrailType[];
 };
-
-const minHeight = css`
-	min-height: 300px;
-`;
 
 const getMedia = (galleryCount?: number): MainMedia | undefined => {
 	if (typeof galleryCount === 'number') {
@@ -91,7 +85,6 @@ const fetchJson = async (ajaxUrl: string): Promise<MoreGalleriesResponse> => {
 };
 
 export const FetchMoreGalleriesData = ({
-	limit,
 	discussionApiUrl,
 	absoluteServerTimes,
 	isAdFreeUser,
@@ -117,10 +110,19 @@ export const FetchMoreGalleriesData = ({
 			});
 	}, [ajaxUrl]);
 
+	useEffect(() => {
+		if (!data) return;
+		addDiscussionIds(
+			data.trails
+				.map((trail) => trail.discussion?.discussionId)
+				.filter(isNonNullable),
+		);
+	}, [data]);
+
 	if (error) {
 		// Send the error to Sentry and then prevent the element from rendering
 		window.guardian.modules.sentry.reportError(error, 'more-galleries');
-		return undefined;
+		return null;
 	}
 
 	if (!data?.trails) {
@@ -147,22 +149,16 @@ export const FetchMoreGalleriesData = ({
 		);
 	}
 
-	addDiscussionIds(
-		data.trails
-			.map((trail) => trail.discussion?.discussionId)
-			.filter(isNonNullable),
-	);
-
 	return (
 		<div
 			css={{
-					backgroundColor: palette('--onward-background'),
-					minHeight: 300,
+				backgroundColor: palette('--onward-background'),
+				minHeight: 300,
 			}}
 		>
 			<MoreGalleries
 				absoluteServerTimes={absoluteServerTimes}
-				trails={buildTrails(data.trails, limit, isAdFreeUser)}
+				trails={buildTrails(data.trails, 5, isAdFreeUser)}
 				discussionApiUrl={discussionApiUrl}
 				guardianBaseUrl={guardianBaseUrl}
 			/>

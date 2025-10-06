@@ -365,7 +365,6 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					<FetchMoreGalleriesData
 						ajaxUrl={gallery.frontendData.config.ajaxUrl}
 						guardianBaseUrl={gallery.frontendData.guardianBaseURL}
-						limit={5}
 						discussionApiUrl={discussionApiUrl}
 						absoluteServerTimes={
 							switches['absoluteServerTimes'] ?? false
