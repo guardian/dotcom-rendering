@@ -42,6 +42,7 @@ import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
 import { LoopVideo } from '../LoopVideo.importable';
+import type { SubtitleSize } from '../LoopVideoPlayer';
 import { Pill } from '../Pill';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
 import { Snap } from '../Snap';
@@ -159,6 +160,7 @@ export type Props = {
 	showKickerImage?: boolean;
 	isInAllBoostsTest?: boolean;
 	fixImageWidth?: boolean;
+	subtitleSize?: SubtitleSize;
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
 	/** Feature flag for the labs redesign work */
@@ -404,6 +406,7 @@ export const Card = ({
 	isInAllBoostsTest = false,
 	headlinePosition = 'inner',
 	showLabsRedesign = false,
+	subtitleSize = 'small',
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -969,6 +972,10 @@ export const Card = ({
 									fallbackImageAlt={media.imageAltText}
 									fallbackImageAspectRatio="5:4"
 									linkTo={linkTo}
+									subtitleSource={
+										media.mainMedia.subtitleSource
+									}
+									subtitleSize={subtitleSize}
 								/>
 							</Island>
 						)}
