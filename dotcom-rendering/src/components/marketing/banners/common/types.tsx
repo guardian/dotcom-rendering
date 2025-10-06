@@ -80,4 +80,5 @@ export interface BannerRenderProps {
 	tracking: Tracking;
 	submitComponentEvent?: (componentEvent: ComponentEvent) => void;
 	design?: ConfigurableDesign;
+	promoCodes?: string[];
 }

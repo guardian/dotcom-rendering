@@ -306,26 +306,24 @@ export const addTrackingParamsToProfileUrl = (
 		: baseUrl;
 };
 
-export const getChoiceCardUrl = (
-	choiceCard: ChoiceCard,
-	baseUrl: string,
-): string => {
-	const { destinationUrl, product } = choiceCard;
+const SupportUrl = 'https://support.theguardian.com';
 
-	const url: string =
-		destinationUrl && destinationUrl.trim() !== ''
-			? destinationUrl.trim()
-			: baseUrl;
+export const getChoiceCardUrl = (choiceCard: ChoiceCard): string => {
+	const { product } = choiceCard;
+	const destination = choiceCard.destination ?? 'LandingPage';
 
 	if (product.supportTier === 'OneOff') {
-		return addChoiceCardsOneTimeParams(url);
+		const path =
+			destination === 'LandingPage' ? 'contribute' : 'one-time-checkout';
+		return addChoiceCardsOneTimeParams(`${SupportUrl}/${path}`);
+	} else {
+		const path = destination === 'LandingPage' ? 'contribute' : 'checkout';
+		return addChoiceCardsProductParams(
+			`${SupportUrl}/${path}`,
+			product.supportTier,
+			product.ratePlan,
+		);
 	}
-
-	return addChoiceCardsProductParams(
-		url,
-		product.supportTier,
-		product.ratePlan,
-	);
 };
 
 // SHARED TRACKING
