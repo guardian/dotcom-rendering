@@ -155,12 +155,10 @@ export const FetchMoreGalleriesData = ({
 
 	return (
 		<div
-			css={[
-				minHeight,
-				css`
-					background-color: ${palette('--onward-background')};
-				`,
-			]}
+			css={{
+					backgroundColor: palette('--onward-background'),
+					minHeight: 300,
+			}}
 		>
 			<MoreGalleries
 				absoluteServerTimes={absoluteServerTimes}
