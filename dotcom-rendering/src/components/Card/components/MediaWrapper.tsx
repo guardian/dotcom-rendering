@@ -12,7 +12,7 @@ const mediaFixedSize = {
 type MediaFixedSize = keyof typeof mediaFixedSize;
 
 export type MediaFixedSizeOptions = {
-	mobile: MediaFixedSize;
+	mobile?: MediaFixedSize;
 	tablet?: MediaFixedSize;
 	desktop?: MediaFixedSize;
 };
@@ -38,6 +38,7 @@ type Props = {
 	mediaType?: CardMediaType;
 	mediaPositionOnDesktop: MediaPositionType;
 	mediaPositionOnMobile: MediaPositionType;
+	fixImageWidth: boolean;
 	/**
 	 * Forces hiding the image overlay added to pictures & slideshows on hover.
 	 * This is to allow hiding the overlay on slideshow carousels where we don't
@@ -166,7 +167,7 @@ const fixMediaWidth = ({
 	desktop,
 }: MediaFixedSizeOptions) => css`
 	${until.tablet} {
-		${fixMediaWidthStyles(mediaFixedSize[mobile])}
+		${mobile !== undefined && fixMediaWidthStyles(mediaFixedSize[mobile])}
 	}
 	${tablet &&
 	css`
@@ -189,14 +190,13 @@ export const MediaWrapper = ({
 	mediaType,
 	mediaPositionOnDesktop,
 	mediaPositionOnMobile,
+	fixImageWidth,
 	hideImageOverlay,
 	isBetaContainer = false,
 	padMedia,
 }: Props) => {
 	const isHorizontalOnDesktop =
 		mediaPositionOnDesktop === 'left' || mediaPositionOnDesktop === 'right';
-	const isHorizontalOnMobile =
-		mediaPositionOnMobile === 'left' || mediaPositionOnMobile === 'right';
 
 	return (
 		<div
@@ -222,7 +222,7 @@ export const MediaWrapper = ({
 							display: none;
 						}
 					`,
-				isHorizontalOnMobile && fixMediaWidth(mediaFixedSizes),
+				fixImageWidth && fixMediaWidth(mediaFixedSizes),
 				isHorizontalOnDesktop &&
 					css`
 						${from.tablet} {

@@ -1,9 +1,13 @@
+import { css } from '@emotion/react';
+import { from } from '@guardian/source/foundations';
+import { palette } from '../palette';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
-	DCRContainerType,
 	DCRFrontCard,
 } from '../types/front';
+import { LI } from './Card/components/LI';
+import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
 import { ScrollableCarousel } from './ScrollableCarousel';
 
@@ -13,10 +17,9 @@ type Props = {
 	showAge?: boolean;
 	absoluteServerTimes?: boolean;
 	imageLoading: 'lazy' | 'eager';
-	containerType: DCRContainerType;
 	aspectRatio: AspectRatio;
+	isInAllBoostsTest?: boolean;
 	sectionId: string;
-	isInHideTrailsAbTest?: boolean;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 };
@@ -57,17 +60,126 @@ type Props = {
 export const ScrollableSmall = ({
 	trails,
 	containerPalette,
-	containerType,
 	absoluteServerTimes,
 	imageLoading,
 	showAge,
 	aspectRatio,
+	isInAllBoostsTest = false,
 	sectionId,
-	isInHideTrailsAbTest,
 	showLabsRedesign,
 }: Props) => {
 	const mobileBottomCards = [1, 3];
 	const desktopBottomCards = [2, 3];
+
+	if (isInAllBoostsTest) {
+		return (
+			<>
+				<UL direction="row" padBottom={true}>
+					{trails.slice(0, 2).map((trail, index) => {
+						return (
+							<LI
+								key={trail.url}
+								stretch={false}
+								padSides={true}
+								showDivider={true}
+								verticalDividerColour={palette(
+									'--card-border-supporting',
+								)}
+							>
+								<FrontCard
+									trail={trail}
+									imageLoading={imageLoading}
+									absoluteServerTimes={!!absoluteServerTimes}
+									containerPalette={containerPalette}
+									containerType="scrollable/small"
+									showAge={showAge}
+									headlineSizes={{
+										desktop: 'xxsmall',
+										tablet: 'xxxsmall',
+										mobile: 'small',
+									}}
+									mediaPositionOnDesktop="left"
+									mediaPositionOnMobile="bottom"
+									fixImageWidth={true}
+									mediaSize="small"
+									trailText={undefined}
+									supportingContent={undefined} // unsupported
+									aspectRatio={aspectRatio}
+									kickerText={trail.kickerText}
+									showLivePlayable={trail.showLivePlayable}
+									showTopBarDesktop={desktopBottomCards.includes(
+										index,
+									)}
+									showTopBarMobile={mobileBottomCards.includes(
+										index,
+									)}
+									isInAllBoostsTest={isInAllBoostsTest}
+									canPlayInline={false}
+									showLabsRedesign={showLabsRedesign}
+								/>
+							</LI>
+						);
+					})}
+				</UL>
+				<hr
+					css={css`
+						border: 0;
+						border-top: 1px solid ${palette('--card-border-top')};
+						${from.tablet} {
+							display: none;
+						}
+					`}
+				/>
+				<UL direction="row" showTopBar={true} splitTopBar={true}>
+					{trails.slice(2, 4).map((trail, index) => {
+						return (
+							<LI
+								key={trail.url}
+								stretch={false}
+								padSides={true}
+								showDivider={true}
+								verticalDividerColour={palette(
+									'--card-border-supporting',
+								)}
+							>
+								<FrontCard
+									trail={trail}
+									imageLoading={imageLoading}
+									absoluteServerTimes={!!absoluteServerTimes}
+									containerPalette={containerPalette}
+									containerType="scrollable/small"
+									showAge={showAge}
+									headlineSizes={{
+										desktop: 'xxsmall',
+										tablet: 'xxxsmall',
+										mobile: 'small',
+									}}
+									mediaPositionOnDesktop="left"
+									mediaPositionOnMobile="bottom"
+									fixImageWidth={true}
+									mediaSize="small"
+									trailText={undefined}
+									supportingContent={undefined} // unsupported
+									aspectRatio={aspectRatio}
+									kickerText={trail.kickerText}
+									showLivePlayable={trail.showLivePlayable}
+									showTopBarDesktop={desktopBottomCards.includes(
+										index,
+									)}
+									showTopBarMobile={mobileBottomCards.includes(
+										index,
+									)}
+									isInAllBoostsTest={isInAllBoostsTest}
+									canPlayInline={false}
+									showLabsRedesign={showLabsRedesign}
+								/>
+							</LI>
+						);
+					})}
+				</UL>
+			</>
+		);
+	}
 
 	return (
 		<ScrollableCarousel
@@ -89,7 +201,7 @@ export const ScrollableSmall = ({
 							imageLoading={imageLoading}
 							absoluteServerTimes={!!absoluteServerTimes}
 							containerPalette={containerPalette}
-							containerType={containerType}
+							containerType="scrollable/small"
 							showAge={!!showAge}
 							headlineSizes={{
 								desktop: 'xxsmall',
@@ -108,7 +220,6 @@ export const ScrollableSmall = ({
 							)}
 							showTopBarMobile={mobileBottomCards.includes(index)}
 							canPlayInline={false}
-							isInHideTrailsAbTest={isInHideTrailsAbTest}
 							showLabsRedesign={showLabsRedesign}
 						/>
 					</ScrollableCarousel.Item>

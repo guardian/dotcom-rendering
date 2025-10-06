@@ -219,9 +219,9 @@ export const CalloutTermsAndConditions = () => (
 		purpose. For true anonymity please use our{' '}
 		<a
 			data-ignore="global-link-styling"
-			href="https://www.theguardian.com/securedrop"
+			href="https://www.theguardian.com/tips"
 		>
-			SecureDrop
+			Secure Messaging
 		</a>{' '}
 		service instead.
 	</div>

@@ -46,8 +46,8 @@ type Props = {
 	sectionId: string;
 	frontId?: string;
 	collectionId: number;
+	isInAllBoostsTest?: boolean;
 	containerLevel?: DCRContainerLevel;
-	isInHideTrailsAbTest?: boolean;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 };
@@ -64,8 +64,8 @@ export const DecideContainer = ({
 	sectionId,
 	frontId,
 	collectionId,
+	isInAllBoostsTest,
 	containerLevel,
-	isInHideTrailsAbTest,
 	showLabsRedesign = false,
 }: Props) => {
 	switch (containerType) {
@@ -248,8 +248,8 @@ export const DecideContainer = ({
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
+					isInAllBoostsTest={!!isInAllBoostsTest}
 					collectionId={collectionId}
-					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 					showLabsRedesign={!!showLabsRedesign}
 				/>
 			);
@@ -263,42 +263,66 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
+					isInAllBoostsTest={!!isInAllBoostsTest}
 					collectionId={collectionId}
-					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 					showLabsRedesign={!!showLabsRedesign}
 				/>
 			);
 		case 'scrollable/small':
-			return (
+			return isInAllBoostsTest ? (
+				<ScrollableSmall
+					trails={trails}
+					imageLoading={imageLoading}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
+					aspectRatio={aspectRatio}
+					isInAllBoostsTest={true}
+					sectionId={sectionId}
+					showLabsRedesign={!!showLabsRedesign}
+				/>
+			) : (
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<ScrollableSmall
 						trails={trails}
 						imageLoading={imageLoading}
-						containerType={'scrollable/small'}
 						containerPalette={containerPalette}
 						showAge={showAge}
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
+						isInAllBoostsTest={false}
 						sectionId={sectionId}
-						isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 						showLabsRedesign={!!showLabsRedesign}
 					/>
 				</Island>
 			);
 		case 'scrollable/medium':
-			return (
+			return isInAllBoostsTest ? (
+				<ScrollableMedium
+					trails={trails}
+					imageLoading={imageLoading}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
+					aspectRatio={aspectRatio}
+					sectionId={sectionId}
+					showLabsRedesign={!!showLabsRedesign}
+					containerLevel={containerLevel}
+					isInAllBoostsTest={true}
+				/>
+			) : (
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<ScrollableMedium
 						trails={trails}
 						imageLoading={imageLoading}
-						containerType={'scrollable/small'}
 						containerPalette={containerPalette}
 						showAge={showAge}
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
-						isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 						showLabsRedesign={!!showLabsRedesign}
+						containerLevel={containerLevel}
+						isInAllBoostsTest={isInAllBoostsTest}
 					/>
 				</Island>
 			);
@@ -311,8 +335,8 @@ export const DecideContainer = ({
 					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
-					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 					showLabsRedesign={!!showLabsRedesign}
+					isInAllBoostsTest={isInAllBoostsTest}
 				/>
 			);
 		case 'scrollable/feature':
@@ -325,7 +349,6 @@ export const DecideContainer = ({
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
 						collectionId={collectionId}
-						isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 					/>
 				</Island>
 			);
@@ -338,7 +361,6 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
-					isInHideTrailsAbTest={!!isInHideTrailsAbTest}
 				/>
 			);
 		default:

@@ -24,7 +24,6 @@ const meta = {
 		showAge: true,
 		absoluteServerTimes: true,
 		imageLoading: 'eager',
-		containerType: 'scrollable/small',
 		aspectRatio: '5:4',
 	},
 	render: (args) => (

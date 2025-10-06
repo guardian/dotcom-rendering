@@ -64,7 +64,6 @@ export type Props = {
 	isImmersive?: boolean;
 	byline?: string;
 	showByline?: boolean;
-	isInHideTrailsAbTest?: boolean;
 };
 
 /**
@@ -120,7 +119,6 @@ export const YoutubeAtom = ({
 	isImmersive,
 	byline,
 	showByline,
-	isInHideTrailsAbTest,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -269,7 +267,6 @@ export const YoutubeAtom = ({
 								isImmersive={isImmersive}
 								byline={byline}
 								showByline={showByline}
-								isInHideTrailsAbTest={isInHideTrailsAbTest}
 							/>
 						) : (
 							<YoutubeAtomOverlay

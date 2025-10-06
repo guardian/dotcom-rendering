@@ -58,7 +58,8 @@ const hoverStyles = css`
 	:has(
 			ul.sublinks:hover,
 			.loop-video-container:hover,
-			.slideshow-carousel:hover
+			.slideshow-carousel:hover,
+			.branding-logo:hover
 		) {
 		.card-headline .show-underline {
 			text-decoration: none;

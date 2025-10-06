@@ -41,7 +41,7 @@ const footer = css`
 `;
 
 const pillarWrap = css`
-	${clearFix}
+	${clearFix};
 	border-left: ${footerBorders};
 	border-right: ${footerBorders};
 	padding-top: ${space[2]}px;
@@ -192,7 +192,7 @@ const acknowledgments = css`
 const copyright = css`
 	${textSans12};
 	padding: ${space[3]}px;
-	padding-left: 20px;
+	padding-left: ${space[5]}px;
 
 	${until.tablet} {
 		margin-top: 11px;
@@ -222,7 +222,7 @@ const footerGrid = css`
 	border: ${footerBorders};
 
 	${from.mobileLandscape} {
-		padding: 0 20px;
+		padding: 0 ${space[5]}px;
 	}
 `;
 
@@ -231,7 +231,7 @@ const bttPosition = css`
 	padding: 0 5px;
 	position: absolute;
 	bottom: -21px;
-	right: 20px;
+	right: ${space[5]}px;
 `;
 
 const FooterLinks = ({
@@ -241,22 +241,10 @@ const FooterLinks = ({
 	pageFooter: FooterType;
 	urls: ReaderRevenueCategories;
 }) => {
-	const linkGroups = pageFooter.footerLinks.map((linkGroup) => {
+	const linkGroups = pageFooter.footerLinks.map((linkGroup, index) => {
 		const linkList = linkGroup.flatMap(
 			({ url, extraClasses, dataLinkName, text }) =>
 				[
-					dataLinkName === 'privacy' ? (
-						<li key="privacy-settings-link">
-							<Island
-								priority="critical"
-								defer={{ until: 'visible' }}
-							>
-								<PrivacySettingsLink
-									extraClasses={extraClasses}
-								/>
-							</Island>
-						</li>
-					) : null,
 					<li key={url}>
 						<a
 							className={extraClasses}
@@ -269,6 +257,21 @@ const FooterLinks = ({
 					</li>,
 				].filter(isNonNullable),
 		);
+		const privacyClasses = linkGroup.find(
+			(link) => link.dataLinkName === 'privacy',
+		)?.extraClasses;
+
+		const isFinalColumn = index === pageFooter.footerLinks.length - 1;
+
+		if (isFinalColumn) {
+			linkList.push(
+				<li key="privacy-settings-link">
+					<Island priority="critical" defer={{ until: 'visible' }}>
+						<PrivacySettingsLink extraClasses={privacyClasses} />
+					</Island>
+				</li>,
+			);
+		}
 		const key = linkGroup.reduce((acc, { text }) => `${acc}-${text}`, '');
 		return <ul key={key}>{linkList}</ul>;
 	});

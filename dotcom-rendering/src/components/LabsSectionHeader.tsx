@@ -7,9 +7,12 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import {
+	Link,
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
+import type { EditionId } from '../lib/edition';
+import { getLabsUrlSuffix } from '../lib/labs';
 import { palette as schemePalette } from '../palette';
 import { ContainerTitle } from './ContainerTitle';
 import { Details } from './Details';
@@ -20,6 +23,8 @@ type Props = {
 	title?: string;
 	/** The title can be made into a link using this property */
 	url?: string;
+	/** The ID of the edition, used to construct the Labs front URL */
+	editionId: EditionId;
 };
 
 const headerStyles = css`
@@ -96,10 +101,16 @@ const detailsStyles = css`
 	padding: ${space[5]}px;
 `;
 
-export const LabsSectionHeader = ({ title, url }: Props) => (
+export const LabsSectionHeader = ({ title, url, editionId }: Props) => (
 	<div css={headerStyles}>
 		<div css={[logoStyles, dividerStylesUntilLeftCol]}>
-			<LabsLogo />
+			<Link
+				href={`https://www.theguardian.com/guardian-labs${getLabsUrlSuffix(
+					editionId,
+				)}`}
+			>
+				<LabsLogo />
+			</Link>
 		</div>
 
 		<div css={textLayoutStyles}>

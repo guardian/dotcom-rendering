@@ -33,7 +33,6 @@ type Props = {
 	idUrl?: string;
 	contributionsServiceUrl: string;
 	auxiaGateDisplayData?: AuxiaGateDisplayData | undefined;
-	signInGateVersion?: AuxiaGateVersion;
 };
 
 // function to generate the profile.theguardian.com url with tracking params
@@ -87,11 +86,14 @@ export const SignInGateSelector = ({
 	idUrl = 'https://profile.theguardian.com',
 	contributionsServiceUrl,
 	auxiaGateDisplayData,
-	signInGateVersion,
 }: Props) => {
 	if (!pageIdIsAllowedForGating(pageId)) {
 		return <></>;
 	}
+
+	const signInGateVersion = getAuxiaGateVersion(
+		auxiaGateDisplayData?.auxiaData.userTreatment,
+	);
 
 	return (
 		<SignInGateSelectorAuxia
@@ -138,7 +140,7 @@ type PropsAuxia = {
 	isPreview: boolean;
 	isPaidContent: boolean;
 	auxiaGateDisplayData?: AuxiaGateDisplayData;
-	signInGateVersion?: AuxiaGateVersion;
+	signInGateVersion: AuxiaGateVersion;
 };
 
 // [1] If true, it indicates that we are using the component for the regular Auxia share of the Audience
@@ -158,7 +160,7 @@ interface ShowSignInGateAuxiaProps {
 		interactionType: AuxiaInteractionInteractionType,
 		actionName?: AuxiaInteractionActionName,
 	) => Promise<void>;
-	signInGateVersion?: AuxiaGateVersion;
+	signInGateVersion: AuxiaGateVersion;
 }
 
 const incrementGateDisplayCount = () => {
@@ -243,22 +245,24 @@ const buildAbTestTrackingAuxiaVariant = (
 	};
 };
 
+/**
+ * Determines the gate version based on one of 2 things:
+ * 1. url query parameter
+ * 2. treatmentType
+ */
 export const getAuxiaGateVersion = (
-	signInGateVersion?: AuxiaGateVersion,
 	userTreatment?: AuxiaAPIResponseDataUserTreatment,
 ): AuxiaGateVersion => {
-	if (signInGateVersion) {
-		return signInGateVersion;
+	let urlParamVersion: string | null = null;
+	if (typeof window !== 'undefined') {
+		const params = new URLSearchParams(window.location.search);
+		urlParamVersion = params.get('auxia_gate_version');
 	}
 
-	const params = new URLSearchParams(window.location.search);
-	const version = params.get('auxia_gate_version');
-
 	if (
-		String(version).toLowerCase().endsWith('v2') ||
-		String(userTreatment?.treatmentType)
-			.toLowerCase()
-			.includes('v2')
+		String(urlParamVersion).toLowerCase().endsWith('v2') ||
+		userTreatment?.treatmentType === 'DISMISSABLE_SIGN_IN_GATE_POPUP' ||
+		userTreatment?.treatmentType === 'NONDISMISSIBLE_SIGN_IN_GATE_POPUP'
 	) {
 		return 'v2';
 	}
@@ -300,6 +304,17 @@ const SignInGateSelectorAuxia = ({
 			document.dispatchEvent(
 				new CustomEvent('article:sign-in-gate-dismissed'),
 			);
+
+			if (signInGateVersion === 'v2') {
+				// Emit modal dismiss event
+				document.dispatchEvent(
+					new CustomEvent('modal:close', {
+						detail: {
+							modalType: `sign-in-gate-${signInGateVersion}`,
+						},
+					}),
+				);
+			}
 		}
 	}, [isGateDismissed]);
 
@@ -396,9 +411,6 @@ const ShowSignInGateAuxia = ({
 	const checkoutCompleteCookieData = undefined;
 	const personaliseSignInGateAfterCheckoutSwitch = undefined;
 
-	// Get the gate version configuration
-	const gateVersion = getAuxiaGateVersion(signInGateVersion, userTreatment);
-
 	const [signInGatePlaceholder, setSignInGatePlaceholder] =
 		useState<HTMLElement | null>(null);
 
@@ -417,6 +429,7 @@ const ShowSignInGateAuxia = ({
 
 	useEffect(() => {
 		if (hasBeenSeen) {
+			// Tell Auxia
 			void auxiaLogTreatmentInteraction(
 				contributionsServiceUrl,
 				userTreatment,
@@ -436,6 +449,7 @@ const ShowSignInGateAuxia = ({
 				);
 			});
 
+			// Tell Ophan
 			void submitComponentEventTracking(
 				{
 					component: {
@@ -451,6 +465,17 @@ const ShowSignInGateAuxia = ({
 			// Once the gate is being displayed we need to update
 			// the tracking of the number of times the gate has been displayed
 			incrementGateDisplayCount();
+
+			if (signInGateVersion === 'v2') {
+				// Emit modal view event
+				document.dispatchEvent(
+					new CustomEvent('modal:open', {
+						detail: {
+							modalType: `sign-in-gate-${signInGateVersion}`,
+						},
+					}),
+				);
+			}
 		}
 	}, [
 		componentId,
@@ -460,7 +485,7 @@ const ShowSignInGateAuxia = ({
 		renderingTarget,
 		treatmentId,
 		userTreatment,
-		gateVersion,
+		signInGateVersion,
 	]);
 
 	const commonProps = {
@@ -498,7 +523,7 @@ const ShowSignInGateAuxia = ({
 				aria-hidden="true"
 				style={{ height: 1, marginTop: -1 }}
 			/>
-			{gateVersion === 'v2' ? (
+			{signInGateVersion === 'v2' ? (
 				shouldShowV2Gate && <SignInGateAuxiaV2 {...commonProps} />
 			) : (
 				<SignInGateAuxiaV1 {...commonProps} />

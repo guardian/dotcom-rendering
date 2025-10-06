@@ -44,6 +44,7 @@ const addBrandingAndAffiliateDisclaimer = (gallery: Gallery): Gallery => ({
 const appsArticle = enhanceArticleType(
 	{
 		...GalleryFixture,
+		hasStoryPackage: true,
 		storyPackage,
 	},
 	'Apps',
@@ -75,6 +76,7 @@ export const Apps = {
 const webArticle = enhanceArticleType(
 	{
 		...GalleryFixture,
+		hasStoryPackage: true,
 		storyPackage,
 	},
 	'Web',

@@ -55,7 +55,6 @@ export const FrontCard = (props: Props) => {
 		showLivePlayable: trail.showLivePlayable,
 		showVideo: trail.showVideo,
 		uniqueId: trail.uniqueId,
-		isInHideTrailsAbTest: trail.isInHideTrailsAbTest,
 	};
 
 	return Card({ ...defaultProps, ...cardProps });

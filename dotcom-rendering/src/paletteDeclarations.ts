@@ -6148,6 +6148,7 @@ const featureCardKickerText: PaletteFunction = ({ theme }) => {
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.neutral[86];
 		case Pillar.News:
+			return sourcePalette.news[800];
 		case Pillar.Opinion:
 		case Pillar.Sport:
 		case Pillar.Culture:
@@ -6162,6 +6163,7 @@ const featureCardQuoteIcon: PaletteFunction = ({ theme }) => {
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.neutral[86];
 		case Pillar.News:
+			return sourcePalette.news[800];
 		case Pillar.Opinion:
 		case Pillar.Sport:
 		case Pillar.Culture:
@@ -7439,9 +7441,21 @@ const paletteColours = {
 		light: numberedListTitleLight,
 		dark: numberedListTitleDark,
 	},
+	'--onward-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[10],
+	},
+	'--onward-card-background': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[20],
+	},
 	'--onward-content-border': {
 		light: onwardContentBorderLight,
 		dark: () => sourcePalette.neutral[20],
+	},
+	'--onward-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
 	},
 	'--pagination-text': {
 		light: paginationTextLight,
