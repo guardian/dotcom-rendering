@@ -81,6 +81,7 @@ export const ProductElement = ({
 					padding-top: 0;
 				}
 			`}
+			data-spacefinder-role="nested"
 		>
 			{isSubheading &&
 				Array.from(subheadingHtml.childNodes).map(
