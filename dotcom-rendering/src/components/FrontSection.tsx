@@ -693,7 +693,11 @@ export const FrontSection = ({
 
 				{isLabs && showLabsRedesign ? (
 					<div css={labsSectionHeaderStyles}>
-						<LabsSectionHeader title={title} />
+						<LabsSectionHeader
+							title={title}
+							url={url}
+							editionId={editionId}
+						/>
 					</div>
 				) : (
 					<div

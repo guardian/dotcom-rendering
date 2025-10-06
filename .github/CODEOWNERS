@@ -20,6 +20,7 @@
 /dotcom-rendering/src/client/userFeatures/      @guardian/supporter-revenue-stream
 /dotcom-rendering/src/components/AdBlock*       @guardian/commercial-dev
 /dotcom-rendering/src/components/AdSlot*        @guardian/commercial-dev
+/dotcom-rendering/src/components/Labs*       	@guardian/commercial-dev
 /dotcom-rendering/src/components/AdP*           @guardian/commercial-dev
 /dotcom-rendering/src/components/marketing/     @guardian/growth
 /dotcom-rendering/src/server/                   @guardian/dotcom-platform

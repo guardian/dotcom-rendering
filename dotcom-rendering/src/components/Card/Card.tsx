@@ -1,9 +1,11 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import {
+	between,
 	from,
 	palette as sourcePalette,
 	space,
+	until,
 } from '@guardian/source/foundations';
 import { Hide, Link, SvgCamera } from '@guardian/source/react-components';
 import {
@@ -15,6 +17,7 @@ import { isMediaCard } from '../../lib/cardHelpers';
 import { isWithinTwelveHours, secondsToDuration } from '../../lib/formatTime';
 import { appendLinkNameMedia } from '../../lib/getDataLinkName';
 import { getZIndex } from '../../lib/getZIndex';
+import { getOphanComponents } from '../../lib/labs';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { BETA_CONTAINERS } from '../../model/enhanceCollections';
 import { palette } from '../../palette';
@@ -43,6 +46,7 @@ import { Pill } from '../Pill';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
 import { Snap } from '../Snap';
 import { SnapCssSandbox } from '../SnapCssSandbox';
+import { SponsoredContentLabel } from '../SponsoredContentLabel';
 import { StarRating } from '../StarRating/StarRating';
 import type { Alignment } from '../SupportingContent';
 import { SupportingContent } from '../SupportingContent';
@@ -153,6 +157,8 @@ export type Props = {
 	trailTextSize?: TrailTextSize;
 	/** A kicker image is seperate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
+	isInAllBoostsTest?: boolean;
+	fixImageWidth?: boolean;
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
 	/** Feature flag for the labs redesign work */
@@ -394,6 +400,8 @@ export const Card = ({
 	showTopBarMobile = true,
 	trailTextSize,
 	showKickerImage = false,
+	fixImageWidth,
+	isInAllBoostsTest = false,
 	headlinePosition = 'inner',
 	showLabsRedesign = false,
 }: Props) => {
@@ -582,12 +590,14 @@ export const Card = ({
 
 	const isOnwardContainer = containerType === 'more-galleries';
 
-	const isSmallCard = containerType === 'scrollable/small';
+	const isSmallCard =
+		containerType === 'scrollable/small' ||
+		containerType === 'scrollable/medium';
 
 	const mediaFixedSizeOptions = (): MediaFixedSizeOptions => {
 		if (isSmallCard) {
 			return {
-				mobile: 'tiny',
+				mobile: isInAllBoostsTest ? undefined : 'tiny',
 				tablet: 'small',
 				desktop: 'small',
 			};
@@ -738,6 +748,80 @@ export const Card = ({
 		return undefined;
 	};
 
+	/**
+	 * Decides which branding design to apply based on the labs redesign feature switch
+	 * Adds appropriate Ophan data attributes based on card context
+	 * Results in a clickable brand logo and sponsorship label
+	 */
+	const LabsBranding = () => {
+		if (!branding) return;
+		const getLocationPrefix = () => {
+			if (!onwardsSource) {
+				return 'front-card';
+			}
+			if (onwardsSource === 'related-content') {
+				return 'article-related-content';
+			} else {
+				return undefined;
+			}
+		};
+		const locationPrefix = getLocationPrefix();
+		const dataAttributes = locationPrefix
+			? getOphanComponents({
+					branding,
+					locationPrefix,
+			  })
+			: undefined;
+
+		return showLabsRedesign ? (
+			<>
+				{/** All screen sizes apart from tablet have horizontal orientation */}
+				<div
+					css={css`
+						${between.tablet.and.desktop} {
+							display: none;
+						}
+					`}
+				>
+					<SponsoredContentLabel
+						branding={branding}
+						containerPalette={containerPalette}
+						orientation="horizontal"
+						alignment="end"
+						ophanComponentLink={dataAttributes?.ophanComponentLink}
+						ophanComponentName={dataAttributes?.ophanComponentName}
+					/>
+				</div>
+				{/** Tablet sized screens have vertical orientation */}
+				<div
+					css={css`
+						${until.tablet} {
+							display: none;
+						}
+						${from.desktop} {
+							display: none;
+						}
+					`}
+				>
+					<SponsoredContentLabel
+						branding={branding}
+						containerPalette={containerPalette}
+						orientation="vertical"
+						alignment="end"
+						ophanComponentLink={dataAttributes?.ophanComponentLink}
+						ophanComponentName={dataAttributes?.ophanComponentName}
+					/>
+				</div>
+			</>
+		) : (
+			<CardBranding
+				branding={branding}
+				containerPalette={containerPalette}
+				onwardsSource={onwardsSource}
+			/>
+		);
+	};
+
 	return (
 		<CardWrapper
 			format={format}
@@ -818,6 +902,11 @@ export const Card = ({
 						mediaType={media.type}
 						mediaPositionOnDesktop={mediaPositionOnDesktop}
 						mediaPositionOnMobile={mediaPositionOnMobile}
+						fixImageWidth={
+							fixImageWidth ??
+							(mediaPositionOnMobile === 'left' ||
+								mediaPositionOnMobile === 'right')
+						}
 						hideImageOverlay={media.type === 'slideshow'}
 						padMedia={isMediaCardOrNewsletter && isBetaContainer}
 						isBetaContainer={isBetaContainer}
@@ -850,6 +939,7 @@ export const Card = ({
 								imagePositionOnMobile={mediaPositionOnMobile}
 								isBetaContainer={isBetaContainer}
 								isFlexibleContainer={isFlexibleContainer}
+								isInAllBoostsTest={isInAllBoostsTest}
 							>
 								<Avatar
 									src={media.avatarUrl}
@@ -857,6 +947,7 @@ export const Card = ({
 									imageSize={
 										isBetaContainer ? mediaSize : undefined
 									}
+									isInAllBoostsTest={isInAllBoostsTest}
 								/>
 							</AvatarContainer>
 						)}
@@ -977,6 +1068,9 @@ export const Card = ({
 											loading={imageLoading}
 											roundedCorners={isOnwardContent}
 											aspectRatio={aspectRatio}
+											isInAllBoostsTest={
+												isInAllBoostsTest
+											}
 										/>
 									</div>
 								)}
@@ -991,6 +1085,7 @@ export const Card = ({
 									loading={imageLoading}
 									roundedCorners={isOnwardContent}
 									aspectRatio={aspectRatio}
+									isInAllBoostsTest={isInAllBoostsTest}
 								/>
 								{isVideoMainMedia && mainMedia.duration > 0 && (
 									<div
@@ -1037,6 +1132,7 @@ export const Card = ({
 										alt={media.trailImage.altText}
 										loading={imageLoading}
 										aspectRatio={aspectRatio}
+										isInAllBoostsTest={isInAllBoostsTest}
 									/>
 								)}
 							</>
@@ -1122,17 +1218,10 @@ export const Card = ({
 								{showPill ? (
 									<>
 										<MediaOrNewsletterPill />
-										{format.theme === ArticleSpecial.Labs &&
-											branding && (
-												<CardBranding
-													branding={branding}
-													onwardsSource={
-														onwardsSource
-													}
-													containerPalette={
-														containerPalette
-													}
-												/>
+										{!showLabsRedesign &&
+											format.theme ===
+												ArticleSpecial.Labs && (
+												<LabsBranding />
 											)}
 									</>
 								) : (
@@ -1141,16 +1230,9 @@ export const Card = ({
 										age={decideAge()}
 										commentCount={<CommentCount />}
 										cardBranding={
-											branding ? (
-												<CardBranding
-													branding={branding}
-													onwardsSource={
-														onwardsSource
-													}
-													containerPalette={
-														containerPalette
-													}
-												/>
+											isOnwardContent ||
+											!showLabsRedesign ? (
+												<LabsBranding />
 											) : undefined
 										}
 										showLivePlayable={showLivePlayable}
@@ -1200,6 +1282,7 @@ export const Card = ({
 				</ContentWrapper>
 			</CardLayout>
 
+			{/** This div contains content that sits "outside" of the standard card layout */}
 			<div
 				css={
 					/** We allow this area to take up more space so that cards without
@@ -1244,12 +1327,7 @@ export const Card = ({
 						age={decideAge()}
 						commentCount={<CommentCount />}
 						cardBranding={
-							branding ? (
-								<CardBranding
-									branding={branding}
-									onwardsSource={onwardsSource}
-								/>
-							) : undefined
+							!showLabsRedesign ? <LabsBranding /> : undefined
 						}
 						showLivePlayable={showLivePlayable}
 						shouldReserveSpace={{
@@ -1259,6 +1337,10 @@ export const Card = ({
 					/>
 				)}
 			</div>
+
+			{showLabsRedesign &&
+				!isOnwardContent &&
+				format.theme === ArticleSpecial.Labs && <LabsBranding />}
 		</CardWrapper>
 	);
 };

@@ -57,17 +57,19 @@ type Props = {
 	alt: string;
 	shape?: AvatarShape;
 	imageSize?: MediaSizeType;
+	isInAllBoostsTest?: boolean;
 };
 
 const decideImageWidths = (
 	imageSize: MediaSizeType,
+	isInAllBoostsTest = false,
 ): [ImageWidthType, ...ImageWidthType[]] => {
 	switch (imageSize) {
 		case 'small':
 			return [
 				{
 					breakpoint: breakpoints.mobile,
-					width: 80,
+					width: isInAllBoostsTest ? 150 : 80,
 					aspectRatio: '1:1',
 				},
 			];
@@ -142,9 +144,15 @@ const defaultImageSizes: [ImageWidthType, ...ImageWidthType[]] = [
 	{ breakpoint: breakpoints.tablet, width: 140 },
 ];
 
-export const Avatar = ({ src, alt, shape = 'round', imageSize }: Props) => {
+export const Avatar = ({
+	src,
+	alt,
+	shape = 'round',
+	imageSize,
+	isInAllBoostsTest,
+}: Props) => {
 	const imageWidths = imageSize
-		? decideImageWidths(imageSize)
+		? decideImageWidths(imageSize, isInAllBoostsTest)
 		: defaultImageSizes;
 
 	const sources = generateSources(getSourceImageUrl(src), imageWidths);
