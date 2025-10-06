@@ -18,8 +18,12 @@ import {
 } from '../lib/video';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
+import type {
+	PLAYER_STATES,
+	PlayerStates,
+	SubtitleSize,
+} from './LoopVideoPlayer';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
-import type { PLAYER_STATES, PlayerStates } from './LoopVideoPlayer';
 import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
 const videoContainerStyles = css`
@@ -117,6 +121,8 @@ type Props = {
 	fallbackImageAlt: CardPictureProps['alt'];
 	fallbackImageAspectRatio: CardPictureProps['aspectRatio'];
 	linkTo: string;
+	subtitleSource?: string;
+	subtitleSize: SubtitleSize;
 };
 
 export const LoopVideo = ({
@@ -132,6 +138,8 @@ export const LoopVideo = ({
 	fallbackImageAlt,
 	fallbackImageAspectRatio,
 	linkTo,
+	subtitleSource,
+	subtitleSize,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -627,6 +635,8 @@ export const LoopVideo = ({
 				AudioIcon={hasAudio ? AudioIcon : null}
 				preloadPartialData={preloadPartialData}
 				showPlayIcon={showPlayIcon}
+				subtitleSource={subtitleSource}
+				subtitleSize={subtitleSize}
 			/>
 		</figure>
 	);
