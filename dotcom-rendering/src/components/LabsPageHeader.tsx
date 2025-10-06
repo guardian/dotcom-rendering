@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import {
+	breakpoints,
 	from,
-	palette,
 	space,
 	textSans15,
 	textSansBold15,
@@ -11,137 +11,165 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
+import { grid } from '../grid';
 import type { EditionId } from '../lib/edition';
 import { getLabsUrlSuffix } from '../lib/labs';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
-import LabsLogo from '../static/logos/the-guardian-labs.svg';
+import { palette } from '../palette';
 import { Details } from './Details';
+import { LabsLogo } from './LabsLogo';
 
-export const LabsHeader = ({ editionId }: { editionId: EditionId }) => (
-	<div
-		css={css`
-			position: relative;
-			height: ${LABS_HEADER_HEIGHT}px;
-			display: flex;
-			justify-content: space-between;
+const headerStyles = css`
+	color: ${palette('--labs-header-title')};
+	background-color: ${palette('--labs-header-background')};
+	border-bottom: 1px solid var(--article-border);
+`;
 
-			color: ${palette.neutral[7]};
-		`}
-	>
-		<div
-			css={css`
-				display: flex;
-			`}
-		>
-			<div
-				css={css`
-					border-right: 1px solid ${palette.neutral[60]};
-					height: 100%;
-					display: flex;
-					align-items: center;
+const headerInnerStyles = css`
+	height: ${LABS_HEADER_HEIGHT}px;
+	${grid.paddedContainer}
 
-					padding-right: 10px;
-					${from.mobileLandscape} {
-						padding-right: 20px;
-					}
-				`}
-			>
+	${from.tablet} {
+		border-left: 1px solid ${palette('--article-border')};
+		border-right: 1px solid ${palette('--article-border')};
+	}
+`;
+
+const leftContentStyles = css`
+	${grid.span(1, 4)}
+	${from.tablet} {
+		${grid.span(1, 6)}
+	}
+	justify-self: start;
+	display: flex;
+`;
+
+const detailsPositionStyles = css`
+	top: 40px;
+	left: 0px;
+
+	${from.mobile} {
+		left: -108px;
+	}
+
+	${from.mobileLandscape} {
+		left: -127.5px;
+	}
+
+	${from.tablet} {
+		max-width: ${breakpoints.tablet}px;
+	}
+	${from.desktop} {
+		max-width: ${breakpoints.desktop}px;
+	}
+`;
+
+const leftContentChildStyles = css`
+	display: flex;
+	align-items: center;
+	padding: 0 ${grid.mobileColumnGap};
+	${from.mobileLandscape} {
+		padding: 0 ${grid.columnGap};
+	}
+	/* Right border */
+	position: relative;
+	:after {
+		content: '';
+		position: absolute;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		border-right: 1px solid ${palette('--section-border')};
+	}
+`;
+
+const detailsExpandedAreaStyles = css`
+	${textSans15};
+	background-color: ${palette('--labs-about-dropdown-background')};
+	border-top: 1px solid ${palette('--section-border')};
+
+	width: 100vw;
+	/* margin-left: -${grid.mobileColumnGap}; */
+
+	${from.tablet} {
+		width: ${breakpoints.tablet}px;
+	}
+	${from.desktop} {
+		width: 240px;
+	}
+
+	${from.mobileLandscape} {
+		margin-left: -20px;
+	}
+
+	padding: ${space[2]}px 10px;
+	${from.mobileLandscape} {
+		padding: ${space[3]}px 20px;
+	}
+`;
+
+const logoStyles = css`
+	${grid.span(-3, 1)}
+	align-self: center;
+	justify-self: end;
+
+	${from.tablet} {
+		${grid.span(-4, 2)}
+	}
+`;
+
+export const LabsPageHeader = ({ editionId }: { editionId: EditionId }) => (
+	<div css={headerStyles}>
+		<div css={headerInnerStyles}>
+			<div css={leftContentStyles}>
 				<div
-					css={css`
-						${textSansBold15};
-						margin-bottom: 4px;
-					`}
+					css={[
+						leftContentChildStyles,
+						css`
+							${textSansBold15}
+						`,
+					]}
 				>
 					Paid content
 				</div>
-			</div>
-			<div
-				css={css`
-					border-right: 1px solid ${palette.neutral[60]};
-					height: 100%;
-					display: flex;
-					align-items: center;
 
-					padding-left: 10px;
-					padding-right: 10px;
-					${from.mobileLandscape} {
-						padding-left: 20px;
-						padding-right: 20px;
-					}
-				`}
-			>
-				<Details
-					label="About"
-					labelSize="small"
-					positionStyles={css`
-						top: 40px;
-						left: -75px;
-
-						${from.mobile} {
-							left: -108px;
-						}
-
-						${from.mobileLandscape} {
-							left: -128px;
-						}
-					`}
-				>
-					<div
-						css={css`
-							${textSans15};
-							background-color: ${palette.labs[400]};
-							border-top: 1px solid ${palette.neutral[60]};
-
-							width: 100vw;
-							${from.desktop} {
-								width: 235px;
-							}
-
-							margin-left: -10px;
-							${from.mobileLandscape} {
-								margin-left: -20px;
-							}
-							padding: ${space[2]}px 10px;
-							${from.mobileLandscape} {
-								padding: ${space[3]}px 20px;
-							}
-
-							> a {
-								color: black;
-							}
-						`}
+				<div css={leftContentChildStyles}>
+					<Details
+						label="About"
+						labelSize="small"
+						positionStyles={detailsPositionStyles}
 					>
-						<p>
-							Paid content is paid for and controlled by an
-							advertiser and produced by the Guardian Labs team.
-						</p>
-						<br />
-						<LinkButton
-							iconSide="right"
-							size="xsmall"
-							priority="subdued"
-							icon={<SvgArrowRightStraight />}
-							href="https://www.theguardian.com/info/2016/jan/25/content-funding"
-						>
-							Learn more
-						</LinkButton>
-					</div>
-				</Details>
+						<div css={detailsExpandedAreaStyles}>
+							<p>
+								Paid content is paid for and controlled by an
+								advertiser and produced by the Guardian Labs
+								team.
+							</p>
+							<br />
+							<LinkButton
+								iconSide="right"
+								size="xsmall"
+								priority="subdued"
+								icon={<SvgArrowRightStraight />}
+								href="https://www.theguardian.com/info/2016/jan/25/content-funding"
+							>
+								Learn more
+							</LinkButton>
+						</div>
+					</Details>
+				</div>
 			</div>
-		</div>
-		<div
-			css={css`
-				display: flex;
-				padding: ${space[1]}px 0;
-			`}
-		>
-			<Link
-				href={`https://www.theguardian.com/guardian-labs${getLabsUrlSuffix(
-					editionId,
-				)}`}
-			>
-				<LabsLogo />
-			</Link>
+
+			{/* labs logo */}
+			<div css={logoStyles}>
+				<Link
+					href={`https://www.theguardian.com/guardian-labs${getLabsUrlSuffix(
+						editionId,
+					)}`}
+				>
+					<LabsLogo size={LABS_HEADER_HEIGHT - space[1]} />
+				</Link>
+			</div>
 		</div>
 	</div>
 );

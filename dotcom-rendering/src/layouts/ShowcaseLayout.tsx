@@ -26,6 +26,7 @@ import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
+import { LabsPageHeader } from '../components/LabsPageHeader';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
@@ -247,7 +248,8 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
-	const { absoluteServerTimes = false } = article.config.switches;
+	const { absoluteServerTimes = false, guardianLabsRedesign = false } =
+		article.config.switches;
 
 	return (
 		<>
@@ -333,15 +335,21 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								</Stuck>
 							</div>
 							<Stuck zIndex="subNavBanner">
-								<Section
-									fullWidth={true}
-									showTopBorder={false}
-									backgroundColour={sourcePalette.labs[400]}
-									borderColour={sourcePalette.neutral[60]}
-									sectionId="labs-header"
-								>
-									<LabsHeader editionId={editionId} />
-								</Section>
+								{guardianLabsRedesign ? (
+									<LabsPageHeader editionId={editionId} />
+								) : (
+									<Section
+										fullWidth={true}
+										showTopBorder={false}
+										backgroundColour={
+											sourcePalette.labs[400]
+										}
+										borderColour={sourcePalette.neutral[60]}
+										sectionId="labs-header"
+									>
+										<LabsHeader editionId={editionId} />
+									</Section>
+								)}
 							</Stuck>
 						</>
 					)}
