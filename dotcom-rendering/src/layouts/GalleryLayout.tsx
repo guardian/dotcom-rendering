@@ -34,7 +34,11 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { grid } from '../grid';
-import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
+import {
+	type ArticleFormat,
+	ArticleSpecial,
+	type ArticleTheme,
+} from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
@@ -154,7 +158,6 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 			section,
 			switches,
 		},
-		editionId,
 	} = gallery.frontendData;
 
 	const frontendData = gallery.frontendData;
@@ -194,21 +197,10 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					pageId={frontendData.pageId}
 				/>
 			) : null}
-
-			{format.theme === ArticleSpecial.Labs && (
-				<Stuck zIndex="subNavBanner">
-					<Section
-						fullWidth={true}
-						showTopBorder={false}
-						backgroundColour={sourcePalette.labs[400]}
-						borderColour={sourcePalette.neutral[60]}
-						sectionId="labs-header"
-						element="aside"
-					>
-						<LabsHeader editionId={editionId} />
-					</Section>
-				</Stuck>
-			)}
+			<GalleryLabsHeader
+				theme={format.theme}
+				editionId={frontendData.editionId}
+			/>
 
 			<main
 				css={{
@@ -576,6 +568,25 @@ const BannerAndMasthead = (props: {
 		/>
 	</div>
 );
+
+const GalleryLabsHeader = (props: {
+	theme: ArticleTheme;
+	editionId: EditionId;
+}) =>
+	props.theme === ArticleSpecial.Labs ? (
+		<Stuck>
+			<Section
+				fullWidth={true}
+				showTopBorder={false}
+				backgroundColour={sourcePalette.labs[400]}
+				borderColour={sourcePalette.neutral[60]}
+				sectionId="labs-header"
+				element="aside"
+			>
+				<LabsHeader editionId={props.editionId} />
+			</Section>
+		</Stuck>
+	) : null;
 
 const StoryPackage = ({
 	storyPackage,
