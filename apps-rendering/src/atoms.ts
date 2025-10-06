@@ -8,6 +8,8 @@ import { isValidDate } from 'date';
 import type { Int64 } from 'thrift';
 import type { DocParser } from 'parserContext';
 import { Result } from 'result';
+import type { MediaAtom } from '@guardian/content-atom-model/media/mediaAtom';
+import { AssetType } from '@guardian/content-atom-model/media/assetType';
 
 interface TimelineEvent {
 	title: string;
@@ -248,10 +250,12 @@ function parseAtom(
 				return Result.err(`No atom matched this id: ${id}`);
 			}
 
+			const mediaAtom: MediaAtom = atom.data.media;
 			const { posterUrl, duration, assets, activeVersion, title } =
-				atom.data.media;
+				mediaAtom;
 			const videoId = assets.find(
 				(asset) =>
+					asset.assetType === AssetType.VIDEO &&
 					asset.version.toNumber() === activeVersion?.toNumber(),
 			)?.id;
 			const caption = docParser(title);

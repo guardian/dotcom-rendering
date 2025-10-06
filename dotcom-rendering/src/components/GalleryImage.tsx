@@ -35,6 +35,12 @@ const styles = css`
 		border-left: 1px solid ${palette('--article-border')};
 		border-right: 1px solid ${palette('--article-border')};
 	}
+
+	${from.desktop} {
+		&:first-of-type {
+			padding-top: ${space[3]}px;
+		}
+	}
 `;
 
 const galleryBodyImageStyles = css`
