@@ -340,41 +340,33 @@ export const OnwardsUpper = ({
 					/>
 				</Section>
 			)}
-			{!!curatedDataUrl &&
-				!isPaidContent &&
-				canHaveCuratedContent && (
-					<Section
-						fullWidth={true}
-						borderColour={palette('--article-section-border')}
-						showTopBorder={
-							format.design === ArticleDesign.Gallery
-								? false
-								: true
-						}
-						showSideBorders={
-							format.design === ArticleDesign.Gallery
-								? false
-								: true
-						}
-						padSides={
-							format.design === ArticleDesign.Gallery
-								? false
-								: true
-						}
-					>
-						<FetchOnwardsData
-							url={curatedDataUrl}
-							limit={20}
-							onwardsSource="curated-content"
-							format={format}
-							discussionApiUrl={discussionApiUrl}
-							absoluteServerTimes={absoluteServerTimes}
-							renderingTarget={renderingTarget}
-							isAdFreeUser={isAdFreeUser}
-							webURL={webURL}
-						/>
-					</Section>
-				)}
+			{!!curatedDataUrl && !isPaidContent && canHaveCuratedContent && (
+				<Section
+					fullWidth={true}
+					borderColour={palette('--article-section-border')}
+					showTopBorder={
+						format.design === ArticleDesign.Gallery ? false : true
+					}
+					showSideBorders={
+						format.design === ArticleDesign.Gallery ? false : true
+					}
+					padSides={
+						format.design === ArticleDesign.Gallery ? false : true
+					}
+				>
+					<FetchOnwardsData
+						url={curatedDataUrl}
+						limit={20}
+						onwardsSource="curated-content"
+						format={format}
+						discussionApiUrl={discussionApiUrl}
+						absoluteServerTimes={absoluteServerTimes}
+						renderingTarget={renderingTarget}
+						isAdFreeUser={isAdFreeUser}
+						webURL={webURL}
+					/>
+				</Section>
+			)}
 		</div>
 	);
 };
