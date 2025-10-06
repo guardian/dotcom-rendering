@@ -6144,7 +6144,6 @@ const editorialButtonText: PaletteFunction = (format: ArticleFormat) => {
 
 const featureCardKickerText: PaletteFunction = ({ theme }) => {
 	switch (theme) {
-		case ArticleSpecial.Labs:
 		case ArticleSpecial.SpecialReport:
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.neutral[86];
@@ -6155,11 +6154,12 @@ const featureCardKickerText: PaletteFunction = ({ theme }) => {
 		case Pillar.Culture:
 		case Pillar.Lifestyle:
 			return pillarPalette(theme, 600);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
 	}
 };
 const featureCardQuoteIcon: PaletteFunction = ({ theme }) => {
 	switch (theme) {
-		case ArticleSpecial.Labs:
 		case ArticleSpecial.SpecialReport:
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.neutral[86];
@@ -6170,6 +6170,8 @@ const featureCardQuoteIcon: PaletteFunction = ({ theme }) => {
 		case Pillar.Culture:
 		case Pillar.Lifestyle:
 			return pillarPalette(theme, 600);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
 	}
 };
 
