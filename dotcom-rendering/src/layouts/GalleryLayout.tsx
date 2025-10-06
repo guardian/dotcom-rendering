@@ -6,6 +6,7 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { Fragment } from 'react';
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
@@ -280,6 +281,15 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						</Fragment>
 					);
 				})}
+
+				<StraightLines
+					data-print-layout="hide"
+					count={4}
+					cssOverrides={css`
+						display: block;
+					`}
+					color={palette('--straight-lines')}
+				/>
 
 				<SubMeta
 					format={format}

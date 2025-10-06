@@ -88,6 +88,7 @@ const listWrapper = (design: ArticleDesign): SerializedStyles => {
 			${grid.column.centre}
 			padding-bottom: 0.75rem;
 			margin-bottom: 6px;
+			border-bottom: 1px solid ${palette('--article-border')};
 		`;
 	}
 
