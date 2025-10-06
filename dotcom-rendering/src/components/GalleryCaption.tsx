@@ -54,7 +54,7 @@ const styles = css`
 			content: '';
 			position: absolute;
 			right: -10px;
-			top: 0;
+			top: -12px;
 			bottom: 0;
 			width: 1px;
 			background-color: ${palette('--article-border')};
