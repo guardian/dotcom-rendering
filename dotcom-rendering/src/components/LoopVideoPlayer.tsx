@@ -106,6 +106,7 @@ type Props = {
 	currentTime: number;
 	setCurrentTime: Dispatch<SetStateAction<number>>;
 	isMuted: boolean;
+	handleLoadedMetadata: (event: SyntheticEvent) => void;
 	handleLoadedData: (event: SyntheticEvent) => void;
 	handleCanPlay: (event: SyntheticEvent) => void;
 	handlePlayPauseClick: (event: SyntheticEvent) => void;
@@ -140,6 +141,7 @@ export const LoopVideoPlayer = forwardRef(
 			currentTime,
 			setCurrentTime,
 			isMuted,
+			handleLoadedMetadata,
 			handleLoadedData,
 			handleCanPlay,
 			handlePlayPauseClick,
@@ -177,6 +179,7 @@ export const LoopVideoPlayer = forwardRef(
 					muted={isMuted}
 					playsInline={true}
 					poster={posterImage}
+					onLoadedMetadata={handleLoadedMetadata}
 					onLoadedData={handleLoadedData}
 					onCanPlay={handleCanPlay}
 					onCanPlayThrough={handleCanPlay}
