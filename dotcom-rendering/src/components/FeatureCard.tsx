@@ -6,11 +6,17 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { Hide, SvgMediaControlsPlay } from '@guardian/source/react-components';
-import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '../lib/articleFormat';
 import { secondsToDuration } from '../lib/formatTime';
 import { getZIndex } from '../lib/getZIndex';
+import { getOphanComponents } from '../lib/labs';
 import { transparentColour } from '../lib/transparentColour';
 import { palette } from '../palette';
+import type { Branding } from '../types/branding';
 import type { StarRating as Rating } from '../types/content';
 import type {
 	AspectRatio,
@@ -33,13 +39,11 @@ import { FormatBoundary } from './FormatBoundary';
 import { Island } from './Island';
 import { MediaDuration } from './MediaDuration';
 import { Pill } from './Pill';
+import { SponsoredContentLabel } from './SponsoredContentLabel';
 import { StarRating } from './StarRating/StarRating';
 import { SupportingContent } from './SupportingContent';
 import { WaveForm } from './WaveForm';
 import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
-import { Branding } from 'src/types/branding';
-import { CardBranding } from './Card/components/CardBranding';
-import { OnwardsSource } from 'src/types/onwards';
 
 export type Position = 'inner' | 'outer' | 'none';
 
@@ -314,7 +318,6 @@ export type Props = {
 	dataLinkName?: string;
 	/** Only used on Labs cards */
 	branding?: Branding;
-	onwardsSource?: OnwardsSource;
 	/** Supporting content refers to sublinks */
 	supportingContent?: DCRSupportingContent[];
 	containerPalette?: DCRContainerPalette;
@@ -362,7 +365,6 @@ export const FeatureCard = ({
 	showPulsingDot,
 	dataLinkName,
 	branding,
-	onwardsSource,
 	supportingContent,
 	containerPalette,
 	discussionApiUrl,
@@ -401,6 +403,15 @@ export const FeatureCard = ({
 		webPublicationDate !== undefined && showClock !== undefined;
 
 	const showCommentCount = discussionId !== undefined;
+
+	const dataAttributes = branding
+		? getOphanComponents({
+				branding,
+				locationPrefix: 'front-card',
+		  })
+		: undefined;
+
+	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	return (
 		<FormatBoundary format={format}>
@@ -676,19 +687,6 @@ export const FeatureCard = ({
 													/>
 												) : undefined
 											}
-											cardBranding={
-												branding ? (
-													<CardBranding
-														branding={branding}
-														onwardsSource={
-															onwardsSource
-														}
-														containerPalette={
-															containerPalette
-														}
-													/>
-												) : undefined
-											}
 											showLivePlayable={false}
 											mainMedia={mainMedia}
 											isNewsletter={isNewsletter}
@@ -733,6 +731,20 @@ export const FeatureCard = ({
 							alignment="vertical"
 							fillBackgroundOnDesktop={true}
 							fillBackgroundOnMobile={true}
+						/>
+					)}
+					{isLabs && branding && showLabsRedesign && (
+						<SponsoredContentLabel
+							branding={branding}
+							containerPalette={containerPalette}
+							orientation="horizontal"
+							alignment="end"
+							ophanComponentLink={
+								dataAttributes?.ophanComponentLink
+							}
+							ophanComponentName={
+								dataAttributes?.ophanComponentName
+							}
 						/>
 					)}
 				</div>

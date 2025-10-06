@@ -1,7 +1,12 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	Pillar,
+} from '../lib/articleFormat';
 import { type Props as CardProps, FeatureCard } from './FeatureCard';
 
 const cardProps: CardProps = {
@@ -119,6 +124,45 @@ export const Immersive: Story = {
 		isImmersive: true,
 		trailText:
 			'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+	},
+};
+
+export const Labs: Story = {
+	args: {
+		byline: undefined,
+		format: { ...cardProps.format, theme: ArticleSpecial.Labs },
+		containerPalette: 'Branded',
+		branding: {
+			logo: {
+				src: 'https://static.theguardian.com/commercial/sponsor/22/Aug/2025/52dc0276-c2d9-405c-a686-2577c12914d4-ecover_pos_280.png',
+				link: '#',
+				label: 'Paid for by',
+				dimensions: {
+					width: 120,
+					height: 60,
+				},
+			},
+			logoForDarkBackground: {
+				src: 'https://static.theguardian.com/commercial/sponsor/22/Aug/2025/52dc0276-c2d9-405c-a686-2577c12914d4-ecover_pos_280.png',
+				link: '#',
+				label: 'Paid for by',
+				dimensions: {
+					width: 120,
+					height: 60,
+				},
+			},
+			sponsorName: 'Guardian Org',
+			aboutThisLink: '#about',
+		},
+		showLabsRedesign: true,
+	},
+};
+
+export const LabsImmersive: Story = {
+	args: {
+		...Labs.args,
+		...Immersive.args,
+		trailText: undefined,
 	},
 };
 
