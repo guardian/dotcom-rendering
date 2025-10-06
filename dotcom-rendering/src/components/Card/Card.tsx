@@ -1,9 +1,11 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import {
+	between,
 	from,
 	palette as sourcePalette,
 	space,
+	until,
 } from '@guardian/source/foundations';
 import { Hide, Link, SvgCamera } from '@guardian/source/react-components';
 import {
@@ -15,6 +17,7 @@ import { isMediaCard } from '../../lib/cardHelpers';
 import { isWithinTwelveHours, secondsToDuration } from '../../lib/formatTime';
 import { appendLinkNameMedia } from '../../lib/getDataLinkName';
 import { getZIndex } from '../../lib/getZIndex';
+import { getOphanComponents } from '../../lib/labs';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { BETA_CONTAINERS } from '../../model/enhanceCollections';
 import { palette } from '../../palette';
@@ -43,6 +46,7 @@ import { Pill } from '../Pill';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
 import { Snap } from '../Snap';
 import { SnapCssSandbox } from '../SnapCssSandbox';
+import { SponsoredContentLabel } from '../SponsoredContentLabel';
 import { StarRating } from '../StarRating/StarRating';
 import type { Alignment } from '../SupportingContent';
 import { SupportingContent } from '../SupportingContent';
@@ -725,6 +729,80 @@ export const Card = ({
 		return undefined;
 	};
 
+	/**
+	 * Decides which branding design to apply based on the labs redesign feature switch
+	 * Adds appropriate Ophan data attributes based on card context
+	 * Results in a clickable brand logo and sponsorship label
+	 */
+	const LabsBranding = () => {
+		if (!branding) return;
+		const getLocationPrefix = () => {
+			if (!onwardsSource) {
+				return 'front-card';
+			}
+			if (onwardsSource === 'related-content') {
+				return 'article-related-content';
+			} else {
+				return undefined;
+			}
+		};
+		const locationPrefix = getLocationPrefix();
+		const dataAttributes = locationPrefix
+			? getOphanComponents({
+					branding,
+					locationPrefix,
+			  })
+			: undefined;
+
+		return showLabsRedesign ? (
+			<>
+				{/** All screen sizes apart from tablet have horizontal orientation */}
+				<div
+					css={css`
+						${between.tablet.and.desktop} {
+							display: none;
+						}
+					`}
+				>
+					<SponsoredContentLabel
+						branding={branding}
+						containerPalette={containerPalette}
+						orientation="horizontal"
+						alignment="end"
+						ophanComponentLink={dataAttributes?.ophanComponentLink}
+						ophanComponentName={dataAttributes?.ophanComponentName}
+					/>
+				</div>
+				{/** Tablet sized screens have vertical orientation */}
+				<div
+					css={css`
+						${until.tablet} {
+							display: none;
+						}
+						${from.desktop} {
+							display: none;
+						}
+					`}
+				>
+					<SponsoredContentLabel
+						branding={branding}
+						containerPalette={containerPalette}
+						orientation="vertical"
+						alignment="end"
+						ophanComponentLink={dataAttributes?.ophanComponentLink}
+						ophanComponentName={dataAttributes?.ophanComponentName}
+					/>
+				</div>
+			</>
+		) : (
+			<CardBranding
+				branding={branding}
+				containerPalette={containerPalette}
+				onwardsSource={onwardsSource}
+			/>
+		);
+	};
+
 	return (
 		<CardWrapper
 			format={format}
@@ -1109,17 +1187,10 @@ export const Card = ({
 								{showPill ? (
 									<>
 										<MediaOrNewsletterPill />
-										{format.theme === ArticleSpecial.Labs &&
-											branding && (
-												<CardBranding
-													branding={branding}
-													onwardsSource={
-														onwardsSource
-													}
-													containerPalette={
-														containerPalette
-													}
-												/>
+										{!showLabsRedesign &&
+											format.theme ===
+												ArticleSpecial.Labs && (
+												<LabsBranding />
 											)}
 									</>
 								) : (
@@ -1128,16 +1199,9 @@ export const Card = ({
 										age={decideAge()}
 										commentCount={<CommentCount />}
 										cardBranding={
-											branding ? (
-												<CardBranding
-													branding={branding}
-													onwardsSource={
-														onwardsSource
-													}
-													containerPalette={
-														containerPalette
-													}
-												/>
+											isOnwardContent ||
+											!showLabsRedesign ? (
+												<LabsBranding />
 											) : undefined
 										}
 										showLivePlayable={showLivePlayable}
@@ -1187,6 +1251,7 @@ export const Card = ({
 				</ContentWrapper>
 			</CardLayout>
 
+			{/** This div contains content that sits "outside" of the standard card layout */}
 			<div
 				css={
 					/** We allow this area to take up more space so that cards without
@@ -1231,12 +1296,7 @@ export const Card = ({
 						age={decideAge()}
 						commentCount={<CommentCount />}
 						cardBranding={
-							branding ? (
-								<CardBranding
-									branding={branding}
-									onwardsSource={onwardsSource}
-								/>
-							) : undefined
+							!showLabsRedesign ? <LabsBranding /> : undefined
 						}
 						showLivePlayable={showLivePlayable}
 						shouldReserveSpace={{
@@ -1246,6 +1306,10 @@ export const Card = ({
 					/>
 				)}
 			</div>
+
+			{showLabsRedesign &&
+				!isOnwardContent &&
+				format.theme === ArticleSpecial.Labs && <LabsBranding />}
 		</CardWrapper>
 	);
 };
