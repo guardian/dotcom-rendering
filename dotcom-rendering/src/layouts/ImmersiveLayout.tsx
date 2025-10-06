@@ -333,7 +333,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 			)}
 
 			{format.theme === ArticleSpecial.Labs && (
-				<Stuck>
+				<Stuck zIndex="subNavBanner">
 					<Section
 						fullWidth={true}
 						showTopBorder={false}

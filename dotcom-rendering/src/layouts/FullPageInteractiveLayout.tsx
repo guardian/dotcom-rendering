@@ -232,7 +232,7 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 						/>
 
 						{format.theme === ArticleSpecial.Labs && (
-							<Stuck>
+							<Stuck zIndex="subNavBanner">
 								<Section
 									fullWidth={true}
 									showTopBorder={false}
