@@ -33,7 +33,7 @@ import type {
 	DCRSupportingContent,
 } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
-import type { OnwardsSource } from '../../types/onwards';
+import type { OnwardContainerType, OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
 import { CardCommentCount } from '../CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from '../CardHeadline';
@@ -124,7 +124,7 @@ export type Props = {
 	supportingContentPosition?: Position;
 	snapData?: DCRSnapType;
 	containerPalette?: DCRContainerPalette;
-	containerType?: DCRContainerType;
+	containerType?: DCRContainerType | OnwardContainerType;
 	showAge?: boolean;
 	discussionApiUrl: string;
 	discussionId?: string;
@@ -150,6 +150,8 @@ export type Props = {
 	uniqueId?: string;
 	/** The Splash card in a flexible container gets a different visual treatment to other cards */
 	isFlexSplash?: boolean;
+	/** The Splash card in an onward container gets a different visual treatment to other cards */
+	isOnwardSplash?: boolean;
 	showTopBarDesktop?: boolean;
 	showTopBarMobile?: boolean;
 	trailTextSize?: TrailTextSize;
@@ -393,6 +395,7 @@ export const Card = ({
 	index = 0,
 	uniqueId = '',
 	isFlexSplash,
+	isOnwardSplash,
 	showTopBarDesktop = true,
 	showTopBarMobile = true,
 	trailTextSize,
@@ -585,6 +588,8 @@ export const Card = ({
 		containerType === 'flexible/special' ||
 		containerType === 'flexible/general';
 
+	const isOnwardContainer = containerType === 'more-galleries';
+
 	const isSmallCard =
 		containerType === 'scrollable/small' ||
 		containerType === 'scrollable/medium';
@@ -603,17 +608,25 @@ export const Card = ({
 
 	const hideTrailTextUntil = () => {
 		if (isFlexibleContainer) {
+			return 'tablet';
+		}
+		if (isOnwardSplash) {
 			return undefined;
-		} else if (
+		}
+		if (
 			mediaSize === 'large' &&
 			mediaPositionOnDesktop === 'right' &&
 			media?.type !== 'avatar'
 		) {
 			return 'desktop';
-		} else {
-			return 'tablet';
 		}
+
+		return 'tablet';
 	};
+
+	const shouldShowTrailText = isOnwardContainer
+		? media?.type !== 'podcast' && isOnwardSplash
+		: media?.type !== 'podcast';
 
 	/**
 	 * Determines the gap of between card components based on card properties
@@ -1191,7 +1204,7 @@ export const Card = ({
 							</HeadlineWrapper>
 						)}
 
-						{!!trailText && media?.type !== 'podcast' && (
+						{!!trailText && shouldShowTrailText && (
 							<TrailText
 								trailText={trailText}
 								trailTextSize={trailTextSize}
