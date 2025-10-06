@@ -38,9 +38,11 @@ import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
+import type { EditionId } from '../lib/edition';
 import type { NavType } from '../model/extract-nav';
 import { palette } from '../palette';
 import type { Gallery } from '../types/article';
+import type { ConfigType } from '../types/config';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -144,8 +146,6 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 
 	const {
 		config: {
-			idUrl,
-			mmaUrl,
 			discussionApiUrl,
 			idApiUrl,
 			shortUrlId,
@@ -184,40 +184,16 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 
 	return (
 		<>
-			{isWeb && (
-				<div data-print-layout="hide" id="bannerandheader">
-					{renderAds && (
-						<Stuck>
-							<Section
-								fullWidth={true}
-								showTopBorder={false}
-								showSideBorders={false}
-								padSides={false}
-								shouldCenter={false}
-							>
-								<HeaderAdSlot />
-							</Section>
-						</Stuck>
-					)}
-					<Masthead
-						nav={props.NAV}
-						editionId={editionId}
-						idUrl={idUrl}
-						mmaUrl={mmaUrl}
-						discussionApiUrl={discussionApiUrl}
-						idApiUrl={idApiUrl}
-						contributionsServiceUrl={
-							frontendData.contributionsServiceUrl
-						}
-						showSubNav={false}
-						showSlimNav={true}
-						hasPageSkin={false}
-						hasPageSkinContentSelfConstrain={false}
-						pageId={frontendData.pageId}
-						wholePictureLogoSwitch={switches.wholePictureLogo}
-					/>
-				</div>
-			)}
+			{isWeb ? (
+				<BannerAndMasthead
+					renderAds={renderAds}
+					nav={props.NAV}
+					editionId={frontendData.editionId}
+					config={frontendData.config}
+					contributionsServiceUrl={contributionsServiceUrl}
+					pageId={frontendData.pageId}
+				/>
+			) : null}
 
 			{format.theme === ArticleSpecial.Labs && (
 				<Stuck zIndex="subNavBanner">
@@ -560,6 +536,46 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 		</>
 	);
 };
+
+const BannerAndMasthead = (props: {
+	renderAds: boolean;
+	nav: NavType;
+	editionId: EditionId;
+	config: ConfigType;
+	contributionsServiceUrl: string;
+	pageId: string | undefined;
+}) => (
+	<div data-print-layout="hide" id="bannerandheader">
+		{props.renderAds ? (
+			<Stuck>
+				<Section
+					fullWidth={true}
+					showTopBorder={false}
+					showSideBorders={false}
+					padSides={false}
+					shouldCenter={false}
+				>
+					<HeaderAdSlot />
+				</Section>
+			</Stuck>
+		) : null}
+		<Masthead
+			nav={props.nav}
+			editionId={props.editionId}
+			idUrl={props.config.idUrl}
+			mmaUrl={props.config.mmaUrl}
+			discussionApiUrl={props.config.discussionApiUrl}
+			idApiUrl={props.config.idApiUrl}
+			contributionsServiceUrl={props.contributionsServiceUrl}
+			showSubNav={false}
+			showSlimNav={true}
+			hasPageSkin={false}
+			hasPageSkinContentSelfConstrain={false}
+			pageId={props.pageId}
+			wholePictureLogoSwitch={props.config.switches.wholePictureLogo}
+		/>
+	</div>
+);
 
 const StoryPackage = ({
 	storyPackage,
