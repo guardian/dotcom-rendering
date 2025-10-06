@@ -544,3 +544,38 @@ export const MultipleProductsWithoutStats: StoryFn = () => {
 		</>
 	);
 };
+
+export const withoutFields: StoryFn = () => {
+	return (
+		<>
+			<ProductElement
+				product={{
+					...product,
+					primaryHeading: '',
+					secondaryHeading: '',
+					brandName: '',
+					productName: '',
+					primaryCta: '',
+					primaryPrice: '',
+					primaryRetailer: '',
+					primaryProductUrl: '',
+					secondaryCta: '',
+					secondaryPrice: '',
+					secondaryRetailer: '',
+					secondaryProductUrl: '',
+					statistics: [],
+					image: {
+						...product.image,
+						url: '',
+					},
+				}}
+				format={{
+					design: ArticleDesign.Review,
+					display: ArticleDisplay.Showcase,
+					theme: Pillar.Lifestyle,
+				}}
+				ArticleElementComponent={ArticleElementComponent}
+			/>
+		</>
+	);
+};
