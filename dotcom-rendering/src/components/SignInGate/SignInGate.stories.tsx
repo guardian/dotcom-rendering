@@ -272,13 +272,14 @@ export const auxiaV2DismissibleModal = () => {
 				host="https://www.theguardian.com"
 				idUrl="https://profile.theguardian.com"
 				contributionsServiceUrl="https://contributions.guardianapis.com"
-				signInGateVersion="v2"
 				auxiaGateDisplayData={{
 					browserId: 'test-browser-id',
 					auxiaData: {
 						responseId: 'test-response-id',
-						userTreatment:
-							mockAuxiaResponseDismissible.data.userTreatment,
+						userTreatment: {
+							...mockAuxiaResponseDismissible.data.userTreatment,
+							treatmentType: 'DISMISSABLE_SIGN_IN_GATE_POPUP',
+						},
 					},
 				}}
 			/>
@@ -298,13 +299,15 @@ export const auxiaV2NonDismissibleModal = () => {
 				host="https://www.theguardian.com"
 				idUrl="https://profile.theguardian.com"
 				contributionsServiceUrl="https://contributions.guardianapis.com"
-				signInGateVersion="v2"
 				auxiaGateDisplayData={{
 					browserId: 'test-browser-id',
 					auxiaData: {
 						responseId: 'test-response-id',
-						userTreatment:
-							mockAuxiaResponseNonDismissible.data.userTreatment,
+						userTreatment: {
+							...mockAuxiaResponseNonDismissible.data
+								.userTreatment,
+							treatmentType: 'NONDISMISSIBLE_SIGN_IN_GATE_POPUP',
+						},
 					},
 				}}
 			/>

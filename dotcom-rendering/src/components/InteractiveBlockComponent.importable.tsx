@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
+import { getErrorMessage, isUndefined, log } from '@guardian/libs';
 import {
 	article17,
 	from,
@@ -223,9 +223,9 @@ const setupWindowListeners = (iframe: HTMLIFrameElement) => {
 			try {
 				message = JSON.parse(event.data);
 			} catch (e) {
-				window.guardian.modules.sentry.reportError(
-					// @ts-expect-error
-					e,
+				log(
+					'dotcom',
+					getErrorMessage(e),
 					'Json parse Failed on in interactiveBlockComponent',
 				);
 			}

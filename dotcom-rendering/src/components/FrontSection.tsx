@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
-import { badgeFromBranding } from '../lib/branding';
 import { type EditionId, isNetworkFront } from '../lib/edition';
 import { hideAge } from '../lib/hideAge';
+import { getOphanComponents } from '../lib/labs';
 import { palette as schemePalette } from '../palette';
 import type { CollectionBranding } from '../types/branding';
 import type {
@@ -634,7 +634,13 @@ export const FrontSection = ({
 		!!isNextCollectionPrimary || isAboveDesktopAd;
 
 	const showSectionColours = isNetworkFront(pageId ?? '');
-	const badge = badgeFromBranding(collectionBranding);
+
+	const labsDataAttributes = collectionBranding?.branding
+		? getOphanComponents({
+				branding: collectionBranding.branding,
+				locationPrefix: 'front-container',
+		  })
+		: undefined;
 
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
@@ -687,7 +693,11 @@ export const FrontSection = ({
 
 				{isLabs && showLabsRedesign ? (
 					<div css={labsSectionHeaderStyles}>
-						<LabsSectionHeader title={title} />
+						<LabsSectionHeader
+							title={title}
+							url={url}
+							editionId={editionId}
+						/>
 					</div>
 				) : (
 					<div
@@ -807,12 +817,17 @@ export const FrontSection = ({
 					) : null}
 					{isLabs &&
 						collectionBranding?.kind === 'paid-content' &&
-						badge && (
+						!collectionBranding.hasMultipleBranding && (
 							<div css={sponsoredContentLabelWrapper}>
 								<SponsoredContentLabel
-									imageSrc={badge.imageSrc}
-									href={badge.href}
-									ophanComponentName={ophanComponentName}
+									branding={collectionBranding.branding}
+									containerPalette={containerPalette}
+									ophanComponentLink={
+										labsDataAttributes?.ophanComponentLink
+									}
+									ophanComponentName={
+										labsDataAttributes?.ophanComponentName
+									}
 								/>
 							</div>
 						)}
