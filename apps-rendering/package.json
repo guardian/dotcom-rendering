@@ -41,7 +41,7 @@
 		"@emotion/jest": "11.13.0",
 		"@emotion/react": "11.14.0",
 		"@emotion/server": "11.11.0",
-		"@guardian/apps-rendering-api-models": "13.0.1-PREVIEW.fpbump-scrooge-ts.2025-10-02T0957.15fda4f0",
+		"@guardian/apps-rendering-api-models": "13.0.1",
 		"@guardian/bridget": "7.0.0",
 		"@guardian/cdk": "61.4.0",
 		"@guardian/content-api-models": "31.0.0",

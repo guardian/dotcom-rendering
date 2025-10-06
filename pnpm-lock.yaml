@@ -64,8 +64,8 @@ importers:
         specifier: 11.11.0
         version: 11.11.0
       '@guardian/apps-rendering-api-models':
-        specifier: 13.0.1-PREVIEW.fpbump-scrooge-ts.2025-10-02T0957.15fda4f0
-        version: 13.0.1-PREVIEW.fpbump-scrooge-ts.2025-10-02T0957.15fda4f0
+        specifier: 13.0.1
+        version: 13.0.1
       '@guardian/bridget':
         specifier: 7.0.0
         version: 7.0.0
@@ -4743,8 +4743,8 @@ packages:
       typescript: 5.5.3
     dev: false
 
-  /@guardian/apps-rendering-api-models@13.0.1-PREVIEW.fpbump-scrooge-ts.2025-10-02T0957.15fda4f0:
-    resolution: {integrity: sha512-Ai9mdupQTIzBsYZXLN1D/JQUEtUNHr5mTV0AZgkj7VOiVm+DYAM4Psn9vx1AQWAPnEMQElkJ9OQg4y/VUFLpTw==}
+  /@guardian/apps-rendering-api-models@13.0.1:
+    resolution: {integrity: sha512-w2+jArODTq/dWD/Gx44LBkaiy8cA8+aJ1S6ZMx2huFdN69QL1Ex3QhEmzzjqDbSymA9cxJEySb92y8+QZIxycw==}
     dependencies:
       '@guardian/content-api-models': 31.0.0
       '@guardian/content-atom-model': 6.1.0
