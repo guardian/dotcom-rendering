@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { space } from '@guardian/source/foundations';
+import {
+	space,
+	textSans15,
+	textSans17,
+	textSans20,
+} from '@guardian/source/foundations';
 import type { IconProps } from '@guardian/source/react-components';
 import type {
 	Dispatch,
@@ -13,7 +18,13 @@ import { palette } from '../palette';
 import { narrowPlayIconWidth, PlayIcon } from './Card/components/PlayIcon';
 import { LoopVideoProgressBar } from './LoopVideoProgressBar';
 
-const videoStyles = (width: number, height: number) => css`
+export type SubtitleSize = 'small' | 'medium' | 'large';
+
+const videoStyles = (
+	width: number,
+	height: number,
+	subtitleSize: SubtitleSize,
+) => css`
 	position: relative;
 	display: block;
 	height: auto;
@@ -22,6 +33,15 @@ const videoStyles = (width: number, height: number) => css`
 	/* Prevents CLS by letting the browser know the space the video will take up. */
 	aspect-ratio: ${width} / ${height};
 	object-fit: cover;
+
+	::cue {
+		background-color: ${palette('--loop-video-subtitle-background')};
+		color: ${palette('--loop-video-subtitle-text')};
+
+		${subtitleSize === 'small' && textSans15};
+		${subtitleSize === 'medium' && textSans17};
+		${subtitleSize === 'large' && textSans20};
+	}
 `;
 
 const playIconStyles = css`
@@ -97,6 +117,8 @@ type Props = {
 	posterImage?: string;
 	preloadPartialData: boolean;
 	showPlayIcon: boolean;
+	subtitleSource?: string;
+	subtitleSize: SubtitleSize;
 };
 
 /**
@@ -128,6 +150,8 @@ export const LoopVideoPlayer = forwardRef(
 			AudioIcon,
 			preloadPartialData,
 			showPlayIcon,
+			subtitleSource,
+			subtitleSize,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -138,7 +162,7 @@ export const LoopVideoPlayer = forwardRef(
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Captions will be considered later. */}
 				<video
 					id={loopVideoId}
-					css={videoStyles(width, height)}
+					css={videoStyles(width, height, subtitleSize)}
 					ref={ref}
 					tabIndex={0}
 					data-testid="loop-video"
@@ -179,6 +203,13 @@ export const LoopVideoPlayer = forwardRef(
 							type={source.mimeType}
 						/>
 					))}
+					{subtitleSource !== undefined && (
+						<track
+							default={true}
+							kind="subtitles"
+							src={subtitleSource}
+						/>
+					)}
 					{FallbackImageComponent}
 				</video>
 				{ref && 'current' in ref && ref.current && isPlayable && (
