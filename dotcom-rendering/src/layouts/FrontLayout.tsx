@@ -21,6 +21,7 @@ import { FrontSection } from '../components/FrontSection';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
+import { LabsPageHeader } from '../components/LabsPageHeader';
 import { LabsSection } from '../components/LabsSection';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
@@ -232,17 +233,20 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					}
 				/>
 
-				{isPaidContent && (
-					<Section
-						fullWidth={true}
-						showTopBorder={false}
-						backgroundColour={sourcePalette.labs[400]}
-						borderColour={sourcePalette.neutral[60]}
-						sectionId="labs-header"
-					>
-						<LabsHeader editionId={editionId} />
-					</Section>
-				)}
+				{isPaidContent &&
+					(showLabsRedesign ? (
+						<LabsPageHeader editionId={editionId} />
+					) : (
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							backgroundColour={sourcePalette.labs[400]}
+							borderColour={sourcePalette.neutral[60]}
+							sectionId="labs-header"
+						>
+							<LabsHeader editionId={editionId} />
+						</Section>
+					))}
 			</div>
 
 			<main

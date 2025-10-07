@@ -11,6 +11,7 @@ import { InteractivesDisableArticleSwipe } from '../components/InteractivesDisab
 import { InteractivesNativePlatformWrapper } from '../components/InteractivesNativePlatformWrapper.importable';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
+import { LabsPageHeader } from '../components/LabsPageHeader';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
@@ -200,6 +201,8 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 
 	const renderAds = canRenderAds(article);
 
+	const { guardianLabsRedesign = false } = article.config.switches;
+
 	return (
 		<>
 			{article.isLegacyInteractive && (
@@ -233,16 +236,21 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 
 						{format.theme === ArticleSpecial.Labs && (
 							<Stuck zIndex="subNavBanner">
-								<Section
-									fullWidth={true}
-									showTopBorder={false}
-									padSides={true}
-									backgroundColour={sourcePalette.labs[400]}
-									borderColour={sourcePalette.neutral[60]}
-									sectionId="labs-header"
-								>
-									<LabsHeader editionId={editionId} />
-								</Section>
+								{guardianLabsRedesign ? (
+									<LabsPageHeader editionId={editionId} />
+								) : (
+									<Section
+										fullWidth={true}
+										showTopBorder={false}
+										backgroundColour={
+											sourcePalette.labs[400]
+										}
+										borderColour={sourcePalette.neutral[60]}
+										sectionId="labs-header"
+									>
+										<LabsHeader editionId={editionId} />
+									</Section>
+								)}
 							</Stuck>
 						)}
 					</header>

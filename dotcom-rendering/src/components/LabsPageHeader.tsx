@@ -118,7 +118,7 @@ const logoStyles = css`
 `;
 
 export const LabsPageHeader = ({ editionId }: { editionId: EditionId }) => (
-	<div css={headerStyles}>
+	<div id="labs-header" css={headerStyles}>
 		<div css={headerInnerStyles}>
 			<div css={leftContentStyles}>
 				<div

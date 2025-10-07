@@ -29,6 +29,7 @@ import { HeadlineByline } from '../components/HeadlineByline';
 import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
+import { LabsPageHeader } from '../components/LabsPageHeader';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { minHeaderHeightPx } from '../components/Masthead/Titlepiece/constants';
@@ -308,7 +309,8 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
-	const { absoluteServerTimes = false } = article.config.switches;
+	const { absoluteServerTimes = false, guardianLabsRedesign = false } =
+		article.config.switches;
 
 	return (
 		<>
@@ -334,15 +336,19 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 			{format.theme === ArticleSpecial.Labs && (
 				<Stuck zIndex="subNavBanner">
-					<Section
-						fullWidth={true}
-						showTopBorder={false}
-						backgroundColour={sourcePalette.labs[400]}
-						borderColour={sourcePalette.neutral[60]}
-						sectionId="labs-header"
-					>
-						<LabsHeader editionId={editionId} />
-					</Section>
+					{guardianLabsRedesign ? (
+						<LabsPageHeader editionId={editionId} />
+					) : (
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							backgroundColour={sourcePalette.labs[400]}
+							borderColour={sourcePalette.neutral[60]}
+							sectionId="labs-header"
+						>
+							<LabsHeader editionId={editionId} />
+						</Section>
+					)}
 				</Stuck>
 			)}
 

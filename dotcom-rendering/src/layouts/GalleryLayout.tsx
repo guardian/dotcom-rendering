@@ -24,6 +24,7 @@ import { GalleryImage } from '../components/GalleryImage';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
+import { LabsPageHeader } from '../components/LabsPageHeader';
 import { MainMediaGallery } from '../components/MainMediaGallery';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
@@ -165,7 +166,8 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 	const showComments =
 		frontendData.isCommentable && !frontendData.config.isPaidContent;
 
-	const { absoluteServerTimes = false } = switches;
+	const { absoluteServerTimes = false, guardianLabsRedesign = false } =
+		switches;
 
 	return (
 		<>
@@ -179,9 +181,11 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					pageId={frontendData.pageId}
 				/>
 			) : null}
+
 			<GalleryLabsHeader
 				theme={format.theme}
 				editionId={frontendData.editionId}
+				showLabsRedesign={guardianLabsRedesign}
 			/>
 
 			<main
@@ -512,19 +516,23 @@ const BannerAndMasthead = (props: {
 const GalleryLabsHeader = (props: {
 	theme: ArticleTheme;
 	editionId: EditionId;
+	showLabsRedesign?: boolean;
 }) =>
 	props.theme === ArticleSpecial.Labs ? (
 		<Stuck>
-			<Section
-				fullWidth={true}
-				showTopBorder={false}
-				backgroundColour={sourcePalette.labs[400]}
-				borderColour={sourcePalette.neutral[60]}
-				sectionId="labs-header"
-				element="aside"
-			>
-				<LabsHeader editionId={props.editionId} />
-			</Section>
+			{props.showLabsRedesign ? (
+				<LabsPageHeader editionId={props.editionId} />
+			) : (
+				<Section
+					fullWidth={true}
+					showTopBorder={false}
+					backgroundColour={sourcePalette.labs[400]}
+					borderColour={sourcePalette.neutral[60]}
+					sectionId="labs-header"
+				>
+					<LabsHeader editionId={props.editionId} />
+				</Section>
+			)}
 		</Stuck>
 	) : null;
 
