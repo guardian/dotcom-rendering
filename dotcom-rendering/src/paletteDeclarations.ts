@@ -619,6 +619,8 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme, display }) => {
 
 const bylineAnchorDark: PaletteFunction = ({ design, theme, display }) => {
 	switch (design) {
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[86];
 		case ArticleDesign.Analysis:
 			switch (theme) {
 				case Pillar.News:
