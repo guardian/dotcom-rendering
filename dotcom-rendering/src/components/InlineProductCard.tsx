@@ -11,6 +11,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import { Picture } from './Picture';
 import { ProductLinkButton } from './ProductLinkButton';
+import { stripHtmlFromString } from './TextBlockComponent';
 
 export type Statistics = {
 	name: string;
@@ -101,8 +102,6 @@ const ProductInfoContainer = ({ children }: { children: ReactNode }) => (
 	<div css={productInfoContainer}>{children}</div>
 );
 
-const stripHtml = (html: string) => html.replace(/<[^>]+>/g, '');
-
 export const InlineProductCard = ({
 	format,
 	brandName,
@@ -136,7 +135,7 @@ export const InlineProductCard = ({
 		</ProductInfoContainer>
 		<ButtonContainer>
 			<ProductLinkButton
-				label={stripHtml(primaryCTA)}
+				label={stripHtmlFromString(primaryCTA)}
 				url={primaryUrl}
 				cssOverrides={css`
 					width: 100%;
@@ -147,7 +146,7 @@ export const InlineProductCard = ({
 					cssOverrides={css`
 						width: 100%;
 					`}
-					label={stripHtml(secondaryCTA)}
+					label={stripHtmlFromString(secondaryCTA)}
 					url={secondaryUrl}
 					priority={'tertiary'}
 				/>
