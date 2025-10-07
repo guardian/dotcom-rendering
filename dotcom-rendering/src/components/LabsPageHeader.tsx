@@ -22,7 +22,7 @@ import { LabsLogo } from './LabsLogo';
 const headerStyles = css`
 	color: ${schemePalette('--labs-header-title')};
 	background-color: ${schemePalette('--labs-header-background')};
-	border-bottom: 1px solid var(--article-border);
+	border-bottom: 1px solid var(--section-border);
 `;
 
 const headerInnerStyles = css`
@@ -30,8 +30,8 @@ const headerInnerStyles = css`
 	${grid.paddedContainer}
 
 	${from.tablet} {
-		border-left: 1px solid ${schemePalette('--article-border')};
-		border-right: 1px solid ${schemePalette('--article-border')};
+		border-left: 1px solid ${schemePalette('--section-border')};
+		border-right: 1px solid ${schemePalette('--section-border')};
 	}
 `;
 
