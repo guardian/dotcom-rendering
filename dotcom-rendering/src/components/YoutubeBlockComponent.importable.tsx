@@ -129,6 +129,13 @@ export const YoutubeBlockComponent = ({
 			return posterImage;
 		}
 
+		// For Liveblog Articles with a Video atom for their main media
+		// we need to display the poster image
+		// Note: main media videos in liveblogs tend to be transitory eg PMQs
+		if (contentLayout?.toLowerCase() === 'livebloglayout') {
+			return posterImage;
+		}
+
 		// Default behaviour is to use the override image, if supplied
 		// otherwise use the poster image
 		return overrideImage ?? posterImage;
