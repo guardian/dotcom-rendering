@@ -15,13 +15,13 @@ import { grid } from '../grid';
 import type { EditionId } from '../lib/edition';
 import { getLabsUrlSuffix } from '../lib/labs';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
-import { palette } from '../palette';
+import { palette as schemePalette } from '../palette';
 import { Details } from './Details';
 import { LabsLogo } from './LabsLogo';
 
 const headerStyles = css`
-	color: ${palette('--labs-header-title')};
-	background-color: ${palette('--labs-header-background')};
+	color: ${schemePalette('--labs-header-title')};
+	background-color: ${schemePalette('--labs-header-background')};
 	border-bottom: 1px solid var(--article-border);
 `;
 
@@ -30,8 +30,8 @@ const headerInnerStyles = css`
 	${grid.paddedContainer}
 
 	${from.tablet} {
-		border-left: 1px solid ${palette('--article-border')};
-		border-right: 1px solid ${palette('--article-border')};
+		border-left: 1px solid ${schemePalette('--article-border')};
+		border-right: 1px solid ${schemePalette('--article-border')};
 	}
 `;
 
@@ -42,26 +42,6 @@ const leftContentStyles = css`
 	}
 	justify-self: start;
 	display: flex;
-`;
-
-const detailsPositionStyles = css`
-	top: 40px;
-	left: 0px;
-
-	${from.mobile} {
-		left: -108px;
-	}
-
-	${from.mobileLandscape} {
-		left: -127.5px;
-	}
-
-	${from.tablet} {
-		max-width: ${breakpoints.tablet}px;
-	}
-	${from.desktop} {
-		max-width: ${breakpoints.desktop}px;
-	}
 `;
 
 const leftContentChildStyles = css`
@@ -79,18 +59,37 @@ const leftContentChildStyles = css`
 		right: 0;
 		top: 0;
 		bottom: 0;
-		border-right: 1px solid ${palette('--section-border')};
+		border-right: 1px solid ${schemePalette('--section-border')};
+	}
+`;
+
+const detailsPositionStyles = css`
+	/** 40px minus 1px border */
+	top: 39px;
+	left: 0px;
+
+	${from.mobile} {
+		left: -108px;
+	}
+
+	${from.mobileLandscape} {
+		left: -128px;
+	}
+
+	${from.tablet} {
+		max-width: ${breakpoints.tablet}px;
+	}
+	${from.desktop} {
+		max-width: ${breakpoints.desktop}px;
 	}
 `;
 
 const detailsExpandedAreaStyles = css`
 	${textSans15};
-	background-color: ${palette('--labs-about-dropdown-background')};
-	border-top: 1px solid ${palette('--section-border')};
+	background-color: ${schemePalette('--labs-about-dropdown-background')};
+	border-top: 1px solid ${schemePalette('--section-border')};
 
 	width: 100vw;
-	/* margin-left: -${grid.mobileColumnGap}; */
-
 	${from.tablet} {
 		width: ${breakpoints.tablet}px;
 	}
@@ -104,7 +103,7 @@ const detailsExpandedAreaStyles = css`
 
 	padding: ${space[2]}px 10px;
 	${from.mobileLandscape} {
-		padding: ${space[3]}px 20px;
+		padding: ${space[3]}px ${space[5]}px;
 	}
 `;
 
@@ -152,6 +151,11 @@ export const LabsPageHeader = ({ editionId }: { editionId: EditionId }) => (
 								priority="subdued"
 								icon={<SvgArrowRightStraight />}
 								href="https://www.theguardian.com/info/2016/jan/25/content-funding"
+								theme={{
+									textSubdued: schemePalette(
+										'--labs-about-dropdown-link',
+									),
+								}}
 							>
 								Learn more
 							</LinkButton>
@@ -160,7 +164,6 @@ export const LabsPageHeader = ({ editionId }: { editionId: EditionId }) => (
 				</div>
 			</div>
 
-			{/* labs logo */}
 			<div css={logoStyles}>
 				<Link
 					href={`https://www.theguardian.com/guardian-labs${getLabsUrlSuffix(
