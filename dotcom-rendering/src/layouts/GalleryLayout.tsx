@@ -339,6 +339,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					discussionApiUrl={frontendData.config.discussionApiUrl}
 					absoluteServerTimes={absoluteServerTimes}
 					renderingTarget={renderingTarget}
+					webURL={frontendData.webURL}
 				/>
 			</Island>
 
