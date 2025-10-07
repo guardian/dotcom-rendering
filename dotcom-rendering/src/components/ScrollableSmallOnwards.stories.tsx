@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { getDataLinkNameCard } from '../lib/getDataLinkName';
-import { CarousableSmallOnwards } from './CarousableSmallOnwards';
+import { ScrollableSmallOnwards } from './ScrollableSmallOnwards';
 
 const meta = {
-	title: 'Components/CarousableSmallOnwards',
-	component: CarousableSmallOnwards,
-} satisfies Meta<typeof CarousableSmallOnwards>;
+	title: 'Components/ScrollableSmallOnwards',
+	component: ScrollableSmallOnwards,
+} satisfies Meta<typeof ScrollableSmallOnwards>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const CarousableSmallOnwardsStory = {
+export const ScrollableSmallOnwardsStory = {
 	args: {
 		absoluteServerTimes: false,
 		discussionApiUrl:

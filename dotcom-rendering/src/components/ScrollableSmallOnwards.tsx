@@ -119,7 +119,7 @@ const getDefaultCardProps = (
 	return defaultProps;
 };
 
-export const CarousableSmallOnwards = (props: Props) => {
+export const ScrollableSmallOnwards = (props: Props) => {
 	const trails = props.trails.slice(0, 4); // Limit to 4 cards
 	if (trails.length !== 4) return null;
 

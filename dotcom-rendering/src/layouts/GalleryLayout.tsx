@@ -16,7 +16,6 @@ import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Caption } from '../components/Caption';
-import { CarousableSmallOnwards } from '../components/CarousableSmallOnwards';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FetchMoreGalleriesData } from '../components/FetchMoreGalleriesData.importable';
 import { Footer } from '../components/Footer';
@@ -30,6 +29,7 @@ import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { ScrollableSmallOnwards } from '../components/ScrollableSmallOnwards';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
@@ -312,7 +312,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 				show={showMerchandisingHigh}
 				display={format.display}
 			/>
-			<CarousableSmallOnwards
+			<ScrollableSmallOnwards
 				absoluteServerTimes={absoluteServerTimes}
 				trails={gallery.storyPackage?.trails ?? []}
 				discussionApiUrl={discussionApiUrl}

@@ -8,9 +8,9 @@ import { palette } from '../palette';
 import type { OnwardsSource } from '../types/onwards';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { FETrailType, TrailType } from '../types/trails';
-import { CarousableSmallOnwards } from './CarousableSmallOnwards';
 import { Carousel } from './Carousel.importable';
 import { Placeholder } from './Placeholder';
+import { ScrollableSmallOnwards } from './ScrollableSmallOnwards';
 
 type Props = {
 	url: string;
@@ -91,7 +91,7 @@ export const FetchOnwardsData = ({
 	return (
 		<div css={minHeight}>
 			{format.design === ArticleDesign.Gallery ? (
-				<CarousableSmallOnwards
+				<ScrollableSmallOnwards
 					absoluteServerTimes={absoluteServerTimes}
 					trails={trails}
 					discussionApiUrl={discussionApiUrl}
