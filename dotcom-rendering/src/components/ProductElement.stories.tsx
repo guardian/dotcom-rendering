@@ -39,11 +39,11 @@ const product: ProductBlockElement = {
 	primaryProductUrl: 'https://www.aircraft.com/lume',
 	primaryPrice: '£199.99',
 	primaryRetailer: 'AirCraft',
-	primaryCta: 'Buy at AirCraft',
+	primaryCta: '£199.99 at AirCraft',
 	starRating: 'none-selected',
 	secondaryProductUrl:
 		'https://www.amazon.co.uk/Devola-16-Inch-Desk-Fan/dp/B0B3Z9K5XH?tag=theguardianbookshop-21&ascsubtag=trd-10001-1b2f-00000-00000-a0000-00000-00000-00000',
-	secondaryCta: 'Buy at Amazon',
+	secondaryCta: '£132.99 at Amazon',
 	secondaryPrice: '£132.99',
 	secondaryRetailer: 'Amazon',
 	statistics: [

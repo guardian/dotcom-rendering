@@ -23,6 +23,7 @@ export type LeftColProductCardProps = {
 	primaryCta: string;
 	primaryUrl: string;
 	primaryPrice: string;
+	primaryRetailer: string;
 	statistics: Statistics[];
 	format: ArticleFormat;
 };
@@ -90,6 +91,23 @@ const Statistic = ({ name, value }: Statistics) => (
 	</div>
 );
 
+const RetailerLink = ({ url, retailer }: { url: string; retailer: string }) => (
+	<a
+		css={css`
+			color: ${palette('--article-text')};
+			border-bottom: 1px solid ${palette('--article-link-border')};
+			text-decoration: none;
+			:hover,
+			:active {
+				border-bottom: 1px solid ${palette('--article-text')};
+			}
+		`}
+		href={url}
+	>
+		{retailer}
+	</a>
+);
+
 //todo -- make this a proper image generateSources() etc.
 
 export const LeftColProductCard = ({
@@ -99,6 +117,7 @@ export const LeftColProductCard = ({
 	primaryCta,
 	primaryUrl,
 	primaryPrice,
+	primaryRetailer,
 	statistics,
 	format,
 }: LeftColProductCardProps) => (
@@ -118,7 +137,8 @@ export const LeftColProductCard = ({
 			<div css={primaryHeading}>{brandName}</div>
 			<div css={secondaryHeading}>{productName}</div>
 			<div css={priceRowStyle}>
-				<strong>{primaryPrice}</strong>
+				<strong>{primaryPrice}</strong> at{' '}
+				<RetailerLink url={primaryUrl} retailer={primaryRetailer} />
 			</div>
 		</div>
 		<div css={buttonOverride}>
