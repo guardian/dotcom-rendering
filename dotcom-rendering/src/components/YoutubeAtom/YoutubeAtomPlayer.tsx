@@ -113,16 +113,17 @@ const setAppsConfiguration = async (
 	basePlayerConfiguration: YouTubePlayerArgs,
 	renderingTarget: RenderingTarget,
 ) => {
-	if (renderingTarget === 'Apps') {
-		const requiresWebFullscreen =
-			await getVideoClient().setFullscreen(false);
-		const updatedConfiguration = {
-			...basePlayerConfiguration,
-			external_fullscreen: requiresWebFullscreen ? 1 : 0,
-		};
-		return updatedConfiguration;
-	}
-	return basePlayerConfiguration;
+	// if (renderingTarget === 'Apps') {
+	// 	const requiresWebFullscreen =
+	// 		await getVideoClient().setFullscreen(false);
+	const updatedConfiguration = {
+		...basePlayerConfiguration,
+		external_fullscreen: 1,
+		fs: 1,
+	};
+	return updatedConfiguration;
+	// }
+	// return basePlayerConfiguration;
 };
 
 /**
