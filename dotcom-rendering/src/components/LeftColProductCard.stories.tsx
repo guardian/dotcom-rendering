@@ -34,6 +34,7 @@ const sampleProductCard: LeftColProductCardProps = {
 	primaryCta: 'Buy at AirCraft',
 	primaryUrl: 'https://www.aircraft.com/lume',
 	primaryPrice: '£199.99',
+	primaryRetailer: 'AirCraft',
 	statistics: [
 		{ name: 'What we love', value: 'It packs away pretty small' },
 		{

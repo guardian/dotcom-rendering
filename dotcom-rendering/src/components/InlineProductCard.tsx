@@ -48,6 +48,7 @@ export type InlineProductCardProps = {
 	primaryCTA: string;
 	primaryUrl: string;
 	primaryPrice: string;
+	primaryRetailer: string;
 	secondaryCTA?: string;
 	secondaryUrl?: string;
 	statistics: Statistics[];
@@ -98,6 +99,23 @@ const ButtonContainer = ({ children }: { children: ReactNode }) => (
 	</div>
 );
 
+const RetailerLink = ({ url, retailer }: { url: string; retailer: string }) => (
+	<a
+		css={css`
+			color: ${palette('--article-text')};
+			border-bottom: 1px solid ${palette('--article-link-border')};
+			text-decoration: none;
+			:hover,
+			:active {
+				border-bottom: 1px solid ${palette('--article-text')};
+			}
+		`}
+		href={url}
+	>
+		{retailer}
+	</a>
+);
+
 const ProductInfoContainer = ({ children }: { children: ReactNode }) => (
 	<div css={productInfoContainer}>{children}</div>
 );
@@ -110,6 +128,7 @@ export const InlineProductCard = ({
 	primaryCTA,
 	primaryUrl,
 	primaryPrice,
+	primaryRetailer,
 	secondaryCTA,
 	secondaryUrl,
 	statistics,
@@ -130,7 +149,8 @@ export const InlineProductCard = ({
 			<div css={primaryHeading}>{brandName}</div>
 			<div>{productName}</div>
 			<div>
-				<strong>{primaryPrice}</strong>
+				<strong>{primaryPrice}</strong> at{' '}
+				<RetailerLink url={primaryUrl} retailer={primaryRetailer} />
 			</div>
 		</ProductInfoContainer>
 		<ButtonContainer>
