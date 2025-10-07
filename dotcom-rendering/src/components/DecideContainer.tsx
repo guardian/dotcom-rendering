@@ -349,6 +349,7 @@ export const DecideContainer = ({
 						absoluteServerTimes={absoluteServerTimes}
 						aspectRatio={aspectRatio}
 						collectionId={collectionId}
+						showLabsRedesign={showLabsRedesign}
 					/>
 				</Island>
 			);
@@ -361,6 +362,7 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
+					showLabsRedesign={showLabsRedesign}
 				/>
 			);
 		default:

@@ -335,6 +335,8 @@ export type Props = {
 	 */
 	isImmersive?: boolean;
 	showVideo?: boolean;
+	/** Feature flag for the labs redesign work */
+	showLabsRedesign?: boolean;
 };
 
 export const FeatureCard = ({
@@ -370,6 +372,7 @@ export const FeatureCard = ({
 	isNewsletter = false,
 	isImmersive = false,
 	showVideo = false,
+	showLabsRedesign = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -611,6 +614,9 @@ export const FeatureCard = ({
 												quoteColour={palette(
 													'--feature-card-quote-icon',
 												)}
+												showLabsRedesign={
+													showLabsRedesign
+												}
 											/>
 										</div>
 
