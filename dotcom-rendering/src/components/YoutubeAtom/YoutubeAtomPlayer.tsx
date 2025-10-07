@@ -109,17 +109,22 @@ const fullscreenStyles = (id: string) => css`
  *
  * external_fullscreen is allowed listed on our CODE and PROD domains.
  */
-const setAppsConfiguration = async (
+const setAppsConfiguration = (
 	basePlayerConfiguration: YouTubePlayerArgs,
-	renderingTarget: RenderingTarget,
-) => {
+): YouTubePlayerArgs => {
 	// if (renderingTarget === 'Apps') {
 	// 	const requiresWebFullscreen =
 	// 		await getVideoClient().setFullscreen(false);
 	const updatedConfiguration = {
 		...basePlayerConfiguration,
-		external_fullscreen: 1,
-		fs: 1,
+		youtubeOptions: {
+			...basePlayerConfiguration.youtubeOptions,
+			playerVars: {
+				...basePlayerConfiguration.youtubeOptions.playerVars,
+				external_fullscreen: 1,
+				fs: 1,
+			},
+		},
 	};
 	return updatedConfiguration;
 	// }
@@ -532,7 +537,6 @@ export const YoutubeAtomPlayer = ({
 
 				const basePlayerConfigurationWithApps = setAppsConfiguration(
 					basePlayerConfiguration,
-					renderingTarget,
 				);
 
 				void Promise.allSettled([
