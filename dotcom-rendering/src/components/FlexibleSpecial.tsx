@@ -355,6 +355,7 @@ export const FlexibleSpecial = ({
 					isFirstRow={!isNonEmptyArray(snaps)}
 					containerLevel={containerLevel}
 					isSplashCard={true}
+					showLabsRedesign={showLabsRedesign}
 				/>
 			)}
 

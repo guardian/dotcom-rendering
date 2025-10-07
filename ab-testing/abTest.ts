@@ -45,20 +45,4 @@ export const ABTests: ABTest[] = [
 		groups: ['control', 'variant'],
 		shouldForceMetricsCollection: true,
 	},
-	{
-		name: 'commercial-large-overlap-test',
-		description:
-			'Allows viewing the beta version of the Europe network front',
-		owners: [
-			'project.fairground@theguardian.com',
-			'dotcom.platform@theguardian.com',
-		],
-		status: 'ON',
-		expirationDate: '2050-12-30',
-		type: 'server',
-		audienceSize: 50 / 100,
-		groups: ['control', 'variant'],
-		audienceSpace: 'B',
-		shouldForceMetricsCollection: true,
-	},
 ];
