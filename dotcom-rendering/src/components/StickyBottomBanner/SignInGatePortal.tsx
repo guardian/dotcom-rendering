@@ -35,7 +35,7 @@ export const SignInGatePortal = ({
 	pageId: string;
 	contributionsServiceUrl: string;
 	idUrl: string;
-	auxiaGateDisplayData?: AuxiaGateDisplayData | undefined;
+	auxiaGateDisplayData: AuxiaGateDisplayData;
 }) => {
 	const [shouldShowGate, setShouldShowGate] = useState<boolean>(false);
 	const [targetElement, setTargetElement] = useState<HTMLElement | null>(
@@ -61,8 +61,7 @@ export const SignInGatePortal = ({
 	useEffect(() => {
 		const element = document.getElementById('sign-in-gate');
 		const gateVersion = getAuxiaGateVersion(
-			undefined,
-			auxiaGateDisplayData?.auxiaData.userTreatment,
+			auxiaGateDisplayData.auxiaData.userTreatment,
 		);
 
 		/**

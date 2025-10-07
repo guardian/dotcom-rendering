@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
-import { joinUrl } from '@guardian/libs';
+import { isUndefined, joinUrl } from '@guardian/libs';
 import {
+	ArticleDesign,
 	type ArticleFormat,
 	type ArticleTheme,
 	Pillar,
@@ -303,6 +304,11 @@ export const OnwardsUpper = ({
 		? getContainerDataUrl(pillar, editionId, ajaxUrl)
 		: undefined;
 
+	// For galleries: they already have a "more galleries" container,
+	// so we can only allow one more onwards container
+	const canHaveCuratedContent =
+		format.design === ArticleDesign.Gallery ? isUndefined(url) : true;
+
 	return (
 		<div css={onwardsWrapper}>
 			{!!url && (
@@ -322,7 +328,7 @@ export const OnwardsUpper = ({
 					/>
 				</Section>
 			)}
-			{!!curatedDataUrl && !isPaidContent && (
+			{!!curatedDataUrl && !isPaidContent && canHaveCuratedContent && (
 				<Section
 					fullWidth={true}
 					borderColour={palette('--article-section-border')}

@@ -335,7 +335,6 @@ export type Props = {
 	 */
 	isImmersive?: boolean;
 	showVideo?: boolean;
-	isInHideTrailsAbTest?: boolean;
 };
 
 export const FeatureCard = ({
@@ -371,7 +370,6 @@ export const FeatureCard = ({
 	isNewsletter = false,
 	isImmersive = false,
 	showVideo = false,
-	isInHideTrailsAbTest = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -462,9 +460,6 @@ export const FeatureCard = ({
 										isImmersive={isImmersive}
 										byline={byline}
 										showByline={showByline}
-										isInHideTrailsAbTest={
-											isInHideTrailsAbTest
-										}
 									/>
 								</Island>
 							</div>
@@ -628,19 +623,19 @@ export const FeatureCard = ({
 											</div>
 										) : null}
 
-										{!!trailText &&
-											!isInHideTrailsAbTest && (
-												<div css={trailTextWrapper}>
-													<TrailText
-														trailText={trailText}
-														trailTextColour={palette(
-															'--feature-card-trail-text',
-														)}
-														trailTextSize="regular"
-														padBottom={false}
-													/>
-												</div>
-											)}
+										{!!trailText && (
+											<div css={trailTextWrapper}>
+												<TrailText
+													trailText={trailText}
+													trailTextColour={palette(
+														'--feature-card-trail-text',
+													)}
+													trailTextSize="regular"
+													padBottom={false}
+													hideUntil="tablet"
+												/>
+											</div>
+										)}
 
 										<CardFooter
 											format={format}

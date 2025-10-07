@@ -14,6 +14,7 @@ const meta = {
 	args: {
 		title: 'Container Title',
 		url: '/',
+		editionId: 'AU',
 	},
 	render: (args) => (
 		<div

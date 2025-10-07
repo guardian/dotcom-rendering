@@ -1,15 +1,13 @@
 // @ts-check
 const path = require('node:path');
 const bodyParser = require('body-parser');
-const chalk = require('chalk');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
+const { dim, reset, blue, underline } = require('../../scripts/log');
 
 const port = 3030;
 
 console.log(
-	`${chalk.dim('DEV server running on')} ${chalk.blue.underline(
-		`http://localhost:${port}`,
-	)}`,
+	`${dim}DEV server running on${reset} ${blue}${underline}http://localhost:${port}${reset}`,
 );
 
 module.exports = {

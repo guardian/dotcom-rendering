@@ -230,7 +230,7 @@ const galleryStyles = css`
 	padding-bottom: 6px;
 	${from.leftCol} {
 		${grid.column.left}
-		grid-row-start: 8;
+		grid-row: 8/10;
 	}
 	${between.tablet.and.leftCol} {
 		position: relative;

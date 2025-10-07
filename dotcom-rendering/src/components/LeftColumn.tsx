@@ -98,7 +98,7 @@ export const LeftColumn = ({
 	hasPageSkin = false,
 }: Props) => {
 	return (
-		<section
+		<div
 			css={[
 				positionRelative,
 				leftWidth(size, hasPageSkin),
@@ -124,6 +124,6 @@ export const LeftColumn = ({
 			>
 				{children}
 			</div>
-		</section>
+		</div>
 	);
 };
