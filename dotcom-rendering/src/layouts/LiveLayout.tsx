@@ -674,6 +674,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										isAdFreeUser={article.isAdFreeUser}
 										editionId={article.editionId}
 										shouldHideAds={article.shouldHideAds}
+										contentLayout="LiveblogLayout"
 									/>
 								</div>
 							</GridItem>
