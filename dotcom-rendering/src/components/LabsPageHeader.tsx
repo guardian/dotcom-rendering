@@ -53,7 +53,7 @@ const leftContentChildStyles = css`
 	}
 	/* Right border */
 	position: relative;
-	:after {
+	::after {
 		content: '';
 		position: absolute;
 		right: 0;
