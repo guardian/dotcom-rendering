@@ -8,6 +8,8 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
+import { Fragment } from 'react';
 import { grid } from '../grid';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import type { BaseLinkType } from '../model/extract-nav';
@@ -138,6 +140,21 @@ const syndicationButtonOverrides = css`
 	}
 `;
 
+const straightLinesStyles = css`
+	display: inline;
+	position: relative;
+
+	${grid.column.all}
+
+	${from.tablet} {
+		${grid.column.centre}
+	}
+
+	${from.leftCol} {
+		${grid.between('centre-column-start', 'right-column-end')}
+	}
+`;
+
 const galleryStyles = css`
 	${grid.paddedContainer};
 	background-color: ${palette('--article-inner-background')};
@@ -220,7 +237,20 @@ export const SubMeta = ({
 			]}
 		>
 			{format.design === ArticleDesign.Gallery && (
-				<div css={galleryBorder}></div>
+				<Fragment>
+					<div css={galleryBorder}></div>
+
+					<div css={straightLinesStyles}>
+						<StraightLines
+							data-print-layout="hide"
+							count={4}
+							cssOverrides={css`
+								display: block;
+							`}
+							color={palette('--straight-lines')}
+						/>
+					</div>
+				</Fragment>
 			)}
 			{hasLinks && (
 				<>
