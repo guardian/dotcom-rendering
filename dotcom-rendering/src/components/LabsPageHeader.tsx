@@ -94,7 +94,7 @@ const detailsExpandedAreaStyles = css`
 		width: ${breakpoints.tablet}px;
 	}
 	${from.desktop} {
-		width: 240px;
+		width: 320px;
 	}
 
 	${from.mobileLandscape} {
