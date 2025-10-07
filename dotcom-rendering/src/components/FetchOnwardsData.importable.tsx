@@ -10,6 +10,10 @@ import type { RenderingTarget } from '../types/renderingTarget';
 import type { FETrailType, TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
 import { Placeholder } from './Placeholder';
+import { useIsInView } from '../lib/useIsInView';
+import { useEffect, useState } from 'react';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
+import { submitComponentEvent } from '../client/ophan/ophan';
 
 type Props = {
 	url: string;
@@ -20,6 +24,7 @@ type Props = {
 	absoluteServerTimes: boolean;
 	renderingTarget: RenderingTarget;
 	isAdFreeUser: boolean;
+	containerPosition: string;
 };
 
 type OnwardsResponse = {
@@ -56,7 +61,34 @@ export const FetchOnwardsData = ({
 	absoluteServerTimes,
 	renderingTarget,
 	isAdFreeUser,
+	containerPosition,
 }: Props) => {
+	const [hasBeenSeen, setIsInViewRef] = useIsInView({ threshold: 0.9 });
+
+	const [hasTrackedView, setHasTrackedView] = useState(false);
+
+	useEffect(() => {
+		if (hasBeenSeen && !hasTrackedView) {
+			const ophanComponentEvent: ComponentEvent = {
+				component: {
+					componentType: 'CONTAINER',
+					id: `onwards-${onwardsSource}-${containerPosition}`,
+				},
+				action: 'VIEW',
+			};
+
+			void submitComponentEvent(ophanComponentEvent, renderingTarget);
+
+			setHasTrackedView(true);
+		}
+	}, [
+		hasBeenSeen,
+		hasTrackedView,
+		renderingTarget,
+		onwardsSource,
+		containerPosition,
+	]);
+
 	const { data, error } = useApi<OnwardsResponse>(url);
 
 	if (error) {
@@ -82,7 +114,7 @@ export const FetchOnwardsData = ({
 	);
 
 	return (
-		<div css={minHeight}>
+		<div ref={setIsInViewRef} css={minHeight}>
 			<Carousel
 				heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
 				trails={buildTrails(data.trails, limit, isAdFreeUser)}
