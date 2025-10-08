@@ -131,17 +131,14 @@ class YouTubePlayer {
 								onReady: onReadyListener,
 								onStateChange:
 									youtubeOptions.events?.onStateChange,
-								onFullscreenToggled:
-									youtubeOptions.events?.onFullscreenToggled,
 							},
 						});
-						this.player.addEventListener(
-							'onFullscreenToggled',
-							() => {
-								log('dotcom', 'YouTube fullscreen toggled!!');
-							},
-						);
-						// onReadyListener is called in the YT.Player constructor, so we can resolve the promise here
+						if (youtubeOptions.events?.onFullscreenToggled) {
+							this.player.addEventListener(
+								'onFullscreenToggled',
+								youtubeOptions.events.onFullscreenToggled,
+							);
+						}
 						resolve({ player: this.player });
 					}
 				} catch (e) {
