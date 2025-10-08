@@ -84,22 +84,19 @@ const listStyles = css`
 	background-repeat: no-repeat;
 `;
 
-const listWrapper = (design: ArticleDesign): SerializedStyles => {
-	if (design === ArticleDesign.Gallery) {
-		return css`
-			${grid.column.centre}
-			padding-bottom: 0.75rem;
-			margin-bottom: 6px;
-			border-bottom: 1px solid ${palette('--article-border')};
-		`;
-	}
+const listWrapper = css`
+	padding-bottom: 0.75rem;
+	margin-bottom: 6px;
+	border-bottom: 1px solid ${palette('--article-border')};
+`;
 
-	return css`
-		padding-bottom: 0.75rem;
-		margin-bottom: 6px;
-		border-bottom: 1px solid ${palette('--article-border')};
-	`;
-};
+const galleryWrapperStyles = css`
+	${grid.column.centre}
+
+	${from.leftCol} {
+		${grid.between('centre-column-start', 'right-column-end')}
+	}
+`;
 
 const listItemStyles = css`
 	${textSans14};
@@ -257,7 +254,13 @@ export const SubMeta = ({
 					<span css={labelStyles(format.design)}>
 						Explore more on these topics
 					</span>
-					<div css={listWrapper(format.design)}>
+					<div
+						css={[
+							listWrapper,
+							format.design == ArticleDesign.Gallery &&
+								galleryWrapperStyles,
+						]}
+					>
 						<ul css={listStyles}>
 							{links.map((link) => (
 								<li css={listItemStyles} key={link.url}>
