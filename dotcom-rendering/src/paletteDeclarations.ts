@@ -6155,7 +6155,7 @@ const featureCardKickerText: PaletteFunction = ({ theme }) => {
 		case Pillar.Lifestyle:
 			return pillarPalette(theme, 600);
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
+			return sourcePalette.labs[700];
 	}
 };
 const featureCardQuoteIcon: PaletteFunction = ({ theme }) => {
@@ -6171,7 +6171,7 @@ const featureCardQuoteIcon: PaletteFunction = ({ theme }) => {
 		case Pillar.Lifestyle:
 			return pillarPalette(theme, 600);
 		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
+			return sourcePalette.labs[700];
 	}
 };
 
