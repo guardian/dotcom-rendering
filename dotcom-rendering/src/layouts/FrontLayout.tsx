@@ -134,7 +134,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
-	const showLabsRedesign = !!front.config.switches.guardianLabsRedesign;
+	/** We allow the labs redesign to be shown if:
+	 * - the feature switch is ON
+	 * OR
+	 * - the user is opted into the 0% server side test
+	 */
+	const showLabsRedesign =
+		!!front.config.switches.guardianLabsRedesign ||
+		abTests.labsRedesignVariant === 'variant';
 
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
