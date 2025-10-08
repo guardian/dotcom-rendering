@@ -31,6 +31,12 @@ jobs:
         with:
           deno-version: v2.3
 
+      - name: Download build artifact
+        uses: actions/download-artifact@v5.0.0
+        with:
+          name: ab-testing-build
+          path: ab-testing/dist
+
       - name: Deploy
         run: deno run deploy
         env:
