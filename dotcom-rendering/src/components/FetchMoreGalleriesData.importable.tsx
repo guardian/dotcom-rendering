@@ -150,18 +150,11 @@ export const FetchMoreGalleriesData = ({
 	}
 
 	return (
-		<div
-			css={{
-				backgroundColor: palette('--onward-background'),
-				minHeight: 300,
-			}}
-		>
-			<MoreGalleries
-				absoluteServerTimes={absoluteServerTimes}
-				trails={buildTrails(data.trails, 5, isAdFreeUser)}
-				discussionApiUrl={discussionApiUrl}
-				guardianBaseUrl={guardianBaseUrl}
-			/>
-		</div>
+		<MoreGalleries
+			absoluteServerTimes={absoluteServerTimes}
+			trails={buildTrails(data.trails, 5, isAdFreeUser)}
+			discussionApiUrl={discussionApiUrl}
+			guardianBaseUrl={guardianBaseUrl}
+		/>
 	);
 };

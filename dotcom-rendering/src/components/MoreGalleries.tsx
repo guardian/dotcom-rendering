@@ -122,57 +122,65 @@ export const MoreGalleries = (props: Props) => {
 	if (!firstTrail) return null;
 
 	return (
-		<section
-			data-component="more-galleries"
-			data-link="more-galleries"
-			css={css`
-				${grid.paddedContainer}
-				background-color: ${palette('--onward-background')};
-				padding-top: ${space[1]}px;
-
-				${from.tablet} {
-					padding-top: 0;
-					border-left: 1px solid ${palette('--onward-content-border')};
-					border-right: 1px solid
-						${palette('--onward-content-border')};
-				}
-			`}
+		<div
+			css={{
+				backgroundColor: palette('--onward-background'),
+				minHeight: 300,
+			}}
 		>
-			<Title guardianBaseUrl={props.guardianBaseUrl} />
-			<MoreGalleriesSplashCard
-				defaultProps={getDefaultCardProps(
-					firstTrail,
-					props.absoluteServerTimes,
-					props.discussionApiUrl,
-				)}
-			/>
-			<StraightLines
-				cssOverrides={[
-					cardsContainerStyles,
-					css`
-						${until.tablet} {
-							display: none;
-						}
-					`,
-				]}
-				count={1}
-				color={palette('--onward-content-border')}
-			/>
-			<ul css={[cardsContainerStyles, standardCardsListStyles]}>
-				{standardCards.map((trail) => (
-					<li key={trail.url} css={standardCardStyles}>
-						<Card
-							{...getDefaultCardProps(
-								trail,
-								props.absoluteServerTimes,
-								props.discussionApiUrl,
-							)}
-							mediaSize="medium"
-						/>
-					</li>
-				))}
-			</ul>
-		</section>
+			<section
+				data-component="more-galleries"
+				data-link="more-galleries"
+				css={css`
+					${grid.paddedContainer}
+					background-color: ${palette('--onward-background')};
+					padding-top: ${space[1]}px;
+
+					${from.tablet} {
+						padding-top: 0;
+						border-left: 1px solid
+							${palette('--onward-content-border')};
+						border-right: 1px solid
+							${palette('--onward-content-border')};
+					}
+				`}
+			>
+				<Title guardianBaseUrl={props.guardianBaseUrl} />
+				<MoreGalleriesSplashCard
+					defaultProps={getDefaultCardProps(
+						firstTrail,
+						props.absoluteServerTimes,
+						props.discussionApiUrl,
+					)}
+				/>
+				<StraightLines
+					cssOverrides={[
+						cardsContainerStyles,
+						css`
+							${until.tablet} {
+								display: none;
+							}
+						`,
+					]}
+					count={1}
+					color={palette('--onward-content-border')}
+				/>
+				<ul css={[cardsContainerStyles, standardCardsListStyles]}>
+					{standardCards.map((trail) => (
+						<li key={trail.url} css={standardCardStyles}>
+							<Card
+								{...getDefaultCardProps(
+									trail,
+									props.absoluteServerTimes,
+									props.discussionApiUrl,
+								)}
+								mediaSize="medium"
+							/>
+						</li>
+					))}
+				</ul>
+			</section>
+		</div>
 	);
 };
 
