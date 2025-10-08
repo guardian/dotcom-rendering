@@ -455,6 +455,7 @@ const ShowSignInGateAuxia = ({
 					component: {
 						componentType: 'SIGN_IN_GATE',
 						id: treatmentId,
+						labels: [userTreatment.treatmentType],
 					},
 					action: 'VIEW',
 					abTest: buildAbTestTrackingAuxiaVariant(treatmentId),
