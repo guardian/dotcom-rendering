@@ -1,19 +1,19 @@
 import { css } from '@emotion/react';
 import { isNonNullable } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
+import { useEffect, useState } from 'react';
+import { submitComponentEvent } from '../client/ophan/ophan';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { decideTrail } from '../lib/decideTrail';
 import { useApi } from '../lib/useApi';
 import { addDiscussionIds } from '../lib/useCommentCount';
+import { useIsInView } from '../lib/useIsInView';
 import { palette } from '../palette';
 import type { OnwardsSource } from '../types/onwards';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { FETrailType, TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
 import { Placeholder } from './Placeholder';
-import { useIsInView } from '../lib/useIsInView';
-import { useEffect, useState } from 'react';
-import type { ComponentEvent } from '@guardian/ophan-tracker-js';
-import { submitComponentEvent } from '../client/ophan/ophan';
 
 type Props = {
 	url: string;
@@ -63,7 +63,7 @@ export const FetchOnwardsData = ({
 	isAdFreeUser,
 	containerPosition,
 }: Props) => {
-	const [hasBeenSeen, setIsInViewRef] = useIsInView({ threshold: 0.9 });
+	const [hasBeenSeen, setIsInViewRef] = useIsInView({ rootMargin: `-100px` });
 
 	const [hasTrackedView, setHasTrackedView] = useState(false);
 
