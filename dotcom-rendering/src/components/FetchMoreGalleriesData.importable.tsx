@@ -101,6 +101,11 @@ export const FetchMoreGalleriesData = ({
 			.then((fetchedData) => {
 				setData(fetchedData);
 				setError(undefined);
+				addDiscussionIds(
+					fetchedData.trails
+						.map((trail) => trail.discussion?.discussionId)
+						.filter(isNonNullable),
+				);
 			})
 			.catch((err) => {
 				setError(
@@ -109,15 +114,6 @@ export const FetchMoreGalleriesData = ({
 				setData(undefined);
 			});
 	}, [ajaxUrl]);
-
-	useEffect(() => {
-		if (!data) return;
-		addDiscussionIds(
-			data.trails
-				.map((trail) => trail.discussion?.discussionId)
-				.filter(isNonNullable),
-		);
-	}, [data]);
 
 	if (error) {
 		// Send the error to Sentry and then prevent the element from rendering
