@@ -1,4 +1,15 @@
 import { type CrosswordProps } from '@guardian/react-crossword';
+import {
+	array,
+	boolean,
+	literal,
+	number,
+	object,
+	optional,
+	type Output,
+	string,
+	union,
+} from 'valibot';
 import type { ArticleFormat } from '../lib/articleFormat';
 
 export type StarRating = 0 | 1 | 2 | 3 | 4 | 5;
@@ -26,747 +37,968 @@ export type ContentType =
 // Elements
 
 // -------------------------------------
-interface ThirdPartyEmbeddedContent {
-	isThirdPartyTracking: boolean;
-	source?: string;
-	sourceDomain?: string;
-}
+const ThirdPartyEmbeddedContentSchema = object({
+	isThirdPartyTracking: boolean(),
+	source: optional(string()),
+	sourceDomain: optional(string()),
+});
 
-export interface AudioAtomBlockElement {
-	_type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
-	elementId: string;
-	id: string;
-	kicker: string;
-	title?: string;
-	trackUrl: string;
-	duration: number;
-	coverUrl: string;
-	role?: RoleType;
-}
 
-interface AudioBlockElement {
-	_type: 'model.dotcomrendering.pageElements.AudioBlockElement';
-	id?: string;
-	elementId: string;
-	assets: AudioAsset[];
-}
+/**
+ * Affects how an image is placed.
+ *
+ * Also known as “weighting” in Composer, but we respect the CAPI naming.
+ *
+ * @see https://github.com/guardian/frontend/blob/0a32dba0/common/app/model/dotcomrendering/pageElements/Role.scala
+ */
+const RoleTypeSchema = union([
+	literal('immersive'),
+	literal('supporting'),
+	literal('showcase'),
+	literal('inline'),
+	literal('thumbnail'),
+	literal('halfWidth'),
+]);
 
-export interface BlockquoteBlockElement {
-	_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement';
-	elementId: string;
-	html: string;
-	quoted?: boolean;
-}
+export type RoleType = Output<
+	typeof RoleTypeSchema
+>;
 
-interface CaptionBlockElement {
-	_type: 'model.dotcomrendering.pageElements.CaptionBlockElement';
-	elementId: string;
-	captionText?: string;
-	padCaption?: boolean;
-	credit?: string;
-	displayCredit?: boolean;
-	shouldLimitWidth?: boolean;
-	isOverlaid?: boolean;
-}
+const AudioAssetSchema = object({
+	url: string(),
+	mimeType: optional(string()),
+	fields: optional(object({
+		durationMinutes: optional(string()),
+		durationSeconds: optional(string()),
+		explicit: optional(string()),
+		source: optional(string()),
+	})),
+});
 
-export interface CalloutBlockElement {
-	_type: 'model.dotcomrendering.pageElements.CalloutBlockElement';
-	elementId: string;
-	id: string;
-	calloutsUrl: string;
-	activeFrom: number;
-	activeUntil?: number;
-	displayOnSensitive: boolean;
-	formId: number;
-	title: string;
-	description: string;
-	tagName: string;
-	formFields: CampaignFieldType[];
-	role?: RoleType;
-}
+export type AudioAsset = Output<typeof AudioAssetSchema>;
 
-export interface CalloutContactType {
-	name: string;
-	value: string;
-	urlPrefix: string;
-	guidance?: string;
-}
+const CampaignFieldSchema = object({
+	id: string(),
+	name: string(),
+	description: optional(string()),
+	required: boolean(),
+	textSize: optional(number()),
+	hideLabel: optional(boolean()),
+	hidden: optional(boolean()),
+	label: string(),
+});
 
-export interface CalloutBlockElementV2 {
-	_type: 'model.dotcomrendering.pageElements.CalloutBlockElementV2';
-	elementId: string;
-	id: string;
-	calloutsUrl: string;
-	activeFrom: number;
-	activeUntil?: number;
-	displayOnSensitive: boolean;
-	formId: number;
-	prompt: string;
-	title: string;
-	description: string;
-	tagName: string;
-	formFields: CampaignFieldType[];
-	role?: RoleType;
-	isNonCollapsible: boolean;
-	contacts?: CalloutContactType[];
-}
+const CampaignFieldTextSchema = object({
+	...CampaignFieldSchema.entries,
+	type: union([literal('text'), literal('email'), literal('phone')]),
+});
 
-export interface CartoonBlockElement {
-	_type: 'model.dotcomrendering.pageElements.CartoonBlockElement';
-	elementId: string;
-	role: RoleType;
-	variants: CartoonVariant[];
-	caption?: string;
-	credit?: string;
-	displayCredit?: boolean;
-	alt?: string;
+export type CampaignFieldText = Output<typeof CampaignFieldTextSchema>;
+
+
+const CampaignFieldTextAreaSchema = object({
+	...CampaignFieldSchema.entries,
+	type: literal('textarea'),
+	minlength: optional(number()),
+	maxlength: optional(number()),
+});
+
+export type CampaignFieldTextArea = Output<typeof CampaignFieldTextAreaSchema>;
+
+const CampaignFieldFileSchema = object({
+	...CampaignFieldSchema.entries,
+	type: literal('file'),
+});
+
+export type CampaignFieldFile = Output<typeof CampaignFieldFileSchema>;
+
+const CampaignFieldRadioSchema = object({
+	...CampaignFieldSchema.entries,
+	type: literal('radio'),
+	options: array(object({
+		label: string(),
+		value: string(),
+	})),
+});
+
+export type CampaignFieldRadio = Output<typeof CampaignFieldRadioSchema>;
+
+const CampaignFieldCheckboxSchema = object({
+	...CampaignFieldSchema.entries,
+	type: literal('checkbox'),
+	options: array(object({
+		label: string(),
+		value: string(),
+	})),
+});
+
+const CampaignFieldSelectSchema = object({
+	...CampaignFieldSchema.entries,
+	type: literal('select'),
+	options: array(object({
+		label: string(),
+		value: string(),
+	})),
+});
+
+export type CampaignFieldSelect = Output<typeof CampaignFieldSelectSchema>;
+
+// -------------------------------------
+// Callout Campaign
+// -------------------------------------
+const CampaignFieldTypeSchema = union([
+	CampaignFieldTextSchema,
+	CampaignFieldTextAreaSchema,
+	CampaignFieldFileSchema,
+	CampaignFieldRadioSchema,
+	CampaignFieldCheckboxSchema,
+	CampaignFieldSelectSchema,
+]);
+export type CampaignFieldType = Output<typeof CampaignFieldTypeSchema>;
+
+// -------------------------------------
+// Quiz
+// -------------------------------------
+
+const AnswerTypeSchema = object({
+	id: string(),
+	text: string(),
+	revealText: optional(string()),
+	isCorrect: boolean(),
+	answerBuckets: array(string()),
+});
+
+export type AnswerType = Output<typeof AnswerTypeSchema>;
+
+const QuestionTypeSchema = object({
+	id: string(),
+	text: string(),
+	answers: array(AnswerTypeSchema),
+	imageUrl: optional(string()),
+	imageAlt: optional(string()),
+});
+
+const ResultGroupsTypeSchema = object({
+	title: string(),
+	shareText: string(),
+	minScore: number(),
+	id: string(),
+});
+
+const ResultsBucketTypeSchema = object({
+	id: string(),
+	title: string(),
+	description: string(),
+});
+
+const KnowledgeQuizAtomTypeSchema = object({
+	id: string(),
+	questions: array(QuestionTypeSchema),
+	resultGroups: array(ResultGroupsTypeSchema),
+	pageId: string(),
+	webTitle: string(),
+	format: ArticleFormat, // TODO
+});
+
+const PersonalityQuizAtomTypeSchema = object({
+	id: string(),
+	questions: array(QuestionTypeSchema),
+	resultBuckets: array(ResultsBucketTypeSchema),
+	pageId: string(),
+	webTitle: string(),
+	format: ArticleFormat, // TODO
+});
+
+export type QuizSelectionType = Record<string, AnswerType>;
+
+const ImageSchema = object({
+	index: number(),
+	fields: object({
+		height: string(),
+		width: string(),
+		aspectRatio: optional(string()),
+		isMaster: optional(string()),
+		source: optional(string()),
+		caption: optional(string()),
+	}),
+	mediaType: string(),
+	mimeType: optional(string()),
+	url: string(),
+});
+
+const AudioAtomBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.AudioAtomBlockElement'),
+	elementId: string(),
+	id: string(),
+	kicker: string(),
+	title: optional(string()),
+	trackUrl: string(),
+	duration: number(),
+	coverUrl: string(),
+	role: optional(RoleTypeSchema)
+});
+
+export type AudioAtomBlockElement = Output<typeof AudioAtomBlockElementSchema>;
+
+const AudioBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.AudioBlockElement'),
+	id: optional(string()),
+	elementId: string(),
+	assets: array(AudioAssetSchema),
+});
+
+export type AudioBlockElement = Output<typeof AudioBlockElementSchema>;
+
+const BlockquoteBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.BlockquoteBlockElement'),
+	elementId: string(),
+	html: string(),
+	quoted: optional(boolean()),
+});
+
+export type BlockquoteBlockElement = Output<typeof BlockquoteBlockElementSchema>;
+
+const CaptionBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.CaptionBlockElement'),
+	elementId: string(),
+	captionText: optional(string()),
+	padCaption: optional(boolean()),
+	credit: optional(string()),
+	displayCredit: optional(boolean()),
+	shouldLimitWidth: optional(boolean()),
+	isOverlaid: optional(boolean()),
+});
+
+export type CaptionBlockElement = Output<typeof CaptionBlockElementSchema>;
+
+const CalloutBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.CalloutBlockElement'),
+	elementId: string(),
+	id: string(),
+	calloutsUrl: string(),
+	activeFrom: number(),
+	activeUntil: optional(number()),
+	displayOnSensitive: boolean(),
+	formId: number(),
+	title: string(),
+	description: string(),
+	tagName: string(),
+	formFields: array(CampaignFieldTypeSchema),
+	role: optional(RoleTypeSchema),
+});
+
+export type CalloutBlockElement = Output<typeof CalloutBlockElementSchema>;
+
+const CalloutContactTypeSchema = object({
+	name: string(),
+	value: string(),
+	urlPrefix: string(),
+	guidance: optional(string()),
+});
+
+const CalloutBlockElementV2Schema = object({
+	_type: literal('model.dotcomrendering.pageElements.CalloutBlockElementV2'),
+	elementId: string(),
+	id: string(),
+	calloutsUrl: string(),
+	activeFrom: number(),
+	activeUntil: optional(number()),
+	displayOnSensitive: boolean(),
+	formId: number(),
+	prompt: string(),
+	title: string(),
+	description: string(),
+	tagName: string(),
+	formFields: array(CampaignFieldTypeSchema),
+	role: optional(RoleTypeSchema),
+	isNonCollapsible: boolean(),
+	contacts: optional(array(CalloutContactTypeSchema)),
+});
+
+export type CalloutBlockElementV2 = Output<typeof CalloutBlockElementV2Schema>;
+
+const CartoonVariantSchema = object({
+	viewportSize: union([literal('small'), literal('large')]),
+	images: array(ImageSchema),
+});
+
+export type CartoonVariant = Output<typeof CartoonVariantSchema>;
+
+const CartoonBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.CartoonBlockElement'),
+	elementId: string(),
+	role: RoleTypeSchema,
+	variants: array(CartoonVariantSchema),
+	caption: optional(string()),
+	credit: optional(string()),
+	displayCredit: optional(boolean()),
+	alt: optional(string()),
 	/**
 	 * position is an index starting at 1 for all the images
 	 * that are “lightboxable”, including main media.
 	 *
 	 * It is generated by `addImagePositions`
 	 */
-	position?: number;
-}
+	position: optional(number()),
+});
 
-export type CartoonVariant = {
-	viewportSize: 'small' | 'large';
-	images: Image[];
-};
+const ChartAtomBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.ChartAtomBlockElement'),
+	elementId: string(),
+	id: string(),
+	url: string(),
+	html: string(),
+	title: string(),
+	css: optional(string()),
+	js: optional(string()),
+	role: optional(RoleTypeSchema),
+	placeholderUrl: optional(string()),
+});
 
-interface ChartAtomBlockElement {
-	_type: 'model.dotcomrendering.pageElements.ChartAtomBlockElement';
-	elementId: string;
-	id: string;
-	url: string;
-	html: string;
-	title: string;
-	css?: string;
-	js?: string;
-	role?: RoleType;
-	placeholderUrl?: string;
-}
+const QuizAtomBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.QuizAtomBlockElement'),
+	elementId: string(),
+	quizType: union([literal('knowledge'), literal('personality')]),
+	id: string(),
+	questions: array(QuestionTypeSchema),
+	resultBuckets: array(ResultsBucketTypeSchema),
+	resultGroups: array(ResultGroupsTypeSchema),
+});
 
-interface QuizAtomBlockElement {
-	_type: 'model.dotcomrendering.pageElements.QuizAtomBlockElement';
-	elementId: string;
-	quizType: 'personality' | 'knowledge';
-	id: string;
-	questions: QuestionType[];
-	resultBuckets: ResultsBucketType[];
-	resultGroups: ResultGroupsType[];
-}
+const CodeBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.CodeBlockElement'),
+	elementId: string(),
+	html: string(),
+	isMandatory: boolean(),
+	language: optional(string()),
+});
 
-interface CodeBlockElement {
-	_type: 'model.dotcomrendering.pageElements.CodeBlockElement';
-	elementId: string;
-	html: string;
-	isMandatory: boolean;
-	language?: string;
-}
+const CommentBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.CommentBlockElement'),
+	elementId: string(),
+	body: string(),
+	avatarURL: string(),
+	profileURL: string(),
+	profileName: string(),
+	permalink: string(),
+	dateTime: string(),
+	role: optional(RoleTypeSchema),
+});
 
-export interface CommentBlockElement {
-	_type: 'model.dotcomrendering.pageElements.CommentBlockElement';
-	elementId: string;
-	body: string;
-	avatarURL: string;
-	profileURL: string;
-	profileName: string;
-	permalink: string;
-	dateTime: string;
-	role?: RoleType;
-}
+const ContentAtomBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.ContentAtomBlockElement'),
+	elementId: string(),
+	atomId: string(),
+});
 
-export interface ContentAtomBlockElement {
-	_type: 'model.dotcomrendering.pageElements.ContentAtomBlockElement';
-	elementId: string;
-	atomId: string;
-}
+const DisclaimerBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.DisclaimerBlockElement'),
+	elementId: string(),
+	html: string(),
+	role: optional(RoleTypeSchema),
+});
 
-interface DisclaimerBlockElement {
-	_type: 'model.dotcomrendering.pageElements.DisclaimerBlockElement';
-	elementId: string;
-	html: string;
-	role?: RoleType;
-}
+const DividerBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.DividerBlockElement'),
+	size: optional(union([literal('full'), literal('partial')])),
+	spaceAbove: optional(union([literal('tight'), literal('loose')])),
+});
 
-export interface DividerBlockElement {
-	_type: 'model.dotcomrendering.pageElements.DividerBlockElement';
-	size?: 'full' | 'partial';
-	spaceAbove?: 'tight' | 'loose';
-}
+// TODO: Ravi we've done it up to here :)
 
-export interface DocumentBlockElement extends ThirdPartyEmbeddedContent {
-	_type: 'model.dotcomrendering.pageElements.DocumentBlockElement';
-	elementId: string;
-	embedUrl?: string;
-	height?: number;
-	width?: number;
-	title?: string;
+const DocumentBlockElement extends ThirdPartyEmbeddedContentSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.DocumentBlockElement'),
+	elementId: string(),
+	embedUrl: optional(string()),
+	height: optional(number()),
+	width: optional(number()),
+	title: optional(string()),
 	role?: RoleType;
 }
 
-export interface EmbedBlockElement extends ThirdPartyEmbeddedContent {
-	_type: 'model.dotcomrendering.pageElements.EmbedBlockElement';
-	elementId: string;
-	safe?: boolean;
+const EmbedBlockElement extends ThirdPartyEmbeddedContentSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.EmbedBlockElement'),
+	elementId: string(),
+	safe: optional(boolean()),
 	role?: RoleType;
-	alt?: string;
-	height?: number;
-	width?: number;
-	html: string;
-	isMandatory: boolean;
-	caption?: string;
+	alt: optional(string()),
+	height: optional(number()),
+	width: optional(number()),
+	html: string(),
+	isMandatory: boolean(),
+	caption: optional(string()),
 }
 
-interface ExplainerAtomBlockElement {
-	_type: 'model.dotcomrendering.pageElements.ExplainerAtomBlockElement';
-	elementId: string;
-	id: string;
-	title: string;
-	body: string;
-	role?: RoleType;
-}
-
-interface GenericAtomBlockElement {
-	_type: 'model.dotcomrendering.pageElements.GenericAtomBlockElement';
-	url: string;
-	placeholderUrl?: string;
-	id?: string;
-	html?: string;
-	css?: string;
-	js?: string;
-	elementId: string;
-}
-
-interface GuideAtomBlockElement {
-	_type: 'model.dotcomrendering.pageElements.GuideAtomBlockElement';
-	elementId: string;
-	id: string;
-	label: string;
-	title: string;
-	img?: string;
-	html: string;
-	credit: string;
+const ExplainerAtomBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.ExplainerAtomBlockElement'),
+	elementId: string(),
+	id: string(),
+	title: string(),
+	body: string(),
 	role?: RoleType;
 }
 
-export interface GuVideoBlockElement {
-	_type: 'model.dotcomrendering.pageElements.GuVideoBlockElement';
-	elementId: string;
+const GenericAtomBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.GenericAtomBlockElement'),
+	url: string(),
+	placeholderUrl: optional(string()),
+	id: optional(string()),
+	html: optional(string()),
+	css: optional(string()),
+	js: optional(string()),
+	elementId: string(),
+}
+
+const GuideAtomBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.GuideAtomBlockElement'),
+	elementId: string(),
+	id: string(),
+	label: string(),
+	title: string(),
+	img: optional(string()),
+	html: string(),
+	credit: string(),
+	role?: RoleType;
+}
+
+const GuVideoBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.GuVideoBlockElement'),
+	elementId: string(),
 	assets: VideoAssets[];
-	caption: string;
-	html: string;
-	source: string;
+	caption: string(),
+	html: string(),
+	source: string(),
 	role?: RoleType;
 	imageMedia?: { allImages: Image[] };
-	originalUrl?: string;
-	url?: string;
+	originalUrl: optional(string()),
+	url: optional(string()),
 }
 
-interface HighlightBlockElement {
-	_type: 'model.dotcomrendering.pageElements.HighlightBlockElement';
-	elementId: string;
-	html: string;
+const HighlightBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.HighlightBlockElement'),
+	elementId: string(),
+	html: string(),
 }
 
-export interface ImageBlockElement {
-	_type: 'model.dotcomrendering.pageElements.ImageBlockElement';
-	elementId: string;
+const ImageBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.ImageBlockElement'),
+	elementId: string(),
 	media: { allImages: Image[] };
 	data: {
-		alt?: string;
-		credit?: string;
-		caption?: string;
-		copyright?: string;
+		alt: optional(string()),
+		credit: optional(string()),
+		caption: optional(string()),
+		copyright: optional(string()),
 	};
 	imageSources: ImageSource[];
-	displayCredit?: boolean;
+	displayCredit: optional(boolean()),
 	role: RoleType;
-	title?: string;
+	title: optional(string()),
 	starRating?: StarRating;
-	isAvatar?: boolean;
+	isAvatar: optional(boolean()),
 	/**
 	 * position is an index starting at 1 for all the images
 	 * that are “lightboxable”, including main media.
 	 *
 	 * It is generated by `addImagePositions`
 	 */
-	position?: number;
+	position: optional(number()),
 }
 
-export interface InstagramBlockElement extends ThirdPartyEmbeddedContent {
-	_type: 'model.dotcomrendering.pageElements.InstagramBlockElement';
-	elementId: string;
-	html: string;
-	url: string;
-	hasCaption: boolean;
+const InstagramBlockElement extends ThirdPartyEmbeddedContentSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.InstagramBlockElement'),
+	elementId: string(),
+	html: string(),
+	url: string(),
+	hasCaption: boolean(),
 	role?: RoleType;
 }
 
-export interface InteractiveAtomBlockElement {
-	_type: 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement';
-	elementId: string;
-	url: string;
-	id: string;
-	title: string;
-	js?: string;
-	html?: string;
-	css?: string;
-	placeholderUrl?: string;
+const InteractiveAtomBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.InteractiveAtomBlockElement'),
+	elementId: string(),
+	url: string(),
+	id: string(),
+	title: string(),
+	js: optional(string()),
+	html: optional(string()),
+	css: optional(string()),
+	placeholderUrl: optional(string()),
 	role?: RoleType;
 }
 
 // Can't guarantee anything in interactiveBlockElement :shrug:
-interface InteractiveBlockElement {
-	_type: 'model.dotcomrendering.pageElements.InteractiveBlockElement';
-	elementId: string;
-	url?: string;
-	isMandatory?: boolean;
-	scriptUrl?: string;
-	alt?: string;
+const InteractiveBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.InteractiveBlockElement'),
+	elementId: string(),
+	url: optional(string()),
+	isMandatory: optional(boolean()),
+	scriptUrl: optional(string()),
+	alt: optional(string()),
 	role?: RoleType;
-	caption?: string;
+	caption: optional(string()),
 }
 
-interface ItemLinkBlockElement {
-	_type: 'model.dotcomrendering.pageElements.ItemLinkBlockElement';
-	elementId: string;
-	html: string;
+const ItemLinkBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.ItemLinkBlockElement'),
+	elementId: string(),
+	html: string(),
 }
 
-export interface KeyTakeaway {
-	title: string;
+const KeyTakeawaySchema = object({
+	title: string(),
 	body: FEElement[];
 }
 
-export interface QAndAExplainer {
-	title: string;
+const QAndAExplainerSchema = object({
+	title: string(),
 	body: FEElement[];
 }
 
-export interface MiniProfile {
-	title: string;
+const MiniProfileSchema = object({
+	title: string(),
 	body: FEElement[];
-	bio?: string;
-	endNote?: string;
+	bio: optional(string()),
+	endNote: optional(string()),
 }
 
-export interface MultiByline {
-	title: string;
+const MultiBylineSchema = object({
+	title: string(),
 	body: FEElement[];
-	bio?: string;
-	endNote?: string;
-	imageUrl?: string;
-	byline: string;
-	bylineHtml: string;
+	bio: optional(string()),
+	endNote: optional(string()),
+	imageUrl: optional(string()),
+	byline: string(),
+	bylineHtml: string(),
 }
 
-export interface KeyTakeawaysBlockElement {
-	_type: 'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement';
+const KeyTakeawaysBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.KeyTakeawaysBlockElement'),
 	keyTakeaways: KeyTakeaway[];
 }
 
-interface QAndAExplainerBlockElement {
-	_type: 'model.dotcomrendering.pageElements.QAndAExplainerBlockElement';
+const QAndAExplainerBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.QAndAExplainerBlockElement'),
 	qAndAExplainers: QAndAExplainer[];
 }
 
-interface MiniProfilesBlockElement {
-	_type: 'model.dotcomrendering.pageElements.MiniProfilesBlockElement';
+const MiniProfilesBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.MiniProfilesBlockElement'),
 	miniProfiles: MiniProfile[];
 }
 
-interface MultiBylinesBlockElement {
-	_type: 'model.dotcomrendering.pageElements.MultiBylinesBlockElement';
+const MultiBylinesBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.MultiBylinesBlockElement'),
 	multiBylines: MultiByline[];
 }
 
-export interface ListItem {
-	title?: string;
+const ListItemSchema = object({
+	title: optional(string()),
 	elements: FEElement[];
-	bio?: string;
-	endNote?: string;
-	contributorImageOverrideUrl?: string;
+	bio: optional(string()),
+	endNote: optional(string()),
+	contributorImageOverrideUrl: optional(string()),
 	contributorIds?: string[];
-	byline?: string;
-	bylineHtml?: string;
+	byline: optional(string()),
+	bylineHtml: optional(string()),
 }
 
-export interface LinkBlockElement {
-	_type: 'model.dotcomrendering.pageElements.LinkBlockElement';
-	url: string;
-	label: string;
+const LinkBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.LinkBlockElement'),
+	url: string(),
+	label: string(),
 	linkType: 'ProductButton';
 }
 
-export interface ListBlockElement {
-	_type: 'model.dotcomrendering.pageElements.ListBlockElement';
+const ListBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.ListBlockElement'),
 	listElementType:
 		| 'KeyTakeaways'
 		| 'QAndAExplainer'
 		| 'MiniProfiles'
 		| 'MultiByline';
 	items: ListItem[];
-	elementId: string;
+	elementId: string(),
 }
 
-export interface MapBlockElement extends ThirdPartyEmbeddedContent {
-	_type: 'model.dotcomrendering.pageElements.MapBlockElement';
-	elementId: string;
-	embedUrl: string;
-	originalUrl: string;
-	title: string;
-	height: number;
-	width: number;
-	caption?: string;
+const MapBlockElement extends ThirdPartyEmbeddedContentSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.MapBlockElement'),
+	elementId: string(),
+	embedUrl: string(),
+	originalUrl: string(),
+	title: string(),
+	height: number(),
+	width: number(),
+	caption: optional(string()),
 	role?: RoleType;
 }
 
-interface MediaAtomBlockElement {
-	_type: 'model.dotcomrendering.pageElements.MediaAtomBlockElement';
-	elementId: string;
-	id: string;
+const MediaAtomBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.MediaAtomBlockElement'),
+	elementId: string(),
+	id: string(),
 	assets: VideoAssets[];
 	posterImage?: {
-		url: string;
-		width: number;
+		url: string(),
+		width: number(),
 	}[];
-	title?: string;
-	duration?: number;
+	title: optional(string()),
+	duration: optional(number()),
 }
 
-export interface MultiImageBlockElement {
-	_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement';
-	elementId: string;
+const MultiImageBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.MultiImageBlockElement'),
+	elementId: string(),
 	images: ImageBlockElement[];
-	caption?: string;
+	caption: optional(string()),
 	role?: RoleType;
 }
 
-export interface NewsletterSignupBlockElement {
-	_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement';
+const NewsletterSignupBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.NewsletterSignupBlockElement'),
 	newsletter: Newsletter;
-	elementId?: string;
+	elementId: optional(string()),
 }
 
-export interface AdPlaceholderBlockElement {
-	_type: 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement';
-}
+const AdPlaceholderBlockElementSchema = object({
+	_type: literal(
+		'model.dotcomrendering.pageElements.AdPlaceholderBlockElement',
+	),
+});
 
-export interface NumberedTitleBlockElement {
-	_type: 'model.dotcomrendering.pageElements.NumberedTitleBlockElement';
-	elementId: string;
-	position: number;
-	html: string;
-}
+export type AdPlaceholderBlockElement = Output<
+	typeof AdPlaceholderBlockElementSchema
+>;
 
-export interface InteractiveContentsBlockElement {
-	_type: 'model.dotcomrendering.pageElements.InteractiveContentsBlockElement';
-	elementId: string;
-	subheadingLinks: SubheadingBlockElement[];
-	endDocumentElementId?: string;
-}
+const NumberedTitleBlockElementSchema = object({
+	_type: literal(
+		'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
+	),
+	elementId: string(),
+	position: number(),
+	html: string(),
+});
 
-interface ProfileAtomBlockElement {
-	_type: 'model.dotcomrendering.pageElements.ProfileAtomBlockElement';
-	elementId: string;
-	id: string;
-	label: string;
-	title: string;
-	img?: string;
-	html: string;
-	credit: string;
+export type NumberedTitleBlockElement = Output<
+	typeof NumberedTitleBlockElementSchema
+>;
+
+const SubheadingBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.SubheadingBlockElement'),
+	elementId: string(),
+	html: string(),
+});
+
+export type SubheadingBlockElement = Output<
+	typeof SubheadingBlockElementSchema
+>;
+
+const InteractiveContentsBlockElementSchema = object({
+	_type: literal(
+		'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
+	),
+	elementId: string(),
+	subheadingLinks: array(SubheadingBlockElementSchema),
+	endDocumentElementId: optional(string()),
+});
+
+export type InteractiveContentsBlockElement = Output<
+	typeof InteractiveContentsBlockElementSchema
+>;
+
+const ProfileAtomBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.ProfileAtomBlockElement'),
+	elementId: string(),
+	id: string(),
+	label: string(),
+	title: string(),
+	img: optional(string()),
+	html: string(),
+	credit: string(),
 	role?: RoleType;
 }
 
-interface PullquoteBlockElement {
-	_type: 'model.dotcomrendering.pageElements.PullquoteBlockElement';
-	elementId: string;
-	html?: string;
+const PullquoteBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.PullquoteBlockElement'),
+	elementId: string(),
+	html: optional(string()),
 	role: RoleType;
-	attribution?: string;
-	isThirdPartyTracking?: boolean;
+	attribution: optional(string()),
+	isThirdPartyTracking: optional(boolean()),
 }
 
-interface QABlockElement {
-	_type: 'model.dotcomrendering.pageElements.QABlockElement';
-	elementId: string;
-	id: string;
-	title: string;
-	img?: string;
-	html: string;
-	credit: string;
+const QABlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.QABlockElement'),
+	elementId: string(),
+	id: string(),
+	title: string(),
+	img: optional(string()),
+	html: string(),
+	credit: string(),
 	role?: RoleType;
 }
 
-export interface RichLinkBlockElement {
-	_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement';
-	elementId: string;
-	url: string;
-	text: string;
-	prefix: string;
+const RichLinkBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.RichLinkBlockElement'),
+	elementId: string(),
+	url: string(),
+	text: string(),
+	prefix: string(),
 	role?: RoleType | 'richLink';
 }
 
-export interface SoundcloudBlockElement extends ThirdPartyEmbeddedContent {
-	_type: 'model.dotcomrendering.pageElements.SoundcloudBlockElement';
-	elementId: string;
-	html: string;
-	id: string;
-	isTrack: boolean;
-	isMandatory: boolean;
+const SoundcloudBlockElement extends ThirdPartyEmbeddedContentSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.SoundcloudBlockElement'),
+	elementId: string(),
+	html: string(),
+	id: string(),
+	isTrack: boolean(),
+	isMandatory: boolean(),
 	role?: RoleType;
 }
 
-export interface SpotifyBlockElement extends ThirdPartyEmbeddedContent {
-	_type: 'model.dotcomrendering.pageElements.SpotifyBlockElement';
-	elementId: string;
-	embedUrl?: string;
-	title?: string;
-	height?: number;
-	width?: number;
-	caption?: string;
+const SpotifyBlockElement extends ThirdPartyEmbeddedContentSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.SpotifyBlockElement'),
+	elementId: string(),
+	embedUrl: optional(string()),
+	title: optional(string()),
+	height: optional(number()),
+	width: optional(number()),
+	caption: optional(string()),
 	role?: RoleType;
 }
 
-interface StarRatingBlockElement {
-	_type: 'model.dotcomrendering.pageElements.StarRatingBlockElement';
-	elementId: string;
+const StarRatingBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.StarRatingBlockElement'),
+	elementId: string(),
 	rating: StarRating;
 	size: RatingSizeType;
 }
 
-export interface SubheadingBlockElement {
-	_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement';
-	elementId: string;
-	html: string;
-}
-
-export interface TableBlockElement {
-	_type: 'model.dotcomrendering.pageElements.TableBlockElement';
-	elementId: string;
-	isMandatory: boolean;
-	html: string;
+const TableBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.TableBlockElement'),
+	elementId: string(),
+	isMandatory: boolean(),
+	html: string(),
 	role?: RoleType;
 }
 
-export interface TextBlockElement {
-	_type: 'model.dotcomrendering.pageElements.TextBlockElement';
-	elementId: string;
+const TextBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.TextBlockElement'),
+	elementId: string(),
 	dropCap?: 'on' | 'off';
-	html: string;
+	html: string(),
 }
 
 export type DCRTimelineEvent = {
-	date: string;
-	title?: string;
-	label?: string;
+	date: string(),
+	title: optional(string()),
+	label: optional(string()),
 	main?: FEElement;
 	body: FEElement[];
 };
 
 export type DCRTimelineSection = {
-	title: string;
+	title: string(),
 	events: DCRTimelineEvent[];
 };
 
 export type DCRTimelineBlockElement = {
-	_type: 'model.dotcomrendering.pageElements.DCRTimelineBlockElement';
+	_type: literal('model.dotcomrendering.pageElements.DCRTimelineBlockElement'),
 	events: DCRTimelineEvent[];
 };
 
 export type DCRSectionedTimelineBlockElement = {
-	_type: 'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement';
+	_type: literal('model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement'),
 	sections: DCRTimelineSection[];
 };
 
 export type FETimelineEvent = {
-	title?: string;
-	date?: string;
-	label?: string;
+	title: optional(string()),
+	date: optional(string()),
+	label: optional(string()),
 	main?: FEElement;
 	body: FEElement[];
 };
 
 export type FETimelineSection = {
-	title?: string;
+	title: optional(string()),
 	events: FETimelineEvent[];
 };
 
-export interface FETimelineBlockElement {
-	_type: 'model.dotcomrendering.pageElements.TimelineBlockElement';
-	elementId: string;
+const FETimelineBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.TimelineBlockElement'),
+	elementId: string(),
 	sections: FETimelineSection[];
 }
 
-export interface TimelineAtomBlockElement {
-	_type: 'model.dotcomrendering.pageElements.TimelineAtomBlockElement';
-	elementId: string;
-	id: string;
-	title: string;
-	description?: string;
+const TimelineAtomBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.TimelineAtomBlockElement'),
+	elementId: string(),
+	id: string(),
+	title: string(),
+	description: optional(string()),
 	events: TimelineAtomEvent[];
 	role?: RoleType;
 }
 
-export interface TweetBlockElement extends ThirdPartyEmbeddedContent {
-	_type: 'model.dotcomrendering.pageElements.TweetBlockElement';
-	elementId: string;
-	html: string;
-	url: string;
-	id: string;
-	hasMedia: boolean;
+const TweetBlockElement extends ThirdPartyEmbeddedContentSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.TweetBlockElement'),
+	elementId: string(),
+	html: string(),
+	url: string(),
+	id: string(),
+	hasMedia: boolean(),
 	role?: RoleType;
 }
 
-export interface VineBlockElement extends ThirdPartyEmbeddedContent {
-	_type: 'model.dotcomrendering.pageElements.VineBlockElement';
-	elementId: string;
-	url: string;
-	height: number;
-	width: number;
-	originalUrl: string;
-	title: string;
+const VineBlockElement extends ThirdPartyEmbeddedContentSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.VineBlockElement'),
+	elementId: string(),
+	url: string(),
+	height: number(),
+	width: number(),
+	originalUrl: string(),
+	title: string(),
 }
 
-export interface VideoBlockElement extends ThirdPartyEmbeddedContent {
-	_type: 'model.dotcomrendering.pageElements.VideoBlockElement';
-	elementId: string;
+const VideoBlockElement extends ThirdPartyEmbeddedContentSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.VideoBlockElement'),
+	elementId: string(),
 	role?: RoleType;
 }
 
-export interface VideoFacebookBlockElement extends ThirdPartyEmbeddedContent {
-	_type: 'model.dotcomrendering.pageElements.VideoFacebookBlockElement';
-	elementId: string;
-	url: string;
-	height: number;
-	width: number;
-	caption?: string;
-	embedUrl?: string;
+const VideoFacebookBlockElement extends ThirdPartyEmbeddedContentSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.VideoFacebookBlockElement'),
+	elementId: string(),
+	url: string(),
+	height: number(),
+	width: number(),
+	caption: optional(string()),
+	embedUrl: optional(string()),
 	role?: RoleType;
 }
 
-export interface VideoVimeoBlockElement extends ThirdPartyEmbeddedContent {
-	_type: 'model.dotcomrendering.pageElements.VideoVimeoBlockElement';
-	elementId: string;
-	embedUrl?: string;
-	url: string;
-	height: number;
-	width: number;
-	caption?: string;
-	credit?: string;
-	title?: string;
-	originalUrl?: string;
+const VideoVimeoBlockElement extends ThirdPartyEmbeddedContentSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.VideoVimeoBlockElement'),
+	elementId: string(),
+	embedUrl: optional(string()),
+	url: string(),
+	height: number(),
+	width: number(),
+	caption: optional(string()),
+	credit: optional(string()),
+	title: optional(string()),
+	originalUrl: optional(string()),
 	role?: RoleType;
 }
 
-export interface VideoYoutubeBlockElement extends ThirdPartyEmbeddedContent {
-	_type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement';
-	elementId: string;
-	embedUrl?: string;
-	url: string;
-	originalUrl: string;
-	height: number;
-	width: number;
-	caption?: string;
-	credit?: string;
-	title?: string;
+const VideoYoutubeBlockElement extends ThirdPartyEmbeddedContentSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.VideoYoutubeBlockElement'),
+	elementId: string(),
+	embedUrl: optional(string()),
+	url: string(),
+	originalUrl: string(),
+	height: number(),
+	width: number(),
+	caption: optional(string()),
+	credit: optional(string()),
+	title: optional(string()),
 	role?: RoleType;
 }
 
-export interface YoutubeBlockElement {
-	_type: 'model.dotcomrendering.pageElements.YoutubeBlockElement';
-	assetId: string;
-	mediaTitle: string;
-	id: string;
-	elementId: string;
-	channelId?: string;
-	duration?: number;
+const YoutubeBlockElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.YoutubeBlockElement'),
+	assetId: string(),
+	mediaTitle: string(),
+	id: string(),
+	elementId: string(),
+	channelId: optional(string()),
+	duration: optional(number()),
 	posterImage?: {
-		url: string;
-		width: number;
+		url: string(),
+		width: number(),
 	}[];
-	expired: boolean;
-	overrideImage?: string;
-	altText?: string;
+	expired: boolean(),
+	overrideImage: optional(string()),
+	altText: optional(string()),
 	role?: RoleType;
 }
 
-interface WitnessTypeDataBase {
-	authorUsername: string;
-	originalUrl: string;
-	source: string;
-	title: string;
-	url: string;
-	dateCreated: string;
-	apiUrl: string;
-	authorName: string;
-	witnessEmbedType: string;
-	html?: string;
-	authorWitnessProfileUrl: string;
+const WitnessTypeDataBaseSchema = object({
+	authorUsername: string(),
+	originalUrl: string(),
+	source: string(),
+	title: string(),
+	url: string(),
+	dateCreated: string(),
+	apiUrl: string(),
+	authorName: string(),
+	witnessEmbedType: string(),
+	html: optional(string()),
+	authorWitnessProfileUrl: string(),
 }
 
-interface WitnessTypeDataImage extends WitnessTypeDataBase {
-	_type: 'model.dotcomrendering.pageElements.WitnessTypeDataImage';
+const WitnessTypeDataImage extends WitnessTypeDataBaseSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.WitnessTypeDataImage'),
 	type: 'image';
-	alt: string;
-	caption?: string;
-	mediaId: string;
-	photographer: string;
+	alt: string(),
+	caption: optional(string()),
+	mediaId: string(),
+	photographer: string(),
 }
 
-interface WitnessTypeDataVideo extends WitnessTypeDataBase {
-	_type: 'model.dotcomrendering.pageElements.WitnessTypeDataVideo';
+const WitnessTypeDataVideo extends WitnessTypeDataBaseSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.WitnessTypeDataVideo'),
 	type: 'video';
-	description: string;
-	youtubeHtml: string;
-	youtubeDescription: string;
-	youtubeUrl: string;
-	width: number;
-	youtubeSource: string;
-	youtubeAuthorName: string;
-	height: number;
-	youtubeTitle: string;
+	description: string(),
+	youtubeHtml: string(),
+	youtubeDescription: string(),
+	youtubeUrl: string(),
+	width: number(),
+	youtubeSource: string(),
+	youtubeAuthorName: string(),
+	height: number(),
+	youtubeTitle: string(),
 }
 
-interface WitnessTypeDataText extends WitnessTypeDataBase {
-	_type: 'model.dotcomrendering.pageElements.WitnessTypeDataText';
+const WitnessTypeDataText extends WitnessTypeDataBaseSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.WitnessTypeDataText'),
 	type: 'text';
-	description: string;
-	authorUsername: string;
-	originalUrl: string;
-	source: string;
-	title: string;
-	url: string;
-	dateCreated: string;
-	apiUrl: string;
-	authorName: string;
-	witnessEmbedType: string;
-	authorWitnessProfileUrl: string;
+	description: string(),
+	authorUsername: string(),
+	originalUrl: string(),
+	source: string(),
+	title: string(),
+	url: string(),
+	dateCreated: string(),
+	apiUrl: string(),
+	authorName: string(),
+	witnessEmbedType: string(),
+	authorWitnessProfileUrl: string(),
 }
 
-export interface WitnessAssetType {
+const WitnessAssetTypeSchema = object({
 	type: 'Image';
-	mimeType?: string;
-	file?: string;
+	mimeType: optional(string()),
+	file: optional(string()),
 	typeData?: {
-		name?: string;
+		name: optional(string()),
 	};
 }
-interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
-	_type: 'model.dotcomrendering.pageElements.WitnessBlockElement';
-	elementId: string;
+const WitnessTypeBlockElement extends ThirdPartyEmbeddedContentSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.WitnessBlockElement'),
+	elementId: string(),
 	assets: WitnessAssetType[];
-	isThirdPartyTracking: boolean;
+	isThirdPartyTracking: boolean(),
 	witnessTypeData:
 		| WitnessTypeDataImage
 		| WitnessTypeDataVideo
 		| WitnessTypeDataText;
 }
 
-export interface CrosswordElement {
-	_type: 'model.dotcomrendering.pageElements.CrosswordElement';
+const CrosswordElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.CrosswordElement'),
 	crossword: CrosswordProps['data'];
 }
 
@@ -844,84 +1076,43 @@ export type FEElement =
  */
 type Weighting = Exclude<RoleType, 'halfWidth' | 'richLink'> | 'halfwidth';
 
-/**
- * Affects how an image is placed.
- *
- * Also known as “weighting” in Composer, but we respect the CAPI naming.
- *
- * @see https://github.com/guardian/frontend/blob/0a32dba0/common/app/model/dotcomrendering/pageElements/Role.scala
- */
-export type RoleType =
-	| 'immersive'
-	| 'supporting'
-	| 'showcase'
-	| 'inline'
-	| 'thumbnail'
-	| 'halfWidth';
-
-export interface ImageSource {
+const ImageSourceSchema = object({
 	weighting: Weighting;
 	srcSet: SrcSetItem[];
 }
 
-export interface SrcSetItem {
-	src: string;
-	width: number;
+const SrcSetItemSchema = object({
+	src: string(),
+	width: number(),
 }
 
-export interface Image {
-	index: number;
-	fields: {
-		height: string;
-		width: string;
-		aspectRatio?: string;
-		isMaster?: string;
-		source?: string;
-		caption?: string;
-	};
-	mediaType: string;
-	mimeType?: string;
-	url: string;
-}
-
-interface VideoAssets {
-	url: string;
-	mimeType?: string;
+const VideoAssetsSchema = object({
+	url: string(),
+	mimeType: optional(string()),
 	fields?: {
-		source?: string;
-		embeddable?: string;
-		height?: string;
-		width?: string;
-		caption?: string;
+		source: optional(string()),
+		embeddable: optional(string()),
+		height: optional(string()),
+		width: optional(string()),
+		caption: optional(string()),
 	};
 }
 
-interface AudioAsset {
-	url: string;
-	mimeType?: string;
-	fields?: {
-		durationMinutes?: string;
-		durationSeconds?: string;
-		explicit?: string;
-		source?: string;
-	};
-}
-
-export interface TimelineAtomEvent {
-	title: string;
-	date: string;
-	unixDate: number;
-	body?: string;
-	toDate?: string;
-	toUnixDate?: number;
+const TimelineAtomEventSchema = object({
+	title: string(),
+	date: string(),
+	unixDate: number(),
+	body: optional(string()),
+	toDate: optional(string()),
+	toUnixDate: optional(number()),
 }
 
 export type TimelineAtomType = {
-	id: string;
+	id: string(),
 	events?: TimelineAtomEvent[];
-	title: string;
-	description?: string;
-	expandForStorybook?: boolean;
+	title: string(),
+	description: optional(string()),
+	expandForStorybook: optional(boolean()),
 	likeHandler?: () => void;
 	dislikeHandler?: () => void;
 	expandCallback?: () => void;
@@ -930,141 +1121,29 @@ export type TimelineAtomType = {
 export type RatingSizeType = 'large' | 'small';
 
 export type ImageForLightbox = {
-	masterUrl: string;
-	elementId: string;
-	width: number;
-	height: number;
-	position: number;
-	alt?: string;
-	credit?: string;
-	caption?: string;
-	displayCredit?: boolean;
-	title?: string;
-	starRating?: number;
+	masterUrl: string(),
+	elementId: string(),
+	width: number(),
+	height: number(),
+	position: number(),
+	alt: optional(string()),
+	credit: optional(string()),
+	caption: optional(string()),
+	displayCredit: optional(boolean()),
+	title: optional(string()),
+	starRating: optional(number()),
 	/**
 	 * Used for liveblog images to generate a link back to the
 	 * original post where the image was used
 	 */
-	blockId?: string;
+	blockId: optional(string()),
 	/**
 	 * Used to show when a liveblog image was posted
 	 */
-	firstPublished?: number;
+	firstPublished: optional(number()),
 };
 
-// -------------------------------------
-// Callout Campaign
-// -------------------------------------
 
-export type CampaignFieldType =
-	| CampaignFieldText
-	| CampaignFieldTextArea
-	| CampaignFieldFile
-	| CampaignFieldRadio
-	| CampaignFieldCheckbox
-	| CampaignFieldSelect;
-
-interface CampaignField {
-	id: string;
-	name: string;
-	description?: string;
-	required: boolean;
-	textSize?: number;
-	hideLabel?: boolean;
-	hidden?: boolean;
-	label: string;
-}
-
-export interface CampaignFieldText extends CampaignField {
-	type: 'text' | 'email' | 'phone';
-}
-
-export interface CampaignFieldTextArea extends CampaignField {
-	type: 'textarea';
-	minlength?: number;
-	maxlength?: number;
-}
-
-export interface CampaignFieldFile extends CampaignField {
-	type: 'file';
-}
-
-export interface CampaignFieldRadio extends CampaignField {
-	type: 'radio';
-	options: {
-		label: string;
-		value: string;
-	}[];
-}
-
-export interface CampaignFieldCheckbox extends CampaignField {
-	type: 'checkbox';
-	options: {
-		label: string;
-		value: string;
-	}[];
-}
-
-export interface CampaignFieldSelect extends CampaignField {
-	type: 'select';
-	options: {
-		label: string;
-		value: string;
-	}[];
-}
-
-// -------------------------------------
-// Quiz
-// -------------------------------------
-
-export type AnswerType = {
-	id: string;
-	text: string;
-	revealText?: string;
-	isCorrect: boolean;
-	answerBuckets: string[];
-};
-
-export type QuestionType = {
-	id: string;
-	text: string;
-	answers: AnswerType[];
-	imageUrl?: string;
-	imageAlt?: string;
-};
-
-export type ResultGroupsType = {
-	title: string;
-	shareText: string;
-	minScore: number;
-	id: string;
-};
-
-export type ResultsBucketType = {
-	id: string;
-	title: string;
-	description: string;
-};
-
-export type KnowledgeQuizAtomType = {
-	id: string;
-	questions: QuestionType[];
-	resultGroups: ResultGroupsType[];
-	pageId: string;
-	webTitle: string;
-	format: ArticleFormat;
-};
-
-export type PersonalityQuizAtomType = {
-	id: string;
-	questions: QuestionType[];
-	resultBuckets: ResultsBucketType[];
-	pageId: string;
-	webTitle: string;
-	format: ArticleFormat;
-};
-
-export type QuizSelectionType = Record<string, AnswerType>;
 
 export type SharePlatformType =
 	| 'facebook'
@@ -1077,8 +1156,8 @@ export type SharePlatformType =
 
 export type SharingUrlsType = {
 	[K in SharePlatformType]?: {
-		url: string;
-		userMessage: string;
+		url: string(),
+		userMessage: string(),
 	};
 };
 
@@ -1087,22 +1166,22 @@ export type SharingUrlsType = {
 // -------------------------------------
 
 export type Newsletter = {
-	listId: number;
-	identityName: string;
-	name: string;
-	description: string;
-	frequency: string;
-	successDescription: string;
-	theme: string;
-	group: string;
-	regionFocus?: string;
-	illustrationCard?: string;
+	listId: number(),
+	identityName: string(),
+	name: string(),
+	description: string(),
+	frequency: string(),
+	successDescription: string(),
+	theme: string(),
+	group: string(),
+	regionFocus: optional(string()),
+	illustrationCard: optional(string()),
 };
 
 export type NewsletterLayout = {
 	groups: {
-		title: string;
-		subtitle?: string;
+		title: string(),
+		subtitle: optional(string()),
 		newsletters: string[];
 	}[];
 };
