@@ -33,3 +33,6 @@ jobs:
 
       - name: Deploy
         run: deno run deploy
+        env:
+          FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_AB_TESTING_CONFIG }}
+          FASTLY_API_TOKEN: ${{ secrets.FASTLY_API_TOKEN }}
