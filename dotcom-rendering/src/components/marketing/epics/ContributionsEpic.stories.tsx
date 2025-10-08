@@ -10,7 +10,7 @@ import lzstring from 'lz-string';
 import React from 'react';
 import {
 	choiceCardsSettings,
-	choiceCardsWithDestinationUrl,
+	choiceCardsWithMixedDestinations,
 } from '../lib/storybook';
 import { ContributionsEpicUnvalidated as ContributionsEpic } from './ContributionsEpic';
 import { props } from './utils/storybook';
@@ -385,8 +385,8 @@ export const WithParagraphLinks: Story = {
 	},
 };
 
-export const WithThreeTierChoiceCardsAndCustomDestinationUrl: Story = {
-	name: 'ContributionsEpic with three tier choice cards and custom destination URL',
+export const WithThreeTierChoiceCardsAndMixedDestinations: Story = {
+	name: 'ContributionsEpic with three tier choice cards and mixed destinations',
 	args: {
 		...meta.args,
 		variant: {
@@ -394,7 +394,7 @@ export const WithThreeTierChoiceCardsAndCustomDestinationUrl: Story = {
 			name: 'THREE_TIER_CHOICE_CARDS',
 			secondaryCta: undefined,
 			showChoiceCards: true,
-			choiceCardsSettings: choiceCardsWithDestinationUrl,
+			choiceCardsSettings: choiceCardsWithMixedDestinations,
 		},
 	},
 };

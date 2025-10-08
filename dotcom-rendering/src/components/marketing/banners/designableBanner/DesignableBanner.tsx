@@ -33,7 +33,7 @@ import {
 } from '../../../../lib/useMatchMedia';
 import { getChoiceCards } from '../../lib/choiceCards';
 import type { ReactComponent } from '../../lib/ReactComponent';
-import { getChoiceCardUrl } from '../../lib/tracking';
+import { enrichSupportUrl, getChoiceCardUrl } from '../../lib/tracking';
 import { ThreeTierChoiceCards } from '../../shared/ThreeTierChoiceCards';
 import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
 import type { BannerRenderProps } from '../common/types';
@@ -132,6 +132,8 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	submitComponentEvent,
 	tracking,
 	design,
+	countryCode,
+	promoCodes,
 }: BannerRenderProps): JSX.Element => {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
 
@@ -480,10 +482,15 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 							)}
 							<div css={styles.ctaContainer(isCollapsed)}>
 								<LinkButton
-									href={getChoiceCardUrl(
-										selectedChoiceCard,
-										mainOrMobileContent.primaryCta.ctaUrl,
-									)}
+									href={enrichSupportUrl({
+										baseUrl:
+											getChoiceCardUrl(
+												selectedChoiceCard,
+											),
+										tracking,
+										promoCodes: promoCodes ?? [],
+										countryCode,
+									})}
 									onClick={onCtaClick}
 									priority="primary"
 									cssOverrides={styles.linkButtonStyles}

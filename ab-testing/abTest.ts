@@ -22,7 +22,7 @@ import type { ABTest } from './types';
 export const ABTests: ABTest[] = [
 	// Sample tests that will be used for testing the AB testing framework
 	{
-		name: 'commercial-client-side-test',
+		name: 'commercial-client-side-test-1',
 		description:
 			'Show new ad block ask component in ad slots when we detect ad blocker usage',
 		owners: ['commercial.dev@guardian.co.uk'],
@@ -34,7 +34,7 @@ export const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: 'commercial-server-side-test',
+		name: 'commercial-server-side-test-1',
 		description:
 			'Show new ad block ask component in ad slots when we detect ad blocker usage',
 		owners: ['commercial.dev@guardian.co.uk'],

@@ -20,6 +20,9 @@ import {
 	textSansBold15,
 	textSansBold17,
 	textSansBold20,
+	textSansBold24,
+	textSansBold28,
+	textSansBold34,
 	until,
 } from '@guardian/source/foundations';
 import { Link, SvgExternal } from '@guardian/source/react-components';
@@ -102,12 +105,12 @@ const fontFamilies = {
 	 * Line height for sans style headlines for labs is overridden to match that of other headlines (1.15)
 	 */
 	textSansBold: {
-		xxxlarge: `${textSansBold20}\n\tline-height: 1.15;\n`,
-		xxlarge: `${textSansBold20}\n\tline-height: 1.15;\n`,
-		xlarge: `${textSansBold20}\n\tline-height: 1.15;\n`,
-		large: `${textSansBold20}\n\tline-height: 1.15;\n`,
-		medium: `${textSansBold20}\n\tline-height: 1.15;\n`,
-		small: `${textSansBold20}\n\tline-height: 1.15;\n`,
+		xxxlarge: `${textSansBold34}\n\tline-height: 1.15;\n`,
+		xxlarge: `${textSansBold34}\n\tline-height: 1.15;\n`,
+		xlarge: `${textSansBold34}\n\tline-height: 1.15;\n`,
+		large: `${textSansBold34}\n\tline-height: 1.15;\n`,
+		medium: `${textSansBold28}\n\tline-height: 1.15;\n`,
+		small: `${textSansBold24}\n\tline-height: 1.15;\n`,
 		xsmall: `${textSansBold20}\n\tline-height: 1.15;\n`,
 		xxsmall: `${textSansBold17}\n\tline-height: 1.15;\n`,
 		xxxsmall: `${textSansBold15}\n\tline-height: 1.15;\n`,
