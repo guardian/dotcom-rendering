@@ -90,7 +90,7 @@ describe('getChoiceCardUrl', () => {
 	});
 
 	// Recurring contribution
-	it('builds landing page url for one-time choice', () => {
+	it('builds landing page url for recurring contribution choice', () => {
 		const url = getChoiceCardUrl({
 			benefits: [],
 			isDefault: false,
@@ -105,7 +105,7 @@ describe('getChoiceCardUrl', () => {
 			'https://support.theguardian.com/contribute?product=Contribution&ratePlan=Monthly',
 		);
 	});
-	it('builds checkout page url for one-time choice', () => {
+	it('builds checkout page url for recurring contribution choice', () => {
 		const url = getChoiceCardUrl({
 			benefits: [],
 			isDefault: false,
@@ -122,7 +122,7 @@ describe('getChoiceCardUrl', () => {
 	});
 
 	// SupporterPlus
-	it('builds landing page url for one-time choice', () => {
+	it('builds landing page url for Supporter Plus choice', () => {
 		const url = getChoiceCardUrl({
 			benefits: [],
 			isDefault: false,
@@ -137,7 +137,7 @@ describe('getChoiceCardUrl', () => {
 			'https://support.theguardian.com/contribute?product=SupporterPlus&ratePlan=Annual',
 		);
 	});
-	it('builds checkout page url for one-time choice', () => {
+	it('builds checkout page url for Supporter Plus choice', () => {
 		const url = getChoiceCardUrl({
 			benefits: [],
 			isDefault: false,
