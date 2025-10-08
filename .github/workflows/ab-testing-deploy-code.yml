@@ -9,6 +9,8 @@ on:
 jobs:
   ci:
     uses: ./.github/workflows/ab-testing-checks.yml
+    with:
+      save_build_artifact: true
     secrets:
       FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_CODE_AB_TESTING_CONFIG }}
       FASTLY_API_TOKEN: ${{ secrets.FASTLY_CODE_API_TOKEN }}
@@ -16,15 +18,9 @@ jobs:
   deploy:
     name: Deploy CODE
     needs: ci
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ab-testing
-    steps:
-      - name: Deploy
-        uses: ./.github/workflows/ab-testing-deploy.yml
-        with:
-          stage: code
-        env:
-          FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_CODE_AB_TESTING_CONFIG }}
-          FASTLY_API_TOKEN: ${{ secrets.FASTLY_CODE_API_TOKEN }}
+    uses: ./.github/workflows/ab-testing-deploy.yml
+    with:
+      stage: code
+    secrets:
+      FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_CODE_AB_TESTING_CONFIG }}
+      FASTLY_API_TOKEN: ${{ secrets.FASTLY_CODE_API_TOKEN }}
