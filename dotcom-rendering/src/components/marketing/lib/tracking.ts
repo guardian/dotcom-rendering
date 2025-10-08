@@ -10,7 +10,6 @@ import type {
 	AbandonedBasket,
 	BannerTest,
 	BannerVariant,
-	ContributionFrequency,
 	EpicTest,
 	EpicVariant,
 	TargetingAbTest,
@@ -263,18 +262,6 @@ export const addProfileTrackingParams = (
 	)}`;
 };
 
-export const addChoiceCardsParams = (
-	url: string,
-	frequency: ContributionFrequency,
-	amount?: number | 'other',
-): string => {
-	const newParams = `selected-contribution-type=${frequency}${
-		amount !== undefined ? `&selected-amount=${amount}` : ''
-	}`;
-	const alreadyHasQueryString = url.includes('?');
-	return `${url}${alreadyHasQueryString ? '&' : '?'}${newParams}`;
-};
-
 export const addChoiceCardsOneTimeParams = (url: string): string => {
 	const newParams = `oneTime`;
 	const alreadyHasQueryString = url.includes('?');
@@ -313,9 +300,11 @@ export const getChoiceCardUrl = (choiceCard: ChoiceCard): string => {
 	const destination = choiceCard.destination ?? 'LandingPage';
 
 	if (product.supportTier === 'OneOff') {
-		const path =
-			destination === 'LandingPage' ? 'contribute' : 'one-time-checkout';
-		return addChoiceCardsOneTimeParams(`${SupportUrl}/${path}`);
+		if (destination === 'LandingPage') {
+			return addChoiceCardsOneTimeParams(`${SupportUrl}/contribute`);
+		} else {
+			return `${SupportUrl}/one-time-checkout`;
+		}
 	} else {
 		const path = destination === 'LandingPage' ? 'contribute' : 'checkout';
 		return addChoiceCardsProductParams(

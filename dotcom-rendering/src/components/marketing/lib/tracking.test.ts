@@ -1,29 +1,5 @@
 import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/types';
-import { addChoiceCardsParams, enrichSupportUrl } from './tracking';
-
-describe('addChoiceCardsParams', () => {
-	it('adds choice cards params to url without existing querystring', () => {
-		const result = addChoiceCardsParams(
-			'https://support.theguardian.com/contribute',
-			'ONE_OFF',
-			5,
-		);
-		expect(result).toEqual(
-			'https://support.theguardian.com/contribute?selected-contribution-type=ONE_OFF&selected-amount=5',
-		);
-	});
-
-	it('adds choice cards params to url with existing querystring', () => {
-		const result = addChoiceCardsParams(
-			'https://support.theguardian.com/contribute?test=test',
-			'ONE_OFF',
-			5,
-		);
-		expect(result).toEqual(
-			'https://support.theguardian.com/contribute?test=test&selected-contribution-type=ONE_OFF&selected-amount=5',
-		);
-	});
-});
+import { enrichSupportUrl, getChoiceCardUrl } from './tracking';
 
 describe('enrichSupportUrl', () => {
 	const tracking: Tracking = {
@@ -78,6 +54,102 @@ describe('enrichSupportUrl', () => {
 		});
 		expect(result).toEqual(
 			'https://support.theguardian.com/uk/contribute?REFPVID=123&INTCMP=test&acquisitionData=%7B%22source%22%3A%22WEB%22%2C%22componentId%22%3A%22test%22%2C%22componentType%22%3A%22ACQUISITIONS_EPIC%22%2C%22campaignCode%22%3A%22test%22%2C%22abTests%22%3A%5B%7B%22name%22%3A%22test%22%2C%22variant%22%3A%22control%22%7D%5D%2C%22referrerPageviewId%22%3A%22123%22%2C%22referrerUrl%22%3A%22https%3A%2F%2Ftheguardian.com%22%2C%22isRemote%22%3Atrue%7D&promoCode=PROMO1&promoCode=PROMO2',
+		);
+	});
+});
+
+describe('getChoiceCardUrl', () => {
+	// One-time
+	it('builds landing page url for one-time choice', () => {
+		const url = getChoiceCardUrl({
+			benefits: [],
+			isDefault: false,
+			label: 'label',
+			product: {
+				supportTier: 'OneOff',
+			},
+			destination: 'LandingPage',
+		});
+		expect(url).toEqual(
+			'https://support.theguardian.com/contribute?oneTime',
+		);
+	});
+	it('builds checkout page url for one-time choice', () => {
+		const url = getChoiceCardUrl({
+			benefits: [],
+			isDefault: false,
+			label: 'label',
+			product: {
+				supportTier: 'OneOff',
+			},
+			destination: 'Checkout',
+		});
+		expect(url).toEqual(
+			'https://support.theguardian.com/one-time-checkout',
+		);
+	});
+
+	// Recurring contribution
+	it('builds landing page url for one-time choice', () => {
+		const url = getChoiceCardUrl({
+			benefits: [],
+			isDefault: false,
+			label: 'label',
+			product: {
+				supportTier: 'Contribution',
+				ratePlan: 'Monthly',
+			},
+			destination: 'LandingPage',
+		});
+		expect(url).toEqual(
+			'https://support.theguardian.com/contribute?product=Contribution&ratePlan=Monthly',
+		);
+	});
+	it('builds checkout page url for one-time choice', () => {
+		const url = getChoiceCardUrl({
+			benefits: [],
+			isDefault: false,
+			label: 'label',
+			product: {
+				supportTier: 'Contribution',
+				ratePlan: 'Monthly',
+			},
+			destination: 'Checkout',
+		});
+		expect(url).toEqual(
+			'https://support.theguardian.com/checkout?product=Contribution&ratePlan=Monthly',
+		);
+	});
+
+	// SupporterPlus
+	it('builds landing page url for one-time choice', () => {
+		const url = getChoiceCardUrl({
+			benefits: [],
+			isDefault: false,
+			label: 'label',
+			product: {
+				supportTier: 'SupporterPlus',
+				ratePlan: 'Annual',
+			},
+			destination: 'LandingPage',
+		});
+		expect(url).toEqual(
+			'https://support.theguardian.com/contribute?product=SupporterPlus&ratePlan=Annual',
+		);
+	});
+	it('builds checkout page url for one-time choice', () => {
+		const url = getChoiceCardUrl({
+			benefits: [],
+			isDefault: false,
+			label: 'label',
+			product: {
+				supportTier: 'SupporterPlus',
+				ratePlan: 'Annual',
+			},
+			destination: 'Checkout',
+		});
+		expect(url).toEqual(
+			'https://support.theguardian.com/checkout?product=SupporterPlus&ratePlan=Annual',
 		);
 	});
 });
