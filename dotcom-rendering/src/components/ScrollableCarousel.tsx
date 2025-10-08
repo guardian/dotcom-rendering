@@ -104,32 +104,34 @@ const itemStyles = css`
 	position: relative;
 `;
 
-const leftBorderStyles = css`
+const leftBorderStyles = (isOnwardContent?: boolean) => css`
 	content: '';
 	position: absolute;
 	top: 0;
 	bottom: 0;
 	left: -10px;
 	width: 1px;
-	background-color: ${palette('--card-border-top')};
+	background-color: ${isOnwardContent
+		? palette('--onward-content-border')
+		: palette('--card-border-top')};
 	transform: translateX(-50%);
 `;
 
-const singleRowLeftBorderStyles = css`
+const singleRowLeftBorderStyles = (isOnwardContent?: boolean) => css`
 	:not(:first-child)::before {
-		${leftBorderStyles}
+		${leftBorderStyles(isOnwardContent)}
 	}
 `;
 
-const stackedRowLeftBorderStyles = css`
+const stackedRowLeftBorderStyles = (isOnwardContent?: boolean) => css`
 	${from.tablet} {
 		:not(:first-child)::before {
-			${leftBorderStyles}
+			${leftBorderStyles(isOnwardContent)}
 		}
 	}
 	${until.tablet} {
 		:not(:first-child):not(:nth-child(2))::before {
-			${leftBorderStyles}
+			${leftBorderStyles(isOnwardContent)}
 		}
 	}
 `;
@@ -410,17 +412,20 @@ export const ScrollableCarousel = ({
 
 ScrollableCarousel.Item = ({
 	isStackingCarousel = false,
+	isOnwardContent = false,
 	children,
 }: {
 	isStackingCarousel?: boolean;
 	children: React.ReactNode;
+	/** The colour of borders can be overriden */
+	isOnwardContent?: boolean;
 }) => (
 	<li
 		css={[
 			itemStyles,
 			isStackingCarousel
-				? stackedRowLeftBorderStyles
-				: singleRowLeftBorderStyles,
+				? stackedRowLeftBorderStyles(isOnwardContent)
+				: singleRowLeftBorderStyles(isOnwardContent),
 		]}
 	>
 		{children}

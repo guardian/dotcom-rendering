@@ -1,20 +1,19 @@
 import { css } from '@emotion/react';
 import {
+	between,
 	from,
-	headlineBold20,
-	headlineBold24,
 	space,
+	textSansBold17,
+	textSansBold20,
+	until,
 } from '@guardian/source/foundations';
-import { formatAttrString } from '../lib/formatAttrString';
-import { palette as themePalette } from '../palette';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
+import { grid } from '../grid';
+import { palette } from '../palette';
 import { type OnwardsSource } from '../types/onwards';
 import { type TrailType } from '../types/trails';
 import { Card } from './Card/Card';
-import type { Props as CardProps } from './Card/Card';
-import { Hide } from './Hide';
-import { LeftColumn } from './LeftColumn';
 import { ScrollableCarousel } from './ScrollableCarousel';
-import { Section } from './Section';
 
 type Props = {
 	absoluteServerTimes: boolean;
@@ -22,102 +21,37 @@ type Props = {
 	discussionApiUrl: string;
 	heading: string;
 	onwardsSource: OnwardsSource;
-	url?: string;
+	headingUrl?: string;
 };
 
-const wrapperStyle = css`
-	display: flex;
-	justify-content: space-between;
-	overflow: hidden;
-	${from.desktop} {
-		padding-right: 40px;
-	}
-`;
-
-const containerStyles = css`
-	display: flex;
-	flex-direction: column;
+const cardsContainerStyles = css`
+	${grid.column.centre}
 	position: relative;
-	overflow: hidden; /* Needed for scrolling to work */
 
-	margin-top: ${space[2]}px;
-	padding-bottom: ${space[6]}px;
-
-	margin-left: 0px;
-	margin-right: 0px;
-
-	border-bottom: 1px solid ${themePalette('--onward-content-border')};
+	${from.desktop} {
+		${grid.between('centre-column-start', 'right-column-end')}
+	}
 
 	${from.leftCol} {
-		margin-left: 10px;
-		margin-right: 100px;
+		${grid.between('centre-column-start', 'right-column-end')}
+	}
+
+	${from.leftCol} {
+		&::before {
+			content: '';
+			position: absolute;
+			left: -11px;
+			top: 0;
+			bottom: 0;
+			width: 1px;
+			background-color: ${palette('--onward-content-border')};
+		}
+
+		ol {
+			padding-left: 0;
+		}
 	}
 `;
-
-const headerStyles = css`
-	color: ${themePalette('--carousel-text')};
-	${headlineBold24};
-	padding-bottom: ${space[3]}px;
-	padding-top: ${space[1]}px;
-	margin-left: 0;
-
-	${from.tablet} {
-		${headlineBold20};
-	}
-`;
-
-const headerStylesWithUrl = css`
-	:hover {
-		text-decoration: underline;
-	}
-`;
-
-const titleStyle = css`
-	color: ${themePalette('--onward-text')};
-	display: inline-block;
-	&::first-letter {
-		text-transform: capitalize;
-	}
-`;
-
-const getDefaultCardProps = (
-	trail: TrailType,
-	absoluteServerTimes: boolean,
-	discussionApiUrl: string,
-) => {
-	const defaultProps: CardProps = {
-		linkTo: trail.url,
-		format: trail.format,
-		headlineText: trail.headline,
-		byline: trail.byline,
-		showByline: trail.showByline,
-		showQuotedHeadline: trail.showQuotedHeadline,
-		webPublicationDate: trail.webPublicationDate,
-		kickerText: trail.kickerText,
-		showPulsingDot: false,
-		showClock: false,
-		image: trail.image,
-		isCrossword: trail.isCrossword,
-		starRating: trail.starRating,
-		dataLinkName: trail.dataLinkName,
-		snapData: trail.snapData,
-		discussionApiUrl,
-		discussionId: trail.discussionId,
-		avatarUrl: trail.avatarUrl,
-		mainMedia: trail.mainMedia,
-		isExternalLink: false,
-		branding: trail.branding,
-		absoluteServerTimes,
-		imageLoading: 'lazy',
-		trailText: trail.trailText,
-		showAge: true, // TODO
-		containerType: 'related-content',
-		showTopBarDesktop: false,
-		showTopBarMobile: false,
-		aspectRatio: '5:4',
-	};
-	return defaultProps;
-};
 
 export const ScrollableSmallOnwards = (props: Props) => {
 	const trails = props.trails.slice(0, 4); // Limit to 4 cards
@@ -127,117 +61,157 @@ export const ScrollableSmallOnwards = (props: Props) => {
 	const desktopBottomCards = [2, 3];
 
 	return (
-		<Section
-			fullWidth={true}
-			borderColour={themePalette('--onward-content-border')}
-			backgroundColour={themePalette('--onward-background')}
-			showTopBorder={false}
-			showSideBorders={true}
+		<section
+			data-component={props.onwardsSource}
+			data-link="more-galleries"
+			css={css`
+				${grid.paddedContainer}
+				background-color: ${palette('--onward-background')};
+				padding-top: ${space[1]}px;
+				padding-bottom: ${space[6]}px;
+
+				${from.tablet} {
+					padding-top: 0;
+					border-left: 1px solid ${palette('--onward-content-border')};
+					border-right: 1px solid
+						${palette('--onward-content-border')};
+				}
+			`}
 		>
-			<div
-				css={wrapperStyle}
-				data-link-name={formatAttrString(props.heading)}
-			>
-				<LeftColumn
-					size={'compact'}
-					borderColour={themePalette('--onward-content-border')}
-					hasPageSkin={false} // TODO
+			<StraightLines
+				cssOverrides={[
+					css`
+						${grid.column.all}
+						padding-left: ${space[5]}px;
+						padding-right: ${space[5]}px;
+						margin-bottom: ${space[2]}px;
+						${until.tablet} {
+							display: none;
+						}
+					`,
+				]}
+				count={1}
+				color={palette('--card-border-top')}
+			/>
+			<Title title={props.heading} headingUrl={props.headingUrl} />
+			<div css={cardsContainerStyles}>
+				<ScrollableCarousel
+					carouselLength={Math.ceil(trails.length / 2)}
+					visibleCarouselSlidesOnMobile={1}
+					visibleCarouselSlidesOnTablet={2}
+					sectionId={'some-section-id-12'}
+					shouldStackCards={{
+						desktop: true,
+						mobile: true,
+					}}
+					gapSizes={{ column: 'large', row: 'medium' }}
 				>
-					<Title title={props.heading} url={props.url} />
-				</LeftColumn>
-
-				<div
-					css={containerStyles}
-					data-component={props.onwardsSource}
-					data-link={formatAttrString(props.heading)}
-				>
-					<Hide when="above" breakpoint="leftCol">
-						<Title title={props.heading} url={props.url} />
-					</Hide>
-
-					<ScrollableCarousel
-						carouselLength={Math.ceil(trails.length / 2)}
-						visibleCarouselSlidesOnMobile={1}
-						visibleCarouselSlidesOnTablet={2}
-						sectionId={'some-section-id-12'}
-						shouldStackCards={{
-							desktop: true,
-							mobile: true,
-						}}
-						gapSizes={{ column: 'large', row: 'medium' }}
-					>
-						{trails.map((trail, index) => {
-							return (
-								<li
-									key={trail.url}
-									css={[
-										css`
-											display: flex;
-											scroll-snap-align: start;
-											grid-area: span 1;
-											position: relative;
-											&::before {
-												content: '';
-												position: absolute;
-												top: 0;
-												bottom: 0;
-												left: -10px;
-												width: 1px;
-												background-color: ${themePalette(
-													'--card-border-top',
-												)};
-												transform: translateX(-50%);
-											}
-										`,
-									]}
-								>
-									{Card({
-										...getDefaultCardProps(
-											trail,
-											props.absoluteServerTimes,
-											props.discussionApiUrl,
-										),
-										mediaSize: 'small',
-										mediaPositionOnDesktop: 'left',
-										mediaPositionOnMobile: 'left',
-										headlineSizes: {
-											desktop: 'xxsmall',
-											tablet: 'xxsmall',
-											mobile: 'xxxsmall',
-										},
-										trailText: undefined,
-										supportingContent: undefined,
-										showTopBarDesktop:
-											desktopBottomCards.includes(index),
-										showTopBarMobile:
-											mobileBottomCards.includes(index),
-										canPlayInline: false,
-									})}
-								</li>
-							);
-						})}
-					</ScrollableCarousel>
-				</div>
+					{trails.map((trail, index) => {
+						return (
+							<ScrollableCarousel.Item
+								key={trail.url}
+								isStackingCarousel={true}
+								isOnwardContent={true}
+							>
+								{Card({
+									linkTo: trail.url,
+									format: trail.format,
+									headlineText: trail.headline,
+									byline: trail.byline,
+									showByline: trail.showByline,
+									showQuotedHeadline:
+										trail.showQuotedHeadline,
+									webPublicationDate:
+										trail.webPublicationDate,
+									kickerText: trail.kickerText,
+									showPulsingDot: false,
+									showClock: false,
+									image: trail.image,
+									isCrossword: trail.isCrossword,
+									starRating: trail.starRating,
+									dataLinkName: trail.dataLinkName,
+									snapData: trail.snapData,
+									discussionApiUrl: props.discussionApiUrl,
+									discussionId:
+										trail.discussion?.discussionId,
+									avatarUrl: trail.avatarUrl,
+									mainMedia: trail.mainMedia,
+									isExternalLink: false,
+									branding: trail.branding,
+									absoluteServerTimes:
+										props.absoluteServerTimes,
+									imageLoading: 'lazy',
+									showAge: true,
+									containerType: 'related-content',
+									aspectRatio: '5:4',
+									mediaSize: 'small',
+									mediaPositionOnDesktop: 'left',
+									mediaPositionOnMobile: 'left',
+									headlineSizes: {
+										desktop: 'xxsmall',
+										tablet: 'xxsmall',
+										mobile: 'xxxsmall',
+									},
+									trailText: undefined,
+									supportingContent: undefined,
+									showTopBarDesktop:
+										desktopBottomCards.includes(index),
+									showTopBarMobile:
+										mobileBottomCards.includes(index),
+									canPlayInline: false,
+								})}
+							</ScrollableCarousel.Item>
+						);
+					})}
+				</ScrollableCarousel>
 			</div>
-		</Section>
+		</section>
 	);
 };
 
-const Title = ({ title, url }: { title: string; url?: string }) =>
-	url ? (
+const Title = ({
+	title,
+	headingUrl,
+}: {
+	title: string;
+	headingUrl?: string;
+}) =>
+	headingUrl ? (
 		<a
-			css={css`
-				text-decoration: none;
-			`}
-			href={url}
-			data-link-name="section heading" // TODO
+			css={headerGridStyles}
+			href={`${headingUrl}/inpictures/all`}
+			data-link-name="section heading"
 		>
-			<h2 css={headerStyles}>
-				<span css={[headerStylesWithUrl, titleStyle]}>{title}</span>
-			</h2>
+			<h2 css={headerStyles}>{title}</h2>
 		</a>
 	) : (
-		<h2 css={headerStyles}>
-			<span css={titleStyle}>{title}</span>
-		</h2>
+		<h2 css={[headerGridStyles, headerStyles]}>{title}</h2>
 	);
+
+const headerGridStyles = css`
+	${grid.column.centre}
+	color: ${palette('--caption-text')};
+	text-decoration: none;
+	align-self: start;
+	${between.tablet.and.leftCol} {
+		margin-left: 10px;
+	}
+	${from.leftCol} {
+		${grid.column.left}
+	}
+`;
+
+const headerStyles = css`
+	color: ${palette('--carousel-text')};
+	${textSansBold17};
+	padding-bottom: ${space[3]}px;
+	padding-top: ${space[1]}px;
+
+	:hover {
+		text-decoration: underline;
+	}
+
+	${from.tablet} {
+		${textSansBold20};
+	}
+`;

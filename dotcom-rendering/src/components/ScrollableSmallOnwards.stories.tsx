@@ -18,7 +18,7 @@ export const ScrollableSmallOnwardsStory = {
 		discussionApiUrl:
 			'https://discussion.code.dev-theguardian.com/discussion-api',
 		heading: 'More on this story',
-		url: 'http://localhost:9000/more-galleries',
+		headingUrl: 'http://localhost:9000/more-galleries',
 		onwardsSource: 'more-galleries',
 		trails: [
 			{
