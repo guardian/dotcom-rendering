@@ -964,6 +964,10 @@ export const Card = ({
 								<LoopVideo
 									// sources={media.mainMedia.sources}
 									sources={[
+										// {
+										// 	src: "https://uploads.guimcode.co.uk/2025/10/07/Andy_test_6_oct--9d8d52da-da51-4ca0-9e04-ae6868c9afba-3.1.m3u8",
+										// 	mimeType: "application/vnd.apple.mpegurl"
+										// },
 										{
 											src: 'https://uploads.guimcode.co.uk/2025/10/07/Andy_test_6_oct--9d8d52da-da51-4ca0-9e04-ae6868c9afba-3.0.mp4',
 											mimeType: 'video/mp4',

@@ -368,14 +368,11 @@ export const LoopVideo = ({
 		enableSubs();
 		video.addEventListener('loadeddata', enableSubs);
 		// Some browsers fire this when the track becomes available
-		(video.textTracks as any)?.addEventListener?.('addtrack', enableSubs);
+		video.textTracks.addEventListener?.('addtrack', enableSubs);
 
 		return () => {
 			video.removeEventListener('loadeddata', enableSubs);
-			(video.textTracks as any)?.removeEventListener?.(
-				'addtrack',
-				enableSubs,
-			);
+			video.textTracks.removeEventListener?.('addtrack', enableSubs);
 		};
 	}, [subtitleSource]);
 
