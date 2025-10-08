@@ -138,8 +138,7 @@ const syndicationButtonOverrides = css`
 `;
 
 const straightLinesStyles = css`
-	display: inline;
-	position: relative;
+	display: block;
 
 	${grid.column.all}
 
@@ -237,16 +236,12 @@ export const SubMeta = ({
 				<Fragment>
 					<div css={galleryBorder}></div>
 
-					<div css={straightLinesStyles}>
-						<StraightLines
-							data-print-layout="hide"
-							count={4}
-							cssOverrides={css`
-								display: block;
-							`}
-							color={palette('--straight-lines')}
-						/>
-					</div>
+					<StraightLines
+						data-print-layout="hide"
+						count={4}
+						cssOverrides={straightLinesStyles}
+						color={palette('--straight-lines')}
+					/>
 				</Fragment>
 			)}
 			{hasLinks && (
