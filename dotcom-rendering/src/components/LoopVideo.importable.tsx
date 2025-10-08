@@ -353,13 +353,11 @@ export const LoopVideo = ({
 			if (!track) return;
 			track.mode = 'showing';
 
-			// Optional: adjust cue line safely (no VTTCue import needed)
+			// adjust cue line safely (no VTTCue import needed)
 			const cues = track.cues ? Array.from(track.cues) : [];
 			for (const cue of cues) {
 				if ('line' in cue) {
-					try {
-						(cue as any).line = -2;
-					} catch {}
+					cue.line = -2;
 				}
 			}
 		};
