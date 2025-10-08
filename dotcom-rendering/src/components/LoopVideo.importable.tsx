@@ -344,6 +344,41 @@ export const LoopVideo = ({
 		};
 	}, [uniqueId]);
 
+	useEffect(() => {
+		const video = vidRef.current;
+		if (!video) return;
+
+		const enableSubs = () => {
+			const track = video.textTracks?.[0];
+			if (!track) return;
+			track.mode = 'showing';
+
+			// Optional: adjust cue line safely (no VTTCue import needed)
+			const cues = track.cues ? Array.from(track.cues) : [];
+			for (const cue of cues) {
+				if ('line' in cue) {
+					try {
+						(cue as any).line = -2;
+					} catch {}
+				}
+			}
+		};
+
+		// run now (if things are already loaded) and when media/track become usable
+		enableSubs();
+		video.addEventListener('loadeddata', enableSubs);
+		// Some browsers fire this when the track becomes available
+		(video.textTracks as any)?.addEventListener?.('addtrack', enableSubs);
+
+		return () => {
+			video.removeEventListener('loadeddata', enableSubs);
+			(video.textTracks as any)?.removeEventListener?.(
+				'addtrack',
+				enableSubs,
+			);
+		};
+	}, [subtitleSource]);
+
 	/**
 	 * Initiates attention tracking for ophan
 	 */
@@ -486,22 +521,7 @@ export const LoopVideo = ({
 		return FallbackImageComponent;
 	}
 
-	const handleLoadedMetadata = () => {
-		if (!vidRef.current) return;
-
-		console.log('textTracks', vidRef.current.textTracks);
-
-		const track = vidRef.current.textTracks[0];
-		if (!track?.cues) return;
-
-		console.log('cues', track.cues);
-
-		for (const cue of Array.from(track.cues)) {
-			if (cue instanceof VTTCue) {
-				cue.line = -2;
-			}
-		}
-	};
+	const handleLoadedMetadata = () => {};
 
 	const handleLoadedData = () => {
 		if (vidRef.current) {

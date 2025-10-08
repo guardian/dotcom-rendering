@@ -965,13 +965,7 @@ export const Card = ({
 									// sources={media.mainMedia.sources}
 									sources={[
 										{
-											// Test loop with subtitles
-											src: 'https://uploads.guimcode.co.uk/2025/09/01/Loop__Japan_fireball--ace3fcf6-1378-41db-9d21-f3fc07072ab2-1.10.m3u8',
-											// src: 'https://uploads.guim.co.uk/2025/08/20/Allaire+loop+--83f7d9ab-b1ff-439c-9631-8febd724829b-1.m3u8',
-											mimeType: 'application/x-mpegURL',
-										},
-										{
-											src: 'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
+											src: 'https://uploads.guimcode.co.uk/2025/10/07/Andy_test_6_oct--9d8d52da-da51-4ca0-9e04-ae6868c9afba-3.0.mp4',
 											mimeType: 'video/mp4',
 										},
 									]}
@@ -987,7 +981,7 @@ export const Card = ({
 									fallbackImageAspectRatio="5:4"
 									linkTo={linkTo}
 									subtitleSource={
-										media.mainMedia.subtitleSource
+										'https://uploads.guimcode.co.uk/2025/10/07/Andy_test_6_oct--9d8d52da-da51-4ca0-9e04-ae6868c9afba-3.1captions_00001.vtt'
 									}
 									subtitleSize={subtitleSize}
 								/>
