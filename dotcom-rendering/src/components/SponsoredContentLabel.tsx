@@ -34,7 +34,7 @@ const labelStyles = css`
 `;
 
 const wrapperStyles = css`
-	padding-top: ${space[4]}px;
+	padding-top: ${space[1]}px;
 	display: flex;
 	justify-content: end;
 `;

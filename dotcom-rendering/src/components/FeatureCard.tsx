@@ -235,6 +235,10 @@ const waveformStyles = css`
 	opacity: 0.3;
 `;
 
+const wrapperStyles = css`
+	padding-top: ${space[3]}px;
+`;
+
 const getMedia = ({
 	imageUrl,
 	imageAltText,
@@ -404,7 +408,7 @@ export const FeatureCard = ({
 
 	const showCommentCount = discussionId !== undefined;
 
-	const dataAttributes = branding
+	const labsDataAttributes = branding
 		? getOphanComponents({
 				branding,
 				locationPrefix: 'front-card',
@@ -734,18 +738,20 @@ export const FeatureCard = ({
 						/>
 					)}
 					{isLabs && branding && showLabsRedesign && (
-						<SponsoredContentLabel
-							branding={branding}
-							containerPalette={containerPalette}
-							orientation="horizontal"
-							alignment="end"
-							ophanComponentLink={
-								dataAttributes?.ophanComponentLink
-							}
-							ophanComponentName={
-								dataAttributes?.ophanComponentName
-							}
-						/>
+						<div css={wrapperStyles}>
+							<SponsoredContentLabel
+								branding={branding}
+								containerPalette={containerPalette}
+								orientation="horizontal"
+								alignment="end"
+								ophanComponentLink={
+									labsDataAttributes?.ophanComponentLink
+								}
+								ophanComponentName={
+									labsDataAttributes?.ophanComponentName
+								}
+							/>
+						</div>
 					)}
 				</div>
 			</ContainerOverrides>
