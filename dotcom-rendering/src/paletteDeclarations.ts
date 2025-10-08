@@ -619,6 +619,8 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme, display }) => {
 
 const bylineAnchorDark: PaletteFunction = ({ design, theme, display }) => {
 	switch (design) {
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[86];
 		case ArticleDesign.Analysis:
 			switch (theme) {
 				case Pillar.News:
@@ -4797,7 +4799,20 @@ const seriesTitleBackgroundDark: PaletteFunction = ({
 }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
-			return sourcePalette.neutral[10];
+			switch (theme) {
+				case Pillar.Opinion:
+				case Pillar.News:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 400);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[300];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.brandAlt[400];
+			}
 		default: {
 			if (theme === ArticleSpecial.SpecialReport) {
 				return sourcePalette.brandAlt[400];

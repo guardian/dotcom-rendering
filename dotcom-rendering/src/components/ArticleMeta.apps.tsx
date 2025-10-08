@@ -336,20 +336,22 @@ export const ArticleMetaApps = ({
 						</Island>
 					</MetaGridCommentCount>
 				)}
-				<StraightLines
-					cssOverrides={[
-						stretchLines,
-						css`
-							grid-row: 4 / -4;
-						`,
-					]}
-					count={1}
-					color={
-						isLiveBlog
-							? 'rgba(255, 255, 255, 0.4)'
-							: themePalette('--article-meta-lines')
-					}
-				/>
+				{format.design !== ArticleDesign.Gallery && (
+					<StraightLines
+						cssOverrides={[
+							stretchLines,
+							css`
+								grid-row: 4 / -4;
+							`,
+						]}
+						count={1}
+						color={
+							isLiveBlog
+								? 'rgba(255, 255, 255, 0.4)'
+								: themePalette('--article-meta-lines')
+						}
+					/>
+				)}
 				<MetaGridDateline
 					isImmersiveOrAnalysisWithMultipleAuthors={
 						isImmersiveOrAnalysisWithMultipleAuthors

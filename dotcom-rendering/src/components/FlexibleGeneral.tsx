@@ -640,6 +640,7 @@ export const FlexibleGeneral = ({
 					isLastRow={cards.length === 0}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
+					showLabsRedesign={showLabsRedesign}
 				/>
 			)}
 			{groupedCards.map((row, i) => {
