@@ -140,7 +140,6 @@ type PropsAuxia = {
 
 interface ShowSignInGateAuxiaProps {
 	host: string;
-	// signInUrl: string;
 	queryParams: QueryParams;
 	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
 	abTest: CurrentSignInGateABTest;
