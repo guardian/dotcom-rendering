@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { isNonNullable } from '@guardian/libs';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
-import { decideTrail } from '../lib/decideTrail';
+import { decideTrail, dedupeTrail } from '../lib/decideTrail';
 import { useApi } from '../lib/useApi';
 import { addDiscussionIds } from '../lib/useCommentCount';
 import { palette } from '../palette';
@@ -20,6 +20,7 @@ type Props = {
 	absoluteServerTimes: boolean;
 	renderingTarget: RenderingTarget;
 	isAdFreeUser: boolean;
+	webURL: string;
 };
 
 type OnwardsResponse = {
@@ -40,9 +41,11 @@ const buildTrails = (
 	trails: FETrailType[],
 	trailLimit: number,
 	isAdFreeUser: boolean,
+	webURL: string,
 ): TrailType[] => {
 	return trails
 		.filter((trailType) => !(isTrailPaidContent(trailType) && isAdFreeUser))
+		.filter((trailType) => dedupeTrail(trailType, webURL))
 		.slice(0, trailLimit)
 		.map(decideTrail);
 };
@@ -56,6 +59,7 @@ export const FetchOnwardsData = ({
 	absoluteServerTimes,
 	renderingTarget,
 	isAdFreeUser,
+	webURL,
 }: Props) => {
 	const { data, error } = useApi<OnwardsResponse>(url);
 
@@ -68,7 +72,7 @@ export const FetchOnwardsData = ({
 	if (!data?.trails) {
 		return (
 			<Placeholder
-				height={340} // best guess at typical height
+				heights={new Map([['mobile', 340]])} // best guess at typical height
 				shouldShimmer={false}
 				backgroundColor={palette('--article-background')}
 			/>
@@ -81,11 +85,13 @@ export const FetchOnwardsData = ({
 			.filter(isNonNullable),
 	);
 
+	const trails = buildTrails(data.trails, limit, isAdFreeUser, webURL);
+
 	return (
 		<div css={minHeight}>
 			<Carousel
 				heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
-				trails={buildTrails(data.trails, limit, isAdFreeUser)}
+				trails={trails}
 				description={data.description}
 				onwardsSource={onwardsSource}
 				format={format}
