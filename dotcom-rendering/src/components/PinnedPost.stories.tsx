@@ -84,10 +84,9 @@ const block = {
 export const Sport = {
 	args: {
 		pinnedPost: block,
-
 		children: null,
 	},
-	render: ({ pinnedPost, serverTime }) => {
+	render: ({ pinnedPost }) => {
 		const format = {
 			theme: Pillar.Sport,
 			design: ArticleDesign.LiveBlog,
@@ -95,7 +94,7 @@ export const Sport = {
 		};
 		return (
 			<Wrapper format={format}>
-				<PinnedPost pinnedPost={pinnedPost} serverTime={serverTime}>
+				<PinnedPost pinnedPost={pinnedPost}>
 					<LiveBlock
 						format={format}
 						block={pinnedPost}
@@ -119,10 +118,9 @@ export const Sport = {
 export const News = {
 	args: {
 		pinnedPost: block,
-
 		children: null,
 	},
-	render: ({ pinnedPost, serverTime }) => {
+	render: ({ pinnedPost }) => {
 		const format = {
 			theme: Pillar.News,
 			design: ArticleDesign.LiveBlog,
@@ -130,7 +128,7 @@ export const News = {
 		};
 		return (
 			<Wrapper format={format}>
-				<PinnedPost pinnedPost={pinnedPost} serverTime={serverTime}>
+				<PinnedPost pinnedPost={pinnedPost}>
 					<LiveBlock
 						format={format}
 						block={pinnedPost}
@@ -154,10 +152,9 @@ export const News = {
 export const Culture = {
 	args: {
 		pinnedPost: block,
-
 		children: null,
 	},
-	render: ({ pinnedPost, serverTime }) => {
+	render: ({ pinnedPost }) => {
 		const format = {
 			theme: Pillar.Culture,
 			design: ArticleDesign.LiveBlog,
@@ -165,7 +162,7 @@ export const Culture = {
 		};
 		return (
 			<Wrapper format={format}>
-				<PinnedPost pinnedPost={pinnedPost} serverTime={serverTime}>
+				<PinnedPost pinnedPost={pinnedPost}>
 					<LiveBlock
 						format={format}
 						block={pinnedPost}
@@ -189,10 +186,9 @@ export const Culture = {
 export const Lifestyle = {
 	args: {
 		pinnedPost: block,
-
 		children: null,
 	},
-	render: ({ pinnedPost, serverTime }) => {
+	render: ({ pinnedPost }) => {
 		const format = {
 			theme: Pillar.Lifestyle,
 			design: ArticleDesign.LiveBlog,
@@ -200,7 +196,7 @@ export const Lifestyle = {
 		};
 		return (
 			<Wrapper format={format}>
-				<PinnedPost pinnedPost={pinnedPost} serverTime={serverTime}>
+				<PinnedPost pinnedPost={pinnedPost}>
 					<LiveBlock
 						format={format}
 						block={pinnedPost}
@@ -224,10 +220,9 @@ export const Lifestyle = {
 export const Opinion = {
 	args: {
 		pinnedPost: block,
-
 		children: null,
 	},
-	render: ({ pinnedPost, serverTime }) => {
+	render: ({ pinnedPost }) => {
 		const format = {
 			theme: Pillar.Opinion,
 			design: ArticleDesign.LiveBlog,
@@ -235,7 +230,7 @@ export const Opinion = {
 		};
 		return (
 			<Wrapper format={format}>
-				<PinnedPost pinnedPost={pinnedPost} serverTime={serverTime}>
+				<PinnedPost pinnedPost={pinnedPost}>
 					<LiveBlock
 						format={format}
 						block={pinnedPost}
@@ -259,10 +254,9 @@ export const Opinion = {
 export const SpecialReport = {
 	args: {
 		pinnedPost: block,
-
 		children: null,
 	},
-	render: ({ pinnedPost, serverTime }) => {
+	render: ({ pinnedPost }) => {
 		const format = {
 			theme: ArticleSpecial.SpecialReport,
 			design: ArticleDesign.LiveBlog,
@@ -270,7 +264,7 @@ export const SpecialReport = {
 		};
 		return (
 			<Wrapper format={format}>
-				<PinnedPost pinnedPost={pinnedPost} serverTime={serverTime}>
+				<PinnedPost pinnedPost={pinnedPost}>
 					<LiveBlock
 						format={format}
 						block={pinnedPost}
@@ -294,10 +288,9 @@ export const SpecialReport = {
 export const Labs = {
 	args: {
 		pinnedPost: block,
-
 		children: null,
 	},
-	render: ({ pinnedPost, serverTime }) => {
+	render: ({ pinnedPost }) => {
 		const format = {
 			theme: ArticleSpecial.Labs,
 			design: ArticleDesign.LiveBlog,
@@ -305,7 +298,7 @@ export const Labs = {
 		};
 		return (
 			<Wrapper format={format}>
-				<PinnedPost pinnedPost={pinnedPost} serverTime={serverTime}>
+				<PinnedPost pinnedPost={pinnedPost}>
 					<LiveBlock
 						format={format}
 						block={pinnedPost}

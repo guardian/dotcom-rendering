@@ -153,7 +153,6 @@ const meta = {
 		frontSectionTitle: 'Flexible general',
 		groupedTrails: emptyGroupedTrails,
 		showAge: true,
-
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
 		collectionId: 1,
