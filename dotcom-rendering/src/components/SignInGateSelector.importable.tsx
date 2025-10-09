@@ -322,15 +322,13 @@ const SignInGateSelectorAuxia = ({
 		return null;
 	}
 
-	const ctaUrlParams = {
+	const queryParams = generateQueryParams({
 		pageId,
 		host,
 		pageViewId,
 		currentTest: abTest,
 		componentId: abTest.id,
-	} satisfies Parameters<typeof generateQueryParams>[1];
-
-	const queryParams = generateQueryParams(ctaUrlParams);
+	});
 
 	return (
 		<>
