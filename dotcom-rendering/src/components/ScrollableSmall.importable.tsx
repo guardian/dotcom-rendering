@@ -82,7 +82,7 @@ export const ScrollableSmall = ({
 						<FrontCard
 							trail={trail}
 							imageLoading={imageLoading}
-							absoluteServerTimes={!!absoluteServerTimes}
+							serverTime={serverTime}
 							containerPalette={containerPalette}
 							containerType="scrollable/small"
 							showAge={!!showAge}

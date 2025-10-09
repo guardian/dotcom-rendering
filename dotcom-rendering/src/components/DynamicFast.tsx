@@ -90,9 +90,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 										trail={card}
 										containerPalette={containerPalette}
 										showAge={showAge}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
+										serverTime={serverTime}
 										imageLoading={imageLoading}
 									/>
 								) : (
@@ -100,9 +98,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 										trail={card}
 										containerPalette={containerPalette}
 										showAge={showAge}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
+										serverTime={serverTime}
 									/>
 								)}
 							</LI>

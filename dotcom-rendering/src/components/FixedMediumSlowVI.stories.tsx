@@ -27,7 +27,6 @@ export const Default = () => (
 		<FixedMediumSlowVI
 			trails={trails}
 			showAge={true}
-			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
