@@ -85,15 +85,15 @@ const labelAndAboutStyles = css`
 const labelStyles = css`
 	${textSansBold15}
 	color: ${schemePalette('--labs-header-label-text')};
-
-	${between.leftCol.and.wide} {
-		padding-bottom: ${space[1]}px;
-	}
 `;
 
 const aboutStyles = css`
 	justify-self: end;
 	${textSans14}
+
+	${between.leftCol.and.wide} {
+		margin-top: ${space[1]}px;
+	}
 `;
 
 const positionStyles = css`
