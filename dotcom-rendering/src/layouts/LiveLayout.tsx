@@ -294,6 +294,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	const showComments = article.isCommentable && !isPaidContent;
 
 	const { absoluteServerTimes = false } = article.config.switches;
+	const serverTime = absoluteServerTimes ? undefined : Date.now();
 
 	return (
 		<>

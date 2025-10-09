@@ -240,6 +240,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
 	const { absoluteServerTimes = false } = article.config.switches;
+	const serverTime = absoluteServerTimes ? undefined : Date.now();
 
 	const renderAds = canRenderAds(article);
 
