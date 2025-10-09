@@ -489,16 +489,20 @@ export const LoopVideo = ({
 	const handleLoadedMetadata = () => {
 		if (!vidRef.current) return;
 
-		console.log('textTracks', vidRef.current.textTracks);
-
 		const track = vidRef.current.textTracks[0];
 		if (!track?.cues) return;
-
-		console.log('cues', track.cues);
+		const pxFromBottom = 16;
+		const videoHeight =
+			vidRef.current.getBoundingClientRect().height ||
+			vidRef.current.clientHeight ||
+			height;
+		const percentFromTop =
+			((videoHeight - pxFromBottom) / videoHeight) * 100;
 
 		for (const cue of Array.from(track.cues)) {
 			if (cue instanceof VTTCue) {
-				cue.line = -2;
+				cue.snapToLines = false;
+				cue.line = percentFromTop;
 			}
 		}
 	};
