@@ -292,7 +292,7 @@ const renderPodcastImage = (
 export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	headlineText: string;
 	headlineSizes?: ResponsiveFontSize;
 	byline?: string;
@@ -370,7 +370,7 @@ export const FeatureCard = ({
 	discussionApiUrl,
 	discussionId,
 	isExternalLink,
-	absoluteServerTimes,
+	serverTime,
 	aspectRatio,
 	mobileAspectRatio,
 	starRating,

@@ -35,7 +35,7 @@ type Props = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 };
 
 /* ._________________.________.________.
@@ -48,14 +48,14 @@ type Props = {
 const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 	cards,
 	showAge,
-	absoluteServerTimes,
+	serverTime,
 	containerPalette,
 	imageLoading,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	containerPalette?: DCRContainerPalette;
 }) => {
 	if (!cards[0]) return null;
@@ -71,7 +71,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 					trail={big}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			</LI>
@@ -123,7 +123,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									absoluteServerTimes={absoluteServerTimes}
+									serverTime={serverTime}
 								/>
 							</LI>
 						);
@@ -137,14 +137,14 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 	cards,
 	showAge,
-	absoluteServerTimes,
+	serverTime,
 	containerPalette,
 	imageLoading,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	containerPalette?: DCRContainerPalette;
 }) => {
 	if (!cards[0]) return null;
@@ -158,7 +158,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 					trail={big}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			</LI>
@@ -184,7 +184,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									absoluteServerTimes={absoluteServerTimes}
+									serverTime={serverTime}
 								/>
 							</LI>
 						);
@@ -199,12 +199,12 @@ const ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThr
 	({
 		cards,
 		showAge,
-		absoluteServerTimes,
+		serverTime,
 		containerPalette,
 	}: {
 		cards: DCRFrontCard[];
 		showAge?: boolean;
-		absoluteServerTimes: boolean;
+		serverTime?: number;
 		containerPalette?: DCRContainerPalette;
 	}) => {
 		if (cards.length === 0) return null;
@@ -230,7 +230,7 @@ const ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThr
 								trail={card}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								absoluteServerTimes={absoluteServerTimes}
+								serverTime={serverTime}
 							/>
 						</LI>
 					);
@@ -242,14 +242,14 @@ const ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThr
 const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 	cards,
 	showAge,
-	absoluteServerTimes,
+	serverTime,
 	containerPalette,
 	imageLoading,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	containerPalette?: DCRContainerPalette;
 }) => {
 	if (!cards[0]) return null;
@@ -263,7 +263,7 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 					trail={big}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			</LI>
@@ -289,7 +289,7 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									absoluteServerTimes={absoluteServerTimes}
+									serverTime={serverTime}
 								/>
 							</LI>
 						);
@@ -305,12 +305,12 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 	showAge,
 	containerPalette,
 	imageLoading,
-	absoluteServerTimes,
+	serverTime,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	containerPalette?: DCRContainerPalette;
 }) => {
 	if (cards.length < 0) return null;
@@ -332,7 +332,7 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							absoluteServerTimes={absoluteServerTimes}
+							serverTime={serverTime}
 							imageLoading={imageLoading}
 						/>
 					</LI>
@@ -361,7 +361,7 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									absoluteServerTimes={absoluteServerTimes}
+									serverTime={serverTime}
 								/>
 							</LI>
 						);
@@ -377,12 +377,12 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 	showAge,
 	containerPalette,
 	imageLoading,
-	absoluteServerTimes,
+	serverTime,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	containerPalette?: DCRContainerPalette;
 }) => {
 	if (cards.length < 3) return null;
@@ -404,7 +404,7 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							absoluteServerTimes={absoluteServerTimes}
+							serverTime={serverTime}
 							imageLoading={imageLoading}
 						/>
 					</LI>
@@ -426,7 +426,7 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									absoluteServerTimes={absoluteServerTimes}
+									serverTime={serverTime}
 								/>
 							</LI>
 						);
@@ -441,7 +441,7 @@ export const DynamicFast = ({
 	groupedTrails,
 	containerPalette,
 	showAge,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 }: Props) => {
 	let firstSliceLayout:
@@ -574,7 +574,7 @@ export const DynamicFast = ({
 					<Card100PictureTop
 						cards={firstSliceCards}
 						showAge={showAge}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>
@@ -584,7 +584,7 @@ export const DynamicFast = ({
 					<Card100PictureRight
 						cards={firstSliceCards}
 						showAge={showAge}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>
@@ -594,7 +594,7 @@ export const DynamicFast = ({
 					<Card75_Card25
 						cards={firstSliceCards}
 						showAge={showAge}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>
@@ -604,7 +604,7 @@ export const DynamicFast = ({
 					<Card25_Card75
 						cards={firstSliceCards}
 						showAge={showAge}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>
@@ -614,7 +614,7 @@ export const DynamicFast = ({
 					<Card50_Card50
 						cards={firstSliceCards}
 						showAge={showAge}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>
@@ -631,7 +631,7 @@ export const DynamicFast = ({
 					<Card50_ColumnOfThreeCards25_ColumnOfThreeCards25
 						cards={secondSliceCards}
 						showAge={showAge}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>
@@ -641,7 +641,7 @@ export const DynamicFast = ({
 					<Card50_ColumnOfThreeCards25_ColumnOfFiveCards
 						cards={secondSliceCards}
 						showAge={showAge}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>
@@ -651,7 +651,7 @@ export const DynamicFast = ({
 					<ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25
 						cards={secondSliceCards}
 						showAge={showAge}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						containerPalette={containerPalette}
 					/>
 				);
@@ -660,7 +660,7 @@ export const DynamicFast = ({
 					<Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25
 						cards={secondSliceCards}
 						showAge={showAge}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>
@@ -670,7 +670,7 @@ export const DynamicFast = ({
 					<Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25
 						cards={secondSliceCards}
 						showAge={showAge}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>
@@ -680,7 +680,7 @@ export const DynamicFast = ({
 					<Card25_Card25_Card25_ColumnOfThreeCards25
 						cards={secondSliceCards}
 						showAge={showAge}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>
@@ -690,7 +690,7 @@ export const DynamicFast = ({
 					<Card25_Card25_Card25_Card25
 						cards={secondSliceCards}
 						showAge={showAge}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>

@@ -95,10 +95,7 @@ export const Sport = {
 		};
 		return (
 			<Wrapper format={format}>
-				<PinnedPost
-					pinnedPost={pinnedPost}
-					absoluteServerTimes={absoluteServerTimes}
-				>
+				<PinnedPost pinnedPost={pinnedPost} serverTime={serverTime}>
 					<LiveBlock
 						format={format}
 						block={pinnedPost}
@@ -133,10 +130,7 @@ export const News = {
 		};
 		return (
 			<Wrapper format={format}>
-				<PinnedPost
-					pinnedPost={pinnedPost}
-					absoluteServerTimes={absoluteServerTimes}
-				>
+				<PinnedPost pinnedPost={pinnedPost} serverTime={serverTime}>
 					<LiveBlock
 						format={format}
 						block={pinnedPost}
@@ -171,10 +165,7 @@ export const Culture = {
 		};
 		return (
 			<Wrapper format={format}>
-				<PinnedPost
-					pinnedPost={pinnedPost}
-					absoluteServerTimes={absoluteServerTimes}
-				>
+				<PinnedPost pinnedPost={pinnedPost} serverTime={serverTime}>
 					<LiveBlock
 						format={format}
 						block={pinnedPost}
@@ -209,10 +200,7 @@ export const Lifestyle = {
 		};
 		return (
 			<Wrapper format={format}>
-				<PinnedPost
-					pinnedPost={pinnedPost}
-					absoluteServerTimes={absoluteServerTimes}
-				>
+				<PinnedPost pinnedPost={pinnedPost} serverTime={serverTime}>
 					<LiveBlock
 						format={format}
 						block={pinnedPost}
@@ -247,10 +235,7 @@ export const Opinion = {
 		};
 		return (
 			<Wrapper format={format}>
-				<PinnedPost
-					pinnedPost={pinnedPost}
-					absoluteServerTimes={absoluteServerTimes}
-				>
+				<PinnedPost pinnedPost={pinnedPost} serverTime={serverTime}>
 					<LiveBlock
 						format={format}
 						block={pinnedPost}
@@ -285,10 +270,7 @@ export const SpecialReport = {
 		};
 		return (
 			<Wrapper format={format}>
-				<PinnedPost
-					pinnedPost={pinnedPost}
-					absoluteServerTimes={absoluteServerTimes}
-				>
+				<PinnedPost pinnedPost={pinnedPost} serverTime={serverTime}>
 					<LiveBlock
 						format={format}
 						block={pinnedPost}
@@ -323,10 +305,7 @@ export const Labs = {
 		};
 		return (
 			<Wrapper format={format}>
-				<PinnedPost
-					pinnedPost={pinnedPost}
-					absoluteServerTimes={absoluteServerTimes}
-				>
+				<PinnedPost pinnedPost={pinnedPost} serverTime={serverTime}>
 					<LiveBlock
 						format={format}
 						block={pinnedPost}

@@ -10,14 +10,14 @@ type Props = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 };
 
 export const FixedSmallFastVIII = ({
 	trails,
 	containerPalette,
 	showAge,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 }: Props) => {
 	if (!trails[0]) return null;
@@ -38,7 +38,7 @@ export const FixedSmallFastVIII = ({
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							absoluteServerTimes={absoluteServerTimes}
+							serverTime={serverTime}
 							imageLoading={imageLoading}
 						/>
 					</LI>
@@ -66,7 +66,7 @@ export const FixedSmallFastVIII = ({
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									absoluteServerTimes={absoluteServerTimes}
+									serverTime={serverTime}
 								/>
 							</LI>
 						);
