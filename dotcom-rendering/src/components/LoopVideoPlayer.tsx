@@ -35,7 +35,6 @@ const videoStyles = (
 	object-fit: cover;
 
 	::cue {
-		background-color: ${palette('--loop-video-subtitle-background')};
 		color: ${palette('--loop-video-subtitle-text')};
 
 		${subtitleSize === 'small' && textSans15};
