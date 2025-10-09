@@ -29,7 +29,7 @@ export const PartialRightBorder = () => {
 					}}
 				>
 					<Placeholder
-						height={500}
+						heights={new Map([['mobile', 500]])}
 						width={600}
 						shouldShimmer={false}
 					/>
@@ -58,7 +58,7 @@ export const RightBorder = () => {
 					}}
 				>
 					<Placeholder
-						height={500}
+						heights={new Map([['mobile', 500]])}
 						width={600}
 						shouldShimmer={false}
 					/>
