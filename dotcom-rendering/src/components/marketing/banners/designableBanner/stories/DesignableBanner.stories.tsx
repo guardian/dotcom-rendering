@@ -7,8 +7,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
 import {
 	choiceCardsSettings,
-	choiceCardsWithDestinationUrl,
-	choiceCardsWithDestinationUrlTwoCards,
+	choiceCardsWithMixedDestinations,
 } from '../../../lib/storybook';
 import {
 	contentNoHeading,
@@ -286,7 +285,7 @@ export const NoChoiceCardOrImage: Story = {
 	},
 };
 
-export const WithDestinationUrlAllCards: Story = {
+export const WithMixedDestinations: Story = {
 	name: 'With destinationUrl on all choice cards',
 	args: {
 		...meta.args,
@@ -302,39 +301,12 @@ export const WithDestinationUrlAllCards: Story = {
 			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
 		},
 		choiceCardAmounts: regularChoiceCardAmounts,
-		choiceCardsSettings: choiceCardsWithDestinationUrl,
+		choiceCardsSettings: choiceCardsWithMixedDestinations,
 	},
 	parameters: {
 		docs: {
 			description: {
-				story: 'All choice cards have a destinationUrl configured. The banner should use these custom URLs instead of constructing URLs with product parameters.',
-			},
-		},
-	},
-};
-
-export const WithDestinationUrlTwoCards: Story = {
-	name: 'With destinationUrl in two choice cards',
-	args: {
-		...meta.args,
-		design: {
-			...design,
-			visual: {
-				kind: 'ChoiceCards',
-				buttonColour: stringToHexColour('E5E5E5'),
-			},
-		},
-		tracking: {
-			...tracking,
-			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
-		},
-		choiceCardAmounts: regularChoiceCardAmounts,
-		choiceCardsSettings: choiceCardsWithDestinationUrlTwoCards,
-	},
-	parameters: {
-		docs: {
-			description: {
-				story: 'All choice cards have a destinationUrl configured. The banner should use these custom URLs instead of constructing URLs with product parameters.',
+				story: 'Two out of three choice cards have destination set to checkout.',
 			},
 		},
 	},

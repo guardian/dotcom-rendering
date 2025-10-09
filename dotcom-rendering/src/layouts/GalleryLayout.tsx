@@ -35,6 +35,7 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubMeta } from '../components/SubMeta';
 import { grid } from '../grid';
 import {
+	type ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
 	type ArticleTheme,
@@ -293,24 +294,12 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					}
 				/>
 			</main>
+
 			{/* More galleries container */}
-			{showMerchandisingHigh && (
-				<Section
-					fullWidth={true}
-					data-print-layout="hide"
-					padSides={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={palette('--ad-background')}
-					element="aside"
-				>
-					<AdSlot
-						data-print-layout="hide"
-						position="merchandising-high"
-						display={format.display}
-					/>
-				</Section>
-			)}
+			<MerchandisingHigh
+				show={showMerchandisingHigh}
+				display={format.display}
+			/>
 			<StoryPackage
 				absoluteServerTimes={absoluteServerTimes}
 				discussionApiUrl={discussionApiUrl}
@@ -319,7 +308,6 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 				storyPackage={gallery.storyPackage}
 				topBorder={showMerchandisingHigh}
 			/>
-
 			<Island priority="feature" defer={{ until: 'visible' }}>
 				<OnwardsUpper
 					ajaxUrl={frontendData.config.ajaxUrl}
@@ -596,6 +584,28 @@ const Meta = ({
 		) : null}
 	</div>
 );
+
+const MerchandisingHigh = (props: {
+	show: boolean;
+	display: ArticleDisplay;
+}) =>
+	props.show ? (
+		<Section
+			fullWidth={true}
+			data-print-layout="hide"
+			padSides={false}
+			showTopBorder={false}
+			showSideBorders={false}
+			backgroundColour={palette('--ad-background')}
+			element="aside"
+		>
+			<AdSlot
+				data-print-layout="hide"
+				position="merchandising-high"
+				display={props.display}
+			/>
+		</Section>
+	) : null;
 
 const StoryPackage = ({
 	storyPackage,

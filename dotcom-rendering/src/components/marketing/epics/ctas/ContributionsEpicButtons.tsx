@@ -184,7 +184,7 @@ export const ContributionsEpicButtons = ({
 
 		return {
 			text: cta.text,
-			baseUrl: getChoiceCardUrl(threeTierSelectedChoiceCard, cta.baseUrl),
+			baseUrl: getChoiceCardUrl(threeTierSelectedChoiceCard),
 		};
 	};
 

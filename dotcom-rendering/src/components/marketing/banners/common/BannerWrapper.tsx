@@ -338,6 +338,7 @@ const withBannerData =
 					tracking,
 					submitComponentEvent,
 					design,
+					promoCodes,
 				};
 
 				return (
