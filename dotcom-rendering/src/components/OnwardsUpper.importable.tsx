@@ -309,6 +309,10 @@ export const OnwardsUpper = ({
 	const canHaveCuratedContent =
 		format.design === ArticleDesign.Gallery ? isUndefined(url) : true;
 
+	const hasOnwardsContainer = !!url;
+	const showCuratedContainer =
+		!!curatedDataUrl && !isPaidContent && canHaveCuratedContent;
+
 	return (
 		<div css={onwardsWrapper}>
 			{!!url && (
@@ -325,10 +329,11 @@ export const OnwardsUpper = ({
 						absoluteServerTimes={absoluteServerTimes}
 						renderingTarget={renderingTarget}
 						isAdFreeUser={isAdFreeUser}
+						containerPosition={'first'}
 					/>
 				</Section>
 			)}
-			{!!curatedDataUrl && !isPaidContent && canHaveCuratedContent && (
+			{showCuratedContainer && (
 				<Section
 					fullWidth={true}
 					borderColour={palette('--article-section-border')}
@@ -342,6 +347,9 @@ export const OnwardsUpper = ({
 						absoluteServerTimes={absoluteServerTimes}
 						renderingTarget={renderingTarget}
 						isAdFreeUser={isAdFreeUser}
+						containerPosition={
+							hasOnwardsContainer ? 'second' : 'first'
+						}
 					/>
 				</Section>
 			)}
