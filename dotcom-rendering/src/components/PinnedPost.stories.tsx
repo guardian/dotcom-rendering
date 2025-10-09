@@ -84,10 +84,10 @@ const block = {
 export const Sport = {
 	args: {
 		pinnedPost: block,
-		absoluteServerTimes: true,
+
 		children: null,
 	},
-	render: ({ pinnedPost, absoluteServerTimes }) => {
+	render: ({ pinnedPost, serverTime }) => {
 		const format = {
 			theme: Pillar.Sport,
 			design: ArticleDesign.LiveBlog,
@@ -119,10 +119,10 @@ export const Sport = {
 export const News = {
 	args: {
 		pinnedPost: block,
-		absoluteServerTimes: true,
+
 		children: null,
 	},
-	render: ({ pinnedPost, absoluteServerTimes }) => {
+	render: ({ pinnedPost, serverTime }) => {
 		const format = {
 			theme: Pillar.News,
 			design: ArticleDesign.LiveBlog,
@@ -154,10 +154,10 @@ export const News = {
 export const Culture = {
 	args: {
 		pinnedPost: block,
-		absoluteServerTimes: true,
+
 		children: null,
 	},
-	render: ({ pinnedPost, absoluteServerTimes }) => {
+	render: ({ pinnedPost, serverTime }) => {
 		const format = {
 			theme: Pillar.Culture,
 			design: ArticleDesign.LiveBlog,
@@ -189,10 +189,10 @@ export const Culture = {
 export const Lifestyle = {
 	args: {
 		pinnedPost: block,
-		absoluteServerTimes: true,
+
 		children: null,
 	},
-	render: ({ pinnedPost, absoluteServerTimes }) => {
+	render: ({ pinnedPost, serverTime }) => {
 		const format = {
 			theme: Pillar.Lifestyle,
 			design: ArticleDesign.LiveBlog,
@@ -224,10 +224,10 @@ export const Lifestyle = {
 export const Opinion = {
 	args: {
 		pinnedPost: block,
-		absoluteServerTimes: true,
+
 		children: null,
 	},
-	render: ({ pinnedPost, absoluteServerTimes }) => {
+	render: ({ pinnedPost, serverTime }) => {
 		const format = {
 			theme: Pillar.Opinion,
 			design: ArticleDesign.LiveBlog,
@@ -259,10 +259,10 @@ export const Opinion = {
 export const SpecialReport = {
 	args: {
 		pinnedPost: block,
-		absoluteServerTimes: true,
+
 		children: null,
 	},
-	render: ({ pinnedPost, absoluteServerTimes }) => {
+	render: ({ pinnedPost, serverTime }) => {
 		const format = {
 			theme: ArticleSpecial.SpecialReport,
 			design: ArticleDesign.LiveBlog,
@@ -294,10 +294,10 @@ export const SpecialReport = {
 export const Labs = {
 	args: {
 		pinnedPost: block,
-		absoluteServerTimes: true,
+
 		children: null,
 	},
-	render: ({ pinnedPost, absoluteServerTimes }) => {
+	render: ({ pinnedPost, serverTime }) => {
 		const format = {
 			theme: ArticleSpecial.Labs,
 			design: ArticleDesign.LiveBlog,

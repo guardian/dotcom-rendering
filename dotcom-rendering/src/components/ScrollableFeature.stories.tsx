@@ -74,7 +74,7 @@ const meta = {
 	args: {
 		trails,
 		containerPalette: undefined,
-		absoluteServerTimes: true,
+
 		imageLoading: 'eager',
 		aspectRatio: '4:5',
 		collectionId: 1,

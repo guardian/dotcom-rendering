@@ -212,9 +212,7 @@ export const LatestLinks = ({
 														)
 													}
 													display="relative"
-													absoluteServerTimes={
-														absoluteServerTimes
-													}
+													serverTime={serverTime}
 													showWeekday={false}
 													showDate={true}
 													showTime={false}
