@@ -1,4 +1,4 @@
-import { isString } from '@guardian/libs';
+import { isString, isUndefined } from '@guardian/libs';
 import { getEditionFromId } from '../lib/edition';
 import { useConfig } from './ConfigContext';
 import { Island } from './Island';
@@ -70,9 +70,9 @@ export const DateTime = ({
 	 *
 	 * [1] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#the_epoch_timestamps_and_invalid_date
 	 */
-	const now = serverTime
-		? Math.floor(serverTime / ONE_MINUTE) * ONE_MINUTE
-		: MAX_DATE;
+	const now = isUndefined(serverTime)
+		? MAX_DATE
+		: Math.floor(serverTime / ONE_MINUTE) * ONE_MINUTE;
 	const then = date.getTime();
 
 	return display === 'relative' ? (
