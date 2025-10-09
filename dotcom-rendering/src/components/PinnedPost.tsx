@@ -140,14 +140,10 @@ const buttonIcon = css`
 type Props = {
 	pinnedPost: Block;
 	children: React.ReactNode;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 };
 
-export const PinnedPost = ({
-	pinnedPost,
-	children,
-	absoluteServerTimes,
-}: Props) => {
+export const PinnedPost = ({ pinnedPost, children, serverTime }: Props) => {
 	return (
 		<div
 			id="pinned-post"
@@ -174,7 +170,7 @@ export const PinnedPost = ({
 						<DateTime
 							date={new Date(pinnedPost.blockFirstPublished)}
 							display="relative"
-							absoluteServerTimes={absoluteServerTimes}
+							serverTime={serverTime}
 							showWeekday={false}
 							showDate={true}
 							showTime={false}
