@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	between,
 	from,
 	space,
 	textSans14,
@@ -75,11 +76,19 @@ const labelAndAboutStyles = css`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+
+	${between.leftCol.and.wide} {
+		flex-direction: column;
+	}
 `;
 
 const labelStyles = css`
 	${textSansBold15}
 	color: ${schemePalette('--labs-header-label-text')};
+
+	${between.leftCol.and.wide} {
+		padding-bottom: ${space[1]}px;
+	}
 `;
 
 const aboutStyles = css`
