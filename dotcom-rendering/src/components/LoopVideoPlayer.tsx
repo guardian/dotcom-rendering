@@ -165,6 +165,7 @@ export const LoopVideoPlayer = forwardRef(
 					id={loopVideoId}
 					css={videoStyles(width, height, subtitleSize)}
 					ref={ref}
+					crossOrigin="anonymous"
 					tabIndex={0}
 					data-testid="loop-video"
 					height={height}
