@@ -36,7 +36,6 @@ const meta = {
 		groupedTrails: defaultGroupedTrails,
 		containerPalette: 'LongRunningPalette',
 		imageLoading: 'eager',
-
 		showAge: false,
 	},
 	render: (args) => (
