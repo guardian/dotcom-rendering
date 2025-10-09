@@ -27,7 +27,6 @@ const cardProps: CardProps = {
 	canPlayInline: true,
 	imageLoading: 'eager',
 	discussionApiUrl: 'https://discussion.theguardian.com/discussion-api/',
-
 	aspectRatio: '4:5',
 	byline: 'Byline text',
 	showByline: true,

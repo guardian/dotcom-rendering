@@ -47,7 +47,6 @@ const basicCardProps: CardProps = {
 	imageLoading: 'eager',
 	discussionApiUrl: 'https://discussion.theguardian.com/discussion-api/',
 	showVideo: true,
-
 	headlinePosition: 'inner',
 };
 
