@@ -12,7 +12,7 @@ import { Placeholder } from './Placeholder';
 
 type Props = {
 	discussionApiUrl: string;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	isAdFreeUser: boolean;
 	ajaxUrl: string;
 	guardianBaseUrl: string;
@@ -86,7 +86,7 @@ const fetchJson = async (ajaxUrl: string): Promise<MoreGalleriesResponse> => {
 
 export const FetchMoreGalleriesData = ({
 	discussionApiUrl,
-	absoluteServerTimes,
+	serverTime,
 	isAdFreeUser,
 	ajaxUrl,
 	guardianBaseUrl,
@@ -147,7 +147,7 @@ export const FetchMoreGalleriesData = ({
 
 	return (
 		<MoreGalleries
-			absoluteServerTimes={absoluteServerTimes}
+			serverTime={serverTime}
 			trails={buildTrails(data.trails, 5, isAdFreeUser)}
 			discussionApiUrl={discussionApiUrl}
 			guardianBaseUrl={guardianBaseUrl}

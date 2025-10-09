@@ -14,7 +14,7 @@ import { Card } from './Card/Card';
 import type { Props as CardProps } from './Card/Card';
 
 type Props = {
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	trails: TrailType[];
 	discussionApiUrl: string;
 	guardianBaseUrl: string;
@@ -80,7 +80,7 @@ const cardsContainerStyles = css`
 
 const getDefaultCardProps = (
 	trail: TrailType,
-	absoluteServerTimes: boolean,
+	serverTime?: number,
 	discussionApiUrl: string,
 ) => {
 	const defaultProps: CardProps = {
@@ -105,7 +105,7 @@ const getDefaultCardProps = (
 		mainMedia: trail.mainMedia,
 		isExternalLink: false,
 		branding: trail.branding,
-		absoluteServerTimes,
+		serverTime,
 		imageLoading: 'lazy',
 		trailText: trail.trailText,
 		showAge: false,
@@ -150,7 +150,7 @@ export const MoreGalleries = (props: Props) => {
 				<MoreGalleriesSplashCard
 					defaultProps={getDefaultCardProps(
 						firstTrail,
-						props.absoluteServerTimes,
+						props.serverTime,
 						props.discussionApiUrl,
 					)}
 				/>
@@ -172,7 +172,7 @@ export const MoreGalleries = (props: Props) => {
 							<Card
 								{...getDefaultCardProps(
 									trail,
-									props.absoluteServerTimes,
+									props.serverTime,
 									props.discussionApiUrl,
 								)}
 								mediaSize="medium"
