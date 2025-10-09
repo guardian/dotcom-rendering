@@ -313,7 +313,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 				display={format.display}
 			/>
 			<StoryPackage
-				absoluteServerTimes={absoluteServerTimes}
+				serverTime={serverTime}
 				discussionApiUrl={discussionApiUrl}
 				format={format}
 				renderingTarget={renderingTarget}
@@ -337,7 +337,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					editionId={frontendData.editionId}
 					shortUrlId={frontendData.config.shortUrlId}
 					discussionApiUrl={frontendData.config.discussionApiUrl}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					renderingTarget={renderingTarget}
 					webURL={frontendData.webURL}
 				/>
@@ -624,14 +624,14 @@ const StoryPackage = ({
 	storyPackage,
 	format,
 	discussionApiUrl,
-	absoluteServerTimes,
+	serverTime,
 	renderingTarget,
 	topBorder,
 }: {
 	storyPackage: Gallery['storyPackage'];
 	format: ArticleFormat;
 	discussionApiUrl: string;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	renderingTarget: RenderingTarget;
 	topBorder: boolean;
 }) =>
@@ -650,7 +650,7 @@ const StoryPackage = ({
 					format={format}
 					leftColSize="compact"
 					discussionApiUrl={discussionApiUrl}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					renderingTarget={renderingTarget}
 				/>
 			</Island>

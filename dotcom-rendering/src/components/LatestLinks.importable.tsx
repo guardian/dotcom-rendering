@@ -19,7 +19,7 @@ import type { Alignment } from './SupportingContent';
 type Props = {
 	id: string;
 	direction: Alignment;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	isDynamo?: boolean;
 	containerPalette?: DCRContainerPalette;
 	displayHeader?: boolean;
@@ -117,7 +117,7 @@ export const LatestLinks = ({
 	direction,
 	isDynamo = false,
 	containerPalette,
-	absoluteServerTimes,
+	serverTime,
 	displayHeader = false,
 	directionOnMobile,
 }: Props) => {
