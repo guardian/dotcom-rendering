@@ -89,6 +89,7 @@ export const ProductElement = ({
 				)}
 			<LeftColProductCardContainer>
 				<LeftColProductCard
+					noHeadings={!isSubheading}
 					brandName={product.brandName}
 					productName={product.productName}
 					image={product.image.url}
