@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { between, textSans14, textSans15 } from '@guardian/source/foundations';
+import { textSans14, textSans15 } from '@guardian/source/foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
@@ -108,10 +108,6 @@ export const Details = ({
 					}
 					cursor: pointer;
 					display: flex;
-
-					${between.leftCol.and.wide} {
-						justify-content: end;
-					}
 				`,
 				colour && colourStyles(colour),
 			]}
