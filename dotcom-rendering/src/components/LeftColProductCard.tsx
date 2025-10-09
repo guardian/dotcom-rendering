@@ -26,15 +26,16 @@ export type LeftColProductCardProps = {
 	primaryRetailer: string;
 	statistics: Statistics[];
 	format: ArticleFormat;
+	noHeadings?: boolean;
 };
 
-const card = css`
+const card = (noHeadings?: boolean) => css`
 	display: none;
 	${from.wide} {
 		top: ${space[3]}px;
 		position: sticky;
 		display: block;
-		margin-top: ${space[3]}px;
+		margin-top: ${noHeadings ? 0 : space[3]}px;
 		width: 220px;
 		border-top: 1px solid ${palette('--section-border-lifestyle')};
 	}
@@ -94,11 +95,9 @@ const Statistic = ({ name, value }: Statistics) => (
 const RetailerLink = ({
 	primaryUrl,
 	primaryRetailer,
-	url,
 }: {
 	primaryUrl: string;
 	primaryRetailer: string;
-	url?: string;
 }) => (
 	<a
 		css={css`
@@ -128,8 +127,9 @@ export const LeftColProductCard = ({
 	primaryRetailer,
 	statistics,
 	format,
+	noHeadings,
 }: LeftColProductCardProps) => (
-	<div css={card}>
+	<div css={card(noHeadings)}>
 		{!!image && (
 			<Picture
 				role={'productCard'}
