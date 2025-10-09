@@ -8,6 +8,8 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
+import { Fragment } from 'react';
 import { grid } from '../grid';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import type { BaseLinkType } from '../model/extract-nav';
@@ -82,21 +84,19 @@ const listStyles = css`
 	background-repeat: no-repeat;
 `;
 
-const listWrapper = (design: ArticleDesign): SerializedStyles => {
-	if (design === ArticleDesign.Gallery) {
-		return css`
-			${grid.column.centre}
-			padding-bottom: 0.75rem;
-			margin-bottom: 6px;
-		`;
-	}
+const listWrapper = css`
+	padding-bottom: 0.75rem;
+	margin-bottom: 6px;
+	border-bottom: 1px solid ${palette('--article-border')};
+`;
 
-	return css`
-		padding-bottom: 0.75rem;
-		margin-bottom: 6px;
-		border-bottom: 1px solid ${palette('--article-border')};
-	`;
-};
+const galleryWrapperStyles = css`
+	${grid.column.centre}
+
+	${from.leftCol} {
+		${grid.between('centre-column-start', 'right-column-end')}
+	}
+`;
 
 const listItemStyles = css`
 	${textSans14};
@@ -134,6 +134,20 @@ type Props = {
 const syndicationButtonOverrides = css`
 	> a {
 		font-weight: normal;
+	}
+`;
+
+const straightLinesStyles = css`
+	display: block;
+
+	${grid.column.all}
+
+	${from.tablet} {
+		${grid.column.centre}
+	}
+
+	${from.leftCol} {
+		${grid.between('centre-column-start', 'right-column-end')}
 	}
 `;
 
@@ -219,14 +233,29 @@ export const SubMeta = ({
 			]}
 		>
 			{format.design === ArticleDesign.Gallery && (
-				<div css={galleryBorder}></div>
+				<Fragment>
+					<div css={galleryBorder}></div>
+
+					<StraightLines
+						data-print-layout="hide"
+						count={4}
+						cssOverrides={straightLinesStyles}
+						color={palette('--straight-lines')}
+					/>
+				</Fragment>
 			)}
 			{hasLinks && (
 				<>
 					<span css={labelStyles(format.design)}>
 						Explore more on these topics
 					</span>
-					<div css={listWrapper(format.design)}>
+					<div
+						css={[
+							listWrapper,
+							format.design == ArticleDesign.Gallery &&
+								galleryWrapperStyles,
+						]}
+					>
 						<ul css={listStyles}>
 							{links.map((link) => (
 								<li css={listItemStyles} key={link.url}>

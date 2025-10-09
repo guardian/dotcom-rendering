@@ -10,7 +10,6 @@ import type {
 	AbandonedBasket,
 	BannerTest,
 	BannerVariant,
-	ContributionFrequency,
 	EpicTest,
 	EpicVariant,
 	TargetingAbTest,
@@ -263,18 +262,6 @@ export const addProfileTrackingParams = (
 	)}`;
 };
 
-export const addChoiceCardsParams = (
-	url: string,
-	frequency: ContributionFrequency,
-	amount?: number | 'other',
-): string => {
-	const newParams = `selected-contribution-type=${frequency}${
-		amount !== undefined ? `&selected-amount=${amount}` : ''
-	}`;
-	const alreadyHasQueryString = url.includes('?');
-	return `${url}${alreadyHasQueryString ? '&' : '?'}${newParams}`;
-};
-
 export const addChoiceCardsOneTimeParams = (url: string): string => {
 	const newParams = `oneTime`;
 	const alreadyHasQueryString = url.includes('?');
@@ -306,26 +293,26 @@ export const addTrackingParamsToProfileUrl = (
 		: baseUrl;
 };
 
-export const getChoiceCardUrl = (
-	choiceCard: ChoiceCard,
-	baseUrl: string,
-): string => {
-	const { destinationUrl, product } = choiceCard;
+const SupportUrl = 'https://support.theguardian.com';
 
-	const url: string =
-		destinationUrl && destinationUrl.trim() !== ''
-			? destinationUrl.trim()
-			: baseUrl;
+export const getChoiceCardUrl = (choiceCard: ChoiceCard): string => {
+	const { product } = choiceCard;
+	const destination = choiceCard.destination ?? 'LandingPage';
 
 	if (product.supportTier === 'OneOff') {
-		return addChoiceCardsOneTimeParams(url);
+		if (destination === 'LandingPage') {
+			return addChoiceCardsOneTimeParams(`${SupportUrl}/contribute`);
+		} else {
+			return `${SupportUrl}/one-time-checkout`;
+		}
+	} else {
+		const path = destination === 'LandingPage' ? 'contribute' : 'checkout';
+		return addChoiceCardsProductParams(
+			`${SupportUrl}/${path}`,
+			product.supportTier,
+			product.ratePlan,
+		);
 	}
-
-	return addChoiceCardsProductParams(
-		url,
-		product.supportTier,
-		product.ratePlan,
-	);
 };
 
 // SHARED TRACKING

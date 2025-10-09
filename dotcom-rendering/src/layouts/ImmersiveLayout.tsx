@@ -50,7 +50,7 @@ import {
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
-import { decideTrail } from '../lib/decideTrail';
+import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { parse } from '../lib/slot-machine-flags';
@@ -806,8 +806,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						>
 							<Carousel
 								heading={article.storyPackage.heading}
-								trails={article.storyPackage.trails.map(
-									decideTrail,
+								trails={decideStoryPackageTrails(
+									article.storyPackage.trails,
+									article.webURL,
 								)}
 								onwardsSource="more-on-this-story"
 								format={format}
@@ -841,6 +842,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						discussionApiUrl={article.config.discussionApiUrl}
 						absoluteServerTimes={absoluteServerTimes}
 						renderingTarget={renderingTarget}
+						webURL={article.webURL}
 					/>
 				</Island>
 

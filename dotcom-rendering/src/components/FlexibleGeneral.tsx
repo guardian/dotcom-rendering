@@ -89,6 +89,7 @@ type ImmersiveCardLayoutProps = {
 	absoluteServerTimes: boolean;
 	imageLoading: Loading;
 	collectionId: number;
+	showLabsRedesign?: boolean;
 };
 
 /**
@@ -103,6 +104,7 @@ const ImmersiveCardLayout = ({
 	absoluteServerTimes,
 	imageLoading,
 	collectionId,
+	showLabsRedesign,
 }: ImmersiveCardLayoutProps) => {
 	const isLoopingVideo = card.mainMedia?.type === 'LoopVideo';
 
@@ -127,7 +129,7 @@ const ImmersiveCardLayout = ({
 					discussionId={card.discussionId}
 					mainMedia={card.mainMedia}
 					isExternalLink={card.isExternalLink}
-					// branding={card.branding}
+					branding={card.branding}
 					containerPalette={containerPalette}
 					trailText={card.trailText}
 					absoluteServerTimes={absoluteServerTimes}
@@ -139,6 +141,7 @@ const ImmersiveCardLayout = ({
 					supportingContent={card.supportingContent}
 					isImmersive={true}
 					showVideo={card.showVideo}
+					showLabsRedesign={showLabsRedesign}
 				/>
 			</LI>
 		</UL>
@@ -272,6 +275,7 @@ const SplashCardLayout = ({
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
 				collectionId={collectionId}
+				showLabsRedesign={showLabsRedesign}
 			/>
 		);
 	}
@@ -444,6 +448,7 @@ const FullWidthCardLayout = ({
 				absoluteServerTimes={absoluteServerTimes}
 				imageLoading={imageLoading}
 				collectionId={collectionId}
+				showLabsRedesign={showLabsRedesign}
 			/>
 		);
 	}
@@ -640,6 +645,7 @@ export const FlexibleGeneral = ({
 					isLastRow={cards.length === 0}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
+					showLabsRedesign={showLabsRedesign}
 				/>
 			)}
 			{groupedCards.map((row, i) => {

@@ -1,0 +1,50 @@
+name: Checks
+
+permissions:
+  contents: read
+
+on:
+  workflow_call:
+    inputs:
+      save_build_artifact:
+        description: 'Whether to save the built files as an artifact'
+        required: false
+        type: boolean
+        default: false
+    secrets:
+      FASTLY_AB_TESTING_CONFIG:
+        required: true
+      FASTLY_API_TOKEN:
+        required: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ab-testing
+    env:
+      FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_AB_TESTING_CONFIG }}
+      FASTLY_API_TOKEN: ${{ secrets.FASTLY_API_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # https://github.com/denoland/setup-deno#latest-stable-for-a-major
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v2.3
+
+      - name: Test
+        run: deno test
+
+      - name: Validate
+        run: deno run scripts/validation/index.ts
+
+      - name: Build
+        run: deno task build
+
+      - if: ${{ inputs.save_build_artifact }}
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: ab-testing-build
+          path: ab-testing/dist

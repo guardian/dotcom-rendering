@@ -38,7 +38,7 @@ import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { getSoleContributor } from '../lib/byline';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { decideTrail } from '../lib/decideTrail';
+import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -583,8 +583,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
-								trails={article.storyPackage.trails.map(
-									decideTrail,
+								trails={decideStoryPackageTrails(
+									article.storyPackage.trails,
+									article.webURL,
 								)}
 								onwardsSource="more-on-this-story"
 								format={format}
@@ -621,6 +622,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							discussionApiUrl={article.config.discussionApiUrl}
 							absoluteServerTimes={absoluteServerTimes}
 							renderingTarget={renderingTarget}
+							webURL={article.webURL}
 						/>
 					</Island>
 				)}

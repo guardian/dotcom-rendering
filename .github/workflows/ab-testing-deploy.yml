@@ -1,0 +1,44 @@
+name: 🧪 Deploy AB Testing Config
+
+permissions:
+  contents: read
+
+on:
+  workflow_call:
+    inputs:
+      stage:
+        description: 'Stage to deploy to (e.g., code, prod)'
+        required: true
+        type: string
+    secrets:
+      FASTLY_AB_TESTING_CONFIG:
+        required: true
+      FASTLY_API_TOKEN:
+        required: true
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ab-testing
+    steps:
+      - uses: actions/checkout@v4
+
+      # https://github.com/denoland/setup-deno#latest-stable-for-a-major
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v2.3
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v5.0.0
+        with:
+          name: ab-testing-build
+          path: ab-testing/dist
+
+      - name: Deploy
+        run: deno run deploy
+        env:
+          FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_AB_TESTING_CONFIG }}
+          FASTLY_API_TOKEN: ${{ secrets.FASTLY_API_TOKEN }}
