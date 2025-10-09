@@ -5,6 +5,7 @@ import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
 import { usePageViewId } from '../lib/usePageViewId';
 import type { RenderingTarget } from '../types/renderingTarget';
+import type { QueryParams } from './AuthProviderButtons/types';
 import { useConfig } from './ConfigContext';
 import type { ComponentEventParams } from './SignInGate/componentEventTracking';
 import { submitComponentEventTracking } from './SignInGate/componentEventTracking';
@@ -35,26 +36,21 @@ type Props = {
 	auxiaGateDisplayData?: AuxiaGateDisplayData | undefined;
 };
 
-// function to generate the profile.theguardian.com url with tracking params
-// and the return url (link to current article page)
-const generateGatewayUrl = (
-	tab: 'register' | 'signin',
-	{
-		pageId,
-		pageViewId,
-		idUrl,
-		host,
-		currentTest,
-		componentId,
-	}: {
-		pageId: string;
-		pageViewId: string;
-		idUrl: string;
-		host: string;
-		currentTest: CurrentSignInGateABTest;
-		componentId?: string;
-	},
-) => {
+// function to generate the params for use by the profile.theguardian.com url
+const generateQueryParams = ({
+	pageId,
+	pageViewId,
+	host,
+	currentTest,
+	componentId,
+}: {
+	pageId: string;
+	pageViewId: string;
+	idUrl: string;
+	host: string;
+	currentTest: CurrentSignInGateABTest;
+	componentId?: string;
+}): QueryParams => {
 	// url of the article, return user here after sign in/registration
 	const returnUrl = `${host}/${pageId}`;
 
@@ -69,9 +65,10 @@ const generateGatewayUrl = (
 		viewId: pageViewId,
 	};
 
-	return `${idUrl}/${tab}?returnUrl=${returnUrl}&componentEventParams=${encodeURIComponent(
-		constructQuery(queryParams),
-	)}`;
+	return {
+		returnUrl,
+		componentEventParams: encodeURIComponent(constructQuery(queryParams)),
+	};
 };
 
 // -------------------------------
@@ -90,6 +87,7 @@ export const SignInGateSelector = ({
 	if (!pageIdIsAllowedForGating(pageId)) {
 		return <></>;
 	}
+	console.log({ idUrl });
 
 	const signInGateVersion = getAuxiaGateVersion(
 		auxiaGateDisplayData?.auxiaData.userTreatment,
@@ -148,7 +146,8 @@ type PropsAuxia = {
 
 interface ShowSignInGateAuxiaProps {
 	host: string;
-	signInUrl: string;
+	// signInUrl: string;
+	queryParams: QueryParams;
 	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
 	abTest: CurrentSignInGateABTest;
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
@@ -339,7 +338,7 @@ const SignInGateSelectorAuxia = ({
 		componentId: abTest.id,
 	} satisfies Parameters<typeof generateGatewayUrl>[1];
 
-	const signInUrl = generateGatewayUrl('signin', ctaUrlParams);
+	const queryParams = generateQueryParams(ctaUrlParams);
 
 	return (
 		<>
@@ -347,7 +346,7 @@ const SignInGateSelectorAuxia = ({
 				auxiaGateDisplayData?.auxiaData.userTreatment !== undefined && (
 					<ShowSignInGateAuxia
 						host={host}
-						signInUrl={signInUrl}
+						queryParams={queryParams}
 						// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
 						setShowGate={(show) => setIsGateDismissed(!show)}
 						abTest={buildAbTestTrackingAuxiaVariant(
@@ -396,7 +395,7 @@ const SignInGateSelectorAuxia = ({
 
 const ShowSignInGateAuxia = ({
 	host,
-	signInUrl,
+	queryParams,
 	setShowGate,
 	abTest,
 	userTreatment,
@@ -491,7 +490,7 @@ const ShowSignInGateAuxia = ({
 
 	const commonProps = {
 		guUrl: host,
-		signInUrl,
+		queryParams,
 		dismissGate: () => {
 			setShowGate(false);
 		},
