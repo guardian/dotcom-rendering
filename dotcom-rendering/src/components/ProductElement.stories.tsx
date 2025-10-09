@@ -32,7 +32,7 @@ const product: ProductBlockElement = {
 			height: '500',
 			width: '500',
 		},
-		mediaType: 'Cartoon',
+		mediaType: 'Image',
 		mimeType: 'image/jpeg',
 		url: 'https://media.guim.co.uk/ed32f52c10d742be18c4ff1b218dce611e71f57e/500_0_3000_3000/master/3000.jpg',
 	},

@@ -99,29 +99,6 @@ const ButtonContainer = ({ children }: { children: ReactNode }) => (
 	</div>
 );
 
-const RetailerLink = ({
-	primaryUrl,
-	primaryRetailer,
-}: {
-	primaryUrl: string;
-	primaryRetailer: string;
-}) => (
-	<a
-		css={css`
-			color: ${palette('--article-text')};
-			border-bottom: 1px solid ${palette('--article-link-border')};
-			text-decoration: none;
-			:hover,
-			:active {
-				border-bottom: 1px solid ${palette('--article-text')};
-			}
-		`}
-		href={primaryUrl}
-	>
-		{primaryRetailer}
-	</a>
-);
-
 const ProductInfoContainer = ({ children }: { children: ReactNode }) => (
 	<div css={productInfoContainer}>{children}</div>
 );
@@ -154,13 +131,7 @@ export const InlineProductCard = ({
 		<ProductInfoContainer>
 			<div css={primaryHeading}>{brandName}</div>
 			<div>{productName}</div>
-			<div>
-				<strong>{primaryPrice}</strong> at{' '}
-				<RetailerLink
-					primaryUrl={primaryUrl}
-					primaryRetailer={primaryRetailer}
-				/>
-			</div>
+			<strong>{primaryPrice}</strong>
 		</ProductInfoContainer>
 		<ButtonContainer>
 			<ProductLinkButton

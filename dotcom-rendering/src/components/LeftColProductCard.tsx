@@ -51,7 +51,7 @@ const card = (noHeadings?: boolean) => css`
 const productInfoContainer = css`
 	display: grid;
 	row-gap: ${space[1]}px;
-	padding: 0 10px 8px 0;
+	padding: ${space[1]}px 10px ${space[2]}px 0;
 `;
 
 const primaryHeading = css`
@@ -92,29 +92,6 @@ const Statistic = ({ name, value }: Statistics) => (
 	</div>
 );
 
-const RetailerLink = ({
-	primaryUrl,
-	primaryRetailer,
-}: {
-	primaryUrl: string;
-	primaryRetailer: string;
-}) => (
-	<a
-		css={css`
-			color: ${palette('--article-text')};
-			border-bottom: 1px solid ${palette('--article-link-border')};
-			text-decoration: none;
-			:hover,
-			:active {
-				border-bottom: 1px solid ${palette('--article-text')};
-			}
-		`}
-		href={primaryUrl}
-	>
-		{primaryRetailer}
-	</a>
-);
-
 //todo -- make this a proper image generateSources() etc.
 
 export const LeftColProductCard = ({
@@ -145,11 +122,7 @@ export const LeftColProductCard = ({
 			<div css={primaryHeading}>{brandName}</div>
 			<div css={secondaryHeading}>{productName}</div>
 			<div css={priceRowStyle}>
-				<strong>{primaryPrice}</strong> at{' '}
-				<RetailerLink
-					primaryUrl={primaryUrl}
-					primaryRetailer={primaryRetailer}
-				/>
+				<strong>{primaryPrice}</strong>
 			</div>
 		</div>
 		<div css={buttonOverride}>
