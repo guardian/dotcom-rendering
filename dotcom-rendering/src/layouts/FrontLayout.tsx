@@ -111,6 +111,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		editionId,
 	} = front;
 
+	const serverTime = absoluteServerTimes ? undefined : Date.now();
+
 	const renderAds = canRenderAds(front);
 
 	const hasPageSkin = renderAds && hasPageSkinConfig;
@@ -469,9 +471,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											collection.containerPalette
 										}
 										imageLoading={imageLoading}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
+										serverTime={serverTime}
 										aspectRatio={
 											collection.aspectRatio ??
 											fallbackAspectRatio(

@@ -309,6 +309,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 	const renderAds = canRenderAds(article);
 
 	const { absoluteServerTimes = false } = article.config.switches;
+	const serverTime = absoluteServerTimes ? undefined : Date.now();
 
 	return (
 		<>
