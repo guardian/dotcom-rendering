@@ -31,7 +31,6 @@ type Props = {
 	isPreview: boolean;
 	host?: string;
 	pageId: string;
-	idUrl?: string;
 	contributionsServiceUrl: string;
 	auxiaGateDisplayData?: AuxiaGateDisplayData | undefined;
 };
@@ -46,7 +45,6 @@ const generateQueryParams = ({
 }: {
 	pageId: string;
 	pageViewId: string;
-	idUrl: string;
 	host: string;
 	currentTest: CurrentSignInGateABTest;
 	componentId?: string;
@@ -80,14 +78,12 @@ export const SignInGateSelector = ({
 	isPreview,
 	host = 'https://theguardian.com/',
 	pageId, // pageId is the path without starting slash
-	idUrl = 'https://profile.theguardian.com',
 	contributionsServiceUrl,
 	auxiaGateDisplayData,
 }: Props) => {
 	if (!pageIdIsAllowedForGating(pageId)) {
 		return <></>;
 	}
-	console.log({ idUrl });
 
 	const signInGateVersion = getAuxiaGateVersion(
 		auxiaGateDisplayData?.auxiaData.userTreatment,
@@ -97,7 +93,6 @@ export const SignInGateSelector = ({
 		<SignInGateSelectorAuxia
 			host={host}
 			pageId={pageId}
-			idUrl={idUrl}
 			contributionsServiceUrl={contributionsServiceUrl}
 			isPreview={isPreview}
 			isPaidContent={isPaidContent}
@@ -133,7 +128,6 @@ export const SignInGateSelector = ({
 type PropsAuxia = {
 	host?: string;
 	pageId: string;
-	idUrl: string;
 	contributionsServiceUrl: string;
 	isPreview: boolean;
 	isPaidContent: boolean;
@@ -272,7 +266,6 @@ export const getAuxiaGateVersion = (
 const SignInGateSelectorAuxia = ({
 	host = 'https://theguardian.com/',
 	pageId,
-	idUrl,
 	contributionsServiceUrl,
 	isPreview,
 	isPaidContent,
@@ -333,10 +326,9 @@ const SignInGateSelectorAuxia = ({
 		pageId,
 		host,
 		pageViewId,
-		idUrl,
 		currentTest: abTest,
 		componentId: abTest.id,
-	} satisfies Parameters<typeof generateGatewayUrl>[1];
+	} satisfies Parameters<typeof generateQueryParams>[1];
 
 	const queryParams = generateQueryParams(ctaUrlParams);
 
