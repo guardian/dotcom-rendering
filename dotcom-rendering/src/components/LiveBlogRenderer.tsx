@@ -67,7 +67,7 @@ export const LiveBlogRenderer = ({
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const isWeb = renderingTarget === 'Web';
-	const { absoluteServerTimes = false } = switches;
+	// TODO: const { absoluteServerTimes = false } = switches;
 
 	return (
 		<>
@@ -76,7 +76,10 @@ export const LiveBlogRenderer = ({
 					<Island defer={{ until: 'idle' }} priority="feature">
 						<EnhancePinnedPost />
 					</Island>
-					<PinnedPost pinnedPost={pinnedPost} serverTime={serverTime}>
+					<PinnedPost
+						pinnedPost={pinnedPost}
+						// TODO: serverTime={serverTime}
+					>
 						<LiveBlock
 							format={format}
 							block={pinnedPost}
@@ -103,7 +106,7 @@ export const LiveBlogRenderer = ({
 							keyEvents={keyEvents}
 							filterKeyEvents={filterKeyEvents}
 							id={'key-events-carousel-mobile'}
-							serverTime={serverTime}
+							// TODO: serverTime={serverTime}
 							renderingTarget={renderingTarget}
 						/>
 					</Island>

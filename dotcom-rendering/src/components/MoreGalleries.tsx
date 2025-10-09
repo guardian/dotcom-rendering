@@ -80,8 +80,8 @@ const cardsContainerStyles = css`
 
 const getDefaultCardProps = (
 	trail: TrailType,
-	serverTime?: number,
 	discussionApiUrl: string,
+	serverTime?: number,
 ) => {
 	const defaultProps: CardProps = {
 		linkTo: trail.url,
@@ -150,8 +150,8 @@ export const MoreGalleries = (props: Props) => {
 				<MoreGalleriesSplashCard
 					defaultProps={getDefaultCardProps(
 						firstTrail,
-						props.serverTime,
 						props.discussionApiUrl,
+						props.serverTime,
 					)}
 				/>
 				<StraightLines
@@ -172,8 +172,8 @@ export const MoreGalleries = (props: Props) => {
 							<Card
 								{...getDefaultCardProps(
 									trail,
-									props.serverTime,
 									props.discussionApiUrl,
+									props.serverTime,
 								)}
 								mediaSize="medium"
 							/>

@@ -230,7 +230,6 @@ describe('Island: server-side rendering', () => {
 						editionId={'UK'}
 						shortUrlId=""
 						discussionApiUrl=""
-						absoluteServerTimes={true}
 						renderingTarget="Web"
 						webURL={''}
 					/>
