@@ -35,7 +35,6 @@ const videoStyles = (
 	object-fit: cover;
 
 	::cue {
-		background-color: ${palette('--loop-video-subtitle-background')};
 		color: ${palette('--loop-video-subtitle-text')};
 
 		${subtitleSize === 'small' && textSans15};
@@ -163,6 +162,7 @@ export const LoopVideoPlayer = forwardRef(
 			<>
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Captions will be considered later. */}
 				<video
+					crossOrigin="anonymous"
 					id={loopVideoId}
 					css={videoStyles(width, height, subtitleSize)}
 					ref={ref}
@@ -211,6 +211,8 @@ export const LoopVideoPlayer = forwardRef(
 							default={true}
 							kind="subtitles"
 							src={subtitleSource}
+							srcLang="en"
+							label="English"
 						/>
 					)}
 					{FallbackImageComponent}
