@@ -117,7 +117,7 @@ export const ScrollableMedium = ({
 						<FrontCard
 							trail={trail}
 							imageLoading={imageLoading}
-							absoluteServerTimes={!!absoluteServerTimes}
+							serverTime={serverTime}
 							containerPalette={containerPalette}
 							containerType="scrollable/medium"
 							showAge={!!showAge}
