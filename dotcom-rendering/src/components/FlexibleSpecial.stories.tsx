@@ -83,7 +83,6 @@ const meta = {
 	args: {
 		groupedTrails: emptyGroupedTrails,
 		showAge: true,
-
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
 		frontSectionTitle: 'Flexible special',

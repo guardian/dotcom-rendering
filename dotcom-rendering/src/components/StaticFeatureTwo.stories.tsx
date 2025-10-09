@@ -25,7 +25,6 @@ const meta = {
 	},
 	args: {
 		trails: trails.slice(0, 2),
-
 		imageLoading: 'eager',
 		aspectRatio: '4:5',
 		collectionId: 1,

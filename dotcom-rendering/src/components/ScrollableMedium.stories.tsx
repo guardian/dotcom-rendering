@@ -22,7 +22,6 @@ const meta = {
 		trails,
 		containerPalette: undefined,
 		showAge: true,
-
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
 	},
