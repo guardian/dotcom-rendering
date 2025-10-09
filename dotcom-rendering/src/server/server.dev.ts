@@ -1,3 +1,4 @@
+import react from '@vitejs/plugin-react-swc';
 import express, { type Handler, Router } from 'express';
 import { createServer } from 'vite';
 import svgr from 'vite-plugin-svgr';
@@ -136,7 +137,23 @@ export const devServer = async (): Promise<void> => {
 	const vite = await createServer({
 		server: { middlewareMode: true },
 		appType: 'custom',
-		plugins: [svgr()],
+		plugins: [
+			react({
+				jsxImportSource: '@emotion/react',
+				parserConfig: { tsx: true },
+			}),
+			svgr({
+				// svgr options: https://react-svgr.com/docs/options/
+				svgrOptions: {
+					exportType: 'default',
+					ref: true,
+					svgo: false,
+					titleProp: true,
+				},
+				include: '**/*.svg',
+			}),
+		],
+		// plugins: [svgr()],
 	});
 	console.log('!!! Vite httpServer:', vite.httpServer);
 

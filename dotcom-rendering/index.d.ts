@@ -15,10 +15,20 @@ declare module 'dynamic-import-polyfill' {
 }
 
 // SVG handling
+// declare module '*.svg' {
+// 	const content: any;
+// 	// eslint-disable-next-line import/no-default-export -- This is how we import SVGs
+// 	export default content;
+// }
 declare module '*.svg' {
-	const content: any;
-	// eslint-disable-next-line import/no-default-export -- This is how we import SVGs
-	export default content;
+	import type React from 'react';
+
+	const ReactComponent: React.FunctionComponent<
+		React.SVGProps<SVGSVGElement> & { title?: string }
+	>;
+
+	// eslint-disable-next-line import/no-default-export -- vite poc
+	export default ReactComponent;
 }
 
 // Extend PerformanceEntry from lib.dom.ts with current 'In Draft' properties (to allow access as use in browsers that support)
