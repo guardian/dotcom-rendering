@@ -1,5 +1,12 @@
 packages:
-  - 'apps-rendering'
-  - 'dotcom-rendering'
-  - 'libs/**'
-  - 'ab-testing'
+  - apps-rendering
+  - dotcom-rendering
+  - ab-testing
+
+onlyBuiltDependencies:
+  - '@swc/core'
+  - aws-sdk
+  - core-js
+  - esbuild
+
+nodeLinker: isolated
