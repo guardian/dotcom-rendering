@@ -113,6 +113,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 		frontendData.isCommentable && !frontendData.config.isPaidContent;
 
 	const { absoluteServerTimes = false } = switches;
+	const serverTime = absoluteServerTimes ? undefined : Date.now();
 
 	return (
 		<>
@@ -202,9 +203,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						ajaxUrl={gallery.frontendData.config.ajaxUrl}
 						guardianBaseUrl={gallery.frontendData.guardianBaseURL}
 						discussionApiUrl={discussionApiUrl}
-						absoluteServerTimes={
-							switches['absoluteServerTimes'] ?? false
-						}
+						serverTime={serverTime}
 						isAdFreeUser={frontendData.isAdFreeUser}
 					/>
 				</Island>

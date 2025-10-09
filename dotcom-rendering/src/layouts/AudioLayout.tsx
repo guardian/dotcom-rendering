@@ -145,6 +145,7 @@ export const AudioLayout = (props: WebProps) => {
 	const showBodyEndSlot = parse(article.slotMachineFlags ?? '').showBodyEnd;
 
 	const { absoluteServerTimes = false } = article.config.switches;
+	const serverTime = absoluteServerTimes ? undefined : Date.now();
 
 	const showComments = article.isCommentable && !isPaidContent;
 

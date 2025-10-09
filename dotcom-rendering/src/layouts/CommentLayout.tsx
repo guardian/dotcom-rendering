@@ -304,6 +304,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 	const renderAds = canRenderAds(article);
 
 	const { absoluteServerTimes = false } = article.config.switches;
+	const serverTime = absoluteServerTimes ? undefined : Date.now();
 
 	return (
 		<>

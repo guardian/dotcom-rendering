@@ -248,6 +248,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const { absoluteServerTimes = false } = article.config.switches;
+	const serverTime = absoluteServerTimes ? undefined : Date.now();
 
 	return (
 		<>

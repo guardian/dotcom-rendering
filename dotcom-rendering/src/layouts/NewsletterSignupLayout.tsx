@@ -214,6 +214,7 @@ export const NewsletterSignupLayout = ({
 	const isWeb = renderingTarget === 'Web';
 
 	const { absoluteServerTimes = false } = article.config.switches;
+	const serverTime = absoluteServerTimes ? undefined : Date.now();
 
 	return (
 		<>

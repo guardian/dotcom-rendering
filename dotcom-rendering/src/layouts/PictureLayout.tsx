@@ -278,6 +278,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 	const displayAvatarUrl = avatarUrl ? true : false;
 
 	const { absoluteServerTimes = false } = article.config.switches;
+	const serverTime = absoluteServerTimes ? undefined : Date.now();
 
 	return (
 		<>
