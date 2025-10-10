@@ -43,7 +43,7 @@ type Props = {
 	onwardsSource: OnwardsSource;
 	leftColSize: LeftColSize;
 	discussionApiUrl: string;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	renderingTarget: RenderingTarget;
 };
 
@@ -449,7 +449,7 @@ type CarouselCardProps = {
 	linkTo: string;
 	headlineText: string;
 	webPublicationDate: string;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	imageLoading: Loading;
 	kickerText?: string;
 	image?: DCRFrontImage;
@@ -483,7 +483,7 @@ const CarouselCard = ({
 	imageLoading,
 	discussionApiUrl,
 	isOnwardContent,
-	absoluteServerTimes,
+	serverTime,
 	starRating,
 	index,
 }: CarouselCardProps) => {
@@ -527,7 +527,7 @@ const CarouselCard = ({
 				isOnwardContent={isOnwardContent}
 				mediaPositionOnDesktop={cardImagePosition}
 				mediaPositionOnMobile={cardImagePosition}
-				absoluteServerTimes={absoluteServerTimes}
+				serverTime={serverTime}
 				starRating={starRating}
 				index={index}
 				showTopBarDesktop={!isOnwardContent}
@@ -751,7 +751,7 @@ export const Carousel = ({
 	leftColSize,
 	discussionApiUrl,
 	isOnwardContent = true,
-	absoluteServerTimes,
+	serverTime,
 	renderingTarget,
 	...props
 }: ArticleProps | FrontProps) => {
@@ -973,7 +973,7 @@ export const Carousel = ({
 									linkTo={linkTo}
 									headlineText={headlineText}
 									webPublicationDate={webPublicationDate}
-									absoluteServerTimes={absoluteServerTimes}
+									serverTime={serverTime}
 									image={image}
 									kickerText={kickerText}
 									dataLinkName={`carousel-small-card-position-${i}`}

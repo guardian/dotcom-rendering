@@ -67,7 +67,7 @@ export const LiveBlogRenderer = ({
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const isWeb = renderingTarget === 'Web';
-	const { absoluteServerTimes = false } = switches;
+	// TODO: const { absoluteServerTimes = false } = switches;
 
 	return (
 		<>
@@ -78,7 +78,7 @@ export const LiveBlogRenderer = ({
 					</Island>
 					<PinnedPost
 						pinnedPost={pinnedPost}
-						absoluteServerTimes={absoluteServerTimes}
+						// TODO: serverTime={serverTime}
 					>
 						<LiveBlock
 							format={format}
@@ -106,7 +106,7 @@ export const LiveBlogRenderer = ({
 							keyEvents={keyEvents}
 							filterKeyEvents={filterKeyEvents}
 							id={'key-events-carousel-mobile'}
-							absoluteServerTimes={absoluteServerTimes}
+							// TODO: serverTime={serverTime}
 							renderingTarget={renderingTarget}
 						/>
 					</Island>

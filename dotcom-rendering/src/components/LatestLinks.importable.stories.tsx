@@ -163,7 +163,6 @@ export const WorldCupFinal2023 = () => {
 						direction="horizontal"
 						containerPalette={containerPalette}
 						isDynamo={true}
-						absoluteServerTimes={true}
 					/>
 				</Island>
 			</Wrapper>
@@ -196,7 +195,6 @@ export const LondonPride2022 = () => {
 				<LatestLinks
 					id="/world/live/2022/jul/02/pride-in-london-2022-huge-turnout-expected-at-first-march-since-pandemic-live-updates"
 					direction="horizontal"
-					absoluteServerTimes={true}
 				/>
 			</Island>
 		</Wrapper>
@@ -228,7 +226,6 @@ export const WithHeader = () => {
 				<LatestLinks
 					id="/world/live/2022/jul/02/pride-in-london-2022-huge-turnout-expected-at-first-march-since-pandemic-live-updates"
 					direction="horizontal"
-					absoluteServerTimes={true}
 					displayHeader={true}
 				/>
 			</Island>
