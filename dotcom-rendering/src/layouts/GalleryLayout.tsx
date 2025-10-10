@@ -237,7 +237,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					const isImage =
 						element._type ===
 						'model.dotcomrendering.pageElements.ImageBlockElement';
-					const shouldShowAds =
+					const isAdPlaceholder =
 						element._type ===
 						'model.dotcomrendering.pageElements.AdPlaceholderBlockElement';
 					return (
@@ -251,7 +251,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 									renderingTarget={props.renderingTarget}
 								/>
 							)}
-							{shouldShowAds && renderAds && (
+							{isAdPlaceholder && renderAds && (
 								<>
 									{isWeb && (
 										<div css={galleryItemAdvertStyles}>
@@ -263,13 +263,17 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 												<Hide until="tablet">
 													<DesktopAdSlot
 														renderAds={renderAds}
-														adSlotIndex={index}
+														adSlotIndex={
+															element.adPosition
+														}
 													/>
 												</Hide>
 												<Hide from="tablet">
 													<MobileAdSlot
 														renderAds={renderAds}
-														adSlotIndex={index}
+														adSlotIndex={
+															element.adPosition
+														}
 													/>
 												</Hide>
 											</div>
