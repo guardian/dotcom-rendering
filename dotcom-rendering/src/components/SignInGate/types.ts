@@ -2,6 +2,7 @@ import type { CountryCode } from '@guardian/libs';
 import { isObject, isOneOf, isString } from '@guardian/libs';
 import type { EditionId } from '../../lib/edition';
 import type { TagType } from '../../types/tag';
+import type { QueryParams } from '../AuthProviderButtons/types';
 
 export type CanShowGateProps = {
 	isSignedIn: boolean;
@@ -238,7 +239,7 @@ export interface AuxiaGateDisplayData {
 
 export type SignInGatePropsAuxia = {
 	guUrl: string;
-	signInUrl: string;
+	queryParams: QueryParams;
 	dismissGate: () => void;
 	ophanComponentId: string;
 	abTest?: CurrentSignInGateABTest;

@@ -18,6 +18,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Caption } from '../components/Caption';
 import { Carousel } from '../components/Carousel.importable';
 import { DiscussionLayout } from '../components/DiscussionLayout';
+import { FetchMoreGalleriesData } from '../components/FetchMoreGalleriesData.importable';
 import { Footer } from '../components/Footer';
 import { DesktopAdSlot, MobileAdSlot } from '../components/GalleryAdSlots';
 import { GalleryImage } from '../components/GalleryImage';
@@ -293,6 +294,17 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						frontendData.showBottomSocialButtons && isWeb
 					}
 				/>
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<FetchMoreGalleriesData
+						ajaxUrl={gallery.frontendData.config.ajaxUrl}
+						guardianBaseUrl={gallery.frontendData.guardianBaseURL}
+						discussionApiUrl={discussionApiUrl}
+						absoluteServerTimes={
+							switches['absoluteServerTimes'] ?? false
+						}
+						isAdFreeUser={frontendData.isAdFreeUser}
+					/>
+				</Island>
 			</main>
 
 			{/* More galleries container */}

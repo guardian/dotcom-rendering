@@ -78,9 +78,6 @@ importers:
       '@guardian/content-atom-model':
         specifier: 6.1.0
         version: 6.1.0
-      '@guardian/eslint-config':
-        specifier: 7.0.1
-        version: 7.0.1(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)(tslib@2.6.2)
       '@guardian/eslint-config-typescript':
         specifier: 9.0.1
         version: 9.0.1(eslint@8.56.0)(tslib@2.6.2)(typescript@5.5.3)

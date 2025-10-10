@@ -5144,6 +5144,12 @@
                 },
                 "mainMedia": {
                     "$ref": "#/definitions/MainMedia"
+                },
+                "trailText": {
+                    "type": "string"
+                },
+                "galleryCount": {
+                    "type": "number"
                 }
             },
             "required": [
