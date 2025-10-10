@@ -1,4 +1,4 @@
-import { isString } from '@guardian/libs';
+import { isString, isUndefined } from '@guardian/libs';
 import { getEditionFromId } from '../lib/edition';
 import { useConfig } from './ConfigContext';
 import { useDateTime } from './DateTimeContext';
@@ -65,16 +65,17 @@ export const DateTime = ({
 	const serverTime = useDateTime();
 
 	/**
-	 * Server time (if set) is rounded down to the previous minute to ensure
-	 * relative times rarely go backwards. If unset we use the maximum value
-	 * that can be represented by a `Date` object [1] to force display as an
-	 * absolute date due to `then` being far in the past.
+	 * `serverTime` is rounded down to the previous minute to ensure relative
+	 * times rarely go backwards. If undefined or `absoluteServerTimes` is true
+	 * we use the maximum value that can be represented by a `Date` object [1]
+	 * to force display as an absolute date due to `then` being far in the past.
 	 *
 	 * [1] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#the_epoch_timestamps_and_invalid_date
 	 */
-	const now = serverTime
-		? Math.floor(serverTime / ONE_MINUTE) * ONE_MINUTE
-		: MAX_DATE;
+	const now =
+		isUndefined(serverTime) || absoluteServerTimes
+			? MAX_DATE
+			: Math.floor(serverTime / ONE_MINUTE) * ONE_MINUTE;
 	const then = date.getTime();
 
 	return display === 'relative' ? (
