@@ -38,7 +38,6 @@ const sampleProductCard: InlineProductCardProps = {
 	primaryUrl: 'https://www.aircraft.com/lume',
 	primaryCTA: 'Buy at AirCraft',
 	primaryPrice: '£199.99',
-	primaryRetailer: 'AirCraft',
 	secondaryCTA: '£199.99 at Amazon',
 	secondaryUrl:
 		'https://www.amazon.co.uk/AirCraft-Home-Backlight-Oscillating-Circulator/dp/B0D8QNGB3M',

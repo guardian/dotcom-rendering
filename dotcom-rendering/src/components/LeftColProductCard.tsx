@@ -23,7 +23,6 @@ export type LeftColProductCardProps = {
 	primaryCta: string;
 	primaryUrl: string;
 	primaryPrice: string;
-	primaryRetailer: string;
 	statistics: Statistics[];
 	format: ArticleFormat;
 	noHeadings?: boolean;
@@ -101,7 +100,6 @@ export const LeftColProductCard = ({
 	primaryCta,
 	primaryUrl,
 	primaryPrice,
-	primaryRetailer,
 	statistics,
 	format,
 	noHeadings,
