@@ -34,6 +34,10 @@ export type InlineProductCardProps = {
 };
 
 const card = css`
+	${from.wide} {
+		display: none;
+	}
+
 	background-color: ${palette('--product-card-background')};
 	padding: ${space[2]}px ${space[3]}px ${space[3]}px;
 	display: grid;
@@ -51,6 +55,13 @@ const card = css`
 
 	${from.phablet} {
 		img {
+			height: 328px;
+			width: 328px;
+		}
+	}
+
+	${from.desktop} {
+		img {
 			height: 288px;
 			width: 288px;
 		}
@@ -60,24 +71,24 @@ const card = css`
 const productInfoContainer = css`
 	display: flex;
 	flex-direction: column;
-	gap: ${space[2]}px;
+	gap: ${space[1]}px;
 	${textSans20};
 
-	${until.phablet} {
+	${until.mobileLandscape} {
 		${textSans17};
 	}
 `;
 
 const primaryHeading = css`
 	${headlineMedium24};
-	${until.phablet} {
+	${until.mobileLandscape} {
 		${headlineMedium20};
 	}
 `;
 
 const productNameStyle = css`
 	${textSans20};
-	${until.phablet} {
+	${until.mobileLandscape} {
 		${textSans17};
 	}
 `;
@@ -86,7 +97,6 @@ const priceStyle = css`
 	font-weight: 700;
 `;
 
-/* Mobile buttons below top row */
 const mobileButtonWrapper = css`
 	display: flex;
 	flex-direction: column;
@@ -95,16 +105,15 @@ const mobileButtonWrapper = css`
 	grid-column: 1 / span 2;
 	margin-top: ${space[1]}px;
 
-	${from.phablet} {
+	${from.mobileLandscape} {
 		display: none;
 	}
 `;
 
-/* Phablet+ buttons directly under product info */
 const desktopButtonWrapper = css`
 	display: none;
 
-	${from.phablet} {
+	${from.mobileLandscape} {
 		display: flex;
 		flex-direction: column;
 		gap: ${space[1]}px;
@@ -119,13 +128,19 @@ const statisticsContainer = css`
 	display: grid;
 	gap: ${space[2]}px;
 
-	${from.phablet} {
+	${from.mobileLandscape} {
 		grid-template-columns: 1fr 1fr;
 	}
 `;
 
 const statisticItem = css`
 	${textSans15};
+	${from.phablet} {
+		${textSans17};
+	}
+	strong {
+		font-weight: 700;
+	}
 `;
 
 const Statistic = ({ name, value }: Statistics) => (
@@ -149,7 +164,6 @@ export const InlineProductCard = ({
 	statistics,
 }: InlineProductCardProps) => (
 	<div css={card}>
-		{/* Image */}
 		{!!image && (
 			<Picture
 				role={'productCard'}
@@ -161,14 +175,11 @@ export const InlineProductCard = ({
 				loading={'eager'}
 			/>
 		)}
-
-		{/* Product info column */}
 		<div css={productInfoContainer}>
 			<div css={primaryHeading}>{brandName}</div>
 			<div css={productNameStyle}>{productName}</div>
 			<div css={priceStyle}>{primaryPrice}</div>
 
-			{/* Desktop buttons only */}
 			<div css={desktopButtonWrapper}>
 				<ProductLinkButton
 					label={stripHtmlFromString(primaryCTA)}
@@ -190,7 +201,6 @@ export const InlineProductCard = ({
 			</div>
 		</div>
 
-		{/* Mobile buttons only */}
 		<div css={mobileButtonWrapper}>
 			<ProductLinkButton
 				label={stripHtmlFromString(primaryCTA)}
