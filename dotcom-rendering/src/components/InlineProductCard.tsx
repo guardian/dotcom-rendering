@@ -9,7 +9,6 @@ import {
 	textSans20,
 	until,
 } from '@guardian/source/foundations';
-import type { ReactNode } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import { Picture } from './Picture';
@@ -21,45 +20,6 @@ export type Statistics = {
 	value: string;
 };
 
-const card = css`
-	background-color: ${palette('--product-card-background')};
-	padding: ${space[2]}px ${space[3]}px ${space[3]}px ${space[3]}px;
-	column-gap: 10px;
-	display: grid;
-	max-width: 100%;
-	min-width: 100%;
-	row-gap: ${space[4]}px;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 1fr 1fr;
-
-	strong {
-		font-weight: 700;
-	}
-	img {
-		height: 165px;
-		width: 165px;
-	}
-	border-top: 1px solid ${palette('--section-border-lifestyle')};
-
-	${from.phablet} {
-		column-gap: 10px;
-		row-gap: ${space[4]}px;
-		grid-template-columns: 1fr 1fr;
-		grid-template-rows: 1fr;
-		strong {
-			font-weight: 700;
-		}
-		img {
-			height: 288px;
-			width: 288px;
-		}
-	}
-
-	${from.wide} {
-		display: none;
-	}
-`;
-
 export type InlineProductCardProps = {
 	format: ArticleFormat;
 	brandName: string;
@@ -68,21 +28,44 @@ export type InlineProductCardProps = {
 	primaryCTA: string;
 	primaryUrl: string;
 	primaryPrice: string;
-	primaryRetailer: string;
 	secondaryCTA?: string;
 	secondaryUrl?: string;
 	statistics: Statistics[];
 };
 
+const card = css`
+	background-color: ${palette('--product-card-background')};
+	padding: ${space[2]}px ${space[3]}px ${space[3]}px;
+	display: grid;
+	grid-template-columns: auto 1fr;
+	column-gap: 12px;
+	row-gap: ${space[3]}px;
+	border-top: 1px solid ${palette('--section-border-lifestyle')};
+	max-width: 100%;
+
+	img {
+		height: 165px;
+		width: 165px;
+		object-fit: cover;
+	}
+
+	${from.phablet} {
+		img {
+			height: 288px;
+			width: 288px;
+		}
+	}
+`;
+
 const productInfoContainer = css`
-	${textSans20}
+	display: flex;
+	flex-direction: column;
+	gap: ${space[2]}px;
+	${textSans20};
+
 	${until.phablet} {
 		${textSans17};
 	}
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	gap: ${space[2]}px;
 `;
 
 const primaryHeading = css`
@@ -92,68 +75,65 @@ const primaryHeading = css`
 	}
 `;
 
+const productNameStyle = css`
+	${textSans20};
+	${until.phablet} {
+		${textSans17};
+	}
+`;
+
+const priceStyle = css`
+	font-weight: 700;
+`;
+
+/* Mobile buttons below top row */
+const mobileButtonWrapper = css`
+	display: flex;
+	flex-direction: column;
+	gap: ${space[1]}px;
+	width: 100%;
+	grid-column: 1 / span 2;
+	margin-top: ${space[1]}px;
+
+	${from.phablet} {
+		display: none;
+	}
+`;
+
+/* Phablet+ buttons directly under product info */
+const desktopButtonWrapper = css`
+	display: none;
+
+	${from.phablet} {
+		display: flex;
+		flex-direction: column;
+		gap: ${space[1]}px;
+		margin-top: 8px;
+	}
+`;
+
 const statisticsContainer = css`
-	grid-column: span 2;
+	grid-column: 1 / span 2;
 	border-top: 1px solid ${palette('--section-border')};
+	padding-top: ${space[3]}px;
 	display: grid;
-	grid-template-columns: 1fr;
-	gap: 2px;
-	align-self: start;
+	gap: ${space[2]}px;
 
 	${from.phablet} {
 		grid-template-columns: 1fr 1fr;
 	}
 `;
 
+const statisticItem = css`
+	${textSans15};
+`;
+
 const Statistic = ({ name, value }: Statistics) => (
-	<div
-		css={css`
-			${textSans15};
-			margin-top: ${space[2]}px;
-		`}
-	>
-		<strong>{name}</strong> <br /> {value}
+	<div css={statisticItem}>
+		<strong>{name}</strong>
+		<br />
+		{value}
 	</div>
-);
-
-const ButtonContainer = ({ children }: { children: ReactNode }) => (
-	<div
-		css={css`
-			grid-column: span 2;
-			margin-top: 8px;
-
-			${from.phablet} {
-				grid-column: span 2;
-				margin-top: 8px;
-			}
-
-			display: flex;
-			flex-direction: column;
-			gap: ${space[1]}px;
-			padding-bottom: ${space[2]}px;
-		`}
-	>
-		{children}
-	</div>
-);
-
-const InfoAndButtons = ({ children }: { children: ReactNode }) => (
-	<div
-		css={css`
-			${from.phablet} {
-				grid-column: 2;
-				display: flex;
-				flex-direction: column;
-				gap: 8px;
-			}
-		`}
-	>
-		{children}
-	</div>
-);
-
-const ProductInfoContainer = ({ children }: { children: ReactNode }) => (
-	<div css={productInfoContainer}>{children}</div>
 );
 
 export const InlineProductCard = ({
@@ -169,6 +149,7 @@ export const InlineProductCard = ({
 	statistics,
 }: InlineProductCardProps) => (
 	<div css={card}>
+		{/* Image */}
 		{!!image && (
 			<Picture
 				role={'productCard'}
@@ -180,13 +161,15 @@ export const InlineProductCard = ({
 				loading={'eager'}
 			/>
 		)}
-		<InfoAndButtons>
-			<ProductInfoContainer>
-				<div css={primaryHeading}>{brandName}</div>
-				<div>{productName}</div>
-				<strong>{primaryPrice}</strong>
-			</ProductInfoContainer>
-			<ButtonContainer>
+
+		{/* Product info column */}
+		<div css={productInfoContainer}>
+			<div css={primaryHeading}>{brandName}</div>
+			<div css={productNameStyle}>{productName}</div>
+			<div css={priceStyle}>{primaryPrice}</div>
+
+			{/* Desktop buttons only */}
+			<div css={desktopButtonWrapper}>
 				<ProductLinkButton
 					label={stripHtmlFromString(primaryCTA)}
 					url={primaryUrl}
@@ -196,16 +179,38 @@ export const InlineProductCard = ({
 				/>
 				{!!secondaryCTA && !!secondaryUrl && (
 					<ProductLinkButton
+						label={stripHtmlFromString(secondaryCTA)}
+						url={secondaryUrl}
+						priority="tertiary"
 						cssOverrides={css`
 							width: 100%;
 						`}
-						label={stripHtmlFromString(secondaryCTA)}
-						url={secondaryUrl}
-						priority={'tertiary'}
 					/>
 				)}
-			</ButtonContainer>
-		</InfoAndButtons>
+			</div>
+		</div>
+
+		{/* Mobile buttons only */}
+		<div css={mobileButtonWrapper}>
+			<ProductLinkButton
+				label={stripHtmlFromString(primaryCTA)}
+				url={primaryUrl}
+				cssOverrides={css`
+					width: 100%;
+				`}
+			/>
+			{!!secondaryCTA && !!secondaryUrl && (
+				<ProductLinkButton
+					label={stripHtmlFromString(secondaryCTA)}
+					url={secondaryUrl}
+					priority="tertiary"
+					cssOverrides={css`
+						width: 100%;
+					`}
+				/>
+			)}
+		</div>
+
 		{statistics.length > 0 && (
 			<div css={statisticsContainer}>
 				{statistics.map((statistic) => (
