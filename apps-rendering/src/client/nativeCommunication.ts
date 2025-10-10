@@ -29,7 +29,9 @@ function areRectsEqual(rectA: IRect, rectB: IRect): boolean {
 }
 
 function positionChanged(slotsA: Slot[], slotsB: Slot[]): boolean {
-	if (slotsA.length !== slotsB.length) return true;
+	if (slotsA.length !== slotsB.length) {
+		return true;
+	}
 	return !slotsA.every((slot, index) =>
 		areRectsEqual(slot.rect, slotsB[index].rect),
 	);

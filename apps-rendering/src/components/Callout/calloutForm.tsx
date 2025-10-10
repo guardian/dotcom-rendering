@@ -94,7 +94,9 @@ const CalloutForm = ({ id, fields }: CalloutFormProps) => {
 		// Reset error for new submission attempt
 		setSubmissionError('');
 		const isValid = validateForm();
-		if (!isValid) return;
+		if (!isValid) {
+			return;
+		}
 
 		// need to add prefix `field_` to all keys in form (as is required by formstack api)
 		const formDataWithFieldPrefix = Object.keys(formData).reduce(

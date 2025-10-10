@@ -62,7 +62,9 @@ export const FormField = ({
 		);
 	}
 
-	if (formField.hidden) return <input type="hidden" />;
+	if (formField.hidden) {
+		return <input type="hidden" />;
+	}
 
 	switch (type) {
 		case 'text':

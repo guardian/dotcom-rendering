@@ -120,8 +120,12 @@ const makeArticleFormat = (theme: ArticleTheme): ArticleFormatProps => ({
 const themeParser: Parser<ArticleTheme> = pipe(
 	numberParser,
 	andThen((num) => {
-		if (Pillar[num]) return succeed(num);
-		if (ArticleSpecial[num]) return succeed(num);
+		if (Pillar[num]) {
+			return succeed(num);
+		}
+		if (ArticleSpecial[num]) {
+			return succeed(num);
+		}
 		return fail(`I was not able to parse '${num}' as a valid theme`);
 	}),
 );
