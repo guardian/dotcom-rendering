@@ -1,4 +1,5 @@
 import { isUndefined } from '@guardian/libs';
+import { getABTestParticipations } from '../../client/abTesting';
 
 export interface BetaABTestAPI {
 	getParticipations: () => ABParticipations;
@@ -55,8 +56,7 @@ export class BetaABTests implements BetaABTestAPI {
 		if (isServer) {
 			this.participations = serverSideABTests;
 		} else {
-			this.participations =
-				window.guardian.modules.abTests?.getParticipations() ?? {};
+			this.participations = getABTestParticipations();
 		}
 	}
 
