@@ -42,6 +42,7 @@ import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
 import { LoopVideo } from '../LoopVideo.importable';
+import type { SubtitleSize } from '../LoopVideoPlayer';
 import { Pill } from '../Pill';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
 import { Snap } from '../Snap';
@@ -159,6 +160,7 @@ export type Props = {
 	showKickerImage?: boolean;
 	isInAllBoostsTest?: boolean;
 	fixImageWidth?: boolean;
+	subtitleSize?: SubtitleSize;
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
 	/** Feature flag for the labs redesign work */
@@ -404,6 +406,7 @@ export const Card = ({
 	isInAllBoostsTest = false,
 	headlinePosition = 'inner',
 	showLabsRedesign = false,
+	subtitleSize = 'small',
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -872,6 +875,8 @@ export const Card = ({
 				</div>
 			)}
 
+			{/** Don't merge this! */}
+			<p>subtitleSize: {subtitleSize}</p>
 			<CardLayout
 				cardBackgroundColour={backgroundColour}
 				mediaPositionOnDesktop={mediaPositionOnDesktop}
@@ -957,7 +962,18 @@ export const Card = ({
 								defer={{ until: 'visible' }}
 							>
 								<LoopVideo
-									sources={media.mainMedia.sources}
+									// sources={media.mainMedia.sources}
+									sources={[
+										{
+											// Test loop with subtitles
+											src: 'https://uploads.guimcode.co.uk/2025/10/07/Andy_test_6_oct--9d8d52da-da51-4ca0-9e04-ae6868c9afba-3.1.m3u8',
+											mimeType: 'application/x-mpegURL',
+										},
+										{
+											src: 'https://uploads.guimcode.co.uk/2025/10/07/Andy_test_6_oct--9d8d52da-da51-4ca0-9e04-ae6868c9afba-3.0.mp4',
+											mimeType: 'video/mp4',
+										},
+									]}
 									atomId={media.mainMedia.atomId}
 									uniqueId={uniqueId}
 									height={media.mainMedia.height}
@@ -969,6 +985,11 @@ export const Card = ({
 									fallbackImageAlt={media.imageAltText}
 									fallbackImageAspectRatio="5:4"
 									linkTo={linkTo}
+									subtitleSource={
+										// TESTING ONLY - DO NOT MERGE
+										'https://uploads.guimcode.co.uk/2025/10/07/Andy_test_6_oct--9d8d52da-da51-4ca0-9e04-ae6868c9afba-3.1captions_00001.vtt'
+									}
+									subtitleSize={subtitleSize}
 								/>
 							</Island>
 						)}

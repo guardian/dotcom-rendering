@@ -18,8 +18,12 @@ import {
 } from '../lib/video';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
+import type {
+	PLAYER_STATES,
+	PlayerStates,
+	SubtitleSize,
+} from './LoopVideoPlayer';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
-import type { PLAYER_STATES, PlayerStates } from './LoopVideoPlayer';
 import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
 const videoContainerStyles = css`
@@ -117,6 +121,8 @@ type Props = {
 	fallbackImageAlt: CardPictureProps['alt'];
 	fallbackImageAspectRatio: CardPictureProps['aspectRatio'];
 	linkTo: string;
+	subtitleSource?: string;
+	subtitleSize: SubtitleSize;
 };
 
 export const LoopVideo = ({
@@ -132,6 +138,8 @@ export const LoopVideo = ({
 	fallbackImageAlt,
 	fallbackImageAspectRatio,
 	linkTo,
+	subtitleSource,
+	subtitleSize,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -478,6 +486,23 @@ export const LoopVideo = ({
 		return FallbackImageComponent;
 	}
 
+	const handleLoadedMetadata = () => {
+		if (!vidRef.current) return;
+
+		console.log('textTracks', vidRef.current.textTracks);
+
+		const track = vidRef.current.textTracks[0];
+		if (!track?.cues) return;
+
+		console.log('cues', track.cues);
+
+		for (const cue of Array.from(track.cues)) {
+			if (cue instanceof VTTCue) {
+				cue.line = -2;
+			}
+		}
+	};
+
 	const handleLoadedData = () => {
 		if (vidRef.current) {
 			setHasAudio(doesVideoHaveAudio(vidRef.current));
@@ -617,6 +642,7 @@ export const LoopVideo = ({
 				isPlayable={isPlayable}
 				playerState={playerState}
 				isMuted={isMuted}
+				handleLoadedMetadata={handleLoadedMetadata}
 				handleLoadedData={handleLoadedData}
 				handleCanPlay={handleCanPlay}
 				handlePlayPauseClick={handlePlayPauseClick}
@@ -627,6 +653,8 @@ export const LoopVideo = ({
 				AudioIcon={hasAudio ? AudioIcon : null}
 				preloadPartialData={preloadPartialData}
 				showPlayIcon={showPlayIcon}
+				subtitleSource={subtitleSource}
+				subtitleSize={subtitleSize}
 			/>
 		</figure>
 	);

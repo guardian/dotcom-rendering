@@ -324,6 +324,7 @@ export const SplashBoostLevels: Story = {
 
 		return (
 			<>
+				<Section title="Default" boostLevel="default" />
 				<Section title="Boosted" boostLevel="boost" />
 				<Section title="Mega boosted" boostLevel="megaboost" />
 				<Section title="Giga boosted" boostLevel="gigaboost" />
