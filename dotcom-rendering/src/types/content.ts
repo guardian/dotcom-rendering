@@ -452,6 +452,7 @@ export interface NewsletterSignupBlockElement {
 
 export interface AdPlaceholderBlockElement {
 	_type: 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement';
+	adPosition: number;
 }
 
 export interface NumberedTitleBlockElement {
