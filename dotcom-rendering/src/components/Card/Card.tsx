@@ -545,7 +545,8 @@ export const Card = ({
 -	 */
 	const isMediaCardOrNewsletter = isMediaCard(format) || isNewsletter;
 
-	const showPill = isMediaCardOrNewsletter;
+	const isOnwardRelatedContent = containerType === 'related-content';
+	const showPill = isMediaCardOrNewsletter && !isOnwardRelatedContent;
 
 	const media = getMedia({
 		imageUrl: image?.src,
