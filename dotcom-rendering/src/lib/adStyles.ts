@@ -64,7 +64,7 @@ const adSlotStyles = css`
 			*/
 			/* stylelint-disable-next-line declaration-no-important */
 			display: block !important;
-			/* Center the content within this element */
+			/* Centre the content within this element */
 			margin-left: auto;
 			margin-right: auto;
 
