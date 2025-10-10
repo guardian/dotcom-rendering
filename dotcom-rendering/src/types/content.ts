@@ -395,6 +395,7 @@ export interface ListItem {
 
 export interface LinkBlockElement {
 	_type: 'model.dotcomrendering.pageElements.LinkBlockElement';
+	elementId: string;
 	url: string;
 	label: string;
 	linkType: 'ProductButton';
@@ -467,6 +468,28 @@ export interface InteractiveContentsBlockElement {
 	elementId: string;
 	subheadingLinks: SubheadingBlockElement[];
 	endDocumentElementId?: string;
+}
+
+export interface ProductBlockElement {
+	_type: 'model.dotcomrendering.pageElements.ProductBlockElement';
+	elementId: string;
+	secondaryProductUrl: string;
+	brandName: string;
+	secondaryPrice: string;
+	primaryProductUrl: string;
+	starRating: string;
+	productName: string;
+	primaryRetailer: string;
+	image: Image;
+	primaryPrice: string;
+	primaryCta: string;
+	secondaryHeading: string;
+	primaryHeading: string;
+	secondaryRetailer: string;
+	secondaryCta: string;
+	statistics: { name: string; value: string }[];
+	content: FEElement[];
+	h2Id?: string;
 }
 
 interface ProfileAtomBlockElement {
@@ -833,7 +856,8 @@ export type FEElement =
 	| VineBlockElement
 	| YoutubeBlockElement
 	| WitnessTypeBlockElement
-	| CrosswordElement;
+	| CrosswordElement
+	| ProductBlockElement;
 
 // -------------------------------------
 // Misc
