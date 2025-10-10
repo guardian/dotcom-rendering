@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source/foundations';
-import type { ArticleFormat } from '../../../lib/articleFormat';
+import { ArticleDesign, type ArticleFormat } from '../../../lib/articleFormat';
 import { palette } from '../../../palette';
 import type { DCRContainerPalette } from '../../../types/front';
 import { ContainerOverrides } from '../../ContainerOverrides';
@@ -117,7 +117,9 @@ export const CardWrapper = ({
 						hoverStyles,
 						showTopBarDesktop && desktopTopBarStyles,
 						showTopBarMobile && mobileTopBarStyles,
-						isOnwardContent && onwardContentStyles,
+						isOnwardContent &&
+							format.design !== ArticleDesign.Gallery &&
+							onwardContentStyles,
 					]}
 				>
 					{children}

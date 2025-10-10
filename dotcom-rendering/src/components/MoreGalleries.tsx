@@ -109,10 +109,11 @@ const getDefaultCardProps = (
 		imageLoading: 'lazy',
 		trailText: trail.trailText,
 		showAge: false,
-		containerType: 'more-galleries',
 		showTopBarDesktop: false,
 		showTopBarMobile: false,
 		aspectRatio: '5:4',
+		isOnwardContent: true,
+		onwardsSource: 'more-galleries',
 	};
 	return defaultProps;
 };
