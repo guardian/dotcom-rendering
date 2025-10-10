@@ -28,6 +28,7 @@ import { InteractivesDisableArticleSwipe } from '../components/InteractivesDisab
 import { InteractivesNativePlatformWrapper } from '../components/InteractivesNativePlatformWrapper.importable';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
+import { LabsPageHeader } from '../components/LabsPageHeader';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
@@ -239,7 +240,8 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	const { absoluteServerTimes = false } = article.config.switches;
+	const { absoluteServerTimes = false, guardianLabsRedesign = false } =
+		article.config.switches;
 
 	const renderAds = canRenderAds(article);
 
@@ -299,15 +301,19 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 
 					{format.theme === ArticleSpecial.Labs && (
 						<Stuck zIndex="subNavBanner">
-							<Section
-								fullWidth={true}
-								showTopBorder={false}
-								backgroundColour={sourcePalette.labs[400]}
-								borderColour={sourcePalette.neutral[60]}
-								sectionId="labs-header"
-							>
-								<LabsHeader editionId={editionId} />
-							</Section>
+							{guardianLabsRedesign ? (
+								<LabsPageHeader editionId={editionId} />
+							) : (
+								<Section
+									fullWidth={true}
+									showTopBorder={false}
+									backgroundColour={sourcePalette.labs[400]}
+									borderColour={sourcePalette.neutral[60]}
+									sectionId="labs-header"
+								>
+									<LabsHeader editionId={editionId} />
+								</Section>
+							)}
 						</Stuck>
 					)}
 
