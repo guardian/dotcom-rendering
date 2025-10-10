@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import type { ScheduleOptions, SchedulePriority } from '../lib/scheduler';
-import { IslandContext, IslandProvider } from './IslandContext';
 import { useDateTime } from './DateTimeContext';
+import { IslandContext, IslandProvider } from './IslandContext';
 
 type DeferredProps = {
 	visible: {

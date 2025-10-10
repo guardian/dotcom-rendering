@@ -1,9 +1,9 @@
 import { isString } from '@guardian/libs';
 import { getEditionFromId } from '../lib/edition';
 import { useConfig } from './ConfigContext';
+import { useDateTime } from './DateTimeContext';
 import { Island } from './Island';
 import { RelativeTime } from './RelativeTime.importable';
-import { useDateTime } from './DateTimeContext';
 
 type Props = {
 	date: Date;
