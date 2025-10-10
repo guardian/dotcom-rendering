@@ -71,6 +71,9 @@ const adSlotStyles = css`
 			/* iframes are inline by default, so we need to set them to block to avoid the same whitespace quirk mentioned in the above comment */
 			iframe {
 				display: block;
+				/* Centre the content within this element */
+				margin-left: auto;
+				margin-right: auto;
 			}
 		}
 
