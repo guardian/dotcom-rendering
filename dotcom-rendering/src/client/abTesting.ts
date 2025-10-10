@@ -30,6 +30,9 @@ const getClientParticipations = (): ABParticipations => {
 	return {};
 };
 
+/**
+ * Get all AB test participations, client and server side
+ */
 const getABTestParticipations = (): ABParticipations => {
 	return {
 		...getClientParticipations(),
@@ -37,7 +40,7 @@ const getABTestParticipations = (): ABParticipations => {
 	};
 };
 
-const initABTesting = (): void => {
+const initWindowABTesting = (): void => {
 	const participations = getABTestParticipations();
 
 	window.guardian.modules.abTests = {
@@ -51,4 +54,4 @@ const initABTesting = (): void => {
 	};
 };
 
-export { initABTesting, getABTestParticipations };
+export { initWindowABTesting, getABTestParticipations };

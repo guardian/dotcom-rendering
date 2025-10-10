@@ -7,21 +7,10 @@ jest.mock('@guardian/libs', () => ({
 
 // Mock window.guardian
 const mockGetParticipations = jest.fn();
-const mockWindow = {
-	guardian: {
-		modules: {
-			abTests: {
-				getParticipations: mockGetParticipations,
-			},
-		},
-	},
-};
 
-// Set up window mock
-Object.defineProperty(global, 'window', {
-	value: mockWindow,
-	writable: true,
-});
+jest.mock('../../client/abTesting', () => ({
+	getABTestParticipations: () => mockGetParticipations(),
+}));
 
 describe('BetaABTests', () => {
 	let betaABTests: BetaABTests;
