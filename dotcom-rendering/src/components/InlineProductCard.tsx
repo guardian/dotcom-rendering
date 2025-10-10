@@ -2,9 +2,12 @@ import { css } from '@emotion/react';
 import {
 	from,
 	headlineMedium20,
+	headlineMedium24,
 	space,
 	textSans15,
 	textSans17,
+	textSans20,
+	until,
 } from '@guardian/source/foundations';
 import type { ReactNode } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
@@ -27,6 +30,8 @@ const card = css`
 	min-width: 100%;
 	row-gap: ${space[4]}px;
 	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+
 	strong {
 		font-weight: 700;
 	}
@@ -35,6 +40,21 @@ const card = css`
 		width: 165px;
 	}
 	border-top: 1px solid ${palette('--section-border-lifestyle')};
+
+	${from.phablet} {
+		column-gap: 10px;
+		row-gap: ${space[4]}px;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 1fr;
+		strong {
+			font-weight: 700;
+		}
+		img {
+			height: 288px;
+			width: 288px;
+		}
+	}
+
 	${from.wide} {
 		display: none;
 	}
@@ -55,7 +75,10 @@ export type InlineProductCardProps = {
 };
 
 const productInfoContainer = css`
-	${textSans17};
+	${textSans20}
+	${until.phablet} {
+		${textSans17};
+	}
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -63,7 +86,10 @@ const productInfoContainer = css`
 `;
 
 const primaryHeading = css`
-	${headlineMedium20};
+	${headlineMedium24};
+	${until.phablet} {
+		${headlineMedium20};
+	}
 `;
 
 const statisticsContainer = css`
@@ -72,6 +98,11 @@ const statisticsContainer = css`
 	display: grid;
 	grid-template-columns: 1fr;
 	gap: 2px;
+	align-self: start;
+
+	${from.phablet} {
+		grid-template-columns: 1fr 1fr;
+	}
 `;
 
 const Statistic = ({ name, value }: Statistics) => (
@@ -89,10 +120,32 @@ const ButtonContainer = ({ children }: { children: ReactNode }) => (
 	<div
 		css={css`
 			grid-column: span 2;
+			margin-top: 8px;
+
+			${from.phablet} {
+				grid-column: span 2;
+				margin-top: 8px;
+			}
+
 			display: flex;
 			flex-direction: column;
 			gap: ${space[1]}px;
 			padding-bottom: ${space[2]}px;
+		`}
+	>
+		{children}
+	</div>
+);
+
+const InfoAndButtons = ({ children }: { children: ReactNode }) => (
+	<div
+		css={css`
+			${from.phablet} {
+				grid-column: 2;
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
+			}
 		`}
 	>
 		{children}
@@ -111,7 +164,6 @@ export const InlineProductCard = ({
 	primaryCTA,
 	primaryUrl,
 	primaryPrice,
-	primaryRetailer,
 	secondaryCTA,
 	secondaryUrl,
 	statistics,
@@ -128,30 +180,32 @@ export const InlineProductCard = ({
 				loading={'eager'}
 			/>
 		)}
-		<ProductInfoContainer>
-			<div css={primaryHeading}>{brandName}</div>
-			<div>{productName}</div>
-			<strong>{primaryPrice}</strong>
-		</ProductInfoContainer>
-		<ButtonContainer>
-			<ProductLinkButton
-				label={stripHtmlFromString(primaryCTA)}
-				url={primaryUrl}
-				cssOverrides={css`
-					width: 100%;
-				`}
-			/>
-			{!!secondaryCTA && !!secondaryUrl && (
+		<InfoAndButtons>
+			<ProductInfoContainer>
+				<div css={primaryHeading}>{brandName}</div>
+				<div>{productName}</div>
+				<strong>{primaryPrice}</strong>
+			</ProductInfoContainer>
+			<ButtonContainer>
 				<ProductLinkButton
+					label={stripHtmlFromString(primaryCTA)}
+					url={primaryUrl}
 					cssOverrides={css`
 						width: 100%;
 					`}
-					label={stripHtmlFromString(secondaryCTA)}
-					url={secondaryUrl}
-					priority={'tertiary'}
 				/>
-			)}
-		</ButtonContainer>
+				{!!secondaryCTA && !!secondaryUrl && (
+					<ProductLinkButton
+						cssOverrides={css`
+							width: 100%;
+						`}
+						label={stripHtmlFromString(secondaryCTA)}
+						url={secondaryUrl}
+						priority={'tertiary'}
+					/>
+				)}
+			</ButtonContainer>
+		</InfoAndButtons>
 		{statistics.length > 0 && (
 			<div css={statisticsContainer}>
 				{statistics.map((statistic) => (
