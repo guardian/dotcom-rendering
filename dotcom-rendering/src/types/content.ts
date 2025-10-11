@@ -1,8 +1,9 @@
-import { type CrosswordProps } from '@guardian/react-crossword';
 import {
+	any,
 	array,
 	boolean,
 	literal,
+	merge,
 	number,
 	object,
 	optional,
@@ -10,9 +11,6 @@ import {
 	string,
 	union,
 } from 'valibot';
-import type { ArticleFormat } from '../lib/articleFormat';
-
-export type StarRating = 0 | 1 | 2 | 3 | 4 | 5;
 
 export type BoostLevel = 'default' | 'boost' | 'megaboost' | 'gigaboost';
 
@@ -33,16 +31,7 @@ export type ContentType =
 	| 'signup'
 	| 'userid';
 
-// -------------------------------------
-// Elements
-
-// -------------------------------------
-const ThirdPartyEmbeddedContentSchema = object({
-	isThirdPartyTracking: boolean(),
-	source: optional(string()),
-	sourceDomain: optional(string()),
-});
-
+// ------------------------------------- Elements
 
 /**
  * Affects how an image is placed.
@@ -60,19 +49,126 @@ const RoleTypeSchema = union([
 	literal('halfWidth'),
 ]);
 
-export type RoleType = Output<
-	typeof RoleTypeSchema
->;
+export type RoleType = Output<typeof RoleTypeSchema>;
+
+const ThirdPartyEmbeddedContentSchema = object({
+	isThirdPartyTracking: boolean(),
+	source: optional(string()),
+	sourceDomain: optional(string()),
+});
+
+const VideoAssetsSchema = object({
+	url: string(),
+	mimeType: optional(string()),
+	fields: optional(
+		object({
+			source: optional(string()),
+			embeddable: optional(string()),
+			height: optional(string()),
+			width: optional(string()),
+			caption: optional(string()),
+		}),
+	),
+});
+
+/**
+ * This duplicate type is unfortunate, but the image sources come lowercase
+ * Note, 'richLink' is used internally but does not exist upstream.
+ *
+ * TODO check:
+ * type Weighting = Exclude<RoleType, 'halfWidth' | 'richLink'> | 'halfwidth';
+ * TODO can pick from RoleTypeSchema?
+ */
+const WeightingSchema = union([
+	literal('immersive'),
+	literal('supporting'),
+	literal('showcase'),
+	literal('inline'),
+	literal('thumbnail'),
+]);
+
+export type Weighting = Output<typeof WeightingSchema>;
+
+const SrcSetItemSchema = object({
+	src: string(),
+	width: number(),
+});
+
+const ImageSourceSchema = object({
+	weighting: WeightingSchema,
+	srcSet: array(SrcSetItemSchema),
+});
+
+const StarRatingSchema = union([
+	literal(0),
+	literal(1),
+	literal(2),
+	literal(3),
+	literal(4),
+	literal(5),
+]);
+
+export type StarRating = Output<typeof StarRatingSchema>;
+
+const RatingSizeTypeSchema = union([literal('large'), literal('small')]);
+
+export type RatingSizeType = Output<typeof RatingSizeTypeSchema>;
+
+const TimelineAtomEventSchema = object({
+	title: string(),
+	date: string(),
+	unixDate: number(),
+	body: optional(string()),
+	toDate: optional(string()),
+	toUnixDate: optional(number()),
+});
+
+export type TimelineAtomEvent = Output<typeof TimelineAtomEventSchema>;
+
+// -------------------------------------
+// Newsletter
+// -------------------------------------
+
+const NewsletterSchema = object({
+	listId: number(),
+	identityName: string(),
+	name: string(),
+	description: string(),
+	frequency: string(),
+	successDescription: string(),
+	theme: string(),
+	group: string(),
+	regionFocus: optional(string()),
+	illustrationCard: optional(string()),
+});
+
+export type Newsletter = Output<typeof NewsletterSchema>;
+
+const NewsletterLayoutSchema = object({
+	groups: array(
+		object({
+			title: string(),
+			subtitle: optional(string()),
+			newsletters: array(string()),
+		}),
+	),
+});
+
+export type NewsletterLayout = Output<typeof NewsletterLayoutSchema>;
+
+// ------------------------------------- Article
 
 const AudioAssetSchema = object({
 	url: string(),
 	mimeType: optional(string()),
-	fields: optional(object({
-		durationMinutes: optional(string()),
-		durationSeconds: optional(string()),
-		explicit: optional(string()),
-		source: optional(string()),
-	})),
+	fields: optional(
+		object({
+			durationMinutes: optional(string()),
+			durationSeconds: optional(string()),
+			explicit: optional(string()),
+			source: optional(string()),
+		}),
+	),
 });
 
 export type AudioAsset = Output<typeof AudioAssetSchema>;
@@ -95,7 +191,6 @@ const CampaignFieldTextSchema = object({
 
 export type CampaignFieldText = Output<typeof CampaignFieldTextSchema>;
 
-
 const CampaignFieldTextAreaSchema = object({
 	...CampaignFieldSchema.entries,
 	type: literal('textarea'),
@@ -115,10 +210,12 @@ export type CampaignFieldFile = Output<typeof CampaignFieldFileSchema>;
 const CampaignFieldRadioSchema = object({
 	...CampaignFieldSchema.entries,
 	type: literal('radio'),
-	options: array(object({
-		label: string(),
-		value: string(),
-	})),
+	options: array(
+		object({
+			label: string(),
+			value: string(),
+		}),
+	),
 });
 
 export type CampaignFieldRadio = Output<typeof CampaignFieldRadioSchema>;
@@ -126,19 +223,23 @@ export type CampaignFieldRadio = Output<typeof CampaignFieldRadioSchema>;
 const CampaignFieldCheckboxSchema = object({
 	...CampaignFieldSchema.entries,
 	type: literal('checkbox'),
-	options: array(object({
-		label: string(),
-		value: string(),
-	})),
+	options: array(
+		object({
+			label: string(),
+			value: string(),
+		}),
+	),
 });
 
 const CampaignFieldSelectSchema = object({
 	...CampaignFieldSchema.entries,
 	type: literal('select'),
-	options: array(object({
-		label: string(),
-		value: string(),
-	})),
+	options: array(
+		object({
+			label: string(),
+			value: string(),
+		}),
+	),
 });
 
 export type CampaignFieldSelect = Output<typeof CampaignFieldSelectSchema>;
@@ -235,7 +336,7 @@ const AudioAtomBlockElementSchema = object({
 	trackUrl: string(),
 	duration: number(),
 	coverUrl: string(),
-	role: optional(RoleTypeSchema)
+	role: optional(RoleTypeSchema),
 });
 
 export type AudioAtomBlockElement = Output<typeof AudioAtomBlockElementSchema>;
@@ -256,7 +357,9 @@ const BlockquoteBlockElementSchema = object({
 	quoted: optional(boolean()),
 });
 
-export type BlockquoteBlockElement = Output<typeof BlockquoteBlockElementSchema>;
+export type BlockquoteBlockElement = Output<
+	typeof BlockquoteBlockElementSchema
+>;
 
 const CaptionBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.CaptionBlockElement'),
@@ -342,6 +445,8 @@ const CartoonBlockElementSchema = object({
 	position: optional(number()),
 });
 
+export type CartoonBlockElement = Output<typeof CartoonBlockElementSchema>;
+
 const ChartAtomBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.ChartAtomBlockElement'),
 	elementId: string(),
@@ -355,6 +460,8 @@ const ChartAtomBlockElementSchema = object({
 	placeholderUrl: optional(string()),
 });
 
+export type ChartAtomBlockElement = Output<typeof ChartAtomBlockElementSchema>;
+
 const QuizAtomBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.QuizAtomBlockElement'),
 	elementId: string(),
@@ -365,6 +472,8 @@ const QuizAtomBlockElementSchema = object({
 	resultGroups: array(ResultGroupsTypeSchema),
 });
 
+export type QuizAtomBlockElement = Output<typeof QuizAtomBlockElementSchema>;
+
 const CodeBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.CodeBlockElement'),
 	elementId: string(),
@@ -372,6 +481,8 @@ const CodeBlockElementSchema = object({
 	isMandatory: boolean(),
 	language: optional(string()),
 });
+
+export type CodeBlockElement = Output<typeof CodeBlockElementSchema>;
 
 const CommentBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.CommentBlockElement'),
@@ -385,11 +496,19 @@ const CommentBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
+export type CommentBlockElement = Output<typeof CommentBlockElementSchema>;
+
 const ContentAtomBlockElementSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.ContentAtomBlockElement'),
+	_type: literal(
+		'model.dotcomrendering.pageElements.ContentAtomBlockElement',
+	),
 	elementId: string(),
 	atomId: string(),
 });
+
+export type ContentAtomBlockElement = Output<
+	typeof ContentAtomBlockElementSchema
+>;
 
 const DisclaimerBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.DisclaimerBlockElement'),
@@ -398,48 +517,72 @@ const DisclaimerBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
+export type DisclaimerBlockElement = Output<
+	typeof DisclaimerBlockElementSchema
+>;
+
 const DividerBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.DividerBlockElement'),
 	size: optional(union([literal('full'), literal('partial')])),
 	spaceAbove: optional(union([literal('tight'), literal('loose')])),
 });
 
-// TODO: Ravi we've done it up to here :)
+export type DividerBlockElement = Output<typeof DividerBlockElementSchema>;
 
-const DocumentBlockElement extends ThirdPartyEmbeddedContentSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.DocumentBlockElement'),
-	elementId: string(),
-	embedUrl: optional(string()),
-	height: optional(number()),
-	width: optional(number()),
-	title: optional(string()),
-	role?: RoleType;
-}
+const DocumentBlockElementSchema = merge([
+	ThirdPartyEmbeddedContentSchema,
+	object({
+		_type: literal(
+			'model.dotcomrendering.pageElements.DocumentBlockElement',
+		),
+		elementId: string(),
+		embedUrl: optional(string()),
+		height: optional(number()),
+		width: optional(number()),
+		title: optional(string()),
+		role: optional(RoleTypeSchema),
+	}),
+]);
 
-const EmbedBlockElement extends ThirdPartyEmbeddedContentSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.EmbedBlockElement'),
-	elementId: string(),
-	safe: optional(boolean()),
-	role?: RoleType;
-	alt: optional(string()),
-	height: optional(number()),
-	width: optional(number()),
-	html: string(),
-	isMandatory: boolean(),
-	caption: optional(string()),
-}
+export type DocumentBlockElement = Output<typeof DocumentBlockElementSchema>;
+
+const EmbedBlockElementSchema = merge([
+	ThirdPartyEmbeddedContentSchema,
+	object({
+		_type: literal('model.dotcomrendering.pageElements.EmbedBlockElement'),
+		elementId: string(),
+		safe: optional(boolean()),
+		role: optional(RoleTypeSchema),
+		alt: optional(string()),
+		height: optional(number()),
+		width: optional(number()),
+		html: string(),
+		isMandatory: boolean(),
+		caption: optional(string()),
+	}),
+]);
+
+export type EmbedBlockElement = Output<typeof EmbedBlockElementSchema>;
 
 const ExplainerAtomBlockElementSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.ExplainerAtomBlockElement'),
+	_type: literal(
+		'model.dotcomrendering.pageElements.ExplainerAtomBlockElement',
+	),
 	elementId: string(),
 	id: string(),
 	title: string(),
 	body: string(),
-	role?: RoleType;
-}
+	role: optional(RoleTypeSchema),
+});
+
+export type ExplainerAtomBlockElement = Output<
+	typeof ExplainerAtomBlockElementSchema
+>;
 
 const GenericAtomBlockElementSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.GenericAtomBlockElement'),
+	_type: literal(
+		'model.dotcomrendering.pageElements.GenericAtomBlockElement',
+	),
 	url: string(),
 	placeholderUrl: optional(string()),
 	id: optional(string()),
@@ -447,7 +590,11 @@ const GenericAtomBlockElementSchema = object({
 	css: optional(string()),
 	js: optional(string()),
 	elementId: string(),
-}
+});
+
+export type GenericAtomBlockElement = Output<
+	typeof GenericAtomBlockElementSchema
+>;
 
 const GuideAtomBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.GuideAtomBlockElement'),
@@ -458,43 +605,49 @@ const GuideAtomBlockElementSchema = object({
 	img: optional(string()),
 	html: string(),
 	credit: string(),
-	role?: RoleType;
-}
+	role: optional(RoleTypeSchema),
+});
+
+export type GuideAtomBlockElement = Output<typeof GuideAtomBlockElementSchema>;
 
 const GuVideoBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.GuVideoBlockElement'),
 	elementId: string(),
-	assets: VideoAssets[];
+	assets: array(VideoAssetsSchema),
 	caption: string(),
 	html: string(),
 	source: string(),
-	role?: RoleType;
-	imageMedia?: { allImages: Image[] };
+	role: optional(RoleTypeSchema),
+	imageMedia: optional(object({ allImages: array(ImageSchema) })),
 	originalUrl: optional(string()),
 	url: optional(string()),
-}
+});
+
+export type GuVideoBlockElement = Output<typeof GuVideoBlockElementSchema>;
 
 const HighlightBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.HighlightBlockElement'),
 	elementId: string(),
 	html: string(),
-}
+});
+
+export type HighlightBlockElement = Output<typeof HighlightBlockElementSchema>;
 
 const ImageBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.ImageBlockElement'),
 	elementId: string(),
-	media: { allImages: Image[] };
-	data: {
+	media: object({ allImages: array(ImageSchema) }),
+	data: object({
 		alt: optional(string()),
 		credit: optional(string()),
 		caption: optional(string()),
 		copyright: optional(string()),
-	};
-	imageSources: ImageSource[];
+	}),
+	imageSources: array(ImageSourceSchema),
 	displayCredit: optional(boolean()),
-	role: RoleType;
+	role: RoleTypeSchema,
 	title: optional(string()),
-	starRating?: StarRating;
+	starRating: optional(StarRatingSchema),
 	isAvatar: optional(boolean()),
 	/**
 	 * position is an index starting at 1 for all the images
@@ -503,19 +656,30 @@ const ImageBlockElementSchema = object({
 	 * It is generated by `addImagePositions`
 	 */
 	position: optional(number()),
-}
+});
 
-const InstagramBlockElement extends ThirdPartyEmbeddedContentSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.InstagramBlockElement'),
-	elementId: string(),
-	html: string(),
-	url: string(),
-	hasCaption: boolean(),
-	role?: RoleType;
-}
+export type ImageBlockElement = Output<typeof ImageBlockElementSchema>;
+
+const InstagramBlockElementSchema = merge([
+	ThirdPartyEmbeddedContentSchema,
+	object({
+		_type: literal(
+			'model.dotcomrendering.pageElements.InstagramBlockElement',
+		),
+		elementId: string(),
+		html: string(),
+		url: string(),
+		hasCaption: boolean(),
+		role: optional(RoleTypeSchema),
+	}),
+]);
+
+export type InstagramBlockElement = Output<typeof InstagramBlockElementSchema>;
 
 const InteractiveAtomBlockElementSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.InteractiveAtomBlockElement'),
+	_type: literal(
+		'model.dotcomrendering.pageElements.InteractiveAtomBlockElement',
+	),
 	elementId: string(),
 	url: string(),
 	id: string(),
@@ -524,141 +688,213 @@ const InteractiveAtomBlockElementSchema = object({
 	html: optional(string()),
 	css: optional(string()),
 	placeholderUrl: optional(string()),
-	role?: RoleType;
-}
+	role: optional(RoleTypeSchema),
+});
+
+export type InteractiveAtomBlockElement = Output<
+	typeof InteractiveAtomBlockElementSchema
+>;
 
 // Can't guarantee anything in interactiveBlockElement :shrug:
 const InteractiveBlockElementSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.InteractiveBlockElement'),
+	_type: literal(
+		'model.dotcomrendering.pageElements.InteractiveBlockElement',
+	),
 	elementId: string(),
 	url: optional(string()),
 	isMandatory: optional(boolean()),
 	scriptUrl: optional(string()),
 	alt: optional(string()),
-	role?: RoleType;
+	role: optional(RoleTypeSchema),
 	caption: optional(string()),
-}
+});
+
+export type InteractiveBlockElement = Output<
+	typeof InteractiveBlockElementSchema
+>;
 
 const ItemLinkBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.ItemLinkBlockElement'),
 	elementId: string(),
 	html: string(),
-}
+});
+
+export type ItemLinkBlockElement = Output<typeof ItemLinkBlockElementSchema>;
 
 const KeyTakeawaySchema = object({
 	title: string(),
-	body: FEElement[];
-}
+	body: array(FEElementSchema),
+});
+
+export type KeyTakeaway = Output<typeof KeyTakeawaySchema>;
 
 const QAndAExplainerSchema = object({
 	title: string(),
-	body: FEElement[];
-}
+	body: array(FEElementSchema),
+});
+
+export type QAndAExplainer = Output<typeof QAndAExplainerSchema>;
 
 const MiniProfileSchema = object({
 	title: string(),
-	body: FEElement[];
+	body: array(FEElementSchema),
 	bio: optional(string()),
 	endNote: optional(string()),
-}
+});
+
+export type MiniProfile = Output<typeof MiniProfileSchema>;
 
 const MultiBylineSchema = object({
 	title: string(),
-	body: FEElement[];
+	body: array(FEElementSchema),
 	bio: optional(string()),
 	endNote: optional(string()),
 	imageUrl: optional(string()),
 	byline: string(),
 	bylineHtml: string(),
-}
+});
+
+export type MultiByline = Output<typeof MultiBylineSchema>;
 
 const KeyTakeawaysBlockElementSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.KeyTakeawaysBlockElement'),
-	keyTakeaways: KeyTakeaway[];
-}
+	_type: literal(
+		'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement',
+	),
+	keyTakeaways: array(KeyTakeawaySchema),
+});
+
+export type KeyTakeawaysBlockElement = Output<
+	typeof KeyTakeawaysBlockElementSchema
+>;
 
 const QAndAExplainerBlockElementSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.QAndAExplainerBlockElement'),
-	qAndAExplainers: QAndAExplainer[];
-}
+	_type: literal(
+		'model.dotcomrendering.pageElements.QAndAExplainerBlockElement',
+	),
+	qAndAExplainers: array(QAndAExplainerSchema),
+});
+
+export type QAndAExplainerBlockElement = Output<
+	typeof QAndAExplainerBlockElementSchema
+>;
 
 const MiniProfilesBlockElementSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.MiniProfilesBlockElement'),
-	miniProfiles: MiniProfile[];
-}
+	_type: literal(
+		'model.dotcomrendering.pageElements.MiniProfilesBlockElement',
+	),
+	miniProfiles: array(MiniProfileSchema),
+});
+
+export type MiniProfilesBlockElement = Output<
+	typeof MiniProfilesBlockElementSchema
+>;
 
 const MultiBylinesBlockElementSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.MultiBylinesBlockElement'),
-	multiBylines: MultiByline[];
-}
+	_type: literal(
+		'model.dotcomrendering.pageElements.MultiBylinesBlockElement',
+	),
+	multiBylines: array(MultiBylineSchema),
+});
+
+export type MultiBylinesBlockElement = Output<
+	typeof MultiBylinesBlockElementSchema
+>;
 
 const ListItemSchema = object({
 	title: optional(string()),
-	elements: FEElement[];
+	elements: array(FEElementSchema),
 	bio: optional(string()),
 	endNote: optional(string()),
 	contributorImageOverrideUrl: optional(string()),
-	contributorIds?: string[];
+	contributorIds: optional(array(string())),
 	byline: optional(string()),
 	bylineHtml: optional(string()),
-}
+});
+
+export type ListItem = Output<typeof ListItemSchema>;
 
 const LinkBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.LinkBlockElement'),
 	url: string(),
 	label: string(),
-	linkType: 'ProductButton';
-}
+	linkType: literal('ProductButton'),
+});
+
+export type LinkBlockElement = Output<typeof LinkBlockElementSchema>;
 
 const ListBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.ListBlockElement'),
-	listElementType:
-		| 'KeyTakeaways'
-		| 'QAndAExplainer'
-		| 'MiniProfiles'
-		| 'MultiByline';
-	items: ListItem[];
+	listElementType: union([
+		literal('KeyTakeaways'),
+		literal('QAndAExplainer'),
+		literal('MiniProfiles'),
+		literal('MultiByline'),
+	]),
+	items: array(ListItemSchema),
 	elementId: string(),
-}
+});
 
-const MapBlockElement extends ThirdPartyEmbeddedContentSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.MapBlockElement'),
-	elementId: string(),
-	embedUrl: string(),
-	originalUrl: string(),
-	title: string(),
-	height: number(),
-	width: number(),
-	caption: optional(string()),
-	role?: RoleType;
-}
+export type ListBlockElement = Output<typeof ListBlockElementSchema>;
+
+const MapBlockElementSchema = merge([
+	ThirdPartyEmbeddedContentSchema,
+	object({
+		_type: literal('model.dotcomrendering.pageElements.MapBlockElement'),
+		elementId: string(),
+		embedUrl: string(),
+		originalUrl: string(),
+		title: string(),
+		height: number(),
+		width: number(),
+		caption: optional(string()),
+		role: optional(RoleTypeSchema),
+	}),
+]);
+
+export type MapBlockElement = Output<typeof MapBlockElementSchema>;
 
 const MediaAtomBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.MediaAtomBlockElement'),
 	elementId: string(),
 	id: string(),
-	assets: VideoAssets[];
-	posterImage?: {
-		url: string(),
-		width: number(),
-	}[];
+	assets: array(VideoAssetsSchema),
+	posterImage: optional(
+		array(
+			object({
+				url: string(),
+				width: number(),
+			}),
+		),
+	),
 	title: optional(string()),
 	duration: optional(number()),
-}
+});
+
+export type MediaAtomBlockElement = Output<typeof MediaAtomBlockElementSchema>;
 
 const MultiImageBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.MultiImageBlockElement'),
 	elementId: string(),
-	images: ImageBlockElement[];
+	images: array(ImageBlockElementSchema),
 	caption: optional(string()),
-	role?: RoleType;
-}
+	role: optional(RoleTypeSchema),
+});
+
+export type MultiImageBlockElement = Output<
+	typeof MultiImageBlockElementSchema
+>;
 
 const NewsletterSignupBlockElementSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.NewsletterSignupBlockElement'),
-	newsletter: Newsletter;
+	_type: literal(
+		'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
+	),
+	newsletter: NewsletterSchema,
 	elementId: optional(string()),
-}
+});
+
+export type NewsletterSignupBlockElement = Output<
+	typeof NewsletterSignupBlockElementSchema
+>;
 
 const AdPlaceholderBlockElementSchema = object({
 	_type: literal(
@@ -707,7 +943,9 @@ export type InteractiveContentsBlockElement = Output<
 >;
 
 const ProfileAtomBlockElementSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.ProfileAtomBlockElement'),
+	_type: literal(
+		'model.dotcomrendering.pageElements.ProfileAtomBlockElement',
+	),
 	elementId: string(),
 	id: string(),
 	label: string(),
@@ -715,17 +953,23 @@ const ProfileAtomBlockElementSchema = object({
 	img: optional(string()),
 	html: string(),
 	credit: string(),
-	role?: RoleType;
-}
+	role: optional(RoleTypeSchema),
+});
+
+export type ProfileAtomBlockElement = Output<
+	typeof ProfileAtomBlockElementSchema
+>;
 
 const PullquoteBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.PullquoteBlockElement'),
 	elementId: string(),
 	html: optional(string()),
-	role: RoleType;
+	role: RoleTypeSchema,
 	attribution: optional(string()),
 	isThirdPartyTracking: optional(boolean()),
-}
+});
+
+export type PullquoteBlockElement = Output<typeof PullquoteBlockElementSchema>;
 
 const QABlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.QABlockElement'),
@@ -735,8 +979,10 @@ const QABlockElementSchema = object({
 	img: optional(string()),
 	html: string(),
 	credit: string(),
-	role?: RoleType;
-}
+	role: optional(RoleTypeSchema),
+});
+
+export type QABlockElement = Output<typeof QABlockElementSchema>;
 
 const RichLinkBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.RichLinkBlockElement'),
@@ -744,168 +990,266 @@ const RichLinkBlockElementSchema = object({
 	url: string(),
 	text: string(),
 	prefix: string(),
-	role?: RoleType | 'richLink';
-}
+	role: optional(union([RoleTypeSchema, literal('richLink')])),
+});
 
-const SoundcloudBlockElement extends ThirdPartyEmbeddedContentSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.SoundcloudBlockElement'),
-	elementId: string(),
-	html: string(),
-	id: string(),
-	isTrack: boolean(),
-	isMandatory: boolean(),
-	role?: RoleType;
-}
+export type RichLinkBlockElement = Output<typeof RichLinkBlockElementSchema>;
 
-const SpotifyBlockElement extends ThirdPartyEmbeddedContentSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.SpotifyBlockElement'),
-	elementId: string(),
-	embedUrl: optional(string()),
-	title: optional(string()),
-	height: optional(number()),
-	width: optional(number()),
-	caption: optional(string()),
-	role?: RoleType;
-}
+const SoundcloudBlockElementSchema = merge([
+	ThirdPartyEmbeddedContentSchema,
+	object({
+		_type: literal(
+			'model.dotcomrendering.pageElements.SoundcloudBlockElement',
+		),
+		elementId: string(),
+		html: string(),
+		id: string(),
+		isTrack: boolean(),
+		isMandatory: boolean(),
+		role: optional(RoleTypeSchema),
+	}),
+]);
+
+export type SoundcloudBlockElement = Output<
+	typeof SoundcloudBlockElementSchema
+>;
+
+const SpotifyBlockElementSchema = merge([
+	ThirdPartyEmbeddedContentSchema,
+	object({
+		_type: literal(
+			'model.dotcomrendering.pageElements.SpotifyBlockElement',
+		),
+		elementId: string(),
+		embedUrl: optional(string()),
+		title: optional(string()),
+		height: optional(number()),
+		width: optional(number()),
+		caption: optional(string()),
+		role: optional(RoleTypeSchema),
+	}),
+]);
+
+export type SpotifyBlockElement = Output<typeof SpotifyBlockElementSchema>;
 
 const StarRatingBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.StarRatingBlockElement'),
 	elementId: string(),
-	rating: StarRating;
-	size: RatingSizeType;
-}
+	rating: StarRatingSchema,
+	size: RatingSizeTypeSchema,
+});
+
+export type StarRatingBlockElement = Output<
+	typeof StarRatingBlockElementSchema
+>;
 
 const TableBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.TableBlockElement'),
 	elementId: string(),
 	isMandatory: boolean(),
 	html: string(),
-	role?: RoleType;
-}
+	role: optional(RoleTypeSchema),
+});
+
+export type TableBlockElement = Output<typeof TableBlockElementSchema>;
 
 const TextBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.TextBlockElement'),
 	elementId: string(),
-	dropCap?: 'on' | 'off';
+	dropCap: optional(union([literal('on'), literal('off')])),
 	html: string(),
-}
+});
 
-export type DCRTimelineEvent = {
+export type TextBlockElement = Output<typeof TextBlockElementSchema>;
+
+const DCRTimelineEventSchema = object({
 	date: string(),
 	title: optional(string()),
 	label: optional(string()),
-	main?: FEElement;
-	body: FEElement[];
-};
+	main: optional(FEElementSchema),
+	body: array(FEElementSchema),
+});
 
-export type DCRTimelineSection = {
+export type DCRTimelineEvent = Output<typeof DCRTimelineEventSchema>;
+
+const DCRTimelineSectionSchema = object({
 	title: string(),
-	events: DCRTimelineEvent[];
-};
+	events: array(DCRTimelineEventSchema),
+});
 
-export type DCRTimelineBlockElement = {
-	_type: literal('model.dotcomrendering.pageElements.DCRTimelineBlockElement'),
-	events: DCRTimelineEvent[];
-};
+export type DCRTimelineSection = Output<typeof DCRTimelineSectionSchema>;
 
-export type DCRSectionedTimelineBlockElement = {
-	_type: literal('model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement'),
-	sections: DCRTimelineSection[];
-};
+const DCRTimelineBlockElementSchema = object({
+	_type: literal(
+		'model.dotcomrendering.pageElements.DCRTimelineBlockElement',
+	),
+	events: array(DCRTimelineEventSchema),
+});
 
-export type FETimelineEvent = {
+export type DCRTimelineBlockElement = Output<
+	typeof DCRTimelineBlockElementSchema
+>;
+
+const DCRSectionedTimelineBlockElementSchema = object({
+	_type: literal(
+		'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement',
+	),
+	sections: array(DCRTimelineSectionSchema),
+});
+
+export type DCRSectionedTimelineBlockElement = Output<
+	typeof DCRSectionedTimelineBlockElementSchema
+>;
+
+const FETimelineEventSchema = object({
 	title: optional(string()),
 	date: optional(string()),
 	label: optional(string()),
-	main?: FEElement;
-	body: FEElement[];
-};
+	main: optional(FEElementSchema),
+	body: array(FEElementSchema),
+});
 
-export type FETimelineSection = {
+export type FETimelineEvent = Output<typeof FETimelineEventSchema>;
+
+const FETimelineSectionSchema = object({
 	title: optional(string()),
-	events: FETimelineEvent[];
-};
+	events: array(FETimelineEventSchema),
+});
+
+export type FETimelineSection = Output<typeof FETimelineSectionSchema>;
 
 const FETimelineBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.TimelineBlockElement'),
 	elementId: string(),
-	sections: FETimelineSection[];
-}
+	sections: array(FETimelineSectionSchema),
+});
+
+export type FETimelineBlockElement = Output<
+	typeof FETimelineBlockElementSchema
+>;
 
 const TimelineAtomBlockElementSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.TimelineAtomBlockElement'),
+	_type: literal(
+		'model.dotcomrendering.pageElements.TimelineAtomBlockElement',
+	),
 	elementId: string(),
 	id: string(),
 	title: string(),
 	description: optional(string()),
-	events: TimelineAtomEvent[];
-	role?: RoleType;
-}
+	events: array(TimelineAtomEventSchema),
+	role: optional(RoleTypeSchema),
+});
 
-const TweetBlockElement extends ThirdPartyEmbeddedContentSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.TweetBlockElement'),
-	elementId: string(),
-	html: string(),
-	url: string(),
-	id: string(),
-	hasMedia: boolean(),
-	role?: RoleType;
-}
+export type TimelineAtomBlockElement = Output<
+	typeof TimelineAtomBlockElementSchema
+>;
 
-const VineBlockElement extends ThirdPartyEmbeddedContentSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.VineBlockElement'),
-	elementId: string(),
-	url: string(),
-	height: number(),
-	width: number(),
-	originalUrl: string(),
-	title: string(),
-}
+const TweetBlockElementSchema = merge([
+	ThirdPartyEmbeddedContentSchema,
+	object({
+		_type: literal('model.dotcomrendering.pageElements.TweetBlockElement'),
+		elementId: string(),
+		html: string(),
+		url: string(),
+		id: string(),
+		hasMedia: boolean(),
+		role: optional(RoleTypeSchema),
+	}),
+]);
 
-const VideoBlockElement extends ThirdPartyEmbeddedContentSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.VideoBlockElement'),
-	elementId: string(),
-	role?: RoleType;
-}
+export type TweetBlockElement = Output<typeof TweetBlockElementSchema>;
 
-const VideoFacebookBlockElement extends ThirdPartyEmbeddedContentSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.VideoFacebookBlockElement'),
-	elementId: string(),
-	url: string(),
-	height: number(),
-	width: number(),
-	caption: optional(string()),
-	embedUrl: optional(string()),
-	role?: RoleType;
-}
+const VineBlockElementSchema = merge([
+	ThirdPartyEmbeddedContentSchema,
+	object({
+		_type: literal('model.dotcomrendering.pageElements.VineBlockElement'),
+		elementId: string(),
+		url: string(),
+		height: number(),
+		width: number(),
+		originalUrl: string(),
+		title: string(),
+	}),
+]);
 
-const VideoVimeoBlockElement extends ThirdPartyEmbeddedContentSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.VideoVimeoBlockElement'),
-	elementId: string(),
-	embedUrl: optional(string()),
-	url: string(),
-	height: number(),
-	width: number(),
-	caption: optional(string()),
-	credit: optional(string()),
-	title: optional(string()),
-	originalUrl: optional(string()),
-	role?: RoleType;
-}
+export type VineBlockElement = Output<typeof VineBlockElementSchema>;
 
-const VideoYoutubeBlockElement extends ThirdPartyEmbeddedContentSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.VideoYoutubeBlockElement'),
-	elementId: string(),
-	embedUrl: optional(string()),
-	url: string(),
-	originalUrl: string(),
-	height: number(),
-	width: number(),
-	caption: optional(string()),
-	credit: optional(string()),
-	title: optional(string()),
-	role?: RoleType;
-}
+const VideoBlockElementSchema = merge([
+	ThirdPartyEmbeddedContentSchema,
+	object({
+		_type: literal('model.dotcomrendering.pageElements.VideoBlockElement'),
+		elementId: string(),
+		role: optional(RoleTypeSchema),
+	}),
+]);
+
+export type VideoBlockElement = Output<typeof VideoBlockElementSchema>;
+
+const VideoFacebookBlockElementSchema = merge([
+	ThirdPartyEmbeddedContentSchema,
+	object({
+		_type: literal(
+			'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
+		),
+		elementId: string(),
+		url: string(),
+		height: number(),
+		width: number(),
+		caption: optional(string()),
+		embedUrl: optional(string()),
+		role: optional(RoleTypeSchema),
+	}),
+]);
+
+export type VideoFacebookBlockElement = Output<
+	typeof VideoFacebookBlockElementSchema
+>;
+
+const VideoVimeoBlockElementSchema = merge([
+	ThirdPartyEmbeddedContentSchema,
+	object({
+		_type: literal(
+			'model.dotcomrendering.pageElements.VideoVimeoBlockElement',
+		),
+		elementId: string(),
+		embedUrl: optional(string()),
+		url: string(),
+		height: number(),
+		width: number(),
+		caption: optional(string()),
+		credit: optional(string()),
+		title: optional(string()),
+		originalUrl: optional(string()),
+		role: optional(RoleTypeSchema),
+	}),
+]);
+
+export type VideoVimeoBlockElement = Output<
+	typeof VideoVimeoBlockElementSchema
+>;
+
+const VideoYoutubeBlockElementSchema = merge([
+	ThirdPartyEmbeddedContentSchema,
+	object({
+		_type: literal(
+			'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
+		),
+		elementId: string(),
+		embedUrl: optional(string()),
+		url: string(),
+		originalUrl: string(),
+		height: number(),
+		width: number(),
+		caption: optional(string()),
+		credit: optional(string()),
+		title: optional(string()),
+		role: optional(RoleTypeSchema),
+	}),
+]);
+
+export type VideoYoutubeBlockElement = Output<
+	typeof VideoYoutubeBlockElementSchema
+>;
 
 const YoutubeBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.YoutubeBlockElement'),
@@ -915,15 +1259,21 @@ const YoutubeBlockElementSchema = object({
 	elementId: string(),
 	channelId: optional(string()),
 	duration: optional(number()),
-	posterImage?: {
-		url: string(),
-		width: number(),
-	}[];
+	posterImage: optional(
+		array(
+			object({
+				url: string(),
+				width: number(),
+			}),
+		),
+	),
 	expired: boolean(),
 	overrideImage: optional(string()),
 	altText: optional(string()),
-	role?: RoleType;
-}
+	role: optional(RoleTypeSchema),
+});
+
+export type YoutubeBlockElement = Output<typeof YoutubeBlockElementSchema>;
 
 const WitnessTypeDataBaseSchema = object({
 	authorUsername: string(),
@@ -937,190 +1287,192 @@ const WitnessTypeDataBaseSchema = object({
 	witnessEmbedType: string(),
 	html: optional(string()),
 	authorWitnessProfileUrl: string(),
-}
+});
 
-const WitnessTypeDataImage extends WitnessTypeDataBaseSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.WitnessTypeDataImage'),
-	type: 'image';
-	alt: string(),
-	caption: optional(string()),
-	mediaId: string(),
-	photographer: string(),
-}
+export type WitnessTypeDataBase = Output<typeof WitnessTypeDataBaseSchema>;
 
-const WitnessTypeDataVideo extends WitnessTypeDataBaseSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.WitnessTypeDataVideo'),
-	type: 'video';
-	description: string(),
-	youtubeHtml: string(),
-	youtubeDescription: string(),
-	youtubeUrl: string(),
-	width: number(),
-	youtubeSource: string(),
-	youtubeAuthorName: string(),
-	height: number(),
-	youtubeTitle: string(),
-}
+const WitnessTypeDataImageSchema = merge([
+	WitnessTypeDataBaseSchema,
+	object({
+		_type: literal(
+			'model.dotcomrendering.pageElements.WitnessTypeDataImage',
+		),
+		type: literal('image'),
+		alt: string(),
+		caption: optional(string()),
+		mediaId: string(),
+		photographer: string(),
+	}),
+]);
 
-const WitnessTypeDataText extends WitnessTypeDataBaseSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.WitnessTypeDataText'),
-	type: 'text';
-	description: string(),
-	authorUsername: string(),
-	originalUrl: string(),
-	source: string(),
-	title: string(),
-	url: string(),
-	dateCreated: string(),
-	apiUrl: string(),
-	authorName: string(),
-	witnessEmbedType: string(),
-	authorWitnessProfileUrl: string(),
-}
+export type WitnessTypeDataImage = Output<typeof WitnessTypeDataImageSchema>;
+
+const WitnessTypeDataVideoSchema = merge([
+	WitnessTypeDataBaseSchema,
+	object({
+		_type: literal(
+			'model.dotcomrendering.pageElements.WitnessTypeDataVideo',
+		),
+		type: literal('video'),
+		description: string(),
+		youtubeHtml: string(),
+		youtubeDescription: string(),
+		youtubeUrl: string(),
+		width: number(),
+		youtubeSource: string(),
+		youtubeAuthorName: string(),
+		height: number(),
+		youtubeTitle: string(),
+	}),
+]);
+
+export type WitnessTypeDataVideo = Output<typeof WitnessTypeDataVideoSchema>;
+
+const WitnessTypeDataTextSchema = merge([
+	WitnessTypeDataBaseSchema,
+	object({
+		_type: literal(
+			'model.dotcomrendering.pageElements.WitnessTypeDataText',
+		),
+		type: literal('text'),
+		description: string(),
+		authorUsername: string(),
+		originalUrl: string(),
+		source: string(),
+		title: string(),
+		url: string(),
+		dateCreated: string(),
+		apiUrl: string(),
+		authorName: string(),
+		witnessEmbedType: string(),
+		authorWitnessProfileUrl: string(),
+	}),
+]);
+
+export type WitnessTypeDataText = Output<typeof WitnessTypeDataTextSchema>;
 
 const WitnessAssetTypeSchema = object({
-	type: 'Image';
+	type: literal('Image'),
 	mimeType: optional(string()),
 	file: optional(string()),
-	typeData?: {
-		name: optional(string()),
-	};
-}
-const WitnessTypeBlockElement extends ThirdPartyEmbeddedContentSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.WitnessBlockElement'),
-	elementId: string(),
-	assets: WitnessAssetType[];
-	isThirdPartyTracking: boolean(),
-	witnessTypeData:
-		| WitnessTypeDataImage
-		| WitnessTypeDataVideo
-		| WitnessTypeDataText;
-}
+	typeData: optional(
+		object({
+			name: optional(string()),
+		}),
+	),
+});
+
+export type WitnessAssetType = Output<typeof WitnessAssetTypeSchema>;
+
+const WitnessTypeBlockElement = merge([
+	ThirdPartyEmbeddedContentSchema,
+	object({
+		_type: literal(
+			'model.dotcomrendering.pageElements.WitnessBlockElement',
+		),
+		elementId: string(),
+		assets: array(WitnessAssetTypeSchema),
+		isThirdPartyTracking: boolean(),
+		witnessTypeData: union([
+			WitnessTypeDataImageSchema,
+			WitnessTypeDataVideoSchema,
+			WitnessTypeDataTextSchema,
+		]),
+	}),
+]);
+
+export type WitnessTypeBlockElement = Output<typeof WitnessTypeBlockElement>;
 
 const CrosswordElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.CrosswordElement'),
-	crossword: CrosswordProps['data'];
-}
+	crossword: any(), // TODO - crossword schema
+});
 
-export type FEElement =
-	| AdPlaceholderBlockElement
-	| AudioAtomBlockElement
-	| AudioBlockElement
-	| BlockquoteBlockElement
-	| CaptionBlockElement
-	| CalloutBlockElement
-	| CalloutBlockElementV2
-	| CartoonBlockElement
-	| ChartAtomBlockElement
-	| CodeBlockElement
-	| CommentBlockElement
-	| ContentAtomBlockElement
-	| DisclaimerBlockElement
-	| DividerBlockElement
-	| DocumentBlockElement
-	| EmbedBlockElement
-	| ExplainerAtomBlockElement
-	| GenericAtomBlockElement
-	| GuideAtomBlockElement
-	| GuVideoBlockElement
-	| HighlightBlockElement
-	| ImageBlockElement
-	| InstagramBlockElement
-	| InteractiveAtomBlockElement
-	| InteractiveContentsBlockElement
-	| InteractiveBlockElement
-	| ItemLinkBlockElement
-	| KeyTakeawaysBlockElement
-	| LinkBlockElement
-	| ListBlockElement
-	| MapBlockElement
-	| MediaAtomBlockElement
-	| MiniProfilesBlockElement
-	| MultiBylinesBlockElement
-	| MultiImageBlockElement
-	| NumberedTitleBlockElement
-	| NewsletterSignupBlockElement
-	| ProfileAtomBlockElement
-	| PullquoteBlockElement
-	| QAndAExplainerBlockElement
-	| QABlockElement
-	| QuizAtomBlockElement
-	| RichLinkBlockElement
-	| SoundcloudBlockElement
-	| SpotifyBlockElement
-	| StarRatingBlockElement
-	| SubheadingBlockElement
-	| TableBlockElement
-	| TextBlockElement
-	| TimelineAtomBlockElement
-	| FETimelineBlockElement
-	| DCRTimelineBlockElement
-	| DCRSectionedTimelineBlockElement
-	| TweetBlockElement
-	| VideoBlockElement
-	| VideoFacebookBlockElement
-	| VideoVimeoBlockElement
-	| VideoYoutubeBlockElement
-	| VineBlockElement
-	| YoutubeBlockElement
-	| WitnessTypeBlockElement
-	| CrosswordElement;
+export type CrosswordElement = Output<typeof CrosswordElementSchema>;
+
+const FEElementSchema = union([
+	AdPlaceholderBlockElementSchema,
+	AudioAtomBlockElementSchema,
+	AudioBlockElementSchema,
+	BlockquoteBlockElementSchema,
+	CaptionBlockElementSchema,
+	CalloutBlockElementSchema,
+	CalloutBlockElementV2Schema,
+	CartoonBlockElementSchema,
+	ChartAtomBlockElementSchema,
+	CodeBlockElementSchema,
+	CommentBlockElementSchema,
+	ContentAtomBlockElementSchema,
+	DisclaimerBlockElementSchema,
+	DividerBlockElementSchema,
+	DocumentBlockElementSchema,
+	EmbedBlockElementSchema,
+	ExplainerAtomBlockElementSchema,
+	GenericAtomBlockElementSchema,
+	GuideAtomBlockElementSchema,
+	GuVideoBlockElementSchema,
+	HighlightBlockElementSchema,
+	ImageBlockElementSchema,
+	InstagramBlockElementSchema,
+	InteractiveAtomBlockElementSchema,
+	InteractiveContentsBlockElementSchema,
+	InteractiveBlockElementSchema,
+	ItemLinkBlockElementSchema,
+	KeyTakeawaysBlockElementSchema,
+	LinkBlockElementSchema,
+	ListBlockElementSchema,
+	MapBlockElementSchema,
+	MediaAtomBlockElementSchema,
+	MiniProfilesBlockElementSchema,
+	MultiBylinesBlockElementSchema,
+	MultiImageBlockElementSchema,
+	NumberedTitleBlockElementSchema,
+	NewsletterSignupBlockElementSchema,
+	ProfileAtomBlockElementSchema,
+	PullquoteBlockElementSchema,
+	QAndAExplainerBlockElementSchema,
+	QABlockElementSchema,
+	QuizAtomBlockElementSchema,
+	RichLinkBlockElementSchema,
+	SoundcloudBlockElementSchema,
+	SpotifyBlockElementSchema,
+	StarRatingBlockElementSchema,
+	SubheadingBlockElementSchema,
+	TableBlockElementSchema,
+	TextBlockElementSchema,
+	TimelineAtomBlockElementSchema,
+	FETimelineBlockElementSchema,
+	DCRTimelineBlockElementSchema,
+	DCRSectionedTimelineBlockElementSchema,
+	TweetBlockElementSchema,
+	VideoBlockElementSchema,
+	VideoFacebookBlockElementSchema,
+	VideoVimeoBlockElementSchema,
+	VideoYoutubeBlockElementSchema,
+	VineBlockElementSchema,
+	YoutubeBlockElementSchema,
+	WitnessTypeBlockElement,
+	CrosswordElementSchema,
+]);
+
+export type FEElement = Output<typeof FEElementSchema>;
 
 // -------------------------------------
 // Misc
 // -------------------------------------
 
-/**
- * This duplicate type is unfortunate, but the image sources come lowercase
- * Note, 'richLink' is used internally but does not exist upstream.
- */
-type Weighting = Exclude<RoleType, 'halfWidth' | 'richLink'> | 'halfwidth';
-
-const ImageSourceSchema = object({
-	weighting: Weighting;
-	srcSet: SrcSetItem[];
-}
-
-const SrcSetItemSchema = object({
-	src: string(),
-	width: number(),
-}
-
-const VideoAssetsSchema = object({
-	url: string(),
-	mimeType: optional(string()),
-	fields?: {
-		source: optional(string()),
-		embeddable: optional(string()),
-		height: optional(string()),
-		width: optional(string()),
-		caption: optional(string()),
-	};
-}
-
-const TimelineAtomEventSchema = object({
-	title: string(),
-	date: string(),
-	unixDate: number(),
-	body: optional(string()),
-	toDate: optional(string()),
-	toUnixDate: optional(number()),
-}
-
 export type TimelineAtomType = {
-	id: string(),
+	id: string;
 	events?: TimelineAtomEvent[];
-	title: string(),
-	description: optional(string()),
-	expandForStorybook: optional(boolean()),
+	title: string;
+	description?: string;
+	expandForStorybook: boolean;
 	likeHandler?: () => void;
 	dislikeHandler?: () => void;
 	expandCallback?: () => void;
 };
 
-export type RatingSizeType = 'large' | 'small';
-
-export type ImageForLightbox = {
+const ImageForLightboxSchema = object({
 	masterUrl: string(),
 	elementId: string(),
 	width: number(),
@@ -1141,9 +1493,9 @@ export type ImageForLightbox = {
 	 * Used to show when a liveblog image was posted
 	 */
 	firstPublished: optional(number()),
-};
+});
 
-
+export type ImageForLightbox = Output<typeof ImageForLightboxSchema>;
 
 export type SharePlatformType =
 	| 'facebook'
@@ -1156,32 +1508,7 @@ export type SharePlatformType =
 
 export type SharingUrlsType = {
 	[K in SharePlatformType]?: {
-		url: string(),
-		userMessage: string(),
+		url: string;
+		userMessage: string;
 	};
-};
-
-// -------------------------------------
-// Newsletter
-// -------------------------------------
-
-export type Newsletter = {
-	listId: number(),
-	identityName: string(),
-	name: string(),
-	description: string(),
-	frequency: string(),
-	successDescription: string(),
-	theme: string(),
-	group: string(),
-	regionFocus: optional(string()),
-	illustrationCard: optional(string()),
-};
-
-export type NewsletterLayout = {
-	groups: {
-		title: string(),
-		subtitle: optional(string()),
-		newsletters: string[];
-	}[];
 };
