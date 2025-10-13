@@ -46,7 +46,7 @@
 		"@guardian/cdk": "61.4.0",
 		"@guardian/content-api-models": "31.0.0",
 		"@guardian/content-atom-model": "6.1.0",
-		"@guardian/eslint-config-typescript": "9.0.1",
+		"@guardian/eslint-config-typescript": "10.0.1",
 		"@guardian/libs": "22.0.0",
 		"@guardian/renditions": "0.2.0",
 		"@guardian/source": "9.0.0",
