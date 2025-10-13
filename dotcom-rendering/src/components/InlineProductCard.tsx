@@ -183,7 +183,7 @@ export const InlineProductCard = ({
 			<div css={desktopButtonWrapper}>
 				<ProductLinkButton
 					dataComponent="inline-product-card-primary-button"
-				    label={stripHtmlFromString(primaryCTA)}
+					label={stripHtmlFromString(primaryCTA)}
 					url={primaryUrl}
 					cssOverrides={css`
 						width: 100%;
