@@ -1,18 +1,22 @@
 import {
-	any,
 	array,
 	boolean,
+	custom,
 	type GenericSchema,
 	type InferOutput,
 	lazy,
 	literal,
+	nonEmpty,
 	number,
 	object,
 	optional,
+	pipe,
+	record,
 	string,
 	union,
 } from 'valibot';
 import { type ArticleFormat } from '../lib/articleFormat';
+import { type CrosswordProps } from '@guardian/react-crossword';
 
 export type BoostLevel = 'default' | 'boost' | 'megaboost' | 'gigaboost';
 
@@ -1413,12 +1417,66 @@ export type WitnessTypeBlockElement = InferOutput<
 	typeof WitnessTypeBlockElementSchema
 >;
 
+type EntryID = CrosswordProps['data']['entries'][0]['id'];
+
+const EntryIDSchema = custom<EntryID>(
+	(input) =>
+		typeof input === 'string' && /^[0-9]*-(across|down)$/.test(input),
+);
+
 const CrosswordElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.CrosswordElement'),
-	crossword: any(), // TODO - crossword schema
+	crossword: object({
+		creator: optional(
+			object({
+				name: string(),
+				webUrl: string(),
+			}),
+		),
+		crosswordType: union([
+			literal('cryptic'),
+			literal('everyman'),
+			literal('prize'),
+			literal('quick-cryptic'),
+			literal('quick'),
+			literal('quiptic'),
+			literal('special'),
+			literal('speedy'),
+			literal('sunday-quick'),
+			literal('weekend'),
+		]),
+		date: number(),
+		dateSolutionAvailable: optional(number()),
+		dimensions: object({
+			rows: number(),
+			cols: number(),
+		}),
+		entries: array(
+			object({
+				id: EntryIDSchema,
+				group: pipe(
+					array(EntryIDSchema),
+					nonEmpty('group must have at least one item'),
+				),
+				number: number(),
+				direction: union([literal('across'), literal('down')]),
+				position: record(union([literal('x'), literal('y')]), number()),
+				clue: string(),
+				humanNumber: string(),
+				solution: optional(string()),
+				length: number(),
+				separatorLocations: record(string(), array(number())),
+			}),
+		),
+		id: string(),
+		name: string(),
+		number: number(),
+		pdf: optional(string()),
+		solutionAvailable: boolean(),
+		webPublicationDate: optional(number()),
+		instructions: optional(string()),
+	}),
 });
-
-export type CrosswordElement = InferOutput<typeof CrosswordElementSchema>;
 
 const FEElementSchema = union([
 	AdPlaceholderBlockElementSchema,
