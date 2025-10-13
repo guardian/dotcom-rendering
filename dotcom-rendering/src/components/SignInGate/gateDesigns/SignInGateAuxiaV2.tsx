@@ -35,8 +35,8 @@ const DividerWithOr = () => {
 };
 
 export const SignInGateAuxiaV2 = ({
-	signInUrl,
 	dismissGate,
+	queryParams,
 	abTest,
 	ophanComponentId,
 	userTreatment,
@@ -208,7 +208,7 @@ export const SignInGateAuxiaV2 = ({
 						</div>
 						<div css={emailContainer}>
 							<AuthProviderButtons
-								queryParams={{ returnUrl: signInUrl }}
+								queryParams={queryParams}
 								providers={['email']}
 								onClick={(provider) => {
 									trackLink(
@@ -230,7 +230,7 @@ export const SignInGateAuxiaV2 = ({
 
 						<div css={socialContainer}>
 							<AuthProviderButtons
-								queryParams={{ returnUrl: signInUrl }}
+								queryParams={queryParams}
 								providers={['social']}
 								onClick={(provider) => {
 									trackLink(

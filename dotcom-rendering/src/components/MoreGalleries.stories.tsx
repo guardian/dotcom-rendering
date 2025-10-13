@@ -16,7 +16,7 @@ export const MoreGalleries = {
 	args: {
 		absoluteServerTimes: false,
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
-		headingLink: 'https://www.theguardian.com/inpictures/all',
+		guardianBaseUrl: 'https://www.theguardian.com',
 		trails: [
 			{
 				url: 'https://www.theguardian.com/environment/gallery/2025/aug/22/week-in-wildlife-a-clumsy-fox-swinging-orangutang-and-rescued-jaguarundi-cub',

@@ -36,7 +36,7 @@ import { Standfirst } from '../components/Standfirst';
 import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { decideTrail } from '../lib/decideTrail';
+import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { isValidUrl } from '../lib/isValidUrl';
 import type { NavType } from '../model/extract-nav';
 import type { ArticleDeprecated } from '../types/article';
@@ -429,8 +429,9 @@ export const NewsletterSignupLayout = ({
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
-								trails={article.storyPackage.trails.map(
-									decideTrail,
+								trails={decideStoryPackageTrails(
+									article.storyPackage.trails,
+									article.webURL,
 								)}
 								onwardsSource="more-on-this-story"
 								format={format}
@@ -464,6 +465,7 @@ export const NewsletterSignupLayout = ({
 						discussionApiUrl={article.config.discussionApiUrl}
 						absoluteServerTimes={absoluteServerTimes}
 						renderingTarget={renderingTarget}
+						webURL={article.webURL}
 					/>
 				</Island>
 			</main>

@@ -29,18 +29,22 @@ const getClientParticipations = (): ABParticipations => {
 
 	return {};
 };
-const initABTesting = (): void => {
-	const { serverSideABTests } = window.guardian.config;
 
-	const clientSideABTests = getClientParticipations();
-
-	const participations = {
-		...clientSideABTests,
-		...serverSideABTests,
+/**
+ * Get all AB test participations, client and server side
+ */
+const getABTestParticipations = (): ABParticipations => {
+	return {
+		...getClientParticipations(),
+		...window.guardian.config.serverSideABTests,
 	};
+};
+
+const initWindowABTesting = (): void => {
+	const participations = getABTestParticipations();
 
 	window.guardian.modules.abTests = {
-		getParticipations: () => participations,
+		getParticipations: getABTestParticipations,
 		isUserInTest: (testId: string) => {
 			return !isUndefined(participations[testId]);
 		},
@@ -50,4 +54,4 @@ const initABTesting = (): void => {
 	};
 };
 
-export { initABTesting };
+export { initWindowABTesting, getABTestParticipations };

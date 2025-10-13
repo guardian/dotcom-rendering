@@ -18,6 +18,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Caption } from '../components/Caption';
 import { Carousel } from '../components/Carousel.importable';
 import { DiscussionLayout } from '../components/DiscussionLayout';
+import { FetchMoreGalleriesData } from '../components/FetchMoreGalleriesData.importable';
 import { Footer } from '../components/Footer';
 import { DesktopAdSlot, MobileAdSlot } from '../components/GalleryAdSlots';
 import { GalleryImage } from '../components/GalleryImage';
@@ -35,6 +36,7 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubMeta } from '../components/SubMeta';
 import { grid } from '../grid';
 import {
+	type ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
 	type ArticleTheme,
@@ -235,7 +237,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					const isImage =
 						element._type ===
 						'model.dotcomrendering.pageElements.ImageBlockElement';
-					const shouldShowAds =
+					const isAdPlaceholder =
 						element._type ===
 						'model.dotcomrendering.pageElements.AdPlaceholderBlockElement';
 					return (
@@ -249,7 +251,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 									renderingTarget={props.renderingTarget}
 								/>
 							)}
-							{shouldShowAds && renderAds && (
+							{isAdPlaceholder && renderAds && (
 								<>
 									{isWeb && (
 										<div css={galleryItemAdvertStyles}>
@@ -261,13 +263,17 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 												<Hide until="tablet">
 													<DesktopAdSlot
 														renderAds={renderAds}
-														adSlotIndex={index}
+														adSlotIndex={
+															element.adPosition
+														}
 													/>
 												</Hide>
 												<Hide from="tablet">
 													<MobileAdSlot
 														renderAds={renderAds}
-														adSlotIndex={index}
+														adSlotIndex={
+															element.adPosition
+														}
 													/>
 												</Hide>
 											</div>
@@ -292,25 +298,24 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						frontendData.showBottomSocialButtons && isWeb
 					}
 				/>
-			</main>
-			{/* More galleries container */}
-			{showMerchandisingHigh && (
-				<Section
-					fullWidth={true}
-					data-print-layout="hide"
-					padSides={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={palette('--ad-background')}
-					element="aside"
-				>
-					<AdSlot
-						data-print-layout="hide"
-						position="merchandising-high"
-						display={format.display}
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<FetchMoreGalleriesData
+						ajaxUrl={gallery.frontendData.config.ajaxUrl}
+						guardianBaseUrl={gallery.frontendData.guardianBaseURL}
+						discussionApiUrl={discussionApiUrl}
+						absoluteServerTimes={
+							switches['absoluteServerTimes'] ?? false
+						}
+						isAdFreeUser={frontendData.isAdFreeUser}
 					/>
-				</Section>
-			)}
+				</Island>
+			</main>
+
+			{/* More galleries container */}
+			<MerchandisingHigh
+				show={showMerchandisingHigh}
+				display={format.display}
+			/>
 			<StoryPackage
 				absoluteServerTimes={absoluteServerTimes}
 				discussionApiUrl={discussionApiUrl}
@@ -319,7 +324,6 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 				storyPackage={gallery.storyPackage}
 				topBorder={showMerchandisingHigh}
 			/>
-
 			<Island priority="feature" defer={{ until: 'visible' }}>
 				<OnwardsUpper
 					ajaxUrl={frontendData.config.ajaxUrl}
@@ -339,6 +343,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					discussionApiUrl={frontendData.config.discussionApiUrl}
 					absoluteServerTimes={absoluteServerTimes}
 					renderingTarget={renderingTarget}
+					webURL={frontendData.webURL}
 				/>
 			</Island>
 
@@ -596,6 +601,28 @@ const Meta = ({
 		) : null}
 	</div>
 );
+
+const MerchandisingHigh = (props: {
+	show: boolean;
+	display: ArticleDisplay;
+}) =>
+	props.show ? (
+		<Section
+			fullWidth={true}
+			data-print-layout="hide"
+			padSides={false}
+			showTopBorder={false}
+			showSideBorders={false}
+			backgroundColour={palette('--ad-background')}
+			element="aside"
+		>
+			<AdSlot
+				data-print-layout="hide"
+				position="merchandising-high"
+				display={props.display}
+			/>
+		</Section>
+	) : null;
 
 const StoryPackage = ({
 	storyPackage,

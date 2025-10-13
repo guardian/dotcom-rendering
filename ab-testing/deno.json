@@ -1,7 +1,7 @@
 {
 	"tasks": {
 		"validate": "deno run scripts/validation/index.ts",
-		"deploy": "deno run --allow-read=dist --allow-env=FASTLY_AB_TESTING_CONFIG --allow-net=api.fastly.com:443 scripts/deploy/index.ts --mvts=dist/mvts.json --ab-tests=dist/ab-tests.json",
+		"deploy": "deno run --allow-read=dist --allow-env=FASTLY_AB_TESTING_CONFIG,FASTLY_API_TOKEN --allow-net=api.fastly.com:443 scripts/deploy/index.ts --mvts=dist/mvts.json --ab-tests=dist/ab-tests.json",
 		"build": "deno run --allow-write=dist --allow-env=FASTLY_AB_TESTING_CONFIG,FASTLY_API_TOKEN --allow-net=api.fastly.com:443 scripts/build/index.ts --mvts=dist/mvts.json --ab-tests=dist/ab-tests.json"
 	},
 	"imports": {

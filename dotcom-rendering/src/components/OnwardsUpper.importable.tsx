@@ -186,6 +186,7 @@ type Props = {
 	discussionApiUrl: string;
 	absoluteServerTimes: boolean;
 	renderingTarget: RenderingTarget;
+	webURL: string;
 };
 
 /**
@@ -221,6 +222,7 @@ export const OnwardsUpper = ({
 	discussionApiUrl,
 	absoluteServerTimes,
 	renderingTarget,
+	webURL,
 }: Props) => {
 	const isHorizontalScrollingSupported = useIsHorizontalScrollingSupported();
 
@@ -330,6 +332,7 @@ export const OnwardsUpper = ({
 						renderingTarget={renderingTarget}
 						isAdFreeUser={isAdFreeUser}
 						containerPosition={'first'}
+						webURL={webURL}
 					/>
 				</Section>
 			)}
@@ -350,6 +353,7 @@ export const OnwardsUpper = ({
 						containerPosition={
 							hasOnwardsContainer ? 'second' : 'first'
 						}
+						webURL={webURL}
 					/>
 				</Section>
 			)}
