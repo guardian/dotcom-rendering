@@ -15,6 +15,7 @@ type TrailProps = {
 	containerPalette?: DCRContainerPalette;
 	isTagPage?: boolean;
 	aspectRatio?: AspectRatio;
+	stripBrandingFromCards?: boolean;
 };
 
 /**
@@ -57,6 +58,7 @@ export const Card100Media50 = ({
 	isTagPage,
 	absoluteServerTimes,
 	aspectRatio,
+	stripBrandingFromCards,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -85,6 +87,7 @@ export const Card100Media50 = ({
 					: 'vertical'
 			}
 			aspectRatio={aspectRatio}
+			stripBrandingFromCards={stripBrandingFromCards}
 		/>
 	);
 };
@@ -111,6 +114,7 @@ export const Card100Media75 = ({
 	isTagPage,
 	absoluteServerTimes,
 	aspectRatio,
+	stripBrandingFromCards,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -139,6 +143,7 @@ export const Card100Media75 = ({
 					: 'vertical'
 			}
 			aspectRatio={aspectRatio}
+			stripBrandingFromCards={stripBrandingFromCards}
 		/>
 	);
 };
@@ -166,6 +171,7 @@ export const Card100Media100 = ({
 	isTagPage,
 	absoluteServerTimes,
 	aspectRatio,
+	stripBrandingFromCards,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -182,6 +188,7 @@ export const Card100Media100 = ({
 			supportingContent={trail.supportingContent?.slice(0, 4)}
 			supportingContentAlignment="horizontal"
 			aspectRatio={aspectRatio}
+			stripBrandingFromCards={stripBrandingFromCards}
 		/>
 	);
 };
@@ -210,6 +217,7 @@ export const Card100Media100Tall = ({
 	isTagPage,
 	absoluteServerTimes,
 	aspectRatio,
+	stripBrandingFromCards,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -227,6 +235,7 @@ export const Card100Media100Tall = ({
 			supportingContentAlignment="vertical"
 			trailText={trail.trailText}
 			aspectRatio={aspectRatio}
+			stripBrandingFromCards={stripBrandingFromCards}
 		/>
 	);
 };
@@ -253,6 +262,7 @@ export const Card75Media50Right = ({
 	isTagPage,
 	absoluteServerTimes,
 	aspectRatio,
+	stripBrandingFromCards,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -274,6 +284,7 @@ export const Card75Media50Right = ({
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'small', tablet: 'xsmall' }}
 			aspectRatio={aspectRatio}
+			stripBrandingFromCards={stripBrandingFromCards}
 		/>
 	);
 };
@@ -300,6 +311,7 @@ export const Card75Media50Left = ({
 	isTagPage,
 	absoluteServerTimes,
 	aspectRatio,
+	stripBrandingFromCards,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -321,6 +333,7 @@ export const Card75Media50Left = ({
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'small', tablet: 'xsmall' }}
 			aspectRatio={aspectRatio}
+			stripBrandingFromCards={stripBrandingFromCards}
 		/>
 	);
 };
@@ -347,6 +360,7 @@ export const Card25Media25 = ({
 	isTagPage,
 	absoluteServerTimes,
 	aspectRatio,
+	stripBrandingFromCards,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -364,6 +378,7 @@ export const Card25Media25 = ({
 			headlineSizes={{ desktop: 'xsmall', tablet: 'xxsmall' }}
 			canPlayInline={false}
 			aspectRatio={aspectRatio}
+			stripBrandingFromCards={stripBrandingFromCards}
 		/>
 	);
 };
@@ -390,6 +405,7 @@ export const Card25Media25SmallHeadline = ({
 	isTagPage,
 	absoluteServerTimes,
 	aspectRatio,
+	stripBrandingFromCards,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -407,6 +423,7 @@ export const Card25Media25SmallHeadline = ({
 			headlineSizes={{ desktop: 'xxsmall', tablet: 'xxsmall' }}
 			canPlayInline={false}
 			aspectRatio={aspectRatio}
+			stripBrandingFromCards={stripBrandingFromCards}
 		/>
 	);
 };
@@ -434,6 +451,7 @@ export const Card25Media25Tall = ({
 	isTagPage,
 	absoluteServerTimes,
 	aspectRatio,
+	stripBrandingFromCards,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -457,6 +475,7 @@ export const Card25Media25Tall = ({
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 			canPlayInline={false}
 			aspectRatio={aspectRatio}
+			stripBrandingFromCards={stripBrandingFromCards}
 		/>
 	);
 };
@@ -483,6 +502,7 @@ export const Card25Media25TallNoTrail = ({
 	isTagPage,
 	absoluteServerTimes,
 	aspectRatio,
+	stripBrandingFromCards,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -499,6 +519,7 @@ export const Card25Media25TallNoTrail = ({
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 			canPlayInline={false}
 			aspectRatio={aspectRatio}
+			stripBrandingFromCards={stripBrandingFromCards}
 		/>
 	);
 };
@@ -525,6 +546,7 @@ export const Card25Media25TallSmallHeadline = ({
 	isTagPage,
 	absoluteServerTimes,
 	aspectRatio,
+	stripBrandingFromCards,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -541,6 +563,7 @@ export const Card25Media25TallSmallHeadline = ({
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 			canPlayInline={false}
 			aspectRatio={aspectRatio}
+			stripBrandingFromCards={stripBrandingFromCards}
 		/>
 	);
 };
@@ -567,6 +590,7 @@ export const Card50Media50 = ({
 	isTagPage,
 	absoluteServerTimes,
 	aspectRatio,
+	stripBrandingFromCards,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -583,6 +607,7 @@ export const Card50Media50 = ({
 			supportingContent={trail.supportingContent?.slice(0, 3)}
 			supportingContentAlignment="horizontal"
 			aspectRatio={aspectRatio}
+			stripBrandingFromCards={stripBrandingFromCards}
 		/>
 	);
 };
@@ -610,6 +635,7 @@ export const Card50Media50Tall = ({
 	isTagPage,
 	absoluteServerTimes,
 	aspectRatio,
+	stripBrandingFromCards,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -627,6 +653,7 @@ export const Card50Media50Tall = ({
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'small', tablet: 'xsmall' }}
 			aspectRatio={aspectRatio}
+			stripBrandingFromCards={stripBrandingFromCards}
 		/>
 	);
 };
@@ -653,6 +680,7 @@ export const Card66Media66 = ({
 	isTagPage,
 	absoluteServerTimes,
 	aspectRatio,
+	stripBrandingFromCards,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -668,6 +696,7 @@ export const Card66Media66 = ({
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
 			aspectRatio={aspectRatio}
+			stripBrandingFromCards={stripBrandingFromCards}
 		/>
 	);
 };
@@ -694,6 +723,7 @@ export const Card33Media33 = ({
 	isTagPage,
 	absoluteServerTimes,
 	aspectRatio,
+	stripBrandingFromCards,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -709,6 +739,7 @@ export const Card33Media33 = ({
 			isTagPage={isTagPage}
 			headlineSizes={{ desktop: 'xsmall', tablet: 'xxsmall' }}
 			aspectRatio={aspectRatio}
+			stripBrandingFromCards={stripBrandingFromCards}
 		/>
 	);
 };
@@ -734,6 +765,7 @@ export const Card33Media33Tall = ({
 	isTagPage,
 	absoluteServerTimes,
 	aspectRatio,
+	stripBrandingFromCards,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -750,6 +782,7 @@ export const Card33Media33Tall = ({
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 			supportingContentAlignment="vertical"
 			aspectRatio={aspectRatio}
+			stripBrandingFromCards={stripBrandingFromCards}
 		/>
 	);
 };
@@ -776,6 +809,7 @@ export const Card33Media33MobileTopTall = ({
 	isTagPage,
 	absoluteServerTimes,
 	aspectRatio,
+	stripBrandingFromCards,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -793,6 +827,7 @@ export const Card33Media33MobileTopTall = ({
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 			supportingContentAlignment="vertical"
 			aspectRatio={aspectRatio}
+			stripBrandingFromCards={stripBrandingFromCards}
 		/>
 	);
 };
@@ -816,6 +851,7 @@ export const CardDefault = ({
 	absoluteServerTimes,
 	isTagPage,
 	aspectRatio,
+	stripBrandingFromCards,
 }: Omit<TrailProps, 'imageLoading'>) => {
 	return (
 		<FrontCard
@@ -830,6 +866,7 @@ export const CardDefault = ({
 			canPlayInline={false}
 			isTagPage={isTagPage}
 			aspectRatio={aspectRatio}
+			stripBrandingFromCards={stripBrandingFromCards}
 		/>
 	);
 };
@@ -854,6 +891,7 @@ export const CardDefaultMedia = ({
 	isTagPage,
 	absoluteServerTimes,
 	aspectRatio,
+	stripBrandingFromCards,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -869,6 +907,7 @@ export const CardDefaultMedia = ({
 			headlineSizes={{ desktop: 'xxsmall' }}
 			canPlayInline={false}
 			aspectRatio={aspectRatio}
+			stripBrandingFromCards={stripBrandingFromCards}
 		/>
 	);
 };
@@ -893,6 +932,7 @@ export const CardDefaultMediaMobile = ({
 	isTagPage,
 	absoluteServerTimes,
 	aspectRatio,
+	stripBrandingFromCards,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -908,6 +948,7 @@ export const CardDefaultMediaMobile = ({
 			headlineSizes={{ desktop: 'xxsmall' }}
 			canPlayInline={false}
 			aspectRatio={aspectRatio}
+			stripBrandingFromCards={stripBrandingFromCards}
 		/>
 	);
 };

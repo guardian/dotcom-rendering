@@ -163,6 +163,7 @@ export type Props = {
 	headlinePosition?: 'inner' | 'outer';
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
+	stripBrandingFromCards?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -404,6 +405,7 @@ export const Card = ({
 	isInAllBoostsTest = false,
 	headlinePosition = 'inner',
 	showLabsRedesign = false,
+	stripBrandingFromCards = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -818,6 +820,7 @@ export const Card = ({
 				branding={branding}
 				containerPalette={containerPalette}
 				onwardsSource={onwardsSource}
+				stripBranding={stripBrandingFromCards}
 			/>
 		);
 	};

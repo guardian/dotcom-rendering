@@ -18,6 +18,7 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubNav } from '../components/SubNav.importable';
 import { TagPageHeader } from '../components/TagPageHeader';
 import { TrendingTopics } from '../components/TrendingTopics';
+import { isPaidContentSameBranding } from '../lib/branding';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import {
@@ -64,6 +65,8 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 
 	const isAccessibilityPage =
 		tagPage.config.pageId === 'help/accessibility-help';
+
+	const stripBrandingFromCards = isPaidContentSameBranding(tagPage.branding);
 
 	return (
 		<>
@@ -177,6 +180,9 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									imageLoading={imageLoading}
 									isTagPage={true}
 									aspectRatio={'5:4'}
+									stripBrandingFromCards={
+										stripBrandingFromCards
+									}
 								/>
 							</FrontSection>
 							{mobileAdPositions.includes(index) && (
