@@ -875,8 +875,6 @@ export const Card = ({
 				</div>
 			)}
 
-			{/** Don't merge this! */}
-			<p>subtitleSize: {subtitleSize}</p>
 			<CardLayout
 				cardBackgroundColour={backgroundColour}
 				mediaPositionOnDesktop={mediaPositionOnDesktop}
@@ -962,18 +960,7 @@ export const Card = ({
 								defer={{ until: 'visible' }}
 							>
 								<LoopVideo
-									// sources={media.mainMedia.sources}
-									sources={[
-										{
-											// Test loop with subtitles
-											src: 'https://uploads.guimcode.co.uk/2025/10/07/Andy_test_6_oct--9d8d52da-da51-4ca0-9e04-ae6868c9afba-3.1.m3u8',
-											mimeType: 'application/x-mpegURL',
-										},
-										{
-											src: 'https://uploads.guimcode.co.uk/2025/10/07/Andy_test_6_oct--9d8d52da-da51-4ca0-9e04-ae6868c9afba-3.0.mp4',
-											mimeType: 'video/mp4',
-										},
-									]}
+									sources={media.mainMedia.sources}
 									atomId={media.mainMedia.atomId}
 									uniqueId={uniqueId}
 									height={media.mainMedia.height}
@@ -986,8 +973,7 @@ export const Card = ({
 									fallbackImageAspectRatio="5:4"
 									linkTo={linkTo}
 									subtitleSource={
-										// TESTING ONLY - DO NOT MERGE
-										'https://uploads.guimcode.co.uk/2025/10/07/Andy_test_6_oct--9d8d52da-da51-4ca0-9e04-ae6868c9afba-3.1captions_00001.vtt'
+										media.mainMedia.subtitleSource
 									}
 									subtitleSize={subtitleSize}
 								/>
