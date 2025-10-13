@@ -16397,7 +16397,7 @@ packages:
     resolution: {integrity: sha512-ECkTw8TmJwW60lOTR+ZkODISW6RQ8+2CL3COqtiJKLd6MmB45hN51HprHFziKLGkAuTGQhBb91V8cy+KHlaCjw==}
     engines: {node: '>= 0.4'}
     dependencies:
-      call-bind: 1.0.7
+      call-bind: 1.0.8
       define-properties: 1.2.1
       es-abstract: 1.23.3
       get-intrinsic: 1.2.4
@@ -19070,7 +19070,7 @@ packages:
       is-bigint: 1.0.4
       is-boolean-object: 1.1.2
       is-number-object: 1.0.7
-      is-string: 1.0.7
+      is-string: 1.1.1
       is-symbol: 1.0.4
     dev: false
 
