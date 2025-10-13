@@ -10,6 +10,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import { Picture } from './Picture';
 import { ProductLinkButton } from './ProductLinkButton';
+import { stripHtmlFromString } from './TextBlockComponent';
 
 export type Statistics = {
 	name: string;
@@ -126,7 +127,7 @@ export const LeftColProductCard = ({
 		<div css={buttonOverride}>
 			<ProductLinkButton
 				dataComponent="leftcol-product-card-button"
-				label={primaryCta}
+				label={stripHtmlFromString(primaryCta)}
 				url={primaryUrl}
 				size={'small'}
 				cssOverrides={css`
