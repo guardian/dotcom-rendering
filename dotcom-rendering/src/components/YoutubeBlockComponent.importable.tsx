@@ -123,16 +123,12 @@ export const YoutubeBlockComponent = ({
 			return posterImage;
 		}
 
-		// For Standard Articles with a Video atom for their main media
-		// we need to display the poster image
-		if (contentLayout?.toLowerCase() === 'standardlayout') {
-			return posterImage;
-		}
-
-		// For Liveblog Articles with a Video atom for their main media
-		// we need to display the poster image
-		// Note: main media videos in liveblogs tend to be transitory eg PMQs
-		if (contentLayout?.toLowerCase() === 'livebloglayout') {
+		// For Standard Articles and Liveblog Articles with a Video atom for
+		// their main media we need to display the poster image.
+		if (
+			contentLayout?.toLowerCase() === 'standardlayout' ||
+			contentLayout?.toLowerCase() === 'livebloglayout'
+		) {
 			return posterImage;
 		}
 
