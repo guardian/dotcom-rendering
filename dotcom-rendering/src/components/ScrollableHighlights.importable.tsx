@@ -191,6 +191,10 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 	`;
 };
 
+const hideCarousel = css`
+	visibility: hidden;
+`;
+
 /**
  * Typically, Ophan tracking data gets determined in the front layout component.
  * As the highlights exists outside of this front layout (in the header), we need to construct these fields here.
@@ -268,7 +272,10 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 		getOphanInfo(frontId);
 
 	return (
-		<div css={containerStyles} data-link-name={ophanFrontName}>
+		<div
+			css={[containerStyles, hideCarousel]}
+			data-link-name={ophanFrontName}
+		>
 			<ol
 				data-link-name={ophanComponentLink}
 				data-component={ophanComponentName}
