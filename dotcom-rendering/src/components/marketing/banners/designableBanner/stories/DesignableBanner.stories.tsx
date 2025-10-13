@@ -3,7 +3,7 @@ import type {
 	SelectedAmountsVariant,
 	TickerSettings,
 } from '@guardian/support-dotcom-components/dist/shared/types';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import lzstring from 'lz-string';
 import {
 	choiceCardsSettings,

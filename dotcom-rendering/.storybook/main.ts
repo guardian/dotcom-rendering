@@ -9,7 +9,13 @@ import { svgr } from '../webpack/svg.cjs';
 saveStories();
 
 const config: StorybookConfig = {
-	features: {},
+	features: {
+		actions: true,
+		backgrounds: true,
+		controls: true,
+		viewport: true,
+		toolbars: true,
+	},
 
 	stories: [
 		'../src/**/*.stories.@(tsx)',
@@ -23,21 +29,7 @@ const config: StorybookConfig = {
 		{ from: '../src/static', to: '/static/frontend/' },
 	],
 
-	addons: [
-		{
-			name: '@storybook/addon-essentials',
-			options: {
-				actions: true,
-				backgrounds: true,
-				controls: true,
-				docs: true,
-				viewport: true,
-				toolbars: true,
-			},
-		},
-		'@storybook/addon-interactions',
-		'@storybook/addon-webpack5-compiler-swc',
-	],
+	addons: ['@storybook/addon-webpack5-compiler-swc', '@storybook/addon-docs'],
 
 	webpackFinal: async (config) => {
 		// Get project specific webpack options
