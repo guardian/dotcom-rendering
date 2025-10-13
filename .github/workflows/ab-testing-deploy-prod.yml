@@ -5,11 +5,11 @@ permissions:
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - main
-  #   paths:
-  #     - 'ab-testing/**'
+  push:
+    branches:
+      - main
+    paths:
+      - 'ab-testing/**'
 
 jobs:
   ci:

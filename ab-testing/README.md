@@ -16,8 +16,8 @@ Add your AB tests to the `abTests` array in the `abTest.ts` file. Each test shou
 	expirationDate: '2050-12-30',
 	type: 'client',
 	audienceSize: 10 / 100,
-	audienceSpace: 'A',
 	groups: ['control', 'variant'],
+	shouldForceMetricsCollection: true
 }
 ```
 

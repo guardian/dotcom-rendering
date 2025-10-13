@@ -3,6 +3,11 @@ on:
   pull_request:
     paths:
       - 'ab-testing/**'
+  push:
+    branches:
+      - main
+    paths:
+      - 'ab-testing/**'
 
 jobs:
   build-ui:
