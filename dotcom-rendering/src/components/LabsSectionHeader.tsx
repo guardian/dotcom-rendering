@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	between,
 	from,
 	space,
 	textSans14,
@@ -75,6 +76,10 @@ const labelAndAboutStyles = css`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+
+	${between.leftCol.and.wide} {
+		flex-direction: column;
+	}
 `;
 
 const labelStyles = css`
@@ -85,6 +90,10 @@ const labelStyles = css`
 const aboutStyles = css`
 	justify-self: end;
 	${textSans14}
+
+	${between.leftCol.and.wide} {
+		margin-top: ${space[1]}px;
+	}
 `;
 
 const positionStyles = css`

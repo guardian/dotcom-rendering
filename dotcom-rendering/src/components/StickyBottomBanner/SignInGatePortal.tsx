@@ -26,7 +26,6 @@ export const SignInGatePortal = ({
 	isPreview,
 	pageId,
 	contributionsServiceUrl,
-	idUrl,
 	auxiaGateDisplayData,
 }: {
 	host?: string;
@@ -34,7 +33,6 @@ export const SignInGatePortal = ({
 	isPreview: boolean;
 	pageId: string;
 	contributionsServiceUrl: string;
-	idUrl: string;
 	auxiaGateDisplayData: AuxiaGateDisplayData;
 }) => {
 	const [shouldShowGate, setShouldShowGate] = useState<boolean>(false);
@@ -128,7 +126,6 @@ export const SignInGatePortal = ({
 				isPreview={isPreview}
 				host={host}
 				pageId={pageId}
-				idUrl={idUrl}
 				contributionsServiceUrl={contributionsServiceUrl}
 				auxiaGateDisplayData={auxiaGateDisplayData}
 			/>

@@ -189,7 +189,6 @@ const buildSignInGateConfig = (
 	pageId: string,
 	contributionsServiceUrl: string,
 	editionId: EditionId,
-	idUrl: string,
 	host?: string,
 ): CandidateConfig<AuxiaGateDisplayData> => ({
 	candidate: {
@@ -215,7 +214,6 @@ const buildSignInGateConfig = (
 				isPreview={isPreview}
 				pageId={pageId}
 				contributionsServiceUrl={contributionsServiceUrl}
-				idUrl={idUrl}
 				auxiaGateDisplayData={meta}
 			/>
 		),
@@ -353,7 +351,6 @@ export const StickyBottomBanner = ({
 			pageId,
 			contributionsServiceUrl,
 			editionId,
-			idApiUrl, // Using idApiUrl as idUrl
 			host,
 		);
 

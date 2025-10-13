@@ -11,6 +11,7 @@ import {
 } from '@guardian/core-web-vitals';
 import { getCookie, isString, isUndefined } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
+import { compareClientTestWithNewFramework } from '../experiments/tests/compare-client-test-with-new-framework';
 import { useAB, useBetaAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useDetectAdBlock } from '../lib/useDetectAdBlock';
@@ -30,6 +31,7 @@ const willRecordCoreWebVitals = Math.random() < sampling;
 // For these tests switch off sampling and collect metrics for 100% of views
 const clientSideTestsToForceMetrics: ABTest[] = [
 	/* keep array multi-line */
+	compareClientTestWithNewFramework,
 ];
 
 const shouldCollectMetricsForBetaTests = (userTestParticipations: string[]) => {
