@@ -9,6 +9,7 @@ import {
 import { useEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { ophanComponentId } from '../lib/ophan-helpers';
+import { getHighlightClickHistory } from '../lib/personaliseHighlights';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { HighlightsCard } from './Masthead/HighlightsCard';
@@ -195,6 +196,10 @@ const hideCarousel = css`
 	visibility: hidden;
 `;
 
+const showCarousel = css`
+	visibility: visible;
+`;
+
 /**
  * Typically, Ophan tracking data gets determined in the front layout component.
  * As the highlights exists outside of this front layout (in the header), we need to construct these fields here.
@@ -217,7 +222,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	const imageLoading = 'eager';
 	const [showPreviousButton, setShowPreviousButton] = useState(false);
 	const [showNextButton, setShowNextButton] = useState(true);
-
+	const [shouldShowHighlights, setShouldShowHighlights] = useState(false);
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
 
@@ -268,12 +273,26 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 		};
 	}, []);
 
+	useEffect(() => {
+		const history = getHighlightClickHistory();
+		if (history === undefined) {
+			setShouldShowHighlights(true);
+		}
+
+		// if there is a history, reorganise highlights then set to true
+		// shuffle highlights
+		setShouldShowHighlights(true);
+	}, []);
+
 	const { ophanComponentLink, ophanComponentName, ophanFrontName } =
 		getOphanInfo(frontId);
 
 	return (
 		<div
-			css={[containerStyles, hideCarousel]}
+			css={[
+				containerStyles,
+				shouldShowHighlights ? showCarousel : hideCarousel,
+			]}
 			data-link-name={ophanFrontName}
 		>
 			<ol
