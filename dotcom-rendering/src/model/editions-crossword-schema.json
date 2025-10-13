@@ -25,6 +25,7 @@
                         "enum": [
                             "cryptic",
                             "everyman",
+                            "mini",
                             "prize",
                             "quick",
                             "quick-cryptic",
