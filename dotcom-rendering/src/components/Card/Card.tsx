@@ -756,7 +756,7 @@ export const Card = ({
 	 * Results in a clickable brand logo and sponsorship label
 	 */
 	const LabsBranding = () => {
-		if (!branding) return;
+		if (!branding || stripBrandingFromCards) return;
 		const getLocationPrefix = () => {
 			if (!onwardsSource) {
 				return 'front-card';
@@ -820,7 +820,6 @@ export const Card = ({
 				branding={branding}
 				containerPalette={containerPalette}
 				onwardsSource={onwardsSource}
-				stripBranding={stripBrandingFromCards}
 			/>
 		);
 	};

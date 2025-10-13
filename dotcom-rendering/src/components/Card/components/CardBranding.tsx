@@ -48,7 +48,6 @@ export const CardBranding = ({
 	branding,
 	onwardsSource,
 	containerPalette,
-	stripBranding = false,
 }: Props) => {
 	const logo = decideBrandingLogo(branding, containerPalette);
 
@@ -66,56 +65,51 @@ export const CardBranding = ({
 			: undefined;
 
 	return (
-		!stripBranding && (
-			<div css={brandingWrapperStyle}>
-				<div css={labelStyle}>{logo.label}</div>
-				<span
-					css={css`
-						${visuallyHidden};
-					`}
-				>
-					{branding.sponsorName
-						? `This content was paid for by ${branding.sponsorName} and produced by the Guardian Labs team.`
-						: 'This content has been paid for by an advertiser and produced by the Guardian Labs team.'}
-				</span>
-				<a
-					href={logo.link}
-					data-sponsor={branding.sponsorName.toLowerCase()}
-					rel="nofollow"
-					aria-label={`Visit the ${branding.sponsorName} website`}
-					data-testid="card-branding-logo"
-					data-component={dataAttributes?.ophanComponentName}
-					data-link-name={dataAttributes?.ophanComponentLink}
-					className="branding-logo"
-				>
-					<picture>
-						{darkModeAvailable &&
-							branding.logoForDarkBackground && (
-								<source
-									width={
-										branding.logoForDarkBackground
-											.dimensions.width
-									}
-									height={
-										branding.logoForDarkBackground
-											.dimensions.height
-									}
-									srcSet={encodeURI(
-										branding.logoForDarkBackground.src,
-									)}
-									media={'(prefers-color-scheme: dark)'}
-								/>
+		<div css={brandingWrapperStyle}>
+			<div css={labelStyle}>{logo.label}</div>
+			<span
+				css={css`
+					${visuallyHidden};
+				`}
+			>
+				{branding.sponsorName
+					? `This content was paid for by ${branding.sponsorName} and produced by the Guardian Labs team.`
+					: 'This content has been paid for by an advertiser and produced by the Guardian Labs team.'}
+			</span>
+			<a
+				href={logo.link}
+				data-sponsor={branding.sponsorName.toLowerCase()}
+				rel="nofollow"
+				aria-label={`Visit the ${branding.sponsorName} website`}
+				data-testid="card-branding-logo"
+				data-component={dataAttributes?.ophanComponentName}
+				data-link-name={dataAttributes?.ophanComponentLink}
+				className="branding-logo"
+			>
+				<picture>
+					{darkModeAvailable && branding.logoForDarkBackground && (
+						<source
+							width={
+								branding.logoForDarkBackground.dimensions.width
+							}
+							height={
+								branding.logoForDarkBackground.dimensions.height
+							}
+							srcSet={encodeURI(
+								branding.logoForDarkBackground.src,
 							)}
-						<img
-							css={logoImageStyle}
-							src={logo.src}
-							alt={branding.sponsorName}
-							width={logo.dimensions.width}
-							height={logo.dimensions.height}
+							media={'(prefers-color-scheme: dark)'}
 						/>
-					</picture>
-				</a>
-			</div>
-		)
+					)}
+					<img
+						css={logoImageStyle}
+						src={logo.src}
+						alt={branding.sponsorName}
+						width={logo.dimensions.width}
+						height={logo.dimensions.height}
+					/>
+				</picture>
+			</a>
+		</div>
 	);
 };
