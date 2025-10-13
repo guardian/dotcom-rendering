@@ -312,11 +312,20 @@ export const OnwardsUpper = ({
 		format.design === ArticleDesign.Gallery ? isUndefined(url) : true;
 
 	return (
-		<div css={onwardsWrapper}>
+		<div id="marjan" css={onwardsWrapper}>
 			{!!url && (
 				<Section
 					fullWidth={true}
 					borderColour={palette('--article-section-border')}
+					padSides={
+						format.design === ArticleDesign.Gallery ? false : true
+					}
+					showTopBorder={
+						format.design === ArticleDesign.Gallery ? false : true
+					}
+					showSideBorders={
+						format.design === ArticleDesign.Gallery ? false : true
+					}
 				>
 					<FetchOnwardsData
 						url={url}
@@ -335,6 +344,15 @@ export const OnwardsUpper = ({
 				<Section
 					fullWidth={true}
 					borderColour={palette('--article-section-border')}
+					showTopBorder={
+						format.design === ArticleDesign.Gallery ? false : true
+					}
+					showSideBorders={
+						format.design === ArticleDesign.Gallery ? false : true
+					}
+					padSides={
+						format.design === ArticleDesign.Gallery ? false : true
+					}
 				>
 					<FetchOnwardsData
 						url={curatedDataUrl}
