@@ -26,7 +26,7 @@ deployments:
           value: public, max-age=315360000, immutable # one year in seconds
       prefixStack: false
       publicReadAcl: false
-  frontend-store/admin:
+  admin/ab-testing:
     type: aws-s3
     parameters:
       bucketSsmKey: /account/services/dotcom-store.bucket

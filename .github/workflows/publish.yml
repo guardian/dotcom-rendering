@@ -86,5 +86,5 @@ jobs:
               - interactive-rendering
             frontend-static:
               - frontend-static
-            frontend-store/admin:
+            admin/ab-testing:
               - ab-testing/ab-tests.html
