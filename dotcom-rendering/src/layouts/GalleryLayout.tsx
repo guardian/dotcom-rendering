@@ -521,7 +521,7 @@ const Body = (props: {
 			 * this function does contain `return` statements. TypeScript will
 			 * confirm the switch is exhaustive, but it's possible ESLint does
 			 * not know this. */
-			.map((element, index) => {
+			.map((element) => {
 				switch (element._type) {
 					case 'model.dotcomrendering.pageElements.ImageBlockElement':
 						return (
@@ -538,7 +538,8 @@ const Body = (props: {
 						return (
 							<BodyAdSlot
 								renderingTarget={props.renderingTarget}
-								adIndex={index}
+								adIndex={element.adPosition}
+								key={element.adPosition}
 							/>
 						);
 				}
@@ -552,9 +553,9 @@ const BodyAdSlot = (props: {
 }) => {
 	switch (props.renderingTarget) {
 		case 'Web':
-			return <WebAdSlot adIndex={props.adIndex} key={props.adIndex} />;
+			return <WebAdSlot adIndex={props.adIndex} />;
 		case 'Apps':
-			return <AdPlaceholder key={props.adIndex} />;
+			return <AdPlaceholder />;
 	}
 };
 
