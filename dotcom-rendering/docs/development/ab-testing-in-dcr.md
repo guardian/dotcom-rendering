@@ -1,5 +1,74 @@
 # AB Testing in DCR
 
+This document explains how to set up A/B tests in Dotcom Rendering (DCR).
+
+## Creating a new A/B test
+
+Create an ab test in [ab-testing/abTest.ts](../ab-testing/abTest.ts) both server and client side tests are defined here. More information on defining tests can be found in [ab-testing/README.md](../ab-testing/README.md).
+
+When the config is merged, the A/B test will be automatically deployed and be available at the same time as your changes.
+
+Ab test on/off state is controlled only by the config. Expired tests will cause the ab testing validation to fail, they will also not be served. In effect expired tests are turned off "automatically", but their config needs to be cleaned up.
+
+## Putting code changes behind an A/B test (group)
+
+### Use in Components
+
+Again, this applies to both client and server side tests.
+
+```ts
+// Within the components
+import { useBetaAB } from '../lib/useAB';
+
+const someComponent = () => {
+	// Example usage of AB Tests
+	const abTests = useBetaAB();
+
+	// Am I in the test at all?
+	const isInTest = abTests?.isUserInTest('AbTestTest') ?? false;
+
+	const isInControlGroup =
+		(abTests?.isUserInTestGroup('AbTestTest', 'control') ?? false);
+
+	const isInVariantGroup =
+	abTests?.isUserInTestGroup('AbTestTest', 'variant') ?? false;
+
+	if (isInControlGroup) {
+		return (
+			<div>
+				You're in the control group
+			</div>
+		);
+	} else if (isInVariantGroup) {
+		return (
+			<div>
+				You're in the variant group
+			</div>
+		);
+	} else {
+		return (
+			<div>
+				You're not in the test
+			</div>
+		);
+	}
+}
+
+```
+
+### Other ways to check
+
+The ab test API is also available on the window object as `window.guardian.modules.abTests`, this only works client side. It's best to use the `useBetaAB` hook in react components.
+
+Server side tests are also available in the CAPI object e.g. `CAPIArticle.config.serverSideABTests`.
+
+# Legacy A/B testing in DCR
+
+> [!WARNING]
+> This section describes the legacy A/B testing framework in DCR. New A/B tests should use the new A/B testing framework described above.
+
+The documentation remains here for reference, until all legacy A/B tests have ended or have been migrated to the new framework.
+
 ## Client-side A/B tests
 
 > [!NOTE]
