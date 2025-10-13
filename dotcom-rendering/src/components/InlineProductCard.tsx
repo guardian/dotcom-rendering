@@ -41,19 +41,19 @@ const card = css`
 	background-color: ${palette('--product-card-background')};
 	padding: ${space[2]}px ${space[3]}px ${space[3]}px;
 	display: grid;
-	grid-template-columns: auto 1fr;
-	column-gap: 12px;
+	grid-template-columns: 1fr 1fr;
+	column-gap: 10px;
 	row-gap: ${space[3]}px;
 	border-top: 1px solid ${palette('--section-border-lifestyle')};
 	max-width: 100%;
-
 	img {
-		height: 165px;
-		width: 165px;
-		object-fit: cover;
+		width: 100%;
+		height: auto;
 	}
-
-	${from.phablet} {
+	${from.mobileLandscape} {
+		column-gap: 20px;
+	}
+	${from.tablet} {
 		img {
 			height: 328px;
 			width: 328px;
@@ -191,7 +191,7 @@ export const InlineProductCard = ({
 				/>
 				{!!secondaryCTA && !!secondaryUrl && (
 					<ProductLinkButton
-						dataComponent="inline-secondary-card-primary-button"
+						dataComponent="inline-product-card-secondary-button"
 						label={stripHtmlFromString(secondaryCTA)}
 						url={secondaryUrl}
 						priority="tertiary"
