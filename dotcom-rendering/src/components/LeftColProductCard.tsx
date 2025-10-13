@@ -92,8 +92,6 @@ const Statistic = ({ name, value }: Statistics) => (
 	</div>
 );
 
-//todo -- make this a proper image generateSources() etc.
-
 export const LeftColProductCard = ({
 	brandName,
 	productName,
