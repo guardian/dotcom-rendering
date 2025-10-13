@@ -1,3 +1,4 @@
+import { union, literal, type InferOutput, object, array, boolean, optional, string, lazy, type GenericSchema } from 'valibot';
 import type { FEFormat } from '../frontend/feArticle';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { Block } from './blocks';
@@ -27,6 +28,22 @@ export interface FEBlocksRequest {
 	shouldHideAds: boolean;
 }
 
+// Pillars are used for styling
+
+/** `RealPillars` have pillar palette colours */
+const RealPillarsSchema = union([
+	literal('news'),
+	literal('opinion'),
+	literal('sport'),
+	literal('culture'),
+	literal('lifestyle'),
+])
+/** `FakePillars` allow us to make modifications to style based on rules outside of the pillar of an article */
+const FakePillarsSchema = literal('labs');
+
+export const LegacyPillarSchema = union([RealPillarsSchema, FakePillarsSchema]);
+export type LegacyPillar = InferOutput<typeof LegacyPillarSchema>;
+
 /**
  * Data types for the API request bodies from clients that require transformation before internal use.
  * Where data types are coming from Frontend we try to use the 'FE' prefix.
@@ -42,6 +59,16 @@ export interface FELinkType {
 	more?: boolean;
 	classList?: string[];
 }
+export const FELinkTypeSchema: GenericSchema<FELinkType> = object({
+	url: string(),
+	title: string(),
+	longTitle: optional(string()),
+	iconName: optional(string()),
+	children: optional(array(lazy(() => FELinkTypeSchema))),
+	pillar: optional(LegacyPillarSchema),
+	more: optional(boolean()),
+	classList: optional(array(string())),
+});
 export interface FENavType {
 	currentUrl: string;
 	pillars: FELinkType[];
@@ -56,11 +83,3 @@ export interface FENavType {
 	};
 	readerRevenueLinks: ReaderRevenuePositions;
 }
-
-// Pillars are used for styling
-
-/** `RealPillars` have pillar palette colours */
-type RealPillars = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
-/** `FakePillars` allow us to make modifications to style based on rules outside of the pillar of an article */
-type FakePillars = 'labs';
-export type LegacyPillar = RealPillars | FakePillars;

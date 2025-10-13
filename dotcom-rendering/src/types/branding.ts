@@ -1,27 +1,38 @@
+import { optional, string, union, object, literal, type InferOutput, number } from 'valibot';
 import type { EditionId } from '../lib/edition';
 
-type BrandingLogo = {
-	src: string;
-	link: string;
-	label: string;
-	dimensions: { width: number; height: number };
-};
+export const BrandingLogoSchema = object({
+	src: string(),
+	link: string(),
+	label: string(),
+	dimensions: object({
+		width: number(),
+		height: number(),
+	}),
+});
+
+export type BrandingLogo = InferOutput<typeof BrandingLogoSchema>;
 
 /**
  * @see https://github.com/guardian/commercial-shared/blob/35cdf4e1/src/main/scala/com/gu/commercial/branding/BrandingType.scala
  */
-export type BrandingType =
-	| { name: 'paid-content' }
-	| { name: 'foundation' }
-	| { name: 'sponsored' };
+export const BrandingTypeSchema = union([
+	object({ name: literal('paid-content') }),
+	object({ name: literal('foundation') }),
+	object({ name: literal('sponsored') }),
+]);
 
-export interface Branding {
-	brandingType?: BrandingType;
-	sponsorName: string;
-	logo: BrandingLogo;
-	aboutThisLink: string;
-	logoForDarkBackground?: BrandingLogo;
-}
+export type BrandingType = InferOutput<typeof BrandingTypeSchema>;
+
+export const BrandingSchema = object({
+	brandingType: optional(BrandingTypeSchema),
+	sponsorName: string(),
+	logo: BrandingLogoSchema,
+	aboutThisLink: string(),
+	logoForDarkBackground: optional(BrandingLogoSchema),
+});
+
+export type Branding = InferOutput<typeof BrandingSchema>;
 
 export interface EditionBranding {
 	edition: {

@@ -1,7 +1,16 @@
 import { isOneOf } from '@guardian/libs';
 import { isTuple } from './tuple';
+import { literal, union, type InferOutput } from 'valibot';
 
-type EditionId = 'UK' | 'US' | 'AU' | 'INT' | 'EUR';
+const EditionIdSchema = union([
+	literal('UK'),
+	literal('US'),
+	literal('AU'),
+	literal('INT'),
+	literal('EUR'),
+]);
+
+type EditionId = InferOutput<typeof EditionIdSchema>;
 
 type Edition = (typeof editionList)[number];
 
@@ -161,7 +170,8 @@ const getLocaleFromEdition = (edition: EditionId): Locale =>
 	getEditionFromId(edition).dateLocale;
 
 export {
-	EditionId,
+	type EditionId,
+	EditionIdSchema,
 	Edition,
 	TimeZone,
 	editionList,

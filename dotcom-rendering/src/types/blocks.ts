@@ -1,41 +1,44 @@
-import type { FEElement } from './content';
+import { array, boolean, number, object, optional, string, type InferOutput } from 'valibot';
+import { FEElementSchema, type FEElement } from './content';
 
-interface MembershipPlaceholder {
-	campaignCode?: string;
-}
+const MembershipPlaceholderSchema = object({
+	campaignCode: optional(string()),
+});
 
-interface Attributes {
-	pinned: boolean;
-	summary: boolean;
-	keyEvent: boolean;
-	membershipPlaceholder?: MembershipPlaceholder;
-}
+const AttributesSchema = object({
+	pinned: boolean(),
+	summary: boolean(),
+	keyEvent: boolean(),
+	membershipPlaceholder: optional(MembershipPlaceholderSchema),
+});
 
-interface BlockContributor {
-	name: string;
-	imageUrl?: string;
-	largeImageUrl?: string;
-}
+const BlockContributorSchema = object({
+	name: string(),
+	imageUrl: optional(string()),
+	largeImageUrl: optional(string()),
+});
 
-export interface Block {
-	id: string;
-	elements: FEElement[];
-	attributes: Attributes;
-	blockCreatedOn?: number;
-	blockCreatedOnDisplay?: string;
-	blockLastUpdated?: number;
-	blockLastUpdatedDisplay?: string;
-	title?: string;
-	blockFirstPublished?: number;
-	blockFirstPublishedDisplay?: string;
-	blockFirstPublishedDisplayNoTimezone?: string;
-	primaryDateLine: string;
-	secondaryDateLine: string;
-	createdOn?: number;
-	createdOnDisplay?: string;
-	lastUpdated?: number;
-	lastUpdatedDisplay?: string;
-	firstPublished?: number;
-	firstPublishedDisplay?: string;
-	contributors?: BlockContributor[];
-}
+export const BlockSchema = object({
+	id: string(),
+	elements: array(FEElementSchema),
+	attributes: AttributesSchema,
+	blockCreatedOn: optional(number()),
+	blockCreatedOnDisplay: optional(string()),
+	blockLastUpdated: optional(number()),
+	blockLastUpdatedDisplay: optional(string()),
+	title: optional(string()),
+	blockFirstPublished: optional(number()),
+	blockFirstPublishedDisplay: optional(string()),
+	blockFirstPublishedDisplayNoTimezone: optional(string()),
+	primaryDateLine: string(),
+	secondaryDateLine: string(),
+	createdOn: optional(number()),
+	createdOnDisplay: optional(string()),
+	lastUpdated: optional(number()),
+	lastUpdatedDisplay: optional(string()),
+	firstPublished: optional(number()),
+	firstPublishedDisplay: optional(string()),
+	contributors: optional(array(BlockContributorSchema)),
+});
+
+export type Block = InferOutput<typeof BlockSchema>;

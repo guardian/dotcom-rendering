@@ -1,3 +1,4 @@
+import { object, optional, string } from 'valibot';
 import type {
 	FEAspectRatio,
 	FEContainer,
@@ -108,11 +109,13 @@ export type DCRSlideshowImage = {
 	imageCaption?: string;
 };
 
-export type DCRSnapType = {
-	embedHtml?: string;
-	embedCss?: string;
-	embedJs?: string;
-};
+export const DCRSnapTypeSchema = object({
+	embedHtml: optional(string()),
+	embedCss: optional(string()),
+	embedJs: optional(string()),
+});
+
+export type DCRSnapType = InferOutput<typeof DCRSnapTypeSchema>;
 
 export type AspectRatio = FEAspectRatio;
 

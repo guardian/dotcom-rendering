@@ -105,7 +105,7 @@ const ImageSourceSchema = object({
 	srcSet: array(SrcSetItemSchema),
 });
 
-const StarRatingSchema = union([
+export const StarRatingSchema = union([
 	literal(0),
 	literal(1),
 	literal(2),
@@ -1478,7 +1478,7 @@ const CrosswordElementSchema = object({
 	}),
 });
 
-const FEElementSchema = union([
+export const FEElementSchema = union([
 	AdPlaceholderBlockElementSchema,
 	AudioAtomBlockElementSchema,
 	AudioBlockElementSchema,

@@ -1,24 +1,31 @@
-import type { SharedAdTargeting } from '../lib/ad-targeting';
-import type { EditionId } from '../lib/edition';
+import { array, boolean, custom, intersect, literal, number, object, optional, record, string, undefined, union, type InferOutput } from 'valibot';
+import { SharedAdTargetingSchema } from '../lib/ad-targeting';
+import { EditionIdSchema, type EditionId } from '../lib/edition';
 
-export type StageType = 'DEV' | 'CODE' | 'PROD';
+const StageTypeSchema = union([
+	literal('DEV'),
+	literal('CODE'),
+	literal('PROD'),
+])
 
-export interface CommercialConfigType {
-	isPaidContent?: boolean;
-	pageId: string;
-	webPublicationDate?: number;
-	headline?: string;
-	author?: string;
-	keywords?: string;
-	section?: string;
-	edition?: string;
-	series?: string;
-	toneIds?: string;
-	contentType: string;
-	ampIframeUrl: string;
-	hasLiveBlogTopAd?: boolean;
-	hasSurveyAd?: boolean;
-}
+export type StageType = InferOutput<typeof StageTypeSchema>;
+
+const CommercialConfigTypeSchema = object({
+	isPaidContent: optional(boolean()),
+	pageId: string(),
+	webPublicationDate: optional(number()),
+	headline: optional(string()),
+	author: optional(string()),
+	keywords: optional(string()),
+	section: optional(string()),
+	edition: optional(string()),
+	series: optional(string()),
+	toneIds: optional(string()),
+	contentType: string(),
+	ampIframeUrl: string(),
+	hasLiveBlogTopAd: optional(boolean()),
+	hasSurveyAd: optional(boolean()),
+});
 
 /**
  * Narrowest representation of the server-side tests
@@ -26,16 +33,20 @@ export interface CommercialConfigType {
  *
  * **Note:** This type is not support by JSON-schema, it evaluates as `object`
  */
-export type ServerSideTests = {
-	[key: `${string}Variant`]: 'variant';
-	[key: `${string}Control`]: 'control';
-};
+const VariantKeySchema = custom<`${string}Variant`>((input) => typeof input === 'string' && /.*Variant$/.test(input));
+const VariantTestsSchema = record(VariantKeySchema, literal('variant'));
+const ControlKeySchema = custom<`${string}Control`>((input) => typeof input === 'string' && /.*Control$/.test(input));
+const ControlTestsSchema = record(ControlKeySchema, literal('control'));
+
+const ServerSideTestsSchema = intersect([VariantTestsSchema, ControlTestsSchema]);
+
+export type ServerSideTests = InferOutput<typeof ServerSideTestsSchema>;
 
 export type ServerSideTestNames = keyof ServerSideTests;
 
-export interface Switches {
-	[key: string]: boolean | undefined;
-}
+const SwitchesSchema = record(string(), union([boolean(), undefined()]));
+
+export type Switches = InferOutput<typeof SwitchesSchema>;
 
 /**
  * the config model will contain useful app/site
@@ -43,49 +54,52 @@ export interface Switches {
  * constructed in frontend and passed to dotcom-rendering
  * this data could eventually be defined in dotcom-rendering
  */
-export interface ConfigType extends CommercialConfigType {
-	dcrCouldRender?: boolean;
-	ajaxUrl: string;
-	sentryPublicApiKey: string;
-	sentryHost: string;
-	dcrSentryDsn: string;
-	switches: Switches;
-	abTests: ServerSideTests;
-	serverSideABTests: Record<string, string>;
-	dfpAccountId: string;
-	commercialBundleUrl: string;
-	revisionNumber: string;
-	shortUrlId: string;
-	isDev?: boolean;
-	googletagUrl: string;
-	stage: StageType;
-	frontendAssetsFullURL: string;
-	adUnit: string;
-	isSensitive: boolean;
-	videoDuration?: number;
-	edition: EditionId;
-	section: string;
-	source?: string;
+export const ConfigTypeSchema = object({
+	...CommercialConfigTypeSchema.entries,
+	dcrCouldRender: optional(boolean()),
+	ajaxUrl: string(),
+	sentryPublicApiKey: string(),
+	sentryHost: string(),
+	dcrSentryDsn: string(),
+	switches: SwitchesSchema,
+	abTests: ServerSideTestsSchema,
+	serverSideABTests: record(string(), string()),
+	dfpAccountId: string(),
+	commercialBundleUrl: string(),
+	revisionNumber: string(),
+	shortUrlId: string(),
+	isDev: optional(boolean()),
+	googletagUrl: string(),
+	stage: StageTypeSchema,
+	frontendAssetsFullURL: string(),
+	adUnit: string(),
+	isSensitive: boolean(),
+	videoDuration: optional(number()),
+	edition: EditionIdSchema,
+	section: string(),
+	source: optional(string()),
 
-	sharedAdTargeting: SharedAdTargeting;
-	isPaidContent?: boolean;
-	keywordIds: string;
-	showRelatedContent: boolean;
-	shouldHideReaderRevenue?: boolean;
-	idApiUrl: string;
-	discussionApiUrl: string;
-	discussionD2Uid: string;
-	discussionApiClientHeader: string;
-	isPhotoEssay?: boolean;
-	references?: { [key: string]: string }[];
-	host?: string;
-	idUrl?: string;
-	mmaUrl?: string;
-	brazeApiKey?: string;
-	ipsosTag?: string;
-	isLiveBlog?: boolean;
-	isLive?: boolean;
-	isPreview?: boolean;
-	googleRecaptchaSiteKey?: string;
-	googleRecaptchaSiteKeyVisible?: string;
-}
+	sharedAdTargeting: SharedAdTargetingSchema,
+	isPaidContent: optional(boolean()),
+	keywordIds: string(),
+	showRelatedContent: boolean(),
+	shouldHideReaderRevenue: optional(boolean()),
+	idApiUrl: string(),
+	discussionApiUrl: string(),
+	discussionD2Uid: string(),
+	discussionApiClientHeader: string(),
+	isPhotoEssay: optional(boolean()),
+	references: optional(array(record(string(), string()))),
+	host: optional(string()),
+	idUrl: optional(string()),
+	mmaUrl: optional(string()),
+	brazeApiKey: optional(string()),
+	ipsosTag: optional(string()),
+	isLiveBlog: optional(boolean()),
+	isLive: optional(boolean()),
+	isPreview: optional(boolean()),
+	googleRecaptchaSiteKey: optional(string()),
+	googleRecaptchaSiteKeyVisible: optional(string()),
+});
+
+export type ConfigType = InferOutput<typeof ConfigTypeSchema>;

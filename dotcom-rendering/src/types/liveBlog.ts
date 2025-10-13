@@ -1,14 +1,18 @@
+import { number, object, optional, string, type InferOutput } from "valibot";
+
 export type LiveUpdateType = {
 	numNewBlocks: number;
 	html: string;
 	mostRecentBlockId: string;
 };
 
-export interface PaginationType {
-	currentPage: number;
-	totalPages: number;
-	newest?: string;
-	newer?: string;
-	oldest?: string;
-	older?: string;
-}
+export const PaginationTypeSchema = object({
+	currentPage: number(),
+	totalPages: number(),
+	newest: optional(string()),
+	newer: optional(string()),
+	oldest: optional(string()),
+	older: optional(string()),
+});
+
+export type PaginationType = InferOutput<typeof PaginationTypeSchema>;

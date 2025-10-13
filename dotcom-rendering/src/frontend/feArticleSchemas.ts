@@ -6,7 +6,6 @@ import {
 	number,
 	object,
 	optional,
-	type Output,
 	record,
 	string,
 	union,
@@ -693,6 +692,15 @@ const MultiImageBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
+// Newsletter schema (simplified)
+const NewsletterSchema = object({
+	name: string(),
+	description: optional(string()),
+	frequency: optional(string()),
+	listId: optional(number()),
+	successDescription: optional(string()),
+});
+
 const NewsletterSignupBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.NewsletterSignupBlockElement'),
 	newsletter: NewsletterSchema,
@@ -1348,15 +1356,6 @@ const FEArticleBadgeTypeSchema = object({
 
 // MatchType schema (simplified)
 const MatchTypeSchema = union([literal('football'), literal('cricket')]);
-
-// Newsletter schema (simplified)
-const NewsletterSchema = object({
-	name: string(),
-	description: optional(string()),
-	frequency: optional(string()),
-	listId: optional(number()),
-	successDescription: optional(string()),
-});
 
 // FEOnwards schema (simplified)
 const FEOnwardsSchema = object({

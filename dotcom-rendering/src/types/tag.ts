@@ -4,6 +4,8 @@
  * @see https://github.com/guardian/frontend/blob/5b987289/common/app/model/Tag.scala#L156-L179
  */
 
+import { object, optional, string, type InferOutput } from "valibot";
+
 type Reference = {
 	id: string;
 	type: string;
@@ -37,24 +39,31 @@ export type FEPagination = {
 	lastPage: number;
 	totalContent: number;
 };
-export type Podcast = {
-	subscriptionUrl?: string;
-	spotifyUrl?: string;
-	image?: string;
-};
 
-export type PodcastSeriesImage = {
-	src?: string;
-	altText?: string;
-};
+const PodcastSchema = object({
+	subscriptionUrl: optional(string()),
+	spotifyUrl: optional(string()),
+	image: optional(string()),
+});
 
-export type TagType = {
-	id: string;
-	type: string;
-	title: string;
-	twitterHandle?: string;
-	paidContentType?: string;
-	bylineImageUrl?: string;
-	bylineLargeImageUrl?: string;
-	podcast?: Podcast;
-};
+type Podcast = InferOutput<typeof PodcastSchema>;
+
+export const PodcastSeriesImageSchema = object({
+	src: optional(string()),
+	altText: optional(string()),
+});
+
+export type PodcastSeriesImage = InferOutput<typeof PodcastSeriesImageSchema>;
+
+export const TagTypeSchema = object({
+	id: string(),
+	type: string(),
+	title: string(),
+	twitterHandle: optional(string()),
+	paidContentType: optional(string()),
+	bylineImageUrl: optional(string()),
+	bylineLargeImageUrl: optional(string()),
+	podcast: optional(PodcastSchema),
+});
+
+export type TagType = InferOutput<typeof TagTypeSchema>;
