@@ -1,28 +1,30 @@
-import type { FEFormat } from '../frontend/feArticle';
-import type { FETrailType } from './trails';
+import { array, boolean, literal, object, optional, string, union } from 'valibot';
+import { FEFormatSchema } from '../frontend/feArticle';
+import { FETrailTypeSchema } from './trails';
+
+const OnwardsSourceSchema = union([
+	literal('series'),
+	literal('more-on-this-story'),
+	literal('related-stories'),
+	literal('related-content'),
+	literal('more-media-in-section'),
+	literal('more-galleries'),
+	literal('curated-content'),
+	literal('newsletters-page'),
+	literal('unknown-source'), // We should never see this in the analytics data!
+]);
 
 /**
  * Onwards
  */
-export type FEOnwards = {
-	heading: string;
-	trails: FETrailType[];
-	description?: string;
-	url?: string;
-	onwardsSource: OnwardsSource;
-	format: FEFormat;
-	isCuratedContent?: boolean;
-};
-
-export type OnwardsSource =
-	| 'series'
-	| 'more-on-this-story'
-	| 'related-stories'
-	| 'related-content'
-	| 'more-media-in-section'
-	| 'more-galleries'
-	| 'curated-content'
-	| 'newsletters-page'
-	| 'unknown-source'; // We should never see this in the analytics data!
+export const FEOnwardsSchema = object({
+	heading: string(),
+	trails: array(FETrailTypeSchema),
+	description: optional(string()),
+	url: optional(string()),
+	onwardsSource: OnwardsSourceSchema,
+	format: FEFormatSchema,
+	isCuratedContent: optional(boolean()),
+});
 
 export type OnwardContainerType = 'more-galleries';

@@ -655,7 +655,7 @@ export type HighlightBlockElement = InferOutput<
 	typeof HighlightBlockElementSchema
 >;
 
-const ImageBlockElementSchema = object({
+export const ImageBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.ImageBlockElement'),
 	elementId: string(),
 	media: object({ allImages: array(ImageSchema) }),

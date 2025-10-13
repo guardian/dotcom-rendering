@@ -1,16 +1,9 @@
-import { object, string, type InferOutput } from "valibot";
+import { type InferOutput, literal, object, string, union } from "valibot";
 
 export type CustomPlayEventDetail = { uniqueId: string };
 
 export const customLoopPlayAudioEventName = 'looping-video:play-with-audio';
 export const customYoutubePlayEventName = 'youtube-video:play';
-
-export const SourceSchema = object({
-	src: string(),
-	mimeType: SupportedVideoFileType,
-});
-
-export type Source = InferOutput<typeof SourceSchema>;
 
 /**
  * Order is important here - the browser will use the first type it supports.
@@ -21,4 +14,11 @@ export const supportedVideoFileTypes = [
 	'video/mp4', // MP4 format
 ] as const;
 
-export type SupportedVideoFileType = (typeof supportedVideoFileTypes)[number];
+const SupportedVideoFileTypeSchema = union(supportedVideoFileTypes.map((type) => literal(type)));
+export type SupportedVideoFileType = InferOutput<typeof SupportedVideoFileTypeSchema>;
+
+export const SourceSchema = object({
+    src: string(),
+    mimeType: SupportedVideoFileTypeSchema,
+});
+export type Source = InferOutput<typeof SourceSchema>;

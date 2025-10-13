@@ -1,6 +1,6 @@
 import { isString } from '@guardian/libs';
+import { type InferOutput, record, string, unknown } from 'valibot';
 import type { AdTargeting } from '../types/commercial';
-import { record, string, unknown, type InferOutput } from 'valibot';
 
 export const SharedAdTargetingSchema = record(string(), unknown());
 

@@ -1,6 +1,6 @@
 import { isOneOf } from '@guardian/libs';
+import { type InferOutput, literal, union } from 'valibot';
 import { isTuple } from './tuple';
-import { literal, union, type InferOutput } from 'valibot';
 
 const EditionIdSchema = union([
 	literal('UK'),

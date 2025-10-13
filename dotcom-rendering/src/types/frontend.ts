@@ -1,8 +1,8 @@
-import { union, literal, type InferOutput, object, array, boolean, optional, string, lazy, type GenericSchema } from 'valibot';
+import { array, boolean, type GenericSchema, type InferOutput, lazy, literal, object, optional, string, union } from 'valibot';
 import type { FEFormat } from '../frontend/feArticle';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { Block } from './blocks';
-import type { ReaderRevenuePositions } from './commercial';
+import { ReaderRevenuePositionsSchema } from './commercial';
 import type { ServerSideTests } from './config';
 
 /**
@@ -69,17 +69,20 @@ export const FELinkTypeSchema: GenericSchema<FELinkType> = object({
 	more: optional(boolean()),
 	classList: optional(array(string())),
 });
-export interface FENavType {
-	currentUrl: string;
-	pillars: FELinkType[];
-	otherLinks: FELinkType[];
-	brandExtensions: FELinkType[];
-	currentNavLink?: FELinkType;
-	currentNavLinkTitle?: string;
-	currentPillarTitle?: string;
-	subNavSections?: {
-		parent?: FELinkType;
-		links: FELinkType[];
-	};
-	readerRevenueLinks: ReaderRevenuePositions;
-}
+
+export const FENavTypeSchema = object({
+	currentUrl: string(),
+	pillars: array(FELinkTypeSchema),
+	otherLinks: array(FELinkTypeSchema),
+	brandExtensions: array(FELinkTypeSchema),
+	currentNavLink: optional(FELinkTypeSchema),
+	currentNavLinkTitle: optional(string()),
+	currentPillarTitle: optional(string()),
+	subNavSections: optional(object({
+		parent: optional(FELinkTypeSchema),
+		links: array(FELinkTypeSchema),
+	})),
+	readerRevenueLinks: ReaderRevenuePositionsSchema
+});
+
+export type FENavType = InferOutput<typeof FENavTypeSchema>;

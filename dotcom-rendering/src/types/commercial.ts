@@ -1,14 +1,26 @@
-import type { EditionId } from '../lib/edition';
-import type { Branding } from './branding';
+import { array, type InferOutput, object, optional, string, union } from 'valibot';
+import { type EditionId, EditionIdSchema } from '../lib/edition';
+import { BrandingSchema } from './branding';
 
-export interface EditionCommercialProperties {
-	adTargeting: AdTargetParam[];
-	branding?: Branding;
-}
+const AdTargetParamSchema = object({
+	name: string(),
+	value: union([string(), array(string())]),
+});
 
-export type CommercialProperties = {
-	[E in EditionId]: EditionCommercialProperties;
-};
+const EditionCommercialPropertiesSchema = object({
+	adTargeting: array(AdTargetParamSchema),
+	branding: optional(BrandingSchema),
+});
+
+export type EditionCommercialProperties = InferOutput<typeof EditionCommercialPropertiesSchema>;
+
+export const CommercialPropertiesSchema = object(
+    Object.fromEntries(
+      EditionIdSchema.options.map((editionId) => [editionId, EditionCommercialPropertiesSchema])
+    ) as Record<EditionId, typeof EditionCommercialPropertiesSchema>
+);
+
+export type CommercialProperties = InferOutput<typeof CommercialPropertiesSchema>;
 
 /**
  * key: a front, e.g. "uk" or "uk/sport"
@@ -18,10 +30,6 @@ export type FrontsBannerAdCollections = {
 	[key: string]: string[];
 };
 
-export interface AdTargetParam {
-	name: string;
-	value: string | string[];
-}
 
 type CustomParams = {
 	sens: 't' | 'f';
@@ -39,20 +47,24 @@ export type AdTargeting =
 			disableAds: true;
 	  };
 
-export interface ReaderRevenueCategories {
-	contribute: string;
-	subscribe: string;
-	support: string;
-	supporter: string;
-	gifting?: string;
-}
+const ReaderRevenueCategoriesSchema = object({
+	contribute: string(),
+	subscribe: string(),
+	support: string(),
+	supporter: string(),
+	gifting: optional(string()),
+});
 
-export interface ReaderRevenuePositions {
-	header: ReaderRevenueCategories;
-	footer: ReaderRevenueCategories;
-	sideMenu: ReaderRevenueCategories;
-	ampHeader: ReaderRevenueCategories;
-	ampFooter: ReaderRevenueCategories;
-}
+export type ReaderRevenueCategories = InferOutput<typeof ReaderRevenueCategoriesSchema>;
+
+export const ReaderRevenuePositionsSchema = object({
+	header: ReaderRevenueCategoriesSchema,
+	footer: ReaderRevenueCategoriesSchema,
+	sideMenu: ReaderRevenueCategoriesSchema,
+	ampHeader: ReaderRevenueCategoriesSchema,
+	ampFooter: ReaderRevenueCategoriesSchema,
+});
+
+export type ReaderRevenuePositions = InferOutput<typeof ReaderRevenuePositionsSchema>;
 
 export type ReaderRevenuePosition = keyof ReaderRevenuePositions;

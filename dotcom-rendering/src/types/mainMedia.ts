@@ -1,16 +1,16 @@
 import {
 	array,
 	boolean,
+	type InferOutput,
 	literal,
 	number,
 	object,
 	optional,
-	type InferOutput,
 	string,
 	union,
 } from 'valibot';
-import { PodcastSeriesImageSchema } from './tag';
 import { SourceSchema } from '../lib/video';
+import { PodcastSeriesImageSchema } from './tag';
 /** For displaying embedded, playable videos directly in cards */
 const VideoSchema = object({
 	type: literal('Video'),

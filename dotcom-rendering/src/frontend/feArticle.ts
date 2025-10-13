@@ -1,23 +1,23 @@
 import { type CrosswordProps } from '@guardian/react-crossword';
 import { EditionIdSchema, type EditionId } from '../lib/edition';
-import type { FEArticleBadgeType } from '../types/badge';
+import { FEArticleBadgeTypeSchema } from '../types/badge';
 import { BlockSchema, type Block } from '../types/blocks';
-import type { CommercialProperties } from '../types/commercial';
+import { CommercialPropertiesSchema } from '../types/commercial';
 import { ConfigTypeSchema, type ConfigType } from '../types/config';
 import {
 	FEElementSchema,
 	type FEElement,
-	type ImageBlockElement,
+	ImageBlockElementSchema,
 	type Newsletter,
-	type StarRating,
+	StarRatingSchema
 } from '../types/content';
 import type { FooterType } from '../types/footer';
-import { FELinkTypeSchema, LegacyPillarSchema, type FELinkType, type FENavType, type LegacyPillar } from '../types/frontend';
+import { FELinkTypeSchema, FENavTypeSchema, LegacyPillarSchema, type FELinkType, type FENavType, type LegacyPillar } from '../types/frontend';
 import { PaginationTypeSchema } from '../types/liveBlog';
-import type { FEOnwards } from '../types/onwards';
+import { FEOnwardsSchema } from '../types/onwards';
 import type { MatchType } from '../types/sport';
 import { TagTypeSchema, type TagType } from '../types/tag';
-import type { FETrailType } from '../types/trails';
+import { FETrailTypeSchema, type FETrailType } from '../types/trails';
 import { any, array, boolean, literal, number, object, optional, record, string, union, unknown, type InferOutput } from 'valibot';
 
 const FEPillarSchema = union([
@@ -165,18 +165,18 @@ const FEArticleSchema = object({
 	hasRelated: boolean(),
 	publication: string(), // TODO: check who uses?
 	hasStoryPackage: boolean(),
-	storyPackage?: FEStoryPackage;
-	onwards?: FEOnwards[];
+	storyPackage: optional(FEStoryPackageSchema),
+	onwards: optional(array(FEOnwardsSchema)),
 	beaconURL: string(),
 	isCommentable: boolean(),
-	commercialProperties: CommercialProperties;
-	starRating?: StarRating;
-	audioArticleImage?: ImageBlockElement;
-	trailPicture?: ImageBlockElement;
+	commercialProperties: CommercialPropertiesSchema,
+	starRating: optional(StarRatingSchema),
+	audioArticleImage: optional(ImageBlockElementSchema),
+	trailPicture: optional(ImageBlockElementSchema),
 	trailText: string(),
-	badge?: FEArticleBadgeType;
+	badge: optional(FEArticleBadgeTypeSchema),
 
-	nav: FENavType; // TODO move this out as most code uses a different internal NAV model.
+	nav: FENavTypeSchema, // TODO move this out as most code uses a different internal NAV model.
 
 	pageFooter: FooterType;
 
