@@ -19,30 +19,4 @@ import type { ABTest } from './types';
  * - 100% Test	variant		MVT 500-999
  */
 
-export const ABTests: ABTest[] = [
-	// Sample tests that will be used for testing the AB testing framework
-	{
-		name: 'commercial-client-side-test-1',
-		description:
-			'Show new ad block ask component in ad slots when we detect ad blocker usage',
-		owners: ['commercial.dev@guardian.co.uk'],
-		status: 'ON',
-		expirationDate: '2050-12-30',
-		type: 'client',
-		audienceSize: 10 / 100,
-		groups: ['control', 'variant'],
-		shouldForceMetricsCollection: true,
-	},
-	{
-		name: 'commercial-server-side-test-1',
-		description:
-			'Show new ad block ask component in ad slots when we detect ad blocker usage',
-		owners: ['commercial.dev@guardian.co.uk'],
-		status: 'ON',
-		expirationDate: '2050-12-30',
-		type: 'server',
-		audienceSize: 10 / 100,
-		groups: ['control', 'variant'],
-		shouldForceMetricsCollection: true,
-	},
-];
+export const ABTests: ABTest[] = [];
