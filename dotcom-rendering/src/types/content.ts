@@ -11,6 +11,7 @@ import {
 	string,
 	union,
 } from 'valibot';
+import { ArticleFormatSchema } from '../lib/articleFormat';
 
 export type BoostLevel = 'default' | 'boost' | 'megaboost' | 'gigaboost';
 
@@ -279,6 +280,8 @@ const QuestionTypeSchema = object({
 	imageAlt: optional(string()),
 });
 
+export type QuestionType = Output<typeof QuestionTypeSchema>;
+
 const ResultGroupsTypeSchema = object({
 	title: string(),
 	shareText: string(),
@@ -286,11 +289,15 @@ const ResultGroupsTypeSchema = object({
 	id: string(),
 });
 
+export type ResultGroupsType = Output<typeof ResultGroupsTypeSchema>;
+
 const ResultsBucketTypeSchema = object({
 	id: string(),
 	title: string(),
 	description: string(),
 });
+
+export type ResultsBucketType = Output<typeof ResultsBucketTypeSchema>;
 
 const KnowledgeQuizAtomTypeSchema = object({
 	id: string(),
@@ -298,8 +305,10 @@ const KnowledgeQuizAtomTypeSchema = object({
 	resultGroups: array(ResultGroupsTypeSchema),
 	pageId: string(),
 	webTitle: string(),
-	format: ArticleFormat, // TODO
+	format: ArticleFormatSchema,
 });
+
+export type KnowledgeQuizAtomType = Output<typeof KnowledgeQuizAtomTypeSchema>;
 
 const PersonalityQuizAtomTypeSchema = object({
 	id: string(),
@@ -307,8 +316,12 @@ const PersonalityQuizAtomTypeSchema = object({
 	resultBuckets: array(ResultsBucketTypeSchema),
 	pageId: string(),
 	webTitle: string(),
-	format: ArticleFormat, // TODO
+	format: ArticleFormatSchema,
 });
+
+export type PersonalityQuizAtomType = Output<
+	typeof PersonalityQuizAtomTypeSchema
+>;
 
 export type QuizSelectionType = Record<string, AnswerType>;
 

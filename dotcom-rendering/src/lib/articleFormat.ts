@@ -1,4 +1,5 @@
 import { isString } from '@guardian/libs';
+import { type BaseSchema, literal, object, union } from 'valibot';
 import type { FEFormat } from '../frontend/feArticle';
 
 export enum ArticleDesign {
@@ -31,12 +32,30 @@ export enum ArticleDesign {
 	Crossword,
 }
 
+// Valibot schema for ArticleDesign enum, generated from the enum values
+const articleDesignValues = Object.values(ArticleDesign).filter(
+	(value): value is ArticleDesign => !isString(value),
+);
+
+export const ArticleDesignSchema: BaseSchema<ArticleDesign> = union(
+	articleDesignValues.map((value) => literal(value)),
+);
+
 export enum ArticleDisplay {
 	Standard,
 	Immersive,
 	Showcase,
 	NumberedList,
 }
+
+// Valibot schema for ArticleDisplay enum, generated from the enum values
+const articleDisplayValues = Object.values(ArticleDisplay).filter(
+	(value): value is ArticleDisplay => !isString(value),
+);
+
+export const ArticleDisplaySchema: BaseSchema<ArticleDisplay> = union(
+	articleDisplayValues.map((value) => literal(value)),
+);
 
 export enum Pillar {
 	News = 0,
@@ -46,19 +65,48 @@ export enum Pillar {
 	Lifestyle = 4,
 }
 
+// Valibot schema for ArticleDisplay enum, generated from the enum values
+const articlePillarValues = Object.values(Pillar).filter(
+	(value): value is Pillar => !isString(value),
+);
+
+export const ArticlePillarSchema: BaseSchema<Pillar> = union(
+	articlePillarValues.map((value) => literal(value)),
+);
+
 export enum ArticleSpecial {
 	SpecialReport = 5,
 	Labs = 6,
 	SpecialReportAlt = 7,
 }
 
+// Valibot schema for ArticleDisplay enum, generated from the enum values
+const articleSpecialValues = Object.values(ArticleSpecial).filter(
+	(value): value is ArticleSpecial => !isString(value),
+);
+
+export const ArticleSpecialSchema: BaseSchema<ArticleSpecial> = union(
+	articleSpecialValues.map((value) => literal(value)),
+);
+
 export type ArticleTheme = Pillar | ArticleSpecial;
+
+export const ArticleThemeSchema: BaseSchema<ArticleTheme> = union([
+	ArticlePillarSchema,
+	ArticleSpecialSchema,
+]);
 
 export interface ArticleFormat {
 	theme: ArticleTheme;
 	design: ArticleDesign;
 	display: ArticleDisplay;
 }
+
+export const ArticleFormatSchema: BaseSchema<ArticleFormat> = object({
+	theme: ArticleThemeSchema,
+	design: ArticleDesignSchema,
+	display: ArticleDisplaySchema,
+});
 
 /**
  * NOTE: Immersive Opinion pieces are not supported,
