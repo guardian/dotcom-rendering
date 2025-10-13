@@ -26,6 +26,13 @@ deployments:
           value: public, max-age=315360000, immutable # one year in seconds
       prefixStack: false
       publicReadAcl: false
+  frontend-store/admin:
+    type: aws-s3
+    parameters:
+      bucketSsmKey: /account/services/dotcom-store.bucket
+      cacheControl: public, max-age=315360000
+      prefixStack: false
+      publicReadAcl: false
   # article-rendering cloudformation
   article-rendering-cfn:
     template: cloudformation

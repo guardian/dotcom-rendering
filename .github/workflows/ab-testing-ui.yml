@@ -1,13 +1,6 @@
 name: 🦕 AB testing UI
 on:
-  pull_request:
-    paths:
-      - 'ab-testing/**'
-  push:
-    branches:
-      - main
-    paths:
-      - 'ab-testing/**'
+  workflow_call:
 
 jobs:
   build-ui:
@@ -32,41 +25,6 @@ jobs:
       - name: Save build
         uses: actions/upload-artifact@v4.6.2
         with:
-          name: ui-build
-          path: ${{ github.workspace }}/ab-testing/frontend/output/ab-tests.html
+          name: ab-testing-ui-build
+          path: ab-testing/frontend/output/ab-tests.html
           if-no-files-found: error
-
-  riff-raff:
-    name: AB testing Riffraff upload
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
-      pull-requests: write
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-
-      - name: Set up Node
-        uses: ./.github/actions/setup-node-env
-
-      - name: Fetch build
-        uses: actions/download-artifact@v5.0.0
-        with:
-          name: ui-build
-          path: output/ab-tests.html
-
-      - name: Riff-Raff Upload
-        uses: guardian/actions-riff-raff@v4.1.9
-        with:
-          roleArn: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-          projectName: dotcom:rendering-all
-          configPath: ab-testing/riff-raff.yaml
-          contentDirectories: |
-            frontend-store/commercial:
-              - output/ab-tests.html
