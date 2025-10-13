@@ -125,6 +125,7 @@ export const LeftColProductCard = ({
 		</div>
 		<div css={buttonOverride}>
 			<ProductLinkButton
+				dataComponent="leftcol-product-card-button"
 				label={primaryCta}
 				url={primaryUrl}
 				size={'small'}

@@ -182,7 +182,8 @@ export const InlineProductCard = ({
 
 			<div css={desktopButtonWrapper}>
 				<ProductLinkButton
-					label={stripHtmlFromString(primaryCTA)}
+					dataComponent="inline-product-card-primary-button"
+				    label={stripHtmlFromString(primaryCTA)}
 					url={primaryUrl}
 					cssOverrides={css`
 						width: 100%;
@@ -190,6 +191,7 @@ export const InlineProductCard = ({
 				/>
 				{!!secondaryCTA && !!secondaryUrl && (
 					<ProductLinkButton
+						dataComponent="inline-secondary-card-primary-button"
 						label={stripHtmlFromString(secondaryCTA)}
 						url={secondaryUrl}
 						priority="tertiary"
