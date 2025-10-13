@@ -17,7 +17,6 @@ type Props = {
 	branding: Branding;
 	onwardsSource: OnwardsSource | undefined;
 	containerPalette?: DCRContainerPalette;
-	stripBranding?: boolean;
 };
 
 const logoImageStyle = css`
