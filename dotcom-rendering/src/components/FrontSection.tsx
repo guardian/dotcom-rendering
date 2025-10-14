@@ -499,13 +499,12 @@ const sponsoredContentLabelWrapper = css`
 	grid-row: bottom-content;
 	grid-column: content;
 
-	margin: ${space[1]}px 0 0;
 	${from.tablet} {
 		/*
 		* side margins of 10px due to the -10px margins on the
 		* grid area for content, to align with the card edges
 		*/
-		margin: ${space[1]}px 10px 0;
+		margin: 0 10px;
 	}
 `;
 
