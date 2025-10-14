@@ -1,22 +1,12 @@
+import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta } from '@storybook/react';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleFormat,
-	Pillar,
-} from '../lib/articleFormat';
+import type { ArticleFormat } from '../lib/articleFormat';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { ArticleContainer } from './ArticleContainer';
 import type { InlineProductCardProps } from './InlineProductCard';
 import { InlineProductCard } from './InlineProductCard';
 import { Section as SectionComponent } from './Section';
-import { css } from '@emotion/react';
-import { ArticleContainer } from './ArticleContainer';
-
-const format: ArticleFormat = {
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Standard,
-	theme: Pillar.Lifestyle,
-};
 
 const meta = {
 	component: InlineProductCard,
