@@ -1,6 +1,10 @@
 import { breakpoints } from '@guardian/source/foundations';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
-import { trails } from '../../fixtures/manual/trails';
+import {
+	multipleBrandedTrails,
+	singleBrandedTrails,
+	trails,
+} from '../../fixtures/manual/trails';
 import { DecideContainerByTrails } from './DecideContainerByTrails';
 import { FrontSection } from './FrontSection';
 
@@ -345,3 +349,64 @@ export const TwelveCardSlow = () => {
 	);
 };
 TwelveCardSlow.storyName = 'Slow - Twelve cards';
+
+export const FiveCardWithSingleBranding = () => {
+	return (
+		<FrontSection
+			title="Five cards with single branding"
+			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
+			collectionBranding={{
+				kind: 'paid-content',
+				isFrontBranding: false,
+				branding: {
+					brandingType: {
+						name: 'paid-content',
+					},
+					sponsorName: 'guardian.org',
+					logo: {
+						src: 'https://static.theguardian.com/commercial/sponsor/21/Jul/2025/bd012231-b67a-44cf-a208-9499714959b2-Vinted_green_280.png',
+						dimensions: {
+							width: 140,
+							height: 90,
+						},
+						link: '/',
+						label: 'Paid for by',
+					},
+					aboutThisLink:
+						'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
+				},
+				isContainerBranding: true,
+				hasMultipleBranding: false,
+			}}
+		>
+			<DecideContainerByTrails
+				trails={singleBrandedTrails}
+				speed="fast"
+				imageLoading="eager"
+				isTagPage={true}
+				aspectRatio={ASPECT_RATIO}
+			/>
+		</FrontSection>
+	);
+};
+FiveCardWithSingleBranding.storyName = 'Five cards with single branding';
+
+export const FiveCardWithMultipleBranding = () => {
+	return (
+		<FrontSection
+			title="Five cards with multiple branding"
+			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
+		>
+			<DecideContainerByTrails
+				trails={multipleBrandedTrails}
+				speed="fast"
+				imageLoading="eager"
+				isTagPage={true}
+				aspectRatio={ASPECT_RATIO}
+			/>
+		</FrontSection>
+	);
+};
+FiveCardWithMultipleBranding.storyName = 'Five cards with multiple branding';
