@@ -229,7 +229,8 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	const [showPreviousButton, setShowPreviousButton] = useState(false);
 	const [showNextButton, setShowNextButton] = useState(true);
 	const [shouldShowHighlights, setShouldShowHighlights] = useState(false);
-	const [testTrails, setTestTrails] = useState<DCRFrontCard[]>(trails);
+	const [orderedTrails, setOrderedTrails] = useState<DCRFrontCard[]>(trails);
+
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
 
@@ -286,7 +287,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 			carouselRef.current.scrollTo({ left: 0, behavior: 'auto' });
 			setShouldShowHighlights(true);
 		}
-	}, [testTrails]);
+	}, [orderedTrails]);
 
 	useEffect(() => {
 		const history = getHighlightClickHistory();
@@ -302,8 +303,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 			setShouldShowHighlights(true);
 		}
 		// otherwise history is different to trails so set in state
-		console.log('>>> lets start changing things', { history, trails });
-		setTestTrails(history ?? trails);
+		setOrderedTrails(history ?? trails);
 	}, [trails]);
 
 	const { ophanComponentLink, ophanComponentName, ophanFrontName } =
@@ -328,7 +328,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 				]}
 				data-heatphan-type="carousel"
 			>
-				{testTrails.map((trail) => {
+				{orderedTrails.map((trail) => {
 					return (
 						<li
 							key={trail.url}
@@ -352,8 +352,8 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 									console.log('storing....');
 									storeHighlightArticleVisit(
 										trail,
-										setTestTrails,
-										testTrails,
+										setOrderedTrails,
+										orderedTrails,
 									);
 								}}
 							/>
