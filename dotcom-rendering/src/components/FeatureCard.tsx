@@ -90,7 +90,7 @@ const hoverStyles = css`
 
 /** When we hover on sublinks, we want to prevent the general hover styles applying */
 const sublinkHoverStyles = css`
-	:has(ul.sublinks:hover) {
+	:has(ul.sublinks:hover, .branding-logo:hover) {
 		.card-headline .show-underline {
 			text-decoration: none;
 		}
@@ -233,10 +233,6 @@ const waveformStyles = css`
 	max-width: 100%;
 	overflow: hidden;
 	opacity: 0.3;
-`;
-
-const wrapperStyles = css`
-	padding-top: ${space[3]}px;
 `;
 
 const getMedia = ({
@@ -738,20 +734,18 @@ export const FeatureCard = ({
 						/>
 					)}
 					{isLabs && branding && showLabsRedesign && (
-						<div css={wrapperStyles}>
-							<SponsoredContentLabel
-								branding={branding}
-								containerPalette={containerPalette}
-								orientation="horizontal"
-								alignment="end"
-								ophanComponentLink={
-									labsDataAttributes?.ophanComponentLink
-								}
-								ophanComponentName={
-									labsDataAttributes?.ophanComponentName
-								}
-							/>
-						</div>
+						<SponsoredContentLabel
+							branding={branding}
+							containerPalette={containerPalette}
+							orientation="horizontal"
+							alignment="end"
+							ophanComponentLink={
+								labsDataAttributes?.ophanComponentLink
+							}
+							ophanComponentName={
+								labsDataAttributes?.ophanComponentName
+							}
+						/>
 					)}
 				</div>
 			</ContainerOverrides>
