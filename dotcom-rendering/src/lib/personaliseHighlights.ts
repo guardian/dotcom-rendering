@@ -1,14 +1,14 @@
 import { storage } from '@guardian/libs';
+import type { DCRFrontCard } from '../types/front';
 
-export type HighlightsArticleHistory = Array<string>;
+export type HighlightsArticleHistory = Array<DCRFrontCard>;
 
 export const HighlightArticleCountKey = 'gu.history.highlightArticleCount';
 
 const isValidHistory = (
 	history: unknown,
 ): history is HighlightsArticleHistory =>
-	Array.isArray(history) &&
-	history.every((daily) => typeof daily === 'string');
+	Array.isArray(history) && history.every((card) => typeof card === 'object');
 
 // Returns undefined if no highlight articles have been clicked and stored in local storage
 export const getHighlightClickHistory = ():
@@ -29,16 +29,31 @@ export const getHighlightClickHistory = ():
 	}
 };
 
-export const storeHighlightArticleVisit = (articleID: string): void => {
-	// get the article click history from local storage
-	const highlightHistory = getHighlightClickHistory() ?? [];
+export const setHistoryInLocalStorage = (
+	history: HighlightsArticleHistory,
+): void => {
+	storage.local.set(HighlightArticleCountKey, history);
+};
 
-	if (highlightHistory.includes(articleID)) {
+export const storeHighlightArticleVisit = (
+	article: DCRFrontCard,
+	setHighlightOrder: (highlightHistory: HighlightsArticleHistory) => void,
+	currentOrder: DCRFrontCard[],
+): void => {
+	// get the article click history from local storage
+	const articleIndex = currentOrder.indexOf(article);
+	console.log('>>>', { articleIndex });
+	if (articleIndex === -1) {
 		return;
 	}
-
-	highlightHistory.push(articleID);
+	console.log('>>> 1', currentOrder);
+	// @ts-expect-error
+	currentOrder.push(currentOrder.splice(articleIndex, 1)[0]);
+	setHighlightOrder(currentOrder);
+	console.log('>>> 2', currentOrder);
 
 	// set the latest article click
-	storage.local.set(HighlightArticleCountKey, highlightHistory);
+	storage.local.set(HighlightArticleCountKey, currentOrder);
 };
+
+//

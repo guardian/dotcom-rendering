@@ -9,7 +9,11 @@ import {
 import { useEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { ophanComponentId } from '../lib/ophan-helpers';
-import { getHighlightClickHistory } from '../lib/personaliseHighlights';
+import { storeHighlightArticleVisit } from '../lib/personaliseHighlights';
+import {
+	getHighlightClickHistory,
+	setHistoryInLocalStorage,
+} from '../lib/personaliseHighlights';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { HighlightsCard } from './Masthead/HighlightsCard';
@@ -208,6 +212,9 @@ const getOphanInfo = (frontId?: string) => {
 	};
 };
 
+const isEqual = (arr: DCRFrontCard[], target: DCRFrontCard[]) =>
+	target.every((v) => arr.includes(v));
+
 export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const carouselLength = trails.length;
@@ -215,6 +222,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	const [showPreviousButton, setShowPreviousButton] = useState(false);
 	const [showNextButton, setShowNextButton] = useState(true);
 	const [shouldShowHighlights, setShouldShowHighlights] = useState(false);
+	const [testTrails, setTestTrails] = useState<DCRFrontCard[]>(trails);
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
 
@@ -267,16 +275,43 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 
 	useEffect(() => {
 		const history = getHighlightClickHistory();
-		if (history === undefined) {
+		if (
+			history === undefined ||
+			history.length !== trails.length ||
+			!isEqual(history, trails)
+		) {
+			// store in local cache but dont bother setting in test trails as thats already set to trails
+			setHistoryInLocalStorage(trails);
+			// display highlights
 			setShouldShowHighlights(true);
-			console.log('history undefined');
 		}
 
-		console.log('history defined', history);
-		// if there is a history, reorganise highlights then set to true
-		// shuffle highlights
-		setShouldShowHighlights(true);
-	}, []);
+		// otherwise history is different to trails so set in state
+		console.log('>>> lets start changing things', { history, trails });
+		setTestTrails(history ?? trails);
+	}, [trails]);
+
+	// useEffect(() => {
+	// 	const history = getHighlightClickHistory();
+	// 	const newHistory = trails.map((trail) => trail.url);
+	// 	if (history === undefined || history.length === 0) {
+	// 		setHistory(newHistory)
+	// 		setHighlightOrder(newHistory)
+	// 		setShouldShowHighlights(true);
+	// 	}
+	// 	setHistory(newHistory)
+	// 	setHighlightOrder(history ?? [])
+	//
+	// 	/**
+	// 	 * If the original array matches the current array
+	// 	 */
+	// 	console.log('history defined', history, highlightOrder);
+	// 	// if there is a history, reorganise highlights then set to true
+	// 	// shuffle highlights
+	//
+	//
+	// 	setShouldShowHighlights(true);
+	// }, [trails]);
 
 	const { ophanComponentLink, ophanComponentName, ophanFrontName } =
 		getOphanInfo(frontId);
@@ -300,7 +335,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 				]}
 				data-heatphan-type="carousel"
 			>
-				{trails.map((trail) => {
+				{testTrails.map((trail) => {
 					return (
 						<li
 							key={trail.url}
@@ -320,6 +355,14 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 								showQuotedHeadline={trail.showQuotedHeadline}
 								mainMedia={trail.mainMedia}
 								starRating={trail.starRating}
+								storeInteraction={() => {
+									console.log('storing....');
+									storeHighlightArticleVisit(
+										trail,
+										setTestTrails,
+										testTrails,
+									);
+								}}
 							/>
 						</li>
 					);
