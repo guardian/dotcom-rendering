@@ -29,6 +29,7 @@ export type LeftColProductCardProps = {
 	noHeadings?: boolean;
 };
 
+//To Do fix this so it doesn't pass in noHeadings
 const card = (noHeadings?: boolean) => css`
 	display: none;
 	${from.wide} {
