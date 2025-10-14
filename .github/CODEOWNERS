@@ -24,5 +24,6 @@
 /dotcom-rendering/src/components/AdP*           @guardian/commercial-dev
 /dotcom-rendering/src/components/marketing/     @guardian/growth
 /dotcom-rendering/src/server/                   @guardian/dotcom-platform
+/dotcom-rendering/src/lib/braze/                @guardian/value
 /dotcom-rendering/webpack/                      @guardian/dotcom-platform
 /scripts/                                       @guardian/dotcom-platform
