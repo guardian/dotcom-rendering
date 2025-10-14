@@ -1,6 +1,10 @@
 import { breakpoints } from '@guardian/source/foundations';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
-import { brandedTrails, trails } from '../../fixtures/manual/trails';
+import {
+	multipleBrandedTrails,
+	singleBrandedTrails,
+	trails,
+} from '../../fixtures/manual/trails';
 import { DecideContainerByTrails } from './DecideContainerByTrails';
 import { FrontSection } from './FrontSection';
 
@@ -19,16 +23,6 @@ export default {
 };
 
 const ASPECT_RATIO = '5:4';
-
-const logo = {
-	src: 'https://static.theguardian.com/commercial/sponsor/28/Oct/2020/daa941da-14fd-46cc-85cb-731ce59050ee-Grounded_badging-280x180.png',
-	dimensions: {
-		width: 140,
-		height: 90,
-	},
-	link: '/',
-	label: 'Paid for by',
-};
 
 export const OneCardFast = () => {
 	return (
@@ -370,7 +364,15 @@ export const FiveCardWithSingleBranding = () => {
 						name: 'paid-content',
 					},
 					sponsorName: 'guardian.org',
-					logo,
+					logo: {
+						src: 'https://static.theguardian.com/commercial/sponsor/21/Jul/2025/bd012231-b67a-44cf-a208-9499714959b2-Vinted_green_280.png',
+						dimensions: {
+							width: 140,
+							height: 90,
+						},
+						link: '/',
+						label: 'Paid for by',
+					},
 					aboutThisLink:
 						'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
 				},
@@ -379,7 +381,7 @@ export const FiveCardWithSingleBranding = () => {
 			}}
 		>
 			<DecideContainerByTrails
-				trails={trails.slice(0, 5)}
+				trails={singleBrandedTrails}
 				speed="fast"
 				imageLoading="eager"
 				isTagPage={true}
@@ -398,7 +400,7 @@ export const FiveCardWithMultipleBranding = () => {
 			editionId={'UK'}
 		>
 			<DecideContainerByTrails
-				trails={brandedTrails}
+				trails={multipleBrandedTrails}
 				speed="fast"
 				imageLoading="eager"
 				isTagPage={true}

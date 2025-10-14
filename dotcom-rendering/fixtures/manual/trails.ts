@@ -681,8 +681,7 @@ export const snapLink: DCRFrontCard = {
 	snapData: enhanceSnaps(snapDataEnriched),
 };
 
-// Five different trail examples with varied branding data
-export const brandedTrails: [
+export const singleBrandedTrails: [
 	DCRFrontCard,
 	DCRFrontCard,
 	DCRFrontCard,
@@ -701,7 +700,100 @@ export const brandedTrails: [
 		},
 		format: {
 			theme: ArticleSpecial.Labs,
+			design: ArticleDesign.Gallery,
+			display: ArticleDisplay.Standard,
+		},
+		dataLinkName: 'labs | group-0 | card-@1',
+		showQuotedHeadline: false,
+	},
+	{
+		...defaultCardProps,
+		url: 'https://www.theguardian.com/restyle-recapped/2025/oct/13/vinted-fashion-show-episode-5-vip-week-and-penultimate-recap',
+		headline:
+			'RE/style recap: Ep5 – it’s VIP week in Vinted’s fashion show (and the penultimate episode!)',
+		byline: 'Louis Staples',
+		image: {
+			src: 'https://media.guim.co.uk/b087d8b79a6367e14ffe61d8251463c484736ab3/500_0_3000_2400/master/3000.jpg',
+			altText: "Collage of contestants' designs",
+		},
+		format: {
+			theme: ArticleSpecial.Labs,
 			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		},
+		dataLinkName: 'labs | group-0 | card-@2',
+		showQuotedHeadline: false,
+	},
+	{
+		...defaultCardProps,
+		url: 'https://www.theguardian.com/restyle-recapped/2025/oct/13/vinted-fashion-show-episode-4-adventure-week-looks-and-challenges',
+		headline:
+			'RE/style recap: Ep4 – it’s adventure week on Vinted’s fashion show',
+		byline: 'Louis Staples',
+		image: {
+			src: 'https://media.guim.co.uk/8a415de51f74460c1962ab20292eeb46e8cd6be5/573_0_3000_2400/master/3000.jpg',
+			altText: "Collage of contestants' designs",
+		},
+		format: {
+			theme: ArticleSpecial.Labs,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		},
+		dataLinkName: 'labs | group-0 | card-@3',
+		showQuotedHeadline: false,
+	},
+	{
+		...defaultCardProps,
+		url: 'https://www.theguardian.com/restyle-recapped/ng-interactive/2025/oct/13/restyle-episode-by-episode',
+		headline: 'RE/style: episode by episode',
+		image: {
+			src: 'https://media.guim.co.uk/0a1b8c0c6e942fde40a0080592d45a9b2b7a586f/0_0_5000_4000/master/5000.jpg',
+			altText: 'Vinted Re/style competitors',
+		},
+		format: {
+			theme: ArticleSpecial.Labs,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		},
+		dataLinkName: 'labs | group-0 | card-@4',
+		showQuotedHeadline: false,
+	},
+	{
+		...defaultCardProps,
+		url: 'https://www.theguardian.com/restyle-recapped/2025/oct/13/vinted-fashion-show-episode-3-denim-week-style-moments',
+		headline:
+			'RE/style recap: Ep3 – it’s denim week on Vinted’s fashion show',
+		format: {
+			theme: ArticleSpecial.Labs,
+			design: ArticleDesign.Video,
+			display: ArticleDisplay.Standard,
+		},
+		dataLinkName: 'labs | group-0 | card-@5',
+		showQuotedHeadline: false,
+	},
+];
+
+// Five different trail examples with varied branding data
+export const multipleBrandedTrails: [
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+] = [
+	{
+		...defaultCardProps,
+		url: 'https://www.theguardian.com/restyle-recapped/2025/oct/13/vinted-fashion-show-episode-6-grand-finale-recap',
+		headline:
+			'RE/style recap: Ep6 – it’s the grand finale of Vinted’s fashion show',
+		byline: 'Louis Staples',
+		image: {
+			src: 'https://media.guim.co.uk/fd838308b8572ad216d905ce2c04a09e23d74f86/627_0_2998_2400/master/2998.jpg',
+			altText: 'Finalists Chiara and Emily.',
+		},
+		format: {
+			theme: ArticleSpecial.Labs,
+			design: ArticleDesign.Gallery,
 			display: ArticleDisplay.Standard,
 		},
 		dataLinkName: 'labs | group-0 | card-@1',
@@ -818,7 +910,7 @@ export const brandedTrails: [
 		},
 		format: {
 			theme: ArticleSpecial.Labs,
-			design: ArticleDesign.Standard,
+			design: ArticleDesign.Video,
 			display: ArticleDisplay.Standard,
 		},
 		dataLinkName: 'labs | group-0 | card-@5',
