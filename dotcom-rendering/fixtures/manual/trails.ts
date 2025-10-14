@@ -2,6 +2,7 @@ import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
+	ArticleSpecial,
 	Pillar,
 } from '../../src/lib/articleFormat';
 import { enhanceSnaps } from '../../src/model/enhanceSnaps';
@@ -679,3 +680,160 @@ export const snapLink: DCRFrontCard = {
 	headline: 'Headline for snap link',
 	snapData: enhanceSnaps(snapDataEnriched),
 };
+
+// Five different trail examples with varied branding data
+export const brandedTrails: [
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+] = [
+	{
+		...defaultCardProps,
+		url: 'https://www.theguardian.com/restyle-recapped/2025/oct/13/vinted-fashion-show-episode-6-grand-finale-recap',
+		headline:
+			'RE/style recap: Ep6 – it’s the grand finale of Vinted’s fashion show',
+		byline: 'Louis Staples',
+		image: {
+			src: 'https://media.guim.co.uk/fd838308b8572ad216d905ce2c04a09e23d74f86/627_0_2998_2400/master/2998.jpg',
+			altText: 'Finalists Chiara and Emily.',
+		},
+		format: {
+			theme: ArticleSpecial.Labs,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		},
+		dataLinkName: 'labs | group-0 | card-@1',
+		showQuotedHeadline: false,
+		branding: {
+			brandingType: { name: 'paid-content' },
+			sponsorName: 'Vinted',
+			logo: {
+				src: 'https://static.theguardian.com/commercial/sponsor/21/Jul/2025/bd012231-b67a-44cf-a208-9499714959b2-Vinted_green_280.png',
+				dimensions: { width: 280, height: 180 },
+				link: '/',
+				label: 'Paid for by',
+			},
+			aboutThisLink:
+				'https://www.theguardian.com/info/2016/jan/25/content-funding',
+		},
+	},
+	{
+		...defaultCardProps,
+		url: 'https://www.theguardian.com/restyle-recapped/2025/oct/13/vinted-fashion-show-episode-5-vip-week-and-penultimate-recap',
+		headline:
+			'RE/style recap: Ep5 – it’s VIP week in Vinted’s fashion show (and the penultimate episode!)',
+		byline: 'Louis Staples',
+		image: {
+			src: 'https://media.guim.co.uk/b087d8b79a6367e14ffe61d8251463c484736ab3/500_0_3000_2400/master/3000.jpg',
+			altText: "Collage of contestants' designs",
+		},
+		format: {
+			theme: ArticleSpecial.Labs,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		},
+		dataLinkName: 'labs | group-0 | card-@2',
+		showQuotedHeadline: false,
+		branding: {
+			brandingType: { name: 'paid-content' },
+			sponsorName: 'Vinted',
+			logo: {
+				src: 'https://static.theguardian.com/commercial/sponsor/21/Jul/2025/bd012231-b67a-44cf-a208-9499714959b2-Vinted_green_280.png',
+				dimensions: { width: 280, height: 180 },
+				link: '/',
+				label: 'Paid for by',
+			},
+			aboutThisLink:
+				'https://www.theguardian.com/info/2016/jan/25/content-funding',
+		},
+	},
+	{
+		...defaultCardProps,
+		url: 'https://www.theguardian.com/monash-university-leading-with-culture/2025/oct/13/meet-the-indigenous-leaders-driving-real-change-with-a-monash-masters-degree',
+		headline:
+			'Meet the Indigenous leaders driving real change with a Monash master’s degree',
+		image: {
+			src: 'https://media.guim.co.uk/c2ebe5543016330fed2b5b07f2ee18f83c3b1af4/375_0_3750_3000/master/3750.jpg',
+			altText: 'Graduates throwing their hats in the air',
+		},
+		format: {
+			theme: ArticleSpecial.Labs,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		},
+		dataLinkName: 'labs | group-0 | card-@3',
+		showQuotedHeadline: false,
+		branding: {
+			brandingType: { name: 'paid-content' },
+			sponsorName: 'Monash University',
+			logo: {
+				src: 'https://static.theguardian.com/commercial/sponsor/23/Sep/2025/9cba6258-2ee6-42cc-89ac-18b982c7c45a-Monash-Uni-Logo.png',
+				dimensions: { width: 280, height: 180 },
+				link: '/',
+				label: 'Paid for by',
+			},
+			aboutThisLink:
+				'https://www.theguardian.com/info/2016/jan/25/content-funding',
+		},
+	},
+	{
+		...defaultCardProps,
+		url: 'https://www.theguardian.com/restyle-recapped/2025/oct/13/vinted-fashion-show-episode-4-adventure-week-looks-and-challenges',
+		headline:
+			'RE/style recap: Ep4 – it’s adventure week on Vinted’s fashion show',
+		byline: 'Louis Staples',
+		image: {
+			src: 'https://media.guim.co.uk/8a415de51f74460c1962ab20292eeb46e8cd6be5/573_0_3000_2400/master/3000.jpg',
+			altText: "Collage of contestants' designs",
+		},
+		format: {
+			theme: ArticleSpecial.Labs,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		},
+		dataLinkName: 'labs | group-0 | card-@4',
+		showQuotedHeadline: false,
+		branding: {
+			brandingType: { name: 'paid-content' },
+			sponsorName: 'Vinted',
+			logo: {
+				src: 'https://static.theguardian.com/commercial/sponsor/21/Jul/2025/bd012231-b67a-44cf-a208-9499714959b2-Vinted_green_280.png',
+				dimensions: { width: 280, height: 180 },
+				link: '/',
+				label: 'Paid for by',
+			},
+			aboutThisLink:
+				'https://www.theguardian.com/info/2016/jan/25/content-funding',
+		},
+	},
+	{
+		...defaultCardProps,
+		url: 'https://www.theguardian.com/restyle-recapped/ng-interactive/2025/oct/13/restyle-episode-by-episode',
+		headline: 'RE/style: episode by episode',
+		image: {
+			src: 'https://media.guim.co.uk/0a1b8c0c6e942fde40a0080592d45a9b2b7a586f/0_0_5000_4000/master/5000.jpg',
+			altText: 'Vinted Re/style competitors',
+		},
+		format: {
+			theme: ArticleSpecial.Labs,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		},
+		dataLinkName: 'labs | group-0 | card-@5',
+		showQuotedHeadline: false,
+		branding: {
+			brandingType: { name: 'paid-content' },
+			sponsorName: 'Vinted',
+			logo: {
+				src: 'https://static.theguardian.com/commercial/sponsor/21/Jul/2025/bd012231-b67a-44cf-a208-9499714959b2-Vinted_green_280.png',
+				dimensions: { width: 280, height: 180 },
+				link: '/',
+				label: 'Paid for by',
+			},
+			aboutThisLink:
+				'https://www.theguardian.com/info/2016/jan/25/content-funding',
+		},
+	},
+];
