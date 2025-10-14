@@ -5,6 +5,7 @@ import { SvgCamera } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import { isMediaCard as isMedia } from '../../lib/cardHelpers';
 import { secondsToDuration } from '../../lib/formatTime';
+import { storeHighlightArticleVisit } from '../../lib/personaliseHighlights';
 import { palette } from '../../palette';
 import type { StarRating as Rating } from '../../types/content';
 import type { DCRFrontImage } from '../../types/front';
@@ -144,6 +145,9 @@ export const HighlightsCard = ({
 					headlineText={headlineText}
 					dataLinkName={dataLinkName}
 					isExternalLink={isExternalLink}
+					storeInteraction={() => {
+						storeHighlightArticleVisit(linkTo);
+					}}
 				/>
 
 				<div css={content}>

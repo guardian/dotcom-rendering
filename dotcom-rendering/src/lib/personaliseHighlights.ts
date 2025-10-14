@@ -28,3 +28,17 @@ export const getHighlightClickHistory = ():
 		return undefined;
 	}
 };
+
+export const storeHighlightArticleVisit = (articleID: string): void => {
+	// get the article click history from local storage
+	const highlightHistory = getHighlightClickHistory() ?? [];
+
+	if (highlightHistory.includes(articleID)) {
+		return;
+	}
+
+	highlightHistory.push(articleID);
+
+	// set the latest article click
+	storage.local.set(HighlightArticleCountKey, highlightHistory);
+};
