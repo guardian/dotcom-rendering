@@ -81,20 +81,6 @@ export const getBadgeUrl = (tag: FETagType): string | undefined => {
 const enhanceTagPage = (body: unknown): TagPage => {
 	const data: FETagPage = validateAsFETagPage(body);
 
-	const enhancedCards = enhanceCards(data.contents, {
-		cardInTagPage: true,
-		pageId: data.pageId,
-		discussionApiUrl: data.config.discussionApiUrl,
-		editionId: data.editionId,
-	});
-	const speed = getSpeedFromTrails(data.contents);
-
-	const groupedTrails = groupTrailsByDates(
-		enhancedCards,
-		data.editionId,
-		speed === 'slow' || data.forceDay,
-	);
-
 	const branding = data.commercialProperties[data.editionId].branding;
 
 	const tagPageBranding = branding
@@ -102,6 +88,22 @@ const enhanceTagPage = (body: unknown): TagPage => {
 				branding,
 		  })
 		: undefined;
+
+	const enhancedCards = enhanceCards(data.contents, {
+		cardInTagPage: true,
+		pageId: data.pageId,
+		discussionApiUrl: data.config.discussionApiUrl,
+		editionId: data.editionId,
+		stripBranding: !!tagPageBranding,
+	});
+
+	const speed = getSpeedFromTrails(data.contents);
+
+	const groupedTrails = groupTrailsByDates(
+		enhancedCards,
+		data.editionId,
+		speed === 'slow' || data.forceDay,
+	);
 
 	return {
 		...data,
