@@ -47,7 +47,6 @@ import type {
 	BannerTemplateSettings,
 	ChoiceCardSettings,
 	CtaSettings,
-	CtaStateSettings,
 } from './settings';
 import { buttonStyles, buttonThemes } from './styles/buttonStyles';
 import { templateSpacing } from './styles/templateStyles';
@@ -92,6 +91,9 @@ const buildChoiceCardSettings = (
 			buttonSelectColour,
 			buttonSelectTextColour,
 			buttonSelectBorderColour,
+			buttonSelectMarkerColour,
+			pillTextColour,
+			pillBackgroundColour,
 		} = design.visual;
 		return {
 			buttonColour: buttonColour
@@ -111,6 +113,15 @@ const buildChoiceCardSettings = (
 				: undefined,
 			buttonSelectBorderColour: buttonSelectBorderColour
 				? hexColourToString(buttonSelectBorderColour)
+				: undefined,
+			buttonSelectMarkerColour: buttonSelectMarkerColour
+				? hexColourToString(buttonSelectMarkerColour)
+				: undefined,
+			pillTextColour: pillTextColour
+				? hexColourToString(pillTextColour)
+				: undefined,
+			pillBackgroundColour: pillBackgroundColour
+				? hexColourToString(pillBackgroundColour)
 				: undefined,
 		};
 	}
@@ -194,15 +205,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		: imageSettings
 		? 'main-image'
 		: '.';
-
-	// TODO: I assume we're planning on making this adjustable in RRCP in future.
-	const choiceCardButtonCtaStateSettings: CtaStateSettings = {
-		backgroundColour: palette.brandAlt[400],
-		textColour: 'inherit',
-	};
-	const choiceCardButtonSettings: CtaSettings = {
-		default: choiceCardButtonCtaStateSettings,
-	};
 
 	const templateSettings: BannerTemplateSettings = {
 		containerSettings: {
@@ -431,8 +433,10 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								onClick={() =>
 									handleSetIsCollapsed(!isCollapsed)
 								}
-								cssOverrides={styles.iconOverrides}
-								priority="tertiary"
+								cssOverrides={styles.iconOverrides(
+									templateSettings.closeButtonSettings,
+								)}
+								priority="secondary"
 								icon={
 									isCollapsed ? (
 										<SvgChevronUpSingle />
@@ -442,14 +446,8 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								}
 								size="small"
 								theme={buttonThemes(
-									{
-										default: {
-											backgroundColour:
-												palette.brand[400],
-											textColour: 'inherit',
-										},
-									},
-									'tertiary',
+									templateSettings.closeButtonSettings,
+									'secondary',
 								)}
 								hideLabel={true}
 							/>
@@ -478,6 +476,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									choices={choiceCards}
 									id={'banner'}
 									submitComponentEvent={submitComponentEvent}
+									choiceCardSettings={choiceCardSettings}
 								/>
 							)}
 							<div css={styles.ctaContainer(isCollapsed)}>
@@ -493,9 +492,9 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									})}
 									onClick={onCtaClick}
 									priority="primary"
-									cssOverrides={styles.linkButtonStyles}
+									cssOverrides={[styles.linkButtonStyles]}
 									theme={buttonThemes(
-										choiceCardButtonSettings,
+										templateSettings.primaryCtaSettings,
 										'primary',
 									)}
 									icon={<SvgArrowRightStraight />}
@@ -1036,10 +1035,11 @@ const styles = {
 			margin-top: ${space[1]}px;
 		}
 	`,
-	iconOverrides: css`
-		background-color: ${palette.brand[400]};
+	iconOverrides: (ctaSettings?: CtaSettings) => css`
+		background-color: ${ctaSettings?.default.backgroundColour ??
+		palette.brand[400]};
 		path {
-			fill: white;
+			fill: ${ctaSettings?.default.textColour ?? 'white'};
 		}
 		margin-top: ${space[1]}px;
 		margin-right: ${space[1]}px;
