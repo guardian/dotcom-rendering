@@ -26,17 +26,12 @@ jobs:
     with:
       container-image: ${{ needs.container.outputs.container-image }}
 
-  ab-testing-ui:
-    uses: ./.github/workflows/ab-testing-ui.yml
-    permissions:
-      contents: read
-
   publish:
     permissions:
       id-token: write
       contents: read
       pull-requests: write # required by riff-raff action
-    needs: [container, prettier, jest, lint, playwright, ab-testing-ui]
+    needs: [container, prettier, jest, lint, playwright]
     uses: ./.github/workflows/publish.yml
     with:
       container-image: ${{ needs.container.outputs.container-image }}

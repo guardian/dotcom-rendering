@@ -53,12 +53,6 @@ jobs:
           rm -r interactive-rendering/*
           mv interactive-rendering.tar.gz interactive-rendering/
 
-      - name: Get AB Testing build
-        uses: actions/download-artifact@v5.0.0
-        with:
-          name: ab-testing-ui-build
-          path: ab-testing/ab-tests.html
-
       # All rendering apps deployment
       - name: Upload rendering apps to RiffRaff
         uses: guardian/actions-riff-raff@v4.1.2
@@ -86,5 +80,3 @@ jobs:
               - interactive-rendering
             frontend-static:
               - frontend-static
-            admin/ab-testing:
-              - ab-testing/ab-tests.html
