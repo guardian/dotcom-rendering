@@ -9,7 +9,10 @@ import {
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { ophanComponentId } from '../lib/ophan-helpers';
-import { storeHighlightArticleVisit } from '../lib/personaliseHighlights';
+import {
+	setHistoryInLocalStorage,
+	storeHighlightArticleVisit,
+} from '../lib/personaliseHighlights';
 import { getHighlightClickHistory } from '../lib/personaliseHighlights';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
@@ -209,9 +212,16 @@ const getOphanInfo = (frontId?: string) => {
 	};
 };
 
-const isEqual = (arr: DCRFrontCard[], target: DCRFrontCard[]) =>
-	target.every((v) => arr.includes(v));
-
+const isEqual = (
+	historicalHighlights: DCRFrontCard[],
+	currentHighlights: DCRFrontCard[],
+) => {
+	const c = currentHighlights.map((v) => v.url);
+	const h = historicalHighlights.map((v) => v.url);
+	return c.every((v) => {
+		return h.includes(v);
+	});
+};
 export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const carouselLength = trails.length;
@@ -280,7 +290,6 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 
 	useEffect(() => {
 		const history = getHighlightClickHistory();
-		if (history) console.log('>>> is not equal', !isEqual(history, trails));
 
 		if (
 			history === undefined ||
@@ -288,9 +297,9 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 			!isEqual(history, trails)
 		) {
 			// store in local cache but dont bother setting in test trails as thats already set to trails
-			// setHistoryInLocalStorage(trails);
+			setHistoryInLocalStorage(trails);
 			// display highlights
-			// setShouldShowHighlights(true);
+			setShouldShowHighlights(true);
 		}
 		// otherwise history is different to trails so set in state
 		console.log('>>> lets start changing things', { history, trails });
