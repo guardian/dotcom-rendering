@@ -1,6 +1,6 @@
 import { breakpoints } from '@guardian/source/foundations';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
-import { trails, brandedTrails } from '../../fixtures/manual/trails';
+import { brandedTrails, trails } from '../../fixtures/manual/trails';
 import { DecideContainerByTrails } from './DecideContainerByTrails';
 import { FrontSection } from './FrontSection';
 
