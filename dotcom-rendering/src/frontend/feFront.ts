@@ -8,7 +8,7 @@ import type { FENavType } from '../types/frontend';
 import type { FETagType } from '../types/tag';
 import type { Territory } from '../types/territory';
 import type { FETrailType } from '../types/trails';
-import type { FEFormat } from './feArticle';
+import { type FEFormat } from './format';
 
 export interface FEFront {
 	pressedPage: FEPressedPage;

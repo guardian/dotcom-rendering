@@ -1,5 +1,5 @@
 import { isUndefined } from '@guardian/libs';
-import type { FEFormat } from '../frontend/feArticle';
+import { type FEFormat } from '../frontend/format';
 import { getLargest, getMaster } from '../lib/image';
 import type { Block } from '../types/blocks';
 import type {

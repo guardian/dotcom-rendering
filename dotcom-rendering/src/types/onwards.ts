@@ -1,5 +1,13 @@
-import { array, boolean, literal, object, optional, string, union } from 'valibot';
-import { FEFormatSchema } from '../frontend/feArticle';
+import {
+	array,
+	boolean,
+	literal,
+	object,
+	optional,
+	string,
+	union,
+} from 'valibot';
+import { FEFormatSchema } from '../frontend/format';
 import { FETrailTypeSchema } from './trails';
 
 const OnwardsSourceSchema = union([

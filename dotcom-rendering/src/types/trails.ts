@@ -1,9 +1,21 @@
-import { boolean, number, object, optional, record, string, type InferOutput } from 'valibot';
-import { FEFormatSchema } from '../frontend/feArticle';
+import {
+	boolean,
+	type InferOutput,
+	number,
+	object,
+	optional,
+	record,
+	string,
+} from 'valibot';
+import { FEFormatSchema } from '../frontend/format';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { BrandingSchema } from './branding';
 import { StarRatingSchema, type BoostLevel } from './content';
-import { DCRSnapTypeSchema, type DCRFrontImage, type DCRSupportingContent } from './front';
+import {
+	DCRSnapTypeSchema,
+	type DCRFrontImage,
+	type DCRSupportingContent,
+} from './front';
 import { MainMediaSchema } from './mainMedia';
 
 export const DiscussionSchema = object({

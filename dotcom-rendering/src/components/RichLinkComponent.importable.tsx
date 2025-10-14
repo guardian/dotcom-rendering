@@ -1,4 +1,4 @@
-import type { FEFormat } from '../frontend/feArticle';
+import { type FEFormat } from '../frontend/format';
 import { type ArticleFormat, decideFormat } from '../lib/articleFormat';
 import { useApi } from '../lib/useApi';
 import type {

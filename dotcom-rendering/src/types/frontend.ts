@@ -1,5 +1,16 @@
-import { array, boolean, type GenericSchema, type InferOutput, lazy, literal, object, optional, string, union } from 'valibot';
-import type { FEFormat } from '../frontend/feArticle';
+import {
+	array,
+	boolean,
+	type GenericSchema,
+	type InferOutput,
+	lazy,
+	literal,
+	object,
+	optional,
+	string,
+	union,
+} from 'valibot';
+import { type FEFormat } from '../frontend/format';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { Block } from './blocks';
 import { ReaderRevenuePositionsSchema } from './commercial';
@@ -37,7 +48,7 @@ const RealPillarsSchema = union([
 	literal('sport'),
 	literal('culture'),
 	literal('lifestyle'),
-])
+]);
 /** `FakePillars` allow us to make modifications to style based on rules outside of the pillar of an article */
 const FakePillarsSchema = literal('labs');
 
@@ -78,11 +89,13 @@ export const FENavTypeSchema = object({
 	currentNavLink: optional(FELinkTypeSchema),
 	currentNavLinkTitle: optional(string()),
 	currentPillarTitle: optional(string()),
-	subNavSections: optional(object({
-		parent: optional(FELinkTypeSchema),
-		links: array(FELinkTypeSchema),
-	})),
-	readerRevenueLinks: ReaderRevenuePositionsSchema
+	subNavSections: optional(
+		object({
+			parent: optional(FELinkTypeSchema),
+			links: array(FELinkTypeSchema),
+		}),
+	),
+	readerRevenueLinks: ReaderRevenuePositionsSchema,
 });
 
 export type FENavType = InferOutput<typeof FENavTypeSchema>;
