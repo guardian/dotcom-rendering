@@ -3,7 +3,7 @@ import type { DCRFrontCard } from '../types/front';
 
 export type HighlightsArticleHistory = Array<DCRFrontCard>;
 
-export const HighlightArticleCountKey = 'gu.history.highlightArticleCount';
+export const HighlightOrderKey = 'gu.history.highlightsOrder';
 
 const isValidHistory = (
 	history: unknown,
@@ -15,16 +15,16 @@ export const getHighlightClickHistory = ():
 	| HighlightsArticleHistory
 	| undefined => {
 	try {
-		const dailyCount = storage.local.get(HighlightArticleCountKey);
+		const dailyCount = storage.local.get(HighlightOrderKey);
 
 		if (!isValidHistory(dailyCount)) {
-			throw new Error(`Invalid ${HighlightArticleCountKey} value`);
+			throw new Error(`Invalid ${HighlightOrderKey} value`);
 		}
 
 		return dailyCount;
 	} catch (e) {
 		// error parsing the string, so remove the key
-		storage.local.remove(HighlightArticleCountKey);
+		storage.local.remove(HighlightOrderKey);
 		return undefined;
 	}
 };
@@ -32,7 +32,7 @@ export const getHighlightClickHistory = ():
 export const setHistoryInLocalStorage = (
 	history: HighlightsArticleHistory,
 ): void => {
-	storage.local.set(HighlightArticleCountKey, history);
+	storage.local.set(HighlightOrderKey, history);
 };
 
 export const storeHighlightArticleVisit = (
@@ -53,7 +53,7 @@ export const storeHighlightArticleVisit = (
 	console.log('>>> 2', currentOrder);
 
 	// set the latest article click
-	storage.local.set(HighlightArticleCountKey, currentOrder);
+	storage.local.set(HighlightOrderKey, currentOrder);
 };
 
 //
