@@ -58,18 +58,9 @@ export const ProductElement = ({
 	format: ArticleFormat;
 }) => {
 	const subheadingHtml = parseHtml(
-		[
-			product.primaryHeading
-				? `<h2 id="${product.h2Id ?? product.elementId}-primary">${
-						product.primaryHeading
-				  }</h2>`
-				: '',
-			product.secondaryHeading
-				? `<h2 id="${product.h2Id ?? product.elementId}-secondary">${
-						product.secondaryHeading
-				  }</h2>`
-				: '',
-		].join(''),
+		`<h2 id="${product.h2Id ?? product.elementId}">${
+			product.primaryHeading ? `${product.primaryHeading}</br>` : ''
+		} ${product.secondaryHeading || ''}</h2>`,
 	);
 
 	const isSubheading = subheadingHtml.textContent
