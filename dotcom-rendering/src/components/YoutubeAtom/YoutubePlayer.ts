@@ -131,10 +131,14 @@ class YouTubePlayer {
 								onReady: onReadyListener,
 								onStateChange:
 									youtubeOptions.events?.onStateChange,
-								onFullscreenToggled:
-									youtubeOptions.events?.onFullscreenToggled,
 							},
 						});
+						if (youtubeOptions.events?.onFullscreenToggled) {
+							this.player.addEventListener(
+								'onFullscreenToggled',
+								youtubeOptions.events.onFullscreenToggled,
+							);
+						}
 						resolve({ player: this.player });
 					}
 				} catch (e) {
