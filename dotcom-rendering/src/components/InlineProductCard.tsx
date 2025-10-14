@@ -11,6 +11,7 @@ import {
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
+import type { ProductDisplayType } from '../types/content';
 import { Picture } from './Picture';
 import { ProductLinkButton } from './ProductLinkButton';
 import { stripHtmlFromString } from './TextBlockComponent';
@@ -31,20 +32,25 @@ export type InlineProductCardProps = {
 	secondaryCTA?: string;
 	secondaryUrl?: string;
 	statistics: Statistics[];
+	displayType: ProductDisplayType;
 };
 
-const card = css`
-	${from.wide} {
+const card = (displayType?: string) => css`
+	${from.wide && displayType === 'inline-and-product-card'} {
 		display: none;
 	}
-
-	background-color: ${palette('--product-card-background')};
+	background-color: ${displayType === 'product-card-only'
+		? 'transparent'
+		: palette('--product-card-background')};
 	padding: ${space[2]}px ${space[3]}px ${space[3]}px;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	column-gap: 10px;
 	row-gap: ${space[3]}px;
-	border-top: 1px solid ${palette('--section-border-lifestyle')};
+	border-top: 1px solid
+		${displayType === 'product-card-only'
+			? palette('--section-border')
+			: palette('--section-border-lifestyle')};
 	max-width: 100%;
 	img {
 		width: 100%;
@@ -59,7 +65,6 @@ const card = css`
 			width: 328px;
 		}
 	}
-
 	${from.desktop} {
 		img {
 			height: 288px;
@@ -162,8 +167,9 @@ export const InlineProductCard = ({
 	secondaryCTA,
 	secondaryUrl,
 	statistics,
+	displayType,
 }: InlineProductCardProps) => (
-	<div css={card}>
+	<div css={card(displayType)}>
 		{!!image && (
 			<Picture
 				role={'productCard'}
@@ -179,7 +185,6 @@ export const InlineProductCard = ({
 			<div css={primaryHeading}>{brandName}</div>
 			<div css={productNameStyle}>{productName}</div>
 			<div css={priceStyle}>{primaryPrice}</div>
-
 			<div css={desktopButtonWrapper}>
 				<ProductLinkButton
 					dataComponent="inline-product-card-primary-button"
@@ -202,7 +207,6 @@ export const InlineProductCard = ({
 				)}
 			</div>
 		</div>
-
 		<div css={mobileButtonWrapper}>
 			<ProductLinkButton
 				label={stripHtmlFromString(primaryCTA)}
@@ -222,8 +226,7 @@ export const InlineProductCard = ({
 				/>
 			)}
 		</div>
-
-		{statistics.length > 0 && (
+		{displayType === 'inline-and-product-card' && statistics.length > 0 && (
 			<div css={statisticsContainer}>
 				{statistics.map((statistic) => (
 					<Statistic

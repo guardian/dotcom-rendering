@@ -1,8 +1,22 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta } from '@storybook/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleFormat,
+	Pillar,
+} from '../lib/articleFormat';
 import type { InlineProductCardProps } from './InlineProductCard';
 import { InlineProductCard } from './InlineProductCard';
+import { Section as SectionComponent } from './Section';
+import { css } from '@emotion/react';
+import { ArticleContainer } from './ArticleContainer';
+
+const format: ArticleFormat = {
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.Lifestyle,
+};
 
 const meta = {
 	component: InlineProductCard,
@@ -11,8 +25,8 @@ const meta = {
 		chromatic: {
 			viewports: [
 				breakpoints.mobile,
-				breakpoints.mobileMedium,
-				breakpoints.desktop,
+				breakpoints.tablet,
+				breakpoints.wide,
 			],
 		},
 
@@ -24,6 +38,35 @@ const meta = {
 			},
 		],
 	},
+	decorators: [
+		(Story) => (
+			<SectionComponent
+				shouldCenter={true}
+				showSideBorders={true}
+				centralBorder={'full'}
+				css={css`
+					strong {
+						font-weight: bold;
+					}
+				`}
+				format={{
+					design: ArticleDesign.Review,
+					display: ArticleDisplay.Showcase,
+					theme: Pillar.Lifestyle,
+				}}
+			>
+				<ArticleContainer
+					format={{
+						design: ArticleDesign.Review,
+						display: ArticleDisplay.Showcase,
+						theme: Pillar.Lifestyle,
+					}}
+				>
+					<Story />
+				</ArticleContainer>
+			</SectionComponent>
+		),
+	],
 } satisfies Meta<typeof InlineProductCard>;
 
 export default meta;
@@ -50,6 +93,11 @@ const sampleProductCard: InlineProductCardProps = {
 			value: 'there’s nowhere to stow the remote control',
 		},
 	],
+	displayType: 'inline-and-product-card',
 };
 
 export const Default = () => <InlineProductCard {...sampleProductCard} />;
+
+export const productCardOnly = () => (
+	<InlineProductCard {...sampleProductCard} displayType="product-card-only" />
+);

@@ -4,7 +4,11 @@ import type { ReactNode } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { parseHtml } from '../lib/domUtils';
 import type { NestedArticleElement } from '../lib/renderElement';
-import type { FEElement, ProductBlockElement } from '../types/content';
+import type {
+	FEElement,
+	ProductBlockElement,
+	ProductDisplayType,
+} from '../types/content';
 import { InlineProductCard } from './InlineProductCard';
 import { LeftColProductCard } from './LeftColProductCard';
 import { buildElementTree } from './SubheadingBlockComponent';
@@ -26,6 +30,7 @@ export type Product = {
 		value: string;
 	}[];
 	content: FEElement[];
+	displayType: ProductDisplayType;
 };
 
 const LeftColProductCardContainer = ({ children }: { children: ReactNode }) => (
@@ -71,6 +76,14 @@ export const ProductElement = ({
 		? subheadingHtml.textContent.trim().length > 0
 		: false;
 
+	const showContent =
+		product.displayType === 'inline-only' ||
+		product.displayType === 'inline-and-product-card';
+	const showProductCard =
+		product.displayType === 'product-card-only' ||
+		product.displayType === 'inline-and-product-card';
+	const showLeftCol = product.displayType === 'inline-and-product-card';
+
 	return (
 		<div
 			css={css`
@@ -84,44 +97,52 @@ export const ProductElement = ({
 			data-spacefinder-role="nested"
 		>
 			{isSubheading &&
+				showContent &&
 				Array.from(subheadingHtml.childNodes).map(
 					buildElementTree(format),
 				)}
-			<LeftColProductCardContainer>
-				<LeftColProductCard
-					noHeadings={!isSubheading}
+
+			{showLeftCol && (
+				<LeftColProductCardContainer>
+					<LeftColProductCard
+						noHeadings={!isSubheading}
+						brandName={product.brandName}
+						productName={product.productName}
+						image={product.image.url}
+						primaryUrl={product.primaryProductUrl}
+						primaryPrice={product.primaryPrice}
+						primaryCta={product.primaryCta}
+						statistics={product.statistics}
+						format={format}
+					/>
+				</LeftColProductCardContainer>
+			)}
+			{showContent &&
+				product.content.map((element, index) => (
+					<ArticleElementComponent
+						element={element}
+						// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
+						key={index}
+						index={index}
+						format={format}
+						isMainMedia={false}
+					/>
+				))}
+			{showProductCard && (
+				<InlineProductCard
+					format={format}
 					brandName={product.brandName}
 					productName={product.productName}
 					image={product.image.url}
 					primaryUrl={product.primaryProductUrl}
 					primaryPrice={product.primaryPrice}
-					primaryCta={product.primaryCta}
+					primaryCTA={product.primaryCta}
+					secondaryCTA={product.secondaryCta}
+					secondaryUrl={product.secondaryProductUrl}
 					statistics={product.statistics}
-					format={format}
+					displayType={product.displayType}
 				/>
-			</LeftColProductCardContainer>
-			{product.content.map((element, index) => (
-				<ArticleElementComponent
-					element={element}
-					// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
-					key={index}
-					index={index}
-					format={format}
-					isMainMedia={false}
-				/>
-			))}
-			<InlineProductCard
-				format={format}
-				brandName={product.brandName}
-				productName={product.productName}
-				image={product.image.url}
-				primaryUrl={product.primaryProductUrl}
-				primaryPrice={product.primaryPrice}
-				primaryCTA={product.primaryCta}
-				secondaryCTA={product.secondaryCta}
-				secondaryUrl={product.secondaryProductUrl}
-				statistics={product.statistics}
-			/>
+			)}
 		</div>
 	);
 };

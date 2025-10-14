@@ -490,6 +490,7 @@ export interface ProductBlockElement {
 	statistics: { name: string; value: string }[];
 	content: FEElement[];
 	h2Id?: string;
+	displayType: ProductDisplayType;
 }
 
 interface ProfileAtomBlockElement {
@@ -888,6 +889,11 @@ export interface ImageSource {
 	weighting: Weighting;
 	srcSet: SrcSetItem[];
 }
+
+export type ProductDisplayType =
+	| 'inline-only'
+	| 'product-card-only'
+	| 'inline-and-product-card';
 
 export interface SrcSetItem {
 	src: string;
