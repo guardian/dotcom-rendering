@@ -35,22 +35,15 @@ export type InlineProductCardProps = {
 	displayType: ProductDisplayType;
 };
 
-const card = (displayType?: string) => css`
-	${from.wide && displayType === 'inline-and-product-card'} {
+const baseCard = css`
+	${from.wide} {
 		display: none;
 	}
-	background-color: ${displayType === 'product-card-only'
-		? 'transparent'
-		: palette('--product-card-background')};
 	padding: ${space[2]}px ${space[3]}px ${space[3]}px;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	column-gap: 10px;
 	row-gap: ${space[3]}px;
-	border-top: 1px solid
-		${displayType === 'product-card-only'
-			? palette('--section-border')
-			: palette('--section-border-lifestyle')};
 	max-width: 100%;
 	img {
 		width: 100%;
@@ -71,6 +64,18 @@ const card = (displayType?: string) => css`
 			width: 288px;
 		}
 	}
+`;
+
+const showcaseCard = css`
+	${baseCard};
+	background-color: ${palette('--product-card-background')};
+	border-top: 1px solid ${palette('--section-border-lifestyle')};
+`;
+
+const productCard = css`
+	${baseCard};
+	background-color: transparent;
+	border-top: 1px solid ${palette('--section-border')};
 `;
 
 const productInfoContainer = css`
@@ -156,6 +161,16 @@ const Statistic = ({ name, value }: Statistics) => (
 	</div>
 );
 
+const getCardStyle = (displayType: ProductDisplayType) => {
+	switch (displayType) {
+		case 'product-card-only':
+			return productCard;
+		case 'inline-and-product-card':
+		default:
+			return showcaseCard;
+	}
+};
+
 export const InlineProductCard = ({
 	format,
 	brandName,
@@ -169,7 +184,7 @@ export const InlineProductCard = ({
 	statistics,
 	displayType,
 }: InlineProductCardProps) => (
-	<div css={card(displayType)}>
+	<div css={getCardStyle(displayType)}>
 		{!!image && (
 			<Picture
 				role={'productCard'}
