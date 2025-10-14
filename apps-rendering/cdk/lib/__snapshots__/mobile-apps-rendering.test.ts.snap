@@ -20,7 +20,6 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
       "GuParameterStoreReadPolicy",
       "GuAmiParameter",
       "GuHttpsEgressSecurityGroup",
-      "GuWazuhAccess",
       "GuAutoScalingGroup",
       "GuApplicationLoadBalancer",
       "GuApplicationTargetGroup",
@@ -520,27 +519,6 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "InternalIngressSecurityGroupMobileappsrenderingtoMobileAppsRenderingWazuhSecurityGroupB96243E1304031807BEA": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "DestinationSecurityGroupId": {
-          "Fn::GetAtt": [
-            "WazuhSecurityGroup",
-            "GroupId",
-          ],
-        },
-        "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "InternalIngressSecurityGroupMobileappsrendering486B411A",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "ToPort": 3040,
-      },
-      "Type": "AWS::EC2::SecurityGroupEgress",
-    },
     "ListenerMobileappsrendering47F84352": {
       "Properties": {
         "Certificates": [
@@ -581,6 +559,10 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
           {
             "Key": "routing.http.drop_invalid_header_fields.enabled",
             "Value": "true",
+          },
+          {
+            "Key": "access_logs.s3.enabled",
+            "Value": "false",
           },
           {
             "Key": "idle_timeout.timeout_seconds",
@@ -668,27 +650,6 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
             "GuHttpsEgressSecurityGroupMobileappsrendering089F1660",
-            "GroupId",
-          ],
-        },
-        "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "LoadBalancerMobileappsrenderingSecurityGroup86D57550",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "ToPort": 3040,
-      },
-      "Type": "AWS::EC2::SecurityGroupEgress",
-    },
-    "LoadBalancerMobileappsrenderingSecurityGrouptoMobileAppsRenderingWazuhSecurityGroupB96243E130401C238DEC": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "DestinationSecurityGroupId": {
-          "Fn::GetAtt": [
-            "WazuhSecurityGroup",
             "GroupId",
           ],
         },
@@ -854,17 +815,8 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
         "SecurityGroupEgress": [
           {
             "CidrIp": "0.0.0.0/0",
-            "Description": "Wazuh event logging",
-            "FromPort": 1514,
-            "IpProtocol": "tcp",
-            "ToPort": 1514,
-          },
-          {
-            "CidrIp": "0.0.0.0/0",
-            "Description": "Wazuh agent registration",
-            "FromPort": 1515,
-            "IpProtocol": "tcp",
-            "ToPort": 1515,
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
           },
         ],
         "Tags": [
@@ -891,48 +843,6 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "WazuhSecurityGroupfromMobileAppsRenderingInternalIngressSecurityGroupMobileappsrenderingB407C3A23040A9B30033": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "WazuhSecurityGroup",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "InternalIngressSecurityGroupMobileappsrendering486B411A",
-            "GroupId",
-          ],
-        },
-        "ToPort": 3040,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
-    "WazuhSecurityGroupfromMobileAppsRenderingLoadBalancerMobileappsrenderingSecurityGroupE0CCF718304012C66B0D": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "WazuhSecurityGroup",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "LoadBalancerMobileappsrenderingSecurityGroup86D57550",
-            "GroupId",
-          ],
-        },
-        "ToPort": 3040,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
     "mobileTESTmobileappsrenderingAD91FF83": {
       "DependsOn": [
         "InstanceRoleMobileappsrenderingEC64402A",
@@ -955,16 +865,13 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
             "HttpTokens": "required",
             "InstanceMetadataTags": "enabled",
           },
+          "Monitoring": {
+            "Enabled": false,
+          },
           "SecurityGroupIds": [
             {
               "Fn::GetAtt": [
                 "GuHttpsEgressSecurityGroupMobileappsrendering089F1660",
-                "GroupId",
-              ],
-            },
-            {
-              "Fn::GetAtt": [
-                "WazuhSecurityGroup",
                 "GroupId",
               ],
             },
@@ -1136,7 +1043,6 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
       "GuParameterStoreReadPolicy",
       "GuAmiParameter",
       "GuHttpsEgressSecurityGroup",
-      "GuWazuhAccess",
       "GuAutoScalingGroup",
       "GuApplicationLoadBalancer",
       "GuApplicationTargetGroup",
@@ -1636,27 +1542,6 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "InternalIngressSecurityGroupMobileappsrenderingtoMobileAppsRenderingPreviewWazuhSecurityGroupBFDBFD7E3040AC7A9AEE": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "DestinationSecurityGroupId": {
-          "Fn::GetAtt": [
-            "WazuhSecurityGroup",
-            "GroupId",
-          ],
-        },
-        "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "InternalIngressSecurityGroupMobileappsrendering486B411A",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "ToPort": 3040,
-      },
-      "Type": "AWS::EC2::SecurityGroupEgress",
-    },
     "ListenerMobileappsrendering47F84352": {
       "Properties": {
         "Certificates": [
@@ -1697,6 +1582,10 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
           {
             "Key": "routing.http.drop_invalid_header_fields.enabled",
             "Value": "true",
+          },
+          {
+            "Key": "access_logs.s3.enabled",
+            "Value": "false",
           },
           {
             "Key": "idle_timeout.timeout_seconds",
@@ -1784,27 +1673,6 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
         "DestinationSecurityGroupId": {
           "Fn::GetAtt": [
             "GuHttpsEgressSecurityGroupMobileappsrendering089F1660",
-            "GroupId",
-          ],
-        },
-        "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "LoadBalancerMobileappsrenderingSecurityGroup86D57550",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "ToPort": 3040,
-      },
-      "Type": "AWS::EC2::SecurityGroupEgress",
-    },
-    "LoadBalancerMobileappsrenderingSecurityGrouptoMobileAppsRenderingPreviewWazuhSecurityGroupBFDBFD7E304032ED6346": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "DestinationSecurityGroupId": {
-          "Fn::GetAtt": [
-            "WazuhSecurityGroup",
             "GroupId",
           ],
         },
@@ -1970,17 +1838,8 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
         "SecurityGroupEgress": [
           {
             "CidrIp": "0.0.0.0/0",
-            "Description": "Wazuh event logging",
-            "FromPort": 1514,
-            "IpProtocol": "tcp",
-            "ToPort": 1514,
-          },
-          {
-            "CidrIp": "0.0.0.0/0",
-            "Description": "Wazuh agent registration",
-            "FromPort": 1515,
-            "IpProtocol": "tcp",
-            "ToPort": 1515,
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
           },
         ],
         "Tags": [
@@ -2007,48 +1866,6 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "WazuhSecurityGroupfromMobileAppsRenderingPreviewInternalIngressSecurityGroupMobileappsrendering981D8A7F30409D4BEBFF": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "WazuhSecurityGroup",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "InternalIngressSecurityGroupMobileappsrendering486B411A",
-            "GroupId",
-          ],
-        },
-        "ToPort": 3040,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
-    "WazuhSecurityGroupfromMobileAppsRenderingPreviewLoadBalancerMobileappsrenderingSecurityGroupA08E152F3040CC90354B": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "WazuhSecurityGroup",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "LoadBalancerMobileappsrenderingSecurityGroup86D57550",
-            "GroupId",
-          ],
-        },
-        "ToPort": 3040,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
     "mobilepreviewTESTmobileappsrenderingFF204ED7": {
       "DependsOn": [
         "InstanceRoleMobileappsrenderingEC64402A",
@@ -2071,16 +1888,13 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
             "HttpTokens": "required",
             "InstanceMetadataTags": "enabled",
           },
+          "Monitoring": {
+            "Enabled": false,
+          },
           "SecurityGroupIds": [
             {
               "Fn::GetAtt": [
                 "GuHttpsEgressSecurityGroupMobileappsrendering089F1660",
-                "GroupId",
-              ],
-            },
-            {
-              "Fn::GetAtt": [
-                "WazuhSecurityGroup",
                 "GroupId",
               ],
             },
