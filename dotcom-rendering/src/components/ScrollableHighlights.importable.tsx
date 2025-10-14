@@ -6,14 +6,11 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { ophanComponentId } from '../lib/ophan-helpers';
 import { storeHighlightArticleVisit } from '../lib/personaliseHighlights';
-import {
-	getHighlightClickHistory,
-	setHistoryInLocalStorage,
-} from '../lib/personaliseHighlights';
+import { getHighlightClickHistory } from '../lib/personaliseHighlights';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { HighlightsCard } from './Masthead/HighlightsCard';
@@ -47,7 +44,7 @@ const carouselStyles = css`
 	overflow-x: auto;
 	overflow-y: hidden;
 	scroll-snap-type: x mandatory;
-	scroll-behavior: smooth;
+	scroll-behavior: auto;
 	overscroll-behavior-x: contain;
 	overscroll-behavior-y: auto;
 
@@ -273,45 +270,32 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 		};
 	}, []);
 
+	useLayoutEffect(() => {
+		if (carouselRef.current) {
+			// cancel any anchoring/snap side-effects by jumping immediately
+			carouselRef.current.scrollTo({ left: 0, behavior: 'auto' });
+			setShouldShowHighlights(true);
+		}
+	}, [testTrails]);
+
 	useEffect(() => {
 		const history = getHighlightClickHistory();
+		if (history) console.log('>>> is not equal', !isEqual(history, trails));
+
 		if (
 			history === undefined ||
 			history.length !== trails.length ||
 			!isEqual(history, trails)
 		) {
 			// store in local cache but dont bother setting in test trails as thats already set to trails
-			setHistoryInLocalStorage(trails);
+			// setHistoryInLocalStorage(trails);
 			// display highlights
-			setShouldShowHighlights(true);
+			// setShouldShowHighlights(true);
 		}
-
 		// otherwise history is different to trails so set in state
 		console.log('>>> lets start changing things', { history, trails });
 		setTestTrails(history ?? trails);
 	}, [trails]);
-
-	// useEffect(() => {
-	// 	const history = getHighlightClickHistory();
-	// 	const newHistory = trails.map((trail) => trail.url);
-	// 	if (history === undefined || history.length === 0) {
-	// 		setHistory(newHistory)
-	// 		setHighlightOrder(newHistory)
-	// 		setShouldShowHighlights(true);
-	// 	}
-	// 	setHistory(newHistory)
-	// 	setHighlightOrder(history ?? [])
-	//
-	// 	/**
-	// 	 * If the original array matches the current array
-	// 	 */
-	// 	console.log('history defined', history, highlightOrder);
-	// 	// if there is a history, reorganise highlights then set to true
-	// 	// shuffle highlights
-	//
-	//
-	// 	setShouldShowHighlights(true);
-	// }, [trails]);
 
 	const { ophanComponentLink, ophanComponentName, ophanFrontName } =
 		getOphanInfo(frontId);
