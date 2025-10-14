@@ -349,6 +349,39 @@ export const withoutHeading: StoryFn = () => {
 	);
 };
 
+export const emptyHeadingsOnly: StoryFn = () => {
+	return (
+		<>
+			<ProductElement
+				product={{
+					...product,
+					primaryHeading: '',
+					secondaryHeading: 'Secondary heading only',
+				}}
+				format={{
+					design: ArticleDesign.Review,
+					display: ArticleDisplay.Showcase,
+					theme: Pillar.Lifestyle,
+				}}
+				ArticleElementComponent={ArticleElementComponent}
+			/>
+			<ProductElement
+				product={{
+					...product,
+					primaryHeading: 'Primary Heading',
+					secondaryHeading: '',
+				}}
+				format={{
+					design: ArticleDesign.Review,
+					display: ArticleDisplay.Showcase,
+					theme: Pillar.Lifestyle,
+				}}
+				ArticleElementComponent={ArticleElementComponent}
+			/>
+		</>
+	);
+};
+
 export const displayTypeProductCardOnly: StoryFn = () => {
 	return (
 		<>
