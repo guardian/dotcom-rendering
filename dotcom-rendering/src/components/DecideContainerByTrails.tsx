@@ -19,7 +19,6 @@ type Props = {
 	imageLoading: Loading;
 	isTagPage?: boolean;
 	aspectRatio: AspectRatio;
-	stripBrandingFromCards?: boolean;
 };
 
 type CardProps = {
@@ -33,10 +32,8 @@ export const OneCardFast = ({
 	imageLoading,
 	isTagPage,
 	aspectRatio,
-	stripBrandingFromCards,
 }: {
 	trail: DCRFrontCard;
-	stripBrandingFromCards?: boolean;
 } & CardProps) => {
 	return (
 		<UL direction="row">
@@ -48,7 +45,6 @@ export const OneCardFast = ({
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
-					stripBrandingFromCards={stripBrandingFromCards}
 				/>
 			</LI>
 		</UL>
@@ -60,10 +56,8 @@ export const OneCardSlow = ({
 	imageLoading,
 	isTagPage,
 	aspectRatio,
-	stripBrandingFromCards,
 }: {
 	trail: DCRFrontCard;
-	stripBrandingFromCards?: boolean;
 } & CardProps) => {
 	return (
 		<UL direction="row">
@@ -75,7 +69,6 @@ export const OneCardSlow = ({
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
-					stripBrandingFromCards={stripBrandingFromCards}
 				/>
 			</LI>
 		</UL>
@@ -87,10 +80,8 @@ export const TwoCard = ({
 	imageLoading,
 	isTagPage,
 	aspectRatio,
-	stripBrandingFromCards,
 }: {
 	trails: Tuple<DCRFrontCard, 2>;
-	stripBrandingFromCards?: boolean;
 } & CardProps) => {
 	return (
 		<UL direction="row">
@@ -102,7 +93,6 @@ export const TwoCard = ({
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
-					stripBrandingFromCards={stripBrandingFromCards}
 				/>
 			</LI>
 			<LI percentage="50%" padSides={true} showDivider={true}>
@@ -113,7 +103,6 @@ export const TwoCard = ({
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
-					stripBrandingFromCards={stripBrandingFromCards}
 				/>
 			</LI>
 		</UL>
@@ -125,10 +114,8 @@ export const ThreeCard = ({
 	imageLoading,
 	isTagPage,
 	aspectRatio,
-	stripBrandingFromCards,
 }: {
 	trails: Tuple<DCRFrontCard, 3>;
-	stripBrandingFromCards?: boolean;
 } & CardProps) => {
 	return (
 		<UL direction="row">
@@ -140,7 +127,6 @@ export const ThreeCard = ({
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
-					stripBrandingFromCards={stripBrandingFromCards}
 				/>
 			</LI>
 			<LI percentage="33.333%" padSides={true} showDivider={true}>
@@ -151,7 +137,6 @@ export const ThreeCard = ({
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
-					stripBrandingFromCards={stripBrandingFromCards}
 				/>
 			</LI>
 			<LI percentage="33.333%" padSides={true} showDivider={true}>
@@ -162,7 +147,6 @@ export const ThreeCard = ({
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
-					stripBrandingFromCards={stripBrandingFromCards}
 				/>
 			</LI>
 		</UL>
@@ -174,10 +158,8 @@ export const FourCard = ({
 	imageLoading,
 	isTagPage,
 	aspectRatio,
-	stripBrandingFromCards,
 }: {
 	trails: Tuple<DCRFrontCard, 4>;
-	stripBrandingFromCards?: boolean;
 } & CardProps) => {
 	return (
 		<UL direction="row">
@@ -189,7 +171,6 @@ export const FourCard = ({
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
-					stripBrandingFromCards={stripBrandingFromCards}
 				/>
 			</LI>
 			<LI percentage="25%" padSides={true} showDivider={true}>
@@ -200,7 +181,6 @@ export const FourCard = ({
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
-					stripBrandingFromCards={stripBrandingFromCards}
 				/>
 			</LI>
 			<LI percentage="25%" padSides={true} showDivider={true}>
@@ -211,7 +191,6 @@ export const FourCard = ({
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
-					stripBrandingFromCards={stripBrandingFromCards}
 				/>
 			</LI>
 			<LI percentage="25%" padSides={true} showDivider={true}>
@@ -222,7 +201,6 @@ export const FourCard = ({
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
-					stripBrandingFromCards={stripBrandingFromCards}
 				/>
 			</LI>
 		</UL>
@@ -234,10 +212,8 @@ export const FiveCardFast = ({
 	imageLoading,
 	isTagPage,
 	aspectRatio,
-	stripBrandingFromCards,
 }: {
 	trails: Tuple<DCRFrontCard, 5>;
-	stripBrandingFromCards?: boolean;
 } & CardProps) => {
 	return (
 		<UL direction="row">
@@ -249,7 +225,6 @@ export const FiveCardFast = ({
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
-					stripBrandingFromCards={stripBrandingFromCards}
 				/>
 			</LI>
 			<LI percentage="33.333%" padSides={true} showDivider={true}>
@@ -260,7 +235,6 @@ export const FiveCardFast = ({
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
-					stripBrandingFromCards={stripBrandingFromCards}
 				/>
 			</LI>
 			<LI percentage="33.333%">
@@ -272,7 +246,6 @@ export const FiveCardFast = ({
 							absoluteServerTimes={true}
 							isTagPage={isTagPage}
 							aspectRatio={aspectRatio}
-							stripBrandingFromCards={stripBrandingFromCards}
 						/>
 					</LI>
 					<LI padSides={true}>
@@ -282,7 +255,6 @@ export const FiveCardFast = ({
 							absoluteServerTimes={true}
 							isTagPage={isTagPage}
 							aspectRatio={aspectRatio}
-							stripBrandingFromCards={stripBrandingFromCards}
 						/>
 					</LI>
 					<LI padSides={true}>
@@ -292,7 +264,6 @@ export const FiveCardFast = ({
 							absoluteServerTimes={true}
 							isTagPage={isTagPage}
 							aspectRatio={aspectRatio}
-							stripBrandingFromCards={stripBrandingFromCards}
 						/>
 					</LI>
 				</UL>
@@ -943,7 +914,6 @@ export const DecideContainerByTrails = ({
 	imageLoading,
 	isTagPage,
 	aspectRatio,
-	stripBrandingFromCards,
 }: Props) => {
 	const initialTrails = takeFirst(trails, 8);
 	if (speed === 'fast') {
@@ -957,7 +927,6 @@ export const DecideContainerByTrails = ({
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
-						stripBrandingFromCards={stripBrandingFromCards}
 					/>
 				);
 			case 2:
@@ -967,7 +936,6 @@ export const DecideContainerByTrails = ({
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
-						stripBrandingFromCards={stripBrandingFromCards}
 					/>
 				);
 			case 3:
@@ -977,7 +945,6 @@ export const DecideContainerByTrails = ({
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
-						stripBrandingFromCards={stripBrandingFromCards}
 					/>
 				);
 			case 4:
@@ -987,7 +954,6 @@ export const DecideContainerByTrails = ({
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
-						stripBrandingFromCards={stripBrandingFromCards}
 					/>
 				);
 			case 5:
@@ -997,7 +963,6 @@ export const DecideContainerByTrails = ({
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
-						stripBrandingFromCards={stripBrandingFromCards}
 					/>
 				);
 			case 6:
