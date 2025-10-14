@@ -4,7 +4,7 @@
  * @see https://github.com/guardian/frontend/blob/5b987289/common/app/model/Tag.scala#L156-L179
  */
 
-import { object, optional, string, type InferOutput } from "valibot";
+import { type InferOutput, object, optional, string } from 'valibot';
 
 type Reference = {
 	id: string;
@@ -46,7 +46,7 @@ const PodcastSchema = object({
 	image: optional(string()),
 });
 
-type Podcast = InferOutput<typeof PodcastSchema>;
+export type Podcast = InferOutput<typeof PodcastSchema>;
 
 export const PodcastSeriesImageSchema = object({
 	src: optional(string()),

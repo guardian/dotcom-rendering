@@ -3,13 +3,11 @@ import {
 	array,
 	boolean,
 	type InferOutput,
-	literal,
 	number,
 	object,
 	optional,
 	record,
 	string,
-	union,
 	unknown,
 } from 'valibot';
 import { EditionIdSchema } from '../lib/edition';

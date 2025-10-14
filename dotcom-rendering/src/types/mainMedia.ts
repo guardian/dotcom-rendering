@@ -30,7 +30,6 @@ const LoopVideoSchema = object({
 	type: literal('LoopVideo'),
 	atomId: string(),
 	sources: array(SourceSchema),
-	videoId: string(),
 	height: number(),
 	width: number(),
 	duration: number(),

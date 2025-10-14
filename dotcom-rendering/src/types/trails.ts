@@ -10,10 +10,10 @@ import {
 import { FEFormatSchema } from '../frontend/format';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { BrandingSchema } from './branding';
-import { StarRatingSchema, type BoostLevel } from './content';
+import { type BoostLevel, StarRatingSchema } from './content';
 import {
-	DCRSnapTypeSchema,
 	type DCRFrontImage,
+	DCRSnapTypeSchema,
 	type DCRSupportingContent,
 } from './front';
 import { MainMediaSchema } from './mainMedia';

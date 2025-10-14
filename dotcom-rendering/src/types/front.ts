@@ -1,4 +1,4 @@
-import { object, optional, string } from 'valibot';
+import { type InferOutput, object, optional, string } from 'valibot';
 import type {
 	FEAspectRatio,
 	FEContainer,

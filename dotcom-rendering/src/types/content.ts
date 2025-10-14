@@ -39,24 +39,6 @@ export type ContentType =
 
 // ------------------------------------- Elements
 
-/**
- * Affects how an image is placed.
- *
- * Also known as “weighting” in Composer, but we respect the CAPI naming.
- *
- * @see https://github.com/guardian/frontend/blob/0a32dba0/common/app/model/dotcomrendering/pageElements/Role.scala
- */
-const RoleTypeSchema = union([
-	literal('immersive'),
-	literal('supporting'),
-	literal('showcase'),
-	literal('inline'),
-	literal('thumbnail'),
-	literal('halfWidth'),
-]);
-
-export type RoleType = InferOutput<typeof RoleTypeSchema>;
-
 const ThirdPartyEmbeddedContentSchema = object({
 	isThirdPartyTracking: boolean(),
 	source: optional(string()),
@@ -78,20 +60,35 @@ const VideoAssetsSchema = object({
 });
 
 /**
- * This duplicate type is unfortunate, but the image sources come lowercase
- * Note, 'richLink' is used internally but does not exist upstream.
+ * Affects how an image is placed.
  *
- * TODO check:
- * type Weighting = Exclude<RoleType, 'halfWidth' | 'richLink'> | 'halfwidth';
- * TODO can pick from RoleTypeSchema?
+ * Also known as “weighting” in Composer, but we respect the CAPI naming.
+ *
+ * @see https://github.com/guardian/frontend/blob/0a32dba0/common/app/model/dotcomrendering/pageElements/Role.scala
  */
-const WeightingSchema = union([
+const RoleTypeSchema = union([
 	literal('immersive'),
 	literal('supporting'),
 	literal('showcase'),
 	literal('inline'),
 	literal('thumbnail'),
+	literal('halfWidth'),
 ]);
+
+export type RoleType = InferOutput<typeof RoleTypeSchema>;
+
+/**
+ * This duplicate type is unfortunate, but the image sources come lowercase
+ * Note, 'richLink' is used internally but does not exist upstream.
+ */
+// TODO: type Weighting = Exclude<RoleType, 'halfWidth' | 'richLink'> | 'halfwidth';
+// What's better to do here? use literals or create schema based on RoleTypeSchema
+const roleTypeLiterals = RoleTypeSchema.options
+	.map((opt) => opt.literal)
+	.map((weighting) => (weighting === 'halfWidth' ? 'halfwidth' : weighting))
+	.map((weighting) => literal(weighting));
+
+export const WeightingSchema = union([...roleTypeLiterals]);
 
 export type Weighting = InferOutput<typeof WeightingSchema>;
 
@@ -239,6 +236,10 @@ const CampaignFieldCheckboxSchema = object({
 	),
 });
 
+export type CampaignFieldCheckbox = InferOutput<
+	typeof CampaignFieldCheckboxSchema
+>;
+
 const CampaignFieldSelectSchema = object({
 	...CampaignFieldSchema.entries,
 	type: literal('select'),
@@ -341,6 +342,8 @@ const ImageSchema = object({
 	url: string(),
 });
 
+export type Image = InferOutput<typeof ImageSchema>;
+
 const AudioAtomBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.AudioAtomBlockElement'),
 	elementId: string(),
@@ -414,6 +417,8 @@ const CalloutContactTypeSchema = object({
 	urlPrefix: string(),
 	guidance: optional(string()),
 });
+
+export type CalloutContactType = InferOutput<typeof CalloutContactTypeSchema>;
 
 const CalloutBlockElementV2Schema = object({
 	_type: literal('model.dotcomrendering.pageElements.CalloutBlockElementV2'),
@@ -1425,55 +1430,55 @@ const EntryIDSchema = custom<EntryID>(
 );
 
 export const CAPICrosswordSchema = object({
-		creator: optional(
-			object({
-				name: string(),
-				webUrl: string(),
-			}),
-		),
-		crosswordType: union([
-			literal('cryptic'),
-			literal('everyman'),
-			literal('prize'),
-			literal('quick-cryptic'),
-			literal('quick'),
-			literal('quiptic'),
-			literal('special'),
-			literal('speedy'),
-			literal('sunday-quick'),
-			literal('weekend'),
-		]),
-		date: number(),
-		dateSolutionAvailable: optional(number()),
-		dimensions: object({
-			rows: number(),
-			cols: number(),
+	creator: optional(
+		object({
+			name: string(),
+			webUrl: string(),
 		}),
-		entries: array(
-			object({
-				id: EntryIDSchema,
-				group: pipe(
-					array(EntryIDSchema),
-					nonEmpty('group must have at least one item'),
-				),
-				number: number(),
-				direction: union([literal('across'), literal('down')]),
-				position: record(union([literal('x'), literal('y')]), number()),
-				clue: string(),
-				humanNumber: string(),
-				solution: optional(string()),
-				length: number(),
-				separatorLocations: record(string(), array(number())),
-			}),
-		),
-		id: string(),
-		name: string(),
-		number: number(),
-		pdf: optional(string()),
-		solutionAvailable: boolean(),
-		webPublicationDate: optional(number()),
-		instructions: optional(string()),
-	});
+	),
+	crosswordType: union([
+		literal('cryptic'),
+		literal('everyman'),
+		literal('prize'),
+		literal('quick-cryptic'),
+		literal('quick'),
+		literal('quiptic'),
+		literal('special'),
+		literal('speedy'),
+		literal('sunday-quick'),
+		literal('weekend'),
+	]),
+	date: number(),
+	dateSolutionAvailable: optional(number()),
+	dimensions: object({
+		rows: number(),
+		cols: number(),
+	}),
+	entries: array(
+		object({
+			id: EntryIDSchema,
+			group: pipe(
+				array(EntryIDSchema),
+				nonEmpty('group must have at least one item'),
+			),
+			number: number(),
+			direction: union([literal('across'), literal('down')]),
+			position: record(union([literal('x'), literal('y')]), number()),
+			clue: string(),
+			humanNumber: string(),
+			solution: optional(string()),
+			length: number(),
+			separatorLocations: record(string(), array(number())),
+		}),
+	),
+	id: string(),
+	name: string(),
+	number: number(),
+	pdf: optional(string()),
+	solutionAvailable: boolean(),
+	webPublicationDate: optional(number()),
+	instructions: optional(string()),
+});
 
 const CrosswordElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.CrosswordElement'),

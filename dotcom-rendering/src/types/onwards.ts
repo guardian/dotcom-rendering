@@ -1,6 +1,7 @@
 import {
 	array,
 	boolean,
+	type InferOutput,
 	literal,
 	object,
 	optional,
@@ -21,6 +22,8 @@ const OnwardsSourceSchema = union([
 	literal('newsletters-page'),
 	literal('unknown-source'), // We should never see this in the analytics data!
 ]);
+
+export type OnwardsSource = InferOutput<typeof OnwardsSourceSchema>;
 
 /**
  * Onwards
