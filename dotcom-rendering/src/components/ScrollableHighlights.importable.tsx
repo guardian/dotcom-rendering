@@ -269,8 +269,10 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 		const history = getHighlightClickHistory();
 		if (history === undefined) {
 			setShouldShowHighlights(true);
+			console.log('history undefined');
 		}
 
+		console.log('history defined', history);
 		// if there is a history, reorganise highlights then set to true
 		// shuffle highlights
 		setShouldShowHighlights(true);
