@@ -1,8 +1,12 @@
+import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta } from '@storybook/react';
+import type { ArticleFormat } from '../lib/articleFormat';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { ArticleContainer } from './ArticleContainer';
 import type { InlineProductCardProps } from './InlineProductCard';
 import { InlineProductCard } from './InlineProductCard';
+import { Section as SectionComponent } from './Section';
 
 const meta = {
 	component: InlineProductCard,
@@ -11,8 +15,8 @@ const meta = {
 		chromatic: {
 			viewports: [
 				breakpoints.mobile,
-				breakpoints.mobileMedium,
-				breakpoints.desktop,
+				breakpoints.tablet,
+				breakpoints.wide,
 			],
 		},
 
@@ -24,6 +28,35 @@ const meta = {
 			},
 		],
 	},
+	decorators: [
+		(Story) => (
+			<SectionComponent
+				shouldCenter={true}
+				showSideBorders={true}
+				centralBorder={'full'}
+				css={css`
+					strong {
+						font-weight: bold;
+					}
+				`}
+				format={{
+					design: ArticleDesign.Review,
+					display: ArticleDisplay.Showcase,
+					theme: Pillar.Lifestyle,
+				}}
+			>
+				<ArticleContainer
+					format={{
+						design: ArticleDesign.Review,
+						display: ArticleDisplay.Showcase,
+						theme: Pillar.Lifestyle,
+					}}
+				>
+					<Story />
+				</ArticleContainer>
+			</SectionComponent>
+		),
+	],
 } satisfies Meta<typeof InlineProductCard>;
 
 export default meta;
@@ -50,6 +83,11 @@ const sampleProductCard: InlineProductCardProps = {
 			value: 'there’s nowhere to stow the remote control',
 		},
 	],
+	displayType: 'inline-and-product-card',
 };
 
 export const Default = () => <InlineProductCard {...sampleProductCard} />;
+
+export const productCardOnly = () => (
+	<InlineProductCard {...sampleProductCard} displayType="product-card-only" />
+);

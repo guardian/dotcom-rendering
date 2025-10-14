@@ -4505,7 +4505,10 @@
                 },
                 "h2Id": {
                     "type": "string"
-                }
+                },
+				"displayType": {
+					"type": "string"
+				}
             },
             "required": [
                 "_type",
@@ -4525,7 +4528,8 @@
                 "secondaryProductUrl",
                 "secondaryRetailer",
                 "starRating",
-                "statistics"
+                "statistics",
+				"displayType"
             ]
         },
         "Block": {
