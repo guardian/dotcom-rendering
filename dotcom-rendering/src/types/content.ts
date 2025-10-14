@@ -1,3 +1,4 @@
+import { type CrosswordProps } from '@guardian/react-crossword';
 import {
 	array,
 	boolean,
@@ -16,7 +17,6 @@ import {
 	union,
 } from 'valibot';
 import { type ArticleFormat } from '../lib/articleFormat';
-import { type CrosswordProps } from '@guardian/react-crossword';
 
 export type BoostLevel = 'default' | 'boost' | 'megaboost' | 'gigaboost';
 
@@ -135,7 +135,7 @@ export type TimelineAtomEvent = InferOutput<typeof TimelineAtomEventSchema>;
 // Newsletter
 // -------------------------------------
 
-const NewsletterSchema = object({
+export const NewsletterSchema = object({
 	listId: number(),
 	identityName: string(),
 	name: string(),
@@ -1424,9 +1424,7 @@ const EntryIDSchema = custom<EntryID>(
 		typeof input === 'string' && /^[0-9]*-(across|down)$/.test(input),
 );
 
-const CrosswordElementSchema = object({
-	_type: literal('model.dotcomrendering.pageElements.CrosswordElement'),
-	crossword: object({
+export const CAPICrosswordSchema = object({
 		creator: optional(
 			object({
 				name: string(),
@@ -1475,7 +1473,11 @@ const CrosswordElementSchema = object({
 		solutionAvailable: boolean(),
 		webPublicationDate: optional(number()),
 		instructions: optional(string()),
-	}),
+	});
+
+const CrosswordElementSchema = object({
+	_type: literal('model.dotcomrendering.pageElements.CrosswordElement'),
+	crossword: CAPICrosswordSchema,
 });
 
 export const FEElementSchema = union([

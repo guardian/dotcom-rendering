@@ -1,24 +1,23 @@
-import { type CrosswordProps } from '@guardian/react-crossword';
-import { EditionIdSchema, type EditionId } from '../lib/edition';
+import { any, array, boolean, type InferOutput, literal, number, object, optional, record, string, union, unknown } from 'valibot';
+import { EditionIdSchema } from '../lib/edition';
 import { FEArticleBadgeTypeSchema } from '../types/badge';
-import { BlockSchema, type Block } from '../types/blocks';
+import { BlockSchema } from '../types/blocks';
 import { CommercialPropertiesSchema } from '../types/commercial';
-import { ConfigTypeSchema, type ConfigType } from '../types/config';
+import { ConfigTypeSchema } from '../types/config';
 import {
+	CAPICrosswordSchema,
 	FEElementSchema,
-	type FEElement,
 	ImageBlockElementSchema,
-	type Newsletter,
+	NewsletterSchema,
 	StarRatingSchema
 } from '../types/content';
-import type { FooterType } from '../types/footer';
-import { FELinkTypeSchema, FENavTypeSchema, LegacyPillarSchema, type FELinkType, type FENavType, type LegacyPillar } from '../types/frontend';
+import { FooterTypeSchema } from '../types/footer';
+import { FELinkTypeSchema, FENavTypeSchema, LegacyPillarSchema } from '../types/frontend';
 import { PaginationTypeSchema } from '../types/liveBlog';
 import { FEOnwardsSchema } from '../types/onwards';
-import type { MatchType } from '../types/sport';
-import { TagTypeSchema, type TagType } from '../types/tag';
-import { FETrailTypeSchema, type FETrailType } from '../types/trails';
-import { any, array, boolean, literal, number, object, optional, record, string, union, unknown, type InferOutput } from 'valibot';
+import { MatchTypeSchema } from '../types/sport';
+import { TagTypeSchema } from '../types/tag';
+import { FETrailTypeSchema } from '../types/trails';
 
 const FEPillarSchema = union([
 	literal('NewsPillar'),
@@ -100,6 +99,17 @@ const FEStoryPackageSchema = object({
 
 export type FEStoryPackage = InferOutput<typeof FEStoryPackageSchema>;
 
+const PageTypeSchema = object({
+	hasShowcaseMainElement: boolean(),
+	isFront: boolean(),
+	isLiveblog: boolean(),
+	isMinuteArticle: boolean(),
+	isPaidContent: boolean(),
+	isPreview: boolean(),
+	isSensitive: boolean(),
+});
+
+
 /**
  * This type is what we receive from `frontend`,
  * hence the FE prefix.
@@ -146,7 +156,7 @@ const FEArticleSchema = object({
 	isImmersive: boolean(),
 	sectionLabel: string(),
 	sectionUrl: string(),
-	sectionName?: string(),
+	sectionName: optional(string()),
 	subMetaSectionLinks: array(FELinkTypeSchema),
 	subMetaKeywordLinks: array(FELinkTypeSchema),
 	shouldHideAds: boolean(),
@@ -178,15 +188,15 @@ const FEArticleSchema = object({
 
 	nav: FENavTypeSchema, // TODO move this out as most code uses a different internal NAV model.
 
-	pageFooter: FooterType;
+	pageFooter: FooterTypeSchema,
 
 	contributionsServiceUrl: string(),
-	slotMachineFlags?: string(),
+	slotMachineFlags: optional(string()),
 
-	pageType: PageType;
+	pageType: PageTypeSchema,
 
-	matchUrl?: string(),
-	matchType?: MatchType;
+	matchUrl: optional(string()),
+	matchType: optional(MatchTypeSchema),
 	isSpecialReport: boolean(),
 
 	// Interactives made on Frontend rather than DCR require special handling.
@@ -196,22 +206,14 @@ const FEArticleSchema = object({
 	filterKeyEvents: boolean(),
 
 	// Included on live and dead blogs. Used when polling
-	mostRecentBlockId?: string(),
+	mostRecentBlockId: optional(string()),
 
-	promotedNewsletter?: Newsletter;
+	promotedNewsletter: optional(NewsletterSchema),
 	canonicalUrl: string(),
 	showTableOfContents: boolean(),
-	lang?: string(),
+	lang: optional(string()),
 	isRightToLeftLang: optional(boolean()),
-	crossword?: CrosswordProps['data'];
+	crossword: optional(CAPICrosswordSchema),
 });
 
-type PageType = {
-	hasShowcaseMainElement: boolean(),
-	isFront: boolean(),
-	isLiveblog: boolean(),
-	isMinuteArticle: boolean(),
-	isPaidContent: boolean(),
-	isPreview: boolean(),
-	isSensitive: boolean(),
-};
+export type FEArticle = InferOutput<typeof FEArticleSchema>;
