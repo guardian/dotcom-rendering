@@ -6,7 +6,7 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { ophanComponentId } from '../lib/ophan-helpers';
 import {
@@ -281,7 +281,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 		};
 	}, []);
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		if (carouselRef.current) {
 			// cancel any anchoring/snap side-effects by jumping immediately
 			carouselRef.current.scrollTo({ left: 0, behavior: 'auto' });
