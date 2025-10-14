@@ -28,6 +28,8 @@ jobs:
 
   ab-testing-ui:
     uses: ./.github/workflows/ab-testing-ui.yml
+    permissions:
+      contents: read
 
   publish:
     permissions:
