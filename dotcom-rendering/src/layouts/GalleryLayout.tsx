@@ -6,7 +6,6 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import { Fragment } from 'react';
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot } from '../components/AdSlot.web';
@@ -72,61 +71,6 @@ const headerStyles = css`
 
 	${from.tablet} {
 		border-bottom: 1px solid ${palette('--article-border')};
-	}
-`;
-
-const galleryItemAdvertStyles = css`
-	${grid.paddedContainer}
-	grid-auto-flow: row dense;
-	background-color: ${palette('--article-inner-background')};
-
-	${from.tablet} {
-		border-left: 1px solid ${palette('--article-border')};
-		border-right: 1px solid ${palette('--article-border')};
-	}
-`;
-
-const galleryInlineAdContainerStyles = css`
-	${grid.column.centre}
-	z-index: 1;
-
-	${from.desktop} {
-		padding-bottom: ${space[10]}px;
-	}
-
-	${from.leftCol} {
-		${grid.between('centre-column-start', 'right-column-end')}
-	}
-`;
-
-const galleryBorder = css`
-	position: relative;
-	${between.desktop.and.leftCol} {
-		${grid.column.right}
-
-		&::before {
-			content: '';
-			position: absolute;
-			left: -10px; /* 10px to the left of this element */
-			top: 0;
-			bottom: 0;
-			width: 1px;
-			background-color: ${palette('--article-border')};
-		}
-	}
-
-	${from.leftCol} {
-		${grid.column.left}
-
-		&::after {
-			content: '';
-			position: absolute;
-			right: -10px;
-			top: 0;
-			bottom: 0;
-			width: 1px;
-			background-color: ${palette('--article-border')};
-		}
 	}
 `;
 
@@ -233,60 +177,14 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						frontendData={frontendData}
 					/>
 				</header>
-				{gallery.bodyElements.map((element, index) => {
-					const isImage =
-						element._type ===
-						'model.dotcomrendering.pageElements.ImageBlockElement';
-					const isAdPlaceholder =
-						element._type ===
-						'model.dotcomrendering.pageElements.AdPlaceholderBlockElement';
-					return (
-						<Fragment key={isImage ? element.elementId : index}>
-							{isImage && (
-								<GalleryImage
-									image={element}
-									format={format}
-									pageId={frontendData.pageId}
-									webTitle={frontendData.webTitle}
-									renderingTarget={props.renderingTarget}
-								/>
-							)}
-							{isAdPlaceholder && renderAds && (
-								<>
-									{isWeb && (
-										<div css={galleryItemAdvertStyles}>
-											<div
-												css={
-													galleryInlineAdContainerStyles
-												}
-											>
-												<Hide until="tablet">
-													<DesktopAdSlot
-														renderAds={renderAds}
-														adSlotIndex={
-															element.adPosition
-														}
-													/>
-												</Hide>
-												<Hide from="tablet">
-													<MobileAdSlot
-														renderAds={renderAds}
-														adSlotIndex={
-															element.adPosition
-														}
-													/>
-												</Hide>
-											</div>
-											<div css={galleryBorder}></div>
-										</div>
-									)}
-									{isApps && <AdPlaceholder />}
-								</>
-							)}
-						</Fragment>
-					);
-				})}
-
+				<Body
+					renderingTarget={renderingTarget}
+					format={format}
+					bodyElements={gallery.bodyElements}
+					renderAds={renderAds}
+					pageId={frontendData.pageId}
+					webTitle={frontendData.webTitle}
+				/>
 				<SubMeta
 					format={format}
 					subMetaKeywordLinks={frontendData.subMetaKeywordLinks}
@@ -600,6 +498,140 @@ const Meta = ({
 			/>
 		) : null}
 	</div>
+);
+
+const Body = (props: {
+	renderingTarget: RenderingTarget;
+	format: ArticleFormat;
+	bodyElements: Gallery['bodyElements'];
+	renderAds: boolean;
+	pageId: string;
+	webTitle: string;
+}) => (
+	<>
+		{props.bodyElements
+			// Filter out ad elements if we don't want to render them.
+			.filter(
+				(element) =>
+					props.renderAds ||
+					element._type !==
+						'model.dotcomrendering.pageElements.AdPlaceholderBlockElement',
+			)
+			/* eslint-disable-next-line array-callback-return -- ESLint bug,
+			 * this function does contain `return` statements. TypeScript will
+			 * confirm the switch is exhaustive, but it's possible ESLint does
+			 * not know this. */
+			.map((element) => {
+				switch (element._type) {
+					case 'model.dotcomrendering.pageElements.ImageBlockElement':
+						return (
+							<GalleryImage
+								image={element}
+								format={props.format}
+								pageId={props.pageId}
+								webTitle={props.webTitle}
+								renderingTarget={props.renderingTarget}
+								key={element.elementId}
+							/>
+						);
+					case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
+						return (
+							<BodyAdSlot
+								renderingTarget={props.renderingTarget}
+								adIndex={element.adPosition}
+								key={element.adPosition}
+							/>
+						);
+				}
+			})}
+	</>
+);
+
+const BodyAdSlot = (props: {
+	renderingTarget: RenderingTarget;
+	adIndex: number;
+}) => {
+	switch (props.renderingTarget) {
+		case 'Web':
+			return <WebAdSlot adIndex={props.adIndex} />;
+		case 'Apps':
+			return <AdPlaceholder />;
+	}
+};
+
+const WebAdSlot = (props: { adIndex: number }) => (
+	<div
+		css={{
+			'&': css(grid.paddedContainer),
+			gridAutoFlow: 'row dense',
+			backgroundColor: palette('--article-inner-background'),
+
+			[from.tablet]: {
+				borderColor: palette('--article-border'),
+				borderStyle: 'solid',
+				borderLeftWidth: 1,
+				borderRightWidth: 1,
+			},
+		}}
+	>
+		<div
+			css={{
+				'&': css(grid.column.centre),
+				zIndex: 1,
+
+				[from.desktop]: {
+					paddingBottom: space[10],
+				},
+
+				[from.leftCol]: css(
+					grid.between('centre-column-start', 'right-column-end'),
+				),
+			}}
+		>
+			<Hide until="tablet">
+				<DesktopAdSlot renderAds={true} adSlotIndex={props.adIndex} />
+			</Hide>
+			<Hide from="tablet">
+				<MobileAdSlot renderAds={true} adSlotIndex={props.adIndex} />
+			</Hide>
+		</div>
+		<AdSlotBorders />
+	</div>
+);
+
+const AdSlotBorders = () => (
+	<div
+		css={{
+			position: 'relative',
+			[between.desktop.and.leftCol]: {
+				'&': css(grid.column.right),
+
+				'&::before': {
+					content: '""',
+					position: 'absolute',
+					left: -10,
+					top: 0,
+					bottom: 0,
+					width: 1,
+					backgroundColor: palette('--article-border'),
+				},
+			},
+
+			[from.leftCol]: {
+				'&': css(grid.column.left),
+
+				'&::after': {
+					content: '""',
+					position: 'absolute',
+					right: -10,
+					top: 0,
+					bottom: 0,
+					width: 1,
+					backgroundColor: palette('--article-border'),
+				},
+			},
+		}}
+	/>
 );
 
 const MerchandisingHigh = (props: {

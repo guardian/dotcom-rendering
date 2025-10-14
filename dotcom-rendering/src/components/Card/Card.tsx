@@ -33,7 +33,7 @@ import type {
 	DCRSupportingContent,
 } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
-import type { OnwardContainerType, OnwardsSource } from '../../types/onwards';
+import type { OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
 import { CardCommentCount } from '../CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from '../CardHeadline';
@@ -124,7 +124,7 @@ export type Props = {
 	supportingContentPosition?: Position;
 	snapData?: DCRSnapType;
 	containerPalette?: DCRContainerPalette;
-	containerType?: DCRContainerType | OnwardContainerType;
+	containerType?: DCRContainerType;
 	showAge?: boolean;
 	discussionApiUrl: string;
 	discussionId?: string;
@@ -588,8 +588,6 @@ export const Card = ({
 		containerType === 'flexible/special' ||
 		containerType === 'flexible/general';
 
-	const isOnwardContainer = containerType === 'more-galleries';
-
 	const isSmallCard =
 		containerType === 'scrollable/small' ||
 		containerType === 'scrollable/medium';
@@ -624,7 +622,9 @@ export const Card = ({
 		return 'tablet';
 	};
 
-	const shouldShowTrailText = isOnwardContainer
+	const isMoreGalleriesOnwardContent =
+		isOnwardContent && onwardsSource === 'more-galleries';
+	const shouldShowTrailText = isMoreGalleriesOnwardContent
 		? media?.type !== 'podcast' && isOnwardSplash
 		: media?.type !== 'podcast';
 
@@ -1066,7 +1066,10 @@ export const Card = ({
 											imageSize={mediaSize}
 											alt={headlineText}
 											loading={imageLoading}
-											roundedCorners={isOnwardContent}
+											roundedCorners={
+												isOnwardContent &&
+												!isMoreGalleriesOnwardContent
+											}
 											aspectRatio={aspectRatio}
 											isInAllBoostsTest={
 												isInAllBoostsTest
@@ -1083,7 +1086,10 @@ export const Card = ({
 									imageSize={mediaSize}
 									alt={media.imageAltText}
 									loading={imageLoading}
-									roundedCorners={isOnwardContent}
+									roundedCorners={
+										isOnwardContent &&
+										!isMoreGalleriesOnwardContent
+									}
 									aspectRatio={aspectRatio}
 									isInAllBoostsTest={isInAllBoostsTest}
 								/>
@@ -1121,7 +1127,10 @@ export const Card = ({
 											imageSize="small"
 											alt={media.imageAltText}
 											loading={imageLoading}
-											roundedCorners={isOnwardContent}
+											roundedCorners={
+												isOnwardContent &&
+												!isMoreGalleriesOnwardContent
+											}
 											aspectRatio="1:1"
 										/>
 									</div>
@@ -1152,7 +1161,7 @@ export const Card = ({
 					padContent={determinePadContent(
 						isMediaCardOrNewsletter,
 						isBetaContainer,
-						isOnwardContent,
+						isOnwardContent && !isMoreGalleriesOnwardContent,
 					)}
 				>
 					{/* This div is needed to keep the headline and trail text justified at the start */}
