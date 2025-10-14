@@ -1,6 +1,7 @@
 import { breakpoints } from '@guardian/source/foundations';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
+import type { DCRFrontCard } from '../types/front';
 import { DecideContainerByTrails } from './DecideContainerByTrails';
 import { FrontSection } from './FrontSection';
 
@@ -19,6 +20,109 @@ export default {
 };
 
 const ASPECT_RATIO = '5:4';
+
+const logo = {
+	src: 'https://static.theguardian.com/commercial/sponsor/28/Oct/2020/daa941da-14fd-46cc-85cb-731ce59050ee-Grounded_badging-280x180.png',
+	dimensions: {
+		width: 140,
+		height: 90,
+	},
+	link: '/',
+	label: 'Paid for by',
+};
+
+// Five different trail examples with varied branding data
+const brandedTrailExamples: DCRFrontCard[] = [
+	{
+		...trails[0],
+		url: 'https://www.theguardian.com/restyle-recapped/2025/oct/13/vinted-fashion-show-episode-6-grand-finale-recap',
+		headline:
+			'RE/style recap: Ep6 – it’s the grand finale of Vinted’s fashion show',
+		branding: {
+			brandingType: { name: 'paid-content' },
+			sponsorName: 'Vinted',
+			logo: {
+				src: 'https://static.theguardian.com/commercial/sponsor/21/Jul/2025/bd012231-b67a-44cf-a208-9499714959b2-Vinted_green_280.png',
+				dimensions: { width: 280, height: 180 },
+				link: '/',
+				label: 'Paid for by',
+			},
+			aboutThisLink:
+				'https://www.theguardian.com/info/2016/jan/25/content-funding',
+		},
+	},
+	{
+		...trails[1],
+		url: 'https://www.theguardian.com/restyle-recapped/2025/oct/13/vinted-fashion-show-episode-5-vip-week-and-penultimate-recap',
+		headline:
+			'RE/style recap: Ep5 – it’s VIP week in Vinted’s fashion show (and the penultimate episode!)',
+		branding: {
+			brandingType: { name: 'paid-content' },
+			sponsorName: 'Vinted',
+			logo: {
+				src: 'https://static.theguardian.com/commercial/sponsor/21/Jul/2025/bd012231-b67a-44cf-a208-9499714959b2-Vinted_green_280.png',
+				dimensions: { width: 280, height: 180 },
+				link: '/',
+				label: 'Paid for by',
+			},
+			aboutThisLink:
+				'https://www.theguardian.com/info/2016/jan/25/content-funding',
+		},
+	},
+	{
+		...trails[2],
+		url: 'https://www.theguardian.com/monash-university-leading-with-culture/2025/oct/13/meet-the-indigenous-leaders-driving-real-change-with-a-monash-masters-degree',
+		headline:
+			'Meet the Indigenous leaders driving real change with a Monash master’s degree',
+		branding: {
+			brandingType: { name: 'paid-content' },
+			sponsorName: 'Monash University',
+			logo: {
+				src: 'https://static.theguardian.com/commercial/sponsor/23/Sep/2025/9cba6258-2ee6-42cc-89ac-18b982c7c45a-Monash-Uni-Logo.png',
+				dimensions: { width: 280, height: 180 },
+				link: '/',
+				label: 'Paid for by',
+			},
+			aboutThisLink:
+				'https://www.theguardian.com/info/2016/jan/25/content-funding',
+		},
+	},
+	{
+		...trails[3],
+		url: 'https://www.theguardian.com/restyle-recapped/2025/oct/13/vinted-fashion-show-episode-4-adventure-week-looks-and-challenges',
+		headline:
+			'RE/style recap: Ep4 – it’s adventure week on Vinted’s fashion show',
+		branding: {
+			brandingType: { name: 'paid-content' },
+			sponsorName: 'Vinted',
+			logo: {
+				src: 'https://static.theguardian.com/commercial/sponsor/21/Jul/2025/bd012231-b67a-44cf-a208-9499714959b2-Vinted_green_280.png',
+				dimensions: { width: 280, height: 180 },
+				link: '/',
+				label: 'Paid for by',
+			},
+			aboutThisLink:
+				'https://www.theguardian.com/info/2016/jan/25/content-funding',
+		},
+	},
+	{
+		...trails[4],
+		url: 'https://www.theguardian.com/restyle-recapped/ng-interactive/2025/oct/13/restyle-episode-by-episode',
+		headline: 'RE/style: episode by episode',
+		branding: {
+			brandingType: { name: 'paid-content' },
+			sponsorName: 'Vinted',
+			logo: {
+				src: 'https://static.theguardian.com/commercial/sponsor/21/Jul/2025/bd012231-b67a-44cf-a208-9499714959b2-Vinted_green_280.png',
+				dimensions: { width: 280, height: 180 },
+				link: '/',
+				label: 'Paid for by',
+			},
+			aboutThisLink:
+				'https://www.theguardian.com/info/2016/jan/25/content-funding',
+		},
+	},
+];
 
 export const OneCardFast = () => {
 	return (
@@ -345,3 +449,56 @@ export const TwelveCardSlow = () => {
 	);
 };
 TwelveCardSlow.storyName = 'Slow - Twelve cards';
+
+export const FiveCardWithSingleBranding = () => {
+	return (
+		<FrontSection
+			title="Five cards with single branding"
+			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
+			collectionBranding={{
+				kind: 'paid-content',
+				isFrontBranding: false,
+				branding: {
+					brandingType: {
+						name: 'paid-content',
+					},
+					sponsorName: 'guardian.org',
+					logo,
+					aboutThisLink:
+						'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
+				},
+				isContainerBranding: true,
+				hasMultipleBranding: false,
+			}}
+		>
+			<DecideContainerByTrails
+				trails={trails.slice(0, 5)}
+				speed="fast"
+				imageLoading="eager"
+				isTagPage={true}
+				aspectRatio={ASPECT_RATIO}
+			/>
+		</FrontSection>
+	);
+};
+FiveCardWithSingleBranding.storyName = 'Five cards with single branding';
+
+export const FiveCardWithMultipleBranding = () => {
+	return (
+		<FrontSection
+			title="Five cards with multiple branding"
+			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
+		>
+			<DecideContainerByTrails
+				trails={brandedTrailExamples}
+				speed="fast"
+				imageLoading="eager"
+				isTagPage={true}
+				aspectRatio={ASPECT_RATIO}
+			/>
+		</FrontSection>
+	);
+};
+FiveCardWithMultipleBranding.storyName = 'Five cards with multiple branding';
