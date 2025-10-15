@@ -7,10 +7,13 @@ import {
 	type InferOutput,
 	lazy,
 	literal,
+	nonEmpty,
 	number,
 	object,
 	optional,
+	pipe,
 	record,
+	safeParse,
 	string,
 	union,
 } from 'valibot';
@@ -1428,12 +1431,15 @@ export const EntryIDSchema = custom<EntryID>(
 );
 
 const NonEmptyGroupSchema = custom<[EntryID, ...EntryID[]]>((input) => {
-	if (!Array.isArray(input)) return false;
-	if (input.length === 0) return false;
-	for (const item of input) {
-		if (!EntryIDSchema.check(item)) return false;
-	}
-	return true;
+	const result = safeParse(
+		pipe(
+			array(EntryIDSchema),
+			nonEmpty('group must have at least one item'),
+		),
+		input,
+	);
+
+	return result.success;
 });
 
 export const CAPICrosswordSchema = object({

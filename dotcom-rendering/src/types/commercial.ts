@@ -26,10 +26,12 @@ export type EditionCommercialProperties = InferOutput<
 export const CommercialPropertiesSchema = object(
 	Object.fromEntries(
 		EditionIdSchema.options.map((editionId) => [
-			editionId,
+			editionId.literal,
 			EditionCommercialPropertiesSchema,
 		]),
 	) as Record<EditionId, typeof EditionCommercialPropertiesSchema>,
+	() =>
+		'Invalid commercial properties object — one or more editions are invalid.',
 );
 
 export type CommercialProperties = InferOutput<

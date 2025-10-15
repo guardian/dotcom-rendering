@@ -4,6 +4,7 @@ import {
 	custom,
 	type GenericSchema,
 	type InferOutput,
+	intersect,
 	literal,
 	number,
 	object,
@@ -44,44 +45,25 @@ const CommercialConfigTypeSchema = object({
 /**
  * Narrowest representation of the server-side tests
  * object shape, which is [defined in `frontend`](https://github.com/guardian/frontend/blob/23743723030a041e4f4f59fa265ee2be0bb51825/common/app/experiments/ExperimentsDefinition.scala#L24-L26).
- *
- * **Note:** This type is not support by JSON-schema, it evaluates as `object`
  */
-
-// TODO this is temporary fix to be able to make the build pass
 export type ServerSideTests = {
 	[key: `${string}Variant`]: 'variant';
 	[key: `${string}Control`]: 'control';
 };
 
-export const ServerSideTestsSchema: GenericSchema<ServerSideTests> = custom(
-	(input): input is ServerSideTests => {
-		if (typeof input !== 'object' || input === null) return false;
-
-		return Object.entries(input).every(([key, value]) => {
-			if (key.endsWith('Variant')) return value === 'variant';
-			if (key.endsWith('Control')) return value === 'control';
-			return false;
-		});
-	},
+const VariantKeySchema = custom<`${string}Variant`>(
+	(input) => typeof input === 'string' && /.*Variant$/.test(input),
 );
+const VariantTestsSchema = record(VariantKeySchema, literal('variant'));
+const ControlKeySchema = custom<`${string}Control`>(
+	(input) => typeof input === 'string' && /.*Control$/.test(input),
+);
+const ControlTestsSchema = record(ControlKeySchema, literal('control'));
 
-// TODO: the ideal fix is to make the following approach work
-// const VariantKeySchema = custom<`${string}Variant`>(
-// 	(input) => typeof input === 'string' && /.*Variant$/.test(input),
-// );
-// const VariantTestsSchema = record(VariantKeySchema, literal('variant'));
-// const ControlKeySchema = custom<`${string}Control`>(
-// 	(input) => typeof input === 'string' && /.*Control$/.test(input),
-// );
-// const ControlTestsSchema = record(ControlKeySchema, literal('control'));
-
-// const ServerSideTestsSchema = intersect([
-// 	VariantTestsSchema,
-// 	ControlTestsSchema,
-// ]);
-
-// export type ServerSideTests = InferOutput<typeof ServerSideTestsSchema>;
+const ServerSideTestsSchema = intersect([
+	VariantTestsSchema,
+	ControlTestsSchema,
+]) as GenericSchema<ServerSideTests>;
 
 export type ServerSideTestNames = keyof ServerSideTests;
 

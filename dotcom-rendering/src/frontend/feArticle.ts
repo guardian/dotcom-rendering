@@ -59,7 +59,7 @@ const PageTypeSchema = object({
  * WARNING: run `gen-schema` task if changing this to update the associated JSON
  * schema definition.
  */
-const FEArticleSchema = object({
+export const FEArticleSchema = object({
 	headline: string(),
 	standfirst: string(),
 	affiliateLinksDisclaimer: optional(string()),
