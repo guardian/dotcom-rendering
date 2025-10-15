@@ -6,17 +6,17 @@ import {
 import { ABTest } from '../../types.ts';
 import { AudienceSpace, AllSpace, FastlyTestParams } from '../lib/types.ts';
 
+const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000)
+	.toISOString()
+	.split('T')[0] as ABTest['expirationDate']; // Format as YYYY-MM-DD
+
 // Helper function to create mock ABTest
 function createMockABTest(name: string, options: Partial<ABTest> = {}): ABTest {
 	return {
 		name: name as ABTest['name'], // Cast to satisfy TestName type
 		description: options.description || `Test ${name}`,
 		owners: options.owners || ['test@example.com'],
-		expirationDate:
-			options.expirationDate ||
-			(new Date(Date.now() + 86400000)
-				.toISOString()
-				.split('T')[0] as ABTest['expirationDate']), // 24 hours from now
+		expirationDate: options.expirationDate || tomorrow, // 24 hours from now
 		type: options.type || 'server',
 		status: options.status || 'ON',
 		audienceSize: options.audienceSize || 0.1, // 10% of audience
@@ -616,6 +616,7 @@ Deno.test(
 				audienceSize: 0.002,
 				groups: ['control', 'variant'],
 				status: 'OFF', // Test is switched off
+				expirationDate: tomorrow, // Future date, but should be ignored
 			}),
 		];
 
