@@ -222,7 +222,7 @@ export const CalloutTermsAndConditions = () => (
 			href="https://www.theguardian.com/tips"
 		>
 			tips guide
-		</a>{' '}
+		</a>
 		.
 	</div>
 );
