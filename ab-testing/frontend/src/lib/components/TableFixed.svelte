@@ -60,6 +60,7 @@
 					</td>
 					<td>
 						<TestVariants
+							size={test.audienceSize * 100}
 							testName={test.name}
 							testGroups={test.groups}
 						/>

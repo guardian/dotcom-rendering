@@ -2,9 +2,16 @@
 	interface Props {
 		testName: string;
 		testGroups: string[];
+		size: number;
 	}
 
-	const { testName, testGroups }: Props = $props();
+	const { testName, testGroups, size }: Props = $props();
+
+	const formatter = new Intl.NumberFormat('en-US', {
+		style: 'percent',
+		minimumFractionDigits: 0,
+		maximumFractionDigits: 2,
+	});
 </script>
 
 <div>
@@ -14,7 +21,9 @@
 				<a
 					href={`https://www.theguardian.com/ab-tests/opt/in/${testName}:${group}`}
 				>
-					{group}
+					{group} ({formatter.format(
+						((1 / testGroups.length) * size) / 100,
+					)})
 				</a>{#if i < testGroups.length - 1}&nbsp;|&nbsp;{/if}
 			</li>
 		{/each}
