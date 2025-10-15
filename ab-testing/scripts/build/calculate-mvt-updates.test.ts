@@ -602,3 +602,28 @@ Deno.test(
 		);
 	},
 );
+
+Deno.test(
+	'calculateSpaceUpdates - tests that are switched off should have expiration of 0',
+	() => {
+		const existingAudienceSpace = createMockAudienceSpace({
+			'commercial-test1:control': [0, 1],
+			'commercial-test1:variant': [2, 3],
+		});
+
+		const tests = [
+			createMockABTest('commercial-test1', {
+				audienceSize: 0.002,
+				groups: ['control', 'variant'],
+				status: 'OFF', // Test is switched off
+			}),
+		];
+
+		const result = calculateSpaceUpdates(existingAudienceSpace, tests);
+
+		// All entries for the test should have exp set to 0
+		result.forEach((entry) => {
+			assertEquals(entry.exp, 0);
+		});
+	},
+);
