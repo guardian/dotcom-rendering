@@ -15,7 +15,7 @@ import { AdjustmentType, StepScalingPolicy } from 'aws-cdk-lib/aws-autoscaling';
 import { Metric, Unit } from 'aws-cdk-lib/aws-cloudwatch';
 import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
 import type { InstanceType } from 'aws-cdk-lib/aws-ec2';
-import { Peer, SecurityGroup } from 'aws-cdk-lib/aws-ec2';
+import { Peer } from 'aws-cdk-lib/aws-ec2';
 import { Subscription, SubscriptionProtocol, Topic } from 'aws-cdk-lib/aws-sns';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { getUserData } from './userData';
@@ -285,23 +285,6 @@ export class RenderingCDKStack extends CDKStack {
 			parameterName: `/${guStack}/${stage.toLowerCase()}/${guApp}.baseURL`,
 			stringValue: `https://${domainName}`,
 			description: `The rendering base URL for frontend to call the ${guApp} app in the ${stage} environment`,
-		});
-
-		// A temporary security group with a fixed logical ID, replicating the one removed from GuCDK v61.5.0.
-		const tempSecurityGroup = new SecurityGroup(
-			this,
-			'WazuhSecurityGroup',
-			{
-				vpc: ec2App.vpc,
-				// Must keep the same description, else CloudFormation will try to replace the security group
-				// See https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-securitygroup.html#cfn-ec2-securitygroup-groupdescription.
-				description:
-					'Allow outbound traffic from wazuh agent to manager',
-			},
-		);
-		this.overrideLogicalId(tempSecurityGroup, {
-			logicalId: 'WazuhSecurityGroup',
-			reason: "Part one of updating to GuCDK 61.5.0+ whilst using Riff-Raff's ASG deployment type",
 		});
 	}
 }
