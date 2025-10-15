@@ -12,7 +12,8 @@
 	function daysToExpiry(expires: string) {
 		const today = new Date();
 		const expiresDate = new Date(expires);
-		const differenceInMilliseconds = expiresDate.getTime() - today.getTime();
+		const differenceInMilliseconds =
+			expiresDate.getTime() - today.getTime();
 		const differenceInDays =
 			differenceInMilliseconds / (1000 * 60 * 60 * 24);
 		return Math.floor(differenceInDays);
@@ -26,7 +27,7 @@
 				<tr>
 					<th scope="col">Name</th>
 					<th scope="col">State</th>
-					<th scope="col">Variants</th>
+					<th scope="col">Test Groups</th>
 					<th scope="col">Expires In</th>
 					<th scope="col">Audience</th>
 					<th scope="col">Offset</th>
