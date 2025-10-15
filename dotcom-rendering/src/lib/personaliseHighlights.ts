@@ -37,23 +37,23 @@ export const setHistoryInLocalStorage = (
 
 export const storeHighlightArticleVisit = (
 	article: DCRFrontCard,
-	setHighlightOrder: (highlightHistory: HighlightsArticleHistory) => void,
-	currentOrder: DCRFrontCard[],
+	highlights: DCRFrontCard[],
 ): void => {
-	// get the article click history from local storage
-	const articleIndex = currentOrder.indexOf(article);
-	console.log('>>>', { articleIndex });
+	const articleIndex = highlights.indexOf(article);
+
+	// if the article is already at the back of the highlights array, leave it be.
 	if (articleIndex === -1) {
 		return;
 	}
-	console.log('>>> 1', currentOrder);
-	// @ts-expect-error
-	currentOrder.push(currentOrder.splice(articleIndex, 1)[0]);
-	setHighlightOrder(currentOrder);
-	console.log('>>> 2', currentOrder);
+
+	const newOrder = [
+		...highlights.slice(0, articleIndex),
+		...highlights.slice(articleIndex + 1),
+		article,
+	];
 
 	// set the latest article click
-	storage.local.set(HighlightOrderKey, currentOrder);
+	storage.local.set(HighlightOrderKey, newOrder);
 };
 
 //

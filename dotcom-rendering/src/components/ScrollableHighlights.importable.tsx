@@ -349,10 +349,8 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 								mainMedia={trail.mainMedia}
 								starRating={trail.starRating}
 								storeInteraction={() => {
-									console.log('storing....');
 									storeHighlightArticleVisit(
 										trail,
-										setOrderedTrails,
 										orderedTrails,
 									);
 								}}
