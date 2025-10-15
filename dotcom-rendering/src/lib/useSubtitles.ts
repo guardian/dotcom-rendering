@@ -10,7 +10,6 @@ type Props = {
 
 export const useSubtitles = ({ video, playerState, currentTime }: Props) => {
 	const [activeTrack, setActiveTrack] = useState<TextTrack | null>(null);
-	const [subtitlesAvailable, setSubtitlesAvailable] = useState(false);
 
 	useEffect(() => {
 		if (!video) return;
@@ -19,10 +18,13 @@ export const useSubtitles = ({ video, playerState, currentTime }: Props) => {
 		console.log('>>> Text Tracks', textTracks);
 
 		const setTrackFromList = () => {
+			const track = textTracks[0];
 			// We currently only support one text track per video, so we are ok to acces [0] here. If we added additional languages, this will need updating.
-			if (!textTracks[0]) return;
-			setActiveTrack(textTracks[0]);
-			console.log(textTracks[0]);
+			if (!track) return;
+			setActiveTrack(track);
 		};
+
+		//Get Text track as soon as the video element is available.
+		setTrackFromList();
 	}, [video]);
 };

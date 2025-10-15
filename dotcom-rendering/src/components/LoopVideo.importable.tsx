@@ -25,6 +25,7 @@ import type {
 } from './LoopVideoPlayer';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
 import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
+import { useSubtitles } from '../lib/useSubtitles';
 
 const videoContainerStyles = css`
 	z-index: ${getZIndex('loop-video-container')};
@@ -618,6 +619,12 @@ export const LoopVideo = ({
 				break;
 		}
 	};
+
+	useSubtitles({
+		video: vidRef.current,
+		playerState,
+		currentTime,
+	});
 
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
 
