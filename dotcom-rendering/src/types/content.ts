@@ -481,6 +481,10 @@ export interface ProductBlockElement {
 	productName: string;
 	primaryRetailer: string;
 	image: Image;
+	altText: string;
+	caption: string;
+	displayCredit: boolean;
+	credit: string;
 	primaryPrice: string;
 	primaryCta: string;
 	secondaryHeading: string;

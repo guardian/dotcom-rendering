@@ -41,6 +41,9 @@ const sampleProductCard: LeftColProductCardProps = {
 			value: 'there’s nowhere to stow the remote control',
 		},
 	],
+	altText: 'A small fan on a table',
+	displayCredit: true,
+	credit: 'AirCraft',
 };
 
 export const Default = () => <LeftColProductCard {...sampleProductCard} />;
