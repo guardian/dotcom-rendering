@@ -43,7 +43,7 @@ const sampleProductCard: LeftColProductCardProps = {
 	],
 	altText: 'A small fan on a table',
 	displayCredit: true,
-	credit: 'AirCraft',
+	credit: 'AirCraft Photography by John Smith',
 };
 
 export const Default = () => <LeftColProductCard {...sampleProductCard} />;

@@ -260,7 +260,7 @@ const product: ProductBlockElement = {
 		},
 	],
 	credit: 'Photograph: Rachel Ogden/The Guardian',
-	displayCredit: true,
+	displayCredit: false,
 	altText: 'Bosch Sky Kettle',
 	caption:
 		'The Bosch Sky Kettle is a good all-rounder. Photograph: Rachel Ogden/The Guardian',
@@ -354,14 +354,13 @@ export const withoutHeading: StoryFn = () => {
 	);
 };
 
-export const emptyHeadingsOnly: StoryFn = () => {
+export const displayCredit: StoryFn = () => {
 	return (
 		<>
 			<ProductElement
 				product={{
 					...product,
-					primaryHeading: '',
-					secondaryHeading: 'Secondary heading only',
+					displayCredit: true,
 				}}
 				format={{
 					design: ArticleDesign.Review,
@@ -373,8 +372,7 @@ export const emptyHeadingsOnly: StoryFn = () => {
 			<ProductElement
 				product={{
 					...product,
-					primaryHeading: 'Primary Heading',
-					secondaryHeading: '',
+					displayCredit: true,
 				}}
 				format={{
 					design: ArticleDesign.Review,
@@ -384,6 +382,42 @@ export const emptyHeadingsOnly: StoryFn = () => {
 				ArticleElementComponent={ArticleElementComponent}
 			/>
 		</>
+	);
+};
+
+export const noPrimaryHeading: StoryFn = () => {
+	return (
+		<ProductElement
+			product={{
+				...product,
+				primaryHeading: '<em>Primary heading only</em>',
+				secondaryHeading: '',
+			}}
+			format={{
+				design: ArticleDesign.Review,
+				display: ArticleDisplay.Showcase,
+				theme: Pillar.Lifestyle,
+			}}
+			ArticleElementComponent={ArticleElementComponent}
+		/>
+	);
+};
+
+export const noSecondaryHeading: StoryFn = () => {
+	return (
+		<ProductElement
+			product={{
+				...product,
+				primaryHeading: '',
+				secondaryHeading: 'Secondary heading only',
+			}}
+			format={{
+				design: ArticleDesign.Review,
+				display: ArticleDisplay.Showcase,
+				theme: Pillar.Lifestyle,
+			}}
+			ArticleElementComponent={ArticleElementComponent}
+		/>
 	);
 };
 

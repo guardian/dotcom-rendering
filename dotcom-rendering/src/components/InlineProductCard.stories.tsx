@@ -69,13 +69,16 @@ const sampleProductCard: InlineProductCardProps = {
 	},
 	image: 'https://media.guim.co.uk/ed32f52c10d742be18c4ff1b218dce611e71f57e/500_0_3000_3000/master/3000.jpg',
 	primaryUrl: 'https://www.aircraft.com/lume',
-	primaryCTA: 'Buy at AirCraft',
+	primaryCta: 'Buy at AirCraft',
 	primaryPrice: '£199.99',
-	secondaryCTA: '£199.99 at Amazon',
+	secondaryCta: '£199.99 at Amazon',
 	secondaryUrl:
 		'https://www.amazon.co.uk/AirCraft-Home-Backlight-Oscillating-Circulator/dp/B0D8QNGB3M',
 	brandName: 'AirCraft',
 	productName: 'Lume',
+	altText: 'A small fan on a table',
+	credit: 'AirCraft Photography by John Smith',
+	displayCredit: false,
 	statistics: [
 		{ name: 'What we love', value: 'It packs away pretty small' },
 		{
@@ -83,11 +86,19 @@ const sampleProductCard: InlineProductCardProps = {
 			value: 'there’s nowhere to stow the remote control',
 		},
 	],
-	displayType: 'inline-and-product-card',
+	isCardOnly: false,
 };
 
 export const Default = () => <InlineProductCard {...sampleProductCard} />;
 
 export const productCardOnly = () => (
-	<InlineProductCard {...sampleProductCard} displayType="product-card-only" />
+	<InlineProductCard {...sampleProductCard} isCardOnly={true} />
+);
+
+export const productCardOnlyDisplayCredit = () => (
+	<InlineProductCard
+		{...sampleProductCard}
+		isCardOnly={true}
+		displayCredit={true}
+	/>
 );

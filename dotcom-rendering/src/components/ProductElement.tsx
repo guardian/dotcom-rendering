@@ -69,7 +69,7 @@ export const ProductElement = ({
 		product.displayType === 'inline-and-product-card';
 
 	return (
-		<div data-spacefinder-role="nested">
+		<div>
 			{showContent && (
 				<Content
 					product={product}
@@ -85,9 +85,12 @@ export const ProductElement = ({
 					image={product.image.url}
 					primaryUrl={product.primaryProductUrl}
 					primaryPrice={product.primaryPrice}
-					primaryCTA={product.primaryCta}
-					secondaryCTA={product.secondaryCta}
+					primaryCta={product.primaryCta}
+					secondaryCta={product.secondaryCta}
 					secondaryUrl={product.secondaryProductUrl}
+					altText={product.altText}
+					credit={product.credit}
+					displayCredit={product.displayCredit}
 					statistics={product.statistics}
 					isCardOnly={product.displayType === 'product-card-only'}
 				/>
@@ -116,7 +119,7 @@ const Content = ({
 		? subheadingHtml.textContent.trim().length > 0
 		: false;
 	return (
-		<>
+		<div data-spacefinder-role="nested">
 			{isSubheading &&
 				Array.from(subheadingHtml.childNodes).map(
 					buildElementTree(format),
@@ -150,6 +153,6 @@ const Content = ({
 					/>
 				))}
 			</div>
-		</>
+		</div>
 	);
 };
