@@ -1,4 +1,4 @@
-import { type InferOutput, literal, object, string, union } from "valibot";
+import { type InferOutput, literal, object, string, union } from 'valibot';
 
 export type CustomPlayEventDetail = { uniqueId: string };
 
@@ -14,11 +14,15 @@ export const supportedVideoFileTypes = [
 	'video/mp4', // MP4 format
 ] as const;
 
-const SupportedVideoFileTypeSchema = union(supportedVideoFileTypes.map((type) => literal(type)));
-export type SupportedVideoFileType = InferOutput<typeof SupportedVideoFileTypeSchema>;
+const SupportedVideoFileTypeSchema = union(
+	supportedVideoFileTypes.map((type) => literal(type)),
+);
+export type SupportedVideoFileType = InferOutput<
+	typeof SupportedVideoFileTypeSchema
+>;
 
 export const SourceSchema = object({
-    src: string(),
-    mimeType: SupportedVideoFileTypeSchema,
+	src: string(),
+	mimeType: SupportedVideoFileTypeSchema,
 });
 export type Source = InferOutput<typeof SourceSchema>;

@@ -1,4 +1,4 @@
-import { array, type InferOutput, object, optional, string } from "valibot";
+import { array, type InferOutput, object, optional, string } from 'valibot';
 
 const FooterLinkSchema = object({
 	text: string(),

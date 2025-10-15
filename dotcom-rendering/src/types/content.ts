@@ -1561,7 +1561,7 @@ export type TimelineAtomType = {
 	events?: TimelineAtomEvent[];
 	title: string;
 	description?: string;
-	expandForStorybook: boolean;
+	expandForStorybook?: boolean;
 	likeHandler?: () => void;
 	dislikeHandler?: () => void;
 	expandCallback?: () => void;

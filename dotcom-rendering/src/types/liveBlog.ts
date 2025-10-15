@@ -1,4 +1,4 @@
-import { number, object, optional, string, type InferOutput } from "valibot";
+import { type InferOutput, number, object, optional, string } from 'valibot';
 
 export type LiveUpdateType = {
 	numNewBlocks: number;

@@ -1,4 +1,11 @@
-import { array, type InferOutput, object, optional, string, union } from 'valibot';
+import {
+	array,
+	type InferOutput,
+	object,
+	optional,
+	string,
+	union,
+} from 'valibot';
 import { type EditionId, EditionIdSchema } from '../lib/edition';
 import { BrandingSchema } from './branding';
 
@@ -12,15 +19,22 @@ const EditionCommercialPropertiesSchema = object({
 	branding: optional(BrandingSchema),
 });
 
-export type EditionCommercialProperties = InferOutput<typeof EditionCommercialPropertiesSchema>;
+export type EditionCommercialProperties = InferOutput<
+	typeof EditionCommercialPropertiesSchema
+>;
 
 export const CommercialPropertiesSchema = object(
-    Object.fromEntries(
-      EditionIdSchema.options.map((editionId) => [editionId, EditionCommercialPropertiesSchema])
-    ) as Record<EditionId, typeof EditionCommercialPropertiesSchema>
+	Object.fromEntries(
+		EditionIdSchema.options.map((editionId) => [
+			editionId,
+			EditionCommercialPropertiesSchema,
+		]),
+	) as Record<EditionId, typeof EditionCommercialPropertiesSchema>,
 );
 
-export type CommercialProperties = InferOutput<typeof CommercialPropertiesSchema>;
+export type CommercialProperties = InferOutput<
+	typeof CommercialPropertiesSchema
+>;
 
 /**
  * key: a front, e.g. "uk" or "uk/sport"
@@ -29,7 +43,6 @@ export type CommercialProperties = InferOutput<typeof CommercialPropertiesSchema
 export type FrontsBannerAdCollections = {
 	[key: string]: string[];
 };
-
 
 type CustomParams = {
 	sens: 't' | 'f';
@@ -55,7 +68,9 @@ const ReaderRevenueCategoriesSchema = object({
 	gifting: optional(string()),
 });
 
-export type ReaderRevenueCategories = InferOutput<typeof ReaderRevenueCategoriesSchema>;
+export type ReaderRevenueCategories = InferOutput<
+	typeof ReaderRevenueCategoriesSchema
+>;
 
 export const ReaderRevenuePositionsSchema = object({
 	header: ReaderRevenueCategoriesSchema,
@@ -65,6 +80,8 @@ export const ReaderRevenuePositionsSchema = object({
 	ampFooter: ReaderRevenueCategoriesSchema,
 });
 
-export type ReaderRevenuePositions = InferOutput<typeof ReaderRevenuePositionsSchema>;
+export type ReaderRevenuePositions = InferOutput<
+	typeof ReaderRevenuePositionsSchema
+>;
 
 export type ReaderRevenuePosition = keyof ReaderRevenuePositions;

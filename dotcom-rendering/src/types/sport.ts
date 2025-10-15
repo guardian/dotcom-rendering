@@ -1,4 +1,4 @@
-import { literal, union } from "valibot";
+import { literal, union } from 'valibot';
 
 /**
  * Football
@@ -69,4 +69,7 @@ export type CricketMatch = {
 /**
  * General
  */
-export const MatchTypeSchema = union([literal('CricketMatchType'), literal('FootballMatchType')]);
+export const MatchTypeSchema = union([
+	literal('CricketMatchType'),
+	literal('FootballMatchType'),
+]);

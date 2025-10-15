@@ -1,5 +1,13 @@
-import { array, boolean, number, object, optional, string, type InferOutput } from 'valibot';
-import { FEElementSchema, type FEElement } from './content';
+import {
+	array,
+	boolean,
+	type InferOutput,
+	number,
+	object,
+	optional,
+	string,
+} from 'valibot';
+import { FEElementSchema } from './content';
 
 const MembershipPlaceholderSchema = object({
 	campaignCode: optional(string()),

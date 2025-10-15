@@ -1,4 +1,12 @@
-import { optional, string, union, object, literal, type InferOutput, number } from 'valibot';
+import {
+	type InferOutput,
+	literal,
+	number,
+	object,
+	optional,
+	string,
+	union,
+} from 'valibot';
 import type { EditionId } from '../lib/edition';
 
 export const BrandingLogoSchema = object({

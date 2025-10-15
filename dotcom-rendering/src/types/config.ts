@@ -1,12 +1,26 @@
-import { array, boolean, custom, intersect, literal, number, object, optional, record, string, undefined, union, type InferOutput } from 'valibot';
+import {
+	array,
+	boolean,
+	custom,
+	type InferOutput,
+	intersect,
+	literal,
+	number,
+	object,
+	optional,
+	record,
+	string,
+	undefined,
+	union,
+} from 'valibot';
 import { SharedAdTargetingSchema } from '../lib/ad-targeting';
-import { EditionIdSchema, type EditionId } from '../lib/edition';
+import { EditionIdSchema } from '../lib/edition';
 
 const StageTypeSchema = union([
 	literal('DEV'),
 	literal('CODE'),
 	literal('PROD'),
-])
+]);
 
 export type StageType = InferOutput<typeof StageTypeSchema>;
 
@@ -33,12 +47,19 @@ const CommercialConfigTypeSchema = object({
  *
  * **Note:** This type is not support by JSON-schema, it evaluates as `object`
  */
-const VariantKeySchema = custom<`${string}Variant`>((input) => typeof input === 'string' && /.*Variant$/.test(input));
+const VariantKeySchema = custom<`${string}Variant`>(
+	(input) => typeof input === 'string' && /.*Variant$/.test(input),
+);
 const VariantTestsSchema = record(VariantKeySchema, literal('variant'));
-const ControlKeySchema = custom<`${string}Control`>((input) => typeof input === 'string' && /.*Control$/.test(input));
+const ControlKeySchema = custom<`${string}Control`>(
+	(input) => typeof input === 'string' && /.*Control$/.test(input),
+);
 const ControlTestsSchema = record(ControlKeySchema, literal('control'));
 
-const ServerSideTestsSchema = intersect([VariantTestsSchema, ControlTestsSchema]);
+const ServerSideTestsSchema = intersect([
+	VariantTestsSchema,
+	ControlTestsSchema,
+]);
 
 export type ServerSideTests = InferOutput<typeof ServerSideTestsSchema>;
 
