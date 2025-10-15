@@ -17,6 +17,9 @@
 
 	const BAR_HEIGHT = 40;
 
+	const BAR_MARGIN_X = 0.1;
+	const BAR_MARGIN_Y = 2;
+
 	const testSpaces = ['A', 'B', 'C'];
 
 	const chartHeight = testSpaces.length * BAR_HEIGHT + BAR_HEIGHT + 16;
@@ -85,13 +88,13 @@
 	</svg>
 	{#each getAllRows(testsBySpace) as bar}
 		<svg
-			x={`${bar.x + 0.1}%`}
+			x={`${bar.x + BAR_MARGIN_X}%`}
 			y={bar.y}
-			width={`${bar.width - 0.2}%`}
+			width={`${bar.width - BAR_MARGIN_X * 2}%`}
 			height={BAR_HEIGHT}
 		>
 			<g class="bar">
-				<rect height={BAR_HEIGHT - 2} width="100%" rx="4" />
+				<rect height={BAR_HEIGHT - BAR_MARGIN_Y} width="100%" rx="4" />
 				<text class="name" x="50%" y="50%">{bar.name}</text>
 				<text class="segments" x="50%" y="50%">{bar.segments}</text>
 			</g>
