@@ -17,10 +17,9 @@
 
 	const BAR_HEIGHT = 40;
 
-	// Account for legend bar and vertical padding in chart height
-	const chartHeight = tests.length * BAR_HEIGHT + BAR_HEIGHT + 16;
-
 	const testSpaces = ['A', 'B', 'C'];
+
+	const chartHeight = testSpaces.length * BAR_HEIGHT + BAR_HEIGHT + 16;
 
 	const testsBySpace = testSpaces.map((space) => {
 		if (space === 'A') {
@@ -33,32 +32,32 @@
 	});
 
 	function getBars(testList: ABTest[], rowPosition: number) {
-		return testList.reduce<Array<ABTestBarData>>(
-			(barsList, test, index) => {
-				const previousBar = barsList.slice(-1)[0];
-				const offset: number = Number(previousBar?.width ?? 0);
-				const rowYLevel = index + rowPosition;
-				const testSize = getSize(test);
+		return testList.reduce<Array<ABTestBarData>>((barsList, test) => {
+			const previousBarsWidth = barsList.reduce(
+				(acc, bar) => acc + bar.width,
+				0,
+			);
+			const offset: number = Number(previousBarsWidth);
+			const rowYLevel = rowPosition;
+			const testSize = getSize(test);
 
-				return [
-					...barsList,
-					{
-						x: offset,
-						y: rowYLevel * BAR_HEIGHT + BAR_HEIGHT,
-						width: testSize,
-						name: test.name,
-						segments: `${offset}% to ${offset + testSize}%`,
-					},
-				];
-			},
-			[],
-		);
+			return [
+				...barsList,
+				{
+					x: offset,
+					y: rowYLevel * BAR_HEIGHT + BAR_HEIGHT,
+					width: testSize,
+					name: test.name,
+					segments: `${offset}% to ${offset + testSize}%`,
+				},
+			];
+		}, []);
 	}
 
 	function getAllRows(testsBySpace: ABTest[][]) {
 		return testsBySpace.reduce<Array<ABTestBarData>>(
-			(barsList, testsInSpace) => {
-				return [...barsList, ...getBars(testsInSpace, barsList.length)];
+			(barsList, testsInSpace, i) => {
+				return [...barsList, ...getBars(testsInSpace, i)];
 			},
 			[],
 		);
@@ -86,13 +85,13 @@
 	</svg>
 	{#each getAllRows(testsBySpace) as bar}
 		<svg
-			x={`${bar.x}%`}
+			x={`${bar.x + 0.1}%`}
 			y={bar.y}
-			width={`${bar.width}%`}
+			width={`${bar.width - 0.2}%`}
 			height={BAR_HEIGHT}
 		>
 			<g class="bar">
-				<rect height={BAR_HEIGHT} width="100%" rx="4" />
+				<rect height={BAR_HEIGHT - 2} width="100%" rx="4" />
 				<text class="name" x="50%" y="50%">{bar.name}</text>
 				<text class="segments" x="50%" y="50%">{bar.segments}</text>
 			</g>

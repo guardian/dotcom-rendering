@@ -30,7 +30,6 @@
 					<th scope="col">Test Groups</th>
 					<th scope="col">Expires In</th>
 					<th scope="col">Audience</th>
-					<th scope="col">Offset</th>
 					<th scope="col">Ophan</th>
 				</tr>
 			</thead>
@@ -46,12 +45,11 @@
 					</td>
 					<td>{daysToExpiry(test.expirationDate)} days</td>
 					<td>{test.audienceSize * 100}%</td>
-					<td>0</td>
 					<td><OphanLink testName={test.name} /></td>
 				</tr>
 				<tr>
 					<th scope="row">Description</th>
-					<td colspan="6">{test.description}</td>
+					<td colspan="5">{test.description}</td>
 				</tr>
 			</tbody>
 		</table>
