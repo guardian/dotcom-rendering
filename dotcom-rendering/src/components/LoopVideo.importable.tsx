@@ -11,6 +11,7 @@ import { getZIndex } from '../lib/getZIndex';
 import { generateImageURL } from '../lib/image';
 import { useIsInView } from '../lib/useIsInView';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
+import { useSubtitles } from '../lib/useSubtitles';
 import type { CustomPlayEventDetail, Source } from '../lib/video';
 import {
 	customLoopPlayAudioEventName,
@@ -25,7 +26,6 @@ import type {
 } from './LoopVideoPlayer';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
 import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
-import { useSubtitles } from '../lib/useSubtitles';
 
 const videoContainerStyles = css`
 	z-index: ${getZIndex('loop-video-container')};
@@ -170,6 +170,12 @@ export const LoopVideo = ({
 	const [isInView, setNode] = useIsInView({
 		repeat: true,
 		threshold: VISIBILITY_THRESHOLD,
+	});
+
+	const subtitles = useSubtitles({
+		video: vidRef.current,
+		playerState,
+		currentTime,
 	});
 
 	const playVideo = useCallback(async () => {
@@ -620,12 +626,6 @@ export const LoopVideo = ({
 		}
 	};
 
-	useSubtitles({
-		video: vidRef.current,
-		playerState,
-		currentTime,
-	});
-
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
 
 	const optimisedPosterImage = showPosterImage
@@ -666,6 +666,7 @@ export const LoopVideo = ({
 				showPlayIcon={showPlayIcon}
 				subtitleSource={subtitleSource}
 				subtitleSize={subtitleSize}
+				subtitles={subtitles}
 			/>
 		</figure>
 	);

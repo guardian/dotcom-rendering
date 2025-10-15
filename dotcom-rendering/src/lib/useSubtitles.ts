@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { PlayerStates } from 'src/components/LoopVideoPlayer';
+import type { PlayerStates } from '../components/LoopVideoPlayer';
 
 type Props = {
 	video: HTMLVideoElement | null;
@@ -7,15 +7,19 @@ type Props = {
 	currentTime: number;
 };
 
-type ActiveCue = {
+export type ActiveCue = {
 	startTime: number;
 	endTime: number;
 	text: string;
 };
 
-export const useSubtitles = ({ video, playerState, currentTime }: Props) => {
+export const useSubtitles = ({
+	video,
+	playerState,
+	currentTime,
+}: Props): ActiveCue | null => {
 	const [activeTrack, setActiveTrack] = useState<TextTrack | null>(null);
-	const [activeCue, setActiveCue] = useState<ActiveCue | null[]>([]);
+	const [activeCue, setActiveCue] = useState<ActiveCue | null>(null);
 	// only show subtitles if the video is actively playing or if its paused
 	const shouldShow = playerState === 'PLAYING' || currentTime > 0;
 
@@ -46,7 +50,7 @@ export const useSubtitles = ({ video, playerState, currentTime }: Props) => {
 		if (!shouldShow) return;
 
 		// if we have a track and can show it, hide the native track
-		// track.mode = 'hidden';
+		track.mode = 'hidden';
 
 		const onCueChange = () => {
 			const list = track.activeCues;
@@ -59,7 +63,6 @@ export const useSubtitles = ({ video, playerState, currentTime }: Props) => {
 				endTime: cue.endTime,
 				text: cue.text,
 			});
-			console.log('>>> activeCue', activeCue);
 		};
 		track.addEventListener('cuechange', onCueChange);
 		onCueChange();
