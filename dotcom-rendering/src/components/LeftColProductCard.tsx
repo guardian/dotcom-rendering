@@ -8,6 +8,7 @@ import {
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
+import { Caption } from './Caption';
 import { Picture } from './Picture';
 import { ProductLinkButton } from './ProductLinkButton';
 import { stripHtmlFromString } from './TextBlockComponent';
@@ -24,19 +25,19 @@ export type LeftColProductCardProps = {
 	primaryCta: string;
 	primaryUrl: string;
 	primaryPrice: string;
+	altText: string;
+	displayCredit: boolean;
+	credit: string;
 	statistics: Statistics[];
 	format: ArticleFormat;
-	noHeadings?: boolean;
 };
 
-//To Do fix this so it doesn't pass in noHeadings
-const card = (noHeadings?: boolean) => css`
+const card = css`
 	display: none;
 	${from.wide} {
 		top: ${space[3]}px;
 		position: sticky;
 		display: block;
-		margin-top: ${noHeadings ? 0 : space[3]}px;
 		width: 220px;
 		border-top: 1px solid ${palette('--section-border-lifestyle')};
 	}
@@ -55,15 +56,15 @@ const productInfoContainer = css`
 	padding: ${space[1]}px 10px ${space[2]}px 0;
 `;
 
-const primaryHeading = css`
+const brandNameFont = css`
 	${headlineMedium17};
 `;
 
-const secondaryHeading = css`
+const productNameFont = css`
 	${textSans17};
 `;
 
-const priceRowStyle = css`
+const priceFont = css`
 	${textSans17};
 `;
 
@@ -97,29 +98,47 @@ export const LeftColProductCard = ({
 	brandName,
 	productName,
 	image,
+	altText,
+	displayCredit,
+	credit,
 	primaryCta,
 	primaryUrl,
 	primaryPrice,
 	statistics,
 	format,
-	noHeadings,
 }: LeftColProductCardProps) => (
-	<div css={card(noHeadings)}>
+	<div css={card}>
 		{!!image && (
-			<Picture
-				role={'productCard'}
-				format={format}
-				master={image}
-				alt={productName + brandName}
-				height={220}
-				width={220}
-				loading={'eager'}
-			/>
+			<div
+				css={css`
+					figcaption {
+						position: static;
+					}
+				`}
+			>
+				<Picture
+					role={'productCard'}
+					format={format}
+					master={image}
+					alt={altText}
+					height={220}
+					width={220}
+					loading={'eager'}
+				/>
+				<Caption
+					shouldLimitWidth={true}
+					format={format}
+					isLeftCol={true}
+					displayCredit={displayCredit}
+					credit={credit}
+					isOverlaid={false}
+				/>
+			</div>
 		)}
 		<div css={productInfoContainer}>
-			<div css={primaryHeading}>{brandName}</div>
-			<div css={secondaryHeading}>{productName}</div>
-			<div css={priceRowStyle}>
+			<div css={brandNameFont}>{brandName}</div>
+			<div css={productNameFont}>{productName}</div>
+			<div css={priceFont}>
 				<strong>{primaryPrice}</strong>
 			</div>
 		</div>

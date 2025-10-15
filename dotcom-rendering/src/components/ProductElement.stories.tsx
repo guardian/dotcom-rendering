@@ -259,6 +259,11 @@ const product: ProductBlockElement = {
 			elementId: 'd98fc724-8908-46e2-acc6-4739ad4d5719',
 		},
 	],
+	credit: 'Photograph: Rachel Ogden/The Guardian',
+	displayCredit: true,
+	altText: 'Bosch Sky Kettle',
+	caption:
+		'The Bosch Sky Kettle is a good all-rounder. Photograph: Rachel Ogden/The Guardian',
 };
 const meta = {
 	component: ProductElement,
@@ -384,32 +389,18 @@ export const emptyHeadingsOnly: StoryFn = () => {
 
 export const displayTypeProductCardOnly: StoryFn = () => {
 	return (
-		<>
-			<ProductElement
-				product={{
-					...product,
-					displayType: 'product-card-only',
-				}}
-				format={{
-					design: ArticleDesign.Review,
-					display: ArticleDisplay.Showcase,
-					theme: Pillar.Lifestyle,
-				}}
-				ArticleElementComponent={ArticleElementComponent}
-			/>
-			<ProductElement
-				product={{
-					...product,
-					displayType: 'product-card-only',
-				}}
-				format={{
-					design: ArticleDesign.Review,
-					display: ArticleDisplay.Showcase,
-					theme: Pillar.Lifestyle,
-				}}
-				ArticleElementComponent={ArticleElementComponent}
-			/>
-		</>
+		<ProductElement
+			product={{
+				...product,
+				displayType: 'product-card-only',
+			}}
+			format={{
+				design: ArticleDesign.Review,
+				display: ArticleDisplay.Showcase,
+				theme: Pillar.Lifestyle,
+			}}
+			ArticleElementComponent={ArticleElementComponent}
+		/>
 	);
 };
 

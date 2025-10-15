@@ -11,7 +11,6 @@ import {
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
-import type { ProductDisplayType } from '../types/content';
 import { Picture } from './Picture';
 import { ProductLinkButton } from './ProductLinkButton';
 import { stripHtmlFromString } from './TextBlockComponent';
@@ -32,13 +31,10 @@ export type InlineProductCardProps = {
 	secondaryCTA?: string;
 	secondaryUrl?: string;
 	statistics: Statistics[];
-	displayType: ProductDisplayType;
+	isCardOnly: boolean;
 };
 
 const baseCard = css`
-	${from.wide} {
-		display: none;
-	}
 	padding: ${space[2]}px ${space[3]}px ${space[3]}px;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -68,6 +64,9 @@ const baseCard = css`
 
 const showcaseCard = css`
 	${baseCard};
+	${from.wide} {
+		display: none;
+	}
 	background-color: ${palette('--product-card-background')};
 	border-top: 1px solid ${palette('--section-border-lifestyle')};
 `;
@@ -161,16 +160,6 @@ const Statistic = ({ name, value }: Statistics) => (
 	</div>
 );
 
-const getCardStyle = (displayType: ProductDisplayType) => {
-	switch (displayType) {
-		case 'product-card-only':
-			return productCard;
-		case 'inline-and-product-card':
-		default:
-			return showcaseCard;
-	}
-};
-
 export const InlineProductCard = ({
 	format,
 	brandName,
@@ -182,27 +171,49 @@ export const InlineProductCard = ({
 	secondaryCTA,
 	secondaryUrl,
 	statistics,
-	displayType,
-}: InlineProductCardProps) => (
-	<div css={getCardStyle(displayType)}>
-		{!!image && (
-			<Picture
-				role={'productCard'}
-				format={format}
-				master={image}
-				alt={productName + brandName}
-				height={165}
-				width={165}
-				loading={'eager'}
-			/>
-		)}
-		<div css={productInfoContainer}>
-			<div css={primaryHeading}>{brandName}</div>
-			<div css={productNameStyle}>{productName}</div>
-			<div css={priceStyle}>{primaryPrice}</div>
-			<div css={desktopButtonWrapper}>
+	isCardOnly = false,
+}: InlineProductCardProps) => {
+	return (
+		<div css={[isCardOnly && productCard, !isCardOnly && showcaseCard]}>
+			{!!image && (
+				<Picture
+					role={'productCard'}
+					format={format}
+					master={image}
+					alt={productName + brandName}
+					height={165}
+					width={165}
+					loading={'eager'}
+				/>
+			)}
+			<div css={productInfoContainer}>
+				<div css={primaryHeading}>{brandName}</div>
+				<div css={productNameStyle}>{productName}</div>
+				<div css={priceStyle}>{primaryPrice}</div>
+				<div css={desktopButtonWrapper}>
+					<ProductLinkButton
+						dataComponent="inline-product-card-primary-button"
+						label={stripHtmlFromString(primaryCTA)}
+						url={primaryUrl}
+						cssOverrides={css`
+							width: 100%;
+						`}
+					/>
+					{!!secondaryCTA && !!secondaryUrl && (
+						<ProductLinkButton
+							dataComponent="inline-product-card-secondary-button"
+							label={stripHtmlFromString(secondaryCTA)}
+							url={secondaryUrl}
+							priority="tertiary"
+							cssOverrides={css`
+								width: 100%;
+							`}
+						/>
+					)}
+				</div>
+			</div>
+			<div css={mobileButtonWrapper}>
 				<ProductLinkButton
-					dataComponent="inline-product-card-primary-button"
 					label={stripHtmlFromString(primaryCTA)}
 					url={primaryUrl}
 					cssOverrides={css`
@@ -211,7 +222,6 @@ export const InlineProductCard = ({
 				/>
 				{!!secondaryCTA && !!secondaryUrl && (
 					<ProductLinkButton
-						dataComponent="inline-product-card-secondary-button"
 						label={stripHtmlFromString(secondaryCTA)}
 						url={secondaryUrl}
 						priority="tertiary"
@@ -221,36 +231,17 @@ export const InlineProductCard = ({
 					/>
 				)}
 			</div>
-		</div>
-		<div css={mobileButtonWrapper}>
-			<ProductLinkButton
-				label={stripHtmlFromString(primaryCTA)}
-				url={primaryUrl}
-				cssOverrides={css`
-					width: 100%;
-				`}
-			/>
-			{!!secondaryCTA && !!secondaryUrl && (
-				<ProductLinkButton
-					label={stripHtmlFromString(secondaryCTA)}
-					url={secondaryUrl}
-					priority="tertiary"
-					cssOverrides={css`
-						width: 100%;
-					`}
-				/>
+			{!isCardOnly && statistics.length > 0 && (
+				<div css={statisticsContainer}>
+					{statistics.map((statistic) => (
+						<Statistic
+							key={statistic.name}
+							name={statistic.name}
+							value={statistic.value}
+						/>
+					))}
+				</div>
 			)}
 		</div>
-		{displayType === 'inline-and-product-card' && statistics.length > 0 && (
-			<div css={statisticsContainer}>
-				{statistics.map((statistic) => (
-					<Statistic
-						key={statistic.name}
-						name={statistic.name}
-						value={statistic.value}
-					/>
-				))}
-			</div>
-		)}
-	</div>
-);
+	);
+};
