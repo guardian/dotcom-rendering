@@ -12,8 +12,8 @@
 		{#each testGroups as group}
 			<li>
 				<a
-					href={`http://www.theguardian.com/uk#ab-${testName}=${group}`}
-					>
+					href={`https://www.theguardian.com/ab-tests/opt/in/${testName}:${group}`}
+				>
 					{group}
 				</a>
 			</li>
