@@ -11,6 +11,7 @@ import {
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
+import { Caption } from './Caption';
 import { Picture } from './Picture';
 import { ProductLinkButton } from './ProductLinkButton';
 import { stripHtmlFromString } from './TextBlockComponent';
@@ -25,6 +26,9 @@ export type InlineProductCardProps = {
 	brandName: string;
 	productName: string;
 	image: string;
+	altText: string;
+	credit: string;
+	displayCredit: boolean;
 	primaryCTA: string;
 	primaryUrl: string;
 	primaryPrice: string;
@@ -165,6 +169,9 @@ export const InlineProductCard = ({
 	brandName,
 	productName,
 	image,
+	altText,
+	credit,
+	displayCredit,
 	primaryCTA,
 	primaryUrl,
 	primaryPrice,
@@ -176,15 +183,25 @@ export const InlineProductCard = ({
 	return (
 		<div css={[isCardOnly && productCard, !isCardOnly && showcaseCard]}>
 			{!!image && (
-				<Picture
-					role={'productCard'}
-					format={format}
-					master={image}
-					alt={productName + brandName}
-					height={165}
-					width={165}
-					loading={'eager'}
-				/>
+				<div>
+					<Picture
+						role={'productCard'}
+						format={format}
+						master={image}
+						alt={altText}
+						height={165}
+						width={165}
+						loading={'eager'}
+					/>
+					<Caption
+						shouldLimitWidth={true}
+						format={format}
+						isLeftCol={true}
+						displayCredit={displayCredit}
+						credit={credit}
+						isOverlaid={false}
+					/>
+				</div>
 			)}
 			<div css={productInfoContainer}>
 				<div css={primaryHeading}>{brandName}</div>
