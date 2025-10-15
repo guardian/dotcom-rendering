@@ -2,8 +2,8 @@ import {
 	array,
 	boolean,
 	custom,
+	type GenericSchema,
 	type InferOutput,
-	intersect,
 	literal,
 	number,
 	object,
@@ -47,21 +47,41 @@ const CommercialConfigTypeSchema = object({
  *
  * **Note:** This type is not support by JSON-schema, it evaluates as `object`
  */
-const VariantKeySchema = custom<`${string}Variant`>(
-	(input) => typeof input === 'string' && /.*Variant$/.test(input),
-);
-const VariantTestsSchema = record(VariantKeySchema, literal('variant'));
-const ControlKeySchema = custom<`${string}Control`>(
-	(input) => typeof input === 'string' && /.*Control$/.test(input),
-);
-const ControlTestsSchema = record(ControlKeySchema, literal('control'));
 
-const ServerSideTestsSchema = intersect([
-	VariantTestsSchema,
-	ControlTestsSchema,
-]);
+// TODO this is temporary fix to be able to make the build pass
+export type ServerSideTests = {
+	[key: `${string}Variant`]: 'variant';
+	[key: `${string}Control`]: 'control';
+};
 
-export type ServerSideTests = InferOutput<typeof ServerSideTestsSchema>;
+export const ServerSideTestsSchema: GenericSchema<ServerSideTests> = custom(
+	(input): input is ServerSideTests => {
+		if (typeof input !== 'object' || input === null) return false;
+
+		return Object.entries(input).every(([key, value]) => {
+			if (key.endsWith('Variant')) return value === 'variant';
+			if (key.endsWith('Control')) return value === 'control';
+			return false;
+		});
+	},
+);
+
+// TODO: the ideal fix is to make the following approach work
+// const VariantKeySchema = custom<`${string}Variant`>(
+// 	(input) => typeof input === 'string' && /.*Variant$/.test(input),
+// );
+// const VariantTestsSchema = record(VariantKeySchema, literal('variant'));
+// const ControlKeySchema = custom<`${string}Control`>(
+// 	(input) => typeof input === 'string' && /.*Control$/.test(input),
+// );
+// const ControlTestsSchema = record(ControlKeySchema, literal('control'));
+
+// const ServerSideTestsSchema = intersect([
+// 	VariantTestsSchema,
+// 	ControlTestsSchema,
+// ]);
+
+// export type ServerSideTests = InferOutput<typeof ServerSideTestsSchema>;
 
 export type ServerSideTestNames = keyof ServerSideTests;
 

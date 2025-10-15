@@ -7,11 +7,9 @@ import {
 	type InferOutput,
 	lazy,
 	literal,
-	nonEmpty,
 	number,
 	object,
 	optional,
-	pipe,
 	record,
 	string,
 	union,
@@ -1424,10 +1422,19 @@ export type WitnessTypeBlockElement = InferOutput<
 
 type EntryID = CrosswordProps['data']['entries'][0]['id'];
 
-const EntryIDSchema = custom<EntryID>(
-	(input) =>
-		typeof input === 'string' && /^[0-9]*-(across|down)$/.test(input),
+export const EntryIDSchema = custom<EntryID>(
+	(input): input is EntryID =>
+		typeof input === 'string' && /^[0-9]+-(across|down)$/.test(input),
 );
+
+const NonEmptyGroupSchema = custom<[EntryID, ...EntryID[]]>((input) => {
+	if (!Array.isArray(input)) return false;
+	if (input.length === 0) return false;
+	for (const item of input) {
+		if (!EntryIDSchema.check(item)) return false;
+	}
+	return true;
+});
 
 export const CAPICrosswordSchema = object({
 	creator: optional(
@@ -1457,13 +1464,13 @@ export const CAPICrosswordSchema = object({
 	entries: array(
 		object({
 			id: EntryIDSchema,
-			group: pipe(
-				array(EntryIDSchema),
-				nonEmpty('group must have at least one item'),
-			),
+			group: NonEmptyGroupSchema,
 			number: number(),
 			direction: union([literal('across'), literal('down')]),
-			position: record(union([literal('x'), literal('y')]), number()),
+			position: object({
+				x: number(),
+				y: number(),
+			}),
 			clue: string(),
 			humanNumber: string(),
 			solution: optional(string()),
