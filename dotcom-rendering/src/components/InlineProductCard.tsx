@@ -14,7 +14,6 @@ import { palette } from '../palette';
 import { Caption } from './Caption';
 import { Picture } from './Picture';
 import { ProductLinkButton } from './ProductLinkButton';
-import { stripHtmlFromString } from './TextBlockComponent';
 
 export type Statistics = {
 	name: string;
@@ -29,10 +28,10 @@ export type InlineProductCardProps = {
 	altText: string;
 	credit: string;
 	displayCredit: boolean;
-	primaryCTA: string;
+	primaryCta: string;
 	primaryUrl: string;
 	primaryPrice: string;
-	secondaryCTA?: string;
+	secondaryCta?: string;
 	secondaryUrl?: string;
 	statistics: Statistics[];
 	isCardOnly: boolean;
@@ -111,13 +110,7 @@ const priceStyle = css`
 `;
 
 const mobileButtonWrapper = css`
-	display: flex;
-	flex-direction: column;
-	gap: ${space[1]}px;
-	width: 100%;
 	grid-column: 1 / span 2;
-	margin-top: ${space[1]}px;
-
 	${from.mobileLandscape} {
 		display: none;
 	}
@@ -125,12 +118,8 @@ const mobileButtonWrapper = css`
 
 const desktopButtonWrapper = css`
 	display: none;
-
 	${from.mobileLandscape} {
-		display: flex;
-		flex-direction: column;
-		gap: ${space[1]}px;
-		margin-top: 8px;
+		display: inline;
 	}
 `;
 
@@ -172,10 +161,10 @@ export const InlineProductCard = ({
 	altText,
 	credit,
 	displayCredit,
-	primaryCTA,
+	primaryCta,
 	primaryUrl,
 	primaryPrice,
-	secondaryCTA,
+	secondaryCta,
 	secondaryUrl,
 	statistics,
 	isCardOnly = false,
@@ -208,45 +197,21 @@ export const InlineProductCard = ({
 				<div css={productNameStyle}>{productName}</div>
 				<div css={priceStyle}>{primaryPrice}</div>
 				<div css={desktopButtonWrapper}>
-					<ProductLinkButton
-						dataComponent="inline-product-card-primary-button"
-						label={stripHtmlFromString(primaryCTA)}
-						url={primaryUrl}
-						cssOverrides={css`
-							width: 100%;
-						`}
+					<ProductCardButtons
+						primaryCta={primaryCta}
+						primaryUrl={primaryUrl}
+						secondaryCta={secondaryCta}
+						secondaryUrl={secondaryUrl}
 					/>
-					{!!secondaryCTA && !!secondaryUrl && (
-						<ProductLinkButton
-							dataComponent="inline-product-card-secondary-button"
-							label={stripHtmlFromString(secondaryCTA)}
-							url={secondaryUrl}
-							priority="tertiary"
-							cssOverrides={css`
-								width: 100%;
-							`}
-						/>
-					)}
 				</div>
 			</div>
 			<div css={mobileButtonWrapper}>
-				<ProductLinkButton
-					label={stripHtmlFromString(primaryCTA)}
-					url={primaryUrl}
-					cssOverrides={css`
-						width: 100%;
-					`}
+				<ProductCardButtons
+					primaryCta={primaryCta}
+					primaryUrl={primaryUrl}
+					secondaryUrl={secondaryUrl}
+					secondaryCta={secondaryCta}
 				/>
-				{!!secondaryCTA && !!secondaryUrl && (
-					<ProductLinkButton
-						label={stripHtmlFromString(secondaryCTA)}
-						url={secondaryUrl}
-						priority="tertiary"
-						cssOverrides={css`
-							width: 100%;
-						`}
-					/>
-				)}
 			</div>
 			{!isCardOnly && statistics.length > 0 && (
 				<div css={statisticsContainer}>
@@ -260,5 +225,42 @@ export const InlineProductCard = ({
 				</div>
 			)}
 		</div>
+	);
+};
+
+const ProductCardButtons = ({
+	primaryCta,
+	primaryUrl,
+	secondaryCta,
+	secondaryUrl,
+}: {
+	primaryCta: string;
+	primaryUrl: string;
+	secondaryCta?: string;
+	secondaryUrl?: string;
+}) => {
+	return (
+		<>
+			<ProductLinkButton
+				dataComponent="inline-product-card-primary-button"
+				label={primaryCta}
+				url={primaryUrl}
+				cssOverrides={css`
+					width: 100%;
+				`}
+			/>
+			{!!secondaryCta && !!secondaryUrl && (
+				<ProductLinkButton
+					dataComponent="inline-product-card-secondary-button"
+					label={secondaryCta}
+					url={secondaryUrl}
+					priority="tertiary"
+					cssOverrides={css`
+						width: 100%;
+						margin-top: ${space[1]}px;
+					`}
+				/>
+			)}
+		</>
 	);
 };
