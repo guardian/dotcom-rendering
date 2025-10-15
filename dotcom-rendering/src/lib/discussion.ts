@@ -1,15 +1,15 @@
 import { isOneOf } from '@guardian/libs';
-import type { BaseSchema, Input, Output } from 'valibot';
+import type { GenericSchema, InferInput, InferOutput } from 'valibot';
 import {
 	array,
 	boolean,
 	literal,
-	merge,
 	minLength,
 	number,
 	object,
 	optional,
 	picklist,
+	pipe,
 	safeParse,
 	string,
 	transform,
@@ -36,7 +36,7 @@ export type CAPIPillar =
 	| 'lifestyle'
 	| 'labs';
 
-const userProfile: BaseSchema<UserProfile> = object({
+const userProfile: GenericSchema<UserProfile> = object({
 	userId: string(),
 	displayName: string(),
 	webUrl: string(),
@@ -86,7 +86,10 @@ export const parseUserProfile = (
 };
 
 const baseCommentSchema = object({
-	id: transform(union([number(), string()]), (id) => id.toString()),
+	id: pipe(
+		union([number(), string()]),
+		transform((id) => id.toString()),
+	),
 	body: string(),
 	date: string(),
 	isoDateTime: string(),
@@ -118,32 +121,28 @@ const baseCommentSchema = object({
 	),
 });
 
-export type ReplyType = Output<typeof replySchema>;
+export type ReplyType = InferOutput<typeof replySchema>;
 
-const replySchema = merge([
-	baseCommentSchema,
-	object({
-		responses: optional(undefined_(), undefined),
-		responseTo: object({
-			displayName: string(),
-			commentApiUrl: string(),
-			isoDateTime: string(),
-			date: string(),
-			commentId: string(),
-			commentWebUrl: string(),
-		}),
+const replySchema = object({
+	...baseCommentSchema.entries,
+	responses: optional(undefined_(), undefined),
+	responseTo: object({
+		displayName: string(),
+		commentApiUrl: string(),
+		isoDateTime: string(),
+		date: string(),
+		commentId: string(),
+		commentWebUrl: string(),
 	}),
-]);
+});
 
-export type CommentType = Output<typeof commentSchema>;
+export type CommentType = InferOutput<typeof commentSchema>;
 
-const commentSchema = merge([
-	baseCommentSchema,
-	object({
-		responses: optional(array(replySchema), []),
-		responseTo: optional(undefined_(), undefined),
-	}),
-]);
+const commentSchema = object({
+	...baseCommentSchema.entries,
+	responses: optional(array(replySchema), []),
+	responseTo: optional(undefined_(), undefined),
+});
 
 const commentRepliesResponseSchema = variant('status', [
 	object({
@@ -267,11 +266,13 @@ export const parseAbuseResponse = (data: unknown): Result<string, true> => {
 export const postUsernameResponseSchema = variant('status', [
 	object({
 		status: literal('error'),
-		errors: array(
-			object({
-				message: string(),
-			}),
-			[minLength(1)],
+		errors: pipe(
+			array(
+				object({
+					message: string(),
+				}),
+			),
+			minLength(1),
 		),
 	}),
 	object({
@@ -324,7 +325,9 @@ const discussionApiErrorSchema = object({
 	errorCode: optional(string()),
 });
 
-export type GetDiscussionSuccess = Output<typeof discussionApiSuccessSchema>;
+export type GetDiscussionSuccess = InferOutput<
+	typeof discussionApiSuccessSchema
+>;
 
 const discussionApiSuccessSchema = object({
 	status: literal('ok'),
@@ -351,7 +354,9 @@ export const discussionApiResponseSchema = variant('status', [
 	discussionApiSuccessSchema,
 ]);
 
-export type GetDiscussionResponse = Input<typeof discussionApiResponseSchema>;
+export type GetDiscussionResponse = InferInput<
+	typeof discussionApiResponseSchema
+>;
 
 export interface DiscussionOptions {
 	orderBy: string;

@@ -360,7 +360,7 @@ export const Comment = ({
 	};
 
 	const showStaffBadge = comment.userProfile.badge.some(
-		(obj) => obj['name'] === 'Staff',
+		(obj: { name: string }) => obj['name'] === 'Staff',
 	);
 
 	const showPickBadge = comment.status !== 'blocked' && isHighlighted;
@@ -370,7 +370,7 @@ export const Comment = ({
 	// Contributor - we shouldn't see both Staff & Contributor badges.
 	// https://github.com/guardian/frontend/blob/main/discussion/app/views/fragments/commentBadges.scala.html#L8
 	const showContributorBadge = comment.userProfile.badge.some(
-		(obj) => obj['name'] === 'Contributor',
+		(obj: { name: string }) => obj['name'] === 'Contributor',
 	);
 
 	return (

@@ -157,7 +157,7 @@ export const CommentContainer = ({
 				{showResponses && responses.length > 0 && (
 					<div css={nestingStyles}>
 						<ul css={[commentContainerStyles, removeMargin]}>
-							{responses.map((responseComment) => (
+							{responses.map((responseComment: ReplyType) => (
 								<li key={responseComment.id}>
 									<Comment
 										comment={responseComment}

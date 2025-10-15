@@ -174,7 +174,7 @@ export const TopPick = ({
 	isClosedForRecommendations,
 }: Props) => {
 	const showStaffBadge = comment.userProfile.badge.some(
-		(obj) => obj['name'] === 'Staff',
+		(obj: { name: string }) => obj['name'] === 'Staff',
 	);
 
 	const showContributorBadge = comment.userProfile.badge.some(
