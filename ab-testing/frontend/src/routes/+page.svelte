@@ -2,9 +2,6 @@
 	import { ABTests } from '../../../abTest';
 	import Table from '$lib/components/TableFixed.svelte';
 	import AudienceBreakdown from '$lib/components/AudienceBreakdown.svelte';
-
-	const clientSideTests = ABTests.filter((test) => test.type === 'client');
-	const serverSideTests = ABTests.filter((test) => test.type === 'server');
 </script>
 
 <h1 class="headline">A/B Tests</h1>
@@ -34,14 +31,8 @@
 	</p>
 </section>
 <section>
-	<h2 class="sub-headline">Client-side Tests</h2>
-	<AudienceBreakdown tests={clientSideTests} />
-	<Table tests={clientSideTests} />
-</section>
-<section>
-	<h2 class="sub-headline">Server-side Tests</h2>
-	<AudienceBreakdown tests={serverSideTests} />
-	<Table tests={serverSideTests} />
+	<AudienceBreakdown tests={ABTests} />
+	<Table tests={ABTests} />
 </section>
 
 <style>

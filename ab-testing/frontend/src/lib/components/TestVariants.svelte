@@ -9,13 +9,13 @@
 
 <div>
 	<ul>
-		{#each testGroups as group}
+		{#each testGroups as group, i}
 			<li>
 				<a
 					href={`https://www.theguardian.com/ab-tests/opt/in/${testName}:${group}`}
 				>
 					{group}
-				</a>
+				</a>{#if i < testGroups.length - 1}&nbsp;|&nbsp;{/if}
 			</li>
 		{/each}
 	</ul>
@@ -28,7 +28,6 @@
 		list-style: none;
 		display: flex;
 		flex-direction: row;
-		justify-content: space-between;
 		flex-wrap: wrap;
 	}
 </style>

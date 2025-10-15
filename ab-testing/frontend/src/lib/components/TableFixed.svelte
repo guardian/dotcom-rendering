@@ -22,7 +22,16 @@
 
 <section class="tests">
 	{#each tests as test}
+		{@const expired = daysToExpiry(test.expirationDate) < 0}
 		<table>
+			<colgroup>
+				<col span="1" style="width: 25%;" />
+				<col span="1" style="width: 10%;" />
+				<col span="1" style="width: 35%;" />
+				<col span="1" style="width: 10%;" />
+				<col span="1" style="width: 10%;" />
+				<col span="1" style="width: 10%;" />
+			</colgroup>
 			<thead>
 				<tr>
 					<th scope="col">Name</th>
@@ -35,15 +44,29 @@
 			</thead>
 			<tbody>
 				<tr>
-					<th scope="row" class="test-name">{test.name}</th>
-					<td>{test.status}</td>
+					<th scope="row" class="test-name"
+						>{test.name} ({test.type})</th
+					>
+					<td
+						class="status"
+						class:off={test.status === 'OFF'}
+						class:expired
+					>
+						{#if expired}
+							EXPIRED
+						{:else}
+							{test.status}
+						{/if}
+					</td>
 					<td>
 						<TestVariants
 							testName={test.name}
 							testGroups={test.groups}
 						/>
 					</td>
-					<td>{daysToExpiry(test.expirationDate)} days</td>
+					<td class:expired
+						>{daysToExpiry(test.expirationDate)} days</td
+					>
 					<td>{test.audienceSize * 100}%</td>
 					<td><OphanLink testName={test.name} /></td>
 				</tr>
@@ -57,6 +80,10 @@
 </section>
 
 <style>
+	:root {
+		--ok-green: #00823b;
+		--error-red: #d5281b;
+	}
 	.tests {
 		border: 1px solid var(--border-grey);
 		padding: 8px;
@@ -85,5 +112,21 @@
 	td,
 	.test-name {
 		font-weight: 100;
+	}
+
+	.status {
+		text-transform: uppercase;
+		font-weight: bold;
+
+		color: var(--ok-green);
+
+		&.off {
+			color: #767676;
+		}
+	}
+
+	.expired {
+		color: var(--error-red);
+		font-weight: bold;
 	}
 </style>
