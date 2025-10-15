@@ -68,9 +68,9 @@ const sampleProductCard: InlineProductCardProps = {
 	},
 	image: 'https://media.guim.co.uk/ed32f52c10d742be18c4ff1b218dce611e71f57e/500_0_3000_3000/master/3000.jpg',
 	primaryUrl: 'https://www.aircraft.com/lume',
-	primaryCTA: 'Buy at AirCraft',
+	primaryCta: 'Buy at AirCraft',
 	primaryPrice: '£199.99',
-	secondaryCTA: '£199.99 at Amazon',
+	secondaryCta: '£199.99 at Amazon',
 	secondaryUrl:
 		'https://www.amazon.co.uk/AirCraft-Home-Backlight-Oscillating-Circulator/dp/B0D8QNGB3M',
 	brandName: 'AirCraft',
