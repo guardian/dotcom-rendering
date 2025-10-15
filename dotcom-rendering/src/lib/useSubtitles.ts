@@ -46,7 +46,7 @@ export const useSubtitles = ({ video, playerState, currentTime }: Props) => {
 		if (!shouldShow) return;
 
 		// if we have a track and can show it, hide the native track
-		track.mode = 'hidden';
+		// track.mode = 'hidden';
 
 		const onCueChange = () => {
 			const list = track.activeCues;
@@ -59,6 +59,7 @@ export const useSubtitles = ({ video, playerState, currentTime }: Props) => {
 				endTime: cue.endTime,
 				text: cue.text,
 			});
+			console.log('>>> activeCue', activeCue);
 		};
 		track.addEventListener('cuechange', onCueChange);
 		onCueChange();
