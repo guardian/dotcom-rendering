@@ -96,9 +96,8 @@ const Disclaimer = ({ contacts }: { contacts: CalloutContactType[] }) => {
 
 	const secureMessagingText = (
 		<span>
-			For true anonymity please use our{' '}
-			<a href="https://www.theguardian.com/tips">Secure Messaging</a>{' '}
-			service instead.
+			For alternative ways to get in touch securely please see our{' '}
+			<a href="https://www.theguardian.com/tips">tips guide</a>.
 		</span>
 	);
 
