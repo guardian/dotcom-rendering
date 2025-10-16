@@ -63,9 +63,11 @@ module.exports = {
 		'eslint:recommended',
 		'@guardian/eslint-config-typescript',
 		'plugin:jsx-a11y/recommended',
-		'prettier',
 		'plugin:ssr-friendly/recommended',
 		'plugin:storybook/recommended',
+		// eslint-config-prettier disables formatting rules that conflict with prettier
+		// needs to go last so it can override other configuration. See https://github.com/prettier/eslint-config-prettier#installation
+		'prettier',
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
