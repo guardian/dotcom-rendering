@@ -223,23 +223,22 @@ const ProductCardButtons = ({
 }: {
 	productCtas: ProductCtas[];
 }) => {
-	const primaryCta = productCtas.length > 0 ? productCtas[0] : null;
-	const primaryUrl = primaryCta?.url ?? '';
-	const primaryLabel =
-		primaryCta?.text && primaryCta.text.trim().length > 0
-			? primaryCta.text
-			: primaryCta?.price && primaryCta.retailer
-			? `${primaryCta.price} at ${primaryCta.retailer}`
-			: '';
+	const getCtaProps = (cta: ProductCtas | null) => ({
+		url: cta?.url ?? '',
+		label:
+			cta?.text && cta.text.trim().length > 0
+				? cta.text
+				: cta?.price && cta.retailer
+				? `${cta.price} at ${cta.retailer}`
+				: '',
+	});
 
-	const secondaryCta = productCtas.length > 0 ? productCtas[1] : null;
-	const secondaryUrl = secondaryCta?.url ?? '';
-	const secondaryLabel =
-		secondaryCta?.text && secondaryCta.text.trim().length > 0
-			? secondaryCta.text
-			: secondaryCta?.price && secondaryCta.retailer
-			? `${secondaryCta.price} at ${secondaryCta.retailer}`
-			: '';
+	const primaryCta = productCtas[0] ?? null;
+	const secondaryCta = productCtas[1] ?? null;
+
+	const { url: primaryUrl, label: primaryLabel } = getCtaProps(primaryCta);
+	const { url: secondaryUrl, label: secondaryLabel } =
+		getCtaProps(secondaryCta);
 
 	return (
 		<>

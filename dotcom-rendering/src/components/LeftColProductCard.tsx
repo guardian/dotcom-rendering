@@ -109,15 +109,23 @@ export const LeftColProductCard = ({
 	format,
 	productCtas,
 }: LeftColProductCardProps) => {
-	const primaryCta = productCtas.length > 0 ? productCtas[0] : null;
-	const primaryUrl = primaryCta?.url ?? '';
-	const primaryLabel =
-		primaryCta?.text && primaryCta.text.trim().length > 0
-			? primaryCta.text
-			: primaryCta?.price && primaryCta.retailer
-			? `${primaryCta.price} at ${primaryCta.retailer}`
-			: '';
-	const primaryPrice = primaryCta?.price ?? '';
+	const getCtaProps = (cta: ProductCtas | null) => ({
+		url: cta?.url ?? '',
+		label:
+			cta?.text && cta.text.trim().length > 0
+				? cta.text
+				: cta?.price && cta.retailer
+				? `${cta.price} at ${cta.retailer}`
+				: '',
+		price: cta?.price ?? '',
+	});
+
+	const primaryCta = productCtas[0] ?? null;
+	const {
+		url: primaryUrl,
+		label: primaryLabel,
+		price: primaryPrice,
+	} = getCtaProps(primaryCta);
 
 	return (
 		<div css={card}>
