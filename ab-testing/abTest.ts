@@ -19,4 +19,8 @@ import type { ABTest } from './types';
  * - 100% Test	variant		MVT 500-999
  */
 
-export const ABTests: ABTest[] = [];
+const ABTests: ABTest[] = [];
+
+const activeABtests = ABTests.filter((test) => test.status === 'ON');
+
+export { activeABtests };
