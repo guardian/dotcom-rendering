@@ -487,12 +487,7 @@ export interface ProductBlockElement {
 	content: FEElement[];
 	h2Id?: string;
 	displayType: ProductDisplayType;
-	productCtas: {
-		url: string;
-		text: string;
-		retailer: string;
-		price: string;
-	}[];
+	productCtas: ProductCta[];
 }
 
 interface ProfileAtomBlockElement {
@@ -896,6 +891,13 @@ export type ProductDisplayType =
 	| 'inline-only'
 	| 'product-card-only'
 	| 'inline-and-product-card';
+
+export type ProductCta = {
+	url: string;
+	text: string;
+	retailer: string;
+	price: string;
+};
 
 export interface SrcSetItem {
 	src: string;

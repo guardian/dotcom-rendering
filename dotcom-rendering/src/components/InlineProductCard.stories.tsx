@@ -70,15 +70,11 @@ const sampleProductCard: InlineProductCardProps = {
 	productCtas: [
 		{
 			url: 'https://www.theguardian.com',
-			text: '',
-			retailer: 'Amazon',
-			price: '£89.99',
+			label: '£89.99 at Amazon',
 		},
 		{
 			url: 'https://www.theguardian.com',
-			text: 'See alternatives',
-			retailer: 'John Lewis',
-			price: '£99.99',
+			label: '£99.99 at John Lewis',
 		},
 	],
 	brandName: 'AirCraft',

@@ -34,15 +34,11 @@ const sampleProductCard: LeftColProductCardProps = {
 	productCtas: [
 		{
 			url: 'https://www.theguardian.com',
-			text: '',
-			retailer: 'Amazon',
-			price: '£89.99',
+			label: '£89.99 at Amazon',
 		},
 		{
 			url: 'https://www.theguardian.com',
-			text: 'See alternatives',
-			retailer: 'John Lewis',
-			price: '£99.99',
+			label: '£99.99 at John Lewis',
 		},
 	],
 	customAttributes: [
@@ -65,9 +61,11 @@ export const WithButtonOverride = () => (
 		productCtas={[
 			{
 				url: 'https://www.theguardian.com',
-				text: 'Shop Now',
-				retailer: 'Amazon',
-				price: '£89.99',
+				label: '£29.99 at Amazon',
+			},
+			{
+				url: 'https://www.theguardian.com',
+				label: '£23.66 at John Lewis',
 			},
 		]}
 	></LeftColProductCard>

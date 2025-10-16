@@ -9,19 +9,13 @@ import {
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import { Caption } from './Caption';
+import { ProductCardButtons } from './InlineProductCard';
 import { Picture } from './Picture';
-import { ProductLinkButton } from './ProductLinkButton';
+import type { ProductCardCta } from './ProductElement';
 
 export type CustomAttributes = {
 	name: string;
 	value: string;
-};
-
-export type ProductCtas = {
-	url: string;
-	text: string;
-	retailer: string;
-	price: string;
 };
 
 export type LeftColProductCardProps = {
@@ -33,7 +27,8 @@ export type LeftColProductCardProps = {
 	credit: string;
 	customAttributes: CustomAttributes[];
 	format: ArticleFormat;
-	productCtas: ProductCtas[];
+	productCtas: ProductCardCta[];
+	primaryPrice?: string;
 };
 
 const card = css`
@@ -72,7 +67,7 @@ const priceFont = css`
 	${textSans17};
 `;
 
-const buttonOverride = css`
+const buttonContainer = css`
 	padding-bottom: ${space[4]}px;
 	min-width: 100%;
 `;
@@ -107,26 +102,9 @@ export const LeftColProductCard = ({
 	credit,
 	customAttributes,
 	format,
+	primaryPrice,
 	productCtas,
 }: LeftColProductCardProps) => {
-	const getCtaProps = (cta: ProductCtas | null) => ({
-		url: cta?.url ?? '',
-		label:
-			cta?.text && cta.text.trim().length > 0
-				? cta.text
-				: cta?.price && cta.retailer
-				? `${cta.price} at ${cta.retailer}`
-				: '',
-		price: cta?.price ?? '',
-	});
-
-	const primaryCta = productCtas[0] ?? null;
-	const {
-		url: primaryUrl,
-		label: primaryLabel,
-		price: primaryPrice,
-	} = getCtaProps(primaryCta);
-
 	return (
 		<div css={card}>
 			{!!image && (
@@ -163,16 +141,11 @@ export const LeftColProductCard = ({
 					<strong>{primaryPrice}</strong>
 				</div>
 			</div>
-			<div css={buttonOverride}>
-				<ProductLinkButton
-					dataComponent="leftcol-product-card-button"
-					label={primaryLabel}
-					url={primaryUrl}
-					size={'small'}
-					cssOverrides={css`
-						min-width: 100%;
-					`}
-				></ProductLinkButton>
+			<div css={buttonContainer}>
+				<ProductCardButtons
+					productCtas={productCtas}
+					dataComponent={'left-col-product-card-buttons'}
+				/>
 			</div>
 			{customAttributes.length > 0 && (
 				<div css={customAttributesContainer}>
