@@ -46,8 +46,10 @@ export const useSubtitles = ({
 	useEffect(() => {
 		const track = activeTrack;
 
-		if (!track) return;
-		if (!shouldShow) return;
+		if (!track || !shouldShow) {
+			setActiveCue(null);
+			return;
+		}
 
 		// if we have a track and can show it, hide the native track
 		track.mode = 'hidden';
