@@ -6,17 +6,20 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
+import { isServer } from '../lib/isServer';
 import { ophanComponentId } from '../lib/ophan-helpers';
 import {
+	getHighlightClickHistory,
+	manageCardsWithoutViews,
 	setHistoryInLocalStorage,
 	storeHighlightArticleVisit,
 } from '../lib/personaliseHighlights';
-import { getHighlightClickHistory } from '../lib/personaliseHighlights';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { HighlightsCard } from './Masthead/HighlightsCard';
+import { storage } from '@guardian/libs';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -265,6 +268,18 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	};
 
 	useEffect(() => {
+		console.log('>>> my storage');
+		console.log(
+			'>>> highlights Order',
+			storage.local.get('gu.history.highlightsOrder'),
+		);
+		console.log(
+			'>>> highlights view history',
+			storage.local.get('gu.history.highlightsViewed'),
+		);
+	}, []);
+
+	useEffect(() => {
 		const carouselElement = carouselRef.current;
 		if (!carouselElement) return;
 
@@ -281,7 +296,11 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 		};
 	}, []);
 
-	useEffect(() => {
+	// inspired by https://usehooks-ts.com/react-hook/use-isomorphic-layout-effect
+	const useIsomorphicLayoutEffect = isServer ? useEffect : useLayoutEffect;
+	// useEffect runs after paint, so we briefly see the pre-hydration scroll position and then it snaps back.
+	// to remedy this, we can use the useLayoutEffect hook. However, useLayoutEffect can only run on the client so we run useEffect on the server to stop it complaining.
+	useIsomorphicLayoutEffect(() => {
 		if (carouselRef.current) {
 			// cancel any anchoring/snap side-effects by jumping immediately
 			carouselRef.current.scrollTo({ left: 0, behavior: 'auto' });
@@ -305,6 +324,19 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 		// otherwise history is different to trails so set in state
 		setOrderedTrails(history ?? trails);
 	}, [trails]);
+
+	useEffect(() => {
+		function trackHighlightViews() {
+			console.log('>>> tracking views');
+			manageCardsWithoutViews(orderedTrails);
+		}
+
+		window.addEventListener('beforeunload', trackHighlightViews);
+
+		return () => {
+			window.removeEventListener('beforeunload', trackHighlightViews);
+		};
+	}, [orderedTrails]);
 
 	const { ophanComponentLink, ophanComponentName, ophanFrontName } =
 		getOphanInfo(frontId);
