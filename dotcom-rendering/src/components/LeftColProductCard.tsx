@@ -9,9 +9,9 @@ import {
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import { Caption } from './Caption';
+import { ProductCardButtons } from './InlineProductCard';
 import { Picture } from './Picture';
-import { ProductLinkButton } from './ProductLinkButton';
-import { stripHtmlFromString } from './TextBlockComponent';
+import type { ProductCardCta } from './ProductElement';
 
 export type CustomAttributes = {
 	name: string;
@@ -22,14 +22,13 @@ export type LeftColProductCardProps = {
 	brandName: string;
 	productName: string;
 	image: string;
-	primaryCta: string;
-	primaryUrl: string;
-	primaryPrice: string;
 	altText: string;
 	displayCredit: boolean;
 	credit: string;
 	customAttributes: CustomAttributes[];
 	format: ArticleFormat;
+	productCtas: ProductCardCta[];
+	primaryPrice?: string;
 };
 
 const card = css`
@@ -68,7 +67,7 @@ const priceFont = css`
 	${textSans17};
 `;
 
-const buttonOverride = css`
+const buttonContainer = css`
 	padding-bottom: ${space[4]}px;
 	min-width: 100%;
 `;
@@ -101,68 +100,64 @@ export const LeftColProductCard = ({
 	altText,
 	displayCredit,
 	credit,
-	primaryCta,
-	primaryUrl,
-	primaryPrice,
 	customAttributes,
 	format,
-}: LeftColProductCardProps) => (
-	<div css={card}>
-		{!!image && (
-			<div
-				css={css`
-					figcaption {
-						position: static;
-					}
-				`}
-			>
-				<Picture
-					role={'productCard'}
-					format={format}
-					master={image}
-					alt={altText}
-					height={220}
-					width={220}
-					loading={'eager'}
-				/>
-				<Caption
-					shouldLimitWidth={true}
-					format={format}
-					isLeftCol={true}
-					displayCredit={displayCredit}
-					credit={credit}
-					isOverlaid={false}
-				/>
-			</div>
-		)}
-		<div css={productInfoContainer}>
-			<div css={brandNameFont}>{brandName}</div>
-			<div css={productNameFont}>{productName}</div>
-			<div css={priceFont}>
-				<strong>{primaryPrice}</strong>
-			</div>
-		</div>
-		<div css={buttonOverride}>
-			<ProductLinkButton
-				dataComponent="leftcol-product-card-button"
-				label={stripHtmlFromString(primaryCta)}
-				url={primaryUrl}
-				size={'small'}
-				cssOverrides={css`
-					min-width: 100%;
-				`}
-			></ProductLinkButton>
-		</div>
-		{customAttributes.length > 0 && (
-			<div css={customAttributesContainer}>
-				{customAttributes.map((customAttribute) => (
-					<CustomAttribute
-						key={customAttribute.name}
-						name={customAttribute.name}
-						value={customAttribute.value}
+	primaryPrice,
+	productCtas,
+}: LeftColProductCardProps) => {
+	return (
+		<div css={card}>
+			{!!image && (
+				<div
+					css={css`
+						figcaption {
+							position: static;
+						}
+					`}
+				>
+					<Picture
+						role={'productCard'}
+						format={format}
+						master={image}
+						alt={altText}
+						height={220}
+						width={220}
+						loading={'eager'}
 					/>
-				))}
+					<Caption
+						shouldLimitWidth={true}
+						format={format}
+						isLeftCol={true}
+						displayCredit={displayCredit}
+						credit={credit}
+						isOverlaid={false}
+					/>
+				</div>
+			)}
+			<div css={productInfoContainer}>
+				<div css={brandNameFont}>{brandName}</div>
+				<div css={productNameFont}>{productName}</div>
+				<div css={priceFont}>
+					<strong>{primaryPrice}</strong>
+				</div>
 			</div>
-		)}
-	</div>
-);
+			<div css={buttonContainer}>
+				<ProductCardButtons
+					productCtas={productCtas}
+					dataComponent={'left-col-product-card-buttons'}
+				/>
+			</div>
+			{customAttributes.length > 0 && (
+				<div css={customAttributesContainer}>
+					{customAttributes.map((customAttribute) => (
+						<CustomAttribute
+							key={customAttribute.name}
+							name={customAttribute.name}
+							value={customAttribute.value}
+						/>
+					))}
+				</div>
+			)}
+		</div>
+	);
+};

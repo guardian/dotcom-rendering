@@ -473,28 +473,21 @@ export interface InteractiveContentsBlockElement {
 export interface ProductBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ProductBlockElement';
 	elementId: string;
-	secondaryProductUrl: string;
 	brandName: string;
-	secondaryPrice: string;
-	primaryProductUrl: string;
 	starRating: string;
 	productName: string;
-	primaryRetailer: string;
 	image: Image;
 	altText: string;
 	caption: string;
 	displayCredit: boolean;
 	credit: string;
-	primaryPrice: string;
-	primaryCta: string;
 	secondaryHeading: string;
 	primaryHeading: string;
-	secondaryRetailer: string;
-	secondaryCta: string;
 	customAttributes: { name: string; value: string }[];
 	content: FEElement[];
 	h2Id?: string;
 	displayType: ProductDisplayType;
+	productCtas: ProductCta[];
 }
 
 interface ProfileAtomBlockElement {
@@ -898,6 +891,13 @@ export type ProductDisplayType =
 	| 'inline-only'
 	| 'product-card-only'
 	| 'inline-and-product-card';
+
+export type ProductCta = {
+	url: string;
+	text: string;
+	retailer: string;
+	price: string;
+};
 
 export interface SrcSetItem {
 	src: string;

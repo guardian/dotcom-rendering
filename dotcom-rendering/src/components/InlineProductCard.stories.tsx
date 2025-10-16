@@ -68,12 +68,16 @@ const sampleProductCard: InlineProductCardProps = {
 		theme: Pillar.Lifestyle,
 	},
 	image: 'https://media.guim.co.uk/ed32f52c10d742be18c4ff1b218dce611e71f57e/500_0_3000_3000/master/3000.jpg',
-	primaryUrl: 'https://www.aircraft.com/lume',
-	primaryCta: 'Buy at AirCraft',
-	primaryPrice: '£199.99',
-	secondaryCta: '£199.99 at Amazon',
-	secondaryUrl:
-		'https://www.amazon.co.uk/AirCraft-Home-Backlight-Oscillating-Circulator/dp/B0D8QNGB3M',
+	productCtas: [
+		{
+			url: 'https://www.theguardian.com',
+			label: '£89.99 at Amazon',
+		},
+		{
+			url: 'https://www.theguardian.com',
+			label: '£99.99 at John Lewis',
+		},
+	],
 	brandName: 'AirCraft',
 	productName: 'Lume',
 	altText: 'A small fan on a table',

@@ -13,6 +13,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import { Caption } from './Caption';
 import { Picture } from './Picture';
+import type { ProductCardCta } from './ProductElement';
 import { ProductLinkButton } from './ProductLinkButton';
 
 export type CustomAttributes = {
@@ -28,11 +29,8 @@ export type InlineProductCardProps = {
 	altText: string;
 	credit: string;
 	displayCredit: boolean;
-	primaryCta: string;
-	primaryUrl: string;
-	primaryPrice: string;
-	secondaryCta?: string;
-	secondaryUrl?: string;
+	primaryPrice?: string;
+	productCtas: ProductCardCta[];
 	customAttributes: CustomAttributes[];
 	isCardOnly: boolean;
 };
@@ -157,16 +155,13 @@ export const InlineProductCard = ({
 	format,
 	brandName,
 	productName,
+	primaryPrice,
 	image,
 	altText,
 	credit,
 	displayCredit,
-	primaryCta,
-	primaryUrl,
-	primaryPrice,
-	secondaryCta,
-	secondaryUrl,
 	customAttributes,
+	productCtas,
 	isCardOnly = false,
 }: InlineProductCardProps) => {
 	return (
@@ -198,19 +193,15 @@ export const InlineProductCard = ({
 				<div css={priceStyle}>{primaryPrice}</div>
 				<div css={desktopButtonWrapper}>
 					<ProductCardButtons
-						primaryCta={primaryCta}
-						primaryUrl={primaryUrl}
-						secondaryCta={secondaryCta}
-						secondaryUrl={secondaryUrl}
+						productCtas={productCtas}
+						dataComponent={'inline-product-card-buttons-desktop'}
 					/>
 				</div>
 			</div>
 			<div css={mobileButtonWrapper}>
 				<ProductCardButtons
-					primaryCta={primaryCta}
-					primaryUrl={primaryUrl}
-					secondaryUrl={secondaryUrl}
-					secondaryCta={secondaryCta}
+					productCtas={productCtas}
+					dataComponent={'inline-product-card-buttons-mobile'}
 				/>
 			</div>
 			{!isCardOnly && customAttributes.length > 0 && (
@@ -228,39 +219,36 @@ export const InlineProductCard = ({
 	);
 };
 
-const ProductCardButtons = ({
-	primaryCta,
-	primaryUrl,
-	secondaryCta,
-	secondaryUrl,
+export const ProductCardButtons = ({
+	productCtas,
+	dataComponent,
 }: {
-	primaryCta: string;
-	primaryUrl: string;
-	secondaryCta?: string;
-	secondaryUrl?: string;
+	productCtas: ProductCardCta[];
+	dataComponent?: string;
 }) => {
 	return (
 		<>
-			<ProductLinkButton
-				dataComponent="inline-product-card-primary-button"
-				label={primaryCta}
-				url={primaryUrl}
-				cssOverrides={css`
-					width: 100%;
-				`}
-			/>
-			{!!secondaryCta && !!secondaryUrl && (
+			{productCtas.map((productCta, index) => (
 				<ProductLinkButton
-					dataComponent="inline-product-card-secondary-button"
-					label={secondaryCta}
-					url={secondaryUrl}
-					priority="tertiary"
-					cssOverrides={css`
-						width: 100%;
-						margin-top: ${space[1]}px;
-					`}
+					key={productCta.label}
+					label={productCta.label}
+					url={productCta.url}
+					priority={index === 0 ? 'primary' : 'tertiary'}
+					cssOverrides={
+						index === 0
+							? css`
+									width: 100%;
+							  `
+							: css`
+									width: 100%;
+									margin-top: ${space[1]}px;
+							  `
+					}
+					data-component={`${
+						dataComponent ?? 'product-card-button'
+					}-${index}`}
 				/>
-			)}
+			))}
 		</>
 	);
 };

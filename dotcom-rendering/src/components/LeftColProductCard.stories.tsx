@@ -31,9 +31,16 @@ const sampleProductCard: LeftColProductCardProps = {
 	brandName: 'AirCraft',
 	productName: 'Lume',
 	image: 'https://media.guim.co.uk/ed32f52c10d742be18c4ff1b218dce611e71f57e/500_0_3000_3000/master/3000.jpg',
-	primaryCta: 'Buy at AirCraft',
-	primaryUrl: 'https://www.aircraft.com/lume',
-	primaryPrice: '£199.99',
+	productCtas: [
+		{
+			url: 'https://www.theguardian.com',
+			label: '£89.99 at Amazon',
+		},
+		{
+			url: 'https://www.theguardian.com',
+			label: '£99.99 at John Lewis',
+		},
+	],
 	customAttributes: [
 		{ name: 'What we love', value: 'It packs away pretty small' },
 		{
@@ -47,6 +54,22 @@ const sampleProductCard: LeftColProductCardProps = {
 };
 
 export const Default = () => <LeftColProductCard {...sampleProductCard} />;
+
+export const WithButtonOverride = () => (
+	<LeftColProductCard
+		{...sampleProductCard}
+		productCtas={[
+			{
+				url: 'https://www.theguardian.com',
+				label: '£29.99 at Amazon',
+			},
+			{
+				url: 'https://www.theguardian.com',
+				label: '£23.66 at John Lewis',
+			},
+		]}
+	></LeftColProductCard>
+);
 
 export const WithNoCustomAttributes = () => (
 	<LeftColProductCard {...sampleProductCard} customAttributes={[]} />

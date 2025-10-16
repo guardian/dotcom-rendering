@@ -7,11 +7,17 @@ import type { NestedArticleElement } from '../lib/renderElement';
 import type {
 	FEElement,
 	ProductBlockElement,
+	ProductCta,
 	ProductDisplayType,
 } from '../types/content';
 import { InlineProductCard } from './InlineProductCard';
 import { LeftColProductCard } from './LeftColProductCard';
 import { buildElementTree } from './SubheadingBlockComponent';
+
+export type ProductCardCta = {
+	label: string;
+	url: string;
+};
 
 export type Product = {
 	primaryHeadline: string;
@@ -19,23 +25,29 @@ export type Product = {
 	brandName: string;
 	productName: string;
 	image: string;
-	url: string;
-	price: string;
 	retailer: string;
-	cta: string;
-	secondaryCTA?: string;
-	secondaryUrl?: string;
 	customAttributes: {
 		name: string;
 		value: string;
 	}[];
 	content: FEElement[];
 	displayType: ProductDisplayType;
+	productCtas: ProductCta[];
 };
 
 const contentContainer = css`
 	position: relative;
 `;
+
+const transformCtas = (ctas: ProductCta[]): ProductCardCta[] => {
+	return ctas.map((cta) => {
+		const overrideLabel = cta.text.trim().length > 0;
+		return {
+			label: overrideLabel ? cta.text : `${cta.price} at ${cta.retailer}`,
+			url: cta.url,
+		};
+	});
+};
 
 const LeftColProductCardContainer = ({ children }: { children: ReactNode }) => (
 	<div
@@ -67,7 +79,6 @@ export const ProductElement = ({
 	const showProductCard =
 		product.displayType === 'product-card-only' ||
 		product.displayType === 'inline-and-product-card';
-
 	return (
 		<div>
 			{showContent && (
@@ -83,13 +94,10 @@ export const ProductElement = ({
 					brandName={product.brandName}
 					productName={product.productName}
 					image={product.image.url}
-					primaryUrl={product.primaryProductUrl}
-					primaryPrice={product.primaryPrice}
-					primaryCta={product.primaryCta}
-					secondaryCta={product.secondaryCta}
-					secondaryUrl={product.secondaryProductUrl}
+					productCtas={transformCtas(product.productCtas)}
 					altText={product.altText}
 					credit={product.credit}
+					primaryPrice={product.productCtas[0]?.price}
 					displayCredit={product.displayCredit}
 					customAttributes={product.customAttributes}
 					isCardOnly={product.displayType === 'product-card-only'}
@@ -134,9 +142,7 @@ const Content = ({
 							altText={product.altText}
 							credit={product.credit}
 							displayCredit={product.displayCredit}
-							primaryUrl={product.primaryProductUrl}
-							primaryPrice={product.primaryPrice}
-							primaryCta={product.primaryCta}
+							productCtas={transformCtas(product.productCtas)}
 							customAttributes={product.customAttributes}
 							format={format}
 						/>
