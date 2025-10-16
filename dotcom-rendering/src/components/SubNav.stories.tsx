@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { navInternational } from '../../fixtures/manual/nav-international';
 import { navWorld } from '../../fixtures/manual/nav-world';
 import { extractNAV } from '../model/extract-nav';

@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
-import { userEvent } from '@storybook/test';
 import { act, render, screen } from '@testing-library/react';
+import { userEvent } from 'storybook/test';
 import { EditionSwitcherBanner } from './EditionSwitcherBanner.importable';
 
 describe('EditionSwitcherBanner', () => {

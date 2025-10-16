@@ -3,10 +3,10 @@ import { ContainerTitle } from './ContainerTitle';
 export default {
 	component: ContainerTitle,
 	title: 'Components/ContainerTitle',
-	parameters: {
+	globals: {
 		viewport: {
-			// This has the effect of turning off the viewports addon by default
-			defaultViewport: 'doesNotExist',
+			value: 'doesNotExist',
+			isRotated: false,
 		},
 	},
 };

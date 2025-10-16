@@ -10,10 +10,10 @@ import { Section } from './Section';
 export default {
 	component: Section,
 	title: 'Components/Section',
-	parameters: {
+	globals: {
 		viewport: {
-			// This has the effect of turning off the viewports addon by default
-			defaultViewport: 'doesNotExist',
+			value: 'doesNotExist',
+			isRotated: false,
 		},
 	},
 };

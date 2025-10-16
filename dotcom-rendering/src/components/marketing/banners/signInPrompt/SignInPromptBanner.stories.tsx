@@ -4,7 +4,7 @@
  * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/signInPrompt/SignInPromptBanner.stories.tsx
  */
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-webpack5';
 import { props } from '../utils/storybook';
 import { SignInPromptBanner } from './SignInPromptBanner';
 
