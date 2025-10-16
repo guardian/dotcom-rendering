@@ -25,7 +25,7 @@ export type Product = {
 	cta: string;
 	secondaryCTA?: string;
 	secondaryUrl?: string;
-	statistics: {
+	customAttributes: {
 		name: string;
 		value: string;
 	}[];
@@ -91,7 +91,7 @@ export const ProductElement = ({
 					altText={product.altText}
 					credit={product.credit}
 					displayCredit={product.displayCredit}
-					statistics={product.statistics}
+					customAttributes={product.customAttributes}
 					isCardOnly={product.displayType === 'product-card-only'}
 				/>
 			)}
@@ -137,7 +137,7 @@ const Content = ({
 							primaryUrl={product.primaryProductUrl}
 							primaryPrice={product.primaryPrice}
 							primaryCta={product.primaryCta}
-							statistics={product.statistics}
+							customAttributes={product.customAttributes}
 							format={format}
 						/>
 					</LeftColProductCardContainer>

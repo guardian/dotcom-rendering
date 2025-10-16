@@ -47,7 +47,7 @@ const product: ProductBlockElement = {
 	secondaryCta: '£79.99 at Amazon',
 	secondaryPrice: '£79.99',
 	secondaryRetailer: 'Amazon',
-	statistics: [
+	customAttribute: [
 		{
 			name: 'What we love',
 			value: 'It boils quickly and stays hot for a while',
@@ -467,7 +467,7 @@ export const MultipleProductsWithoutStats: StoryFn = () => {
 	return (
 		<>
 			<ProductElement
-				product={{ ...product, statistics: [] }}
+				product={{ ...product, customAttributes: [] }}
 				format={{
 					design: ArticleDesign.Review,
 					display: ArticleDisplay.Showcase,
@@ -476,7 +476,7 @@ export const MultipleProductsWithoutStats: StoryFn = () => {
 				ArticleElementComponent={ArticleElementComponent}
 			/>
 			<ProductElement
-				product={{ ...product, statistics: [] }}
+				product={{ ...product, customAttributes: [] }}
 				format={{
 					design: ArticleDesign.Review,
 					display: ArticleDisplay.Showcase,
@@ -506,7 +506,7 @@ export const withoutFields: StoryFn = () => {
 					secondaryPrice: '',
 					secondaryRetailer: '',
 					secondaryProductUrl: '',
-					statistics: [],
+					customAttributes: [],
 					image: {
 						...product.image,
 						url: '',

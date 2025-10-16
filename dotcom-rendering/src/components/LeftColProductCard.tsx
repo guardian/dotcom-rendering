@@ -13,7 +13,7 @@ import { Picture } from './Picture';
 import { ProductLinkButton } from './ProductLinkButton';
 import { stripHtmlFromString } from './TextBlockComponent';
 
-export type Statistics = {
+export type CustomAttributes = {
 	name: string;
 	value: string;
 };
@@ -28,7 +28,7 @@ export type LeftColProductCardProps = {
 	altText: string;
 	displayCredit: boolean;
 	credit: string;
-	statistics: Statistics[];
+	customAttributes: CustomAttributes[];
 	format: ArticleFormat;
 };
 
@@ -73,7 +73,7 @@ const buttonOverride = css`
 	min-width: 100%;
 `;
 
-const statisticsContainer = css`
+const customAttributesContainer = css`
 	border-top: 1px solid ${palette('--section-border')};
 	padding-top: ${space[3]}px;
 	padding-bottom: ${space[4]}px;
@@ -81,7 +81,7 @@ const statisticsContainer = css`
 	row-gap: ${space[3]}px;
 `;
 
-const Statistic = ({ name, value }: Statistics) => (
+const CustomAttribute = ({ name, value }: CustomAttributes) => (
 	<div
 		css={css`
 			${textSans15};
@@ -104,7 +104,7 @@ export const LeftColProductCard = ({
 	primaryCta,
 	primaryUrl,
 	primaryPrice,
-	statistics,
+	customAttributes,
 	format,
 }: LeftColProductCardProps) => (
 	<div css={card}>
@@ -153,13 +153,13 @@ export const LeftColProductCard = ({
 				`}
 			></ProductLinkButton>
 		</div>
-		{statistics.length > 0 && (
-			<div css={statisticsContainer}>
-				{statistics.map((statistic) => (
-					<Statistic
-						key={statistic.name}
-						name={statistic.name}
-						value={statistic.value}
+		{customAttributes.length > 0 && (
+			<div css={customAttributesContainer}>
+				{customAttributes.map((customAttribute) => (
+					<CustomAttribute
+						key={customAttribute.name}
+						name={customAttribute.name}
+						value={customAttribute.value}
 					/>
 				))}
 			</div>
