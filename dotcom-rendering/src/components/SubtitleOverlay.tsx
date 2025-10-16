@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	space,
 	textSans15,
 	textSans17,
 	textSans20,
@@ -10,23 +9,24 @@ import type { SubtitleSize } from './LoopVideoPlayer';
 
 const subtitleOverlayStyles = css`
 	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: ${space[4]}px;
-	display: flex;
-	justify-content: center;
-	pointer-events: none;
-`;
-const subtitleCueBoxStyles = (subtitleSize: SubtitleSize) => css`
+	bottom: 16px;
+	left: 50%;
+	transform: translateX(-50%);
+	text-align: center;
+	width: fit-content;
 	max-width: 71%;
+	line-height: 1.9;
+`;
+
+const subtitleCueBoxStyles = (subtitleSize: SubtitleSize) => css`
 	background-color: rgba(18, 18, 18, 0.7);
 	color: ${palette('--loop-video-subtitle-text')};
 	${subtitleSize === 'small' && textSans15};
 	${subtitleSize === 'medium' && textSans17};
 	${subtitleSize === 'large' && textSans20};
-	padding: 4px;
-	text-align: center;
 	display: inline;
+	text-align: center;
+	padding: 4px 4px 6px 4px;
 	box-decoration-break: clone;
 	-webkit-box-decoration-break: clone;
 `;
