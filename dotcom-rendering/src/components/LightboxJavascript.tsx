@@ -252,7 +252,9 @@ const close = async (
 	});
 	closeLightbox(lightbox, handleKeydown);
 	history.back();
-	previouslyFocused && restoreFocus(previouslyFocused);
+	if (previouslyFocused) {
+		restoreFocus(previouslyFocused);
+	}
 };
 
 const toggleInfo = (
@@ -462,7 +464,9 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 					// which closes fullscreen mode but not the lightbox, so let's close it
 					closeLightbox(lightbox, handleKeydown);
 					history.back();
-					previouslyFocused && restoreFocus(previouslyFocused);
+					if (previouslyFocused) {
+						restoreFocus(previouslyFocused);
+					}
 				}
 			}
 		});
@@ -484,7 +488,9 @@ const initialiseLightbox = (lightbox: HTMLElement) => {
 			// There's no img hash so close the lightbox
 			void exitFullscreen();
 			closeLightbox(lightbox, handleKeydown);
-			previouslyFocused && restoreFocus(previouslyFocused);
+			if (previouslyFocused) {
+				restoreFocus(previouslyFocused);
+			}
 		}
 	});
 

@@ -65,7 +65,9 @@ const loadTweet = (element: TweetBlockElement, darkMode: boolean) => {
 		// to find the tweet on the page. We *remove* this class in
 		// enhanceTweets()
 		tweet.classList.add('twitter-tweet');
-		darkMode && tweet.setAttribute('data-theme', 'dark');
+		if (darkMode) {
+			tweet.setAttribute('data-theme', 'dark');
+		}
 
 		twttr.ready((twitter) => {
 			twitter.widgets.load(tweetContainer);
