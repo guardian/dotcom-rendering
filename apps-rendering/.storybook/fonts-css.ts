@@ -1,5 +1,3 @@
-import CleanCSS from 'clean-css';
-
 type FontFamily =
 	| 'GH Guardian Headline'
 	| 'Guardian Egyptian Web' // Legacy of GH Guardian Headline
@@ -278,5 +276,4 @@ const getStyleString: () => string = () => {
 	);
 };
 
-export const getFontsCss = (): string =>
-	new CleanCSS().minify(getStyleString()).styles;
+export const getFontsCss = (): string => getStyleString();
