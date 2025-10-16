@@ -18,6 +18,7 @@ import type { Source } from '../lib/video';
 import { palette } from '../palette';
 import { narrowPlayIconWidth, PlayIcon } from './Card/components/PlayIcon';
 import { LoopVideoProgressBar } from './LoopVideoProgressBar';
+import { SubtitleOverlay } from './SubtitleOverlay';
 
 export type SubtitleSize = 'small' | 'medium' | 'large';
 
@@ -74,29 +75,6 @@ const audioIconContainerStyles = css`
 	background-color: ${palette('--loop-video-audio-icon-background')};
 	border-radius: 50%;
 	border: 1px solid ${palette('--loop-video-audio-icon-border')};
-`;
-
-const subtitleOverlayStyles = css`
-	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: ${space[4]}px;
-	display: flex;
-	justify-content: center;
-	pointer-events: none;
-`;
-const subtitleCueBoxStyles = (subtitleSize: SubtitleSize) => css`
-	max-width: 71%;
-	background-color: rgba(18, 18, 18, 0.7);
-	color: ${palette('--loop-video-subtitle-text')};
-	${subtitleSize === 'small' && textSans15};
-	${subtitleSize === 'medium' && textSans17};
-	${subtitleSize === 'large' && textSans20};
-	padding: 4px;
-	text-align: center;
-	display: inline;
-	box-decoration-break: clone;
-	-webkit-box-decoration-break: clone;
 `;
 
 export const PLAYER_STATES = [
@@ -241,11 +219,10 @@ export const LoopVideoPlayer = forwardRef(
 					{FallbackImageComponent}
 				</video>
 				{!!subtitles?.text && (
-					<div css={subtitleOverlayStyles}>
-						<div css={subtitleCueBoxStyles(subtitleSize)}>
-							{subtitles.text}
-						</div>
-					</div>
+					<SubtitleOverlay
+						text={subtitles.text}
+						subtitleSize={subtitleSize}
+					/>
 				)}
 				{ref && 'current' in ref && ref.current && isPlayable && (
 					<>
