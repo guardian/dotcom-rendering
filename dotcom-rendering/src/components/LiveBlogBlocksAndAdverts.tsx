@@ -24,6 +24,7 @@ type Props = {
 	isSensitive: boolean;
 	isLiveUpdate?: boolean;
 	shouldHideAds: boolean;
+	serverTime?: number;
 };
 /**
  * On liveblogs we insert two sets of ad slots into the page: one set for small
@@ -48,6 +49,7 @@ export const LiveBlogBlocksAndAdverts = ({
 	isLiveUpdate,
 	editionId,
 	shouldHideAds,
+	serverTime,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const isWeb = renderingTarget === 'Web';
@@ -71,6 +73,7 @@ export const LiveBlogBlocksAndAdverts = ({
 				pinnedPostId={pinnedPost?.id}
 				editionId={editionId}
 				shouldHideAds={shouldHideAds}
+				serverTime={serverTime}
 			/>
 		);
 	};

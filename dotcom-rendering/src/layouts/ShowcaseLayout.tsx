@@ -208,6 +208,7 @@ interface CommonProps {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
+	serverTime?: number;
 }
 
 interface WebProps extends CommonProps {
@@ -220,7 +221,7 @@ interface AppsProps extends CommonProps {
 }
 
 export const ShowcaseLayout = (props: WebProps | AppsProps) => {
-	const { article, format, renderingTarget } = props;
+	const { article, format, renderingTarget, serverTime } = props;
 	const {
 		config: { isPaidContent, host, hasSurveyAd },
 		editionId,
@@ -246,9 +247,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 	const renderAds = canRenderAds(article);
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
-
-	const { absoluteServerTimes = false } = article.config.switches;
-	const serverTime = absoluteServerTimes ? undefined : Date.now();
 
 	return (
 		<>
