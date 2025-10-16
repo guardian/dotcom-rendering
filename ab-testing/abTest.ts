@@ -23,4 +23,4 @@ const ABTests: ABTest[] = [];
 
 const activeABtests = ABTests.filter((test) => test.status === 'ON');
 
-export { activeABtests };
+export { ABTests as allABTests, activeABtests };
