@@ -15,7 +15,7 @@ import { Caption } from './Caption';
 import { Picture } from './Picture';
 import { ProductLinkButton } from './ProductLinkButton';
 
-export type Statistics = {
+export type CustomAttributes = {
 	name: string;
 	value: string;
 };
@@ -33,7 +33,7 @@ export type InlineProductCardProps = {
 	primaryPrice: string;
 	secondaryCta?: string;
 	secondaryUrl?: string;
-	statistics: Statistics[];
+	customAttributes: CustomAttributes[];
 	isCardOnly: boolean;
 };
 
@@ -123,7 +123,7 @@ const desktopButtonWrapper = css`
 	}
 `;
 
-const statisticsContainer = css`
+const customAttributesContainer = css`
 	grid-column: 1 / span 2;
 	border-top: 1px solid ${palette('--section-border')};
 	padding-top: ${space[3]}px;
@@ -135,7 +135,7 @@ const statisticsContainer = css`
 	}
 `;
 
-const statisticItem = css`
+const customAttributeItem = css`
 	${textSans15};
 	${from.phablet} {
 		${textSans17};
@@ -145,8 +145,8 @@ const statisticItem = css`
 	}
 `;
 
-const Statistic = ({ name, value }: Statistics) => (
-	<div css={statisticItem}>
+const CustomAttribute = ({ name, value }: CustomAttributes) => (
+	<div css={customAttributeItem}>
 		<strong>{name}</strong>
 		<br />
 		{value}
@@ -166,7 +166,7 @@ export const InlineProductCard = ({
 	primaryPrice,
 	secondaryCta,
 	secondaryUrl,
-	statistics,
+	customAttributes,
 	isCardOnly = false,
 }: InlineProductCardProps) => {
 	return (
@@ -213,13 +213,13 @@ export const InlineProductCard = ({
 					secondaryCta={secondaryCta}
 				/>
 			</div>
-			{!isCardOnly && statistics.length > 0 && (
-				<div css={statisticsContainer}>
-					{statistics.map((statistic) => (
-						<Statistic
-							key={statistic.name}
-							name={statistic.name}
-							value={statistic.value}
+			{!isCardOnly && customAttributes.length > 0 && (
+				<div css={customAttributesContainer}>
+					{customAttributes.map((customAttribute) => (
+						<CustomAttribute
+							key={customAttribute.name}
+							name={customAttribute.name}
+							value={customAttribute.value}
 						/>
 					))}
 				</div>

@@ -491,7 +491,7 @@ export interface ProductBlockElement {
 	primaryHeading: string;
 	secondaryRetailer: string;
 	secondaryCta: string;
-	statistics: { name: string; value: string }[];
+	customAttributes: { name: string; value: string }[];
 	content: FEElement[];
 	h2Id?: string;
 	displayType: ProductDisplayType;

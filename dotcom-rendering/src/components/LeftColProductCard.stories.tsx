@@ -34,7 +34,7 @@ const sampleProductCard: LeftColProductCardProps = {
 	primaryCta: 'Buy at AirCraft',
 	primaryUrl: 'https://www.aircraft.com/lume',
 	primaryPrice: '£199.99',
-	statistics: [
+	customAttributes: [
 		{ name: 'What we love', value: 'It packs away pretty small' },
 		{
 			name: "What we don't love",
@@ -48,6 +48,6 @@ const sampleProductCard: LeftColProductCardProps = {
 
 export const Default = () => <LeftColProductCard {...sampleProductCard} />;
 
-export const WithNoStatistics = () => (
-	<LeftColProductCard {...sampleProductCard} statistics={[]} />
+export const WithNoCustomAttributes = () => (
+	<LeftColProductCard {...sampleProductCard} customAttributes={[]} />
 );

@@ -78,7 +78,7 @@ const sampleProductCard: InlineProductCardProps = {
 	altText: 'A small fan on a table',
 	credit: 'AirCraft Photography by John Smith',
 	displayCredit: false,
-	statistics: [
+	customAttributes: [
 		{ name: 'What we love', value: 'It packs away pretty small' },
 		{
 			name: 'What we don\t love',
