@@ -52,7 +52,7 @@
 		"@guardian/source": "9.0.0",
 		"@guardian/source-development-kitchen": "17.0.0",
 		"@smithy/property-provider": "2.0.16",
-		"@storybook/addon-essentials": "8.6.14",
+		"@storybook/addon-docs": "9.1.10",
 		"@storybook/addon-webpack5-compiler-babel": "3.0.6",
 		"@storybook/react-webpack5": "9.1.10",
 		"@types/clean-css": "4.2.11",
