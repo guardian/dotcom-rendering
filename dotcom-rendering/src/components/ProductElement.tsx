@@ -19,18 +19,19 @@ export type Product = {
 	brandName: string;
 	productName: string;
 	image: string;
-	url: string;
-	price: string;
 	retailer: string;
-	cta: string;
-	secondaryCTA?: string;
-	secondaryUrl?: string;
 	customAttributes: {
 		name: string;
 		value: string;
 	}[];
 	content: FEElement[];
 	displayType: ProductDisplayType;
+	productCtas: {
+		url: string;
+		text: string;
+		retailer: string;
+		price: string;
+	}[];
 };
 
 const contentContainer = css`
@@ -83,11 +84,7 @@ export const ProductElement = ({
 					brandName={product.brandName}
 					productName={product.productName}
 					image={product.image.url}
-					primaryUrl={product.primaryProductUrl}
-					primaryPrice={product.primaryPrice}
-					primaryCta={product.primaryCta}
-					secondaryCta={product.secondaryCta}
-					secondaryUrl={product.secondaryProductUrl}
+					productCtas={product.productCtas}
 					altText={product.altText}
 					credit={product.credit}
 					displayCredit={product.displayCredit}
@@ -134,9 +131,7 @@ const Content = ({
 							altText={product.altText}
 							credit={product.credit}
 							displayCredit={product.displayCredit}
-							primaryUrl={product.primaryProductUrl}
-							primaryPrice={product.primaryPrice}
-							primaryCta={product.primaryCta}
+							productCtas={product.productCtas}
 							customAttributes={product.customAttributes}
 							format={format}
 						/>

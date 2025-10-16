@@ -20,6 +20,13 @@ export type CustomAttributes = {
 	value: string;
 };
 
+export type ProductCtas = {
+	url: string;
+	text: string;
+	retailer: string;
+	price: string;
+};
+
 export type InlineProductCardProps = {
 	format: ArticleFormat;
 	brandName: string;
@@ -28,11 +35,7 @@ export type InlineProductCardProps = {
 	altText: string;
 	credit: string;
 	displayCredit: boolean;
-	primaryCta: string;
-	primaryUrl: string;
-	primaryPrice: string;
-	secondaryCta?: string;
-	secondaryUrl?: string;
+	productCtas: ProductCtas[];
 	customAttributes: CustomAttributes[];
 	isCardOnly: boolean;
 };
@@ -161,14 +164,11 @@ export const InlineProductCard = ({
 	altText,
 	credit,
 	displayCredit,
-	primaryCta,
-	primaryUrl,
-	primaryPrice,
-	secondaryCta,
-	secondaryUrl,
 	customAttributes,
+	productCtas,
 	isCardOnly = false,
 }: InlineProductCardProps) => {
+	const primaryPrice = productCtas[0]?.price ?? '';
 	return (
 		<div css={[isCardOnly && productCard, !isCardOnly && showcaseCard]}>
 			{!!image && (
@@ -197,21 +197,11 @@ export const InlineProductCard = ({
 				<div css={productNameStyle}>{productName}</div>
 				<div css={priceStyle}>{primaryPrice}</div>
 				<div css={desktopButtonWrapper}>
-					<ProductCardButtons
-						primaryCta={primaryCta}
-						primaryUrl={primaryUrl}
-						secondaryCta={secondaryCta}
-						secondaryUrl={secondaryUrl}
-					/>
+					<ProductCardButtons productCtas={productCtas} />
 				</div>
 			</div>
 			<div css={mobileButtonWrapper}>
-				<ProductCardButtons
-					primaryCta={primaryCta}
-					primaryUrl={primaryUrl}
-					secondaryUrl={secondaryUrl}
-					secondaryCta={secondaryCta}
-				/>
+				<ProductCardButtons productCtas={productCtas} />
 			</div>
 			{!isCardOnly && customAttributes.length > 0 && (
 				<div css={customAttributesContainer}>
@@ -229,21 +219,33 @@ export const InlineProductCard = ({
 };
 
 const ProductCardButtons = ({
-	primaryCta,
-	primaryUrl,
-	secondaryCta,
-	secondaryUrl,
+	productCtas,
 }: {
-	primaryCta: string;
-	primaryUrl: string;
-	secondaryCta?: string;
-	secondaryUrl?: string;
+	productCtas: ProductCtas[];
 }) => {
+	const primaryCta = productCtas.length > 0 ? productCtas[0] : null;
+	const primaryUrl = primaryCta?.url ?? '';
+	const primaryLabel =
+		primaryCta?.text && primaryCta.text.trim().length > 0
+			? primaryCta.text
+			: primaryCta?.price && primaryCta.retailer
+			? `${primaryCta.price} at ${primaryCta.retailer}`
+			: '';
+
+	const secondaryCta = productCtas.length > 0 ? productCtas[1] : null;
+	const secondaryUrl = secondaryCta?.url ?? '';
+	const secondaryLabel =
+		secondaryCta?.text && secondaryCta.text.trim().length > 0
+			? secondaryCta.text
+			: secondaryCta?.price && secondaryCta.retailer
+			? `${secondaryCta.price} at ${secondaryCta.retailer}`
+			: '';
+
 	return (
 		<>
 			<ProductLinkButton
 				dataComponent="inline-product-card-primary-button"
-				label={primaryCta}
+				label={primaryLabel}
 				url={primaryUrl}
 				cssOverrides={css`
 					width: 100%;
@@ -252,7 +254,7 @@ const ProductCardButtons = ({
 			{!!secondaryCta && !!secondaryUrl && (
 				<ProductLinkButton
 					dataComponent="inline-product-card-secondary-button"
-					label={secondaryCta}
+					label={secondaryLabel}
 					url={secondaryUrl}
 					priority="tertiary"
 					cssOverrides={css`

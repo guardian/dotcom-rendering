@@ -11,25 +11,29 @@ import { palette } from '../palette';
 import { Caption } from './Caption';
 import { Picture } from './Picture';
 import { ProductLinkButton } from './ProductLinkButton';
-import { stripHtmlFromString } from './TextBlockComponent';
 
 export type CustomAttributes = {
 	name: string;
 	value: string;
 };
 
+export type ProductCtas = {
+	url: string;
+	text: string;
+	retailer: string;
+	price: string;
+};
+
 export type LeftColProductCardProps = {
 	brandName: string;
 	productName: string;
 	image: string;
-	primaryCta: string;
-	primaryUrl: string;
-	primaryPrice: string;
 	altText: string;
 	displayCredit: boolean;
 	credit: string;
 	customAttributes: CustomAttributes[];
 	format: ArticleFormat;
+	productCtas: ProductCtas[];
 };
 
 const card = css`
@@ -101,68 +105,78 @@ export const LeftColProductCard = ({
 	altText,
 	displayCredit,
 	credit,
-	primaryCta,
-	primaryUrl,
-	primaryPrice,
 	customAttributes,
 	format,
-}: LeftColProductCardProps) => (
-	<div css={card}>
-		{!!image && (
-			<div
-				css={css`
-					figcaption {
-						position: static;
-					}
-				`}
-			>
-				<Picture
-					role={'productCard'}
-					format={format}
-					master={image}
-					alt={altText}
-					height={220}
-					width={220}
-					loading={'eager'}
-				/>
-				<Caption
-					shouldLimitWidth={true}
-					format={format}
-					isLeftCol={true}
-					displayCredit={displayCredit}
-					credit={credit}
-					isOverlaid={false}
-				/>
-			</div>
-		)}
-		<div css={productInfoContainer}>
-			<div css={brandNameFont}>{brandName}</div>
-			<div css={productNameFont}>{productName}</div>
-			<div css={priceFont}>
-				<strong>{primaryPrice}</strong>
-			</div>
-		</div>
-		<div css={buttonOverride}>
-			<ProductLinkButton
-				dataComponent="leftcol-product-card-button"
-				label={stripHtmlFromString(primaryCta)}
-				url={primaryUrl}
-				size={'small'}
-				cssOverrides={css`
-					min-width: 100%;
-				`}
-			></ProductLinkButton>
-		</div>
-		{customAttributes.length > 0 && (
-			<div css={customAttributesContainer}>
-				{customAttributes.map((customAttribute) => (
-					<CustomAttribute
-						key={customAttribute.name}
-						name={customAttribute.name}
-						value={customAttribute.value}
+	productCtas,
+}: LeftColProductCardProps) => {
+	const primaryCta = productCtas.length > 0 ? productCtas[0] : null;
+	const primaryUrl = primaryCta?.url ?? '';
+	const primaryLabel =
+		primaryCta?.text && primaryCta.text.trim().length > 0
+			? primaryCta.text
+			: primaryCta?.price && primaryCta.retailer
+			? `${primaryCta.price} at ${primaryCta.retailer}`
+			: '';
+	const primaryPrice = primaryCta?.price ?? '';
+
+	return (
+		<div css={card}>
+			{!!image && (
+				<div
+					css={css`
+						figcaption {
+							position: static;
+						}
+					`}
+				>
+					<Picture
+						role={'productCard'}
+						format={format}
+						master={image}
+						alt={altText}
+						height={220}
+						width={220}
+						loading={'eager'}
 					/>
-				))}
+					<Caption
+						shouldLimitWidth={true}
+						format={format}
+						isLeftCol={true}
+						displayCredit={displayCredit}
+						credit={credit}
+						isOverlaid={false}
+					/>
+				</div>
+			)}
+			<div css={productInfoContainer}>
+				<div css={brandNameFont}>{brandName}</div>
+				<div css={productNameFont}>{productName}</div>
+				<div css={priceFont}>
+					<strong>{primaryPrice}</strong>
+				</div>
 			</div>
-		)}
-	</div>
-);
+			<div css={buttonOverride}>
+				<ProductLinkButton
+					dataComponent="leftcol-product-card-button"
+					label={primaryLabel}
+					url={primaryUrl}
+					size={'small'}
+					cssOverrides={css`
+						min-width: 100%;
+					`}
+				></ProductLinkButton>
+			</div>
+			{customAttributes.length > 0 && (
+				<div css={customAttributesContainer}>
+					{customAttributes.map((customAttribute) => (
+						<CustomAttribute
+							key={customAttribute.name}
+							name={customAttribute.name}
+							value={customAttribute.value}
+						/>
+					))}
+				</div>
+			)}
+		</div>
+	);
+};

@@ -36,28 +36,29 @@ const product: ProductBlockElement = {
 		mimeType: 'image/jpeg',
 		url: 'https://media.guimcode.co.uk/cb193848ed75d40103eceaf12b448de2330770dc/0_0_725_725/500.jpg',
 	},
-	primaryProductUrl:
-		'https://www.johnlewis.com/bosch-twk7203gb-sky-variable-temperature-kettle-1-7l-black/p3228625',
-	primaryPrice: '£79.99',
-	primaryRetailer: 'John Lewis',
-	primaryCta: '£79.99 at John Lewis',
-	starRating: 'none-selected',
-	secondaryProductUrl:
-		'https://www.amazon.co.uk/Bosch-TWK7203GB-Kettle-Cordless-Silver/dp/B0716G4TSQ',
-	secondaryCta: '£79.99 at Amazon',
-	secondaryPrice: '£79.99',
-	secondaryRetailer: 'Amazon',
-	customAttribute: [
-		{
-			name: 'What we love',
-			value: 'It boils quickly and stays hot for a while',
-		},
+	displayType: 'inline-and-product-card',
+	customAttributes: [
+		{ name: 'What we love', value: 'It pours well and looks great' },
 		{
 			name: "What we don't love",
 			value: 'The handle feels a bit cheap compared to the rest of it',
 		},
 	],
-	displayType: 'inline-and-product-card',
+	productCtas: [
+		{
+			url: 'https://www.johnlewis.com/bosch-twk7203gb-sky-variable-temperature-kettle-1-7l-black/p3228625',
+			text: 'Buy now',
+			retailer: 'John Lewis',
+			price: '£79.99',
+		},
+		{
+			url: 'https://www.amazon.co.uk/Bosch-TWK7203GB-Sky-Variable-Temperature/dp/B07Z8VQ2V6',
+			text: '',
+			retailer: 'Amazon',
+			price: '£79.99',
+		},
+	],
+	starRating: 'none-selected',
 	content: [
 		{
 			displayCredit: true,
@@ -498,14 +499,7 @@ export const withoutFields: StoryFn = () => {
 					secondaryHeading: '',
 					brandName: '',
 					productName: '',
-					primaryCta: '',
-					primaryPrice: '',
-					primaryRetailer: '',
-					primaryProductUrl: '',
-					secondaryCta: '',
-					secondaryPrice: '',
-					secondaryRetailer: '',
-					secondaryProductUrl: '',
+					productCtas: [],
 					customAttributes: [],
 					image: {
 						...product.image,
