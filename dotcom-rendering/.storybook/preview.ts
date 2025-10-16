@@ -12,7 +12,7 @@ import { Picture } from '../src/components/Picture';
 import { mockFetch } from '../src/lib/mockRESTCalls';
 import { setABTests } from '../src/lib/useAB';
 import { ConfigContextDecorator } from './decorators/configContextDecorator';
-import { Preview } from '@storybook/react';
+import { Preview } from '@storybook/react-webpack5';
 import {
 	globalColourScheme,
 	globalColourSchemeDecorator,
@@ -162,9 +162,15 @@ export default {
 
 	parameters: {
 		viewport: {
-			viewports: guardianViewports,
-			defaultViewport: 'wide',
+			options: guardianViewports,
 		},
 		layout: 'fullscreen',
+	},
+
+	initialGlobals: {
+		viewport: {
+			value: 'wide',
+			isRotated: false,
+		},
 	},
 } satisfies Preview;

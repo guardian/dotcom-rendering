@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { Decorator } from '@storybook/react';
+import type { Decorator } from '@storybook/react-webpack5';
 import { grid } from '../../src/grid';
 import { from } from '@guardian/source/foundations';
 

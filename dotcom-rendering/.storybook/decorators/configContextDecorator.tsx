@@ -1,6 +1,6 @@
 import React from 'react';
 import { ConfigProvider } from '../../src/components/ConfigContext';
-import type { Decorator } from '@storybook/react';
+import type { Decorator } from '@storybook/react-webpack5';
 import { Config } from '../../src/types/configContext';
 
 const defaultConfig = {

@@ -1,5 +1,5 @@
 import { ArticleDisplay, ArticleSpecial, Pillar } from '@guardian/libs';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
 import { images } from '../../fixtures/generated/images';

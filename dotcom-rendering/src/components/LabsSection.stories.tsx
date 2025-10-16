@@ -8,11 +8,8 @@ import { LabsSection } from './LabsSection';
 export default {
 	component: LabsSection,
 	title: 'Components/LabsSection',
+
 	parameters: {
-		viewport: {
-			// This has the effect of turning off the viewports addon by default
-			defaultViewport: 'doesNotExist',
-		},
 		chromatic: {
 			viewports: [
 				breakpoints.mobile,
@@ -21,6 +18,13 @@ export default {
 				breakpoints.leftCol,
 				breakpoints.wide,
 			],
+		},
+	},
+
+	globals: {
+		viewport: {
+			value: 'doesNotExist',
+			isRotated: false,
 		},
 	},
 };
