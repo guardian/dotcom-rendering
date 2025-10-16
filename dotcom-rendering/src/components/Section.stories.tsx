@@ -12,6 +12,7 @@ export default {
 	title: 'Components/Section',
 	globals: {
 		viewport: {
+			// This has the effect of turning off the viewports addon by default
 			value: 'doesNotExist',
 			isRotated: false,
 		},
