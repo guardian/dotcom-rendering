@@ -22,9 +22,7 @@ export const calculateSpaceUpdates = (
 					name: test.name,
 					type: test.type,
 					audienceSize: test.audienceSize / test.groups.length,
-					// If the test is OFF we set the expiration to 0 so it is not served by Fastly
-					expirationDate:
-						test.status === 'OFF' ? 0 : test.expirationDate,
+					expirationDate: test.expirationDate,
 					group,
 				},
 			]),
