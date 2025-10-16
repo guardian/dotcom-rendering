@@ -27,7 +27,7 @@ jobs:
       FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_AB_TESTING_CONFIG }}
       FASTLY_API_TOKEN: ${{ secrets.FASTLY_API_TOKEN }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       # https://github.com/denoland/setup-deno#latest-stable-for-a-major
       - uses: denoland/setup-deno@v1

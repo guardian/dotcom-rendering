@@ -10,6 +10,8 @@ When the config is merged, the A/B test will be automatically deployed and be av
 
 Ab test on/off state is controlled only by the config. Expired tests will cause the ab testing validation to fail, they will also not be served. In effect expired tests are turned off "automatically", but their config needs to be cleaned up.
 
+The test will appear in https://frontend.gutools.co.uk/analytics/ab-testing once the config is deployed.
+
 ## Putting code changes behind an A/B test (group)
 
 ### Use in Components
@@ -61,6 +63,19 @@ const someComponent = () => {
 The ab test API is also available on the window object as `window.guardian.modules.abTests`, this only works client side. It's best to use the `useBetaAB` hook in react components.
 
 Server side tests are also available in the CAPI object e.g. `CAPIArticle.config.serverSideABTests`.
+
+## Forcing yourself into a test
+
+Use the opt-in and opt-out URL fragments to force yourself into or out of a test.
+
+When opted-in, the test will override any mvt based assignment and you'll only be in the opted-in test group.
+
+When opted-out, you'll return to random/mvt based assignment.
+
+These links are also in the [frontend admin](https://frontend.gutools.co.uk/analytics/ab-testing).
+
+-   Opt-in Example: `https://theguardian.com/ab-tests/opt/in/commercial-test-example:variant`
+-   Opt-out: `https://theguardian.com/ab-tests/opt/out`
 
 # Legacy A/B testing in DCR
 
