@@ -27,13 +27,11 @@ export const useSubtitles = ({
 		if (!video) return;
 
 		const textTracks = video.textTracks;
-		console.log('>>> Text Tracks', textTracks);
 
 		const setTrackFromList = () => {
 			const track = textTracks[0];
-			// We currently only support one text track per video, so we are ok to acces [0] here. If we added additional languages, this will need updating.
+			// We currently only support one text track per video, so we are ok to access [0] here. If we add additional languages, this will need updating.
 			if (!track) return;
-			console.log('>>> Track', track);
 
 			setActiveTrack(track);
 		};
