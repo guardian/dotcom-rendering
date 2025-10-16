@@ -1,6 +1,6 @@
 import { isObject } from '@guardian/libs';
 import { breakpoints } from '@guardian/source/foundations';
-import type { Decorator, StoryObj } from '@storybook/react';
+import type { Decorator, StoryObj } from '@storybook/react-webpack5';
 import { useEffect } from 'react';
 import { colourSchemeDecorator } from '../../.storybook/decorators/themeDecorator';
 import { Analysis as AnalysisStandardNewsFixture } from '../../fixtures/generated/fe-articles/Analysis';

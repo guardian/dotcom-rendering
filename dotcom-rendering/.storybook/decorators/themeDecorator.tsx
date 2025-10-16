@@ -11,7 +11,7 @@ import {
 	type Decorator,
 	type StoryContext,
 	type StrictArgs,
-} from '@storybook/react';
+} from '@storybook/react-webpack5';
 import { ArticleFormat } from '../../src/lib/articleFormat';
 import type { CSSProperties } from 'react';
 

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { gridContainerDecorator } from '../../.storybook/decorators/gridDecorators';
 import { images } from '../../fixtures/generated/images';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';

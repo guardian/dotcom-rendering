@@ -1,5 +1,5 @@
 import type { AccessToken, IDToken } from '@guardian/identity-auth';
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-webpack5';
 import {
 	contributionsHeaderResponse,
 	contributionsSignInPromptHeaderResponse,

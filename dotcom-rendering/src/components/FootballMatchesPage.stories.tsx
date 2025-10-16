@@ -1,5 +1,5 @@
-import type { StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
+import type { StoryObj } from '@storybook/react-webpack5';
+import { fn } from 'storybook/test';
 import { initialDays, regions } from '../../fixtures/manual/footballData';
 import { WomensEuro2025 } from './FootballCompetitionNav.stories';
 import { FootballMatchesPage } from './FootballMatchesPage';

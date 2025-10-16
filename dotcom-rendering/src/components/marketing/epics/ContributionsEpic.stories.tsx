@@ -5,7 +5,7 @@
  */
 import { css } from '@emotion/react';
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import lzstring from 'lz-string';
 import React from 'react';
 import {

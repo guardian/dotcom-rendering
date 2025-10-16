@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { breakpoints, space, textSans17 } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import type { ReactNode } from 'react';
 import { palette } from '../palette';
 import type { DCRContainerPalette, DCRSlideshowImage } from '../types/front';

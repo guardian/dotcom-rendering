@@ -1,4 +1,4 @@
-import type { Decorator } from '@storybook/react';
+import type { Decorator } from '@storybook/react-webpack5';
 import { lightDecorator, darkDecorator } from '../decorators/themeDecorator';
 import { splitTheme } from '../decorators/splitThemeDecorator';
 import {

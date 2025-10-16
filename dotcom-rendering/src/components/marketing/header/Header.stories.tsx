@@ -3,7 +3,7 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/4925ef1e0ced5d221f1122afe79f93bd7448e0e5/packages/modules/src/modules/headers/Header.stories.tsx
  */
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-webpack5';
 import { HeaderDecorator } from './common/HeaderDecorator';
 import { HeaderUnvalidated as Header } from './Header';
 

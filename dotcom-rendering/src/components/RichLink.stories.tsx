@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
 import {
 	ArticleDesign,
@@ -107,6 +107,7 @@ export const Network = {
 		tags: [],
 		sponsorName: '',
 	},
+
 	render: (args) => {
 		return (
 			<SectionComponent
@@ -124,10 +125,17 @@ export const Network = {
 			</SectionComponent>
 		);
 	},
+
 	parameters: {
-		viewport: { defaultViewport: 'mobileMedium' },
 		chromatic: {
 			modes: { horizontal: allModes.splitHorizontal },
+		},
+	},
+
+	globals: {
+		viewport: {
+			value: 'mobileMedium',
+			isRotated: false,
 		},
 	},
 } satisfies Story;
@@ -217,6 +225,7 @@ export const ImageContent = {
 		tags: [],
 		sponsorName: '',
 	},
+
 	render: (args) => {
 		return (
 			<SectionComponent
@@ -234,10 +243,17 @@ export const ImageContent = {
 			</SectionComponent>
 		);
 	},
+
 	parameters: {
-		viewport: { defaultViewport: 'desktop' },
 		chromatic: {
 			modes: { horizontal: allModes.splitHorizontal },
+		},
+	},
+
+	globals: {
+		viewport: {
+			value: 'desktop',
+			isRotated: false,
 		},
 	},
 } satisfies Story;
@@ -255,6 +271,7 @@ export const Interactive = {
 		tags: [],
 		sponsorName: '',
 	},
+
 	render: (args) => {
 		return (
 			<SectionComponent
@@ -272,10 +289,17 @@ export const Interactive = {
 			</SectionComponent>
 		);
 	},
+
 	parameters: {
-		viewport: { defaultViewport: 'leftCol' },
 		chromatic: {
 			modes: { horizontal: allModes.splitHorizontal },
+		},
+	},
+
+	globals: {
+		viewport: {
+			value: 'leftCol',
+			isRotated: false,
 		},
 	},
 } satisfies Story;
@@ -302,6 +326,7 @@ export const Gallery = {
 		sponsorName: '',
 		contributorImage: someContributor,
 	},
+
 	render: (args) => {
 		return (
 			<SectionComponent
@@ -319,10 +344,17 @@ export const Gallery = {
 			</SectionComponent>
 		);
 	},
+
 	parameters: {
-		viewport: { defaultViewport: 'leftCol' },
 		chromatic: {
 			modes: { horizontal: allModes.splitHorizontal },
+		},
+	},
+
+	globals: {
+		viewport: {
+			value: 'leftCol',
+			isRotated: false,
 		},
 	},
 } satisfies Story;
@@ -341,6 +373,7 @@ export const Video = {
 		sponsorName: '',
 		contributorImage: someContributor,
 	},
+
 	render: (args) => {
 		return (
 			<SectionComponent
@@ -358,10 +391,17 @@ export const Video = {
 			</SectionComponent>
 		);
 	},
+
 	parameters: {
-		viewport: { defaultViewport: 'mobileMedium' },
 		chromatic: {
 			modes: { horizontal: allModes.splitHorizontal },
+		},
+	},
+
+	globals: {
+		viewport: {
+			value: 'mobileMedium',
+			isRotated: false,
 		},
 	},
 } satisfies Story;
@@ -422,6 +462,7 @@ export const LiveBlog = {
 		tags: [],
 		sponsorName: '',
 	},
+
 	render: (args) => {
 		return (
 			<SectionComponent
@@ -443,10 +484,17 @@ export const LiveBlog = {
 			</SectionComponent>
 		);
 	},
+
 	parameters: {
-		viewport: { defaultViewport: 'mobileMedium' },
 		chromatic: {
 			modes: { horizontal: allModes.splitHorizontal },
+		},
+	},
+
+	globals: {
+		viewport: {
+			value: 'mobileMedium',
+			isRotated: false,
 		},
 	},
 } satisfies Story;

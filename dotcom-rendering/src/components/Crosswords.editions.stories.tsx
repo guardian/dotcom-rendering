@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { expect, waitFor, within } from '@storybook/test';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { expect, waitFor, within } from 'storybook/test';
 import {
 	crypticCrossword,
 	quickCrossword,

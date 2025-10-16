@@ -5,7 +5,7 @@
  */
 import { css } from '@emotion/react';
 import { from, space } from '@guardian/source/foundations';
-import type { Decorator } from '@storybook/react';
+import type { Decorator } from '@storybook/react-webpack5';
 import { palette as themePalette } from '../../../../palette';
 
 const topBarStyles = css`
