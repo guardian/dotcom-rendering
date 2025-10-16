@@ -48,6 +48,7 @@ type Props = {
 	NAV: NavType;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
+	serverTime?: number;
 };
 
 const mainColWrapperStyle = css`
@@ -190,6 +191,7 @@ export const NewsletterSignupLayout = ({
 	NAV,
 	format,
 	renderingTarget,
+	serverTime,
 }: Props) => {
 	const {
 		promotedNewsletter,
@@ -212,9 +214,6 @@ export const NewsletterSignupLayout = ({
 
 	const renderAds = canRenderAds(article);
 	const isWeb = renderingTarget === 'Web';
-
-	const { absoluteServerTimes = false } = article.config.switches;
-	const serverTime = absoluteServerTimes ? undefined : Date.now();
 
 	return (
 		<>

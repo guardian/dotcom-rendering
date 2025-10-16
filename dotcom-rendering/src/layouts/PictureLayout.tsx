@@ -240,6 +240,7 @@ interface CommonProps {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
+	serverTime?: number;
 }
 
 interface WebProps extends CommonProps {
@@ -252,7 +253,8 @@ interface AppsProps extends CommonProps {
 }
 
 export const PictureLayout = (props: WebProps | AppsProps) => {
-	const { article, format, renderingTarget } = props;
+	const { article, format, renderingTarget, serverTime } = props;
+
 	const {
 		config: { isPaidContent, host, hasSurveyAd },
 	} = article;
@@ -276,9 +278,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 		?.bylineLargeImageUrl;
 
 	const displayAvatarUrl = avatarUrl ? true : false;
-
-	const { absoluteServerTimes = false } = article.config.switches;
-	const serverTime = absoluteServerTimes ? undefined : Date.now();
 
 	return (
 		<>

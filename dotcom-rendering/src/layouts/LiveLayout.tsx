@@ -245,6 +245,7 @@ interface BaseProps {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
+	serverTime?: number;
 }
 
 interface AppsProps extends BaseProps {
@@ -257,7 +258,7 @@ interface WebProps extends BaseProps {
 }
 
 export const LiveLayout = (props: WebProps | AppsProps) => {
-	const { article, format, renderingTarget } = props;
+	const { article, format, renderingTarget, serverTime } = props;
 	const {
 		config: { isPaidContent, host, hasLiveBlogTopAd, hasSurveyAd },
 	} = article;
@@ -292,9 +293,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	const isApps = renderingTarget === 'Apps';
 
 	const showComments = article.isCommentable && !isPaidContent;
-
-	const { absoluteServerTimes = false } = article.config.switches;
-	const serverTime = absoluteServerTimes ? undefined : Date.now();
 
 	return (
 		<>
@@ -848,6 +846,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												shouldHideAds={
 													article.shouldHideAds
 												}
+												serverTime={serverTime}
 											/>
 											{pagination.totalPages > 1 && (
 												<Pagination

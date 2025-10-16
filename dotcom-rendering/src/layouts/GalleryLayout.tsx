@@ -55,6 +55,7 @@ import { BannerWrapper, Stuck } from './lib/stickiness';
 interface Props {
 	gallery: Gallery;
 	renderingTarget: RenderingTarget;
+	serverTime?: number;
 }
 
 interface WebProps extends Props {
@@ -76,7 +77,7 @@ const headerStyles = css`
 `;
 
 export const GalleryLayout = (props: WebProps | AppProps) => {
-	const { gallery, renderingTarget } = props;
+	const { gallery, renderingTarget, serverTime } = props;
 
 	const {
 		config: {
@@ -111,9 +112,6 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 
 	const showComments =
 		frontendData.isCommentable && !frontendData.config.isPaidContent;
-
-	const { absoluteServerTimes = false } = switches;
-	const serverTime = absoluteServerTimes ? undefined : Date.now();
 
 	return (
 		<>

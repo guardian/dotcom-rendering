@@ -106,12 +106,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			hasPageSkin: hasPageSkinConfig,
 			pageId,
 			abTests,
-			switches: { absoluteServerTimes = false },
 		},
 		editionId,
 	} = front;
 
-	const serverTime = absoluteServerTimes ? undefined : Date.now();
+	const serverTime = front.serverTime;
 
 	const renderAds = canRenderAds(front);
 

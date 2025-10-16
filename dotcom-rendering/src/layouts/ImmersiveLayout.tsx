@@ -186,6 +186,7 @@ const stretchLines = css`
 interface CommonProps {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
+	serverTime?: number;
 }
 
 interface WebProps extends CommonProps {
@@ -229,7 +230,7 @@ const Box = ({ children }: { children: React.ReactNode }) => (
 );
 
 export const ImmersiveLayout = (props: WebProps | AppProps) => {
-	const { article, format, renderingTarget } = props;
+	const { article, format, renderingTarget, serverTime } = props;
 
 	const {
 		config: { isPaidContent, host, hasSurveyAd },
@@ -307,9 +308,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 	);
 
 	const renderAds = canRenderAds(article);
-
-	const { absoluteServerTimes = false } = article.config.switches;
-	const serverTime = absoluteServerTimes ? undefined : Date.now();
 
 	return (
 		<>
