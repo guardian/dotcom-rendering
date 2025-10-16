@@ -20,7 +20,10 @@
 			"jest",
 			"react",
 			"react-dom",
-			"@testing-library/jest-dom"
+			"@testing-library/jest-dom",
+			"webpack-env",
+			"youtube",
+			"twitter-for-web"
 		]
 	},
 	"include": ["**/*", ".storybook/mocks/bridgetApi.ts"],
