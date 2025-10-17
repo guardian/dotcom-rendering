@@ -27,7 +27,6 @@ import type { ArticleDeprecated } from '../types/article';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { temporaryBodyCopyColourOverride } from './InteractiveLayout';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -213,7 +212,6 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 					<Island priority="critical">
 						<InteractivesDisableArticleSwipe />
 					</Island>
-					<Global styles={temporaryBodyCopyColourOverride} />
 				</>
 			)}
 			{isWeb && (
