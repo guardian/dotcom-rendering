@@ -11,15 +11,14 @@ import { getZIndex } from '../lib/getZIndex';
 import { isServer } from '../lib/isServer';
 import { ophanComponentId } from '../lib/ophan-helpers';
 import {
-	getHighlightClickHistory,
-	manageCardsWithoutViews,
-	setHistoryInLocalStorage,
-	storeHighlightArticleVisit,
-} from '../lib/personaliseHighlights';
+	getHighlightCards,
+	getOrderedHighlights,
+	resetStoredHighlights,
+	trackCardEngagement,
+} from '../lib/personalHighlights';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { HighlightsCard } from './Masthead/HighlightsCard';
-import { storage } from '@guardian/libs';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -233,7 +232,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	const [showNextButton, setShowNextButton] = useState(true);
 	const [shouldShowHighlights, setShouldShowHighlights] = useState(false);
 	const [orderedTrails, setOrderedTrails] = useState<DCRFrontCard[]>(trails);
-
+	const [clickNavigation, setClickNavigation] = useState(false);
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
 
@@ -268,15 +267,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	};
 
 	useEffect(() => {
-		console.log('>>> my storage');
-		console.log(
-			'>>> highlights Order',
-			storage.local.get('gu.history.highlightsOrder'),
-		);
-		console.log(
-			'>>> highlights view history',
-			storage.local.get('gu.history.highlightsViewed'),
-		);
+		// TODO: DO NOT MERGE : TESTING ONLY
 	}, []);
 
 	useEffect(() => {
@@ -309,34 +300,54 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	}, [orderedTrails]);
 
 	useEffect(() => {
-		const history = getHighlightClickHistory();
-
+		const ooo = getOrderedHighlights();
+		const orderedHighlights = getHighlightCards();
+		console.log('>>> stored history', ooo);
+		console.log('>>> ordered highlights', orderedHighlights);
+		console.log('>>> trails', trails);
 		if (
-			history === undefined ||
-			history.length !== trails.length ||
-			!isEqual(history, trails)
+			orderedHighlights.length === 0 ||
+			orderedHighlights.length !== trails.length ||
+			!isEqual(orderedHighlights, trails)
 		) {
+			console.log(
+				'>>> highlights are out of whack',
+				orderedHighlights.length === 0,
+				orderedHighlights.length !== trails.length,
+				!isEqual(orderedHighlights, trails),
+			);
 			// store in local cache but dont bother setting in test trails as thats already set to trails
-			setHistoryInLocalStorage(trails);
+			resetStoredHighlights(trails);
 			// display highlights
 			setShouldShowHighlights(true);
+			return;
 		}
+		console.log('>>> use stored highlights');
 		// otherwise history is different to trails so set in state
-		setOrderedTrails(history ?? trails);
+		setOrderedTrails(orderedHighlights);
+		console.log('>>> set trails', orderedHighlights);
 	}, [trails]);
 
 	useEffect(() => {
-		function trackHighlightViews() {
-			console.log('>>> tracking views');
-			manageCardsWithoutViews(orderedTrails);
-		}
+		const trackHighlightViews = () => {
+			console.log(
+				'>>> attempting to track a view',
+				'clickNavigation',
+				clickNavigation,
+			);
+			if (document.visibilityState === 'hidden' && !clickNavigation) {
+				console.log('>>>  tracking a view ');
 
-		window.addEventListener('beforeunload', trackHighlightViews);
+				trackCardEngagement('VIEW');
+			}
+		};
+
+		document.addEventListener('visibilitychange', trackHighlightViews);
 
 		return () => {
-			window.removeEventListener('beforeunload', trackHighlightViews);
+			window.removeEventListener('visibilitychange', trackHighlightViews);
 		};
-	}, [orderedTrails]);
+	}, [clickNavigation]);
 
 	const { ophanComponentLink, ophanComponentName, ophanFrontName } =
 		getOphanInfo(frontId);
@@ -381,10 +392,8 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 								mainMedia={trail.mainMedia}
 								starRating={trail.starRating}
 								storeInteraction={() => {
-									storeHighlightArticleVisit(
-										trail,
-										orderedTrails,
-									);
+									setClickNavigation(true);
+									trackCardEngagement('CLICK', trail);
 								}}
 							/>
 						</li>
