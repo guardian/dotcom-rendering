@@ -52,22 +52,50 @@ export const getOrderedHighlights = (): OrderedHighlights | undefined => {
 	}
 };
 
+const resetHighlights = (): void => {
+	storage.local.remove(OrderedHighlightsKey);
+};
+
 export const storeOrderInStorage = (order: OrderedHighlights): void => {
 	storage.local.set(OrderedHighlightsKey, order);
 };
 
-export const getOrderedCardsFromHistory = (
+const convertCardsToHighlights = (
+	cards: Array<DCRFrontCard>,
+): OrderedHighlights => {
+	return cards.map((card) => ({
+		card,
+		viewCount: 0,
+		clicked: false,
+	}));
+};
+
+export const resetStoredHighlights = (cards: DCRFrontCard[]): void => {
+	resetHighlights();
+	const highlights = convertCardsToHighlights(cards);
+	storeOrderInStorage(highlights);
+};
+
+const getOrderedCardsFromHistory = (
 	history: OrderedHighlights,
 ): Array<DCRFrontCard> => {
-	return history.map((highlight) => highlight.card);
+	return history.map((highlight) => {
+		return highlight.card;
+	});
+};
+
+export const getHighlightCards = (): Array<DCRFrontCard> => {
+	const history = getOrderedHighlights() ?? [];
+	return getOrderedCardsFromHistory(history);
 };
 
 const trackCardClick = (
-	card: DCRFrontCard,
 	highlights: OrderedHighlights,
+	card?: DCRFrontCard,
 ): OrderedHighlights => {
+	if (!card) return highlights;
 	return highlights.map((el) =>
-		el.card == card ? { ...el, clicked: true } : el,
+		el.card.url === card.url ? { ...el, clicked: true } : el,
 	);
 };
 
@@ -81,6 +109,15 @@ const trackCardView = (highlights: OrderedHighlights): OrderedHighlights => {
 };
 
 const shouldDemoteCard = (card: HighlightCard) => {
+	console.log(
+		'>>> showuld demote card? ',
+		card.viewCount >= 3 || card.clicked,
+		card,
+		'viewCount: ',
+		card.viewCount,
+		'clicked: ',
+		card.clicked,
+	);
 	return card.viewCount >= 3 || card.clicked;
 };
 
@@ -100,15 +137,15 @@ const orderCardsByHistory = (
 type CardEngagement = 'VIEW' | 'CLICK';
 
 export const trackCardEngagement = (
-	card: DCRFrontCard,
-	history: OrderedHighlights,
 	engagement: CardEngagement,
+	card?: DCRFrontCard,
 ): void => {
+	console.log('>>> trackCardEngagement: ', engagement);
+	const history = getOrderedHighlights() ?? [];
 	const newHistory =
 		engagement === 'VIEW'
 			? trackCardView(history)
-			: trackCardClick(card, history);
+			: trackCardClick(history, card);
 	const newOrder = orderCardsByHistory(newHistory);
-
 	storeOrderInStorage(newOrder);
 };
