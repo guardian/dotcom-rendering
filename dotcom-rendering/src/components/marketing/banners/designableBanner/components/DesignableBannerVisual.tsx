@@ -16,7 +16,7 @@ interface DesignableBannerVisualProps {
 	settings: Image;
 	bannerId?: BannerId;
 	isHeaderImage?: boolean;
-	isCollapsed?: boolean;
+	isCollapsed: boolean;
 }
 
 export function DesignableBannerVisual({
