@@ -11,6 +11,7 @@ import {
 } from './handler.article.apps';
 import {
 	handleArticle,
+	handleArticleValibot,
 	handleBlocks,
 	handleInteractive,
 } from './handler.article.web';
@@ -58,6 +59,7 @@ export const prodServer = (): void => {
 	}
 
 	app.post('/Article', logRenderTime, handleArticle);
+	app.post('/ArticleValibot', logRenderTime, handleArticleValibot);
 	app.post('/Interactive', logRenderTime, handleInteractive);
 	app.post('/Blocks', logRenderTime, handleBlocks);
 	app.post('/Front', logRenderTime, handleFront);

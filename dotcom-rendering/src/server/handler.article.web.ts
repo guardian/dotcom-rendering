@@ -49,6 +49,17 @@ const validateFeArticleValibot = (data: unknown): FEArticle => {
 	}
 };
 
+export const handleArticleValibot: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('article', 'web');
+	const frontendData = validateFeArticleValibot(body);
+	const article = enhanceArticleType(frontendData, 'Web');
+	const { html, prefetchScripts } = renderHtml({
+		article,
+	});
+
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
+};
+
 export const handleArticle: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'web');
 	const frontendData = validateFeArticleAJV(body);
