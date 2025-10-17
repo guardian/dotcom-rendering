@@ -9,19 +9,19 @@ import type { FEFootballMatchPage } from '../frontend/feFootballMatchPage';
 import type { FEFootballTablesPage } from '../frontend/feFootballTablesPage';
 import type { FEFront } from '../frontend/feFront';
 import type { FETagPage } from '../frontend/feTagPage';
-import articleSchema from '../frontend/schemas/feArticle.json';
-import cricketMatchPageSchema from '../frontend/schemas/feCricketMatchPage.json';
-import footballMatchListPageSchema from '../frontend/schemas/feFootballMatchListPage.json';
-import footballMatchPageSchema from '../frontend/schemas/feFootballMatchPage.json';
-import footballTablesPageSchema from '../frontend/schemas/feFootballTablesPage.json';
-import frontSchema from '../frontend/schemas/feFront.json';
-import tagPageSchema from '../frontend/schemas/feTagPage.json';
+import articleSchema from '../frontend/schemas/feArticle.json' with { type: 'json' };
+import cricketMatchPageSchema from '../frontend/schemas/feCricketMatchPage.json' with { type: 'json' };
+import footballMatchListPageSchema from '../frontend/schemas/feFootballMatchListPage.json' with { type: 'json' };
+import footballMatchPageSchema from '../frontend/schemas/feFootballMatchPage.json' with { type: 'json' };
+import footballTablesPageSchema from '../frontend/schemas/feFootballTablesPage.json' with { type: 'json' };
+import frontSchema from '../frontend/schemas/feFront.json' with { type: 'json' };
+import tagPageSchema from '../frontend/schemas/feTagPage.json' with { type: 'json' };
 import type { Block } from '../types/blocks';
 import type { FEEditionsCrosswords } from '../types/editionsCrossword';
 import type { FENewslettersPageType } from '../types/newslettersPage';
-import blockSchema from './block-schema.json';
-import editionsCrosswordSchema from './editions-crossword-schema.json';
-import newslettersPageSchema from './newsletter-page-schema.json';
+import blockSchema from './block-schema.json' with { type: 'json' };
+import editionsCrosswordSchema from './editions-crossword-schema.json' with { type: 'json' };
+import newslettersPageSchema from './newsletter-page-schema.json' with { type: 'json' };
 
 const options: Options = {
 	verbose: false,

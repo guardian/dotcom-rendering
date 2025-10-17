@@ -16,8 +16,7 @@
 		"playwright:run": "playwright test",
 		"unused-exports": "pnpm ts-unused-exports ./tsconfig.json --ignoreFiles='(/(fixtures|__mocks__)/|.+\\.(stories|mocks))' --exitWithCount",
 		"storybook": "storybook dev -p 4002",
-		"build-storybook": "storybook build",
-		"bench": "tsx src/benchmark/validate-benchmark.ts"
+		"build-storybook": "storybook build"
 	},
 	"dependencies": {
 		"@aws-sdk/client-cloudwatch": "3.621.0",

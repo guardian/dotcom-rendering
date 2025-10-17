@@ -172,8 +172,8 @@ const getLocaleFromEdition = (edition: EditionId): Locale =>
 export {
 	type EditionId,
 	EditionIdSchema,
-	Edition,
-	TimeZone,
+	type Edition,
+	type TimeZone,
 	editionList,
 	editionalisedPages,
 	getEditionFromId,
