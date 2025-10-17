@@ -79,3 +79,36 @@ const trackCardView = (
 		el.card == card ? { ...el, viewCount: (el.viewCount += 1) } : el,
 	);
 };
+
+const shouldDemoteCard = (card: HighlightCard) => {
+	return card.viewCount >= 3 || card.clicked;
+};
+
+const orderCardsByHistory = (
+	highlights: OrderedHighlights,
+): OrderedHighlights => {
+	return highlights.reduce((acc: HighlightCard[], card) => {
+		if (shouldDemoteCard(card)) {
+			acc.push(card);
+		} else {
+			acc.unshift(card);
+		}
+		return acc;
+	}, []);
+};
+
+type CardEngagement = 'VIEW' | 'CLICK';
+
+export const trackCardEngagement = (
+	card: DCRFrontCard,
+	history: OrderedHighlights,
+	engagement: CardEngagement,
+): void => {
+	const newHistory =
+		engagement === 'VIEW'
+			? trackCardView(card, history)
+			: trackCardClick(card, history);
+	const newOrder = orderCardsByHistory(newHistory);
+
+	storeOrderInStorage(newOrder);
+};
