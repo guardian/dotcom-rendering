@@ -30,12 +30,12 @@ export const LiveblogNotifications = ({ id, displayName }: Props) => {
 				window.guardian.modules.sentry.reportError(
 					error,
 					'bridget-getNotificationsClient-isFollowing-error',
-				),
-					log(
-						'dotcom',
-						'Bridget getNotificationsClient.isFollowing Error:',
-						error,
-					);
+				);
+				log(
+					'dotcom',
+					'Bridget getNotificationsClient.isFollowing Error:',
+					error,
+				);
 			});
 	}, [id, displayName]);
 
@@ -46,39 +46,45 @@ export const LiveblogNotifications = ({ id, displayName }: Props) => {
 			type: 'content',
 		});
 
-		isFollowingNotifications
-			? void getNotificationsClient()
-					.unfollow(topic)
-					.then((success) => {
-						success && setIsFollowingNotifications(false);
-					})
-					.catch((error) => {
-						window.guardian.modules.sentry.reportError(
-							error,
-							'briidget-getNotificationsClient-unfollow-error',
-						),
-							log(
-								'dotcom',
-								'Bridget getNotificationsClient.unfollow Error:',
-								error,
-							);
-					})
-			: void getNotificationsClient()
-					.follow(topic)
-					.then((success) => {
-						success && setIsFollowingNotifications(true);
-					})
-					.catch((error) => {
-						window.guardian.modules.sentry.reportError(
-							error,
-							'bridget-getNotificationsClient-follow-error',
-						),
-							log(
-								'dotcom',
-								'Bridget getNotificationsClient.follow Error:',
-								error,
-							);
-					});
+		if (isFollowingNotifications) {
+			void getNotificationsClient()
+				.unfollow(topic)
+				.then((success) => {
+					if (success) {
+						setIsFollowingNotifications(false);
+					}
+				})
+				.catch((error) => {
+					window.guardian.modules.sentry.reportError(
+						error,
+						'briidget-getNotificationsClient-unfollow-error',
+					);
+					log(
+						'dotcom',
+						'Bridget getNotificationsClient.unfollow Error:',
+						error,
+					);
+				});
+		} else {
+			void getNotificationsClient()
+				.follow(topic)
+				.then((success) => {
+					if (success) {
+						setIsFollowingNotifications(true);
+					}
+				})
+				.catch((error) => {
+					window.guardian.modules.sentry.reportError(
+						error,
+						'bridget-getNotificationsClient-follow-error',
+					);
+					log(
+						'dotcom',
+						'Bridget getNotificationsClient.follow Error:',
+						error,
+					);
+				});
+		}
 	};
 
 	return (

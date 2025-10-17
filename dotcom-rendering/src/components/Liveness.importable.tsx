@@ -180,8 +180,9 @@ export const Liveness = ({
 				// Insert the new blocks in the dom (but hidden)
 				if (onFirstPage) {
 					try {
-						topOfBlog &&
+						if (topOfBlog) {
 							insert(data.html, enhanceTweetsSwitch, topOfBlog);
+						}
 					} catch (e) {
 						console.log('>> failed >>', e);
 					}
