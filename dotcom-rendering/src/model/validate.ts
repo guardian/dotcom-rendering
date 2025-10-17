@@ -33,7 +33,7 @@ const options: Options = {
 const ajv = new Ajv(options);
 addFormats(ajv);
 
-const validateArticle = ajv.compile<FEArticle>(articleSchema);
+export const validateArticle = ajv.compile<FEArticle>(articleSchema);
 const validateFront = ajv.compile<FEFront>(frontSchema);
 const validateTagPage = ajv.compile<FETagPage>(tagPageSchema);
 const validateAllEditorialNewslettersPage = ajv.compile<FENewslettersPageType>(
