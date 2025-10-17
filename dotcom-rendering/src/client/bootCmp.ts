@@ -66,6 +66,13 @@ const initialiseCmp = async () => {
 	const useNonAdvertisedList = allowRejectAll(isUserSignedIn);
 
 	const country = code ?? undefined;
+
+	window.addEventListener('popstate', () => {
+		// SP needs to be informed when SPA navigation occurs
+		console.log('CMP: popstate detected, executing messaging');
+		// window._sp_?.executeMessaging?.();
+	});
+
 	cmp.init({
 		pubData: {
 			platform: 'next-gen',
