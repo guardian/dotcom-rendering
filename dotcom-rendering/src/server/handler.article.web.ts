@@ -22,20 +22,16 @@ const valibotParseFailure = (
 	);
 };
 
-export const handleArticle: RequestHandler = ({ body }, res) => {
-	recordTypeAndPlatform('article', 'web');
-	// const frontendData1 = validateAsFEArticle(body);
-	const result = safeParse(FEArticleSchema, body);
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- testing
+const validateFeArticleAJV = (data: unknown): FEArticle =>
+	validateAsFEArticle(data);
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- testing
+const validateFeArticleValibot = (data: unknown): FEArticle => {
+	const result = safeParse(FEArticleSchema, data);
 	if (result.success) {
 		const frontendData: FEArticle = result.output;
-		const article = enhanceArticleType(frontendData, 'Web');
-		const { html, prefetchScripts } = renderHtml({
-			article,
-		});
-
-		res.status(200)
-			.set('Link', makePrefetchHeader(prefetchScripts))
-			.send(html);
+		return frontendData;
 	} else {
 		const errorMessages: string[] = [];
 		console.error('Validation errors:');
@@ -48,11 +44,20 @@ export const handleArticle: RequestHandler = ({ body }, res) => {
 
 			console.log(errorMessages);
 		}
-
 		const errorMsg = errorMessages.join('\n');
-
 		throw new TypeError(`Validation failed ${errorMsg}`);
 	}
+};
+
+export const handleArticle: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('article', 'web');
+	const frontendData = validateFeArticleAJV(body);
+	const article = enhanceArticleType(frontendData, 'Web');
+	const { html, prefetchScripts } = renderHtml({
+		article,
+	});
+
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
 export const handleInteractive: RequestHandler = ({ body }, res) => {

@@ -7,7 +7,7 @@ const PORT = 9000;
 
 /** @type {import('k6/data').SharedArray} */
 const jsonPayload = new SharedArray('jsonPayload', function () {
-	const f = JSON.parse(open('./article-nier-automata.json'));
+	const f = JSON.parse(open('./article.json'));
 	return [f];
 });
 

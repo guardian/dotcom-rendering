@@ -1,0 +1,3214 @@
+{
+	"version": 3,
+	"headline": "Head of CPS faces cross-party pressure to explain China spy trial collapse",
+	"standfirst": "<p>Stephen Parkinson called on to give ‘fuller explanation’ as MI5 expresses frustration over charges being dropped</p>",
+	"webTitle": "Head of CPS faces cross-party pressure to explain China spy trial collapse",
+	"mainMediaElements": [
+		{
+			"displayCredit": true,
+			"_type": "model.dotcomrendering.pageElements.ImageBlockElement",
+			"role": "inline",
+			"media": {
+				"allImages": [
+					{
+						"index": 0,
+						"fields": {
+							"aspectRatio": "5:4",
+							"height": "1600",
+							"width": "2000"
+						},
+						"mediaType": "Image",
+						"mimeType": "image/jpeg",
+						"url": "https://media.guim.co.uk/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/2000.jpg"
+					},
+					{
+						"index": 1,
+						"fields": {
+							"aspectRatio": "5:4",
+							"height": "800",
+							"width": "1000"
+						},
+						"mediaType": "Image",
+						"mimeType": "image/jpeg",
+						"url": "https://media.guim.co.uk/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/1000.jpg"
+					},
+					{
+						"index": 2,
+						"fields": {
+							"aspectRatio": "5:4",
+							"height": "400",
+							"width": "500"
+						},
+						"mediaType": "Image",
+						"mimeType": "image/jpeg",
+						"url": "https://media.guim.co.uk/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/500.jpg"
+					},
+					{
+						"index": 3,
+						"fields": {
+							"aspectRatio": "5:4",
+							"height": "112",
+							"width": "140"
+						},
+						"mediaType": "Image",
+						"mimeType": "image/jpeg",
+						"url": "https://media.guim.co.uk/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/140.jpg"
+					},
+					{
+						"index": 4,
+						"fields": {
+							"aspectRatio": "5:4",
+							"height": "3381",
+							"width": "4226"
+						},
+						"mediaType": "Image",
+						"mimeType": "image/jpeg",
+						"url": "https://media.guim.co.uk/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/4226.jpg"
+					},
+					{
+						"index": 5,
+						"fields": {
+							"aspectRatio": "5:4",
+							"isMaster": "true",
+							"height": "3381",
+							"width": "4226"
+						},
+						"mediaType": "Image",
+						"mimeType": "image/jpeg",
+						"url": "https://media.guim.co.uk/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg"
+					}
+				]
+			},
+			"elementId": "e820ff9e-1619-4f61-beec-6f71eab8568a",
+			"imageSources": [
+				{
+					"weighting": "inline",
+					"srcSet": [
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=620&quality=85&auto=format&fit=max&s=3e52c077ef77b3b1317cc30e9bcac98e",
+							"width": 620
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=aae2bcc00cda1d08941f7ec11be8d834",
+							"width": 1240
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=700&quality=85&auto=format&fit=max&s=7f90ef70b288b80bb775989a8301e5e4",
+							"width": 700
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=0d36c75707e0abc6a5cf3db50e8adb89",
+							"width": 1400
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=620&quality=85&auto=format&fit=max&s=3e52c077ef77b3b1317cc30e9bcac98e",
+							"width": 620
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=aae2bcc00cda1d08941f7ec11be8d834",
+							"width": 1240
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=645&quality=85&auto=format&fit=max&s=c50ace943738012179e13a53081ab467",
+							"width": 645
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=17919462837270c5c6423804c3ba256a",
+							"width": 1290
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=465&quality=85&auto=format&fit=max&s=2a5dbbeea1062b8fc484fb3ae2923db7",
+							"width": 465
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=35a04d2dc0293c5ccc540427e600b1b6",
+							"width": 930
+						}
+					]
+				},
+				{
+					"weighting": "thumbnail",
+					"srcSet": []
+				},
+				{
+					"weighting": "supporting",
+					"srcSet": []
+				},
+				{
+					"weighting": "showcase",
+					"srcSet": [
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=1020&quality=85&auto=format&fit=max&s=f609104fe47e5ea890b98a55e5030683",
+							"width": 1020
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=1a7d252821e32deacea65a1bd34d624d",
+							"width": 2040
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=940&quality=85&auto=format&fit=max&s=70929e2546ebafb5aafd21c478942161",
+							"width": 940
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=817c720c92e6906f8b9cbae48da6af60",
+							"width": 1880
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=700&quality=85&auto=format&fit=max&s=7f90ef70b288b80bb775989a8301e5e4",
+							"width": 700
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=0d36c75707e0abc6a5cf3db50e8adb89",
+							"width": 1400
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=700&quality=85&auto=format&fit=max&s=7f90ef70b288b80bb775989a8301e5e4",
+							"width": 700
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=0d36c75707e0abc6a5cf3db50e8adb89",
+							"width": 1400
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=660&quality=85&auto=format&fit=max&s=7935f535080ccfbb794fc23952a7347c",
+							"width": 660
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=0104b8ea4c18612d3b21ced379d2ed67",
+							"width": 1320
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=645&quality=85&auto=format&fit=max&s=c50ace943738012179e13a53081ab467",
+							"width": 645
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=17919462837270c5c6423804c3ba256a",
+							"width": 1290
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=465&quality=85&auto=format&fit=max&s=2a5dbbeea1062b8fc484fb3ae2923db7",
+							"width": 465
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=35a04d2dc0293c5ccc540427e600b1b6",
+							"width": 930
+						}
+					]
+				},
+				{
+					"weighting": "halfwidth",
+					"srcSet": []
+				},
+				{
+					"weighting": "immersive",
+					"srcSet": [
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=1900&quality=85&auto=format&fit=max&s=3cb948e2075718d52e0728b0ed6460f2",
+							"width": 1900
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=77832a42bdfc058c8d1fb43d14dca522",
+							"width": 3800
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=1300&quality=85&auto=format&fit=max&s=a1d7dd8d81fb9cbe2c23f73d801381a5",
+							"width": 1300
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=858564868572d0cc769098b2cb49aa53",
+							"width": 2600
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=1140&quality=85&auto=format&fit=max&s=69c3aafe6d8ea64e6f64c2f4f07f1183",
+							"width": 1140
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=2f4112c1064142e852ee5b3208aaa69a",
+							"width": 2280
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=980&quality=85&auto=format&fit=max&s=b914e2819bce21ad4a1b2ac484357964",
+							"width": 980
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=56ca278a3f07816ca7e5bc9de3898860",
+							"width": 1960
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=740&quality=85&auto=format&fit=max&s=689d7947820693a5eb8d5ce14a97d006",
+							"width": 740
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=68a25d60b8dc44f648d72a9da36df91f",
+							"width": 1480
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=660&quality=85&auto=format&fit=max&s=7935f535080ccfbb794fc23952a7347c",
+							"width": 660
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=0104b8ea4c18612d3b21ced379d2ed67",
+							"width": 1320
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=480&quality=85&auto=format&fit=max&s=25af2be455c8e5f10c95f5a078c5f416",
+							"width": 480
+						},
+						{
+							"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=538fb754e35f660af423b792d8b1333a",
+							"width": 960
+						}
+					]
+				}
+			],
+			"data": {
+				"alt": "Stephen Parkinson, the director of public prosecutions, speaking in front of a large pale blue screen",
+				"caption": "Parkinson, the director of public prosecutions, is expected to be brought before MPs to explain why the CPS dropped the charges.",
+				"credit": "Photograph: Stefan Rousseau/PA"
+			}
+		}
+	],
+	"main": "<figure class=\"element element-image\" data-media-id=\"ce5132e849de9958cec0b6abd1b689ca391b4534\"> \n <img src=\"https://media.guim.co.uk/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/1000.jpg\" alt=\"Stephen Parkinson, the director of public prosecutions, speaking in front of a large pale blue screen\" width=\"1000\" height=\"800\" class=\"gu-image\"> \n <figcaption> <span class=\"element-image__caption\">Parkinson, the director of public prosecutions, is expected to be brought before MPs to explain why the CPS dropped the charges.</span> <span class=\"element-image__credit\">Photograph: Stefan Rousseau/PA</span> \n </figcaption> \n</figure>",
+	"filterKeyEvents": false,
+	"keyEvents": [],
+	"blocks": [
+		{
+			"id": "68f1236a8f08387628a5dcf0",
+			"elements": [
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>The director of public prosecutions has come under intense cross-party pressure to explain why the <a href=\"https://www.theguardian.com/law/2025/oct/08/why-has-the-uk-dropped-its-trial-of-two-alleged-china-spies\">China spy trial collapsed</a> as MI5 expressed frustration at the decision and MPs launched a series of inquiries into how it was taken.</p>",
+					"elementId": "e2fdd7eb-519e-4efc-8707-f7f0da8c59d2"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>The chairs of the home affairs, foreign affairs, justice and national security committees wrote together to <a href=\"https://www.theguardian.com/politics/2025/oct/16/china-spying-case-dream-job-turns-into-nightmare-for-dpp-stephen-parkinson\">Stephen Parkinson, the head of the Crown Prosecution Service</a> (CPS), on Thursday calling on him to give “a fuller explanation for the dropping of charges”.</p>",
+					"elementId": "224030da-3be1-4373-9972-5ecf8969eb38"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.RichLinkBlockElement",
+					"prefix": "Related: ",
+					"text": "China spying case: dream job turns into nightmare for DPP Stephen Parkinson",
+					"elementId": "53dc4471-71c6-4c13-8170-4aa806b489d2",
+					"role": "thumbnail",
+					"url": "https://www.theguardian.com/politics/2025/oct/16/china-spying-case-dream-job-turns-into-nightmare-for-dpp-stephen-parkinson"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>They asked Parkinson “what steps did you take to make ministers aware” that the case was at risk of collapse because of a change in the case law that required <a href=\"https://www.theguardian.com/world/china\" data-component=\"auto-linked-tag\">China</a> to be designated a “threat to the national security of the UK”.</p>",
+					"elementId": "84c3518e-86af-4ea8-a95e-65329aef8b7c"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>The committee chairs also asked if a key government witness, one of the UK’s deputy national security advisers, Matthew Collins, was warned his evidence may be insufficient and “what consideration was given to seeking evidence from other sources” as to the level of security threats posed by China.</p>",
+					"elementId": "aeff39d6-2138-4717-adfa-7d4d0f03815c"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>Parkinson is expected to be brought before MPs to explain why the CPS dropped charges against Christopher Cash, a former parliamentary researcher, and Christopher Berry, in September, a month before a trial had been due to take place.</p>",
+					"elementId": "1f0fa6e2-7280-4814-a576-fda1fd58e442"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>Earlier on Thursday, MI5’s director general, Ken McCallum, said he was frustrated at the decision and revealed security services had disrupted a threat from Beijing within the last week, though it was not related to parliament.</p>",
+					"elementId": "36c9f461-e5d0-471e-9f5d-c217e41964a2"
+				},
+				{
+					"displayCredit": true,
+					"_type": "model.dotcomrendering.pageElements.ImageBlockElement",
+					"role": "inline",
+					"media": {
+						"allImages": [
+							{
+								"index": 0,
+								"fields": {
+									"height": "3349",
+									"width": "5000"
+								},
+								"mediaType": "Image",
+								"mimeType": "image/jpeg",
+								"url": "https://media.guim.co.uk/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/5000.jpg"
+							},
+							{
+								"index": 1,
+								"fields": {
+									"isMaster": "true",
+									"height": "3349",
+									"width": "5000"
+								},
+								"mediaType": "Image",
+								"mimeType": "image/jpeg",
+								"url": "https://media.guim.co.uk/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg"
+							},
+							{
+								"index": 2,
+								"fields": {
+									"height": "1340",
+									"width": "2000"
+								},
+								"mediaType": "Image",
+								"mimeType": "image/jpeg",
+								"url": "https://media.guim.co.uk/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/2000.jpg"
+							},
+							{
+								"index": 3,
+								"fields": {
+									"height": "670",
+									"width": "1000"
+								},
+								"mediaType": "Image",
+								"mimeType": "image/jpeg",
+								"url": "https://media.guim.co.uk/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/1000.jpg"
+							},
+							{
+								"index": 4,
+								"fields": {
+									"height": "335",
+									"width": "500"
+								},
+								"mediaType": "Image",
+								"mimeType": "image/jpeg",
+								"url": "https://media.guim.co.uk/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/500.jpg"
+							},
+							{
+								"index": 5,
+								"fields": {
+									"height": "94",
+									"width": "140"
+								},
+								"mediaType": "Image",
+								"mimeType": "image/jpeg",
+								"url": "https://media.guim.co.uk/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/140.jpg"
+							}
+						]
+					},
+					"elementId": "7bee9389-ecc7-4142-b929-76dcabed9c94",
+					"imageSources": [
+						{
+							"weighting": "inline",
+							"srcSet": [
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=620&quality=85&auto=format&fit=max&s=838aaf300423b5f4ca0890bf130ea889",
+									"width": 620
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=342291f5cc5c030b4dfc0d5446c7f16b",
+									"width": 1240
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=605&quality=85&auto=format&fit=max&s=b7f9bbf02c2fcb829280be8d87267905",
+									"width": 605
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=2023840cbd52db1c95a7442684ccdc20",
+									"width": 1210
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=445&quality=85&auto=format&fit=max&s=9705afdc95ed8932a87feb28c0938838",
+									"width": 445
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=3208cf53c9e4fb16be65f095618adba9",
+									"width": 890
+								}
+							]
+						},
+						{
+							"weighting": "thumbnail",
+							"srcSet": [
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=140&quality=85&auto=format&fit=max&s=a4669de86e11d9a518752288b5dc366a",
+									"width": 140
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=1a225269c3557038903b2e69f5560209",
+									"width": 280
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=120&quality=85&auto=format&fit=max&s=97b2b8485457138c1144f5361c90d165",
+									"width": 120
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=831165a2f5a4519104b80cb7c5647bc9",
+									"width": 240
+								}
+							]
+						},
+						{
+							"weighting": "supporting",
+							"srcSet": [
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=380&quality=85&auto=format&fit=max&s=56c6aad1fb540332def987c37adf9d0c",
+									"width": 380
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=d59c933889fdaa6852a828aff523453d",
+									"width": 760
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=97a0c8c7e5f299ec17eaa449bc556906",
+									"width": 300
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=437940ff8ba6ec77b59129a20095ae89",
+									"width": 600
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=620&quality=85&auto=format&fit=max&s=838aaf300423b5f4ca0890bf130ea889",
+									"width": 620
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=342291f5cc5c030b4dfc0d5446c7f16b",
+									"width": 1240
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=605&quality=85&auto=format&fit=max&s=b7f9bbf02c2fcb829280be8d87267905",
+									"width": 605
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=2023840cbd52db1c95a7442684ccdc20",
+									"width": 1210
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=445&quality=85&auto=format&fit=max&s=9705afdc95ed8932a87feb28c0938838",
+									"width": 445
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=3208cf53c9e4fb16be65f095618adba9",
+									"width": 890
+								}
+							]
+						},
+						{
+							"weighting": "showcase",
+							"srcSet": [
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=860&quality=85&auto=format&fit=max&s=e33b3b82d6b709ff50f469a24e3f41d5",
+									"width": 860
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=e85f46715666c5f44c25215d0dc4b645",
+									"width": 1720
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=780&quality=85&auto=format&fit=max&s=3c12a756c240570b09f3b853e06aeeb9",
+									"width": 780
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=01943155cef6e7dbac3fa5af20aae14b",
+									"width": 1560
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=620&quality=85&auto=format&fit=max&s=838aaf300423b5f4ca0890bf130ea889",
+									"width": 620
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=342291f5cc5c030b4dfc0d5446c7f16b",
+									"width": 1240
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=605&quality=85&auto=format&fit=max&s=b7f9bbf02c2fcb829280be8d87267905",
+									"width": 605
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=2023840cbd52db1c95a7442684ccdc20",
+									"width": 1210
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=445&quality=85&auto=format&fit=max&s=9705afdc95ed8932a87feb28c0938838",
+									"width": 445
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=3208cf53c9e4fb16be65f095618adba9",
+									"width": 890
+								}
+							]
+						},
+						{
+							"weighting": "halfwidth",
+							"srcSet": [
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=620&quality=85&auto=format&fit=max&s=838aaf300423b5f4ca0890bf130ea889",
+									"width": 620
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=342291f5cc5c030b4dfc0d5446c7f16b",
+									"width": 1240
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=605&quality=85&auto=format&fit=max&s=b7f9bbf02c2fcb829280be8d87267905",
+									"width": 605
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=2023840cbd52db1c95a7442684ccdc20",
+									"width": 1210
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=445&quality=85&auto=format&fit=max&s=9705afdc95ed8932a87feb28c0938838",
+									"width": 445
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=3208cf53c9e4fb16be65f095618adba9",
+									"width": 890
+								}
+							]
+						},
+						{
+							"weighting": "immersive",
+							"srcSet": [
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=1900&quality=85&auto=format&fit=max&s=d0fef15a65bf642756cf937aad0c5622",
+									"width": 1900
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=2dc4d1ec601b4614e42acd8bb84ae746",
+									"width": 3800
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=1300&quality=85&auto=format&fit=max&s=fd736435243956e4bb8e1f7e0fe7168c",
+									"width": 1300
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=3beb14ce10608bc20d4d2c7bbbe5b42f",
+									"width": 2600
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=1140&quality=85&auto=format&fit=max&s=942fbcc04f24ec3ae1c293ba80f092b1",
+									"width": 1140
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=e5d9fa2b27c8f60af71f0a1f52a5db17",
+									"width": 2280
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=980&quality=85&auto=format&fit=max&s=7590235d9e96b587dae8a614777c3248",
+									"width": 980
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=ed91e96fab81780602c88bd8aed68d60",
+									"width": 1960
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=740&quality=85&auto=format&fit=max&s=747b7c4e5569befa35cc7ce6bd6662c8",
+									"width": 740
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=e68d475934b93908f8bfcfd4fc0a2af6",
+									"width": 1480
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=660&quality=85&auto=format&fit=max&s=db034ad60d16a166f891d97a22d82f3a",
+									"width": 660
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=b5a2b6d6b3a445b335b5afcc46171023",
+									"width": 1320
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=480&quality=85&auto=format&fit=max&s=7315117df0c73a890537047f5c2bbe14",
+									"width": 480
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=98e0901d059a3abcb7d65bf7fadf79cd",
+									"width": 960
+								}
+							]
+						}
+					],
+					"data": {
+						"alt": "Ken McCallum delivers the annual director general’s speech at Thames House in London",
+						"caption": "Ken McCallum, the director general of MI5.",
+						"credit": "Photograph: Jonathan Brady/AFP/Getty Images/PA"
+					}
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>“Of course I am frustrated when opportunities to prosecute national security threatening activity are not followed through for what ever reason,” the spy chief said, emphasising he would “never back off from confronting threats to the UK”.</p>",
+					"elementId": "7cf638a0-5838-4709-b92a-9f3b8aa08d9c"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>Chinese state actors, McCallum added, posed a national security threat “every day” and he warned that the number of all individuals under investigation by the spy agency over state-based threats from all countries had risen by 35% in the past year.</p>",
+					"elementId": "6e17fae5-9784-4fee-92ef-8a739b595e83"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>Keir Starmer, the prime minister, reiterated his disappointment that the case was dropped and stressed there was no government involvement in the decision. Downing Street argued that it would have been “frankly absurd” for the prime minister to intervene when he was told a few days in advance that the case was on the brink of collapse.</p>",
+					"elementId": "8b598498-4db1-4fec-926e-60b8948d58a0"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>Chris Philp, the Conservative shadow home secretary, also wrote to Parkinson demanding he release all the correspondence the CPS exchanged with the government about its evidence.</p>",
+					"elementId": "ef459ead-4a9c-4b97-b8a1-394ca393d43f"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>The row concerns the decision to abandon a prosecution under the 1911 Official Secrets Act against Christopher Cash, a former parliamentary researcher for the Conservative MPs Alicia Kearns and Tom Tugendhat, and Christopher Berry, a teacher, on 15 September.</p>",
+					"elementId": "dc3c10b6-ebec-45bf-a8c3-6211ac7705e4"
+				},
+				{
+					"displayCredit": true,
+					"_type": "model.dotcomrendering.pageElements.ImageBlockElement",
+					"role": "inline",
+					"media": {
+						"allImages": [
+							{
+								"index": 0,
+								"fields": {
+									"height": "3000",
+									"width": "5000"
+								},
+								"mediaType": "Image",
+								"mimeType": "image/jpeg",
+								"url": "https://media.guim.co.uk/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/5000.jpg"
+							},
+							{
+								"index": 1,
+								"fields": {
+									"isMaster": "true",
+									"height": "3000",
+									"width": "5000"
+								},
+								"mediaType": "Image",
+								"mimeType": "image/jpeg",
+								"url": "https://media.guim.co.uk/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg"
+							},
+							{
+								"index": 2,
+								"fields": {
+									"height": "1200",
+									"width": "2000"
+								},
+								"mediaType": "Image",
+								"mimeType": "image/jpeg",
+								"url": "https://media.guim.co.uk/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/2000.jpg"
+							},
+							{
+								"index": 3,
+								"fields": {
+									"height": "600",
+									"width": "1000"
+								},
+								"mediaType": "Image",
+								"mimeType": "image/jpeg",
+								"url": "https://media.guim.co.uk/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/1000.jpg"
+							},
+							{
+								"index": 4,
+								"fields": {
+									"height": "300",
+									"width": "500"
+								},
+								"mediaType": "Image",
+								"mimeType": "image/jpeg",
+								"url": "https://media.guim.co.uk/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/500.jpg"
+							},
+							{
+								"index": 5,
+								"fields": {
+									"height": "84",
+									"width": "140"
+								},
+								"mediaType": "Image",
+								"mimeType": "image/jpeg",
+								"url": "https://media.guim.co.uk/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/140.jpg"
+							}
+						]
+					},
+					"elementId": "4f041c59-1eeb-4e5e-8591-8cf0ed846860",
+					"imageSources": [
+						{
+							"weighting": "inline",
+							"srcSet": [
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=620&quality=85&auto=format&fit=max&s=ac72d456bc390423dee711fc4619d4ec",
+									"width": 620
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b9f4864a727c7e9e7926ffdbd6cee4de",
+									"width": 1240
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=605&quality=85&auto=format&fit=max&s=fe5974bc6297d43b05b089b936cf0353",
+									"width": 605
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=585f119d3ecd990f0bd6021f0843f798",
+									"width": 1210
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=445&quality=85&auto=format&fit=max&s=7aee95f5bce7f457960572f04d1d6b81",
+									"width": 445
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=370fb42eac818dbe23745e118cd9fd54",
+									"width": 890
+								}
+							]
+						},
+						{
+							"weighting": "thumbnail",
+							"srcSet": [
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=140&quality=85&auto=format&fit=max&s=143b1bb5b330730f7e93ff779ee617e3",
+									"width": 140
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=fa8e25b9e319dd5258f2f8cf37707a0e",
+									"width": 280
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=120&quality=85&auto=format&fit=max&s=aabde4769c7f2836629e93a74c12fd22",
+									"width": 120
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=4eabf258ca2e1da470ffe708556d922f",
+									"width": 240
+								}
+							]
+						},
+						{
+							"weighting": "supporting",
+							"srcSet": [
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=380&quality=85&auto=format&fit=max&s=2d1549ced741db08a1035ea4454b9146",
+									"width": 380
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=97a5ccfd1535597fe29c878f48c19201",
+									"width": 760
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=17a285f167cd483425be21bf2096348e",
+									"width": 300
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=88005f3674754fff431e716b8c51cd2f",
+									"width": 600
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=620&quality=85&auto=format&fit=max&s=ac72d456bc390423dee711fc4619d4ec",
+									"width": 620
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b9f4864a727c7e9e7926ffdbd6cee4de",
+									"width": 1240
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=605&quality=85&auto=format&fit=max&s=fe5974bc6297d43b05b089b936cf0353",
+									"width": 605
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=585f119d3ecd990f0bd6021f0843f798",
+									"width": 1210
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=445&quality=85&auto=format&fit=max&s=7aee95f5bce7f457960572f04d1d6b81",
+									"width": 445
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=370fb42eac818dbe23745e118cd9fd54",
+									"width": 890
+								}
+							]
+						},
+						{
+							"weighting": "showcase",
+							"srcSet": [
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=860&quality=85&auto=format&fit=max&s=82c4b32730062c41a75a7925bb74e4d2",
+									"width": 860
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=f30c40a7ba89eb2d537aa28ad06a3c4a",
+									"width": 1720
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=780&quality=85&auto=format&fit=max&s=94d8d518d84ef1e05cac79e137ec48b5",
+									"width": 780
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=168ada125167fd9d97b83908df4d2d44",
+									"width": 1560
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=620&quality=85&auto=format&fit=max&s=ac72d456bc390423dee711fc4619d4ec",
+									"width": 620
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b9f4864a727c7e9e7926ffdbd6cee4de",
+									"width": 1240
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=605&quality=85&auto=format&fit=max&s=fe5974bc6297d43b05b089b936cf0353",
+									"width": 605
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=585f119d3ecd990f0bd6021f0843f798",
+									"width": 1210
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=445&quality=85&auto=format&fit=max&s=7aee95f5bce7f457960572f04d1d6b81",
+									"width": 445
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=370fb42eac818dbe23745e118cd9fd54",
+									"width": 890
+								}
+							]
+						},
+						{
+							"weighting": "halfwidth",
+							"srcSet": [
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=620&quality=85&auto=format&fit=max&s=ac72d456bc390423dee711fc4619d4ec",
+									"width": 620
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b9f4864a727c7e9e7926ffdbd6cee4de",
+									"width": 1240
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=605&quality=85&auto=format&fit=max&s=fe5974bc6297d43b05b089b936cf0353",
+									"width": 605
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=585f119d3ecd990f0bd6021f0843f798",
+									"width": 1210
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=445&quality=85&auto=format&fit=max&s=7aee95f5bce7f457960572f04d1d6b81",
+									"width": 445
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=370fb42eac818dbe23745e118cd9fd54",
+									"width": 890
+								}
+							]
+						},
+						{
+							"weighting": "immersive",
+							"srcSet": [
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=1900&quality=85&auto=format&fit=max&s=d639376fed2269c98662f9debfaf8c4e",
+									"width": 1900
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=f6ae053fc046edb7ae9f816a8f2fa41e",
+									"width": 3800
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=1300&quality=85&auto=format&fit=max&s=05d447c538ccf1d83d267885dca889ec",
+									"width": 1300
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=9da045a7e98fa010451334b2ec18565d",
+									"width": 2600
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=1140&quality=85&auto=format&fit=max&s=edbaa41f3dd0228743722b092c04bb0f",
+									"width": 1140
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=0977849db13bf5156a75fe16397376dd",
+									"width": 2280
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=980&quality=85&auto=format&fit=max&s=f4ef5244f83ca27181163e08af460c89",
+									"width": 980
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=14a1790849f14a3cbdbf80e5632169e2",
+									"width": 1960
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=740&quality=85&auto=format&fit=max&s=d359f76f4fe4c4325c791d5f2c39533f",
+									"width": 740
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=b9a0725632aac1b4d1c2053a5ff0d472",
+									"width": 1480
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=660&quality=85&auto=format&fit=max&s=3548be0fa1e5eb2c70a34370603a9ac9",
+									"width": 660
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=ab45f97bcb706ddee0490e996da3c173",
+									"width": 1320
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=480&quality=85&auto=format&fit=max&s=30d569613d8c8a76ff4a374a976b37d1",
+									"width": 480
+								},
+								{
+									"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=f3efced1a958cfefd64eb515ab0264ac",
+									"width": 960
+								}
+							]
+						}
+					],
+					"data": {
+						"alt": "Composite pic of Cash and Berry",
+						"caption": "Christopher Cash, left, and Christopher Berry were the two men accused of spying for Beijing.",
+						"credit": "Photograph: Henry Nicholls/AFP/Getty Images"
+					}
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>The CPS said previously it had dropped the case because the government had not provided sufficient evidence that China represented a “threat to the national security of the UK”, a definition required by the espionage legislation, which has since been repealed.</p>",
+					"elementId": "58b011da-b6d3-4919-92f7-cbb9a0cb67b7"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>On Wednesday, Starmer <a href=\"https://www.theguardian.com/politics/2025/oct/15/no-10-publishes-key-witness-statements-in-china-spy-row\">published the three witness statements</a> submitted by Collins in an attempt to dispel claims that the government had a hand in disrupting the trial.</p>",
+					"elementId": "1c496457-da26-4da0-956e-e2e4c917ae12"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>But the prime minister still faces questions over why he did not step in to stop the case from being dropped over the contents of the government’s evidence. Parkinson told committee chairs at a private meeting on Wednesday that the evidence was just 5% off what was required, having said earlier that prosecutors tried for “many months” to obtain what was needed.</p>",
+					"elementId": "a1453f69-b221-4e27-bf9c-82380175ca5e"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>Ministers have also faced questions over why the final statement submitted by Collins echoed the <a href=\"https://www.theguardian.com/politics/labour\" data-component=\"auto-linked-tag\">Labour</a> government’s policy towards China, despite Starmer’s insistence throughout that the collapsed case relied upon the previous Tory government’s stance. Downing Street said Collins had included the line at his own initiative to provide context about the current government policy.</p>",
+					"elementId": "673feedc-63b9-4de6-adaf-0163ee2e55cf"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>The joint committee on the national security strategy (JCNSS) and the intelligence and security committee (ISC) will both <a href=\"https://www.theguardian.com/law/2025/oct/16/prosecutions-director-must-explain-why-china-spy-case-was-dropped-says-minister\">hold inquiries into the matter</a>, which will have the power to compel ministers, prosecutors and government and intelligence officials to give evidence.</p>",
+					"elementId": "62391333-b019-4faa-84c8-a742d9ccbd86"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>Unlike select committees, the ISC has statutory powers to compel witnesses. Its chair, Lord Beamish, said it had “received the intelligence background behind the case” and now planned to “investigate how that classified material was then used”.</p>",
+					"elementId": "24026397-b282-4623-8d71-06ae1150adab"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>The government is still pushing ahead with its reset in UK-China relations, with several <a href=\"https://www.theguardian.com/politics/2025/oct/16/ministers-plan-high-level-visits-to-china-despite-espionage-trial-outcry\">high-level trips planned this year</a> including another by the national security adviser, Jonathan Powell. Plans are being drawn up for Starmer to make a bilateral visit to China next year.</p>",
+					"elementId": "d3ab45a7-0784-4866-b39a-1a5309e83bbd"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>China said spying allegations contained in the evidence from Collins were false and that it never interferes in other countries’ internal affairs. An embassy spokesperson added: “The so-called ‘witness statements’ released after the CPS dropped the case are rife with unfounded accusations against China. They are nothing but sheer fabrications made out of thin air.”</p>",
+					"elementId": "e751cf99-40a7-4c49-9508-84466bf91d84"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.RichLinkBlockElement",
+					"prefix": "Related: ",
+					"text": "The Guardian view on UK national security: a case of state failure | Editorial",
+					"elementId": "26345d66-7ac3-4f46-b757-10885fc95b2d",
+					"role": "thumbnail",
+					"url": "https://www.theguardian.com/commentisfree/2025/oct/16/the-guardian-view-on-uk-national-security-a-case-of-state-failure"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>A crunch decision over whether to approve controversial proposals for a huge Chinese embassy in east London was delayed for the second time, and will now be taken on or before 10 December.</p>",
+					"elementId": "b7766ecb-32b7-4098-b278-7135db1475d1"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>The head of MI5 signalled he was relatively relaxed about the embassy proposal, which could clear the way for ministers to approve it despite vehement opposition from critics. “MI5 has more than a century of experience of dealing with the national security risks, which do flow from the presence of foreign embassies on British soil,” McCallum said.</p>",
+					"elementId": "b3143c5b-e5c9-415c-b3db-ea65deadc1e3"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>He said MI5 and sister agency GCHQ had the available counter-espionage expertise and were advising ministers on how to handle the development. “You would expect us to give our best professional security advice to government and you would expect us to keep that advice private,” he said.</p>",
+					"elementId": "d582209c-e731-46ed-8705-7779d7e63451"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>However, Matt Western, the chair of the JCNSS, wrote to the government on Monday warning that approving the embassy was “not in the UK’s long-term interest”.</p>",
+					"elementId": "40ecc82b-ac1b-4eb9-bb38-e9821437381d"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>In a letter to Steve Reed, the housing secretary, who is responsible for taking the decision, Western said the proposed location of the outpost posed “eavesdropping risks in peacetime and sabotage risks in a crisis” owing to its proximity to fibre-optic cables, datacentres and telecoms exchanges serving Canary Wharf and the City.</p>",
+					"elementId": "a601d73d-60b8-420d-aae1-d78b69c068e8"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+					"html": "<p>The Guardian revealed last year that China was blocking the much-needed <a href=\"https://www.theguardian.com/world/2024/nov/05/china-blocking-uk-plans-beijing-east-london-mega-embassy-dispute\">redevelopment of Britain’s embassy in Beijing</a> while the fate of its own proposed embassy was being decided. The refurbishment of Britain’s embassy is increasingly a pressing concern in parts of government.</p>",
+					"elementId": "2102a84e-2132-4d31-9c86-70c0f6c2d315"
+				},
+				{
+					"_type": "model.dotcomrendering.pageElements.GuideAtomBlockElement",
+					"img": "https://i.guim.co.uk/img/media/ae475ccca7c94a4565f6b500a485479f08098383/788_0_4000_4000/4000.jpg?width=620&quality=85&auto=format&fit=max&s=45fd162100b331bf1618e364c5c69452",
+					"label": "Quick Guide",
+					"credit": "Illustration: Guardian Design / Rich Cousins",
+					"id": "ea05a110-2f0f-41ea-ba0a-8d9189dbddb7",
+					"elementId": "027b6587-b9ae-4aea-ac79-043c79a30bba",
+					"title": "Contact us about this story",
+					"html": "<p><strong></strong></p><p>The best public interest journalism relies on first-hand accounts from people in the know.</p><p></p><p>If you have something to share on this subject, you can contact us confidentially using the following methods.</p><p><strong>Secure Messaging in the Guardian app</strong></p><p>The Guardian app has a tool to send tips about stories. Messages are end to end encrypted and concealed within the routine activity that every Guardian mobile app performs. This prevents an observer from knowing that you are communicating with us at all, let alone what is being said.</p><p></p><p>If you don't already have the Guardian app, download it (<a href=\"https://apps.apple.com/app/the-guardian-live-world-news/id409128287\">iOS</a>/<a href=\"https://play.google.com/store/apps/details?id=com.guardian\">Android</a>) and go to the menu. Select ‘Secure Messaging’. </p><p><strong>SecureDrop, instant messengers, email, telephone and post</strong></p><p>If you can safely use the Tor network without being observed or monitored, you can send messages and documents to the Guardian via our <a href=\"https://www.theguardian.com/securedrop\">SecureDrop platform</a>.</p><p></p><p>Finally, our guide at <a href=\"https://www.theguardian.com/tips\">theguardian.com/tips</a>&nbsp;lists several ways to contact us securely, and discusses the pros and cons of each.&nbsp;</p>"
+				}
+			],
+			"attributes": {
+				"pinned": false,
+				"keyEvent": false,
+				"summary": false
+			},
+			"blockCreatedOn": 1760640262000,
+			"blockCreatedOnDisplay": "19.44 BST",
+			"blockLastUpdated": 1760687860000,
+			"blockLastUpdatedDisplay": "08.57 BST",
+			"blockFirstPublished": 1760641351000,
+			"blockFirstPublishedDisplay": "20.02 BST",
+			"blockFirstPublishedDisplayNoTimezone": "20.02",
+			"contributors": [],
+			"primaryDateLine": "Thu 16 Oct 2025 19.44 BST",
+			"secondaryDateLine": "Last modified on Fri 17 Oct 2025 08.57 BST"
+		}
+	],
+	"author": {
+		"byline": "Eleni Courea and Dan Sabbagh"
+	},
+	"byline": "Eleni Courea and Dan Sabbagh",
+	"webPublicationDate": "2025-10-16T18:44:22.000Z",
+	"webPublicationDateDeprecated": "2025-10-16T18:44:22.000Z",
+	"webPublicationDateDisplay": "Thu 16 Oct 2025 19.44 BST",
+	"webPublicationSecondaryDateDisplay": "Last modified on Fri 17 Oct 2025 08.57 BST",
+	"editionLongForm": "UK edition",
+	"editionId": "UK",
+	"pageId": "world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse",
+	"canonicalUrl": "https://www.theguardian.com/world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse",
+	"format": {
+		"design": "ArticleDesign",
+		"theme": "NewsPillar",
+		"display": "StandardDisplay"
+	},
+	"designType": "Article",
+	"tags": [
+		{
+			"id": "world/espionage",
+			"type": "Keyword",
+			"title": "Espionage"
+		},
+		{
+			"id": "world/china",
+			"type": "Keyword",
+			"title": "China"
+		},
+		{
+			"id": "uk/uk",
+			"type": "Keyword",
+			"title": "UK news"
+		},
+		{
+			"id": "politics/keir-starmer",
+			"type": "Keyword",
+			"title": "Keir Starmer"
+		},
+		{
+			"id": "law/crown-prosecution-service",
+			"type": "Keyword",
+			"title": "Crown Prosecution Service"
+		},
+		{
+			"id": "politics/jonathan-powell",
+			"type": "Keyword",
+			"title": "Jonathan Powell"
+		},
+		{
+			"id": "politics/chris-philp",
+			"type": "Keyword",
+			"title": "Chris Philp"
+		},
+		{
+			"id": "uk/mi5",
+			"type": "Keyword",
+			"title": "MI5"
+		},
+		{
+			"id": "politics/labour",
+			"type": "Keyword",
+			"title": "Labour"
+		},
+		{
+			"id": "politics/politics",
+			"type": "Keyword",
+			"title": "Politics"
+		},
+		{
+			"id": "law/law",
+			"type": "Keyword",
+			"title": "Law"
+		},
+		{
+			"id": "uk/uksecurity",
+			"type": "Keyword",
+			"title": "UK security and counter-terrorism"
+		},
+		{
+			"id": "type/article",
+			"type": "Type",
+			"title": "Article"
+		},
+		{
+			"id": "tone/news",
+			"type": "Tone",
+			"title": "News"
+		},
+		{
+			"id": "profile/eleni-courea",
+			"type": "Contributor",
+			"title": "Eleni Courea"
+		},
+		{
+			"id": "profile/dan-sabbagh",
+			"type": "Contributor",
+			"title": "Dan Sabbagh",
+			"bylineImageUrl": "https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/4/17/1397749330599/DanSabbagh.jpg?width=300&quality=85&auto=format&fit=max&s=f641045dc110c3bb8e92127b230af380",
+			"bylineLargeImageUrl": "https://i.guim.co.uk/img/uploads/2017/10/06/Dan-Sabbagh,-L.png?width=300&quality=85&auto=format&fit=max&s=cec99c5da174842615d73509b87e8008"
+		},
+		{
+			"id": "publication/theguardian",
+			"type": "Publication",
+			"title": "The Guardian"
+		},
+		{
+			"id": "theguardian/mainsection",
+			"type": "NewspaperBook",
+			"title": "Main section"
+		},
+		{
+			"id": "theguardian/mainsection/uknews",
+			"type": "NewspaperBookSection",
+			"title": "UK news"
+		},
+		{
+			"id": "tracking/commissioningdesk/uk-home-news",
+			"type": "Tracking",
+			"title": "UK Home News"
+		}
+	],
+	"pillar": "news",
+	"isLegacyInteractive": false,
+	"isImmersive": false,
+	"sectionLabel": "Espionage",
+	"sectionUrl": "world/espionage",
+	"sectionName": "world",
+	"subMetaSectionLinks": [
+		{
+			"url": "/world/espionage",
+			"title": "Espionage"
+		}
+	],
+	"subMetaKeywordLinks": [
+		{
+			"url": "/world/china",
+			"title": "China"
+		},
+		{
+			"url": "/politics/keir-starmer",
+			"title": "Keir Starmer"
+		},
+		{
+			"url": "/law/crown-prosecution-service",
+			"title": "Crown Prosecution Service"
+		},
+		{
+			"url": "/politics/jonathan-powell",
+			"title": "Jonathan Powell"
+		},
+		{
+			"url": "/politics/chris-philp",
+			"title": "Chris Philp"
+		},
+		{
+			"url": "/uk/mi5",
+			"title": "MI5"
+		},
+		{
+			"url": "/tone/news",
+			"title": "news"
+		}
+	],
+	"shouldHideAds": false,
+	"isAdFreeUser": false,
+	"webURL": "https://www.theguardian.com/world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse",
+	"linkedData": [
+		{
+			"@type": "NewsArticle",
+			"@context": "https://schema.org",
+			"@id": "https://www.theguardian.com/world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse",
+			"publisher": {
+				"@type": "Organization",
+				"@context": "https://schema.org",
+				"@id": "https://www.theguardian.com#publisher",
+				"name": "The Guardian",
+				"url": "https://www.theguardian.com/",
+				"logo": {
+					"@type": "ImageObject",
+					"url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
+					"width": 190,
+					"height": 60
+				},
+				"sameAs": [
+					"https://www.facebook.com/theguardian",
+					"https://twitter.com/guardian",
+					"https://www.youtube.com/user/TheGuardian"
+				]
+			},
+			"isAccessibleForFree": true,
+			"isPartOf": {
+				"@type": ["CreativeWork", "Product"],
+				"name": "The Guardian",
+				"productID": "theguardian.com:basic"
+			},
+			"image": [
+				"https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=9f7f56c776de8782f1cf15db3506a8da",
+				"https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=bc5831d9303e103a7c5268d31293ba74",
+				"https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=b228eae9ab7ec0890d470cd5e52a1de7",
+				"https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=1200&quality=85&auto=format&fit=max&s=87ab54a524b40849f80066f5627c2098"
+			],
+			"author": [
+				{
+					"@type": "Person",
+					"name": "Eleni Courea",
+					"sameAs": "https://www.theguardian.com/profile/eleni-courea"
+				},
+				{
+					"@type": "Person",
+					"name": "Dan Sabbagh",
+					"sameAs": "https://www.theguardian.com/profile/dan-sabbagh"
+				}
+			],
+			"datePublished": "2025-10-16T18:44:22.000Z",
+			"headline": "Head of CPS faces cross-party pressure to explain China spy trial collapse",
+			"dateModified": "2025-10-17T07:57:41.000Z",
+			"mainEntityOfPage": "https://www.theguardian.com/world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse"
+		},
+		{
+			"@type": "WebPage",
+			"@context": "https://schema.org",
+			"@id": "https://www.theguardian.com/world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse",
+			"potentialAction": {
+				"@type": "ViewAction",
+				"target": "android-app://com.guardian/https/www.theguardian.com/world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse"
+			}
+		}
+	],
+	"openGraphData": {
+		"og:url": "https://www.theguardian.com/world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse",
+		"article:author": "https://www.theguardian.com/profile/eleni-courea,https://www.theguardian.com/profile/dan-sabbagh",
+		"og:image:width": "1200",
+		"og:image": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=9f7f56c776de8782f1cf15db3506a8da",
+		"al:ios:url": "gnmguardian://world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse?contenttype=Article&source=applinks",
+		"article:publisher": "https://www.facebook.com/theguardian",
+		"og:title": "Head of CPS faces cross-party pressure to explain China spy trial collapse",
+		"fb:app_id": "180444840287",
+		"article:modified_time": "2025-10-17T07:57:41.000Z",
+		"og:image:height": "960",
+		"og:description": "Stephen Parkinson called on to give ‘fuller explanation’ as MI5 expresses frustration over charges being dropped",
+		"og:type": "article",
+		"al:ios:app_store_id": "409128287",
+		"article:section": "World news",
+		"article:published_time": "2025-10-16T18:44:22.000Z",
+		"article:tag": "Espionage,China,UK news,Keir Starmer,Crown Prosecution Service,Jonathan Powell,Chris Philp,MI5,Labour,Politics,Law,UK security and counter-terrorism",
+		"al:ios:app_name": "The Guardian",
+		"og:site_name": "the Guardian"
+	},
+	"twitterData": {
+		"twitter:app:id:iphone": "409128287",
+		"twitter:app:name:googleplay": "The Guardian",
+		"twitter:app:name:ipad": "The Guardian",
+		"twitter:card": "summary_large_image",
+		"twitter:app:name:iphone": "The Guardian",
+		"twitter:app:id:ipad": "409128287",
+		"twitter:app:id:googleplay": "com.guardian",
+		"twitter:app:url:googleplay": "guardian://www.theguardian.com/world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse",
+		"twitter:app:url:iphone": "gnmguardian://world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse?contenttype=Article&source=twitter",
+		"twitter:image": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=0b3000a086c48699e09bd317ac89b63a",
+		"twitter:site": "@guardian",
+		"twitter:app:url:ipad": "gnmguardian://world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse?contenttype=Article&source=twitter"
+	},
+	"config": {
+		"switches": {
+			"prebidCriteo": true,
+			"wholePictureLogo": true,
+			"externalVideoEmbeds": true,
+			"personaliseSignInGateAfterCheckout": true,
+			"abSignInGateMainVariant": true,
+			"lightbox": true,
+			"googleOneTapSwitch": false,
+			"googleOneTap": true,
+			"prebidAppnexusUkRow": true,
+			"prebidMagnite": true,
+			"commercialMetrics": true,
+			"prebidTrustx": true,
+			"scAdFreeBanner": false,
+			"adaptiveSite": true,
+			"prebidPermutiveAudience": true,
+			"compareVariantDecision": false,
+			"manyNewsletterVisibleRecaptcha": true,
+			"enableSentryReporting": true,
+			"lazyLoadContainers": true,
+			"ampArticleSwitch": false,
+			"remarketing": true,
+			"articleEndSlot": true,
+			"keyEventsCarousel": true,
+			"allBoosts": true,
+			"registerWithPhone": false,
+			"darkModeWeb": true,
+			"targeting": true,
+			"remoteHeader": true,
+			"ampPrebidOzone": false,
+			"slotBodyEnd": true,
+			"emailInlineInFooter": true,
+			"showNewPrivacyWordingOnEmailSignupEmbeds": true,
+			"prebidAnalytics": true,
+			"extendedMostPopular": true,
+			"ampContentAbTesting": false,
+			"imrWorldwide": true,
+			"acast": true,
+			"twitterUwt": true,
+			"abAuxiaSignInGate": true,
+			"prebidAppnexusInvcode": true,
+			"ampPrebidPubmatic": false,
+			"a9HeaderBidding": true,
+			"prebidAppnexus": true,
+			"enableDiscussionSwitch": true,
+			"prebidXaxis": true,
+			"stickyVideos": true,
+			"discussionAllPageSize": true,
+			"abCompareClientTestWithNewFramework": true,
+			"prebidUserSync": true,
+			"audioOnwardJourneySwitch": true,
+			"brazeTaylorReport": false,
+			"callouts": true,
+			"sentinelLogger": true,
+			"geoMostPopular": true,
+			"consentOrPayEurope": true,
+			"weAreHiring": false,
+			"relatedContent": true,
+			"thirdPartyEmbedTracking": true,
+			"prebidOzone": true,
+			"ampLiveblogSwitch": false,
+			"ampAmazon": false,
+			"mostViewedFronts": true,
+			"labsRedesign": true,
+			"optOutAdvertising": true,
+			"abSignInGateMainControl": true,
+			"googleSearch": true,
+			"brazeSwitch": true,
+			"prebidKargo": true,
+			"disableChildDirected": true,
+			"abAdmiralAdblockRecovery": true,
+			"consentManagement": true,
+			"idProfileNavigation": true,
+			"confiantAdVerification": true,
+			"discussionAllowAnonymousRecommendsSwitch": false,
+			"consentOrPayEuropeInternalTest": true,
+			"absoluteServerTimes": false,
+			"permutive": true,
+			"comscore": true,
+			"ampPrebidCriteo": false,
+			"prebidTheTradeDesk": true,
+			"newsletterOnwards": false,
+			"youtubeIma": true,
+			"webFonts": true,
+			"liveBlogTopSponsorship": true,
+			"lineItemJobs": true,
+			"ophan": true,
+			"crosswordSvgThumbnails": true,
+			"prebidTriplelift": true,
+			"prebidPubmatic": true,
+			"serverShareCounts": false,
+			"autoRefresh": true,
+			"enhanceTweets": true,
+			"prebidIndexExchange": true,
+			"prebidOpenx": true,
+			"prebidHeaderBidding": true,
+			"idCookieRefresh": true,
+			"discussionPageSize": true,
+			"smartAppBanner": false,
+			"historyTags": true,
+			"guardianLabsRedesign": false,
+			"brazeContentCards": true,
+			"remoteBanner": true,
+			"emailSignupRecaptcha": true,
+			"prebidSmart": true,
+			"shouldLoadGoogletag": true,
+			"inizio": true
+		},
+		"abTests": {},
+		"serverSideABTests": {},
+		"googletagUrl": "//securepubads.g.doubleclick.net/tag/js/gpt.js",
+		"stage": "PROD",
+		"frontendAssetsFullURL": "https://assets.guim.co.uk/",
+		"ampIframeUrl": "https://assets.guim.co.uk/data/vendor/2533d5cb94302889e6a8f1b24b5329e7/amp-iframe.html",
+		"tones": "News",
+		"facebookIaAdUnitRoot": "facebook-instant-articles",
+		"avatarApiUrl": "https://avatar.theguardian.com",
+		"isSplash": false,
+		"isColumn": false,
+		"membershipUrl": "https://membership.theguardian.com",
+		"headline": "Head of CPS faces cross-party pressure to explain China spy trial collapse",
+		"isImmersive": false,
+		"author": "Eleni Courea,Dan Sabbagh",
+		"toneIds": "tone/news",
+		"ipsosTag": "world",
+		"isProd": true,
+		"membershipAccess": "",
+		"allowUserGeneratedContent": false,
+		"commissioningDesks": "uk-home-news",
+		"webPublicationDate": 1760640262000,
+		"forecastsapiurl": "/weatherapi/forecast",
+		"supportUrl": "https://support.theguardian.com",
+		"isNumberedList": false,
+		"commercialBundleUrl": "https://assets.guim.co.uk/commercial/f628e219f189e32da88d/graun.standalone.commercial.js",
+		"idOAuthUrl": "https://oauth.theguardian.com",
+		"webTitle": "Head of CPS faces cross-party pressure to explain China spy trial collapse",
+		"isPhotoEssay": false,
+		"idWebAppUrl": "https://oauth.theguardian.com",
+		"a9PublisherId": "3722",
+		"isFront": false,
+		"inBodyInternalLinkCount": 10,
+		"googleSearchUrl": "//www.google.co.uk/cse/cse.js",
+		"inBodyExternalLinkCount": 2,
+		"showRelatedContent": true,
+		"lightboxImages": {
+			"id": "world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse",
+			"headline": "Head of CPS faces cross-party pressure to explain China spy trial collapse",
+			"shouldHideAdverts": false,
+			"standfirst": "<p>Stephen Parkinson called on to give ‘fuller explanation’ as MI5 expresses frustration over charges being dropped</p>",
+			"images": [
+				{
+					"caption": "Parkinson, the director of public prosecutions, is expected to be brought before MPs to explain why the CPS dropped the charges.",
+					"credit": "Photograph: Stefan Rousseau/PA",
+					"displayCredit": true,
+					"src": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=700&quality=85&auto=format&fit=max&s=7f90ef70b288b80bb775989a8301e5e4",
+					"srcsets": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=1920&quality=85&auto=format&fit=max&s=c0b7eb9d2c812544b31d32c01cf19744 1920w, https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=1225&quality=85&auto=format&fit=max&s=155091ef489a4e8c8a98bd60d635c4c1 1225w, https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=1065&quality=85&auto=format&fit=max&s=e54d00aac9320ee13f97c25d6c97f626 1065w, https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=965&quality=85&auto=format&fit=max&s=33c39aa6cccd14920985ee326e77bbac 965w, https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=725&quality=85&auto=format&fit=max&s=cb7f31ffdb213dbc4e34e7a966333244 725w, https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=645&quality=85&auto=format&fit=max&s=c50ace943738012179e13a53081ab467 645w, https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/master/4226.jpg?width=465&quality=85&auto=format&fit=max&s=2a5dbbeea1062b8fc484fb3ae2923db7 465w",
+					"sizes": "(min-width: 1300px) 1920px, (min-width: 1140px) 1225px, (min-width: 980px) 1065px, (min-width: 740px) 965px, (min-width: 660px) 725px, (min-width: 480px) 645px, 465px",
+					"ratio": 1.2499260573794735,
+					"role": "None",
+					"parentContentId": "world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse",
+					"id": "world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse"
+				},
+				{
+					"caption": "Ken McCallum, the director general of MI5.",
+					"credit": "Photograph: Jonathan Brady/AFP/Getty Images/PA",
+					"displayCredit": true,
+					"src": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=700&quality=85&auto=format&fit=max&s=239db556aa775487b4fbcd4341f7212f",
+					"srcsets": "https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=1920&quality=85&auto=format&fit=max&s=5fa9c852806011c3e935c3a12307a76a 1920w, https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=1225&quality=85&auto=format&fit=max&s=add31f17bf48b3b18b8c791107f90cb0 1225w, https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=1065&quality=85&auto=format&fit=max&s=02273f21703388a00ab11fd3fafefe71 1065w, https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=965&quality=85&auto=format&fit=max&s=6b38bea1024766505d123615e0c05a70 965w, https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=725&quality=85&auto=format&fit=max&s=b30bf8f06d5a4e80a9049e4b803c09ef 725w, https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=645&quality=85&auto=format&fit=max&s=eb875e44eb832f9dfea2dde8ce70f071 645w, https://i.guim.co.uk/img/media/2a0c614245eb478c1d1d6a5b7d5009c0034eb2de/0_0_5000_3349/master/5000.jpg?width=465&quality=85&auto=format&fit=max&s=a091a9c606271e04f235451dd1c7f9ca 465w",
+					"sizes": "(min-width: 1300px) 1920px, (min-width: 1140px) 1225px, (min-width: 980px) 1065px, (min-width: 740px) 965px, (min-width: 660px) 725px, (min-width: 480px) 645px, 465px",
+					"ratio": 1.492982979994028,
+					"role": "None",
+					"parentContentId": "world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse",
+					"id": "world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse"
+				},
+				{
+					"caption": "Christopher Cash, left, and Christopher Berry were the two men accused of spying for Beijing.",
+					"credit": "Photograph: Henry Nicholls/AFP/Getty Images",
+					"displayCredit": true,
+					"src": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=700&quality=85&auto=format&fit=max&s=ccf2dbe8aed339a37e85657df60d2c77",
+					"srcsets": "https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=1920&quality=85&auto=format&fit=max&s=379143d7ac87e1f49ef31349c300bbf0 1920w, https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=1225&quality=85&auto=format&fit=max&s=ad032dfbe66172d72518b4d0f143ba70 1225w, https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=1065&quality=85&auto=format&fit=max&s=eb3bc4ca5aee8686a7cdbc12ea1f8253 1065w, https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=965&quality=85&auto=format&fit=max&s=f3c706973fb661953d4f7d376ca46fb3 965w, https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=725&quality=85&auto=format&fit=max&s=1dd9de3770c1005b5e7510d2dfd3c0f4 725w, https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=645&quality=85&auto=format&fit=max&s=bd8a826bb371d3466f6b60a2f9c6ce80 645w, https://i.guim.co.uk/img/media/9f980a6b0e3a04d645f5728feb2a5fbfbf8bb34a/0_0_5000_3000/master/5000.jpg?width=465&quality=85&auto=format&fit=max&s=ea431b838cdbbd53126deb19848d8df7 465w",
+					"sizes": "(min-width: 1300px) 1920px, (min-width: 1140px) 1225px, (min-width: 980px) 1065px, (min-width: 740px) 965px, (min-width: 660px) 725px, (min-width: 480px) 645px, 465px",
+					"ratio": 1.6666666666666667,
+					"role": "None",
+					"parentContentId": "world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse",
+					"id": "world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse"
+				}
+			]
+		},
+		"googleSearchId": "007466294097402385199:m2ealvuxh1i",
+		"shouldHideReaderRevenue": false,
+		"idUrl": "https://profile.theguardian.com",
+		"hasSurveyAd": false,
+		"omnitureAmpAccount": "guardiangu-thirdpartyapps",
+		"dfpAdUnitRoot": "theguardian.com",
+		"trackingNames": "UK Home News",
+		"host": "https://www.theguardian.com",
+		"blogIds": "",
+		"sectionName": "World news",
+		"hasMultipleVideosInPage": false,
+		"hasShowcaseMainElement": false,
+		"googleRecaptchaSiteKey": "6Le7mFsrAAAAAD07aRCTHZe9u0EfvOiNe8Y0DMMV",
+		"fbAppId": "180444840287",
+		"isContent": true,
+		"shortUrlId": "/p/x3enf7",
+		"dfpAccountId": "59666047",
+		"plistaPublicApiKey": "462925f4f131001fd974bebe",
+		"wordCount": 1277,
+		"hasLiveBlogTopAd": false,
+		"dcrSentryDsn": "https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847",
+		"cardStyle": "news",
+		"adUnit": "/59666047/theguardian.com/world/article/ng",
+		"discussionApiUrl": "https://discussion.theguardian.com/discussion-api",
+		"isSensitive": false,
+		"ophanEmbedJsUrl": "//j.ophan.co.uk/ophan.embed",
+		"edition": "UK",
+		"frontendSentryDsn": "https://344003a8d11c41d8800fbad8383fdc50@o14302.ingest.us.sentry.io/35463",
+		"brazeApiKey": "7f28c639-8bda-48ff-a3f6-24345abfc07c",
+		"blogs": "",
+		"discussionApiClientHeader": "nextgen",
+		"section": "world",
+		"userAttributesApiUrl": "https://members-data-api.theguardian.com/user-attributes",
+		"videoDuration": 0,
+		"dfpHost": "pubads.g.doubleclick.net",
+		"weatherapiurl": "/weatherapi/city",
+		"sentryPublicApiKey": "344003a8d11c41d8800fbad8383fdc50",
+		"shortUrl": "https://www.theguardian.com/p/x3enf7",
+		"thumbnail": "https://i.guim.co.uk/img/media/ce5132e849de9958cec0b6abd1b689ca391b4534/60_18_4226_3381/500.jpg?quality=85&auto=format&fit=max&s=4984bea3f02c2ddb73c5892cabdfa0e9",
+		"pillar": "News",
+		"pageId": "world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse",
+		"references": [
+			{
+				"rich-link": "https://www.theguardian.com/info/2015/dec/08/daily-email-uk"
+			}
+		],
+		"beaconUrl": "//phar.gu-web.net",
+		"commentable": false,
+		"discussionD2Uid": "zHoBy6HNKsk",
+		"ophanJsUrl": "//j.ophan.co.uk/ophan.ng",
+		"contributorBio": "",
+		"keywordIds": "world/espionage,world/china,uk/uk,politics/keir-starmer,law/crown-prosecution-service,politics/jonathan-powell,politics/chris-philp,uk/mi5,politics/labour,politics/politics,law/law,uk/uksecurity",
+		"googleRecaptchaSiteKeyVisible": "6LcTl8srAAAAAKwyUhd4nJHHe2-hCrPKcWnawY0F",
+		"contentType": "Article",
+		"isDev": false,
+		"isHosted": false,
+		"isAdFree": false,
+		"stripePublicToken": "pk_live_2O6zPMHXNs2AGea4bAmq5R7Z",
+		"omnitureAccount": "guardiangu-network",
+		"locationapiurl": "/weatherapi/locations?query=",
+		"authorIds": "profile/eleni-courea,profile/dan-sabbagh",
+		"isPaidContent": false,
+		"hasYouTubeAtom": false,
+		"externalEmbedHost": "https://embed.theguardian.com",
+		"thirdPartyAppsAccount": "guardiangu-thirdpartyapps",
+		"ajaxUrl": "https://api.nextgen.guardianapps.co.uk",
+		"byline": "Eleni Courea and Dan Sabbagh",
+		"keywords": "Espionage,China,UK news,Keir Starmer,Crown Prosecution Service,Jonathan Powell,Chris Philp,MI5,Labour,Politics,Law,UK security and counter-terrorism",
+		"contentId": "world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse",
+		"nonKeywordTagIds": "type/article,tone/news,profile/eleni-courea,profile/dan-sabbagh,publication/theguardian,theguardian/mainsection,theguardian/mainsection/uknews,tracking/commissioningdesk/uk-home-news",
+		"mobileAppsAdUnitRoot": "beta-guardian-app",
+		"hasPageSkin": false,
+		"requiresMembershipAccess": false,
+		"revisionNumber": "DEV",
+		"optimizeEpicUrl": "https://support.theguardian.com/epic/control/index.html",
+		"assetsPath": "https://assets.guim.co.uk/",
+		"mmaUrl": "https://manage.theguardian.com",
+		"isLive": false,
+		"richLink": "/info/2015/dec/08/daily-email-uk",
+		"campaigns": [],
+		"isLiveBlog": false,
+		"pageCode": "16235971",
+		"avatarImagesUrl": "https://avatar.guim.co.uk",
+		"publication": "The Guardian",
+		"sentryHost": "app.getsentry.com/35463",
+		"buildNumber": "DEV",
+		"atomTypes": {
+			"review": false,
+			"guide": true,
+			"audio": false,
+			"explainer": false,
+			"interactive": false,
+			"profile": false,
+			"chart": false,
+			"quizz": false,
+			"commonsdivision": false,
+			"timeline": false,
+			"media": false,
+			"qanda": false
+		},
+		"userBenefitsApiUrl": "https://user-benefits.guardianapis.com/benefits/me",
+		"sharedAdTargeting": {
+			"ct": "article",
+			"su": ["5"],
+			"edition": "uk",
+			"tn": ["news"],
+			"p": "ng",
+			"k": [
+				"jonathan-powell",
+				"china",
+				"law",
+				"chris-philp",
+				"uksecurity",
+				"keir-starmer",
+				"mi5",
+				"politics",
+				"espionage",
+				"uk/uk",
+				"labour",
+				"crown-prosecution-service"
+			],
+			"sh": "https://www.theguardian.com/p/x3enf7",
+			"co": ["dan-sabbagh", "eleni-courea"],
+			"url": "/world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse"
+		},
+		"onwardWebSocket": "ws://api.nextgen.guardianapps.co.uk/recently-published",
+		"productionOffice": "Uk",
+		"shouldHideAdverts": false,
+		"idApiUrl": "https://idapi.theguardian.com",
+		"pbIndexSites": [
+			{
+				"bp": "D",
+				"id": 204985
+			},
+			{
+				"bp": "M",
+				"id": 213473
+			},
+			{
+				"bp": "T",
+				"id": 215408
+			}
+		],
+		"googletagJsUrl": "//securepubads.g.doubleclick.net/tag/js/gpt.js",
+		"atoms": ["ea05a110-2f0f-41ea-ba0a-8d9189dbddb7"],
+		"calloutsUrl": "https://callouts.guardianapis.com/formstack-campaign/submit",
+		"isPreview": false
+	},
+	"guardianBaseURL": "https://www.theguardian.com",
+	"contentType": "Article",
+	"hasRelated": true,
+	"hasStoryPackage": true,
+	"storyPackage": {
+		"heading": "More on this story",
+		"trails": [
+			{
+				"url": "https://www.theguardian.com/politics/2025/oct/16/china-spying-case-dream-job-turns-into-nightmare-for-dpp-stephen-parkinson",
+				"linkText": "China spying case: dream job turns into nightmare for DPP Stephen Parkinson",
+				"showByline": false,
+				"byline": "Haroon Siddique and Eleni Courea",
+				"masterImage": "https://media.guim.co.uk/89b5115ff3dcbd2ea5f9a91d70b0b53658e27708/500_0_5000_4000/master/5000.jpg",
+				"image": "https://i.guim.co.uk/img/media/89b5115ff3dcbd2ea5f9a91d70b0b53658e27708/500_0_5000_4000/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=47601685b6e66e1db1eab4b964a15f04",
+				"carouselImages": {
+					"300": "https://i.guim.co.uk/img/media/89b5115ff3dcbd2ea5f9a91d70b0b53658e27708/500_0_5000_4000/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=47601685b6e66e1db1eab4b964a15f04",
+					"460": "https://i.guim.co.uk/img/media/89b5115ff3dcbd2ea5f9a91d70b0b53658e27708/500_0_5000_4000/master/5000.jpg?width=460&quality=85&auto=format&fit=max&s=ba687047cc28b46f18c3953b0b60a0b3"
+				},
+				"isLiveBlog": false,
+				"pillar": "news",
+				"designType": "Feature",
+				"format": {
+					"design": "FeatureDesign",
+					"theme": "NewsPillar",
+					"display": "StandardDisplay"
+				},
+				"webPublicationDate": "2025-10-16T16:14:50.000Z",
+				"headline": "China spying case: dream job turns into nightmare for DPP Stephen Parkinson",
+				"shortUrl": "https://www.theguardian.com/p/x3emxn",
+				"discussion": {
+					"isCommentable": false,
+					"isClosedForComments": true,
+					"discussionId": "/p/x3emxn"
+				},
+				"trailText": "Having long desired to lead the CPS, Parkinson now finds himself at the heart of a political row over the collapsed case"
+			},
+			{
+				"url": "https://www.theguardian.com/politics/2025/oct/16/ministers-plan-high-level-visits-to-china-despite-espionage-trial-outcry",
+				"linkText": "Ministers plan high-level visits to China despite espionage trial outcry",
+				"showByline": false,
+				"byline": "Eleni Courea Political correspondent",
+				"masterImage": "https://media.guim.co.uk/b1f3c5cd082b1b0bf8af9e84880aa7d9f9670596/271_0_2560_2048/master/2560.jpg",
+				"image": "https://i.guim.co.uk/img/media/b1f3c5cd082b1b0bf8af9e84880aa7d9f9670596/271_0_2560_2048/master/2560.jpg?width=300&quality=85&auto=format&fit=max&s=644ac73d4e64bfdca725ec6db2e98819",
+				"carouselImages": {
+					"300": "https://i.guim.co.uk/img/media/b1f3c5cd082b1b0bf8af9e84880aa7d9f9670596/271_0_2560_2048/master/2560.jpg?width=300&quality=85&auto=format&fit=max&s=644ac73d4e64bfdca725ec6db2e98819",
+					"460": "https://i.guim.co.uk/img/media/b1f3c5cd082b1b0bf8af9e84880aa7d9f9670596/271_0_2560_2048/master/2560.jpg?width=460&quality=85&auto=format&fit=max&s=8054bd2e7a57d0fde6240c3d5ead6adb"
+				},
+				"isLiveBlog": false,
+				"pillar": "news",
+				"designType": "Article",
+				"format": {
+					"design": "ArticleDesign",
+					"theme": "NewsPillar",
+					"display": "StandardDisplay"
+				},
+				"webPublicationDate": "2025-10-16T17:10:22.000Z",
+				"headline": "Ministers plan high-level visits to China despite espionage trial outcry",
+				"shortUrl": "https://www.theguardian.com/p/x3env6",
+				"discussion": {
+					"isCommentable": false,
+					"isClosedForComments": true,
+					"discussionId": "/p/x3env6"
+				},
+				"trailText": "National security adviser, education secretary and science minister to visit before end of year as part of policy to reset relations"
+			},
+			{
+				"url": "https://www.theguardian.com/politics/2025/oct/16/china-spy-case-row-shows-why-most-mps-prefer-conspiracy-theory-over-cock-up",
+				"linkText": "Why MPs prefer conspiracy theory over cock-up in China spy case row | John Crace",
+				"showByline": true,
+				"byline": "John Crace",
+				"masterImage": "https://media.guim.co.uk/0aafddba6dcd8e789dd15dc96c3beee6afdd963f/338_0_1349_1080/master/1349.jpg",
+				"image": "https://i.guim.co.uk/img/media/0aafddba6dcd8e789dd15dc96c3beee6afdd963f/338_0_1349_1080/master/1349.jpg?width=300&quality=85&auto=format&fit=max&s=b3067141505ccbd498709beea5e1d30c",
+				"carouselImages": {
+					"300": "https://i.guim.co.uk/img/media/0aafddba6dcd8e789dd15dc96c3beee6afdd963f/338_0_1349_1080/master/1349.jpg?width=300&quality=85&auto=format&fit=max&s=b3067141505ccbd498709beea5e1d30c",
+					"460": "https://i.guim.co.uk/img/media/0aafddba6dcd8e789dd15dc96c3beee6afdd963f/338_0_1349_1080/master/1349.jpg?width=460&quality=85&auto=format&fit=max&s=3175a89053dc0924d4b8d202083b2043"
+				},
+				"isLiveBlog": false,
+				"pillar": "news",
+				"designType": "Comment",
+				"format": {
+					"design": "CommentDesign",
+					"theme": "OpinionPillar",
+					"display": "StandardDisplay"
+				},
+				"webPublicationDate": "2025-10-16T14:48:05.000Z",
+				"headline": "China spy case row shows why most MPs prefer conspiracy theory over cock-up",
+				"shortUrl": "https://www.theguardian.com/p/x3emt8",
+				"discussion": {
+					"isCommentable": true,
+					"isClosedForComments": true,
+					"discussionId": "/p/x3emt8"
+				},
+				"trailText": "The facts had changed so MPs simply amended their conspiracy theories to fit the new evidence"
+			},
+			{
+				"url": "https://www.theguardian.com/world/2025/oct/16/china-spy-row-what-do-the-witness-statements-say-and-what-is-their-significance",
+				"linkText": "China spy row: what do the witness statements say and what is their significance?",
+				"showByline": false,
+				"byline": "Peter Walker Senior political correspondent",
+				"masterImage": "https://media.guim.co.uk/2beb20d0771107fb3ef81a4fe08f1375fa71a30c/192_0_1499_1199/master/1499.jpg",
+				"image": "https://i.guim.co.uk/img/media/2beb20d0771107fb3ef81a4fe08f1375fa71a30c/192_0_1499_1199/master/1499.jpg?width=300&quality=85&auto=format&fit=max&s=375956f8766b8f3353133ee326ce155e",
+				"carouselImages": {
+					"300": "https://i.guim.co.uk/img/media/2beb20d0771107fb3ef81a4fe08f1375fa71a30c/192_0_1499_1199/master/1499.jpg?width=300&quality=85&auto=format&fit=max&s=375956f8766b8f3353133ee326ce155e",
+					"460": "https://i.guim.co.uk/img/media/2beb20d0771107fb3ef81a4fe08f1375fa71a30c/192_0_1499_1199/master/1499.jpg?width=460&quality=85&auto=format&fit=max&s=df8fe88ee398b15ae00f1f3c02e44649"
+				},
+				"isLiveBlog": false,
+				"pillar": "news",
+				"designType": "Article",
+				"format": {
+					"design": "ExplainerDesign",
+					"theme": "NewsPillar",
+					"display": "StandardDisplay"
+				},
+				"webPublicationDate": "2025-10-16T11:18:45.000Z",
+				"headline": "China spy row: what do the witness statements say and what is their significance?",
+				"shortUrl": "https://www.theguardian.com/p/x3eyaz",
+				"discussion": {
+					"isCommentable": false,
+					"isClosedForComments": true,
+					"discussionId": "/p/x3eyaz"
+				},
+				"trailText": "Statements are at heart of row about who, if anyone, was to blame for collapse of case against two men accused of spying"
+			},
+			{
+				"url": "https://www.theguardian.com/law/2025/oct/16/prosecutions-director-must-explain-why-china-spy-case-was-dropped-says-minister",
+				"linkText": "MPs to hold inquiry into collapsed China spy case after No 10 publishes key evidence",
+				"showByline": false,
+				"byline": "Eleni Courea Political correspondent",
+				"masterImage": "https://media.guim.co.uk/d531e71f36df851b9482ec86e79bd6053562df55/350_0_4118_3294/master/4118.jpg",
+				"image": "https://i.guim.co.uk/img/media/d531e71f36df851b9482ec86e79bd6053562df55/350_0_4118_3294/master/4118.jpg?width=300&quality=85&auto=format&fit=max&s=108911b612a04b5011b61ed5ff252ed5",
+				"carouselImages": {
+					"300": "https://i.guim.co.uk/img/media/d531e71f36df851b9482ec86e79bd6053562df55/350_0_4118_3294/master/4118.jpg?width=300&quality=85&auto=format&fit=max&s=108911b612a04b5011b61ed5ff252ed5",
+					"460": "https://i.guim.co.uk/img/media/d531e71f36df851b9482ec86e79bd6053562df55/350_0_4118_3294/master/4118.jpg?width=460&quality=85&auto=format&fit=max&s=d237cae5c77e9f95abf6f2aa609fb918"
+				},
+				"isLiveBlog": false,
+				"pillar": "news",
+				"designType": "Article",
+				"format": {
+					"design": "ArticleDesign",
+					"theme": "NewsPillar",
+					"display": "StandardDisplay"
+				},
+				"webPublicationDate": "2025-10-16T13:43:27.000Z",
+				"headline": "MPs to hold inquiry into collapsed China spy case after No 10 publishes key evidence",
+				"shortUrl": "https://www.theguardian.com/p/x3ey5p",
+				"discussion": {
+					"isCommentable": false,
+					"isClosedForComments": true,
+					"discussionId": "/p/x3ey5p"
+				},
+				"trailText": "Labour MP and chair of security committee Matt Western says there are ‘a lot of questions yet to be asked’"
+			},
+			{
+				"url": "https://www.theguardian.com/politics/2025/oct/16/no-10-moves-to-end-china-spy-row-but-threat-of-further-fallout-lingers",
+				"linkText": "No 10 moves to end China spy row – but threat of further fallout lingers",
+				"showByline": false,
+				"byline": "Pippa Crerar political editor",
+				"masterImage": "https://media.guim.co.uk/8cb7daca9d878c671d46887912492ea900e4d3ad/1542_661_5087_4071/master/5087.jpg",
+				"image": "https://i.guim.co.uk/img/media/8cb7daca9d878c671d46887912492ea900e4d3ad/1542_661_5087_4071/master/5087.jpg?width=300&quality=85&auto=format&fit=max&s=eaff57c6dd54d801b7503710442d3572",
+				"carouselImages": {
+					"300": "https://i.guim.co.uk/img/media/8cb7daca9d878c671d46887912492ea900e4d3ad/1542_661_5087_4071/master/5087.jpg?width=300&quality=85&auto=format&fit=max&s=eaff57c6dd54d801b7503710442d3572",
+					"460": "https://i.guim.co.uk/img/media/8cb7daca9d878c671d46887912492ea900e4d3ad/1542_661_5087_4071/master/5087.jpg?width=460&quality=85&auto=format&fit=max&s=b51ec8af882c4ba174b89a681e94fcad"
+				},
+				"isLiveBlog": false,
+				"pillar": "news",
+				"designType": "Analysis",
+				"format": {
+					"design": "AnalysisDesign",
+					"theme": "NewsPillar",
+					"display": "StandardDisplay"
+				},
+				"webPublicationDate": "2025-10-15T23:00:20.000Z",
+				"headline": "No 10 moves to end China spy row – but threat of further fallout lingers",
+				"shortUrl": "https://www.theguardian.com/p/x3eh95",
+				"discussion": {
+					"isCommentable": false,
+					"isClosedForComments": true,
+					"discussionId": "/p/x3eh95"
+				},
+				"trailText": "Questions remain over trial collapse even as publication of key evidence scuppers Tory’s main line of attack"
+			},
+			{
+				"url": "https://www.theguardian.com/politics/2025/oct/15/kemi-brings-a-shovel-to-a-gunfight-and-starmer-lets-her-dig-her-own-hole",
+				"linkText": "Kemi brings a shovel to a gunfight, and Starmer lets her dig her own hole | John Crace",
+				"showByline": true,
+				"byline": "John Crace",
+				"masterImage": "https://media.guim.co.uk/fc0d7e678f3f983a2994633aabfef0e8b2d27135/1527_70_4370_3496/master/4370.jpg",
+				"image": "https://i.guim.co.uk/img/media/fc0d7e678f3f983a2994633aabfef0e8b2d27135/1527_70_4370_3496/master/4370.jpg?width=300&quality=85&auto=format&fit=max&s=bd35ad612006cbfc9ce50018b873b26f",
+				"carouselImages": {
+					"300": "https://i.guim.co.uk/img/media/fc0d7e678f3f983a2994633aabfef0e8b2d27135/1527_70_4370_3496/master/4370.jpg?width=300&quality=85&auto=format&fit=max&s=bd35ad612006cbfc9ce50018b873b26f",
+					"460": "https://i.guim.co.uk/img/media/fc0d7e678f3f983a2994633aabfef0e8b2d27135/1527_70_4370_3496/master/4370.jpg?width=460&quality=85&auto=format&fit=max&s=53c3dce4bd21f7103d347791f45c6b8f"
+				},
+				"isLiveBlog": false,
+				"pillar": "news",
+				"designType": "Comment",
+				"format": {
+					"design": "CommentDesign",
+					"theme": "OpinionPillar",
+					"display": "StandardDisplay"
+				},
+				"webPublicationDate": "2025-10-15T16:45:01.000Z",
+				"headline": "Kemi brings a shovel to a gunfight, and Starmer lets her dig her own hole",
+				"shortUrl": "https://www.theguardian.com/p/x3eh73",
+				"discussion": {
+					"isCommentable": false,
+					"isClosedForComments": true,
+					"discussionId": "/p/x3eh73"
+				},
+				"trailText": "After a humiliating performance earlier this week, the Tory leader continues to declare war on logic, evidence and self-awareness"
+			},
+			{
+				"url": "https://www.theguardian.com/world/2025/oct/15/china-spy-row-key-witness-statement-to-be-published-says-starmer",
+				"linkText": "Key witness statement in China spy row to be published, says Starmer",
+				"showByline": false,
+				"byline": "Peter Walker and Eleni Courea",
+				"masterImage": "https://media.guim.co.uk/e7f408d3b9dd35a24abd4f9dfd809cf3bbe6c045/873_419_4742_3794/master/4742.jpg",
+				"image": "https://i.guim.co.uk/img/media/e7f408d3b9dd35a24abd4f9dfd809cf3bbe6c045/873_419_4742_3794/master/4742.jpg?width=300&quality=85&auto=format&fit=max&s=a14cb2e8e7982428191423f37615e20c",
+				"carouselImages": {
+					"300": "https://i.guim.co.uk/img/media/e7f408d3b9dd35a24abd4f9dfd809cf3bbe6c045/873_419_4742_3794/master/4742.jpg?width=300&quality=85&auto=format&fit=max&s=a14cb2e8e7982428191423f37615e20c",
+					"460": "https://i.guim.co.uk/img/media/e7f408d3b9dd35a24abd4f9dfd809cf3bbe6c045/873_419_4742_3794/master/4742.jpg?width=460&quality=85&auto=format&fit=max&s=91aef1e50744799706474d7cb5a7eac7"
+				},
+				"isLiveBlog": false,
+				"pillar": "news",
+				"designType": "Article",
+				"format": {
+					"design": "ArticleDesign",
+					"theme": "NewsPillar",
+					"display": "StandardDisplay"
+				},
+				"webPublicationDate": "2025-10-15T16:14:26.000Z",
+				"headline": "Key witness statement in China spy row to be published, says Starmer",
+				"shortUrl": "https://www.theguardian.com/p/x3eg5d",
+				"discussion": {
+					"isCommentable": false,
+					"isClosedForComments": true,
+					"discussionId": "/p/x3eg5d"
+				},
+				"trailText": "Statement by deputy national security adviser was central to CPS decision to withdraw spying charges against two men"
+			},
+			{
+				"url": "https://www.theguardian.com/politics/2025/oct/15/pressure-downing-street-release-evidence-collapsed-china-spy-case",
+				"linkText": "Pressure on Downing Street to release evidence in collapsed China spy case",
+				"showByline": false,
+				"byline": "Emine Sinmaz",
+				"masterImage": "https://media.guim.co.uk/2fbaf52e943e93790082d46570d5ec0cba39fc84/0_0_11811_9449/master/11811.jpg",
+				"image": "https://i.guim.co.uk/img/media/2fbaf52e943e93790082d46570d5ec0cba39fc84/0_0_11811_9449/master/11811.jpg?width=300&quality=85&auto=format&fit=max&s=f47bef0d4c4cf4267b5efba1d5c49f6d",
+				"carouselImages": {
+					"300": "https://i.guim.co.uk/img/media/2fbaf52e943e93790082d46570d5ec0cba39fc84/0_0_11811_9449/master/11811.jpg?width=300&quality=85&auto=format&fit=max&s=f47bef0d4c4cf4267b5efba1d5c49f6d",
+					"460": "https://i.guim.co.uk/img/media/2fbaf52e943e93790082d46570d5ec0cba39fc84/0_0_11811_9449/master/11811.jpg?width=460&quality=85&auto=format&fit=max&s=2fcde132e70ec702a2498b51a6cb0c09"
+				},
+				"isLiveBlog": false,
+				"pillar": "news",
+				"designType": "Article",
+				"format": {
+					"design": "ArticleDesign",
+					"theme": "NewsPillar",
+					"display": "StandardDisplay"
+				},
+				"webPublicationDate": "2025-10-15T08:20:58.000Z",
+				"headline": "Pressure on Downing Street to release evidence in collapsed China spy case",
+				"shortUrl": "https://www.theguardian.com/p/x3ef7m",
+				"discussion": {
+					"isCommentable": false,
+					"isClosedForComments": true,
+					"discussionId": "/p/x3ef7m"
+				},
+				"trailText": "Crown Prosecution Service denies it blocked publication of material and says decision rests with the government"
+			},
+			{
+				"url": "https://www.theguardian.com/politics/2025/oct/13/government-made-every-effort-to-support-china-spy-case-says-minister",
+				"linkText": "Government made ‘every effort’ to support China spying trial, says minister",
+				"showByline": false,
+				"byline": "Eleni Courea Political correspondent",
+				"masterImage": "https://media.guim.co.uk/8313073e626002f699a1531407e1311cc0190869/189_0_894_715/master/894.jpg",
+				"image": "https://i.guim.co.uk/img/media/8313073e626002f699a1531407e1311cc0190869/189_0_894_715/master/894.jpg?width=300&quality=85&auto=format&fit=max&s=b3d90291db3de6895ed5c7561343f82d",
+				"carouselImages": {
+					"300": "https://i.guim.co.uk/img/media/8313073e626002f699a1531407e1311cc0190869/189_0_894_715/master/894.jpg?width=300&quality=85&auto=format&fit=max&s=b3d90291db3de6895ed5c7561343f82d",
+					"460": "https://i.guim.co.uk/img/media/8313073e626002f699a1531407e1311cc0190869/189_0_894_715/master/894.jpg?width=460&quality=85&auto=format&fit=max&s=a6af5990c9fda31cc699d2cc1e5fc242"
+				},
+				"isLiveBlog": false,
+				"pillar": "news",
+				"designType": "Article",
+				"format": {
+					"design": "ArticleDesign",
+					"theme": "NewsPillar",
+					"display": "StandardDisplay"
+				},
+				"webPublicationDate": "2025-10-13T18:10:39.000Z",
+				"headline": "Government made ‘every effort’ to support China spying trial, says minister",
+				"shortUrl": "https://www.theguardian.com/p/x3e68z",
+				"discussion": {
+					"isCommentable": false,
+					"isClosedForComments": true,
+					"discussionId": "/p/x3e68z"
+				},
+				"trailText": "Dan Jarvis accuses Tories of suggesting case was deliberately abandoned ‘without a shred of evidence’"
+			}
+		]
+	},
+	"beaconURL": "//phar.gu-web.net",
+	"isCommentable": false,
+	"commercialProperties": {
+		"US": {
+			"adTargeting": [
+				{
+					"name": "ct",
+					"value": "article"
+				},
+				{
+					"name": "tn",
+					"value": ["news"]
+				},
+				{
+					"name": "url",
+					"value": "/world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse"
+				},
+				{
+					"name": "sh",
+					"value": "https://www.theguardian.com/p/x3enf7"
+				},
+				{
+					"name": "k",
+					"value": [
+						"jonathan-powell",
+						"china",
+						"law",
+						"chris-philp",
+						"uksecurity",
+						"keir-starmer",
+						"mi5",
+						"politics",
+						"espionage",
+						"uk/uk",
+						"labour",
+						"crown-prosecution-service"
+					]
+				},
+				{
+					"name": "co",
+					"value": ["dan-sabbagh", "eleni-courea"]
+				},
+				{
+					"name": "edition",
+					"value": "us"
+				},
+				{
+					"name": "p",
+					"value": "ng"
+				},
+				{
+					"name": "su",
+					"value": ["5"]
+				}
+			]
+		},
+		"AU": {
+			"adTargeting": [
+				{
+					"name": "edition",
+					"value": "au"
+				},
+				{
+					"name": "co",
+					"value": ["dan-sabbagh", "eleni-courea"]
+				},
+				{
+					"name": "ct",
+					"value": "article"
+				},
+				{
+					"name": "tn",
+					"value": ["news"]
+				},
+				{
+					"name": "url",
+					"value": "/world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse"
+				},
+				{
+					"name": "sh",
+					"value": "https://www.theguardian.com/p/x3enf7"
+				},
+				{
+					"name": "k",
+					"value": [
+						"jonathan-powell",
+						"china",
+						"law",
+						"chris-philp",
+						"uksecurity",
+						"keir-starmer",
+						"mi5",
+						"politics",
+						"espionage",
+						"uk/uk",
+						"labour",
+						"crown-prosecution-service"
+					]
+				},
+				{
+					"name": "p",
+					"value": "ng"
+				},
+				{
+					"name": "su",
+					"value": ["5"]
+				}
+			]
+		},
+		"UK": {
+			"adTargeting": [
+				{
+					"name": "co",
+					"value": ["dan-sabbagh", "eleni-courea"]
+				},
+				{
+					"name": "edition",
+					"value": "uk"
+				},
+				{
+					"name": "ct",
+					"value": "article"
+				},
+				{
+					"name": "tn",
+					"value": ["news"]
+				},
+				{
+					"name": "url",
+					"value": "/world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse"
+				},
+				{
+					"name": "sh",
+					"value": "https://www.theguardian.com/p/x3enf7"
+				},
+				{
+					"name": "k",
+					"value": [
+						"jonathan-powell",
+						"china",
+						"law",
+						"chris-philp",
+						"uksecurity",
+						"keir-starmer",
+						"mi5",
+						"politics",
+						"espionage",
+						"uk/uk",
+						"labour",
+						"crown-prosecution-service"
+					]
+				},
+				{
+					"name": "p",
+					"value": "ng"
+				},
+				{
+					"name": "su",
+					"value": ["5"]
+				}
+			]
+		},
+		"INT": {
+			"adTargeting": [
+				{
+					"name": "co",
+					"value": ["dan-sabbagh", "eleni-courea"]
+				},
+				{
+					"name": "ct",
+					"value": "article"
+				},
+				{
+					"name": "tn",
+					"value": ["news"]
+				},
+				{
+					"name": "url",
+					"value": "/world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse"
+				},
+				{
+					"name": "edition",
+					"value": "int"
+				},
+				{
+					"name": "sh",
+					"value": "https://www.theguardian.com/p/x3enf7"
+				},
+				{
+					"name": "k",
+					"value": [
+						"jonathan-powell",
+						"china",
+						"law",
+						"chris-philp",
+						"uksecurity",
+						"keir-starmer",
+						"mi5",
+						"politics",
+						"espionage",
+						"uk/uk",
+						"labour",
+						"crown-prosecution-service"
+					]
+				},
+				{
+					"name": "p",
+					"value": "ng"
+				},
+				{
+					"name": "su",
+					"value": ["5"]
+				}
+			]
+		},
+		"EUR": {
+			"adTargeting": [
+				{
+					"name": "co",
+					"value": ["dan-sabbagh", "eleni-courea"]
+				},
+				{
+					"name": "ct",
+					"value": "article"
+				},
+				{
+					"name": "tn",
+					"value": ["news"]
+				},
+				{
+					"name": "edition",
+					"value": "eur"
+				},
+				{
+					"name": "url",
+					"value": "/world/2025/oct/16/head-of-cps-faces-cross-party-pressure-to-explain-china-spy-trial-collapse"
+				},
+				{
+					"name": "sh",
+					"value": "https://www.theguardian.com/p/x3enf7"
+				},
+				{
+					"name": "k",
+					"value": [
+						"jonathan-powell",
+						"china",
+						"law",
+						"chris-philp",
+						"uksecurity",
+						"keir-starmer",
+						"mi5",
+						"politics",
+						"espionage",
+						"uk/uk",
+						"labour",
+						"crown-prosecution-service"
+					]
+				},
+				{
+					"name": "p",
+					"value": "ng"
+				},
+				{
+					"name": "su",
+					"value": ["5"]
+				}
+			]
+		}
+	},
+	"pageType": {
+		"hasShowcaseMainElement": false,
+		"isFront": false,
+		"isLiveblog": false,
+		"isMinuteArticle": false,
+		"isPaidContent": false,
+		"isPreview": false,
+		"isSensitive": false
+	},
+	"trailText": "Stephen Parkinson called on to give ‘fuller explanation’ as MI5 expresses frustration over charges being dropped",
+	"nav": {
+		"currentUrl": "/world",
+		"pillars": [
+			{
+				"title": "News",
+				"url": "/",
+				"longTitle": "Headlines",
+				"iconName": "home",
+				"children": [
+					{
+						"title": "UK",
+						"url": "/uk-news",
+						"longTitle": "UK news",
+						"children": [
+							{
+								"title": "UK politics",
+								"url": "/politics"
+							},
+							{
+								"title": "Education",
+								"url": "/education",
+								"children": [
+									{
+										"title": "Schools",
+										"url": "/education/schools"
+									},
+									{
+										"title": "Teachers",
+										"url": "/teacher-network"
+									},
+									{
+										"title": "Universities",
+										"url": "/education/universities"
+									},
+									{
+										"title": "Students",
+										"url": "/education/students"
+									}
+								]
+							},
+							{
+								"title": "Media",
+								"url": "/media"
+							},
+							{
+								"title": "Society",
+								"url": "/society"
+							},
+							{
+								"title": "Law",
+								"url": "/law"
+							},
+							{
+								"title": "Scotland",
+								"url": "/uk/scotland"
+							},
+							{
+								"title": "Wales",
+								"url": "/uk/wales"
+							},
+							{
+								"title": "Northern Ireland",
+								"url": "/uk/northernireland"
+							}
+						]
+					},
+					{
+						"title": "US politics",
+						"url": "/us-news/us-politics"
+					},
+					{
+						"title": "World",
+						"url": "/world",
+						"longTitle": "World news",
+						"children": [
+							{
+								"title": "Europe",
+								"url": "/world/europe-news"
+							},
+							{
+								"title": "US news",
+								"url": "/us-news",
+								"longTitle": "US news"
+							},
+							{
+								"title": "Americas",
+								"url": "/world/americas"
+							},
+							{
+								"title": "Asia",
+								"url": "/world/asia"
+							},
+							{
+								"title": "Australia",
+								"url": "/australia-news",
+								"longTitle": "Australia news"
+							},
+							{
+								"title": "Middle East",
+								"url": "/world/middleeast"
+							},
+							{
+								"title": "Africa",
+								"url": "/world/africa"
+							},
+							{
+								"title": "Inequality",
+								"url": "/inequality"
+							},
+							{
+								"title": "Global development",
+								"url": "/global-development"
+							}
+						]
+					},
+					{
+						"title": "Climate crisis",
+						"url": "/environment/climate-crisis"
+					},
+					{
+						"title": "Middle East",
+						"url": "/world/middleeast"
+					},
+					{
+						"title": "Ukraine",
+						"url": "/world/ukraine"
+					},
+					{
+						"title": "Football",
+						"url": "/football",
+						"children": [
+							{
+								"title": "Live scores",
+								"url": "/football/live",
+								"longTitle": "football/live"
+							},
+							{
+								"title": "Tables",
+								"url": "/football/tables",
+								"longTitle": "football/tables"
+							},
+							{
+								"title": "Fixtures",
+								"url": "/football/fixtures",
+								"longTitle": "football/fixtures"
+							},
+							{
+								"title": "Results",
+								"url": "/football/results",
+								"longTitle": "football/results"
+							},
+							{
+								"title": "Competitions",
+								"url": "/football/competitions",
+								"longTitle": "football/competitions"
+							},
+							{
+								"title": "Clubs",
+								"url": "/football/teams",
+								"longTitle": "football/teams"
+							}
+						]
+					},
+					{
+						"title": "Newsletters",
+						"url": "/email-newsletters"
+					},
+					{
+						"title": "Business",
+						"url": "/business",
+						"children": [
+							{
+								"title": "Economics",
+								"url": "/business/economics"
+							},
+							{
+								"title": "Banking",
+								"url": "/business/banking"
+							},
+							{
+								"title": "Money",
+								"url": "/money",
+								"children": [
+									{
+										"title": "Property",
+										"url": "/money/property"
+									},
+									{
+										"title": "Pensions",
+										"url": "/money/pensions"
+									},
+									{
+										"title": "Savings",
+										"url": "/money/savings"
+									},
+									{
+										"title": "Borrowing",
+										"url": "/money/debt"
+									},
+									{
+										"title": "Careers",
+										"url": "/money/work-and-careers"
+									}
+								]
+							},
+							{
+								"title": "Markets",
+								"url": "/business/stock-markets"
+							},
+							{
+								"title": "Project Syndicate",
+								"url": "/business/series/project-syndicate-economists"
+							},
+							{
+								"title": "B2B",
+								"url": "/business-to-business"
+							},
+							{
+								"title": "Retail",
+								"url": "/business/retail"
+							}
+						]
+					},
+					{
+						"title": "Environment",
+						"url": "/environment",
+						"children": [
+							{
+								"title": "Climate crisis",
+								"url": "/environment/climate-crisis"
+							},
+							{
+								"title": "Wildlife",
+								"url": "/environment/wildlife"
+							},
+							{
+								"title": "Energy",
+								"url": "/environment/energy"
+							},
+							{
+								"title": "Pollution",
+								"url": "/environment/pollution"
+							}
+						]
+					},
+					{
+						"title": "UK politics",
+						"url": "/politics"
+					},
+					{
+						"title": "Science",
+						"url": "/science"
+					},
+					{
+						"title": "Tech",
+						"url": "/technology"
+					},
+					{
+						"title": "Global development",
+						"url": "/global-development"
+					},
+					{
+						"title": "Obituaries",
+						"url": "/obituaries"
+					}
+				]
+			},
+			{
+				"title": "Opinion",
+				"url": "/commentisfree",
+				"longTitle": "Opinion home",
+				"iconName": "home",
+				"children": [
+					{
+						"title": "The Guardian view",
+						"url": "/profile/editorial"
+					},
+					{
+						"title": "Columnists",
+						"url": "/index/contributors"
+					},
+					{
+						"title": "Cartoons",
+						"url": "/tone/cartoons"
+					},
+					{
+						"title": "Opinion videos",
+						"url": "/type/video+tone/comment"
+					},
+					{
+						"title": "Letters",
+						"url": "/tone/letters"
+					}
+				]
+			},
+			{
+				"title": "Sport",
+				"url": "/sport",
+				"longTitle": "Sport home",
+				"iconName": "home",
+				"children": [
+					{
+						"title": "Football",
+						"url": "/football",
+						"children": [
+							{
+								"title": "Live scores",
+								"url": "/football/live",
+								"longTitle": "football/live"
+							},
+							{
+								"title": "Tables",
+								"url": "/football/tables",
+								"longTitle": "football/tables"
+							},
+							{
+								"title": "Fixtures",
+								"url": "/football/fixtures",
+								"longTitle": "football/fixtures"
+							},
+							{
+								"title": "Results",
+								"url": "/football/results",
+								"longTitle": "football/results"
+							},
+							{
+								"title": "Competitions",
+								"url": "/football/competitions",
+								"longTitle": "football/competitions"
+							},
+							{
+								"title": "Clubs",
+								"url": "/football/teams",
+								"longTitle": "football/teams"
+							}
+						]
+					},
+					{
+						"title": "Cricket",
+						"url": "/sport/cricket"
+					},
+					{
+						"title": "Rugby union",
+						"url": "/sport/rugby-union"
+					},
+					{
+						"title": "Tennis",
+						"url": "/sport/tennis"
+					},
+					{
+						"title": "Cycling",
+						"url": "/sport/cycling"
+					},
+					{
+						"title": "F1",
+						"url": "/sport/formulaone"
+					},
+					{
+						"title": "Golf",
+						"url": "/sport/golf"
+					},
+					{
+						"title": "Boxing",
+						"url": "/sport/boxing"
+					},
+					{
+						"title": "Rugby league",
+						"url": "/sport/rugbyleague"
+					},
+					{
+						"title": "Racing",
+						"url": "/sport/horse-racing"
+					},
+					{
+						"title": "US sports",
+						"url": "/sport/us-sport"
+					}
+				]
+			},
+			{
+				"title": "Culture",
+				"url": "/culture",
+				"longTitle": "Culture home",
+				"iconName": "home",
+				"children": [
+					{
+						"title": "Film",
+						"url": "/film"
+					},
+					{
+						"title": "Music",
+						"url": "/music"
+					},
+					{
+						"title": "TV & radio",
+						"url": "/tv-and-radio"
+					},
+					{
+						"title": "Books",
+						"url": "/books"
+					},
+					{
+						"title": "Art & design",
+						"url": "/artanddesign"
+					},
+					{
+						"title": "Stage",
+						"url": "/stage"
+					},
+					{
+						"title": "Games",
+						"url": "/games"
+					},
+					{
+						"title": "Classical",
+						"url": "/music/classicalmusicandopera"
+					}
+				]
+			},
+			{
+				"title": "Lifestyle",
+				"url": "/lifeandstyle",
+				"longTitle": "Lifestyle home",
+				"iconName": "home",
+				"children": [
+					{
+						"title": "The Filter",
+						"url": "/uk/thefilter"
+					},
+					{
+						"title": "Fashion",
+						"url": "/fashion"
+					},
+					{
+						"title": "Food",
+						"url": "/food"
+					},
+					{
+						"title": "Recipes",
+						"url": "/tone/recipes"
+					},
+					{
+						"title": "Travel",
+						"url": "/travel",
+						"children": [
+							{
+								"title": "UK",
+								"url": "/travel/uk"
+							},
+							{
+								"title": "Europe",
+								"url": "/travel/europe"
+							},
+							{
+								"title": "US",
+								"url": "/travel/usa"
+							}
+						]
+					},
+					{
+						"title": "Health & fitness",
+						"url": "/lifeandstyle/health-and-wellbeing"
+					},
+					{
+						"title": "Women",
+						"url": "/lifeandstyle/women"
+					},
+					{
+						"title": "Men",
+						"url": "/lifeandstyle/men"
+					},
+					{
+						"title": "Love & sex",
+						"url": "/lifeandstyle/love-and-sex"
+					},
+					{
+						"title": "Beauty",
+						"url": "/fashion/beauty"
+					},
+					{
+						"title": "Home & garden",
+						"url": "/lifeandstyle/home-and-garden"
+					},
+					{
+						"title": "Money",
+						"url": "/money",
+						"children": [
+							{
+								"title": "Property",
+								"url": "/money/property"
+							},
+							{
+								"title": "Pensions",
+								"url": "/money/pensions"
+							},
+							{
+								"title": "Savings",
+								"url": "/money/savings"
+							},
+							{
+								"title": "Borrowing",
+								"url": "/money/debt"
+							},
+							{
+								"title": "Careers",
+								"url": "/money/work-and-careers"
+							}
+						]
+					},
+					{
+						"title": "Cars",
+						"url": "/technology/motoring"
+					}
+				]
+			}
+		],
+		"otherLinks": [
+			{
+				"title": "The Guardian app",
+				"url": "https://app.adjust.com/16xt6hai"
+			},
+			{
+				"title": "Video",
+				"url": "/video"
+			},
+			{
+				"title": "Podcasts",
+				"url": "/podcasts"
+			},
+			{
+				"title": "Pictures",
+				"url": "/inpictures"
+			},
+			{
+				"title": "Newsletters",
+				"url": "/email-newsletters"
+			},
+			{
+				"title": "Today's paper",
+				"url": "/theguardian",
+				"children": [
+					{
+						"title": "Obituaries",
+						"url": "/obituaries"
+					},
+					{
+						"title": "G2",
+						"url": "/theguardian/g2"
+					},
+					{
+						"title": "Journal",
+						"url": "/theguardian/journal"
+					},
+					{
+						"title": "Saturday",
+						"url": "/theguardian/saturday"
+					}
+				]
+			},
+			{
+				"title": "Inside the Guardian",
+				"url": "https://www.theguardian.com/insidetheguardian"
+			},
+			{
+				"title": "Guardian Weekly",
+				"url": "https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK"
+			},
+			{
+				"title": "Crosswords",
+				"url": "/crosswords",
+				"children": [
+					{
+						"title": "Blog",
+						"url": "/crosswords/crossword-blog"
+					},
+					{
+						"title": "Quick",
+						"url": "/crosswords/series/quick"
+					},
+					{
+						"title": "Sunday quick",
+						"url": "/crosswords/series/sunday-quick"
+					},
+					{
+						"title": "Quick cryptic",
+						"url": "/crosswords/series/quick-cryptic"
+					},
+					{
+						"title": "Quiptic",
+						"url": "/crosswords/series/quiptic"
+					},
+					{
+						"title": "Cryptic",
+						"url": "/crosswords/series/cryptic"
+					},
+					{
+						"title": "Prize",
+						"url": "/crosswords/series/prize"
+					},
+					{
+						"title": "Genius",
+						"url": "/crosswords/series/genius"
+					},
+					{
+						"title": "Weekend",
+						"url": "/crosswords/series/weekend-crossword"
+					},
+					{
+						"title": "Special",
+						"url": "/crosswords/series/special"
+					}
+				]
+			},
+			{
+				"title": "Wordiply",
+				"url": "https://www.wordiply.com"
+			},
+			{
+				"title": "Corrections",
+				"url": "/theguardian/series/corrections-and-clarifications"
+			},
+			{
+				"title": "Tips",
+				"url": "https://www.theguardian.com/tips"
+			}
+		],
+		"brandExtensions": [
+			{
+				"title": "Search jobs",
+				"url": "https://jobs.theguardian.com"
+			},
+			{
+				"title": "Hire with Guardian Jobs",
+				"url": "https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs"
+			},
+			{
+				"title": "Holidays",
+				"url": "https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader"
+			},
+			{
+				"title": "Live events",
+				"url": "https://www.theguardian.com/guardian-live-events?INTCMP=live_uk_header_dropdown"
+			},
+			{
+				"title": "About Us",
+				"url": "/about"
+			},
+			{
+				"title": "Digital Archive",
+				"url": "https://theguardian.newspapers.com"
+			},
+			{
+				"title": "Guardian Print Shop",
+				"url": "/artanddesign/series/gnm-print-sales"
+			},
+			{
+				"title": "Patrons",
+				"url": "https://patrons.theguardian.com/?INTCMP=header_patrons"
+			},
+			{
+				"title": "Guardian Licensing",
+				"url": "https://licensing.theguardian.com/"
+			}
+		],
+		"currentNavLinkTitle": "World",
+		"currentPillarTitle": "News",
+		"subNavSections": {
+			"parent": {
+				"title": "World",
+				"url": "/world",
+				"longTitle": "World news",
+				"children": [
+					{
+						"title": "Europe",
+						"url": "/world/europe-news"
+					},
+					{
+						"title": "US news",
+						"url": "/us-news",
+						"longTitle": "US news"
+					},
+					{
+						"title": "Americas",
+						"url": "/world/americas"
+					},
+					{
+						"title": "Asia",
+						"url": "/world/asia"
+					},
+					{
+						"title": "Australia",
+						"url": "/australia-news",
+						"longTitle": "Australia news"
+					},
+					{
+						"title": "Middle East",
+						"url": "/world/middleeast"
+					},
+					{
+						"title": "Africa",
+						"url": "/world/africa"
+					},
+					{
+						"title": "Inequality",
+						"url": "/inequality"
+					},
+					{
+						"title": "Global development",
+						"url": "/global-development"
+					}
+				]
+			},
+			"links": [
+				{
+					"title": "Europe",
+					"url": "/world/europe-news"
+				},
+				{
+					"title": "US news",
+					"url": "/us-news",
+					"longTitle": "US news"
+				},
+				{
+					"title": "Americas",
+					"url": "/world/americas"
+				},
+				{
+					"title": "Asia",
+					"url": "/world/asia"
+				},
+				{
+					"title": "Australia",
+					"url": "/australia-news",
+					"longTitle": "Australia news"
+				},
+				{
+					"title": "Middle East",
+					"url": "/world/middleeast"
+				},
+				{
+					"title": "Africa",
+					"url": "/world/africa"
+				},
+				{
+					"title": "Inequality",
+					"url": "/inequality"
+				},
+				{
+					"title": "Global development",
+					"url": "/global-development"
+				}
+			]
+		},
+		"readerRevenueLinks": {
+			"header": {
+				"contribute": "https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D",
+				"subscribe": "https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D",
+				"support": "https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D",
+				"supporter": "https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D"
+			},
+			"footer": {
+				"contribute": "https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D",
+				"subscribe": "https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D",
+				"support": "https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D",
+				"supporter": "https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D"
+			},
+			"sideMenu": {
+				"contribute": "https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D",
+				"subscribe": "https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D",
+				"support": "https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D",
+				"supporter": "https://support.theguardian.com/subscribe?INTCMP=mobilenav_print_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22mobilenav_print_cta%22%7D"
+			},
+			"ampHeader": {
+				"contribute": "https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D",
+				"subscribe": "https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D",
+				"support": "https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D",
+				"supporter": "https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D"
+			},
+			"ampFooter": {
+				"contribute": "https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D",
+				"subscribe": "https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D",
+				"support": "https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D",
+				"supporter": "https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D"
+			}
+		}
+	},
+	"showBottomSocialButtons": true,
+	"pageFooter": {
+		"footerLinks": [
+			[
+				{
+					"text": "About us",
+					"url": "/about",
+					"dataLinkName": "uk : footer : about us",
+					"extraClasses": ""
+				},
+				{
+					"text": "Help",
+					"url": "https://manage.theguardian.com/help-centre",
+					"dataLinkName": "uk : footer : tech feedback",
+					"extraClasses": "js-tech-feedback-report"
+				},
+				{
+					"text": "Complaints & corrections",
+					"url": "/info/complaints-and-corrections",
+					"dataLinkName": "complaints",
+					"extraClasses": ""
+				},
+				{
+					"text": "Contact us",
+					"url": "/help/contact-us",
+					"dataLinkName": "uk : footer : contact us",
+					"extraClasses": ""
+				},
+				{
+					"text": "Tip us off",
+					"url": "https://www.theguardian.com/tips",
+					"dataLinkName": "uk : footer : tips",
+					"extraClasses": ""
+				},
+				{
+					"text": "SecureDrop",
+					"url": "https://www.theguardian.com/securedrop",
+					"dataLinkName": "securedrop",
+					"extraClasses": ""
+				},
+				{
+					"text": "Privacy policy",
+					"url": "/info/privacy",
+					"dataLinkName": "privacy",
+					"extraClasses": ""
+				},
+				{
+					"text": "Cookie policy",
+					"url": "/info/cookies",
+					"dataLinkName": "cookie",
+					"extraClasses": ""
+				},
+				{
+					"text": "Modern Slavery Act",
+					"url": "https://uploads.guim.co.uk/2025/09/05/Modern_Slavery_Statement_2025.pdf",
+					"dataLinkName": "uk : footer : modern slavery act statement",
+					"extraClasses": ""
+				},
+				{
+					"text": "Tax strategy",
+					"url": "https://uploads.guim.co.uk/2025/09/05/Tax_strategy_for_the_year_ended_31_March_2025.pdf",
+					"dataLinkName": "uk : footer : tax strategy",
+					"extraClasses": ""
+				},
+				{
+					"text": "Terms & conditions",
+					"url": "/help/terms-of-service",
+					"dataLinkName": "terms",
+					"extraClasses": ""
+				}
+			],
+			[
+				{
+					"text": "All topics",
+					"url": "/index/subjects/a",
+					"dataLinkName": "uk : footer : all topics",
+					"extraClasses": ""
+				},
+				{
+					"text": "All writers",
+					"url": "/index/contributors",
+					"dataLinkName": "uk : footer : all contributors",
+					"extraClasses": ""
+				},
+				{
+					"text": "Newsletters",
+					"url": "/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK",
+					"dataLinkName": "uk : footer : newsletters",
+					"extraClasses": ""
+				},
+				{
+					"text": "Digital newspaper archive",
+					"url": "https://theguardian.newspapers.com",
+					"dataLinkName": "digital newspaper archive",
+					"extraClasses": ""
+				},
+				{
+					"text": "Bluesky",
+					"url": "https://bsky.app/profile/theguardian.com",
+					"dataLinkName": "uk : footer : Bluesky",
+					"extraClasses": ""
+				},
+				{
+					"text": "Facebook",
+					"url": "https://www.facebook.com/theguardian",
+					"dataLinkName": "uk : footer : Facebook",
+					"extraClasses": ""
+				},
+				{
+					"text": "Instagram",
+					"url": "https://www.instagram.com/guardian",
+					"dataLinkName": "uk : footer : Instagram",
+					"extraClasses": ""
+				},
+				{
+					"text": "LinkedIn",
+					"url": "https://www.linkedin.com/company/theguardian",
+					"dataLinkName": "uk : footer : LinkedIn",
+					"extraClasses": ""
+				},
+				{
+					"text": "Threads",
+					"url": "https://www.threads.com/@guardian",
+					"dataLinkName": "uk : footer : Threads",
+					"extraClasses": ""
+				},
+				{
+					"text": "TikTok",
+					"url": "https://www.tiktok.com/@guardian",
+					"dataLinkName": "uk : footer : TikTok",
+					"extraClasses": ""
+				},
+				{
+					"text": "YouTube",
+					"url": "https://www.youtube.com/user/TheGuardian",
+					"dataLinkName": "uk : footer : YouTube",
+					"extraClasses": ""
+				}
+			],
+			[
+				{
+					"text": "Advertise with us",
+					"url": "https://advertising.theguardian.com",
+					"dataLinkName": "uk : footer : advertise with us",
+					"extraClasses": ""
+				},
+				{
+					"text": "Guardian Labs",
+					"url": "/guardian-labs",
+					"dataLinkName": "uk : footer : guardian labs",
+					"extraClasses": ""
+				},
+				{
+					"text": "Search jobs",
+					"url": "https://jobs.theguardian.com",
+					"dataLinkName": "uk : footer : jobs",
+					"extraClasses": ""
+				},
+				{
+					"text": "Patrons",
+					"url": "https://patrons.theguardian.com?INTCMP=footer_patrons",
+					"dataLinkName": "uk : footer : patrons",
+					"extraClasses": ""
+				},
+				{
+					"text": "Work for us",
+					"url": "https://workforus.theguardian.com",
+					"dataLinkName": "uk : footer : work for us",
+					"extraClasses": ""
+				},
+				{
+					"text": "Accessibility settings",
+					"url": "/help/accessibility-help",
+					"dataLinkName": "accessibility settings",
+					"extraClasses": ""
+				}
+			]
+		]
+	},
+	"publication": "The Guardian",
+	"shouldHideReaderRevenue": false,
+	"slotMachineFlags": "",
+	"contributionsServiceUrl": "https://contributions.guardianapis.com",
+	"isSpecialReport": false,
+	"showTableOfContents": false,
+	"lang": "en",
+	"isRightToLeftLang": false
+}
