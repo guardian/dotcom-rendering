@@ -98,12 +98,14 @@ export const getViewsWithoutClick = (
 export const demoteCardsWithoutClicks = (
 	viewHistory: HighlightsViewHistory,
 	highlights: OrderedHighlights,
-) => {
+): DCRFrontCard[] => {
 	const demotedCards = viewHistory
 		.filter((card) => card.count >= 2)
 		.map((card) => card.id);
 	// if no cards have been ignored 2 times or more, dont worry, we don't need to do anything
-	if (demotedCards.length === 0) return;
+	if (demotedCards.length === 0) {
+		return highlights;
+	}
 	// otherwise, move the demoted cards to the back of the highlights container
 	const newHighlights = highlights.reduce((acc: DCRFrontCard[], card) => {
 		if (demotedCards.includes(card.url)) {
