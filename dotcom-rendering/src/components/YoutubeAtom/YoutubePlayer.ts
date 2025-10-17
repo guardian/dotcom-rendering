@@ -143,6 +143,9 @@ class YouTubePlayer {
 					}
 				} catch (e) {
 					this.logError(e as Error);
+					/* eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors --
+					 * This object comes from the YT API; we can't enforce that
+					 * it's an instance of Error. */
 					reject(e);
 				}
 			},
