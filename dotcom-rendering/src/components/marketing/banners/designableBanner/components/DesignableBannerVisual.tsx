@@ -16,12 +16,14 @@ interface DesignableBannerVisualProps {
 	settings: Image;
 	bannerId?: BannerId;
 	isHeaderImage?: boolean;
+	isCollapsed?: boolean;
 }
 
 export function DesignableBannerVisual({
 	settings,
 	bannerId,
 	isHeaderImage,
+	isCollapsed,
 }: DesignableBannerVisualProps): JSX.Element {
 	const baseImage: ImageAttrs = {
 		url: settings.mainUrl,
@@ -35,16 +37,33 @@ export function DesignableBannerVisual({
 		images.push({ url: settings.mobileUrl, media: '(max-width: 739px)' });
 	}
 	if (settings.tabletUrl) {
-		images.push({ url: settings.tabletUrl, media: '(max-width: 979px)' });
+		images.push({
+			url: getImageUrl(
+				isCollapsed,
+				settings.mobileUrl,
+				settings.tabletUrl,
+			),
+			media: '(max-width: 979px)',
+		});
 	}
 	if (settings.desktopUrl) {
-		images.push({ url: settings.desktopUrl, media: '(max-width: 1139px)' });
+		images.push({
+			url: getImageUrl(
+				isCollapsed,
+				settings.tabletUrl,
+				settings.desktopUrl,
+			),
+			media: '(max-width: 1139px)',
+		});
 	}
 	if (settings.leftColUrl) {
 		images.push({ url: settings.leftColUrl, media: '(max-width: 1299px)' });
 	}
 	if (settings.wideUrl) {
-		images.push({ url: settings.wideUrl, media: '' });
+		images.push({
+			url: getImageUrl(isCollapsed, settings.tabletUrl, settings.wideUrl),
+			media: '',
+		});
 	}
 
 	return (
@@ -56,6 +75,17 @@ export function DesignableBannerVisual({
 		/>
 	);
 }
+
+const getImageUrl = (
+	isCollapsed: boolean | undefined,
+	collapsedUrl: string | undefined,
+	originalUrl: string,
+): string => {
+	if (isCollapsed) {
+		return collapsedUrl ?? originalUrl;
+	}
+	return originalUrl;
+};
 
 // ---- Styles ---- //
 
