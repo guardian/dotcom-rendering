@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ABTests } from '../../../abTest';
+	import { allABTests, activeABtests } from '../../../abTest';
 	import Table from '$lib/components/TableFixed.svelte';
 	import AudienceBreakdown from '$lib/components/AudienceBreakdown.svelte';
 </script>
@@ -31,8 +31,8 @@
 	</p>
 </section>
 <section>
-	<AudienceBreakdown tests={ABTests} />
-	<Table tests={ABTests} />
+	<AudienceBreakdown tests={activeABtests} />
+	<Table tests={allABTests} />
 </section>
 
 <style>

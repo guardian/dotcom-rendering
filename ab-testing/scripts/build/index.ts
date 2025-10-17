@@ -1,10 +1,10 @@
-import { ABTests } from '../../abTest.ts';
 import { getMVTGroupsFromDictionary } from '../lib/fastly-api.ts';
 import { buildABTestGroupKeyValues } from './build-ab-tests-dict.ts';
 import { parseArgs } from 'jsr:@std/cli/parse-args';
 import { calculateAllSpaceUpdates } from './calculate-mvt-updates.ts';
 import { parseMVTValue, stringifyMVTValue } from '../lib/fastly-subfield.ts';
 import { dirname } from 'jsr:@std/path';
+import { activeABtests } from '../../abTest.ts';
 
 const flags = parseArgs(Deno.args, {
 	string: ['mvts', 'ab-tests'],
@@ -26,9 +26,9 @@ const mvtGroups = new Map(
 	}),
 );
 
-const abTestGroupKeyValues = buildABTestGroupKeyValues(ABTests);
+const abTestGroupKeyValues = buildABTestGroupKeyValues(activeABtests);
 
-const mvtIdKeyValues = calculateAllSpaceUpdates(mvtGroups, ABTests);
+const mvtIdKeyValues = calculateAllSpaceUpdates(mvtGroups, activeABtests);
 
 const mvtDictArray = Array.from(
 	mvtIdKeyValues.entries().map(([key, value]) => ({

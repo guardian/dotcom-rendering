@@ -1,5 +1,5 @@
-import { ABTests } from '../../abTest.ts';
 import { ABTest } from '../../types.ts';
+import { activeABtests } from '../../abTest.ts';
 import { enoughSpace } from './enoughSpace.ts';
 import { limitServerSideTests } from './limitServerSide.ts';
 import { uniqueName } from './uniqueName.ts';
@@ -19,7 +19,7 @@ function validateTests(testList: ABTest[]) {
 }
 
 try {
-	validateTests(ABTests);
+	validateTests(activeABtests);
 	console.log('AB test validations passed');
 } catch (err) {
 	const error = err as Error;
