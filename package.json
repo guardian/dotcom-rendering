@@ -31,7 +31,7 @@
 		"prettier": "3.0.3",
 		"tslib": "2.6.2"
 	},
-	"packageManager": "pnpm@8.15.7",
+	"packageManager": "pnpm@9.15.9",
 	"pnpm": {
 		"patchedDependencies": {
 			"webpack-manifest-plugin@5.0.0": "patches/webpack-manifest-plugin@5.0.0.patch"
