@@ -64,19 +64,19 @@ export const getOrderedCardsFromHistory = (
 
 const trackCardClick = (
 	card: DCRFrontCard,
-	history: OrderedHighlights,
+	highlights: OrderedHighlights,
 ): OrderedHighlights => {
-	return history.map((el) =>
+	return highlights.map((el) =>
 		el.card == card ? { ...el, clicked: true } : el,
 	);
 };
 
-const trackCardView = (
-	card: DCRFrontCard,
-	history: OrderedHighlights,
-): OrderedHighlights => {
-	return history.map((el) =>
-		el.card == card ? { ...el, viewCount: (el.viewCount += 1) } : el,
+const trackCardView = (highlights: OrderedHighlights): OrderedHighlights => {
+	const unviewedCards = highlights.slice(0, 2);
+	return highlights.map((el) =>
+		unviewedCards.includes(el)
+			? { ...el, viewCount: (el.viewCount += 1) }
+			: el,
 	);
 };
 
@@ -106,7 +106,7 @@ export const trackCardEngagement = (
 ): void => {
 	const newHistory =
 		engagement === 'VIEW'
-			? trackCardView(card, history)
+			? trackCardView(history)
 			: trackCardClick(card, history);
 	const newOrder = orderCardsByHistory(newHistory);
 
