@@ -61,3 +61,21 @@ export const getOrderedCardsFromHistory = (
 ): Array<DCRFrontCard> => {
 	return history.map((highlight) => highlight.card);
 };
+
+const trackCardClick = (
+	card: DCRFrontCard,
+	history: OrderedHighlights,
+): OrderedHighlights => {
+	return history.map((el) =>
+		el.card == card ? { ...el, clicked: true } : el,
+	);
+};
+
+const trackCardView = (
+	card: DCRFrontCard,
+	history: OrderedHighlights,
+): OrderedHighlights => {
+	return history.map((el) =>
+		el.card == card ? { ...el, viewCount: (el.viewCount += 1) } : el,
+	);
+};
