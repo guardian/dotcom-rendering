@@ -395,6 +395,7 @@ export interface ListItem {
 
 export interface LinkBlockElement {
 	_type: 'model.dotcomrendering.pageElements.LinkBlockElement';
+	elementId: string;
 	url: string;
 	label: string;
 	linkType: 'ProductButton';
@@ -467,6 +468,26 @@ export interface InteractiveContentsBlockElement {
 	elementId: string;
 	subheadingLinks: SubheadingBlockElement[];
 	endDocumentElementId?: string;
+}
+
+export interface ProductBlockElement {
+	_type: 'model.dotcomrendering.pageElements.ProductBlockElement';
+	elementId: string;
+	brandName: string;
+	starRating: string;
+	productName: string;
+	image: Image;
+	altText: string;
+	caption: string;
+	displayCredit: boolean;
+	credit: string;
+	secondaryHeading: string;
+	primaryHeading: string;
+	customAttributes: { name: string; value: string }[];
+	content: FEElement[];
+	h2Id?: string;
+	displayType: ProductDisplayType;
+	productCtas: ProductCta[];
 }
 
 interface ProfileAtomBlockElement {
@@ -833,7 +854,8 @@ export type FEElement =
 	| VineBlockElement
 	| YoutubeBlockElement
 	| WitnessTypeBlockElement
-	| CrosswordElement;
+	| CrosswordElement
+	| ProductBlockElement;
 
 // -------------------------------------
 // Misc
@@ -864,6 +886,18 @@ export interface ImageSource {
 	weighting: Weighting;
 	srcSet: SrcSetItem[];
 }
+
+export type ProductDisplayType =
+	| 'inline-only'
+	| 'product-card-only'
+	| 'inline-and-product-card';
+
+export type ProductCta = {
+	url: string;
+	text: string;
+	retailer: string;
+	price: string;
+};
 
 export interface SrcSetItem {
 	src: string;
