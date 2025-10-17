@@ -878,10 +878,14 @@
                 "_type": {
                     "type": "string",
                     "const": "model.dotcomrendering.pageElements.AdPlaceholderBlockElement"
+                },
+                "adPosition": {
+                    "type": "number"
                 }
             },
             "required": [
-                "_type"
+                "_type",
+                "adPosition"
             ]
         },
         "AudioAtomBlockElement": {
@@ -5036,6 +5040,12 @@
                 },
                 "mainMedia": {
                     "$ref": "#/definitions/MainMedia"
+                },
+                "trailText": {
+                    "type": "string"
+                },
+                "galleryCount": {
+                    "type": "number"
                 }
             },
             "required": [

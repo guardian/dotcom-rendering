@@ -956,6 +956,7 @@ const AdPlaceholderBlockElementSchema = object({
 	_type: literal(
 		'model.dotcomrendering.pageElements.AdPlaceholderBlockElement',
 	),
+	adPosition: number(),
 });
 
 export type AdPlaceholderBlockElement = InferOutput<

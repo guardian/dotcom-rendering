@@ -328,10 +328,11 @@ export const InteractiveBlockComponent = ({
 	const { darkModeAvailable, renderingTarget } = useConfig();
 
 	// Define some one-time flags
-	const isDatawrapperGraphic =
-		url && url.includes('interactive.guim.co.uk/datawrapper')
-			? true
-			: false;
+	const isDatawrapperGraphic = url?.includes(
+		'interactive.guim.co.uk/datawrapper',
+	)
+		? true
+		: false;
 
 	const isUploaderEmbedPath =
 		url &&
@@ -341,13 +342,11 @@ export const InteractiveBlockComponent = ({
 			? true
 			: false;
 
-	const scriptUrlIsBoot =
-		scriptUrl &&
-		scriptUrl.includes(
-			'interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js',
-		)
-			? true
-			: false;
+	const scriptUrlIsBoot = scriptUrl?.includes(
+		'interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js',
+	)
+		? true
+		: false;
 
 	useOnce(() => {
 		// We've brought the behavior from boot.js into this file to avoid loading 2 extra scripts
@@ -459,7 +458,7 @@ export const InteractiveBlockComponent = ({
 				{!loaded && (
 					<>
 						<Placeholder // removed by HydrateInteractiveOnce
-							height={decideHeight(role)}
+							heights={new Map([['mobile', decideHeight(role)]])}
 							shouldShimmer={false}
 						/>
 						<a

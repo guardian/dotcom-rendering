@@ -7,107 +7,75 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
-import { formatAttrString } from '../lib/formatAttrString';
+import { grid } from '../grid';
 import { palette } from '../palette';
-import { type OnwardsSource } from '../types/onwards';
 import { type TrailType } from '../types/trails';
 import { Card } from './Card/Card';
 import type { Props as CardProps } from './Card/Card';
-import { Hide } from './Hide';
-import { LeftColumn } from './LeftColumn';
-import { Section } from './Section';
 
 type Props = {
 	absoluteServerTimes: boolean;
 	trails: TrailType[];
 	discussionApiUrl: string;
-	headingLink?: string;
+	guardianBaseUrl: string;
 };
-
-const wrapperStyle = css`
-	display: flex;
-	justify-content: space-between;
-	overflow: hidden;
-	${from.desktop} {
-		padding-right: ${space[10]}px;
-	}
-`;
-
-const containerStyles = css`
-	display: flex;
-	flex-direction: column;
-	position: relative;
-
-	margin-top: ${space[2]}px;
-	padding-bottom: ${space[6]}px;
-
-	margin-left: 0px;
-	margin-right: 0px;
-
-	border-bottom: 1px solid ${palette('--onward-content-border')};
-
-	${from.leftCol} {
-		margin-left: 10px;
-		margin-right: 100px;
-	}
-`;
 
 const standardCardStyles = css`
 	flex: 1;
-
 	position: relative;
 	display: flex;
 	padding: ${space[2]}px;
 	background-color: ${palette('--onward-card-background')};
 
-	:not(:first-child)::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: -10px; /* shift into the gap */
-		width: 1px;
-		background: ${palette('--onward-content-border')};
+	${from.tablet} {
+		:not(:first-child)::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: -10px; /* shift into the gap */
+			width: 1px;
+			background: ${palette('--onward-content-border')};
+		}
 	}
 `;
 
 const standardCardsListStyles = css`
 	width: 100%;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	gap: 20px;
+	margin-bottom: ${space[6]}px;
 
 	${from.tablet} {
+		flex-direction: row;
 		padding-top: ${space[2]}px;
 	}
 
-	${until.tablet} {
-		flex-direction: column;
-		width: 100%;
+	${from.leftCol} {
+		&::before {
+			content: '';
+			position: absolute;
+			left: -11px;
+			top: 8px;
+			bottom: 0;
+			width: 1px;
+			background-color: ${palette('--onward-content-border')};
+		}
 	}
 `;
 
-const headerStyles = css`
-	color: ${palette('--carousel-text')};
-	${headlineBold24};
-	padding-bottom: ${space[3]}px;
-	padding-top: ${space[1]}px;
-	margin-left: 0;
+const cardsContainerStyles = css`
+	${grid.column.centre}
+	position: relative;
 
-	${from.tablet} {
-		${headlineBold28};
+	${from.desktop} {
+		${grid.between('centre-column-start', 'right-column-end')}
 	}
-`;
 
-const headerStylesWithUrl = css`
-	:hover {
-		text-decoration: underline;
+	${from.leftCol} {
+		${grid.between('centre-column-start', 'right-column-end')}
 	}
-`;
-
-const titleStyle = css`
-	color: ${palette('--onward-text')};
-	display: inline-block;
 `;
 
 const getDefaultCardProps = (
@@ -132,7 +100,7 @@ const getDefaultCardProps = (
 		dataLinkName: trail.dataLinkName,
 		snapData: trail.snapData,
 		discussionApiUrl,
-		discussionId: trail.discussionId,
+		discussionId: trail.discussion?.discussionId,
 		avatarUrl: trail.avatarUrl,
 		mainMedia: trail.mainMedia,
 		isExternalLink: false,
@@ -141,10 +109,11 @@ const getDefaultCardProps = (
 		imageLoading: 'lazy',
 		trailText: trail.trailText,
 		showAge: false,
-		containerType: 'more-galleries',
 		showTopBarDesktop: false,
 		showTopBarMobile: false,
 		aspectRatio: '5:4',
+		isOnwardContent: true,
+		onwardsSource: 'more-galleries',
 	};
 	return defaultProps;
 };
@@ -153,65 +122,66 @@ export const MoreGalleries = (props: Props) => {
 	const [firstTrail, ...standardCards] = props.trails;
 	if (!firstTrail) return null;
 
-	const heading = 'More galleries';
-	const onwardsSource: OnwardsSource = 'more-galleries';
-
-	const defaultProps = getDefaultCardProps(
-		firstTrail,
-		props.absoluteServerTimes,
-		props.discussionApiUrl,
-	);
-
 	return (
-		<Section
-			fullWidth={true}
-			borderColour={palette('--onward-content-border')}
-			backgroundColour={palette('--onward-background')}
-			showTopBorder={false}
+		<div
+			css={{
+				backgroundColor: palette('--onward-background'),
+				minHeight: 300,
+			}}
 		>
-			<div css={wrapperStyle} data-link-name={formatAttrString(heading)}>
-				<LeftColumn
-					size={'compact'}
-					borderColour={palette('--onward-content-border')}
-					hasPageSkin={false}
-				>
-					<Title title={heading} url={props.headingLink} />
-				</LeftColumn>
+			<section
+				data-component="more-galleries"
+				data-link="more-galleries"
+				css={css`
+					${grid.paddedContainer}
+					background-color: ${palette('--onward-background')};
+					padding-top: ${space[1]}px;
 
-				<div
-					css={containerStyles}
-					data-component={onwardsSource}
-					data-link={formatAttrString(heading)}
-				>
-					<Hide when="above" breakpoint="leftCol">
-						<Title title={heading} url={props.headingLink} />
-					</Hide>
-
-					<MoreGalleriesSplashCard defaultProps={defaultProps} />
-					<Hide when="below" breakpoint="tablet">
-						<StraightLines
-							count={1}
-							color={palette('--onward-content-border')}
-						/>
-					</Hide>
-
-					<ul css={standardCardsListStyles}>
-						{standardCards.map((trail) => (
-							<li key={trail.url} css={standardCardStyles}>
-								<Card
-									{...getDefaultCardProps(
-										trail,
-										props.absoluteServerTimes,
-										props.discussionApiUrl,
-									)}
-									mediaSize="medium"
-								/>
-							</li>
-						))}
-					</ul>
-				</div>
-			</div>
-		</Section>
+					${from.tablet} {
+						padding-top: 0;
+						border-left: 1px solid
+							${palette('--onward-content-border')};
+						border-right: 1px solid
+							${palette('--onward-content-border')};
+					}
+				`}
+			>
+				<Title guardianBaseUrl={props.guardianBaseUrl} />
+				<MoreGalleriesSplashCard
+					defaultProps={getDefaultCardProps(
+						firstTrail,
+						props.absoluteServerTimes,
+						props.discussionApiUrl,
+					)}
+				/>
+				<StraightLines
+					cssOverrides={[
+						cardsContainerStyles,
+						css`
+							${until.tablet} {
+								display: none;
+							}
+						`,
+					]}
+					count={1}
+					color={palette('--onward-content-border')}
+				/>
+				<ul css={[cardsContainerStyles, standardCardsListStyles]}>
+					{standardCards.map((trail) => (
+						<li key={trail.url} css={standardCardStyles}>
+							<Card
+								{...getDefaultCardProps(
+									trail,
+									props.absoluteServerTimes,
+									props.discussionApiUrl,
+								)}
+								mediaSize="medium"
+							/>
+						</li>
+					))}
+				</ul>
+			</section>
+		</div>
 	);
 };
 
@@ -233,32 +203,63 @@ const MoreGalleriesSplashCard = ({
 	};
 	return (
 		<div
-			css={css`
-				margin-bottom: ${space[6]}px;
-				background-color: ${palette('--onward-card-background')};
-				padding: ${space[2]}px;
-			`}
+			css={[
+				cardsContainerStyles,
+				css`
+					margin-bottom: ${space[6]}px;
+					background-color: ${palette('--onward-card-background')};
+					padding: ${space[2]}px;
+					${from.leftCol} {
+						&::before {
+							content: '';
+							position: absolute;
+							left: -11px;
+							top: 8px;
+							bottom: 0;
+							width: 1px;
+							background-color: ${palette(
+								'--onward-content-border',
+							)};
+						}
+					}
+				`,
+			]}
 		>
 			<Card {...defaultProps} {...cardProps} />
 		</div>
 	);
 };
 
-const Title = ({ title, url }: { title: string; url?: string }) =>
-	url ? (
-		<a
-			css={css`
-				text-decoration: none;
-			`}
-			href={url}
-			data-link-name="section heading"
-		>
-			<h2 css={headerStyles}>
-				<span css={[headerStylesWithUrl, titleStyle]}>{title}</span>
-			</h2>
-		</a>
-	) : (
-		<h2 css={headerStyles}>
-			<span css={titleStyle}>{title}</span>
-		</h2>
-	);
+const Title = ({ guardianBaseUrl }: { guardianBaseUrl: string }) => (
+	<a
+		css={css`
+			${grid.column.centre}
+			color: ${palette('--caption-text')};
+			text-decoration: none;
+			align-self: start;
+
+			${from.leftCol} {
+				${grid.column.left}
+			}
+		`}
+		href={`${guardianBaseUrl}/inpictures/all`}
+		data-link-name="section heading"
+	>
+		<h2 css={headerStyles}>More galleries</h2>
+	</a>
+);
+
+const headerStyles = css`
+	color: ${palette('--carousel-text')};
+	${headlineBold24};
+	padding-bottom: ${space[3]}px;
+	padding-top: ${space[1]}px;
+
+	:hover {
+		text-decoration: underline;
+	}
+
+	${from.tablet} {
+		${headlineBold28};
+	}
+`;

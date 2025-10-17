@@ -45,6 +45,8 @@ export const BaseTrailTypeSchema = object({
 	showQuotedHeadline: optional(boolean()),
 	discussion: optional(DiscussionSchema),
 	mainMedia: optional(MainMediaSchema),
+	trailText: optional(string()),
+	galleryCount: optional(number()),
 });
 
 export type BaseTrailType = InferOutput<typeof BaseTrailTypeSchema>;

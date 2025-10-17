@@ -37,5 +37,3 @@ export const FEOnwardsSchema = object({
 	format: FEFormatSchema,
 	isCuratedContent: optional(boolean()),
 });
-
-export type OnwardContainerType = 'more-galleries';

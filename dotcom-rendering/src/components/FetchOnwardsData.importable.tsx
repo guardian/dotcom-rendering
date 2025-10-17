@@ -1,9 +1,13 @@
 import { css } from '@emotion/react';
 import { isNonNullable } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
+import { useEffect, useState } from 'react';
+import { submitComponentEvent } from '../client/ophan/ophan';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
-import { decideTrail } from '../lib/decideTrail';
+import { decideTrail, dedupeTrail } from '../lib/decideTrail';
 import { useApi } from '../lib/useApi';
 import { addDiscussionIds } from '../lib/useCommentCount';
+import { useIsInView } from '../lib/useIsInView';
 import { palette } from '../palette';
 import type { OnwardsSource } from '../types/onwards';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -20,6 +24,8 @@ type Props = {
 	absoluteServerTimes: boolean;
 	renderingTarget: RenderingTarget;
 	isAdFreeUser: boolean;
+	containerPosition: string;
+	webURL: string;
 };
 
 type OnwardsResponse = {
@@ -40,9 +46,11 @@ const buildTrails = (
 	trails: FETrailType[],
 	trailLimit: number,
 	isAdFreeUser: boolean,
+	webURL: string,
 ): TrailType[] => {
 	return trails
 		.filter((trailType) => !(isTrailPaidContent(trailType) && isAdFreeUser))
+		.filter((trailType) => dedupeTrail(trailType, webURL))
 		.slice(0, trailLimit)
 		.map(decideTrail);
 };
@@ -56,7 +64,35 @@ export const FetchOnwardsData = ({
 	absoluteServerTimes,
 	renderingTarget,
 	isAdFreeUser,
+	containerPosition,
+	webURL,
 }: Props) => {
+	const [hasBeenSeen, setIsInViewRef] = useIsInView({ rootMargin: `-100px` });
+
+	const [hasTrackedView, setHasTrackedView] = useState(false);
+
+	useEffect(() => {
+		if (hasBeenSeen && !hasTrackedView) {
+			const ophanComponentEvent: ComponentEvent = {
+				component: {
+					componentType: 'CONTAINER',
+					id: `onwards-${onwardsSource}-${containerPosition}`,
+				},
+				action: 'VIEW',
+			};
+
+			void submitComponentEvent(ophanComponentEvent, renderingTarget);
+
+			setHasTrackedView(true);
+		}
+	}, [
+		hasBeenSeen,
+		hasTrackedView,
+		renderingTarget,
+		onwardsSource,
+		containerPosition,
+	]);
+
 	const { data, error } = useApi<OnwardsResponse>(url);
 
 	if (error) {
@@ -68,7 +104,7 @@ export const FetchOnwardsData = ({
 	if (!data?.trails) {
 		return (
 			<Placeholder
-				height={340} // best guess at typical height
+				heights={new Map([['mobile', 340]])} // best guess at typical height
 				shouldShimmer={false}
 				backgroundColor={palette('--article-background')}
 			/>
@@ -81,11 +117,13 @@ export const FetchOnwardsData = ({
 			.filter(isNonNullable),
 	);
 
+	const trails = buildTrails(data.trails, limit, isAdFreeUser, webURL);
+
 	return (
-		<div css={minHeight}>
+		<div ref={setIsInViewRef} css={minHeight}>
 			<Carousel
 				heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
-				trails={buildTrails(data.trails, limit, isAdFreeUser)}
+				trails={trails}
 				description={data.description}
 				onwardsSource={onwardsSource}
 				format={format}

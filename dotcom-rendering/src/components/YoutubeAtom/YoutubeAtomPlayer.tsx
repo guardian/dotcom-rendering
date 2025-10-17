@@ -97,28 +97,61 @@ const fullscreenStyles = (id: string) => css`
 `;
 
 /**
- * We set the external_fullscreen configuration property depending on
- * whether the native layer needs to delegate fullscreen styling to
- * the webview.
+ * The external_fullscreen configuration property determines
+ * if the YouTube player controls fullscreen behaviour.
  *
- * This is true for Android but not for iOS which handles fullscreen
- * natively. The Bridget method setFullscreen returns a value to
- * indicate this requirement. We use it here by passing a value of
- * false for fullscreen when intialising the player to determine
- * the value we need to pass for external_fullscreen.
+ * On Android webviews, the YouTube player does not implement
+ * fullscreen so we need to set external_fullscreen to true and
+ * apply custom styling to mimic fullscreen behaviour.
  *
- * external_fullscreen is allowed listed on our CODE and PROD domains.
+ * The Bridget method setFullscreen returns a boolean value
+ * to indicate if the YouTubeAtom should apply fullscreen
+ * styling itself.
+ *
+ * By invoking setFullscreen(false) when initialising the player
+ * and checking the return value we can determine if the player
+ * requires external_fullscreen to be set.
+ *
+ * This will return true for Android but false for iOS which
+ * handles fullscreen natively.
+ *
+ * We then add a listener for fullscreen toggles so we can
+ * a) apply or remove fullscreen styles
+ * b) invoke the Bridget method setFullscreen(true|false) so
+ *    the native layer can also toggle fullscreen
+ *
+ * external_fullscreen is allow-listed by YouTube
+ * on only our CODE and PROD domains.
  */
 const setAppsConfiguration = async (
 	basePlayerConfiguration: YouTubePlayerArgs,
 	renderingTarget: RenderingTarget,
-) => {
+	videoId: string,
+	setIsFullscreen: (value: React.SetStateAction<boolean>) => void,
+): Promise<YouTubePlayerArgs> => {
 	if (renderingTarget === 'Apps') {
 		const requiresWebFullscreen =
 			await getVideoClient().setFullscreen(false);
 		const updatedConfiguration = {
 			...basePlayerConfiguration,
-			external_fullscreen: requiresWebFullscreen ? 1 : 0,
+			youtubeOptions: {
+				...basePlayerConfiguration.youtubeOptions,
+				playerVars: {
+					...basePlayerConfiguration.youtubeOptions.playerVars,
+					external_fullscreen: requiresWebFullscreen ? 1 : 0,
+					fs: 1,
+				},
+				events: {
+					...basePlayerConfiguration.youtubeOptions.events,
+					onFullscreenToggled: () => {
+						log('dotcom', {
+							from: 'YoutubeAtomPlayer fullscreen toggled',
+							videoId,
+						});
+						setIsFullscreen((prev) => !prev);
+					},
+				},
+			},
 		};
 		return updatedConfiguration;
 	}
@@ -514,28 +547,22 @@ export const YoutubeAtomPlayer = ({
 						},
 						events: {
 							onStateChange: onStateChangeListener,
-							onFullscreenToggled: () => {
-								if (renderingTarget === 'Apps') {
-									log('dotcom', {
-										from: 'YoutubeAtomPlayer fullscreen',
-										videoId,
-									});
-									setIsFullscreen((prev) => !prev);
-								}
-							},
 						},
 					},
 					onReadyListener,
 					enableIma: enableAds,
 				};
 
-				const basePlayerConfigurationWithApps = setAppsConfiguration(
-					basePlayerConfiguration,
-					renderingTarget,
-				);
+				const basePlayerConfigurationWithAppsPromise =
+					setAppsConfiguration(
+						basePlayerConfiguration,
+						renderingTarget,
+						videoId,
+						setIsFullscreen,
+					);
 
 				void Promise.allSettled([
-					basePlayerConfigurationWithApps,
+					basePlayerConfigurationWithAppsPromise,
 					isSignedIn(),
 				]).then(([playerConfigurationResult, isSignedInResult]) => {
 					const playerConfiguration =

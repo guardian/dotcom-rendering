@@ -33,7 +33,9 @@ const adjustGalleryImages = (): void => {
 	const figures: NodeListOf<HTMLElement> = document.querySelectorAll(
 		'.editions-gallery-figure',
 	);
-	if (figures.length === 0) return;
+	if (figures.length === 0) {
+		return;
+	}
 
 	Array.from(figures).forEach((figure) => {
 		const imageEl = figure.querySelector('img');

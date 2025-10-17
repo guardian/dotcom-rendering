@@ -16,8 +16,8 @@ Add your AB tests to the `abTests` array in the `abTest.ts` file. Each test shou
 	expirationDate: '2050-12-30',
 	type: 'client',
 	audienceSize: 10 / 100,
-	audienceSpace: 'A',
 	groups: ['control', 'variant'],
+	shouldForceMetricsCollection: true
 }
 ```
 
@@ -74,3 +74,5 @@ The algorithm allocates tests available MVT IDs based on the audience size and s
 However, the allocation is completely separate for each audience space, so if you have a test in space `A` and move it to space `B`, it will be allocated different MVT IDs.
 
 The state of the AB tests is stored in Fastly dictionaries, which are updated when the `deploy` task is run. Logic in fastly VCL will then use these dictionaries to determine which users are in which test groups and set appropriate headers and/or cookies.
+
+See the [fastly-edge-cache documentation](https://github.com/guardian/fastly-edge-cache/blob/main/theguardiancom/docs/ab-testing.md) for even more details.

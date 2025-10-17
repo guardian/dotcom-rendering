@@ -219,7 +219,7 @@ export const getActiveMediaAtom = (
 			/**
 			 * Take one source for each supported video file type.
 			 */
-			const sources = supportedVideoFileTypes.reduce(
+			const sources = supportedVideoFileTypes.reduce<typeof assets>(
 				(acc, type) => {
 					const source = assets.find(
 						({ mimeType }) => mimeType === type,
@@ -227,7 +227,7 @@ export const getActiveMediaAtom = (
 					if (source) acc.push(source);
 					return acc;
 				},
-				[] as typeof assets,
+				[],
 			);
 			if (!sources.length) return undefined;
 
