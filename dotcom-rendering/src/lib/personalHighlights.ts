@@ -55,3 +55,9 @@ export const getOrderedHighlights = (): OrderedHighlights | undefined => {
 export const storeOrderInStorage = (order: OrderedHighlights): void => {
 	storage.local.set(OrderedHighlightsKey, order);
 };
+
+export const getOrderedCardsFromHistory = (
+	history: OrderedHighlights,
+): Array<DCRFrontCard> => {
+	return history.map((highlight) => highlight.card);
+};
