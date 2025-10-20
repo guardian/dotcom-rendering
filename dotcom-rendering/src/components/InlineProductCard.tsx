@@ -11,6 +11,7 @@ import {
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
+import type { ProductImage } from '../types/content';
 import { Caption } from './Caption';
 import { Picture } from './Picture';
 import type { ProductCardCta } from './ProductElement';
@@ -25,10 +26,7 @@ export type InlineProductCardProps = {
 	format: ArticleFormat;
 	brandName: string;
 	productName: string;
-	image: string;
-	altText: string;
-	credit: string;
-	displayCredit: boolean;
+	image?: ProductImage;
 	primaryPrice?: string;
 	productCtas: ProductCardCta[];
 	customAttributes: CustomAttributes[];
@@ -157,32 +155,48 @@ export const InlineProductCard = ({
 	productName,
 	primaryPrice,
 	image,
-	altText,
-	credit,
-	displayCredit,
 	customAttributes,
 	productCtas,
 	isCardOnly = false,
 }: InlineProductCardProps) => {
+
 	return (
 		<div css={[isCardOnly && productCard, !isCardOnly && showcaseCard]}>
 			{!!image && (
 				<div>
-					<Picture
-						role={'productCard'}
-						format={format}
-						master={image}
-						alt={altText}
-						height={165}
-						width={165}
-						loading={'eager'}
-					/>
+					{productCtas[0]?.url ? (
+						<a
+							href={productCtas[0].url}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<Picture
+								role={'productCard'}
+								format={format}
+								master={image.url}
+								alt={image.alt}
+								height={165}
+								width={165}
+								loading={'eager'}
+							/>
+						</a>
+					) : (
+						<Picture
+							role={'productCard'}
+							format={format}
+							master={image.url}
+							alt={image.alt}
+							height={165}
+							width={165}
+							loading={'eager'}
+						/>
+					)}
 					<Caption
 						shouldLimitWidth={true}
 						format={format}
 						isLeftCol={true}
-						displayCredit={displayCredit}
-						credit={credit}
+						displayCredit={image.displayCredit}
+						credit={image.credit}
 						isOverlaid={false}
 					/>
 				</div>

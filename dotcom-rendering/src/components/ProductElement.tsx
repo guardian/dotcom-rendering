@@ -9,6 +9,7 @@ import type {
 	ProductBlockElement,
 	ProductCta,
 	ProductDisplayType,
+	ProductImage,
 } from '../types/content';
 import { InlineProductCard } from './InlineProductCard';
 import { LeftColProductCard } from './LeftColProductCard';
@@ -24,7 +25,7 @@ export type Product = {
 	secondaryHeadline: string;
 	brandName: string;
 	productName: string;
-	image: string;
+	image: ProductImage;
 	retailer: string;
 	customAttributes: {
 		name: string;
@@ -74,11 +75,11 @@ export const ProductElement = ({
 	format: ArticleFormat;
 }) => {
 	const showContent =
-		product.displayType === 'inline-only' ||
-		product.displayType === 'inline-and-product-card';
+		product.displayType === 'InlineOnly' ||
+		product.displayType === 'InlineWithProductCard';
 	const showProductCard =
-		product.displayType === 'product-card-only' ||
-		product.displayType === 'inline-and-product-card';
+		product.displayType === 'ProductCardOnly' ||
+		product.displayType === 'InlineWithProductCard';
 	return (
 		<div>
 			{showContent && (
@@ -93,14 +94,11 @@ export const ProductElement = ({
 					format={format}
 					brandName={product.brandName}
 					productName={product.productName}
-					image={product.image.url}
+					image={product.image}
 					productCtas={transformCtas(product.productCtas)}
-					altText={product.altText}
-					credit={product.credit}
 					primaryPrice={product.productCtas[0]?.price}
-					displayCredit={product.displayCredit}
 					customAttributes={product.customAttributes}
-					isCardOnly={product.displayType === 'product-card-only'}
+					isCardOnly={product.displayType === 'ProductCardOnly'}
 				/>
 			)}
 		</div>
@@ -116,7 +114,7 @@ const Content = ({
 	ArticleElementComponent: NestedArticleElement;
 	format: ArticleFormat;
 }) => {
-	const showLeftCol = product.displayType === 'inline-and-product-card';
+	const showLeftCol = product.displayType === 'InlineWithProductCard';
 	const subheadingHtml = parseHtml(
 		`<h2 id="${product.h2Id ?? product.elementId}">${
 			product.primaryHeading ? `${product.primaryHeading}</br>` : ''
@@ -138,10 +136,7 @@ const Content = ({
 						<LeftColProductCard
 							brandName={product.brandName}
 							productName={product.productName}
-							image={product.image.url}
-							altText={product.altText}
-							credit={product.credit}
-							displayCredit={product.displayCredit}
+							image={product.image}
 							productCtas={transformCtas(product.productCtas)}
 							customAttributes={product.customAttributes}
 							format={format}
