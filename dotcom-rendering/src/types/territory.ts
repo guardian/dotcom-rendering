@@ -6,10 +6,7 @@ const AmericanTerritoriesSchema = union([
 	literal('US-West-Coast'),
 ]);
 
-export type AmericanTerritories = InferOutput<typeof AmericanTerritoriesSchema>;
-
 const EuropeanTerritoriesSchema = literal('EU-27');
-export type EuropeanTerritories = InferOutput<typeof EuropeanTerritoriesSchema>;
 
 const australianTerritories = ['AU-VIC', 'AU-QLD', 'AU-NSW'] as const;
 export const isAustralianTerritory = isOneOf(australianTerritories);
@@ -20,12 +17,8 @@ const AustralianTerritorySchema = union(
 export type AustralianTerritory = InferOutput<typeof AustralianTerritorySchema>;
 
 const NewZealandTerritoriesSchema = literal('NZ');
-export type NewZealandTerritories = InferOutput<
-	typeof NewZealandTerritoriesSchema
->;
 
 const UnknownTerritoriesSchema = literal('XX');
-export type UnknownTerritories = InferOutput<typeof UnknownTerritoriesSchema>;
 
 /**
  * List of territories that can be targetted against.
