@@ -1,5 +1,3 @@
-import CleanCSS from 'clean-css';
-
 type FontFamily =
 	| 'GH Guardian Headline'
 	| 'Guardian Egyptian Web' // Legacy of GH Guardian Headline
@@ -252,7 +250,7 @@ const fontList: FontDisplay[] = [
 const getFontUrl = (path: string): string =>
 	`https://assets.guim.co.uk/static/frontend/${path}`;
 
-const rawFontsCss = fontList
+export const rawFontsCss = fontList
 	.map(
 		(font) => `
 @font-face {
@@ -268,27 +266,4 @@ const rawFontsCss = fontList
 	)
 	.join('\n');
 
-/**
- * Running CleanCSS inside Storybook's browser bundle previously crashed
- * (e.g. reading undefined HTTP_PROXY via process.env in a non‑Node context). Mitigations:
- *  - Detect server by absence of window and only then run CleanCSS
- *  - In the browser return the raw (unminified) CSS – size not critical there
- *  - On any minification error log once and fall back to raw CSS
- */
-let fontsCssMinified: string | undefined;
-// Only attempt minification when not in a browser context.
-const canMinify = typeof window === 'undefined';
-
-if (canMinify) {
-	try {
-		fontsCssMinified = new CleanCSS().minify(rawFontsCss).styles;
-	} catch (e) {
-		// eslint-disable-next-line no-console -- surfaced only during build/runtime diagnostics
-		console.warn(
-			'[fonts-css] CleanCSS minification failed; using raw CSS',
-			e,
-		);
-	}
-}
-
-export const fontsCss = fontsCssMinified ?? rawFontsCss;
+export const fontsCss = rawFontsCss;
