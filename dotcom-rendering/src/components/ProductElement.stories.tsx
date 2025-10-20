@@ -282,6 +282,7 @@ const meta = {
 			theme: Pillar.Lifestyle,
 		},
 		ArticleElementComponent,
+		shouldShowLeftColCard: true,
 	},
 	decorators: [
 		(Story) => (
@@ -502,6 +503,7 @@ export const withoutFields: StoryFn = () => {
 			<ProductElement
 				product={{
 					...product,
+					image: undefined,
 					primaryHeading: '',
 					secondaryHeading: '',
 					brandName: '',
