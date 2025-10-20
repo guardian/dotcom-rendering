@@ -164,19 +164,33 @@ export const InlineProductCard = ({
 	productCtas,
 	isCardOnly = false,
 }: InlineProductCardProps) => {
+	const imageElement = (
+		<Picture
+			role={'productCard'}
+			format={format}
+			master={image}
+			alt={altText}
+			height={165}
+			width={165}
+			loading={'eager'}
+		/>
+	);
+
 	return (
 		<div css={[isCardOnly && productCard, !isCardOnly && showcaseCard]}>
 			{!!image && (
 				<div>
-					<Picture
-						role={'productCard'}
-						format={format}
-						master={image}
-						alt={altText}
-						height={165}
-						width={165}
-						loading={'eager'}
-					/>
+					{productCtas[0]?.url ? (
+						<a
+							href={productCtas[0].url}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							{imageElement}
+						</a>
+					) : (
+						imageElement
+					)}
 					<Caption
 						shouldLimitWidth={true}
 						format={format}

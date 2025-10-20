@@ -105,6 +105,17 @@ export const LeftColProductCard = ({
 	primaryPrice,
 	productCtas,
 }: LeftColProductCardProps) => {
+	const imageElement = (
+		<Picture
+			role={'productCard'}
+			format={format}
+			master={image}
+			alt={altText}
+			height={220}
+			width={220}
+			loading={'eager'}
+		/>
+	);
 	return (
 		<div css={card}>
 			{!!image && (
@@ -115,15 +126,17 @@ export const LeftColProductCard = ({
 						}
 					`}
 				>
-					<Picture
-						role={'productCard'}
-						format={format}
-						master={image}
-						alt={altText}
-						height={220}
-						width={220}
-						loading={'eager'}
-					/>
+					{productCtas[0]?.url ? (
+						<a
+							href={productCtas[0].url}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							{imageElement}
+						</a>
+					) : (
+						imageElement
+					)}
 					<Caption
 						shouldLimitWidth={true}
 						format={format}
