@@ -503,6 +503,7 @@ export const withoutFields: StoryFn = () => {
 			<ProductElement
 				product={{
 					...product,
+					image: undefined,
 					primaryHeading: '',
 					secondaryHeading: '',
 					brandName: '',
