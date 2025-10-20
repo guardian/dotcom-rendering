@@ -1,4 +1,4 @@
-name: 🧪 AB testing CI
+name: 🧪 AB testing
 
 permissions:
   contents: read
@@ -17,6 +17,7 @@ on:
 
 jobs:
   ci:
+    name: CI
     uses: ./.github/workflows/ab-testing-checks.yml
     with:
       save_build_artifact: true
