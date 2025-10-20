@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { log, storage } from '@guardian/libs';
+import { space } from '@guardian/source/foundations';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
@@ -25,7 +26,6 @@ import type {
 } from './LoopVideoPlayer';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
 import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
-import { space } from '@guardian/source/foundations';
 
 const videoContainerStyles = css`
 	z-index: ${getZIndex('loop-video-container')};
@@ -488,14 +488,15 @@ export const LoopVideo = ({
 	}
 
 	const handleLoadedMetadata = () => {
-		if (!vidRef.current) return;
+		const video = vidRef.current;
+		if (!video) return;
 
-		const track = vidRef.current.textTracks[0];
+		const track = video.textTracks[0];
 		if (!track?.cues) return;
 		const pxFromBottom = space[3];
 		const videoHeight =
-			vidRef.current.getBoundingClientRect().height ||
-			vidRef.current.clientHeight ||
+			video.getBoundingClientRect().height ||
+			video.clientHeight ||
 			height;
 		const percentFromTop =
 			((videoHeight - pxFromBottom) / videoHeight) * 100;
