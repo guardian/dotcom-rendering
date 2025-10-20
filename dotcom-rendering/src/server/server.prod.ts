@@ -16,7 +16,11 @@ import {
 	handleInteractive,
 } from './handler.article.web';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
-import { handleFront, handleTagPage } from './handler.front.web';
+import {
+	handleFront,
+	handleFrontValibot,
+	handleTagPage,
+} from './handler.front.web';
 import {
 	handleCricketMatchPage,
 	handleFootballMatchListPage,
@@ -63,7 +67,7 @@ export const prodServer = (): void => {
 	app.post('/Interactive', logRenderTime, handleInteractive);
 	app.post('/Blocks', logRenderTime, handleBlocks);
 	app.post('/Front', logRenderTime, handleFront);
-	app.post('/FrontValibot', logRenderTime, handleFront); // TODO: this is just for testing
+	app.post('/FrontValibot', logRenderTime, handleFrontValibot);
 	app.post('/TagPage', logRenderTime, handleTagPage);
 	app.post(
 		'/FootballMatchListPage',
