@@ -47,9 +47,9 @@ const insertDisclaimerElement = (elements: FEElement[]): FEElement[] => {
 };
 
 const enhanceDisclaimer =
-	(hasAffiliateLinksDisclaimer: boolean) =>
+	(hasAffiliateLinksDisclaimer: boolean, isNestedElement: boolean) =>
 	(elements: FEElement[]): FEElement[] =>
-		hasAffiliateLinksDisclaimer
+		hasAffiliateLinksDisclaimer && !isNestedElement
 			? insertDisclaimerElement(elements)
 			: elements;
 
