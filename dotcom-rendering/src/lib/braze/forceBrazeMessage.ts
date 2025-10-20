@@ -1,7 +1,14 @@
+const runtimeHostname = () => {
+	if (typeof process !== 'undefined' && process.env.HOSTNAME)
+		return process.env.HOSTNAME;
+	if (typeof window !== 'undefined') return window.location.hostname;
+	return 'localhost';
+};
+
 const FORCE_BRAZE_ALLOWLIST = [
 	'preview.gutools.co.uk',
 	'preview.code.dev-gutools.co.uk',
-	process.env.HOSTNAME ?? 'localhost',
+	runtimeHostname(),
 	'm.thegulocal.com',
 ];
 
