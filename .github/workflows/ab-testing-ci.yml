@@ -7,11 +7,13 @@ on:
   pull_request:
     paths:
       - 'ab-testing/**'
+      - '.github/workflows/ab-testing-*.yml'
   push:
     branches:
       - main
     paths:
       - 'ab-testing/**'
+      - '.github/workflows/ab-testing-*.yml'
 
 jobs:
   ci:
@@ -23,7 +25,7 @@ jobs:
       FASTLY_API_TOKEN: ${{ secrets.FASTLY_PROD_API_TOKEN }}
 
   deploy:
-    name: Deploy PROD
+    name: Deploy
     needs: ci
     if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/ab-testing-deploy.yml
