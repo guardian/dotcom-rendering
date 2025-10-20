@@ -111,29 +111,27 @@ export const design: ConfigurableDesign = {
 		},
 		primaryCta: {
 			default: {
-				text: stringToHexColour('FFFFFF'),
-				background: stringToHexColour('0077B6'),
+				text: stringToHexColour('052962'),
+				background: stringToHexColour('FFE500'),
 			},
 		},
 		secondaryCta: {
 			default: {
-				text: stringToHexColour('004E7C'),
+				text: stringToHexColour('000000'),
 				background: stringToHexColour('F1F8FC'),
-				border: stringToHexColour('004E7C'),
+				border: stringToHexColour('000000'),
 			},
 		},
 		closeButton: {
 			default: {
-				text: stringToHexColour('052962'),
-				background: stringToHexColour('F1F8FC'),
-				border: stringToHexColour('052962'),
+				text: stringToHexColour('000000'),
+				background: stringToHexColour('E6ECEF'),
+				border: stringToHexColour('E6ECEF'),
 			},
 		},
 		ticker: {
-			text: stringToHexColour('052962'),
 			filledProgress: stringToHexColour('052962'),
 			progressBarBackground: stringToHexColour('cccccc'),
-			goalMarker: stringToHexColour('000000'),
 			headlineColour: stringToHexColour('052962'),
 			totalColour: stringToHexColour('052962'),
 			goalColour: stringToHexColour('052962'),

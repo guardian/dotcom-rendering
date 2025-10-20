@@ -11,7 +11,6 @@ import {
 	InstanceClass,
 	InstanceType,
 	Peer,
-	SecurityGroup,
 	UserData,
 } from 'aws-cdk-lib/aws-ec2';
 import {
@@ -144,19 +143,5 @@ export class MobileAppsRendering extends GuStack {
 
 		const defaultChild = recordSet.node.defaultChild as CfnElement;
 		defaultChild.overrideLogicalId('DnsRecord');
-
-		const tempSecurityGroup = new SecurityGroup(
-			this,
-			'WazuhSecurityGroup',
-			{
-				vpc: appsRenderingApp.vpc,
-				description:
-					'Allow outbound traffic from wazuh agent to manager',
-			},
-		);
-		this.overrideLogicalId(tempSecurityGroup, {
-			logicalId: 'WazuhSecurityGroup',
-			reason: "Part one of updating to GuCDK 61.5.0+ whilst using Riff-Raff's ASG deployment type",
-		});
 	}
 }

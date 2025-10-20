@@ -279,8 +279,12 @@ export const reportAbuse =
 
 		const data = new URLSearchParams();
 		data.append('categoryId', categoryId.toString());
-		email && data.append('email', email.toString());
-		reason && data.append('reason', reason);
+		if (email) {
+			data.append('email', email.toString());
+		}
+		if (reason) {
+			data.append('reason', reason);
+		}
 
 		const authOptions = authStatus
 			? getOptionsHeaders(authStatus)

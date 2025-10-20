@@ -107,7 +107,10 @@ const positionStyles = css`
 const detailsStyles = css`
 	background-color: ${schemePalette('--labs-about-dropdown-background')};
 	color: ${schemePalette('--labs-about-dropdown-text')};
-	padding: ${space[5]}px;
+	padding: ${space[3]}px;
+	> :not(:last-child) {
+		margin-bottom: ${space[3]}px;
+	}
 `;
 
 export const LabsSectionHeader = ({ title, url, editionId }: Props) => (
@@ -137,7 +140,6 @@ export const LabsSectionHeader = ({ title, url, editionId }: Props) => (
 								advertiser and produced by the Guardian Labs
 								team.
 							</p>
-							<br />
 							<LinkButton
 								iconSide="right"
 								size="xsmall"

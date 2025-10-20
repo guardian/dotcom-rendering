@@ -5699,7 +5699,6 @@ const expandableAtomButtonFillDark: PaletteFunction = () =>
 
 const timelineAtomBulletLight: PaletteFunction = () => sourcePalette.neutral[7];
 const timelineAtomBulletDark: PaletteFunction = () => sourcePalette.neutral[93];
-sourcePalette.neutral[0];
 
 const timelineAtomHighlightText: PaletteFunction = () =>
 	sourcePalette.neutral[0];
@@ -5708,7 +5707,6 @@ const timelineAtomHighlightTextBackgroundLight: PaletteFunction = () =>
 	sourcePalette.brandAlt[400];
 const timelineAtomHighlightTextBackgroundDark: PaletteFunction = () =>
 	sourcePalette.brandAlt[200];
-sourcePalette.neutral[0];
 
 const emailSignupButtonBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[0];
