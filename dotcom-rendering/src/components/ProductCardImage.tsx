@@ -60,9 +60,7 @@ export const ProductCardImage = ({
 				/>
 			)}
 			<Caption
-				shouldLimitWidth={true}
 				format={format}
-				isLeftCol={true}
 				displayCredit={image.displayCredit}
 				credit={image.credit}
 				isOverlaid={false}

@@ -68,12 +68,6 @@ const buttonContainer = css`
 	padding-bottom: ${space[4]}px;
 	min-width: 100%;
 `;
-
-const productImageCaption = css`
-	figcaption {
-		position: static;
-	}
-`;
 const customAttributesContainer = css`
 	border-top: 1px solid ${palette('--section-border')};
 	padding-top: ${space[3]}px;
@@ -110,7 +104,6 @@ export const LeftColProductCard = ({
 				format={format}
 				image={image}
 				url={productCtas[0]?.url}
-				css={productImageCaption}
 			/>
 			<div css={productInfoContainer}>
 				<div css={brandNameFont}>{brandName}</div>
