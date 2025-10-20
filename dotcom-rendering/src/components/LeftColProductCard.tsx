@@ -117,6 +117,9 @@ export const LeftColProductCard = ({
 			loading={'eager'}
 		/>
 	);
+
+	const safeUrl = getSafeUrl(productCtas[0]?.url);
+
 	return (
 		<div css={card}>
 			{!!image && (
@@ -127,9 +130,9 @@ export const LeftColProductCard = ({
 						}
 					`}
 				>
-					{productCtas[0] && getSafeUrl(productCtas[0].url) ? (
+					{safeUrl ? (
 						<a
-							href={productCtas[0].url}
+							href={safeUrl}
 							target="_blank"
 							rel="noopener noreferrer"
 						>

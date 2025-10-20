@@ -177,13 +177,15 @@ export const InlineProductCard = ({
 		/>
 	);
 
+	const safeUrl = getSafeUrl(productCtas[0]?.url);
+
 	return (
 		<div css={[isCardOnly && productCard, !isCardOnly && showcaseCard]}>
 			{!!image && (
 				<div>
-					{productCtas[0] && getSafeUrl(productCtas[0].url) ? (
+					{safeUrl ? (
 						<a
-							href={productCtas[0].url}
+							href={safeUrl}
 							target="_blank"
 							rel="noopener noreferrer"
 						>
