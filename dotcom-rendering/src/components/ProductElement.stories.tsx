@@ -333,6 +333,7 @@ export const withoutHeading: StoryFn = () => {
 					theme: Pillar.Lifestyle,
 				}}
 				ArticleElementComponent={ArticleElementComponent}
+				shouldShowLeftColCard={true}
 			/>
 			<ProductElement
 				product={{
@@ -346,6 +347,7 @@ export const withoutHeading: StoryFn = () => {
 					theme: Pillar.Lifestyle,
 				}}
 				ArticleElementComponent={ArticleElementComponent}
+				shouldShowLeftColCard={true}
 			/>
 		</>
 	);
@@ -365,6 +367,7 @@ export const displayCredit: StoryFn = () => {
 					theme: Pillar.Lifestyle,
 				}}
 				ArticleElementComponent={ArticleElementComponent}
+				shouldShowLeftColCard={true}
 			/>
 			<ProductElement
 				product={{
@@ -377,6 +380,7 @@ export const displayCredit: StoryFn = () => {
 					theme: Pillar.Lifestyle,
 				}}
 				ArticleElementComponent={ArticleElementComponent}
+				shouldShowLeftColCard={true}
 			/>
 		</>
 	);
@@ -396,6 +400,7 @@ export const noPrimaryHeading: StoryFn = () => {
 				theme: Pillar.Lifestyle,
 			}}
 			ArticleElementComponent={ArticleElementComponent}
+			shouldShowLeftColCard={true}
 		/>
 	);
 };
@@ -414,6 +419,7 @@ export const noSecondaryHeading: StoryFn = () => {
 				theme: Pillar.Lifestyle,
 			}}
 			ArticleElementComponent={ArticleElementComponent}
+			shouldShowLeftColCard={true}
 		/>
 	);
 };
@@ -431,6 +437,7 @@ export const displayTypeProductCardOnly: StoryFn = () => {
 				theme: Pillar.Lifestyle,
 			}}
 			ArticleElementComponent={ArticleElementComponent}
+			shouldShowLeftColCard={true}
 		/>
 	);
 };
@@ -446,6 +453,7 @@ export const MultipleProducts: StoryFn = () => {
 					theme: Pillar.Lifestyle,
 				}}
 				ArticleElementComponent={ArticleElementComponent}
+				shouldShowLeftColCard={true}
 			/>
 			<ProductElement
 				product={product}
@@ -455,6 +463,7 @@ export const MultipleProducts: StoryFn = () => {
 					theme: Pillar.Lifestyle,
 				}}
 				ArticleElementComponent={ArticleElementComponent}
+				shouldShowLeftColCard={true}
 			/>
 		</>
 	);
@@ -471,6 +480,7 @@ export const MultipleProductsWithoutStats: StoryFn = () => {
 					theme: Pillar.Lifestyle,
 				}}
 				ArticleElementComponent={ArticleElementComponent}
+				shouldShowLeftColCard={true}
 			/>
 			<ProductElement
 				product={{ ...product, customAttributes: [] }}
@@ -480,6 +490,7 @@ export const MultipleProductsWithoutStats: StoryFn = () => {
 					theme: Pillar.Lifestyle,
 				}}
 				ArticleElementComponent={ArticleElementComponent}
+				shouldShowLeftColCard={true}
 			/>
 		</>
 	);
@@ -504,6 +515,7 @@ export const withoutFields: StoryFn = () => {
 					theme: Pillar.Lifestyle,
 				}}
 				ArticleElementComponent={ArticleElementComponent}
+				shouldShowLeftColCard={true}
 			/>
 		</>
 	);

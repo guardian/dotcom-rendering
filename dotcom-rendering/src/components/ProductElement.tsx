@@ -69,10 +69,12 @@ export const ProductElement = ({
 	product,
 	ArticleElementComponent,
 	format,
+	shouldShowLeftColCard,
 }: {
 	product: ProductBlockElement;
 	ArticleElementComponent: NestedArticleElement;
 	format: ArticleFormat;
+	shouldShowLeftColCard: boolean;
 }) => {
 	const showContent =
 		product.displayType === 'InlineOnly' ||
@@ -87,6 +89,7 @@ export const ProductElement = ({
 					product={product}
 					format={format}
 					ArticleElementComponent={ArticleElementComponent}
+					shouldShowLeftColCard={shouldShowLeftColCard}
 				/>
 			)}
 			{showProductCard && (
@@ -109,12 +112,16 @@ const Content = ({
 	product,
 	ArticleElementComponent,
 	format,
+	shouldShowLeftColCard,
 }: {
 	product: ProductBlockElement;
 	ArticleElementComponent: NestedArticleElement;
 	format: ArticleFormat;
+	shouldShowLeftColCard: boolean;
 }) => {
-	const showLeftCol = product.displayType === 'InlineWithProductCard';
+	const showLeftCol =
+		product.displayType === 'InlineWithProductCard' &&
+		shouldShowLeftColCard;
 	const subheadingHtml = parseHtml(
 		`<h2 id="${product.h2Id ?? product.elementId}">${
 			product.primaryHeading ? `${product.primaryHeading}</br>` : ''

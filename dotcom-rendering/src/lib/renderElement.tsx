@@ -607,6 +607,7 @@ export const renderElement = ({
 							shouldHideAds,
 						})}
 						format={format}
+						shouldShowLeftColCard={!!switches.productLeftColCards}
 					/>
 				</>
 			);
