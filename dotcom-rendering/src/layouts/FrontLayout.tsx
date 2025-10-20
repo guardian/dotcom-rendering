@@ -234,9 +234,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					hasPageSkin={hasPageSkin}
 					hasPageSkinContentSelfConstrain={true}
 					pageId={pageId}
-					wholePictureLogoSwitch={
-						front.config.switches.wholePictureLogo
-					}
 				/>
 
 				{isPaidContent && (
