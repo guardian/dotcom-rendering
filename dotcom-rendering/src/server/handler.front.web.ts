@@ -1,6 +1,7 @@
 import { isUndefined } from '@guardian/libs';
 import type { RequestHandler } from 'express';
-import type { FEFront } from '../frontend/feFront';
+import { type IssuePathItem, safeParse } from 'valibot';
+import { type FEFront, FEFrontSchema } from '../frontend/feFront';
 import type { FETagPage } from '../frontend/feTagPage';
 import { decideTagPageBranding, pickBrandingForEdition } from '../lib/branding';
 import { decideTrail } from '../lib/decideTrail';
@@ -20,9 +21,7 @@ import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderFront, renderTagPage } from './render.front.web';
 
-const enhanceFront = (body: unknown): Front => {
-	const data: FEFront = validateAsFEFront(body);
-
+const enhanceFront = (data: FEFront): Front => {
 	return {
 		...data,
 		webTitle: `${
@@ -138,7 +137,18 @@ const enhanceTagPage = (body: unknown): TagPage => {
 
 export const handleFront: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('front');
-	const front = enhanceFront(body);
+	const data: FEFront = validateAsFEFront(body);
+	const front = enhanceFront(data);
+	const { html, prefetchScripts } = renderFront({
+		front,
+	});
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
+};
+
+export const handleFrontValibot: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('front');
+	const data = validateFeFrontValibot(body);
+	const front = enhanceFront(data);
 	const { html, prefetchScripts } = renderFront({
 		front,
 	});
@@ -152,4 +162,39 @@ export const handleTagPage: RequestHandler = ({ body }, res) => {
 		tagPage,
 	});
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
+};
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- testing
+const validateFeFrontValibot = (data: unknown): FEFront => {
+	const result = safeParse(FEFrontSchema, data);
+	if (result.success) {
+		const frontendData: FEFront = result.output;
+		return frontendData;
+	} else {
+		const errorMessages: string[] = [];
+		console.error('Validation errors:');
+		for (const issue of result.issues) {
+			if (issue.path) {
+				for (const entry of issue.path.entries()) {
+					valibotParseFailure(errorMessages, entry);
+				}
+			}
+
+			console.log(errorMessages);
+		}
+		const errorMsg = errorMessages.join('\n');
+		throw new TypeError(`Validation failed ${errorMsg}`);
+	}
+};
+
+const valibotParseFailure = (
+	errorString: string[],
+	entry: [number, IssuePathItem],
+) => {
+	const test = entry[1].key as string;
+	const type = entry[1].type;
+
+	errorString.push(
+		`entry ${entry[0]} with key ${test.toString()} with type ${type}`,
+	);
 };

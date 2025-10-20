@@ -13,7 +13,11 @@ import {
 	handleInteractive,
 } from './handler.article.web';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
-import { handleFront, handleTagPage } from './handler.front.web';
+import {
+	handleFront,
+	handleFrontValibot,
+	handleTagPage,
+} from './handler.front.web';
 import {
 	handleCricketMatchPage,
 	handleFootballMatchListPage,
@@ -93,6 +97,7 @@ renderer.get('/Article/*url', handleArticle);
 renderer.get('/Interactive/*url', handleInteractive);
 renderer.get('/Blocks/*url', handleBlocks);
 renderer.get('/Front/*url', handleFront);
+renderer.get('/FrontValibot/*url', handleFrontValibot); // TODO: this is just for testing
 renderer.get('/TagPage/*url', handleTagPage);
 renderer.get('/EmailNewsletters/*url', handleAllEditorialNewslettersPage);
 renderer.get('/AppsArticle/*url', handleAppsArticle);

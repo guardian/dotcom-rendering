@@ -63,6 +63,7 @@ export const prodServer = (): void => {
 	app.post('/Interactive', logRenderTime, handleInteractive);
 	app.post('/Blocks', logRenderTime, handleBlocks);
 	app.post('/Front', logRenderTime, handleFront);
+	app.post('/FrontValibot', logRenderTime, handleFront); // TODO: this is just for testing
 	app.post('/TagPage', logRenderTime, handleTagPage);
 	app.post(
 		'/FootballMatchListPage',
