@@ -7,7 +7,6 @@ import {
 	textSans17,
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
-import { getSafeUrl } from '../lib/urlUtils';
 import { palette } from '../palette';
 import { Caption } from './Caption';
 import { ProductCardButtons } from './InlineProductCard';
@@ -117,9 +116,6 @@ export const LeftColProductCard = ({
 			loading={'eager'}
 		/>
 	);
-
-	const safeUrl = getSafeUrl(productCtas[0]?.url);
-
 	return (
 		<div css={card}>
 			{!!image && (
@@ -130,9 +126,9 @@ export const LeftColProductCard = ({
 						}
 					`}
 				>
-					{safeUrl ? (
+					{productCtas[0]?.url ? (
 						<a
-							href={safeUrl}
+							href={productCtas[0].url}
 							target="_blank"
 							rel="noopener noreferrer"
 						>

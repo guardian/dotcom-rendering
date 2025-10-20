@@ -10,7 +10,6 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
-import { getSafeUrl } from '../lib/urlUtils';
 import { palette } from '../palette';
 import { Caption } from './Caption';
 import { Picture } from './Picture';
@@ -176,16 +175,13 @@ export const InlineProductCard = ({
 			loading={'eager'}
 		/>
 	);
-
-	const safeUrl = getSafeUrl(productCtas[0]?.url);
-
 	return (
 		<div css={[isCardOnly && productCard, !isCardOnly && showcaseCard]}>
 			{!!image && (
 				<div>
-					{safeUrl ? (
+					{productCtas[0]?.url ? (
 						<a
-							href={safeUrl}
+							href={productCtas[0].url}
 							target="_blank"
 							rel="noopener noreferrer"
 						>
