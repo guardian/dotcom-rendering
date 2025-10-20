@@ -97,8 +97,8 @@ importers:
         specifier: 7.0.0
         version: 7.0.0
       '@guardian/cdk':
-        specifier: 62.0.0
-        version: 62.0.0(aws-cdk-lib@2.220.0(constructs@10.4.2))(aws-cdk@2.1030.0)(constructs@10.4.2)
+        specifier: 62.0.1
+        version: 62.0.1(aws-cdk-lib@2.220.0(constructs@10.4.2))(aws-cdk@2.1030.0)(constructs@10.4.2)
       '@guardian/content-api-models':
         specifier: 31.0.0
         version: 31.0.0
@@ -334,8 +334,8 @@ importers:
         specifier: 6.1.0
         version: 6.1.0(browserslist@4.24.4)(tslib@2.6.2)
       '@guardian/cdk':
-        specifier: 62.0.0
-        version: 62.0.0(aws-cdk-lib@2.220.0(constructs@10.4.2))(aws-cdk@2.1030.0)(constructs@10.4.2)
+        specifier: 62.0.1
+        version: 62.0.1(aws-cdk-lib@2.220.0(constructs@10.4.2))(aws-cdk@2.1030.0)(constructs@10.4.2)
       '@guardian/commercial-core':
         specifier: 28.0.0
         version: 28.0.0(@guardian/ab-core@8.0.0(tslib@2.6.2)(typescript@5.5.3))(@guardian/libs@26.0.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))
@@ -2329,12 +2329,12 @@ packages:
       browserslist: ^4.22.2
       tslib: ^2.6.2
 
-  '@guardian/cdk@62.0.0':
-    resolution: {integrity: sha512-IQGU2QJSNg1PwOnoSH1R7Chf1GS/+5gUYwGAXmu3euKtfHigVRGIBtBZgIAkoMzuW8wNDdYBzJZTDytgEaR7sw==}
+  '@guardian/cdk@62.0.1':
+    resolution: {integrity: sha512-scDdsd/dLlRWn/GrLgGhXvBoowQRGrt2mCF+gNJq2oF+thINOF7eJtIuRpUwoKSHrjkN59eyjdYKbX8w3rUl0g==}
     hasBin: true
     peerDependencies:
-      aws-cdk: ^2.1029.1
-      aws-cdk-lib: ^2.214.0
+      aws-cdk: ^2.1030.0
+      aws-cdk-lib: ^2.219.0
       constructs: ^10.4.2
 
   '@guardian/commercial-core@28.0.0':
@@ -5005,8 +5005,8 @@ packages:
     resolution: {integrity: sha512-QVb0dM5HvG+uaxitm8wONl7jltx8dqhfU33DcqtOZcLSVIKSDDLDi7+0LbAKiyI8hD9u42m2YxXSkMGWThaecQ==}
     engines: {iojs: '>= 1.0.0', node: '>= 0.12.0'}
 
-  codemaker@1.115.0:
-    resolution: {integrity: sha512-OYTghD9XRaXzjByMXEljGeF5Ci9zZnq90O3GEfkMn4nGWyp7IXHOq4by6IiR2ByJSywTcnoQg0NQnDZUgj/YfA==}
+  codemaker@1.116.0:
+    resolution: {integrity: sha512-o23BKz+Y0Yam/czEbe3UAXVqSY4HFKgUYTffx3YW6yPtAVSX0d50BgIU0RxCUGIWmFD9Go3tXqraRDpo7TxMLg==}
     engines: {node: '>= 14.17.0'}
 
   collect-v8-coverage@1.0.2:
@@ -12633,14 +12633,14 @@ snapshots:
       browserslist: 4.24.4
       tslib: 2.6.2
 
-  '@guardian/cdk@62.0.0(aws-cdk-lib@2.220.0(constructs@10.4.2))(aws-cdk@2.1030.0)(constructs@10.4.2)':
+  '@guardian/cdk@62.0.1(aws-cdk-lib@2.220.0(constructs@10.4.2))(aws-cdk@2.1030.0)(constructs@10.4.2)':
     dependencies:
       '@oclif/core': 3.26.6
       aws-cdk: 2.1030.0
       aws-cdk-lib: 2.220.0(constructs@10.4.2)
       aws-sdk: 2.1692.0
       chalk: 4.1.2
-      codemaker: 1.115.0
+      codemaker: 1.116.0
       constructs: 10.4.2
       git-url-parse: 16.1.0
       js-yaml: 4.1.0
@@ -16182,7 +16182,7 @@ snapshots:
 
   co@4.6.0: {}
 
-  codemaker@1.115.0:
+  codemaker@1.116.0:
     dependencies:
       camelcase: 6.3.0
       decamelize: 5.0.1
