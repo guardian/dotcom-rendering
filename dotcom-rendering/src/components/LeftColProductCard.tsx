@@ -9,9 +9,8 @@ import {
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import type { ProductImage } from '../types/content';
-import { Caption } from './Caption';
 import { ProductCardButtons } from './InlineProductCard';
-import { Picture } from './Picture';
+import { ProductCardImage } from './ProductCardImage';
 import type { ProductCardCta } from './ProductElement';
 
 export type CustomAttributes = {
@@ -70,6 +69,11 @@ const buttonContainer = css`
 	min-width: 100%;
 `;
 
+const productImageCaption = css`
+	figcaption {
+		position: static;
+	}
+`;
 const customAttributesContainer = css`
 	border-top: 1px solid ${palette('--section-border')};
 	padding-top: ${space[3]}px;
@@ -102,51 +106,12 @@ export const LeftColProductCard = ({
 }: LeftColProductCardProps) => {
 	return (
 		<div css={card}>
-			{!!image && (
-				<div
-					css={css`
-						figcaption {
-							position: static;
-						}
-					`}
-				>
-					{productCtas[0]?.url ? (
-						<a
-							href={productCtas[0].url}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							<Picture
-								role={'productCard'}
-								format={format}
-								master={image.url}
-								alt={image.alt}
-								height={220}
-								width={220}
-								loading={'eager'}
-							/>
-						</a>
-					) : (
-						<Picture
-							role={'productCard'}
-							format={format}
-							master={image.url}
-							alt={image.alt}
-							height={220}
-							width={220}
-							loading={'eager'}
-						/>
-					)}
-					<Caption
-						shouldLimitWidth={true}
-						format={format}
-						isLeftCol={true}
-						displayCredit={image.displayCredit}
-						credit={image.credit}
-						isOverlaid={false}
-					/>
-				</div>
-			)}
+			<ProductCardImage
+				format={format}
+				image={image}
+				url={productCtas[0]?.url}
+				css={productImageCaption}
+			/>
 			<div css={productInfoContainer}>
 				<div css={brandNameFont}>{brandName}</div>
 				<div css={productNameFont}>{productName}</div>

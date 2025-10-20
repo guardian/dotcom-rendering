@@ -282,6 +282,7 @@ const meta = {
 			theme: Pillar.Lifestyle,
 		},
 		ArticleElementComponent,
+		shouldShowLeftColCard: true,
 	},
 	decorators: [
 		(Story) => (

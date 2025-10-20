@@ -12,8 +12,7 @@ import {
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import type { ProductImage } from '../types/content';
-import { Caption } from './Caption';
-import { Picture } from './Picture';
+import { ProductCardImage } from './ProductCardImage';
 import type { ProductCardCta } from './ProductElement';
 import { ProductLinkButton } from './ProductLinkButton';
 
@@ -161,45 +160,11 @@ export const InlineProductCard = ({
 }: InlineProductCardProps) => {
 	return (
 		<div css={[isCardOnly && productCard, !isCardOnly && showcaseCard]}>
-			{!!image && (
-				<div>
-					{productCtas[0]?.url ? (
-						<a
-							href={productCtas[0].url}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							<Picture
-								role={'productCard'}
-								format={format}
-								master={image.url}
-								alt={image.alt}
-								height={165}
-								width={165}
-								loading={'eager'}
-							/>
-						</a>
-					) : (
-						<Picture
-							role={'productCard'}
-							format={format}
-							master={image.url}
-							alt={image.alt}
-							height={165}
-							width={165}
-							loading={'eager'}
-						/>
-					)}
-					<Caption
-						shouldLimitWidth={true}
-						format={format}
-						isLeftCol={true}
-						displayCredit={image.displayCredit}
-						credit={image.credit}
-						isOverlaid={false}
-					/>
-				</div>
-			)}
+			<ProductCardImage
+				format={format}
+				image={image}
+				url={productCtas[0]?.url}
+			/>
 			<div css={productInfoContainer}>
 				<div css={primaryHeading}>{brandName}</div>
 				<div css={productNameStyle}>{productName}</div>
