@@ -25,6 +25,7 @@ import type {
 } from './LoopVideoPlayer';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
 import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
+import { space } from '@guardian/source/foundations';
 
 const videoContainerStyles = css`
 	z-index: ${getZIndex('loop-video-container')};
@@ -491,7 +492,7 @@ export const LoopVideo = ({
 
 		const track = vidRef.current.textTracks[0];
 		if (!track?.cues) return;
-		const pxFromBottom = 16;
+		const pxFromBottom = space[3];
 		const videoHeight =
 			vidRef.current.getBoundingClientRect().height ||
 			vidRef.current.clientHeight ||
