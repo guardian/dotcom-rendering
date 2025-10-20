@@ -1,6 +1,7 @@
 import type { Meta } from '@storybook/react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import type { ProductImage } from '../types/content';
 import type { LeftColProductCardProps } from './LeftColProductCard';
 import { LeftColProductCard } from './LeftColProductCard';
 
@@ -26,11 +27,21 @@ const meta = {
 
 export default meta;
 
+const productImage: ProductImage = {
+	url: 'https://media.guimcode.co.uk/cb193848ed75d40103eceaf12b448de2330770dc/0_0_725_725/725.jpg',
+	caption: 'Filter-2 test image for live demo',
+	height: 1,
+	width: 1,
+	alt: 'Bosch Sky kettle',
+	credit: 'Photograph: Rachel Ogden/The Guardian',
+	displayCredit: false,
+};
+
 const sampleProductCard: LeftColProductCardProps = {
 	format,
 	brandName: 'AirCraft',
 	productName: 'Lume',
-	image: 'https://media.guim.co.uk/ed32f52c10d742be18c4ff1b218dce611e71f57e/500_0_3000_3000/master/3000.jpg',
+	image: productImage,
 	productCtas: [
 		{
 			url: 'https://www.theguardian.com',
@@ -48,9 +59,6 @@ const sampleProductCard: LeftColProductCardProps = {
 			value: 'there’s nowhere to stow the remote control',
 		},
 	],
-	altText: 'A small fan on a table',
-	displayCredit: true,
-	credit: 'AirCraft Photography by John Smith',
 };
 
 export const Default = () => <LeftColProductCard {...sampleProductCard} />;

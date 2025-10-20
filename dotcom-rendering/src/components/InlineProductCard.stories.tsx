@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta } from '@storybook/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import type { ProductImage } from '../types/content';
 import { ArticleContainer } from './ArticleContainer';
 import type { InlineProductCardProps } from './InlineProductCard';
 import { InlineProductCard } from './InlineProductCard';
@@ -60,13 +61,23 @@ const meta = {
 
 export default meta;
 
+const productImage: ProductImage = {
+	url: 'https://media.guimcode.co.uk/cb193848ed75d40103eceaf12b448de2330770dc/0_0_725_725/725.jpg',
+	caption: 'Filter-2 test image for live demo',
+	height: 1,
+	width: 1,
+	alt: 'Bosch Sky kettle',
+	credit: 'Photograph: Rachel Ogden/The Guardian',
+	displayCredit: false,
+};
+
 const sampleProductCard: InlineProductCardProps = {
 	format: {
 		design: ArticleDesign.Standard,
 		display: ArticleDisplay.Standard,
 		theme: Pillar.Lifestyle,
 	},
-	image: 'https://media.guim.co.uk/ed32f52c10d742be18c4ff1b218dce611e71f57e/500_0_3000_3000/master/3000.jpg',
+	image: productImage,
 	productCtas: [
 		{
 			url: 'https://www.theguardian.com',
@@ -79,9 +90,6 @@ const sampleProductCard: InlineProductCardProps = {
 	],
 	brandName: 'AirCraft',
 	productName: 'Lume',
-	altText: 'A small fan on a table',
-	credit: 'AirCraft Photography by John Smith',
-	displayCredit: false,
 	customAttributes: [
 		{ name: 'What we love', value: 'It packs away pretty small' },
 		{
@@ -101,7 +109,10 @@ export const productCardOnly = () => (
 export const productCardOnlyDisplayCredit = () => (
 	<InlineProductCard
 		{...sampleProductCard}
+		image={{
+			...productImage,
+			displayCredit: true,
+		}}
 		isCardOnly={true}
-		displayCredit={true}
 	/>
 );

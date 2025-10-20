@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { getNestedArticleElement } from '../lib/renderElement';
-import type { ProductBlockElement } from '../types/content';
+import type { ProductBlockElement, ProductImage } from '../types/content';
 import { ArticleContainer } from './ArticleContainer';
 import { ProductElement } from './ProductElement';
 import { Section as SectionComponent } from './Section';
@@ -19,6 +19,16 @@ const ArticleElementComponent = getNestedArticleElement({
 	shouldHideAds: false,
 });
 
+const productImage: ProductImage = {
+	url: 'https://media.guimcode.co.uk/cb193848ed75d40103eceaf12b448de2330770dc/0_0_725_725/725.jpg',
+	caption: 'Filter-2 test image for live demo',
+	height: 1,
+	width: 1,
+	alt: 'Bosch Sky kettle',
+	credit: 'Photograph: Rachel Ogden/The Guardian',
+	displayCredit: false,
+};
+
 const product: ProductBlockElement = {
 	_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
 	elementId: 'b1f6e8e2-3f3a-4f0c-8d1e-5f3e3e3e3e3e',
@@ -26,17 +36,8 @@ const product: ProductBlockElement = {
 	secondaryHeading: 'Bosch Sky Kettle',
 	brandName: 'Bosch',
 	productName: 'Sky Kettle',
-	image: {
-		index: 0,
-		fields: {
-			height: '500',
-			width: '500',
-		},
-		mediaType: 'Image',
-		mimeType: 'image/jpeg',
-		url: 'https://media.guimcode.co.uk/cb193848ed75d40103eceaf12b448de2330770dc/0_0_725_725/500.jpg',
-	},
-	displayType: 'inline-and-product-card',
+	image: productImage,
+	displayType: 'InlineWithProductCard',
 	customAttributes: [
 		{ name: 'What we love', value: 'It pours well and looks great' },
 		{
@@ -260,11 +261,6 @@ const product: ProductBlockElement = {
 			elementId: 'd98fc724-8908-46e2-acc6-4739ad4d5719',
 		},
 	],
-	credit: 'Photograph: Rachel Ogden/The Guardian',
-	displayCredit: false,
-	altText: 'Bosch Sky Kettle',
-	caption:
-		'The Bosch Sky Kettle is a good all-rounder. Photograph: Rachel Ogden/The Guardian',
 };
 const meta = {
 	component: ProductElement,
@@ -361,7 +357,7 @@ export const displayCredit: StoryFn = () => {
 			<ProductElement
 				product={{
 					...product,
-					displayCredit: true,
+					image: { ...productImage, displayCredit: true },
 				}}
 				format={{
 					design: ArticleDesign.Review,
@@ -373,7 +369,7 @@ export const displayCredit: StoryFn = () => {
 			<ProductElement
 				product={{
 					...product,
-					displayCredit: true,
+					image: { ...productImage, displayCredit: true },
 				}}
 				format={{
 					design: ArticleDesign.Review,
@@ -427,7 +423,7 @@ export const displayTypeProductCardOnly: StoryFn = () => {
 		<ProductElement
 			product={{
 				...product,
-				displayType: 'product-card-only',
+				displayType: 'ProductCardOnly',
 			}}
 			format={{
 				design: ArticleDesign.Review,
@@ -501,10 +497,6 @@ export const withoutFields: StoryFn = () => {
 					productName: '',
 					productCtas: [],
 					customAttributes: [],
-					image: {
-						...product.image,
-						url: '',
-					},
 				}}
 				format={{
 					design: ArticleDesign.Review,

@@ -476,11 +476,7 @@ export interface ProductBlockElement {
 	brandName: string;
 	starRating: string;
 	productName: string;
-	image: Image;
-	altText: string;
-	caption: string;
-	displayCredit: boolean;
-	credit: string;
+	image?: ProductImage;
 	secondaryHeading: string;
 	primaryHeading: string;
 	customAttributes: { name: string; value: string }[];
@@ -888,9 +884,9 @@ export interface ImageSource {
 }
 
 export type ProductDisplayType =
-	| 'inline-only'
-	| 'product-card-only'
-	| 'inline-and-product-card';
+	| 'InlineOnly'
+	| 'ProductCardOnly'
+	| 'InlineWithProductCard';
 
 export type ProductCta = {
 	url: string;
@@ -901,6 +897,16 @@ export type ProductCta = {
 
 export interface SrcSetItem {
 	src: string;
+	width: number;
+}
+
+export interface ProductImage {
+	url: string;
+	caption: string;
+	credit: string;
+	alt: string;
+	displayCredit: boolean;
+	height: number;
 	width: number;
 }
 
