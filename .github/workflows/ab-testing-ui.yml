@@ -3,11 +3,13 @@ on:
   pull_request:
     paths:
       - 'ab-testing/**'
+      - '.github/workflows/ab-testing-*.yml'
   push:
     branches:
       - main
     paths:
       - 'ab-testing/**'
+      - '.github/workflows/ab-testing-*.yml'
 
 jobs:
   build-ui:
