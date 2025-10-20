@@ -33,7 +33,6 @@ interface Props {
 	showSlimNav?: boolean;
 	hasPageSkin?: boolean;
 	pageId?: string;
-	wholePictureLogoSwitch?: boolean;
 }
 
 const gridContent = css`
@@ -97,22 +96,6 @@ const logoStylesFromLeftCol = css`
 	svg {
 		${from.leftCol} {
 			width: 324px;
-		}
-	}
-`;
-
-const theWholePictureStyles = css`
-	margin-bottom: 2px;
-	${from.tablet} {
-		margin-top: 10px;
-		margin-bottom: 6px;
-	}
-
-	svg {
-		height: auto;
-		width: 173px;
-		${from.tablet} {
-			width: 246px;
 		}
 	}
 `;
@@ -337,12 +320,8 @@ export const Titlepiece = ({
 	showSlimNav,
 	hasPageSkin,
 	pageId = '',
-	wholePictureLogoSwitch,
 }: Props) => {
 	const { showBanner } = useEditionSwitcherBanner(pageId, editionId);
-
-	const showWholePictureLogo =
-		!!wholePictureLogoSwitch && !showSlimNav && editionId === 'US';
 
 	return (
 		<Grid
@@ -527,10 +506,9 @@ export const Titlepiece = ({
 					logoStyles,
 					!hasPageSkin && logoStylesFromLeftCol,
 					showSlimNav && slimNavLogoOverrides,
-					showWholePictureLogo && theWholePictureStyles,
 				]}
 			>
-				<Logo showWholePictureLogo={showWholePictureLogo} />
+				<Logo />
 			</div>
 
 			{/** Expanded menu checkbox */}
