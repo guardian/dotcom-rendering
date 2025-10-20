@@ -1,9 +1,12 @@
-export function isSafeHttpUrl(url: string | undefined): boolean {
-	if (!url) return false;
+export function getSafeUrl(url: string | undefined): string | undefined {
+	if (!url) return undefined;
 	try {
 		const parsed = new URL(url);
-		return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+		if (parsed.protocol === 'http:' || parsed.protocol === 'https:') {
+			return parsed.toString();
+		}
+		return undefined;
 	} catch {
-		return false;
+		return undefined;
 	}
 }
