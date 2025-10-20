@@ -3,6 +3,15 @@
 // import { validateArticle } from '../../../src/model/validate';
 // import articleJson from './article.json' with { type: 'json' };
 
-// Deno.bench('Valibot', () => safeParse(FEArticleSchema, articleJson));
 // // @ts-expect-error -- ignore
-// Deno.bench('AJV', () => validateArticle(articleJson));
+// Deno.bench({
+// 	  name: 'Valibot',
+// 	  fn: () => safeParse(FEArticleSchema, articleJson),
+// 	  n: 10000,
+// });
+// // @ts-expect-error -- ignore
+// Deno.bench({
+// 	  name: 'AJV',
+// 	  fn: () => validateArticle(articleJson),
+// 	  n: 10000,
+// });

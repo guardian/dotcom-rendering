@@ -4,6 +4,14 @@
 // import frontJson from './uk-front.json' with { type: 'json' };
 
 // // @ts-expect-error -- ignore
-// Deno.bench('Valibot', () => safeParse(FEFrontSchema, frontJson));
+// Deno.bench({
+// 	  name: 'Valibot',
+// 	  fn: () => safeParse(FEFrontSchema, frontJson),
+// 	  n: 10000,
+// });
 // // @ts-expect-error -- ignore
-// Deno.bench('AJV', () => validateFront(frontJson));
+// Deno.bench({
+// 	  name: 'AJV',
+// 	  fn: () => validateFront(frontJson),
+// 	  n: 10000,
+// });
