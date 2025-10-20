@@ -389,6 +389,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						<DesignableBannerVisual
 							settings={templateSettings.imageSettings}
 							bannerId={templateSettings.bannerId}
+							isCollapsed={isCollapsed}
 						/>
 						{templateSettings.alternativeVisual}
 					</div>
