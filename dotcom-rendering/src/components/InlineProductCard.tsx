@@ -10,6 +10,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
+import { isSafeHttpUrl } from '../lib/urlUtils';
 import { palette } from '../palette';
 import { Caption } from './Caption';
 import { Picture } from './Picture';
@@ -180,7 +181,7 @@ export const InlineProductCard = ({
 		<div css={[isCardOnly && productCard, !isCardOnly && showcaseCard]}>
 			{!!image && (
 				<div>
-					{productCtas[0]?.url ? (
+					{isSafeHttpUrl(productCtas[0]?.url) ? (
 						<a
 							href={productCtas[0].url}
 							target="_blank"
