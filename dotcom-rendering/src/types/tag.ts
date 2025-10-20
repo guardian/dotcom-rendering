@@ -4,41 +4,19 @@
  * @see https://github.com/guardian/frontend/blob/5b987289/common/app/model/Tag.scala#L156-L179
  */
 
-import { type InferOutput, object, optional, string } from 'valibot';
+import {
+	array,
+	type InferOutput,
+	number,
+	object,
+	optional,
+	string,
+} from 'valibot';
 
-type Reference = {
-	id: string;
-	type: string;
-};
-
-export type FETagType = {
-	properties: {
-		id: string;
-		tagType: string;
-		webTitle: string;
-		/* bio is html */
-		bio?: string;
-		description?: string;
-		bylineImageUrl?: string;
-		bylineLargeImageUrl?: string;
-		contributorLargeImagePath?: string;
-		paidContentType?: string;
-		sectionId?: string;
-		sectionName?: string;
-		twitterHandle?: string;
-		url?: string;
-		webUrl?: string;
-		references?: Reference[];
-		podcast?: Podcast;
-	};
-	pagination?: FEPagination;
-};
-
-export type FEPagination = {
-	currentPage: number;
-	lastPage: number;
-	totalContent: number;
-};
+const ReferenceSchema = object({
+	id: string(),
+	type: string(),
+});
 
 const PodcastSchema = object({
 	subscriptionUrl: optional(string()),
@@ -47,6 +25,39 @@ const PodcastSchema = object({
 });
 
 export type Podcast = InferOutput<typeof PodcastSchema>;
+
+const FEPaginationSchema = object({
+	currentPage: number(),
+	lastPage: number(),
+	totalContent: number(),
+});
+
+export type FEPagination = InferOutput<typeof FEPaginationSchema>;
+
+export const FETagTypeSchema = object({
+	properties: object({
+		id: string(),
+		tagType: string(),
+		webTitle: string(),
+		/* bio is html */
+		bio: optional(string()),
+		description: optional(string()),
+		bylineImageUrl: optional(string()),
+		bylineLargeImageUrl: optional(string()),
+		contributorLargeImagePath: optional(string()),
+		paidContentType: optional(string()),
+		sectionId: optional(string()),
+		sectionName: optional(string()),
+		twitterHandle: optional(string()),
+		url: optional(string()),
+		webUrl: optional(string()),
+		references: optional(array(ReferenceSchema)),
+		podcast: optional(PodcastSchema),
+	}),
+	pagination: optional(FEPaginationSchema),
+});
+
+export type FETagType = InferOutput<typeof FETagTypeSchema>;
 
 export const PodcastSeriesImageSchema = object({
 	src: optional(string()),

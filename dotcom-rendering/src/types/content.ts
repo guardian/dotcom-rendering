@@ -19,7 +19,14 @@ import {
 } from 'valibot';
 import { type ArticleFormat } from '../lib/articleFormat';
 
-export type BoostLevel = 'default' | 'boost' | 'megaboost' | 'gigaboost';
+export const BoostLevelSchema = union([
+	literal('default'),
+	literal('boost'),
+	literal('megaboost'),
+	literal('gigaboost'),
+]);
+
+export type BoostLevel = InferOutput<typeof BoostLevelSchema>;
 
 export type ContentType =
 	| 'article'
@@ -328,7 +335,7 @@ export type PersonalityQuizAtomType = {
 
 export type QuizSelectionType = Record<string, AnswerType>;
 
-const ImageSchema = object({
+export const ImageSchema = object({
 	index: number(),
 	fields: object({
 		height: string(),

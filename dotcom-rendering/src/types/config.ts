@@ -17,7 +17,7 @@ import {
 import { SharedAdTargetingSchema } from '../lib/ad-targeting';
 import { EditionIdSchema } from '../lib/edition';
 
-const StageTypeSchema = union([
+export const StageTypeSchema = union([
 	literal('DEV'),
 	literal('CODE'),
 	literal('PROD'),
@@ -60,14 +60,14 @@ const ControlKeySchema = custom<`${string}Control`>(
 );
 const ControlTestsSchema = record(ControlKeySchema, literal('control'));
 
-const ServerSideTestsSchema = intersect([
+export const ServerSideTestsSchema = intersect([
 	VariantTestsSchema,
 	ControlTestsSchema,
 ]) as GenericSchema<ServerSideTests>;
 
 export type ServerSideTestNames = keyof ServerSideTests;
 
-const SwitchesSchema = record(string(), union([boolean(), undefined()]));
+export const SwitchesSchema = record(string(), union([boolean(), undefined()]));
 
 export type Switches = InferOutput<typeof SwitchesSchema>;
 

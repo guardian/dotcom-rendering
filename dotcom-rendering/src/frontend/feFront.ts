@@ -1,445 +1,532 @@
-import type { SharedAdTargeting } from '../lib/ad-targeting';
-import type { EditionId } from '../lib/edition';
-import type { EditionBranding } from '../types/branding';
-import type { ServerSideTests, StageType, Switches } from '../types/config';
-import type { BoostLevel, Image, StarRating } from '../types/content';
-import type { FooterType } from '../types/footer';
-import type { FENavType } from '../types/frontend';
-import type { FETagType } from '../types/tag';
-import type { Territory } from '../types/territory';
-import type { FETrailType } from '../types/trails';
-import { type FEFormat } from './format';
+import {
+	array,
+	boolean,
+	type InferOutput,
+	literal,
+	number,
+	object,
+	optional,
+	record,
+	string,
+	union,
+	unknown,
+} from 'valibot';
+import { SharedAdTargetingSchema } from '../lib/ad-targeting';
+import { EditionIdSchema } from '../lib/edition';
+import { EditionBrandingSchema } from '../types/branding';
+import {
+	ServerSideTestsSchema,
+	StageTypeSchema,
+	SwitchesSchema,
+} from '../types/config';
+import {
+	BoostLevelSchema,
+	ImageSchema,
+	StarRatingSchema,
+} from '../types/content';
+import { FooterTypeSchema } from '../types/footer';
+import { FENavTypeSchema } from '../types/frontend';
+import { FETagTypeSchema } from '../types/tag';
+import { TerritorySchema } from '../types/territory';
+import { FETrailTypeSchema } from '../types/trails';
+import { FEFormatSchema } from './format';
 
-export interface FEFront {
-	pressedPage: FEPressedPage;
-	nav: FENavType;
-	editionId: EditionId;
-	editionLongForm: string;
-	guardianBaseURL: string;
-	pageId: string;
-	webTitle: string;
-	webURL: string;
-	config: FEFrontConfig;
-	commercialProperties: Record<string, unknown>;
-	pageFooter: FooterType;
-	isAdFreeUser: boolean;
-	isNetworkFront: boolean;
-	mostViewed: FETrailType[];
-	deeplyRead?: FETrailType[];
-	contributionsServiceUrl: string;
-	canonicalUrl?: string;
-}
+const FESeoDataSchema = object({
+	id: string(),
+	navSection: string(),
+	webTitle: string(),
+	title: optional(string()),
+	description: string(),
+});
 
-interface FEPressedPage {
-	id: string;
-	seoData: FESeoData;
-	frontProperties: FEFrontProperties;
-	collections: FECollection[];
-}
+export type FESeoData = InferOutput<typeof FESeoDataSchema>;
+
+const FEFrontPropertiesSchema = object({
+	isImageDisplayed: boolean(),
+	commercial: object({
+		editionBrandings: array(EditionBrandingSchema),
+		editionAdTargetings: unknown(),
+		prebidIndexSites: optional(unknown()),
+	}),
+	isPaidContent: optional(boolean()),
+	onPageDescription: optional(string()),
+});
+
+export type FEFrontProperties = InferOutput<typeof FEFrontPropertiesSchema>;
 
 /* This list of containers supported in DCR must be kept up to date with frontend **manually**.
  * @see https://github.com/guardian/frontend/blob/167dce23a8453ed13a97fbd23c7fc45ecb06e3fe/facia/app/services/dotcomrendering/FaciaPicker.scala#L21-L45 */
-export type FEContainer =
-	| 'dynamic/fast'
-	| 'dynamic/package'
-	| 'dynamic/slow'
-	| 'fixed/large/slow-XIV'
-	| 'fixed/medium/fast-XI'
-	| 'fixed/medium/fast-XII'
-	| 'fixed/medium/slow-VI'
-	| 'fixed/medium/slow-VII'
-	| 'fixed/medium/slow-XII-mpu'
-	| 'fixed/small/fast-VIII'
-	| 'fixed/small/slow-I'
-	| 'fixed/small/slow-III'
-	| 'fixed/small/slow-IV'
-	| 'fixed/small/slow-V-half'
-	| 'fixed/small/slow-V-mpu'
-	| 'fixed/small/slow-V-third'
-	| 'fixed/thrasher'
-	| 'nav/list'
-	| 'nav/media-list'
-	| 'news/most-popular'
-	| 'scrollable/highlights'
-	| 'flexible/special'
-	| 'flexible/general'
-	| 'scrollable/small'
-	| 'scrollable/medium'
-	| 'scrollable/feature'
-	| 'static/feature/2'
-	| 'static/medium/4';
+const FEContainerSchema = union([
+	literal('dynamic/fast'),
+	literal('dynamic/package'),
+	literal('dynamic/slow'),
+	literal('fixed/large/slow-XIV'),
+	literal('fixed/medium/fast-XI'),
+	literal('fixed/medium/fast-XII'),
+	literal('fixed/medium/slow-VI'),
+	literal('fixed/medium/slow-VII'),
+	literal('fixed/medium/slow-XII-mpu'),
+	literal('fixed/small/fast-VIII'),
+	literal('fixed/small/slow-I'),
+	literal('fixed/small/slow-III'),
+	literal('fixed/small/slow-IV'),
+	literal('fixed/small/slow-V-half'),
+	literal('fixed/small/slow-V-mpu'),
+	literal('fixed/small/slow-V-third'),
+	literal('fixed/thrasher'),
+	literal('nav/list'),
+	literal('nav/media-list'),
+	literal('news/most-popular'),
+	literal('scrollable/highlights'),
+	literal('flexible/special'),
+	literal('flexible/general'),
+	literal('scrollable/small'),
+	literal('scrollable/medium'),
+	literal('scrollable/feature'),
+	literal('static/feature/2'),
+	literal('static/medium/4'),
+]);
 
-export type FEContainerLevel = 'Primary' | 'Secondary';
+export type FEContainer = InferOutput<typeof FEContainerSchema>;
 
-export type FEContainerMetadata =
-	| 'EventPalette'
-	| 'SombreAltPalette'
-	| 'EventAltPalette'
-	| 'InvestigationPalette'
-	| 'LongRunningAltPalette'
-	| 'LongRunningPalette'
-	| 'SombrePalette'
-	| 'Canonical'
-	| 'Dynamo'
-	| 'Special'
-	| 'DynamoLike'
-	| 'Breaking'
-	| 'Podcast'
-	| 'Branded'
-	| 'BreakingPalette'
-	| 'SpecialReportAltPalette'
-	| 'Secondary';
+const FEContainerLevelSchema = union([
+	literal('Primary'),
+	literal('Secondary'),
+]);
 
-export type FEFrontCardStyle =
-	| 'SpecialReport'
-	| 'SpecialReportAlt'
-	| 'LiveBlog'
-	| 'DeadBlog'
-	| 'Feature'
-	| 'Editorial'
-	| 'Comment'
-	| 'Media'
-	| 'Analysis'
-	| 'Review'
-	| 'Letters'
-	| 'ExternalLink'
-	| 'DefaultCardstyle';
+export type FEContainerLevel = InferOutput<typeof FEContainerLevelSchema>;
+
+const FEContainerMetadataSchema = union([
+	literal('EventPalette'),
+	literal('SombreAltPalette'),
+	literal('EventAltPalette'),
+	literal('InvestigationPalette'),
+	literal('LongRunningAltPalette'),
+	literal('LongRunningPalette'),
+	literal('SombrePalette'),
+	literal('Canonical'),
+	literal('Dynamo'),
+	literal('Special'),
+	literal('DynamoLike'),
+	literal('Breaking'),
+	literal('Podcast'),
+	literal('Branded'),
+	literal('BreakingPalette'),
+	literal('SpecialReportAltPalette'),
+	literal('Secondary'),
+]);
+
+export type FEContainerMetadata = InferOutput<typeof FEContainerMetadataSchema>;
+
+const FEFrontCardStyleSchema = union([
+	literal('SpecialReport'),
+	literal('SpecialReportAlt'),
+	literal('LiveBlog'),
+	literal('DeadBlog'),
+	literal('Feature'),
+	literal('Editorial'),
+	literal('Comment'),
+	literal('Media'),
+	literal('Analysis'),
+	literal('Review'),
+	literal('Letters'),
+	literal('ExternalLink'),
+	literal('DefaultCardstyle'),
+]);
+
+export type FEFrontCardStyle = InferOutput<typeof FEFrontCardStyleSchema>;
 
 /** @see https://github.com/guardian/frontend/blob/0bf69f55a/common/app/model/content/Atom.scala#L191-L196 */
-export interface FEMediaAsset {
-	id: string;
-	version: number;
-	platform: string;
-	mimeType?: string;
-	assetType: string;
-}
+const FEMediaAssetSchema = object({
+	id: string(),
+	version: number(),
+	platform: string(),
+	mimeType: optional(string()),
+	assetType: string(),
+});
+
+export type FEMediaAsset = InferOutput<typeof FEMediaAssetSchema>;
 
 /** @see https://github.com/guardian/frontend/blob/0bf69f55a/common/app/model/content/Atom.scala#L158-L169 */
-export interface FEMediaAtom {
-	id: string;
-	// defaultHtml: string; // currently unused
-	assets: FEMediaAsset[];
-	title: string;
-	duration?: number;
-	source?: string;
-	posterImage?: { allImages: Image[] };
-	trailImage?: { allImages: Image[] };
-	expired?: boolean;
-	activeVersion?: number;
-	// channelId?: string; // currently unused
-}
+const FEMediaAtomSchema = object({
+	id: string(),
+	// defaultHtml: string(), // currently unused
+	assets: array(FEMediaAssetSchema),
+	title: string(),
+	duration: optional(number()),
+	source: optional(string()),
+	posterImage: optional(object({ allImages: array(ImageSchema) })),
+	trailImage: optional(object({ allImages: array(ImageSchema) })),
+	expired: optional(boolean()),
+	activeVersion: optional(number()),
+	// channelId: optional(string()), // currently unused
+});
 
-export type FEFrontCard = {
-	properties: {
-		isBreaking: boolean;
+export type FEMediaAtom = InferOutput<typeof FEMediaAtomSchema>;
+
+const FESnapSchema = object({
+	embedHtml: optional(string()),
+	embedCss: optional(string()),
+	embedJs: optional(string()),
+});
+
+export type FESnap = InferOutput<typeof FESnapSchema>;
+
+const FESupportingContentSchema = object({
+	properties: object({
+		href: optional(string()),
+		webUrl: optional(string()),
+	}),
+	header: object({
+		kicker: optional(
+			object({
+				item: optional(
+					object({
+						properties: object({
+							kickerText: string(),
+						}),
+					}),
+				),
+			}),
+		),
+		headline: string(),
+		url: string(),
+	}),
+	format: optional(FEFormatSchema),
+});
+
+export type FESupportingContent = InferOutput<typeof FESupportingContentSchema>;
+
+const FEFrontCardSchema = object({
+	properties: object({
+		isBreaking: boolean(),
 		/** Legacy fields retained for backward compatibility:
 		 * `showMainVideo` and `imageSlideshowReplace` have been moved into `mediaSelect`,
 		 * but must remain at the top level to support unrepressed or older front data.
 		 */
-		showMainVideo?: boolean;
-		imageSlideshowReplace?: boolean;
-		mediaSelect?: {
-			showMainVideo: boolean;
-			imageSlideshowReplace: boolean;
-			videoReplace: boolean;
-		};
-		showKickerTag: boolean;
-		showByline: boolean;
-		maybeContent?: {
-			trail: {
-				trailPicture?: {
-					allImages: {
-						index: number;
-						fields: {
-							displayCredit?: string;
-							source?: string;
-							photographer?: string;
-							isMaster?: string;
-							altText?: string;
-							height: string;
-							credit?: string;
-							mediaId?: string;
-							width: string;
-						};
-						mediaType: string;
-						url: string;
-					}[];
-				};
-				byline?: string;
-				thumbnailPath?: string;
-				webPublicationDate: number;
-			};
-			metadata: {
-				id: string;
-				webTitle: string;
-				webUrl: string;
-				type: string;
-				sectionId?: { value: string };
-				format: FEFormat;
-			};
-			fields: {
-				main: string;
-				body: string;
-				standfirst?: string;
-			};
-			elements: {
-				mainVideo?: unknown;
-				mediaAtoms: FEMediaAtom[];
-				mainMediaAtom?: FEMediaAtom;
-			};
-			tags: { tags: FETagType[] };
-		};
-		maybeContentId?: string;
-		isLiveBlog: boolean;
-		isCrossword: boolean;
-		byline?: string;
-		image?: {
-			type: string;
-			item: {
-				imageSrc?: string;
-				assets?: {
-					imageSrc: string;
-					imageCaption?: string;
-				}[];
-			};
-		};
-		webTitle: string;
-		linkText?: string;
-		webUrl?: string;
-		editionBrandings: EditionBranding[];
-		href?: string;
-		embedUri?: string;
-	};
-	header: {
-		isVideo: boolean;
-		isComment: boolean;
-		isGallery: boolean;
-		isAudio: boolean;
-		kicker?: {
-			type: string;
-			item?: {
-				properties: {
-					kickerText: string;
-				};
-			};
-		};
-		seriesOrBlogKicker?: {
-			properties: {
-				kickerText: string;
-			};
-			name: string;
-			url: string;
-			id: string;
-		};
-		headline: string;
-		url: string;
-		hasMainVideoElement: boolean;
-	};
-	card: {
-		id: string;
-		cardStyle: {
-			type: FEFrontCardStyle;
-		};
-		webPublicationDateOption?: number;
-		lastModifiedOption?: number;
-		trailText?: string;
-		starRating?: StarRating;
-		shortUrlPath?: string;
-		shortUrl: string;
-		group: string;
-		isLive: boolean;
-		galleryCount?: number;
-		audioDuration?: string;
-	};
-	discussion: {
-		isCommentable: boolean;
-		isClosedForComments: boolean;
-		discussionId?: string;
-	};
-	display: {
-		isBoosted: boolean;
-		boostLevel?: BoostLevel;
-		isImmersive?: boolean;
-		showBoostedHeadline: boolean;
-		showQuotedHeadline: boolean;
-		imageHide: boolean;
-		showLivePlayable: boolean;
-	};
-	format?: FEFormat;
-	enriched?: FESnap;
-	mediaAtom?: FEMediaAtom;
-	supportingContent?: FESupportingContent[];
-	cardStyle?: {
-		type: FEFrontCardStyle;
-	};
-	type: string;
-};
+		showMainVideo: optional(boolean()),
+		imageSlideshowReplace: optional(boolean()),
+		mediaSelect: optional(
+			object({
+				showMainVideo: boolean(),
+				imageSlideshowReplace: boolean(),
+				videoReplace: boolean(),
+			}),
+		),
+		showKickerTag: boolean(),
+		showByline: boolean(),
+		maybeContent: optional(
+			object({
+				trail: object({
+					trailPicture: optional(
+						object({
+							allImages: array(
+								object({
+									index: number(),
+									fields: object({
+										displayCredit: optional(string()),
+										source: optional(string()),
+										photographer: optional(string()),
+										isMaster: optional(string()),
+										altText: optional(string()),
+										height: string(),
+										credit: optional(string()),
+										mediaId: optional(string()),
+										width: string(),
+									}),
+									mediaType: string(),
+									url: string(),
+								}),
+							),
+						}),
+					),
+					byline: optional(string()),
+					thumbnailPath: optional(string()),
+					webPublicationDate: number(),
+				}),
+				metadata: object({
+					id: string(),
+					webTitle: string(),
+					webUrl: string(),
+					type: string(),
+					sectionId: optional(object({ value: string() })),
+					format: FEFormatSchema,
+				}),
+				fields: object({
+					main: string(),
+					body: string(),
+					standfirst: optional(string()),
+				}),
+				elements: object({
+					mainVideo: optional(unknown()),
+					mediaAtoms: array(FEMediaAtomSchema),
+					mainMediaAtom: optional(FEMediaAtomSchema),
+				}),
+				tags: object({ tags: array(FETagTypeSchema) }),
+			}),
+		),
+		maybeContentId: optional(string()),
+		isLiveBlog: boolean(),
+		isCrossword: boolean(),
+		byline: optional(string()),
+		image: optional(
+			object({
+				type: string(),
+				item: object({
+					imageSrc: optional(string()),
+					assets: optional(
+						array(
+							object({
+								imageSrc: string(),
+								imageCaption: optional(string()),
+							}),
+						),
+					),
+				}),
+			}),
+		),
+		webTitle: string(),
+		linkText: optional(string()),
+		webUrl: optional(string()),
+		editionBrandings: array(EditionBrandingSchema),
+		href: optional(string()),
+		embedUri: optional(string()),
+	}),
+	header: object({
+		isVideo: boolean(),
+		isComment: boolean(),
+		isGallery: boolean(),
+		isAudio: boolean(),
+		kicker: optional(
+			object({
+				type: string(),
+				item: optional(
+					object({
+						properties: object({
+							kickerText: string(),
+						}),
+					}),
+				),
+			}),
+		),
+		seriesOrBlogKicker: optional(
+			object({
+				properties: object({
+					kickerText: string(),
+				}),
+				name: string(),
+				url: string(),
+				id: string(),
+			}),
+		),
+		headline: string(),
+		url: string(),
+		hasMainVideoElement: boolean(),
+	}),
+	card: object({
+		id: string(),
+		cardStyle: object({
+			type: FEFrontCardStyleSchema,
+		}),
+		webPublicationDateOption: optional(number()),
+		lastModifiedOption: optional(number()),
+		trailText: optional(string()),
+		starRating: optional(StarRatingSchema),
+		shortUrlPath: optional(string()),
+		shortUrl: string(),
+		group: string(),
+		isLive: boolean(),
+		galleryCount: optional(number()),
+		audioDuration: optional(string()),
+	}),
+	discussion: object({
+		isCommentable: boolean(),
+		isClosedForComments: boolean(),
+		discussionId: optional(string()),
+	}),
+	display: object({
+		isBoosted: boolean(),
+		boostLevel: optional(optional(BoostLevelSchema)),
+		isImmersive: optional(boolean()),
+		showBoostedHeadline: boolean(),
+		showQuotedHeadline: boolean(),
+		imageHide: boolean(),
+		showLivePlayable: boolean(),
+	}),
+	format: optional(FEFormatSchema),
+	enriched: optional(FESnapSchema),
+	mediaAtom: optional(FEMediaAtomSchema),
+	supportingContent: optional(array(FESupportingContentSchema)),
+	cardStyle: optional(
+		object({
+			type: FEFrontCardStyleSchema,
+		}),
+	),
+	type: string(),
+});
 
-export type FESnap = {
-	embedHtml?: string;
-	embedCss?: string;
-	embedJs?: string;
-};
+export type FEFrontCard = InferOutput<typeof FEFrontCardSchema>;
 
-export type FEAspectRatio = '5:3' | '5:4' | '4:5' | '1:1';
+const FEAspectRatioSchema = union([
+	literal('5:3'),
+	literal('5:4'),
+	literal('4:5'),
+	literal('1:1'),
+]);
+export type FEAspectRatio = InferOutput<typeof FEAspectRatioSchema>;
 
-type FECollectionConfig = {
-	displayName: string;
-	metadata?: { type: FEContainerMetadata }[];
-	collectionType: FEContainer;
-	collectionLevel?: FEContainerLevel;
-	href?: string;
-	groups?: string[];
-	uneditable: boolean;
-	showTags: boolean;
-	showSections: boolean;
-	hideKickers: boolean;
-	showDateHeader: boolean;
-	showLatestUpdate: boolean;
-	excludeFromRss: boolean;
-	showTimestamps: boolean;
-	hideShowMore: boolean;
-	platform: string;
-	aspectRatio?: FEAspectRatio;
-};
+const FECollectionConfigSchema = object({
+	displayName: string(),
+	metadata: optional(array(object({ type: FEContainerMetadataSchema }))),
+	collectionType: FEContainerSchema,
+	collectionLevel: optional(FEContainerLevelSchema),
+	href: optional(string()),
+	groups: optional(array(string())),
+	uneditable: boolean(),
+	showTags: boolean(),
+	showSections: boolean(),
+	hideKickers: boolean(),
+	showDateHeader: boolean(),
+	showLatestUpdate: boolean(),
+	excludeFromRss: boolean(),
+	showTimestamps: boolean(),
+	hideShowMore: boolean(),
+	platform: string(),
+	aspectRatio: optional(FEAspectRatioSchema),
+});
 
-export type FECollection = {
-	id: string;
-	displayName: string;
-	description?: string;
-	curated: FEFrontCard[];
-	backfill: FEFrontCard[];
-	treats: FEFrontCard[];
-	lastUpdate?: number;
-	href?: string;
-	groups?: string[];
-	collectionType: FEContainer;
-	uneditable: boolean;
-	showTags: boolean;
-	showSections: boolean;
-	hideKickers: boolean;
-	showDateHeader: boolean;
-	showLatestUpdate: boolean;
-	config: FECollectionConfig;
-	hasMore: boolean;
-	targetedTerritory?: Territory;
-};
+const FECollectionSchema = object({
+	id: string(),
+	displayName: string(),
+	description: optional(string()),
+	curated: array(FEFrontCardSchema),
+	backfill: array(FEFrontCardSchema),
+	treats: array(FEFrontCardSchema),
+	lastUpdate: optional(number()),
+	href: optional(string()),
+	groups: optional(array(string())),
+	collectionType: FEContainerSchema,
+	uneditable: boolean(),
+	showTags: boolean(),
+	showSections: boolean(),
+	hideKickers: boolean(),
+	showDateHeader: boolean(),
+	showLatestUpdate: boolean(),
+	config: FECollectionConfigSchema,
+	hasMore: boolean(),
+	targetedTerritory: optional(TerritorySchema),
+});
 
-export type FEFrontConfig = {
-	avatarApiUrl: string;
-	externalEmbedHost: string;
-	ajaxUrl: string;
-	keywords: string;
-	revisionNumber: string;
-	isProd: boolean;
-	switches: Switches;
-	section: string;
-	keywordIds: string;
-	locationapiurl: string;
-	sharedAdTargeting: SharedAdTargeting;
-	buildNumber: string;
-	abTests: ServerSideTests;
-	serverSideABTests: Record<string, string>;
-	pbIndexSites: { [key: string]: unknown }[];
-	ampIframeUrl: string;
-	beaconUrl: string;
-	host: string;
-	brazeApiKey?: string;
-	calloutsUrl: string;
-	requiresMembershipAccess: boolean;
-	onwardWebSocket: string;
-	a9PublisherId: string;
-	contentType: string;
-	facebookIaAdUnitRoot: string;
-	ophanEmbedJsUrl: string;
-	idUrl: string;
-	dcrSentryDsn: string;
-	isFront: true;
-	idWebAppUrl: string;
-	discussionApiUrl: string;
-	sentryPublicApiKey: string;
-	omnitureAccount: string;
-	dfpAccountId: string;
-	pageId: string;
-	forecastsapiurl: string;
-	assetsPath: string;
-	pillar: string;
-	commercialBundleUrl: string;
-	discussionApiClientHeader: string;
-	membershipUrl: string;
-	dfpHost: string;
-	cardStyle?: string;
-	googletagUrl: string;
-	sentryHost: string;
-	shouldHideAdverts: boolean;
-	mmaUrl: string;
-	membershipAccess: string;
-	isPreview: boolean;
-	googletagJsUrl: string;
-	supportUrl: string;
-	edition: string;
-	ipsosTag: string;
-	ophanJsUrl: string;
-	isPaidContent?: boolean;
-	mobileAppsAdUnitRoot: string;
-	plistaPublicApiKey: string;
-	frontendAssetsFullURL: string;
-	googleSearchId: string;
-	allowUserGeneratedContent: boolean;
-	dfpAdUnitRoot: string;
-	idApiUrl: string;
-	omnitureAmpAccount: string;
-	adUnit: string;
-	hasPageSkin: boolean;
-	webTitle: string;
-	stripePublicToken: string;
-	googleRecaptchaSiteKey: string;
-	discussionD2Uid: string;
-	googleSearchUrl: string;
-	optimizeEpicUrl: string;
-	stage: StageType;
-	idOAuthUrl: string;
-	isSensitive: boolean;
-	isDev: boolean;
-	thirdPartyAppsAccount?: string;
-	avatarImagesUrl: string;
-	fbAppId: string;
-};
+export type FECollection = InferOutput<typeof FECollectionSchema>;
 
-export type FESeoData = {
-	id: string;
-	navSection: string;
-	webTitle: string;
-	title?: string;
-	description: string;
-};
+const FEPressedPageSchema = object({
+	id: string(),
+	seoData: FESeoDataSchema,
+	frontProperties: FEFrontPropertiesSchema,
+	collections: array(FECollectionSchema),
+});
 
-export type FEFrontProperties = {
-	isImageDisplayed: boolean;
-	commercial: {
-		editionBrandings: EditionBranding[];
-		editionAdTargetings: unknown;
-		prebidIndexSites?: unknown;
-	};
-	isPaidContent?: boolean;
-	onPageDescription?: string;
-};
+const FEFrontConfigSchema = object({
+	avatarApiUrl: string(),
+	externalEmbedHost: string(),
+	ajaxUrl: string(),
+	keywords: string(),
+	revisionNumber: string(),
+	isProd: boolean(),
+	switches: SwitchesSchema,
+	section: string(),
+	keywordIds: string(),
+	locationapiurl: string(),
+	sharedAdTargeting: SharedAdTargetingSchema,
+	buildNumber: string(),
+	abTests: ServerSideTestsSchema,
+	serverSideABTests: record(string(), string()),
+	pbIndexSites: array(record(string(), unknown())), // TODO: Check if this is correct
+	ampIframeUrl: string(),
+	beaconUrl: string(),
+	host: string(),
+	brazeApiKey: optional(string()),
+	calloutsUrl: string(),
+	requiresMembershipAccess: boolean(),
+	onwardWebSocket: string(),
+	a9PublisherId: string(),
+	contentType: string(),
+	facebookIaAdUnitRoot: string(),
+	ophanEmbedJsUrl: string(),
+	idUrl: string(),
+	dcrSentryDsn: string(),
+	isFront: literal(true),
+	idWebAppUrl: string(),
+	discussionApiUrl: string(),
+	sentryPublicApiKey: string(),
+	omnitureAccount: string(),
+	dfpAccountId: string(),
+	pageId: string(),
+	forecastsapiurl: string(),
+	assetsPath: string(),
+	pillar: string(),
+	commercialBundleUrl: string(),
+	discussionApiClientHeader: string(),
+	membershipUrl: string(),
+	dfpHost: string(),
+	cardStyle: string(),
+	googletagUrl: string(),
+	sentryHost: string(),
+	shouldHideAdverts: boolean(),
+	mmaUrl: string(),
+	membershipAccess: string(),
+	isPreview: boolean(),
+	googletagJsUrl: string(),
+	supportUrl: string(),
+	edition: string(),
+	ipsosTag: string(),
+	ophanJsUrl: string(),
+	isPaidContent: optional(boolean()),
+	mobileAppsAdUnitRoot: string(),
+	plistaPublicApiKey: string(),
+	frontendAssetsFullURL: string(),
+	googleSearchId: string(),
+	allowUserGeneratedContent: boolean(),
+	dfpAdUnitRoot: string(),
+	idApiUrl: string(),
+	omnitureAmpAccount: string(),
+	adUnit: string(),
+	hasPageSkin: boolean(),
+	webTitle: string(),
+	stripePublicToken: string(),
+	googleRecaptchaSiteKey: string(),
+	discussionD2Uid: string(),
+	googleSearchUrl: string(),
+	optimizeEpicUrl: string(),
+	stage: StageTypeSchema,
+	idOAuthUrl: string(),
+	isSensitive: boolean(),
+	isDev: boolean(),
+	thirdPartyAppsAccount: optional(string()),
+	avatarImagesUrl: string(),
+	fbAppId: string(),
+});
 
-export type FESupportingContent = {
-	properties: {
-		href?: string;
-		webUrl?: string;
-	};
-	header: {
-		kicker?: {
-			item?: {
-				properties: {
-					kickerText: string;
-				};
-			};
-		};
-		headline: string;
-		url: string;
-	};
-	format?: FEFormat;
-};
+export type FEFrontConfig = InferOutput<typeof FEFrontConfigSchema>;
+
+export const FEFrontSchema = object({
+	pressedPage: FEPressedPageSchema,
+	nav: FENavTypeSchema,
+	editionId: EditionIdSchema,
+	editionLongForm: string(),
+	guardianBaseURL: string(),
+	pageId: string(),
+	webTitle: string(),
+	webURL: string(),
+	config: FEFrontConfigSchema,
+	commercialProperties: record(string(), unknown()),
+	pageFooter: FooterTypeSchema,
+	isAdFreeUser: boolean(),
+	isNetworkFront: boolean(),
+	mostViewed: array(FETrailTypeSchema),
+	deeplyRead: optional(array(FETrailTypeSchema)),
+	contributionsServiceUrl: string(),
+	canonicalUrl: optional(string()),
+});
+
+export type FEFront = InferOutput<typeof FEFrontSchema>;

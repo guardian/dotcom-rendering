@@ -7,7 +7,7 @@ import {
 	string,
 	union,
 } from 'valibot';
-import type { EditionId } from '../lib/edition';
+import { EditionIdSchema } from '../lib/edition';
 
 export const BrandingLogoSchema = object({
 	src: string(),
@@ -42,12 +42,14 @@ export const BrandingSchema = object({
 
 export type Branding = InferOutput<typeof BrandingSchema>;
 
-export interface EditionBranding {
-	edition: {
-		id: EditionId;
-	};
-	branding?: Branding;
-}
+export const EditionBrandingSchema = object({
+	edition: object({
+		id: EditionIdSchema,
+	}),
+	branding: optional(BrandingSchema),
+});
+
+export type EditionBranding = InferOutput<typeof EditionBrandingSchema>;
 
 type BaseCollectionBranding<Kind extends BrandingType['name']> = {
 	/**
