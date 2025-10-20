@@ -232,7 +232,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	const [showNextButton, setShowNextButton] = useState(true);
 	const [shouldShowHighlights, setShouldShowHighlights] = useState(false);
 	const [orderedTrails, setOrderedTrails] = useState<DCRFrontCard[]>(trails);
-	const [clickNavigation, setClickNavigation] = useState(false);
+
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
 
@@ -296,6 +296,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 			// cancel any anchoring/snap side-effects by jumping immediately
 			carouselRef.current.scrollTo({ left: 0, behavior: 'auto' });
 			setShouldShowHighlights(true);
+			trackCardEngagement('VIEW');
 		}
 	}, [orderedTrails]);
 
@@ -320,34 +321,12 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 			resetStoredHighlights(trails);
 			// display highlights
 			setShouldShowHighlights(true);
+			trackCardEngagement('VIEW');
 			return;
 		}
-		console.log('>>> use stored highlights');
 		// otherwise history is different to trails so set in state
 		setOrderedTrails(orderedHighlights);
-		console.log('>>> set trails', orderedHighlights);
 	}, [trails]);
-
-	useEffect(() => {
-		const trackHighlightViews = () => {
-			console.log(
-				'>>> attempting to track a view',
-				'clickNavigation',
-				clickNavigation,
-			);
-			if (document.visibilityState === 'hidden' && !clickNavigation) {
-				console.log('>>>  tracking a view ');
-
-				trackCardEngagement('VIEW');
-			}
-		};
-
-		document.addEventListener('visibilitychange', trackHighlightViews);
-
-		return () => {
-			window.removeEventListener('visibilitychange', trackHighlightViews);
-		};
-	}, [clickNavigation]);
 
 	const { ophanComponentLink, ophanComponentName, ophanFrontName } =
 		getOphanInfo(frontId);
@@ -392,7 +371,6 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 								mainMedia={trail.mainMedia}
 								starRating={trail.starRating}
 								storeInteraction={() => {
-									setClickNavigation(true);
 									trackCardEngagement('CLICK', trail);
 								}}
 							/>

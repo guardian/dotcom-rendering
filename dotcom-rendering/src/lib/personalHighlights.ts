@@ -86,7 +86,9 @@ const getOrderedCardsFromHistory = (
 
 export const getHighlightCards = (): Array<DCRFrontCard> => {
 	const history = getOrderedHighlights() ?? [];
-	return getOrderedCardsFromHistory(history);
+	const orderedHistory = orderCardsByHistory(history);
+	storeOrderInStorage(orderedHistory);
+	return getOrderedCardsFromHistory(orderedHistory);
 };
 
 const trackCardClick = (
@@ -146,6 +148,5 @@ export const trackCardEngagement = (
 		engagement === 'VIEW'
 			? trackCardView(history)
 			: trackCardClick(history, card);
-	const newOrder = orderCardsByHistory(newHistory);
-	storeOrderInStorage(newOrder);
+	storeOrderInStorage(newHistory);
 };
