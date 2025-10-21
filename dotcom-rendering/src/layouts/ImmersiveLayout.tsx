@@ -326,9 +326,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					hasPageSkin={false}
 					hasPageSkinContentSelfConstrain={false}
 					pageId={article.pageId}
-					wholePictureLogoSwitch={
-						article.config.switches.wholePictureLogo
-					}
 				/>
 			)}
 
