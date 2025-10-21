@@ -66,7 +66,7 @@ const timeout = <T,>(promise: Promise<T>, delay = 1200) =>
 		promise,
 		new Promise<void>((_, reject) => {
 			const timer = setTimeout(() => {
-				reject();
+				reject(new Error());
 				clearTimeout(timer);
 			}, delay);
 		}),
