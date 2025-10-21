@@ -9,7 +9,6 @@ type Props = {
 	imagePositionOnMobile: MediaPositionType;
 	isBetaContainer: boolean;
 	isFlexibleContainer: boolean;
-	isInAllBoostsTest?: boolean;
 };
 
 const sideMarginStyles = css`
@@ -32,7 +31,6 @@ const sizingStyles = (
 	isFlexibleContainer: boolean,
 	isVerticalOnDesktop: boolean,
 	isVerticalOnMobile: boolean,
-	isInAllBoostsTest = false,
 ) => {
 	if (!isBetaContainer) {
 		switch (imageSize) {
@@ -83,26 +81,6 @@ const sizingStyles = (
 
 	switch (imageSize) {
 		case 'small':
-			if (isInAllBoostsTest) {
-				return isFlexibleContainer
-					? css`
-							width: 90px;
-							height: 90px;
-							${until.tablet} {
-								height: 150px;
-								width: 150px;
-							}
-					  `
-					: css`
-							width: 80px;
-							height: 80px;
-							${until.tablet} {
-								height: 150px;
-								width: 150px;
-							}
-					  `;
-			}
-
 			return isFlexibleContainer
 				? css`
 						width: 90px;
@@ -159,7 +137,6 @@ export const AvatarContainer = ({
 	imagePositionOnMobile,
 	isBetaContainer,
 	isFlexibleContainer,
-	isInAllBoostsTest,
 }: Props) => {
 	const isVerticalOnDesktop =
 		imagePositionOnDesktop === 'top' || imagePositionOnDesktop === 'bottom';
@@ -178,7 +155,6 @@ export const AvatarContainer = ({
 					isFlexibleContainer,
 					isVerticalOnDesktop,
 					isVerticalOnMobile,
-					isInAllBoostsTest,
 				),
 			]}
 		>

@@ -408,7 +408,6 @@ const BannerAndMasthead = (props: {
 			hasPageSkin={false}
 			hasPageSkinContentSelfConstrain={false}
 			pageId={props.pageId}
-			wholePictureLogoSwitch={props.config.switches.wholePictureLogo}
 		/>
 	</div>
 );
