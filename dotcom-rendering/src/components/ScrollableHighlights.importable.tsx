@@ -267,7 +267,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	};
 
 	useEffect(() => {
-		// TODO: DO NOT MERGE : TESTING ONLY
+		trackCardEngagement('VIEW');
 	}, []);
 
 	useEffect(() => {
@@ -296,7 +296,6 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 			// cancel any anchoring/snap side-effects by jumping immediately
 			carouselRef.current.scrollTo({ left: 0, behavior: 'auto' });
 			setShouldShowHighlights(true);
-			trackCardEngagement('VIEW');
 		}
 	}, [orderedTrails]);
 
@@ -321,7 +320,6 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 			resetStoredHighlights(trails);
 			// display highlights
 			setShouldShowHighlights(true);
-			trackCardEngagement('VIEW');
 			return;
 		}
 		// otherwise history is different to trails so set in state
