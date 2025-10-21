@@ -94,7 +94,7 @@ const sampleProductCard: InlineProductCardProps = {
 	customAttributes: [
 		{ name: 'What we love', value: 'It packs away pretty small' },
 		{
-			name: 'What we don\'t love',
+			name: "What we don't love",
 			value: 'There’s nowhere to stow the remote control',
 		},
 	],
