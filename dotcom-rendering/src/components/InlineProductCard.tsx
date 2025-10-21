@@ -30,6 +30,7 @@ export type InlineProductCardProps = {
 	productCtas: ProductCardCta[];
 	customAttributes: CustomAttributes[];
 	isCardOnly: boolean;
+	shouldShowLeftColCard?: boolean;
 };
 
 const baseCard = css`
@@ -60,11 +61,14 @@ const baseCard = css`
 	}
 `;
 
-const showcaseCard = css`
-	${baseCard};
+const showLeftColCard = css`
 	${from.wide} {
 		display: none;
 	}
+`;
+
+const showcaseCard = css`
+	${baseCard};
 	background-color: ${palette('--product-card-background')};
 	border-top: 1px solid ${palette('--section-border-lifestyle')};
 `;
@@ -157,9 +161,16 @@ export const InlineProductCard = ({
 	customAttributes,
 	productCtas,
 	isCardOnly = false,
+	shouldShowLeftColCard = false,
 }: InlineProductCardProps) => {
 	return (
-		<div css={[isCardOnly && productCard, !isCardOnly && showcaseCard]}>
+		<div
+			css={[
+				isCardOnly && productCard,
+				!isCardOnly && showcaseCard,
+				shouldShowLeftColCard && showLeftColCard,
+			]}
+		>
 			<ProductCardImage
 				format={format}
 				image={image}
