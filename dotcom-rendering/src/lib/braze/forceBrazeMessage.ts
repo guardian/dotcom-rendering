@@ -1,14 +1,11 @@
-const runtimeHostname = () => {
-	try {
-		if (typeof process !== 'undefined' && process.env.HOSTNAME) {
-			return process.env.HOSTNAME;
-		}
-	} catch {
-		/* ignore */
+const runtimeHostname = (): string | undefined => {
+	if (typeof process !== 'undefined' && process.env.HOSTNAME) {
+		return process.env.HOSTNAME;
 	}
 	if (typeof window !== 'undefined' && window.location.hostname) {
 		return window.location.hostname;
 	}
+	return undefined;
 };
 
 const FORCE_BRAZE_ALLOWLIST = [
