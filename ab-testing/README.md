@@ -63,6 +63,10 @@ To add a test where there is not enough space in the default audience space (`A`
 
 For example if there are already 3 25% tests in space `A` totalling 75%, and you want to run a 50% test, you can set the `audienceSpace` to `B` to allow this test to overlap with the existing tests.
 
+### Test Status
+
+Tests can be set to `ON` or `OFF` using the `status` field. Only tests with status `ON` will be validated and deployed.
+
 ## How it works
 
 The AB testing framework uses Deno to run scripts that validate and deploy the tests. The `deno.json` file contains the tasks that can be run, such as `validate`, `deploy`, and `build`.
