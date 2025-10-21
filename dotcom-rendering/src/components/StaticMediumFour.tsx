@@ -34,7 +34,6 @@ type Props = {
 	containerLevel?: DCRContainerLevel;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
-	isInAllBoostsTest?: boolean;
 };
 
 export const StaticMediumFour = ({
@@ -47,7 +46,6 @@ export const StaticMediumFour = ({
 	aspectRatio,
 	containerLevel = 'Primary',
 	showLabsRedesign,
-	isInAllBoostsTest = false,
 }: Props) => {
 	const cards = trails.slice(0, 4);
 
@@ -74,18 +72,8 @@ export const StaticMediumFour = ({
 								card.format,
 								!!card.isNewsletter,
 							)}
-							mediaPositionOnMobile={
-								isInAllBoostsTest ? 'bottom' : 'left'
-							}
-							headlineSizes={
-								isInAllBoostsTest
-									? {
-											desktop: 'xsmall',
-											tablet: 'xxsmall',
-											mobile: 'small',
-									  }
-									: undefined
-							}
+							mediaPositionOnMobile="left"
+							headlineSizes={undefined}
 							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
 							supportingContent={undefined}
 							mediaSize="medium"
@@ -100,7 +88,6 @@ export const StaticMediumFour = ({
 							}
 							canPlayInline={false}
 							showLabsRedesign={showLabsRedesign}
-							isInAllBoostsTest={isInAllBoostsTest}
 						/>
 					</LI>
 				);
