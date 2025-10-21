@@ -16,7 +16,9 @@ const CMP_LAYER2_REJECT_ALL_BUTTON = 'button.sp_choice_type_REJECT_ALL';
  */
 const cmpAcceptAll = async (page: Page, rootIframe?: string): Promise<void> => {
 	const root = rootIframe ? page.frameLocator(rootIframe) : page;
-	const acceptAllButton = root.locator(CMP_LAYER1_ACCEPT_ALL_BUTTON);
+	const acceptAllButton = root
+		.frameLocator(CMP_LAYER1_IFRAME)
+		.locator(CMP_LAYER1_ACCEPT_ALL_BUTTON);
 	await acceptAllButton.click();
 	// wait for consent settings to apply
 	await new Promise((r) => setTimeout(r, 2000));
