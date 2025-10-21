@@ -29,7 +29,11 @@ const config: StorybookConfig = {
 		{ from: '../src/static', to: '/static/frontend/' },
 	],
 
-	addons: ['@storybook/addon-webpack5-compiler-swc', '@storybook/addon-docs'],
+	addons: [
+		'@storybook/addon-webpack5-compiler-swc',
+		'@storybook/addon-docs',
+		'@storybook/addon-a11y',
+	],
 
 	webpackFinal: async (config) => {
 		// Get project specific webpack options
@@ -50,7 +54,9 @@ const config: StorybookConfig = {
 		// e.g process?.env?.SOME_VAR
 		config.plugins?.push(
 			new webpack.DefinePlugin({
-				process: '{}',
+				process: JSON.stringify({
+					env: { SDC_URL: process.env.SDC_URL },
+				}),
 			}),
 			// We rely on Buffer for our bridget thrift client
 			new webpack.ProvidePlugin({
