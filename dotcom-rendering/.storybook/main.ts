@@ -45,10 +45,6 @@ const config: StorybookConfig = {
 		config.resolve.fallback['http'] = false;
 		config.resolve.fallback['https'] = false;
 		config.resolve.fallback['os'] = false;
-		// Provide browser polyfill for 'path' (used indirectly by clean-css)
-		config.resolve.fallback['path'] = require.resolve('path-browserify');
-		// Explicitly disable 'fs' since clean-css conditionally touches it; we don't need it in the browser
-		config.resolve.fallback['fs'] = false;
 
 		// Required as otherwise 'process' will not be defined when included on its own (without .env)
 		// e.g process?.env?.SOME_VAR
