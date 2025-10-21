@@ -311,6 +311,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 					isCollapsableBanner && isCollapsed
 						? styles.collapsedLayoutOverrides(
 								cardsImageOrSpaceTemplateString,
+								isMaybeLaterVariant,
 						  )
 						: styles.layoutOverrides(
 								cardsImageOrSpaceTemplateString,
@@ -572,10 +573,10 @@ const styles = {
 			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
 			grid-template-columns: auto max(${phabletContentMaxWidth} auto);
 			grid-template-areas:
-				'.	close-button						.'
-				'.	copy-container						.'
-				'.	${cardsImageOrSpaceTemplateString}	.'
-				'.	cta-container						.';
+				'.	.									.'
+				'.	copy-container						close-button'
+				'.	${cardsImageOrSpaceTemplateString}	${cardsImageOrSpaceTemplateString}'
+				'.	cta-container						cta-container';
 		}
 		${from.phablet} {
 			max-width: 740px;
@@ -623,7 +624,10 @@ const styles = {
 				'.		vert-line	cta-container	${cardsImageOrSpaceTemplateString}	.';
 		}
 	`,
-	collapsedLayoutOverrides: (cardsImageOrSpaceTemplateString: string) => css`
+	collapsedLayoutOverrides: (
+		cardsImageOrSpaceTemplateString: string,
+		isMaybeLaterVariant: boolean,
+	) => css`
 		display: grid;
 		background: inherit;
 		position: relative;
@@ -635,11 +639,19 @@ const styles = {
 			margin: 0 auto;
 			padding: ${space[2]}px ${space[3]}px 0 ${space[3]}px;
 			grid-template-columns: auto max(${phabletContentMaxWidth} auto);
-			grid-template-areas:
+			grid-template-areas: ${isMaybeLaterVariant
+				? `
+				'.	.									.'
+				'.	copy-container						close-button'
+				'.	${cardsImageOrSpaceTemplateString}	${cardsImageOrSpaceTemplateString}'
+				'.	cta-container						cta-container'
+				`
+				: `
 				'.	close-button						.'
 				'.	copy-container						.'
 				'.	${cardsImageOrSpaceTemplateString}	.'
 				'.	cta-container						.';
+				`};
 		}
 		${from.phablet} {
 			max-width: 740px;
