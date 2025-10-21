@@ -102,6 +102,7 @@ export const ProductElement = ({
 					primaryPrice={product.productCtas[0]?.price}
 					customAttributes={product.customAttributes}
 					isCardOnly={product.displayType === 'ProductCardOnly'}
+					shouldShowLeftColCard={shouldShowLeftColCard}
 				/>
 			)}
 		</div>
