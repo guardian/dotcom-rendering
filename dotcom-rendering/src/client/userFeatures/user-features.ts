@@ -30,6 +30,7 @@ const refresh = async (): Promise<void> => {
 const requestNewData = async () => {
 	const authStatus = await getAuthStatus();
 	if (authStatus.kind !== 'SignedIn') {
+		// eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
 		return Promise.reject('The user is not signed in');
 	}
 	return syncDataFromUserBenefitsApi(authStatus).then(persistResponse);
