@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
 import { matchReport } from '../../fixtures/generated/match-report';
 import { FootballMatchSummary as FootballMatchSummaryComponent } from './FootballMatchSummary';

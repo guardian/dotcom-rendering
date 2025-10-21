@@ -5,7 +5,7 @@ import {
 	space,
 	textSans15,
 } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { leftColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { defaultFormats } from '../../.storybook/decorators/splitThemeDecorator';
 import { allModes } from '../../.storybook/modes';
@@ -157,15 +157,15 @@ export const LiveBlogDesignWithBranding = {
 	args: {
 		...WithBranding.args,
 	},
+
 	parameters: {
 		config: { darkModeAvailable: true },
+
 		formats: getAllThemes({
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.LiveBlog,
 		}),
-		viewport: {
-			defaultViewport: 'tablet',
-		},
+
 		chromatic: {
 			modes: {
 				horizontal: { disable: true },
@@ -173,6 +173,7 @@ export const LiveBlogDesignWithBranding = {
 			},
 		},
 	},
+
 	decorators: [
 		leftColumnDecorator,
 		(Story) => (
@@ -191,6 +192,13 @@ export const LiveBlogDesignWithBranding = {
 			</div>
 		),
 	],
+
+	globals: {
+		viewport: {
+			value: 'tablet',
+			isRotated: false,
+		},
+	},
 } satisfies Story;
 
 export const FeatureDesignWithABylineMismatchingTheContributorTag = {

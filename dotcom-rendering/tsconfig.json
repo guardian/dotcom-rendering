@@ -23,7 +23,8 @@
 			"@testing-library/jest-dom",
 			"webpack-env",
 			"youtube",
-			"twitter-for-web"
+			"twitter-for-web",
+			"chai"
 		]
 	},
 	"include": ["**/*", ".storybook/mocks/bridgetApi.ts"],

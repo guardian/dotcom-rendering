@@ -1,5 +1,5 @@
 // ----- Imports ----- //
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-webpack5';
 import { StarRating } from './StarRating';
 
 // ----- Meta ----- //

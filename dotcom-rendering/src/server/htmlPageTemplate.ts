@@ -1,9 +1,10 @@
 import { isUndefined } from '@guardian/libs';
 import { resets, palette as sourcePalette } from '@guardian/source/foundations';
+import CleanCSS from 'clean-css';
 import he from 'he';
 import { ASSET_ORIGIN } from '../lib/assets';
 import { escapeData } from '../lib/escapeData';
-import { fontsCss } from '../lib/fonts-css';
+import { fontsCss as rawFontsCss } from '../lib/fonts-css';
 import type { Guardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
 import { GIT_COMMIT_HASH } from './prout';
@@ -391,7 +392,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 						: ''
 				}
                 ${scriptTags.join('\n')}
-                <style class="webfont">${fontsCss}</style>
+				<style class="webfont">${new CleanCSS().minify(rawFontsCss).styles}</style>
                 <style>${resets.resetCSS}</style>
 				${css}
 				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">

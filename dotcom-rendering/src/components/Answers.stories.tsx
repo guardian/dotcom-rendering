@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { Radio, RadioGroup } from '@guardian/source/react-components';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import {

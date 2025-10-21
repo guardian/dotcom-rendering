@@ -4,7 +4,7 @@ import { AB } from '@guardian/ab-core';
 import isChromatic from 'chromatic/isChromatic';
 import MockDate from 'mockdate';
 
-import { fontsCss } from '../src/lib/fonts-css';
+import { rawFontsCss } from '../src/lib/fonts-css';
 import { resets } from '@guardian/source/foundations';
 
 import { Lazy } from '../src/components/Lazy';
@@ -12,7 +12,7 @@ import { Picture } from '../src/components/Picture';
 import { mockFetch } from '../src/lib/mockRESTCalls';
 import { setABTests } from '../src/lib/useAB';
 import { ConfigContextDecorator } from './decorators/configContextDecorator';
-import { Preview } from '@storybook/react';
+import { Preview } from '@storybook/react-webpack5';
 import {
 	globalColourScheme,
 	globalColourSchemeDecorator,
@@ -42,7 +42,7 @@ setABTests({
 });
 
 // Add base css for the site
-let css = `${fontsCss}${resets.resetCSS}`;
+let css = `${rawFontsCss}${resets.resetCSS}`;
 let head = document.getElementsByTagName('head')[0];
 let style = document.createElement('style');
 head.appendChild(style);
@@ -162,9 +162,15 @@ export default {
 
 	parameters: {
 		viewport: {
-			viewports: guardianViewports,
-			defaultViewport: 'wide',
+			options: guardianViewports,
 		},
 		layout: 'fullscreen',
+	},
+
+	initialGlobals: {
+		viewport: {
+			value: 'wide',
+			isRotated: false,
+		},
 	},
 } satisfies Preview;

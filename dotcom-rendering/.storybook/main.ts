@@ -9,7 +9,13 @@ import { svgr } from '../webpack/svg.cjs';
 saveStories();
 
 const config: StorybookConfig = {
-	features: {},
+	features: {
+		actions: true,
+		backgrounds: true,
+		controls: true,
+		viewport: true,
+		toolbars: true,
+	},
 
 	stories: [
 		'../src/**/*.stories.@(tsx)',
@@ -24,19 +30,9 @@ const config: StorybookConfig = {
 	],
 
 	addons: [
-		{
-			name: '@storybook/addon-essentials',
-			options: {
-				actions: true,
-				backgrounds: true,
-				controls: true,
-				docs: true,
-				viewport: true,
-				toolbars: true,
-			},
-		},
-		'@storybook/addon-interactions',
 		'@storybook/addon-webpack5-compiler-swc',
+		'@storybook/addon-docs',
+		'@storybook/addon-a11y',
 	],
 
 	webpackFinal: async (config) => {
@@ -58,7 +54,9 @@ const config: StorybookConfig = {
 		// e.g process?.env?.SOME_VAR
 		config.plugins?.push(
 			new webpack.DefinePlugin({
-				process: '{}',
+				process: JSON.stringify({
+					env: { SDC_URL: process.env.SDC_URL },
+				}),
 			}),
 			// We rely on Buffer for our bridget thrift client
 			new webpack.ProvidePlugin({
