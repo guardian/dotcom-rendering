@@ -13,7 +13,6 @@ test.describe('Commercial E2E tests', () => {
 		await cmpAcceptAll(page);
 
 		const fixedSlots = [
-			'carrot', // Not used often, likely to be unfilled
 			'right',
 			'merchandising-high',
 			'mostpop',
