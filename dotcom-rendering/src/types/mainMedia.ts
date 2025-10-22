@@ -1,14 +1,14 @@
 import {
 	array,
 	boolean,
-	type InferOutput,
 	literal,
 	number,
 	object,
 	optional,
 	string,
 	union,
-} from 'valibot';
+	type z,
+} from 'zod';
 import { SourceSchema } from '../lib/video';
 import { PodcastSeriesImageSchema } from './tag';
 /** For displaying embedded, playable videos directly in cards */
@@ -47,7 +47,7 @@ const GallerySchema = object({
 	count: string(),
 });
 
-export type MainMedia = InferOutput<typeof MainMediaSchema>;
+export type MainMedia = z.infer<typeof MainMediaSchema>;
 
 export const MainMediaSchema = union([
 	VideoSchema,

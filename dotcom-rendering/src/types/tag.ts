@@ -4,14 +4,8 @@
  * @see https://github.com/guardian/frontend/blob/5b987289/common/app/model/Tag.scala#L156-L179
  */
 
-import {
-	array,
-	type InferOutput,
-	number,
-	object,
-	optional,
-	string,
-} from 'valibot';
+import type z from 'zod';
+import { array, number, object, optional, string } from 'zod';
 
 const ReferenceSchema = object({
 	id: string(),
@@ -24,7 +18,7 @@ const PodcastSchema = object({
 	image: optional(string()),
 });
 
-export type Podcast = InferOutput<typeof PodcastSchema>;
+export type Podcast = z.infer<typeof PodcastSchema>;
 
 const FEPaginationSchema = object({
 	currentPage: number(),
@@ -32,7 +26,7 @@ const FEPaginationSchema = object({
 	totalContent: number(),
 });
 
-export type FEPagination = InferOutput<typeof FEPaginationSchema>;
+export type FEPagination = z.infer<typeof FEPaginationSchema>;
 
 export const FETagTypeSchema = object({
 	properties: object({
@@ -57,14 +51,14 @@ export const FETagTypeSchema = object({
 	pagination: optional(FEPaginationSchema),
 });
 
-export type FETagType = InferOutput<typeof FETagTypeSchema>;
+export type FETagType = z.infer<typeof FETagTypeSchema>;
 
 export const PodcastSeriesImageSchema = object({
 	src: optional(string()),
 	altText: optional(string()),
 });
 
-export type PodcastSeriesImage = InferOutput<typeof PodcastSeriesImageSchema>;
+export type PodcastSeriesImage = z.infer<typeof PodcastSeriesImageSchema>;
 
 export const TagTypeSchema = object({
 	id: string(),
@@ -77,4 +71,4 @@ export const TagTypeSchema = object({
 	podcast: optional(PodcastSchema),
 });
 
-export type TagType = InferOutput<typeof TagTypeSchema>;
+export type TagType = z.infer<typeof TagTypeSchema>;

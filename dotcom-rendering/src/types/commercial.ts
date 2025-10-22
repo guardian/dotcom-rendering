@@ -1,11 +1,4 @@
-import {
-	array,
-	type InferOutput,
-	object,
-	optional,
-	string,
-	union,
-} from 'valibot';
+import { array, object, optional, string, union, type z } from 'zod';
 import { type EditionId, EditionIdSchema } from '../lib/edition';
 import { BrandingSchema } from './branding';
 
@@ -19,24 +12,22 @@ const EditionCommercialPropertiesSchema = object({
 	branding: optional(BrandingSchema),
 });
 
-export type EditionCommercialProperties = InferOutput<
+export type EditionCommercialProperties = z.infer<
 	typeof EditionCommercialPropertiesSchema
 >;
 
+// TODO remove casting
 export const CommercialPropertiesSchema = object(
 	Object.fromEntries(
 		EditionIdSchema.options.map((editionId) => [
-			editionId.literal,
+			editionId,
 			EditionCommercialPropertiesSchema,
 		]),
 	) as Record<EditionId, typeof EditionCommercialPropertiesSchema>,
-	() =>
-		'Invalid commercial properties object — one or more editions are invalid.',
+	'Invalid commercial properties object — one or more editions are invalid.',
 );
 
-export type CommercialProperties = InferOutput<
-	typeof CommercialPropertiesSchema
->;
+export type CommercialProperties = z.infer<typeof CommercialPropertiesSchema>;
 
 /**
  * key: a front, e.g. "uk" or "uk/sport"
@@ -70,7 +61,7 @@ const ReaderRevenueCategoriesSchema = object({
 	gifting: optional(string()),
 });
 
-export type ReaderRevenueCategories = InferOutput<
+export type ReaderRevenueCategories = z.infer<
 	typeof ReaderRevenueCategoriesSchema
 >;
 
@@ -82,7 +73,7 @@ export const ReaderRevenuePositionsSchema = object({
 	ampFooter: ReaderRevenueCategoriesSchema,
 });
 
-export type ReaderRevenuePositions = InferOutput<
+export type ReaderRevenuePositions = z.infer<
 	typeof ReaderRevenuePositionsSchema
 >;
 

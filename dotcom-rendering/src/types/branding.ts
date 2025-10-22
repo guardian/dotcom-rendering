@@ -1,12 +1,5 @@
-import {
-	type InferOutput,
-	literal,
-	number,
-	object,
-	optional,
-	string,
-	union,
-} from 'valibot';
+import type { z } from 'zod';
+import { literal, number, object, optional, string, union } from 'zod';
 import { EditionIdSchema } from '../lib/edition';
 
 export const BrandingLogoSchema = object({
@@ -19,7 +12,7 @@ export const BrandingLogoSchema = object({
 	}),
 });
 
-export type BrandingLogo = InferOutput<typeof BrandingLogoSchema>;
+export type BrandingLogo = z.infer<typeof BrandingLogoSchema>;
 
 /**
  * @see https://github.com/guardian/commercial-shared/blob/35cdf4e1/src/main/scala/com/gu/commercial/branding/BrandingType.scala
@@ -30,7 +23,7 @@ export const BrandingTypeSchema = union([
 	object({ name: literal('sponsored') }),
 ]);
 
-export type BrandingType = InferOutput<typeof BrandingTypeSchema>;
+export type BrandingType = z.infer<typeof BrandingTypeSchema>;
 
 export const BrandingSchema = object({
 	brandingType: optional(BrandingTypeSchema),
@@ -40,7 +33,7 @@ export const BrandingSchema = object({
 	logoForDarkBackground: optional(BrandingLogoSchema),
 });
 
-export type Branding = InferOutput<typeof BrandingSchema>;
+export type Branding = z.infer<typeof BrandingSchema>;
 
 export const EditionBrandingSchema = object({
 	edition: object({
@@ -49,7 +42,7 @@ export const EditionBrandingSchema = object({
 	branding: optional(BrandingSchema),
 });
 
-export type EditionBranding = InferOutput<typeof EditionBrandingSchema>;
+export type EditionBranding = z.infer<typeof EditionBrandingSchema>;
 
 type BaseCollectionBranding<Kind extends BrandingType['name']> = {
 	/**

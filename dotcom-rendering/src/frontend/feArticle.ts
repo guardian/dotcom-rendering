@@ -2,14 +2,14 @@ import {
 	any,
 	array,
 	boolean,
-	type InferOutput,
 	number,
 	object,
 	optional,
 	record,
 	string,
 	unknown,
-} from 'valibot';
+	type z,
+} from 'zod';
 import { EditionIdSchema } from '../lib/edition';
 import { FEArticleBadgeTypeSchema } from '../types/badge';
 import { BlockSchema } from '../types/blocks';
@@ -40,7 +40,7 @@ const FEStoryPackageSchema = object({
 	trails: array(FETrailTypeSchema),
 });
 
-export type FEStoryPackage = InferOutput<typeof FEStoryPackageSchema>;
+export type FEStoryPackage = z.infer<typeof FEStoryPackageSchema>;
 
 const PageTypeSchema = object({
 	hasShowcaseMainElement: boolean(),
@@ -158,4 +158,4 @@ export const FEArticleSchema = object({
 	crossword: optional(CAPICrosswordSchema),
 });
 
-export type FEArticle = InferOutput<typeof FEArticleSchema>;
+export type FEArticle = z.infer<typeof FEArticleSchema>;

@@ -1,6 +1,6 @@
 import { isUndefined } from '@guardian/libs';
 import type { RequestHandler } from 'express';
-import { type IssuePathItem, safeParse } from 'valibot';
+import { safeParse } from 'zod';
 import { type FEFront, FEFrontSchema } from '../frontend/feFront';
 import type { FETagPage } from '../frontend/feTagPage';
 import { decideTagPageBranding, pickBrandingForEdition } from '../lib/branding';

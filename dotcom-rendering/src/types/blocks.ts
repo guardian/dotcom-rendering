@@ -1,12 +1,4 @@
-import {
-	array,
-	boolean,
-	type InferOutput,
-	number,
-	object,
-	optional,
-	string,
-} from 'valibot';
+import { array, boolean, number, object, optional, string, type z } from 'zod';
 import { FEElementSchema } from './content';
 
 const MembershipPlaceholderSchema = object({
@@ -49,4 +41,4 @@ export const BlockSchema = object({
 	contributors: optional(array(BlockContributorSchema)),
 });
 
-export type Block = InferOutput<typeof BlockSchema>;
+export type Block = z.infer<typeof BlockSchema>;

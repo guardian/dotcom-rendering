@@ -1,4 +1,4 @@
-import { type InferOutput, literal, object, union } from 'valibot';
+import { literal, object, union, type z } from 'zod';
 
 const FEPillarSchema = union([
 	literal('NewsPillar'),
@@ -68,4 +68,4 @@ export const FEFormatSchema = object({
 	display: FEDisplaySchema,
 });
 
-export type FEFormat = InferOutput<typeof FEFormatSchema>;
+export type FEFormat = z.infer<typeof FEFormatSchema>;

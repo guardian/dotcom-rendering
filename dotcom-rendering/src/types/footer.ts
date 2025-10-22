@@ -1,4 +1,4 @@
-import { array, type InferOutput, object, optional, string } from 'valibot';
+import { array, object, optional, string, type z } from 'zod';
 
 const FooterLinkSchema = object({
 	text: string(),
@@ -11,4 +11,4 @@ export const FooterTypeSchema = object({
 	footerLinks: array(array(FooterLinkSchema)),
 });
 
-export type FooterType = InferOutput<typeof FooterTypeSchema>;
+export type FooterType = z.infer<typeof FooterTypeSchema>;

@@ -1,4 +1,5 @@
-import { type InferOutput, object, optional, string } from 'valibot';
+import type z from 'zod';
+import { object, optional, string } from 'zod';
 import type {
 	FEAspectRatio,
 	FEContainer,
@@ -115,7 +116,7 @@ export const DCRSnapTypeSchema = object({
 	embedJs: optional(string()),
 });
 
-export type DCRSnapType = InferOutput<typeof DCRSnapTypeSchema>;
+export type DCRSnapType = z.infer<typeof DCRSnapTypeSchema>;
 
 export type AspectRatio = FEAspectRatio;
 

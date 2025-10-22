@@ -9,6 +9,7 @@ import {
 } from './handler.article.apps';
 import {
 	handleArticle,
+	handleArticleZod,
 	handleBlocks,
 	handleInteractive,
 } from './handler.article.web';
@@ -93,7 +94,7 @@ const renderer = Router();
 // populates req.body with the content data from a production
 // URL if req.params.url is present
 renderer.use(getContentFromURLMiddleware);
-renderer.get('/Article/*url', handleArticle);
+renderer.get('/Article/*url', handleArticleZod);
 renderer.get('/Interactive/*url', handleInteractive);
 renderer.get('/Blocks/*url', handleBlocks);
 renderer.get('/Front/*url', handleFront);

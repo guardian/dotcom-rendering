@@ -1,13 +1,13 @@
 import {
 	array,
 	boolean,
-	type InferOutput,
 	literal,
 	object,
 	optional,
 	string,
 	union,
-} from 'valibot';
+	type z,
+} from 'zod';
 import { FEFormatSchema } from '../frontend/format';
 import { FETrailTypeSchema } from './trails';
 
@@ -23,7 +23,7 @@ const OnwardsSourceSchema = union([
 	literal('unknown-source'), // We should never see this in the analytics data!
 ]);
 
-export type OnwardsSource = InferOutput<typeof OnwardsSourceSchema>;
+export type OnwardsSource = z.infer<typeof OnwardsSourceSchema>;
 
 /**
  * Onwards

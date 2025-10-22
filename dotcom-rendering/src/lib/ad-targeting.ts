@@ -1,10 +1,10 @@
 import { isString } from '@guardian/libs';
-import { type InferOutput, record, string, unknown } from 'valibot';
+import { record, string, unknown, type z } from 'zod';
 import type { AdTargeting } from '../types/commercial';
 
 export const SharedAdTargetingSchema = record(string(), unknown());
 
-export type SharedAdTargeting = InferOutput<typeof SharedAdTargetingSchema>;
+export type SharedAdTargeting = z.infer<typeof SharedAdTargetingSchema>;
 
 // TODO: this function already exists in commercial-core, consider exporting it to avoid duplication
 const getUrlKeywords = (url: string): string[] => {

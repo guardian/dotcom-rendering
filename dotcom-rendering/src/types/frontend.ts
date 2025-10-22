@@ -1,15 +1,13 @@
 import {
 	array,
 	boolean,
-	type GenericSchema,
-	type InferOutput,
-	lazy,
 	literal,
 	object,
 	optional,
 	string,
 	union,
-} from 'valibot';
+	type z,
+} from 'zod';
 import { type FEFormat } from '../frontend/format';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { Block } from './blocks';
@@ -53,33 +51,28 @@ const RealPillarsSchema = union([
 const FakePillarsSchema = literal('labs');
 
 export const LegacyPillarSchema = union([RealPillarsSchema, FakePillarsSchema]);
-export type LegacyPillar = InferOutput<typeof LegacyPillarSchema>;
+export type LegacyPillar = z.infer<typeof LegacyPillarSchema>;
 
 /**
  * Data types for the API request bodies from clients that require transformation before internal use.
  * Where data types are coming from Frontend we try to use the 'FE' prefix.
  * Prior to this we used 'CAPI' as a prefix which wasn't entirely accurate, and some data structures never received the prefix, meaning some are still missing it.
  */
-export interface FELinkType {
-	url: string;
-	title: string;
-	longTitle?: string;
-	iconName?: string;
-	children?: FELinkType[];
-	pillar?: LegacyPillar;
-	more?: boolean;
-	classList?: string[];
-}
-export const FELinkTypeSchema: GenericSchema<FELinkType> = object({
+
+export const FELinkTypeSchema = object({
 	url: string(),
 	title: string(),
 	longTitle: optional(string()),
 	iconName: optional(string()),
-	children: optional(array(lazy(() => FELinkTypeSchema))),
+	get children() {
+		return optional(array(FELinkTypeSchema));
+	},
 	pillar: optional(LegacyPillarSchema),
 	more: optional(boolean()),
 	classList: optional(array(string())),
 });
+
+export type FELinkType = z.infer<typeof FELinkTypeSchema>;
 
 export const FENavTypeSchema = object({
 	currentUrl: string(),
@@ -98,4 +91,4 @@ export const FENavTypeSchema = object({
 	readerRevenueLinks: ReaderRevenuePositionsSchema,
 });
 
-export type FENavType = InferOutput<typeof FENavTypeSchema>;
+export type FENavType = z.infer<typeof FENavTypeSchema>;

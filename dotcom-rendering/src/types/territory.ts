@@ -1,5 +1,5 @@
 import { isOneOf } from '@guardian/libs';
-import { type InferOutput, literal, union } from 'valibot';
+import { literal, union, type z } from 'zod';
 
 const AmericanTerritoriesSchema = union([
 	literal('US-East-Coast'),
@@ -14,7 +14,7 @@ export const isAustralianTerritory = isOneOf(australianTerritories);
 const AustralianTerritorySchema = union(
 	australianTerritories.map((t) => literal(t)),
 );
-export type AustralianTerritory = InferOutput<typeof AustralianTerritorySchema>;
+export type AustralianTerritory = z.infer<typeof AustralianTerritorySchema>;
 
 const NewZealandTerritoriesSchema = literal('NZ');
 
@@ -33,4 +33,4 @@ export const TerritorySchema = union([
 	UnknownTerritoriesSchema,
 ]);
 
-export type Territory = InferOutput<typeof TerritorySchema>;
+export type Territory = z.infer<typeof TerritorySchema>;

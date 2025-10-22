@@ -1,12 +1,4 @@
-import {
-	boolean,
-	type InferOutput,
-	number,
-	object,
-	optional,
-	record,
-	string,
-} from 'valibot';
+import { boolean, number, object, optional, record, string, type z } from 'zod';
 import { FEFormatSchema } from '../frontend/format';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { BrandingSchema } from './branding';
@@ -49,7 +41,7 @@ export const BaseTrailTypeSchema = object({
 	galleryCount: optional(number()),
 });
 
-export type BaseTrailType = InferOutput<typeof BaseTrailTypeSchema>;
+export type BaseTrailType = z.infer<typeof BaseTrailTypeSchema>;
 
 export interface TrailType extends BaseTrailType {
 	palette?: never;
@@ -64,8 +56,7 @@ export interface TrailType extends BaseTrailType {
 	image?: DCRFrontImage;
 }
 
-export const FETrailTypeSchema = object({
-	...BaseTrailTypeSchema.entries,
+export const FETrailTypeSchema = BaseTrailTypeSchema.extend({
 	format: FEFormatSchema,
 	/**
 	 * @deprecated This type must exist as it's passed by frontend, but we shouldn't use it.
@@ -83,7 +74,7 @@ export const FETrailTypeSchema = object({
 	image: optional(string()),
 });
 
-export type FETrailType = InferOutput<typeof FETrailTypeSchema>;
+export type FETrailType = z.infer<typeof FETrailTypeSchema>;
 
 export interface TrailTabType {
 	heading: string;

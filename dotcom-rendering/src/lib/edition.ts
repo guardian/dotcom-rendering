@@ -1,16 +1,10 @@
 import { isOneOf } from '@guardian/libs';
-import { type InferOutput, literal, union } from 'valibot';
+import { z } from 'zod';
 import { isTuple } from './tuple';
 
-const EditionIdSchema = union([
-	literal('UK'),
-	literal('US'),
-	literal('AU'),
-	literal('INT'),
-	literal('EUR'),
-]);
+const EditionIdSchema = z.enum(['UK', 'US', 'AU', 'INT', 'EUR']);
 
-type EditionId = InferOutput<typeof EditionIdSchema>;
+type EditionId = z.infer<typeof EditionIdSchema>;
 
 type Edition = (typeof editionList)[number];
 

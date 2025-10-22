@@ -1,4 +1,4 @@
-import { literal, union } from 'valibot';
+import { literal, union } from 'zod';
 
 /**
  * Football

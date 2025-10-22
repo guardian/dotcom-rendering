@@ -1,19 +1,18 @@
 import {
 	array,
 	boolean,
-	custom,
-	type GenericSchema,
-	type InferOutput,
-	intersect,
+	intersection,
 	literal,
 	number,
 	object,
 	optional,
 	record,
 	string,
+	templateLiteral,
 	undefined,
 	union,
-} from 'valibot';
+	type z,
+} from 'zod';
 import { SharedAdTargetingSchema } from '../lib/ad-targeting';
 import { EditionIdSchema } from '../lib/edition';
 
@@ -23,7 +22,7 @@ export const StageTypeSchema = union([
 	literal('PROD'),
 ]);
 
-export type StageType = InferOutput<typeof StageTypeSchema>;
+export type StageType = z.infer<typeof StageTypeSchema>;
 
 const CommercialConfigTypeSchema = object({
 	isPaidContent: optional(boolean()),
@@ -46,30 +45,24 @@ const CommercialConfigTypeSchema = object({
  * Narrowest representation of the server-side tests
  * object shape, which is [defined in `frontend`](https://github.com/guardian/frontend/blob/23743723030a041e4f4f59fa265ee2be0bb51825/common/app/experiments/ExperimentsDefinition.scala#L24-L26).
  */
-export type ServerSideTests = {
-	[key: `${string}Variant`]: 'variant';
-	[key: `${string}Control`]: 'control';
-};
-
-const VariantKeySchema = custom<`${string}Variant`>(
-	(input) => typeof input === 'string' && /.*Variant$/.test(input),
-);
+const VariantKeySchema = templateLiteral([string(), literal('Variant')]);
 const VariantTestsSchema = record(VariantKeySchema, literal('variant'));
-const ControlKeySchema = custom<`${string}Control`>(
-	(input) => typeof input === 'string' && /.*Control$/.test(input),
-);
+
+const ControlKeySchema = templateLiteral([string(), literal('Control')]);
 const ControlTestsSchema = record(ControlKeySchema, literal('control'));
 
-export const ServerSideTestsSchema = intersect([
+export const ServerSideTestsSchema = intersection(
 	VariantTestsSchema,
 	ControlTestsSchema,
-]) as GenericSchema<ServerSideTests>;
+);
+
+export type ServerSideTests = z.infer<typeof ServerSideTestsSchema>;
 
 export type ServerSideTestNames = keyof ServerSideTests;
 
 export const SwitchesSchema = record(string(), union([boolean(), undefined()]));
 
-export type Switches = InferOutput<typeof SwitchesSchema>;
+export type Switches = z.infer<typeof SwitchesSchema>;
 
 /**
  * the config model will contain useful app/site
@@ -77,8 +70,7 @@ export type Switches = InferOutput<typeof SwitchesSchema>;
  * constructed in frontend and passed to dotcom-rendering
  * this data could eventually be defined in dotcom-rendering
  */
-export const ConfigTypeSchema = object({
-	...CommercialConfigTypeSchema.entries,
+export const ConfigTypeSchema = CommercialConfigTypeSchema.extend({
 	dcrCouldRender: optional(boolean()),
 	ajaxUrl: string(),
 	sentryPublicApiKey: string(),
@@ -125,4 +117,4 @@ export const ConfigTypeSchema = object({
 	googleRecaptchaSiteKeyVisible: optional(string()),
 });
 
-export type ConfigType = InferOutput<typeof ConfigTypeSchema>;
+export type ConfigType = z.infer<typeof ConfigTypeSchema>;

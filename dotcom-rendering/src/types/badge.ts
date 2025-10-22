@@ -1,4 +1,4 @@
-import { type InferOutput, object, optional, string } from 'valibot';
+import { object, optional, string, type z } from 'zod';
 
 const DCRBadgeTypeSchema = object({
 	imageSrc: string(),
@@ -6,7 +6,7 @@ const DCRBadgeTypeSchema = object({
 	href: string(),
 });
 
-export type DCRBadgeType = InferOutput<typeof DCRBadgeTypeSchema>;
+export type DCRBadgeType = z.infer<typeof DCRBadgeTypeSchema>;
 
 export const FEArticleBadgeTypeSchema = object({
 	seriesTag: string(),

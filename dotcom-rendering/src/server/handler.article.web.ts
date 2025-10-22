@@ -1,5 +1,4 @@
 import type { RequestHandler } from 'express';
-import { type IssuePathItem, safeParse } from 'valibot';
 import { type FEArticle, FEArticleSchema } from '../frontend/feArticle';
 import { decideFormat } from '../lib/articleFormat';
 import { enhanceBlocks } from '../model/enhanceBlocks';
@@ -10,48 +9,26 @@ import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderBlocks, renderHtml } from './render.article.web';
 
-const valibotParseFailure = (
-	errorString: string[],
-	entry: [number, IssuePathItem],
-) => {
-	const test = entry[1].key as string;
-	const type = entry[1].type;
-
-	errorString.push(
-		`entry ${entry[0]} with key ${test.toString()} with type ${type}`,
-	);
-};
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- testing
 const validateFeArticleAJV = (data: unknown): FEArticle =>
 	validateAsFEArticle(data);
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- testing
-const validateFeArticleValibot = (data: unknown): FEArticle => {
-	const result = safeParse(FEArticleSchema, data);
+const validateFeArticleZod = (data: unknown): FEArticle => {
+	const result = FEArticleSchema.safeParse(data);
 	if (result.success) {
-		const frontendData: FEArticle = result.output;
+		const frontendData: FEArticle = result.data;
 		return frontendData;
 	} else {
-		const errorMessages: string[] = [];
 		console.error('Validation errors:');
-		for (const issue of result.issues) {
-			if (issue.path) {
-				for (const entry of issue.path.entries()) {
-					valibotParseFailure(errorMessages, entry);
-				}
-			}
-
-			console.log(errorMessages);
+		for (const issue of result.error.issues) {
+			console.error(issue);
 		}
-		const errorMsg = errorMessages.join('\n');
-		throw new TypeError(`Validation failed ${errorMsg}`);
+		throw new TypeError(`Validation failed`);
 	}
 };
 
-export const handleArticleValibot: RequestHandler = ({ body }, res) => {
+export const handleArticleZod: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'web');
-	const frontendData = validateFeArticleValibot(body);
+	const frontendData = validateFeArticleZod(body);
 	const article = enhanceArticleType(frontendData, 'Web');
 	const { html, prefetchScripts } = renderHtml({
 		article,

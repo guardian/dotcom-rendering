@@ -1,4 +1,4 @@
-import { type InferOutput, number, object, optional, string } from 'valibot';
+import { number, object, optional, string, type z } from 'zod';
 
 export type LiveUpdateType = {
 	numNewBlocks: number;
@@ -15,4 +15,4 @@ export const PaginationTypeSchema = object({
 	older: optional(string()),
 });
 
-export type PaginationType = InferOutput<typeof PaginationTypeSchema>;
+export type PaginationType = z.infer<typeof PaginationTypeSchema>;

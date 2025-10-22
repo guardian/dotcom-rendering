@@ -1,4 +1,5 @@
-import { type InferOutput, literal, object, string, union } from 'valibot';
+import type z from 'zod';
+import { literal, object, string, union } from 'zod';
 
 export type CustomPlayEventDetail = { uniqueId: string };
 
@@ -17,7 +18,7 @@ export const supportedVideoFileTypes = [
 const SupportedVideoFileTypeSchema = union(
 	supportedVideoFileTypes.map((type) => literal(type)),
 );
-export type SupportedVideoFileType = InferOutput<
+export type SupportedVideoFileType = z.infer<
 	typeof SupportedVideoFileTypeSchema
 >;
 
@@ -25,4 +26,4 @@ export const SourceSchema = object({
 	src: string(),
 	mimeType: SupportedVideoFileTypeSchema,
 });
-export type Source = InferOutput<typeof SourceSchema>;
+export type Source = z.infer<typeof SourceSchema>;
