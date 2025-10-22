@@ -18,6 +18,7 @@ import {
 	type TableOfContentsItem,
 } from '../model/enhanceTableOfContents';
 import { enhancePinnedPost } from '../model/pinnedPost';
+import { logger } from '../server/lib/logging';
 import { parse as parseStoryPackage, type StoryPackage } from '../storyPackage';
 import type {
 	AdPlaceholderBlockElement,
@@ -65,7 +66,7 @@ export const getGalleryMainMedia = (
 
 	if (isUndefined(mainMedia)) {
 		if (isUndefined(trailImage)) {
-			console.error('No main media or trail picture found');
+			logger.warn('No main media or trail picture found');
 		}
 		return trailImage;
 	}
