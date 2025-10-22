@@ -12,7 +12,7 @@ import { isServer } from '../lib/isServer';
 import { ophanComponentId } from '../lib/ophan-helpers';
 import {
 	getHighlightCards,
-	getOrderedHighlights,
+	getHighlightHistory,
 	resetStoredHighlights,
 	trackCardEngagement,
 } from '../lib/personalHighlights';
@@ -300,7 +300,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	}, [orderedTrails]);
 
 	useEffect(() => {
-		const ooo = getOrderedHighlights();
+		const ooo = getHighlightHistory();
 		const orderedHighlights = getHighlightCards();
 		console.log('>>> stored history', ooo);
 		console.log('>>> ordered highlights', orderedHighlights);
@@ -322,6 +322,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 			setShouldShowHighlights(true);
 			return;
 		}
+		console.log('>>> highlights are good');
 		// otherwise history is different to trails so set in state
 		setOrderedTrails(orderedHighlights);
 	}, [trails]);
