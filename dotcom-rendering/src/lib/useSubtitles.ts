@@ -68,7 +68,6 @@ export const useSubtitles = ({
 		onCueChange();
 		return () => {
 			track.removeEventListener('cuechange', onCueChange);
-			track.mode = 'showing';
 		};
 	}, [activeTrack, shouldShow]);
 
