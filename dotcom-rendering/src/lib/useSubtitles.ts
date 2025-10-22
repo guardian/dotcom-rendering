@@ -20,9 +20,11 @@ export const useSubtitles = ({
 }: Props): ActiveCue | null => {
 	const [activeTrack, setActiveTrack] = useState<TextTrack | null>(null);
 	const [activeCue, setActiveCue] = useState<ActiveCue | null>(null);
-	// only show subtitles if the video is actively playing or if its paused
+
+	// Only show subtitles if the video is actively playing or if it's paused after having started
 	const shouldShow = playerState === 'PLAYING' || currentTime > 0;
 
+	// Select and "wake" the single text track as soon as possible.
 	useEffect(() => {
 		if (!video) return;
 
@@ -33,59 +35,107 @@ export const useSubtitles = ({
 			if (!t) return;
 
 			// Trigger cue fetching immediately (don’t wait for play state)
-			if (t.mode !== 'hidden' && t.mode !== 'showing') {
-				t.mode = 'hidden';
-			}
+			if (t.mode === 'disabled') t.mode = 'hidden';
 
 			setActiveTrack(t);
 		};
 
-		// 1) pick immediately if already present
+		// 1) If already present
 		pickTrack();
 
-		// 2) react when HLS adds tracks later (common on mobile)
+		// 2) Track can appear later on mobile HLS
 		const onAdd = () => pickTrack();
-		tracks.addEventListener('addtrack', onAdd);
+		// Some engines support addEventListener on TextTrackList; guard just in case
+		(tracks as unknown as EventTarget).addEventListener?.(
+			'addtrack',
+			onAdd as EventListener,
+		);
 
-		// 3) also after metadata (some browsers populate then)
+		// 3) Some browsers populate textTracks on metadata
 		const onMeta = () => pickTrack();
 		video.addEventListener('loadedmetadata', onMeta);
 
 		return () => {
-			tracks.removeEventListener('addtrack', onAdd);
+			(tracks as unknown as EventTarget).removeEventListener?.(
+				'addtrack',
+				onAdd as EventListener,
+			);
 			video.removeEventListener('loadedmetadata', onMeta);
 		};
 	}, [video]);
 
+	// Keep activeCue in sync; use cuechange + timeupdate fallback to avoid stalls on mobile.
 	useEffect(() => {
 		const track = activeTrack;
 
-		if (!track || !shouldShow) {
+		if (!video || !track) {
 			setActiveCue(null);
 			return;
 		}
 
-		// if we have a track and can show it, hide the native track
-		track.mode = 'hidden';
+		// Ensure the browser continues fetching cues even if it flips the mode
+		if (track.mode === 'disabled') track.mode = 'hidden';
 
-		const onCueChange = () => {
-			const list = track.activeCues;
-			if (!list || list.length === 0) {
+		const computeActive = () => {
+			if (!shouldShow) {
+				// We still keep the track loading, but hide our custom renderer state
+				setActiveCue(null);
 				return;
 			}
-			const cue = list[0] as VTTCue;
-			setActiveCue({
-				startTime: cue.startTime,
-				endTime: cue.endTime,
-				text: cue.text,
-			});
+
+			// Prefer activeCues when available
+			const list = track.activeCues;
+			if (list && list.length > 0) {
+				const cue = list[0] as VTTCue;
+				setActiveCue({
+					startTime: cue.startTime,
+					endTime: cue.endTime,
+					text: cue.text,
+				});
+				return;
+			}
+
+			// Fallback: derive from all cues + currentTime (helps when cuechange stalls on mobile)
+			const cues = track.cues;
+			if (cues?.length != null) {
+				const t = video.currentTime;
+				let found: VTTCue | null = null;
+				// Typical subtitle counts are small; linear scan is fine.
+				for (let i = 0; i < cues.length; i++) {
+					const c = cues[i] as VTTCue;
+					if (t >= c.startTime && t < c.endTime) {
+						found = c;
+						break;
+					}
+				}
+				if (found) {
+					setActiveCue({
+						startTime: found.startTime,
+						endTime: found.endTime,
+						text: found.text,
+					});
+					return;
+				}
+			}
+
+			// No active cue → clear to avoid “stuck on first cue”
+			setActiveCue(null);
 		};
+
+		const onCueChange = () => computeActive();
+		const onTimeUpdate = () => computeActive();
+
 		track.addEventListener('cuechange', onCueChange);
-		onCueChange();
+		video.addEventListener('timeupdate', onTimeUpdate);
+
+		// Kick once in case we're already mid-cue
+		computeActive();
+
 		return () => {
 			track.removeEventListener('cuechange', onCueChange);
+			video.removeEventListener('timeupdate', onTimeUpdate);
 		};
-	}, [activeTrack, shouldShow]);
+	}, [activeTrack, video, shouldShow]);
 
 	return activeCue;
 };
