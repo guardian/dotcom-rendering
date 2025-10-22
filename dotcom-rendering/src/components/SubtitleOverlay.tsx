@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	space,
 	textSans15,
 	textSans17,
 	textSans20,
@@ -9,27 +8,49 @@ import { palette } from '../palette';
 import type { SubtitleSize } from './LoopVideoPlayer';
 
 const subtitleOverlayStyles = css`
+	max-width: 71%;
+	pointer-events: none;
 	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: ${space[4]}px;
-	display: flex;
-	justify-content: center;
+	bottom: 16px;
+	left: 50%;
+	transform: translateX(-50%);
+`;
+
+const cueBoxStyles = css`
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
 	pointer-events: none;
 `;
-const subtitleCueBoxStyles = (subtitleSize: SubtitleSize) => css`
-	max-width: 71%;
-	background-color: rgba(18, 18, 18, 0.7);
+
+const cueStyles = css`
 	color: ${palette('--loop-video-subtitle-text')};
-	${subtitleSize === 'small' && textSans15};
-	${subtitleSize === 'medium' && textSans17};
-	${subtitleSize === 'large' && textSans20};
-	padding: 4px;
-	text-align: center;
 	display: inline;
-	box-decoration-break: clone;
+	background-color: rgba(18, 18, 18, 0.7);
 	-webkit-box-decoration-break: clone;
+	box-decoration-break: clone;
+	pointer-events: none;
+	padding: 3px 4px 3px;
 `;
+
+const cueTextStyles = (subtitleSize: SubtitleSize) => {
+	const sizeStyles = {
+		small: css`
+			${textSans15};
+			line-height: 24px;
+		`,
+		medium: css`
+			${textSans17};
+			line-height: 26px;
+		`,
+		large: css`
+			${textSans20};
+			line-height: 30px;
+		`,
+	};
+
+	return sizeStyles[subtitleSize];
+};
 
 export const SubtitleOverlay = ({
 	text,
@@ -40,7 +61,9 @@ export const SubtitleOverlay = ({
 }) => {
 	return (
 		<div css={subtitleOverlayStyles}>
-			<div css={subtitleCueBoxStyles(subtitleSize)}>{text}</div>
+			<div css={cueBoxStyles}>
+				<div css={[cueStyles, cueTextStyles(subtitleSize)]}>{text}</div>
+			</div>
 		</div>
 	);
 };
