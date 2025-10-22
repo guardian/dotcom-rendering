@@ -20,7 +20,8 @@ export const useSubtitles = ({
 }: Props): ActiveCue | null => {
 	const [activeTrack, setActiveTrack] = useState<TextTrack | null>(null);
 	const [activeCue, setActiveCue] = useState<ActiveCue | null>(null);
-	// only show subtitles if the video is actively playing or if its paused
+
+	// only show subtitles if the video is actively playing or if it's paused
 	const shouldShow = playerState === 'PLAYING' || currentTime > 0;
 
 	useEffect(() => {
@@ -33,12 +34,17 @@ export const useSubtitles = ({
 			// We currently only support one text track per video, so we are ok to access [0] here. If we add additional languages, this will need updating.
 			if (!track) return;
 
+			// 'showing' keeps iOS’s activeCues more reliable. Instead of "hidden", we hide them with native CSS
+			if (track.mode !== 'showing') track.mode = 'showing';
 			setActiveTrack(track);
 		};
 
-		//Get Text track as soon as the video element is available.
+		// Get Text track as soon as the video element is available.
 		setTrackFromList();
-		// TODO:: are there changes we need to listen for that might change the text track?
+
+		// listen for delayed loads
+		textTracks.addEventListener('addtrack', setTrackFromList);
+		video.addEventListener('loadedmetadata', setTrackFromList);
 	}, [video]);
 
 	useEffect(() => {
