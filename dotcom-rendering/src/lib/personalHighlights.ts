@@ -9,20 +9,20 @@ import type { DCRFrontCard } from '../types/front';
  * If the highlights container has been updated by editorial, we reset the ordering to allow for editorial oversight.
  * */
 
-type HighlightCard = {
+type HighlightCardHistory = {
 	card: DCRFrontCard;
 	viewCount: number;
 	clicked: boolean;
 };
 
-export type OrderedHighlights = Array<HighlightCard>;
+export type HighlightHistory = Array<HighlightCardHistory>;
 
-export const OrderedHighlightsKey = 'gu.history.orderedHighlights';
+export const HighlightHistoryKey = 'gu.history.highlights';
 
 // todo: improve type of card
-const isValidOrderedHighlights = (
+const isValidHighlightHistory = (
 	history: unknown,
-): history is OrderedHighlights =>
+): history is HighlightHistory =>
 	Array.isArray(history) &&
 	history.every(
 		(highlight) =>
@@ -36,48 +36,50 @@ const isValidOrderedHighlights = (
 	);
 
 // Retrieve the user's highlight card order
-export const getOrderedHighlights = (): OrderedHighlights | undefined => {
+export const getHighlightHistory = (): HighlightHistory | undefined => {
 	try {
-		const orderedHighlights = storage.local.get(OrderedHighlightsKey);
+		const highlighthistory = storage.local.get(HighlightHistoryKey);
 
-		if (!isValidOrderedHighlights(orderedHighlights)) {
-			throw new Error(`Invalid ${OrderedHighlightsKey} value`);
+		if (!isValidHighlightHistory(highlighthistory)) {
+			throw new Error(`Invalid ${HighlightHistoryKey} value`);
 		}
 
-		return orderedHighlights;
+		return highlighthistory;
 	} catch (e) {
 		// error parsing the string, so remove the key
-		storage.local.remove(OrderedHighlightsKey);
+		storage.local.remove(HighlightHistoryKey);
 		return undefined;
 	}
 };
 
 const resetHighlights = (): void => {
-	storage.local.remove(OrderedHighlightsKey);
+	storage.local.remove(HighlightHistoryKey);
 };
 
-export const storeOrderInStorage = (order: OrderedHighlights): void => {
-	storage.local.set(OrderedHighlightsKey, order);
+export const storeOrderInStorage = (order: HighlightHistory): void => {
+	storage.local.set(HighlightHistoryKey, order);
 };
 
-const convertCardsToHighlights = (
+const convertCardsToHistory = (
 	cards: Array<DCRFrontCard>,
-): OrderedHighlights => {
-	return cards.map((card) => ({
+): HighlightHistory => {
+	return cards.map((card, index) => ({
 		card,
 		viewCount: 0,
 		clicked: false,
+		originalPosition: index,
+		moveTimestamp: undefined,
 	}));
 };
 
 export const resetStoredHighlights = (cards: DCRFrontCard[]): void => {
 	resetHighlights();
-	const highlights = convertCardsToHighlights(cards);
+	const highlights = convertCardsToHistory(cards);
 	storeOrderInStorage(highlights);
 };
 
 const getOrderedCardsFromHistory = (
-	history: OrderedHighlights,
+	history: HighlightHistory,
 ): Array<DCRFrontCard> => {
 	return history.map((highlight) => {
 		return highlight.card;
@@ -85,56 +87,120 @@ const getOrderedCardsFromHistory = (
 };
 
 export const getHighlightCards = (): Array<DCRFrontCard> => {
-	const history = getOrderedHighlights() ?? [];
-	const orderedHistory = orderCardsByHistory(history);
-	storeOrderInStorage(orderedHistory);
-	return getOrderedCardsFromHistory(orderedHistory);
+	const history = getHighlightHistory() ?? [];
+	// const orderedHistory = orderCardsByHistory(history);
+	return getOrderedCardsFromHistory(history);
 };
 
 const trackCardClick = (
-	highlights: OrderedHighlights,
+	highlights: HighlightHistory,
 	card?: DCRFrontCard,
-): OrderedHighlights => {
+): HighlightHistory => {
 	if (!card) return highlights;
-	return highlights.map((el) =>
-		el.card.url === card.url ? { ...el, clicked: true } : el,
-	);
+
+	// find the matching card
+	const index = highlights.findIndex((el) => el.card.url === card.url);
+	if (index === -1) return highlights; // card not found
+
+	// copy array so we don't mutate the original
+	const newHighlights = [...highlights];
+
+	// remove the found element
+	const [found] = newHighlights.splice(index, 1);
+	if (!found || found.clicked) return newHighlights;
+
+	// update it
+	const updated = {
+		...found,
+		clicked: true,
+	};
+
+	// move to the end
+	newHighlights.push(updated);
+
+	return newHighlights;
 };
 
-const trackCardView = (highlights: OrderedHighlights): OrderedHighlights => {
-	const unviewedCards = highlights.slice(0, 2);
-	return highlights.map((el) =>
-		unviewedCards.includes(el)
-			? { ...el, viewCount: (el.viewCount += 1) }
-			: el,
-	);
-};
+const trackCardView = (highlights: HighlightHistory): HighlightHistory => {
+	// we always track a view for the first 2 cards in the highlights container as we can guarantee they appear on screen.
+	const viewedCards = highlights.slice(0, 2);
 
-const shouldDemoteCard = (card: HighlightCard) => {
-	console.log(
-		'>>> showuld demote card? ',
-		card.viewCount >= 3 || card.clicked,
-		card,
-		'viewCount: ',
-		card.viewCount,
-		'clicked: ',
-		card.clicked,
-	);
-	return card.viewCount >= 3 || card.clicked;
-};
+	const updatedCards: HighlightCardHistory[] = [];
 
-const orderCardsByHistory = (
-	highlights: OrderedHighlights,
-): OrderedHighlights => {
-	return highlights.reduce((acc: HighlightCard[], card) => {
-		if (shouldDemoteCard(card)) {
-			acc.push(card);
-		} else {
-			acc.unshift(card);
+	const newHighlights = highlights.map((el) => {
+		if (viewedCards.includes(el) && el.viewCount < 3) {
+			const newViewCount = el.viewCount + 1;
+			const updated = { ...el, viewCount: newViewCount };
+			updatedCards.push(updated);
+			return updated;
 		}
-		return acc;
-	}, []);
+		return el;
+	});
+
+	// Separate the updated cards that now have viewCount >= 3
+	const toMove = updatedCards.filter((el) => el.viewCount >= 3);
+	if (toMove.length === 0) return newHighlights;
+
+	// Remove those cards from their current positions
+	const remaining = newHighlights.filter((el) => !toMove.includes(el));
+
+	// Append them to the end, preserving order
+	return [...remaining, ...toMove];
 };
+
+//
+// const trackCardView = (highlights: OrderedHighlights): OrderedHighlights => {
+// 	const unviewedCards = highlights.slice(0, 2);
+// 	return highlights.map((el) =>
+// 		unviewedCards.includes(el)
+// 			? { ...el, viewCount: (el.viewCount += 1) }
+// 			: el,
+// 	);
+//
+//
+// };
+
+// const shouldDemoteCard = (card: HighlightCard) => {
+// 	return card.viewCount > 2 || card.clicked;
+// };
+
+// type Buckets = [keep: HighlightCard[], demote: HighlightCard[]];
+//
+// export const orderCardsByHistory = (
+// 	highlights: OrderedHighlights,
+// ): OrderedHighlights => {
+//
+//
+//
+//
+// 	//
+// 	// // First, order the highlights by their original order
+// 	// const sortedHighlights = [...highlights].sort(
+// 	// 	(a, b) => a.originalPosition - b.originalPosition
+// 	// );
+//
+// 	// Next, organise the cards into two buckets;
+// 	// a "kept" bucket for those cards which should retain their position,
+// 	// and a "demote" bucket for those which should be demoted to the back of the container
+// 	//
+// 	const [keep, demote] = highlights.reduce((acc: Buckets, card) => {
+// 		const [kept, demoted] = acc;
+//
+// 		if (card.moveTimestamp) {
+// 			demoted.push(card);
+// 		// }
+// 		// if (shouldDemoteCard(card)) {
+// 		// 	demoted.push(card);
+// 		} else {
+// 			kept.push(card);
+// 		}
+// 		return acc;
+// 	}, [[],[]])
+//
+//
+// 	return [...keep, ...demote.sort((a, b) => new Date(b.moveTimestamp ??0) - new Date(a.moveTimestamp))];
+//
+// };
 
 type CardEngagement = 'VIEW' | 'CLICK';
 
@@ -142,11 +208,12 @@ export const trackCardEngagement = (
 	engagement: CardEngagement,
 	card?: DCRFrontCard,
 ): void => {
-	console.log('>>> trackCardEngagement: ', engagement);
-	const history = getOrderedHighlights() ?? [];
-	const newHistory =
+	const history = getHighlightHistory() ?? [];
+
+	const newHistory: HighlightHistory =
 		engagement === 'VIEW'
 			? trackCardView(history)
 			: trackCardClick(history, card);
+
 	storeOrderInStorage(newHistory);
 };
