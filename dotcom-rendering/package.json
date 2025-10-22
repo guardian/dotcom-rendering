@@ -37,7 +37,7 @@
 		"@guardian/eslint-config-typescript": "11.0.0",
 		"@guardian/identity-auth": "6.0.1",
 		"@guardian/identity-auth-frontend": "8.1.0",
-		"@guardian/libs": "0.0.0-canary-20251021103952",
+		"@guardian/libs": "0.0.0-canary-20251022075725",
 		"@guardian/ophan-tracker-js": "2.6.1",
 		"@guardian/react-crossword": "6.3.0",
 		"@guardian/shimport": "1.0.2",
