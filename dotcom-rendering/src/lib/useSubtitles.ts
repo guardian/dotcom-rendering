@@ -26,19 +26,35 @@ export const useSubtitles = ({
 	useEffect(() => {
 		if (!video) return;
 
-		const textTracks = video.textTracks;
+		const tracks = video.textTracks;
 
-		const setTrackFromList = () => {
-			const track = textTracks[0];
-			// We currently only support one text track per video, so we are ok to access [0] here. If we add additional languages, this will need updating.
-			if (!track) return;
+		const pickTrack = () => {
+			const t = tracks[0];
+			if (!t) return;
 
-			setActiveTrack(track);
+			// Trigger cue fetching immediately (don’t wait for play state)
+			if (t.mode !== 'hidden' && t.mode !== 'showing') {
+				t.mode = 'hidden';
+			}
+
+			setActiveTrack(t);
 		};
 
-		//Get Text track as soon as the video element is available.
-		setTrackFromList();
-		// TODO:: are there changes we need to listen for that might change the text track?
+		// 1) pick immediately if already present
+		pickTrack();
+
+		// 2) react when HLS adds tracks later (common on mobile)
+		const onAdd = () => pickTrack();
+		tracks.addEventListener('addtrack', onAdd);
+
+		// 3) also after metadata (some browsers populate then)
+		const onMeta = () => pickTrack();
+		video.addEventListener('loadedmetadata', onMeta);
+
+		return () => {
+			tracks.removeEventListener('addtrack', onAdd);
+			video.removeEventListener('loadedmetadata', onMeta);
+		};
 	}, [video]);
 
 	useEffect(() => {
