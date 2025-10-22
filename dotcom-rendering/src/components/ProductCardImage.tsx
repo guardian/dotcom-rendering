@@ -9,12 +9,14 @@ interface ProductCardImageProps extends HTMLAttributes<HTMLDivElement> {
 	format: ArticleFormat;
 	image?: ProductImage;
 	url?: string;
+	label?: string;
 }
 
 export const ProductCardImage = ({
 	format,
 	image,
 	url,
+	label,
 	...props
 }: ProductCardImageProps) => {
 	if (!image) {
@@ -23,22 +25,22 @@ export const ProductCardImage = ({
 
 	return (
 		<div {...props}>
-			{url ? (
+			{url && label ? (
 				<a
 					href={url}
 					target="_blank"
 					rel="noopener noreferrer"
-					aria-disabled={true}
-					tabIndex={-1}
-					data-src-focus-disabled={true}
+					aria-label={label}
 					css={css`
-						&:focus {
-							box-shadow: none !important;
+						// this is needed to override global style
+						// html:not(.src-focus-disabled) *:focus
+						// it has specificity(0, 2, 1) so we need (0, 3, 0)
+						&&:focus {
+							box-shadow: none;
 						}
 					`}
 				>
 					<Picture
-						data-src-focus-disabled={true}
 						role={'productCard'}
 						format={format}
 						master={image.url}

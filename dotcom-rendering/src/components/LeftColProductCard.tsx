@@ -104,6 +104,7 @@ export const LeftColProductCard = ({
 				format={format}
 				image={image}
 				url={productCtas[0]?.url}
+				label={productCtas[0]?.label}
 			/>
 			<div css={productInfoContainer}>
 				<div css={brandNameFont}>{brandName}</div>
