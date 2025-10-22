@@ -32,6 +32,7 @@ export const MainMediaGallery = ({
 	format,
 	renderingTarget,
 }: Props) => {
+	// This is to support some galleries created in 2007 where mainMedia is missing
 	if (isUndefined(mainMedia)) {
 		return <div css={styles}></div>;
 	}
