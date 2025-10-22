@@ -135,6 +135,7 @@ export const renderFront = ({
 		abTests: front.config.abTests,
 		serverSideABTests: front.config.serverSideABTests,
 		brazeApiKey: front.config.brazeApiKey,
+		contentType: front.config.contentType,
 		googleRecaptchaSiteKey: front.config.googleRecaptchaSiteKey,
 		// Until we understand exactly what config we need to make available client-side,
 		// add everything we haven't explicitly typed as unknown config
