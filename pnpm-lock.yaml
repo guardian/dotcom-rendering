@@ -371,7 +371,7 @@ importers:
         version: 18.1.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@26.0.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/support-dotcom-components':
         specifier: 7.10.1
-        version: 7.10.1(@guardian/libs@26.0.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.6.1)(zod@3.22.4)
+        version: 7.10.1(@guardian/libs@26.0.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.6.1)(zod@4.1.12)
       '@guardian/tsconfig':
         specifier: 0.2.0
         version: 0.2.0
@@ -790,8 +790,8 @@ importers:
         specifier: 3.2.3
         version: 3.2.3
       zod:
-        specifier: 3.22.4
-        version: 3.22.4
+        specifier: 4.1.12
+        version: 4.1.12
 
 packages:
 
@@ -9770,8 +9770,8 @@ packages:
   zimmerframe@1.1.4:
     resolution: {integrity: sha512-B58NGBEoc8Y9MWWCQGl/gq9xBCe4IiKM0a2x7GZdQKOW5Exr8S1W24J6OgM1njK8xCRGvAJIL/MxXHf6SkmQKQ==}
 
-  zod@3.22.4:
-    resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
+  zod@4.1.12:
+    resolution: {integrity: sha512-JInaHOamG8pt5+Ey8kGmdcAcg3OL9reK8ltczgHTAwNhMys/6ThXHityHxVV2p3fkw/c+MAvBHFVYHFZDmjMCQ==}
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -12726,7 +12726,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@guardian/support-dotcom-components@7.10.1(@guardian/libs@26.0.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.6.1)(zod@3.22.4)':
+  '@guardian/support-dotcom-components@7.10.1(@guardian/libs@26.0.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.6.1)(zod@4.1.12)':
     dependencies:
       '@aws-sdk/client-cloudwatch': 3.841.0
       '@aws-sdk/client-dynamodb': 3.840.0
@@ -12745,7 +12745,7 @@ snapshots:
       lodash.throttle: 4.1.1
       log4js: 6.9.1
       seedrandom: 3.0.5
-      zod: 3.22.4
+      zod: 4.1.12
     transitivePeerDependencies:
       - aws-crt
       - supports-color
@@ -21820,6 +21820,6 @@ snapshots:
 
   zimmerframe@1.1.4: {}
 
-  zod@3.22.4: {}
+  zod@4.1.12: {}
 
   zwitch@2.0.4: {}

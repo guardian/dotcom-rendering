@@ -1,22 +1,16 @@
-import { type CrosswordProps } from '@guardian/react-crossword';
 import {
 	array,
 	boolean,
-	custom,
-	type GenericSchema,
-	type InferOutput,
-	lazy,
 	literal,
-	nonEmpty,
 	number,
 	object,
 	optional,
-	pipe,
 	record,
-	safeParse,
 	string,
+	templateLiteral,
 	union,
-} from 'valibot';
+	z,
+} from 'zod';
 import { type ArticleFormat } from '../lib/articleFormat';
 
 export const BoostLevelSchema = union([
@@ -26,7 +20,7 @@ export const BoostLevelSchema = union([
 	literal('gigaboost'),
 ]);
 
-export type BoostLevel = InferOutput<typeof BoostLevelSchema>;
+export type BoostLevel = z.infer<typeof BoostLevelSchema>;
 
 export type ContentType =
 	| 'article'
@@ -74,16 +68,16 @@ const VideoAssetsSchema = object({
  *
  * @see https://github.com/guardian/frontend/blob/0a32dba0/common/app/model/dotcomrendering/pageElements/Role.scala
  */
-const RoleTypeSchema = union([
-	literal('immersive'),
-	literal('supporting'),
-	literal('showcase'),
-	literal('inline'),
-	literal('thumbnail'),
-	literal('halfWidth'),
+const RoleTypeSchema = z.enum([
+	'immersive',
+	'supporting',
+	'showcase',
+	'inline',
+	'thumbnail',
+	'halfWidth',
 ]);
 
-export type RoleType = InferOutput<typeof RoleTypeSchema>;
+export type RoleType = z.infer<typeof RoleTypeSchema>;
 
 /**
  * This duplicate type is unfortunate, but the image sources come lowercase
@@ -91,14 +85,12 @@ export type RoleType = InferOutput<typeof RoleTypeSchema>;
  */
 // TODO: type Weighting = Exclude<RoleType, 'halfWidth' | 'richLink'> | 'halfwidth';
 // What's better to do here? use literals or create schema based on RoleTypeSchema
-const roleTypeLiterals = RoleTypeSchema.options
-	.map((opt) => opt.literal)
-	.map((weighting) => (weighting === 'halfWidth' ? 'halfwidth' : weighting))
-	.map((weighting) => literal(weighting));
+export const WeightingSchema = z.union([
+	RoleTypeSchema.exclude(['halfWidth']),
+	z.literal('halfwidth'),
+]);
 
-export const WeightingSchema = union([...roleTypeLiterals]);
-
-export type Weighting = InferOutput<typeof WeightingSchema>;
+export type Weighting = z.infer<typeof WeightingSchema>;
 
 const SrcSetItemSchema = object({
 	src: string(),
@@ -119,11 +111,11 @@ export const StarRatingSchema = union([
 	literal(5),
 ]);
 
-export type StarRating = InferOutput<typeof StarRatingSchema>;
+export type StarRating = z.infer<typeof StarRatingSchema>;
 
 const RatingSizeTypeSchema = union([literal('large'), literal('small')]);
 
-export type RatingSizeType = InferOutput<typeof RatingSizeTypeSchema>;
+export type RatingSizeType = z.infer<typeof RatingSizeTypeSchema>;
 
 const TimelineAtomEventSchema = object({
 	title: string(),
@@ -134,7 +126,7 @@ const TimelineAtomEventSchema = object({
 	toUnixDate: optional(number()),
 });
 
-export type TimelineAtomEvent = InferOutput<typeof TimelineAtomEventSchema>;
+export type TimelineAtomEvent = z.infer<typeof TimelineAtomEventSchema>;
 
 // -------------------------------------
 // Newsletter
@@ -153,7 +145,7 @@ export const NewsletterSchema = object({
 	illustrationCard: optional(string()),
 });
 
-export type Newsletter = InferOutput<typeof NewsletterSchema>;
+export type Newsletter = z.infer<typeof NewsletterSchema>;
 
 const NewsletterLayoutSchema = object({
 	groups: array(
@@ -165,7 +157,7 @@ const NewsletterLayoutSchema = object({
 	),
 });
 
-export type NewsletterLayout = InferOutput<typeof NewsletterLayoutSchema>;
+export type NewsletterLayout = z.infer<typeof NewsletterLayoutSchema>;
 
 // ------------------------------------- Article
 
@@ -182,7 +174,7 @@ const AudioAssetSchema = object({
 	),
 });
 
-export type AudioAsset = InferOutput<typeof AudioAssetSchema>;
+export type AudioAsset = z.infer<typeof AudioAssetSchema>;
 
 const CampaignFieldSchema = object({
 	id: string(),
@@ -195,33 +187,27 @@ const CampaignFieldSchema = object({
 	label: string(),
 });
 
-const CampaignFieldTextSchema = object({
-	...CampaignFieldSchema.entries,
+export const CampaignFieldTextSchema = CampaignFieldSchema.extend({
 	type: union([literal('text'), literal('email'), literal('phone')]),
 });
 
-export type CampaignFieldText = InferOutput<typeof CampaignFieldTextSchema>;
+export type CampaignFieldText = z.infer<typeof CampaignFieldTextSchema>;
 
-const CampaignFieldTextAreaSchema = object({
-	...CampaignFieldSchema.entries,
+const CampaignFieldTextAreaSchema = CampaignFieldSchema.extend({
 	type: literal('textarea'),
 	minlength: optional(number()),
 	maxlength: optional(number()),
 });
 
-export type CampaignFieldTextArea = InferOutput<
-	typeof CampaignFieldTextAreaSchema
->;
+export type CampaignFieldTextArea = z.infer<typeof CampaignFieldTextAreaSchema>;
 
-const CampaignFieldFileSchema = object({
-	...CampaignFieldSchema.entries,
+const CampaignFieldFileSchema = CampaignFieldSchema.extend({
 	type: literal('file'),
 });
 
-export type CampaignFieldFile = InferOutput<typeof CampaignFieldFileSchema>;
+export type CampaignFieldFile = z.infer<typeof CampaignFieldFileSchema>;
 
-const CampaignFieldRadioSchema = object({
-	...CampaignFieldSchema.entries,
+const CampaignFieldRadioSchema = CampaignFieldSchema.extend({
 	type: literal('radio'),
 	options: array(
 		object({
@@ -231,10 +217,9 @@ const CampaignFieldRadioSchema = object({
 	),
 });
 
-export type CampaignFieldRadio = InferOutput<typeof CampaignFieldRadioSchema>;
+export type CampaignFieldRadio = z.infer<typeof CampaignFieldRadioSchema>;
 
-const CampaignFieldCheckboxSchema = object({
-	...CampaignFieldSchema.entries,
+const CampaignFieldCheckboxSchema = CampaignFieldSchema.extend({
 	type: literal('checkbox'),
 	options: array(
 		object({
@@ -244,12 +229,9 @@ const CampaignFieldCheckboxSchema = object({
 	),
 });
 
-export type CampaignFieldCheckbox = InferOutput<
-	typeof CampaignFieldCheckboxSchema
->;
+export type CampaignFieldCheckbox = z.infer<typeof CampaignFieldCheckboxSchema>;
 
-const CampaignFieldSelectSchema = object({
-	...CampaignFieldSchema.entries,
+const CampaignFieldSelectSchema = CampaignFieldSchema.extend({
 	type: literal('select'),
 	options: array(
 		object({
@@ -259,7 +241,7 @@ const CampaignFieldSelectSchema = object({
 	),
 });
 
-export type CampaignFieldSelect = InferOutput<typeof CampaignFieldSelectSchema>;
+export type CampaignFieldSelect = z.infer<typeof CampaignFieldSelectSchema>;
 
 // -------------------------------------
 // Callout Campaign
@@ -272,7 +254,7 @@ const CampaignFieldTypeSchema = union([
 	CampaignFieldCheckboxSchema,
 	CampaignFieldSelectSchema,
 ]);
-export type CampaignFieldType = InferOutput<typeof CampaignFieldTypeSchema>;
+export type CampaignFieldType = z.infer<typeof CampaignFieldTypeSchema>;
 
 // -------------------------------------
 // Quiz
@@ -286,7 +268,7 @@ const AnswerTypeSchema = object({
 	answerBuckets: array(string()),
 });
 
-export type AnswerType = InferOutput<typeof AnswerTypeSchema>;
+export type AnswerType = z.infer<typeof AnswerTypeSchema>;
 
 const QuestionTypeSchema = object({
 	id: string(),
@@ -296,7 +278,7 @@ const QuestionTypeSchema = object({
 	imageAlt: optional(string()),
 });
 
-export type QuestionType = InferOutput<typeof QuestionTypeSchema>;
+export type QuestionType = z.infer<typeof QuestionTypeSchema>;
 
 const ResultGroupsTypeSchema = object({
 	title: string(),
@@ -305,7 +287,7 @@ const ResultGroupsTypeSchema = object({
 	id: string(),
 });
 
-export type ResultGroupsType = InferOutput<typeof ResultGroupsTypeSchema>;
+export type ResultGroupsType = z.infer<typeof ResultGroupsTypeSchema>;
 
 const ResultsBucketTypeSchema = object({
 	id: string(),
@@ -313,7 +295,7 @@ const ResultsBucketTypeSchema = object({
 	description: string(),
 });
 
-export type ResultsBucketType = InferOutput<typeof ResultsBucketTypeSchema>;
+export type ResultsBucketType = z.infer<typeof ResultsBucketTypeSchema>;
 
 export type KnowledgeQuizAtomType = {
 	id: string;
@@ -350,7 +332,7 @@ export const ImageSchema = object({
 	url: string(),
 });
 
-export type Image = InferOutput<typeof ImageSchema>;
+export type Image = z.infer<typeof ImageSchema>;
 
 const AudioAtomBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.AudioAtomBlockElement'),
@@ -364,9 +346,7 @@ const AudioAtomBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
-export type AudioAtomBlockElement = InferOutput<
-	typeof AudioAtomBlockElementSchema
->;
+export type AudioAtomBlockElement = z.infer<typeof AudioAtomBlockElementSchema>;
 
 const AudioBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.AudioBlockElement'),
@@ -375,7 +355,7 @@ const AudioBlockElementSchema = object({
 	assets: array(AudioAssetSchema),
 });
 
-export type AudioBlockElement = InferOutput<typeof AudioBlockElementSchema>;
+export type AudioBlockElement = z.infer<typeof AudioBlockElementSchema>;
 
 const BlockquoteBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.BlockquoteBlockElement'),
@@ -384,7 +364,7 @@ const BlockquoteBlockElementSchema = object({
 	quoted: optional(boolean()),
 });
 
-export type BlockquoteBlockElement = InferOutput<
+export type BlockquoteBlockElement = z.infer<
 	typeof BlockquoteBlockElementSchema
 >;
 
@@ -399,7 +379,7 @@ const CaptionBlockElementSchema = object({
 	isOverlaid: optional(boolean()),
 });
 
-export type CaptionBlockElement = InferOutput<typeof CaptionBlockElementSchema>;
+export type CaptionBlockElement = z.infer<typeof CaptionBlockElementSchema>;
 
 const CalloutBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.CalloutBlockElement'),
@@ -417,7 +397,7 @@ const CalloutBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
-export type CalloutBlockElement = InferOutput<typeof CalloutBlockElementSchema>;
+export type CalloutBlockElement = z.infer<typeof CalloutBlockElementSchema>;
 
 const CalloutContactTypeSchema = object({
 	name: string(),
@@ -426,7 +406,7 @@ const CalloutContactTypeSchema = object({
 	guidance: optional(string()),
 });
 
-export type CalloutContactType = InferOutput<typeof CalloutContactTypeSchema>;
+export type CalloutContactType = z.infer<typeof CalloutContactTypeSchema>;
 
 const CalloutBlockElementV2Schema = object({
 	_type: literal('model.dotcomrendering.pageElements.CalloutBlockElementV2'),
@@ -447,16 +427,14 @@ const CalloutBlockElementV2Schema = object({
 	contacts: optional(array(CalloutContactTypeSchema)),
 });
 
-export type CalloutBlockElementV2 = InferOutput<
-	typeof CalloutBlockElementV2Schema
->;
+export type CalloutBlockElementV2 = z.infer<typeof CalloutBlockElementV2Schema>;
 
 const CartoonVariantSchema = object({
 	viewportSize: union([literal('small'), literal('large')]),
 	images: array(ImageSchema),
 });
 
-export type CartoonVariant = InferOutput<typeof CartoonVariantSchema>;
+export type CartoonVariant = z.infer<typeof CartoonVariantSchema>;
 
 const CartoonBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.CartoonBlockElement'),
@@ -476,7 +454,7 @@ const CartoonBlockElementSchema = object({
 	position: optional(number()),
 });
 
-export type CartoonBlockElement = InferOutput<typeof CartoonBlockElementSchema>;
+export type CartoonBlockElement = z.infer<typeof CartoonBlockElementSchema>;
 
 const ChartAtomBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.ChartAtomBlockElement'),
@@ -491,9 +469,7 @@ const ChartAtomBlockElementSchema = object({
 	placeholderUrl: optional(string()),
 });
 
-export type ChartAtomBlockElement = InferOutput<
-	typeof ChartAtomBlockElementSchema
->;
+export type ChartAtomBlockElement = z.infer<typeof ChartAtomBlockElementSchema>;
 
 const QuizAtomBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.QuizAtomBlockElement'),
@@ -505,9 +481,7 @@ const QuizAtomBlockElementSchema = object({
 	resultGroups: array(ResultGroupsTypeSchema),
 });
 
-export type QuizAtomBlockElement = InferOutput<
-	typeof QuizAtomBlockElementSchema
->;
+export type QuizAtomBlockElement = z.infer<typeof QuizAtomBlockElementSchema>;
 
 const CodeBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.CodeBlockElement'),
@@ -517,7 +491,7 @@ const CodeBlockElementSchema = object({
 	language: optional(string()),
 });
 
-export type CodeBlockElement = InferOutput<typeof CodeBlockElementSchema>;
+export type CodeBlockElement = z.infer<typeof CodeBlockElementSchema>;
 
 const CommentBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.CommentBlockElement'),
@@ -531,7 +505,7 @@ const CommentBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
-export type CommentBlockElement = InferOutput<typeof CommentBlockElementSchema>;
+export type CommentBlockElement = z.infer<typeof CommentBlockElementSchema>;
 
 const ContentAtomBlockElementSchema = object({
 	_type: literal(
@@ -541,7 +515,7 @@ const ContentAtomBlockElementSchema = object({
 	atomId: string(),
 });
 
-export type ContentAtomBlockElement = InferOutput<
+export type ContentAtomBlockElement = z.infer<
 	typeof ContentAtomBlockElementSchema
 >;
 
@@ -552,7 +526,7 @@ const DisclaimerBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
-export type DisclaimerBlockElement = InferOutput<
+export type DisclaimerBlockElement = z.infer<
 	typeof DisclaimerBlockElementSchema
 >;
 
@@ -562,10 +536,9 @@ const DividerBlockElementSchema = object({
 	spaceAbove: optional(union([literal('tight'), literal('loose')])),
 });
 
-export type DividerBlockElement = InferOutput<typeof DividerBlockElementSchema>;
+export type DividerBlockElement = z.infer<typeof DividerBlockElementSchema>;
 
-const DocumentBlockElementSchema = object({
-	...ThirdPartyEmbeddedContentSchema.entries,
+const DocumentBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
 	_type: literal('model.dotcomrendering.pageElements.DocumentBlockElement'),
 	elementId: string(),
 	embedUrl: optional(string()),
@@ -575,12 +548,9 @@ const DocumentBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
-export type DocumentBlockElement = InferOutput<
-	typeof DocumentBlockElementSchema
->;
+export type DocumentBlockElement = z.infer<typeof DocumentBlockElementSchema>;
 
-const EmbedBlockElementSchema = object({
-	...ThirdPartyEmbeddedContentSchema.entries,
+const EmbedBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
 	_type: literal('model.dotcomrendering.pageElements.EmbedBlockElement'),
 	elementId: string(),
 	safe: optional(boolean()),
@@ -593,7 +563,7 @@ const EmbedBlockElementSchema = object({
 	caption: optional(string()),
 });
 
-export type EmbedBlockElement = InferOutput<typeof EmbedBlockElementSchema>;
+export type EmbedBlockElement = z.infer<typeof EmbedBlockElementSchema>;
 
 const ExplainerAtomBlockElementSchema = object({
 	_type: literal(
@@ -606,7 +576,7 @@ const ExplainerAtomBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
-export type ExplainerAtomBlockElement = InferOutput<
+export type ExplainerAtomBlockElement = z.infer<
 	typeof ExplainerAtomBlockElementSchema
 >;
 
@@ -623,7 +593,7 @@ const GenericAtomBlockElementSchema = object({
 	elementId: string(),
 });
 
-export type GenericAtomBlockElement = InferOutput<
+export type GenericAtomBlockElement = z.infer<
 	typeof GenericAtomBlockElementSchema
 >;
 
@@ -639,9 +609,7 @@ const GuideAtomBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
-export type GuideAtomBlockElement = InferOutput<
-	typeof GuideAtomBlockElementSchema
->;
+export type GuideAtomBlockElement = z.infer<typeof GuideAtomBlockElementSchema>;
 
 const GuVideoBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.GuVideoBlockElement'),
@@ -656,7 +624,7 @@ const GuVideoBlockElementSchema = object({
 	url: optional(string()),
 });
 
-export type GuVideoBlockElement = InferOutput<typeof GuVideoBlockElementSchema>;
+export type GuVideoBlockElement = z.infer<typeof GuVideoBlockElementSchema>;
 
 const HighlightBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.HighlightBlockElement'),
@@ -664,9 +632,7 @@ const HighlightBlockElementSchema = object({
 	html: string(),
 });
 
-export type HighlightBlockElement = InferOutput<
-	typeof HighlightBlockElementSchema
->;
+export type HighlightBlockElement = z.infer<typeof HighlightBlockElementSchema>;
 
 export const ImageBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.ImageBlockElement'),
@@ -693,10 +659,9 @@ export const ImageBlockElementSchema = object({
 	position: optional(number()),
 });
 
-export type ImageBlockElement = InferOutput<typeof ImageBlockElementSchema>;
+export type ImageBlockElement = z.infer<typeof ImageBlockElementSchema>;
 
-const InstagramBlockElementSchema = object({
-	...ThirdPartyEmbeddedContentSchema.entries,
+const InstagramBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
 	_type: literal('model.dotcomrendering.pageElements.InstagramBlockElement'),
 	elementId: string(),
 	html: string(),
@@ -705,9 +670,7 @@ const InstagramBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
-export type InstagramBlockElement = InferOutput<
-	typeof InstagramBlockElementSchema
->;
+export type InstagramBlockElement = z.infer<typeof InstagramBlockElementSchema>;
 
 const InteractiveAtomBlockElementSchema = object({
 	_type: literal(
@@ -724,7 +687,7 @@ const InteractiveAtomBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
-export type InteractiveAtomBlockElement = InferOutput<
+export type InteractiveAtomBlockElement = z.infer<
 	typeof InteractiveAtomBlockElementSchema
 >;
 
@@ -742,7 +705,7 @@ const InteractiveBlockElementSchema = object({
 	caption: optional(string()),
 });
 
-export type InteractiveBlockElement = InferOutput<
+export type InteractiveBlockElement = z.infer<
 	typeof InteractiveBlockElementSchema
 >;
 
@@ -752,63 +715,42 @@ const ItemLinkBlockElementSchema = object({
 	html: string(),
 });
 
-export type ItemLinkBlockElement = InferOutput<
-	typeof ItemLinkBlockElementSchema
->;
+export type ItemLinkBlockElement = z.infer<typeof ItemLinkBlockElementSchema>;
 
-const KeyTakeawaySchema: GenericSchema<KeyTakeaway> = object({
+const KeyTakeawaySchema = object({
 	title: string(),
-	body: array(lazy(() => FEElementSchema)),
+	get body() {
+		return array(FEElementSchema);
+	},
 });
 
-export type KeyTakeaway = {
-	title: string;
-	body: Array<FEElement>;
-};
-
-const QAndAExplainerSchema: GenericSchema<QAndAExplainer> = object({
+const QAndAExplainerSchema = object({
 	title: string(),
-	body: array(lazy(() => FEElementSchema)),
+	get body() {
+		return array(FEElementSchema);
+	},
 });
 
-export type QAndAExplainer = {
-	title: string;
-	body: Array<FEElement>;
-};
-
-const MiniProfileSchema: GenericSchema<MiniProfile> = object({
+const MiniProfileSchema = object({
 	title: string(),
-	body: array(lazy(() => FEElementSchema)),
+	get body() {
+		return array(FEElementSchema);
+	},
 	bio: optional(string()),
 	endNote: optional(string()),
 });
 
-export type MiniProfile = {
-	title: string;
-	body: Array<FEElement>;
-	bio?: string;
-	endNote?: string;
-};
-
-const MultiBylineSchema: GenericSchema<MultiByline> = object({
+const MultiBylineSchema = object({
 	title: string(),
-	body: array(lazy(() => FEElementSchema)),
+	get body() {
+		return array(FEElementSchema);
+	},
 	bio: optional(string()),
 	endNote: optional(string()),
 	imageUrl: optional(string()),
 	byline: string(),
 	bylineHtml: string(),
 });
-
-export type MultiByline = {
-	title: string;
-	body: Array<FEElement>;
-	bio?: string;
-	endNote?: string;
-	imageUrl?: string;
-	byline: string;
-	bylineHtml: string;
-};
 
 const KeyTakeawaysBlockElementSchema = object({
 	_type: literal(
@@ -817,7 +759,7 @@ const KeyTakeawaysBlockElementSchema = object({
 	keyTakeaways: array(KeyTakeawaySchema),
 });
 
-export type KeyTakeawaysBlockElement = InferOutput<
+export type KeyTakeawaysBlockElement = z.infer<
 	typeof KeyTakeawaysBlockElementSchema
 >;
 
@@ -828,7 +770,7 @@ const QAndAExplainerBlockElementSchema = object({
 	qAndAExplainers: array(QAndAExplainerSchema),
 });
 
-export type QAndAExplainerBlockElement = InferOutput<
+export type QAndAExplainerBlockElement = z.infer<
 	typeof QAndAExplainerBlockElementSchema
 >;
 
@@ -839,7 +781,7 @@ const MiniProfilesBlockElementSchema = object({
 	miniProfiles: array(MiniProfileSchema),
 });
 
-export type MiniProfilesBlockElement = InferOutput<
+export type MiniProfilesBlockElement = z.infer<
 	typeof MiniProfilesBlockElementSchema
 >;
 
@@ -850,13 +792,15 @@ const MultiBylinesBlockElementSchema = object({
 	multiBylines: array(MultiBylineSchema),
 });
 
-export type MultiBylinesBlockElement = InferOutput<
+export type MultiBylinesBlockElement = z.infer<
 	typeof MultiBylinesBlockElementSchema
 >;
 
-const ListItemSchema: GenericSchema<ListItem> = object({
+const ListItemSchema = object({
 	title: optional(string()),
-	elements: array(lazy(() => FEElementSchema)),
+	get elements() {
+		return array(FEElementSchema);
+	},
 	bio: optional(string()),
 	endNote: optional(string()),
 	contributorImageOverrideUrl: optional(string()),
@@ -865,17 +809,6 @@ const ListItemSchema: GenericSchema<ListItem> = object({
 	bylineHtml: optional(string()),
 });
 
-export type ListItem = {
-	title?: string;
-	elements: Array<FEElement>;
-	bio?: string;
-	endNote?: string;
-	contributorImageOverrideUrl?: string;
-	contributorIds?: Array<string>;
-	byline?: string;
-	bylineHtml?: string;
-};
-
 const LinkBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.LinkBlockElement'),
 	url: string(),
@@ -883,7 +816,7 @@ const LinkBlockElementSchema = object({
 	linkType: literal('ProductButton'),
 });
 
-export type LinkBlockElement = InferOutput<typeof LinkBlockElementSchema>;
+export type LinkBlockElement = z.infer<typeof LinkBlockElementSchema>;
 
 const ListBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.ListBlockElement'),
@@ -897,10 +830,9 @@ const ListBlockElementSchema = object({
 	elementId: string(),
 });
 
-export type ListBlockElement = InferOutput<typeof ListBlockElementSchema>;
+export type ListBlockElement = z.infer<typeof ListBlockElementSchema>;
 
-const MapBlockElementSchema = object({
-	...ThirdPartyEmbeddedContentSchema.entries,
+const MapBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
 	_type: literal('model.dotcomrendering.pageElements.MapBlockElement'),
 	elementId: string(),
 	embedUrl: string(),
@@ -912,7 +844,7 @@ const MapBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
-export type MapBlockElement = InferOutput<typeof MapBlockElementSchema>;
+export type MapBlockElement = z.infer<typeof MapBlockElementSchema>;
 
 const MediaAtomBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.MediaAtomBlockElement'),
@@ -931,9 +863,7 @@ const MediaAtomBlockElementSchema = object({
 	duration: optional(number()),
 });
 
-export type MediaAtomBlockElement = InferOutput<
-	typeof MediaAtomBlockElementSchema
->;
+export type MediaAtomBlockElement = z.infer<typeof MediaAtomBlockElementSchema>;
 
 const MultiImageBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.MultiImageBlockElement'),
@@ -943,7 +873,7 @@ const MultiImageBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
-export type MultiImageBlockElement = InferOutput<
+export type MultiImageBlockElement = z.infer<
 	typeof MultiImageBlockElementSchema
 >;
 
@@ -955,7 +885,7 @@ const NewsletterSignupBlockElementSchema = object({
 	elementId: optional(string()),
 });
 
-export type NewsletterSignupBlockElement = InferOutput<
+export type NewsletterSignupBlockElement = z.infer<
 	typeof NewsletterSignupBlockElementSchema
 >;
 
@@ -966,7 +896,7 @@ const AdPlaceholderBlockElementSchema = object({
 	adPosition: number(),
 });
 
-export type AdPlaceholderBlockElement = InferOutput<
+export type AdPlaceholderBlockElement = z.infer<
 	typeof AdPlaceholderBlockElementSchema
 >;
 
@@ -979,7 +909,7 @@ const NumberedTitleBlockElementSchema = object({
 	html: string(),
 });
 
-export type NumberedTitleBlockElement = InferOutput<
+export type NumberedTitleBlockElement = z.infer<
 	typeof NumberedTitleBlockElementSchema
 >;
 
@@ -989,7 +919,7 @@ const SubheadingBlockElementSchema = object({
 	html: string(),
 });
 
-export type SubheadingBlockElement = InferOutput<
+export type SubheadingBlockElement = z.infer<
 	typeof SubheadingBlockElementSchema
 >;
 
@@ -1002,7 +932,7 @@ const InteractiveContentsBlockElementSchema = object({
 	endDocumentElementId: optional(string()),
 });
 
-export type InteractiveContentsBlockElement = InferOutput<
+export type InteractiveContentsBlockElement = z.infer<
 	typeof InteractiveContentsBlockElementSchema
 >;
 
@@ -1020,7 +950,7 @@ const ProfileAtomBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
-export type ProfileAtomBlockElement = InferOutput<
+export type ProfileAtomBlockElement = z.infer<
 	typeof ProfileAtomBlockElementSchema
 >;
 
@@ -1033,9 +963,7 @@ const PullquoteBlockElementSchema = object({
 	isThirdPartyTracking: optional(boolean()),
 });
 
-export type PullquoteBlockElement = InferOutput<
-	typeof PullquoteBlockElementSchema
->;
+export type PullquoteBlockElement = z.infer<typeof PullquoteBlockElementSchema>;
 
 const QABlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.QABlockElement'),
@@ -1048,7 +976,7 @@ const QABlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
-export type QABlockElement = InferOutput<typeof QABlockElementSchema>;
+export type QABlockElement = z.infer<typeof QABlockElementSchema>;
 
 const RichLinkBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.RichLinkBlockElement'),
@@ -1059,12 +987,9 @@ const RichLinkBlockElementSchema = object({
 	role: optional(union([RoleTypeSchema, literal('richLink')])),
 });
 
-export type RichLinkBlockElement = InferOutput<
-	typeof RichLinkBlockElementSchema
->;
+export type RichLinkBlockElement = z.infer<typeof RichLinkBlockElementSchema>;
 
-const SoundcloudBlockElementSchema = object({
-	...ThirdPartyEmbeddedContentSchema.entries,
+const SoundcloudBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
 	_type: literal('model.dotcomrendering.pageElements.SoundcloudBlockElement'),
 	elementId: string(),
 	html: string(),
@@ -1074,12 +999,11 @@ const SoundcloudBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
-export type SoundcloudBlockElement = InferOutput<
+export type SoundcloudBlockElement = z.infer<
 	typeof SoundcloudBlockElementSchema
 >;
 
-const SpotifyBlockElementSchema = object({
-	...ThirdPartyEmbeddedContentSchema.entries,
+const SpotifyBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
 	_type: literal('model.dotcomrendering.pageElements.SpotifyBlockElement'),
 	elementId: string(),
 	embedUrl: optional(string()),
@@ -1090,7 +1014,7 @@ const SpotifyBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
-export type SpotifyBlockElement = InferOutput<typeof SpotifyBlockElementSchema>;
+export type SpotifyBlockElement = z.infer<typeof SpotifyBlockElementSchema>;
 
 const StarRatingBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.StarRatingBlockElement'),
@@ -1099,7 +1023,7 @@ const StarRatingBlockElementSchema = object({
 	size: RatingSizeTypeSchema,
 });
 
-export type StarRatingBlockElement = InferOutput<
+export type StarRatingBlockElement = z.infer<
 	typeof StarRatingBlockElementSchema
 >;
 
@@ -1111,7 +1035,7 @@ const TableBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
-export type TableBlockElement = InferOutput<typeof TableBlockElementSchema>;
+export type TableBlockElement = z.infer<typeof TableBlockElementSchema>;
 
 const TextBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.TextBlockElement'),
@@ -1120,30 +1044,26 @@ const TextBlockElementSchema = object({
 	html: string(),
 });
 
-export type TextBlockElement = InferOutput<typeof TextBlockElementSchema>;
+export type TextBlockElement = z.infer<typeof TextBlockElementSchema>;
 
-const DCRTimelineEventSchema: GenericSchema<DCRTimelineEvent> = object({
+const DCRTimelineEventSchema = object({
 	date: string(),
 	title: optional(string()),
 	label: optional(string()),
-	main: optional(lazy(() => FEElementSchema)),
-	body: array(lazy(() => FEElementSchema)),
+	get main() {
+		return optional(FEElementSchema);
+	},
+	get body() {
+		return array(FEElementSchema);
+	},
 });
-
-export type DCRTimelineEvent = {
-	date: string;
-	title?: string;
-	label?: string;
-	main?: FEElement;
-	body: Array<FEElement>;
-};
 
 const DCRTimelineSectionSchema = object({
 	title: string(),
 	events: array(DCRTimelineEventSchema),
 });
 
-export type DCRTimelineSection = InferOutput<typeof DCRTimelineSectionSchema>;
+export type DCRTimelineSection = z.infer<typeof DCRTimelineSectionSchema>;
 
 const DCRTimelineBlockElementSchema = object({
 	_type: literal(
@@ -1152,7 +1072,7 @@ const DCRTimelineBlockElementSchema = object({
 	events: array(DCRTimelineEventSchema),
 });
 
-export type DCRTimelineBlockElement = InferOutput<
+export type DCRTimelineBlockElement = z.infer<
 	typeof DCRTimelineBlockElementSchema
 >;
 
@@ -1163,32 +1083,28 @@ const DCRSectionedTimelineBlockElementSchema = object({
 	sections: array(DCRTimelineSectionSchema),
 });
 
-export type DCRSectionedTimelineBlockElement = InferOutput<
+export type DCRSectionedTimelineBlockElement = z.infer<
 	typeof DCRSectionedTimelineBlockElementSchema
 >;
 
-const FETimelineEventSchema: GenericSchema<FETimelineEvent> = object({
+const FETimelineEventSchema = object({
 	title: optional(string()),
 	date: optional(string()),
 	label: optional(string()),
-	main: optional(lazy(() => FEElementSchema)),
-	body: array(lazy(() => FEElementSchema)),
+	get main() {
+		return optional(FEElementSchema);
+	},
+	get body() {
+		return array(FEElementSchema);
+	},
 });
-
-export type FETimelineEvent = {
-	title?: string;
-	date?: string;
-	label?: string;
-	main?: FEElement;
-	body: Array<FEElement>;
-};
 
 const FETimelineSectionSchema = object({
 	title: optional(string()),
 	events: array(FETimelineEventSchema),
 });
 
-export type FETimelineSection = InferOutput<typeof FETimelineSectionSchema>;
+export type FETimelineSection = z.infer<typeof FETimelineSectionSchema>;
 
 const FETimelineBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.TimelineBlockElement'),
@@ -1196,7 +1112,7 @@ const FETimelineBlockElementSchema = object({
 	sections: array(FETimelineSectionSchema),
 });
 
-export type FETimelineBlockElement = InferOutput<
+export type FETimelineBlockElement = z.infer<
 	typeof FETimelineBlockElementSchema
 >;
 
@@ -1212,12 +1128,11 @@ const TimelineAtomBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
-export type TimelineAtomBlockElement = InferOutput<
+export type TimelineAtomBlockElement = z.infer<
 	typeof TimelineAtomBlockElementSchema
 >;
 
-const TweetBlockElementSchema = object({
-	...ThirdPartyEmbeddedContentSchema.entries,
+const TweetBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
 	_type: literal('model.dotcomrendering.pageElements.TweetBlockElement'),
 	elementId: string(),
 	html: string(),
@@ -1227,10 +1142,9 @@ const TweetBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
-export type TweetBlockElement = InferOutput<typeof TweetBlockElementSchema>;
+export type TweetBlockElement = z.infer<typeof TweetBlockElementSchema>;
 
-const VineBlockElementSchema = object({
-	...ThirdPartyEmbeddedContentSchema.entries,
+const VineBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
 	_type: literal('model.dotcomrendering.pageElements.VineBlockElement'),
 	elementId: string(),
 	url: string(),
@@ -1240,19 +1154,17 @@ const VineBlockElementSchema = object({
 	title: string(),
 });
 
-export type VineBlockElement = InferOutput<typeof VineBlockElementSchema>;
+export type VineBlockElement = z.infer<typeof VineBlockElementSchema>;
 
-const VideoBlockElementSchema = object({
-	...ThirdPartyEmbeddedContentSchema.entries,
+const VideoBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
 	_type: literal('model.dotcomrendering.pageElements.VideoBlockElement'),
 	elementId: string(),
 	role: optional(RoleTypeSchema),
 });
 
-export type VideoBlockElement = InferOutput<typeof VideoBlockElementSchema>;
+export type VideoBlockElement = z.infer<typeof VideoBlockElementSchema>;
 
-const VideoFacebookBlockElementSchema = object({
-	...ThirdPartyEmbeddedContentSchema.entries,
+const VideoFacebookBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
 	_type: literal(
 		'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
 	),
@@ -1265,12 +1177,11 @@ const VideoFacebookBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
-export type VideoFacebookBlockElement = InferOutput<
+export type VideoFacebookBlockElement = z.infer<
 	typeof VideoFacebookBlockElementSchema
 >;
 
-const VideoVimeoBlockElementSchema = object({
-	...ThirdPartyEmbeddedContentSchema.entries,
+const VideoVimeoBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
 	_type: literal('model.dotcomrendering.pageElements.VideoVimeoBlockElement'),
 	elementId: string(),
 	embedUrl: optional(string()),
@@ -1284,12 +1195,11 @@ const VideoVimeoBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
-export type VideoVimeoBlockElement = InferOutput<
+export type VideoVimeoBlockElement = z.infer<
 	typeof VideoVimeoBlockElementSchema
 >;
 
-const VideoYoutubeBlockElementSchema = object({
-	...ThirdPartyEmbeddedContentSchema.entries,
+const VideoYoutubeBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
 	_type: literal(
 		'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
 	),
@@ -1305,7 +1215,7 @@ const VideoYoutubeBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
-export type VideoYoutubeBlockElement = InferOutput<
+export type VideoYoutubeBlockElement = z.infer<
 	typeof VideoYoutubeBlockElementSchema
 >;
 
@@ -1331,7 +1241,7 @@ const YoutubeBlockElementSchema = object({
 	role: optional(RoleTypeSchema),
 });
 
-export type YoutubeBlockElement = InferOutput<typeof YoutubeBlockElementSchema>;
+export type YoutubeBlockElement = z.infer<typeof YoutubeBlockElementSchema>;
 
 const WitnessTypeDataBaseSchema = object({
 	authorUsername: string(),
@@ -1347,10 +1257,9 @@ const WitnessTypeDataBaseSchema = object({
 	authorWitnessProfileUrl: string(),
 });
 
-export type WitnessTypeDataBase = InferOutput<typeof WitnessTypeDataBaseSchema>;
+export type WitnessTypeDataBase = z.infer<typeof WitnessTypeDataBaseSchema>;
 
-const WitnessTypeDataImageSchema = object({
-	...WitnessTypeDataBaseSchema.entries,
+const WitnessTypeDataImageSchema = WitnessTypeDataBaseSchema.extend({
 	_type: literal('model.dotcomrendering.pageElements.WitnessTypeDataImage'),
 	type: literal('image'),
 	alt: string(),
@@ -1359,12 +1268,9 @@ const WitnessTypeDataImageSchema = object({
 	photographer: string(),
 });
 
-export type WitnessTypeDataImage = InferOutput<
-	typeof WitnessTypeDataImageSchema
->;
+export type WitnessTypeDataImage = z.infer<typeof WitnessTypeDataImageSchema>;
 
-const WitnessTypeDataVideoSchema = object({
-	...WitnessTypeDataBaseSchema.entries,
+const WitnessTypeDataVideoSchema = WitnessTypeDataBaseSchema.extend({
 	_type: literal('model.dotcomrendering.pageElements.WitnessTypeDataVideo'),
 	type: literal('video'),
 	description: string(),
@@ -1378,12 +1284,9 @@ const WitnessTypeDataVideoSchema = object({
 	youtubeTitle: string(),
 });
 
-export type WitnessTypeDataVideo = InferOutput<
-	typeof WitnessTypeDataVideoSchema
->;
+export type WitnessTypeDataVideo = z.infer<typeof WitnessTypeDataVideoSchema>;
 
-const WitnessTypeDataTextSchema = object({
-	...WitnessTypeDataBaseSchema.entries,
+const WitnessTypeDataTextSchema = WitnessTypeDataBaseSchema.extend({
 	_type: literal('model.dotcomrendering.pageElements.WitnessTypeDataText'),
 	type: literal('text'),
 	description: string(),
@@ -1399,7 +1302,7 @@ const WitnessTypeDataTextSchema = object({
 	authorWitnessProfileUrl: string(),
 });
 
-export type WitnessTypeDataText = InferOutput<typeof WitnessTypeDataTextSchema>;
+export type WitnessTypeDataText = z.infer<typeof WitnessTypeDataTextSchema>;
 
 const WitnessAssetTypeSchema = object({
 	type: literal('Image'),
@@ -1412,10 +1315,9 @@ const WitnessAssetTypeSchema = object({
 	),
 });
 
-export type WitnessAssetType = InferOutput<typeof WitnessAssetTypeSchema>;
+export type WitnessAssetType = z.infer<typeof WitnessAssetTypeSchema>;
 
-const WitnessTypeBlockElementSchema = object({
-	...ThirdPartyEmbeddedContentSchema.entries,
+const WitnessTypeBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
 	_type: literal('model.dotcomrendering.pageElements.WitnessBlockElement'),
 	elementId: string(),
 	assets: array(WitnessAssetTypeSchema),
@@ -1427,28 +1329,16 @@ const WitnessTypeBlockElementSchema = object({
 	]),
 });
 
-export type WitnessTypeBlockElement = InferOutput<
+export type WitnessTypeBlockElement = z.infer<
 	typeof WitnessTypeBlockElementSchema
 >;
 
-type EntryID = CrosswordProps['data']['entries'][0]['id'];
+export const EntryIDSchema = templateLiteral([
+	number(),
+	union([literal('-across'), literal('-down')]),
+]);
 
-export const EntryIDSchema = custom<EntryID>(
-	(input): input is EntryID =>
-		typeof input === 'string' && /^[0-9]+-(across|down)$/.test(input),
-);
-
-const NonEmptyGroupSchema = custom<[EntryID, ...EntryID[]]>((input) => {
-	const result = safeParse(
-		pipe(
-			array(EntryIDSchema),
-			nonEmpty('group must have at least one item'),
-		),
-		input,
-	);
-
-	return result.success;
-});
+const NonEmptyGroupSchema = z.tuple([EntryIDSchema], EntryIDSchema);
 
 export const CAPICrosswordSchema = object({
 	creator: optional(
@@ -1571,7 +1461,7 @@ export const FEElementSchema = union([
 	CrosswordElementSchema,
 ]);
 
-export type FEElement = InferOutput<typeof FEElementSchema>;
+export type FEElement = z.infer<typeof FEElementSchema>;
 
 // -------------------------------------
 // Misc
@@ -1611,7 +1501,7 @@ const ImageForLightboxSchema = object({
 	firstPublished: optional(number()),
 });
 
-export type ImageForLightbox = InferOutput<typeof ImageForLightboxSchema>;
+export type ImageForLightbox = z.infer<typeof ImageForLightboxSchema>;
 
 export type SharePlatformType =
 	| 'facebook'
