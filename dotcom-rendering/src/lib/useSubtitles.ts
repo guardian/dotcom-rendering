@@ -11,7 +11,7 @@ export type ActiveCue = {
 	startTime: number;
 	endTime: number;
 	text: string;
-};
+} | null;
 
 export const useSubtitles = ({
 	video,
@@ -55,6 +55,7 @@ export const useSubtitles = ({
 		const onCueChange = () => {
 			const list = track.activeCues;
 			if (!list || list.length === 0) {
+				setActiveTrack(null);
 				return;
 			}
 			const cue = list[0] as VTTCue;
@@ -68,7 +69,6 @@ export const useSubtitles = ({
 		onCueChange();
 		return () => {
 			track.removeEventListener('cuechange', onCueChange);
-			track.mode = 'showing';
 		};
 	}, [activeTrack, shouldShow]);
 

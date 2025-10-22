@@ -503,8 +503,8 @@ export const LoopVideo = ({
 			vidRef.current.getBoundingClientRect().height ||
 			vidRef.current.clientHeight ||
 			height;
-		const percentFromTop =
-			((videoHeight - pxFromBottom) / videoHeight) * 100;
+		let percentFromTop = ((videoHeight - pxFromBottom) / videoHeight) * 100;
+		percentFromTop = Math.min(98, Math.max(0, percentFromTop));
 
 		for (const cue of Array.from(track.cues)) {
 			if (cue instanceof VTTCue) {
@@ -667,6 +667,7 @@ export const LoopVideo = ({
 				subtitleSource={subtitleSource}
 				subtitleSize={subtitleSize}
 				subtitles={subtitles}
+				showNativeCaptions={false}
 			/>
 		</figure>
 	);

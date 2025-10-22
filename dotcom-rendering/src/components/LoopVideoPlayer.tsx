@@ -44,6 +44,12 @@ const videoStyles = (
 	}
 `;
 
+const hiddenCaptions = css`
+	::cue {
+		visibility: hidden;
+	}
+`;
+
 const playIconStyles = css`
 	position: absolute;
 	/* Center the icon */
@@ -121,6 +127,7 @@ type Props = {
 	subtitleSource?: string;
 	subtitleSize: SubtitleSize;
 	subtitles?: ActiveCue | null;
+	showNativeCaptions?: boolean;
 };
 
 /**
@@ -156,17 +163,20 @@ export const LoopVideoPlayer = forwardRef(
 			subtitleSource,
 			subtitleSize,
 			subtitles,
+			showNativeCaptions = false,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
 		const loopVideoId = `loop-video-${uniqueId}`;
-		console.log('>>> ', subtitles?.text);
 		return (
 			<>
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Captions will be considered later. */}
 				<video
 					id={loopVideoId}
-					css={videoStyles(width, height, subtitleSize)}
+					css={[
+						videoStyles(width, height, subtitleSize),
+						!showNativeCaptions && hiddenCaptions,
+					]}
 					ref={ref}
 					crossOrigin="anonymous"
 					tabIndex={0}
@@ -211,9 +221,9 @@ export const LoopVideoPlayer = forwardRef(
 					))}
 					{subtitleSource !== undefined && (
 						<track
-							default={true}
 							kind="subtitles"
 							src={subtitleSource}
+							default={showNativeCaptions}
 						/>
 					)}
 					{FallbackImageComponent}
