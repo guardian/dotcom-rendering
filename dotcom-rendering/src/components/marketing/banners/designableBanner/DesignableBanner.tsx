@@ -716,7 +716,7 @@ const styles = {
 		/* Layout changes only here */
 		grid-area: close-button;
 		${until.phablet} {
-			padding-right: ${space[2]}px;
+			padding-bottom: ${space[4]}px;
 			justify-self: end;
 			position: sticky;
 			top: 10px;
