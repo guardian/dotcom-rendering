@@ -61,7 +61,7 @@ const baseCard = css`
 	}
 `;
 
-const showLeftColCard = css`
+const hideFromWide = css`
 	${from.wide} {
 		display: none;
 	}
@@ -168,7 +168,7 @@ export const InlineProductCard = ({
 			css={[
 				isCardOnly && productCard,
 				!isCardOnly && showcaseCard,
-				shouldShowLeftColCard && showLeftColCard,
+				shouldShowLeftColCard && !isCardOnly && hideFromWide,
 			]}
 		>
 			<ProductCardImage
