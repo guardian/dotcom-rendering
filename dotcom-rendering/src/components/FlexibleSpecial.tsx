@@ -29,7 +29,6 @@ type Props = {
 	absoluteServerTimes: boolean;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
-	isInAllBoostsTest?: boolean;
 	collectionId: number;
 	showLabsRedesign?: boolean;
 };
@@ -224,7 +223,6 @@ type TwoOrFourCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
-	isInAllBoostsTest: boolean;
 };
 
 const TwoOrFourCardLayout = ({
@@ -238,7 +236,6 @@ const TwoOrFourCardLayout = ({
 	isFirstRow,
 	containerLevel,
 	showLabsRedesign,
-	isInAllBoostsTest,
 }: TwoOrFourCardLayoutProps) => {
 	if (cards.length === 0) return null;
 	const hasTwoOrFewerCards = cards.length <= 2;
@@ -266,19 +263,8 @@ const TwoOrFourCardLayout = ({
 								hasTwoOrFewerCards,
 								isMediaCard(card.format) || !!card.isNewsletter,
 							)}
-							mediaPositionOnMobile={
-								isInAllBoostsTest ? 'bottom' : 'left'
-							}
-							headlineSizes={
-								isInAllBoostsTest
-									? {
-											desktop: 'xsmall',
-											tablet: 'xxsmall',
-											mobile: 'small',
-									  }
-									: undefined
-							}
-							isInAllBoostsTest={isInAllBoostsTest}
+							mediaPositionOnMobile="left"
+							headlineSizes={undefined}
 							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
 							supportingContent={undefined}
 							mediaSize="small"
@@ -309,7 +295,6 @@ export const FlexibleSpecial = ({
 	imageLoading,
 	aspectRatio,
 	containerLevel = 'Primary',
-	isInAllBoostsTest = false,
 	collectionId,
 	showLabsRedesign,
 }: Props) => {
@@ -369,7 +354,6 @@ export const FlexibleSpecial = ({
 				isFirstRow={!isNonEmptyArray(snaps) && !isNonEmptyArray(splash)}
 				containerLevel={containerLevel}
 				showLabsRedesign={showLabsRedesign}
-				isInAllBoostsTest={isInAllBoostsTest}
 			/>
 		</>
 	);

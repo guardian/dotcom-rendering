@@ -44,7 +44,6 @@ export const AllEditorialNewslettersPageLayout = ({
 					showSlimNav={false}
 					hasPageSkin={false}
 					hasPageSkinContentSelfConstrain={false}
-					wholePictureLogoSwitch={config.switches.wholePictureLogo}
 				/>
 			</div>
 
