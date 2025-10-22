@@ -48,7 +48,7 @@ export type ArticleFields = {
 export type Gallery = ArticleFields & {
 	design: ArticleDesign.Gallery;
 	bodyElements: (ImageBlockElement | AdPlaceholderBlockElement)[];
-	mainMedia: ImageBlockElement;
+	mainMedia?: ImageBlockElement;
 };
 
 export type OtherArticles = ArticleFields & {
@@ -60,12 +60,12 @@ export type Article = Gallery | OtherArticles;
 export const getGalleryMainMedia = (
 	mainMediaElements: FEElement[],
 	trailImage?: ImageBlockElement,
-): ImageBlockElement => {
+): ImageBlockElement | undefined => {
 	const mainMedia = mainMediaElements[0];
 
 	if (isUndefined(mainMedia)) {
 		if (isUndefined(trailImage)) {
-			throw new Error('No main media or trail picture found');
+			console.error('No main media or trail picture found');
 		}
 		return trailImage;
 	}

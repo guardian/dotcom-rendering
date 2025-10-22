@@ -12,7 +12,7 @@ import { LightboxLink } from './LightboxLink';
 import { Picture } from './Picture';
 
 type Props = {
-	mainMedia: ImageBlockElement;
+	mainMedia?: ImageBlockElement;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 };
@@ -32,6 +32,9 @@ export const MainMediaGallery = ({
 	format,
 	renderingTarget,
 }: Props) => {
+	if (isUndefined(mainMedia)) {
+		return <div css={styles}></div>;
+	}
 	const asset = getImage(mainMedia.media.allImages);
 
 	if (asset === undefined) {
