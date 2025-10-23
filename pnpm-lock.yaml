@@ -337,8 +337,8 @@ importers:
         specifier: 62.0.1
         version: 62.0.1(aws-cdk-lib@2.220.0(constructs@10.4.2))(aws-cdk@2.1030.0)(constructs@10.4.2)
       '@guardian/commercial-core':
-        specifier: 29.0.0
-        version: 29.0.0(@guardian/ab-core@8.0.0(tslib@2.6.2)(typescript@5.5.3))(@guardian/libs@26.0.1(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))
+        specifier: 0.0.0-beta-20251023093018
+        version: 0.0.0-beta-20251023093018(@guardian/ab-core@8.0.0(tslib@2.6.2)(typescript@5.5.3))(@guardian/libs@26.0.1(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))
       '@guardian/core-web-vitals':
         specifier: 7.0.0
         version: 7.0.0(@guardian/libs@26.0.1(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.3)
@@ -2332,8 +2332,8 @@ packages:
       aws-cdk-lib: ^2.219.0
       constructs: ^10.4.2
 
-  '@guardian/commercial-core@29.0.0':
-    resolution: {integrity: sha512-qBPxH7xp8JrJ2rDLaLqSFJ/mwHeV9iL9+z4Yr9bRdC97Xf4ri2D8WpKweFs2dabPxEBKWT9IHse1OZgLE1t03Q==}
+  '@guardian/commercial-core@0.0.0-beta-20251023093018':
+    resolution: {integrity: sha512-RNvL+JHcYwfmm1hzK8dlUxMt/jU2gD+tvSHx4ALdwd5n3At+EwK+MvfWLbTXgSvDzP0O4Th1bZzh6UfYNhYcSA==}
     peerDependencies:
       '@guardian/ab-core': ^8.0.1
       '@guardian/libs': ^26.0.0
@@ -12835,7 +12835,7 @@ snapshots:
       read-pkg-up: 7.0.1
       yargs: 17.7.2
 
-  '@guardian/commercial-core@29.0.0(@guardian/ab-core@8.0.0(tslib@2.6.2)(typescript@5.5.3))(@guardian/libs@26.0.1(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))':
+  '@guardian/commercial-core@0.0.0-beta-20251023093018(@guardian/ab-core@8.0.0(tslib@2.6.2)(typescript@5.5.3))(@guardian/libs@26.0.1(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))':
     dependencies:
       '@guardian/ab-core': 8.0.0(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/libs': 26.0.1(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3)
