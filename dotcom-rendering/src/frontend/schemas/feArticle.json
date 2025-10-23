@@ -4513,6 +4513,7 @@
             "required": [
                 "_type",
                 "brandName",
+                "content",
                 "customAttributes",
                 "displayType",
                 "elementId",
