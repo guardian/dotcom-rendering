@@ -358,8 +358,8 @@ importers:
         specifier: 2.6.1
         version: 2.6.1
       '@guardian/react-crossword':
-        specifier: 6.3.0
-        version: 6.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@26.0.1(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.3)
+        specifier: 11.1.0
+        version: 11.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@26.0.1(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.3)
       '@guardian/shimport':
         specifier: 1.0.2
         version: 1.0.2
@@ -2424,12 +2424,12 @@ packages:
       prettier: ^3.0.0
       tslib: ^2.5.3
 
-  '@guardian/react-crossword@6.3.0':
-    resolution: {integrity: sha512-6CVNzY+yZrrUYOLpaAu7KSlyU23LBiZTFNJACI935iyjYuWEtyROoOwza82h1XconuqyEd9S8iG8CjtLb+j9Ig==}
+  '@guardian/react-crossword@11.1.0':
+    resolution: {integrity: sha512-GfkyqCHCajiyuMdK8s/s8TH+LhADTcJeIXFEqbesCYp0wQO/DdTR27tRtaFhKqVRCgzRIKFyxd68HcAy+Z7eBQ==}
     peerDependencies:
-      '@emotion/react': ^11.11.3
-      '@guardian/libs': ^22.0.0
-      '@guardian/source': ^9.0.0
+      '@emotion/react': ^11.11.4
+      '@guardian/libs': ^26.0.0
+      '@guardian/source': ^11.0.0
       '@types/react': ^18.2.79
       react: ^18.2.0
       typescript: ~5.5.2
@@ -8373,7 +8373,6 @@ packages:
     engines: {node: '>=0.6.0', teleport: '>=0.2.0'}
     deprecated: |-
       You or someone you depend on is using Q, the JavaScript Promise library that gave JavaScript developers strong feelings about promises. They can almost certainly migrate to the native JavaScript promise now. Thank you literally everyone for joining me in this bet against the odds. Be excellent to each other.
-
       (For a CapTP with native promises, see @endo/eventual-send and @endo/captp)
 
   qs@6.13.0:
@@ -12958,7 +12957,7 @@ snapshots:
       prettier: 3.0.3
       tslib: 2.6.2
 
-  '@guardian/react-crossword@6.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@26.0.1(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.3)':
+  '@guardian/react-crossword@11.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@26.0.1(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.3)':
     dependencies:
       '@emotion/react': 11.14.0(@types/react@18.3.1)(react@18.3.1)
       '@guardian/libs': 26.0.1(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3)
