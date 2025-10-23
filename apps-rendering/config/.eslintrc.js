@@ -118,7 +118,7 @@ module.exports = {
 		{
 			files: ['**/*.tsx'],
 			rules: {
-				'@typescript-eslint/ban-types': [
+				'@typescript-eslint/no-restricted-types': [
 					'error',
 					{
 						types: {
@@ -132,7 +132,6 @@ module.exports = {
 							'React.FC':
 								'Please use const MyThing = ({foo, bar}: Props) instead',
 						},
-						extendDefaults: true,
 					},
 				],
 			},
