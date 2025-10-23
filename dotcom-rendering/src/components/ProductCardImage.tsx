@@ -31,10 +31,10 @@ export const ProductCardImage = ({
 					target="_blank"
 					rel="noopener noreferrer"
 					aria-label={label}
+					// this is needed to override global style
+					// html:not(.src-focus-disabled) *:focus
+					// it has specificity(0, 2, 1) so we need (0, 3, 0)
 					css={css`
-						// this is needed to override global style
-						// html:not(.src-focus-disabled) *:focus
-						// it has specificity(0, 2, 1) so we need (0, 3, 0)
 						&&:focus {
 							box-shadow: none;
 						}
