@@ -56,15 +56,22 @@ const enhanceNewsletterSignup =
 // example: enhanceInteractiveContentElements needs to be before enhanceNumberedLists
 // as they both effect SubheadingBlockElement
 export const enhanceElements =
-	(format: ArticleFormat, blockId: string, options: Options) =>
+	(
+		format: ArticleFormat,
+		blockId: string,
+		options: Options,
+		isNested = false,
+	) =>
 	(elements: FEElement[]): FEElement[] =>
 		[
 			enhanceLists(
-				enhanceElements(format, blockId, options),
+				enhanceElements(format, blockId, options, true),
 				options.tags,
 			),
-			enhanceTimeline(enhanceElements(format, blockId, options)),
-			enhanceProductElement(enhanceElements(format, blockId, options)),
+			enhanceTimeline(enhanceElements(format, blockId, options, true)),
+			enhanceProductElement(
+				enhanceElements(format, blockId, options, true),
+			),
 			enhanceDividers,
 			enhanceH2s,
 			enhanceInteractiveContentsElements,
@@ -84,7 +91,7 @@ export const enhanceElements =
 				options.renderingTarget,
 				options.shouldHideAds,
 			),
-			enhanceDisclaimer(options.hasAffiliateLinksDisclaimer),
+			enhanceDisclaimer(options.hasAffiliateLinksDisclaimer, isNested),
 		].reduce(
 			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),
 			elements,

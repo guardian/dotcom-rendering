@@ -27,3 +27,4 @@
 /dotcom-rendering/src/lib/braze/                @guardian/value
 /dotcom-rendering/webpack/                      @guardian/dotcom-platform
 /scripts/                                       @guardian/dotcom-platform
+/ab-testing/                                    @guardian/commercial-dev
