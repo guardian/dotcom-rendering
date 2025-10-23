@@ -75,7 +75,7 @@ export const getGalleryMainMedia = (
 		mainMedia._type !==
 		'model.dotcomrendering.pageElements.ImageBlockElement'
 	) {
-		throw new Error('Main media is not an image');
+		logger.warn('Main media is not an image');
 	}
 
 	return mainMedia;
