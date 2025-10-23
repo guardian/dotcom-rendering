@@ -113,7 +113,7 @@ export const GalleryImage = ({
 						master={asset.url}
 						width={width}
 						height={height}
-						loading="lazy"
+						loading="eager"
 					/>
 				)}
 				{renderingTarget === 'Web' && !isUndefined(image.position) && (
