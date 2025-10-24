@@ -241,6 +241,13 @@ const product: ProductBlockElement = {
 			linkType: 'ProductButton',
 		},
 		{
+			_type: 'model.dotcomrendering.pageElements.LinkBlockElement',
+			url: 'https://www.amazon.co.uk/Bosch-TWK7203GB-Sky-Variable-Temperature/dp/B07Z8VQ2V6',
+			label: '£79.99 at Amazon',
+			elementId: 'f9b3e7a9-788b-4ada-bd99-f7c40b843db7',
+			linkType: 'ProductButton',
+		},
+		{
 			_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 			html: '<p>Offering variable temperatures and a double-walled stainless-steel housing, the 3kW Sky is a brilliant blend of robust form and function. It boasts a low minimum boil (300ml), a keep-warm setting and touch controls.</p>',
 			elementId: '4a27eb68-6a03-4e82-a7d0-e4f1ef3ccb6f',
