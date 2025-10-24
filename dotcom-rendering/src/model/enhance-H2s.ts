@@ -1,5 +1,5 @@
 import { JSDOM } from 'jsdom';
-import type { FEElement, SubheadingBlockElement } from '../types/content';
+import type { FEElement } from '../types/content';
 import { isLegacyTableOfContents } from './isLegacyTableOfContents';
 
 const shouldUseLegacyIDs = (elements: FEElement[]): boolean => {
@@ -11,8 +11,8 @@ const shouldUseLegacyIDs = (elements: FEElement[]): boolean => {
 	);
 };
 
-const extractText = (element: SubheadingBlockElement): string => {
-	const frag = JSDOM.fragment(element.html);
+export const extractText = (html: string): string => {
+	const frag = JSDOM.fragment(html);
 	if (!frag.firstElementChild) return '';
 	return frag.textContent?.trim() ?? '';
 };
@@ -47,11 +47,11 @@ export const slugify = (text: string): string => {
 /**
  * This function attempts to create a slugified string to use as the id. It fails over to elementId.
  */
-const generateId = (element: SubheadingBlockElement, existingIds: string[]) => {
-	const text = extractText(element);
-	if (!text) return element.elementId;
+const generateId = (elementId: string, html: string, existingIds: string[]) => {
+	const text = extractText(html);
+	if (!text) return elementId;
 	const slug = slugify(text);
-	if (!slug) return element.elementId;
+	if (!slug) return elementId;
 	const unique = getUnique(slug, existingIds);
 	existingIds.push(slug);
 	return unique;
@@ -71,7 +71,7 @@ export const enhanceH2s = (elements: FEElement[]): FEElement[] => {
 		) {
 			const id = shouldUseElementId
 				? element.elementId
-				: generateId(element, slugifiedIds);
+				: generateId(element.elementId, element.html, slugifiedIds);
 
 			const withId = element.html.replace(
 				'<h2>',
@@ -82,6 +82,19 @@ export const enhanceH2s = (elements: FEElement[]): FEElement[] => {
 				...element,
 				html: withId,
 			};
+		} else if (
+			element._type ===
+			'model.dotcomrendering.pageElements.ProductBlockElement'
+		) {
+			const subheadingHtml = `${element.primaryHeading || ''} ${
+				element.secondaryHeading || ''
+			}`;
+
+			const h2Id = shouldUseElementId
+				? element.elementId
+				: generateId(element.elementId, subheadingHtml, slugifiedIds);
+
+			return { ...element, h2Id };
 		} else {
 			// Otherwise, do nothing
 			return element;

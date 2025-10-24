@@ -5089,6 +5089,16 @@ const privacyTextSupportingSubduedLight: PaletteFunction = () =>
 const privacyTextSupportingSubduedDark: PaletteFunction = () =>
 	sourcePalette.neutral[60];
 
+const productCardBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const productCardBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[7];
+
+const productCardBorderLight: PaletteFunction = () =>
+	sourcePalette.lifestyle[300];
+const productCardBorderDark: PaletteFunction = () =>
+	sourcePalette.lifestyle[500];
+
 const privacyTextRegularLight: PaletteFunction = () => sourcePalette.neutral[7];
 const privacyTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 const witnessTitleText: PaletteFunction = ({ theme }) => {
@@ -5380,6 +5390,18 @@ const discussionSubduedDark: PaletteFunction = () => sourcePalette.neutral[60];
 const discussionLinkLight: PaletteFunction = () => sourcePalette.brand[500];
 const discussionLinkDark: PaletteFunction = () => sourcePalette.brand[800];
 
+const productButtonPrimaryBackgroundLight: PaletteFunction = (format) =>
+	discussionPrimaryButtonBackgroundLight(format);
+const productButtonPrimaryBackgroundDark: PaletteFunction = (format) =>
+	discussionPrimaryButtonBackgroundDark(format);
+const productButtonPrimaryBackgroundHoverLight: PaletteFunction = (format) =>
+	discussionButtonHover(format);
+const productButtonPrimaryBackgroundHoverDark: PaletteFunction = (format) =>
+	discussionButtonHover(format);
+const productButtonPrimaryTextDark: PaletteFunction = (format) =>
+	discussionButtonTextDark(format);
+const productButtonPrimaryTextLight: PaletteFunction = (format) =>
+	discussionButtonTextLight(format);
 const discussionPrimaryButtonBackgroundLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
@@ -7513,6 +7535,26 @@ const paletteColours = {
 	'--privacy-text-supporting-subdued': {
 		light: privacyTextSupportingSubduedLight,
 		dark: privacyTextSupportingSubduedDark,
+	},
+	'--product-button-primary-background': {
+		light: productButtonPrimaryBackgroundLight,
+		dark: productButtonPrimaryBackgroundDark,
+	},
+	'--product-button-primary-background-hover': {
+		light: productButtonPrimaryBackgroundHoverLight,
+		dark: productButtonPrimaryBackgroundHoverDark,
+	},
+	'--product-button-primary-text': {
+		light: productButtonPrimaryTextLight,
+		dark: productButtonPrimaryTextDark,
+	},
+	'--product-card-background': {
+		light: productCardBackgroundLight,
+		dark: productCardBackgroundDark,
+	},
+	'--product-card-border': {
+		light: productCardBorderLight,
+		dark: productCardBorderDark,
 	},
 	'--pullquote-background': {
 		light: pullQuoteBackgroundLight,
