@@ -95,7 +95,7 @@ export const deleteSection = (
 	});
 };
 
-type InsertError = 'NoIndex' | 'NoSectionAtLocation';
+type InsertError = 'NoIndex' | 'NoSectionAtLocation' | 'SectionExists';
 
 export function insertSection(
 	sections: Section[],
@@ -109,6 +109,16 @@ export function insertSection(
 	}
 
 	if (rest.length === 0) {
+		if (
+			sections.findIndex(
+				(value) =>
+					value.title === section.title &&
+					value.path === section.path,
+			) !== -1
+		) {
+			return error('SectionExists');
+		}
+
 		return ok(sections.toSpliced(index, 0, section));
 	}
 
