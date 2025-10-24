@@ -18,7 +18,7 @@ type State = {
 	insertingAt?: number[];
 };
 
-type HistoryEvent =
+export type HistoryEvent =
 	| {
 			kind: 'delete';
 			location: number[];
@@ -53,10 +53,6 @@ type Action =
 	  }
 	| {
 			kind: 'insertInto';
-			location: number[];
-	  }
-	| {
-			kind: 'insertAfter';
 			location: number[];
 	  }
 	| {
@@ -208,15 +204,6 @@ export const reducer = (state: State, action: Action): State => {
 		}
 		case 'insertInto':
 			return { ...state, insertingAt: [...action.location, 0] };
-		case 'insertAfter':
-			return {
-				...state,
-				insertingAt: action.location.toSpliced(
-					-1,
-					1,
-					(action.location.at(-1) ?? 0) + 1,
-				),
-			};
 		case 'cancelInsert':
 			return { ...state, insertingAt: undefined };
 		case 'moveDown':

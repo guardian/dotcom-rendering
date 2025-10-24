@@ -16,13 +16,17 @@ import {
 	SvgArrowOutdent,
 	SvgArrowUpStraight,
 	SvgBin,
-	SvgFolderFilled,
-	SvgIndent,
+	SvgPlus,
 	SvgReload,
 	TextInput,
 } from '@guardian/source/react-components';
 import { css } from '@emotion/react';
-import { DispatchContext, reducer, useDispatch } from './appsNavContext';
+import {
+	DispatchContext,
+	reducer,
+	useDispatch,
+	type HistoryEvent,
+} from './appsNavContext';
 
 type Props = {
 	ukNav: AppsNav;
@@ -37,23 +41,10 @@ export const AppsNavTool = (props: Props) => {
 
 	return (
 		<DispatchContext.Provider value={dispatch}>
-			<Button
-				onClick={() => dispatch({ kind: 'undo' })}
-				disabled={state.history.length === 0}
-				icon={<SvgArrowOutdent />}
-			>
-				Undo
-			</Button>
-			<Button
-				onClick={() =>
-					dispatch({ kind: 'reset', initial: props.ukNav.pillars })
-				}
-				disabled={state.history.length === 0}
-				type="reset"
-				icon={<SvgReload />}
-			>
-				Reset
-			</Button>
+			<MenuActions
+				initialSections={props.ukNav.pillars}
+				history={state.history}
+			/>
 			<InsertDialog insertingAt={state.insertingAt} />
 			{state.error !== undefined ? <p>{state.error}</p> : null}
 			<Sections
@@ -62,6 +53,68 @@ export const AppsNavTool = (props: Props) => {
 				location={[]}
 			/>
 		</DispatchContext.Provider>
+	);
+};
+
+const MenuActions = (props: {
+	initialSections: Section[];
+	history: HistoryEvent[];
+}) => {
+	const dispatch = useDispatch();
+
+	return (
+		<menu
+			css={{
+				paddingTop: space[2],
+				paddingBottom: space[2],
+				paddingLeft: space[4],
+				li: {
+					display: 'inline',
+					paddingRight: space[1],
+				},
+			}}
+		>
+			<li>
+				<Button
+					size="small"
+					priority="tertiary"
+					onClick={() => dispatch({ kind: 'undo' })}
+					disabled={props.history.length === 0}
+					icon={<SvgReload />}
+				>
+					Undo
+				</Button>
+			</li>
+			<li>
+				<Button
+					size="small"
+					priority="tertiary"
+					onClick={() =>
+						dispatch({
+							kind: 'reset',
+							initial: props.initialSections,
+						})
+					}
+					disabled={props.history.length === 0}
+					type="reset"
+					icon={<SvgArrowOutdent />}
+				>
+					Reset
+				</Button>
+			</li>
+			<li>
+				<Button
+					size="small"
+					priority="tertiary"
+					icon={<SvgPlus />}
+					onClick={() =>
+						dispatch({ kind: 'insertInto', location: [] })
+					}
+				>
+					Add Section
+				</Button>
+			</li>
+		</menu>
 	);
 };
 
@@ -96,12 +149,12 @@ const Section = (props: {
 				alignItems: 'center',
 			}}
 		>
+			<SectionActions location={props.location} />
 			<Title location={props.location}>{props.section.title}</Title>{' '}
 			<Path
 				path={props.section.path}
 				guardianBaseUrl={props.guardianBaseUrl}
 			/>
-			<SectionActions location={props.location} />
 		</div>
 		{props.section.sections !== undefined ? (
 			<Sections
@@ -114,7 +167,14 @@ const Section = (props: {
 );
 
 const Title = (props: { children: ReactNode; location: number[] }) => (
-	<span css={headlineBold17Object}>{props.children}</span>
+	<span
+		css={{
+			...headlineBold17Object,
+			paddingLeft: space[2],
+		}}
+	>
+		{props.children}
+	</span>
 );
 
 const Path = (props: { path: string; guardianBaseUrl: string }) => (
@@ -143,52 +203,11 @@ const SectionActions = (props: { location: number[] }) => {
 			<Button
 				size="xsmall"
 				priority="secondary"
-				icon={<SvgBin />}
-				onClick={() =>
-					dispatch({ kind: 'delete', location: props.location })
-				}
-				cssOverrides={css({
-					marginLeft: space[4],
-				})}
-			>
-				Delete
-			</Button>
-			<Button
-				size="xsmall"
-				priority="secondary"
-				icon={<SvgFolderFilled />}
-				onClick={() =>
-					dispatch({ kind: 'insertInto', location: props.location })
-				}
-				cssOverrides={css({
-					marginLeft: space[1],
-				})}
-			>
-				Insert Into
-			</Button>
-			<Button
-				size="xsmall"
-				priority="secondary"
-				icon={<SvgIndent />}
-				onClick={() =>
-					dispatch({ kind: 'insertAfter', location: props.location })
-				}
-				cssOverrides={css({
-					marginLeft: space[1],
-				})}
-			>
-				Insert After
-			</Button>
-			<Button
-				size="xsmall"
-				priority="secondary"
 				icon={<SvgArrowUpStraight />}
+				hideLabel
 				onClick={() =>
 					dispatch({ kind: 'moveUp', location: props.location })
 				}
-				cssOverrides={css({
-					marginLeft: space[1],
-				})}
 			>
 				Move Up
 			</Button>
@@ -196,6 +215,7 @@ const SectionActions = (props: { location: number[] }) => {
 				size="xsmall"
 				priority="secondary"
 				icon={<SvgArrowDownStraight />}
+				hideLabel
 				onClick={() =>
 					dispatch({ kind: 'moveDown', location: props.location })
 				}
@@ -204,6 +224,34 @@ const SectionActions = (props: { location: number[] }) => {
 				})}
 			>
 				Move Down
+			</Button>
+			<Button
+				size="xsmall"
+				priority="secondary"
+				icon={<SvgBin />}
+				hideLabel
+				onClick={() =>
+					dispatch({ kind: 'delete', location: props.location })
+				}
+				cssOverrides={css({
+					marginLeft: space[1],
+				})}
+			>
+				Delete
+			</Button>
+			<Button
+				size="xsmall"
+				priority="secondary"
+				icon={<SvgPlus />}
+				hideLabel
+				onClick={() =>
+					dispatch({ kind: 'insertInto', location: props.location })
+				}
+				cssOverrides={css({
+					marginLeft: space[1],
+				})}
+			>
+				Add Subsection
 			</Button>
 		</>
 	);
