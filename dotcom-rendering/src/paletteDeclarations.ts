@@ -5097,7 +5097,7 @@ const productCardBackgroundDark: PaletteFunction = () =>
 const productCardBorderLight: PaletteFunction = () =>
 	sourcePalette.lifestyle[300];
 const productCardBorderDark: PaletteFunction = () =>
-	sourcePalette.lifestyle[300];
+	sourcePalette.lifestyle[500];
 
 const privacyTextRegularLight: PaletteFunction = () => sourcePalette.neutral[7];
 const privacyTextDark: PaletteFunction = () => sourcePalette.neutral[86];
