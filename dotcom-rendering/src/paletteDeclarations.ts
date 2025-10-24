@@ -5092,13 +5092,16 @@ const privacyTextSupportingSubduedDark: PaletteFunction = () =>
 const productCardBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 const productCardBackgroundDark: PaletteFunction = () =>
-	sourcePalette.neutral[97];
+	sourcePalette.neutral[20];
 
 const productCardBorderLight: PaletteFunction = () =>
 	sourcePalette.lifestyle[300];
 const productCardBorderDark: PaletteFunction = () =>
-	sourcePalette.lifestyle[300];
-
+	sourcePalette.lifestyle[500];
+const productCardBorderNeutralDark: PaletteFunction = () =>
+	sourcePalette.neutral[38];
+const productCardBorderNeutralLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
 const privacyTextRegularLight: PaletteFunction = () => sourcePalette.neutral[7];
 const privacyTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 const witnessTitleText: PaletteFunction = ({ theme }) => {
@@ -5390,15 +5393,18 @@ const discussionSubduedDark: PaletteFunction = () => sourcePalette.neutral[60];
 const discussionLinkLight: PaletteFunction = () => sourcePalette.brand[500];
 const discussionLinkDark: PaletteFunction = () => sourcePalette.brand[800];
 
-const productButtonPrimaryBackgroundLight: PaletteFunction = (format) =>
-	discussionPrimaryButtonBackgroundLight(format);
-const productButtonPrimaryBackgroundDark: PaletteFunction = (format) =>
-	discussionPrimaryButtonBackgroundDark(format);
-const productButtonPrimaryBackgroundHoverLight: PaletteFunction = (format) =>
-	discussionButtonHover(format);
-const productButtonPrimaryBackgroundHoverDark: PaletteFunction = (format) =>
-	discussionButtonHover(format);
-
+const productButtonPrimaryBackgroundLight: PaletteFunction = () =>
+	sourcePalette.lifestyle[300];
+const productButtonPrimaryBackgroundDark: PaletteFunction = () =>
+	sourcePalette.lifestyle[500];
+const productButtonPrimaryBackgroundHoverLight: PaletteFunction = () =>
+	sourcePalette.lifestyle[400];
+const productButtonPrimaryBackgroundHoverDark: PaletteFunction = () =>
+	sourcePalette.lifestyle[400];
+const productButtonPrimaryTextDark: PaletteFunction = () =>
+	sourcePalette.neutral[7];
+const productButtonPrimaryTextLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
 const discussionPrimaryButtonBackgroundLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
@@ -7541,6 +7547,10 @@ const paletteColours = {
 		light: productButtonPrimaryBackgroundHoverLight,
 		dark: productButtonPrimaryBackgroundHoverDark,
 	},
+	'--product-button-primary-text': {
+		light: productButtonPrimaryTextLight,
+		dark: productButtonPrimaryTextDark,
+	},
 	'--product-card-background': {
 		light: productCardBackgroundLight,
 		dark: productCardBackgroundDark,
@@ -7548,6 +7558,10 @@ const paletteColours = {
 	'--product-card-border': {
 		light: productCardBorderLight,
 		dark: productCardBorderDark,
+	},
+	'--product-card-border-neutral': {
+		light: productCardBorderNeutralLight,
+		dark: productCardBorderNeutralDark,
 	},
 	'--pullquote-background': {
 		light: pullQuoteBackgroundLight,

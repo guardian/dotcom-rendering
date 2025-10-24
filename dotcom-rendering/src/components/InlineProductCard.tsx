@@ -130,7 +130,7 @@ const desktopButtonWrapper = css`
 
 const customAttributesContainer = css`
 	grid-column: 1 / span 2;
-	border-top: 1px solid ${palette('--section-border')};
+	border-top: 1px solid ${palette('--product-card-border-neutral')};
 	padding-top: ${space[2]}px;
 	display: grid;
 	column-gap: inherit;
