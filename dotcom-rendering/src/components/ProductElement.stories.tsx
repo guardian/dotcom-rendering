@@ -48,15 +48,15 @@ const product: ProductBlockElement = {
 	productCtas: [
 		{
 			url: 'https://www.johnlewis.com/bosch-twk7203gb-sky-variable-temperature-kettle-1-7l-black/p3228625',
-			text: 'Buy now',
+			text: '',
 			retailer: 'John Lewis',
-			price: '£79.99',
+			price: '£45.99',
 		},
 		{
 			url: 'https://www.amazon.co.uk/Bosch-TWK7203GB-Sky-Variable-Temperature/dp/B07Z8VQ2V6',
 			text: '',
 			retailer: 'Amazon',
-			price: '£79.99',
+			price: '£39.99',
 		},
 	],
 	starRating: 'none-selected',
@@ -237,6 +237,13 @@ const product: ProductBlockElement = {
 			_type: 'model.dotcomrendering.pageElements.LinkBlockElement',
 			url: 'https://www.johnlewis.com/bosch-twk7203gb-sky-variable-temperature-kettle-1-7l-black/p3228625',
 			label: '£79.99 at John Lewis',
+			elementId: 'f9b3e7a9-788b-4ada-bd99-f7c40b843db7',
+			linkType: 'ProductButton',
+		},
+		{
+			_type: 'model.dotcomrendering.pageElements.LinkBlockElement',
+			url: 'https://www.amazon.co.uk/Bosch-TWK7203GB-Sky-Variable-Temperature/dp/B07Z8VQ2V6',
+			label: '£79.99 at Amazon',
 			elementId: 'f9b3e7a9-788b-4ada-bd99-f7c40b843db7',
 			linkType: 'ProductButton',
 		},

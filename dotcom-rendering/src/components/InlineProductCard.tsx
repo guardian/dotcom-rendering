@@ -7,6 +7,8 @@ import {
 	textSans15,
 	textSans17,
 	textSans20,
+	textSansBold17,
+	textSansBold20,
 	until,
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
@@ -26,11 +28,11 @@ export type InlineProductCardProps = {
 	brandName: string;
 	productName: string;
 	image?: ProductImage;
-	primaryPrice?: string;
 	productCtas: ProductCardCta[];
 	customAttributes: CustomAttributes[];
 	isCardOnly: boolean;
 	shouldShowLeftColCard?: boolean;
+	lowestPrice?: string;
 };
 
 const baseCard = css`
@@ -38,7 +40,7 @@ const baseCard = css`
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	column-gap: 10px;
-	row-gap: ${space[3]}px;
+	row-gap: ${space[4]}px;
 	max-width: 100%;
 	img {
 		width: 100%;
@@ -70,11 +72,12 @@ const hideFromWide = css`
 const showcaseCard = css`
 	${baseCard};
 	background-color: ${palette('--product-card-background')};
-	border-top: 1px solid ${palette('--section-border-lifestyle')};
+	border-top: 1px solid ${palette('--product-card-border')};
 `;
 
 const productCard = css`
 	${baseCard};
+	padding: ${space[2]}px 0 0;
 	background-color: transparent;
 	border-top: 1px solid ${palette('--section-border')};
 `;
@@ -98,14 +101,17 @@ const primaryHeading = css`
 `;
 
 const productNameStyle = css`
-	${textSans20};
-	${until.mobileLandscape} {
-		${textSans17};
+	${textSans17};
+	> strong {
+		${textSansBold17}
 	}
-`;
 
-const priceStyle = css`
-	font-weight: 700;
+	${from.mobileLandscape} {
+		${textSans20};
+		> strong {
+			${textSansBold20}
+		}
+	}
 `;
 
 const mobileButtonWrapper = css`
@@ -125,9 +131,9 @@ const desktopButtonWrapper = css`
 const customAttributesContainer = css`
 	grid-column: 1 / span 2;
 	border-top: 1px solid ${palette('--section-border')};
-	padding-top: ${space[3]}px;
+	padding-top: ${space[2]}px;
 	display: grid;
-	gap: ${space[2]}px;
+	column-gap: inherit;
 
 	${from.mobileLandscape} {
 		grid-template-columns: 1fr 1fr;
@@ -156,12 +162,12 @@ export const InlineProductCard = ({
 	format,
 	brandName,
 	productName,
-	primaryPrice,
 	image,
 	customAttributes,
 	productCtas,
 	isCardOnly = false,
 	shouldShowLeftColCard = false,
+	lowestPrice,
 }: InlineProductCardProps) => {
 
 	return (
@@ -181,7 +187,17 @@ export const InlineProductCard = ({
 			<div css={productInfoContainer}>
 				<div css={primaryHeading}>{brandName}</div>
 				<div css={productNameStyle}>{productName}</div>
-				<div css={priceStyle}>{primaryPrice}</div>
+				{!!lowestPrice && (
+					<div css={productNameStyle}>
+						{productCtas.length > 1 ? (
+							<>
+								from <strong>{lowestPrice}</strong>
+							</>
+						) : (
+							<strong>{lowestPrice}</strong>
+						)}
+					</div>
+				)}
 				<div css={desktopButtonWrapper}>
 					<ProductCardButtons
 						productCtas={productCtas}
