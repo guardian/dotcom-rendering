@@ -59,26 +59,24 @@ const sampleProductCard: LeftColProductCardProps = {
 			value: 'there’s nowhere to stow the remote control',
 		},
 	],
+	lowestPrice: '£89.99',
 };
 
 export const Default = () => <LeftColProductCard {...sampleProductCard} />;
 
-export const WithButtonOverride = () => (
+export const WithNoCustomAttributes = () => (
+	<LeftColProductCard {...sampleProductCard} customAttributes={[]} />
+);
+
+export const SingleCta = () => (
 	<LeftColProductCard
 		{...sampleProductCard}
 		productCtas={[
 			{
 				url: 'https://www.theguardian.com',
-				label: '£29.99 at Amazon',
-			},
-			{
-				url: 'https://www.theguardian.com',
-				label: '£23.66 at John Lewis',
+				label: '£89.99 at Amazon',
 			},
 		]}
-	></LeftColProductCard>
-);
-
-export const WithNoCustomAttributes = () => (
-	<LeftColProductCard {...sampleProductCard} customAttributes={[]} />
+		lowestPrice={'£89.99'}
+	/>
 );

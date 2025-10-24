@@ -7,6 +7,8 @@ import {
 	textSans15,
 	textSans17,
 	textSans20,
+	textSansBold17,
+	textSansBold20,
 	until,
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
@@ -26,11 +28,11 @@ export type InlineProductCardProps = {
 	brandName: string;
 	productName: string;
 	image?: ProductImage;
-	primaryPrice?: string;
 	productCtas: ProductCardCta[];
 	customAttributes: CustomAttributes[];
 	isCardOnly: boolean;
 	shouldShowLeftColCard?: boolean;
+	lowestPrice?: string;
 };
 
 const baseCard = css`
@@ -98,14 +100,17 @@ const primaryHeading = css`
 `;
 
 const productNameStyle = css`
-	${textSans20};
-	${until.mobileLandscape} {
-		${textSans17};
+	${textSans17};
+	> strong {
+		${textSansBold17}
 	}
-`;
 
-const priceStyle = css`
-	font-weight: 700;
+	${from.mobileLandscape} {
+		${textSans20};
+		> strong {
+			${textSansBold20}
+		}
+	}
 `;
 
 const mobileButtonWrapper = css`
@@ -156,12 +161,12 @@ export const InlineProductCard = ({
 	format,
 	brandName,
 	productName,
-	primaryPrice,
 	image,
 	customAttributes,
 	productCtas,
 	isCardOnly = false,
 	shouldShowLeftColCard = false,
+	lowestPrice,
 }: InlineProductCardProps) => {
 	return (
 		<div
@@ -180,7 +185,17 @@ export const InlineProductCard = ({
 			<div css={productInfoContainer}>
 				<div css={primaryHeading}>{brandName}</div>
 				<div css={productNameStyle}>{productName}</div>
-				<div css={priceStyle}>{primaryPrice}</div>
+				{!!lowestPrice && (
+					<div css={productNameStyle}>
+						{productCtas.length > 1 ? (
+							<>
+								from <strong>{lowestPrice}</strong>
+							</>
+						) : (
+							<strong>{lowestPrice}</strong>
+						)}
+					</div>
+				)}
 				<div css={desktopButtonWrapper}>
 					<ProductCardButtons
 						productCtas={productCtas}

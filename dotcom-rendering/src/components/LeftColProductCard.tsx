@@ -5,6 +5,7 @@ import {
 	space,
 	textSans15,
 	textSans17,
+	textSansBold17,
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
@@ -25,7 +26,7 @@ export type LeftColProductCardProps = {
 	customAttributes: CustomAttributes[];
 	format: ArticleFormat;
 	productCtas: ProductCardCta[];
-	primaryPrice?: string;
+	lowestPrice?: string;
 };
 
 const card = css`
@@ -49,7 +50,7 @@ const card = css`
 const productInfoContainer = css`
 	display: grid;
 	row-gap: ${space[1]}px;
-	padding: ${space[1]}px 10px ${space[2]}px 0;
+	padding: ${space[1]}px 0 ${space[2]}px 0;
 `;
 
 const brandNameFont = css`
@@ -58,29 +59,26 @@ const brandNameFont = css`
 
 const productNameFont = css`
 	${textSans17};
-`;
-
-const priceFont = css`
-	${textSans17};
+	> strong {
+		${textSansBold17};
+	}
 `;
 
 const buttonContainer = css`
-	padding-bottom: ${space[4]}px;
+	padding-bottom: ${space[6]}px;
 	min-width: 100%;
 `;
 const customAttributesContainer = css`
 	border-top: 1px solid ${palette('--section-border')};
-	padding-top: ${space[3]}px;
-	padding-bottom: ${space[4]}px;
+	padding-top: ${space[2]}px;
 	display: grid;
-	row-gap: ${space[3]}px;
+	row-gap: ${space[4]}px;
 `;
 
 const CustomAttribute = ({ name, value }: CustomAttributes) => (
 	<div
 		css={css`
 			${textSans15};
-			margin-top: 4px;
 		`}
 	>
 		<strong>{name}</strong>
@@ -95,8 +93,8 @@ export const LeftColProductCard = ({
 	image,
 	customAttributes,
 	format,
-	primaryPrice,
 	productCtas,
+	lowestPrice,
 }: LeftColProductCardProps) => {
 	return (
 		<div css={card}>
@@ -109,9 +107,17 @@ export const LeftColProductCard = ({
 			<div css={productInfoContainer}>
 				<div css={brandNameFont}>{brandName}</div>
 				<div css={productNameFont}>{productName}</div>
-				<div css={priceFont}>
-					<strong>{primaryPrice}</strong>
-				</div>
+				{!!lowestPrice && (
+					<div css={productNameFont}>
+						{productCtas.length > 1 ? (
+							<>
+								from <strong>{lowestPrice}</strong>
+							</>
+						) : (
+							<strong>{lowestPrice}</strong>
+						)}
+					</div>
+				)}
 			</div>
 			<div css={buttonContainer}>
 				<ProductCardButtons

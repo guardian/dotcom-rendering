@@ -21,12 +21,7 @@ type ProductLinkButtonProps = {
 };
 
 const linkButtonStyles = css`
-	max-width: 100%;
-	height: fit-content;
-	padding-top: ${space[1]}px;
-	padding-bottom: ${space[1]}px;
-	white-space: normal;
-	overflow-wrap: break-word;
+	height: auto;
 `;
 
 export const theme: Partial<ThemeButton> = {
@@ -66,7 +61,16 @@ export const ProductLinkButton = ({
 			]}
 			data-component={dataComponent}
 		>
-			{label}
+			<span
+				css={css`
+					text-align: center;
+					white-space: normal;
+					max-width: 100%;
+					padding: ${space[1]}px 0;
+				`}
+			>
+				{label}
+			</span>
 		</LinkButton>
 	);
 };
