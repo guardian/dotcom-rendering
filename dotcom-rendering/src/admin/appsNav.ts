@@ -9,6 +9,7 @@ import {
 	string,
 	union,
 } from 'valibot';
+import { error, ok, type Result } from '../lib/result';
 
 // We can't use `InferOutput` for this due to lazy.
 // See https://valibot.dev/guides/other/
@@ -51,3 +52,82 @@ export const AppsNavSchema = object({
 });
 
 export type AppsNav = InferOutput<typeof AppsNavSchema>;
+
+type DeleteError = 'NoIndex' | 'NoSectionAtLocation';
+
+type DeleteSuccess = {
+	deleted: Section;
+	sections: Section[];
+};
+
+export const deleteSection = (
+	sections: Section[],
+	location: number[],
+): Result<DeleteError, DeleteSuccess> => {
+	const [index, ...rest] = location;
+
+	if (index === undefined) {
+		return error('NoIndex');
+	}
+
+	const section = sections[index];
+
+	if (section === undefined) {
+		return error('NoSectionAtLocation');
+	}
+
+	if (rest.length === 0 || section.sections === undefined) {
+		return ok({ deleted: section, sections: sections.toSpliced(index, 1) });
+	}
+
+	const result = deleteSection(section.sections, rest);
+
+	if (result.kind === 'error') {
+		return result;
+	}
+
+	return ok({
+		deleted: result.value.deleted,
+		sections: sections.toSpliced(index, 1, {
+			...section,
+			sections: result.value.sections,
+		}),
+	});
+};
+
+type InsertError = 'NoIndex' | 'NoSectionAtLocation';
+
+export function insertSection(
+	sections: Section[],
+	location: number[],
+	section: Section,
+): Result<InsertError, Section[]> {
+	const [index, ...rest] = location;
+
+	if (index === undefined) {
+		return error('NoIndex');
+	}
+
+	if (rest.length === 0) {
+		return ok(sections.toSpliced(index, 0, section));
+	}
+
+	const currentSection = sections[index];
+
+	if (currentSection === undefined) {
+		return error('NoSectionAtLocation');
+	}
+
+	const result = insertSection(currentSection.sections ?? [], rest, section);
+
+	if (result.kind === 'error') {
+		return result;
+	}
+
+	return ok(
+		sections.toSpliced(index, 1, {
+			...currentSection,
+			sections: result.value,
+		}),
+	);
+}
