@@ -40,7 +40,7 @@ const baseCard = css`
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	column-gap: 10px;
-	row-gap: ${space[3]}px;
+	row-gap: ${space[4]}px;
 	max-width: 100%;
 	img {
 		width: 100%;
@@ -130,7 +130,7 @@ const desktopButtonWrapper = css`
 const customAttributesContainer = css`
 	grid-column: 1 / span 2;
 	border-top: 1px solid ${palette('--section-border')};
-	padding-top: ${space[3]}px;
+	padding-top: ${space[2]}px;
 	display: grid;
 	column-gap: inherit;
 
