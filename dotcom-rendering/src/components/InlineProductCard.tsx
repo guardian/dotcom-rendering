@@ -132,7 +132,7 @@ const customAttributesContainer = css`
 	border-top: 1px solid ${palette('--section-border')};
 	padding-top: ${space[3]}px;
 	display: grid;
-	gap: ${space[2]}px;
+	column-gap: inherit;
 
 	${from.mobileLandscape} {
 		grid-template-columns: 1fr 1fr;
