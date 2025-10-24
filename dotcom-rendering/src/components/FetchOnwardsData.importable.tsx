@@ -21,7 +21,7 @@ type Props = {
 	onwardsSource: OnwardsSource;
 	format: ArticleFormat;
 	discussionApiUrl: string;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	renderingTarget: RenderingTarget;
 	isAdFreeUser: boolean;
 	containerPosition: string;
@@ -61,7 +61,7 @@ export const FetchOnwardsData = ({
 	onwardsSource,
 	format,
 	discussionApiUrl,
-	absoluteServerTimes,
+	serverTime,
 	renderingTarget,
 	isAdFreeUser,
 	containerPosition,
@@ -134,7 +134,7 @@ export const FetchOnwardsData = ({
 						: 'compact'
 				}
 				discussionApiUrl={discussionApiUrl}
-				absoluteServerTimes={absoluteServerTimes}
+				serverTime={serverTime}
 				renderingTarget={renderingTarget}
 			/>
 		</div>
