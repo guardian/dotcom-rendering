@@ -77,6 +77,7 @@ const showcaseCard = css`
 
 const productCard = css`
 	${baseCard};
+	padding: ${space[2]}px 0 0;
 	background-color: transparent;
 	border-top: 1px solid ${palette('--section-border')};
 `;
