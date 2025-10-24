@@ -29,6 +29,7 @@ export const theme: Partial<ThemeButton> = {
 	backgroundPrimaryHover: palette(
 		'--product-button-primary-background-hover',
 	),
+	textPrimary: palette('--product-button-primary-text'),
 	textTertiary: palette('--product-button-primary-background'),
 	borderTertiary: palette('--product-button-primary-background'),
 };
