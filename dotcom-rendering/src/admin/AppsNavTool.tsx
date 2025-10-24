@@ -10,7 +10,15 @@ import {
 	type ReactNode,
 } from 'react';
 import { type AppsNav, type Section } from './appsNav';
-import { Button, TextInput } from '@guardian/source/react-components';
+import {
+	Button,
+	SvgArrowOutdent,
+	SvgBin,
+	SvgFolderFilled,
+	SvgIndent,
+	SvgReload,
+	TextInput,
+} from '@guardian/source/react-components';
 import { css } from '@emotion/react';
 import { DispatchContext, reducer, useDispatch } from './appsNavContext';
 
@@ -30,6 +38,7 @@ export const AppsNavTool = (props: Props) => {
 			<Button
 				onClick={() => dispatch({ kind: 'undo' })}
 				disabled={state.history.length === 0}
+				icon={<SvgArrowOutdent />}
 			>
 				Undo
 			</Button>
@@ -39,6 +48,7 @@ export const AppsNavTool = (props: Props) => {
 				}
 				disabled={state.history.length === 0}
 				type="reset"
+				icon={<SvgReload />}
 			>
 				Reset
 			</Button>
@@ -131,6 +141,7 @@ const SectionActions = (props: { location: number[] }) => {
 			<Button
 				size="xsmall"
 				priority="secondary"
+				icon={<SvgBin />}
 				onClick={() =>
 					dispatch({ kind: 'delete', location: props.location })
 				}
@@ -143,6 +154,7 @@ const SectionActions = (props: { location: number[] }) => {
 			<Button
 				size="xsmall"
 				priority="secondary"
+				icon={<SvgFolderFilled />}
 				onClick={() =>
 					dispatch({ kind: 'insertInto', location: props.location })
 				}
@@ -155,6 +167,7 @@ const SectionActions = (props: { location: number[] }) => {
 			<Button
 				size="xsmall"
 				priority="secondary"
+				icon={<SvgIndent />}
 				onClick={() =>
 					dispatch({ kind: 'insertAfter', location: props.location })
 				}
