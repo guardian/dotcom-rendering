@@ -27,6 +27,11 @@ type HistoryEvent =
 	| {
 			kind: 'insert';
 			location: number[];
+	  }
+	| {
+			kind: 'move';
+			distance: number;
+			from: number[];
 	  };
 
 type Action =
@@ -129,6 +134,38 @@ const deleteAction = (
 	};
 };
 
+const moveAction = (
+	state: State,
+	location: number[],
+	distance: number,
+	history: HistoryEvent[] | undefined,
+): State => {
+	const result = moveSection(state.sections, location, distance);
+
+	if (result.kind === 'error') {
+		return {
+			...state,
+			error: `Failed to move ${distance} at location ${location}, ${result.error}`,
+		};
+	}
+
+	return {
+		...state,
+		sections: result.value,
+		history:
+			history === undefined
+				? [
+						{
+							kind: 'move',
+							distance,
+							from: location,
+						},
+						...state.history,
+				  ]
+				: history,
+	};
+};
+
 const undo = (state: State): State => {
 	const [lastEvent, ...rest] = state.history;
 
@@ -144,6 +181,8 @@ const undo = (state: State): State => {
 			);
 		case 'insert':
 			return deleteAction(state, lastEvent.location, rest);
+		case 'move':
+			return moveAction(state, lastEvent.from, lastEvent.distance, rest);
 	}
 };
 
@@ -180,30 +219,9 @@ export const reducer = (state: State, action: Action): State => {
 			};
 		case 'cancelInsert':
 			return { ...state, insertingAt: undefined };
-		case 'moveDown': {
-			const result = moveSection(state.sections, action.location, 1);
-
-			if (result.kind === 'error') {
-				return {
-					...state,
-					error: `Failed to move down at location ${location}, ${result.error}`,
-				};
-			}
-
-			return { ...state, sections: result.value };
-		}
-
-		case 'moveUp': {
-			const result = moveSection(state.sections, action.location, -1);
-
-			if (result.kind === 'error') {
-				return {
-					...state,
-					error: `Failed to move up at location ${location}, ${result.error}`,
-				};
-			}
-
-			return { ...state, sections: result.value };
-		}
+		case 'moveDown':
+			return moveAction(state, action.location, 1, undefined);
+		case 'moveUp':
+			return moveAction(state, action.location, -1, undefined);
 	}
 };
