@@ -70,7 +70,7 @@ const hideFromWide = css`
 const showcaseCard = css`
 	${baseCard};
 	background-color: ${palette('--product-card-background')};
-	border-top: 1px solid ${palette('--section-border-lifestyle')};
+	border-top: 1px solid ${palette('--product-card-border')};
 `;
 
 const productCard = css`

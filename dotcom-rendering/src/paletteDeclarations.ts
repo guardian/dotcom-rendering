@@ -5094,6 +5094,11 @@ const productCardBackgroundLight: PaletteFunction = () =>
 const productCardBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 
+const productCardBorderLight: PaletteFunction = () =>
+	sourcePalette.lifestyle[300];
+const productCardBorderDark: PaletteFunction = () =>
+	sourcePalette.lifestyle[300];
+
 const privacyTextRegularLight: PaletteFunction = () => sourcePalette.neutral[7];
 const privacyTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 const witnessTitleText: PaletteFunction = ({ theme }) => {
@@ -7539,6 +7544,10 @@ const paletteColours = {
 	'--product-card-background': {
 		light: productCardBackgroundLight,
 		dark: productCardBackgroundDark,
+	},
+	'--product-card-border': {
+		light: productCardBorderLight,
+		dark: productCardBorderDark,
 	},
 	'--pullquote-background': {
 		light: pullQuoteBackgroundLight,

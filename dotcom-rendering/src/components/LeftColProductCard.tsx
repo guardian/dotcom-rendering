@@ -35,7 +35,7 @@ const card = css`
 		position: sticky;
 		display: block;
 		width: 220px;
-		border-top: 1px solid ${palette('--section-border-lifestyle')};
+		border-top: 1px solid ${palette('--product-card-border')};
 	}
 	img {
 		height: 220px;
