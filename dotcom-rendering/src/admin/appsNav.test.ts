@@ -1,6 +1,11 @@
 import { parse } from 'valibot';
 import { ukNav } from '../../fixtures/manual/appsNav/uk';
-import { AppsNavSchema, deleteSection, insertSection } from './appsNav';
+import {
+	AppsNavSchema,
+	deleteSection,
+	insertSection,
+	moveSection,
+} from './appsNav';
 import { okOrThrow } from '../lib/result';
 
 describe('appsNav', () => {
@@ -47,5 +52,25 @@ describe('appsNav', () => {
 
 		expect(result2[0]?.sections[0]?.title).toEqual('Mock Section');
 		expect(result2[1]?.title).toEqual('UK');
+	});
+
+	it('moves sections', () => {
+		const result = okOrThrow(
+			moveSection(sections, [0, 2], 3),
+			'Expected section move to be successful',
+		);
+
+		expect(result[0]?.sections?.length).toBe(8);
+		expect(result[0]?.sections[2]?.title).toEqual('Society');
+		expect(result[0]?.sections[5]?.title).toEqual('Media');
+
+		const result2 = okOrThrow(
+			moveSection(sections, [0, 2], -5),
+			'Expected section move to be successful',
+		);
+
+		expect(result2[0]?.sections?.length).toBe(8);
+		expect(result2[0]?.sections[0]?.title).toEqual('Media');
+		expect(result2[0]?.sections[2]?.title).toEqual('Education');
 	});
 });

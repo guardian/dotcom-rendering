@@ -131,3 +131,28 @@ export function insertSection(
 		}),
 	);
 }
+
+export const moveSection = (
+	sections: Section[],
+	location: number[],
+	to: number,
+): Result<DeleteError | InsertError, Section[]> => {
+	if (location.length === 0) {
+		return ok(sections);
+	}
+
+	const deleteResult = deleteSection(sections, location);
+
+	if (deleteResult.kind === 'error') {
+		return deleteResult;
+	}
+
+	const { deleted, sections: remainingSections } = deleteResult.value;
+	const newLocation = (location.at(-1) ?? 0) + to;
+
+	return insertSection(
+		remainingSections,
+		location.toSpliced(-1, 1, newLocation < 0 ? 0 : newLocation),
+		deleted,
+	);
+};

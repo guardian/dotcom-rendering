@@ -4,7 +4,12 @@
  */
 
 import { createContext, useContext, type Dispatch } from 'react';
-import { deleteSection, insertSection, type Section } from './appsNav';
+import {
+	deleteSection,
+	insertSection,
+	moveSection,
+	type Section,
+} from './appsNav';
 
 type State = {
 	sections: Section[];
@@ -51,6 +56,14 @@ type Action =
 	  }
 	| {
 			kind: 'cancelInsert';
+	  }
+	| {
+			kind: 'moveDown';
+			location: number[];
+	  }
+	| {
+			kind: 'moveUp';
+			location: number[];
 	  };
 
 export const DispatchContext = createContext<Dispatch<Action>>((_a: Action) => {
@@ -167,5 +180,30 @@ export const reducer = (state: State, action: Action): State => {
 			};
 		case 'cancelInsert':
 			return { ...state, insertingAt: undefined };
+		case 'moveDown': {
+			const result = moveSection(state.sections, action.location, 1);
+
+			if (result.kind === 'error') {
+				return {
+					...state,
+					error: `Failed to move down at location ${location}, ${result.error}`,
+				};
+			}
+
+			return { ...state, sections: result.value };
+		}
+
+		case 'moveUp': {
+			const result = moveSection(state.sections, action.location, -1);
+
+			if (result.kind === 'error') {
+				return {
+					...state,
+					error: `Failed to move up at location ${location}, ${result.error}`,
+				};
+			}
+
+			return { ...state, sections: result.value };
+		}
 	}
 };

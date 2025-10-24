@@ -12,7 +12,9 @@ import {
 import { type AppsNav, type Section } from './appsNav';
 import {
 	Button,
+	SvgArrowDownStraight,
 	SvgArrowOutdent,
+	SvgArrowUpStraight,
 	SvgBin,
 	SvgFolderFilled,
 	SvgIndent,
@@ -176,6 +178,32 @@ const SectionActions = (props: { location: number[] }) => {
 				})}
 			>
 				Insert After
+			</Button>
+			<Button
+				size="xsmall"
+				priority="secondary"
+				icon={<SvgArrowUpStraight />}
+				onClick={() =>
+					dispatch({ kind: 'moveUp', location: props.location })
+				}
+				cssOverrides={css({
+					marginLeft: space[1],
+				})}
+			>
+				Move Up
+			</Button>
+			<Button
+				size="xsmall"
+				priority="secondary"
+				icon={<SvgArrowDownStraight />}
+				onClick={() =>
+					dispatch({ kind: 'moveDown', location: props.location })
+				}
+				cssOverrides={css({
+					marginLeft: space[1],
+				})}
+			>
+				Move Down
 			</Button>
 		</>
 	);
