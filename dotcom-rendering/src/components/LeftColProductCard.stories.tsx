@@ -80,3 +80,53 @@ export const SingleCta = () => (
 		lowestPrice={'£89.99'}
 	/>
 );
+
+export const ShortCta = () => (
+	<LeftColProductCard
+		{...sampleProductCard}
+		productCtas={[
+			{
+				url: 'https://www.theguardian.com',
+				label: '£8 at Z',
+			},
+		]}
+		lowestPrice={'£89.99'}
+	/>
+);
+
+export const LotsOfCtas = () => (
+	<LeftColProductCard
+		{...sampleProductCard}
+		productCtas={[
+			{
+				url: 'https://www.theguardian.com',
+				label: '£89.99 at Cotswolds Outdoors',
+			},
+			{
+				url: 'https://www.theguardian.com',
+				label: '£89 at Zara',
+			},
+			{
+				url: 'https://www.theguardian.com',
+				label: '£9 at Kenwood',
+			},
+			{
+				url: 'https://www.theguardian.com',
+				label: '£70 at Amazon',
+			},
+			{
+				url: 'https://www.theguardian.com',
+				label: '£12 for 10 at John Lewis',
+			},
+			{
+				url: 'https://www.theguardian.com',
+				label: '£30 at eBay',
+			},
+			{
+				url: 'https://www.theguardian.com',
+				label: '£45 at Etsy',
+			},
+		]}
+		lowestPrice={'£89.99'}
+	/>
+);
