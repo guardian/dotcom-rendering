@@ -265,5 +265,3 @@ export const rawFontsCss = fontList
 `,
 	)
 	.join('\n');
-
-export const fontsCss = rawFontsCss;

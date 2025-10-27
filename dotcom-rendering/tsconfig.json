@@ -24,6 +24,9 @@
 			"webpack-env",
 			"youtube",
 			"twitter-for-web",
+			// This is to fix a "Cannot find namespace 'Chai'" error that arose during
+			// the upgrade to Storybook 9. Storybook uses vitest, which has chai as a
+			// dependency, and this makes the chai types available globally.
 			"chai"
 		]
 	},

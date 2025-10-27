@@ -4,6 +4,7 @@ import { transpileExclude, getLoaders } from '../webpack/webpack.config.client';
 import { saveStories } from '../scripts/gen-stories/get-stories.mjs';
 import type { StorybookConfig } from '@storybook/react-webpack5';
 import { svgr } from '../webpack/svg.cjs';
+import process from 'node:process';
 
 // Generate dynamic Card and Layout stories
 saveStories();
@@ -14,7 +15,6 @@ const config: StorybookConfig = {
 		backgrounds: true,
 		controls: true,
 		viewport: true,
-		toolbars: true,
 	},
 
 	stories: [
@@ -32,7 +32,6 @@ const config: StorybookConfig = {
 	addons: [
 		'@storybook/addon-webpack5-compiler-swc',
 		'@storybook/addon-docs',
-		'@storybook/addon-a11y',
 		'@storybook/addon-backgrounds',
 	],
 
@@ -55,8 +54,9 @@ const config: StorybookConfig = {
 		// e.g process?.env?.SOME_VAR
 		config.plugins?.push(
 			new webpack.DefinePlugin({
-				process: JSON.stringify({
-					env: { SDC_URL: process.env.SDC_URL },
+				'process.env': JSON.stringify({
+					SDC_URL: process.env.SDC_URL,
+					HOSTNAME: process.env.HOSTNAME ?? 'localhost',
 				}),
 			}),
 			// We rely on Buffer for our bridget thrift client
