@@ -163,7 +163,9 @@ export default {
 
 	parameters: {
 		backgrounds: {
+			default: 'transparent',
 			options: {
+				transparent: { name: 'Transparent', value: 'transparent' },
 				grey: { name: 'Grey', value: 'lightgrey' },
 				red: { name: 'Red', value: sourcePalette.news[300] },
 			},
@@ -172,5 +174,12 @@ export default {
 			options: guardianViewports,
 		},
 		layout: 'fullscreen',
+	},
+
+	initialGlobals: {
+		viewport: {
+			value: 'wide',
+			isRotated: false,
+		},
 	},
 } satisfies Preview;
