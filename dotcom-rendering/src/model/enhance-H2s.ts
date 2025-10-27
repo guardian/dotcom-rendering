@@ -86,14 +86,13 @@ export const enhanceH2s = (elements: FEElement[]): FEElement[] => {
 			element._type ===
 			'model.dotcomrendering.pageElements.ProductBlockElement'
 		) {
-			const subheadingHtml = `${element.primaryHeading || ''} ${
-				element.secondaryHeading || ''
-			}`;
+			const subheadingHtml = `<h2>${
+				element.primaryHeading ? `${element.primaryHeading}</br>` : ''
+			} ${element.secondaryHeading || ''}</h2>`;
 
 			const h2Id = shouldUseElementId
 				? element.elementId
 				: generateId(element.elementId, subheadingHtml, slugifiedIds);
-
 			return { ...element, h2Id };
 		} else {
 			// Otherwise, do nothing
