@@ -17,6 +17,7 @@ import {
 	globalColourScheme,
 	globalColourSchemeDecorator,
 } from './toolbar/globalColourScheme';
+import { palette as sourcePalette } from '@guardian/source/foundations';
 
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
 Lazy.disabled = isChromatic();
@@ -161,16 +162,15 @@ export default {
 	],
 
 	parameters: {
+		backgrounds: {
+			options: {
+				grey: { name: 'Grey', value: 'lightgrey' },
+				red: { name: 'Red', value: sourcePalette.news[300] },
+			},
+		},
 		viewport: {
 			options: guardianViewports,
 		},
 		layout: 'fullscreen',
-	},
-
-	initialGlobals: {
-		viewport: {
-			value: 'wide',
-			isRotated: false,
-		},
 	},
 } satisfies Preview;

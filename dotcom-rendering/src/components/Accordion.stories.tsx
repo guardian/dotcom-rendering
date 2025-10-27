@@ -7,11 +7,10 @@ import { Accordion as AccordionComponent } from './Accordion';
 
 const meta = {
 	component: AccordionComponent,
+	globals: {
+		backgrounds: { value: 'grey' },
+	},
 	parameters: {
-		backgrounds: {
-			default: 'grey',
-			values: [{ name: 'grey', value: 'lightgrey' }],
-		},
 		chromatic: {
 			modes: {
 				'light mobileMedium': allModes['light mobileMedium'],
