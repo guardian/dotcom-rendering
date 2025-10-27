@@ -49,18 +49,6 @@ const baseCard = css`
 	${from.mobileLandscape} {
 		column-gap: 20px;
 	}
-	${from.tablet} {
-		img {
-			height: 328px;
-			width: 328px;
-		}
-	}
-	${from.desktop} {
-		img {
-			height: 288px;
-			width: 288px;
-		}
-	}
 `;
 
 const hideFromWide = css`
