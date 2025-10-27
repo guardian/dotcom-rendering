@@ -1,6 +1,5 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { space } from '@guardian/source/foundations';
 import type {
 	ButtonPriority,
 	ThemeButton,
@@ -64,10 +63,9 @@ export const ProductLinkButton = ({
 		>
 			<span
 				css={css`
-					text-align: center;
 					white-space: normal;
-					max-width: 100%;
-					padding: ${space[1]}px 0;
+					width: 100%;
+					padding: 10px 0 10px;
 				`}
 			>
 				{label}
