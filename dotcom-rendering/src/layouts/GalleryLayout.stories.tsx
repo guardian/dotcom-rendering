@@ -105,3 +105,26 @@ export const Web = {
 		],
 	},
 } satisfies Story;
+
+export const WebWithoutMainMedia = {
+	args: {
+		renderingTarget: 'Web',
+		NAV: {
+			...extractNAV(webArticle.frontendData.nav),
+			selectedPillar: getCurrentPillar(webArticle.frontendData),
+		},
+		gallery: {
+			...addBrandingAndAffiliateDisclaimer(webArticle),
+			mainMedia: undefined,
+		},
+	},
+	parameters: {
+		formats: [
+			{
+				design: webArticle.design,
+				display: webArticle.display,
+				theme: webArticle.theme,
+			},
+		],
+	},
+} satisfies Story;
