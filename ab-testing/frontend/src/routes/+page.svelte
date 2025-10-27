@@ -35,7 +35,7 @@
 		<AudienceBreakdown tests={activeABtests} />
 		<Table tests={allABTests} />
 	{:else}
-		<p>There are <b>no active</b> AB tests currently configured!</p>
+		<p>There are <b>no active</b> A/B tests currently configured!</p>
 	{/if}
 </section>
 
