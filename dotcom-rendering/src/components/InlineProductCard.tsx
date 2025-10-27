@@ -121,10 +121,11 @@ const customAttributesContainer = css`
 	border-top: 1px solid ${palette('--section-border')};
 	padding-top: ${space[2]}px;
 	display: grid;
-	column-gap: inherit;
+	gap: ${space[3]}px;
 
 	${from.mobileLandscape} {
 		grid-template-columns: 1fr 1fr;
+		gap: ${space[5]}px;
 	}
 `;
 
