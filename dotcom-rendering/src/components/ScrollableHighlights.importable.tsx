@@ -369,7 +369,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 								showQuotedHeadline={trail.showQuotedHeadline}
 								mainMedia={trail.mainMedia}
 								starRating={trail.starRating}
-								storeInteraction={() => {
+								trackCardClick={() => {
 									trackCardEngagement('CLICK', trail);
 								}}
 							/>
