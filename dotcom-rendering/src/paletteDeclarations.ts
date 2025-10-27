@@ -5092,7 +5092,7 @@ const privacyTextSupportingSubduedDark: PaletteFunction = () =>
 const productCardBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 const productCardBackgroundDark: PaletteFunction = () =>
-	sourcePalette.neutral[7];
+	sourcePalette.neutral[10];
 
 const productCardBorderLight: PaletteFunction = () =>
 	sourcePalette.lifestyle[300];
