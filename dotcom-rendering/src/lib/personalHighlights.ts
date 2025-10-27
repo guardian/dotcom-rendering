@@ -2,22 +2,28 @@ import { isObject, storage } from '@guardian/libs';
 import type { DCRFrontCard } from '../types/front';
 
 /*
- * We want to better surface content in the highglihgts container that is beyond the fold.
- * To do this, the ordering of the highlights container is affected by user engagement.
+ * We want to better surface content in the "highlights" container that is beyond the fold.
+ * To do this, user engagement will affect the ordering of the container.
  * If a card has been clicked, we consider that card engaged with and move it to the back of the container.
- * If a card has been ignored 3 or more times, we consider the card unengaged and move it to the back of the container.
- * If the highlights container has been updated by editorial, we reset the ordering to allow for editorial oversight.
+ * If a card has been viewed 3 or more times but not actively interacted with (i.e. clicked), we consider the card unengaged and move it to the back of the container.
+ * If editorial has updated the highlights container, we reset the ordering to allow for editorial oversight.
+ * The user only stores one highlight container history in storage. If a different front is visited that has a highlights container,
+ * it will reset local storage with the new container data.
  * */
 
 type HighlightCardHistory = {
-	card: DCRFrontCard;
+	card: DCRFrontCard; // TODO: store a card indentifier rather than the whole card.
 	viewCount: number;
-	clicked: boolean;
+	wasClicked: boolean;
 };
 
 export type HighlightHistory = Array<HighlightCardHistory>;
 
-export const HighlightHistoryKey = 'gu.history.highlights';
+type CardEngagement = 'VIEW' | 'CLICK';
+
+export const HighlightsHistoryKey = 'gu.history.highlights';
+
+const MAX_VIEW_COUNT = 3;
 
 // todo: improve type of card
 const isValidHighlightHistory = (
@@ -29,56 +35,59 @@ const isValidHighlightHistory = (
 			isObject(highlight) &&
 			'card' in highlight &&
 			'viewCount' in highlight &&
-			'clicked' in highlight &&
+			'wasClicked' in highlight &&
 			isObject(highlight.card) &&
 			typeof highlight.viewCount === 'number' &&
-			typeof highlight.clicked === 'boolean',
+			typeof highlight.wasClicked === 'boolean',
 	);
 
-// Retrieve the user's highlight card order
+// Retrieve the user's highlight card order from local storage
 export const getHighlightHistory = (): HighlightHistory | undefined => {
 	try {
-		const highlighthistory = storage.local.get(HighlightHistoryKey);
+		const highlightHistory = storage.local.get(HighlightsHistoryKey);
 
-		if (!isValidHighlightHistory(highlighthistory)) {
-			throw new Error(`Invalid ${HighlightHistoryKey} value`);
+		if (!isValidHighlightHistory(highlightHistory)) {
+			throw new Error(`Invalid ${HighlightsHistoryKey} value`);
 		}
 
-		return highlighthistory;
+		return highlightHistory;
 	} catch (e) {
 		// error parsing the string, so remove the key
-		storage.local.remove(HighlightHistoryKey);
+		storage.local.remove(HighlightsHistoryKey);
 		return undefined;
 	}
 };
 
-const resetHighlights = (): void => {
-	storage.local.remove(HighlightHistoryKey);
+// remove highlight history from local storage
+const removeHighlightHistory = (): void => {
+	storage.local.remove(HighlightsHistoryKey);
 };
 
-export const storeOrderInStorage = (order: HighlightHistory): void => {
-	storage.local.set(HighlightHistoryKey, order);
+// store the personalised history in local storage
+export const storeHistoryInStorage = (order: HighlightHistory): void => {
+	storage.local.set(HighlightsHistoryKey, order);
 };
 
+// Maps DCR front cards to history records, initialising view and click tracking
 const convertCardsToHistory = (
 	cards: Array<DCRFrontCard>,
 ): HighlightHistory => {
-	return cards.map((card, index) => ({
+	return cards.map((card) => ({
 		card,
 		viewCount: 0,
-		clicked: false,
-		originalPosition: index,
-		moveTimestamp: undefined,
+		wasClicked: false,
 	}));
 };
 
+// Reset highlight history in local storage
 export const resetStoredHighlights = (cards: DCRFrontCard[]): void => {
-	resetHighlights();
+	removeHighlightHistory();
 	const highlights = convertCardsToHistory(cards);
-	storeOrderInStorage(highlights);
+	storeHistoryInStorage(highlights);
 };
 
-const getOrderedCardsFromHistory = (
+// Maps history records to DCR front cards for faster rendering
+const getCardsFromHistory = (
 	history: HighlightHistory,
 ): Array<DCRFrontCard> => {
 	return history.map((highlight) => {
@@ -88,37 +97,35 @@ const getOrderedCardsFromHistory = (
 
 export const getHighlightCards = (): Array<DCRFrontCard> => {
 	const history = getHighlightHistory() ?? [];
-	// const orderedHistory = orderCardsByHistory(history);
-	return getOrderedCardsFromHistory(history);
+	return getCardsFromHistory(history);
 };
 
+// Track when a user has clicked on a highlight card
 const trackCardClick = (
 	highlights: HighlightHistory,
 	card?: DCRFrontCard,
 ): HighlightHistory => {
+	// if we don't have a card, return highlights as is
 	if (!card) return highlights;
 
-	// find the matching card
 	const index = highlights.findIndex((el) => el.card.url === card.url);
-	if (index === -1) return highlights; // card not found
 
-	// copy array so we don't mutate the original
-	const newHighlights = [...highlights];
+	const foundCard = highlights[index];
 
-	// remove the found element
-	const [found] = newHighlights.splice(index, 1);
-	if (!found || found.clicked) return newHighlights;
+	/* if we can't find the card, or it has already been clicked, return highlights as is */
+	if (!foundCard || foundCard.wasClicked) return highlights;
 
-	// update it
-	const updated = {
-		...found,
-		clicked: true,
+	const updatedCard = {
+		...foundCard,
+		wasClicked: true,
 	};
 
-	// move to the end
-	newHighlights.push(updated);
-
-	return newHighlights;
+	// Rebuild without the clicked card, then append the updated one
+	return [
+		...highlights.slice(0, index),
+		...highlights.slice(index + 1),
+		updatedCard,
+	];
 };
 
 const trackCardView = (highlights: HighlightHistory): HighlightHistory => {
@@ -128,7 +135,7 @@ const trackCardView = (highlights: HighlightHistory): HighlightHistory => {
 	const updatedCards: HighlightCardHistory[] = [];
 
 	const newHighlights = highlights.map((el) => {
-		if (viewedCards.includes(el) && el.viewCount < 3) {
+		if (viewedCards.includes(el) && el.viewCount < MAX_VIEW_COUNT) {
 			const newViewCount = el.viewCount + 1;
 			const updated = { ...el, viewCount: newViewCount };
 			updatedCards.push(updated);
@@ -138,7 +145,7 @@ const trackCardView = (highlights: HighlightHistory): HighlightHistory => {
 	});
 
 	// Separate the updated cards that now have viewCount >= 3
-	const toMove = updatedCards.filter((el) => el.viewCount >= 3);
+	const toMove = updatedCards.filter((el) => el.viewCount >= MAX_VIEW_COUNT);
 	if (toMove.length === 0) return newHighlights;
 
 	// Remove those cards from their current positions
@@ -147,62 +154,6 @@ const trackCardView = (highlights: HighlightHistory): HighlightHistory => {
 	// Append them to the end, preserving order
 	return [...remaining, ...toMove];
 };
-
-//
-// const trackCardView = (highlights: OrderedHighlights): OrderedHighlights => {
-// 	const unviewedCards = highlights.slice(0, 2);
-// 	return highlights.map((el) =>
-// 		unviewedCards.includes(el)
-// 			? { ...el, viewCount: (el.viewCount += 1) }
-// 			: el,
-// 	);
-//
-//
-// };
-
-// const shouldDemoteCard = (card: HighlightCard) => {
-// 	return card.viewCount > 2 || card.clicked;
-// };
-
-// type Buckets = [keep: HighlightCard[], demote: HighlightCard[]];
-//
-// export const orderCardsByHistory = (
-// 	highlights: OrderedHighlights,
-// ): OrderedHighlights => {
-//
-//
-//
-//
-// 	//
-// 	// // First, order the highlights by their original order
-// 	// const sortedHighlights = [...highlights].sort(
-// 	// 	(a, b) => a.originalPosition - b.originalPosition
-// 	// );
-//
-// 	// Next, organise the cards into two buckets;
-// 	// a "kept" bucket for those cards which should retain their position,
-// 	// and a "demote" bucket for those which should be demoted to the back of the container
-// 	//
-// 	const [keep, demote] = highlights.reduce((acc: Buckets, card) => {
-// 		const [kept, demoted] = acc;
-//
-// 		if (card.moveTimestamp) {
-// 			demoted.push(card);
-// 		// }
-// 		// if (shouldDemoteCard(card)) {
-// 		// 	demoted.push(card);
-// 		} else {
-// 			kept.push(card);
-// 		}
-// 		return acc;
-// 	}, [[],[]])
-//
-//
-// 	return [...keep, ...demote.sort((a, b) => new Date(b.moveTimestamp ??0) - new Date(a.moveTimestamp))];
-//
-// };
-
-type CardEngagement = 'VIEW' | 'CLICK';
 
 export const trackCardEngagement = (
 	engagement: CardEngagement,
@@ -215,5 +166,5 @@ export const trackCardEngagement = (
 			? trackCardView(history)
 			: trackCardClick(history, card);
 
-	storeOrderInStorage(newHistory);
+	storeHistoryInStorage(newHistory);
 };
