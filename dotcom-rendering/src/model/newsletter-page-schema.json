@@ -180,6 +180,9 @@
                 },
                 "googleRecaptchaSiteKeyVisible": {
                     "type": "string"
+                },
+                "contentType": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -187,6 +190,7 @@
                 "adUnit",
                 "ajaxUrl",
                 "commercialBundleUrl",
+                "contentType",
                 "dcrSentryDsn",
                 "dfpAccountId",
                 "discussionApiUrl",
