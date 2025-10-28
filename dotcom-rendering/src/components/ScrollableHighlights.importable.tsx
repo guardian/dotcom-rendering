@@ -12,10 +12,9 @@ import { isServer } from '../lib/isServer';
 import { ophanComponentId } from '../lib/ophan-helpers';
 import {
 	getHighlightCards,
-	getHighlightHistory,
 	resetStoredHighlights,
 	trackCardEngagement,
-} from '../lib/personalHighlights';
+} from '../lib/personaliseHighlights';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { HighlightsCard } from './Masthead/HighlightsCard';
@@ -300,31 +299,20 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	}, [orderedTrails]);
 
 	useEffect(() => {
-		const ooo = getHighlightHistory();
-		const orderedHighlights = getHighlightCards();
-		console.log('>>> stored history', ooo);
-		console.log('>>> ordered highlights', orderedHighlights);
-		console.log('>>> trails', trails);
+		const personalisedHighlights = getHighlightCards();
 		if (
-			orderedHighlights.length === 0 ||
-			orderedHighlights.length !== trails.length ||
-			!isEqual(orderedHighlights, trails)
+			personalisedHighlights.length === 0 ||
+			personalisedHighlights.length !== trails.length ||
+			!isEqual(personalisedHighlights, trails)
 		) {
-			console.log(
-				'>>> highlights are out of whack',
-				orderedHighlights.length === 0,
-				orderedHighlights.length !== trails.length,
-				!isEqual(orderedHighlights, trails),
-			);
-			// store in local cache but dont bother setting in test trails as thats already set to trails
+			// store in local cache but don't bother setting in test trails as they are already set to trails
 			resetStoredHighlights(trails);
 			// display highlights
 			setShouldShowHighlights(true);
 			return;
 		}
-		console.log('>>> highlights are good');
 		// otherwise history is different to trails so set in state
-		setOrderedTrails(orderedHighlights);
+		setOrderedTrails(personalisedHighlights);
 	}, [trails]);
 
 	const { ophanComponentLink, ophanComponentName, ophanFrontName } =

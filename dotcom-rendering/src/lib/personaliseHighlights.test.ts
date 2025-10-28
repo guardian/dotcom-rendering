@@ -12,7 +12,7 @@ import {
 	trackCardClick,
 	trackCardEngagement,
 	trackCardView,
-} from './personalHighlights';
+} from './personaliseHighlights';
 
 // Mock @guardian/libs storage + isObject
 jest.mock('@guardian/libs', () => {

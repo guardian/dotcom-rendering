@@ -12,7 +12,7 @@ import type { DCRFrontCard } from '../types/front';
  * */
 
 type HighlightCardHistory = {
-	card: DCRFrontCard; // TODO: store a card indentifier rather than the whole card.
+	card: DCRFrontCard; // TODO: store a card identifier (eg url) rather than the whole card.
 	viewCount: number;
 	wasClicked: boolean;
 };
@@ -25,7 +25,6 @@ export const HighlightsHistoryKey = 'gu.history.highlights';
 
 const MAX_VIEW_COUNT = 3;
 
-// todo: improve type of card
 const isValidHighlightHistory = (
 	history: unknown,
 ): history is HighlightHistory =>
