@@ -44,6 +44,7 @@ export type ArticleFields = {
 	display: ArticleDisplay;
 	theme: ArticleTheme;
 	storyPackage: StoryPackage | undefined;
+	serverTime?: number | undefined;
 };
 
 export type Gallery = ArticleFields & {
@@ -87,6 +88,8 @@ export const enhanceArticleType = (
 	renderingTarget: RenderingTarget,
 ): Article => {
 	const format = decideFormat(data.format);
+
+	const serverTime = Date.now();
 
 	const imagesForLightbox = data.config.switches.lightbox
 		? buildLightboxImages(data.format, data.blocks, data.mainMediaElements)
@@ -141,6 +144,7 @@ export const enhanceArticleType = (
 			design,
 			display: format.display,
 			theme: format.theme,
+			serverTime,
 			bodyElements: blocks.flatMap((block) =>
 				block.elements.filter(
 					(element) =>
@@ -163,6 +167,7 @@ export const enhanceArticleType = (
 		display: format.display,
 		theme: format.theme,
 		storyPackage,
+		serverTime,
 		frontendData: {
 			...data,
 			mainMediaElements,
