@@ -31,7 +31,7 @@
 	</p>
 </section>
 <section>
-	{#if activeABtests.length > 0}
+	{#if allABtests.length > 0}
 		<AudienceBreakdown tests={activeABtests} />
 		<Table tests={allABTests} />
 	{:else}
