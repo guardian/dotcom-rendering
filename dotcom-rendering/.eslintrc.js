@@ -212,7 +212,7 @@ module.exports = {
 			files: ['**/**.js'],
 			rules: {
 				'global-require': 'off',
-				'@typescript-eslint/no-var-requires': 'off',
+				'@typescript-eslint/no-require-imports': 'off',
 				'@typescript-eslint/no-unsafe-member-access': 'off',
 				'@typescript-eslint/no-misused-promises': 'off',
 			},
@@ -245,7 +245,7 @@ module.exports = {
 		{
 			files: ['**/**.tsx'],
 			rules: {
-				'@typescript-eslint/ban-types': [
+				'@typescript-eslint/no-restricted-types': [
 					'warn',
 					{
 						types: {
@@ -259,7 +259,7 @@ module.exports = {
 						},
 					},
 				],
-				'@typescript-eslint/ban-types': [
+				'@typescript-eslint/no-restricted-types': [
 					'error',
 					{
 						types: {
@@ -274,7 +274,6 @@ module.exports = {
 							'React.FC':
 								'Please use const MyThing = ({foo, bar}: Props) instead',
 						},
-						extendDefaults: true,
 					},
 				],
 			},
