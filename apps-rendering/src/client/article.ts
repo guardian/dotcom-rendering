@@ -85,7 +85,7 @@ function followToggle(
 		if (isFollowing) {
 			void bridgetClient.unfollow(topic).then((unfollow) => {
 				// unfollow will be true if the update was successful
-				unfollow &&
+				if (unfollow) {
 					ReactDOM.render(
 						h(followStatusComponent, {
 							isFollowing: false,
@@ -93,11 +93,12 @@ function followToggle(
 						}),
 						followStatus,
 					);
+				}
 			});
 		} else {
 			void bridgetClient.follow(topic).then((follow) => {
 				// follow will be true if the update was successful
-				follow &&
+				if (follow) {
 					ReactDOM.render(
 						h(followStatusComponent, {
 							isFollowing: true,
@@ -105,6 +106,7 @@ function followToggle(
 						}),
 						followStatus,
 					);
+				}
 			});
 		}
 	});
@@ -167,9 +169,11 @@ function conditionallyRenderFollowTagComponent(
 				isMyGuardianEnabled,
 				tagIsFollowingState,
 			]) => {
-				isBridgetCompatible &&
+				if (
+					isBridgetCompatible &&
 					isMyGuardianEnabled &&
-					followTagStatus &&
+					followTagStatus
+				) {
 					ReactDOM.render(
 						h(FollowTagStatus, {
 							isFollowing: tagIsFollowingState,
@@ -177,6 +181,7 @@ function conditionallyRenderFollowTagComponent(
 						}),
 						followTagStatus,
 					);
+				}
 
 				followTag?.addEventListener('click', followTagClick);
 				followTag?.setAttribute('aria-hidden', 'false');

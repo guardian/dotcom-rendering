@@ -14,7 +14,6 @@ type Story = StoryObj<typeof meta>;
 
 export const MoreGalleries = {
 	args: {
-		absoluteServerTimes: false,
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		guardianBaseUrl: 'https://www.theguardian.com',
 		trails: [
