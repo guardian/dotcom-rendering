@@ -4,12 +4,18 @@ import { transpileExclude, getLoaders } from '../webpack/webpack.config.client';
 import { saveStories } from '../scripts/gen-stories/get-stories.mjs';
 import type { StorybookConfig } from '@storybook/react-webpack5';
 import { svgr } from '../webpack/svg.cjs';
+import process from 'node:process';
 
 // Generate dynamic Card and Layout stories
 saveStories();
 
 const config: StorybookConfig = {
-	features: {},
+	features: {
+		actions: true,
+		backgrounds: true,
+		controls: true,
+		viewport: true,
+	},
 
 	stories: [
 		'../src/**/*.stories.@(tsx)',
@@ -23,21 +29,7 @@ const config: StorybookConfig = {
 		{ from: '../src/static', to: '/static/frontend/' },
 	],
 
-	addons: [
-		{
-			name: '@storybook/addon-essentials',
-			options: {
-				actions: true,
-				backgrounds: true,
-				controls: true,
-				docs: true,
-				viewport: true,
-				toolbars: true,
-			},
-		},
-		'@storybook/addon-interactions',
-		'@storybook/addon-webpack5-compiler-swc',
-	],
+	addons: ['@storybook/addon-webpack5-compiler-swc', '@storybook/addon-docs'],
 
 	webpackFinal: async (config) => {
 		// Get project specific webpack options
@@ -58,7 +50,10 @@ const config: StorybookConfig = {
 		// e.g process?.env?.SOME_VAR
 		config.plugins?.push(
 			new webpack.DefinePlugin({
-				process: '{}',
+				'process.env': JSON.stringify({
+					SDC_URL: process.env.SDC_URL,
+					HOSTNAME: process.env.HOSTNAME,
+				}),
 			}),
 			// We rely on Buffer for our bridget thrift client
 			new webpack.ProvidePlugin({

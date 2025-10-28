@@ -1,5 +1,3 @@
-import CleanCSS from 'clean-css';
-
 type FontFamily =
 	| 'GH Guardian Headline'
 	| 'Guardian Egyptian Web' // Legacy of GH Guardian Headline
@@ -252,7 +250,7 @@ const fontList: FontDisplay[] = [
 const getFontUrl = (path: string): string =>
 	`https://assets.guim.co.uk/static/frontend/${path}`;
 
-const rawFontsCss = fontList
+export const rawFontsCss = fontList
 	.map(
 		(font) => `
 @font-face {
@@ -267,5 +265,3 @@ const rawFontsCss = fontList
 `,
 	)
 	.join('\n');
-
-export const fontsCss = new CleanCSS().minify(rawFontsCss).styles;

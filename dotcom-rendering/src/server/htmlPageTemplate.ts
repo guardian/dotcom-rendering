@@ -1,9 +1,10 @@
 import { isUndefined } from '@guardian/libs';
 import { resets, palette as sourcePalette } from '@guardian/source/foundations';
+import CleanCSS from 'clean-css';
 import he from 'he';
 import { ASSET_ORIGIN } from '../lib/assets';
 import { escapeData } from '../lib/escapeData';
-import { fontsCss } from '../lib/fonts-css';
+import { rawFontsCss } from '../lib/fonts-css';
 import type { Guardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
 import { GIT_COMMIT_HASH } from './prout';
@@ -55,6 +56,8 @@ const fontPreloadTags = fontFiles
 			`<link rel="preload" href="${fontFile}" as="font" crossorigin>`,
 	)
 	.join('\n');
+
+const minifiedFontsCss = new CleanCSS().minify(rawFontsCss).styles;
 
 export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 	const {
@@ -391,7 +394,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 						: ''
 				}
                 ${scriptTags.join('\n')}
-                <style class="webfont">${fontsCss}</style>
+				<style class="webfont">${minifiedFontsCss}</style>
                 <style>${resets.resetCSS}</style>
 				${css}
 				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { getDataLinkNameCard } from '../lib/getDataLinkName';
 import { MoreGalleries as MoreGalleriesComponent } from './MoreGalleries';
