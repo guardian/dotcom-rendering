@@ -45,7 +45,7 @@
 		"@guardian/source-development-kitchen": "18.1.1",
 		"@guardian/support-dotcom-components": "7.10.1",
 		"@guardian/tsconfig": "0.2.0",
-		"@playwright/test": "1.52.0",
+		"@playwright/test": "1.56.1",
 		"@sentry/browser": "10.20.0",
 		"@storybook/addon-docs": "9.1.13",
 		"@storybook/addon-webpack5-compiler-swc": "4.0.1",
