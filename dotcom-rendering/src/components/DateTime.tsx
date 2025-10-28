@@ -48,6 +48,9 @@ const formatTime = (date: Date, locale: string, timeZone: string) =>
 		})
 		.replace(':', '.');
 
+const ONE_MINUTE = 60_000;
+const MAX_DATE = 8.64e15;
+
 export const DateTime = ({
 	date,
 	showWeekday,
@@ -58,9 +61,6 @@ export const DateTime = ({
 }: Props & DisplayProps) => {
 	const { editionId } = useConfig();
 	const { dateLocale, timeZone } = getEditionFromId(editionId);
-
-	const ONE_MINUTE = 60_000;
-	const MAX_DATE = 8.64e15;
 
 	/**
 	 * Server time (if set) is rounded down to the previous minute to ensure
