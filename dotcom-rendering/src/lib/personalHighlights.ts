@@ -69,7 +69,7 @@ export const storeHistoryInStorage = (order: HighlightHistory): void => {
 };
 
 // Maps DCR front cards to history records, initialising view and click tracking
-const convertCardsToHistory = (
+export const convertCardsToHistory = (
 	cards: Array<DCRFrontCard>,
 ): HighlightHistory => {
 	return cards.map((card) => ({
@@ -87,7 +87,7 @@ export const resetStoredHighlights = (cards: DCRFrontCard[]): void => {
 };
 
 // Maps history records to DCR front cards for faster rendering
-const getCardsFromHistory = (
+export const getCardsFromHistory = (
 	history: HighlightHistory,
 ): Array<DCRFrontCard> => {
 	return history.map((highlight) => {
@@ -101,7 +101,7 @@ export const getHighlightCards = (): Array<DCRFrontCard> => {
 };
 
 // Track when a user has clicked on a highlight card
-const trackCardClick = (
+export const trackCardClick = (
 	highlights: HighlightHistory,
 	card?: DCRFrontCard,
 ): HighlightHistory => {
@@ -128,7 +128,9 @@ const trackCardClick = (
 	];
 };
 
-const trackCardView = (highlights: HighlightHistory): HighlightHistory => {
+export const trackCardView = (
+	highlights: HighlightHistory,
+): HighlightHistory => {
 	// we always track a view for the first 2 cards in the highlights container as we can guarantee they appear on screen.
 	const viewedCards = highlights.slice(0, 2);
 
