@@ -52,7 +52,7 @@ const config: StorybookConfig = {
 			new webpack.DefinePlugin({
 				'process.env': JSON.stringify({
 					SDC_URL: process.env.SDC_URL,
-					HOSTNAME: process.env.HOSTNAME ?? 'localhost',
+					HOSTNAME: process.env.HOSTNAME,
 				}),
 			}),
 			// We rely on Buffer for our bridget thrift client
