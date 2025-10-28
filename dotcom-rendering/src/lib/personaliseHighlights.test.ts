@@ -131,7 +131,6 @@ describe('Personalise Highlights', () => {
 			// baseHistory[4] and baseHistory[5] never appear in the first two before the first reshuffle,
 			// and after 5 iterations it's still not guaranteed they were front. To be safe,
 			// assert at least that at least one tail item remains at 0 (indicating only fronts are incremented).
-			// We'll do a lighter assertion:
 			expect(h.viewCount).toBeGreaterThanOrEqual(0);
 		}
 	});
