@@ -227,33 +227,37 @@ const HorizontalDivider = () => (
 	/>
 );
 
-const podcastImageStyles = (imageSize: MediaSizeType) => {
-	switch (imageSize) {
-		case 'scrollable-small':
-			return css`
-				width: 69px;
-				height: 69px;
-				${from.tablet} {
-					width: 98px;
-					height: 98px;
-				}
-			`;
-
-		case 'scrollable-medium':
-			return css`
+const podcastImageStyles = (
+	fixImageWidth: boolean,
+	imagePositionOnDesktop: MediaPositionType,
+) => {
+	if (fixImageWidth) {
+		return css`
+			width: 69px;
+			height: 69px;
+			${from.tablet} {
 				width: 98px;
 				height: 98px;
-				${from.tablet} {
-					width: 120px;
-					height: 120px;
-				}
-			`;
-		default:
-			return css`
+			}
+		`;
+	}
+
+	if (
+		imagePositionOnDesktop === 'top' ||
+		imagePositionOnDesktop === 'bottom'
+	) {
+		return css`
+			width: 98px;
+			height: 98px;
+			${from.tablet} {
 				width: 120px;
 				height: 120px;
-			`;
+			}
+		`;
 	}
+
+	// Don't fix the image width if the image is horizontal on desktop
+	return undefined;
 };
 
 const getMedia = ({
@@ -908,8 +912,9 @@ export const Card = ({
 						mediaPositionOnMobile={mediaPositionOnMobile}
 						fixImageWidth={
 							fixImageWidth ??
-							(mediaPositionOnMobile === 'left' ||
-								mediaPositionOnMobile === 'right')
+							(!isBetaContainer &&
+								(mediaPositionOnMobile === 'left' ||
+									mediaPositionOnMobile === 'right'))
 						}
 						hideImageOverlay={media.type === 'slideshow'}
 						padMedia={isMediaCardOrNewsletter && isBetaContainer}
@@ -1119,7 +1124,12 @@ export const Card = ({
 						{media.type === 'podcast' && (
 							<>
 								{media.podcastImage?.src && !showKickerImage ? (
-									<div css={podcastImageStyles(mediaSize)}>
+									<div
+										css={podcastImageStyles(
+											!!fixImageWidth,
+											mediaPositionOnDesktop,
+										)}
+									>
 										<CardPicture
 											mainImage={media.podcastImage.src}
 											imageSize="small"

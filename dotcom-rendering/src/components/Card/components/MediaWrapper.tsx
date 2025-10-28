@@ -215,6 +215,15 @@ export const MediaWrapper = ({
 						mediaSize,
 						isBetaContainer,
 					}),
+				mediaType === 'podcast' &&
+					isHorizontalOnDesktop &&
+					!fixImageWidth &&
+					css`
+						flex-basis: 120px;
+						${from.desktop} {
+							flex-basis: 168px;
+						}
+					`,
 				mediaType === 'avatar' &&
 					css`
 						display: flex;
