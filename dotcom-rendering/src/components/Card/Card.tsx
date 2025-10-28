@@ -66,7 +66,6 @@ import { CardWrapper } from './components/CardWrapper';
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
 import type {
-	MediaFixedSizeOptions,
 	MediaPositionType,
 	MediaSizeType,
 } from './components/MediaWrapper';
@@ -157,7 +156,6 @@ export type Props = {
 	trailTextSize?: TrailTextSize;
 	/** A kicker image is seperate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
-	fixImageWidth?: boolean;
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
 	/** Feature flag for the labs redesign work */
@@ -399,7 +397,6 @@ export const Card = ({
 	showTopBarMobile = true,
 	trailTextSize,
 	showKickerImage = false,
-	fixImageWidth,
 	headlinePosition = 'inner',
 	showLabsRedesign = false,
 }: Props) => {
@@ -586,28 +583,6 @@ export const Card = ({
 		containerType === 'flexible/special' ||
 		containerType === 'flexible/general';
 
-	const isSmallCard =
-		containerType === 'scrollable/small' ||
-		containerType === 'scrollable/medium';
-
-	const mediaFixedSizeOptions = (): MediaFixedSizeOptions => {
-		if (isSmallCard) {
-			return {
-				mobile: 'tiny',
-				tablet: 'small',
-				desktop: 'small',
-			};
-		}
-
-		if (isFlexibleContainer) {
-			return {
-				mobile: 'small',
-			};
-		}
-
-		return { mobile: 'medium' };
-	};
-
 	const hideTrailTextUntil = () => {
 		if (isFlexibleContainer) {
 			return 'tablet';
@@ -660,7 +635,10 @@ export const Card = ({
 			return { row: 'small', column: 'small' };
 		}
 
-		if (isSmallCard) {
+		if (
+			containerType === 'scrollable/small' ||
+			containerType === 'scrollable/medium'
+		) {
 			return {
 				row: 'medium',
 				column: 'medium',
@@ -902,18 +880,16 @@ export const Card = ({
 				{media && (
 					<MediaWrapper
 						mediaSize={mediaSize}
-						mediaFixedSizes={mediaFixedSizeOptions()}
 						mediaType={media.type}
 						mediaPositionOnDesktop={mediaPositionOnDesktop}
 						mediaPositionOnMobile={mediaPositionOnMobile}
-						fixImageWidth={
-							fixImageWidth ??
-							(mediaPositionOnMobile === 'left' ||
-								mediaPositionOnMobile === 'right')
-						}
 						hideImageOverlay={media.type === 'slideshow'}
 						padMedia={isMediaCardOrNewsletter && isBetaContainer}
 						isBetaContainer={isBetaContainer}
+						isFlexibleContainer={isFlexibleContainer}
+						isScrollableSmallContainer={
+							containerType === 'scrollable/small'
+						}
 					>
 						{media.type === 'slideshow' && (
 							<div

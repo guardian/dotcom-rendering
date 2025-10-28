@@ -9,14 +9,6 @@ const mediaFixedSize = {
 	medium: 125,
 };
 
-type MediaFixedSize = keyof typeof mediaFixedSize;
-
-export type MediaFixedSizeOptions = {
-	mobile?: MediaFixedSize;
-	tablet?: MediaFixedSize;
-	desktop?: MediaFixedSize;
-};
-
 export type MediaPositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
 export type MediaSizeType =
 	| 'small'
@@ -34,18 +26,18 @@ export type MediaSizeType =
 type Props = {
 	children: React.ReactNode;
 	mediaSize: MediaSizeType;
-	mediaFixedSizes?: MediaFixedSizeOptions;
 	mediaType?: CardMediaType;
 	mediaPositionOnDesktop: MediaPositionType;
 	mediaPositionOnMobile: MediaPositionType;
-	fixImageWidth: boolean;
 	/**
 	 * Forces hiding the image overlay added to pictures & slideshows on hover.
 	 * This is to allow hiding the overlay on slideshow carousels where we don't
 	 * want it to be shown whilst retaining it for existing slideshows.
 	 */
 	hideImageOverlay?: boolean;
-	isBetaContainer?: boolean;
+	isBetaContainer: boolean;
+	isFlexibleContainer: boolean;
+	isScrollableSmallContainer: boolean;
 	padMedia?: boolean;
 };
 
@@ -148,6 +140,7 @@ const flexBasisStyles = ({
 			`;
 	}
 };
+
 /**
  * Below tablet, we fix the size of the media and add a margin around it.
  * The corresponding content flex grows to fill the space.
@@ -161,43 +154,37 @@ const fixMediaWidthStyles = (width: number) => css`
 	align-self: flex-start;
 `;
 
-const fixMediaWidth = ({
-	mobile,
-	tablet,
-	desktop,
-}: MediaFixedSizeOptions) => css`
-	${mobile &&
-	css`
-		${until.tablet} {
-			${fixMediaWidthStyles(mediaFixedSize[mobile])}
-		}
-	`}
-	${tablet &&
-	css`
-		${between.tablet.and.desktop} {
-			${fixMediaWidthStyles(mediaFixedSize[tablet])}
-		}
-	`}
-	${desktop &&
-	css`
-		${from.desktop} {
-			${fixMediaWidthStyles(mediaFixedSize[desktop])}
-		}
-	`}
+const fixMobileMediaWidth = (
+	isScrollableSmallContainer: boolean,
+	isFlexibleContainer: boolean,
+) => css`
+	${until.tablet} {
+		${fixMediaWidthStyles(mediaFixedSize.medium)}
+		${isFlexibleContainer && fixMediaWidthStyles(mediaFixedSize.small)}
+		${isScrollableSmallContainer && fixMediaWidthStyles(mediaFixedSize.tiny)}
+	}
+`;
+
+const fixDesktopMediaWidth = () => css`
+	${from.tablet} {
+		${fixMediaWidthStyles(mediaFixedSize.small)}
+	}
 `;
 
 export const MediaWrapper = ({
 	children,
 	mediaSize,
-	mediaFixedSizes = { mobile: 'medium' },
 	mediaType,
 	mediaPositionOnDesktop,
 	mediaPositionOnMobile,
-	fixImageWidth,
 	hideImageOverlay,
-	isBetaContainer = false,
+	isBetaContainer,
+	isFlexibleContainer,
+	isScrollableSmallContainer,
 	padMedia,
 }: Props) => {
+	const isHorizontalOnMobile =
+		mediaPositionOnMobile === 'left' || mediaPositionOnMobile === 'right';
 	const isHorizontalOnDesktop =
 		mediaPositionOnDesktop === 'left' || mediaPositionOnDesktop === 'right';
 
@@ -225,7 +212,12 @@ export const MediaWrapper = ({
 							display: none;
 						}
 					`,
-				fixImageWidth && fixMediaWidth(mediaFixedSizes),
+				isHorizontalOnMobile &&
+					fixMobileMediaWidth(
+						isFlexibleContainer,
+						isScrollableSmallContainer,
+					),
+				isScrollableSmallContainer && fixDesktopMediaWidth(),
 				isHorizontalOnDesktop &&
 					css`
 						${from.tablet} {
