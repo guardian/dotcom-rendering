@@ -239,7 +239,7 @@ const podcastImageStyles = (imageSize: MediaSizeType) => {
 				}
 			`;
 
-		case 'medium':
+		case 'scrollable-medium':
 			return css`
 				width: 98px;
 				height: 98px;

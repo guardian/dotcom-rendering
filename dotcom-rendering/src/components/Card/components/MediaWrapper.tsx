@@ -25,6 +25,7 @@ export type MediaSizeType =
 	| 'xlarge'
 	| 'jumbo'
 	| 'carousel'
+	| 'scrollable-medium'
 	| 'podcast'
 	| 'highlights-card'
 	| 'feature'
