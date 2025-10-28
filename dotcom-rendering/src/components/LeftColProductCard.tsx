@@ -10,7 +10,7 @@ import {
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import type { ProductImage } from '../types/content';
-import { ProductCardButtons } from './InlineProductCard';
+import { ProductCardButtons } from './ProductCardButtons';
 import { ProductCardImage } from './ProductCardImage';
 import type { ProductCardCta } from './ProductElement';
 
