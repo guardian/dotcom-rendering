@@ -13,14 +13,13 @@ test.describe('Commercial E2E tests', () => {
 		await cmpAcceptAll(page);
 
 		const fixedSlots = [
-			'carrot', // Not used often, likely to be unfilled
 			'right',
 			'merchandising-high',
 			'mostpop',
 			'merchandising',
 		];
 
-		const totalSlotsExpected = 16; // All slots, even if unfilled ie. `display: none`
+		const totalSlotsExpected = 15; // All slots, even if unfilled ie. `display: none`
 		const inlineSlots = totalSlotsExpected - fixedSlots.length;
 
 		// We are excluding survey slot as they can be switched off

@@ -158,7 +158,6 @@ export type Props = {
 	trailTextSize?: TrailTextSize;
 	/** A kicker image is seperate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
-	isInAllBoostsTest?: boolean;
 	fixImageWidth?: boolean;
 	subtitleSize?: SubtitleSize;
 	/** Determines if the headline should be positioned within the content or outside the content */
@@ -403,7 +402,6 @@ export const Card = ({
 	trailTextSize,
 	showKickerImage = false,
 	fixImageWidth,
-	isInAllBoostsTest = false,
 	headlinePosition = 'inner',
 	showLabsRedesign = false,
 	subtitleSize = 'small',
@@ -598,12 +596,18 @@ export const Card = ({
 	const mediaFixedSizeOptions = (): MediaFixedSizeOptions => {
 		if (isSmallCard) {
 			return {
-				mobile: isInAllBoostsTest ? undefined : 'tiny',
+				mobile: 'tiny',
 				tablet: 'small',
 				desktop: 'small',
 			};
 		}
-		if (isFlexibleContainer) return { mobile: 'small' };
+
+		if (isFlexibleContainer) {
+			return {
+				mobile: 'small',
+			};
+		}
+
 		return { mobile: 'medium' };
 	};
 
@@ -942,7 +946,6 @@ export const Card = ({
 								imagePositionOnMobile={mediaPositionOnMobile}
 								isBetaContainer={isBetaContainer}
 								isFlexibleContainer={isFlexibleContainer}
-								isInAllBoostsTest={isInAllBoostsTest}
 							>
 								<Avatar
 									src={media.avatarUrl}
@@ -950,7 +953,6 @@ export const Card = ({
 									imageSize={
 										isBetaContainer ? mediaSize : undefined
 									}
-									isInAllBoostsTest={isInAllBoostsTest}
 								/>
 							</AvatarContainer>
 						)}
@@ -1078,9 +1080,6 @@ export const Card = ({
 												!isMoreGalleriesOnwardContent
 											}
 											aspectRatio={aspectRatio}
-											isInAllBoostsTest={
-												isInAllBoostsTest
-											}
 										/>
 									</div>
 								)}
@@ -1098,7 +1097,6 @@ export const Card = ({
 										!isMoreGalleriesOnwardContent
 									}
 									aspectRatio={aspectRatio}
-									isInAllBoostsTest={isInAllBoostsTest}
 								/>
 								{isVideoMainMedia && mainMedia.duration > 0 && (
 									<div
@@ -1148,7 +1146,6 @@ export const Card = ({
 										alt={media.trailImage.altText}
 										loading={imageLoading}
 										aspectRatio={aspectRatio}
-										isInAllBoostsTest={isInAllBoostsTest}
 									/>
 								)}
 							</>

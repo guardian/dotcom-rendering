@@ -234,9 +234,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					hasPageSkin={hasPageSkin}
 					hasPageSkinContentSelfConstrain={true}
 					pageId={pageId}
-					wholePictureLogoSwitch={
-						front.config.switches.wholePictureLogo
-					}
 				/>
 
 				{isPaidContent && (
@@ -609,10 +606,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 									sectionId={ophanName}
 									collectionId={index + 1}
-									isInAllBoostsTest={
-										front.isNetworkFront &&
-										abTests.allBoostsVariant === 'variant'
-									}
 									containerLevel={collection.containerLevel}
 									showLabsRedesign={showLabsRedesign}
 								/>

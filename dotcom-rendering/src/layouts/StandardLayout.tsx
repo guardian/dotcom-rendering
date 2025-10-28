@@ -422,9 +422,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						showSlimNav={false}
 						hasPageSkinContentSelfConstrain={true}
 						pageId={article.pageId}
-						wholePictureLogoSwitch={
-							article.config.switches.wholePictureLogo
-						}
 					/>
 				</div>
 			)}

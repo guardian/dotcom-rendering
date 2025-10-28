@@ -1,4 +1,4 @@
-name: 🧪 Deploy CODE AB Testing Config
+name: 🧪 AB testing CI (CODE)
 
 permissions:
   contents: read
