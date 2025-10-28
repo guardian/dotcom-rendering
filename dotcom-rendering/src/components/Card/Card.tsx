@@ -229,7 +229,7 @@ const HorizontalDivider = () => (
 
 const podcastImageStyles = (imageSize: MediaSizeType) => {
 	switch (imageSize) {
-		case 'small':
+		case 'scrollable-small':
 			return css`
 				width: 69px;
 				height: 69px;
