@@ -31,11 +31,13 @@
 	</p>
 </section>
 <section>
-	{#if allABtests.length > 0}
+	{#if activeABtests.length > 0}
 		<AudienceBreakdown tests={activeABtests} />
+	{/if}
+	{#if allABTests.length > 0}
 		<Table tests={allABTests} />
 	{:else}
-		<p>There are <b>no active</b> A/B tests currently configured!</p>
+		<p>There are <b>ZERO</b> A/B tests currently configured!</p>
 	{/if}
 </section>
 
