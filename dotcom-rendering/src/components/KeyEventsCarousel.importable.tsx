@@ -17,7 +17,7 @@ interface Props {
 	keyEvents: Block[];
 	filterKeyEvents: boolean;
 	id: 'key-events-carousel-desktop' | 'key-events-carousel-mobile';
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	renderingTarget: RenderingTarget;
 }
 type ValidBlock = Block & {
@@ -110,7 +110,7 @@ export const KeyEventsCarousel = ({
 	keyEvents,
 	filterKeyEvents,
 	id,
-	absoluteServerTimes,
+	serverTime,
 	renderingTarget,
 }: Props) => {
 	const carousel = useRef<HTMLDivElement | null>(null);
@@ -162,7 +162,7 @@ export const KeyEventsCarousel = ({
 								isSummary={keyEvent.attributes.summary}
 								title={keyEvent.title}
 								cardPosition={`${index} of ${carouselLength}`}
-								absoluteServerTimes={absoluteServerTimes}
+								serverTime={serverTime}
 								renderingTarget={renderingTarget}
 							/>
 						);

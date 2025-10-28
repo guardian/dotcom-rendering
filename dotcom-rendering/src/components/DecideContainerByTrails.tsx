@@ -41,7 +41,6 @@ export const OneCardFast = ({
 				<Card100Media50
 					trail={trail}
 					showAge={true}
-					absoluteServerTimes={true}
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
@@ -65,7 +64,6 @@ export const OneCardSlow = ({
 				<Card100Media75
 					trail={trail}
 					showAge={true}
-					absoluteServerTimes={true}
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
@@ -89,7 +87,6 @@ export const TwoCard = ({
 				<Card50Media50
 					trail={trails[0]}
 					showAge={true}
-					absoluteServerTimes={true}
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
@@ -99,7 +96,6 @@ export const TwoCard = ({
 				<Card50Media50
 					trail={trails[1]}
 					showAge={true}
-					absoluteServerTimes={true}
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
@@ -123,7 +119,6 @@ export const ThreeCard = ({
 				<Card33Media33
 					trail={trails[0]}
 					showAge={true}
-					absoluteServerTimes={true}
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
@@ -133,7 +128,6 @@ export const ThreeCard = ({
 				<Card33Media33
 					trail={trails[1]}
 					showAge={true}
-					absoluteServerTimes={true}
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
@@ -143,7 +137,6 @@ export const ThreeCard = ({
 				<Card33Media33
 					trail={trails[2]}
 					showAge={true}
-					absoluteServerTimes={true}
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
@@ -167,7 +160,6 @@ export const FourCard = ({
 				<Card25Media25
 					trail={trails[0]}
 					showAge={true}
-					absoluteServerTimes={true}
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
@@ -177,7 +169,6 @@ export const FourCard = ({
 				<Card25Media25
 					trail={trails[1]}
 					showAge={true}
-					absoluteServerTimes={true}
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
@@ -187,7 +178,6 @@ export const FourCard = ({
 				<Card25Media25
 					trail={trails[2]}
 					showAge={true}
-					absoluteServerTimes={true}
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
@@ -197,7 +187,6 @@ export const FourCard = ({
 				<Card25Media25
 					trail={trails[3]}
 					showAge={true}
-					absoluteServerTimes={true}
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
@@ -221,7 +210,6 @@ export const FiveCardFast = ({
 				<Card33Media33
 					trail={trails[0]}
 					showAge={true}
-					absoluteServerTimes={true}
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
@@ -231,7 +219,6 @@ export const FiveCardFast = ({
 				<Card33Media33
 					trail={trails[1]}
 					showAge={true}
-					absoluteServerTimes={true}
 					imageLoading={imageLoading}
 					isTagPage={isTagPage}
 					aspectRatio={aspectRatio}
@@ -243,7 +230,6 @@ export const FiveCardFast = ({
 						<CardDefault
 							trail={trails[2]}
 							showAge={true}
-							absoluteServerTimes={true}
 							isTagPage={isTagPage}
 							aspectRatio={aspectRatio}
 						/>
@@ -252,7 +238,6 @@ export const FiveCardFast = ({
 						<CardDefault
 							trail={trails[3]}
 							showAge={true}
-							absoluteServerTimes={true}
 							isTagPage={isTagPage}
 							aspectRatio={aspectRatio}
 						/>
@@ -261,7 +246,6 @@ export const FiveCardFast = ({
 						<CardDefault
 							trail={trails[4]}
 							showAge={true}
-							absoluteServerTimes={true}
 							isTagPage={isTagPage}
 							aspectRatio={aspectRatio}
 						/>
@@ -287,7 +271,6 @@ export const FiveCardSlow = ({
 					<Card33Media33
 						trail={trails[0]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -297,7 +280,6 @@ export const FiveCardSlow = ({
 					<Card33Media33
 						trail={trails[1]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -309,7 +291,6 @@ export const FiveCardSlow = ({
 					<Card33Media33
 						trail={trails[2]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -319,7 +300,6 @@ export const FiveCardSlow = ({
 					<Card33Media33
 						trail={trails[3]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -329,7 +309,6 @@ export const FiveCardSlow = ({
 					<Card33Media33
 						trail={trails[4]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -355,7 +334,6 @@ export const SixCardFast = ({
 					<Card25Media25
 						trail={trails[0]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -365,7 +343,6 @@ export const SixCardFast = ({
 					<Card25Media25
 						trail={trails[1]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -375,7 +352,6 @@ export const SixCardFast = ({
 					<Card25Media25
 						trail={trails[2]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -385,7 +361,6 @@ export const SixCardFast = ({
 					<Card25Media25
 						trail={trails[3]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -397,7 +372,6 @@ export const SixCardFast = ({
 					<CardDefault
 						trail={trails[4]}
 						showAge={true}
-						absoluteServerTimes={true}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
 					/>
@@ -406,7 +380,6 @@ export const SixCardFast = ({
 					<CardDefault
 						trail={trails[5]}
 						showAge={true}
-						absoluteServerTimes={true}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
 					/>
@@ -431,7 +404,6 @@ export const SixCardSlow = ({
 					<Card33Media33
 						trail={trails[0]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -441,7 +413,6 @@ export const SixCardSlow = ({
 					<Card33Media33
 						trail={trails[1]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -451,7 +422,6 @@ export const SixCardSlow = ({
 					<Card33Media33
 						trail={trails[2]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -463,7 +433,6 @@ export const SixCardSlow = ({
 					<Card33Media33
 						trail={trails[3]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -473,7 +442,6 @@ export const SixCardSlow = ({
 					<Card33Media33
 						trail={trails[4]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -483,7 +451,6 @@ export const SixCardSlow = ({
 					<Card33Media33
 						trail={trails[5]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -509,7 +476,6 @@ export const SevenCardFast = ({
 					<Card25Media25
 						trail={trails[0]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -519,7 +485,6 @@ export const SevenCardFast = ({
 					<Card25Media25
 						trail={trails[1]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -529,7 +494,6 @@ export const SevenCardFast = ({
 					<Card25Media25
 						trail={trails[2]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -539,7 +503,6 @@ export const SevenCardFast = ({
 					<Card25Media25
 						trail={trails[3]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -551,7 +514,6 @@ export const SevenCardFast = ({
 					<CardDefault
 						trail={trails[4]}
 						showAge={true}
-						absoluteServerTimes={true}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
 					/>
@@ -560,7 +522,6 @@ export const SevenCardFast = ({
 					<CardDefault
 						trail={trails[5]}
 						showAge={true}
-						absoluteServerTimes={true}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
 					/>
@@ -569,7 +530,6 @@ export const SevenCardFast = ({
 					<CardDefault
 						trail={trails[6]}
 						showAge={true}
-						absoluteServerTimes={true}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
 					/>
@@ -594,7 +554,6 @@ export const SevenCardSlow = ({
 					<Card33Media33
 						trail={trails[0]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -604,7 +563,6 @@ export const SevenCardSlow = ({
 					<Card33Media33
 						trail={trails[1]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -614,7 +572,6 @@ export const SevenCardSlow = ({
 					<Card33Media33
 						trail={trails[2]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -626,7 +583,6 @@ export const SevenCardSlow = ({
 					<Card25Media25
 						trail={trails[3]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -636,7 +592,6 @@ export const SevenCardSlow = ({
 					<Card25Media25
 						trail={trails[4]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -646,7 +601,6 @@ export const SevenCardSlow = ({
 					<Card25Media25
 						trail={trails[5]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -656,7 +610,6 @@ export const SevenCardSlow = ({
 					<Card25Media25
 						trail={trails[6]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -684,7 +637,6 @@ export const EightOrMoreFast = ({
 					<Card25Media25
 						trail={trails[0]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -694,7 +646,6 @@ export const EightOrMoreFast = ({
 					<Card25Media25
 						trail={trails[1]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -704,7 +655,6 @@ export const EightOrMoreFast = ({
 					<Card25Media25
 						trail={trails[2]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -714,7 +664,6 @@ export const EightOrMoreFast = ({
 					<Card25Media25
 						trail={trails[3]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -726,7 +675,6 @@ export const EightOrMoreFast = ({
 					<CardDefault
 						trail={trails[4]}
 						showAge={true}
-						absoluteServerTimes={true}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
 					/>
@@ -735,7 +683,6 @@ export const EightOrMoreFast = ({
 					<CardDefault
 						trail={trails[5]}
 						showAge={true}
-						absoluteServerTimes={true}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
 					/>
@@ -744,7 +691,6 @@ export const EightOrMoreFast = ({
 					<CardDefault
 						trail={trails[6]}
 						showAge={true}
-						absoluteServerTimes={true}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
 					/>
@@ -753,7 +699,6 @@ export const EightOrMoreFast = ({
 					<CardDefault
 						trail={trails[7]}
 						showAge={true}
-						absoluteServerTimes={true}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
 					/>
@@ -771,7 +716,6 @@ export const EightOrMoreFast = ({
 							<CardDefault
 								trail={trail}
 								showAge={true}
-								absoluteServerTimes={true}
 								isTagPage={isTagPage}
 								aspectRatio={aspectRatio}
 							/>
@@ -802,7 +746,6 @@ export const EightOrMoreSlow = ({
 					<Card25Media25
 						trail={trails[0]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -812,7 +755,6 @@ export const EightOrMoreSlow = ({
 					<Card25Media25
 						trail={trails[1]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -822,7 +764,6 @@ export const EightOrMoreSlow = ({
 					<Card25Media25
 						trail={trails[2]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -832,7 +773,6 @@ export const EightOrMoreSlow = ({
 					<Card25Media25
 						trail={trails[3]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -844,7 +784,6 @@ export const EightOrMoreSlow = ({
 					<Card25Media25
 						trail={trails[4]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -854,7 +793,6 @@ export const EightOrMoreSlow = ({
 					<Card25Media25
 						trail={trails[5]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -864,7 +802,6 @@ export const EightOrMoreSlow = ({
 					<Card25Media25
 						trail={trails[6]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -874,7 +811,6 @@ export const EightOrMoreSlow = ({
 					<Card25Media25
 						trail={trails[7]}
 						showAge={true}
-						absoluteServerTimes={true}
 						imageLoading={imageLoading}
 						isTagPage={isTagPage}
 						aspectRatio={aspectRatio}
@@ -893,7 +829,6 @@ export const EightOrMoreSlow = ({
 							<Card25Media25
 								trail={trail}
 								showAge={true}
-								absoluteServerTimes={true}
 								imageLoading={imageLoading}
 								isTagPage={isTagPage}
 								aspectRatio={aspectRatio}

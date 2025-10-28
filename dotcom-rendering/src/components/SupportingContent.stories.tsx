@@ -36,7 +36,6 @@ const basicCardProps: CardProps = {
 	canPlayInline: true,
 	imageLoading: 'eager',
 	discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
-	absoluteServerTimes: true,
 };
 
 const aBasicLink = {
