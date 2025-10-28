@@ -63,7 +63,7 @@ export const ScrollableMedium = ({
 							}}
 							mediaPositionOnDesktop={imagePosition}
 							mediaPositionOnMobile={imagePosition}
-							mediaSize="medium"
+							mediaSize="scrollable-medium"
 							trailText={undefined} // unsupported
 							supportingContent={undefined} // unsupported
 							aspectRatio={aspectRatio}
