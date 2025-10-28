@@ -21,7 +21,7 @@ type Props = {
 	headlineText: string;
 	dataLinkName?: string;
 	isExternalLink: boolean;
-	trackCardClick: () => void;
+	trackCardClick?: () => void;
 };
 
 const InternalLink = ({
@@ -33,7 +33,7 @@ const InternalLink = ({
 	linkTo: string;
 	headlineText: string;
 	dataLinkName?: string;
-	trackCardClick: () => void;
+	trackCardClick?: () => void;
 }) => {
 	return (
 		// eslint-disable-next-line jsx-a11y/anchor-has-content -- we have an aria-label attribute describing the content
@@ -56,7 +56,7 @@ const ExternalLink = ({
 	linkTo: string;
 	headlineText: string;
 	dataLinkName?: string;
-	trackCardClick: () => void;
+	trackCardClick?: () => void;
 }) => {
 	return (
 		// eslint-disable-next-line jsx-a11y/anchor-has-content -- we have an aria-label attribute describing the content
