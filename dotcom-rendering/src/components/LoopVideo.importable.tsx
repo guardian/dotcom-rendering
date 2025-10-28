@@ -494,10 +494,7 @@ export const LoopVideo = ({
 		const track = video.textTracks[0];
 		if (!track?.cues) return;
 		const pxFromBottom = space[3];
-		const videoHeight =
-			video.getBoundingClientRect().height ||
-			video.clientHeight ||
-			height;
+		const videoHeight = video.getBoundingClientRect().height;
 		const percentFromTop =
 			((videoHeight - pxFromBottom) / videoHeight) * 100;
 
