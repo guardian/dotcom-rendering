@@ -1,7 +1,13 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
-import { trails } from '../../fixtures/manual/trails';
+import {
+	audioTrails,
+	galleryTrails,
+	newsletterTrails,
+	trails,
+	videoTrails,
+} from '../../fixtures/manual/trails';
 import type { DCRContainerPalette } from '../types/front';
 import { FrontSection } from './FrontSection';
 import { StaticMediumFour } from './StaticMediumFour';
@@ -42,35 +48,44 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Four = {
-	name: 'With four cards',
+	name: 'With Four Cards',
 	args: {
-		trails: trails.slice(0, 4).map((trail, index) => ({
-			...trail,
-			isNewsletter: index === 3, // Check that we see the Newsletter pill on a card.
-		})),
+		trails: trails.slice(0, 4),
 	},
 };
 
 export const Three: Story = {
-	name: 'With three cards',
+	name: 'With Three Cards',
 	args: {
 		trails: trails.slice(0, 3),
 	},
 };
 
 export const Two: Story = {
-	name: 'With two cards',
+	name: 'With Two Cards',
 	args: {
 		trails: trails.slice(0, 2),
 	},
 };
 
 export const One: Story = {
-	name: 'With one card',
+	name: 'With One Card',
 	args: {
 		trails: trails.slice(0, 1),
 	},
 };
+
+export const Media = {
+	name: 'With Media Cards',
+	args: {
+		trails: [
+			audioTrails[0],
+			videoTrails[0],
+			galleryTrails[0],
+			newsletterTrails[0],
+		],
+	},
+} satisfies Story;
 
 const containerPalettes = [
 	'InvestigationPalette',

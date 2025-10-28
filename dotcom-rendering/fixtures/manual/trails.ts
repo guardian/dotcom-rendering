@@ -605,6 +605,49 @@ export const videoTrails: [DCRFrontCard, DCRFrontCard] = [
 	},
 ];
 
+export const newsletterTrails: [DCRFrontCard, DCRFrontCard] = [
+	{
+		format: { design: 0, display: 0, theme: 0 },
+		dataLinkName: 'news | group-0 | card-@4',
+		url: '/global/2022/sep/20/sign-up-for-the-guide-newsletter-our-free-pop-culture-email',
+		headline: 'Sign up for a weekly dose of pop culture',
+		trailText:
+			'The best new music, film, TV, podcasts and more direct to your inbox, plus hidden gems and reader recommendations',
+		webPublicationDate: '2022-09-20T10:57:04.000Z',
+		kickerText: 'The Guide',
+		isNewsletter: true,
+		image: {
+			src: 'https://media.guim.co.uk/ce2e59cfa2ab7db34cba24adbf20910976e55604/0_55_501_401/master/501.jpg',
+			altText: 'The Guide Newsletter Design',
+		},
+		showQuotedHeadline: false,
+		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
+		isExternalLink: false,
+		showLivePlayable: false,
+		isImmersive: false,
+	},
+	{
+		format: { design: 0, display: 0, theme: 0 },
+		dataLinkName: 'news | group-0 | card-@2',
+		url: '/info/2024/oct/10/sign-up-for-the-filter-newsletter-our-free-weekly-buying-advice',
+		headline: 'Sign up our free weekly buying advice newsletter',
+		trailText:
+			'Get smart, sustainable shopping advice from the Filter team straight to your inbox, every Sunday<br><br>The Guardian’s journalism is independent. We will earn a commission if you buy something through an affiliate link.',
+		webPublicationDate: '2024-10-10T10:30:16.000Z',
+		kickerText: 'The Filter',
+		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
+		isNewsletter: true,
+		image: {
+			src: 'https://media.guim.co.uk/e5269c957a8e19da44d76b53f349b8d5a3b6a98f/0_0_5000_3000/master/5000.jpg',
+			altText: 'The Filter',
+		},
+		showQuotedHeadline: false,
+		isExternalLink: false,
+		showLivePlayable: false,
+		isImmersive: false,
+	},
+];
+
 export const loopVideoCard: DCRFrontCard = {
 	...defaultCardProps,
 	dataLinkName: 'news | group-0 | card-@2',

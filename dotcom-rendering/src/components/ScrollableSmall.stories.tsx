@@ -2,6 +2,12 @@ import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/highlights-trails';
+import {
+	audioTrails,
+	galleryTrails,
+	newsletterTrails,
+	videoTrails,
+} from '../../fixtures/manual/trails';
 import type { DCRContainerPalette } from '../types/front';
 import { FrontSection } from './FrontSection';
 import { ScrollableSmall } from './ScrollableSmall.importable';
@@ -65,6 +71,18 @@ export const WithOneCard = {
 		trails: trails.slice(0, 1),
 	},
 };
+
+export const Media = {
+	name: 'With Media Cards',
+	args: {
+		trails: [
+			audioTrails[0],
+			videoTrails[0],
+			galleryTrails[0],
+			newsletterTrails[0],
+		],
+	},
+} satisfies Story;
 
 export const WithPrimaryContainer = {
 	render: (args) => (
