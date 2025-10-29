@@ -24,7 +24,7 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof ProductLinkButton>;
 
 export const Default = {} satisfies Story;
 

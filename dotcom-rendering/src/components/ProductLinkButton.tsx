@@ -13,7 +13,7 @@ type ProductLinkButtonProps = {
 	label: string;
 	url: string;
 	size?: 'default' | 'small';
-	fullwidth: boolean;
+	fullwidth?: boolean;
 	priority?: ButtonPriority;
 	dataComponent?: string;
 };
@@ -40,7 +40,7 @@ export const ProductLinkButton = ({
 	label,
 	url,
 	size = 'default',
-	fullwidth,
+	fullwidth = false,
 	priority = 'primary',
 	dataComponent = 'in-body-product-link-button',
 }: ProductLinkButtonProps) => {
