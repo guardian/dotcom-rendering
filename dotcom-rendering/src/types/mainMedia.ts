@@ -27,6 +27,7 @@ type LoopVideo = Media & {
 	height: number;
 	width: number;
 	duration: number;
+	subtitleSource?: string;
 	image?: string;
 };
 
