@@ -1,16 +1,16 @@
 import {
 	array,
 	boolean,
-	type InferOutput,
 	literal,
 	number,
 	object,
 	optional,
+	type output,
 	record,
 	string,
 	union,
 	unknown,
-} from 'valibot';
+} from 'zod';
 import { SharedAdTargetingSchema } from '../lib/ad-targeting';
 import { EditionIdSchema } from '../lib/edition';
 import { EditionBrandingSchema } from '../types/branding';
@@ -39,7 +39,7 @@ const FESeoDataSchema = object({
 	description: string(),
 });
 
-export type FESeoData = InferOutput<typeof FESeoDataSchema>;
+export type FESeoData = output<typeof FESeoDataSchema>;
 
 const FEFrontPropertiesSchema = object({
 	isImageDisplayed: boolean(),
@@ -52,7 +52,7 @@ const FEFrontPropertiesSchema = object({
 	onPageDescription: optional(string()),
 });
 
-export type FEFrontProperties = InferOutput<typeof FEFrontPropertiesSchema>;
+export type FEFrontProperties = output<typeof FEFrontPropertiesSchema>;
 
 /* This list of containers supported in DCR must be kept up to date with frontend **manually**.
  * @see https://github.com/guardian/frontend/blob/167dce23a8453ed13a97fbd23c7fc45ecb06e3fe/facia/app/services/dotcomrendering/FaciaPicker.scala#L21-L45 */
@@ -87,14 +87,14 @@ const FEContainerSchema = union([
 	literal('static/medium/4'),
 ]);
 
-export type FEContainer = InferOutput<typeof FEContainerSchema>;
+export type FEContainer = output<typeof FEContainerSchema>;
 
 const FEContainerLevelSchema = union([
 	literal('Primary'),
 	literal('Secondary'),
 ]);
 
-export type FEContainerLevel = InferOutput<typeof FEContainerLevelSchema>;
+export type FEContainerLevel = output<typeof FEContainerLevelSchema>;
 
 const FEContainerMetadataSchema = union([
 	literal('EventPalette'),
@@ -116,7 +116,7 @@ const FEContainerMetadataSchema = union([
 	literal('Secondary'),
 ]);
 
-export type FEContainerMetadata = InferOutput<typeof FEContainerMetadataSchema>;
+export type FEContainerMetadata = output<typeof FEContainerMetadataSchema>;
 
 const FEFrontCardStyleSchema = union([
 	literal('SpecialReport'),
@@ -134,7 +134,7 @@ const FEFrontCardStyleSchema = union([
 	literal('DefaultCardstyle'),
 ]);
 
-export type FEFrontCardStyle = InferOutput<typeof FEFrontCardStyleSchema>;
+export type FEFrontCardStyle = output<typeof FEFrontCardStyleSchema>;
 
 /** @see https://github.com/guardian/frontend/blob/0bf69f55a/common/app/model/content/Atom.scala#L191-L196 */
 const FEMediaAssetSchema = object({
@@ -145,7 +145,7 @@ const FEMediaAssetSchema = object({
 	assetType: string(),
 });
 
-export type FEMediaAsset = InferOutput<typeof FEMediaAssetSchema>;
+export type FEMediaAsset = output<typeof FEMediaAssetSchema>;
 
 /** @see https://github.com/guardian/frontend/blob/0bf69f55a/common/app/model/content/Atom.scala#L158-L169 */
 const FEMediaAtomSchema = object({
@@ -162,7 +162,7 @@ const FEMediaAtomSchema = object({
 	// channelId: optional(string()), // currently unused
 });
 
-export type FEMediaAtom = InferOutput<typeof FEMediaAtomSchema>;
+export type FEMediaAtom = output<typeof FEMediaAtomSchema>;
 
 const FESnapSchema = object({
 	embedHtml: optional(string()),
@@ -170,7 +170,7 @@ const FESnapSchema = object({
 	embedJs: optional(string()),
 });
 
-export type FESnap = InferOutput<typeof FESnapSchema>;
+export type FESnap = output<typeof FESnapSchema>;
 
 const FESupportingContentSchema = object({
 	properties: object({
@@ -195,7 +195,7 @@ const FESupportingContentSchema = object({
 	format: optional(FEFormatSchema),
 });
 
-export type FESupportingContent = InferOutput<typeof FESupportingContentSchema>;
+export type FESupportingContent = output<typeof FESupportingContentSchema>;
 
 const FEFrontCardSchema = object({
 	properties: object({
@@ -365,7 +365,7 @@ const FEFrontCardSchema = object({
 	type: string(),
 });
 
-export type FEFrontCard = InferOutput<typeof FEFrontCardSchema>;
+export type FEFrontCard = output<typeof FEFrontCardSchema>;
 
 const FEAspectRatioSchema = union([
 	literal('5:3'),
@@ -373,7 +373,7 @@ const FEAspectRatioSchema = union([
 	literal('4:5'),
 	literal('1:1'),
 ]);
-export type FEAspectRatio = InferOutput<typeof FEAspectRatioSchema>;
+export type FEAspectRatio = output<typeof FEAspectRatioSchema>;
 
 const FECollectionConfigSchema = object({
 	displayName: string(),
@@ -417,7 +417,7 @@ const FECollectionSchema = object({
 	targetedTerritory: optional(TerritorySchema),
 });
 
-export type FECollection = InferOutput<typeof FECollectionSchema>;
+export type FECollection = output<typeof FECollectionSchema>;
 
 const FEPressedPageSchema = object({
 	id: string(),
@@ -503,11 +503,12 @@ const FEFrontConfigSchema = object({
 	isSensitive: boolean(),
 	isDev: boolean(),
 	thirdPartyAppsAccount: optional(string()),
+
 	avatarImagesUrl: string(),
 	fbAppId: string(),
 });
 
-export type FEFrontConfig = InferOutput<typeof FEFrontConfigSchema>;
+export type FEFrontConfig = output<typeof FEFrontConfigSchema>;
 
 export const FEFrontSchema = object({
 	pressedPage: FEPressedPageSchema,
@@ -529,4 +530,4 @@ export const FEFrontSchema = object({
 	canonicalUrl: optional(string()),
 });
 
-export type FEFront = InferOutput<typeof FEFrontSchema>;
+export type FEFront = output<typeof FEFrontSchema>;
