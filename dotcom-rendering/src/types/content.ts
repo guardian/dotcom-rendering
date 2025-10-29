@@ -724,12 +724,16 @@ const KeyTakeawaySchema = object({
 	},
 });
 
+export type KeyTakeaway = z.infer<typeof KeyTakeawaySchema>;
+
 const QAndAExplainerSchema = object({
 	title: string(),
 	get body() {
 		return array(FEElementSchema);
 	},
 });
+
+export type QAndAExplainer = z.infer<typeof QAndAExplainerSchema>;
 
 const MiniProfileSchema = object({
 	title: string(),
@@ -739,6 +743,8 @@ const MiniProfileSchema = object({
 	bio: optional(string()),
 	endNote: optional(string()),
 });
+
+export type MiniProfile = z.infer<typeof MiniProfileSchema>;
 
 const MultiBylineSchema = object({
 	title: string(),
@@ -751,6 +757,8 @@ const MultiBylineSchema = object({
 	byline: string(),
 	bylineHtml: string(),
 });
+
+export type MultiByline = z.infer<typeof MultiBylineSchema>;
 
 const KeyTakeawaysBlockElementSchema = object({
 	_type: literal(
@@ -808,6 +816,8 @@ const ListItemSchema = object({
 	byline: optional(string()),
 	bylineHtml: optional(string()),
 });
+
+export type ListItem = z.infer<typeof ListItemSchema>;
 
 const LinkBlockElementSchema = object({
 	_type: literal('model.dotcomrendering.pageElements.LinkBlockElement'),
@@ -1058,6 +1068,8 @@ const DCRTimelineEventSchema = object({
 	},
 });
 
+export type DCRTimelineEvent = z.infer<typeof DCRTimelineEventSchema>;
+
 const DCRTimelineSectionSchema = object({
 	title: string(),
 	events: array(DCRTimelineEventSchema),
@@ -1098,6 +1110,8 @@ const FETimelineEventSchema = object({
 		return array(FEElementSchema);
 	},
 });
+
+export type FETimelineEvent = z.infer<typeof FETimelineEventSchema>;
 
 const FETimelineSectionSchema = object({
 	title: optional(string()),

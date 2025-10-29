@@ -18,7 +18,7 @@ import {
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import {
 	handleFront,
-	handleFrontValibot,
+	handleFrontZod,
 	handleTagPage,
 } from './handler.front.web';
 import {
@@ -67,7 +67,7 @@ export const prodServer = (): void => {
 	app.post('/Interactive', logRenderTime, handleInteractive);
 	app.post('/Blocks', logRenderTime, handleBlocks);
 	app.post('/Front', logRenderTime, handleFront);
-	app.post('/FrontValibot', logRenderTime, handleFrontValibot);
+	app.post('/FrontZod', logRenderTime, handleFrontZod);
 	app.post('/TagPage', logRenderTime, handleTagPage);
 	app.post(
 		'/FootballMatchListPage',

@@ -16,7 +16,7 @@ import {
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import {
 	handleFront,
-	handleFrontValibot,
+	handleFrontZod,
 	handleTagPage,
 } from './handler.front.web';
 import {
@@ -98,7 +98,7 @@ renderer.get('/Article/*url', handleArticleZod);
 renderer.get('/Interactive/*url', handleInteractive);
 renderer.get('/Blocks/*url', handleBlocks);
 renderer.get('/Front/*url', handleFront);
-renderer.get('/FrontValibot/*url', handleFrontValibot); // TODO: this is just for testing
+renderer.get('/FrontZod/*url', handleFrontZod); // TODO: this is just for testing
 renderer.get('/TagPage/*url', handleTagPage);
 renderer.get('/EmailNewsletters/*url', handleAllEditorialNewslettersPage);
 renderer.get('/AppsArticle/*url', handleAppsArticle);
