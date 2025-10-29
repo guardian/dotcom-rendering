@@ -870,6 +870,16 @@ export interface SrcSetItem {
 	width: number;
 }
 
+export interface ProductImage {
+	url: string;
+	caption: string;
+	credit: string;
+	alt: string;
+	displayCredit: boolean;
+	height: number;
+	width: number;
+}
+
 export interface Image {
 	index: number;
 	fields: {
