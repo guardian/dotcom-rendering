@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { Meta, StoryFn } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { getNestedArticleElement } from '../lib/renderElement';
 import type { ProductBlockElement, ProductImage } from '../types/content';
@@ -269,7 +269,8 @@ const product: ProductBlockElement = {
 		},
 	],
 };
-const meta = {
+
+const meta: Meta<typeof ProductElement> = {
 	component: ProductElement,
 	title: 'Components/ProductElement',
 	parameters: {
@@ -320,16 +321,18 @@ const meta = {
 			</SectionComponent>
 		),
 	],
-} satisfies Meta<typeof ProductElement>;
-
+};
 export default meta;
 
-export const Default = {};
+type Story = StoryObj<typeof ProductElement>;
 
-export const withoutHeading: StoryFn = () => {
-	return (
+export const Default = {} satisfies Story;
+
+export const WithoutHeading: Story = {
+	render: (args) => (
 		<>
 			<ProductElement
+				{...args}
 				product={{
 					...product,
 					primaryHeading: '',
@@ -344,6 +347,7 @@ export const withoutHeading: StoryFn = () => {
 				shouldShowLeftColCard={true}
 			/>
 			<ProductElement
+				{...args}
 				product={{
 					...product,
 					primaryHeading: `<em></em>`,
@@ -358,13 +362,14 @@ export const withoutHeading: StoryFn = () => {
 				shouldShowLeftColCard={true}
 			/>
 		</>
-	);
-};
+	),
+} satisfies Story;
 
-export const displayCredit: StoryFn = () => {
-	return (
+export const DisplayCredit: Story = {
+	render: (args) => (
 		<>
 			<ProductElement
+				{...args}
 				product={{
 					...product,
 					image: { ...productImage, displayCredit: true },
@@ -378,6 +383,7 @@ export const displayCredit: StoryFn = () => {
 				shouldShowLeftColCard={true}
 			/>
 			<ProductElement
+				{...args}
 				product={{
 					...product,
 					image: { ...productImage, displayCredit: true },
@@ -391,141 +397,73 @@ export const displayCredit: StoryFn = () => {
 				shouldShowLeftColCard={true}
 			/>
 		</>
-	);
-};
+	),
+} satisfies Story;
 
-export const noPrimaryHeading: StoryFn = () => {
-	return (
-		<ProductElement
-			product={{
-				...product,
-				primaryHeading: '<em>Primary heading only</em>',
-				secondaryHeading: '',
-			}}
-			format={{
-				design: ArticleDesign.Review,
-				display: ArticleDisplay.Showcase,
-				theme: Pillar.Lifestyle,
-			}}
-			ArticleElementComponent={ArticleElementComponent}
-			shouldShowLeftColCard={true}
-		/>
-	);
-};
+export const NoPrimaryHeading: Story = {
+	args: {
+		product: {
+			...product,
+			primaryHeading: '<em>Primary heading only</em>',
+			secondaryHeading: '',
+		},
+	},
+} satisfies Story;
 
-export const noSecondaryHeading: StoryFn = () => {
-	return (
-		<ProductElement
-			product={{
-				...product,
-				primaryHeading: '',
-				secondaryHeading: 'Secondary heading only',
-			}}
-			format={{
-				design: ArticleDesign.Review,
-				display: ArticleDisplay.Showcase,
-				theme: Pillar.Lifestyle,
-			}}
-			ArticleElementComponent={ArticleElementComponent}
-			shouldShowLeftColCard={true}
-		/>
-	);
-};
+export const NoSecondaryHeading: Story = {
+	args: {
+		product: {
+			...product,
+			primaryHeading: '',
+			secondaryHeading: 'Secondary heading only',
+		},
+	},
+} satisfies Story;
 
-export const displayTypeProductCardOnly: StoryFn = () => {
-	return (
-		<ProductElement
-			product={{
-				...product,
-				displayType: 'ProductCardOnly',
-			}}
-			format={{
-				design: ArticleDesign.Review,
-				display: ArticleDisplay.Showcase,
-				theme: Pillar.Lifestyle,
-			}}
-			ArticleElementComponent={ArticleElementComponent}
-			shouldShowLeftColCard={true}
-		/>
-	);
-};
+export const DisplayTypeProductCardOnly: Story = {
+	args: {
+		product: {
+			...product,
+			displayType: 'ProductCardOnly',
+		},
+	},
+} satisfies Story;
 
-export const MultipleProducts: StoryFn = () => {
-	return (
+export const MultipleProducts: Story = {
+	render: (args) => (
 		<>
-			<ProductElement
-				product={product}
-				format={{
-					design: ArticleDesign.Review,
-					display: ArticleDisplay.Showcase,
-					theme: Pillar.Lifestyle,
-				}}
-				ArticleElementComponent={ArticleElementComponent}
-				shouldShowLeftColCard={true}
-			/>
-			<ProductElement
-				product={product}
-				format={{
-					design: ArticleDesign.Review,
-					display: ArticleDisplay.Showcase,
-					theme: Pillar.Lifestyle,
-				}}
-				ArticleElementComponent={ArticleElementComponent}
-				shouldShowLeftColCard={true}
-			/>
+			<ProductElement {...args} />
+			<ProductElement {...args} />
 		</>
-	);
-};
+	),
+} satisfies Story;
 
-export const MultipleProductsWithoutStats: StoryFn = () => {
-	return (
+export const MultipleProductsWithoutStats: Story = {
+	render: (args) => (
 		<>
 			<ProductElement
+				{...args}
 				product={{ ...product, customAttributes: [] }}
-				format={{
-					design: ArticleDesign.Review,
-					display: ArticleDisplay.Showcase,
-					theme: Pillar.Lifestyle,
-				}}
-				ArticleElementComponent={ArticleElementComponent}
-				shouldShowLeftColCard={true}
 			/>
 			<ProductElement
+				{...args}
 				product={{ ...product, customAttributes: [] }}
-				format={{
-					design: ArticleDesign.Review,
-					display: ArticleDisplay.Showcase,
-					theme: Pillar.Lifestyle,
-				}}
-				ArticleElementComponent={ArticleElementComponent}
-				shouldShowLeftColCard={true}
 			/>
 		</>
-	);
-};
+	),
+} satisfies Story;
 
-export const withoutFields: StoryFn = () => {
-	return (
-		<>
-			<ProductElement
-				product={{
-					...product,
-					image: undefined,
-					primaryHeading: '',
-					secondaryHeading: '',
-					brandName: '',
-					productName: '',
-					productCtas: [],
-					customAttributes: [],
-				}}
-				format={{
-					design: ArticleDesign.Review,
-					display: ArticleDisplay.Showcase,
-					theme: Pillar.Lifestyle,
-				}}
-				ArticleElementComponent={ArticleElementComponent}
-				shouldShowLeftColCard={true}
-			/>
-		</>
-	);
-};
+export const WithoutFields: Story = {
+	args: {
+		product: {
+			...product,
+			image: undefined,
+			primaryHeading: '',
+			secondaryHeading: '',
+			brandName: '',
+			productName: '',
+			productCtas: [],
+			customAttributes: [],
+		},
+	},
+} satisfies Story;
