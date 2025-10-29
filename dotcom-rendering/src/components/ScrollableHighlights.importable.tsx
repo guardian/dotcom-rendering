@@ -15,6 +15,7 @@ import {
 	resetStoredHighlights,
 	trackCardEngagement,
 } from '../lib/personaliseHighlights';
+import { useAB } from '../lib/useAB';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { HighlightsCard } from './Masthead/HighlightsCard';
@@ -232,6 +233,27 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	const [shouldShowHighlights, setShouldShowHighlights] = useState(false);
 	const [orderedTrails, setOrderedTrails] = useState<DCRFrontCard[]>(trails);
 
+	const ABTestAPI = useAB()?.api;
+	let abTestPersonalisedHighlightAttr = 'not-in-test';
+	if (
+		ABTestAPI?.isUserInVariant('PersonalisedHighlights', 'click-tracking')
+	) {
+		abTestPersonalisedHighlightAttr = 'click-tracking';
+	}
+
+	if (ABTestAPI?.isUserInVariant('PersonalisedHighlights', 'view-tracking')) {
+		abTestPersonalisedHighlightAttr = 'view-tracking';
+	}
+
+	if (
+		ABTestAPI?.isUserInVariant(
+			'PersonalisedHighlights',
+			'click-and-view-tracking',
+		)
+	) {
+		abTestPersonalisedHighlightAttr = 'click-and-view-tracking';
+	}
+
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
 
@@ -266,8 +288,13 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	};
 
 	useEffect(() => {
-		trackCardEngagement('VIEW');
-	}, []);
+		if (
+			abTestPersonalisedHighlightAttr === 'view-tracking' ||
+			abTestPersonalisedHighlightAttr === 'click-and-view-tracking'
+		) {
+			trackCardEngagement('VIEW');
+		}
+	}, [abTestPersonalisedHighlightAttr]);
 
 	useEffect(() => {
 		const carouselElement = carouselRef.current;
@@ -358,7 +385,14 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 								mainMedia={trail.mainMedia}
 								starRating={trail.starRating}
 								trackCardClick={() => {
-									trackCardEngagement('CLICK', trail);
+									if (
+										abTestPersonalisedHighlightAttr ===
+											'click-tracking' ||
+										abTestPersonalisedHighlightAttr ===
+											'click-and-view-tracking'
+									) {
+										trackCardEngagement('CLICK', trail);
+									}
 								}}
 							/>
 						</li>
