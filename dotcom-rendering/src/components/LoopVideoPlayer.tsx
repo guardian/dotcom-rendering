@@ -37,6 +37,9 @@ const videoStyles = (
 	object-fit: cover;
 
 	::cue {
+		/* Hide the cue by default as we prefer custom overlay */
+		visibility: hidden;
+
 		color: ${palette('--loop-video-subtitle-text')};
 		${subtitleSize === 'small' && textSans15};
 		${subtitleSize === 'medium' && textSans17};
