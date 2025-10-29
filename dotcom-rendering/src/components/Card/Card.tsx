@@ -247,6 +247,10 @@ const podcastImageStyles = (
 		width: 98px;
 		height: 98px;
 		${from.tablet} {
+			width: 120px;
+			height: 120px;
+		}
+		${from.desktop} {
 			width: ${isHorizontalOnDesktop ? 'unset' : '120px'};
 			height: ${isHorizontalOnDesktop ? 'unset' : '120px'};
 		}
