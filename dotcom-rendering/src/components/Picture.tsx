@@ -364,6 +364,11 @@ const decideImageWidths = ({
 				];
 			case 'halfWidth':
 				return [{ breakpoint: breakpoints.mobile, width: 445 }];
+			case 'podcastCover':
+				return [
+					{ breakpoint: breakpoints.mobile, width: 140 },
+					{ breakpoint: breakpoints.wide, width: 219 },
+				];
 			case 'productCard':
 				return [
 					{ breakpoint: breakpoints.mobile, width: 328 },
