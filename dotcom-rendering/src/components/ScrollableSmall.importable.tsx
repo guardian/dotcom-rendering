@@ -104,7 +104,6 @@ export const ScrollableSmall = ({
 							showTopBarMobile={mobileBottomCards.includes(index)}
 							canPlayInline={false}
 							showLabsRedesign={showLabsRedesign}
-							fixImageWidth={true}
 						/>
 					</ScrollableCarousel.Item>
 				);
