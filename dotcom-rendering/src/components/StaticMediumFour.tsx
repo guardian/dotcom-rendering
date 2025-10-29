@@ -28,7 +28,7 @@ type Props = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
@@ -40,7 +40,7 @@ export const StaticMediumFour = ({
 	trails,
 	containerPalette,
 	showAge,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 	showImage = true,
 	aspectRatio,
@@ -65,7 +65,7 @@ export const StaticMediumFour = ({
 							containerPalette={containerPalette}
 							containerType="static/medium/4"
 							showAge={showAge}
-							absoluteServerTimes={absoluteServerTimes}
+							serverTime={serverTime}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
 							mediaPositionOnDesktop={getMediaPositionOnDesktop(

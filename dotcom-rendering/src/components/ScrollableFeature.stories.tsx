@@ -1,5 +1,5 @@
 import { breakpoints } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
 	audioTrails,
@@ -74,7 +74,6 @@ const meta = {
 	args: {
 		trails,
 		containerPalette: undefined,
-		absoluteServerTimes: true,
 		imageLoading: 'eager',
 		aspectRatio: '4:5',
 		collectionId: 1,

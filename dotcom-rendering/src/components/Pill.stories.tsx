@@ -1,5 +1,5 @@
 import { SvgCamera } from '@guardian/source/react-components';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { Pill } from './Pill';
 import { SvgMediaControlsPlay } from './SvgMediaControlsPlay';
 

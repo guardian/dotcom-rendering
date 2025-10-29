@@ -80,7 +80,7 @@ export type Position = 'inner' | 'outer' | 'none';
 export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	headlineText: string;
 	headlineSizes?: ResponsiveFontSize;
 	showQuotedHeadline?: boolean;
@@ -231,7 +231,7 @@ const HorizontalDivider = () => (
 
 const podcastImageStyles = (imageSize: MediaSizeType) => {
 	switch (imageSize) {
-		case 'small':
+		case 'scrollable-small':
 			return css`
 				width: 69px;
 				height: 69px;
@@ -241,7 +241,7 @@ const podcastImageStyles = (imageSize: MediaSizeType) => {
 				}
 			`;
 
-		case 'medium':
+		case 'scrollable-medium':
 			return css`
 				width: 98px;
 				height: 98px;
@@ -390,7 +390,7 @@ export const Card = ({
 	liveUpdatesPosition = 'inner',
 	onwardsSource,
 	showVideo = true,
-	absoluteServerTimes,
+	serverTime,
 	isTagPage = false,
 	aspectRatio,
 	index = 0,
@@ -453,7 +453,7 @@ export const Card = ({
 					isWithinTwelveHours: withinTwelveHours,
 				}}
 				showClock={showClock}
-				absoluteServerTimes={absoluteServerTimes}
+				serverTime={serverTime}
 				isTagPage={isTagPage}
 			/>
 		);
@@ -1268,9 +1268,7 @@ export const Card = ({
 												: supportingContentAlignment
 										}
 										containerPalette={containerPalette}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
+										serverTime={serverTime}
 										displayHeader={isFlexibleContainer}
 										directionOnMobile={
 											isFlexibleContainer
@@ -1325,7 +1323,7 @@ export const Card = ({
 									: supportingContentAlignment
 							}
 							containerPalette={containerPalette}
-							absoluteServerTimes={absoluteServerTimes}
+							serverTime={serverTime}
 							displayHeader={isFlexibleContainer}
 							directionOnMobile={'horizontal'}
 						></LatestLinks>

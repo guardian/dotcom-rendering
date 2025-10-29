@@ -27,7 +27,6 @@ export const Default = () => (
 		<FixedLargeSlowXIV
 			trails={trails}
 			showAge={true}
-			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>

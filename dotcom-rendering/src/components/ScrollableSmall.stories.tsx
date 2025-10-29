@@ -1,5 +1,5 @@
 import { breakpoints } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/highlights-trails';
 import {
@@ -28,7 +28,6 @@ const meta = {
 		trails,
 		containerPalette: undefined,
 		showAge: true,
-		absoluteServerTimes: true,
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
 	},
