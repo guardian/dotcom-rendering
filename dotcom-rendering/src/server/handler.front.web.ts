@@ -22,6 +22,8 @@ import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderFront, renderTagPage } from './render.front.web';
 
 const enhanceFront = (data: FEFront): Front => {
+	const serverTime = Date.now();
+
 	return {
 		...data,
 		webTitle: `${
@@ -51,6 +53,7 @@ const enhanceFront = (data: FEFront): Front => {
 		),
 		deeplyRead: data.deeplyRead?.map((trail) => decideTrail(trail)),
 		canonicalUrl: data.canonicalUrl,
+		serverTime,
 	};
 };
 

@@ -1,5 +1,5 @@
 import { breakpoints } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { getSublinks, trails } from '../../fixtures/manual/trails';
 import {
@@ -36,7 +36,6 @@ const meta = {
 		groupedTrails: defaultGroupedTrails,
 		containerPalette: 'LongRunningPalette',
 		imageLoading: 'eager',
-		absoluteServerTimes: true,
 		showAge: false,
 	},
 	render: (args) => (
@@ -53,7 +52,6 @@ const meta = {
 		>
 			<DynamicPackage
 				groupedTrails={args.groupedTrails}
-				absoluteServerTimes={args.absoluteServerTimes}
 				imageLoading={args.imageLoading}
 				containerPalette={args.containerPalette}
 				showAge={args.showAge}

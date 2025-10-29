@@ -1,7 +1,13 @@
 import { breakpoints } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/highlights-trails';
+import {
+	audioTrails,
+	galleryTrails,
+	newsletterTrails,
+	videoTrails,
+} from '../../fixtures/manual/trails';
 import type { DCRContainerPalette } from '../types/front';
 import { FrontSection } from './FrontSection';
 import { ScrollableMedium } from './ScrollableMedium.importable';
@@ -22,7 +28,6 @@ const meta = {
 		trails,
 		containerPalette: undefined,
 		showAge: true,
-		absoluteServerTimes: true,
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
 	},
@@ -42,17 +47,11 @@ export default meta;
 
 type Story = StoryObj<typeof ScrollableMedium>;
 
-export const WithMultipleCards = {} satisfies Story;
+export const WithEightCards = {} satisfies Story;
 
-export const WithOneCard = {
+export const WithFourCards = {
 	args: {
-		trails: trails.slice(0, 1),
-	},
-} satisfies Story;
-
-export const WithTwoCards = {
-	args: {
-		trails: trails.slice(0, 2),
+		trails: trails.slice(0, 4),
 	},
 } satisfies Story;
 
@@ -62,9 +61,27 @@ export const WithThreeCards = {
 	},
 } satisfies Story;
 
-export const WithFourCards = {
+export const WithTwoCards = {
 	args: {
-		trails: trails.slice(0, 4),
+		trails: trails.slice(0, 2),
+	},
+} satisfies Story;
+
+export const WithOneCard = {
+	args: {
+		trails: trails.slice(0, 1),
+	},
+} satisfies Story;
+
+export const Media = {
+	name: 'With Media Cards',
+	args: {
+		trails: [
+			audioTrails[0],
+			videoTrails[0],
+			galleryTrails[0],
+			newsletterTrails[0],
+		],
 	},
 } satisfies Story;
 

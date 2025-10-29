@@ -1,5 +1,5 @@
 import type { ABTest, ABTestAPI } from '@guardian/ab-core';
-import { ABTests } from '@guardian/ab-testing';
+import { activeABtests } from '@guardian/ab-testing';
 import {
 	bypassCommercialMetricsSampling,
 	EventTimer,
@@ -33,7 +33,7 @@ const clientSideTestsToForceMetrics: ABTest[] = [
 ];
 
 const shouldCollectMetricsForBetaTests = (userTestParticipations: string[]) => {
-	const userParticipationConfigs = ABTests.filter((test) =>
+	const userParticipationConfigs = activeABtests.filter((test) =>
 		userTestParticipations.includes(test.name),
 	);
 	return userParticipationConfigs.some(

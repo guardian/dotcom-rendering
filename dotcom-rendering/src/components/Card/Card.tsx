@@ -66,7 +66,6 @@ import { CardWrapper } from './components/CardWrapper';
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
 import type {
-	MediaFixedSizeOptions,
 	MediaPositionType,
 	MediaSizeType,
 } from './components/MediaWrapper';
@@ -79,7 +78,7 @@ export type Position = 'inner' | 'outer' | 'none';
 export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	headlineText: string;
 	headlineSizes?: ResponsiveFontSize;
 	showQuotedHeadline?: boolean;
@@ -157,8 +156,6 @@ export type Props = {
 	trailTextSize?: TrailTextSize;
 	/** A kicker image is seperate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
-	isInAllBoostsTest?: boolean;
-	fixImageWidth?: boolean;
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
 	/** Feature flag for the labs redesign work */
@@ -228,33 +225,37 @@ const HorizontalDivider = () => (
 	/>
 );
 
-const podcastImageStyles = (imageSize: MediaSizeType) => {
-	switch (imageSize) {
-		case 'small':
-			return css`
-				width: 69px;
-				height: 69px;
-				${from.tablet} {
-					width: 98px;
-					height: 98px;
-				}
-			`;
-
-		case 'medium':
-			return css`
+const podcastImageStyles = (
+	isSmallCard: boolean,
+	imagePositionOnDesktop: MediaPositionType,
+) => {
+	if (isSmallCard) {
+		return css`
+			width: 69px;
+			height: 69px;
+			${from.tablet} {
 				width: 98px;
 				height: 98px;
-				${from.tablet} {
-					width: 120px;
-					height: 120px;
-				}
-			`;
-		default:
-			return css`
-				width: 120px;
-				height: 120px;
-			`;
+			}
+		`;
 	}
+
+	const isHorizontalOnDesktop =
+		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
+
+	return css`
+		width: 98px;
+		height: 98px;
+		${from.tablet} {
+			width: 120px;
+			height: 120px;
+		}
+		/** The image takes the full height on desktop, so that the waveform sticks to the bottom of the card. */
+		${from.desktop} {
+			width: ${isHorizontalOnDesktop ? 'unset' : '120px'};
+			height: ${isHorizontalOnDesktop ? 'unset' : '120px'};
+		}
+	`;
 };
 
 const getMedia = ({
@@ -389,7 +390,7 @@ export const Card = ({
 	liveUpdatesPosition = 'inner',
 	onwardsSource,
 	showVideo = true,
-	absoluteServerTimes,
+	serverTime,
 	isTagPage = false,
 	aspectRatio,
 	index = 0,
@@ -400,8 +401,6 @@ export const Card = ({
 	showTopBarMobile = true,
 	trailTextSize,
 	showKickerImage = false,
-	fixImageWidth,
-	isInAllBoostsTest = false,
 	headlinePosition = 'inner',
 	showLabsRedesign = false,
 }: Props) => {
@@ -452,7 +451,7 @@ export const Card = ({
 					isWithinTwelveHours: withinTwelveHours,
 				}}
 				showClock={showClock}
-				absoluteServerTimes={absoluteServerTimes}
+				serverTime={serverTime}
 				isTagPage={isTagPage}
 			/>
 		);
@@ -588,21 +587,7 @@ export const Card = ({
 		containerType === 'flexible/special' ||
 		containerType === 'flexible/general';
 
-	const isSmallCard =
-		containerType === 'scrollable/small' ||
-		containerType === 'scrollable/medium';
-
-	const mediaFixedSizeOptions = (): MediaFixedSizeOptions => {
-		if (isSmallCard) {
-			return {
-				mobile: isInAllBoostsTest ? undefined : 'tiny',
-				tablet: 'small',
-				desktop: 'small',
-			};
-		}
-		if (isFlexibleContainer) return { mobile: 'small' };
-		return { mobile: 'medium' };
-	};
+	const isSmallCard = containerType === 'scrollable/small';
 
 	const hideTrailTextUntil = () => {
 		if (isFlexibleContainer) {
@@ -656,7 +641,10 @@ export const Card = ({
 			return { row: 'small', column: 'small' };
 		}
 
-		if (isSmallCard) {
+		if (
+			containerType === 'scrollable/small' ||
+			containerType === 'scrollable/medium'
+		) {
 			return {
 				row: 'medium',
 				column: 'medium',
@@ -898,18 +886,13 @@ export const Card = ({
 				{media && (
 					<MediaWrapper
 						mediaSize={mediaSize}
-						mediaFixedSizes={mediaFixedSizeOptions()}
 						mediaType={media.type}
 						mediaPositionOnDesktop={mediaPositionOnDesktop}
 						mediaPositionOnMobile={mediaPositionOnMobile}
-						fixImageWidth={
-							fixImageWidth ??
-							(mediaPositionOnMobile === 'left' ||
-								mediaPositionOnMobile === 'right')
-						}
 						hideImageOverlay={media.type === 'slideshow'}
 						padMedia={isMediaCardOrNewsletter && isBetaContainer}
 						isBetaContainer={isBetaContainer}
+						isSmallCard={isSmallCard}
 					>
 						{media.type === 'slideshow' && (
 							<div
@@ -939,7 +922,6 @@ export const Card = ({
 								imagePositionOnMobile={mediaPositionOnMobile}
 								isBetaContainer={isBetaContainer}
 								isFlexibleContainer={isFlexibleContainer}
-								isInAllBoostsTest={isInAllBoostsTest}
 							>
 								<Avatar
 									src={media.avatarUrl}
@@ -947,7 +929,6 @@ export const Card = ({
 									imageSize={
 										isBetaContainer ? mediaSize : undefined
 									}
-									isInAllBoostsTest={isInAllBoostsTest}
 								/>
 							</AvatarContainer>
 						)}
@@ -1071,9 +1052,6 @@ export const Card = ({
 												!isMoreGalleriesOnwardContent
 											}
 											aspectRatio={aspectRatio}
-											isInAllBoostsTest={
-												isInAllBoostsTest
-											}
 										/>
 									</div>
 								)}
@@ -1091,7 +1069,6 @@ export const Card = ({
 										!isMoreGalleriesOnwardContent
 									}
 									aspectRatio={aspectRatio}
-									isInAllBoostsTest={isInAllBoostsTest}
 								/>
 								{isVideoMainMedia && mainMedia.duration > 0 && (
 									<div
@@ -1121,7 +1098,12 @@ export const Card = ({
 						{media.type === 'podcast' && (
 							<>
 								{media.podcastImage?.src && !showKickerImage ? (
-									<div css={podcastImageStyles(mediaSize)}>
+									<div
+										css={podcastImageStyles(
+											isSmallCard,
+											mediaPositionOnDesktop,
+										)}
+									>
 										<CardPicture
 											mainImage={media.podcastImage.src}
 											imageSize="small"
@@ -1141,7 +1123,6 @@ export const Card = ({
 										alt={media.trailImage.altText}
 										loading={imageLoading}
 										aspectRatio={aspectRatio}
-										isInAllBoostsTest={isInAllBoostsTest}
 									/>
 								)}
 							</>
@@ -1264,9 +1245,7 @@ export const Card = ({
 												: supportingContentAlignment
 										}
 										containerPalette={containerPalette}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
+										serverTime={serverTime}
 										displayHeader={isFlexibleContainer}
 										directionOnMobile={
 											isFlexibleContainer
@@ -1321,7 +1300,7 @@ export const Card = ({
 									: supportingContentAlignment
 							}
 							containerPalette={containerPalette}
-							absoluteServerTimes={absoluteServerTimes}
+							serverTime={serverTime}
 							displayHeader={isFlexibleContainer}
 							directionOnMobile={'horizontal'}
 						></LatestLinks>

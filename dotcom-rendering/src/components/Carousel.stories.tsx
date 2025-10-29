@@ -1,5 +1,5 @@
 import { breakpoints } from '@guardian/source/foundations';
-import type { StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react-webpack5';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
@@ -269,7 +269,6 @@ export const Headlines: StoryObj = ({ format }: StoryProps) => {
 				format={format}
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
-				absoluteServerTimes={true}
 				renderingTarget="Web"
 			/>
 		</Section>
@@ -295,7 +294,6 @@ export const SingleItemCarousel = () => {
 				format={defaultFormat}
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
-				absoluteServerTimes={true}
 				renderingTarget="Web"
 			/>
 		</Section>
@@ -350,7 +348,6 @@ export const SingleOpinionCarousel = () => {
 				}}
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
-				absoluteServerTimes={true}
 				renderingTarget="Web"
 			/>
 		</Section>
@@ -381,7 +378,6 @@ export const Immersive = () => {
 					}}
 					leftColSize="compact"
 					discussionApiUrl={discussionApiUrl}
-					absoluteServerTimes={true}
 					renderingTarget="Web"
 				/>
 			</Section>
@@ -427,7 +423,6 @@ export const SpecialReportAlt = () => {
 				format={specialReportAltFormat}
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
-				absoluteServerTimes={true}
 				renderingTarget="Web"
 			/>
 		</Section>
@@ -643,7 +638,6 @@ export const AllCards = () => {
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
 				format={defaultFormat}
-				absoluteServerTimes={true}
 				renderingTarget="Web"
 			/>
 		</Section>

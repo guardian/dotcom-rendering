@@ -26,11 +26,10 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
 export default {
 	component: LiveBlock,
 	title: 'Components/LiveBlock',
+	globals: {
+		backgrounds: { value: 'grey' },
+	},
 	parameters: {
-		backgrounds: {
-			default: 'grey',
-			values: [{ name: 'grey', value: 'lightgrey' }],
-		},
 		chromatic: {
 			viewports: [
 				breakpoints.mobile,

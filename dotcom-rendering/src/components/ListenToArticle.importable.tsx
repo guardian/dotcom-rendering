@@ -87,18 +87,20 @@ export const ListenToArticle = ({ articleId }: Props) => {
 			.then((success: boolean) => {
 				// hide the audio button once audio is playing until we can
 				// manage play state syncronisation across the native miniplayer and web layer
-				success && setShowButton(false);
+				if (success) {
+					setShowButton(false);
+				}
 			})
 			.catch((error: Error) => {
 				window.guardian.modules.sentry.reportError(
 					error,
 					'bridget-getListenToArticleClient-play-error',
-				),
-					log(
-						'dotcom',
-						'Bridget getListenToArticleClient.play Error:',
-						error,
-					);
+				);
+				log(
+					'dotcom',
+					'Bridget getListenToArticleClient.play Error:',
+					error,
+				);
 			});
 	};
 	return (

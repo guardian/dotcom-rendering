@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -27,7 +27,6 @@ const cardProps: CardProps = {
 	canPlayInline: true,
 	imageLoading: 'eager',
 	discussionApiUrl: 'https://discussion.theguardian.com/discussion-api/',
-	absoluteServerTimes: true,
 	aspectRatio: '4:5',
 	byline: 'Byline text',
 	showByline: true,

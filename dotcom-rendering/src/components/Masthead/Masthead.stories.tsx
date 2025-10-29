@@ -1,5 +1,5 @@
 import { breakpoints } from '@guardian/source/foundations';
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-webpack5';
 import { Masthead } from './Masthead';
 import { nav } from './Titlepiece/Nav.mock';
 
@@ -49,31 +49,4 @@ export const WithPageSkin = {
 
 export const WithPageSkinAndContentSelfContstrain = {
 	args: { hasPageSkinContentSelfConstrain: true },
-};
-
-export const WithUsLogoAndWithoutSubnav = {
-	args: { wholePictureLogoSwitch: true, editionId: 'US' },
-};
-
-export const WithUsLogoAndSubnav = {
-	args: { ...WithUsLogoAndWithoutSubnav.args, showSubNav: true },
-};
-
-export const WithUsLogoAndSlimNav = {
-	args: {
-		...WithUsLogoAndWithoutSubnav.args,
-		showSlimNav: true,
-		displayRoundel: true,
-	},
-};
-
-export const WithUsLogoAndPageSkin = {
-	args: { ...WithUsLogoAndWithoutSubnav.args, hasPageSkin: true },
-};
-
-export const WithUsLogoAndPageSkinAndContentSelfContstrain = {
-	args: {
-		...WithUsLogoAndWithoutSubnav.args,
-		hasPageSkinContentSelfConstrain: true,
-	},
 };

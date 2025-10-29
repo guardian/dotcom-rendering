@@ -2,7 +2,7 @@ import type { ButtonProps as CoreButtonProps } from '@guardian/source/react-comp
 import { Button as CoreButton } from '@guardian/source/react-components';
 import { decideBackground, decideBorder, decideFont } from './styles';
 
-export interface EditorialButtonProps extends CoreButtonProps {}
+export type EditorialButtonProps = CoreButtonProps;
 
 /**
  *
