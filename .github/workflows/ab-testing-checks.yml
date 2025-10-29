@@ -20,6 +20,7 @@ on:
 jobs:
   checks:
     runs-on: ubuntu-latest
+    name: Checks
     defaults:
       run:
         working-directory: ab-testing

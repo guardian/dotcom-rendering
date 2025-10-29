@@ -28,13 +28,12 @@ type Props = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
-	isInAllBoostsTest?: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -86,7 +85,7 @@ export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 type ImmersiveCardLayoutProps = {
 	card: DCRFrontCard;
 	containerPalette?: DCRContainerPalette;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	imageLoading: Loading;
 	collectionId: number;
 	showLabsRedesign?: boolean;
@@ -101,7 +100,7 @@ type ImmersiveCardLayoutProps = {
 const ImmersiveCardLayout = ({
 	card,
 	containerPalette,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 	collectionId,
 	showLabsRedesign,
@@ -132,7 +131,7 @@ const ImmersiveCardLayout = ({
 					branding={card.branding}
 					containerPalette={containerPalette}
 					trailText={card.trailText}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio="5:3"
 					mobileAspectRatio="4:5"
@@ -242,7 +241,7 @@ type SplashCardLayoutProps = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
@@ -255,7 +254,7 @@ const SplashCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 	aspectRatio,
 	isLastRow,
@@ -272,7 +271,7 @@ const SplashCardLayout = ({
 			<ImmersiveCardLayout
 				card={card}
 				containerPalette={containerPalette}
-				absoluteServerTimes={absoluteServerTimes}
+				serverTime={serverTime}
 				imageLoading={imageLoading}
 				collectionId={collectionId}
 				showLabsRedesign={showLabsRedesign}
@@ -317,7 +316,7 @@ const SplashCardLayout = ({
 					containerPalette={containerPalette}
 					containerType="flexible/general"
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					headlineSizes={headlineSizes}
 					mediaPositionOnDesktop={mediaPositionOnDesktop}
 					mediaPositionOnMobile={mediaPositionOnMobile}
@@ -401,7 +400,7 @@ type FullWidthCardLayoutProps = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	aspectRatio: AspectRatio;
 	isFirstRow: boolean;
 	isLastRow: boolean;
@@ -415,7 +414,7 @@ const FullWidthCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 	aspectRatio,
 	isFirstRow,
@@ -445,7 +444,7 @@ const FullWidthCardLayout = ({
 			<ImmersiveCardLayout
 				card={card}
 				containerPalette={containerPalette}
-				absoluteServerTimes={absoluteServerTimes}
+				serverTime={serverTime}
 				imageLoading={imageLoading}
 				collectionId={collectionId}
 				showLabsRedesign={showLabsRedesign}
@@ -468,7 +467,7 @@ const FullWidthCardLayout = ({
 					containerPalette={containerPalette}
 					containerType="flexible/general"
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					headlineSizes={headlineSizes}
 					mediaPositionOnDesktop="right"
 					mediaPositionOnMobile={
@@ -510,10 +509,9 @@ type HalfWidthCardLayoutProps = {
 	isFirstStandardRow?: boolean;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
-	isInAllBoostsTest?: boolean;
 	containerLevel: DCRContainerLevel;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
@@ -523,13 +521,12 @@ const HalfWidthCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 	isFirstRow,
 	isFirstStandardRow,
 	aspectRatio,
 	isLastRow,
-	isInAllBoostsTest,
 	containerLevel,
 	showLabsRedesign,
 }: HalfWidthCardLayoutProps) => {
@@ -561,13 +558,11 @@ const HalfWidthCardLayout = ({
 							containerPalette={containerPalette}
 							containerType="flexible/general"
 							showAge={showAge}
-							absoluteServerTimes={absoluteServerTimes}
+							serverTime={serverTime}
 							image={card.image}
 							imageLoading={imageLoading}
 							mediaPositionOnDesktop="left"
-							mediaPositionOnMobile={
-								isInAllBoostsTest ? 'bottom' : 'left'
-							}
+							mediaPositionOnMobile="left"
 							supportingContent={card.supportingContent?.slice(
 								0,
 								2,
@@ -586,18 +581,9 @@ const HalfWidthCardLayout = ({
 								(containerLevel !== 'Primary' && cardIndex > 0)
 							}
 							trailText={undefined}
-							headlineSizes={
-								isInAllBoostsTest
-									? {
-											desktop: 'xsmall',
-											tablet: 'xxsmall',
-											mobile: 'small',
-									  }
-									: undefined
-							}
+							headlineSizes={undefined}
 							canPlayInline={false}
 							showLabsRedesign={showLabsRedesign}
-							isInAllBoostsTest={isInAllBoostsTest}
 						/>
 					</LI>
 				);
@@ -610,11 +596,10 @@ export const FlexibleGeneral = ({
 	groupedTrails,
 	containerPalette,
 	showAge,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 	aspectRatio,
 	containerLevel = 'Primary',
-	isInAllBoostsTest = false,
 	collectionId,
 	showLabsRedesign,
 }: Props) => {
@@ -639,7 +624,7 @@ export const FlexibleGeneral = ({
 					cards={splash}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					isLastRow={cards.length === 0}
@@ -657,7 +642,7 @@ export const FlexibleGeneral = ({
 								cards={row.cards}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								absoluteServerTimes={absoluteServerTimes}
+								serverTime={serverTime}
 								imageLoading={imageLoading}
 								aspectRatio={aspectRatio}
 								isFirstRow={!splash.length && i === 0}
@@ -677,13 +662,12 @@ export const FlexibleGeneral = ({
 								cards={row.cards}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								absoluteServerTimes={absoluteServerTimes}
+								serverTime={serverTime}
 								imageLoading={imageLoading}
 								isFirstRow={!splash.length && i === 0}
 								isFirstStandardRow={i === 0}
 								aspectRatio={aspectRatio}
 								isLastRow={i === groupedCards.length - 1}
-								isInAllBoostsTest={isInAllBoostsTest}
 								containerLevel={containerLevel}
 								showLabsRedesign={showLabsRedesign}
 							/>

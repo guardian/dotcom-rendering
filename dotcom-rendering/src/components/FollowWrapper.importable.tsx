@@ -31,10 +31,9 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 		return !blockList.includes(tagId);
 	};
 
-	isBridgetCompatible &&
-		isMyGuardianEnabled &&
-		isNotInBlockList(id) &&
+	if (isBridgetCompatible && isMyGuardianEnabled && isNotInBlockList(id)) {
 		setShowFollowTagButton(true);
+	}
 
 	useEffect(() => {
 		const topic = new Topic({
@@ -50,12 +49,12 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 				window.guardian.modules.sentry.reportError(
 					error,
 					'bridget-getNotificationsClient-isFollowing-error',
-				),
-					log(
-						'dotcom',
-						'Bridget getNotificationsClient.isFollowing Error:',
-						error,
-					);
+				);
+				log(
+					'dotcom',
+					'Bridget getNotificationsClient.isFollowing Error:',
+					error,
+				);
 			});
 
 		void getTagClient()
@@ -65,12 +64,8 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 				window.guardian.modules.sentry.reportError(
 					error,
 					'bridget-getTagClient-isFollowing-error',
-				),
-					log(
-						'dotcom',
-						'Bridget getTagClient.isFollowing Error:',
-						error,
-					);
+				);
+				log('dotcom', 'Bridget getTagClient.isFollowing Error:', error);
 			});
 	}, [id, displayName]);
 
@@ -81,39 +76,41 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 			type: 'tag-contributor',
 		});
 
-		isFollowingTag
-			? void getTagClient()
-					.unfollow(topic)
-					.then((success) => {
-						success && setIsFollowingTag(false);
-					})
-					.catch((error) => {
-						window.guardian.modules.sentry.reportError(
-							error,
-							'bridget-getTagClient-unfollow-error',
-						),
-							log(
-								'dotcom',
-								'Bridget getTagClient.unfollow Error:',
-								error,
-							);
-					})
-			: void getTagClient()
-					.follow(topic)
-					.then((success) => {
-						success && setIsFollowingTag(true);
-					})
-					.catch((error) => {
-						window.guardian.modules.sentry.reportError(
-							error,
-							'bridget-getTagClient-follow-error',
-						),
-							log(
-								'dotcom',
-								'Bridget getTagClient.follow Error:',
-								error,
-							);
-					});
+		if (isFollowingTag) {
+			void getTagClient()
+				.unfollow(topic)
+				.then((success) => {
+					if (success) {
+						setIsFollowingTag(false);
+					}
+				})
+				.catch((error) => {
+					window.guardian.modules.sentry.reportError(
+						error,
+						'bridget-getTagClient-unfollow-error',
+					);
+					log(
+						'dotcom',
+						'Bridget getTagClient.unfollow Error:',
+						error,
+					);
+				});
+		} else {
+			void getTagClient()
+				.follow(topic)
+				.then((success) => {
+					if (success) {
+						setIsFollowingTag(true);
+					}
+				})
+				.catch((error) => {
+					window.guardian.modules.sentry.reportError(
+						error,
+						'bridget-getTagClient-follow-error',
+					);
+					log('dotcom', 'Bridget getTagClient.follow Error:', error);
+				});
+		}
 	};
 
 	const notificationsHandler = () => {
@@ -123,39 +120,45 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 			type: 'tag-contributor',
 		});
 
-		isFollowingNotifications
-			? void getNotificationsClient()
-					.unfollow(topic)
-					.then((success) => {
-						success && setIsFollowingNotifications(false);
-					})
-					.catch((error) => {
-						window.guardian.modules.sentry.reportError(
-							error,
-							'briidget-getNotificationsClient-unfollow-error',
-						),
-							log(
-								'dotcom',
-								'Bridget getNotificationsClient.unfollow Error:',
-								error,
-							);
-					})
-			: void getNotificationsClient()
-					.follow(topic)
-					.then((success) => {
-						success && setIsFollowingNotifications(true);
-					})
-					.catch((error) => {
-						window.guardian.modules.sentry.reportError(
-							error,
-							'bridget-getNotificationsClient-follow-error',
-						),
-							log(
-								'dotcom',
-								'Bridget getNotificationsClient.follow Error:',
-								error,
-							);
-					});
+		if (isFollowingNotifications) {
+			void getNotificationsClient()
+				.unfollow(topic)
+				.then((success) => {
+					if (success) {
+						setIsFollowingNotifications(false);
+					}
+				})
+				.catch((error) => {
+					window.guardian.modules.sentry.reportError(
+						error,
+						'briidget-getNotificationsClient-unfollow-error',
+					);
+					log(
+						'dotcom',
+						'Bridget getNotificationsClient.unfollow Error:',
+						error,
+					);
+				});
+		} else {
+			void getNotificationsClient()
+				.follow(topic)
+				.then((success) => {
+					if (success) {
+						setIsFollowingNotifications(true);
+					}
+				})
+				.catch((error) => {
+					window.guardian.modules.sentry.reportError(
+						error,
+						'bridget-getNotificationsClient-follow-error',
+					);
+					log(
+						'dotcom',
+						'Bridget getNotificationsClient.follow Error:',
+						error,
+					);
+				});
+		}
 	};
 
 	return (

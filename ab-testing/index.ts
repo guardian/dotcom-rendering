@@ -1,4 +1,3 @@
-// @ts-ignore - extension is required to import this as a package in DCR
-import { ABTests } from './abTest.ts';
+import { allABTests, activeABtests } from './abTest';
 
-export { ABTests };
+export { allABTests, activeABtests };

@@ -45,7 +45,6 @@ export const OneHugeTwoBigsSixStandards = () => (
 				standard: trails.slice(3, 10),
 			}}
 			showAge={true}
-			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -67,7 +66,6 @@ export const OneVeryBigTwoBigsSixStandards = () => (
 				standard: trails.slice(3, 10),
 			}}
 			showAge={true}
-			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -90,7 +88,6 @@ export const TwoVeryBigsTwoBigsSixStandards = () => (
 				standard: trails.slice(4, 11),
 			}}
 			showAge={true}
-			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -113,7 +110,6 @@ export const TwoVeryBigs1stBoostedTwoBigsSixStandards = () => (
 				standard: trails.slice(4, 11),
 			}}
 			showAge={true}
-			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -136,7 +132,6 @@ export const TwoVeryBigs2ndBoostedTwoBigsSixStandards = () => (
 				standard: trails.slice(4, 11),
 			}}
 			showAge={true}
-			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -160,7 +155,6 @@ export const TwoVeryBigsTwelveStandards = () => (
 				standard: trails.slice(2, 14),
 			}}
 			showAge={true}
-			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -183,7 +177,6 @@ export const TwoVeryBigsOneBigEightStandards = () => (
 				standard: trails.slice(4, 12),
 			}}
 			showAge={true}
-			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -207,7 +200,6 @@ export const TwoVeryBigsOneBigBoostedSixStandards = () => (
 				standard: trails.slice(4, 10),
 			}}
 			showAge={true}
-			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -231,7 +223,6 @@ export const TwoVeryBigsTwoBigsFiveStandards = () => (
 				standard: trails.slice(5, 10),
 			}}
 			showAge={true}
-			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -255,7 +246,6 @@ export const TwoVeryBigsTwoBigsFirstBoostedEightStandards = () => (
 				standard: trails.slice(5, 12),
 			}}
 			showAge={true}
-			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -279,7 +269,6 @@ export const TwoVeryBigsThreeBigsThreeStandards = () => (
 				standard: trails.slice(6, 9),
 			}}
 			showAge={true}
-			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -302,7 +291,6 @@ export const TwoVeryBigsFourBigs = () => (
 				big: [trails[3], trails[4], trails[5], trails[6]],
 			}}
 			showAge={true}
-			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -329,7 +317,6 @@ export const OneHugeOneVeryBig7Standards = () => (
 				standard: trails.slice(2, 9),
 			}}
 			showAge={true}
-			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -352,7 +339,6 @@ export const ThreeVeryBigsFourBigs = () => (
 				big: [trails[3], trails[4], trails[5], trails[6]],
 			}}
 			showAge={true}
-			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -375,7 +361,6 @@ export const TwoBigsFourStandards = () => (
 				standard: trails.slice(2, 6),
 			}}
 			showAge={true}
-			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -399,7 +384,6 @@ export const OneVeryBigTwoBigs = () => (
 				big: [trails[1], trails[2]],
 			}}
 			showAge={true}
-			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -421,7 +405,6 @@ export const OneVeryBig = () => (
 				veryBig: [trails[0]],
 			}}
 			showAge={true}
-			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -445,7 +428,6 @@ export const TwoVeryBigsFourBigsFirstBoostedThreeStandards = () => (
 				standard: trails.slice(5, 8),
 			}}
 			showAge={true}
-			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>

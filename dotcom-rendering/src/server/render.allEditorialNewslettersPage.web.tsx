@@ -78,6 +78,7 @@ export const renderEditorialNewslettersPage = ({
 		abTests: newslettersPage.config.abTests,
 		serverSideABTests: newslettersPage.config.serverSideABTests,
 		brazeApiKey: newslettersPage.config.brazeApiKey,
+		contentType: newslettersPage.config.contentType,
 		googleRecaptchaSiteKey: newslettersPage.config.googleRecaptchaSiteKey,
 		googleRecaptchaSiteKeyVisible:
 			newslettersPage.config.googleRecaptchaSiteKeyVisible,

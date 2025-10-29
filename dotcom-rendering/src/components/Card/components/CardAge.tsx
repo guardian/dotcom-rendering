@@ -22,7 +22,7 @@ const ageStyles = (colour: string) => {
 };
 
 type Props = {
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	webPublication: {
 		date: string;
 		isWithinTwelveHours: boolean;
@@ -33,7 +33,7 @@ type Props = {
 };
 
 export const CardAge = ({
-	absoluteServerTimes,
+	serverTime,
 	webPublication,
 	isTagPage,
 	showClock,
@@ -58,7 +58,7 @@ export const CardAge = ({
 				<DateTime
 					date={new Date(webPublication.date)}
 					display={'relative'}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					showWeekday={false}
 					showDate={true}
 					showTime={false}

@@ -63,10 +63,11 @@ module.exports = {
 		'eslint:recommended',
 		'@guardian/eslint-config-typescript',
 		'plugin:jsx-a11y/recommended',
+		'plugin:ssr-friendly/recommended',
+		'plugin:storybook/recommended',
 		// eslint-config-prettier disables formatting rules that conflict with prettier
 		// needs to go last so it can override other configuration. See https://github.com/prettier/eslint-config-prettier#installation
 		'prettier',
-		'plugin:ssr-friendly/recommended',
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
@@ -211,7 +212,7 @@ module.exports = {
 			files: ['**/**.js'],
 			rules: {
 				'global-require': 'off',
-				'@typescript-eslint/no-var-requires': 'off',
+				'@typescript-eslint/no-require-imports': 'off',
 				'@typescript-eslint/no-unsafe-member-access': 'off',
 				'@typescript-eslint/no-misused-promises': 'off',
 			},
@@ -244,7 +245,7 @@ module.exports = {
 		{
 			files: ['**/**.tsx'],
 			rules: {
-				'@typescript-eslint/ban-types': [
+				'@typescript-eslint/no-restricted-types': [
 					'warn',
 					{
 						types: {
@@ -258,7 +259,7 @@ module.exports = {
 						},
 					},
 				],
-				'@typescript-eslint/ban-types': [
+				'@typescript-eslint/no-restricted-types': [
 					'error',
 					{
 						types: {
@@ -273,7 +274,6 @@ module.exports = {
 							'React.FC':
 								'Please use const MyThing = ({foo, bar}: Props) instead',
 						},
-						extendDefaults: true,
 					},
 				],
 			},

@@ -18,6 +18,7 @@ import {
 	type TableOfContentsItem,
 } from '../model/enhanceTableOfContents';
 import { enhancePinnedPost } from '../model/pinnedPost';
+import { logger } from '../server/lib/logging';
 import { parse as parseStoryPackage, type StoryPackage } from '../storyPackage';
 import type {
 	AdPlaceholderBlockElement,
@@ -43,12 +44,13 @@ export type ArticleFields = {
 	display: ArticleDisplay;
 	theme: ArticleTheme;
 	storyPackage: StoryPackage | undefined;
+	serverTime?: number | undefined;
 };
 
 export type Gallery = ArticleFields & {
 	design: ArticleDesign.Gallery;
 	bodyElements: (ImageBlockElement | AdPlaceholderBlockElement)[];
-	mainMedia: ImageBlockElement;
+	mainMedia?: ImageBlockElement;
 };
 
 export type OtherArticles = ArticleFields & {
@@ -60,12 +62,12 @@ export type Article = Gallery | OtherArticles;
 export const getGalleryMainMedia = (
 	mainMediaElements: FEElement[],
 	trailImage?: ImageBlockElement,
-): ImageBlockElement => {
+): ImageBlockElement | undefined => {
 	const mainMedia = mainMediaElements[0];
 
 	if (isUndefined(mainMedia)) {
 		if (isUndefined(trailImage)) {
-			throw new Error('No main media or trail picture found');
+			logger.warn('No main media or trail picture found');
 		}
 		return trailImage;
 	}
@@ -74,7 +76,8 @@ export const getGalleryMainMedia = (
 		mainMedia._type !==
 		'model.dotcomrendering.pageElements.ImageBlockElement'
 	) {
-		throw new Error('Main media is not an image');
+		logger.warn('Main media is not an image');
+		return;
 	}
 
 	return mainMedia;
@@ -85,6 +88,8 @@ export const enhanceArticleType = (
 	renderingTarget: RenderingTarget,
 ): Article => {
 	const format = decideFormat(data.format);
+
+	const serverTime = Date.now();
 
 	const imagesForLightbox = data.config.switches.lightbox
 		? buildLightboxImages(data.format, data.blocks, data.mainMediaElements)
@@ -139,6 +144,7 @@ export const enhanceArticleType = (
 			design,
 			display: format.display,
 			theme: format.theme,
+			serverTime,
 			bodyElements: blocks.flatMap((block) =>
 				block.elements.filter(
 					(element) =>
@@ -161,6 +167,7 @@ export const enhanceArticleType = (
 		display: format.display,
 		theme: format.theme,
 		storyPackage,
+		serverTime,
 		frontendData: {
 			...data,
 			mainMediaElements,

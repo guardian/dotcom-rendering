@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import type { MainMedia } from '../../types/mainMedia';
 import { HighlightsCard } from './HighlightsCard';
@@ -109,7 +109,7 @@ export const WithMediaIcon: Story = {
 			theme: Pillar.Culture,
 		},
 	},
-	parameters: {},
+
 	name: 'With Media Icon',
 };
 
@@ -121,7 +121,7 @@ export const WithLiveKicker: Story = {
 			theme: Pillar.News,
 		},
 	},
-	parameters: {},
+
 	name: 'With Live Kicker',
 };
 
@@ -134,7 +134,7 @@ export const WithStarRating: Story = {
 		},
 		starRating: 4,
 	},
-	parameters: {},
+
 	name: 'With Star Rating',
 };
 
@@ -155,6 +155,5 @@ export const WithPodcastSeriesImage: Story = {
 		},
 	},
 
-	parameters: {},
 	name: 'With Podcast Series Image',
 };

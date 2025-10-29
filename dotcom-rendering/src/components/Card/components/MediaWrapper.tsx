@@ -9,14 +9,6 @@ const mediaFixedSize = {
 	medium: 125,
 };
 
-type MediaFixedSize = keyof typeof mediaFixedSize;
-
-export type MediaFixedSizeOptions = {
-	mobile?: MediaFixedSize;
-	tablet?: MediaFixedSize;
-	desktop?: MediaFixedSize;
-};
-
 export type MediaPositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
 export type MediaSizeType =
 	| 'small'
@@ -25,6 +17,8 @@ export type MediaSizeType =
 	| 'xlarge'
 	| 'jumbo'
 	| 'carousel'
+	| 'scrollable-small'
+	| 'scrollable-medium'
 	| 'podcast'
 	| 'highlights-card'
 	| 'feature'
@@ -34,18 +28,17 @@ export type MediaSizeType =
 type Props = {
 	children: React.ReactNode;
 	mediaSize: MediaSizeType;
-	mediaFixedSizes?: MediaFixedSizeOptions;
 	mediaType?: CardMediaType;
 	mediaPositionOnDesktop: MediaPositionType;
 	mediaPositionOnMobile: MediaPositionType;
-	fixImageWidth: boolean;
 	/**
 	 * Forces hiding the image overlay added to pictures & slideshows on hover.
 	 * This is to allow hiding the overlay on slideshow carousels where we don't
 	 * want it to be shown whilst retaining it for existing slideshows.
 	 */
 	hideImageOverlay?: boolean;
-	isBetaContainer?: boolean;
+	isBetaContainer: boolean;
+	isSmallCard: boolean;
 	padMedia?: boolean;
 };
 
@@ -84,9 +77,13 @@ const mediaPaddingStyles = (
  */
 const flexBasisStyles = ({
 	mediaSize,
+	mediaType,
+	isSmallCard,
 	isBetaContainer,
 }: {
 	mediaSize: MediaSizeType;
+	mediaType: CardMediaType;
+	isSmallCard: boolean;
 	isBetaContainer: boolean;
 }): SerializedStyles => {
 	if (!isBetaContainer) {
@@ -115,6 +112,15 @@ const flexBasisStyles = ({
 					flex-basis: 75%;
 				`;
 		}
+	}
+
+	if (mediaType === 'podcast' && !isSmallCard) {
+		return css`
+			flex-basis: 120px;
+			${from.desktop} {
+				flex-basis: 168px;
+			}
+		`;
 	}
 
 	switch (mediaSize) {
@@ -148,6 +154,7 @@ const flexBasisStyles = ({
 			`;
 	}
 };
+
 /**
  * Below tablet, we fix the size of the media and add a margin around it.
  * The corresponding content flex grows to fill the space.
@@ -161,40 +168,48 @@ const fixMediaWidthStyles = (width: number) => css`
 	align-self: flex-start;
 `;
 
-const fixMediaWidth = ({
-	mobile,
-	tablet,
-	desktop,
-}: MediaFixedSizeOptions) => css`
-	${until.tablet} {
-		${mobile !== undefined && fixMediaWidthStyles(mediaFixedSize[mobile])}
+const fixMobileMediaWidth = (
+	isBetaContainer: boolean,
+	isSmallCard: boolean,
+) => {
+	if (!isBetaContainer) {
+		return css`
+			${until.tablet} {
+				${fixMediaWidthStyles(mediaFixedSize.medium)}
+			}
+		`;
 	}
-	${tablet &&
-	css`
-		${between.tablet.and.desktop} {
-			${fixMediaWidthStyles(mediaFixedSize[tablet])}
+
+	const size = isSmallCard ? mediaFixedSize.tiny : mediaFixedSize.small;
+
+	return css`
+		${until.tablet} {
+			${fixMediaWidthStyles(size)}
 		}
-	`}
-	${desktop &&
-	css`
-		${from.desktop} {
-			${fixMediaWidthStyles(mediaFixedSize[desktop])}
+	`;
+};
+
+const fixDesktopMediaWidth = () => {
+	return css`
+		${from.tablet} {
+			${fixMediaWidthStyles(mediaFixedSize.small)}
 		}
-	`}
-`;
+	`;
+};
 
 export const MediaWrapper = ({
 	children,
 	mediaSize,
-	mediaFixedSizes = { mobile: 'medium' },
 	mediaType,
 	mediaPositionOnDesktop,
 	mediaPositionOnMobile,
-	fixImageWidth,
 	hideImageOverlay,
-	isBetaContainer = false,
+	isBetaContainer,
+	isSmallCard,
 	padMedia,
 }: Props) => {
+	const isHorizontalOnMobile =
+		mediaPositionOnMobile === 'left' || mediaPositionOnMobile === 'right';
 	const isHorizontalOnDesktop =
 		mediaPositionOnDesktop === 'left' || mediaPositionOnDesktop === 'right';
 
@@ -204,10 +219,13 @@ export const MediaWrapper = ({
 				(mediaType === 'slideshow' ||
 					mediaType === 'picture' ||
 					mediaType === 'youtube-video' ||
-					mediaType === 'loop-video') &&
+					mediaType === 'loop-video' ||
+					mediaType === 'podcast') &&
 					isHorizontalOnDesktop &&
 					flexBasisStyles({
 						mediaSize,
+						mediaType,
+						isSmallCard,
 						isBetaContainer,
 					}),
 				mediaType === 'avatar' &&
@@ -222,7 +240,10 @@ export const MediaWrapper = ({
 							display: none;
 						}
 					`,
-				fixImageWidth && fixMediaWidth(mediaFixedSizes),
+				isHorizontalOnMobile &&
+					mediaType !== 'podcast' &&
+					fixMobileMediaWidth(isBetaContainer, isSmallCard),
+				isSmallCard && fixDesktopMediaWidth(),
 				isHorizontalOnDesktop &&
 					css`
 						${from.tablet} {
