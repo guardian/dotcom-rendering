@@ -77,9 +77,13 @@ const mediaPaddingStyles = (
  */
 const flexBasisStyles = ({
 	mediaSize,
+	mediaType,
+	isSmallCard,
 	isBetaContainer,
 }: {
 	mediaSize: MediaSizeType;
+	mediaType: CardMediaType;
+	isSmallCard: boolean;
 	isBetaContainer: boolean;
 }): SerializedStyles => {
 	if (!isBetaContainer) {
@@ -108,6 +112,15 @@ const flexBasisStyles = ({
 					flex-basis: 75%;
 				`;
 		}
+	}
+
+	if (mediaType === 'podcast' && !isSmallCard) {
+		return css`
+			flex-basis: 120px;
+			${from.desktop} {
+				flex-basis: 168px;
+			}
+		`;
 	}
 
 	switch (mediaSize) {
@@ -206,10 +219,13 @@ export const MediaWrapper = ({
 				(mediaType === 'slideshow' ||
 					mediaType === 'picture' ||
 					mediaType === 'youtube-video' ||
-					mediaType === 'loop-video') &&
+					mediaType === 'loop-video' ||
+					mediaType === 'podcast') &&
 					isHorizontalOnDesktop &&
 					flexBasisStyles({
 						mediaSize,
+						mediaType,
+						isSmallCard,
 						isBetaContainer,
 					}),
 				mediaType === 'avatar' &&
@@ -228,15 +244,6 @@ export const MediaWrapper = ({
 					mediaType !== 'podcast' &&
 					fixMobileMediaWidth(isBetaContainer, isSmallCard),
 				isSmallCard && fixDesktopMediaWidth(),
-				mediaType === 'podcast' &&
-					isHorizontalOnDesktop &&
-					!isSmallCard &&
-					css`
-						flex-basis: 120px;
-						${from.desktop} {
-							flex-basis: 168px;
-						}
-					`,
 				isHorizontalOnDesktop &&
 					css`
 						${from.tablet} {
