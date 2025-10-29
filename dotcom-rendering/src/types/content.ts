@@ -147,17 +147,13 @@ export const NewsletterSchema = object({
 
 export type Newsletter = z.infer<typeof NewsletterSchema>;
 
-const NewsletterLayoutSchema = object({
-	groups: array(
-		object({
-			title: string(),
-			subtitle: optional(string()),
-			newsletters: array(string()),
-		}),
-	),
-});
-
-export type NewsletterLayout = z.infer<typeof NewsletterLayoutSchema>;
+export type NewsletterLayout = {
+	groups: {
+		title: string;
+		subtitle?: string;
+		newsletters: string[];
+	}[];
+};
 
 // ------------------------------------- Article
 
@@ -1492,31 +1488,28 @@ export type TimelineAtomType = {
 	expandCallback?: () => void;
 };
 
-const ImageForLightboxSchema = object({
-	masterUrl: string(),
-	elementId: string(),
-	width: number(),
-	height: number(),
-	position: number(),
-	alt: optional(string()),
-	credit: optional(string()),
-	caption: optional(string()),
-	displayCredit: optional(boolean()),
-	title: optional(string()),
-	starRating: optional(number()),
+export type ImageForLightbox = {
+	masterUrl: string;
+	elementId: string;
+	width: number;
+	height: number;
+	position: number;
+	alt?: string;
+	credit?: string;
+	caption?: string;
+	displayCredit?: boolean;
+	title?: string;
+	starRating?: number;
 	/**
 	 * Used for liveblog images to generate a link back to the
 	 * original post where the image was used
 	 */
-	blockId: optional(string()),
+	blockId?: string;
 	/**
 	 * Used to show when a liveblog image was posted
 	 */
-	firstPublished: optional(number()),
-});
-
-export type ImageForLightbox = z.infer<typeof ImageForLightboxSchema>;
-
+	firstPublished?: number;
+};
 export type SharePlatformType =
 	| 'facebook'
 	| 'twitter'
