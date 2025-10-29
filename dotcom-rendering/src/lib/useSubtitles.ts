@@ -31,7 +31,7 @@ export const useSubtitles = ({
 
 		const setTrackFromList = () => {
 			const track = textTracks[0];
-			// We currently only support one text track per video, so we are ok to access [0] here.
+			// We currently only support one text track per video, so we are OK to access [0] here.
 			if (!track) return;
 
 			// Keep track in 'showing' mode for iOS reliability
@@ -74,32 +74,7 @@ export const useSubtitles = ({
 			track.mode = 'showing';
 		}
 
-		// Manual polling for maximum reliability
-		const pollCues = () => {
-			if (!track.cues || track.cues.length === 0) {
-				setActiveCue(null);
-				return;
-			}
-
-			// Find the active cue based on current time
-			for (let i = 0; i < track.cues.length; i++) {
-				const cue = track.cues[i] as VTTCue;
-				if (
-					cue.startTime <= currentTime &&
-					cue.endTime >= currentTime
-				) {
-					setActiveCue({
-						startTime: cue.startTime,
-						endTime: cue.endTime,
-						text: cue.text,
-					});
-					return;
-				}
-			}
-			setActiveCue(null);
-		};
-
-		// Also listen to cuechange as the primary method (works in most browsers)
+		// listen to cuechange and set the active cue
 		const onCueChange = () => {
 			const list = track.activeCues;
 			if (!list || list.length === 0) {
@@ -116,12 +91,10 @@ export const useSubtitles = ({
 
 		track.addEventListener('cuechange', onCueChange);
 
-		// Initial check and polling as backup
-		pollCues();
-		const intervalId = setInterval(pollCues, 100);
+		// Initial check
+		onCueChange();
 
 		return () => {
-			clearInterval(intervalId);
 			track.removeEventListener('cuechange', onCueChange);
 			// Keep it showing even on cleanup for consistency
 			track.mode = 'showing';
