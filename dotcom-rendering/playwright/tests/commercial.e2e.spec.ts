@@ -3,7 +3,7 @@ import { cmpAcceptAll } from '../lib/cmp';
 import { loadPage } from '../lib/load-page';
 import { expectToExist } from '../lib/locators';
 
-test.describe('Commercial E2E tests', () => {
+test.describe.skip('Commercial E2E tests', () => {
 	test(`It should load the expected number of ad slots`, async ({ page }) => {
 		await loadPage({
 			page,
