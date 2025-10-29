@@ -211,9 +211,13 @@ export const LoopVideoPlayer = forwardRef(
 					))}
 					{subtitleSource !== undefined && (
 						<track
-							default={true}
+							// Don't use default for iOS HLS - it forces native rendering
+							default={false}
 							kind="subtitles"
 							src={subtitleSource}
+							// Add label to ensure iOS recognizes it
+							label="English"
+							srcLang="en"
 						/>
 					)}
 					{FallbackImageComponent}

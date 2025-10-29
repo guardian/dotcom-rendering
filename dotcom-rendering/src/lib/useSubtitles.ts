@@ -31,20 +31,33 @@ export const useSubtitles = ({
 
 		const setTrackFromList = () => {
 			const track = textTracks[0];
-			// We currently only support one text track per video, so we are ok to access [0] here. If we add additional languages, this will need updating.
+			// We currently only support one text track per video, so we are ok to access [0] here.
 			if (!track) return;
 
-			// 'showing' keeps iOS’s activeCues more reliable. Instead of "hidden", we hide them with native CSS
-			if (track.mode !== 'showing') track.mode = 'showing';
+			// Keep track in 'showing' mode for iOS reliability
+			// We'll hide the native subtitles with CSS instead
+			if (track.mode !== 'showing') {
+				track.mode = 'showing';
+			}
+
 			setActiveTrack(track);
 		};
 
-		// Get Text track as soon as the video element is available.
+		// Get Text track as soon as the video element is available
 		setTrackFromList();
 
-		// listen for delayed loads
+		// Listen for delayed loads across all scenarios
 		textTracks.addEventListener('addtrack', setTrackFromList);
 		video.addEventListener('loadedmetadata', setTrackFromList);
+		video.addEventListener('loadeddata', setTrackFromList);
+		video.addEventListener('canplay', setTrackFromList);
+
+		return () => {
+			textTracks.removeEventListener('addtrack', setTrackFromList);
+			video.removeEventListener('loadedmetadata', setTrackFromList);
+			video.removeEventListener('loadeddata', setTrackFromList);
+			video.removeEventListener('canplay', setTrackFromList);
+		};
 	}, [video]);
 
 	useEffect(() => {
@@ -55,12 +68,42 @@ export const useSubtitles = ({
 			return;
 		}
 
-		// if we have a track and can show it, hide the native track
-		track.mode = 'hidden';
+		// Keep track in 'showing' mode but hide with CSS
+		// This makes iOS more reliable with cuechange events and activeCues
+		if (track.mode !== 'showing') {
+			track.mode = 'showing';
+		}
 
+		// Manual polling for maximum reliability
+		const pollCues = () => {
+			if (!track.cues || track.cues.length === 0) {
+				setActiveCue(null);
+				return;
+			}
+
+			// Find the active cue based on current time
+			for (let i = 0; i < track.cues.length; i++) {
+				const cue = track.cues[i] as VTTCue;
+				if (
+					cue.startTime <= currentTime &&
+					cue.endTime >= currentTime
+				) {
+					setActiveCue({
+						startTime: cue.startTime,
+						endTime: cue.endTime,
+						text: cue.text,
+					});
+					return;
+				}
+			}
+			setActiveCue(null);
+		};
+
+		// Also listen to cuechange as the primary method (works in most browsers)
 		const onCueChange = () => {
 			const list = track.activeCues;
 			if (!list || list.length === 0) {
+				setActiveCue(null);
 				return;
 			}
 			const cue = list[0] as VTTCue;
@@ -70,13 +113,20 @@ export const useSubtitles = ({
 				text: cue.text,
 			});
 		};
+
 		track.addEventListener('cuechange', onCueChange);
-		onCueChange();
+
+		// Initial check and polling as backup
+		pollCues();
+		const intervalId = setInterval(pollCues, 100);
+
 		return () => {
+			clearInterval(intervalId);
 			track.removeEventListener('cuechange', onCueChange);
+			// Keep it showing even on cleanup for consistency
 			track.mode = 'showing';
 		};
-	}, [activeTrack, shouldShow]);
+	}, [activeTrack, shouldShow, currentTime]);
 
 	return activeCue;
 };
