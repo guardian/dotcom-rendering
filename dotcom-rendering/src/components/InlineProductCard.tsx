@@ -9,7 +9,6 @@ import {
 	textSans20,
 	textSansBold17,
 	textSansBold20,
-	until,
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
@@ -73,17 +72,17 @@ const productInfoContainer = css`
 	display: flex;
 	flex-direction: column;
 	gap: ${space[1]}px;
-	${textSans20};
+	${textSans17};
 
-	${until.mobileLandscape} {
-		${textSans17};
+	${from.mobileLandscape} {
+		${textSans20};
 	}
 `;
 
 const primaryHeading = css`
-	${headlineMedium24};
-	${until.mobileLandscape} {
-		${headlineMedium20};
+	${headlineMedium20};
+	${from.mobileLandscape} {
+		${headlineMedium24};
 	}
 `;
 
