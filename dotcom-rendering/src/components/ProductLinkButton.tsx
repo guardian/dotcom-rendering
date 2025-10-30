@@ -68,8 +68,7 @@ export const ProductLinkButton = ({
 			<span
 				css={css`
 					white-space: normal;
-					width: 100%;
-					padding: 10px 0 10px;
+					padding: 4px 0 4px;
 				`}
 			>
 				{label}

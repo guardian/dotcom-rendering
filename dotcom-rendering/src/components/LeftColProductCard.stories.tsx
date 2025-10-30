@@ -41,11 +41,15 @@ const meta = {
 		productCtas: [
 			{
 				url: 'https://www.theguardian.com',
-				label: '£89.99 at Amazon',
+				price: '£89.99',
+				retailer: 'Amazon',
+				text: '',
 			},
 			{
 				url: 'https://www.theguardian.com',
-				label: '£99.99 at John Lewis',
+				price: '£95.99',
+				retailer: 'John Lewis',
+				text: '',
 			},
 		],
 		customAttributes: [
@@ -76,7 +80,9 @@ export const SingleCta: Story = {
 		productCtas: [
 			{
 				url: 'https://www.theguardian.com',
-				label: '£89.99 at Amazon',
+				price: '£89.99',
+				retailer: 'at Amazon',
+				text: '',
 			},
 		],
 		lowestPrice: '£89.99',
@@ -88,7 +94,9 @@ export const ShortCta: Story = {
 		productCtas: [
 			{
 				url: 'https://www.theguardian.com',
-				label: '£8 at Z',
+				price: '£8',
+				retailer: 'Z',
+				text: '',
 			},
 		],
 		lowestPrice: '£89.99',
@@ -100,31 +108,27 @@ export const LotsOfCtas: Story = {
 		productCtas: [
 			{
 				url: 'https://www.theguardian.com',
-				label: '£89.99 at Cotswolds Outdoors',
+				price: '£89.99',
+				retailer: 'Cotswold Outdoor',
+				text: '',
 			},
 			{
 				url: 'https://www.theguardian.com',
-				label: '£89 at Zara',
+				price: '£95',
+				retailer: 'REI',
+				text: '',
 			},
 			{
 				url: 'https://www.theguardian.com',
-				label: '£9 at Kenwood',
+				price: '£99.99',
+				retailer: 'John Lewis',
+				text: '',
 			},
 			{
 				url: 'https://www.theguardian.com',
-				label: '£70 at Amazon',
-			},
-			{
-				url: 'https://www.theguardian.com',
-				label: '£12 for 10 at John Lewis',
-			},
-			{
-				url: 'https://www.theguardian.com',
-				label: '£30 at eBay',
-			},
-			{
-				url: 'https://www.theguardian.com',
-				label: '£45 at Etsy',
+				price: '£105',
+				retailer: 'Amazon',
+				text: '',
 			},
 		],
 		lowestPrice: '£89.99',

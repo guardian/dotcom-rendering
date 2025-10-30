@@ -81,11 +81,15 @@ const sampleProductCard: InlineProductCardProps = {
 	productCtas: [
 		{
 			url: 'https://www.theguardian.com',
-			label: '£89.99 at Amazon',
+			price: '£89.99',
+			retailer: 'Amazon',
+			text: '',
 		},
 		{
 			url: 'https://www.theguardian.com',
-			label: '£99.99 at John Lewis',
+			price: '£95.99',
+			retailer: 'John Lewis',
+			text: '',
 		},
 	],
 	brandName: 'AirCraft',
@@ -97,16 +101,17 @@ const sampleProductCard: InlineProductCardProps = {
 			value: 'There’s nowhere to stow the remote control',
 		},
 	],
+	lowestPrice: '£89.99',
 	isCardOnly: false,
 };
 
 export const Default = () => <InlineProductCard {...sampleProductCard} />;
 
-export const productCardOnly = () => (
+export const ProductCardOnly = () => (
 	<InlineProductCard {...sampleProductCard} isCardOnly={true} />
 );
 
-export const productCardOnlyDisplayCredit = () => (
+export const ProductCardOnlyDisplayCredit = () => (
 	<InlineProductCard
 		{...sampleProductCard}
 		image={{

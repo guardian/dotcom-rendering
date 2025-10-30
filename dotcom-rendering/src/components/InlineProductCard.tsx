@@ -13,14 +13,10 @@ import {
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
-import type { ProductImage } from '../types/content';
+import type { ProductCta, ProductImage } from '../types/content';
 import { ProductCardButtons } from './ProductCardButtons';
 import { ProductCardImage } from './ProductCardImage';
 
-export type ProductCardCta = {
-	label: string;
-	url: string;
-};
 export type CustomAttributes = {
 	name: string;
 	value: string;
@@ -31,7 +27,7 @@ export type InlineProductCardProps = {
 	brandName: string;
 	productName: string;
 	image?: ProductImage;
-	productCtas: ProductCardCta[];
+	productCtas: ProductCta[];
 	customAttributes: CustomAttributes[];
 	isCardOnly: boolean;
 	shouldShowLeftColCard?: boolean;
@@ -107,7 +103,8 @@ const productNameStyle = css`
 
 const mobileButtonWrapper = css`
 	grid-column: 1 / span 2;
-	grid-gap: ${space[1]}px;
+	display: grid;
+	row-gap: ${space[1]}px;
 	${from.mobileLandscape} {
 		display: none;
 	}
@@ -116,7 +113,8 @@ const mobileButtonWrapper = css`
 const desktopButtonWrapper = css`
 	display: none;
 	${from.mobileLandscape} {
-		display: inline;
+		display: grid;
+		row-gap: ${space[1]}px;
 	}
 `;
 
@@ -174,7 +172,6 @@ export const InlineProductCard = ({
 				format={format}
 				image={image}
 				url={productCtas[0]?.url}
-				label={productCtas[0]?.label}
 			/>
 			<div css={productInfoContainer}>
 				<div css={primaryHeading}>{brandName}</div>

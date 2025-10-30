@@ -16,7 +16,6 @@ export const ProductCardImage = ({
 	format,
 	image,
 	url,
-	label,
 	...props
 }: ProductCardImageProps) => {
 	if (!image) {
@@ -25,12 +24,11 @@ export const ProductCardImage = ({
 
 	return (
 		<div {...props}>
-			{url && label ? (
+			{url ? (
 				<a
 					href={url}
 					target="_blank"
 					rel="noopener noreferrer"
-					aria-label={label}
 					// this is needed to override global style
 					// html:not(.src-focus-disabled) *:focus
 					// it has specificity(0, 2, 1) so we need (0, 3, 0)
