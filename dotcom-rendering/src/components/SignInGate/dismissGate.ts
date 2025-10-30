@@ -136,7 +136,7 @@ export const incrementUserDismissedGateCount = (
  * Get the dismissed count using the last known treatmentId if available.
  * Returns 0 if no treatmentId has been saved yet (first visit).
  */
-export const getGateDismissedCount = (name: string): number => {
+export const retrieveLastGateDismissedCount = (name: string): number => {
 	const prefs = getSigninGatePrefsSafely();
 	const lastTreatmentId = prefs[`last-treatment-id-${name}`];
 

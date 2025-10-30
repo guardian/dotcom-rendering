@@ -1,8 +1,8 @@
 import {
-	getGateDismissedCount,
 	hasUserDismissedGate,
 	hasUserDismissedGateMoreThanCount,
 	incrementUserDismissedGateCount,
+	retrieveLastGateDismissedCount,
 	setUserDismissedGate,
 	unsetUserDismissedGate,
 } from './dismissGate';
@@ -210,7 +210,7 @@ describe('SignInGate - dismissGate methods', () => {
 
 	describe('getGateDismissedCount', () => {
 		test('returns 0 when no treatmentId has been saved yet (first visit)', () => {
-			const count = getGateDismissedCount('AuxiaSignInGate');
+			const count = retrieveLastGateDismissedCount('AuxiaSignInGate');
 			expect(count).toBe(0);
 		});
 
@@ -219,7 +219,7 @@ describe('SignInGate - dismissGate methods', () => {
 			incrementUserDismissedGateCount('14414017', 'AuxiaSignInGate');
 			incrementUserDismissedGateCount('14414017', 'AuxiaSignInGate');
 
-			const count = getGateDismissedCount('AuxiaSignInGate');
+			const count = retrieveLastGateDismissedCount('AuxiaSignInGate');
 			expect(count).toBe(2);
 		});
 
@@ -234,22 +234,22 @@ describe('SignInGate - dismissGate methods', () => {
 				'AuxiaSignInGate',
 			);
 
-			expect(getGateDismissedCount('AuxiaSignInGate')).toBe(2);
+			expect(retrieveLastGateDismissedCount('AuxiaSignInGate')).toBe(2);
 
 			// Later visit with treatmentId '14414017'
 			incrementUserDismissedGateCount('14414017', 'AuxiaSignInGate');
 
 			// Should now return count for '14414017' since it's the last one saved
-			expect(getGateDismissedCount('AuxiaSignInGate')).toBe(1);
+			expect(retrieveLastGateDismissedCount('AuxiaSignInGate')).toBe(1);
 		});
 
 		test('handles different gate names independently', () => {
 			incrementUserDismissedGateCount('variant-1', 'GateA');
 			incrementUserDismissedGateCount('variant-2', 'GateB');
 
-			expect(getGateDismissedCount('GateA')).toBe(1);
-			expect(getGateDismissedCount('GateB')).toBe(1);
-			expect(getGateDismissedCount('GateC')).toBe(0);
+			expect(retrieveLastGateDismissedCount('GateA')).toBe(1);
+			expect(retrieveLastGateDismissedCount('GateB')).toBe(1);
+			expect(retrieveLastGateDismissedCount('GateC')).toBe(0);
 		});
 	});
 });
