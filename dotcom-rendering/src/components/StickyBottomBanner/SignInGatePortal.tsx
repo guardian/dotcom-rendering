@@ -140,17 +140,30 @@ export const SignInGatePortal = ({
  * This replicates the logic from SignInGateSelector but is adapted
  * for use within the message picker system.
  */
-export const canShowSignInGatePortal = async (
-	isSignedIn: boolean | undefined,
-	isPaidContent: boolean,
-	isPreview: boolean,
-	pageId?: string,
-	contributionsServiceUrl?: string,
-	editionId?: EditionId,
-	contentType?: string,
-	sectionId?: string,
-	tags?: TagType[],
-): Promise<CanShowResult<AuxiaGateDisplayData>> => {
+export interface CanShowSignInGateProps {
+	isSignedIn: boolean | undefined;
+	isPaidContent: boolean;
+	isPreview: boolean;
+	pageId: string;
+	contributionsServiceUrl: string;
+	isInAuxiaControlGroup: boolean;
+	editionId?: EditionId;
+	contentType?: string;
+	sectionId?: string;
+	tags?: TagType[];
+}
+export const canShowSignInGatePortal = async ({
+	isSignedIn,
+	isPaidContent,
+	isPreview,
+	pageId,
+	contributionsServiceUrl,
+	isInAuxiaControlGroup,
+	editionId,
+	contentType,
+	sectionId,
+	tags,
+}: CanShowSignInGateProps): Promise<CanShowResult<AuxiaGateDisplayData>> => {
 	// Check if the sign-in gate placeholder exists in the DOM
 	const targetElement = document.getElementById('sign-in-gate');
 
@@ -185,6 +198,7 @@ export const canShowSignInGatePortal = async (
 			sectionId,
 			tags,
 			retrieveLastGateDismissedCount('AuxiaSignInGate'),
+			isInAuxiaControlGroup,
 		);
 
 		return {

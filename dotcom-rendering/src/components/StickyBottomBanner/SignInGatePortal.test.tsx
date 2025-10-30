@@ -2,6 +2,7 @@
 // under test is evaluated.
 import { buildAuxiaGateDisplayData } from '../../lib/auxia';
 import type { AuxiaGateDisplayData } from '../SignInGate/types';
+import type { CanShowSignInGateProps } from './SignInGatePortal';
 import { canShowSignInGatePortal } from './SignInGatePortal';
 
 // Mock the auxia module (Jest hoists jest.mock calls so placing it after imports is fine).
@@ -15,6 +16,19 @@ Object.defineProperty(document, 'getElementById', {
 	value: mockGetElementById,
 });
 
+const canShowProps: CanShowSignInGateProps = {
+	isSignedIn: false,
+	isPaidContent: false,
+	isPreview: false,
+	pageId: 'page-id',
+	contributionsServiceUrl: 'https://contributions.local',
+	isInAuxiaControlGroup: false,
+	editionId: 'UK',
+	contentType: 'Article',
+	sectionId: 'section',
+	tags: [],
+};
+
 describe('SignInGatePortal', () => {
 	beforeEach(() => {
 		jest.clearAllMocks();
@@ -24,7 +38,7 @@ describe('SignInGatePortal', () => {
 		it('should return false when sign-in gate placeholder does not exist', async () => {
 			mockGetElementById.mockReturnValue(null);
 
-			const result = await canShowSignInGatePortal(false, false, false);
+			const result = await canShowSignInGatePortal(canShowProps);
 
 			expect(result).toEqual({ show: false });
 			expect(mockGetElementById).toHaveBeenCalledWith('sign-in-gate');
@@ -34,7 +48,10 @@ describe('SignInGatePortal', () => {
 			const mockElement = document.createElement('div');
 			mockGetElementById.mockReturnValue(mockElement);
 
-			const result = await canShowSignInGatePortal(true, false, false);
+			const result = await canShowSignInGatePortal({
+				...canShowProps,
+				isSignedIn: true,
+			});
 
 			expect(result).toEqual({ show: false });
 		});
@@ -43,7 +60,10 @@ describe('SignInGatePortal', () => {
 			const mockElement = document.createElement('div');
 			mockGetElementById.mockReturnValue(mockElement);
 
-			const result = await canShowSignInGatePortal(false, true, false);
+			const result = await canShowSignInGatePortal({
+				...canShowProps,
+				isPaidContent: true,
+			});
 
 			expect(result).toEqual({ show: false });
 		});
@@ -52,7 +72,10 @@ describe('SignInGatePortal', () => {
 			const mockElement = document.createElement('div');
 			mockGetElementById.mockReturnValue(mockElement);
 
-			const result = await canShowSignInGatePortal(false, false, true);
+			const result = await canShowSignInGatePortal({
+				...canShowProps,
+				isPreview: true,
+			});
 
 			expect(result).toEqual({ show: false });
 		});
@@ -83,17 +106,7 @@ describe('SignInGatePortal', () => {
 				>
 			).mockResolvedValue(auxiaReturn);
 
-			const result = await canShowSignInGatePortal(
-				false, // isSignedIn
-				false, // isPaidContent
-				false, // isPreview
-				'page-id', // pageId
-				'https://contributions.local', // contributionsServiceUrl
-				'UK', // editionId
-				'Article', // contentType (must be a valid content type)
-				'section', // sectionId
-				[], // tags
-			);
+			const result = await canShowSignInGatePortal(canShowProps);
 
 			expect(result).toEqual({ show: true, meta: auxiaReturn });
 		});
@@ -123,17 +136,10 @@ describe('SignInGatePortal', () => {
 				>
 			).mockResolvedValue(auxiaReturn);
 
-			const result = await canShowSignInGatePortal(
-				undefined,
-				false,
-				false,
-				'page-id',
-				'https://contributions.local',
-				'UK',
-				'Article',
-				'section',
-				[],
-			);
+			const result = await canShowSignInGatePortal({
+				...canShowProps,
+				isSignedIn: undefined,
+			});
 
 			expect(result).toEqual({ show: true, meta: auxiaReturn });
 		});
