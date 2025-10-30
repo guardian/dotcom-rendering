@@ -12,7 +12,7 @@ import type { DCRFrontCard } from '../types/front';
  * */
 
 type HighlightCardHistory = {
-	card: DCRFrontCard; // TODO: store a card identifier (eg url) rather than the whole card.
+	card: DCRFrontCard /* TODO: store a card identifier (eg url) rather than the whole card. */;
 	viewCount: number;
 	wasClicked: boolean;
 };
@@ -40,7 +40,7 @@ const isValidHighlightHistory = (
 			typeof highlight.wasClicked === 'boolean',
 	);
 
-// Retrieve the user's highlight card order from local storage
+/* Retrieve the user's highlight card order from local storage */
 export const getHighlightHistory = (): HighlightHistory | undefined => {
 	try {
 		const highlightHistory = storage.local.get(HighlightsHistoryKey);
@@ -51,23 +51,23 @@ export const getHighlightHistory = (): HighlightHistory | undefined => {
 
 		return highlightHistory;
 	} catch (e) {
-		// error parsing the string, so remove the key
+		/* error parsing the string, so remove the key */
 		storage.local.remove(HighlightsHistoryKey);
 		return undefined;
 	}
 };
 
-// remove highlight history from local storage
+/* remove highlight history from local storage */
 const removeHighlightHistory = (): void => {
 	storage.local.remove(HighlightsHistoryKey);
 };
 
-// store the personalised history in local storage
+/* store the personalised history in local storage */
 export const storeHistoryInStorage = (order: HighlightHistory): void => {
 	storage.local.set(HighlightsHistoryKey, order);
 };
 
-// Maps DCR front cards to history records, initialising view and click tracking
+/* Maps DCR front cards to history records, initialising view and click tracking */
 export const convertCardsToHistory = (
 	cards: Array<DCRFrontCard>,
 ): HighlightHistory => {
@@ -78,14 +78,14 @@ export const convertCardsToHistory = (
 	}));
 };
 
-// Reset highlight history in local storage
+/* Reset highlight history in local storage */
 export const resetStoredHighlights = (cards: DCRFrontCard[]): void => {
 	removeHighlightHistory();
 	const highlights = convertCardsToHistory(cards);
 	storeHistoryInStorage(highlights);
 };
 
-// Maps history records to DCR front cards for faster rendering
+/* Maps history records to DCR front cards for faster rendering */
 export const getCardsFromHistory = (
 	history: HighlightHistory,
 ): Array<DCRFrontCard> => {
@@ -99,12 +99,12 @@ export const getHighlightCards = (): Array<DCRFrontCard> => {
 	return getCardsFromHistory(history);
 };
 
-// Track when a user has clicked on a highlight card
+/* Track when a user has clicked on a highlight card */
 export const trackCardClick = (
 	highlights: HighlightHistory,
 	card?: DCRFrontCard,
 ): HighlightHistory => {
-	// if we don't have a card, return highlights as is
+	/* if we don't have a card, return highlights as is */
 	if (!card) return highlights;
 
 	const index = highlights.findIndex((el) => el.card.url === card.url);
@@ -119,7 +119,7 @@ export const trackCardClick = (
 		wasClicked: true,
 	};
 
-	// Rebuild without the clicked card, then append the updated one
+	/* Rebuild without the clicked card, then append the updated one */
 	return [
 		...highlights.slice(0, index),
 		...highlights.slice(index + 1),
@@ -130,7 +130,7 @@ export const trackCardClick = (
 export const trackCardView = (
 	highlights: HighlightHistory,
 ): HighlightHistory => {
-	// we always track a view for the first 2 cards in the highlights container as we can guarantee they appear on screen.
+	/* we always track a view for the first 2 cards in the highlights container as we can guarantee they appear on screen. */
 	const viewedCards = highlights.slice(0, 2);
 
 	const updatedCards: HighlightCardHistory[] = [];
@@ -145,14 +145,14 @@ export const trackCardView = (
 		return el;
 	});
 
-	// Separate the updated cards that now have viewCount >= 3
+	/* Separate the updated cards that now have viewCount >= 3 */
 	const toMove = updatedCards.filter((el) => el.viewCount >= MAX_VIEW_COUNT);
 	if (toMove.length === 0) return newHighlights;
 
-	// Remove those cards from their current positions
+	/* Remove those cards from their current positions */
 	const remaining = newHighlights.filter((el) => !toMove.includes(el));
 
-	// Append them to the end, preserving order
+	/* Append them to the end, preserving order */
 	return [...remaining, ...toMove];
 };
 
