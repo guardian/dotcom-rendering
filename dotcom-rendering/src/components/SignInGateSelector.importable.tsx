@@ -10,6 +10,7 @@ import { useConfig } from './ConfigContext';
 import type { ComponentEventParams } from './SignInGate/componentEventTracking';
 import { submitComponentEventTracking } from './SignInGate/componentEventTracking';
 import { pageIdIsAllowedForGating } from './SignInGate/displayRules';
+import { incrementUserDismissedGateCount } from './SignInGate/dismissGate';
 import { SignInGateAuxiaV1 } from './SignInGate/gateDesigns/SignInGateAuxiaV1';
 import { SignInGateAuxiaV2 } from './SignInGate/gateDesigns/SignInGateAuxiaV2';
 import type {
@@ -481,6 +482,7 @@ const ShowSignInGateAuxia = ({
 		guUrl: host,
 		queryParams,
 		dismissGate: () => {
+			incrementUserDismissedGateCount(abTest.variant, abTest.name);
 			setShowGate(false);
 		},
 		abTest,
