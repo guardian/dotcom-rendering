@@ -11,23 +11,21 @@ import type { DCRFrontCard } from '../types/front';
  * it will reset local storage with the new container data.
  * */
 
-type HighlightCardHistory = {
+type HighlightCardState = {
 	card: DCRFrontCard /* TODO: store a card identifier (eg url) rather than the whole card. */;
 	viewCount: number;
 	wasClicked: boolean;
 };
 
-export type HighlightHistory = Array<HighlightCardHistory>;
+export type HighlightsState = Array<HighlightCardState>;
 
-type CardEngagement = 'VIEW' | 'CLICK';
+type CardEvent = 'VIEW' | 'CLICK';
 
 export const HighlightsHistoryKey = 'gu.history.highlights';
 
 const MAX_VIEW_COUNT = 3;
 
-const isValidHighlightHistory = (
-	history: unknown,
-): history is HighlightHistory =>
+const isValidHighlightsState = (history: unknown): history is HighlightsState =>
 	Array.isArray(history) &&
 	history.every(
 		(highlight) =>
@@ -40,12 +38,12 @@ const isValidHighlightHistory = (
 			typeof highlight.wasClicked === 'boolean',
 	);
 
-/* Retrieve the user's highlight card order from local storage */
-export const getHighlightHistory = (): HighlightHistory | undefined => {
+/* Retrieve the user's highlights state from local storage */
+export const getHighlightsState = (): HighlightsState | undefined => {
 	try {
 		const highlightHistory = storage.local.get(HighlightsHistoryKey);
 
-		if (!isValidHighlightHistory(highlightHistory)) {
+		if (!isValidHighlightsState(highlightHistory)) {
 			throw new Error(`Invalid ${HighlightsHistoryKey} value`);
 		}
 
@@ -57,20 +55,20 @@ export const getHighlightHistory = (): HighlightHistory | undefined => {
 	}
 };
 
-/* remove highlight history from local storage */
-const removeHighlightHistory = (): void => {
+/* clear highlight history from local storage */
+const clearHighlightsState = (): void => {
 	storage.local.remove(HighlightsHistoryKey);
 };
 
-/* store the personalised history in local storage */
-export const storeHistoryInStorage = (order: HighlightHistory): void => {
+/* store personalised highlights in local storage */
+export const saveHighlightsState = (order: HighlightsState): void => {
 	storage.local.set(HighlightsHistoryKey, order);
 };
 
 /* Maps DCR front cards to history records, initialising view and click tracking */
-export const convertCardsToHistory = (
+export const initialiseHighlightsState = (
 	cards: Array<DCRFrontCard>,
-): HighlightHistory => {
+): HighlightsState => {
 	return cards.map((card) => ({
 		card,
 		viewCount: 0,
@@ -79,31 +77,31 @@ export const convertCardsToHistory = (
 };
 
 /* Reset highlight history in local storage */
-export const resetStoredHighlights = (cards: DCRFrontCard[]): void => {
-	removeHighlightHistory();
-	const highlights = convertCardsToHistory(cards);
-	storeHistoryInStorage(highlights);
+export const resetHighlightsState = (cards: DCRFrontCard[]): void => {
+	clearHighlightsState();
+	const highlights = initialiseHighlightsState(cards);
+	saveHighlightsState(highlights);
 };
 
 /* Maps history records to DCR front cards for faster rendering */
-export const getCardsFromHistory = (
-	history: HighlightHistory,
+export const getCardsFromState = (
+	history: HighlightsState,
 ): Array<DCRFrontCard> => {
 	return history.map((highlight) => {
 		return highlight.card;
 	});
 };
 
-export const getHighlightCards = (): Array<DCRFrontCard> => {
-	const history = getHighlightHistory() ?? [];
-	return getCardsFromHistory(history);
+export const getOrderedHighlights = (): Array<DCRFrontCard> => {
+	const history = getHighlightsState() ?? [];
+	return getCardsFromState(history);
 };
 
 /* Track when a user has clicked on a highlight card */
-export const trackCardClick = (
-	highlights: HighlightHistory,
+export const onCardClick = (
+	highlights: HighlightsState,
 	card?: DCRFrontCard,
-): HighlightHistory => {
+): HighlightsState => {
 	/* if we don't have a card, return highlights as is */
 	if (!card) return highlights;
 
@@ -127,13 +125,14 @@ export const trackCardClick = (
 	];
 };
 
-export const trackCardView = (
-	highlights: HighlightHistory,
-): HighlightHistory => {
-	/* we always track a view for the first 2 cards in the highlights container as we can guarantee they appear on screen. */
+/*
+ * Track a view for the first 2 cards in the highlights container and reorder if necessary.
+ * Persist the view count and the new card order in local storage
+ */
+export const onCardView = (highlights: HighlightsState): HighlightsState => {
 	const viewedCards = highlights.slice(0, 2);
 
-	const updatedCards: HighlightCardHistory[] = [];
+	const updatedCards: HighlightCardState[] = [];
 
 	const newHighlights = highlights.map((el) => {
 		if (viewedCards.includes(el) && el.viewCount < MAX_VIEW_COUNT) {
@@ -149,23 +148,23 @@ export const trackCardView = (
 	const toMove = updatedCards.filter((el) => el.viewCount >= MAX_VIEW_COUNT);
 	if (toMove.length === 0) return newHighlights;
 
-	/* Remove those cards from their current positions */
+	/* Remove the updated cards from their current positions */
 	const remaining = newHighlights.filter((el) => !toMove.includes(el));
 
-	/* Append them to the end, preserving order */
+	/* Append the updated cards to the end, preserving order */
 	return [...remaining, ...toMove];
 };
 
-export const trackCardEngagement = (
-	engagement: CardEngagement,
+export const onHighlightEvent = (
+	event: CardEvent,
 	card?: DCRFrontCard,
 ): void => {
-	const history = getHighlightHistory() ?? [];
+	const localHighlights = getHighlightsState() ?? [];
 
-	const newHistory: HighlightHistory =
-		engagement === 'VIEW'
-			? trackCardView(history)
-			: trackCardClick(history, card);
+	const updatedHighlights: HighlightsState =
+		event === 'VIEW'
+			? onCardView(localHighlights)
+			: onCardClick(localHighlights, card);
 
-	storeHistoryInStorage(newHistory);
+	saveHighlightsState(updatedHighlights);
 };

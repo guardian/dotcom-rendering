@@ -11,9 +11,9 @@ import { getZIndex } from '../lib/getZIndex';
 import { isServer } from '../lib/isServer';
 import { ophanComponentId } from '../lib/ophan-helpers';
 import {
-	getHighlightCards,
-	resetStoredHighlights,
-	trackCardEngagement,
+	getOrderedHighlights,
+	onHighlightEvent,
+	resetHighlightsState,
 } from '../lib/personaliseHighlights';
 import { useAB } from '../lib/useAB';
 import { palette } from '../palette';
@@ -292,7 +292,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 			abTestPersonalisedHighlightAttr === 'view-tracking' ||
 			abTestPersonalisedHighlightAttr === 'click-and-view-tracking'
 		) {
-			trackCardEngagement('VIEW');
+			onHighlightEvent('VIEW');
 		}
 	}, [abTestPersonalisedHighlightAttr]);
 
@@ -326,14 +326,14 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	}, [orderedTrails]);
 
 	useEffect(() => {
-		const personalisedHighlights = getHighlightCards();
+		const personalisedHighlights = getOrderedHighlights();
 		if (
 			personalisedHighlights.length === 0 ||
 			personalisedHighlights.length !== trails.length ||
 			!isEqual(personalisedHighlights, trails)
 		) {
 			// store in local cache but don't bother setting in test trails as they are already set to trails
-			resetStoredHighlights(trails);
+			resetHighlightsState(trails);
 			// display highlights
 			setShouldShowHighlights(true);
 			return;
@@ -391,7 +391,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 										abTestPersonalisedHighlightAttr ===
 											'click-and-view-tracking'
 									) {
-										trackCardEngagement('CLICK', trail);
+										onHighlightEvent('CLICK', trail);
 									}
 								}}
 							/>
