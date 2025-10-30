@@ -6,6 +6,7 @@ import type { CanShowResult } from '../../lib/messagePicker';
 import { useAuthStatus } from '../../lib/useAuthStatus';
 import type { TagType } from '../../types/tag';
 import { Island } from '../Island';
+import { getGateDismissedCount } from '../SignInGate/dismissGate';
 import { pageIdIsAllowedForGating } from '../SignInGate/displayRules';
 import type { AuxiaGateDisplayData } from '../SignInGate/types';
 import {
@@ -185,7 +186,7 @@ export const canShowSignInGatePortal = async (
 			contentType,
 			sectionId,
 			tags,
-			retrieveDismissedCount('auxia-signin-gate', 'AuxiaSignInGate'),
+			getGateDismissedCount('AuxiaSignInGate'),
 		);
 
 		return {
