@@ -7,7 +7,7 @@ export const personalisedHighlights: ABTest = {
 	author: 'Anna Beddow',
 	description:
 		'Allow user behaviour to personalise the ordering of cards in the highlights container.',
-	audience: 0,
+	audience: 0.75,
 	audienceOffset: 0,
 	successMeasure: '',
 	audienceCriteria: '',
