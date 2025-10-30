@@ -15,11 +15,6 @@ import { InlineProductCard } from './InlineProductCard';
 import { LeftColProductCard } from './LeftColProductCard';
 import { buildElementTree } from './SubheadingBlockComponent';
 
-export type ProductCardCta = {
-	label: string;
-	url: string;
-};
-
 export type Product = {
 	primaryHeadline: string;
 	secondaryHeadline: string;
@@ -60,16 +55,6 @@ const getLowestPrice = (ctas: ProductCta[]): string | undefined => {
 	}
 
 	return lowestCta?.price;
-};
-
-const transformCtas = (ctas: ProductCta[]): ProductCardCta[] => {
-	return ctas.map((cta) => {
-		const overrideLabel = cta.text.trim().length > 0;
-		return {
-			label: overrideLabel ? cta.text : `${cta.price} at ${cta.retailer}`,
-			url: cta.url,
-		};
-	});
 };
 
 const LeftColProductCardContainer = ({ children }: { children: ReactNode }) => (
@@ -121,7 +106,7 @@ export const ProductElement = ({
 					productName={product.productName}
 					image={product.image}
 					lowestPrice={getLowestPrice(product.productCtas)}
-					productCtas={transformCtas(product.productCtas)}
+					productCtas={product.productCtas}
 					customAttributes={product.customAttributes}
 					isCardOnly={product.displayType === 'ProductCardOnly'}
 					shouldShowLeftColCard={shouldShowLeftColCard}
@@ -168,7 +153,7 @@ const Content = ({
 							productName={product.productName}
 							image={product.image}
 							lowestPrice={getLowestPrice(product.productCtas)}
-							productCtas={transformCtas(product.productCtas)}
+							productCtas={product.productCtas}
 							customAttributes={product.customAttributes}
 							format={format}
 						/>
