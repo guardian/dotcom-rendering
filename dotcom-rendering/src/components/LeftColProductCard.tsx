@@ -9,8 +9,7 @@ import {
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
-import type { ProductImage } from '../types/content';
-import type { ProductCardCta } from './InlineProductCard';
+import type { ProductCta, ProductImage } from '../types/content';
 import { ProductCardButtons } from './ProductCardButtons';
 import { ProductCardImage } from './ProductCardImage';
 
@@ -25,7 +24,7 @@ export type LeftColProductCardProps = {
 	image?: ProductImage;
 	customAttributes: CustomAttributes[];
 	format: ArticleFormat;
-	productCtas: ProductCardCta[];
+	productCtas: ProductCta[];
 	lowestPrice?: string;
 };
 
@@ -67,6 +66,8 @@ const productNameFont = css`
 const buttonContainer = css`
 	padding-bottom: ${space[6]}px;
 	min-width: 100%;
+	display: grid;
+	row-gap: ${space[1]}px;
 `;
 const customAttributesContainer = css`
 	border-top: 1px solid ${palette('--section-border')};
@@ -102,7 +103,6 @@ export const LeftColProductCard = ({
 				format={format}
 				image={image}
 				url={productCtas[0]?.url}
-				label={productCtas[0]?.label}
 			/>
 			<div css={productInfoContainer}>
 				<div css={brandNameFont}>{brandName}</div>

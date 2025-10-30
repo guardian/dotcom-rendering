@@ -865,6 +865,13 @@ export interface ImageSource {
 	srcSet: SrcSetItem[];
 }
 
+export type ProductCta = {
+	url: string;
+	text: string;
+	retailer: string;
+	price: string;
+};
+
 export interface SrcSetItem {
 	src: string;
 	width: number;
