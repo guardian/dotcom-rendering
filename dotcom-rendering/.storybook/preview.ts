@@ -162,6 +162,7 @@ export default {
 	],
 
 	parameters: {
+		a11y: { test: 'error' },
 		backgrounds: {
 			default: 'transparent',
 			options: {
