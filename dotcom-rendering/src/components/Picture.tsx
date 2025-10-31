@@ -364,7 +364,6 @@ const decideImageWidths = ({
 					{ breakpoint: breakpoints.wide, width: 219 },
 				];
 			case 'inline':
-			default:
 				return [
 					{ breakpoint: breakpoints.mobile, width: 445 },
 					{
