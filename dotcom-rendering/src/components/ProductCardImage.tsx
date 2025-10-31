@@ -20,8 +20,20 @@ export const ProductCardImage = ({
 		return null;
 	}
 
+	const ProductPicture = () => (
+		<Picture
+			role={'productCard'}
+			format={format}
+			master={image.url}
+			alt={image.alt}
+			height={image.height}
+			width={image.width}
+			loading={'eager'}
+		/>
+	);
+
 	return (
-		<div>
+		<figure>
 			{url ? (
 				<a
 					href={url}
@@ -36,26 +48,10 @@ export const ProductCardImage = ({
 						}
 					`}
 				>
-					<Picture
-						role={'productCard'}
-						format={format}
-						master={image.url}
-						alt={image.alt}
-						height={image.height}
-						width={image.width}
-						loading={'eager'}
-					/>
+					<ProductPicture />
 				</a>
 			) : (
-				<Picture
-					role={'productCard'}
-					format={format}
-					master={image.url}
-					alt={image.alt}
-					height={image.height}
-					width={image.width}
-					loading={'eager'}
-				/>
+				<ProductPicture />
 			)}
 			<Caption
 				format={format}
@@ -63,6 +59,6 @@ export const ProductCardImage = ({
 				credit={image.credit}
 				isOverlaid={false}
 			/>
-		</div>
+		</figure>
 	);
 };
