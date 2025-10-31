@@ -78,6 +78,7 @@ export const ProductCardOnly = {
 export const ProductCardOnlyDisplayCredit = {
 	args: {
 		...meta.args,
+		isCardOnly: true,
 		image: { ...productImage, displayCredit: true },
 	},
 } satisfies Story;
