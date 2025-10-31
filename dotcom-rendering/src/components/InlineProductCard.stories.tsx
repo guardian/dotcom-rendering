@@ -17,14 +17,6 @@ const meta = {
 				breakpoints.wide,
 			],
 		},
-
-		formats: [
-			{
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.Lifestyle,
-			},
-		],
 	},
 	decorators: [centreColumnDecorator],
 } satisfies Meta<typeof InlineProductCard>;
