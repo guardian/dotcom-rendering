@@ -32,7 +32,7 @@ jobs:
       - name: Build
         run: deno run build
       - name: Save build
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@v5
         with:
           name: ui-build
           path: ab-testing/frontend/output/ab-tests.html

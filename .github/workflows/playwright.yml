@@ -41,7 +41,7 @@ jobs:
         env:
           NODE_ENV: production
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         if: always()
         with:
           name: playwright-report-${{ matrix.group }}
