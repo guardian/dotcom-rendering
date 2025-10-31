@@ -26,13 +26,6 @@ const meta = {
 	title: 'Components/ProductCardLeftCol',
 	parameters: {
 		layout: 'padded',
-		formats: [
-			{
-				design: ArticleDesign.Standard,
-				display: ArticleDesign.Standard,
-				theme: Pillar.Lifestyle,
-			},
-		],
 		chromatic: {
 			modes: {
 				'horizontal split': allModes['splitHorizontal'],
