@@ -157,57 +157,55 @@ export const ProductCardInline = ({
 	isCardOnly = false,
 	shouldShowLeftColCard = false,
 	lowestPrice,
-}: InlineProductCardProps) => {
-	return (
-		<div
-			css={[
-				isCardOnly ? productCard : showcaseCard,
-				shouldShowLeftColCard && !isCardOnly && hideFromWide,
-			]}
-		>
-			<ProductCardImage
-				format={format}
-				image={image}
-				url={productCtas[0]?.url}
-			/>
-			<div css={productInfoContainer}>
-				<div css={primaryHeading}>{brandName}</div>
-				<div css={productNameStyle}>{productName}</div>
-				{!!lowestPrice && (
-					<div css={productNameStyle}>
-						{productCtas.length > 1 ? (
-							<>
-								from <strong>{lowestPrice}</strong>
-							</>
-						) : (
-							<strong>{lowestPrice}</strong>
-						)}
-					</div>
-				)}
-				<div css={desktopButtonWrapper}>
-					<ProductCardButtons
-						productCtas={productCtas}
-						dataComponent={'inline-product-card-buttons-desktop'}
-					/>
-				</div>
-			</div>
-			<div css={mobileButtonWrapper}>
-				<ProductCardButtons
-					productCtas={productCtas}
-					dataComponent={'inline-product-card-buttons-mobile'}
-				/>
-			</div>
-			{!isCardOnly && customAttributes.length > 0 && (
-				<div css={customAttributesContainer}>
-					{customAttributes.map((customAttribute) => (
-						<CustomAttribute
-							key={customAttribute.name}
-							name={customAttribute.name}
-							value={customAttribute.value}
-						/>
-					))}
+}: InlineProductCardProps) => (
+	<div
+		css={[
+			isCardOnly ? productCard : showcaseCard,
+			shouldShowLeftColCard && !isCardOnly && hideFromWide,
+		]}
+	>
+		<ProductCardImage
+			format={format}
+			image={image}
+			url={productCtas[0]?.url}
+		/>
+		<div css={productInfoContainer}>
+			<div css={primaryHeading}>{brandName}</div>
+			<div css={productNameStyle}>{productName}</div>
+			{!!lowestPrice && (
+				<div css={productNameStyle}>
+					{productCtas.length > 1 ? (
+						<>
+							from <strong>{lowestPrice}</strong>
+						</>
+					) : (
+						<strong>{lowestPrice}</strong>
+					)}
 				</div>
 			)}
+			<div css={desktopButtonWrapper}>
+				<ProductCardButtons
+					productCtas={productCtas}
+					dataComponent={'inline-product-card-buttons-desktop'}
+				/>
+			</div>
 		</div>
-	);
-};
+		<div css={mobileButtonWrapper}>
+			<ProductCardButtons
+				productCtas={productCtas}
+				dataComponent={'inline-product-card-buttons-mobile'}
+			/>
+		</div>
+		{!isCardOnly && customAttributes.length > 0 && (
+			<div css={customAttributesContainer}>
+				{customAttributes.map((customAttribute) => (
+					<CustomAttribute
+						key={customAttribute.name}
+						name={customAttribute.name}
+						value={customAttribute.value}
+					/>
+				))}
+			</div>
+		)}
+	</div>
+);
