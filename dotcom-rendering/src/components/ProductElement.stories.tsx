@@ -360,6 +360,15 @@ export const DisplayTypeProductCardOnly: Story = {
 	},
 } satisfies Story;
 
+export const DisplayTypeInlineOnly: Story = {
+	args: {
+		product: {
+			...product,
+			displayType: 'InlineOnly',
+		},
+	},
+} satisfies Story;
+
 export const MultipleProducts: Story = {
 	render: (args) => (
 		<>
