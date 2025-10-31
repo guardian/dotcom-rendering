@@ -1,12 +1,10 @@
-import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta } from '@storybook/react-webpack5';
+import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { ProductImage } from '../types/content';
-import { ArticleContainer } from './ArticleContainer';
 import type { InlineProductCardProps } from './InlineProductCard';
 import { InlineProductCard } from './InlineProductCard';
-import { Section as SectionComponent } from './Section';
 
 const meta = {
 	component: InlineProductCard,
