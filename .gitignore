@@ -52,6 +52,8 @@ webArchitecture.svg
 
 # k6 load testing binaries
 k6-v*arm64
+k6-bin
+k6-output.txt
 
 # playwright
 test-results/
