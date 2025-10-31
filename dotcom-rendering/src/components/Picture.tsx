@@ -368,6 +368,7 @@ const decideImageWidths = ({
 				return [
 					{ breakpoint: breakpoints.mobile, width: 328 },
 					{ breakpoint: breakpoints.wide, width: 220 },
+				];
 			case 'podcastCover':
 				return [
 					{ breakpoint: breakpoints.mobile, width: 140 },
