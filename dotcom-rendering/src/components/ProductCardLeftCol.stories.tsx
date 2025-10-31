@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { allModes } from '../../.storybook/modes';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { ProductImage } from '../types/content';
-import { LeftColProductCard } from './LeftColProductCard';
+import { ProductCardLeftCol } from './ProductCardLeftCol';
 
 const format: ArticleFormat = {
 	design: ArticleDesign.Standard,
@@ -21,8 +22,8 @@ const productImage: ProductImage = {
 };
 
 const meta = {
-	component: LeftColProductCard,
-	title: 'Components/LeftColProductCard',
+	component: ProductCardLeftCol,
+	title: 'Components/ProductCardLeftCol',
 	parameters: {
 		layout: 'padded',
 		formats: [
@@ -32,7 +33,13 @@ const meta = {
 				theme: Pillar.Lifestyle,
 			},
 		],
+		chromatic: {
+			modes: {
+				'horizontal split': allModes['splitHorizontal'],
+			},
+		},
 	},
+
 	args: {
 		format,
 		brandName: 'AirCraft',
@@ -61,7 +68,7 @@ const meta = {
 		],
 		lowestPrice: '£89.99',
 	},
-} satisfies Meta<typeof LeftColProductCard>;
+} satisfies Meta<typeof ProductCardLeftCol>;
 
 export default meta;
 

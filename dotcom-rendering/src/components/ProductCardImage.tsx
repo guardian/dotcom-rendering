@@ -9,21 +9,19 @@ interface ProductCardImageProps extends HTMLAttributes<HTMLDivElement> {
 	format: ArticleFormat;
 	image?: ProductImage;
 	url?: string;
-	label?: string;
 }
 
 export const ProductCardImage = ({
 	format,
 	image,
 	url,
-	...props
 }: ProductCardImageProps) => {
 	if (!image) {
 		return null;
 	}
 
 	return (
-		<div {...props}>
+		<div>
 			{url ? (
 				<a
 					href={url}
