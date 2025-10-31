@@ -162,8 +162,7 @@ export const ProductCardInline = ({
 	return (
 		<div
 			css={[
-				isCardOnly && productCard,
-				!isCardOnly && showcaseCard,
+				isCardOnly ? productCard : showcaseCard,
 				shouldShowLeftColCard && !isCardOnly && hideFromWide,
 			]}
 		>
