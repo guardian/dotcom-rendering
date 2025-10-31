@@ -13,7 +13,7 @@ import {
 	textSans17,
 	textSansBold20,
 } from '@guardian/source/foundations';
-import { Decorator } from '@storybook/react';
+import { Decorator } from '@storybook/react-webpack5';
 import { storybookPaletteDeclarations as paletteDeclarations } from '../mocks/paletteDeclarations';
 import type { ReactNode } from 'react';
 

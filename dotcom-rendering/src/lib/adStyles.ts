@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { adSizes, constants } from '@guardian/commercial-core';
-import { from, space, textSans12, until } from '@guardian/source/foundations';
+import { from, textSans12, until } from '@guardian/source/foundations';
 import { palette } from '../palette';
 
 const labelHeight = constants.AD_LABEL_HEIGHT;
@@ -214,23 +214,6 @@ const spacefinderAdSlotStyles = css`
 	#dfp-ad--inline1--passback {
 		${until.tablet} {
 			background-color: ${palette('--ad-background')};
-		}
-	}
-
-	.ad-slot--carrot {
-		float: left;
-		clear: both;
-		width: 140px;
-		margin-right: 20px;
-		margin-bottom: ${space[1]}px;
-		${from.leftCol} {
-			position: relative;
-			margin-left: -160px;
-			width: 140px;
-		}
-		${from.wide} {
-			margin-left: -240px;
-			width: 220px;
 		}
 	}
 

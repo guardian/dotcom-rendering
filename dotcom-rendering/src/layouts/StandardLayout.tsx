@@ -339,6 +339,7 @@ interface Props {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
+	serverTime?: number;
 }
 
 interface WebProps extends Props {
@@ -351,7 +352,7 @@ interface AppProps extends Props {
 }
 
 export const StandardLayout = (props: WebProps | AppProps) => {
-	const { article, format, renderingTarget } = props;
+	const { article, format, renderingTarget, serverTime } = props;
 	const {
 		config: { isPaidContent, host, hasSurveyAd },
 		editionId,
@@ -364,8 +365,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 		isWeb &&
 		(parse(article.slotMachineFlags ?? '').showBodyEnd ||
 			article.config.switches.slotBodyEnd);
-
-	const { absoluteServerTimes = false } = article.config.switches;
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -880,7 +879,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
-								absoluteServerTimes={absoluteServerTimes}
+								serverTime={serverTime}
 								renderingTarget={renderingTarget}
 							/>
 						</Island>
@@ -904,7 +903,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						webURL={article.webURL}
 					/>

@@ -212,6 +212,7 @@ interface CommonProps {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
+	serverTime?: number;
 }
 
 interface WebProps extends CommonProps {
@@ -224,7 +225,7 @@ interface AppsProps extends CommonProps {
 }
 
 export const InteractiveLayout = (props: WebProps | AppsProps) => {
-	const { article, format, renderingTarget } = props;
+	const { article, format, renderingTarget, serverTime } = props;
 	const {
 		config: { isPaidContent, host, hasSurveyAd },
 		editionId,
@@ -238,8 +239,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 	const { branding } = article.commercialProperties[article.editionId];
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
-
-	const { absoluteServerTimes = false } = article.config.switches;
 
 	const renderAds = canRenderAds(article);
 
@@ -657,7 +656,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
-								absoluteServerTimes={absoluteServerTimes}
+								serverTime={serverTime}
 								renderingTarget={renderingTarget}
 							/>
 						</Island>
@@ -681,7 +680,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						webURL={article.webURL}
 					/>

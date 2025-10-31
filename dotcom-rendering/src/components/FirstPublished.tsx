@@ -22,7 +22,7 @@ type Props = {
 	blockId: string;
 	isPinnedPost: boolean;
 	isOriginalPinnedPost: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 };
 
 const href = (blockId: string, renderingTarget: RenderingTarget): string => {
@@ -43,7 +43,7 @@ const FirstPublished = ({
 	blockId,
 	isPinnedPost,
 	isOriginalPinnedPost,
-	absoluteServerTimes,
+	serverTime,
 }: Props) => {
 	const publishedDate = new Date(firstPublished);
 	const { renderingTarget } = useConfig();
@@ -81,7 +81,7 @@ const FirstPublished = ({
 						<DateTime
 							date={new Date(firstPublished)}
 							display="relative"
-							absoluteServerTimes={absoluteServerTimes}
+							serverTime={serverTime}
 							showWeekday={false}
 							showDate={true}
 							showTime={false}

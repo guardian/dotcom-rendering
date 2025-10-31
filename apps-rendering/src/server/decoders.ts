@@ -33,6 +33,8 @@ const decodeContent =
 
 			return decoder.read(protocol);
 		} else {
+			/* eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors --
+			 * Part of an upgrade to get this rule enabled. */
 			return Promise.reject('Invalid request');
 		}
 	};

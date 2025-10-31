@@ -2,87 +2,7 @@
 
 This document explains how to set up A/B tests in Dotcom Rendering (DCR).
 
-## Creating a new A/B test
-
-Create an ab test in [ab-testing/abTest.ts](../ab-testing/abTest.ts) both server and client side tests are defined here. More information on defining tests can be found in [ab-testing/README.md](../ab-testing/README.md).
-
-When the config is merged, the A/B test will be automatically deployed and be available at the same time as your changes.
-
-Ab test on/off state is controlled only by the config. Expired tests will cause the ab testing validation to fail, they will also not be served. In effect expired tests are turned off "automatically", but their config needs to be cleaned up.
-
-The test will appear in https://frontend.gutools.co.uk/analytics/ab-testing once the config is deployed.
-
-## Putting code changes behind an A/B test (group)
-
-### Use in Components
-
-Again, this applies to both client and server side tests.
-
-```ts
-// Within the components
-import { useBetaAB } from '../lib/useAB';
-
-const someComponent = () => {
-	// Example usage of AB Tests
-	const abTests = useBetaAB();
-
-	// Am I in the test at all?
-	const isInTest = abTests?.isUserInTest('AbTestTest') ?? false;
-
-	const isInControlGroup =
-		(abTests?.isUserInTestGroup('AbTestTest', 'control') ?? false);
-
-	const isInVariantGroup =
-	abTests?.isUserInTestGroup('AbTestTest', 'variant') ?? false;
-
-	if (isInControlGroup) {
-		return (
-			<div>
-				You're in the control group
-			</div>
-		);
-	} else if (isInVariantGroup) {
-		return (
-			<div>
-				You're in the variant group
-			</div>
-		);
-	} else {
-		return (
-			<div>
-				You're not in the test
-			</div>
-		);
-	}
-}
-
-```
-
-### Other ways to check
-
-The ab test API is also available on the window object as `window.guardian.modules.abTests`, this only works client side. It's best to use the `useBetaAB` hook in react components.
-
-Server side tests are also available in the CAPI object e.g. `CAPIArticle.config.serverSideABTests`.
-
-## Forcing yourself into a test
-
-Use the opt-in and opt-out URL fragments to force yourself into or out of a test.
-
-When opted-in, the test will override any mvt based assignment and you'll only be in the opted-in test group.
-
-When opted-out, you'll return to random/mvt based assignment.
-
-These links are also in the [frontend admin](https://frontend.gutools.co.uk/analytics/ab-testing).
-
--   Opt-in Example: `https://theguardian.com/ab-tests/opt/in/commercial-test-example:variant`
--   Opt-out: `https://theguardian.com/ab-tests/opt/out`
-
-# Legacy A/B testing in DCR
-
-> [!WARNING]
-> This section describes the legacy A/B testing framework in DCR. New A/B tests should use the new A/B testing framework described above.
-
-The documentation remains here for reference, until all legacy A/B tests have ended or have been migrated to the new framework.
+There's a new beta A/B testing framework in DCR that supports both client-side and server-side tests with the same API. It's currently in it's beta/testing phase, so please get in touch with the commercial-dev team if you'd like to use it. [Details on how to use the new framework are at the bottom of this document](#beta-ab-test-framework).
 
 ## Client-side A/B tests
 
@@ -157,3 +77,84 @@ You can verify that you have been correctly assigned to the variant by appending
 ```
 
 You can access server-side `abTests` within DCR wherever the CAPI object is used (`CAPIArticle.config.abTests`).
+
+# Beta AB Test framework
+
+This is a new framework that has been developed by commercial-dev to support both client and server side A/B tests in DCR. The goal is to eventually replace the legacy A/B testing framework described above with this new framework.
+
+Please get in touch with the commercial-dev team if you'd like up to date information on it's state of readiness.
+
+## Creating a new A/B test
+
+Create an ab test in [ab-testing/abTest.ts](../ab-testing/abTest.ts) both server and client side tests are defined here. More information on defining tests can be found in [ab-testing/README.md](../ab-testing/README.md).
+
+When the config is merged, the A/B test will be automatically deployed and be available at the same time as your changes.
+
+Ab test on/off state is controlled only by the config. Expired tests will cause the ab testing validation to fail, they will also not be served. In effect expired tests are turned off "automatically", but their config needs to be cleaned up.
+
+The test will appear in https://frontend.gutools.co.uk/analytics/ab-testing once the config is deployed.
+
+## Putting code changes behind an A/B test (group)
+
+### Use in Components
+
+Again, this applies to both client and server side tests.
+
+```ts
+// Within the components
+import { useBetaAB } from '../lib/useAB';
+
+const someComponent = () => {
+	// Example usage of AB Tests
+	const abTests = useBetaAB();
+
+	// Am I in the test at all?
+	const isInTest = abTests?.isUserInTest('AbTestTest') ?? false;
+
+	const isInControlGroup =
+		(abTests?.isUserInTestGroup('AbTestTest', 'control') ?? false);
+
+	const isInVariantGroup =
+	abTests?.isUserInTestGroup('AbTestTest', 'variant') ?? false;
+
+	if (isInControlGroup) {
+		return (
+			<div>
+				You're in the control group
+			</div>
+		);
+	} else if (isInVariantGroup) {
+		return (
+			<div>
+				You're in the variant group
+			</div>
+		);
+	} else {
+		return (
+			<div>
+				You're not in the test
+			</div>
+		);
+	}
+}
+
+```
+
+### Other ways to check
+
+The ab test API is also available on the window object as `window.guardian.modules.abTests`, this only works client side. It's best to use the `useBetaAB` hook in react components.
+
+Server side tests are also available in the CAPI object e.g. `CAPIArticle.config.serverSideABTests`.
+
+## Forcing yourself into a test
+
+Use the opt-in and opt-out URL fragments to force yourself into or out of a test.
+
+When opted-in, the test will override any mvt based assignment and you'll only be in the opted-in test group.
+
+When opted-out, you'll return to random/mvt based assignment.
+
+These links are also in the [frontend admin](https://frontend.gutools.co.uk/analytics/ab-testing).
+
+-   Opt-in Example: `https://theguardian.com/ab-tests/opt/in/commercial-test-example:variant`
+-   Opt-out: `https://theguardian.com/ab-tests/opt/out`
