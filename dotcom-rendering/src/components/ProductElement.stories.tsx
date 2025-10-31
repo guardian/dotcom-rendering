@@ -331,7 +331,7 @@ export const DisplayCredit = {
 	},
 } satisfies Story;
 
-export const NoPrimaryHeading: Story = {
+export const NoSecondaryHeading: Story = {
 	args: {
 		product: {
 			...product,
@@ -341,7 +341,7 @@ export const NoPrimaryHeading: Story = {
 	},
 } satisfies Story;
 
-export const NoSecondaryHeading: Story = {
+export const NoPrimaryHeading: Story = {
 	args: {
 		product: {
 			...product,
