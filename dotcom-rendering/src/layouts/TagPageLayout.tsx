@@ -28,6 +28,7 @@ import { enhanceTags } from '../model/enhanceTags';
 import type { NavType } from '../model/extract-nav';
 import type { TagPage as TagPageModel } from '../types/tagPage';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { StorylinesSection } from '../components/StorylinesSection.importable';
 
 interface Props {
 	tagPage: TagPageModel;
@@ -64,6 +65,19 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 
 	const isAccessibilityPage =
 		tagPage.config.pageId === 'help/accessibility-help';
+
+	const isSCTagPage =
+		tagPage.webURL ===
+		'https://www.theguardian.com/technology/artificialintelligenceai';
+	// && tagPage.config.isDev;
+	console.log(
+		'isSCTagPage:',
+		isSCTagPage,
+		'tagPage.webURL:',
+		tagPage.webURL,
+		'isDev:',
+		tagPage.config.isDev,
+	);
 
 	return (
 		<>
@@ -109,6 +123,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					image={tagPage.header.image}
 				/>
 				{tagPage.groupedTrails.map((groupedTrails, index) => {
+					// console.log("groupedTrails in TagPageLayout:", groupedTrails);
 					const imageLoading = index > 0 ? 'lazy' : 'eager';
 
 					const title = isUndefined(groupedTrails.day)
@@ -134,6 +149,12 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 						  )
 						: undefined;
 
+					const insertSCSection =
+						isSCTagPage &&
+						index == 1 &&
+						(!tagPage.pagination ||
+							tagPage.pagination.currentPage === 1);
+
 					return (
 						<Fragment key={containerId}>
 							{desktopAdPositions.includes(index) && (
@@ -144,6 +165,18 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 										index,
 									)}
 								/>
+							)}
+							{insertSCSection && (
+								<Island
+									priority="critical"
+									defer={{ until: 'visible' }}
+								>
+									<StorylinesSection
+										index={1}
+										tagPage={tagPage}
+										Storylines={undefined}
+									/>
+								</Island>
 							)}
 							<FrontSection
 								title={title}
