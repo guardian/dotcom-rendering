@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { allModes } from '../../.storybook/modes';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { ProductImage } from '../types/content';
@@ -32,7 +33,13 @@ const meta = {
 				theme: Pillar.Lifestyle,
 			},
 		],
+		chromatic: {
+			modes: {
+				'horizontal split': allModes['splitHorizontal'],
+			},
+		},
 	},
+
 	args: {
 		format,
 		brandName: 'AirCraft',

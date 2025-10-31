@@ -1,6 +1,6 @@
-import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
+import { allModes } from '../../.storybook/modes';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { ProductImage } from '../types/content';
 import { ProductCardInline } from './ProductCardInline';
@@ -20,11 +20,11 @@ const meta = {
 	title: 'Components/ProductCardInline',
 	parameters: {
 		chromatic: {
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.tablet,
-				breakpoints.wide,
-			],
+			modes: {
+				'light mobile': allModes['light mobile'],
+				'light tablet': allModes['light desktop'],
+				'light wide': allModes['light wide'],
+			},
 		},
 	},
 	args: {
