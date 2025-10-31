@@ -1,27 +1,9 @@
 import { breakpoints } from '@guardian/source/foundations';
-import type { Meta } from '@storybook/react-webpack5';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { ProductImage } from '../types/content';
-import type { InlineProductCardProps } from './ProductCardInline';
 import { ProductCardInline } from './ProductCardInline';
-
-const meta = {
-	component: ProductCardInline,
-	title: 'Components/InlineProductCard',
-	parameters: {
-		chromatic: {
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.tablet,
-				breakpoints.wide,
-			],
-		},
-	},
-	decorators: [centreColumnDecorator],
-} satisfies Meta<typeof ProductCardInline>;
-
-export default meta;
 
 const productImage: ProductImage = {
 	url: 'https://media.guimcode.co.uk/cb193848ed75d40103eceaf12b448de2330770dc/0_0_725_725/725.jpg',
@@ -33,53 +15,69 @@ const productImage: ProductImage = {
 	displayCredit: false,
 };
 
-const sampleProductCard: InlineProductCardProps = {
-	format: {
-		design: ArticleDesign.Standard,
-		display: ArticleDisplay.Standard,
-		theme: Pillar.Lifestyle,
+const meta = {
+	component: ProductCardInline,
+	title: 'Components/ProductCardInline',
+	parameters: {
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.tablet,
+				breakpoints.wide,
+			],
+		},
 	},
-	image: productImage,
-	productCtas: [
-		{
-			url: 'https://www.theguardian.com',
-			price: '£89.99',
-			retailer: 'Amazon',
-			text: '',
+	args: {
+		format: {
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Lifestyle,
 		},
-		{
-			url: 'https://www.theguardian.com',
-			price: '£95.99',
-			retailer: 'John Lewis',
-			text: '',
-		},
-	],
-	brandName: 'AirCraft',
-	productName: 'Lume',
-	customAttributes: [
-		{ name: 'What we love', value: 'It packs away pretty small' },
-		{
-			name: "What we don't love",
-			value: 'There’s nowhere to stow the remote control',
-		},
-	],
-	lowestPrice: '£89.99',
-	isCardOnly: false,
+		image: productImage,
+		productCtas: [
+			{
+				url: 'https://www.theguardian.com',
+				price: '£89.99',
+				retailer: 'Amazon',
+				text: '',
+			},
+			{
+				url: 'https://www.theguardian.com',
+				price: '£95.99',
+				retailer: 'John Lewis',
+				text: '',
+			},
+		],
+		brandName: 'AirCraft',
+		productName: 'Lume',
+		customAttributes: [
+			{ name: 'What we love', value: 'It packs away pretty small' },
+			{
+				name: "What we don't love",
+				value: 'There’s nowhere to stow the remote control',
+			},
+		],
+		lowestPrice: '£89.99',
+		isCardOnly: false,
+	},
+	decorators: [centreColumnDecorator],
+} satisfies Meta<typeof ProductCardInline>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Default = {} satisfies Story;
+
+export const ProductCardOnly = {
+	args: {
+		...meta.args,
+		isCardOnly: true,
+	},
 };
-
-export const Default = () => <ProductCardInline {...sampleProductCard} />;
-
-export const ProductCardOnly = () => (
-	<ProductCardInline {...sampleProductCard} isCardOnly={true} />
-);
-
-export const ProductCardOnlyDisplayCredit = () => (
-	<ProductCardInline
-		{...sampleProductCard}
-		image={{
-			...productImage,
-			displayCredit: true,
-		}}
-		isCardOnly={true}
-	/>
-);
+export const ProductCardOnlyDisplayCredit = {
+	args: {
+		...meta.args,
+		image: { ...productImage, displayCredit: true },
+	},
+} satisfies Story;

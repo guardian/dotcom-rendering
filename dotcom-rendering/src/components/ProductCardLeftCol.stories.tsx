@@ -22,7 +22,7 @@ const productImage: ProductImage = {
 
 const meta = {
 	component: ProductCardLeftCol,
-	title: 'Components/LeftColProductCard',
+	title: 'Components/ProductCardLeftCol',
 	parameters: {
 		layout: 'padded',
 		formats: [
