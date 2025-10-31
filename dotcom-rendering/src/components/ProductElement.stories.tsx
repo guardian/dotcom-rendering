@@ -271,15 +271,6 @@ const product: ProductBlockElement = {
 const meta: Meta<typeof ProductElement> = {
 	component: ProductElement,
 	title: 'Components/ProductElement',
-	parameters: {
-		formats: [
-			{
-				design: ArticleDesign.Review,
-				display: ArticleDesign.Review,
-				theme: Pillar.Lifestyle,
-			},
-		],
-	},
 	args: {
 		product,
 		format: {
@@ -301,11 +292,6 @@ const meta: Meta<typeof ProductElement> = {
 						font-weight: bold;
 					}
 				`}
-				format={{
-					design: ArticleDesign.Review,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Lifestyle,
-				}}
 			>
 				<ArticleContainer
 					format={{
