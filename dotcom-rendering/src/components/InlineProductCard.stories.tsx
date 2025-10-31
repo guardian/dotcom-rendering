@@ -28,35 +28,7 @@ const meta = {
 			},
 		],
 	},
-	decorators: [
-		(Story) => (
-			<SectionComponent
-				shouldCenter={true}
-				showSideBorders={true}
-				centralBorder={'full'}
-				css={css`
-					strong {
-						font-weight: bold;
-					}
-				`}
-				format={{
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Lifestyle,
-				}}
-			>
-				<ArticleContainer
-					format={{
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-						theme: Pillar.Lifestyle,
-					}}
-				>
-					<Story />
-				</ArticleContainer>
-			</SectionComponent>
-		),
-	],
+	decorators: [centreColumnDecorator],
 } satisfies Meta<typeof InlineProductCard>;
 
 export default meta;
