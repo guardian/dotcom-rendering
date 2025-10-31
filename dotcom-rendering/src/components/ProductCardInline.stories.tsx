@@ -3,11 +3,11 @@ import type { Meta } from '@storybook/react-webpack5';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { ProductImage } from '../types/content';
-import type { InlineProductCardProps } from './InlineProductCard';
-import { InlineProductCard } from './InlineProductCard';
+import type { InlineProductCardProps } from './ProductCardInline';
+import { ProductCardInline } from './ProductCardInline';
 
 const meta = {
-	component: InlineProductCard,
+	component: ProductCardInline,
 	title: 'Components/InlineProductCard',
 	parameters: {
 		chromatic: {
@@ -19,7 +19,7 @@ const meta = {
 		},
 	},
 	decorators: [centreColumnDecorator],
-} satisfies Meta<typeof InlineProductCard>;
+} satisfies Meta<typeof ProductCardInline>;
 
 export default meta;
 
@@ -67,14 +67,14 @@ const sampleProductCard: InlineProductCardProps = {
 	isCardOnly: false,
 };
 
-export const Default = () => <InlineProductCard {...sampleProductCard} />;
+export const Default = () => <ProductCardInline {...sampleProductCard} />;
 
 export const ProductCardOnly = () => (
-	<InlineProductCard {...sampleProductCard} isCardOnly={true} />
+	<ProductCardInline {...sampleProductCard} isCardOnly={true} />
 );
 
 export const ProductCardOnlyDisplayCredit = () => (
-	<InlineProductCard
+	<ProductCardInline
 		{...sampleProductCard}
 		image={{
 			...productImage,

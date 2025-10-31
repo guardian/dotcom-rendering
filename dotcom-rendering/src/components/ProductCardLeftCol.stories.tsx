@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { ProductImage } from '../types/content';
-import { LeftColProductCard } from './LeftColProductCard';
+import { ProductCardLeftCol } from './ProductCardLeftCol';
 
 const format: ArticleFormat = {
 	design: ArticleDesign.Standard,
@@ -21,7 +21,7 @@ const productImage: ProductImage = {
 };
 
 const meta = {
-	component: LeftColProductCard,
+	component: ProductCardLeftCol,
 	title: 'Components/LeftColProductCard',
 	parameters: {
 		layout: 'padded',
@@ -61,7 +61,7 @@ const meta = {
 		],
 		lowestPrice: '£89.99',
 	},
-} satisfies Meta<typeof LeftColProductCard>;
+} satisfies Meta<typeof ProductCardLeftCol>;
 
 export default meta;
 

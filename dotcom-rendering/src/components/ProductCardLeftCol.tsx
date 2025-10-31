@@ -88,7 +88,7 @@ const CustomAttribute = ({ name, value }: CustomAttributes) => (
 	</div>
 );
 
-export const LeftColProductCard = ({
+export const ProductCardLeftCol = ({
 	brandName,
 	productName,
 	image,

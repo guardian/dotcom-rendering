@@ -148,7 +148,7 @@ const CustomAttribute = ({ name, value }: CustomAttributes) => (
 	</div>
 );
 
-export const InlineProductCard = ({
+export const ProductCardInline = ({
 	format,
 	brandName,
 	productName,
