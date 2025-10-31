@@ -40,15 +40,15 @@ const meta = {
 					}
 				`}
 				format={{
-					design: ArticleDesign.Review,
-					display: ArticleDisplay.Showcase,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
 					theme: Pillar.Lifestyle,
 				}}
 			>
 				<ArticleContainer
 					format={{
-						design: ArticleDesign.Review,
-						display: ArticleDisplay.Showcase,
+						design: ArticleDesign.Standard,
+						display: ArticleDisplay.Standard,
 						theme: Pillar.Lifestyle,
 					}}
 				>
