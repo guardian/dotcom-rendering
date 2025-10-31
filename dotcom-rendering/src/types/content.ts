@@ -872,6 +872,11 @@ export type ProductCta = {
 	price: string;
 };
 
+export type ProductCustomAttribute = {
+	name: string;
+	value: string;
+};
+
 export interface SrcSetItem {
 	src: string;
 	width: number;

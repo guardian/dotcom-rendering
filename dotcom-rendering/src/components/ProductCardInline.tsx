@@ -12,14 +12,13 @@ import {
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
-import type { ProductCta, ProductImage } from '../types/content';
+import type {
+	ProductCta,
+	ProductCustomAttribute,
+	ProductImage,
+} from '../types/content';
 import { ProductCardButtons } from './ProductCardButtons';
 import { ProductCardImage } from './ProductCardImage';
-
-export type CustomAttributes = {
-	name: string;
-	value: string;
-};
 
 export type InlineProductCardProps = {
 	format: ArticleFormat;
@@ -27,7 +26,7 @@ export type InlineProductCardProps = {
 	productName: string;
 	image?: ProductImage;
 	productCtas: ProductCta[];
-	customAttributes: CustomAttributes[];
+	customAttributes: ProductCustomAttribute[];
 	isCardOnly: boolean;
 	shouldShowLeftColCard?: boolean;
 	lowestPrice?: string;
@@ -140,7 +139,7 @@ const customAttributeItem = css`
 	}
 `;
 
-const CustomAttribute = ({ name, value }: CustomAttributes) => (
+const CustomAttribute = ({ name, value }: ProductCustomAttribute) => (
 	<div css={customAttributeItem}>
 		<strong>{name}</strong>
 		<br />
