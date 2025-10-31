@@ -93,7 +93,6 @@ describe('SignInGatePortal', () => {
 				'Article', // contentType (must be a valid content type)
 				'section', // sectionId
 				[], // tags
-				() => 0, // retrieveDismissedCount
 			);
 
 			expect(result).toEqual({ show: true, meta: auxiaReturn });
@@ -134,7 +133,6 @@ describe('SignInGatePortal', () => {
 				'Article',
 				'section',
 				[],
-				() => 0,
 			);
 
 			expect(result).toEqual({ show: true, meta: auxiaReturn });

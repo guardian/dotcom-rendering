@@ -23,7 +23,6 @@ import { usePageViewId } from '../lib/usePageViewId';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
-import { retrieveDismissedCount } from './SignInGate/dismissGate';
 import type { AuxiaGateDisplayData } from './SignInGate/types';
 import {
 	BrazeBanner,
@@ -204,7 +203,6 @@ const buildSignInGateConfig = (
 				contentType,
 				sectionId,
 				tags,
-				retrieveDismissedCount,
 			);
 		},
 		show: (meta: AuxiaGateDisplayData) => () => (
