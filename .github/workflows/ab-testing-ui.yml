@@ -57,7 +57,7 @@ jobs:
         uses: ./.github/actions/setup-node-env
 
       - name: Fetch build
-        uses: actions/download-artifact@v5.0.0
+        uses: actions/download-artifact@v6.0.0
         with:
           name: ui-build
           path: output/ab-tests.html
