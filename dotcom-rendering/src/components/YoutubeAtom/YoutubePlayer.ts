@@ -131,14 +131,21 @@ class YouTubePlayer {
 								onReady: onReadyListener,
 								onStateChange:
 									youtubeOptions.events?.onStateChange,
-								onFullscreenToggled:
-									youtubeOptions.events?.onFullscreenToggled,
 							},
 						});
+						if (youtubeOptions.events?.onFullscreenToggled) {
+							this.player.addEventListener(
+								'onFullscreenToggled',
+								youtubeOptions.events.onFullscreenToggled,
+							);
+						}
 						resolve({ player: this.player });
 					}
 				} catch (e) {
 					this.logError(e as Error);
+					/* eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors --
+					 * This object comes from the YT API; we can't enforce that
+					 * it's an instance of Error. */
 					reject(e);
 				}
 			},

@@ -18,7 +18,6 @@ export type Props = {
 	isCircular?: boolean;
 	aspectRatio?: AspectRatio;
 	mobileAspectRatio?: AspectRatio;
-	isInAllBoostsTest?: boolean;
 };
 
 /**
@@ -30,7 +29,6 @@ export type Props = {
 const decideImageWidths = (
 	imageSize: MediaSizeType,
 	aspectRatio: AspectRatio,
-	isInAllBoostsTest: boolean,
 ): [ImageWidthType, ...ImageWidthType[]] => {
 	switch (imageSize) {
 		// @TODO missing image size option
@@ -52,11 +50,28 @@ const decideImageWidths = (
 				{ breakpoint: breakpoints.mobile, width: 220, aspectRatio },
 			];
 
+		case 'scrollable-small':
+			return [
+				{ breakpoint: breakpoints.mobile, width: 86, aspectRatio },
+				{ breakpoint: breakpoints.tablet, width: 123, aspectRatio },
+			];
+		case 'scrollable-medium':
+			return [
+				{ breakpoint: breakpoints.mobile, width: 200, aspectRatio },
+				{
+					breakpoint: breakpoints.mobileLandscape,
+					width: 324,
+					aspectRatio,
+				},
+				{ breakpoint: breakpoints.tablet, width: 160, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 220, aspectRatio },
+			];
+
 		case 'small':
 			return [
 				{
 					breakpoint: breakpoints.mobile,
-					width: isInAllBoostsTest ? 465 : 120,
+					width: 120,
 					aspectRatio,
 				},
 				{ breakpoint: breakpoints.tablet, width: 160, aspectRatio },
@@ -216,7 +231,6 @@ export const CardPicture = ({
 	isCircular,
 	aspectRatio = '5:3',
 	mobileAspectRatio,
-	isInAllBoostsTest = false,
 }: Props) => {
 	if (mainImage === '') {
 		return null;
@@ -224,7 +238,7 @@ export const CardPicture = ({
 
 	const sources = generateSources(
 		mainImage,
-		decideImageWidths(imageSize, aspectRatio, isInAllBoostsTest),
+		decideImageWidths(imageSize, aspectRatio),
 	);
 
 	const fallbackSource = getFallbackSource(sources);

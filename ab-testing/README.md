@@ -63,6 +63,10 @@ To add a test where there is not enough space in the default audience space (`A`
 
 For example if there are already 3 25% tests in space `A` totalling 75%, and you want to run a 50% test, you can set the `audienceSpace` to `B` to allow this test to overlap with the existing tests.
 
+### Test Status
+
+Tests can be set to `ON` or `OFF` using the `status` field. Only tests with status `ON` will be validated and deployed.
+
 ## How it works
 
 The AB testing framework uses Deno to run scripts that validate and deploy the tests. The `deno.json` file contains the tasks that can be run, such as `validate`, `deploy`, and `build`.
@@ -74,3 +78,5 @@ The algorithm allocates tests available MVT IDs based on the audience size and s
 However, the allocation is completely separate for each audience space, so if you have a test in space `A` and move it to space `B`, it will be allocated different MVT IDs.
 
 The state of the AB tests is stored in Fastly dictionaries, which are updated when the `deploy` task is run. Logic in fastly VCL will then use these dictionaries to determine which users are in which test groups and set appropriate headers and/or cookies.
+
+See the [fastly-edge-cache documentation](https://github.com/guardian/fastly-edge-cache/blob/main/theguardiancom/docs/ab-testing.md) for even more details.

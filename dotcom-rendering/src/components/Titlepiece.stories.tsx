@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { nav } from './Masthead/Titlepiece/Nav.mock';
 import { Titlepiece } from './Titlepiece.importable';
 

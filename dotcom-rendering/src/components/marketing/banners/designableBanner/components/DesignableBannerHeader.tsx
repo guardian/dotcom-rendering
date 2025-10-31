@@ -47,7 +47,11 @@ export function DesignableBannerHeader({
 
 	const resolveImage = (settings: Image) => {
 		return (
-			<DesignableBannerVisual settings={settings} isHeaderImage={true} />
+			<DesignableBannerVisual
+				settings={settings}
+				isHeaderImage={true}
+				isCollapsed={isCollapsedForABTest}
+			/>
 		);
 	};
 

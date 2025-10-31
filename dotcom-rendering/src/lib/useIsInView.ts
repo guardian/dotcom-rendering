@@ -70,7 +70,9 @@ const useIsInView = (
 		: intersectionObserverCallback;
 
 	useEffect(() => {
-		options.node && setNode(options.node);
+		if (options.node) {
+			setNode(options.node);
+		}
 	}, [options.node]);
 
 	useEffect(() => {

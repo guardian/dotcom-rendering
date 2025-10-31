@@ -15,7 +15,6 @@ import { Section } from './Section';
 export default {
 	component: CartoonComponent,
 	title: 'Components/CartoonBlockComponent',
-	parameters: {},
 };
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (

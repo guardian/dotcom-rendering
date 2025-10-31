@@ -26,10 +26,9 @@ type Props = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
-	isInAllBoostsTest?: boolean;
 	collectionId: number;
 	showLabsRedesign?: boolean;
 };
@@ -122,7 +121,7 @@ type OneCardLayoutProps = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
 	isFirstRow: boolean;
@@ -135,7 +134,7 @@ export const OneCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 	aspectRatio,
 	isLastRow,
@@ -170,7 +169,7 @@ export const OneCardLayout = ({
 					containerPalette={containerPalette}
 					containerType="flexible/special"
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					headlineSizes={headlineSizes}
 					mediaSize={mediaSize}
 					mediaPositionOnDesktop={mediaPositionOnDesktop}
@@ -217,28 +216,26 @@ type TwoOrFourCardLayoutProps = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
 	isFirstRow: boolean;
 	containerLevel: DCRContainerLevel;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
-	isInAllBoostsTest: boolean;
 };
 
 const TwoOrFourCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
-	absoluteServerTimes,
+	serverTime,
 	showImage = true,
 	imageLoading,
 	aspectRatio,
 	isFirstRow,
 	containerLevel,
 	showLabsRedesign,
-	isInAllBoostsTest,
 }: TwoOrFourCardLayoutProps) => {
 	if (cards.length === 0) return null;
 	const hasTwoOrFewerCards = cards.length <= 2;
@@ -259,26 +256,15 @@ const TwoOrFourCardLayout = ({
 							containerPalette={containerPalette}
 							containerType="flexible/special"
 							showAge={showAge}
-							absoluteServerTimes={absoluteServerTimes}
+							serverTime={serverTime}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
 							mediaPositionOnDesktop={getImagePosition(
 								hasTwoOrFewerCards,
 								isMediaCard(card.format) || !!card.isNewsletter,
 							)}
-							mediaPositionOnMobile={
-								isInAllBoostsTest ? 'bottom' : 'left'
-							}
-							headlineSizes={
-								isInAllBoostsTest
-									? {
-											desktop: 'xsmall',
-											tablet: 'xxsmall',
-											mobile: 'small',
-									  }
-									: undefined
-							}
-							isInAllBoostsTest={isInAllBoostsTest}
+							mediaPositionOnMobile="left"
+							headlineSizes={undefined}
 							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
 							supportingContent={undefined}
 							mediaSize="small"
@@ -305,11 +291,10 @@ export const FlexibleSpecial = ({
 	groupedTrails,
 	containerPalette,
 	showAge,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 	aspectRatio,
 	containerLevel = 'Primary',
-	isInAllBoostsTest = false,
 	collectionId,
 	showLabsRedesign,
 }: Props) => {
@@ -333,7 +318,7 @@ export const FlexibleSpecial = ({
 					cards={snaps}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					isFirstRow={true}
@@ -348,7 +333,7 @@ export const FlexibleSpecial = ({
 					cards={splash}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					isLastRow={cards.length === 0}
@@ -363,13 +348,12 @@ export const FlexibleSpecial = ({
 				cards={cards}
 				containerPalette={containerPalette}
 				showAge={showAge}
-				absoluteServerTimes={absoluteServerTimes}
+				serverTime={serverTime}
 				imageLoading={imageLoading}
 				aspectRatio={aspectRatio}
 				isFirstRow={!isNonEmptyArray(snaps) && !isNonEmptyArray(splash)}
 				containerLevel={containerLevel}
 				showLabsRedesign={showLabsRedesign}
-				isInAllBoostsTest={isInAllBoostsTest}
 			/>
 		</>
 	);

@@ -90,7 +90,7 @@ const hoverStyles = css`
 
 /** When we hover on sublinks, we want to prevent the general hover styles applying */
 const sublinkHoverStyles = css`
-	:has(ul.sublinks:hover) {
+	:has(ul.sublinks:hover, .branding-logo:hover) {
 		.card-headline .show-underline {
 			text-decoration: none;
 		}
@@ -235,10 +235,6 @@ const waveformStyles = css`
 	opacity: 0.3;
 `;
 
-const wrapperStyles = css`
-	padding-top: ${space[3]}px;
-`;
-
 const getMedia = ({
 	imageUrl,
 	imageAltText,
@@ -296,7 +292,7 @@ const renderPodcastImage = (
 export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	headlineText: string;
 	headlineSizes?: ResponsiveFontSize;
 	byline?: string;
@@ -374,7 +370,7 @@ export const FeatureCard = ({
 	discussionApiUrl,
 	discussionId,
 	isExternalLink,
-	absoluteServerTimes,
+	serverTime,
 	aspectRatio,
 	mobileAspectRatio,
 	starRating,
@@ -473,9 +469,7 @@ export const FeatureCard = ({
 										headlineSizes={headlineSizes}
 										webPublicationDate={webPublicationDate}
 										showClock={!!showClock}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
+										serverTime={serverTime}
 										linkTo={linkTo}
 										discussionId={discussionId}
 										discussionApiUrl={discussionApiUrl}
@@ -672,9 +666,7 @@ export const FeatureCard = ({
 															webPublicationDate
 														}
 														showClock={!!showClock}
-														absoluteServerTimes={
-															absoluteServerTimes
-														}
+														serverTime={serverTime}
 													/>
 												) : undefined
 											}
@@ -738,20 +730,18 @@ export const FeatureCard = ({
 						/>
 					)}
 					{isLabs && branding && showLabsRedesign && (
-						<div css={wrapperStyles}>
-							<SponsoredContentLabel
-								branding={branding}
-								containerPalette={containerPalette}
-								orientation="horizontal"
-								alignment="end"
-								ophanComponentLink={
-									labsDataAttributes?.ophanComponentLink
-								}
-								ophanComponentName={
-									labsDataAttributes?.ophanComponentName
-								}
-							/>
-						</div>
+						<SponsoredContentLabel
+							branding={branding}
+							containerPalette={containerPalette}
+							orientation="horizontal"
+							alignment="end"
+							ophanComponentLink={
+								labsDataAttributes?.ophanComponentLink
+							}
+							ophanComponentName={
+								labsDataAttributes?.ophanComponentName
+							}
+						/>
 					)}
 				</div>
 			</ContainerOverrides>

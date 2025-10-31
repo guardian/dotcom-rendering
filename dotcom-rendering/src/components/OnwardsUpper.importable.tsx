@@ -184,7 +184,7 @@ type Props = {
 	pillar: ArticleTheme;
 	shortUrlId: string;
 	discussionApiUrl: string;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	renderingTarget: RenderingTarget;
 	webURL: string;
 };
@@ -220,7 +220,7 @@ export const OnwardsUpper = ({
 	editionId,
 	shortUrlId,
 	discussionApiUrl,
-	absoluteServerTimes,
+	serverTime,
 	renderingTarget,
 	webURL,
 }: Props) => {
@@ -311,6 +311,10 @@ export const OnwardsUpper = ({
 	const canHaveCuratedContent =
 		format.design === ArticleDesign.Gallery ? isUndefined(url) : true;
 
+	const hasOnwardsContainer = !!url;
+	const showCuratedContainer =
+		!!curatedDataUrl && !isPaidContent && canHaveCuratedContent;
+
 	return (
 		<div css={onwardsWrapper}>
 			{!!url && (
@@ -324,14 +328,15 @@ export const OnwardsUpper = ({
 						onwardsSource={onwardsSource}
 						format={format}
 						discussionApiUrl={discussionApiUrl}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						isAdFreeUser={isAdFreeUser}
+						containerPosition={'first'}
 						webURL={webURL}
 					/>
 				</Section>
 			)}
-			{!!curatedDataUrl && !isPaidContent && canHaveCuratedContent && (
+			{showCuratedContainer && (
 				<Section
 					fullWidth={true}
 					borderColour={palette('--article-section-border')}
@@ -342,9 +347,12 @@ export const OnwardsUpper = ({
 						onwardsSource="curated-content"
 						format={format}
 						discussionApiUrl={discussionApiUrl}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						isAdFreeUser={isAdFreeUser}
+						containerPosition={
+							hasOnwardsContainer ? 'second' : 'first'
+						}
 						webURL={webURL}
 					/>
 				</Section>

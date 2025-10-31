@@ -1,17 +1,16 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import { article17, from, space } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
 import { Accordion as AccordionComponent } from './Accordion';
 
 const meta = {
 	component: AccordionComponent,
+	globals: {
+		backgrounds: { value: 'grey' },
+	},
 	parameters: {
-		backgrounds: {
-			default: 'grey',
-			values: [{ name: 'grey', value: 'lightgrey' }],
-		},
 		chromatic: {
 			modes: {
 				'light mobileMedium': allModes['light mobileMedium'],

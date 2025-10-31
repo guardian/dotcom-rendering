@@ -23,18 +23,7 @@ import type { Dispatch, SetStateAction } from 'react';
 import { useEffect } from 'react';
 import sanitise from 'sanitize-html';
 import { useIsInView } from '../../../lib/useIsInView';
-
-const supportTierChoiceCardStyles = (selected: boolean) => css`
-	display: block;
-	border: ${selected
-		? `2px solid ${palette.brand['500']}`
-		: `1px solid ${palette.neutral[46]}`};
-	background-color: ${palette.neutral[100]};
-	border-radius: 10px;
-	padding: ${selected
-		? `6px ${space[5]}px 10px ${space[5]}px`
-		: `6px ${space[5]}px`};
-`;
+import type { ChoiceCardSettings } from '../banners/designableBanner/settings';
 
 const benefitsStyles = css`
 	${textSans15};
@@ -60,8 +49,8 @@ const benefitsStyles = css`
 	}
 `;
 
-const benefitsLabelStyles = css`
-	color: ${palette.neutral[0]};
+const benefitsLabelStyles = (customColor?: string) => css`
+	color: ${customColor ?? palette.neutral[0]};
 	${textSans15};
 
 	strong {
@@ -69,58 +58,27 @@ const benefitsLabelStyles = css`
 	}
 `;
 
-const labelOverrideStyles = (isSelected: boolean) => css`
-	+ label div {
-		${isSelected ? 'font-weight: bold;' : ''}
-		s {
-			font-weight: normal;
-		}
-	}
-`;
-
 const supportingTextStyles = css`
 	margin-top: ${space[4]}px;
 `;
 
-const pillStyles = (pill: NonNullable<ChoiceCard['pill']>) => css`
-	border-radius: 4px;
-	padding: ${space[1]}px ${space[2]}px;
-	background-color: ${pill.backgroundColour
-		? hexColourToString(pill.backgroundColour as HexColour)
-		: palette.brandAlt[400]};
-	${textSansBold14};
-	color: ${pill.textColour
-		? hexColourToString(pill.textColour as HexColour)
-		: palette.neutral[7]};
-	position: absolute;
-	top: -${space[2]}px;
-	${until.phablet} {
-		right: ${space[3]}px;
-	}
-	right: ${space[5]}px;
-`;
-
-const customRadioTheme: ThemeRadio = {
-	...themeRadio,
-	borderSelected: palette.brandAlt[400],
-	borderUnselected: palette.neutral[46],
-	borderHover: palette.brandAlt[400],
-	fillSelected: palette.brand[400],
-};
-
 const SupportingBenefits = ({
 	benefitsLabel,
 	benefits,
+	choiceCardSettings,
 }: {
 	benefitsLabel?: string;
 	benefits: ChoiceCard['benefits'];
+	choiceCardSettings?: ChoiceCardSettings;
 }) => {
 	const showTicks = benefits.length > 1;
 	return (
 		<div css={supportingTextStyles}>
 			{!!benefitsLabel && (
 				<span
-					css={benefitsLabelStyles}
+					css={benefitsLabelStyles(
+						choiceCardSettings?.buttonSelectTextColour,
+					)}
 					dangerouslySetInnerHTML={{
 						__html: sanitise(benefitsLabel),
 					}}
@@ -129,8 +87,20 @@ const SupportingBenefits = ({
 			<ul css={benefitsStyles}>
 				{benefits.map((benefit) => (
 					<li key={benefit.copy}>
-						{showTicks && <SvgTickRound size="xsmall" />}
+						{showTicks && (
+							<SvgTickRound
+								size="xsmall"
+								theme={{
+									fill:
+										choiceCardSettings?.buttonSelectMarkerColour ??
+										palette.brand[400],
+								}}
+							/>
+						)}
 						<span
+							css={benefitsLabelStyles(
+								choiceCardSettings?.buttonSelectTextColour,
+							)}
 							dangerouslySetInnerHTML={{
 								__html: sanitise(benefit.copy),
 							}}
@@ -142,20 +112,13 @@ const SupportingBenefits = ({
 	);
 };
 
-const ChoiceCardPill = ({
-	pill,
-}: {
-	pill: NonNullable<ChoiceCard['pill']>;
-}) => {
-	return <div css={pillStyles(pill)}>{pill.copy}</div>;
-};
-
 type ThreeTierChoiceCardsProps = {
 	selectedChoiceCard: ChoiceCard;
 	setSelectedChoiceCard: Dispatch<SetStateAction<ChoiceCard | undefined>>;
 	choices: ChoiceCard[];
 	id: 'epic' | 'banner'; // uniquely identify this choice cards component to avoid conflicting with others
 	submitComponentEvent?: (componentEvent: ComponentEvent) => void;
+	choiceCardSettings?: ChoiceCardSettings;
 };
 
 export const ThreeTierChoiceCards = ({
@@ -164,11 +127,88 @@ export const ThreeTierChoiceCards = ({
 	choices,
 	id,
 	submitComponentEvent,
+	choiceCardSettings,
 }: ThreeTierChoiceCardsProps) => {
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
 		threshold: 0,
 	});
+
+	const supportTierChoiceCardStyles = (selected: boolean) => css`
+		display: block;
+		border: ${selected
+			? `2px solid ${
+					choiceCardSettings?.buttonSelectBorderColour ??
+					palette.brand['500']
+			  }`
+			: `1px solid ${
+					choiceCardSettings?.buttonBorderColour ??
+					palette.neutral[46]
+			  }`};
+		background-color: ${selected
+			? choiceCardSettings?.buttonSelectColour ?? palette.neutral[100]
+			: choiceCardSettings?.buttonColour ?? palette.neutral[100]};
+		color: ${selected
+			? choiceCardSettings?.buttonSelectTextColour ?? 'inherit'
+			: choiceCardSettings?.buttonTextColour ?? 'inherit'};
+		border-radius: 10px;
+		padding: ${selected
+			? `6px ${space[5]}px 10px ${space[5]}px`
+			: `6px ${space[5]}px`};
+	`;
+
+	const labelOverrideStyles = (isSelected: boolean) => css`
+		+ label div {
+			${isSelected ? 'font-weight: bold;' : ''}
+			color: ${isSelected
+				? choiceCardSettings?.buttonSelectTextColour ?? 'inherit'
+				: choiceCardSettings?.buttonTextColour ?? 'inherit'};
+			s {
+				font-weight: normal;
+			}
+		}
+	`;
+
+	const customRadioTheme: ThemeRadio = {
+		...themeRadio,
+		borderSelected:
+			choiceCardSettings?.buttonSelectBorderColour ??
+			palette.brandAlt[400],
+		borderUnselected:
+			choiceCardSettings?.buttonBorderColour ?? palette.neutral[46],
+		borderHover:
+			choiceCardSettings?.buttonSelectBorderColour ??
+			palette.brandAlt[400],
+		fillSelected:
+			choiceCardSettings?.buttonSelectMarkerColour ?? palette.brand[400],
+	};
+
+	const pillStyles = (pill: NonNullable<ChoiceCard['pill']>) => css`
+		border-radius: 4px;
+		padding: ${space[1]}px ${space[2]}px;
+		background-color: ${pill.backgroundColour
+			? hexColourToString(pill.backgroundColour as HexColour)
+			: choiceCardSettings?.pillBackgroundColour ??
+			  palette.brandAlt[400]};
+		${textSansBold14};
+		color: ${pill.textColour
+			? hexColourToString(pill.textColour as HexColour)
+			: choiceCardSettings?.pillTextColour ?? palette.neutral[7]};
+		position: absolute;
+		top: -${space[2]}px;
+		${until.phablet} {
+			right: ${space[3]}px;
+		}
+		right: ${space[5]}px;
+	`;
+
+	const ChoiceCardPill = ({
+		pill,
+	}: {
+		pill: NonNullable<ChoiceCard['pill']>;
+	}) => {
+		return <div css={pillStyles(pill)}>{pill.copy}</div>;
+	};
 
 	useEffect(() => {
 		if (submitComponentEvent) {
@@ -277,6 +317,9 @@ export const ThreeTierChoiceCards = ({
 															| undefined
 													}
 													benefits={benefits}
+													choiceCardSettings={
+														choiceCardSettings
+													}
 												/>
 											)
 										}

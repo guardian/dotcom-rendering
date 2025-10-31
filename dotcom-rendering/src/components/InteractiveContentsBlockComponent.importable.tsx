@@ -247,7 +247,9 @@ export const InteractiveContentsBlockComponent = ({
 			});
 
 			for (const item of enhancedSubheadings) {
-				item.ref && observer.observe(item.ref);
+				if (item.ref) {
+					observer.observe(item.ref);
+				}
 			}
 
 			if (endDocumentElementId) {

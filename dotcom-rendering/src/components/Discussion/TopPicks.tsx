@@ -56,9 +56,11 @@ export const TopPicks = ({
 	const leftColComments: Array<CommentType | ReplyType> = [];
 	const rightColComments: Array<CommentType | ReplyType> = [];
 	for (const [index, comment] of comments.entries()) {
-		index % 2 === 0
-			? leftColComments.push(comment)
-			: rightColComments.push(comment);
+		if (index % 2 === 0) {
+			leftColComments.push(comment);
+		} else {
+			rightColComments.push(comment);
+		}
 	}
 	return (
 		<div css={picksWrapper}>
