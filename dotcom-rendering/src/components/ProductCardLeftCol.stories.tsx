@@ -74,15 +74,15 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default = {} satisfies Story;
 
-export const WithNoCustomAttributes: Story = {
+export const WithNoCustomAttributes = {
 	args: {
 		customAttributes: [],
 	},
-};
+} satisfies Story;
 
-export const SingleCta: Story = {
+export const SingleCta = {
 	args: {
 		productCtas: [
 			{
@@ -94,9 +94,9 @@ export const SingleCta: Story = {
 		],
 		lowestPrice: '£89.99',
 	},
-};
+} satisfies Story;
 
-export const ShortCta: Story = {
+export const ShortCta = {
 	args: {
 		productCtas: [
 			{
@@ -108,9 +108,9 @@ export const ShortCta: Story = {
 		],
 		lowestPrice: '£89.99',
 	},
-};
+} satisfies Story;
 
-export const LotsOfCtas: Story = {
+export const LotsOfCtas = {
 	args: {
 		productCtas: [
 			{
@@ -140,4 +140,4 @@ export const LotsOfCtas: Story = {
 		],
 		lowestPrice: '£89.99',
 	},
-};
+} satisfies Story;
