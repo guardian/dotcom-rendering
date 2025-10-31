@@ -11,8 +11,8 @@ import type {
 	ProductDisplayType,
 	ProductImage,
 } from '../types/content';
-import { InlineProductCard } from './InlineProductCard';
-import { LeftColProductCard } from './LeftColProductCard';
+import { ProductCardInline } from './ProductCardInline';
+import { ProductCardLeftCol } from './ProductCardLeftCol';
 import { buildElementTree } from './SubheadingBlockComponent';
 
 export type Product = {
@@ -100,7 +100,7 @@ export const ProductElement = ({
 				/>
 			)}
 			{showProductCard && (
-				<InlineProductCard
+				<ProductCardInline
 					format={format}
 					brandName={product.brandName}
 					productName={product.productName}
@@ -148,7 +148,7 @@ const Content = ({
 			<div css={contentContainer}>
 				{showLeftCol && (
 					<LeftColProductCardContainer>
-						<LeftColProductCard
+						<ProductCardLeftCol
 							brandName={product.brandName}
 							productName={product.productName}
 							image={product.image}

@@ -284,7 +284,7 @@ const meta: Meta<typeof ProductElement> = {
 		product,
 		format: {
 			design: ArticleDesign.Review,
-			display: ArticleDisplay.Showcase,
+			display: ArticleDisplay.Standard,
 			theme: Pillar.Lifestyle,
 		},
 		ArticleElementComponent,
@@ -303,14 +303,14 @@ const meta: Meta<typeof ProductElement> = {
 				`}
 				format={{
 					design: ArticleDesign.Review,
-					display: ArticleDisplay.Showcase,
+					display: ArticleDisplay.Standard,
 					theme: Pillar.Lifestyle,
 				}}
 			>
 				<ArticleContainer
 					format={{
 						design: ArticleDesign.Review,
-						display: ArticleDisplay.Showcase,
+						display: ArticleDisplay.Standard,
 						theme: Pillar.Lifestyle,
 					}}
 				>
@@ -326,76 +326,23 @@ type Story = StoryObj<typeof ProductElement>;
 
 export const Default = {} satisfies Story;
 
-export const WithoutHeading: Story = {
-	render: (args) => (
-		<>
-			<ProductElement
-				{...args}
-				product={{
-					...product,
-					primaryHeading: '',
-					secondaryHeading: '',
-				}}
-				format={{
-					design: ArticleDesign.Review,
-					display: ArticleDisplay.Showcase,
-					theme: Pillar.Lifestyle,
-				}}
-				ArticleElementComponent={ArticleElementComponent}
-				shouldShowLeftColCard={true}
-			/>
-			<ProductElement
-				{...args}
-				product={{
-					...product,
-					primaryHeading: `<em></em>`,
-					secondaryHeading: `<strong></strong>`,
-				}}
-				format={{
-					design: ArticleDesign.Review,
-					display: ArticleDisplay.Showcase,
-					theme: Pillar.Lifestyle,
-				}}
-				ArticleElementComponent={ArticleElementComponent}
-				shouldShowLeftColCard={true}
-			/>
-		</>
-	),
+export const WithoutHeading = {
+	args: {
+		product: {
+			...product,
+			primaryHeading: '',
+			secondaryHeading: '',
+		},
+	},
 } satisfies Story;
 
-export const DisplayCredit: Story = {
-	render: (args) => (
-		<>
-			<ProductElement
-				{...args}
-				product={{
-					...product,
-					image: { ...productImage, displayCredit: true },
-				}}
-				format={{
-					design: ArticleDesign.Review,
-					display: ArticleDisplay.Showcase,
-					theme: Pillar.Lifestyle,
-				}}
-				ArticleElementComponent={ArticleElementComponent}
-				shouldShowLeftColCard={true}
-			/>
-			<ProductElement
-				{...args}
-				product={{
-					...product,
-					image: { ...productImage, displayCredit: true },
-				}}
-				format={{
-					design: ArticleDesign.Review,
-					display: ArticleDisplay.Showcase,
-					theme: Pillar.Lifestyle,
-				}}
-				ArticleElementComponent={ArticleElementComponent}
-				shouldShowLeftColCard={true}
-			/>
-		</>
-	),
+export const DisplayCredit = {
+	args: {
+		product: {
+			...product,
+			image: { ...productImage, displayCredit: true },
+		},
+	},
 } satisfies Story;
 
 export const NoPrimaryHeading: Story = {
