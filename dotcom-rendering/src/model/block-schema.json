@@ -358,6 +358,9 @@
                 },
                 {
                     "$ref": "#/definitions/CrosswordElement"
+                },
+                {
+                    "$ref": "#/definitions/ProductBlockElement"
                 }
             ]
         },
@@ -3907,6 +3910,148 @@
         },
         "Record<string,number[]>": {
             "type": "object"
+        },
+        "ProductBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.ProductBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "brandName": {
+                    "type": "string"
+                },
+                "starRating": {
+                    "type": "string"
+                },
+                "productName": {
+                    "type": "string"
+                },
+                "image": {
+                    "$ref": "#/definitions/ProductImage"
+                },
+                "secondaryHeading": {
+                    "type": "string"
+                },
+                "primaryHeading": {
+                    "type": "string"
+                },
+                "customAttributes": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "value": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "value"
+                        ]
+                    }
+                },
+                "content": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FEElement"
+                    }
+                },
+                "h2Id": {
+                    "type": "string"
+                },
+                "displayType": {
+                    "$ref": "#/definitions/ProductDisplayType"
+                },
+                "productCtas": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "url": {
+                                "type": "string"
+                            },
+                            "text": {
+                                "type": "string"
+                            },
+                            "retailer": {
+                                "type": "string"
+                            },
+                            "price": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "price",
+                            "retailer",
+                            "text",
+                            "url"
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "_type",
+                "brandName",
+                "content",
+                "customAttributes",
+                "displayType",
+                "elementId",
+                "primaryHeading",
+                "productCtas",
+                "productName",
+                "secondaryHeading",
+                "starRating"
+            ]
+        },
+        "ProductImage": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string"
+                },
+                "caption": {
+                    "type": "string"
+                },
+                "credit": {
+                    "type": "string"
+                },
+                "alt": {
+                    "type": "string"
+                },
+                "displayCredit": {
+                    "type": "boolean"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "width": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "alt",
+                "caption",
+                "credit",
+                "displayCredit",
+                "height",
+                "url",
+                "width"
+            ]
+        },
+        "ProductDisplayType": {
+            "enum": [
+                "InlineOnly",
+                "InlineWithProductCard",
+                "ProductCardOnly"
+            ],
+            "type": "string"
         },
         "Attributes": {
             "type": "object",
