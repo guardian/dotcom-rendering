@@ -15,9 +15,10 @@ const categoryTitleCss = css`
 	${textSans20};
 	font-weight: 700;
 	color: ${sourcePalette.news[300]};
+	margin: ${space[2]}px 0;
 	padding: ${space[2]}px 0;
 	${from.tablet} {
-		padding: 10px;
+		margin: 10px;
 	}
 
 	border-top: 1px solid ${palette('--section-border-secondary')};
@@ -52,6 +53,7 @@ export const StorylineTabContent = ({ content }: { content: Category[] }) => {
 						aspectRatio={'5:4'}
 						collectionId={0}
 						SCStyle={true}
+						containerLevel="Secondary"
 					/>
 				);
 			case 'flexible/general':
