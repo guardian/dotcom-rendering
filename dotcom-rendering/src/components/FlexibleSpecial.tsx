@@ -55,6 +55,7 @@ const determineCardProperties = (
 	supportingContentLength: number,
 	mediaCard: boolean,
 	imageSuppressed: boolean,
+	SCStyle: boolean,
 ): BoostProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
@@ -169,6 +170,7 @@ export const OneCardLayout = ({
 		card.supportingContent?.length ?? 0,
 		isMediaCard(card.format),
 		!card.image,
+		SCStyle,
 	);
 
 	return (
@@ -235,6 +237,7 @@ type TwoOrFourCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
+	SCStyle: boolean;
 };
 
 const TwoOrFourCardLayout = ({
@@ -248,12 +251,13 @@ const TwoOrFourCardLayout = ({
 	isFirstRow,
 	containerLevel,
 	showLabsRedesign,
+	SCStyle,
 }: TwoOrFourCardLayoutProps) => {
 	if (cards.length === 0) return null;
 	const hasTwoOrFewerCards = cards.length <= 2;
 
 	return (
-		<UL direction="row" showTopBar={true}>
+		<UL direction="row" showTopBar={!SCStyle}>
 			{cards.map((card, cardIndex) => {
 				return (
 					<LI
@@ -369,6 +373,7 @@ export const FlexibleSpecial = ({
 				isFirstRow={!isNonEmptyArray(snaps) && !isNonEmptyArray(splash)}
 				containerLevel={containerLevel}
 				showLabsRedesign={showLabsRedesign}
+				SCStyle={SCStyle}
 			/>
 		</>
 	);

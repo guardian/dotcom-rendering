@@ -1,11 +1,16 @@
 import { TagPage } from 'src/types/tagPage';
-import { space } from '@guardian/source/foundations';
-import { palette } from '../palette';
+import { from } from '@guardian/source/foundations';
 import { css } from '@emotion/react';
 import { useState } from 'react';
 import { DCRFrontCard, DCRGroupedTrails, TreatType } from 'src/types/front';
 import { StorylineTabContent } from './StorylineTabContent';
 import { StorylineSection } from './StorylineSection';
+import {
+	space,
+	palette as sourcePalette,
+	textSans17,
+} from '@guardian/source/foundations';
+import { ScrollableCarousel } from './ScrollableCarousel';
 
 type Storyline = {
 	id: string;
@@ -29,31 +34,34 @@ type StorylinesSectionProps = {
 
 const tabsContainerStyles = css`
 	display: flex;
-	gap: ${space[2]}px;
-	border-bottom: 1px solid ${palette('--section-border-primary')};
-	margin-bottom: ${space[4]}px;
+	width: 100%;
+	align-items: stretch; /* Makes all tabs the same height */
+	margin-bottom: ${space[2]}px;
+	margin-left: -${space[2]}px; /* on mobile at least */
 `;
 
-const tabStyles = (isActive: boolean) => css`
-	background: none;
-	border: none;
-	padding: ${space[2]}px ${space[3]}px;
+const tabStyles = (isActive: boolean, isFirst: boolean) => css`
+	${textSans17};
+	font-weight: 700;
+	text-align: start;
+	padding: ${space[0]}px ${space[0]}px ${space[0]}px ${space[2]}px;
 	cursor: pointer;
-	border-bottom: ${isActive
-		? `4px solid ${palette('--section-border-primary')}`
-		: 'none'};
-	font-weight: ${isActive ? 'bold' : 'normal'};
+	border: none;
+	${!isFirst && `border-left: 1px ${sourcePalette.neutral[86]} solid;`}
 	color: ${isActive
-		? `${palette('--section-border-news')}`
-		: `${palette('--section-border-primary')}`};
-
-	&:hover {
-		color: ${palette('--section-border-news')};
-	}
+		? `${sourcePalette.news[400]}`
+		: `${sourcePalette.neutral[38]}`};
+	flex: 1;
+	min-width: 0;
+	display: flex;
+	align-items: flex-start; /* Aligns text to the top of each tab */
 `;
+// &:hover {
+// 		color: ${palette('--section-border-news')};
+// 	}
 
 const contentStyles = css`
-	padding: ${space[3]}px 0;
+	padding-top: ${space[0]}px 0;
 `;
 
 // importable because we need js to handle the tabs
@@ -77,7 +85,7 @@ export const StorylinesSection = ({
 			{
 				format: { design: 0, display: 0, theme: 0 },
 				dataLinkName: 'news | group-0 | card-@1',
-				url: '/uk-news/2025/oct/31/andrew-in-line-for-six-figure-payment-and-annual-stipend-from-king-sources-say',
+				url: '',
 				headline: '',
 				trailText:
 					'The former prince remains under scrutiny as Buckingham Palace finalises plans for his future as a commoner',
@@ -620,12 +628,22 @@ export const StorylinesSection = ({
 	const testStorylines: Storyline[] = [
 		{
 			id: 'storyline-1',
-			title: 'Storyline 1',
+			title: 'Russian drone incursions in NATO airspace',
 			categories: categories1Test,
 		},
 		{
 			id: 'storyline-2',
-			title: 'Storyline 2',
+			title: 'Zaporizhzhia nuclear plant power crisis',
+			categories: categories2Test,
+		},
+		{
+			id: 'storyline-3',
+			title: 'Ukrainian energy infrastructure under sustained Russian attack',
+			categories: categories2Test,
+		},
+		{
+			id: 'storyline-4',
+			title: `Trump's evolving approach to ending the war`,
 			categories: categories2Test,
 		},
 	];
@@ -681,16 +699,30 @@ export const StorylinesSection = ({
 			>
 				{/* Tab selector */}
 				<div css={tabsContainerStyles}>
-					{testStorylines.map((storyline) => (
-						<button
-							key={storyline.id}
-							css={tabStyles(activeStorylineId === storyline.id)}
-							onClick={() => setActiveStorylineId(storyline.id)}
-							type="button"
-						>
-							{storyline.title}
-						</button>
-					))}
+					<ScrollableCarousel
+						carouselLength={Math.ceil(testStorylines.length / 2)}
+						visibleCarouselSlidesOnMobile={2}
+						visibleCarouselSlidesOnTablet={4}
+						sectionId={'sectionId'}
+						shouldStackCards={{ desktop: false, mobile: false }}
+						gapSizes={{ column: 'large', row: 'medium' }}
+					>
+						{testStorylines.map((storyline, index) => (
+							<button
+								key={storyline.id}
+								css={tabStyles(
+									activeStorylineId === storyline.id,
+									index === 0,
+								)}
+								onClick={() =>
+									setActiveStorylineId(storyline.id)
+								}
+								type="button"
+							>
+								{storyline.title}
+							</button>
+						))}
+					</ScrollableCarousel>
 				</div>
 
 				{/* Tabs content */}
