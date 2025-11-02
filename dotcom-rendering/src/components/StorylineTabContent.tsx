@@ -3,20 +3,36 @@ import { FlexibleGeneral } from './FlexibleGeneral';
 import { FlexibleSpecial } from './FlexibleSpecial';
 import { css } from '@emotion/react';
 import { palette } from '../palette';
+import {
+	space,
+	palette as sourcePalette,
+	textSans20,
+	from,
+} from '@guardian/source/foundations';
 import { Category } from './StorylinesSection.importable';
 
 const categoryTitleCss = css`
-	fontsize: 20px;
-	fontweight: 700;
-	color: #ab0613;
-	margin: 4px;
-	padding: 8px;
-	border-top: 1px solid ${palette('--section-border-primary')};
+	${textSans20};
+	font-weight: 700;
+	color: ${sourcePalette.news[300]};
+	padding: ${space[2]}px 0;
+	${from.tablet} {
+		padding: 10px;
+	}
+
+	border-top: 1px solid ${palette('--section-border-secondary')};
+`;
+
+const contentCss = css`
+	margin-bottom: ${space[4]}px;
+	${from.leftCol} {
+		border-left: 1px solid ${sourcePalette.neutral[86]};
+	}
 `;
 
 export const StorylineTabContent = ({ content }: { content: Category[] }) => {
 	// key stories - flexible general, megaboosted first standard card
-	// other categories - flex gen
+	// other categories - flex gen secondary
 	// explainers/multimedia with default
 	// opinion with default boost and design 8 (comment)
 	// deep reads/profiles with contents->display->is immersive true
@@ -35,6 +51,7 @@ export const StorylineTabContent = ({ content }: { content: Category[] }) => {
 						imageLoading={'eager'}
 						aspectRatio={'5:4'}
 						collectionId={0}
+						SCStyle={true}
 					/>
 				);
 			case 'flexible/general':
@@ -44,6 +61,7 @@ export const StorylineTabContent = ({ content }: { content: Category[] }) => {
 						imageLoading={'eager'}
 						aspectRatio={'5:4'}
 						collectionId={0}
+						containerLevel="Secondary"
 					/>
 				);
 			default:
@@ -58,7 +76,7 @@ export const StorylineTabContent = ({ content }: { content: Category[] }) => {
 	return (
 		<>
 			{content.map((category, idx) => (
-				<div key={idx}>
+				<div key={idx} css={contentCss}>
 					{category.title !== 'Key Stories' && (
 						<h2 css={categoryTitleCss}>{category.title}</h2>
 					)}

@@ -31,6 +31,7 @@ type Props = {
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
 	showLabsRedesign?: boolean;
+	SCStyle?: boolean;
 };
 
 type BoostProperties = {
@@ -52,6 +53,7 @@ const determineCardProperties = (
 	supportingContentLength: number,
 	mediaCard: boolean,
 	imageSuppressed: boolean,
+	SCStyle: boolean,
 ): BoostProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
@@ -68,7 +70,7 @@ const determineCardProperties = (
 				supportingContentAlignment:
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
-				trailTextSize: 'regular',
+				trailTextSize: SCStyle ? 'xlarge' : 'regular',
 			};
 		case 'boost':
 			return {
@@ -128,6 +130,7 @@ type OneCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	isSplashCard?: boolean;
 	showLabsRedesign?: boolean;
+	SCStyle?: boolean;
 };
 
 export const OneCardLayout = ({
@@ -142,6 +145,7 @@ export const OneCardLayout = ({
 	containerLevel,
 	isSplashCard,
 	showLabsRedesign,
+	SCStyle = false,
 }: OneCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -159,6 +163,7 @@ export const OneCardLayout = ({
 		card.supportingContent?.length ?? 0,
 		isMediaCard(card.format),
 		!card.image,
+		SCStyle,
 	);
 
 	return (
@@ -223,6 +228,7 @@ type TwoOrFourCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
+	SCStyle: boolean;
 };
 
 const TwoOrFourCardLayout = ({
@@ -236,12 +242,13 @@ const TwoOrFourCardLayout = ({
 	isFirstRow,
 	containerLevel,
 	showLabsRedesign,
+	SCStyle,
 }: TwoOrFourCardLayoutProps) => {
 	if (cards.length === 0) return null;
 	const hasTwoOrFewerCards = cards.length <= 2;
 
 	return (
-		<UL direction="row" showTopBar={true}>
+		<UL direction="row" showTopBar={!SCStyle}>
 			{cards.map((card, cardIndex) => {
 				return (
 					<LI
@@ -297,6 +304,7 @@ export const FlexibleSpecial = ({
 	containerLevel = 'Primary',
 	collectionId,
 	showLabsRedesign,
+	SCStyle = false,
 }: Props) => {
 	const snaps = [...groupedTrails.snap].slice(0, 1).map((snap) => ({
 		...snap,
@@ -341,6 +349,7 @@ export const FlexibleSpecial = ({
 					containerLevel={containerLevel}
 					isSplashCard={true}
 					showLabsRedesign={showLabsRedesign}
+					SCStyle={SCStyle}
 				/>
 			)}
 
@@ -354,6 +363,7 @@ export const FlexibleSpecial = ({
 				isFirstRow={!isNonEmptyArray(snaps) && !isNonEmptyArray(splash)}
 				containerLevel={containerLevel}
 				showLabsRedesign={showLabsRedesign}
+				SCStyle={SCStyle}
 			/>
 		</>
 	);
