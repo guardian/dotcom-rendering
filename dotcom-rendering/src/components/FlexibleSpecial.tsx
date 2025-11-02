@@ -62,9 +62,13 @@ const determineCardProperties = (
 		case 'default':
 			return {
 				headlineSizes: {
-					desktop: imageSuppressed ? 'xxlarge' : 'xlarge',
-					tablet: 'large',
-					mobile: 'medium',
+					desktop: SCStyle
+						? 'small'
+						: imageSuppressed
+						? 'xxlarge'
+						: 'xlarge',
+					tablet: SCStyle ? 'small' : 'large',
+					mobile: SCStyle ? 'xxsmall' : 'medium',
 				},
 				mediaSize: 'xlarge',
 				mediaPositionOnDesktop: 'right',
@@ -204,7 +208,9 @@ export const OneCardLayout = ({
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
-					headlinePosition={isSplashCard ? 'outer' : 'inner'}
+					headlinePosition={
+						SCStyle ? 'inner' : isSplashCard ? 'outer' : 'inner'
+					}
 					showLabsRedesign={showLabsRedesign}
 					subtitleSize={subtitleSize}
 					enableHls={enableHls}

@@ -36,7 +36,7 @@ const tabsContainerStyles = css`
 	display: flex;
 	width: 100%;
 	align-items: stretch; /* Makes all tabs the same height */
-	margin-bottom: ${space[2]}px;
+	margin-bottom: ${space[6]}px;
 	margin-left: -${space[2]}px; /* on mobile at least */
 `;
 
@@ -86,9 +86,9 @@ export const StorylinesSection = ({
 				format: { design: 0, display: 0, theme: 0 },
 				dataLinkName: 'news | group-0 | card-@1',
 				url: '',
-				headline: '',
-				trailText:
+				headline:
 					'The former prince remains under scrutiny as Buckingham Palace finalises plans for his future as a commoner',
+				trailText: undefined,
 				starRating: undefined,
 				webPublicationDate: '2025-10-31T19:24:41.000Z',
 				kickerText: undefined,
@@ -700,7 +700,7 @@ export const StorylinesSection = ({
 				{/* Tab selector */}
 				<div css={tabsContainerStyles}>
 					<ScrollableCarousel
-						carouselLength={Math.ceil(testStorylines.length / 2)}
+						carouselLength={Math.ceil(testStorylines.length)}
 						visibleCarouselSlidesOnMobile={2}
 						visibleCarouselSlidesOnTablet={4}
 						sectionId={'sectionId'}

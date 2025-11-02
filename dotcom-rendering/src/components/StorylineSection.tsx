@@ -370,6 +370,7 @@ const sectionContentBorderFromLeftCol = css`
 			position: absolute;
 			top: ${space[2]}px;
 			bottom: 0;
+			border-left: 1px solid ${schemePalette('--section-border')};
 			transform: translateX(-50%);
 			/** Keeps the vertical divider ontop of carousel item dividers */
 			z-index: 1;
@@ -386,15 +387,19 @@ const sectionBottomContent = css`
 `;
 
 const sectionTreats = css`
-	display: none;
+	/* Mobile: treats appear at the bottom */
+	grid-row: bottom-content;
+	grid-column: content;
+	${from.leftCol} {
+		padding-top: ${space[2]}px;
+	}
+	padding-bottom: ${space[3]}px;
 
 	${from.leftCol} {
-		padding-bottom: ${space[3]}px;
-		display: block;
 		align-self: end;
-
 		grid-row: treats;
 		grid-column: title;
+		padding-top: 0;
 	}
 
 	.hidden > & {
@@ -426,7 +431,7 @@ const topBorder = css`
 `;
 
 const bottomPadding = css`
-	padding-bottom: ${space[6]}px;
+	padding-bottom: ${space[4]}px;
 `;
 
 const bottomPaddingBetaContainer = (
@@ -435,13 +440,13 @@ const bottomPaddingBetaContainer = (
 ) => css`
 	${until.tablet} {
 		padding-bottom: ${useLargeSpacingMobile
-			? `${space[10]}px`
-			: `${space[6]}px`};
+			? `${space[8]}px`
+			: `${space[4]}px`};
 	}
 	${from.tablet} {
 		padding-bottom: ${useLargeSpacingDesktop
-			? `${space[10]}px`
-			: `${space[6]}px`};
+			? `${space[8]}px`
+			: `${space[4]}px`};
 	}
 `;
 
@@ -744,7 +749,7 @@ export const StorylineSection = ({
 				</div>
 
 				{treats && !hasPageSkin && (
-					<div css={[sectionTreats, topPadding]}>
+					<div css={[sectionTreats]}>
 						<Treats
 							treats={treats}
 							borderColour={schemePalette('--section-border')}

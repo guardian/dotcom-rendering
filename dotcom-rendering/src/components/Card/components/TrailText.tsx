@@ -9,7 +9,7 @@ import {
 import { Hide } from '@guardian/source/react-components';
 import { palette } from '../../../palette';
 
-export type TrailTextSize = 'regular' | 'large' | 'xlarge';
+export type TrailTextSize = 'regular' | 'large';
 
 const trailTextStyles = css`
 	display: flex;
@@ -28,7 +28,6 @@ const fontStyles = (trailTextSize: TrailTextSize) => css`
 	${textSans14}
 	${from.desktop} {
 		${trailTextSize === 'large' && textSans17}
-		${trailTextSize === 'xlarge' && textSans20}
 	}
 	strong {
 		font-weight: bold;
@@ -56,16 +55,12 @@ export const TrailText = ({
 	padBottom = true,
 	padTop = false,
 }: Props) => {
-	const effectiveColour =
-		trailTextSize === 'xlarge'
-			? palette('--card-headline')
-			: trailTextColour;
 	const trailText = (
 		<div
 			css={[
 				trailTextStyles,
 				css`
-					color: ${effectiveColour};
+					color: ${trailTextColour};
 				`,
 				fontStyles(trailTextSize),
 				padBottom && bottomPadding,
