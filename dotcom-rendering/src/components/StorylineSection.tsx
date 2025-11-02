@@ -370,7 +370,6 @@ const sectionContentBorderFromLeftCol = css`
 			position: absolute;
 			top: ${space[2]}px;
 			bottom: 0;
-			border-left: 1px solid ${schemePalette('--section-border')};
 			transform: translateX(-50%);
 			/** Keeps the vertical divider ontop of carousel item dividers */
 			z-index: 1;
@@ -390,6 +389,7 @@ const sectionTreats = css`
 	display: none;
 
 	${from.leftCol} {
+		padding-bottom: ${space[3]}px;
 		display: block;
 		align-self: end;
 
@@ -426,7 +426,7 @@ const topBorder = css`
 `;
 
 const bottomPadding = css`
-	padding-bottom: ${space[9]}px;
+	padding-bottom: ${space[6]}px;
 `;
 
 const bottomPaddingBetaContainer = (
@@ -681,7 +681,7 @@ export const StorylineSection = ({
 								url={url}
 								showDateHeader={showDateHeader}
 								editionId={editionId}
-								containerLevel={containerLevel}
+								containerLevel={'Secondary'}
 							/>
 						}
 						collectionBranding={collectionBranding}
