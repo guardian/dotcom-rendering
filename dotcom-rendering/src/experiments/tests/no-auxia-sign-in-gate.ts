@@ -19,7 +19,7 @@ export const noAuxiaSignInGate: ABTest = {
 	description:
 		'Defines a control group who should not have sign-in gate journeys handled by Auxia',
 	audience: 0.05,
-	audienceOffset: 0,
+	audienceOffset: 0.95,
 	audienceCriteria: 'All users',
 	successMeasure: 'Control group for Auxia sign-in gate testing',
 	canRun: () => true,
