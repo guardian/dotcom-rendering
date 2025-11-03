@@ -7335,10 +7335,6 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[86],
 	},
-	'--loop-video-subtitle-background': {
-		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
-		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
-	},
 	'--loop-video-subtitle-text': {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[100],
