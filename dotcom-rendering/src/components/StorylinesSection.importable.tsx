@@ -1,5 +1,4 @@
 import { TagPage } from 'src/types/tagPage';
-import { from } from '@guardian/source/foundations';
 import { css } from '@emotion/react';
 import { useState } from 'react';
 import { DCRFrontCard, DCRGroupedTrails, TreatType } from 'src/types/front';
@@ -18,6 +17,7 @@ type Storyline = {
 	categories: Category[];
 };
 
+// probably want to add a generic category type mapping to those in supercharger (e.g. opinions) and map this to a container type and title (e.g. "Contrasting Opinions" + "flexible/general")
 export type Category = {
 	title: string;
 	containerType: string;
@@ -625,6 +625,7 @@ export const StorylinesSection = ({
 		},
 	];
 
+	//
 	const testStorylines: Storyline[] = [
 		{
 			id: 'storyline-1',

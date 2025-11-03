@@ -4,7 +4,6 @@ import {
 	space,
 	textSans14,
 	textSans17,
-	textSans20,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { palette } from '../../../palette';
