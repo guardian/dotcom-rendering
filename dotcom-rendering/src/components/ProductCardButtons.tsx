@@ -12,24 +12,22 @@ export const ProductCardButtons = ({
 }: {
 	productCtas: ProductCta[];
 	dataComponent?: string;
-}) => {
-	return (
-		<>
-			{productCtas.map((productCta, index) => {
-				const label = getLabel(productCta);
-				return (
-					<ProductLinkButton
-						key={label}
-						label={label}
-						url={productCta.url}
-						priority={index === 0 ? 'primary' : 'tertiary'}
-						fullwidth={true}
-						data-component={`${
-							dataComponent ?? 'product-card-button'
-						}-${index}`}
-					/>
-				);
-			})}
-		</>
-	);
-};
+}) => (
+	<>
+		{productCtas.map((productCta, index) => {
+			const label = getLabel(productCta);
+			return (
+				<ProductLinkButton
+					key={label}
+					label={label}
+					url={productCta.url}
+					priority={index === 0 ? 'primary' : 'tertiary'}
+					fullwidth={true}
+					data-component={`${
+						dataComponent ?? 'product-card-button'
+					}-${index}`}
+				/>
+			);
+		})}
+	</>
+);
