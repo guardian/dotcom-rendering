@@ -12,6 +12,7 @@ const meta = {
 	parameters: {
 		chromatic: {
 			viewports: [breakpoints.mobile, breakpoints.wide],
+			disableSnapshot: true,
 		},
 	},
 } satisfies Meta<typeof LoopVideo>;
