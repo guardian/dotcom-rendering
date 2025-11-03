@@ -173,7 +173,7 @@ export const LoopVideo = ({
 		threshold: VISIBILITY_THRESHOLD,
 	});
 
-	const subtitles = useSubtitles({
+	const activeCue = useSubtitles({
 		video: vidRef.current,
 		playerState,
 		currentTime,
@@ -665,7 +665,7 @@ export const LoopVideo = ({
 				showPlayIcon={showPlayIcon}
 				subtitleSource={subtitleSource}
 				subtitleSize={subtitleSize}
-				subtitles={subtitles}
+				activeCue={activeCue}
 			/>
 		</figure>
 	);

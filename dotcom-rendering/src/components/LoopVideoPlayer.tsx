@@ -123,7 +123,8 @@ type Props = {
 	showPlayIcon: boolean;
 	subtitleSource?: string;
 	subtitleSize: SubtitleSize;
-	subtitles?: ActiveCue | null;
+	/* used in custom subtitle overlays */
+	activeCue?: ActiveCue | null;
 };
 
 /**
@@ -163,12 +164,11 @@ export const LoopVideoPlayer = forwardRef(
 			showPlayIcon,
 			subtitleSource,
 			subtitleSize,
-			subtitles,
+			activeCue,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
 		const loopVideoId = `loop-video-${uniqueId}`;
-		console.log('>>> ', subtitles?.text);
 		return (
 			<>
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Captions will be considered later. */}
@@ -230,9 +230,9 @@ export const LoopVideoPlayer = forwardRef(
 					)}
 					{FallbackImageComponent}
 				</video>
-				{!!subtitles?.text && (
+				{!!activeCue?.text && (
 					<SubtitleOverlay
-						text={subtitles.text}
+						text={activeCue.text}
 						subtitleSize={subtitleSize}
 					/>
 				)}
