@@ -5327,6 +5327,9 @@
                         "duration": {
                             "type": "number"
                         },
+                        "subtitleSource": {
+                            "type": "string"
+                        },
                         "image": {
                             "type": "string"
                         }
