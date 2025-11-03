@@ -2,6 +2,7 @@ import {
 	hasUserDismissedGate,
 	hasUserDismissedGateMoreThanCount,
 	incrementUserDismissedGateCount,
+	retrieveLastGateDismissedCount,
 	setUserDismissedGate,
 	unsetUserDismissedGate,
 } from './dismissGate';
@@ -204,6 +205,51 @@ describe('SignInGate - dismissGate methods', () => {
 			expect(
 				hasUserDismissedGateMoreThanCount('variant-1', 'test-2', 0),
 			).toBe(false);
+		});
+	});
+
+	describe('getGateDismissedCount', () => {
+		test('returns 0 when no treatmentId has been saved yet (first visit)', () => {
+			const count = retrieveLastGateDismissedCount('AuxiaSignInGate');
+			expect(count).toBe(0);
+		});
+
+		test('returns the count using the last saved treatmentId', () => {
+			// Simulate incrementing with a specific treatmentId
+			incrementUserDismissedGateCount('14414017', 'AuxiaSignInGate');
+			incrementUserDismissedGateCount('14414017', 'AuxiaSignInGate');
+
+			const count = retrieveLastGateDismissedCount('AuxiaSignInGate');
+			expect(count).toBe(2);
+		});
+
+		test('returns correct count when treatmentId changes between visits', () => {
+			// First visit with treatmentId 'default-treatment-id'
+			incrementUserDismissedGateCount(
+				'default-treatment-id',
+				'AuxiaSignInGate',
+			);
+			incrementUserDismissedGateCount(
+				'default-treatment-id',
+				'AuxiaSignInGate',
+			);
+
+			expect(retrieveLastGateDismissedCount('AuxiaSignInGate')).toBe(2);
+
+			// Later visit with treatmentId '14414017'
+			incrementUserDismissedGateCount('14414017', 'AuxiaSignInGate');
+
+			// Should now return count for '14414017' since it's the last one saved
+			expect(retrieveLastGateDismissedCount('AuxiaSignInGate')).toBe(1);
+		});
+
+		test('handles different gate names independently', () => {
+			incrementUserDismissedGateCount('variant-1', 'GateA');
+			incrementUserDismissedGateCount('variant-2', 'GateB');
+
+			expect(retrieveLastGateDismissedCount('GateA')).toBe(1);
+			expect(retrieveLastGateDismissedCount('GateB')).toBe(1);
+			expect(retrieveLastGateDismissedCount('GateC')).toBe(0);
 		});
 	});
 });
