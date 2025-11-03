@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	space,
 	textSans15,
 	textSans17,
 	textSans20,
@@ -11,7 +12,7 @@ const subtitleOverlayStyles = css`
 	max-width: 71%;
 	pointer-events: none;
 	position: absolute;
-	bottom: 16px;
+	bottom: ${space[4]}px;
 	left: 50%;
 	transform: translateX(-50%);
 `;
@@ -26,18 +27,18 @@ const cueBoxStyles = css`
 const cueStyles = css`
 	color: ${palette('--loop-video-subtitle-text')};
 	display: inline;
-	background-color: rgba(18, 18, 18, 0.7);
+	background-color: ${palette('--loop-video-subtitle-background')};
 	-webkit-box-decoration-break: clone;
 	box-decoration-break: clone;
 	pointer-events: none;
-	padding: 3px 4px 3px;
+	padding: 3px ${space[1]}px 3px;
 `;
 
 const cueTextStyles = (subtitleSize: SubtitleSize) => {
 	const sizeStyles = {
 		small: css`
 			${textSans15};
-			line-height: 24px;
+			line-height: ${space[6]}px;
 		`,
 		medium: css`
 			${textSans17};
