@@ -9,20 +9,19 @@ import {
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
-import type { ProductCta, ProductImage } from '../types/content';
+import type {
+	ProductCta,
+	ProductCustomAttribute,
+	ProductImage,
+} from '../types/content';
 import { ProductCardButtons } from './ProductCardButtons';
 import { ProductCardImage } from './ProductCardImage';
 
-export type CustomAttributes = {
-	name: string;
-	value: string;
-};
-
-export type LeftColProductCardProps = {
+type LeftColProductCardProps = {
 	brandName: string;
 	productName: string;
 	image?: ProductImage;
-	customAttributes: CustomAttributes[];
+	customAttributes: ProductCustomAttribute[];
 	format: ArticleFormat;
 	productCtas: ProductCta[];
 	lowestPrice?: string;
@@ -76,7 +75,7 @@ const customAttributesContainer = css`
 	row-gap: ${space[4]}px;
 `;
 
-const CustomAttribute = ({ name, value }: CustomAttributes) => (
+const CustomAttribute = ({ name, value }: ProductCustomAttribute) => (
 	<div
 		css={css`
 			${textSans15};

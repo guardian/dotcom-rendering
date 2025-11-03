@@ -12,14 +12,13 @@ import {
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
-import type { ProductCta, ProductImage } from '../types/content';
+import type {
+	ProductCta,
+	ProductCustomAttribute,
+	ProductImage,
+} from '../types/content';
 import { ProductCardButtons } from './ProductCardButtons';
 import { ProductCardImage } from './ProductCardImage';
-
-export type CustomAttributes = {
-	name: string;
-	value: string;
-};
 
 export type InlineProductCardProps = {
 	format: ArticleFormat;
@@ -27,7 +26,7 @@ export type InlineProductCardProps = {
 	productName: string;
 	image?: ProductImage;
 	productCtas: ProductCta[];
-	customAttributes: CustomAttributes[];
+	customAttributes: ProductCustomAttribute[];
 	isCardOnly: boolean;
 	shouldShowLeftColCard?: boolean;
 	lowestPrice?: string;
@@ -36,16 +35,20 @@ export type InlineProductCardProps = {
 const baseCard = css`
 	padding: ${space[2]}px ${space[3]}px ${space[3]}px;
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template:
+		'image info'
+		'buttons buttons'
+		'custom-attributes custom-attributes' / 1fr 1fr;
 	column-gap: 10px;
 	row-gap: ${space[4]}px;
 	max-width: 100%;
-	img {
-		width: 100%;
-		height: auto;
-	}
 	${from.mobileLandscape} {
+		grid-template:
+			'image info' auto
+			'image buttons' 1fr
+			'custom-attributes custom-attributes' / 1fr 1fr;
 		column-gap: 20px;
+		row-gap: ${space[2]}px;
 	}
 `;
 
@@ -69,6 +72,7 @@ const productCard = css`
 `;
 
 const productInfoContainer = css`
+	grid-area: info;
 	display: flex;
 	flex-direction: column;
 	gap: ${space[1]}px;
@@ -100,33 +104,32 @@ const productNameStyle = css`
 	}
 `;
 
-const mobileButtonWrapper = css`
-	grid-column: 1 / span 2;
-	display: grid;
-	row-gap: ${space[1]}px;
-	${from.mobileLandscape} {
-		display: none;
-	}
-`;
-
-const desktopButtonWrapper = css`
-	display: none;
-	${from.mobileLandscape} {
-		display: grid;
-		row-gap: ${space[1]}px;
-	}
+const buttonWrapper = css`
+	grid-area: buttons;
+	display: flex;
+	flex-direction: column;
+	gap: ${space[1]}px;
 `;
 
 const customAttributesContainer = css`
-	grid-column: 1 / span 2;
+	grid-area: custom-attributes;
 	border-top: 1px solid ${palette('--product-card-border-neutral')};
 	padding-top: ${space[2]}px;
 	display: grid;
 	gap: ${space[3]}px;
 
 	${from.mobileLandscape} {
+		margin-top: ${space[2]}px;
 		grid-template-columns: 1fr 1fr;
 		gap: ${space[5]}px;
+	}
+`;
+
+const imageGridArea = css`
+	grid-area: image;
+	img {
+		width: 100%;
+		height: auto;
 	}
 `;
 
@@ -140,7 +143,7 @@ const customAttributeItem = css`
 	}
 `;
 
-const CustomAttribute = ({ name, value }: CustomAttributes) => (
+const CustomAttribute = ({ name, value }: ProductCustomAttribute) => (
 	<div css={customAttributeItem}>
 		<strong>{name}</strong>
 		<br />
@@ -158,58 +161,51 @@ export const ProductCardInline = ({
 	isCardOnly = false,
 	shouldShowLeftColCard = false,
 	lowestPrice,
-}: InlineProductCardProps) => {
-	return (
-		<div
-			css={[
-				isCardOnly && productCard,
-				!isCardOnly && showcaseCard,
-				shouldShowLeftColCard && !isCardOnly && hideFromWide,
-			]}
-		>
+}: InlineProductCardProps) => (
+	<div
+		css={[
+			isCardOnly ? productCard : showcaseCard,
+			shouldShowLeftColCard && !isCardOnly && hideFromWide,
+		]}
+	>
+		<div css={imageGridArea}>
 			<ProductCardImage
 				format={format}
 				image={image}
 				url={productCtas[0]?.url}
 			/>
-			<div css={productInfoContainer}>
-				<div css={primaryHeading}>{brandName}</div>
-				<div css={productNameStyle}>{productName}</div>
-				{!!lowestPrice && (
-					<div css={productNameStyle}>
-						{productCtas.length > 1 ? (
-							<>
-								from <strong>{lowestPrice}</strong>
-							</>
-						) : (
-							<strong>{lowestPrice}</strong>
-						)}
-					</div>
-				)}
-				<div css={desktopButtonWrapper}>
-					<ProductCardButtons
-						productCtas={productCtas}
-						dataComponent={'inline-product-card-buttons-desktop'}
-					/>
-				</div>
-			</div>
-			<div css={mobileButtonWrapper}>
-				<ProductCardButtons
-					productCtas={productCtas}
-					dataComponent={'inline-product-card-buttons-mobile'}
-				/>
-			</div>
-			{!isCardOnly && customAttributes.length > 0 && (
-				<div css={customAttributesContainer}>
-					{customAttributes.map((customAttribute) => (
-						<CustomAttribute
-							key={customAttribute.name}
-							name={customAttribute.name}
-							value={customAttribute.value}
-						/>
-					))}
+		</div>
+		<div css={productInfoContainer}>
+			<div css={primaryHeading}>{brandName}</div>
+			<div css={productNameStyle}>{productName}</div>
+			{!!lowestPrice && (
+				<div css={productNameStyle}>
+					{productCtas.length > 1 ? (
+						<>
+							from <strong>{lowestPrice}</strong>
+						</>
+					) : (
+						<strong>{lowestPrice}</strong>
+					)}
 				</div>
 			)}
 		</div>
-	);
-};
+		<div css={buttonWrapper}>
+			<ProductCardButtons
+				productCtas={productCtas}
+				dataComponent={'inline-product-card-buttons'}
+			/>
+		</div>
+		{!isCardOnly && customAttributes.length > 0 && (
+			<div css={customAttributesContainer}>
+				{customAttributes.map((customAttribute) => (
+					<CustomAttribute
+						key={customAttribute.name}
+						name={customAttribute.name}
+						value={customAttribute.value}
+					/>
+				))}
+			</div>
+		)}
+	</div>
+);

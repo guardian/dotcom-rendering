@@ -5398,9 +5398,9 @@ const productButtonPrimaryBackgroundLight: PaletteFunction = () =>
 const productButtonPrimaryBackgroundDark: PaletteFunction = () =>
 	sourcePalette.lifestyle[500];
 const productButtonPrimaryBackgroundHoverLight: PaletteFunction = () =>
-	sourcePalette.lifestyle[400];
+	'#660055';
 const productButtonPrimaryBackgroundHoverDark: PaletteFunction = () =>
-	sourcePalette.lifestyle[400];
+	'#FF8ACC';
 const productButtonPrimaryTextDark: PaletteFunction = () =>
 	sourcePalette.neutral[7];
 const productButtonPrimaryTextLight: PaletteFunction = () =>
@@ -7334,6 +7334,14 @@ const paletteColours = {
 	'--loop-video-progress-bar-value': {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[86],
+	},
+	'--loop-video-subtitle-background': {
+		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
+		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
+	},
+	'--loop-video-subtitle-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
 	},
 	'--masthead-nav-background': {
 		light: mastheadNavBackground,
