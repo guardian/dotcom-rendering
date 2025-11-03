@@ -35,16 +35,20 @@ export type InlineProductCardProps = {
 const baseCard = css`
 	padding: ${space[2]}px ${space[3]}px ${space[3]}px;
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template:
+		'image info'
+		'buttons buttons'
+		'custom-attributes custom-attributes' / 1fr 1fr;
 	column-gap: 10px;
 	row-gap: ${space[4]}px;
 	max-width: 100%;
-	img {
-		width: 100%;
-		height: auto;
-	}
 	${from.mobileLandscape} {
+		grid-template:
+			'image info' auto
+			'image buttons' 1fr
+			'custom-attributes custom-attributes' / 1fr 1fr;
 		column-gap: 20px;
+		row-gap: ${space[2]}px;
 	}
 `;
 
@@ -68,6 +72,7 @@ const productCard = css`
 `;
 
 const productInfoContainer = css`
+	grid-area: info;
 	display: flex;
 	flex-direction: column;
 	gap: ${space[1]}px;
@@ -99,33 +104,32 @@ const productNameStyle = css`
 	}
 `;
 
-const mobileButtonWrapper = css`
-	grid-column: 1 / span 2;
-	display: grid;
-	row-gap: ${space[1]}px;
-	${from.mobileLandscape} {
-		display: none;
-	}
-`;
-
-const desktopButtonWrapper = css`
-	display: none;
-	${from.mobileLandscape} {
-		display: grid;
-		row-gap: ${space[1]}px;
-	}
+const buttonWrapper = css`
+	grid-area: buttons;
+	display: flex;
+	flex-direction: column;
+	gap: ${space[1]}px;
 `;
 
 const customAttributesContainer = css`
-	grid-column: 1 / span 2;
+	grid-area: custom-attributes;
 	border-top: 1px solid ${palette('--product-card-border-neutral')};
 	padding-top: ${space[2]}px;
 	display: grid;
 	gap: ${space[3]}px;
 
 	${from.mobileLandscape} {
+		margin-top: ${space[2]}px;
 		grid-template-columns: 1fr 1fr;
 		gap: ${space[5]}px;
+	}
+`;
+
+const imageGridArea = css`
+	grid-area: image;
+	img {
+		width: 100%;
+		height: auto;
 	}
 `;
 
@@ -164,11 +168,13 @@ export const ProductCardInline = ({
 			shouldShowLeftColCard && !isCardOnly && hideFromWide,
 		]}
 	>
-		<ProductCardImage
-			format={format}
-			image={image}
-			url={productCtas[0]?.url}
-		/>
+		<div css={imageGridArea}>
+			<ProductCardImage
+				format={format}
+				image={image}
+				url={productCtas[0]?.url}
+			/>
+		</div>
 		<div css={productInfoContainer}>
 			<div css={primaryHeading}>{brandName}</div>
 			<div css={productNameStyle}>{productName}</div>
@@ -183,17 +189,11 @@ export const ProductCardInline = ({
 					)}
 				</div>
 			)}
-			<div css={desktopButtonWrapper}>
-				<ProductCardButtons
-					productCtas={productCtas}
-					dataComponent={'inline-product-card-buttons-desktop'}
-				/>
-			</div>
 		</div>
-		<div css={mobileButtonWrapper}>
+		<div css={buttonWrapper}>
 			<ProductCardButtons
 				productCtas={productCtas}
-				dataComponent={'inline-product-card-buttons-mobile'}
+				dataComponent={'inline-product-card-buttons'}
 			/>
 		</div>
 		{!isCardOnly && customAttributes.length > 0 && (
