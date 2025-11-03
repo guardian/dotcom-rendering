@@ -219,7 +219,7 @@ export const LoopVideoPlayer = forwardRef(
 					))}
 					{subtitleSource !== undefined && (
 						<track
-							// Don't use default for iOS HLS - it forces native rendering
+							// Don't use default - it forces native rendering on iOS
 							default={false}
 							kind="subtitles"
 							src={subtitleSource}
