@@ -2,6 +2,20 @@ import type { FEElement, ProductBlockElement } from '../types/content';
 import { enhanceH2s } from './enhance-H2s';
 
 describe('Enhance h2 Embeds', () => {
+	const productElement: FEElement = {
+		_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
+		elementId: 'productMockId',
+		primaryHeading: 'Primary Heading',
+		secondaryHeading: 'Secondary Heading',
+		content: [],
+		customAttributes: [],
+		productCtas: [],
+		brandName: 'Brand',
+		displayType: 'InlineOnly',
+		starRating: '5',
+		productName: 'Product Name',
+	};
+
 	it('sets an id when it is an h2 of type SubheadingBlockElement', () => {
 		const input: FEElement[] = [
 			{
@@ -181,26 +195,72 @@ describe('Enhance h2 Embeds', () => {
 	});
 
 	it('should add H2 id to productElement', () => {
-		const productElement: FEElement = {
-			_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
-			elementId: 'productMockId',
-			primaryHeading: 'Primary Heading',
-			secondaryHeading: 'Secondary Heading',
-			content: [],
-			customAttributes: [],
-			productCtas: [],
-			brandName: 'Brand',
-			displayType: 'InlineOnly',
-			starRating: '5',
-			productName: 'Product Name',
-		};
-
 		const input = [productElement];
-
 		const expectedOutput: ProductBlockElement[] = [
 			{
 				...productElement,
 				h2Id: 'primary-heading-secondary-heading',
+			},
+		];
+
+		expect(enhanceH2s(input)).toEqual(expectedOutput);
+	});
+
+	it('should use elementId as h2Id when primary and secondary headings are empty', () => {
+		const input = [
+			{
+				...productElement,
+				primaryHeading: '',
+				secondaryHeading: '',
+			},
+		];
+		const expectedOutput: ProductBlockElement[] = [
+			{
+				...productElement,
+				primaryHeading: '',
+				secondaryHeading: '',
+				h2Id: 'productMockId',
+			},
+		];
+
+		expect(enhanceH2s(input)).toEqual(expectedOutput);
+	});
+
+	it('multiple productElements should have unique h2Ids', () => {
+		const input = [productElement, productElement];
+		const expectedOutput: ProductBlockElement[] = [
+			{
+				...productElement,
+				h2Id: 'primary-heading-secondary-heading',
+			},
+			{
+				...productElement,
+				h2Id: 'primary-heading-secondary-heading-1',
+			},
+		];
+
+		expect(enhanceH2s(input)).toEqual(expectedOutput);
+	});
+
+	it('product element with a subheading element', () => {
+		const input: FEElement[] = [
+			productElement,
+			{
+				_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+				elementId: 'mockId',
+				html: '<h2>primary heading secondary heading</h2>',
+			},
+		];
+
+		const expectedOutput: FEElement[] = [
+			{
+				...productElement,
+				h2Id: 'primary-heading-secondary-heading',
+			},
+			{
+				_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+				elementId: 'mockId',
+				html: "<h2 id='primary-heading-secondary-heading-1'>primary heading secondary heading</h2>",
 			},
 		];
 
