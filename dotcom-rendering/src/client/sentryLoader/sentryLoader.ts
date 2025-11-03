@@ -57,7 +57,11 @@ export const sentryLoader = (): Promise<void> => {
 		isInBrowserVariantTest,
 		random: Math.random(),
 	});
-	canLoadSentry ? loadSentryOnError() : stubSentry();
+	if (canLoadSentry) {
+		loadSentryOnError();
+	} else {
+		stubSentry();
+	}
 	return Promise.resolve();
 };
 

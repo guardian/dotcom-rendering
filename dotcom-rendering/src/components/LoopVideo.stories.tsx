@@ -1,6 +1,6 @@
 import { breakpoints } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react';
-import { expect, userEvent, within } from '@storybook/test';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { expect, userEvent, within } from 'storybook/test';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { LoopVideo } from './LoopVideo.importable';
 

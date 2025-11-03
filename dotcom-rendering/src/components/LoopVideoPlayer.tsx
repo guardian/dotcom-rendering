@@ -130,6 +130,11 @@ type Props = {
  * Note that in React 19, forwardRef is no longer necessary:
  * https://react.dev/reference/react/forwardRef
  */
+/**
+ * NB: To develop the loop video player locally, use `https://r.thegulocal.com/` instead of `localhost`.
+ * This is required because CORS restrictions prevent accessing the subtitles and video file from localhost.
+ */
+
 export const LoopVideoPlayer = forwardRef(
 	(
 		{

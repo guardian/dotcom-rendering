@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-webpack5';
 import { EditionDropdown } from './EditionDropdown';
 
 const meta = {

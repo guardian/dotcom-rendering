@@ -3,7 +3,7 @@ import type {
 	SelectedAmountsVariant,
 	TickerSettings,
 } from '@guardian/support-dotcom-components/dist/shared/types';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import lzstring from 'lz-string';
 import {
 	choiceCardsSettings,
@@ -117,7 +117,7 @@ export const WithThreeTierChoiceCards: Story = {
 			...design,
 			visual: {
 				kind: 'ChoiceCards',
-				buttonColour: stringToHexColour('E5E5E5'),
+				buttonColour: stringToHexColour('F1F8FC'),
 			},
 		},
 		tracking: {
@@ -138,7 +138,7 @@ export const ThreeTierChoiceCardsWithHeaderImageAndCopy: Story = {
 			headerImage,
 			visual: {
 				kind: 'ChoiceCards',
-				buttonColour: stringToHexColour('E5E5E5'),
+				buttonColour: stringToHexColour('F1F8FC'),
 			},
 		},
 
@@ -162,7 +162,7 @@ export const HeaderImageOnly: Story = {
 			headerImage,
 			visual: {
 				kind: 'ChoiceCards',
-				buttonColour: stringToHexColour('E5E5E5'),
+				buttonColour: stringToHexColour('FFFFFF'),
 			},
 			colours: {
 				...design.colours,
@@ -215,7 +215,7 @@ export const DesignThreeAnimatedHeaderImage: Story = {
 			},
 			visual: {
 				kind: 'ChoiceCards',
-				buttonColour: stringToHexColour('E5E5E5'),
+				buttonColour: stringToHexColour('FFFFFF'),
 			},
 			colours: {
 				...design.colours,
@@ -239,7 +239,7 @@ export const WithTickerAndThreeTierChoiceCards: Story = {
 			...design,
 			visual: {
 				kind: 'ChoiceCards',
-				buttonColour: stringToHexColour('E5E5E5'),
+				buttonColour: stringToHexColour('F1F8FC'),
 			},
 		},
 		tracking: {
@@ -262,7 +262,7 @@ export const WithThreeTierChoiceCardsAndArticleCount: Story = {
 			...design,
 			visual: {
 				kind: 'ChoiceCards',
-				buttonColour: stringToHexColour('E5E5E5'),
+				buttonColour: stringToHexColour('F1F8FC'),
 			},
 		},
 		tracking: {
@@ -293,7 +293,7 @@ export const WithMixedDestinations: Story = {
 			...design,
 			visual: {
 				kind: 'ChoiceCards',
-				buttonColour: stringToHexColour('E5E5E5'),
+				buttonColour: stringToHexColour('F1F8FC'),
 			},
 		},
 		tracking: {
@@ -320,7 +320,7 @@ export const CollapsableWithThreeTierChoiceCards: Story = {
 			...design,
 			visual: {
 				kind: 'ChoiceCards',
-				buttonColour: stringToHexColour('E5E5E5'),
+				buttonColour: stringToHexColour('F1F8FC'),
 			},
 		},
 		tracking: {
@@ -374,7 +374,7 @@ export const CollapsableWithThreeTierChoiceCardsMaybeLaterVariant: Story = {
 			...design,
 			visual: {
 				kind: 'ChoiceCards',
-				buttonColour: stringToHexColour('E5E5E5'),
+				buttonColour: stringToHexColour('F1F8FC'),
 			},
 		},
 		tracking: {

@@ -106,10 +106,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			hasPageSkin: hasPageSkinConfig,
 			pageId,
 			abTests,
-			switches: { absoluteServerTimes = false },
 		},
 		editionId,
 	} = front;
+
+	const serverTime = front.serverTime;
 
 	const renderAds = canRenderAds(front);
 
@@ -175,7 +176,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					]}
 					groupedTrails={highlightsCollection.grouped}
 					showAge={false}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading="eager"
 					aspectRatio={
 						highlightsCollection.aspectRatio ??
@@ -234,9 +235,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					hasPageSkin={hasPageSkin}
 					hasPageSkinContentSelfConstrain={true}
 					pageId={pageId}
-					wholePictureLogoSwitch={
-						front.config.switches.wholePictureLogo
-					}
 				/>
 
 				{isPaidContent && (
@@ -472,9 +470,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											collection.containerPalette
 										}
 										imageLoading={imageLoading}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
+										serverTime={serverTime}
 										aspectRatio={
 											collection.aspectRatio ??
 											fallbackAspectRatio(
@@ -600,7 +596,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										)
 									}
 									imageLoading={imageLoading}
-									absoluteServerTimes={absoluteServerTimes}
+									serverTime={serverTime}
 									aspectRatio={
 										collection.aspectRatio ??
 										fallbackAspectRatio(
@@ -609,10 +605,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 									sectionId={ophanName}
 									collectionId={index + 1}
-									isInAllBoostsTest={
-										front.isNetworkFront &&
-										abTests.allBoostsVariant === 'variant'
-									}
 									containerLevel={collection.containerLevel}
 									showLabsRedesign={showLabsRedesign}
 								/>

@@ -80,7 +80,7 @@ export type Position = 'inner' | 'outer' | 'none';
 export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	headlineText: string;
 	headlineSizes?: ResponsiveFontSize;
 	showQuotedHeadline?: boolean;
@@ -158,7 +158,6 @@ export type Props = {
 	trailTextSize?: TrailTextSize;
 	/** A kicker image is seperate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
-	isInAllBoostsTest?: boolean;
 	fixImageWidth?: boolean;
 	subtitleSize?: SubtitleSize;
 	/** Determines if the headline should be positioned within the content or outside the content */
@@ -232,7 +231,7 @@ const HorizontalDivider = () => (
 
 const podcastImageStyles = (imageSize: MediaSizeType) => {
 	switch (imageSize) {
-		case 'small':
+		case 'scrollable-small':
 			return css`
 				width: 69px;
 				height: 69px;
@@ -242,7 +241,7 @@ const podcastImageStyles = (imageSize: MediaSizeType) => {
 				}
 			`;
 
-		case 'medium':
+		case 'scrollable-medium':
 			return css`
 				width: 98px;
 				height: 98px;
@@ -391,7 +390,7 @@ export const Card = ({
 	liveUpdatesPosition = 'inner',
 	onwardsSource,
 	showVideo = true,
-	absoluteServerTimes,
+	serverTime,
 	isTagPage = false,
 	aspectRatio,
 	index = 0,
@@ -403,7 +402,6 @@ export const Card = ({
 	trailTextSize,
 	showKickerImage = false,
 	fixImageWidth,
-	isInAllBoostsTest = false,
 	headlinePosition = 'inner',
 	showLabsRedesign = false,
 	subtitleSize = 'small',
@@ -455,7 +453,7 @@ export const Card = ({
 					isWithinTwelveHours: withinTwelveHours,
 				}}
 				showClock={showClock}
-				absoluteServerTimes={absoluteServerTimes}
+				serverTime={serverTime}
 				isTagPage={isTagPage}
 			/>
 		);
@@ -598,12 +596,18 @@ export const Card = ({
 	const mediaFixedSizeOptions = (): MediaFixedSizeOptions => {
 		if (isSmallCard) {
 			return {
-				mobile: isInAllBoostsTest ? undefined : 'tiny',
+				mobile: 'tiny',
 				tablet: 'small',
 				desktop: 'small',
 			};
 		}
-		if (isFlexibleContainer) return { mobile: 'small' };
+
+		if (isFlexibleContainer) {
+			return {
+				mobile: 'small',
+			};
+		}
+
 		return { mobile: 'medium' };
 	};
 
@@ -942,7 +946,6 @@ export const Card = ({
 								imagePositionOnMobile={mediaPositionOnMobile}
 								isBetaContainer={isBetaContainer}
 								isFlexibleContainer={isFlexibleContainer}
-								isInAllBoostsTest={isInAllBoostsTest}
 							>
 								<Avatar
 									src={media.avatarUrl}
@@ -950,7 +953,6 @@ export const Card = ({
 									imageSize={
 										isBetaContainer ? mediaSize : undefined
 									}
-									isInAllBoostsTest={isInAllBoostsTest}
 								/>
 							</AvatarContainer>
 						)}
@@ -1078,9 +1080,6 @@ export const Card = ({
 												!isMoreGalleriesOnwardContent
 											}
 											aspectRatio={aspectRatio}
-											isInAllBoostsTest={
-												isInAllBoostsTest
-											}
 										/>
 									</div>
 								)}
@@ -1098,7 +1097,6 @@ export const Card = ({
 										!isMoreGalleriesOnwardContent
 									}
 									aspectRatio={aspectRatio}
-									isInAllBoostsTest={isInAllBoostsTest}
 								/>
 								{isVideoMainMedia && mainMedia.duration > 0 && (
 									<div
@@ -1148,7 +1146,6 @@ export const Card = ({
 										alt={media.trailImage.altText}
 										loading={imageLoading}
 										aspectRatio={aspectRatio}
-										isInAllBoostsTest={isInAllBoostsTest}
 									/>
 								)}
 							</>
@@ -1271,9 +1268,7 @@ export const Card = ({
 												: supportingContentAlignment
 										}
 										containerPalette={containerPalette}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
+										serverTime={serverTime}
 										displayHeader={isFlexibleContainer}
 										directionOnMobile={
 											isFlexibleContainer
@@ -1328,7 +1323,7 @@ export const Card = ({
 									: supportingContentAlignment
 							}
 							containerPalette={containerPalette}
-							absoluteServerTimes={absoluteServerTimes}
+							serverTime={serverTime}
 							displayHeader={isFlexibleContainer}
 							directionOnMobile={'horizontal'}
 						></LatestLinks>

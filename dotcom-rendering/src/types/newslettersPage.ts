@@ -45,6 +45,7 @@ type FENewslettersConfigType = {
 	// isPreview?: boolean;
 	googleRecaptchaSiteKey?: string;
 	googleRecaptchaSiteKeyVisible?: string;
+	contentType: string;
 };
 
 export interface FENewslettersPageType {

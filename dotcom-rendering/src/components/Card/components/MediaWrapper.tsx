@@ -25,6 +25,8 @@ export type MediaSizeType =
 	| 'xlarge'
 	| 'jumbo'
 	| 'carousel'
+	| 'scrollable-small'
+	| 'scrollable-medium'
 	| 'podcast'
 	| 'highlights-card'
 	| 'feature'
@@ -166,9 +168,12 @@ const fixMediaWidth = ({
 	tablet,
 	desktop,
 }: MediaFixedSizeOptions) => css`
-	${until.tablet} {
-		${mobile !== undefined && fixMediaWidthStyles(mediaFixedSize[mobile])}
-	}
+	${mobile &&
+	css`
+		${until.tablet} {
+			${fixMediaWidthStyles(mediaFixedSize[mobile])}
+		}
+	`}
 	${tablet &&
 	css`
 		${between.tablet.and.desktop} {

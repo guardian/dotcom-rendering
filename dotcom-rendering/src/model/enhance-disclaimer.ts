@@ -47,9 +47,13 @@ const insertDisclaimerElement = (elements: FEElement[]): FEElement[] => {
 };
 
 const enhanceDisclaimer =
-	(hasAffiliateLinksDisclaimer: boolean) =>
+	(hasAffiliateLinksDisclaimer: boolean, isNested: boolean) =>
 	(elements: FEElement[]): FEElement[] =>
-		hasAffiliateLinksDisclaimer
+		/* If we run enhanceDisclaimer on nested elements, such as Q&A elements, we end up
+		with lots of duplicate disclaimers on the page, being added to the second paragraph
+		of every element containing nested content. We want to avoid running the enhancer
+		on any nested elements to avoid this problem. */
+		hasAffiliateLinksDisclaimer && !isNested
 			? insertDisclaimerElement(elements)
 			: elements;
 

@@ -7,10 +7,31 @@ on:
   pull_request:
     paths:
       - 'ab-testing/**'
+      - '.github/workflows/ab-testing-*.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'ab-testing/**'
+      - '.github/workflows/ab-testing-*.yml'
 
 jobs:
-  checks:
+  ci:
+    name: CI
     uses: ./.github/workflows/ab-testing-checks.yml
+    with:
+      save_build_artifact: true
     secrets:
-      FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_CODE_AB_TESTING_CONFIG }}
-      FASTLY_API_TOKEN: ${{ secrets.FASTLY_CODE_API_TOKEN }}
+      FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_PROD_AB_TESTING_CONFIG }}
+      FASTLY_API_TOKEN: ${{ secrets.FASTLY_PROD_API_TOKEN }}
+
+  deploy:
+    name: Deploy
+    needs: ci
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/ab-testing-deploy.yml
+    with:
+      stage: prod
+    secrets:
+      FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_PROD_AB_TESTING_CONFIG }}
+      FASTLY_API_TOKEN: ${{ secrets.FASTLY_PROD_API_TOKEN }}

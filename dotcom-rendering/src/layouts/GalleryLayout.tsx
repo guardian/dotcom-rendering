@@ -9,6 +9,7 @@ import { Hide } from '@guardian/source/react-components';
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot } from '../components/AdSlot.web';
+import { GalleryAffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
@@ -54,6 +55,7 @@ import { BannerWrapper, Stuck } from './lib/stickiness';
 interface Props {
 	gallery: Gallery;
 	renderingTarget: RenderingTarget;
+	serverTime?: number;
 }
 
 interface WebProps extends Props {
@@ -75,7 +77,7 @@ const headerStyles = css`
 `;
 
 export const GalleryLayout = (props: WebProps | AppProps) => {
-	const { gallery, renderingTarget } = props;
+	const { gallery, renderingTarget, serverTime } = props;
 
 	const {
 		config: {
@@ -110,8 +112,6 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 
 	const showComments =
 		frontendData.isCommentable && !frontendData.config.isPaidContent;
-
-	const { absoluteServerTimes = false } = switches;
 
 	return (
 		<>
@@ -201,9 +201,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						ajaxUrl={gallery.frontendData.config.ajaxUrl}
 						guardianBaseUrl={gallery.frontendData.guardianBaseURL}
 						discussionApiUrl={discussionApiUrl}
-						absoluteServerTimes={
-							switches['absoluteServerTimes'] ?? false
-						}
+						serverTime={serverTime}
 						isAdFreeUser={frontendData.isAdFreeUser}
 					/>
 				</Island>
@@ -215,7 +213,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 				display={format.display}
 			/>
 			<StoryPackage
-				absoluteServerTimes={absoluteServerTimes}
+				serverTime={serverTime}
 				discussionApiUrl={discussionApiUrl}
 				format={format}
 				renderingTarget={renderingTarget}
@@ -239,7 +237,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					editionId={frontendData.editionId}
 					shortUrlId={frontendData.config.shortUrlId}
 					discussionApiUrl={frontendData.config.discussionApiUrl}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					renderingTarget={renderingTarget}
 					webURL={frontendData.webURL}
 				/>
@@ -407,7 +405,6 @@ const BannerAndMasthead = (props: {
 			hasPageSkin={false}
 			hasPageSkinContentSelfConstrain={false}
 			pageId={props.pageId}
-			wholePictureLogoSwitch={props.config.switches.wholePictureLogo}
 		/>
 	</div>
 );
@@ -497,6 +494,9 @@ const Meta = ({
 				shortUrlId={frontendData.config.shortUrlId}
 			/>
 		) : null}
+		{!!frontendData.affiliateLinksDisclaimer && (
+			<GalleryAffiliateDisclaimer />
+		)}
 	</div>
 );
 
@@ -660,14 +660,14 @@ const StoryPackage = ({
 	storyPackage,
 	format,
 	discussionApiUrl,
-	absoluteServerTimes,
+	serverTime,
 	renderingTarget,
 	topBorder,
 }: {
 	storyPackage: Gallery['storyPackage'];
 	format: ArticleFormat;
 	discussionApiUrl: string;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	renderingTarget: RenderingTarget;
 	topBorder: boolean;
 }) =>
@@ -686,7 +686,7 @@ const StoryPackage = ({
 					format={format}
 					leftColSize="compact"
 					discussionApiUrl={discussionApiUrl}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					renderingTarget={renderingTarget}
 				/>
 			</Island>

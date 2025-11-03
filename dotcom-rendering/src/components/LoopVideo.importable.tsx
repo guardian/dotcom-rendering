@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { log, storage } from '@guardian/libs';
+import { space } from '@guardian/source/foundations';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
@@ -494,15 +495,13 @@ export const LoopVideo = ({
 	}
 
 	const handleLoadedMetadata = () => {
-		if (!vidRef.current) return;
+		const video = vidRef.current;
+		if (!video) return;
 
-		const track = vidRef.current.textTracks[0];
+		const track = video.textTracks[0];
 		if (!track?.cues) return;
-		const pxFromBottom = 16;
-		const videoHeight =
-			vidRef.current.getBoundingClientRect().height ||
-			vidRef.current.clientHeight ||
-			height;
+		const pxFromBottom = space[3];
+		const videoHeight = video.getBoundingClientRect().height;
 		const percentFromTop =
 			((videoHeight - pxFromBottom) / videoHeight) * 100;
 

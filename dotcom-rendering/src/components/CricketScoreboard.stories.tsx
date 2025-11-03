@@ -1,5 +1,5 @@
 import { breakpoints } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { match } from '../../fixtures/manual/cricket-scoreboard';
 import { CricketScoreboard } from './CricketScoreboard';
 
