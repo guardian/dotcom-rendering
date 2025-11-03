@@ -1,4 +1,4 @@
-import type { FEElement } from '../types/content';
+import type { FEElement, ProductBlockElement } from '../types/content';
 import { enhanceH2s } from './enhance-H2s';
 
 describe('Enhance h2 Embeds', () => {
@@ -174,6 +174,33 @@ describe('Enhance h2 Embeds', () => {
 				_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 				elementId: 'mockId',
 				html: "<h2 id='jurassic-park-iii-2001'>	Jurassic Park III --- 2001 -- ★★★ </h2>",
+			},
+		];
+
+		expect(enhanceH2s(input)).toEqual(expectedOutput);
+	});
+
+	it('should update productElement', () => {
+		const productElement: FEElement = {
+			_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
+			elementId: 'productMockId',
+			primaryHeading: 'Primary Heading',
+			secondaryHeading: 'Secondary Heading',
+			content: [],
+			customAttributes: [],
+			productCtas: [],
+			brandName: 'Brand',
+			displayType: 'InlineOnly',
+			starRating: '5',
+			productName: 'Product Name',
+		};
+
+		const input = [productElement];
+
+		const expectedOutput: ProductBlockElement[] = [
+			{
+				...productElement,
+				h2Id: 'primary-heading-secondary-heading',
 			},
 		];
 
