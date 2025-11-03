@@ -5398,9 +5398,9 @@ const productButtonPrimaryBackgroundLight: PaletteFunction = () =>
 const productButtonPrimaryBackgroundDark: PaletteFunction = () =>
 	sourcePalette.lifestyle[500];
 const productButtonPrimaryBackgroundHoverLight: PaletteFunction = () =>
-	sourcePalette.lifestyle[400];
+	'#660055';
 const productButtonPrimaryBackgroundHoverDark: PaletteFunction = () =>
-	sourcePalette.lifestyle[400];
+	'#FF8ACC';
 const productButtonPrimaryTextDark: PaletteFunction = () =>
 	sourcePalette.neutral[7];
 const productButtonPrimaryTextLight: PaletteFunction = () =>
