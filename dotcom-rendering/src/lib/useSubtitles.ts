@@ -21,7 +21,7 @@ export const useSubtitles = ({
 	const [activeTrack, setActiveTrack] = useState<TextTrack | null>(null);
 	const [activeCue, setActiveCue] = useState<ActiveCue | null>(null);
 
-	// only show subtitles if the video is actively playing or if it's paused
+	/* Only show subtitles if the video is actively playing or if it's paused. */
 	const shouldShow = playerState === 'PLAYING' || currentTime > 0;
 
 	useEffect(() => {
@@ -31,11 +31,12 @@ export const useSubtitles = ({
 
 		const setTrackFromList = () => {
 			const track = textTracks[0];
-			// We currently only support one text track per video, so we are OK to access [0] here.
+			/* We currently only support one text track per video, so we are OK to access [0] here. */
 			if (!track) return;
 
-			// Keep track in 'showing' mode for iOS reliability
-			// We'll hide the native subtitles with CSS instead
+			/* Keep track in 'showing' mode for iOS reliability.
+			 * We'll hide the native subtitles with CSS instead
+			 */
 			if (track.mode !== 'showing') {
 				track.mode = 'showing';
 			}
@@ -43,10 +44,10 @@ export const useSubtitles = ({
 			setActiveTrack(track);
 		};
 
-		// Get Text track as soon as the video element is available
+		/* Get Text track as soon as the video element is available */
 		setTrackFromList();
 
-		// Listen for delayed loads across all scenarios
+		/* Listen for delayed loads across all scenarios */
 		textTracks.addEventListener('addtrack', setTrackFromList);
 		video.addEventListener('loadedmetadata', setTrackFromList);
 		video.addEventListener('loadeddata', setTrackFromList);
@@ -68,13 +69,14 @@ export const useSubtitles = ({
 			return;
 		}
 
-		// Keep track in 'showing' mode but hide with CSS
-		// This makes iOS more reliable with cuechange events and activeCues
+		/* Keep track in 'showing' mode.
+		 * this makes iOS more reliable with cuechange events and activeCues
+		 */
 		if (track.mode !== 'showing') {
 			track.mode = 'showing';
 		}
 
-		// listen to cuechange and set the active cue
+		/* listen to cuechange and set the active cue */
 		const onCueChange = () => {
 			const list = track.activeCues;
 			if (!list || list.length === 0) {
@@ -91,12 +93,12 @@ export const useSubtitles = ({
 
 		track.addEventListener('cuechange', onCueChange);
 
-		// Initial check
+		/* Initial check */
 		onCueChange();
 
 		return () => {
 			track.removeEventListener('cuechange', onCueChange);
-			// Keep it showing even on cleanup for consistency
+			/* Keep it showing even on cleanup for consistency */
 			track.mode = 'showing';
 		};
 	}, [activeTrack, shouldShow, currentTime]);
