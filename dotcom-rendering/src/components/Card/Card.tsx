@@ -67,7 +67,6 @@ import { CardWrapper } from './components/CardWrapper';
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
 import type {
-	MediaFixedSizeOptions,
 	MediaPositionType,
 	MediaSizeType,
 } from './components/MediaWrapper';
@@ -158,7 +157,6 @@ export type Props = {
 	trailTextSize?: TrailTextSize;
 	/** A kicker image is seperate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
-	fixImageWidth?: boolean;
 	subtitleSize?: SubtitleSize;
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
@@ -229,33 +227,37 @@ const HorizontalDivider = () => (
 	/>
 );
 
-const podcastImageStyles = (imageSize: MediaSizeType) => {
-	switch (imageSize) {
-		case 'scrollable-small':
-			return css`
-				width: 69px;
-				height: 69px;
-				${from.tablet} {
-					width: 98px;
-					height: 98px;
-				}
-			`;
-
-		case 'scrollable-medium':
-			return css`
+const podcastImageStyles = (
+	isSmallCard: boolean,
+	imagePositionOnDesktop: MediaPositionType,
+) => {
+	if (isSmallCard) {
+		return css`
+			width: 69px;
+			height: 69px;
+			${from.tablet} {
 				width: 98px;
 				height: 98px;
-				${from.tablet} {
-					width: 120px;
-					height: 120px;
-				}
-			`;
-		default:
-			return css`
-				width: 120px;
-				height: 120px;
-			`;
+			}
+		`;
 	}
+
+	const isHorizontalOnDesktop =
+		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
+
+	return css`
+		width: 98px;
+		height: 98px;
+		${from.tablet} {
+			width: 120px;
+			height: 120px;
+		}
+		/** The image takes the full height on desktop, so that the waveform sticks to the bottom of the card. */
+		${from.desktop} {
+			width: ${isHorizontalOnDesktop ? 'unset' : '120px'};
+			height: ${isHorizontalOnDesktop ? 'unset' : '120px'};
+		}
+	`;
 };
 
 const getMedia = ({
@@ -401,7 +403,6 @@ export const Card = ({
 	showTopBarMobile = true,
 	trailTextSize,
 	showKickerImage = false,
-	fixImageWidth,
 	headlinePosition = 'inner',
 	showLabsRedesign = false,
 	subtitleSize = 'small',
@@ -589,27 +590,7 @@ export const Card = ({
 		containerType === 'flexible/special' ||
 		containerType === 'flexible/general';
 
-	const isSmallCard =
-		containerType === 'scrollable/small' ||
-		containerType === 'scrollable/medium';
-
-	const mediaFixedSizeOptions = (): MediaFixedSizeOptions => {
-		if (isSmallCard) {
-			return {
-				mobile: 'tiny',
-				tablet: 'small',
-				desktop: 'small',
-			};
-		}
-
-		if (isFlexibleContainer) {
-			return {
-				mobile: 'small',
-			};
-		}
-
-		return { mobile: 'medium' };
-	};
+	const isSmallCard = containerType === 'scrollable/small';
 
 	const hideTrailTextUntil = () => {
 		if (isFlexibleContainer) {
@@ -663,7 +644,10 @@ export const Card = ({
 			return { row: 'small', column: 'small' };
 		}
 
-		if (isSmallCard) {
+		if (
+			containerType === 'scrollable/small' ||
+			containerType === 'scrollable/medium'
+		) {
 			return {
 				row: 'medium',
 				column: 'medium',
@@ -905,18 +889,13 @@ export const Card = ({
 				{media && (
 					<MediaWrapper
 						mediaSize={mediaSize}
-						mediaFixedSizes={mediaFixedSizeOptions()}
 						mediaType={media.type}
 						mediaPositionOnDesktop={mediaPositionOnDesktop}
 						mediaPositionOnMobile={mediaPositionOnMobile}
-						fixImageWidth={
-							fixImageWidth ??
-							(mediaPositionOnMobile === 'left' ||
-								mediaPositionOnMobile === 'right')
-						}
 						hideImageOverlay={media.type === 'slideshow'}
 						padMedia={isMediaCardOrNewsletter && isBetaContainer}
 						isBetaContainer={isBetaContainer}
+						isSmallCard={isSmallCard}
 					>
 						{media.type === 'slideshow' && (
 							<div
@@ -1126,7 +1105,12 @@ export const Card = ({
 						{media.type === 'podcast' && (
 							<>
 								{media.podcastImage?.src && !showKickerImage ? (
-									<div css={podcastImageStyles(mediaSize)}>
+									<div
+										css={podcastImageStyles(
+											isSmallCard,
+											mediaPositionOnDesktop,
+										)}
+									>
 										<CardPicture
 											mainImage={media.podcastImage.src}
 											imageSize="small"

@@ -58,15 +58,6 @@ const benefitsLabelStyles = (customColor?: string) => css`
 	}
 `;
 
-const labelOverrideStyles = (isSelected: boolean) => css`
-	+ label div {
-		${isSelected ? 'font-weight: bold;' : ''}
-		s {
-			font-weight: normal;
-		}
-	}
-`;
-
 const supportingTextStyles = css`
 	margin-top: ${space[4]}px;
 `;
@@ -164,6 +155,18 @@ export const ThreeTierChoiceCards = ({
 		padding: ${selected
 			? `6px ${space[5]}px 10px ${space[5]}px`
 			: `6px ${space[5]}px`};
+	`;
+
+	const labelOverrideStyles = (isSelected: boolean) => css`
+		+ label div {
+			${isSelected ? 'font-weight: bold;' : ''}
+			color: ${isSelected
+				? choiceCardSettings?.buttonSelectTextColour ?? 'inherit'
+				: choiceCardSettings?.buttonTextColour ?? 'inherit'};
+			s {
+				font-weight: normal;
+			}
+		}
 	`;
 
 	const customRadioTheme: ThemeRadio = {
