@@ -22,7 +22,7 @@ const meta = {
 		chromatic: {
 			modes: {
 				'light mobile': allModes['light mobile'],
-				'light tablet': allModes['light desktop'],
+				'light desktop': allModes['light desktop'],
 				'light wide': allModes['light wide'],
 				'horizontal split': allModes['splitHorizontal'],
 			},
