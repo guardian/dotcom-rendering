@@ -128,7 +128,7 @@ export const LotsOfCtas = {
 				url: 'https://www.theguardian.com',
 				price: '£105',
 				retailer: 'Amazon',
-				text: '',
+				text: 'Override text',
 			},
 		],
 		lowestPrice: '£89.99',
