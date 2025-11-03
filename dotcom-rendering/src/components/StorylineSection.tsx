@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
-import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { type EditionId, isNetworkFront } from '../lib/edition';
 import { palette as schemePalette } from '../palette';
 import type { CollectionBranding } from '../types/branding';
@@ -303,21 +302,21 @@ const sectionHeadlineUntilLeftCol = (isOpinion: boolean) => css`
 	}
 `;
 
-const sectionHeadlineFromLeftCol = (borderColour: string) => css`
-	${from.leftCol} {
-		position: relative;
-		::after {
-			content: '';
-			display: block;
-			width: 1px;
-			top: 0;
-			height: 1.875rem;
-			right: -10px;
-			position: absolute;
-			background-color: ${borderColour};
-		}
-	}
-`;
+// const sectionHeadlineFromLeftCol = (borderColour: string) => css`
+// 	${from.leftCol} {
+// 		position: relative;
+// 		::after {
+// 			content: '';
+// 			display: block;
+// 			width: 1px;
+// 			top: 0;
+// 			height: 1.875rem;
+// 			right: -10px;
+// 			position: absolute;
+// 			background-color: ${borderColour};
+// 		}
+// 	}
+// `;
 
 const topPadding = css`
 	padding-top: ${space[2]}px;
@@ -585,7 +584,6 @@ export const StorylineSection = ({
 	treats,
 	url,
 	pagination,
-	hasPageSkin = false,
 	collectionBranding,
 	isTagPage = false,
 	hasNavigationButtons = false,
@@ -593,7 +591,6 @@ export const StorylineSection = ({
 	isAboveMobileAd = false,
 }: Props) => {
 	const isToggleable = toggleable && !!sectionId;
-	const showVerticalRule = !hasPageSkin;
 	const isBetaContainer = !!containerLevel;
 
 	// These are for beta containers only
@@ -618,12 +615,9 @@ export const StorylineSection = ({
 				css={[
 					fallbackStyles,
 					containerStylesUntilLeftCol,
-					!hasPageSkin && containerStylesFromLeftCol,
-					!hasPageSkin &&
-						hasNavigationButtons &&
+					containerStylesFromLeftCol,
+					hasNavigationButtons &&
 						containerScrollableStylesFromLeftCol,
-
-					hasPageSkin && pageSkinContainer,
 				]}
 			>
 				{isBetaContainer && showTopBorder && (
@@ -660,11 +654,11 @@ export const StorylineSection = ({
 							// only ever having <CPScott> as the leftContent
 							title?.toLowerCase() === 'opinion',
 						),
-						showVerticalRule &&
-							!isBetaContainer &&
-							sectionHeadlineFromLeftCol(
-								schemePalette('--section-border'),
-							),
+						// showVerticalRule &&
+						// 	!isBetaContainer &&
+						// 	sectionHeadlineFromLeftCol(
+						// 		schemePalette('--section-border'),
+						// 	),
 					]}
 				>
 					<FrontSectionTitle
@@ -716,9 +710,8 @@ export const StorylineSection = ({
 						sectionContentHorizontalMargins,
 						sectionContentRow(toggleable),
 						topPadding,
-						showVerticalRule &&
-							isBetaContainer &&
-							sectionContentBorderFromLeftCol,
+						// showVerticalRule &&
+						isBetaContainer && sectionContentBorderFromLeftCol,
 					]}
 					id={`container-${sectionId}`}
 				>
@@ -748,7 +741,7 @@ export const StorylineSection = ({
 					)}
 				</div>
 
-				{treats && !hasPageSkin && (
+				{treats && (
 					<div css={[sectionTreats]}>
 						<Treats
 							treats={treats}
