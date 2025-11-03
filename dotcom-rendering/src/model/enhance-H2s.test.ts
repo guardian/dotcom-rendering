@@ -1,21 +1,21 @@
 import type { FEElement, ProductBlockElement } from '../types/content';
 import { enhanceH2s } from './enhance-H2s';
 
-describe('Enhance h2 Embeds', () => {
-	const productElement: FEElement = {
-		_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
-		elementId: 'productMockId',
-		primaryHeading: 'Primary Heading',
-		secondaryHeading: 'Secondary Heading',
-		content: [],
-		customAttributes: [],
-		productCtas: [],
-		brandName: 'Brand',
-		displayType: 'InlineOnly',
-		starRating: '5',
-		productName: 'Product Name',
-	};
+const mockProductElement: FEElement = {
+	_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
+	elementId: 'productMockId',
+	primaryHeading: 'Primary Heading',
+	secondaryHeading: 'Secondary Heading',
+	content: [],
+	customAttributes: [],
+	productCtas: [],
+	brandName: 'Brand',
+	displayType: 'InlineOnly',
+	starRating: '5',
+	productName: 'Product Name',
+};
 
+describe('Enhance h2 Embeds', () => {
 	it('sets an id when it is an h2 of type SubheadingBlockElement', () => {
 		const input: FEElement[] = [
 			{
@@ -194,11 +194,11 @@ describe('Enhance h2 Embeds', () => {
 		expect(enhanceH2s(input)).toEqual(expectedOutput);
 	});
 
-	it('should add H2 id to productElement', () => {
-		const input = [productElement];
+	it('should add H2 id to mockProductElement', () => {
+		const input = [mockProductElement];
 		const expectedOutput: ProductBlockElement[] = [
 			{
-				...productElement,
+				...mockProductElement,
 				h2Id: 'primary-heading-secondary-heading',
 			},
 		];
@@ -209,14 +209,14 @@ describe('Enhance h2 Embeds', () => {
 	it('should use elementId as h2Id when primary and secondary headings are empty', () => {
 		const input = [
 			{
-				...productElement,
+				...mockProductElement,
 				primaryHeading: '',
 				secondaryHeading: '',
 			},
 		];
 		const expectedOutput: ProductBlockElement[] = [
 			{
-				...productElement,
+				...mockProductElement,
 				primaryHeading: '',
 				secondaryHeading: '',
 				h2Id: 'productMockId',
@@ -227,14 +227,14 @@ describe('Enhance h2 Embeds', () => {
 	});
 
 	it('multiple productElements should have unique h2Ids', () => {
-		const input = [productElement, productElement];
+		const input = [mockProductElement, mockProductElement];
 		const expectedOutput: ProductBlockElement[] = [
 			{
-				...productElement,
+				...mockProductElement,
 				h2Id: 'primary-heading-secondary-heading',
 			},
 			{
-				...productElement,
+				...mockProductElement,
 				h2Id: 'primary-heading-secondary-heading-1',
 			},
 		];
@@ -244,7 +244,7 @@ describe('Enhance h2 Embeds', () => {
 
 	it('product element with a subheading element', () => {
 		const input: FEElement[] = [
-			productElement,
+			mockProductElement,
 			{
 				_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 				elementId: 'mockId',
@@ -254,7 +254,7 @@ describe('Enhance h2 Embeds', () => {
 
 		const expectedOutput: FEElement[] = [
 			{
-				...productElement,
+				...mockProductElement,
 				h2Id: 'primary-heading-secondary-heading',
 			},
 			{
