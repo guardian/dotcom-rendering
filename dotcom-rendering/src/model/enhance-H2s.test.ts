@@ -180,7 +180,7 @@ describe('Enhance h2 Embeds', () => {
 		expect(enhanceH2s(input)).toEqual(expectedOutput);
 	});
 
-	it('should update productElement', () => {
+	it('should add H2 id to productElement', () => {
 		const productElement: FEElement = {
 			_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
 			elementId: 'productMockId',
