@@ -3994,6 +3994,9 @@
                             "url"
                         ]
                     }
+                },
+                "lowestPrice": {
+                    "type": "string"
                 }
             },
             "required": [
