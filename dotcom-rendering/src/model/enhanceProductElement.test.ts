@@ -1,8 +1,12 @@
+// typescript
+import type { ArticleFormat } from '../lib/articleFormat';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type {
 	FEElement,
 	ProductBlockElement,
 	ProductImage,
 } from '../types/content';
+import { enhanceElements } from './enhanceBlocks';
 import { enhanceProductElement } from './enhanceProductElement';
 
 const productImage: ProductImage = {
@@ -15,159 +19,87 @@ const productImage: ProductImage = {
 	displayCredit: false,
 };
 
+const productBlockElement: ProductBlockElement = {
+	_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
+	elementId: 'product-1',
+	brandName: 'Bosch',
+	starRating: '5',
+	productName: 'Sky Kettle',
+	image: productImage,
+	secondaryHeading: 'Best Kettle Overall',
+	primaryHeading: 'Bosch Sky Kettle',
+	customAttributes: [
+		{ name: 'What we love', value: 'It packs away pretty small' },
+		{
+			name: "What we don't love",
+			value: 'There’s nowhere to stow the remote control',
+		},
+	],
+	content: [
+		{
+			_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+			elementId: 'mockId',
+			html: '<h2>Unique Heading.</h2>',
+		},
+	],
+	displayType: 'InlineOnly',
+	productCtas: [
+		{
+			url: 'https://www.johnlewis.com/bosch-twk7203gb-sky-variable-temperature-kettle-1-7l-black/p3228625',
+			text: 'Buy now',
+			retailer: 'John Lewis',
+			price: '£79.99',
+		},
+		{
+			url: 'https://www.johnlewis.com/bosch-twk7203gb-sky-variable-temperature-kettle-1-7l-black/p3228625',
+			text: 'Buy now',
+			retailer: 'John Lewis',
+			price: '£29.99',
+		},
+	],
+};
+
+const expectedEnhancedContent = [
+	{
+		_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+		elementId: 'mockId',
+		html: "<h2 id='unique-heading'>Unique Heading.</h2>",
+	},
+];
+
+const format: ArticleFormat = {
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme: Pillar.Lifestyle,
+};
+
+const elementsEnhancer = enhanceElements(
+	format,
+	'block-id',
+	{
+		renderingTarget: 'Web',
+		promotedNewsletter: undefined,
+		imagesForLightbox: [],
+		hasAffiliateLinksDisclaimer: false,
+		shouldHideAds: false,
+	},
+	true,
+);
+
 describe('enhanceProductBlockElements', () => {
+	const inputElements: FEElement[] = [productBlockElement];
+	const result = enhanceProductElement(elementsEnhancer)(inputElements);
+
+	expect(result).toHaveLength(1);
+
+	const enhancedElements = (result as ProductBlockElement[])[0];
+	if (!enhancedElements) throw new Error('enhanced Elements is undefined');
+
 	it('enhances the content of a ProductBlockElement', () => {
-		const elementsEnhancer = (elements: FEElement[]): FEElement[] => [
-			...elements,
-		];
+		expect(enhancedElements.content).toEqual(expectedEnhancedContent);
+	});
 
-		const productBlockElement: ProductBlockElement = {
-			_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
-			elementId: 'product-1',
-			brandName: 'Bosch',
-			starRating: '5',
-			productName: 'Sky Kettle',
-			image: productImage,
-			secondaryHeading: 'Best Kettle Overall',
-			primaryHeading: 'Bosch Sky Kettle',
-			customAttributes: [
-				{ name: 'What we love', value: 'It packs away pretty small' },
-				{
-					name: "What we don't love",
-					value: 'There’s nowhere to stow the remote control',
-				},
-			],
-			content: [
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>This is a text block</p>',
-					elementId: 'text-block-1',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
-					elementId: 'rich-link-1',
-					url: 'https://example.com',
-					text: 'Example Rich Link',
-					prefix: 'Related',
-					role: 'inline',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: 'image-1',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '600',
-									width: '800',
-								},
-								mediaType: 'Image',
-								url: 'https://example.com/image.jpg',
-							},
-						],
-					},
-					data: {
-						alt: 'Example image',
-						credit: 'Photographer Name',
-						caption: 'An example caption',
-						copyright: 'Example Copyright',
-					},
-					imageSources: [
-						{
-							weighting: 'inline',
-							srcSet: [
-								{
-									src: 'https://example.com/image.jpg',
-									width: 800,
-								},
-							],
-						},
-					],
-					displayCredit: true,
-					role: 'inline',
-					title: 'Example Image',
-					starRating: 4,
-					isAvatar: false,
-					position: 1,
-				},
-			],
-			displayType: 'InlineOnly',
-			productCtas: [
-				{
-					url: 'https://www.johnlewis.com/bosch-twk7203gb-sky-variable-temperature-kettle-1-7l-black/p3228625',
-					text: 'Buy now',
-					retailer: 'John Lewis',
-					price: '£79.99',
-				},
-			],
-		};
-
-		const inputElements: FEElement[] = [productBlockElement];
-
-		const outputElements: FEElement[] = [
-			{
-				...productBlockElement,
-				content: [
-					{
-						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-						html: '<p>This is a text block</p>',
-						elementId: 'text-block-1',
-					},
-					{
-						_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
-						elementId: 'rich-link-1',
-						url: 'https://example.com',
-						text: 'Example Rich Link',
-						prefix: 'Related',
-						role: 'inline',
-					},
-					{
-						_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-						elementId: 'image-1',
-						media: {
-							allImages: [
-								{
-									index: 0,
-									fields: {
-										height: '600',
-										width: '800',
-									},
-									mediaType: 'Image',
-									url: 'https://example.com/image.jpg',
-								},
-							],
-						},
-						data: {
-							alt: 'Example image',
-							credit: 'Photographer Name',
-							caption: 'An example caption',
-							copyright: 'Example Copyright',
-						},
-						imageSources: [
-							{
-								weighting: 'inline',
-								srcSet: [
-									{
-										src: 'https://example.com/image.jpg',
-										width: 800,
-									},
-								],
-							},
-						],
-						displayCredit: true,
-						role: 'inline',
-						title: 'Example Image',
-						starRating: 4,
-						isAvatar: false,
-						position: 1,
-					},
-				],
-			},
-		];
-
-		expect(enhanceProductElement(elementsEnhancer)(inputElements)).toEqual(
-			outputElements,
-		);
+	it('adds the lowestPrice to a ProductBlockElement', () => {
+		expect(enhancedElements.lowestPrice).toEqual('£29.99');
 	});
 });

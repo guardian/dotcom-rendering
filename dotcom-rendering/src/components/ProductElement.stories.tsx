@@ -38,6 +38,7 @@ const product: ProductBlockElement = {
 	productName: 'Sky Kettle',
 	image: productImage,
 	displayType: 'InlineWithProductCard',
+	lowestPrice: '£39.99',
 	customAttributes: [
 		{ name: 'What we love', value: 'It pours well and looks great' },
 		{

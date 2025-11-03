@@ -483,6 +483,7 @@ export interface ProductBlockElement {
 	h2Id?: string;
 	displayType: ProductDisplayType;
 	productCtas: ProductCta[];
+	lowestPrice?: string;
 }
 
 interface ProfileAtomBlockElement {

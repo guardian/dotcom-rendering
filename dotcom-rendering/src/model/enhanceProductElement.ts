@@ -1,4 +1,8 @@
-import type { FEElement, ProductBlockElement } from '../types/content';
+import type {
+	FEElement,
+	ProductBlockElement,
+	ProductCta,
+} from '../types/content';
 
 type ElementsEnhancer = (elements: FEElement[]) => FEElement[];
 
@@ -8,7 +12,30 @@ const enhanceProductBlockElement = (
 ): ProductBlockElement => ({
 	...element,
 	content: elementsEnhancer(element.content),
+	lowestPrice: getLowestPrice(element.productCtas),
 });
+
+const getLowestPrice = (ctas: ProductCta[]): string | undefined => {
+	if (ctas.length === 0) {
+		return undefined;
+	}
+
+	let lowestCta: ProductCta | null = null;
+	let lowestPrice: number | null = null;
+
+	for (const cta of ctas) {
+		const priceMatch = cta.price.match(/[\d,.]+/);
+		if (priceMatch) {
+			const priceNumber = parseFloat(priceMatch[0].replace(/,/g, ''));
+			if (lowestPrice === null || priceNumber < lowestPrice) {
+				lowestPrice = priceNumber;
+				lowestCta = cta;
+			}
+		}
+	}
+
+	return lowestCta?.price;
+};
 
 const enhance =
 	(elementsEnhancer: ElementsEnhancer) =>

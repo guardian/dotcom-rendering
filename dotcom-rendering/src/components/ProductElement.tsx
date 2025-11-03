@@ -35,28 +35,6 @@ const contentContainer = css`
 	position: relative;
 `;
 
-const getLowestPrice = (ctas: ProductCta[]): string | undefined => {
-	if (ctas.length === 0) {
-		return undefined;
-	}
-
-	let lowestCta: ProductCta | null = null;
-	let lowestPrice: number | null = null;
-
-	for (const cta of ctas) {
-		const priceMatch = cta.price.match(/[\d,.]+/);
-		if (priceMatch) {
-			const priceNumber = parseFloat(priceMatch[0].replace(/,/g, ''));
-			if (lowestPrice === null || priceNumber < lowestPrice) {
-				lowestPrice = priceNumber;
-				lowestCta = cta;
-			}
-		}
-	}
-
-	return lowestCta?.price;
-};
-
 const LeftColProductCardContainer = ({ children }: { children: ReactNode }) => (
 	<div
 		css={css`
@@ -105,7 +83,7 @@ export const ProductElement = ({
 					brandName={product.brandName}
 					productName={product.productName}
 					image={product.image}
-					lowestPrice={getLowestPrice(product.productCtas)}
+					lowestPrice={product.lowestPrice}
 					productCtas={product.productCtas}
 					customAttributes={product.customAttributes}
 					isCardOnly={product.displayType === 'ProductCardOnly'}
@@ -152,7 +130,7 @@ const Content = ({
 							brandName={product.brandName}
 							productName={product.productName}
 							image={product.image}
-							lowestPrice={getLowestPrice(product.productCtas)}
+							lowestPrice={product.lowestPrice}
 							productCtas={product.productCtas}
 							customAttributes={product.customAttributes}
 							format={format}
