@@ -137,6 +137,7 @@ export interface AuxiaProxyGetTreatmentsPayload {
 	showDefaultGate: ShowGateValues; // [3]
 	gateDisplayCount: number;
 	hideSupportMessagingTimestamp: number | undefined; // [4]
+	isInAuxiaControlGroup: boolean;
 }
 
 // [1]
