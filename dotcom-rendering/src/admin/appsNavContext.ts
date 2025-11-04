@@ -92,6 +92,7 @@ const insertAction = (
 		...state,
 		sections: result.value,
 		insertingAt: undefined,
+		error: undefined,
 		history:
 			history === undefined
 				? [{ kind: 'insert', location }, ...state.history]
@@ -116,6 +117,7 @@ const deleteAction = (
 	return {
 		...state,
 		sections: result.value.sections,
+		error: undefined,
 		history:
 			history === undefined
 				? [
@@ -148,6 +150,7 @@ const moveAction = (
 	return {
 		...state,
 		sections: result.value,
+		error: undefined,
 		history:
 			history === undefined
 				? [
@@ -200,12 +203,21 @@ export const reducer = (state: State, action: Action): State => {
 				return { ...state, error: 'Cannot reset, nothing has changed' };
 			}
 
-			return { ...state, sections: action.initial, history: [] };
+			return {
+				...state,
+				sections: action.initial,
+				history: [],
+				error: undefined,
+			};
 		}
 		case 'insertInto':
-			return { ...state, insertingAt: [...action.location, 0] };
+			return {
+				...state,
+				insertingAt: [...action.location, 0],
+				error: undefined,
+			};
 		case 'cancelInsert':
-			return { ...state, insertingAt: undefined };
+			return { ...state, insertingAt: undefined, error: undefined };
 		case 'moveDown':
 			return moveAction(state, action.location, 1, undefined);
 		case 'moveUp':
