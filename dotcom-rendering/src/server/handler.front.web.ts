@@ -45,6 +45,8 @@ const enhanceFront = (body: unknown): Front => {
 						.editionBrandings,
 					data.editionId,
 				),
+				isLoopVideoLoadTest:
+					data.config.abTests.LoopVideoLoadVariant === 'variant',
 			}),
 		},
 		mostViewed: data.mostViewed.map((trail) => decideTrail(trail)),
