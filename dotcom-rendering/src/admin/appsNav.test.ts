@@ -39,18 +39,18 @@ describe('appsNav', () => {
 
 		const result = okOrThrow(
 			insertSection(sections, [0], section),
-			'Expected section deletion to be successful',
+			'Expected section insertion to be successful',
 		);
 
 		expect(result[0]?.title).toEqual('Mock Section');
 		expect(result[1]?.title).toEqual('UK');
 
 		const result2 = okOrThrow(
-			insertSection(result, [0, 2], section),
-			'Expected section deletion to be successful',
+			insertSection(result, [1, 2], section),
+			'Expected section insertion to be successful',
 		);
 
-		expect(result2?.[0]?.sections?.[0]?.title).toEqual('Mock Section');
+		expect(result2?.[1]?.sections?.[2]?.title).toEqual('Mock Section');
 		expect(result2[1]?.title).toEqual('UK');
 	});
 
@@ -65,7 +65,7 @@ describe('appsNav', () => {
 		expect(result?.[0]?.sections?.[5]?.title).toEqual('Media');
 
 		const result2 = okOrThrow(
-			moveSection(sections, [0, 2], -5),
+			moveSection(sections, [0, 2], -2),
 			'Expected section move to be successful',
 		);
 
