@@ -1,11 +1,14 @@
 import {
 	headlineBold17Object,
+	headlineBold24Object,
 	palette,
 	space,
 } from '@guardian/source/foundations';
 import {
 	useCallback,
+	useEffect,
 	useReducer,
+	useRef,
 	useState,
 	type FormEventHandler,
 	type ReactNode,
@@ -359,14 +362,14 @@ const InsertDialog = (props: { insertingAt: number[] | undefined }) => {
 	}, [dispatch]);
 
 	return (
-		<dialog open={props.insertingAt !== undefined}>
-			<SectionForm
-				initialTitle=""
-				initialPath=""
-				submit={submit}
-				cancel={cancel}
-			/>
-		</dialog>
+		<SectionForm
+			heading="Add Section"
+			open={props.insertingAt !== undefined}
+			initialTitle=""
+			initialPath=""
+			submit={submit}
+			cancel={cancel}
+		/>
 	);
 };
 
@@ -400,21 +403,23 @@ const EditDialog = (props: {
 	}, [dispatch]);
 
 	return (
-		<dialog open={props.editing !== undefined}>
-			<SectionForm
-				initialTitle={props.editing?.title ?? ''}
-				initialPath={new URL(
-					props.editing?.path ?? '',
-					'https://www.theguardian.com',
-				).toString()}
-				submit={submit}
-				cancel={cancel}
-			/>
-		</dialog>
+		<SectionForm
+			heading="Edit Section"
+			open={props.editing !== undefined}
+			initialTitle={props.editing?.title ?? ''}
+			initialPath={new URL(
+				props.editing?.path ?? '',
+				'https://www.theguardian.com',
+			).toString()}
+			submit={submit}
+			cancel={cancel}
+		/>
 	);
 };
 
 const SectionForm = (props: {
+	heading: string;
+	open: boolean;
 	initialTitle: string;
 	initialPath: string;
 	submit: (title: string, url: URL) => void;
@@ -422,32 +427,71 @@ const SectionForm = (props: {
 }) => {
 	const [title, setTitle] = useState(props.initialTitle);
 	const [url, setUrl] = useState(props.initialPath);
+	const dialogRef = useRef<HTMLDialogElement | null>(null);
 
 	const submit: FormEventHandler = (e) => {
 		e.preventDefault();
 		props.submit(title, new URL(url));
 	};
 
+	// Required for the `::backdrop` pseudo-element, otherwise we could use the
+	// `open` attribute.
+	useEffect(() => {
+		if (props.open) {
+			dialogRef.current?.showModal();
+		} else {
+			dialogRef.current?.close();
+		}
+	}, [props.open]);
+
 	return (
-		<form action="" onSubmit={submit}>
-			<TextInput
-				label="Title"
-				value={title}
-				onChange={(e) => setTitle(e.target.value)}
-			/>
-			<TextInput
-				label="Dotcom Link"
-				type="url"
-				pattern="https://www.theguardian\.com/.*"
-				placeholder="https://www.theguardian.com/uk/sport"
-				value={url}
-				onChange={(e) => setUrl(e.target.value)}
-			/>
-			<Button type="submit">Submit</Button>
-			<Button onClick={props.cancel} priority="tertiary">
-				Cancel
-			</Button>
-		</form>
+		<dialog
+			css={{
+				'::backdrop': {
+					backgroundColor: palette.neutral[10],
+					opacity: 0.7,
+				},
+			}}
+			ref={dialogRef}
+		>
+			<form action="" onSubmit={submit}>
+				<h2
+					css={{
+						...headlineBold24Object,
+						paddingBottom: space[5],
+					}}
+				>
+					{props.heading}
+				</h2>
+				<TextInput
+					label="Title"
+					value={title}
+					onChange={(e) => setTitle(e.target.value)}
+					cssOverrides={css({
+						marginBottom: space[5],
+					})}
+				/>
+				<TextInput
+					label="Dotcom Link"
+					type="url"
+					pattern="https://www.theguardian\.com/.*"
+					placeholder="https://www.theguardian.com/uk/sport"
+					value={url}
+					onChange={(e) => setUrl(e.target.value)}
+					cssOverrides={css({
+						marginBottom: space[8],
+					})}
+				/>
+				<Button type="submit">Submit</Button>
+				<Button
+					cssOverrides={css({ marginLeft: space[2] })}
+					onClick={props.cancel}
+					priority="tertiary"
+				>
+					Cancel
+				</Button>
+			</form>
+		</dialog>
 	);
 };
 
