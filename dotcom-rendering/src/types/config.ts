@@ -2,7 +2,6 @@ import {
 	array,
 	boolean,
 	extend,
-	intersection,
 	literal,
 	number,
 	object,
@@ -52,10 +51,11 @@ const VariantTestsSchema = record(VariantKeySchema, literal('variant'));
 const ControlKeySchema = templateLiteral([string(), literal('Control')]);
 const ControlTestsSchema = record(ControlKeySchema, literal('control'));
 
-export const ServerSideTestsSchema = intersection(
+// TODO this is not exactly what we want
+export const ServerSideTestsSchema = union([
 	VariantTestsSchema,
 	ControlTestsSchema,
-);
+]);
 
 export type ServerSideTests = z.infer<typeof ServerSideTestsSchema>;
 
