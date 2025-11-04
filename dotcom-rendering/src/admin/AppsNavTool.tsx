@@ -20,6 +20,7 @@ import {
 	SvgChevronDownSingle,
 	SvgPlus,
 	SvgReload,
+	SvgUpload,
 	TextInput,
 } from '@guardian/source/react-components';
 import { css } from '@emotion/react';
@@ -33,6 +34,7 @@ import {
 type Props = {
 	ukNav: AppsNav;
 	guardianBaseUrl: string;
+	publish: (data: AppsNav) => Promise<void>;
 };
 
 export const AppsNavTool = (props: Props) => {
@@ -46,6 +48,7 @@ export const AppsNavTool = (props: Props) => {
 			<MenuActions
 				initialSections={props.ukNav.pillars}
 				history={state.history}
+				publish={() => props.publish({ pillars: state.sections })}
 			/>
 			<InsertDialog insertingAt={state.insertingAt} />
 			<Sections
@@ -61,6 +64,7 @@ export const AppsNavTool = (props: Props) => {
 const MenuActions = (props: {
 	initialSections: Section[];
 	history: HistoryEvent[];
+	publish: () => Promise<void>;
 }) => {
 	const dispatch = useDispatch();
 
@@ -69,14 +73,12 @@ const MenuActions = (props: {
 			css={{
 				paddingTop: space[2],
 				paddingBottom: space[2],
-				paddingLeft: space[4],
-				li: {
-					display: 'inline',
-					paddingRight: space[1],
-				},
+				paddingLeft: space[5],
+				paddingRight: space[5],
+				display: 'flex',
 			}}
 		>
-			<li>
+			<li css={{ paddingRight: space[2] }}>
 				<Button
 					size="small"
 					priority="tertiary"
@@ -87,7 +89,7 @@ const MenuActions = (props: {
 					Undo
 				</Button>
 			</li>
-			<li>
+			<li css={{ paddingRight: space[2] }}>
 				<Button
 					size="small"
 					priority="tertiary"
@@ -104,7 +106,7 @@ const MenuActions = (props: {
 					Reset
 				</Button>
 			</li>
-			<li>
+			<li css={{ paddingRight: space[2] }}>
 				<Button
 					size="small"
 					priority="tertiary"
@@ -114,6 +116,20 @@ const MenuActions = (props: {
 					}
 				>
 					Add Section
+				</Button>
+			</li>
+			<li
+				css={{
+					marginLeft: 'auto',
+				}}
+			>
+				<Button
+					size="small"
+					priority="primary"
+					icon={<SvgUpload />}
+					onClick={props.publish}
+				>
+					Publish
 				</Button>
 			</li>
 		</menu>
@@ -339,7 +355,7 @@ const ErrorMessage = (props: { children: ReactNode }) =>
 				display: 'block',
 				position: 'sticky',
 				bottom: 0,
-				paddingLeft: space[5],
+				paddingLeft: space[4],
 				paddingTop: space[2],
 				paddingBottom: space[1],
 				borderTopColor: palette.error[400],

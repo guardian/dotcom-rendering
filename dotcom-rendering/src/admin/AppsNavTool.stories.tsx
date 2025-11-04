@@ -3,6 +3,7 @@ import { parse } from 'valibot';
 import { ukNav } from '../../fixtures/manual/appsNav/uk';
 import { AppsNavSchema } from './appsNav';
 import { AppsNavTool as AppsNavToolComponent } from './AppsNavTool';
+import { fn } from 'storybook/test';
 
 const meta = {
 	title: 'Admin/Apps Nav Tool',
@@ -17,5 +18,6 @@ export const AppsNavTool = {
 	args: {
 		ukNav: parse(AppsNavSchema, ukNav),
 		guardianBaseUrl: 'https://www.theguardian.com',
+		publish: fn(),
 	},
 } satisfies Story;
