@@ -19,7 +19,30 @@ import type { ABTest } from './types';
  * - 100% Test	variant		MVT 500-999
  */
 
-const ABTests: ABTest[] = [];
+const ABTests: ABTest[] = [
+	{
+		name: 'commercial-dev-client-side-test',
+		description: 'Test something interesting on the site',
+		owners: ['commercial.dev@guardian.co.uk'],
+		status: 'ON',
+		expirationDate: '2050-12-30',
+		type: 'client',
+		audienceSize: 100 / 100,
+		groups: ['control', 'variant'],
+		shouldForceMetricsCollection: true,
+	},
+	{
+		name: 'commercial-dev-server-side-test',
+		description: 'Test something interesting on the site',
+		owners: ['commercial.dev@guardian.co.uk'],
+		status: 'ON',
+		expirationDate: '2050-12-30',
+		type: 'server',
+		audienceSize: 100 / 100,
+		groups: ['control', 'variant'],
+		shouldForceMetricsCollection: true,
+	},
+];
 
 const activeABtests = ABTests.filter((test) => test.status === 'ON');
 
