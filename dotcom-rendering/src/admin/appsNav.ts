@@ -95,7 +95,11 @@ export const deleteSection = (
 	});
 };
 
-type InsertError = 'NoIndex' | 'NoSectionAtLocation' | 'SectionExists';
+type InsertError =
+	| 'NoIndex'
+	| 'NoSectionAtLocation'
+	| 'SectionExists'
+	| 'OutOfRange';
 
 export function insertSection(
 	sections: Section[],
@@ -117,6 +121,10 @@ export function insertSection(
 			) !== -1
 		) {
 			return error('SectionExists');
+		}
+
+		if (index > sections.length) {
+			return error('OutOfRange');
 		}
 
 		return ok(sections.toSpliced(index, 0, section));
@@ -142,11 +150,13 @@ export function insertSection(
 	);
 }
 
+type MoveError = 'OutOfRange';
+
 export const moveSection = (
 	sections: Section[],
 	location: number[],
 	to: number,
-): Result<DeleteError | InsertError, Section[]> => {
+): Result<MoveError | DeleteError | InsertError, Section[]> => {
 	if (location.length === 0) {
 		return ok(sections);
 	}
@@ -160,9 +170,13 @@ export const moveSection = (
 	const { deleted, sections: remainingSections } = deleteResult.value;
 	const newLocation = (location.at(-1) ?? 0) + to;
 
+	if (newLocation < 0) {
+		return error('OutOfRange');
+	}
+
 	return insertSection(
 		remainingSections,
-		location.toSpliced(-1, 1, newLocation < 0 ? 0 : newLocation),
+		location.toSpliced(-1, 1, newLocation),
 		deleted,
 	);
 };
