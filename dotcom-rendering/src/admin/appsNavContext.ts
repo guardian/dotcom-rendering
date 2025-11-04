@@ -10,11 +10,12 @@ import {
 	moveSection,
 	type Section,
 } from './appsNav';
+import { error, ok, type Result } from '../lib/result';
 
 type State = {
 	sections: Section[];
 	history: HistoryEvent[];
-	error?: string;
+	message?: Result<string, string>;
 	insertingAt?: number[];
 };
 
@@ -65,6 +66,12 @@ type Action =
 	| {
 			kind: 'moveUp';
 			location: number[];
+	  }
+	| {
+			kind: 'publishSuccess';
+	  }
+	| {
+			kind: 'publishError';
 	  };
 
 export const DispatchContext = createContext<Dispatch<Action>>((_a: Action) => {
@@ -84,7 +91,9 @@ const insertAction = (
 	if (result.kind === 'error') {
 		return {
 			...state,
-			error: `Failed to insert at location ${location}, ${result.error}`,
+			message: error(
+				`Failed to insert at location ${location}, ${result.error}`,
+			),
 		};
 	}
 
@@ -92,7 +101,7 @@ const insertAction = (
 		...state,
 		sections: result.value,
 		insertingAt: undefined,
-		error: undefined,
+		message: undefined,
 		history:
 			history === undefined
 				? [{ kind: 'insert', location }, ...state.history]
@@ -110,14 +119,16 @@ const deleteAction = (
 	if (result.kind === 'error') {
 		return {
 			...state,
-			error: `Failed to delete at location ${location}, ${result.error}`,
+			message: error(
+				`Failed to delete at location ${location}, ${result.error}`,
+			),
 		};
 	}
 
 	return {
 		...state,
 		sections: result.value.sections,
-		error: undefined,
+		message: undefined,
 		history:
 			history === undefined
 				? [
@@ -143,14 +154,16 @@ const moveAction = (
 	if (result.kind === 'error') {
 		return {
 			...state,
-			error: `Failed to move ${distance} at location ${location}, ${result.error}`,
+			message: error(
+				`Failed to move ${distance} at location ${location}, ${result.error}`,
+			),
 		};
 	}
 
 	return {
 		...state,
 		sections: result.value,
-		error: undefined,
+		message: undefined,
 		history:
 			history === undefined
 				? [
@@ -170,7 +183,7 @@ const undo = (state: State): State => {
 
 	switch (lastEvent?.kind) {
 		case undefined:
-			return { ...state, error: 'Cannot undo, no more history' };
+			return { ...state, message: error('Cannot undo, no more history') };
 		case 'delete':
 			return insertAction(
 				state,
@@ -200,27 +213,34 @@ export const reducer = (state: State, action: Action): State => {
 			return undo(state);
 		case 'reset': {
 			if (state.history.length === 0) {
-				return { ...state, error: 'Cannot reset, nothing has changed' };
+				return {
+					...state,
+					message: error('Cannot reset, nothing has changed'),
+				};
 			}
 
 			return {
 				...state,
 				sections: action.initial,
 				history: [],
-				error: undefined,
+				message: undefined,
 			};
 		}
 		case 'insertInto':
 			return {
 				...state,
 				insertingAt: [...action.location, 0],
-				error: undefined,
+				message: undefined,
 			};
 		case 'cancelInsert':
-			return { ...state, insertingAt: undefined, error: undefined };
+			return { ...state, insertingAt: undefined, message: undefined };
 		case 'moveDown':
 			return moveAction(state, action.location, 1, undefined);
 		case 'moveUp':
 			return moveAction(state, action.location, -1, undefined);
+		case 'publishSuccess':
+			return { ...state, message: ok('Publication successful.') };
+		case 'publishError':
+			return { ...state, message: error('Publication failed.') };
 	}
 };

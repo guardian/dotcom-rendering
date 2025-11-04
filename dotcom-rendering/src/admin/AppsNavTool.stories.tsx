@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { parse } from 'valibot';
 import { ukNav } from '../../fixtures/manual/appsNav/uk';
-import { AppsNavSchema } from './appsNav';
+import { AppsNavSchema, type AppsNav } from './appsNav';
 import { AppsNavTool as AppsNavToolComponent } from './AppsNavTool';
 import { fn } from 'storybook/test';
 
@@ -18,6 +18,6 @@ export const AppsNavTool = {
 	args: {
 		ukNav: parse(AppsNavSchema, ukNav),
 		guardianBaseUrl: 'https://www.theguardian.com',
-		publish: fn(),
+		publish: fn((_data: AppsNav) => Promise.resolve(true)),
 	},
 } satisfies Story;

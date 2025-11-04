@@ -13,6 +13,7 @@ import { type AppsNav, type Section } from './appsNav';
 import {
 	Button,
 	InlineError,
+	InlineSuccess,
 	SvgArrowDownStraight,
 	SvgArrowOutdent,
 	SvgArrowUpStraight,
@@ -30,11 +31,12 @@ import {
 	useDispatch,
 	type HistoryEvent,
 } from './appsNavContext';
+import type { Result } from '../lib/result';
 
 type Props = {
 	ukNav: AppsNav;
 	guardianBaseUrl: string;
-	publish: (data: AppsNav) => Promise<void>;
+	publish: (data: AppsNav) => Promise<boolean>;
 };
 
 export const AppsNavTool = (props: Props) => {
@@ -48,7 +50,11 @@ export const AppsNavTool = (props: Props) => {
 			<MenuActions
 				initialSections={props.ukNav.pillars}
 				history={state.history}
-				publish={() => props.publish({ pillars: state.sections })}
+				publish={async () =>
+					(await props.publish({ pillars: state.sections }))
+						? dispatch({ kind: 'publishSuccess' })
+						: dispatch({ kind: 'publishError' })
+				}
 			/>
 			<InsertDialog insertingAt={state.insertingAt} />
 			<Sections
@@ -56,7 +62,7 @@ export const AppsNavTool = (props: Props) => {
 				guardianBaseUrl={props.guardianBaseUrl}
 				location={[]}
 			/>
-			<ErrorMessage>{state.error}</ErrorMessage>
+			<Message message={state.message} />
 		</DispatchContext.Provider>
 	);
 };
@@ -348,8 +354,12 @@ const InsertDialog = (props: { insertingAt: number[] | undefined }) => {
 	);
 };
 
-const ErrorMessage = (props: { children: ReactNode }) =>
-	props.children !== undefined ? (
+const Message = (props: { message: Result<string, string> | undefined }) => {
+	if (props.message === undefined) {
+		return null;
+	}
+
+	return (
 		<output
 			css={{
 				display: 'block',
@@ -358,12 +368,27 @@ const ErrorMessage = (props: { children: ReactNode }) =>
 				paddingLeft: space[4],
 				paddingTop: space[2],
 				paddingBottom: space[1],
-				borderTopColor: palette.error[400],
 				borderTopWidth: 2,
 				borderTopStyle: 'solid',
 				backgroundColor: palette.neutral[100],
 			}}
+			style={{
+				borderTopColor:
+					props.message.kind === 'ok'
+						? palette.success[400]
+						: palette.error[400],
+			}}
 		>
-			<InlineError>{props.children}</InlineError>
+			<MessageOutput message={props.message} />
 		</output>
-	) : null;
+	);
+};
+
+const MessageOutput = (props: { message: Result<string, string> }) => {
+	switch (props.message.kind) {
+		case 'ok':
+			return <InlineSuccess>{props.message.value}</InlineSuccess>;
+		case 'error':
+			return <InlineError>{props.message.error}</InlineError>;
+	}
+};
