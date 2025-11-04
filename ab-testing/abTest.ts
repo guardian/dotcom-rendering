@@ -30,6 +30,7 @@ const ABTests: ABTest[] = [
 		audienceSize: 100 / 100,
 		groups: ['control', 'variant'],
 		shouldForceMetricsCollection: true,
+		audienceSpace: 'A',
 	},
 	{
 		name: 'commercial-dev-server-side-test',
@@ -41,6 +42,7 @@ const ABTests: ABTest[] = [
 		audienceSize: 100 / 100,
 		groups: ['control', 'variant'],
 		shouldForceMetricsCollection: true,
+		audienceSpace: 'B',
 	},
 ];
 
