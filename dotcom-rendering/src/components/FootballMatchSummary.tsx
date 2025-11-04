@@ -3,8 +3,9 @@ import { from } from '@guardian/source/foundations';
 import type { FootballMatch } from '../footballMatch';
 import { grid } from '../grid';
 import { palette } from '../palette';
-import { MatchNav } from './MatchNav';
+import { Island } from './Island';
 import { MatchStats } from './MatchStats';
+import { MatchUpdate } from './MatchUpdate.importable';
 
 const gridStyles = css`
 	${grid.paddedContainer}
@@ -50,12 +51,15 @@ export const FootballMatchSummary = ({ match }: Props) => (
 				}
 			`}
 		>
-			<MatchNav
-				homeTeam={match.homeTeam}
-				awayTeam={match.awayTeam}
-				comments={match.comments}
-				usage="MatchSummary"
-			/>
+			<Island priority="critical">
+				<MatchUpdate
+					homeTeam={match.homeTeam}
+					awayTeam={match.awayTeam}
+					comments={match.comments}
+					usage="MatchSummary"
+					matchId={match.id}
+				/>
+			</Island>
 		</div>
 		<div
 			css={css`

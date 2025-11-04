@@ -23,6 +23,7 @@ export const FootballMatchSummary = {
 		match: {
 			homeTeam: matchReport.homeTeam,
 			awayTeam: matchReport.awayTeam,
+			id: matchReport.id,
 			comments: matchReport.comments,
 		},
 	},

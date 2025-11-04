@@ -13,7 +13,6 @@ import { RightAdsPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
-import { AppSyncEvent } from '../components/AppSyncEvent.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -297,9 +296,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	return (
 		<>
-			<Island priority="critical">
-				<AppSyncEvent />
-			</Island>
 			{isWeb && (
 				<div data-print-layout="hide">
 					{renderAds && (

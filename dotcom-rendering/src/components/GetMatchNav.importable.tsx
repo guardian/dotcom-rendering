@@ -7,7 +7,7 @@ import { useApi } from '../lib/useApi';
 import type { TeamType } from '../types/sport';
 import type { TagType } from '../types/tag';
 import { ArticleHeadline } from './ArticleHeadline';
-import { MatchNav } from './MatchNav';
+import { MatchUpdate } from './MatchUpdate.importable';
 
 type Props = {
 	matchUrl: string;
@@ -23,6 +23,7 @@ type MatchData = {
 	comments?: string;
 	minByMinUrl?: string;
 	venue?: string;
+	id: string;
 };
 
 const fallbackTeam = {
@@ -35,6 +36,7 @@ const fallbackTeam = {
 const fallbackData = {
 	homeTeam: fallbackTeam,
 	awayTeam: fallbackTeam,
+	id: '0',
 } satisfies MatchData;
 
 const validateMatchData = (data: unknown): data is MatchData => {
@@ -137,9 +139,10 @@ export const GetMatchNav = ({
 	const isDataValid = validateMatchData(data);
 	if (isDataValid) {
 		return (
-			<MatchNav
+			<MatchUpdate
 				homeTeam={data.homeTeam}
 				awayTeam={data.awayTeam}
+				matchId={data.id}
 				comments={data.comments}
 				usage="Article"
 			/>

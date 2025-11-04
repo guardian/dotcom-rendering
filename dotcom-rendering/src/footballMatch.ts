@@ -48,6 +48,7 @@ export type FootballPlayer = {
 export type FootballMatch = {
 	homeTeam: FootballTeam;
 	awayTeam: FootballTeam;
+	id: string;
 	comments?: string;
 };
 
@@ -142,6 +143,7 @@ export const parse = (
 	return ok({
 		homeTeam: parsedHomeTeam.value,
 		awayTeam: parsedAwayTeam.value,
+		id: feFootballMatch.id,
 		comments: feFootballMatch.comments,
 	});
 };
