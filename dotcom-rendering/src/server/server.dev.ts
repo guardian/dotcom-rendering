@@ -1,4 +1,5 @@
-import { type Handler, Router } from 'express';
+import path from 'node:path';
+import { static as expressStatic, type Handler, Router } from 'express';
 import { pages } from '../devServer/routers/pages';
 import { targets } from '../devServer/routers/targets';
 import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslettersPage.web';
@@ -118,6 +119,13 @@ renderer.post('/FootballMatchListPage', handleFootballMatchListPage);
 renderer.post('/FootballTablesPage', handleFootballTablesPage);
 renderer.post('/CricketMatchPage', handleCricketMatchPage);
 renderer.post('/FootballMatchSummaryPage', handleFootballMatchPage);
+
+// TODO: Why AR was doing it in both dist annd assets?
+renderer.use('/assets', expressStatic(path.resolve(__dirname, '../assets')));
+renderer.use(
+	'/assets',
+	expressStatic(path.resolve(__dirname, '../dist/assets')),
+);
 
 const router = Router();
 router.use('/pages', pages);

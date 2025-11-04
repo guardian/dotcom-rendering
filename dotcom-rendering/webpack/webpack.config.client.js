@@ -1,6 +1,11 @@
+const { createHash } = require('node:crypto');
+const path = require('node:path');
+const CleanCSS = require('clean-css');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const swcConfig = require('./.swcrc.json');
+const { assetsCss } = require('./assets-styles');
 const { getBrowserTargets } = require('./browser-targets');
 const { svgr } = require('./svg.cjs');
 
@@ -61,6 +66,11 @@ const getLoaders = (build) => {
 	}
 };
 
+const assetsTemplateCss = new CleanCSS().minify(assetsCss).styles.trim();
+
+const assetHash = (asset) =>
+	createHash('sha256').update(asset).digest('base64');
+
 /**
  * @param {{ build: Build }} options
  * @returns {import('webpack').Configuration}
@@ -113,6 +123,30 @@ module.exports = ({ build }) => ({
 		new WebpackManifestPlugin({
 			fileName: `manifest.${build}.json`,
 		}),
+		...(build === 'client.apps'
+			? [
+					new HtmlWebpackPlugin({
+						excludeChunks: ['debug'],
+						meta: {
+							'Content-Security-Policy': {
+								'http-equiv': 'Content-Security-Policy',
+								content: `style-src 'sha256-${assetHash(
+									assetsTemplateCss,
+								)}';`,
+							},
+						},
+						filename: 'rendered-items-assets.html',
+						minify: true,
+						template: path.resolve(
+							__dirname,
+							'assets-template.html',
+						),
+						templateParameters: {
+							styles: assetsTemplateCss,
+						},
+					}),
+			  ]
+			: []),
 		...(build === 'client.apps' || build === 'client.editionsCrossword'
 			? [
 					new webpack.optimize.LimitChunkCountPlugin({
