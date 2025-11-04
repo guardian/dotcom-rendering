@@ -293,7 +293,7 @@ const InsertDialog = (props: { insertingAt: number[] | undefined }) => {
 				kind: 'insert',
 				section: {
 					title,
-					path,
+					path: new URL(path).pathname.slice(1),
 				},
 				location: props.insertingAt,
 			});
@@ -313,7 +313,10 @@ const InsertDialog = (props: { insertingAt: number[] | undefined }) => {
 					onChange={(e) => setTitle(e.target.value)}
 				/>
 				<TextInput
-					label="Path"
+					label="Dotcom Link"
+					type="url"
+					pattern="https://www.theguardian\.com/.*"
+					placeholder="https://www.theguardian.com/uk/sport"
 					value={path}
 					onChange={(e) => setPath(e.target.value)}
 				/>
