@@ -1,5 +1,5 @@
 import { parse } from 'valibot';
-import { ukNav } from '../../fixtures/manual/appsNav/uk';
+import { ukNav } from '../../../fixtures/manual/appsNav/uk';
 import {
 	AppsNavSchema,
 	deleteSection,
@@ -7,7 +7,7 @@ import {
 	moveSection,
 	updateSection,
 } from './appsNav';
-import { okOrThrow } from '../lib/result';
+import { okOrThrow } from '../../lib/result';
 
 describe('appsNav', () => {
 	const sections = parse(AppsNavSchema, ukNav).pillars;

@@ -36,7 +36,7 @@ import {
 	useDispatch,
 	type HistoryEvent,
 } from './appsNavContext';
-import type { Result } from '../lib/result';
+import type { Result } from '../../lib/result';
 
 type Props = {
 	ukNav: AppsNav;

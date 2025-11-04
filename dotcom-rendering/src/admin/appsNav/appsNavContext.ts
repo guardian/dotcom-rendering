@@ -11,7 +11,7 @@ import {
 	updateSection,
 	type Section,
 } from './appsNav';
-import { error, ok, type Result } from '../lib/result';
+import { error, ok, type Result } from '../../lib/result';
 
 type State = {
 	sections: Section[];

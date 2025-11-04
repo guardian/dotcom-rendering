@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { parse } from 'valibot';
-import { ukNav } from '../../fixtures/manual/appsNav/uk';
+import { ukNav } from '../../../fixtures/manual/appsNav/uk';
 import { AppsNavSchema, type AppsNav } from './appsNav';
 import { AppsNavTool } from './AppsNavTool';
 import { fn } from 'storybook/test';

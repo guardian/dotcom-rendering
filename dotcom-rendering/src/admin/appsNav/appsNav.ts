@@ -9,7 +9,7 @@ import {
 	string,
 	union,
 } from 'valibot';
-import { error, ok, type Result } from '../lib/result';
+import { error, ok, type Result } from '../../lib/result';
 
 // We can't use `InferOutput` for this due to lazy.
 // See https://valibot.dev/guides/other/
