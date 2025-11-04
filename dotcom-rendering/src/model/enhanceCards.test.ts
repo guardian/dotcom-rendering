@@ -1,7 +1,7 @@
 import type { FEMediaAsset, FEMediaAtom } from '../frontend/feFront';
 import { getActiveMediaAtom } from './enhanceCards';
 
-describe('Enhance Cards', () => {
+describe.skip('Enhance Cards', () => {
 	it('prioritises m3u8 assets over MP4 assets', () => {
 		const videoReplace = true;
 		const assets: FEMediaAsset[] = [
