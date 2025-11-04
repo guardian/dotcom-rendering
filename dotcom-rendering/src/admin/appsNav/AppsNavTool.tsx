@@ -10,24 +10,17 @@ import {
 	InlineError,
 	InlineSuccess,
 	SvgArrowDownStraight,
-	SvgArrowOutdent,
 	SvgArrowUpStraight,
 	SvgBin,
 	SvgChevronDownSingle,
 	SvgEdit,
 	SvgPlus,
-	SvgReload,
-	SvgUpload,
 } from '@guardian/source/react-components';
 import { css } from '@emotion/react';
-import {
-	DispatchContext,
-	reducer,
-	useDispatch,
-	type HistoryEvent,
-} from './appsNavContext';
+import { DispatchContext, reducer, useDispatch } from './appsNavContext';
 import type { Result } from '../../lib/result';
 import { SectionForm } from './SectionForm';
+import { MenuActions } from './MenuActions';
 
 type Props = {
 	ukNav: AppsNav;
@@ -61,81 +54,6 @@ export const AppsNavTool = (props: Props) => {
 			/>
 			<Message message={state.message} />
 		</DispatchContext.Provider>
-	);
-};
-
-const MenuActions = (props: {
-	initialSections: Section[];
-	history: HistoryEvent[];
-	publish: () => Promise<void>;
-}) => {
-	const dispatch = useDispatch();
-
-	return (
-		<menu
-			css={{
-				paddingTop: space[2],
-				paddingBottom: space[2],
-				paddingLeft: space[5],
-				paddingRight: space[5],
-				display: 'flex',
-			}}
-		>
-			<li css={{ paddingRight: space[2] }}>
-				<Button
-					size="small"
-					priority="secondary"
-					onClick={() => dispatch({ kind: 'undo' })}
-					disabled={props.history.length === 0}
-					icon={<SvgReload />}
-				>
-					Undo
-				</Button>
-			</li>
-			<li css={{ paddingRight: space[2] }}>
-				<Button
-					size="small"
-					priority="secondary"
-					onClick={() =>
-						dispatch({
-							kind: 'reset',
-							initial: props.initialSections,
-						})
-					}
-					disabled={props.history.length === 0}
-					type="reset"
-					icon={<SvgArrowOutdent />}
-				>
-					Reset
-				</Button>
-			</li>
-			<li css={{ paddingRight: space[2] }}>
-				<Button
-					size="small"
-					priority="tertiary"
-					icon={<SvgPlus />}
-					onClick={() =>
-						dispatch({ kind: 'insertInto', location: [] })
-					}
-				>
-					Add Section
-				</Button>
-			</li>
-			<li
-				css={{
-					marginLeft: 'auto',
-				}}
-			>
-				<Button
-					size="small"
-					priority="primary"
-					icon={<SvgUpload />}
-					onClick={props.publish}
-				>
-					Publish
-				</Button>
-			</li>
-		</menu>
 	);
 };
 
