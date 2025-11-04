@@ -18,6 +18,16 @@ import { useBetaAB } from '../lib/useAB';
 export const EnhanceAffiliateLinks = () => {
 	const abTests = useBetaAB();
 
+	// Am I in a test at all?
+	const abTestParticipations = abTests?.getParticipations();
+
+	// Reduce abTestParticipations to a comma-separated string
+	const abTestString = abTestParticipations
+		? Object.entries(abTestParticipations)
+				.map(([key, value]) => `${key}:${value}`)
+				.join(',')
+		: '';
+
 	useEffect(() => {
 		const allLinksOnPage = [...document.querySelectorAll('a')];
 
@@ -30,15 +40,10 @@ export const EnhanceAffiliateLinks = () => {
 
 				const skimlinksAccountId = getSkimlinksAccountId(link.href);
 
-				// Am I in a test at all?
-				const abTestParticipations = abTests?.getParticipations();
-				console.log(
-					'*** abTestParticipations ***',
-					abTestParticipations,
-				);
-
 				// Skimlinks treats xcust as one long string, so we use | to separate values
-				const xcustValue = `referrer|${referrerDomain}|accountId|${skimlinksAccountId}`;
+				const xcustValue = `referrer|${referrerDomain}|accountId|${skimlinksAccountId}${
+					abTestString ? `|abTestParticipations|${abTestString}` : ''
+				}`;
 
 				link.href = `${link.href}&xcust=${encodeURIComponent(
 					xcustValue,
