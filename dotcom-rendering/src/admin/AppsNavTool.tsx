@@ -16,6 +16,7 @@ import {
 	SvgArrowOutdent,
 	SvgArrowUpStraight,
 	SvgBin,
+	SvgChevronDownSingle,
 	SvgPlus,
 	SvgReload,
 	TextInput,
@@ -139,32 +140,54 @@ const Section = (props: {
 	section: Section;
 	guardianBaseUrl: string;
 	location: number[];
-}) => (
-	<li css={{ borderTop: '1px solid lightgrey' }}>
-		<div
-			css={{
-				display: 'flex',
-				paddingTop: space[1],
-				paddingBottom: space[1],
-				alignItems: 'center',
-			}}
-		>
-			<SectionActions location={props.location} />
-			<Title location={props.location}>{props.section.title}</Title>{' '}
-			<Path
-				path={props.section.path}
-				guardianBaseUrl={props.guardianBaseUrl}
-			/>
-		</div>
-		{props.section.sections !== undefined ? (
-			<Sections
-				sections={props.section.sections}
-				guardianBaseUrl={props.guardianBaseUrl}
-				location={props.location}
-			/>
-		) : null}
-	</li>
-);
+}) => {
+	const hasSubsections = props.section.sections?.length ?? 0 > 0;
+
+	return (
+		<li css={{ borderTop: '1px solid lightgrey' }}>
+			<details>
+				<summary
+					css={{
+						display: 'flex',
+						paddingTop: space[1],
+						paddingBottom: space[1],
+						alignItems: 'center',
+					}}
+				>
+					<SectionActions location={props.location} />
+					<span
+						css={{
+							width: 20,
+							cursor: 'pointer',
+							'[open] &': {
+								transform: 'rotate(180deg)',
+							},
+							svg: {
+								verticalAlign: 'middle',
+							},
+						}}
+					>
+						{hasSubsections ? <SvgChevronDownSingle /> : null}
+					</span>
+					<Title location={props.location}>
+						{props.section.title}
+					</Title>{' '}
+					<Path
+						path={props.section.path}
+						guardianBaseUrl={props.guardianBaseUrl}
+					/>
+				</summary>
+				{props.section.sections !== undefined ? (
+					<Sections
+						sections={props.section.sections}
+						guardianBaseUrl={props.guardianBaseUrl}
+						location={props.location}
+					/>
+				) : null}
+			</details>
+		</li>
+	);
+};
 
 const Title = (props: { children: ReactNode; location: number[] }) => (
 	<span
@@ -182,16 +205,15 @@ const Path = (props: { path: string; guardianBaseUrl: string }) => (
 		css={{
 			fontSize: 17,
 			fontFamily: 'monospace',
+			marginLeft: space[2],
 		}}
 	>
-		(
 		<a
 			href={new URL(props.path, props.guardianBaseUrl).href}
 			css={{ color: palette.brand[500] }}
 		>
 			{props.path}
 		</a>
-		)
 	</span>
 );
 
@@ -202,7 +224,7 @@ const SectionActions = (props: { location: number[] }) => {
 		<>
 			<Button
 				size="xsmall"
-				priority="secondary"
+				priority="primary"
 				icon={<SvgArrowUpStraight />}
 				hideLabel
 				onClick={() =>
@@ -213,7 +235,7 @@ const SectionActions = (props: { location: number[] }) => {
 			</Button>
 			<Button
 				size="xsmall"
-				priority="secondary"
+				priority="primary"
 				icon={<SvgArrowDownStraight />}
 				hideLabel
 				onClick={() =>
@@ -241,7 +263,7 @@ const SectionActions = (props: { location: number[] }) => {
 			</Button>
 			<Button
 				size="xsmall"
-				priority="secondary"
+				priority="tertiary"
 				icon={<SvgPlus />}
 				hideLabel
 				onClick={() =>
@@ -249,6 +271,7 @@ const SectionActions = (props: { location: number[] }) => {
 				}
 				cssOverrides={css({
 					marginLeft: space[1],
+					marginRight: space[2],
 				})}
 			>
 				Add Subsection
