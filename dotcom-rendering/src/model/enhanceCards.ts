@@ -198,20 +198,14 @@ export const getActiveMediaAtom = (
 	videoReplace: boolean,
 	mediaAtom?: FEMediaAtom,
 	cardTrailImage?: string,
-	isLoopVideoLoadTest?: boolean,
 ): MainMedia | undefined => {
 	if (mediaAtom) {
-		let assets;
-		if (isLoopVideoLoadTest) {
-			/* temporarily filter out m3u8 files */
-			assets = mediaAtom.assets
-				.filter((_) => !m3u8MimeType.includes(_.mimeType ?? ''))
-				.filter(({ version }) => version === mediaAtom.activeVersion);
-		} else {
-			assets = mediaAtom.assets.filter(
-				({ version }) => version === mediaAtom.activeVersion,
-			);
-		}
+		/* filter out m3u8 files whilst hls chrome bug is investigated
+		 * https://issues.chromium.org/issues/454630434
+		 */
+		const assets = mediaAtom.assets
+			.filter((_) => !m3u8MimeType.includes(_.mimeType ?? ''))
+			.filter(({ version }) => version === mediaAtom.activeVersion);
 
 		const m3u8MimeType = [
 			'application/vnd.apple.mpegurl',
@@ -297,17 +291,11 @@ const decideMedia = (
 	imageHide?: boolean,
 	videoReplace?: boolean,
 	cardImage?: string,
-	isLoopVideoLoadTest?: boolean,
 ): MainMedia | undefined => {
 	// If the showVideo toggle is enabled in the fronts tool,
 	// we should return the active mediaAtom regardless of the design
 	if (!!showMainVideo || !!videoReplace) {
-		return getActiveMediaAtom(
-			!!videoReplace,
-			mediaAtom,
-			cardImage,
-			isLoopVideoLoadTest,
-		);
+		return getActiveMediaAtom(!!videoReplace, mediaAtom, cardImage);
 	}
 
 	switch (format.design) {
@@ -322,12 +310,7 @@ const decideMedia = (
 			};
 
 		case ArticleDesign.Video: {
-			return getActiveMediaAtom(
-				false,
-				mediaAtom,
-				cardImage,
-				isLoopVideoLoadTest,
-			);
+			return getActiveMediaAtom(false, mediaAtom, cardImage);
 		}
 
 		default:
@@ -344,7 +327,6 @@ export const enhanceCards = (
 		pageId,
 		discussionApiUrl,
 		stripBranding = false,
-		isLoopVideoLoadTest,
 	}: {
 		cardInTagPage: boolean;
 		/** Used for the data link name to indicate card position in container */
@@ -354,7 +336,6 @@ export const enhanceCards = (
 		discussionApiUrl: string;
 		/** We strip branding from cards if the branding will appear at the collection level instead */
 		stripBranding?: boolean;
-		isLoopVideoLoadTest?: boolean;
 	},
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
@@ -410,7 +391,6 @@ export const enhanceCards = (
 			faciaCard.display.imageHide,
 			faciaCard.properties.mediaSelect?.videoReplace,
 			imageSrc,
-			isLoopVideoLoadTest,
 		);
 
 		return {
