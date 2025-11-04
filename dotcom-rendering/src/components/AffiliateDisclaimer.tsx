@@ -7,6 +7,7 @@ import {
 	textSans15,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
+import { useBetaAB } from '../lib/useAB';
 import { palette as themePalette } from '../palette';
 
 const disclaimerLeftColStyles = css`
@@ -75,16 +76,28 @@ const DisclaimerText = () => (
 	</p>
 );
 
-const AffiliateDisclaimer = () => (
-	<Hide until="leftCol">
-		<aside
-			css={[disclaimerLeftColStyles]}
-			data-testid="affiliate-disclaimer"
-		>
-			<DisclaimerText />
-		</aside>
-	</Hide>
-);
+const AffiliateDisclaimer = () => {
+	const abTests = useBetaAB();
+
+	const isUserInServerSideVariant = abTests?.isUserInTestGroup(
+		'commercial-dev-server-side-test',
+		'variant',
+	);
+
+	console.log('isUserInServerSideVariant ---->', isUserInServerSideVariant);
+
+	return (
+		<Hide until="leftCol">
+			<aside
+				css={[disclaimerLeftColStyles]}
+				data-testid="affiliate-disclaimer"
+				data-foo={isUserInServerSideVariant}
+			>
+				<DisclaimerText />
+			</aside>
+		</Hide>
+	);
+};
 
 const AffiliateDisclaimerInline = () => (
 	<Hide from="leftCol">
