@@ -16,9 +16,10 @@ import { useBetaAB } from '../lib/useAB';
  * (No visual story exists as this does not render anything)
  */
 export const EnhanceAffiliateLinks = () => {
+	const abTests = useBetaAB();
+
 	useEffect(() => {
 		const allLinksOnPage = [...document.querySelectorAll('a')];
-		const abTests = useBetaAB();
 
 		for (const link of allLinksOnPage) {
 			if (isSkimlink(link.href)) {
