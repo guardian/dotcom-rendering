@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	space,
-	textSans15,
-	textSans17,
-	textSans20,
-} from '@guardian/source/foundations';
+import { space } from '@guardian/source/foundations';
 import type { IconProps } from '@guardian/source/react-components';
 import type {
 	Dispatch,
@@ -13,20 +8,12 @@ import type {
 	SyntheticEvent,
 } from 'react';
 import { forwardRef } from 'react';
-import type { ActiveCue } from '../lib/useSubtitles';
 import type { Source } from '../lib/video';
 import { palette } from '../palette';
 import { narrowPlayIconWidth, PlayIcon } from './Card/components/PlayIcon';
 import { LoopVideoProgressBar } from './LoopVideoProgressBar';
-import { SubtitleOverlay } from './SubtitleOverlay';
 
-export type SubtitleSize = 'small' | 'medium' | 'large';
-
-const videoStyles = (
-	width: number,
-	height: number,
-	subtitleSize: SubtitleSize,
-) => css`
+const videoStyles = (width: number, height: number) => css`
 	position: relative;
 	display: block;
 	height: auto;
@@ -35,16 +22,6 @@ const videoStyles = (
 	/* Prevents CLS by letting the browser know the space the video will take up. */
 	aspect-ratio: ${width} / ${height};
 	object-fit: cover;
-
-	::cue {
-		/* Hide the cue by default as we prefer custom overlay */
-		visibility: hidden;
-
-		color: ${palette('--loop-video-subtitle-text')};
-		${subtitleSize === 'small' && textSans15};
-		${subtitleSize === 'medium' && textSans17};
-		${subtitleSize === 'large' && textSans20};
-	}
 `;
 
 const playIconStyles = css`
@@ -109,7 +86,6 @@ type Props = {
 	currentTime: number;
 	setCurrentTime: Dispatch<SetStateAction<number>>;
 	isMuted: boolean;
-	handleLoadedMetadata: (event: SyntheticEvent) => void;
 	handleLoadedData: (event: SyntheticEvent) => void;
 	handleCanPlay: (event: SyntheticEvent) => void;
 	handlePlayPauseClick: (event: SyntheticEvent) => void;
@@ -121,21 +97,12 @@ type Props = {
 	posterImage?: string;
 	preloadPartialData: boolean;
 	showPlayIcon: boolean;
-	subtitleSource?: string;
-	subtitleSize: SubtitleSize;
-	/* used in custom subtitle overlays */
-	activeCue?: ActiveCue | null;
 };
 
 /**
  * Note that in React 19, forwardRef is no longer necessary:
  * https://react.dev/reference/react/forwardRef
  */
-/**
- * NB: To develop the loop video player locally, use `https://r.thegulocal.com/` instead of `localhost`.
- * This is required because CORS restrictions prevent accessing the subtitles and video file from localhost.
- */
-
 export const LoopVideoPlayer = forwardRef(
 	(
 		{
@@ -151,7 +118,6 @@ export const LoopVideoPlayer = forwardRef(
 			currentTime,
 			setCurrentTime,
 			isMuted,
-			handleLoadedMetadata,
 			handleLoadedData,
 			handleCanPlay,
 			handlePlayPauseClick,
@@ -162,21 +128,18 @@ export const LoopVideoPlayer = forwardRef(
 			AudioIcon,
 			preloadPartialData,
 			showPlayIcon,
-			subtitleSource,
-			subtitleSize,
-			activeCue,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
 		const loopVideoId = `loop-video-${uniqueId}`;
+
 		return (
 			<>
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Captions will be considered later. */}
 				<video
 					id={loopVideoId}
-					css={videoStyles(width, height, subtitleSize)}
+					css={videoStyles(width, height)}
 					ref={ref}
-					crossOrigin="anonymous"
 					tabIndex={0}
 					data-testid="loop-video"
 					height={height}
@@ -190,7 +153,6 @@ export const LoopVideoPlayer = forwardRef(
 					muted={isMuted}
 					playsInline={true}
 					poster={posterImage}
-					onLoadedMetadata={handleLoadedMetadata}
 					onLoadedData={handleLoadedData}
 					onCanPlay={handleCanPlay}
 					onCanPlayThrough={handleCanPlay}
@@ -217,25 +179,8 @@ export const LoopVideoPlayer = forwardRef(
 							type={source.mimeType}
 						/>
 					))}
-					{subtitleSource !== undefined && (
-						<track
-							// Don't use default - it forces native rendering on iOS
-							default={false}
-							kind="subtitles"
-							src={subtitleSource}
-							// Add label to ensure iOS recognizes it
-							label="English"
-							srcLang="en"
-						/>
-					)}
 					{FallbackImageComponent}
 				</video>
-				{!!activeCue?.text && (
-					<SubtitleOverlay
-						text={activeCue.text}
-						subtitleSize={subtitleSize}
-					/>
-				)}
 				{ref && 'current' in ref && ref.current && isPlayable && (
 					<>
 						{/* Play icon */}

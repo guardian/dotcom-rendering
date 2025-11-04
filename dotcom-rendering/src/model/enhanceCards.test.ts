@@ -100,7 +100,6 @@ describe.skip('Enhance Cards', () => {
 			duration: 15,
 			height: 400,
 			image: '',
-			subtitleSource: 'https://guim-example.co.uk/atomID-1.vtt',
 			type: 'LoopVideo',
 			sources: [
 				{
