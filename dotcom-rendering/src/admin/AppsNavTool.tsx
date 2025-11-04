@@ -12,6 +12,7 @@ import {
 import { type AppsNav, type Section } from './appsNav';
 import {
 	Button,
+	InlineError,
 	SvgArrowDownStraight,
 	SvgArrowOutdent,
 	SvgArrowUpStraight,
@@ -47,12 +48,12 @@ export const AppsNavTool = (props: Props) => {
 				history={state.history}
 			/>
 			<InsertDialog insertingAt={state.insertingAt} />
-			{state.error !== undefined ? <p>{state.error}</p> : null}
 			<Sections
 				sections={state.sections}
 				guardianBaseUrl={props.guardianBaseUrl}
 				location={[]}
 			/>
+			<ErrorMessage>{state.error}</ErrorMessage>
 		</DispatchContext.Provider>
 	);
 };
@@ -330,3 +331,23 @@ const InsertDialog = (props: { insertingAt: number[] | undefined }) => {
 		</dialog>
 	);
 };
+
+const ErrorMessage = (props: { children: ReactNode }) =>
+	props.children !== undefined ? (
+		<output
+			css={{
+				display: 'block',
+				position: 'sticky',
+				bottom: 0,
+				paddingLeft: space[5],
+				paddingTop: space[2],
+				paddingBottom: space[1],
+				borderTopColor: palette.error[400],
+				borderTopWidth: 2,
+				borderTopStyle: 'solid',
+				backgroundColor: palette.neutral[100],
+			}}
+		>
+			<InlineError>{props.children}</InlineError>
+		</output>
+	) : null;
