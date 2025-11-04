@@ -65,6 +65,7 @@ export const enhanceCollections = ({
 	frontBranding,
 	onPageDescription,
 	isOnPaidContentFront,
+	isLoopVideoLoadTest,
 }: {
 	collections: FECollection[];
 	editionId: EditionId;
@@ -73,6 +74,7 @@ export const enhanceCollections = ({
 	frontBranding: Branding | undefined;
 	onPageDescription?: string;
 	isOnPaidContentFront?: boolean;
+	isLoopVideoLoadTest?: boolean;
 }): DCRCollectionType[] => {
 	const indexToShowFrontBranding =
 		findCollectionSuitableForFrontBranding(collections);
@@ -133,18 +135,21 @@ export const enhanceCollections = ({
 				editionId,
 				discussionApiUrl,
 				stripBrandingFromCards,
+				isLoopVideoLoadTest,
 			),
 			curated: enhanceCards(collection.curated, {
 				cardInTagPage: false,
 				editionId,
 				discussionApiUrl,
 				stripBranding: stripBrandingFromCards,
+				isLoopVideoLoadTest,
 			}),
 			backfill: enhanceCards(collection.backfill, {
 				cardInTagPage: false,
 				editionId,
 				discussionApiUrl,
 				stripBranding: stripBrandingFromCards,
+				isLoopVideoLoadTest,
 			}),
 			treats: enhanceTreats(
 				collection.treats,
