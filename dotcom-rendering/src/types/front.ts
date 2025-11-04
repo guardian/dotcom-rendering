@@ -1,5 +1,5 @@
-import type z from 'zod';
-import { object, optional, string } from 'zod';
+import type z from 'zod/mini';
+import { object, optional, string } from 'zod/mini';
 import type {
 	FEAspectRatio,
 	FEContainer,

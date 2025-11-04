@@ -1,4 +1,4 @@
-import { array, object, optional, string, union, type z } from 'zod';
+import { array, object, optional, string, union, type z } from 'zod/mini';
 import { type EditionId, EditionIdSchema } from '../lib/edition';
 import { BrandingSchema } from './branding';
 

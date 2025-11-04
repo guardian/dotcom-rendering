@@ -1,4 +1,4 @@
-import { number, object, optional, string, type z } from 'zod';
+import { number, object, optional, string, type z } from 'zod/mini';
 
 export type LiveUpdateType = {
 	numNewBlocks: number;

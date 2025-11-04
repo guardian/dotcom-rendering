@@ -7,7 +7,7 @@ import {
 	string,
 	union,
 	type z,
-} from 'zod';
+} from 'zod/mini';
 import { type FEFormat } from '../frontend/format';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { Block } from './blocks';

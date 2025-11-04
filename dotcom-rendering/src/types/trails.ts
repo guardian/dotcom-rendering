@@ -1,4 +1,13 @@
-import { boolean, number, object, optional, record, string, type z } from 'zod';
+import {
+	boolean,
+	extend,
+	number,
+	object,
+	optional,
+	record,
+	string,
+	type z,
+} from 'zod/mini';
 import { FEFormatSchema } from '../frontend/format';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { BrandingSchema } from './branding';
@@ -56,7 +65,7 @@ export interface TrailType extends BaseTrailType {
 	image?: DCRFrontImage;
 }
 
-export const FETrailTypeSchema = BaseTrailTypeSchema.extend({
+export const FETrailTypeSchema = extend(BaseTrailTypeSchema, {
 	format: FEFormatSchema,
 	/**
 	 * @deprecated This type must exist as it's passed by frontend, but we shouldn't use it.

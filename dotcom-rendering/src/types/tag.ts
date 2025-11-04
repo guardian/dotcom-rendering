@@ -4,8 +4,8 @@
  * @see https://github.com/guardian/frontend/blob/5b987289/common/app/model/Tag.scala#L156-L179
  */
 
-import type z from 'zod';
-import { array, number, object, optional, string } from 'zod';
+import type z from 'zod/mini';
+import { array, number, object, optional, string } from 'zod/mini';
 
 const ReferenceSchema = object({
 	id: string(),

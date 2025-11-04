@@ -1,4 +1,4 @@
-import { literal, object, union, type z } from 'zod';
+import { literal, object, union, type z } from 'zod/mini';
 
 const FEPillarSchema = union([
 	literal('NewsPillar'),

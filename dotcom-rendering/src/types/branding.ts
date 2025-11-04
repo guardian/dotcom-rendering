@@ -1,5 +1,5 @@
-import type { z } from 'zod';
-import { literal, number, object, optional, string, union } from 'zod';
+import type { z } from 'zod/mini';
+import { literal, number, object, optional, string, union } from 'zod/mini';
 import { EditionIdSchema } from '../lib/edition';
 
 export const BrandingLogoSchema = object({

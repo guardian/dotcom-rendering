@@ -1,5 +1,5 @@
 import { isOneOf } from '@guardian/libs';
-import { z } from 'zod';
+import { z } from 'zod/mini';
 import { isTuple } from './tuple';
 
 const EditionIdSchema = z.enum(['UK', 'US', 'AU', 'INT', 'EUR']);

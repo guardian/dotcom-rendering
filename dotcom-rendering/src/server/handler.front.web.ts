@@ -1,6 +1,6 @@
 import { isUndefined } from '@guardian/libs';
 import type { RequestHandler } from 'express';
-import { safeParse } from 'zod';
+import { safeParse } from 'zod/mini';
 import { type FEFront, FEFrontSchema } from '../frontend/feFront';
 import type { FETagPage } from '../frontend/feTagPage';
 import { decideTagPageBranding, pickBrandingForEdition } from '../lib/branding';

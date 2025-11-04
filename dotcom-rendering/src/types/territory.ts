@@ -1,5 +1,5 @@
 import { isOneOf } from '@guardian/libs';
-import { literal, union, type z } from 'zod';
+import { literal, union, type z } from 'zod/mini';
 
 const AmericanTerritoriesSchema = union([
 	literal('US-East-Coast'),

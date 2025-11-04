@@ -1,5 +1,5 @@
 import { isString } from '@guardian/libs';
-import { record, string, unknown, type z } from 'zod';
+import { record, string, unknown, type z } from 'zod/mini';
 import type { AdTargeting } from '../types/commercial';
 
 export const SharedAdTargetingSchema = record(string(), unknown());

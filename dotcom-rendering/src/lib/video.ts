@@ -1,5 +1,5 @@
-import type z from 'zod';
-import { literal, object, string, union } from 'zod';
+import type z from 'zod/mini';
+import { literal, object, string, union } from 'zod/mini';
 
 export type CustomPlayEventDetail = { uniqueId: string };
 

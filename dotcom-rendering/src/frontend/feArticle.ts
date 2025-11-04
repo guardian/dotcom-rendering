@@ -9,7 +9,7 @@ import {
 	string,
 	unknown,
 	type z,
-} from 'zod';
+} from 'zod/mini';
 import { EditionIdSchema } from '../lib/edition';
 import { FEArticleBadgeTypeSchema } from '../types/badge';
 import { BlockSchema } from '../types/blocks';

@@ -7,7 +7,7 @@ import {
 	string,
 	union,
 	type z,
-} from 'zod';
+} from 'zod/mini';
 import { FEFormatSchema } from '../frontend/format';
 import { FETrailTypeSchema } from './trails';
 

@@ -8,7 +8,7 @@ import {
 	string,
 	union,
 	type z,
-} from 'zod';
+} from 'zod/mini';
 import { SourceSchema } from '../lib/video';
 import { PodcastSeriesImageSchema } from './tag';
 /** For displaying embedded, playable videos directly in cards */

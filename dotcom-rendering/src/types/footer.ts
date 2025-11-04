@@ -1,4 +1,4 @@
-import { array, object, optional, string, type z } from 'zod';
+import { array, object, optional, string, type z } from 'zod/mini';
 
 const FooterLinkSchema = object({
 	text: string(),

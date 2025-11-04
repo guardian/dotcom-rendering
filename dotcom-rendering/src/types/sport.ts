@@ -1,4 +1,4 @@
-import { literal, union } from 'zod';
+import { literal, union } from 'zod/mini';
 
 /**
  * Football

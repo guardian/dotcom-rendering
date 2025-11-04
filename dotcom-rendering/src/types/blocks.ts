@@ -1,4 +1,12 @@
-import { array, boolean, number, object, optional, string, type z } from 'zod';
+import {
+	array,
+	boolean,
+	number,
+	object,
+	optional,
+	string,
+	type z,
+} from 'zod/mini';
 import { FEElementSchema } from './content';
 
 const MembershipPlaceholderSchema = object({

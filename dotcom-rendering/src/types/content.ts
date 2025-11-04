@@ -1,6 +1,7 @@
 import {
 	array,
 	boolean,
+	extend,
 	literal,
 	number,
 	object,
@@ -10,7 +11,8 @@ import {
 	templateLiteral,
 	union,
 	z,
-} from 'zod';
+	enum as zodEnum,
+} from 'zod/mini';
 import { type ArticleFormat } from '../lib/articleFormat';
 
 export const BoostLevelSchema = union([
@@ -68,13 +70,19 @@ const VideoAssetsSchema = object({
  *
  * @see https://github.com/guardian/frontend/blob/0a32dba0/common/app/model/dotcomrendering/pageElements/Role.scala
  */
-const RoleTypeSchema = z.enum([
+const RoleTypeLiteralsSchema = zodEnum([
 	'immersive',
 	'supporting',
 	'showcase',
 	'inline',
 	'thumbnail',
-	'halfWidth',
+]);
+
+const RoleTypeHalfwidthSchema = zodEnum(['halfWidth']);
+
+const RoleTypeSchema = z.union([
+	RoleTypeLiteralsSchema,
+	RoleTypeHalfwidthSchema,
 ]);
 
 export type RoleType = z.infer<typeof RoleTypeSchema>;
@@ -86,7 +94,7 @@ export type RoleType = z.infer<typeof RoleTypeSchema>;
 // TODO: type Weighting = Exclude<RoleType, 'halfWidth' | 'richLink'> | 'halfwidth';
 // What's better to do here? use literals or create schema based on RoleTypeSchema
 export const WeightingSchema = z.union([
-	RoleTypeSchema.exclude(['halfWidth']),
+	RoleTypeLiteralsSchema,
 	z.literal('halfwidth'),
 ]);
 
@@ -183,13 +191,13 @@ const CampaignFieldSchema = object({
 	label: string(),
 });
 
-export const CampaignFieldTextSchema = CampaignFieldSchema.extend({
+export const CampaignFieldTextSchema = extend(CampaignFieldSchema, {
 	type: union([literal('text'), literal('email'), literal('phone')]),
 });
 
 export type CampaignFieldText = z.infer<typeof CampaignFieldTextSchema>;
 
-const CampaignFieldTextAreaSchema = CampaignFieldSchema.extend({
+const CampaignFieldTextAreaSchema = extend(CampaignFieldSchema, {
 	type: literal('textarea'),
 	minlength: optional(number()),
 	maxlength: optional(number()),
@@ -197,13 +205,13 @@ const CampaignFieldTextAreaSchema = CampaignFieldSchema.extend({
 
 export type CampaignFieldTextArea = z.infer<typeof CampaignFieldTextAreaSchema>;
 
-const CampaignFieldFileSchema = CampaignFieldSchema.extend({
+const CampaignFieldFileSchema = extend(CampaignFieldSchema, {
 	type: literal('file'),
 });
 
 export type CampaignFieldFile = z.infer<typeof CampaignFieldFileSchema>;
 
-const CampaignFieldRadioSchema = CampaignFieldSchema.extend({
+const CampaignFieldRadioSchema = extend(CampaignFieldSchema, {
 	type: literal('radio'),
 	options: array(
 		object({
@@ -215,7 +223,7 @@ const CampaignFieldRadioSchema = CampaignFieldSchema.extend({
 
 export type CampaignFieldRadio = z.infer<typeof CampaignFieldRadioSchema>;
 
-const CampaignFieldCheckboxSchema = CampaignFieldSchema.extend({
+const CampaignFieldCheckboxSchema = extend(CampaignFieldSchema, {
 	type: literal('checkbox'),
 	options: array(
 		object({
@@ -227,7 +235,7 @@ const CampaignFieldCheckboxSchema = CampaignFieldSchema.extend({
 
 export type CampaignFieldCheckbox = z.infer<typeof CampaignFieldCheckboxSchema>;
 
-const CampaignFieldSelectSchema = CampaignFieldSchema.extend({
+const CampaignFieldSelectSchema = extend(CampaignFieldSchema, {
 	type: literal('select'),
 	options: array(
 		object({
@@ -534,7 +542,7 @@ const DividerBlockElementSchema = object({
 
 export type DividerBlockElement = z.infer<typeof DividerBlockElementSchema>;
 
-const DocumentBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
+const DocumentBlockElementSchema = extend(ThirdPartyEmbeddedContentSchema, {
 	_type: literal('model.dotcomrendering.pageElements.DocumentBlockElement'),
 	elementId: string(),
 	embedUrl: optional(string()),
@@ -546,7 +554,7 @@ const DocumentBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
 
 export type DocumentBlockElement = z.infer<typeof DocumentBlockElementSchema>;
 
-const EmbedBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
+const EmbedBlockElementSchema = extend(ThirdPartyEmbeddedContentSchema, {
 	_type: literal('model.dotcomrendering.pageElements.EmbedBlockElement'),
 	elementId: string(),
 	safe: optional(boolean()),
@@ -657,7 +665,7 @@ export const ImageBlockElementSchema = object({
 
 export type ImageBlockElement = z.infer<typeof ImageBlockElementSchema>;
 
-const InstagramBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
+const InstagramBlockElementSchema = extend(ThirdPartyEmbeddedContentSchema, {
 	_type: literal('model.dotcomrendering.pageElements.InstagramBlockElement'),
 	elementId: string(),
 	html: string(),
@@ -838,7 +846,7 @@ const ListBlockElementSchema = object({
 
 export type ListBlockElement = z.infer<typeof ListBlockElementSchema>;
 
-const MapBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
+const MapBlockElementSchema = extend(ThirdPartyEmbeddedContentSchema, {
 	_type: literal('model.dotcomrendering.pageElements.MapBlockElement'),
 	elementId: string(),
 	embedUrl: string(),
@@ -995,7 +1003,7 @@ const RichLinkBlockElementSchema = object({
 
 export type RichLinkBlockElement = z.infer<typeof RichLinkBlockElementSchema>;
 
-const SoundcloudBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
+const SoundcloudBlockElementSchema = extend(ThirdPartyEmbeddedContentSchema, {
 	_type: literal('model.dotcomrendering.pageElements.SoundcloudBlockElement'),
 	elementId: string(),
 	html: string(),
@@ -1009,7 +1017,7 @@ export type SoundcloudBlockElement = z.infer<
 	typeof SoundcloudBlockElementSchema
 >;
 
-const SpotifyBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
+const SpotifyBlockElementSchema = extend(ThirdPartyEmbeddedContentSchema, {
 	_type: literal('model.dotcomrendering.pageElements.SpotifyBlockElement'),
 	elementId: string(),
 	embedUrl: optional(string()),
@@ -1142,7 +1150,7 @@ export type TimelineAtomBlockElement = z.infer<
 	typeof TimelineAtomBlockElementSchema
 >;
 
-const TweetBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
+const TweetBlockElementSchema = extend(ThirdPartyEmbeddedContentSchema, {
 	_type: literal('model.dotcomrendering.pageElements.TweetBlockElement'),
 	elementId: string(),
 	html: string(),
@@ -1154,7 +1162,7 @@ const TweetBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
 
 export type TweetBlockElement = z.infer<typeof TweetBlockElementSchema>;
 
-const VineBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
+const VineBlockElementSchema = extend(ThirdPartyEmbeddedContentSchema, {
 	_type: literal('model.dotcomrendering.pageElements.VineBlockElement'),
 	elementId: string(),
 	url: string(),
@@ -1166,7 +1174,7 @@ const VineBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
 
 export type VineBlockElement = z.infer<typeof VineBlockElementSchema>;
 
-const VideoBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
+const VideoBlockElementSchema = extend(ThirdPartyEmbeddedContentSchema, {
 	_type: literal('model.dotcomrendering.pageElements.VideoBlockElement'),
 	elementId: string(),
 	role: optional(RoleTypeSchema),
@@ -1174,24 +1182,27 @@ const VideoBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
 
 export type VideoBlockElement = z.infer<typeof VideoBlockElementSchema>;
 
-const VideoFacebookBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
-	_type: literal(
-		'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
-	),
-	elementId: string(),
-	url: string(),
-	height: number(),
-	width: number(),
-	caption: optional(string()),
-	embedUrl: optional(string()),
-	role: optional(RoleTypeSchema),
-});
+const VideoFacebookBlockElementSchema = extend(
+	ThirdPartyEmbeddedContentSchema,
+	{
+		_type: literal(
+			'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
+		),
+		elementId: string(),
+		url: string(),
+		height: number(),
+		width: number(),
+		caption: optional(string()),
+		embedUrl: optional(string()),
+		role: optional(RoleTypeSchema),
+	},
+);
 
 export type VideoFacebookBlockElement = z.infer<
 	typeof VideoFacebookBlockElementSchema
 >;
 
-const VideoVimeoBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
+const VideoVimeoBlockElementSchema = extend(ThirdPartyEmbeddedContentSchema, {
 	_type: literal('model.dotcomrendering.pageElements.VideoVimeoBlockElement'),
 	elementId: string(),
 	embedUrl: optional(string()),
@@ -1209,7 +1220,7 @@ export type VideoVimeoBlockElement = z.infer<
 	typeof VideoVimeoBlockElementSchema
 >;
 
-const VideoYoutubeBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
+const VideoYoutubeBlockElementSchema = extend(ThirdPartyEmbeddedContentSchema, {
 	_type: literal(
 		'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
 	),
@@ -1269,7 +1280,7 @@ const WitnessTypeDataBaseSchema = object({
 
 export type WitnessTypeDataBase = z.infer<typeof WitnessTypeDataBaseSchema>;
 
-const WitnessTypeDataImageSchema = WitnessTypeDataBaseSchema.extend({
+const WitnessTypeDataImageSchema = extend(WitnessTypeDataBaseSchema, {
 	_type: literal('model.dotcomrendering.pageElements.WitnessTypeDataImage'),
 	type: literal('image'),
 	alt: string(),
@@ -1280,7 +1291,7 @@ const WitnessTypeDataImageSchema = WitnessTypeDataBaseSchema.extend({
 
 export type WitnessTypeDataImage = z.infer<typeof WitnessTypeDataImageSchema>;
 
-const WitnessTypeDataVideoSchema = WitnessTypeDataBaseSchema.extend({
+const WitnessTypeDataVideoSchema = extend(WitnessTypeDataBaseSchema, {
 	_type: literal('model.dotcomrendering.pageElements.WitnessTypeDataVideo'),
 	type: literal('video'),
 	description: string(),
@@ -1296,7 +1307,7 @@ const WitnessTypeDataVideoSchema = WitnessTypeDataBaseSchema.extend({
 
 export type WitnessTypeDataVideo = z.infer<typeof WitnessTypeDataVideoSchema>;
 
-const WitnessTypeDataTextSchema = WitnessTypeDataBaseSchema.extend({
+const WitnessTypeDataTextSchema = extend(WitnessTypeDataBaseSchema, {
 	_type: literal('model.dotcomrendering.pageElements.WitnessTypeDataText'),
 	type: literal('text'),
 	description: string(),
@@ -1327,7 +1338,7 @@ const WitnessAssetTypeSchema = object({
 
 export type WitnessAssetType = z.infer<typeof WitnessAssetTypeSchema>;
 
-const WitnessTypeBlockElementSchema = ThirdPartyEmbeddedContentSchema.extend({
+const WitnessTypeBlockElementSchema = extend(ThirdPartyEmbeddedContentSchema, {
 	_type: literal('model.dotcomrendering.pageElements.WitnessBlockElement'),
 	elementId: string(),
 	assets: array(WitnessAssetTypeSchema),

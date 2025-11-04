@@ -1,6 +1,7 @@
 import {
 	array,
 	boolean,
+	extend,
 	intersection,
 	literal,
 	number,
@@ -12,7 +13,7 @@ import {
 	undefined,
 	union,
 	type z,
-} from 'zod';
+} from 'zod/mini';
 import { SharedAdTargetingSchema } from '../lib/ad-targeting';
 import { EditionIdSchema } from '../lib/edition';
 
@@ -70,7 +71,7 @@ export type Switches = z.infer<typeof SwitchesSchema>;
  * constructed in frontend and passed to dotcom-rendering
  * this data could eventually be defined in dotcom-rendering
  */
-export const ConfigTypeSchema = CommercialConfigTypeSchema.extend({
+export const ConfigTypeSchema = extend(CommercialConfigTypeSchema, {
 	dcrCouldRender: optional(boolean()),
 	ajaxUrl: string(),
 	sentryPublicApiKey: string(),

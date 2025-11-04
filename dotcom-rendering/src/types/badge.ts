@@ -1,4 +1,4 @@
-import { object, optional, string, type z } from 'zod';
+import { object, optional, string, type z } from 'zod/mini';
 
 const DCRBadgeTypeSchema = object({
 	imageSrc: string(),

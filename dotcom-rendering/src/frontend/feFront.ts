@@ -10,7 +10,7 @@ import {
 	string,
 	union,
 	unknown,
-} from 'zod';
+} from 'zod/mini';
 import { SharedAdTargetingSchema } from '../lib/ad-targeting';
 import { EditionIdSchema } from '../lib/edition';
 import { EditionBrandingSchema } from '../types/branding';
