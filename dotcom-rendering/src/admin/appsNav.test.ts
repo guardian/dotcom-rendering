@@ -5,6 +5,7 @@ import {
 	deleteSection,
 	insertSection,
 	moveSection,
+	updateSection,
 } from './appsNav';
 import { okOrThrow } from '../lib/result';
 
@@ -72,5 +73,19 @@ describe('appsNav', () => {
 		expect(result2[0]?.sections?.length).toBe(8);
 		expect(result2?.[0]?.sections?.[0]?.title).toEqual('Media');
 		expect(result2?.[0]?.sections?.[2]?.title).toEqual('Education');
+	});
+
+	it('updates sections', () => {
+		const title = 'Mock Section';
+		const path = 'mock-section';
+
+		const result = okOrThrow(
+			updateSection(sections, [0], title, path),
+			'Expected section update to be successful',
+		);
+
+		expect(result.from.title).toEqual('UK');
+		expect(result.sections[0]?.title).toEqual('Mock Section');
+		expect(result.sections[0]?.path).toEqual('mock-section');
 	});
 });

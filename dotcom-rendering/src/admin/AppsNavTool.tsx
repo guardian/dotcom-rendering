@@ -4,6 +4,7 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import {
+	useCallback,
 	useReducer,
 	useState,
 	type FormEventHandler,
@@ -19,6 +20,7 @@ import {
 	SvgArrowUpStraight,
 	SvgBin,
 	SvgChevronDownSingle,
+	SvgEdit,
 	SvgPlus,
 	SvgReload,
 	SvgUpload,
@@ -57,6 +59,7 @@ export const AppsNavTool = (props: Props) => {
 				}
 			/>
 			<InsertDialog insertingAt={state.insertingAt} />
+			<EditDialog editing={state.editing} />
 			<Sections
 				sections={state.sections}
 				guardianBaseUrl={props.guardianBaseUrl}
@@ -180,7 +183,11 @@ const Section = (props: {
 						cursor: hasSubsections ? 'pointer' : undefined,
 					}}
 				>
-					<SectionActions location={props.location} />
+					<SectionActions
+						location={props.location}
+						title={props.section.title}
+						path={props.section.path}
+					/>
 					<span
 						css={{
 							width: 20,
@@ -242,7 +249,11 @@ const Path = (props: { path: string; guardianBaseUrl: string }) => (
 	</span>
 );
 
-const SectionActions = (props: { location: number[] }) => {
+const SectionActions = (props: {
+	location: number[];
+	title: string;
+	path: string;
+}) => {
 	const dispatch = useDispatch();
 
 	return (
@@ -271,6 +282,25 @@ const SectionActions = (props: { location: number[] }) => {
 				})}
 			>
 				Move Down
+			</Button>
+			<Button
+				size="xsmall"
+				priority="secondary"
+				icon={<SvgEdit />}
+				hideLabel
+				onClick={() =>
+					dispatch({
+						kind: 'edit',
+						location: props.location,
+						title: props.title,
+						path: props.path,
+					})
+				}
+				cssOverrides={css({
+					marginLeft: space[1],
+				})}
+			>
+				Edit
 			</Button>
 			<Button
 				size="xsmall"
@@ -306,51 +336,118 @@ const SectionActions = (props: { location: number[] }) => {
 };
 
 const InsertDialog = (props: { insertingAt: number[] | undefined }) => {
-	const [title, setTitle] = useState('');
-	const [path, setPath] = useState('');
 	const dispatch = useDispatch();
 
-	const submit: FormEventHandler = (e) => {
-		e.preventDefault();
+	const submit = useCallback(
+		(title: string, url: URL) => {
+			if (props.insertingAt !== undefined) {
+				dispatch({
+					kind: 'insert',
+					section: {
+						title,
+						path: url.pathname.slice(1),
+					},
+					location: props.insertingAt,
+				});
+			}
+		},
+		[props.insertingAt, dispatch],
+	);
 
-		if (props.insertingAt !== undefined) {
-			dispatch({
-				kind: 'insert',
-				section: {
-					title,
-					path: new URL(path).pathname.slice(1),
-				},
-				location: props.insertingAt,
-			});
-		}
-	};
-
-	const cancel = () => {
+	const cancel = useCallback(() => {
 		dispatch({ kind: 'cancelInsert' });
-	};
+	}, [dispatch]);
 
 	return (
 		<dialog open={props.insertingAt !== undefined}>
-			<form action="" onSubmit={submit}>
-				<TextInput
-					label="Title"
-					value={title}
-					onChange={(e) => setTitle(e.target.value)}
-				/>
-				<TextInput
-					label="Dotcom Link"
-					type="url"
-					pattern="https://www.theguardian\.com/.*"
-					placeholder="https://www.theguardian.com/uk/sport"
-					value={path}
-					onChange={(e) => setPath(e.target.value)}
-				/>
-				<Button type="submit">Insert</Button>
-				<Button onClick={cancel} priority="tertiary">
-					Cancel
-				</Button>
-			</form>
+			<SectionForm
+				initialTitle=""
+				initialPath=""
+				submit={submit}
+				cancel={cancel}
+			/>
 		</dialog>
+	);
+};
+
+const EditDialog = (props: {
+	editing:
+		| {
+				title: string;
+				path: string;
+				location: number[];
+		  }
+		| undefined;
+}) => {
+	const dispatch = useDispatch();
+
+	const submit = useCallback(
+		(title: string, url: URL) => {
+			if (props.editing !== undefined) {
+				dispatch({
+					kind: 'update',
+					title,
+					path: url.pathname.slice(1),
+					location: props.editing.location,
+				});
+			}
+		},
+		[props.editing, dispatch],
+	);
+
+	const cancel = useCallback(() => {
+		dispatch({ kind: 'cancelEdit' });
+	}, [dispatch]);
+
+	return (
+		<dialog open={props.editing !== undefined}>
+			<SectionForm
+				initialTitle={props.editing?.title ?? ''}
+				initialPath={new URL(
+					props.editing?.path ?? '',
+					'https://www.theguardian.com',
+				).toString()}
+				submit={submit}
+				cancel={cancel}
+			/>
+		</dialog>
+	);
+};
+
+const SectionForm = (props: {
+	initialTitle: string;
+	initialPath: string;
+	submit: (title: string, url: URL) => void;
+	cancel: () => void;
+}) => {
+	const [title, setTitle] = useState(props.initialTitle);
+	const [url, setUrl] = useState(props.initialPath);
+
+	const submit: FormEventHandler = (e) => {
+		e.preventDefault();
+		props.submit(title, new URL(url));
+	};
+
+	return (
+		<form action="" onSubmit={submit}>
+			<TextInput
+				label="Title"
+				value={title}
+				onChange={(e) => setTitle(e.target.value)}
+			/>
+			<TextInput
+				label="Dotcom Link"
+				type="url"
+				pattern="https://www.theguardian\.com/.*"
+				placeholder="https://www.theguardian.com/uk/sport"
+				value={url}
+				onChange={(e) => setUrl(e.target.value)}
+			/>
+			<Button type="submit">Submit</Button>
+			<Button onClick={props.cancel} priority="tertiary">
+				Cancel
+			</Button>
+		</form>
 	);
 };
 

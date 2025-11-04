@@ -180,3 +180,50 @@ export const moveSection = (
 		deleted,
 	);
 };
+
+type UpdateError = 'NoIndex' | 'NoSectionAtLocation';
+
+type UpdateSuccess = {
+	from: Section;
+	sections: Section[];
+};
+
+export const updateSection = (
+	sections: Section[],
+	location: number[],
+	title: string,
+	path: string,
+): Result<UpdateError, UpdateSuccess> => {
+	const [index, ...rest] = location;
+
+	if (index === undefined) {
+		return error('NoIndex');
+	}
+
+	const section = sections[index];
+
+	if (section === undefined) {
+		return error('NoSectionAtLocation');
+	}
+
+	if (rest.length === 0 || section.sections === undefined) {
+		return ok({
+			from: section,
+			sections: sections.toSpliced(index, 1, { ...section, title, path }),
+		});
+	}
+
+	const result = updateSection(section.sections, rest, title, path);
+
+	if (result.kind === 'error') {
+		return result;
+	}
+
+	return ok({
+		from: result.value.from,
+		sections: sections.toSpliced(index, 1, {
+			...section,
+			sections: result.value.sections,
+		}),
+	});
+};

@@ -8,6 +8,7 @@ import {
 	deleteSection,
 	insertSection,
 	moveSection,
+	updateSection,
 	type Section,
 } from './appsNav';
 import { error, ok, type Result } from '../lib/result';
@@ -17,6 +18,11 @@ type State = {
 	history: HistoryEvent[];
 	message?: Result<string, string>;
 	insertingAt?: number[];
+	editing?: {
+		title: string;
+		path: string;
+		location: number[];
+	};
 };
 
 export type HistoryEvent =
@@ -33,6 +39,11 @@ export type HistoryEvent =
 			kind: 'move';
 			distance: number;
 			from: number[];
+	  }
+	| {
+			kind: 'update';
+			location: number[];
+			from: Section;
 	  };
 
 type Action =
@@ -44,6 +55,12 @@ type Action =
 			kind: 'insert';
 			location: number[];
 			section: Section;
+	  }
+	| {
+			kind: 'update';
+			location: number[];
+			title: string;
+			path: string;
 	  }
 	| {
 			kind: 'undo';
@@ -58,6 +75,15 @@ type Action =
 	  }
 	| {
 			kind: 'cancelInsert';
+	  }
+	| {
+			kind: 'edit';
+			location: number[];
+			title: string;
+			path: string;
+	  }
+	| {
+			kind: 'cancelEdit';
 	  }
 	| {
 			kind: 'moveDown';
@@ -178,6 +204,43 @@ const moveAction = (
 	};
 };
 
+const updateAction = (
+	state: State,
+	location: number[],
+	title: string,
+	path: string,
+	history: HistoryEvent[] | undefined,
+): State => {
+	const result = updateSection(state.sections, location, title, path);
+
+	if (result.kind === 'error') {
+		return {
+			...state,
+			message: error(
+				`Failed to update section at location ${location}, ${result.error}`,
+			),
+		};
+	}
+
+	return {
+		...state,
+		sections: result.value.sections,
+		message: undefined,
+		editing: undefined,
+		history:
+			history === undefined
+				? [
+						{
+							kind: 'update',
+							location,
+							from: result.value.from,
+						},
+						...state.history,
+				  ]
+				: history,
+	};
+};
+
 const undo = (state: State): State => {
 	const [lastEvent, ...rest] = state.history;
 
@@ -195,6 +258,14 @@ const undo = (state: State): State => {
 			return deleteAction(state, lastEvent.location, rest);
 		case 'move':
 			return moveAction(state, lastEvent.from, lastEvent.distance, rest);
+		case 'update':
+			return updateAction(
+				state,
+				lastEvent.location,
+				lastEvent.from.title,
+				lastEvent.from.path,
+				rest,
+			);
 	}
 };
 
@@ -242,5 +313,24 @@ export const reducer = (state: State, action: Action): State => {
 			return { ...state, message: ok('Publication successful.') };
 		case 'publishError':
 			return { ...state, message: error('Publication failed.') };
+		case 'edit':
+			return {
+				...state,
+				editing: {
+					title: action.title,
+					path: action.path,
+					location: action.location,
+				},
+			};
+		case 'cancelEdit':
+			return { ...state, editing: undefined };
+		case 'update':
+			return updateAction(
+				state,
+				action.location,
+				action.title,
+				action.path,
+				undefined,
+			);
 	}
 };
