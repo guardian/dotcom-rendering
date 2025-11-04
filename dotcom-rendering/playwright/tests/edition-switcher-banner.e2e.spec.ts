@@ -10,7 +10,7 @@ const scenarios = [
 	{ pageId: 'us', edition: 'US', showBanner: false },
 ];
 
-test.describe.skip('Edition Switcher Banner', () => {
+test.describe('Edition Switcher Banner', () => {
 	for (const { pageId, edition } of scenarios.filter(
 		({ showBanner }) => showBanner,
 	)) {

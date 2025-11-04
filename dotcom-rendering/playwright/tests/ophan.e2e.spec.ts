@@ -18,7 +18,7 @@ const articleUrl =
 
 const frontUrl = 'https://www.theguardian.com/uk';
 
-test.describe.skip('Ophan requests', () => {
+test.describe('Ophan requests', () => {
 	/**
 	 * Why is this test skipped?
 	 *
