@@ -1,6 +1,8 @@
-# AB Testing
+# Beta AB Test framework
 
-This directory contains the code and configuration for the AB testing framework used on theguardian.com.
+This directory contains the code and configuration for the new **Beta** AB Test framework, developed by commercial-dev to support both client and server side A/B tests in DCR. The goal is to eventually replace the legacy A/B testing framework with this new framework.
+
+Please reach out to commercial-dev if you're setting up a client or server side A/B tests in DCR and are interested in using this new framework whilst it's in beta (this would be helpful for the team) or if you'd like up to date information on it's state of readiness. **For now the legacy framework is still available to use, and documentation for that can be found [here](https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/docs/development/ab-testing-in-dcr.md)**.
 
 The [`abTest.ts`](./abTest.ts) module is where you should define your AB tests.
 
