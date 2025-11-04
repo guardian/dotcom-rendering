@@ -93,7 +93,7 @@ const MenuActions = (props: {
 			<li css={{ paddingRight: space[2] }}>
 				<Button
 					size="small"
-					priority="tertiary"
+					priority="secondary"
 					onClick={() => dispatch({ kind: 'undo' })}
 					disabled={props.history.length === 0}
 					icon={<SvgReload />}
@@ -104,7 +104,7 @@ const MenuActions = (props: {
 			<li css={{ paddingRight: space[2] }}>
 				<Button
 					size="small"
-					priority="tertiary"
+					priority="secondary"
 					onClick={() =>
 						dispatch({
 							kind: 'reset',
@@ -264,31 +264,6 @@ const SectionActions = (props: {
 			<Button
 				size="xsmall"
 				priority="primary"
-				icon={<SvgArrowUpStraight />}
-				hideLabel
-				onClick={() =>
-					dispatch({ kind: 'moveUp', location: props.location })
-				}
-			>
-				Move Up
-			</Button>
-			<Button
-				size="xsmall"
-				priority="primary"
-				icon={<SvgArrowDownStraight />}
-				hideLabel
-				onClick={() =>
-					dispatch({ kind: 'moveDown', location: props.location })
-				}
-				cssOverrides={css({
-					marginLeft: space[1],
-				})}
-			>
-				Move Down
-			</Button>
-			<Button
-				size="xsmall"
-				priority="secondary"
 				icon={<SvgEdit />}
 				hideLabel
 				onClick={() =>
@@ -299,15 +274,12 @@ const SectionActions = (props: {
 						path: props.path,
 					})
 				}
-				cssOverrides={css({
-					marginLeft: space[1],
-				})}
 			>
 				Edit
 			</Button>
 			<Button
 				size="xsmall"
-				priority="secondary"
+				priority="primary"
 				icon={<SvgBin />}
 				hideLabel
 				onClick={() =>
@@ -318,6 +290,34 @@ const SectionActions = (props: {
 				})}
 			>
 				Delete
+			</Button>
+			<Button
+				size="xsmall"
+				priority="secondary"
+				icon={<SvgArrowUpStraight />}
+				hideLabel
+				onClick={() =>
+					dispatch({ kind: 'moveUp', location: props.location })
+				}
+				cssOverrides={css({
+					marginLeft: space[1],
+				})}
+			>
+				Move Up
+			</Button>
+			<Button
+				size="xsmall"
+				priority="secondary"
+				icon={<SvgArrowDownStraight />}
+				hideLabel
+				onClick={() =>
+					dispatch({ kind: 'moveDown', location: props.location })
+				}
+				cssOverrides={css({
+					marginLeft: space[1],
+				})}
+			>
+				Move Down
 			</Button>
 			<Button
 				size="xsmall"
