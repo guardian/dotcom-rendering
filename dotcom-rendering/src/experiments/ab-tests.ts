@@ -1,7 +1,7 @@
 import type { ABTest } from '@guardian/ab-core';
 import { abTestTest } from './tests/ab-test-test';
 import { auxiaSignInGate } from './tests/auxia-sign-in-gate';
-import { compareClientTestWithNewFramework } from './tests/compare-client-test-with-new-framework';
+import { noAuxiaSignInGate } from './tests/no-auxia-sign-in-gate';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
 import { userBenefitsApi } from './tests/user-benefits-api';
@@ -14,5 +14,5 @@ export const tests: ABTest[] = [
 	signInGateMainControl,
 	userBenefitsApi,
 	auxiaSignInGate,
-	compareClientTestWithNewFramework,
+	noAuxiaSignInGate,
 ];

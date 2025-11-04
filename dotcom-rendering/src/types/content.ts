@@ -452,6 +452,7 @@ export interface NewsletterSignupBlockElement {
 
 export interface AdPlaceholderBlockElement {
 	_type: 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement';
+	adPosition: number;
 }
 
 export interface NumberedTitleBlockElement {
@@ -864,8 +865,30 @@ export interface ImageSource {
 	srcSet: SrcSetItem[];
 }
 
+export type ProductCta = {
+	url: string;
+	text: string;
+	retailer: string;
+	price: string;
+};
+
+export type ProductCustomAttribute = {
+	name: string;
+	value: string;
+};
+
 export interface SrcSetItem {
 	src: string;
+	width: number;
+}
+
+export interface ProductImage {
+	url: string;
+	caption: string;
+	credit: string;
+	alt: string;
+	displayCredit: boolean;
+	height: number;
 	width: number;
 }
 

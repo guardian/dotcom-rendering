@@ -45,8 +45,10 @@ const recaptchaContainerStyle = (showRecaptchaContainer: boolean) => css`
 	}
 `;
 
-export interface ManyNewslettersFormFieldsProps
-	extends Omit<FormProps, 'handleSubmitButton' | 'newsletterCount'> {}
+export type ManyNewslettersFormFieldsProps = Omit<
+	FormProps,
+	'handleSubmitButton' | 'newsletterCount'
+>;
 
 export const ManyNewslettersFormFields: FC<ManyNewslettersFormFieldsProps> = ({
 	status,

@@ -100,7 +100,9 @@ describe('YoutubeAtom', () => {
 		const [overlay] = getAllByTestId(/^youtube-overlay-c_xtiZNDgGc-\d+$/);
 		expect(overlay).toBeInTheDocument();
 
-		overlay && fireEvent.click(overlay);
+		if (overlay) {
+			fireEvent.click(overlay);
+		}
 		expect(overlay).not.toBeInTheDocument();
 
 		const [playerDiv] = getAllByTestId(/^youtube-player-c_xtiZNDgGc-\d+$/);
@@ -309,7 +311,9 @@ describe('YoutubeAtom', () => {
 		const [overlay] = getAllByTestId(/^youtube-overlay-c_xtiZNDgGc-\d+$/);
 		expect(overlay).toBeInTheDocument();
 
-		overlay && fireEvent.click(overlay);
+		if (overlay) {
+			fireEvent.click(overlay);
+		}
 		expect(overlay).not.toBeInTheDocument();
 	});
 
@@ -377,7 +381,9 @@ describe('YoutubeAtom', () => {
 		);
 		expect(overlay1).toBeInTheDocument();
 
-		overlay1 && fireEvent.click(overlay1);
+		if (overlay1) {
+			fireEvent.click(overlay1);
+		}
 		expect(overlay1).not.toBeInTheDocument();
 
 		expect(overlay2).toBeInTheDocument();

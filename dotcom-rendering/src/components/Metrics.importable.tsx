@@ -1,5 +1,5 @@
 import type { ABTest, ABTestAPI } from '@guardian/ab-core';
-import { ABTests } from '@guardian/ab-testing';
+import { activeABtests } from '@guardian/ab-testing';
 import {
 	bypassCommercialMetricsSampling,
 	EventTimer,
@@ -11,7 +11,6 @@ import {
 } from '@guardian/core-web-vitals';
 import { getCookie, isString, isUndefined } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
-import { compareClientTestWithNewFramework } from '../experiments/tests/compare-client-test-with-new-framework';
 import { useAB, useBetaAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useDetectAdBlock } from '../lib/useDetectAdBlock';
@@ -31,11 +30,10 @@ const willRecordCoreWebVitals = Math.random() < sampling;
 // For these tests switch off sampling and collect metrics for 100% of views
 const clientSideTestsToForceMetrics: ABTest[] = [
 	/* keep array multi-line */
-	compareClientTestWithNewFramework,
 ];
 
 const shouldCollectMetricsForBetaTests = (userTestParticipations: string[]) => {
-	const userParticipationConfigs = ABTests.filter((test) =>
+	const userParticipationConfigs = activeABtests.filter((test) =>
 		userTestParticipations.includes(test.name),
 	);
 	return userParticipationConfigs.some(

@@ -2,7 +2,7 @@ import type { LinkButtonProps as CoreLinkButtonProps } from '@guardian/source/re
 import { LinkButton as CoreLinkButton } from '@guardian/source/react-components';
 import { decideBackground, decideBorder, decideFont } from './styles';
 
-export interface EditorialLinkButtonProps extends CoreLinkButtonProps {}
+export type EditorialLinkButtonProps = CoreLinkButtonProps;
 
 /**
  *

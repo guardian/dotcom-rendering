@@ -43,6 +43,9 @@ export interface ChoiceCardSettings {
 	buttonSelectColour?: string;
 	buttonSelectTextColour?: string;
 	buttonSelectBorderColour?: string;
+	buttonSelectMarkerColour?: string;
+	pillTextColour?: string;
+	pillBackgroundColour?: string;
 }
 
 export interface BannerTemplateSettings {

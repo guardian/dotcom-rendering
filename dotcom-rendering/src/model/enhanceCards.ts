@@ -198,12 +198,30 @@ export const getActiveMediaAtom = (
 	videoReplace: boolean,
 	mediaAtom?: FEMediaAtom,
 	cardTrailImage?: string,
+	isLoopVideoLoadTest?: boolean,
 ): MainMedia | undefined => {
 	if (mediaAtom) {
-		const assets = mediaAtom.assets
-			.filter((_) => _.assetType === 'Video')
-			.filter(({ version }) => version === mediaAtom.activeVersion);
-		if (!assets.length) return undefined;
+		let assets;
+		if (isLoopVideoLoadTest) {
+			/* temporarily filter out m3u8 files */
+			assets = mediaAtom.assets
+				.filter((_) => !m3u8MimeType.includes(_.mimeType ?? ''))
+				.filter(({ version }) => version === mediaAtom.activeVersion);
+		} else {
+			assets = mediaAtom.assets.filter(
+				({ version }) => version === mediaAtom.activeVersion,
+			);
+		}
+
+		const m3u8MimeType = [
+			'application/vnd.apple.mpegurl',
+			'application/x-mpegURL',
+		];
+
+		const videoAssets = assets.filter(
+			({ assetType }) => assetType === 'Video',
+		);
+		if (!videoAssets.length) return undefined;
 
 		const image = decideMediaAtomImage(
 			videoReplace,
@@ -219,7 +237,7 @@ export const getActiveMediaAtom = (
 			/**
 			 * Take one source for each supported video file type.
 			 */
-			const sources = supportedVideoFileTypes.reduce(
+			const sources = supportedVideoFileTypes.reduce<typeof assets>(
 				(acc, type) => {
 					const source = assets.find(
 						({ mimeType }) => mimeType === type,
@@ -227,7 +245,7 @@ export const getActiveMediaAtom = (
 					if (source) acc.push(source);
 					return acc;
 				},
-				[] as typeof assets,
+				[],
 			);
 			if (!sources.length) return undefined;
 
@@ -279,11 +297,17 @@ const decideMedia = (
 	imageHide?: boolean,
 	videoReplace?: boolean,
 	cardImage?: string,
+	isLoopVideoLoadTest?: boolean,
 ): MainMedia | undefined => {
 	// If the showVideo toggle is enabled in the fronts tool,
 	// we should return the active mediaAtom regardless of the design
 	if (!!showMainVideo || !!videoReplace) {
-		return getActiveMediaAtom(!!videoReplace, mediaAtom, cardImage);
+		return getActiveMediaAtom(
+			!!videoReplace,
+			mediaAtom,
+			cardImage,
+			isLoopVideoLoadTest,
+		);
 	}
 
 	switch (format.design) {
@@ -298,7 +322,12 @@ const decideMedia = (
 			};
 
 		case ArticleDesign.Video: {
-			return getActiveMediaAtom(false, mediaAtom, cardImage);
+			return getActiveMediaAtom(
+				false,
+				mediaAtom,
+				cardImage,
+				isLoopVideoLoadTest,
+			);
 		}
 
 		default:
@@ -315,6 +344,7 @@ export const enhanceCards = (
 		pageId,
 		discussionApiUrl,
 		stripBranding = false,
+		isLoopVideoLoadTest,
 	}: {
 		cardInTagPage: boolean;
 		/** Used for the data link name to indicate card position in container */
@@ -324,6 +354,7 @@ export const enhanceCards = (
 		discussionApiUrl: string;
 		/** We strip branding from cards if the branding will appear at the collection level instead */
 		stripBranding?: boolean;
+		isLoopVideoLoadTest?: boolean;
 	},
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
@@ -379,6 +410,7 @@ export const enhanceCards = (
 			faciaCard.display.imageHide,
 			faciaCard.properties.mediaSelect?.videoReplace,
 			imageSrc,
+			isLoopVideoLoadTest,
 		);
 
 		return {

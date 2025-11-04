@@ -240,6 +240,7 @@ interface CommonProps {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
+	serverTime?: number;
 }
 
 interface WebProps extends CommonProps {
@@ -252,7 +253,8 @@ interface AppsProps extends CommonProps {
 }
 
 export const PictureLayout = (props: WebProps | AppsProps) => {
-	const { article, format, renderingTarget } = props;
+	const { article, format, renderingTarget, serverTime } = props;
+
 	const {
 		config: { isPaidContent, host, hasSurveyAd },
 	} = article;
@@ -276,8 +278,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 		?.bylineLargeImageUrl;
 
 	const displayAvatarUrl = avatarUrl ? true : false;
-
-	const { absoluteServerTimes = false } = article.config.switches;
 
 	return (
 		<>
@@ -309,9 +309,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}
 						pageId={article.pageId}
-						wholePictureLogoSwitch={
-							article.config.switches.wholePictureLogo
-						}
 					/>
 				</div>
 			)}
@@ -593,7 +590,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
-								absoluteServerTimes={absoluteServerTimes}
+								serverTime={serverTime}
 								renderingTarget={renderingTarget}
 							/>
 						</Island>
@@ -620,7 +617,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							editionId={article.editionId}
 							shortUrlId={article.config.shortUrlId}
 							discussionApiUrl={article.config.discussionApiUrl}
-							absoluteServerTimes={absoluteServerTimes}
+							serverTime={serverTime}
 							renderingTarget={renderingTarget}
 							webURL={article.webURL}
 						/>

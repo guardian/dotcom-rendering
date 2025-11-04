@@ -6,10 +6,10 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import { Fragment } from 'react';
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot } from '../components/AdSlot.web';
+import { GalleryAffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
@@ -55,6 +55,7 @@ import { BannerWrapper, Stuck } from './lib/stickiness';
 interface Props {
 	gallery: Gallery;
 	renderingTarget: RenderingTarget;
+	serverTime?: number;
 }
 
 interface WebProps extends Props {
@@ -75,63 +76,8 @@ const headerStyles = css`
 	}
 `;
 
-const galleryItemAdvertStyles = css`
-	${grid.paddedContainer}
-	grid-auto-flow: row dense;
-	background-color: ${palette('--article-inner-background')};
-
-	${from.tablet} {
-		border-left: 1px solid ${palette('--article-border')};
-		border-right: 1px solid ${palette('--article-border')};
-	}
-`;
-
-const galleryInlineAdContainerStyles = css`
-	${grid.column.centre}
-	z-index: 1;
-
-	${from.desktop} {
-		padding-bottom: ${space[10]}px;
-	}
-
-	${from.leftCol} {
-		${grid.between('centre-column-start', 'right-column-end')}
-	}
-`;
-
-const galleryBorder = css`
-	position: relative;
-	${between.desktop.and.leftCol} {
-		${grid.column.right}
-
-		&::before {
-			content: '';
-			position: absolute;
-			left: -10px; /* 10px to the left of this element */
-			top: 0;
-			bottom: 0;
-			width: 1px;
-			background-color: ${palette('--article-border')};
-		}
-	}
-
-	${from.leftCol} {
-		${grid.column.left}
-
-		&::after {
-			content: '';
-			position: absolute;
-			right: -10px;
-			top: 0;
-			bottom: 0;
-			width: 1px;
-			background-color: ${palette('--article-border')};
-		}
-	}
-`;
-
 export const GalleryLayout = (props: WebProps | AppProps) => {
-	const { gallery, renderingTarget } = props;
+	const { gallery, renderingTarget, serverTime } = props;
 
 	const {
 		config: {
@@ -166,8 +112,6 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 
 	const showComments =
 		frontendData.isCommentable && !frontendData.config.isPaidContent;
-
-	const { absoluteServerTimes = false } = switches;
 
 	return (
 		<>
@@ -233,56 +177,14 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						frontendData={frontendData}
 					/>
 				</header>
-				{gallery.bodyElements.map((element, index) => {
-					const isImage =
-						element._type ===
-						'model.dotcomrendering.pageElements.ImageBlockElement';
-					const shouldShowAds =
-						element._type ===
-						'model.dotcomrendering.pageElements.AdPlaceholderBlockElement';
-					return (
-						<Fragment key={isImage ? element.elementId : index}>
-							{isImage && (
-								<GalleryImage
-									image={element}
-									format={format}
-									pageId={frontendData.pageId}
-									webTitle={frontendData.webTitle}
-									renderingTarget={props.renderingTarget}
-								/>
-							)}
-							{shouldShowAds && renderAds && (
-								<>
-									{isWeb && (
-										<div css={galleryItemAdvertStyles}>
-											<div
-												css={
-													galleryInlineAdContainerStyles
-												}
-											>
-												<Hide until="tablet">
-													<DesktopAdSlot
-														renderAds={renderAds}
-														adSlotIndex={index}
-													/>
-												</Hide>
-												<Hide from="tablet">
-													<MobileAdSlot
-														renderAds={renderAds}
-														adSlotIndex={index}
-													/>
-												</Hide>
-											</div>
-											<div css={galleryBorder}></div>
-										</div>
-									)}
-									{isApps && <AdPlaceholder />}
-								</>
-							)}
-						</Fragment>
-					);
-				})}
-
+				<Body
+					renderingTarget={renderingTarget}
+					format={format}
+					bodyElements={gallery.bodyElements}
+					renderAds={renderAds}
+					pageId={frontendData.pageId}
+					webTitle={frontendData.webTitle}
+				/>
 				<SubMeta
 					format={format}
 					subMetaKeywordLinks={frontendData.subMetaKeywordLinks}
@@ -299,9 +201,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						ajaxUrl={gallery.frontendData.config.ajaxUrl}
 						guardianBaseUrl={gallery.frontendData.guardianBaseURL}
 						discussionApiUrl={discussionApiUrl}
-						absoluteServerTimes={
-							switches['absoluteServerTimes'] ?? false
-						}
+						serverTime={serverTime}
 						isAdFreeUser={frontendData.isAdFreeUser}
 					/>
 				</Island>
@@ -313,7 +213,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 				display={format.display}
 			/>
 			<StoryPackage
-				absoluteServerTimes={absoluteServerTimes}
+				serverTime={serverTime}
 				discussionApiUrl={discussionApiUrl}
 				format={format}
 				renderingTarget={renderingTarget}
@@ -337,7 +237,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					editionId={frontendData.editionId}
 					shortUrlId={frontendData.config.shortUrlId}
 					discussionApiUrl={frontendData.config.discussionApiUrl}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					renderingTarget={renderingTarget}
 					webURL={frontendData.webURL}
 				/>
@@ -505,7 +405,6 @@ const BannerAndMasthead = (props: {
 			hasPageSkin={false}
 			hasPageSkinContentSelfConstrain={false}
 			pageId={props.pageId}
-			wholePictureLogoSwitch={props.config.switches.wholePictureLogo}
 		/>
 	</div>
 );
@@ -595,7 +494,144 @@ const Meta = ({
 				shortUrlId={frontendData.config.shortUrlId}
 			/>
 		) : null}
+		{!!frontendData.affiliateLinksDisclaimer && (
+			<GalleryAffiliateDisclaimer />
+		)}
 	</div>
+);
+
+const Body = (props: {
+	renderingTarget: RenderingTarget;
+	format: ArticleFormat;
+	bodyElements: Gallery['bodyElements'];
+	renderAds: boolean;
+	pageId: string;
+	webTitle: string;
+}) => (
+	<>
+		{props.bodyElements
+			// Filter out ad elements if we don't want to render them.
+			.filter(
+				(element) =>
+					props.renderAds ||
+					element._type !==
+						'model.dotcomrendering.pageElements.AdPlaceholderBlockElement',
+			)
+			/* eslint-disable-next-line array-callback-return -- ESLint bug,
+			 * this function does contain `return` statements. TypeScript will
+			 * confirm the switch is exhaustive, but it's possible ESLint does
+			 * not know this. */
+			.map((element) => {
+				switch (element._type) {
+					case 'model.dotcomrendering.pageElements.ImageBlockElement':
+						return (
+							<GalleryImage
+								image={element}
+								format={props.format}
+								pageId={props.pageId}
+								webTitle={props.webTitle}
+								renderingTarget={props.renderingTarget}
+								key={element.elementId}
+							/>
+						);
+					case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
+						return (
+							<BodyAdSlot
+								renderingTarget={props.renderingTarget}
+								adIndex={element.adPosition}
+								key={element.adPosition}
+							/>
+						);
+				}
+			})}
+	</>
+);
+
+const BodyAdSlot = (props: {
+	renderingTarget: RenderingTarget;
+	adIndex: number;
+}) => {
+	switch (props.renderingTarget) {
+		case 'Web':
+			return <WebAdSlot adIndex={props.adIndex} />;
+		case 'Apps':
+			return <AdPlaceholder />;
+	}
+};
+
+const WebAdSlot = (props: { adIndex: number }) => (
+	<div
+		css={{
+			'&': css(grid.paddedContainer),
+			gridAutoFlow: 'row dense',
+			backgroundColor: palette('--article-inner-background'),
+
+			[from.tablet]: {
+				borderColor: palette('--article-border'),
+				borderStyle: 'solid',
+				borderLeftWidth: 1,
+				borderRightWidth: 1,
+			},
+		}}
+	>
+		<div
+			css={{
+				'&': css(grid.column.centre),
+				zIndex: 1,
+
+				[from.desktop]: {
+					paddingBottom: space[10],
+				},
+
+				[from.leftCol]: css(
+					grid.between('centre-column-start', 'right-column-end'),
+				),
+			}}
+		>
+			<Hide until="tablet">
+				<DesktopAdSlot renderAds={true} adSlotIndex={props.adIndex} />
+			</Hide>
+			<Hide from="tablet">
+				<MobileAdSlot renderAds={true} adSlotIndex={props.adIndex} />
+			</Hide>
+		</div>
+		<AdSlotBorders />
+	</div>
+);
+
+const AdSlotBorders = () => (
+	<div
+		css={{
+			position: 'relative',
+			[between.desktop.and.leftCol]: {
+				'&': css(grid.column.right),
+
+				'&::before': {
+					content: '""',
+					position: 'absolute',
+					left: -10,
+					top: 0,
+					bottom: 0,
+					width: 1,
+					backgroundColor: palette('--article-border'),
+				},
+			},
+
+			[from.leftCol]: {
+				'&': css(grid.column.left),
+
+				'&::after': {
+					content: '""',
+					position: 'absolute',
+					right: -10,
+					top: 0,
+					bottom: 0,
+					width: 1,
+					backgroundColor: palette('--article-border'),
+				},
+			},
+		}}
+	/>
 );
 
 const MerchandisingHigh = (props: {
@@ -624,14 +660,14 @@ const StoryPackage = ({
 	storyPackage,
 	format,
 	discussionApiUrl,
-	absoluteServerTimes,
+	serverTime,
 	renderingTarget,
 	topBorder,
 }: {
 	storyPackage: Gallery['storyPackage'];
 	format: ArticleFormat;
 	discussionApiUrl: string;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	renderingTarget: RenderingTarget;
 	topBorder: boolean;
 }) =>
@@ -650,7 +686,7 @@ const StoryPackage = ({
 					format={format}
 					leftColSize="compact"
 					discussionApiUrl={discussionApiUrl}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					renderingTarget={renderingTarget}
 				/>
 			</Island>

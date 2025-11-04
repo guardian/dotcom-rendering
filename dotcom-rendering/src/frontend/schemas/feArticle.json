@@ -462,6 +462,7 @@
                     "enum": [
                         "cryptic",
                         "everyman",
+                        "mini",
                         "prize",
                         "quick",
                         "quick-cryptic",
@@ -878,10 +879,14 @@
                 "_type": {
                     "type": "string",
                     "const": "model.dotcomrendering.pageElements.AdPlaceholderBlockElement"
+                },
+                "adPosition": {
+                    "type": "number"
                 }
             },
             "required": [
-                "_type"
+                "_type",
+                "adPosition"
             ]
         },
         "AudioAtomBlockElement": {
@@ -4213,6 +4218,7 @@
                             "enum": [
                                 "cryptic",
                                 "everyman",
+                                "mini",
                                 "prize",
                                 "quick",
                                 "quick-cryptic",

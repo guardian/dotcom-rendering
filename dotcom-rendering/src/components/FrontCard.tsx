@@ -6,7 +6,7 @@ import { Card } from './Card/Card';
 type Props = {
 	trail: DCRFrontCard;
 } & Partial<CardProps> &
-	Pick<CardProps, 'imageLoading' | 'absoluteServerTimes'>;
+	Pick<CardProps, 'imageLoading' | 'serverTime'>;
 
 /**
  * A wrapper around the normal Card component providing sensible defaults for Cards on front containers.
@@ -25,10 +25,7 @@ type Props = {
  */
 export const FrontCard = (props: Props) => {
 	const { trail, ...cardProps } = props;
-	const defaultProps: Omit<
-		CardProps,
-		'imageLoading' | 'absoluteServerTimes'
-	> = {
+	const defaultProps: Omit<CardProps, 'imageLoading' | 'serverTime'> = {
 		linkTo: trail.url,
 		format: trail.format,
 		headlineText: trail.headline,

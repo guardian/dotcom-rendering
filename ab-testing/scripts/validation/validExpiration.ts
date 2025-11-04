@@ -12,7 +12,7 @@ export function allExpirationsValid(tests: ABTest[]): boolean {
 		throw new Error(
 			`${
 				test.name
-			} has an expiration date in the past: ${expires.toISOString()}, has it expired?`,
+			} has an expiration date in the past: ${expires.toISOString()}, has it expired? If it doesn't belong to you or your team, you can set the status to OFF for now.`,
 		);
 	});
 }

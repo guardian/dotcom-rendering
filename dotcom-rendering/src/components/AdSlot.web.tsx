@@ -31,7 +31,6 @@ type SlotNamesWithPageSkin = SlotName | 'pageskin';
 
 type ServerRenderedSlot = Exclude<
 	SlotNamesWithPageSkin,
-	| 'carrot'
 	| 'comments-expanded'
 	| 'crossword-banner'
 	| 'exclusion'

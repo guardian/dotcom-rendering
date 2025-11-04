@@ -38,6 +38,7 @@ type Props = {
 	keyEvents: Block[];
 	filterKeyEvents: boolean;
 	shouldHideAds: boolean;
+	serverTime?: number;
 };
 
 export const LiveBlogRenderer = ({
@@ -64,10 +65,10 @@ export const LiveBlogRenderer = ({
 	filterKeyEvents = false,
 	editionId,
 	shouldHideAds,
+	serverTime,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const isWeb = renderingTarget === 'Web';
-	const { absoluteServerTimes = false } = switches;
 
 	return (
 		<>
@@ -76,10 +77,7 @@ export const LiveBlogRenderer = ({
 					<Island defer={{ until: 'idle' }} priority="feature">
 						<EnhancePinnedPost />
 					</Island>
-					<PinnedPost
-						pinnedPost={pinnedPost}
-						absoluteServerTimes={absoluteServerTimes}
-					>
+					<PinnedPost pinnedPost={pinnedPost} serverTime={serverTime}>
 						<LiveBlock
 							format={format}
 							block={pinnedPost}
@@ -95,6 +93,7 @@ export const LiveBlogRenderer = ({
 							isPinnedPost={true}
 							editionId={editionId}
 							shouldHideAds={shouldHideAds}
+							serverTime={serverTime}
 						/>
 					</PinnedPost>
 				</>
@@ -106,8 +105,8 @@ export const LiveBlogRenderer = ({
 							keyEvents={keyEvents}
 							filterKeyEvents={filterKeyEvents}
 							id={'key-events-carousel-mobile'}
-							absoluteServerTimes={absoluteServerTimes}
 							renderingTarget={renderingTarget}
+							serverTime={serverTime}
 						/>
 					</Island>
 					<Island priority="feature" defer={{ until: 'visible' }}>
@@ -137,6 +136,7 @@ export const LiveBlogRenderer = ({
 				pinnedPost={pinnedPost}
 				editionId={editionId}
 				shouldHideAds={shouldHideAds}
+				serverTime={serverTime}
 			/>
 			{isWeb && blocks.length > 4 && (
 				<Island

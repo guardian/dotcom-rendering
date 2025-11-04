@@ -32,6 +32,7 @@ export const groupCards = (
 	editionId: EditionId,
 	discussionApiUrl: string,
 	stripBranding: boolean = false,
+	isLoopVideoLoadTest?: boolean,
 ): DCRGroupedTrails => {
 	switch (container) {
 		case 'dynamic/fast':
@@ -96,6 +97,7 @@ export const groupCards = (
 				discussionApiUrl,
 				offset,
 				stripBranding,
+				isLoopVideoLoadTest,
 			});
 
 			return {
@@ -122,6 +124,7 @@ export const groupCards = (
 				discussionApiUrl,
 				offset,
 				stripBranding,
+				isLoopVideoLoadTest,
 			});
 
 			return {

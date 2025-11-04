@@ -61,7 +61,7 @@ void (async () => {
 		'abTesting',
 		() =>
 			import(/* webpackMode: 'eager' */ './abTesting').then(
-				({ initABTesting }) => initABTesting(),
+				({ initWindowABTesting }) => initWindowABTesting(),
 			),
 		{ priority: 'critical' },
 	);

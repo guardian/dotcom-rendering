@@ -47,7 +47,6 @@ import type {
 	BannerTemplateSettings,
 	ChoiceCardSettings,
 	CtaSettings,
-	CtaStateSettings,
 } from './settings';
 import { buttonStyles, buttonThemes } from './styles/buttonStyles';
 import { templateSpacing } from './styles/templateStyles';
@@ -92,6 +91,9 @@ const buildChoiceCardSettings = (
 			buttonSelectColour,
 			buttonSelectTextColour,
 			buttonSelectBorderColour,
+			buttonSelectMarkerColour,
+			pillTextColour,
+			pillBackgroundColour,
 		} = design.visual;
 		return {
 			buttonColour: buttonColour
@@ -111,6 +113,15 @@ const buildChoiceCardSettings = (
 				: undefined,
 			buttonSelectBorderColour: buttonSelectBorderColour
 				? hexColourToString(buttonSelectBorderColour)
+				: undefined,
+			buttonSelectMarkerColour: buttonSelectMarkerColour
+				? hexColourToString(buttonSelectMarkerColour)
+				: undefined,
+			pillTextColour: pillTextColour
+				? hexColourToString(pillTextColour)
+				: undefined,
+			pillBackgroundColour: pillBackgroundColour
+				? hexColourToString(pillBackgroundColour)
 				: undefined,
 		};
 	}
@@ -194,15 +205,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		: imageSettings
 		? 'main-image'
 		: '.';
-
-	// TODO: I assume we're planning on making this adjustable in RRCP in future.
-	const choiceCardButtonCtaStateSettings: CtaStateSettings = {
-		backgroundColour: palette.brandAlt[400],
-		textColour: 'inherit',
-	};
-	const choiceCardButtonSettings: CtaSettings = {
-		default: choiceCardButtonCtaStateSettings,
-	};
 
 	const templateSettings: BannerTemplateSettings = {
 		containerSettings: {
@@ -309,6 +311,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 					isCollapsableBanner && isCollapsed
 						? styles.collapsedLayoutOverrides(
 								cardsImageOrSpaceTemplateString,
+								isMaybeLaterVariant,
 						  )
 						: styles.layoutOverrides(
 								cardsImageOrSpaceTemplateString,
@@ -387,6 +390,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						<DesignableBannerVisual
 							settings={templateSettings.imageSettings}
 							bannerId={templateSettings.bannerId}
+							isCollapsed={isCollapsed}
 						/>
 						{templateSettings.alternativeVisual}
 					</div>
@@ -431,8 +435,10 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								onClick={() =>
 									handleSetIsCollapsed(!isCollapsed)
 								}
-								cssOverrides={styles.iconOverrides}
-								priority="tertiary"
+								cssOverrides={styles.iconOverrides(
+									templateSettings.closeButtonSettings,
+								)}
+								priority="secondary"
 								icon={
 									isCollapsed ? (
 										<SvgChevronUpSingle />
@@ -442,14 +448,8 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								}
 								size="small"
 								theme={buttonThemes(
-									{
-										default: {
-											backgroundColour:
-												palette.brand[400],
-											textColour: 'inherit',
-										},
-									},
-									'tertiary',
+									templateSettings.closeButtonSettings,
+									'secondary',
 								)}
 								hideLabel={true}
 							/>
@@ -478,6 +478,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									choices={choiceCards}
 									id={'banner'}
 									submitComponentEvent={submitComponentEvent}
+									choiceCardSettings={choiceCardSettings}
 								/>
 							)}
 							<div css={styles.ctaContainer(isCollapsed)}>
@@ -493,9 +494,9 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									})}
 									onClick={onCtaClick}
 									priority="primary"
-									cssOverrides={styles.linkButtonStyles}
+									cssOverrides={[styles.linkButtonStyles]}
 									theme={buttonThemes(
-										choiceCardButtonSettings,
+										templateSettings.primaryCtaSettings,
 										'primary',
 									)}
 									icon={<SvgArrowRightStraight />}
@@ -572,10 +573,10 @@ const styles = {
 			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
 			grid-template-columns: auto max(${phabletContentMaxWidth} auto);
 			grid-template-areas:
-				'.	close-button						.'
-				'.	copy-container						.'
-				'.	${cardsImageOrSpaceTemplateString}	.'
-				'.	cta-container						.';
+				'.	.									.'
+				'.	copy-container						close-button'
+				'.	${cardsImageOrSpaceTemplateString}	${cardsImageOrSpaceTemplateString}'
+				'.	cta-container						cta-container';
 		}
 		${from.phablet} {
 			max-width: 740px;
@@ -623,7 +624,10 @@ const styles = {
 				'.		vert-line	cta-container	${cardsImageOrSpaceTemplateString}	.';
 		}
 	`,
-	collapsedLayoutOverrides: (cardsImageOrSpaceTemplateString: string) => css`
+	collapsedLayoutOverrides: (
+		cardsImageOrSpaceTemplateString: string,
+		isMaybeLaterVariant: boolean,
+	) => css`
 		display: grid;
 		background: inherit;
 		position: relative;
@@ -635,11 +639,19 @@ const styles = {
 			margin: 0 auto;
 			padding: ${space[2]}px ${space[3]}px 0 ${space[3]}px;
 			grid-template-columns: auto max(${phabletContentMaxWidth} auto);
-			grid-template-areas:
+			grid-template-areas: ${isMaybeLaterVariant
+				? `
+				'.	.									.'
+				'.	copy-container						close-button'
+				'.	${cardsImageOrSpaceTemplateString}	${cardsImageOrSpaceTemplateString}'
+				'.	cta-container						cta-container'
+				`
+				: `
 				'.	close-button						.'
 				'.	copy-container						.'
 				'.	${cardsImageOrSpaceTemplateString}	.'
 				'.	cta-container						.';
+				`};
 		}
 		${from.phablet} {
 			max-width: 740px;
@@ -704,7 +716,7 @@ const styles = {
 		/* Layout changes only here */
 		grid-area: close-button;
 		${until.phablet} {
-			padding-right: ${space[2]}px;
+			padding-bottom: ${space[4]}px;
 			justify-self: end;
 			position: sticky;
 			top: 10px;
@@ -1036,10 +1048,11 @@ const styles = {
 			margin-top: ${space[1]}px;
 		}
 	`,
-	iconOverrides: css`
-		background-color: ${palette.brand[400]};
+	iconOverrides: (ctaSettings?: CtaSettings) => css`
+		background-color: ${ctaSettings?.default.backgroundColour ??
+		palette.brand[400]};
 		path {
-			fill: white;
+			fill: ${ctaSettings?.default.textColour ?? 'white'};
 		}
 		margin-top: ${space[1]}px;
 		margin-right: ${space[1]}px;

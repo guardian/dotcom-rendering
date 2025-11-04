@@ -34,9 +34,10 @@ const labelStyles = css`
 `;
 
 const wrapperStyles = css`
-	padding-top: ${space[1]}px;
+	padding-top: ${space[2]}px;
 	display: flex;
 	justify-content: end;
+	gap: ${space[1]}px;
 `;
 
 const horizontalStyles = css`

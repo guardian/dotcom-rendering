@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import lzstring from 'lz-string';
 import { GutterAsk } from './GutterAsk';
 import { props } from './utils/storybook';

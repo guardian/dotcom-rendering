@@ -1,4 +1,4 @@
-import { isString } from '@guardian/libs';
+import { isString, isUndefined } from '@guardian/libs';
 import { getEditionFromId } from '../lib/edition';
 import { useConfig } from './ConfigContext';
 import { Island } from './Island';
@@ -14,11 +14,11 @@ type Props = {
 type DisplayProps =
 	| {
 			display?: 'absolute';
-			absoluteServerTimes?: never;
+			serverTime?: never;
 	  }
 	| {
 			display: 'relative';
-			absoluteServerTimes: boolean;
+			serverTime?: number;
 	  };
 
 const formatWeekday = (date: Date, locale: string, timeZone: string) =>
@@ -49,10 +49,7 @@ const formatTime = (date: Date, locale: string, timeZone: string) =>
 		.replace(':', '.');
 
 const ONE_MINUTE = 60_000;
-/** https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#the_epoch_timestamps_and_invalid_date */
 const MAX_DATE = 8.64e15;
-/** Rounded down to the previous minute, to ensure relative times rarely go backwards */
-const getServerTime = () => Math.floor(Date.now() / ONE_MINUTE) * ONE_MINUTE;
 
 export const DateTime = ({
 	date,
@@ -60,20 +57,27 @@ export const DateTime = ({
 	showDate,
 	showTime,
 	display = 'absolute',
-	absoluteServerTimes = true,
+	serverTime,
 }: Props & DisplayProps) => {
 	const { editionId } = useConfig();
 	const { dateLocale, timeZone } = getEditionFromId(editionId);
 
+	/**
+	 * Server time (if set) is rounded down to the previous minute to ensure
+	 * relative times rarely go backwards. If unset we use the maximum value
+	 * that can be represented by a `Date` object [1] to force display as an
+	 * absolute date due to `then` being far in the past.
+	 *
+	 * [1] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#the_epoch_timestamps_and_invalid_date
+	 */
+	const now = isUndefined(serverTime)
+		? MAX_DATE
+		: Math.floor(serverTime / ONE_MINUTE) * ONE_MINUTE;
 	const then = date.getTime();
 
 	return display === 'relative' ? (
 		<Island priority="enhancement" defer={{ until: 'visible' }}>
-			<RelativeTime
-				then={then}
-				now={absoluteServerTimes ? MAX_DATE : getServerTime()}
-				editionId={editionId}
-			/>
+			<RelativeTime then={then} now={now} editionId={editionId} />
 		</Island>
 	) : (
 		<time
