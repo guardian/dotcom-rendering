@@ -33,8 +33,8 @@ export const SectionForm = (props: Props) => {
 
 	return (
 		<Dialog open={props.open}>
+			<Heading>{props.heading}</Heading>
 			<form action="" onSubmit={submit}>
-				<Heading>{props.heading}</Heading>
 				<TitleInput title={title} setTitle={setTitle} />
 				<UrlInput url={url} setUrl={setUrl} />
 				<Buttons cancel={props.cancel} />
