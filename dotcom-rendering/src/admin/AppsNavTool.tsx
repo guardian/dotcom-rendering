@@ -153,12 +153,14 @@ const Section = (props: {
 						paddingBottom: space[1],
 						alignItems: 'center',
 					}}
+					style={{
+						cursor: hasSubsections ? 'pointer' : undefined,
+					}}
 				>
 					<SectionActions location={props.location} />
 					<span
 						css={{
 							width: 20,
-							cursor: 'pointer',
 							'[open] &': {
 								transform: 'rotate(180deg)',
 							},
