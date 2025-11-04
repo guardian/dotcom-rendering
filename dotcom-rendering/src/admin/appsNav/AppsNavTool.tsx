@@ -1,18 +1,9 @@
 import {
 	headlineBold17Object,
-	headlineBold24Object,
 	palette,
 	space,
 } from '@guardian/source/foundations';
-import {
-	useCallback,
-	useEffect,
-	useReducer,
-	useRef,
-	useState,
-	type FormEventHandler,
-	type ReactNode,
-} from 'react';
+import { useCallback, useReducer, type ReactNode } from 'react';
 import { type AppsNav, type Section } from './appsNav';
 import {
 	Button,
@@ -27,7 +18,6 @@ import {
 	SvgPlus,
 	SvgReload,
 	SvgUpload,
-	TextInput,
 } from '@guardian/source/react-components';
 import { css } from '@emotion/react';
 import {
@@ -37,6 +27,7 @@ import {
 	type HistoryEvent,
 } from './appsNavContext';
 import type { Result } from '../../lib/result';
+import { SectionForm } from './SectionForm';
 
 type Props = {
 	ukNav: AppsNav;
@@ -414,84 +405,6 @@ const EditDialog = (props: {
 			submit={submit}
 			cancel={cancel}
 		/>
-	);
-};
-
-const SectionForm = (props: {
-	heading: string;
-	open: boolean;
-	initialTitle: string;
-	initialPath: string;
-	submit: (title: string, url: URL) => void;
-	cancel: () => void;
-}) => {
-	const [title, setTitle] = useState(props.initialTitle);
-	const [url, setUrl] = useState(props.initialPath);
-	const dialogRef = useRef<HTMLDialogElement | null>(null);
-
-	const submit: FormEventHandler = (e) => {
-		e.preventDefault();
-		props.submit(title, new URL(url));
-	};
-
-	// Required for the `::backdrop` pseudo-element, otherwise we could use the
-	// `open` attribute.
-	useEffect(() => {
-		if (props.open) {
-			dialogRef.current?.showModal();
-		} else {
-			dialogRef.current?.close();
-		}
-	}, [props.open]);
-
-	return (
-		<dialog
-			css={{
-				'::backdrop': {
-					backgroundColor: palette.neutral[10],
-					opacity: 0.7,
-				},
-			}}
-			ref={dialogRef}
-		>
-			<form action="" onSubmit={submit}>
-				<h2
-					css={{
-						...headlineBold24Object,
-						paddingBottom: space[5],
-					}}
-				>
-					{props.heading}
-				</h2>
-				<TextInput
-					label="Title"
-					value={title}
-					onChange={(e) => setTitle(e.target.value)}
-					cssOverrides={css({
-						marginBottom: space[5],
-					})}
-				/>
-				<TextInput
-					label="Dotcom Link"
-					type="url"
-					pattern="https://www.theguardian\.com/.*"
-					placeholder="https://www.theguardian.com/uk/sport"
-					value={url}
-					onChange={(e) => setUrl(e.target.value)}
-					cssOverrides={css({
-						marginBottom: space[8],
-					})}
-				/>
-				<Button type="submit">Submit</Button>
-				<Button
-					cssOverrides={css({ marginLeft: space[2] })}
-					onClick={props.cancel}
-					priority="tertiary"
-				>
-					Cancel
-				</Button>
-			</form>
-		</dialog>
 	);
 };
 
