@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { getSkimlinksAccountId, isSkimlink } from '../lib/affiliateLinksUtils';
+import { useBetaAB } from '../lib/useAB';
 
 /**
  * Add custom parameters to skimlink URLs:
@@ -17,6 +18,7 @@ import { getSkimlinksAccountId, isSkimlink } from '../lib/affiliateLinksUtils';
 export const EnhanceAffiliateLinks = () => {
 	useEffect(() => {
 		const allLinksOnPage = [...document.querySelectorAll('a')];
+		const abTests = useBetaAB();
 
 		for (const link of allLinksOnPage) {
 			if (isSkimlink(link.href)) {
@@ -26,6 +28,13 @@ export const EnhanceAffiliateLinks = () => {
 						: new URL(document.referrer).hostname;
 
 				const skimlinksAccountId = getSkimlinksAccountId(link.href);
+
+				// Am I in a test at all?
+				const abTestParticipations = abTests?.getParticipations();
+				console.log(
+					'*** abTestParticipations ***',
+					abTestParticipations,
+				);
 
 				// Skimlinks treats xcust as one long string, so we use | to separate values
 				const xcustValue = `referrer|${referrerDomain}|accountId|${skimlinksAccountId}`;
