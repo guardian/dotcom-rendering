@@ -181,7 +181,11 @@ export const LoopVideoPlayer = forwardRef(
 						<source
 							key={source.mimeType}
 							/* The start time is set to 1ms so that Safari will autoplay the video */
-							src={`${source.src}#t=0.001`}
+							src={
+								enableLoopVideoCORS
+									? `${source.src}#t=0.001?cors=enabled`
+									: `${source.src}#t=0.001`
+							}
 							type={source.mimeType}
 						/>
 					))}
