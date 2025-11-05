@@ -6,21 +6,15 @@ import {
 import { useCallback, useReducer, type ReactNode } from 'react';
 import { type AppsNav, type MobileOverride, type Section } from './appsNav';
 import {
-	Button,
 	InlineError,
 	InlineSuccess,
-	SvgArrowDownStraight,
-	SvgArrowUpStraight,
-	SvgBin,
 	SvgChevronDownSingle,
-	SvgEdit,
-	SvgPlus,
 } from '@guardian/source/react-components';
-import { css } from '@emotion/react';
 import { DispatchContext, reducer, useDispatch } from './appsNavContext';
 import type { Result } from '../../lib/result';
 import { SectionForm } from './SectionForm';
 import { MenuActions } from './MenuActions';
+import { SectionActions } from './SectionActions';
 
 type Props = {
 	ukNav: AppsNav;
@@ -161,94 +155,6 @@ const Path = (props: { path: string; guardianBaseUrl: string }) => (
 		</a>
 	</span>
 );
-
-const SectionActions = (props: {
-	location: number[];
-	title: string;
-	path: string;
-	mobileOverride: MobileOverride | undefined;
-}) => {
-	const dispatch = useDispatch();
-
-	return (
-		<>
-			<Button
-				size="xsmall"
-				priority="primary"
-				icon={<SvgEdit />}
-				hideLabel
-				onClick={() =>
-					dispatch({
-						kind: 'edit',
-						location: props.location,
-						title: props.title,
-						path: props.path,
-						mobileOverride: props.mobileOverride,
-					})
-				}
-			>
-				Edit
-			</Button>
-			<Button
-				size="xsmall"
-				priority="primary"
-				icon={<SvgBin />}
-				hideLabel
-				onClick={() =>
-					dispatch({ kind: 'delete', location: props.location })
-				}
-				cssOverrides={css({
-					marginLeft: space[1],
-				})}
-			>
-				Delete
-			</Button>
-			<Button
-				size="xsmall"
-				priority="secondary"
-				icon={<SvgArrowUpStraight />}
-				hideLabel
-				onClick={() =>
-					dispatch({ kind: 'moveUp', location: props.location })
-				}
-				cssOverrides={css({
-					marginLeft: space[1],
-				})}
-			>
-				Move Up
-			</Button>
-			<Button
-				size="xsmall"
-				priority="secondary"
-				icon={<SvgArrowDownStraight />}
-				hideLabel
-				onClick={() =>
-					dispatch({ kind: 'moveDown', location: props.location })
-				}
-				cssOverrides={css({
-					marginLeft: space[1],
-				})}
-			>
-				Move Down
-			</Button>
-			<Button
-				size="xsmall"
-				priority="tertiary"
-				icon={<SvgPlus />}
-				hideLabel
-				onClick={() =>
-					dispatch({ kind: 'insertInto', location: props.location })
-				}
-				cssOverrides={css({
-					marginLeft: space[1],
-					marginRight: space[2],
-				})}
-			>
-				Add Subsection
-			</Button>
-		</>
-	);
-};
 
 const InsertDialog = (props: { insertingAt: number[] | undefined }) => {
 	const dispatch = useDispatch();
