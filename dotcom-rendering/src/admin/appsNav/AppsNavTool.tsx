@@ -1,20 +1,12 @@
-import {
-	headlineBold17Object,
-	palette,
-	space,
-} from '@guardian/source/foundations';
-import { useCallback, useReducer, type ReactNode } from 'react';
-import { type AppsNav, type MobileOverride, type Section } from './appsNav';
-import {
-	InlineError,
-	InlineSuccess,
-	SvgChevronDownSingle,
-} from '@guardian/source/react-components';
+import { palette, space } from '@guardian/source/foundations';
+import { useCallback, useReducer } from 'react';
+import { type AppsNav, type MobileOverride } from './appsNav';
+import { InlineError, InlineSuccess } from '@guardian/source/react-components';
 import { DispatchContext, reducer, useDispatch } from './appsNavContext';
 import type { Result } from '../../lib/result';
 import { SectionForm } from './SectionForm';
 import { MenuActions } from './MenuActions';
-import { SectionActions } from './SectionActions';
+import { Sections } from './Sections';
 
 type Props = {
 	ukNav: AppsNav;
@@ -50,111 +42,6 @@ export const AppsNavTool = (props: Props) => {
 		</DispatchContext.Provider>
 	);
 };
-
-const Sections = (props: {
-	sections: Section[];
-	guardianBaseUrl: string;
-	location: number[];
-}) => (
-	<ul css={{ paddingLeft: 20 }}>
-		{props.sections.map((section, index) => (
-			<Section
-				key={`${section.title}-${section.path}`}
-				section={section}
-				guardianBaseUrl={props.guardianBaseUrl}
-				location={[...props.location, index]}
-			/>
-		))}
-	</ul>
-);
-
-const Section = (props: {
-	section: Section;
-	guardianBaseUrl: string;
-	location: number[];
-}) => {
-	const hasSubsections = props.section.sections?.length ?? 0 > 0;
-
-	return (
-		<li css={{ borderTop: '1px solid lightgrey' }}>
-			<details>
-				<summary
-					css={{
-						display: 'flex',
-						paddingTop: space[1],
-						paddingBottom: space[1],
-						alignItems: 'center',
-					}}
-					style={{
-						cursor: hasSubsections ? 'pointer' : undefined,
-					}}
-				>
-					<SectionActions
-						location={props.location}
-						title={props.section.title}
-						path={props.section.path}
-						mobileOverride={props.section.mobileOverride}
-					/>
-					<span
-						css={{
-							width: 20,
-							'[open] &': {
-								transform: 'rotate(180deg)',
-							},
-							svg: {
-								verticalAlign: 'middle',
-							},
-						}}
-					>
-						{hasSubsections ? <SvgChevronDownSingle /> : null}
-					</span>
-					<Title location={props.location}>
-						{props.section.title}
-					</Title>{' '}
-					<Path
-						path={props.section.path}
-						guardianBaseUrl={props.guardianBaseUrl}
-					/>
-				</summary>
-				{props.section.sections !== undefined ? (
-					<Sections
-						sections={props.section.sections}
-						guardianBaseUrl={props.guardianBaseUrl}
-						location={props.location}
-					/>
-				) : null}
-			</details>
-		</li>
-	);
-};
-
-const Title = (props: { children: ReactNode; location: number[] }) => (
-	<span
-		css={{
-			...headlineBold17Object,
-			paddingLeft: space[2],
-		}}
-	>
-		{props.children}
-	</span>
-);
-
-const Path = (props: { path: string; guardianBaseUrl: string }) => (
-	<span
-		css={{
-			fontSize: 17,
-			fontFamily: 'monospace',
-			marginLeft: space[2],
-		}}
-	>
-		<a
-			href={new URL(props.path, props.guardianBaseUrl).href}
-			css={{ color: palette.brand[500] }}
-		>
-			{props.path}
-		</a>
-	</span>
-);
 
 const InsertDialog = (props: { insertingAt: number[] | undefined }) => {
 	const dispatch = useDispatch();
