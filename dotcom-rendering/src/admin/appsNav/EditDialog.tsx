@@ -9,19 +9,16 @@ type Props = {
 export const EditDialog = (props: Props) => {
 	const dispatch = useDispatch();
 
-	const submit = useCallback(
-		(title: string, url: URL) => {
-			if (props.editing !== undefined) {
-				dispatch({
-					kind: 'update',
-					title,
-					path: url.pathname.slice(1),
-					location: props.editing.location,
-				});
-			}
-		},
-		[props.editing, dispatch],
-	);
+	const submit = (title: string, url: URL) => {
+		if (props.editing !== undefined) {
+			dispatch({
+				kind: 'update',
+				title,
+				path: url.pathname.slice(1),
+				location: props.editing.location,
+			});
+		}
+	};
 
 	const cancel = useCallback(() => {
 		dispatch({ kind: 'cancelEdit' });

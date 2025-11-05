@@ -9,21 +9,18 @@ type Props = {
 export const InsertDialog = (props: Props) => {
 	const dispatch = useDispatch();
 
-	const submit = useCallback(
-		(title: string, url: URL) => {
-			if (props.insertingAt !== undefined) {
-				dispatch({
-					kind: 'insert',
-					section: {
-						title,
-						path: url.pathname.slice(1),
-					},
-					location: props.insertingAt,
-				});
-			}
-		},
-		[props.insertingAt, dispatch],
-	);
+	const submit = (title: string, url: URL) => {
+		if (props.insertingAt !== undefined) {
+			dispatch({
+				kind: 'insert',
+				section: {
+					title,
+					path: url.pathname.slice(1),
+				},
+				location: props.insertingAt,
+			});
+		}
+	};
 
 	const cancel = useCallback(() => {
 		dispatch({ kind: 'cancelInsert' });
