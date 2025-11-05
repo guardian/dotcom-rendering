@@ -34,6 +34,8 @@ type Props = {
 	collectionId: number;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
+	/** Feature flag for the enabling CORS loading on looping video */
+	enableLoopVideoCORS?: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -248,6 +250,8 @@ type SplashCardLayoutProps = {
 	collectionId: number;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
+	/** Feature flag for the enabling CORS loading on looping video */
+	enableLoopVideoCORS?: boolean;
 };
 
 const SplashCardLayout = ({
@@ -261,6 +265,7 @@ const SplashCardLayout = ({
 	containerLevel,
 	collectionId,
 	showLabsRedesign,
+	enableLoopVideoCORS,
 }: SplashCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -344,6 +349,7 @@ const SplashCardLayout = ({
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
 					showLabsRedesign={showLabsRedesign}
+					enableLoopVideoCORS={enableLoopVideoCORS}
 				/>
 			</LI>
 		</UL>
@@ -408,6 +414,8 @@ type FullWidthCardLayoutProps = {
 	collectionId: number;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
+	/** Feature flag for the enabling CORS loading on looping video */
+	enableLoopVideoCORS?: boolean;
 };
 
 const FullWidthCardLayout = ({
@@ -422,6 +430,7 @@ const FullWidthCardLayout = ({
 	containerLevel,
 	collectionId,
 	showLabsRedesign,
+	enableLoopVideoCORS,
 }: FullWidthCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -496,6 +505,7 @@ const FullWidthCardLayout = ({
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 					showLabsRedesign={showLabsRedesign}
+					enableLoopVideoCORS={enableLoopVideoCORS}
 				/>
 			</LI>
 		</UL>
@@ -515,6 +525,8 @@ type HalfWidthCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
+	/** Feature flag for the enabling CORS loading on looping video */
+	enableLoopVideoCORS?: boolean;
 };
 
 const HalfWidthCardLayout = ({
@@ -529,6 +541,7 @@ const HalfWidthCardLayout = ({
 	isLastRow,
 	containerLevel,
 	showLabsRedesign,
+	enableLoopVideoCORS,
 }: HalfWidthCardLayoutProps) => {
 	if (cards.length === 0) return null;
 
@@ -584,6 +597,7 @@ const HalfWidthCardLayout = ({
 							headlineSizes={undefined}
 							canPlayInline={false}
 							showLabsRedesign={showLabsRedesign}
+							enableLoopVideoCORS={enableLoopVideoCORS}
 						/>
 					</LI>
 				);
@@ -602,6 +616,7 @@ export const FlexibleGeneral = ({
 	containerLevel = 'Primary',
 	collectionId,
 	showLabsRedesign,
+	enableLoopVideoCORS,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
 		...snap,
@@ -631,6 +646,7 @@ export const FlexibleGeneral = ({
 					containerLevel={containerLevel}
 					collectionId={collectionId}
 					showLabsRedesign={showLabsRedesign}
+					enableLoopVideoCORS={enableLoopVideoCORS}
 				/>
 			)}
 			{groupedCards.map((row, i) => {
@@ -650,6 +666,7 @@ export const FlexibleGeneral = ({
 								containerLevel={containerLevel}
 								collectionId={collectionId}
 								showLabsRedesign={showLabsRedesign}
+								enableLoopVideoCORS={enableLoopVideoCORS}
 							/>
 						);
 
@@ -670,6 +687,7 @@ export const FlexibleGeneral = ({
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
 								showLabsRedesign={showLabsRedesign}
+								enableLoopVideoCORS={enableLoopVideoCORS}
 							/>
 						);
 				}

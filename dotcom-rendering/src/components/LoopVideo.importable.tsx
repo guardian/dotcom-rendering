@@ -117,6 +117,8 @@ type Props = {
 	fallbackImageAlt: CardPictureProps['alt'];
 	fallbackImageAspectRatio: CardPictureProps['aspectRatio'];
 	linkTo: string;
+	/** Feature flag for the enabling CORS loading on looping video */
+	enableLoopVideoCORS?: boolean;
 };
 
 export const LoopVideo = ({
@@ -132,6 +134,7 @@ export const LoopVideo = ({
 	fallbackImageAlt,
 	fallbackImageAspectRatio,
 	linkTo,
+	enableLoopVideoCORS = false,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -635,6 +638,7 @@ export const LoopVideo = ({
 				AudioIcon={hasAudio ? AudioIcon : null}
 				preloadPartialData={preloadPartialData}
 				showPlayIcon={showPlayIcon}
+				enableLoopVideoCORS={enableLoopVideoCORS}
 			/>
 		</figure>
 	);
