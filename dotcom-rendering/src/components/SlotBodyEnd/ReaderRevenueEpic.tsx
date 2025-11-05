@@ -20,6 +20,7 @@ import type {
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import {
+	buildRequestHeaders,
 	hasCmpConsentForWeeklyArticleCount,
 	hasOptedOutOfArticleCount,
 	shouldHideSupportMessaging,
@@ -64,7 +65,6 @@ const buildPayload = async (
 		showSupportMessaging: !data.hideSupportMessagingForUser,
 		epicViewLog: getEpicViewLog(storage.local),
 		weeklyArticleHistory: await data.asyncArticleCount,
-
 		hasOptedOutOfArticleCount: await hasOptedOutOfArticleCount(),
 		mvtId: Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })),
 		countryCode: data.countryCode,
@@ -107,9 +107,12 @@ export const canShowReaderRevenueEpic = async (
 		hideSupportMessagingForUser,
 	});
 
+	const headers = await buildRequestHeaders();
+
 	const response: ModuleDataResponse<EpicProps> = await getEpic(
 		contributionsServiceUrl,
 		contributionsPayload,
+		headers,
 	);
 	const module: ModuleData<EpicProps> | undefined = response.data?.module;
 
