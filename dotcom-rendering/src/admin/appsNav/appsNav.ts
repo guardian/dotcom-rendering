@@ -21,13 +21,17 @@ export type Section = {
 	sections?: Section[];
 };
 
-const MobileOverrideSchema = union([
-	literal('section-front'),
-	literal('section-list'),
-	literal('tag-list'),
-]);
+export const mobileOverrideOptions = [
+	'section-front',
+	'section-list',
+	'tag-list',
+] as const;
 
-type MobileOverride = InferOutput<typeof MobileOverrideSchema>;
+const MobileOverrideSchema = union(
+	mobileOverrideOptions.map((v) => literal(v)),
+);
+
+export type MobileOverride = InferOutput<typeof MobileOverrideSchema>;
 
 const EditionOverrideSchema = union([
 	literal('uk'),

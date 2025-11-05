@@ -9,6 +9,7 @@ import {
 	insertSection,
 	moveSection,
 	updateSection,
+	type MobileOverride,
 	type Section,
 } from './appsNav';
 import { error, ok, type Result } from '../../lib/result';
@@ -21,6 +22,7 @@ type State = {
 	editing?: {
 		title: string;
 		path: string;
+		mobileOverride: MobileOverride | undefined;
 		location: number[];
 	};
 };
@@ -81,6 +83,7 @@ type Action =
 			location: number[];
 			title: string;
 			path: string;
+			mobileOverride: MobileOverride | undefined;
 	  }
 	| {
 			kind: 'cancelEdit';
@@ -319,6 +322,7 @@ export const reducer = (state: State, action: Action): State => {
 				editing: {
 					title: action.title,
 					path: action.path,
+					mobileOverride: action.mobileOverride,
 					location: action.location,
 				},
 			};

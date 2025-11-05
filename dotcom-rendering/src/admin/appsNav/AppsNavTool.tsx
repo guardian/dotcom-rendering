@@ -4,7 +4,7 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { useCallback, useReducer, type ReactNode } from 'react';
-import { type AppsNav, type Section } from './appsNav';
+import { type AppsNav, type MobileOverride, type Section } from './appsNav';
 import {
 	Button,
 	InlineError,
@@ -99,6 +99,7 @@ const Section = (props: {
 						location={props.location}
 						title={props.section.title}
 						path={props.section.path}
+						mobileOverride={props.section.mobileOverride}
 					/>
 					<span
 						css={{
@@ -165,6 +166,7 @@ const SectionActions = (props: {
 	location: number[];
 	title: string;
 	path: string;
+	mobileOverride: MobileOverride | undefined;
 }) => {
 	const dispatch = useDispatch();
 
@@ -181,6 +183,7 @@ const SectionActions = (props: {
 						location: props.location,
 						title: props.title,
 						path: props.path,
+						mobileOverride: props.mobileOverride,
 					})
 				}
 			>
@@ -276,6 +279,7 @@ const InsertDialog = (props: { insertingAt: number[] | undefined }) => {
 			open={props.insertingAt !== undefined}
 			initialTitle=""
 			initialPath=""
+			initialMobileOverride={undefined}
 			submit={submit}
 			cancel={cancel}
 		/>
@@ -287,6 +291,7 @@ const EditDialog = (props: {
 		| {
 				title: string;
 				path: string;
+				mobileOverride: MobileOverride | undefined;
 				location: number[];
 		  }
 		| undefined;
@@ -320,6 +325,7 @@ const EditDialog = (props: {
 				props.editing?.path ?? '',
 				'https://www.theguardian.com',
 			).toString()}
+			initialMobileOverride={props.editing?.mobileOverride}
 			submit={submit}
 			cancel={cancel}
 		/>
