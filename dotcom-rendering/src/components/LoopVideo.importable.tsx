@@ -155,6 +155,8 @@ export const LoopVideo = ({
 	 * want to pause the video if it has been in view.
 	 */
 	const [hasBeenInView, setHasBeenInView] = useState(false);
+	const [hasBeenPlayed, setHasBeenPlayed] = useState(false);
+	const [hasTrackedPlay, setHasTrackedPlay] = useState(false);
 
 	const VISIBILITY_THRESHOLD = 0.5;
 
@@ -176,6 +178,7 @@ export const LoopVideo = ({
 				.then(() => {
 					// Autoplay succeeded
 					dispatchOphanAttentionEvent('videoPlaying');
+					setHasBeenPlayed(true);
 					setPlayerState('PLAYING');
 				})
 				.catch((error: Error) => {
@@ -384,6 +387,19 @@ export const LoopVideo = ({
 	}, [isInView, hasBeenInView, atomId, linkTo]);
 
 	/**
+	 * Track the first successful video play in Ophan.
+	 *
+	 * This effect runs only after the video has actually started playing
+	 * for the first time. This is to ensure we don't double-report the event.
+	 */
+	useEffect(() => {
+		if (!hasBeenPlayed || hasTrackedPlay) return;
+
+		ophanTrackerWeb(atomId, 'loop')('play');
+		setHasTrackedPlay(true);
+	}, [atomId, hasBeenPlayed, hasTrackedPlay]);
+
+	/**
 	 * Handle play/pause, when instigated by the browser.
 	 */
 	useEffect(() => {
@@ -412,14 +428,6 @@ export const LoopVideo = ({
 				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' ||
 				(hasPageBecomeActive && playerState === 'PAUSED_BY_BROWSER'))
 		) {
-			/**
-			 * Check if the video has not been in view before tracking the play.
-			 * This is so we only track the first play.
-			 */
-			if (!hasBeenInView) {
-				ophanTrackerWeb(atomId, 'loop')('play');
-			}
-
 			setHasPageBecomeActive(false);
 			void playVideo();
 		}

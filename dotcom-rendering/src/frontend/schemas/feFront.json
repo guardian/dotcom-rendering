@@ -3941,7 +3941,8 @@
                                         "type": "string"
                                     },
                                     "mimeType": {
-                                        "$ref": "#/definitions/SupportedVideoFileType"
+                                        "type": "string",
+                                        "const": "video/mp4"
                                     }
                                 },
                                 "required": [
@@ -3973,14 +3974,6 @@
                     ]
                 }
             ]
-        },
-        "SupportedVideoFileType": {
-            "enum": [
-                "application/vnd.apple.mpegurl",
-                "application/x-mpegURL",
-                "video/mp4"
-            ],
-            "type": "string"
         },
         "Audio": {
             "allOf": [
