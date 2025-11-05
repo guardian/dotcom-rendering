@@ -1,4 +1,8 @@
-import { palette, space } from '@guardian/source/foundations';
+import {
+	headlineMedium34Object,
+	palette,
+	space,
+} from '@guardian/source/foundations';
 import { useCallback, useReducer } from 'react';
 import { type AppsNav, type MobileOverride } from './appsNav';
 import { InlineError, InlineSuccess } from '@guardian/source/react-components';
@@ -7,23 +11,26 @@ import type { Result } from '../../lib/result';
 import { SectionForm } from './SectionForm';
 import { MenuActions } from './MenuActions';
 import { Sections } from './Sections';
+import { getEditionFromId, type EditionId } from '../../lib/edition';
 
 type Props = {
-	ukNav: AppsNav;
+	nav: AppsNav;
+	editionId: EditionId;
 	guardianBaseUrl: string;
 	publish: (data: AppsNav) => Promise<boolean>;
 };
 
 export const AppsNavTool = (props: Props) => {
 	const [state, dispatch] = useReducer(reducer, {
-		sections: props.ukNav.pillars,
+		sections: props.nav.pillars,
 		history: [],
 	});
 
 	return (
 		<DispatchContext.Provider value={dispatch}>
+			<Heading editionId={props.editionId} />
 			<MenuActions
-				initialSections={props.ukNav.pillars}
+				initialSections={props.nav.pillars}
 				history={state.history}
 				publish={async () =>
 					(await props.publish({ pillars: state.sections }))
@@ -42,6 +49,19 @@ export const AppsNavTool = (props: Props) => {
 		</DispatchContext.Provider>
 	);
 };
+
+const Heading = (props: { editionId: EditionId }) => (
+	<h1
+		css={{
+			...headlineMedium34Object,
+			paddingLeft: space[5],
+			paddingTop: space[1],
+			paddingBottom: space[5],
+		}}
+	>
+		{`${getEditionFromId(props.editionId).title} apps nav`}
+	</h1>
+);
 
 const InsertDialog = (props: { insertingAt: number[] | undefined }) => {
 	const dispatch = useDispatch();

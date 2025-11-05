@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { parse } from 'valibot';
 import { ukNav } from '../../../fixtures/manual/appsNav/uk';
+import { auNav } from '../../../fixtures/manual/appsNav/au';
 import { AppsNavSchema, type AppsNav } from './appsNav';
 import { AppsNavTool } from './AppsNavTool';
 import { fn } from 'storybook/test';
@@ -14,16 +15,25 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default = {
+export const UKNav = {
 	args: {
-		ukNav: parse(AppsNavSchema, ukNav),
+		nav: parse(AppsNavSchema, ukNav),
+		editionId: 'UK',
 		guardianBaseUrl: 'https://www.theguardian.com',
 		publish: fn((_data: AppsNav) => Promise.resolve(true)),
 	},
 } satisfies Story;
 
+export const AUNav = {
+	args: {
+		...UKNav.args,
+		nav: parse(AppsNavSchema, auNav),
+		editionId: 'AU',
+	},
+};
+
 export const AddSectionForm = {
-	...Default,
+	...UKNav,
 	play: ({ canvas, userEvent }) => {
 		const addSection = canvas.getByRole('button', { name: 'Add Section' });
 
@@ -32,7 +42,7 @@ export const AddSectionForm = {
 } satisfies Story;
 
 export const EditSectionForm = {
-	...Default,
+	...UKNav,
 	play: ({ canvas, userEvent }) => {
 		// ! is used here to make sure we get an error in storybook if this
 		// can't be found.
