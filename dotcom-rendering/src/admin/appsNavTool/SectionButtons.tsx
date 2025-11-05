@@ -18,7 +18,7 @@ type Props = {
 	mobileOverride: MobileOverride | undefined;
 };
 
-export const SectionActions = (props: Props) => (
+export const SectionButtons = (props: Props) => (
 	<>
 		<Edit
 			location={props.location}

@@ -16,7 +16,7 @@ type Props = {
 	publish: () => Promise<void>;
 };
 
-export const MenuActions = (props: Props) => (
+export const MenuButtons = (props: Props) => (
 	<Menu>
 		<Undo history={props.history} />
 		<Reset

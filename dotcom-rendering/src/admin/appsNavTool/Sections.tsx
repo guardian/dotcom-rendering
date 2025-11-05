@@ -4,7 +4,7 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { type Section as SectionModel } from './appsNav';
-import { SectionActions } from './SectionActions';
+import { SectionButtons } from './SectionButtons';
 import { SvgChevronDownSingle } from '@guardian/source/react-components';
 import type { ReactNode } from 'react';
 
@@ -38,7 +38,7 @@ const Section = (props: {
 			guardianBaseUrl={props.guardianBaseUrl}
 			location={props.location}
 		>
-			<SectionActions
+			<SectionButtons
 				location={props.location}
 				title={props.section.title}
 				path={props.section.path}

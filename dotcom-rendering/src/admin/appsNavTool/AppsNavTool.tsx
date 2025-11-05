@@ -2,7 +2,7 @@ import { headlineMedium34Object, space } from '@guardian/source/foundations';
 import { useReducer } from 'react';
 import { type AppsNav } from './appsNav';
 import { DispatchContext, reducer } from './state';
-import { MenuActions } from './MenuActions';
+import { MenuButtons } from './MenuButtons';
 import { Sections } from './Sections';
 import { getEditionFromId, type EditionId } from '../../lib/edition';
 import { EditDialog } from './EditDialog';
@@ -25,7 +25,7 @@ export const AppsNavTool = (props: Props) => {
 	return (
 		<DispatchContext.Provider value={dispatch}>
 			<Heading editionId={props.editionId} />
-			<MenuActions
+			<MenuButtons
 				initialSections={props.nav.pillars}
 				history={state.history}
 				publish={async () =>
