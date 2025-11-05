@@ -118,12 +118,10 @@ const insertAction = (
 	const result = insertSection(state.sections, location, section);
 
 	if (result.kind === 'error') {
-		return {
-			...state,
-			message: error(
-				`Failed to insert at location ${location}, ${result.error}`,
-			),
-		};
+		return errorState(
+			`Failed to insert at location ${location}, ${result.error}`,
+			state,
+		);
 	}
 
 	return {
@@ -146,12 +144,10 @@ const deleteAction = (
 	const result = deleteSection(state.sections, location);
 
 	if (result.kind === 'error') {
-		return {
-			...state,
-			message: error(
-				`Failed to delete at location ${location}, ${result.error}`,
-			),
-		};
+		return errorState(
+			`Failed to delete at location ${location}, ${result.error}`,
+			state,
+		);
 	}
 
 	return {
@@ -181,12 +177,10 @@ const moveAction = (
 	const result = moveSection(state.sections, location, distance);
 
 	if (result.kind === 'error') {
-		return {
-			...state,
-			message: error(
-				`Failed to move ${distance} at location ${location}, ${result.error}`,
-			),
-		};
+		return errorState(
+			`Failed to move ${distance} at location ${location}, ${result.error}`,
+			state,
+		);
 	}
 
 	return {
@@ -217,12 +211,10 @@ const updateAction = (
 	const result = updateSection(state.sections, location, title, path);
 
 	if (result.kind === 'error') {
-		return {
-			...state,
-			message: error(
-				`Failed to update section at location ${location}, ${result.error}`,
-			),
-		};
+		return errorState(
+			`Failed to update section at location ${location}, ${result.error}`,
+			state,
+		);
 	}
 
 	return {
@@ -249,7 +241,7 @@ const undo = (state: State): State => {
 
 	switch (lastEvent?.kind) {
 		case undefined:
-			return { ...state, message: error('Cannot undo, no more history') };
+			return errorState('Cannot undo, no more history', state);
 		case 'delete':
 			return insertAction(
 				state,
@@ -287,10 +279,7 @@ export const reducer = (state: State, action: Action): State => {
 			return undo(state);
 		case 'reset': {
 			if (state.history.length === 0) {
-				return {
-					...state,
-					message: error('Cannot reset, nothing has changed'),
-				};
+				return errorState('Cannot reset, nothing has changed', state);
 			}
 
 			return {
@@ -315,7 +304,7 @@ export const reducer = (state: State, action: Action): State => {
 		case 'publishSuccess':
 			return { ...state, message: ok('Publication successful.') };
 		case 'publishError':
-			return { ...state, message: error('Publication failed.') };
+			return errorState('Publication failed.', state);
 		case 'edit':
 			return {
 				...state,
@@ -338,3 +327,8 @@ export const reducer = (state: State, action: Action): State => {
 			);
 	}
 };
+
+const errorState = (message: string, state: State): State => ({
+	...state,
+	message: error(message),
+});
