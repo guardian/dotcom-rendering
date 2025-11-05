@@ -32,21 +32,37 @@ export type InlineProductCardProps = {
 	lowestPrice?: string;
 };
 
-const baseCard = css`
-	padding: ${space[2]}px ${space[3]}px ${space[3]}px;
-	display: grid;
+const defaultGrid = css`
 	grid-template:
 		'image info'
 		'buttons buttons'
 		'custom-attributes custom-attributes' / 1fr 1fr;
-	column-gap: 10px;
-	row-gap: ${space[4]}px;
-	max-width: 100%;
 	${from.mobileLandscape} {
 		grid-template:
 			'image info' auto
 			'image buttons' 1fr
 			'custom-attributes custom-attributes' / 1fr 1fr;
+	}
+`;
+
+const noCustomAttributesGrid = css`
+	grid-template:
+		'image info'
+		'buttons buttons' / 1fr 1fr;
+	${from.mobileLandscape} {
+		grid-template:
+			'image info' auto
+			'image buttons' 1fr / 1fr 1fr;
+	}
+`;
+
+const baseCard = css`
+	padding: ${space[2]}px ${space[3]}px ${space[3]}px;
+	display: grid;
+	column-gap: 10px;
+	row-gap: ${space[4]}px;
+	max-width: 100%;
+	${from.mobileLandscape} {
 		column-gap: 20px;
 		row-gap: ${space[2]}px;
 	}
@@ -166,6 +182,9 @@ export const ProductCardInline = ({
 		css={[
 			isCardOnly ? productCard : showcaseCard,
 			shouldShowLeftColCard && !isCardOnly && hideFromWide,
+			customAttributes.length > 0 && !isCardOnly
+				? defaultGrid
+				: noCustomAttributesGrid,
 		]}
 	>
 		<div css={imageGridArea}>
