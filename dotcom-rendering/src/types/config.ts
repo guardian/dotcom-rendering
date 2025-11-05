@@ -8,7 +8,6 @@ import {
 	optional,
 	record,
 	string,
-	templateLiteral,
 	undefined,
 	union,
 	type z,
@@ -45,17 +44,17 @@ const CommercialConfigTypeSchema = object({
  * Narrowest representation of the server-side tests
  * object shape, which is [defined in `frontend`](https://github.com/guardian/frontend/blob/23743723030a041e4f4f59fa265ee2be0bb51825/common/app/experiments/ExperimentsDefinition.scala#L24-L26).
  */
-const VariantKeySchema = templateLiteral([string(), literal('Variant')]);
-const VariantTestsSchema = record(VariantKeySchema, literal('variant'));
+// const VariantKeySchema = templateLiteral([string(), literal('Variant')]);
+// const VariantTestsSchema = record(VariantKeySchema, literal('variant'));
 
-const ControlKeySchema = templateLiteral([string(), literal('Control')]);
-const ControlTestsSchema = record(ControlKeySchema, literal('control'));
+// const ControlKeySchema = templateLiteral([string(), literal('Control')]);
+// const ControlTestsSchema = record(ControlKeySchema, literal('control'));
 
 // TODO this is not exactly what we want
-export const ServerSideTestsSchema = union([
-	VariantTestsSchema,
-	ControlTestsSchema,
-]);
+export const ServerSideTestsSchema = record(
+	string(),
+	union([literal('variant'), literal('control')]),
+);
 
 export type ServerSideTests = z.infer<typeof ServerSideTestsSchema>;
 
