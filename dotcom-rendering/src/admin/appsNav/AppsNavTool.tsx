@@ -34,14 +34,14 @@ export const AppsNavTool = (props: Props) => {
 						: dispatch({ kind: 'publishError' })
 				}
 			/>
-			<InsertDialog insertingAt={state.insertingAt} />
-			<EditDialog editing={state.editing} />
 			<Sections
 				sections={state.sections}
 				guardianBaseUrl={props.guardianBaseUrl}
 				location={[]}
 			/>
 			<StatusMessage message={state.message} />
+			<InsertDialog insertingAt={state.insertingAt} />
+			<EditDialog editing={state.editing} />
 		</DispatchContext.Provider>
 	);
 };
