@@ -3,16 +3,16 @@ import {
 	palette,
 	space,
 } from '@guardian/source/foundations';
-import { useCallback, useReducer } from 'react';
+import { useReducer } from 'react';
 import { type AppsNav } from './appsNav';
 import { InlineError, InlineSuccess } from '@guardian/source/react-components';
-import { DispatchContext, reducer, useDispatch } from './appsNavContext';
+import { DispatchContext, reducer } from './appsNavContext';
 import type { Result } from '../../lib/result';
-import { SectionForm } from './SectionForm';
 import { MenuActions } from './MenuActions';
 import { Sections } from './Sections';
 import { getEditionFromId, type EditionId } from '../../lib/edition';
 import { EditDialog } from './EditDialog';
+import { InsertDialog } from './InsertDialog';
 
 type Props = {
 	nav: AppsNav;
@@ -63,42 +63,6 @@ const Heading = (props: { editionId: EditionId }) => (
 		{`${getEditionFromId(props.editionId).title} apps nav`}
 	</h1>
 );
-
-const InsertDialog = (props: { insertingAt: number[] | undefined }) => {
-	const dispatch = useDispatch();
-
-	const submit = useCallback(
-		(title: string, url: URL) => {
-			if (props.insertingAt !== undefined) {
-				dispatch({
-					kind: 'insert',
-					section: {
-						title,
-						path: url.pathname.slice(1),
-					},
-					location: props.insertingAt,
-				});
-			}
-		},
-		[props.insertingAt, dispatch],
-	);
-
-	const cancel = useCallback(() => {
-		dispatch({ kind: 'cancelInsert' });
-	}, [dispatch]);
-
-	return (
-		<SectionForm
-			heading="Add Section"
-			open={props.insertingAt !== undefined}
-			initialTitle=""
-			initialPath=""
-			initialMobileOverride={undefined}
-			submit={submit}
-			cancel={cancel}
-		/>
-	);
-};
 
 const Message = (props: { message: Result<string, string> | undefined }) => {
 	if (props.message === undefined) {
