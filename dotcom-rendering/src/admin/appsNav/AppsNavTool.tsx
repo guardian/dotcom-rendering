@@ -6,7 +6,7 @@ import {
 import { useReducer } from 'react';
 import { type AppsNav } from './appsNav';
 import { InlineError, InlineSuccess } from '@guardian/source/react-components';
-import { DispatchContext, reducer } from './appsNavContext';
+import { DispatchContext, reducer } from './state';
 import type { Result } from '../../lib/result';
 import { MenuActions } from './MenuActions';
 import { Sections } from './Sections';

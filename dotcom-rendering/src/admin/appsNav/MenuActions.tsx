@@ -7,7 +7,7 @@ import {
 	SvgUpload,
 } from '@guardian/source/react-components';
 import type { Section } from './appsNav';
-import { useDispatch, type HistoryEvent } from './appsNavContext';
+import { useDispatch, type HistoryEvent } from './state';
 import type { ReactNode } from 'react';
 
 type Props = {

@@ -8,7 +8,7 @@ import {
 	SvgPlus,
 } from '@guardian/source/react-components';
 import type { MobileOverride } from './appsNav';
-import { useDispatch } from './appsNavContext';
+import { useDispatch } from './state';
 import { css } from '@emotion/react';
 
 type Props = {

@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useDispatch, type State } from './appsNavContext';
+import { useDispatch, type State } from './state';
 import { SectionForm } from './SectionForm';
 
 type Props = {
