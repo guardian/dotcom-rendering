@@ -16,6 +16,8 @@ type Props = {
 	title: string;
 	path: string;
 	mobileOverride: MobileOverride | undefined;
+	index: number;
+	numberOfSections: number;
 };
 
 export const SectionButtons = (props: Props) => (
@@ -27,8 +29,12 @@ export const SectionButtons = (props: Props) => (
 			mobileOverride={props.mobileOverride}
 		/>
 		<Delete location={props.location} />
-		<MoveUp location={props.location} />
-		<MoveDown location={props.location} />
+		<MoveUp location={props.location} index={props.index} />
+		<MoveDown
+			location={props.location}
+			index={props.index}
+			numberOfSections={props.numberOfSections}
+		/>
 		<AddSubsection location={props.location} />
 	</>
 );
@@ -83,7 +89,7 @@ const Delete = (props: { location: Props['location'] }) => {
 	);
 };
 
-const MoveUp = (props: { location: Props['location'] }) => {
+const MoveUp = (props: { location: Props['location']; index: number }) => {
 	const dispatch = useDispatch();
 
 	return (
@@ -91,6 +97,7 @@ const MoveUp = (props: { location: Props['location'] }) => {
 			size="xsmall"
 			priority="secondary"
 			icon={<SvgArrowUpStraight />}
+			disabled={props.index === 0}
 			hideLabel
 			onClick={() =>
 				dispatch({ kind: 'moveUp', location: props.location })
@@ -104,7 +111,11 @@ const MoveUp = (props: { location: Props['location'] }) => {
 	);
 };
 
-const MoveDown = (props: { location: Props['location'] }) => {
+const MoveDown = (props: {
+	location: Props['location'];
+	index: number;
+	numberOfSections: number;
+}) => {
 	const dispatch = useDispatch();
 
 	return (
@@ -112,6 +123,7 @@ const MoveDown = (props: { location: Props['location'] }) => {
 			size="xsmall"
 			priority="secondary"
 			icon={<SvgArrowDownStraight />}
+			disabled={props.index === props.numberOfSections - 1}
 			hideLabel
 			onClick={() =>
 				dispatch({ kind: 'moveDown', location: props.location })

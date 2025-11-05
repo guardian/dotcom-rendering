@@ -16,12 +16,14 @@ type Props = {
 
 export const Sections = (props: Props) => (
 	<ul css={{ paddingLeft: space[5] }}>
-		{props.sections.map((section, index) => (
+		{props.sections.map((section, index, sections) => (
 			<Section
 				key={`${section.title}-${section.path}`}
 				section={section}
 				guardianBaseUrl={props.guardianBaseUrl}
 				location={[...props.location, index]}
+				index={index}
+				numberOfSections={sections.length}
 			/>
 		))}
 	</ul>
@@ -31,6 +33,8 @@ const Section = (props: {
 	section: SectionModel;
 	guardianBaseUrl: string;
 	location: number[];
+	index: number;
+	numberOfSections: number;
 }) => (
 	<Li>
 		<WithSubSections
@@ -43,6 +47,8 @@ const Section = (props: {
 				title={props.section.title}
 				path={props.section.path}
 				mobileOverride={props.section.mobileOverride}
+				index={props.index}
+				numberOfSections={props.numberOfSections}
 			/>
 			<Chevron subSections={props.section.sections} />
 			<Title location={props.location}>{props.section.title}</Title>{' '}
