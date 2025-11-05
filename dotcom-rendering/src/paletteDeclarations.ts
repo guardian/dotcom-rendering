@@ -8238,10 +8238,17 @@ type ColourName = keyof typeof paletteColours;
 const paletteDeclarations = (
 	format: ArticleFormat,
 	colourScheme: 'light' | 'dark',
+	defaultFormat?: ArticleFormat,
 ): string[] =>
-	Object.entries(paletteColours).map(
-		([colourName, colour]) =>
-			`${colourName}: ${colour[colourScheme](format)};`,
-	);
+	Object.entries(paletteColours).map(([colourName, colour]) => {
+		if (defaultFormat) {
+			const defaultColour = colour[colourScheme](defaultFormat);
+			const formatColour = colour[colourScheme](format);
+			return defaultColour === formatColour
+				? ''
+				: `${colourName}: ${formatColour};`;
+		}
+		return `${colourName}: ${colour[colourScheme](format)};`;
+	});
 
 export { type ColourName, paletteDeclarations };

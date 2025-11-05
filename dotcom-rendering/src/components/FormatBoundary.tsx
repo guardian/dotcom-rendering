@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
-import type { ArticleFormat } from '../lib/articleFormat';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	Pillar,
+} from '../lib/articleFormat';
 import { paletteDeclarations } from '../paletteDeclarations';
 import { useConfig } from './ConfigContext';
 
@@ -27,6 +32,13 @@ export const FormatBoundary = ({ format, children }: Props) => {
 		setIsStorybook(true);
 	}, []);
 
+	// Default fronts format (will vary for articles)
+	const defaultFormat = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: Pillar.News,
+	};
+
 	return (
 		<div
 			data-format-theme={format.theme}
@@ -34,11 +46,15 @@ export const FormatBoundary = ({ format, children }: Props) => {
 			data-format-display={format.display}
 			css={[
 				displayContents,
-				paletteDeclarations(format, 'light'),
+				paletteDeclarations(format, 'light', defaultFormat),
 				darkModeAvailable &&
 					css`
 						@media (prefers-color-scheme: dark) {
-							${paletteDeclarations(format, 'dark')}
+							${paletteDeclarations(
+								format,
+								'dark',
+								defaultFormat,
+							)}
 						}
 					`,
 				isStorybook &&
