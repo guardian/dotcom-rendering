@@ -1,18 +1,13 @@
-import {
-	headlineMedium34Object,
-	palette,
-	space,
-} from '@guardian/source/foundations';
+import { headlineMedium34Object, space } from '@guardian/source/foundations';
 import { useReducer } from 'react';
 import { type AppsNav } from './appsNav';
-import { InlineError, InlineSuccess } from '@guardian/source/react-components';
 import { DispatchContext, reducer } from './state';
-import type { Result } from '../../lib/result';
 import { MenuActions } from './MenuActions';
 import { Sections } from './Sections';
 import { getEditionFromId, type EditionId } from '../../lib/edition';
 import { EditDialog } from './EditDialog';
 import { InsertDialog } from './InsertDialog';
+import { StatusMessage } from './StatusMessage';
 
 type Props = {
 	nav: AppsNav;
@@ -46,7 +41,7 @@ export const AppsNavTool = (props: Props) => {
 				guardianBaseUrl={props.guardianBaseUrl}
 				location={[]}
 			/>
-			<Message message={state.message} />
+			<StatusMessage message={state.message} />
 		</DispatchContext.Provider>
 	);
 };
@@ -63,42 +58,3 @@ const Heading = (props: { editionId: EditionId }) => (
 		{`${getEditionFromId(props.editionId).title} apps nav`}
 	</h1>
 );
-
-const Message = (props: { message: Result<string, string> | undefined }) => {
-	if (props.message === undefined) {
-		return null;
-	}
-
-	return (
-		<output
-			css={{
-				display: 'block',
-				position: 'sticky',
-				bottom: 0,
-				paddingLeft: space[4],
-				paddingTop: space[2],
-				paddingBottom: space[1],
-				borderTopWidth: 2,
-				borderTopStyle: 'solid',
-				backgroundColor: palette.neutral[100],
-			}}
-			style={{
-				borderTopColor:
-					props.message.kind === 'ok'
-						? palette.success[400]
-						: palette.error[400],
-			}}
-		>
-			<MessageOutput message={props.message} />
-		</output>
-	);
-};
-
-const MessageOutput = (props: { message: Result<string, string> }) => {
-	switch (props.message.kind) {
-		case 'ok':
-			return <InlineSuccess>{props.message.value}</InlineSuccess>;
-		case 'error':
-			return <InlineError>{props.message.error}</InlineError>;
-	}
-};
