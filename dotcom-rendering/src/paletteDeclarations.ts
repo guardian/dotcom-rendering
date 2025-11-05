@@ -7335,6 +7335,10 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[86],
 	},
+	'--loop-video-subtitle-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
 	'--masthead-nav-background': {
 		light: mastheadNavBackground,
 		dark: mastheadNavBackground,
