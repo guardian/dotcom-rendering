@@ -15,7 +15,7 @@ type Props = {
 };
 
 export const Sections = (props: Props) => (
-	<ul css={{ paddingLeft: 20 }}>
+	<ul css={{ paddingLeft: space[5] }}>
 		{props.sections.map((section, index) => (
 			<Section
 				key={`${section.title}-${section.path}`}
