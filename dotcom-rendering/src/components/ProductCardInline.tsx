@@ -193,6 +193,7 @@ export const ProductCardInline = ({
 		<div css={buttonWrapper}>
 			<ProductCardButtons
 				productCtas={productCtas}
+				minimisePadding={true}
 				dataComponent={'inline-product-card-buttons'}
 			/>
 		</div>
