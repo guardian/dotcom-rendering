@@ -14,7 +14,7 @@ import {
 } from './appsNav';
 import { error, ok, type Result } from '../../lib/result';
 
-type State = {
+export type State = {
 	sections: Section[];
 	history: HistoryEvent[];
 	message?: Result<string, string>;

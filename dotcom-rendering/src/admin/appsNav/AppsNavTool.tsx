@@ -4,7 +4,7 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { useCallback, useReducer } from 'react';
-import { type AppsNav, type MobileOverride } from './appsNav';
+import { type AppsNav } from './appsNav';
 import { InlineError, InlineSuccess } from '@guardian/source/react-components';
 import { DispatchContext, reducer, useDispatch } from './appsNavContext';
 import type { Result } from '../../lib/result';
@@ -12,6 +12,7 @@ import { SectionForm } from './SectionForm';
 import { MenuActions } from './MenuActions';
 import { Sections } from './Sections';
 import { getEditionFromId, type EditionId } from '../../lib/edition';
+import { EditDialog } from './EditDialog';
 
 type Props = {
 	nav: AppsNav;
@@ -93,52 +94,6 @@ const InsertDialog = (props: { insertingAt: number[] | undefined }) => {
 			initialTitle=""
 			initialPath=""
 			initialMobileOverride={undefined}
-			submit={submit}
-			cancel={cancel}
-		/>
-	);
-};
-
-const EditDialog = (props: {
-	editing:
-		| {
-				title: string;
-				path: string;
-				mobileOverride: MobileOverride | undefined;
-				location: number[];
-		  }
-		| undefined;
-}) => {
-	const dispatch = useDispatch();
-
-	const submit = useCallback(
-		(title: string, url: URL) => {
-			if (props.editing !== undefined) {
-				dispatch({
-					kind: 'update',
-					title,
-					path: url.pathname.slice(1),
-					location: props.editing.location,
-				});
-			}
-		},
-		[props.editing, dispatch],
-	);
-
-	const cancel = useCallback(() => {
-		dispatch({ kind: 'cancelEdit' });
-	}, [dispatch]);
-
-	return (
-		<SectionForm
-			heading="Edit Section"
-			open={props.editing !== undefined}
-			initialTitle={props.editing?.title ?? ''}
-			initialPath={new URL(
-				props.editing?.path ?? '',
-				'https://www.theguardian.com',
-			).toString()}
-			initialMobileOverride={props.editing?.mobileOverride}
 			submit={submit}
 			cancel={cancel}
 		/>
