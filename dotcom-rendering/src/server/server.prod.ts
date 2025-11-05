@@ -11,14 +11,14 @@ import {
 } from './handler.article.apps';
 import {
 	handleArticle,
-	handleArticleZod,
+	handleArticleZodMini,
 	handleBlocks,
 	handleInteractive,
 } from './handler.article.web';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import {
 	handleFront,
-	handleFrontZod,
+	handleFrontZodMini,
 	handleTagPage,
 } from './handler.front.web';
 import {
@@ -63,11 +63,11 @@ export const prodServer = (): void => {
 	}
 
 	app.post('/Article', logRenderTime, handleArticle);
-	app.post('/ArticleZod', logRenderTime, handleArticleZod);
+	app.post('/ArticleZodMini', logRenderTime, handleArticleZodMini);
 	app.post('/Interactive', logRenderTime, handleInteractive);
 	app.post('/Blocks', logRenderTime, handleBlocks);
 	app.post('/Front', logRenderTime, handleFront);
-	app.post('/FrontZod', logRenderTime, handleFrontZod);
+	app.post('/FrontZodMini', logRenderTime, handleFrontZodMini);
 	app.post('/TagPage', logRenderTime, handleTagPage);
 	app.post(
 		'/FootballMatchListPage',

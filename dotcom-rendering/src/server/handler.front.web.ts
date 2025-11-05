@@ -148,9 +148,9 @@ export const handleFront: RequestHandler = ({ body }, res) => {
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
-export const handleFrontZod: RequestHandler = ({ body }, res) => {
+export const handleFrontZodMini: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('front');
-	const data = validateFeFrontZod(body);
+	const data = validateFeFrontZodMini(body);
 	const front = enhanceFront(data);
 	const { html, prefetchScripts } = renderFront({
 		front,
@@ -167,7 +167,7 @@ export const handleTagPage: RequestHandler = ({ body }, res) => {
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
-const validateFeFrontZod = (data: unknown): FEFront => {
+const validateFeFrontZodMini = (data: unknown): FEFront => {
 	const result = safeParse(FEFrontSchema, data);
 	if (result.success) {
 		const frontendData: FEFront = result.data;

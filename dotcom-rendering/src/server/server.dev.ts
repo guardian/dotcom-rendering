@@ -9,14 +9,14 @@ import {
 } from './handler.article.apps';
 import {
 	handleArticle,
-	handleArticleZod,
+	handleArticleZodMini,
 	handleBlocks,
 	handleInteractive,
 } from './handler.article.web';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import {
 	handleFront,
-	handleFrontZod,
+	handleFrontZodMini,
 	handleTagPage,
 } from './handler.front.web';
 import {
@@ -94,11 +94,12 @@ const renderer = Router();
 // populates req.body with the content data from a production
 // URL if req.params.url is present
 renderer.use(getContentFromURLMiddleware);
-renderer.get('/Article/*url', handleArticleZod);
+renderer.get('/Article/*url', handleArticle);
+renderer.get('/ArticleZod/*url', handleArticleZodMini);
 renderer.get('/Interactive/*url', handleInteractive);
 renderer.get('/Blocks/*url', handleBlocks);
 renderer.get('/Front/*url', handleFront);
-renderer.get('/FrontZod/*url', handleFrontZod); // TODO: this is just for testing
+renderer.get('/FrontZod/*url', handleFrontZodMini); // TODO: this is just for testing
 renderer.get('/TagPage/*url', handleTagPage);
 renderer.get('/EmailNewsletters/*url', handleAllEditorialNewslettersPage);
 renderer.get('/AppsArticle/*url', handleAppsArticle);

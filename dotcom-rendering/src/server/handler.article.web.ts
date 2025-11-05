@@ -12,7 +12,7 @@ import { renderBlocks, renderHtml } from './render.article.web';
 const validateFeArticleAJV = (data: unknown): FEArticle =>
 	validateAsFEArticle(data);
 
-const validateFeArticleZod = (data: unknown): FEArticle => {
+const validateFeArticleZodMini = (data: unknown): FEArticle => {
 	const result = FEArticleSchema.safeParse(data);
 	if (result.success) {
 		const frontendData: FEArticle = result.data;
@@ -26,9 +26,9 @@ const validateFeArticleZod = (data: unknown): FEArticle => {
 	}
 };
 
-export const handleArticleZod: RequestHandler = ({ body }, res) => {
+export const handleArticleZodMini: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'web');
-	const frontendData = validateFeArticleZod(body);
+	const frontendData = validateFeArticleZodMini(body);
 	const article = enhanceArticleType(frontendData, 'Web');
 	const { html, prefetchScripts } = renderHtml({
 		article,
