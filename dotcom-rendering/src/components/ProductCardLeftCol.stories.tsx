@@ -120,7 +120,7 @@ export const LotsOfCtas = {
 			},
 			{
 				url: 'https://www.theguardian.com',
-				price: '£99.99',
+				price: '£105.99',
 				retailer: 'John Lewis',
 				text: '',
 			},

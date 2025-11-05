@@ -1,3 +1,4 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type {
 	ButtonPriority,
@@ -16,6 +17,7 @@ type ProductLinkButtonProps = {
 	fullwidth?: boolean;
 	priority?: ButtonPriority;
 	dataComponent?: string;
+	minimisePadding?: boolean;
 };
 
 const fullWidthStyle = css`
@@ -24,6 +26,15 @@ const fullWidthStyle = css`
 
 const heightAutoStyle = css`
 	height: auto;
+`;
+
+const reduceSpace = css`
+	& .src-button-space {
+		width: 8px;
+	}
+	> svg {
+		margin-left: -2px;
+	}
 `;
 
 export const theme: Partial<ThemeButton> = {
@@ -41,12 +52,15 @@ export const ProductLinkButton = ({
 	url,
 	size = 'default',
 	fullwidth = false,
+	minimisePadding = true,
 	priority = 'primary',
 	dataComponent = 'in-body-product-link-button',
 }: ProductLinkButtonProps) => {
-	const cssOverrides = fullwidth
-		? [fullWidthStyle, heightAutoStyle]
-		: heightAutoStyle;
+	const cssOverrides: SerializedStyles[] = [
+		heightAutoStyle,
+		...(fullwidth ? [fullWidthStyle] : []),
+		...(minimisePadding ? [reduceSpace] : []),
+	];
 
 	return (
 		<LinkButton
@@ -64,6 +78,13 @@ export const ProductLinkButton = ({
 			size={size}
 			cssOverrides={cssOverrides}
 			data-component={dataComponent}
+			style={
+				minimisePadding
+					? {
+							padding: '0 10px 0 12px',
+					  }
+					: {}
+			}
 		>
 			<span
 				css={css`
