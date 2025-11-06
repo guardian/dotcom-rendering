@@ -4,32 +4,10 @@ import type { ReactNode } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { parseHtml } from '../lib/domUtils';
 import type { NestedArticleElement } from '../lib/renderElement';
-import type {
-	FEElement,
-	ProductBlockElement,
-	ProductCta,
-	ProductDisplayType,
-	ProductImage,
-} from '../types/content';
+import type { ProductBlockElement } from '../types/content';
 import { ProductCardInline } from './ProductCardInline';
 import { ProductCardLeftCol } from './ProductCardLeftCol';
 import { buildElementTree } from './SubheadingBlockComponent';
-
-export type Product = {
-	primaryHeadline: string;
-	secondaryHeadline: string;
-	brandName: string;
-	productName: string;
-	image: ProductImage;
-	retailer: string;
-	customAttributes: {
-		name: string;
-		value: string;
-	}[];
-	content: FEElement[];
-	displayType: ProductDisplayType;
-	productCtas: ProductCta[];
-};
 
 const contentContainer = css`
 	position: relative;
