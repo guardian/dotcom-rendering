@@ -58,8 +58,9 @@ export const trackLink = (
 	value: string,
 	renderingTarget: RenderingTarget,
 	abTest?: CurrentSignInGateABTest,
+	labels?: string[],
 ): void => {
-	const component = withComponentId(componentId);
+	const component = { ...withComponentId(componentId), labels };
 
 	submitClickEventTracking(
 		{

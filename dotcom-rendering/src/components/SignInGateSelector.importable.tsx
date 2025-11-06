@@ -396,7 +396,6 @@ const ShowSignInGateAuxia = ({
 	logTreatmentInteractionCall,
 	signInGateVersion,
 }: ShowSignInGateAuxiaProps) => {
-	const componentId = 'main_variant_5';
 	const checkoutCompleteCookieData = undefined;
 	const personaliseSignInGateAfterCheckoutSwitch = undefined;
 
@@ -468,7 +467,6 @@ const ShowSignInGateAuxia = ({
 			}
 		}
 	}, [
-		componentId,
 		hasBeenSeen,
 		browserId,
 		contributionsServiceUrl,
@@ -486,7 +484,7 @@ const ShowSignInGateAuxia = ({
 			setShowGate(false);
 		},
 		abTest,
-		ophanComponentId: componentId,
+		ophanComponentId: treatmentId,
 		checkoutCompleteCookieData,
 		personaliseSignInGateAfterCheckoutSwitch,
 		userTreatment,
