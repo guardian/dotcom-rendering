@@ -32,21 +32,37 @@ export type InlineProductCardProps = {
 	lowestPrice?: string;
 };
 
-const baseCard = css`
-	padding: ${space[2]}px ${space[3]}px ${space[3]}px;
-	display: grid;
+const defaultGrid = css`
 	grid-template:
 		'image info'
 		'buttons buttons'
 		'custom-attributes custom-attributes' / 1fr 1fr;
-	column-gap: 10px;
-	row-gap: ${space[4]}px;
-	max-width: 100%;
 	${from.mobileLandscape} {
 		grid-template:
 			'image info' auto
 			'image buttons' 1fr
 			'custom-attributes custom-attributes' / 1fr 1fr;
+	}
+`;
+
+const noCustomAttributesGrid = css`
+	grid-template:
+		'image info'
+		'buttons buttons' / 1fr 1fr;
+	${from.mobileLandscape} {
+		grid-template:
+			'image info' auto
+			'image buttons' 1fr / 1fr 1fr;
+	}
+`;
+
+const baseCard = css`
+	padding: ${space[2]}px ${space[3]}px ${space[3]}px;
+	display: grid;
+	column-gap: 10px;
+	row-gap: ${space[4]}px;
+	max-width: 100%;
+	${from.mobileLandscape} {
 		column-gap: 20px;
 		row-gap: ${space[2]}px;
 	}
@@ -161,51 +177,56 @@ export const ProductCardInline = ({
 	isCardOnly = false,
 	shouldShowLeftColCard = false,
 	lowestPrice,
-}: InlineProductCardProps) => (
-	<div
-		css={[
-			isCardOnly ? productCard : showcaseCard,
-			shouldShowLeftColCard && !isCardOnly && hideFromWide,
-		]}
-	>
-		<div css={imageGridArea}>
-			<ProductCardImage
-				format={format}
-				image={image}
-				url={productCtas[0]?.url}
-			/>
-		</div>
-		<div css={productInfoContainer}>
-			<div css={primaryHeading}>{brandName}</div>
-			<div css={productNameStyle}>{productName}</div>
-			{!!lowestPrice && (
-				<div css={productNameStyle}>
-					{productCtas.length > 1 ? (
-						<>
-							from <strong>{lowestPrice}</strong>
-						</>
-					) : (
-						<strong>{lowestPrice}</strong>
-					)}
+}: InlineProductCardProps) => {
+	const hasCustomAttributes = customAttributes.length > 0 && !isCardOnly;
+
+	return (
+		<div
+			css={[
+				isCardOnly ? productCard : showcaseCard,
+				shouldShowLeftColCard && !isCardOnly && hideFromWide,
+				hasCustomAttributes ? defaultGrid : noCustomAttributesGrid,
+			]}
+		>
+			<div css={imageGridArea}>
+				<ProductCardImage
+					format={format}
+					image={image}
+					url={productCtas[0]?.url}
+				/>
+			</div>
+			<div css={productInfoContainer}>
+				<div css={primaryHeading}>{brandName}</div>
+				<div css={productNameStyle}>{productName}</div>
+				{!!lowestPrice && (
+					<div css={productNameStyle}>
+						{productCtas.length > 1 ? (
+							<>
+								from <strong>{lowestPrice}</strong>
+							</>
+						) : (
+							<strong>{lowestPrice}</strong>
+						)}
+					</div>
+				)}
+			</div>
+			<div css={buttonWrapper}>
+				<ProductCardButtons
+					productCtas={productCtas}
+					dataComponent={'inline-product-card-buttons'}
+				/>
+			</div>
+			{hasCustomAttributes && (
+				<div css={customAttributesContainer}>
+					{customAttributes.map((customAttribute) => (
+						<CustomAttribute
+							key={customAttribute.name}
+							name={customAttribute.name}
+							value={customAttribute.value}
+						/>
+					))}
 				</div>
 			)}
 		</div>
-		<div css={buttonWrapper}>
-			<ProductCardButtons
-				productCtas={productCtas}
-				dataComponent={'inline-product-card-buttons'}
-			/>
-		</div>
-		{!isCardOnly && customAttributes.length > 0 && (
-			<div css={customAttributesContainer}>
-				{customAttributes.map((customAttribute) => (
-					<CustomAttribute
-						key={customAttribute.name}
-						name={customAttribute.name}
-						value={customAttribute.value}
-					/>
-				))}
-			</div>
-		)}
-	</div>
-);
+	);
+};
