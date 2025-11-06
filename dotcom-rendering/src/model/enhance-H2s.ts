@@ -11,7 +11,7 @@ const shouldUseLegacyIDs = (elements: FEElement[]): boolean => {
 	);
 };
 
-export const extractText = (html: string): string => {
+const extractText = (html: string): string => {
 	const frag = JSDOM.fragment(html);
 	if (!frag.firstElementChild) return '';
 	return frag.textContent?.trim() ?? '';
