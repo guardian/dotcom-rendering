@@ -32,6 +32,8 @@ type Props = {
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
 	showLabsRedesign?: boolean;
+	/** Feature flag for the enabling CORS loading on looping video */
+	enableLoopVideoCORS?: boolean;
 };
 
 type BoostProperties = {
@@ -134,6 +136,8 @@ type OneCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	isSplashCard?: boolean;
 	showLabsRedesign?: boolean;
+	/** Feature flag for the enabling CORS loading on looping video */
+	enableLoopVideoCORS?: boolean;
 };
 
 export const OneCardLayout = ({
@@ -148,6 +152,7 @@ export const OneCardLayout = ({
 	containerLevel,
 	isSplashCard,
 	showLabsRedesign,
+	enableLoopVideoCORS,
 }: OneCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -202,6 +207,7 @@ export const OneCardLayout = ({
 					headlinePosition={isSplashCard ? 'outer' : 'inner'}
 					showLabsRedesign={showLabsRedesign}
 					subtitleSize={subtitleSize}
+					enableLoopVideoCORS={enableLoopVideoCORS}
 				/>
 			</LI>
 		</UL>
@@ -305,6 +311,7 @@ export const FlexibleSpecial = ({
 	containerLevel = 'Primary',
 	collectionId,
 	showLabsRedesign,
+	enableLoopVideoCORS,
 }: Props) => {
 	const snaps = [...groupedTrails.snap].slice(0, 1).map((snap) => ({
 		...snap,
@@ -349,6 +356,7 @@ export const FlexibleSpecial = ({
 					containerLevel={containerLevel}
 					isSplashCard={true}
 					showLabsRedesign={showLabsRedesign}
+					enableLoopVideoCORS={enableLoopVideoCORS}
 				/>
 			)}
 

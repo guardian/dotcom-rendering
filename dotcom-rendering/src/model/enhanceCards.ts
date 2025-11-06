@@ -200,13 +200,9 @@ export const getActiveMediaAtom = (
 	cardTrailImage?: string,
 ): MainMedia | undefined => {
 	if (mediaAtom) {
-		const m3u8MimeType = [
-			'application/vnd.apple.mpegurl',
-			'application/x-mpegURL',
-		];
-		const assets = mediaAtom.assets
-			.filter((_) => !m3u8MimeType.includes(_.mimeType ?? ''))
-			.filter(({ version }) => version === mediaAtom.activeVersion);
+		const assets = mediaAtom.assets.filter(
+			({ version }) => version === mediaAtom.activeVersion,
+		);
 
 		const videoAssets = assets.filter(
 			({ assetType }) => assetType === 'Video',
