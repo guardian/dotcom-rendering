@@ -19,7 +19,7 @@ const ArticleElementComponent = getNestedArticleElement({
 	shouldHideAds: false,
 });
 
-const productImage: ProductImage = {
+const productImage = {
 	url: 'https://media.guimcode.co.uk/cb193848ed75d40103eceaf12b448de2330770dc/0_0_725_725/725.jpg',
 	caption: 'Filter-2 test image for live demo',
 	height: 1,
@@ -27,9 +27,9 @@ const productImage: ProductImage = {
 	alt: 'Bosch Sky kettle',
 	credit: 'Photograph: Rachel Ogden/The Guardian',
 	displayCredit: false,
-};
+} satisfies ProductImage;
 
-const product: ProductBlockElement = {
+const product = {
 	_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
 	elementId: 'b1f6e8e2-3f3a-4f0c-8d1e-5f3e3e3e3e3e',
 	primaryHeading: '<em>Best Kettle overall</em>',
@@ -267,9 +267,9 @@ const product: ProductBlockElement = {
 			elementId: 'd98fc724-8908-46e2-acc6-4739ad4d5719',
 		},
 	],
-};
+} satisfies ProductBlockElement;
 
-const meta: Meta<typeof ProductElement> = {
+const meta = {
 	component: ProductElement,
 	title: 'Components/ProductElement',
 	args: {
@@ -306,7 +306,8 @@ const meta: Meta<typeof ProductElement> = {
 			</SectionComponent>
 		),
 	],
-};
+} satisfies Meta<typeof ProductElement>;
+
 export default meta;
 
 type Story = StoryObj<typeof ProductElement>;
@@ -332,7 +333,7 @@ export const DisplayCredit = {
 	},
 } satisfies Story;
 
-export const NoSecondaryHeading: Story = {
+export const NoSecondaryHeading = {
 	args: {
 		product: {
 			...product,
@@ -342,7 +343,7 @@ export const NoSecondaryHeading: Story = {
 	},
 } satisfies Story;
 
-export const NoPrimaryHeading: Story = {
+export const NoPrimaryHeading = {
 	args: {
 		product: {
 			...product,
@@ -352,7 +353,7 @@ export const NoPrimaryHeading: Story = {
 	},
 } satisfies Story;
 
-export const DisplayTypeProductCardOnly: Story = {
+export const DisplayTypeProductCardOnly = {
 	args: {
 		product: {
 			...product,
@@ -361,7 +362,7 @@ export const DisplayTypeProductCardOnly: Story = {
 	},
 } satisfies Story;
 
-export const DisplayTypeInlineOnly: Story = {
+export const DisplayTypeInlineOnly = {
 	args: {
 		product: {
 			...product,
@@ -370,7 +371,7 @@ export const DisplayTypeInlineOnly: Story = {
 	},
 } satisfies Story;
 
-export const MultipleProducts: Story = {
+export const MultipleProducts = {
 	render: (args) => (
 		<>
 			<ProductElement {...args} />
@@ -379,7 +380,7 @@ export const MultipleProducts: Story = {
 	),
 } satisfies Story;
 
-export const MultipleProductsWithoutStats: Story = {
+export const MultipleProductsWithoutStats = {
 	render: (args) => (
 		<>
 			<ProductElement
@@ -394,7 +395,7 @@ export const MultipleProductsWithoutStats: Story = {
 	),
 } satisfies Story;
 
-export const WithoutFields: Story = {
+export const WithoutFields = {
 	args: {
 		product: {
 			...product,
