@@ -838,6 +838,7 @@ export const FrontSection = ({
 									ophanComponentName={
 										labsDataAttributes?.ophanComponentName
 									}
+									isLabs={isLabs}
 								/>
 							</div>
 						)}

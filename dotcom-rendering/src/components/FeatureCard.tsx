@@ -741,6 +741,7 @@ export const FeatureCard = ({
 							ophanComponentName={
 								labsDataAttributes?.ophanComponentName
 							}
+							isLabs={isLabs}
 						/>
 					)}
 				</div>

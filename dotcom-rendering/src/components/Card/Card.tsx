@@ -441,6 +441,8 @@ export const Card = ({
 	const isVideoMainMedia =
 		mainMedia?.type === 'Video' && format.design !== ArticleDesign.Video;
 
+	const isLabs = format.theme === ArticleSpecial.Labs;
+
 	const decideAge = () => {
 		if (!webPublicationDate) return undefined;
 		const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
@@ -784,6 +786,7 @@ export const Card = ({
 						alignment="end"
 						ophanComponentLink={dataAttributes?.ophanComponentLink}
 						ophanComponentName={dataAttributes?.ophanComponentName}
+						isLabs={isLabs}
 					/>
 				</div>
 				{/** Tablet sized screens have vertical orientation */}
@@ -804,6 +807,7 @@ export const Card = ({
 						alignment="end"
 						ophanComponentLink={dataAttributes?.ophanComponentLink}
 						ophanComponentName={dataAttributes?.ophanComponentName}
+						isLabs={isLabs}
 					/>
 				</div>
 			</>

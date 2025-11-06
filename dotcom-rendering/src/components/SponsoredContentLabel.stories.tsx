@@ -33,6 +33,7 @@ const meta: Meta<typeof SponsoredContentLabel> = {
 			sponsorName: 'Guardian Org',
 			aboutThisLink: '#about',
 		},
+		isLabs: true,
 	},
 };
 

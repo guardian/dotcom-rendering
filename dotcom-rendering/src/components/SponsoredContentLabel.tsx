@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 import {
+	between,
+	from,
 	space,
 	textSansBold12,
 	visuallyHidden,
@@ -18,6 +20,8 @@ type SponsoredContentLabelProps = {
 	containerPalette?: DCRContainerPalette;
 	ophanComponentLink?: string;
 	ophanComponentName?: string;
+	isLabs?: boolean;
+	isAdvertisingPartner?: boolean;
 };
 
 const logoImageStyle = css`
@@ -65,6 +69,36 @@ const linkStyles = css`
 	justify-content: center;
 `;
 
+const badgeLink = css`
+	text-decoration: none;
+`;
+
+const imageStyles = css`
+	display: block;
+	width: auto;
+	max-width: 100%;
+	object-fit: contain;
+`;
+
+const frontsSectionBadgeSizingStyles = css`
+	height: auto;
+	width: 120px;
+
+	${from.tablet} {
+		width: 140px;
+	}
+
+	${from.leftCol} {
+		width: 200px;
+	}
+`;
+
+const imageAdvertisingPartnerStyles = css`
+	${between.leftCol.and.wide} {
+		max-width: 130px;
+	}
+`;
+
 /**
  * Component used to display "paid for" label alonside the sponsor logo
  * for a particular set of branding
@@ -79,64 +113,90 @@ export const SponsoredContentLabel = ({
 	containerPalette,
 	ophanComponentLink,
 	ophanComponentName,
+	isLabs = false,
+	isAdvertisingPartner = false,
 }: SponsoredContentLabelProps) => {
 	const { darkModeAvailable } = useConfig();
 	const logo = decideBrandingLogo(branding, containerPalette);
 
-	return (
-		<div
-			css={[
-				wrapperStyles,
-				orientation === 'vertical'
-					? verticalStyles[alignment]
-					: horizontalStyles,
-			]}
-		>
-			<div css={labelStyles}>{logo.label}</div>
-			<span
-				css={css`
-					${visuallyHidden};
-				`}
+	if (isLabs) {
+		return (
+			<div
+				css={[
+					wrapperStyles,
+					orientation === 'vertical'
+						? verticalStyles[alignment]
+						: horizontalStyles,
+				]}
 			>
-				{branding.sponsorName
-					? `This content was paid for by ${branding.sponsorName} and produced by the Guardian Labs team.`
-					: 'This content has been paid for by an advertiser and produced by the Guardian Labs team.'}
-			</span>
-			<a
-				css={linkStyles}
-				href={logo.link}
-				data-sponsor={branding.sponsorName.toLowerCase()}
-				rel="nofollow"
-				aria-label={`Visit the ${branding.sponsorName} website`}
-				data-testid="branding-logo"
-				data-component={ophanComponentName}
-				data-link-name={ophanComponentLink}
-				className="branding-logo"
-			>
-				<picture>
-					{darkModeAvailable && branding.logoForDarkBackground && (
-						<source
-							width={
-								branding.logoForDarkBackground.dimensions.width
-							}
-							height={
-								branding.logoForDarkBackground.dimensions.height
-							}
-							srcSet={encodeURI(
-								branding.logoForDarkBackground.src,
+				<div css={labelStyles}>{logo.label}</div>
+
+				<span
+					css={css`
+						${visuallyHidden};
+					`}
+				>
+					{branding.sponsorName
+						? `This content was paid for by ${branding.sponsorName} and produced by the Guardian Labs team.`
+						: 'This content has been paid for by an advertiser and produced by the Guardian Labs team.'}
+				</span>
+				<a
+					css={linkStyles}
+					href={logo.link}
+					data-sponsor={branding.sponsorName.toLowerCase()}
+					rel="nofollow"
+					aria-label={`Visit the ${branding.sponsorName} website`}
+					data-testid="branding-logo"
+					data-component={ophanComponentName}
+					data-link-name={ophanComponentLink}
+					className="branding-logo"
+				>
+					<picture>
+						{darkModeAvailable &&
+							branding.logoForDarkBackground && (
+								<source
+									width={
+										branding.logoForDarkBackground
+											.dimensions.width
+									}
+									height={
+										branding.logoForDarkBackground
+											.dimensions.height
+									}
+									srcSet={encodeURI(
+										branding.logoForDarkBackground.src,
+									)}
+									media={'(prefers-color-scheme: dark)'}
+								/>
 							)}
-							media={'(prefers-color-scheme: dark)'}
+						<img
+							css={logoImageStyle}
+							src={logo.src}
+							alt={branding.sponsorName}
+							width={logo.dimensions.width}
+							height={logo.dimensions.height}
 						/>
-					)}
-					<img
-						css={logoImageStyle}
-						src={logo.src}
-						alt={branding.sponsorName}
-						width={logo.dimensions.width}
-						height={logo.dimensions.height}
-					/>
-				</picture>
-			</a>
-		</div>
+					</picture>
+				</a>
+			</div>
+		);
+	}
+	return (
+		<a
+			href={logo.link}
+			data-link-name={ophanComponentLink}
+			data-component={ophanComponentName}
+			css={badgeLink}
+		>
+			<img
+				css={[
+					imageStyles,
+					frontsSectionBadgeSizingStyles,
+					isAdvertisingPartner && imageAdvertisingPartnerStyles,
+				]}
+				src={logo.src}
+				alt={''}
+			/>
+		</a>
 	);
 };
