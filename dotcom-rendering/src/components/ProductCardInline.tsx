@@ -177,54 +177,56 @@ export const ProductCardInline = ({
 	isCardOnly = false,
 	shouldShowLeftColCard = false,
 	lowestPrice,
-}: InlineProductCardProps) => (
-	<div
-		css={[
-			isCardOnly ? productCard : showcaseCard,
-			shouldShowLeftColCard && !isCardOnly && hideFromWide,
-			customAttributes.length > 0 && !isCardOnly
-				? defaultGrid
-				: noCustomAttributesGrid,
-		]}
-	>
-		<div css={imageGridArea}>
-			<ProductCardImage
-				format={format}
-				image={image}
-				url={productCtas[0]?.url}
-			/>
-		</div>
-		<div css={productInfoContainer}>
-			<div css={primaryHeading}>{brandName}</div>
-			<div css={productNameStyle}>{productName}</div>
-			{!!lowestPrice && (
-				<div css={productNameStyle}>
-					{productCtas.length > 1 ? (
-						<>
-							from <strong>{lowestPrice}</strong>
-						</>
-					) : (
-						<strong>{lowestPrice}</strong>
-					)}
+}: InlineProductCardProps) => {
+	const hasCustomAttributes = customAttributes.length > 0 && !isCardOnly;
+
+	return (
+		<div
+			css={[
+				isCardOnly ? productCard : showcaseCard,
+				shouldShowLeftColCard && !isCardOnly && hideFromWide,
+				hasCustomAttributes ? defaultGrid : noCustomAttributesGrid,
+			]}
+		>
+			<div css={imageGridArea}>
+				<ProductCardImage
+					format={format}
+					image={image}
+					url={productCtas[0]?.url}
+				/>
+			</div>
+			<div css={productInfoContainer}>
+				<div css={primaryHeading}>{brandName}</div>
+				<div css={productNameStyle}>{productName}</div>
+				{!!lowestPrice && (
+					<div css={productNameStyle}>
+						{productCtas.length > 1 ? (
+							<>
+								from <strong>{lowestPrice}</strong>
+							</>
+						) : (
+							<strong>{lowestPrice}</strong>
+						)}
+					</div>
+				)}
+			</div>
+			<div css={buttonWrapper}>
+				<ProductCardButtons
+					productCtas={productCtas}
+					dataComponent={'inline-product-card-buttons'}
+				/>
+			</div>
+			{hasCustomAttributes && (
+				<div css={customAttributesContainer}>
+					{customAttributes.map((customAttribute) => (
+						<CustomAttribute
+							key={customAttribute.name}
+							name={customAttribute.name}
+							value={customAttribute.value}
+						/>
+					))}
 				</div>
 			)}
 		</div>
-		<div css={buttonWrapper}>
-			<ProductCardButtons
-				productCtas={productCtas}
-				dataComponent={'inline-product-card-buttons'}
-			/>
-		</div>
-		{!isCardOnly && customAttributes.length > 0 && (
-			<div css={customAttributesContainer}>
-				{customAttributes.map((customAttribute) => (
-					<CustomAttribute
-						key={customAttribute.name}
-						name={customAttribute.name}
-						value={customAttribute.value}
-					/>
-				))}
-			</div>
-		)}
-	</div>
-);
+	);
+};
