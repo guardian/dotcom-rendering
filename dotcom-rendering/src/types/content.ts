@@ -478,7 +478,7 @@ export interface ProductBlockElement {
 	image?: ProductImage;
 	secondaryHeading: string;
 	primaryHeading: string;
-	customAttributes: { name: string; value: string }[];
+	customAttributes: ProductCustomAttribute[];
 	content: FEElement[];
 	h2Id?: string;
 	displayType: ProductDisplayType;
