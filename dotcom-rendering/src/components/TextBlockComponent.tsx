@@ -43,7 +43,7 @@ const isOpenQuote = (t: string): boolean => {
 	].includes(t);
 };
 
-export const stripHtmlFromString = (html: string): string => {
+const stripHtmlFromString = (html: string): string => {
 	// https://stackoverflow.com/questions/822452/strip-html-from-text-javascript is
 	// a good discussion on how this can be done. Of the two approaches, regex and
 	// DOM, both have unikely failure scenarios but the impact for failure with DOM
