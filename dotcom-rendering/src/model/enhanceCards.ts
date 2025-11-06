@@ -235,6 +235,10 @@ export const getActiveMediaAtom = (
 			);
 			if (!sources.length) return undefined;
 
+			const subtitleAsset = assets.find(
+				({ assetType }) => assetType === 'Subtitles',
+			);
+
 			return {
 				type: 'LoopVideo',
 				atomId: mediaAtom.id,
@@ -242,6 +246,7 @@ export const getActiveMediaAtom = (
 					src: source.id,
 					mimeType: source.mimeType as SupportedVideoFileType,
 				})),
+				subtitleSource: subtitleAsset?.id,
 				duration: mediaAtom.duration ?? 0,
 				// Size fixed to a 5:4 ratio
 				width: 500,

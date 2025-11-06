@@ -203,7 +203,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	 * - the user is opted into the 0% server side test
 	 */
 	const enableLoopVideoCORS =
-		!!front.config.switches.loopVideoLoad ||
+		!!front.config.switches.enableLoopVideoCors ||
 		abTests.loopVideoLoadVariant === 'variant';
 
 	return (

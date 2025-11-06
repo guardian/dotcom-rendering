@@ -70,12 +70,20 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {} satisfies Story;
 
+export const ProductCardNoCustomAttributes = {
+	args: {
+		...meta.args,
+		customAttributes: [],
+	},
+} satisfies Story;
+
 export const ProductCardOnly = {
 	args: {
 		...meta.args,
 		isCardOnly: true,
 	},
-};
+} satisfies Story;
+
 export const ProductCardOnlyDisplayCredit = {
 	args: {
 		...meta.args,
