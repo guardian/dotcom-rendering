@@ -53,7 +53,7 @@ export const ProductLinkButton = ({
 	url,
 	size = 'default',
 	fullwidth = false,
-	minimisePadding = true,
+	minimisePadding = false,
 	priority = 'primary',
 	dataComponent = 'in-body-product-link-button',
 }: ProductLinkButtonProps) => {

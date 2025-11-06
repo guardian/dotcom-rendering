@@ -122,7 +122,6 @@ export const ProductCardLeftCol = ({
 				<ProductCardButtons
 					productCtas={productCtas}
 					dataComponent={'left-col-product-card-buttons'}
-					minimisePadding={true}
 				/>
 			</div>
 			{customAttributes.length > 0 && (

@@ -9,11 +9,9 @@ const getLabel = (cta: ProductCta): string => {
 export const ProductCardButtons = ({
 	productCtas,
 	dataComponent,
-	minimisePadding = false,
 }: {
 	productCtas: ProductCta[];
 	dataComponent?: string;
-	minimisePadding?: boolean;
 }) => (
 	<>
 		{productCtas.map((productCta, index) => {
@@ -23,7 +21,7 @@ export const ProductCardButtons = ({
 					key={label}
 					label={label}
 					url={productCta.url}
-					minimisePadding={minimisePadding}
+					minimisePadding={true}
 					priority={index === 0 ? 'primary' : 'tertiary'}
 					fullwidth={true}
 					data-component={`${
