@@ -92,8 +92,10 @@ describe('enhanceProductBlockElements', () => {
 
 	expect(result).toHaveLength(1);
 
-	const enhancedElements = (result as ProductBlockElement[])[0];
-	if (!enhancedElements) throw new Error('enhanced Elements is undefined');
+	const enhancedElements = result[0];
+	if (enhancedElements === undefined || enhancedElements._type !== 'model.dotcomrendering.pageElements.ProductBlockElement') {
+		throw new Error('Expected "enhancedElements" to be a ProductBlockElement');
+	}
 
 	it('enhances the content of a ProductBlockElement', () => {
 		expect(enhancedElements.content).toEqual(expectedEnhancedContent);
