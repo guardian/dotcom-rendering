@@ -130,6 +130,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		? getMobileAdPositions(filteredCollections)
 		: [];
 
+	const showSlimNav = front.pageId === 'uk/thefilter';
+
 	const desktopAdPositions = renderAds
 		? getDesktopAdPositions(filteredCollections, pageId)
 		: [];
@@ -245,7 +247,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					contributionsServiceUrl={contributionsServiceUrl}
 					idApiUrl={front.config.idApiUrl}
 					showSubNav={!isPaidContent}
-					showSlimNav={false}
+					showSlimNav={showSlimNav}
 					hasPageSkin={hasPageSkin}
 					hasPageSkinContentSelfConstrain={true}
 					pageId={pageId}
