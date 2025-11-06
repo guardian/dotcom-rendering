@@ -4,8 +4,9 @@ import { useBetaAB } from '../lib/useAB';
 
 /**
  * Add custom parameters to skimlink URLs:
- * - referrer
+ * - Referrer
  * - Skimlinks account ID
+ * - AB test participations
  *
  * ## Why does this need to be an Island?
  *
@@ -18,7 +19,7 @@ import { useBetaAB } from '../lib/useAB';
 export const EnhanceAffiliateLinks = () => {
 	const abTests = useBetaAB();
 
-	// Am I in a test at all?
+	// Get users server/client-side AB test participations
 	const abTestParticipations = abTests?.getParticipations();
 
 	// Reduce abTestParticipations to a comma-separated string
