@@ -1,9 +1,9 @@
 import type { Meta } from '@storybook/react-webpack5';
-import { SponsoredContentLabel } from './SponsoredContentLabel';
+import { BrandingLabel } from './BrandingLabel';
 
-const meta: Meta<typeof SponsoredContentLabel> = {
-	component: SponsoredContentLabel,
-	title: 'Components/SponsoredContentLabel',
+const meta: Meta<typeof BrandingLabel> = {
+	component: BrandingLabel,
+	title: 'Components/BrandingLabel For Labs',
 	parameters: {
 		layout: 'centered',
 		chromatic: {

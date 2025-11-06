@@ -15,6 +15,7 @@ import type {
 import type { TagPagePagination } from '../types/tagPage';
 import { isAustralianTerritory, type Territory } from '../types/territory';
 import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
+import { BrandingLabel } from './BrandingLabel';
 import { ContainerOverrides } from './ContainerOverrides';
 import { ContainerTitle } from './ContainerTitle';
 import { FrontPagination } from './FrontPagination';
@@ -23,7 +24,6 @@ import { Island } from './Island';
 import { LabsSectionHeader } from './LabsSectionHeader';
 import { ShowHideButton } from './ShowHideButton';
 import { ShowMore } from './ShowMore.importable';
-import { SponsoredContentLabel } from './SponsoredContentLabel';
 import { Treats } from './Treats';
 
 type Props = {
@@ -829,7 +829,7 @@ export const FrontSection = ({
 						collectionBranding?.kind === 'paid-content' &&
 						!collectionBranding.hasMultipleBranding && (
 							<div css={sponsoredContentLabelWrapper}>
-								<SponsoredContentLabel
+								<BrandingLabel
 									branding={collectionBranding.branding}
 									containerPalette={containerPalette}
 									ophanComponentLink={

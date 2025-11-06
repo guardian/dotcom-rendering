@@ -9,7 +9,7 @@ import { Hide } from '@guardian/source/react-components';
 import { assertUnreachable } from '../lib/assert-unreachable';
 import { palette } from '../palette';
 import type { CollectionBranding } from '../types/branding';
-import { SponsoredContentLabel } from './SponsoredContentLabel';
+import { BrandingLabel } from './BrandingLabel';
 
 type Props = {
 	title: React.ReactNode;
@@ -90,14 +90,14 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 					<>
 						<Hide until="leftCol">
 							<p css={[labelStyles]}>{logo.label}</p>
-							<SponsoredContentLabel
+							<BrandingLabel
 								branding={collectionBranding.branding}
 							/>
 						</Hide>
 						<div css={titleStyle}>
 							<Hide from="leftCol">
 								<p css={[labelStyles]}>{logo.label}</p>
-								<SponsoredContentLabel
+								<BrandingLabel
 									branding={collectionBranding.branding}
 								/>
 							</Hide>
@@ -134,7 +134,7 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 							`}
 						>
 							Paid for by
-							<SponsoredContentLabel
+							<BrandingLabel
 								branding={collectionBranding.branding}
 							/>
 						</div>
@@ -145,13 +145,11 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 			return (
 				<>
 					<Hide until="leftCol">
-						<SponsoredContentLabel
-							branding={collectionBranding.branding}
-						/>
+						<BrandingLabel branding={collectionBranding.branding} />
 					</Hide>
 					<div css={titleStyle}>
 						<Hide from="leftCol">
-							<SponsoredContentLabel
+							<BrandingLabel
 								branding={collectionBranding.branding}
 							/>
 						</Hide>
@@ -191,7 +189,7 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 							>
 								{logo.label}
 							</p>
-							<SponsoredContentLabel
+							<BrandingLabel
 								branding={collectionBranding.branding}
 								isAdvertisingPartner={
 									isAdvertisingPartnerOrExclusive

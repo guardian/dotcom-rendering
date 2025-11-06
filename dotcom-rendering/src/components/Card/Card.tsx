@@ -35,6 +35,7 @@ import type {
 import type { MainMedia } from '../../types/mainMedia';
 import type { OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
+import { BrandingLabel } from '../BrandingLabel';
 import { CardCommentCount } from '../CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from '../CardHeadline';
 import type { Loading } from '../CardPicture';
@@ -47,7 +48,6 @@ import { Pill } from '../Pill';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
 import { Snap } from '../Snap';
 import { SnapCssSandbox } from '../SnapCssSandbox';
-import { SponsoredContentLabel } from '../SponsoredContentLabel';
 import { StarRating } from '../StarRating/StarRating';
 import type { Alignment } from '../SupportingContent';
 import { SupportingContent } from '../SupportingContent';
@@ -779,7 +779,7 @@ export const Card = ({
 						}
 					`}
 				>
-					<SponsoredContentLabel
+					<BrandingLabel
 						branding={branding}
 						containerPalette={containerPalette}
 						orientation="horizontal"
@@ -800,7 +800,7 @@ export const Card = ({
 						}
 					`}
 				>
-					<SponsoredContentLabel
+					<BrandingLabel
 						branding={branding}
 						containerPalette={containerPalette}
 						orientation="vertical"

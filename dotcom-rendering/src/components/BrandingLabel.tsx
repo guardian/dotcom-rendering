@@ -100,13 +100,13 @@ const imageAdvertisingPartnerStyles = css`
 `;
 
 /**
- * Component used to display "paid for" label alonside the sponsor logo
- * for a particular set of branding
+ * Component used to display branding labels with sponsor logos for
+ * various types of branded content (paid-content, sponsored, foundation, etc.)
  *
- * This is used for front container level branding for labs content and
- * should replace `CardBranding` eventually
+ * This is used for front container level branding and supports both Labs
+ * and non-Labs designs. Should eventually replace `CardBranding` and `Badge`.
  */
-export const SponsoredContentLabel = ({
+export const BrandingLabel = ({
 	branding,
 	alignment = 'start',
 	orientation = 'horizontal',
