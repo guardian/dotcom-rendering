@@ -49,6 +49,8 @@ type Props = {
 	containerLevel?: DCRContainerLevel;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
+	/** Feature flag for the enabling CORS loading on looping video */
+	enableLoopVideoCORS: boolean;
 };
 
 export const DecideContainer = ({
@@ -65,6 +67,7 @@ export const DecideContainer = ({
 	collectionId,
 	containerLevel,
 	showLabsRedesign = false,
+	enableLoopVideoCORS = false,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -248,6 +251,7 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
 					showLabsRedesign={!!showLabsRedesign}
+					enableLoopVideoCORS={enableLoopVideoCORS}
 				/>
 			);
 		case 'flexible/general':
@@ -262,6 +266,7 @@ export const DecideContainer = ({
 					containerLevel={containerLevel}
 					collectionId={collectionId}
 					showLabsRedesign={!!showLabsRedesign}
+					enableLoopVideoCORS={enableLoopVideoCORS}
 				/>
 			);
 		case 'scrollable/small':
