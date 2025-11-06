@@ -28,7 +28,8 @@ const heightAutoStyle = css`
 	height: auto;
 `;
 
-const reduceSpace = css`
+const minimisePaddingStyle = css`
+	padding: 0 10px 0 12px;
 	& .src-button-space {
 		width: 8px;
 	}
@@ -59,7 +60,7 @@ export const ProductLinkButton = ({
 	const cssOverrides: SerializedStyles[] = [
 		heightAutoStyle,
 		...(fullwidth ? [fullWidthStyle] : []),
-		...(minimisePadding ? [reduceSpace] : []),
+		...(minimisePadding ? [minimisePaddingStyle] : []),
 	];
 
 	return (
@@ -78,13 +79,6 @@ export const ProductLinkButton = ({
 			size={size}
 			cssOverrides={cssOverrides}
 			data-component={dataComponent}
-			style={
-				minimisePadding
-					? {
-							padding: '0 10px 0 12px',
-					  }
-					: {}
-			}
 		>
 			<span
 				css={css`
