@@ -223,8 +223,6 @@ export const LoopVideoPlayer = forwardRef(
 							default={false}
 							kind="subtitles"
 							src={subtitleSource}
-							// Add label to ensure iOS recognizes it
-							label="English"
 							srcLang="en"
 						/>
 					)}
