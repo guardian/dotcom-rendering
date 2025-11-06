@@ -197,10 +197,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		);
 	};
 
-	/** We allow the video to set crossOrigin={"anonymous"} CORS redesign
-	 * if the user is opted into the 0% server side test
+	/** We allow the video to set crossOrigin={"anonymous"} if:
+	 * - the feature switch is ON
+	 * OR
+	 * - the user is opted into the 0% server side test
 	 */
-	const enableLoopVideoCORS = abTests.loopVideoLoadVariant === 'variant';
+	const enableLoopVideoCORS =
+		!!front.config.switches.loopVideoLoad ||
+		abTests.loopVideoLoadVariant === 'variant';
 
 	return (
 		<>
