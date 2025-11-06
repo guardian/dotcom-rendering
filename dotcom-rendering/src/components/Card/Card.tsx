@@ -162,6 +162,8 @@ export type Props = {
 	headlinePosition?: 'inner' | 'outer';
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
+	/** Feature flag for the enabling CORS loading on looping video */
+	enableLoopVideoCORS?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -406,6 +408,7 @@ export const Card = ({
 	headlinePosition = 'inner',
 	showLabsRedesign = false,
 	subtitleSize = 'small',
+	enableLoopVideoCORS = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -957,6 +960,7 @@ export const Card = ({
 										media.mainMedia.subtitleSource
 									}
 									subtitleSize={subtitleSize}
+									enableLoopVideoCORS={enableLoopVideoCORS}
 								/>
 							</Island>
 						)}

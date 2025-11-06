@@ -119,6 +119,8 @@ type Props = {
 	showPlayIcon: boolean;
 	subtitleSource?: string;
 	subtitleSize: SubtitleSize;
+	/** Feature flag for the enabling CORS loading on looping video */
+	enableLoopVideoCORS: boolean;
 };
 
 /**
@@ -158,6 +160,7 @@ export const LoopVideoPlayer = forwardRef(
 			showPlayIcon,
 			subtitleSource,
 			subtitleSize,
+			enableLoopVideoCORS,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -169,6 +172,9 @@ export const LoopVideoPlayer = forwardRef(
 				<video
 					id={loopVideoId}
 					css={videoStyles(width, height, subtitleSize)}
+					{...(enableLoopVideoCORS
+						? { crossOrigin: 'anonymous' }
+						: {})}
 					ref={ref}
 					crossOrigin="anonymous"
 					tabIndex={0}
@@ -207,7 +213,10 @@ export const LoopVideoPlayer = forwardRef(
 						<source
 							key={source.mimeType}
 							/* The start time is set to 1ms so that Safari will autoplay the video */
-							src={`${source.src}#t=0.001`}
+							/* Use a '?cors=enabled' cache buster so that we don't serve video from local cache*/
+							src={`${source.src}${
+								enableLoopVideoCORS ? '?cors=enabled' : ''
+							}#t=0.001`}
 							type={source.mimeType}
 						/>
 					))}
