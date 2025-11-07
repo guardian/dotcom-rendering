@@ -46,7 +46,7 @@ export const ProductElement = ({
 		product.displayType === 'ProductCardOnly' ||
 		product.displayType === 'InlineWithProductCard';
 	return (
-		<div>
+		<>
 			{showContent && (
 				<Content
 					product={product}
@@ -68,7 +68,7 @@ export const ProductElement = ({
 					shouldShowLeftColCard={shouldShowLeftColCard}
 				/>
 			)}
-		</div>
+		</>
 	);
 };
 
