@@ -1,13 +1,10 @@
-import { css } from '@emotion/react';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { productImage } from '../../fixtures/manual/productImage';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { getNestedArticleElement } from '../lib/renderElement';
 import type { ProductBlockElement } from '../types/content';
-import { ArticleContainer } from './ArticleContainer';
 import { ProductElement } from './ProductElement';
-import { Section as SectionComponent } from './Section';
-import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 
 const ArticleElementComponent = getNestedArticleElement({
 	abTests: {},
