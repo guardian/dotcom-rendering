@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { log, storage } from '@guardian/libs';
+import { space } from '@guardian/source/foundations';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
@@ -11,6 +12,7 @@ import { getZIndex } from '../lib/getZIndex';
 import { generateImageURL } from '../lib/image';
 import { useIsInView } from '../lib/useIsInView';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
+import { useSubtitles } from '../lib/useSubtitles';
 import type { CustomPlayEventDetail, Source } from '../lib/video';
 import {
 	customLoopPlayAudioEventName,
@@ -18,8 +20,12 @@ import {
 } from '../lib/video';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
+import type {
+	PLAYER_STATES,
+	PlayerStates,
+	SubtitleSize,
+} from './LoopVideoPlayer';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
-import type { PLAYER_STATES, PlayerStates } from './LoopVideoPlayer';
 import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
 const videoContainerStyles = css`
@@ -117,6 +123,8 @@ type Props = {
 	fallbackImageAlt: CardPictureProps['alt'];
 	fallbackImageAspectRatio: CardPictureProps['aspectRatio'];
 	linkTo: string;
+	subtitleSource?: string;
+	subtitleSize: SubtitleSize;
 	/** Feature flag for the enabling CORS loading on looping video */
 	enableLoopVideoCORS?: boolean;
 };
@@ -134,6 +142,8 @@ export const LoopVideo = ({
 	fallbackImageAlt,
 	fallbackImageAspectRatio,
 	linkTo,
+	subtitleSource,
+	subtitleSize,
 	enableLoopVideoCORS = false,
 }: Props) => {
 	const adapted = useShouldAdapt();
@@ -166,6 +176,12 @@ export const LoopVideo = ({
 	const [isInView, setNode] = useIsInView({
 		repeat: true,
 		threshold: VISIBILITY_THRESHOLD,
+	});
+
+	const activeCue = useSubtitles({
+		video: vidRef.current,
+		playerState,
+		currentTime,
 	});
 
 	const playVideo = useCallback(async () => {
@@ -489,6 +505,25 @@ export const LoopVideo = ({
 		return FallbackImageComponent;
 	}
 
+	const handleLoadedMetadata = () => {
+		const video = vidRef.current;
+		if (!video) return;
+
+		const track = video.textTracks[0];
+		if (!track?.cues) return;
+		const pxFromBottom = space[3];
+		const videoHeight = video.getBoundingClientRect().height;
+		const percentFromTop =
+			((videoHeight - pxFromBottom) / videoHeight) * 100;
+
+		for (const cue of Array.from(track.cues)) {
+			if (cue instanceof VTTCue) {
+				cue.snapToLines = false;
+				cue.line = percentFromTop;
+			}
+		}
+	};
+
 	const handleLoadedData = () => {
 		if (vidRef.current) {
 			setHasAudio(doesVideoHaveAudio(vidRef.current));
@@ -628,6 +663,7 @@ export const LoopVideo = ({
 				isPlayable={isPlayable}
 				playerState={playerState}
 				isMuted={isMuted}
+				handleLoadedMetadata={handleLoadedMetadata}
 				handleLoadedData={handleLoadedData}
 				handleCanPlay={handleCanPlay}
 				handlePlayPauseClick={handlePlayPauseClick}
@@ -638,6 +674,9 @@ export const LoopVideo = ({
 				AudioIcon={hasAudio ? AudioIcon : null}
 				preloadPartialData={preloadPartialData}
 				showPlayIcon={showPlayIcon}
+				subtitleSource={subtitleSource}
+				subtitleSize={subtitleSize}
+				activeCue={activeCue}
 				enableLoopVideoCORS={enableLoopVideoCORS}
 			/>
 		</figure>
