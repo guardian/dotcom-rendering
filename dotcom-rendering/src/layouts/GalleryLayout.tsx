@@ -217,7 +217,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 				trails={gallery.storyPackage?.trails ?? []}
 				discussionApiUrl={discussionApiUrl}
 				format={format}
-				heading={gallery.storyPackage?.heading ?? 'Marjan'} // TODO
+				heading={gallery.storyPackage?.heading ?? 'More on this story'}
 				onwardsSource={'more-on-this-story'}
 			/>
 			<Island priority="feature" defer={{ until: 'visible' }}>

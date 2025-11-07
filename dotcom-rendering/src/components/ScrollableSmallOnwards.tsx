@@ -233,6 +233,7 @@ const getDefaultCardProps = (
 		supportingContent: undefined,
 		canPlayInline: false,
 		onwardsSource,
+		isOnwardContent: true,
 	};
 	return defaultProps;
 };
