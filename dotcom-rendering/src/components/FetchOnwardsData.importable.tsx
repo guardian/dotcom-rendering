@@ -4,7 +4,11 @@ import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
-import { decideTrail, dedupeTrail } from '../lib/decideTrail';
+import {
+	decideTrail,
+	decideTrailWithMasterImage,
+	dedupeTrail,
+} from '../lib/decideTrail';
 import { useApi } from '../lib/useApi';
 import { addDiscussionIds } from '../lib/useCommentCount';
 import { useIsInView } from '../lib/useIsInView';
@@ -48,12 +52,13 @@ const buildTrails = (
 	trailLimit: number,
 	isAdFreeUser: boolean,
 	webURL: string,
+	withMasterImage: boolean,
 ): TrailType[] => {
 	return trails
 		.filter((trailType) => !(isTrailPaidContent(trailType) && isAdFreeUser))
 		.filter((trailType) => dedupeTrail(trailType, webURL))
 		.slice(0, trailLimit)
-		.map(decideTrail);
+		.map(withMasterImage ? decideTrailWithMasterImage : decideTrail);
 };
 
 export const FetchOnwardsData = ({
@@ -118,14 +123,15 @@ export const FetchOnwardsData = ({
 			.filter(isNonNullable),
 	);
 
-	const trails = buildTrails(data.trails, limit, isAdFreeUser, webURL);
+	const trails = ({ withMasterImage }: { withMasterImage: boolean }) =>
+		buildTrails(data.trails, limit, isAdFreeUser, webURL, withMasterImage);
 
 	return (
 		<div ref={setIsInViewRef} css={minHeight}>
 			{format.design === ArticleDesign.Gallery ? (
 				<ScrollableSmallOnwards
 					serverTime={serverTime}
-					trails={trails}
+					trails={trails({ withMasterImage: true })}
 					discussionApiUrl={discussionApiUrl}
 					heading={data.heading || data.displayname}
 					onwardsSource={onwardsSource}
@@ -134,7 +140,7 @@ export const FetchOnwardsData = ({
 			) : (
 				<Carousel
 					heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
-					trails={trails}
+					trails={trails({ withMasterImage: false })}
 					description={data.description}
 					onwardsSource={onwardsSource}
 					format={format}
