@@ -16,7 +16,6 @@ import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Caption } from '../components/Caption';
-import { Carousel } from '../components/Carousel.importable';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FetchMoreGalleriesData } from '../components/FetchMoreGalleriesData.importable';
 import { Footer } from '../components/Footer';
@@ -30,6 +29,7 @@ import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { ScrollableSmallOnwards } from '../components/ScrollableSmallOnwards';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
@@ -212,13 +212,13 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 				show={showMerchandisingHigh}
 				display={format.display}
 			/>
-			<StoryPackage
+			<ScrollableSmallOnwards
 				serverTime={serverTime}
+				trails={gallery.storyPackage?.trails ?? []}
 				discussionApiUrl={discussionApiUrl}
 				format={format}
-				renderingTarget={renderingTarget}
-				storyPackage={gallery.storyPackage}
-				topBorder={showMerchandisingHigh}
+				heading={gallery.storyPackage?.heading ?? 'Marjan'} // TODO
+				onwardsSource={'more-on-this-story'}
 			/>
 			<Island priority="feature" defer={{ until: 'visible' }}>
 				<OnwardsUpper
@@ -655,40 +655,3 @@ const MerchandisingHigh = (props: {
 			/>
 		</Section>
 	) : null;
-
-const StoryPackage = ({
-	storyPackage,
-	format,
-	discussionApiUrl,
-	serverTime,
-	renderingTarget,
-	topBorder,
-}: {
-	storyPackage: Gallery['storyPackage'];
-	format: ArticleFormat;
-	discussionApiUrl: string;
-	serverTime?: number;
-	renderingTarget: RenderingTarget;
-	topBorder: boolean;
-}) =>
-	storyPackage === undefined ? null : (
-		<Section
-			fullWidth={true}
-			backgroundColour={palette('--article-section-background')}
-			borderColour={palette('--onward-content-border')}
-			showTopBorder={topBorder}
-		>
-			<Island priority="feature" defer={{ until: 'visible' }}>
-				<Carousel
-					heading={storyPackage.heading}
-					trails={storyPackage.trails}
-					onwardsSource="more-on-this-story"
-					format={format}
-					leftColSize="compact"
-					discussionApiUrl={discussionApiUrl}
-					serverTime={serverTime}
-					renderingTarget={renderingTarget}
-				/>
-			</Island>
-		</Section>
-	);
