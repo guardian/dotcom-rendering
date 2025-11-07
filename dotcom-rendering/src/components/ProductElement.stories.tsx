@@ -7,6 +7,7 @@ import type { ProductBlockElement } from '../types/content';
 import { ArticleContainer } from './ArticleContainer';
 import { ProductElement } from './ProductElement';
 import { Section as SectionComponent } from './Section';
+import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 
 const ArticleElementComponent = getNestedArticleElement({
 	abTests: {},
@@ -273,30 +274,7 @@ const meta = {
 		ArticleElementComponent,
 		shouldShowLeftColCard: true,
 	},
-	decorators: [
-		(Story) => (
-			<SectionComponent
-				shouldCenter={true}
-				showSideBorders={true}
-				centralBorder={'full'}
-				css={css`
-					strong {
-						font-weight: bold;
-					}
-				`}
-			>
-				<ArticleContainer
-					format={{
-						design: ArticleDesign.Review,
-						display: ArticleDisplay.Standard,
-						theme: Pillar.Lifestyle,
-					}}
-				>
-					<Story />
-				</ArticleContainer>
-			</SectionComponent>
-		),
-	],
+	decorators: [centreColumnDecorator],
 } satisfies Meta<typeof ProductElement>;
 
 export default meta;
