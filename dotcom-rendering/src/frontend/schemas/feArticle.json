@@ -4445,10 +4445,10 @@
                 "image": {
                     "$ref": "#/definitions/ProductImage"
                 },
-                "secondaryHeading": {
+                "secondaryHeadingHtml": {
                     "type": "string"
                 },
-                "primaryHeading": {
+                "primaryHeadingHtml": {
                     "type": "string"
                 },
                 "customAttributes": {
@@ -4518,10 +4518,10 @@
                 "customAttributes",
                 "displayType",
                 "elementId",
-                "primaryHeading",
+                "primaryHeadingHtml",
                 "productCtas",
                 "productName",
-                "secondaryHeading",
+                "secondaryHeadingHtml",
                 "starRating"
             ]
         },
