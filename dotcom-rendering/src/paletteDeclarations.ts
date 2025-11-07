@@ -6145,6 +6145,26 @@ const latestLinksDottedLineLight: PaletteFunction = () =>
 const latestLinksDottedLineDark: PaletteFunction = () =>
 	sourcePalette.neutral[38];
 
+const activePillar: PaletteFunction = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case Pillar.News:
+			return pillarPalette(Pillar.News, 400);
+		case Pillar.Opinion:
+			return pillarPalette(Pillar.Opinion, 400);
+		case Pillar.Sport:
+			return pillarPalette(Pillar.Sport, 400);
+		case Pillar.Culture:
+			return pillarPalette(Pillar.Culture, 400);
+		case Pillar.Lifestyle:
+			return pillarPalette(Pillar.Lifestyle, 400);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReport[400];
+	}
+};
+
 const editorialButtonBackground: PaletteFunction = (format: ArticleFormat) => {
 	switch (format.theme) {
 		case Pillar.News:
@@ -6332,6 +6352,10 @@ const paletteColours = {
 	'--accordion-title-row-fill': {
 		light: accordionTitleRowFillLight,
 		dark: accordionTitleRowFillDark,
+	},
+	'--active-pillar': {
+		light: activePillar,
+		dark: activePillar,
 	},
 	'--ad-background': {
 		light: adBackgroundLight,
