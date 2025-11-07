@@ -1,8 +1,9 @@
 import { css } from '@emotion/react';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { productImage } from '../../fixtures/manual/productImage';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { getNestedArticleElement } from '../lib/renderElement';
-import type { ProductBlockElement, ProductImage } from '../types/content';
+import type { ProductBlockElement } from '../types/content';
 import { ArticleContainer } from './ArticleContainer';
 import { ProductElement } from './ProductElement';
 import { Section as SectionComponent } from './Section';
@@ -18,16 +19,6 @@ const ArticleElementComponent = getNestedArticleElement({
 	webTitle: 'Storybook page',
 	shouldHideAds: false,
 });
-
-const productImage = {
-	url: 'https://media.guimcode.co.uk/cb193848ed75d40103eceaf12b448de2330770dc/0_0_725_725/725.jpg',
-	caption: 'Filter-2 test image for live demo',
-	height: 1,
-	width: 1,
-	alt: 'Bosch Sky kettle',
-	credit: 'Photograph: Rachel Ogden/The Guardian',
-	displayCredit: false,
-} satisfies ProductImage;
 
 const product = {
 	_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
