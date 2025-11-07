@@ -79,6 +79,7 @@ export type Position = 'inner' | 'outer' | 'none';
 export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
+	contextFormat?: ArticleFormat;
 	serverTime?: number;
 	headlineText: string;
 	headlineSizes?: ResponsiveFontSize;
@@ -352,6 +353,7 @@ const liveBulletStyles = css`
 export const Card = ({
 	linkTo,
 	format,
+	contextFormat,
 	headlineText,
 	headlineSizes,
 	showQuotedHeadline,
@@ -550,7 +552,14 @@ export const Card = ({
 -	 */
 	const isMediaCardOrNewsletter = isMediaCard(format) || isNewsletter;
 
-	const showPill = isMediaCardOrNewsletter;
+	// This is due to a re-design for onwards content.
+	// Currently this re-design is only applied for galleries secondary onwards content.
+	// We plan to apply this to all onwards content in the future.
+	const isGallerySecondaryOnward =
+		contextFormat?.design === ArticleDesign.Gallery &&
+		onwardsSource !== 'more-galleries';
+
+	const showPill = isMediaCardOrNewsletter && !isGallerySecondaryOnward;
 
 	const media = getMedia({
 		imageUrl: image?.src,
