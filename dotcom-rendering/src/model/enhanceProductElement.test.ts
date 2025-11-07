@@ -110,4 +110,61 @@ describe('enhanceProductBlockElements', () => {
 	it('adds the lowestPrice to a ProductBlockElement', () => {
 		expect(enhancedElements.lowestPrice).toEqual('£29.99');
 	});
+
+	it('returns undefined for lowestPrice if there are no productCTAs', () => {
+		const productBlockWithoutCtas: ProductBlockElement = {
+			...productBlockElement,
+			productCtas: [],
+		};
+		const inputElementsNoCtas: FEElement[] = [productBlockWithoutCtas];
+		const resultNoCtas =
+			enhanceProductElement(elementsEnhancer)(inputElementsNoCtas);
+
+		expect(resultNoCtas).toHaveLength(1);
+
+		const enhancedElementNoCtas = resultNoCtas[0];
+		if (
+			enhancedElementNoCtas === undefined ||
+			enhancedElementNoCtas._type !==
+				'model.dotcomrendering.pageElements.ProductBlockElement'
+		) {
+			throw new Error(
+				'Expected "enhancedElementNoCtas" to be a ProductBlockElement',
+			);
+		}
+
+		expect(enhancedElementNoCtas.lowestPrice).toBeUndefined();
+	});
+
+	it('expect lowest price to be £29.99 if one cta is NaN', () => {
+		const productBlockWithNaNCta: ProductBlockElement = {
+			...productBlockElement,
+			productCtas: [
+				{
+					url: 'https://www.johnlewis.com/bosch-twk7203gb-sky-variable-temperature-kettle-1-7l-black/p3228625',
+					text: 'Buy now',
+					retailer: 'John Lewis',
+					price: '£88.882.22',
+				},
+				...productBlockElement.productCtas,
+			],
+		};
+		const inputElementsWithNaN: FEElement[] = [productBlockWithNaNCta];
+		const resultWithNaN =
+			enhanceProductElement(elementsEnhancer)(inputElementsWithNaN);
+		expect(resultWithNaN).toHaveLength(1);
+
+		const enhancedElementWithNaN = resultWithNaN[0];
+		if (
+			enhancedElementWithNaN === undefined ||
+			enhancedElementWithNaN._type !==
+				'model.dotcomrendering.pageElements.ProductBlockElement'
+		) {
+			throw new Error(
+				'Expected "enhancedElementWithNaN" to be a ProductBlockElement',
+			);
+		}
+
+		expect(enhancedElementWithNaN.lowestPrice).toEqual('£29.99');
+	});
 });
