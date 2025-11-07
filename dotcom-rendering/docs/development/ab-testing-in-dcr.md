@@ -117,11 +117,11 @@ When your PR is merged, the A/B test will be automatically deployed to Fastly an
 
 #### Guidelines for A/B tests
 
-##### Naming Conventions
+#### Naming Conventions
 
 A/B tests should be prefixed with the team associated with the test, for example `webex-example-test`. This helps to identify the team responsible for the test and is enforce by typescript validation.
 
-##### Test Size and Groups
+#### Test Size and Groups
 
 The `audienceSize` is the size of the whole test and is divided between the test groups that you specify. The "resolution" of sizing is down to 0.1%, so groups will be rounded to the nearest 0.1%.
 
@@ -129,7 +129,7 @@ Convention is to have groups named control and variant, but you can name them as
 
 A single group is also possible, for example if you're rolling out a new feature and don't need a control.
 
-##### Client vs Server Side Tests
+#### Client vs Server Side Tests
 
 All requests are processed by Fastly at the edge, however, A/B testing of server-side logic in Frontend or DCR will need to be cached separately. Client side tests do not need to be cached separately, as they are applied in the browser after the response is delivered.
 
@@ -137,7 +137,7 @@ Ensure that the `type` field is set to either `client` or `server` to indicate t
 
 There's a limit of the number of concurrent server-side tests that can be run, enforce by the validation script, so it's important to use client-side tests where possible.
 
-##### Test Expiration
+#### Test Expiration
 
 A/B tests should have an expiration date set in the future. This is to ensure that tests do not run indefinitely.
 
@@ -145,7 +145,7 @@ Expired tests will cause the A/B testing validation to fail, and will not be dep
 
 Tests that expire while they are are in-flight will not be served by fastly, and should be removed from the `abTest.ts` file as soon as possible.
 
-##### Audience Spaces
+#### Audience Spaces
 
 Ideally A/B tests would never overlap (users being in multiple tests), but sometimes this is unavoidable, for example when running a very large 50+% test without interrupting existing tests.
 
@@ -153,7 +153,7 @@ To add a test where there is not enough space in the default audience space (`A`
 
 For example if there are already 3 25% tests in space `A` totalling 75%, and you want to run a 50% test, you can set the `audienceSpace` to `B` to allow this test to overlap with the existing tests.
 
-##### Test Status
+#### Test Status
 
 Tests can be set to `ON` or `OFF` using the `status` field. Only tests with status `ON` will be validated and deployed.
 
@@ -223,7 +223,7 @@ The 3rd step is crucial as Fastly buckets users into tests/cohorts and returns y
 
 #### Ways to check your participation
 
-##### In source code
+#### In source code
 
 As detailed above the `useAB` module below exposes methods for getting a user's A/B test participations.
 
@@ -247,15 +247,15 @@ const isInVariantGroup =
 	abTests?.isUserInTestGroup('AbTestTest', 'variant') ?? false;
 ```
 
-##### On the Client
+#### On the Client
 
 The A/B test API described above is also available on the window object as `window.guardian.modules.abTests`. **Note:** This only works client side, you should use the `useBetaAB` hook described above in React components.
 
-##### On the Server
+#### On the Server
 
 Server side tests are also available in the CAPI object e.g. `CAPIArticle.config.serverSideABTests`.
 
-##### In the response headers
+#### In the response headers
 
 Fastly sends a user's AB participations via the `x-gu-server-ab-tests` response header (server side A/B tests) and `gu_client_ab_tests` response cookie (client side A/B tests).
 
