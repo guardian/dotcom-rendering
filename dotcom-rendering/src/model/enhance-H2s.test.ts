@@ -210,8 +210,8 @@ describe('Enhance h2 Embeds', () => {
 		const input = [
 			{
 				...mockProductElement,
-				primaryHeading: '<strong></strong>',
-				secondaryHeading: '',
+				primaryHeadingHtml: '<strong></strong>',
+				secondaryHeadingHtml: '',
 			},
 		];
 		const expectedOutput: ProductBlockElement[] = [
