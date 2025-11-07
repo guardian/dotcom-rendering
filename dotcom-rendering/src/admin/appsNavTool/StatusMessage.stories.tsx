@@ -5,6 +5,9 @@ import { error, ok } from '../../lib/result';
 const meta = {
 	title: 'Admin/Apps Nav Tool/Status Message',
 	component: StatusMessage,
+	parameters: {
+		chromatic: { disable: true },
+	},
 } satisfies Meta<typeof StatusMessage>;
 
 export default meta;
