@@ -4,6 +4,7 @@
  * https://github.com/guardian/commercial/blob/1a429d6be05657f20df4ca909df7d01a5c3d7402/src/lib/user-features.ts
  */
 
+import { removeCookie } from '@guardian/libs';
 import { getAuthStatus, isUserLoggedIn } from '../../lib/identity';
 import { AD_FREE_USER_COOKIE } from './cookies/adFree';
 import { ALLOW_REJECT_ALL_COOKIE } from './cookies/allowRejectAll';
@@ -48,16 +49,36 @@ const requestNewData = async () => {
  */
 const persistResponse = (userBenefitsResponse: UserBenefits) => {
 	createOrRenewCookie(USER_BENEFITS_EXPIRY_COOKIE);
+
+	// All of these user benefits cookies are now valid for 30 days. Previously
+	// they were short lived (1-2 days) but this resulted in edge cases where if
+	// a signed in user didn't visit the site for more than a couple of days
+	// when they returned their first page view wouldn't reflect their benefits
+	// (i.e. they would see ads). This is due to a race condition between the
+	// user benefits refresh and the ads code. However, we don't want to delay
+	// ads until after the user benefits have been refreshed as that would
+	// impact performance. So instead, extend the expiry of the cookie. Note:
+	// this may result in a user getting benefits they no longer have on the
+	// first returning pageview, but this will be correct from the second page
+	// view onwards. We think this is OK. This also means we now remove cookies
+	// if the user benefits response says they no longer have the benefit,
+	// rather than simply letting the cookie expire.
 	if (userBenefitsResponse.hideSupportMessaging) {
-		createOrRenewCookie(HIDE_SUPPORT_MESSAGING_COOKIE);
+		createOrRenewCookie(HIDE_SUPPORT_MESSAGING_COOKIE, 30);
+	} else {
+		removeCookie({ name: HIDE_SUPPORT_MESSAGING_COOKIE });
 	}
+
 	if (userBenefitsResponse.allowRejectAll) {
-		createOrRenewCookie(ALLOW_REJECT_ALL_COOKIE);
+		createOrRenewCookie(ALLOW_REJECT_ALL_COOKIE, 30);
+	} else {
+		removeCookie({ name: ALLOW_REJECT_ALL_COOKIE });
 	}
-	// Ad free cookie has an expiry of 2 days from now
-	// See https://github.com/guardian/gateway/blob/52f810a88fa9ce23c6a794916251748718742c3d/src/server/lib/user-features.ts#L111-L115
+
 	if (userBenefitsResponse.adFree) {
-		createOrRenewCookie(AD_FREE_USER_COOKIE, 2);
+		createOrRenewCookie(AD_FREE_USER_COOKIE, 30);
+	} else {
+		removeCookie({ name: AD_FREE_USER_COOKIE });
 	}
 };
 
