@@ -835,6 +835,7 @@ export const Card = ({
 			showTopBarMobile={showTopBarMobile}
 			isOnwardContent={isOnwardContent}
 			containerPalette={containerPalette}
+			contextFormat={contextFormat}
 		>
 			<CardLink
 				linkTo={linkTo}
