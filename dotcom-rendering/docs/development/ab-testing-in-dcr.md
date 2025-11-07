@@ -213,7 +213,7 @@ const someComponent = () => {
 
 #### In source code
 
-As detailed above the `useAB` module below exposes methods for getting a user's A/B test participations.
+As detailed above the `useAB` module exposes methods for getting a user's A/B test participations.
 
 ```ts
 import { useBetaAB } from '../lib/useAB';
