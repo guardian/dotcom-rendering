@@ -79,6 +79,7 @@ export type Position = 'inner' | 'outer' | 'none';
 export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
+	/** The format of the article holding the card */
 	contextFormat?: ArticleFormat;
 	serverTime?: number;
 	headlineText: string;
