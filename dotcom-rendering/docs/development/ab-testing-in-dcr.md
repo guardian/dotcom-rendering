@@ -209,7 +209,7 @@ const someComponent = () => {
 
 ```
 
-### Ways to check your participation
+### 3. Ways to check your participation
 
 #### In source code
 
@@ -247,7 +247,7 @@ Server side tests are also available in the CAPI object e.g. `CAPIArticle.config
 
 Fastly sends a user's AB participations via the `x-gu-server-ab-tests` response header (server side A/B tests) and `gu_client_ab_tests` response cookie (client side A/B tests).
 
-### Testing your changes on CODE
+### 4. Testing your changes on CODE
 
 If you want to test your changes on CODE you need to follow these steps:
 
@@ -259,7 +259,7 @@ If you want to test your changes on CODE you need to follow these steps:
 
 The 3rd step is crucial as Fastly buckets users into tests/cohorts and returns your A/B test participations as response headers.
 
-### Forcing yourself into a test on PROD/CODE
+### 5. Forcing yourself into a test on PROD/CODE
 
 Use the opt-in and opt-out URL fragments to force yourself into or out of a test.
 
