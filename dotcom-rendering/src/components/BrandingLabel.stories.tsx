@@ -3,7 +3,7 @@ import { BrandingLabel } from './BrandingLabel';
 
 const meta: Meta<typeof BrandingLabel> = {
 	component: BrandingLabel,
-	title: 'Components/BrandingLabel For Labs',
+	title: 'Components/BrandingLabel',
 	parameters: {
 		layout: 'centered',
 		chromatic: {
@@ -33,27 +33,35 @@ const meta: Meta<typeof BrandingLabel> = {
 			sponsorName: 'Guardian Org',
 			aboutThisLink: '#about',
 		},
-		isLabs: true,
 	},
 };
 
 export default meta;
 
-export const HorizontalOrientation = {
+export const Default = {
 	args: {
+		isLabs: false,
+	},
+};
+
+export const LabsHorizontalOrientation = {
+	args: {
+		isLabs: true,
 		orientation: 'horizontal',
 	},
 };
 
-export const VerticalOrientation = {
+export const LabsVerticalOrientation = {
 	args: {
+		isLabs: true,
 		orientation: 'vertical',
 	},
 };
 
-export const VerticalRightAlignment = {
+export const LabsVerticalRightAlignment = {
 	args: {
-		alignment: 'end',
+		isLabs: true,
 		orientation: 'vertical',
+		alignment: 'end',
 	},
 };

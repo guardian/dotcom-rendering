@@ -13,7 +13,7 @@ import type { Branding } from '../types/branding';
 import type { DCRContainerPalette } from '../types/front';
 import { useConfig } from './ConfigContext';
 
-type SponsoredContentLabelProps = {
+type Props = {
 	branding: Branding;
 	alignment?: 'start' | 'end';
 	orientation?: 'horizontal' | 'vertical';
@@ -115,7 +115,7 @@ export const BrandingLabel = ({
 	ophanComponentName,
 	isLabs = false,
 	isAdvertisingPartner = false,
-}: SponsoredContentLabelProps) => {
+}: Props) => {
 	const { darkModeAvailable } = useConfig();
 	const logo = decideBrandingLogo(branding, containerPalette);
 
@@ -195,7 +195,7 @@ export const BrandingLabel = ({
 					isAdvertisingPartner && imageAdvertisingPartnerStyles,
 				]}
 				src={logo.src}
-				alt={''}
+				alt={`logo for ${branding.sponsorName}`}
 			/>
 		</a>
 	);
