@@ -8241,14 +8241,14 @@ const paletteDeclarations = (
 	defaultFormat?: ArticleFormat,
 ): string[] =>
 	Object.entries(paletteColours).map(([colourName, colour]) => {
+		const formatColour = `${colourName}: ${colour[colourScheme](format)}`;
 		if (defaultFormat) {
-			const defaultColour = colour[colourScheme](defaultFormat);
-			const formatColour = colour[colourScheme](format);
-			return defaultColour === formatColour
-				? ''
-				: `${colourName}: ${formatColour};`;
+			const defaultColour = `${colourName}: ${colour[colourScheme](
+				defaultFormat,
+			)}`;
+			return defaultColour === formatColour ? '' : formatColour;
 		}
-		return `${colourName}: ${colour[colourScheme](format)};`;
+		return formatColour;
 	});
 
 export { type ColourName, paletteDeclarations };
