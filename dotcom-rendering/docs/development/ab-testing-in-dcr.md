@@ -209,19 +209,7 @@ const someComponent = () => {
 
 ```
 
-#### Testing your changes on CODE
-
-If you want to test your changes on CODE you need to follow these steps:
-
-1. Configure the A/B tests on your branch
-
-2. Deploy your branch to CODE
-
-3. Manually run the [🧪 AB testing CI (CODE)](https://github.com/guardian/dotcom-rendering/actions/workflows/ab-testing-ci-code.yml) worfklow using your branch. This deploys the test config to Fastly CODE.
-
-The 3rd step is crucial as Fastly buckets users into tests/cohorts and returns your A/B test participations as response headers.
-
-#### Ways to check your participation
+### Ways to check your participation
 
 #### In source code
 
@@ -259,7 +247,19 @@ Server side tests are also available in the CAPI object e.g. `CAPIArticle.config
 
 Fastly sends a user's AB participations via the `x-gu-server-ab-tests` response header (server side A/B tests) and `gu_client_ab_tests` response cookie (client side A/B tests).
 
-#### Forcing yourself into a test on PROD
+### Testing your changes on CODE
+
+If you want to test your changes on CODE you need to follow these steps:
+
+1. Configure the A/B tests on your branch
+
+2. Deploy your branch to CODE
+
+3. Manually run the [🧪 AB testing CI (CODE)](https://github.com/guardian/dotcom-rendering/actions/workflows/ab-testing-ci-code.yml) worfklow using your branch. This deploys the test config to Fastly CODE.
+
+The 3rd step is crucial as Fastly buckets users into tests/cohorts and returns your A/B test participations as response headers.
+
+### Forcing yourself into a test on PROD/CODE
 
 Use the opt-in and opt-out URL fragments to force yourself into or out of a test.
 
@@ -269,5 +269,7 @@ When opted-out, you'll return to random/mvt based assignment.
 
 These links are also in the [frontend admin](https://frontend.gutools.co.uk/analytics/ab-testing).
 
--   Opt-in Example: `https://theguardian.com/ab-tests/opt/in/commercial-test-example:variant`
--   Opt-out: `https://theguardian.com/ab-tests/opt/out`
+-   Opt-in Example on PROD: `https://theguardian.com/ab-tests/opt/in/commercial-test-example:variant`
+-   Opt-out on PROD: `https://theguardian.com/ab-tests/opt/out`
+
+You can use the same routes on CODE.
