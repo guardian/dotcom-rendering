@@ -57,7 +57,7 @@ export const AppsNavSchema = object({
 
 export type AppsNav = InferOutput<typeof AppsNavSchema>;
 
-type DeleteError = 'NoIndex' | 'NoSectionAtLocation';
+export type DeleteError = 'NoIndex' | 'NoSectionAtLocation';
 
 type DeleteSuccess = {
 	deleted: Section;
@@ -99,7 +99,7 @@ export const deleteSection = (
 	});
 };
 
-type InsertError =
+export type InsertError =
 	| 'NoIndex'
 	| 'NoSectionAtLocation'
 	| 'SectionExists'
@@ -154,7 +154,7 @@ export function insertSection(
 	);
 }
 
-type MoveError = 'OutOfRange';
+export type MoveError = 'OutOfRange';
 
 export const moveSection = (
 	sections: Section[],
@@ -185,7 +185,7 @@ export const moveSection = (
 	);
 };
 
-type UpdateError = 'NoIndex' | 'NoSectionAtLocation';
+export type UpdateError = 'NoIndex' | 'NoSectionAtLocation';
 
 type UpdateSuccess = {
 	from: Section;

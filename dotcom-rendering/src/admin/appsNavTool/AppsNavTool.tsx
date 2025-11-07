@@ -8,13 +8,17 @@ import { getEditionFromId, type EditionId } from '../../lib/edition';
 import { EditDialog } from './EditDialog';
 import { InsertDialog } from './InsertDialog';
 import { StatusMessage } from './StatusMessage';
+import type { Result } from '../../lib/result';
+import type { PublishError } from './error';
 
 type Props = {
 	nav: AppsNav;
 	editionId: EditionId;
 	guardianBaseUrl: string;
-	publish: (data: AppsNav) => Promise<boolean>;
+	publish: (data: AppsNav) => Promise<PublishResult>;
 };
+
+export type PublishResult = Result<PublishError, true>;
 
 export const AppsNavTool = (props: Props) => {
 	const [state, dispatch] = useReducer(reducer, {
@@ -22,24 +26,30 @@ export const AppsNavTool = (props: Props) => {
 		history: [],
 	});
 
+	const publish = async () => {
+		const result = await props.publish({ pillars: state.sections });
+
+		if (result.kind === 'ok') {
+			dispatch({ kind: 'publishSuccess' });
+		} else {
+			dispatch({ kind: 'publishError', error: result.error });
+		}
+	};
+
 	return (
 		<DispatchContext.Provider value={dispatch}>
 			<Heading editionId={props.editionId} />
 			<MenuButtons
 				initialSections={props.nav.pillars}
 				history={state.history}
-				publish={async () =>
-					(await props.publish({ pillars: state.sections }))
-						? dispatch({ kind: 'publishSuccess' })
-						: dispatch({ kind: 'publishError' })
-				}
+				publish={publish}
 			/>
 			<Sections
 				sections={state.sections}
 				guardianBaseUrl={props.guardianBaseUrl}
 				location={[]}
 			/>
-			<StatusMessage message={state.message} />
+			<StatusMessage message={state.statusMessage} />
 			<InsertDialog insertingAt={state.insertingAt} />
 			<EditDialog editing={state.editing} />
 		</DispatchContext.Provider>

@@ -13,11 +13,12 @@ import {
 	type Section,
 } from './appsNav';
 import { error, ok, type Result } from '../../lib/result';
+import type { AppsNavError, PublishError } from './error';
 
 export type State = {
 	sections: Section[];
 	history: HistoryEvent[];
-	message?: Result<string, string>;
+	statusMessage?: Result<AppsNavError, string>;
 	insertingAt?: number[];
 	editing?: {
 		title: string;
@@ -101,6 +102,7 @@ type Action =
 	  }
 	| {
 			kind: 'publishError';
+			error: PublishError;
 	  };
 
 export const DispatchContext = createContext<Dispatch<Action>>((_a: Action) => {
@@ -119,7 +121,7 @@ const insertAction = (
 
 	if (result.kind === 'error') {
 		return errorState(
-			`Failed to insert at location ${location}, ${result.error}`,
+			{ kind: 'InsertError', details: result.error, location },
 			state,
 		);
 	}
@@ -128,7 +130,7 @@ const insertAction = (
 		...state,
 		sections: result.value,
 		insertingAt: undefined,
-		message: undefined,
+		statusMessage: undefined,
 		history:
 			history === undefined
 				? [{ kind: 'insert', location }, ...state.history]
@@ -145,7 +147,7 @@ const deleteAction = (
 
 	if (result.kind === 'error') {
 		return errorState(
-			`Failed to delete at location ${location}, ${result.error}`,
+			{ kind: 'DeleteError', details: result.error, location },
 			state,
 		);
 	}
@@ -153,7 +155,7 @@ const deleteAction = (
 	return {
 		...state,
 		sections: result.value.sections,
-		message: undefined,
+		statusMessage: undefined,
 		history:
 			history === undefined
 				? [
@@ -178,7 +180,7 @@ const moveAction = (
 
 	if (result.kind === 'error') {
 		return errorState(
-			`Failed to move ${distance} at location ${location}, ${result.error}`,
+			{ kind: 'MoveError', details: result.error, location, distance },
 			state,
 		);
 	}
@@ -186,7 +188,7 @@ const moveAction = (
 	return {
 		...state,
 		sections: result.value,
-		message: undefined,
+		statusMessage: undefined,
 		history:
 			history === undefined
 				? [
@@ -212,7 +214,7 @@ const updateAction = (
 
 	if (result.kind === 'error') {
 		return errorState(
-			`Failed to update section at location ${location}, ${result.error}`,
+			{ kind: 'UpdateError', details: result.error, location },
 			state,
 		);
 	}
@@ -220,7 +222,7 @@ const updateAction = (
 	return {
 		...state,
 		sections: result.value.sections,
-		message: undefined,
+		statusMessage: undefined,
 		editing: undefined,
 		history:
 			history === undefined
@@ -241,7 +243,7 @@ const undo = (state: State): State => {
 
 	switch (lastEvent?.kind) {
 		case undefined:
-			return errorState('Cannot undo, no more history', state);
+			return errorState({ kind: 'NoHistoryError' }, state);
 		case 'delete':
 			return insertAction(
 				state,
@@ -279,32 +281,39 @@ export const reducer = (state: State, action: Action): State => {
 			return undo(state);
 		case 'reset': {
 			if (state.history.length === 0) {
-				return errorState('Cannot reset, nothing has changed', state);
+				return errorState({ kind: 'NoHistoryError' }, state);
 			}
 
 			return {
 				...state,
 				sections: action.initial,
 				history: [],
-				message: undefined,
+				statusMessage: undefined,
 			};
 		}
 		case 'insertInto':
 			return {
 				...state,
 				insertingAt: [...action.location, 0],
-				message: undefined,
+				statusMessage: undefined,
 			};
 		case 'cancelInsert':
-			return { ...state, insertingAt: undefined, message: undefined };
+			return {
+				...state,
+				insertingAt: undefined,
+				statusMessage: undefined,
+			};
 		case 'moveDown':
 			return moveAction(state, action.location, 1, undefined);
 		case 'moveUp':
 			return moveAction(state, action.location, -1, undefined);
 		case 'publishSuccess':
-			return { ...state, message: ok('Publication successful.') };
+			return { ...state, statusMessage: ok('Publication successful.') };
 		case 'publishError':
-			return errorState('Publication failed.', state);
+			return errorState(
+				{ kind: 'PublishError', details: action.error },
+				state,
+			);
 		case 'edit':
 			return {
 				...state,
@@ -328,7 +337,7 @@ export const reducer = (state: State, action: Action): State => {
 	}
 };
 
-const errorState = (message: string, state: State): State => ({
+const errorState = (message: AppsNavError, state: State): State => ({
 	...state,
-	message: error(message),
+	statusMessage: error(message),
 });

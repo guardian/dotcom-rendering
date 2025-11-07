@@ -3,8 +3,9 @@ import { parse } from 'valibot';
 import { ukNav } from '../../../fixtures/manual/appsNav/uk';
 import { auNav } from '../../../fixtures/manual/appsNav/au';
 import { AppsNavSchema, type AppsNav } from './appsNav';
-import { AppsNavTool } from './AppsNavTool';
+import { AppsNavTool, PublishResult } from './AppsNavTool';
 import { fn } from 'storybook/test';
+import { error, ok } from '../../lib/result';
 
 const meta = {
 	title: 'Admin/Apps Nav Tool',
@@ -20,7 +21,9 @@ export const UKNav = {
 		nav: parse(AppsNavSchema, ukNav),
 		editionId: 'UK',
 		guardianBaseUrl: 'https://www.theguardian.com',
-		publish: fn((_data: AppsNav) => Promise.resolve(true)),
+		publish: fn((_data: AppsNav) =>
+			Promise.resolve<PublishResult>(ok(true)),
+		),
 	},
 } satisfies Story;
 
@@ -49,5 +52,25 @@ export const EditSectionForm = {
 		const addSection = canvas.getAllByRole('button', { name: 'Edit' })[0]!;
 
 		userEvent.click(addSection);
+	},
+} satisfies Story;
+
+export const PublishError = {
+	args: {
+		...UKNav.args,
+		publish: fn((_data: AppsNav) =>
+			Promise.resolve<PublishResult>(error('NetworkError')),
+		),
+	},
+	play: ({ canvas, userEvent }) => {
+		// ! is used here to make sure we get an error in storybook if this
+		// can't be found.
+		const addSection = canvas.getAllByRole('button', {
+			name: 'Move Down',
+		})[0]!;
+		userEvent.click(addSection);
+
+		const publish = canvas.getByRole('button', { name: 'Publish' });
+		userEvent.click(publish);
 	},
 } satisfies Story;
