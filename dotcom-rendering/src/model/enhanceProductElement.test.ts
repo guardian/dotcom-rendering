@@ -26,8 +26,8 @@ const productBlockElement: ProductBlockElement = {
 	starRating: '5',
 	productName: 'Sky Kettle',
 	image: productImage,
-	secondaryHeading: 'Best Kettle Overall',
-	primaryHeading: 'Bosch Sky Kettle',
+	secondaryHeadingHtml: 'Best Kettle Overall',
+	primaryHeadingHtml: 'Bosch Sky Kettle',
 	customAttributes: [
 		{ name: 'What we love', value: 'It packs away pretty small' },
 		{

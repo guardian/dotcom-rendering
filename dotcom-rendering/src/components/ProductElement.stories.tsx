@@ -21,8 +21,8 @@ const ArticleElementComponent = getNestedArticleElement({
 const product = {
 	_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
 	elementId: 'b1f6e8e2-3f3a-4f0c-8d1e-5f3e3e3e3e3e',
-	primaryHeading: '<em>Best Kettle overall</em>',
-	secondaryHeading: 'Bosch Sky Kettle',
+	primaryHeadingHtml: '<em>Best Kettle overall</em>',
+	secondaryHeadingHtml: 'Bosch Sky Kettle',
 	brandName: 'Bosch',
 	productName: 'Sky Kettle',
 	image: productImage,
@@ -284,8 +284,8 @@ export const WithoutHeading = {
 	args: {
 		product: {
 			...product,
-			primaryHeading: '',
-			secondaryHeading: '',
+			primaryHeadingHtml: '',
+			secondaryHeadingHtml: '',
 		},
 	},
 } satisfies Story;
@@ -303,8 +303,8 @@ export const NoSecondaryHeading = {
 	args: {
 		product: {
 			...product,
-			primaryHeading: '<em>Primary heading only</em>',
-			secondaryHeading: '',
+			primaryHeadingHtml: '<em>Primary heading only</em>',
+			secondaryHeadingHtml: '',
 		},
 	},
 } satisfies Story;
@@ -313,8 +313,8 @@ export const NoPrimaryHeading = {
 	args: {
 		product: {
 			...product,
-			primaryHeading: '',
-			secondaryHeading: 'Secondary heading only',
+			primaryHeadingHtml: '',
+			secondaryHeadingHtml: 'Secondary heading only',
 		},
 	},
 } satisfies Story;
@@ -366,8 +366,8 @@ export const WithoutFields = {
 		product: {
 			...product,
 			image: undefined,
-			primaryHeading: '',
-			secondaryHeading: '',
+			primaryHeadingHtml: '',
+			secondaryHeadingHtml: '',
 			brandName: '',
 			productName: '',
 			productCtas: [],

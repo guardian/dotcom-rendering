@@ -476,8 +476,8 @@ export interface ProductBlockElement {
 	starRating: string;
 	productName: string;
 	image?: ProductImage;
-	secondaryHeading: string;
-	primaryHeading: string;
+	secondaryHeadingHtml: string;
+	primaryHeadingHtml: string;
 	customAttributes: ProductCustomAttribute[];
 	content: FEElement[];
 	h2Id?: string;

@@ -88,8 +88,10 @@ const Content = ({
 		shouldShowLeftColCard;
 	const subheadingHtml = parseHtml(
 		`<h2 id="${product.h2Id ?? product.elementId}">${
-			product.primaryHeading ? `${product.primaryHeading}<br />` : ''
-		} ${product.secondaryHeading || ''}</h2>`,
+			product.primaryHeadingHtml
+				? `${product.primaryHeadingHtml}<br />`
+				: ''
+		} ${product.secondaryHeadingHtml || ''}</h2>`,
 	);
 
 	const isSubheading = subheadingHtml.textContent

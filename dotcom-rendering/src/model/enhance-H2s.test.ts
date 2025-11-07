@@ -4,8 +4,8 @@ import { enhanceH2s } from './enhance-H2s';
 const mockProductElement: FEElement = {
 	_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
 	elementId: 'productMockId',
-	primaryHeading: 'Primary Heading',
-	secondaryHeading: 'Secondary Heading',
+	primaryHeadingHtml: 'Primary Heading',
+	secondaryHeadingHtml: 'Secondary Heading',
 	content: [],
 	customAttributes: [],
 	productCtas: [],
@@ -217,8 +217,8 @@ describe('Enhance h2 Embeds', () => {
 		const expectedOutput: ProductBlockElement[] = [
 			{
 				...mockProductElement,
-				primaryHeading: '<strong></strong>',
-				secondaryHeading: '',
+				primaryHeadingHtml: '<strong></strong>',
+				secondaryHeadingHtml: '',
 				h2Id: 'productMockId',
 			},
 		];
