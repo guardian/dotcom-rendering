@@ -163,7 +163,7 @@ A/B test on/off state is controlled only by the config. Expired tests will cause
 
 The test will appear in https://frontend.gutools.co.uk/analytics/ab-testing once the config is deployed.
 
-### 2. Putting your code changes behind an A/B test (group)
+### 2. Putting your code changes behind an A/B test
 
 Once your A/B test has been configured you can conditionally put your code changes behind an A/B test participation. The instructions below describe how to do this, and are applicable to both client and server side tests.
 
