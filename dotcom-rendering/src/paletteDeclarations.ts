@@ -8185,8 +8185,15 @@ type ColourName = keyof typeof paletteColours;
  * styles via the {@linkcode palette} function. See the examples for ways the
  * palette could be set up.
  *
+ * When not being applied at the root level an optional `defaultFormat` can be
+ * supplied which is compared against the colours generated for the current
+ * format. Any colours which are already defined and unchanged are not output
+ * to reduce the size of the resulting CSS. (The complete palette consists of
+ * 487 custom property declarations.)
+ *
  * @param format The `ArticleFormat` of the current article.
  * @param colourScheme Get declarations for either `light` or `dark` mode.
+ * @param defaultFormat Optional `ArticleFormat` to compare `format` against.
  * @returns A set of CSS custom property declarations for palette colours,
  * in string format. For example:
  * ```

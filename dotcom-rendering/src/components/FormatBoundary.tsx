@@ -32,7 +32,11 @@ export const FormatBoundary = ({ format, children }: Props) => {
 		setIsStorybook(true);
 	}, []);
 
-	// Default fronts format (will vary for articles)
+	/**
+	 * Default fronts format copied from `FrontPage.tsx`.
+	 * For use elsewhere (ie. articles) we will need to get the format that has
+	 * actually been applied to the page.
+	 */
 	const defaultFormat = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
