@@ -37,6 +37,8 @@ const requestNewData = async () => {
 	return syncDataFromUserBenefitsApi(authStatus).then(persistResponse);
 };
 
+const USER_BENEFITS_COOKIE_EXPIRATION_IN_DAYS = 30;
+
 /**
  * Persist the user benefits response to cookies
  *
@@ -64,19 +66,28 @@ const persistResponse = (userBenefitsResponse: UserBenefits) => {
 	// if the user benefits response says they no longer have the benefit,
 	// rather than simply letting the cookie expire.
 	if (userBenefitsResponse.hideSupportMessaging) {
-		createOrRenewCookie(HIDE_SUPPORT_MESSAGING_COOKIE, 30);
+		createOrRenewCookie(
+			HIDE_SUPPORT_MESSAGING_COOKIE,
+			USER_BENEFITS_COOKIE_EXPIRATION_IN_DAYS,
+		);
 	} else {
 		removeCookie({ name: HIDE_SUPPORT_MESSAGING_COOKIE });
 	}
 
 	if (userBenefitsResponse.allowRejectAll) {
-		createOrRenewCookie(ALLOW_REJECT_ALL_COOKIE, 30);
+		createOrRenewCookie(
+			ALLOW_REJECT_ALL_COOKIE,
+			USER_BENEFITS_COOKIE_EXPIRATION_IN_DAYS,
+		);
 	} else {
 		removeCookie({ name: ALLOW_REJECT_ALL_COOKIE });
 	}
 
 	if (userBenefitsResponse.adFree) {
-		createOrRenewCookie(AD_FREE_USER_COOKIE, 30);
+		createOrRenewCookie(
+			AD_FREE_USER_COOKIE,
+			USER_BENEFITS_COOKIE_EXPIRATION_IN_DAYS,
+		);
 	} else {
 		removeCookie({ name: AD_FREE_USER_COOKIE });
 	}
