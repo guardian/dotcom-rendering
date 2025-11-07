@@ -18,10 +18,32 @@ export const decideStoryPackageTrails = (
 
 export const decideTrail = (trail: FETrailType, index = 0): TrailType => {
 	const format: ArticleFormat = decideFormat(trail.format);
-	const image: DCRFrontImage | undefined = trail.masterImage // Fix this
+	const image: DCRFrontImage | undefined = trail.image
+		? {
+				src: trail.image,
+				altText: '', // TODO: Do we get this from frontend?
+		  }
+		: undefined;
+
+	return {
+		...trail,
+		image,
+		format,
+		dataLinkName: getDataLinkNameCard(format, '0', index),
+	};
+};
+
+// This is used for the new ScrollableSmallOnwards component which relies on the masterImage
+// In future work, we will need to fully migrate to this function and deprecate decideTrail
+export const decideTrailWithMasterImage = (
+	trail: FETrailType,
+	index = 0,
+): TrailType => {
+	const format: ArticleFormat = decideFormat(trail.format);
+	const image: DCRFrontImage | undefined = trail.masterImage
 		? {
 				src: trail.masterImage,
-				altText: '', // TODO: Do we get this from frontend?
+				altText: '',
 		  }
 		: undefined;
 
