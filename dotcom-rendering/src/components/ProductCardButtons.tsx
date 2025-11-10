@@ -21,6 +21,7 @@ export const ProductCardButtons = ({
 					key={label}
 					label={label}
 					url={productCta.url}
+					minimisePadding={true}
 					priority={index === 0 ? 'primary' : 'tertiary'}
 					fullwidth={true}
 					data-component={`${
