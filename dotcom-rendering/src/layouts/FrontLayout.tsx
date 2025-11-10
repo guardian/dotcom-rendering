@@ -191,20 +191,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 					frontId={front.pressedPage.id}
 					collectionId={0}
-					enableLoopVideoCORS={false}
 				/>
 			)
 		);
 	};
-
-	/** We allow the video to set crossOrigin={"anonymous"} if:
-	 * - the feature switch is ON
-	 * OR
-	 * - the user is opted into the 0% server side test
-	 */
-	const enableLoopVideoCORS =
-		!!front.config.switches.enableLoopVideoCors ||
-		abTests.loopVideoLoadVariant === 'variant';
 
 	return (
 		<>
@@ -497,7 +487,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											collection.containerLevel
 										}
 										showLabsRedesign={showLabsRedesign}
-										enableLoopVideoCORS={false}
 									/>
 								</LabsSection>
 
@@ -620,7 +609,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
 									showLabsRedesign={showLabsRedesign}
-									enableLoopVideoCORS={enableLoopVideoCORS}
 								/>
 							</FrontSection>
 
