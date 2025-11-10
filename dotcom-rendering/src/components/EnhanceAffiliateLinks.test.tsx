@@ -26,7 +26,7 @@ describe('EnhanceAffiliateLinks', () => {
 		expect(link?.href).toBe('https://example.com/');
 	});
 
-	it('should append xcust parameter to Skimlinks with refferer set to none if unavailable', () => {
+	it('should append xcust parameter to Skimlinks with referrer set to none if unavailable', () => {
 		Object.defineProperty(document, 'referrer', {
 			value: '',
 			configurable: true,
@@ -44,7 +44,7 @@ describe('EnhanceAffiliateLinks', () => {
 		);
 	});
 
-	it('should append xcust parameter to Skimlinks with refferer set if available', () => {
+	it('should append xcust parameter to Skimlinks with referrer set if available', () => {
 		Object.defineProperty(document, 'referrer', {
 			value: 'https://foo.com',
 			configurable: true,
