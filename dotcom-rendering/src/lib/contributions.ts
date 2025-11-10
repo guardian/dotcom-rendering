@@ -232,10 +232,8 @@ const hasCanTargetConsent = (): Promise<boolean> =>
 		.then(({ canTarget }: ConsentState) => canTarget)
 		.catch(() => false);
 
-export const buildRequestHeaders = async (): Promise<
-	HeadersInit | undefined
-> => {
-	// If user has targeting consent and is signed in then we can send an Authorization header
+// Returns Auth headers only if user has targeting consent and is signed in
+export const getAuthHeaders = async (): Promise<HeadersInit | undefined> => {
 	const hasConsented = await hasCanTargetConsent();
 	if (hasConsented) {
 		const authStatus = await getAuthStatus();

@@ -20,7 +20,7 @@ import type {
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import {
-	buildRequestHeaders,
+	getAuthHeaders,
 	hasCmpConsentForWeeklyArticleCount,
 	hasOptedOutOfArticleCount,
 	shouldHideSupportMessaging,
@@ -107,7 +107,7 @@ export const canShowReaderRevenueEpic = async (
 		hideSupportMessagingForUser,
 	});
 
-	const headers = await buildRequestHeaders();
+	const headers = await getAuthHeaders();
 
 	const response: ModuleDataResponse<EpicProps> = await getEpic(
 		contributionsServiceUrl,

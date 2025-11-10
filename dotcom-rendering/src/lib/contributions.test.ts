@@ -4,7 +4,7 @@ import { createOrRenewCookie } from '../client/userFeatures/cookies/cookieHelper
 import { HIDE_SUPPORT_MESSAGING_COOKIE } from '../client/userFeatures/cookies/hideSupportMessaging';
 import { USER_BENEFITS_EXPIRY_COOKIE } from '../client/userFeatures/cookies/userBenefitsExpiry';
 import {
-	buildRequestHeaders,
+	getAuthHeaders,
 	getLastOneOffContributionTimestamp,
 	hasHideSupportMessagingCookie,
 	isRecentOneOffContributor,
@@ -216,7 +216,7 @@ const getAuthStatus = getAuthStatus_ as jest.MockedFunction<
 	typeof getAuthStatus_
 >;
 
-describe('buildRequestHeaders', () => {
+describe('getAuthHeaders', () => {
 	beforeEach(() => {
 		jest.clearAllMocks();
 	});
@@ -224,7 +224,7 @@ describe('buildRequestHeaders', () => {
 	it('returns undefined when user has not consented to targeting', async () => {
 		(onConsent as jest.Mock).mockResolvedValue({ canTarget: false });
 
-		const result = await buildRequestHeaders();
+		const result = await getAuthHeaders();
 
 		expect(result).toBeUndefined();
 	});
@@ -232,7 +232,7 @@ describe('buildRequestHeaders', () => {
 	it('returns undefined when consent check fails', async () => {
 		(onConsent as jest.Mock).mockRejectedValue(new Error('Consent error'));
 
-		const result = await buildRequestHeaders();
+		const result = await getAuthHeaders();
 
 		expect(result).toBeUndefined();
 	});
@@ -241,7 +241,7 @@ describe('buildRequestHeaders', () => {
 		(onConsent as jest.Mock).mockResolvedValue({ canTarget: true });
 		(getAuthStatus as jest.Mock).mockResolvedValue({ kind: 'SignedOut' });
 
-		const result = await buildRequestHeaders();
+		const result = await getAuthHeaders();
 
 		expect(result).toBeUndefined();
 	});
@@ -253,7 +253,7 @@ describe('buildRequestHeaders', () => {
 			accessToken: { accessToken: 'token' },
 		});
 
-		const result = await buildRequestHeaders();
+		const result = await getAuthHeaders();
 
 		expect(result).toEqual({
 			Authorization: 'Bearer token',
