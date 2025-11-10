@@ -1,19 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
+import { productImage } from '../../fixtures/manual/productImage';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import type { ProductImage } from '../types/content';
 import { ProductCardInline } from './ProductCardInline';
-
-const productImage: ProductImage = {
-	url: 'https://media.guimcode.co.uk/cb193848ed75d40103eceaf12b448de2330770dc/0_0_725_725/725.jpg',
-	caption: 'Filter-2 test image for live demo',
-	height: 1,
-	width: 1,
-	alt: 'Bosch Sky kettle',
-	credit: 'Photograph: Rachel Ogden/The Guardian',
-	displayCredit: false,
-};
 
 const meta = {
 	component: ProductCardInline,
@@ -70,12 +60,20 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {} satisfies Story;
 
+export const ProductCardNoCustomAttributes = {
+	args: {
+		...meta.args,
+		customAttributes: [],
+	},
+} satisfies Story;
+
 export const ProductCardOnly = {
 	args: {
 		...meta.args,
 		isCardOnly: true,
 	},
-};
+} satisfies Story;
+
 export const ProductCardOnlyDisplayCredit = {
 	args: {
 		...meta.args,

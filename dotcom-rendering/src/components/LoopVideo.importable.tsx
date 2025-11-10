@@ -12,6 +12,7 @@ import { getZIndex } from '../lib/getZIndex';
 import { generateImageURL } from '../lib/image';
 import { useIsInView } from '../lib/useIsInView';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
+import { useSubtitles } from '../lib/useSubtitles';
 import type { CustomPlayEventDetail, Source } from '../lib/video';
 import {
 	customLoopPlayAudioEventName,
@@ -172,6 +173,12 @@ export const LoopVideo = ({
 	const [isInView, setNode] = useIsInView({
 		repeat: true,
 		threshold: VISIBILITY_THRESHOLD,
+	});
+
+	const activeCue = useSubtitles({
+		video: vidRef.current,
+		playerState,
+		currentTime,
 	});
 
 	const playVideo = useCallback(async () => {
@@ -666,6 +673,7 @@ export const LoopVideo = ({
 				showPlayIcon={showPlayIcon}
 				subtitleSource={subtitleSource}
 				subtitleSize={subtitleSize}
+				activeCue={activeCue}
 			/>
 		</figure>
 	);
