@@ -361,7 +361,7 @@ export const MultipleProductsWithoutStats = {
 	),
 } satisfies Story;
 
-export const WithoutFields = {
+export const EmptyFields = {
 	args: {
 		product: {
 			...product,
@@ -372,6 +372,7 @@ export const WithoutFields = {
 			productName: '',
 			productCtas: [],
 			customAttributes: [],
+			lowestPrice: undefined,
 		},
 	},
 } satisfies Story;
