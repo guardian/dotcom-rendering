@@ -473,7 +473,7 @@ export interface ProductBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ProductBlockElement';
 	elementId: string;
 	brandName: string;
-	starRating: string;
+	starRating: ProductStarRating;
 	productName: string;
 	image?: ProductImage;
 	secondaryHeadingHtml: string;
@@ -899,6 +899,15 @@ export type ProductCustomAttribute = {
 	name: string;
 	value: string;
 };
+
+export type ProductStarRating =
+	| '0'
+	| '1'
+	| '2'
+	| '3'
+	| '4'
+	| '5'
+	| 'none-selected';
 
 export interface SrcSetItem {
 	src: string;
