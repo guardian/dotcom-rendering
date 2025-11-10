@@ -13,7 +13,7 @@ import type { ReactNode } from 'react';
 type Props = {
 	initialSections: Section[];
 	history: HistoryEvent[];
-	publish: () => Promise<void>;
+	publish: () => void;
 };
 
 export const MenuButtons = (props: Props) => (
@@ -24,7 +24,7 @@ export const MenuButtons = (props: Props) => (
 			initialSections={props.initialSections}
 		/>
 		<AddSection />
-		<Publish publish={props.publish} />
+		<Publish publish={props.publish} history={props.history} />
 	</Menu>
 );
 
@@ -104,7 +104,10 @@ const AddSection = () => {
 	);
 };
 
-const Publish = (props: { publish: Props['publish'] }) => (
+const Publish = (props: {
+	publish: Props['publish'];
+	history: HistoryEvent[];
+}) => (
 	<li
 		css={{
 			marginLeft: 'auto',
@@ -115,6 +118,7 @@ const Publish = (props: { publish: Props['publish'] }) => (
 			priority="primary"
 			icon={<SvgUpload />}
 			onClick={props.publish}
+			disabled={props.history.length === 0}
 		>
 			Publish
 		</Button>

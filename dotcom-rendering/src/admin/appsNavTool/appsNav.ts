@@ -154,15 +154,20 @@ export function insertSection(
 	);
 }
 
-export type MoveError = 'OutOfRange';
+export type MoveError = 'OutOfRange' | 'NoIndex';
+
+type MoveSuccess = {
+	moved: Section;
+	sections: Section[];
+};
 
 export const moveSection = (
 	sections: Section[],
 	location: number[],
 	to: number,
-): Result<MoveError | DeleteError | InsertError, Section[]> => {
+): Result<MoveError | DeleteError | InsertError, MoveSuccess> => {
 	if (location.length === 0) {
-		return ok(sections);
+		return error('NoIndex');
 	}
 
 	const deleteResult = deleteSection(sections, location);
@@ -178,17 +183,27 @@ export const moveSection = (
 		return error('OutOfRange');
 	}
 
-	return insertSection(
+	const result = insertSection(
 		remainingSections,
 		location.toSpliced(-1, 1, newLocation),
 		deleted,
 	);
+
+	if (result.kind === 'error') {
+		return result;
+	}
+
+	return ok({
+		moved: deleted,
+		sections: result.value,
+	});
 };
 
 export type UpdateError = 'NoIndex' | 'NoSectionAtLocation';
 
 type UpdateSuccess = {
 	from: Section;
+	to: Section;
 	sections: Section[];
 };
 
@@ -211,9 +226,12 @@ export const updateSection = (
 	}
 
 	if (rest.length === 0 || section.sections === undefined) {
+		const newSection = { ...section, title, path };
+
 		return ok({
 			from: section,
-			sections: sections.toSpliced(index, 1, { ...section, title, path }),
+			sections: sections.toSpliced(index, 1, newSection),
+			to: newSection,
 		});
 	}
 
@@ -225,6 +243,7 @@ export const updateSection = (
 
 	return ok({
 		from: result.value.from,
+		to: result.value.to,
 		sections: sections.toSpliced(index, 1, {
 			...section,
 			sections: result.value.sections,

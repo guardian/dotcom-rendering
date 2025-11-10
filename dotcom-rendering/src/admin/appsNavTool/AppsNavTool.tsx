@@ -1,5 +1,5 @@
 import { headlineMedium34Object, space } from '@guardian/source/foundations';
-import { useReducer } from 'react';
+import { useCallback, useReducer } from 'react';
 import { type AppsNav } from './appsNav';
 import { DispatchContext, reducer } from './state';
 import { MenuButtons } from './MenuButtons';
@@ -10,6 +10,7 @@ import { InsertDialog } from './InsertDialog';
 import { StatusMessage } from './StatusMessage';
 import type { Result } from '../../lib/result';
 import type { PublishError } from './error';
+import { PublishDialog } from './PublishDialog';
 
 type Props = {
 	nav: AppsNav;
@@ -24,6 +25,7 @@ export const AppsNavTool = (props: Props) => {
 	const [state, dispatch] = useReducer(reducer, {
 		sections: props.nav.pillars,
 		history: [],
+		prepublish: false,
 	});
 
 	const publish = async () => {
@@ -36,13 +38,17 @@ export const AppsNavTool = (props: Props) => {
 		}
 	};
 
+	const prePublish = useCallback(() => {
+		dispatch({ kind: 'prePublish' });
+	}, [dispatch]);
+
 	return (
 		<DispatchContext.Provider value={dispatch}>
 			<Heading editionId={props.editionId} />
 			<MenuButtons
 				initialSections={props.nav.pillars}
 				history={state.history}
-				publish={publish}
+				publish={prePublish}
 			/>
 			<Sections
 				sections={state.sections}
@@ -52,6 +58,11 @@ export const AppsNavTool = (props: Props) => {
 			<StatusMessage message={state.statusMessage} />
 			<InsertDialog insertingAt={state.insertingAt} />
 			<EditDialog editing={state.editing} />
+			<PublishDialog
+				history={state.history}
+				open={state.prepublish}
+				publish={publish}
+			/>
 		</DispatchContext.Provider>
 	);
 };

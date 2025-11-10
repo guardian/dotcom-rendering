@@ -20,6 +20,7 @@ export type State = {
 	history: HistoryEvent[];
 	statusMessage?: Result<AppsNavError, string>;
 	insertingAt?: number[];
+	prepublish: boolean;
 	editing?: {
 		title: string;
 		path: string;
@@ -36,10 +37,12 @@ export type HistoryEvent =
 	  }
 	| {
 			kind: 'insert';
+			section: Section;
 			location: number[];
 	  }
 	| {
 			kind: 'move';
+			section: Section;
 			distance: number;
 			from: number[];
 	  }
@@ -47,6 +50,7 @@ export type HistoryEvent =
 			kind: 'update';
 			location: number[];
 			from: Section;
+			to: Section;
 	  };
 
 type Action =
@@ -98,6 +102,12 @@ type Action =
 			location: number[];
 	  }
 	| {
+			kind: 'prePublish';
+	  }
+	| {
+			kind: 'cancelPrePublish';
+	  }
+	| {
 			kind: 'publishSuccess';
 	  }
 	| {
@@ -133,7 +143,7 @@ const insertAction = (
 		statusMessage: undefined,
 		history:
 			history === undefined
-				? [{ kind: 'insert', location }, ...state.history]
+				? [{ kind: 'insert', location, section }, ...state.history]
 				: history,
 	};
 };
@@ -187,7 +197,7 @@ const moveAction = (
 
 	return {
 		...state,
-		sections: result.value,
+		sections: result.value.sections,
 		statusMessage: undefined,
 		history:
 			history === undefined
@@ -196,6 +206,7 @@ const moveAction = (
 							kind: 'move',
 							distance,
 							from: location,
+							section: result.value.moved,
 						},
 						...state.history,
 				  ]
@@ -231,6 +242,7 @@ const updateAction = (
 							kind: 'update',
 							location,
 							from: result.value.from,
+							to: result.value.to,
 						},
 						...state.history,
 				  ]
@@ -307,13 +319,25 @@ export const reducer = (state: State, action: Action): State => {
 			return moveAction(state, action.location, 1, undefined);
 		case 'moveUp':
 			return moveAction(state, action.location, -1, undefined);
+		case 'prePublish':
+			return { ...state, prepublish: true };
+		case 'cancelPrePublish':
+			return { ...state, prepublish: false };
 		case 'publishSuccess':
-			return { ...state, statusMessage: ok('Publication successful.') };
+			return {
+				...state,
+				statusMessage: ok('Publication successful.'),
+				prepublish: false,
+				history: [],
+			};
 		case 'publishError':
-			return errorState(
-				{ kind: 'PublishError', details: action.error },
-				state,
-			);
+			return {
+				...errorState(
+					{ kind: 'PublishError', details: action.error },
+					state,
+				),
+				prepublish: false,
+			};
 		case 'edit':
 			return {
 				...state,

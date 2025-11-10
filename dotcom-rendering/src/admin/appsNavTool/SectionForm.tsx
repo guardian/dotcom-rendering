@@ -1,20 +1,14 @@
-import {
-	headlineBold24Object,
-	palette,
-	space,
-} from '@guardian/source/foundations';
+import { space } from '@guardian/source/foundations';
 import { TextInput, Button, Select } from '@guardian/source/react-components';
 import {
 	useState,
-	useRef,
 	type FormEventHandler,
-	useEffect,
-	type ReactNode,
 	useCallback,
 	type ChangeEventHandler,
 } from 'react';
 import { css } from '@emotion/react';
 import { mobileOverrideOptions, type MobileOverride } from './appsNav';
+import { Dialog } from './Dialog';
 
 type Props = {
 	heading: string;
@@ -43,8 +37,7 @@ export const SectionForm = (props: Props) => {
 	};
 
 	return (
-		<Dialog open={props.open}>
-			<Heading>{props.heading}</Heading>
+		<Dialog open={props.open} heading={props.heading}>
 			<form action="" onSubmit={submit}>
 				<TitleInput title={title} setTitle={setTitle} />
 				<UrlInput url={url} setUrl={setUrl} />
@@ -57,46 +50,6 @@ export const SectionForm = (props: Props) => {
 		</Dialog>
 	);
 };
-
-const Dialog = (props: { children: ReactNode; open: boolean }) => {
-	const dialogRef = useRef<HTMLDialogElement | null>(null);
-
-	// Required for the `::backdrop` pseudo-element, otherwise we could use the
-	// `open` attribute.
-	useEffect(() => {
-		if (props.open) {
-			dialogRef.current?.showModal();
-		} else {
-			dialogRef.current?.close();
-		}
-	}, [props.open]);
-
-	return (
-		<dialog
-			css={{
-				width: 'min(500px, 95vw)',
-				'::backdrop': {
-					backgroundColor: palette.neutral[10],
-					opacity: 0.7,
-				},
-			}}
-			ref={dialogRef}
-		>
-			{props.children}
-		</dialog>
-	);
-};
-
-const Heading = (props: { children: ReactNode }) => (
-	<h2
-		css={{
-			...headlineBold24Object,
-			paddingBottom: space[5],
-		}}
-	>
-		{props.children}
-	</h2>
-);
 
 const TitleInput = (props: {
 	title: string;

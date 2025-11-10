@@ -61,18 +61,20 @@ describe('appsNav', () => {
 			'Expected section move to be successful',
 		);
 
-		expect(result[0]?.sections?.length).toBe(8);
-		expect(result?.[0]?.sections?.[2]?.title).toEqual('Society');
-		expect(result?.[0]?.sections?.[5]?.title).toEqual('Media');
+		expect(result.sections[0]?.sections?.length).toBe(8);
+		expect(result.sections?.[0]?.sections?.[2]?.title).toEqual('Society');
+		expect(result.sections?.[0]?.sections?.[5]?.title).toEqual('Media');
 
 		const result2 = okOrThrow(
 			moveSection(sections, [0, 2], -2),
 			'Expected section move to be successful',
 		);
 
-		expect(result2[0]?.sections?.length).toBe(8);
-		expect(result2?.[0]?.sections?.[0]?.title).toEqual('Media');
-		expect(result2?.[0]?.sections?.[2]?.title).toEqual('Education');
+		expect(result2.sections[0]?.sections?.length).toBe(8);
+		expect(result2.sections?.[0]?.sections?.[0]?.title).toEqual('Media');
+		expect(result2.sections?.[0]?.sections?.[2]?.title).toEqual(
+			'Education',
+		);
 	});
 
 	it('updates sections', () => {
