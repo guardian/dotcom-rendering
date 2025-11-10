@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { StatusMessage } from './StatusMessage';
 import { error, ok } from '../../lib/result';
+import { StatusMessage } from './StatusMessage';
 
 const meta = {
 	title: 'Admin/Apps Nav Tool/Status Message',

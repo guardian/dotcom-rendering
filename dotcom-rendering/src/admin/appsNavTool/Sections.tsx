@@ -3,10 +3,10 @@ import {
 	palette,
 	space,
 } from '@guardian/source/foundations';
-import { type Section as SectionModel } from './appsNav';
-import { SectionButtons } from './SectionButtons';
 import { SvgChevronDownSingle } from '@guardian/source/react-components';
 import type { ReactNode } from 'react';
+import { type Section as SectionModel } from './appsNav';
+import { SectionButtons } from './SectionButtons';
 
 type Props = {
 	sections: SectionModel[];
@@ -51,7 +51,7 @@ const Section = (props: {
 				numberOfSections={props.numberOfSections}
 			/>
 			<Chevron subSections={props.section.sections} />
-			<Title location={props.location}>{props.section.title}</Title>{' '}
+			<Title>{props.section.title}</Title>{' '}
 			<Path
 				path={props.section.path}
 				guardianBaseUrl={props.guardianBaseUrl}
@@ -127,7 +127,7 @@ const Chevron = (props: { subSections: SectionModel[] | undefined }) => {
 	);
 };
 
-const Title = (props: { children: ReactNode; location: number[] }) => (
+const Title = (props: { children: ReactNode }) => (
 	<span
 		css={{
 			...headlineBold17Object,

@@ -1,11 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { parse } from 'valibot';
-import { ukNav } from '../../../fixtures/manual/appsNav/uk';
-import { auNav } from '../../../fixtures/manual/appsNav/au';
-import { AppsNavSchema, type AppsNav } from './appsNav';
-import { AppsNavTool, PublishResult } from './AppsNavTool';
 import { fn, within } from 'storybook/test';
+import { parse } from 'valibot';
+import { auNav } from '../../../fixtures/manual/appsNav/au';
+import { ukNav } from '../../../fixtures/manual/appsNav/uk';
 import { error, ok } from '../../lib/result';
+import { AppsNavSchema } from './appsNav';
+import type { PublishResult } from './AppsNavTool';
+import { AppsNavTool } from './AppsNavTool';
 
 const meta = {
 	title: 'Admin/Apps Nav Tool',
@@ -21,9 +22,7 @@ export const UKNav = {
 		nav: parse(AppsNavSchema, ukNav),
 		editionId: 'UK',
 		guardianBaseUrl: 'https://www.theguardian.com',
-		publish: fn((_data: AppsNav) =>
-			Promise.resolve<PublishResult>(ok(true)),
-		),
+		publish: fn(() => Promise.resolve<PublishResult>(ok(true))),
 	},
 } satisfies Story;
 
@@ -37,21 +36,21 @@ export const AUNav = {
 
 export const AddSectionForm = {
 	...UKNav,
-	play: ({ canvas, userEvent }) => {
+	play: async ({ canvas, userEvent }) => {
 		const addSection = canvas.getByRole('button', { name: 'Add Section' });
 
-		userEvent.click(addSection);
+		await userEvent.click(addSection);
 	},
 } satisfies Story;
 
 export const EditSectionForm = {
 	...UKNav,
-	play: ({ canvas, userEvent }) => {
+	play: async ({ canvas, userEvent }) => {
 		// ! is used here to make sure we get an error in storybook if this
 		// can't be found.
 		const addSection = canvas.getAllByRole('button', { name: 'Edit' })[0]!;
 
-		userEvent.click(addSection);
+		await userEvent.click(addSection);
 	},
 } satisfies Story;
 
@@ -147,7 +146,7 @@ export const PublishConfirm = {
 export const PublishError = {
 	args: {
 		...UKNav.args,
-		publish: fn((_data: AppsNav) =>
+		publish: fn(() =>
 			Promise.resolve<PublishResult>(error('NetworkError')),
 		),
 	},

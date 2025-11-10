@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
-import { useDispatch, type State } from './state';
 import { SectionForm } from './SectionForm';
+import { type State, useDispatch } from './state';
 
 type Props = {
 	editing: State['editing'] | undefined;

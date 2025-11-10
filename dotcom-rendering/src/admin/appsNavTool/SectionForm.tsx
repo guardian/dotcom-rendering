@@ -1,13 +1,13 @@
+import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import { TextInput, Button, Select } from '@guardian/source/react-components';
+import { Button, Select, TextInput } from '@guardian/source/react-components';
 import {
-	useState,
+	type ChangeEventHandler,
 	type FormEventHandler,
 	useCallback,
-	type ChangeEventHandler,
+	useState,
 } from 'react';
-import { css } from '@emotion/react';
-import { mobileOverrideOptions, type MobileOverride } from './appsNav';
+import { type MobileOverride, mobileOverrideOptions } from './appsNav';
 import { Dialog } from './Dialog';
 
 type Props = {
@@ -83,6 +83,8 @@ const MobileOverrideSelect = (props: {
 	mobileOverride: MobileOverride | undefined;
 	setMobileOverride: (a: MobileOverride | undefined) => void;
 }) => {
+	const { setMobileOverride } = props;
+
 	const onChange = useCallback<ChangeEventHandler<HTMLSelectElement>>(
 		(e) => {
 			if (isMobileOverride(e.target.value)) {
@@ -91,7 +93,7 @@ const MobileOverrideSelect = (props: {
 				props.setMobileOverride(undefined);
 			}
 		},
-		[props.setMobileOverride],
+		[setMobileOverride],
 	);
 
 	return (

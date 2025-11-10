@@ -3,7 +3,7 @@ import {
 	palette,
 	space,
 } from '@guardian/source/foundations';
-import { useEffect, useRef, type ReactNode } from 'react';
+import { type ReactNode, useEffect, useRef } from 'react';
 
 type Props = {
 	children: ReactNode;

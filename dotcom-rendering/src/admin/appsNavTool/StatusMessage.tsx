@@ -1,13 +1,13 @@
+import { css } from '@emotion/react';
 import {
 	palette,
 	space,
 	textEgyptian17Object,
 } from '@guardian/source/foundations';
-import { InlineSuccess, InlineError } from '@guardian/source/react-components';
+import { InlineError, InlineSuccess } from '@guardian/source/react-components';
 import type { ReactNode } from 'react';
-import type { State } from './state';
 import type { AppsNavError } from './error';
-import { css } from '@emotion/react';
+import type { State } from './state';
 
 type Props = {
 	message: State['statusMessage'];

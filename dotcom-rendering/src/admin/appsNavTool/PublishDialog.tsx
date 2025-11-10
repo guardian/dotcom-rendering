@@ -1,6 +1,10 @@
-import { useCallback, type FormEventHandler, type ReactNode } from 'react';
-import { Dialog } from './Dialog';
-import { type HistoryEvent } from './state';
+import { css } from '@emotion/react';
+import {
+	headlineBold17Object,
+	palette,
+	space,
+	textEgyptian17Object,
+} from '@guardian/source/foundations';
 import {
 	Button,
 	SvgArrowDownStraight,
@@ -10,15 +14,11 @@ import {
 	SvgPlus,
 	SvgUpload,
 } from '@guardian/source/react-components';
-import {
-	headlineBold17Object,
-	palette,
-	space,
-	textEgyptian17Object,
-} from '@guardian/source/foundations';
-import { useDispatch } from './state';
-import { css } from '@emotion/react';
+import { type FormEventHandler, type ReactNode, useCallback } from 'react';
 import type { Section } from './appsNav';
+import { Dialog } from './Dialog';
+import { type HistoryEvent } from './state';
+import { useDispatch } from './state';
 
 type Props = {
 	history: HistoryEvent[];
@@ -27,12 +27,14 @@ type Props = {
 };
 
 export const PublishDialog = (props: Props) => {
+	const { publish } = props;
+
 	const submit: FormEventHandler = useCallback(
 		(e) => {
 			e.preventDefault();
 			props.publish();
 		},
-		[props.publish],
+		[publish],
 	);
 
 	return (

@@ -1,15 +1,15 @@
+import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
 import {
 	Button,
-	SvgEdit,
-	SvgBin,
-	SvgArrowUpStraight,
 	SvgArrowDownStraight,
+	SvgArrowUpStraight,
+	SvgBin,
+	SvgEdit,
 	SvgPlus,
 } from '@guardian/source/react-components';
 import type { MobileOverride } from './appsNav';
 import { useDispatch } from './state';
-import { css } from '@emotion/react';
 
 type Props = {
 	location: number[];
@@ -52,7 +52,7 @@ const Edit = (props: {
 			size="xsmall"
 			priority="primary"
 			icon={<SvgEdit />}
-			hideLabel
+			hideLabel={true}
 			onClick={() =>
 				dispatch({
 					kind: 'edit',
@@ -76,7 +76,7 @@ const Delete = (props: { location: Props['location'] }) => {
 			size="xsmall"
 			priority="primary"
 			icon={<SvgBin />}
-			hideLabel
+			hideLabel={true}
 			onClick={() =>
 				dispatch({ kind: 'delete', location: props.location })
 			}
@@ -98,7 +98,7 @@ const MoveUp = (props: { location: Props['location']; index: number }) => {
 			priority="secondary"
 			icon={<SvgArrowUpStraight />}
 			disabled={props.index === 0}
-			hideLabel
+			hideLabel={true}
 			onClick={() =>
 				dispatch({ kind: 'moveUp', location: props.location })
 			}
@@ -124,7 +124,7 @@ const MoveDown = (props: {
 			priority="secondary"
 			icon={<SvgArrowDownStraight />}
 			disabled={props.index === props.numberOfSections - 1}
-			hideLabel
+			hideLabel={true}
 			onClick={() =>
 				dispatch({ kind: 'moveDown', location: props.location })
 			}
@@ -145,7 +145,7 @@ const AddSubsection = (props: { location: Props['location'] }) => {
 			size="xsmall"
 			priority="tertiary"
 			icon={<SvgPlus />}
-			hideLabel
+			hideLabel={true}
 			onClick={() =>
 				dispatch({ kind: 'insertInto', location: props.location })
 			}

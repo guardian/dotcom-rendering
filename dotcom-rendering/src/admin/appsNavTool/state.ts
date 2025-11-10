@@ -3,16 +3,16 @@
  * https://react.dev/learn/scaling-up-with-reducer-and-context
  */
 
-import { createContext, useContext, type Dispatch } from 'react';
+import { createContext, type Dispatch, useContext } from 'react';
+import { error, ok, type Result } from '../../lib/result';
 import {
 	deleteSection,
 	insertSection,
-	moveSection,
-	updateSection,
 	type MobileOverride,
+	moveSection,
 	type Section,
+	updateSection,
 } from './appsNav';
-import { error, ok, type Result } from '../../lib/result';
 import type { AppsNavError, PublishError } from './error';
 
 export type State = {
@@ -115,11 +115,11 @@ type Action =
 			error: PublishError;
 	  };
 
-export const DispatchContext = createContext<Dispatch<Action>>((_a: Action) => {
+export const DispatchContext = createContext<Dispatch<Action>>(() => {
 	console.error('No dispatch function was provided to the DispatchContext');
 });
 
-export const useDispatch = () => useContext(DispatchContext);
+export const useDispatch = (): Dispatch<Action> => useContext(DispatchContext);
 
 const insertAction = (
 	state: State,
@@ -141,10 +141,10 @@ const insertAction = (
 		sections: result.value,
 		insertingAt: undefined,
 		statusMessage: undefined,
-		history:
-			history === undefined
-				? [{ kind: 'insert', location, section }, ...state.history]
-				: history,
+		history: history ?? [
+			{ kind: 'insert', location, section },
+			...state.history,
+		],
 	};
 };
 
@@ -166,17 +166,14 @@ const deleteAction = (
 		...state,
 		sections: result.value.sections,
 		statusMessage: undefined,
-		history:
-			history === undefined
-				? [
-						{
-							kind: 'delete',
-							location,
-							section: result.value.deleted,
-						},
-						...state.history,
-				  ]
-				: history,
+		history: history ?? [
+			{
+				kind: 'delete',
+				location,
+				section: result.value.deleted,
+			},
+			...state.history,
+		],
 	};
 };
 
@@ -199,18 +196,15 @@ const moveAction = (
 		...state,
 		sections: result.value.sections,
 		statusMessage: undefined,
-		history:
-			history === undefined
-				? [
-						{
-							kind: 'move',
-							distance,
-							from: location,
-							section: result.value.moved,
-						},
-						...state.history,
-				  ]
-				: history,
+		history: history ?? [
+			{
+				kind: 'move',
+				distance,
+				from: location,
+				section: result.value.moved,
+			},
+			...state.history,
+		],
 	};
 };
 
@@ -235,18 +229,15 @@ const updateAction = (
 		sections: result.value.sections,
 		statusMessage: undefined,
 		editing: undefined,
-		history:
-			history === undefined
-				? [
-						{
-							kind: 'update',
-							location,
-							from: result.value.from,
-							to: result.value.to,
-						},
-						...state.history,
-				  ]
-				: history,
+		history: history ?? [
+			{
+				kind: 'update',
+				location,
+				from: result.value.from,
+				to: result.value.to,
+			},
+			...state.history,
+		],
 	};
 };
 

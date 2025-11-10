@@ -1,14 +1,14 @@
 import { space } from '@guardian/source/foundations';
 import {
 	Button,
-	SvgReload,
 	SvgArrowOutdent,
 	SvgPlus,
+	SvgReload,
 	SvgUpload,
 } from '@guardian/source/react-components';
-import type { Section } from './appsNav';
-import { useDispatch, type HistoryEvent } from './state';
 import type { ReactNode } from 'react';
+import type { Section } from './appsNav';
+import { type HistoryEvent, useDispatch } from './state';
 
 type Props = {
 	initialSections: Section[];

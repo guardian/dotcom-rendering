@@ -1,16 +1,16 @@
 import { headlineMedium34Object, space } from '@guardian/source/foundations';
 import { useCallback, useReducer } from 'react';
-import { type AppsNav } from './appsNav';
-import { DispatchContext, reducer } from './state';
-import { MenuButtons } from './MenuButtons';
-import { Sections } from './Sections';
-import { getEditionFromId, type EditionId } from '../../lib/edition';
-import { EditDialog } from './EditDialog';
-import { InsertDialog } from './InsertDialog';
-import { StatusMessage } from './StatusMessage';
+import { type EditionId, getEditionFromId } from '../../lib/edition';
 import type { Result } from '../../lib/result';
+import { type AppsNav } from './appsNav';
+import { EditDialog } from './EditDialog';
 import type { PublishError } from './error';
+import { InsertDialog } from './InsertDialog';
+import { MenuButtons } from './MenuButtons';
 import { PublishDialog } from './PublishDialog';
+import { Sections } from './Sections';
+import { DispatchContext, reducer } from './state';
+import { StatusMessage } from './StatusMessage';
 
 type Props = {
 	nav: AppsNav;
