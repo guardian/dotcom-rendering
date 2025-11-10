@@ -5,6 +5,7 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { getNestedArticleElement } from '../lib/renderElement';
 import type { ProductBlockElement } from '../types/content';
 import { ProductElement } from './ProductElement';
+import { allModes } from '../../.storybook/modes';
 
 const ArticleElementComponent = getNestedArticleElement({
 	abTests: {},
@@ -261,6 +262,16 @@ const product = {
 const meta = {
 	component: ProductElement,
 	title: 'Components/ProductElement',
+	parameters: {
+		chromatic: {
+			modes: {
+				'light mobile': allModes['light mobile'],
+				'light desktop': allModes['light desktop'],
+				'light wide': allModes['light wide'],
+				dark: allModes['dark'],
+			},
+		},
+	},
 	args: {
 		product,
 		format: {
