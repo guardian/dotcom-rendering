@@ -3925,7 +3925,7 @@
                     "type": "string"
                 },
                 "starRating": {
-                    "type": "string"
+                    "$ref": "#/definitions/ProductStarRating"
                 },
                 "productName": {
                     "type": "string"
@@ -4012,6 +4012,18 @@
                 "secondaryHeadingHtml",
                 "starRating"
             ]
+        },
+        "ProductStarRating": {
+            "enum": [
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "none-selected"
+            ],
+            "type": "string"
         },
         "ProductImage": {
             "type": "object",
