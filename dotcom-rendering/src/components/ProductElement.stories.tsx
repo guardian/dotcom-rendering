@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
+import { allModes } from '../../.storybook/modes';
 import { productImage } from '../../fixtures/manual/productImage';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { getNestedArticleElement } from '../lib/renderElement';
 import type { ProductBlockElement } from '../types/content';
 import { ProductElement } from './ProductElement';
-import { allModes } from '../../.storybook/modes';
 
 const ArticleElementComponent = getNestedArticleElement({
 	abTests: {},
