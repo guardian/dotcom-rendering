@@ -119,7 +119,7 @@ When your PR is merged, the A/B test will be automatically deployed to Fastly an
 
 #### Naming Conventions
 
-A/B tests should be prefixed with the team associated with the test, for example `webex-example-test`. This helps to identify the team responsible for the test and is enforce by typescript validation.
+A/B tests should be prefixed with the team associated with the test, for example `webex-example-test`. This helps to identify the team responsible for the test and is enforce by typescript validation, you can inspect & edit the allowed team name definitions [here](https://github.com/guardian/dotcom-rendering/blob/main/ab-testing/types.ts#L9).
 
 #### Test Size and Groups
 
