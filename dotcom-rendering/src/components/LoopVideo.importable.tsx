@@ -125,8 +125,6 @@ type Props = {
 	linkTo: string;
 	subtitleSource?: string;
 	subtitleSize: SubtitleSize;
-	/** Feature flag for the enabling CORS loading on looping video */
-	enableLoopVideoCORS?: boolean;
 };
 
 export const LoopVideo = ({
@@ -144,7 +142,6 @@ export const LoopVideo = ({
 	linkTo,
 	subtitleSource,
 	subtitleSize,
-	enableLoopVideoCORS = false,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -677,7 +674,6 @@ export const LoopVideo = ({
 				subtitleSource={subtitleSource}
 				subtitleSize={subtitleSize}
 				activeCue={activeCue}
-				enableLoopVideoCORS={enableLoopVideoCORS}
 			/>
 		</figure>
 	);
