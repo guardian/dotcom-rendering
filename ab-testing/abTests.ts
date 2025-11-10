@@ -31,6 +31,19 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
 	},
+	{
+		name: "commercial-user-module-ID5",
+		description:
+			"Tests whether we can get the users email, hash it and pass pd value to the userId array",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: `2025-12-19`,
+		type: "client",
+		status: "ON",
+		audienceSize: 10 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
