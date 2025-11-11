@@ -7,6 +7,7 @@ import {
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { submitComponentEvent } from '../client/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
 import { isServer } from '../lib/isServer';
 import { ophanComponentId } from '../lib/ophan-helpers';
@@ -344,6 +345,18 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 		}
 		/* Otherwise, use personalised order from local storage */
 		setOrderedTrails(personalisedHighlights);
+
+		/* Fire a view event only if the container has been personalised */
+		void submitComponentEvent(
+			{
+				component: {
+					componentType: 'CONTAINER',
+					id: `reordered-highlights-container`,
+				},
+				action: 'VIEW',
+			},
+			'Web',
+		);
 	}, [trails]);
 
 	const { ophanComponentLink, ophanComponentName, ophanFrontName } =
