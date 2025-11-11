@@ -313,13 +313,18 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 		};
 	}, []);
 
-	// inspired by https://usehooks-ts.com/react-hook/use-isomorphic-layout-effect
+	/* inspired by https://usehooks-ts.com/react-hook/use-isomorphic-layout-effect */
 	const useIsomorphicLayoutEffect = isServer ? useEffect : useLayoutEffect;
-	// useEffect runs after paint, so we briefly see the pre-hydration scroll position and then it snaps back.
-	// to remedy this, we can use the useLayoutEffect hook. However, useLayoutEffect can only run on the client so we run useEffect on the server to stop it complaining.
+
+	/**
+	 * 	useEffect runs after paint, so we briefly see the pre-hydration scroll position and then it snaps back.
+	 * 	to remedy this, we can use the useLayoutEffect hook which fires before the browser repaints the screen.
+	 * 	However, useLayoutEffect can only run on the client so we run useEffect on the server to stop it complaining.
+	 * 	https://react.dev/reference/react/useLayoutEffect
+	 */
 	useIsomorphicLayoutEffect(() => {
 		if (carouselRef.current) {
-			// cancel any anchoring/snap side-effects by jumping immediately
+			/* cancel any anchoring/snap side-effects by jumping immediately */
 			carouselRef.current.scrollTo({ left: 0, behavior: 'auto' });
 			setShouldShowHighlights(true);
 		}
@@ -332,12 +337,12 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 			personalisedHighlights.length !== trails.length ||
 			!isEqual(personalisedHighlights, trails)
 		) {
-			// store in local cache but don't bother setting in test trails as they are already set to trails
+			/* Reset to editorial order */
 			resetHighlightsState(trails);
 			setOrderedTrails(trails);
 			return;
 		}
-		// otherwise history is different to trails so set in state
+		/* Otherwise, use personalised order from local storage */
 		setOrderedTrails(personalisedHighlights);
 	}, [trails]);
 
