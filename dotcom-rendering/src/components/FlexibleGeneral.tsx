@@ -34,6 +34,7 @@ type Props = {
 	collectionId: number;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
+	SCStyle?: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -168,6 +169,7 @@ const decideSplashCardProperties = (
 	mediaCard: boolean,
 	useLargerHeadlineSizeDesktop: boolean,
 	avatarUrl: boolean,
+	SCStyle?: boolean,
 ): BoostedSplashProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
@@ -196,10 +198,13 @@ const decideSplashCardProperties = (
 				mediaPositionOnDesktop: 'right',
 				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
 				mediaSize: avatarUrl ? 'large' : 'xlarge',
-				supportingContentAlignment:
-					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
+				supportingContentAlignment: SCStyle
+					? 'vertical'
+					: supportingContentLength >= 4
+					? 'horizontal'
+					: 'vertical',
 				liveUpdatesAlignment: 'vertical',
-				trailTextSize: 'regular',
+				trailTextSize: SCStyle ? 'large' : 'regular',
 			};
 		case 'megaboost':
 			return {
@@ -248,6 +253,7 @@ type SplashCardLayoutProps = {
 	collectionId: number;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
+	SCStyle?: boolean;
 };
 
 const SplashCardLayout = ({
@@ -261,6 +267,7 @@ const SplashCardLayout = ({
 	containerLevel,
 	collectionId,
 	showLabsRedesign,
+	SCStyle,
 }: SplashCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -299,6 +306,7 @@ const SplashCardLayout = ({
 		isMediaCard(card.format),
 		useLargerHeadlineSizeDesktop,
 		!!card.avatarUrl,
+		SCStyle,
 	);
 
 	return (
@@ -602,11 +610,16 @@ export const FlexibleGeneral = ({
 	containerLevel = 'Primary',
 	collectionId,
 	showLabsRedesign,
+	SCStyle = false,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
 		...snap,
 		uniqueId: `collection-${collectionId}-splash-0`,
 	}));
+
+	splash[0]?.headline.includes('Senate') &&
+		containerLevel === 'Primary' &&
+		console.dir({ groupedTrails }, { depth: null });
 
 	const cards = [...groupedTrails.standard]
 		.slice(0, 19)
@@ -631,6 +644,7 @@ export const FlexibleGeneral = ({
 					containerLevel={containerLevel}
 					collectionId={collectionId}
 					showLabsRedesign={showLabsRedesign}
+					SCStyle={SCStyle}
 				/>
 			)}
 			{groupedCards.map((row, i) => {

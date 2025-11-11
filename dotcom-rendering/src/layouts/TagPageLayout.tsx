@@ -66,17 +66,17 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	const isAccessibilityPage =
 		tagPage.config.pageId === 'help/accessibility-help';
 
-	const isSCTagPage =
-		tagPage.webURL ===
-		'https://www.theguardian.com/technology/artificialintelligenceai';
-	// && tagPage.config.isDev;
+	const isSCTagPage = process.env.NODE_ENV === 'development';
+
 	console.log(
 		'isSCTagPage:',
 		isSCTagPage,
 		'tagPage.webURL:',
 		tagPage.webURL,
-		'isDev:',
+		'isDev:', //isDev doesn't actually work?
 		tagPage.config.isDev,
+		'is node env',
+		process.env.NODE_ENV,
 	);
 
 	return (
@@ -167,14 +167,10 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								/>
 							)}
 							{insertSCSection && (
-								<Island
-									priority="critical"
-									defer={{ until: 'visible' }}
-								>
+								<Island priority="critical">
 									<StorylinesSection
 										index={1}
 										tagPage={tagPage}
-										Storylines={undefined}
 									/>
 								</Island>
 							)}
