@@ -2,11 +2,11 @@ import { storage } from '@guardian/libs';
 import { trails } from '../../fixtures/manual/highlights-trails';
 import type { DCRFrontCard } from '../types/front';
 import {
-	initialiseHighlightsState,
 	getCardsFromState,
-	getOrderedHighlights,
 	getHighlightsState,
+	getOrderedHighlights,
 	HighlightsHistoryKey,
+	initialiseHighlightsState,
 	onCardClick,
 	onCardView,
 	onHighlightEvent,
@@ -121,8 +121,9 @@ describe('Personalise Highlights', () => {
 	it('should cap view tracking to the first two items only and never increment others', () => {
 		let storedHighlights = [...baseHighlights];
 		// Run view tracking many times
-		for (let i = 0; i < 5; i++)
+		for (let i = 0; i < 5; i++) {
 			storedHighlights = onCardView(storedHighlights);
+		}
 
 		// Only two items per call are ever incremented (the current first two at that time).
 		// Items not at indices 0 or 1 in any pass remain 0.
