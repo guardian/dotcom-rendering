@@ -4,8 +4,11 @@ const CleanCSS = require('clean-css');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const {
+	fontList,
+	rawFontsCssWithClassNames,
+} = require('../src/lib/fonts-css.ts');
 const swcConfig = require('./.swcrc.json');
-const { assetsCss } = require('./assets-styles');
 const { getBrowserTargets } = require('./browser-targets');
 const { svgr } = require('./svg.cjs');
 
@@ -66,10 +69,16 @@ const getLoaders = (build) => {
 	}
 };
 
-const assetsTemplateCss = new CleanCSS().minify(assetsCss).styles.trim();
+const fontAssetsCss = new CleanCSS()
+	.minify(rawFontsCssWithClassNames)
+	.styles.trim();
 
 const assetHash = (asset) =>
 	createHash('sha256').update(asset).digest('base64');
+
+const fontDivsHtml = fontList
+	.map((font) => `<div class="${font.uniqueName}">.</div>`)
+	.join('\n');
 
 /**
  * @param {{ build: Build }} options
@@ -131,7 +140,7 @@ module.exports = ({ build }) => ({
 							'Content-Security-Policy': {
 								'http-equiv': 'Content-Security-Policy',
 								content: `style-src 'sha256-${assetHash(
-									assetsTemplateCss,
+									fontAssetsCss,
 								)}';`,
 							},
 						},
@@ -139,10 +148,11 @@ module.exports = ({ build }) => ({
 						minify: true,
 						template: path.resolve(
 							__dirname,
-							'assets-template.html',
+							'rendered-items-assets-template.html',
 						),
 						templateParameters: {
-							styles: assetsTemplateCss,
+							styles: fontAssetsCss,
+							bodyContent: fontDivsHtml,
 						},
 					}),
 			  ]
