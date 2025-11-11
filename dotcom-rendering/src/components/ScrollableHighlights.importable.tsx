@@ -334,8 +334,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 		) {
 			// store in local cache but don't bother setting in test trails as they are already set to trails
 			resetHighlightsState(trails);
-			// display highlights
-			setShouldShowHighlights(true);
+			setOrderedTrails(trails);
 			return;
 		}
 		// otherwise history is different to trails so set in state
