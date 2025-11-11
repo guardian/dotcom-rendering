@@ -5,9 +5,8 @@
 */
 import { palette as sourcePalette } from '@guardian/source/foundations';
 import {
-	buttonThemeBrand,
-	buttonThemeDefault,
 	themeButton,
+	themeButtonBrand,
 } from '@guardian/source/react-components';
 import {
 	expandingWrapperDarkTheme,
@@ -887,20 +886,19 @@ const bylineUnderline: PaletteFunction = ({ theme }) => {
 const calloutPromptLight: PaletteFunction = () => sourcePalette.brand[500];
 const calloutPromptDark: PaletteFunction = () => sourcePalette.brand[800];
 
-const calloutSubmitTextLight: PaletteFunction = () =>
-	buttonThemeDefault.button.textPrimary;
+const calloutSubmitTextLight: PaletteFunction = () => themeButton.textPrimary;
 const calloutSubmitTextDark: PaletteFunction = () =>
-	buttonThemeBrand.button.textPrimary;
+	themeButtonBrand.textPrimary;
 
 const calloutSubmitBackgroundLight: PaletteFunction = () =>
-	buttonThemeDefault.button.backgroundPrimary;
+	themeButton.backgroundPrimary;
 const calloutSubmitBackgroundDark: PaletteFunction = () =>
-	buttonThemeBrand.button.backgroundPrimary;
+	themeButtonBrand.backgroundPrimary;
 
 const calloutSubmitBackgroundHoverLight: PaletteFunction = () =>
-	buttonThemeDefault.button.backgroundPrimaryHover;
+	themeButton.backgroundPrimaryHover;
 const calloutSubmitBackgroundHoverDark: PaletteFunction = () =>
-	buttonThemeBrand.button.backgroundPrimaryHover;
+	themeButtonBrand.backgroundPrimaryHover;
 
 export const expandingWrapper = {
 	'--expandingWrapper--background': {
@@ -1977,11 +1975,11 @@ const clickToViewBorderDark: PaletteFunction = () => sourcePalette.neutral[46];
 const clickToViewButtonLight: PaletteFunction = () => sourcePalette.brand[400];
 const clickToViewButtonDark: PaletteFunction = () => sourcePalette.neutral[97];
 const clickToViewButtonTextLight: PaletteFunction = () =>
-	buttonThemeDefault.button.textPrimary;
+	themeButton.textPrimary;
 const clickToViewButtonTextDark: PaletteFunction = () =>
 	sourcePalette.neutral[7];
 const clickToViewButtonHoverLight: PaletteFunction = () =>
-	buttonThemeDefault.button.backgroundPrimaryHover;
+	themeButton.backgroundPrimaryHover;
 const clickToViewButtonHoverDark: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 
