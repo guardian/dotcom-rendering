@@ -19,7 +19,19 @@ import type { ABTest } from './types';
  * - 100% Test	variant		MVT 500-999
  */
 
-const ABTests: ABTest[] = [];
+const ABTests: ABTest[] = [
+	{
+		name: 'commercial-prebid-v10',
+		description: 'Testing Prebid.js v10 integration on DCR',
+		owners: ['commercial.dev@guardian.co.uk'],
+		status: 'ON',
+		expirationDate: '2025-12-30',
+		type: 'client',
+		audienceSize: 10 / 100,
+		groups: ['control', 'variant'],
+		shouldForceMetricsCollection: true,
+	},
+];
 
 const activeABtests = ABTests.filter((test) => test.status === 'ON');
 
