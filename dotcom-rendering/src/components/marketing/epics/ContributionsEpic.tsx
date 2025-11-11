@@ -278,7 +278,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
-		threshold: 0,
+		threshold: 0.4,
 	});
 
 	useEffect(() => {
