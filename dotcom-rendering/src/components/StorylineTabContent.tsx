@@ -32,10 +32,10 @@ const contentCss = css`
 `;
 
 export const StorylineTabContent = ({ content }: { content: Category[] }) => {
-	// key stories - flexible general, megaboosted first standard card
+	// key stories - flexible general, megaboosted first standard card - done?
 	// other categories - flex gen secondary
 	// explainers/multimedia with default
-	// opinion with default boost and design 8 (comment)
+	// opinion with default boost and design 8 (comment) - missing avatar url
 	// deep reads/profiles with contents->display->is immersive true
 	const DecideContainer = ({
 		containerType,
@@ -64,6 +64,7 @@ export const StorylineTabContent = ({ content }: { content: Category[] }) => {
 						aspectRatio={'5:4'}
 						collectionId={0}
 						containerLevel="Secondary"
+						SCStyle={true}
 					/>
 				);
 			default:
