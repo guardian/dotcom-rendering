@@ -5348,11 +5348,11 @@
         "MainMedia": {
             "anyOf": [
                 {
-                    "$ref": "#/definitions/Video",
+                    "$ref": "#/definitions/YoutubeVideo",
                     "description": "For displaying embedded, playable videos directly in cards"
                 },
                 {
-                    "$ref": "#/definitions/LoopVideo"
+                    "$ref": "#/definitions/SelfHostedVideo"
                 },
                 {
                     "$ref": "#/definitions/Audio"
@@ -5362,7 +5362,7 @@
                 }
             ]
         },
-        "Video": {
+        "YoutubeVideo": {
             "description": "For displaying embedded, playable videos directly in cards",
             "allOf": [
                 {
@@ -5372,8 +5372,8 @@
                             "enum": [
                                 "Audio",
                                 "Gallery",
-                                "LoopVideo",
-                                "Video"
+                                "SelfHostedVideo",
+                                "YoutubeVideo"
                             ],
                             "type": "string"
                         }
@@ -5387,7 +5387,7 @@
                     "properties": {
                         "type": {
                             "type": "string",
-                            "const": "Video"
+                            "const": "YoutubeVideo"
                         },
                         "id": {
                             "type": "string"
@@ -5431,7 +5431,7 @@
                 }
             ]
         },
-        "LoopVideo": {
+        "SelfHostedVideo": {
             "allOf": [
                 {
                     "type": "object",
@@ -5440,8 +5440,8 @@
                             "enum": [
                                 "Audio",
                                 "Gallery",
-                                "LoopVideo",
-                                "Video"
+                                "SelfHostedVideo",
+                                "YoutubeVideo"
                             ],
                             "type": "string"
                         }
@@ -5455,7 +5455,15 @@
                     "properties": {
                         "type": {
                             "type": "string",
-                            "const": "LoopVideo"
+                            "const": "SelfHostedVideo"
+                        },
+                        "format": {
+                            "enum": [
+                                "Cinemagraph",
+                                "Default",
+                                "Loop"
+                            ],
+                            "type": "string"
                         },
                         "atomId": {
                             "type": "string"
@@ -5498,6 +5506,7 @@
                     "required": [
                         "atomId",
                         "duration",
+                        "format",
                         "height",
                         "sources",
                         "type",
@@ -5515,8 +5524,8 @@
                             "enum": [
                                 "Audio",
                                 "Gallery",
-                                "LoopVideo",
-                                "Video"
+                                "SelfHostedVideo",
+                                "YoutubeVideo"
                             ],
                             "type": "string"
                         }
@@ -5563,8 +5572,8 @@
                             "enum": [
                                 "Audio",
                                 "Gallery",
-                                "LoopVideo",
-                                "Video"
+                                "SelfHostedVideo",
+                                "YoutubeVideo"
                             ],
                             "type": "string"
                         }
