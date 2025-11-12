@@ -41,7 +41,7 @@ export const StaticFeatureTwo = ({
 			{cards.map((card) => {
 				const isLoopingVideo =
 					card.mainMedia?.type === 'SelfHostedVideo' &&
-					card.mainMedia.format === 'Loop';
+					card.mainMedia.videoStyle === 'Loop';
 
 				return (
 					<LI

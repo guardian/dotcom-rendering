@@ -3929,7 +3929,7 @@
                             "type": "string",
                             "const": "SelfHostedVideo"
                         },
-                        "format": {
+                        "videoStyle": {
                             "enum": [
                                 "Cinemagraph",
                                 "Default",
@@ -3978,10 +3978,10 @@
                     "required": [
                         "atomId",
                         "duration",
-                        "format",
                         "height",
                         "sources",
                         "type",
+                        "videoStyle",
                         "width"
                     ]
                 }

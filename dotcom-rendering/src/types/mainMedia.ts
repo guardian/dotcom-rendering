@@ -22,7 +22,7 @@ type YoutubeVideo = Media & {
 
 type SelfHostedVideo = Media & {
 	type: 'SelfHostedVideo';
-	format: 'Default' | 'Loop' | 'Cinemagraph';
+	videoStyle: 'Default' | 'Loop' | 'Cinemagraph';
 	atomId: string;
 	sources: Source[];
 	height: number;

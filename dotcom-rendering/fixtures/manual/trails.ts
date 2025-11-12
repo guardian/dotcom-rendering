@@ -656,7 +656,7 @@ export const loopVideoCard: DCRFrontCard = {
 	trailText: 'Trail text for looping video card',
 	mainMedia: {
 		type: 'SelfHostedVideo',
-		format: 'Loop',
+		videoStyle: 'Loop',
 		atomId: '3cb22b60-2c3f-48d6-8bce-38c956907cce',
 		sources: [
 			{
