@@ -1,3 +1,4 @@
+import { createRef } from 'react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { TeamType } from '../types/sport';
 import { ArticleContainer } from './ArticleContainer';
@@ -55,6 +56,8 @@ export const Default = () => {
 			awayTeam={awayTeam}
 			comments="Here is a comments string"
 			usage="Article"
+			homeScoreRef={createRef<HTMLDivElement>()}
+			awayScoreRef={createRef<HTMLDivElement>()}
 		/>
 	);
 };
@@ -67,13 +70,23 @@ export const NilNil = () => {
 			awayTeam={{ ...awayTeam, score: 0, scorers: [] }}
 			comments="Neither team scored any goals"
 			usage="Article"
+			homeScoreRef={createRef<HTMLDivElement>()}
+			awayScoreRef={createRef<HTMLDivElement>()}
 		/>
 	);
 };
 NilNil.storyName = 'nil - nil';
 
 export const NoComments = () => {
-	return <MatchNav homeTeam={homeTeam} awayTeam={awayTeam} usage="Article" />;
+	return (
+		<MatchNav
+			homeTeam={homeTeam}
+			awayTeam={awayTeam}
+			usage="Article"
+			homeScoreRef={createRef<HTMLDivElement>()}
+			awayScoreRef={createRef<HTMLDivElement>()}
+		/>
+	);
 };
 NoComments.storyName = 'with no comments';
 
@@ -96,6 +109,8 @@ export const InContext = () => {
 						awayTeam={awayTeam}
 						comments="Here is a comments string"
 						usage="Article"
+						homeScoreRef={createRef<HTMLDivElement>()}
+						awayScoreRef={createRef<HTMLDivElement>()}
 					/>
 				</ArticleContainer>
 				<RightColumn>
@@ -113,6 +128,8 @@ export const NoScore = () => {
 			homeTeam={{ ...homeTeam, score: undefined, scorers: [] }}
 			awayTeam={{ ...awayTeam, score: undefined, scorers: [] }}
 			usage="Article"
+			homeScoreRef={createRef<HTMLDivElement>()}
+			awayScoreRef={createRef<HTMLDivElement>()}
 		/>
 	);
 };
@@ -124,6 +141,8 @@ export const NilNilInMatchSummary = () => {
 			homeTeam={{ ...homeTeam, score: 0, scorers: [] }}
 			awayTeam={{ ...awayTeam, score: 0, scorers: [] }}
 			usage="MatchSummary"
+			homeScoreRef={createRef<HTMLDivElement>()}
+			awayScoreRef={createRef<HTMLDivElement>()}
 		/>
 	);
 };

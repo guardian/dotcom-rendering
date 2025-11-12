@@ -18,6 +18,8 @@ type Props = {
 	awayTeam: Team;
 	comments?: string;
 	usage: 'MatchSummary' | 'Article';
+	homeScoreRef: React.RefObject<HTMLDivElement>;
+	awayScoreRef: React.RefObject<HTMLDivElement>;
 };
 
 const Row = ({ children }: { children: React.ReactNode }) => (
@@ -133,46 +135,50 @@ const TeamNav = ({
 	score,
 	crest,
 	scorers,
+	scoreRef,
 }: {
 	name: string;
 	score?: number;
 	crest: string;
 	scorers: string[];
-}) => (
-	<div
-		css={css`
-			display: flex;
-			flex-grow: 1;
-			flex-basis: 50%;
-			color: ${palette('--match-nav-text')};
-		`}
-	>
-		<Column>
-			<div
-				css={css`
-					display: flex;
-					flex-direction: column;
-					flex-grow: 1;
-				`}
-			>
-				<TeamName name={name} />
-				<Scorers scorers={scorers} />
-			</div>
-			<CrestRow>
-				<Crest crest={crest} />
-				{!isUndefined(score) && (
-					<div
-						css={css`
-							margin-left: -${space[2]}px;
-						`}
-					>
-						<Score score={score} />
-					</div>
-				)}
-			</CrestRow>
-		</Column>
-	</div>
-);
+	scoreRef: React.RefObject<HTMLDivElement>;
+}) => {
+	return (
+		<div
+			css={css`
+				display: flex;
+				flex-grow: 1;
+				flex-basis: 50%;
+				color: ${palette('--match-nav-text')};
+			`}
+		>
+			<Column>
+				<div
+					css={css`
+						display: flex;
+						flex-direction: column;
+						flex-grow: 1;
+					`}
+				>
+					<TeamName name={name} />
+					<Scorers scorers={scorers} />
+				</div>
+				<CrestRow>
+					<Crest crest={crest} />
+					{!isUndefined(score) && (
+						<div
+							css={css`
+								margin-left: -${space[2]}px;
+							`}
+						>
+							<Score ref={scoreRef} score={score} />
+						</div>
+					)}
+				</CrestRow>
+			</Column>
+		</div>
+	);
+};
 
 const Comments = ({ comments }: { comments: string }) => (
 	<div
@@ -209,44 +215,55 @@ const addScorerPlaceholders = (scorers: string[]): string[] =>
 		'placeholder-3',
 	].slice(0, Math.max(3, scorers.length));
 
-export const MatchNav = ({ homeTeam, awayTeam, comments, usage }: Props) => (
-	<div
-		css={css`
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-			position: relative;
-			padding: ${space[2]}px;
-			background-color: ${palette('--match-nav-background')};
-			margin-bottom: 10px;
-			${until.tablet} {
-				margin: 0 -10px 10px;
-			}
-		`}
-	>
-		<Row>
-			<TeamNav
-				name={homeTeam.name}
-				score={homeTeam.score}
-				crest={homeTeam.crest}
-				scorers={
-					usage === 'Article'
-						? addScorerPlaceholders(homeTeam.scorers)
-						: homeTeam.scorers
+export const MatchNav = ({
+	homeTeam,
+	awayTeam,
+	comments,
+	usage,
+	homeScoreRef,
+	awayScoreRef,
+}: Props) => {
+	return (
+		<div
+			css={css`
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				position: relative;
+				padding: ${space[2]}px;
+				background-color: ${palette('--match-nav-background')};
+				margin-bottom: 10px;
+				${until.tablet} {
+					margin: 0 -10px 10px;
 				}
-			/>
-			<YellowBorder />
-			<TeamNav
-				name={awayTeam.name}
-				score={awayTeam.score}
-				crest={awayTeam.crest}
-				scorers={
-					usage === 'Article'
-						? addScorerPlaceholders(awayTeam.scorers)
-						: awayTeam.scorers
-				}
-			/>
-		</Row>
-		{!!comments && <Comments comments={comments} />}
-	</div>
-);
+			`}
+		>
+			<Row>
+				<TeamNav
+					name={homeTeam.name}
+					score={homeTeam.score}
+					crest={homeTeam.crest}
+					scorers={
+						usage === 'Article'
+							? addScorerPlaceholders(homeTeam.scorers)
+							: homeTeam.scorers
+					}
+					scoreRef={homeScoreRef}
+				/>
+				<YellowBorder />
+				<TeamNav
+					name={awayTeam.name}
+					score={awayTeam.score}
+					crest={awayTeam.crest}
+					scorers={
+						usage === 'Article'
+							? addScorerPlaceholders(awayTeam.scorers)
+							: awayTeam.scorers
+					}
+					scoreRef={awayScoreRef}
+				/>
+			</Row>
+			{!!comments && <Comments comments={comments} />}
+		</div>
+	);
+};
