@@ -133,9 +133,9 @@ const customAttributesContainer = css`
 	padding-top: ${space[2]}px;
 	display: grid;
 	gap: ${space[3]}px;
+	margin-top: ${space[2]}px;
 
 	${from.mobileLandscape} {
-		margin-top: ${space[2]}px;
 		grid-template-columns: 1fr 1fr;
 		gap: ${space[5]}px;
 	}
