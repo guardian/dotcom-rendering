@@ -2,12 +2,12 @@ import type { Source } from '../lib/video';
 import type { PodcastSeriesImage } from './tag';
 
 type Media = {
-	type: 'Video' | 'LoopVideo' | 'Audio' | 'Gallery';
+	type: 'YoutubeVideo' | 'SelfHostedVideo' | 'Audio' | 'Gallery';
 };
 
 /** For displaying embedded, playable videos directly in cards */
-type Video = Media & {
-	type: 'Video';
+type YoutubeVideo = Media & {
+	type: 'YoutubeVideo';
 	/** @see https://github.com/guardian/frontend/blob/8e7e4d0e/common/app/model/content/Atom.scala#L159 */
 	id: string;
 	videoId: string;
@@ -20,8 +20,9 @@ type Video = Media & {
 	image?: string;
 };
 
-type LoopVideo = Media & {
-	type: 'LoopVideo';
+type SelfHostedVideo = Media & {
+	type: 'SelfHostedVideo';
+	format: 'Default' | 'Loop' | 'Cinemagraph';
 	atomId: string;
 	sources: Source[];
 	height: number;
@@ -42,4 +43,4 @@ type Gallery = Media & {
 	count: string;
 };
 
-export type MainMedia = Video | LoopVideo | Audio | Gallery;
+export type MainMedia = YoutubeVideo | SelfHostedVideo | Audio | Gallery;

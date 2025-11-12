@@ -106,7 +106,9 @@ const ImmersiveCardLayout = ({
 	collectionId,
 	showLabsRedesign,
 }: ImmersiveCardLayoutProps) => {
-	const isLoopingVideo = card.mainMedia?.type === 'LoopVideo';
+	const isLoopingVideo =
+		card.mainMedia?.type === 'SelfHostedVideo' &&
+		card.mainMedia.format === 'Loop';
 
 	return (
 		<UL padBottom={true}>

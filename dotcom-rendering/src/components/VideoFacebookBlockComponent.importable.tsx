@@ -72,7 +72,7 @@ export const VideoFacebookBlockComponent = ({
 						captionText={caption}
 						format={format}
 						credit={credit}
-						mediaType="Video"
+						mediaType="YoutubeVideo"
 						isMainMedia={isMainMedia}
 					/>
 				)}
