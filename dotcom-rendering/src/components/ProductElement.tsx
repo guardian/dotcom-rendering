@@ -124,6 +124,7 @@ const Content = ({
 						key={index}
 						index={index}
 						format={format}
+						isProduct={true}
 						isMainMedia={false}
 					/>
 				))}
