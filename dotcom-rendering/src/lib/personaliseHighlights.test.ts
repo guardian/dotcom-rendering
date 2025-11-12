@@ -76,38 +76,35 @@ describe('Personalise Highlights', () => {
 		}
 	});
 
-	it('should not move any cards to the back until viewCount reaches 3', () => {
+	it('should not move any cards to the back until viewCount reaches 2', () => {
 		let storedHighlights = [...baseHighlights];
 
 		// After 1st view
 		storedHighlights = onCardView(storedHighlights);
-		// After 2nd view
-		storedHighlights = onCardView(storedHighlights);
 
-		// No reordering yet; first two should still be at the front with viewCount 2
+		// No reordering yet; first two should still be at the front with viewCount 1
 		expect(storedHighlights.slice(0, 2).map((h) => h.card.url)).toEqual([
 			baseHighlights[0]!.card.url,
 			baseHighlights[1]!.card.url,
 		]);
-		expect(storedHighlights[0]!.viewCount).toBe(2);
-		expect(storedHighlights[1]!.viewCount).toBe(2);
+		expect(storedHighlights[0]!.viewCount).toBe(1);
+		expect(storedHighlights[1]!.viewCount).toBe(1);
 	});
 
-	it('should move first two cards to the back once they each reach 3 views (and preserve their order)', () => {
+	it('should move first two cards to the back once they each reach 2 views (and preserve their order)', () => {
 		let storedHighlights = [...baseHighlights];
 
-		// Simulate three renders where we track views for the first two each time
+		// Simulate two renders where we track views for the first two each time
 		storedHighlights = onCardView(storedHighlights); // both -> 1
-		storedHighlights = onCardView(storedHighlights); // both -> 2
-		storedHighlights = onCardView(storedHighlights); // both -> 3 (now move to back in the same order)
+		storedHighlights = onCardView(storedHighlights); // both -> 2 (now move to back in the same order)
 
 		// The two moved cards should appear at the end, in the same order as they were viewed
 		const moved = storedHighlights.slice(-2);
 		expect(moved[0]!.card.url).toBe(baseHighlights[0]!.card.url);
 		expect(moved[1]!.card.url).toBe(baseHighlights[1]!.card.url);
-		// And their viewCount should be >= 3
-		expect(moved[0]!.viewCount).toBeGreaterThanOrEqual(3);
-		expect(moved[1]!.viewCount).toBeGreaterThanOrEqual(3);
+		// And their viewCount should be >= 2
+		expect(moved[0]!.viewCount).toBeGreaterThanOrEqual(2);
+		expect(moved[1]!.viewCount).toBeGreaterThanOrEqual(2);
 
 		// The items now at the front should be the ones that used to be at positions 2..end-2
 		const frontUrls = storedHighlights

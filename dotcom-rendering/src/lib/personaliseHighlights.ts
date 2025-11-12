@@ -5,7 +5,7 @@ import type { DCRFrontCard } from '../types/front';
  * We want to better surface content in the "highlights" container that is beyond the fold.
  * To do this, user engagement will affect the ordering of the container.
  * If a card has been clicked, we consider that card engaged with and move it to the back of the container.
- * If a card has been viewed 3 or more times but not actively interacted with (i.e. clicked), we consider the card unengaged and move it to the back of the container.
+ * If a card has been viewed 2 or more times but not actively interacted with (i.e. clicked), we consider the card unengaged and move it to the back of the container.
  * If editorial has updated the highlights container, we reset the ordering to allow for editorial oversight.
  * The user only stores one highlight container history in storage. If a different front is visited that has a highlights container,
  * it will reset local storage with the new container data.
@@ -23,7 +23,7 @@ type CardEvent = 'VIEW' | 'CLICK';
 
 export const HighlightsHistoryKey = 'gu.history.highlights';
 
-const MAX_VIEW_COUNT = 3;
+const MAX_VIEW_COUNT = 2;
 
 const isValidHighlightsState = (history: unknown): history is HighlightsState =>
 	Array.isArray(history) &&
@@ -144,7 +144,7 @@ export const onCardView = (highlights: HighlightsState): HighlightsState => {
 		return el;
 	});
 
-	/* Separate the updated cards that now have viewCount >= 3 */
+	/* Separate the updated cards that now have viewCount >= 2 */
 	const toMove = updatedCards.filter((el) => el.viewCount >= MAX_VIEW_COUNT);
 	if (toMove.length === 0) return newHighlights;
 
