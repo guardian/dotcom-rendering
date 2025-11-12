@@ -98,12 +98,12 @@ const Content = ({
 		? subheadingHtml.textContent.trim().length > 0
 		: false;
 	return (
-		<div data-spacefinder-role="nested">
+		<div>
 			{isSubheading &&
 				Array.from(subheadingHtml.childNodes).map(
 					buildElementTree(format),
 				)}
-			<div css={contentContainer}>
+			<div css={contentContainer} data-spacefinder-role="nested">
 				{showLeftCol && (
 					<LeftColProductCardContainer>
 						<ProductCardLeftCol
