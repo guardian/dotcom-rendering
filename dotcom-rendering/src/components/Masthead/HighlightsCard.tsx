@@ -74,7 +74,7 @@ const container = css`
 `;
 
 const hoverStyles = css`
-	:hover .image-overlay {
+	:hover .media-overlay {
 		position: absolute;
 		bottom: 0;
 		right: 0;

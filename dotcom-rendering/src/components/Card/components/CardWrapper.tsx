@@ -42,7 +42,7 @@ const baseCardStyles = css`
 `;
 
 const hoverStyles = css`
-	:hover .image-overlay {
+	:hover .media-overlay {
 		width: 100%;
 		height: 100%;
 		background-color: ${palette('--card-background-hover')};
@@ -53,8 +53,10 @@ const hoverStyles = css`
 		text-decoration: underline;
 	}
 
-	/** We want to prevent the general hover styles applying when
-	    a click won't result in navigating to the main article */
+	/**
+	  * We want to prevent the general hover styles applying when
+	  * a click won't result in navigating to the main article
+	*/
 	:has(
 			ul.sublinks:hover,
 			.loop-video-container:hover,
@@ -64,7 +66,7 @@ const hoverStyles = css`
 		.card-headline .show-underline {
 			text-decoration: none;
 		}
-		.image-overlay {
+		.media-overlay {
 			background-color: transparent;
 		}
 	}
@@ -95,7 +97,7 @@ const onwardContentStyles = css`
 	border-radius: ${space[2]}px;
 	overflow: hidden;
 
-	:hover .image-overlay {
+	:hover .media-overlay {
 		border-radius: ${space[2]}px;
 	}
 `;
