@@ -6,10 +6,9 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
-import { isServer } from '../lib/isServer';
 import { ophanComponentId } from '../lib/ophan-helpers';
 import {
 	getOrderedHighlights,
@@ -49,7 +48,6 @@ const carouselStyles = css`
 	grid-auto-flow: column;
 	overflow-x: auto;
 	overflow-y: hidden;
-	scroll-snap-type: x mandatory;
 	scroll-behavior: auto;
 	overscroll-behavior-x: contain;
 	overscroll-behavior-y: auto;
@@ -84,6 +82,10 @@ const carouselStyles = css`
 	}
 	scrollbar-width: none; /* Firefox */
 	position: relative;
+`;
+
+const scrollSnapStyles = css`
+	scroll-snap-type: x mandatory;
 `;
 
 const itemStyles = css`
@@ -314,23 +316,6 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 		};
 	}, []);
 
-	/* inspired by https://usehooks-ts.com/react-hook/use-isomorphic-layout-effect */
-	const useIsomorphicLayoutEffect = isServer ? useEffect : useLayoutEffect;
-
-	/**
-	 * 	useEffect runs after paint, so we briefly see the pre-hydration scroll position and then it snaps back.
-	 * 	to remedy this, we can use the useLayoutEffect hook which fires before the browser repaints the screen.
-	 * 	However, useLayoutEffect can only run on the client so we run useEffect on the server to stop it complaining.
-	 * 	https://react.dev/reference/react/useLayoutEffect
-	 */
-	useIsomorphicLayoutEffect(() => {
-		if (carouselRef.current) {
-			/* cancel any anchoring/snap side-effects by jumping immediately */
-			carouselRef.current.scrollTo({ left: 0, behavior: 'auto' });
-			setShouldShowHighlights(true);
-		}
-	}, [orderedTrails]);
-
 	useEffect(() => {
 		const personalisedHighlights = getOrderedHighlights();
 		if (
@@ -359,6 +344,11 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 		);
 	}, [trails]);
 
+	/* Update the visibility of highlights once we have the correct trail order set in state. */
+	useEffect(() => {
+		setShouldShowHighlights(true);
+	}, [orderedTrails]);
+
 	const { ophanComponentLink, ophanComponentName, ophanFrontName } =
 		getOphanInfo(frontId);
 
@@ -378,6 +368,11 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 				css={[
 					carouselStyles,
 					generateCarouselColumnStyles(carouselLength),
+					/*
+					 * Enable scroll-snap only when visible to prevent browser scroll anchoring.
+					 * When items reorder, browsers try to keep previously visible items in view,
+					 * causing unwanted scrolling. Enabling snap after reordering forces position 0.
+					 */ shouldShowHighlights && scrollSnapStyles,
 				]}
 				data-heatphan-type="carousel"
 			>
