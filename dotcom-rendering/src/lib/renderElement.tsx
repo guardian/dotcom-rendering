@@ -93,7 +93,6 @@ type Props = {
 	editionId: EditionId;
 	forceDropCap?: 'on' | 'off';
 	isTimeline?: boolean;
-	isProduct?: boolean;
 	totalElements?: number;
 	isListElement?: boolean;
 	isSectionedMiniProfilesArticle?: boolean;
@@ -165,7 +164,6 @@ export const renderElement = ({
 	editionId,
 	forceDropCap,
 	isTimeline = false,
-	isProduct = false,
 	totalElements = 0,
 	isListElement = false,
 	isSectionedMiniProfilesArticle = false,
@@ -555,7 +553,7 @@ export const renderElement = ({
 				successDescription: element.newsletter.successDescription,
 				theme: element.newsletter.theme,
 			};
-			if (isListElement || isTimeline || isProduct) return null;
+			if (isListElement || isTimeline) return null;
 			return <EmailSignUpWrapper {...emailSignUpProps} />;
 		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
 			return renderAds && <AdPlaceholder />;
@@ -987,7 +985,6 @@ export const RenderArticleElement = ({
 	editionId,
 	forceDropCap,
 	isTimeline,
-	isProduct,
 	totalElements,
 	isListElement,
 	isSectionedMiniProfilesArticle,
@@ -1016,7 +1013,6 @@ export const RenderArticleElement = ({
 		editionId,
 		forceDropCap,
 		isTimeline,
-		isProduct,
 		totalElements,
 		isListElement,
 		isSectionedMiniProfilesArticle,
@@ -1057,7 +1053,6 @@ type ElementLevelPropNames =
 	| 'hideCaption'
 	| 'format'
 	| 'isTimeline'
-	| 'isProduct'
 	| 'isListElement'
 	| 'isMainMedia';
 type ArticleLevelProps = Omit<Props, ElementLevelPropNames>;
