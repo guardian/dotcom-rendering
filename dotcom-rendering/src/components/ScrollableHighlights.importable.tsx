@@ -7,15 +7,8 @@ import {
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
-import { submitComponentEvent } from '../client/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
 import { ophanComponentId } from '../lib/ophan-helpers';
-import {
-	getOrderedHighlights,
-	onHighlightEvent,
-	resetHighlightsState,
-} from '../lib/personaliseHighlights';
-import { useAB } from '../lib/useAB';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { HighlightsCard } from './Masthead/HighlightsCard';
@@ -48,7 +41,8 @@ const carouselStyles = css`
 	grid-auto-flow: column;
 	overflow-x: auto;
 	overflow-y: hidden;
-	scroll-behavior: auto;
+	scroll-snap-type: x mandatory;
+	scroll-behavior: smooth;
 	overscroll-behavior-x: contain;
 	overscroll-behavior-y: auto;
 
@@ -82,10 +76,6 @@ const carouselStyles = css`
 	}
 	scrollbar-width: none; /* Firefox */
 	position: relative;
-`;
-
-const scrollSnapStyles = css`
-	scroll-snap-type: x mandatory;
 `;
 
 const itemStyles = css`
@@ -217,45 +207,12 @@ const getOphanInfo = (frontId?: string) => {
 	};
 };
 
-const isEqual = (
-	historicalHighlights: DCRFrontCard[],
-	currentHighlights: DCRFrontCard[],
-) => {
-	const c = currentHighlights.map((v) => v.url);
-	const h = historicalHighlights.map((v) => v.url);
-	return c.every((v) => {
-		return h.includes(v);
-	});
-};
 export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const carouselLength = trails.length;
 	const imageLoading = 'eager';
 	const [showPreviousButton, setShowPreviousButton] = useState(false);
 	const [showNextButton, setShowNextButton] = useState(true);
-	const [shouldShowHighlights, setShouldShowHighlights] = useState(false);
-	const [orderedTrails, setOrderedTrails] = useState<DCRFrontCard[]>(trails);
-
-	const ABTestAPI = useAB()?.api;
-	let abTestPersonalisedHighlightAttr = 'not-in-test';
-	if (
-		ABTestAPI?.isUserInVariant('PersonalisedHighlights', 'click-tracking')
-	) {
-		abTestPersonalisedHighlightAttr = 'click-tracking';
-	}
-
-	if (ABTestAPI?.isUserInVariant('PersonalisedHighlights', 'view-tracking')) {
-		abTestPersonalisedHighlightAttr = 'view-tracking';
-	}
-
-	if (
-		ABTestAPI?.isUserInVariant(
-			'PersonalisedHighlights',
-			'click-and-view-tracking',
-		)
-	) {
-		abTestPersonalisedHighlightAttr = 'click-and-view-tracking';
-	}
 
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
@@ -291,15 +248,6 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	};
 
 	useEffect(() => {
-		if (
-			abTestPersonalisedHighlightAttr === 'view-tracking' ||
-			abTestPersonalisedHighlightAttr === 'click-and-view-tracking'
-		) {
-			onHighlightEvent('VIEW');
-		}
-	}, [abTestPersonalisedHighlightAttr]);
-
-	useEffect(() => {
 		const carouselElement = carouselRef.current;
 		if (!carouselElement) return;
 
@@ -316,50 +264,11 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 		};
 	}, []);
 
-	useEffect(() => {
-		const personalisedHighlights = getOrderedHighlights();
-		if (
-			personalisedHighlights.length === 0 ||
-			personalisedHighlights.length !== trails.length ||
-			!isEqual(personalisedHighlights, trails)
-		) {
-			/* Reset to editorial order */
-			resetHighlightsState(trails);
-			setOrderedTrails(trails);
-			return;
-		}
-		/* Otherwise, use personalised order from local storage */
-		setOrderedTrails(personalisedHighlights);
-
-		/* Fire a view event only if the container has been personalised */
-		void submitComponentEvent(
-			{
-				component: {
-					componentType: 'CONTAINER',
-					id: `reordered-highlights-container`,
-				},
-				action: 'VIEW',
-			},
-			'Web',
-		);
-	}, [trails]);
-
-	/* Update the visibility of highlights once we have the correct trail order set in state. */
-	useEffect(() => {
-		setShouldShowHighlights(true);
-	}, [orderedTrails]);
-
 	const { ophanComponentLink, ophanComponentName, ophanFrontName } =
 		getOphanInfo(frontId);
 
 	return (
-		<div
-			css={[
-				containerStyles,
-				{ visibility: shouldShowHighlights ? 'visible' : 'hidden' },
-			]}
-			data-link-name={ophanFrontName}
-		>
+		<div css={containerStyles} data-link-name={ophanFrontName}>
 			<ol
 				data-link-name={ophanComponentLink}
 				data-component={ophanComponentName}
@@ -368,15 +277,10 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 				css={[
 					carouselStyles,
 					generateCarouselColumnStyles(carouselLength),
-					/*
-					 * Enable scroll-snap only when visible to prevent browser scroll anchoring.
-					 * When items reorder, browsers try to keep previously visible items in view,
-					 * causing unwanted scrolling. Enabling snap after reordering forces position 0.
-					 */ shouldShowHighlights && scrollSnapStyles,
 				]}
 				data-heatphan-type="carousel"
 			>
-				{orderedTrails.map((trail) => {
+				{trails.map((trail) => {
 					return (
 						<li
 							key={trail.url}
@@ -396,16 +300,6 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 								showQuotedHeadline={trail.showQuotedHeadline}
 								mainMedia={trail.mainMedia}
 								starRating={trail.starRating}
-								trackCardClick={() => {
-									if (
-										abTestPersonalisedHighlightAttr ===
-											'click-tracking' ||
-										abTestPersonalisedHighlightAttr ===
-											'click-and-view-tracking'
-									) {
-										onHighlightEvent('CLICK', trail);
-									}
-								}}
 							/>
 						</li>
 					);
