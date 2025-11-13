@@ -1,10 +1,10 @@
-import type { ABTest } from "../../config/types.ts";
-import { AUDIENCE_SPACES, MVT_COUNT } from "../../lib/constants.ts";
+import type { ABTest } from "../../types.ts";
+import { AUDIENCE_SPACES, MVT_COUNT } from "../lib/constants.ts";
 import type {
 	AllSpace,
 	AudienceSpace,
 	FastlyTestParams,
-} from "../../lib/types.ts";
+} from "../lib/types.ts";
 import { TestGroupMVTManager } from "./test-group-mvt-manager.ts";
 
 const getTestGroupName = (

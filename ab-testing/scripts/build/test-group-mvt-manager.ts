@@ -1,5 +1,5 @@
-import { MVT_COUNT } from "../../lib/constants.ts";
-import type { AudienceSpace } from "../../lib/types.ts";
+import { MVT_COUNT } from "../lib/constants.ts";
+import type { AudienceSpace } from "../lib/types.ts";
 
 /**
  * A class to manage MVTs for test groups in a test space.

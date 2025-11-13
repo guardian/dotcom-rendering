@@ -2,7 +2,7 @@ import {
 	calculateUpdates,
 	getMVTGroupsFromDictionary,
 	updateMVTGroups,
-} from "../../lib/fastly-api.ts";
+} from "../lib/fastly-api.ts";
 import { getMVTGroups } from "./read-built-dictionaries.ts";
 
 const deployMVTs = async (filePath: string) => {

@@ -6,8 +6,8 @@ import {
 	mvtDictionaryName,
 	serviceId,
 	serviceName,
-} from "../../lib/config.ts";
-import { getService, verifyDictionaryName } from "../../lib/fastly-api.ts";
+} from "../lib/config.ts";
+import { getService, verifyDictionaryName } from "../lib/fastly-api.ts";
 import { deployABTests } from "./deploy-ab-tests.ts";
 import { deployMVTs } from "./deploy-mvts.ts";
 

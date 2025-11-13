@@ -1,5 +1,5 @@
-import { activeABtests } from "../../config/abTests.ts";
-import type { ABTest } from "../../config/types.ts";
+import { activeABtests } from "../../abTests.ts";
+import type { ABTest } from "../../types.ts";
 import { enoughSpace } from "./enoughSpace.ts";
 import { limitServerSideTests } from "./limitServerSide.ts";
 import { uniqueName } from "./uniqueName.ts";

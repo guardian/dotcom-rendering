@@ -1,6 +1,6 @@
 import { equal, throws } from "node:assert";
 import test from "node:test";
-import type { ABTest } from "../../config/types.ts";
+import type { ABTest } from "../../types.ts";
 import { allExpirationsValid } from "./validExpiration.ts";
 
 function futureDay() {

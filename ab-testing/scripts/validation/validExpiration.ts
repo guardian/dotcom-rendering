@@ -1,4 +1,4 @@
-import type { ABTest } from "../../config/types.ts";
+import type { ABTest } from "../../types.ts";
 
 export function allExpirationsValid(tests: ABTest[]): boolean {
 	tests.forEach((test) => {

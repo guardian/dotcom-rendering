@@ -1,4 +1,4 @@
-import type { ABTest } from "../../config/types.ts";
+import type { ABTest } from "../../types.ts";
 
 export function enoughSpace(allTests: ABTest[]) {
 	const spaceTotalSize = allTests.reduce(

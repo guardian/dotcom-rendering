@@ -1,9 +1,9 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
 import { parseArgs } from "node:util";
-import { activeABtests } from "../../config/abTests.ts";
-import { getMVTGroupsFromDictionary } from "../../lib/fastly-api.ts";
-import { parseMVTValue, stringifyMVTValue } from "../../lib/fastly-subfield.ts";
+import { activeABtests } from "../../abTests.ts";
+import { getMVTGroupsFromDictionary } from "../lib/fastly-api.ts";
+import { parseMVTValue, stringifyMVTValue } from "../lib/fastly-subfield.ts";
 import { buildABTestGroupKeyValues } from "./build-ab-tests-dict.ts";
 import { calculateAllSpaceUpdates } from "./calculate-mvt-updates.ts";
 

@@ -1,6 +1,6 @@
 import { equal, throws } from "node:assert";
 import test from "node:test";
-import type { ABTest } from "../../config/types.ts";
+import type { ABTest } from "../../types.ts";
 import { uniqueName } from "./uniqueName.ts";
 
 function createTestABTest(name: ABTest["name"]): ABTest {

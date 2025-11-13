@@ -1,6 +1,6 @@
 import { deepEqual, equal, throws } from "node:assert";
 import test from "node:test";
-import type { AudienceSpace } from "../../lib/types.ts";
+import type { AudienceSpace } from "../lib/types.ts";
 import { TestGroupMVTManager } from "./test-group-mvt-manager.ts";
 
 // Helper function to create mock AudienceSpace
