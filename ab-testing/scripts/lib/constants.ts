@@ -17,6 +17,6 @@ const MAX_SERVER_SIDE_TESTS = 20;
  * The spaces used for test groups, each space covers the entire mvt space allowing for concurrent overlapping tests where necessary.
  * If this is increased, the fastly VCL configuration will need to be updated to match.
  */
-const AUDIENCE_SPACES = ['A', 'B', 'C'];
+const AUDIENCE_SPACES = ["A", "B", "C"];
 
 export { MVT_COUNT, MAX_SERVER_SIDE_TESTS, AUDIENCE_SPACES };

@@ -4,7 +4,7 @@ type AudienceSpace = Map<string, FastlyTestParams>;
 
 type AllSpace = Map<string, FastlyTestParams[]>;
 
-type Team = 'commercial' | 'webex';
+type Team = "commercial" | "webex";
 
 type TestName = `${Team}-${string}`;
 
@@ -22,11 +22,11 @@ type ABTest = {
 	/** The datetime the test expires on (expressed in UTC) - will turn OFF when expires */
 	expirationDate: `${Year}-${Month}-${Day}`;
 	/** Test type: should this run on the server or client */
-	type: 'server' | 'client';
+	type: "server" | "client";
 	/** Whether the AB test is currently running or not
 	 * Would be nice to know who changed the status last and when
 	 */
-	status: 'ON' | 'OFF';
+	status: "ON" | "OFF";
 	/** The size of the test, all variants will be divided equally to fit */
 	audienceSize: number;
 	/**
@@ -34,7 +34,7 @@ type ABTest = {
 	 * Having multiple test spaces allows deliberate overlapping of test audiences
 	 * Defaults to A
 	 */
-	audienceSpace?: 'A' | 'B' | 'C';
+	audienceSpace?: "A" | "B" | "C";
 	/** Test group definition */
 	groups: string[];
 	/** Bypasses sampling to force metrics collection for this test
