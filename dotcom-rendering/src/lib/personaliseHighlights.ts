@@ -56,7 +56,7 @@ export const getHighlightsState = (): HighlightsState | undefined => {
 };
 
 /* clear highlight history from local storage */
-const clearHighlightsState = (): void => {
+export const clearHighlightsState = (): void => {
 	storage.local.remove(HighlightsHistoryKey);
 };
 
