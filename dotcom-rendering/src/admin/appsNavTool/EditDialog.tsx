@@ -24,16 +24,20 @@ export const EditDialog = (props: Props) => {
 		dispatch({ kind: 'cancelEdit' });
 	}, [dispatch]);
 
+	if (props.editing === undefined) {
+		return null;
+	}
+
 	return (
 		<SectionForm
 			heading="Edit Section"
-			open={props.editing !== undefined}
-			initialTitle={props.editing?.title ?? ''}
+			open={true}
+			initialTitle={props.editing.title}
 			initialPath={new URL(
-				props.editing?.path ?? '',
+				props.editing.path,
 				'https://www.theguardian.com',
 			).toString()}
-			initialMobileOverride={props.editing?.mobileOverride}
+			initialMobileOverride={props.editing.mobileOverride}
 			submit={submit}
 			cancel={cancel}
 		/>
