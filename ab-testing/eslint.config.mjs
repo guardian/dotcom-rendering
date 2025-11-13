@@ -2,7 +2,7 @@ import guardian from "@guardian/eslint-config";
 import { defineConfig, globalIgnores } from "eslint/config";
 
 export default defineConfig([
-	globalIgnores(["frontend", "eslint.config.mjs"]),
+	globalIgnores(["frontend", "eslint.config.mjs", "index.ts"]),
 	...guardian.configs.recommended,
 	{
 		languageOptions: {

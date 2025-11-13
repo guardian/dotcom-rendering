@@ -2,7 +2,13 @@
 	"name": "@guardian/ab-testing",
 	"version": "1.0.0",
 	"description": "A/B test definitions and configuration",
-	"main": "config/index.ts",
+	"main": "index.ts",
+	"module": "index.ts",
+	"exports": {
+		".": {
+			"import": "./index.ts"
+		}
+	},
 	"type": "module",
 	"scripts": {
 		"validate": "node scripts/validation/index.ts",
