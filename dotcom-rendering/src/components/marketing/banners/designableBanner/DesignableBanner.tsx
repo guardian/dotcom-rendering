@@ -481,7 +481,13 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									choiceCardSettings={choiceCardSettings}
 								/>
 							)}
-							<div css={styles.ctaContainer(isCollapsed)}>
+							<div
+								css={styles.ctaContainer(
+									isCollapsed,
+									templateSettings.containerSettings
+										.backgroundColour,
+								)}
+							>
 								<LinkButton
 									href={enrichSupportUrl({
 										baseUrl:
@@ -957,7 +963,7 @@ const styles = {
 		}
 	`,
 	/* choice card CTA container */
-	ctaContainer: (isCollapsed: boolean) => css`
+	ctaContainer: (isCollapsed: boolean, backgroundColor: string) => css`
 		grid-area: cc_cta;
 		display: flex;
 		align-items: center;
@@ -975,9 +981,8 @@ const styles = {
 			width: 100vw;
 			position: sticky;
 			bottom: 0;
-			padding-top: ${space[3]}px;
-			padding-bottom: ${space[3]}px;
-			background-color: ${neutral[100]};
+			padding: ${space[3]}px;
+			background-color: ${backgroundColor};
 			box-shadow: 0 -${space[1]}px ${space[3]}px 0 rgba(0, 0, 0, 0.25);
 			margin-right: -${space[3]}px;
 			margin-left: -${space[3]}px;
