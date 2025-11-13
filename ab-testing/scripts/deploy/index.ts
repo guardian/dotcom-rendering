@@ -12,7 +12,7 @@ import { deployABTests } from "./deploy-ab-tests.ts";
 import { deployMVTs } from "./deploy-mvts.ts";
 
 const flags = parseArgs({
-	args: process.argv,
+	args: process.argv.slice(2),
 	options: {
 		mvts: {
 			type: "string",

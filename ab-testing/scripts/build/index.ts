@@ -8,7 +8,7 @@ import { buildABTestGroupKeyValues } from "./build-ab-tests-dict.ts";
 import { calculateAllSpaceUpdates } from "./calculate-mvt-updates.ts";
 
 const flags = parseArgs({
-	args: process.argv,
+	args: process.argv.slice(2),
 	options: {
 		mvts: {
 			type: "string",
