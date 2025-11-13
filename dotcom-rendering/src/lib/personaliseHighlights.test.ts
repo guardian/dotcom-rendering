@@ -4,7 +4,6 @@ import type { DCRFrontCard } from '../types/front';
 import {
 	getCardsFromState,
 	getHighlightsState,
-	getOrderedHighlights,
 	HighlightsHistoryKey,
 	initialiseHighlightsState,
 	onCardClick,
@@ -38,12 +37,12 @@ const asCards = (n: number): DCRFrontCard[] =>
 const highlightCards: DCRFrontCard[] = asCards(6);
 
 const baseHighlights = [
-	{ card: highlightCards[0]!, viewCount: 0, wasClicked: false },
-	{ card: highlightCards[1]!, viewCount: 0, wasClicked: false },
-	{ card: highlightCards[2]!, viewCount: 0, wasClicked: false },
-	{ card: highlightCards[3]!, viewCount: 0, wasClicked: false },
-	{ card: highlightCards[4]!, viewCount: 0, wasClicked: false },
-	{ card: highlightCards[5]!, viewCount: 0, wasClicked: false },
+	{ cardUrl: highlightCards[0]!.url, viewCount: 0, wasClicked: false },
+	{ cardUrl: highlightCards[1]!.url, viewCount: 0, wasClicked: false },
+	{ cardUrl: highlightCards[2]!.url, viewCount: 0, wasClicked: false },
+	{ cardUrl: highlightCards[3]!.url, viewCount: 0, wasClicked: false },
+	{ cardUrl: highlightCards[4]!.url, viewCount: 0, wasClicked: false },
+	{ cardUrl: highlightCards[5]!.url, viewCount: 0, wasClicked: false },
 ];
 
 describe('Personalise Highlights', () => {
@@ -61,7 +60,7 @@ describe('Personalise Highlights', () => {
 	});
 
 	it('should get cards from stored highlights', () => {
-		const result = getCardsFromState(baseHighlights);
+		const result = getCardsFromState(baseHighlights, highlightCards);
 		expect(result).toEqual(highlightCards.slice(0, 6));
 	});
 
@@ -83,9 +82,9 @@ describe('Personalise Highlights', () => {
 		storedHighlights = onCardView(storedHighlights);
 
 		// No reordering yet; first two should still be at the front with viewCount 1
-		expect(storedHighlights.slice(0, 2).map((h) => h.card.url)).toEqual([
-			baseHighlights[0]!.card.url,
-			baseHighlights[1]!.card.url,
+		expect(storedHighlights.slice(0, 2).map((h) => h.cardUrl)).toEqual([
+			baseHighlights[0]!.cardUrl,
+			baseHighlights[1]!.cardUrl,
 		]);
 		expect(storedHighlights[0]!.viewCount).toBe(1);
 		expect(storedHighlights[1]!.viewCount).toBe(1);
@@ -100,8 +99,8 @@ describe('Personalise Highlights', () => {
 
 		// The two moved cards should appear at the end, in the same order as they were viewed
 		const moved = storedHighlights.slice(-2);
-		expect(moved[0]!.card.url).toBe(baseHighlights[0]!.card.url);
-		expect(moved[1]!.card.url).toBe(baseHighlights[1]!.card.url);
+		expect(moved[0]!.cardUrl).toBe(baseHighlights[0]!.cardUrl);
+		expect(moved[1]!.cardUrl).toBe(baseHighlights[1]!.cardUrl);
 		// And their viewCount should be >= 2
 		expect(moved[0]!.viewCount).toBeGreaterThanOrEqual(2);
 		expect(moved[1]!.viewCount).toBeGreaterThanOrEqual(2);
@@ -109,9 +108,9 @@ describe('Personalise Highlights', () => {
 		// The items now at the front should be the ones that used to be at positions 2..end-2
 		const frontUrls = storedHighlights
 			.slice(0, storedHighlights.length - 2)
-			.map((h) => h.card.url);
+			.map((h) => h.cardUrl);
 		expect(frontUrls).toEqual(
-			baseHighlights.slice(2).map((h) => h.card.url),
+			baseHighlights.slice(2).map((h) => h.cardUrl),
 		);
 	});
 
@@ -137,12 +136,12 @@ describe('Personalise Highlights', () => {
 	});
 
 	it('should mark a clicked card and move it to the back', () => {
-		const target = baseHighlights[2]!.card; // click the 3rd card
+		const target = highlightCards[2]!; // click the 3rd card
 		const result = onCardClick(baseHighlights, target);
 
 		// the clicked card should be last and marked clicked
 		const last = result[result.length - 1]!;
-		expect(last.card.url).toBe(target.url);
+		expect(last.cardUrl).toBe(target.url);
 		expect(last.wasClicked).toBe(true);
 
 		// length and other items preserved (minus the original instance of the clicked card)
@@ -150,18 +149,15 @@ describe('Personalise Highlights', () => {
 		const urlsInOrderExceptClicked = [
 			...baseHighlights.slice(0, 2),
 			...baseHighlights.slice(3),
-		].map((h) => h.card.url);
-		expect(result.slice(0, -1).map((h) => h.card.url)).toEqual(
+		].map((h) => h.cardUrl);
+		expect(result.slice(0, -1).map((h) => h.cardUrl)).toEqual(
 			urlsInOrderExceptClicked,
 		);
 	});
 
 	it('should not reorder if a card was already clicked', () => {
-		const clickedOnce = onCardClick(
-			baseHighlights,
-			baseHighlights[0]!.card,
-		);
-		const clickedTwice = onCardClick(clickedOnce, baseHighlights[0]!.card);
+		const clickedOnce = onCardClick(baseHighlights, highlightCards[0]);
+		const clickedTwice = onCardClick(clickedOnce, highlightCards[0]);
 		expect(clickedTwice).toEqual(clickedOnce);
 	});
 
@@ -169,7 +165,7 @@ describe('Personalise Highlights', () => {
 		expect(onCardClick(baseHighlights, undefined)).toEqual(baseHighlights);
 
 		const unknownCard = {
-			...baseHighlights[0]!.card,
+			...highlightCards[0],
 			url: 'https://unknown.example',
 		} as DCRFrontCard;
 		expect(onCardClick(baseHighlights, unknownCard)).toEqual(
@@ -193,17 +189,6 @@ describe('Personalise Highlights', () => {
 		const result = getHighlightsState();
 		expect(result).toEqual(valid);
 		expect(storage.local.remove).not.toHaveBeenCalled();
-	});
-
-	it('getOrderedHighlights maps stored highlights to cards (or empty if none)', () => {
-		// No storage => empty
-		(storage.local.get as jest.Mock).mockReturnValueOnce(undefined);
-		expect(getOrderedHighlights()).toEqual([]);
-
-		// With storage => returns just the cards
-		const valid = initialiseHighlightsState(highlightCards.slice(0, 2));
-		(storage.local.get as jest.Mock).mockReturnValueOnce(valid);
-		expect(getOrderedHighlights()).toEqual(valid.map((h) => h.card));
 	});
 
 	it('saveHighlightsState sets storage under HighlightsHistoryKey', () => {
@@ -251,7 +236,7 @@ describe('Personalise Highlights', () => {
 		const seeded = [...baseHighlights];
 		(storage.local.get as jest.Mock).mockReturnValueOnce(seeded);
 
-		const clickCard = seeded[1]!.card;
+		const clickCard = highlightCards[1]!;
 		onHighlightEvent('CLICK', clickCard);
 
 		expect(storage.local.set).toHaveBeenCalledWith(
@@ -260,7 +245,7 @@ describe('Personalise Highlights', () => {
 		);
 		const [, finalHistory] = (storage.local.set as jest.Mock).mock.calls[0];
 		const last = (finalHistory as typeof baseHighlights).slice(-1)[0]!;
-		expect(last.card.url).toBe(clickCard.url);
+		expect(last.cardUrl).toBe(clickCard.url);
 		expect(last.wasClicked).toBe(true);
 	});
 });
