@@ -21,16 +21,19 @@ type Props = {
 	headlineText: string;
 	dataLinkName?: string;
 	isExternalLink: boolean;
+	trackCardClick?: () => void;
 };
 
 const InternalLink = ({
 	linkTo,
 	headlineText,
 	dataLinkName,
+	trackCardClick,
 }: {
 	linkTo: string;
 	headlineText: string;
 	dataLinkName?: string;
+	trackCardClick?: () => void;
 }) => {
 	return (
 		// eslint-disable-next-line jsx-a11y/anchor-has-content -- we have an aria-label attribute describing the content
@@ -39,6 +42,7 @@ const InternalLink = ({
 			css={fauxLinkStyles}
 			data-link-name={dataLinkName}
 			aria-label={headlineText}
+			onClick={trackCardClick}
 		/>
 	);
 };
@@ -47,10 +51,12 @@ const ExternalLink = ({
 	linkTo,
 	headlineText,
 	dataLinkName,
+	trackCardClick,
 }: {
 	linkTo: string;
 	headlineText: string;
 	dataLinkName?: string;
+	trackCardClick?: () => void;
 }) => {
 	return (
 		// eslint-disable-next-line jsx-a11y/anchor-has-content -- we have an aria-label attribute describing the content
@@ -61,6 +67,7 @@ const ExternalLink = ({
 			aria-label={headlineText + ' (opens in new tab)'}
 			target="_blank"
 			rel="noreferrer"
+			onClick={trackCardClick}
 		/>
 	);
 };
@@ -70,6 +77,7 @@ export const CardLink = ({
 	headlineText,
 	dataLinkName = 'article', //this makes sense if the link is to an article, but should this say something like "external" if it's an external link? are there any other uses/alternatives?
 	isExternalLink,
+	trackCardClick,
 }: Props) => {
 	return (
 		<>
@@ -78,6 +86,7 @@ export const CardLink = ({
 					linkTo={linkTo}
 					headlineText={headlineText}
 					dataLinkName={dataLinkName}
+					trackCardClick={trackCardClick}
 				/>
 			)}
 			{!isExternalLink && (
@@ -85,6 +94,7 @@ export const CardLink = ({
 					linkTo={linkTo}
 					headlineText={headlineText}
 					dataLinkName={dataLinkName}
+					trackCardClick={trackCardClick}
 				/>
 			)}
 		</>
