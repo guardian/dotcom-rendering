@@ -223,14 +223,14 @@ const abTests = useBetaAB();
 // Get all of the user's server/client-side A/B test participations
 const abTestParticipations = abTests?.getParticipations(); // EG. { commercial-dev-client-side-test: 'variant', commercial-dev-server-side-test: 'variant' }
 
-// Is user in the AbTestTest test (any cohort)
+// Is user in the webex-example-test test (any cohort)
 const isInTest = abTests?.isUserInTest('webex-example-test') ?? false;
 
-// Is user in the AbTestTest test (control cohort)
+// Is user in the webex-example-test test (control cohort)
 const isInControlGroup =
 	abTests?.isUserInTestGroup('webex-example-test', 'control') ?? false;
 
-// Is user in the AbTestTest test (variant cohort)
+// Is user in the webex-example-test test (variant cohort)
 const isInVariantGroup =
 	abTests?.isUserInTestGroup('webex-example-test', 'variant') ?? false;
 ```
