@@ -22,11 +22,7 @@ import { VideoProgressBar } from './VideoProgressBar';
 
 export type SubtitleSize = 'small' | 'medium' | 'large';
 
-const videoStyles = (
-	width: number,
-	height: number,
-	subtitleSize: SubtitleSize,
-) => css`
+const videoStyles = (width: number, height: number) => css`
 	position: relative;
 	display: block;
 	height: auto;
@@ -35,7 +31,9 @@ const videoStyles = (
 	/* Prevents CLS by letting the browser know the space the video will take up. */
 	aspect-ratio: ${width} / ${height};
 	object-fit: cover;
+`;
 
+const subtitleStyles = (subtitleSize: SubtitleSize | undefined) => css`
 	::cue {
 		/* Hide the cue by default as we prefer custom overlay */
 		visibility: hidden;
@@ -112,19 +110,21 @@ type Props = {
 	handleLoadedMetadata: (event: SyntheticEvent) => void;
 	handleLoadedData: (event: SyntheticEvent) => void;
 	handleCanPlay: (event: SyntheticEvent) => void;
-	handlePlayPauseClick: (event: SyntheticEvent) => void;
-	handleAudioClick: (event: SyntheticEvent) => void;
-	handleKeyDown: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
-	handlePause: (event: SyntheticEvent) => void;
+	handlePlayPauseClick?: (event: SyntheticEvent) => void;
+	handleAudioClick?: (event: SyntheticEvent) => void;
+	handleKeyDown?: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
+	handlePause?: (event: SyntheticEvent) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	AudioIcon: ((iconProps: IconProps) => JSX.Element) | null;
 	posterImage?: string;
 	preloadPartialData: boolean;
 	showPlayIcon: boolean;
 	subtitleSource?: string;
-	subtitleSize: SubtitleSize;
+	subtitleSize?: SubtitleSize;
 	/* used in custom subtitle overlays */
 	activeCue?: ActiveCue | null;
+	/* Cinemagraphs do not display subtitles or video controls */
+	isCinemagraph: boolean;
 };
 
 /**
@@ -165,17 +165,26 @@ export const SelfHostedVideoPlayer = forwardRef(
 			subtitleSource,
 			subtitleSize,
 			activeCue,
+			isCinemagraph,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
 		const videoId = `video-${uniqueId}`;
+		const showSubtitles =
+			!!subtitleSource &&
+			!!subtitleSize &&
+			!!activeCue?.text &&
+			!isCinemagraph;
 
 		return (
 			<>
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Captions will be considered later. */}
 				<video
 					id={videoId}
-					css={videoStyles(width, height, subtitleSize)}
+					css={[
+						videoStyles(width, height),
+						showSubtitles && subtitleStyles(subtitleSize),
+					]}
 					crossOrigin="anonymous"
 					ref={ref}
 					tabIndex={0}
@@ -229,59 +238,65 @@ export const SelfHostedVideoPlayer = forwardRef(
 					)}
 					{FallbackImageComponent}
 				</video>
-				{!!activeCue?.text && (
+				{showSubtitles && (
 					<SubtitleOverlay
 						text={activeCue.text}
 						subtitleSize={subtitleSize}
 					/>
 				)}
-				{ref && 'current' in ref && ref.current && isPlayable && (
-					<>
-						{/* Play icon */}
-						{showPlayIcon && (
-							<button
-								type="button"
-								onClick={handlePlayPauseClick}
-								css={playIconStyles}
-								data-link-name={`gu-video-loop-play-${atomId}`}
-								data-testid="play-icon"
-							>
-								<PlayIcon iconWidth="narrow" />
-							</button>
-						)}
-						{/* Progress bar */}
-						<VideoProgressBar
-							videoId={videoId}
-							currentTime={currentTime}
-							duration={ref.current.duration}
-						/>
-						{/* Audio icon */}
-						{AudioIcon && (
-							<button
-								type="button"
-								onClick={handleAudioClick}
-								css={audioButtonStyles}
-								data-link-name={`gu-video-loop-${
-									isMuted ? 'unmute' : 'mute'
-								}-${atomId}`}
-							>
-								<div
-									css={audioIconContainerStyles}
-									data-testid={`${
-										isMuted ? 'unmute' : 'mute'
-									}-icon`}
+				{ref &&
+					'current' in ref &&
+					ref.current &&
+					isPlayable &&
+					!isCinemagraph && (
+						<>
+							{/* Play icon */}
+							{showPlayIcon && (
+								<button
+									type="button"
+									onClick={handlePlayPauseClick}
+									css={playIconStyles}
+									data-link-name={`gu-video-loop-play-${atomId}`}
+									data-testid="play-icon"
 								>
-									<AudioIcon
-										size="xsmall"
-										theme={{
-											fill: palette('--video-audio-icon'),
-										}}
-									/>
-								</div>
-							</button>
-						)}
-					</>
-				)}
+									<PlayIcon iconWidth="narrow" />
+								</button>
+							)}
+							{/* Progress bar */}
+							<VideoProgressBar
+								videoId={videoId}
+								currentTime={currentTime}
+								duration={ref.current.duration}
+							/>
+							{/* Audio icon */}
+							{AudioIcon && (
+								<button
+									type="button"
+									onClick={handleAudioClick}
+									css={audioButtonStyles}
+									data-link-name={`gu-video-loop-${
+										isMuted ? 'unmute' : 'mute'
+									}-${atomId}`}
+								>
+									<div
+										css={audioIconContainerStyles}
+										data-testid={`${
+											isMuted ? 'unmute' : 'mute'
+										}-icon`}
+									>
+										<AudioIcon
+											size="xsmall"
+											theme={{
+												fill: palette(
+													'--video-audio-icon',
+												),
+											}}
+										/>
+									</div>
+								</button>
+							)}
+						</>
+					)}
 			</>
 		);
 	},

@@ -86,6 +86,9 @@ const indices = [
 	'bodyArea',
 	'rightColumnArea',
 
+	// Media overlay
+	'mediaOverlay',
+
 	// Self-hosted video
 	'video-progress-bar-foreground',
 	'video-progress-bar-background',
