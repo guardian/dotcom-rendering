@@ -151,6 +151,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
+		threshold: 0.4,
 	});
 
 	useEffect(() => {
