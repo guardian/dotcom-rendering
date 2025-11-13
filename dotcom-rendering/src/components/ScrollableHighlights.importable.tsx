@@ -241,14 +241,14 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	const ABTestAPI = useAB()?.api;
 
 	type Attr =
-		| 'undetermined'
 		| 'click-tracking'
 		| 'view-tracking'
 		| 'click-and-view-tracking'
-		| 'not-in-test';
+		| 'not-in-test'
+		| undefined;
 
 	const getUserABAttr = (api?: ABTestAPIType): Attr => {
-		if (!api) return 'undetermined';
+		if (!api) return undefined;
 
 		if (api.isUserInVariant('PersonalisedHighlights', 'click-tracking')) {
 			return 'click-tracking';
@@ -329,7 +329,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	}, []);
 
 	useEffect(() => {
-		if (abTestPersonalisedHighlightAttr === 'undetermined') {
+		if (abTestPersonalisedHighlightAttr === undefined) {
 			return;
 		}
 
