@@ -394,7 +394,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 					 * Enable scroll-snap only when visible to prevent browser scroll anchoring.
 					 * When items reorder, browsers try to keep previously visible items in view,
 					 * causing unwanted scrolling. Enabling snap after reordering forces position 0.
-					 // */
+					 */
 					shouldShowHighlights && scrollSnapStyles,
 				]}
 				data-heatphan-type="carousel"
