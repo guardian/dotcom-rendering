@@ -12,7 +12,7 @@ import type { DCRFrontCard } from '../types/front';
  * */
 
 type HighlightCardState = {
-	card: DCRFrontCard /* TODO: store a card identifier (eg url) rather than the whole card. */;
+	cardUrl: string;
 	viewCount: number;
 	wasClicked: boolean;
 };
@@ -30,10 +30,10 @@ const isValidHighlightsState = (history: unknown): history is HighlightsState =>
 	history.every(
 		(highlight) =>
 			isObject(highlight) &&
-			'card' in highlight &&
+			'cardUrl' in highlight &&
 			'viewCount' in highlight &&
 			'wasClicked' in highlight &&
-			isObject(highlight.card) &&
+			typeof highlight.cardUrl === 'string' &&
 			typeof highlight.viewCount === 'number' &&
 			typeof highlight.wasClicked === 'boolean',
 	);
@@ -70,7 +70,7 @@ export const initialiseHighlightsState = (
 	cards: Array<DCRFrontCard>,
 ): HighlightsState => {
 	return cards.map((card) => ({
-		card,
+		cardUrl: card.url,
 		viewCount: 0,
 		wasClicked: false,
 	}));
@@ -83,18 +83,23 @@ export const resetHighlightsState = (cards: DCRFrontCard[]): void => {
 	saveHighlightsState(highlights);
 };
 
-/* Maps history records to DCR front cards for faster rendering */
+/* Maps history to DCR front cards */
 export const getCardsFromState = (
 	history: HighlightsState,
-): Array<DCRFrontCard> => {
-	return history.map((highlight) => {
-		return highlight.card;
-	});
+	trails: DCRFrontCard[],
+): DCRFrontCard[] => {
+	return history
+		.map((highlight) =>
+			trails.find((card) => card.url === highlight.cardUrl),
+		)
+		.filter((card): card is DCRFrontCard => !!card);
 };
 
-export const getOrderedHighlights = (): Array<DCRFrontCard> => {
+export const getOrderedHighlights = (
+	trails: DCRFrontCard[],
+): DCRFrontCard[] => {
 	const history = getHighlightsState() ?? [];
-	return getCardsFromState(history);
+	return getCardsFromState(history, trails);
 };
 
 /* Track when a user has clicked on a highlight card */
@@ -104,8 +109,7 @@ export const onCardClick = (
 ): HighlightsState => {
 	/* if we don't have a card, return highlights as is */
 	if (!card) return highlights;
-
-	const index = highlights.findIndex((el) => el.card.url === card.url);
+	const index = highlights.findIndex((el) => el.cardUrl === card.url);
 
 	const foundCard = highlights[index];
 

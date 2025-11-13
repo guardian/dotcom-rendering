@@ -317,7 +317,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	}, []);
 
 	useEffect(() => {
-		const personalisedHighlights = getOrderedHighlights();
+		const personalisedHighlights = getOrderedHighlights(trails);
 		if (
 			personalisedHighlights.length === 0 ||
 			personalisedHighlights.length !== trails.length ||
