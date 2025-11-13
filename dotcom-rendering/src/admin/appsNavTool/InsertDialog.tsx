@@ -26,10 +26,14 @@ export const InsertDialog = (props: Props) => {
 		dispatch({ kind: 'cancelInsert' });
 	}, [dispatch]);
 
+	if (props.insertingAt === undefined) {
+		return null;
+	}
+
 	return (
 		<SectionForm
 			heading="Add Section"
-			open={props.insertingAt !== undefined}
+			open={true}
 			initialTitle=""
 			initialPath=""
 			initialMobileOverride={undefined}
