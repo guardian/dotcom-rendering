@@ -2,16 +2,16 @@
 	"name": "@guardian/ab-testing",
 	"version": "1.0.0",
 	"description": "A/B test definitions and configuration",
-	"main": "index.ts",
+	"main": "config/index.ts",
 	"type": "module",
 	"scripts": {
+		"validate": "node scripts/validation/index.ts",
+		"deploy": "node scripts/deploy/index.ts --mvts=dist/mvts.json --ab-tests=dist/ab-tests.json",
+		"build": "node scripts/build/index.ts --mvts=dist/mvts.json --ab-tests=dist/ab-tests.json",
 		"test": "node --test",
 		"lint": "eslint .",
 		"prettier:check": "prettier . --check --cache",
-		"prettier:fix": "prettier . --write --cache",
-		"validate": "node scripts/validation/index.ts",
-		"deploy": "node scripts/deploy/index.ts --mvts=dist/mvts.json --ab-tests=dist/ab-tests.json",
-		"build": "node scripts/build/index.ts --mvts=dist/mvts.json --ab-tests=dist/ab-tests.json"
+		"prettier:fix": "prettier . --write --cache"
 	},
 	"dependencies": {
 		"superstruct": "2.0.2"

@@ -36,6 +36,15 @@ jobs:
       - name: Test
         run: pnpm test
 
+      - name: Lint
+        run: pnpm lint
+
+      - name: Prettier Check
+        run: pnpm prettier:check
+
+      - name: Typecheck
+        run: pnpm tsc
+
       - name: Validate
         run: pnpm validate
 
