@@ -245,7 +245,6 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 		| 'click-tracking'
 		| 'view-tracking'
 		| 'click-and-view-tracking'
-		| 'control'
 		| 'not-in-test';
 
 	const getUserABAttr = (api?: ABTestAPIType): Attr => {
@@ -334,10 +333,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 			return;
 		}
 
-		if (
-			abTestPersonalisedHighlightAttr === 'not-in-test' ||
-			abTestPersonalisedHighlightAttr === 'control'
-		) {
+		if (abTestPersonalisedHighlightAttr === 'not-in-test') {
 			clearHighlightsState();
 			setOrderedTrails(trails);
 			return;
