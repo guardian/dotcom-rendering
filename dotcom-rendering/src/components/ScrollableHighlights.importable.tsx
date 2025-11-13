@@ -352,11 +352,12 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 			/* Reset to editorial order */
 			resetHighlightsState(trails);
 			setOrderedTrails(trails);
+			setShouldShowHighlights(true);
 			return;
 		}
 		/* Otherwise, use personalised order from local storage */
 		setOrderedTrails(personalisedHighlights);
-
+		setShouldShowHighlights(true);
 		/* Fire a view event only if the container has been personalised */
 		void submitComponentEvent(
 			{
@@ -368,12 +369,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 			},
 			'Web',
 		);
-	}, [trails]);
-
-	/* Update the visibility of highlights once we have the correct trail order set in state. */
-	useEffect(() => {
-		setShouldShowHighlights(true);
-	}, [orderedTrails]);
+	}, [trails, abTestPersonalisedHighlightAttr]);
 
 	const { ophanComponentLink, ophanComponentName, ophanFrontName } =
 		getOphanInfo(frontId);
@@ -398,7 +394,8 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 					 * Enable scroll-snap only when visible to prevent browser scroll anchoring.
 					 * When items reorder, browsers try to keep previously visible items in view,
 					 * causing unwanted scrolling. Enabling snap after reordering forces position 0.
-					 */ shouldShowHighlights && scrollSnapStyles,
+					 // */
+					shouldShowHighlights && scrollSnapStyles,
 				]}
 				data-heatphan-type="carousel"
 			>
