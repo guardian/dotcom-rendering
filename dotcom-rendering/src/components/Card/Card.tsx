@@ -896,6 +896,10 @@ export const Card = ({
 					<MediaWrapper
 						mediaSize={mediaSize}
 						mediaType={media.type}
+						isCinemagraph={
+							media.mainMedia?.type === 'SelfHostedVideo' &&
+							media.mainMedia.videoStyle === 'Cinemagraph'
+						}
 						mediaPositionOnDesktop={mediaPositionOnDesktop}
 						mediaPositionOnMobile={mediaPositionOnMobile}
 						hideMediaOverlay={media.type === 'slideshow'}
@@ -952,6 +956,12 @@ export const Card = ({
 									uniqueId={uniqueId}
 									height={media.mainMedia.height}
 									width={media.mainMedia.width}
+									isCinemagraph={
+										media.mainMedia?.type ===
+											'SelfHostedVideo' &&
+										media.mainMedia.videoStyle ===
+											'Cinemagraph'
+									}
 									posterImage={media.mainMedia.image ?? ''}
 									fallbackImage={media.mainMedia.image ?? ''}
 									fallbackImageSize={mediaSize}

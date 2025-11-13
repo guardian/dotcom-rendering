@@ -1,6 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
+import { getZIndex } from '../../../lib/getZIndex';
 import type { CardMediaType } from '../../../types/layout';
 
 const mediaFixedSize = {
@@ -29,6 +30,7 @@ type Props = {
 	children: React.ReactNode;
 	mediaSize: MediaSizeType;
 	mediaType?: CardMediaType;
+	isCinemagraph?: boolean;
 	mediaPositionOnDesktop: MediaPositionType;
 	mediaPositionOnMobile: MediaPositionType;
 	/**
@@ -48,6 +50,9 @@ const mediaOverlayContainerStyles = css`
 	left: 0;
 	width: 100%;
 	height: 100%;
+	z-index: ${getZIndex('mediaOverlay')};
+	cursor: pointer;
+	pointer-events: none;
 `;
 
 /**
@@ -201,6 +206,7 @@ export const MediaWrapper = ({
 	children,
 	mediaSize,
 	mediaType,
+	isCinemagraph,
 	mediaPositionOnDesktop,
 	mediaPositionOnMobile,
 	hideMediaOverlay,
@@ -267,8 +273,10 @@ export const MediaWrapper = ({
 		>
 			<>
 				{children}
-				{/* This image overlay is styled when the CardLink is hovered */}
-				{(mediaType === 'picture' || mediaType === 'slideshow') &&
+				{/* This overlay is styled when the CardLink is hovered */}
+				{(mediaType === 'picture' ||
+					mediaType === 'slideshow' ||
+					(mediaType === 'loop-video' && isCinemagraph)) &&
 					!hideMediaOverlay && (
 						<div
 							css={[
