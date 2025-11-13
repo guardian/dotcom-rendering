@@ -1412,6 +1412,14 @@
                 },
                 "activeVersion": {
                     "type": "number"
+                },
+                "videoPlayerFormat": {
+                    "enum": [
+                        "Cinemagraph",
+                        "Default",
+                        "Loop"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [

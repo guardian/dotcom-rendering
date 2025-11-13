@@ -33,6 +33,10 @@ const videoContainerStyles = css`
 	position: relative;
 `;
 
+const cinemagraphContainerStyles = css`
+	pointer-events: none;
+`;
+
 /**
  * Dispatches a custom play audio event so that other videos listening
  * for this event will be muted.
@@ -116,6 +120,11 @@ type Props = {
 	uniqueId: string;
 	height: number;
 	width: number;
+	/**
+	 * All controls on the video are hidden: the video looks like a GIF.
+	 * This includes but may not be limited to: audio icon, play/pause icon, subtitles, progress bar.
+	 */
+	isCinemagraph: boolean;
 	posterImage: string;
 	fallbackImage: CardPictureProps['mainImage'];
 	fallbackImageSize: CardPictureProps['imageSize'];
@@ -133,6 +142,7 @@ export const LoopVideo = ({
 	uniqueId,
 	height,
 	width,
+	isCinemagraph,
 	posterImage,
 	fallbackImage,
 	fallbackImageSize,
@@ -642,8 +652,13 @@ export const LoopVideo = ({
 	return (
 		<figure
 			ref={setNode}
-			css={videoContainerStyles}
-			className="loop-video-container"
+			css={[
+				videoContainerStyles,
+				isCinemagraph && cinemagraphContainerStyles,
+			]}
+			className={`loop-video-container ${
+				isCinemagraph ? 'cinemagraph' : ''
+			}`}
 			data-component="gu-video-loop"
 		>
 			<LoopVideoPlayer
@@ -663,17 +678,20 @@ export const LoopVideo = ({
 				handleLoadedMetadata={handleLoadedMetadata}
 				handleLoadedData={handleLoadedData}
 				handleCanPlay={handleCanPlay}
-				handlePlayPauseClick={handlePlayPauseClick}
-				handleAudioClick={handleAudioClick}
-				handleKeyDown={handleKeyDown}
-				handlePause={handlePause}
+				handlePlayPauseClick={
+					!isCinemagraph ? handlePlayPauseClick : undefined
+				}
+				handleAudioClick={!isCinemagraph ? handleAudioClick : undefined}
+				handleKeyDown={!isCinemagraph ? handleKeyDown : undefined}
+				handlePause={!isCinemagraph ? handlePause : undefined}
 				onError={onError}
-				AudioIcon={hasAudio ? AudioIcon : null}
+				AudioIcon={hasAudio && !isCinemagraph ? AudioIcon : null}
 				preloadPartialData={preloadPartialData}
-				showPlayIcon={showPlayIcon}
-				subtitleSource={subtitleSource}
-				subtitleSize={subtitleSize}
+				showPlayIcon={!isCinemagraph ? showPlayIcon : false}
+				subtitleSize={!isCinemagraph ? subtitleSize : undefined}
+				subtitleSource={!isCinemagraph ? subtitleSource : undefined}
 				activeCue={activeCue}
+				isCinemagraph={isCinemagraph}
 			/>
 		</figure>
 	);
