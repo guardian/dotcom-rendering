@@ -1,14 +1,18 @@
-import { ABTest } from '../../types.ts';
-import { AUDIENCE_SPACES, MVT_COUNT } from '../lib/constants.ts';
-import { AllSpace, AudienceSpace, FastlyTestParams } from '../lib/types.ts';
-import { TestGroupMVTManager } from './test-group-mvt-manager.ts';
+import type { ABTest } from "../../config/types.ts";
+import { AUDIENCE_SPACES, MVT_COUNT } from "../../lib/constants.ts";
+import type {
+	AllSpace,
+	AudienceSpace,
+	FastlyTestParams,
+} from "../../lib/types.ts";
+import { TestGroupMVTManager } from "./test-group-mvt-manager.ts";
 
 const getTestGroupName = (
-	test: Pick<ABTest, 'name'> & { group?: string },
+	test: Pick<ABTest, "name"> & { group?: string },
 	group?: string,
 ) => `${test.name}:${group ?? test.group}`;
 
-export const calculateSpaceUpdates = (
+const calculateSpaceUpdates = (
 	audienceSpace: AudienceSpace,
 	tests: ABTest[],
 ) => {
@@ -90,19 +94,18 @@ const calculateAllSpaceUpdates = (
 		(space, i) => {
 			console.log(`Calculating updates for space: ${space}`);
 			const spaceTests = tests.filter(
-				(test) => (test.audienceSpace ?? 'A') === space, // 'A' is the default space
+				(test) => (test.audienceSpace ?? "A") === space, // 'A' is the default space
 			);
 
 			if (spaceTests.length === 0) {
 				console.log(`No tests for space: ${space}`);
-				return new Map();
+				return new Map<string, FastlyTestParams>();
 			}
 
-			const spaceMVTGroups: Map<
-				string,
-				{ name: string; type: string; exp: number }
-			> = new Map(
-				mvtGroups.entries().map(([key, value]) => [key, value[i]]),
+			const spaceMVTGroups = new Map(
+				mvtGroups
+					.entries()
+					.map(([key, value]) => [key, value[i] as FastlyTestParams]),
 			);
 
 			return calculateSpaceUpdates(spaceMVTGroups, spaceTests);
@@ -120,4 +123,4 @@ const calculateAllSpaceUpdates = (
 	}, new Map<string, FastlyTestParams[]>());
 };
 
-export { calculateAllSpaceUpdates };
+export { calculateSpaceUpdates, calculateAllSpaceUpdates };

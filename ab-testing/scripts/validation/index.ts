@@ -1,9 +1,9 @@
-import { ABTest } from '../../types.ts';
-import { activeABtests } from '../../abTest.ts';
-import { enoughSpace } from './enoughSpace.ts';
-import { limitServerSideTests } from './limitServerSide.ts';
-import { uniqueName } from './uniqueName.ts';
-import { allExpirationsValid } from './validExpiration.ts';
+import { activeABtests } from "../../config/abTests.ts";
+import type { ABTest } from "../../config/types.ts";
+import { enoughSpace } from "./enoughSpace.ts";
+import { limitServerSideTests } from "./limitServerSide.ts";
+import { uniqueName } from "./uniqueName.ts";
+import { allExpirationsValid } from "./validExpiration.ts";
 
 type ValidationFunction = (tests: ABTest[]) => boolean;
 
@@ -20,7 +20,7 @@ function validateTests(testList: ABTest[]) {
 
 try {
 	validateTests(activeABtests);
-	console.log('AB test validations passed');
+	console.log("AB test validations passed");
 } catch (err) {
 	const error = err as Error;
 	console.error(`AB test validation failed: ${error.message}`);

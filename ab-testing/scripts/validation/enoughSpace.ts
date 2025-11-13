@@ -1,11 +1,10 @@
-import { ABTest } from '../../types.ts';
+import type { ABTest } from "../../config/types.ts";
 
 export function enoughSpace(allTests: ABTest[]) {
-	const spaceTotalSize = allTests.reduce<{
-		[key: string]: number;
-	}>(
+	const spaceTotalSize = allTests.reduce(
 		(acc, test) => {
-			const space = test.audienceSpace ?? 'A';
+			const space = test.audienceSpace ?? "A";
+
 			acc[space] += test.audienceSize;
 			return acc;
 		},

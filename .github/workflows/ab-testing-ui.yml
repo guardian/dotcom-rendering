@@ -1,4 +1,4 @@
-name: 🦕 AB testing UI
+name: 🧪 AB testing UI
 on:
   pull_request:
     paths:
@@ -23,14 +23,15 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      # https://github.com/denoland/setup-deno#latest-stable-for-a-major
-      - uses: denoland/setup-deno@v1
-        with:
-          deno-version: v2.3
+      - name: Set up Node environment
+        uses: ./.github/actions/setup-node-env
+
       - name: Install
-        run: deno install
+        run: pnpm install --frozen-lockfile
+
       - name: Build
-        run: deno run build
+        run: pnpm build
+
       - name: Save build
         uses: actions/upload-artifact@v5
         with:
