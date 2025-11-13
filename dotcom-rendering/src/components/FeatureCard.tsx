@@ -246,7 +246,7 @@ const getMedia = ({
 	mainMedia?: MainMedia;
 	canPlayInline?: boolean;
 }) => {
-	if (mainMedia && mainMedia.type === 'Video' && canPlayInline) {
+	if (mainMedia && mainMedia.type === 'YoutubeVideo' && canPlayInline) {
 		return {
 			type: 'video',
 			mainMedia,
@@ -383,11 +383,11 @@ export const FeatureCard = ({
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
-	const isVideoMainMedia = mainMedia?.type === 'Video';
+	const isVideoMainMedia = mainMedia?.type === 'YoutubeVideo';
 	const isVideoArticle = format.design === ArticleDesign.Video;
 
 	const videoDuration =
-		mainMedia?.type === 'Video' ? mainMedia.duration : undefined;
+		mainMedia?.type === 'YoutubeVideo' ? mainMedia.duration : undefined;
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -397,7 +397,7 @@ export const FeatureCard = ({
 	});
 
 	const showYoutubeVideo =
-		canPlayInline && showVideo && mainMedia?.type === 'Video';
+		canPlayInline && showVideo && mainMedia?.type === 'YoutubeVideo';
 
 	const showCardAge =
 		webPublicationDate !== undefined && showClock !== undefined;

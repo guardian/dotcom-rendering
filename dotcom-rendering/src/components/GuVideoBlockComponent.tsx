@@ -39,7 +39,7 @@ export const GuVideoBlockComponent = ({
 					captionText={caption}
 					format={format}
 					credit={credit}
-					mediaType="Video"
+					mediaType="YoutubeVideo"
 					isMainMedia={isMainMedia}
 				/>
 			)}

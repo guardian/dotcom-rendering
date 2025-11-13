@@ -279,13 +279,13 @@ const getMedia = ({
 	canPlayInline?: boolean;
 	isBetaContainer: boolean;
 }) => {
-	if (mainMedia?.type === 'LoopVideo' && canPlayInline) {
+	if (mainMedia?.type === 'SelfHostedVideo' && canPlayInline) {
 		return {
 			type: 'loop-video',
 			mainMedia,
 		} as const;
 	}
-	if (mainMedia?.type === 'Video' && canPlayInline) {
+	if (mainMedia?.type === 'YoutubeVideo' && canPlayInline) {
 		return {
 			type: 'youtube-video',
 			mainMedia,
@@ -429,14 +429,16 @@ export const Card = ({
 	 * It is treated as a media card in the design system.
 	 */
 	const isVideoArticle =
-		mainMedia?.type === 'Video' && format.design === ArticleDesign.Video;
+		mainMedia?.type === 'YoutubeVideo' &&
+		format.design === ArticleDesign.Video;
 
 	/**
 	 * Articles with a video as the main media but not classified as "video articles"
 	 * are styled differently and are not treated as media cards.
 	 */
 	const isVideoMainMedia =
-		mainMedia?.type === 'Video' && format.design !== ArticleDesign.Video;
+		mainMedia?.type === 'YoutubeVideo' &&
+		format.design !== ArticleDesign.Video;
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 

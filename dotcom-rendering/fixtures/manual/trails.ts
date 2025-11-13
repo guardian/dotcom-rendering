@@ -101,7 +101,7 @@ export const trails: [
 		},
 		dataLinkName: 'news | group-0 | card-@2',
 		mainMedia: {
-			type: 'Video',
+			type: 'YoutubeVideo',
 			id: 'abcdef',
 			videoId: 'abcd',
 			title: 'some title',
@@ -316,7 +316,7 @@ export const trails: [
 		headline: 'How plastics are invading our brain cells – video',
 		dataLinkName: 'media | group-0 | card-@11',
 		mainMedia: {
-			type: 'Video',
+			type: 'YoutubeVideo',
 			id: '966acc06-a238-4d5f-b477-816eec0476f3',
 			videoId: '4JUvvbpx2So',
 			duration: 322,
@@ -408,7 +408,7 @@ export const trails: [
 		dataLinkName: 'news | group-0 | card-@18',
 		supportingContent: getSublinks(3),
 		mainMedia: {
-			type: 'Video',
+			type: 'YoutubeVideo',
 			id: 'abcdef',
 			videoId: 'abcd',
 			title: 'some title',
@@ -560,7 +560,7 @@ export const videoTrails: [DCRFrontCard, DCRFrontCard] = [
 			"Amorim said the team proved by the victory against City that they 'can leave anyone outside the squad and manage to win'",
 		webPublicationDate: '2024-12-16T15:21:02.000Z',
 		mainMedia: {
-			type: 'Video',
+			type: 'YoutubeVideo',
 			id: 'fa2ee832-c5e7-4305-8387-f0277d2d9e27',
 			videoId: '9kIN--VV2LQ',
 			duration: 117,
@@ -587,7 +587,7 @@ export const videoTrails: [DCRFrontCard, DCRFrontCard] = [
 			'News Group Newspapers offered Harry ‘full and unequivocal apology’ for ‘serious intrusion’ by the paper',
 		webPublicationDate: '2025-01-22T18:51:14.000Z',
 		mainMedia: {
-			type: 'Video',
+			type: 'YoutubeVideo',
 			id: '03ac0c90-3a66-448c-8562-b66a9ca9360e',
 			videoId: '_2wsSKq6yAk',
 			duration: 71,
@@ -655,7 +655,8 @@ export const loopVideoCard: DCRFrontCard = {
 	headline: 'Headline for looping video card',
 	trailText: 'Trail text for looping video card',
 	mainMedia: {
-		type: 'LoopVideo',
+		type: 'SelfHostedVideo',
+		videoStyle: 'Loop',
 		atomId: '3cb22b60-2c3f-48d6-8bce-38c956907cce',
 		sources: [
 			{

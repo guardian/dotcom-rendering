@@ -178,7 +178,7 @@ export const HighlightsCard = ({
 
 					{!!mainMedia && isMediaCard && (
 						<div>
-							{mainMedia.type === 'Video' && (
+							{mainMedia.type === 'YoutubeVideo' && (
 								<Pill
 									content={secondsToDuration(
 										mainMedia.duration,

@@ -279,7 +279,10 @@ export const YoutubeAtomFeatureCardOverlay = ({
 						showLivePlayable={false}
 						mainMedia={
 							isVideoArticle
-								? { type: 'Video', duration: duration ?? 0 }
+								? {
+										type: 'YoutubeVideo',
+										duration: duration ?? 0,
+								  }
 								: undefined
 						}
 					/>
