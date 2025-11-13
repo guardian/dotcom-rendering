@@ -896,7 +896,7 @@ export const Card = ({
 						mediaType={media.type}
 						mediaPositionOnDesktop={mediaPositionOnDesktop}
 						mediaPositionOnMobile={mediaPositionOnMobile}
-						hideImageOverlay={media.type === 'slideshow'}
+						hideMediaOverlay={media.type === 'slideshow'}
 						padMedia={isMediaCardOrNewsletter && isBetaContainer}
 						isBetaContainer={isBetaContainer}
 						isSmallCard={isSmallCard}

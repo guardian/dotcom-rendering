@@ -36,13 +36,13 @@ type Props = {
 	 * This is to allow hiding the overlay on slideshow carousels where we don't
 	 * want it to be shown whilst retaining it for existing slideshows.
 	 */
-	hideImageOverlay?: boolean;
+	hideMediaOverlay?: boolean;
 	isBetaContainer: boolean;
 	isSmallCard: boolean;
 	padMedia?: boolean;
 };
 
-const imageOverlayContainerStyles = css`
+const mediaOverlayContainerStyles = css`
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -203,7 +203,7 @@ export const MediaWrapper = ({
 	mediaType,
 	mediaPositionOnDesktop,
 	mediaPositionOnMobile,
-	hideImageOverlay,
+	hideMediaOverlay,
 	isBetaContainer,
 	isSmallCard,
 	padMedia,
@@ -269,10 +269,10 @@ export const MediaWrapper = ({
 				{children}
 				{/* This image overlay is styled when the CardLink is hovered */}
 				{(mediaType === 'picture' || mediaType === 'slideshow') &&
-					!hideImageOverlay && (
+					!hideMediaOverlay && (
 						<div
 							css={[
-								imageOverlayContainerStyles,
+								mediaOverlayContainerStyles,
 								padMedia &&
 									mediaPaddingStyles(
 										mediaPositionOnDesktop,
@@ -282,7 +282,7 @@ export const MediaWrapper = ({
 						>
 							{/* This child div is needed as the hover background colour covers the padded
 							    area around the image when the hover styles are applied to the top-level div */}
-							<div className="image-overlay" />
+							<div className="media-overlay" />
 						</div>
 					)}
 			</>

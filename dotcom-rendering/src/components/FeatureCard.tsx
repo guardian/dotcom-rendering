@@ -73,7 +73,7 @@ const baseCardStyles = css`
 `;
 
 const hoverStyles = css`
-	:hover .image-overlay {
+	:hover .media-overlay {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -94,7 +94,7 @@ const sublinkHoverStyles = css`
 		.card-headline .show-underline {
 			text-decoration: none;
 		}
-		.image-overlay {
+		.media-overlay {
 			background-color: transparent;
 		}
 	}
@@ -536,8 +536,8 @@ export const FeatureCard = ({
 									</>
 								)}
 
-								{/* This image overlay is styled when the CardLink is hovered */}
-								<div className="image-overlay" />
+								{/* This overlay is styled when the CardLink is hovered */}
+								<div className="media-overlay" />
 
 								<div
 									css={[
