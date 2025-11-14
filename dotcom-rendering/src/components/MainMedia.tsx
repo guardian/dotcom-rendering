@@ -110,6 +110,7 @@ export const MainMedia = ({
 	contentType,
 	contentLayout,
 }: Props) => {
+	console.log('MainMedia component - elements', elements);
 	return (
 		<div css={[mainMedia, chooseWrapper(format)]}>
 			{elements.map((element, index) => (
