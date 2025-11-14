@@ -514,7 +514,13 @@ export const renderElement = ({
 					`2 + 2 === 4` - display in the looping video player
 			*/
 
-			if (2 + 2 === 5) {
+			if (2 + 2 === 4) {
+				console.log('Loop: element.assets', element.assets);
+				const updatedSources = element.assets.map((a) => ({
+					src: a.src || a.url,
+					mimeType: a.mimeType,
+				}));
+				console.log('Loop: updatedSources', updatedSources);
 				return (
 					<>
 						{element.posterImage?.[0]?.url && (
@@ -523,7 +529,7 @@ export const renderElement = ({
 								defer={{ until: 'visible' }}
 							>
 								<LoopVideoInArticle
-									sources={element.assets}
+									sources={updatedSources}
 									atomId={element.id}
 									uniqueId={`${Math.random()}`}
 									height={400}
@@ -546,6 +552,7 @@ export const renderElement = ({
 					</>
 				);
 			} else {
+				console.log('Default: element.assets', element.assets);
 				return (
 					<VideoAtom
 						format={format}

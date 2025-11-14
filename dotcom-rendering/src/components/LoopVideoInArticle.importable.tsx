@@ -67,7 +67,7 @@ export const LoopVideoInArticle = ({
 				<Caption
 					captionText={caption}
 					format={format}
-					mediaType="Video"
+					mediaType="SelfHostedVideo"
 					isMainMedia={isMainMedia}
 				/>
 			)}
