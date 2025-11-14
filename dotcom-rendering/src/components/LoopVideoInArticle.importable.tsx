@@ -3,6 +3,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import { Caption } from './Caption';
 import type { Props as CardPictureProps } from './CardPicture';
 import type { Source } from '../lib/video';
+import type { SubtitleSize } from './LoopVideoPlayer';
 
 type LoopVideoInArticleProps = {
 	atomId: string;
@@ -20,6 +21,8 @@ type LoopVideoInArticleProps = {
 	sources: Source[];
 	uniqueId: string;
 	width: number;
+	subtitleSource?: string;
+	subtitleSize: SubtitleSize;
 };
 
 export const LoopVideoInArticle = ({
@@ -38,6 +41,8 @@ export const LoopVideoInArticle = ({
 	sources,
 	uniqueId,
 	width = 500,
+	subtitleSource,
+	subtitleSize,
 }: LoopVideoInArticleProps) => {
 	console.log('LVIAimp - atomId', atomId);
 	return (
@@ -55,6 +60,8 @@ export const LoopVideoInArticle = ({
 				fallbackImageAlt={fallbackImageAlt}
 				fallbackImageAspectRatio={fallbackImageAspectRatio}
 				linkTo={linkTo}
+				subtitleSource={subtitleSource}
+				subtitleSize={subtitleSize}
 			/>
 			{!!caption && (
 				<Caption
