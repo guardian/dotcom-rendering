@@ -832,7 +832,6 @@ export type FEElement =
 	| KeyTakeawaysBlockElement
 	| LinkBlockElement
 	| ListBlockElement
-	| LoopVideoInArticleElement
 	| MapBlockElement
 	| MediaAtomBlockElement
 	| MiniProfilesBlockElement
