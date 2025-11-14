@@ -150,6 +150,7 @@ module.exports = ({ build }) => ({
 							__dirname,
 							'rendered-items-assets-template.html',
 						),
+						inject: false,
 						templateParameters: {
 							styles: fontAssetsCss,
 							bodyContent: fontDivsHtml,
