@@ -1,5 +1,19 @@
-import type { FEElement } from '../types/content';
+import type { FEElement, ProductBlockElement } from '../types/content';
 import { enhanceH2s } from './enhance-H2s';
+
+const mockProductElement: FEElement = {
+	_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
+	elementId: 'productMockId',
+	primaryHeadingHtml: 'Primary Heading',
+	secondaryHeadingHtml: 'Secondary Heading',
+	content: [],
+	customAttributes: [],
+	productCtas: [],
+	brandName: 'Brand',
+	displayType: 'InlineOnly',
+	starRating: '5',
+	productName: 'Product Name',
+};
 
 describe('Enhance h2 Embeds', () => {
 	it('sets an id when it is an h2 of type SubheadingBlockElement', () => {
@@ -174,6 +188,79 @@ describe('Enhance h2 Embeds', () => {
 				_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 				elementId: 'mockId',
 				html: "<h2 id='jurassic-park-iii-2001'>	Jurassic Park III --- 2001 -- ★★★ </h2>",
+			},
+		];
+
+		expect(enhanceH2s(input)).toEqual(expectedOutput);
+	});
+
+	it('should add H2 id to mockProductElement', () => {
+		const input = [mockProductElement];
+		const expectedOutput: ProductBlockElement[] = [
+			{
+				...mockProductElement,
+				h2Id: 'primary-heading-secondary-heading',
+			},
+		];
+
+		expect(enhanceH2s(input)).toEqual(expectedOutput);
+	});
+
+	it('should use elementId as h2Id when primary and secondary headings are empty', () => {
+		const input = [
+			{
+				...mockProductElement,
+				primaryHeadingHtml: '<strong></strong>',
+				secondaryHeadingHtml: '',
+			},
+		];
+		const expectedOutput: ProductBlockElement[] = [
+			{
+				...mockProductElement,
+				primaryHeadingHtml: '<strong></strong>',
+				secondaryHeadingHtml: '',
+				h2Id: 'productMockId',
+			},
+		];
+
+		expect(enhanceH2s(input)).toEqual(expectedOutput);
+	});
+
+	it('multiple productElements should have unique h2Ids', () => {
+		const input = [mockProductElement, mockProductElement];
+		const expectedOutput: ProductBlockElement[] = [
+			{
+				...mockProductElement,
+				h2Id: 'primary-heading-secondary-heading',
+			},
+			{
+				...mockProductElement,
+				h2Id: 'primary-heading-secondary-heading-1',
+			},
+		];
+
+		expect(enhanceH2s(input)).toEqual(expectedOutput);
+	});
+
+	it('product element with a subheading element', () => {
+		const input: FEElement[] = [
+			mockProductElement,
+			{
+				_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+				elementId: 'mockId',
+				html: '<h2>primary heading secondary heading</h2>',
+			},
+		];
+
+		const expectedOutput: FEElement[] = [
+			{
+				...mockProductElement,
+				h2Id: 'primary-heading-secondary-heading',
+			},
+			{
+				_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+				elementId: 'mockId',
+				html: "<h2 id='primary-heading-secondary-heading-1'>primary heading secondary heading</h2>",
 			},
 		];
 

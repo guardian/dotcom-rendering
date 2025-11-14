@@ -39,7 +39,7 @@ const buttonStyles = css`
 `;
 
 const hoverStyles = css`
-	:hover .image-overlay {
+	:hover .media-overlay {
 		position: absolute;
 		top: 0;
 		width: 100%;
@@ -209,7 +209,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 						/>
 					</div>
 				) : null}
-				<div className="image-overlay" />
+				<div className="media-overlay" />
 				<div css={playIconStyles}>
 					<PlayIcon iconWidth="narrow" />
 				</div>
@@ -279,7 +279,10 @@ export const YoutubeAtomFeatureCardOverlay = ({
 						showLivePlayable={false}
 						mainMedia={
 							isVideoArticle
-								? { type: 'Video', duration: duration ?? 0 }
+								? {
+										type: 'YoutubeVideo',
+										duration: duration ?? 0,
+								  }
 								: undefined
 						}
 					/>

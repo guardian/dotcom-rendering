@@ -16,7 +16,17 @@ const meta = {
 			},
 		},
 	},
-} satisfies Meta;
+	args: {
+		showLabsRedesign: false,
+	},
+	argTypes: {
+		showLabsRedesign: {
+			control: { type: 'boolean' },
+			description:
+				'Toggle between old Labs design (LabsSection) and new design (FrontSection)',
+		},
+	},
+} satisfies Meta<{ showLabsRedesign: boolean }>;
 type Story = StoryObj<typeof meta>;
 
 export default meta;
@@ -208,25 +218,43 @@ export const SpecialReportAltPalette = {
 	),
 } satisfies Story;
 
-export const BrandedPalette = {
-	render: () => (
-		<LabsSection
-			title="Branded Palette"
-			collectionId={''}
-			pageId={''}
-			ajaxUrl={''}
-			sectionId={'branded-palette'}
-			ophanComponentName={'branded-palette'}
-			ophanComponentLink={'branded-palette'}
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
-			<DynamicFast
-				groupedTrails={groupedTrails}
+export const BrandedPalette: StoryObj<{ showLabsRedesign: boolean }> = {
+	render: ({ showLabsRedesign }) =>
+		showLabsRedesign ? (
+			<FrontSection
+				title="Branded Palette Redesign"
 				containerPalette="Branded"
-				showAge={true}
-				imageLoading="eager"
-			/>
-		</LabsSection>
-	),
-} satisfies Story;
+				showDateHeader={true}
+				editionId={'UK'}
+				discussionApiUrl={discussionApiUrl}
+				isLabs={true}
+				showLabsRedesign={showLabsRedesign}
+			>
+				<DynamicFast
+					groupedTrails={groupedTrails}
+					containerPalette="Branded"
+					showAge={true}
+					imageLoading="eager"
+				/>
+			</FrontSection>
+		) : (
+			<LabsSection
+				title="Branded Palette"
+				collectionId={''}
+				pageId={''}
+				ajaxUrl={''}
+				sectionId={'branded-palette-toggle'}
+				ophanComponentName={'branded-palette-toggle'}
+				ophanComponentLink={'branded-palette-toggle'}
+				discussionApiUrl={discussionApiUrl}
+				editionId={'UK'}
+			>
+				<DynamicFast
+					groupedTrails={groupedTrails}
+					containerPalette="Branded"
+					showAge={true}
+					imageLoading="eager"
+				/>
+			</LabsSection>
+		),
+};

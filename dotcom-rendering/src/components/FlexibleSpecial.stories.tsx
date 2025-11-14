@@ -51,7 +51,7 @@ const liveUpdatesCard = {
 	showQuotedHeadline: false,
 	dataLinkName: 'news | group-0 | card-@1',
 	mainMedia: {
-		type: 'Video',
+		type: 'YoutubeVideo',
 		id: 'fd00c892-407f-4d99-adfb-a8d12eada25f',
 		videoId: '04lLgC1NioA',
 		height: 300,

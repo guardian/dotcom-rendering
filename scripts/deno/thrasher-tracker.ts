@@ -1,4 +1,4 @@
-import { array, object, string } from 'npm:zod@3';
+import { array, object, string } from 'npm:zod@4.1.12';
 import { fetchJSON } from './json.ts';
 import prettyBytes from 'npm:pretty-bytes@6';
 import { octokit } from './github.ts';

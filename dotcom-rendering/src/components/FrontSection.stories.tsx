@@ -385,7 +385,7 @@ export const WithPaidContentForWholeFront = {
 };
 
 export const GuardianLabs = {
-	name: 'Guardian Labs',
+	name: 'guardian Labs',
 	args: {
 		title: 'Section',
 		collectionBranding: {

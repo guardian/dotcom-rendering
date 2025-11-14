@@ -127,5 +127,22 @@ export const incrementUserDismissedGateCount = (
 	const prefs = getSigninGatePrefsSafely();
 	const key = localStorageDismissedCountKey(variant, name);
 	prefs[key] = retrieveDismissedCount(variant, name) + 1;
+	prefs[`last-treatment-id-${name}`] = variant; // Also save this as the last known treatmentId for this gate
+
 	setSigninGatePrefs(prefs);
+};
+
+/**
+ * Get the dismissed count using the last known treatmentId if available.
+ * Returns 0 if no treatmentId has been saved yet (first visit).
+ */
+export const retrieveLastGateDismissedCount = (name: string): number => {
+	const prefs = getSigninGatePrefsSafely();
+	const lastTreatmentId = prefs[`last-treatment-id-${name}`];
+
+	if (typeof lastTreatmentId === 'string') {
+		return retrieveDismissedCount(lastTreatmentId, name);
+	}
+
+	return 0; // First visit - no treatmentId saved yet, return 0
 };

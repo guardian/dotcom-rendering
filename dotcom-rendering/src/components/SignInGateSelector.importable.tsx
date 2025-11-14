@@ -9,6 +9,7 @@ import type { QueryParams } from './AuthProviderButtons/types';
 import { useConfig } from './ConfigContext';
 import type { ComponentEventParams } from './SignInGate/componentEventTracking';
 import { submitComponentEventTracking } from './SignInGate/componentEventTracking';
+import { incrementUserDismissedGateCount } from './SignInGate/dismissGate';
 import { pageIdIsAllowedForGating } from './SignInGate/displayRules';
 import { SignInGateAuxiaV1 } from './SignInGate/gateDesigns/SignInGateAuxiaV1';
 import { SignInGateAuxiaV2 } from './SignInGate/gateDesigns/SignInGateAuxiaV2';
@@ -395,7 +396,6 @@ const ShowSignInGateAuxia = ({
 	logTreatmentInteractionCall,
 	signInGateVersion,
 }: ShowSignInGateAuxiaProps) => {
-	const componentId = 'main_variant_5';
 	const checkoutCompleteCookieData = undefined;
 	const personaliseSignInGateAfterCheckoutSwitch = undefined;
 
@@ -467,7 +467,6 @@ const ShowSignInGateAuxia = ({
 			}
 		}
 	}, [
-		componentId,
 		hasBeenSeen,
 		browserId,
 		contributionsServiceUrl,
@@ -481,10 +480,11 @@ const ShowSignInGateAuxia = ({
 		guUrl: host,
 		queryParams,
 		dismissGate: () => {
+			incrementUserDismissedGateCount(abTest.variant, abTest.name);
 			setShowGate(false);
 		},
 		abTest,
-		ophanComponentId: componentId,
+		ophanComponentId: treatmentId,
 		checkoutCompleteCookieData,
 		personaliseSignInGateAfterCheckoutSwitch,
 		userTreatment,

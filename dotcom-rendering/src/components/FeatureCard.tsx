@@ -25,6 +25,7 @@ import type {
 	DCRSupportingContent,
 } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
+import { BrandingLabel } from './BrandingLabel';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
 import type { MediaSizeType } from './Card/components/MediaWrapper';
@@ -39,7 +40,6 @@ import { FormatBoundary } from './FormatBoundary';
 import { Island } from './Island';
 import { MediaDuration } from './MediaDuration';
 import { Pill } from './Pill';
-import { SponsoredContentLabel } from './SponsoredContentLabel';
 import { StarRating } from './StarRating/StarRating';
 import { SupportingContent } from './SupportingContent';
 import { WaveForm } from './WaveForm';
@@ -73,7 +73,7 @@ const baseCardStyles = css`
 `;
 
 const hoverStyles = css`
-	:hover .image-overlay {
+	:hover .media-overlay {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -94,7 +94,7 @@ const sublinkHoverStyles = css`
 		.card-headline .show-underline {
 			text-decoration: none;
 		}
-		.image-overlay {
+		.media-overlay {
 			background-color: transparent;
 		}
 	}
@@ -246,7 +246,7 @@ const getMedia = ({
 	mainMedia?: MainMedia;
 	canPlayInline?: boolean;
 }) => {
-	if (mainMedia && mainMedia.type === 'Video' && canPlayInline) {
+	if (mainMedia && mainMedia.type === 'YoutubeVideo' && canPlayInline) {
 		return {
 			type: 'video',
 			mainMedia,
@@ -383,11 +383,11 @@ export const FeatureCard = ({
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
-	const isVideoMainMedia = mainMedia?.type === 'Video';
+	const isVideoMainMedia = mainMedia?.type === 'YoutubeVideo';
 	const isVideoArticle = format.design === ArticleDesign.Video;
 
 	const videoDuration =
-		mainMedia?.type === 'Video' ? mainMedia.duration : undefined;
+		mainMedia?.type === 'YoutubeVideo' ? mainMedia.duration : undefined;
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -397,7 +397,7 @@ export const FeatureCard = ({
 	});
 
 	const showYoutubeVideo =
-		canPlayInline && showVideo && mainMedia?.type === 'Video';
+		canPlayInline && showVideo && mainMedia?.type === 'YoutubeVideo';
 
 	const showCardAge =
 		webPublicationDate !== undefined && showClock !== undefined;
@@ -536,8 +536,8 @@ export const FeatureCard = ({
 									</>
 								)}
 
-								{/* This image overlay is styled when the CardLink is hovered */}
-								<div className="image-overlay" />
+								{/* This overlay is styled when the CardLink is hovered */}
+								<div className="media-overlay" />
 
 								<div
 									css={[
@@ -730,7 +730,7 @@ export const FeatureCard = ({
 						/>
 					)}
 					{isLabs && branding && showLabsRedesign && (
-						<SponsoredContentLabel
+						<BrandingLabel
 							branding={branding}
 							containerPalette={containerPalette}
 							orientation="horizontal"
@@ -741,6 +741,7 @@ export const FeatureCard = ({
 							ophanComponentName={
 								labsDataAttributes?.ophanComponentName
 							}
+							isLabs={isLabs}
 						/>
 					)}
 				</div>

@@ -6,6 +6,7 @@ import type { CanShowResult } from '../../lib/messagePicker';
 import { useAuthStatus } from '../../lib/useAuthStatus';
 import type { TagType } from '../../types/tag';
 import { Island } from '../Island';
+import { retrieveLastGateDismissedCount } from '../SignInGate/dismissGate';
 import { pageIdIsAllowedForGating } from '../SignInGate/displayRules';
 import type { AuxiaGateDisplayData } from '../SignInGate/types';
 import {
@@ -139,18 +140,30 @@ export const SignInGatePortal = ({
  * This replicates the logic from SignInGateSelector but is adapted
  * for use within the message picker system.
  */
-export const canShowSignInGatePortal = async (
-	isSignedIn: boolean | undefined,
-	isPaidContent: boolean,
-	isPreview: boolean,
-	pageId?: string,
-	contributionsServiceUrl?: string,
-	editionId?: EditionId,
-	contentType?: string,
-	sectionId?: string,
-	tags?: TagType[],
-	retrieveDismissedCount?: (variant: string, name: string) => number,
-): Promise<CanShowResult<AuxiaGateDisplayData>> => {
+export interface CanShowSignInGateProps {
+	isSignedIn: boolean | undefined;
+	isPaidContent: boolean;
+	isPreview: boolean;
+	pageId: string;
+	contributionsServiceUrl: string;
+	isInAuxiaControlGroup: boolean;
+	editionId?: EditionId;
+	contentType?: string;
+	sectionId?: string;
+	tags?: TagType[];
+}
+export const canShowSignInGatePortal = async ({
+	isSignedIn,
+	isPaidContent,
+	isPreview,
+	pageId,
+	contributionsServiceUrl,
+	isInAuxiaControlGroup,
+	editionId,
+	contentType,
+	sectionId,
+	tags,
+}: CanShowSignInGateProps): Promise<CanShowResult<AuxiaGateDisplayData>> => {
 	// Check if the sign-in gate placeholder exists in the DOM
 	const targetElement = document.getElementById('sign-in-gate');
 
@@ -171,8 +184,7 @@ export const canShowSignInGatePortal = async (
 		editionId === undefined ||
 		contentType === undefined ||
 		sectionId === undefined ||
-		tags === undefined ||
-		retrieveDismissedCount === undefined
+		tags === undefined
 	) {
 		return Promise.resolve({ show: false });
 	}
@@ -185,7 +197,8 @@ export const canShowSignInGatePortal = async (
 			contentType,
 			sectionId,
 			tags,
-			retrieveDismissedCount('auxia-signin-gate', 'AuxiaSignInGate'),
+			retrieveLastGateDismissedCount('AuxiaSignInGate'),
+			isInAuxiaControlGroup,
 		);
 
 		return {

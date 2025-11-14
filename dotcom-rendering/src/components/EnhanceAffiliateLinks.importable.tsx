@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 import { getSkimlinksAccountId, isSkimlink } from '../lib/affiliateLinksUtils';
+import { useBetaAB } from '../lib/useAB';
 
 /**
  * Add custom parameters to skimlink URLs:
- * - referrer
+ * - Referrer
  * - Skimlinks account ID
+ * - AB test participations
  *
  * ## Why does this need to be an Island?
  *
@@ -15,6 +17,18 @@ import { getSkimlinksAccountId, isSkimlink } from '../lib/affiliateLinksUtils';
  * (No visual story exists as this does not render anything)
  */
 export const EnhanceAffiliateLinks = () => {
+	const abTests = useBetaAB();
+
+	// Get users server/client-side AB test participations
+	const abTestParticipations = abTests?.getParticipations();
+
+	// Reduce abTestParticipations to a comma-separated string
+	const abTestString = abTestParticipations
+		? Object.entries(abTestParticipations)
+				.map(([key, value]) => `${key}:${value}`)
+				.join(',')
+		: '';
+
 	useEffect(() => {
 		const allLinksOnPage = [...document.querySelectorAll('a')];
 
@@ -28,7 +42,9 @@ export const EnhanceAffiliateLinks = () => {
 				const skimlinksAccountId = getSkimlinksAccountId(link.href);
 
 				// Skimlinks treats xcust as one long string, so we use | to separate values
-				const xcustValue = `referrer|${referrerDomain}|accountId|${skimlinksAccountId}`;
+				const xcustValue = `referrer|${referrerDomain}|accountId|${skimlinksAccountId}${
+					abTestString ? `|abTestParticipations|${abTestString}` : ''
+				}`;
 
 				link.href = `${link.href}&xcust=${encodeURIComponent(
 					xcustValue,

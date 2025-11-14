@@ -55,7 +55,7 @@ export const WithVideo = {
 	args: {
 		...WithAge.args,
 		mainMedia: {
-			type: 'Video',
+			type: 'YoutubeVideo',
 			duration: 972,
 		},
 	},

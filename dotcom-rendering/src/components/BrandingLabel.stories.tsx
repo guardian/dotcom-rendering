@@ -1,9 +1,9 @@
 import type { Meta } from '@storybook/react-webpack5';
-import { SponsoredContentLabel } from './SponsoredContentLabel';
+import { BrandingLabel } from './BrandingLabel';
 
-const meta: Meta<typeof SponsoredContentLabel> = {
-	component: SponsoredContentLabel,
-	title: 'Components/SponsoredContentLabel',
+const meta: Meta<typeof BrandingLabel> = {
+	component: BrandingLabel,
+	title: 'Components/BrandingLabel',
 	parameters: {
 		layout: 'centered',
 		chromatic: {
@@ -38,21 +38,30 @@ const meta: Meta<typeof SponsoredContentLabel> = {
 
 export default meta;
 
-export const HorizontalOrientation = {
+export const Default = {
 	args: {
+		isLabs: false,
+	},
+};
+
+export const LabsHorizontalOrientation = {
+	args: {
+		isLabs: true,
 		orientation: 'horizontal',
 	},
 };
 
-export const VerticalOrientation = {
+export const LabsVerticalOrientation = {
 	args: {
+		isLabs: true,
 		orientation: 'vertical',
 	},
 };
 
-export const VerticalRightAlignment = {
+export const LabsVerticalRightAlignment = {
 	args: {
-		alignment: 'end',
+		isLabs: true,
 		orientation: 'vertical',
+		alignment: 'end',
 	},
 };

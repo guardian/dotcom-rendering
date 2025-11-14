@@ -9,7 +9,7 @@ import { Hide } from '@guardian/source/react-components';
 import { assertUnreachable } from '../lib/assert-unreachable';
 import { palette } from '../palette';
 import type { CollectionBranding } from '../types/branding';
-import { Badge } from './Badge';
+import { BrandingLabel } from './BrandingLabel';
 
 type Props = {
 	title: React.ReactNode;
@@ -90,12 +90,16 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 					<>
 						<Hide until="leftCol">
 							<p css={[labelStyles]}>{logo.label}</p>
-							<Badge imageSrc={logo.src} href={logo.link} />
+							<BrandingLabel
+								branding={collectionBranding.branding}
+							/>
 						</Hide>
 						<div css={titleStyle}>
 							<Hide from="leftCol">
 								<p css={[labelStyles]}>{logo.label}</p>
-								<Badge imageSrc={logo.src} href={logo.link} />
+								<BrandingLabel
+									branding={collectionBranding.branding}
+								/>
 							</Hide>
 							{title}
 							<a href={aboutThisLink} css={[aboutThisLinkStyles]}>
@@ -109,11 +113,7 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 			return <div css={titleStyle}>{title}</div>;
 		}
 		case 'paid-content': {
-			const {
-				isFrontBranding,
-				isContainerBranding,
-				branding: { logo },
-			} = collectionBranding;
+			const { isFrontBranding, isContainerBranding } = collectionBranding;
 
 			if (isFrontBranding || isContainerBranding) {
 				return (
@@ -134,7 +134,9 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 							`}
 						>
 							Paid for by
-							<Badge imageSrc={logo.src} href={logo.link} />
+							<BrandingLabel
+								branding={collectionBranding.branding}
+							/>
 						</div>
 					</div>
 				);
@@ -143,11 +145,13 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 			return (
 				<>
 					<Hide until="leftCol">
-						<Badge imageSrc={logo.src} href={logo.link} />
+						<BrandingLabel branding={collectionBranding.branding} />
 					</Hide>
 					<div css={titleStyle}>
 						<Hide from="leftCol">
-							<Badge imageSrc={logo.src} href={logo.link} />
+							<BrandingLabel
+								branding={collectionBranding.branding}
+							/>
 						</Hide>
 						{title}
 					</div>
@@ -185,9 +189,8 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 							>
 								{logo.label}
 							</p>
-							<Badge
-								imageSrc={logo.src}
-								href={logo.link}
+							<BrandingLabel
+								branding={collectionBranding.branding}
 								isAdvertisingPartner={
 									isAdvertisingPartnerOrExclusive
 								}

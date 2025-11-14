@@ -203,7 +203,7 @@ export const WhenOverlaidWithStars = {
 export const ForVideos = {
 	args: {
 		...Standard.args,
-		mediaType: 'Video',
+		mediaType: 'YoutubeVideo',
 	},
 	parameters: {
 		chromatic: {

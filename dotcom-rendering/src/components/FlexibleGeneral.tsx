@@ -21,6 +21,7 @@ import type { ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
 import { FeatureCard } from './FeatureCard';
 import { FrontCard } from './FrontCard';
+import type { SubtitleSize } from './LoopVideoPlayer';
 import type { Alignment } from './SupportingContent';
 
 type Props = {
@@ -105,7 +106,9 @@ const ImmersiveCardLayout = ({
 	collectionId,
 	showLabsRedesign,
 }: ImmersiveCardLayoutProps) => {
-	const isLoopingVideo = card.mainMedia?.type === 'LoopVideo';
+	const isLoopingVideo =
+		card.mainMedia?.type === 'SelfHostedVideo' &&
+		card.mainMedia.videoStyle === 'Loop';
 
 	return (
 		<UL padBottom={true}>
@@ -155,6 +158,7 @@ type BoostedSplashProperties = {
 	supportingContentAlignment: Alignment;
 	liveUpdatesAlignment: Alignment;
 	trailTextSize: TrailTextSize;
+	subtitleSize: SubtitleSize;
 	avatarUrl?: string;
 };
 
@@ -185,6 +189,7 @@ const decideSplashCardProperties = (
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
 				trailTextSize: 'regular',
+				subtitleSize: 'medium',
 			};
 		case 'boost':
 			return {
@@ -200,6 +205,7 @@ const decideSplashCardProperties = (
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
 				trailTextSize: 'regular',
+				subtitleSize: 'medium',
 			};
 		case 'megaboost':
 			return {
@@ -216,6 +222,7 @@ const decideSplashCardProperties = (
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
+				subtitleSize: 'large',
 			};
 		case 'gigaboost':
 			return {
@@ -232,6 +239,7 @@ const decideSplashCardProperties = (
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
+				subtitleSize: 'large',
 			};
 	}
 };
@@ -293,6 +301,7 @@ const SplashCardLayout = ({
 		supportingContentAlignment,
 		liveUpdatesAlignment,
 		trailTextSize,
+		subtitleSize,
 	} = decideSplashCardProperties(
 		card.boostLevel ?? 'default',
 		card.supportingContent?.length ?? 0,
@@ -342,6 +351,7 @@ const SplashCardLayout = ({
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
+					subtitleSize={subtitleSize}
 					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
 					showLabsRedesign={showLabsRedesign}
 				/>
@@ -355,6 +365,7 @@ type BoostedCardProperties = {
 	mediaSize: MediaSizeType;
 	liveUpdatesPosition: Position;
 	supportingContentAlignment: Alignment;
+	subtitleSize: SubtitleSize;
 };
 
 /**
@@ -378,6 +389,7 @@ const decideCardProperties = (
 				liveUpdatesPosition: 'outer',
 				supportingContentAlignment:
 					supportingContentLength >= 2 ? 'horizontal' : 'vertical',
+				subtitleSize: 'medium',
 			};
 		case 'boost':
 		default:
@@ -391,6 +403,7 @@ const decideCardProperties = (
 				liveUpdatesPosition: 'inner',
 				supportingContentAlignment:
 					supportingContentLength >= 2 ? 'horizontal' : 'vertical',
+				subtitleSize: 'small',
 			};
 	}
 };
@@ -431,6 +444,7 @@ const FullWidthCardLayout = ({
 		mediaSize,
 		supportingContentAlignment,
 		liveUpdatesPosition,
+		subtitleSize,
 	} = decideCardProperties(
 		card.supportingContent?.length ?? 0,
 		card.boostLevel,
@@ -496,6 +510,7 @@ const FullWidthCardLayout = ({
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 					showLabsRedesign={showLabsRedesign}
+					subtitleSize={subtitleSize}
 				/>
 			</LI>
 		</UL>

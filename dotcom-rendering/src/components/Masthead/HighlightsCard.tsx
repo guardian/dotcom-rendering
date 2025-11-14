@@ -73,7 +73,7 @@ const container = css`
 `;
 
 const hoverStyles = css`
-	:hover .image-overlay {
+	:hover .media-overlay {
 		position: absolute;
 		bottom: 0;
 		right: 0;
@@ -175,7 +175,7 @@ export const HighlightsCard = ({
 
 					{!!mainMedia && isMediaCard && (
 						<div>
-							{mainMedia.type === 'Video' && (
+							{mainMedia.type === 'YoutubeVideo' && (
 								<Pill
 									content={secondsToDuration(
 										mainMedia.duration,

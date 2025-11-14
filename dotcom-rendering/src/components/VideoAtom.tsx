@@ -59,7 +59,7 @@ export const VideoAtom = ({
 				<Caption
 					captionText={caption}
 					format={format}
-					mediaType="Video"
+					mediaType="YoutubeVideo"
 					isMainMedia={isMainMedia}
 				/>
 			)}

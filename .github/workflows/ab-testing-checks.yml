@@ -45,7 +45,7 @@ jobs:
         run: deno task build
 
       - if: ${{ inputs.save_build_artifact }}
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@v5
         with:
           name: ab-testing-build
           path: ab-testing/dist

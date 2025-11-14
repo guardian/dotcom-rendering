@@ -98,6 +98,7 @@ export const SignInGateAuxiaV1 = ({
 							`sign-in-${provider}-${dismissStatusLabel}`,
 							renderingTarget,
 							abTest,
+							[userTreatment.treatmentType],
 						);
 						void logTreatmentInteractionCall(
 							'CLICKED',
@@ -119,6 +120,7 @@ export const SignInGateAuxiaV1 = ({
 							`sign-in-${provider}-${dismissStatusLabel}`,
 							renderingTarget,
 							abTest,
+							[userTreatment.treatmentType],
 						);
 						void logTreatmentInteractionCall(
 							'CLICKED',

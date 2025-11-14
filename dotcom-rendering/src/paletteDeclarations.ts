@@ -5,9 +5,8 @@
 */
 import { palette as sourcePalette } from '@guardian/source/foundations';
 import {
-	buttonThemeBrand,
-	buttonThemeDefault,
 	themeButton,
+	themeButtonBrand,
 } from '@guardian/source/react-components';
 import {
 	expandingWrapperDarkTheme,
@@ -887,20 +886,19 @@ const bylineUnderline: PaletteFunction = ({ theme }) => {
 const calloutPromptLight: PaletteFunction = () => sourcePalette.brand[500];
 const calloutPromptDark: PaletteFunction = () => sourcePalette.brand[800];
 
-const calloutSubmitTextLight: PaletteFunction = () =>
-	buttonThemeDefault.button.textPrimary;
+const calloutSubmitTextLight: PaletteFunction = () => themeButton.textPrimary;
 const calloutSubmitTextDark: PaletteFunction = () =>
-	buttonThemeBrand.button.textPrimary;
+	themeButtonBrand.textPrimary;
 
 const calloutSubmitBackgroundLight: PaletteFunction = () =>
-	buttonThemeDefault.button.backgroundPrimary;
+	themeButton.backgroundPrimary;
 const calloutSubmitBackgroundDark: PaletteFunction = () =>
-	buttonThemeBrand.button.backgroundPrimary;
+	themeButtonBrand.backgroundPrimary;
 
 const calloutSubmitBackgroundHoverLight: PaletteFunction = () =>
-	buttonThemeDefault.button.backgroundPrimaryHover;
+	themeButton.backgroundPrimaryHover;
 const calloutSubmitBackgroundHoverDark: PaletteFunction = () =>
-	buttonThemeBrand.button.backgroundPrimaryHover;
+	themeButtonBrand.backgroundPrimaryHover;
 
 export const expandingWrapper = {
 	'--expandingWrapper--background': {
@@ -1977,11 +1975,11 @@ const clickToViewBorderDark: PaletteFunction = () => sourcePalette.neutral[46];
 const clickToViewButtonLight: PaletteFunction = () => sourcePalette.brand[400];
 const clickToViewButtonDark: PaletteFunction = () => sourcePalette.neutral[97];
 const clickToViewButtonTextLight: PaletteFunction = () =>
-	buttonThemeDefault.button.textPrimary;
+	themeButton.textPrimary;
 const clickToViewButtonTextDark: PaletteFunction = () =>
 	sourcePalette.neutral[7];
 const clickToViewButtonHoverLight: PaletteFunction = () =>
-	buttonThemeDefault.button.backgroundPrimaryHover;
+	themeButton.backgroundPrimaryHover;
 const clickToViewButtonHoverDark: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 
@@ -5089,6 +5087,19 @@ const privacyTextSupportingSubduedLight: PaletteFunction = () =>
 const privacyTextSupportingSubduedDark: PaletteFunction = () =>
 	sourcePalette.neutral[60];
 
+const productCardBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const productCardBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+
+const productCardBorderLight: PaletteFunction = () =>
+	sourcePalette.lifestyle[300];
+const productCardBorderDark: PaletteFunction = () =>
+	sourcePalette.lifestyle[500];
+const productCardBorderNeutralDark: PaletteFunction = () =>
+	sourcePalette.neutral[38];
+const productCardBorderNeutralLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
 const privacyTextRegularLight: PaletteFunction = () => sourcePalette.neutral[7];
 const privacyTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 const witnessTitleText: PaletteFunction = ({ theme }) => {
@@ -5380,6 +5391,18 @@ const discussionSubduedDark: PaletteFunction = () => sourcePalette.neutral[60];
 const discussionLinkLight: PaletteFunction = () => sourcePalette.brand[500];
 const discussionLinkDark: PaletteFunction = () => sourcePalette.brand[800];
 
+const productButtonPrimaryBackgroundLight: PaletteFunction = () =>
+	sourcePalette.lifestyle[300];
+const productButtonPrimaryBackgroundDark: PaletteFunction = () =>
+	sourcePalette.lifestyle[500];
+const productButtonPrimaryBackgroundHoverLight: PaletteFunction = () =>
+	'#660055';
+const productButtonPrimaryBackgroundHoverDark: PaletteFunction = () =>
+	'#FF8ACC';
+const productButtonPrimaryTextDark: PaletteFunction = () =>
+	sourcePalette.neutral[7];
+const productButtonPrimaryTextLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
 const discussionPrimaryButtonBackgroundLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
@@ -7310,6 +7333,14 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[86],
 	},
+	'--loop-video-subtitle-background': {
+		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
+		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
+	},
+	'--loop-video-subtitle-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
 	'--masthead-nav-background': {
 		light: mastheadNavBackground,
 		dark: mastheadNavBackground,
@@ -7513,6 +7544,30 @@ const paletteColours = {
 	'--privacy-text-supporting-subdued': {
 		light: privacyTextSupportingSubduedLight,
 		dark: privacyTextSupportingSubduedDark,
+	},
+	'--product-button-primary-background': {
+		light: productButtonPrimaryBackgroundLight,
+		dark: productButtonPrimaryBackgroundDark,
+	},
+	'--product-button-primary-background-hover': {
+		light: productButtonPrimaryBackgroundHoverLight,
+		dark: productButtonPrimaryBackgroundHoverDark,
+	},
+	'--product-button-primary-text': {
+		light: productButtonPrimaryTextLight,
+		dark: productButtonPrimaryTextDark,
+	},
+	'--product-card-background': {
+		light: productCardBackgroundLight,
+		dark: productCardBackgroundDark,
+	},
+	'--product-card-border': {
+		light: productCardBorderLight,
+		dark: productCardBorderDark,
+	},
+	'--product-card-border-neutral': {
+		light: productCardBorderNeutralLight,
+		dark: productCardBorderNeutralDark,
 	},
 	'--pullquote-background': {
 		light: pullQuoteBackgroundLight,

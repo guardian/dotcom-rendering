@@ -61,7 +61,7 @@ export const HighlightsCardImage = ({
 						isCircular={false}
 						aspectRatio="1:1"
 					/>
-					<div className="image-overlay" />
+					<div className="media-overlay" />
 				</div>
 			);
 		}
@@ -76,8 +76,8 @@ export const HighlightsCardImage = ({
 					isCircular={true}
 					aspectRatio="1:1"
 				/>
-				{/* This image overlay is styled when the CardLink is hovered */}
-				<div className="image-overlay circular" />
+				{/* This overlay is styled when the CardLink is hovered */}
+				<div className="media-overlay circular" />
 			</div>
 		);
 	}
