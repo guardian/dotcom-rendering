@@ -1,0 +1,191 @@
+import { Meta, Source } from '@storybook/addon-docs/blocks';
+
+<Meta title="Writing Stories" />
+
+# Writing Stories
+
+If you're not familiar with the concept of stories, see the [Storybook docs](https://storybook.js.org/docs/9) and [Chromatic docs](https://www.chromatic.com/docs/) for an introduction.
+
+We recommend using Storybook's [Component Story Format](https://storybook.js.org/docs/9/api/csf/index) version 3 (CSFv3) to write stories. The [documentation](https://storybook.js.org/docs/9/writing-stories) covers this in detail, but in brief it means that your stories file should look something like this:
+
+<Source language="tsx" code={`
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { Headline } from './Headline';
+
+const meta = {
+    title: 'Components/Headline',
+    component: Headline,
+} satisfies Meta<typeof Headline>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const MyStory = {
+    args: {
+        text: 'A headline',
+    },
+} satisfies Story;
+`} />
+
+The `title` field is optional, as it can be inferred from the name of the component and its file path. You may also, sometimes, want to choose a different prefix than `Components/`. See [the docs](https://storybook.js.org/docs/9/writing-stories/naming-components-and-hierarchy) for more information. In addition, if you only have a single story you may want to ["hoist"](https://storybook.js.org/docs/9/writing-stories/naming-components-and-hierarchy#single-story-hoisting) it in the sidebar.
+
+## Toolbar and Modes
+
+Viewing a story in a particular state unrelated to its props or context, such as at a specific breakpoint or in dark mode, is achieved through the [toolbar and globals](https://storybook.js.org/docs/9/essentials/toolbars-and-globals).
+
+### Breakpoints
+
+We have configured Storybook to display stories in one of the eight Guardian breakpoints:
+
+- mobile: 320px
+- mobileMedium: 375px
+- mobileLandscape: 480px
+- phablet: 660px
+- tablet: 740px
+- desktop: 980px
+- leftCol: 1140px
+- wide: 1300px
+
+These can be applied using the dropdown in the Storybook toolbar, which is powered by the built-in [viewport feature](https://storybook.js.org/docs/9/essentials/viewport).
+
+### Colour Scheme
+
+Most of our components also have both light and dark mode versions, and we want to be able to view either of these in Storybook. To this end we have a custom toolbar item that allows you to display a story in one of four colour schemes:
+
+- Light
+- Dark
+- Horizontal Split
+- Vertical Split
+
+The "split" schemes will display two versions of the story at the same time; either vertically, light above dark, or horizontally, light on the left and dark on the right. The [docs](https://storybook.js.org/docs/9/essentials/toolbars-and-globals) contain details about how this works internally.
+
+These colour schemes will include default background and text colours. If you want to override these defaults this can be done with the `colourSchemeBackground` and `colourSchemeTextColour` parameters:
+
+<Source language="tsx" code={`
+export const MyStory = {
+    parameters: {
+        colourSchemeBackground: {
+            light: 'blue',
+            dark: '#222',
+        },
+        colourSchemeTextColour: {
+            light: palette('--custom-text-colour'),
+            dark: palette('--custom-text-colour'),
+        },
+    },
+} satisfies Story;
+`} />
+
+As seen in this example, any CSS colour value should work, including variables from the DCAR palette (see `palette.ts`).
+
+### Chromatic and Modes
+
+To apply a particular combination of breakpoint and colour scheme to a story in Chromatic, we use [modes](https://www.chromatic.com/docs/modes/). Some are already defined in `.storybook/modes.ts`, and if the one you want is missing you can add it there. We apply these modes at either the component level via a parameter in the `meta` object, or at the story level via a parameter in the story object. For example:
+
+<Source language="tsx" code={`
+import { allModes } from '../../../.storybook/modes';
+
+const meta = {
+    title: 'Components/Headline',
+    component: Headline,
+    parameters: {
+        chromatic: {
+            modes: {
+                'light mobileMedium': allModes['light mobileMedium'],
+                'vertical leftCol': allModes['vertical leftCol'],
+            },
+        }
+    }
+} satisfies Meta<typeof Headline>;
+
+export default meta;
+`} />
+
+Note that the previous way of achieving some of this functionality was through a [viewports parameter](https://www.chromatic.com/docs/legacy-viewports/#viewports-legacy-storybook-api). That is now deprecated.
+
+## Format and Colour Palette
+
+Many components will use the DCAR palette (see `palette.ts`) to derive their colours, and the colours in this palette are determined by a "Format" value. If a component takes a `format` prop, and the story therefore provides a `format` arg, then the palette will use this:
+
+<Source language="tsx" code={`
+export const MyStory = {
+    args: {
+        text: 'A headline',
+        format: {
+            design: ArticleDesign.Standard,
+            display: ArticleDisplay.Standard,
+            theme: Pillar.News,
+        },
+    },
+} satisfies Story;
+`} />
+
+If the component does not take this prop, you can instead pass a `formats` parameter:
+
+<Source language="tsx" code={`
+export const MyStory = {
+    args: {
+        text: 'A headline',
+    },
+    parameters: {
+        formats: [
+            {
+                design: ArticleDesign.Standard,
+                display: ArticleDisplay.Standard,
+                theme: Pillar.News,
+            },
+        ],
+    },
+} satisfies Story;
+`} />
+
+This parameter takes an array because you can pass multiple Formats to render the story multiple times, with a different format, and therefore colour palette, each time. Note that if the component *also* takes a `format` prop then this prop will be overridden by the `formats` parameter. This has consequences beyond the colour palette, as components can derive many aspects of the way they appear from Format.
+
+If a Format is not passed in either the `args` or `parameters` of a story then we use a default to determine the colour palette instead (defined in `globalColourScheme.ts`).
+
+## Story Layout
+
+Components often represent small pieces of UI that are only intended to appear in a certain area of the page, such as in one of the Guardian layout columns (left, centre, right). Due to the way our pages are designed, the styles that determine their layout often live at a higher level than the component, and so rendering the component in a story without that environment may not be very useful. Storybook provides the [decorators](https://storybook.js.org/docs/9/writing-stories/decorators) feature to solve this problem, and we have some custom decorators to place stories within the [Guardian grid](?path=/docs/grid--docs):
+
+<dl>
+    <dt>centreColumnDecorator</dt>
+    <dd>
+        Place the story in the centre column of a Guardian grid across all breakpoints.
+    </dd>
+    <dt>leftColumnDecorator</dt>
+    <dd>
+        Place the story in the left column of a Guardian grid, when available. On narrower breakpoints, where the left column isn't available, it will instead be placed in the centre column (this is a common layout pattern).
+    </dd>
+    <dt>rightColumnDecorator</dt>
+    <dd>
+        Place the story in the right column of a Guardian grid, when available. On narrower breakpoints, where the right column isn't available, it will instead be placed in the centre column (this is a common layout pattern).
+    </dd>
+    <dt>gridContainerDecorator</dt>
+    <dd>
+        Wrap the story in a Guardian grid container. This allows styles either:
+        <ol style={{ listStyle: 'decimal' }}>
+            <li>Within the component</li>
+            <li>In the story</li>
+            <li>In other decorators</li>
+        </ol>
+        to position elements on the grid.
+    </dd>
+</dl>
+
+These decorators can be applied at either the component level via the `meta` object, or at the story level via the story object. For example:
+
+<Source language="tsx" code={`
+import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
+
+export const MyStory = {
+    args: {
+        text: 'A headline',
+    },
+    decorators: [centreColumnDecorator],
+} satisfies Story;
+`} />
+
+## Other Decorators
+
+Aside from the grid decorators mentioned above, we also have the `splitThemeDecorator`, the `themeDecorator`, and the `configContextDecorator`. These are mostly intended for use in Storybook setup, in `preview.ts`, and are _not_ meant to be used directly in stories files.
