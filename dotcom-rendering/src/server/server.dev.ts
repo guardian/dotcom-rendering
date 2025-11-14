@@ -1,4 +1,5 @@
-import { type Handler, Router } from 'express';
+import nodePath from 'node:path';
+import { type Handler, Router, static as static_ } from 'express';
 import { pages } from '../devServer/routers/pages';
 import { targets } from '../devServer/routers/targets';
 import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslettersPage.web';
@@ -118,6 +119,11 @@ renderer.post('/FootballMatchListPage', handleFootballMatchListPage);
 renderer.post('/FootballTablesPage', handleFootballTablesPage);
 renderer.post('/CricketMatchPage', handleCricketMatchPage);
 renderer.post('/FootballMatchSummaryPage', handleFootballMatchPage);
+
+renderer.get(
+	'/assets',
+	static_(nodePath.resolve(__dirname, '../dist/rendered-items-assets.html')),
+);
 
 const router = Router();
 router.use('/pages', pages);
