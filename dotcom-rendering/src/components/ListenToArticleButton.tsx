@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-import { height, space } from '@guardian/source/foundations';
+import { height, neutral, space } from '@guardian/source/foundations';
+import type { ThemeIcon } from '@guardian/source/react-components';
 import {
 	Button,
 	SvgMediaControlsPlay,
@@ -18,12 +19,12 @@ const buttonCss = (audioDuration: string | undefined) => css`
 	}
 	margin-bottom: ${space[4]}px;
 	margin-left: ${space[2]}px;
-	padding-left: ${space[2]}px;
+	padding-left: ${space[3]}px;
 	padding-right: ${audioDuration === undefined ? space[4] : space[3]}px;
 	padding-bottom: 0px;
 	font-size: 15px;
-	height: ${height.ctaSmall}px;
-	min-height: ${height.ctaSmall}px;
+	height: ${height.ctaXsmall}px;
+	min-height: ${height.ctaXsmall}px;
 
 	.src-button-space {
 		width: 0px;
@@ -36,15 +37,46 @@ const dividerCss = css`
 	opacity: 0.5;
 	border-left: 1px solid ${palette('--follow-icon-background')};
 	margin-left: ${space[2]}px;
-	margin-right: ${space[2]}px;
 `;
 
-const durationCss = css`
-	font-weight: 300;
+const themeIcon: ThemeIcon = {
+	fill: palette('--follow-icon-background'),
+};
+
+const waveFormContainerCss = css`
+	height: ${space[12]}px;
+	border-top: 1px solid ${neutral[86]};
 `;
 
-const baselineCss = css`
-	padding-bottom: 2px;
+const generateWaveformGradients = (barCount: number): string => {
+	const barWidth = 2;
+	const spacing = 1;
+	const gradients: string[] = [];
+	let lastBarHeight = Math.floor(Math.random() * 60) + 25; // Initial random height
+
+	for (let i = 0; i < barCount; i++) {
+		const variation = lastBarHeight * 0.5; // 50% of last bar height
+		const minHeight = Math.max(50, lastBarHeight - variation);
+		const maxHeight = Math.min(70, lastBarHeight + variation);
+		const barHeight =
+			Math.floor(Math.random() * (maxHeight - minHeight + 1)) + minHeight;
+		lastBarHeight = barHeight;
+		const position = i * (barWidth + spacing);
+		gradients.push(
+			`linear-gradient(to top, ${neutral[86]} 0 ${barHeight}%, transparent ${barHeight}%) ${position}px 100% / ${barWidth}px 100%`,
+		);
+	}
+
+	return gradients.join(',\n\t\t');
+};
+
+const waveFormCss = css`
+	background: ${generateWaveformGradients(250)};
+	background-repeat: no-repeat;
+	height: inherit;
+	display: block;
+	width: 100%;
+	padding-top: ${space[2]}px;
 `;
 
 type ButtonProps = {
@@ -55,19 +87,22 @@ export const ListenToArticleButton = ({
 	onClickHandler,
 	audioDuration,
 }: ButtonProps) => (
-	<Button
-		onClick={onClickHandler}
-		size="default"
-		iconSide="left"
-		cssOverrides={buttonCss(audioDuration)}
-		icon={<SvgMediaControlsPlay />}
-	>
-		{audioDuration === undefined || audioDuration === '' ? null : (
-			<>
-				<span css={[durationCss, baselineCss]}>{audioDuration}</span>
-				<span css={dividerCss}></span>
-			</>
-		)}
-		<span css={baselineCss}>Listen to this article</span>
-	</Button>
+	<div css={waveFormContainerCss}>
+		<div css={waveFormCss}>
+			<Button
+				onClick={onClickHandler}
+				size="default"
+				cssOverrides={buttonCss(audioDuration)}
+			>
+				<span>Listen to this article</span>
+				{audioDuration === undefined || audioDuration === '' ? null : (
+					<>
+						<span css={dividerCss}></span>
+						<SvgMediaControlsPlay size="small" theme={themeIcon} />
+						<span>{audioDuration}</span>
+					</>
+				)}
+			</Button>
+		</div>
+	</div>
 );
