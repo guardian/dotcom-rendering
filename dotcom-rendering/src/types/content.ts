@@ -411,6 +411,19 @@ export interface ListBlockElement {
 	elementId: string;
 }
 
+interface LoopVideoInArticleElement {
+	_type: 'model.dotcomrendering.pageElements.MediaAtomBlockElement';
+	elementId: string;
+	id: string;
+	assets: VideoAssets[];
+	posterImage?: {
+		url: string;
+		width: number;
+	}[];
+	title?: string;
+	duration?: number;
+}
+
 export interface MapBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.MapBlockElement';
 	elementId: string;
@@ -819,6 +832,7 @@ export type FEElement =
 	| KeyTakeawaysBlockElement
 	| LinkBlockElement
 	| ListBlockElement
+	| LoopVideoInArticleElement
 	| MapBlockElement
 	| MediaAtomBlockElement
 	| MiniProfilesBlockElement
