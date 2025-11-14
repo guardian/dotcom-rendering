@@ -124,6 +124,13 @@ const copyFrontendStatic = () => {
 		},
 	);
 
+	log(' - copying rendered-items-assets.html => assets');
+	const renderedItemsAssetsHtmlJob = cpy(
+		path.resolve(source, 'rendered-items-assets.html'),
+		dest,
+		{ nodir: true },
+	);
+
 	log(' - copying stats => assets');
 	const statsToAssetsJob = cpy(
 		path.resolve(source, 'stats'),
@@ -133,7 +140,12 @@ const copyFrontendStatic = () => {
 		},
 	);
 
-	return [staticJob, distToAssetsJob, statsToAssetsJob];
+	return [
+		staticJob,
+		distToAssetsJob,
+		renderedItemsAssetsHtmlJob,
+		statsToAssetsJob,
+	];
 };
 
 const copyRiffRaff = () => {
