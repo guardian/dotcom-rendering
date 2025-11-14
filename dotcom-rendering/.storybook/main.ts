@@ -1,10 +1,21 @@
-import path from 'node:path';
+import path, { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
 import webpack from 'webpack';
-import { transpileExclude, getLoaders } from '../webpack/webpack.config.client';
 import { saveStories } from '../scripts/gen-stories/get-stories.mjs';
 import type { StorybookConfig } from '@storybook/react-webpack5';
 import { svgr } from '../webpack/svg.cjs';
 import process from 'node:process';
+
+// ESM equivalent of __dirname
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+// Import CommonJS webpack config in ESM context
+const require = createRequire(import.meta.url);
+const {
+	transpileExclude,
+	getLoaders,
+} = require('../webpack/webpack.config.client.js');
 
 // Generate dynamic Card and Layout stories
 saveStories();
