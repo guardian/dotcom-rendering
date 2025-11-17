@@ -40,6 +40,7 @@ deployments.set(abTestingArtifactDeployment, {
 	stacks: new Set(["frontend"]),
 	parameters: {
 		bucketSsmKey: "/account/services/dotcom-store.bucket",
+		cacheControl: "public, max-age=315360000",
 		prefixStack: false,
 		publicReadAcl: false,
 	},
