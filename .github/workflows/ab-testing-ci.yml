@@ -60,7 +60,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ab-testing/deploy-dictionary-lambda
+        working-directory: ab-testing/dictionary-deploy-lambda
     permissions:
       contents: read
     steps:
@@ -76,7 +76,7 @@ jobs:
         uses: actions/upload-artifact@v5
         with:
           name: ab-testing-lambda-build
-          path: ab-testing/deploy-dictionary-lambda/dist
+          path: ab-testing/dictionary-deploy-lambda/dist
 
   build-ui:
     name: UI build
@@ -138,7 +138,7 @@ jobs:
         uses: actions/download-artifact@v6.0.0
         with:
           name: ab-testing-lambda-build
-          path: ab-testing/deploy-dictionary-lambda/dist
+          path: ab-testing/dictionary-deploy-lambda/dist
 
       - name: CDK Test
         run: pnpm cdk:test
@@ -156,8 +156,8 @@ jobs:
           contentDirectories: |
             ab-testing:
               - ab-testing/dist
-            ab-testing-deploy-dictionary-lambda:
-              - ab-testing/deploy-dictionary-lambda/dist
+            ab-testing-dictionary-deploy-lambda:
+              - ab-testing/dictionary-deploy-lambda/dist
             admin/ab-testing:
               - ab-testing/frontend/output/ab-tests.html
             cdk.out:
