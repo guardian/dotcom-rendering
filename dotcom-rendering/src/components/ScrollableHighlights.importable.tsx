@@ -336,6 +336,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 		if (abTestPersonalisedHighlightAttr === 'not-in-test') {
 			clearHighlightsState();
 			setOrderedTrails(trails);
+			setShouldShowHighlights(true);
 			return;
 		}
 
