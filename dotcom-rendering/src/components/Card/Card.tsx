@@ -1073,7 +1073,10 @@ export const Card = ({
 											loading={imageLoading}
 											roundedCorners={
 												isOnwardContent &&
-												!isMoreGalleriesOnwardContent
+												!(
+													isMoreGalleriesOnwardContent ||
+													isGallerySecondaryOnward
+												)
 											}
 											aspectRatio={aspectRatio}
 										/>
@@ -1090,7 +1093,10 @@ export const Card = ({
 									loading={imageLoading}
 									roundedCorners={
 										isOnwardContent &&
-										!isMoreGalleriesOnwardContent
+										!(
+											isMoreGalleriesOnwardContent ||
+											isGallerySecondaryOnward
+										)
 									}
 									aspectRatio={aspectRatio}
 								/>
@@ -1135,7 +1141,10 @@ export const Card = ({
 											loading={imageLoading}
 											roundedCorners={
 												isOnwardContent &&
-												!isMoreGalleriesOnwardContent
+												!(
+													isMoreGalleriesOnwardContent ||
+													isGallerySecondaryOnward
+												)
 											}
 											aspectRatio="1:1"
 										/>

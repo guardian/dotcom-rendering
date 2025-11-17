@@ -8,6 +8,7 @@ import {
 } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { grid } from '../grid';
+import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import { type TrailType } from '../types/trails';
 import { Card } from './Card/Card';
@@ -18,6 +19,7 @@ type Props = {
 	trails: TrailType[];
 	discussionApiUrl: string;
 	guardianBaseUrl: string;
+	format: ArticleFormat;
 };
 
 const standardCardStyles = css`
@@ -81,11 +83,13 @@ const cardsContainerStyles = css`
 const getDefaultCardProps = (
 	trail: TrailType,
 	discussionApiUrl: string,
+	format: ArticleFormat,
 	serverTime?: number,
 ) => {
 	const defaultProps: CardProps = {
 		linkTo: trail.url,
 		format: trail.format,
+		contextFormat: format,
 		headlineText: trail.headline,
 		byline: trail.byline,
 		showByline: trail.showByline,
@@ -151,6 +155,7 @@ export const MoreGalleries = (props: Props) => {
 					defaultProps={getDefaultCardProps(
 						firstTrail,
 						props.discussionApiUrl,
+						props.format,
 						props.serverTime,
 					)}
 				/>
@@ -173,6 +178,7 @@ export const MoreGalleries = (props: Props) => {
 								{...getDefaultCardProps(
 									trail,
 									props.discussionApiUrl,
+									props.format,
 									props.serverTime,
 								)}
 								mediaSize="medium"

@@ -1,6 +1,7 @@
 import { isNonNullable, isObject } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { decideFormat } from '../lib/articleFormat';
+import type { ArticleFormat } from '../lib/articleFormat';
 import { getDataLinkNameCard } from '../lib/getDataLinkName';
 import { addDiscussionIds } from '../lib/useCommentCount';
 import { palette } from '../palette';
@@ -16,6 +17,7 @@ type Props = {
 	isAdFreeUser: boolean;
 	ajaxUrl: string;
 	guardianBaseUrl: string;
+	format: ArticleFormat;
 };
 
 type MoreGalleriesResponse = {
@@ -90,6 +92,7 @@ export const FetchMoreGalleriesData = ({
 	isAdFreeUser,
 	ajaxUrl,
 	guardianBaseUrl,
+	format,
 }: Props) => {
 	const [data, setData] = useState<MoreGalleriesResponse | undefined>(
 		undefined,
@@ -151,6 +154,7 @@ export const FetchMoreGalleriesData = ({
 			trails={buildTrails(data.trails, 5, isAdFreeUser)}
 			discussionApiUrl={discussionApiUrl}
 			guardianBaseUrl={guardianBaseUrl}
+			format={format}
 		/>
 	);
 };
