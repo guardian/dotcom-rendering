@@ -1,8 +1,8 @@
 import type { FECollection } from '../frontend/feFront';
 import {
+	brandingEqual,
 	decideCollectionBranding,
 	shouldStripBrandingFromCards,
-	brandingEqual,
 } from '../lib/branding';
 import type { EditionId } from '../lib/edition';
 import type { Branding } from '../types/branding';
