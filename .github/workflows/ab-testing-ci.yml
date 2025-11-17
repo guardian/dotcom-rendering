@@ -23,8 +23,8 @@ jobs:
       run:
         working-directory: ab-testing
     env:
-      FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_AB_TESTING_CONFIG }}
-      FASTLY_API_TOKEN: ${{ secrets.FASTLY_API_TOKEN }}
+      FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_PROD_AB_TESTING_CONFIG }}
+      FASTLY_API_TOKEN: ${{ secrets.FASTLY_PROD_API_TOKEN }}
 
     steps:
       - uses: actions/checkout@v5
