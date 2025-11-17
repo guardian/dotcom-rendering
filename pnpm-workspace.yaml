@@ -3,3 +3,4 @@ packages:
   - 'dotcom-rendering'
   - 'ab-testing'
   - 'ab-testing/frontend'
+  - 'ab-testing/deploy-dictionary-lambda'

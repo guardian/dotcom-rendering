@@ -1,5 +1,5 @@
+import { stringifyFastlySubfield } from "../../lib/fastly-subfield.ts";
 import type { ABTest } from "../../types.ts";
-import { stringifyFastlySubfield } from "../lib/fastly-subfield.ts";
 
 const buildABTestGroupKeyValues = (tests: ABTest[]) =>
 	tests.flatMap((test) =>

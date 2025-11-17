@@ -96,9 +96,11 @@ const getService = async (serviceId: string) => {
 const getDictionary = async ({
 	activeVersion,
 	dictionaryName,
+	serviceId,
 }: {
 	activeVersion: number;
 	dictionaryName: string;
+	serviceId: string;
 }) => {
 	const dictionary = await fetchFromFastly(
 		`${FASTLY_API_BASE_URL}/${serviceId}/version/${activeVersion}/dictionary/${dictionaryName}`,
@@ -239,16 +241,19 @@ const calculateUpdates = (
  *
  */
 const verifyDictionaryName = async ({
+	serviceId,
 	activeVersion,
 	dictionaryName,
 	dictionaryId,
 }: {
+	serviceId: string;
 	activeVersion: number;
 	dictionaryName: string;
 	dictionaryId: string;
 }) => {
 	const dictionary = await getDictionary({
-		activeVersion: activeVersion,
+		serviceId,
+		activeVersion,
 		dictionaryName,
 	});
 
@@ -294,6 +299,7 @@ export {
 	getDictionaryItems,
 	updateMVTGroups,
 	updateABTestGroups,
+	updateDictionaryItems,
 	calculateUpdates,
 	encodeObject,
 	verifyDictionaryName,

@@ -16,22 +16,149 @@ on:
       - '.github/workflows/ab-testing-*.yml'
 
 jobs:
-  ci:
-    name: CI
-    uses: ./.github/workflows/ab-testing-checks.yml
-    with:
-      save_build_artifact: true
-    secrets:
-      FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_PROD_AB_TESTING_CONFIG }}
-      FASTLY_API_TOKEN: ${{ secrets.FASTLY_PROD_API_TOKEN }}
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+    defaults:
+      run:
+        working-directory: ab-testing
+    env:
+      FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_AB_TESTING_CONFIG }}
+      FASTLY_API_TOKEN: ${{ secrets.FASTLY_API_TOKEN }}
 
-  deploy:
-    name: Deploy
-    needs: ci
-    if: github.ref == 'refs/heads/main'
-    uses: ./.github/workflows/ab-testing-deploy.yml
-    with:
-      stage: prod
-    secrets:
-      FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_PROD_AB_TESTING_CONFIG }}
-      FASTLY_API_TOKEN: ${{ secrets.FASTLY_PROD_API_TOKEN }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Node environment
+        uses: ./.github/actions/setup-node-env
+
+      - name: Test
+        run: pnpm test
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Prettier Check
+        run: pnpm prettier:check
+
+      - name: Typecheck
+        run: pnpm tsc
+
+      - name: Validate
+        run: pnpm validate
+
+      - name: Build
+        run: pnpm build
+
+      - uses: actions/upload-artifact@v5
+        with:
+          name: ab-testing-build
+          path: ab-testing/dist
+
+  build-lambda:
+    name: Build Lambda
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ab-testing/deploy-dictionary-lambda
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Node environment
+        uses: ./.github/actions/setup-node-env
+
+      - name: Build Lambda
+        run: pnpm build
+
+      - name: Save build
+        uses: actions/upload-artifact@v5
+        with:
+          name: ab-testing-lambda-build
+          path: ab-testing/deploy-dictionary-lambda/dist
+
+  build-ui:
+    name: UI build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ab-testing/frontend
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Node environment
+        uses: ./.github/actions/setup-node-env
+
+      - name: Build UI
+        run: pnpm build
+
+      - name: Save build
+        uses: actions/upload-artifact@v5
+        with:
+          name: ui-build
+          path: ab-testing/frontend/output/ab-tests.html
+          if-no-files-found: error
+
+  riff-raff:
+    runs-on: ubuntu-latest
+    needs: [build, build-ui, build-lambda]
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
+    defaults:
+      run:
+        working-directory: ab-testing
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: ./.github/actions/setup-node-env
+
+      - name: Fetch build
+        uses: actions/download-artifact@v6.0.0
+        with:
+          name: ab-testing-build
+
+      - name: Fetch UI build
+        uses: actions/download-artifact@v6.0.0
+        with:
+          name: ui-build
+          path: ab-testing/frontend/output/ab-tests.html
+
+      - name: Fetch Lambda build
+        uses: actions/download-artifact@v6.0.0
+        with:
+          name: ab-testing-lambda-build
+          path: ab-testing/deploy-dictionary-lambda/dist
+
+      - name: CDK Test
+        run: pnpm cdk:test
+
+      - name: CDK synth
+        run: pnpm cdk:synth
+
+      - name: Riff-Raff Upload
+        uses: guardian/actions-riff-raff@v4.1.9
+        with:
+          roleArn: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          projectName: dotcom:ab-testing
+          configPath: ab-testing/cdk.out/riff-raff.yaml
+          contentDirectories: |
+            ab-testing:
+              - ab-testing/dist
+            ab-testing-deploy-dictionary-lambda:
+              - ab-testing/deploy-dictionary-lambda/dist
+            admin/ab-testing:
+              - ab-testing/frontend/output/ab-tests.html
+            cdk.out:
+              - ab-testing/cdk.out
