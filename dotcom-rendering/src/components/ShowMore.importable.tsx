@@ -121,6 +121,7 @@ export const ShowMore = ({
 			cardInTagPage: false,
 			editionId,
 			discussionApiUrl,
+			enableHlsSupport: true,
 		}).filter((card) => !existingCardLinks.includes(card.url));
 
 	const showMoreContainerId = `show-more-${collectionId}`;

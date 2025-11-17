@@ -1,6 +1,7 @@
 import { isUndefined } from '@guardian/libs';
 import type {
 	FEFrontCard,
+	FEMediaAsset,
 	FEMediaAtom,
 	FESupportingContent,
 } from '../frontend/feFront';
@@ -14,8 +15,14 @@ import type { EditionId } from '../lib/edition';
 import type { Group } from '../lib/getDataLinkName';
 import { getDataLinkNameCard } from '../lib/getDataLinkName';
 import { getLargestImageSize } from '../lib/image';
-import type { SupportedVideoFileType } from '../lib/video';
-import { supportedVideoFileTypes } from '../lib/video';
+import type {
+	SupportedVideoFileType,
+	SupportedMP4VideoFileType,
+} from '../lib/video';
+import {
+	supportedMP4VideoFileTypes,
+	supportedVideoFileTypes,
+} from '../lib/video';
 import type { Image } from '../types/content';
 import type {
 	DCRFrontCard,
@@ -196,6 +203,7 @@ const decideMediaAtomImage = (
 
 export const getActiveMediaAtom = (
 	videoReplace: boolean,
+	enableHlsSupport: boolean,
 	mediaAtom?: FEMediaAtom,
 	cardTrailImage?: string,
 ): MainMedia | undefined => {
@@ -220,10 +228,13 @@ export const getActiveMediaAtom = (
 		 * Therefore, we check the platform of the first asset and assume the rest are the same.
 		 */
 		if (assets[0]?.platform === 'Url') {
+			const supportedFileTypes = enableHlsSupport
+				? supportedVideoFileTypes
+				: supportedMP4VideoFileTypes;
 			/**
 			 * Take one source for each supported video file type.
 			 */
-			const sources = supportedVideoFileTypes.reduce<typeof assets>(
+			const sources = supportedFileTypes.reduce<typeof assets>(
 				(acc, type) => {
 					const source = assets.find(
 						({ mimeType }) => mimeType === type,
@@ -239,13 +250,18 @@ export const getActiveMediaAtom = (
 				({ assetType }) => assetType === 'Subtitles',
 			);
 
+			const getMimeType = (source: FEMediaAsset) =>
+				enableHlsSupport
+					? (source.mimeType as SupportedVideoFileType)
+					: (source.mimeType as SupportedMP4VideoFileType);
+
 			return {
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
 				atomId: mediaAtom.id,
 				sources: sources.map((source) => ({
 					src: source.id,
-					mimeType: source.mimeType as SupportedVideoFileType,
+					mimeType: getMimeType(source),
 				})),
 				subtitleSource: subtitleAsset?.id,
 				duration: mediaAtom.duration ?? 0,
@@ -281,6 +297,7 @@ export const getActiveMediaAtom = (
 
 const decideMedia = (
 	format: ArticleFormat,
+	enableHlsSupport: boolean,
 	showMainVideo?: boolean,
 	mediaAtom?: FEMediaAtom,
 	galleryCount: number = 0,
@@ -293,7 +310,12 @@ const decideMedia = (
 	// If the showVideo toggle is enabled in the fronts tool,
 	// we should return the active mediaAtom regardless of the design
 	if (!!showMainVideo || !!videoReplace) {
-		return getActiveMediaAtom(!!videoReplace, mediaAtom, cardImage);
+		return getActiveMediaAtom(
+			!!videoReplace,
+			enableHlsSupport,
+			mediaAtom,
+			cardImage,
+		);
 	}
 
 	switch (format.design) {
@@ -308,7 +330,12 @@ const decideMedia = (
 			};
 
 		case ArticleDesign.Video: {
-			return getActiveMediaAtom(false, mediaAtom, cardImage);
+			return getActiveMediaAtom(
+				false,
+				enableHlsSupport,
+				mediaAtom,
+				cardImage,
+			);
 		}
 
 		default:
@@ -325,6 +352,7 @@ export const enhanceCards = (
 		pageId,
 		discussionApiUrl,
 		stripBranding = false,
+		enableHlsSupport = false,
 	}: {
 		cardInTagPage: boolean;
 		/** Used for the data link name to indicate card position in container */
@@ -334,6 +362,7 @@ export const enhanceCards = (
 		discussionApiUrl: string;
 		/** We strip branding from cards if the branding will appear at the collection level instead */
 		stripBranding?: boolean;
+		enableHlsSupport: boolean;
 	},
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
@@ -378,6 +407,7 @@ export const enhanceCards = (
 
 		const mainMedia = decideMedia(
 			format,
+			enableHlsSupport,
 			faciaCard.properties.showMainVideo ??
 				faciaCard.properties.mediaSelect?.showMainVideo,
 			faciaCard.mediaAtom ??

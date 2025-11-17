@@ -45,6 +45,7 @@ const enhanceFront = (body: unknown): Front => {
 						.editionBrandings,
 					data.editionId,
 				),
+				enableHlsSupport: !!data.config.switches.enableHlsSupport,
 			}),
 		},
 		mostViewed: data.mostViewed.map((trail) => decideTrail(trail)),
@@ -98,6 +99,7 @@ const enhanceTagPage = (body: unknown): TagPage => {
 		discussionApiUrl: data.config.discussionApiUrl,
 		editionId: data.editionId,
 		stripBranding: !!tagPageBranding,
+		enableHlsSupport: !!data.config.switches.enableHlsSupport,
 	});
 
 	const speed = getSpeedFromTrails(data.contents);

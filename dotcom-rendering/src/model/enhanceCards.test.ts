@@ -39,7 +39,7 @@ describe.skip('Enhance Cards', () => {
 		const cardTrailImage = '';
 
 		expect(
-			getActiveMediaAtom(videoReplace, mediaAtom, cardTrailImage),
+			getActiveMediaAtom(videoReplace, true, mediaAtom, cardTrailImage),
 		).toEqual({
 			atomId: 'atomID',
 			duration: 15,
@@ -99,7 +99,7 @@ describe.skip('Enhance Cards', () => {
 		const cardTrailImage = '';
 
 		expect(
-			getActiveMediaAtom(videoReplace, mediaAtom, cardTrailImage),
+			getActiveMediaAtom(videoReplace, true, mediaAtom, cardTrailImage),
 		).toEqual({
 			atomId: 'atomID',
 			duration: 15,

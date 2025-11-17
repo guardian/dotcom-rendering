@@ -32,6 +32,7 @@ export const groupCards = (
 	editionId: EditionId,
 	discussionApiUrl: string,
 	stripBranding: boolean = false,
+	enableHlsSupport: boolean,
 ): DCRGroupedTrails => {
 	switch (container) {
 		case 'dynamic/fast':
@@ -49,6 +50,7 @@ export const groupCards = (
 					editionId,
 					discussionApiUrl,
 					stripBranding,
+					enableHlsSupport,
 				}),
 				veryBig: enhanceCards(veryBig, {
 					cardInTagPage: false,
@@ -56,6 +58,7 @@ export const groupCards = (
 					editionId,
 					discussionApiUrl,
 					stripBranding,
+					enableHlsSupport,
 				}),
 				big: enhanceCards(big, {
 					cardInTagPage: false,
@@ -63,6 +66,7 @@ export const groupCards = (
 					editionId,
 					discussionApiUrl,
 					stripBranding,
+					enableHlsSupport,
 				}),
 				standard: enhanceCards(
 					// Backfilled cards will always be treated as 'standard' cards
@@ -74,6 +78,7 @@ export const groupCards = (
 						offset: huge.length + veryBig.length + big.length,
 						editionId,
 						discussionApiUrl,
+						enableHlsSupport,
 					},
 				),
 			};
@@ -96,6 +101,7 @@ export const groupCards = (
 				discussionApiUrl,
 				offset,
 				stripBranding,
+				enableHlsSupport,
 			});
 
 			return {
@@ -122,6 +128,7 @@ export const groupCards = (
 				discussionApiUrl,
 				offset,
 				stripBranding,
+				enableHlsSupport,
 			});
 
 			return {
