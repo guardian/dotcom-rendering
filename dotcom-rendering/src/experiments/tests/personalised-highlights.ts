@@ -2,12 +2,12 @@ import type { ABTest } from '@guardian/ab-core';
 
 export const personalisedHighlights: ABTest = {
 	id: 'PersonalisedHighlights',
-	start: '2025-10-29',
-	expiry: '2025-12-04',
+	start: '2025-11-17',
+	expiry: '2025-12-01',
 	author: 'Anna Beddow',
 	description:
 		'Allow user behaviour to personalise the ordering of cards in the highlights container.',
-	audience: 0,
+	audience: 0.75,
 	audienceOffset: 0,
 	successMeasure: '',
 	audienceCriteria: '',
