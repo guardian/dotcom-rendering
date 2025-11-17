@@ -1,5 +1,4 @@
-import path, { dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 import { createRequire } from 'node:module';
 import webpack from 'webpack';
 import { saveStories } from '../scripts/gen-stories/get-stories.mjs';
@@ -8,7 +7,7 @@ import { svgr } from '../webpack/svg.cjs';
 import process from 'node:process';
 
 // ESM equivalent of __dirname
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = import.meta.dirname;
 
 // Import CommonJS webpack config in ESM context
 const require = createRequire(import.meta.url);
