@@ -30,11 +30,9 @@ const {
 	riffRaffYaml: { deployments },
 } = riffRaff;
 
-const abTestingArtifactDeployment = "ab-testing-dictionary-artifact";
-
-deployments.set(abTestingArtifactDeployment, {
-	app: abTestingArtifactDeployment,
-	contentDirectory: "dictionary-deploy-lambda/artifacts",
+deployments.set("config/ab-testing", {
+	app: "ab-testing-config-artifact",
+	contentDirectory: "ab-testing-config-artifacts",
 	type: "aws-s3",
 	regions: new Set(["eu-west-1"]),
 	stacks: new Set(["frontend"]),
@@ -46,9 +44,9 @@ deployments.set(abTestingArtifactDeployment, {
 	},
 });
 
-deployments.set("ab-testing-ui-artifact", {
+deployments.set("admin/ab-testing", {
 	app: "ab-testing-ui-artifact",
-	contentDirectory: "admin/ab-testing",
+	contentDirectory: "ab-testing-ui-artifact",
 	type: "aws-s3",
 	regions: new Set(["eu-west-1"]),
 	stacks: new Set(["frontend"]),
@@ -60,8 +58,9 @@ deployments.set("ab-testing-ui-artifact", {
 	},
 });
 
+// We need the test artifacts in place before deploying the lambda that uses them
 deployments
-	.get(`lambda-update-eu-west-1-frontend-${appName}`)
-	?.dependencies?.push(abTestingArtifactDeployment);
+	.get(`cfn-eu-west-1-frontend-dictionary-deploy-lambda`)
+	?.dependencies?.push("config/ab-testing");
 
 riffRaff.synth();

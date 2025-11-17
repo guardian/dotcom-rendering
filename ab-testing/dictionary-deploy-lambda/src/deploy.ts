@@ -4,7 +4,7 @@ import { fetchDictionaryArtifact } from "./fetch-artifact.ts";
 const ARTIFACT_BUCKET_NAME = process.env.ARTIFACT_BUCKET_NAME ?? "";
 const STAGE = process.env.STAGE ?? "CODE";
 
-const CONFIG_PREFIX = `/${STAGE}/config/ab-tests`;
+const CONFIG_PREFIX = `/${STAGE}/config/ab-testing`;
 
 type ServiceInfo = {
 	activeVersion: { number: number };

@@ -72,11 +72,17 @@ jobs:
       - name: Build Lambda
         run: pnpm build
 
+      - name: Zip app artifact
+        run: |
+          cd dist
+          zip -r lambda.zip .
+          zip -j lambda.zip ../package.json
+
       - name: Save build
         uses: actions/upload-artifact@v5
         with:
           name: ab-testing-lambda-build
-          path: ab-testing/dictionary-deploy-lambda/dist
+          path: ab-testing/dictionary-deploy-lambda/dist/lambda.zip
 
   ui-ci:
     name: UI CI
@@ -139,7 +145,7 @@ jobs:
         uses: actions/download-artifact@v6.0.0
         with:
           name: ab-testing-lambda-build
-          path: ab-testing/dictionary-deploy-lambda/dist
+          path: ab-testing/dictionary-deploy-lambda/dist/lambda.zip
 
       - name: CDK Test
         run: pnpm cdk:test
@@ -155,11 +161,11 @@ jobs:
           projectName: dotcom:ab-testing
           configPath: ab-testing/cdk.out/riff-raff.yaml
           contentDirectories: |
-            ab-testing:
+            ab-testing-config-artifacts:
               - ab-testing/dist
-            ab-testing-dictionary-deploy-lambda:
-              - ab-testing/dictionary-deploy-lambda/dist
-            admin/ab-testing:
+            ab-testing-deploy:
+              - ab-testing/dictionary-deploy-lambda/dist/lambda.zip
+            ab-testing-ui-artifact:
               - ab-testing/frontend/output/ab-tests.html
             cdk.out:
               - ab-testing/cdk.out
