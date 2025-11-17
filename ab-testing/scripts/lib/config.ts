@@ -1,7 +1,7 @@
-import { assert, object, string } from 'jsr:@superstruct/core';
+import { assert, object, string } from "superstruct";
 
 const getEnv = (key: string): string => {
-	const value = Deno.env.get(key);
+	const value = process.env[key];
 	if (!value) {
 		throw new Error(`Environment variable ${key} is not set`);
 	}
@@ -17,9 +17,9 @@ const configStruct = object({
 	abTestsDictionaryName: string(),
 });
 
-const config = JSON.parse(getEnv('FASTLY_AB_TESTING_CONFIG'));
+const config = JSON.parse(getEnv("FASTLY_AB_TESTING_CONFIG")) as unknown;
 
-const apiToken = getEnv('FASTLY_API_TOKEN');
+const apiToken = getEnv("FASTLY_API_TOKEN");
 
 assert(config, configStruct);
 
