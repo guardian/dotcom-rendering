@@ -1,15 +1,15 @@
-import { AUDIENCE_SPACES } from './constants.ts';
-import { FastlyTestParams } from './types.ts';
+import { AUDIENCE_SPACES } from "./constants.ts";
+import type { FastlyTestParams } from "./types.ts";
 
 const validateValue = (value: string | number, allowedColons: number): void => {
 	const stringValue = String(value);
-	if (stringValue.includes(',')) {
+	if (stringValue.includes(",")) {
 		throw new Error(
 			`Value "${stringValue}" contains invalid character: comma (,)`,
 		);
 	}
 
-	if (stringValue.split(':').length > allowedColons + 1) {
+	if (stringValue.split(":").length > allowedColons + 1) {
 		// ensure the value only contains one colon for subfield parsing
 		throw new Error(
 			`Value "${stringValue}" contains invalid character: colon (:)`,
@@ -22,7 +22,7 @@ const validateValue = (value: string | number, allowedColons: number): void => {
  * https://www.fastly.com/documentation/reference/vcl/functions/miscellaneous/subfield/
  */
 const stringifyFastlySubfield = (
-	obj: Record<string, string | number> | Array<string>,
+	obj: Record<string, string | number> | string[],
 ) =>
 	Object.entries(obj)
 		.map(([key, value]) => {
@@ -30,11 +30,11 @@ const stringifyFastlySubfield = (
 			// where as value keys can have one colon (e.g. commercial-server-side-test:control)
 			validateValue(
 				value,
-				key.includes(':type') || key.includes(':exp') ? 0 : 1,
+				key.includes(":type") || key.includes(":exp") ? 0 : 1,
 			);
 			return `${key}=${value}`;
 		})
-		.join(',');
+		.join(",");
 
 /**
  * Parses a Fastly subfield string into an object.
@@ -42,8 +42,8 @@ const stringifyFastlySubfield = (
  */
 const parseFastlySubfield = (str: string): Record<string, string | number> => {
 	const result: Record<string, string | number> = {};
-	str.split(',').forEach((pair) => {
-		const [key, value] = pair.split('=');
+	str.split(",").forEach((pair) => {
+		const [key, value] = pair.split("=");
 		if (key && value) {
 			result[key] = isNaN(Number(value)) ? value : Number(value);
 		}

@@ -1,20 +1,19 @@
 import {
+	array,
+	assert,
+	boolean,
+	nullable,
+	number,
+	object,
+	string,
+	type,
+} from "superstruct";
+import {
 	abTestsDictionaryId,
 	apiToken,
 	mvtDictionaryId,
 	serviceId,
-	serviceName,
-} from './config.ts';
-import {
-	object,
-	string,
-	assert,
-	array,
-	nullable,
-	boolean,
-	number,
-	type,
-} from 'jsr:@superstruct/core';
+} from "./config.ts";
 
 const dictionaryItemStruct = object({
 	service_id: string(),
@@ -30,14 +29,14 @@ type UpdateDictionaryItemRequest =
 	| {
 			item_key: string;
 			item_value: string;
-			op: 'create' | 'update' | 'upsert';
+			op: "create" | "update" | "upsert";
 	  }
 	| {
 			item_key: string;
-			op: 'delete';
+			op: "delete";
 	  };
 
-const FASTLY_API_BASE_URL = 'https://api.fastly.com/service';
+const FASTLY_API_BASE_URL = "https://api.fastly.com/service";
 
 /**
  * Fetch data from Fastly API
@@ -56,7 +55,7 @@ const fetchFromFastly = async <T>(
 		...options,
 		headers: {
 			...options.headers,
-			'Fastly-Key': apiToken,
+			"Fastly-Key": apiToken,
 		},
 	});
 	if (!response.ok) {
@@ -65,11 +64,11 @@ const fetchFromFastly = async <T>(
 			`Failed to fetch from Fastly: ${response.status} ${response.statusText}`,
 		);
 	}
-	const data = await response.json();
+	const data = (await response.json()) as unknown;
 	if (!data) {
 		throw new Error(`Failed to parse response from Fastly`);
 	}
-	return data;
+	return data as T;
 };
 
 const getService = async (serviceId: string) => {
@@ -133,9 +132,9 @@ const updateDictionaryItems = async ({
 	const dictionary = await fetchFromFastly(
 		`${FASTLY_API_BASE_URL}/${serviceId}/dictionary/${dictionaryId}/items`,
 		{
-			method: 'PATCH',
+			method: "PATCH",
 			headers: {
-				'Content-Type': 'application/json',
+				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
 				service_id: serviceId,
@@ -146,7 +145,7 @@ const updateDictionaryItems = async ({
 	);
 
 	assert(dictionary, object({ status: string() }));
-	if (dictionary.status !== 'ok') {
+	if (dictionary.status !== "ok") {
 		throw new Error(`Failed to update dictionary: ${dictionary.status}`);
 	}
 	return dictionary;
@@ -187,10 +186,10 @@ const calculateUpdates = (
 				return {
 					...ops,
 					deletes: [
-						...(ops.deletes ?? []),
+						...ops.deletes,
 						{
 							item_key: group.item_key,
-							op: 'delete',
+							op: "delete",
 						},
 					],
 				};
@@ -200,11 +199,11 @@ const calculateUpdates = (
 				return {
 					...ops,
 					updates: [
-						...(ops.updates ?? []),
+						...ops.updates,
 						{
 							item_key: group.item_key,
 							item_value: updatedGroup.item_value,
-							op: 'update',
+							op: "update",
 						},
 					],
 				};
@@ -223,7 +222,7 @@ const calculateUpdates = (
 		.map(({ item_key, item_value }) => ({
 			item_key,
 			item_value,
-			op: 'create',
+			op: "create",
 		}));
 
 	const bulkUpdates = [
@@ -283,10 +282,10 @@ const updateABTestGroups = (items: UpdateDictionaryItemRequest[]) =>
 		items,
 	});
 
-const encodeObject = (obj: Record<string, unknown> | Array<string>) =>
+const encodeObject = (obj: Record<string, unknown> | string[]) =>
 	Object.entries(obj)
-		.map(([key, value]) => `${key}=${value}`)
-		.join(',');
+		.map(([key, value]) => `${key}=${String(value)}`)
+		.join(",");
 
 export {
 	getMVTGroupsFromDictionary,

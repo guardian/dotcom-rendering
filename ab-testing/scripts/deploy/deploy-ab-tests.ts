@@ -2,8 +2,8 @@ import {
 	calculateUpdates,
 	getABTestGroupsFromDictionary,
 	updateABTestGroups,
-} from '../lib/fastly-api.ts';
-import { getUpdatedABTestGroups } from './read-built-dictionaries.ts';
+} from "../lib/fastly-api.ts";
+import { getUpdatedABTestGroups } from "./read-built-dictionaries.ts";
 
 const deployABTests = async (filePath: string) => {
 	// update ab test groups first
@@ -16,21 +16,21 @@ const deployABTests = async (filePath: string) => {
 	);
 
 	if (abTestGroupUpdates.length === 0) {
-		console.log('No ab test groups to update');
+		console.log("No ab test groups to update");
 	} else {
 		Map.groupBy(abTestGroupUpdates, (item) => item.op).forEach(
 			(items, op) => {
-				if (op === 'delete') {
+				if (op === "delete") {
 					console.log(
 						`Deleting ${items.length} ab test groups from dictionary`,
 					);
 				}
-				if (op === 'update') {
+				if (op === "update") {
 					console.log(
 						`Updating ${items.length} ab test groups in dictionary`,
 					);
 				}
-				if (op === 'create') {
+				if (op === "create") {
 					console.log(
 						`Creating ${items.length} ab test groups in dictionary`,
 					);
@@ -41,7 +41,7 @@ const deployABTests = async (filePath: string) => {
 		const updateABTestGroupsResponse =
 			await updateABTestGroups(abTestGroupUpdates);
 
-		if (updateABTestGroupsResponse.status !== 'ok') {
+		if (updateABTestGroupsResponse.status !== "ok") {
 			throw new Error(`Failed to update ab test groups dictionary`);
 		}
 	}

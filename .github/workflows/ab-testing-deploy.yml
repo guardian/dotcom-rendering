@@ -26,10 +26,8 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      # https://github.com/denoland/setup-deno#latest-stable-for-a-major
-      - uses: denoland/setup-deno@v1
-        with:
-          deno-version: v2.3
+      - name: Set up Node environment
+        uses: ./.github/actions/setup-node-env
 
       - name: Download build artifact
         uses: actions/download-artifact@v6.0.0
@@ -38,7 +36,7 @@ jobs:
           path: ab-testing/dist
 
       - name: Deploy
-        run: deno run deploy
+        run: pnpm run deploy
         env:
           FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_AB_TESTING_CONFIG }}
           FASTLY_API_TOKEN: ${{ secrets.FASTLY_API_TOKEN }}
