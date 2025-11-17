@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { ABTestAPI as ABTestAPIType } from '@guardian/ab-core';
 import { from, space } from '@guardian/source/foundations';
 import {
 	Button,
@@ -11,6 +12,7 @@ import { submitComponentEvent } from '../client/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
 import { ophanComponentId } from '../lib/ophan-helpers';
 import {
+	clearHighlightsState,
 	getOrderedHighlights,
 	onHighlightEvent,
 	resetHighlightsState,
@@ -237,25 +239,35 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	const [orderedTrails, setOrderedTrails] = useState<DCRFrontCard[]>(trails);
 
 	const ABTestAPI = useAB()?.api;
-	let abTestPersonalisedHighlightAttr = 'not-in-test';
-	if (
-		ABTestAPI?.isUserInVariant('PersonalisedHighlights', 'click-tracking')
-	) {
-		abTestPersonalisedHighlightAttr = 'click-tracking';
-	}
 
-	if (ABTestAPI?.isUserInVariant('PersonalisedHighlights', 'view-tracking')) {
-		abTestPersonalisedHighlightAttr = 'view-tracking';
-	}
+	type Attr =
+		| 'click-tracking'
+		| 'view-tracking'
+		| 'click-and-view-tracking'
+		| 'not-in-test'
+		| undefined;
 
-	if (
-		ABTestAPI?.isUserInVariant(
-			'PersonalisedHighlights',
-			'click-and-view-tracking',
-		)
-	) {
-		abTestPersonalisedHighlightAttr = 'click-and-view-tracking';
-	}
+	const getUserABAttr = (api?: ABTestAPIType): Attr => {
+		if (!api) return undefined;
+
+		if (api.isUserInVariant('PersonalisedHighlights', 'click-tracking')) {
+			return 'click-tracking';
+		}
+		if (api.isUserInVariant('PersonalisedHighlights', 'view-tracking')) {
+			return 'view-tracking';
+		}
+		if (
+			api.isUserInVariant(
+				'PersonalisedHighlights',
+				'click-and-view-tracking',
+			)
+		) {
+			return 'click-and-view-tracking';
+		}
+		return 'not-in-test';
+	};
+
+	const abTestPersonalisedHighlightAttr = getUserABAttr(ABTestAPI);
 
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
@@ -317,6 +329,16 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	}, []);
 
 	useEffect(() => {
+		if (abTestPersonalisedHighlightAttr === undefined) {
+			return;
+		}
+
+		if (abTestPersonalisedHighlightAttr === 'not-in-test') {
+			clearHighlightsState();
+			setOrderedTrails(trails);
+			return;
+		}
+
 		const personalisedHighlights = getOrderedHighlights(trails);
 		if (
 			personalisedHighlights.length === 0 ||
@@ -326,11 +348,12 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 			/* Reset to editorial order */
 			resetHighlightsState(trails);
 			setOrderedTrails(trails);
+			setShouldShowHighlights(true);
 			return;
 		}
 		/* Otherwise, use personalised order from local storage */
 		setOrderedTrails(personalisedHighlights);
-
+		setShouldShowHighlights(true);
 		/* Fire a view event only if the container has been personalised */
 		void submitComponentEvent(
 			{
@@ -342,12 +365,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 			},
 			'Web',
 		);
-	}, [trails]);
-
-	/* Update the visibility of highlights once we have the correct trail order set in state. */
-	useEffect(() => {
-		setShouldShowHighlights(true);
-	}, [orderedTrails]);
+	}, [trails, abTestPersonalisedHighlightAttr]);
 
 	const { ophanComponentLink, ophanComponentName, ophanFrontName } =
 		getOphanInfo(frontId);
@@ -372,7 +390,8 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 					 * Enable scroll-snap only when visible to prevent browser scroll anchoring.
 					 * When items reorder, browsers try to keep previously visible items in view,
 					 * causing unwanted scrolling. Enabling snap after reordering forces position 0.
-					 */ shouldShowHighlights && scrollSnapStyles,
+					 // */
+					shouldShowHighlights && scrollSnapStyles,
 				]}
 				data-heatphan-type="carousel"
 			>
