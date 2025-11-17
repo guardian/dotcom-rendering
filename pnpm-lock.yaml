@@ -337,7 +337,7 @@ importers:
         version: link:../ab-testing
       '@guardian/braze-components':
         specifier: 22.2.0
-        version: 22.2.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(react@18.3.1)
+        version: 22.2.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(react@18.3.1)
       '@guardian/bridget':
         specifier: 8.7.0
         version: 8.7.0
@@ -349,28 +349,28 @@ importers:
         version: 62.0.1(aws-cdk-lib@2.220.0(constructs@10.4.2))(aws-cdk@2.1030.0)(constructs@10.4.2)
       '@guardian/commercial-core':
         specifier: 29.0.0
-        version: 29.0.0(@guardian/ab-core@8.0.0(tslib@2.6.2)(typescript@5.5.3))(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))
+        version: 29.0.0(@guardian/ab-core@8.0.0(tslib@2.6.2)(typescript@5.5.3))(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3))
       '@guardian/core-web-vitals':
         specifier: 7.0.0
-        version: 7.0.0(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.3)
+        version: 7.0.0(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3))(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.3)
       '@guardian/eslint-config-typescript':
         specifier: 12.0.0
         version: 12.0.0(eslint@8.57.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/identity-auth':
         specifier: 6.0.1
-        version: 6.0.1(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(tslib@2.6.2)(typescript@5.5.3)
+        version: 6.0.1(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3))(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/identity-auth-frontend':
         specifier: 8.1.0
-        version: 8.1.0(@guardian/identity-auth@6.0.1(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(tslib@2.6.2)(typescript@5.5.3))(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(tslib@2.6.2)(typescript@5.5.3)
+        version: 8.1.0(@guardian/identity-auth@6.0.1(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3))(tslib@2.6.2)(typescript@5.5.3))(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3))(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/libs':
         specifier: 26.1.0
-        version: 26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3)
+        version: 26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/ophan-tracker-js':
-        specifier: 2.6.1
-        version: 2.6.1
+        specifier: 2.6.2
+        version: 2.6.2
       '@guardian/react-crossword':
         specifier: 11.1.0
-        version: 11.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.3)
+        version: 11.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.3)
       '@guardian/shimport':
         specifier: 1.0.2
         version: 1.0.2
@@ -379,10 +379,10 @@ importers:
         version: 11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/source-development-kitchen':
         specifier: 18.1.1
-        version: 18.1.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
+        version: 18.1.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/support-dotcom-components':
         specifier: 8.1.0
-        version: 8.1.0(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.6.1)(zod@4.1.12)
+        version: 8.1.0(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.6.2)(zod@4.1.12)
       '@guardian/tsconfig':
         specifier: 0.2.0
         version: 0.2.0
@@ -2445,8 +2445,8 @@ packages:
       typescript:
         optional: true
 
-  '@guardian/ophan-tracker-js@2.6.1':
-    resolution: {integrity: sha512-YTBL/PDUTs6jGf9nN7EY7l9xM64pHWGKkf+TEYrXYQI/1vHaLO4wVEW5Ss5g6dNOHNDibELJy+MEZBm6zTzgGw==}
+  '@guardian/ophan-tracker-js@2.6.2':
+    resolution: {integrity: sha512-fVEnwjFBuVfFu0KuqIufrUejvIhpUUVRykayl4fcYxM6yA5kTj0LeOpXq0KzdUov59dqv43walanfoUvT8aMjw==}
     engines: {node: '>=16'}
 
   '@guardian/prettier@5.0.0':
@@ -12814,10 +12814,10 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@guardian/braze-components@22.2.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(react@18.3.1)':
+  '@guardian/braze-components@22.2.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(react@18.3.1)':
     dependencies:
       '@emotion/react': 11.14.0(@types/react@18.3.1)(react@18.3.1)
-      '@guardian/libs': 26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/source': 11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       react: 18.3.1
 
@@ -12844,10 +12844,10 @@ snapshots:
       read-pkg-up: 7.0.1
       yargs: 17.7.2
 
-  '@guardian/commercial-core@29.0.0(@guardian/ab-core@8.0.0(tslib@2.6.2)(typescript@5.5.3))(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))':
+  '@guardian/commercial-core@29.0.0(@guardian/ab-core@8.0.0(tslib@2.6.2)(typescript@5.5.3))(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3))':
     dependencies:
       '@guardian/ab-core': 8.0.0(tslib@2.6.2)(typescript@5.5.3)
-      '@guardian/libs': 26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3)
       '@types/googletag': 3.3.0
 
   '@guardian/content-api-models@31.0.0':
@@ -12894,9 +12894,9 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@guardian/core-web-vitals@7.0.0(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.3)':
+  '@guardian/core-web-vitals@7.0.0(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3))(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.3)':
     dependencies:
-      '@guardian/libs': 26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3)
       tslib: 2.6.2
       web-vitals: 4.2.3
     optionalDependencies:
@@ -12952,17 +12952,17 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  '@guardian/identity-auth-frontend@8.1.0(@guardian/identity-auth@6.0.1(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(tslib@2.6.2)(typescript@5.5.3))(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(tslib@2.6.2)(typescript@5.5.3)':
+  '@guardian/identity-auth-frontend@8.1.0(@guardian/identity-auth@6.0.1(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3))(tslib@2.6.2)(typescript@5.5.3))(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3))(tslib@2.6.2)(typescript@5.5.3)':
     dependencies:
-      '@guardian/identity-auth': 6.0.1(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(tslib@2.6.2)(typescript@5.5.3)
-      '@guardian/libs': 26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/identity-auth': 6.0.1(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3))(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3)
       tslib: 2.6.2
     optionalDependencies:
       typescript: 5.5.3
 
-  '@guardian/identity-auth@6.0.1(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(tslib@2.6.2)(typescript@5.5.3)':
+  '@guardian/identity-auth@6.0.1(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3))(tslib@2.6.2)(typescript@5.5.3)':
     dependencies:
-      '@guardian/libs': 26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3)
       tslib: 2.6.2
     optionalDependencies:
       typescript: 5.5.3
@@ -12973,14 +12973,14 @@ snapshots:
     optionalDependencies:
       typescript: 5.5.3
 
-  '@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3)':
+  '@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3)':
     dependencies:
-      '@guardian/ophan-tracker-js': 2.6.1
+      '@guardian/ophan-tracker-js': 2.6.2
       tslib: 2.6.2
     optionalDependencies:
       typescript: 5.5.3
 
-  '@guardian/ophan-tracker-js@2.6.1':
+  '@guardian/ophan-tracker-js@2.6.2':
     dependencies:
       '@guardian/tsconfig': 1.0.1
 
@@ -12989,10 +12989,10 @@ snapshots:
       prettier: 3.0.3
       tslib: 2.6.2
 
-  '@guardian/react-crossword@11.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.3)':
+  '@guardian/react-crossword@11.1.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.3)':
     dependencies:
       '@emotion/react': 11.14.0(@types/react@18.3.1)(react@18.3.1)
-      '@guardian/libs': 26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/source': 11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       react: 18.3.1
       tslib: 2.6.2
@@ -13022,9 +13022,9 @@ snapshots:
       react: 18.3.1
       typescript: 5.5.3
 
-  '@guardian/source-development-kitchen@18.1.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)':
+  '@guardian/source-development-kitchen@18.1.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)':
     dependencies:
-      '@guardian/libs': 26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/source': 11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       tslib: 2.6.2
     optionalDependencies:
@@ -13063,7 +13063,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@guardian/support-dotcom-components@8.1.0(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.6.1)(zod@4.1.12)':
+  '@guardian/support-dotcom-components@8.1.0(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.6.2)(zod@4.1.12)':
     dependencies:
       '@aws-sdk/client-cloudwatch': 3.841.0
       '@aws-sdk/client-dynamodb': 3.840.0
@@ -13071,8 +13071,8 @@ snapshots:
       '@aws-sdk/client-ssm': 3.840.0
       '@aws-sdk/credential-providers': 3.840.0
       '@aws-sdk/lib-dynamodb': 3.840.0(@aws-sdk/client-dynamodb@3.840.0)
-      '@guardian/libs': 26.1.0(@guardian/ophan-tracker-js@2.6.1)(tslib@2.6.2)(typescript@5.5.3)
-      '@guardian/ophan-tracker-js': 2.6.1
+      '@guardian/libs': 26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/ophan-tracker-js': 2.6.2
       compression: 1.7.4
       cors: 2.8.5
       date-fns: 2.30.0
