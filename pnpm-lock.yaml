@@ -49,13 +49,16 @@ importers:
         version: 62.0.1(aws-cdk-lib@2.220.0(constructs@10.4.2))(aws-cdk@2.1030.0)(constructs@10.4.2)
       '@guardian/eslint-config':
         specifier: 12.0.1
-        version: 12.0.1(eslint-plugin-import@2.29.1(eslint@9.39.1))(eslint@9.39.1)(typescript@5.9.3)
+        version: 12.0.1(eslint-plugin-import@2.29.1(@typescript-eslint/parser@8.22.0(eslint@9.39.1)(typescript@5.9.3))(eslint@9.39.1))(eslint@9.39.1)(typescript@5.9.3)
       '@guardian/tsconfig':
         specifier: 1.0.1
         version: 1.0.1
       '@types/node':
         specifier: 22.17.0
         version: 22.17.0
+      aws-cdk:
+        specifier: 2.1030.0
+        version: 2.1030.0
       aws-cdk-lib:
         specifier: 2.220.0
         version: 2.220.0(constructs@10.4.2)
@@ -98,7 +101,7 @@ importers:
         version: 62.0.1(aws-cdk-lib@2.220.0(constructs@10.4.2))(aws-cdk@2.1030.0)(constructs@10.4.2)
       '@guardian/eslint-config':
         specifier: 12.0.1
-        version: 12.0.1(eslint-plugin-import@2.29.1(@typescript-eslint/parser@8.22.0(eslint@9.39.1)(typescript@5.9.3))(eslint@9.39.1))(eslint@9.39.1)(typescript@5.9.3)
+        version: 12.0.1(eslint-plugin-import@2.29.1(eslint@9.39.1))(eslint@9.39.1)(typescript@5.9.3)
       '@guardian/tsconfig':
         specifier: 1.0.1
         version: 1.0.1
