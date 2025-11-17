@@ -127,6 +127,7 @@ jobs:
         uses: actions/download-artifact@v6.0.0
         with:
           name: ab-testing-build
+          path: ab-testing/dist
 
       - name: Fetch UI build
         uses: actions/download-artifact@v6.0.0
