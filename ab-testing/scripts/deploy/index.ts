@@ -1,6 +1,4 @@
-import { verifyDictionaryName, getService } from '../lib/fastly-api.ts';
-
-import { parseArgs } from 'jsr:@std/cli/parse-args';
+import { parseArgs } from "node:util";
 import {
 	abTestsDictionaryId,
 	abTestsDictionaryName,
@@ -8,19 +6,30 @@ import {
 	mvtDictionaryName,
 	serviceId,
 	serviceName,
-} from '../lib/config.ts';
-import { deployABTests } from './deploy-ab-tests.ts';
-import { deployMVTs } from './deploy-mvts.ts';
+} from "../lib/config.ts";
+import { getService, verifyDictionaryName } from "../lib/fastly-api.ts";
+import { deployABTests } from "./deploy-ab-tests.ts";
+import { deployMVTs } from "./deploy-mvts.ts";
 
-const flags = parseArgs(Deno.args, {
-	string: ['mvts', 'ab-tests'],
-});
+const flags = parseArgs({
+	args: process.argv.slice(2),
+	options: {
+		mvts: {
+			type: "string",
+			short: "m",
+		},
+		"ab-tests": {
+			type: "string",
+			short: "a",
+		},
+	},
+}).values;
 
-if (!flags['mvts'] || !flags['ab-tests']) {
+if (!flags["mvts"] || !flags["ab-tests"]) {
 	console.error(
-		'Please provide the path to the mvt and ab test groups dictionaries',
+		"Please provide the path to the mvt and ab test groups dictionaries",
 	);
-	Deno.exit(1);
+	process.exit(1);
 }
 
 const service = await getService(serviceId);
@@ -30,7 +39,7 @@ if (service.name !== serviceName) {
 	);
 }
 
-const activeVersion = service.versions?.find(
+const activeVersion = service.versions.find(
 	(v: { active: boolean }) => v.active,
 );
 
@@ -39,20 +48,22 @@ if (!activeVersion) {
 }
 
 // Verify that the service ID and dictionary names match the expected values
-verifyDictionaryName({
-	activeVersion: activeVersion.number,
-	dictionaryName: mvtDictionaryName,
-	dictionaryId: mvtDictionaryId,
-});
+await Promise.all([
+	verifyDictionaryName({
+		activeVersion: activeVersion.number,
+		dictionaryName: mvtDictionaryName,
+		dictionaryId: mvtDictionaryId,
+	}),
+	verifyDictionaryName({
+		activeVersion: activeVersion.number,
+		dictionaryName: abTestsDictionaryName,
+		dictionaryId: abTestsDictionaryId,
+	}),
+]);
 
-verifyDictionaryName({
-	activeVersion: activeVersion.number,
-	dictionaryName: abTestsDictionaryName,
-	dictionaryId: abTestsDictionaryId,
-});
+await Promise.all([
+	deployABTests(flags["ab-tests"]),
+	deployMVTs(flags["mvts"]),
+]);
 
-deployABTests(flags['ab-tests']);
-
-deployMVTs(flags['mvts']);
-
-console.log('Successfully updated ab test groups and mvt groups dictionaries');
+console.log("Successfully updated ab test groups and mvt groups dictionaries");

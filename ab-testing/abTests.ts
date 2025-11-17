@@ -1,4 +1,4 @@
-import type { ABTest } from './types';
+import type { ABTest } from "./types.ts";
 
 /**
  * Tests are defined here. They will be assigned mvt ranges based on the
@@ -21,18 +21,18 @@ import type { ABTest } from './types';
 
 const ABTests: ABTest[] = [
 	{
-		name: 'commercial-prebid-v10',
-		description: 'Testing Prebid.js v10 integration on DCR',
-		owners: ['commercial.dev@guardian.co.uk'],
-		status: 'ON',
-		expirationDate: '2025-12-30',
-		type: 'client',
+		name: "commercial-prebid-v10",
+		description: "Testing Prebid.js v10 integration on DCR",
+		owners: ["commercial.dev@guardian.co.uk"],
+		status: "ON",
+		expirationDate: "2025-12-30",
+		type: "client",
 		audienceSize: 0 / 100,
-		groups: ['control', 'variant'],
+		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
 	},
 ];
 
-const activeABtests = ABTests.filter((test) => test.status === 'ON');
+const activeABtests = ABTests.filter((test) => test.status === "ON");
 
 export { ABTests as allABTests, activeABtests };

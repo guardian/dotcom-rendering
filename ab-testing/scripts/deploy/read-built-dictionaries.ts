@@ -1,5 +1,5 @@
-import { readTextFile } from 'jsr:@std/fs/unstable-read-text-file';
-import { object, string, assert, array } from 'jsr:@superstruct/core';
+import { readFile } from "fs/promises";
+import { array, assert, object, string } from "superstruct";
 
 const fastlyKVStruct = object({
 	item_key: string(),
@@ -7,7 +7,11 @@ const fastlyKVStruct = object({
 });
 
 const getUpdatedABTestGroups = async (file: string) => {
-	const updatedABTestGroups = JSON.parse(await readTextFile(file));
+	const updatedABTestGroups = JSON.parse(
+		await readFile(file, {
+			encoding: "utf-8",
+		}),
+	) as unknown;
 
 	assert(updatedABTestGroups, array(fastlyKVStruct));
 
@@ -15,7 +19,11 @@ const getUpdatedABTestGroups = async (file: string) => {
 };
 
 const getMVTGroups = async (file: string) => {
-	const mvtGroups = JSON.parse(await readTextFile(file));
+	const mvtGroups = JSON.parse(
+		await readFile(file, {
+			encoding: "utf-8",
+		}),
+	) as unknown;
 
 	assert(mvtGroups, array(fastlyKVStruct));
 	return mvtGroups;
