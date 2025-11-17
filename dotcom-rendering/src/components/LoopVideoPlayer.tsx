@@ -169,6 +169,7 @@ export const LoopVideoPlayer = forwardRef(
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
 		const loopVideoId = `loop-video-${uniqueId}`;
+		console.log('LoopVideoPlayer');
 		return (
 			<>
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Captions will be considered later. */}
