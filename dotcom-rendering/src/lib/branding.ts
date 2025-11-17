@@ -88,7 +88,7 @@ const everyCardHasSameSponsor = ([
 /**
  * TODO verify that this is what is necessary for two branding to be equal
  */
-const brandingEqual = (b1: Branding, b2: Branding) => {
+export const brandingEqual = (b1: Branding, b2: Branding): boolean => {
 	return (
 		b1.brandingType?.name === b2.brandingType?.name &&
 		b1.sponsorName === b2.sponsorName
@@ -100,6 +100,37 @@ export const isPaidContentSameBranding = (
 ): boolean =>
 	collectionBranding?.kind === 'paid-content' &&
 	!collectionBranding.hasMultipleBranding;
+
+/**
+ * Determines if cards should have their branding stripped
+ * Returns true if all cards have paid-content branding with the same sponsor
+ *
+ * This can be called with either:
+ * - A CollectionBranding object (when available from decideCollectionBranding)
+ * - Raw cards array (when CollectionBranding is undefined but we still need to check)
+ */
+export const shouldStripBrandingFromCards = (
+	input: CollectionBranding | CardWithBranding[],
+	editionId?: EditionId,
+): boolean => {
+	// If we have a CollectionBranding object, use it directly
+	if (!Array.isArray(input)) {
+		return isPaidContentSameBranding(input);
+	}
+
+	// Otherwise, check the cards directly
+	if (!editionId) return false;
+
+	const brandingsFromCards = getBrandingFromCards(input, editionId);
+	if (!brandingsFromCards) {
+		return false;
+	}
+
+	const brandingKind = getBrandingType(brandingsFromCards);
+	const sameSponsor = everyCardHasSameSponsor(brandingsFromCards);
+
+	return brandingKind === 'paid-content' && sameSponsor;
+};
 
 export const badgeFromBranding = (
 	collectionBranding: CollectionBranding | undefined,
