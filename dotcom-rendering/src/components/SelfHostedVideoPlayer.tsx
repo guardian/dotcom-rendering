@@ -171,10 +171,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 	) => {
 		const videoId = `video-${uniqueId}`;
 		const showSubtitles =
-			videoStyle !== 'Cinemagraph' &&
-			!!subtitleSource &&
-			!!subtitleSize &&
-			!!activeCue?.text;
+			videoStyle !== 'Cinemagraph' && !!subtitleSource && !!subtitleSize;
 
 		const showControls =
 			videoStyle !== 'Cinemagraph' &&
@@ -236,7 +233,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 							type={source.mimeType}
 						/>
 					))}
-					{subtitleSource !== undefined && (
+					{showSubtitles && (
 						<track
 							// Don't use default - it forces native rendering on iOS
 							default={false}
@@ -247,7 +244,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					)}
 					{FallbackImageComponent}
 				</video>
-				{showSubtitles && (
+				{showSubtitles && !!activeCue?.text && (
 					<SubtitleOverlay
 						text={activeCue.text}
 						subtitleSize={subtitleSize}
