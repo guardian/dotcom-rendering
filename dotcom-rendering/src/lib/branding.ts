@@ -111,25 +111,21 @@ export const isPaidContentSameBranding = (
  */
 export const shouldStripBrandingFromCards = (
 	input: CollectionBranding | CardWithBranding[],
-	editionId?: EditionId,
+	editionId: EditionId,
 ): boolean => {
 	// If we have a CollectionBranding object, use it directly
 	if (!Array.isArray(input)) {
 		return isPaidContentSameBranding(input);
 	}
 
-	// Otherwise, check the cards directly
-	if (!editionId) return false;
-
 	const brandingsFromCards = getBrandingFromCards(input, editionId);
 	if (!brandingsFromCards) {
 		return false;
 	}
 
-	const brandingKind = getBrandingType(brandingsFromCards);
 	const sameSponsor = everyCardHasSameSponsor(brandingsFromCards);
 
-	return brandingKind === 'paid-content' && sameSponsor;
+	return sameSponsor;
 };
 
 export const badgeFromBranding = (

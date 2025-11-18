@@ -121,9 +121,10 @@ export const enhanceCollections = ({
 		 * We need to check this directly in here because decideCollectionBranding might return undefined
 		 * when cards have same branding as frontBranding, but we still need to strip in that case
 		 */
-		const stripBrandingFromCards = rawCollectionBranding
-			? shouldStripBrandingFromCards(rawCollectionBranding)
-			: shouldStripBrandingFromCards(allCards, editionId);
+		const stripBrandingFromCards = shouldStripBrandingFromCards(
+			rawCollectionBranding ?? allCards,
+			editionId,
+		);
 
 		const containerPalette = decideContainerPalette(
 			collection.config.metadata?.map((meta) => meta.type),
