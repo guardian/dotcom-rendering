@@ -578,6 +578,12 @@ export const Card = ({
 		isBetaContainer,
 	});
 
+	const isSelfHostedVideo =
+		media &&
+		(media.type === 'default-video' ||
+			media.type === 'loop-video' ||
+			media.type === 'cinemagraph');
+
 	const resolvedDataLinkName =
 		media && dataLinkName
 			? appendLinkNameMedia(dataLinkName, media.type)
@@ -955,7 +961,7 @@ export const Card = ({
 								/>
 							</AvatarContainer>
 						)}
-						{media.type === 'loop-video' && (
+						{isSelfHostedVideo && (
 							<Island
 								priority="critical"
 								defer={{ until: 'visible' }}
