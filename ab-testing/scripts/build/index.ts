@@ -2,7 +2,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
 import { parseArgs } from "node:util";
 import { activeABtests } from "../../abTests.ts";
-import { mvtDictionaryName, serviceId, serviceName } from "../../lib/config.ts";
+import { getApiTokenFromEnv, getConfigFromEnv } from "../../lib/config.ts";
 import { FastlyClient } from "../../lib/fastly/client.ts";
 import { parseMVTValue, stringifyMVTValue } from "../../lib/fastly-subfield.ts";
 import { buildABTestGroupKeyValues } from "./build-ab-tests-dict.ts";
@@ -29,7 +29,9 @@ if (!flags["mvts"] || !flags["ab-tests"]) {
 	process.exit(1);
 }
 
-const fastly = new FastlyClient(process.env.FASTLY_API_TOKEN ?? "");
+const { serviceId, serviceName, mvtDictionaryName } = getConfigFromEnv();
+
+const fastly = new FastlyClient(getApiTokenFromEnv());
 
 const service = await fastly.getService(serviceId, serviceName);
 
