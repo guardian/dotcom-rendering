@@ -2,7 +2,8 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
 import { parseArgs } from "node:util";
 import { activeABtests } from "../../abTests.ts";
-import { getMVTGroupsFromDictionary } from "../../lib/fastly-api.ts";
+import { FastlyClient } from "../../lib/fastly/client.ts";
+import { getMVTGroupsFromDictionary } from "../../lib/fastly/dictionary.ts";
 import { parseMVTValue, stringifyMVTValue } from "../../lib/fastly-subfield.ts";
 import { buildABTestGroupKeyValues } from "./build-ab-tests-dict.ts";
 import { calculateAllSpaceUpdates } from "./calculate-mvt-updates.ts";
@@ -28,7 +29,9 @@ if (!flags["mvts"] || !flags["ab-tests"]) {
 	process.exit(1);
 }
 
-const mvtGroupsDictionary = await getMVTGroupsFromDictionary();
+const fastly = new FastlyClient(process.env.FASTLY_API_TOKEN ?? "");
+
+const mvtGroupsDictionary = await getMVTGroupsFromDictionary(fastly);
 
 const mvtGroups = new Map(
 	mvtGroupsDictionary.map(({ item_key, item_value }) => {

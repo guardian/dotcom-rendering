@@ -1,9 +1,5 @@
-import {
-	calculateUpdates,
-	getDictionaryItems,
-	updateDictionaryItems,
-	verifyDictionaryName,
-} from "../../lib/fastly-api.ts";
+import type { FastlyDictionary } from "../../lib/fastly/dictionary.ts";
+import { calculateUpdates } from "../../lib/fastly/utils.ts";
 import type { KeyValue } from "./fetch-artifact.ts";
 
 /**
@@ -14,49 +10,27 @@ import type { KeyValue } from "./fetch-artifact.ts";
  * @param keyValues An array of key-value pairs to deploy to the dictionary.
  */
 export const deployDictionary = async (
-	{
-		dictionaryName,
-		dictionaryId,
-		serviceId,
-		activeVersion,
-	}: {
-		dictionaryName: string;
-		dictionaryId: string;
-		serviceId: string;
-		activeVersion: number;
-	},
+	dictionary: FastlyDictionary,
 	keyValues: KeyValue[],
 ) => {
-	await verifyDictionaryName({
-		serviceId,
-		activeVersion,
-		dictionaryName,
-		dictionaryId,
-	});
-
-	const currentKeyValues = await getDictionaryItems({
-		dictionaryId,
-	});
+	const currentKeyValues = await dictionary.getItems();
 
 	const updates = calculateUpdates(keyValues, currentKeyValues);
 
 	if (updates.length === 0) {
-		console.log(`No key-values need updating in '${dictionaryName}'`);
+		console.log(`No key-values need updating in '${dictionary.name}'`);
 	} else {
 		Map.groupBy(updates, (item) => item.op).forEach((items, op) => {
 			console.log(
-				`Performing ${items.length} ${op} operations in '${dictionaryName}'`,
+				`Performing ${items.length} ${op} operations in '${dictionary.name}'`,
 			);
 		});
 
 		console.log(
-			`Performing ${updates.length} total operations in '${dictionaryName}'`,
+			`Performing ${updates.length} total operations in '${dictionary.name}'`,
 		);
 
-		const response = await updateDictionaryItems({
-			dictionaryId,
-			items: updates,
-		});
+		const response = await dictionary.updateItems(updates);
 
 		if (response.status !== "ok") {
 			throw new Error(`Failed to update mvt groups dictionary`);

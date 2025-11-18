@@ -1,3 +1,4 @@
+import type { FastlyDictionary } from "../../lib/fastly/dictionary.ts";
 import { deployDictionary } from "./deploy-dictionary.ts";
 import { fetchDictionaryArtifact } from "./fetch-artifact.ts";
 
@@ -6,15 +7,9 @@ const STAGE = process.env.STAGE ?? "CODE";
 
 const CONFIG_PREFIX = `/${STAGE}/config/ab-testing`;
 
-type ServiceInfo = {
-	activeVersion: { number: number };
-	serviceId: string;
-};
-
 type ArtifactInfo = {
 	artifact: string;
-	dictionaryName: string;
-	dictionaryId: string;
+	dictionary: FastlyDictionary;
 };
 
 /**
@@ -22,26 +17,15 @@ type ArtifactInfo = {
  * @param serviceInfo The Fastly service information including active version and service ID.
  * @param deployments An array of artifact deployment information.
  */
-export const fetchAndDeployArtifacts = async (
-	{ activeVersion, serviceId }: ServiceInfo,
-	deployments: ArtifactInfo[],
-) => {
+export const fetchAndDeployArtifacts = async (deployments: ArtifactInfo[]) => {
 	try {
 		await Promise.all(
-			deployments.map(({ artifact, dictionaryName, dictionaryId }) =>
+			deployments.map(({ artifact, dictionary }) =>
 				fetchDictionaryArtifact(
 					ARTIFACT_BUCKET_NAME,
 					`${CONFIG_PREFIX}/${artifact}`,
 				).then((abTestGroups) =>
-					deployDictionary(
-						{
-							serviceId,
-							activeVersion: activeVersion.number,
-							dictionaryName,
-							dictionaryId,
-						},
-						abTestGroups,
-					),
+					deployDictionary(dictionary, abTestGroups),
 				),
 			),
 		);
