@@ -221,7 +221,7 @@ const getDefaultCardProps = (
 		imageLoading: 'lazy',
 		showAge: true,
 		aspectRatio: '5:4',
-		mediaSize: 'small',
+		mediaSize: 'scrollable-small',
 		mediaPositionOnDesktop: 'left',
 		mediaPositionOnMobile: 'left',
 		headlineSizes: {

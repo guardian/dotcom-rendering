@@ -604,7 +604,8 @@ export const Card = ({
 		containerType === 'flexible/special' ||
 		containerType === 'flexible/general';
 
-	const isSmallCard = containerType === 'scrollable/small';
+	const isSmallCard =
+		containerType === 'scrollable/small' || isGallerySecondaryOnward;
 
 	const hideTrailTextUntil = () => {
 		if (isFlexibleContainer) {
@@ -635,6 +636,13 @@ export const Card = ({
 	 * Order matters here as the logic is based on the card properties
 	 */
 	const getGapSizes = (): GapSizes => {
+		if (isGallerySecondaryOnward) {
+			return {
+				row: 'medium',
+				column: 'medium',
+			};
+		}
+
 		if (isOnwardContent) {
 			return {
 				row: 'none',
@@ -749,7 +757,9 @@ export const Card = ({
 		onwardContent: boolean,
 	): 'large' | 'small' | undefined => {
 		if (mediaCard && betaContainer) return 'large';
-		if (mediaCard || onwardContent) return 'small';
+		if ((mediaCard || onwardContent) && !isGallerySecondaryOnward) {
+			return 'small';
+		}
 		return undefined;
 	};
 
@@ -1175,7 +1185,7 @@ export const Card = ({
 					padContent={determinePadContent(
 						isMediaCardOrNewsletter,
 						isBetaContainer,
-						isOnwardContent && !isMoreGalleriesOnwardContent,
+						isOnwardContent,
 					)}
 				>
 					{/* This div is needed to keep the headline and trail text justified at the start */}

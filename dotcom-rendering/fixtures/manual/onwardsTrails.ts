@@ -8,7 +8,7 @@ import { type TrailType } from '../../src/types/trails';
 
 export const galleryOnwardsTrails: TrailType[] = [
 	{
-		url: 'http://localhost:9000/environment/gallery/2025/aug/22/week-in-wildlife-a-clumsy-fox-swinging-orangutang-and-rescued-jaguarundi-cub',
+		url: 'https://www.theguardian.com/environment/gallery/2025/aug/22/week-in-wildlife-a-clumsy-fox-swinging-orangutang-and-rescued-jaguarundi-cub',
 		linkText:
 			'Week in wildlife: a clumsy fox, a swinging orangutan and a rescued jaguarundi cub',
 		showByline: false,
@@ -47,7 +47,7 @@ export const galleryOnwardsTrails: TrailType[] = [
 		mainMedia: { type: 'Gallery', count: '6' },
 	},
 	{
-		url: 'http://localhost:9000/money/gallery/2025/aug/22/characterful-cottages-for-sale-in-england-in-pictures',
+		url: 'https://www.theguardian.com/money/gallery/2025/aug/22/characterful-cottages-for-sale-in-england-in-pictures',
 		linkText: 'Characterful cottages for sale in England – in pictures',
 		showByline: false,
 		byline: 'Anna White',
@@ -82,7 +82,7 @@ export const galleryOnwardsTrails: TrailType[] = [
 		mainMedia: { type: 'Gallery', count: '6' },
 	},
 	{
-		url: 'http://localhost:9000/news/gallery/2025/aug/22/sunsets-aid-parachutes-and-giant-pandas-photos-of-the-day-friday',
+		url: 'https://www.theguardian.com/news/gallery/2025/aug/22/sunsets-aid-parachutes-and-giant-pandas-photos-of-the-day-friday',
 		linkText:
 			'Sunsets, aid parachutes and giant pandas: photos of the day – Friday ',
 		showByline: false,
@@ -119,7 +119,7 @@ export const galleryOnwardsTrails: TrailType[] = [
 		mainMedia: { type: 'Gallery', count: '6' },
 	},
 	{
-		url: 'http://localhost:9000/fashion/gallery/2025/aug/22/what-to-wear-to-notting-hill-carnival',
+		url: 'https://www.theguardian.com/fashion/gallery/2025/aug/22/what-to-wear-to-notting-hill-carnival',
 		linkText: 'On parade: what to wear to Notting Hill carnival',
 		showByline: false,
 		byline: 'Melanie Wilkinson',
@@ -151,6 +151,42 @@ export const galleryOnwardsTrails: TrailType[] = [
 		),
 		trailText:
 			'The Guardian’s picture editors select photographs from around the world',
+		mainMedia: { type: 'Gallery', count: '6' },
+	},
+	{
+		url: 'https://www.theguardian.com/artanddesign/gallery/2025/aug/21/psychedelic-rock-glass-mountain-michael-lundgren',
+		linkText:
+			'Psychedelic rock! Formations that mess with your mind – in pictures ',
+		showByline: false,
+		image: {
+			src: 'https://media.guim.co.uk/2810af61b2d2d2d5f71ec01e56e6555e0a6d4635/55_0_2813_2250/master/2813.jpg',
+			altText: '',
+		},
+		format: {
+			design: ArticleDesign.Gallery,
+			theme: Pillar.Culture,
+			display: ArticleDisplay.Standard,
+		},
+		webPublicationDate: '2025-08-21T06:01:01.000Z',
+		headline:
+			'Psychedelic rock! Formations that mess with your mind – in pictures ',
+		shortUrl: 'https://www.theguardian.com/p/x2p663',
+		discussion: {
+			isCommentable: false,
+			isClosedForComments: true,
+			discussionId: '/p/x2p663',
+		},
+		dataLinkName: getDataLinkNameCard(
+			{
+				design: ArticleDesign.Gallery,
+				theme: Pillar.Culture,
+				display: ArticleDisplay.Standard,
+			},
+			'0',
+			1,
+		),
+		trailText:
+			'Politicians and their partners put on their best show at this year’s Midwinter Ball, an annual dinner hosted by the Federal Parliamentary Press Gallery in Canberra',
 		mainMedia: { type: 'Gallery', count: '6' },
 	},
 ];
