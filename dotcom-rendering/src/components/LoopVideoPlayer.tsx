@@ -19,7 +19,7 @@ import { palette } from '../palette';
 import { narrowPlayIconWidth, PlayIcon } from './Card/components/PlayIcon';
 import { LoopVideoProgressBar } from './LoopVideoProgressBar';
 import { SubtitleOverlay } from './SubtitleOverlay';
-import { VideoPlayerFormat } from '../types/content';
+import type { VideoPlayerFormat } from '../types/content';
 
 export type SubtitleSize = 'small' | 'medium' | 'large';
 

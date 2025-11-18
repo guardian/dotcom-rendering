@@ -1,5 +1,5 @@
 import type { Source } from '../lib/video';
-import { VideoPlayerFormat } from './content';
+import type { VideoPlayerFormat } from './content';
 import type { PodcastSeriesImage } from './tag';
 
 type Media = {

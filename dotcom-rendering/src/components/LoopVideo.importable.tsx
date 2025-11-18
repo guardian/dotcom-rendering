@@ -27,7 +27,7 @@ import type {
 } from './LoopVideoPlayer';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
 import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
-import { VideoPlayerFormat } from '../types/content';
+import type { VideoPlayerFormat } from '../types/content';
 
 const videoContainerStyles = css`
 	z-index: ${getZIndex('loop-video-container')};

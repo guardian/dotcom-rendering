@@ -73,6 +73,7 @@ import type {
 import { MediaWrapper } from './components/MediaWrapper';
 import { SvgWaveform } from './components/SvgWaveform';
 import { TrailText, type TrailTextSize } from './components/TrailText';
+import type { CardMediaType } from '../../types/layout';
 
 export type Position = 'inner' | 'outer' | 'none';
 
@@ -280,8 +281,21 @@ const getMedia = ({
 	isBetaContainer: boolean;
 }) => {
 	if (mainMedia?.type === 'SelfHostedVideo' && canPlayInline) {
+		let type: CardMediaType;
+		switch (mainMedia.videoStyle) {
+			case 'Default':
+				type = 'default-video';
+				break;
+			case 'Loop':
+				type = 'loop-video';
+				break;
+			case 'Cinemagraph':
+				type = 'cinemagraph';
+				break;
+		}
+
 		return {
-			type: 'loop-video',
+			type,
 			mainMedia,
 		} as const;
 	}
@@ -896,11 +910,6 @@ export const Card = ({
 					<MediaWrapper
 						mediaSize={mediaSize}
 						mediaType={media.type}
-						videoStyle={
-							media.mainMedia?.type === 'SelfHostedVideo'
-								? media.mainMedia.videoStyle
-								: null
-						}
 						mediaPositionOnDesktop={mediaPositionOnDesktop}
 						mediaPositionOnMobile={mediaPositionOnMobile}
 						hideMediaOverlay={media.type === 'slideshow'}
