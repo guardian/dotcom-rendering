@@ -197,6 +197,56 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
                   ]
                 }
               ]
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":parameter/ab-testing-deploy/CODE/fastly-api-token"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":parameter/ab-testing-deploy/CODE/fastly-ab-testing-config"
+                  ]
+                ]
+              }
             }
           ],
           "Version": "2012-10-17"
@@ -220,10 +270,6 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
         },
         "Environment": {
           "Variables": {
-            "FASTLY_API_TOKEN": "{{resolve:ssm-secure:/ab-testing-deploy/CODE/fastly-api-token}}",
-            "FASTLY_AB_TESTING_CONFIG": {
-              "Ref": "FastlyAbTestingConfigParameterParameter"
-            },
             "STAGE": "CODE",
             "ARTIFACT_BUCKET_NAME": {
               "Ref": "SsmParameterValueaccountservicesdotcomstorebucketC96584B6F00A464EAD1953AFF4B05118Parameter"
@@ -490,6 +536,56 @@ exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
                   ]
                 }
               ]
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":parameter/ab-testing-deploy/PROD/fastly-api-token"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:DescribeParameters",
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+                "ssm:GetParameterHistory"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ssm:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":parameter/ab-testing-deploy/PROD/fastly-ab-testing-config"
+                  ]
+                ]
+              }
             }
           ],
           "Version": "2012-10-17"
@@ -513,10 +609,6 @@ exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
         },
         "Environment": {
           "Variables": {
-            "FASTLY_API_TOKEN": "{{resolve:ssm-secure:/ab-testing-deploy/PROD/fastly-api-token}}",
-            "FASTLY_AB_TESTING_CONFIG": {
-              "Ref": "FastlyAbTestingConfigParameterParameter"
-            },
             "STAGE": "PROD",
             "ARTIFACT_BUCKET_NAME": {
               "Ref": "SsmParameterValueaccountservicesdotcomstorebucketC96584B6F00A464EAD1953AFF4B05118Parameter"
