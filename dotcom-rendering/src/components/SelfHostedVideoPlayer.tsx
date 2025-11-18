@@ -16,7 +16,7 @@ import { forwardRef } from 'react';
 import type { ActiveCue } from '../lib/useSubtitles';
 import type { Source } from '../lib/video';
 import { palette } from '../palette';
-import type { VideoPlayerFormat } from '../types/content';
+import type { VideoPlayerFormat } from '../types/mainMedia';
 import { narrowPlayIconWidth, PlayIcon } from './Card/components/PlayIcon';
 import { SubtitleOverlay } from './SubtitleOverlay';
 import { VideoProgressBar } from './VideoProgressBar';

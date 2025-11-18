@@ -27,7 +27,7 @@ export type CardMediaType =
 	| 'crossword'
 	| 'slideshow'
 	| 'youtube-video'
-	| 'default-video' // Self-hosted
+	| 'default-video'
 	| 'loop-video'
 	| 'cinemagraph'
 	| 'podcast';

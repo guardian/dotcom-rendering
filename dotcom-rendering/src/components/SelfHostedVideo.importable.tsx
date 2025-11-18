@@ -18,7 +18,7 @@ import {
 	customSelfHostedVideoPlayAudioEventName,
 	customYoutubePlayEventName,
 } from '../lib/video';
-import type { VideoPlayerFormat } from '../types/content';
+import type { VideoPlayerFormat } from '../types/mainMedia';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
 import type {
@@ -547,14 +547,14 @@ export const SelfHostedVideo = ({
 	};
 
 	const handlePlayPauseClick = (event: React.SyntheticEvent) => {
-		if (videoStyle === 'Cinemagraph') return;
+		if (isCinemagraph) return;
 
 		event.preventDefault();
 		playPauseVideo();
 	};
 
 	const handleAudioClick = (event: React.SyntheticEvent) => {
-		if (videoStyle === 'Cinemagraph') return;
+		if (isCinemagraph) return;
 
 		void submitClickComponentEvent(event.currentTarget, renderingTarget);
 
@@ -575,7 +575,7 @@ export const SelfHostedVideo = ({
 	 * browser. Therefore we need to apply the pause state to the video.
 	 */
 	const handlePause = () => {
-		if (videoStyle === 'Cinemagraph') return;
+		if (isCinemagraph) return;
 
 		if (
 			playerState === 'PAUSED_BY_USER' ||
@@ -632,7 +632,7 @@ export const SelfHostedVideo = ({
 	const handleKeyDown = (
 		event: React.KeyboardEvent<HTMLVideoElement>,
 	): void => {
-		if (videoStyle === 'Cinemagraph') return;
+		if (isCinemagraph) return;
 
 		switch (event.key) {
 			case 'Enter':
@@ -668,7 +668,7 @@ export const SelfHostedVideo = ({
 				videoContainerStyles,
 				isCinemagraph && cinemagraphContainerStyles,
 			]}
-			className={`video-container ${isCinemagraph ? 'cinemagraph' : ''}`}
+			className={`video-container ${videoStyle.toLocaleLowerCase()}`}
 			data-component="gu-video-loop"
 		>
 			<SelfHostedVideoPlayer
