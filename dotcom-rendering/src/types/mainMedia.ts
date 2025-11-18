@@ -1,6 +1,7 @@
 import type { Source } from '../lib/video';
-import type { VideoPlayerFormat } from './content';
 import type { PodcastSeriesImage } from './tag';
+
+export type VideoPlayerFormat = 'Default' | 'Loop' | 'Cinemagraph';
 
 type Media = {
 	type: 'YoutubeVideo' | 'SelfHostedVideo' | 'Audio' | 'Gallery';

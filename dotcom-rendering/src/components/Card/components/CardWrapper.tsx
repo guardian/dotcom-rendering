@@ -59,7 +59,7 @@ const hoverStyles = css`
 	*/
 	:has(
 			ul.sublinks:hover,
-			.loop-video-container:hover,
+			.video-container.cinemagraph:hover,
 			.slideshow-carousel:hover,
 			.branding-logo:hover
 		) {

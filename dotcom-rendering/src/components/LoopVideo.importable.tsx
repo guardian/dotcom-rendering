@@ -18,6 +18,7 @@ import {
 	customLoopPlayAudioEventName,
 	customYoutubePlayEventName,
 } from '../lib/video';
+import type { VideoPlayerFormat } from '../types/mainMedia';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
 import type {
@@ -27,10 +28,9 @@ import type {
 } from './LoopVideoPlayer';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
 import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
-import type { VideoPlayerFormat } from '../types/content';
 
 const videoContainerStyles = css`
-	z-index: ${getZIndex('loop-video-container')};
+	z-index: ${getZIndex('video-container')};
 	position: relative;
 `;
 
@@ -547,14 +547,14 @@ export const LoopVideo = ({
 	};
 
 	const handlePlayPauseClick = (event: React.SyntheticEvent) => {
-		if (videoStyle === 'Cinemagraph') return;
+		if (isCinemagraph) return;
 
 		event.preventDefault();
 		playPauseVideo();
 	};
 
 	const handleAudioClick = (event: React.SyntheticEvent) => {
-		if (videoStyle === 'Cinemagraph') return;
+		if (isCinemagraph) return;
 
 		void submitClickComponentEvent(event.currentTarget, renderingTarget);
 
@@ -575,7 +575,7 @@ export const LoopVideo = ({
 	 * browser. Therefore we need to apply the pause state to the video.
 	 */
 	const handlePause = () => {
-		if (videoStyle === 'Cinemagraph') return;
+		if (isCinemagraph) return;
 
 		if (
 			playerState === 'PAUSED_BY_USER' ||
@@ -632,7 +632,7 @@ export const LoopVideo = ({
 	const handleKeyDown = (
 		event: React.KeyboardEvent<HTMLVideoElement>,
 	): void => {
-		if (videoStyle === 'Cinemagraph') return;
+		if (isCinemagraph) return;
 
 		switch (event.key) {
 			case 'Enter':
@@ -668,9 +668,7 @@ export const LoopVideo = ({
 				videoContainerStyles,
 				isCinemagraph && cinemagraphContainerStyles,
 			]}
-			className={`loop-video-container ${
-				isCinemagraph ? 'cinemagraph' : ''
-			}`}
+			className={`video-container ${videoStyle.toLocaleLowerCase()}`}
 			data-component="gu-video-loop"
 		>
 			<LoopVideoPlayer

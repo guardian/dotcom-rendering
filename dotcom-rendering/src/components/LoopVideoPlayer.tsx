@@ -16,10 +16,10 @@ import { forwardRef } from 'react';
 import type { ActiveCue } from '../lib/useSubtitles';
 import type { Source } from '../lib/video';
 import { palette } from '../palette';
+import type { VideoPlayerFormat } from '../types/mainMedia';
 import { narrowPlayIconWidth, PlayIcon } from './Card/components/PlayIcon';
 import { LoopVideoProgressBar } from './LoopVideoProgressBar';
 import { SubtitleOverlay } from './SubtitleOverlay';
-import type { VideoPlayerFormat } from '../types/content';
 
 export type SubtitleSize = 'small' | 'medium' | 'large';
 

@@ -32,6 +32,7 @@ import type {
 	DCRSnapType,
 	DCRSupportingContent,
 } from '../../types/front';
+import type { CardMediaType } from '../../types/layout';
 import type { MainMedia } from '../../types/mainMedia';
 import type { OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
@@ -73,7 +74,6 @@ import type {
 import { MediaWrapper } from './components/MediaWrapper';
 import { SvgWaveform } from './components/SvgWaveform';
 import { TrailText, type TrailTextSize } from './components/TrailText';
-import type { CardMediaType } from '../../types/layout';
 
 export type Position = 'inner' | 'outer' | 'none';
 
