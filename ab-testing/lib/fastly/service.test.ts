@@ -32,10 +32,7 @@ describe("FastlyService", async () => {
 			activeVersion: 1,
 		});
 
-		const dictionary = await service.getDictionary(
-			"dict-123",
-			"test-dictionary",
-		);
+		const dictionary = await service.getDictionary("test-dictionary");
 
 		equal(dictionary instanceof FastlyDictionary, true);
 		equal(dictionary.id, "dict-123");

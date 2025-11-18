@@ -21,18 +21,12 @@ export class FastlyService {
 		this.activeVersion = activeVersion;
 	}
 
-	async getDictionary(id: string, name: string): Promise<FastlyDictionary> {
+	async getDictionary(name: string): Promise<FastlyDictionary> {
 		const dictionaryConfig = await this.client.getDictionary({
 			activeVersion: this.activeVersion,
-			dictionaryName: id,
+			dictionaryName: name,
 			serviceId: this.id,
 		});
-
-		if (dictionaryConfig.name !== name) {
-			throw new Error(
-				`Dictionary name ${dictionaryConfig.name} does not match expected name ${name}`,
-			);
-		}
 
 		return new FastlyDictionary(this, dictionaryConfig);
 	}

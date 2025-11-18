@@ -2,12 +2,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
 import { parseArgs } from "node:util";
 import { activeABtests } from "../../abTests.ts";
-import {
-	mvtDictionaryId,
-	mvtDictionaryName,
-	serviceId,
-	serviceName,
-} from "../../lib/config.ts";
+import { mvtDictionaryName, serviceId, serviceName } from "../../lib/config.ts";
 import { FastlyClient } from "../../lib/fastly/client.ts";
 import { parseMVTValue, stringifyMVTValue } from "../../lib/fastly-subfield.ts";
 import { buildABTestGroupKeyValues } from "./build-ab-tests-dict.ts";
@@ -38,10 +33,7 @@ const fastly = new FastlyClient(process.env.FASTLY_API_TOKEN ?? "");
 
 const service = await fastly.getService(serviceId, serviceName);
 
-const mvtGroupsDictionary = await service.getDictionary(
-	mvtDictionaryId,
-	mvtDictionaryName,
-);
+const mvtGroupsDictionary = await service.getDictionary(mvtDictionaryName);
 
 const mvtGroupsDictionaryItems = await mvtGroupsDictionary.getItems();
 

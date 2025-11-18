@@ -43,26 +43,16 @@ export const handler: Handler = async (
 		throw new Error("Fastly API token not found in SSM Parameter Store");
 	}
 
-	const {
-		serviceId,
-		serviceName,
-		abTestsDictionaryId,
-		abTestsDictionaryName,
-		mvtDictionaryId,
-		mvtDictionaryName,
-	} = await getFastlyConfig();
+	const { serviceId, serviceName, abTestsDictionaryName, mvtDictionaryName } =
+		await getFastlyConfig();
 
 	const fastly = new FastlyClient(apiToken);
 	const service = await fastly.getService(serviceId, serviceName);
 
 	const abTestsDictionary = await service.getDictionary(
-		abTestsDictionaryId,
 		abTestsDictionaryName,
 	);
-	const mvtDictionary = await service.getDictionary(
-		mvtDictionaryId,
-		mvtDictionaryName,
-	);
+	const mvtDictionary = await service.getDictionary(mvtDictionaryName);
 
 	if (event.RequestType === "Create" || event.RequestType === "Update") {
 		try {

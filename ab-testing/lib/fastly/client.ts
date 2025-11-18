@@ -109,7 +109,7 @@ export class FastlyClient {
 
 		if (serviceConfig.name !== serviceName) {
 			throw new Error(
-				`Service ID ${serviceId} does not match the expected service name ${serviceName}`,
+				`Service with ID ${serviceId} does not match the expected service name ${serviceName}`,
 			);
 		}
 
