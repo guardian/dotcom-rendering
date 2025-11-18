@@ -501,18 +501,14 @@ export const renderElement = ({
 					- However they need to display in a different video player
 					- This is handled in the new `LoopVideoInArticle` component
 				- We need to differentiate between the two forms of video
-					- We can do this by interrogating the atom's metadata, which includes new attributes
-				- Note: we'll probably extend this functionality to handle new 'cenemagraph' videos
+					- We can do this by interrogating the atom's metadata, which includes the new attribute `videoPlayerFormat`
+
+				- Note: we'll probably extend this functionality to handle new 'Cinemagraph' videos
 					- These may use the looping video, or yet another new, video player
 					- But they will still be Media Atoms
-				
-				TESTING
-				- While waiting for the new parameters, we can test:
-					`2 + 2 === 5` - current behaviour - `VideoAtom`
-					`2 + 2 === 4` - display in the looping video player
 			*/
 
-			if (2 + 2 === 5) {
+			if (element.videoPlayerFormat === 'Loop') {
 				const updatedSources = element.assets.map((a) => ({
 					src: a.src || a.url,
 					mimeType: a.mimeType,
