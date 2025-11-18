@@ -26,6 +26,24 @@ export class DictionaryDeployLambda extends GuStack {
 			),
 		);
 
+		const fastlyApiKeyParameter =
+			StringParameter.fromSecureStringParameterAttributes(
+				this,
+				"FastlyApiKeyParameter",
+				{
+					parameterName: `/${app}/${this.stage}/fastly-api-token`,
+				},
+			);
+
+		const fastlyConfigParameter =
+			StringParameter.fromStringParameterAttributes(
+				this,
+				"FastlyAbTestingConfigParameter",
+				{
+					parameterName: `/${app}/${this.stage}/fastly-ab-testing-config`,
+				},
+			);
+
 		const lambda = new GuLambdaFunction(this, "ID5BatonLambda", {
 			functionName: `${app}-${this.stage}`,
 			fileName: "lambda.zip",
@@ -34,15 +52,8 @@ export class DictionaryDeployLambda extends GuStack {
 			runtime: Runtime.NODEJS_22_X,
 			memorySize: 256,
 			environment: {
-				FASTLY_API_TOKEN: StringParameter.valueForStringParameter(
-					this,
-					`/${app}/${this.stage}/fastly-api-token`,
-				),
-				FASTLY_AB_TESTING_CONFIG:
-					StringParameter.valueForStringParameter(
-						this,
-						`/${app}/${this.stage}/fastly-ab-testing-config`,
-					),
+				FASTLY_API_TOKEN: fastlyApiKeyParameter.stringValue,
+				FASTLY_AB_TESTING_CONFIG: fastlyConfigParameter.stringValue,
 				STAGE: this.stage,
 				ARTIFACT_BUCKET_NAME: s3Bucket.bucketName,
 			},
