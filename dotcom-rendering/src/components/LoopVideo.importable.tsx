@@ -133,7 +133,6 @@ export const LoopVideo = ({
 	fallbackImageAspectRatio,
 	linkTo,
 }: Props) => {
-	console.log('LVimp - atomId', atomId);
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
 	const vidRef = useRef<HTMLVideoElement>(null);
@@ -255,7 +254,6 @@ export const LoopVideo = ({
 	 * 2. Creates event listeners to control playback when there are multiple videos.
 	 */
 	useEffect(() => {
-		console.log('LVimp - useEffect - setup', uniqueId);
 		setIsAutoplayAllowed(doesUserPermitAutoplay());
 
 		/**

@@ -44,7 +44,6 @@ export const LoopVideoInArticle = ({
 	subtitleSource,
 	subtitleSize,
 }: LoopVideoInArticleProps) => {
-	console.log('LVIAimp - atomId', atomId);
 	return (
 		<>
 			<LoopVideo

@@ -360,7 +360,6 @@ export const renderElement = ({
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
-			console.log('RENDER_ELEMENT: pageElements.GuVideoBlockElement');
 			return (
 				<GuVideoBlockComponent
 					html={element.html}
@@ -493,7 +492,6 @@ export const renderElement = ({
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
-			console.log('RENDER_ELEMENT: pageElements.MediaAtomBlockElement');
 			/*
 				- MediaAtomBlockElement is used for self-hosted videos
 				- Historically, these videos have been self-hosted for legal or sensitive reasons
@@ -514,13 +512,11 @@ export const renderElement = ({
 					`2 + 2 === 4` - display in the looping video player
 			*/
 
-			if (2 + 2 === 4) {
-				console.log('Loop: element.assets', element.assets);
+			if (2 + 2 === 5) {
 				const updatedSources = element.assets.map((a) => ({
 					src: a.src || a.url,
 					mimeType: a.mimeType,
 				}));
-				console.log('Loop: updatedSources', updatedSources);
 				return (
 					<>
 						{element.posterImage?.[0]?.url && (
@@ -552,7 +548,6 @@ export const renderElement = ({
 					</>
 				);
 			} else {
-				console.log('Default: element.assets', element.assets);
 				return (
 					<VideoAtom
 						format={format}
@@ -851,9 +846,6 @@ export const renderElement = ({
 			}
 			return <TweetBlockComponent element={element} />;
 		case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
-			console.log(
-				'RENDER_ELEMENT: pageElements.VideoFacebookBlockElement',
-			);
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<VideoFacebookBlockComponent
@@ -873,7 +865,6 @@ export const renderElement = ({
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
-			console.log('RENDER_ELEMENT: pageElements.VideoVimeoBlockElement');
 			return (
 				<VimeoBlockComponent
 					format={format}
@@ -887,9 +878,6 @@ export const renderElement = ({
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
-			console.log(
-				'RENDER_ELEMENT: pageElements.VideoYoutubeBlockElement',
-			);
 			return (
 				<YoutubeEmbedBlockComponent
 					format={format}
@@ -903,7 +891,6 @@ export const renderElement = ({
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.VineBlockElement':
-			console.log('RENDER_ELEMENT: pageElements.VineBlockElement');
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<VineBlockComponent
@@ -935,9 +922,6 @@ export const renderElement = ({
 					);
 				}
 				case 'model.dotcomrendering.pageElements.WitnessTypeDataVideo': {
-					console.log(
-						'RENDER_ELEMENT: pageElements.WitnessTypeDataVideo',
-					);
 					const {
 						title,
 						description,
@@ -971,7 +955,6 @@ export const renderElement = ({
 			}
 		}
 		case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
-			console.log('RENDER_ELEMENT: pageElements.YoutubeBlockElement');
 			return (
 				<Island priority="critical" defer={{ until: 'visible' }}>
 					<YoutubeBlockComponent
@@ -1018,9 +1001,6 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.VideoBlockElement':
 		default:
-			console.log(
-				'RENDER_ELEMENT: possibly pageElements.VideoBlockElement',
-			);
 			return <></>;
 	}
 };
