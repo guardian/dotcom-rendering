@@ -3,7 +3,6 @@ import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { getZIndex } from '../../../lib/getZIndex';
 import type { CardMediaType } from '../../../types/layout';
-import { VideoPlayerFormat } from '../../../types/content';
 
 const mediaFixedSize = {
 	tiny: 86,
@@ -31,7 +30,6 @@ type Props = {
 	children: React.ReactNode;
 	mediaSize: MediaSizeType;
 	mediaType?: CardMediaType;
-	videoStyle: VideoPlayerFormat | null;
 	mediaPositionOnDesktop: MediaPositionType;
 	mediaPositionOnMobile: MediaPositionType;
 	/**
@@ -207,7 +205,6 @@ export const MediaWrapper = ({
 	children,
 	mediaSize,
 	mediaType,
-	videoStyle,
 	mediaPositionOnDesktop,
 	mediaPositionOnMobile,
 	hideMediaOverlay,
@@ -226,7 +223,9 @@ export const MediaWrapper = ({
 				(mediaType === 'slideshow' ||
 					mediaType === 'picture' ||
 					mediaType === 'youtube-video' ||
+					mediaType === 'default-video' ||
 					mediaType === 'loop-video' ||
+					mediaType === 'cinemagraph' ||
 					mediaType === 'podcast') &&
 					isHorizontalOnDesktop &&
 					flexBasisStyles({
@@ -277,7 +276,7 @@ export const MediaWrapper = ({
 				{/* This overlay is styled when the CardLink is hovered */}
 				{(mediaType === 'picture' ||
 					mediaType === 'slideshow' ||
-					videoStyle === 'Cinemagraph') &&
+					mediaType === 'cinemagraph') &&
 					!hideMediaOverlay && (
 						<div
 							css={[

@@ -32,6 +32,7 @@ import type {
 	DCRSnapType,
 	DCRSupportingContent,
 } from '../../types/front';
+import type { CardMediaType } from '../../types/layout';
 import type { MainMedia } from '../../types/mainMedia';
 import type { OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
@@ -280,8 +281,21 @@ const getMedia = ({
 	isBetaContainer: boolean;
 }) => {
 	if (mainMedia?.type === 'SelfHostedVideo' && canPlayInline) {
+		let type: CardMediaType;
+		switch (mainMedia.videoStyle) {
+			case 'Default':
+				type = 'default-video';
+				break;
+			case 'Loop':
+				type = 'loop-video';
+				break;
+			case 'Cinemagraph':
+				type = 'cinemagraph';
+				break;
+		}
+
 		return {
-			type: 'loop-video',
+			type,
 			mainMedia,
 		} as const;
 	}
@@ -896,11 +910,6 @@ export const Card = ({
 					<MediaWrapper
 						mediaSize={mediaSize}
 						mediaType={media.type}
-						videoStyle={
-							media.mainMedia?.type === 'SelfHostedVideo'
-								? media.mainMedia.videoStyle
-								: null
-						}
 						mediaPositionOnDesktop={mediaPositionOnDesktop}
 						mediaPositionOnMobile={mediaPositionOnMobile}
 						hideMediaOverlay={media.type === 'slideshow'}
