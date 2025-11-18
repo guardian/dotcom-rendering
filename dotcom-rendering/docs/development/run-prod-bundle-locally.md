@@ -6,20 +6,16 @@ production build locally.
 To do this:
 
     $ make build
-    $ node dist/server.js
+    $ make ci
 
-_Note, you will need AWS `frontend` credentials to run the service._
+The PROD server should start on its default port 9000.
 
-You can then use the provided GET endpoints for testing:
+You can then use the provided POST endpoints for testing e.g.:
 
     /Article
-    /AMPArticle
+    /Front
 
-Similar to the dev server, both endpoints support a `url` parameter to customise
-the article used. E.g.
+Unlike the DEV server, the DCAR PROD server does _not_ implement GET endpoints.
 
-    GET /Article/https://www.theguardian.com/my-test-article.
-
-_Note, PROD Frontend doesn't use these endpoints. Instead, it `POSTs` data to
-DCR and receives a JSON response. A tool like Postman can help if you want to
-replicate this exactly._
+As in production, it expects the Frontend JSON data model to be
+`POSTed` to DCAR.
