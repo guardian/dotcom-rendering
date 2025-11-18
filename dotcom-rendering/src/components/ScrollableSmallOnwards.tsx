@@ -226,7 +226,6 @@ const getDefaultCardProps = (
 		mediaPositionOnMobile: 'left',
 		headlineSizes: {
 			desktop: 'xxsmall',
-			tablet: 'xxsmall',
 			mobile: 'xxxsmall',
 		},
 		trailText: undefined,
