@@ -1,9 +1,6 @@
 import { log } from '@guardian/libs';
 import { useEffect, useState } from 'react';
-import {
-	getListenToArticleClient,
-	getNativeABTestingClient,
-} from '../lib/bridgetApi';
+import { getListenToArticleClient } from '../lib/bridgetApi';
 import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
 import { ListenToArticleButton } from './ListenToArticleButton';
 
@@ -37,39 +34,19 @@ export const ListenToArticle = ({ articleId }: Props) => {
 	useEffect(() => {
 		if (isBridgetCompatible) {
 			Promise.all([
-				// AB TESTING native
-				getNativeABTestingClient().getParticipations(),
 				getListenToArticleClient().isAvailable(articleId),
 				getListenToArticleClient().isPlaying(articleId),
 				getListenToArticleClient().getAudioDurationSeconds(articleId),
 			])
-				.then(
-					([
-						abParticipations,
-						isAvailable,
-						isPlaying,
-						durationSeconds,
-					]) => {
-						// AB TESTING native start
-						const variant = abParticipations.get(
-							'l2a_article_button_test',
-						);
-						if (variant === 'no-button') {
-							setShowButton(false);
-						} else if (variant === 'with-duration') {
-							setAudioDurationSeconds(
-								typeof durationSeconds === 'number' &&
-									durationSeconds > 0
-									? durationSeconds
-									: undefined,
-							);
-							setShowButton(isAvailable && !isPlaying);
-						} else if (variant === 'without-duration') {
-							setShowButton(isAvailable && !isPlaying);
-						}
-						// AB TESTING native ends
-					},
-				)
+				.then(([isAvailable, isPlaying, durationSeconds]) => {
+					setAudioDurationSeconds(
+						typeof durationSeconds === 'number' &&
+							durationSeconds > 0
+							? durationSeconds
+							: undefined,
+					);
+					setShowButton(isAvailable && !isPlaying);
+				})
 				.catch((error) => {
 					console.error(
 						'Error fetching article audio status: ',
@@ -87,20 +64,18 @@ export const ListenToArticle = ({ articleId }: Props) => {
 			.then((success: boolean) => {
 				// hide the audio button once audio is playing until we can
 				// manage play state syncronisation across the native miniplayer and web layer
-				if (success) {
-					setShowButton(false);
-				}
+				success && setShowButton(false);
 			})
 			.catch((error: Error) => {
 				window.guardian.modules.sentry.reportError(
 					error,
 					'bridget-getListenToArticleClient-play-error',
-				);
-				log(
-					'dotcom',
-					'Bridget getListenToArticleClient.play Error:',
-					error,
-				);
+				),
+					log(
+						'dotcom',
+						'Bridget getListenToArticleClient.play Error:',
+						error,
+					);
 			});
 	};
 	return (
