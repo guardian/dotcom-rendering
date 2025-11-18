@@ -126,13 +126,10 @@ export const generateScriptTags = (scripts: string[]): string[] =>
 		if (
 			script.match(WEB) ??
 			script.match(WEB_VARIANT_SCRIPT) ??
+			script.match(APPS_SCRIPT) ??
 			script.match(EDITIONS_CROSSWORD_SCRIPT)
 		) {
 			return `<script type="module" src="${script}"></script>`;
-		}
-
-		if (script.match(APPS_SCRIPT)) {
-			return `<script src="${script}"></script>`;
 		}
 
 		return [
