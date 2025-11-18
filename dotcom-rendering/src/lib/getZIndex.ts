@@ -86,10 +86,10 @@ const indices = [
 	'bodyArea',
 	'rightColumnArea',
 
-	// Loop video container
-	'loop-video-progress-bar-foreground',
-	'loop-video-progress-bar-background',
-	'loop-video-container',
+	// Self-hosted video
+	'video-progress-bar-foreground',
+	'video-progress-bar-background',
+	'video-container',
 
 	// Main media
 	'mainMedia',

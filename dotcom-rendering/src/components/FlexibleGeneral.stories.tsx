@@ -5,8 +5,8 @@ import {
 	audioTrails,
 	galleryTrails,
 	getSublinks,
-	loopVideoCard,
 	opinionTrails,
+	selfHostedVideoCard,
 	slideshowCard,
 	trails,
 	videoTrails,
@@ -542,14 +542,14 @@ export const ImmersiveCardsSplashAndStandard: Story = {
 	},
 };
 
-export const LoopVideoCards: Story = {
-	name: 'Looping video cards',
+export const SelfHostedVideoCards: Story = {
+	name: 'Self-hosted video cards',
 	args: {
-		frontSectionTitle: 'Loop video cards',
+		frontSectionTitle: 'Self-hosted video cards',
 		groupedTrails: {
 			...emptyGroupedTrails,
-			splash: [loopVideoCard],
-			standard: [loopVideoCard], // Loop video is disabled at standard card size
+			splash: [selfHostedVideoCard],
+			standard: [selfHostedVideoCard], // Self-hosted video is disabled at standard card size
 		},
 	},
 };

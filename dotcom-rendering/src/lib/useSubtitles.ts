@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { PlayerStates } from '../components/LoopVideoPlayer';
+import type { PlayerStates } from '../components/SelfHostedVideoPlayer';
 
 type Props = {
 	video: HTMLVideoElement | null;

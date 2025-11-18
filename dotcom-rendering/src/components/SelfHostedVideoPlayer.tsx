@@ -17,8 +17,8 @@ import type { ActiveCue } from '../lib/useSubtitles';
 import type { Source } from '../lib/video';
 import { palette } from '../palette';
 import { narrowPlayIconWidth, PlayIcon } from './Card/components/PlayIcon';
-import { LoopVideoProgressBar } from './LoopVideoProgressBar';
 import { SubtitleOverlay } from './SubtitleOverlay';
+import { VideoProgressBar } from './VideoProgressBar';
 
 export type SubtitleSize = 'small' | 'medium' | 'large';
 
@@ -40,7 +40,7 @@ const videoStyles = (
 		/* Hide the cue by default as we prefer custom overlay */
 		visibility: hidden;
 
-		color: ${palette('--loop-video-subtitle-text')};
+		color: ${palette('--video-subtitle-text')};
 		${subtitleSize === 'small' && textSans15};
 		${subtitleSize === 'medium' && textSans17};
 		${subtitleSize === 'large' && textSans20};
@@ -75,9 +75,9 @@ const audioIconContainerStyles = css`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: ${palette('--loop-video-audio-icon-background')};
+	background-color: ${palette('--video-audio-icon-background')};
 	border-radius: 50%;
-	border: 1px solid ${palette('--loop-video-audio-icon-border')};
+	border: 1px solid ${palette('--video-audio-icon-border')};
 `;
 
 export const PLAYER_STATES = [
@@ -132,11 +132,11 @@ type Props = {
  * https://react.dev/reference/react/forwardRef
  */
 /**
- * NB: To develop the loop video player locally, use `https://r.thegulocal.com/` instead of `localhost`.
+ * NB: To develop the video player locally, use `https://r.thegulocal.com/` instead of `localhost`.
  * This is required because CORS restrictions prevent accessing the subtitles and video file from localhost.
  */
 
-export const LoopVideoPlayer = forwardRef(
+export const SelfHostedVideoPlayer = forwardRef(
 	(
 		{
 			sources,
@@ -168,17 +168,18 @@ export const LoopVideoPlayer = forwardRef(
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
-		const loopVideoId = `loop-video-${uniqueId}`;
+		const videoId = `video-${uniqueId}`;
+
 		return (
 			<>
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Captions will be considered later. */}
 				<video
-					id={loopVideoId}
+					id={videoId}
 					css={videoStyles(width, height, subtitleSize)}
 					crossOrigin="anonymous"
 					ref={ref}
 					tabIndex={0}
-					data-testid="loop-video"
+					data-testid="self-hosted-video-player"
 					height={height}
 					width={width}
 					data-link-name={`gu-video-loop-${
@@ -249,8 +250,8 @@ export const LoopVideoPlayer = forwardRef(
 							</button>
 						)}
 						{/* Progress bar */}
-						<LoopVideoProgressBar
-							videoId={loopVideoId}
+						<VideoProgressBar
+							videoId={videoId}
 							currentTime={currentTime}
 							duration={ref.current.duration}
 						/>
@@ -273,9 +274,7 @@ export const LoopVideoPlayer = forwardRef(
 									<AudioIcon
 										size="xsmall"
 										theme={{
-											fill: palette(
-												'--loop-video-audio-icon',
-											),
+											fill: palette('--video-audio-icon'),
 										}}
 									/>
 								</div>
