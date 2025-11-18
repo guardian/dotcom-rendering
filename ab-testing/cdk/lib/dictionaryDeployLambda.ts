@@ -36,7 +36,7 @@ export class DictionaryDeployLambda extends GuStack {
 			);
 
 		const fastlyConfigParameter =
-			StringParameter.fromStringParameterAttributes(
+			StringParameter.fromSecureStringParameterAttributes(
 				this,
 				"FastlyAbTestingConfigParameter",
 				{
@@ -44,7 +44,7 @@ export class DictionaryDeployLambda extends GuStack {
 				},
 			);
 
-		const lambda = new GuLambdaFunction(this, "ID5BatonLambda", {
+		const lambda = new GuLambdaFunction(this, "DictionaryDeployLambda", {
 			functionName: `${app}-${this.stage}`,
 			fileName: "lambda.zip",
 			handler: "index.handler",

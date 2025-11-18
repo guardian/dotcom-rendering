@@ -12,10 +12,6 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
       "Type": "AWS::SSM::Parameter::Value<String>",
       "Default": "/account/services/dotcom-store.bucket"
     },
-    "FastlyAbTestingConfigParameterParameter": {
-      "Type": "AWS::SSM::Parameter::Value<String>",
-      "Default": "/ab-testing-deploy/CODE/fastly-ab-testing-config"
-    },
     "DistributionBucketName": {
       "Type": "AWS::SSM::Parameter::Value<String>",
       "Default": "/account/services/artifact.bucket",
@@ -23,7 +19,7 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
     }
   },
   "Resources": {
-    "ID5BatonLambdaServiceRole5E3112D1": {
+    "DictionaryDeployLambdaServiceRoleAD814AB7": {
       "Type": "AWS::IAM::Role",
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -76,7 +72,7 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
         ]
       }
     },
-    "ID5BatonLambdaServiceRoleDefaultPolicy3736CB87": {
+    "DictionaryDeployLambdaServiceRoleDefaultPolicy63259B6E": {
       "Type": "AWS::IAM::Policy",
       "Properties": {
         "PolicyDocument": {
@@ -251,15 +247,15 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
           ],
           "Version": "2012-10-17"
         },
-        "PolicyName": "ID5BatonLambdaServiceRoleDefaultPolicy3736CB87",
+        "PolicyName": "DictionaryDeployLambdaServiceRoleDefaultPolicy63259B6E",
         "Roles": [
           {
-            "Ref": "ID5BatonLambdaServiceRole5E3112D1"
+            "Ref": "DictionaryDeployLambdaServiceRoleAD814AB7"
           }
         ]
       }
     },
-    "ID5BatonLambda41DA535C": {
+    "DictionaryDeployLambdaD0FF981C": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
@@ -286,7 +282,7 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
         "MemorySize": 256,
         "Role": {
           "Fn::GetAtt": [
-            "ID5BatonLambdaServiceRole5E3112D1",
+            "DictionaryDeployLambdaServiceRoleAD814AB7",
             "Arn"
           ]
         },
@@ -316,8 +312,8 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
         "Timeout": 30
       },
       "DependsOn": [
-        "ID5BatonLambdaServiceRoleDefaultPolicy3736CB87",
-        "ID5BatonLambdaServiceRole5E3112D1"
+        "DictionaryDeployLambdaServiceRoleDefaultPolicy63259B6E",
+        "DictionaryDeployLambdaServiceRoleAD814AB7"
       ]
     },
     "InvokeDictionaryDeployLambda": {
@@ -325,7 +321,7 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
       "Properties": {
         "ServiceToken": {
           "Fn::GetAtt": [
-            "ID5BatonLambda41DA535C",
+            "DictionaryDeployLambdaD0FF981C",
             "Arn"
           ]
         }
@@ -351,10 +347,6 @@ exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
       "Type": "AWS::SSM::Parameter::Value<String>",
       "Default": "/account/services/dotcom-store.bucket"
     },
-    "FastlyAbTestingConfigParameterParameter": {
-      "Type": "AWS::SSM::Parameter::Value<String>",
-      "Default": "/ab-testing-deploy/PROD/fastly-ab-testing-config"
-    },
     "DistributionBucketName": {
       "Type": "AWS::SSM::Parameter::Value<String>",
       "Default": "/account/services/artifact.bucket",
@@ -362,7 +354,7 @@ exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
     }
   },
   "Resources": {
-    "ID5BatonLambdaServiceRole5E3112D1": {
+    "DictionaryDeployLambdaServiceRoleAD814AB7": {
       "Type": "AWS::IAM::Role",
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -415,7 +407,7 @@ exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
         ]
       }
     },
-    "ID5BatonLambdaServiceRoleDefaultPolicy3736CB87": {
+    "DictionaryDeployLambdaServiceRoleDefaultPolicy63259B6E": {
       "Type": "AWS::IAM::Policy",
       "Properties": {
         "PolicyDocument": {
@@ -590,15 +582,15 @@ exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
           ],
           "Version": "2012-10-17"
         },
-        "PolicyName": "ID5BatonLambdaServiceRoleDefaultPolicy3736CB87",
+        "PolicyName": "DictionaryDeployLambdaServiceRoleDefaultPolicy63259B6E",
         "Roles": [
           {
-            "Ref": "ID5BatonLambdaServiceRole5E3112D1"
+            "Ref": "DictionaryDeployLambdaServiceRoleAD814AB7"
           }
         ]
       }
     },
-    "ID5BatonLambda41DA535C": {
+    "DictionaryDeployLambdaD0FF981C": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
@@ -625,7 +617,7 @@ exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
         "MemorySize": 256,
         "Role": {
           "Fn::GetAtt": [
-            "ID5BatonLambdaServiceRole5E3112D1",
+            "DictionaryDeployLambdaServiceRoleAD814AB7",
             "Arn"
           ]
         },
@@ -655,8 +647,8 @@ exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
         "Timeout": 30
       },
       "DependsOn": [
-        "ID5BatonLambdaServiceRoleDefaultPolicy3736CB87",
-        "ID5BatonLambdaServiceRole5E3112D1"
+        "DictionaryDeployLambdaServiceRoleDefaultPolicy63259B6E",
+        "DictionaryDeployLambdaServiceRoleAD814AB7"
       ]
     },
     "InvokeDictionaryDeployLambda": {
@@ -664,7 +656,7 @@ exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
       "Properties": {
         "ServiceToken": {
           "Fn::GetAtt": [
-            "ID5BatonLambda41DA535C",
+            "DictionaryDeployLambdaD0FF981C",
             "Arn"
           ]
         }
