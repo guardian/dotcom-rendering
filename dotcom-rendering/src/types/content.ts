@@ -962,6 +962,8 @@ interface AudioAsset {
 	};
 }
 
+export type VideoPlayerFormat = 'Default' | 'Loop' | 'Cinemagraph';
+
 export interface TimelineAtomEvent {
 	title: string;
 	date: string;

@@ -3938,12 +3938,7 @@
                             "const": "SelfHostedVideo"
                         },
                         "videoStyle": {
-                            "enum": [
-                                "Cinemagraph",
-                                "Default",
-                                "Loop"
-                            ],
-                            "type": "string"
+                            "$ref": "#/definitions/VideoPlayerFormat"
                         },
                         "atomId": {
                             "type": "string"
@@ -3994,6 +3989,14 @@
                     ]
                 }
             ]
+        },
+        "VideoPlayerFormat": {
+            "enum": [
+                "Cinemagraph",
+                "Default",
+                "Loop"
+            ],
+            "type": "string"
         },
         "Audio": {
             "allOf": [

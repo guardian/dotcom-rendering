@@ -75,7 +75,7 @@ export const WithCinemagraph: Story = {
 	name: 'With cinemagraph',
 	args: {
 		...Default.args,
-		isCinemagraph: true,
+		videoStyle: 'Cinemagraph',
 	},
 };
 
