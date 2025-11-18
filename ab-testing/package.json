@@ -10,7 +10,7 @@
 		"build": "node scripts/build/index.ts --mvts=dist/mvts.json --ab-tests=dist/ab-tests.json",
 		"build-ui": "pnpm --filter @guardian/ab-testing-frontend run build",
 		"lambda:build": "pnpm --filter @guardian/ab-testing-lambda run build",
-		"test": "node --test",
+		"test": "node --test --test-reporter spec scripts/**/*.test.ts lib/**/*.test.ts",
 		"lint": "eslint .",
 		"prettier:check": "prettier . --check --cache",
 		"prettier:fix": "prettier . --write --cache",
@@ -24,6 +24,7 @@
 	},
 	"devDependencies": {
 		"@aws-sdk/client-s3": "3.931.0",
+		"@aws-sdk/client-ssm": "3.621.0",
 		"@guardian/cdk": "62.0.1",
 		"@guardian/eslint-config": "12.0.1",
 		"@guardian/tsconfig": "1.0.1",

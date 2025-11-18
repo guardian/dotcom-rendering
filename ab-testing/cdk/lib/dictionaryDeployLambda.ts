@@ -52,14 +52,14 @@ export class DictionaryDeployLambda extends GuStack {
 			runtime: Runtime.NODEJS_22_X,
 			memorySize: 256,
 			environment: {
-				FASTLY_API_TOKEN: fastlyApiKeyParameter.stringValue,
-				FASTLY_AB_TESTING_CONFIG: fastlyConfigParameter.stringValue,
 				STAGE: this.stage,
 				ARTIFACT_BUCKET_NAME: s3Bucket.bucketName,
 			},
 		});
 
 		s3Bucket.grantRead(lambda);
+		fastlyApiKeyParameter.grantRead(lambda);
+		fastlyConfigParameter.grantRead(lambda);
 
 		// Trigger the Lambda to run upon deployment
 		new CustomResource(this, "InvokeDictionaryDeployLambda", {
