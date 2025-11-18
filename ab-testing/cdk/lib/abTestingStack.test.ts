@@ -3,7 +3,7 @@ import { snapshot } from "node:test";
 import { basename } from "path";
 import { GuRoot } from "@guardian/cdk/lib/constructs/root.js";
 import { Template } from "aws-cdk-lib/assertions";
-import { DictionaryDeployLambda } from "./dictionaryDeployLambda.ts";
+import { AbTestingStack } from "./abTestingStack.ts";
 
 snapshot.setResolveSnapshotPath(
 	() =>
@@ -15,36 +15,28 @@ snapshot.setResolveSnapshotPath(
 void describe("The ID5 Baton Lambda stack", () => {
 	void it("matches the CODE snapshot", ({ assert }) => {
 		const app = new GuRoot();
-		const stack = new DictionaryDeployLambda(
-			app,
-			"DictionaryDeployLambda",
-			{
-				stack: "frontend",
-				stage: "CODE",
-				env: {
-					region: "eu-west-1",
-				},
-				app: "ab-testing-deploy",
+		const stack = new AbTestingStack(app, "AbTestingStack", {
+			stack: "frontend",
+			stage: "CODE",
+			env: {
+				region: "eu-west-1",
 			},
-		);
+			app: "ab-testing-deploy",
+		});
 		const template = Template.fromStack(stack);
 		assert.snapshot(template.toJSON());
 	});
 
 	void it("matches the PROD snapshot", ({ assert }) => {
 		const app = new GuRoot();
-		const stack = new DictionaryDeployLambda(
-			app,
-			"DictionaryDeployLambda",
-			{
-				stack: "frontend",
-				stage: "PROD",
-				env: {
-					region: "eu-west-1",
-				},
-				app: "ab-testing-deploy",
+		const stack = new AbTestingStack(app, "AbTestingStack", {
+			stack: "frontend",
+			stage: "PROD",
+			env: {
+				region: "eu-west-1",
 			},
-		);
+			app: "ab-testing-deploy",
+		});
 		const template = Template.fromStack(stack);
 		assert.snapshot(template.toJSON());
 	});

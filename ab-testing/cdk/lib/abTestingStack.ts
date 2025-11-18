@@ -11,7 +11,7 @@ type Props = GuStackProps & {
 	app: string;
 };
 
-export class DictionaryDeployLambda extends GuStack {
+export class AbTestingStack extends GuStack {
 	constructor(scope: App, id: string, props: Props) {
 		super(scope, id, props);
 

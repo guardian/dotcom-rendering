@@ -1,13 +1,13 @@
 import "source-map-support/register.js";
 import { RiffRaffYamlFile } from "@guardian/cdk/lib/riff-raff-yaml-file/index.js";
 import { App } from "aws-cdk-lib";
-import { DictionaryDeployLambda } from "../lib/dictionaryDeployLambda.ts";
+import { AbTestingStack } from "../lib/abTestingStack.ts";
 
 const app = new App();
 
-const appName = "ab-testing-deploy";
+const appName = "ab-testing";
 
-new DictionaryDeployLambda(app, "DictionaryDeployLambdaCode", {
+new AbTestingStack(app, "AbTestingCode", {
 	stack: "frontend",
 	stage: "CODE",
 	env: {
@@ -16,7 +16,7 @@ new DictionaryDeployLambda(app, "DictionaryDeployLambdaCode", {
 	app: appName,
 });
 
-new DictionaryDeployLambda(app, "DictionaryDeployLambdaProd", {
+new AbTestingStack(app, "AbTestingProd", {
 	stack: "frontend",
 	stage: "PROD",
 	env: {
@@ -60,7 +60,7 @@ deployments.set("admin/ab-testing", {
 
 // We need the test artifacts in place before deploying the lambda that uses them
 deployments
-	.get(`cfn-eu-west-1-frontend-dictionary-deploy-lambda`)
+	.get(`cfn-eu-west-1-frontend-ab-testing-stack`)
 	?.dependencies?.push("config/ab-testing");
 
 riffRaff.synth();

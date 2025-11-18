@@ -21,7 +21,7 @@ const getSecureString = async (name: string) => {
 
 const getFastlyConfig = async () => {
 	const stringParam = await getSecureString(
-		`/ab-testing-deploy/${process.env.STAGE}/fastly-ab-testing-config`,
+		`/ab-testing/${process.env.STAGE}/fastly-config`,
 	);
 	// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing -- empty string is invalid JSON too
 	const json = JSON.parse(stringParam || "{}") as unknown;
@@ -37,7 +37,7 @@ export const handler: Handler = async (
 ): Promise<void> => {
 	try {
 		const apiToken = await getSecureString(
-			`/ab-testing-deploy/${process.env.STAGE}/fastly-api-token`,
+			`/ab-testing/${process.env.STAGE}/fastly-api-token`,
 		);
 
 		if (!apiToken) {
