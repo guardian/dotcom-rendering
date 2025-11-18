@@ -45,11 +45,6 @@ const requiredNodeVersionMatches =
 			matchLevel: 'patch',
 		},
 		{
-			filepath: '../apps-rendering/riff-raff.yaml',
-			pattern: /^ +Recipe: apps-rendering.*-node-(\d+\.\d+\.\d+).*?$/m,
-			matchLevel: 'patch',
-		},
-		{
 			filepath: 'package.json',
 			pattern: /^\t+"@types\/node"\: "(.+)",$/m,
 			/*
