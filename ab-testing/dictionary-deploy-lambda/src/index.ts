@@ -74,6 +74,9 @@ export const handler: Handler = async (
 			]);
 
 			send(event, context, "SUCCESS");
+		} else {
+			// For Delete requests, simply respond with SUCCESS
+			send(event, context, "SUCCESS");
 		}
 	} catch (error) {
 		console.error("Error deploying dictionaries:", error);
