@@ -74,7 +74,7 @@ export const Loop16to9: Story = {
 export const WithCinemagraph: Story = {
 	args: {
 		...Loop4to5.args,
-		isCinemagraph: true,
+		videoStyle: 'Cinemagraph',
 	},
 };
 
