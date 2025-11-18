@@ -38,14 +38,21 @@ export class FastlyService {
 	}
 
 	async getDictionaryItems(dictionaryId: string) {
-		return this.client.getDictionaryItems({ dictionaryId });
+		return this.client.getDictionaryItems({
+			dictionaryId,
+			serviceId: this.id,
+		});
 	}
 
 	async updateDictionaryItems(
 		dictionaryId: string,
 		items: UpdateDictionaryItemRequest[],
 	) {
-		return this.client.updateDictionaryItems({ dictionaryId, items });
+		return this.client.updateDictionaryItems({
+			dictionaryId,
+			serviceId: this.id,
+			items,
+		});
 	}
 
 	async verifyDictionaryName({

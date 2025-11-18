@@ -2,14 +2,8 @@ import { GetParameterCommand, SSMClient } from "@aws-sdk/client-ssm";
 import type { Handler } from "aws-cdk-lib/aws-lambda";
 import type { CloudFormationCustomResourceEvent, Context } from "aws-lambda";
 import { send } from "cfn-response";
-import {
-	abTestsDictionaryId,
-	abTestsDictionaryName,
-	mvtDictionaryId,
-	mvtDictionaryName,
-	serviceId,
-	serviceName,
-} from "../../lib/config.ts";
+import { assert } from "superstruct";
+import { configStruct } from "../../lib/config.ts";
 import { FastlyClient } from "../../lib/fastly/client.ts";
 import { fetchAndDeployArtifacts } from "./deploy.ts";
 
@@ -25,6 +19,18 @@ const getSecureString = async (name: string) => {
 	return response.Parameter?.Value;
 };
 
+const getFastlyConfig = async () => {
+	const stringParam = await getSecureString(
+		`/ab-testing-deploy/${process.env.STAGE}/fastly-ab-testing-config`,
+	);
+	// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing -- empty string is invalid JSON too
+	const json = JSON.parse(stringParam || "{}") as unknown;
+
+	assert(json, configStruct);
+
+	return json;
+};
+
 export const handler: Handler = async (
 	event: CloudFormationCustomResourceEvent,
 	context: Context,
@@ -36,6 +42,15 @@ export const handler: Handler = async (
 	if (!apiToken) {
 		throw new Error("Fastly API token not found in SSM Parameter Store");
 	}
+
+	const {
+		serviceId,
+		serviceName,
+		abTestsDictionaryId,
+		abTestsDictionaryName,
+		mvtDictionaryId,
+		mvtDictionaryName,
+	} = await getFastlyConfig();
 
 	const fastly = new FastlyClient(apiToken);
 	const service = await fastly.getService(serviceId, serviceName);

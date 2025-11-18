@@ -40,4 +40,5 @@ export {
 	mvtDictionaryName,
 	abTestsDictionaryId,
 	abTestsDictionaryName,
+	configStruct,
 };

@@ -1,21 +1,6 @@
 import { deepEqual, equal } from "node:assert";
 import test from "node:test";
-
-const mockConfig = {
-	serviceName: "test-service",
-	serviceId: "test-service-id",
-	mvtDictionaryId: "test-mvt-dictionary-id",
-	mvtDictionaryName: "test-mvt-dictionary",
-	abTestsDictionaryId: "test-ab-tests-dictionary-id",
-	abTestsDictionaryName: "test-ab-tests-dictionary",
-};
-
-// Mock environment variables
-process.env.FASTLY_AB_TESTING_CONFIG = JSON.stringify(mockConfig);
-process.env.FASTLY_API_TOKEN = "test-api-token";
-
-// Import after mocking
-const { calculateUpdates, encodeObject } = await import("./utils.ts");
+import { calculateUpdates, encodeObject } from "./utils.ts";
 
 test("calculateUpdates - creates new items", () => {
 	const currentDictionary: Array<{ item_key: string; item_value: string }> =

@@ -8,7 +8,6 @@ import {
 	string,
 	type,
 } from "superstruct";
-import { apiToken, serviceId } from "../config.ts";
 import { FastlyService } from "./service.ts";
 
 const dictionaryItemStruct = object({
@@ -72,7 +71,7 @@ export class FastlyClient {
 			...options,
 			headers: {
 				...options.headers,
-				"Fastly-Key": apiToken,
+				"Fastly-Key": this.apiToken,
 			},
 		});
 		if (!response.ok) {
@@ -150,8 +149,10 @@ export class FastlyClient {
 
 	async getDictionaryItems({
 		dictionaryId,
+		serviceId,
 	}: {
 		dictionaryId: string;
+		serviceId: string;
 	}): Promise<DictionaryItem[]> {
 		const dictionary = await this.fetch(
 			`${serviceId}/dictionary/${dictionaryId}/items?per_page=1000`,
@@ -164,9 +165,11 @@ export class FastlyClient {
 
 	async updateDictionaryItems({
 		dictionaryId,
+		serviceId,
 		items,
 	}: {
 		dictionaryId: string;
+		serviceId: string;
 		items: UpdateDictionaryItemRequest[];
 	}): Promise<{ status: string }> {
 		const dictionary = await this.fetch(

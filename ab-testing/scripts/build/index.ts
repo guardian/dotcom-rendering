@@ -2,8 +2,13 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
 import { parseArgs } from "node:util";
 import { activeABtests } from "../../abTests.ts";
+import {
+	mvtDictionaryId,
+	mvtDictionaryName,
+	serviceId,
+	serviceName,
+} from "../../lib/config.ts";
 import { FastlyClient } from "../../lib/fastly/client.ts";
-import { getMVTGroupsFromDictionary } from "../../lib/fastly/dictionary.ts";
 import { parseMVTValue, stringifyMVTValue } from "../../lib/fastly-subfield.ts";
 import { buildABTestGroupKeyValues } from "./build-ab-tests-dict.ts";
 import { calculateAllSpaceUpdates } from "./calculate-mvt-updates.ts";
@@ -31,10 +36,17 @@ if (!flags["mvts"] || !flags["ab-tests"]) {
 
 const fastly = new FastlyClient(process.env.FASTLY_API_TOKEN ?? "");
 
-const mvtGroupsDictionary = await getMVTGroupsFromDictionary(fastly);
+const service = await fastly.getService(serviceId, serviceName);
+
+const mvtGroupsDictionary = await service.getDictionary(
+	mvtDictionaryId,
+	mvtDictionaryName,
+);
+
+const mvtGroupsDictionaryItems = await mvtGroupsDictionary.getItems();
 
 const mvtGroups = new Map(
-	mvtGroupsDictionary.map(({ item_key, item_value }) => {
+	mvtGroupsDictionaryItems.map(({ item_key, item_value }) => {
 		const testGroups = parseMVTValue(item_value);
 		return [item_key, testGroups];
 	}),

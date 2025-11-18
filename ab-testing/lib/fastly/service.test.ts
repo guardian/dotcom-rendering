@@ -1,20 +1,9 @@
 import { deepEqual, equal } from "node:assert";
 import type { Mock } from "node:test";
 import test, { describe, mock } from "node:test";
+import { FastlyClient } from "./client.ts";
 import { FastlyDictionary } from "./dictionary.ts";
-
-const mockConfig = {
-	serviceName: "test-service",
-	serviceId: "test-service-id",
-	mvtDictionaryId: "test-mvt-dictionary-id",
-	mvtDictionaryName: "test-mvt-dictionary",
-	abTestsDictionaryId: "test-ab-tests-dictionary-id",
-	abTestsDictionaryName: "test-ab-tests-dictionary",
-};
-
-// Mock environment variables
-process.env.FASTLY_AB_TESTING_CONFIG = JSON.stringify(mockConfig);
-process.env.FASTLY_API_TOKEN = "test-api-token";
+import { FastlyService } from "./service.ts";
 
 type MockedFetch = Mock<typeof fetch>;
 
@@ -28,12 +17,8 @@ function mockFetch(response: unknown, status = 200, statusText = "OK") {
 	globalThis.fetch = mock.fn(async () => Promise.resolve(mockResponse));
 }
 
-// Import after mocking
-const { FastlyClient } = await import("./client.ts");
-const { FastlyService } = await import("./service.ts");
-
 describe("FastlyService", async () => {
-	await test("getDictionary - returns FastlyDictionary instance", async () => {
+	await test.only("getDictionary - returns FastlyDictionary instance", async () => {
 		const mockResponse = {
 			id: "dict-123",
 			name: "test-dictionary",

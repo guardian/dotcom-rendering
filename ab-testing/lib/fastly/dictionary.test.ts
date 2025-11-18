@@ -1,19 +1,9 @@
-import { deepEqual, equal, match } from "node:assert";
+import { deepEqual, equal } from "node:assert";
 import type { Mock } from "node:test";
 import test, { describe, mock } from "node:test";
-
-const mockConfig = {
-	serviceName: "test-service",
-	serviceId: "test-service-id",
-	mvtDictionaryId: "test-mvt-dictionary-id",
-	mvtDictionaryName: "test-mvt-dictionary",
-	abTestsDictionaryId: "test-ab-tests-dictionary-id",
-	abTestsDictionaryName: "test-ab-tests-dictionary",
-};
-
-// Mock environment variables
-process.env.FASTLY_AB_TESTING_CONFIG = JSON.stringify(mockConfig);
-process.env.FASTLY_API_TOKEN = "test-api-token";
+import { FastlyClient } from "./client.ts";
+import { FastlyDictionary } from "./dictionary.ts";
+import { FastlyService } from "./service.ts";
 
 type MockedFetch = Mock<typeof fetch>;
 
@@ -26,18 +16,6 @@ function mockFetch(response: unknown, status = 200, statusText = "OK") {
 
 	globalThis.fetch = mock.fn(async () => Promise.resolve(mockResponse));
 }
-
-// Import after mocking
-const { FastlyClient } = await import("./client.ts");
-const {
-	getMVTGroupsFromDictionary,
-	getABTestGroupsFromDictionary,
-	updateMVTGroups,
-	updateABTestGroups,
-} = await import("./dictionary.ts");
-
-const { FastlyService } = await import("./service.ts");
-const { FastlyDictionary } = await import("./dictionary.ts");
 
 describe("FastlyDictionary", async () => {
 	await test("getItems - calls service.getDictionaryItems", async () => {
@@ -90,94 +68,5 @@ describe("FastlyDictionary", async () => {
 		await dictionary.updateItems(items);
 
 		equal((globalThis.fetch as MockedFetch).mock.calls.length, 1);
-	});
-
-	test("getMVTGroupsFromDictionary - calls the right endpoint", async () => {
-		const mockResponse = [] as unknown;
-		mockFetch(mockResponse);
-
-		const client = new FastlyClient("test-api-token");
-		await getMVTGroupsFromDictionary(client);
-
-		equal((globalThis.fetch as MockedFetch).mock.calls.length, 1);
-		match(
-			(globalThis.fetch as MockedFetch).mock.calls[0]
-				?.arguments[0] as string,
-			new RegExp(`/dictionary/${mockConfig.mvtDictionaryId}/items`),
-		);
-	});
-
-	test("getABTestGroupsFromDictionary - calls the right endpoint", async () => {
-		const mockResponse = [] as unknown;
-		mockFetch(mockResponse);
-
-		const client = new FastlyClient("test-api-token");
-		await getABTestGroupsFromDictionary(client);
-
-		equal((globalThis.fetch as MockedFetch).mock.calls.length, 1);
-		match(
-			(globalThis.fetch as MockedFetch).mock.calls[0]
-				?.arguments[0] as string,
-			new RegExp(`/dictionary/${mockConfig.abTestsDictionaryId}/items`),
-		);
-	});
-
-	test("updateMVTGroups - makes PATCH request with correct data", async () => {
-		mockFetch({ status: "ok" });
-
-		const client = new FastlyClient("test-api-token");
-		const items = [
-			{ item_key: "key1", item_value: "value1", op: "create" as const },
-		];
-		await updateMVTGroups(client, items);
-
-		equal((globalThis.fetch as MockedFetch).mock.calls.length, 1);
-		equal(
-			(globalThis.fetch as MockedFetch).mock.calls[0]?.arguments[1]
-				?.method,
-			"PATCH",
-		);
-
-		const requestBody = JSON.parse(
-			(globalThis.fetch as MockedFetch).mock.calls[0]?.arguments[1]
-				?.body as string,
-		) as {
-			items: Array<{
-				item_key: string;
-				item_value: string;
-				op: "create" | "update" | "delete";
-			}>;
-		};
-
-		deepEqual(requestBody.items, items);
-	});
-
-	test("updateABTestGroups - makes PATCH request with correct data", async () => {
-		mockFetch({ status: "ok" });
-
-		const client = new FastlyClient("test-api-token");
-		const items = [
-			{ item_key: "key1", item_value: "value1", op: "update" as const },
-		];
-		await updateABTestGroups(client, items);
-
-		equal((globalThis.fetch as MockedFetch).mock.calls.length, 1);
-		equal(
-			(globalThis.fetch as MockedFetch).mock.calls[0]?.arguments[1]
-				?.method,
-			"PATCH",
-		);
-
-		const requestBody = JSON.parse(
-			(globalThis.fetch as MockedFetch).mock.calls[0]?.arguments[1]
-				?.body as string,
-		) as {
-			items: Array<{
-				item_key: string;
-				item_value: string;
-				op: "create" | "update" | "delete";
-			}>;
-		};
-		deepEqual(requestBody.items, items);
 	});
 });

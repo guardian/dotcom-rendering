@@ -1,19 +1,7 @@
 import { deepEqual, equal, match, rejects } from "node:assert";
 import type { Mock } from "node:test";
 import test, { describe, mock } from "node:test";
-
-const mockConfig = {
-	serviceName: "test-service",
-	serviceId: "test-service-id",
-	mvtDictionaryId: "test-mvt-dictionary-id",
-	mvtDictionaryName: "test-mvt-dictionary",
-	abTestsDictionaryId: "test-ab-tests-dictionary-id",
-	abTestsDictionaryName: "test-ab-tests-dictionary",
-};
-
-// Mock environment variables
-process.env.FASTLY_AB_TESTING_CONFIG = JSON.stringify(mockConfig);
-process.env.FASTLY_API_TOKEN = "test-api-token";
+import { FastlyClient } from "./client.ts";
 
 type MockedFetch = Mock<typeof fetch>;
 
@@ -26,9 +14,6 @@ function mockFetch(response: unknown, status = 200, statusText = "OK") {
 
 	globalThis.fetch = mock.fn(async () => Promise.resolve(mockResponse));
 }
-
-// Import after mocking
-const { FastlyClient } = await import("./client.ts");
 
 describe("FastlyClient", async () => {
 	await test("fetch - successfully fetches data", async () => {
@@ -160,6 +145,7 @@ describe("FastlyClient", async () => {
 		const client = new FastlyClient("test-api-token");
 		const result = await client.getDictionaryItems({
 			dictionaryId: "test-dict",
+			serviceId: "service-123",
 		});
 
 		deepEqual(result, mockResponse);
@@ -181,6 +167,7 @@ describe("FastlyClient", async () => {
 			async () => {
 				await client.getDictionaryItems({
 					dictionaryId: "test-dict",
+					serviceId: "service-123",
 				});
 			},
 			Error,
@@ -197,6 +184,7 @@ describe("FastlyClient", async () => {
 		];
 		await client.updateDictionaryItems({
 			dictionaryId: "dict-123",
+			serviceId: "service-123",
 			items,
 		});
 
@@ -233,6 +221,7 @@ describe("FastlyClient", async () => {
 			async () => {
 				await client.updateDictionaryItems({
 					dictionaryId: "dict-123",
+					serviceId: "service-123",
 					items,
 				});
 			},
