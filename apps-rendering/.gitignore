@@ -25,7 +25,3 @@ dist
 
 # Istanbul/Jest code coverage
 coverage
-
-# CDK asset staging directory
-.cdk.staging
-cdk.out
