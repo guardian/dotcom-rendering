@@ -55,7 +55,7 @@ const generateWaveformGradients = (barCount: number): string => {
 	let lastBarHeight = Math.floor(Math.random() * 60) + 25; // Initial random height
 
 	for (let i = 0; i < barCount; i++) {
-		const variation = lastBarHeight * 0.5; // 50% of last bar height
+		const variation = lastBarHeight * 0.5; // keep within 50% of last bar height
 		const minHeight = Math.max(50, lastBarHeight - variation);
 		const maxHeight = Math.min(70, lastBarHeight + variation);
 		const barHeight =
@@ -63,7 +63,7 @@ const generateWaveformGradients = (barCount: number): string => {
 		lastBarHeight = barHeight;
 		const position = i * (barWidth + spacing);
 		gradients.push(
-			`linear-gradient(to top, ${neutral[86]} 0 ${barHeight}%, transparent ${barHeight}%) ${position}px 100% / ${barWidth}px 100%`,
+			`linear-gradient(to top, ${neutral[86]} 0 ${barHeight}%, transparent ${barHeight}%) ${position}px 50% / ${barWidth}px 100%`,
 		);
 	}
 
