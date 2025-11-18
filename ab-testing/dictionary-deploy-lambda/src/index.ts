@@ -7,9 +7,9 @@ import { configStruct } from "../../lib/config.ts";
 import { FastlyClient } from "../../lib/fastly/client.ts";
 import { fetchAndDeployArtifacts } from "./deploy.ts";
 
-const ssmClient = new SSMClient({ region: "eu-west-1" });
-
 const getSecureString = async (name: string) => {
+	const ssmClient = new SSMClient({ region: "eu-west-1" });
+
 	const response = await ssmClient.send(
 		new GetParameterCommand({
 			Name: name,
@@ -35,27 +35,33 @@ export const handler: Handler = async (
 	event: CloudFormationCustomResourceEvent,
 	context: Context,
 ): Promise<void> => {
-	const apiToken = await getSecureString(
-		`/ab-testing-deploy/${process.env.STAGE}/fastly-api-token`,
-	);
+	try {
+		const apiToken = await getSecureString(
+			`/ab-testing-deploy/${process.env.STAGE}/fastly-api-token`,
+		);
 
-	if (!apiToken) {
-		throw new Error("Fastly API token not found in SSM Parameter Store");
-	}
+		if (!apiToken) {
+			throw new Error(
+				"Fastly API token not found in SSM Parameter Store",
+			);
+		}
 
-	const { serviceId, serviceName, abTestsDictionaryName, mvtDictionaryName } =
-		await getFastlyConfig();
+		const {
+			serviceId,
+			serviceName,
+			abTestsDictionaryName,
+			mvtDictionaryName,
+		} = await getFastlyConfig();
 
-	const fastly = new FastlyClient(apiToken);
-	const service = await fastly.getService(serviceId, serviceName);
+		const fastly = new FastlyClient(apiToken);
+		const service = await fastly.getService(serviceId, serviceName);
 
-	const abTestsDictionary = await service.getDictionary(
-		abTestsDictionaryName,
-	);
-	const mvtDictionary = await service.getDictionary(mvtDictionaryName);
+		const abTestsDictionary = await service.getDictionary(
+			abTestsDictionaryName,
+		);
+		const mvtDictionary = await service.getDictionary(mvtDictionaryName);
 
-	if (event.RequestType === "Create" || event.RequestType === "Update") {
-		try {
+		if (event.RequestType === "Create" || event.RequestType === "Update") {
 			await fetchAndDeployArtifacts([
 				{
 					artifact: "ab-test-groups.json",
@@ -68,9 +74,9 @@ export const handler: Handler = async (
 			]);
 
 			send(event, context, "SUCCESS");
-		} catch (error) {
-			console.error("Error deploying dictionaries:", error);
-			send(event, context, "FAILED");
 		}
+	} catch (error) {
+		console.error("Error deploying dictionaries:", error);
+		send(event, context, "FAILED", { error: (error as Error).message });
 	}
 };
