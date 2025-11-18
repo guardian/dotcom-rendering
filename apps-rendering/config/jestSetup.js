@@ -1,5 +1,3 @@
-jest.mock('@guardian/cdk/lib/constants/tracking-tag');
-
 /**
  * Some tests use a JSDOM Jest environment. It appears that TextEncoder is not
  * available globally, and so we need to enable it here.
