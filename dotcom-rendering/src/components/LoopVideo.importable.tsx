@@ -28,6 +28,11 @@ import type {
 import { LoopVideoPlayer } from './LoopVideoPlayer';
 import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
+/**
+ * If the user's connection is slow, we'd rather them look at the poster image than a blank space.
+ */
+const MILLISECONDS_BEFORE_SHOWING_POSTER_IMAGE = 1200;
+
 const videoContainerStyles = css`
 	z-index: ${getZIndex('loop-video-container')};
 	position: relative;
@@ -159,6 +164,8 @@ export const LoopVideo = ({
 		null,
 	);
 	const [hasPageBecomeActive, setHasPageBecomeActive] = useState(false);
+	const [videoShouldHaveLoadedByNow, setVideoShouldHaveLoadedByNow] =
+		useState(false);
 
 	/**
 	 * Keep a track of whether the video has been in view. We only
@@ -264,6 +271,19 @@ export const LoopVideo = ({
 		return !userPrefersReducedMotion && autoplayPreference !== false;
 	};
 
+	useEffect(() => {
+		if (videoShouldHaveLoadedByNow) {
+			if (playerState === 'NOT_STARTED') {
+				console.log('Player state is NOT_STARTED');
+				setShowPosterImage(true);
+			} else {
+				console.log('player state is', playerState);
+			}
+		}
+
+		setVideoShouldHaveLoadedByNow(false);
+	}, [videoShouldHaveLoadedByNow, playerState]);
+
 	/**
 	 * Setup.
 	 *
@@ -337,6 +357,10 @@ export const LoopVideo = ({
 			}
 		});
 
+		let timer = setTimeout(() => {
+			setVideoShouldHaveLoadedByNow(true);
+		}, MILLISECONDS_BEFORE_SHOWING_POSTER_IMAGE);
+
 		return () => {
 			document.removeEventListener(
 				customLoopPlayAudioEventName,
@@ -352,6 +376,7 @@ export const LoopVideo = ({
 			document.removeEventListener('visibilitychange', () => {
 				handlePageBecomesVisible();
 			});
+			clearTimeout(timer);
 		};
 	}, [uniqueId]);
 
