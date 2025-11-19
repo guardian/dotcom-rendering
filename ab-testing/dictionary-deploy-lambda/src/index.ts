@@ -1,10 +1,10 @@
 import { GetParameterCommand, SSMClient } from "@aws-sdk/client-ssm";
 import type { Handler } from "aws-cdk-lib/aws-lambda";
 import type { CloudFormationCustomResourceEvent, Context } from "aws-lambda";
-import { send } from "cfn-response";
 import { assert } from "superstruct";
 import { configStruct } from "../../lib/config.ts";
 import { FastlyClient } from "../../lib/fastly/client.ts";
+import { send } from "./custom-resource-response.ts";
 import { fetchAndDeployArtifacts } from "./deploy.ts";
 
 const getSecureString = async (name: string) => {
@@ -73,13 +73,15 @@ export const handler: Handler = async (
 				},
 			]);
 
-			send(event, context, "SUCCESS");
+			await send(event, context, "SUCCESS");
 		} else {
 			// For Delete requests, simply respond with SUCCESS
-			send(event, context, "SUCCESS");
+			await send(event, context, "SUCCESS");
 		}
 	} catch (error) {
 		console.error("Error deploying dictionaries:", error);
-		send(event, context, "FAILED", { error: (error as Error).message });
+		await send(event, context, "FAILED", {
+			error: (error as Error).message,
+		});
 	}
 };

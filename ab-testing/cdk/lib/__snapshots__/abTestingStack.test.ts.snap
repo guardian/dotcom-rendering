@@ -239,7 +239,7 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
                     {
                       "Ref": "AWS::AccountId"
                     },
-                    ":parameter/ab-testing-deploy/CODE/fastly-ab-testing-config"
+                    ":parameter/ab-testing-deploy/CODE/fastly-config"
                   ]
                 ]
               }
@@ -324,7 +324,8 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
             "DictionaryDeployLambdaD0FF981C",
             "Arn"
           ]
-        }
+        },
+        "ServiceTimeout": "300"
       },
       "UpdateReplacePolicy": "Delete",
       "DeletionPolicy": "Delete"
@@ -574,7 +575,7 @@ exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
                     {
                       "Ref": "AWS::AccountId"
                     },
-                    ":parameter/ab-testing-deploy/PROD/fastly-ab-testing-config"
+                    ":parameter/ab-testing-deploy/PROD/fastly-config"
                   ]
                 ]
               }
@@ -659,7 +660,8 @@ exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
             "DictionaryDeployLambdaD0FF981C",
             "Arn"
           ]
-        }
+        },
+        "ServiceTimeout": "300"
       },
       "UpdateReplacePolicy": "Delete",
       "DeletionPolicy": "Delete"

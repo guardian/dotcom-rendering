@@ -3,7 +3,7 @@ import { GuStack } from "@guardian/cdk/lib/constructs/core/stack.js";
 import { GuLambdaFunction } from "@guardian/cdk/lib/constructs/lambda/index.js";
 import { GuS3Bucket } from "@guardian/cdk/lib/constructs/s3/index.js";
 import type { App } from "aws-cdk-lib";
-import { CustomResource } from "aws-cdk-lib";
+import { CustomResource, Duration } from "aws-cdk-lib";
 import { Runtime } from "aws-cdk-lib/aws-lambda";
 import { StringParameter } from "aws-cdk-lib/aws-ssm";
 
@@ -40,7 +40,7 @@ export class AbTestingStack extends GuStack {
 				this,
 				"FastlyAbTestingConfigParameter",
 				{
-					parameterName: `/${app}/${this.stage}/fastly-ab-testing-config`,
+					parameterName: `/${app}/${this.stage}/fastly-config`,
 				},
 			);
 
@@ -64,6 +64,7 @@ export class AbTestingStack extends GuStack {
 		// Trigger the Lambda to run upon deployment
 		new CustomResource(this, "InvokeDictionaryDeployLambda", {
 			serviceToken: lambda.functionArn,
+			serviceTimeout: Duration.minutes(5),
 		});
 	}
 }
