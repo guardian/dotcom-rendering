@@ -422,6 +422,9 @@ interface LoopVideoInArticleElement {
 	}[];
 	title?: string;
 	duration?: number;
+	videoPlayerFormat?: string;
+	subtitleSize?: string;
+	subtitleSource?: string;
 }
 
 export interface MapBlockElement extends ThirdPartyEmbeddedContent {
@@ -447,6 +450,9 @@ interface MediaAtomBlockElement {
 	}[];
 	title?: string;
 	duration?: number;
+	videoPlayerFormat?: string;
+	subtitleSize?: string;
+	subtitleSource?: string;
 }
 
 export interface MultiImageBlockElement {
@@ -953,8 +959,8 @@ export interface Image {
 	url: string;
 }
 
-interface VideoAssets {
-	url: string;
+export interface VideoAssets {
+	url?: string;
 	mimeType?: string;
 	fields?: {
 		source?: string;

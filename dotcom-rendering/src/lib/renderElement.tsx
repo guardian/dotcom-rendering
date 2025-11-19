@@ -29,6 +29,7 @@ import { Island } from '../components/Island';
 import { ItemLinkBlockElement } from '../components/ItemLinkBlockElement';
 import { KeyTakeaways } from '../components/KeyTakeaways';
 import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
+import { LoopVideoInArticle } from '../components/LoopVideoInArticle.importable';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
 import { MiniProfiles } from '../components/MiniProfiles';
@@ -73,8 +74,6 @@ import type { FEElement, RoleType, StarRating } from '../types/content';
 import { ArticleDesign, type ArticleFormat } from './articleFormat';
 import type { EditionId } from './edition';
 import { getLargestImageSize } from './image';
-
-import { LoopVideoInArticle } from '../components/LoopVideoInArticle.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -508,27 +507,26 @@ export const renderElement = ({
 					- But they will still be Media Atoms
 			*/
 
-			if (element.videoPlayerFormat === 'Loop') {
-				const updatedSources = element.assets.map((a) => ({
-					src: a.src || a.url,
-					mimeType: a.mimeType,
-				}));
+			if (element?.videoPlayerFormat === 'Loop') {
+				const posterImageExists = !!element.posterImage?.[0]?.url;
 				return (
 					<>
-						{element.posterImage?.[0]?.url && (
+						{posterImageExists && (
 							<Island
 								priority="critical"
 								defer={{ until: 'visible' }}
 							>
 								<LoopVideoInArticle
-									sources={updatedSources}
+									assets={element.assets}
 									atomId={element.id}
 									uniqueId={`${Math.random()}`}
 									height={400}
 									width={500}
-									posterImage={element.posterImage?.[0]?.url}
+									posterImage={
+										element.posterImage?.[0]?.url ?? ''
+									}
 									fallbackImage={
-										element.posterImage?.[0]?.url
+										element.posterImage?.[0]?.url ?? ''
 									}
 									fallbackImageSize="small"
 									fallbackImageLoading="lazy"
@@ -538,6 +536,8 @@ export const renderElement = ({
 									format={format}
 									caption={element.title}
 									isMainMedia={isMainMedia}
+									subtitleSize={element.subtitleSize}
+									subtitleSource={element.subtitleSource}
 								/>
 							</Island>
 						)}

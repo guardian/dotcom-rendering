@@ -1,15 +1,16 @@
 import type { ArticleFormat } from '../lib/articleFormat';
+import type { VideoAssets } from '../types/content';
 import { Caption } from './Caption';
 import { MaintainAspectRatio } from './MaintainAspectRatio';
 
-type AssetType = {
-	url: string;
-	mimeType?: string;
-};
+// type AssetType = {
+// 	url: string;
+// 	mimeType?: string;
+// };
 
 interface Props {
 	format: ArticleFormat;
-	assets: AssetType[];
+	assets: VideoAssets[];
 	isMainMedia: boolean;
 	poster?: string;
 	caption?: string;
