@@ -22,8 +22,6 @@ deployments:
           value: max-age=3600 # one hour in seconds
           # assume all other assets are hashed and never change,
           # even though this is not the case–e.g. icons
-        - pattern: rendered-items-assets\.html$
-          value: public, max-age=3600
         - pattern: .*
           value: public, max-age=315360000, immutable # one year in seconds
       prefixStack: false

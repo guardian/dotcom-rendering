@@ -8,7 +8,7 @@ type FontFamily =
 
 type FontStyle = 'normal' | 'italic';
 
-interface FontDisplay {
+export interface FontDisplay {
 	family: FontFamily;
 	woff2: string;
 	woff: string;

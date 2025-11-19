@@ -1,4 +1,3 @@
-import path from 'node:path';
 import compression from 'compression';
 import type { ErrorRequestHandler, Request, Response } from 'express';
 import express from 'express';
@@ -15,6 +14,7 @@ import {
 	handleBlocks,
 	handleInteractive,
 } from './handler.article.web';
+import { handleAppsAssets } from './handler.assets.apps';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import { handleFront, handleTagPage } from './handler.front.web';
 import {
@@ -86,11 +86,7 @@ export const prodServer = (): void => {
 	app.post('/AppsBlocks', logRenderTime, handleAppsBlocks);
 	app.post('/EditionsCrossword', logRenderTime, handleEditionsCrossword);
 
-	app.get('/assets/rendered-items-assets.html', (req, res) => {
-		res.sendFile(
-			path.resolve(__dirname, './dist/rendered-items-assets.html'),
-		);
-	});
+	app.get('/assets/rendered-items-assets', handleAppsAssets);
 
 	// All params to error handlers must be declared for express to identify them as error middleware
 	// https://expressjs.com/en/api.html#:~:text=Error%2Dhandling%20middleware%20always,see%3A%20Error%20handling

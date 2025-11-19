@@ -1,13 +1,5 @@
-const { createHash } = require('node:crypto');
-const path = require('node:path');
-const CleanCSS = require('clean-css');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
-const {
-	fontList,
-	rawFontsCssWithClassNames,
-} = require('../src/lib/fonts-css.ts');
 const swcConfig = require('./.swcrc.json');
 const { getBrowserTargets } = require('./browser-targets');
 const { svgr } = require('./svg.cjs');
@@ -69,17 +61,6 @@ const getLoaders = (build) => {
 	}
 };
 
-const fontAssetsCss = new CleanCSS()
-	.minify(rawFontsCssWithClassNames)
-	.styles.trim();
-
-const assetHash = (asset) =>
-	createHash('sha256').update(asset).digest('base64');
-
-const fontDivsHtml = fontList
-	.map((font) => `<div class="${font.uniqueName}">.</div>`)
-	.join('\n');
-
 /**
  * @param {{ build: Build }} options
  * @returns {import('webpack').Configuration}
@@ -132,32 +113,6 @@ module.exports = ({ build }) => ({
 		new WebpackManifestPlugin({
 			fileName: `manifest.${build}.json`,
 		}),
-		...(build === 'client.apps'
-			? [
-					new HtmlWebpackPlugin({
-						excludeChunks: ['debug'],
-						meta: {
-							'Content-Security-Policy': {
-								'http-equiv': 'Content-Security-Policy',
-								content: `style-src 'sha256-${assetHash(
-									fontAssetsCss,
-								)}';`,
-							},
-						},
-						filename: 'rendered-items-assets.html',
-						minify: true,
-						template: path.resolve(
-							__dirname,
-							'rendered-items-assets-template.html',
-						),
-						inject: false,
-						templateParameters: {
-							styles: fontAssetsCss,
-							bodyContent: fontDivsHtml,
-						},
-					}),
-			  ]
-			: []),
 		...(build === 'client.apps' || build === 'client.editionsCrossword'
 			? [
 					new webpack.optimize.LimitChunkCountPlugin({
