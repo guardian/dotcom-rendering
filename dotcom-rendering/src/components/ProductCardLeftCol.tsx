@@ -97,7 +97,7 @@ export const ProductCardLeftCol = ({
 	lowestPrice,
 }: LeftColProductCardProps) => {
 	return (
-		<div css={card}>
+		<div data-component="product-card-left-col" css={card}>
 			<ProductCardImage
 				format={format}
 				image={image}
