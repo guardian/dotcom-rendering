@@ -3,19 +3,12 @@ import { GuStack } from "@guardian/cdk/lib/constructs/core/stack.js";
 import { GuLambdaFunction } from "@guardian/cdk/lib/constructs/lambda/index.js";
 import { GuS3Bucket } from "@guardian/cdk/lib/constructs/s3/index.js";
 import type { App } from "aws-cdk-lib";
-import { CustomResource, Duration } from "aws-cdk-lib";
 import { Runtime } from "aws-cdk-lib/aws-lambda";
 import { StringParameter } from "aws-cdk-lib/aws-ssm";
 
-type Props = GuStackProps & {
-	app: string;
-};
-
-export class AbTestingStack extends GuStack {
-	constructor(scope: App, id: string, props: Props) {
+export class DeploymentLambda extends GuStack {
+	constructor(scope: App, id: string, props: GuStackProps) {
 		super(scope, id, props);
-
-		const { app } = props;
 
 		const s3Bucket = GuS3Bucket.fromBucketName(
 			this,
@@ -31,7 +24,7 @@ export class AbTestingStack extends GuStack {
 				this,
 				"FastlyApiKeyParameter",
 				{
-					parameterName: `/${app}/${this.stage}/fastly-api-token`,
+					parameterName: `/ab-testing/${this.stage}/fastly-api-token`,
 				},
 			);
 
@@ -40,15 +33,15 @@ export class AbTestingStack extends GuStack {
 				this,
 				"FastlyAbTestingConfigParameter",
 				{
-					parameterName: `/${app}/${this.stage}/fastly-config`,
+					parameterName: `/ab-testing/${this.stage}/fastly-config`,
 				},
 			);
 
-		const lambda = new GuLambdaFunction(this, "DictionaryDeployLambda", {
-			functionName: `${app}-${this.stage}`,
+		const lambda = new GuLambdaFunction(this, "AbTestingDeploymentLambda", {
+			functionName: `ab-testing-deployment-${this.stage}`,
 			fileName: "lambda.zip",
 			handler: "index.handler",
-			app,
+			app: "ab-testing-deployment-lambda",
 			runtime: Runtime.NODEJS_22_X,
 			memorySize: 256,
 			environment: {
@@ -60,12 +53,5 @@ export class AbTestingStack extends GuStack {
 		s3Bucket.grantRead(lambda);
 		fastlyApiKeyParameter.grantRead(lambda);
 		fastlyConfigParameter.grantRead(lambda);
-
-		// Trigger the Lambda to run upon deployment
-		new CustomResource(this, "InvokeDictionaryDeployLambda", {
-			serviceToken: lambda.functionArn,
-			serviceTimeout: Duration.minutes(5),
-			resourceType: "Custom::FastlyEdgeDictionaryDeploy",
-		});
 	}
 }

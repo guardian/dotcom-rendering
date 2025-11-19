@@ -1,28 +1,24 @@
 import "source-map-support/register.js";
 import { RiffRaffYamlFile } from "@guardian/cdk/lib/riff-raff-yaml-file/index.js";
 import { App } from "aws-cdk-lib";
-import { AbTestingStack } from "../lib/abTestingStack.ts";
+import { AbTestingConfig } from "../lib/abTestingConfig.ts";
 
-const app = new App();
+const app = new App({ outdir: "cdk.out/ab-testing-config" });
 
-const appName = "ab-testing";
-
-new AbTestingStack(app, "AbTestingCode", {
+new AbTestingConfig(app, "AbTestingConfigCode", {
 	stack: "frontend",
 	stage: "CODE",
 	env: {
 		region: "eu-west-1",
 	},
-	app: appName,
 });
 
-new AbTestingStack(app, "AbTestingProd", {
+new AbTestingConfig(app, "AbTestingConfigProd", {
 	stack: "frontend",
 	stage: "PROD",
 	env: {
 		region: "eu-west-1",
 	},
-	app: appName,
 });
 
 const riffRaff = new RiffRaffYamlFile(app);
@@ -58,9 +54,15 @@ deployments.set("admin/ab-testing", {
 	},
 });
 
+console.log(deployments);
+
+const cfnDeployment = deployments.get(
+	`cfn-eu-west-1-frontend-ab-testing-config`,
+)!;
+
 // We need the test artifacts in place before deploying the lambda that uses them
-deployments
-	.get(`cfn-eu-west-1-frontend-ab-testing-stack`)
-	?.dependencies?.push("config/ab-testing");
+cfnDeployment.dependencies = cfnDeployment.dependencies
+	? [...cfnDeployment.dependencies, "config/ab-testing"]
+	: ["config/ab-testing"];
 
 riffRaff.synth();

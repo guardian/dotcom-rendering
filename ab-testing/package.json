@@ -16,8 +16,8 @@
 		"prettier:fix": "prettier . --write --cache",
 		"cdk:test": "node --test --test-reporter spec cdk/*/*.test.ts",
 		"cdk:test-update": "node --test --test-reporter spec --test-update-snapshots cdk/*/*.test.ts",
-		"cdk:synth": "cdk synth --path-metadata false --version-reporting false",
-		"cdk:diff": "cdk diff --path-metadata false --version-reporting false"
+		"synth:ab-testing-config": "cdk synth --path-metadata false --version-reporting false --app 'node cdk/bin/ab-testing-config.cdk.ts' --output ./cdk.out/ab-testing-config",
+		"synth:deployment-lambda": "cdk synth --path-metadata false --version-reporting false --app 'node cdk/bin/deployment-lambda.cdk.ts' --output ./cdk.out/deployment-lambda"
 	},
 	"dependencies": {
 		"superstruct": "2.0.2"

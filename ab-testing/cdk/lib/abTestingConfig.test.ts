@@ -3,7 +3,7 @@ import { snapshot } from "node:test";
 import { basename } from "path";
 import { GuRoot } from "@guardian/cdk/lib/constructs/root.js";
 import { Template } from "aws-cdk-lib/assertions";
-import { AbTestingStack } from "./abTestingStack.ts";
+import { AbTestingConfig } from "./abTestingConfig.ts";
 
 snapshot.setResolveSnapshotPath(
 	() =>
@@ -15,13 +15,12 @@ snapshot.setResolveSnapshotPath(
 void describe("The ID5 Baton Lambda stack", () => {
 	void it("matches the CODE snapshot", ({ assert }) => {
 		const app = new GuRoot();
-		const stack = new AbTestingStack(app, "AbTestingStack", {
+		const stack = new AbTestingConfig(app, "AbTestingConfig", {
 			stack: "frontend",
 			stage: "CODE",
 			env: {
 				region: "eu-west-1",
 			},
-			app: "ab-testing-deploy",
 		});
 		const template = Template.fromStack(stack);
 		assert.snapshot(template.toJSON());
@@ -29,13 +28,12 @@ void describe("The ID5 Baton Lambda stack", () => {
 
 	void it("matches the PROD snapshot", ({ assert }) => {
 		const app = new GuRoot();
-		const stack = new AbTestingStack(app, "AbTestingStack", {
+		const stack = new AbTestingConfig(app, "AbTestingConfig", {
 			stack: "frontend",
 			stage: "PROD",
 			env: {
 				region: "eu-west-1",
 			},
-			app: "ab-testing-deploy",
 		});
 		const template = Template.fromStack(stack);
 		assert.snapshot(template.toJSON());
