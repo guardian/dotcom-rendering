@@ -97,7 +97,7 @@ export const ScrollableSmall = ({
 							supportingContent={undefined} // unsupported
 							aspectRatio={aspectRatio}
 							kickerText={trail.kickerText}
-							showLivePlayable={trail.showLivePlayable}
+							showLivePlayable={false}
 							showTopBarDesktop={desktopBottomCards.includes(
 								index,
 							)}

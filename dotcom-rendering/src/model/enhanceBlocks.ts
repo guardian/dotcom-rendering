@@ -41,9 +41,10 @@ const enhanceNewsletterSignup =
 		format: ArticleFormat,
 		promotedNewsletter: Newsletter | undefined,
 		blockId: string,
+		isNested: boolean,
 	) =>
 	(elements: FEElement[]): FEElement[] =>
-		!isUndefined(promotedNewsletter)
+		!isUndefined(promotedNewsletter) && !isNested
 			? insertPromotedNewsletter(
 					elements,
 					blockId,
@@ -85,6 +86,7 @@ export const enhanceElements =
 				format,
 				options.promotedNewsletter,
 				blockId,
+				isNested,
 			),
 			enhanceAdPlaceholders(
 				format,

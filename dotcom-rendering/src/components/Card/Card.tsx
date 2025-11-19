@@ -35,6 +35,7 @@ import type {
 import type { MainMedia } from '../../types/mainMedia';
 import type { OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
+import { BrandingLabel } from '../BrandingLabel';
 import { CardCommentCount } from '../CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from '../CardHeadline';
 import type { Loading } from '../CardPicture';
@@ -47,7 +48,6 @@ import { Pill } from '../Pill';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
 import { Snap } from '../Snap';
 import { SnapCssSandbox } from '../SnapCssSandbox';
-import { SponsoredContentLabel } from '../SponsoredContentLabel';
 import { StarRating } from '../StarRating/StarRating';
 import type { Alignment } from '../SupportingContent';
 import { SupportingContent } from '../SupportingContent';
@@ -279,13 +279,13 @@ const getMedia = ({
 	canPlayInline?: boolean;
 	isBetaContainer: boolean;
 }) => {
-	if (mainMedia?.type === 'LoopVideo' && canPlayInline) {
+	if (mainMedia?.type === 'SelfHostedVideo' && canPlayInline) {
 		return {
 			type: 'loop-video',
 			mainMedia,
 		} as const;
 	}
-	if (mainMedia?.type === 'Video' && canPlayInline) {
+	if (mainMedia?.type === 'YoutubeVideo' && canPlayInline) {
 		return {
 			type: 'youtube-video',
 			mainMedia,
@@ -429,14 +429,18 @@ export const Card = ({
 	 * It is treated as a media card in the design system.
 	 */
 	const isVideoArticle =
-		mainMedia?.type === 'Video' && format.design === ArticleDesign.Video;
+		mainMedia?.type === 'YoutubeVideo' &&
+		format.design === ArticleDesign.Video;
 
 	/**
 	 * Articles with a video as the main media but not classified as "video articles"
 	 * are styled differently and are not treated as media cards.
 	 */
 	const isVideoMainMedia =
-		mainMedia?.type === 'Video' && format.design !== ArticleDesign.Video;
+		mainMedia?.type === 'YoutubeVideo' &&
+		format.design !== ArticleDesign.Video;
+
+	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const decideAge = () => {
 		if (!webPublicationDate) return undefined;
@@ -774,13 +778,14 @@ export const Card = ({
 						}
 					`}
 				>
-					<SponsoredContentLabel
+					<BrandingLabel
 						branding={branding}
 						containerPalette={containerPalette}
 						orientation="horizontal"
 						alignment="end"
 						ophanComponentLink={dataAttributes?.ophanComponentLink}
 						ophanComponentName={dataAttributes?.ophanComponentName}
+						isLabs={isLabs}
 					/>
 				</div>
 				{/** Tablet sized screens have vertical orientation */}
@@ -794,13 +799,14 @@ export const Card = ({
 						}
 					`}
 				>
-					<SponsoredContentLabel
+					<BrandingLabel
 						branding={branding}
 						containerPalette={containerPalette}
 						orientation="vertical"
 						alignment="end"
 						ophanComponentLink={dataAttributes?.ophanComponentLink}
 						ophanComponentName={dataAttributes?.ophanComponentName}
+						isLabs={isLabs}
 					/>
 				</div>
 			</>
@@ -892,7 +898,7 @@ export const Card = ({
 						mediaType={media.type}
 						mediaPositionOnDesktop={mediaPositionOnDesktop}
 						mediaPositionOnMobile={mediaPositionOnMobile}
-						hideImageOverlay={media.type === 'slideshow'}
+						hideMediaOverlay={media.type === 'slideshow'}
 						padMedia={isMediaCardOrNewsletter && isBetaContainer}
 						isBetaContainer={isBetaContainer}
 						isSmallCard={isSmallCard}

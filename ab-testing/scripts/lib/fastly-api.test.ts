@@ -1,52 +1,30 @@
-import {
-	assertEquals,
-	assertRejects,
-	assertStringIncludes,
-} from 'jsr:@std/assert';
-import { stub, Stub } from 'jsr:@std/testing/mock';
+import { deepEqual, equal, match, rejects } from "node:assert";
+import type { Mock } from "node:test";
+import test, { mock } from "node:test";
 
 const mockConfig = {
-	serviceName: 'test-service',
-	serviceId: 'test-service-id',
-	mvtDictionaryId: 'test-mvt-dictionary-id',
-	mvtDictionaryName: 'test-mvt-dictionary',
-	abTestsDictionaryId: 'test-ab-tests-dictionary-id',
-	abTestsDictionaryName: 'test-ab-tests-dictionary',
+	serviceName: "test-service",
+	serviceId: "test-service-id",
+	mvtDictionaryId: "test-mvt-dictionary-id",
+	mvtDictionaryName: "test-mvt-dictionary",
+	abTestsDictionaryId: "test-ab-tests-dictionary-id",
+	abTestsDictionaryName: "test-ab-tests-dictionary",
 };
 
 // Mock environment variables
-stub(Deno.env, 'get', (key: string) => {
-	if (key === 'FASTLY_AB_TESTING_CONFIG') {
-		return JSON.stringify(mockConfig);
-	}
-	if (key === 'FASTLY_API_TOKEN') {
-		return 'test-api-token';
-	}
-});
+process.env.FASTLY_AB_TESTING_CONFIG = JSON.stringify(mockConfig);
+process.env.FASTLY_API_TOKEN = "test-api-token";
 
-let fetchStub: Stub<typeof globalThis>;
+type MockedFetch = Mock<typeof fetch>;
 
-function mockFetch(response: unknown, status = 200, statusText = 'OK') {
-	// Restore original fetch if it was stubbed
-	if (fetchStub) {
-		fetchStub.restore();
-	}
-
+function mockFetch(response: unknown, status = 200, statusText = "OK") {
 	const mockResponse = new Response(JSON.stringify(response), {
 		status,
 		statusText,
-		headers: { 'Content-Type': 'application/json' },
+		headers: { "Content-Type": "application/json" },
 	});
 
-	// Create a new stub
-	fetchStub = stub(
-		globalThis,
-		'fetch',
-		(_input: string | URL | Request, _init?: RequestInit) =>
-			Promise.resolve(mockResponse),
-	);
-
-	return fetchStub;
+	globalThis.fetch = mock.fn(async () => Promise.resolve(mockResponse));
 }
 
 // Import after mocking
@@ -58,273 +36,286 @@ const {
 	updateMVTGroups,
 	updateABTestGroups,
 	encodeObject,
-} = await import('./fastly-api.ts');
+} = await import("./fastly-api.ts");
 
-Deno.test('calculateUpdates - creates new items', () => {
+test("calculateUpdates - creates new items", () => {
 	const currentDictionary: Array<{ item_key: string; item_value: string }> =
 		[];
 	const newDictionary = [
-		{ item_key: 'test1', item_value: 'value1' },
-		{ item_key: 'test2', item_value: 'value2' },
+		{ item_key: "test1", item_value: "value1" },
+		{ item_key: "test2", item_value: "value2" },
 	];
 
 	const result = calculateUpdates(newDictionary, currentDictionary);
 
-	assertEquals(result.length, 2);
-	assertEquals(result[0], {
-		item_key: 'test1',
-		item_value: 'value1',
-		op: 'create',
+	equal(result.length, 2);
+	deepEqual(result[0], {
+		item_key: "test1",
+		item_value: "value1",
+		op: "create",
 	});
-	assertEquals(result[1], {
-		item_key: 'test2',
-		item_value: 'value2',
-		op: 'create',
+	deepEqual(result[1], {
+		item_key: "test2",
+		item_value: "value2",
+		op: "create",
 	});
 });
 
-Deno.test('calculateUpdates - updates existing items', () => {
+test("calculateUpdates - updates existing items", () => {
 	const currentDictionary = [
-		{ item_key: 'test1', item_value: 'old_value1' },
-		{ item_key: 'test2', item_value: 'value2' },
+		{ item_key: "test1", item_value: "old_value1" },
+		{ item_key: "test2", item_value: "value2" },
 	];
 	const newDictionary = [
-		{ item_key: 'test1', item_value: 'new_value1' },
-		{ item_key: 'test2', item_value: 'value2' },
+		{ item_key: "test1", item_value: "new_value1" },
+		{ item_key: "test2", item_value: "value2" },
 	];
 
 	const result = calculateUpdates(newDictionary, currentDictionary);
 
-	assertEquals(result.length, 1);
-	assertEquals(result[0], {
-		item_key: 'test1',
-		item_value: 'new_value1',
-		op: 'update',
+	equal(result.length, 1);
+	deepEqual(result[0], {
+		item_key: "test1",
+		item_value: "new_value1",
+		op: "update",
 	});
 });
 
-Deno.test('calculateUpdates - deletes removed items', () => {
+test("calculateUpdates - deletes removed items", () => {
 	const currentDictionary = [
-		{ item_key: 'test1', item_value: 'value1' },
-		{ item_key: 'test2', item_value: 'value2' },
+		{ item_key: "test1", item_value: "value1" },
+		{ item_key: "test2", item_value: "value2" },
 	];
-	const newDictionary = [{ item_key: 'test1', item_value: 'value1' }];
+	const newDictionary = [{ item_key: "test1", item_value: "value1" }];
 
 	const result = calculateUpdates(newDictionary, currentDictionary);
 
-	assertEquals(result.length, 1);
-	assertEquals(result[0], {
-		item_key: 'test2',
-		op: 'delete',
+	equal(result.length, 1);
+	deepEqual(result[0], {
+		item_key: "test2",
+		op: "delete",
 	});
 });
 
-Deno.test('calculateUpdates - no changes needed', () => {
+test("calculateUpdates - no changes needed", () => {
 	const currentDictionary = [
-		{ item_key: 'test1', item_value: 'value1' },
-		{ item_key: 'test2', item_value: 'value2' },
+		{ item_key: "test1", item_value: "value1" },
+		{ item_key: "test2", item_value: "value2" },
 	];
 	const newDictionary = [
-		{ item_key: 'test1', item_value: 'value1' },
-		{ item_key: 'test2', item_value: 'value2' },
+		{ item_key: "test1", item_value: "value1" },
+		{ item_key: "test2", item_value: "value2" },
 	];
 
 	const result = calculateUpdates(newDictionary, currentDictionary);
 
-	assertEquals(result.length, 0);
+	equal(result.length, 0);
 });
 
-Deno.test('calculateUpdates - combination of operations', () => {
+test("calculateUpdates - combination of operations", () => {
 	const currentDictionary = [
-		{ item_key: 'keep', item_value: 'same_value' },
-		{ item_key: 'update', item_value: 'old_value' },
-		{ item_key: 'delete', item_value: 'will_be_deleted' },
+		{ item_key: "keep", item_value: "same_value" },
+		{ item_key: "update", item_value: "old_value" },
+		{ item_key: "delete", item_value: "will_be_deleted" },
 	];
 	const newDictionary = [
-		{ item_key: 'keep', item_value: 'same_value' },
-		{ item_key: 'update', item_value: 'new_value' },
-		{ item_key: 'create', item_value: 'new_item' },
+		{ item_key: "keep", item_value: "same_value" },
+		{ item_key: "update", item_value: "new_value" },
+		{ item_key: "create", item_value: "new_item" },
 	];
 
 	const result = calculateUpdates(newDictionary, currentDictionary);
 
-	assertEquals(result.length, 3);
+	equal(result.length, 3);
 
-	const deleteOp = result.find((op) => op.op === 'delete');
-	assertEquals(deleteOp, {
-		item_key: 'delete',
-		op: 'delete',
+	const deleteOp = result.find((op) => op.op === "delete");
+	deepEqual(deleteOp, {
+		item_key: "delete",
+		op: "delete",
 	});
 
-	const updateOp = result.find((op) => op.op === 'update');
-	assertEquals(updateOp, {
-		item_key: 'update',
-		item_value: 'new_value',
-		op: 'update',
+	const updateOp = result.find((op) => op.op === "update");
+	deepEqual(updateOp, {
+		item_key: "update",
+		item_value: "new_value",
+		op: "update",
 	});
 
-	const createOp = result.find((op) => op.op === 'create');
-	assertEquals(createOp, {
-		item_key: 'create',
-		item_value: 'new_item',
-		op: 'create',
+	const createOp = result.find((op) => op.op === "create");
+	deepEqual(createOp, {
+		item_key: "create",
+		item_value: "new_item",
+		op: "create",
 	});
 });
 
-Deno.test(
-	'getDictionaryItems - fetches and returns dictionary items',
-	async () => {
-		const mockResponse = [
-			{
-				service_id: 'test-service',
-				item_key: 'key1',
-				item_value: 'value1',
-				dictionary_id: 'test-dict',
-				created_at: '2023-01-01',
-				updated_at: '2023-01-01',
-				deleted_at: null,
-			},
-		];
+test("getDictionaryItems - fetches and returns dictionary items", async () => {
+	const mockResponse = [
+		{
+			service_id: "test-service",
+			item_key: "key1",
+			item_value: "value1",
+			dictionary_id: "test-dict",
+			created_at: "2023-01-01",
+			updated_at: "2023-01-01",
+			deleted_at: null,
+		},
+	];
 
-		mockFetch(mockResponse);
+	mockFetch(mockResponse);
 
-		const result = await getDictionaryItems({
-			dictionaryId: 'test-dict',
-		});
+	const result = await getDictionaryItems({
+		dictionaryId: "test-dict",
+	});
 
-		assertEquals(result, mockResponse);
-		assertEquals(fetchStub.calls.length, 1);
-		assertEquals(
-			fetchStub.calls[0].args[0],
-			`https://api.fastly.com/service/${mockConfig.serviceId}/dictionary/test-dict/items?per_page=1000`,
-		);
-	},
-);
+	deepEqual(result, mockResponse);
+	equal((globalThis.fetch as MockedFetch).mock.calls.length, 1);
+	equal(
+		(globalThis.fetch as MockedFetch).mock.calls[0]?.arguments[0],
+		`https://api.fastly.com/service/${mockConfig.serviceId}/dictionary/test-dict/items?per_page=1000`,
+	);
+});
 
-Deno.test('getDictionaryItems - throws error on invalid response', async () => {
+test("getDictionaryItems - throws error on invalid response", async () => {
 	// Mock invalid response format
-	mockFetch('not an array');
+	mockFetch("not an array");
 
-	await assertRejects(
+	await rejects(
 		async () => {
 			await getDictionaryItems({
-				dictionaryId: 'test-dict',
+				dictionaryId: "test-dict",
 			});
 		},
 		Error,
-		'Expected an array',
+		"Expected an array",
 	);
 });
 
-Deno.test('getDictionaryItems - throws error on fetch failure', async () => {
-	mockFetch({ error: 'Something went wrong' }, 500, 'Internal Server Error');
+test("getDictionaryItems - throws error on fetch failure", async () => {
+	mockFetch({ error: "Something went wrong" }, 500, "Internal Server Error");
 
-	await assertRejects(
+	await rejects(
 		async () => {
 			await getDictionaryItems({
-				dictionaryId: 'test-dict',
+				dictionaryId: "test-dict",
 			});
 		},
 		Error,
-		'Failed to fetch from Fastly: 500',
+		"Failed to fetch from Fastly: 500",
 	);
 });
 
-Deno.test('getMVTGroupsFromDictionary - calls the right endpoint', async () => {
+test("getMVTGroupsFromDictionary - calls the right endpoint", async () => {
 	const mockResponse = [] as unknown;
 	mockFetch(mockResponse);
 
 	await getMVTGroupsFromDictionary();
 
-	assertEquals(fetchStub.calls.length, 1);
-	assertStringIncludes(
-		fetchStub.calls[0].args[0],
-		`/dictionary/${mockConfig.mvtDictionaryId}/items`,
+	equal((globalThis.fetch as MockedFetch).mock.calls.length, 1);
+	match(
+		(globalThis.fetch as MockedFetch).mock.calls[0]?.arguments[0] as string,
+		new RegExp(`/dictionary/${mockConfig.mvtDictionaryId}/items`),
 	);
 });
 
-Deno.test(
-	'getABTestGroupsFromDictionary - calls the right endpoint',
-	async () => {
-		const mockResponse = [] as unknown;
-		mockFetch(mockResponse);
+test("getABTestGroupsFromDictionary - calls the right endpoint", async () => {
+	const mockResponse = [] as unknown;
+	mockFetch(mockResponse);
 
-		await getABTestGroupsFromDictionary();
+	await getABTestGroupsFromDictionary();
 
-		assertEquals(fetchStub.calls.length, 1);
-		assertStringIncludes(
-			fetchStub.calls[0].args[0],
-			`/dictionary/${mockConfig.abTestsDictionaryId}/items`,
-		);
-	},
-);
+	equal((globalThis.fetch as MockedFetch).mock.calls.length, 1);
+	match(
+		(globalThis.fetch as MockedFetch).mock.calls[0]?.arguments[0] as string,
+		new RegExp(`/dictionary/${mockConfig.abTestsDictionaryId}/items`),
+	);
+});
 
-Deno.test(
-	'updateMVTGroups - makes PATCH request with correct data',
-	async () => {
-		mockFetch({ status: 'ok' });
-
-		const items = [
-			{ item_key: 'key1', item_value: 'value1', op: 'create' as const },
-		];
-		await updateMVTGroups(items);
-
-		assertEquals(fetchStub.calls.length, 1);
-		assertEquals(fetchStub.calls[0].args[1].method, 'PATCH');
-
-		const requestBody = JSON.parse(fetchStub.calls[0].args[1].body);
-		assertEquals(requestBody.items, items);
-	},
-);
-
-Deno.test(
-	'updateABTestGroups - makes PATCH request with correct data',
-	async () => {
-		mockFetch({ status: 'ok' });
-
-		const items = [
-			{ item_key: 'key1', item_value: 'value1', op: 'update' as const },
-		];
-		await updateABTestGroups(items);
-
-		assertEquals(fetchStub.calls.length, 1);
-		assertEquals(fetchStub.calls[0].args[1].method, 'PATCH');
-
-		const requestBody = JSON.parse(fetchStub.calls[0].args[1].body);
-		assertEquals(requestBody.items, items);
-	},
-);
-
-Deno.test('updateABTestGroups - throws error on non-ok status', async () => {
-	mockFetch({ status: 'error' });
+test("updateMVTGroups - makes PATCH request with correct data", async () => {
+	mockFetch({ status: "ok" });
 
 	const items = [
-		{ item_key: 'key1', item_value: 'value1', op: 'create' as const },
+		{ item_key: "key1", item_value: "value1", op: "create" as const },
+	];
+	await updateMVTGroups(items);
+
+	equal((globalThis.fetch as MockedFetch).mock.calls.length, 1);
+	equal(
+		(globalThis.fetch as MockedFetch).mock.calls[0]?.arguments[1]?.method,
+		"PATCH",
+	);
+
+	const requestBody = JSON.parse(
+		(globalThis.fetch as MockedFetch).mock.calls[0]?.arguments[1]
+			?.body as string,
+	) as {
+		items: Array<{
+			item_key: string;
+			item_value: string;
+			op: "create" | "update" | "delete";
+		}>;
+	};
+
+	deepEqual(requestBody.items, items);
+});
+
+test("updateABTestGroups - makes PATCH request with correct data", async () => {
+	mockFetch({ status: "ok" });
+
+	const items = [
+		{ item_key: "key1", item_value: "value1", op: "update" as const },
+	];
+	await updateABTestGroups(items);
+
+	equal((globalThis.fetch as MockedFetch).mock.calls.length, 1);
+	equal(
+		(globalThis.fetch as MockedFetch).mock.calls[0]?.arguments[1]?.method,
+		"PATCH",
+	);
+
+	const requestBody = JSON.parse(
+		(globalThis.fetch as MockedFetch).mock.calls[0]?.arguments[1]
+			?.body as string,
+	) as {
+		items: Array<{
+			item_key: string;
+			item_value: string;
+			op: "create" | "update" | "delete";
+		}>;
+	};
+	deepEqual(requestBody.items, items);
+});
+
+test("updateABTestGroups - throws error on non-ok status", async () => {
+	mockFetch({ status: "error" });
+
+	const items = [
+		{ item_key: "key1", item_value: "value1", op: "create" as const },
 	];
 
-	await assertRejects(
+	await rejects(
 		async () => {
 			await updateABTestGroups(items);
 		},
 		Error,
-		'Failed to update dictionary: error',
+		"Failed to update dictionary: error",
 	);
 });
 
-Deno.test('encodeObject - encodes object to string', () => {
+test("encodeObject - encodes object to string", () => {
 	const obj = {
-		test: 'value',
+		test: "value",
 		another: 123,
 		bool: true,
 	};
 
 	const result = encodeObject(obj);
-	assertEquals(result, 'test=value,another=123,bool=true');
+	equal(result, "test=value,another=123,bool=true");
 });
 
-Deno.test('encodeObject - handles arrays', () => {
-	const arr = ['test', 'another'];
+test("encodeObject - handles arrays", () => {
+	const arr = ["test", "another"];
 
 	const result = encodeObject(arr);
-	assertEquals(result, '0=test,1=another');
+	equal(result, "0=test,1=another");
 });

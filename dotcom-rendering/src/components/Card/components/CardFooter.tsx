@@ -53,8 +53,8 @@ const labStyles = css`
 `;
 
 type MainMedia =
-	| { type: 'Video'; duration: number }
-	| { type: 'LoopVideo'; duration: number }
+	| { type: 'YoutubeVideo'; duration: number }
+	| { type: 'SelfHostedVideo'; duration: number }
 	| { type: 'Audio'; duration: string }
 	| { type: 'Gallery'; count: string };
 
@@ -85,7 +85,7 @@ export const CardFooter = ({
 		return <footer css={labStyles}>{cardBranding}</footer>;
 	}
 
-	if (mainMedia?.type === 'Video') {
+	if (mainMedia?.type === 'YoutubeVideo') {
 		return (
 			<footer css={contentStyles}>
 				<Pill
