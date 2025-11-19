@@ -317,7 +317,7 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
       ]
     },
     "InvokeDictionaryDeployLambda": {
-      "Type": "AWS::CloudFormation::CustomResource",
+      "Type": "Custom::FastlyEdgeDictionaryDeploy",
       "Properties": {
         "ServiceToken": {
           "Fn::GetAtt": [
@@ -653,7 +653,7 @@ exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
       ]
     },
     "InvokeDictionaryDeployLambda": {
-      "Type": "AWS::CloudFormation::CustomResource",
+      "Type": "Custom::FastlyEdgeDictionaryDeploy",
       "Properties": {
         "ServiceToken": {
           "Fn::GetAtt": [

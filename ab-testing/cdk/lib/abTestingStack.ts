@@ -65,6 +65,7 @@ export class AbTestingStack extends GuStack {
 		new CustomResource(this, "InvokeDictionaryDeployLambda", {
 			serviceToken: lambda.functionArn,
 			serviceTimeout: Duration.minutes(5),
+			resourceType: "Custom::FastlyEdgeDictionaryDeploy",
 		});
 	}
 }

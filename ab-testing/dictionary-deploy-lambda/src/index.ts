@@ -68,11 +68,11 @@ export const handler: Handler = async (
 
 		await fetchAndDeployArtifacts([
 			{
-				artifact: "ab-test-groups.json",
+				artifact: "ab-tests.json",
 				dictionary: abTestsDictionary,
 			},
 			{
-				artifact: "mvt-groups.json",
+				artifact: "mvts.json",
 				dictionary: mvtDictionary,
 			},
 		]);
