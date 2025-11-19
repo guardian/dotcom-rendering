@@ -39,6 +39,8 @@ export const ProductCardImage = ({
 					href={url}
 					target="_blank"
 					rel="noopener noreferrer"
+					data-component="product-card-image"
+					data-link-name="product image link"
 					// this is needed to override global style
 					// html:not(.src-focus-disabled) *:focus
 					// it has specificity(0, 2, 1) so we need (0, 3, 0)
