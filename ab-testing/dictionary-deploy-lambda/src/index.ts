@@ -35,6 +35,11 @@ export const handler: Handler = async (
 	event: CloudFormationCustomResourceEvent,
 	context: Context,
 ): Promise<void> => {
+	if (event.RequestType === "Delete") {
+		// No action needed on delete
+		await send(event, context, "SUCCESS");
+		return;
+	}
 	try {
 		const apiToken = await getSecureString(
 			`/ab-testing/${process.env.STAGE}/fastly-api-token`,
@@ -61,23 +66,18 @@ export const handler: Handler = async (
 		);
 		const mvtDictionary = await service.getDictionary(mvtDictionaryName);
 
-		if (event.RequestType === "Create" || event.RequestType === "Update") {
-			await fetchAndDeployArtifacts([
-				{
-					artifact: "ab-test-groups.json",
-					dictionary: abTestsDictionary,
-				},
-				{
-					artifact: "mvt-groups.json",
-					dictionary: mvtDictionary,
-				},
-			]);
+		await fetchAndDeployArtifacts([
+			{
+				artifact: "ab-test-groups.json",
+				dictionary: abTestsDictionary,
+			},
+			{
+				artifact: "mvt-groups.json",
+				dictionary: mvtDictionary,
+			},
+		]);
 
-			await send(event, context, "SUCCESS");
-		} else {
-			// For Delete requests, simply respond with SUCCESS
-			await send(event, context, "SUCCESS");
-		}
+		await send(event, context, "SUCCESS");
 	} catch (error) {
 		console.error("Error deploying dictionaries:", error);
 		await send(event, context, "FAILED", {
