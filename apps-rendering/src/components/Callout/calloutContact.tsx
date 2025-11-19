@@ -31,7 +31,9 @@ export const formatContactNumbers = (contacts: Contact[]): string => {
 
 	// Group each contact by its value, so we can display multiple names for the same number.
 	contacts.forEach(({ name, value }) => {
-		if (!contactNumbers.has(value)) contactNumbers.set(value, []);
+		if (!contactNumbers.has(value)) {
+			contactNumbers.set(value, []);
+		}
 		contactNumbers.get(value)?.push(name);
 	});
 
@@ -76,10 +78,10 @@ const Disclaimer = ({ contacts }: { contacts: Contact[] }) => {
 		</span>
 	);
 
-	const secureDropText = (
+	const secureMessagingText = (
 		<span css={[info, calloutLinkContainer]}>
-			For true anonymity please use our{' '}
-			<a href="https://www.theguardian.com/securedrop">SecureDrop</a>{' '}
+			For fully anonymous communication please use our{' '}
+			<a href="https://www.theguardian.com/tips">Secure Messaging</a>{' '}
 			service instead.
 		</span>
 	);
@@ -88,7 +90,7 @@ const Disclaimer = ({ contacts }: { contacts: Contact[] }) => {
 		<>
 			{contactText}
 			{contacts.some((c) => !!c.guidance) && guidanceText}{' '}
-			{secureDropText}
+			{secureMessagingText}
 		</>
 	);
 };

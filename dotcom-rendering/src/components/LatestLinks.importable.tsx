@@ -7,6 +7,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { DottedLines } from '@guardian/source-development-kitchen/react-components';
+import { Fragment } from 'react';
 import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';
 import { palette as themePalette } from '../palette';
@@ -19,7 +20,7 @@ import type { Alignment } from './SupportingContent';
 type Props = {
 	id: string;
 	direction: Alignment;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	isDynamo?: boolean;
 	containerPalette?: DCRContainerPalette;
 	displayHeader?: boolean;
@@ -117,7 +118,7 @@ export const LatestLinks = ({
 	direction,
 	isDynamo = false,
 	containerPalette,
-	absoluteServerTimes,
+	serverTime,
 	displayHeader = false,
 	directionOnMobile,
 }: Props) => {
@@ -179,21 +180,12 @@ export const LatestLinks = ({
 						.filter((block) => block.body.trim() !== '')
 						.slice(0, 3)
 						.map((block, index) => (
-							<>
+							<Fragment key={block.id}>
 								<ContainerOverrides
 									containerPalette={containerPalette}
 								>
-									{index > 0 && (
-										<li
-											key={block.id + ' : divider'}
-											css={dividerStyles}
-										></li>
-									)}
-									<li
-										key={block.id}
-										css={linkStyles}
-										className={'reveal'}
-									>
+									{index > 0 && <li css={dividerStyles}></li>}
+									<li css={linkStyles} className={'reveal'}>
 										<WithLink
 											linkTo={`${id}?page=with:block-${block.id}#block-${block.id}`}
 										>
@@ -212,9 +204,7 @@ export const LatestLinks = ({
 														)
 													}
 													display="relative"
-													absoluteServerTimes={
-														absoluteServerTimes
-													}
+													serverTime={serverTime}
 													showWeekday={false}
 													showDate={true}
 													showTime={false}
@@ -228,7 +218,7 @@ export const LatestLinks = ({
 										</WithLink>
 									</li>
 								</ContainerOverrides>
-							</>
+							</Fragment>
 						))
 				) : (
 					<>

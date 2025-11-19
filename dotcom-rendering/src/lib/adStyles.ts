@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { adSizes, constants } from '@guardian/commercial-core';
-import { from, space, textSans12, until } from '@guardian/source/foundations';
+import { from, textSans12, until } from '@guardian/source/foundations';
 import { palette } from '../palette';
 
 const labelHeight = constants.AD_LABEL_HEIGHT;
@@ -57,13 +57,21 @@ const adSlotStyles = css`
 			the element with this class name is inserted by GAM into the ad slot
 		*/
 		.ad-slot__content {
-			/* When a native ad is served, GAM sets this to inline-block as an inline style, but we want it to be block as inline-block can cause whitespace to render newlines as white space, see https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Whitespace#:~:text=If%20there%20is%20formatting%20whitespace%20between%20adjacent%20inline%20elements%2C%20this%20will%20result%20in%20space%20in%20the%20layout%2C%20just%20like%20the%20spaces%20between%20words%20in%20text. */
+			/**
+			 * When a native ad is served, GAM sets this to inline-block as an inline style, but we want it
+			 * to be block as inline-block can cause whitespace to render newlines as white space
+			 * See https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Whitespace#:~:text=If%20there%20is%20formatting%20whitespace%20between%20adjacent%20inline%20elements%2C%20this%20will%20result%20in%20space%20in%20the%20layout%2C%20just%20like%20the%20spaces%20between%20words%20in%20text.
+			*/
 			/* stylelint-disable-next-line declaration-no-important */
 			display: block !important;
+			/* Centre the content within this element */
+			margin-left: auto;
+			margin-right: auto;
 
 			/* iframes are inline by default, so we need to set them to block to avoid the same whitespace quirk mentioned in the above comment */
 			iframe {
 				display: block;
+				/* Centre the content within this element */
 				margin-left: auto;
 				margin-right: auto;
 			}
@@ -206,23 +214,6 @@ const spacefinderAdSlotStyles = css`
 	#dfp-ad--inline1--passback {
 		${until.tablet} {
 			background-color: ${palette('--ad-background')};
-		}
-	}
-
-	.ad-slot--carrot {
-		float: left;
-		clear: both;
-		width: 140px;
-		margin-right: 20px;
-		margin-bottom: ${space[1]}px;
-		${from.leftCol} {
-			position: relative;
-			margin-left: -160px;
-			width: 140px;
-		}
-		${from.wide} {
-			margin-left: -240px;
-			width: 220px;
 		}
 	}
 

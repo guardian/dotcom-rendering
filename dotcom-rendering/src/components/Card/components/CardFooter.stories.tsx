@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -55,7 +55,7 @@ export const WithVideo = {
 	args: {
 		...WithAge.args,
 		mainMedia: {
-			type: 'Video',
+			type: 'YoutubeVideo',
 			duration: 972,
 		},
 	},

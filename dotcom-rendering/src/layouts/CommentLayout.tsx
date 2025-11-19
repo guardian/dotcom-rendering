@@ -45,7 +45,7 @@ import {
 import { getSoleContributor } from '../lib/byline';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { decideTrail } from '../lib/decideTrail';
+import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -264,6 +264,7 @@ interface CommonProps {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
+	serverTime?: number;
 }
 
 interface WebProps extends CommonProps {
@@ -276,7 +277,7 @@ interface AppsProps extends CommonProps {
 }
 
 export const CommentLayout = (props: WebProps | AppsProps) => {
-	const { article, format, renderingTarget } = props;
+	const { article, format, renderingTarget, serverTime } = props;
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 	const {
@@ -302,8 +303,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
 	const renderAds = canRenderAds(article);
-
-	const { absoluteServerTimes = false } = article.config.switches;
 
 	return (
 		<>
@@ -335,9 +334,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}
 						pageId={article.pageId}
-						wholePictureLogoSwitch={
-							article.config.switches.wholePictureLogo
-						}
 					/>
 				</div>
 			)}
@@ -725,8 +721,9 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
-								trails={article.storyPackage.trails.map(
-									decideTrail,
+								trails={decideStoryPackageTrails(
+									article.storyPackage.trails,
+									article.webURL,
 								)}
 								onwardsSource="more-on-this-story"
 								format={format}
@@ -734,7 +731,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
-								absoluteServerTimes={absoluteServerTimes}
+								serverTime={serverTime}
 								renderingTarget={renderingTarget}
 							/>
 						</Island>
@@ -758,8 +755,9 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						renderingTarget={renderingTarget}
+						webURL={article.webURL}
 					/>
 				</Island>
 

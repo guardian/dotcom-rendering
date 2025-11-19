@@ -9,13 +9,13 @@ import type { BannerProps } from '@guardian/support-dotcom-components/dist/share
 import { useEffect, useState } from 'react';
 import type { ArticleCounts } from '../lib/articleCount';
 import { getArticleCounts } from '../lib/articleCount';
-import type { EditionId } from '../lib/edition';
 import type {
 	CandidateConfig,
 	MaybeFC,
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
+import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
@@ -23,7 +23,6 @@ import { usePageViewId } from '../lib/usePageViewId';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
-import { retrieveDismissedCount } from './SignInGate/dismissGate';
 import type { AuxiaGateDisplayData } from './SignInGate/types';
 import {
 	BrazeBanner,
@@ -34,6 +33,7 @@ import {
 	ReaderRevenueBanner,
 } from './StickyBottomBanner/ReaderRevenueBanner';
 import type { CanShowFunctionType } from './StickyBottomBanner/ReaderRevenueBanner';
+import type { CanShowSignInGateProps } from './StickyBottomBanner/SignInGatePortal';
 import {
 	canShowSignInGatePortal,
 	SignInGatePortal,
@@ -180,42 +180,21 @@ const buildRRBannerConfigWith = ({
 };
 
 const buildSignInGateConfig = (
-	isSignedIn: boolean | undefined,
-	isPaidContent: boolean,
-	isPreview: boolean,
-	contentType: string,
-	sectionId: string,
-	tags: TagType[],
-	pageId: string,
-	contributionsServiceUrl: string,
-	editionId: EditionId,
-	idUrl: string,
+	canShowProps: CanShowSignInGateProps,
 	host?: string,
 ): CandidateConfig<AuxiaGateDisplayData> => ({
 	candidate: {
 		id: 'sign-in-gate-portal',
 		canShow: async () => {
-			return await canShowSignInGatePortal(
-				isSignedIn,
-				isPaidContent,
-				isPreview,
-				pageId,
-				contributionsServiceUrl,
-				editionId,
-				contentType,
-				sectionId,
-				tags,
-				retrieveDismissedCount,
-			);
+			return await canShowSignInGatePortal(canShowProps);
 		},
 		show: (meta: AuxiaGateDisplayData) => () => (
 			<SignInGatePortal
 				host={host}
-				isPaidContent={isPaidContent}
-				isPreview={isPreview}
-				pageId={pageId}
-				contributionsServiceUrl={contributionsServiceUrl}
-				idUrl={idUrl}
+				isPaidContent={canShowProps.isPaidContent}
+				isPreview={canShowProps.isPreview}
+				pageId={canShowProps.pageId}
+				contributionsServiceUrl={canShowProps.contributionsServiceUrl}
 				auxiaGateDisplayData={meta}
 			/>
 		),
@@ -289,6 +268,11 @@ export const StickyBottomBanner = ({
 	const countryCode = useCountryCode('sticky-bottom-banner');
 	const isSignedIn = useIsSignedIn();
 	const ophanPageViewId = usePageViewId(renderingTarget);
+	const abTestAPI = useAB()?.api;
+	const isInAuxiaControlGroup = !!abTestAPI?.isUserInVariant(
+		'NoAuxiaSignInGate',
+		'control',
+	);
 
 	const [SelectedBanner, setSelectedBanner] = useState<MaybeFC | null>(null);
 	const [asyncArticleCounts, setAsyncArticleCounts] =
@@ -344,16 +328,18 @@ export const StickyBottomBanner = ({
 		);
 
 		const signInGate = buildSignInGateConfig(
-			isSignedIn,
-			isPaidContent,
-			isPreview,
-			contentType,
-			sectionId,
-			tags,
-			pageId,
-			contributionsServiceUrl,
-			editionId,
-			idApiUrl, // Using idApiUrl as idUrl
+			{
+				isSignedIn,
+				isPaidContent,
+				isPreview,
+				contentType,
+				sectionId,
+				tags,
+				pageId,
+				contributionsServiceUrl,
+				editionId,
+				isInAuxiaControlGroup,
+			},
 			host,
 		);
 
@@ -397,6 +383,7 @@ export const StickyBottomBanner = ({
 		ophanPageViewId,
 		pageId,
 		host,
+		isInAuxiaControlGroup,
 	]);
 
 	if (SelectedBanner) {

@@ -50,7 +50,7 @@ import {
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
-import { decideTrail } from '../lib/decideTrail';
+import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { parse } from '../lib/slot-machine-flags';
@@ -186,6 +186,7 @@ const stretchLines = css`
 interface CommonProps {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
+	serverTime?: number;
 }
 
 interface WebProps extends CommonProps {
@@ -229,7 +230,7 @@ const Box = ({ children }: { children: React.ReactNode }) => (
 );
 
 export const ImmersiveLayout = (props: WebProps | AppProps) => {
-	const { article, format, renderingTarget } = props;
+	const { article, format, renderingTarget, serverTime } = props;
 
 	const {
 		config: { isPaidContent, host, hasSurveyAd },
@@ -308,8 +309,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
-	const { absoluteServerTimes = false } = article.config.switches;
-
 	return (
 		<>
 			{isWeb && (
@@ -326,14 +325,11 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					hasPageSkin={false}
 					hasPageSkinContentSelfConstrain={false}
 					pageId={article.pageId}
-					wholePictureLogoSwitch={
-						article.config.switches.wholePictureLogo
-					}
 				/>
 			)}
 
 			{format.theme === ArticleSpecial.Labs && (
-				<Stuck>
+				<Stuck zIndex="subNavBanner">
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
@@ -806,8 +802,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						>
 							<Carousel
 								heading={article.storyPackage.heading}
-								trails={article.storyPackage.trails.map(
-									decideTrail,
+								trails={decideStoryPackageTrails(
+									article.storyPackage.trails,
+									article.webURL,
 								)}
 								onwardsSource="more-on-this-story"
 								format={format}
@@ -815,7 +812,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
-								absoluteServerTimes={absoluteServerTimes}
+								serverTime={serverTime}
 								renderingTarget={renderingTarget}
 							/>
 						</Island>
@@ -839,8 +836,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						renderingTarget={renderingTarget}
+						webURL={article.webURL}
 					/>
 				</Island>
 

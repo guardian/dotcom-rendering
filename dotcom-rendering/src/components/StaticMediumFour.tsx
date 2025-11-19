@@ -28,11 +28,10 @@ type Props = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
-	isInHideTrailsAbTest?: boolean;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 };
@@ -41,12 +40,11 @@ export const StaticMediumFour = ({
 	trails,
 	containerPalette,
 	showAge,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 	showImage = true,
 	aspectRatio,
 	containerLevel = 'Primary',
-	isInHideTrailsAbTest,
 	showLabsRedesign,
 }: Props) => {
 	const cards = trails.slice(0, 4);
@@ -57,7 +55,7 @@ export const StaticMediumFour = ({
 				return (
 					<LI
 						stretch={false}
-						percentage={'25%'}
+						percentage="25%"
 						key={card.url}
 						padSides={true}
 						showDivider={cardIndex > 0}
@@ -67,13 +65,15 @@ export const StaticMediumFour = ({
 							containerPalette={containerPalette}
 							containerType="static/medium/4"
 							showAge={showAge}
-							absoluteServerTimes={absoluteServerTimes}
+							serverTime={serverTime}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
 							mediaPositionOnDesktop={getMediaPositionOnDesktop(
 								card.format,
 								!!card.isNewsletter,
 							)}
+							mediaPositionOnMobile="left"
+							headlineSizes={undefined}
 							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
 							supportingContent={undefined}
 							mediaSize="medium"
@@ -87,7 +87,6 @@ export const StaticMediumFour = ({
 									!isMediaCard(card.format))
 							}
 							canPlayInline={false}
-							isInHideTrailsAbTest={isInHideTrailsAbTest}
 							showLabsRedesign={showLabsRedesign}
 						/>
 					</LI>

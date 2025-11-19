@@ -1,6 +1,11 @@
 import { type EditionId } from '../../lib/edition';
 import type { RenderingTarget } from '../../types/renderingTarget';
-import { getOphan, recordExperiences, recordPerformance } from './ophan';
+import {
+	getOphan,
+	recordExperiences,
+	recordPerformance,
+	submitComponentEvent,
+} from './ophan';
 
 const getEditionForOphan = (editionId: EditionId) => {
 	switch (editionId) {
@@ -28,5 +33,21 @@ export const recordInitialPageEvents = async (
 	window.addEventListener('load', function load() {
 		void recordPerformance(renderingTarget);
 		window.removeEventListener('load', load, false);
+	});
+
+	window.addEventListener('pageshow', (event: PageTransitionEvent) => {
+		if (!event.persisted) {
+			return;
+		}
+
+		void submitComponentEvent(
+			{
+				action: 'VIEW',
+				component: {
+					componentType: 'BF_CACHE',
+				},
+			},
+			renderingTarget,
+		);
 	});
 };

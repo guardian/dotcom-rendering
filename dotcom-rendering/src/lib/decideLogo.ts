@@ -2,7 +2,7 @@ import type { Branding } from '../types/branding';
 import type { DCRContainerPalette } from '../types/front';
 import { cardHasDarkBackground } from './cardHelpers';
 
-export const decideCardLogo = (
+export const decideBrandingLogo = (
 	branding: Branding,
 	containerPalette?: DCRContainerPalette,
 ): Branding['logo'] => {

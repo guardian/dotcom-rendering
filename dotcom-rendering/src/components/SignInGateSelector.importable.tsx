@@ -5,9 +5,11 @@ import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
 import { usePageViewId } from '../lib/usePageViewId';
 import type { RenderingTarget } from '../types/renderingTarget';
+import type { QueryParams } from './AuthProviderButtons/types';
 import { useConfig } from './ConfigContext';
 import type { ComponentEventParams } from './SignInGate/componentEventTracking';
 import { submitComponentEventTracking } from './SignInGate/componentEventTracking';
+import { incrementUserDismissedGateCount } from './SignInGate/dismissGate';
 import { pageIdIsAllowedForGating } from './SignInGate/displayRules';
 import { SignInGateAuxiaV1 } from './SignInGate/gateDesigns/SignInGateAuxiaV1';
 import { SignInGateAuxiaV2 } from './SignInGate/gateDesigns/SignInGateAuxiaV2';
@@ -30,32 +32,24 @@ type Props = {
 	isPreview: boolean;
 	host?: string;
 	pageId: string;
-	idUrl?: string;
 	contributionsServiceUrl: string;
 	auxiaGateDisplayData?: AuxiaGateDisplayData | undefined;
-	signInGateVersion?: AuxiaGateVersion;
 };
 
-// function to generate the profile.theguardian.com url with tracking params
-// and the return url (link to current article page)
-const generateGatewayUrl = (
-	tab: 'register' | 'signin',
-	{
-		pageId,
-		pageViewId,
-		idUrl,
-		host,
-		currentTest,
-		componentId,
-	}: {
-		pageId: string;
-		pageViewId: string;
-		idUrl: string;
-		host: string;
-		currentTest: CurrentSignInGateABTest;
-		componentId?: string;
-	},
-) => {
+// function to generate the params for use by the profile.theguardian.com url
+const generateQueryParams = ({
+	pageId,
+	pageViewId,
+	host,
+	currentTest,
+	componentId,
+}: {
+	pageId: string;
+	pageViewId: string;
+	host: string;
+	currentTest: CurrentSignInGateABTest;
+	componentId?: string;
+}): QueryParams => {
 	// url of the article, return user here after sign in/registration
 	const returnUrl = `${host}/${pageId}`;
 
@@ -70,9 +64,10 @@ const generateGatewayUrl = (
 		viewId: pageViewId,
 	};
 
-	return `${idUrl}/${tab}?returnUrl=${returnUrl}&componentEventParams=${encodeURIComponent(
-		constructQuery(queryParams),
-	)}`;
+	return {
+		returnUrl,
+		componentEventParams: encodeURIComponent(constructQuery(queryParams)),
+	};
 };
 
 // -------------------------------
@@ -84,20 +79,21 @@ export const SignInGateSelector = ({
 	isPreview,
 	host = 'https://theguardian.com/',
 	pageId, // pageId is the path without starting slash
-	idUrl = 'https://profile.theguardian.com',
 	contributionsServiceUrl,
 	auxiaGateDisplayData,
-	signInGateVersion,
 }: Props) => {
 	if (!pageIdIsAllowedForGating(pageId)) {
 		return <></>;
 	}
 
+	const signInGateVersion = getAuxiaGateVersion(
+		auxiaGateDisplayData?.auxiaData.userTreatment,
+	);
+
 	return (
 		<SignInGateSelectorAuxia
 			host={host}
 			pageId={pageId}
-			idUrl={idUrl}
 			contributionsServiceUrl={contributionsServiceUrl}
 			isPreview={isPreview}
 			isPaidContent={isPaidContent}
@@ -133,12 +129,11 @@ export const SignInGateSelector = ({
 type PropsAuxia = {
 	host?: string;
 	pageId: string;
-	idUrl: string;
 	contributionsServiceUrl: string;
 	isPreview: boolean;
 	isPaidContent: boolean;
 	auxiaGateDisplayData?: AuxiaGateDisplayData;
-	signInGateVersion?: AuxiaGateVersion;
+	signInGateVersion: AuxiaGateVersion;
 };
 
 // [1] If true, it indicates that we are using the component for the regular Auxia share of the Audience
@@ -146,7 +141,7 @@ type PropsAuxia = {
 
 interface ShowSignInGateAuxiaProps {
 	host: string;
-	signInUrl: string;
+	queryParams: QueryParams;
 	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
 	abTest: CurrentSignInGateABTest;
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
@@ -158,7 +153,7 @@ interface ShowSignInGateAuxiaProps {
 		interactionType: AuxiaInteractionInteractionType,
 		actionName?: AuxiaInteractionActionName,
 	) => Promise<void>;
-	signInGateVersion?: AuxiaGateVersion;
+	signInGateVersion: AuxiaGateVersion;
 }
 
 const incrementGateDisplayCount = () => {
@@ -243,22 +238,24 @@ const buildAbTestTrackingAuxiaVariant = (
 	};
 };
 
+/**
+ * Determines the gate version based on one of 2 things:
+ * 1. url query parameter
+ * 2. treatmentType
+ */
 export const getAuxiaGateVersion = (
-	signInGateVersion?: AuxiaGateVersion,
 	userTreatment?: AuxiaAPIResponseDataUserTreatment,
 ): AuxiaGateVersion => {
-	if (signInGateVersion) {
-		return signInGateVersion;
+	let urlParamVersion: string | null = null;
+	if (typeof window !== 'undefined') {
+		const params = new URLSearchParams(window.location.search);
+		urlParamVersion = params.get('auxia_gate_version');
 	}
 
-	const params = new URLSearchParams(window.location.search);
-	const version = params.get('auxia_gate_version');
-
 	if (
-		String(version).toLowerCase().endsWith('v2') ||
-		String(userTreatment?.treatmentType)
-			.toLowerCase()
-			.endsWith('POPUP')
+		String(urlParamVersion).toLowerCase().endsWith('v2') ||
+		userTreatment?.treatmentType === 'DISMISSABLE_SIGN_IN_GATE_POPUP' ||
+		userTreatment?.treatmentType === 'NONDISMISSIBLE_SIGN_IN_GATE_POPUP'
 	) {
 		return 'v2';
 	}
@@ -269,7 +266,6 @@ export const getAuxiaGateVersion = (
 const SignInGateSelectorAuxia = ({
 	host = 'https://theguardian.com/',
 	pageId,
-	idUrl,
 	contributionsServiceUrl,
 	isPreview,
 	isPaidContent,
@@ -300,6 +296,17 @@ const SignInGateSelectorAuxia = ({
 			document.dispatchEvent(
 				new CustomEvent('article:sign-in-gate-dismissed'),
 			);
+
+			if (signInGateVersion === 'v2') {
+				// Emit modal dismiss event
+				document.dispatchEvent(
+					new CustomEvent('modal:close', {
+						detail: {
+							modalType: `sign-in-gate-${signInGateVersion}`,
+						},
+					}),
+				);
+			}
 		}
 	}, [isGateDismissed]);
 
@@ -315,16 +322,13 @@ const SignInGateSelectorAuxia = ({
 		return null;
 	}
 
-	const ctaUrlParams = {
+	const queryParams = generateQueryParams({
 		pageId,
 		host,
 		pageViewId,
-		idUrl,
 		currentTest: abTest,
 		componentId: abTest.id,
-	} satisfies Parameters<typeof generateGatewayUrl>[1];
-
-	const signInUrl = generateGatewayUrl('signin', ctaUrlParams);
+	});
 
 	return (
 		<>
@@ -332,7 +336,7 @@ const SignInGateSelectorAuxia = ({
 				auxiaGateDisplayData?.auxiaData.userTreatment !== undefined && (
 					<ShowSignInGateAuxia
 						host={host}
-						signInUrl={signInUrl}
+						queryParams={queryParams}
 						// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
 						setShowGate={(show) => setIsGateDismissed(!show)}
 						abTest={buildAbTestTrackingAuxiaVariant(
@@ -381,7 +385,7 @@ const SignInGateSelectorAuxia = ({
 
 const ShowSignInGateAuxia = ({
 	host,
-	signInUrl,
+	queryParams,
 	setShowGate,
 	abTest,
 	userTreatment,
@@ -392,12 +396,8 @@ const ShowSignInGateAuxia = ({
 	logTreatmentInteractionCall,
 	signInGateVersion,
 }: ShowSignInGateAuxiaProps) => {
-	const componentId = 'main_variant_5';
 	const checkoutCompleteCookieData = undefined;
 	const personaliseSignInGateAfterCheckoutSwitch = undefined;
-
-	// Get the gate version configuration
-	const gateVersion = getAuxiaGateVersion(signInGateVersion, userTreatment);
 
 	const [signInGatePlaceholder, setSignInGatePlaceholder] =
 		useState<HTMLElement | null>(null);
@@ -417,6 +417,7 @@ const ShowSignInGateAuxia = ({
 
 	useEffect(() => {
 		if (hasBeenSeen) {
+			// Tell Auxia
 			void auxiaLogTreatmentInteraction(
 				contributionsServiceUrl,
 				userTreatment,
@@ -436,11 +437,13 @@ const ShowSignInGateAuxia = ({
 				);
 			});
 
+			// Tell Ophan
 			void submitComponentEventTracking(
 				{
 					component: {
 						componentType: 'SIGN_IN_GATE',
 						id: treatmentId,
+						labels: [userTreatment.treatmentType],
 					},
 					action: 'VIEW',
 					abTest: buildAbTestTrackingAuxiaVariant(treatmentId),
@@ -451,26 +454,37 @@ const ShowSignInGateAuxia = ({
 			// Once the gate is being displayed we need to update
 			// the tracking of the number of times the gate has been displayed
 			incrementGateDisplayCount();
+
+			if (signInGateVersion === 'v2') {
+				// Emit modal view event
+				document.dispatchEvent(
+					new CustomEvent('modal:open', {
+						detail: {
+							modalType: `sign-in-gate-${signInGateVersion}`,
+						},
+					}),
+				);
+			}
 		}
 	}, [
-		componentId,
 		hasBeenSeen,
 		browserId,
 		contributionsServiceUrl,
 		renderingTarget,
 		treatmentId,
 		userTreatment,
-		gateVersion,
+		signInGateVersion,
 	]);
 
 	const commonProps = {
 		guUrl: host,
-		signInUrl,
+		queryParams,
 		dismissGate: () => {
+			incrementUserDismissedGateCount(abTest.variant, abTest.name);
 			setShowGate(false);
 		},
 		abTest,
-		ophanComponentId: componentId,
+		ophanComponentId: treatmentId,
 		checkoutCompleteCookieData,
 		personaliseSignInGateAfterCheckoutSwitch,
 		userTreatment,
@@ -498,7 +512,7 @@ const ShowSignInGateAuxia = ({
 				aria-hidden="true"
 				style={{ height: 1, marginTop: -1 }}
 			/>
-			{gateVersion === 'v2' ? (
+			{signInGateVersion === 'v2' ? (
 				shouldShowV2Gate && <SignInGateAuxiaV2 {...commonProps} />
 			) : (
 				<SignInGateAuxiaV1 {...commonProps} />

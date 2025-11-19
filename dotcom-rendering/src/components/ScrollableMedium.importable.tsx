@@ -2,7 +2,6 @@ import { isMediaCard } from '../lib/cardHelpers';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
-	DCRContainerType,
 	DCRFrontCard,
 } from '../types/front';
 import { FrontCard } from './FrontCard';
@@ -12,12 +11,10 @@ type Props = {
 	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	imageLoading: 'lazy' | 'eager';
-	containerType: DCRContainerType;
 	aspectRatio: AspectRatio;
 	sectionId: string;
-	isInHideTrailsAbTest?: boolean;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 };
@@ -32,13 +29,11 @@ type Props = {
 export const ScrollableMedium = ({
 	trails,
 	containerPalette,
-	containerType,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 	showAge,
 	aspectRatio,
 	sectionId,
-	isInHideTrailsAbTest,
 	showLabsRedesign,
 }: Props) => {
 	return (
@@ -58,9 +53,9 @@ export const ScrollableMedium = ({
 						<FrontCard
 							trail={trail}
 							imageLoading={imageLoading}
-							absoluteServerTimes={!!absoluteServerTimes}
+							serverTime={serverTime}
 							containerPalette={containerPalette}
-							containerType={containerType}
+							containerType="scrollable/medium"
 							showAge={!!showAge}
 							headlineSizes={{
 								desktop: 'xsmall',
@@ -68,16 +63,15 @@ export const ScrollableMedium = ({
 							}}
 							mediaPositionOnDesktop={imagePosition}
 							mediaPositionOnMobile={imagePosition}
-							mediaSize="medium"
+							mediaSize="scrollable-medium"
 							trailText={undefined} // unsupported
 							supportingContent={undefined} // unsupported
 							aspectRatio={aspectRatio}
 							kickerText={trail.kickerText}
-							showLivePlayable={trail.showLivePlayable}
+							showLivePlayable={false}
 							showTopBarDesktop={false}
 							showTopBarMobile={false}
 							canPlayInline={false}
-							isInHideTrailsAbTest={isInHideTrailsAbTest}
 							showLabsRedesign={showLabsRedesign}
 						/>
 					</ScrollableCarousel.Item>

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source/foundations';
-import type { ArticleFormat } from '../../../lib/articleFormat';
+import { ArticleDesign, type ArticleFormat } from '../../../lib/articleFormat';
 import { palette } from '../../../palette';
 import type { DCRContainerPalette } from '../../../types/front';
 import { ContainerOverrides } from '../../ContainerOverrides';
@@ -42,7 +42,7 @@ const baseCardStyles = css`
 `;
 
 const hoverStyles = css`
-	:hover .image-overlay {
+	:hover .media-overlay {
 		width: 100%;
 		height: 100%;
 		background-color: ${palette('--card-background-hover')};
@@ -53,17 +53,20 @@ const hoverStyles = css`
 		text-decoration: underline;
 	}
 
-	/** We want to prevent the general hover styles applying when
-	    a click won't result in navigating to the main article */
+	/**
+	  * We want to prevent the general hover styles applying when
+	  * a click won't result in navigating to the main article
+	*/
 	:has(
 			ul.sublinks:hover,
 			.loop-video-container:hover,
-			.slideshow-carousel:hover
+			.slideshow-carousel:hover,
+			.branding-logo:hover
 		) {
 		.card-headline .show-underline {
 			text-decoration: none;
 		}
-		.image-overlay {
+		.media-overlay {
 			background-color: transparent;
 		}
 	}
@@ -94,7 +97,7 @@ const onwardContentStyles = css`
 	border-radius: ${space[2]}px;
 	overflow: hidden;
 
-	:hover .image-overlay {
+	:hover .media-overlay {
 		border-radius: ${space[2]}px;
 	}
 `;
@@ -116,7 +119,9 @@ export const CardWrapper = ({
 						hoverStyles,
 						showTopBarDesktop && desktopTopBarStyles,
 						showTopBarMobile && mobileTopBarStyles,
-						isOnwardContent && onwardContentStyles,
+						isOnwardContent &&
+							format.design !== ArticleDesign.Gallery &&
+							onwardContentStyles,
 					]}
 				>
 					{children}

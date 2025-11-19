@@ -653,6 +653,7 @@ describe('parseAtom', () => {
 		let atoms: Atoms;
 		let media: Atom;
 		let mediaAtom: MediaAtom;
+		const assetVersion = new Int64(1);
 
 		beforeEach(() => {
 			blockElement.contentAtomTypeData = {
@@ -663,9 +664,15 @@ describe('parseAtom', () => {
 				title: '',
 				assets: [
 					{
+						assetType: AssetType.SUBTITLES,
+						id: 'subtitles-asset-id',
+						version: assetVersion,
+						platform: Platform.YOUTUBE,
+					},
+					{
 						assetType: AssetType.VIDEO,
-						id: 'asset-id',
-						version: new Int64(1),
+						id: 'video-asset-id',
+						version: assetVersion,
 						platform: Platform.YOUTUBE,
 					},
 				],
@@ -726,7 +733,7 @@ describe('parseAtom', () => {
 					posterUrl: 'poster-url',
 					caption: some(frag),
 					duration: some(1000),
-					videoId: 'asset-id',
+					videoId: 'video-asset-id',
 					id: atomId,
 					title: '',
 				}),

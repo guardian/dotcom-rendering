@@ -203,7 +203,11 @@ export const getActiveMediaAtom = (
 		const assets = mediaAtom.assets.filter(
 			({ version }) => version === mediaAtom.activeVersion,
 		);
-		if (!assets.length) return undefined;
+
+		const videoAssets = assets.filter(
+			({ assetType }) => assetType === 'Video',
+		);
+		if (!videoAssets.length) return undefined;
 
 		const image = decideMediaAtomImage(
 			videoReplace,
@@ -219,7 +223,7 @@ export const getActiveMediaAtom = (
 			/**
 			 * Take one source for each supported video file type.
 			 */
-			const sources = supportedVideoFileTypes.reduce(
+			const sources = supportedVideoFileTypes.reduce<typeof assets>(
 				(acc, type) => {
 					const source = assets.find(
 						({ mimeType }) => mimeType === type,
@@ -227,17 +231,23 @@ export const getActiveMediaAtom = (
 					if (source) acc.push(source);
 					return acc;
 				},
-				[] as typeof assets,
+				[],
 			);
 			if (!sources.length) return undefined;
 
+			const subtitleAsset = assets.find(
+				({ assetType }) => assetType === 'Subtitles',
+			);
+
 			return {
-				type: 'LoopVideo',
+				type: 'SelfHostedVideo',
+				videoStyle: 'Loop',
 				atomId: mediaAtom.id,
 				sources: sources.map((source) => ({
 					src: source.id,
 					mimeType: source.mimeType as SupportedVideoFileType,
 				})),
+				subtitleSource: subtitleAsset?.id,
 				duration: mediaAtom.duration ?? 0,
 				// Size fixed to a 5:4 ratio
 				width: 500,
@@ -251,7 +261,7 @@ export const getActiveMediaAtom = (
 		 */
 		if (assets[0]?.platform === 'Youtube') {
 			return {
-				type: 'Video',
+				type: 'YoutubeVideo',
 				id: mediaAtom.id,
 				videoId: assets[0].id,
 				duration: mediaAtom.duration ?? 0,

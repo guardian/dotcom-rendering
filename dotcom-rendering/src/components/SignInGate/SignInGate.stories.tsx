@@ -168,7 +168,6 @@ export const signInGateSelectorStoryDismissable = () => {
 				isPreview={false}
 				pageId="dismissable"
 				host="https://www.theguardian.com"
-				idUrl="https://profile.theguardian.com"
 				contributionsServiceUrl="https://contributions.guardianapis.com"
 				auxiaGateDisplayData={{
 					browserId: 'test-browser-id',
@@ -194,7 +193,6 @@ export const signInGateSelectorStoryNonDismissable = () => {
 				isPreview={false}
 				pageId="non-dismissable"
 				host="https://www.theguardian.com"
-				idUrl="https://profile.theguardian.com"
 				contributionsServiceUrl="https://contributions.guardianapis.com"
 				auxiaGateDisplayData={{
 					browserId: 'test-browser-id',
@@ -220,7 +218,6 @@ export const signInGateSelectorStoryLegacy = () => {
 				isPreview={false}
 				pageId="legacy"
 				host="https://www.theguardian.com"
-				idUrl="https://profile.theguardian.com"
 				contributionsServiceUrl="https://contributions.guardianapis.com"
 				auxiaGateDisplayData={{
 					browserId: 'test-browser-id',
@@ -245,7 +242,6 @@ export const signInGateSelectorStoryNoTreatment = () => {
 				isPreview={false}
 				pageId="no-treatment"
 				host="https://www.theguardian.com"
-				idUrl="https://profile.theguardian.com"
 				contributionsServiceUrl="https://contributions.guardianapis.com"
 				auxiaGateDisplayData={{
 					browserId: 'test-browser-id',
@@ -270,15 +266,15 @@ export const auxiaV2DismissibleModal = () => {
 				isPreview={false}
 				pageId="dismissable-v2"
 				host="https://www.theguardian.com"
-				idUrl="https://profile.theguardian.com"
 				contributionsServiceUrl="https://contributions.guardianapis.com"
-				signInGateVersion="v2"
 				auxiaGateDisplayData={{
 					browserId: 'test-browser-id',
 					auxiaData: {
 						responseId: 'test-response-id',
-						userTreatment:
-							mockAuxiaResponseDismissible.data.userTreatment,
+						userTreatment: {
+							...mockAuxiaResponseDismissible.data.userTreatment,
+							treatmentType: 'DISMISSABLE_SIGN_IN_GATE_POPUP',
+						},
 					},
 				}}
 			/>
@@ -296,15 +292,16 @@ export const auxiaV2NonDismissibleModal = () => {
 				isPreview={false}
 				pageId="non-dismissable-v2"
 				host="https://www.theguardian.com"
-				idUrl="https://profile.theguardian.com"
 				contributionsServiceUrl="https://contributions.guardianapis.com"
-				signInGateVersion="v2"
 				auxiaGateDisplayData={{
 					browserId: 'test-browser-id',
 					auxiaData: {
 						responseId: 'test-response-id',
-						userTreatment:
-							mockAuxiaResponseNonDismissible.data.userTreatment,
+						userTreatment: {
+							...mockAuxiaResponseNonDismissible.data
+								.userTreatment,
+							treatmentType: 'NONDISMISSIBLE_SIGN_IN_GATE_POPUP',
+						},
 					},
 				}}
 			/>

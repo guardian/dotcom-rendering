@@ -31,7 +31,7 @@ const DividerWithOr = () => {
 };
 
 export const SignInGateAuxiaV1 = ({
-	signInUrl,
+	queryParams,
 	dismissGate,
 	abTest,
 	ophanComponentId,
@@ -90,7 +90,7 @@ export const SignInGateAuxiaV1 = ({
 
 			<div css={socialContainer}>
 				<AuthProviderButtons
-					queryParams={{ returnUrl: signInUrl }}
+					queryParams={queryParams}
 					providers={['social']}
 					onClick={(provider) => {
 						trackLink(
@@ -98,6 +98,7 @@ export const SignInGateAuxiaV1 = ({
 							`sign-in-${provider}-${dismissStatusLabel}`,
 							renderingTarget,
 							abTest,
+							[userTreatment.treatmentType],
 						);
 						void logTreatmentInteractionCall(
 							'CLICKED',
@@ -111,7 +112,7 @@ export const SignInGateAuxiaV1 = ({
 
 			<div css={emailContainer}>
 				<AuthProviderButtons
-					queryParams={{ returnUrl: signInUrl }}
+					queryParams={queryParams}
 					providers={['email']}
 					onClick={(provider) => {
 						trackLink(
@@ -119,6 +120,7 @@ export const SignInGateAuxiaV1 = ({
 							`sign-in-${provider}-${dismissStatusLabel}`,
 							renderingTarget,
 							abTest,
+							[userTreatment.treatmentType],
 						);
 						void logTreatmentInteractionCall(
 							'CLICKED',

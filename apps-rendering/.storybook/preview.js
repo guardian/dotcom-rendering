@@ -82,8 +82,14 @@ export const viewports = [320, 375, 480, 660, 740, 980, 1140, 1300];
 
 export const parameters = {
 	viewport: {
-		viewports: guardianViewports,
-		defaultViewport: 'wide',
+		options: guardianViewports,
 	},
 	layout: 'fullscreen',
+};
+
+export const initialGlobals = {
+	viewport: {
+		value: 'wide',
+		isRotated: false,
+	},
 };

@@ -43,7 +43,7 @@ import { SubNav } from '../components/SubNav.importable';
 import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { decideTrail } from '../lib/decideTrail';
+import { decideStoryPackageTrails } from '../lib/decideTrail';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -212,6 +212,7 @@ interface CommonProps {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
+	serverTime?: number;
 }
 
 interface WebProps extends CommonProps {
@@ -224,7 +225,7 @@ interface AppsProps extends CommonProps {
 }
 
 export const InteractiveLayout = (props: WebProps | AppsProps) => {
-	const { article, format, renderingTarget } = props;
+	const { article, format, renderingTarget, serverTime } = props;
 	const {
 		config: { isPaidContent, host, hasSurveyAd },
 		editionId,
@@ -238,8 +239,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 	const { branding } = article.commercialProperties[article.editionId];
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
-
-	const { absoluteServerTimes = false } = article.config.switches;
 
 	const renderAds = canRenderAds(article);
 
@@ -291,14 +290,11 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							hasPageSkin={false}
 							hasPageSkinContentSelfConstrain={false}
 							pageId={article.pageId}
-							wholePictureLogoSwitch={
-								article.config.switches.wholePictureLogo
-							}
 						/>
 					</div>
 
 					{format.theme === ArticleSpecial.Labs && (
-						<Stuck>
+						<Stuck zIndex="subNavBanner">
 							<Section
 								fullWidth={true}
 								showTopBorder={false}
@@ -650,8 +646,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
-								trails={article.storyPackage.trails.map(
-									decideTrail,
+								trails={decideStoryPackageTrails(
+									article.storyPackage.trails,
+									article.webURL,
 								)}
 								onwardsSource="more-on-this-story"
 								format={format}
@@ -659,7 +656,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
-								absoluteServerTimes={absoluteServerTimes}
+								serverTime={serverTime}
 								renderingTarget={renderingTarget}
 							/>
 						</Island>
@@ -683,8 +680,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						renderingTarget={renderingTarget}
+						webURL={article.webURL}
 					/>
 				</Island>
 

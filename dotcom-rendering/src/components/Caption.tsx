@@ -230,7 +230,7 @@ const galleryStyles = css`
 	padding-bottom: 6px;
 	${from.leftCol} {
 		${grid.column.left}
-		grid-row-start: 8;
+		grid-row: 8/10;
 	}
 	${between.tablet.and.leftCol} {
 		position: relative;
@@ -307,7 +307,7 @@ export const Caption = ({
 				shouldLimitWidth && limitedWidth,
 				isOverlaid ? overlaidStyles(format) : bottomMarginStyles,
 				isMainMedia &&
-					(isBlog || mediaType === 'Video') &&
+					(isBlog || mediaType === 'YoutubeVideo') &&
 					tabletCaptionPadding,
 				padCaption && captionPadding,
 				isImmersive && immersivePadding,
@@ -315,7 +315,7 @@ export const Caption = ({
 			]}
 			data-spacefinder-role="inline"
 		>
-			{mediaType === 'Video' ? (
+			{mediaType === 'YoutubeVideo' ? (
 				<VideoIcon format={format} />
 			) : (
 				<CameraIcon format={format} />

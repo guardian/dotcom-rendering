@@ -2,6 +2,7 @@ import type { CountryCode } from '@guardian/libs';
 import { isObject, isOneOf, isString } from '@guardian/libs';
 import type { EditionId } from '../../lib/edition';
 import type { TagType } from '../../types/tag';
+import type { QueryParams } from '../AuthProviderButtons/types';
 
 export type CanShowGateProps = {
 	isSignedIn: boolean;
@@ -136,6 +137,7 @@ export interface AuxiaProxyGetTreatmentsPayload {
 	showDefaultGate: ShowGateValues; // [3]
 	gateDisplayCount: number;
 	hideSupportMessagingTimestamp: number | undefined; // [4]
+	isInAuxiaControlGroup: boolean;
 }
 
 // [1]
@@ -238,7 +240,7 @@ export interface AuxiaGateDisplayData {
 
 export type SignInGatePropsAuxia = {
 	guUrl: string;
-	signInUrl: string;
+	queryParams: QueryParams;
 	dismissGate: () => void;
 	ophanComponentId: string;
 	abTest?: CurrentSignInGateABTest;
@@ -251,4 +253,5 @@ export type SignInGatePropsAuxia = {
 	) => Promise<void>;
 };
 
+// v1 is in the article, v2 is a popup
 export type AuxiaGateVersion = 'v1' | 'v2';

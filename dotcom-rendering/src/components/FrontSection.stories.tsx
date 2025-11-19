@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import type { ReactNode } from 'react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { LI } from './Card/components/LI';
@@ -68,11 +68,8 @@ const PageSkinWrapper = ({ children }: { children: ReactNode }) => (
 export default {
 	component: FrontSection,
 	title: 'Components/FrontSection',
+
 	parameters: {
-		viewport: {
-			// This has the effect of turning off the viewports addon by default
-			defaultViewport: 'doesNotExist',
-		},
 		chromatic: {
 			viewports: [
 				breakpoints.mobile,
@@ -83,13 +80,23 @@ export default {
 			],
 		},
 	},
+
 	args: {
 		discussionApiUrl,
 		editionId: 'UK',
 		children: <Placeholder />,
 		url: '/',
 	},
+
 	render: (args) => <FrontSection {...args} />,
+
+	globals: {
+		viewport: {
+			// This has the effect of turning off the viewports addon by default
+			value: 'doesNotExist',
+			isRotated: false,
+		},
+	},
 } satisfies Meta<typeof FrontSection>;
 
 export const ContainerStory = {
@@ -378,7 +385,7 @@ export const WithPaidContentForWholeFront = {
 };
 
 export const GuardianLabs = {
-	name: 'Guardian Labs',
+	name: 'guardian Labs',
 	args: {
 		title: 'Section',
 		collectionBranding: {

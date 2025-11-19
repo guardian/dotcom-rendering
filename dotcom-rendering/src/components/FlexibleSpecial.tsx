@@ -19,6 +19,7 @@ import { UL } from './Card/components/UL';
 import type { ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
+import type { SubtitleSize } from './LoopVideoPlayer';
 import type { Alignment } from './SupportingContent';
 
 type Props = {
@@ -26,11 +27,10 @@ type Props = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
-	isInHideTrailsAbTest?: boolean;
 	showLabsRedesign?: boolean;
 };
 
@@ -42,6 +42,7 @@ type BoostProperties = {
 	supportingContentAlignment: Alignment;
 	liveUpdatesAlignment: Alignment;
 	trailTextSize: TrailTextSize;
+	subtitleSize: SubtitleSize;
 };
 
 /**
@@ -70,6 +71,7 @@ const determineCardProperties = (
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
 				trailTextSize: 'regular',
+				subtitleSize: 'medium',
 			};
 		case 'boost':
 			return {
@@ -85,6 +87,7 @@ const determineCardProperties = (
 					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
 				trailTextSize: 'regular',
+				subtitleSize: 'medium',
 			};
 		case 'megaboost':
 			return {
@@ -99,6 +102,7 @@ const determineCardProperties = (
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
+				subtitleSize: 'large',
 			};
 		case 'gigaboost':
 			return {
@@ -113,6 +117,7 @@ const determineCardProperties = (
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
+				subtitleSize: 'large',
 			};
 	}
 };
@@ -122,13 +127,12 @@ type OneCardLayoutProps = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
 	isFirstRow: boolean;
 	containerLevel: DCRContainerLevel;
 	isSplashCard?: boolean;
-	isInHideTrailsAbTest?: boolean;
 	showLabsRedesign?: boolean;
 };
 
@@ -136,14 +140,13 @@ export const OneCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 	aspectRatio,
 	isLastRow,
 	isFirstRow,
 	containerLevel,
 	isSplashCard,
-	isInHideTrailsAbTest,
 	showLabsRedesign,
 }: OneCardLayoutProps) => {
 	const card = cards[0];
@@ -157,6 +160,7 @@ export const OneCardLayout = ({
 		supportingContentAlignment,
 		liveUpdatesAlignment,
 		trailTextSize,
+		subtitleSize,
 	} = determineCardProperties(
 		card.boostLevel ?? 'default',
 		card.supportingContent?.length ?? 0,
@@ -172,7 +176,7 @@ export const OneCardLayout = ({
 					containerPalette={containerPalette}
 					containerType="flexible/special"
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					headlineSizes={headlineSizes}
 					mediaSize={mediaSize}
 					mediaPositionOnDesktop={mediaPositionOnDesktop}
@@ -196,8 +200,8 @@ export const OneCardLayout = ({
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 					headlinePosition={isSplashCard ? 'outer' : 'inner'}
-					isInHideTrailsAbTest={isInHideTrailsAbTest}
 					showLabsRedesign={showLabsRedesign}
+					subtitleSize={subtitleSize}
 				/>
 			</LI>
 		</UL>
@@ -220,12 +224,11 @@ type TwoOrFourCardLayoutProps = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
 	isFirstRow: boolean;
 	containerLevel: DCRContainerLevel;
-	isInHideTrailsAbTest?: boolean;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 };
@@ -234,13 +237,12 @@ const TwoOrFourCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
-	absoluteServerTimes,
+	serverTime,
 	showImage = true,
 	imageLoading,
 	aspectRatio,
 	isFirstRow,
 	containerLevel,
-	isInHideTrailsAbTest,
 	showLabsRedesign,
 }: TwoOrFourCardLayoutProps) => {
 	if (cards.length === 0) return null;
@@ -262,13 +264,15 @@ const TwoOrFourCardLayout = ({
 							containerPalette={containerPalette}
 							containerType="flexible/special"
 							showAge={showAge}
-							absoluteServerTimes={absoluteServerTimes}
+							serverTime={serverTime}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
 							mediaPositionOnDesktop={getImagePosition(
 								hasTwoOrFewerCards,
 								isMediaCard(card.format) || !!card.isNewsletter,
 							)}
+							mediaPositionOnMobile="left"
+							headlineSizes={undefined}
 							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
 							supportingContent={undefined}
 							mediaSize="small"
@@ -282,7 +286,6 @@ const TwoOrFourCardLayout = ({
 									!isMediaCard(card.format))
 							}
 							canPlayInline={false}
-							isInHideTrailsAbTest={isInHideTrailsAbTest}
 							showLabsRedesign={showLabsRedesign}
 						/>
 					</LI>
@@ -296,12 +299,11 @@ export const FlexibleSpecial = ({
 	groupedTrails,
 	containerPalette,
 	showAge,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 	aspectRatio,
 	containerLevel = 'Primary',
 	collectionId,
-	isInHideTrailsAbTest,
 	showLabsRedesign,
 }: Props) => {
 	const snaps = [...groupedTrails.snap].slice(0, 1).map((snap) => ({
@@ -324,14 +326,13 @@ export const FlexibleSpecial = ({
 					cards={snaps}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					isFirstRow={true}
 					isLastRow={splash.length === 0 && cards.length === 0}
 					containerLevel={containerLevel}
 					isSplashCard={false}
-					isInHideTrailsAbTest={isInHideTrailsAbTest}
 					showLabsRedesign={showLabsRedesign}
 				/>
 			)}
@@ -340,14 +341,14 @@ export const FlexibleSpecial = ({
 					cards={splash}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					isLastRow={cards.length === 0}
 					isFirstRow={!isNonEmptyArray(snaps)}
 					containerLevel={containerLevel}
 					isSplashCard={true}
-					isInHideTrailsAbTest={isInHideTrailsAbTest}
+					showLabsRedesign={showLabsRedesign}
 				/>
 			)}
 
@@ -355,12 +356,11 @@ export const FlexibleSpecial = ({
 				cards={cards}
 				containerPalette={containerPalette}
 				showAge={showAge}
-				absoluteServerTimes={absoluteServerTimes}
+				serverTime={serverTime}
 				imageLoading={imageLoading}
 				aspectRatio={aspectRatio}
 				isFirstRow={!isNonEmptyArray(snaps) && !isNonEmptyArray(splash)}
 				containerLevel={containerLevel}
-				isInHideTrailsAbTest={isInHideTrailsAbTest}
 				showLabsRedesign={showLabsRedesign}
 			/>
 		</>

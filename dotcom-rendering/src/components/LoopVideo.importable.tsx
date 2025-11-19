@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { log, storage } from '@guardian/libs';
+import { space } from '@guardian/source/foundations';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
@@ -11,6 +12,7 @@ import { getZIndex } from '../lib/getZIndex';
 import { generateImageURL } from '../lib/image';
 import { useIsInView } from '../lib/useIsInView';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
+import { useSubtitles } from '../lib/useSubtitles';
 import type { CustomPlayEventDetail, Source } from '../lib/video';
 import {
 	customLoopPlayAudioEventName,
@@ -18,8 +20,12 @@ import {
 } from '../lib/video';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
+import type {
+	PLAYER_STATES,
+	PlayerStates,
+	SubtitleSize,
+} from './LoopVideoPlayer';
 import { LoopVideoPlayer } from './LoopVideoPlayer';
-import type { PLAYER_STATES, PlayerStates } from './LoopVideoPlayer';
 import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
 const videoContainerStyles = css`
@@ -117,6 +123,8 @@ type Props = {
 	fallbackImageAlt: CardPictureProps['alt'];
 	fallbackImageAspectRatio: CardPictureProps['aspectRatio'];
 	linkTo: string;
+	subtitleSource?: string;
+	subtitleSize: SubtitleSize;
 };
 
 export const LoopVideo = ({
@@ -132,6 +140,8 @@ export const LoopVideo = ({
 	fallbackImageAlt,
 	fallbackImageAspectRatio,
 	linkTo,
+	subtitleSource,
+	subtitleSize,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -155,12 +165,20 @@ export const LoopVideo = ({
 	 * want to pause the video if it has been in view.
 	 */
 	const [hasBeenInView, setHasBeenInView] = useState(false);
+	const [hasBeenPlayed, setHasBeenPlayed] = useState(false);
+	const [hasTrackedPlay, setHasTrackedPlay] = useState(false);
 
 	const VISIBILITY_THRESHOLD = 0.5;
 
 	const [isInView, setNode] = useIsInView({
 		repeat: true,
 		threshold: VISIBILITY_THRESHOLD,
+	});
+
+	const activeCue = useSubtitles({
+		video: vidRef.current,
+		playerState,
+		currentTime,
 	});
 
 	const playVideo = useCallback(async () => {
@@ -176,6 +194,7 @@ export const LoopVideo = ({
 				.then(() => {
 					// Autoplay succeeded
 					dispatchOphanAttentionEvent('videoPlaying');
+					setHasBeenPlayed(true);
 					setPlayerState('PLAYING');
 				})
 				.catch((error: Error) => {
@@ -384,6 +403,19 @@ export const LoopVideo = ({
 	}, [isInView, hasBeenInView, atomId, linkTo]);
 
 	/**
+	 * Track the first successful video play in Ophan.
+	 *
+	 * This effect runs only after the video has actually started playing
+	 * for the first time. This is to ensure we don't double-report the event.
+	 */
+	useEffect(() => {
+		if (!hasBeenPlayed || hasTrackedPlay) return;
+
+		ophanTrackerWeb(atomId, 'loop')('play');
+		setHasTrackedPlay(true);
+	}, [atomId, hasBeenPlayed, hasTrackedPlay]);
+
+	/**
 	 * Handle play/pause, when instigated by the browser.
 	 */
 	useEffect(() => {
@@ -412,14 +444,6 @@ export const LoopVideo = ({
 				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' ||
 				(hasPageBecomeActive && playerState === 'PAUSED_BY_BROWSER'))
 		) {
-			/**
-			 * Check if the video has not been in view before tracking the play.
-			 * This is so we only track the first play.
-			 */
-			if (!hasBeenInView) {
-				ophanTrackerWeb(atomId, 'loop')('play');
-			}
-
 			setHasPageBecomeActive(false);
 			void playVideo();
 		}
@@ -477,6 +501,25 @@ export const LoopVideo = ({
 	if (adapted) {
 		return FallbackImageComponent;
 	}
+
+	const handleLoadedMetadata = () => {
+		const video = vidRef.current;
+		if (!video) return;
+
+		const track = video.textTracks[0];
+		if (!track?.cues) return;
+		const pxFromBottom = space[3];
+		const videoHeight = video.getBoundingClientRect().height;
+		const percentFromTop =
+			((videoHeight - pxFromBottom) / videoHeight) * 100;
+
+		for (const cue of Array.from(track.cues)) {
+			if (cue instanceof VTTCue) {
+				cue.snapToLines = false;
+				cue.line = percentFromTop;
+			}
+		}
+	};
 
 	const handleLoadedData = () => {
 		if (vidRef.current) {
@@ -617,6 +660,7 @@ export const LoopVideo = ({
 				isPlayable={isPlayable}
 				playerState={playerState}
 				isMuted={isMuted}
+				handleLoadedMetadata={handleLoadedMetadata}
 				handleLoadedData={handleLoadedData}
 				handleCanPlay={handleCanPlay}
 				handlePlayPauseClick={handlePlayPauseClick}
@@ -627,6 +671,9 @@ export const LoopVideo = ({
 				AudioIcon={hasAudio ? AudioIcon : null}
 				preloadPartialData={preloadPartialData}
 				showPlayIcon={showPlayIcon}
+				subtitleSource={subtitleSource}
+				subtitleSize={subtitleSize}
+				activeCue={activeCue}
 			/>
 		</figure>
 	);

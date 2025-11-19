@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	between,
 	from,
 	space,
 	textSans14,
@@ -7,9 +8,12 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import {
+	Link,
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
+import type { EditionId } from '../lib/edition';
+import { getLabsUrlSuffix } from '../lib/labs';
 import { palette as schemePalette } from '../palette';
 import { ContainerTitle } from './ContainerTitle';
 import { Details } from './Details';
@@ -20,6 +24,8 @@ type Props = {
 	title?: string;
 	/** The title can be made into a link using this property */
 	url?: string;
+	/** The ID of the edition, used to construct the Labs front URL */
+	editionId: EditionId;
 };
 
 const headerStyles = css`
@@ -70,6 +76,10 @@ const labelAndAboutStyles = css`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+
+	${between.leftCol.and.wide} {
+		flex-direction: column;
+	}
 `;
 
 const labelStyles = css`
@@ -80,6 +90,10 @@ const labelStyles = css`
 const aboutStyles = css`
 	justify-self: end;
 	${textSans14}
+
+	${between.leftCol.and.wide} {
+		margin-top: ${space[1]}px;
+	}
 `;
 
 const positionStyles = css`
@@ -93,13 +107,22 @@ const positionStyles = css`
 const detailsStyles = css`
 	background-color: ${schemePalette('--labs-about-dropdown-background')};
 	color: ${schemePalette('--labs-about-dropdown-text')};
-	padding: ${space[5]}px;
+	padding: ${space[3]}px;
+	> :not(:last-child) {
+		margin-bottom: ${space[3]}px;
+	}
 `;
 
-export const LabsSectionHeader = ({ title, url }: Props) => (
+export const LabsSectionHeader = ({ title, url, editionId }: Props) => (
 	<div css={headerStyles}>
 		<div css={[logoStyles, dividerStylesUntilLeftCol]}>
-			<LabsLogo />
+			<Link
+				href={`https://www.theguardian.com/guardian-labs${getLabsUrlSuffix(
+					editionId,
+				)}`}
+			>
+				<LabsLogo />
+			</Link>
 		</div>
 
 		<div css={textLayoutStyles}>
@@ -117,7 +140,6 @@ export const LabsSectionHeader = ({ title, url }: Props) => (
 								advertiser and produced by the Guardian Labs
 								team.
 							</p>
-							<br />
 							<LinkButton
 								iconSide="right"
 								size="xsmall"

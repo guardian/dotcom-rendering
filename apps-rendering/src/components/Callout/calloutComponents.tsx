@@ -21,9 +21,8 @@ export const Disclaimer = () => (
 		encrypted and only the Guardian has access to your contributions. We
 		will only use the data you provide us for the purpose of the feature and
 		we will delete any personal data when we no longer require it for this
-		purpose. For true anonymity please use our{' '}
-		<a href="https://www.theguardian.com/securedrop">SecureDrop</a> service
-		instead.
+		purpose. For alternative ways to get in touch securely please see our{' '}
+		<a href="https://www.theguardian.com/tips">tips guide</a>.
 	</div>
 );
 

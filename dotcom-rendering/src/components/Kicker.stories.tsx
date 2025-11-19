@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-webpack5';
 import type { CSSProperties } from 'react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';

@@ -181,9 +181,6 @@ const NavHeader = ({ article, NAV, renderAds }: HeaderProps) => {
 				hasPageSkin={false}
 				hasPageSkinContentSelfConstrain={false}
 				pageId={article.pageId}
-				wholePictureLogoSwitch={
-					article.config.switches.wholePictureLogo
-				}
 			/>
 		</section>
 	);
@@ -232,7 +229,7 @@ export const FullPageInteractiveLayout = (props: WebProps | AppsProps) => {
 						/>
 
 						{format.theme === ArticleSpecial.Labs && (
-							<Stuck>
+							<Stuck zIndex="subNavBanner">
 								<Section
 									fullWidth={true}
 									showTopBorder={false}

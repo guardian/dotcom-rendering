@@ -21,6 +21,7 @@ import type { ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
 import { FeatureCard } from './FeatureCard';
 import { FrontCard } from './FrontCard';
+import type { SubtitleSize } from './LoopVideoPlayer';
 import type { Alignment } from './SupportingContent';
 
 type Props = {
@@ -28,11 +29,10 @@ type Props = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
-	isInHideTrailsAbTest?: boolean;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 };
@@ -86,10 +86,10 @@ export const decideCardPositions = (cards: DCRFrontCard[]): GroupedCards => {
 type ImmersiveCardLayoutProps = {
 	card: DCRFrontCard;
 	containerPalette?: DCRContainerPalette;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	imageLoading: Loading;
 	collectionId: number;
-	isInHideTrailsAbTest?: boolean;
+	showLabsRedesign?: boolean;
 };
 
 /**
@@ -101,12 +101,14 @@ type ImmersiveCardLayoutProps = {
 const ImmersiveCardLayout = ({
 	card,
 	containerPalette,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 	collectionId,
-	isInHideTrailsAbTest,
+	showLabsRedesign,
 }: ImmersiveCardLayoutProps) => {
-	const isLoopingVideo = card.mainMedia?.type === 'LoopVideo';
+	const isLoopingVideo =
+		card.mainMedia?.type === 'SelfHostedVideo' &&
+		card.mainMedia.videoStyle === 'Loop';
 
 	return (
 		<UL padBottom={true}>
@@ -129,10 +131,10 @@ const ImmersiveCardLayout = ({
 					discussionId={card.discussionId}
 					mainMedia={card.mainMedia}
 					isExternalLink={card.isExternalLink}
-					// branding={card.branding}
+					branding={card.branding}
 					containerPalette={containerPalette}
 					trailText={card.trailText}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio="5:3"
 					mobileAspectRatio="4:5"
@@ -141,7 +143,7 @@ const ImmersiveCardLayout = ({
 					supportingContent={card.supportingContent}
 					isImmersive={true}
 					showVideo={card.showVideo}
-					isInHideTrailsAbTest={isInHideTrailsAbTest}
+					showLabsRedesign={showLabsRedesign}
 				/>
 			</LI>
 		</UL>
@@ -156,6 +158,7 @@ type BoostedSplashProperties = {
 	supportingContentAlignment: Alignment;
 	liveUpdatesAlignment: Alignment;
 	trailTextSize: TrailTextSize;
+	subtitleSize: SubtitleSize;
 	avatarUrl?: string;
 };
 
@@ -186,6 +189,7 @@ const decideSplashCardProperties = (
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
 				trailTextSize: 'regular',
+				subtitleSize: 'medium',
 			};
 		case 'boost':
 			return {
@@ -201,6 +205,7 @@ const decideSplashCardProperties = (
 					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
 				liveUpdatesAlignment: 'vertical',
 				trailTextSize: 'regular',
+				subtitleSize: 'medium',
 			};
 		case 'megaboost':
 			return {
@@ -217,6 +222,7 @@ const decideSplashCardProperties = (
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
+				subtitleSize: 'large',
 			};
 		case 'gigaboost':
 			return {
@@ -233,6 +239,7 @@ const decideSplashCardProperties = (
 				supportingContentAlignment: 'horizontal',
 				liveUpdatesAlignment: 'horizontal',
 				trailTextSize: 'large',
+				subtitleSize: 'large',
 			};
 	}
 };
@@ -242,12 +249,11 @@ type SplashCardLayoutProps = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
-	isInHideTrailsAbTest?: boolean;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 };
@@ -256,13 +262,12 @@ const SplashCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 	aspectRatio,
 	isLastRow,
 	containerLevel,
 	collectionId,
-	isInHideTrailsAbTest,
 	showLabsRedesign,
 }: SplashCardLayoutProps) => {
 	const card = cards[0];
@@ -274,10 +279,10 @@ const SplashCardLayout = ({
 			<ImmersiveCardLayout
 				card={card}
 				containerPalette={containerPalette}
-				absoluteServerTimes={absoluteServerTimes}
+				serverTime={serverTime}
 				imageLoading={imageLoading}
 				collectionId={collectionId}
-				isInHideTrailsAbTest={isInHideTrailsAbTest}
+				showLabsRedesign={showLabsRedesign}
 			/>
 		);
 	}
@@ -296,6 +301,7 @@ const SplashCardLayout = ({
 		supportingContentAlignment,
 		liveUpdatesAlignment,
 		trailTextSize,
+		subtitleSize,
 	} = decideSplashCardProperties(
 		card.boostLevel ?? 'default',
 		card.supportingContent?.length ?? 0,
@@ -319,7 +325,7 @@ const SplashCardLayout = ({
 					containerPalette={containerPalette}
 					containerType="flexible/general"
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					headlineSizes={headlineSizes}
 					mediaPositionOnDesktop={mediaPositionOnDesktop}
 					mediaPositionOnMobile={mediaPositionOnMobile}
@@ -345,8 +351,8 @@ const SplashCardLayout = ({
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
+					subtitleSize={subtitleSize}
 					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
-					isInHideTrailsAbTest={isInHideTrailsAbTest}
 					showLabsRedesign={showLabsRedesign}
 				/>
 			</LI>
@@ -359,6 +365,7 @@ type BoostedCardProperties = {
 	mediaSize: MediaSizeType;
 	liveUpdatesPosition: Position;
 	supportingContentAlignment: Alignment;
+	subtitleSize: SubtitleSize;
 };
 
 /**
@@ -382,6 +389,7 @@ const decideCardProperties = (
 				liveUpdatesPosition: 'outer',
 				supportingContentAlignment:
 					supportingContentLength >= 2 ? 'horizontal' : 'vertical',
+				subtitleSize: 'medium',
 			};
 		case 'boost':
 		default:
@@ -395,6 +403,7 @@ const decideCardProperties = (
 				liveUpdatesPosition: 'inner',
 				supportingContentAlignment:
 					supportingContentLength >= 2 ? 'horizontal' : 'vertical',
+				subtitleSize: 'small',
 			};
 	}
 };
@@ -404,13 +413,12 @@ type FullWidthCardLayoutProps = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	aspectRatio: AspectRatio;
 	isFirstRow: boolean;
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
-	isInHideTrailsAbTest?: boolean;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 };
@@ -419,14 +427,13 @@ const FullWidthCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 	aspectRatio,
 	isFirstRow,
 	isLastRow,
 	containerLevel,
 	collectionId,
-	isInHideTrailsAbTest,
 	showLabsRedesign,
 }: FullWidthCardLayoutProps) => {
 	const card = cards[0];
@@ -437,6 +444,7 @@ const FullWidthCardLayout = ({
 		mediaSize,
 		supportingContentAlignment,
 		liveUpdatesPosition,
+		subtitleSize,
 	} = decideCardProperties(
 		card.supportingContent?.length ?? 0,
 		card.boostLevel,
@@ -450,10 +458,10 @@ const FullWidthCardLayout = ({
 			<ImmersiveCardLayout
 				card={card}
 				containerPalette={containerPalette}
-				absoluteServerTimes={absoluteServerTimes}
+				serverTime={serverTime}
 				imageLoading={imageLoading}
 				collectionId={collectionId}
-				isInHideTrailsAbTest={isInHideTrailsAbTest}
+				showLabsRedesign={showLabsRedesign}
 			/>
 		);
 	}
@@ -473,7 +481,7 @@ const FullWidthCardLayout = ({
 					containerPalette={containerPalette}
 					containerType="flexible/general"
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					headlineSizes={headlineSizes}
 					mediaPositionOnDesktop="right"
 					mediaPositionOnMobile={
@@ -501,8 +509,8 @@ const FullWidthCardLayout = ({
 					liveUpdatesPosition={liveUpdatesPosition}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
-					isInHideTrailsAbTest={isInHideTrailsAbTest}
 					showLabsRedesign={showLabsRedesign}
+					subtitleSize={subtitleSize}
 				/>
 			</LI>
 		</UL>
@@ -516,11 +524,10 @@ type HalfWidthCardLayoutProps = {
 	isFirstStandardRow?: boolean;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
-	isInHideTrailsAbTest?: boolean;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 };
@@ -529,14 +536,13 @@ const HalfWidthCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 	isFirstRow,
 	isFirstStandardRow,
 	aspectRatio,
 	isLastRow,
 	containerLevel,
-	isInHideTrailsAbTest,
 	showLabsRedesign,
 }: HalfWidthCardLayoutProps) => {
 	if (cards.length === 0) return null;
@@ -567,10 +573,11 @@ const HalfWidthCardLayout = ({
 							containerPalette={containerPalette}
 							containerType="flexible/general"
 							showAge={showAge}
-							absoluteServerTimes={absoluteServerTimes}
+							serverTime={serverTime}
 							image={card.image}
 							imageLoading={imageLoading}
 							mediaPositionOnDesktop="left"
+							mediaPositionOnMobile="left"
 							supportingContent={card.supportingContent?.slice(
 								0,
 								2,
@@ -591,7 +598,6 @@ const HalfWidthCardLayout = ({
 							trailText={undefined}
 							headlineSizes={undefined}
 							canPlayInline={false}
-							isInHideTrailsAbTest={isInHideTrailsAbTest}
 							showLabsRedesign={showLabsRedesign}
 						/>
 					</LI>
@@ -605,12 +611,11 @@ export const FlexibleGeneral = ({
 	groupedTrails,
 	containerPalette,
 	showAge,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 	aspectRatio,
 	containerLevel = 'Primary',
 	collectionId,
-	isInHideTrailsAbTest,
 	showLabsRedesign,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
@@ -634,13 +639,13 @@ export const FlexibleGeneral = ({
 					cards={splash}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					isLastRow={cards.length === 0}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
-					isInHideTrailsAbTest={isInHideTrailsAbTest}
+					showLabsRedesign={showLabsRedesign}
 				/>
 			)}
 			{groupedCards.map((row, i) => {
@@ -652,14 +657,13 @@ export const FlexibleGeneral = ({
 								cards={row.cards}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								absoluteServerTimes={absoluteServerTimes}
+								serverTime={serverTime}
 								imageLoading={imageLoading}
 								aspectRatio={aspectRatio}
 								isFirstRow={!splash.length && i === 0}
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
 								collectionId={collectionId}
-								isInHideTrailsAbTest={isInHideTrailsAbTest}
 								showLabsRedesign={showLabsRedesign}
 							/>
 						);
@@ -673,14 +677,13 @@ export const FlexibleGeneral = ({
 								cards={row.cards}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								absoluteServerTimes={absoluteServerTimes}
+								serverTime={serverTime}
 								imageLoading={imageLoading}
 								isFirstRow={!splash.length && i === 0}
 								isFirstStandardRow={i === 0}
 								aspectRatio={aspectRatio}
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
-								isInHideTrailsAbTest={isInHideTrailsAbTest}
 								showLabsRedesign={showLabsRedesign}
 							/>
 						);

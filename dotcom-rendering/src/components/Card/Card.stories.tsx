@@ -47,7 +47,6 @@ const basicCardProps: CardProps = {
 	imageLoading: 'eager',
 	discussionApiUrl: 'https://discussion.theguardian.com/discussion-api/',
 	showVideo: true,
-	absoluteServerTimes: true,
 	headlinePosition: 'inner',
 };
 
@@ -62,7 +61,7 @@ const aBasicLink = {
 };
 
 const mainVideo: MainMedia = {
-	type: 'Video',
+	type: 'YoutubeVideo',
 	id: '1234-abcdef-09876-xyz',
 	videoId: '8M_yH-e9cq8',
 	title: '’I care, but I don’t care’: Life after the Queen’s death | Anywhere but Westminster',

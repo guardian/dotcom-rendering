@@ -55,7 +55,7 @@ export const YoutubeEmbedBlockComponent = ({
 					captionText={caption}
 					format={format}
 					credit={credit}
-					mediaType="Video"
+					mediaType="YoutubeVideo"
 					isMainMedia={isMainMedia}
 				/>
 			)}

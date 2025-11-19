@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
-import { joinUrl } from '@guardian/libs';
+import { isUndefined, joinUrl } from '@guardian/libs';
 import {
+	ArticleDesign,
 	type ArticleFormat,
 	type ArticleTheme,
 	Pillar,
@@ -183,8 +184,9 @@ type Props = {
 	pillar: ArticleTheme;
 	shortUrlId: string;
 	discussionApiUrl: string;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	renderingTarget: RenderingTarget;
+	webURL: string;
 };
 
 /**
@@ -218,8 +220,9 @@ export const OnwardsUpper = ({
 	editionId,
 	shortUrlId,
 	discussionApiUrl,
-	absoluteServerTimes,
+	serverTime,
 	renderingTarget,
+	webURL,
 }: Props) => {
 	const isHorizontalScrollingSupported = useIsHorizontalScrollingSupported();
 
@@ -303,6 +306,15 @@ export const OnwardsUpper = ({
 		? getContainerDataUrl(pillar, editionId, ajaxUrl)
 		: undefined;
 
+	// For galleries: they already have a "more galleries" container,
+	// so we can only allow one more onwards container
+	const canHaveCuratedContent =
+		format.design === ArticleDesign.Gallery ? isUndefined(url) : true;
+
+	const hasOnwardsContainer = !!url;
+	const showCuratedContainer =
+		!!curatedDataUrl && !isPaidContent && canHaveCuratedContent;
+
 	return (
 		<div css={onwardsWrapper}>
 			{!!url && (
@@ -316,13 +328,15 @@ export const OnwardsUpper = ({
 						onwardsSource={onwardsSource}
 						format={format}
 						discussionApiUrl={discussionApiUrl}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						isAdFreeUser={isAdFreeUser}
+						containerPosition={'first'}
+						webURL={webURL}
 					/>
 				</Section>
 			)}
-			{!!curatedDataUrl && !isPaidContent && (
+			{showCuratedContainer && (
 				<Section
 					fullWidth={true}
 					borderColour={palette('--article-section-border')}
@@ -333,9 +347,13 @@ export const OnwardsUpper = ({
 						onwardsSource="curated-content"
 						format={format}
 						discussionApiUrl={discussionApiUrl}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						isAdFreeUser={isAdFreeUser}
+						containerPosition={
+							hasOnwardsContainer ? 'second' : 'first'
+						}
+						webURL={webURL}
 					/>
 				</Section>
 			)}

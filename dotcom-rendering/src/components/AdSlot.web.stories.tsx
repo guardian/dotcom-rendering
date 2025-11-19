@@ -1,9 +1,9 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { remSpace, textSans14 } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react';
-import { within } from '@storybook/test';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { createRoot } from 'react-dom/client';
+import { within } from 'storybook/test';
 import {
 	centreColumnDecorator,
 	rightColumnDecorator,

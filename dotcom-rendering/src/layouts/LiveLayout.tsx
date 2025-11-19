@@ -51,7 +51,7 @@ import { SubNav } from '../components/SubNav.importable';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { decideTrail } from '../lib/decideTrail';
+import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -245,6 +245,7 @@ interface BaseProps {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
+	serverTime?: number;
 }
 
 interface AppsProps extends BaseProps {
@@ -257,7 +258,7 @@ interface WebProps extends BaseProps {
 }
 
 export const LiveLayout = (props: WebProps | AppsProps) => {
-	const { article, format, renderingTarget } = props;
+	const { article, format, renderingTarget, serverTime } = props;
 	const {
 		config: { isPaidContent, host, hasLiveBlogTopAd, hasSurveyAd },
 	} = article;
@@ -293,8 +294,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const showComments = article.isCommentable && !isPaidContent;
 
-	const { absoluteServerTimes = false } = article.config.switches;
-
 	return (
 		<>
 			{isWeb && (
@@ -327,9 +326,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}
 						pageId={article.pageId}
-						wholePictureLogoSwitch={
-							article.config.switches.wholePictureLogo
-						}
 					/>
 				</div>
 			)}
@@ -567,7 +563,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									keyEvents={article.keyEvents}
 									filterKeyEvents={article.filterKeyEvents}
 									id={'key-events-carousel-desktop'}
-									absoluteServerTimes={absoluteServerTimes}
+									serverTime={serverTime}
 									renderingTarget={renderingTarget}
 								/>
 							</Island>
@@ -674,6 +670,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										isAdFreeUser={article.isAdFreeUser}
 										editionId={article.editionId}
 										shouldHideAds={article.shouldHideAds}
+										contentLayout="LiveblogLayout"
 									/>
 								</div>
 							</GridItem>
@@ -849,6 +846,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												shouldHideAds={
 													article.shouldHideAds
 												}
+												serverTime={serverTime}
 											/>
 											{pagination.totalPages > 1 && (
 												<Pagination
@@ -970,8 +968,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							>
 								<Carousel
 									heading={article.storyPackage.heading}
-									trails={article.storyPackage.trails.map(
-										decideTrail,
+									trails={decideStoryPackageTrails(
+										article.storyPackage.trails,
+										article.webURL,
 									)}
 									onwardsSource="more-on-this-story"
 									format={format}
@@ -979,7 +978,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									discussionApiUrl={
 										article.config.discussionApiUrl
 									}
-									absoluteServerTimes={absoluteServerTimes}
+									serverTime={serverTime}
 									renderingTarget={renderingTarget}
 								/>
 							</Island>
@@ -1005,8 +1004,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							editionId={article.editionId}
 							shortUrlId={article.config.shortUrlId}
 							discussionApiUrl={article.config.discussionApiUrl}
-							absoluteServerTimes={absoluteServerTimes}
+							serverTime={serverTime}
 							renderingTarget={renderingTarget}
+							webURL={article.webURL}
 						/>
 					</Island>
 

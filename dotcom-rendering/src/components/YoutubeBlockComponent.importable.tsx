@@ -44,7 +44,7 @@ type Props = {
 	isVideoArticle?: boolean;
 	webPublicationDate?: string;
 	showClock?: boolean;
-	absoluteServerTimes?: boolean;
+	serverTime?: number;
 	linkTo?: string;
 	discussionApiUrl?: string;
 	discussionId?: string;
@@ -55,7 +55,6 @@ type Props = {
 	showByline?: boolean;
 	contentType?: string;
 	contentLayout?: string;
-	isInHideTrailsAbTest?: boolean;
 };
 
 export const YoutubeBlockComponent = ({
@@ -87,7 +86,7 @@ export const YoutubeBlockComponent = ({
 	isVideoArticle,
 	webPublicationDate,
 	showClock,
-	absoluteServerTimes,
+	serverTime,
 	linkTo,
 	discussionApiUrl,
 	discussionId,
@@ -98,7 +97,6 @@ export const YoutubeBlockComponent = ({
 	showByline,
 	contentType,
 	contentLayout,
-	isInHideTrailsAbTest,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -125,9 +123,12 @@ export const YoutubeBlockComponent = ({
 			return posterImage;
 		}
 
-		// For Standard Articles with a Video atom for their main media
-		// we need to display the poster image
-		if (contentLayout?.toLowerCase() === 'standardlayout') {
+		// For Standard Articles and Liveblog Articles with a Video atom for
+		// their main media we need to display the poster image.
+		if (
+			contentLayout?.toLowerCase() === 'standardlayout' ||
+			contentLayout?.toLowerCase() === 'livebloglayout'
+		) {
 			return posterImage;
 		}
 
@@ -216,7 +217,7 @@ export const YoutubeBlockComponent = ({
 				isVideoArticle={isVideoArticle}
 				webPublicationDate={webPublicationDate}
 				showClock={!!showClock}
-				absoluteServerTimes={absoluteServerTimes}
+				serverTime={serverTime}
 				linkTo={linkTo}
 				discussionId={discussionId}
 				discussionApiUrl={discussionApiUrl}
@@ -224,14 +225,13 @@ export const YoutubeBlockComponent = ({
 				isImmersive={isImmersive}
 				byline={byline}
 				showByline={showByline}
-				isInHideTrailsAbTest={isInHideTrailsAbTest}
 			/>
 			{!hideCaption && (
 				<Caption
 					captionText={mediaTitle ?? ''}
 					format={format}
 					displayCredit={false}
-					mediaType="Video"
+					mediaType="YoutubeVideo"
 					isMainMedia={isMainMedia}
 				/>
 			)}

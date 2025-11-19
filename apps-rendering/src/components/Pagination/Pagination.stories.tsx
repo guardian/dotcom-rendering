@@ -4,7 +4,7 @@ import {
 	formatToString,
 } from '../../articleFormat';
 import { breakpoints } from '@guardian/source/foundations';
-import type { StoryFn } from '@storybook/react';
+import type { StoryFn } from '@storybook/react-webpack5';
 import { getAllThemes } from 'fixtures/article';
 import { Pagination } from '.';
 

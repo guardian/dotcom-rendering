@@ -6,11 +6,17 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { Hide, SvgMediaControlsPlay } from '@guardian/source/react-components';
-import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '../lib/articleFormat';
 import { secondsToDuration } from '../lib/formatTime';
 import { getZIndex } from '../lib/getZIndex';
+import { getOphanComponents } from '../lib/labs';
 import { transparentColour } from '../lib/transparentColour';
 import { palette } from '../palette';
+import type { Branding } from '../types/branding';
 import type { StarRating as Rating } from '../types/content';
 import type {
 	AspectRatio,
@@ -19,6 +25,7 @@ import type {
 	DCRSupportingContent,
 } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
+import { BrandingLabel } from './BrandingLabel';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
 import type { MediaSizeType } from './Card/components/MediaWrapper';
@@ -66,7 +73,7 @@ const baseCardStyles = css`
 `;
 
 const hoverStyles = css`
-	:hover .image-overlay {
+	:hover .media-overlay {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -83,11 +90,11 @@ const hoverStyles = css`
 
 /** When we hover on sublinks, we want to prevent the general hover styles applying */
 const sublinkHoverStyles = css`
-	:has(ul.sublinks:hover) {
+	:has(ul.sublinks:hover, .branding-logo:hover) {
 		.card-headline .show-underline {
 			text-decoration: none;
 		}
-		.image-overlay {
+		.media-overlay {
 			background-color: transparent;
 		}
 	}
@@ -239,7 +246,7 @@ const getMedia = ({
 	mainMedia?: MainMedia;
 	canPlayInline?: boolean;
 }) => {
-	if (mainMedia && mainMedia.type === 'Video' && canPlayInline) {
+	if (mainMedia && mainMedia.type === 'YoutubeVideo' && canPlayInline) {
 		return {
 			type: 'video',
 			mainMedia,
@@ -285,7 +292,7 @@ const renderPodcastImage = (
 export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	headlineText: string;
 	headlineSizes?: ResponsiveFontSize;
 	byline?: string;
@@ -310,7 +317,7 @@ export type Props = {
 	/** Used for Ophan tracking */
 	dataLinkName?: string;
 	/** Only used on Labs cards */
-	// branding?: Branding;
+	branding?: Branding;
 	/** Supporting content refers to sublinks */
 	supportingContent?: DCRSupportingContent[];
 	containerPalette?: DCRContainerPalette;
@@ -335,7 +342,8 @@ export type Props = {
 	 */
 	isImmersive?: boolean;
 	showVideo?: boolean;
-	isInHideTrailsAbTest?: boolean;
+	/** Feature flag for the labs redesign work */
+	showLabsRedesign?: boolean;
 };
 
 export const FeatureCard = ({
@@ -356,13 +364,13 @@ export const FeatureCard = ({
 	kickerText,
 	showPulsingDot,
 	dataLinkName,
-	// branding,
+	branding,
 	supportingContent,
 	containerPalette,
 	discussionApiUrl,
 	discussionId,
 	isExternalLink,
-	absoluteServerTimes,
+	serverTime,
 	aspectRatio,
 	mobileAspectRatio,
 	starRating,
@@ -371,15 +379,15 @@ export const FeatureCard = ({
 	isNewsletter = false,
 	isImmersive = false,
 	showVideo = false,
-	isInHideTrailsAbTest = false,
+	showLabsRedesign = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
-	const isVideoMainMedia = mainMedia?.type === 'Video';
+	const isVideoMainMedia = mainMedia?.type === 'YoutubeVideo';
 	const isVideoArticle = format.design === ArticleDesign.Video;
 
 	const videoDuration =
-		mainMedia?.type === 'Video' ? mainMedia.duration : undefined;
+		mainMedia?.type === 'YoutubeVideo' ? mainMedia.duration : undefined;
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -389,12 +397,21 @@ export const FeatureCard = ({
 	});
 
 	const showYoutubeVideo =
-		canPlayInline && showVideo && mainMedia?.type === 'Video';
+		canPlayInline && showVideo && mainMedia?.type === 'YoutubeVideo';
 
 	const showCardAge =
 		webPublicationDate !== undefined && showClock !== undefined;
 
 	const showCommentCount = discussionId !== undefined;
+
+	const labsDataAttributes = branding
+		? getOphanComponents({
+				branding,
+				locationPrefix: 'front-card',
+		  })
+		: undefined;
+
+	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	return (
 		<FormatBoundary format={format}>
@@ -452,9 +469,7 @@ export const FeatureCard = ({
 										headlineSizes={headlineSizes}
 										webPublicationDate={webPublicationDate}
 										showClock={!!showClock}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
+										serverTime={serverTime}
 										linkTo={linkTo}
 										discussionId={discussionId}
 										discussionApiUrl={discussionApiUrl}
@@ -462,9 +477,6 @@ export const FeatureCard = ({
 										isImmersive={isImmersive}
 										byline={byline}
 										showByline={showByline}
-										isInHideTrailsAbTest={
-											isInHideTrailsAbTest
-										}
 									/>
 								</Island>
 							</div>
@@ -524,8 +536,8 @@ export const FeatureCard = ({
 									</>
 								)}
 
-								{/* This image overlay is styled when the CardLink is hovered */}
-								<div className="image-overlay" />
+								{/* This overlay is styled when the CardLink is hovered */}
+								<div className="media-overlay" />
 
 								<div
 									css={[
@@ -616,6 +628,9 @@ export const FeatureCard = ({
 												quoteColour={palette(
 													'--feature-card-quote-icon',
 												)}
+												showLabsRedesign={
+													showLabsRedesign
+												}
 											/>
 										</div>
 
@@ -628,19 +643,19 @@ export const FeatureCard = ({
 											</div>
 										) : null}
 
-										{!!trailText &&
-											!isInHideTrailsAbTest && (
-												<div css={trailTextWrapper}>
-													<TrailText
-														trailText={trailText}
-														trailTextColour={palette(
-															'--feature-card-trail-text',
-														)}
-														trailTextSize="regular"
-														padBottom={false}
-													/>
-												</div>
-											)}
+										{!!trailText && (
+											<div css={trailTextWrapper}>
+												<TrailText
+													trailText={trailText}
+													trailTextColour={palette(
+														'--feature-card-trail-text',
+													)}
+													trailTextSize="regular"
+													padBottom={false}
+													hideUntil="tablet"
+												/>
+											</div>
+										)}
 
 										<CardFooter
 											format={format}
@@ -651,9 +666,7 @@ export const FeatureCard = ({
 															webPublicationDate
 														}
 														showClock={!!showClock}
-														absoluteServerTimes={
-															absoluteServerTimes
-														}
+														serverTime={serverTime}
 													/>
 												) : undefined
 											}
@@ -670,21 +683,6 @@ export const FeatureCard = ({
 													/>
 												) : undefined
 											}
-											/**TODO: Determine if this is needed */
-											// cardBranding={
-											// 	branding ? (
-											// 		<CardBranding
-											// 			branding={branding}
-											// 			format={format}
-											// 			onwardsSource={
-											// 				onwardsSource
-											// 			}
-											// 			containerPalette={
-											// 				containerPalette
-											// 			}
-											// 		/>
-											// 	) : undefined
-											// }
 											showLivePlayable={false}
 											mainMedia={mainMedia}
 											isNewsletter={isNewsletter}
@@ -729,6 +727,21 @@ export const FeatureCard = ({
 							alignment="vertical"
 							fillBackgroundOnDesktop={true}
 							fillBackgroundOnMobile={true}
+						/>
+					)}
+					{isLabs && branding && showLabsRedesign && (
+						<BrandingLabel
+							branding={branding}
+							containerPalette={containerPalette}
+							orientation="horizontal"
+							alignment="end"
+							ophanComponentLink={
+								labsDataAttributes?.ophanComponentLink
+							}
+							ophanComponentName={
+								labsDataAttributes?.ophanComponentName
+							}
+							isLabs={isLabs}
 						/>
 					)}
 				</div>

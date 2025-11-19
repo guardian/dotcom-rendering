@@ -6,7 +6,7 @@
 import { css } from '@emotion/react';
 import { palette } from '@guardian/source/foundations';
 import { ButtonLink } from '@guardian/source/react-components';
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-webpack5';
 import { ExternalLink } from '../ExternalLink/ExternalLink';
 import { ThemedLink } from '../ThemedLink/ThemedLink';
 import { InformationBox, InformationBoxText } from './InformationBox';

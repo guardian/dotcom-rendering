@@ -20,17 +20,19 @@
 		"prettier:write": "prettier --ignore-unknown --write --cache ."
 	},
 	"lint-staged": {
-		"*": "prettier --ignore-unknown --write"
+		"*": "prettier --ignore-unknown --write",
+		"ab-testing/**/*": "cd ab-testing && deno run validate"
 	},
 	"dependencies": {
 		"@guardian/prettier": "5.0.0",
+		"@types/chai": "5.2.2",
 		"chromatic": "13.3.0",
 		"husky": "9.1.7",
 		"lint-staged": "15.2.0",
 		"prettier": "3.0.3",
 		"tslib": "2.6.2"
 	},
-	"packageManager": "pnpm@8.15.7",
+	"packageManager": "pnpm@9.15.9",
 	"pnpm": {
 		"patchedDependencies": {
 			"webpack-manifest-plugin@5.0.0": "patches/webpack-manifest-plugin@5.0.0.patch"

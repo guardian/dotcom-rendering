@@ -39,7 +39,7 @@ const buttonStyles = css`
 `;
 
 const hoverStyles = css`
-	:hover .image-overlay {
+	:hover .media-overlay {
 		position: absolute;
 		top: 0;
 		width: 100%;
@@ -133,14 +133,13 @@ type Props = {
 	isVideoArticle?: boolean;
 	webPublicationDate?: string;
 	showClock?: boolean;
-	absoluteServerTimes?: boolean;
+	serverTime?: number;
 	linkTo?: string;
 	discussionApiUrl?: string;
 	discussionId?: string;
 	isImmersive?: boolean;
 	byline?: string;
 	showByline?: boolean;
-	isInHideTrailsAbTest?: boolean;
 };
 
 export const YoutubeAtomFeatureCardOverlay = ({
@@ -161,14 +160,13 @@ export const YoutubeAtomFeatureCardOverlay = ({
 	isVideoArticle,
 	webPublicationDate,
 	showClock,
-	absoluteServerTimes,
+	serverTime,
 	linkTo,
 	discussionId,
 	discussionApiUrl,
 	isImmersive,
 	byline,
 	showByline,
-	isInHideTrailsAbTest,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
@@ -176,7 +174,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 	const showCardAge =
 		webPublicationDate !== undefined &&
 		showClock !== undefined &&
-		absoluteServerTimes !== undefined;
+		serverTime === undefined;
 
 	const showCommentCount =
 		linkTo !== undefined &&
@@ -211,7 +209,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 						/>
 					</div>
 				) : null}
-				<div className="image-overlay" />
+				<div className="media-overlay" />
 				<div css={playIconStyles}>
 					<PlayIcon iconWidth="narrow" />
 				</div>
@@ -240,7 +238,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 							showByline={showByline}
 						/>
 					)}
-					{!!trailText && !isInHideTrailsAbTest && (
+					{!!trailText && (
 						<div
 							css={css`
 								margin-top: ${space[3]}px;
@@ -254,6 +252,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 								)}
 								trailTextSize="regular"
 								padBottom={false}
+								hideUntil="tablet"
 							/>
 						</div>
 					)}
@@ -264,7 +263,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 								<FeatureCardCardAge
 									webPublicationDate={webPublicationDate}
 									showClock={!!showClock}
-									absoluteServerTimes={absoluteServerTimes}
+									serverTime={serverTime}
 								/>
 							) : undefined
 						}
@@ -280,7 +279,10 @@ export const YoutubeAtomFeatureCardOverlay = ({
 						showLivePlayable={false}
 						mainMedia={
 							isVideoArticle
-								? { type: 'Video', duration: duration ?? 0 }
+								? {
+										type: 'YoutubeVideo',
+										duration: duration ?? 0,
+								  }
 								: undefined
 						}
 					/>

@@ -1,4 +1,4 @@
-import type { Decorator, Meta, StoryObj } from '@storybook/react';
+import type { Decorator, Meta, StoryObj } from '@storybook/react-webpack5';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
 import { calloutCampaign as calloutCampaignV2 } from '../../fixtures/manual/calloutCampaignV2';

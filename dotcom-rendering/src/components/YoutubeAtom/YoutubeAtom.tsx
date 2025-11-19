@@ -56,7 +56,7 @@ export type Props = {
 	isVideoArticle?: boolean;
 	webPublicationDate?: string;
 	showClock?: boolean;
-	absoluteServerTimes?: boolean;
+	serverTime?: number;
 	linkTo?: string;
 	discussionApiUrl?: string;
 	discussionId?: string;
@@ -64,7 +64,6 @@ export type Props = {
 	isImmersive?: boolean;
 	byline?: string;
 	showByline?: boolean;
-	isInHideTrailsAbTest?: boolean;
 };
 
 /**
@@ -112,7 +111,7 @@ export const YoutubeAtom = ({
 	isVideoArticle,
 	webPublicationDate,
 	showClock,
-	absoluteServerTimes,
+	serverTime,
 	linkTo,
 	discussionApiUrl,
 	discussionId,
@@ -120,7 +119,6 @@ export const YoutubeAtom = ({
 	isImmersive,
 	byline,
 	showByline,
-	isInHideTrailsAbTest,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -262,14 +260,13 @@ export const YoutubeAtom = ({
 								isVideoArticle={isVideoArticle}
 								webPublicationDate={webPublicationDate}
 								showClock={!!showClock}
-								absoluteServerTimes={absoluteServerTimes}
+								serverTime={serverTime}
 								linkTo={linkTo}
 								discussionId={discussionId}
 								discussionApiUrl={discussionApiUrl}
 								isImmersive={isImmersive}
 								byline={byline}
 								showByline={showByline}
-								isInHideTrailsAbTest={isInHideTrailsAbTest}
 							/>
 						) : (
 							<YoutubeAtomOverlay

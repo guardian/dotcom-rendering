@@ -43,30 +43,45 @@ import { StickyBottomBanner } from './StickyBottomBanner.importable';
 
 const Mock = () => <>🏝️</>;
 
+/* eslint-disable-next-line @typescript-eslint/no-unused-expressions --
+ * The expression is intentionally never used, the file is just being tested for
+ * compilation, as mentioned above. */
 () => (
 	<Island priority="critical">
 		<Mock />
 	</Island>
 );
 
+/* eslint-disable-next-line @typescript-eslint/no-unused-expressions --
+ * The expression is intentionally never used, the file is just being tested for
+ * compilation, as mentioned above. */
 () => (
 	<Island priority="critical" defer={{ until: 'visible' }}>
 		<Mock />
 	</Island>
 );
 
+/* eslint-disable-next-line @typescript-eslint/no-unused-expressions --
+ * The expression is intentionally never used, the file is just being tested for
+ * compilation, as mentioned above. */
 () => (
 	<Island priority="critical" defer={{ until: 'idle' }}>
 		<Mock />
 	</Island>
 );
 
+/* eslint-disable-next-line @typescript-eslint/no-unused-expressions --
+ * The expression is intentionally never used, the file is just being tested for
+ * compilation, as mentioned above. */
 () => (
 	<Island priority="feature" defer={{ until: 'interaction' }}>
 		<Mock />
 	</Island>
 );
 
+/* eslint-disable-next-line @typescript-eslint/no-unused-expressions --
+ * The expression is intentionally never used; the file is just being tested for
+ * compilation, as mentioned above. */
 () => (
 	// @ts-expect-error -- non-critical island must be deferred
 	<Island priority="feature">
@@ -215,8 +230,8 @@ describe('Island: server-side rendering', () => {
 						editionId={'UK'}
 						shortUrlId=""
 						discussionApiUrl=""
-						absoluteServerTimes={true}
 						renderingTarget="Web"
+						webURL={''}
 					/>
 				</WithConfig>,
 			),

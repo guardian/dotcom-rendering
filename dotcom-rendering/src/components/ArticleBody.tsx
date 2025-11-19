@@ -54,6 +54,7 @@ type Props = {
 	lang?: string;
 	isRightToLeftLang?: boolean;
 	shouldHideAds: boolean;
+	serverTime?: number;
 };
 
 const globalOlStyles = () => css`
@@ -137,6 +138,7 @@ export const ArticleBody = ({
 	isRightToLeftLang = false,
 	editionId,
 	shouldHideAds,
+	serverTime,
 }: Props) => {
 	const isInteractiveContent =
 		format.design === ArticleDesign.Interactive ||
@@ -205,6 +207,7 @@ export const ArticleBody = ({
 					keywordIds={keywordIds}
 					editionId={editionId}
 					shouldHideAds={shouldHideAds}
+					serverTime={serverTime}
 				/>
 			</div>
 		);

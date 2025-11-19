@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react';
-import { userEvent, within } from '@storybook/test';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { userEvent, within } from 'storybook/test';
 import {
 	defaultFormats,
 	splitTheme,
@@ -14,6 +14,7 @@ const meta = {
 	args: {
 		title: 'Container Title',
 		url: '/',
+		editionId: 'AU',
 	},
 	render: (args) => (
 		<div

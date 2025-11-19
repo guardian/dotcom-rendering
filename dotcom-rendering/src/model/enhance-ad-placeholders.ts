@@ -62,9 +62,11 @@ const isEligibleImage = (element: FEElement) =>
 const insertPlaceholder = (
 	prevElements: FEElement[],
 	currentElement: FEElement,
+	adPosition: number,
 ): FEElement[] => {
 	const placeholder: AdPlaceholderBlockElement = {
 		_type: 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement',
+		adPosition,
 	};
 	return [...prevElements, placeholder, currentElement];
 };
@@ -72,9 +74,11 @@ const insertPlaceholder = (
 const insertPlaceholderAfterCurrentElement = (
 	prevElements: FEElement[],
 	currentElement: FEElement,
+	adPosition: number,
 ): FEElement[] => {
 	const placeholder: AdPlaceholderBlockElement = {
 		_type: 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement',
+		adPosition,
 	};
 	return [...prevElements, currentElement, placeholder];
 };
@@ -82,6 +86,7 @@ const insertPlaceholderAfterCurrentElement = (
 type ReducerAccumulatorGallery = {
 	elements: FEElement[];
 	imageBlockElementCounter: number;
+	adPlaceholderCounter: number;
 };
 
 /**
@@ -111,15 +116,20 @@ const insertAdPlaceholdersForGallery = (elements: FEElement[]): FEElement[] => {
 					? insertPlaceholderAfterCurrentElement(
 							prev.elements,
 							currentElement,
+							prev.adPlaceholderCounter,
 					  )
 					: [...prev.elements, currentElement],
 				imageBlockElementCounter,
+				adPlaceholderCounter: shouldInsertAd
+					? prev.adPlaceholderCounter + 1
+					: prev.adPlaceholderCounter,
 			};
 		},
 		// Initial value for reducer function
 		{
 			elements: [],
 			imageBlockElementCounter: 0,
+			adPlaceholderCounter: 0,
 		},
 	);
 
@@ -166,7 +176,11 @@ const insertAdPlaceholders = (elements: FEElement[]): FEElement[] => {
 
 			return {
 				elements: shouldInsertAd
-					? insertPlaceholder(prev.elements, currentElement)
+					? insertPlaceholder(
+							prev.elements,
+							currentElement,
+							prev.numberOfAdsInserted,
+					  )
 					: currentElements,
 				elementCounter,
 				lastAdIndex: shouldInsertAd ? elementCounter : prev.lastAdIndex,

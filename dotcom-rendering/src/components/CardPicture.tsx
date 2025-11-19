@@ -50,9 +50,30 @@ const decideImageWidths = (
 				{ breakpoint: breakpoints.mobile, width: 220, aspectRatio },
 			];
 
+		case 'scrollable-small':
+			return [
+				{ breakpoint: breakpoints.mobile, width: 86, aspectRatio },
+				{ breakpoint: breakpoints.tablet, width: 123, aspectRatio },
+			];
+		case 'scrollable-medium':
+			return [
+				{ breakpoint: breakpoints.mobile, width: 200, aspectRatio },
+				{
+					breakpoint: breakpoints.mobileLandscape,
+					width: 324,
+					aspectRatio,
+				},
+				{ breakpoint: breakpoints.tablet, width: 160, aspectRatio },
+				{ breakpoint: breakpoints.desktop, width: 220, aspectRatio },
+			];
+
 		case 'small':
 			return [
-				{ breakpoint: breakpoints.mobile, width: 120, aspectRatio },
+				{
+					breakpoint: breakpoints.mobile,
+					width: 120,
+					aspectRatio,
+				},
 				{ breakpoint: breakpoints.tablet, width: 160, aspectRatio },
 				{ breakpoint: breakpoints.desktop, width: 220, aspectRatio },
 			];
