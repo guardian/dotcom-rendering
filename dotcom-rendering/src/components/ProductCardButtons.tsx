@@ -26,7 +26,7 @@ export const ProductCardButtons = ({
 					fullwidth={true}
 					dataComponent={
 						dataComponent
-							? `${dataComponent}--${index + 1}`
+							? `${dataComponent}-${index + 1}`
 							: undefined
 					}
 				/>
