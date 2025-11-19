@@ -45,15 +45,15 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: 'thefilter-product-element',
+		name: "thefilter-product-element",
 		description:
-			'A hold back test to measure uplift of the product element',
-		owners: ['thefilter.dev@guardian.co.uk'],
-		status: 'ON',
-		expirationDate: '2025-12-30',
-		type: 'server',
+			"A hold back test to measure uplift of the product element",
+		owners: ["thefilter.dev@guardian.co.uk"],
+		status: "ON",
+		expirationDate: "2025-12-30",
+		type: "server",
 		audienceSize: 10 / 100,
-		groups: ['control', 'variant'],
+		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
 ];
