@@ -31,6 +31,7 @@ export function EpicContent({
 		if (impressionSeen && !reportedImpressionSeen) {
 			void getAcquisitionsClient().epicSeen();
 			setReportedImpressionSeen(true);
+			document.dispatchEvent(new CustomEvent('EpicContent in view'));
 		}
 	}, [impressionSeen, reportedImpressionSeen, setReportedImpressionSeen]);
 

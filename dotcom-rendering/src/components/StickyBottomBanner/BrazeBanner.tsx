@@ -13,6 +13,7 @@ import { getZIndex } from '../../lib/getZIndex';
 import { getOptionsHeaders } from '../../lib/identity';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { useAuthStatus } from '../../lib/useAuthStatus';
+import { useIsInView } from '../../lib/useIsInView';
 import type { TagType } from '../../types/tag';
 import { useConfig } from '../ConfigContext';
 
@@ -109,6 +110,10 @@ const BrazeBannerWithSatisfiedDependencies = ({
 }: InnerProps) => {
 	const authStatus = useAuthStatus();
 	const { renderingTarget } = useConfig();
+	const [hasBeenSeen, setNode] = useIsInView({
+		debounce: true,
+		threshold: 0,
+	});
 
 	useEffect(() => {
 		// Log the impression with Braze
@@ -129,6 +134,12 @@ const BrazeBannerWithSatisfiedDependencies = ({
 		);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	useEffect(() => {
+		if (hasBeenSeen) {
+			document.dispatchEvent(new CustomEvent('braze-banner:in-view'));
+		}
+	}, [hasBeenSeen]);
 
 	const componentName = meta.dataFromBraze.componentName;
 	if (!componentName) return null;
@@ -152,7 +163,7 @@ const BrazeBannerWithSatisfiedDependencies = ({
 		lazyFetchEmailWithTimeout();
 
 	return (
-		<div css={containerStyles}>
+		<div css={containerStyles} ref={setNode}>
 			<BrazeComponent
 				logButtonClickWithBraze={meta.logButtonClickWithBraze}
 				submitComponentEvent={(event) =>

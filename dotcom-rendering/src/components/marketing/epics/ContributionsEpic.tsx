@@ -285,6 +285,9 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 		if (hasBeenSeen) {
 			// For epic view count
 			logEpicView(tracking.abTestName);
+			document.dispatchEvent(
+				new CustomEvent('contributions-epic:in-view'),
+			);
 
 			// For ophan
 			if (submitComponentEvent) {
