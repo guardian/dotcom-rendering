@@ -6,7 +6,9 @@ import type { App } from "aws-cdk-lib";
 import { Runtime } from "aws-cdk-lib/aws-lambda";
 import { StringParameter } from "aws-cdk-lib/aws-ssm";
 
-export class DeploymentLambda extends GuStack {
+export const lambdaFunctionName = "ab-testing-deployment-lambda";
+
+export class AbTestingDeploymentLambda extends GuStack {
 	constructor(scope: App, id: string, props: GuStackProps) {
 		super(scope, id, props);
 
@@ -38,10 +40,10 @@ export class DeploymentLambda extends GuStack {
 			);
 
 		const lambda = new GuLambdaFunction(this, "AbTestingDeploymentLambda", {
-			functionName: `ab-testing-deployment-${this.stage}`,
+			functionName: `${lambdaFunctionName}-${this.stage}`,
 			fileName: "lambda.zip",
 			handler: "index.handler",
-			app: "ab-testing-deployment-lambda",
+			app: `${lambdaFunctionName}-lambda`,
 			runtime: Runtime.NODEJS_22_X,
 			memorySize: 256,
 			environment: {

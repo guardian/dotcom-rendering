@@ -3,6 +3,7 @@ import { GuStack } from "@guardian/cdk/lib/constructs/core/stack.js";
 import type { App } from "aws-cdk-lib";
 import { CustomResource, Duration } from "aws-cdk-lib";
 import { Function } from "aws-cdk-lib/aws-lambda";
+import { lambdaFunctionName } from "./deploymentLambda.ts";
 
 export class AbTestingConfig extends GuStack {
 	constructor(scope: App, id: string, props: GuStackProps) {
@@ -11,7 +12,7 @@ export class AbTestingConfig extends GuStack {
 		const lambda = Function.fromFunctionName(
 			this,
 			"DeploymentLambdaFunction",
-			`${props.app}-${this.stage}`,
+			`${lambdaFunctionName}-${this.stage}`,
 		);
 
 		// Trigger the Lambda to run upon deployment
