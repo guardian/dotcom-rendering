@@ -115,7 +115,7 @@ const withBannerData =
 		useEffect(() => {
 			if (hasBeenSeen) {
 				document.dispatchEvent(
-					new CustomEvent('banner:in-view', { detail: { bannerId } }),
+					new CustomEvent('banner:open', { detail: { bannerId } }),
 				);
 			}
 		}, [hasBeenSeen]);

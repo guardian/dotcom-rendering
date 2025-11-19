@@ -137,7 +137,11 @@ const BrazeBannerWithSatisfiedDependencies = ({
 
 	useEffect(() => {
 		if (hasBeenSeen) {
-			document.dispatchEvent(new CustomEvent('braze-banner:in-view'));
+			document.dispatchEvent(
+				new CustomEvent('banner:open', {
+					detail: { bannerId: 'braze-banner' },
+				}),
+			);
 		}
 	}, [hasBeenSeen]);
 

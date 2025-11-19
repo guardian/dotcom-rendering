@@ -286,7 +286,11 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 			// For epic view count
 			logEpicView(tracking.abTestName);
 			document.dispatchEvent(
-				new CustomEvent('contributions-epic:in-view'),
+				new CustomEvent('epic:in-view', {
+					detail: {
+						epicType: 'contributions',
+					},
+				}),
 			);
 
 			// For ophan
