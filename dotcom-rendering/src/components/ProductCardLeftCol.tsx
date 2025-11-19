@@ -66,7 +66,7 @@ const buttonContainer = css`
 	padding-bottom: ${space[6]}px;
 	min-width: 100%;
 	display: grid;
-	row-gap: ${space[1]}px;
+	row-gap: ${space[3]}px;
 `;
 const customAttributesContainer = css`
 	border-top: 1px solid ${palette('--section-border')};
