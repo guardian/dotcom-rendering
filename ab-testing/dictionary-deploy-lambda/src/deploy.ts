@@ -6,7 +6,7 @@ import { fetchDictionaryArtifact } from "./fetch-artifact.ts";
 const ARTIFACT_BUCKET_NAME = getEnv("ARTIFACT_BUCKET_NAME");
 const STAGE = getEnv("STAGE");
 
-const CONFIG_PREFIX = `/${STAGE}/config/ab-testing`;
+const CONFIG_PREFIX = `${STAGE}/config/ab-testing`;
 
 type ArtifactInfo = {
 	artifact: string;
