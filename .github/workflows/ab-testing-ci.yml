@@ -163,7 +163,7 @@ jobs:
           contentDirectories: |
             ab-testing-config-artifacts:
               - ab-testing/dist
-            ab-testing-deploy:
+            ab-testing:
               - ab-testing/dictionary-deploy-lambda/dist/lambda.zip
             ab-testing-ui-artifact:
               - ab-testing/frontend/output/ab-tests.html
