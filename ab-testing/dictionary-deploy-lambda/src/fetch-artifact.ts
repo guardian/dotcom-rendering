@@ -25,18 +25,27 @@ const fetchDictionaryArtifact = async (
 		Bucket,
 		Key,
 	});
-	const response = await s3Client.send(getObjectCommand);
 
-	if (!response.Body) {
-		throw new Error("No body found in S3 object response");
+	try {
+		const response = await s3Client.send(getObjectCommand);
+
+		if (!response.Body) {
+			throw new Error("No body found in S3 object response");
+		}
+
+		const bodyString = await response.Body.transformToString();
+		const parsed = JSON.parse(bodyString) as unknown;
+
+		const result = create(parsed, array(fastlyKVStruct));
+
+		return result;
+	} catch (error) {
+		console.error(
+			`Failed to fetch artifact from Bucket: ${Bucket}, Key: ${Key}`,
+		);
+		console.error("Error fetching or parsing artifact:", error);
+		throw error;
 	}
-
-	const bodyString = await response.Body.transformToString();
-	const parsed = JSON.parse(bodyString) as unknown;
-
-	const result = create(parsed, array(fastlyKVStruct));
-
-	return result;
 };
 
 export { fetchDictionaryArtifact, type KeyValue };

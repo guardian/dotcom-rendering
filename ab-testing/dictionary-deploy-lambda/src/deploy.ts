@@ -21,14 +21,17 @@ type ArtifactInfo = {
 export const fetchAndDeployArtifacts = async (deployments: ArtifactInfo[]) => {
 	try {
 		await Promise.all(
-			deployments.map(({ artifact, dictionary }) =>
-				fetchDictionaryArtifact(
+			deployments.map(({ artifact, dictionary }) => {
+				console.log(
+					`Fetching artifact /${ARTIFACT_BUCKET_NAME}${CONFIG_PREFIX}/${artifact} from S3 and deploying to Fastly dictionary ${dictionary.name}`,
+				);
+				return fetchDictionaryArtifact(
 					ARTIFACT_BUCKET_NAME,
 					`${CONFIG_PREFIX}/${artifact}`,
 				).then((abTestGroups) =>
 					deployDictionary(dictionary, abTestGroups),
-				),
-			),
+				);
+			}),
 		);
 	} catch (error) {
 		console.error("Error in fetchAndDeployArtifacts:", error);
