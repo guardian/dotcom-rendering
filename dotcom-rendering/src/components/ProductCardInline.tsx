@@ -213,7 +213,7 @@ export const ProductCardInline = ({
 			<div css={buttonWrapper}>
 				<ProductCardButtons
 					productCtas={productCtas}
-					dataComponent={'inline-product-card-buttons'}
+					dataComponent={'inline-product-card-button'}
 				/>
 			</div>
 			{hasCustomAttributes && (

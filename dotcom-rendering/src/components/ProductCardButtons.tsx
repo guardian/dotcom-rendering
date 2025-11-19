@@ -24,7 +24,11 @@ export const ProductCardButtons = ({
 					minimisePadding={true}
 					priority={index === 0 ? 'primary' : 'tertiary'}
 					fullwidth={true}
-					dataComponent={dataComponent}
+					dataComponent={
+						dataComponent
+							? `${dataComponent}--${index + 1}`
+							: undefined
+					}
 				/>
 			);
 		})}
