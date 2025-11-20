@@ -1,11 +1,11 @@
 import { deepEqual, equal, throws } from "node:assert";
 import { test } from "node:test";
-import type { ABTest } from "../../types.ts";
 import type {
 	AllSpace,
 	AudienceSpace,
 	FastlyTestParams,
-} from "../lib/types.ts";
+} from "../../lib/types.ts";
+import type { ABTest } from "../../types.ts";
 import {
 	calculateAllSpaceUpdates,
 	calculateSpaceUpdates,
