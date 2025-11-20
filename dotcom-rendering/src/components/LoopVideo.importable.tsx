@@ -18,6 +18,7 @@ import {
 	customLoopPlayAudioEventName,
 	customYoutubePlayEventName,
 } from '../lib/video';
+import type { VideoPlayerFormat } from '../types/mainMedia';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
 import type {
@@ -29,8 +30,12 @@ import { LoopVideoPlayer } from './LoopVideoPlayer';
 import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
 const videoContainerStyles = css`
-	z-index: ${getZIndex('loop-video-container')};
+	z-index: ${getZIndex('video-container')};
 	position: relative;
+`;
+
+const cinemagraphContainerStyles = css`
+	pointer-events: none;
 `;
 
 /**
@@ -116,6 +121,7 @@ type Props = {
 	uniqueId: string;
 	height: number;
 	width: number;
+	videoStyle: VideoPlayerFormat;
 	posterImage: string;
 	fallbackImage: CardPictureProps['mainImage'];
 	fallbackImageSize: CardPictureProps['imageSize'];
@@ -133,6 +139,7 @@ export const LoopVideo = ({
 	uniqueId,
 	height,
 	width,
+	videoStyle,
 	posterImage,
 	fallbackImage,
 	fallbackImageSize,
@@ -169,6 +176,12 @@ export const LoopVideo = ({
 	const [hasTrackedPlay, setHasTrackedPlay] = useState(false);
 
 	const VISIBILITY_THRESHOLD = 0.5;
+
+	/**
+	 * All controls on the video are hidden: the video looks like a GIF.
+	 * This includes but may not be limited to: audio icon, play/pause icon, subtitles, progress bar.
+	 */
+	const isCinemagraph = videoStyle === 'Cinemagraph';
 
 	const [isInView, setNode] = useIsInView({
 		repeat: true,
@@ -534,11 +547,15 @@ export const LoopVideo = ({
 	};
 
 	const handlePlayPauseClick = (event: React.SyntheticEvent) => {
+		if (isCinemagraph) return;
+
 		event.preventDefault();
 		playPauseVideo();
 	};
 
 	const handleAudioClick = (event: React.SyntheticEvent) => {
+		if (isCinemagraph) return;
+
 		void submitClickComponentEvent(event.currentTarget, renderingTarget);
 
 		event.stopPropagation(); // Don't pause the video
@@ -558,6 +575,8 @@ export const LoopVideo = ({
 	 * browser. Therefore we need to apply the pause state to the video.
 	 */
 	const handlePause = () => {
+		if (isCinemagraph) return;
+
 		if (
 			playerState === 'PAUSED_BY_USER' ||
 			playerState === 'PAUSED_BY_INTERSECTION_OBSERVER'
@@ -581,6 +600,7 @@ export const LoopVideo = ({
 			new Error(message),
 			'loop-video',
 		);
+
 		log('dotcom', message);
 	};
 
@@ -612,6 +632,8 @@ export const LoopVideo = ({
 	const handleKeyDown = (
 		event: React.KeyboardEvent<HTMLVideoElement>,
 	): void => {
+		if (isCinemagraph) return;
+
 		switch (event.key) {
 			case 'Enter':
 			case ' ':
@@ -642,8 +664,11 @@ export const LoopVideo = ({
 	return (
 		<figure
 			ref={setNode}
-			css={videoContainerStyles}
-			className="loop-video-container"
+			css={[
+				videoContainerStyles,
+				isCinemagraph && cinemagraphContainerStyles,
+			]}
+			className={`video-container ${videoStyle.toLocaleLowerCase()}`}
 			data-component="gu-video-loop"
 		>
 			<LoopVideoPlayer
@@ -652,6 +677,7 @@ export const LoopVideo = ({
 				uniqueId={uniqueId}
 				width={width}
 				height={height}
+				videoStyle={videoStyle}
 				posterImage={optimisedPosterImage}
 				FallbackImageComponent={FallbackImageComponent}
 				currentTime={currentTime}
@@ -671,8 +697,8 @@ export const LoopVideo = ({
 				AudioIcon={hasAudio ? AudioIcon : null}
 				preloadPartialData={preloadPartialData}
 				showPlayIcon={showPlayIcon}
-				subtitleSource={subtitleSource}
 				subtitleSize={subtitleSize}
+				subtitleSource={subtitleSource}
 				activeCue={activeCue}
 			/>
 		</figure>

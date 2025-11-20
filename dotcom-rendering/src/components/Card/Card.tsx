@@ -32,6 +32,7 @@ import type {
 	DCRSnapType,
 	DCRSupportingContent,
 } from '../../types/front';
+import type { CardMediaType } from '../../types/layout';
 import type { MainMedia } from '../../types/mainMedia';
 import type { OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
@@ -280,8 +281,21 @@ const getMedia = ({
 	isBetaContainer: boolean;
 }) => {
 	if (mainMedia?.type === 'SelfHostedVideo' && canPlayInline) {
+		let type: CardMediaType;
+		switch (mainMedia.videoStyle) {
+			case 'Default':
+				type = 'default-video';
+				break;
+			case 'Loop':
+				type = 'loop-video';
+				break;
+			case 'Cinemagraph':
+				type = 'cinemagraph';
+				break;
+		}
+
 		return {
-			type: 'loop-video',
+			type,
 			mainMedia,
 		} as const;
 	}
@@ -563,6 +577,12 @@ export const Card = ({
 		canPlayInline,
 		isBetaContainer,
 	});
+
+	const isSelfHostedVideo =
+		media &&
+		(media.type === 'default-video' ||
+			media.type === 'loop-video' ||
+			media.type === 'cinemagraph');
 
 	const resolvedDataLinkName =
 		media && dataLinkName
@@ -941,7 +961,7 @@ export const Card = ({
 								/>
 							</AvatarContainer>
 						)}
-						{media.type === 'loop-video' && (
+						{isSelfHostedVideo && (
 							<Island
 								priority="critical"
 								defer={{ until: 'visible' }}
@@ -952,6 +972,7 @@ export const Card = ({
 									uniqueId={uniqueId}
 									height={media.mainMedia.height}
 									width={media.mainMedia.width}
+									videoStyle={media.mainMedia.videoStyle}
 									posterImage={media.mainMedia.image ?? ''}
 									fallbackImage={media.mainMedia.image ?? ''}
 									fallbackImageSize={mediaSize}

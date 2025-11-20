@@ -241,7 +241,7 @@ export const getActiveMediaAtom = (
 
 			return {
 				type: 'SelfHostedVideo',
-				videoStyle: 'Loop',
+				videoStyle: mediaAtom.videoPlayerFormat ?? 'Loop',
 				atomId: mediaAtom.id,
 				sources: sources.map((source) => ({
 					src: source.id,

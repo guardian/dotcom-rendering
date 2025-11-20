@@ -27,7 +27,9 @@ export type CardMediaType =
 	| 'crossword'
 	| 'slideshow'
 	| 'youtube-video'
+	| 'default-video'
 	| 'loop-video'
+	| 'cinemagraph'
 	| 'podcast';
 
 export type SmallHeadlineSize =

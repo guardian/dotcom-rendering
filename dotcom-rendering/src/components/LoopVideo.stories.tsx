@@ -71,6 +71,14 @@ export const Without5to4Ratio: Story = {
 	},
 };
 
+export const WithCinemagraph: Story = {
+	name: 'With cinemagraph',
+	args: {
+		...Default.args,
+		videoStyle: 'Cinemagraph',
+	},
+};
+
 export const PausePlay: Story = {
 	...Default,
 	name: 'Pause and play interaction',

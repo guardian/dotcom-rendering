@@ -16,17 +16,14 @@ import { forwardRef } from 'react';
 import type { ActiveCue } from '../lib/useSubtitles';
 import type { Source } from '../lib/video';
 import { palette } from '../palette';
+import type { VideoPlayerFormat } from '../types/mainMedia';
 import { narrowPlayIconWidth, PlayIcon } from './Card/components/PlayIcon';
 import { LoopVideoProgressBar } from './LoopVideoProgressBar';
 import { SubtitleOverlay } from './SubtitleOverlay';
 
 export type SubtitleSize = 'small' | 'medium' | 'large';
 
-const videoStyles = (
-	width: number,
-	height: number,
-	subtitleSize: SubtitleSize,
-) => css`
+const videoStyles = (width: number, height: number) => css`
 	position: relative;
 	display: block;
 	height: auto;
@@ -35,7 +32,9 @@ const videoStyles = (
 	/* Prevents CLS by letting the browser know the space the video will take up. */
 	aspect-ratio: ${width} / ${height};
 	object-fit: cover;
+`;
 
+const subtitleStyles = (subtitleSize: SubtitleSize | undefined) => css`
 	::cue {
 		/* Hide the cue by default as we prefer custom overlay */
 		visibility: hidden;
@@ -103,6 +102,7 @@ type Props = {
 	uniqueId: string;
 	width: number;
 	height: number;
+	videoStyle: VideoPlayerFormat;
 	FallbackImageComponent: ReactElement;
 	isPlayable: boolean;
 	playerState: PlayerStates;
@@ -122,7 +122,7 @@ type Props = {
 	preloadPartialData: boolean;
 	showPlayIcon: boolean;
 	subtitleSource?: string;
-	subtitleSize: SubtitleSize;
+	subtitleSize?: SubtitleSize;
 	/* used in custom subtitle overlays */
 	activeCue?: ActiveCue | null;
 };
@@ -144,6 +144,7 @@ export const LoopVideoPlayer = forwardRef(
 			uniqueId,
 			width,
 			height,
+			videoStyle,
 			FallbackImageComponent,
 			posterImage,
 			isPlayable,
@@ -169,21 +170,36 @@ export const LoopVideoPlayer = forwardRef(
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
 		const loopVideoId = `loop-video-${uniqueId}`;
+		const showSubtitles =
+			videoStyle !== 'Cinemagraph' && !!subtitleSource && !!subtitleSize;
+
+		const showControls =
+			videoStyle !== 'Cinemagraph' &&
+			ref &&
+			'current' in ref &&
+			ref.current &&
+			isPlayable;
+
+		const dataLinkName = `gu-video-${videoStyle}-${
+			showPlayIcon ? 'play' : 'pause'
+		}-${atomId}`;
+
 		return (
 			<>
-				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Captions will be considered later. */}
+				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Not all videos require captions. */}
 				<video
 					id={loopVideoId}
-					css={videoStyles(width, height, subtitleSize)}
+					css={[
+						videoStyles(width, height),
+						showSubtitles && subtitleStyles(subtitleSize),
+					]}
 					crossOrigin="anonymous"
 					ref={ref}
 					tabIndex={0}
 					data-testid="loop-video"
 					height={height}
 					width={width}
-					data-link-name={`gu-video-loop-${
-						showPlayIcon ? 'play' : 'pause'
-					}-${atomId}`}
+					data-link-name={dataLinkName}
 					data-chromatic="ignore"
 					preload={preloadPartialData ? 'metadata' : 'none'}
 					loop={true}
@@ -217,7 +233,7 @@ export const LoopVideoPlayer = forwardRef(
 							type={source.mimeType}
 						/>
 					))}
-					{subtitleSource !== undefined && (
+					{showSubtitles && (
 						<track
 							// Don't use default - it forces native rendering on iOS
 							default={false}
@@ -228,13 +244,13 @@ export const LoopVideoPlayer = forwardRef(
 					)}
 					{FallbackImageComponent}
 				</video>
-				{!!activeCue?.text && (
+				{showSubtitles && !!activeCue?.text && (
 					<SubtitleOverlay
 						text={activeCue.text}
 						subtitleSize={subtitleSize}
 					/>
 				)}
-				{ref && 'current' in ref && ref.current && isPlayable && (
+				{showControls && (
 					<>
 						{/* Play icon */}
 						{showPlayIcon && (
@@ -252,7 +268,7 @@ export const LoopVideoPlayer = forwardRef(
 						<LoopVideoProgressBar
 							videoId={loopVideoId}
 							currentTime={currentTime}
-							duration={ref.current.duration}
+							duration={ref.current!.duration}
 						/>
 						{/* Audio icon */}
 						{AudioIcon && (
