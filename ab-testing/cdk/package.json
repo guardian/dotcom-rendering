@@ -1,0 +1,38 @@
+{
+	"name": "@guardian/ab-testing-cdk",
+	"version": "1.0.0",
+	"description": "CDK stacks for AB testing infrastructure",
+	"main": "config/index.ts",
+	"type": "module",
+	"scripts": {
+		"test": "node --test --test-reporter spec cdk/*/*.test.ts",
+		"test-update": "node --test --test-reporter spec --test-update-snapshots cdk/*/*.test.ts",
+		"synth:ab-testing-config": "cdk synth --path-metadata false --version-reporting false --app 'node bin/ab-testing-config.cdk.ts' --output ./cdk.out/ab-testing-config",
+		"synth:deployment-lambda": "cdk synth --path-metadata false --version-reporting false --app 'node bin/deployment-lambda.cdk.ts' --output ./cdk.out/deployment-lambda",
+		"lint": "eslint .",
+		"prettier:check": "prettier . --check --cache",
+		"prettier:fix": "prettier . --write --cache",
+		"lint-staged": "lint-staged"
+	},
+	"dependencies": {},
+	"lint-staged": {
+		"*.ts": [
+			"pnpm lint --fix",
+			"pnpm prettier:fix"
+		]
+	},
+	"devDependencies": {
+		"@aws-sdk/client-s3": "3.931.0",
+		"@aws-sdk/client-ssm": "3.621.0",
+		"@guardian/cdk": "62.0.1",
+		"@guardian/eslint-config": "12.0.1",
+		"@guardian/tsconfig": "1.0.1",
+		"@types/node": "22.17.0",
+		"aws-cdk": "2.1030.0",
+		"aws-cdk-lib": "2.220.0",
+		"eslint": "9.39.1",
+		"prettier": "3.0.3",
+		"source-map-support": "0.5.21",
+		"typescript": "5.9.3"
+	}
+}

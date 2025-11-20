@@ -1,0 +1,89 @@
+name: 🧪 AB testing Lambda
+
+permissions:
+  contents: read
+
+on:
+  push:
+    paths:
+      - 'ab-testing/deploy-lambda/**'
+      - 'ab-testing/cdk/**'
+      - 'ab-testing/config/lib/**'
+      - '.github/workflows/ab-testing-lambda-ci.yml'
+
+jobs:
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ab-testing/deploy-lambda
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Node environment
+        uses: ./.github/actions/setup-node-env
+
+      - name: Build Lambda
+        run: pnpm build
+
+      - name: Zip app artifact
+        run: |
+          cd dist
+          zip -r lambda.zip .
+          zip -j lambda.zip ../package.json
+
+      - name: Save build
+        uses: actions/upload-artifact@v5
+        with:
+          name: ab-testing-lambda-build
+          path: ab-testing/deploy-lambda/dist/lambda.zip
+
+  riff-raff:
+    name: Riff-Raff Artifacts
+    runs-on: ubuntu-latest
+    needs: [ci]
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
+    defaults:
+      run:
+        working-directory: ab-testing
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: ./.github/actions/setup-node-env
+
+      - name: Fetch Lambda build
+        uses: actions/download-artifact@v6.0.0
+        with:
+          name: ab-testing-lambda-build
+          path: ab-testing/deploy-lambda/dist/lambda.zip
+
+      - name: CDK Test
+        run: pnpm --filter @guardian/ab-testing-cdk test
+
+      - name: CDK synth
+        run: pnpm --filter @guardian/ab-testing-cdk synth:deployment-lambda
+
+      - name: Riff-Raff Upload
+        uses: guardian/actions-riff-raff@v4.1.9
+        with:
+          roleArn: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          projectName: dotcom:ab-testing-deployment-lambda
+          configPath: ab-testing/cdk/cdk.out/deployment-lambda/riff-raff.yaml
+          contentDirectories: |
+            ab-testing-deployment-lambda:
+              - ab-testing/deploy-lambda/dist/lambda.zip
+            cdk.out/deployment-lambda:
+              - ab-testing/cdk/cdk.out/deployment-lambda
