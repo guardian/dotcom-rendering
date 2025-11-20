@@ -13,6 +13,7 @@
 	},
 	"dependencies": {
 		"@aws-sdk/client-s3": "3.931.0",
+		"@aws-sdk/client-ssm": "3.621.0",
 		"superstruct": "2.0.2"
 	},
 	"devDependencies": {
@@ -20,17 +21,17 @@
 		"@guardian/eslint-config": "12.0.1",
 		"@guardian/tsconfig": "1.0.1",
 		"@rollup/plugin-commonjs": "29.0.0",
-		"@rollup/plugin-node-resolve": "16.0.3",
 		"@rollup/plugin-json": "6.1.0",
+		"@rollup/plugin-node-resolve": "16.0.3",
 		"@types/aws-lambda": "8.10.158",
 		"@types/node": "22.17.0",
 		"aws-cdk-lib": "2.220.0",
 		"aws-lambda": "1.0.7",
+		"esbuild": "0.27.0",
 		"eslint": "9.39.1",
 		"prettier": "3.0.3",
 		"rollup": "4.53.2",
-		"typescript": "5.9.3",
-		"esbuild": "0.27.0",
-		"rollup-plugin-esbuild": "6.2.1"
+		"rollup-plugin-esbuild": "6.2.1",
+		"typescript": "5.9.3"
 	}
 }

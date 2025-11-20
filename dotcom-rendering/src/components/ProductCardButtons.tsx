@@ -24,9 +24,11 @@ export const ProductCardButtons = ({
 					minimisePadding={true}
 					priority={index === 0 ? 'primary' : 'tertiary'}
 					fullwidth={true}
-					data-component={`${
-						dataComponent ?? 'product-card-button'
-					}-${index}`}
+					dataComponent={
+						dataComponent
+							? `${dataComponent}-${index + 1}`
+							: undefined
+					}
 				/>
 			);
 		})}

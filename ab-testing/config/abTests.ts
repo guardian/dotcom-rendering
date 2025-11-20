@@ -25,9 +25,10 @@ const ABTests: ABTest[] = [
 		description: "Testing Prebid.js v10 integration on DCR",
 		owners: ["commercial.dev@guardian.co.uk"],
 		status: "ON",
-		expirationDate: "2025-12-30",
+		expirationDate: "2025-12-10",
 		type: "client",
-		audienceSize: 0 / 100,
+		audienceSize: 10 / 100,
+		audienceSpace: "A",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
 	},
@@ -43,6 +44,18 @@ const ABTests: ABTest[] = [
 		audienceSpace: "A",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
+	},
+	{
+		name: "thefilter-product-element",
+		description:
+			"A hold back test to measure uplift of the product element",
+		owners: ["thefilter.dev@guardian.co.uk"],
+		status: "ON",
+		expirationDate: "2025-12-30",
+		type: "server",
+		audienceSize: 0 / 100,
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
 	},
 ];
 

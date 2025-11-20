@@ -81,9 +81,9 @@ jobs:
           roleArn: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           projectName: dotcom:ab-testing-deployment-lambda
-          configPath: ab-testing/cd/cdk.out/deployment-lambda/riff-raff.yaml
+          configPath: ab-testing/cdk/cdk.out/deployment-lambda/riff-raff.yaml
           contentDirectories: |
             ab-testing-deployment-lambda:
               - ab-testing/deploy-lambda/dist/lambda.zip
-            cdk.out/cdk/deployment-lambda:
-              - ab-testing/cdk.out/deployment-lambda
+            cdk.out/deployment-lambda:
+              - ab-testing/cdk/cdk.out/deployment-lambda
