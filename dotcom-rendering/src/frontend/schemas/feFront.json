@@ -3239,6 +3239,21 @@
                 },
                 "activeVersion": {
                     "type": "number"
+                },
+                "dimensions": {
+                    "type": "object",
+                    "properties": {
+                        "width": {
+                            "type": "number"
+                        },
+                        "height": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "height",
+                        "width"
+                    ]
                 }
             },
             "required": [

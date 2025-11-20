@@ -127,6 +127,10 @@ export interface FEMediaAtom {
 	expired?: boolean;
 	activeVersion?: number;
 	// channelId?: string; // currently unused
+	dimensions?: {
+		width: number;
+		height: number;
+	};
 }
 
 export type FEFrontCard = {

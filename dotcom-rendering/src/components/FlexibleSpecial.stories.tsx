@@ -2,7 +2,7 @@ import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
-	loopVideoCard,
+	loopVideo54Card,
 	opinionTrails,
 	slideshowCard,
 	snapLink,
@@ -287,7 +287,7 @@ export const LoopVideoCards: Story = {
 		groupedTrails: {
 			...emptyGroupedTrails,
 			snap: [],
-			standard: [loopVideoCard],
+			standard: [loopVideo54Card],
 		},
 		collectionId: 1,
 	},

@@ -34,7 +34,6 @@ const videoStyles = (
 	cursor: pointer;
 	/* Prevents CLS by letting the browser know the space the video will take up. */
 	aspect-ratio: ${width} / ${height};
-	object-fit: cover;
 
 	::cue {
 		/* Hide the cue by default as we prefer custom overlay */
@@ -169,6 +168,7 @@ export const LoopVideoPlayer = forwardRef(
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
 		const loopVideoId = `loop-video-${uniqueId}`;
+
 		return (
 			<>
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Captions will be considered later. */}

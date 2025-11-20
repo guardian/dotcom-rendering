@@ -5,7 +5,8 @@ import {
 	audioTrails,
 	galleryTrails,
 	getSublinks,
-	loopVideoCard,
+	loopVideo54Card,
+	loopVideoVerticalCard,
 	opinionTrails,
 	slideshowCard,
 	trails,
@@ -542,14 +543,24 @@ export const ImmersiveCardsSplashAndStandard: Story = {
 	},
 };
 
-export const LoopVideoCards: Story = {
-	name: 'Looping video cards',
+export const LoopVideo54Cards: Story = {
+	name: 'Looping video cards at 5:4 aspect ratio',
 	args: {
 		frontSectionTitle: 'Loop video cards',
 		groupedTrails: {
 			...emptyGroupedTrails,
-			splash: [loopVideoCard],
-			standard: [loopVideoCard], // Loop video is disabled at standard card size
+			splash: [loopVideo54Card],
+			standard: [loopVideo54Card], // Loop video is disabled at standard card size
+		},
+	},
+};
+export const loopVideoVerticalCards: Story = {
+	name: 'Looping video vertical cards',
+	args: {
+		frontSectionTitle: 'Loop video cards',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			splash: [loopVideoVerticalCard],
 		},
 	},
 };
