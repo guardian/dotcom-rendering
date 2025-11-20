@@ -51,7 +51,7 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
         "Tags": [
           {
             "Key": "App",
-            "Value": "ab-testing-deployment-lambda"
+            "Value": "ab-testing-deployment-lambda-lambda"
           },
           {
             "Key": "gu:cdk:version",
@@ -112,7 +112,7 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
                       {
                         "Ref": "DistributionBucketName"
                       },
-                      "/frontend/CODE/ab-testing-deployment-lambda/lambda.zip"
+                      "/frontend/CODE/ab-testing-deployment-lambda-lambda/lambda.zip"
                     ]
                   ]
                 }
@@ -129,7 +129,7 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
                     {
                       "Ref": "AWS::AccountId"
                     },
-                    ":parameter/CODE/frontend/ab-testing-deployment-lambda"
+                    ":parameter/CODE/frontend/ab-testing-deployment-lambda-lambda"
                   ]
                 ]
               }
@@ -148,7 +148,7 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
                     {
                       "Ref": "AWS::AccountId"
                     },
-                    ":parameter/CODE/frontend/ab-testing-deployment-lambda/*"
+                    ":parameter/CODE/frontend/ab-testing-deployment-lambda-lambda/*"
                   ]
                 ]
               }
@@ -262,7 +262,7 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
           "S3Bucket": {
             "Ref": "DistributionBucketName"
           },
-          "S3Key": "frontend/CODE/ab-testing-deployment-lambda/lambda.zip"
+          "S3Key": "frontend/CODE/ab-testing-deployment-lambda-lambda/lambda.zip"
         },
         "Environment": {
           "Variables": {
@@ -271,10 +271,10 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
               "Ref": "SsmParameterValueaccountservicesdotcomstorebucketC96584B6F00A464EAD1953AFF4B05118Parameter"
             },
             "STACK": "frontend",
-            "APP": "ab-testing-deployment-lambda"
+            "APP": "ab-testing-deployment-lambda-lambda"
           }
         },
-        "FunctionName": "ab-testing-deployment-CODE",
+        "FunctionName": "ab-testing-deployment-lambda-CODE",
         "Handler": "index.handler",
         "LoggingConfig": {
           "LogFormat": "JSON"
@@ -290,7 +290,7 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
         "Tags": [
           {
             "Key": "App",
-            "Value": "ab-testing-deployment-lambda"
+            "Value": "ab-testing-deployment-lambda-lambda"
           },
           {
             "Key": "gu:cdk:version",
@@ -373,7 +373,7 @@ exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
         "Tags": [
           {
             "Key": "App",
-            "Value": "ab-testing-deployment-lambda"
+            "Value": "ab-testing-deployment-lambda-lambda"
           },
           {
             "Key": "gu:cdk:version",
@@ -434,7 +434,7 @@ exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
                       {
                         "Ref": "DistributionBucketName"
                       },
-                      "/frontend/PROD/ab-testing-deployment-lambda/lambda.zip"
+                      "/frontend/PROD/ab-testing-deployment-lambda-lambda/lambda.zip"
                     ]
                   ]
                 }
@@ -451,7 +451,7 @@ exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
                     {
                       "Ref": "AWS::AccountId"
                     },
-                    ":parameter/PROD/frontend/ab-testing-deployment-lambda"
+                    ":parameter/PROD/frontend/ab-testing-deployment-lambda-lambda"
                   ]
                 ]
               }
@@ -470,7 +470,7 @@ exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
                     {
                       "Ref": "AWS::AccountId"
                     },
-                    ":parameter/PROD/frontend/ab-testing-deployment-lambda/*"
+                    ":parameter/PROD/frontend/ab-testing-deployment-lambda-lambda/*"
                   ]
                 ]
               }
@@ -584,7 +584,7 @@ exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
           "S3Bucket": {
             "Ref": "DistributionBucketName"
           },
-          "S3Key": "frontend/PROD/ab-testing-deployment-lambda/lambda.zip"
+          "S3Key": "frontend/PROD/ab-testing-deployment-lambda-lambda/lambda.zip"
         },
         "Environment": {
           "Variables": {
@@ -593,10 +593,10 @@ exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
               "Ref": "SsmParameterValueaccountservicesdotcomstorebucketC96584B6F00A464EAD1953AFF4B05118Parameter"
             },
             "STACK": "frontend",
-            "APP": "ab-testing-deployment-lambda"
+            "APP": "ab-testing-deployment-lambda-lambda"
           }
         },
-        "FunctionName": "ab-testing-deployment-PROD",
+        "FunctionName": "ab-testing-deployment-lambda-PROD",
         "Handler": "index.handler",
         "LoggingConfig": {
           "LogFormat": "JSON"
@@ -612,7 +612,7 @@ exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
         "Tags": [
           {
             "Key": "App",
-            "Value": "ab-testing-deployment-lambda"
+            "Value": "ab-testing-deployment-lambda-lambda"
           },
           {
             "Key": "gu:cdk:version",

@@ -20,7 +20,7 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
               {
                 "Ref": "AWS::AccountId"
               },
-              ":function:undefined-CODE"
+              ":function:ab-testing-deployment-lambda-CODE"
             ]
           ]
         },
@@ -55,7 +55,7 @@ exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
               {
                 "Ref": "AWS::AccountId"
               },
-              ":function:undefined-PROD"
+              ":function:ab-testing-deployment-lambda-PROD"
             ]
           ]
         },

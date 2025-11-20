@@ -125,5 +125,5 @@ jobs:
               - ab-testing/dist
             ab-testing-ui-artifact:
               - ab-testing/frontend/output/ab-tests.html
-            cdk.out:
+            cdk.out/ab-testing-config:
               - ab-testing/cdk.out/ab-testing-config

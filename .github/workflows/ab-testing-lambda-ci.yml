@@ -83,5 +83,5 @@ jobs:
           contentDirectories: |
             ab-testing-deployment-lambda:
               - ab-testing/dictionary-deploy-lambda/dist/lambda.zip
-            cdk.out:
+            cdk.out/deployment-lambda:
               - ab-testing/cdk.out/deployment-lambda
