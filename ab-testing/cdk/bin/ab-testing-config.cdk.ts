@@ -54,8 +54,6 @@ deployments.set("admin/ab-testing", {
 	},
 });
 
-console.log(deployments);
-
 const cfnDeployment = deployments.get(
 	`cfn-eu-west-1-frontend-ab-testing-config`,
 )!;

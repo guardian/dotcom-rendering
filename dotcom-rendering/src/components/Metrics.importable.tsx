@@ -1,5 +1,5 @@
 import type { ABTest, ABTestAPI } from '@guardian/ab-core';
-import { activeABtests } from '@guardian/ab-testing';
+import { activeABtests } from '@guardian/ab-testing-config';
 import {
 	bypassCommercialMetricsSampling,
 	EventTimer,

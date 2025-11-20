@@ -6,9 +6,9 @@ permissions:
 on:
   push:
     paths:
-      - 'ab-testing/dictionary-deploy-lambda/**'
+      - 'ab-testing/deploy-lambda/**'
       - 'ab-testing/cdk/**'
-      - 'ab-testing/lib/**'
+      - 'ab-testing/config/lib/**'
       - '.github/workflows/ab-testing-lambda-ci.yml'
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ab-testing/dictionary-deploy-lambda
+        working-directory: ab-testing/deploy-lambda
     permissions:
       contents: read
     steps:
@@ -38,7 +38,7 @@ jobs:
         uses: actions/upload-artifact@v5
         with:
           name: ab-testing-lambda-build
-          path: ab-testing/dictionary-deploy-lambda/dist/lambda.zip
+          path: ab-testing/deploy-lambda/dist/lambda.zip
 
   riff-raff:
     runs-on: ubuntu-latest
@@ -65,13 +65,13 @@ jobs:
         uses: actions/download-artifact@v6.0.0
         with:
           name: ab-testing-lambda-build
-          path: ab-testing/dictionary-deploy-lambda/dist/lambda.zip
+          path: ab-testing/deploy-lambda/dist/lambda.zip
 
       - name: CDK Test
-        run: pnpm cdk:test
+        run: pnpm --filter @guardian/ab-testing-cdk test
 
       - name: CDK synth
-        run: pnpm synth:deployment-lambda
+        run: pnpm --filter @guardian/ab-testing-cdk synth:deployment-lambda
 
       - name: Riff-Raff Upload
         uses: guardian/actions-riff-raff@v4.1.9
@@ -79,9 +79,9 @@ jobs:
           roleArn: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           projectName: dotcom:ab-testing-deployment-lambda
-          configPath: ab-testing/cdk.out/deployment-lambda/riff-raff.yaml
+          configPath: ab-testing/cd/cdk.out/deployment-lambda/riff-raff.yaml
           contentDirectories: |
             ab-testing-deployment-lambda:
-              - ab-testing/dictionary-deploy-lambda/dist/lambda.zip
-            cdk.out/deployment-lambda:
+              - ab-testing/deploy-lambda/dist/lambda.zip
+            cdk.out/cdk/deployment-lambda:
               - ab-testing/cdk.out/deployment-lambda

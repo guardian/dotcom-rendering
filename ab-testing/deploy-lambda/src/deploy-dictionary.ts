@@ -1,5 +1,5 @@
-import type { FastlyDictionary } from "../../lib/fastly/dictionary.ts";
-import { calculateUpdates } from "../../lib/fastly/utils.ts";
+import type { FastlyDictionary } from "../../config/lib/fastly/dictionary.ts";
+import { calculateUpdates } from "../../config/lib/fastly/utils.ts";
 import type { KeyValue } from "./fetch-artifact.ts";
 
 /**

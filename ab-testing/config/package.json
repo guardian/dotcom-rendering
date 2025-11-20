@@ -1,5 +1,5 @@
 {
-	"name": "@guardian/ab-testing",
+	"name": "@guardian/ab-testing-config",
 	"version": "1.0.0",
 	"description": "A/B test definitions and configuration",
 	"main": "index.ts",
@@ -8,16 +8,10 @@
 		"validate": "node scripts/validation/index.ts",
 		"deploy": "node scripts/deploy/index.ts --mvts=dist/mvts.json --ab-tests=dist/ab-tests.json",
 		"build": "node scripts/build/index.ts --mvts=dist/mvts.json --ab-tests=dist/ab-tests.json",
-		"build-ui": "pnpm --filter @guardian/ab-testing-frontend run build",
-		"lambda:build": "pnpm --filter @guardian/ab-testing-lambda run build",
-		"test": "node --test --test-reporter spec scripts/**/*.test.ts lib/**/*.test.ts",
+		"test": "node --test --test-reporter spec ./**/*.test.ts",
 		"lint": "eslint .",
 		"prettier:check": "prettier . --check --cache",
 		"prettier:fix": "prettier . --write --cache",
-		"cdk:test": "node --test --test-reporter spec cdk/*/*.test.ts",
-		"cdk:test-update": "node --test --test-reporter spec --test-update-snapshots cdk/*/*.test.ts",
-		"synth:ab-testing-config": "cdk synth --path-metadata false --version-reporting false --app 'node cdk/bin/ab-testing-config.cdk.ts' --output ./cdk.out/ab-testing-config",
-		"synth:deployment-lambda": "cdk synth --path-metadata false --version-reporting false --app 'node cdk/bin/deployment-lambda.cdk.ts' --output ./cdk.out/deployment-lambda",
 		"lint-staged": "lint-staged"
 	},
 	"dependencies": {

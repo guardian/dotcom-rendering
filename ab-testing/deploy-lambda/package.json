@@ -1,7 +1,7 @@
 {
-	"name": "@guardian/dictionary-deploy-lambda",
+	"name": "@guardian/ab-testing-deploy-lambda",
 	"version": "1.0.0",
-	"description": "A/B test definitions and configuration",
+	"description": "Lambda that deploys AB test configuration to Fastly edge-dictionaries",
 	"main": "index.ts",
 	"type": "module",
 	"scripts": {
@@ -12,28 +12,25 @@
 		"prettier:fix": "prettier . --write --cache"
 	},
 	"dependencies": {
-		"@rollup/plugin-json": "6.1.0",
-		"cfn-response": "1.0.1",
-		"esbuild": "0.27.0",
-		"rollup-plugin-esbuild": "6.2.1",
+		"@aws-sdk/client-s3": "3.931.0",
 		"superstruct": "2.0.2"
 	},
 	"devDependencies": {
-		"@aws-sdk/client-s3": "3.931.0",
 		"@guardian/cdk": "62.0.1",
 		"@guardian/eslint-config": "12.0.1",
 		"@guardian/tsconfig": "1.0.1",
 		"@rollup/plugin-commonjs": "29.0.0",
 		"@rollup/plugin-node-resolve": "16.0.3",
-		"@rollup/plugin-typescript": "12.3.0",
+		"@rollup/plugin-json": "6.1.0",
 		"@types/aws-lambda": "8.10.158",
-		"@types/cfn-response": "1.0.8",
 		"@types/node": "22.17.0",
 		"aws-cdk-lib": "2.220.0",
 		"aws-lambda": "1.0.7",
 		"eslint": "9.39.1",
 		"prettier": "3.0.3",
 		"rollup": "4.53.2",
-		"typescript": "5.9.3"
+		"typescript": "5.9.3",
+		"esbuild": "0.27.0",
+		"rollup-plugin-esbuild": "6.2.1"
 	}
 }

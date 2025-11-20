@@ -7,8 +7,8 @@ on:
   push:
     paths:
       - 'ab-testing/**'
+      - '!ab-testing/deployment-lambda/**'
       - '.github/workflows/ab-testing-ci.yml'
-      - '!.github/workflows/ab-testing-deployment-lambda/**'
 
 jobs:
   config-ci:
@@ -16,7 +16,7 @@ jobs:
     name: Config CI
     defaults:
       run:
-        working-directory: ab-testing
+        working-directory: ab-testing/config
     env:
       FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_PROD_AB_TESTING_CONFIG }}
       FASTLY_API_TOKEN: ${{ secrets.FASTLY_PROD_API_TOKEN }}
@@ -48,7 +48,7 @@ jobs:
       - uses: actions/upload-artifact@v5
         with:
           name: ab-testing-build
-          path: ab-testing/dist
+          path: ab-testing/config/dist
 
   ui-ci:
     name: UI CI
@@ -99,7 +99,7 @@ jobs:
         uses: actions/download-artifact@v6.0.0
         with:
           name: ab-testing-build
-          path: ab-testing/dist
+          path: ab-testing/config/dist
 
       - name: Fetch UI build
         uses: actions/download-artifact@v6.0.0
@@ -108,10 +108,10 @@ jobs:
           path: ab-testing/frontend/output/ab-tests.html
 
       - name: CDK Test
-        run: pnpm cdk:test
+        run: pnpm --filter @guardian/ab-testing-cdk test
 
       - name: CDK synth
-        run: pnpm synth:ab-testing-config
+        run: pnpm  --filter @guardian/ab-testing-cdk synth:ab-testing-config
 
       - name: Riff-Raff Upload
         uses: guardian/actions-riff-raff@v4.1.9
@@ -119,11 +119,11 @@ jobs:
           roleArn: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           projectName: dotcom:ab-testing
-          configPath: ab-testing/cdk.out/ab-testing-config/riff-raff.yaml
+          configPath: ab-testing/cdk/cdk.out/ab-testing-config/riff-raff.yaml
           contentDirectories: |
             ab-testing-config-artifacts:
-              - ab-testing/dist
+              - ab-testing/config/dist
             ab-testing-ui-artifact:
               - ab-testing/frontend/output/ab-tests.html
             cdk.out/ab-testing-config:
-              - ab-testing/cdk.out/ab-testing-config
+              - ab-testing/cdk/cdk.out/ab-testing-config

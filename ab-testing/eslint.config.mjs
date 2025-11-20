@@ -3,10 +3,10 @@ import { defineConfig, globalIgnores } from "eslint/config";
 
 export default defineConfig([
 	globalIgnores([
-		"frontend",
+		"frontend/output/**",
 		"eslint.config.mjs",
-		"index.ts",
-		"dictionary-deploy-lambda/dist",
+		"config/index.ts",
+		"deploy-lambda/dist/**",
 	]),
 	...guardian.configs.recommended,
 	{

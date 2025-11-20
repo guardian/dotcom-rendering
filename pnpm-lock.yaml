@@ -35,11 +35,7 @@ importers:
         specifier: 2.6.2
         version: 2.6.2
 
-  ab-testing:
-    dependencies:
-      superstruct:
-        specifier: 2.0.2
-        version: 2.0.2
+  ab-testing/cdk:
     devDependencies:
       '@aws-sdk/client-s3':
         specifier: 3.931.0
@@ -78,20 +74,8 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
 
-  ab-testing/dictionary-deploy-lambda:
+  ab-testing/config:
     dependencies:
-      '@rollup/plugin-json':
-        specifier: 6.1.0
-        version: 6.1.0(rollup@4.53.2)
-      cfn-response:
-        specifier: 1.0.1
-        version: 1.0.1
-      esbuild:
-        specifier: 0.27.0
-        version: 0.27.0
-      rollup-plugin-esbuild:
-        specifier: 6.2.1
-        version: 6.2.1(esbuild@0.27.0)(rollup@4.53.2)
       superstruct:
         specifier: 2.0.2
         version: 2.0.2
@@ -99,6 +83,49 @@ importers:
       '@aws-sdk/client-s3':
         specifier: 3.931.0
         version: 3.931.0
+      '@aws-sdk/client-ssm':
+        specifier: 3.621.0
+        version: 3.621.0
+      '@guardian/cdk':
+        specifier: 62.0.1
+        version: 62.0.1(aws-cdk-lib@2.220.0(constructs@10.4.2))(aws-cdk@2.1030.0)(constructs@10.4.2)
+      '@guardian/eslint-config':
+        specifier: 12.0.1
+        version: 12.0.1(eslint-plugin-import@2.29.1(eslint@9.39.1))(eslint@9.39.1)(typescript@5.9.3)
+      '@guardian/tsconfig':
+        specifier: 1.0.1
+        version: 1.0.1
+      '@types/node':
+        specifier: 22.17.0
+        version: 22.17.0
+      aws-cdk:
+        specifier: 2.1030.0
+        version: 2.1030.0
+      aws-cdk-lib:
+        specifier: 2.220.0
+        version: 2.220.0(constructs@10.4.2)
+      eslint:
+        specifier: 9.39.1
+        version: 9.39.1
+      prettier:
+        specifier: 3.0.3
+        version: 3.0.3
+      source-map-support:
+        specifier: 0.5.21
+        version: 0.5.21
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+
+  ab-testing/deploy-lambda:
+    dependencies:
+      '@aws-sdk/client-s3':
+        specifier: 3.931.0
+        version: 3.931.0
+      superstruct:
+        specifier: 2.0.2
+        version: 2.0.2
+    devDependencies:
       '@guardian/cdk':
         specifier: 62.0.1
         version: 62.0.1(aws-cdk-lib@2.220.0(constructs@10.4.2))(aws-cdk@2.1030.0)(constructs@10.4.2)
@@ -111,18 +138,15 @@ importers:
       '@rollup/plugin-commonjs':
         specifier: 29.0.0
         version: 29.0.0(rollup@4.53.2)
+      '@rollup/plugin-json':
+        specifier: 6.1.0
+        version: 6.1.0(rollup@4.53.2)
       '@rollup/plugin-node-resolve':
         specifier: 16.0.3
         version: 16.0.3(rollup@4.53.2)
-      '@rollup/plugin-typescript':
-        specifier: 12.3.0
-        version: 12.3.0(rollup@4.53.2)(tslib@2.8.1)(typescript@5.9.3)
       '@types/aws-lambda':
         specifier: 8.10.158
         version: 8.10.158
-      '@types/cfn-response':
-        specifier: 1.0.8
-        version: 1.0.8
       '@types/node':
         specifier: 22.17.0
         version: 22.17.0
@@ -132,6 +156,9 @@ importers:
       aws-lambda:
         specifier: 1.0.7
         version: 1.0.7
+      esbuild:
+        specifier: 0.27.0
+        version: 0.27.0
       eslint:
         specifier: 9.39.1
         version: 9.39.1
@@ -141,15 +168,18 @@ importers:
       rollup:
         specifier: 4.53.2
         version: 4.53.2
+      rollup-plugin-esbuild:
+        specifier: 6.2.1
+        version: 6.2.1(esbuild@0.27.0)(rollup@4.53.2)
       typescript:
         specifier: 5.9.3
         version: 5.9.3
 
   ab-testing/frontend:
     devDependencies:
-      '@guardian/ab-testing':
-        specifier: workspace:ab-testing
-        version: link:..
+      '@guardian/ab-testing-config':
+        specifier: workspace:ab-testing-config
+        version: link:../config
       '@sveltejs/adapter-auto':
         specifier: ^6.0.0
         version: 6.1.1(@sveltejs/kit@2.46.5(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.40.0)(vite@6.4.0(@types/node@22.17.0)(terser@5.44.0)))(svelte@5.40.0)(vite@6.4.0(@types/node@22.17.0)(terser@5.44.0)))
@@ -417,9 +447,9 @@ importers:
       '@guardian/ab-core':
         specifier: 8.0.0
         version: 8.0.0(tslib@2.6.2)(typescript@5.5.3)
-      '@guardian/ab-testing':
-        specifier: workspace:ab-testing
-        version: link:../ab-testing
+      '@guardian/ab-testing-config':
+        specifier: workspace:ab-testing-config
+        version: link:../ab-testing/config
       '@guardian/braze-components':
         specifier: 22.2.0
         version: 22.2.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.2)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(react@18.3.1)
@@ -3150,19 +3180,6 @@ packages:
       rollup:
         optional: true
 
-  '@rollup/plugin-typescript@12.3.0':
-    resolution: {integrity: sha512-7DP0/p7y3t67+NabT9f8oTBFE6gGkto4SA6Np2oudYmZE/m1dt8RB0SjL1msMxFpLo631qjRCcBlAbq1ml/Big==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      rollup: ^2.14.0||^3.0.0||^4.0.0
-      tslib: '*'
-      typescript: '>=3.7.0'
-    peerDependenciesMeta:
-      rollup:
-        optional: true
-      tslib:
-        optional: true
-
   '@rollup/pluginutils@5.3.0':
     resolution: {integrity: sha512-5EdhGZtnu3V88ces7s53hhfK5KSASnJZv8Lulpc04cWO3REESroJXg73DFsOmgbU2BhwV0E20bu2IDZb3VKW4Q==}
     engines: {node: '>=14.0.0'}
@@ -3356,6 +3373,7 @@ packages:
   '@smithy/core@3.18.3':
     resolution: {integrity: sha512-qqpNskkbHOSfrbFbjhYj5o8VMXO26fvN1K/+HbCzUNlTuxgNcPRouUDNm+7D6CkN244WG7aK533Ne18UtJEgAA==}
     engines: {node: '>=18.0.0'}
+    deprecated: Please upgrade your lockfile to use the latest 3.x version of @smithy/core for various fixes, see https://github.com/smithy-lang/smithy-typescript/blob/main/packages/core/CHANGELOG.md
 
   '@smithy/credential-provider-imds@3.2.0':
     resolution: {integrity: sha512-0SCIzgd8LYZ9EJxUjLXBmEKSZR/P/w6l7Rz/pab9culE/RWuqelAKGJvn5qUOl8BgX8Yj5HWM50A5hiB/RzsgA==}
@@ -4244,9 +4262,6 @@ packages:
 
   '@types/bonjour@3.5.13':
     resolution: {integrity: sha512-z9fJ5Im06zvUL548KvYNecEVlA7cVDkGUi6kZusb04mpyEFKCIZJvloCcmpmLaIahDpOQGHaHmG6imtPMmPXGQ==}
-
-  '@types/cfn-response@1.0.8':
-    resolution: {integrity: sha512-b9YttPRwTVcn/r65BcxrXqrVXpBtns3IlwPgE5XfzFoXBSBhimw7ZTbpvdsP39nsxVTmvV7IUN34/9FBQyfe2w==}
 
   '@types/chai@5.2.2':
     resolution: {integrity: sha512-8kB30R7Hwqf40JPiKhVzodJs2Qc1ZJ5zuT3uzw5Hq/dhNCl3G3l83jfpdI1e20BP348+fV7VIL/+FxaXkqBmWg==}
@@ -5392,9 +5407,6 @@ packages:
 
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
-
-  cfn-response@1.0.1:
-    resolution: {integrity: sha512-mHfgHUcGpIbmioV/gQ//5V+b8em/ZKFwAgzmbycflJ1q0AU66wlhIgarkYc4JXGgIca+0lxg+XEKO4ZwyZedaw==}
 
   chai@5.2.0:
     resolution: {integrity: sha512-mCuXncKXk5iCLhfhwTc0izo0gtEmpz5CtG2y8GiOINBlMVS6v8TMRc5TaLWKS6692m9+dVVfzgeVxR5UxWHTYw==}
@@ -14237,15 +14249,6 @@ snapshots:
     optionalDependencies:
       rollup: 4.53.2
 
-  '@rollup/plugin-typescript@12.3.0(rollup@4.53.2)(tslib@2.8.1)(typescript@5.9.3)':
-    dependencies:
-      '@rollup/pluginutils': 5.3.0(rollup@4.53.2)
-      resolve: 1.22.10
-      typescript: 5.9.3
-    optionalDependencies:
-      rollup: 4.53.2
-      tslib: 2.8.1
-
   '@rollup/pluginutils@5.3.0(rollup@4.53.2)':
     dependencies:
       '@types/estree': 1.0.8
@@ -15663,10 +15666,6 @@ snapshots:
   '@types/bonjour@3.5.13':
     dependencies:
       '@types/node': 22.17.0
-
-  '@types/cfn-response@1.0.8':
-    dependencies:
-      '@types/aws-lambda': 8.10.158
 
   '@types/chai@5.2.2':
     dependencies:
@@ -17186,8 +17185,6 @@ snapshots:
   case-sensitive-paths-webpack-plugin@2.4.0: {}
 
   ccount@2.0.1: {}
-
-  cfn-response@1.0.1: {}
 
   chai@5.2.0:
     dependencies:

@@ -2,8 +2,8 @@ import { GetParameterCommand, SSMClient } from "@aws-sdk/client-ssm";
 import type { Handler } from "aws-cdk-lib/aws-lambda";
 import type { CloudFormationCustomResourceEvent, Context } from "aws-lambda";
 import { assert } from "superstruct";
-import { configStruct } from "../../lib/config.ts";
-import { FastlyClient } from "../../lib/fastly/client.ts";
+import { configStruct } from "../../config/lib/config.ts";
+import { FastlyClient } from "../../config/lib/fastly/client.ts";
 import { send } from "./custom-resource-response.ts";
 import { fetchAndDeployArtifacts } from "./deploy.ts";
 

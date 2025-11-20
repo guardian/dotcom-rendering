@@ -1,6 +1,4 @@
 packages:
   - 'apps-rendering'
   - 'dotcom-rendering'
-  - 'ab-testing'
-  - 'ab-testing/frontend'
-  - 'ab-testing/dictionary-deploy-lambda'
+  - 'ab-testing/*'

@@ -1,5 +1,5 @@
-import { getEnv } from "../../lib/config.ts";
-import type { FastlyDictionary } from "../../lib/fastly/dictionary.ts";
+import { getEnv } from "../../config/lib/config.ts";
+import type { FastlyDictionary } from "../../config/lib/fastly/dictionary.ts";
 import { deployDictionary } from "./deploy-dictionary.ts";
 import { fetchDictionaryArtifact } from "./fetch-artifact.ts";
 
