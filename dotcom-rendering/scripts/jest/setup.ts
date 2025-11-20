@@ -48,13 +48,6 @@ const windowGuardian = {
 	functions: {
 		import: (url: string) => import(url),
 	},
-	automat: {
-		react: undefined,
-		preact: undefined,
-		emotion: undefined,
-		emotionCore: undefined,
-		emotionTheming: undefined,
-	},
 	readerRevenue: {
 		changeGeolocation: () => {},
 		showMeTheEpic: () => {},
@@ -67,8 +60,10 @@ const windowGuardian = {
 // Stub global Guardian object
 // We should never be able to directly set things to the global window object.
 // But in this case we want to stub things for testing, so it's ok to ignore this rule
-// @ts-expect-error
-!isServer && (window.guardian = windowGuardian);
+if (!isServer) {
+	// @ts-expect-error
+	window.guardian = windowGuardian;
+}
 
 // Mock Local Storage
 // See: https://github.com/facebook/jest/issues/2098#issuecomment-260733457
@@ -93,10 +88,11 @@ const localStorageMock = (function () {
 	};
 })();
 
-!isServer &&
+if (!isServer) {
 	Object.defineProperty(window, 'localStorage', {
 		value: localStorageMock,
 	});
+}
 
 /**
  * This is to polyfill `TextEncoder` and `TextDecoder`.

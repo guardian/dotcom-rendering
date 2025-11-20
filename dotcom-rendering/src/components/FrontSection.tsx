@@ -4,7 +4,8 @@ import { between, from, space, until } from '@guardian/source/foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { type EditionId, isNetworkFront } from '../lib/edition';
 import { hideAge } from '../lib/hideAge';
-import { palette, palette as schemePalette } from '../palette';
+import { getOphanComponents } from '../lib/labs';
+import { palette as schemePalette } from '../palette';
 import type { CollectionBranding } from '../types/branding';
 import type {
 	DCRContainerLevel,
@@ -14,11 +15,13 @@ import type {
 import type { TagPagePagination } from '../types/tagPage';
 import { isAustralianTerritory, type Territory } from '../types/territory';
 import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
+import { BrandingLabel } from './BrandingLabel';
 import { ContainerOverrides } from './ContainerOverrides';
 import { ContainerTitle } from './ContainerTitle';
 import { FrontPagination } from './FrontPagination';
 import { FrontSectionTitle } from './FrontSectionTitle';
 import { Island } from './Island';
+import { LabsSectionHeader } from './LabsSectionHeader';
 import { ShowHideButton } from './ShowHideButton';
 import { ShowMore } from './ShowMore.importable';
 import { Treats } from './Treats';
@@ -93,6 +96,10 @@ type Props = {
 	hasNavigationButtons?: boolean;
 	isAboveDesktopAd?: boolean;
 	isAboveMobileAd?: boolean;
+	/** Indicates whether this is a Guardian Labs container */
+	isLabs?: boolean;
+	/** Feature switch for the labs redesign work */
+	showLabsRedesign?: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -478,6 +485,29 @@ const carouselNavigationPlaceholder = css`
 	}
 `;
 
+const labsSectionHeaderStyles = css`
+	grid-row: headline;
+	grid-column: title;
+	margin-top: ${space[2]}px;
+	${from.leftCol} {
+		grid-row: content;
+		grid-column: title;
+	}
+`;
+
+const sponsoredContentLabelWrapper = css`
+	grid-row: bottom-content;
+	grid-column: content;
+
+	${from.tablet} {
+		/*
+		* side margins of 10px due to the -10px margins on the
+		* grid area for content, to align with the card edges
+		*/
+		margin: 0 10px;
+	}
+`;
+
 /**
  * # Front Container
  *
@@ -592,6 +622,8 @@ export const FrontSection = ({
 	hasNavigationButtons = false,
 	isAboveDesktopAd = false,
 	isAboveMobileAd = false,
+	isLabs = false,
+	showLabsRedesign = false,
 }: Props) => {
 	const isToggleable = toggleable && !!sectionId;
 	const showVerticalRule = !hasPageSkin;
@@ -612,6 +644,13 @@ export const FrontSection = ({
 
 	const showSectionColours = isNetworkFront(pageId ?? '');
 
+	const labsDataAttributes = collectionBranding?.branding
+		? getOphanComponents({
+				branding: collectionBranding.branding,
+				locationPrefix: 'front-container',
+		  })
+		: undefined;
+
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
 	 * this id pre-existed showMore so is probably also being used for something else.
@@ -624,7 +663,6 @@ export const FrontSection = ({
 				data-component={ophanComponentName}
 				data-container-name={containerName}
 				data-container-level={containerLevel}
-				data-collection-tracking={true}
 				css={[
 					fallbackStyles,
 					containerStylesUntilLeftCol,
@@ -662,49 +700,62 @@ export const FrontSection = ({
 					]}
 				/>
 
-				<div
-					css={[
-						sectionHeadlineUntilLeftCol(
-							// TODO FIXME:
-							// This relies on sections called "opinion"
-							// only ever having <CPScott> as the leftContent
-							title?.toLowerCase() === 'opinion',
-						),
-						showVerticalRule &&
-							!isBetaContainer &&
-							sectionHeadlineFromLeftCol(
-								schemePalette('--section-border'),
+				{isLabs && showLabsRedesign ? (
+					<div css={labsSectionHeaderStyles}>
+						<LabsSectionHeader
+							title={title}
+							url={url}
+							editionId={editionId}
+						/>
+					</div>
+				) : (
+					<div
+						css={[
+							sectionHeadlineUntilLeftCol(
+								// TODO FIXME:
+								// This relies on sections called "opinion"
+								// only ever having <CPScott> as the leftContent
+								title?.toLowerCase() === 'opinion',
 							),
-					]}
-				>
-					<FrontSectionTitle
-						title={
-							<ContainerTitle
-								title={title}
-								lightweightHeader={isTagPage}
-								description={description}
-								fontColour={
-									containerLevel === 'Secondary'
-										? schemePalette(
-												'--article-section-secondary-title',
-										  )
-										: articleSectionTitleStyles(
-												title,
-												showSectionColours,
-										  )
-								}
-								// On paid fronts the title is not treated as a link
-								url={!isOnPaidContentFront ? url : undefined}
-								showDateHeader={showDateHeader}
-								editionId={editionId}
-								containerLevel={containerLevel}
-							/>
-						}
-						collectionBranding={collectionBranding}
-					/>
+							showVerticalRule &&
+								!isBetaContainer &&
+								sectionHeadlineFromLeftCol(
+									schemePalette('--section-border'),
+								),
+						]}
+					>
+						<FrontSectionTitle
+							title={
+								<ContainerTitle
+									title={title}
+									lightweightHeader={isTagPage}
+									description={description}
+									fontColour={
+										containerLevel === 'Secondary'
+											? schemePalette(
+													'--article-section-secondary-title',
+											  )
+											: articleSectionTitleStyles(
+													title,
+													showSectionColours,
+											  )
+									}
+									// On paid fronts the title is not treated as a link
+									url={
+										!isOnPaidContentFront ? url : undefined
+									}
+									showDateHeader={showDateHeader}
+									editionId={editionId}
+									containerLevel={containerLevel}
+									isLabs={isLabs && showLabsRedesign}
+								/>
+							}
+							collectionBranding={collectionBranding}
+						/>
 
-					{leftContent}
-				</div>
+						{leftContent}
+					</div>
+				)}
 
 				{(isToggleable || hasNavigationButtons) && (
 					<div css={sectionControls}>
@@ -773,6 +824,25 @@ export const FrontSection = ({
 							/>
 						</Island>
 					) : null}
+
+					{isLabs &&
+						collectionBranding?.kind === 'paid-content' &&
+						!collectionBranding.hasMultipleBranding && (
+							<div css={sponsoredContentLabelWrapper}>
+								<BrandingLabel
+									branding={collectionBranding.branding}
+									containerPalette={containerPalette}
+									ophanComponentLink={
+										labsDataAttributes?.ophanComponentLink
+									}
+									ophanComponentName={
+										labsDataAttributes?.ophanComponentName
+									}
+									isLabs={isLabs}
+								/>
+							</div>
+						)}
+
 					{pagination && (
 						<FrontPagination
 							sectionName={pagination.sectionName}
@@ -788,7 +858,7 @@ export const FrontSection = ({
 					<div css={[sectionTreats, topPadding]}>
 						<Treats
 							treats={treats}
-							borderColour={palette('--section-border')}
+							borderColour={schemePalette('--section-border')}
 						/>
 					</div>
 				)}

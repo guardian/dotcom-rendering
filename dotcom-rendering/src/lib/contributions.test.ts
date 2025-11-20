@@ -1,9 +1,10 @@
-import { setCookie, storage } from '@guardian/libs';
+import { onConsent as onConsent_, setCookie, storage } from '@guardian/libs';
 import MockDate from 'mockdate';
 import { createOrRenewCookie } from '../client/userFeatures/cookies/cookieHelpers';
 import { HIDE_SUPPORT_MESSAGING_COOKIE } from '../client/userFeatures/cookies/hideSupportMessaging';
 import { USER_BENEFITS_EXPIRY_COOKIE } from '../client/userFeatures/cookies/userBenefitsExpiry';
 import {
+	getAuthHeaders,
 	getLastOneOffContributionTimestamp,
 	hasHideSupportMessagingCookie,
 	isRecentOneOffContributor,
@@ -13,6 +14,7 @@ import {
 	SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
 	withinLocalNoBannerCachePeriod,
 } from './contributions';
+import { getAuthStatus as getAuthStatus_ } from './identity';
 
 const clearAllCookies = () => {
 	const cookies = document.cookie.split(';');
@@ -197,5 +199,65 @@ describe('hasSupporterCookie', () => {
 
 	it('returns Pending if user is signed in and the user features expiry cookie does not exist', () => {
 		expect(hasHideSupportMessagingCookie(true)).toEqual('Pending');
+	});
+});
+
+jest.mock('@guardian/libs', () => ({
+	...jest.requireActual('@guardian/libs'),
+	onConsent: jest.fn(),
+}));
+jest.mock('./identity', () => ({
+	...jest.requireActual('./identity'),
+	getAuthStatus: jest.fn(),
+}));
+
+const onConsent = onConsent_ as jest.MockedFunction<typeof onConsent_>;
+const getAuthStatus = getAuthStatus_ as jest.MockedFunction<
+	typeof getAuthStatus_
+>;
+
+describe('getAuthHeaders', () => {
+	beforeEach(() => {
+		jest.clearAllMocks();
+	});
+
+	it('returns undefined when user has not consented to targeting', async () => {
+		(onConsent as jest.Mock).mockResolvedValue({ canTarget: false });
+
+		const result = await getAuthHeaders();
+
+		expect(result).toBeUndefined();
+	});
+
+	it('returns undefined when consent check fails', async () => {
+		(onConsent as jest.Mock).mockRejectedValue(new Error('Consent error'));
+
+		const result = await getAuthHeaders();
+
+		expect(result).toBeUndefined();
+	});
+
+	it('returns undefined when user has consented but is not signed in', async () => {
+		(onConsent as jest.Mock).mockResolvedValue({ canTarget: true });
+		(getAuthStatus as jest.Mock).mockResolvedValue({ kind: 'SignedOut' });
+
+		const result = await getAuthHeaders();
+
+		expect(result).toBeUndefined();
+	});
+
+	it('returns Authorization header when user has consented and is signed in', async () => {
+		(onConsent as jest.Mock).mockResolvedValue({ canTarget: true });
+		(getAuthStatus as jest.Mock).mockResolvedValue({
+			kind: 'SignedIn',
+			accessToken: { accessToken: 'token' },
+		});
+
+		const result = await getAuthHeaders();
+
+		expect(result).toEqual({
+			Authorization: 'Bearer token',
+			'X-GU-IS-OAUTH': 'true',
+		});
 	});
 });

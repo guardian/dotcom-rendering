@@ -8,6 +8,8 @@ import { isValidDate } from 'date';
 import type { Int64 } from 'thrift';
 import type { DocParser } from 'parserContext';
 import { Result } from 'result';
+import type { MediaAtom } from '@guardian/content-atom-model/media/mediaAtom';
+import { AssetType } from '@guardian/content-atom-model/media/assetType';
 
 interface TimelineEvent {
 	title: string;
@@ -19,9 +21,13 @@ interface TimelineEvent {
 }
 
 function formatOptionalDate(date: Int64 | undefined): string | undefined {
-	if (date === undefined) return undefined;
+	if (date === undefined) {
+		return undefined;
+	}
 	const d = new Date(date.toNumber());
-	if (!isValidDate(d)) return undefined;
+	if (!isValidDate(d)) {
+		return undefined;
+	}
 	return d.toDateString();
 }
 
@@ -248,10 +254,12 @@ function parseAtom(
 				return Result.err(`No atom matched this id: ${id}`);
 			}
 
+			const mediaAtom: MediaAtom = atom.data.media;
 			const { posterUrl, duration, assets, activeVersion, title } =
-				atom.data.media;
+				mediaAtom;
 			const videoId = assets.find(
 				(asset) =>
+					asset.assetType === AssetType.VIDEO &&
 					asset.version.toNumber() === activeVersion?.toNumber(),
 			)?.id;
 			const caption = docParser(title);

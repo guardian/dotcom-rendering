@@ -12,13 +12,14 @@ import { LightboxLink } from './LightboxLink';
 import { Picture } from './Picture';
 
 type Props = {
-	mainMedia: ImageBlockElement;
+	mainMedia?: ImageBlockElement;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 };
 
 const styles = css`
 	${grid.column.all}
+	position: relative;
 	height: calc(80vh - 48px);
 	grid-row: 1/8;
 	${from.desktop} {
@@ -31,6 +32,10 @@ export const MainMediaGallery = ({
 	format,
 	renderingTarget,
 }: Props) => {
+	// This is to support some galleries created in 2007 where mainMedia is missing
+	if (isUndefined(mainMedia)) {
+		return <div css={styles}></div>;
+	}
 	const asset = getImage(mainMedia.media.allImages);
 
 	if (asset === undefined) {

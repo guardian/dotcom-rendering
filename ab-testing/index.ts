@@ -1,4 +1,5 @@
-// @ts-ignore - extension is required to import this as a package in DCR
-import { ABTests } from './abTest.ts';
+// this file is covered by the dotcom-rendering tsconfig.json,
+// not the one in this directory (hence no need for .ts extension)
+import { activeABtests, allABTests } from "./abTests";
 
-export { ABTests };
+export { allABTests, activeABtests };

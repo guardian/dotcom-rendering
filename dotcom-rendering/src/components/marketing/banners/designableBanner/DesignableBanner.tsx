@@ -33,7 +33,7 @@ import {
 } from '../../../../lib/useMatchMedia';
 import { getChoiceCards } from '../../lib/choiceCards';
 import type { ReactComponent } from '../../lib/ReactComponent';
-import { getChoiceCardUrl } from '../../lib/tracking';
+import { enrichSupportUrl, getChoiceCardUrl } from '../../lib/tracking';
 import { ThreeTierChoiceCards } from '../../shared/ThreeTierChoiceCards';
 import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
 import type { BannerRenderProps } from '../common/types';
@@ -47,7 +47,6 @@ import type {
 	BannerTemplateSettings,
 	ChoiceCardSettings,
 	CtaSettings,
-	CtaStateSettings,
 } from './settings';
 import { buttonStyles, buttonThemes } from './styles/buttonStyles';
 import { templateSpacing } from './styles/templateStyles';
@@ -92,6 +91,9 @@ const buildChoiceCardSettings = (
 			buttonSelectColour,
 			buttonSelectTextColour,
 			buttonSelectBorderColour,
+			buttonSelectMarkerColour,
+			pillTextColour,
+			pillBackgroundColour,
 		} = design.visual;
 		return {
 			buttonColour: buttonColour
@@ -111,6 +113,15 @@ const buildChoiceCardSettings = (
 				: undefined,
 			buttonSelectBorderColour: buttonSelectBorderColour
 				? hexColourToString(buttonSelectBorderColour)
+				: undefined,
+			buttonSelectMarkerColour: buttonSelectMarkerColour
+				? hexColourToString(buttonSelectMarkerColour)
+				: undefined,
+			pillTextColour: pillTextColour
+				? hexColourToString(pillTextColour)
+				: undefined,
+			pillBackgroundColour: pillBackgroundColour
+				? hexColourToString(pillBackgroundColour)
 				: undefined,
 		};
 	}
@@ -132,16 +143,10 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	submitComponentEvent,
 	tracking,
 	design,
+	countryCode,
+	promoCodes,
 }: BannerRenderProps): JSX.Element => {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
-
-	// We can use this to shorten the banner if the "open in app" banner is present
-	const [iosAppBannerPresent, setIosAppBannerPresent] = useState(false);
-	useEffect(() => {
-		setIosAppBannerPresent(
-			window.innerHeight != window.document.documentElement.clientHeight,
-		);
-	}, []);
 
 	const bannerRef = useRef<HTMLDivElement>(null);
 
@@ -150,21 +155,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 			bannerRef.current.focus();
 		}
 	}, []);
-
-	useEffect(() => {
-		if (iosAppBannerPresent) {
-			// send ophan event
-			if (submitComponentEvent) {
-				submitComponentEvent({
-					component: {
-						componentType: 'ACQUISITIONS_OTHER',
-						id: 'safari-ios-banner-present',
-					},
-					action: 'VIEW',
-				});
-			}
-		}
-	}, [iosAppBannerPresent, submitComponentEvent]);
 
 	const choiceCards = getChoiceCards(isTabletOrAbove, choiceCardsSettings);
 	const defaultChoiceCard = choiceCards?.find((cc) => cc.isDefault);
@@ -215,15 +205,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		: imageSettings
 		? 'main-image'
 		: '.';
-
-	// TODO: I assume we're planning on making this adjustable in RRCP in future.
-	const choiceCardButtonCtaStateSettings: CtaStateSettings = {
-		backgroundColour: palette.brandAlt[400],
-		textColour: 'inherit',
-	};
-	const choiceCardButtonSettings: CtaSettings = {
-		default: choiceCardButtonCtaStateSettings,
-	};
 
 	const templateSettings: BannerTemplateSettings = {
 		containerSettings: {
@@ -321,7 +302,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 			tabIndex={-1}
 			css={styles.outerContainer(
 				templateSettings.containerSettings.backgroundColour,
-				iosAppBannerPresent,
 				templateSettings.containerSettings.textColor,
 			)}
 			className={contextClassName}
@@ -331,6 +311,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 					isCollapsableBanner && isCollapsed
 						? styles.collapsedLayoutOverrides(
 								cardsImageOrSpaceTemplateString,
+								isMaybeLaterVariant,
 						  )
 						: styles.layoutOverrides(
 								cardsImageOrSpaceTemplateString,
@@ -409,6 +390,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						<DesignableBannerVisual
 							settings={templateSettings.imageSettings}
 							bannerId={templateSettings.bannerId}
+							isCollapsed={isCollapsed}
 						/>
 						{templateSettings.alternativeVisual}
 					</div>
@@ -453,8 +435,10 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								onClick={() =>
 									handleSetIsCollapsed(!isCollapsed)
 								}
-								cssOverrides={styles.iconOverrides}
-								priority="tertiary"
+								cssOverrides={styles.iconOverrides(
+									templateSettings.closeButtonSettings,
+								)}
+								priority="secondary"
 								icon={
 									isCollapsed ? (
 										<SvgChevronUpSingle />
@@ -464,14 +448,8 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								}
 								size="small"
 								theme={buttonThemes(
-									{
-										default: {
-											backgroundColour:
-												palette.brand[400],
-											textColour: 'inherit',
-										},
-									},
-									'tertiary',
+									templateSettings.closeButtonSettings,
+									'secondary',
 								)}
 								hideLabel={true}
 							/>
@@ -500,19 +478,31 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									choices={choiceCards}
 									id={'banner'}
 									submitComponentEvent={submitComponentEvent}
+									choiceCardSettings={choiceCardSettings}
 								/>
 							)}
-							<div css={styles.ctaContainer(isCollapsed)}>
+							<div
+								css={styles.ctaContainer(
+									isCollapsed,
+									templateSettings.containerSettings
+										.backgroundColour,
+								)}
+							>
 								<LinkButton
-									href={getChoiceCardUrl(
-										selectedChoiceCard,
-										mainOrMobileContent.primaryCta.ctaUrl,
-									)}
+									href={enrichSupportUrl({
+										baseUrl:
+											getChoiceCardUrl(
+												selectedChoiceCard,
+											),
+										tracking,
+										promoCodes: promoCodes ?? [],
+										countryCode,
+									})}
 									onClick={onCtaClick}
 									priority="primary"
-									cssOverrides={styles.linkButtonStyles}
+									cssOverrides={[styles.linkButtonStyles]}
 									theme={buttonThemes(
-										choiceCardButtonSettings,
+										templateSettings.primaryCtaSettings,
 										'primary',
 									)}
 									icon={<SvgArrowRightStraight />}
@@ -555,15 +545,14 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 const phabletContentMaxWidth = '492px';
 
 const styles = {
-	outerContainer: (
-		background: string,
-		limitHeight: boolean,
-		textColor: string = 'inherit',
-	) => css`
+	outerContainer: (background: string, textColor: string = 'inherit') => css`
 		background: ${background};
 		color: ${textColor};
 		bottom: 0px;
-		${limitHeight ? 'max-height: 60vh;' : ''}
+		/* override vh with vsh if supported */
+		max-height: 65vh;
+		/* stylelint-disable-next-line declaration-block-no-duplicate-properties */
+		max-height: 65svh;
 
 		* {
 			box-sizing: border-box;
@@ -590,10 +579,10 @@ const styles = {
 			padding: ${space[3]}px ${space[3]}px 0 ${space[3]}px;
 			grid-template-columns: auto max(${phabletContentMaxWidth} auto);
 			grid-template-areas:
-				'.	close-button						.'
-				'.	copy-container						.'
-				'.	${cardsImageOrSpaceTemplateString}	.'
-				'.	cta-container						.';
+				'.	.									.'
+				'.	copy-container						close-button'
+				'.	${cardsImageOrSpaceTemplateString}	${cardsImageOrSpaceTemplateString}'
+				'.	cta-container						cta-container';
 		}
 		${from.phablet} {
 			max-width: 740px;
@@ -641,7 +630,10 @@ const styles = {
 				'.		vert-line	cta-container	${cardsImageOrSpaceTemplateString}	.';
 		}
 	`,
-	collapsedLayoutOverrides: (cardsImageOrSpaceTemplateString: string) => css`
+	collapsedLayoutOverrides: (
+		cardsImageOrSpaceTemplateString: string,
+		isMaybeLaterVariant: boolean,
+	) => css`
 		display: grid;
 		background: inherit;
 		position: relative;
@@ -653,11 +645,19 @@ const styles = {
 			margin: 0 auto;
 			padding: ${space[2]}px ${space[3]}px 0 ${space[3]}px;
 			grid-template-columns: auto max(${phabletContentMaxWidth} auto);
-			grid-template-areas:
+			grid-template-areas: ${isMaybeLaterVariant
+				? `
+				'.	.									.'
+				'.	copy-container						close-button'
+				'.	${cardsImageOrSpaceTemplateString}	${cardsImageOrSpaceTemplateString}'
+				'.	cta-container						cta-container'
+				`
+				: `
 				'.	close-button						.'
 				'.	copy-container						.'
 				'.	${cardsImageOrSpaceTemplateString}	.'
 				'.	cta-container						.';
+				`};
 		}
 		${from.phablet} {
 			max-width: 740px;
@@ -722,7 +722,7 @@ const styles = {
 		/* Layout changes only here */
 		grid-area: close-button;
 		${until.phablet} {
-			padding-right: ${space[2]}px;
+			padding-bottom: ${space[4]}px;
 			justify-self: end;
 			position: sticky;
 			top: 10px;
@@ -963,7 +963,7 @@ const styles = {
 		}
 	`,
 	/* choice card CTA container */
-	ctaContainer: (isCollapsed: boolean) => css`
+	ctaContainer: (isCollapsed: boolean, backgroundColor: string) => css`
 		grid-area: cc_cta;
 		display: flex;
 		align-items: center;
@@ -981,9 +981,8 @@ const styles = {
 			width: 100vw;
 			position: sticky;
 			bottom: 0;
-			padding-top: ${space[3]}px;
-			padding-bottom: ${space[3]}px;
-			background-color: ${neutral[100]};
+			padding: ${space[3]}px;
+			background-color: ${backgroundColor};
 			box-shadow: 0 -${space[1]}px ${space[3]}px 0 rgba(0, 0, 0, 0.25);
 			margin-right: -${space[3]}px;
 			margin-left: -${space[3]}px;
@@ -1054,10 +1053,11 @@ const styles = {
 			margin-top: ${space[1]}px;
 		}
 	`,
-	iconOverrides: css`
-		background-color: ${palette.brand[400]};
+	iconOverrides: (ctaSettings?: CtaSettings) => css`
+		background-color: ${ctaSettings?.default.backgroundColour ??
+		palette.brand[400]};
 		path {
-			fill: white;
+			fill: ${ctaSettings?.default.textColour ?? 'white'};
 		}
 		margin-top: ${space[1]}px;
 		margin-right: ${space[1]}px;

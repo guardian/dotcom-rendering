@@ -26,6 +26,7 @@ type Props = {
 	pinnedPostId?: string;
 	editionId: EditionId;
 	shouldHideAds: boolean;
+	serverTime?: number;
 };
 
 export const LiveBlock = ({
@@ -44,6 +45,7 @@ export const LiveBlock = ({
 	pinnedPostId,
 	editionId,
 	shouldHideAds,
+	serverTime,
 }: Props) => {
 	if (block.elements.length === 0) return null;
 
@@ -68,7 +70,7 @@ export const LiveBlock = ({
 			contributors={block.contributors}
 			isPinnedPost={isPinnedPost}
 			isOriginalPinnedPost={isOriginalPinnedPost}
-			absoluteServerTimes={!!switches.absoluteServerTimes}
+			serverTime={serverTime}
 		>
 			{block.elements.map((element, index) => (
 				<RenderArticleElement
@@ -101,7 +103,8 @@ export const LiveBlock = ({
 					<ShareButton
 						size="xsmall"
 						pageId={pageId}
-						blockId={block.id}
+						hash={`block-${block.id}`}
+						queryParams={{ page: `with:block-${block.id}` }}
 						webTitle={webTitle}
 						format={format}
 						context="LiveBlock"

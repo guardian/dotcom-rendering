@@ -38,7 +38,7 @@ import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { getAudioData } from '../lib/audio-data';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { decideTrail } from '../lib/decideTrail';
+import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -126,6 +126,7 @@ interface Props {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
+	serverTime?: number;
 }
 
 interface WebProps extends Props {
@@ -134,7 +135,7 @@ interface WebProps extends Props {
 }
 
 export const AudioLayout = (props: WebProps) => {
-	const { article, format, renderingTarget } = props;
+	const { article, format, renderingTarget, serverTime } = props;
 	const audioData = getAudioData(article.mainMediaElements);
 
 	const {
@@ -143,8 +144,6 @@ export const AudioLayout = (props: WebProps) => {
 	} = article;
 
 	const showBodyEndSlot = parse(article.slotMachineFlags ?? '').showBodyEnd;
-
-	const { absoluteServerTimes = false } = article.config.switches;
 
 	const showComments = article.isCommentable && !isPaidContent;
 
@@ -168,7 +167,7 @@ export const AudioLayout = (props: WebProps) => {
 							padSides={false}
 							shouldCenter={false}
 						>
-							<HeaderAdSlot abTests={article.config.abTests} />
+							<HeaderAdSlot />
 						</Section>
 					</Stuck>
 				)}
@@ -188,7 +187,7 @@ export const AudioLayout = (props: WebProps) => {
 			</div>
 
 			{format.theme === ArticleSpecial.Labs && (
-				<Stuck>
+				<Stuck zIndex="subNavBanner">
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
@@ -481,8 +480,9 @@ export const AudioLayout = (props: WebProps) => {
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
-								trails={article.storyPackage.trails.map(
-									decideTrail,
+								trails={decideStoryPackageTrails(
+									article.storyPackage.trails,
+									article.webURL,
 								)}
 								onwardsSource="more-on-this-story"
 								format={format}
@@ -490,7 +490,7 @@ export const AudioLayout = (props: WebProps) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
-								absoluteServerTimes={absoluteServerTimes}
+								serverTime={serverTime}
 								renderingTarget={renderingTarget}
 							/>
 						</Island>
@@ -514,8 +514,9 @@ export const AudioLayout = (props: WebProps) => {
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						renderingTarget={renderingTarget}
+						webURL={article.webURL}
 					/>
 				</Island>
 				{showComments && (
@@ -642,6 +643,7 @@ export const AudioLayout = (props: WebProps) => {
 								!!article.config.switches.remoteBanner
 							}
 							tags={article.tags}
+							host={host}
 						/>
 					</Island>
 				</BannerWrapper>

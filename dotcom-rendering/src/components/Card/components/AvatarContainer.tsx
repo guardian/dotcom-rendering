@@ -81,6 +81,7 @@ const sizingStyles = (
 
 	switch (imageSize) {
 		case 'small':
+		case 'scrollable-small':
 			return isFlexibleContainer
 				? css`
 						width: 90px;

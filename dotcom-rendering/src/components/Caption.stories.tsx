@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { palette } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
 import {
 	ArticleDesign,
@@ -203,7 +203,7 @@ export const WhenOverlaidWithStars = {
 export const ForVideos = {
 	args: {
 		...Standard.args,
-		mediaType: 'Video',
+		mediaType: 'YoutubeVideo',
 	},
 	parameters: {
 		chromatic: {

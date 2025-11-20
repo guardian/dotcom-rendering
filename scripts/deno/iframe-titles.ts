@@ -1,4 +1,4 @@
-import { array, object, string } from 'npm:zod@3';
+import { array, object, string } from 'npm:zod@4.1.12';
 import {
 	DOMParser,
 	Element,

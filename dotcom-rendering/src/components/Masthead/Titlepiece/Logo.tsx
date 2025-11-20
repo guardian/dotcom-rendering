@@ -1,7 +1,3 @@
-/**
- * @file
- * This file was largely copied from src/components/Logo.tsx
- */
 import { css } from '@emotion/react';
 import { visuallyHidden } from '@guardian/source/foundations';
 import { SvgGuardianLogo } from '@guardian/source/react-components';

@@ -1,4 +1,5 @@
-import type { Meta } from '@storybook/react';
+import { breakpoints } from '@guardian/source/foundations';
+import type { Meta } from '@storybook/react-webpack5';
 import { Masthead } from './Masthead';
 import { nav } from './Titlepiece/Nav.mock';
 
@@ -19,7 +20,17 @@ const meta = {
 		hasPageSkin: false,
 		hasPageSkinContentSelfConstrain: false,
 	},
+	parameters: {
+		chromatic: {
+			viewports: [
+				breakpoints.mobileMedium,
+				breakpoints.desktop,
+				breakpoints.wide,
+			],
+		},
+	},
 } satisfies Meta<typeof Masthead>;
+
 export default meta;
 
 export const WithoutSubnav = {};

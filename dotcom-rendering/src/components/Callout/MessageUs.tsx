@@ -94,10 +94,10 @@ const Disclaimer = ({ contacts }: { contacts: CalloutContactType[] }) => {
 		</span>
 	);
 
-	const secureDropText = (
+	const secureMessagingText = (
 		<span>
-			For true anonymity please use our{' '}
-			<a href="https://www.theguardian.com/securedrop">SecureDrop</a>{' '}
+			For fully anonymous communication please use our{' '}
+			<a href="https://www.theguardian.com/tips">Secure Messaging</a>{' '}
 			service instead.
 		</span>
 	);
@@ -107,7 +107,7 @@ const Disclaimer = ({ contacts }: { contacts: CalloutContactType[] }) => {
 			{contactText}
 			<p css={[linkStyles, infoStyles]}>
 				{contacts.some((c) => !!c.guidance) && guidanceText}{' '}
-				{secureDropText}
+				{secureMessagingText}
 			</p>
 		</>
 	);

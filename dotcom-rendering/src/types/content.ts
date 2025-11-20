@@ -452,6 +452,7 @@ export interface NewsletterSignupBlockElement {
 
 export interface AdPlaceholderBlockElement {
 	_type: 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement';
+	adPosition: number;
 }
 
 export interface NumberedTitleBlockElement {
@@ -466,6 +467,23 @@ export interface InteractiveContentsBlockElement {
 	elementId: string;
 	subheadingLinks: SubheadingBlockElement[];
 	endDocumentElementId?: string;
+}
+
+export interface ProductBlockElement {
+	_type: 'model.dotcomrendering.pageElements.ProductBlockElement';
+	elementId: string;
+	brandName: string;
+	starRating: ProductStarRating;
+	productName: string;
+	image?: ProductImage;
+	secondaryHeadingHtml: string;
+	primaryHeadingHtml: string;
+	customAttributes: ProductCustomAttribute[];
+	content: FEElement[];
+	h2Id?: string;
+	displayType: ProductDisplayType;
+	productCtas: ProductCta[];
+	lowestPrice?: string;
 }
 
 interface ProfileAtomBlockElement {
@@ -832,7 +850,8 @@ export type FEElement =
 	| VineBlockElement
 	| YoutubeBlockElement
 	| WitnessTypeBlockElement
-	| CrosswordElement;
+	| CrosswordElement
+	| ProductBlockElement;
 
 // -------------------------------------
 // Misc
@@ -864,8 +883,44 @@ export interface ImageSource {
 	srcSet: SrcSetItem[];
 }
 
+export type ProductDisplayType =
+	| 'InlineOnly'
+	| 'ProductCardOnly'
+	| 'InlineWithProductCard';
+
+export type ProductCta = {
+	url: string;
+	text: string;
+	retailer: string;
+	price: string;
+};
+
+export type ProductCustomAttribute = {
+	name: string;
+	value: string;
+};
+
+export type ProductStarRating =
+	| '0'
+	| '1'
+	| '2'
+	| '3'
+	| '4'
+	| '5'
+	| 'none-selected';
+
 export interface SrcSetItem {
 	src: string;
+	width: number;
+}
+
+export interface ProductImage {
+	url: string;
+	caption: string;
+	credit: string;
+	alt: string;
+	displayCredit: boolean;
+	height: number;
 	width: number;
 }
 

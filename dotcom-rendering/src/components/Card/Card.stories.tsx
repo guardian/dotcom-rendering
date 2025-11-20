@@ -47,7 +47,6 @@ const basicCardProps: CardProps = {
 	imageLoading: 'eager',
 	discussionApiUrl: 'https://discussion.theguardian.com/discussion-api/',
 	showVideo: true,
-	absoluteServerTimes: true,
 	headlinePosition: 'inner',
 };
 
@@ -62,7 +61,7 @@ const aBasicLink = {
 };
 
 const mainVideo: MainMedia = {
-	type: 'Video',
+	type: 'YoutubeVideo',
 	id: '1234-abcdef-09876-xyz',
 	videoId: '8M_yH-e9cq8',
 	title: '’I care, but I don’t care’: Life after the Queen’s death | Anywhere but Westminster',
@@ -481,6 +480,20 @@ export const WithDifferentImagePositions = () => {
 			</CardWrapper>
 		</>
 	);
+};
+
+WithDifferentImagePositions.story = {
+	parameters: {
+		viewport: { defaultViewport: 'desktop' },
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.tablet,
+				breakpoints.desktop,
+				breakpoints.wide,
+			],
+		},
+	},
 };
 
 export const WithDifferentImageSizes = () => {
@@ -1266,7 +1279,7 @@ export const WithBranding = () => {
 		>
 			<Section title={containerPalette ?? 'Standard'}>
 				<UL direction="row" padBottom={true}>
-					<LI percentage={'33.333%'} padSides={true}>
+					<LI percentage={'25%'} padSides={true}>
 						<Card
 							{...basicCardProps}
 							format={{
@@ -1284,7 +1297,7 @@ export const WithBranding = () => {
 							branding={branding}
 						/>
 					</LI>
-					<LI percentage={'33.333%'} padSides={true}>
+					<LI percentage={'25%'} padSides={true}>
 						<Card
 							{...basicCardProps}
 							format={{
@@ -1303,7 +1316,7 @@ export const WithBranding = () => {
 							branding={branding}
 						/>
 					</LI>
-					<LI percentage={'33.333%'} padSides={true}>
+					<LI percentage={'25%'} padSides={true}>
 						<Card
 							{...basicCardProps}
 							format={{
@@ -1319,6 +1332,25 @@ export const WithBranding = () => {
 							mediaSize="small"
 							containerPalette={containerPalette}
 							branding={branding}
+						/>
+					</LI>
+					<LI percentage={'25%'} padSides={true}>
+						<Card
+							{...basicCardProps}
+							format={{
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
+								theme: ArticleSpecial.Labs,
+							}}
+							headlineText="Redesigned Labs card"
+							kickerText="Kicker"
+							trailText=""
+							mediaPositionOnDesktop="top"
+							mediaPositionOnMobile="left"
+							mediaSize="small"
+							containerPalette={containerPalette}
+							branding={branding}
+							showLabsRedesign={true}
 						/>
 					</LI>
 				</UL>

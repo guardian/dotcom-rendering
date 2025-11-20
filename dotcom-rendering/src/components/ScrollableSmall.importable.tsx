@@ -1,7 +1,6 @@
 import type {
 	AspectRatio,
 	DCRContainerPalette,
-	DCRContainerType,
 	DCRFrontCard,
 } from '../types/front';
 import { FrontCard } from './FrontCard';
@@ -11,11 +10,12 @@ type Props = {
 	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes?: boolean;
+	serverTime?: number;
 	imageLoading: 'lazy' | 'eager';
-	containerType: DCRContainerType;
 	aspectRatio: AspectRatio;
 	sectionId: string;
+	/** Feature flag for the labs redesign work */
+	showLabsRedesign?: boolean;
 };
 
 /**
@@ -54,12 +54,12 @@ type Props = {
 export const ScrollableSmall = ({
 	trails,
 	containerPalette,
-	containerType,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 	showAge,
 	aspectRatio,
 	sectionId,
+	showLabsRedesign,
 }: Props) => {
 	const mobileBottomCards = [1, 3];
 	const desktopBottomCards = [2, 3];
@@ -82,9 +82,9 @@ export const ScrollableSmall = ({
 						<FrontCard
 							trail={trail}
 							imageLoading={imageLoading}
-							absoluteServerTimes={!!absoluteServerTimes}
+							serverTime={serverTime}
 							containerPalette={containerPalette}
-							containerType={containerType}
+							containerType="scrollable/small"
 							showAge={!!showAge}
 							headlineSizes={{
 								desktop: 'xxsmall',
@@ -92,17 +92,18 @@ export const ScrollableSmall = ({
 							}}
 							mediaPositionOnDesktop="left"
 							mediaPositionOnMobile="left"
-							mediaSize="small"
+							mediaSize="scrollable-small"
 							trailText={undefined} // unsupported
 							supportingContent={undefined} // unsupported
 							aspectRatio={aspectRatio}
 							kickerText={trail.kickerText}
-							showLivePlayable={trail.showLivePlayable}
+							showLivePlayable={false}
 							showTopBarDesktop={desktopBottomCards.includes(
 								index,
 							)}
 							showTopBarMobile={mobileBottomCards.includes(index)}
 							canPlayInline={false}
+							showLabsRedesign={showLabsRedesign}
 						/>
 					</ScrollableCarousel.Item>
 				);

@@ -2,6 +2,7 @@ import type { CountryCode } from '@guardian/libs';
 import { isObject, isOneOf, isString } from '@guardian/libs';
 import type { EditionId } from '../../lib/edition';
 import type { TagType } from '../../types/tag';
+import type { QueryParams } from '../AuthProviderButtons/types';
 
 export type CanShowGateProps = {
 	isSignedIn: boolean;
@@ -98,13 +99,21 @@ export interface TreatmentContentDecoded {
 	second_cta_name?: string;
 }
 
+// The treatmentType is how Auxia tells the client which type of gate to display
+// The spelling of "dismissible" is inconsistent here, but this is because the treatments were set up this way in Auxia.
+export type AuxiaAPIResponseDataUserTreatmentType =
+	| 'DISMISSABLE_SIGN_IN_GATE'
+	| 'NONDISMISSIBLE_SIGN_IN_GATE'
+	| 'DISMISSABLE_SIGN_IN_GATE_POPUP'
+	| 'NONDISMISSIBLE_SIGN_IN_GATE_POPUP';
+
 export interface AuxiaAPIResponseDataUserTreatment {
 	treatmentId: string;
 	treatmentTrackingId: string;
 	rank: string;
 	contentLanguageCode: string;
 	treatmentContent: string;
-	treatmentType: string;
+	treatmentType: AuxiaAPIResponseDataUserTreatmentType;
 	surface: string;
 }
 
@@ -128,6 +137,7 @@ export interface AuxiaProxyGetTreatmentsPayload {
 	showDefaultGate: ShowGateValues; // [3]
 	gateDisplayCount: number;
 	hideSupportMessagingTimestamp: number | undefined; // [4]
+	isInAuxiaControlGroup: boolean;
 }
 
 // [1]
@@ -230,7 +240,7 @@ export interface AuxiaGateDisplayData {
 
 export type SignInGatePropsAuxia = {
 	guUrl: string;
-	signInUrl: string;
+	queryParams: QueryParams;
 	dismissGate: () => void;
 	ophanComponentId: string;
 	abTest?: CurrentSignInGateABTest;
@@ -239,6 +249,9 @@ export type SignInGatePropsAuxia = {
 	userTreatment: AuxiaAPIResponseDataUserTreatment;
 	logTreatmentInteractionCall: (
 		interactionType: AuxiaInteractionInteractionType,
-		actionName: AuxiaInteractionActionName,
+		actionName?: AuxiaInteractionActionName,
 	) => Promise<void>;
 };
+
+// v1 is in the article, v2 is a popup
+export type AuxiaGateVersion = 'v1' | 'v2';

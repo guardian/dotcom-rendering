@@ -208,11 +208,7 @@ export class RenderingCDKStack extends CDKStack {
 				cidrRanges: [Peer.ipv4('10.0.0.0/8')],
 				scope: AccessScope.INTERNAL,
 			},
-			accessLogging: {
-				enabled: true,
-				// This is the prefix pattern DevX assume so that the logs can be shown on the Availability dashboard.
-				prefix: `application-load-balancer/${stage}/${guStack}/${guApp}`,
-			},
+			instanceMetricGranularity: '5Minute',
 			applicationLogging: {
 				enabled: true,
 				systemdUnitName: guApp,

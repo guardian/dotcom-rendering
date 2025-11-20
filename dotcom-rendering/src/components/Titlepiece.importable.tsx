@@ -35,8 +35,6 @@ interface Props {
 	pageId?: string;
 }
 
-const veggieBurgerDiameter = 40;
-
 const gridContent = css`
 	grid-column: content-start / content-end;
 `;
@@ -60,6 +58,8 @@ const slimNavEditionSwitcherOverrides = css`
 	}
 `;
 
+const veggieBurgerDiameter = 40;
+
 const logoStyles = css`
 	${gridMainColumn}
 	grid-row: 1;
@@ -70,6 +70,7 @@ const logoStyles = css`
 	margin-top: ${space[2]}px;
 	margin-bottom: 6px;
 	right: ${veggieBurgerDiameter + space[3]}px;
+
 	${from.mobileMedium} {
 		right: 0;
 	}
@@ -105,9 +106,7 @@ const slimNavLogoOverrides = css`
 	margin-bottom: ${space[2]}px;
 	right: ${veggieBurgerDiameter + 6}px;
 
-	${from.mobile} {
-		right: ${veggieBurgerDiameter + 6}px;
-	}
+	/** Intentionally duplicated as this needs to _override_ the standard logo styles */
 	${from.mobileMedium} {
 		right: ${veggieBurgerDiameter + 6}px;
 	}

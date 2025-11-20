@@ -39,12 +39,13 @@ type FENewslettersConfigType = {
 	idUrl?: string;
 	mmaUrl?: string;
 	brazeApiKey?: string;
-	ipsosTag?: string; // only relevant for AMP
+	ipsosTag?: string; // only relevant for AMP . TODO can we remove now that AMP is no longer used?
 	// isLiveBlog?: boolean;
 	// isLive?: boolean;
 	// isPreview?: boolean;
 	googleRecaptchaSiteKey?: string;
 	googleRecaptchaSiteKeyVisible?: string;
+	contentType: string;
 };
 
 export interface FENewslettersPageType {

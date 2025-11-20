@@ -10,6 +10,7 @@ import {
 	textSansBold15,
 } from '@guardian/source/foundations';
 import { SvgCross, SvgGuardianLogo } from '@guardian/source/react-components';
+import { has } from '../../../lib/has-string';
 import { AuthProviderButtons } from '../../AuthProviderButtons/AuthProviderButtons';
 import { useConfig } from '../../ConfigContext';
 import { ExternalLink } from '../../ExternalLink/ExternalLink';
@@ -30,7 +31,7 @@ const DividerWithOr = () => {
 };
 
 export const SignInGateAuxiaV1 = ({
-	signInUrl,
+	queryParams,
 	dismissGate,
 	abTest,
 	ophanComponentId,
@@ -45,11 +46,11 @@ export const SignInGateAuxiaV1 = ({
 		body,
 		first_cta_name: firstCtaName,
 		first_cta_link: firstCtaLink,
-		second_cta_name: secondCtaName,
 	} = JSON.parse(userTreatment.treatmentContent) as TreatmentContentDecoded;
 
-	const has = (s?: string) => !!s && s.trim() !== '';
-	const isDismissible = has(secondCtaName);
+	const isDismissible = userTreatment.treatmentType.startsWith(
+		'DISMISSABLE_SIGN_IN_GATE',
+	);
 	const dismissStatusLabel = isDismissible
 		? 'dismissible'
 		: 'non-dismissible';
@@ -74,7 +75,7 @@ export const SignInGateAuxiaV1 = ({
 								renderingTarget,
 								abTest,
 							);
-							void logTreatmentInteractionCall('DISMISSED', '');
+							void logTreatmentInteractionCall('DISMISSED');
 						}}
 					>
 						<SvgCross size="xsmall" />
@@ -89,7 +90,7 @@ export const SignInGateAuxiaV1 = ({
 
 			<div css={socialContainer}>
 				<AuthProviderButtons
-					queryParams={{ returnUrl: signInUrl }}
+					queryParams={queryParams}
 					providers={['social']}
 					onClick={(provider) => {
 						trackLink(
@@ -97,6 +98,7 @@ export const SignInGateAuxiaV1 = ({
 							`sign-in-${provider}-${dismissStatusLabel}`,
 							renderingTarget,
 							abTest,
+							[userTreatment.treatmentType],
 						);
 						void logTreatmentInteractionCall(
 							'CLICKED',
@@ -110,7 +112,7 @@ export const SignInGateAuxiaV1 = ({
 
 			<div css={emailContainer}>
 				<AuthProviderButtons
-					queryParams={{ returnUrl: signInUrl }}
+					queryParams={queryParams}
 					providers={['email']}
 					onClick={(provider) => {
 						trackLink(
@@ -118,6 +120,7 @@ export const SignInGateAuxiaV1 = ({
 							`sign-in-${provider}-${dismissStatusLabel}`,
 							renderingTarget,
 							abTest,
+							[userTreatment.treatmentType],
 						);
 						void logTreatmentInteractionCall(
 							'CLICKED',

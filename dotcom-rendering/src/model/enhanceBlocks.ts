@@ -22,6 +22,7 @@ import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceTweets } from './enhance-tweets';
 import { enhanceGuVideos } from './enhance-videos';
 import { enhanceLists } from './enhanceLists';
+import { enhanceProductElement } from './enhanceProductElement';
 import { enhanceTimeline } from './enhanceTimeline';
 import { insertPromotedNewsletter } from './insertPromotedNewsletter';
 
@@ -40,9 +41,10 @@ const enhanceNewsletterSignup =
 		format: ArticleFormat,
 		promotedNewsletter: Newsletter | undefined,
 		blockId: string,
+		isNested: boolean,
 	) =>
 	(elements: FEElement[]): FEElement[] =>
-		!isUndefined(promotedNewsletter)
+		!isUndefined(promotedNewsletter) && !isNested
 			? insertPromotedNewsletter(
 					elements,
 					blockId,
@@ -55,14 +57,22 @@ const enhanceNewsletterSignup =
 // example: enhanceInteractiveContentElements needs to be before enhanceNumberedLists
 // as they both effect SubheadingBlockElement
 export const enhanceElements =
-	(format: ArticleFormat, blockId: string, options: Options) =>
+	(
+		format: ArticleFormat,
+		blockId: string,
+		options: Options,
+		isNested = false,
+	) =>
 	(elements: FEElement[]): FEElement[] =>
 		[
 			enhanceLists(
-				enhanceElements(format, blockId, options),
+				enhanceElements(format, blockId, options, true),
 				options.tags,
 			),
-			enhanceTimeline(enhanceElements(format, blockId, options)),
+			enhanceTimeline(enhanceElements(format, blockId, options, true)),
+			enhanceProductElement(
+				enhanceElements(format, blockId, options, true),
+			),
 			enhanceDividers,
 			enhanceH2s,
 			enhanceInteractiveContentsElements,
@@ -76,13 +86,14 @@ export const enhanceElements =
 				format,
 				options.promotedNewsletter,
 				blockId,
+				isNested,
 			),
 			enhanceAdPlaceholders(
 				format,
 				options.renderingTarget,
 				options.shouldHideAds,
 			),
-			enhanceDisclaimer(options.hasAffiliateLinksDisclaimer),
+			enhanceDisclaimer(options.hasAffiliateLinksDisclaimer, isNested),
 		].reduce(
 			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),
 			elements,

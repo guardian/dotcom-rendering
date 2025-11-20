@@ -270,7 +270,9 @@ export const Comments = ({
 			handleFilterChange(newFilterObject);
 		}
 
-		isWeb && dispatchCommentsStateChange();
+		if (isWeb) {
+			dispatchCommentsStateChange();
+		}
 	};
 
 	useEffect(() => {
@@ -302,7 +304,9 @@ export const Comments = ({
 
 	const onPageChange = (pageNumber: number) => {
 		setPage(pageNumber);
-		isWeb && dispatchCommentsStateChange();
+		if (isWeb) {
+			dispatchCommentsStateChange();
+		}
 	};
 
 	initialiseApi({ additionalHeaders, baseUrl, apiKey, idApiUrl });

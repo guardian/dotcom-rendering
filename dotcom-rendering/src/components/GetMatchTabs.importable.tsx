@@ -8,7 +8,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const Loading = () => <Placeholder height={40} />;
+const Loading = () => <Placeholder heights={new Map([['mobile', 40]])} />;
 
 /**
  * ## Why does this need to be an Island?

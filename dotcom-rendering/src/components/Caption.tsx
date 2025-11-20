@@ -210,7 +210,19 @@ const captionLink = css`
 	}
 `;
 
+const galleryCaptionHeadingReset = css`
+	h2 {
+		display: inline;
+		font-weight: bold;
+	}
+	h2::after {
+		content: '';
+		display: block;
+	}
+`;
+
 const galleryStyles = css`
+	${galleryCaptionHeadingReset}
 	${grid.column.centre};
 	${textSans14};
 
@@ -218,7 +230,7 @@ const galleryStyles = css`
 	padding-bottom: 6px;
 	${from.leftCol} {
 		${grid.column.left}
-		grid-row-start: 8;
+		grid-row: 8/10;
 	}
 	${between.tablet.and.leftCol} {
 		position: relative;
@@ -239,8 +251,7 @@ const CameraIcon = ({ format }: IconProps) => {
 		<span
 			css={[
 				iconStyle,
-				(format.display === ArticleDisplay.Immersive ||
-					format.design === ArticleDesign.Gallery) &&
+				format.display === ArticleDisplay.Immersive &&
 					hideIconBelowLeftCol,
 			]}
 		>
@@ -296,7 +307,7 @@ export const Caption = ({
 				shouldLimitWidth && limitedWidth,
 				isOverlaid ? overlaidStyles(format) : bottomMarginStyles,
 				isMainMedia &&
-					(isBlog || mediaType === 'Video') &&
+					(isBlog || mediaType === 'YoutubeVideo') &&
 					tabletCaptionPadding,
 				padCaption && captionPadding,
 				isImmersive && immersivePadding,
@@ -304,7 +315,7 @@ export const Caption = ({
 			]}
 			data-spacefinder-role="inline"
 		>
-			{mediaType === 'Video' ? (
+			{mediaType === 'YoutubeVideo' ? (
 				<VideoIcon format={format} />
 			) : (
 				<CameraIcon format={format} />

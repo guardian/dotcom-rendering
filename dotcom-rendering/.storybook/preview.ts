@@ -4,7 +4,7 @@ import { AB } from '@guardian/ab-core';
 import isChromatic from 'chromatic/isChromatic';
 import MockDate from 'mockdate';
 
-import { fontsCss } from '../src/lib/fonts-css';
+import { rawFontsCss } from '../src/lib/fonts-css';
 import { resets } from '@guardian/source/foundations';
 
 import { Lazy } from '../src/components/Lazy';
@@ -12,11 +12,12 @@ import { Picture } from '../src/components/Picture';
 import { mockFetch } from '../src/lib/mockRESTCalls';
 import { setABTests } from '../src/lib/useAB';
 import { ConfigContextDecorator } from './decorators/configContextDecorator';
-import { Preview } from '@storybook/react';
+import { Preview } from '@storybook/react-webpack5';
 import {
 	globalColourScheme,
 	globalColourSchemeDecorator,
 } from './toolbar/globalColourScheme';
+import { palette as sourcePalette } from '@guardian/source/foundations';
 
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
 Lazy.disabled = isChromatic();
@@ -42,7 +43,7 @@ setABTests({
 });
 
 // Add base css for the site
-let css = `${fontsCss}${resets.resetCSS}`;
+let css = `${rawFontsCss}${resets.resetCSS}`;
 let head = document.getElementsByTagName('head')[0];
 let style = document.createElement('style');
 head.appendChild(style);
@@ -56,7 +57,7 @@ style.appendChild(document.createTextNode(css));
 // Could this be better? Sure, we could investigate ways to really, truly server side
 // render in Storybook but for now this (and some of the other steps we take around
 // hydration) achieve what we need
-window.guardian = {
+(window as any).guardian = {
 	config: {
 		ophan: {
 			pageViewId: 'mockPageViewId',
@@ -161,10 +162,24 @@ export default {
 	],
 
 	parameters: {
+		backgrounds: {
+			default: 'transparent',
+			options: {
+				transparent: { name: 'Transparent', value: 'transparent' },
+				grey: { name: 'Grey', value: 'lightgrey' },
+				red: { name: 'Red', value: sourcePalette.news[300] },
+			},
+		},
 		viewport: {
-			viewports: guardianViewports,
-			defaultViewport: 'wide',
+			options: guardianViewports,
 		},
 		layout: 'fullscreen',
+	},
+
+	initialGlobals: {
+		viewport: {
+			value: 'wide',
+			isRotated: false,
+		},
 	},
 } satisfies Preview;

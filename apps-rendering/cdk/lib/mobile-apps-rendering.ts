@@ -91,6 +91,8 @@ export class MobileAppsRendering extends GuStack {
 				InstanceClass.T4G,
 				props.instanceSize,
 			),
+			instanceMetricGranularity: '5Minute',
+			withAccessLogging: false,
 			certificateProps: {
 				domainName,
 				hostedZoneId: props.hostedZoneId,

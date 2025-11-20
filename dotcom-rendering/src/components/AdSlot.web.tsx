@@ -31,7 +31,6 @@ type SlotNamesWithPageSkin = SlotName | 'pageskin';
 
 type ServerRenderedSlot = Exclude<
 	SlotNamesWithPageSkin,
-	| 'carrot'
 	| 'comments-expanded'
 	| 'crossword-banner'
 	| 'exclusion'
@@ -47,7 +46,6 @@ type DefaultProps = {
 	display?: ArticleDisplay;
 	isPaidContent?: boolean;
 	hasPageskin?: boolean;
-	isIn250ReservationVariant?: boolean;
 };
 
 // for dark ad labels
@@ -110,14 +108,6 @@ const hideBelowDesktop = css`
 const containerMinHeight = getMinHeight(250, space[5]);
 
 const topAboveNavContainerStyles = css`
-	padding-bottom: ${space[5]}px;
-	position: relative;
-	margin: 0 auto;
-	text-align: left;
-	display: block;
-`;
-
-const topAboveNavContainerVariantStyles = css`
 	padding-bottom: ${space[5]}px;
 	position: relative;
 	margin: 0 auto;
@@ -475,7 +465,6 @@ export const AdSlot = ({
 	isPaidContent = false,
 	index,
 	hasPageskin = false,
-	isIn250ReservationVariant,
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -641,13 +630,7 @@ export const AdSlot = ({
 		}
 		case 'top-above-nav': {
 			return (
-				<AdSlotWrapper
-					css={
-						isIn250ReservationVariant
-							? topAboveNavContainerVariantStyles
-							: topAboveNavContainerStyles
-					}
-				>
+				<AdSlotWrapper css={topAboveNavContainerStyles}>
 					<div
 						id="dfp-ad--top-above-nav"
 						className={[

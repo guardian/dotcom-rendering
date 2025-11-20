@@ -41,13 +41,14 @@ type Props = {
 	containerType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	aspectRatio: AspectRatio;
 	sectionId: string;
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
-	isInOpinionNoAvatarVariant?: boolean;
+	/** Feature flag for the labs redesign work */
+	showLabsRedesign?: boolean;
 };
 
 export const DecideContainer = ({
@@ -56,14 +57,14 @@ export const DecideContainer = ({
 	containerType,
 	containerPalette,
 	showAge,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 	aspectRatio,
 	sectionId,
 	frontId,
 	collectionId,
 	containerLevel,
-	isInOpinionNoAvatarVariant,
+	showLabsRedesign = false,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -72,7 +73,7 @@ export const DecideContainer = ({
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -82,7 +83,7 @@ export const DecideContainer = ({
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -92,7 +93,7 @@ export const DecideContainer = ({
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -102,7 +103,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -112,7 +113,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -122,7 +123,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -132,7 +133,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -142,7 +143,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -152,7 +153,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -162,7 +163,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -172,7 +173,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -182,7 +183,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -192,7 +193,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -202,7 +203,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -212,7 +213,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -222,7 +223,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -232,7 +233,7 @@ export const DecideContainer = ({
 			return <NavList trails={trails} showImage={true} />;
 		case 'scrollable/highlights':
 			return (
-				<Island priority="feature" defer={{ until: 'visible' }}>
+				<Island priority="critical">
 					<ScrollableHighlights trails={trails} frontId={frontId} />
 				</Island>
 			);
@@ -242,10 +243,11 @@ export const DecideContainer = ({
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
+					showLabsRedesign={!!showLabsRedesign}
 				/>
 			);
 		case 'flexible/general':
@@ -254,12 +256,12 @@ export const DecideContainer = ({
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
-					isInOpinionNoAvatarVariant={isInOpinionNoAvatarVariant}
+					showLabsRedesign={!!showLabsRedesign}
 				/>
 			);
 		case 'scrollable/small':
@@ -268,12 +270,12 @@ export const DecideContainer = ({
 					<ScrollableSmall
 						trails={trails}
 						imageLoading={imageLoading}
-						containerType={'scrollable/small'}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
+						showLabsRedesign={!!showLabsRedesign}
 					/>
 				</Island>
 			);
@@ -283,13 +285,12 @@ export const DecideContainer = ({
 					<ScrollableMedium
 						trails={trails}
 						imageLoading={imageLoading}
-						containerType={'scrollable/small'}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
-						isInOpinionNoAvatarVariant={isInOpinionNoAvatarVariant}
+						showLabsRedesign={!!showLabsRedesign}
 					/>
 				</Island>
 			);
@@ -299,9 +300,10 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
+					showLabsRedesign={!!showLabsRedesign}
 				/>
 			);
 		case 'scrollable/feature':
@@ -311,9 +313,10 @@ export const DecideContainer = ({
 						trails={trails}
 						imageLoading={imageLoading}
 						containerPalette={containerPalette}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						collectionId={collectionId}
+						showLabsRedesign={showLabsRedesign}
 					/>
 				</Island>
 			);
@@ -322,10 +325,11 @@ export const DecideContainer = ({
 				<StaticFeatureTwo
 					trails={trails}
 					containerPalette={containerPalette}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
+					showLabsRedesign={showLabsRedesign}
 				/>
 			);
 		default:

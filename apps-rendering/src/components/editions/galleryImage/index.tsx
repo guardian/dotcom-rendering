@@ -94,9 +94,9 @@ const getCaptionDetails = (oDoc: Option<DocumentFragment>): CaptionDetails => {
 	): CaptionDetails => {
 		const detailsSection = details[section];
 
-		node.textContent &&
-			detailsSection.kind === OptionKind.Some &&
+		if (node.textContent && detailsSection.kind === OptionKind.Some) {
 			detailsSection.value.push(node.textContent);
+		}
 
 		return details;
 	};

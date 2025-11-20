@@ -1,7 +1,12 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	Pillar,
+} from '../lib/articleFormat';
 import { type Props as CardProps, FeatureCard } from './FeatureCard';
 
 const cardProps: CardProps = {
@@ -22,7 +27,6 @@ const cardProps: CardProps = {
 	canPlayInline: true,
 	imageLoading: 'eager',
 	discussionApiUrl: 'https://discussion.theguardian.com/discussion-api/',
-	absoluteServerTimes: true,
 	aspectRatio: '4:5',
 	byline: 'Byline text',
 	showByline: true,
@@ -119,6 +123,48 @@ export const Immersive: Story = {
 		isImmersive: true,
 		trailText:
 			'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+	},
+};
+
+export const Labs: Story = {
+	args: {
+		byline: undefined,
+		format: {
+			...cardProps.format,
+			theme: ArticleSpecial.Labs,
+		},
+		containerPalette: 'Branded',
+		branding: {
+			logo: {
+				src: 'https://static.theguardian.com/commercial/sponsor/22/Aug/2025/52dc0276-c2d9-405c-a686-2577c12914d4-ecover_pos_280.png',
+				link: '#',
+				label: 'Paid for by',
+				dimensions: {
+					width: 120,
+					height: 60,
+				},
+			},
+			logoForDarkBackground: {
+				src: 'https://static.theguardian.com/commercial/sponsor/22/Aug/2025/52dc0276-c2d9-405c-a686-2577c12914d4-ecover_pos_280.png',
+				link: '#',
+				label: 'Paid for by',
+				dimensions: {
+					width: 120,
+					height: 60,
+				},
+			},
+			sponsorName: 'Guardian Org',
+			aboutThisLink: '#about',
+		},
+		showLabsRedesign: true,
+	},
+};
+
+export const LabsImmersive: Story = {
+	args: {
+		...Labs.args,
+		...Immersive.args,
+		trailText: undefined,
 	},
 };
 
@@ -248,7 +294,7 @@ export const Video: Story = {
 			altText: 'alt text',
 		},
 		mainMedia: {
-			type: 'Video',
+			type: 'YoutubeVideo',
 			id: 'video-id',
 			videoId: 'video-id',
 			height: 1080,
@@ -322,6 +368,14 @@ export const WithSublinks: Story = {
 export const WithSublinksImmersive: Story = {
 	args: {
 		...WithSublinks.args,
+		...Immersive.args,
+	},
+};
+
+export const WithSublinksLabsImmersive: Story = {
+	args: {
+		...WithSublinks.args,
+		...Labs.args,
 		...Immersive.args,
 	},
 };

@@ -370,6 +370,7 @@ export const SeriesSectionLink = ({
 							format.design === ArticleDesign.Gallery &&
 								css`
 									display: inline-block;
+									position: relative;
 								`,
 							format.display === ArticleDisplay.Immersive &&
 								css`

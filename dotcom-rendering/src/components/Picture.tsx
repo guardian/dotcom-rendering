@@ -20,7 +20,8 @@ export type Orientation = 'portrait' | 'landscape';
 type PictureRoleType =
 	| RoleType
 	// Custom image role types that are used but do not come from CAPI / FE
-	| 'podcastCover';
+	| 'podcastCover'
+	| 'productCard';
 
 type Props = {
 	role: PictureRoleType;
@@ -268,6 +269,11 @@ const decideImageWidths = ({
 					{ breakpoint: breakpoints.mobile, width: 140 },
 					{ breakpoint: breakpoints.wide, width: 219 },
 				];
+			case 'productCard':
+				return [
+					{ breakpoint: breakpoints.mobile, width: 328 },
+					{ breakpoint: breakpoints.wide, width: 220 },
+				];
 			case 'inline':
 			default:
 				return [
@@ -278,6 +284,17 @@ const decideImageWidths = ({
 					},
 				];
 		}
+	} else if (format.design === ArticleDesign.Gallery) {
+		return [
+			{ breakpoint: breakpoints.mobile, width: 375 },
+			{ breakpoint: breakpoints.mobileMedium, width: 480 },
+			{ breakpoint: breakpoints.mobileLandscape, width: 660 },
+			{ breakpoint: breakpoints.phablet, width: 700 },
+			{ breakpoint: breakpoints.tablet, width: 700 },
+			{ breakpoint: breakpoints.desktop, width: 740 },
+			{ breakpoint: breakpoints.leftCol, width: 940 },
+			{ breakpoint: breakpoints.wide, width: 1020 },
+		];
 	} else {
 		switch (role) {
 			case 'showcase':
@@ -347,8 +364,17 @@ const decideImageWidths = ({
 				];
 			case 'halfWidth':
 				return [{ breakpoint: breakpoints.mobile, width: 445 }];
+			case 'productCard':
+				return [
+					{ breakpoint: breakpoints.mobile, width: 328 },
+					{ breakpoint: breakpoints.wide, width: 220 },
+				];
+			case 'podcastCover':
+				return [
+					{ breakpoint: breakpoints.mobile, width: 140 },
+					{ breakpoint: breakpoints.wide, width: 219 },
+				];
 			case 'inline':
-			default:
 				return [
 					{ breakpoint: breakpoints.mobile, width: 445 },
 					{

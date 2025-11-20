@@ -1,5 +1,5 @@
 import { breakpoints } from '@guardian/source/foundations';
-import type { StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react-webpack5';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
@@ -214,6 +214,40 @@ liveStory.decorators = [
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Standard,
 			theme: Pillar.News,
+		},
+	]),
+];
+
+export const labsHeaderStyle: StoryObj = ({ format }: StoryProps) => (
+	<>
+		<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
+			<h4>Labs redesign on</h4>
+			<CardHeadline
+				headlineText="This is how a card headline in labs looks"
+				format={format}
+				kickerText="Labs"
+				showLabsRedesign={true}
+			/>
+		</Section>
+
+		<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
+			<h4>Labs redesign off</h4>
+			<CardHeadline
+				headlineText="This is how a card headline in labs looks"
+				format={format}
+				kickerText="Labs"
+				showLabsRedesign={false}
+			/>
+		</Section>
+	</>
+);
+labsHeaderStyle.storyName = 'Labs Headline';
+labsHeaderStyle.decorators = [
+	splitTheme([
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: ArticleSpecial.Labs,
 		},
 	]),
 ];

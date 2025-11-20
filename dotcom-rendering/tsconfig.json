@@ -7,6 +7,7 @@
 		"jsx": "react-jsx",
 		"jsxImportSource": "@emotion/react",
 		"lib": ["esnext", "es2015", "dom"],
+		"moduleResolution": "bundler",
 		"noEmit": true,
 		"noFallthroughCasesInSwitch": true,
 		"noUncheckedIndexedAccess": true,
@@ -15,7 +16,21 @@
 			"*": ["node_modules/@types/*", "*"] // Make sure that package linking doesn't confuse things https://github.com/microsoft/TypeScript/issues/11916#issuecomment-257130001
 		},
 		"preserveConstEnums": true,
-		"skipLibCheck": true // Temporary fix for canary version testing - skip type checking of dependency .d.ts files
+		"skipLibCheck": true, // Temporary fix for canary version testing - skip type checking of dependency .d.ts files
+		"types": [
+			"node",
+			"jest",
+			"react",
+			"react-dom",
+			"@testing-library/jest-dom",
+			"webpack-env",
+			"youtube",
+			"twitter-for-web",
+			// This is to fix a "Cannot find namespace 'Chai'" error that arose during
+			// the upgrade to Storybook 9. Storybook uses vitest, which has chai as a
+			// dependency, and this makes the chai types available globally.
+			"chai"
+		]
 	},
 	"include": ["**/*", ".storybook/mocks/bridgetApi.ts"],
 	"exclude": [

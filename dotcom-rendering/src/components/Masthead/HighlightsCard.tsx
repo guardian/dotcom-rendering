@@ -32,6 +32,7 @@ export type HighlightsCardProps = {
 	byline?: string;
 	isExternalLink: boolean;
 	starRating?: Rating;
+	trackCardClick: () => void;
 };
 
 const container = css`
@@ -73,7 +74,7 @@ const container = css`
 `;
 
 const hoverStyles = css`
-	:hover .image-overlay {
+	:hover .media-overlay {
 		position: absolute;
 		bottom: 0;
 		right: 0;
@@ -133,6 +134,7 @@ export const HighlightsCard = ({
 	byline,
 	isExternalLink,
 	starRating,
+	trackCardClick,
 }: HighlightsCardProps) => {
 	const isMediaCard = isMedia(format);
 
@@ -144,6 +146,7 @@ export const HighlightsCard = ({
 					headlineText={headlineText}
 					dataLinkName={dataLinkName}
 					isExternalLink={isExternalLink}
+					trackCardClick={trackCardClick}
 				/>
 
 				<div css={content}>
@@ -175,7 +178,7 @@ export const HighlightsCard = ({
 
 					{!!mainMedia && isMediaCard && (
 						<div>
-							{mainMedia.type === 'Video' && (
+							{mainMedia.type === 'YoutubeVideo' && (
 								<Pill
 									content={secondsToDuration(
 										mainMedia.duration,

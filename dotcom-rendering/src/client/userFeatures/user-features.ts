@@ -30,6 +30,7 @@ const refresh = async (): Promise<void> => {
 const requestNewData = async () => {
 	const authStatus = await getAuthStatus();
 	if (authStatus.kind !== 'SignedIn') {
+		// eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
 		return Promise.reject('The user is not signed in');
 	}
 	return syncDataFromUserBenefitsApi(authStatus).then(persistResponse);
@@ -53,8 +54,10 @@ const persistResponse = (userBenefitsResponse: UserBenefits) => {
 	if (userBenefitsResponse.allowRejectAll) {
 		createOrRenewCookie(ALLOW_REJECT_ALL_COOKIE);
 	}
+	// Ad free cookie has an expiry of 2 days from now
+	// See https://github.com/guardian/gateway/blob/52f810a88fa9ce23c6a794916251748718742c3d/src/server/lib/user-features.ts#L111-L115
 	if (userBenefitsResponse.adFree) {
-		createOrRenewCookie(AD_FREE_USER_COOKIE);
+		createOrRenewCookie(AD_FREE_USER_COOKIE, 2);
 	}
 };
 

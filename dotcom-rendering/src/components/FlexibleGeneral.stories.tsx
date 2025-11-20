@@ -1,5 +1,5 @@
 import { breakpoints } from '@guardian/source/foundations';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
 	audioTrails,
@@ -153,7 +153,6 @@ const meta = {
 		frontSectionTitle: 'Flexible general',
 		groupedTrails: emptyGroupedTrails,
 		showAge: true,
-		absoluteServerTimes: true,
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
 		collectionId: 1,
@@ -262,7 +261,7 @@ const liveUpdatesCard = {
 	showQuotedHeadline: false,
 	dataLinkName: 'news | group-0 | card-@1',
 	mainMedia: {
-		type: 'Video',
+		type: 'YoutubeVideo',
 		id: 'fd00c892-407f-4d99-adfb-a8d12eada25f',
 		videoId: '04lLgC1NioA',
 		height: 300,
@@ -324,6 +323,7 @@ export const SplashBoostLevels: Story = {
 
 		return (
 			<>
+				<Section title="Default" boostLevel="default" />
 				<Section title="Boosted" boostLevel="boost" />
 				<Section title="Mega boosted" boostLevel="megaboost" />
 				<Section title="Giga boosted" boostLevel="gigaboost" />

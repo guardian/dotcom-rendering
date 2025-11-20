@@ -13,9 +13,11 @@ type Props = {
 	trails: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	aspectRatio: AspectRatio;
 	collectionId: number;
+	/** Feature flag for the labs redesign work */
+	showLabsRedesign?: boolean;
 };
 
 /**
@@ -27,16 +29,19 @@ type Props = {
 export const StaticFeatureTwo = ({
 	trails,
 	containerPalette,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 	aspectRatio,
 	collectionId,
+	showLabsRedesign = false,
 }: Props) => {
 	const cards = trails.slice(0, 2);
 	return (
 		<UL direction="row">
 			{cards.map((card) => {
-				const isLoopingVideo = card.mainMedia?.type === 'LoopVideo';
+				const isLoopingVideo =
+					card.mainMedia?.type === 'SelfHostedVideo' &&
+					card.mainMedia.videoStyle === 'Loop';
 
 				return (
 					<LI
@@ -67,10 +72,10 @@ export const StaticFeatureTwo = ({
 							discussionId={card.discussionId}
 							mainMedia={card.mainMedia}
 							isExternalLink={card.isExternalLink}
-							// branding={card.branding}
+							branding={card.branding}
 							containerPalette={containerPalette}
 							trailText={undefined}
-							absoluteServerTimes={absoluteServerTimes}
+							serverTime={serverTime}
 							imageLoading={imageLoading}
 							aspectRatio={aspectRatio}
 							imageSize="feature-large"
@@ -80,6 +85,7 @@ export const StaticFeatureTwo = ({
 							isNewsletter={card.isNewsletter}
 							showQuotes={card.showQuotedHeadline}
 							showVideo={card.showVideo}
+							showLabsRedesign={showLabsRedesign}
 						/>
 					</LI>
 				);

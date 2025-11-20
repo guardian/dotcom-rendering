@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
 import { Gallery as GalleryFixture } from '../../fixtures/generated/fe-articles/Gallery';
 import { storyPackage } from '../../fixtures/generated/story-package';
@@ -44,6 +44,7 @@ const addBrandingAndAffiliateDisclaimer = (gallery: Gallery): Gallery => ({
 const appsArticle = enhanceArticleType(
 	{
 		...GalleryFixture,
+		hasStoryPackage: true,
 		storyPackage,
 	},
 	'Apps',
@@ -75,6 +76,7 @@ export const Apps = {
 const webArticle = enhanceArticleType(
 	{
 		...GalleryFixture,
+		hasStoryPackage: true,
 		storyPackage,
 	},
 	'Web',
@@ -92,6 +94,29 @@ export const Web = {
 			selectedPillar: getCurrentPillar(webArticle.frontendData),
 		},
 		gallery: addBrandingAndAffiliateDisclaimer(webArticle),
+	},
+	parameters: {
+		formats: [
+			{
+				design: webArticle.design,
+				display: webArticle.display,
+				theme: webArticle.theme,
+			},
+		],
+	},
+} satisfies Story;
+
+export const WebWithoutMainMedia = {
+	args: {
+		renderingTarget: 'Web',
+		NAV: {
+			...extractNAV(webArticle.frontendData.nav),
+			selectedPillar: getCurrentPillar(webArticle.frontendData),
+		},
+		gallery: {
+			...addBrandingAndAffiliateDisclaimer(webArticle),
+			mainMedia: undefined,
+		},
 	},
 	parameters: {
 		formats: [

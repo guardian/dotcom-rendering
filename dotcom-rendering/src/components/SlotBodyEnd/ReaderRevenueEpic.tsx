@@ -20,13 +20,13 @@ import type {
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import {
+	getAuthHeaders,
 	hasCmpConsentForWeeklyArticleCount,
 	hasOptedOutOfArticleCount,
 	shouldHideSupportMessaging,
 } from '../../lib/contributions';
 import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import type { CanShowResult } from '../../lib/messagePicker';
-import { setAutomat } from '../../lib/setAutomat';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { TagType } from '../../types/tag';
 
@@ -65,7 +65,6 @@ const buildPayload = async (
 		showSupportMessaging: !data.hideSupportMessagingForUser,
 		epicViewLog: getEpicViewLog(storage.local),
 		weeklyArticleHistory: await data.asyncArticleCount,
-
 		hasOptedOutOfArticleCount: await hasOptedOutOfArticleCount(),
 		mvtId: Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })),
 		countryCode: data.countryCode,
@@ -108,9 +107,12 @@ export const canShowReaderRevenueEpic = async (
 		hideSupportMessagingForUser,
 	});
 
+	const headers = await getAuthHeaders();
+
 	const response: ModuleDataResponse<EpicProps> = await getEpic(
 		contributionsServiceUrl,
 		contributionsPayload,
+		headers,
 	);
 	const module: ModuleData<EpicProps> | undefined = response.data?.module;
 
@@ -161,8 +163,6 @@ export const ReaderRevenueEpic = ({ props }: ModuleData<EpicProps>) => {
 	const [Epic, setEpic] = useState<React.ElementType | null>(null);
 
 	useEffect(() => {
-		setAutomat();
-
 		const { endPerformanceMeasure } = startPerformanceMeasure(
 			'supporterRevenue',
 			'contributions-epic-module',

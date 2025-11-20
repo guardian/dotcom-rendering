@@ -43,8 +43,7 @@ type Props = {
 	// A function will render a <Button>
 	// A string will render a <LinkButton>
 	// Both using the same interface
-	// eslint-disable-next-line @typescript-eslint/ban-types
-	onClickAction: Function | Url;
+	onClickAction: (() => void) | Url;
 	submitComponentEvent?: (event: ComponentEvent) => void;
 	children: React.ReactElement | string;
 	priority?: 'primary' | 'secondary';

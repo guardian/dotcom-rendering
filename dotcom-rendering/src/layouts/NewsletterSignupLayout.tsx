@@ -36,7 +36,7 @@ import { Standfirst } from '../components/Standfirst';
 import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { decideTrail } from '../lib/decideTrail';
+import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { isValidUrl } from '../lib/isValidUrl';
 import type { NavType } from '../model/extract-nav';
 import type { ArticleDeprecated } from '../types/article';
@@ -48,6 +48,7 @@ type Props = {
 	NAV: NavType;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
+	serverTime?: number;
 };
 
 const mainColWrapperStyle = css`
@@ -190,6 +191,7 @@ export const NewsletterSignupLayout = ({
 	NAV,
 	format,
 	renderingTarget,
+	serverTime,
 }: Props) => {
 	const {
 		promotedNewsletter,
@@ -213,8 +215,6 @@ export const NewsletterSignupLayout = ({
 	const renderAds = canRenderAds(article);
 	const isWeb = renderingTarget === 'Web';
 
-	const { absoluteServerTimes = false } = article.config.switches;
-
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -227,7 +227,7 @@ export const NewsletterSignupLayout = ({
 							padSides={false}
 							shouldCenter={false}
 						>
-							<HeaderAdSlot abTests={article.config.abTests} />
+							<HeaderAdSlot />
 						</Section>
 					</Stuck>
 				)}
@@ -426,8 +426,9 @@ export const NewsletterSignupLayout = ({
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
 								heading={article.storyPackage.heading}
-								trails={article.storyPackage.trails.map(
-									decideTrail,
+								trails={decideStoryPackageTrails(
+									article.storyPackage.trails,
+									article.webURL,
 								)}
 								onwardsSource="more-on-this-story"
 								format={format}
@@ -435,7 +436,7 @@ export const NewsletterSignupLayout = ({
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
-								absoluteServerTimes={absoluteServerTimes}
+								serverTime={serverTime}
 								renderingTarget={renderingTarget}
 							/>
 						</Island>
@@ -459,8 +460,9 @@ export const NewsletterSignupLayout = ({
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
-						absoluteServerTimes={absoluteServerTimes}
+						serverTime={serverTime}
 						renderingTarget={renderingTarget}
+						webURL={article.webURL}
 					/>
 				</Island>
 			</main>

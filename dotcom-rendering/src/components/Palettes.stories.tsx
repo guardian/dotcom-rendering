@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
@@ -16,7 +16,17 @@ const meta = {
 			},
 		},
 	},
-} satisfies Meta;
+	args: {
+		showLabsRedesign: false,
+	},
+	argTypes: {
+		showLabsRedesign: {
+			control: { type: 'boolean' },
+			description:
+				'Toggle between old Labs design (LabsSection) and new design (FrontSection)',
+		},
+	},
+} satisfies Meta<{ showLabsRedesign: boolean }>;
 type Story = StoryObj<typeof meta>;
 
 export default meta;
@@ -50,7 +60,6 @@ export const EventPalette = {
 				groupedTrails={groupedTrails}
 				containerPalette="EventPalette"
 				showAge={true}
-				absoluteServerTimes={true}
 				imageLoading="eager"
 			/>
 		</FrontSection>
@@ -70,7 +79,6 @@ export const EventAltPalette = {
 				groupedTrails={groupedTrails}
 				containerPalette="EventAltPalette"
 				showAge={true}
-				absoluteServerTimes={true}
 				imageLoading="eager"
 			/>
 		</FrontSection>
@@ -90,7 +98,6 @@ export const SombrePalette = {
 				groupedTrails={groupedTrails}
 				containerPalette="SombrePalette"
 				showAge={true}
-				absoluteServerTimes={true}
 				imageLoading="eager"
 			/>
 		</FrontSection>
@@ -110,7 +117,6 @@ export const SombreAltPalette = {
 				groupedTrails={groupedTrails}
 				containerPalette="SombreAltPalette"
 				showAge={true}
-				absoluteServerTimes={true}
 				imageLoading="eager"
 			/>
 		</FrontSection>
@@ -130,7 +136,6 @@ export const BreakingPalette = {
 				groupedTrails={groupedTrails}
 				containerPalette="BreakingPalette"
 				showAge={true}
-				absoluteServerTimes={true}
 				imageLoading="eager"
 			/>
 		</FrontSection>
@@ -150,7 +155,6 @@ export const LongRunningPalette = {
 				groupedTrails={groupedTrails}
 				containerPalette="LongRunningPalette"
 				showAge={true}
-				absoluteServerTimes={true}
 				imageLoading="eager"
 			/>
 		</FrontSection>
@@ -170,7 +174,6 @@ export const LongRunningAltPalette = {
 				groupedTrails={groupedTrails}
 				containerPalette="LongRunningAltPalette"
 				showAge={true}
-				absoluteServerTimes={true}
 				imageLoading="eager"
 			/>
 		</FrontSection>
@@ -190,7 +193,6 @@ export const InvestigationPalette = {
 				groupedTrails={groupedTrails}
 				containerPalette="InvestigationPalette"
 				showAge={true}
-				absoluteServerTimes={true}
 				imageLoading="eager"
 			/>
 		</FrontSection>
@@ -210,33 +212,49 @@ export const SpecialReportAltPalette = {
 				groupedTrails={groupedTrails}
 				containerPalette="SpecialReportAltPalette"
 				showAge={true}
-				absoluteServerTimes={true}
 				imageLoading="eager"
 			/>
 		</FrontSection>
 	),
 } satisfies Story;
 
-export const BrandedPalette = {
-	render: () => (
-		<LabsSection
-			title="Branded Palette"
-			collectionId={''}
-			pageId={''}
-			ajaxUrl={''}
-			sectionId={'branded-palette'}
-			ophanComponentName={'branded-palette'}
-			ophanComponentLink={'branded-palette'}
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
-			<DynamicFast
-				groupedTrails={groupedTrails}
+export const BrandedPalette: StoryObj<{ showLabsRedesign: boolean }> = {
+	render: ({ showLabsRedesign }) =>
+		showLabsRedesign ? (
+			<FrontSection
+				title="Branded Palette Redesign"
 				containerPalette="Branded"
-				showAge={true}
-				absoluteServerTimes={true}
-				imageLoading="eager"
-			/>
-		</LabsSection>
-	),
-} satisfies Story;
+				showDateHeader={true}
+				editionId={'UK'}
+				discussionApiUrl={discussionApiUrl}
+				isLabs={true}
+				showLabsRedesign={showLabsRedesign}
+			>
+				<DynamicFast
+					groupedTrails={groupedTrails}
+					containerPalette="Branded"
+					showAge={true}
+					imageLoading="eager"
+				/>
+			</FrontSection>
+		) : (
+			<LabsSection
+				title="Branded Palette"
+				collectionId={''}
+				pageId={''}
+				ajaxUrl={''}
+				sectionId={'branded-palette-toggle'}
+				ophanComponentName={'branded-palette-toggle'}
+				ophanComponentLink={'branded-palette-toggle'}
+				discussionApiUrl={discussionApiUrl}
+				editionId={'UK'}
+			>
+				<DynamicFast
+					groupedTrails={groupedTrails}
+					containerPalette="Branded"
+					showAge={true}
+					imageLoading="eager"
+				/>
+			</LabsSection>
+		),
+};

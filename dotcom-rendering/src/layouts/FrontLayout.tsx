@@ -18,7 +18,6 @@ import {
 	MobileAdSlot,
 } from '../components/FrontsAdSlots';
 import { FrontSection } from '../components/FrontSection';
-import { FrontSectionTracker } from '../components/FrontSectionTracker.importable';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
@@ -69,6 +68,9 @@ const isNavList = (collection: DCRCollectionType) => {
 const isHighlights = ({ collectionType }: DCRCollectionType) =>
 	collectionType === 'scrollable/highlights';
 
+const isLabs = ({ containerPalette }: DCRCollectionType) =>
+	containerPalette === 'Branded';
+
 const isToggleable = (
 	index: number,
 	collection: DCRCollectionType,
@@ -78,11 +80,12 @@ const isToggleable = (
 		return (
 			collection.displayName.toLowerCase() !== 'headlines' &&
 			!isNavList(collection) &&
-			!isHighlights(collection)
+			!isHighlights(collection) &&
+			!isLabs(collection)
 		);
 	}
 
-	return index != 0 && !isNavList(collection);
+	return index != 0 && !isNavList(collection) && !isLabs(collection);
 };
 
 const decideLeftContent = (front: Front, collection: DCRCollectionType) => {
@@ -107,10 +110,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			hasPageSkin: hasPageSkinConfig,
 			pageId,
 			abTests,
-			switches: { absoluteServerTimes = false },
 		},
 		editionId,
 	} = front;
+
+	const serverTime = front.serverTime;
 
 	const renderAds = canRenderAds(front);
 
@@ -135,14 +139,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
-	/**
-	 * We are running an AB test which replaces the avatar for the card image
-	 * in the Opinion and More opinion collections on network fronts.
+	/** We allow the labs redesign to be shown if:
+	 * - the feature switch is ON
+	 * OR
+	 * - the user is opted into the 0% server side test
 	 */
-	const isInOpinionNoAvatarVariant = (collectionName: string) =>
-		abTests.opinionNoAvatarVariant === 'variant' &&
-		front.isNetworkFront &&
-		(collectionName === 'Opinion' || collectionName === 'More opinion');
+	const showLabsRedesign =
+		!!front.config.switches.guardianLabsRedesign ||
+		abTests.labsRedesignVariant === 'variant';
 
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
@@ -176,7 +180,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					]}
 					groupedTrails={highlightsCollection.grouped}
 					showAge={false}
-					absoluteServerTimes={absoluteServerTimes}
+					serverTime={serverTime}
 					imageLoading="eager"
 					aspectRatio={
 						highlightsCollection.aspectRatio ??
@@ -207,7 +211,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								'--article-section-background',
 							)}
 						>
-							<HeaderAdSlot abTests={abTests} />
+							<HeaderAdSlot />
 						</Section>
 					</Stuck>
 				)}
@@ -433,7 +437,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						);
 					}
 
-					if (collection.containerPalette === 'Branded') {
+					if (
+						collection.containerPalette === 'Branded' &&
+						!showLabsRedesign
+					) {
 						return (
 							<Fragment key={ophanName}>
 								<LabsSection
@@ -467,9 +474,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											collection.containerPalette
 										}
 										imageLoading={imageLoading}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
+										serverTime={serverTime}
 										aspectRatio={
 											collection.aspectRatio ??
 											fallbackAspectRatio(
@@ -481,6 +486,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										containerLevel={
 											collection.containerLevel
 										}
+										showLabsRedesign={showLabsRedesign}
 									/>
 								</LabsSection>
 
@@ -576,6 +582,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								isAboveMobileAd={mobileAdPositions.includes(
 									index,
 								)}
+								isLabs={isLabs(collection)}
+								showLabsRedesign={showLabsRedesign}
 							>
 								<DecideContainer
 									trails={trails}
@@ -590,7 +598,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										)
 									}
 									imageLoading={imageLoading}
-									absoluteServerTimes={absoluteServerTimes}
+									serverTime={serverTime}
 									aspectRatio={
 										collection.aspectRatio ??
 										fallbackAspectRatio(
@@ -600,9 +608,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
-									isInOpinionNoAvatarVariant={isInOpinionNoAvatarVariant(
-										collection.displayName,
-									)}
+									showLabsRedesign={showLabsRedesign}
 								/>
 							</FrontSection>
 
@@ -705,10 +711,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					/>
 				</Island>
 			</BannerWrapper>
-
-			<Island priority="feature" defer={{ until: 'idle' }}>
-				<FrontSectionTracker />
-			</Island>
 		</>
 	);
 };

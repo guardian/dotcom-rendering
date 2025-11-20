@@ -10,10 +10,12 @@ import { ScrollableCarousel } from './ScrollableCarousel';
 type Props = {
 	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
-	absoluteServerTimes: boolean;
+	serverTime?: number;
 	imageLoading: 'lazy' | 'eager';
 	aspectRatio: AspectRatio;
 	collectionId: number;
+	/** Feature flag for the labs redesign work */
+	showLabsRedesign?: boolean;
 };
 
 /**
@@ -26,10 +28,11 @@ type Props = {
 export const ScrollableFeature = ({
 	trails,
 	containerPalette,
-	absoluteServerTimes,
+	serverTime,
 	imageLoading,
 	aspectRatio,
 	collectionId,
+	showLabsRedesign = false,
 }: Props) => {
 	return (
 		<ScrollableCarousel
@@ -38,7 +41,9 @@ export const ScrollableFeature = ({
 			visibleCarouselSlidesOnTablet={3}
 		>
 			{trails.map((card) => {
-				const isLoopingVideo = card.mainMedia?.type === 'LoopVideo';
+				const isLoopingVideo =
+					card.mainMedia?.type === 'SelfHostedVideo' &&
+					card.mainMedia.videoStyle === 'Loop';
 
 				return (
 					<ScrollableCarousel.Item key={card.url}>
@@ -63,9 +68,9 @@ export const ScrollableFeature = ({
 							discussionId={card.discussionId}
 							mainMedia={card.mainMedia}
 							isExternalLink={card.isExternalLink}
-							// branding={card.branding}
+							branding={card.branding}
 							containerPalette={containerPalette}
-							absoluteServerTimes={absoluteServerTimes}
+							serverTime={serverTime}
 							imageLoading={imageLoading}
 							aspectRatio={aspectRatio}
 							imageSize="feature"
@@ -79,6 +84,7 @@ export const ScrollableFeature = ({
 							isNewsletter={card.isNewsletter}
 							showQuotes={card.showQuotedHeadline}
 							showVideo={card.showVideo}
+							showLabsRedesign={showLabsRedesign}
 						/>
 					</ScrollableCarousel.Item>
 				);

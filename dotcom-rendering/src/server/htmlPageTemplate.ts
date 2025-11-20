@@ -1,9 +1,10 @@
 import { isUndefined } from '@guardian/libs';
 import { resets, palette as sourcePalette } from '@guardian/source/foundations';
+import CleanCSS from 'clean-css';
 import he from 'he';
 import { ASSET_ORIGIN } from '../lib/assets';
 import { escapeData } from '../lib/escapeData';
-import { fontsCss } from '../lib/fonts-css';
+import { rawFontsCss } from '../lib/fonts-css';
 import type { Guardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
 import { GIT_COMMIT_HASH } from './prout';
@@ -16,7 +17,6 @@ type BaseProps = {
 	title?: string;
 	description?: string;
 	linkedData?: { [key: string]: any };
-	ampLink?: string;
 	openGraphData?: { [key: string]: string };
 	twitterData?: { [key: string]: string };
 	initTwitter?: string;
@@ -57,6 +57,8 @@ const fontPreloadTags = fontFiles
 	)
 	.join('\n');
 
+const minifiedFontsCss = new CleanCSS().minify(rawFontsCss).styles;
+
 export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 	const {
 		css,
@@ -66,7 +68,6 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		title = 'The Guardian',
 		description = 'Latest news, sport, business, comment, analysis and reviews from the Guardian, the world&#x27;s leading liberal voice',
 		linkedData,
-		ampLink,
 		openGraphData,
 		twitterData,
 		initTwitter,
@@ -81,13 +82,18 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 	} = props;
 
 	const doNotIndex = (): boolean => {
-		const isDevelopment = process.env.GU_STAGE !== 'PROD';
+		if (process.env.GU_STAGE !== 'PROD') return true;
+		if (!canonicalUrl) return false;
 
-		const hasNoIndexPattern = Boolean(
-			canonicalUrl?.includes('tracking/commissioningdesk'),
+		const isAllowListed = [
+			'tracking/commissioningdesk/the-filter',
+			'tracking/commissioningdesk/filter-us',
+		].some((allowed) => canonicalUrl.includes(allowed));
+
+		return (
+			canonicalUrl.includes('tracking/commissioningdesk') &&
+			!isAllowListed
 		);
-
-		return isDevelopment || hasNoIndexPattern;
 	};
 
 	/**
@@ -263,13 +269,6 @@ https://workforus.theguardian.com/careers/product-engineering/
 						: '<!-- no linked data -->'
 				}
 
-                <!-- TODO make this conditional when we support more content types -->
-                ${
-					ampLink
-						? `<link rel="amphtml" href="${ampLink}">`
-						: '<!-- no Amp link -->'
-				}
-
 				${renderingTarget === 'Web' ? fontPreloadTags : ''}
 
                 ${openGraphMetaTags ?? '<!-- no Open Graph meta tags -->'}
@@ -395,7 +394,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 						: ''
 				}
                 ${scriptTags.join('\n')}
-                <style class="webfont">${fontsCss}</style>
+				<style class="webfont">${minifiedFontsCss}</style>
                 <style>${resets.resetCSS}</style>
 				${css}
 				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">
