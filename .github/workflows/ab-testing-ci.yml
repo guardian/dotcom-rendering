@@ -76,7 +76,7 @@ jobs:
 
   riff-raff:
     runs-on: ubuntu-latest
-    needs: [dictionaries-ci, ui-ci]
+    needs: [config-ci, ui-ci]
     permissions:
       id-token: write
       contents: read
@@ -111,7 +111,7 @@ jobs:
         run: pnpm cdk:test
 
       - name: CDK synth
-        run: pnpm cdk:synth
+        run: pnpm synth:ab-testing-config
 
       - name: Riff-Raff Upload
         uses: guardian/actions-riff-raff@v4.1.9

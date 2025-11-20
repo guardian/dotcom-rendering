@@ -1,4 +1,4 @@
-name: 🧪 AB testing
+name: 🧪 AB testing Lambda
 
 permissions:
   contents: read
@@ -12,8 +12,7 @@ on:
       - '.github/workflows/ab-testing-lambda-ci.yml'
 
 jobs:
-  lambda-ci:
-    name: Deploy Lambda CI
+  ci:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -43,7 +42,7 @@ jobs:
 
   riff-raff:
     runs-on: ubuntu-latest
-    needs: [lambda-ci]
+    needs: [ci]
     permissions:
       id-token: write
       contents: read
