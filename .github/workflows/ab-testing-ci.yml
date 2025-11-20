@@ -75,6 +75,7 @@ jobs:
           if-no-files-found: error
 
   riff-raff:
+    name: Riff-Raff Artifacts
     runs-on: ubuntu-latest
     needs: [config-ci, ui-ci]
     permissions:
