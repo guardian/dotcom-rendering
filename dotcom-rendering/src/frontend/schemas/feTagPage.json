@@ -1413,13 +1413,20 @@
                 "activeVersion": {
                     "type": "number"
                 },
-                "videoPlayerFormat": {
-                    "enum": [
-                        "Cinemagraph",
-                        "Default",
-                        "Loop"
-                    ],
-                    "type": "string"
+                "dimensions": {
+                    "type": "object",
+                    "properties": {
+                        "width": {
+                            "type": "number"
+                        },
+                        "height": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "height",
+                        "width"
+                    ]
                 }
             },
             "required": [

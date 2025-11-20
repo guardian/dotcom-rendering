@@ -648,7 +648,7 @@ export const newsletterTrails: [DCRFrontCard, DCRFrontCard] = [
 	},
 ];
 
-export const selfHostedVideoCard: DCRFrontCard = {
+export const selfHostedVideo54Card = {
 	...defaultCardProps,
 	dataLinkName: 'news | group-0 | card-@2',
 	url: '/uk-news/2025/jan/22/prince-harry-says-sun-publisher-made-historic-admission-as-he-settles-case',
@@ -664,7 +664,7 @@ export const selfHostedVideoCard: DCRFrontCard = {
 				src: 'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
 			},
 		],
-		duration: 0,
+		duration: 30,
 		width: 500,
 		height: 400,
 		image: 'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
@@ -673,7 +673,22 @@ export const selfHostedVideoCard: DCRFrontCard = {
 		src: 'https://media.guim.co.uk/966bf085fb982b1103aaba42a812b09726cc0a3c/1417_104_1378_1104/master/1378.jpg',
 		altText: 'Wyatt Russell and Florence Pugh in Thunderbolts*.',
 	},
-};
+} satisfies DCRFrontCard;
+
+export const selfHostedVerticalVideoCard = {
+	...selfHostedVideo54Card,
+	mainMedia: {
+		...selfHostedVideo54Card.mainMedia,
+		sources: [
+			{
+				mimeType: 'video/mp4',
+				src: 'https://uploads.guimcode.co.uk/2025/11/12/5x4_test--ee49513c-bf16-4321-a444-09c9a037d584-4.0.mp4',
+			},
+		],
+		width: 406,
+		height: 720,
+	},
+} satisfies DCRFrontCard;
 
 export const slideshowCard: DCRFrontCard = {
 	...defaultCardProps,

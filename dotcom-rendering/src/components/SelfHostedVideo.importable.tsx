@@ -18,6 +18,7 @@ import {
 	customSelfHostedVideoPlayAudioEventName,
 	customYoutubePlayEventName,
 } from '../lib/video';
+import { palette } from '../palette';
 import type { VideoPlayerFormat } from '../types/mainMedia';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
@@ -29,9 +30,18 @@ import type {
 import { SelfHostedVideoPlayer } from './SelfHostedVideoPlayer';
 import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
-const videoContainerStyles = css`
-	z-index: ${getZIndex('video-container')};
+const videoAndBackgroundStyles = css`
 	position: relative;
+	display: flex;
+	justify-content: space-around;
+	z-index: ${getZIndex('video-container')};
+	background-color: ${palette('--video-background')};
+`;
+
+const videoContainerStyles = (width: number, height: number) => css`
+	position: relative;
+	height: 100%;
+	width: ${(width / height) * 80}%;
 `;
 
 const cinemagraphContainerStyles = css`
@@ -662,45 +672,47 @@ export const SelfHostedVideo = ({
 		: undefined;
 
 	return (
-		<figure
-			ref={setNode}
-			css={[
-				videoContainerStyles,
-				isCinemagraph && cinemagraphContainerStyles,
-			]}
-			className={`video-container ${videoStyle.toLocaleLowerCase()}`}
-			data-component="gu-video-loop"
-		>
-			<SelfHostedVideoPlayer
-				sources={sources}
-				atomId={atomId}
-				uniqueId={uniqueId}
-				width={width}
-				height={height}
-				videoStyle={videoStyle}
-				posterImage={optimisedPosterImage}
-				FallbackImageComponent={FallbackImageComponent}
-				currentTime={currentTime}
-				setCurrentTime={setCurrentTime}
-				ref={vidRef}
-				isPlayable={isPlayable}
-				playerState={playerState}
-				isMuted={isMuted}
-				handleLoadedMetadata={handleLoadedMetadata}
-				handleLoadedData={handleLoadedData}
-				handleCanPlay={handleCanPlay}
-				handlePlayPauseClick={handlePlayPauseClick}
-				handleAudioClick={handleAudioClick}
-				handleKeyDown={handleKeyDown}
-				handlePause={handlePause}
-				onError={onError}
-				AudioIcon={hasAudio ? AudioIcon : null}
-				preloadPartialData={preloadPartialData}
-				showPlayIcon={showPlayIcon}
-				subtitleSize={subtitleSize}
-				subtitleSource={subtitleSource}
-				activeCue={activeCue}
-			/>
-		</figure>
+		<div css={videoAndBackgroundStyles} className="loop-video-container">
+			<figure
+				ref={setNode}
+				css={[
+					videoContainerStyles(width, height),
+					isCinemagraph && cinemagraphContainerStyles,
+				]}
+				className={`video-container ${videoStyle.toLocaleLowerCase()}`}
+				data-component="gu-video-loop"
+			>
+				<SelfHostedVideoPlayer
+					sources={sources}
+					atomId={atomId}
+					uniqueId={uniqueId}
+					width={width}
+					height={height}
+					videoStyle={videoStyle}
+					posterImage={optimisedPosterImage}
+					FallbackImageComponent={FallbackImageComponent}
+					currentTime={currentTime}
+					setCurrentTime={setCurrentTime}
+					ref={vidRef}
+					isPlayable={isPlayable}
+					playerState={playerState}
+					isMuted={isMuted}
+					handleLoadedMetadata={handleLoadedMetadata}
+					handleLoadedData={handleLoadedData}
+					handleCanPlay={handleCanPlay}
+					handlePlayPauseClick={handlePlayPauseClick}
+					handleAudioClick={handleAudioClick}
+					handleKeyDown={handleKeyDown}
+					handlePause={handlePause}
+					onError={onError}
+					AudioIcon={hasAudio ? AudioIcon : null}
+					preloadPartialData={preloadPartialData}
+					showPlayIcon={showPlayIcon}
+					subtitleSource={subtitleSource}
+					subtitleSize={subtitleSize}
+					activeCue={activeCue}
+				/>
+			</figure>
+		</div>
 	);
 };
