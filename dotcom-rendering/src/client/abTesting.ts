@@ -1,4 +1,5 @@
 import { getCookie, isUndefined } from '@guardian/libs';
+import { getForcedParticipationsFromUrlFlat } from '../lib/getAbUrlHash';
 
 const AB_COOKIE_NAME = 'gu_client_ab_tests';
 
@@ -37,6 +38,7 @@ const getABTestParticipations = (): ABParticipations => {
 	return {
 		...getClientParticipations(),
 		...window.guardian.config.serverSideABTests,
+		...getForcedParticipationsFromUrlFlat(window.location.hash),
 	};
 };
 
