@@ -7,6 +7,7 @@ on:
   push:
     paths:
       - 'ab-testing/dictionary-deploy-lambda/**'
+      - 'ab-testing/cdk/**'
       - 'ab-testing/lib/**'
       - '.github/workflows/ab-testing-lambda-ci.yml'
 

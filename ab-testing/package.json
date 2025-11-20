@@ -17,10 +17,17 @@
 		"cdk:test": "node --test --test-reporter spec cdk/*/*.test.ts",
 		"cdk:test-update": "node --test --test-reporter spec --test-update-snapshots cdk/*/*.test.ts",
 		"synth:ab-testing-config": "cdk synth --path-metadata false --version-reporting false --app 'node cdk/bin/ab-testing-config.cdk.ts' --output ./cdk.out/ab-testing-config",
-		"synth:deployment-lambda": "cdk synth --path-metadata false --version-reporting false --app 'node cdk/bin/deployment-lambda.cdk.ts' --output ./cdk.out/deployment-lambda"
+		"synth:deployment-lambda": "cdk synth --path-metadata false --version-reporting false --app 'node cdk/bin/deployment-lambda.cdk.ts' --output ./cdk.out/deployment-lambda",
+		"lint-staged": "lint-staged"
 	},
 	"dependencies": {
 		"superstruct": "2.0.2"
+	},
+	"lint-staged": {
+		"*.ts": [
+			"pnpm lint --fix",
+			"pnpm prettier:fix"
+		]
 	},
 	"devDependencies": {
 		"@aws-sdk/client-s3": "3.931.0",
