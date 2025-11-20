@@ -119,7 +119,7 @@ When your PR is merged, the A/B test will be automatically deployed to Fastly an
 
 #### Naming Conventions
 
-A/B tests should be prefixed with the team associated with the test, for example `webex-example-test`. This helps to identify the team responsible for the test and is enforce by typescript validation, you can inspect & edit the allowed team name definitions [here](https://github.com/guardian/dotcom-rendering/blob/main/ab-testing/types.ts#L9).
+A/B tests should be prefixed with the team associated with the test, for example `webex-example-test`. This helps to identify the team responsible for the test and is enforced by typescript validation, you can inspect & edit the allowed team name definitions [here](https://github.com/guardian/dotcom-rendering/blob/main/ab-testing/types.ts#L9).
 
 #### Test Size and Groups
 
@@ -135,7 +135,7 @@ All requests are processed by Fastly at the edge, however, A/B testing of server
 
 Ensure that the `type` field is set to either `client` or `server` to indicate the type of test so that server side tests can be cached correctly, and client side tests are not splitting the cache unnecessarily.
 
-There's a limit of the number of concurrent server-side tests that can be run, enforce by the validation script, so it's important to use client-side tests where possible.
+There's a limit of the number of concurrent server-side tests that can be run, enforced by the validation script, so it's important to use client-side tests where possible.
 
 #### Test Expiration
 
@@ -178,13 +178,13 @@ const someComponent = () => {
 	const abTests = useBetaAB();
 
 	// Am I in the test at all?
-	const isInTest = abTests?.isUserInTest('AbTestTest') ?? false;
+	const isInTest = abTests?.isUserInTest('webex-example-test') ?? false;
 
 	const isInControlGroup =
-		(abTests?.isUserInTestGroup('AbTestTest', 'control') ?? false);
+		(abTests?.isUserInTestGroup('webex-example-test', 'control') ?? false);
 
 	const isInVariantGroup =
-	abTests?.isUserInTestGroup('AbTestTest', 'variant') ?? false;
+	abTests?.isUserInTestGroup('webex-example-test', 'variant') ?? false;
 
 	if (isInControlGroup) {
 		return (
@@ -223,16 +223,16 @@ const abTests = useBetaAB();
 // Get all of the user's server/client-side A/B test participations
 const abTestParticipations = abTests?.getParticipations(); // EG. { commercial-dev-client-side-test: 'variant', commercial-dev-server-side-test: 'variant' }
 
-// Is user in the AbTestTest test (any cohort)
-const isInTest = abTests?.isUserInTest('AbTestTest') ?? false;
+// Is user in the webex-example-test test (any cohort)
+const isInTest = abTests?.isUserInTest('webex-example-test') ?? false;
 
-// Is user in the AbTestTest test (control cohort)
+// Is user in the webex-example-test test (control cohort)
 const isInControlGroup =
-	abTests?.isUserInTestGroup('AbTestTest', 'control') ?? false;
+	abTests?.isUserInTestGroup('webex-example-test', 'control') ?? false;
 
-// Is user in the AbTestTest test (variant cohort)
+// Is user in the webex-example-test test (variant cohort)
 const isInVariantGroup =
-	abTests?.isUserInTestGroup('AbTestTest', 'variant') ?? false;
+	abTests?.isUserInTestGroup('webex-example-test', 'variant') ?? false;
 ```
 
 #### On the Client
