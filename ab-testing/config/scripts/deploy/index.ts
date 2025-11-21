@@ -1,13 +1,6 @@
 import { parseArgs } from "node:util";
-import {
-	abTestsDictionaryId,
-	abTestsDictionaryName,
-	mvtDictionaryId,
-	mvtDictionaryName,
-	serviceId,
-	serviceName,
-} from "../../lib/config.ts";
-import { getService, verifyDictionaryName } from "../../lib/fastly-api.ts";
+import { getApiTokenFromEnv, getConfigFromEnv } from "../../lib/config.ts";
+import { FastlyClient } from "../../lib/fastly/client.ts";
 import { deployABTests } from "./deploy-ab-tests.ts";
 import { deployMVTs } from "./deploy-mvts.ts";
 
@@ -31,39 +24,19 @@ if (!flags["mvts"] || !flags["ab-tests"]) {
 	);
 	process.exit(1);
 }
+const { serviceId, serviceName, abTestsDictionaryName, mvtDictionaryName } =
+	getConfigFromEnv();
 
-const service = await getService(serviceId);
-if (service.name !== serviceName) {
-	throw new Error(
-		`Service ID ${serviceId} does not match the expected service name ${serviceName}`,
-	);
-}
+const fastly = new FastlyClient(getApiTokenFromEnv());
 
-const activeVersion = service.versions.find(
-	(v: { active: boolean }) => v.active,
-);
+const service = await fastly.getService(serviceId, serviceName);
 
-if (!activeVersion) {
-	throw new Error(`No active version found for service ${service.name}`);
-}
-
-// Verify that the service ID and dictionary names match the expected values
-await Promise.all([
-	verifyDictionaryName({
-		activeVersion: activeVersion.number,
-		dictionaryName: mvtDictionaryName,
-		dictionaryId: mvtDictionaryId,
-	}),
-	verifyDictionaryName({
-		activeVersion: activeVersion.number,
-		dictionaryName: abTestsDictionaryName,
-		dictionaryId: abTestsDictionaryId,
-	}),
-]);
+const abTestDictionary = await service.getDictionary(abTestsDictionaryName);
+const mvtDictionary = await service.getDictionary(mvtDictionaryName);
 
 await Promise.all([
-	deployABTests(flags["ab-tests"]),
-	deployMVTs(flags["mvts"]),
+	deployABTests(flags["ab-tests"], abTestDictionary),
+	deployMVTs(flags["mvts"], mvtDictionary),
 ]);
 
 console.log("Successfully updated ab test groups and mvt groups dictionaries");

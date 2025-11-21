@@ -17,27 +17,15 @@ const configStruct = object({
 	abTestsDictionaryName: string(),
 });
 
-const config = JSON.parse(getEnv("FASTLY_AB_TESTING_CONFIG")) as unknown;
+const getConfigFromEnv = () => {
+	const config = JSON.parse(getEnv("FASTLY_AB_TESTING_CONFIG")) as unknown;
+	assert(config, configStruct);
 
-const apiToken = getEnv("FASTLY_API_TOKEN");
-
-assert(config, configStruct);
-
-const {
-	serviceName,
-	serviceId,
-	mvtDictionaryId,
-	mvtDictionaryName,
-	abTestsDictionaryId,
-	abTestsDictionaryName,
-} = config;
-
-export {
-	apiToken,
-	serviceName,
-	serviceId,
-	mvtDictionaryId,
-	mvtDictionaryName,
-	abTestsDictionaryId,
-	abTestsDictionaryName,
+	return config;
 };
+const getApiTokenFromEnv = () => {
+	const apiToken = getEnv("FASTLY_API_TOKEN");
+	return apiToken;
+};
+
+export { getConfigFromEnv, getApiTokenFromEnv, getEnv, configStruct };

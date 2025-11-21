@@ -1,14 +1,14 @@
-import {
-	calculateUpdates,
-	getABTestGroupsFromDictionary,
-	updateABTestGroups,
-} from "../../lib/fastly-api.ts";
+import type { FastlyDictionary } from "../../lib/fastly/dictionary.ts";
+import { calculateUpdates } from "../../lib/fastly/utils.ts";
 import { getUpdatedABTestGroups } from "./read-built-dictionaries.ts";
 
-const deployABTests = async (filePath: string) => {
+const deployABTests = async (
+	filePath: string,
+	dictionary: FastlyDictionary,
+) => {
 	// update ab test groups first
 	const updatedABTestGroups = await getUpdatedABTestGroups(filePath);
-	const currentABTestGroups = await getABTestGroupsFromDictionary();
+	const currentABTestGroups = await dictionary.getItems();
 
 	const abTestGroupUpdates = calculateUpdates(
 		updatedABTestGroups,
@@ -39,7 +39,7 @@ const deployABTests = async (filePath: string) => {
 		);
 
 		const updateABTestGroupsResponse =
-			await updateABTestGroups(abTestGroupUpdates);
+			await dictionary.updateItems(abTestGroupUpdates);
 
 		if (updateABTestGroupsResponse.status !== "ok") {
 			throw new Error(`Failed to update ab test groups dictionary`);

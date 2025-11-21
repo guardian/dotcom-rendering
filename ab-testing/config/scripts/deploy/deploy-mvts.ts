@@ -1,14 +1,11 @@
-import {
-	calculateUpdates,
-	getMVTGroupsFromDictionary,
-	updateMVTGroups,
-} from "../../lib/fastly-api.ts";
+import type { FastlyDictionary } from "../../lib/fastly/dictionary.ts";
+import { calculateUpdates } from "../../lib/fastly/utils.ts";
 import { getMVTGroups } from "./read-built-dictionaries.ts";
 
-const deployMVTs = async (filePath: string) => {
+const deployMVTs = async (filePath: string, dictionary: FastlyDictionary) => {
 	// update mvt groups
 	const mvtGroups = await getMVTGroups(filePath);
-	const currentMVTGroups = await getMVTGroupsFromDictionary();
+	const currentMVTGroups = await dictionary.getItems();
 
 	console.log(`Current MVT Groups: ${currentMVTGroups.length}`);
 	console.log(`New MVT Groups: ${mvtGroups.length}`);
@@ -40,7 +37,8 @@ const deployMVTs = async (filePath: string) => {
 			`Performing ${mvtGroupUpdates.length} mvt groups dictionary operations`,
 		);
 
-		const updateMVTGroupsResponse = await updateMVTGroups(mvtGroupUpdates);
+		const updateMVTGroupsResponse =
+			await dictionary.updateItems(mvtGroupUpdates);
 
 		if (updateMVTGroupsResponse.status !== "ok") {
 			throw new Error(`Failed to update mvt groups dictionary`);
