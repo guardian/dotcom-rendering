@@ -411,22 +411,6 @@ export interface ListBlockElement {
 	elementId: string;
 }
 
-// interface LoopVideoInArticleElement {
-// 	_type: 'model.dotcomrendering.pageElements.MediaAtomBlockElement';
-// 	elementId: string;
-// 	id: string;
-// 	assets: VideoAssets[];
-// 	posterImage?: {
-// 		url: string;
-// 		width: number;
-// 	}[];
-// 	title?: string;
-// 	duration?: number;
-// 	videoPlayerFormat?: string;
-// 	subtitleSize?: string;
-// 	subtitleSource?: string;
-// }
-
 export interface MapBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.MapBlockElement';
 	elementId: string;
@@ -451,8 +435,6 @@ interface MediaAtomBlockElement {
 	title?: string;
 	duration?: number;
 	videoPlayerFormat?: string;
-	// subtitleSize?: string;
-	// subtitleSource?: string;
 }
 
 export interface MultiImageBlockElement {
