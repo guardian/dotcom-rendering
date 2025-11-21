@@ -7,6 +7,11 @@ import { useBetaAB } from '../lib/useAB';
  * - Referrer
  * - Skimlinks account ID
  * - AB test participations
+ * - utm_source,
+ * - utm_medium,
+ * - utm_campaign,
+ * - utm_content,
+ * - utm_term
  *
  * ## Why does this need to be an Island?
  *
@@ -32,6 +37,24 @@ export const EnhanceAffiliateLinks = () => {
 	useEffect(() => {
 		const allLinksOnPage = [...document.querySelectorAll('a')];
 
+		const urlParams = new URLSearchParams(window.location.search);
+
+		const utmKeys = [
+			'utm_source',
+			'utm_medium',
+			'utm_campaign',
+			'utm_content',
+			'utm_term',
+		];
+
+		const utmString = utmKeys
+			.map((key) => {
+				const value = urlParams.get(key);
+				return value ? `${key}|${value}` : null;
+			})
+			.filter(Boolean)
+			.join('|');
+
 		for (const link of allLinksOnPage) {
 			if (isSkimlink(link.href)) {
 				const referrerDomain =
@@ -44,7 +67,7 @@ export const EnhanceAffiliateLinks = () => {
 				// Skimlinks treats xcust as one long string, so we use | to separate values
 				const xcustValue = `referrer|${referrerDomain}|accountId|${skimlinksAccountId}${
 					abTestString ? `|abTestParticipations|${abTestString}` : ''
-				}`;
+				}${utmString ? `|${utmString}` : ''}`;
 
 				link.href = `${link.href}&xcust=${encodeURIComponent(
 					xcustValue,
