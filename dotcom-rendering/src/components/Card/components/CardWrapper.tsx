@@ -13,6 +13,7 @@ type Props = {
 	showTopBarMobile: boolean;
 	isOnwardContent: boolean;
 	containerPalette?: DCRContainerPalette;
+	contextFormat?: ArticleFormat;
 };
 
 const baseCardStyles = css`
@@ -72,9 +73,12 @@ const hoverStyles = css`
 	}
 `;
 
-const topBarStyles = css`
+const topBarStyles = (isOnwardContent: boolean) => css`
 	::before {
-		border-top: 1px solid ${palette('--card-border-top')};
+		border-top: 1px solid
+			${isOnwardContent
+				? palette('--onward-content-border')
+				: palette('--card-border-top')};
 		content: '';
 		z-index: 2;
 		width: 100%;
@@ -82,14 +86,14 @@ const topBarStyles = css`
 		background-color: unset;
 	}
 `;
-const mobileTopBarStyles = css`
+const mobileTopBarStyles = (isOnwardContent: boolean) => css`
 	${until.tablet} {
-		${topBarStyles}
+		${topBarStyles(isOnwardContent)}
 	}
 `;
-const desktopTopBarStyles = css`
+const desktopTopBarStyles = (isOnwardContent: boolean) => css`
 	${from.tablet} {
-		${topBarStyles}
+		${topBarStyles(isOnwardContent)}
 	}
 `;
 
@@ -109,7 +113,9 @@ export const CardWrapper = ({
 	showTopBarMobile,
 	isOnwardContent,
 	containerPalette,
+	contextFormat,
 }: Props) => {
+	const isGalleryContext = contextFormat?.design === ArticleDesign.Gallery;
 	return (
 		<FormatBoundary format={format}>
 			<ContainerOverrides containerPalette={containerPalette}>
@@ -117,10 +123,12 @@ export const CardWrapper = ({
 					css={[
 						baseCardStyles,
 						hoverStyles,
-						showTopBarDesktop && desktopTopBarStyles,
-						showTopBarMobile && mobileTopBarStyles,
+						showTopBarDesktop &&
+							desktopTopBarStyles(isGalleryContext),
+						showTopBarMobile &&
+							mobileTopBarStyles(isGalleryContext),
 						isOnwardContent &&
-							format.design !== ArticleDesign.Gallery &&
+							!isGalleryContext &&
 							onwardContentStyles,
 					]}
 				>

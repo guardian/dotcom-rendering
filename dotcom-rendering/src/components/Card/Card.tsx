@@ -79,6 +79,8 @@ export type Position = 'inner' | 'outer' | 'none';
 export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
+	/** The format of the article holding the card */
+	contextFormat?: ArticleFormat;
 	serverTime?: number;
 	headlineText: string;
 	headlineSizes?: ResponsiveFontSize;
@@ -350,6 +352,7 @@ const liveBulletStyles = css`
 export const Card = ({
 	linkTo,
 	format,
+	contextFormat,
 	headlineText,
 	headlineSizes,
 	showQuotedHeadline,
@@ -551,7 +554,14 @@ export const Card = ({
 -	 */
 	const isMediaCardOrNewsletter = isMediaCard(format) || isNewsletter;
 
-	const showPill = isMediaCardOrNewsletter;
+	// This is due to a re-design for onwards content.
+	// Currently this re-design is only applied for galleries secondary onwards content.
+	// We plan to apply this to all onwards content in the future.
+	const isGallerySecondaryOnward =
+		contextFormat?.design === ArticleDesign.Gallery &&
+		onwardsSource !== 'more-galleries';
+
+	const showPill = isMediaCardOrNewsletter && !isGallerySecondaryOnward;
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -594,7 +604,8 @@ export const Card = ({
 		containerType === 'flexible/special' ||
 		containerType === 'flexible/general';
 
-	const isSmallCard = containerType === 'scrollable/small';
+	const isSmallCard =
+		containerType === 'scrollable/small' || isGallerySecondaryOnward;
 
 	const hideTrailTextUntil = () => {
 		if (isFlexibleContainer) {
@@ -625,6 +636,13 @@ export const Card = ({
 	 * Order matters here as the logic is based on the card properties
 	 */
 	const getGapSizes = (): GapSizes => {
+		if (isGallerySecondaryOnward) {
+			return {
+				row: 'medium',
+				column: 'medium',
+			};
+		}
+
 		if (isOnwardContent) {
 			return {
 				row: 'none',
@@ -739,7 +757,9 @@ export const Card = ({
 		onwardContent: boolean,
 	): 'large' | 'small' | undefined => {
 		if (mediaCard && betaContainer) return 'large';
-		if (mediaCard || onwardContent) return 'small';
+		if ((mediaCard || onwardContent) && !isGallerySecondaryOnward) {
+			return 'small';
+		}
 		return undefined;
 	};
 
@@ -826,6 +846,7 @@ export const Card = ({
 			showTopBarMobile={showTopBarMobile}
 			isOnwardContent={isOnwardContent}
 			containerPalette={containerPalette}
+			contextFormat={contextFormat}
 		>
 			<CardLink
 				linkTo={linkTo}
@@ -1062,7 +1083,10 @@ export const Card = ({
 											loading={imageLoading}
 											roundedCorners={
 												isOnwardContent &&
-												!isMoreGalleriesOnwardContent
+												!(
+													isMoreGalleriesOnwardContent ||
+													isGallerySecondaryOnward
+												)
 											}
 											aspectRatio={aspectRatio}
 										/>
@@ -1079,7 +1103,10 @@ export const Card = ({
 									loading={imageLoading}
 									roundedCorners={
 										isOnwardContent &&
-										!isMoreGalleriesOnwardContent
+										!(
+											isMoreGalleriesOnwardContent ||
+											isGallerySecondaryOnward
+										)
 									}
 									aspectRatio={aspectRatio}
 								/>
@@ -1124,7 +1151,10 @@ export const Card = ({
 											loading={imageLoading}
 											roundedCorners={
 												isOnwardContent &&
-												!isMoreGalleriesOnwardContent
+												!(
+													isMoreGalleriesOnwardContent ||
+													isGallerySecondaryOnward
+												)
 											}
 											aspectRatio="1:1"
 										/>
@@ -1155,7 +1185,7 @@ export const Card = ({
 					padContent={determinePadContent(
 						isMediaCardOrNewsletter,
 						isBetaContainer,
-						isOnwardContent && !isMoreGalleriesOnwardContent,
+						isOnwardContent,
 					)}
 				>
 					{/* This div is needed to keep the headline and trail text justified at the start */}
