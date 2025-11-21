@@ -158,6 +158,13 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 		if (hasBeenSeen) {
 			// For epic view count
 			logEpicView(tracking.abTestName);
+			document.dispatchEvent(
+				new CustomEvent('epic:in-view', {
+					detail: {
+						epicType: 'liveblog-contributions',
+					},
+				}),
+			);
 
 			// For ophan
 			if (submitComponentEvent) {

@@ -139,6 +139,14 @@ const BrazeEpicWithSatisfiedDependencies = ({
 				},
 				renderingTarget,
 			);
+
+			document.dispatchEvent(
+				new CustomEvent('epic:in-view', {
+					detail: {
+						epicType: 'braze',
+					},
+				}),
+			);
 		}
 	}, [hasBeenSeen, meta, renderingTarget]);
 

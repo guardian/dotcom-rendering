@@ -15,6 +15,7 @@ export interface CloseableBannerProps extends BannerProps {
 
 const withCloseable = (
 	CloseableBanner: ReactComponent<CloseableBannerProps>,
+	bannerId?: string,
 ): ReactComponent<BannerProps> => {
 	const Banner: ReactComponent<BannerProps> = (bannerProps: BannerProps) => {
 		const [isOpen, setIsOpen] = useState(true);
@@ -23,6 +24,9 @@ const withCloseable = (
 			setChannelClosedTimestamp(bannerProps.bannerChannel);
 			setIsOpen(false);
 			document.body.focus();
+			document.dispatchEvent(
+				new CustomEvent('banner:close', { detail: { bannerId } }),
+			);
 		};
 
 		useEscapeShortcut(onClose);
