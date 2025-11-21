@@ -2698,6 +2698,9 @@
                 },
                 "duration": {
                     "type": "number"
+                },
+                "videoPlayerFormat": {
+                    "type": "string"
                 }
             },
             "required": [

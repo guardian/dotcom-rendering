@@ -434,6 +434,7 @@ interface MediaAtomBlockElement {
 	}[];
 	title?: string;
 	duration?: number;
+	videoPlayerFormat?: string;
 }
 
 export interface MultiImageBlockElement {
@@ -939,7 +940,7 @@ export interface Image {
 	url: string;
 }
 
-interface VideoAssets {
+export interface VideoAssets {
 	url: string;
 	mimeType?: string;
 	fields?: {
