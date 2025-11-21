@@ -91,6 +91,9 @@ const meta = {
 		images,
 		imageSize: 'medium',
 		hasNavigationBackgroundColour: false,
+		linkTo: 'https://www.theguardian.com',
+		linkAriaLabel: 'A picture of a thing',
+		dataLinkName: 'slideshow-carousel',
 	},
 	render: (args) => (
 		<Wrapper>
