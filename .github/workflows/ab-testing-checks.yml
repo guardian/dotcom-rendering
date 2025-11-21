@@ -28,7 +28,7 @@ jobs:
       FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_AB_TESTING_CONFIG }}
       FASTLY_API_TOKEN: ${{ secrets.FASTLY_API_TOKEN }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
