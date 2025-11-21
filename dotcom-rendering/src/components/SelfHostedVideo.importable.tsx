@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { log, storage } from '@guardian/libs';
-import { space } from '@guardian/source/foundations';
+import { from, space } from '@guardian/source/foundations';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
@@ -41,7 +41,12 @@ const videoAndBackgroundStyles = css`
 const videoContainerStyles = (width: number, height: number) => css`
 	position: relative;
 	height: 100%;
-	width: ${(width / height) * 80}%;
+	max-height: 100vh;
+	max-height: 100svh;
+	max-width: 100%;
+	${from.tablet} {
+		max-width: ${(width / height) * 80}%;
+	}
 `;
 
 const cinemagraphContainerStyles = css`
