@@ -1,7 +1,7 @@
 import { equal, throws } from "node:assert";
 import test from "node:test";
+import { MAX_SERVER_SIDE_TESTS } from "../../lib/constants.ts";
 import type { ABTest } from "../../types.ts";
-import { MAX_SERVER_SIDE_TESTS } from "../lib/constants.ts";
 import { limitServerSideTests } from "./limitServerSide.ts";
 
 test("limitServerSideTests - throws if the amount of tests exceeds the limit", () => {
