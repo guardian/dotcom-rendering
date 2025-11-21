@@ -81,4 +81,23 @@ describe('EnhanceAffiliateLinks', () => {
 			'xcust=referrer%7Cfoo.com%7CaccountId%7C12345%7CabTestParticipations%7Ctest1%3AvariantA%2Ctest2%3AvariantB',
 		);
 	});
+
+	it('should include UTM parameters in xcust if present', () => {
+		// replace window.location safely
+		Object.defineProperty(window, 'location', {
+			value: new URL(
+				'https://example.test/this?utm_source=growth&utm_medium=epicuk&utm_campaign=q3_test&utm_content=filter_general',
+			),
+			configurable: true,
+		});
+
+		document.body.innerHTML = `<a href="https://go.skimresources.com/?id=12345">Skimlink</a>`;
+
+		render(<EnhanceAffiliateLinks />);
+
+		const link = document.querySelector('a');
+		expect(link?.href).toContain(
+			'utm_source%7Cgrowth%7Cutm_medium%7Cepicuk%7Cutm_campaign%7Cq3_test%7Cutm_content%7Cfilter_general',
+		);
+	});
 });
