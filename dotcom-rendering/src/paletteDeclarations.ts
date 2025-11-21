@@ -7325,6 +7325,10 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[60],
 		dark: () => sourcePalette.neutral[60],
 	},
+	'--loop-video-background': {
+		light: () => sourcePalette.neutral[93],
+		dark: () => sourcePalette.neutral[93],
+	},
 	'--loop-video-progress-bar-background': {
 		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
 		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
