@@ -923,25 +923,21 @@ export const Card = ({
 						isSmallCard={isSmallCard}
 					>
 						{media.type === 'slideshow' && (
-							<div
-								css={css`
-									position: relative;
-									z-index: ${getZIndex('card-nested-link')};
-								`}
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
 							>
-								<Island
-									priority="feature"
-									defer={{ until: 'visible' }}
-								>
-									<SlideshowCarousel
-										images={media.slideshowImages}
-										imageSize={mediaSize}
-										hasNavigationBackgroundColour={
-											!!hasSublinks
-										}
-									/>
-								</Island>
-							</div>
+								<SlideshowCarousel
+									images={media.slideshowImages}
+									imageSize={mediaSize}
+									hasNavigationBackgroundColour={
+										!!hasSublinks
+									}
+									linkTo={linkTo}
+									linkAriaLabel={headlineText}
+									dataLinkName={resolvedDataLinkName}
+								/>
+							</Island>
 						)}
 						{media.type === 'avatar' && (
 							<AvatarContainer

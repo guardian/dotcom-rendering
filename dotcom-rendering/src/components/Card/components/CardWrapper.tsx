@@ -59,7 +59,7 @@ const hoverStyles = css`
 	:has(
 			ul.sublinks:hover,
 			.video-container.loop:hover,
-			.slideshow-carousel:hover,
+			.slideshow-carousel-footer:hover,
 			.branding-logo:hover
 		) {
 		.card-headline .show-underline {
