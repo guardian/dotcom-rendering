@@ -11,7 +11,7 @@ import { useBetaAB } from '../lib/useAB';
  * - utm_medium,
  * - utm_campaign,
  * - utm_content,
- * - utm_term,
+ * - utm_term
  *
  * ## Why does this need to be an Island?
  *
@@ -55,8 +55,6 @@ export const EnhanceAffiliateLinks = () => {
 			.filter(Boolean)
 			.join('|');
 
-		console.log(utmString);
-
 		for (const link of allLinksOnPage) {
 			if (isSkimlink(link.href)) {
 				const referrerDomain =
@@ -70,8 +68,6 @@ export const EnhanceAffiliateLinks = () => {
 				const xcustValue = `referrer|${referrerDomain}|accountId|${skimlinksAccountId}${
 					abTestString ? `|abTestParticipations|${abTestString}` : ''
 				}${utmString ? `|${utmString}` : ''}`;
-
-				console.log(xcustValue);
 
 				link.href = `${link.href}&xcust=${encodeURIComponent(
 					xcustValue,
