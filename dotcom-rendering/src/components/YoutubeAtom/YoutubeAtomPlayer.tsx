@@ -15,7 +15,7 @@ import { getZIndex } from '../../lib/getZIndex';
 import { getAuthStatus } from '../../lib/identity';
 import type { CustomPlayEventDetail } from '../../lib/video';
 import {
-	customLoopPlayAudioEventName,
+	customSelfHostedVideoPlayAudioEventName,
 	customYoutubePlayEventName,
 } from '../../lib/video';
 import type { AdTargeting } from '../../types/commercial';
@@ -629,10 +629,10 @@ export const YoutubeAtomPlayer = ({
 					handleCustomPlayEvent;
 
 				/**
-				 * Pauses all playing videos when a looping video is unmuted. If a user is
-				 * watching a looping video with sound, any playing Youtube video is paused.
+				 * Pauses all playing videos when a self-hosted video is unmuted. If a user is
+				 * watching a self-hosted video with sound, any playing Youtube video is paused.
 				 */
-				const handleCustomPlayLoopAudioEvent = (
+				const handleCustomPlaySelfHostedAudioEvent = (
 					event: CustomEventInit<CustomPlayEventDetail>,
 				) => {
 					if (event.detail) {
@@ -647,11 +647,12 @@ export const YoutubeAtomPlayer = ({
 				};
 
 				document.addEventListener(
-					customLoopPlayAudioEventName,
-					handleCustomPlayLoopAudioEvent,
+					customSelfHostedVideoPlayAudioEventName,
+					handleCustomPlaySelfHostedAudioEvent,
 				);
-				customListeners.current[customLoopPlayAudioEventName] =
-					handleCustomPlayLoopAudioEvent;
+				customListeners.current[
+					customSelfHostedVideoPlayAudioEventName
+				] = handleCustomPlaySelfHostedAudioEvent;
 
 				playerListeners.current.push(
 					{ name: 'onReady', listener: onReadyListener },

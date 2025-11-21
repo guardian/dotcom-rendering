@@ -42,9 +42,9 @@ import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
-import { LoopVideo } from '../LoopVideo.importable';
-import type { SubtitleSize } from '../LoopVideoPlayer';
 import { Pill } from '../Pill';
+import { SelfHostedVideo } from '../SelfHostedVideo.importable';
+import type { SubtitleSize } from '../SelfHostedVideoPlayer';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
 import { Snap } from '../Snap';
 import { SnapCssSandbox } from '../SnapCssSandbox';
@@ -946,7 +946,7 @@ export const Card = ({
 								priority="critical"
 								defer={{ until: 'visible' }}
 							>
-								<LoopVideo
+								<SelfHostedVideo
 									sources={media.mainMedia.sources}
 									atomId={media.mainMedia.atomId}
 									uniqueId={uniqueId}

@@ -15,7 +15,7 @@ import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useSubtitles } from '../lib/useSubtitles';
 import type { CustomPlayEventDetail, Source } from '../lib/video';
 import {
-	customLoopPlayAudioEventName,
+	customSelfHostedVideoPlayAudioEventName,
 	customYoutubePlayEventName,
 } from '../lib/video';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
@@ -24,12 +24,12 @@ import type {
 	PLAYER_STATES,
 	PlayerStates,
 	SubtitleSize,
-} from './LoopVideoPlayer';
-import { LoopVideoPlayer } from './LoopVideoPlayer';
+} from './SelfHostedVideoPlayer';
+import { SelfHostedVideoPlayer } from './SelfHostedVideoPlayer';
 import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
 const videoContainerStyles = css`
-	z-index: ${getZIndex('loop-video-container')};
+	z-index: ${getZIndex('video-container')};
 	position: relative;
 `;
 
@@ -39,21 +39,21 @@ const videoContainerStyles = css`
  */
 export const dispatchCustomPlayAudioEvent = (uniqueId: string) => {
 	document.dispatchEvent(
-		new CustomEvent(customLoopPlayAudioEventName, {
+		new CustomEvent(customSelfHostedVideoPlayAudioEventName, {
 			detail: { uniqueId },
 		}),
 	);
 };
 
 const logAndReportError = (src: string, error: Error) => {
-	const message = `Autoplay failure for loop video. Source: ${src} could not be played. Error: ${String(
+	const message = `Autoplay failure for self-hosted video. Source: ${src} could not be played. Error: ${String(
 		error,
 	)}`;
 
 	if (error instanceof Error) {
 		window.guardian.modules.sentry.reportError(
 			new Error(message),
-			'loop-video',
+			'self-hosted-video',
 		);
 	}
 
@@ -72,7 +72,7 @@ const getOptimisedPosterImage = (mainImage: string): string => {
 
 	return generateImageURL({
 		mainImage,
-		imageWidth: 940, // The widest a looping video can be: Flexible special, giga-boosted
+		imageWidth: 940, // The widest a video can be: flexible special container, giga-boosted slot
 		resolution,
 		aspectRatio: '5:4',
 	});
@@ -95,7 +95,7 @@ const doesVideoHaveAudio = (video: HTMLVideoElement): boolean => {
 			new Error(
 				'Could not determine if video has audio. This is likely due to the browser not supporting the necessary properties.',
 			),
-			'loop-video',
+			'self-hosted-video',
 		);
 
 		return true;
@@ -127,7 +127,7 @@ type Props = {
 	subtitleSize: SubtitleSize;
 };
 
-export const LoopVideo = ({
+export const SelfHostedVideo = ({
 	sources,
 	atomId,
 	uniqueId,
@@ -321,7 +321,7 @@ export const LoopVideo = ({
 		};
 
 		document.addEventListener(
-			customLoopPlayAudioEventName,
+			customSelfHostedVideoPlayAudioEventName,
 			handleCustomPlayAudioEvent,
 		);
 		document.addEventListener(
@@ -339,7 +339,7 @@ export const LoopVideo = ({
 
 		return () => {
 			document.removeEventListener(
-				customLoopPlayAudioEventName,
+				customSelfHostedVideoPlayAudioEventName,
 				handleCustomPlayAudioEvent,
 			);
 			document.removeEventListener(
@@ -573,13 +573,13 @@ export const LoopVideo = ({
 	 * Sentry and log in the console.
 	 */
 	const onError = () => {
-		const message = `Loop video could not be played. source: ${
+		const message = `Self-hosted video could not be played. source: ${
 			vidRef.current?.currentSrc ?? 'unknown'
 		}`;
 
 		window.guardian.modules.sentry.reportError(
 			new Error(message),
-			'loop-video',
+			'self-hosted-video',
 		);
 		log('dotcom', message);
 	};
@@ -643,10 +643,10 @@ export const LoopVideo = ({
 		<figure
 			ref={setNode}
 			css={videoContainerStyles}
-			className="loop-video-container"
+			className="video-container"
 			data-component="gu-video-loop"
 		>
-			<LoopVideoPlayer
+			<SelfHostedVideoPlayer
 				sources={sources}
 				atomId={atomId}
 				uniqueId={uniqueId}
