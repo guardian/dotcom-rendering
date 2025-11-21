@@ -519,7 +519,7 @@ export const renderElement = ({
 								<LoopVideoInArticle
 									assets={element.assets}
 									atomId={element.id}
-									uniqueId={`${Math.random()}`}
+									uniqueId={element.id}
 									height={400}
 									width={500}
 									posterImage={
@@ -536,8 +536,6 @@ export const renderElement = ({
 									format={format}
 									caption={element.title}
 									isMainMedia={isMainMedia}
-									subtitleSize={element.subtitleSize}
-									subtitleSource={element.subtitleSource}
 								/>
 							</Island>
 						)}

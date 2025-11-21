@@ -22,8 +22,6 @@ type LoopVideoInArticleProps = {
 	posterImage: string;
 	uniqueId: string;
 	width: number;
-	subtitleSource?: string;
-	subtitleSize?: string;
 };
 
 // The looping video player types its `sources` attribute as `Sources`
@@ -38,14 +36,11 @@ const convertAssetsToSources = (assets: VideoAssets[]): Source[] => {
 	});
 };
 
-const convertSubtitleSize = (val?: string): SubtitleSize => {
-	if (val == null) {
-		return 'small' as SubtitleSize;
-	}
-	if (['small', 'medium', 'large'].includes(val)) {
-		return val as SubtitleSize;
-	}
-	return 'small' as SubtitleSize;
+const getSubtitleAsset = (assets: VideoAssets[]) => {
+	// Get the first subtitle asset from assets with a mimetype of 'text/vtt'
+
+	const candidate = assets.find((asset) => asset.mimeType === 'text/vtt');
+	return candidate?.url;
 };
 
 export const LoopVideoInArticle = ({
@@ -62,8 +57,6 @@ export const LoopVideoInArticle = ({
 	isMainMedia,
 	linkTo,
 	posterImage,
-	subtitleSize,
-	subtitleSource,
 	uniqueId,
 	width = 500,
 }: LoopVideoInArticleProps) => {
@@ -80,8 +73,8 @@ export const LoopVideoInArticle = ({
 				linkTo={linkTo}
 				posterImage={posterImage}
 				sources={convertAssetsToSources(assets)}
-				subtitleSize={convertSubtitleSize(subtitleSize)}
-				subtitleSource={subtitleSource}
+				subtitleSize={'small' as SubtitleSize}
+				subtitleSource={getSubtitleAsset(assets)}
 				uniqueId={uniqueId}
 				width={width}
 			/>

@@ -681,9 +681,6 @@
                     "$ref": "#/definitions/ListBlockElement"
                 },
                 {
-                    "$ref": "#/definitions/LoopVideoInArticleElement"
-                },
-                {
                     "$ref": "#/definitions/MapBlockElement"
                 },
                 {
@@ -2607,57 +2604,6 @@
                 "elements"
             ]
         },
-        "LoopVideoInArticleElement": {
-            "type": "object",
-            "properties": {
-                "_type": {
-                    "type": "string",
-                    "const": "model.dotcomrendering.pageElements.MediaAtomBlockElement"
-                },
-                "elementId": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "string"
-                },
-                "assets": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/VideoAssets"
-                    }
-                },
-                "posterImage": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "url": {
-                                "type": "string"
-                            },
-                            "width": {
-                                "type": "number"
-                            }
-                        },
-                        "required": [
-                            "url",
-                            "width"
-                        ]
-                    }
-                },
-                "title": {
-                    "type": "string"
-                },
-                "duration": {
-                    "type": "number"
-                }
-            },
-            "required": [
-                "_type",
-                "assets",
-                "elementId",
-                "id"
-            ]
-        },
         "MapBlockElement": {
             "type": "object",
             "properties": {
@@ -2752,6 +2698,9 @@
                 },
                 "duration": {
                     "type": "number"
+                },
+                "videoPlayerFormat": {
+                    "type": "string"
                 }
             },
             "required": [
