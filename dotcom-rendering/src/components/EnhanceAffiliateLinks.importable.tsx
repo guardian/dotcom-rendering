@@ -61,7 +61,7 @@ export const EnhanceAffiliateLinks = () => {
 		console.log('urlParams:', urlParams.toString());
 
 		const referrerURLParams = new URLSearchParams(
-			document.referrer.split('?')[1] || '',
+			document.referrer.split('?')[1] ?? '',
 		);
 		console.log('referrerURLParams:', referrerURLParams.toString());
 
@@ -72,7 +72,7 @@ export const EnhanceAffiliateLinks = () => {
 		console.log('utmFromReferrer:', utmParamsFromReferrer);
 
 		const utmParamsString =
-			utmParamsFromArticleURL || utmParamsFromReferrer || '';
+			utmParamsFromArticleURL ?? utmParamsFromReferrer ?? '';
 		console.log('final utmParamsString:', utmParamsString);
 
 		for (const link of allLinksOnPage) {
