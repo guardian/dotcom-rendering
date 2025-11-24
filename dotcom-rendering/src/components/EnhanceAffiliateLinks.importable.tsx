@@ -22,6 +22,25 @@ import { useBetaAB } from '../lib/useAB';
  *
  * (No visual story exists as this does not render anything)
  */
+
+function getUtmString(params: URLSearchParams, keys: string[]): string {
+	return keys
+		.map((key) => {
+			const value = params.get(key);
+			return value ? `${key}|${value}` : null;
+		})
+		.filter(Boolean)
+		.join('|');
+}
+
+const utmKeys = [
+	'utm_source',
+	'utm_medium',
+	'utm_campaign',
+	'utm_content',
+	'utm_term',
+];
+
 export const EnhanceAffiliateLinks = () => {
 	const abTests = useBetaAB();
 
@@ -39,43 +58,22 @@ export const EnhanceAffiliateLinks = () => {
 		const allLinksOnPage = [...document.querySelectorAll('a')];
 
 		const urlParams = new URLSearchParams(window.location.search);
+		console.log('urlParams:', urlParams.toString());
+
 		const referrerURLParams = new URLSearchParams(
 			document.referrer.split('?')[1] || '',
 		);
+		console.log('referrerURLParams:', referrerURLParams.toString());
 
-		const utmKeys = [
-			'utm_source',
-			'utm_medium',
-			'utm_campaign',
-			'utm_content',
-			'utm_term',
-		];
+		const utmParamsFromArticleURL = getUtmString(urlParams, utmKeys);
+		console.log('utmString:', utmParamsFromArticleURL);
 
-		const utmFromArticleURL = utmKeys
-			.map((key) => {
-				const value = urlParams.get(key);
-				return value ? `${key}|${value}` : null;
-			})
-			.filter(Boolean)
-			.join('|');
+		const utmParamsFromReferrer = getUtmString(referrerURLParams, utmKeys);
+		console.log('utmFromReferrer:', utmParamsFromReferrer);
 
-		console.log('utmString:', utmFromArticleURL);
-
-		const utmFromReferrer = utmKeys
-			.map((key) => {
-				const value = referrerURLParams.get(key);
-				return value ? `${key}|${value}` : null;
-			})
-			.filter(Boolean)
-			.join('|');
-
-		console.log('utmFromReferrer:', utmFromReferrer);
-
-		const utmString = utmFromArticleURL
-			? utmFromArticleURL
-			: utmFromReferrer
-			? utmFromReferrer
-			: '';
+		const utmParamsString =
+			utmParamsFromArticleURL || utmParamsFromReferrer || '';
+		console.log('final utmParamsString:', utmParamsString);
 
 		for (const link of allLinksOnPage) {
 			if (isSkimlink(link.href)) {
@@ -89,7 +87,7 @@ export const EnhanceAffiliateLinks = () => {
 				// Skimlinks treats xcust as one long string, so we use | to separate values
 				const xcustValue = `referrer|${referrerDomain}|accountId|${skimlinksAccountId}${
 					abTestString ? `|abTestParticipations|${abTestString}` : ''
-				}${utmString ? `|${utmString}` : ''}`;
+				}${utmParamsString ? `|${utmParamsString}` : ''}`;
 
 				link.href = `${link.href}&xcust=${encodeURIComponent(
 					xcustValue,
