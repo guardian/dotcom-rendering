@@ -7,11 +7,12 @@ import { useBetaAB } from '../lib/useAB';
  * - Referrer
  * - Skimlinks account ID
  * - AB test participations
- * - utm_source,
- * - utm_medium,
- * - utm_campaign,
- * - utm_content,
- * - utm_term
+ * - UTM parameters (from page URL or referrer URL):
+ *   - utm_source
+ *   - utm_medium
+ *   - utm_campaign
+ *   - utm_content
+ *   - utm_term
  *
  * ## Why does this need to be an Island?
  *
@@ -38,6 +39,9 @@ export const EnhanceAffiliateLinks = () => {
 		const allLinksOnPage = [...document.querySelectorAll('a')];
 
 		const urlParams = new URLSearchParams(window.location.search);
+		const referrerURLParams = new URLSearchParams(
+			document.referrer.split('?')[1] || '',
+		);
 
 		const utmKeys = [
 			'utm_source',
@@ -47,13 +51,31 @@ export const EnhanceAffiliateLinks = () => {
 			'utm_term',
 		];
 
-		const utmString = utmKeys
+		const utmFromArticleURL = utmKeys
 			.map((key) => {
 				const value = urlParams.get(key);
 				return value ? `${key}|${value}` : null;
 			})
 			.filter(Boolean)
 			.join('|');
+
+		console.log('utmString:', utmFromArticleURL);
+
+		const utmFromReferrer = utmKeys
+			.map((key) => {
+				const value = referrerURLParams.get(key);
+				return value ? `${key}|${value}` : null;
+			})
+			.filter(Boolean)
+			.join('|');
+
+		console.log('utmFromReferrer:', utmFromReferrer);
+
+		const utmString = utmFromArticleURL
+			? utmFromArticleURL
+			: utmFromReferrer
+			? utmFromReferrer
+			: '';
 
 		for (const link of allLinksOnPage) {
 			if (isSkimlink(link.href)) {
