@@ -13,7 +13,7 @@ type Props = {
 	showTopBarDesktop: boolean;
 	showTopBarMobile: boolean;
 	containerPalette?: DCRContainerPalette;
-	colour?: string;
+	topBarColour?: string;
 };
 
 const baseCardStyles = css`
@@ -100,7 +100,7 @@ export const CardWrapper = ({
 	showTopBarDesktop,
 	showTopBarMobile,
 	containerPalette,
-	colour = palette('--card-border-top'),
+	topBarColour = palette('--card-border-top'),
 }: Props) => {
 	return (
 		<FormatBoundary format={format}>
@@ -109,8 +109,8 @@ export const CardWrapper = ({
 					css={[
 						baseCardStyles,
 						hoverStyles,
-						showTopBarDesktop && desktopTopBarStyles(colour),
-						showTopBarMobile && mobileTopBarStyles(colour),
+						showTopBarDesktop && desktopTopBarStyles(topBarColour),
+						showTopBarMobile && mobileTopBarStyles(topBarColour),
 					]}
 				>
 					{children}

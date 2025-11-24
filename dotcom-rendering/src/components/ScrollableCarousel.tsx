@@ -411,18 +411,18 @@ export const ScrollableCarousel = ({
 ScrollableCarousel.Item = ({
 	isStackingCarousel = false,
 	children,
-	colour = palette('--card-border-top'),
+	borderColour = palette('--card-border-top'),
 }: {
 	isStackingCarousel?: boolean;
 	children: React.ReactNode;
-	colour?: string;
+	borderColour?: string;
 }) => (
 	<li
 		css={[
 			itemStyles,
 			isStackingCarousel
-				? stackedRowLeftBorderStyles(colour)
-				: singleRowLeftBorderStyles(colour),
+				? stackedRowLeftBorderStyles(borderColour)
+				: singleRowLeftBorderStyles(borderColour),
 		]}
 	>
 		{children}

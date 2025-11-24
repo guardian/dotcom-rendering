@@ -4,7 +4,11 @@ import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
-import { decideTrail, dedupeTrail } from '../lib/decideTrail';
+import {
+	decideTrail,
+	decideTrailWithMasterImage,
+	dedupeTrail,
+} from '../lib/decideTrail';
 import { useApi } from '../lib/useApi';
 import { addDiscussionIds } from '../lib/useCommentCount';
 import { useIsInView } from '../lib/useIsInView';
@@ -14,6 +18,7 @@ import type { RenderingTarget } from '../types/renderingTarget';
 import type { FETrailType, TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
 import { Placeholder } from './Placeholder';
+import { ScrollableSmallOnwards } from './ScrollableSmallOnwards';
 
 type Props = {
 	url: string;
@@ -35,8 +40,8 @@ type OnwardsResponse = {
 	description: string;
 };
 
-const minHeight = css`
-	min-height: 300px;
+const minHeight = (design: ArticleDesign) => css`
+	min-height: ${design === ArticleDesign.Gallery ? '250px' : '300px'};
 `;
 
 const isTrailPaidContent = (trailType: FETrailType) =>
@@ -47,12 +52,13 @@ const buildTrails = (
 	trailLimit: number,
 	isAdFreeUser: boolean,
 	webURL: string,
+	withMasterImage: boolean,
 ): TrailType[] => {
 	return trails
 		.filter((trailType) => !(isTrailPaidContent(trailType) && isAdFreeUser))
 		.filter((trailType) => dedupeTrail(trailType, webURL))
 		.slice(0, trailLimit)
-		.map(decideTrail);
+		.map(withMasterImage ? decideTrailWithMasterImage : decideTrail);
 };
 
 export const FetchOnwardsData = ({
@@ -117,26 +123,38 @@ export const FetchOnwardsData = ({
 			.filter(isNonNullable),
 	);
 
-	const trails = buildTrails(data.trails, limit, isAdFreeUser, webURL);
+	const trails = ({ withMasterImage }: { withMasterImage: boolean }) =>
+		buildTrails(data.trails, limit, isAdFreeUser, webURL, withMasterImage);
 
 	return (
-		<div ref={setIsInViewRef} css={minHeight}>
-			<Carousel
-				heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
-				trails={trails}
-				description={data.description}
-				onwardsSource={onwardsSource}
-				format={format}
-				leftColSize={
-					format.design === ArticleDesign.LiveBlog ||
-					format.design === ArticleDesign.DeadBlog
-						? 'wide'
-						: 'compact'
-				}
-				discussionApiUrl={discussionApiUrl}
-				serverTime={serverTime}
-				renderingTarget={renderingTarget}
-			/>
+		<div id="marjan" ref={setIsInViewRef} css={minHeight(format.design)}>
+			{format.design === ArticleDesign.Gallery ? (
+				<ScrollableSmallOnwards
+					serverTime={serverTime}
+					trails={trails({ withMasterImage: true })}
+					discussionApiUrl={discussionApiUrl}
+					heading={data.heading || data.displayname}
+					onwardsSource={onwardsSource}
+					format={format}
+				/>
+			) : (
+				<Carousel
+					heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
+					trails={trails({ withMasterImage: false })}
+					description={data.description}
+					onwardsSource={onwardsSource}
+					format={format}
+					leftColSize={
+						format.design === ArticleDesign.LiveBlog ||
+						format.design === ArticleDesign.DeadBlog
+							? 'wide'
+							: 'compact'
+					}
+					discussionApiUrl={discussionApiUrl}
+					serverTime={serverTime}
+					renderingTarget={renderingTarget}
+				/>
+			)}
 		</div>
 	);
 };

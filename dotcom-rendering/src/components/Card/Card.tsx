@@ -874,7 +874,7 @@ export const Card = ({
 			showTopBarDesktop={showTopBarDesktop}
 			showTopBarMobile={showTopBarMobile}
 			containerPalette={containerPalette}
-			colour={
+			topBarColour={
 				isGallerySecondaryOnward
 					? palette('--onward-content-border')
 					: undefined

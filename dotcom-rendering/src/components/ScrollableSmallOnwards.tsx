@@ -109,7 +109,9 @@ export const ScrollableSmallOnwards = (props: Props) => {
 							<ScrollableCarousel.Item
 								key={trail.url}
 								isStackingCarousel={true}
-								colour={palette('--onward-content-border')}
+								borderColour={palette(
+									'--onward-content-border',
+								)}
 							>
 								<Card
 									{...getDefaultCardProps(
