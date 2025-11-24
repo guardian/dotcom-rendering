@@ -3,7 +3,7 @@
 ## Quick Setup Guide
 
 1. Create AB test switch in [guardian/frontend](https://github.com/guardian/frontend/blob/main/common/app/conf/switches/ABTestSwitches.scala), [docs](https://github.com/guardian/frontend/blob/main/docs/03-dev-howtos/01-ab-testing.md#adding-a-switch)
-2. Add test definition to `src/web/experiments/tests` folder, and import test in the `src/web/experiments/ab-tests.ts` file. Variant name in test definition must be unique.
+2. Add test definition to `src/experiments/tests` folder, and import test in the `src/experiments/ab-tests.ts` file. Variant name in test definition must be unique.
 3. Import test definition in the `signInGateTests` array in the `signInGate.ts`
 4. If the test needs a design, make it in the `gateDesigns` folder
 5. Set up individual variants in the `gates` folder, exports the `SignInGateComponent` type. Display rules defined here in the `canShow` method. Helpers in `displayRule.ts`.
@@ -78,7 +78,7 @@ When running dotcom-rendering locally for development, it is useful to have fron
 
 #### AB Test Definition
 
-Once the switch is set up, you'll need to add a test definition to the `src/web/experiments/tests` folder. Here's an example of a test definition.
+Once the switch is set up, you'll need to add a test definition to the `src/experiments/tests` folder. Here's an example of a test definition.
 
 ```ts
 import { ABTest } from '@guardian/ab-core';
@@ -124,13 +124,13 @@ The most important properties are:
 -   `canRun` - A function to determine if the test is allowed to run (Eg, so you can target individual pages, segments etc.). For the sign in gate, this is likely always just returning true, since the display rules for the gate are determined in the component itself.
 -   `variants` - An array of objects representing the groups (variants) in the test. In terms of the object properties, the main one that's required for the sign in gate is the `id` property. This is the `id` of the variant, and should be unique across all sign in gate tests. The `run` property should just be void, since we display the test elsewhere.
 
-Once you've made the test definition, you'll need to import it into the `tests` array in the `src/web/experiments/ab-tests.ts` file.
+Once you've made the test definition, you'll need to import it into the `tests` array in the `src/experiments/ab-tests.ts` file.
 
 The test definition should also be replicated in `frontend` too if the same sign in gate tests is required on both `DCR` and `frontend`. Use the existing documentation in [`frontend`](https://github.com/guardian/frontend/blob/main/static/src/javascripts/projects/common/modules/identity/sign-in-gate/README.md) to set up the tests there. Tests should be mirrored is as far as possible.
 
 ### Sign In Gate Design
 
-The designs for the gate live as React components in the `src/web/components/SignInGate/gateDesigns` folder.
+The designs for the gate live as React components in the `src/components/SignInGate/gateDesigns` folder.
 
 #### Gate Component
 
@@ -144,10 +144,10 @@ The ideal way to view/develop the design is to use Storybook. See "Storybook" in
 
 ### Sign In Gate Component
 
-In the `src/web/components/SignInGate/gates` folder, we have a file for each unique variant. Each file exports a `SignInGateComponent` type which is defined as:
+In the `src/components/SignInGate/gates` folder, we have a file for each unique variant. Each file exports a `SignInGateComponent` type which is defined as:
 
 ```ts
-// src/web/components/SignInGate/types.ts
+// src/components/SignInGate/types.ts
 type SignInGateComponent = {
 	gate?: (props: SignInGateProps) => JSX.Element;
 	canShow: (isSignedIn: boolean, currentTest: CurrentABTest) => boolean;
@@ -223,7 +223,7 @@ export const signInGateComponent: SignInGateComponent = {
 
 Now that the required components have been set up, the AB tests must be matched to the SignInGateComponent that we've created.
 
-All of the following section happens in the `src/web/components/SignInGate/signInGate.ts` file.
+All of the following section happens in the `src/components/SignInGate/signInGate.ts` file.
 
 #### AB Tests
 
@@ -398,7 +398,7 @@ To run the cypress tests interactively, make sure the development server is runn
 
 Since the Cypress tests rely on a production article, it would normally get the AB switch state from there. In some cases this switch may not be on, or may not be defined yet, in turn meaning that the Cypress tests will fail.
 
-To decouple the switch state from production, we define the state of the switch in DCR that will be set only when running within Cypress. In `src/web/experiments/cypress-switches.ts` update the `cypressSwitches` object to add the switch and state for your new test.
+To decouple the switch state from production, we define the state of the switch in DCR that will be set only when running within Cypress. In `src/experiments/cypress-switches.ts` update the `cypressSwitches` object to add the switch and state for your new test.
 
 ```ts
 ...
@@ -413,6 +413,6 @@ Now the AB test will be picked up even if the switch does not exist yet in Front
 
 #### Unit Tests
 
-Finally for specific code which can be unit tested too, there are some tests for those too. For display rules, you'll find them in `src/web/components/SignInGate/displayRule.test.ts` and for the setting/checking if the gate has been dismissed in `src/web/components/SignInGate/dismissGate.test.ts`. Ideally unit tests should not be a replacement for the integration tests.
+Finally for specific code which can be unit tested too, there are some tests for those too. For display rules, you'll find them in `src/components/SignInGate/displayRule.test.ts` and for the setting/checking if the gate has been dismissed in `src/components/SignInGate/dismissGate.test.ts`. Ideally unit tests should not be a replacement for the integration tests.
 
-You can run tests using `pnpm test`, if you want to run for a specific test file use `pnpm test ./path/to/file` e.g. `pnpm test ./src/web/components/SignInGate/displayRule.test.ts`
+You can run tests using `pnpm test`, if you want to run for a specific test file use `pnpm test ./path/to/file` e.g. `pnpm test ./src/components/SignInGate/displayRule.test.ts`

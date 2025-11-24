@@ -15,22 +15,27 @@ import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useSubtitles } from '../lib/useSubtitles';
 import type { CustomPlayEventDetail, Source } from '../lib/video';
 import {
-	customLoopPlayAudioEventName,
+	customSelfHostedVideoPlayAudioEventName,
 	customYoutubePlayEventName,
 } from '../lib/video';
+import type { VideoPlayerFormat } from '../types/mainMedia';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
 import type {
 	PLAYER_STATES,
 	PlayerStates,
 	SubtitleSize,
-} from './LoopVideoPlayer';
-import { LoopVideoPlayer } from './LoopVideoPlayer';
+} from './SelfHostedVideoPlayer';
+import { SelfHostedVideoPlayer } from './SelfHostedVideoPlayer';
 import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
 const videoContainerStyles = css`
-	z-index: ${getZIndex('loop-video-container')};
+	z-index: ${getZIndex('video-container')};
 	position: relative;
+`;
+
+const cinemagraphContainerStyles = css`
+	pointer-events: none;
 `;
 
 /**
@@ -39,21 +44,21 @@ const videoContainerStyles = css`
  */
 export const dispatchCustomPlayAudioEvent = (uniqueId: string) => {
 	document.dispatchEvent(
-		new CustomEvent(customLoopPlayAudioEventName, {
+		new CustomEvent(customSelfHostedVideoPlayAudioEventName, {
 			detail: { uniqueId },
 		}),
 	);
 };
 
 const logAndReportError = (src: string, error: Error) => {
-	const message = `Autoplay failure for loop video. Source: ${src} could not be played. Error: ${String(
+	const message = `Autoplay failure for self-hosted video. Source: ${src} could not be played. Error: ${String(
 		error,
 	)}`;
 
 	if (error instanceof Error) {
 		window.guardian.modules.sentry.reportError(
 			new Error(message),
-			'loop-video',
+			'self-hosted-video',
 		);
 	}
 
@@ -72,7 +77,7 @@ const getOptimisedPosterImage = (mainImage: string): string => {
 
 	return generateImageURL({
 		mainImage,
-		imageWidth: 940, // The widest a looping video can be: Flexible special, giga-boosted
+		imageWidth: 940, // The widest a video can be: flexible special container, giga-boosted slot
 		resolution,
 		aspectRatio: '5:4',
 	});
@@ -95,7 +100,7 @@ const doesVideoHaveAudio = (video: HTMLVideoElement): boolean => {
 			new Error(
 				'Could not determine if video has audio. This is likely due to the browser not supporting the necessary properties.',
 			),
-			'loop-video',
+			'self-hosted-video',
 		);
 
 		return true;
@@ -116,6 +121,7 @@ type Props = {
 	uniqueId: string;
 	height: number;
 	width: number;
+	videoStyle: VideoPlayerFormat;
 	posterImage: string;
 	fallbackImage: CardPictureProps['mainImage'];
 	fallbackImageSize: CardPictureProps['imageSize'];
@@ -127,12 +133,13 @@ type Props = {
 	subtitleSize: SubtitleSize;
 };
 
-export const LoopVideo = ({
+export const SelfHostedVideo = ({
 	sources,
 	atomId,
 	uniqueId,
 	height,
 	width,
+	videoStyle,
 	posterImage,
 	fallbackImage,
 	fallbackImageSize,
@@ -169,6 +176,12 @@ export const LoopVideo = ({
 	const [hasTrackedPlay, setHasTrackedPlay] = useState(false);
 
 	const VISIBILITY_THRESHOLD = 0.5;
+
+	/**
+	 * All controls on the video are hidden: the video looks like a GIF.
+	 * This includes but may not be limited to: audio icon, play/pause icon, subtitles, progress bar.
+	 */
+	const isCinemagraph = videoStyle === 'Cinemagraph';
 
 	const [isInView, setNode] = useIsInView({
 		repeat: true,
@@ -321,7 +334,7 @@ export const LoopVideo = ({
 		};
 
 		document.addEventListener(
-			customLoopPlayAudioEventName,
+			customSelfHostedVideoPlayAudioEventName,
 			handleCustomPlayAudioEvent,
 		);
 		document.addEventListener(
@@ -339,7 +352,7 @@ export const LoopVideo = ({
 
 		return () => {
 			document.removeEventListener(
-				customLoopPlayAudioEventName,
+				customSelfHostedVideoPlayAudioEventName,
 				handleCustomPlayAudioEvent,
 			);
 			document.removeEventListener(
@@ -534,11 +547,15 @@ export const LoopVideo = ({
 	};
 
 	const handlePlayPauseClick = (event: React.SyntheticEvent) => {
+		if (isCinemagraph) return;
+
 		event.preventDefault();
 		playPauseVideo();
 	};
 
 	const handleAudioClick = (event: React.SyntheticEvent) => {
+		if (isCinemagraph) return;
+
 		void submitClickComponentEvent(event.currentTarget, renderingTarget);
 
 		event.stopPropagation(); // Don't pause the video
@@ -558,6 +575,8 @@ export const LoopVideo = ({
 	 * browser. Therefore we need to apply the pause state to the video.
 	 */
 	const handlePause = () => {
+		if (isCinemagraph) return;
+
 		if (
 			playerState === 'PAUSED_BY_USER' ||
 			playerState === 'PAUSED_BY_INTERSECTION_OBSERVER'
@@ -573,14 +592,15 @@ export const LoopVideo = ({
 	 * Sentry and log in the console.
 	 */
 	const onError = () => {
-		const message = `Loop video could not be played. source: ${
+		const message = `Self-hosted video could not be played. source: ${
 			vidRef.current?.currentSrc ?? 'unknown'
 		}`;
 
 		window.guardian.modules.sentry.reportError(
 			new Error(message),
-			'loop-video',
+			'self-hosted-video',
 		);
+
 		log('dotcom', message);
 	};
 
@@ -612,6 +632,8 @@ export const LoopVideo = ({
 	const handleKeyDown = (
 		event: React.KeyboardEvent<HTMLVideoElement>,
 	): void => {
+		if (isCinemagraph) return;
+
 		switch (event.key) {
 			case 'Enter':
 			case ' ':
@@ -642,16 +664,20 @@ export const LoopVideo = ({
 	return (
 		<figure
 			ref={setNode}
-			css={videoContainerStyles}
-			className="loop-video-container"
+			css={[
+				videoContainerStyles,
+				isCinemagraph && cinemagraphContainerStyles,
+			]}
+			className={`video-container ${videoStyle.toLocaleLowerCase()}`}
 			data-component="gu-video-loop"
 		>
-			<LoopVideoPlayer
+			<SelfHostedVideoPlayer
 				sources={sources}
 				atomId={atomId}
 				uniqueId={uniqueId}
 				width={width}
 				height={height}
+				videoStyle={videoStyle}
 				posterImage={optimisedPosterImage}
 				FallbackImageComponent={FallbackImageComponent}
 				currentTime={currentTime}
@@ -671,8 +697,8 @@ export const LoopVideo = ({
 				AudioIcon={hasAudio ? AudioIcon : null}
 				preloadPartialData={preloadPartialData}
 				showPlayIcon={showPlayIcon}
-				subtitleSource={subtitleSource}
 				subtitleSize={subtitleSize}
+				subtitleSource={subtitleSource}
 				activeCue={activeCue}
 			/>
 		</figure>

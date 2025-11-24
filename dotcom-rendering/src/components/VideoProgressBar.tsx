@@ -8,16 +8,16 @@ const styles = css`
 	left: 0;
 	height: 4px;
 	width: 100%;
-	z-index: ${getZIndex('loop-video-progress-bar-background')};
-	background-color: ${palette('--loop-video-progress-bar-background')};
+	z-index: ${getZIndex('video-progress-bar-background')};
+	background-color: ${palette('--video-progress-bar-background')};
 `;
 
 const foregroundStyles = (progressPercentage: number) => css`
 	position: absolute;
 	height: 100%;
 	width: ${progressPercentage}%;
-	z-index: ${getZIndex('loop-video-progress-bar-foreground')};
-	background-color: ${palette('--loop-video-progress-bar-value')};
+	z-index: ${getZIndex('video-progress-bar-foreground')};
+	background-color: ${palette('--video-progress-bar-value')};
 	/**
 	 * Don't show a transition when the progress bar returns to the start.
 	 */
@@ -31,16 +31,12 @@ type Props = {
 };
 
 /**
- * A progress bar for the loop video component.
+ * A progress bar for the self-hosted video component.
  *
  * Q. Why don't we use the <progress /> element?
  * A. It was not possible to properly style the native progress element in Safari.
  */
-export const LoopVideoProgressBar = ({
-	videoId,
-	currentTime,
-	duration,
-}: Props) => {
+export const VideoProgressBar = ({ videoId, currentTime, duration }: Props) => {
 	if (duration <= 0) return null;
 
 	/**

@@ -71,6 +71,7 @@ export const GutterAskWrapper: ReactComponent<GutterProps> = (
 	useEffect(() => {
 		if (hasBeenSeen) {
 			sendOphanEvent('VIEW');
+			document.dispatchEvent(new CustomEvent('gutter:in-view'));
 		}
 	}, [hasBeenSeen, sendOphanEvent]);
 
