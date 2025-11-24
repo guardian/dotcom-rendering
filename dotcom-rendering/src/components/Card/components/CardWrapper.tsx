@@ -9,9 +9,11 @@ import { FormatBoundary } from '../../FormatBoundary';
 type Props = {
 	children: React.ReactNode;
 	format: ArticleFormat;
+	contextFormat?: ArticleFormat;
 	showTopBarDesktop: boolean;
 	showTopBarMobile: boolean;
 	containerPalette?: DCRContainerPalette;
+	colour?: string;
 };
 
 const baseCardStyles = css`
@@ -71,9 +73,9 @@ const hoverStyles = css`
 	}
 `;
 
-const topBarStyles = css`
+const topBarStyles = (colour: string) => css`
 	::before {
-		border-top: 1px solid ${palette('--card-border-top')};
+		border-top: 1px solid ${colour};
 		content: '';
 		z-index: 2;
 		width: 100%;
@@ -81,12 +83,12 @@ const topBarStyles = css`
 		background-color: unset;
 	}
 `;
-const mobileTopBarStyles = css`
+const mobileTopBarStyles = (colour: string) => css`
 	${until.tablet} {
-		${topBarStyles}
+		${topBarStyles(colour)}
 	}
 `;
-const desktopTopBarStyles = css`
+const desktopTopBarStyles = (colour: string) => css`
 	${from.tablet} {
 		${topBarStyles}
 	}
@@ -98,6 +100,7 @@ export const CardWrapper = ({
 	showTopBarDesktop,
 	showTopBarMobile,
 	containerPalette,
+	colour = palette('--card-border-top'),
 }: Props) => {
 	return (
 		<FormatBoundary format={format}>
@@ -106,8 +109,8 @@ export const CardWrapper = ({
 					css={[
 						baseCardStyles,
 						hoverStyles,
-						showTopBarDesktop && desktopTopBarStyles,
-						showTopBarMobile && mobileTopBarStyles,
+						showTopBarDesktop && desktopTopBarStyles(colour),
+						showTopBarMobile && mobileTopBarStyles(colour),
 					]}
 				>
 					{children}

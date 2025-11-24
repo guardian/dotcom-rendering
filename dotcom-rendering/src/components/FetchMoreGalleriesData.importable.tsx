@@ -140,7 +140,7 @@ export const FetchMoreGalleriesData = ({
 					])
 				}
 				shouldShimmer={false}
-				backgroundColor={palette('--onward-background')}
+				backgroundColor={palette('--onward-more-galleries-background')}
 			/>
 		);
 	}

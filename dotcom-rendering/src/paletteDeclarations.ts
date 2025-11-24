@@ -7447,13 +7447,33 @@ const paletteColours = {
 	},
 	'--onward-background': {
 		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[10],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--onward-caption-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[7],
 	},
 	'--onward-card-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--onward-card-footer-text': {
+		light: cardMetaTextLight,
+		dark: cardMetaTextLight,
+	},
+	'--onward-content-border': {
+		light: onwardContentBorderLight,
+		dark: onwardContentBorderLight,
+	},
+	'--onward-more-galleries-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[10],
+	},
+	'--onward-more-galleries-card-background': {
 		light: () => sourcePalette.neutral[97],
 		dark: () => sourcePalette.neutral[20],
 	},
-	'--onward-content-border': {
+	'--onward-more-galleries-content-border': {
 		light: onwardContentBorderLight,
 		dark: () => sourcePalette.neutral[20],
 	},

@@ -25,7 +25,7 @@ const standardCardStyles = css`
 	position: relative;
 	display: flex;
 	padding: ${space[2]}px;
-	background-color: ${palette('--onward-card-background')};
+	background-color: ${palette('--onward-more-galleries-card-background')};
 
 	${from.tablet} {
 		:not(:first-child)::before {
@@ -35,7 +35,7 @@ const standardCardStyles = css`
 			bottom: 0;
 			left: -10px; /* shift into the gap */
 			width: 1px;
-			background: ${palette('--onward-content-border')};
+			background: ${palette('--onward-more-galleries-content-border')};
 		}
 	}
 `;
@@ -60,7 +60,9 @@ const standardCardsListStyles = css`
 			top: 8px;
 			bottom: 0;
 			width: 1px;
-			background-color: ${palette('--onward-content-border')};
+			background-color: ${palette(
+				'--onward-more-galleries-content-border',
+			)};
 		}
 	}
 `;
@@ -125,7 +127,7 @@ export const MoreGalleries = (props: Props) => {
 	return (
 		<div
 			css={{
-				backgroundColor: palette('--onward-background'),
+				backgroundColor: palette('--onward-more-galleries-background'),
 				minHeight: 300,
 			}}
 		>
@@ -134,15 +136,17 @@ export const MoreGalleries = (props: Props) => {
 				data-link="more-galleries"
 				css={css`
 					${grid.paddedContainer}
-					background-color: ${palette('--onward-background')};
+					background-color: ${palette(
+						'--onward-more-galleries-background',
+					)};
 					padding-top: ${space[1]}px;
 
 					${from.tablet} {
 						padding-top: 0;
 						border-left: 1px solid
-							${palette('--onward-content-border')};
+							${palette('--onward-more-galleries-content-border')};
 						border-right: 1px solid
-							${palette('--onward-content-border')};
+							${palette('--onward-more-galleries-content-border')};
 					}
 				`}
 			>
@@ -164,7 +168,7 @@ export const MoreGalleries = (props: Props) => {
 						`,
 					]}
 					count={1}
-					color={palette('--onward-content-border')}
+					color={palette('--onward-more-galleries-content-border')}
 				/>
 				<ul css={[cardsContainerStyles, standardCardsListStyles]}>
 					{standardCards.map((trail) => (
@@ -207,7 +211,9 @@ const MoreGalleriesSplashCard = ({
 				cardsContainerStyles,
 				css`
 					margin-bottom: ${space[6]}px;
-					background-color: ${palette('--onward-card-background')};
+					background-color: ${palette(
+						'--onward-more-galleries-card-background',
+					)};
 					padding: ${space[2]}px;
 					${from.leftCol} {
 						&::before {
@@ -218,7 +224,7 @@ const MoreGalleriesSplashCard = ({
 							bottom: 0;
 							width: 1px;
 							background-color: ${palette(
-								'--onward-content-border',
+								'--onward-more-galleries-content-border',
 							)};
 						}
 					}
