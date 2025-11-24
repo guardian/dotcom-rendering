@@ -23,6 +23,7 @@ import { useBetaAB } from '../lib/useAB';
  * (No visual story exists as this does not render anything)
  */
 
+// Helper to extract UTM parameters from URLSearchParams
 function getUtmString(params: URLSearchParams, keys: string[]): string {
 	return keys
 		.map((key) => {
@@ -72,8 +73,11 @@ export const EnhanceAffiliateLinks = () => {
 		console.log('utmFromReferrer:', utmParamsFromReferrer);
 
 		const utmParamsString =
-			utmParamsFromArticleURL ?? utmParamsFromReferrer ?? '';
-		console.log('final utmParamsString:', utmParamsString);
+			utmParamsFromArticleURL && utmParamsFromArticleURL.trim() !== ''
+				? utmParamsFromArticleURL
+				: utmParamsFromReferrer && utmParamsFromReferrer.trim() !== ''
+				? utmParamsFromReferrer
+				: '';
 
 		for (const link of allLinksOnPage) {
 			if (isSkimlink(link.href)) {
