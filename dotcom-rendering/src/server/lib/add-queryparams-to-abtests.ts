@@ -1,7 +1,7 @@
 import type { Handler } from 'express';
 import { validateAsFEArticle } from '../../../src/model/validate';
 
-export const addQueryParamsToABTests: Handler = async (req, res, next) => {
+export const getABTestsFromQueryParams: Handler = async (req, res, next) => {
 	try {
 		const frontendData = validateAsFEArticle(req.body);
 
@@ -9,11 +9,16 @@ export const addQueryParamsToABTests: Handler = async (req, res, next) => {
 
 		const queryParamsAb = req.query;
 
+		const SAFE_KEY = /^[a-zA-Z0-9_-]{1,100}$/;
+		const SAFE_VALUE = /^[a-zA-Z0-9_-]{1,40}$/;
+
 		const filteredQuery: Record<string, string> = {};
 		for (const [key, value] of Object.entries(queryParamsAb)) {
 			if (typeof value == 'string' && key.startsWith('ab-')) {
 				const testId = key.replace(/^ab-/, '');
-				filteredQuery[testId] = value;
+				if (SAFE_VALUE.test(value) && SAFE_KEY.test(key)) {
+					filteredQuery[testId] = value;
+				}
 			}
 		}
 
