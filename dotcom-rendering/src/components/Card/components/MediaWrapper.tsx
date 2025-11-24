@@ -1,6 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
+import { getZIndex } from '../../../lib/getZIndex';
 import type { CardMediaType } from '../../../types/layout';
 
 const mediaFixedSize = {
@@ -48,6 +49,9 @@ const mediaOverlayContainerStyles = css`
 	left: 0;
 	width: 100%;
 	height: 100%;
+	z-index: ${getZIndex('mediaOverlay')};
+	cursor: pointer;
+	pointer-events: none;
 `;
 
 /**
@@ -219,7 +223,9 @@ export const MediaWrapper = ({
 				(mediaType === 'slideshow' ||
 					mediaType === 'picture' ||
 					mediaType === 'youtube-video' ||
+					mediaType === 'default-video' ||
 					mediaType === 'loop-video' ||
+					mediaType === 'cinemagraph' ||
 					mediaType === 'podcast') &&
 					isHorizontalOnDesktop &&
 					flexBasisStyles({
@@ -267,8 +273,10 @@ export const MediaWrapper = ({
 		>
 			<>
 				{children}
-				{/* This image overlay is styled when the CardLink is hovered */}
-				{(mediaType === 'picture' || mediaType === 'slideshow') &&
+				{/* This overlay is styled when the CardLink is hovered */}
+				{(mediaType === 'picture' ||
+					mediaType === 'slideshow' ||
+					mediaType === 'cinemagraph') &&
 					!hideMediaOverlay && (
 						<div
 							css={[

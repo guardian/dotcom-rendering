@@ -18,6 +18,7 @@ import {
 	customSelfHostedVideoPlayAudioEventName,
 	customYoutubePlayEventName,
 } from '../lib/video';
+import type { VideoPlayerFormat } from '../types/mainMedia';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
 import type {
@@ -31,6 +32,10 @@ import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 const videoContainerStyles = css`
 	z-index: ${getZIndex('video-container')};
 	position: relative;
+`;
+
+const cinemagraphContainerStyles = css`
+	pointer-events: none;
 `;
 
 /**
@@ -116,6 +121,7 @@ type Props = {
 	uniqueId: string;
 	height: number;
 	width: number;
+	videoStyle: VideoPlayerFormat;
 	posterImage: string;
 	fallbackImage: CardPictureProps['mainImage'];
 	fallbackImageSize: CardPictureProps['imageSize'];
@@ -133,6 +139,7 @@ export const SelfHostedVideo = ({
 	uniqueId,
 	height,
 	width,
+	videoStyle,
 	posterImage,
 	fallbackImage,
 	fallbackImageSize,
@@ -169,6 +176,12 @@ export const SelfHostedVideo = ({
 	const [hasTrackedPlay, setHasTrackedPlay] = useState(false);
 
 	const VISIBILITY_THRESHOLD = 0.5;
+
+	/**
+	 * All controls on the video are hidden: the video looks like a GIF.
+	 * This includes but may not be limited to: audio icon, play/pause icon, subtitles, progress bar.
+	 */
+	const isCinemagraph = videoStyle === 'Cinemagraph';
 
 	const [isInView, setNode] = useIsInView({
 		repeat: true,
@@ -534,11 +547,15 @@ export const SelfHostedVideo = ({
 	};
 
 	const handlePlayPauseClick = (event: React.SyntheticEvent) => {
+		if (isCinemagraph) return;
+
 		event.preventDefault();
 		playPauseVideo();
 	};
 
 	const handleAudioClick = (event: React.SyntheticEvent) => {
+		if (isCinemagraph) return;
+
 		void submitClickComponentEvent(event.currentTarget, renderingTarget);
 
 		event.stopPropagation(); // Don't pause the video
@@ -558,6 +575,8 @@ export const SelfHostedVideo = ({
 	 * browser. Therefore we need to apply the pause state to the video.
 	 */
 	const handlePause = () => {
+		if (isCinemagraph) return;
+
 		if (
 			playerState === 'PAUSED_BY_USER' ||
 			playerState === 'PAUSED_BY_INTERSECTION_OBSERVER'
@@ -581,6 +600,7 @@ export const SelfHostedVideo = ({
 			new Error(message),
 			'self-hosted-video',
 		);
+
 		log('dotcom', message);
 	};
 
@@ -612,6 +632,8 @@ export const SelfHostedVideo = ({
 	const handleKeyDown = (
 		event: React.KeyboardEvent<HTMLVideoElement>,
 	): void => {
+		if (isCinemagraph) return;
+
 		switch (event.key) {
 			case 'Enter':
 			case ' ':
@@ -642,8 +664,11 @@ export const SelfHostedVideo = ({
 	return (
 		<figure
 			ref={setNode}
-			css={videoContainerStyles}
-			className="video-container"
+			css={[
+				videoContainerStyles,
+				isCinemagraph && cinemagraphContainerStyles,
+			]}
+			className={`video-container ${videoStyle.toLocaleLowerCase()}`}
 			data-component="gu-video-loop"
 		>
 			<SelfHostedVideoPlayer
@@ -652,6 +677,7 @@ export const SelfHostedVideo = ({
 				uniqueId={uniqueId}
 				width={width}
 				height={height}
+				videoStyle={videoStyle}
 				posterImage={optimisedPosterImage}
 				FallbackImageComponent={FallbackImageComponent}
 				currentTime={currentTime}
@@ -671,8 +697,8 @@ export const SelfHostedVideo = ({
 				AudioIcon={hasAudio ? AudioIcon : null}
 				preloadPartialData={preloadPartialData}
 				showPlayIcon={showPlayIcon}
-				subtitleSource={subtitleSource}
 				subtitleSize={subtitleSize}
+				subtitleSource={subtitleSource}
 				activeCue={activeCue}
 			/>
 		</figure>
