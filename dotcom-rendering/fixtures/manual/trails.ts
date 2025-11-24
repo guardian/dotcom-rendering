@@ -648,7 +648,7 @@ export const newsletterTrails: [DCRFrontCard, DCRFrontCard] = [
 	},
 ];
 
-export const loopVideoCard: DCRFrontCard = {
+export const selfHostedVideoCard: DCRFrontCard = {
 	...defaultCardProps,
 	dataLinkName: 'news | group-0 | card-@2',
 	url: '/uk-news/2025/jan/22/prince-harry-says-sun-publisher-made-historic-admission-as-he-settles-case',

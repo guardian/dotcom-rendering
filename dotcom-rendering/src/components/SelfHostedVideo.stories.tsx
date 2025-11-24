@@ -2,26 +2,26 @@ import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { expect, userEvent, within } from 'storybook/test';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
-import { LoopVideo } from './LoopVideo.importable';
+import { SelfHostedVideo } from './SelfHostedVideo.importable';
 
 const meta = {
-	component: LoopVideo,
-	title: 'Components/LoopVideo',
+	component: SelfHostedVideo,
+	title: 'Components/SelfHostedVideo',
 	decorators: [centreColumnDecorator],
-	render: (args) => <LoopVideo {...args} />,
+	render: (args) => <SelfHostedVideo {...args} />,
 	parameters: {
 		chromatic: {
 			viewports: [breakpoints.mobile, breakpoints.wide],
 			disableSnapshot: true,
 		},
 	},
-} satisfies Meta<typeof LoopVideo>;
+} satisfies Meta<typeof SelfHostedVideo>;
 
 export default meta;
-type Story = StoryObj<typeof LoopVideo>;
+type Story = StoryObj<typeof SelfHostedVideo>;
 
-export const Default: Story = {
-	name: 'Default',
+export const Loop4to5: Story = {
+	name: 'Looping video in 4:5 aspect ratio',
 	args: {
 		sources: [
 			{
@@ -56,10 +56,10 @@ export const Default: Story = {
 // 	},
 // };
 
-export const Without5to4Ratio: Story = {
-	name: 'Without 5:4 aspect ratio',
+export const Loop16to9: Story = {
+	name: 'Looping video in 16:9 aspect ratio',
 	args: {
-		...Default.args,
+		...Loop4to5.args,
 		sources: [
 			{
 				src: 'https://uploads.guim.co.uk/2024/10/01/241001HeleneLoop_2.mp4',
@@ -72,11 +72,11 @@ export const Without5to4Ratio: Story = {
 };
 
 export const PausePlay: Story = {
-	...Default,
+	...Loop4to5,
 	name: 'Pause and play interaction',
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
-		const videoEl = canvas.getByTestId('loop-video');
+		const videoEl = canvas.getByTestId('self-hosted-video-player');
 
 		await userEvent.click(videoEl, {
 			delay: 300, // Allow video to start playing.
@@ -93,7 +93,7 @@ export const PausePlay: Story = {
 };
 
 export const UnmuteMute: Story = {
-	...Default,
+	...Loop4to5,
 	name: 'Unmute and mute interaction',
 	parameters: {
 		test: {
@@ -120,11 +120,11 @@ function sleep(ms: number) {
 }
 
 export const InteractionObserver: Story = {
-	...Default,
+	...Loop4to5,
 	name: 'Interaction observer',
 	render: (args) => (
 		<div data-testid="test-container">
-			<LoopVideo {...args} />
+			<SelfHostedVideo {...args} />
 			<div style={{ height: '100vh' }}></div>
 			<p data-testid="page-end">End of page</p>
 		</div>
