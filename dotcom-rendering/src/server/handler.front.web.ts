@@ -99,7 +99,9 @@ const enhanceTagPage = (body: unknown): TagPage => {
 		discussionApiUrl: data.config.discussionApiUrl,
 		editionId: data.editionId,
 		stripBranding: !!tagPageBranding,
-		enableHlsSupport: !!data.config.switches.enableHlsSupport,
+		enableHlsSupport:
+			!!data.config.switches.enableHlsSupport ||
+			!!data.config.abTests.hlsVideoVariant,
 	});
 
 	const speed = getSpeedFromTrails(data.contents);
