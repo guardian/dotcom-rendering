@@ -1,24 +1,40 @@
 import type { Handler } from 'express';
 import { validateAsFEArticle } from '../../../src/model/validate';
 
+const SAFE_AB_VALUE = /^[a-zA-Z0-9_-]+$/;
+const MAX_LENGTH = 100;
+
 export const getABTestsFromQueryParams: Handler = async (req, res, next) => {
 	try {
 		const frontendData = validateAsFEArticle(req.body);
-
 		const { config } = frontendData;
-
 		const queryParamsAb = req.query;
-
-		const SAFE_KEY = /^[a-zA-Z0-9_-]{1,100}$/;
-		const SAFE_VALUE = /^[a-zA-Z0-9_-]{1,40}$/;
-
 		const filteredQuery: Record<string, string> = {};
+
 		for (const [key, value] of Object.entries(queryParamsAb)) {
-			if (typeof value == 'string' && key.startsWith('ab-')) {
-				const testId = key.replace(/^ab-/, '');
-				if (SAFE_VALUE.test(value) && SAFE_KEY.test(key)) {
-					filteredQuery[testId] = value;
-				}
+			// Only process AB test params
+			if (!key.startsWith('ab-') || typeof value !== 'string') {
+				continue;
+			}
+
+			const testId = key.replace(/^ab-/, '');
+
+			// Validate both test ID and variant value
+			// This prevents injection attacks and ensures safe values
+			if (
+				testId.length > 0 &&
+				testId.length <= MAX_LENGTH &&
+				value.length > 0 &&
+				value.length <= MAX_LENGTH &&
+				SAFE_AB_VALUE.test(testId) &&
+				SAFE_AB_VALUE.test(value)
+			) {
+				filteredQuery[testId] = value;
+			} else {
+				// Log suspicious input for monitoring
+				console.warn(
+					`Rejected invalid AB test parameter: ${key}=${value}`,
+				);
 			}
 		}
 
