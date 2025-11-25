@@ -477,11 +477,6 @@ export const Card = ({
 				showClock={showClock}
 				serverTime={serverTime}
 				isTagPage={isTagPage}
-				colour={
-					isGallerySecondaryOnward
-						? palette('--onward-card-footer-text')
-						: undefined
-				}
 			/>
 		);
 	};
@@ -512,11 +507,6 @@ export const Card = ({
 					<CardCommentCount
 						discussionApiUrl={discussionApiUrl}
 						discussionId={discussionId}
-						colour={
-							isGallerySecondaryOnward
-								? palette('--onward-card-footer-text')
-								: undefined
-						}
 					/>
 				</Island>
 			</Link>
@@ -631,7 +621,7 @@ export const Card = ({
 
 	const backgroundColour = () => {
 		if (isGallerySecondaryOnward) {
-			return palette('--onward-card-background');
+			return palette('--onward-background');
 		}
 		if (isMediaCardOrNewsletter) {
 			return palette('--card-media-background');
@@ -876,7 +866,7 @@ export const Card = ({
 			containerPalette={containerPalette}
 			topBarColour={
 				isGallerySecondaryOnward
-					? palette('--onward-content-border')
+					? palette('--onward-content-top-border')
 					: undefined
 			}
 		>
@@ -912,11 +902,6 @@ export const Card = ({
 						showByline={showByline}
 						isExternalLink={isExternalLink}
 						showLabsRedesign={showLabsRedesign}
-						headlineColour={
-							isGallerySecondaryOnward
-								? palette('--onward-caption-text')
-								: undefined
-						}
 					/>
 					{!isUndefined(starRating) ? (
 						<StarRatingComponent
@@ -1244,11 +1229,6 @@ export const Card = ({
 											: undefined
 									}
 									showLabsRedesign={showLabsRedesign}
-									headlineColour={
-										isGallerySecondaryOnward
-											? palette('--onward-caption-text')
-											: undefined
-									}
 								/>
 								{!isUndefined(starRating) ? (
 									<StarRatingComponent

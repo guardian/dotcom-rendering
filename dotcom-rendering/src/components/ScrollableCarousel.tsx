@@ -116,7 +116,7 @@ const leftBorderStyles = (colour: string) => css`
 `;
 
 const singleRowLeftBorderStyles = (colour: string) => css`
-	:not(:first-child)::before § {
+	:not(:first-child)::before {
 		${leftBorderStyles(colour)}
 	}
 `;

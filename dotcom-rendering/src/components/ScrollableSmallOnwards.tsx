@@ -89,7 +89,7 @@ export const ScrollableSmallOnwards = (props: Props) => {
 					`,
 				]}
 				count={1}
-				color={palette('--card-border-top')}
+				color={palette('--onward-content-top-border')}
 			/>
 			<Title title={props.heading} headingUrl={props.headingUrl} />
 			<div css={cardsContainerStyles}>
@@ -158,7 +158,7 @@ const Title = ({
 
 const headerGridStyles = css`
 	${grid.column.centre}
-	color: ${palette('--onward-caption-text')};
+	color: ${palette('--onward-text')};
 	text-decoration: none;
 	align-self: start;
 	${between.tablet.and.leftCol} {
@@ -170,7 +170,7 @@ const headerGridStyles = css`
 `;
 
 const headerStyles = css`
-	color: ${palette('--onward-caption-text')};
+	color: ${palette('--onward-text')};
 	${textSansBold17};
 	padding-bottom: ${space[3]}px;
 	padding-top: ${space[1]}px;

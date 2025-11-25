@@ -35,7 +35,7 @@ const standardCardStyles = css`
 			bottom: 0;
 			left: -10px; /* shift into the gap */
 			width: 1px;
-			background: ${palette('--onward-more-galleries-content-border')};
+			background: ${palette('--onward-content-border')};
 		}
 	}
 `;
@@ -60,9 +60,7 @@ const standardCardsListStyles = css`
 			top: 8px;
 			bottom: 0;
 			width: 1px;
-			background-color: ${palette(
-				'--onward-more-galleries-content-border',
-			)};
+			background-color: ${palette('--onward-content-border')};
 		}
 	}
 `;
@@ -127,7 +125,7 @@ export const MoreGalleries = (props: Props) => {
 	return (
 		<div
 			css={{
-				backgroundColor: palette('--onward-more-galleries-background'),
+				backgroundColor: palette('--onward-background'),
 				minHeight: 300,
 			}}
 		>
@@ -136,17 +134,15 @@ export const MoreGalleries = (props: Props) => {
 				data-link="more-galleries"
 				css={css`
 					${grid.paddedContainer}
-					background-color: ${palette(
-						'--onward-more-galleries-background',
-					)};
+					background-color: ${palette('--onward-background')};
 					padding-top: ${space[1]}px;
 
 					${from.tablet} {
 						padding-top: 0;
 						border-left: 1px solid
-							${palette('--onward-more-galleries-content-border')};
+							${palette('--onward-content-border')};
 						border-right: 1px solid
-							${palette('--onward-more-galleries-content-border')};
+							${palette('--onward-content-border')};
 					}
 				`}
 			>
@@ -168,7 +164,7 @@ export const MoreGalleries = (props: Props) => {
 						`,
 					]}
 					count={1}
-					color={palette('--onward-more-galleries-content-border')}
+					color={palette('--onward-content-border')}
 				/>
 				<ul css={[cardsContainerStyles, standardCardsListStyles]}>
 					{standardCards.map((trail) => (
@@ -224,7 +220,7 @@ const MoreGalleriesSplashCard = ({
 							bottom: 0;
 							width: 1px;
 							background-color: ${palette(
-								'--onward-more-galleries-content-border',
+								'--onward-content-border',
 							)};
 						}
 					}
