@@ -583,6 +583,7 @@ export const renderElement = ({
 						<ProductLinkButton
 							label={element.label}
 							url={element.url}
+							dataComponent={'in-body-product-link-button'}
 						/>
 					)}
 				</>
