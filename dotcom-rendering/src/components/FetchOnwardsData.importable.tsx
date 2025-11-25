@@ -127,7 +127,7 @@ export const FetchOnwardsData = ({
 		buildTrails(data.trails, limit, isAdFreeUser, webURL, withMasterImage);
 
 	return (
-		<div id="marjan" ref={setIsInViewRef} css={minHeight(format.design)}>
+		<div ref={setIsInViewRef} css={minHeight(format.design)}>
 			{format.design === ArticleDesign.Gallery ? (
 				<ScrollableSmallOnwards
 					serverTime={serverTime}

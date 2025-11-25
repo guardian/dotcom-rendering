@@ -166,7 +166,6 @@ export const ContentWrapper = ({
 
 	return (
 		<div
-			id="marjan"
 			css={[
 				sizingStyles,
 				mediaDirectionDesktop === 'horizontal' &&

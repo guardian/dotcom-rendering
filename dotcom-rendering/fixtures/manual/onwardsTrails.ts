@@ -132,7 +132,7 @@ export const galleryOnwardsTrails: TrailType[] = [
 			theme: Pillar.Lifestyle,
 			display: ArticleDisplay.Standard,
 		},
-		webPublicationDate: '2022-08-22T05:00:23.000Z',
+		webPublicationDate: '2022-01-01T05:00:23.000Z',
 		headline: 'On parade: what to wear to Notting Hill carnival',
 		shortUrl: 'https://www.theguardian.com/p/x32mte',
 		discussion: {
