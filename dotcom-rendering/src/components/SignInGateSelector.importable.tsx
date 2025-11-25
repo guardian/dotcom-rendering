@@ -297,16 +297,14 @@ const SignInGateSelectorAuxia = ({
 				new CustomEvent('article:sign-in-gate-dismissed'),
 			);
 
-			if (signInGateVersion === 'v2') {
-				// Emit modal dismiss event
-				document.dispatchEvent(
-					new CustomEvent('modal:close', {
-						detail: {
-							modalType: `sign-in-gate-${signInGateVersion}`,
-						},
-					}),
-				);
-			}
+			// Emit modal dismiss event
+			document.dispatchEvent(
+				new CustomEvent('modal:close', {
+					detail: {
+						modalType: `sign-in-gate-${signInGateVersion}`,
+					},
+				}),
+			);
 		}
 	}, [isGateDismissed]);
 
@@ -455,16 +453,14 @@ const ShowSignInGateAuxia = ({
 			// the tracking of the number of times the gate has been displayed
 			incrementGateDisplayCount();
 
-			if (signInGateVersion === 'v2') {
-				// Emit modal view event
-				document.dispatchEvent(
-					new CustomEvent('modal:open', {
-						detail: {
-							modalType: `sign-in-gate-${signInGateVersion}`,
-						},
-					}),
-				);
-			}
+			// Emit modal view event
+			document.dispatchEvent(
+				new CustomEvent('modal:open', {
+					detail: {
+						modalType: `sign-in-gate-${signInGateVersion}`,
+					},
+				}),
+			);
 		}
 	}, [
 		hasBeenSeen,

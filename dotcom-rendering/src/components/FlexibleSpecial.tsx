@@ -19,7 +19,7 @@ import { UL } from './Card/components/UL';
 import type { ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
-import type { SubtitleSize } from './LoopVideoPlayer';
+import type { SubtitleSize } from './SelfHostedVideoPlayer';
 import type { Alignment } from './SupportingContent';
 
 type Props = {

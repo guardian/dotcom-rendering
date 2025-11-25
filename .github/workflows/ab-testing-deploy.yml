@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ab-testing
+        working-directory: ab-testing/config
     steps:
       - uses: actions/checkout@v5
 
@@ -33,7 +33,7 @@ jobs:
         uses: actions/download-artifact@v6.0.0
         with:
           name: ab-testing-build
-          path: ab-testing/dist
+          path: ab-testing/config/dist
 
       - name: Deploy
         run: pnpm run deploy

@@ -23,7 +23,7 @@ jobs:
     name: Checks
     defaults:
       run:
-        working-directory: ab-testing
+        working-directory: ab-testing/config
     env:
       FASTLY_AB_TESTING_CONFIG: ${{ secrets.FASTLY_AB_TESTING_CONFIG }}
       FASTLY_API_TOKEN: ${{ secrets.FASTLY_API_TOKEN }}
@@ -55,4 +55,4 @@ jobs:
         uses: actions/upload-artifact@v5
         with:
           name: ab-testing-build
-          path: ab-testing/dist
+          path: ab-testing/config/dist
