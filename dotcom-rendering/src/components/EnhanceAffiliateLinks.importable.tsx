@@ -68,6 +68,9 @@ export const EnhanceAffiliateLinks = () => {
 
 		const utmParamsFromReferrer = getUtmString(referrerURLParams, utmKeys);
 
+		/* Selects UTM parameters from the article URL if present;
+		 otherwise it falls back to UTM parameters from the referrer URL if those exist.
+		 If neither are present it returns an empty string.*/
 		const utmParamsString =
 			utmParamsFromArticleURL && utmParamsFromArticleURL.trim() !== ''
 				? utmParamsFromArticleURL
