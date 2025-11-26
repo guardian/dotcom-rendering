@@ -1,6 +1,5 @@
 import { createHash } from 'node:crypto';
 import { isString } from '@guardian/libs';
-import CleanCSS from 'clean-css';
 import { type RequestHandler } from 'express';
 import { renderToString } from 'react-dom/server';
 import { generateScriptTags, getPathFromManifest } from '../lib/assets';
@@ -25,10 +24,6 @@ type Props = {
 };
 
 export const buildHtml = (scriptTags: string[]) => {
-	const fontAssetsCss = new CleanCSS()
-		.minify(rawFontsCssWithClassNames)
-		.styles.trim();
-
 	const body = renderToString(<AssetsPage fontList={fontList} />);
 
 	return `<!doctype html>
@@ -38,11 +33,11 @@ export const buildHtml = (scriptTags: string[]) => {
 				<meta charset='utf-8'>
 
 				<style>
-					${fontAssetsCss}
+					${rawFontsCssWithClassNames}
 				</style>
 
 				<meta http-equiv='Content-Security-Policy' content="style-src 'sha256-${assetHash(
-					fontAssetsCss,
+					rawFontsCssWithClassNames,
 				)}';">
 
 				${scriptTags.join('\n')}
