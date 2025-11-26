@@ -7018,7 +7018,7 @@ const paletteColours = {
 	},
 	'--feature-card-trail-text': {
 		light: () => sourcePalette.neutral[86],
-		dark: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[86],
 	},
 	'--filter-key-events-toggle-border-top': {
 		light: () => sourcePalette.neutral[86],
