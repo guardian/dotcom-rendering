@@ -64,6 +64,10 @@ const AlreadySubscribedWrapper = (props: EmailSignUpWrapperProps) => {
 			typeof window !== 'undefined'
 				? window.guardian?.config?.page?.idApiUrl
 				: undefined;
+		console.log(
+			'AlreadySubscribedState: useNewsletterSubscription would return true',
+		);
+		console.log('Props:', { listId: props.listId, idApiUrl });
 	}, [props.listId]);
 
 	if (isSubscribed) {
