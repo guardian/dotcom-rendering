@@ -844,7 +844,6 @@ export const Card = ({
 			format={format}
 			showTopBarDesktop={showTopBarDesktop}
 			showTopBarMobile={showTopBarMobile}
-			isOnwardContent={isOnwardContent}
 			containerPalette={containerPalette}
 		>
 			<CardLink
@@ -1081,10 +1080,6 @@ export const Card = ({
 											imageSize={mediaSize}
 											alt={headlineText}
 											loading={imageLoading}
-											roundedCorners={
-												isOnwardContent &&
-												!isMoreGalleriesOnwardContent
-											}
 											aspectRatio={aspectRatio}
 										/>
 									</div>
@@ -1098,10 +1093,6 @@ export const Card = ({
 									imageSize={mediaSize}
 									alt={media.imageAltText}
 									loading={imageLoading}
-									roundedCorners={
-										isOnwardContent &&
-										!isMoreGalleriesOnwardContent
-									}
 									aspectRatio={aspectRatio}
 								/>
 								{isVideoMainMedia && mainMedia.duration > 0 && (
@@ -1143,10 +1134,6 @@ export const Card = ({
 											imageSize="small"
 											alt={media.imageAltText}
 											loading={imageLoading}
-											roundedCorners={
-												isOnwardContent &&
-												!isMoreGalleriesOnwardContent
-											}
 											aspectRatio="1:1"
 										/>
 									</div>
