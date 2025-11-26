@@ -9,7 +9,6 @@ import { FormatBoundary } from '../../FormatBoundary';
 type Props = {
 	children: React.ReactNode;
 	format: ArticleFormat;
-	contextFormat?: ArticleFormat;
 	showTopBarDesktop: boolean;
 	showTopBarMobile: boolean;
 	containerPalette?: DCRContainerPalette;
@@ -90,7 +89,7 @@ const mobileTopBarStyles = (colour: string) => css`
 `;
 const desktopTopBarStyles = (colour: string) => css`
 	${from.tablet} {
-		${topBarStyles}
+		${topBarStyles(colour)}
 	}
 `;
 

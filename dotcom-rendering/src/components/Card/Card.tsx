@@ -862,7 +862,6 @@ export const Card = ({
 	return (
 		<CardWrapper
 			format={format}
-			contextFormat={contextFormat}
 			showTopBarDesktop={showTopBarDesktop}
 			showTopBarMobile={showTopBarMobile}
 			containerPalette={containerPalette}
