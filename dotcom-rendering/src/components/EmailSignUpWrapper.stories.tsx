@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { useEffect } from 'react';
 import type { EmailSignUpProps } from './EmailSignup';
