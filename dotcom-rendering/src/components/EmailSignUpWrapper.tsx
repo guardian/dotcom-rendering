@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
 import type { EmailSignUpProps } from './EmailSignup';
 import { EmailSignup } from './EmailSignup';
@@ -20,11 +21,11 @@ export const EmailSignUpWrapper = ({
 	listId,
 	...emailSignUpProps
 }: EmailSignUpWrapperProps) => {
-	const idApiUrl = window.guardian?.config?.page?.idApiUrl;
-	const isSubscribed = useNewsletterSubscription(
-		listId.toString(),
-		idApiUrl ?? '',
-	);
+	const [idApiUrl] = useState(() => {
+		if (typeof window === 'undefined') return '';
+		return window.guardian?.config?.page?.idApiUrl ?? '';
+	});
+	const isSubscribed = useNewsletterSubscription(listId.toString(), idApiUrl);
 
 	// Don't render if user is signed in and already subscribed
 	if (isSubscribed === true) {

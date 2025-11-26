@@ -55,19 +55,22 @@ interface EmailSignUpWrapperProps extends EmailSignUpProps {
 }
 
 const AlreadySubscribedWrapper = (props: EmailSignUpWrapperProps) => {
-	const idApiUrl = window.guardian?.config?.page?.idApiUrl;
 	// Directly use the hook logic - in a real scenario it would return true
 	// For storybook, we simulate by just returning null
 	const isSubscribed = true; // Simulating hook return value
 
 	useEffect(() => {
+		const idApiUrl =
+			typeof window !== 'undefined'
+				? window.guardian?.config?.page?.idApiUrl
+				: undefined;
 		console.log(
 			'AlreadySubscribedState: useNewsletterSubscription would return true',
 		);
 		console.log('Props:', { listId: props.listId, idApiUrl });
-	}, [props.listId, idApiUrl]);
+	}, [props.listId]);
 
-	if (isSubscribed === true) {
+	if (isSubscribed) {
 		return null;
 	}
 
