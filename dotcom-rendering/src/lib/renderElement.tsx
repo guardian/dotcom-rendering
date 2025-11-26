@@ -546,6 +546,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
 			const emailSignUpProps = {
 				index,
+				listId: element.newsletter.listId,
 				identityName: element.newsletter.identityName,
 				description: element.newsletter.description,
 				name: element.newsletter.name,

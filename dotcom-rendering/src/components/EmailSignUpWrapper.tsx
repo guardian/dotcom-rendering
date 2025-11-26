@@ -1,3 +1,4 @@
+import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
 import type { EmailSignUpProps } from './EmailSignup';
 import { EmailSignup } from './EmailSignup';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
@@ -7,6 +8,7 @@ import { SecureSignup } from './SecureSignup.importable';
 
 interface EmailSignUpWrapperProps extends EmailSignUpProps {
 	index: number;
+	listId: number;
 	identityName: string;
 	successDescription: string;
 	/** You should only set this to true if the privacy message will be shown elsewhere on the page */
@@ -15,8 +17,20 @@ interface EmailSignUpWrapperProps extends EmailSignUpProps {
 
 export const EmailSignUpWrapper = ({
 	index,
+	listId,
 	...emailSignUpProps
 }: EmailSignUpWrapperProps) => {
+	const idApiUrl = window.guardian?.config?.page?.idApiUrl;
+	const isSubscribed = useNewsletterSubscription(
+		listId.toString(),
+		idApiUrl ?? '',
+	);
+
+	// Don't render if user is signed in and already subscribed
+	if (isSubscribed === true) {
+		return null;
+	}
+
 	return (
 		<InlineSkipToWrapper
 			id={`EmailSignup-skip-link-${index}`}
