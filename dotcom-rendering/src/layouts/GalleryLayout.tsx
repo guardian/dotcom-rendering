@@ -203,6 +203,7 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						discussionApiUrl={discussionApiUrl}
 						serverTime={serverTime}
 						isAdFreeUser={frontendData.isAdFreeUser}
+						format={format}
 					/>
 				</Island>
 			</main>

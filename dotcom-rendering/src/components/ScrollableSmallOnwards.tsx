@@ -102,7 +102,7 @@ export const ScrollableSmallOnwards = (props: Props) => {
 						desktop: true,
 						mobile: true,
 					}}
-					gapSizes={{ column: 'large', row: 'medium' }}
+					gapSizes={{ column: 'large', row: 'small' }}
 				>
 					{trails.map((trail, index) => {
 						return (

@@ -562,6 +562,7 @@ export const Card = ({
 		);
 	}
 
+	// Determine if the card is used within a gallery article
 	const isInGalleryContext = contextFormat?.design === ArticleDesign.Gallery;
 
 	// This is due to a re-design for onwards content.
@@ -861,6 +862,7 @@ export const Card = ({
 	return (
 		<CardWrapper
 			format={format}
+			contextFormat={contextFormat}
 			showTopBarDesktop={showTopBarDesktop}
 			showTopBarMobile={showTopBarMobile}
 			containerPalette={containerPalette}
