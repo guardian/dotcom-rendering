@@ -72,8 +72,8 @@ const dispatchOphanAttentionEvent = (
 	document.dispatchEvent(event);
 };
 
-const getOptimisedPosterImage = (mainImage: string): string => {
-	const resolution = window.devicePixelRatio >= 2 ? 'high' : 'low';
+const getOptimisedPosterImage = (mainImage: string, dpr: number): string => {
+	const resolution = dpr >= 2 ? 'high' : 'low';
 
 	return generateImageURL({
 		mainImage,
@@ -174,6 +174,8 @@ export const SelfHostedVideo = ({
 	const [hasBeenInView, setHasBeenInView] = useState(false);
 	const [hasBeenPlayed, setHasBeenPlayed] = useState(false);
 	const [hasTrackedPlay, setHasTrackedPlay] = useState(false);
+
+	const [devicePixelRatio, setDevicePixelRatio] = useState(1);
 
 	const VISIBILITY_THRESHOLD = 0.5;
 
@@ -349,6 +351,8 @@ export const SelfHostedVideo = ({
 				handlePageBecomesVisible();
 			}
 		});
+
+		setDevicePixelRatio(window.devicePixelRatio);
 
 		return () => {
 			document.removeEventListener(
@@ -658,7 +662,7 @@ export const SelfHostedVideo = ({
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
 
 	const optimisedPosterImage = showPosterImage
-		? getOptimisedPosterImage(posterImage)
+		? getOptimisedPosterImage(posterImage, devicePixelRatio)
 		: undefined;
 
 	return (
