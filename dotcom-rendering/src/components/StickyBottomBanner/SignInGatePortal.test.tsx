@@ -32,6 +32,9 @@ const canShowProps: CanShowSignInGateProps = {
 describe('SignInGatePortal', () => {
 	beforeEach(() => {
 		jest.clearAllMocks();
+
+		// Enable the switch for all tests
+		window.guardian.config.switches.signInGate = true;
 	});
 
 	describe('canShowSignInGatePortal', () => {
@@ -76,6 +79,39 @@ describe('SignInGatePortal', () => {
 				...canShowProps,
 				isPreview: true,
 			});
+
+			expect(result).toEqual({ show: false });
+		});
+
+		it('should return false when signInGate is off', async () => {
+			const mockElement = document.createElement('div');
+			mockGetElementById.mockReturnValue(mockElement);
+
+			window.guardian.config.switches.signInGate = false;
+
+			// Mock buildAuxiaGateDisplayData to return auxiaData with userTreatment
+			const auxiaReturn: AuxiaGateDisplayData = {
+				browserId: 'browser-1',
+				auxiaData: {
+					responseId: 'resp1',
+					userTreatment: {
+						treatmentId: 't1',
+						treatmentTrackingId: 'tt1',
+						rank: '1',
+						contentLanguageCode: 'en',
+						treatmentContent: 'content',
+						treatmentType: 'DISMISSABLE_SIGN_IN_GATE',
+						surface: 'surface',
+					},
+				},
+			};
+			(
+				buildAuxiaGateDisplayData as jest.MockedFunction<
+					typeof buildAuxiaGateDisplayData
+				>
+			).mockResolvedValue(auxiaReturn);
+
+			const result = await canShowSignInGatePortal(canShowProps);
 
 			expect(result).toEqual({ show: false });
 		});
