@@ -1,5 +1,6 @@
 import { type CrosswordProps } from '@guardian/react-crossword';
 import type { ArticleFormat } from '../lib/articleFormat';
+import type { VideoPlayerFormat } from './mainMedia';
 
 export type StarRating = 0 | 1 | 2 | 3 | 4 | 5;
 
@@ -423,7 +424,7 @@ export interface MapBlockElement extends ThirdPartyEmbeddedContent {
 	role?: RoleType;
 }
 
-interface MediaAtomBlockElement {
+export interface MediaAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.MediaAtomBlockElement';
 	elementId: string;
 	id: string;
@@ -434,6 +435,7 @@ interface MediaAtomBlockElement {
 	}[];
 	title?: string;
 	duration?: number;
+	videoPlayerFormat?: VideoPlayerFormat;
 }
 
 export interface MultiImageBlockElement {
@@ -939,7 +941,7 @@ export interface Image {
 	url: string;
 }
 
-interface VideoAssets {
+export interface VideoAssets {
 	url: string;
 	mimeType?: string;
 	fields?: {

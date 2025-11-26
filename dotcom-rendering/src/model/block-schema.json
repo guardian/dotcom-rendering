@@ -2186,6 +2186,9 @@
                 },
                 "duration": {
                     "type": "number"
+                },
+                "videoPlayerFormat": {
+                    "$ref": "#/definitions/VideoPlayerFormat"
                 }
             },
             "required": [
@@ -2194,6 +2197,14 @@
                 "elementId",
                 "id"
             ]
+        },
+        "VideoPlayerFormat": {
+            "enum": [
+                "Cinemagraph",
+                "Default",
+                "Loop"
+            ],
+            "type": "string"
         },
         "MiniProfilesBlockElement": {
             "type": "object",

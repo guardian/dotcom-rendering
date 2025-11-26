@@ -29,6 +29,7 @@ import { Island } from '../components/Island';
 import { ItemLinkBlockElement } from '../components/ItemLinkBlockElement';
 import { KeyTakeaways } from '../components/KeyTakeaways';
 import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
+import { LoopVideoInArticle } from '../components/LoopVideoInArticle.importable';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
 import { MiniProfiles } from '../components/MiniProfiles';
@@ -490,15 +491,46 @@ export const renderElement = ({
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
-			return (
-				<VideoAtom
-					format={format}
-					assets={element.assets}
-					poster={element.posterImage?.[0]?.url}
-					caption={element.title}
-					isMainMedia={isMainMedia}
-				/>
-			);
+			/*
+				- MediaAtomBlockElement is used for self-hosted videos
+				- Historically, these videos have been self-hosted for legal or sensitive reasons
+					- These videos play in the `VideoAtom` component
+				- Looping videos, introduced in July 2025, are also self-hosted
+					- Thus they are delivered as a MediaAtomBlockElement
+					- However they need to display in a different video player
+				- We need to differentiate between the two forms of video
+					- We can do this by interrogating the atom's metadata, which includes the new attribute `videoPlayerFormat`
+
+				- Note: we'll probably extend this functionality to handle new 'Cinemagraph' videos
+					- These may use the looping video, or yet another new, video player
+					- But they will still be Media Atoms
+			*/
+			if (element.videoPlayerFormat === 'Loop') {
+				return (
+					<>
+						<Island
+							priority="critical"
+							defer={{ until: 'visible' }}
+						>
+							<LoopVideoInArticle
+								element={element}
+								format={format}
+								isMainMedia={isMainMedia}
+							/>
+						</Island>
+					</>
+				);
+			} else {
+				return (
+					<VideoAtom
+						format={format}
+						assets={element.assets}
+						poster={element.posterImage?.[0]?.url}
+						caption={element.title}
+						isMainMedia={isMainMedia}
+					/>
+				);
+			}
 		case 'model.dotcomrendering.pageElements.MiniProfilesBlockElement':
 			return (
 				<MiniProfiles
