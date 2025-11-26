@@ -18,7 +18,7 @@ interface NewsletterSubscriptionResponse {
  */
 export const useNewsletterSubscription = (
 	newsletterId: string,
-	idApiUrl: string,
+	idApiUrl: string | undefined,
 ): boolean | undefined => {
 	const [isSubscribed, setIsSubscribed] = useState<boolean | undefined>(
 		undefined,
@@ -32,6 +32,11 @@ export const useNewsletterSubscription = (
 		}
 
 		if (authStatus.kind === 'SignedOut') {
+			setIsSubscribed(false);
+			return;
+		}
+
+		if (idApiUrl === undefined || idApiUrl === '') {
 			setIsSubscribed(false);
 			return;
 		}

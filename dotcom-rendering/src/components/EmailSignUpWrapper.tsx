@@ -22,8 +22,8 @@ export const EmailSignUpWrapper = ({
 	...emailSignUpProps
 }: EmailSignUpWrapperProps) => {
 	const [idApiUrl] = useState(() => {
-		if (typeof window === 'undefined') return '';
-		return window.guardian?.config?.page?.idApiUrl ?? '';
+		if (typeof window === 'undefined') return undefined;
+		return window.guardian?.config?.page?.idApiUrl ?? undefined;
 	});
 	const isSubscribed = useNewsletterSubscription(listId.toString(), idApiUrl);
 
