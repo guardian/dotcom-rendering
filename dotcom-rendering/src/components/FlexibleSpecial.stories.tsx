@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
 	opinionTrails,
-	selfHostedVideoCard,
+	selfHostedVideo54Card,
 	slideshowCard,
 	snapLink,
 	trails,
@@ -287,7 +287,7 @@ export const SelfHostedVideoCard: Story = {
 		groupedTrails: {
 			...emptyGroupedTrails,
 			snap: [],
-			standard: [selfHostedVideoCard],
+			standard: [selfHostedVideo54Card],
 		},
 		collectionId: 1,
 	},
