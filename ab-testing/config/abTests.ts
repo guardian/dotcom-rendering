@@ -57,18 +57,6 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
-	{
-		name: "commercial-a9-safe-frames",
-		description:
-			"Tests the impact of using the useSafeFrames options for A9",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2025-12-30",
-		type: "client",
-		status: "ON",
-		audienceSize: 0 / 100,
-		groups: ["variant"],
-		shouldForceMetricsCollection: false,
-	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
