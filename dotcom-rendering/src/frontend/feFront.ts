@@ -128,6 +128,10 @@ export interface FEMediaAtom {
 	activeVersion?: number;
 	videoPlayerFormat?: 'Default' | 'Loop' | 'Cinemagraph';
 	// channelId?: string; // currently unused
+	dimensions?: {
+		width: number;
+		height: number;
+	};
 }
 
 export type FEFrontCard = {
