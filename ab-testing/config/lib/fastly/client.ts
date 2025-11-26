@@ -2,6 +2,7 @@ import {
 	array,
 	assert,
 	boolean,
+	type Infer,
 	nullable,
 	number,
 	object,
@@ -10,7 +11,7 @@ import {
 } from "superstruct";
 import { FastlyService } from "./service.ts";
 
-const dictionaryItemStruct = object({
+const fastlyDictionaryItemStruct = object({
 	service_id: string(),
 	item_key: string(),
 	item_value: string(),
@@ -20,15 +21,7 @@ const dictionaryItemStruct = object({
 	deleted_at: nullable(string()),
 });
 
-export type DictionaryItem = {
-	service_id: string;
-	item_key: string;
-	item_value: string;
-	dictionary_id: string;
-	created_at: string;
-	updated_at: string;
-	deleted_at: string | null;
-};
+export type FastlyDictionaryItem = Infer<typeof fastlyDictionaryItemStruct>;
 
 export type UpdateDictionaryItemRequest =
 	| {
@@ -153,12 +146,12 @@ export class FastlyClient {
 	}: {
 		dictionaryId: string;
 		serviceId: string;
-	}): Promise<DictionaryItem[]> {
+	}): Promise<FastlyDictionaryItem[]> {
 		const dictionary = await this.fetch(
 			`${serviceId}/dictionary/${dictionaryId}/items?per_page=1000`,
 		);
 
-		assert(dictionary, array(dictionaryItemStruct));
+		assert(dictionary, array(fastlyDictionaryItemStruct));
 
 		return dictionary;
 	}
