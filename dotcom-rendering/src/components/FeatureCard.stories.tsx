@@ -24,7 +24,6 @@ const cardProps: CardProps = {
 		altText: 'alt text',
 	},
 	isExternalLink: false,
-	canPlayInline: true,
 	imageLoading: 'eager',
 	discussionApiUrl: 'https://discussion.theguardian.com/discussion-api/',
 	aspectRatio: '4:5',
@@ -35,6 +34,7 @@ const cardProps: CardProps = {
 	showClock: false,
 	imageSize: 'feature',
 	collectionId: 1,
+	uniqueId: `collection-1-feature-0`,
 };
 
 const aBasicLink = {
@@ -282,8 +282,7 @@ export const GalleryImmersive: Story = {
 	},
 };
 
-// A video article
-export const Video: Story = {
+export const YoutubeVideo: Story = {
 	args: {
 		format: {
 			...cardProps.format,
@@ -308,17 +307,17 @@ export const Video: Story = {
 	},
 };
 
-export const VideoImmersive: Story = {
+export const YoutubeVideoImmersive: Story = {
 	args: {
-		...Video.args,
+		...YoutubeVideo.args,
 		...Immersive.args,
 	},
 };
 
 // A standard (non-video) article with a video main media
-export const VideoMainMedia: Story = {
+export const YoutubeVideoMainMedia: Story = {
 	args: {
-		...Video.args,
+		...YoutubeVideo.args,
 		image: {
 			src: 'https://media.guim.co.uk/4612af5f4667888fa697139cf570b6373d93a710/2446_345_3218_1931/master/3218.jpg',
 			altText: 'alt text',
@@ -330,9 +329,9 @@ export const VideoMainMedia: Story = {
 	},
 };
 
-export const VideoMainMediaImmersive: Story = {
+export const YoutubeVideoMainMediaImmersive: Story = {
 	args: {
-		...VideoMainMedia.args,
+		...YoutubeVideoMainMedia.args,
 		...Immersive.args,
 	},
 };
@@ -377,5 +376,33 @@ export const WithSublinksLabsImmersive: Story = {
 		...WithSublinks.args,
 		...Labs.args,
 		...Immersive.args,
+	},
+};
+
+export const WithSelfHostedVideo: Story = {
+	args: {
+		...cardProps,
+		showVideo: true,
+		mainMedia: {
+			type: 'SelfHostedVideo',
+			videoStyle: 'Loop',
+			atomId: 'atom-id-123',
+			sources: [
+				{
+					src: 'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
+					mimeType: 'video/mp4',
+				},
+			],
+			width: 900,
+			height: 720,
+			duration: 18,
+		},
+	},
+};
+
+export const WithSelfHostedImmersiveVideo: Story = {
+	args: {
+		...WithSelfHostedVideo.args,
+		isImmersive: true,
 	},
 };
