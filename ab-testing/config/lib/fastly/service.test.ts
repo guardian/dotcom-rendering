@@ -1,4 +1,4 @@
-import { deepEqual, equal } from "node:assert";
+import { deepEqual, equal, match } from "node:assert";
 import type { Mock } from "node:test";
 import test, { describe, mock } from "node:test";
 import { FastlyClient } from "./client.ts";
@@ -18,7 +18,7 @@ function mockFetch(response: unknown, status = 200, statusText = "OK") {
 }
 
 describe("FastlyService", async () => {
-	await test.only("getDictionary - returns FastlyDictionary instance", async () => {
+	await test("getDictionary - returns FastlyDictionary instance", async () => {
 		const mockResponse = {
 			id: "dict-123",
 			name: "test-dictionary",
@@ -64,6 +64,14 @@ describe("FastlyService", async () => {
 		const items = await service.getDictionaryItems("dict-123");
 
 		deepEqual(items, mockResponse);
+
+		equal((globalThis.fetch as MockedFetch).mock.calls.length, 1);
+
+		match(
+			(globalThis.fetch as MockedFetch).mock.calls[0]
+				?.arguments[0] as string,
+			/dictionary\/dict-123\/items\?per_page=1000/,
+		);
 	});
 
 	await test("updateDictionaryItems - calls client.updateDictionaryItems", async () => {
@@ -82,5 +90,11 @@ describe("FastlyService", async () => {
 		await service.updateDictionaryItems("dict-123", items);
 
 		equal((globalThis.fetch as MockedFetch).mock.calls.length, 1);
+
+		match(
+			(globalThis.fetch as MockedFetch).mock.calls[0]
+				?.arguments[0] as string,
+			/dictionary\/dict-123\/items/,
+		);
 	});
 });

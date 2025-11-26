@@ -25,6 +25,11 @@ describe("FastlyClient", async () => {
 
 		deepEqual(result, mockResponse);
 		equal((globalThis.fetch as MockedFetch).mock.calls.length, 1);
+		equal(
+			(globalThis.fetch as MockedFetch).mock.calls[0]
+				?.arguments[0] as string,
+			"https://api.fastly.com/test-endpoint",
+		);
 	});
 
 	await test("fetch - throws error on fetch failure", async () => {
@@ -65,6 +70,12 @@ describe("FastlyClient", async () => {
 			activeVersion: 2,
 			client,
 		});
+
+		match(
+			(globalThis.fetch as MockedFetch).mock.calls[0]
+				?.arguments[0] as string,
+			/service\/service-123/,
+		);
 	});
 
 	await test("getService - throws error when service name doesn't match", async () => {
