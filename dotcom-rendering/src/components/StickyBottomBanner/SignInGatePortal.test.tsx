@@ -83,7 +83,7 @@ describe('SignInGatePortal', () => {
 			expect(result).toEqual({ show: false });
 		});
 
-		it('should return false when signInGate is off', async () => {
+		it('should return false when signInGate is false', async () => {
 			const mockElement = document.createElement('div');
 			mockGetElementById.mockReturnValue(mockElement);
 
