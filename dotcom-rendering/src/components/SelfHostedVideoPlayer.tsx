@@ -194,7 +194,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 						videoStyles(width, height),
 						showSubtitles && subtitleStyles(subtitleSize),
 					]}
-					crossOrigin="anonymous"
+					crossOrigin={showSubtitles ? 'anonymous' : undefined}
 					ref={ref}
 					tabIndex={0}
 					data-testid="self-hosted-video-player"
