@@ -3,12 +3,11 @@
  * Run the lambda handler locally using frontend AWS account credentials
  *
  * Usage:
- *   STAGE=CODE pnpm tsx src/run.ts
- *   STAGE=PROD pnpm tsx src/run.ts
+ *   STAGE=CODE node src/run.ts
+ *   STAGE=PROD node src/run.ts
  *
  * Prerequisites:
  *   - AWS credentials for the frontend account must be configured
- *   - Use `aws-vault exec frontend -- pnpm tsx src/run.ts` if using aws-vault
  */
 
 import type { CloudFormationCustomResourceEvent, Context } from "aws-lambda";
