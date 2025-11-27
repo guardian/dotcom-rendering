@@ -323,16 +323,14 @@ export const CollapsableWithThreeTierChoiceCards: Story = {
 				buttonColour: stringToHexColour('F1F8FC'),
 			},
 		},
-		tracking: {
-			...tracking,
-			abTestVariant: 'COLLAPSABLE_V1',
-		},
+		tracking,
 		choiceCardAmounts: regularChoiceCardAmounts,
 		choiceCardsSettings,
 		tickerSettings,
 		separateArticleCountSettings: {
 			type: 'above',
 		},
+		isCollapsible: true,
 	},
 };
 
@@ -344,10 +342,8 @@ export const CollapsableWithMainImage: Story = {
 			...design,
 			visual: regularImage,
 		},
-		tracking: {
-			...tracking,
-			abTestVariant: 'COLLAPSABLE_V1',
-		},
+		tracking,
+		isCollapsible: true,
 	},
 };
 
@@ -359,10 +355,8 @@ export const CollapsableMaybeLaterVariant: Story = {
 			...design,
 			visual: regularImage,
 		},
-		tracking: {
-			...tracking,
-			abTestVariant: 'COLLAPSABLE_V2_MAYBE_LATER',
-		},
+		tracking,
+		isCollapsible: true,
 	},
 };
 
@@ -377,15 +371,13 @@ export const CollapsableWithThreeTierChoiceCardsMaybeLaterVariant: Story = {
 				buttonColour: stringToHexColour('F1F8FC'),
 			},
 		},
-		tracking: {
-			...tracking,
-			abTestVariant: 'COLLAPSABLE_V2_MAYBE_LATER',
-		},
+		tracking,
 		choiceCardAmounts: regularChoiceCardAmounts,
 		choiceCardsSettings,
 		tickerSettings,
 		separateArticleCountSettings: {
 			type: 'above',
 		},
+		isCollapsible: true,
 	},
 };
