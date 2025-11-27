@@ -13,10 +13,10 @@ import { Hide } from '@guardian/source/react-components';
 import type { FEArticle } from '../frontend/feArticle';
 import { labelBoxStyles, labelHeight, labelStyles } from '../lib/adStyles';
 import { ArticleDisplay } from '../lib/articleFormat';
+import { center } from '../lib/center';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { palette as schemedPalette } from '../palette';
-import { center } from '../lib/center';
 
 // There are multiple of these ad slots on the page
 type IndexedSlot =
