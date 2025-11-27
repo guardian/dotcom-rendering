@@ -1,5 +1,6 @@
 import type { Handler } from 'express';
-import { validateAsFEArticle } from '../../../src/model/validate';
+import { validateAsFEArticle } from '../../model/validate';
+import { logger } from './logging';
 
 const SAFE_AB_VALUE = /^[a-zA-Z0-9_-]+$/;
 const MAX_LENGTH = 100;
@@ -12,15 +13,12 @@ export const getABTestsFromQueryParams: Handler = async (req, res, next) => {
 		const filteredQuery: Record<string, string> = {};
 
 		for (const [key, value] of Object.entries(queryParamsAb)) {
-			// Only process AB test params
 			if (!key.startsWith('ab-') || typeof value !== 'string') {
 				continue;
 			}
 
 			const testId = key.replace(/^ab-/, '');
 
-			// Validate both test ID and variant value
-			// This prevents injection attacks and ensures safe values
 			if (
 				testId.length > 0 &&
 				testId.length <= MAX_LENGTH &&
@@ -31,8 +29,7 @@ export const getABTestsFromQueryParams: Handler = async (req, res, next) => {
 			) {
 				filteredQuery[testId] = value;
 			} else {
-				// Log suspicious input for monitoring
-				console.warn(
+				logger.warn(
 					`Rejected invalid AB test parameter: ${key}=${value}`,
 				);
 			}
