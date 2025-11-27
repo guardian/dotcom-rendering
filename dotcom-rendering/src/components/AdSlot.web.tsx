@@ -165,6 +165,15 @@ const merchandisingAdContainerStyles = css`
 		width: fit-content;
 		margin: 0 auto;
 	}
+
+	/* This is similar to fluid ads, except this class is applied using messenger */
+	&.ad-slot--full-width {
+		width: 100%;
+		max-width: 100%;
+		.ad-slot {
+			max-width: 100%;
+		}
+	}
 `;
 
 const merchandisingAdStyles = css`

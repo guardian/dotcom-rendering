@@ -40,15 +40,6 @@ const adSlotContainerStyles = css`
 	.ad-slot-container {
 		max-width: 100vw;
 		position: relative;
-
-		/* This is similar to fluid ads, except this class is applied using messenger */
-		&.ad-slot--full-width {
-			width: 100%;
-			max-width: 100%;
-			.ad-slot {
-				max-width: 100%;
-			}
-		}
 	}
 `;
 
