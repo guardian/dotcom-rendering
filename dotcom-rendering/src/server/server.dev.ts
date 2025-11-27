@@ -21,7 +21,7 @@ import {
 	handleFootballMatchPage,
 	handleFootballTablesPage,
 } from './handler.sportDataPage.web';
-import { getABTestsFromQueryParams } from './lib/add-queryparams-to-abtests';
+import { getABTestsFromQueryParams } from './lib/get-abtests-from-query-params';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 
 /** article URLs contain a part that looks like “2022/nov/25” */
