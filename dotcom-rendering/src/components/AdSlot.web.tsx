@@ -13,7 +13,7 @@ import { Hide } from '@guardian/source/react-components';
 import type { FEArticle } from '../frontend/feArticle';
 import { labelBoxStyles, labelHeight, labelStyles } from '../lib/adStyles';
 import { ArticleDisplay } from '../lib/articleFormat';
-import { center } from '../lib/center';
+import { center as layoutCenterStyles } from '../lib/center';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { palette as schemedPalette } from '../palette';
@@ -165,8 +165,9 @@ const merchandisingAdContainerStyles = css`
 		width: fit-content;
 		margin: 0 auto;
 	}
+`;
 
-	/* This is similar to fluid ads, except this class is applied using messenger */
+const allowFullWidthAdContainerStyles = css`
 	&.ad-slot--full-width {
 		width: 100%;
 		max-width: 100%;
@@ -676,7 +677,13 @@ export const AdSlot = ({
 		}
 		case 'merchandising-high': {
 			return (
-				<AdSlotWrapper css={[merchandisingAdContainerStyles, center]}>
+				<AdSlotWrapper
+					css={[
+						merchandisingAdContainerStyles,
+						layoutCenterStyles,
+						allowFullWidthAdContainerStyles,
+					]}
+				>
 					<div
 						id="dfp-ad--merchandising-high"
 						className={[
@@ -696,7 +703,13 @@ export const AdSlot = ({
 		}
 		case 'merchandising': {
 			return (
-				<AdSlotWrapper css={[merchandisingAdContainerStyles, center]}>
+				<AdSlotWrapper
+					css={[
+						merchandisingAdContainerStyles,
+						layoutCenterStyles,
+						allowFullWidthAdContainerStyles,
+					]}
+				>
 					<div
 						id="dfp-ad--merchandising"
 						className={[
@@ -723,6 +736,7 @@ export const AdSlot = ({
 					<AdSlotWrapper
 						css={[
 							frontsBannerAdContainerStyles,
+							allowFullWidthAdContainerStyles,
 							hasPageskin && frontsBannerCollapseStyles,
 						]}
 					>
