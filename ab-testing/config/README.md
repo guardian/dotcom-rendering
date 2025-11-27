@@ -8,14 +8,14 @@ This package provides centralized A/B test configuration, validation and build s
 
 ## Scripts
 
-- `pnpm build` - Generate distribution artifacts (`dist/mvts.json`, `dist/ab-tests.json`)
-- `pnpm validate` - Validate test configuration
-- `pnpm test` - Run unit tests
+-   `pnpm build` - Generate distribution artifacts (`dist/mvts.json`, `dist/ab-tests.json`)
+-   `pnpm validate` - Validate test configuration
+-   `pnpm test` - Run unit tests
 
 ## Usage
 
 Other packages can import active tests:
 
 ```typescript
-import { activeABtests, allABTests } from '@guardian/ab-testing-config';
+import { activeABtests, allABTests } from "@guardian/ab-testing-config";
 ```
