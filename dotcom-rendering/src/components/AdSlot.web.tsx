@@ -16,6 +16,7 @@ import { ArticleDisplay } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { palette as schemedPalette } from '../palette';
+import { center } from '../lib/center';
 
 // There are multiple of these ad slots on the page
 type IndexedSlot =
@@ -666,7 +667,7 @@ export const AdSlot = ({
 		}
 		case 'merchandising-high': {
 			return (
-				<AdSlotWrapper css={merchandisingAdContainerStyles}>
+				<AdSlotWrapper css={[merchandisingAdContainerStyles, center]}>
 					<div
 						id="dfp-ad--merchandising-high"
 						className={[
@@ -686,7 +687,7 @@ export const AdSlot = ({
 		}
 		case 'merchandising': {
 			return (
-				<AdSlotWrapper css={merchandisingAdContainerStyles}>
+				<AdSlotWrapper css={[merchandisingAdContainerStyles, center]}>
 					<div
 						id="dfp-ad--merchandising"
 						className={[
