@@ -55,7 +55,7 @@ export const ProductLinkButton = ({
 	fullwidth = false,
 	minimisePadding = false,
 	priority = 'primary',
-	dataComponent = 'in-body-product-link-button',
+	dataComponent,
 }: ProductLinkButtonProps) => {
 	const cssOverrides: SerializedStyles[] = [
 		heightAutoStyle,
@@ -74,11 +74,11 @@ export const ProductLinkButton = ({
 			icon={<SvgArrowRightStraight />}
 			theme={theme}
 			data-ignore="global-link-styling"
-			data-link-name="in body link"
+			data-component={dataComponent}
+			data-link-name={`product link button ${priority}`}
 			data-spacefinder-role="inline"
 			size={size}
 			cssOverrides={cssOverrides}
-			data-component={dataComponent}
 		>
 			<span
 				css={css`

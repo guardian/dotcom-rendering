@@ -3239,6 +3239,29 @@
                 },
                 "activeVersion": {
                     "type": "number"
+                },
+                "videoPlayerFormat": {
+                    "enum": [
+                        "Cinemagraph",
+                        "Default",
+                        "Loop"
+                    ],
+                    "type": "string"
+                },
+                "dimensions": {
+                    "type": "object",
+                    "properties": {
+                        "width": {
+                            "type": "number"
+                        },
+                        "height": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "height",
+                        "width"
+                    ]
                 }
             },
             "required": [
@@ -3930,12 +3953,7 @@
                             "const": "SelfHostedVideo"
                         },
                         "videoStyle": {
-                            "enum": [
-                                "Cinemagraph",
-                                "Default",
-                                "Loop"
-                            ],
-                            "type": "string"
+                            "$ref": "#/definitions/VideoPlayerFormat"
                         },
                         "atomId": {
                             "type": "string"
@@ -3986,6 +4004,14 @@
                     ]
                 }
             ]
+        },
+        "VideoPlayerFormat": {
+            "enum": [
+                "Cinemagraph",
+                "Default",
+                "Loop"
+            ],
+            "type": "string"
         },
         "Audio": {
             "allOf": [

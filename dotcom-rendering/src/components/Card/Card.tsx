@@ -32,6 +32,7 @@ import type {
 	DCRSnapType,
 	DCRSupportingContent,
 } from '../../types/front';
+import type { CardMediaType } from '../../types/layout';
 import type { MainMedia } from '../../types/mainMedia';
 import type { OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
@@ -42,9 +43,9 @@ import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
-import { LoopVideo } from '../LoopVideo.importable';
-import type { SubtitleSize } from '../LoopVideoPlayer';
 import { Pill } from '../Pill';
+import { SelfHostedVideo } from '../SelfHostedVideo.importable';
+import type { SubtitleSize } from '../SelfHostedVideoPlayer';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
 import { Snap } from '../Snap';
 import { SnapCssSandbox } from '../SnapCssSandbox';
@@ -280,8 +281,21 @@ const getMedia = ({
 	isBetaContainer: boolean;
 }) => {
 	if (mainMedia?.type === 'SelfHostedVideo' && canPlayInline) {
+		let type: CardMediaType;
+		switch (mainMedia.videoStyle) {
+			case 'Default':
+				type = 'default-video';
+				break;
+			case 'Loop':
+				type = 'loop-video';
+				break;
+			case 'Cinemagraph':
+				type = 'cinemagraph';
+				break;
+		}
+
 		return {
-			type: 'loop-video',
+			type,
 			mainMedia,
 		} as const;
 	}
@@ -564,6 +578,12 @@ export const Card = ({
 		isBetaContainer,
 	});
 
+	const isSelfHostedVideo =
+		media &&
+		(media.type === 'default-video' ||
+			media.type === 'loop-video' ||
+			media.type === 'cinemagraph');
+
 	const resolvedDataLinkName =
 		media && dataLinkName
 			? appendLinkNameMedia(dataLinkName, media.type)
@@ -824,7 +844,6 @@ export const Card = ({
 			format={format}
 			showTopBarDesktop={showTopBarDesktop}
 			showTopBarMobile={showTopBarMobile}
-			isOnwardContent={isOnwardContent}
 			containerPalette={containerPalette}
 		>
 			<CardLink
@@ -941,17 +960,18 @@ export const Card = ({
 								/>
 							</AvatarContainer>
 						)}
-						{media.type === 'loop-video' && (
+						{isSelfHostedVideo && (
 							<Island
 								priority="critical"
 								defer={{ until: 'visible' }}
 							>
-								<LoopVideo
+								<SelfHostedVideo
 									sources={media.mainMedia.sources}
 									atomId={media.mainMedia.atomId}
 									uniqueId={uniqueId}
 									height={media.mainMedia.height}
 									width={media.mainMedia.width}
+									videoStyle={media.mainMedia.videoStyle}
 									posterImage={media.mainMedia.image ?? ''}
 									fallbackImage={media.mainMedia.image ?? ''}
 									fallbackImageSize={mediaSize}
@@ -1060,10 +1080,6 @@ export const Card = ({
 											imageSize={mediaSize}
 											alt={headlineText}
 											loading={imageLoading}
-											roundedCorners={
-												isOnwardContent &&
-												!isMoreGalleriesOnwardContent
-											}
 											aspectRatio={aspectRatio}
 										/>
 									</div>
@@ -1077,10 +1093,6 @@ export const Card = ({
 									imageSize={mediaSize}
 									alt={media.imageAltText}
 									loading={imageLoading}
-									roundedCorners={
-										isOnwardContent &&
-										!isMoreGalleriesOnwardContent
-									}
 									aspectRatio={aspectRatio}
 								/>
 								{isVideoMainMedia && mainMedia.duration > 0 && (
@@ -1122,10 +1134,6 @@ export const Card = ({
 											imageSize="small"
 											alt={media.imageAltText}
 											loading={imageLoading}
-											roundedCorners={
-												isOnwardContent &&
-												!isMoreGalleriesOnwardContent
-											}
 											aspectRatio="1:1"
 										/>
 									</div>

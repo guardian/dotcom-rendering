@@ -1,6 +1,8 @@
 import type { Source } from '../lib/video';
 import type { PodcastSeriesImage } from './tag';
 
+export type VideoPlayerFormat = 'Default' | 'Loop' | 'Cinemagraph';
+
 type Media = {
 	type: 'YoutubeVideo' | 'SelfHostedVideo' | 'Audio' | 'Gallery';
 };
@@ -22,7 +24,7 @@ type YoutubeVideo = Media & {
 
 type SelfHostedVideo = Media & {
 	type: 'SelfHostedVideo';
-	videoStyle: 'Default' | 'Loop' | 'Cinemagraph';
+	videoStyle: VideoPlayerFormat;
 	atomId: string;
 	sources: Source[];
 	height: number;

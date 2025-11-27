@@ -7018,7 +7018,7 @@ const paletteColours = {
 	},
 	'--feature-card-trail-text': {
 		light: () => sourcePalette.neutral[86],
-		dark: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[86],
 	},
 	'--filter-key-events-toggle-border-top': {
 		light: () => sourcePalette.neutral[86],
@@ -7312,34 +7312,6 @@ const paletteColours = {
 	'--live-block-datetime-text-hover': {
 		light: () => sourcePalette.neutral[20],
 		dark: () => sourcePalette.neutral[86],
-	},
-	'--loop-video-audio-icon': {
-		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[100],
-	},
-	'--loop-video-audio-icon-background': {
-		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
-		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
-	},
-	'--loop-video-audio-icon-border': {
-		light: () => sourcePalette.neutral[60],
-		dark: () => sourcePalette.neutral[60],
-	},
-	'--loop-video-progress-bar-background': {
-		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
-		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
-	},
-	'--loop-video-progress-bar-value': {
-		light: () => sourcePalette.neutral[86],
-		dark: () => sourcePalette.neutral[86],
-	},
-	'--loop-video-subtitle-background': {
-		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
-		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
-	},
-	'--loop-video-subtitle-text': {
-		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[100],
 	},
 	'--masthead-nav-background': {
 		light: mastheadNavBackground,
@@ -8152,6 +8124,38 @@ const paletteColours = {
 	'--versus-text-faded': {
 		light: () => sourcePalette.neutral[46],
 		dark: () => sourcePalette.neutral[60],
+	},
+	'--video-audio-icon': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--video-audio-icon-background': {
+		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
+		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
+	},
+	'--video-audio-icon-border': {
+		light: () => sourcePalette.neutral[60],
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--video-background': {
+		light: () => sourcePalette.neutral[93],
+		dark: () => sourcePalette.neutral[93],
+	},
+	'--video-progress-bar-background': {
+		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
+		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
+	},
+	'--video-progress-bar-value': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--video-subtitle-background': {
+		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
+		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
+	},
+	'--video-subtitle-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
 	},
 	'--witness-title-author': {
 		light: witnessTitleAuthor,

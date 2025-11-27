@@ -119,10 +119,7 @@ export const ProductCardLeftCol = ({
 				)}
 			</div>
 			<div css={buttonContainer}>
-				<ProductCardButtons
-					productCtas={productCtas}
-					dataComponent={'left-col-product-card-button'}
-				/>
+				<ProductCardButtons productCtas={productCtas} />
 			</div>
 			{customAttributes.length > 0 && (
 				<div css={customAttributesContainer}>
