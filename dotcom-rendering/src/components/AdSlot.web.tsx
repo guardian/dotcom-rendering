@@ -259,13 +259,6 @@ const frontsBannerAdContainerStyles = css`
 
 	/* Native templates require a width (or min-width) to be explicitly set */
 	width: ${breakpoints['wide']}px;
-	/* This is similar to fluid ads, except this class is applied using messenger */
-	&.ad-slot--full-width {
-		width: 100%;
-		.ad-slot {
-			max-width: 100%;
-		}
-	}
 `;
 
 const frontsBannerCollapseStyles = css`
