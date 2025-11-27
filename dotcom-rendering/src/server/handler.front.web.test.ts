@@ -1,6 +1,6 @@
-import { getBadgeUrl } from './handler.front.web';
+import { getPaId } from './handler.front.web';
 
-describe('getBadgeUrl', () => {
+describe('getPaId', () => {
 	it('should return undefined if the references property is not present', () => {
 		const tag = {
 			properties: {
@@ -14,7 +14,7 @@ describe('getBadgeUrl', () => {
 					'https://uploads.guim.co.uk/2017/10/09/Morwenna-Ferrier,-L.png',
 			},
 		};
-		expect(getBadgeUrl(tag)).toBeUndefined();
+		expect(getPaId(tag)).toBeUndefined();
 	});
 
 	it('should return undefined if there is no pa-football-team reference', () => {
@@ -27,10 +27,10 @@ describe('getBadgeUrl', () => {
 			},
 		};
 
-		expect(getBadgeUrl(tag)).toBeUndefined();
+		expect(getPaId(tag)).toBeUndefined();
 	});
 
-	it('should return the correct badge URL if the pa-football-team reference is present', () => {
+	it('should return the correct PA ID if the pa-football-team reference is present', () => {
 		const tag = {
 			properties: {
 				id: '',
@@ -45,12 +45,11 @@ describe('getBadgeUrl', () => {
 			},
 		};
 
-		const expectedUrl =
-			'https://sport.guim.co.uk/football/crests/120/12345.png';
-		expect(getBadgeUrl(tag)).toBe(expectedUrl);
+		const expectedId = '12345';
+		expect(getPaId(tag)).toBe(expectedId);
 	});
 
-	it('should handle multiple references and return the correct badge URL', () => {
+	it('should handle multiple references and return the correct PA ID', () => {
 		const tag = {
 			properties: {
 				id: '',
@@ -66,12 +65,11 @@ describe('getBadgeUrl', () => {
 			},
 		};
 
-		const expectedUrl =
-			'https://sport.guim.co.uk/football/crests/120/67890.png';
-		expect(getBadgeUrl(tag)).toBe(expectedUrl);
+		const expectedId = '67890';
+		expect(getPaId(tag)).toBe(expectedId);
 	});
 
-	it('should handle a complex id and return the correct badge URL', () => {
+	it('should handle a complex id and return the correct PA ID', () => {
 		const tag = {
 			properties: {
 				id: '',
@@ -85,8 +83,7 @@ describe('getBadgeUrl', () => {
 				],
 			},
 		};
-		const expectedUrl =
-			'https://sport.guim.co.uk/football/crests/120/team/abcdef.png';
-		expect(getBadgeUrl(tag)).toBe(expectedUrl);
+		const expectedId = 'abcdef';
+		expect(getPaId(tag)).toBe(expectedId);
 	});
 });

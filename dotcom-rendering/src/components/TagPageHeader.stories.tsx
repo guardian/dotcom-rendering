@@ -28,7 +28,10 @@ export const WithLinkAndImage = {
 	args: {
 		title: 'Example title',
 		description: `<p>And a much longer description with lots of text, other thoughts and musings <a href="#">and a link</a></p>`,
-		image: 'https://uploads.guim.co.uk/2023/02/17/Josh_Halliday.jpg',
+		image: {
+			kind: 'byline',
+			url: 'https://uploads.guim.co.uk/2023/02/17/Josh_Halliday.jpg',
+		},
 	},
 } satisfies Story;
 
@@ -36,6 +39,9 @@ export const WithFootballCrest = {
 	args: {
 		title: 'Aston Villa',
 		description: `<p>And a much longer description with lots of text, other thoughts and musings <a href="#">and a link</a></p>`,
-		image: 'https://sport.guim.co.uk/football/crests/120/2.png',
+		image: {
+			kind: 'footballCrest',
+			teamId: '2',
+		},
 	},
 } satisfies Story;
