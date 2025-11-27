@@ -83,7 +83,7 @@ describe('getPaId', () => {
 				],
 			},
 		};
-		const expectedId = 'abcdef';
+		const expectedId = 'team/abcdef';
 		expect(getPaId(tag)).toBe(expectedId);
 	});
 });
