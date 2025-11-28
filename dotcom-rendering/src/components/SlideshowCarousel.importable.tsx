@@ -56,7 +56,7 @@ const carouselItemStyles = css`
 	scroll-snap-align: start;
 `;
 
-const carouselLinkStyles = css`
+const containerStyles = css`
 	position: relative;
 	z-index: ${getZIndex('card-nested-link')};
 `;
@@ -80,8 +80,6 @@ const navigationStyles = (hasBackgroundColour: boolean) => css`
 	display: flex;
 	align-items: center;
 	padding-top: ${space[2]}px;
-	position: relative;
-	z-index: ${getZIndex('card-nested-link')};
 
 	${until.tablet} {
 		background-color: ${hasBackgroundColour
@@ -214,10 +212,9 @@ export const SlideshowCarousel = ({
 	const slideshowImageCount = slideshowImages.length;
 
 	return (
-		<>
+		<div css={containerStyles}>
 			<a
 				href={linkTo}
-				css={carouselLinkStyles}
 				aria-label={linkAriaLabel}
 				data-link-name={dataLinkName}
 			>
@@ -302,6 +299,6 @@ export const SlideshowCarousel = ({
 					</div>
 				</div>
 			)}
-		</>
+		</div>
 	);
 };
