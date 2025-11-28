@@ -9,9 +9,19 @@ const colourHome = '#da020e';
 const colourAway = '#023474';
 
 const containerCss = css`
+	position: relative;
 	padding: 5px 10px 10px;
 	border: 1px solid ${palette.neutral[86]};
 	border-radius: 6px;
+	&::before {
+		position: absolute;
+		content: '';
+		left: 50%;
+		bottom: 0;
+		width: 1px;
+		height: 24px;
+		background-color: ${palette.neutral[86]};
+	}
 `;
 
 const headerCss = css`
@@ -30,6 +40,7 @@ const labelCss = css`
 `;
 
 const chartCss = css`
+	position: relative;
 	display: flex;
 	gap: 10px;
 `;
