@@ -19,11 +19,22 @@ const meta = {
 			</div>
 		),
 	],
+	parameters: {
+		viewport: {
+			defaultViewport: 'mobile',
+		},
+	},
 } satisfies Meta<typeof FootballMatchStat>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Possession = {
-	args: {},
+	args: {
+		label: 'Possession',
+		homeColour: '#da020e',
+		awayColour: '#023474',
+		homeValue: '39%',
+		awayValue: '61%',
+	},
 } satisfies Story;
