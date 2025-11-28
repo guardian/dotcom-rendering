@@ -80,8 +80,6 @@ const navigationStyles = (hasBackgroundColour: boolean) => css`
 	display: flex;
 	align-items: center;
 	padding-top: ${space[2]}px;
-	position: relative;
-	z-index: ${getZIndex('card-nested-link')};
 
 	${until.tablet} {
 		background-color: ${hasBackgroundColour
