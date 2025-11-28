@@ -81,4 +81,5 @@ export interface BannerRenderProps {
 	submitComponentEvent?: (componentEvent: ComponentEvent) => void;
 	design?: ConfigurableDesign;
 	promoCodes?: string[];
+	isCollapsible?: boolean;
 }

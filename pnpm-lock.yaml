@@ -399,8 +399,8 @@ importers:
         specifier: 18.1.1
         version: 18.1.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.3)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/support-dotcom-components':
-        specifier: 8.2.0
-        version: 8.2.0(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.3)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.6.3)(zod@4.1.12)
+        specifier: 8.3.1
+        version: 8.3.1(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.3)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.6.3)(zod@4.1.12)
       '@guardian/tsconfig':
         specifier: 0.2.0
         version: 0.2.0
@@ -2656,8 +2656,8 @@ packages:
   '@guardian/story-packages-model@2.2.0':
     resolution: {integrity: sha512-tZWBvoBTfR9K7AGlhsiPYAefIjfA5NsU/65OhcZjBEiFN6J+ay37D1dH6uIghYZbd+fB0mQ0I9kT/ac4Lgx0yQ==}
 
-  '@guardian/support-dotcom-components@8.2.0':
-    resolution: {integrity: sha512-XbEdBCTQ+DWPgYWNWnBa8a9xW58HrOAN8Yrzta9SbALq8YRU28DPtJdQgmeAgrX7wgtd/ZVc+1ix5U6k38K+0Q==}
+  '@guardian/support-dotcom-components@8.3.1':
+    resolution: {integrity: sha512-3e+BX/FTMHCXHtWqVi0LV3j6geOU0RX7vEb+c51KStsOXKLnM3wLK4eoih8AUiRSBO/Nqd42L0DWXDxaoyKUsw==}
     peerDependencies:
       '@guardian/libs': ^22.0.0
       '@guardian/ophan-tracker-js': 2.6.1
@@ -10808,7 +10808,7 @@ snapshots:
       '@smithy/middleware-content-length': 4.2.5
       '@smithy/middleware-endpoint': 4.3.12
       '@smithy/middleware-retry': 4.4.12
-      '@smithy/middleware-serde': 4.2.5
+      '@smithy/middleware-serde': 4.2.6
       '@smithy/middleware-stack': 4.2.5
       '@smithy/node-config-provider': 4.3.5
       '@smithy/node-http-handler': 4.4.5
@@ -11720,7 +11720,7 @@ snapshots:
       '@smithy/middleware-content-length': 4.2.5
       '@smithy/middleware-endpoint': 4.3.12
       '@smithy/middleware-retry': 4.4.12
-      '@smithy/middleware-serde': 4.2.5
+      '@smithy/middleware-serde': 4.2.6
       '@smithy/middleware-stack': 4.2.5
       '@smithy/node-config-provider': 4.3.5
       '@smithy/node-http-handler': 4.4.5
@@ -13408,7 +13408,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@guardian/support-dotcom-components@8.2.0(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.3)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.6.3)(zod@4.1.12)':
+  '@guardian/support-dotcom-components@8.3.1(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.3)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.6.3)(zod@4.1.12)':
     dependencies:
       '@aws-sdk/client-cloudwatch': 3.841.0
       '@aws-sdk/client-dynamodb': 3.840.0

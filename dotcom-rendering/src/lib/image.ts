@@ -31,6 +31,8 @@ const getServiceFromUrl = (url: URL): string => {
 			return 'static';
 		case 'uploads':
 			return 'uploads';
+		case 'sport':
+			return 'sport';
 		case 'media':
 		default:
 			return 'media';

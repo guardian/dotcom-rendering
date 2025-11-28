@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { from, textSans14, until } from '@guardian/source/foundations';
 import type { FootballTable as FootballTableData } from '../footballTables';
 import { palette } from '../palette';
+import { FootballTableCrest } from './FootballTableCrest';
 import { FootballTableForm } from './FootballTableForm';
 
 const tableStyles = css`
@@ -68,11 +69,6 @@ type Props = {
 	guardianBaseUrl: string;
 };
 
-function getFootballCrestImageUrl(teamId: string) {
-	// todo: use fastly resizer
-	return `https://sport.guim.co.uk/football/crests/60/${teamId}.png`;
-}
-
 const FullTableLink = ({
 	competitionName,
 	competitionUrl,
@@ -85,28 +81,6 @@ const FullTableLink = ({
 	<a href={`${guardianBaseUrl}${competitionUrl}/table`} css={linkStyles}>
 		View full {competitionName} table
 	</a>
-);
-
-const FootballCrest = ({ teamId }: { teamId: string }) => (
-	<div
-		css={css`
-			width: 1.25rem;
-			height: 1.25rem;
-			flex-shrink: 0;
-			display: flex;
-			justify-content: center;
-		`}
-	>
-		<img
-			css={css`
-				max-width: 100%;
-				max-height: 100%;
-				object-fit: contain;
-			`}
-			src={getFootballCrestImageUrl(teamId)}
-			alt=""
-		/>
-	</div>
 );
 
 const TeamWithCrest = ({
@@ -125,7 +99,7 @@ const TeamWithCrest = ({
 			gap: 0.325rem;
 		`}
 	>
-		<FootballCrest teamId={id} />
+		<FootballTableCrest teamId={id} />
 		{url ? (
 			<a
 				css={css`
