@@ -53,9 +53,13 @@ type Props = {
 	label: string;
 	homeColour: string;
 	awayColour: string;
-	homeValue: string;
-	awayValue: string;
+	homeValue: number;
+	awayValue: number;
+	showPercentage?: boolean;
 };
+
+const formatValue = (value: number, showPercentage: boolean) =>
+	`${value}${showPercentage ? '%' : ''}`;
 
 export const FootballMatchStat = ({
 	label,
@@ -63,32 +67,44 @@ export const FootballMatchStat = ({
 	awayColour,
 	homeValue,
 	awayValue,
-}: Props) => (
-	<div css={containerCss}>
-		<div css={headerCss}>
-			<span css={statCss} style={{ '--match-stat-colour': homeColour }}>
-				{homeValue}
-			</span>
-			<span css={labelCss}>{label}</span>
-			<span css={statCss} style={{ '--match-stat-colour': awayColour }}>
-				{awayValue}
-			</span>
+	showPercentage = false,
+}: Props) => {
+	const homePercentage = (homeValue / (homeValue + awayValue)) * 100;
+	const awayPercentage = (awayValue / (homeValue + awayValue)) * 100;
+
+	return (
+		<div css={containerCss}>
+			<div css={headerCss}>
+				<span
+					css={statCss}
+					style={{ '--match-stat-colour': homeColour }}
+				>
+					{formatValue(homeValue, showPercentage)}
+				</span>
+				<span css={labelCss}>{label}</span>
+				<span
+					css={statCss}
+					style={{ '--match-stat-colour': awayColour }}
+				>
+					{formatValue(awayValue, showPercentage)}
+				</span>
+			</div>
+			<div css={chartCss}>
+				<div
+					css={barCss}
+					style={{
+						'--match-stat-bar-width': `${homePercentage}%`,
+						'--match-stat-bar-colour': homeColour,
+					}}
+				></div>
+				<div
+					css={barCss}
+					style={{
+						'--match-stat-bar-width': `${awayPercentage}%`,
+						'--match-stat-bar-colour': awayColour,
+					}}
+				></div>
+			</div>
 		</div>
-		<div css={chartCss}>
-			<div
-				css={barCss}
-				style={{
-					'--match-stat-bar-width': homeValue,
-					'--match-stat-bar-colour': homeColour,
-				}}
-			></div>
-			<div
-				css={barCss}
-				style={{
-					'--match-stat-bar-width': awayValue,
-					'--match-stat-bar-colour': awayColour,
-				}}
-			></div>
-		</div>
-	</div>
-);
+	);
+};
