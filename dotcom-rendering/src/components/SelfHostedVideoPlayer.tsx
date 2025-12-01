@@ -131,12 +131,10 @@ type Props = {
 /**
  * Note that in React 19, forwardRef is no longer necessary:
  * https://react.dev/reference/react/forwardRef
- */
-/**
+ *
  * NB: To develop the video player locally, use `https://r.thegulocal.com/` instead of `localhost`.
  * This is required because CORS restrictions prevent accessing the subtitles and video file from localhost.
  */
-
 export const SelfHostedVideoPlayer = forwardRef(
 	(
 		{
@@ -185,6 +183,16 @@ export const SelfHostedVideoPlayer = forwardRef(
 			showPlayIcon ? 'play' : 'pause'
 		}-${atomId}`;
 
+		/**
+		 * We need CORS enabled to show subtitles on a video as it allows access to the VTT file.
+		 *
+		 * We don't want a client to not request CORS headers on a video request, then to request
+		 * the same video with CORS headers, as the response could be cached without the headers, which
+		 * will result in the video failing to load. Therefore, we always request CORS headers in production.
+		 */
+		const requestCORS =
+			showSubtitles || process.env.NODE_ENV === 'production';
+
 		return (
 			<>
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Not all videos require captions. */}
@@ -194,7 +202,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 						videoStyles(width, height),
 						showSubtitles && subtitleStyles(subtitleSize),
 					]}
-					crossOrigin={showSubtitles ? 'anonymous' : undefined}
+					crossOrigin={requestCORS ? 'anonymous' : undefined}
 					ref={ref}
 					tabIndex={0}
 					data-testid="self-hosted-video-player"
