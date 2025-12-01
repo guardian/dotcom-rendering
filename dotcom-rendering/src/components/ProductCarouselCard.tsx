@@ -39,7 +39,7 @@ const brandAndProductName = css`
 const readMoreCta = css`
 	${textSansBold15};
 	text-decoration-line: underline;
-	text-decoration-color: #dcdcdc; //TODO update this to use var(--Link-Pillar-color-link-underline-pillar, #DCDCDC);
+	text-decoration-color: #dcdcdc; /* stylelint-disable-line */
 	color: ${lifestyle[400]};
 	text-underline-offset: 20%;
 	padding-bottom: ${space[2]}px;
