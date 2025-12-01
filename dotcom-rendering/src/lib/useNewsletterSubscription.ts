@@ -16,41 +16,33 @@ interface NewsletterSubscriptionResponse {
 export const useNewsletterSubscription = (
 	newsletterId: number,
 	idApiUrl: string | undefined,
-): {
-	isSubscribed: boolean | undefined;
-	authStatus: string | undefined;
-	apiResponse: string | undefined;
-} => {
+): boolean | undefined => {
 	const [isSubscribed, setIsSubscribed] = useState<boolean | undefined>(
-		undefined,
-	);
-	const [apiResponse, setApiResponse] = useState<string | undefined>(
 		undefined,
 	);
 
 	const authStatus = useAuthStatus();
 
-	console.log('useNewsletterSubscription called with:', {
-		newsletterId,
-		idApiUrl,
-		authStatus,
-	});
-
 	useEffect(() => {
+		// Wait for auth to be determined
 		if (authStatus.kind === 'Pending') {
 			setIsSubscribed(undefined);
 			return;
 		}
 
+		// User is not signed in
 		if (authStatus.kind === 'SignedOut') {
 			setIsSubscribed(false);
 			return;
 		}
 
+		// No API URL available
 		if (idApiUrl === undefined || idApiUrl === '') {
 			setIsSubscribed(false);
 			return;
 		}
+
+		// At this point: authStatus.kind === 'SignedIn'
 
 		// User is signed in, fetch their newsletters
 		const fetchNewsletters = async () => {
@@ -71,8 +63,6 @@ export const useNewsletterSubscription = (
 					},
 				);
 
-				console.log('Fetch newsletters response:', response);
-				setApiResponse(JSON.stringify(response));
 				if (!response.ok) {
 					console.error('Failed to fetch user newsletters');
 					setIsSubscribed(false);
@@ -99,9 +89,5 @@ export const useNewsletterSubscription = (
 		void fetchNewsletters();
 	}, [authStatus, newsletterId, idApiUrl]);
 
-	return {
-		isSubscribed,
-		authStatus: JSON.stringify(authStatus),
-		apiResponse,
-	};
+	return isSubscribed;
 };
