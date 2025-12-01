@@ -1332,7 +1332,10 @@ export const Card = ({
 					`
 				}
 				style={{
-					padding: isOnwardContent ? `0 ${space[2]}px` : 0,
+					padding:
+						isOnwardContent && !isInGalleryContext
+							? `0 ${space[2]}px`
+							: 0,
 				}}
 			>
 				{showLivePlayable && liveUpdatesPosition === 'outer' && (

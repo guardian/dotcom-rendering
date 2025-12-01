@@ -230,7 +230,7 @@ const getDefaultCardProps = (
 		supportingContent: undefined,
 		canPlayInline: false,
 		onwardsSource,
-		isOnwardContent: false,
+		isOnwardContent: true,
 		showLivePlayable: false,
 	};
 	return defaultProps;
