@@ -254,6 +254,7 @@ const meta = {
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Lifestyle,
 		},
+		showReadMore: true,
 	},
 } satisfies Meta<typeof ProductCarouselCard>;
 
@@ -262,3 +263,38 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {} satisfies Story;
+
+export const WithoutReadMore = {
+	args: {
+		showReadMore: false,
+	},
+} satisfies Story;
+
+export const WithoutHeadingDisclaimerOrReadMore = {
+	args: {
+		product: {
+			...product,
+			primaryHeadingHtml: '',
+		},
+		showReadMore: false,
+	},
+} satisfies Story;
+
+export const WithLongHeadingProductNameAndCTA = {
+	args: {
+		product: {
+			...product,
+			primaryHeadingHtml: 'Super long product category review name',
+			productName:
+				'Sky Kettle with a super duper long name that goes on and on',
+			productCtas: [
+				{
+					url: 'https://www.johnlewis.com/bosch-twk7203gb-sky-variable-temperature-kettle-1-7l-black/p3228625',
+					text: '',
+					retailer: 'John Lewis with a very long name',
+					price: '£45.99',
+				},
+			],
+		},
+	},
+};

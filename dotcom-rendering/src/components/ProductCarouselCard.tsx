@@ -4,17 +4,19 @@ import {
 	headlineMedium17,
 	lifestyle,
 	space,
+	textSans17,
 	textSansBold15,
 	textSansBold17,
 } from '@guardian/source/foundations';
 import { ProductCardButtons } from './ProductCardButtons';
 import { ProductBlockElement } from '../types/content';
-import { Picture } from './Picture';
 import { ArticleFormat } from '../lib/articleFormat';
+import { ProductCardImage } from './ProductCardImage';
 
 export type ProductCarouselCardProps = {
 	product: ProductBlockElement;
 	format: ArticleFormat;
+	showReadMore?: boolean;
 };
 
 const baseCard = css`
@@ -22,7 +24,7 @@ const baseCard = css`
 	width: 280px;
 	flex-direction: column;
 	align-items: flex-start;
-	padding: 12px 10px 16px 10px;
+	padding: ${space[3]}px 10px ${space[4]}px 10px;
 `;
 
 const productCarouselCardHeading = css`
@@ -39,8 +41,8 @@ const readMoreCta = css`
 	text-decoration-line: underline;
 	text-decoration-color: #dcdcdc; //TODO update this to use var(--Link-Pillar-color-link-underline-pillar, #DCDCDC);
 	color: ${lifestyle[400]};
+	text-underline-offset: 20%;
 	padding-bottom: ${space[2]}px;
-	text-underline-offset: 20%; /* 3px */
 `;
 
 const priceStyle = css`
@@ -70,34 +72,61 @@ const imageArea = css`
 	img {
 		width: 100%;
 		height: 280px;
-		object-fit: contain;
+		object-fit: cover;
 	}
+`;
+
+const brandAndProductNameRow = css`
+	display: block;
+	line-height: 1.3;
+`;
+
+const brandAndProductNameInline = css`
+	${headlineMedium17};
+	display: inline;
+`;
+
+const productNameStyle = css`
+	${textSans17};
 `;
 
 export const ProductCarouselCard = ({
 	product,
 	format,
+	showReadMore,
 }: ProductCarouselCardProps) => {
+	const hasHeading = !!product.primaryHeadingHtml;
 	return (
 		<div css={baseCard}>
-			<div css={productCarouselCardHeading}>
-				{product.primaryHeadingHtml}
-			</div>
-			<div css={brandAndProductName}>
-				{product.brandName} {product.productName}
-			</div>
-			<div css={readMoreCta}>Read more</div>
+			{hasHeading && (
+				<>
+					<div css={productCarouselCardHeading}>
+						{product.primaryHeadingHtml}
+					</div>
+					<div css={brandAndProductNameRow}>
+						<span css={brandAndProductNameInline}>
+							{product.brandName}{' '}
+						</span>
+						<span css={brandAndProductNameInline}>
+							{product.productName}
+						</span>
+					</div>
+				</>
+			)}
+			{showReadMore && <div css={readMoreCta}>Read more</div>}
 			<div css={imageArea}>
-				<Picture
-					role="productCard"
-					master={product.image?.url ?? ''}
-					alt={product.image?.alt ?? ''}
-					width={product.image?.width ?? 0}
-					height={product.image?.height ?? 0}
-					loading="eager"
+				<ProductCardImage
 					format={format}
+					image={product.image}
+					url={undefined}
 				/>
 			</div>
+			{!hasHeading && (
+				<div>
+					<div css={brandAndProductName}>{product.brandName}</div>
+					<div css={productNameStyle}>{product.productName}</div>
+				</div>
+			)}
 			<div css={priceStyle}>
 				{product.productCtas && product.productCtas.length > 0
 					? product.productCtas[0]?.price ?? 'Price unavailable'
@@ -112,7 +141,7 @@ export const ProductCarouselCard = ({
 									product.productCtas[0]?.retailer ??
 									'retailer'
 							  }`
-							: 'Buy'
+							: 'Buy' //TODO better fallback?
 					}
 				/>
 			</div>
