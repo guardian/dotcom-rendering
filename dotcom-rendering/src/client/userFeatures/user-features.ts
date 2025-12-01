@@ -42,10 +42,10 @@ const USER_BENEFITS_COOKIE_EXPIRATION_IN_DAYS = 30;
 /**
  * Persist the user benefits response to cookies
  *
- * If new cookies are added/removed/edited, update the persistUserBenefitsCookie function in Gateway
- * https://github.com/guardian/gateway/blob/252b2b2f24be826da42c6e7c1b1e202594184023/src/server/lib/user-features.ts#L88
- *
+ * If new cookies are added/removed/edited, update the persistUserBenefitsCookies function in Gateway.
  * In gateway, the cookies are set after authentication.
+ *
+ * This code also exist in frontend, so any changes here should be mirrored there.
  *
  * @param {UserBenefits} userBenefitsResponse
  */
