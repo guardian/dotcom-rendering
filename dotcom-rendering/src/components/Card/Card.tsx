@@ -942,7 +942,6 @@ export const Card = ({
 						mediaType={media.type}
 						mediaPositionOnDesktop={mediaPositionOnDesktop}
 						mediaPositionOnMobile={mediaPositionOnMobile}
-						hideMediaOverlay={media.type === 'slideshow'}
 						padMedia={
 							isMediaCardOrNewsletter &&
 							isBetaContainer &&
