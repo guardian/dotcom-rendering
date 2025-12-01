@@ -166,6 +166,7 @@ export type Props = {
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 	enableHls?: boolean;
+	SCStyle?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -425,7 +426,10 @@ export const Card = ({
 	showLabsRedesign = false,
 	subtitleSize = 'small',
 	enableHls = false,
+	SCStyle = false,
 }: Props) => {
+	console.log('article headline, mainMedia:', headlineText, mainMedia);
+
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
 		supportingContent,
@@ -737,6 +741,8 @@ export const Card = ({
 		if (!hasSublinks) return null;
 		if (sublinkPosition === 'none') return null;
 
+		console.log('supportingContent:', supportingContent);
+
 		const Sublinks = () => (
 			<SupportingContent
 				supportingContent={supportingContent}
@@ -758,11 +764,17 @@ export const Card = ({
 		);
 
 		if (sublinkPosition === 'outer') {
-			return <Sublinks />;
+			return (
+				<>
+					<div>test </div>
+					<Sublinks />
+				</>
+			);
 		}
 
 		return (
 			<Hide from={isFlexSplash ? 'desktop' : 'tablet'}>
+				<div>check</div>
 				<Sublinks />
 			</Hide>
 		);
@@ -781,6 +793,7 @@ export const Card = ({
 					containerPalette={containerPalette}
 					isDynamo={isDynamo}
 					fillBackgroundOnMobile={isFlexSplash}
+					SCStyle={SCStyle}
 				/>
 			</Hide>
 		);
@@ -1217,44 +1230,46 @@ export const Card = ({
 							flex-grow: 1;
 						`}
 					>
-						{headlinePosition === 'inner' && (
-							<HeadlineWrapper>
-								<CardHeadline
-									headlineText={headlineText}
-									format={format}
-									fontSizes={headlineSizes}
-									showQuotes={showQuotes}
-									kickerText={
-										format.design ===
-											ArticleDesign.LiveBlog &&
-										!kickerText
-											? 'Live'
-											: kickerText
-									}
-									showPulsingDot={
-										format.design ===
-											ArticleDesign.LiveBlog ||
-										showPulsingDot
-									}
-									byline={byline}
-									showByline={showByline}
-									isExternalLink={isExternalLink}
-									kickerImage={
-										showKickerImage &&
-										media?.type === 'podcast'
-											? media.podcastImage
-											: undefined
-									}
-									showLabsRedesign={showLabsRedesign}
-								/>
-								{!isUndefined(starRating) ? (
-									<StarRatingComponent
-										rating={starRating}
-										cardHasImage={!!image}
-									/>
-								) : null}
-							</HeadlineWrapper>
-						)}
+						{SCStyle && isFlexSplash
+							? null
+							: headlinePosition === 'inner' && (
+									<HeadlineWrapper>
+										<CardHeadline
+											headlineText={headlineText}
+											format={format}
+											fontSizes={headlineSizes}
+											showQuotes={showQuotes}
+											kickerText={
+												format.design ===
+													ArticleDesign.LiveBlog &&
+												!kickerText
+													? 'Live'
+													: kickerText
+											}
+											showPulsingDot={
+												format.design ===
+													ArticleDesign.LiveBlog ||
+												showPulsingDot
+											}
+											byline={byline}
+											showByline={showByline}
+											isExternalLink={isExternalLink}
+											kickerImage={
+												showKickerImage &&
+												media?.type === 'podcast'
+													? media.podcastImage
+													: undefined
+											}
+											showLabsRedesign={showLabsRedesign}
+										/>
+										{!isUndefined(starRating) ? (
+											<StarRatingComponent
+												rating={starRating}
+												cardHasImage={!!image}
+											/>
+										) : null}
+									</HeadlineWrapper>
+							  )}
 
 						{!!trailText && shouldShowTrailText && (
 							<TrailText

@@ -150,6 +150,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 						: undefined;
 
 					const insertSCSection =
+						// tagPage.TPSGContent &&
 						isSCTagPage &&
 						index == 1 &&
 						(!tagPage.pagination ||
@@ -171,6 +172,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									<StorylinesSection
 										index={1}
 										tagPage={tagPage}
+										TPSGContent={tagPage.TPSGContent}
 									/>
 								</Island>
 							)}
