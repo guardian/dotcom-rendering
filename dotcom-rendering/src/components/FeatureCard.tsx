@@ -520,8 +520,12 @@ export const FeatureCard = ({
 											sources={media.mainMedia.sources}
 											atomId={media.mainMedia.atomId}
 											uniqueId={uniqueId}
-											height={media.mainMedia.height}
-											width={media.mainMedia.width}
+											// height={media.mainMedia.height}
+											// width={media.mainMedia.width}
+											height={2 * 720}
+											width={
+												2 * (isImmersive ? 1200 : 576)
+											}
 											// Only cinemagraphs are currently supported in feature cards
 											videoStyle="Cinemagraph"
 											posterImage={

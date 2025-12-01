@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { log, storage } from '@guardian/libs';
-import { from, space } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
@@ -38,14 +38,16 @@ const videoAndBackgroundStyles = (isCinemagraph: boolean) => css`
 	${!isCinemagraph && `z-index: ${getZIndex('video-container')}`};
 `;
 
-const videoContainerStyles = (width: number, height: number) => css`
+const videoContainerStyles = css`
 	position: relative;
 	height: 100%;
+	/** TODO Remove for feature cards */
 	max-height: 100vh;
 	max-height: 100svh;
 	max-width: 100%;
-	${from.tablet} {
-		max-width: ${(width / height) * 80}%;
+
+	${until.tablet} {
+		width: 100%; // Safari
 	}
 `;
 
@@ -672,11 +674,38 @@ export const SelfHostedVideo = ({
 		? getOptimisedPosterImage(posterImage)
 		: undefined;
 
+	const aspectRatioOfCard = (aspectRatioOfImage: string | undefined) => {
+		if (!aspectRatioOfImage) return null;
+
+		const aspectRatio = aspectRatioOfImage.split(':');
+		if (!aspectRatio[0] || !aspectRatio[1]) return null;
+
+		const aspectRatioWidth = parseInt(aspectRatio[0]);
+		const aspectRatioHeight = parseInt(aspectRatio[1]);
+
+		return aspectRatioWidth / aspectRatioHeight;
+	};
+
+	const containerAspectRatio = aspectRatioOfCard(fallbackImageAspectRatio);
+
 	return (
 		<div css={videoAndBackgroundStyles(isCinemagraph)}>
 			<figure
 				ref={setNode}
-				css={videoContainerStyles(width, height)}
+				css={[
+					videoContainerStyles,
+					containerAspectRatio !== null &&
+						css`
+							${from.tablet} {
+								/** If the video is thinner (i.e. taller) than the container, ensure that it
+									takes up enough width such that the height is the same as the container and the
+									aspect ratio is maintained */
+								max-width: ${(width / height) *
+								(1 / containerAspectRatio) *
+								100}%;
+							}
+						`,
+				]}
 				className={`video-container ${videoStyle.toLocaleLowerCase()}`}
 				data-component="gu-video-loop"
 			>

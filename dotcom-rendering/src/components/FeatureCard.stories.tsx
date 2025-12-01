@@ -393,8 +393,8 @@ export const WithSelfHostedVideo = {
 					mimeType: 'video/mp4',
 				},
 			],
-			width: 576,
 			height: 720,
+			width: 576,
 			duration: 18,
 		},
 	},
@@ -412,8 +412,22 @@ export const WithSelfHostedImmersiveVideo = {
 					mimeType: 'video/mp4',
 				},
 			],
-			width: 1200,
 			height: 720,
+			width: 1200,
+		},
+	},
+} satisfies Story;
+
+export const WithSelfHostedVideoOnShortScreen = {
+	args: {
+		...WithSelfHostedVideo.args,
+	},
+	parameters: {
+		viewport: {
+			shortViewport: {
+				name: 'Short viewport',
+				styles: { height: '1000px', width: '700px' },
+			},
 		},
 	},
 } satisfies Story;
