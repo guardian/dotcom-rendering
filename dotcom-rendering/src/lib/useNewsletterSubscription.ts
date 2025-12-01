@@ -102,6 +102,6 @@ export const useNewsletterSubscription = (
 	return {
 		isSubscribed,
 		authStatus: JSON.stringify(authStatus),
-		apiResponse: apiResponse,
+		apiResponse,
 	};
 };
