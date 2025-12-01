@@ -50,7 +50,7 @@ const barCss = css`
 	border-radius: 8px;
 `;
 
-export type MatchStatistic = {
+type MatchStatistic = {
 	teamName: string;
 	teamColour: string;
 	value: number;
