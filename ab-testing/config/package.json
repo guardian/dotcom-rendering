@@ -6,7 +6,7 @@
 	"type": "module",
 	"exports": {
 		".": "./index.ts",
-		"./lib/*": "./lib/*"
+		"./lib/*.ts": "./lib/*.ts"
 	},
 	"scripts": {
 		"validate": "node scripts/validation/index.ts",
