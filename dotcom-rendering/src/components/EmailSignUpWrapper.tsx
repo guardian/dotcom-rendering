@@ -25,7 +25,7 @@ export const EmailSignUpWrapper = ({
 		if (typeof window === 'undefined') return undefined;
 		return window.guardian?.config?.page?.idApiUrl ?? undefined;
 	});
-	const isSubscribed = useNewsletterSubscription(listId.toString(), idApiUrl);
+	const isSubscribed = useNewsletterSubscription(listId, idApiUrl);
 
 	// Don't render if user is signed in and already subscribed
 	if (isSubscribed === true) {
@@ -38,6 +38,7 @@ export const EmailSignUpWrapper = ({
 			blockDescription="newsletter promotion"
 		>
 			<EmailSignup {...emailSignUpProps}>
+				<span>{`current new letter id ${listId}`}</span>
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<SecureSignup
 						newsletterId={emailSignUpProps.identityName}

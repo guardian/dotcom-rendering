@@ -14,7 +14,7 @@ interface NewsletterSubscriptionResponse {
  * A hook to check if a user is subscribed to a specific newsletter.
  */
 export const useNewsletterSubscription = (
-	newsletterId: string,
+	newsletterId: number,
 	idApiUrl: string | undefined,
 ): boolean | undefined => {
 	const [isSubscribed, setIsSubscribed] = useState<boolean | undefined>(
@@ -70,7 +70,7 @@ export const useNewsletterSubscription = (
 
 				// If newsletter exists in the subscriptions array, user is subscribed
 				const isUserSubscribed = newsletters.some(
-					(n) => n.listId === newsletterId,
+					(n) => Number(n.listId) === newsletterId,
 				);
 
 				setIsSubscribed(isUserSubscribed);
