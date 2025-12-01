@@ -8,7 +8,7 @@ There is a single configuration file located at [`config/abTests.ts`](./config/a
 
 This configuration is used to build keys and values, which are deployed to fastly edge dictionaries.
 
-Once deployed, these configurations are accessible at the edge via fastly. which Fastly uses to allocate requests to tests and passes the tests that requests are in to frontend and DCR.
+Once deployed, these configurations are accessible at the edge via fastly. Fastly passes a user's AB participations to Frontend and DCR via the `x-gu-server-ab-tests` response header (server side A/B tests) and `gu_client_ab_tests` response cookie (client side A/B tests).
 
 See the [fastly-edge-cache documentation](https://github.com/guardian/fastly-edge-cache/blob/main/theguardiancom/docs/ab-testing.md) for even more details.
 
