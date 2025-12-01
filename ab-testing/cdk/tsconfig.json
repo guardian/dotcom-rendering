@@ -4,6 +4,7 @@
 		"noEmit": true,
 		"skipLibCheck": true,
 		"allowImportingTsExtensions": true,
+		"erasableSyntaxOnly": true,
 		"moduleResolution": "nodenext",
 		"module": "nodenext"
 	},

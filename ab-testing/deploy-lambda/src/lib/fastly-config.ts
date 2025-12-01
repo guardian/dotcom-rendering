@@ -1,5 +1,5 @@
 import { GetParameterCommand, SSMClient } from "@aws-sdk/client-ssm";
-import { configStruct } from "@guardian/ab-testing-config/lib/config.js";
+import { configStruct } from "@guardian/ab-testing-config/lib/config.ts";
 import { assert } from "superstruct";
 
 const getSecureString = async (name: string) => {

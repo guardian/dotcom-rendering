@@ -20,7 +20,6 @@ test("riffRaffYamlFile", async () => {
 
 		const riffRaff = riffRaffYamlFile({ app, stack, region });
 
-		console.log(JSON.stringify(riffRaff.riffRaffYaml, null, 2));
 		const {
 			riffRaffYaml: { deployments },
 		} = riffRaff;
