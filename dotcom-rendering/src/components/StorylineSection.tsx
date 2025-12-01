@@ -1,5 +1,12 @@
 import { css } from '@emotion/react';
-import { between, from, space, until } from '@guardian/source/foundations';
+import {
+	between,
+	from,
+	space,
+	textSans14,
+	textSans17,
+	until,
+} from '@guardian/source/foundations';
 import { type EditionId, isNetworkFront } from '../lib/edition';
 import { palette as schemePalette } from '../palette';
 import type { CollectionBranding } from '../types/branding';
@@ -15,6 +22,8 @@ import { FrontPagination } from './FrontPagination';
 import { FrontSectionTitle } from './FrontSectionTitle';
 import { ShowHideButton } from './ShowHideButton';
 import { Treats } from './Treats';
+import { Footer } from './ExpandableAtom/Footer';
+import { submitComponentEvent } from '../client/ophan/ophan';
 
 type Props = {
 	/** This text will be used as the h2 shown in the left column for the section */
@@ -86,6 +95,8 @@ type Props = {
 	isLabs?: boolean;
 	/** Feature switch for the labs redesign work */
 	showLabsRedesign?: boolean;
+	likeHandler?: () => void;
+	dislikeHandler?: () => void;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -589,7 +600,10 @@ export const StorylineSection = ({
 	hasNavigationButtons = false,
 	isAboveDesktopAd = false,
 	isAboveMobileAd = false,
+	dislikeHandler,
+	likeHandler,
 }: Props) => {
+	const id = sectionId || 'unknown-id'; //todo: figure out what this should be
 	const isToggleable = toggleable && !!sectionId;
 	const isBetaContainer = !!containerLevel;
 
@@ -663,25 +677,36 @@ export const StorylineSection = ({
 				>
 					<FrontSectionTitle
 						title={
-							<ContainerTitle
-								title={title}
-								lightweightHeader={isTagPage}
-								description={description}
-								fontColour={
-									containerLevel === 'Secondary'
-										? schemePalette(
-												'--article-section-secondary-title',
-										  )
-										: articleSectionTitleStyles(
-												title,
-												showSectionColours,
-										  )
-								}
-								url={url}
-								showDateHeader={showDateHeader}
-								editionId={editionId}
-								containerLevel={'Secondary'}
-							/>
+							<>
+								<ContainerTitle
+									title={title}
+									lightweightHeader={isTagPage}
+									description={description}
+									fontColour={
+										containerLevel === 'Secondary'
+											? schemePalette(
+													'--article-section-secondary-title',
+											  )
+											: articleSectionTitleStyles(
+													title,
+													showSectionColours,
+											  )
+									}
+									url={url}
+									showDateHeader={showDateHeader}
+									editionId={editionId}
+									containerLevel={'Secondary'}
+								/>
+								<div
+									css={css`
+										${textSans14};
+									`}
+								>
+									Dive deeper into the Guardian's archive.
+									This product uses GenAI. Learn more about
+									how it works <a href="#">here.</a>
+								</div>
+							</>
 						}
 						collectionBranding={collectionBranding}
 					/>
@@ -718,35 +743,46 @@ export const StorylineSection = ({
 					{children}
 				</div>
 
-				<div
-					css={[
-						sectionContentHorizontalMargins,
-						sectionBottomContent,
-						isBetaContainer
-							? bottomPaddingBetaContainer(
-									useLargeSpacingMobile,
-									useLargeSpacingDesktop,
-							  )
-							: bottomPadding,
-					]}
-				>
-					{pagination && (
-						<FrontPagination
-							sectionName={pagination.sectionName}
-							totalContent={pagination.totalContent}
-							currentPage={pagination.currentPage}
-							lastPage={pagination.lastPage}
-							pageId={pagination.pageId}
-						/>
-					)}
-				</div>
-
 				{treats && (
 					<div css={[sectionTreats]}>
-						<Treats
+						{/* <Treats
 							treats={treats}
 							borderColour={schemePalette('--section-border')}
-						/>
+						/> */}
+						<Footer
+							dislikeHandler={
+								dislikeHandler ??
+								(() =>
+									submitComponentEvent(
+										{
+											component: {
+												componentType: 'QANDA_ATOM',
+												id,
+												products: [],
+												labels: [],
+											},
+											action: 'DISLIKE',
+										},
+										'Web',
+									))
+							}
+							likeHandler={
+								likeHandler ??
+								(() =>
+									submitComponentEvent(
+										{
+											component: {
+												componentType: 'QANDA_ATOM', //todo: update ophan component types to include storyline?
+												id,
+												products: [],
+												labels: [],
+											},
+											action: 'LIKE',
+										},
+										'Web',
+									))
+							}
+						></Footer>
 					</div>
 				)}
 			</section>

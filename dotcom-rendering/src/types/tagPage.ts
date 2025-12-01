@@ -1,3 +1,4 @@
+import { TPSGContent } from 'src/components/StorylinesSection.importable';
 import type { FEFrontConfig } from '../frontend/feFront';
 import type { EditionId } from '../lib/edition';
 import type { Tuple } from '../lib/tuple';
@@ -61,6 +62,7 @@ export interface TagPage {
 	branding: CollectionBranding | undefined;
 	canonicalUrl?: string;
 	contributionsServiceUrl: string;
+	TPSGContent?: TPSGContent;
 }
 
 export type HeaderImage =

@@ -1,3 +1,4 @@
+import { TPSGContent } from 'src/components/StorylinesSection.importable';
 import type { EditionId } from '../lib/edition';
 import type { CommercialProperties } from '../types/commercial';
 import type { FooterType } from '../types/footer';
@@ -25,4 +26,5 @@ export type FETagPage = {
 	forceDay: boolean;
 	canonicalUrl?: string;
 	contributionsServiceUrl: string;
+	TPSGContent?: TPSGContent;
 };

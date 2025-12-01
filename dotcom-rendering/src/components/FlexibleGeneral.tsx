@@ -366,6 +366,7 @@ const SplashCardLayout = ({
 					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
 					showLabsRedesign={showLabsRedesign}
 					enableHls={enableHls}
+					SCStyle={SCStyle}
 				/>
 			</LI>
 		</UL>
