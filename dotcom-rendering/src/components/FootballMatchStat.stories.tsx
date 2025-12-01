@@ -20,7 +20,7 @@ const meta = {
 	],
 	parameters: {
 		viewport: {
-			defaultViewport: 'mobile',
+			defaultViewport: 'mobileMedium',
 		},
 	},
 } satisfies Meta<typeof FootballMatchStat>;
