@@ -2,14 +2,11 @@ import { useEffect, useState } from 'react';
 import { getOptionsHeaders } from './identity';
 import { useAuthStatus } from './useAuthStatus';
 
-interface UserNewsletter {
-	listId: number;
-	subscribed: boolean;
-}
-
 interface NewsletterSubscriptionResponse {
-	result?: {
-		subscriptions: UserNewsletter[];
+	result: {
+		subscriptions: Array<{
+			listId: string;
+		}>;
 	};
 }
 
@@ -66,17 +63,17 @@ export const useNewsletterSubscription = (
 					return;
 				}
 
-				const data: NewsletterSubscriptionResponse | UserNewsletter[] =
+				const data: NewsletterSubscriptionResponse =
 					await response.json();
 
-				const newsletters = Array.isArray(data)
-					? data
-					: data.result?.subscriptions ?? [];
+				const newsletters = data.result?.subscriptions ?? [];
 
-				const newsletter = newsletters.find(
-					(n) => n.listId.toString() === newsletterId,
+				// If newsletter exists in the subscriptions array, user is subscribed
+				const isUserSubscribed = newsletters.some(
+					(n) => n.listId === newsletterId,
 				);
-				setIsSubscribed(newsletter?.subscribed ?? false);
+
+				setIsSubscribed(isUserSubscribed);
 			} catch (error) {
 				console.error('Error fetching newsletters:', error);
 				setIsSubscribed(false);

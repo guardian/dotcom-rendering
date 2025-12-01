@@ -146,7 +146,7 @@ const NewsletterSignup = ({
 				>
 					<div css={stackBelowTabletStyles}>
 						<p css={titleStyles(theme)}>
-							Sign up to ! <span>{name}</span>
+							Sign up to <span>{name}</span>
 						</p>
 
 						<div css={noHeightFromTabletStyles}>

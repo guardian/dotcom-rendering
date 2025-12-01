@@ -88,7 +88,7 @@ export const EmailSignup = ({
 		<aside css={containerStyles} aria-label="newsletter promotion">
 			<div css={stackBelowTabletStyles}>
 				<p css={titleStyles(theme)}>
-					Sign up to - <span>{name}</span>
+					Sign up to <span>{name}</span>
 				</p>
 				<div css={noHeightFromTabletStyles}>
 					<NewsletterDetail text={buildDetailText(frequency)} />
