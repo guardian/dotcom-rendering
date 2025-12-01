@@ -58,8 +58,8 @@ const hoverStyles = css`
 	*/
 	:has(
 			ul.sublinks:hover,
-			.video-container.loop:hover,
-			.slideshow-carousel:hover,
+			.video-container:not(.cinemagraph):hover,
+			.slideshow-carousel-footer:hover,
 			.branding-logo:hover
 		) {
 		.card-headline .show-underline {
