@@ -3,11 +3,6 @@ import type { FastlyDictionary } from "@guardian/ab-testing-config/lib/fastly/di
 import { deployDictionary } from "./deploy-dictionary.ts";
 import { fetchDictionaryArtifact } from "./fetch-artifact.ts";
 
-const ARTIFACT_BUCKET_NAME = getEnv("ARTIFACT_BUCKET_NAME");
-const STAGE = getEnv("STAGE");
-
-const CONFIG_PREFIX = `${STAGE}/config/ab-testing`;
-
 type ArtifactInfo = {
 	artifact: string;
 	dictionary: FastlyDictionary;
@@ -19,18 +14,21 @@ type ArtifactInfo = {
  * @param deployments An array of artifact deployment information.
  */
 export const fetchAndDeployArtifacts = async (deployments: ArtifactInfo[]) => {
+	const ARTIFACT_BUCKET_NAME = getEnv("ARTIFACT_BUCKET_NAME");
+	const STAGE = getEnv("STAGE");
+	const CONFIG_PREFIX = `${STAGE}/config/ab-testing`;
+
 	try {
 		await Promise.all(
-			deployments.map(({ artifact, dictionary }) => {
+			deployments.map(async ({ artifact, dictionary }) => {
 				console.log(
 					`Fetching artifact /${ARTIFACT_BUCKET_NAME}${CONFIG_PREFIX}/${artifact} from S3 and deploying to Fastly dictionary ${dictionary.name}`,
 				);
-				return fetchDictionaryArtifact(
+				const abTestGroups = await fetchDictionaryArtifact(
 					ARTIFACT_BUCKET_NAME,
 					`${CONFIG_PREFIX}/${artifact}`,
-				).then((abTestGroups) =>
-					deployDictionary(dictionary, abTestGroups),
 				);
+				return await deployDictionary(dictionary, abTestGroups);
 			}),
 		);
 	} catch (error) {
