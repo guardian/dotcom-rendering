@@ -22,6 +22,12 @@ export const useNewsletterSubscription = (
 	);
 	const authStatus = useAuthStatus();
 
+	console.log('useNewsletterSubscription called with:', {
+		newsletterId,
+		idApiUrl,
+		authStatus,
+	});
+
 	useEffect(() => {
 		if (authStatus.kind === 'Pending') {
 			setIsSubscribed(undefined);
@@ -56,6 +62,8 @@ export const useNewsletterSubscription = (
 						},
 					},
 				);
+
+				console.log('Fetch newsletters response:', response);
 
 				if (!response.ok) {
 					console.error('Failed to fetch user newsletters');
