@@ -3,6 +3,7 @@ import {
 	palette,
 	textSansBold14,
 	textSansBold20,
+	visuallyHidden,
 } from '@guardian/source/foundations';
 
 const containerCss = css`
@@ -28,7 +29,7 @@ const headerCss = css`
 
 const statCss = css`
 	${textSansBold20};
-	color: var(--match-stat-colour);
+	color: var(--match-stat-team-colour);
 `;
 
 const labelCss = css`
@@ -44,17 +45,21 @@ const chartCss = css`
 
 const barCss = css`
 	height: 8px;
-	width: var(--match-stat-bar-width);
-	background-color: var(--match-stat-bar-colour);
+	width: var(--match-stat-percentage);
+	background-color: var(--match-stat-team-colour);
 	border-radius: 8px;
 `;
 
+export type MatchStatistic = {
+	teamName: string;
+	teamColour: string;
+	value: number;
+};
+
 type Props = {
 	label: string;
-	homeColour: string;
-	awayColour: string;
-	homeValue: number;
-	awayValue: number;
+	home: MatchStatistic;
+	away: MatchStatistic;
 	showPercentage?: boolean;
 };
 
@@ -63,45 +68,57 @@ const formatValue = (value: number, showPercentage: boolean) =>
 
 export const FootballMatchStat = ({
 	label,
-	homeColour,
-	awayColour,
-	homeValue,
-	awayValue,
+	home,
+	away,
 	showPercentage = false,
 }: Props) => {
-	const homePercentage = (homeValue / (homeValue + awayValue)) * 100;
-	const awayPercentage = (awayValue / (homeValue + awayValue)) * 100;
+	const homePercentage = (home.value / (home.value + away.value)) * 100;
+	const awayPercentage = (away.value / (home.value + away.value)) * 100;
 
 	return (
 		<div css={containerCss}>
 			<div css={headerCss}>
 				<span
 					css={statCss}
-					style={{ '--match-stat-colour': homeColour }}
+					style={{ '--match-stat-team-colour': home.teamColour }}
 				>
-					{formatValue(homeValue, showPercentage)}
+					<span
+						css={css`
+							${visuallyHidden}
+						`}
+					>
+						{away.teamName}
+					</span>
+					{formatValue(home.value, showPercentage)}
 				</span>
 				<span css={labelCss}>{label}</span>
 				<span
 					css={statCss}
-					style={{ '--match-stat-colour': awayColour }}
+					style={{ '--match-stat-team-colour': away.teamColour }}
 				>
-					{formatValue(awayValue, showPercentage)}
+					<span
+						css={css`
+							${visuallyHidden}
+						`}
+					>
+						{away.teamName}
+					</span>
+					{formatValue(away.value, showPercentage)}
 				</span>
 			</div>
 			<div css={chartCss}>
 				<div
 					css={barCss}
 					style={{
-						'--match-stat-bar-width': `${homePercentage}%`,
-						'--match-stat-bar-colour': homeColour,
+						'--match-stat-percentage': `${homePercentage}%`,
+						'--match-stat-team-colour': home.teamColour,
 					}}
 				></div>
 				<div
 					css={barCss}
 					style={{
-						'--match-stat-bar-width': `${awayPercentage}%`,
-						'--match-stat-bar-colour': awayColour,
+						'--match-stat-percentage': `${awayPercentage}%`,
+						'--match-stat-team-colour': away.teamColour,
 					}}
 				></div>
 			</div>
