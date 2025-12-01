@@ -31,10 +31,16 @@ type Story = StoryObj<typeof meta>;
 export const Possession = {
 	args: {
 		label: 'Possession',
-		homeColour: '#da020e',
-		awayColour: '#023474',
-		homeValue: 39,
-		awayValue: 61,
+		home: {
+			teamName: 'Manchester United',
+			teamColour: '#da020e',
+			value: 39,
+		},
+		away: {
+			teamName: 'Arsenal',
+			teamColour: '#023474',
+			value: 61,
+		},
 		showPercentage: true,
 	},
 } satisfies Story;
@@ -42,9 +48,16 @@ export const Possession = {
 export const GoalAttempts = {
 	args: {
 		label: 'Goal Attempts',
-		homeColour: '#722642',
-		awayColour: '#383838',
-		homeValue: 7,
-		awayValue: 4,
+		home: {
+			teamName: 'West Ham',
+			teamColour: '#722642',
+			value: 7,
+		},
+		away: {
+			teamName: 'Newcastle',
+			teamColour: '#383838',
+			value: 4,
+		},
+		showPercentage: true,
 	},
 } satisfies Story;
