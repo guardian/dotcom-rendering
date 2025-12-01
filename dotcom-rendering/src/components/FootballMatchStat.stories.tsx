@@ -58,6 +58,5 @@ export const GoalAttempts = {
 			teamColour: '#383838',
 			value: 4,
 		},
-		showPercentage: true,
 	},
 } satisfies Story;
