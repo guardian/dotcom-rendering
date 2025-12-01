@@ -16,10 +16,18 @@ interface NewsletterSubscriptionResponse {
 export const useNewsletterSubscription = (
 	newsletterId: number,
 	idApiUrl: string | undefined,
-): boolean | undefined => {
+): {
+	isSubscribed: boolean | undefined;
+	authStatus: string | undefined;
+	apiResponse: string | undefined;
+} => {
 	const [isSubscribed, setIsSubscribed] = useState<boolean | undefined>(
 		undefined,
 	);
+	const [apiResponse, setApiResponse] = useState<string | undefined>(
+		undefined,
+	);
+
 	const authStatus = useAuthStatus();
 
 	console.log('useNewsletterSubscription called with:', {
@@ -64,7 +72,7 @@ export const useNewsletterSubscription = (
 				);
 
 				console.log('Fetch newsletters response:', response);
-
+				setApiResponse(JSON.stringify(response));
 				if (!response.ok) {
 					console.error('Failed to fetch user newsletters');
 					setIsSubscribed(false);
@@ -91,5 +99,9 @@ export const useNewsletterSubscription = (
 		void fetchNewsletters();
 	}, [authStatus, newsletterId, idApiUrl]);
 
-	return isSubscribed;
+	return {
+		isSubscribed,
+		authStatus: JSON.stringify(authStatus),
+		apiResponse: apiResponse,
+	};
 };
