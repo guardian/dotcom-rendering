@@ -42,6 +42,7 @@ type StorylinesSectionProps = {
 type ImageData = {
 	src: string;
 	altText: string;
+	isAvatar: boolean;
 	mediaData: MainMedia | null;
 };
 
@@ -941,11 +942,6 @@ export const StorylinesSection = ({
 		article: ArticleData,
 	): DCRFrontCard {
 		const format = decideFormatForArticle(category);
-		console.log(
-			'article headline and mediaData here',
-			article.headline,
-			article.image?.mediaData,
-		);
 		return {
 			format: format,
 			dataLinkName: '',
@@ -958,7 +954,7 @@ export const StorylinesSection = ({
 				'https://discussion.theguardian.com/discussion-api',
 			byline: article.byline || '',
 			showByline:
-				category.category === 'Contrasting Opinions' ? true : false, // could be true if opinion?
+				category.category === 'Contrasting opinions' ? true : false, // could be true if opinion?
 			boostLevel:
 				category.category === 'Profiles and Interviews' ||
 				category.category === 'Deep Reads'
@@ -971,12 +967,16 @@ export const StorylinesSection = ({
 					: false, //would be true for profiles/deep reads?
 			showQuotedHeadline: false,
 			showLivePlayable: false,
-			avatarUrl: undefined, // will need to be set for opinion pieces
+			avatarUrl:
+				category.category === 'Contrasting opinions' &&
+				article.image?.isAvatar
+					? article.image?.src
+					: undefined, // will need to be set for opinion pieces
 			// mainMedia: undefined, // ought to be set for multimedia pieces, but missing the extra info like count?
 			mainMedia:
 				category.category === 'Find multimedia' &&
 				article.image?.mediaData
-					? article.image.mediaData
+					? article.image?.mediaData
 					: undefined,
 			isExternalLink: false,
 			image: article.image

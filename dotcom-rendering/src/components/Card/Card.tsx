@@ -428,8 +428,6 @@ export const Card = ({
 	enableHls = false,
 	SCStyle = false,
 }: Props) => {
-	console.log('article headline, mainMedia:', headlineText, mainMedia);
-
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
 		supportingContent,
@@ -460,7 +458,10 @@ export const Card = ({
 		const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
 
 		const shouldShowAge =
-			isTagPage || !!onwardsSource || (showAge && withinTwelveHours);
+			SCStyle ||
+			isTagPage ||
+			!!onwardsSource ||
+			(showAge && withinTwelveHours);
 
 		if (!shouldShowAge) return undefined;
 
@@ -740,8 +741,6 @@ export const Card = ({
 	const decideOuterSublinks = () => {
 		if (!hasSublinks) return null;
 		if (sublinkPosition === 'none') return null;
-
-		console.log('supportingContent:', supportingContent);
 
 		const Sublinks = () => (
 			<SupportingContent
