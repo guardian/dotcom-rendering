@@ -63,7 +63,9 @@ export const riffRaffYamlFile = ({
 		// We need the test artifacts in place before running the ab-testing-config CloudFormation deployment
 		"config/ab-testing",
 		// We need the lambda to be updated before running the ab-testing-config CloudFormation deployment
-		["lambda-update", region, stack, "ab-testing-deployment"].join("-"),
+		["lambda-update", region, stack, "ab-testing-deployment-lambda"].join(
+			"-",
+		),
 	];
 
 	return riffRaff;

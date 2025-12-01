@@ -2,6 +2,7 @@ import { deepEqual, ok } from "node:assert";
 import test, { it } from "node:test";
 import { GuRoot } from "@guardian/cdk/lib/constructs/root.js";
 import { AbTestingConfig } from "./abTestingConfig.ts";
+import { AbTestingDeploymentLambda } from "./deploymentLambda.ts";
 import { riffRaffYamlFile } from "./riffRaffYamlFile.ts";
 
 test("riffRaffYamlFile", async () => {
@@ -11,6 +12,14 @@ test("riffRaffYamlFile", async () => {
 		const region = "eu-west-1";
 
 		new AbTestingConfig(app, "AbTestingConfig", {
+			stack: "frontend",
+			stage: "CODE",
+			env: {
+				region: "eu-west-1",
+			},
+		});
+
+		new AbTestingDeploymentLambda(app, "AbTestingDeploymentLambda", {
 			stack: "frontend",
 			stage: "CODE",
 			env: {
@@ -41,13 +50,39 @@ test("riffRaffYamlFile", async () => {
 			},
 		});
 
+		new AbTestingDeploymentLambda(app, "AbTestingDeploymentLambda", {
+			stack: "frontend",
+			stage: "CODE",
+			env: {
+				region: "eu-west-1",
+			},
+		});
+
 		const riffRaff = riffRaffYamlFile({ app, stack, region });
 		const {
 			riffRaffYaml: { deployments },
 		} = riffRaff;
 
+		const configCloudformationDeploymentName = [
+			"cfn",
+			region,
+			stack,
+			"ab-testing-config",
+		].join("-");
+
+		const deploymentLambdaDeploymentName = [
+			"lambda-update",
+			region,
+			stack,
+			"ab-testing-deployment-lambda",
+		].join("-");
+
 		const configCloudformationDeployment = deployments.get(
-			["cfn", region, stack, "ab-testing-config"].join("-"),
+			configCloudformationDeploymentName,
+		);
+
+		const deploymentLambdaDeployment = deployments.get(
+			deploymentLambdaDeploymentName,
 		);
 
 		ok(
@@ -55,14 +90,14 @@ test("riffRaffYamlFile", async () => {
 			"Config CloudFormation deployment not found",
 		);
 
+		ok(
+			deploymentLambdaDeployment,
+			"Deployment Lambda deployment not found",
+		);
+
 		deepEqual(
 			configCloudformationDeployment.dependencies,
-			[
-				"config/ab-testing",
-				["lambda-update", region, stack, "ab-testing-deployment"].join(
-					"-",
-				),
-			].sort(),
+			["config/ab-testing", deploymentLambdaDeploymentName].sort(),
 		);
 	});
 });
