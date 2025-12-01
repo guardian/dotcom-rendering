@@ -125,6 +125,9 @@ importers:
       '@aws-sdk/client-ssm':
         specifier: 3.621.0
         version: 3.621.0
+      '@guardian/ab-testing-config':
+        specifier: workspace:ab-testing-config
+        version: link:../config
       superstruct:
         specifier: 2.0.2
         version: 2.0.2
@@ -692,7 +695,7 @@ importers:
         version: 6.7.1(eslint@8.57.1)
       eslint-plugin-jsx-expressions:
         specifier: 1.3.1
-        version: 1.3.1(@typescript-eslint/parser@8.1.0(eslint@8.57.1)(typescript@5.5.3))(eslint@8.57.1)(typescript@5.5.3)
+        version: 1.3.1(@typescript-eslint/parser@8.22.0(eslint@8.57.1)(typescript@5.5.3))(eslint@8.57.1)(typescript@5.5.3)
       eslint-plugin-mocha:
         specifier: 10.1.0
         version: 10.1.0(eslint@8.57.1)
@@ -8701,6 +8704,7 @@ packages:
     engines: {node: '>=0.6.0', teleport: '>=0.2.0'}
     deprecated: |-
       You or someone you depend on is using Q, the JavaScript Promise library that gave JavaScript developers strong feelings about promises. They can almost certainly migrate to the native JavaScript promise now. Thank you literally everyone for joining me in this bet against the odds. Be excellent to each other.
+
       (For a CapTP with native promises, see @endo/eventual-send and @endo/captp)
 
   qs@6.13.0:
@@ -15189,7 +15193,7 @@ snapshots:
       react-docgen-typescript: 2.2.2(typescript@5.5.3)
       tslib: 2.6.2
       typescript: 5.5.3
-      webpack: 5.102.1(@swc/core@1.13.5)(esbuild@0.27.0)(webpack-cli@6.0.1)
+      webpack: 5.102.1(@swc/core@1.13.5)(esbuild@0.25.5)(webpack-cli@6.0.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -16076,6 +16080,18 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@typescript-eslint/parser@8.22.0(eslint@8.57.1)(typescript@5.5.3)':
+    dependencies:
+      '@typescript-eslint/scope-manager': 8.22.0
+      '@typescript-eslint/types': 8.22.0
+      '@typescript-eslint/typescript-estree': 8.22.0(typescript@5.5.3)
+      '@typescript-eslint/visitor-keys': 8.22.0
+      debug: 4.4.3(supports-color@8.1.1)
+      eslint: 8.57.1
+      typescript: 5.5.3
+    transitivePeerDependencies:
+      - supports-color
+
   '@typescript-eslint/parser@8.22.0(eslint@9.39.1)(typescript@5.9.3)':
     dependencies:
       '@typescript-eslint/scope-manager': 8.22.0
@@ -16190,6 +16206,20 @@ snapshots:
       semver: 7.7.3
       ts-api-utils: 1.3.0(typescript@5.5.3)
     optionalDependencies:
+      typescript: 5.5.3
+    transitivePeerDependencies:
+      - supports-color
+
+  '@typescript-eslint/typescript-estree@8.22.0(typescript@5.5.3)':
+    dependencies:
+      '@typescript-eslint/types': 8.22.0
+      '@typescript-eslint/visitor-keys': 8.22.0
+      debug: 4.4.3(supports-color@8.1.1)
+      fast-glob: 3.3.3
+      is-glob: 4.0.3
+      minimatch: 9.0.5
+      semver: 7.7.3
+      ts-api-utils: 2.1.0(typescript@5.5.3)
       typescript: 5.5.3
     transitivePeerDependencies:
       - supports-color
@@ -16431,18 +16461,18 @@ snapshots:
 
   '@webpack-cli/configtest@3.0.1(webpack-cli@6.0.1)(webpack@5.102.1)':
     dependencies:
-      webpack: 5.102.1(@swc/core@1.13.5)(esbuild@0.27.0)(webpack-cli@6.0.1)
-      webpack-cli: 6.0.1(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.2)(webpack@5.102.1)
+      webpack: 5.102.1(@swc/core@1.13.5)(esbuild@0.25.5)(webpack-cli@6.0.1)
+      webpack-cli: 6.0.1(webpack-dev-server@5.2.2)(webpack@5.102.1)
 
   '@webpack-cli/info@3.0.1(webpack-cli@6.0.1)(webpack@5.102.1)':
     dependencies:
-      webpack: 5.102.1(@swc/core@1.13.5)(esbuild@0.27.0)(webpack-cli@6.0.1)
-      webpack-cli: 6.0.1(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.2)(webpack@5.102.1)
+      webpack: 5.102.1(@swc/core@1.13.5)(esbuild@0.25.5)(webpack-cli@6.0.1)
+      webpack-cli: 6.0.1(webpack-dev-server@5.2.2)(webpack@5.102.1)
 
   '@webpack-cli/serve@3.0.1(webpack-cli@6.0.1)(webpack-dev-server@5.2.2)(webpack@5.102.1)':
     dependencies:
-      webpack: 5.102.1(@swc/core@1.13.5)(esbuild@0.27.0)(webpack-cli@6.0.1)
-      webpack-cli: 6.0.1(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.2)(webpack@5.102.1)
+      webpack: 5.102.1(@swc/core@1.13.5)(esbuild@0.25.5)(webpack-cli@6.0.1)
+      webpack-cli: 6.0.1(webpack-dev-server@5.2.2)(webpack@5.102.1)
     optionalDependencies:
       webpack-dev-server: 5.2.2(webpack-cli@6.0.1)(webpack@5.102.1)
 
@@ -18214,10 +18244,10 @@ snapshots:
       object.fromentries: 2.0.8
       semver: 6.3.1
 
-  eslint-plugin-jsx-expressions@1.3.1(@typescript-eslint/parser@8.1.0(eslint@8.57.1)(typescript@5.5.3))(eslint@8.57.1)(typescript@5.5.3):
+  eslint-plugin-jsx-expressions@1.3.1(@typescript-eslint/parser@8.22.0(eslint@8.57.1)(typescript@5.5.3))(eslint@8.57.1)(typescript@5.5.3):
     dependencies:
       '@typescript-eslint/experimental-utils': 5.62.0(eslint@8.57.1)(typescript@5.5.3)
-      '@typescript-eslint/parser': 8.1.0(eslint@8.57.1)(typescript@5.5.3)
+      '@typescript-eslint/parser': 8.22.0(eslint@8.57.1)(typescript@5.5.3)
       eslint: 8.57.1
       tsutils: 3.21.0(typescript@5.5.3)
     optionalDependencies:
@@ -19217,7 +19247,7 @@ snapshots:
       pretty-error: 4.0.0
       tapable: 2.3.0
     optionalDependencies:
-      webpack: 5.102.1(@swc/core@1.13.5)(esbuild@0.27.0)(webpack-cli@6.0.1)
+      webpack: 5.102.1(@swc/core@1.13.5)(esbuild@0.25.5)(webpack-cli@6.0.1)
 
   htmlparser2@6.1.0:
     dependencies:
@@ -22465,7 +22495,7 @@ snapshots:
       semver: 7.5.4
       source-map: 0.7.4
       typescript: 5.5.3
-      webpack: 5.102.1(@swc/core@1.13.5)(esbuild@0.27.0)(webpack-cli@6.0.1)
+      webpack: 5.102.1(@swc/core@1.13.5)(esbuild@0.25.5)(webpack-cli@6.0.1)
 
   ts-node@10.9.2(@swc/core@1.13.5)(@types/node@16.18.68)(typescript@5.1.6):
     dependencies:
@@ -22945,7 +22975,7 @@ snapshots:
       range-parser: 1.2.1
       schema-utils: 4.3.3
     optionalDependencies:
-      webpack: 5.102.1(@swc/core@1.13.5)(esbuild@0.27.0)(webpack-cli@6.0.1)
+      webpack: 5.102.1(@swc/core@1.13.5)(esbuild@0.25.5)(webpack-cli@6.0.1)
 
   webpack-dev-middleware@7.4.2(webpack@5.102.1):
     dependencies:
@@ -22956,7 +22986,7 @@ snapshots:
       range-parser: 1.2.1
       schema-utils: 4.3.3
     optionalDependencies:
-      webpack: 5.102.1(@swc/core@1.13.5)(esbuild@0.27.0)(webpack-cli@6.0.1)
+      webpack: 5.102.1(@swc/core@1.13.5)(esbuild@0.25.5)(webpack-cli@6.0.1)
 
   webpack-dev-middleware@7.4.5(webpack@5.102.1):
     dependencies:
@@ -23000,8 +23030,8 @@ snapshots:
       webpack-dev-middleware: 7.4.2(webpack@5.102.1)
       ws: 8.18.3
     optionalDependencies:
-      webpack: 5.102.1(@swc/core@1.13.5)(esbuild@0.27.0)(webpack-cli@6.0.1)
-      webpack-cli: 6.0.1(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.2)(webpack@5.102.1)
+      webpack: 5.102.1(@swc/core@1.13.5)(esbuild@0.25.5)(webpack-cli@6.0.1)
+      webpack-cli: 6.0.1(webpack-dev-server@5.2.2)(webpack@5.102.1)
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -23030,7 +23060,7 @@ snapshots:
   webpack-manifest-plugin@5.0.0(patch_hash=zao44j4xgexeap52664hqknxfu)(webpack@5.102.1):
     dependencies:
       tapable: 2.2.1
-      webpack: 5.102.1(@swc/core@1.13.5)(esbuild@0.27.0)(webpack-cli@6.0.1)
+      webpack: 5.102.1(@swc/core@1.13.5)(esbuild@0.25.5)(webpack-cli@6.0.1)
       webpack-sources: 2.3.1
 
   webpack-merge@6.0.1:

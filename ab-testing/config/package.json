@@ -4,6 +4,10 @@
 	"description": "A/B test definitions and configuration",
 	"main": "index.ts",
 	"type": "module",
+	"exports": {
+		".": "./index.ts",
+		"./lib/*": "./lib/*"
+	},
 	"scripts": {
 		"validate": "node scripts/validation/index.ts",
 		"deploy": "node scripts/deploy/index.ts --mvts=dist/mvts.json --ab-tests=dist/ab-tests.json",

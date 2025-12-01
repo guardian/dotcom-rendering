@@ -4,8 +4,8 @@ import type { CloudFormationCustomResourceEvent, Context } from "aws-lambda";
 import { assert } from "superstruct";
 import { configStruct } from "../../config/lib/config.ts";
 import { FastlyClient } from "../../config/lib/fastly/client.ts";
-import { send } from "./custom-resource-response.ts";
-import { fetchAndDeployArtifacts } from "./deploy.ts";
+import { send } from "./lib/custom-resource-response.ts";
+import { fetchAndDeployArtifacts } from "./lib/deploy.ts";
 
 const getSecureString = async (name: string) => {
 	const ssmClient = new SSMClient({ region: "eu-west-1" });

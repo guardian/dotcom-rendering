@@ -5,8 +5,8 @@
 	"main": "config/index.ts",
 	"type": "module",
 	"scripts": {
-		"test": "node --test --test-reporter spec cdk/*/*.test.ts",
-		"test-update": "node --test --test-reporter spec --test-update-snapshots cdk/*/*.test.ts",
+		"test": "node --test --test-reporter spec ./**/*.test.ts",
+		"test-update": "node --test --test-reporter spec --test-update-snapshots ./**/*.test.ts",
 		"synth": "cdk synth --path-metadata false --version-reporting false",
 		"lint": "eslint .",
 		"prettier:check": "prettier . --check --cache",

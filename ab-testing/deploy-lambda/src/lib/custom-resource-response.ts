@@ -25,6 +25,8 @@ const send = async (
 		Reason:
 			"See the details in CloudWatch Log Stream: " +
 			context.logStreamName,
+		// This is copied from the AWS docs example, it needs to be unique for each resource
+		// The logStreamName is unique per invocation so using that works
 		PhysicalResourceId: physicalResourceId ?? context.logStreamName,
 		StackId: event.StackId,
 		RequestId: event.RequestId,

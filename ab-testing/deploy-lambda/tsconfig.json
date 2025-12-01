@@ -2,6 +2,7 @@
 	"extends": "@guardian/tsconfig/tsconfig.json",
 	"compilerOptions": {
 		"allowImportingTsExtensions": true,
+		"erasableSyntaxOnly": false,
 		"noEmit": true
 	},
 	"exclude": ["node_modules"]
