@@ -12,7 +12,7 @@ import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { CrosswordComponent } from '../components/CrosswordComponent.importable';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
-import { EmailSignUpWrapper } from '../components/EmailSignUpWrapper';
+import { EmailSignUpWrapper } from '../components/EmailSignUpWrapper.importable';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
 import { ExplainerAtom } from '../components/ExplainerAtom';
 import { Figure } from '../components/Figure';
@@ -555,7 +555,11 @@ export const renderElement = ({
 				theme: element.newsletter.theme,
 			};
 			if (isListElement || isTimeline) return null;
-			return <EmailSignUpWrapper {...emailSignUpProps} />;
+			return (
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<EmailSignUpWrapper {...emailSignUpProps} />
+				</Island>
+			);
 		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
 			return renderAds && <AdPlaceholder />;
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':

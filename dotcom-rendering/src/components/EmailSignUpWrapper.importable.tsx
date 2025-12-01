@@ -16,6 +16,16 @@ interface EmailSignUpWrapperProps extends EmailSignUpProps {
 	hidePrivacyMessage?: boolean;
 }
 
+/**
+ * EmailSignUpWrapper as an importable island component.
+ *
+ * This component needs to be hydrated client-side because it uses
+ * the useNewsletterSubscription hook which depends on auth status
+ * to determine if the user is already subscribed to the newsletter.
+ *
+ * If the user is signed in and already subscribed, this component
+ * will return null (hide the signup form).
+ */
 export const EmailSignUpWrapper = ({
 	index,
 	listId,

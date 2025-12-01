@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { useEffect } from 'react';
 import type { EmailSignUpProps } from './EmailSignup';
-import { EmailSignUpWrapper } from './EmailSignUpWrapper';
+import { EmailSignUpWrapper } from './EmailSignUpWrapper.importable';
 
 const meta: Meta<typeof EmailSignUpWrapper> = {
 	title: 'Components/EmailSignUpWrapper',
