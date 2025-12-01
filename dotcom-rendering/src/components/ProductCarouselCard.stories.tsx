@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { ProductCarouselCard } from './ProductCarouselCard';
 import { productImage } from '../../fixtures/manual/productImage';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { ProductBlockElement } from '../types/content';
+import { ProductCarouselCard } from './ProductCarouselCard';
 
 const product = {
 	_type: 'model.dotcomrendering.pageElements.ProductBlockElement',

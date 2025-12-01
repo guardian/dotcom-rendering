@@ -8,9 +8,9 @@ import {
 	textSansBold15,
 	textSansBold17,
 } from '@guardian/source/foundations';
+import type { ArticleFormat } from '../lib/articleFormat';
+import type { ProductBlockElement } from '../types/content';
 import { ProductCardButtons } from './ProductCardButtons';
-import { ProductBlockElement } from '../types/content';
-import { ArticleFormat } from '../lib/articleFormat';
 import { ProductCardImage } from './ProductCardImage';
 
 export type ProductCarouselCardProps = {
@@ -96,6 +96,9 @@ export const ProductCarouselCard = ({
 	showReadMore,
 }: ProductCarouselCardProps) => {
 	const hasHeading = !!product.primaryHeadingHtml;
+
+	const firstCta = product.productCtas[0];
+
 	return (
 		<div css={baseCard}>
 			{hasHeading && (
@@ -127,21 +130,13 @@ export const ProductCarouselCard = ({
 					<div css={productNameStyle}>{product.productName}</div>
 				</div>
 			)}
-			<div css={priceStyle}>
-				{product.productCtas && product.productCtas.length > 0
-					? product.productCtas[0]?.price ?? 'Price unavailable'
-					: 'Price unavailable'}
-			</div>
+			<div css={priceStyle}>{firstCta?.price ?? 'Price unavailable'}</div>
+
 			<div css={buttonWrapper}>
 				<ProductCardButtons
-					productCtas={product.productCtas?.slice(0, 1) ?? []}
+					productCtas={firstCta ? [firstCta] : []}
 					buttonLabelOverride={
-						product.productCtas && product.productCtas.length > 0
-							? `Buy at ${
-									product.productCtas[0]?.retailer ??
-									'retailer'
-							  }`
-							: 'Buy' //TODO better fallback?
+						firstCta ? `Buy at ${firstCta.retailer}` : 'Buy'
 					}
 				/>
 			</div>

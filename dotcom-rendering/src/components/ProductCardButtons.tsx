@@ -15,7 +15,7 @@ export const ProductCardButtons = ({
 }) => (
 	<>
 		{productCtas.map((productCta, index) => {
-			const label = buttonLabelOverride || getLabel(productCta);
+			const label = buttonLabelOverride ?? getLabel(productCta);
 			return (
 				<ProductLinkButton
 					key={label}
