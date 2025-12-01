@@ -435,6 +435,7 @@ type FullWidthCardLayoutProps = {
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 	enableHls?: boolean;
+	SCStyle?: boolean;
 };
 
 const FullWidthCardLayout = ({
@@ -450,6 +451,7 @@ const FullWidthCardLayout = ({
 	collectionId,
 	showLabsRedesign,
 	enableHls,
+	SCStyle,
 }: FullWidthCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -527,6 +529,7 @@ const FullWidthCardLayout = ({
 					showLabsRedesign={showLabsRedesign}
 					subtitleSize={subtitleSize}
 					enableHls={enableHls}
+					SCStyle={SCStyle}
 				/>
 			</LI>
 		</UL>
@@ -547,6 +550,7 @@ type HalfWidthCardLayoutProps = {
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 	enableHls?: boolean;
+	SCStyle?: boolean;
 };
 
 const HalfWidthCardLayout = ({
@@ -562,6 +566,7 @@ const HalfWidthCardLayout = ({
 	containerLevel,
 	showLabsRedesign,
 	enableHls,
+	SCStyle,
 }: HalfWidthCardLayoutProps) => {
 	if (cards.length === 0) return null;
 
@@ -618,6 +623,7 @@ const HalfWidthCardLayout = ({
 							canPlayInline={false}
 							showLabsRedesign={showLabsRedesign}
 							enableHls={enableHls}
+							SCStyle={SCStyle}
 						/>
 					</LI>
 				);
@@ -693,6 +699,7 @@ export const FlexibleGeneral = ({
 								collectionId={collectionId}
 								showLabsRedesign={showLabsRedesign}
 								enableHls={enableHls}
+								SCStyle={SCStyle}
 							/>
 						);
 
@@ -714,6 +721,7 @@ export const FlexibleGeneral = ({
 								containerLevel={containerLevel}
 								showLabsRedesign={showLabsRedesign}
 								enableHls={enableHls}
+								SCStyle={SCStyle}
 							/>
 						);
 				}
