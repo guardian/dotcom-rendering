@@ -1,5 +1,10 @@
+import type { FEAspectRatio } from '../frontend/feFront';
 import type { ArticleFormat } from '../lib/articleFormat';
-import { convertAssetsToVideoSources, getSubtitleAsset } from '../lib/video';
+import {
+	convertAssetsToVideoSources,
+	getFirstVideoAsset,
+	getSubtitleAsset,
+} from '../lib/video';
 import type { MediaAtomBlockElement } from '../types/content';
 import { Caption } from './Caption';
 import { SelfHostedVideo } from './SelfHostedVideo.importable';
@@ -17,6 +22,7 @@ export const LoopVideoInArticle = ({
 }: LoopVideoInArticleProps) => {
 	const posterImageUrl = element.posterImage?.[0]?.url;
 	const caption = element.title;
+	const firstVideoAsset = getFirstVideoAsset(element.assets);
 
 	if (!posterImageUrl) {
 		return null;
@@ -28,10 +34,12 @@ export const LoopVideoInArticle = ({
 				atomId={element.id}
 				fallbackImage={posterImageUrl}
 				fallbackImageAlt={caption}
-				fallbackImageAspectRatio="5:4"
+				fallbackImageAspectRatio={
+					(firstVideoAsset?.aspectRatio ?? '5:4') as FEAspectRatio
+				}
 				fallbackImageLoading="lazy"
 				fallbackImageSize="small"
-				height={400}
+				height={firstVideoAsset?.dimensions?.height ?? 400}
 				linkTo="Article-embed-MediaAtomBlockElement"
 				posterImage={posterImageUrl}
 				sources={convertAssetsToVideoSources(element.assets)}
@@ -39,7 +47,7 @@ export const LoopVideoInArticle = ({
 				subtitleSource={getSubtitleAsset(element.assets)}
 				videoStyle="Loop"
 				uniqueId={element.id}
-				width={500}
+				width={firstVideoAsset?.dimensions?.width ?? 500}
 			/>
 			{!!caption && (
 				<Caption

@@ -49,3 +49,9 @@ export const convertAssetsToVideoSources = (assets: VideoAssets[]): Source[] =>
 
 export const getSubtitleAsset = (assets: VideoAssets[]): string | undefined =>
 	assets.find((asset) => asset.mimeType === 'text/vtt')?.url;
+
+export const getFirstVideoAsset = (
+	assets: VideoAssets[],
+): VideoAssets | undefined => {
+	return assets.find((asset) => isSupportedMimeType(asset.mimeType));
+};

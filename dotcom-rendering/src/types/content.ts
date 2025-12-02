@@ -944,6 +944,11 @@ export interface Image {
 export interface VideoAssets {
 	url: string;
 	mimeType?: string;
+	dimensions?: {
+		width: number;
+		height: number;
+	};
+	aspectRatio?: string;
 	fields?: {
 		source?: string;
 		embeddable?: string;
