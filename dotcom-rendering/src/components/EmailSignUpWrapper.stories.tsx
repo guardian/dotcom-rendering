@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { useEffect } from 'react';
-import type { EmailSignUpProps } from './EmailSignup';
+import {
+	signedInDecorator,
+	signedOutDecorator,
+} from '../../.storybook/decorators/authDecorator';
 import { EmailSignUpWrapper } from './EmailSignUpWrapper.importable';
 
 const meta: Meta<typeof EmailSignUpWrapper> = {
@@ -22,11 +24,13 @@ const defaultArgs = {
 	theme: 'sport',
 } satisfies Story['args'];
 
+// Default story - signed out user sees the signup form
 export const DefaultStory: Story = {
 	args: {
 		hidePrivacyMessage: true,
 		...defaultArgs,
 	},
+	decorators: [signedOutDecorator],
 };
 
 export const DefaultStoryWithPrivacy: Story = {
@@ -34,57 +38,26 @@ export const DefaultStoryWithPrivacy: Story = {
 		hidePrivacyMessage: false,
 		...defaultArgs,
 	},
+	decorators: [signedOutDecorator],
 };
 
-// Simulates when user is NOT subscribed - signup form is visible
-export const NotSubscribedState: Story = {
+// User is signed in but NOT subscribed - signup form is visible
+export const SignedInNotSubscribed: Story = {
 	args: {
 		hidePrivacyMessage: false,
 		...defaultArgs,
 	},
-	decorators: [(Story) => <Story />],
+	decorators: [signedInDecorator([])],
 };
 
-// Simulates when user IS subscribed - component returns null
-interface EmailSignUpWrapperProps extends EmailSignUpProps {
-	index: number;
-	listId: number;
-	identityName: string;
-	successDescription: string;
-	hidePrivacyMessage?: boolean;
-}
-
-const AlreadySubscribedWrapper = (props: EmailSignUpWrapperProps) => {
-	// Directly use the hook logic - in a real scenario it would return true
-	// For storybook, we simulate by just returning null
-	const isSubscribed = true; // Simulating hook return value
-
-	useEffect(() => {
-		const idApiUrl =
-			typeof window !== 'undefined'
-				? window.guardian?.config?.page?.idApiUrl
-				: undefined;
-		console.log(
-			'AlreadySubscribedState: useNewsletterSubscription would return true',
-		);
-		console.log('Props:', { listId: props.listId, idApiUrl });
-	}, [props.listId]);
-
-	if (isSubscribed) {
-		return null;
-	}
-
-	return <EmailSignUpWrapper {...props} />;
-};
-
-export const AlreadySubscribedState = {
-	render: (args: EmailSignUpWrapperProps) => (
-		<AlreadySubscribedWrapper {...args} />
-	),
+// User is signed in and IS subscribed - component returns null (hidden)
+// Note: This story will render nothing as the component returns null when subscribed
+export const SignedInAlreadySubscribed: Story = {
 	args: {
-		...defaultArgs,
 		hidePrivacyMessage: false,
+		...defaultArgs,
 	},
-} satisfies Story;
+	decorators: [signedInDecorator([{ listId: String(defaultArgs.listId) }])],
+};
 
 export default meta;

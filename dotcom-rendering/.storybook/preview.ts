@@ -64,6 +64,7 @@ style.appendChild(document.createTextNode(css));
 		},
 		page: {
 			ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
+			idApiUrl: 'https://idapi.theguardian.com',
 		},
 		tests: {},
 		switches: {},
