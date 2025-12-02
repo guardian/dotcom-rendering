@@ -1,4 +1,5 @@
 import { renderHook, waitFor } from '@testing-library/react';
+import { useAuthStatus } from './useAuthStatus';
 import { useNewsletterSubscription } from './useNewsletterSubscription';
 
 // Mock the useAuthStatus hook
@@ -15,8 +16,6 @@ jest.mock('./identity', () => ({
 		},
 	})),
 }));
-
-import { useAuthStatus } from './useAuthStatus';
 
 const mockUseAuthStatus = useAuthStatus as jest.MockedFunction<
 	typeof useAuthStatus
