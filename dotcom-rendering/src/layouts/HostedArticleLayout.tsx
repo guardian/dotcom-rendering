@@ -18,7 +18,7 @@ const border = css`
 	border: 1px solid black;
 `;
 
-export const HostedLayout = (props: WebProps | AppProps) => {
+export const HostedArticleLayout = (props: WebProps | AppProps) => {
 	return (
 		<>
 			{props.renderingTarget === 'Web' ? 'Masthead' : null}

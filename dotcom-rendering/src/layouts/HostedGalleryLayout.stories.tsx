@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
-import { HostedLayout } from './HostedLayout';
+import { HostedGalleryLayout } from './HostedGalleryLayout';
 
 const meta = {
-	title: 'Layouts/Hosted',
-	component: HostedLayout,
+	title: 'Layouts/HostedGallery',
+	component: HostedGalleryLayout,
 	parameters: {
 		chromatic: {
 			modes: {
@@ -12,7 +12,7 @@ const meta = {
 			},
 		},
 	},
-} satisfies Meta<typeof HostedLayout>;
+} satisfies Meta<typeof HostedGalleryLayout>;
 
 export default meta;
 
