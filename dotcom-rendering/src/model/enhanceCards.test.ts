@@ -1,12 +1,7 @@
 import type { FEMediaAsset, FEMediaAtom } from '../frontend/feFront';
 import { getActiveMediaAtom } from './enhanceCards';
 
-/**
- * Why has this test suite been skipped?
- *
- * M3U8s have been disabled whilst a chrome hls bug is investigated.
- */
-describe.skip('Enhance Cards', () => {
+describe('Enhance Cards', () => {
 	it('prioritises m3u8 assets over MP4 assets', () => {
 		const videoReplace = true;
 		const assets: FEMediaAsset[] = [
