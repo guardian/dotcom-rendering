@@ -184,11 +184,11 @@ export const SelfHostedVideoPlayer = forwardRef(
 		}-${atomId}`;
 
 		/**
-		 * We need CORS enabled to show subtitles on a video as it allows access to the VTT file.
+		 * To show subtitles, CORS must be enabled as it allows access to the VTT file.
 		 *
-		 * We don't want a client to not request CORS headers on a video request, then to request
-		 * the same video with CORS headers, as the response could be cached without the headers, which
-		 * will result in the video failing to load. Therefore, we always request CORS headers in production.
+		 * CORS should be enabled in production so that requests are consistent with respect to CORS.
+		 * If a client requests a video without CORS, then later made a request to the same video with
+		 * CORS, then this request could fail as the response could be cached without the headers.
 		 */
 		const requestCORS =
 			showSubtitles || process.env.NODE_ENV === 'production';

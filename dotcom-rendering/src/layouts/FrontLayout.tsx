@@ -139,7 +139,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
-	/** We allow the labs redesign to be shown if:
+	/**
+	 * We allow the labs redesign to be shown if:
 	 * - the feature switch is ON
 	 * OR
 	 * - the user is opted into the 0% server side test
