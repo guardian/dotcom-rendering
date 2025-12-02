@@ -500,10 +500,6 @@ export const renderElement = ({
 					- However they need to display in a different video player
 				- We need to differentiate between the two forms of video
 					- We can do this by interrogating the atom's metadata, which includes the new attribute `videoPlayerFormat`
-
-				- Note: we'll probably extend this functionality to handle new 'Cinemagraph' videos
-					- These may use the looping video, or yet another new, video player
-					- But they will still be Media Atoms
 			*/
 			if (element.videoPlayerFormat === 'Loop') {
 				return (
