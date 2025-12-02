@@ -507,18 +507,11 @@ export const renderElement = ({
 			*/
 			if (element.videoPlayerFormat === 'Loop') {
 				return (
-					<>
-						<Island
-							priority="critical"
-							defer={{ until: 'visible' }}
-						>
-							<LoopVideoInArticle
-								element={element}
-								format={format}
-								isMainMedia={isMainMedia}
-							/>
-						</Island>
-					</>
+					<LoopVideoInArticle
+						element={element}
+						format={format}
+						isMainMedia={isMainMedia}
+					/>
 				);
 			} else {
 				return (
