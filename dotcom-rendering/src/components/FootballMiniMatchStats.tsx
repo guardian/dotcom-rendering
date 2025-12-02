@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette } from '@guardian/source/foundations';
+import { from, palette } from '@guardian/source/foundations';
 import {
 	LinkButton,
 	SvgArrowRightStraight,
@@ -10,6 +10,19 @@ const containerCss = css`
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
+`;
+
+const buttonTextCss = css`
+	${from.desktop} {
+		display: none;
+	}
+`;
+
+const buttonTextShortCss = css`
+	display: none;
+	${from.desktop} {
+		display: inline;
+	}
 `;
 
 type FootballTeam = {
@@ -62,7 +75,8 @@ export const FootballMiniMatchStats = ({
 				iconSide="right"
 				theme={{ backgroundPrimary: palette.sport[400] }}
 			>
-				More stats, line-ups and tables
+				<span css={buttonTextCss}>More stats, line-ups and tables</span>
+				<span css={buttonTextShortCss}>Stats and line ups</span>
 			</LinkButton>
 		</div>
 	);

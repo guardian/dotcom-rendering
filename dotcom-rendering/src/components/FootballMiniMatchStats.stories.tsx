@@ -1,26 +1,49 @@
 import { css } from '@emotion/react';
-import { palette, space } from '@guardian/source/foundations';
+import { breakpoints, from, palette } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { FootballMiniMatchStats } from './FootballMiniMatchStats';
+
+const gridCss = css`
+	background-color: ${palette.neutral[97]};
+	/**
+	 * Extremely simplified live blog grid layout as we're only interested in
+	 * the 240px wide left column added at the desktop breakpoint.
+	 * dotcom-rendering/src/layouts/LiveLayout.tsx
+	 */
+	${from.desktop} {
+		display: grid;
+		grid-column-gap: 20px;
+		grid-template-columns: 240px 1fr;
+	}
+`;
+
+const containerCss = css`
+	padding: 10px;
+	${from.desktop} {
+		padding-left: 20px;
+		padding-right: 0;
+	}
+`;
 
 const meta = {
 	title: 'Components/Football Mini Match Stats',
 	component: FootballMiniMatchStats,
 	decorators: [
 		(Story) => (
-			<div
-				css={css`
-					padding: ${space[4]}px;
-					background-color: ${palette.neutral[97]};
-				`}
-			>
-				<Story />
+			<div css={gridCss}>
+				<div css={containerCss}>
+					<Story />
+				</div>
 			</div>
 		),
 	],
 	parameters: {
-		viewport: {
-			defaultViewport: 'mobileMedium',
+		chromatic: {
+			viewports: [
+				breakpoints.mobileMedium,
+				breakpoints.tablet,
+				breakpoints.wide,
+			],
 		},
 	},
 } satisfies Meta<typeof FootballMiniMatchStats>;
