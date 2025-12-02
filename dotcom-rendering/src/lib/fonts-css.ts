@@ -8,16 +8,17 @@ type FontFamily =
 
 type FontStyle = 'normal' | 'italic';
 
-interface FontDisplay {
+export interface FontDisplay {
 	family: FontFamily;
 	woff2: string;
 	woff: string;
 	ttf: string;
 	weight: number;
 	style: FontStyle;
+	uniqueName: string;
 }
 
-const fontList: FontDisplay[] = [
+export const fontList: FontDisplay[] = [
 	// GH Guardian Headline, with legacy family name of Guardian Egyptian Web
 	{
 		family: 'GH Guardian Headline',
@@ -26,6 +27,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-Light.ttf',
 		weight: 300,
 		style: 'normal',
+		uniqueName: 'GHGuardianHeadline-Light',
 	},
 	{
 		family: 'Guardian Egyptian Web',
@@ -34,6 +36,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-Light.ttf',
 		weight: 300,
 		style: 'normal',
+		uniqueName: 'GuardianEgyptian-Light',
 	},
 	{
 		family: 'GH Guardian Headline',
@@ -42,6 +45,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-LightItalic.ttf',
 		weight: 300,
 		style: 'italic',
+		uniqueName: 'GHGuardianHeadline-LightItalic',
 	},
 	{
 		family: 'Guardian Egyptian Web',
@@ -50,6 +54,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-LightItalic.ttf',
 		weight: 300,
 		style: 'italic',
+		uniqueName: 'GuardianEgyptian-LightItalic',
 	},
 	{
 		family: 'GH Guardian Headline',
@@ -58,6 +63,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-Medium.ttf',
 		weight: 500,
 		style: 'normal',
+		uniqueName: 'GHGuardianHeadline-Medium',
 	},
 	{
 		family: 'Guardian Egyptian Web',
@@ -66,6 +72,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-Medium.ttf',
 		weight: 500,
 		style: 'normal',
+		uniqueName: 'GuardianEgyptian-Medium',
 	},
 	{
 		family: 'GH Guardian Headline',
@@ -74,6 +81,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-MediumItalic.ttf',
 		weight: 500,
 		style: 'italic',
+		uniqueName: 'GHGuardianHeadline-MediumItalic',
 	},
 	{
 		family: 'Guardian Egyptian Web',
@@ -82,6 +90,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-MediumItalic.ttf',
 		weight: 500,
 		style: 'italic',
+		uniqueName: 'GuardianEgyptian-MediumItalic',
 	},
 	{
 		family: 'GH Guardian Headline',
@@ -90,6 +99,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-Bold.ttf',
 		weight: 700,
 		style: 'normal',
+		uniqueName: 'GHGuardianHeadline-Bold',
 	},
 	{
 		family: 'Guardian Egyptian Web',
@@ -98,6 +108,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-Bold.ttf',
 		weight: 700,
 		style: 'normal',
+		uniqueName: 'GuardianEgyptian-Bold',
 	},
 	{
 		family: 'GH Guardian Headline',
@@ -106,6 +117,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-BoldItalic.ttf',
 		weight: 700,
 		style: 'italic',
+		uniqueName: 'GHGuardianHeadline-BoldItalic',
 	},
 	{
 		family: 'Guardian Egyptian Web',
@@ -114,6 +126,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-BoldItalic.ttf',
 		weight: 700,
 		style: 'italic',
+		uniqueName: 'GuardianEgyptian-BoldItalic',
 	},
 	// GuardianTextEgyptian, with legacy family name of Guardian Text Egyptian Web
 	{
@@ -123,6 +136,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-Regular.ttf',
 		weight: 400,
 		style: 'normal',
+		uniqueName: 'GuardianTextEgyptian-Regular',
 	},
 	{
 		family: 'Guardian Text Egyptian Web',
@@ -131,6 +145,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-Regular.ttf',
 		weight: 400,
 		style: 'normal',
+		uniqueName: 'GuardianTextEgyptianWeb-Regular',
 	},
 	{
 		family: 'GuardianTextEgyptian',
@@ -139,6 +154,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-RegularItalic.ttf',
 		weight: 400,
 		style: 'italic',
+		uniqueName: 'GuardianTextEgyptian-RegularItalic',
 	},
 	{
 		family: 'Guardian Text Egyptian Web',
@@ -147,6 +163,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-RegularItalic.ttf',
 		weight: 400,
 		style: 'italic',
+		uniqueName: 'GuardianTextEgyptianWeb-RegularItalic',
 	},
 	{
 		family: 'GuardianTextEgyptian',
@@ -155,6 +172,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-Bold.ttf',
 		weight: 700,
 		style: 'normal',
+		uniqueName: 'GuardianTextEgyptian-Bold',
 	},
 	{
 		family: 'Guardian Text Egyptian Web',
@@ -163,6 +181,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-Bold.ttf',
 		weight: 700,
 		style: 'normal',
+		uniqueName: 'GuardianTextEgyptianWeb-Bold',
 	},
 	{
 		family: 'GuardianTextEgyptian',
@@ -171,6 +190,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-BoldItalic.ttf',
 		weight: 700,
 		style: 'italic',
+		uniqueName: 'GuardianTextEgyptian-BoldItalic',
 	},
 	{
 		family: 'Guardian Text Egyptian Web',
@@ -179,6 +199,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-BoldItalic.ttf',
 		weight: 700,
 		style: 'italic',
+		uniqueName: 'GuardianTextEgyptianWeb-BoldItalic',
 	},
 	// GuardianTextSans, with legacy family name of Guardian Text Sans Web
 	{
@@ -188,6 +209,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-Regular.ttf',
 		weight: 400,
 		style: 'normal',
+		uniqueName: 'GuardianTextSans-Regular',
 	},
 	{
 		family: 'Guardian Text Sans Web',
@@ -196,6 +218,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-Regular.ttf',
 		weight: 400,
 		style: 'normal',
+		uniqueName: 'GuardianTextSansWeb-Regular',
 	},
 	{
 		family: 'GuardianTextSans',
@@ -204,6 +227,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-RegularItalic.ttf',
 		weight: 400,
 		style: 'italic',
+		uniqueName: 'GuardianTextSans-RegularItalic',
 	},
 	{
 		family: 'Guardian Text Sans Web',
@@ -212,6 +236,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-RegularItalic.ttf',
 		weight: 400,
 		style: 'italic',
+		uniqueName: 'GuardianTextSansWeb-RegularItalic',
 	},
 	{
 		family: 'GuardianTextSans',
@@ -220,6 +245,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-Bold.ttf',
 		weight: 700,
 		style: 'normal',
+		uniqueName: 'GuardianTextSans-Bold',
 	},
 	{
 		family: 'Guardian Text Sans Web',
@@ -228,6 +254,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-Bold.ttf',
 		weight: 700,
 		style: 'normal',
+		uniqueName: 'GuardianTextSansWeb-Bold',
 	},
 	{
 		family: 'GuardianTextSans',
@@ -236,6 +263,7 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-BoldItalic.ttf',
 		weight: 700,
 		style: 'italic',
+		uniqueName: 'GuardianTextSans-BoldItalic',
 	},
 	{
 		family: 'Guardian Text Sans Web',
@@ -244,16 +272,14 @@ const fontList: FontDisplay[] = [
 		ttf: 'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-BoldItalic.ttf',
 		weight: 700,
 		style: 'italic',
+		uniqueName: 'GuardianTextSansWeb-BoldItalic',
 	},
 ];
 
-const getFontUrl = (path: string): string =>
-	`https://assets.guim.co.uk/static/frontend/${path}`;
+const getFontUrl = (filePath: string): string =>
+	`https://assets.guim.co.uk/static/frontend/${filePath}`;
 
-export const rawFontsCss = fontList
-	.map(
-		(font) => `
-@font-face {
+const getFontFaceCss = (font: FontDisplay): string => `@font-face {
 	font-family: "${font.family}";
 	src: url(${getFontUrl(font.woff2)}) format("woff2"),
 			url(${getFontUrl(font.woff)}) format("woff"),
@@ -261,7 +287,18 @@ export const rawFontsCss = fontList
 	font-weight: ${font.weight};
 	font-style: ${font.style};
 	font-display: swap;
-}
-`,
-	)
+}`;
+
+export const rawFontsCss = fontList.map(getFontFaceCss).join('\n');
+
+export const rawFontsCssWithClassNames = fontList
+	.map((font) => {
+		return `
+		${getFontFaceCss(font)}
+		.${font.uniqueName} {
+			font-family: "${font.family}";
+			font-weight: ${font.weight};
+			font-style: ${font.style};
+		}`;
+	})
 	.join('\n');

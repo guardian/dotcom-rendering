@@ -67,7 +67,7 @@ const tagPageWebTitle = (tagPage: FETagPage) => {
 	}
 };
 
-export const getBadgeUrl = (tag: FETagType): string | undefined => {
+export const getPaId = (tag: FETagType): string | undefined => {
 	const { references } = tag.properties;
 
 	if (!references) return undefined;
@@ -77,8 +77,33 @@ export const getBadgeUrl = (tag: FETagType): string | undefined => {
 	);
 	if (!footballTeamRef) return undefined;
 
-	const teamId = footballTeamRef.id.split('/').slice(1).join('/');
-	return `https://sport.guim.co.uk/football/crests/120/${teamId}.png`;
+	return footballTeamRef.id.split('/').slice(1).join('/');
+};
+
+const headerImage = (tags: FETagType[]): TagPage['header']['image'] => {
+	const firstTag = tags[0];
+
+	if (firstTag === undefined) {
+		return undefined;
+	}
+
+	if (firstTag.properties.bylineImageUrl !== undefined) {
+		return {
+			kind: 'byline',
+			url: firstTag.properties.bylineImageUrl,
+		};
+	}
+
+	const teamId = getPaId(firstTag);
+
+	if (teamId !== undefined) {
+		return {
+			kind: 'footballCrest',
+			teamId,
+		};
+	}
+
+	return undefined;
 };
 
 const enhanceTagPage = (body: unknown): TagPage => {
@@ -128,11 +153,7 @@ const enhanceTagPage = (body: unknown): TagPage => {
 			description:
 				data.tags.tags[0]?.properties.bio ??
 				data.tags.tags[0]?.properties.description,
-			image:
-				data.tags.tags[0]?.properties.bylineImageUrl ??
-				(data.tags.tags[0]
-					? getBadgeUrl(data.tags.tags[0])
-					: undefined),
+			image: headerImage(data.tags.tags),
 		},
 		branding: tagPageBranding,
 		canonicalUrl: data.canonicalUrl,

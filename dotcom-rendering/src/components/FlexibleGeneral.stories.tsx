@@ -6,7 +6,8 @@ import {
 	galleryTrails,
 	getSublinks,
 	opinionTrails,
-	selfHostedVideoCard,
+	selfHostedVerticalVideoCard,
+	selfHostedVideo54Card,
 	slideshowCard,
 	trails,
 	videoTrails,
@@ -542,14 +543,24 @@ export const ImmersiveCardsSplashAndStandard: Story = {
 	},
 };
 
-export const SelfHostedVideoCards: Story = {
-	name: 'Self-hosted video cards',
+export const SelfHostedVideo5to4Cards: Story = {
+	name: 'Self-hosted 5:4 video cards',
 	args: {
-		frontSectionTitle: 'Self-hosted video cards',
+		frontSectionTitle: 'Self-hosted 5:4 video cards',
 		groupedTrails: {
 			...emptyGroupedTrails,
-			splash: [selfHostedVideoCard],
-			standard: [selfHostedVideoCard], // Self-hosted video is disabled at standard card size
+			splash: [selfHostedVideo54Card],
+			standard: [selfHostedVideo54Card], // Self-hosted video is disabled at standard card size
+		},
+	},
+};
+export const SelfHostedVerticalVideoCards: Story = {
+	name: 'Self-hosted vertical video cards',
+	args: {
+		frontSectionTitle: 'Self-hosted vertical video cards',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			splash: [selfHostedVerticalVideoCard],
 		},
 	},
 };

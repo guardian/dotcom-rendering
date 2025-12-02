@@ -145,6 +145,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	design,
 	countryCode,
 	promoCodes,
+	isCollapsible,
 }: BannerRenderProps): JSX.Element => {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
 
@@ -163,15 +164,16 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		ChoiceCard | undefined
 	>(defaultChoiceCard);
 
-	const isCollapsableBanner =
-		tracking.abTestVariant.includes('COLLAPSABLE_V1') ||
-		tracking.abTestVariant.includes('COLLAPSABLE_V2_MAYBE_LATER');
+	const isCollapsableBanner: boolean =
+		isCollapsible ??
+		(tracking.abTestVariant.includes('COLLAPSABLE_V1') ||
+			tracking.abTestVariant.includes('COLLAPSABLE_V2_MAYBE_LATER'));
 
-	const contextClassName = tracking.abTestVariant.includes(
-		'COLLAPSABLE_V2_MAYBE_LATER',
-	)
-		? 'maybe-later'
-		: '';
+	const contextClassName =
+		isCollapsible ||
+		tracking.abTestVariant.includes('COLLAPSABLE_V2_MAYBE_LATER')
+			? 'maybe-later'
+			: '';
 
 	const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 

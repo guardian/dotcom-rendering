@@ -164,6 +164,11 @@ export const canShowSignInGatePortal = async ({
 	sectionId,
 	tags,
 }: CanShowSignInGateProps): Promise<CanShowResult<AuxiaGateDisplayData>> => {
+	if (!window.guardian.config.switches.signInGate) {
+		// Gates are disabled from the Frontend switchboard
+		return Promise.resolve({ show: false });
+	}
+
 	// Check if the sign-in gate placeholder exists in the DOM
 	const targetElement = document.getElementById('sign-in-gate');
 
