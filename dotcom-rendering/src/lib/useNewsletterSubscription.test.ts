@@ -171,9 +171,14 @@ describe('useNewsletterSubscription', () => {
 	});
 
 	it('should return false when fetch throws an error', async () => {
-		const consoleSpy = jest
-			.spyOn(console, 'error')
-			.mockImplementation(() => {});
+		const sentryReportErrorMock = jest.fn();
+		window.guardian = {
+			modules: {
+				sentry: {
+					reportError: sentryReportErrorMock,
+				},
+			},
+		} as unknown as typeof window.guardian;
 
 		mockUseAuthStatus.mockReturnValue({
 			kind: 'SignedIn',
@@ -193,11 +198,9 @@ describe('useNewsletterSubscription', () => {
 			expect(result.current).toBe(false);
 		});
 
-		expect(consoleSpy).toHaveBeenCalledWith(
-			'Error fetching newsletters:',
+		expect(sentryReportErrorMock).toHaveBeenCalledWith(
 			expect.any(Error),
+			'errors-fetching-newsletters',
 		);
-
-		consoleSpy.mockRestore();
 	});
 });
