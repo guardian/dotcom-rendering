@@ -28,35 +28,35 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Possession = {
+export const Default = {
 	args: {
-		label: 'Possession',
+		label: 'Goal Attempts',
 		home: {
 			teamName: 'Manchester United',
 			teamColour: '#da020e',
-			value: 39,
+			value: 7,
 		},
 		away: {
 			teamName: 'Arsenal',
 			teamColour: '#023474',
-			value: 61,
+			value: 4,
 		},
-		showPercentage: true,
 	},
 } satisfies Story;
 
-export const GoalAttempts = {
+export const ShownAsPercentage = {
 	args: {
-		label: 'Goal Attempts',
+		label: 'Possession',
 		home: {
 			teamName: 'West Ham',
 			teamColour: '#722642',
-			value: 7,
+			value: 39,
 		},
 		away: {
 			teamName: 'Newcastle',
 			teamColour: '#383838',
-			value: 4,
+			value: 61,
 		},
+		showPercentage: true,
 	},
 } satisfies Story;
