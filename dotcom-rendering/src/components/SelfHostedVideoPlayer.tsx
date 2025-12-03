@@ -122,6 +122,7 @@ type Props = {
 	posterImage?: string;
 	preloadPartialData: boolean;
 	showPlayIcon: boolean;
+	enableCors?: boolean;
 	subtitleSource?: string;
 	subtitleSize?: SubtitleSize;
 	/* used in custom subtitle overlays */
@@ -162,6 +163,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			AudioIcon,
 			preloadPartialData,
 			showPlayIcon,
+			enableCors = true,
 			subtitleSource,
 			subtitleSize,
 			activeCue,
@@ -183,16 +185,6 @@ export const SelfHostedVideoPlayer = forwardRef(
 			showPlayIcon ? 'play' : 'pause'
 		}-${atomId}`;
 
-		/**
-		 * To show subtitles, CORS must be enabled as it allows access to the VTT file.
-		 *
-		 * CORS should be enabled in production so that requests are consistent with respect to CORS.
-		 * If a client requests a video without CORS, then later made a request to the same video with
-		 * CORS, then this request could fail as the response could be cached without the headers.
-		 */
-		const requestCORS =
-			showSubtitles || process.env.NODE_ENV === 'production';
-
 		return (
 			<>
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Not all videos require captions. */}
@@ -202,7 +194,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 						videoStyles(width, height),
 						showSubtitles && subtitleStyles(subtitleSize),
 					]}
-					crossOrigin={requestCORS ? 'anonymous' : undefined}
+					crossOrigin={enableCors ? 'anonymous' : undefined}
 					ref={ref}
 					tabIndex={0}
 					data-testid="self-hosted-video-player"
