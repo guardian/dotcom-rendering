@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { breakpoints, from, palette } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { FootballMiniMatchStats } from './FootballMiniMatchStats';
+import { FootballMiniMatchStats as FootballMiniMatchStatsComponent } from './FootballMiniMatchStats';
 
 const gridCss = css`
 	background-color: ${palette.neutral[97]};
@@ -27,7 +27,7 @@ const containerCss = css`
 
 const meta = {
 	title: 'Components/Football Mini Match Stats',
-	component: FootballMiniMatchStats,
+	component: FootballMiniMatchStatsComponent,
 	decorators: [
 		(Story) => (
 			<div css={gridCss}>
@@ -46,12 +46,12 @@ const meta = {
 			],
 		},
 	},
-} satisfies Meta<typeof FootballMiniMatchStats>;
+} satisfies Meta<typeof FootballMiniMatchStatsComponent>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const FootballMiniMatchStatsMobile = {
+export const FootballMiniMatchStats = {
 	args: {
 		homeTeam: {
 			name: 'Manchester United',
