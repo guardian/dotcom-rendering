@@ -101,8 +101,8 @@ type Props = {
 	sources: Source[];
 	atomId: string;
 	uniqueId: string;
-	width: number;
 	height: number;
+	width: number;
 	videoStyle: VideoPlayerFormat;
 	FallbackImageComponent: ReactElement;
 	isPlayable: boolean;
@@ -143,8 +143,8 @@ export const SelfHostedVideoPlayer = forwardRef(
 			sources,
 			atomId,
 			uniqueId,
-			width,
 			height,
+			width,
 			videoStyle,
 			FallbackImageComponent,
 			posterImage,
