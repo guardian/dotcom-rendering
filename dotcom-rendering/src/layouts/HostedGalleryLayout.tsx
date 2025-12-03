@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { RenderingTarget } from 'src/types/renderingTarget';
 import { grid } from '../grid';
+import type { RenderingTarget } from '../types/renderingTarget';
 
 interface Props {
 	renderingTarget: RenderingTarget;
