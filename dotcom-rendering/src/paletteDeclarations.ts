@@ -7067,6 +7067,10 @@ const paletteColours = {
 		light: () => sourcePalette.sport[400],
 		dark: () => sourcePalette.sport[500],
 	},
+	'--football-match-stat-button-background-hover': {
+		light: () => '#00679E', // replace with Source's `calculateHoverColour` when available
+		dark: () => '#00A1E6',
+	},
 	'--football-match-stat-name': {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[86],

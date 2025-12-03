@@ -79,6 +79,9 @@ export const FootballMiniMatchStats = ({
 					backgroundPrimary: palette(
 						'--football-match-stat-button-background',
 					),
+					backgroundPrimaryHover: palette(
+						'--football-match-stat-button-background-hover',
+					),
 				}}
 			>
 				<span css={buttonTextCss}>More stats, line-ups and tables</span>
