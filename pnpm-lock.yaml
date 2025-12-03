@@ -502,8 +502,8 @@ importers:
         specifier: 18.1.1
         version: 18.1.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.3)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/support-dotcom-components':
-        specifier: 8.2.0
-        version: 8.2.0(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.3)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.6.3)(zod@4.1.12)
+        specifier: 8.3.1
+        version: 8.3.1(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.3)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.6.3)(zod@4.1.12)
       '@guardian/tsconfig':
         specifier: 0.2.0
         version: 0.2.0
@@ -2915,8 +2915,8 @@ packages:
   '@guardian/story-packages-model@2.2.0':
     resolution: {integrity: sha512-tZWBvoBTfR9K7AGlhsiPYAefIjfA5NsU/65OhcZjBEiFN6J+ay37D1dH6uIghYZbd+fB0mQ0I9kT/ac4Lgx0yQ==}
 
-  '@guardian/support-dotcom-components@8.2.0':
-    resolution: {integrity: sha512-XbEdBCTQ+DWPgYWNWnBa8a9xW58HrOAN8Yrzta9SbALq8YRU28DPtJdQgmeAgrX7wgtd/ZVc+1ix5U6k38K+0Q==}
+  '@guardian/support-dotcom-components@8.3.1':
+    resolution: {integrity: sha512-3e+BX/FTMHCXHtWqVi0LV3j6geOU0RX7vEb+c51KStsOXKLnM3wLK4eoih8AUiRSBO/Nqd42L0DWXDxaoyKUsw==}
     peerDependencies:
       '@guardian/libs': ^22.0.0
       '@guardian/ophan-tracker-js': 2.6.1
@@ -8210,8 +8210,8 @@ packages:
     resolution: {integrity: sha512-dRB78srN/l6gqWulah9SrxeYnxeddIG30+GOqK/9OlLVyLg3HPnr6SqOWTWOXKRwC2eGYCkZ59NNuSgvSrpgOA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
-  node-forge@1.3.1:
-    resolution: {integrity: sha512-dPEtOeMvF9VMcYV/1Wb8CPoVAXtp6MKMlcbAt4ddqmGqUJ6fQZFXkNZNkNlfevtNkGtaSoXf/vNNNSvgrdXwtA==}
+  node-forge@1.3.2:
+    resolution: {integrity: sha512-6xKiQ+cph9KImrRh0VsjH2d8/GXA4FIMlgU4B757iI1ApvcyA9VlouP0yZJha01V+huImO+kKMU7ih+2+E14fw==}
     engines: {node: '>= 6.13.0'}
 
   node-gyp-build@4.8.0:
@@ -13818,7 +13818,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@guardian/support-dotcom-components@8.2.0(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.3)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.6.3)(zod@4.1.12)':
+  '@guardian/support-dotcom-components@8.3.1(@guardian/libs@26.1.0(@guardian/ophan-tracker-js@2.6.3)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.6.3)(zod@4.1.12)':
     dependencies:
       '@aws-sdk/client-cloudwatch': 3.841.0
       '@aws-sdk/client-dynamodb': 3.840.0
@@ -20705,7 +20705,7 @@ snapshots:
       fetch-blob: 3.2.0
       formdata-polyfill: 4.0.10
 
-  node-forge@1.3.1: {}
+  node-forge@1.3.2: {}
 
   node-gyp-build@4.8.0:
     optional: true
@@ -21646,7 +21646,7 @@ snapshots:
   selfsigned@2.4.1:
     dependencies:
       '@types/node-forge': 1.3.14
-      node-forge: 1.3.1
+      node-forge: 1.3.2
 
   semver-regex@4.0.5: {}
 

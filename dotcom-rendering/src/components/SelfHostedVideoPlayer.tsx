@@ -28,6 +28,8 @@ const videoStyles = (width: number, height: number) => css`
 	display: block;
 	height: auto;
 	width: 100%;
+	max-height: 100vh;
+	max-height: 100svh;
 	cursor: pointer;
 	/* Prevents CLS by letting the browser know the space the video will take up. */
 	aspect-ratio: ${width} / ${height};
@@ -99,8 +101,8 @@ type Props = {
 	sources: Source[];
 	atomId: string;
 	uniqueId: string;
-	width: number;
 	height: number;
+	width: number;
 	videoStyle: VideoPlayerFormat;
 	FallbackImageComponent: ReactElement;
 	isPlayable: boolean;
@@ -141,8 +143,8 @@ export const SelfHostedVideoPlayer = forwardRef(
 			sources,
 			atomId,
 			uniqueId,
-			width,
 			height,
+			width,
 			videoStyle,
 			FallbackImageComponent,
 			posterImage,
