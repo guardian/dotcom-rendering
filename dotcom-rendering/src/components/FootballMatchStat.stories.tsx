@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
-import { palette, space } from '@guardian/source/foundations';
+import { space } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { palette } from '../palette';
 import { FootballMatchStat } from './FootballMatchStat';
 
 const meta = {
@@ -11,7 +12,9 @@ const meta = {
 			<div
 				css={css`
 					padding: ${space[4]}px;
-					background-color: ${palette.neutral[97]};
+					background-color: ${palette(
+						'--football-live-blog-background',
+					)};
 				`}
 			>
 				<Story />

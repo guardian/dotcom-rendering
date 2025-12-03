@@ -1,18 +1,18 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	palette,
 	textSansBold14,
 	textSansBold15,
 	textSansBold20,
 	textSansBold28,
 	visuallyHidden,
 } from '@guardian/source/foundations';
+import { palette } from '../palette';
 
 const containerCss = css`
 	position: relative;
 	padding: 5px 10px 10px;
-	border: 1px solid ${palette.neutral[86]};
+	border: 1px solid ${palette('--footall-match-stat-border')};
 	border-radius: 6px;
 	&::before {
 		position: absolute;
@@ -21,7 +21,7 @@ const containerCss = css`
 		bottom: 0;
 		width: 1px;
 		height: 24px;
-		background-color: ${palette.neutral[86]};
+		background-color: ${palette('--footall-match-stat-border')};
 	}
 `;
 
@@ -43,7 +43,7 @@ const labelCss = css`
 	${textSansBold14};
 	grid-area: label;
 	justify-self: center;
-	color: ${palette.neutral[7]};
+	color: ${palette('--footall-match-stat-name')};
 	${from.desktop} {
 		${textSansBold15};
 	}
