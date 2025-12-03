@@ -60,3 +60,17 @@ export const ShownAsPercentage = {
 		showPercentage: true,
 	},
 } satisfies Story;
+
+export const RaisedLabelOnDesktop = {
+	args: {
+		...Default.args,
+		raiseLabelOnDesktop: true,
+	},
+} satisfies Story;
+
+export const LargeNumbersOnDesktop = {
+	args: {
+		...Default.args,
+		largeNumbersOnDesktop: true,
+	},
+} satisfies Story;
