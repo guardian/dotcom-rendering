@@ -876,8 +876,7 @@ const styles = {
 		flex-direction: row;
 		gap: ${space[2]}px;
 		justify-content: stretch;
-		margin-left: ${space[2]}px;
-		margin-right: ${space[2]}px;
+		margin: 0;
 
 		> a {
 			flex: 1 0 100%;
@@ -886,8 +885,6 @@ const styles = {
 
 		${from.tablet} {
 			justify-content: center;
-			margin-left: 0px;
-			margin-right: 0px;
 			max-width: 100%;
 		}
 
@@ -897,7 +894,6 @@ const styles = {
 				flex: 1 0 50%;
 				justify-self: stretch;
 			}
-			margin-left: 0px;
 			flex-direction: row;
 			flex-wrap: nowrap;
 			justify-content: start;
@@ -986,7 +982,12 @@ const styles = {
 		.maybe-later & {
 			flex-direction: row;
 			flex-wrap: wrap;
-			padding: ${space[3]}px 0;
+			padding: ${space[3]}px;
+
+			${from.phablet} {
+				flex-direction: row;
+				padding: ${space[3]}px 0;
+			}
 		}
 
 		${until.phablet} {
