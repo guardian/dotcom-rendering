@@ -77,7 +77,7 @@ export const FootballMiniMatchStats = ({
 				iconSide="right"
 				theme={{
 					backgroundPrimary: palette(
-						'--footall-match-stat-button-background',
+						'--football-match-stat-button-background',
 					),
 				}}
 			>
