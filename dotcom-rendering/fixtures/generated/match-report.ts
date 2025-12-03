@@ -274,7 +274,8 @@ export const matchReport: MatchReportType = {
 		shotsOff: 6,
 		corners: 10,
 		fouls: 4,
-		colours: '#ffffff',
+		colours: '#01009a',
+		// colours: '#fff', // #fef502
 		crest: 'https://sport.guim.co.uk/football/crests/120/7699.png',
 	},
 	awayTeam: {
