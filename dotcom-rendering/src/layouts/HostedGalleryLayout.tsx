@@ -31,7 +31,10 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 					</div>
 				</header>
 				<div css={[grid.container]}>
-					<article css={[border, grid.column.all]}>Gallery</article>
+					<article css={[grid.column.all]}>
+						<div css={border}>Gallery</div>
+						<div css={border}>Onward</div>
+					</article>
 				</div>
 				<div css={[grid.container, border]}>
 					<div css={[grid.column.all]}>Footer</div>
