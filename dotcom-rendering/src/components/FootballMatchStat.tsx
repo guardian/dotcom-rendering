@@ -143,7 +143,7 @@ export const FootballMatchStat = ({
 					{formatValue(away.value, showPercentage)}
 				</span>
 			</div>
-			<div css={chartCss}>
+			<div aria-hidden="true" css={chartCss}>
 				<div
 					css={barCss}
 					style={{
