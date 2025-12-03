@@ -4,9 +4,17 @@ import { customMockFetch } from '../../src/lib/mockRESTCalls';
 // Extend window type for auth state mock
 declare global {
 	interface Window {
-		__STORYBOOK_AUTH_STATE__?: 'SignedIn' | 'SignedOut';
+		__STORYBOOK_AUTH_STATE__?: 'SignedIn' | 'SignedOut' | 'Pending';
 	}
 }
+
+/**
+ * Decorator for pending auth state.
+ */
+export const pendingAuthDecorator: Decorator = (Story) => {
+	window.__STORYBOOK_AUTH_STATE__ = 'Pending';
+	return <Story />;
+};
 
 /**
  * Decorator for signed-out user state.

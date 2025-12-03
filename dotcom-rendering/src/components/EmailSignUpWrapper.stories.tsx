@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import {
+	pendingAuthDecorator,
 	signedInDecorator,
 	signedOutDecorator,
 } from '../../.storybook/decorators/authDecorator';
@@ -23,6 +24,16 @@ const defaultArgs = {
 	successDescription: "We'll send you The Recap every week",
 	theme: 'sport',
 } satisfies Story['args'];
+
+// Loading state - shows placeholder while auth status is being determined
+// This prevents layout shift when subscription status is resolved
+export const LoadingState: Story = {
+	args: {
+		hidePrivacyMessage: false,
+		...defaultArgs,
+	},
+	decorators: [pendingAuthDecorator],
+};
 
 // Default story - signed out user sees the signup form
 export const DefaultStory: Story = {

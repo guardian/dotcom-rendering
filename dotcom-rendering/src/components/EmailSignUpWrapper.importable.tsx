@@ -5,7 +5,17 @@ import { EmailSignup } from './EmailSignup';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { Island } from './Island';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
+import { Placeholder } from './Placeholder';
 import { SecureSignup } from './SecureSignup.importable';
+
+/**
+ * Approximate heights of the EmailSignup component at different breakpoints.
+ */
+const PLACEHOLDER_HEIGHTS = new Map([
+	['mobile', 220],
+	['tablet', 180],
+	['desktop', 180],
+] as const) as Map<'mobile' | 'tablet' | 'desktop', number>;
 
 interface EmailSignUpWrapperProps extends EmailSignUpProps {
 	index: number;
@@ -36,6 +46,12 @@ export const EmailSignUpWrapper = ({
 		return window.guardian?.config?.page?.idApiUrl ?? undefined;
 	});
 	const isSubscribed = useNewsletterSubscription(listId, idApiUrl);
+
+	// Show placeholder while subscription status is being determined
+	// This prevents layout shift in both subscribed and non-subscribed cases
+	if (isSubscribed === undefined) {
+		return <Placeholder heights={PLACEHOLDER_HEIGHTS} />;
+	}
 
 	// Don't render if user is signed in and already subscribed
 	if (isSubscribed === true) {

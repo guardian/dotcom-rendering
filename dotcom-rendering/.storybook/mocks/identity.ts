@@ -10,7 +10,7 @@ import type { AuthStatus, SignedIn } from '../../src/lib/identity';
 // Extend window type for our mock
 declare global {
 	interface Window {
-		__STORYBOOK_AUTH_STATE__?: 'SignedIn' | 'SignedOut';
+		__STORYBOOK_AUTH_STATE__?: 'SignedIn' | 'SignedOut' | 'Pending';
 	}
 }
 
@@ -70,8 +70,20 @@ const mockIdToken = {
 	},
 };
 
-export async function getAuthState() {
+type MockAuthState = {
+	isAuthenticated: boolean;
+	accessToken?: typeof mockAccessToken;
+	idToken?: typeof mockIdToken;
+};
+
+export async function getAuthState(): Promise<MockAuthState> {
 	const authState = window.__STORYBOOK_AUTH_STATE__ ?? 'SignedOut';
+
+	// For Pending state, return a promise that never resolves
+	// This keeps useAuthStatus in the 'Pending' state indefinitely for testing
+	if (authState === 'Pending') {
+		return new Promise<MockAuthState>(() => {});
+	}
 
 	if (authState === 'SignedIn') {
 		return {

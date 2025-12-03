@@ -81,7 +81,11 @@ export const useNewsletterSubscription = (
 
 				setIsSubscribed(isUserSubscribed);
 			} catch (error) {
-				console.error('Error fetching newsletters:', error);
+				const message = `Error fetching newsletters: ${String(error)}`;
+				window.guardian.modules.sentry.reportError(
+					new Error(message, { cause: error }),
+					'errors-fetching-newsletters',
+				);
 				setIsSubscribed(false);
 			}
 		};
