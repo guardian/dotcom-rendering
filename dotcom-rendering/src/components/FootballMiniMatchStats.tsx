@@ -66,6 +66,7 @@ export const FootballMiniMatchStats = ({
 						value: stat.awayValue,
 					}}
 					showPercentage={stat.showPercentage}
+					raiseLabelOnDesktop={true}
 				/>
 			))}
 			<LinkButton
