@@ -20,8 +20,8 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof SelfHostedVideo>;
 
-export const Loop4to5: Story = {
-	name: 'Looping video in 4:5 aspect ratio',
+export const Loop5to4: Story = {
+	name: 'Looping video in 5:4 aspect ratio',
 	args: {
 		sources: [
 			{
@@ -31,6 +31,7 @@ export const Loop4to5: Story = {
 		],
 		uniqueId: 'test-video-1',
 		atomId: 'test-atom-1',
+		videoStyle: 'Loop',
 		height: 720,
 		width: 900,
 		posterImage:
@@ -59,7 +60,7 @@ export const Loop4to5: Story = {
 export const Loop16to9: Story = {
 	name: 'Looping video in 16:9 aspect ratio',
 	args: {
-		...Loop4to5.args,
+		...Loop5to4.args,
 		sources: [
 			{
 				src: 'https://uploads.guim.co.uk/2024/10/01/241001HeleneLoop_2.mp4',
@@ -73,13 +74,13 @@ export const Loop16to9: Story = {
 
 export const WithCinemagraph: Story = {
 	args: {
-		...Loop4to5.args,
+		...Loop5to4.args,
 		videoStyle: 'Cinemagraph',
 	},
 };
 
 export const PausePlay: Story = {
-	...Loop4to5,
+	...Loop5to4,
 	name: 'Pause and play interaction',
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
@@ -100,7 +101,7 @@ export const PausePlay: Story = {
 };
 
 export const UnmuteMute: Story = {
-	...Loop4to5,
+	...Loop5to4,
 	name: 'Unmute and mute interaction',
 	parameters: {
 		test: {
@@ -127,7 +128,7 @@ function sleep(ms: number) {
 }
 
 export const InteractionObserver: Story = {
-	...Loop4to5,
+	...Loop5to4,
 	name: 'Interaction observer',
 	render: (args) => (
 		<div data-testid="test-container">

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { breakpoints, space, until } from '@guardian/source/foundations';
+import { breakpoints, until } from '@guardian/source/foundations';
 import type { ImgHTMLAttributes } from 'react';
 import React from 'react';
 import type { AspectRatio } from '../types/front';
@@ -14,7 +14,6 @@ export type Props = {
 	mainImage: string;
 	loading: Loading;
 	alt?: string;
-	roundedCorners?: boolean;
 	isCircular?: boolean;
 	aspectRatio?: AspectRatio;
 	mobileAspectRatio?: AspectRatio;
@@ -200,12 +199,6 @@ const decideAspectRatioStyles = (aspectRatio?: AspectRatio) => {
 	`;
 };
 
-const borderRadius = css`
-	& > * {
-		border-radius: ${space[2]}px;
-	}
-`;
-
 const circularStyles = css`
 	border-radius: 100%;
 	object-fit: cover;
@@ -227,7 +220,6 @@ export const CardPicture = ({
 	alt,
 	imageSize,
 	loading,
-	roundedCorners,
 	isCircular,
 	aspectRatio = '5:3',
 	mobileAspectRatio,
@@ -251,7 +243,6 @@ export const CardPicture = ({
 				decideAspectRatioStyles(aspectRatio),
 				mobileAspectRatio &&
 					decideMobileAspectRatioStyles(mobileAspectRatio),
-				roundedCorners && borderRadius,
 				isCircular && circularStyles,
 			]}
 		>

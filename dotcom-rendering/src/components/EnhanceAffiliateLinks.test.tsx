@@ -81,4 +81,72 @@ describe('EnhanceAffiliateLinks', () => {
 			'xcust=referrer%7Cfoo.com%7CaccountId%7C12345%7CabTestParticipations%7Ctest1%3AvariantA%2Ctest2%3AvariantB',
 		);
 	});
+
+	it('should use article URL UTM parameters when present', () => {
+		Object.defineProperty(window, 'location', {
+			value: new URL(
+				'https://example.test/this?utm_source=growth&utm_medium=epicuk&utm_campaign=q3_test&utm_content=filter_general',
+			),
+			configurable: true,
+		});
+
+		document.body.innerHTML = `<a href="https://go.skimresources.com/?id=12345">Skimlink</a>`;
+
+		render(<EnhanceAffiliateLinks />);
+
+		const link = document.querySelector('a');
+		expect(link?.href).toContain(
+			'utm_source%7Cgrowth%7Cutm_medium%7Cepicuk%7Cutm_campaign%7Cq3_test%7Cutm_content%7Cfilter_general',
+		);
+	});
+
+	it('should use UTM parameters from the referrer if the article URL has none', () => {
+		Object.defineProperty(window, 'location', {
+			value: new URL('https://example.test/page'),
+			configurable: true,
+		});
+
+		Object.defineProperty(document, 'referrer', {
+			value: 'https://foo.bar/some?utm_source=testsource&utm_medium=somemedium&utm_campaign=refcamp',
+			configurable: true,
+		});
+
+		document.body.innerHTML = `
+		<a href="https://go.skimresources.com/?id=12345">Skimlink</a>
+	`;
+
+		render(<EnhanceAffiliateLinks />);
+
+		const link = document.querySelector('a');
+
+		expect(link?.href).toContain(
+			'utm_source%7Ctestsource%7Cutm_medium%7Csomemedium%7Cutm_campaign%7Crefcamp',
+		);
+	});
+
+	it('should use UTM parameters from the article URL over the referrer if both exist', () => {
+		Object.defineProperty(window, 'location', {
+			value: new URL(
+				'https://example.test/page?utm_source=pagegrow&utm_medium=somemedium',
+			),
+			configurable: true,
+		});
+
+		Object.defineProperty(document, 'referrer', {
+			value: 'https://foo.bar?utm_source=refgrow&utm_medium=refmed',
+			configurable: true,
+		});
+
+		document.body.innerHTML = `
+		<a href="https://go.skimresources.com/?id=12345">Skimlink</a>
+	`;
+
+		render(<EnhanceAffiliateLinks />);
+
+		const link = document.querySelector('a');
+		expect(link?.href).toContain(
+			'utm_source%7Cpagegrow%7Cutm_medium%7Csomemedium',
+		);
+		expect(link?.href).not.toContain('refgrow');
+	});
 });

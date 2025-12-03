@@ -3,7 +3,7 @@ import type { ABTest } from '@guardian/ab-core';
 export const personalisedHighlights: ABTest = {
 	id: 'PersonalisedHighlights',
 	start: '2025-11-17',
-	expiry: '2025-12-01',
+	expiry: '2026-01-28',
 	author: 'Anna Beddow',
 	description:
 		'Allow user behaviour to personalise the ordering of cards in the highlights container.',
