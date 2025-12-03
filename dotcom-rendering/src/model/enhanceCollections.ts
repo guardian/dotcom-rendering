@@ -1,7 +1,8 @@
 import type { FECollection } from '../frontend/feFront';
 import {
+	brandingEqual,
 	decideCollectionBranding,
-	isPaidContentSameBranding,
+	shouldStripBrandingFromCards,
 } from '../lib/branding';
 import type { EditionId } from '../lib/edition';
 import type { Branding } from '../types/branding';
@@ -77,11 +78,16 @@ export const enhanceCollections = ({
 	const indexToShowFrontBranding =
 		findCollectionSuitableForFrontBranding(collections);
 
+	// Track the branding from the first primary container to detect duplicates in subsequent primary containers
+	let firstContainerBranding: Branding | undefined;
+
 	return collections.filter(isSupported).map((collection, index) => {
 		const { id, displayName, collectionType, hasMore, href, description } =
 			collection;
 		const allCards = [...collection.curated, ...collection.backfill];
-		const collectionBranding = decideCollectionBranding({
+
+		// First, get the raw collection branding without considering previous containers
+		const rawCollectionBranding = decideCollectionBranding({
 			frontBranding,
 			couldDisplayFrontBranding: index === indexToShowFrontBranding,
 			cards: allCards,
@@ -91,8 +97,34 @@ export const enhanceCollections = ({
 					({ type }) => type === 'Branded',
 				) ?? false,
 		});
-		const stripBrandingFromCards =
-			isPaidContentSameBranding(collectionBranding);
+
+		// Determine if we should hide collection branding due to a previous container
+		const shouldHideCollectionBranding =
+			!!firstContainerBranding &&
+			!!rawCollectionBranding?.branding &&
+			brandingEqual(
+				firstContainerBranding,
+				rawCollectionBranding.branding,
+			);
+
+		// The actual collection branding to display (hide if duplicate branding of previous container)
+		const collectionBranding = shouldHideCollectionBranding
+			? undefined
+			: rawCollectionBranding;
+
+		// Store the branding from the first container
+		if (!firstContainerBranding && rawCollectionBranding) {
+			firstContainerBranding = rawCollectionBranding.branding;
+		}
+
+		/** Determine if we should strip branding from cards
+		 * We need to check this directly in here because decideCollectionBranding might return undefined
+		 * when cards have same branding as frontBranding, but we still need to strip in that case
+		 */
+		const stripBrandingFromCards = shouldStripBrandingFromCards(
+			rawCollectionBranding ?? allCards,
+			editionId,
+		);
 
 		const containerPalette = decideContainerPalette(
 			collection.config.metadata?.map((meta) => meta.type),

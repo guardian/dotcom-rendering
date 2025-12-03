@@ -36,6 +36,7 @@ import { MultiBylines } from '../components/MultiBylines';
 import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';
 import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
 import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importable';
+import { ProductElement } from '../components/ProductElement';
 import { ProductLinkButton } from '../components/ProductLinkButton';
 import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable';
 import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
@@ -122,11 +123,19 @@ const updateRole = (el: FEElement, format: ArticleFormat): FEElement => {
 			}
 
 			return el;
+		case 'model.dotcomrendering.pageElements.ProductBlockElement':
+			return {
+				...el,
+				content: el.content.map((nestedElement) =>
+					'role' in nestedElement
+						? { ...nestedElement, role: 'inline' }
+						: nestedElement,
+				),
+			};
 		default:
 			if (isBlog && 'role' in el) {
 				el.role = 'inline';
 			}
-
 			return el;
 	}
 };
@@ -574,9 +583,32 @@ export const renderElement = ({
 						<ProductLinkButton
 							label={element.label}
 							url={element.url}
+							dataComponent={'in-body-product-link-button'}
 						/>
 					)}
 				</>
+			);
+		case 'model.dotcomrendering.pageElements.ProductBlockElement':
+			return (
+				<ProductElement
+					product={element}
+					ArticleElementComponent={getNestedArticleElement({
+						abTests,
+						ajaxUrl,
+						editionId,
+						isAdFreeUser,
+						isSensitive,
+						pageId,
+						switches,
+						webTitle,
+						host,
+						isPinnedPost,
+						starRating,
+						shouldHideAds,
+					})}
+					format={format}
+					shouldShowLeftColCard={!!switches.productLeftColCards}
+				/>
 			);
 		case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
 			return (

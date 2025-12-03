@@ -101,7 +101,7 @@ export const trails: [
 		},
 		dataLinkName: 'news | group-0 | card-@2',
 		mainMedia: {
-			type: 'Video',
+			type: 'YoutubeVideo',
 			id: 'abcdef',
 			videoId: 'abcd',
 			title: 'some title',
@@ -316,7 +316,7 @@ export const trails: [
 		headline: 'How plastics are invading our brain cells – video',
 		dataLinkName: 'media | group-0 | card-@11',
 		mainMedia: {
-			type: 'Video',
+			type: 'YoutubeVideo',
 			id: '966acc06-a238-4d5f-b477-816eec0476f3',
 			videoId: '4JUvvbpx2So',
 			duration: 322,
@@ -408,7 +408,7 @@ export const trails: [
 		dataLinkName: 'news | group-0 | card-@18',
 		supportingContent: getSublinks(3),
 		mainMedia: {
-			type: 'Video',
+			type: 'YoutubeVideo',
 			id: 'abcdef',
 			videoId: 'abcd',
 			title: 'some title',
@@ -560,7 +560,7 @@ export const videoTrails: [DCRFrontCard, DCRFrontCard] = [
 			"Amorim said the team proved by the victory against City that they 'can leave anyone outside the squad and manage to win'",
 		webPublicationDate: '2024-12-16T15:21:02.000Z',
 		mainMedia: {
-			type: 'Video',
+			type: 'YoutubeVideo',
 			id: 'fa2ee832-c5e7-4305-8387-f0277d2d9e27',
 			videoId: '9kIN--VV2LQ',
 			duration: 117,
@@ -587,7 +587,7 @@ export const videoTrails: [DCRFrontCard, DCRFrontCard] = [
 			'News Group Newspapers offered Harry ‘full and unequivocal apology’ for ‘serious intrusion’ by the paper',
 		webPublicationDate: '2025-01-22T18:51:14.000Z',
 		mainMedia: {
-			type: 'Video',
+			type: 'YoutubeVideo',
 			id: '03ac0c90-3a66-448c-8562-b66a9ca9360e',
 			videoId: '_2wsSKq6yAk',
 			duration: 71,
@@ -648,14 +648,15 @@ export const newsletterTrails: [DCRFrontCard, DCRFrontCard] = [
 	},
 ];
 
-export const loopVideoCard: DCRFrontCard = {
+export const selfHostedVideo54Card = {
 	...defaultCardProps,
 	dataLinkName: 'news | group-0 | card-@2',
 	url: '/uk-news/2025/jan/22/prince-harry-says-sun-publisher-made-historic-admission-as-he-settles-case',
 	headline: 'Headline for looping video card',
 	trailText: 'Trail text for looping video card',
 	mainMedia: {
-		type: 'LoopVideo',
+		type: 'SelfHostedVideo',
+		videoStyle: 'Loop',
 		atomId: '3cb22b60-2c3f-48d6-8bce-38c956907cce',
 		sources: [
 			{
@@ -663,7 +664,7 @@ export const loopVideoCard: DCRFrontCard = {
 				src: 'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
 			},
 		],
-		duration: 0,
+		duration: 30,
 		width: 500,
 		height: 400,
 		image: 'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
@@ -672,7 +673,22 @@ export const loopVideoCard: DCRFrontCard = {
 		src: 'https://media.guim.co.uk/966bf085fb982b1103aaba42a812b09726cc0a3c/1417_104_1378_1104/master/1378.jpg',
 		altText: 'Wyatt Russell and Florence Pugh in Thunderbolts*.',
 	},
-};
+} satisfies DCRFrontCard;
+
+export const selfHostedVerticalVideoCard = {
+	...selfHostedVideo54Card,
+	mainMedia: {
+		...selfHostedVideo54Card.mainMedia,
+		sources: [
+			{
+				mimeType: 'video/mp4',
+				src: 'https://uploads.guimcode.co.uk/2025/11/12/5x4_test--ee49513c-bf16-4321-a444-09c9a037d584-4.0.mp4',
+			},
+		],
+		width: 406,
+		height: 720,
+	},
+} satisfies DCRFrontCard;
 
 export const slideshowCard: DCRFrontCard = {
 	...defaultCardProps,

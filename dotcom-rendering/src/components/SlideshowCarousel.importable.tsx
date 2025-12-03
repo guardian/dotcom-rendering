@@ -13,6 +13,7 @@ import {
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
+import { getZIndex } from '../lib/getZIndex';
 import { takeFirst } from '../lib/tuple';
 import { palette } from '../palette';
 import type { DCRSlideshowImage } from '../types/front';
@@ -53,6 +54,11 @@ const carouselItemStyles = css`
 	position: relative;
 	flex: 1 0 100%;
 	scroll-snap-align: start;
+`;
+
+const containerStyles = css`
+	position: relative;
+	z-index: ${getZIndex('card-nested-link')};
 `;
 
 const captionStyles = css`
@@ -104,16 +110,30 @@ const scrollingDotStyles = css`
 	}
 `;
 
+const mediaOverlayStyles = css`
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+`;
+
 type Props = {
 	images: readonly DCRSlideshowImage[];
 	imageSize: MediaSizeType;
 	hasNavigationBackgroundColour: boolean;
+	linkTo: string;
+	linkAriaLabel: string;
+	dataLinkName?: string;
 };
 
 export const SlideshowCarousel = ({
 	images,
 	imageSize,
 	hasNavigationBackgroundColour,
+	linkTo,
+	linkAriaLabel,
+	dataLinkName,
 }: Props) => {
 	const carouselRef = useRef<HTMLUListElement | null>(null);
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
@@ -192,37 +212,50 @@ export const SlideshowCarousel = ({
 	const slideshowImageCount = slideshowImages.length;
 
 	return (
-		<div className="slideshow-carousel">
-			<ul
-				ref={carouselRef}
-				css={carouselStyles}
-				data-heatphan-type="carousel"
+		<div css={containerStyles}>
+			<a
+				href={linkTo}
+				aria-label={linkAriaLabel}
+				data-link-name={dataLinkName}
 			>
-				{slideshowImages.map((image, index) => {
-					const loading = index > 0 ? 'lazy' : 'eager';
-					return (
-						<li css={carouselItemStyles} key={image.imageSrc}>
-							<figure>
-								<CardPicture
-									mainImage={image.imageSrc}
-									imageSize={imageSize}
-									aspectRatio="5:4"
-									alt={image.imageCaption}
-									loading={loading}
+				<ul
+					ref={carouselRef}
+					css={carouselStyles}
+					data-heatphan-type="carousel"
+				>
+					{slideshowImages.map((image, index) => {
+						const loading = index > 0 ? 'lazy' : 'eager';
+						return (
+							<li css={carouselItemStyles} key={image.imageSrc}>
+								<figure>
+									<CardPicture
+										mainImage={image.imageSrc}
+										imageSize={imageSize}
+										aspectRatio="5:4"
+										alt={image.imageCaption}
+										loading={loading}
+									/>
+									{!!image.imageCaption && (
+										<figcaption css={captionStyles}>
+											{image.imageCaption}
+										</figcaption>
+									)}
+								</figure>
+								<div
+									css={mediaOverlayStyles}
+									className="media-overlay"
 								/>
-								{!!image.imageCaption && (
-									<figcaption css={captionStyles}>
-										{image.imageCaption}
-									</figcaption>
-								)}
-							</figure>
-						</li>
-					);
-				})}
-			</ul>
+							</li>
+						);
+					})}
+				</ul>
+			</a>
 
 			{slideshowImageCount > 1 && (
-				<div css={navigationStyles(hasNavigationBackgroundColour)}>
+				<div
+					className="slideshow-carousel-footer"
+					css={navigationStyles(hasNavigationBackgroundColour)}
+				>
 					<div css={scrollingDotStyles}>
 						<SlideshowCarouselScrollingDots
 							total={slideshowImageCount}

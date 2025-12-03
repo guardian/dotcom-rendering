@@ -9,7 +9,7 @@ jobs:
     name: 🦕 Deno health
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       # https://github.com/denoland/setup-deno#latest-stable-for-a-major
       - uses: denoland/setup-deno@v1

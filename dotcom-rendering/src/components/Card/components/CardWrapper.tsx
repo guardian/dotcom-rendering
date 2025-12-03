@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source/foundations';
-import { ArticleDesign, type ArticleFormat } from '../../../lib/articleFormat';
+import type { ArticleFormat } from '../../../lib/articleFormat';
 import { palette } from '../../../palette';
 import type { DCRContainerPalette } from '../../../types/front';
 import { ContainerOverrides } from '../../ContainerOverrides';
@@ -11,7 +11,6 @@ type Props = {
 	format: ArticleFormat;
 	showTopBarDesktop: boolean;
 	showTopBarMobile: boolean;
-	isOnwardContent: boolean;
 	containerPalette?: DCRContainerPalette;
 };
 
@@ -42,7 +41,7 @@ const baseCardStyles = css`
 `;
 
 const hoverStyles = css`
-	:hover .image-overlay {
+	:hover .media-overlay {
 		width: 100%;
 		height: 100%;
 		background-color: ${palette('--card-background-hover')};
@@ -53,18 +52,20 @@ const hoverStyles = css`
 		text-decoration: underline;
 	}
 
-	/** We want to prevent the general hover styles applying when
-	    a click won't result in navigating to the main article */
+	/**
+	  * We want to prevent the general hover styles applying when
+	  * a click won't result in navigating to the main article
+	*/
 	:has(
 			ul.sublinks:hover,
-			.loop-video-container:hover,
-			.slideshow-carousel:hover,
+			.video-container:not(.cinemagraph):hover,
+			.slideshow-carousel-footer:hover,
 			.branding-logo:hover
 		) {
 		.card-headline .show-underline {
 			text-decoration: none;
 		}
-		.image-overlay {
+		.media-overlay {
 			background-color: transparent;
 		}
 	}
@@ -91,21 +92,11 @@ const desktopTopBarStyles = css`
 	}
 `;
 
-const onwardContentStyles = css`
-	border-radius: ${space[2]}px;
-	overflow: hidden;
-
-	:hover .image-overlay {
-		border-radius: ${space[2]}px;
-	}
-`;
-
 export const CardWrapper = ({
 	children,
 	format,
 	showTopBarDesktop,
 	showTopBarMobile,
-	isOnwardContent,
 	containerPalette,
 }: Props) => {
 	return (
@@ -117,9 +108,6 @@ export const CardWrapper = ({
 						hoverStyles,
 						showTopBarDesktop && desktopTopBarStyles,
 						showTopBarMobile && mobileTopBarStyles,
-						isOnwardContent &&
-							format.design !== ArticleDesign.Gallery &&
-							onwardContentStyles,
 					]}
 				>
 					{children}

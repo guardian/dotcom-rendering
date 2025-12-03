@@ -1,5 +1,4 @@
 import { css, jsx } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
 import {
 	breakpoints,
 	from,
@@ -13,12 +12,14 @@ import { Fragment, type ReactNode } from 'react';
 import { isElement, parseHtml } from '../lib/domUtils';
 import { palette as schemedPalette } from '../palette';
 import { logger } from '../server/lib/logging';
+import type { HeaderImage as HeaderImageModel } from '../types/tagPage';
+import { FootballCrest } from './FootballCrest';
 import { generateSources, Sources } from './Picture';
 
 type Props = {
 	title: string;
 	description?: string;
-	image?: string;
+	image?: HeaderImageModel;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -267,11 +268,7 @@ const imageStyle = css`
 	}
 `;
 
-const crestStyle = css`
-	height: 5rem;
-`;
-
-const Picture = ({ image }: { image: string }) => {
+const BylineImage = ({ image }: { image: string }) => {
 	const sources = generateSources(image, [
 		{ breakpoint: breakpoints.mobile, width: 80 },
 		{ breakpoint: breakpoints.desktop, width: 100 },
@@ -282,15 +279,12 @@ const Picture = ({ image }: { image: string }) => {
 	if (!fallback) throw new Error('Missing source');
 
 	return (
-		<picture>
+		<>
 			<Sources sources={sources} />
 			<img alt="" src={fallback} css={imageStyle} />
-		</picture>
+		</>
 	);
 };
-
-const isFootballCrest = (image: string) =>
-	image.startsWith('https://sport.guim.co.uk/football/crests/');
 
 export const TagPageHeader = ({ title, description, image }: Props) => {
 	const descriptionFragment = description
@@ -304,19 +298,7 @@ export const TagPageHeader = ({ title, description, image }: Props) => {
 				<h2 css={titleStyle}>{title}</h2>
 			</div>
 
-			{!isUndefined(image) && (
-				<div css={[sectionImage, paddings]}>
-					{isFootballCrest(image) ? (
-						<img
-							css={crestStyle}
-							src={image}
-							alt={`${title} football crest`}
-						/>
-					) : (
-						<Picture image={image} />
-					)}
-				</div>
-			)}
+			<HeaderImage image={image} title={title} />
 
 			{descriptionFragment ? (
 				<div css={[sectionContent, paddings, paragraphStyle]}>
@@ -330,3 +312,35 @@ export const TagPageHeader = ({ title, description, image }: Props) => {
 		</section>
 	);
 };
+
+const HeaderImage = (props: { image: Props['image']; title: string }) => {
+	if (props.image === undefined) {
+		return null;
+	}
+
+	switch (props.image.kind) {
+		case 'byline':
+			return (
+				<HeaderPicture>
+					<BylineImage image={props.image.url} />
+				</HeaderPicture>
+			);
+		case 'footballCrest':
+			return (
+				<HeaderPicture>
+					<FootballCrest
+						teamId={props.image.teamId}
+						altText={`${props.title} football crest`}
+						width={140}
+						css={{
+							height: '5rem',
+						}}
+					/>
+				</HeaderPicture>
+			);
+	}
+};
+
+const HeaderPicture = (props: { children: ReactNode }) => (
+	<picture css={[sectionImage, paddings]}>{props.children}</picture>
+);

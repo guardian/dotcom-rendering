@@ -309,7 +309,9 @@ export const OnwardsUpper = ({
 	// For galleries: they already have a "more galleries" container,
 	// so we can only allow one more onwards container
 	const canHaveCuratedContent =
-		format.design === ArticleDesign.Gallery ? isUndefined(url) : true;
+		format.design === ArticleDesign.Gallery
+			? isUndefined(url) && !hasStoryPackage
+			: true;
 
 	const hasOnwardsContainer = !!url;
 	const showCuratedContainer =

@@ -22,6 +22,7 @@ import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceTweets } from './enhance-tweets';
 import { enhanceGuVideos } from './enhance-videos';
 import { enhanceLists } from './enhanceLists';
+import { enhanceProductElement } from './enhanceProductElement';
 import { enhanceTimeline } from './enhanceTimeline';
 import { insertPromotedNewsletter } from './insertPromotedNewsletter';
 
@@ -40,9 +41,10 @@ const enhanceNewsletterSignup =
 		format: ArticleFormat,
 		promotedNewsletter: Newsletter | undefined,
 		blockId: string,
+		isNested: boolean,
 	) =>
 	(elements: FEElement[]): FEElement[] =>
-		!isUndefined(promotedNewsletter)
+		!isUndefined(promotedNewsletter) && !isNested
 			? insertPromotedNewsletter(
 					elements,
 					blockId,
@@ -68,6 +70,9 @@ export const enhanceElements =
 				options.tags,
 			),
 			enhanceTimeline(enhanceElements(format, blockId, options, true)),
+			enhanceProductElement(
+				enhanceElements(format, blockId, options, true),
+			),
 			enhanceDividers,
 			enhanceH2s,
 			enhanceInteractiveContentsElements,
@@ -81,6 +86,7 @@ export const enhanceElements =
 				format,
 				options.promotedNewsletter,
 				blockId,
+				isNested,
 			),
 			enhanceAdPlaceholders(
 				format,

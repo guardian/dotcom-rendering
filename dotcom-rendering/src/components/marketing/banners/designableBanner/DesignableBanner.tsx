@@ -145,6 +145,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	design,
 	countryCode,
 	promoCodes,
+	isCollapsible,
 }: BannerRenderProps): JSX.Element => {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
 
@@ -163,15 +164,16 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		ChoiceCard | undefined
 	>(defaultChoiceCard);
 
-	const isCollapsableBanner =
-		tracking.abTestVariant.includes('COLLAPSABLE_V1') ||
-		tracking.abTestVariant.includes('COLLAPSABLE_V2_MAYBE_LATER');
+	const isCollapsableBanner: boolean =
+		isCollapsible ??
+		(tracking.abTestVariant.includes('COLLAPSABLE_V1') ||
+			tracking.abTestVariant.includes('COLLAPSABLE_V2_MAYBE_LATER'));
 
-	const contextClassName = tracking.abTestVariant.includes(
-		'COLLAPSABLE_V2_MAYBE_LATER',
-	)
-		? 'maybe-later'
-		: '';
+	const contextClassName =
+		isCollapsible ||
+		tracking.abTestVariant.includes('COLLAPSABLE_V2_MAYBE_LATER')
+			? 'maybe-later'
+			: '';
 
 	const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
@@ -422,7 +424,10 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 				<div
 					css={
 						isCollapsableBanner
-							? styles.closeAndCollapseButtonContainer
+							? styles.closeAndCollapseButtonContainer(
+									isCollapsed,
+									isMaybeLaterVariant,
+							  )
 							: styles.closeButtonContainer
 					}
 				>
@@ -435,9 +440,11 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								onClick={() =>
 									handleSetIsCollapsed(!isCollapsed)
 								}
-								cssOverrides={styles.iconOverrides(
-									templateSettings.closeButtonSettings,
-								)}
+								cssOverrides={[
+									styles.iconOverrides(
+										templateSettings.closeButtonSettings,
+									),
+								]}
 								priority="secondary"
 								icon={
 									isCollapsed ? (
@@ -481,7 +488,13 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									choiceCardSettings={choiceCardSettings}
 								/>
 							)}
-							<div css={styles.ctaContainer(isCollapsed)}>
+							<div
+								css={styles.ctaContainer(
+									isCollapsed,
+									templateSettings.containerSettings
+										.backgroundColour,
+								)}
+							>
 								<LinkButton
 									href={enrichSupportUrl({
 										baseUrl:
@@ -671,7 +684,7 @@ const styles = {
 		${from.desktop} {
 			max-width: 980px;
 			padding: ${space[1]}px ${space[1]}px 0 ${space[3]}px;
-			grid-template-columns: auto 380px auto;
+			grid-template-columns: auto 380px minmax(100px, auto);
 			grid-template-rows: auto auto;
 
 			grid-template-areas:
@@ -735,7 +748,10 @@ const styles = {
 			padding-left: ${space[8]}px;
 		}
 	`,
-	closeAndCollapseButtonContainer: css`
+	closeAndCollapseButtonContainer: (
+		isCollapsed: boolean,
+		isMaybeLaterVariant: boolean,
+	) => css`
 		/* Layout changes only here */
 		grid-area: close-button;
 		display: flex;
@@ -753,7 +769,10 @@ const styles = {
 			margin-top: ${space[2]}px;
 		}
 		${from.desktop} {
-			margin-top: ${space[5]}px;
+			flex-direction: ${isCollapsed ? 'row' : 'row-reverse'};
+			margin-top: ${isCollapsed && isMaybeLaterVariant
+				? space[9]
+				: space[6]}px;
 		}
 
 		.maybe-later & {
@@ -932,6 +951,7 @@ const styles = {
 		}
 		${from.desktop} {
 			justify-self: end;
+			padding-right: ${space[8]}px;
 			width: 299px;
 		}
 		${between.desktop.and.wide} {
@@ -957,7 +977,7 @@ const styles = {
 		}
 	`,
 	/* choice card CTA container */
-	ctaContainer: (isCollapsed: boolean) => css`
+	ctaContainer: (isCollapsed: boolean, backgroundColor: string) => css`
 		grid-area: cc_cta;
 		display: flex;
 		align-items: center;
@@ -968,16 +988,15 @@ const styles = {
 		.maybe-later & {
 			flex-direction: row;
 			flex-wrap: wrap;
-			padding: ${space[3]}px;
+			padding: ${space[3]}px 0;
 		}
 
 		${until.phablet} {
 			width: 100vw;
 			position: sticky;
 			bottom: 0;
-			padding-top: ${space[3]}px;
-			padding-bottom: ${space[3]}px;
-			background-color: ${neutral[100]};
+			padding: ${space[3]}px;
+			background-color: ${backgroundColor};
 			box-shadow: 0 -${space[1]}px ${space[3]}px 0 rgba(0, 0, 0, 0.25);
 			margin-right: -${space[3]}px;
 			margin-left: -${space[3]}px;
@@ -1045,7 +1064,7 @@ const styles = {
 	collapsableButtonContainer: css`
 		margin-left: ${space[2]}px;
 		${from.desktop} {
-			margin-top: ${space[1]}px;
+			margin: 0;
 		}
 	`,
 	iconOverrides: (ctaSettings?: CtaSettings) => css`
@@ -1056,6 +1075,10 @@ const styles = {
 		}
 		margin-top: ${space[1]}px;
 		margin-right: ${space[1]}px;
+
+		${from.desktop} {
+			margin: 0;
+		}
 	`,
 };
 

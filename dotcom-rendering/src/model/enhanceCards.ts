@@ -240,7 +240,8 @@ export const getActiveMediaAtom = (
 			);
 
 			return {
-				type: 'LoopVideo',
+				type: 'SelfHostedVideo',
+				videoStyle: mediaAtom.videoPlayerFormat ?? 'Loop',
 				atomId: mediaAtom.id,
 				sources: sources.map((source) => ({
 					src: source.id,
@@ -248,9 +249,8 @@ export const getActiveMediaAtom = (
 				})),
 				subtitleSource: subtitleAsset?.id,
 				duration: mediaAtom.duration ?? 0,
-				// Size fixed to a 5:4 ratio
-				width: 500,
-				height: 400,
+				width: mediaAtom.dimensions?.width ?? 500,
+				height: mediaAtom.dimensions?.height ?? 400,
 				image,
 			};
 		}
@@ -260,7 +260,7 @@ export const getActiveMediaAtom = (
 		 */
 		if (assets[0]?.platform === 'Youtube') {
 			return {
-				type: 'Video',
+				type: 'YoutubeVideo',
 				id: mediaAtom.id,
 				videoId: assets[0].id,
 				duration: mediaAtom.duration ?? 0,

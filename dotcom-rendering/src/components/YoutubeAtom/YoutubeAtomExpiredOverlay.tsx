@@ -85,7 +85,7 @@ export const YoutubeAtomExpiredOverlay = ({
 					captionText={mediaTitle ?? ''}
 					format={format}
 					displayCredit={false}
-					mediaType="Video"
+					mediaType="YoutubeVideo"
 					isMainMedia={isMainMedia}
 				/>
 			)}

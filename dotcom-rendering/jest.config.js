@@ -7,6 +7,7 @@ const esModules = [
 	'data-uri-to-buffer',
 	'fetch-blob',
 	'formdata-polyfill',
+	'storybook',
 ].join('|');
 
 module.exports = {
