@@ -1,9 +1,10 @@
 import { css } from '@emotion/react';
-import { from, palette } from '@guardian/source/foundations';
+import { from } from '@guardian/source/foundations';
 import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
+import { palette } from '../palette';
 import { FootballMatchStat } from './FootballMatchStat';
 
 const containerCss = css`
@@ -74,7 +75,11 @@ export const FootballMiniMatchStats = ({
 				size="small"
 				icon={<SvgArrowRightStraight />}
 				iconSide="right"
-				theme={{ backgroundPrimary: palette.sport[400] }}
+				theme={{
+					backgroundPrimary: palette(
+						'--footall-match-stat-button-background',
+					),
+				}}
 			>
 				<span css={buttonTextCss}>More stats, line-ups and tables</span>
 				<span css={buttonTextShortCss}>Stats and line ups</span>

@@ -1,10 +1,11 @@
 import { css } from '@emotion/react';
-import { breakpoints, from, palette } from '@guardian/source/foundations';
+import { breakpoints, from } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { palette } from '../palette';
 import { FootballMiniMatchStats as FootballMiniMatchStatsComponent } from './FootballMiniMatchStats';
 
 const gridCss = css`
-	background-color: ${palette.neutral[97]};
+	background-color: ${palette('--football-live-blog-background')};
 	/**
 	 * Extremely simplified live blog grid layout as we're only interested in
 	 * the 240px wide left column added at the desktop breakpoint.
