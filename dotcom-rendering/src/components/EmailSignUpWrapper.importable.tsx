@@ -54,7 +54,7 @@ export const EmailSignUpWrapper = ({
 	}
 
 	// Don't render if user is signed in and already subscribed
-	if (isSubscribed === true) {
+	if (isSubscribed) {
 		return null;
 	}
 
