@@ -1,0 +1,40 @@
+{
+	"name": "@guardian/ab-testing-config",
+	"version": "1.0.0",
+	"description": "A/B test definitions and configuration",
+	"main": "index.ts",
+	"type": "module",
+	"scripts": {
+		"validate": "node scripts/validation/index.ts",
+		"deploy": "node scripts/deploy/index.ts --mvts=dist/mvts.json --ab-tests=dist/ab-tests.json",
+		"build": "node scripts/build/index.ts --mvts=dist/mvts.json --ab-tests=dist/ab-tests.json",
+		"test": "node --test --test-reporter spec ./**/*.test.ts",
+		"lint": "eslint .",
+		"prettier:check": "prettier . --check --cache",
+		"prettier:fix": "prettier . --write --cache",
+		"lint-staged": "lint-staged"
+	},
+	"dependencies": {
+		"superstruct": "2.0.2"
+	},
+	"lint-staged": {
+		"*.ts": [
+			"pnpm lint --fix",
+			"pnpm prettier:fix"
+		]
+	},
+	"devDependencies": {
+		"@aws-sdk/client-s3": "3.931.0",
+		"@aws-sdk/client-ssm": "3.621.0",
+		"@guardian/cdk": "62.0.1",
+		"@guardian/eslint-config": "12.0.1",
+		"@guardian/tsconfig": "1.0.1",
+		"@types/node": "22.17.0",
+		"aws-cdk": "2.1030.0",
+		"aws-cdk-lib": "2.220.0",
+		"eslint": "9.39.1",
+		"prettier": "3.0.3",
+		"source-map-support": "0.5.21",
+		"typescript": "5.9.3"
+	}
+}

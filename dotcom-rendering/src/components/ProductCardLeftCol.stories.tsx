@@ -1,24 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
+import { productImage } from '../../fixtures/manual/productImage';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import type { ProductImage } from '../types/content';
 import { ProductCardLeftCol } from './ProductCardLeftCol';
 
 const format: ArticleFormat = {
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.Standard,
 	theme: Pillar.Lifestyle,
-};
-
-const productImage: ProductImage = {
-	url: 'https://media.guimcode.co.uk/cb193848ed75d40103eceaf12b448de2330770dc/0_0_725_725/725.jpg',
-	caption: 'Filter-2 test image for live demo',
-	height: 1,
-	width: 1,
-	alt: 'Bosch Sky kettle',
-	credit: 'Photograph: Rachel Ogden/The Guardian',
-	displayCredit: false,
 };
 
 const meta = {
@@ -120,7 +110,7 @@ export const LotsOfCtas = {
 			},
 			{
 				url: 'https://www.theguardian.com',
-				price: '£99.99',
+				price: '£105.99',
 				retailer: 'John Lewis',
 				text: '',
 			},

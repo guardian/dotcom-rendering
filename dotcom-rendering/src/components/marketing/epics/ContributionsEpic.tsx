@@ -278,13 +278,20 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
-		threshold: 0,
+		threshold: 0.4,
 	});
 
 	useEffect(() => {
 		if (hasBeenSeen) {
 			// For epic view count
 			logEpicView(tracking.abTestName);
+			document.dispatchEvent(
+				new CustomEvent('epic:in-view', {
+					detail: {
+						epicType: 'contributions',
+					},
+				}),
+			);
 
 			// For ophan
 			if (submitComponentEvent) {

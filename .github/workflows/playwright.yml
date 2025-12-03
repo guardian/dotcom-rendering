@@ -21,7 +21,7 @@ jobs:
           - 9000:9000
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
@@ -41,7 +41,7 @@ jobs:
         env:
           NODE_ENV: production
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         if: always()
         with:
           name: playwright-report-${{ matrix.group }}

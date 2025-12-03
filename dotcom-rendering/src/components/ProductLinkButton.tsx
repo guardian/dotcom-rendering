@@ -1,3 +1,4 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type {
 	ButtonPriority,
@@ -16,6 +17,7 @@ type ProductLinkButtonProps = {
 	fullwidth?: boolean;
 	priority?: ButtonPriority;
 	dataComponent?: string;
+	minimisePadding?: boolean;
 };
 
 const fullWidthStyle = css`
@@ -24,6 +26,16 @@ const fullWidthStyle = css`
 
 const heightAutoStyle = css`
 	height: auto;
+`;
+
+const minimisePaddingStyle = css`
+	padding: 0 10px 0 12px;
+	& .src-button-space {
+		width: 8px;
+	}
+	> svg {
+		margin-left: -2px;
+	}
 `;
 
 export const theme: Partial<ThemeButton> = {
@@ -41,12 +53,15 @@ export const ProductLinkButton = ({
 	url,
 	size = 'default',
 	fullwidth = false,
+	minimisePadding = false,
 	priority = 'primary',
-	dataComponent = 'in-body-product-link-button',
+	dataComponent,
 }: ProductLinkButtonProps) => {
-	const cssOverrides = fullwidth
-		? [fullWidthStyle, heightAutoStyle]
-		: heightAutoStyle;
+	const cssOverrides: SerializedStyles[] = [
+		heightAutoStyle,
+		...(fullwidth ? [fullWidthStyle] : []),
+		...(minimisePadding ? [minimisePaddingStyle] : []),
+	];
 
 	return (
 		<LinkButton
@@ -59,11 +74,11 @@ export const ProductLinkButton = ({
 			icon={<SvgArrowRightStraight />}
 			theme={theme}
 			data-ignore="global-link-styling"
-			data-link-name="in body link"
+			data-component={dataComponent}
+			data-link-name={`product link button ${priority}`}
 			data-spacefinder-role="inline"
 			size={size}
 			cssOverrides={cssOverrides}
-			data-component={dataComponent}
 		>
 			<span
 				css={css`

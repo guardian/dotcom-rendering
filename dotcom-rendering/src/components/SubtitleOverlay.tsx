@@ -6,7 +6,7 @@ import {
 	textSans20,
 } from '@guardian/source/foundations';
 import { palette } from '../palette';
-import type { SubtitleSize } from './LoopVideoPlayer';
+import type { SubtitleSize } from './SelfHostedVideoPlayer';
 
 const subtitleOverlayStyles = css`
 	max-width: 71%;
@@ -25,9 +25,9 @@ const cueBoxStyles = css`
 `;
 
 const cueStyles = css`
-	color: ${palette('--loop-video-subtitle-text')};
+	color: ${palette('--video-subtitle-text')};
 	display: inline;
-	background-color: ${palette('--loop-video-subtitle-background')};
+	background-color: ${palette('--video-subtitle-background')};
 	-webkit-box-decoration-break: clone;
 	box-decoration-break: clone;
 	pointer-events: none;

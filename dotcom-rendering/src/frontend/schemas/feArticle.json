@@ -870,6 +870,9 @@
                 },
                 {
                     "$ref": "#/definitions/CrosswordElement"
+                },
+                {
+                    "$ref": "#/definitions/ProductBlockElement"
                 }
             ]
         },
@@ -4420,6 +4423,163 @@
         "Record<string,number[]>": {
             "type": "object"
         },
+        "ProductBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.ProductBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "brandName": {
+                    "type": "string"
+                },
+                "starRating": {
+                    "$ref": "#/definitions/ProductStarRating"
+                },
+                "productName": {
+                    "type": "string"
+                },
+                "image": {
+                    "$ref": "#/definitions/ProductImage"
+                },
+                "secondaryHeadingHtml": {
+                    "type": "string"
+                },
+                "primaryHeadingHtml": {
+                    "type": "string"
+                },
+                "customAttributes": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "value": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "value"
+                        ]
+                    }
+                },
+                "content": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FEElement"
+                    }
+                },
+                "h2Id": {
+                    "type": "string"
+                },
+                "displayType": {
+                    "$ref": "#/definitions/ProductDisplayType"
+                },
+                "productCtas": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "url": {
+                                "type": "string"
+                            },
+                            "text": {
+                                "type": "string"
+                            },
+                            "retailer": {
+                                "type": "string"
+                            },
+                            "price": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "price",
+                            "retailer",
+                            "text",
+                            "url"
+                        ]
+                    }
+                },
+                "lowestPrice": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "brandName",
+                "content",
+                "customAttributes",
+                "displayType",
+                "elementId",
+                "primaryHeadingHtml",
+                "productCtas",
+                "productName",
+                "secondaryHeadingHtml",
+                "starRating"
+            ]
+        },
+        "ProductStarRating": {
+            "enum": [
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "none-selected"
+            ],
+            "type": "string"
+        },
+        "ProductImage": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string"
+                },
+                "caption": {
+                    "type": "string"
+                },
+                "credit": {
+                    "type": "string"
+                },
+                "alt": {
+                    "type": "string"
+                },
+                "displayCredit": {
+                    "type": "boolean"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "width": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "alt",
+                "caption",
+                "credit",
+                "displayCredit",
+                "height",
+                "url",
+                "width"
+            ]
+        },
+        "ProductDisplayType": {
+            "enum": [
+                "InlineOnly",
+                "InlineWithProductCard",
+                "ProductCardOnly"
+            ],
+            "type": "string"
+        },
         "Block": {
             "type": "object",
             "properties": {
@@ -5188,11 +5348,11 @@
         "MainMedia": {
             "anyOf": [
                 {
-                    "$ref": "#/definitions/Video",
+                    "$ref": "#/definitions/YoutubeVideo",
                     "description": "For displaying embedded, playable videos directly in cards"
                 },
                 {
-                    "$ref": "#/definitions/LoopVideo"
+                    "$ref": "#/definitions/SelfHostedVideo"
                 },
                 {
                     "$ref": "#/definitions/Audio"
@@ -5202,7 +5362,7 @@
                 }
             ]
         },
-        "Video": {
+        "YoutubeVideo": {
             "description": "For displaying embedded, playable videos directly in cards",
             "allOf": [
                 {
@@ -5212,8 +5372,8 @@
                             "enum": [
                                 "Audio",
                                 "Gallery",
-                                "LoopVideo",
-                                "Video"
+                                "SelfHostedVideo",
+                                "YoutubeVideo"
                             ],
                             "type": "string"
                         }
@@ -5227,7 +5387,7 @@
                     "properties": {
                         "type": {
                             "type": "string",
-                            "const": "Video"
+                            "const": "YoutubeVideo"
                         },
                         "id": {
                             "type": "string"
@@ -5271,7 +5431,7 @@
                 }
             ]
         },
-        "LoopVideo": {
+        "SelfHostedVideo": {
             "allOf": [
                 {
                     "type": "object",
@@ -5280,8 +5440,8 @@
                             "enum": [
                                 "Audio",
                                 "Gallery",
-                                "LoopVideo",
-                                "Video"
+                                "SelfHostedVideo",
+                                "YoutubeVideo"
                             ],
                             "type": "string"
                         }
@@ -5295,7 +5455,10 @@
                     "properties": {
                         "type": {
                             "type": "string",
-                            "const": "LoopVideo"
+                            "const": "SelfHostedVideo"
+                        },
+                        "videoStyle": {
+                            "$ref": "#/definitions/VideoPlayerFormat"
                         },
                         "atomId": {
                             "type": "string"
@@ -5341,10 +5504,19 @@
                         "height",
                         "sources",
                         "type",
+                        "videoStyle",
                         "width"
                     ]
                 }
             ]
+        },
+        "VideoPlayerFormat": {
+            "enum": [
+                "Cinemagraph",
+                "Default",
+                "Loop"
+            ],
+            "type": "string"
         },
         "Audio": {
             "allOf": [
@@ -5355,8 +5527,8 @@
                             "enum": [
                                 "Audio",
                                 "Gallery",
-                                "LoopVideo",
-                                "Video"
+                                "SelfHostedVideo",
+                                "YoutubeVideo"
                             ],
                             "type": "string"
                         }
@@ -5403,8 +5575,8 @@
                             "enum": [
                                 "Audio",
                                 "Gallery",
-                                "LoopVideo",
-                                "Video"
+                                "SelfHostedVideo",
+                                "YoutubeVideo"
                             ],
                             "type": "string"
                         }

@@ -133,9 +133,9 @@ const customAttributesContainer = css`
 	padding-top: ${space[2]}px;
 	display: grid;
 	gap: ${space[3]}px;
+	margin-top: ${space[2]}px;
 
 	${from.mobileLandscape} {
-		margin-top: ${space[2]}px;
 		grid-template-columns: 1fr 1fr;
 		gap: ${space[5]}px;
 	}
@@ -182,6 +182,9 @@ export const ProductCardInline = ({
 
 	return (
 		<div
+			data-component={`product-card-type-inline${
+				isCardOnly ? '-only' : ''
+			}`}
 			css={[
 				isCardOnly ? productCard : showcaseCard,
 				shouldShowLeftColCard && !isCardOnly && hideFromWide,
@@ -211,10 +214,7 @@ export const ProductCardInline = ({
 				)}
 			</div>
 			<div css={buttonWrapper}>
-				<ProductCardButtons
-					productCtas={productCtas}
-					dataComponent={'inline-product-card-buttons'}
-				/>
+				<ProductCardButtons productCtas={productCtas} />
 			</div>
 			{hasCustomAttributes && (
 				<div css={customAttributesContainer}>

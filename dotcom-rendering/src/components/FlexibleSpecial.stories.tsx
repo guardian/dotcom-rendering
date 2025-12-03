@@ -2,8 +2,8 @@ import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
-	loopVideoCard,
 	opinionTrails,
+	selfHostedVideo54Card,
 	slideshowCard,
 	snapLink,
 	trails,
@@ -51,7 +51,7 @@ const liveUpdatesCard = {
 	showQuotedHeadline: false,
 	dataLinkName: 'news | group-0 | card-@1',
 	mainMedia: {
-		type: 'Video',
+		type: 'YoutubeVideo',
 		id: 'fd00c892-407f-4d99-adfb-a8d12eada25f',
 		videoId: '04lLgC1NioA',
 		height: 300,
@@ -280,14 +280,14 @@ export const GigaBoostedSplashWithLiveUpdates: Story = {
 	},
 };
 
-export const LoopVideoCards: Story = {
-	name: 'Looping video cards',
+export const SelfHostedVideoCard: Story = {
+	name: 'Self-hosted video cards',
 	args: {
-		frontSectionTitle: 'Looping video',
+		frontSectionTitle: 'Self-hosted video',
 		groupedTrails: {
 			...emptyGroupedTrails,
 			snap: [],
-			standard: [loopVideoCard],
+			standard: [selfHostedVideo54Card],
 		},
 		collectionId: 1,
 	},

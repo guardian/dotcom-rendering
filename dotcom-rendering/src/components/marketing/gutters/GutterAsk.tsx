@@ -36,6 +36,7 @@ const textBlock = css`
 	align-items: flex-start;
 	padding: ${space[2]}px;
 	gap: ${space[1]}px;
+	max-width: 100%;
 `;
 const bodySection = css`
 	color: ${palette.neutral[0]};
@@ -46,6 +47,7 @@ const ctaSection = css`
 	color: ${palette.neutral[0]};
 	margin-top: ${space[3]}px;
 	margin-bottom: ${space[4]}px;
+	max-width: 100%;
 `;
 const cta = css`
 	left: ${space[2]}px;

@@ -8,6 +8,7 @@
 
 <a
 	href={`https://dashboard.ophan.co.uk/graph/breakdown?day=today&ab=${testName}`}
+	target="_blank"
 >
 	graph
 </a>

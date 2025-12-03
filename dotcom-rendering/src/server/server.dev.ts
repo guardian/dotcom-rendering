@@ -12,6 +12,7 @@ import {
 	handleBlocks,
 	handleInteractive,
 } from './handler.article.web';
+import { handleAppsAssets } from './handler.assets.apps';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import { handleFront, handleTagPage } from './handler.front.web';
 import {
@@ -118,6 +119,8 @@ renderer.post('/FootballMatchListPage', handleFootballMatchListPage);
 renderer.post('/FootballTablesPage', handleFootballTablesPage);
 renderer.post('/CricketMatchPage', handleCricketMatchPage);
 renderer.post('/FootballMatchSummaryPage', handleFootballMatchPage);
+
+renderer.get('/assets/rendered-items-assets', handleAppsAssets);
 
 const router = Router();
 router.use('/pages', pages);

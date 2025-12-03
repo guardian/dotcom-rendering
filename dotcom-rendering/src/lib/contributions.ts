@@ -1,6 +1,8 @@
 import {
+	type ConsentState,
 	getCookie,
 	isUndefined,
+	onConsent,
 	onConsentChange,
 	storage,
 } from '@guardian/libs';
@@ -13,6 +15,7 @@ import type { ArticleDeprecated } from '../types/article';
 import type { Front } from '../types/front';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';
 import type { TagPage } from '../types/tagPage';
+import { getAuthStatus, getOptionsHeaders } from './identity';
 
 // User Attributes API cookies (created on sign-in)
 export const RECURRING_CONTRIBUTOR_COOKIE = 'gu_recurring_contributor';
@@ -222,4 +225,21 @@ export const getPurchaseInfo = (): PurchaseInfo => {
 	} catch {} // eslint-disable-line no-empty -- silently handle error
 
 	return purchaseInfo;
+};
+
+const hasCanTargetConsent = (): Promise<boolean> =>
+	onConsent()
+		.then(({ canTarget }: ConsentState) => canTarget)
+		.catch(() => false);
+
+// Returns Auth headers only if user has targeting consent and is signed in
+export const getAuthHeaders = async (): Promise<HeadersInit | undefined> => {
+	const hasConsented = await hasCanTargetConsent();
+	if (hasConsented) {
+		const authStatus = await getAuthStatus();
+		if (authStatus.kind === 'SignedIn') {
+			return getOptionsHeaders(authStatus).headers;
+		}
+	}
+	return undefined;
 };

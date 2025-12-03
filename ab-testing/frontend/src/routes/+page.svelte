@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { allABTests, activeABtests } from '../../../abTest';
-	import Table from '$lib/components/TableFixed.svelte';
-	import AudienceBreakdown from '$lib/components/AudienceBreakdown.svelte';
+	import { allABTests, activeABtests } from "@guardian/ab-testing-config";
+	import Table from "$lib/components/TableFixed.svelte";
+	import AudienceBreakdown from "$lib/components/AudienceBreakdown.svelte";
 </script>
 
 <h1 class="headline">A/B Tests (Beta)</h1>
@@ -43,12 +43,12 @@
 
 <style>
 	.headline {
-		font-family: 'GH Guardian Headline';
+		font-family: "GH Guardian Headline";
 		font-size: 36px;
 	}
 
 	.sub-headline {
-		font-family: 'GH Guardian Headline';
+		font-family: "GH Guardian Headline";
 		font-size: 24px;
 	}
 </style>

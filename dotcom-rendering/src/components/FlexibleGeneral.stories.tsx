@@ -5,8 +5,9 @@ import {
 	audioTrails,
 	galleryTrails,
 	getSublinks,
-	loopVideoCard,
 	opinionTrails,
+	selfHostedVerticalVideoCard,
+	selfHostedVideo54Card,
 	slideshowCard,
 	trails,
 	videoTrails,
@@ -261,7 +262,7 @@ const liveUpdatesCard = {
 	showQuotedHeadline: false,
 	dataLinkName: 'news | group-0 | card-@1',
 	mainMedia: {
-		type: 'Video',
+		type: 'YoutubeVideo',
 		id: 'fd00c892-407f-4d99-adfb-a8d12eada25f',
 		videoId: '04lLgC1NioA',
 		height: 300,
@@ -542,14 +543,24 @@ export const ImmersiveCardsSplashAndStandard: Story = {
 	},
 };
 
-export const LoopVideoCards: Story = {
-	name: 'Looping video cards',
+export const SelfHostedVideo5to4Cards: Story = {
+	name: 'Self-hosted 5:4 video cards',
 	args: {
-		frontSectionTitle: 'Loop video cards',
+		frontSectionTitle: 'Self-hosted 5:4 video cards',
 		groupedTrails: {
 			...emptyGroupedTrails,
-			splash: [loopVideoCard],
-			standard: [loopVideoCard], // Loop video is disabled at standard card size
+			splash: [selfHostedVideo54Card],
+			standard: [selfHostedVideo54Card], // Self-hosted video is disabled at standard card size
+		},
+	},
+};
+export const SelfHostedVerticalVideoCards: Story = {
+	name: 'Self-hosted vertical video cards',
+	args: {
+		frontSectionTitle: 'Self-hosted vertical video cards',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			splash: [selfHostedVerticalVideoCard],
 		},
 	},
 };

@@ -294,7 +294,7 @@ export const Video: Story = {
 			altText: 'alt text',
 		},
 		mainMedia: {
-			type: 'Video',
+			type: 'YoutubeVideo',
 			id: 'video-id',
 			videoId: 'video-id',
 			height: 1080,
