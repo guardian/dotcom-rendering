@@ -7059,15 +7059,15 @@ const paletteColours = {
 		light: () => sourcePalette.sport[500],
 		dark: () => sourcePalette.sport[500],
 	},
-	'--footall-match-stat-border': {
+	'--football-match-stat-border': {
 		light: () => sourcePalette.neutral[86],
-		dark: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[38],
 	},
-	'--footall-match-stat-button-background': {
+	'--football-match-stat-button-background': {
 		light: () => sourcePalette.sport[400],
-		dark: () => sourcePalette.sport[400],
+		dark: () => sourcePalette.sport[500],
 	},
-	'--footall-match-stat-name': {
+	'--football-match-stat-name': {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[86],
 	},
