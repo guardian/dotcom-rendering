@@ -52,9 +52,6 @@ const buttonWrapper = css`
 	display: flex;
 	flex-direction: column;
 	gap: ${space[1]}px;
-	justify-content: center;
-	align-items: center;
-	align-self: stretch;
 `;
 
 const imageArea = css`
