@@ -1,25 +1,30 @@
 import assert from "node:assert";
 import { describe, it, mock } from "node:test";
 import { S3Client } from "@aws-sdk/client-s3";
+import type { Jsonifiable } from "type-fest";
 import { fetchDictionaryArtifact } from "./fetch-artifact.ts";
 
 describe("fetch-artifact", () => {
 	describe("fetchDictionaryArtifact", () => {
+		const mockS3SendResponse = (responseBody?: Jsonifiable) => {
+			const mockBody = {
+				transformToString: async () =>
+					responseBody ? JSON.stringify(responseBody) : undefined,
+			};
+			const mockSend = mock.fn(async () => ({
+				Body: mockBody,
+			}));
+			mock.method(S3Client.prototype, "send", mockSend);
+			return mockSend;
+		};
+
 		it("should fetch and parse valid artifact from S3", async () => {
 			const mockData = [
 				{ item_key: "test1", item_value: "value1" },
 				{ item_key: "test2", item_value: "value2" },
 			];
 
-			const mockBody = {
-				transformToString: async () => JSON.stringify(mockData),
-			};
-
-			const mockSend = mock.fn(async () => ({
-				Body: mockBody,
-			}));
-
-			mock.method(S3Client.prototype, "send", mockSend);
+			const mockSend = mockS3SendResponse(mockData);
 
 			const result = await fetchDictionaryArtifact(
 				"test-bucket",
@@ -32,11 +37,7 @@ describe("fetch-artifact", () => {
 		});
 
 		it("should throw error when S3 response has no body", async () => {
-			const mockSend = mock.fn(async () => ({
-				Body: undefined,
-			}));
-
-			mock.method(S3Client.prototype, "send", mockSend);
+			mockS3SendResponse(undefined);
 
 			await assert.rejects(
 				async () => {
@@ -50,13 +51,7 @@ describe("fetch-artifact", () => {
 		});
 
 		it("should throw error when JSON parsing fails", async () => {
-			const mockBody = {
-				transformToString: async () => "invalid json {",
-			};
-
-			const mockSend = mock.fn(async () => ({
-				Body: mockBody,
-			}));
+			const mockSend = mockS3SendResponse("invalid json {");
 
 			mock.method(S3Client.prototype, "send", mockSend);
 
@@ -66,17 +61,9 @@ describe("fetch-artifact", () => {
 		});
 
 		it("should throw error when data structure is invalid", async () => {
-			const mockData = [
+			const mockSend = mockS3SendResponse([
 				{ wrong_key: "test1", wrong_value: "value1" }, // Invalid structure
-			];
-
-			const mockBody = {
-				transformToString: async () => JSON.stringify(mockData),
-			};
-
-			const mockSend = mock.fn(async () => ({
-				Body: mockBody,
-			}));
+			]);
 
 			mock.method(S3Client.prototype, "send", mockSend);
 
@@ -86,18 +73,10 @@ describe("fetch-artifact", () => {
 		});
 
 		it("should validate that all items have required fields", async () => {
-			const mockData = [
+			const mockSend = mockS3SendResponse([
 				{ item_key: "test1", item_value: "value1" },
 				{ item_key: "test2" }, // Missing item_value
-			];
-
-			const mockBody = {
-				transformToString: async () => JSON.stringify(mockData),
-			};
-
-			const mockSend = mock.fn(async () => ({
-				Body: mockBody,
-			}));
+			]);
 
 			mock.method(S3Client.prototype, "send", mockSend);
 
@@ -125,17 +104,7 @@ describe("fetch-artifact", () => {
 		});
 
 		it("should handle empty array response", async () => {
-			const mockData: never[] = [];
-
-			const mockBody = {
-				transformToString: async () => JSON.stringify(mockData),
-			};
-
-			const mockSend = mock.fn(async () => ({
-				Body: mockBody,
-			}));
-
-			mock.method(S3Client.prototype, "send", mockSend);
+			mockS3SendResponse([]);
 
 			const result = await fetchDictionaryArtifact(
 				"test-bucket",
