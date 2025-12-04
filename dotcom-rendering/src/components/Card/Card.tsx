@@ -163,6 +163,7 @@ export type Props = {
 	headlinePosition?: 'inner' | 'outer';
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
+	enableHls?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -420,6 +421,7 @@ export const Card = ({
 	headlinePosition = 'inner',
 	showLabsRedesign = false,
 	subtitleSize = 'small',
+	enableHls = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -978,6 +980,7 @@ export const Card = ({
 										media.mainMedia.subtitleSource
 									}
 									subtitleSize={subtitleSize}
+									enableHls={enableHls}
 								/>
 							</Island>
 						)}
