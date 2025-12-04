@@ -1,7 +1,7 @@
 import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import type { Infer } from "superstruct";
 import { array, create, object, string } from "superstruct";
-import { REGION } from "./constants";
+import { REGION } from "./constants.ts";
 
 const fastlyKVStruct = object({
 	item_key: string(),

@@ -19,6 +19,27 @@ describe("index", () => {
 		succeed: () => {},
 	};
 
+	const createCustomResourceEvent = (
+		overrides?: Partial<CloudFormationCustomResourceEvent>,
+	) => {
+		return {
+			RequestType: "Create",
+			ServiceToken:
+				"arn:aws:lambda:eu-west-1:123456789012:function:test-function",
+			ResponseURL: "https://example.com/response",
+			StackId:
+				"arn:aws:cloudformation:eu-west-1:123456789012:stack/test-stack/test-id",
+			RequestId: "test-request-id",
+			LogicalResourceId: "TestResource",
+			ResourceType: "Custom::DictionaryDeployer",
+			ResourceProperties: {
+				ServiceToken:
+					"arn:aws:lambda:eu-west-1:123456789012:function:test-function",
+			},
+			...overrides,
+		} as CloudFormationCustomResourceEvent;
+	};
+
 	afterEach(() => {
 		mock.restoreAll();
 	});
@@ -90,22 +111,10 @@ describe("index", () => {
 		});
 
 		await it("should send SUCCESS for Delete events without deploying", async () => {
-			const deleteEvent: CloudFormationCustomResourceEvent = {
-				RequestType: "Delete",
-				ServiceToken:
-					"arn:aws:lambda:eu-west-1:123456789012:function:test-function",
-				ResponseURL: "https://example.com/response",
-				StackId:
-					"arn:aws:cloudformation:eu-west-1:123456789012:stack/test-stack/test-id",
-				RequestId: "test-request-id",
-				LogicalResourceId: "TestResource",
-				ResourceType: "Custom::DictionaryDeployer",
-				PhysicalResourceId: "test-physical-id",
-				ResourceProperties: {
-					ServiceToken:
-						"arn:aws:lambda:eu-west-1:123456789012:function:test-function",
-				},
-			};
+			const deleteEvent: CloudFormationCustomResourceEvent =
+				createCustomResourceEvent({
+					RequestType: "Delete",
+				});
 
 			const { handler } = await import("./index.ts");
 
@@ -124,21 +133,7 @@ describe("index", () => {
 		await it("should deploy dictionaries for Create events", async () => {
 			process.env.STAGE = "TEST";
 
-			const createEvent: CloudFormationCustomResourceEvent = {
-				RequestType: "Create",
-				ServiceToken:
-					"arn:aws:lambda:eu-west-1:123456789012:function:test-function",
-				ResponseURL: "https://example.com/response",
-				StackId:
-					"arn:aws:cloudformation:eu-west-1:123456789012:stack/test-stack/test-id",
-				RequestId: "test-request-id",
-				LogicalResourceId: "TestResource",
-				ResourceType: "Custom::DictionaryDeployer",
-				ResourceProperties: {
-					ServiceToken:
-						"arn:aws:lambda:eu-west-1:123456789012:function:test-function",
-				},
-			};
+			const createEvent = createCustomResourceEvent();
 
 			const { handler } = await import("./index.ts");
 
@@ -156,26 +151,13 @@ describe("index", () => {
 		await it("should deploy dictionaries for update events", async () => {
 			process.env.STAGE = "TEST";
 
-			const updateEvent: CloudFormationCustomResourceEvent = {
+			const updateEvent = createCustomResourceEvent({
 				RequestType: "Update",
-				ServiceToken:
-					"arn:aws:lambda:eu-west-1:123456789012:function:test-function",
-				ResponseURL: "https://example.com/response",
-				StackId:
-					"arn:aws:cloudformation:eu-west-1:123456789012:stack/test-stack/test-id",
-				RequestId: "test-request-id",
-				LogicalResourceId: "TestResource",
-				PhysicalResourceId: "test-physical-id",
-				ResourceType: "Custom::DictionaryDeployer",
-				ResourceProperties: {
-					ServiceToken:
-						"arn:aws:lambda:eu-west-1:123456789012:function:test-function",
-				},
 				OldResourceProperties: {
 					ServiceToken:
 						"arn:aws:lambda:eu-west-1:123456789012:function:test-function",
 				},
-			};
+			});
 
 			const { handler } = await import("./index.ts");
 
@@ -197,21 +179,7 @@ describe("index", () => {
 				throw new Error("Deployment failed");
 			});
 
-			const createEvent: CloudFormationCustomResourceEvent = {
-				RequestType: "Create",
-				ServiceToken:
-					"arn:aws:lambda:eu-west-1:123456789012:function:test-function",
-				ResponseURL: "https://example.com/response",
-				StackId:
-					"arn:aws:cloudformation:eu-west-1:123456789012:stack/test-stack/test-id",
-				RequestId: "test-request-id",
-				LogicalResourceId: "TestResource",
-				ResourceType: "Custom::DictionaryDeployer",
-				ResourceProperties: {
-					ServiceToken:
-						"arn:aws:lambda:eu-west-1:123456789012:function:test-function",
-				},
-			};
+			const createEvent = createCustomResourceEvent();
 
 			const { handler } = await import("./index.ts");
 
@@ -233,21 +201,7 @@ describe("index", () => {
 				throw new Error("Fastly API token expired");
 			});
 
-			const createEvent: CloudFormationCustomResourceEvent = {
-				RequestType: "Create",
-				ServiceToken:
-					"arn:aws:lambda:eu-west-1:123456789012:function:test-function",
-				ResponseURL: "https://example.com/response",
-				StackId:
-					"arn:aws:cloudformation:eu-west-1:123456789012:stack/test-stack/test-id",
-				RequestId: "test-request-id",
-				LogicalResourceId: "TestResource",
-				ResourceType: "Custom::DictionaryDeployer",
-				ResourceProperties: {
-					ServiceToken:
-						"arn:aws:lambda:eu-west-1:123456789012:function:test-function",
-				},
-			};
+			const createEvent = createCustomResourceEvent();
 
 			const { handler } = await import("./index.ts");
 

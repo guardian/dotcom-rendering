@@ -1,44 +1,51 @@
 import assert from "node:assert";
-import type { Mock } from "node:test";
-import { beforeEach, describe, it, mock } from "node:test";
-import * as deployDictionary from "./deploy-dictionary.ts";
-import { fetchAndDeployArtifacts } from "./deploy.ts";
-import * as fetchArtifact from "./fetch-artifact.ts";
+import { before, beforeEach, describe, it, mock } from "node:test";
 
 describe("deploy", () => {
-	const setupMocks = ({
-		deployDictionaryMock,
-		fetchArtifactMock,
-	}: {
-		deployDictionaryMock: Mock<() => Promise<unknown>>;
-		fetchArtifactMock: Mock<() => Promise<unknown>>;
-	}) => ({
-		deployDictionaryMock: mock.method(
-			deployDictionary,
-			"deployDictionary",
-			mock.fn(async () => deployDictionaryMock),
-		),
-		fetchArtifactMock: mock.method(
-			fetchArtifact,
-			"fetchDictionaryArtifact",
-			mock.fn(async () => fetchArtifactMock),
-		),
-	});
-
-	beforeEach(() => {
-		// Set required environment variables for tests
-		process.env.ARTIFACT_BUCKET_NAME = "test-bucket";
-		process.env.STAGE = "TEST";
-	});
-
 	describe("fetchAndDeployArtifacts", () => {
-		it("should fetch and deploy artifacts in parallel", async () => {
-			const { deployDictionaryMock, fetchArtifactMock } = setupMocks({
-				fetchArtifactMock: mock.fn(async () => [
-					{ item_key: "test1", item_value: "value1" },
-				]),
-				deployDictionaryMock: mock.fn(async () => {}),
+		const deployDictionaryMock = mock.fn<() => Promise<unknown>>();
+		const fetchArtifactMock = mock.fn<() => Promise<unknown>>();
+
+		const mockDeployDictionary = (
+			impl: (...args: unknown[]) => Promise<unknown>,
+		) => {
+			deployDictionaryMock.mock.mockImplementation(impl);
+		};
+
+		const mockFetchArtifact = (
+			impl: (...args: unknown[]) => Promise<unknown>,
+		) => {
+			fetchArtifactMock.mock.mockImplementation(impl);
+		};
+
+		before(() => {
+			mock.module("./fetch-artifact.ts", {
+				namedExports: {
+					fetchDictionaryArtifact: fetchArtifactMock,
+				},
 			});
+
+			mock.module("./deploy-dictionary.ts", {
+				namedExports: {
+					deployDictionary: deployDictionaryMock,
+				},
+			});
+		});
+
+		beforeEach(() => {
+			// Set required environment variables for tests
+			process.env.ARTIFACT_BUCKET_NAME = "test-bucket";
+			process.env.STAGE = "TEST";
+
+			deployDictionaryMock.mock.resetCalls();
+			fetchArtifactMock.mock.resetCalls();
+		});
+
+		it("should fetch and deploy artifacts in parallel", async () => {
+			const mockKeyValues = [{ item_key: "test1", item_value: "value1" }];
+
+			mockDeployDictionary(mock.fn(async () => {}));
+			mockFetchArtifact(mock.fn(async () => mockKeyValues));
 
 			const mockDictionary1 = {
 				name: "ab-tests-dictionary",
@@ -46,6 +53,8 @@ describe("deploy", () => {
 			const mockDictionary2 = {
 				name: "mvt-dictionary",
 			};
+
+			const { fetchAndDeployArtifacts } = await import("./deploy.ts");
 
 			await fetchAndDeployArtifacts([
 				{
@@ -68,14 +77,14 @@ describe("deploy", () => {
 		it("should use correct S3 paths for artifacts", async () => {
 			const mockKeyValues = [{ item_key: "test1", item_value: "value1" }];
 
-			const { fetchArtifactMock } = setupMocks({
-				fetchArtifactMock: mock.fn(async () => mockKeyValues),
-				deployDictionaryMock: mock.fn(async () => {}),
-			});
+			mockFetchArtifact(mock.fn(async () => mockKeyValues));
+			mockDeployDictionary(mock.fn(async () => {}));
 
 			const mockDictionary = {
 				name: "test-dictionary",
 			};
+
+			const { fetchAndDeployArtifacts } = await import("./deploy.ts");
 
 			await fetchAndDeployArtifacts([
 				{
@@ -89,16 +98,18 @@ describe("deploy", () => {
 		});
 
 		it("should throw error when artifact fetch fails", async () => {
-			setupMocks({
-				fetchArtifactMock: mock.fn(async () => {
+			mockFetchArtifact(
+				mock.fn(async () => {
 					throw new Error("S3 fetch failed");
 				}),
-				deployDictionaryMock: mock.fn(async () => {}),
-			});
+			);
+			mockDeployDictionary(mock.fn(async () => {}));
 
 			const mockDictionary = {
 				name: "test-dictionary",
 			};
+
+			const { fetchAndDeployArtifacts } = await import("./deploy.ts");
 
 			await assert.rejects(
 				async () => {
@@ -119,16 +130,18 @@ describe("deploy", () => {
 		it("should throw error when deployment fails", async () => {
 			const mockKeyValues = [{ item_key: "test1", item_value: "value1" }];
 
-			setupMocks({
-				fetchArtifactMock: mock.fn(async () => mockKeyValues),
-				deployDictionaryMock: mock.fn(async () => {
+			mockFetchArtifact(mock.fn(async () => mockKeyValues));
+			mockDeployDictionary(
+				mock.fn(async () => {
 					throw new Error("Deployment failed");
 				}),
-			});
+			);
 
 			const mockDictionary = {
 				name: "test-dictionary",
 			};
+
+			const { fetchAndDeployArtifacts } = await import("./deploy.ts");
 
 			await assert.rejects(
 				async () => {
@@ -147,10 +160,10 @@ describe("deploy", () => {
 		});
 
 		it("should handle empty deployments array", async () => {
-			const { deployDictionaryMock, fetchArtifactMock } = setupMocks({
-				fetchArtifactMock: mock.fn(async () => []),
-				deployDictionaryMock: mock.fn(async () => {}),
-			});
+			mockFetchArtifact(mock.fn(async () => []));
+			mockDeployDictionary(mock.fn(async () => {}));
+
+			const { fetchAndDeployArtifacts } = await import("./deploy.ts");
 
 			await fetchAndDeployArtifacts([]);
 
