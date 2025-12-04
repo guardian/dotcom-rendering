@@ -8,6 +8,7 @@ import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPag
 import type { FEFootballMatchPage } from '../frontend/feFootballMatchPage';
 import type { FEFootballTablesPage } from '../frontend/feFootballTablesPage';
 import type { FEFront } from '../frontend/feFront';
+import type { FEHostedContent } from '../frontend/feHostedContent';
 import type { FETagPage } from '../frontend/feTagPage';
 import articleSchema from '../frontend/schemas/feArticle.json';
 import cricketMatchPageSchema from '../frontend/schemas/feCricketMatchPage.json';
@@ -23,7 +24,6 @@ import type { FENewslettersPageType } from '../types/newslettersPage';
 import blockSchema from './block-schema.json';
 import editionsCrosswordSchema from './editions-crossword-schema.json';
 import newslettersPageSchema from './newsletter-page-schema.json';
-import { FEHostedContent } from 'src/frontend/feHostedContent';
 
 const options: Options = {
 	verbose: false,
