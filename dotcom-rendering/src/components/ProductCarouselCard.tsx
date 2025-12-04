@@ -48,9 +48,12 @@ const buttonWrapper = css`
 	display: flex;
 	flex-direction: column;
 	gap: ${space[1]}px;
+	padding-bottom: ${space[4]}px;
 `;
 
 const imageArea = css`
+	padding-top: ${space[2]}px;
+	padding-bottom: ${space[1]}px;
 	grid-row: 2;
 	img {
 		width: 100%;
