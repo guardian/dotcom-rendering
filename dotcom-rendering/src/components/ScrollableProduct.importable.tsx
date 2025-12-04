@@ -27,7 +27,7 @@ export const ScrollableProduct = ({
 			{products.map((product: ProductBlockElement) => (
 				<ScrollableCarousel.SubgridItem
 					key={product.productCtas[0]?.url ?? product.elementId}
-					subgridRows={3}
+					subgridRows={4}
 				>
 					<ProductCarouselCard
 						product={product}

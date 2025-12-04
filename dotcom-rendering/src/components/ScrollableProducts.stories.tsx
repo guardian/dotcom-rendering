@@ -264,8 +264,7 @@ const meta = {
 			{
 				...product,
 				h2Id: 'product-1',
-				productName:
-					'Lorem ipsum dolor sit amet, consectetur adipiscing aliqua',
+				productName: 'Lorem ipsum dolor sit amet',
 			},
 			{ ...product, h2Id: 'product-2' },
 			{ ...product, h2Id: 'product-3' },

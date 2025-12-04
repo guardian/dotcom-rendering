@@ -30,6 +30,7 @@ const brandAndProductName = css`
 `;
 
 const readMoreCta = css`
+	grid-row: 2;
 	${textSansBold15};
 	text-decoration-line: underline;
 	text-decoration-color: #dcdcdc; /* stylelint-disable-line */
@@ -52,9 +53,8 @@ const buttonWrapper = css`
 `;
 
 const imageArea = css`
-	padding-top: ${space[2]}px;
 	padding-bottom: ${space[1]}px;
-	grid-row: 2;
+	grid-row: 3;
 	img {
 		width: 100%;
 		height: auto;
@@ -107,16 +107,16 @@ export const ProductCarouselCard = ({
 						</div>
 					</>
 				)}
-				{showReadMore && !isUndefined(product.h2Id) && (
-					<a
-						href={`#${product.h2Id}`}
-						onFocus={(event) => event.stopPropagation()}
-						css={readMoreCta}
-					>
-						Read more
-					</a>
-				)}
 			</div>
+			{showReadMore && !isUndefined(product.h2Id) && (
+				<a
+					href={`#${product.h2Id}`}
+					onFocus={(event) => event.stopPropagation()}
+					css={readMoreCta}
+				>
+					Read more
+				</a>
+			)}
 			<div css={imageArea}>
 				<ProductCardImage
 					format={format}
@@ -126,7 +126,7 @@ export const ProductCarouselCard = ({
 			</div>
 			<div
 				css={css`
-					grid-row: 3;
+					grid-row: 4;
 				`}
 			>
 				{!hasHeading && (
