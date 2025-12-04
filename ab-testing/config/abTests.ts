@@ -53,9 +53,22 @@ const ABTests: ABTest[] = [
 		status: "ON",
 		expirationDate: "2025-12-30",
 		type: "server",
-		audienceSize: 0 / 100,
+		audienceSize: 40 / 100,
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
+	},
+	{
+		name: "commercial-user-module-uid2",
+		description:
+			"A hold back test to measure the impact of integrating UID2 module",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: `2025-12-19`,
+		type: "client",
+		status: "ON",
+		audienceSize: 10 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
 	},
 ];
 

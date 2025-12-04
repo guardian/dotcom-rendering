@@ -94,6 +94,7 @@ const withBannerData =
 			bannerChannel,
 			abandonedBasket,
 			promoCodes,
+			isCollapsible,
 		} = bannerProps;
 
 		const [hasBeenSeen, setNode] = useIsInView({
@@ -347,6 +348,7 @@ const withBannerData =
 					submitComponentEvent,
 					design,
 					promoCodes,
+					isCollapsible,
 				};
 
 				return (

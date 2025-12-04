@@ -14,7 +14,7 @@ import type {
 } from 'react';
 import { forwardRef } from 'react';
 import type { ActiveCue } from '../lib/useSubtitles';
-import type { Source } from '../lib/video';
+import { filterOutHlsSources, type Source } from '../lib/video';
 import { palette } from '../palette';
 import type { VideoPlayerFormat } from '../types/mainMedia';
 import { narrowPlayIconWidth, PlayIcon } from './Card/components/PlayIcon';
@@ -28,10 +28,11 @@ const videoStyles = (width: number, height: number) => css`
 	display: block;
 	height: auto;
 	width: 100%;
+	max-height: 100vh;
+	max-height: 100svh;
 	cursor: pointer;
 	/* Prevents CLS by letting the browser know the space the video will take up. */
 	aspect-ratio: ${width} / ${height};
-	object-fit: cover;
 `;
 
 const subtitleStyles = (subtitleSize: SubtitleSize | undefined) => css`
@@ -100,8 +101,8 @@ type Props = {
 	sources: Source[];
 	atomId: string;
 	uniqueId: string;
-	width: number;
 	height: number;
+	width: number;
 	videoStyle: VideoPlayerFormat;
 	FallbackImageComponent: ReactElement;
 	isPlayable: boolean;
@@ -125,6 +126,7 @@ type Props = {
 	subtitleSize?: SubtitleSize;
 	/* used in custom subtitle overlays */
 	activeCue?: ActiveCue | null;
+	enableHls: boolean;
 };
 
 /**
@@ -142,8 +144,8 @@ export const SelfHostedVideoPlayer = forwardRef(
 			sources,
 			atomId,
 			uniqueId,
-			width,
 			height,
+			width,
 			videoStyle,
 			FallbackImageComponent,
 			posterImage,
@@ -166,6 +168,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			subtitleSource,
 			subtitleSize,
 			activeCue,
+			enableHls,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -183,6 +186,10 @@ export const SelfHostedVideoPlayer = forwardRef(
 		const dataLinkName = `gu-video-${videoStyle}-${
 			showPlayIcon ? 'play' : 'pause'
 		}-${atomId}`;
+
+		const filteredVideoSources = enableHls
+			? sources
+			: filterOutHlsSources(sources);
 
 		return (
 			<>
@@ -225,7 +232,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					onKeyDown={handleKeyDown}
 					onError={onError}
 				>
-					{sources.map((source) => (
+					{filteredVideoSources.map((source) => (
 						<source
 							key={source.mimeType}
 							/* The start time is set to 1ms so that Safari will autoplay the video */

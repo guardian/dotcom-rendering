@@ -3247,6 +3247,21 @@
                         "Loop"
                     ],
                     "type": "string"
+                },
+                "dimensions": {
+                    "type": "object",
+                    "properties": {
+                        "width": {
+                            "type": "number"
+                        },
+                        "height": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "height",
+                        "width"
+                    ]
                 }
             },
             "required": [
@@ -3952,8 +3967,7 @@
                                         "type": "string"
                                     },
                                     "mimeType": {
-                                        "type": "string",
-                                        "const": "video/mp4"
+                                        "$ref": "#/definitions/SupportedVideoFileType"
                                     }
                                 },
                                 "required": [
@@ -3995,6 +4009,14 @@
                 "Cinemagraph",
                 "Default",
                 "Loop"
+            ],
+            "type": "string"
+        },
+        "SupportedVideoFileType": {
+            "enum": [
+                "application/vnd.apple.mpegurl",
+                "application/x-mpegURL",
+                "video/mp4"
             ],
             "type": "string"
         },

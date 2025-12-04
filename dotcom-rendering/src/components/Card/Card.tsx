@@ -163,6 +163,7 @@ export type Props = {
 	headlinePosition?: 'inner' | 'outer';
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
+	enableHls?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -420,6 +421,7 @@ export const Card = ({
 	headlinePosition = 'inner',
 	showLabsRedesign = false,
 	subtitleSize = 'small',
+	enableHls = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -844,7 +846,6 @@ export const Card = ({
 			format={format}
 			showTopBarDesktop={showTopBarDesktop}
 			showTopBarMobile={showTopBarMobile}
-			isOnwardContent={isOnwardContent}
 			containerPalette={containerPalette}
 		>
 			<CardLink
@@ -918,31 +919,26 @@ export const Card = ({
 						mediaType={media.type}
 						mediaPositionOnDesktop={mediaPositionOnDesktop}
 						mediaPositionOnMobile={mediaPositionOnMobile}
-						hideMediaOverlay={media.type === 'slideshow'}
 						padMedia={isMediaCardOrNewsletter && isBetaContainer}
 						isBetaContainer={isBetaContainer}
 						isSmallCard={isSmallCard}
 					>
 						{media.type === 'slideshow' && (
-							<div
-								css={css`
-									position: relative;
-									z-index: ${getZIndex('card-nested-link')};
-								`}
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
 							>
-								<Island
-									priority="feature"
-									defer={{ until: 'visible' }}
-								>
-									<SlideshowCarousel
-										images={media.slideshowImages}
-										imageSize={mediaSize}
-										hasNavigationBackgroundColour={
-											!!hasSublinks
-										}
-									/>
-								</Island>
-							</div>
+								<SlideshowCarousel
+									images={media.slideshowImages}
+									imageSize={mediaSize}
+									hasNavigationBackgroundColour={
+										!!hasSublinks
+									}
+									linkTo={linkTo}
+									linkAriaLabel={headlineText}
+									dataLinkName={resolvedDataLinkName}
+								/>
+							</Island>
 						)}
 						{media.type === 'avatar' && (
 							<AvatarContainer
@@ -984,6 +980,7 @@ export const Card = ({
 										media.mainMedia.subtitleSource
 									}
 									subtitleSize={subtitleSize}
+									enableHls={enableHls}
 								/>
 							</Island>
 						)}
@@ -1081,10 +1078,6 @@ export const Card = ({
 											imageSize={mediaSize}
 											alt={headlineText}
 											loading={imageLoading}
-											roundedCorners={
-												isOnwardContent &&
-												!isMoreGalleriesOnwardContent
-											}
 											aspectRatio={aspectRatio}
 										/>
 									</div>
@@ -1098,10 +1091,6 @@ export const Card = ({
 									imageSize={mediaSize}
 									alt={media.imageAltText}
 									loading={imageLoading}
-									roundedCorners={
-										isOnwardContent &&
-										!isMoreGalleriesOnwardContent
-									}
 									aspectRatio={aspectRatio}
 								/>
 								{isVideoMainMedia && mainMedia.duration > 0 && (
@@ -1143,10 +1132,6 @@ export const Card = ({
 											imageSize="small"
 											alt={media.imageAltText}
 											loading={imageLoading}
-											roundedCorners={
-												isOnwardContent &&
-												!isMoreGalleriesOnwardContent
-											}
 											aspectRatio="1:1"
 										/>
 									</div>
