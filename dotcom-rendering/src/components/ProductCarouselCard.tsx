@@ -79,7 +79,6 @@ const brandAndProductNameRow = css`
 
 const brandAndProductNameInline = css`
 	${headlineMedium17};
-	display: inline;
 `;
 
 const productNameStyle = css`
