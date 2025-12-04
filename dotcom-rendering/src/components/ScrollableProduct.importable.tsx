@@ -22,13 +22,19 @@ export const ScrollableProduct = ({
 			visibleCarouselSlidesOnMobile={1.2}
 			visibleCarouselSlidesOnTablet={2.666666}
 			fixedCardWidthOverrides={fixedWidthOverrides}
+			gapSizes={{ row: 'none', column: 'large' }}
 		>
 			{products.map((product: ProductBlockElement) => (
-				<ScrollableCarousel.Item
+				<ScrollableCarousel.SubgridItem
 					key={product.productCtas[0]?.url ?? product.elementId}
+					subgridRows={3}
 				>
-					<ProductCarouselCard product={product} format={format} />
-				</ScrollableCarousel.Item>
+					<ProductCarouselCard
+						product={product}
+						format={format}
+						showReadMore={true}
+					/>
+				</ScrollableCarousel.SubgridItem>
 			))}
 		</ScrollableCarousel>
 	);

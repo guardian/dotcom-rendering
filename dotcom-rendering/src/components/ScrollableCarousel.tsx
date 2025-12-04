@@ -8,7 +8,7 @@ import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { palette } from '../palette';
 import { CarouselNavigationButtons } from './CarouselNavigationButtons';
 
-type GapSize = 'small' | 'medium' | 'large';
+type GapSize = 'small' | 'medium' | 'large' | 'none';
 type GapSizes = { row: GapSize; column: GapSize };
 export type FixedWidthOverride = { breakpoint: Breakpoint; width: number };
 
@@ -70,6 +70,18 @@ const carouselGapStyles = (column: number, row: number) => {
 		row-gap: ${row}px;
 	`;
 };
+
+const subgridStyles = ({ subgridRows }: { subgridRows: number }) => css`
+	scroll-snap-align: start;
+	position: relative;
+	display: grid;
+	@supports (grid-template-rows: subgrid) {
+		grid-column: span 1;
+		grid-row: span ${subgridRows};
+		grid-template-rows: subgrid;
+		grid-template-columns: subgrid;
+	}
+`;
 
 const itemStyles = css`
 	display: flex;
@@ -212,6 +224,8 @@ const getGapSize = (gap: GapSize) => {
 			return space[4];
 		case 'large':
 			return space[5];
+		case 'none':
+			return 0;
 	}
 };
 
@@ -415,6 +429,24 @@ ScrollableCarousel.Item = ({
 			isStackingCarousel
 				? stackedRowLeftBorderStyles
 				: singleRowLeftBorderStyles,
+		]}
+	>
+		{children}
+	</li>
+);
+
+ScrollableCarousel.SubgridItem = ({
+	subgridRows,
+	children,
+}: {
+	subgridRows: number;
+	children: React.ReactNode;
+}) => (
+	<li
+		css={[
+			itemStyles,
+			subgridStyles({ subgridRows }),
+			singleRowLeftBorderStyles,
 		]}
 	>
 		{children}

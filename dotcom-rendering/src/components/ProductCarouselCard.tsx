@@ -20,11 +20,6 @@ export type ProductCarouselCardProps = {
 	showReadMore?: boolean;
 };
 
-const baseCard = css`
-	display: flex;
-	flex-direction: column;
-`;
-
 const productCarouselCardHeading = css`
 	${headlineBold20};
 	color: ${lifestyle[300]};
@@ -56,6 +51,7 @@ const buttonWrapper = css`
 `;
 
 const imageArea = css`
+	grid-row: 2;
 	img {
 		width: 100%;
 		height: auto;
@@ -84,30 +80,40 @@ export const ProductCarouselCard = ({
 	const firstCta = product.productCtas[0];
 
 	return (
-		<div css={baseCard}>
-			{hasHeading && (
-				<>
-					<div
-						css={productCarouselCardHeading}
-						dangerouslySetInnerHTML={{
-							__html: product.primaryHeadingHtml,
-						}}
-					/>
-					<div css={brandAndProductNameRow}>
-						<span css={brandAndProductNameInline}>
-							{product.brandName}{' '}
-						</span>
-						<span css={brandAndProductNameInline}>
-							{product.productName}
-						</span>
-					</div>
-				</>
-			)}
-			{showReadMore && !isUndefined(product.h2Id) && (
-				<a href={`#${product.h2Id}`} css={readMoreCta}>
-					Read more
-				</a>
-			)}
+		<>
+			<div
+				css={css`
+					grid-row: 1;
+				`}
+			>
+				{hasHeading && (
+					<>
+						<div
+							css={productCarouselCardHeading}
+							dangerouslySetInnerHTML={{
+								__html: product.primaryHeadingHtml,
+							}}
+						/>
+						<div css={brandAndProductNameRow}>
+							<span css={brandAndProductNameInline}>
+								{product.brandName}{' '}
+							</span>
+							<span css={brandAndProductNameInline}>
+								{product.productName}
+							</span>
+						</div>
+					</>
+				)}
+				{showReadMore && !isUndefined(product.h2Id) && (
+					<a
+						href={`#${product.h2Id}`}
+						onFocus={(event) => event.stopPropagation()}
+						css={readMoreCta}
+					>
+						Read more
+					</a>
+				)}
+			</div>
 			<div css={imageArea}>
 				<ProductCardImage
 					format={format}
@@ -115,22 +121,30 @@ export const ProductCarouselCard = ({
 					url={undefined}
 				/>
 			</div>
-			{!hasHeading && (
-				<div>
-					<div css={brandAndProductName}>{product.brandName}</div>
-					<div css={productNameStyle}>{product.productName}</div>
+			<div
+				css={css`
+					grid-row: 3;
+				`}
+			>
+				{!hasHeading && (
+					<div>
+						<div css={brandAndProductName}>{product.brandName}</div>
+						<div css={productNameStyle}>{product.productName}</div>
+					</div>
+				)}
+				<div css={priceStyle}>
+					{firstCta?.price ?? 'Price unavailable'}
 				</div>
-			)}
-			<div css={priceStyle}>{firstCta?.price ?? 'Price unavailable'}</div>
 
-			<div css={buttonWrapper}>
-				<ProductCardButtons
-					productCtas={firstCta ? [firstCta] : []}
-					buttonLabelOverride={
-						firstCta ? `Buy at ${firstCta.retailer}` : 'Buy'
-					}
-				/>
+				<div css={buttonWrapper}>
+					<ProductCardButtons
+						productCtas={firstCta ? [firstCta] : []}
+						buttonLabelOverride={
+							firstCta ? `Buy at ${firstCta.retailer}` : 'Buy'
+						}
+					/>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
