@@ -1,6 +1,7 @@
 import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import type { Infer } from "superstruct";
 import { array, create, object, string } from "superstruct";
+import { REGION } from "./constants";
 
 const fastlyKVStruct = object({
 	item_key: string(),
@@ -19,7 +20,7 @@ const fetchDictionaryArtifact = async (
 	Bucket: string,
 	Key: string,
 ): Promise<KeyValue[]> => {
-	const s3Client = new S3Client({ region: "eu-west-1" });
+	const s3Client = new S3Client({ region: REGION });
 
 	const getObjectCommand = new GetObjectCommand({
 		Bucket,

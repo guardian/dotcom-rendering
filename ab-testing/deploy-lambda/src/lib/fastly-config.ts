@@ -1,9 +1,10 @@
 import { GetParameterCommand, SSMClient } from "@aws-sdk/client-ssm";
 import { configStruct } from "@guardian/ab-testing-config/lib/config.ts";
 import { assert } from "superstruct";
+import { REGION } from "./constants";
 
 const getSecureString = async (name: string) => {
-	const ssmClient = new SSMClient({ region: "eu-west-1" });
+	const ssmClient = new SSMClient({ region: REGION });
 
 	const response = await ssmClient.send(
 		new GetParameterCommand({
