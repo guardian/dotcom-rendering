@@ -1,14 +1,15 @@
-import { css } from '@emotion/react';
+import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { productImage } from '../../fixtures/manual/productImage';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { ProductBlockElement } from '../types/content';
-import { ProductCarouselCard } from './ProductCarouselCard';
+import { ScrollableProduct } from './ScrollableProduct.importable';
 
 const product = {
 	_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
 	elementId: 'b1f6e8e2-3f3a-4f0c-8d1e-5f3e3e3e3e3e',
-	primaryHeadingHtml: 'Best Kettle overall',
+	primaryHeadingHtml: '<em>Best Kettle overall</em>',
 	secondaryHeadingHtml: 'Bosch Sky Kettle',
 	brandName: 'Bosch',
 	productName: 'Sky Kettle',
@@ -246,65 +247,40 @@ const product = {
 } satisfies ProductBlockElement;
 
 const meta = {
-	component: ProductCarouselCard,
-	title: 'Components/ProductCarouselCard',
+	title: 'Article Carousel/Scrollable Products',
+	component: ScrollableProduct,
+	parameters: {
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.tablet,
+				breakpoints.wide,
+			],
+		},
+	},
 	args: {
-		product,
+		products: [
+			product,
+			{
+				...product,
+				productName:
+					'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+			},
+			product,
+			product,
+			product,
+		],
 		format: {
-			design: ArticleDesign.Standard,
+			design: ArticleDesign.Review,
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Lifestyle,
 		},
-		showReadMore: true,
 	},
-	render: (args) => (
-		<div
-			css={css`
-				width: 280px;
-			`}
-		>
-			<ProductCarouselCard {...args} />,
-		</div>
-	),
-} satisfies Meta<typeof ProductCarouselCard>;
+	decorators: [centreColumnDecorator],
+} satisfies Meta<typeof ScrollableProduct>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default = {} satisfies Story;
-
-export const WithoutReadMore = {
-	args: {
-		showReadMore: false,
-	},
-} satisfies Story;
-
-export const WithoutHeadingDisclaimerOrReadMore = {
-	args: {
-		product: {
-			...product,
-			primaryHeadingHtml: '',
-		},
-		showReadMore: false,
-	},
-} satisfies Story;
-
-export const WithLongHeadingProductNameAndCTA = {
-	args: {
-		product: {
-			...product,
-			primaryHeadingHtml: 'Super long product category review name',
-			productName:
-				'Sky Kettle with a super duper long name that goes on and on',
-			productCtas: [
-				{
-					url: 'https://www.johnlewis.com/bosch-twk7203gb-sky-variable-temperature-kettle-1-7l-black/p3228625',
-					text: '',
-					retailer: 'John Lewis with a very long name',
-					price: '£45.99',
-				},
-			],
-		},
-	},
-};
+export const With5Cards = {} satisfies Story;

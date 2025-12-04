@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import {
 	headlineBold20,
 	headlineMedium17,
@@ -21,10 +22,7 @@ export type ProductCarouselCardProps = {
 
 const baseCard = css`
 	display: flex;
-	width: 280px;
 	flex-direction: column;
-	align-items: flex-start;
-	padding: ${space[3]}px 10px ${space[4]}px 10px;
 `;
 
 const productCarouselCardHeading = css`
@@ -52,38 +50,24 @@ const priceStyle = css`
 `;
 
 const buttonWrapper = css`
-	grid-area: buttons;
 	display: flex;
 	flex-direction: column;
 	gap: ${space[1]}px;
-	justify-content: center;
-	align-items: center;
-	align-self: stretch;
 `;
 
 const imageArea = css`
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	align-self: stretch;
-	aspect-ratio: 1 / 1;
-	height: 280px;
-
 	img {
 		width: 100%;
-		height: 280px;
-		object-fit: cover;
+		height: auto;
 	}
 `;
 
 const brandAndProductNameRow = css`
-	display: block;
 	line-height: 1.3;
 `;
 
 const brandAndProductNameInline = css`
 	${headlineMedium17};
-	display: inline;
 `;
 
 const productNameStyle = css`
@@ -103,9 +87,12 @@ export const ProductCarouselCard = ({
 		<div css={baseCard}>
 			{hasHeading && (
 				<>
-					<div css={productCarouselCardHeading}>
-						{product.primaryHeadingHtml}
-					</div>
+					<div
+						css={productCarouselCardHeading}
+						dangerouslySetInnerHTML={{
+							__html: product.primaryHeadingHtml,
+						}}
+					/>
 					<div css={brandAndProductNameRow}>
 						<span css={brandAndProductNameInline}>
 							{product.brandName}{' '}
@@ -116,7 +103,11 @@ export const ProductCarouselCard = ({
 					</div>
 				</>
 			)}
-			{showReadMore && <div css={readMoreCta}>Read more</div>}
+			{showReadMore && !isUndefined(product.h2Id) && (
+				<a href={`#${product.h2Id}`} css={readMoreCta}>
+					Read more
+				</a>
+			)}
 			<div css={imageArea}>
 				<ProductCardImage
 					format={format}

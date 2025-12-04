@@ -1,4 +1,7 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
+import type { Breakpoint } from '@guardian/source/foundations';
 import { from, space, until } from '@guardian/source/foundations';
 import { useEffect, useRef, useState } from 'react';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
@@ -7,12 +10,14 @@ import { CarouselNavigationButtons } from './CarouselNavigationButtons';
 
 type GapSize = 'small' | 'medium' | 'large';
 type GapSizes = { row: GapSize; column: GapSize };
+export type FixedWidthOverride = { breakpoint: Breakpoint; width: number };
 
 type Props = {
 	children: React.ReactNode;
 	carouselLength: number;
 	visibleCarouselSlidesOnMobile: number;
 	visibleCarouselSlidesOnTablet: number;
+	fixedCardWidthOverrides?: FixedWidthOverride[];
 	sectionId?: string;
 	shouldStackCards?: { desktop: boolean; mobile: boolean };
 	gapSizes?: GapSizes;
@@ -37,19 +42,6 @@ const gridGapMobile = 10;
  */
 const containerStyles = css`
 	position: relative;
-	margin-left: -${gridGapMobile}px;
-	margin-right: -${gridGapMobile}px;
-	${from.mobileLandscape} {
-		margin-left: -${gridGap}px;
-		margin-right: -${gridGap}px;
-	}
-	${from.tablet} {
-		margin-left: ${gridGap / 2}px;
-		margin-right: ${gridGap / 2}px;
-	}
-	${from.leftCol} {
-		margin-left: 0;
-	}
 `;
 
 const carouselStyles = css`
@@ -70,24 +62,6 @@ const carouselStyles = css`
 		display: none; /* Safari and Chrome */
 	}
 	scrollbar-width: none; /* Firefox */
-
-	padding-left: ${gridGapMobile}px;
-	padding-right: ${gridGapMobile}px;
-	scroll-padding-left: ${gridGapMobile}px;
-	${from.mobileLandscape} {
-		padding-left: ${gridGap}px;
-		padding-right: ${gridGap}px;
-		scroll-padding-left: ${gridGap}px;
-	}
-	${from.tablet} {
-		padding-left: 0;
-		padding-right: 0;
-		scroll-padding-left: 0;
-	}
-	${from.leftCol} {
-		padding-left: ${gridGap / 2}px;
-		scroll-padding-left: ${gridGap / 2}px;
-	}
 `;
 
 const carouselGapStyles = (column: number, row: number) => {
@@ -157,13 +131,15 @@ const stackedCardRowsStyles = ({
  * @param {number} totalCards - The total number of cards in the carousel.
  * @param {number} visibleCarouselSlidesOnMobile - Number of cards to show at once on mobile.
  * @param {number} visibleCarouselSlidesOnTablet - Number of cards to show at once on tablet.
+ * @param fixedCardWidthOverrides - An alternative method for deciding the width of cards at various breakpoints
  * @returns {string} - The CSS styles for the grid layout.
  */
 const generateCarouselColumnStyles = (
 	totalCards: number,
 	visibleCarouselSlidesOnMobile: number,
 	visibleCarouselSlidesOnTablet: number,
-) => {
+	fixedCardWidthOverrides?: FixedWidthOverride[],
+): SerializedStyles[] => {
 	const peepingCardWidth = space[8];
 	const cardGap = 20;
 	const offsetPeepingCardWidth =
@@ -171,9 +147,24 @@ const generateCarouselColumnStyles = (
 	const offsetCardGap =
 		(cardGap * (visibleCarouselSlidesOnTablet - 1)) /
 		visibleCarouselSlidesOnTablet;
+	const fixedWidths: SerializedStyles[] = [];
+	if (!isUndefined(fixedCardWidthOverrides)) {
+		for (const fixedCardWidthOverride of fixedCardWidthOverrides) {
+			fixedWidths.push(css`
+				${from[fixedCardWidthOverride.breakpoint]} {
+					grid-template-columns: repeat(
+						${totalCards},
+						${fixedCardWidthOverride.width}px
+					);
+				}
+			`);
+		}
+		return fixedWidths;
+	}
 
-	return css`
-		/**
+	return [
+		css`
+			/**
 		 * On mobile a 32px slice of the next card is shown to indicate there
 		 * are more cards that can be scrolled to. Extra padding is also added
 		 * to the left and right to align cards with the page grid as the
@@ -182,34 +173,35 @@ const generateCarouselColumnStyles = (
 		 * These values are divided by the number of visible cards and
 		 * subtracted from their width so they are shown at the correct size.
 		 */
-		grid-template-columns: repeat(
-			${totalCards},
-			calc(
-				(100% / ${visibleCarouselSlidesOnMobile}) -
-					${offsetPeepingCardWidth}px +
-					${gridGapMobile / visibleCarouselSlidesOnMobile}px
-			)
-		);
-		${from.mobileLandscape} {
 			grid-template-columns: repeat(
 				${totalCards},
 				calc(
 					(100% / ${visibleCarouselSlidesOnMobile}) -
 						${offsetPeepingCardWidth}px +
-						${gridGap / visibleCarouselSlidesOnMobile}px
+						${gridGapMobile / visibleCarouselSlidesOnMobile}px
 				)
 			);
-		}
-		${from.tablet} {
-			grid-template-columns: repeat(
-				${totalCards},
-				calc(
-					(${100 / visibleCarouselSlidesOnTablet}%) -
-						${offsetCardGap}px
-				)
-			);
-		}
-	`;
+			${from.mobileLandscape} {
+				grid-template-columns: repeat(
+					${totalCards},
+					calc(
+						(100% / ${visibleCarouselSlidesOnMobile}) -
+							${offsetPeepingCardWidth}px +
+							${gridGap / visibleCarouselSlidesOnMobile}px
+					)
+				);
+			}
+			${from.tablet} {
+				grid-template-columns: repeat(
+					${totalCards},
+					calc(
+						(${100 / visibleCarouselSlidesOnTablet}%) -
+							${offsetCardGap}px
+					)
+				);
+			}
+		`,
+	];
 };
 
 const getGapSize = (gap: GapSize) => {
@@ -231,6 +223,7 @@ export const ScrollableCarousel = ({
 	carouselLength,
 	visibleCarouselSlidesOnMobile,
 	visibleCarouselSlidesOnTablet,
+	fixedCardWidthOverrides,
 	sectionId,
 	shouldStackCards = { desktop: false, mobile: false },
 	gapSizes = { column: 'large', row: 'large' },
@@ -374,10 +367,11 @@ export const ScrollableCarousel = ({
 				css={[
 					carouselStyles,
 					carouselGapStyles(columnGap, rowGap),
-					generateCarouselColumnStyles(
+					...generateCarouselColumnStyles(
 						carouselLength,
 						visibleCarouselSlidesOnMobile,
 						visibleCarouselSlidesOnTablet,
+						fixedCardWidthOverrides,
 					),
 					stackedCardRowsStyles(shouldStackCards),
 				]}
