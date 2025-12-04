@@ -43,18 +43,18 @@ test("riffRaffYamlFile", async () => {
 		const region = "eu-west-1";
 
 		new AbTestingConfig(app, "AbTestingConfig", {
-			stack: "frontend",
+			stack,
 			stage: "CODE",
 			env: {
-				region: "eu-west-1",
+				region,
 			},
 		});
 
 		new AbTestingDeploymentLambda(app, "AbTestingDeploymentLambda", {
-			stack: "frontend",
+			stack,
 			stage: "CODE",
 			env: {
-				region: "eu-west-1",
+				region,
 			},
 		});
 
@@ -63,19 +63,9 @@ test("riffRaffYamlFile", async () => {
 			riffRaffYaml: { deployments },
 		} = riffRaff;
 
-		const configCloudformationDeploymentName = [
-			"cfn",
-			region,
-			stack,
-			"ab-testing-config",
-		].join("-");
+		const configCloudformationDeploymentName = `cfn-${region}-${stack}-ab-testing-config`;
 
-		const deploymentLambdaDeploymentName = [
-			"lambda-update",
-			region,
-			stack,
-			"ab-testing-deployment-lambda",
-		].join("-");
+		const deploymentLambdaDeploymentName = `lambda-update-${region}-${stack}-ab-testing-deployment-lambda`;
 
 		const configCloudformationDeployment = deployments.get(
 			configCloudformationDeploymentName,
