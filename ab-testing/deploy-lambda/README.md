@@ -27,5 +27,5 @@ install dependencies:
 Call the `run.ts` script, (be sure to announce you're using the CODE stage in the semaphore chat channel):
 
 ```bash
- STAGE=CODE node src/run.ts
+ STAGE=CODE ARTIFACT_BUCKET_NAME=the-bucket node src/run.ts
 ```
