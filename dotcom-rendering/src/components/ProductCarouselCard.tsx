@@ -74,7 +74,6 @@ const imageArea = css`
 `;
 
 const brandAndProductNameRow = css`
-	display: block;
 	line-height: 1.3;
 `;
 
