@@ -58,17 +58,9 @@ const buttonWrapper = css`
 `;
 
 const imageArea = css`
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	align-self: stretch;
-	aspect-ratio: 1 / 1;
-	height: 280px;
-
 	img {
 		width: 100%;
-		height: 280px;
-		object-fit: cover;
+		height: auto;
 	}
 `;
 
