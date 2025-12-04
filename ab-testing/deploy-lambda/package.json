@@ -33,6 +33,7 @@
 		"prettier": "3.0.3",
 		"rollup": "4.53.2",
 		"rollup-plugin-esbuild": "6.2.1",
+		"type-fest": "4.21.0",
 		"typescript": "5.9.3"
 	}
 }

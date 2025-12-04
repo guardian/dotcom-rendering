@@ -1,4 +1,5 @@
 import type { CloudFormationCustomResourceEvent, Context } from "aws-lambda";
+import type { Jsonifiable } from "type-fest";
 
 const SUCCESS = "SUCCESS";
 const FAILED = "FAILED";
@@ -17,7 +18,7 @@ const send = async (
 	event: CloudFormationCustomResourceEvent,
 	context: Context,
 	responseStatus: Status,
-	responseData?: unknown,
+	responseData?: Jsonifiable,
 	physicalResourceId?: string,
 ) => {
 	const responseBody = JSON.stringify({
