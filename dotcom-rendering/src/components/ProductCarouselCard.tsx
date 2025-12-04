@@ -49,7 +49,6 @@ const priceStyle = css`
 `;
 
 const buttonWrapper = css`
-	grid-area: buttons;
 	display: flex;
 	flex-direction: column;
 	gap: ${space[1]}px;
