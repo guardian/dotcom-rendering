@@ -29,8 +29,8 @@ export const riffRaffYamlFile = ({
 		app: "ab-testing-config-artifact",
 		contentDirectory: "ab-testing-config-artifacts",
 		type: "aws-s3",
-		regions: new Set(["eu-west-1"]),
-		stacks: new Set(["frontend"]),
+		regions: new Set([region]),
+		stacks: new Set([stack]),
 		parameters: {
 			bucketSsmKey: "/account/services/dotcom-store.bucket",
 			cacheControl: "public, max-age=315360000",
@@ -44,8 +44,8 @@ export const riffRaffYamlFile = ({
 		app: "ab-testing-ui-artifact",
 		contentDirectory: "ab-testing-ui-artifact",
 		type: "aws-s3",
-		regions: new Set(["eu-west-1"]),
-		stacks: new Set(["frontend"]),
+		regions: new Set([region]),
+		stacks: new Set([stack]),
 		parameters: {
 			bucketSsmKey: "/account/services/dotcom-store.bucket",
 			cacheControl: "public, max-age=315360000",
