@@ -21,10 +21,7 @@ export type ProductCarouselCardProps = {
 
 const baseCard = css`
 	display: flex;
-	width: 280px;
 	flex-direction: column;
-	align-items: flex-start;
-	padding: ${space[3]}px 10px ${space[4]}px 10px;
 `;
 
 const productCarouselCardHeading = css`
