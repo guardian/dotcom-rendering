@@ -99,9 +99,12 @@ export const ProductCarouselCard = ({
 		<div css={baseCard}>
 			{hasHeading && (
 				<>
-					<div css={productCarouselCardHeading}>
-						{product.primaryHeadingHtml}
-					</div>
+					<div
+						css={productCarouselCardHeading}
+						dangerouslySetInnerHTML={{
+							__html: product.primaryHeadingHtml,
+						}}
+					/>
 					<div css={brandAndProductNameRow}>
 						<span css={brandAndProductNameInline}>
 							{product.brandName}{' '}
