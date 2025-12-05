@@ -315,7 +315,7 @@ export const Caption = ({
 			]}
 			data-spacefinder-role="inline"
 		>
-			{mediaType === 'YoutubeVideo' ? (
+			{mediaType === 'YoutubeVideo' || mediaType === 'SelfHostedVideo' ? (
 				<VideoIcon format={format} />
 			) : (
 				<CameraIcon format={format} />
