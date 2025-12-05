@@ -29,6 +29,7 @@ import {
 import type { Result } from '../lib/result';
 import { useHydrated } from '../lib/useHydrated';
 import { palette } from '../palette';
+import { FootballTableCrest } from './FootballTableCrest';
 
 type Props = {
 	initialDays: FootballMatches;
@@ -75,10 +76,6 @@ const footballMatchesGridStyles = css`
 			[centre-column-end];
 	}
 `;
-
-function getFootballCrestImageUrl(teamId: string) {
-	return `https://sport.guim.co.uk/football/crests/60/${teamId}.png`;
-}
 
 const getTimeFormatter = (edition: EditionId): Intl.DateTimeFormat =>
 	new Intl.DateTimeFormat(getLocaleFromEdition(edition), {
@@ -301,28 +298,6 @@ const Match = ({
 	</MatchWrapper>
 );
 
-const FootballCrest = ({ teamId }: { teamId: string }) => (
-	<div
-		css={css`
-			width: 1.25rem;
-			height: 1.25rem;
-			flex-shrink: 0;
-			display: flex;
-			justify-content: center;
-		`}
-	>
-		<img
-			css={css`
-				max-width: 100%;
-				max-height: 100%;
-				object-fit: contain;
-			`}
-			src={getFootballCrestImageUrl(teamId)}
-			alt=""
-		/>
-	</div>
-);
-
 const HomeTeam = ({ team }: { team: Team }) => (
 	<div
 		css={css`
@@ -341,7 +316,7 @@ const HomeTeam = ({ team }: { team: Team }) => (
 		>
 			{team.name}
 		</span>
-		<FootballCrest teamId={team.id} />
+		<FootballTableCrest teamId={team.id} />
 	</div>
 );
 
@@ -355,7 +330,7 @@ const AwayTeam = ({ team }: { team: Team }) => (
 			gap: 0.325rem;
 		`}
 	>
-		<FootballCrest teamId={team.id} />
+		<FootballTableCrest teamId={team.id} />
 		{team.name}
 	</div>
 );

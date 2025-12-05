@@ -56,12 +56,22 @@ export interface TagPage {
 	header: {
 		title: string;
 		description?: string;
-		image?: string;
+		image?: HeaderImage;
 	};
 	branding: CollectionBranding | undefined;
 	canonicalUrl?: string;
 	contributionsServiceUrl: string;
 }
+
+export type HeaderImage =
+	| {
+			kind: 'byline';
+			url: string;
+	  }
+	| {
+			kind: 'footballCrest';
+			teamId: string;
+	  };
 
 export interface TagPagePagination {
 	pageId: string;

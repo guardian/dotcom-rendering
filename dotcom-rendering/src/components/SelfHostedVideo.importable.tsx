@@ -30,12 +30,12 @@ import type {
 import { SelfHostedVideoPlayer } from './SelfHostedVideoPlayer';
 import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
-const videoAndBackgroundStyles = css`
+const videoAndBackgroundStyles = (isCinemagraph: boolean) => css`
 	position: relative;
 	display: flex;
 	justify-content: space-around;
-	z-index: ${getZIndex('video-container')};
 	background-color: ${palette('--video-background')};
+	${!isCinemagraph && `z-index: ${getZIndex('video-container')}`};
 `;
 
 const videoContainerStyles = (width: number, height: number) => css`
@@ -47,10 +47,6 @@ const videoContainerStyles = (width: number, height: number) => css`
 	${from.tablet} {
 		max-width: ${(width / height) * 80}%;
 	}
-`;
-
-const cinemagraphContainerStyles = css`
-	pointer-events: none;
 `;
 
 /**
@@ -146,6 +142,7 @@ type Props = {
 	linkTo: string;
 	subtitleSource?: string;
 	subtitleSize: SubtitleSize;
+	enableHls: boolean;
 };
 
 export const SelfHostedVideo = ({
@@ -164,6 +161,7 @@ export const SelfHostedVideo = ({
 	linkTo,
 	subtitleSource,
 	subtitleSize,
+	enableHls,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -681,13 +679,10 @@ export const SelfHostedVideo = ({
 		: undefined;
 
 	return (
-		<div css={videoAndBackgroundStyles} className="loop-video-container">
+		<div css={videoAndBackgroundStyles(isCinemagraph)}>
 			<figure
 				ref={setNode}
-				css={[
-					videoContainerStyles(width, height),
-					isCinemagraph && cinemagraphContainerStyles,
-				]}
+				css={videoContainerStyles(width, height)}
 				className={`video-container ${videoStyle.toLocaleLowerCase()}`}
 				data-component="gu-video-loop"
 			>
@@ -720,6 +715,7 @@ export const SelfHostedVideo = ({
 					subtitleSource={subtitleSource}
 					subtitleSize={subtitleSize}
 					activeCue={activeCue}
+					enableHls={enableHls}
 				/>
 			</figure>
 		</div>

@@ -117,7 +117,10 @@ export const enhanceArticleType = (
 		data.main,
 	)(data.mainMediaElements);
 
-	const storyPackage = parseStoryPackage(data.storyPackage);
+	const storyPackage = parseStoryPackage(
+		data.storyPackage,
+		format.design === ArticleDesign.Gallery,
+	);
 
 	if (format.design === ArticleDesign.Gallery) {
 		const design = ArticleDesign.Gallery;

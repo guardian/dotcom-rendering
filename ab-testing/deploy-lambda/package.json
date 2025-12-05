@@ -1,0 +1,39 @@
+{
+	"name": "@guardian/ab-testing-deploy-lambda",
+	"version": "1.0.0",
+	"description": "Lambda that deploys AB test configuration to Fastly edge-dictionaries",
+	"main": "index.ts",
+	"type": "module",
+	"scripts": {
+		"build": "rollup -c rollup.config.js",
+		"test": "node --test --experimental-test-module-mocks --test-reporter spec './**/*.test.ts'",
+		"lint": "eslint .",
+		"prettier:check": "prettier . --check --cache",
+		"prettier:fix": "prettier . --write --cache"
+	},
+	"dependencies": {
+		"@aws-sdk/client-s3": "3.931.0",
+		"@aws-sdk/client-ssm": "3.621.0",
+		"@guardian/ab-testing-config": "workspace:ab-testing-config",
+		"superstruct": "2.0.2"
+	},
+	"devDependencies": {
+		"@guardian/cdk": "62.0.1",
+		"@guardian/eslint-config": "12.0.1",
+		"@guardian/tsconfig": "1.0.1",
+		"@rollup/plugin-commonjs": "29.0.0",
+		"@rollup/plugin-json": "6.1.0",
+		"@rollup/plugin-node-resolve": "16.0.3",
+		"@types/aws-lambda": "8.10.158",
+		"@types/node": "22.17.0",
+		"aws-cdk-lib": "2.220.0",
+		"aws-lambda": "1.0.7",
+		"esbuild": "0.27.0",
+		"eslint": "9.39.1",
+		"prettier": "3.0.3",
+		"rollup": "4.53.2",
+		"rollup-plugin-esbuild": "6.2.1",
+		"type-fest": "4.21.0",
+		"typescript": "5.9.3"
+	}
+}

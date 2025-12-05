@@ -7,8 +7,8 @@ import {
 } from '../lib/video';
 import type { MediaAtomBlockElement } from '../types/content';
 import { Caption } from './Caption';
-import { SelfHostedVideo } from './SelfHostedVideo.importable';
 import { Island } from './Island';
+import { SelfHostedVideo } from './SelfHostedVideo.importable';
 
 type LoopVideoInArticleProps = {
 	element: MediaAtomBlockElement;
@@ -50,6 +50,7 @@ export const LoopVideoInArticle = ({
 					videoStyle="Loop"
 					uniqueId={element.id}
 					width={firstVideoAsset?.dimensions?.width ?? 500}
+					enableHls={false}
 				/>
 				{!!caption && (
 					<Caption
