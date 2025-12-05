@@ -6,6 +6,8 @@ import {
 	SvgMediaControlsPlay,
 } from '@guardian/source/react-components';
 import { palette } from '../palette';
+import type { WaveFormProps, WaveFormTheme } from './WaveForm';
+import { WaveForm } from './WaveForm';
 
 const buttonCss = (audioDuration: string | undefined) => css`
 	display: flex;
@@ -46,49 +48,52 @@ const themeIcon: ThemeIcon = {
 const waveFormContainerCss = css`
 	height: ${space[12]}px;
 	border-top: 1px solid ${neutral[86]};
-`;
+	position: relative;
+	padding-top: ${space[2]}px;
+	overflow: hidden;
 
-const generateWaveformGradients = (barCount: number): string => {
-	const barWidth = 2;
-	const spacing = 1;
-	const gradients: string[] = [];
-	let lastBarHeight = Math.floor(Math.random() * 60) + 25; // Initial random height
-
-	for (let i = 0; i < barCount; i++) {
-		const variation = lastBarHeight * 0.5; // keep within 50% of last bar height
-		const minHeight = Math.max(50, lastBarHeight - variation);
-		const maxHeight = Math.min(70, lastBarHeight + variation);
-		const barHeight =
-			Math.floor(Math.random() * (maxHeight - minHeight + 1)) + minHeight;
-		lastBarHeight = barHeight;
-		const position = i * (barWidth + spacing);
-		gradients.push(
-			`linear-gradient(to top, ${neutral[86]} 0 ${barHeight}%, transparent ${barHeight}%) ${position}px 50% / ${barWidth}px 100%`,
-		);
+	> svg {
+		position: absolute;
+		top: ${space[2]}px;
+		left: 0;
+		width: 746px; /* Fixed width - adjust as needed */
+		height: 100%;
+		z-index: 0;
 	}
 
-	return gradients.join(',\n\t\t');
-};
-
-const waveFormCss = css`
-	background: ${generateWaveformGradients(250)};
-	background-repeat: no-repeat;
-	height: inherit;
-	display: block;
-	width: 100%;
-	padding-top: ${space[2]}px;
+	> button {
+		position: relative;
+		z-index: 1;
+	}
 `;
 
 type ButtonProps = {
 	onClickHandler: () => void;
 	audioDuration?: string;
 };
+
+const waveTheme: WaveFormTheme = {
+	progress: neutral[86],
+	buffer: neutral[86],
+	wave: neutral[86],
+};
+
+const waveFormProps: WaveFormProps = {
+	seed: 'listen to this article',
+	height: space[12] - 8,
+	bars: 250,
+	theme: waveTheme,
+	gap: 1,
+	barWidth: 2,
+};
+
 export const ListenToArticleButton = ({
 	onClickHandler,
 	audioDuration,
-}: ButtonProps) => (
-	<div css={waveFormContainerCss}>
-		<div css={waveFormCss}>
+}: ButtonProps) => {
+	return (
+		<div css={waveFormContainerCss}>
+			<WaveForm {...waveFormProps} />
 			<Button
 				onClick={onClickHandler}
 				size="default"
@@ -104,5 +109,5 @@ export const ListenToArticleButton = ({
 				)}
 			</Button>
 		</div>
-	</div>
-);
+	);
+};
