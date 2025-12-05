@@ -2,13 +2,13 @@ import { css } from '@emotion/react';
 import {
 	headlineBold20,
 	headlineMedium17,
-	lifestyle,
 	space,
 	textSans17,
 	textSansBold15,
 	textSansBold17,
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
+import { palette } from '../palette';
 import type { ProductBlockElement } from '../types/content';
 import { ProductCardButtons } from './ProductCardButtons';
 import { ProductCardImage } from './ProductCardImage';
@@ -26,7 +26,7 @@ const baseCard = css`
 
 const productCarouselCardHeading = css`
 	${headlineBold20};
-	color: ${lifestyle[300]};
+	color: ${palette('--product-card-headline')};
 `;
 
 const brandAndProductName = css`
@@ -37,7 +37,7 @@ const readMoreCta = css`
 	${textSansBold15};
 	text-decoration-line: underline;
 	text-decoration-color: #dcdcdc; /* stylelint-disable-line */
-	color: ${lifestyle[400]};
+	color: ${palette('--product-card-read-more')};
 	text-underline-offset: 20%;
 	padding-bottom: ${space[2]}px;
 `;

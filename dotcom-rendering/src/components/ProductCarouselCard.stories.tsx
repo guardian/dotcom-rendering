@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { productImage } from '../../fixtures/manual/productImage';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
@@ -256,6 +257,15 @@ const meta = {
 		},
 		showReadMore: true,
 	},
+	render: (args) => (
+		<div
+			css={css`
+				width: 280px;
+			`}
+		>
+			<ProductCarouselCard {...args} />
+		</div>
+	),
 } satisfies Meta<typeof ProductCarouselCard>;
 
 export default meta;

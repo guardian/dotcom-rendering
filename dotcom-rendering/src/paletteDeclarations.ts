@@ -5096,10 +5096,19 @@ const productCardBorderLight: PaletteFunction = () =>
 	sourcePalette.lifestyle[300];
 const productCardBorderDark: PaletteFunction = () =>
 	sourcePalette.lifestyle[500];
+const productCardHeadingTextLight: PaletteFunction = () =>
+	sourcePalette.lifestyle[300];
+const productCardHeadingTextDark: PaletteFunction = () =>
+	sourcePalette.lifestyle[500];
 const productCardBorderNeutralDark: PaletteFunction = () =>
 	sourcePalette.neutral[38];
 const productCardBorderNeutralLight: PaletteFunction = () =>
 	sourcePalette.neutral[86];
+const productCardReadMoreLight: PaletteFunction = () =>
+	sourcePalette.lifestyle[400];
+const productCardReadMoreDark: PaletteFunction = () =>
+	sourcePalette.lifestyle[600];
+
 const privacyTextRegularLight: PaletteFunction = () => sourcePalette.neutral[7];
 const privacyTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 const witnessTitleText: PaletteFunction = ({ theme }) => {
@@ -7540,6 +7549,14 @@ const paletteColours = {
 	'--product-card-border-neutral': {
 		light: productCardBorderNeutralLight,
 		dark: productCardBorderNeutralDark,
+	},
+	'--product-card-headline': {
+		light: productCardHeadingTextLight,
+		dark: productCardHeadingTextDark,
+	},
+	'--product-card-read-more': {
+		light: productCardReadMoreLight,
+		dark: productCardReadMoreDark,
 	},
 	'--pullquote-background': {
 		light: pullQuoteBackgroundLight,
