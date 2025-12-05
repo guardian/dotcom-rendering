@@ -82,6 +82,8 @@ export const ProductLinkButton = ({
 		>
 			<span
 				css={css`
+					text-wrap: balance;
+					text-align: center;
 					white-space: normal;
 					padding: 4px 0 4px;
 				`}
