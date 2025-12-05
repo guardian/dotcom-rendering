@@ -68,19 +68,19 @@ function generateWaveform(seed: string, bars: number, height: number) {
 	return compress(peaks, height * minimumBarHeight);
 }
 
-type Theme = {
+export type WaveFormTheme = {
 	progress?: string;
 	buffer?: string;
 	wave?: string;
 };
 
-const defaultTheme: Theme = {
+const defaultTheme: WaveFormTheme = {
 	progress: 'green',
 	buffer: 'orange',
 	wave: 'grey',
 };
 
-type Props = {
+export type WaveFormProps = {
 	/**
 	 * The same seed will generate the same waveform. For example, passing the url
 	 * as the seed will ensure the waveform is the same for the same audio file.
@@ -90,7 +90,7 @@ type Props = {
 	bars: number;
 	progress?: number;
 	buffer?: number;
-	theme?: Theme;
+	theme?: WaveFormTheme;
 	gap?: number;
 	barWidth?: number;
 } & React.SVGProps<SVGSVGElement>;
@@ -105,7 +105,7 @@ export const WaveForm = ({
 	gap = 1,
 	barWidth = 4,
 	...props
-}: Props) => {
+}: WaveFormProps) => {
 	// memoise the waveform data so they aren't recalculated on every render
 	const barHeights = useMemo(
 		() => generateWaveform(seed, bars, height),
