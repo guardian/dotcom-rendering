@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import {
-	pendingAuthDecorator,
-	signedInDecorator,
-	signedOutDecorator,
-} from '../../.storybook/decorators/authDecorator';
+import { mocked } from 'storybook/test';
+import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
+import { useIsSignedIn } from '../lib/useAuthStatus';
+import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
 import { EmailSignUpWrapper } from './EmailSignUpWrapper.importable';
 
 const meta: Meta<typeof EmailSignUpWrapper> = {
@@ -23,25 +22,34 @@ const defaultArgs = {
 	frequency: 'Weekly',
 	successDescription: "We'll send you The Recap every week",
 	theme: 'sport',
+	idApiUrl: 'https://idapi.theguardian.com',
 } satisfies Story['args'];
 
 // Loading state - shows placeholder while auth status is being determined
 // This prevents layout shift when subscription status is resolved
-export const LoadingState: Story = {
+export const Placeholder: Story = {
 	args: {
 		hidePrivacyMessage: false,
 		...defaultArgs,
 	},
-	decorators: [pendingAuthDecorator],
+	async beforeEach() {
+		mocked(useNewsletterSubscription).mockReturnValue(undefined);
+	},
 };
 
-// Default story - signed out user sees the signup form
+// Default story - signed out user sees the signup form with email input
 export const DefaultStory: Story = {
 	args: {
 		hidePrivacyMessage: true,
 		...defaultArgs,
 	},
-	decorators: [signedOutDecorator],
+	async beforeEach() {
+		mocked(useNewsletterSubscription).mockReturnValue(false);
+		mocked(useIsSignedIn).mockReturnValue(false);
+		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
+			Promise.resolve(null),
+		);
+	},
 };
 
 export const DefaultStoryWithPrivacy: Story = {
@@ -49,16 +57,28 @@ export const DefaultStoryWithPrivacy: Story = {
 		hidePrivacyMessage: false,
 		...defaultArgs,
 	},
-	decorators: [signedOutDecorator],
+	async beforeEach() {
+		mocked(useNewsletterSubscription).mockReturnValue(false);
+		mocked(useIsSignedIn).mockReturnValue(false);
+		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
+			Promise.resolve(null),
+		);
+	},
 };
 
-// User is signed in but NOT subscribed - signup form is visible
+// User is signed in but NOT subscribed - email field is hidden, only signup button shows
 export const SignedInNotSubscribed: Story = {
 	args: {
 		hidePrivacyMessage: false,
 		...defaultArgs,
 	},
-	decorators: [signedInDecorator([])],
+	async beforeEach() {
+		mocked(useNewsletterSubscription).mockReturnValue(false);
+		mocked(useIsSignedIn).mockReturnValue(true);
+		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
+			Promise.resolve('test@example.com'),
+		);
+	},
 };
 
 // User is signed in and IS subscribed - component returns null (hidden)
@@ -68,7 +88,9 @@ export const SignedInAlreadySubscribed: Story = {
 		hidePrivacyMessage: false,
 		...defaultArgs,
 	},
-	decorators: [signedInDecorator([{ listId: String(defaultArgs.listId) }])],
+	async beforeEach() {
+		mocked(useNewsletterSubscription).mockReturnValue(true);
+	},
 };
 
 export default meta;

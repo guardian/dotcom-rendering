@@ -12,12 +12,18 @@ import { Picture } from '../src/components/Picture';
 import { mockFetch } from '../src/lib/mockRESTCalls';
 import { setABTests } from '../src/lib/useAB';
 import { ConfigContextDecorator } from './decorators/configContextDecorator';
+import { sb } from 'storybook/test';
 import { Preview } from '@storybook/react-webpack5';
 import {
 	globalColourScheme,
 	globalColourSchemeDecorator,
 } from './toolbar/globalColourScheme';
 import { palette as sourcePalette } from '@guardian/source/foundations';
+
+// Set up module mocking for auth and newsletter subscription hooks
+sb.mock(import('../src/lib/useNewsletterSubscription.ts'), { spy: true });
+sb.mock(import('../src/lib/useAuthStatus.ts'), { spy: true });
+sb.mock(import('../src/lib/fetchEmail.ts'), { spy: true });
 
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
 Lazy.disabled = isChromatic();

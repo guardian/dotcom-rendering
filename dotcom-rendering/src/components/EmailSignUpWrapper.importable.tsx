@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import type { Breakpoint } from '@guardian/source/foundations';
 import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
 import type { EmailSignUpProps } from './EmailSignup';
 import { EmailSignup } from './EmailSignup';
@@ -11,17 +11,18 @@ import { SecureSignup } from './SecureSignup.importable';
 /**
  * Approximate heights of the EmailSignup component at different breakpoints.
  */
-const PLACEHOLDER_HEIGHTS = new Map([
+const PLACEHOLDER_HEIGHTS = new Map<Breakpoint, number>([
 	['mobile', 220],
 	['tablet', 180],
 	['desktop', 180],
-] as const) as Map<'mobile' | 'tablet' | 'desktop', number>;
+]);
 
 interface EmailSignUpWrapperProps extends EmailSignUpProps {
 	index: number;
 	listId: number;
 	identityName: string;
 	successDescription: string;
+	idApiUrl: string;
 	/** You should only set this to true if the privacy message will be shown elsewhere on the page */
 	hidePrivacyMessage?: boolean;
 }
@@ -39,12 +40,9 @@ interface EmailSignUpWrapperProps extends EmailSignUpProps {
 export const EmailSignUpWrapper = ({
 	index,
 	listId,
+	idApiUrl,
 	...emailSignUpProps
 }: EmailSignUpWrapperProps) => {
-	const [idApiUrl] = useState(() => {
-		if (typeof window === 'undefined') return undefined;
-		return window.guardian?.config?.page?.idApiUrl ?? undefined;
-	});
 	const isSubscribed = useNewsletterSubscription(listId, idApiUrl);
 
 	// Show placeholder while subscription status is being determined

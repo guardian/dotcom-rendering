@@ -122,10 +122,6 @@ const webpackConfig = (config: Configuration) => {
 		`${path.resolve(__dirname, '../src/lib/bridgetApi')}$`
 	] = path.resolve(__dirname, './mocks/bridgetApi.ts');
 
-	// Mock identity module for storybook to control auth state
-	config.resolve.alias[`${path.resolve(__dirname, '../src/lib/identity')}$`] =
-		path.resolve(__dirname, './mocks/identity.ts');
-
 	const webpackLoaders = getLoaders('client.web');
 
 	// https://swc.rs/docs/usage/swc-loader#with-babel-loader

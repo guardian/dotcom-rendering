@@ -48,7 +48,6 @@ export const useNewsletterSubscription = (
 		const fetchNewsletters = async () => {
 			try {
 				const options = getOptionsHeaders(authStatus);
-				const origin = window.location.origin;
 				const response = await fetch(
 					`${idApiUrl}/users/me/newsletters`,
 					{
@@ -57,8 +56,6 @@ export const useNewsletterSubscription = (
 						...options,
 						headers: {
 							...options.headers,
-							Origin: origin,
-							Referer: origin,
 						},
 					},
 				);
