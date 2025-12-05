@@ -146,8 +146,8 @@ const Title = ({
 }) =>
 	headingUrl ? (
 		<a
-			css={headerGridStyles}
-			href={`${headingUrl}/inpictures/all`}
+			css={[headerGridStyles, headerLinStyles]}
+			href={headingUrl}
 			data-link-name="section heading"
 		>
 			<h2 css={headerStyles}>{title}</h2>
@@ -169,14 +169,17 @@ const headerGridStyles = css`
 	}
 `;
 
+const headerLinStyles = css`
+	:hover {
+		text-decoration: underline;
+	}
+`;
+
 const headerStyles = css`
 	color: ${palette('--onward-text')};
 	${textSansBold17};
 	padding-bottom: ${space[3]}px;
 	padding-top: ${space[1]}px;
-	:hover {
-		text-decoration: underline;
-	}
 	${from.tablet} {
 		${textSansBold20};
 	}
