@@ -486,6 +486,10 @@ export interface ProductBlockElement {
 	lowestPrice?: string;
 }
 
+export interface ProductCarouselElement {
+	_type: 'model.dotcomrendering.pageElements.ProductCarouselElement';
+}
+
 interface ProfileAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ProfileAtomBlockElement';
 	elementId: string;
@@ -851,7 +855,8 @@ export type FEElement =
 	| YoutubeBlockElement
 	| WitnessTypeBlockElement
 	| CrosswordElement
-	| ProductBlockElement;
+	| ProductBlockElement
+	| ProductCarouselElement;
 
 // -------------------------------------
 // Misc

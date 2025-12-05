@@ -36,6 +36,7 @@ import { MultiBylines } from '../components/MultiBylines';
 import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';
 import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
 import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importable';
+import { ProductCarousel } from '../components/ProductCarousel';
 import { ProductElement } from '../components/ProductElement';
 import { ProductLinkButton } from '../components/ProductLinkButton';
 import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable';
@@ -938,6 +939,8 @@ export const renderElement = ({
 					/>
 				</Island>
 			);
+		case 'model.dotcomrendering.pageElements.ProductCarouselElement':
+			return <ProductCarousel />;
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':

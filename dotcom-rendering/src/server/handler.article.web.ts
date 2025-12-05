@@ -63,6 +63,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		imagesForLightbox: [],
 		hasAffiliateLinksDisclaimer: false,
 		shouldHideAds,
+		pageId,
 	});
 	const html = renderBlocks({
 		blocks: enhancedBlocks,
