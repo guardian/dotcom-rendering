@@ -281,6 +281,9 @@
                                 "shotsOn"
                             ]
                         },
+                        "status": {
+                            "type": "string"
+                        },
                         "comments": {
                             "type": "string"
                         }
@@ -288,7 +291,8 @@
                     "required": [
                         "awayTeam",
                         "homeTeam",
-                        "id"
+                        "id",
+                        "status"
                     ]
                 }
             },

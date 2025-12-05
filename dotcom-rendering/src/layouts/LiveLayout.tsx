@@ -360,9 +360,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 				{footballMatchUrl ? (
 					<Section
 						showTopBorder={false}
-						backgroundColour={themePalette(
-							'--match-nav-background',
-						)}
+						backgroundColour={'red'}
 						borderColour={themePalette('--headline-border')}
 						leftContent={
 							<ArticleTitle
