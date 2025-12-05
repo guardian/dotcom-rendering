@@ -142,6 +142,7 @@ type Props = {
 	linkTo: string;
 	subtitleSource?: string;
 	subtitleSize: SubtitleSize;
+	enableHls: boolean;
 };
 
 export const SelfHostedVideo = ({
@@ -160,6 +161,7 @@ export const SelfHostedVideo = ({
 	linkTo,
 	subtitleSource,
 	subtitleSize,
+	enableHls,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -709,6 +711,7 @@ export const SelfHostedVideo = ({
 					subtitleSource={subtitleSource}
 					subtitleSize={subtitleSize}
 					activeCue={activeCue}
+					enableHls={enableHls}
 				/>
 			</figure>
 		</div>

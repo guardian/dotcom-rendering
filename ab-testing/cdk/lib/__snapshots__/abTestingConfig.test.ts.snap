@@ -1,0 +1,69 @@
+exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
+{
+  "Metadata": {
+    "gu:cdk:constructs": [],
+    "gu:cdk:version": "62.0.1"
+  },
+  "Resources": {
+    "InvokeDictionaryDeployLambda": {
+      "Type": "Custom::FastlyEdgeDictionaryDeploy",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":lambda:eu-west-1:",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":function:ab-testing-deployment-lambda-CODE"
+            ]
+          ]
+        },
+        "ServiceTimeout": "300"
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete"
+    }
+  }
+}
+`;
+
+exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
+{
+  "Metadata": {
+    "gu:cdk:constructs": [],
+    "gu:cdk:version": "62.0.1"
+  },
+  "Resources": {
+    "InvokeDictionaryDeployLambda": {
+      "Type": "Custom::FastlyEdgeDictionaryDeploy",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":lambda:eu-west-1:",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":function:ab-testing-deployment-lambda-PROD"
+            ]
+          ]
+        },
+        "ServiceTimeout": "300"
+      },
+      "UpdateReplacePolicy": "Delete",
+      "DeletionPolicy": "Delete"
+    }
+  }
+}
+`;

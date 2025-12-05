@@ -4,6 +4,8 @@ on:
   push:
     paths-ignore:
       - 'apps-rendering/**'
+      - 'ab-testing/**'
+      - '!ab-testing/config/abTests.ts'
 
 jobs:
   container:

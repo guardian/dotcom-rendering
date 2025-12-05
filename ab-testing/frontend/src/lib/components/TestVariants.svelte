@@ -20,6 +20,7 @@
 			<li>
 				<a
 					href={`https://www.theguardian.com/ab-tests/opt/in/${testName}:${group}`}
+					target="_blank"
 				>
 					{group} ({formatter.format(
 						((1 / testGroups.length) * size) / 100,

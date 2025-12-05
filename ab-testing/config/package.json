@@ -4,11 +4,15 @@
 	"description": "A/B test definitions and configuration",
 	"main": "index.ts",
 	"type": "module",
+	"exports": {
+		".": "./index.ts",
+		"./lib/*.ts": "./lib/*.ts"
+	},
 	"scripts": {
 		"validate": "node scripts/validation/index.ts",
 		"deploy": "node scripts/deploy/index.ts --mvts=dist/mvts.json --ab-tests=dist/ab-tests.json",
 		"build": "node scripts/build/index.ts --mvts=dist/mvts.json --ab-tests=dist/ab-tests.json",
-		"test": "node --test --test-reporter spec ./**/*.test.ts",
+		"test": "node --test --test-reporter spec './**/*.test.ts'",
 		"lint": "eslint .",
 		"prettier:check": "prettier . --check --cache",
 		"prettier:fix": "prettier . --write --cache",

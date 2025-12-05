@@ -21,7 +21,7 @@
 	},
 	"lint-staged": {
 		"*": "prettier --ignore-unknown --write",
-		"ab-testing/**/*": "cd ab-testing && deno run validate"
+		"ab-testing/**/*": "pnpm --filter @guardian/ab-testing-* lint-staged"
 	},
 	"dependencies": {
 		"@guardian/prettier": "5.0.0",

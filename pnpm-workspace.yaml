@@ -1,5 +1,4 @@
 packages:
   - 'apps-rendering'
   - 'dotcom-rendering'
-  - 'ab-testing/config'
-  - 'ab-testing/frontend'
+  - 'ab-testing/*'
