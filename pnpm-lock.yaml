@@ -249,9 +249,6 @@ importers:
       '@guardian/bridget':
         specifier: 7.0.0
         version: 7.0.0
-      '@guardian/cdk':
-        specifier: 62.0.1
-        version: 62.0.1(aws-cdk-lib@2.220.0(constructs@10.4.2))(aws-cdk@2.1030.0)(constructs@10.4.2)
       '@guardian/content-api-models':
         specifier: 31.0.0
         version: 31.0.0
@@ -318,12 +315,6 @@ importers:
       '@types/thrift':
         specifier: 0.10.17
         version: 0.10.17
-      aws-cdk:
-        specifier: 2.1030.0
-        version: 2.1030.0
-      aws-cdk-lib:
-        specifier: 2.220.0
-        version: 2.220.0(constructs@10.4.2)
       babel-loader:
         specifier: 10.0.0
         version: 10.0.0(@babel/core@7.28.4)(webpack@5.102.1)
@@ -8707,7 +8698,6 @@ packages:
     engines: {node: '>=0.6.0', teleport: '>=0.2.0'}
     deprecated: |-
       You or someone you depend on is using Q, the JavaScript Promise library that gave JavaScript developers strong feelings about promises. They can almost certainly migrate to the native JavaScript promise now. Thank you literally everyone for joining me in this bet against the odds. Be excellent to each other.
-
       (For a CapTP with native promises, see @endo/eventual-send and @endo/captp)
 
   qs@6.13.0:
