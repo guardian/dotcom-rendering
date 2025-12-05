@@ -309,7 +309,9 @@ export const OnwardsUpper = ({
 	// For galleries: they already have a "more galleries" container,
 	// so we can only allow one more onwards container
 	const canHaveCuratedContent =
-		format.design === ArticleDesign.Gallery ? isUndefined(url) : true;
+		format.design === ArticleDesign.Gallery
+			? isUndefined(url) && !hasStoryPackage
+			: true;
 
 	const hasOnwardsContainer = !!url;
 	const showCuratedContainer =
@@ -321,6 +323,15 @@ export const OnwardsUpper = ({
 				<Section
 					fullWidth={true}
 					borderColour={palette('--article-section-border')}
+					padSides={
+						format.design === ArticleDesign.Gallery ? false : true
+					}
+					showTopBorder={
+						format.design === ArticleDesign.Gallery ? false : true
+					}
+					showSideBorders={
+						format.design === ArticleDesign.Gallery ? false : true
+					}
 				>
 					<FetchOnwardsData
 						url={url}
@@ -340,6 +351,15 @@ export const OnwardsUpper = ({
 				<Section
 					fullWidth={true}
 					borderColour={palette('--article-section-border')}
+					showTopBorder={
+						format.design === ArticleDesign.Gallery ? false : true
+					}
+					showSideBorders={
+						format.design === ArticleDesign.Gallery ? false : true
+					}
+					padSides={
+						format.design === ArticleDesign.Gallery ? false : true
+					}
 				>
 					<FetchOnwardsData
 						url={curatedDataUrl}

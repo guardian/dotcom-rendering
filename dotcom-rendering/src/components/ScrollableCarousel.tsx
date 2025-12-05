@@ -104,32 +104,32 @@ const itemStyles = css`
 	position: relative;
 `;
 
-const leftBorderStyles = css`
+const leftBorderStyles = (colour: string) => css`
 	content: '';
 	position: absolute;
 	top: 0;
 	bottom: 0;
 	left: -10px;
 	width: 1px;
-	background-color: ${palette('--card-border-top')};
+	background-color: ${colour};
 	transform: translateX(-50%);
 `;
 
-const singleRowLeftBorderStyles = css`
+const singleRowLeftBorderStyles = (colour: string) => css`
 	:not(:first-child)::before {
-		${leftBorderStyles}
+		${leftBorderStyles(colour)}
 	}
 `;
 
-const stackedRowLeftBorderStyles = css`
+const stackedRowLeftBorderStyles = (colour: string) => css`
 	${from.tablet} {
 		:not(:first-child)::before {
-			${leftBorderStyles}
+			${leftBorderStyles(colour)}
 		}
 	}
 	${until.tablet} {
 		:not(:first-child):not(:nth-child(2))::before {
-			${leftBorderStyles}
+			${leftBorderStyles(colour)}
 		}
 	}
 `;
@@ -411,16 +411,18 @@ export const ScrollableCarousel = ({
 ScrollableCarousel.Item = ({
 	isStackingCarousel = false,
 	children,
+	borderColour = palette('--card-border-top'),
 }: {
 	isStackingCarousel?: boolean;
 	children: React.ReactNode;
+	borderColour?: string;
 }) => (
 	<li
 		css={[
 			itemStyles,
 			isStackingCarousel
-				? stackedRowLeftBorderStyles
-				: singleRowLeftBorderStyles,
+				? stackedRowLeftBorderStyles(borderColour)
+				: singleRowLeftBorderStyles(borderColour),
 		]}
 	>
 		{children}

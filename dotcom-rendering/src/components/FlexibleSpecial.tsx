@@ -19,7 +19,7 @@ import { UL } from './Card/components/UL';
 import type { ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
-import type { SubtitleSize } from './LoopVideoPlayer';
+import type { SubtitleSize } from './SelfHostedVideoPlayer';
 import type { Alignment } from './SupportingContent';
 
 type Props = {
@@ -32,6 +32,7 @@ type Props = {
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
 	showLabsRedesign?: boolean;
+	enableHls?: boolean;
 };
 
 type BoostProperties = {
@@ -134,6 +135,7 @@ type OneCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	isSplashCard?: boolean;
 	showLabsRedesign?: boolean;
+	enableHls?: boolean;
 };
 
 export const OneCardLayout = ({
@@ -148,6 +150,7 @@ export const OneCardLayout = ({
 	containerLevel,
 	isSplashCard,
 	showLabsRedesign,
+	enableHls,
 }: OneCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -202,6 +205,7 @@ export const OneCardLayout = ({
 					headlinePosition={isSplashCard ? 'outer' : 'inner'}
 					showLabsRedesign={showLabsRedesign}
 					subtitleSize={subtitleSize}
+					enableHls={enableHls}
 				/>
 			</LI>
 		</UL>
@@ -305,6 +309,7 @@ export const FlexibleSpecial = ({
 	containerLevel = 'Primary',
 	collectionId,
 	showLabsRedesign,
+	enableHls,
 }: Props) => {
 	const snaps = [...groupedTrails.snap].slice(0, 1).map((snap) => ({
 		...snap,
@@ -334,6 +339,7 @@ export const FlexibleSpecial = ({
 					containerLevel={containerLevel}
 					isSplashCard={false}
 					showLabsRedesign={showLabsRedesign}
+					enableHls={enableHls}
 				/>
 			)}
 			{isNonEmptyArray(splash) && (
@@ -349,6 +355,7 @@ export const FlexibleSpecial = ({
 					containerLevel={containerLevel}
 					isSplashCard={true}
 					showLabsRedesign={showLabsRedesign}
+					enableHls={enableHls}
 				/>
 			)}
 

@@ -66,7 +66,7 @@ const buttonContainer = css`
 	padding-bottom: ${space[6]}px;
 	min-width: 100%;
 	display: grid;
-	row-gap: ${space[1]}px;
+	row-gap: ${space[3]}px;
 `;
 const customAttributesContainer = css`
 	border-top: 1px solid ${palette('--section-border')};
@@ -97,7 +97,7 @@ export const ProductCardLeftCol = ({
 	lowestPrice,
 }: LeftColProductCardProps) => {
 	return (
-		<div css={card}>
+		<div data-component="product-card-left-col" css={card}>
 			<ProductCardImage
 				format={format}
 				image={image}
@@ -119,10 +119,7 @@ export const ProductCardLeftCol = ({
 				)}
 			</div>
 			<div css={buttonContainer}>
-				<ProductCardButtons
-					productCtas={productCtas}
-					dataComponent={'left-col-product-card-buttons'}
-				/>
+				<ProductCardButtons productCtas={productCtas} />
 			</div>
 			{customAttributes.length > 0 && (
 				<div css={customAttributesContainer}>

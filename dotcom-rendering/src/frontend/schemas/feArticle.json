@@ -5458,12 +5458,7 @@
                             "const": "SelfHostedVideo"
                         },
                         "videoStyle": {
-                            "enum": [
-                                "Cinemagraph",
-                                "Default",
-                                "Loop"
-                            ],
-                            "type": "string"
+                            "$ref": "#/definitions/VideoPlayerFormat"
                         },
                         "atomId": {
                             "type": "string"
@@ -5477,8 +5472,7 @@
                                         "type": "string"
                                     },
                                     "mimeType": {
-                                        "type": "string",
-                                        "const": "video/mp4"
+                                        "$ref": "#/definitions/SupportedVideoFileType"
                                     }
                                 },
                                 "required": [
@@ -5514,6 +5508,22 @@
                     ]
                 }
             ]
+        },
+        "VideoPlayerFormat": {
+            "enum": [
+                "Cinemagraph",
+                "Default",
+                "Loop"
+            ],
+            "type": "string"
+        },
+        "SupportedVideoFileType": {
+            "enum": [
+                "application/vnd.apple.mpegurl",
+                "application/x-mpegURL",
+                "video/mp4"
+            ],
+            "type": "string"
         },
         "Audio": {
             "allOf": [

@@ -21,7 +21,7 @@ jobs:
           - 9000:9000
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env

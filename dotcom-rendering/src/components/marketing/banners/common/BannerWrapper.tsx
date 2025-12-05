@@ -94,6 +94,7 @@ const withBannerData =
 			bannerChannel,
 			abandonedBasket,
 			promoCodes,
+			isCollapsible,
 		} = bannerProps;
 
 		const [hasBeenSeen, setNode] = useIsInView({
@@ -111,6 +112,14 @@ const withBannerData =
 				);
 			}
 		}, [hasBeenSeen, submitComponentEvent, tracking]);
+
+		useEffect(() => {
+			if (hasBeenSeen) {
+				document.dispatchEvent(
+					new CustomEvent('banner:open', { detail: { bannerId } }),
+				);
+			}
+		}, [hasBeenSeen]);
 
 		useEffect(() => {
 			if (submitComponentEvent) {
@@ -339,6 +348,7 @@ const withBannerData =
 					submitComponentEvent,
 					design,
 					promoCodes,
+					isCollapsible,
 				};
 
 				return (
@@ -358,7 +368,7 @@ export const bannerWrapper = (
 	Banner: ReactComponent<BannerRenderProps>,
 	bannerId: BannerId,
 ): ReactComponent<BannerProps> =>
-	withCloseable(withBannerData(Banner, bannerId));
+	withCloseable(withBannerData(Banner, bannerId), bannerId);
 
 const validate = (props: unknown): props is BannerProps => {
 	const result = bannerSchema.safeParse(props);

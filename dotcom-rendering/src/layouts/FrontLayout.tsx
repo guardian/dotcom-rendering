@@ -106,10 +106,11 @@ const decideLeftContent = (front: Front, collection: DCRCollectionType) => {
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
 		config: {
-			isPaidContent,
-			hasPageSkin: hasPageSkinConfig,
-			pageId,
 			abTests,
+			hasPageSkin: hasPageSkinConfig,
+			isPaidContent,
+			pageId,
+			switches,
 		},
 		editionId,
 	} = front;
@@ -145,7 +146,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	 * - the user is opted into the 0% server side test
 	 */
 	const showLabsRedesign =
-		!!front.config.switches.guardianLabsRedesign ||
+		!!switches.guardianLabsRedesign ||
 		abTests.labsRedesignVariant === 'variant';
 
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
@@ -363,7 +364,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					if (
 						collection.collectionType === 'news/most-popular' &&
 						!isPaidContent &&
-						front.config.switches.mostViewedFronts
+						switches.mostViewedFronts
 					) {
 						const deeplyReadData = showMostPopular
 							? front.deeplyRead
@@ -609,6 +610,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
 									showLabsRedesign={showLabsRedesign}
+									enableHls={switches.enableHlsWeb}
 								/>
 							</FrontSection>
 
@@ -704,9 +706,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						pageId={front.pressedPage.id}
 						sectionId={front.config.section}
 						shouldHideReaderRevenue={false} // never defined for fronts
-						remoteBannerSwitch={
-							!!front.config.switches.remoteBanner
-						}
+						remoteBannerSwitch={!!switches.remoteBanner}
 						tags={[]} // a front doesn't have tags
 					/>
 				</Island>

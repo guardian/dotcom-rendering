@@ -6214,15 +6214,6 @@ const crosswordCluesHeaderBorderBottom: PaletteFunction = () =>
 const crosswordTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 const crosswordTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
-const onwardContentBorderLight: PaletteFunction = (format) => {
-	switch (format.design) {
-		case ArticleDesign.Gallery:
-			return sourcePalette.neutral[86];
-		default:
-			return articleBorderLight(format);
-	}
-};
-
 // ----- Palette ----- //
 
 /**
@@ -7018,7 +7009,7 @@ const paletteColours = {
 	},
 	'--feature-card-trail-text': {
 		light: () => sourcePalette.neutral[86],
-		dark: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[86],
 	},
 	'--filter-key-events-toggle-border-top': {
 		light: () => sourcePalette.neutral[86],
@@ -7313,34 +7304,6 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[20],
 		dark: () => sourcePalette.neutral[86],
 	},
-	'--loop-video-audio-icon': {
-		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[100],
-	},
-	'--loop-video-audio-icon-background': {
-		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
-		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
-	},
-	'--loop-video-audio-icon-border': {
-		light: () => sourcePalette.neutral[60],
-		dark: () => sourcePalette.neutral[60],
-	},
-	'--loop-video-progress-bar-background': {
-		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
-		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
-	},
-	'--loop-video-progress-bar-value': {
-		light: () => sourcePalette.neutral[86],
-		dark: () => sourcePalette.neutral[86],
-	},
-	'--loop-video-subtitle-background': {
-		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
-		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
-	},
-	'--loop-video-subtitle-text': {
-		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[100],
-	},
 	'--masthead-nav-background': {
 		light: mastheadNavBackground,
 		dark: mastheadNavBackground,
@@ -7477,12 +7440,16 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[10],
 	},
-	'--onward-card-background': {
-		light: () => sourcePalette.neutral[97],
+	'--onward-content-border': {
+		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[20],
 	},
-	'--onward-content-border': {
-		light: onwardContentBorderLight,
+	'--onward-content-top-border': {
+		light: () => sourcePalette.neutral[73],
+		dark: () => sourcePalette.neutral[38],
+	},
+	'--onward-more-galleries-card-background': {
+		light: () => sourcePalette.neutral[97],
 		dark: () => sourcePalette.neutral[20],
 	},
 	'--onward-text': {
@@ -8152,6 +8119,38 @@ const paletteColours = {
 	'--versus-text-faded': {
 		light: () => sourcePalette.neutral[46],
 		dark: () => sourcePalette.neutral[60],
+	},
+	'--video-audio-icon': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--video-audio-icon-background': {
+		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
+		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
+	},
+	'--video-audio-icon-border': {
+		light: () => sourcePalette.neutral[60],
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--video-background': {
+		light: () => sourcePalette.neutral[93],
+		dark: () => sourcePalette.neutral[93],
+	},
+	'--video-progress-bar-background': {
+		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
+		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
+	},
+	'--video-progress-bar-value': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--video-subtitle-background': {
+		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
+		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
+	},
+	'--video-subtitle-text': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
 	},
 	'--witness-title-author': {
 		light: witnessTitleAuthor,

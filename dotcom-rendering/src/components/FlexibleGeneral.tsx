@@ -21,7 +21,7 @@ import type { ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
 import { FeatureCard } from './FeatureCard';
 import { FrontCard } from './FrontCard';
-import type { SubtitleSize } from './LoopVideoPlayer';
+import type { SubtitleSize } from './SelfHostedVideoPlayer';
 import type { Alignment } from './SupportingContent';
 
 type Props = {
@@ -35,6 +35,7 @@ type Props = {
 	collectionId: number;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
+	enableHls?: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -256,6 +257,7 @@ type SplashCardLayoutProps = {
 	collectionId: number;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
+	enableHls?: boolean;
 };
 
 const SplashCardLayout = ({
@@ -269,6 +271,7 @@ const SplashCardLayout = ({
 	containerLevel,
 	collectionId,
 	showLabsRedesign,
+	enableHls,
 }: SplashCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -354,6 +357,7 @@ const SplashCardLayout = ({
 					subtitleSize={subtitleSize}
 					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
 					showLabsRedesign={showLabsRedesign}
+					enableHls={enableHls}
 				/>
 			</LI>
 		</UL>
@@ -421,6 +425,7 @@ type FullWidthCardLayoutProps = {
 	collectionId: number;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
+	enableHls?: boolean;
 };
 
 const FullWidthCardLayout = ({
@@ -435,6 +440,7 @@ const FullWidthCardLayout = ({
 	containerLevel,
 	collectionId,
 	showLabsRedesign,
+	enableHls,
 }: FullWidthCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -511,6 +517,7 @@ const FullWidthCardLayout = ({
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 					showLabsRedesign={showLabsRedesign}
 					subtitleSize={subtitleSize}
+					enableHls={enableHls}
 				/>
 			</LI>
 		</UL>
@@ -530,6 +537,7 @@ type HalfWidthCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
+	enableHls?: boolean;
 };
 
 const HalfWidthCardLayout = ({
@@ -544,6 +552,7 @@ const HalfWidthCardLayout = ({
 	isLastRow,
 	containerLevel,
 	showLabsRedesign,
+	enableHls,
 }: HalfWidthCardLayoutProps) => {
 	if (cards.length === 0) return null;
 
@@ -599,6 +608,7 @@ const HalfWidthCardLayout = ({
 							headlineSizes={undefined}
 							canPlayInline={false}
 							showLabsRedesign={showLabsRedesign}
+							enableHls={enableHls}
 						/>
 					</LI>
 				);
@@ -617,6 +627,7 @@ export const FlexibleGeneral = ({
 	containerLevel = 'Primary',
 	collectionId,
 	showLabsRedesign,
+	enableHls,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
 		...snap,
@@ -646,6 +657,7 @@ export const FlexibleGeneral = ({
 					containerLevel={containerLevel}
 					collectionId={collectionId}
 					showLabsRedesign={showLabsRedesign}
+					enableHls={enableHls}
 				/>
 			)}
 			{groupedCards.map((row, i) => {
@@ -665,6 +677,7 @@ export const FlexibleGeneral = ({
 								containerLevel={containerLevel}
 								collectionId={collectionId}
 								showLabsRedesign={showLabsRedesign}
+								enableHls={enableHls}
 							/>
 						);
 
@@ -685,6 +698,7 @@ export const FlexibleGeneral = ({
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
 								showLabsRedesign={showLabsRedesign}
+								enableHls={enableHls}
 							/>
 						);
 				}

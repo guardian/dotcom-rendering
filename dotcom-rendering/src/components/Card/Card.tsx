@@ -32,6 +32,7 @@ import type {
 	DCRSnapType,
 	DCRSupportingContent,
 } from '../../types/front';
+import type { CardMediaType } from '../../types/layout';
 import type { MainMedia } from '../../types/mainMedia';
 import type { OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
@@ -42,9 +43,9 @@ import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
-import { LoopVideo } from '../LoopVideo.importable';
-import type { SubtitleSize } from '../LoopVideoPlayer';
 import { Pill } from '../Pill';
+import { SelfHostedVideo } from '../SelfHostedVideo.importable';
+import type { SubtitleSize } from '../SelfHostedVideoPlayer';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
 import { Snap } from '../Snap';
 import { SnapCssSandbox } from '../SnapCssSandbox';
@@ -79,6 +80,8 @@ export type Position = 'inner' | 'outer' | 'none';
 export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
+	/** The format of the article holding the card */
+	contextFormat?: ArticleFormat;
 	serverTime?: number;
 	headlineText: string;
 	headlineSizes?: ResponsiveFontSize;
@@ -162,6 +165,7 @@ export type Props = {
 	headlinePosition?: 'inner' | 'outer';
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
+	enableHls?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -280,8 +284,21 @@ const getMedia = ({
 	isBetaContainer: boolean;
 }) => {
 	if (mainMedia?.type === 'SelfHostedVideo' && canPlayInline) {
+		let type: CardMediaType;
+		switch (mainMedia.videoStyle) {
+			case 'Default':
+				type = 'default-video';
+				break;
+			case 'Loop':
+				type = 'loop-video';
+				break;
+			case 'Cinemagraph':
+				type = 'cinemagraph';
+				break;
+		}
+
 		return {
-			type: 'loop-video',
+			type,
 			mainMedia,
 		} as const;
 	}
@@ -350,6 +367,7 @@ const liveBulletStyles = css`
 export const Card = ({
 	linkTo,
 	format,
+	contextFormat,
 	headlineText,
 	headlineSizes,
 	showQuotedHeadline,
@@ -406,6 +424,7 @@ export const Card = ({
 	headlinePosition = 'inner',
 	showLabsRedesign = false,
 	subtitleSize = 'small',
+	enableHls = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -545,13 +564,25 @@ export const Card = ({
 		);
 	}
 
+	// Determine if the card is used within a gallery article
+	const isInGalleryContext = contextFormat?.design === ArticleDesign.Gallery;
+
+	// This is due to a re-design for onwards content.
+	// Currently this re-design is only applied for galleries secondary onwards content.
+	// We plan to apply this to all onwards content in the future.
+	const isGallerySecondaryOnward =
+		isInGalleryContext && onwardsSource !== 'more-galleries';
+
+	const isMoreGalleriesOnwardContent =
+		isOnwardContent && onwardsSource === 'more-galleries';
+
 	/**
 -	 * Media cards have contrasting background colours. We add additional
 	 * padding to these cards to keep the text readable.
 -	 */
 	const isMediaCardOrNewsletter = isMediaCard(format) || isNewsletter;
 
-	const showPill = isMediaCardOrNewsletter;
+	const showPill = isMediaCardOrNewsletter && !isGallerySecondaryOnward;
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -563,6 +594,12 @@ export const Card = ({
 		canPlayInline,
 		isBetaContainer,
 	});
+
+	const isSelfHostedVideo =
+		media &&
+		(media.type === 'default-video' ||
+			media.type === 'loop-video' ||
+			media.type === 'cinemagraph');
 
 	const resolvedDataLinkName =
 		media && dataLinkName
@@ -585,9 +622,15 @@ export const Card = ({
 		isBetaContainer,
 	);
 
-	const backgroundColour = isMediaCardOrNewsletter
-		? palette('--card-media-background')
-		: palette('--card-background');
+	const backgroundColour = () => {
+		if (isGallerySecondaryOnward) {
+			return palette('--onward-background');
+		}
+		if (isMediaCardOrNewsletter) {
+			return palette('--card-media-background');
+		}
+		return palette('--card-background');
+	};
 
 	/* Whilst we migrate to the new container types, we need to check which container we are in. */
 	const isFlexibleContainer =
@@ -614,8 +657,6 @@ export const Card = ({
 		return 'tablet';
 	};
 
-	const isMoreGalleriesOnwardContent =
-		isOnwardContent && onwardsSource === 'more-galleries';
 	const shouldShowTrailText = isMoreGalleriesOnwardContent
 		? media?.type !== 'podcast' && isOnwardSplash
 		: media?.type !== 'podcast';
@@ -625,7 +666,7 @@ export const Card = ({
 	 * Order matters here as the logic is based on the card properties
 	 */
 	const getGapSizes = (): GapSizes => {
-		if (isOnwardContent) {
+		if (isOnwardContent && !isGallerySecondaryOnward) {
 			return {
 				row: 'none',
 				column: 'none',
@@ -738,6 +779,7 @@ export const Card = ({
 		betaContainer: boolean,
 		onwardContent: boolean,
 	): 'large' | 'small' | undefined => {
+		if (isInGalleryContext) return undefined;
 		if (mediaCard && betaContainer) return 'large';
 		if (mediaCard || onwardContent) return 'small';
 		return undefined;
@@ -824,8 +866,12 @@ export const Card = ({
 			format={format}
 			showTopBarDesktop={showTopBarDesktop}
 			showTopBarMobile={showTopBarMobile}
-			isOnwardContent={isOnwardContent}
 			containerPalette={containerPalette}
+			topBarColour={
+				isGallerySecondaryOnward
+					? palette('--onward-content-top-border')
+					: undefined
+			}
 		>
 			<CardLink
 				linkTo={linkTo}
@@ -838,7 +884,7 @@ export const Card = ({
 					css={css`
 						padding-bottom: ${space[5]}px;
 					`}
-					style={{ backgroundColor: backgroundColour }}
+					style={{ backgroundColor: backgroundColour() }}
 				>
 					<CardHeadline
 						headlineText={headlineText}
@@ -870,7 +916,7 @@ export const Card = ({
 			)}
 
 			<CardLayout
-				cardBackgroundColour={backgroundColour}
+				cardBackgroundColour={backgroundColour()}
 				mediaPositionOnDesktop={mediaPositionOnDesktop}
 				mediaPositionOnMobile={mediaPositionOnMobile}
 				minWidthInPixels={minWidthInPixels}
@@ -898,31 +944,30 @@ export const Card = ({
 						mediaType={media.type}
 						mediaPositionOnDesktop={mediaPositionOnDesktop}
 						mediaPositionOnMobile={mediaPositionOnMobile}
-						hideMediaOverlay={media.type === 'slideshow'}
-						padMedia={isMediaCardOrNewsletter && isBetaContainer}
+						padMedia={
+							isMediaCardOrNewsletter &&
+							isBetaContainer &&
+							!isGallerySecondaryOnward
+						}
 						isBetaContainer={isBetaContainer}
 						isSmallCard={isSmallCard}
 					>
 						{media.type === 'slideshow' && (
-							<div
-								css={css`
-									position: relative;
-									z-index: ${getZIndex('card-nested-link')};
-								`}
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
 							>
-								<Island
-									priority="feature"
-									defer={{ until: 'visible' }}
-								>
-									<SlideshowCarousel
-										images={media.slideshowImages}
-										imageSize={mediaSize}
-										hasNavigationBackgroundColour={
-											!!hasSublinks
-										}
-									/>
-								</Island>
-							</div>
+								<SlideshowCarousel
+									images={media.slideshowImages}
+									imageSize={mediaSize}
+									hasNavigationBackgroundColour={
+										!!hasSublinks
+									}
+									linkTo={linkTo}
+									linkAriaLabel={headlineText}
+									dataLinkName={resolvedDataLinkName}
+								/>
+							</Island>
 						)}
 						{media.type === 'avatar' && (
 							<AvatarContainer
@@ -941,17 +986,18 @@ export const Card = ({
 								/>
 							</AvatarContainer>
 						)}
-						{media.type === 'loop-video' && (
+						{isSelfHostedVideo && (
 							<Island
 								priority="critical"
 								defer={{ until: 'visible' }}
 							>
-								<LoopVideo
+								<SelfHostedVideo
 									sources={media.mainMedia.sources}
 									atomId={media.mainMedia.atomId}
 									uniqueId={uniqueId}
 									height={media.mainMedia.height}
 									width={media.mainMedia.width}
+									videoStyle={media.mainMedia.videoStyle}
 									posterImage={media.mainMedia.image ?? ''}
 									fallbackImage={media.mainMedia.image ?? ''}
 									fallbackImageSize={mediaSize}
@@ -963,6 +1009,7 @@ export const Card = ({
 										media.mainMedia.subtitleSource
 									}
 									subtitleSize={subtitleSize}
+									enableHls={enableHls}
 								/>
 							</Island>
 						)}
@@ -1060,10 +1107,6 @@ export const Card = ({
 											imageSize={mediaSize}
 											alt={headlineText}
 											loading={imageLoading}
-											roundedCorners={
-												isOnwardContent &&
-												!isMoreGalleriesOnwardContent
-											}
 											aspectRatio={aspectRatio}
 										/>
 									</div>
@@ -1077,10 +1120,6 @@ export const Card = ({
 									imageSize={mediaSize}
 									alt={media.imageAltText}
 									loading={imageLoading}
-									roundedCorners={
-										isOnwardContent &&
-										!isMoreGalleriesOnwardContent
-									}
 									aspectRatio={aspectRatio}
 								/>
 								{isVideoMainMedia && mainMedia.duration > 0 && (
@@ -1122,10 +1161,6 @@ export const Card = ({
 											imageSize="small"
 											alt={media.imageAltText}
 											loading={imageLoading}
-											roundedCorners={
-												isOnwardContent &&
-												!isMoreGalleriesOnwardContent
-											}
 											aspectRatio="1:1"
 										/>
 									</div>
@@ -1155,7 +1190,7 @@ export const Card = ({
 					padContent={determinePadContent(
 						isMediaCardOrNewsletter,
 						isBetaContainer,
-						isOnwardContent && !isMoreGalleriesOnwardContent,
+						isOnwardContent,
 					)}
 				>
 					{/* This div is needed to keep the headline and trail text justified at the start */}
@@ -1294,12 +1329,15 @@ export const Card = ({
 					css`
 						${from.tablet} {
 							flex-basis: 100%;
-							background-color: ${backgroundColour};
+							background-color: ${backgroundColour()};
 						}
 					`
 				}
 				style={{
-					padding: isOnwardContent ? `0 ${space[2]}px` : 0,
+					padding:
+						isOnwardContent && !isInGalleryContext
+							? `0 ${space[2]}px`
+							: 0,
 				}}
 			>
 				{showLivePlayable && liveUpdatesPosition === 'outer' && (

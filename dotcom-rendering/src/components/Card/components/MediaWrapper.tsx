@@ -1,6 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
+import { getZIndex } from '../../../lib/getZIndex';
 import type { CardMediaType } from '../../../types/layout';
 
 const mediaFixedSize = {
@@ -31,12 +32,6 @@ type Props = {
 	mediaType?: CardMediaType;
 	mediaPositionOnDesktop: MediaPositionType;
 	mediaPositionOnMobile: MediaPositionType;
-	/**
-	 * Forces hiding the image overlay added to pictures & slideshows on hover.
-	 * This is to allow hiding the overlay on slideshow carousels where we don't
-	 * want it to be shown whilst retaining it for existing slideshows.
-	 */
-	hideMediaOverlay?: boolean;
 	isBetaContainer: boolean;
 	isSmallCard: boolean;
 	padMedia?: boolean;
@@ -48,6 +43,9 @@ const mediaOverlayContainerStyles = css`
 	left: 0;
 	width: 100%;
 	height: 100%;
+	z-index: ${getZIndex('mediaOverlay')};
+	cursor: pointer;
+	pointer-events: none;
 `;
 
 /**
@@ -203,7 +201,6 @@ export const MediaWrapper = ({
 	mediaType,
 	mediaPositionOnDesktop,
 	mediaPositionOnMobile,
-	hideMediaOverlay,
 	isBetaContainer,
 	isSmallCard,
 	padMedia,
@@ -219,7 +216,9 @@ export const MediaWrapper = ({
 				(mediaType === 'slideshow' ||
 					mediaType === 'picture' ||
 					mediaType === 'youtube-video' ||
+					mediaType === 'default-video' ||
 					mediaType === 'loop-video' ||
+					mediaType === 'cinemagraph' ||
 					mediaType === 'podcast') &&
 					isHorizontalOnDesktop &&
 					flexBasisStyles({
@@ -267,24 +266,23 @@ export const MediaWrapper = ({
 		>
 			<>
 				{children}
-				{/* This image overlay is styled when the CardLink is hovered */}
-				{(mediaType === 'picture' || mediaType === 'slideshow') &&
-					!hideMediaOverlay && (
-						<div
-							css={[
-								mediaOverlayContainerStyles,
-								padMedia &&
-									mediaPaddingStyles(
-										mediaPositionOnDesktop,
-										mediaPositionOnMobile,
-									),
-							]}
-						>
-							{/* This child div is needed as the hover background colour covers the padded
+				{/* This overlay is styled when the CardLink is hovered */}
+				{(mediaType === 'picture' || mediaType === 'cinemagraph') && (
+					<div
+						css={[
+							mediaOverlayContainerStyles,
+							padMedia &&
+								mediaPaddingStyles(
+									mediaPositionOnDesktop,
+									mediaPositionOnMobile,
+								),
+						]}
+					>
+						{/* This child div is needed as the hover background colour covers the padded
 							    area around the image when the hover styles are applied to the top-level div */}
-							<div className="media-overlay" />
-						</div>
-					)}
+						<div className="media-overlay" />
+					</div>
+				)}
 			</>
 		</div>
 	);

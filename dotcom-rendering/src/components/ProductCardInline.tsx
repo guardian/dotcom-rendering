@@ -182,6 +182,9 @@ export const ProductCardInline = ({
 
 	return (
 		<div
+			data-component={`product-card-type-inline${
+				isCardOnly ? '-only' : ''
+			}`}
 			css={[
 				isCardOnly ? productCard : showcaseCard,
 				shouldShowLeftColCard && !isCardOnly && hideFromWide,
@@ -211,10 +214,7 @@ export const ProductCardInline = ({
 				)}
 			</div>
 			<div css={buttonWrapper}>
-				<ProductCardButtons
-					productCtas={productCtas}
-					dataComponent={'inline-product-card-buttons'}
-				/>
+				<ProductCardButtons productCtas={productCtas} />
 			</div>
 			{hasCustomAttributes && (
 				<div css={customAttributesContainer}>
