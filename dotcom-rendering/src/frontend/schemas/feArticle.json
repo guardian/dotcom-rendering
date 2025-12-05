@@ -5538,14 +5538,6 @@
                 }
             ]
         },
-        "VideoPlayerFormat": {
-            "enum": [
-                "Cinemagraph",
-                "Default",
-                "Loop"
-            ],
-            "type": "string"
-        },
         "SupportedVideoFileType": {
             "enum": [
                 "application/vnd.apple.mpegurl",
