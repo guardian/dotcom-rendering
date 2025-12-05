@@ -8,7 +8,7 @@ type Media = {
 };
 
 /** For displaying embedded, playable videos directly in cards */
-type YoutubeVideo = Media & {
+export type YoutubeVideo = Media & {
 	type: 'YoutubeVideo';
 	/** @see https://github.com/guardian/frontend/blob/8e7e4d0e/common/app/model/content/Atom.scala#L159 */
 	id: string;
