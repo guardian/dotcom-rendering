@@ -29,6 +29,7 @@ import { BrandingLabel } from './BrandingLabel';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
 import type { MediaSizeType } from './Card/components/MediaWrapper';
+import { narrowPlayIconDiameter, PlayIcon } from './Card/components/PlayIcon';
 import { TrailText } from './Card/components/TrailText';
 import { CardHeadline, type ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
@@ -232,6 +233,12 @@ const videoPillStyles = css`
 	position: absolute;
 	top: ${space[2]}px;
 	right: ${space[2]}px;
+`;
+
+const playIconStyles = css`
+	position: absolute;
+	top: calc(50% - ${narrowPlayIconDiameter / 2}px);
+	left: calc(50% - ${narrowPlayIconDiameter / 2}px);
 `;
 
 const waveformStyles = css`
@@ -529,6 +536,12 @@ export const FeatureCard = ({
 													/>
 												</div>
 											)}
+
+										{mainMedia?.type === 'YoutubeVideo' && (
+											<div css={playIconStyles}>
+												<PlayIcon iconWidth="narrow" />
+											</div>
+										)}
 									</>
 								)}
 
