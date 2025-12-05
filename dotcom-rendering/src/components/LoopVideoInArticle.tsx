@@ -31,33 +31,35 @@ export const LoopVideoInArticle = ({
 
 	return (
 		<Island priority="critical" defer={{ until: 'visible' }}>
-			<SelfHostedVideo
-				atomId={element.id}
-				fallbackImage={posterImageUrl}
-				fallbackImageAlt={caption}
-				fallbackImageAspectRatio={
-					(firstVideoAsset?.aspectRatio ?? '5:4') as FEAspectRatio
-				}
-				fallbackImageLoading="lazy"
-				fallbackImageSize="small"
-				height={firstVideoAsset?.dimensions?.height ?? 400}
-				linkTo="Article-embed-MediaAtomBlockElement"
-				posterImage={posterImageUrl}
-				sources={convertAssetsToVideoSources(element.assets)}
-				subtitleSize="medium"
-				subtitleSource={getSubtitleAsset(element.assets)}
-				videoStyle="Loop"
-				uniqueId={element.id}
-				width={firstVideoAsset?.dimensions?.width ?? 500}
-			/>
-			{!!caption && (
-				<Caption
-					captionText={caption}
-					format={format}
-					isMainMedia={isMainMedia}
-					mediaType="SelfHostedVideo"
+			<div>
+				<SelfHostedVideo
+					atomId={element.id}
+					fallbackImage={posterImageUrl}
+					fallbackImageAlt={caption}
+					fallbackImageAspectRatio={
+						(firstVideoAsset?.aspectRatio ?? '5:4') as FEAspectRatio
+					}
+					fallbackImageLoading="lazy"
+					fallbackImageSize="small"
+					height={firstVideoAsset?.dimensions?.height ?? 400}
+					linkTo="Article-embed-MediaAtomBlockElement"
+					posterImage={posterImageUrl}
+					sources={convertAssetsToVideoSources(element.assets)}
+					subtitleSize="medium"
+					subtitleSource={getSubtitleAsset(element.assets)}
+					videoStyle="Loop"
+					uniqueId={element.id}
+					width={firstVideoAsset?.dimensions?.width ?? 500}
 				/>
-			)}
+				{!!caption && (
+					<Caption
+						captionText={caption}
+						format={format}
+						isMainMedia={isMainMedia}
+						mediaType="SelfHostedVideo"
+					/>
+				)}
+			</div>
 		</Island>
 	);
 };
