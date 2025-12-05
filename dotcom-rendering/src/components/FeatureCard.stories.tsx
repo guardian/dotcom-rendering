@@ -282,8 +282,10 @@ export const GalleryImmersive: Story = {
 	},
 };
 
-// A video article
-export const Video: Story = {
+/**
+ * A video article
+ */
+export const YoutubeVideo: Story = {
 	args: {
 		format: {
 			...cardProps.format,
@@ -303,22 +305,26 @@ export const Video: Story = {
 			title: 'Video Title',
 			duration: 120,
 			expired: false,
-			image: 'https://media.guim.co.uk/video-thumbnail.jpg',
+			image: 'https://media.guim.co.uk/f2aedd24e5414073a653f68112e0ad070c6f4a2b/254_0_7493_4500/master/7493.jpg',
 		},
+		canPlayInline: true,
+		showVideo: true,
 	},
 };
 
-export const VideoImmersive: Story = {
+export const YoutubeVideoImmersive: Story = {
 	args: {
-		...Video.args,
+		...YoutubeVideo.args,
 		...Immersive.args,
 	},
 };
 
-// A standard (non-video) article with a video main media
-export const VideoMainMedia: Story = {
+/**
+ * A standard (non-video) article with a video main media
+ */
+export const YoutubeVideoMainMedia: Story = {
 	args: {
-		...Video.args,
+		...YoutubeVideo.args,
 		image: {
 			src: 'https://media.guim.co.uk/4612af5f4667888fa697139cf570b6373d93a710/2446_345_3218_1931/master/3218.jpg',
 			altText: 'alt text',
@@ -330,9 +336,9 @@ export const VideoMainMedia: Story = {
 	},
 };
 
-export const VideoMainMediaImmersive: Story = {
+export const YoutubeVideoMainMediaImmersive: Story = {
 	args: {
-		...VideoMainMedia.args,
+		...YoutubeVideoMainMedia.args,
 		...Immersive.args,
 	},
 };
