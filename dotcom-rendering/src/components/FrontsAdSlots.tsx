@@ -67,6 +67,7 @@ export const MerchandisingSlot = ({
 				padSides={false}
 				showTopBorder={false}
 				showSideBorders={false}
+				shouldCenter={false}
 				backgroundColour={themePalette('--article-section-background')}
 				element="aside"
 			>

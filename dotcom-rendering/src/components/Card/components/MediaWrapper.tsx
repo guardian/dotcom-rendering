@@ -32,12 +32,6 @@ type Props = {
 	mediaType?: CardMediaType;
 	mediaPositionOnDesktop: MediaPositionType;
 	mediaPositionOnMobile: MediaPositionType;
-	/**
-	 * Forces hiding the image overlay added to pictures & slideshows on hover.
-	 * This is to allow hiding the overlay on slideshow carousels where we don't
-	 * want it to be shown whilst retaining it for existing slideshows.
-	 */
-	hideMediaOverlay?: boolean;
 	isBetaContainer: boolean;
 	isSmallCard: boolean;
 	padMedia?: boolean;
@@ -207,7 +201,6 @@ export const MediaWrapper = ({
 	mediaType,
 	mediaPositionOnDesktop,
 	mediaPositionOnMobile,
-	hideMediaOverlay,
 	isBetaContainer,
 	isSmallCard,
 	padMedia,
@@ -274,25 +267,22 @@ export const MediaWrapper = ({
 			<>
 				{children}
 				{/* This overlay is styled when the CardLink is hovered */}
-				{(mediaType === 'picture' ||
-					mediaType === 'slideshow' ||
-					mediaType === 'cinemagraph') &&
-					!hideMediaOverlay && (
-						<div
-							css={[
-								mediaOverlayContainerStyles,
-								padMedia &&
-									mediaPaddingStyles(
-										mediaPositionOnDesktop,
-										mediaPositionOnMobile,
-									),
-							]}
-						>
-							{/* This child div is needed as the hover background colour covers the padded
+				{(mediaType === 'picture' || mediaType === 'cinemagraph') && (
+					<div
+						css={[
+							mediaOverlayContainerStyles,
+							padMedia &&
+								mediaPaddingStyles(
+									mediaPositionOnDesktop,
+									mediaPositionOnMobile,
+								),
+						]}
+					>
+						{/* This child div is needed as the hover background colour covers the padded
 							    area around the image when the hover styles are applied to the top-level div */}
-							<div className="media-overlay" />
-						</div>
-					)}
+						<div className="media-overlay" />
+					</div>
+				)}
 			</>
 		</div>
 	);

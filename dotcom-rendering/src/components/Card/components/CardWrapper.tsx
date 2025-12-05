@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source/foundations';
-import { ArticleDesign, type ArticleFormat } from '../../../lib/articleFormat';
+import type { ArticleFormat } from '../../../lib/articleFormat';
 import { palette } from '../../../palette';
 import type { DCRContainerPalette } from '../../../types/front';
 import { ContainerOverrides } from '../../ContainerOverrides';
@@ -11,8 +11,8 @@ type Props = {
 	format: ArticleFormat;
 	showTopBarDesktop: boolean;
 	showTopBarMobile: boolean;
-	isOnwardContent: boolean;
 	containerPalette?: DCRContainerPalette;
+	topBarColour?: string;
 };
 
 const baseCardStyles = css`
@@ -59,8 +59,8 @@ const hoverStyles = css`
 	*/
 	:has(
 			ul.sublinks:hover,
-			.video-container.loop:hover,
-			.slideshow-carousel:hover,
+			.video-container:not(.cinemagraph):hover,
+			.slideshow-carousel-footer:hover,
 			.branding-logo:hover
 		) {
 		.card-headline .show-underline {
@@ -72,9 +72,9 @@ const hoverStyles = css`
 	}
 `;
 
-const topBarStyles = css`
+const topBarStyles = (colour: string) => css`
 	::before {
-		border-top: 1px solid ${palette('--card-border-top')};
+		border-top: 1px solid ${colour};
 		content: '';
 		z-index: 2;
 		width: 100%;
@@ -82,23 +82,14 @@ const topBarStyles = css`
 		background-color: unset;
 	}
 `;
-const mobileTopBarStyles = css`
+const mobileTopBarStyles = (colour: string) => css`
 	${until.tablet} {
-		${topBarStyles}
+		${topBarStyles(colour)}
 	}
 `;
-const desktopTopBarStyles = css`
+const desktopTopBarStyles = (colour: string) => css`
 	${from.tablet} {
-		${topBarStyles}
-	}
-`;
-
-const onwardContentStyles = css`
-	border-radius: ${space[2]}px;
-	overflow: hidden;
-
-	:hover .media-overlay {
-		border-radius: ${space[2]}px;
+		${topBarStyles(colour)}
 	}
 `;
 
@@ -107,8 +98,8 @@ export const CardWrapper = ({
 	format,
 	showTopBarDesktop,
 	showTopBarMobile,
-	isOnwardContent,
 	containerPalette,
+	topBarColour = palette('--card-border-top'),
 }: Props) => {
 	return (
 		<FormatBoundary format={format}>
@@ -117,11 +108,8 @@ export const CardWrapper = ({
 					css={[
 						baseCardStyles,
 						hoverStyles,
-						showTopBarDesktop && desktopTopBarStyles,
-						showTopBarMobile && mobileTopBarStyles,
-						isOnwardContent &&
-							format.design !== ArticleDesign.Gallery &&
-							onwardContentStyles,
+						showTopBarDesktop && desktopTopBarStyles(topBarColour),
+						showTopBarMobile && mobileTopBarStyles(topBarColour),
 					]}
 				>
 					{children}
