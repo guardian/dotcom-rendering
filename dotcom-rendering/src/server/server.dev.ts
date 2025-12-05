@@ -21,6 +21,7 @@ import {
 	handleFootballMatchPage,
 	handleFootballTablesPage,
 } from './handler.sportDataPage.web';
+import { getABTestsFromQueryParams } from './lib/get-abtests-from-query-params';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 
 /** article URLs contain a part that looks like “2022/nov/25” */
@@ -90,6 +91,7 @@ const renderer = Router();
 // populates req.body with the content data from a production
 // URL if req.params.url is present
 renderer.use(getContentFromURLMiddleware);
+renderer.use(getABTestsFromQueryParams);
 renderer.get('/Article/*url', handleArticle);
 renderer.get('/Interactive/*url', handleInteractive);
 renderer.get('/Blocks/*url', handleBlocks);
