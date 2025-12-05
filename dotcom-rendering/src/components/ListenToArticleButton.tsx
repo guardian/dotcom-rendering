@@ -70,6 +70,7 @@ const waveFormContainerCss = css`
 type ButtonProps = {
 	onClickHandler: () => void;
 	audioDuration?: string;
+	waveFormSeed?: string;
 };
 
 const waveTheme: WaveFormTheme = {
@@ -78,22 +79,25 @@ const waveTheme: WaveFormTheme = {
 	wave: neutral[86],
 };
 
-const waveFormProps: WaveFormProps = {
-	seed: 'listen to this article',
+const waveFormProps = (
+	seed: string = 'listen to this article',
+): WaveFormProps => ({
+	seed,
 	height: space[12] - 8,
 	bars: 250,
 	theme: waveTheme,
 	gap: 1,
 	barWidth: 2,
-};
+});
 
 export const ListenToArticleButton = ({
 	onClickHandler,
 	audioDuration,
+	waveFormSeed,
 }: ButtonProps) => {
 	return (
 		<div css={waveFormContainerCss}>
-			<WaveForm {...waveFormProps} />
+			<WaveForm {...waveFormProps(waveFormSeed)} />
 			<Button
 				onClick={onClickHandler}
 				size="default"
