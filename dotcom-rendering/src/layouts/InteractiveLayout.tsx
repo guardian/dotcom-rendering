@@ -534,6 +534,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										}
 										editionId={article.editionId}
 										shouldHideAds={article.shouldHideAds}
+										idApiUrl={article.config.idApiUrl}
 									/>
 								</ArticleContainer>
 							</GridItem>

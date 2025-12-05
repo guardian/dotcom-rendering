@@ -39,6 +39,7 @@ type Props = {
 	filterKeyEvents: boolean;
 	shouldHideAds: boolean;
 	serverTime?: number;
+	idApiUrl?: string;
 };
 
 export const LiveBlogRenderer = ({
@@ -66,6 +67,7 @@ export const LiveBlogRenderer = ({
 	editionId,
 	shouldHideAds,
 	serverTime,
+	idApiUrl,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const isWeb = renderingTarget === 'Web';
@@ -94,6 +96,7 @@ export const LiveBlogRenderer = ({
 							editionId={editionId}
 							shouldHideAds={shouldHideAds}
 							serverTime={serverTime}
+							idApiUrl={idApiUrl}
 						/>
 					</PinnedPost>
 				</>
@@ -137,6 +140,7 @@ export const LiveBlogRenderer = ({
 				editionId={editionId}
 				shouldHideAds={shouldHideAds}
 				serverTime={serverTime}
+				idApiUrl={idApiUrl}
 			/>
 			{isWeb && blocks.length > 4 && (
 				<Island

@@ -673,6 +673,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									}
 									editionId={article.editionId}
 									shouldHideAds={article.shouldHideAds}
+									idApiUrl={article.config.idApiUrl}
 								/>
 								{showBodyEndSlot && (
 									<Island

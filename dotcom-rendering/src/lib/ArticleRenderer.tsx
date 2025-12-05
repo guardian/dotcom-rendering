@@ -36,6 +36,7 @@ type Props = {
 	editionId: EditionId;
 	contributionsServiceUrl: string;
 	shouldHideAds: boolean;
+	idApiUrl?: string;
 };
 
 export const ArticleRenderer = ({
@@ -59,6 +60,7 @@ export const ArticleRenderer = ({
 	editionId,
 	contributionsServiceUrl,
 	shouldHideAds,
+	idApiUrl,
 }: Props) => {
 	const isSectionedMiniProfilesArticle =
 		elements.filter(
@@ -88,6 +90,7 @@ export const ArticleRenderer = ({
 				totalElements={length}
 				isSectionedMiniProfilesArticle={isSectionedMiniProfilesArticle}
 				shouldHideAds={shouldHideAds}
+				idApiUrl={idApiUrl}
 			/>
 		);
 	});

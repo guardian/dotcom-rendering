@@ -346,6 +346,7 @@ export const AudioLayout = (props: WebProps) => {
 									}
 									editionId={article.editionId}
 									shouldHideAds={article.shouldHideAds}
+									idApiUrl={article.config.idApiUrl}
 								/>
 								{showBodyEndSlot && (
 									<Island

@@ -847,6 +847,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													article.shouldHideAds
 												}
 												serverTime={serverTime}
+												idApiUrl={
+													article.config.idApiUrl
+												}
 											/>
 											{pagination.totalPages > 1 && (
 												<Pagination

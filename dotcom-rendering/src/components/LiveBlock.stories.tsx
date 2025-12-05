@@ -81,6 +81,7 @@ export const VideoAsSecond = () => {
 				isPinnedPost={false}
 				editionId={'UK'}
 				shouldHideAds={false}
+				idApiUrl="https://idapi.theguardian.com"
 			/>
 		</Wrapper>
 	);
@@ -129,6 +130,7 @@ export const Title = () => {
 				isPinnedPost={false}
 				editionId={'UK'}
 				shouldHideAds={false}
+				idApiUrl="https://idapi.theguardian.com"
 			/>
 		</Wrapper>
 	);
@@ -198,6 +200,7 @@ export const Video = () => {
 				isPinnedPost={false}
 				editionId={'UK'}
 				shouldHideAds={false}
+				idApiUrl="https://idapi.theguardian.com"
 			/>
 		</Wrapper>
 	);
@@ -242,6 +245,7 @@ export const RichLink = () => {
 				isPinnedPost={false}
 				editionId={'UK'}
 				shouldHideAds={false}
+				idApiUrl="https://idapi.theguardian.com"
 			/>
 		</Wrapper>
 	);
@@ -277,6 +281,7 @@ export const FirstImage = () => {
 				isPinnedPost={false}
 				editionId={'UK'}
 				shouldHideAds={false}
+				idApiUrl="https://idapi.theguardian.com"
 			/>
 		</Wrapper>
 	);
@@ -338,6 +343,7 @@ export const ImageRoles = () => {
 				isSensitive={false}
 				editionId={'UK'}
 				shouldHideAds={false}
+				idApiUrl="https://idapi.theguardian.com"
 			/>
 		</Wrapper>
 	);
@@ -388,6 +394,7 @@ export const Thumbnail = () => {
 				isSensitive={false}
 				editionId={'UK'}
 				shouldHideAds={false}
+				idApiUrl="https://idapi.theguardian.com"
 			/>
 		</Wrapper>
 	);
@@ -424,6 +431,7 @@ export const ImageAndTitle = () => {
 				isPinnedPost={false}
 				editionId={'UK'}
 				shouldHideAds={false}
+				idApiUrl="https://idapi.theguardian.com"
 			/>
 		</Wrapper>
 	);
@@ -456,6 +464,7 @@ export const Updated = () => {
 				isPinnedPost={false}
 				editionId={'UK'}
 				shouldHideAds={false}
+				idApiUrl="https://idapi.theguardian.com"
 			/>
 		</Wrapper>
 	);
@@ -492,6 +501,7 @@ export const Contributor = () => {
 				isSensitive={false}
 				editionId={'UK'}
 				shouldHideAds={false}
+				idApiUrl="https://idapi.theguardian.com"
 			/>
 		</Wrapper>
 	);
@@ -526,6 +536,7 @@ export const NoAvatar = () => {
 				isSensitive={false}
 				editionId={'UK'}
 				shouldHideAds={false}
+				idApiUrl="https://idapi.theguardian.com"
 			/>
 		</Wrapper>
 	);
@@ -563,6 +574,7 @@ export const TitleAndContributor = () => {
 				isSensitive={false}
 				editionId={'UK'}
 				shouldHideAds={false}
+				idApiUrl="https://idapi.theguardian.com"
 			/>
 		</Wrapper>
 	);

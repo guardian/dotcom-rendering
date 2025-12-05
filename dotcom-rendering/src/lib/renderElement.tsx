@@ -12,7 +12,7 @@ import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { CrosswordComponent } from '../components/CrosswordComponent.importable';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
-import { EmailSignUpWrapper } from '../components/EmailSignUpWrapper';
+import { EmailSignUpWrapper } from '../components/EmailSignUpWrapper.importable';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
 import { ExplainerAtom } from '../components/ExplainerAtom';
 import { Figure } from '../components/Figure';
@@ -99,6 +99,7 @@ type Props = {
 	shouldHideAds: boolean;
 	contentType?: string;
 	contentLayout?: string;
+	idApiUrl?: string;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -170,6 +171,7 @@ export const renderElement = ({
 	shouldHideAds,
 	contentType,
 	contentLayout,
+	idApiUrl,
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
@@ -546,15 +548,21 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
 			const emailSignUpProps = {
 				index,
+				listId: element.newsletter.listId,
 				identityName: element.newsletter.identityName,
 				description: element.newsletter.description,
 				name: element.newsletter.name,
 				frequency: element.newsletter.frequency,
 				successDescription: element.newsletter.successDescription,
 				theme: element.newsletter.theme,
+				idApiUrl: idApiUrl ?? '',
 			};
 			if (isListElement || isTimeline) return null;
-			return <EmailSignUpWrapper {...emailSignUpProps} />;
+			return (
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<EmailSignUpWrapper {...emailSignUpProps} />
+				</Island>
+			);
 		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
 			return renderAds && <AdPlaceholder />;
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
@@ -992,6 +1000,7 @@ export const RenderArticleElement = ({
 	shouldHideAds,
 	contentType,
 	contentLayout,
+	idApiUrl,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -1020,6 +1029,7 @@ export const RenderArticleElement = ({
 		shouldHideAds,
 		contentType,
 		contentLayout,
+		idApiUrl,
 	});
 
 	const needsFigure = !bareElements.has(element._type);
