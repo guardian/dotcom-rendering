@@ -55,18 +55,24 @@ export const riffRaffYamlFile = ({
 	});
 
 	const configCloudformationDeployment = deployments.get(
-		["cfn", region, stack, "ab-testing-config"].join("-"),
+		`cfn-${region}-${stack}-ab-testing-config`,
 	)!;
 
-	configCloudformationDeployment.dependencies = [
-		...(configCloudformationDeployment.dependencies ?? []),
-		// We need the test artifacts in place before running the ab-testing-config CloudFormation deployment
-		"config/ab-testing",
-		// We need the lambda to be updated before running the ab-testing-config CloudFormation deployment
-		["lambda-update", region, stack, "ab-testing-deployment-lambda"].join(
-			"-",
-		),
-	];
+	deployments.set(`cfn-${region}-${stack}-ab-testing-config`, {
+		...configCloudformationDeployment,
+		dependencies: [
+			...(configCloudformationDeployment.dependencies ?? []),
+			// We need the test artifacts in place before running the ab-testing-config CloudFormation deployment
+			"config/ab-testing",
+			// We need the lambda to be updated before running the ab-testing-config CloudFormation deployment
+			[
+				"lambda-update",
+				region,
+				stack,
+				"ab-testing-deployment-lambda",
+			].join("-"),
+		],
+	});
 
 	return riffRaff;
 };
