@@ -29,7 +29,7 @@ export const getMoreDays =
 				const feFootballData = responseJson as FEFootballMatchListPage;
 				const parsedFootballMatches = parse(feFootballData.matchesList);
 
-				if (parsedFootballMatches.kind === 'error') {
+				if (!parsedFootballMatches.ok) {
 					throw new Error(
 						`Failed to parse matches: ${getParserErrorMessage(
 							parsedFootballMatches.error,

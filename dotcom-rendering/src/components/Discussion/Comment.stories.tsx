@@ -6,7 +6,7 @@ import type {
 	ReplyType,
 	Staff,
 } from '../../lib/discussion';
-import { ok } from '../../lib/result';
+import { error, ok, type Result } from '../../lib/result';
 import { Comment } from './Comment';
 
 type Props = Parameters<typeof Comment>[0];
@@ -113,10 +113,11 @@ const longBothReplyCommentData: ReplyType = {
 	},
 };
 
-const commentResponseError = {
-	kind: 'error',
-	error: 'NetworkError',
-} as const;
+const commentResponseError = function <A>(): Promise<
+	Result<'NetworkError', A>
+> {
+	return Promise.resolve(error('NetworkError'));
+};
 
 const user: Reader = {
 	kind: 'Reader',
@@ -134,8 +135,8 @@ const user: Reader = {
 			hasCommented: true,
 		},
 	},
-	onComment: () => Promise.resolve(commentResponseError),
-	onReply: () => Promise.resolve(commentResponseError),
+	onComment: commentResponseError,
+	onReply: commentResponseError,
 	onRecommend: () => Promise.resolve(true),
 	addUsername: () => Promise.resolve(ok(true)),
 	reportAbuse: () => Promise.resolve(ok(true)),
@@ -157,12 +158,12 @@ const staffUser: Staff = {
 			hasCommented: true,
 		},
 	},
-	onComment: () => Promise.resolve(commentResponseError),
-	onReply: () => Promise.resolve(commentResponseError),
+	onComment: commentResponseError,
+	onReply: commentResponseError,
 	onRecommend: () => Promise.resolve(true),
 	addUsername: () => Promise.resolve(ok(true)),
-	onPick: () => Promise.resolve(commentResponseError),
-	onUnpick: () => Promise.resolve(commentResponseError),
+	onPick: commentResponseError,
+	onUnpick: commentResponseError,
 	reportAbuse: () => Promise.resolve(ok(true)),
 };
 

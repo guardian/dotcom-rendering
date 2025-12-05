@@ -130,11 +130,11 @@ const oneOf =
 
 			const result = head(input);
 
-			if (result.kind === 'error') {
+			if (!result.ok) {
 				return f(tail, [...errs, result.error]);
 			}
 
-			return result;
+			return ok(result.value);
 		};
 
 		return f(parsers, []);
@@ -152,8 +152,8 @@ export const listParse =
 
 			const result = parser(next);
 
-			if (result.kind === 'error') {
-				return result;
+			if (!result.ok) {
+				return error(result.error);
 			}
 
 			return f(remaining, parsed.concat(result.value));
@@ -198,25 +198,24 @@ const parseFixture = (
 		});
 	}
 
-	const date = parseMatchDate(feFixture.date);
-
-	if (date.kind === 'error') {
-		return error({ kind: 'FootballMatchInvalidDate', message: date.error });
-	}
-
-	return ok({
-		kind: 'Fixture',
-		homeTeam: {
-			name: cleanTeamName(feFixture.homeTeam.name),
-			id: feFixture.homeTeam.id,
-		},
-		awayTeam: {
-			name: cleanTeamName(feFixture.awayTeam.name),
-			id: feFixture.awayTeam.id,
-		},
-		dateTimeISOString: date.value,
-		paId: feFixture.id,
-	});
+	return parseMatchDate(feFixture.date)
+		.mapError<ParserError>((message) => ({
+			kind: 'FootballMatchInvalidDate',
+			message,
+		}))
+		.map((dateTimeISOString) => ({
+			kind: 'Fixture',
+			homeTeam: {
+				name: cleanTeamName(feFixture.homeTeam.name),
+				id: feFixture.homeTeam.id,
+			},
+			awayTeam: {
+				name: cleanTeamName(feFixture.awayTeam.name),
+				id: feFixture.awayTeam.id,
+			},
+			dateTimeISOString,
+			paId: feFixture.id,
+		}));
 };
 
 const parseMatchResult = (
@@ -229,28 +228,27 @@ const parseMatchResult = (
 		});
 	}
 
-	const date = parseMatchDate(feResult.date);
-
-	if (date.kind === 'error') {
-		return error({ kind: 'FootballMatchInvalidDate', message: date.error });
-	}
-
-	return ok({
-		kind: 'Result',
-		homeTeam: {
-			name: cleanTeamName(feResult.homeTeam.name),
-			score: feResult.homeTeam.score,
-			id: feResult.homeTeam.id,
-		},
-		awayTeam: {
-			name: cleanTeamName(feResult.awayTeam.name),
-			score: feResult.awayTeam.score,
-			id: feResult.awayTeam.id,
-		},
-		dateTimeISOString: date.value,
-		paId: feResult.id,
-		comment: cleanTeamName(feResult.comments ?? ''),
-	});
+	return parseMatchDate(feResult.date)
+		.mapError<ParserError>((message) => ({
+			kind: 'FootballMatchInvalidDate',
+			message,
+		}))
+		.map((dateTimeISOString) => ({
+			kind: 'Result',
+			homeTeam: {
+				name: cleanTeamName(feResult.homeTeam.name),
+				score: feResult.homeTeam.score,
+				id: feResult.homeTeam.id,
+			},
+			awayTeam: {
+				name: cleanTeamName(feResult.awayTeam.name),
+				score: feResult.awayTeam.score,
+				id: feResult.awayTeam.id,
+			},
+			dateTimeISOString,
+			paId: feResult.id,
+			comment: cleanTeamName(feResult.comments ?? ''),
+		}));
 };
 
 const parseLiveMatch = (
@@ -263,46 +261,41 @@ const parseLiveMatch = (
 		});
 	}
 
-	const date = parseMatchDate(feMatchDay.date);
-
-	if (date.kind === 'error') {
-		return error({ kind: 'FootballMatchInvalidDate', message: date.error });
-	}
-
-	return ok({
-		kind: 'Live',
-		homeTeam: {
-			name: cleanTeamName(feMatchDay.homeTeam.name),
-			score: feMatchDay.homeTeam.score,
-			id: feMatchDay.homeTeam.id,
-		},
-		awayTeam: {
-			name: cleanTeamName(feMatchDay.awayTeam.name),
-			score: feMatchDay.awayTeam.score,
-			id: feMatchDay.awayTeam.id,
-		},
-		dateTimeISOString: date.value,
-		paId: feMatchDay.id,
-		comment: cleanTeamName(feMatchDay.comments ?? ''),
-		status: replaceLiveMatchStatus(feMatchDay.matchStatus),
-	});
+	return parseMatchDate(feMatchDay.date)
+		.mapError<ParserError>((message) => ({
+			kind: 'FootballMatchInvalidDate',
+			message,
+		}))
+		.map((dateTimeISOString) => ({
+			kind: 'Live',
+			homeTeam: {
+				name: cleanTeamName(feMatchDay.homeTeam.name),
+				score: feMatchDay.homeTeam.score,
+				id: feMatchDay.homeTeam.id,
+			},
+			awayTeam: {
+				name: cleanTeamName(feMatchDay.awayTeam.name),
+				score: feMatchDay.awayTeam.score,
+				id: feMatchDay.awayTeam.id,
+			},
+			dateTimeISOString,
+			paId: feMatchDay.id,
+			comment: cleanTeamName(feMatchDay.comments ?? ''),
+			status: replaceLiveMatchStatus(feMatchDay.matchStatus),
+		}));
 };
 
 const parseMatchDay = (
 	feMatchDay: FEMatchDay,
-): Result<ParserError, FootballMatch> => {
-	const result = oneOf<ParserError, FEMatchDay, FootballMatch>([
+): Result<ParserError, FootballMatch> =>
+	oneOf<ParserError, FEMatchDay, FootballMatch>([
 		parseLiveMatch,
 		parseMatchResult,
 		parseFixture,
-	])(feMatchDay);
-
-	if (result.kind === 'error') {
-		return error({ kind: 'InvalidMatchDay', errors: result.error });
-	}
-
-	return result;
-};
+	])(feMatchDay).mapError((errors) => ({
+		kind: 'InvalidMatchDay',
+		errors,
+	}));
 
 const parseMatch = (
 	feMatch: FEFootballMatch,
@@ -328,45 +321,32 @@ const parseMatches = listParse(parseMatch);
 const parseCompetition = ({
 	competitionSummary,
 	matches,
-}: FECompetitionMatch): Result<ParserError, Competition> => {
-	const parsedMatches = parseMatches(matches);
-
-	if (parsedMatches.kind === 'error') {
-		return parsedMatches;
-	}
-
-	return ok({
+}: FECompetitionMatch): Result<ParserError, Competition> =>
+	parseMatches(matches).map((parsedMatches) => ({
 		id: competitionSummary.id,
 		// Frontend stores a path, which is the tag with a leading '/'.
 		tag: competitionSummary.url.slice(1),
 		name: competitionSummary.fullName,
 		nation: competitionSummary.nation,
-		matches: parsedMatches.value,
-	});
-};
+		matches: parsedMatches,
+	}));
 
 const parseCompetitions = listParse(parseCompetition);
 
 const parseFootballDay = (
 	day: FEMatchByDateAndCompetition,
-): Result<ParserError, FootballDay> => {
-	const date = parseDate(day.date);
-
-	if (date.kind === 'error') {
-		return error({ kind: 'FootballDayInvalidDate', message: date.error });
-	}
-
-	const competitions = parseCompetitions(day.competitionMatches);
-
-	if (competitions.kind === 'error') {
-		return competitions;
-	}
-
-	return ok({
-		dateISOString: date.value,
-		competitions: competitions.value,
-	});
-};
+): Result<ParserError, FootballDay> =>
+	parseDate(day.date)
+		.mapError<ParserError>((message) => ({
+			kind: 'FootballDayInvalidDate',
+			message,
+		}))
+		.flatMap((dateISOString) =>
+			parseCompetitions(day.competitionMatches).map((competitions) => ({
+				dateISOString,
+				competitions,
+			})),
+		);
 
 export const getParserErrorMessage = (parserError: ParserError): string => {
 	switch (parserError.kind) {
