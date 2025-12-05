@@ -140,6 +140,10 @@ type Props = {
 	fallbackImageAlt: CardPictureProps['alt'];
 	fallbackImageAspectRatio: CardPictureProps['aspectRatio'];
 	linkTo: string;
+	/**
+	 * If CORS are enabled, the video request will include CORS headers.
+	 */
+	enableCors?: boolean;
 	subtitleSource?: string;
 	subtitleSize: SubtitleSize;
 	enableHls: boolean;
@@ -159,6 +163,7 @@ export const SelfHostedVideo = ({
 	fallbackImageAlt,
 	fallbackImageAspectRatio,
 	linkTo,
+	enableCors = true,
 	subtitleSource,
 	subtitleSize,
 	enableHls,
@@ -708,6 +713,7 @@ export const SelfHostedVideo = ({
 					AudioIcon={hasAudio ? AudioIcon : null}
 					preloadPartialData={preloadPartialData}
 					showPlayIcon={showPlayIcon}
+					enableCors={enableCors}
 					subtitleSource={subtitleSource}
 					subtitleSize={subtitleSize}
 					activeCue={activeCue}
