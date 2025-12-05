@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { height, neutral, space } from '@guardian/source/foundations';
+import { height, space } from '@guardian/source/foundations';
 import type { ThemeIcon } from '@guardian/source/react-components';
 import {
 	Button,
@@ -47,7 +47,7 @@ const themeIcon: ThemeIcon = {
 
 const waveFormContainerCss = css`
 	height: ${space[12]}px;
-	border-top: 1px solid ${neutral[86]};
+	border-top: 1px solid ${palette('--article-meta-lines')};
 	position: relative;
 	padding-top: ${space[2]}px;
 	overflow: hidden;
@@ -74,9 +74,7 @@ type ButtonProps = {
 };
 
 const waveTheme: WaveFormTheme = {
-	progress: neutral[86],
-	buffer: neutral[86],
-	wave: neutral[86],
+	wave: palette('--listen-to-article-waveform'),
 };
 
 const waveFormProps = (
