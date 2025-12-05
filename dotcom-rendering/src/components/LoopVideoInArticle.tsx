@@ -8,6 +8,7 @@ import {
 import type { MediaAtomBlockElement } from '../types/content';
 import { Caption } from './Caption';
 import { SelfHostedVideo } from './SelfHostedVideo.importable';
+import { Island } from './Island';
 
 type LoopVideoInArticleProps = {
 	element: MediaAtomBlockElement;
@@ -29,7 +30,7 @@ export const LoopVideoInArticle = ({
 	}
 
 	return (
-		<>
+		<Island priority="critical" defer={{ until: 'visible' }}>
 			<SelfHostedVideo
 				atomId={element.id}
 				fallbackImage={posterImageUrl}
@@ -57,6 +58,6 @@ export const LoopVideoInArticle = ({
 					mediaType="SelfHostedVideo"
 				/>
 			)}
-		</>
+		</Island>
 	);
 };
