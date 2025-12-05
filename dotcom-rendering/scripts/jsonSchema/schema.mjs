@@ -19,6 +19,7 @@ const program = TJS.getProgramFromFiles(
 		path.resolve(`${root}/src/frontend/feFootballMatchListPage.ts`),
 		path.resolve(`${root}/src/frontend/feFootballTablesPage.ts`),
 		path.resolve(`${root}/src/frontend/feFootballMatchPage.ts`),
+		path.resolve(`${root}/src/frontend/feHostedContent.ts`),
 	],
 	{
 		skipLibCheck: true,
@@ -76,6 +77,10 @@ const schemas = [
 	{
 		typeName: 'FEFootballMatchPage',
 		file: `${root}/src/frontend/schemas/feFootballMatchPage.json`,
+	},
+	{
+		typeName: 'FEHostedContent',
+		file: `${root}/src/frontend/schemas/feHostedContent.json`,
 	},
 ];
 
