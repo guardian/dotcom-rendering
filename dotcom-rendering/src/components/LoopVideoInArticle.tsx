@@ -30,8 +30,8 @@ export const LoopVideoInArticle = ({
 	}
 
 	return (
-		<Island priority="critical" defer={{ until: 'visible' }}>
-			<div>
+		<>
+			<Island priority="critical" defer={{ until: 'visible' }}>
 				<SelfHostedVideo
 					atomId={element.id}
 					fallbackImage={posterImageUrl}
@@ -52,15 +52,15 @@ export const LoopVideoInArticle = ({
 					width={firstVideoAsset?.dimensions?.width ?? 500}
 					enableHls={false}
 				/>
-				{!!caption && (
-					<Caption
-						captionText={caption}
-						format={format}
-						isMainMedia={isMainMedia}
-						mediaType="SelfHostedVideo"
-					/>
-				)}
-			</div>
-		</Island>
+			</Island>
+			{!!caption && (
+				<Caption
+					captionText={caption}
+					format={format}
+					isMainMedia={isMainMedia}
+					mediaType="SelfHostedVideo"
+				/>
+			)}
+		</>
 	);
 };
