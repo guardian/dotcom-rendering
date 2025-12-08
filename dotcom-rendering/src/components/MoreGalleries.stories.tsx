@@ -1,3 +1,4 @@
+import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { galleryOnwardsTrails } from '../../fixtures/manual/onwardsTrails';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
@@ -21,6 +22,11 @@ export const Default = {
 			design: ArticleDesign.Gallery,
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Culture,
+		},
+	},
+	parameters: {
+		chromatic: {
+			viewports: [breakpoints.mobile, breakpoints.desktop],
 		},
 	},
 } satisfies Story;
