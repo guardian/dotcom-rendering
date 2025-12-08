@@ -45,26 +45,7 @@ const requiredNodeVersionMatches =
 			matchLevel: 'patch',
 		},
 		{
-			filepath: '../apps-rendering/riff-raff.yaml',
-			pattern: /^ +Recipe: apps-rendering.*-node-(\d+\.\d+\.\d+).*?$/m,
-			matchLevel: 'patch',
-		},
-		{
 			filepath: 'package.json',
-			pattern: /^\t+"@types\/node"\: "(.+)",$/m,
-			/*
-			Definitely Typed packages only match the major and minor
-			versions of the corresponding library/node release.
-			https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/README.md#how-do-definitely-typed-package-versions-relate-to-versions-of-the-corresponding-library
-
-			Note: Given this rule, this should be set to 'minor'. It's currently
-			set to 'major' because the latest node release doesn't yet have
-			types available for it (v22.18.0, latest types package is v22.17.x).
-			*/
-			matchLevel: 'major',
-		},
-		{
-			filepath: '../apps-rendering/package.json',
 			pattern: /^\t+"@types\/node"\: "(.+)",$/m,
 			/*
 			Definitely Typed packages only match the major and minor
