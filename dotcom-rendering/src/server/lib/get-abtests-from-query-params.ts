@@ -12,8 +12,9 @@ const SAFE_AB_VALUE = /^[a-zA-Z0-9_-]+$/;
 const MAX_LENGTH = 100;
 
 export const getABTestsFromQueryParams: Handler = (req, res, next) => {
+	const body = req.body as AbServerSideTestType | undefined;
 	try {
-		if (isObject(req.body) && isObject(req.body.config)) {
+		if (body?.config && isObject(body.config)) {
 			const { config } = req.body as AbServerSideTestType;
 			const queryParamsAb = req.query;
 			const filteredQuery: Record<string, string> = {};
