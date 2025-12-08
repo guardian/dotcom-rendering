@@ -22,24 +22,6 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const standardCardStyles = css`
-	position: relative;
-	padding: ${space[2]}px;
-	background-color: ${palette('--onward-more-galleries-card-background')};
-
-	${from.tablet} {
-		:not(:first-child)::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: -10px; /* shift into the gap */
-			width: 1px;
-			background: ${palette('--onward-content-border')};
-		}
-	}
-`;
-
 const standardCardsListStyles = css`
 	width: 100%;
 	display: grid;
@@ -74,6 +56,24 @@ const cardsContainerStyles = css`
 
 	${from.leftCol} {
 		${grid.between('centre-column-start', 'right-column-end')}
+	}
+`;
+
+const standardCardStyles = css`
+	position: relative;
+	padding: ${space[2]}px;
+	background-color: ${palette('--onward-more-galleries-card-background')};
+
+	${from.tablet} {
+		:not(:first-child)::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: -10px; /* shift into the gap */
+			width: 1px;
+			background: ${palette('--onward-content-border')};
+		}
 	}
 `;
 
