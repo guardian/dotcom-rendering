@@ -1,12 +1,10 @@
 {
 	"extends": "@guardian/tsconfig/tsconfig.json",
 	"compilerOptions": {
-		"noEmit": true,
-		"skipLibCheck": true,
 		"allowImportingTsExtensions": true,
+		"allowArbitraryExtensions": false,
 		"erasableSyntaxOnly": true,
-		"moduleResolution": "nodenext",
-		"module": "nodenext"
+		"noEmit": true
 	},
-	"exclude": ["node_modules", "index.ts"]
+	"exclude": ["node_modules"]
 }

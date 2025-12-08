@@ -38,7 +38,7 @@ export const storyPackage: FEStoryPackage = {
 				theme: 'NewsPillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2025-03-24T19:00:47.000Z',
+			webPublicationDate: '2022-01-01T11:00:47.000Z',
 			headline:
 				'Nasa rover discovers largest organic compounds yet found on Mars',
 			shortUrl: 'https://www.theguardian.com/p/xxp8eq',
@@ -69,7 +69,7 @@ export const storyPackage: FEStoryPackage = {
 				theme: 'NewsPillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2025-03-13T11:56:49.000Z',
+			webPublicationDate: '2022-01-01T11:56:49.000Z',
 			headline: 'Passing probe captures images of mysterious Mars moon',
 			shortUrl: 'https://www.theguardian.com/p/xxn2cq',
 			discussion: {
@@ -100,7 +100,7 @@ export const storyPackage: FEStoryPackage = {
 				theme: 'NewsPillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2025-02-24T23:35:09.000Z',
+			webPublicationDate: '2021-02-24T23:35:09.000Z',
 			headline:
 				'Mars once had an ocean with sandy beaches, researchers say',
 			shortUrl: 'https://www.theguardian.com/p/xxjy3h',
@@ -132,7 +132,7 @@ export const storyPackage: FEStoryPackage = {
 				theme: 'NewsPillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2025-03-07T02:59:44.000Z',
+			webPublicationDate: '2021-03-01T02:59:44.000Z',
 			headline:
 				'SpaceX’s Starship explodes in second failure for Musk’s Mars program',
 			shortUrl: 'https://www.theguardian.com/p/xxyyzx',
@@ -163,7 +163,7 @@ export const storyPackage: FEStoryPackage = {
 				theme: 'NewsPillar',
 				display: 'ImmersiveDisplay',
 			},
-			webPublicationDate: '2025-01-11T11:00:01.000Z',
+			webPublicationDate: '2021-01-11T11:00:01.000Z',
 			headline:
 				'‘I think there is life there. Today’: the race to put a human on Mars – in pictures',
 			shortUrl: 'https://www.theguardian.com/p/xx66cn',

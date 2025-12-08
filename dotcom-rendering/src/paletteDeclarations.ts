@@ -6214,15 +6214,6 @@ const crosswordCluesHeaderBorderBottom: PaletteFunction = () =>
 const crosswordTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 const crosswordTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
-const onwardContentBorderLight: PaletteFunction = (format) => {
-	switch (format.design) {
-		case ArticleDesign.Gallery:
-			return sourcePalette.neutral[86];
-		default:
-			return articleBorderLight(format);
-	}
-};
-
 // ----- Palette ----- //
 
 /**
@@ -7449,12 +7440,16 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[10],
 	},
-	'--onward-card-background': {
-		light: () => sourcePalette.neutral[97],
+	'--onward-content-border': {
+		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[20],
 	},
-	'--onward-content-border': {
-		light: onwardContentBorderLight,
+	'--onward-content-top-border': {
+		light: () => sourcePalette.neutral[73],
+		dark: () => sourcePalette.neutral[38],
+	},
+	'--onward-more-galleries-card-background': {
+		light: () => sourcePalette.neutral[97],
 		dark: () => sourcePalette.neutral[20],
 	},
 	'--onward-text': {
