@@ -23,9 +23,7 @@ type Props = {
 };
 
 const standardCardStyles = css`
-	flex: 1;
 	position: relative;
-	display: flex;
 	padding: ${space[2]}px;
 	background-color: ${palette('--onward-more-galleries-card-background')};
 
@@ -44,13 +42,12 @@ const standardCardStyles = css`
 
 const standardCardsListStyles = css`
 	width: 100%;
-	display: flex;
-	flex-direction: column;
+	display: grid;
 	gap: 20px;
 	margin-bottom: ${space[6]}px;
 
 	${from.tablet} {
-		flex-direction: row;
+		grid-template-columns: repeat(4, 1fr);
 		padding-top: ${space[2]}px;
 	}
 
