@@ -80,6 +80,88 @@ const cardsContainerStyles = css`
 	}
 `;
 
+const headerStyles = css`
+	color: ${palette('--carousel-text')};
+	${headlineBold24};
+	padding-bottom: ${space[3]}px;
+	padding-top: ${space[1]}px;
+
+	:hover {
+		text-decoration: underline;
+	}
+
+	${from.tablet} {
+		${headlineBold28};
+	}
+`;
+
+const Title = ({ guardianBaseUrl }: { guardianBaseUrl: string }) => (
+	<a
+		css={css`
+			${grid.column.centre}
+			color: ${palette('--caption-text')};
+			text-decoration: none;
+			align-self: start;
+
+			${from.leftCol} {
+				${grid.column.left}
+			}
+		`}
+		href={`${guardianBaseUrl}/inpictures/all`}
+		data-link-name="section heading"
+	>
+		<h2 css={headerStyles}>More galleries</h2>
+	</a>
+);
+
+const MoreGalleriesSplashCard = ({
+	defaultProps,
+}: {
+	defaultProps: CardProps;
+}) => {
+	const cardProps: Partial<CardProps> = {
+		headlineSizes: {
+			desktop: 'medium',
+			tablet: 'medium',
+			mobile: 'medium',
+		},
+		mediaPositionOnDesktop: 'right',
+		mediaPositionOnMobile: 'top',
+		mediaSize: 'medium',
+		isOnwardSplash: true,
+	};
+
+	return (
+		<div
+			css={[
+				cardsContainerStyles,
+				css`
+					margin-bottom: ${space[6]}px;
+					background-color: ${palette(
+						'--onward-more-galleries-card-background',
+					)};
+					padding: ${space[2]}px;
+					${from.leftCol} {
+						&::before {
+							content: '';
+							position: absolute;
+							left: -11px;
+							top: 8px;
+							bottom: 0;
+							width: 1px;
+							background-color: ${palette(
+								'--onward-content-border',
+							)};
+						}
+					}
+				`,
+			]}
+		>
+			<Card {...defaultProps} {...cardProps} />
+		</div>
+	);
+};
+
 const getDefaultCardProps = (
 	trail: TrailType,
 	discussionApiUrl: string,
@@ -121,6 +203,7 @@ const getDefaultCardProps = (
 		isOnwardContent: true,
 		onwardsSource: 'more-galleries',
 	};
+
 	return defaultProps;
 };
 
@@ -192,84 +275,3 @@ export const MoreGalleries = (props: Props) => {
 		</div>
 	);
 };
-
-const MoreGalleriesSplashCard = ({
-	defaultProps,
-}: {
-	defaultProps: CardProps;
-}) => {
-	const cardProps: Partial<CardProps> = {
-		headlineSizes: {
-			desktop: 'medium',
-			tablet: 'medium',
-			mobile: 'medium',
-		},
-		mediaPositionOnDesktop: 'right',
-		mediaPositionOnMobile: 'top',
-		mediaSize: 'medium',
-		isOnwardSplash: true,
-	};
-	return (
-		<div
-			css={[
-				cardsContainerStyles,
-				css`
-					margin-bottom: ${space[6]}px;
-					background-color: ${palette(
-						'--onward-more-galleries-card-background',
-					)};
-					padding: ${space[2]}px;
-					${from.leftCol} {
-						&::before {
-							content: '';
-							position: absolute;
-							left: -11px;
-							top: 8px;
-							bottom: 0;
-							width: 1px;
-							background-color: ${palette(
-								'--onward-content-border',
-							)};
-						}
-					}
-				`,
-			]}
-		>
-			<Card {...defaultProps} {...cardProps} />
-		</div>
-	);
-};
-
-const Title = ({ guardianBaseUrl }: { guardianBaseUrl: string }) => (
-	<a
-		css={css`
-			${grid.column.centre}
-			color: ${palette('--caption-text')};
-			text-decoration: none;
-			align-self: start;
-
-			${from.leftCol} {
-				${grid.column.left}
-			}
-		`}
-		href={`${guardianBaseUrl}/inpictures/all`}
-		data-link-name="section heading"
-	>
-		<h2 css={headerStyles}>More galleries</h2>
-	</a>
-);
-
-const headerStyles = css`
-	color: ${palette('--carousel-text')};
-	${headlineBold24};
-	padding-bottom: ${space[3]}px;
-	padding-top: ${space[1]}px;
-
-	:hover {
-		text-decoration: underline;
-	}
-
-	${from.tablet} {
-		${headlineBold28};
-	}
-`;
