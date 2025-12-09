@@ -36,7 +36,6 @@ export type CategoryContent = {
 
 export type StorylineContent = {
 	title: string;
-	description: string;
 	content: CategoryContent[];
 };
 

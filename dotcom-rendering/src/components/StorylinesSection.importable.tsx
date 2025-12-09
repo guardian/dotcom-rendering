@@ -14,16 +14,16 @@ import { parseTPSGContentToStorylines } from '../model/enhanceAITagPageContent';
 import { palette } from '../palette';
 import { useState } from 'react';
 import type { TreatType } from '../types/front';
-import type { TagPage } from '../types/tagPage';
 import type { TPSGContent } from '../types/tagPageAIContent';
 import { ScrollableCarousel } from './ScrollableCarousel';
 import { StorylineSection } from './StorylineSection';
+import { EditionId } from '../lib/edition';
 
 type StorylinesSectionProps = {
 	url?: string;
 	index: number;
 	containerId?: string;
-	tagPage: TagPage;
+	editionId: EditionId;
 	TPSGContent?: TPSGContent;
 };
 
@@ -105,7 +105,6 @@ function formatDateRangeText(
 	earliestArticleTime?: string | null,
 	latestArticleTime?: string | null,
 ): string {
-	// If your API returns strings
 	const earliest = earliestArticleTime ? new Date(earliestArticleTime) : null;
 	const latest = latestArticleTime ? new Date(latestArticleTime) : null;
 	const format = (d?: Date | null) => d?.toLocaleDateString('en-GB') ?? '';
@@ -126,9 +125,9 @@ function formatDateRangeText(
 export const StorylinesSection = ({
 	url,
 	index,
-	containerId,
-	tagPage,
+	containerId, //need to check
 	TPSGContent,
+	editionId,
 }: StorylinesSectionProps) => {
 	console.log('TPSGContent', TPSGContent);
 	// const [storylines, SetStorylines] = useState<TPSGContent>();
@@ -199,8 +198,8 @@ export const StorylinesSection = ({
 				ophanComponentName={containerId}
 				sectionId={containerId}
 				toggleable={false} //maybe set to true if this still works?
-				pageId={tagPage.pageId}
-				editionId={tagPage.editionId}
+				// pageId={tagPage.pageId}
+				editionId={editionId}
 				treats={[AITreat]}
 			>
 				{/* Tab selector */}
