@@ -6,7 +6,7 @@ import {
 	SvgMediaControlsPlay,
 } from '@guardian/source/react-components';
 import { palette } from '../palette';
-import type { WaveFormProps, WaveFormTheme } from './WaveForm';
+import type { WaveFormTheme } from './WaveForm';
 import { WaveForm } from './WaveForm';
 
 const buttonCss = (audioDuration: string | undefined) => css`
@@ -77,17 +77,6 @@ const waveTheme: WaveFormTheme = {
 	wave: palette('--listen-to-article-waveform'),
 };
 
-const waveFormProps = (
-	seed: string = 'listen to this article',
-): WaveFormProps => ({
-	seed,
-	height: space[12] - 8,
-	bars: 250,
-	theme: waveTheme,
-	gap: 1,
-	barWidth: 2,
-});
-
 export const ListenToArticleButton = ({
 	onClickHandler,
 	audioDuration,
@@ -95,7 +84,14 @@ export const ListenToArticleButton = ({
 }: ButtonProps) => {
 	return (
 		<div css={waveFormContainerCss}>
-			<WaveForm {...waveFormProps(waveFormSeed)} />
+			<WaveForm
+				seed={waveFormSeed ?? 'listen to this article'}
+				height={space[10]}
+				bars={250}
+				theme={waveTheme}
+				gap={1}
+				barWidth={2}
+			/>
 			<Button
 				onClick={onClickHandler}
 				size="default"
