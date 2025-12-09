@@ -1,7 +1,16 @@
 import type { FEElement, ProductBlockElement } from '../types/content';
 import { generateId } from './enhance-H2s';
 
-// We only want to insert the carousel in this one specific spot
+// List of page IDs eligible for product carousel enhancement
+const allowedPageIds = [
+	'thefilter/2025/mar/02/best-air-fryers',
+	'thefilter/2024/nov/21/best-coffee-machines',
+];
+
+const isEligibleForCarousel = (pageId: string) =>
+	allowedPageIds.includes(pageId);
+
+// Extract URLs from 'At a glance' section elements
 const extractAtAGlanceUrls = (elements: FEElement[]): string[] =>
 	elements
 		.filter(
@@ -12,7 +21,7 @@ const extractAtAGlanceUrls = (elements: FEElement[]): string[] =>
 		)
 		.map((el) => el.url);
 
-// Find page elements that match the URLs
+// Find product elements which have a matching URL in their CTAs
 const findMatchingProducts = (
 	pageElements: FEElement[],
 	urls: string[],
@@ -25,6 +34,7 @@ const findMatchingProducts = (
 			el.productCtas.some((cta) => urls.includes(cta.url)),
 	);
 
+// Only insert the carousel in this one specific spot
 const isAtAGlance = (element: FEElement) =>
 	element._type ===
 		'model.dotcomrendering.pageElements.SubheadingBlockElement' &&
@@ -35,14 +45,6 @@ const isSubheadingOrDivider = (element: FEElement) =>
 	element._type ===
 		'model.dotcomrendering.pageElements.SubheadingBlockElement' ||
 	element._type === 'model.dotcomrendering.pageElements.DividerBlockElement';
-
-const allowedPageIds = [
-	'thefilter/2025/mar/02/best-air-fryers',
-	'thefilter/2024/nov/21/best-coffee-machines',
-];
-
-const isEligibleForCarousel = (pageId: string) =>
-	allowedPageIds.includes(pageId);
 
 type ReducerAccumulator = {
 	elements: FEElement[];
@@ -69,10 +71,8 @@ const insertCarouselPlaceholder = (elements: FEElement[]): FEElement[] => {
 				if (isSubheadingOrDivider(currentElement)) {
 					inAtAGlance = false;
 
-					// Extract URLs from captured At a glance elements
 					const urls = extractAtAGlanceUrls(atAGlanceElements);
 
-					// Find matching products in the full page
 					const matchedProducts = findMatchingProducts(
 						elements,
 						urls,
