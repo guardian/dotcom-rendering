@@ -79,6 +79,10 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 		process.env.NODE_ENV,
 	);
 
+	console.log('pagination:', tagPage.pagination);
+	console.log('has tagPage.TPSGContent:', !!tagPage.TagPageAIContent);
+	console.log('tagPage.TPSGContent:', tagPage.TagPageAIContent);
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -172,7 +176,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									<StorylinesSection
 										index={1}
 										tagPage={tagPage}
-										TPSGContent={tagPage.TPSGContent}
+										TPSGContent={tagPage.TagPageAIContent}
 									/>
 								</Island>
 							)}

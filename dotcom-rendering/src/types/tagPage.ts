@@ -62,7 +62,7 @@ export interface TagPage {
 	branding: CollectionBranding | undefined;
 	canonicalUrl?: string;
 	contributionsServiceUrl: string;
-	TPSGContent?: TPSGContent;
+	TagPageAIContent?: TPSGContent;
 }
 
 export type HeaderImage =
