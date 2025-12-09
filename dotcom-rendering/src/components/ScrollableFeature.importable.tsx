@@ -36,6 +36,7 @@ export const ScrollableFeature = ({
 }: Props) => {
 	return (
 		<ScrollableCarousel
+			kind="visible-cards"
 			carouselLength={trails.length}
 			visibleCarouselSlidesOnMobile={1}
 			visibleCarouselSlidesOnTablet={3}

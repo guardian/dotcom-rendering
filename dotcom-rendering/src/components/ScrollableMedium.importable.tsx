@@ -38,6 +38,7 @@ export const ScrollableMedium = ({
 }: Props) => {
 	return (
 		<ScrollableCarousel
+			kind="visible-cards"
 			carouselLength={trails.length}
 			visibleCarouselSlidesOnMobile={2}
 			visibleCarouselSlidesOnTablet={4}

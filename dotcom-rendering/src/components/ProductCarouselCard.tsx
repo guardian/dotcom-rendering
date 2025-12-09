@@ -79,9 +79,7 @@ export const ProductCarouselCard = ({
 	showReadMore,
 }: ProductCarouselCardProps) => {
 	const hasHeading = !!product.primaryHeadingHtml;
-
 	const firstCta = product.productCtas[0];
-
 	return (
 		<>
 			<div
