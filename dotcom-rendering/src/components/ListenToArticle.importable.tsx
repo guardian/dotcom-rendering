@@ -25,10 +25,10 @@ export const formatAudioDuration = (
 };
 
 export const ListenToArticle = ({ articleId }: Props) => {
-	const [showButton, setShowButton] = useState<boolean>(true);
+	const [showButton, setShowButton] = useState<boolean>(false);
 	const [audioDurationSeconds, setAudioDurationSeconds] = useState<
 		number | undefined
-	>(314);
+	>(undefined);
 
 	const isBridgetCompatible = useIsBridgetCompatible('8.7.0');
 	useEffect(() => {
