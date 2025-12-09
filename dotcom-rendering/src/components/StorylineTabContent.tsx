@@ -7,9 +7,9 @@ import {
 } from '@guardian/source/foundations';
 import { palette } from '../palette';
 import type { DCRGroupedTrails } from '../types/front';
+import type { Category } from '../types/tagPageAIContent';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FlexibleSpecial } from './FlexibleSpecial';
-import { Category } from '../types/tagPageAIContent';
 
 const categoryTitleCss = css`
 	${textSans20};

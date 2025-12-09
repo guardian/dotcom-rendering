@@ -1,9 +1,9 @@
-import { TPSGContent } from '../types/tagPageAIContent';
 import type { EditionId } from '../lib/edition';
 import type { CommercialProperties } from '../types/commercial';
 import type { FooterType } from '../types/footer';
 import type { FENavType } from '../types/frontend';
 import type { FEPagination, FETagType } from '../types/tag';
+import type { TPSGContent } from '../types/tagPageAIContent';
 import type { FEFrontCard, FEFrontConfig } from './feFront';
 
 export type FETagPage = {
