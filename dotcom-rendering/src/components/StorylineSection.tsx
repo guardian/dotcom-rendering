@@ -4,7 +4,6 @@ import {
 	from,
 	space,
 	textSans14,
-	textSans17,
 	until,
 } from '@guardian/source/foundations';
 import { type EditionId, isNetworkFront } from '../lib/edition';
@@ -18,10 +17,8 @@ import type {
 import type { TagPagePagination } from '../types/tagPage';
 import { ContainerOverrides } from './ContainerOverrides';
 import { ContainerTitle } from './ContainerTitle';
-import { FrontPagination } from './FrontPagination';
 import { FrontSectionTitle } from './FrontSectionTitle';
 import { ShowHideButton } from './ShowHideButton';
-import { Treats } from './Treats';
 import { Footer } from './ExpandableAtom/Footer';
 import { submitComponentEvent } from '../client/ophan/ophan';
 
@@ -388,13 +385,13 @@ const sectionContentBorderFromLeftCol = css`
 	}
 `;
 
-const sectionBottomContent = css`
-	grid-row: bottom-content;
-	grid-column: content;
-	.hidden > & {
-		display: none;
-	}
-`;
+// const sectionBottomContent = css`
+// 	grid-row: bottom-content;
+// 	grid-column: content;
+// 	.hidden > & {
+// 		display: none;
+// 	}
+// `;
 
 const sectionTreats = css`
 	/* Mobile: treats appear at the bottom */
@@ -440,25 +437,25 @@ const topBorder = css`
 	border-top-style: solid;
 `;
 
-const bottomPadding = css`
-	padding-bottom: ${space[4]}px;
-`;
+// const bottomPadding = css`
+// 	padding-bottom: ${space[4]}px;
+// `;
 
-const bottomPaddingBetaContainer = (
-	useLargeSpacingMobile: boolean,
-	useLargeSpacingDesktop: boolean,
-) => css`
-	${until.tablet} {
-		padding-bottom: ${useLargeSpacingMobile
-			? `${space[8]}px`
-			: `${space[4]}px`};
-	}
-	${from.tablet} {
-		padding-bottom: ${useLargeSpacingDesktop
-			? `${space[8]}px`
-			: `${space[4]}px`};
-	}
-`;
+// const bottomPaddingBetaContainer = (
+// 	useLargeSpacingMobile: boolean,
+// 	useLargeSpacingDesktop: boolean,
+// ) => css`
+// 	${until.tablet} {
+// 		padding-bottom: ${useLargeSpacingMobile
+// 			? `${space[8]}px`
+// 			: `${space[4]}px`};
+// 	}
+// 	${from.tablet} {
+// 		padding-bottom: ${useLargeSpacingDesktop
+// 			? `${space[8]}px`
+// 			: `${space[4]}px`};
+// 	}
+// `;
 
 const primaryLevelTopBorder = (
 	title?: string,
@@ -608,9 +605,9 @@ export const StorylineSection = ({
 	const isBetaContainer = !!containerLevel;
 
 	// These are for beta containers only
-	const useLargeSpacingMobile = !!isNextCollectionPrimary || isAboveMobileAd;
-	const useLargeSpacingDesktop =
-		!!isNextCollectionPrimary || isAboveDesktopAd;
+	// const useLargeSpacingMobile = !!isNextCollectionPrimary || isAboveMobileAd;
+	// const useLargeSpacingDesktop =
+	// 	!!isNextCollectionPrimary || isAboveDesktopAd;
 
 	const showSectionColours = isNetworkFront(pageId ?? '');
 
