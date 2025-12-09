@@ -55,20 +55,15 @@ const determineCardProperties = (
 	supportingContentLength: number,
 	mediaCard: boolean,
 	imageSuppressed: boolean,
-	SCStyle: boolean,
 ): BoostProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
 		case 'default':
 			return {
 				headlineSizes: {
-					desktop: SCStyle
-						? 'small'
-						: imageSuppressed
-						? 'xxlarge'
-						: 'xlarge',
-					tablet: SCStyle ? 'small' : 'large',
-					mobile: SCStyle ? 'xxsmall' : 'medium',
+					desktop: imageSuppressed ? 'xxlarge' : 'xlarge',
+					tablet: 'large',
+					mobile: 'medium',
 				},
 				mediaSize: 'xlarge',
 				mediaPositionOnDesktop: 'right',
@@ -174,7 +169,6 @@ export const OneCardLayout = ({
 		card.supportingContent?.length ?? 0,
 		isMediaCard(card.format),
 		!card.image,
-		SCStyle,
 	);
 
 	return (
@@ -208,9 +202,7 @@ export const OneCardLayout = ({
 					trailTextSize={trailTextSize}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
-					headlinePosition={
-						SCStyle ? 'inner' : isSplashCard ? 'outer' : 'inner'
-					}
+					headlinePosition={isSplashCard ? 'outer' : 'inner'}
 					showLabsRedesign={showLabsRedesign}
 					subtitleSize={subtitleSize}
 					enableHls={enableHls}
@@ -243,7 +235,6 @@ type TwoOrFourCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
-	SCStyle: boolean;
 };
 
 const TwoOrFourCardLayout = ({
@@ -257,13 +248,12 @@ const TwoOrFourCardLayout = ({
 	isFirstRow,
 	containerLevel,
 	showLabsRedesign,
-	SCStyle,
 }: TwoOrFourCardLayoutProps) => {
 	if (cards.length === 0) return null;
 	const hasTwoOrFewerCards = cards.length <= 2;
 
 	return (
-		<UL direction="row" showTopBar={!SCStyle}>
+		<UL direction="row" showTopBar={true}>
 			{cards.map((card, cardIndex) => {
 				return (
 					<LI
@@ -379,7 +369,6 @@ export const FlexibleSpecial = ({
 				isFirstRow={!isNonEmptyArray(snaps) && !isNonEmptyArray(splash)}
 				containerLevel={containerLevel}
 				showLabsRedesign={showLabsRedesign}
-				SCStyle={SCStyle}
 			/>
 		</>
 	);

@@ -2520,16 +2520,9 @@ const cardMetaTextDark: PaletteFunction = () => sourcePalette.neutral[60];
 const cardBackgroundLight: PaletteFunction = () => 'transparent';
 const cardBackgroundDark: PaletteFunction = () => 'transparent';
 
-// needed for multimedia cards in tag page storyline section - probably needed to be chanegd anyway
-// try to add a multimedia card to a front with special report alt palette and see how it looks
-const cardMediaBackgroundLight: PaletteFunction = (format) => {
-	switch (format.theme) {
-		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.neutral[93];
-		default:
-			return sourcePalette.neutral[97];
-	}
-};
+const cardMediaBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+
 const cardMediaBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
 

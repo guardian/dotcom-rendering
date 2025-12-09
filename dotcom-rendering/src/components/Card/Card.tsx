@@ -773,7 +773,6 @@ export const Card = ({
 
 		return (
 			<Hide from={isFlexSplash ? 'desktop' : 'tablet'}>
-				<div>check</div>
 				<Sublinks />
 			</Hide>
 		);
