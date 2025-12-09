@@ -15,6 +15,7 @@ import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { StorylinesSection } from '../components/StorylinesSection.importable';
 import { SubNav } from '../components/SubNav.importable';
 import { TagPageHeader } from '../components/TagPageHeader';
 import { TrendingTopics } from '../components/TrendingTopics';
@@ -28,7 +29,6 @@ import { enhanceTags } from '../model/enhanceTags';
 import type { NavType } from '../model/extract-nav';
 import type { TagPage as TagPageModel } from '../types/tagPage';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-import { StorylinesSection } from '../components/StorylinesSection.importable';
 
 interface Props {
 	tagPage: TagPageModel;
@@ -79,7 +79,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 		process.env.NODE_ENV,
 	);
 
-	console.log('pagination:', tagPage.pagination);
 	console.log('has tagPage.TPSGContent:', !!tagPage.TagPageAIContent);
 	console.log('tagPage.TPSGContent:', tagPage.TagPageAIContent);
 

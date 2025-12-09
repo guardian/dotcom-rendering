@@ -650,10 +650,6 @@ export const FlexibleGeneral = ({
 		uniqueId: `collection-${collectionId}-splash-0`,
 	}));
 
-	splash[0]?.headline.includes('Senate') &&
-		containerLevel === 'Primary' &&
-		console.dir({ groupedTrails }, { depth: null });
-
 	const cards = [...groupedTrails.standard]
 		.slice(0, 19)
 		.map((standard, i) => ({

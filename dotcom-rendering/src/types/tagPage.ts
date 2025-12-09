@@ -1,4 +1,3 @@
-import { TPSGContent } from 'src/components/StorylinesSection.importable';
 import type { FEFrontConfig } from '../frontend/feFront';
 import type { EditionId } from '../lib/edition';
 import type { Tuple } from '../lib/tuple';
@@ -8,6 +7,7 @@ import type { FooterType } from './footer';
 import type { DCRFrontCard } from './front';
 import type { FENavType } from './frontend';
 import type { FETagType } from './tag';
+import { TPSGContent } from './tagPageAIContent';
 
 /**
  * Represents a set of trails grouped by their year, month & optionally day of publication.

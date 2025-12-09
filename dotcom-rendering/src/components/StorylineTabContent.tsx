@@ -1,15 +1,15 @@
-import { DCRGroupedTrails } from 'src/types/front';
+import { css } from '@emotion/react';
+import {
+	from,
+	palette as sourcePalette,
+	space,
+	textSans20,
+} from '@guardian/source/foundations';
+import { palette } from '../palette';
+import type { DCRGroupedTrails } from '../types/front';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FlexibleSpecial } from './FlexibleSpecial';
-import { css } from '@emotion/react';
-import { palette } from '../palette';
-import {
-	space,
-	palette as sourcePalette,
-	textSans20,
-	from,
-} from '@guardian/source/foundations';
-import { Category } from './StorylinesSection.importable';
+import { Category } from '../types/tagPageAIContent';
 
 const categoryTitleCss = css`
 	${textSans20};
