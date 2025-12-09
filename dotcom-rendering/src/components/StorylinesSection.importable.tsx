@@ -12,15 +12,15 @@ import {
 import { useState } from 'react';
 import type { DCRFrontCard, DCRGroupedTrails, TreatType } from '../types/front';
 import type { TagPage } from '../types/tagPage';
-import { ScrollableCarousel } from './ScrollableCarousel';
-import { StorylineSection } from './StorylineSection';
-import { StorylineTabContent } from './StorylineTabContent';
-import {
+import type {
 	ArticleData,
 	CategoryContent,
 	Storyline,
 	TPSGContent,
 } from '../types/tagPageAIContent';
+import { ScrollableCarousel } from './ScrollableCarousel';
+import { StorylineSection } from './StorylineSection';
+import { StorylineTabContent } from './StorylineTabContent';
 
 type StorylinesSectionProps = {
 	url?: string;

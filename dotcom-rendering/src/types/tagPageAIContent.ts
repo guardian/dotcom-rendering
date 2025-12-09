@@ -1,5 +1,5 @@
-import { DCRGroupedTrails } from './front';
-import { MainMedia } from './mainMedia';
+import type { DCRGroupedTrails } from './front';
+import type { MainMedia } from './mainMedia';
 
 export type Storyline = {
 	id: string;

@@ -7,7 +7,7 @@ import type { FooterType } from './footer';
 import type { DCRFrontCard } from './front';
 import type { FENavType } from './frontend';
 import type { FETagType } from './tag';
-import { TPSGContent } from './tagPageAIContent';
+import type { TPSGContent } from './tagPageAIContent';
 
 /**
  * Represents a set of trails grouped by their year, month & optionally day of publication.
