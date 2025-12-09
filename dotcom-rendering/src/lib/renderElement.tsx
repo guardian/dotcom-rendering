@@ -939,8 +939,28 @@ export const renderElement = ({
 					/>
 				</Island>
 			);
-		case 'model.dotcomrendering.pageElements.ProductCarouselElement':
+		case 'model.dotcomrendering.pageElements.ProductCarouselElement': {
+			if (
+				'matchedProducts' in element &&
+				Array.isArray(
+					(element as FEElement & { matchedProducts?: unknown })
+						.matchedProducts,
+				)
+			) {
+				return (
+					<ProductCarousel
+						matchedProducts={
+							(
+								element as FEElement & {
+									matchedProducts: FEElement[];
+								}
+							).matchedProducts
+						}
+					/>
+				);
+			}
 			return <ProductCarousel />;
+		}
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
