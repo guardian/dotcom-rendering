@@ -1,4 +1,4 @@
-import { FEHostedContent } from 'src/frontend/feHostedContent';
+import type { FEHostedContent } from '../frontend/feHostedContent';
 
 enum HostedContentType {
 	Article,
