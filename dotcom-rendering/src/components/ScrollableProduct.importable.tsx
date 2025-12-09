@@ -14,7 +14,6 @@ export const ScrollableProduct = ({
 	const fixedCardWidth: FixedCardWidth = {
 		defaultWidth: 240,
 		widthFromBreakpoints: [
-			{ breakpoint: 'mobile', width: 240 },
 			{ breakpoint: 'mobileMedium', width: 280 },
 			{ breakpoint: 'tablet', width: 220 },
 		],
