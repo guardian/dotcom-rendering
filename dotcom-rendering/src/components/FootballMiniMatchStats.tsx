@@ -49,7 +49,6 @@ export const FootballMiniMatchStats = ({
 	awayTeam,
 	stats,
 }: Props) => {
-	console.log(homeTeam, awayTeam, stats);
 	return (
 		<div css={containerCss}>
 			{stats.map((stat) => (
