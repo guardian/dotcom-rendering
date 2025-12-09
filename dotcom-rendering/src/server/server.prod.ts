@@ -1,5 +1,5 @@
 import compression from 'compression';
-import type { ErrorRequestHandler, Request, Response } from 'express';
+import type { ErrorRequestHandler, Handler, Request, Response } from 'express';
 import express from 'express';
 import responseTime from 'response-time';
 import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
@@ -38,6 +38,11 @@ const logRenderTime = responseTime(
 	},
 );
 
+const delayRequest: Handler = (req, _res, next) => {
+	console.log('Delaying request by 5 seconds');
+	setTimeout(() => next(), 5000);
+};
+
 export const prodServer = (): void => {
 	logger.info('dotcom-rendering is GO.');
 
@@ -61,7 +66,7 @@ export const prodServer = (): void => {
 	app.post('/Article', logRenderTime, handleArticle);
 	app.post('/Interactive', logRenderTime, handleInteractive);
 	app.post('/Blocks', logRenderTime, handleBlocks);
-	app.post('/Front', logRenderTime, handleFront);
+	app.post('/Front', delayRequest, logRenderTime, handleFront);
 	app.post('/TagPage', logRenderTime, handleTagPage);
 	app.post(
 		'/FootballMatchListPage',

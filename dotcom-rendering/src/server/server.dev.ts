@@ -86,6 +86,11 @@ const redirects: Handler = (req, res, next) => {
 	next();
 };
 
+const delayRequest: Handler = (req, _res, next) => {
+	console.log('Delaying request by 5 seconds');
+	setTimeout(() => next(), 5000);
+};
+
 const renderer = Router();
 // populates req.body with the content data from a production
 // URL if req.params.url is present
@@ -93,7 +98,7 @@ renderer.use(getContentFromURLMiddleware);
 renderer.get('/Article/*url', handleArticle);
 renderer.get('/Interactive/*url', handleInteractive);
 renderer.get('/Blocks/*url', handleBlocks);
-renderer.get('/Front/*url', handleFront);
+renderer.get('/Front/*url', delayRequest, handleFront);
 renderer.get('/TagPage/*url', handleTagPage);
 renderer.get('/EmailNewsletters/*url', handleAllEditorialNewslettersPage);
 renderer.get('/AppsArticle/*url', handleAppsArticle);
@@ -108,7 +113,7 @@ renderer.get('/FootballMatchSummaryPage/*url', handleFootballMatchPage);
 renderer.post('/Article', handleArticle);
 renderer.post('/Interactive', handleInteractive);
 renderer.post('/Blocks', handleBlocks);
-renderer.post('/Front', handleFront);
+renderer.post('/Front', delayRequest, handleFront);
 renderer.post('/TagPage', handleTagPage);
 renderer.post('/EmailNewsletters', handleAllEditorialNewslettersPage);
 renderer.post('/AppsArticle', handleAppsArticle);
