@@ -208,7 +208,7 @@ export class RenderingCDKStack extends CDKStack {
 				cidrRanges: [Peer.ipv4('10.0.0.0/8')],
 				scope: AccessScope.INTERNAL,
 			},
-			instanceMetricGranularity: '5Minute',
+			instanceMetricGranularity: '1Minute',
 			applicationLogging: {
 				enabled: true,
 				systemdUnitName: guApp,
