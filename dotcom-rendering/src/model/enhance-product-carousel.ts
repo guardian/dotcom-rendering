@@ -1,4 +1,4 @@
-import type { FEElement } from '../types/content';
+import type { FEElement, ProductBlockElement } from '../types/content';
 import { generateId } from './enhance-H2s';
 
 // We only want to insert the carousel in this one specific spot
@@ -16,12 +16,13 @@ const extractAtAGlanceUrls = (elements: FEElement[]): string[] =>
 const findMatchingProducts = (
 	pageElements: FEElement[],
 	urls: string[],
-): FEElement[] =>
+): ProductBlockElement[] =>
 	pageElements.filter(
-		(el): el is FEElement & { url: string } =>
-			'url' in el &&
-			typeof (el as FEElement & { url?: unknown }).url === 'string' &&
-			urls.includes((el as FEElement & { url: string }).url),
+		(el): el is ProductBlockElement =>
+			el._type ===
+				'model.dotcomrendering.pageElements.ProductBlockElement' &&
+			Array.isArray(el.productCtas) &&
+			el.productCtas.some((cta) => urls.includes(cta.url)),
 	);
 
 const isAtAGlance = (element: FEElement) =>
@@ -70,20 +71,11 @@ const insertCarouselPlaceholder = (elements: FEElement[]): FEElement[] => {
 
 					// Extract URLs from captured At a glance elements
 					const urls = extractAtAGlanceUrls(atAGlanceElements);
-					console.log('All page elements:', elements);
 
 					// Find matching products in the full page
 					const matchedProducts = findMatchingProducts(
 						elements,
 						urls,
-					);
-					console.log(
-						'Matched products for carousel:',
-						matchedProducts,
-					);
-					console.log(
-						'Matched products count:',
-						matchedProducts.length,
 					);
 
 					// Insert carousel with matched products

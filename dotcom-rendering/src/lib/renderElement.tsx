@@ -36,7 +36,6 @@ import { MultiBylines } from '../components/MultiBylines';
 import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';
 import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
 import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importable';
-import { ProductCarousel } from '../components/ProductCarousel';
 import { ProductElement } from '../components/ProductElement';
 import { ProductLinkButton } from '../components/ProductLinkButton';
 import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable';
@@ -44,6 +43,7 @@ import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
 import { QandaAtom } from '../components/QandaAtom.importable';
 import { QAndAExplainers } from '../components/QAndAExplainers';
 import { RichLinkComponent } from '../components/RichLinkComponent.importable';
+import { ScrollableProduct } from '../components/ScrollableProduct.importable';
 import { SoundcloudBlockComponent } from '../components/SoundcloudBlockComponent';
 import { SpotifyBlockComponent } from '../components/SpotifyBlockComponent.importable';
 import { StarRatingBlockComponent } from '../components/StarRatingBlockComponent';
@@ -70,7 +70,12 @@ import {
 	isInteractive,
 } from '../layouts/lib/interactiveLegacyStyling';
 import type { ServerSideTests, Switches } from '../types/config';
-import type { FEElement, RoleType, StarRating } from '../types/content';
+import type {
+	FEElement,
+	ProductBlockElement,
+	RoleType,
+	StarRating,
+} from '../types/content';
 import { ArticleDesign, type ArticleFormat } from './articleFormat';
 import type { EditionId } from './edition';
 import { getLargestImageSize } from './image';
@@ -939,28 +944,21 @@ export const renderElement = ({
 					/>
 				</Island>
 			);
-		case 'model.dotcomrendering.pageElements.ProductCarouselElement': {
+		case 'model.dotcomrendering.pageElements.ProductCarouselElement':
 			if (
 				'matchedProducts' in element &&
-				Array.isArray(
-					(element as FEElement & { matchedProducts?: unknown })
-						.matchedProducts,
-				)
+				Array.isArray(element.matchedProducts)
 			) {
 				return (
-					<ProductCarousel
-						matchedProducts={
-							(
-								element as FEElement & {
-									matchedProducts: FEElement[];
-								}
-							).matchedProducts
+					<ScrollableProduct
+						products={
+							element.matchedProducts as ProductBlockElement[]
 						}
+						format={format}
 					/>
 				);
 			}
-			return <ProductCarousel />;
-		}
+			return null;
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
