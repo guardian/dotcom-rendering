@@ -1,4 +1,3 @@
 packages:
-  - 'apps-rendering'
   - 'dotcom-rendering'
   - 'ab-testing/*'
