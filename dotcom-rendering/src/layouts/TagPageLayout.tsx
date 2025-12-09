@@ -174,7 +174,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								<Island priority="critical">
 									<StorylinesSection
 										index={1}
-										tagPage={tagPage}
+										editionId={tagPage.editionId}
 										TPSGContent={tagPage.TagPageAIContent}
 									/>
 								</Island>
