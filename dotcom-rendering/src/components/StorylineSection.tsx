@@ -6,6 +6,7 @@ import {
 	textSans14,
 	until,
 } from '@guardian/source/foundations';
+import { submitComponentEvent } from '../client/ophan/ophan';
 import { type EditionId, isNetworkFront } from '../lib/edition';
 import { palette as schemePalette } from '../palette';
 import type { CollectionBranding } from '../types/branding';
@@ -14,13 +15,11 @@ import type {
 	DCRContainerPalette,
 	TreatType,
 } from '../types/front';
-import type { TagPagePagination } from '../types/tagPage';
 import { ContainerOverrides } from './ContainerOverrides';
 import { ContainerTitle } from './ContainerTitle';
+import { Footer } from './ExpandableAtom/Footer';
 import { FrontSectionTitle } from './FrontSectionTitle';
 import { ShowHideButton } from './ShowHideButton';
-import { Footer } from './ExpandableAtom/Footer';
-import { submitComponentEvent } from '../client/ophan/ophan';
 
 type Props = {
 	/** This text will be used as the h2 shown in the left column for the section */
@@ -31,7 +30,7 @@ type Props = {
 	url?: string;
 	/** The html `id` property of the element */
 	sectionId?: string;
-	collectionId?: string;
+	// collectionId?: string;
 	pageId?: string;
 	/** Defaults to `true`. If we should render the top border */
 	showTopBorder?: boolean;
@@ -55,10 +54,6 @@ type Props = {
 	 * If used, this can be either "Primary" or "Secondary", both of which have different styles */
 	containerLevel?: DCRContainerLevel;
 	/** Fronts containers spacing rules vary depending on the size of their container spacing which is derived from if the next container is a primary or secondary. */
-	isNextCollectionPrimary?: boolean;
-	/** Defaults to `false`. If true a Hide button is show top right allowing this section
-	 * to be collapsed
-	 */
 	toggleable?: boolean;
 	/** Defaults to `false`. If true and `editionId` is also passed, then a date string is
 	 * shown under the title. Typically only used on Headlines containers on fronts
@@ -68,30 +63,9 @@ type Props = {
 	editionId: EditionId;
 	/** A list of related links that appear in the bottom of the left column on fronts */
 	treats?: TreatType[];
-	/** Enable the "Show More" button on this container to allow readers to load more cards */
-	canShowMore?: boolean;
-	ajaxUrl?: string;
-	/** Puts pagination at the bottom of the container allowing the user to navigate to other pages,
-	 * usually used on the last container on a page */
-	pagination?: TagPagePagination;
-	/** Indicates if the page has a page skin advert
-	 * When a page skin advert is active:
-	 * - containers are constrained to a max width of 'desktop'
-	 * - media queries above desktop are not applied
-	 * - if no background colour is specified use the default body background colour to prevent
-	 *   the page skin background showing through the containers
-	 */
-	hasPageSkin?: boolean;
-	discussionApiUrl: string;
 	collectionBranding?: CollectionBranding;
 	isTagPage?: boolean;
 	hasNavigationButtons?: boolean;
-	isAboveDesktopAd?: boolean;
-	isAboveMobileAd?: boolean;
-	/** Indicates whether this is a Guardian Labs container */
-	isLabs?: boolean;
-	/** Feature switch for the labs redesign work */
-	showLabsRedesign?: boolean;
 	likeHandler?: () => void;
 	dislikeHandler?: () => void;
 };
@@ -578,7 +552,6 @@ export const StorylineSection = ({
 	containerName,
 	containerPalette,
 	containerLevel,
-	isNextCollectionPrimary,
 	description,
 	editionId,
 	leftContent,
@@ -591,12 +564,9 @@ export const StorylineSection = ({
 	toggleable = false,
 	treats,
 	url,
-	pagination,
 	collectionBranding,
 	isTagPage = false,
 	hasNavigationButtons = false,
-	isAboveDesktopAd = false,
-	isAboveMobileAd = false,
 	dislikeHandler,
 	likeHandler,
 }: Props) => {
@@ -701,7 +671,8 @@ export const StorylineSection = ({
 								>
 									Dive deeper into the Guardian's archive.
 									This product uses GenAI. Learn more about
-									how it works <a href="#">here.</a>
+									how it works{' '}
+									<a href="https://theguardian.com">here.</a>
 								</div>
 							</>
 						}

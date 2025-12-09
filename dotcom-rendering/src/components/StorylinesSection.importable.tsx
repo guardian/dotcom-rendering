@@ -1,34 +1,26 @@
-import { TagPage } from 'src/types/tagPage';
 import { css } from '@emotion/react';
-import { useState } from 'react';
-import { DCRFrontCard, DCRGroupedTrails, TreatType } from 'src/types/front';
-import { StorylineTabContent } from './StorylineTabContent';
-import { StorylineSection } from './StorylineSection';
+import { timeAgo } from '@guardian/libs';
 import {
-	space,
+	from,
+	headlineLight50,
 	palette as sourcePalette,
+	space,
+	textSans14,
 	textSans17,
 	textSansBold34,
-	headlineLight50,
-	from,
-	textSans14,
 } from '@guardian/source/foundations';
+import { useState } from 'react';
+import type { DCRFrontCard, DCRGroupedTrails, TreatType } from '../types/front';
+import type { TagPage } from '../types/tagPage';
 import { ScrollableCarousel } from './ScrollableCarousel';
-import { timeAgo } from '@guardian/libs';
-import { MainMedia } from 'src/types/mainMedia';
-
-type Storyline = {
-	id: string;
-	title: string;
-	categories: Category[];
-};
-
-// probably want to add a generic category type mapping to those in supercharger (e.g. opinions) and map this to a container type and title (e.g. "Contrasting Opinions" + "flexible/general")
-export type Category = {
-	title: string;
-	containerType: string;
-	groupedTrails: DCRGroupedTrails;
-};
+import { StorylineSection } from './StorylineSection';
+import { StorylineTabContent } from './StorylineTabContent';
+import {
+	ArticleData,
+	CategoryContent,
+	Storyline,
+	TPSGContent,
+} from '../types/tagPageAIContent';
 
 type StorylinesSectionProps = {
 	url?: string;
@@ -36,41 +28,6 @@ type StorylinesSectionProps = {
 	containerId?: string;
 	tagPage: TagPage;
 	TPSGContent?: TPSGContent;
-};
-
-type ImageData = {
-	src: string;
-	altText: string;
-	isAvatar: boolean;
-	mediaData: MainMedia | null;
-};
-
-type ArticleData = {
-	url: string;
-	headline: string;
-	byline?: string | null;
-	publicationTime: string;
-	image?: ImageData | null;
-};
-
-type CategoryContent = {
-	category: string;
-	articles: ArticleData[];
-};
-
-type StorylineContent = {
-	title: string;
-	description: string;
-	content: CategoryContent[];
-};
-
-export type TPSGContent = {
-	created: string;
-	tag: string;
-	storylines: StorylineContent[];
-	articleCount?: number | null;
-	earliestArticleTime?: string | null;
-	latestArticleTime?: string | null;
 };
 
 const tabsContainerStyles = css`
@@ -134,7 +91,7 @@ function formatDateRangeText(
 	// If your API returns strings
 	const earliest = earliestArticleTime ? new Date(earliestArticleTime) : null;
 	const latest = latestArticleTime ? new Date(latestArticleTime) : null;
-	const format = (d?: Date | null) => d?.toLocaleDateString('en-GB') || '';
+	const format = (d?: Date | null) => d?.toLocaleDateString('en-GB') ?? '';
 
 	// if (earliest && latest) {
 	// 	return `between ${format(earliest)} and ${format(latest)}`;
@@ -148,7 +105,7 @@ function formatDateRangeText(
 	}
 }
 
-// importable because we need js to handle the tabs and fetch request
+// importable because we need js to handle the tabs
 export const StorylinesSection = ({
 	url,
 	index,
@@ -222,7 +179,7 @@ export const StorylinesSection = ({
 	): DCRFrontCard {
 		const format = decideFormatForArticle(category, article);
 		return {
-			format: format,
+			format,
 			dataLinkName: '',
 			url: article.url,
 			headline: article.headline,
@@ -231,7 +188,7 @@ export const StorylinesSection = ({
 			supportingContent: [],
 			discussionApiUrl:
 				'https://discussion.theguardian.com/discussion-api',
-			byline: article.byline || '',
+			byline: article.byline ?? '',
 			showByline:
 				category.category === 'Contrasting opinions' ? true : false, // could be true if opinion?
 			boostLevel:
@@ -289,14 +246,14 @@ export const StorylinesSection = ({
 		return {
 			format: { design: 0, display: 0, theme: 0 },
 			dataLinkName: '',
-			url: category.articles[0]?.url || '',
+			url: category.articles[0]?.url ?? '',
 			headline: '',
 			trailText: '',
 			webPublicationDate: '',
-			supportingContent: supportingContent,
+			supportingContent,
 			discussionApiUrl:
 				'https://discussion.theguardian.com/discussion-api',
-			byline: category.articles[0]?.byline || '',
+			byline: category.articles[0]?.byline ?? '',
 			showByline: false,
 			boostLevel: 'boost',
 			isImmersive: false,
@@ -317,10 +274,7 @@ export const StorylinesSection = ({
 	function decideGroupedTrails(category: CategoryContent): DCRGroupedTrails {
 		if (category.category === 'Key Stories') {
 			return {
-				splash:
-					category.articles && category.articles.length > 0
-						? [parseKeyStoriesToFrontCard(category)]
-						: [],
+				splash: [parseKeyStoriesToFrontCard(category)],
 				huge: [],
 				veryBig: [],
 				big: [],
@@ -332,12 +286,10 @@ export const StorylinesSection = ({
 			category.category === 'Deep Reads'
 		) {
 			const frontCards = category.articles
-				? category.articles
-						.slice(0, 1)
-						.map((article) =>
-							parseArticleDataToFrontCard(category, article),
-						)
-				: [];
+				.slice(0, 1)
+				.map((article) =>
+					parseArticleDataToFrontCard(category, article),
+				);
 			return {
 				splash: [],
 				huge: [],
@@ -348,12 +300,10 @@ export const StorylinesSection = ({
 			};
 		} else {
 			const frontCards = category.articles
-				? category.articles
-						.slice(0, 2)
-						.map((article) =>
-							parseArticleDataToFrontCard(category, article),
-						)
-				: [];
+				.slice(0, 2)
+				.map((article) =>
+					parseArticleDataToFrontCard(category, article),
+				);
 			return {
 				splash: [],
 				huge: [],
@@ -378,8 +328,8 @@ export const StorylinesSection = ({
 					return category.category;
 			}
 		}
-		return data.storylines.map((storyline, index) => ({
-			id: `storyline-${index + 1}`,
+		return data.storylines.map((storyline, i) => ({
+			id: `storyline-${i + 1}`,
 			title: storyline.title,
 			categories: storyline.content.map((category) => ({
 				title: decideCategoryTitle(category),
@@ -393,13 +343,13 @@ export const StorylinesSection = ({
 		storylines && parseTPSGContentToStorylines(storylines);
 	// parseTPSGContentToStorylines(mockData);
 
-	if (!parsedStorylines) {
+	const [activeStorylineId, setActiveStorylineId] = useState<string>(
+		parsedStorylines?.[0]?.id ?? '',
+	);
+
+	if (!parsedStorylines || parsedStorylines.length === 0) {
 		return null;
 	}
-
-	const [activeStorylineId, setActiveStorylineId] = useState<string>(
-		parsedStorylines[0]!.id,
-	);
 
 	const activeStoryline = parsedStorylines.find(
 		(s) => s.id === activeStorylineId,
@@ -437,12 +387,6 @@ export const StorylinesSection = ({
 				toggleable={false} //maybe set to true if this still works?
 				pageId={tagPage.pageId}
 				editionId={tagPage.editionId}
-				pagination={
-					index === tagPage.groupedTrails.length - 1
-						? tagPage.pagination
-						: undefined
-				}
-				discussionApiUrl={tagPage.config.discussionApiUrl}
 				treats={[AITreat]}
 			>
 				{/* Tab selector */}
@@ -455,12 +399,12 @@ export const StorylinesSection = ({
 						shouldStackCards={{ desktop: false, mobile: false }}
 						gapSizes={{ column: 'large', row: 'medium' }}
 					>
-						{parsedStorylines.map((storyline, index) => (
+						{parsedStorylines.map((storyline, i) => (
 							<button
 								key={storyline.id}
 								css={tabStyles(
 									activeStorylineId === storyline.id,
-									index === 0,
+									i === 0,
 								)}
 								onClick={() =>
 									setActiveStorylineId(storyline.id)
@@ -477,13 +421,11 @@ export const StorylinesSection = ({
 											`,
 										]}
 									>
-										{index + 1}
+										{i + 1}
 									</span>
 								) : (
 									<>
-										<span css={numberStyles}>
-											{index + 1}
-										</span>
+										<span css={numberStyles}>{i + 1}</span>
 										<span>{storyline.title}</span>
 									</>
 								)}

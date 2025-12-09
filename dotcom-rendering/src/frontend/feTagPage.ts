@@ -1,4 +1,4 @@
-import { TPSGContent } from 'src/components/StorylinesSection.importable';
+import { TPSGContent } from '../types/tagPageAIContent';
 import type { EditionId } from '../lib/edition';
 import type { CommercialProperties } from '../types/commercial';
 import type { FooterType } from '../types/footer';

@@ -1283,6 +1283,113 @@
         },
         "contributionsServiceUrl": {
             "type": "string"
+        },
+        "TPSGContent": {
+            "type": "object",
+            "properties": {
+                "created": {
+                    "type": "string"
+                },
+                "tag": {
+                    "type": "string"
+                },
+                "storylines": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "title": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            },
+                            "content": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "category": {
+                                            "type": "string"
+                                        },
+                                        "articles": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "url": {
+                                                        "type": "string"
+                                                    },
+                                                    "headline": {
+                                                        "type": "string"
+                                                    },
+                                                    "byline": {
+                                                        "type": "string"
+                                                    },
+                                                    "publicationTime": {
+                                                        "type": "string"
+                                                    },
+                                                    "image": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "src": {
+                                                                "type": "string"
+                                                            },
+                                                            "altText": {
+                                                                "type": "string"
+                                                            },
+                                                            "isAvatar": {
+                                                                "type": "boolean"
+                                                            },
+                                                            "mediaData": {
+                                                                "$ref": "#/definitions/MainMedia"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "altText",
+                                                            "isAvatar",
+                                                            "mediaData",
+                                                            "src"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "headline",
+                                                    "publicationTime",
+                                                    "url"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "articles",
+                                        "category"
+                                    ]
+                                }
+                            }
+                        },
+                        "required": [
+                            "content",
+                            "description",
+                            "title"
+                        ]
+                    }
+                },
+                "articleCount": {
+                    "type": "number"
+                },
+                "earliestArticleTime": {
+                    "type": "string"
+                },
+                "latestArticleTime": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "created",
+                "storylines",
+                "tag"
+            ]
         }
     },
     "required": [
@@ -2010,6 +2117,264 @@
                 "dataLinkName",
                 "text",
                 "url"
+            ]
+        },
+        "MainMedia": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/YoutubeVideo",
+                    "description": "For displaying embedded, playable videos directly in cards"
+                },
+                {
+                    "$ref": "#/definitions/SelfHostedVideo"
+                },
+                {
+                    "$ref": "#/definitions/Audio"
+                },
+                {
+                    "$ref": "#/definitions/Gallery"
+                }
+            ]
+        },
+        "YoutubeVideo": {
+            "description": "For displaying embedded, playable videos directly in cards",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "Audio",
+                                "Gallery",
+                                "SelfHostedVideo",
+                                "YoutubeVideo"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "YoutubeVideo"
+                        },
+                        "id": {
+                            "type": "string"
+                        },
+                        "videoId": {
+                            "type": "string"
+                        },
+                        "height": {
+                            "type": "number"
+                        },
+                        "width": {
+                            "type": "number"
+                        },
+                        "origin": {
+                            "type": "string"
+                        },
+                        "title": {
+                            "type": "string"
+                        },
+                        "duration": {
+                            "type": "number"
+                        },
+                        "expired": {
+                            "type": "boolean"
+                        },
+                        "image": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "duration",
+                        "expired",
+                        "height",
+                        "id",
+                        "origin",
+                        "title",
+                        "type",
+                        "videoId",
+                        "width"
+                    ]
+                }
+            ]
+        },
+        "SelfHostedVideo": {
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "Audio",
+                                "Gallery",
+                                "SelfHostedVideo",
+                                "YoutubeVideo"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "SelfHostedVideo"
+                        },
+                        "videoStyle": {
+                            "$ref": "#/definitions/VideoPlayerFormat"
+                        },
+                        "atomId": {
+                            "type": "string"
+                        },
+                        "sources": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "src": {
+                                        "type": "string"
+                                    },
+                                    "mimeType": {
+                                        "type": "string",
+                                        "const": "video/mp4"
+                                    }
+                                },
+                                "required": [
+                                    "mimeType",
+                                    "src"
+                                ]
+                            }
+                        },
+                        "height": {
+                            "type": "number"
+                        },
+                        "width": {
+                            "type": "number"
+                        },
+                        "duration": {
+                            "type": "number"
+                        },
+                        "subtitleSource": {
+                            "type": "string"
+                        },
+                        "image": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "atomId",
+                        "duration",
+                        "height",
+                        "sources",
+                        "type",
+                        "videoStyle",
+                        "width"
+                    ]
+                }
+            ]
+        },
+        "VideoPlayerFormat": {
+            "enum": [
+                "Cinemagraph",
+                "Default",
+                "Loop"
+            ],
+            "type": "string"
+        },
+        "Audio": {
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "Audio",
+                                "Gallery",
+                                "SelfHostedVideo",
+                                "YoutubeVideo"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "Audio"
+                        },
+                        "duration": {
+                            "type": "string"
+                        },
+                        "podcastImage": {
+                            "type": "object",
+                            "properties": {
+                                "src": {
+                                    "type": "string"
+                                },
+                                "altText": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "required": [
+                        "duration",
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "Gallery": {
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "Audio",
+                                "Gallery",
+                                "SelfHostedVideo",
+                                "YoutubeVideo"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "Gallery"
+                        },
+                        "count": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "count",
+                        "type"
+                    ]
+                }
             ]
         }
     },
