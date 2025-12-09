@@ -1,18 +1,23 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
+import type { Breakpoint } from '@guardian/source/foundations';
 import { from, space, until } from '@guardian/source/foundations';
 import { useEffect, useRef, useState } from 'react';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { palette } from '../palette';
 import { CarouselNavigationButtons } from './CarouselNavigationButtons';
 
-type GapSize = 'small' | 'medium' | 'large';
+type GapSize = 'small' | 'medium' | 'large' | 'none';
 type GapSizes = { row: GapSize; column: GapSize };
+export type FixedWidthOverride = { breakpoint: Breakpoint; width: number };
 
 type Props = {
 	children: React.ReactNode;
 	carouselLength: number;
 	visibleCarouselSlidesOnMobile: number;
 	visibleCarouselSlidesOnTablet: number;
+	fixedCardWidthOverrides?: FixedWidthOverride[];
 	sectionId?: string;
 	shouldStackCards?: { desktop: boolean; mobile: boolean };
 	gapSizes?: GapSizes;
@@ -97,6 +102,18 @@ const carouselGapStyles = (column: number, row: number) => {
 	`;
 };
 
+const subgridStyles = ({ subgridRows }: { subgridRows: number }) => css`
+	scroll-snap-align: start;
+	position: relative;
+	display: grid;
+	@supports (grid-template-rows: subgrid) {
+		grid-column: span 1;
+		grid-row: span ${subgridRows};
+		grid-template-rows: subgrid;
+		grid-template-columns: subgrid;
+	}
+`;
+
 const itemStyles = css`
 	display: flex;
 	scroll-snap-align: start;
@@ -157,13 +174,15 @@ const stackedCardRowsStyles = ({
  * @param {number} totalCards - The total number of cards in the carousel.
  * @param {number} visibleCarouselSlidesOnMobile - Number of cards to show at once on mobile.
  * @param {number} visibleCarouselSlidesOnTablet - Number of cards to show at once on tablet.
+ * @param fixedCardWidthOverrides - An alternative method for deciding the width of cards at various breakpoints
  * @returns {string} - The CSS styles for the grid layout.
  */
 const generateCarouselColumnStyles = (
 	totalCards: number,
 	visibleCarouselSlidesOnMobile: number,
 	visibleCarouselSlidesOnTablet: number,
-) => {
+	fixedCardWidthOverrides?: FixedWidthOverride[],
+): SerializedStyles[] | SerializedStyles => {
 	const peepingCardWidth = space[8];
 	const cardGap = 20;
 	const offsetPeepingCardWidth =
@@ -171,6 +190,21 @@ const generateCarouselColumnStyles = (
 	const offsetCardGap =
 		(cardGap * (visibleCarouselSlidesOnTablet - 1)) /
 		visibleCarouselSlidesOnTablet;
+	const fixedWidths: SerializedStyles[] = [];
+
+	if (!isUndefined(fixedCardWidthOverrides)) {
+		for (const fixedCardWidthOverride of fixedCardWidthOverrides) {
+			fixedWidths.push(css`
+				${from[fixedCardWidthOverride.breakpoint]} {
+					grid-template-columns: repeat(
+						${totalCards},
+						${fixedCardWidthOverride.width}px
+					);
+				}
+			`);
+		}
+		return fixedWidths;
+	}
 
 	return css`
 		/**
@@ -220,6 +254,8 @@ const getGapSize = (gap: GapSize) => {
 			return space[4];
 		case 'large':
 			return space[5];
+		case 'none':
+			return 0;
 	}
 };
 
@@ -231,6 +267,7 @@ export const ScrollableCarousel = ({
 	carouselLength,
 	visibleCarouselSlidesOnMobile,
 	visibleCarouselSlidesOnTablet,
+	fixedCardWidthOverrides,
 	sectionId,
 	shouldStackCards = { desktop: false, mobile: false },
 	gapSizes = { column: 'large', row: 'large' },
@@ -378,6 +415,7 @@ export const ScrollableCarousel = ({
 						carouselLength,
 						visibleCarouselSlidesOnMobile,
 						visibleCarouselSlidesOnTablet,
+						fixedCardWidthOverrides,
 					),
 					stackedCardRowsStyles(shouldStackCards),
 				]}
@@ -421,6 +459,24 @@ ScrollableCarousel.Item = ({
 			isStackingCarousel
 				? stackedRowLeftBorderStyles
 				: singleRowLeftBorderStyles,
+		]}
+	>
+		{children}
+	</li>
+);
+
+ScrollableCarousel.SubgridItem = ({
+	subgridRows,
+	children,
+}: {
+	subgridRows: number;
+	children: React.ReactNode;
+}) => (
+	<li
+		css={[
+			itemStyles,
+			subgridStyles({ subgridRows }),
+			singleRowLeftBorderStyles,
 		]}
 	>
 		{children}
