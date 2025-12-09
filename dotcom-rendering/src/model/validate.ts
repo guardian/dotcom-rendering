@@ -190,7 +190,7 @@ export const validateAsFootballMatchPageType = (
 	);
 };
 
-export const validateAsHostedContent = (data: unknown): FEHostedContent => {
+export const validateAsFEHostedContent = (data: unknown): FEHostedContent => {
 	if (validateHostedContent(data)) return data;
 
 	const url =
