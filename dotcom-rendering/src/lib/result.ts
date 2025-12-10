@@ -168,6 +168,4 @@ const ok = <E, A>(value: A): Result<E, A> => new Ok(value);
  */
 const error = <E, A>(err: E): Result<E, A> => new Err(err);
 
-// ----- Exports ----- //
-
 export { Result, ok, error };
