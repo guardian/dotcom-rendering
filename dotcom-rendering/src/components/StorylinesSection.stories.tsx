@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { StorylinesSection } from './StorylinesSection.importable';
 import { storylinesSectionContent } from '../../fixtures/manual/storylinesSectionContent';
+import { StorylinesSection } from './StorylinesSection.importable';
 
 const meta = {
 	component: StorylinesSection,

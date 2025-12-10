@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { FlexibleGeneral } from './FlexibleGeneral';
 import {
 	from,
 	headlineLight50,
@@ -10,14 +9,14 @@ import {
 	textSans20,
 	textSansBold34,
 } from '@guardian/source/foundations';
+import { useState } from 'react';
+import type { EditionId } from '../lib/edition';
 import { parseTPSGContentToStorylines } from '../model/enhanceAITagPageContent';
 import { palette } from '../palette';
-import { useState } from 'react';
-import type { TreatType } from '../types/front';
 import type { TPSGContent } from '../types/tagPageAIContent';
+import { FlexibleGeneral } from './FlexibleGeneral';
 import { ScrollableCarousel } from './ScrollableCarousel';
 import { StorylineSection } from './StorylineSection';
-import { EditionId } from '../lib/edition';
 
 type StorylinesSectionProps = {
 	url?: string;
@@ -112,9 +111,9 @@ function formatDateRangeText(
 	const format = (d?: Date | null) => {
 		if (!d) return '';
 		const day = d.getDate();
-		const suffix = (day: number) => {
-			if (day > 3 && day < 21) return 'th';
-			switch (day % 10) {
+		const suffix = (dayNum: number) => {
+			if (dayNum > 3 && dayNum < 21) return 'th';
+			switch (dayNum % 10) {
 				case 1:
 					return 'st';
 				case 2:
@@ -186,16 +185,6 @@ export const StorylinesSection = ({
 	const activeStoryline = parsedStorylines.find(
 		(s) => s.id === activeStorylineId,
 	);
-	const AITreat: TreatType = {
-		altText:
-			'This content has been generated with the assistance of AI technology.',
-		links: [
-			{
-				text: 'This section was curated with AI.',
-				linkTo: 'https://www.theguardian.com/help/insideguardian/2023/jun/16/the-guardians-approach-to-generative-ai',
-			},
-		],
-	};
 
 	/** frontsection with background, title, AI warning on the left,
 	 *
@@ -219,7 +208,6 @@ export const StorylinesSection = ({
 				toggleable={false} //maybe set to true if this still works?
 				// pageId={tagPage.pageId}
 				editionId={editionId}
-				treats={[AITreat]}
 			>
 				{/* Tab selector */}
 				<div css={tabsContainerStyles}>
@@ -285,24 +273,21 @@ export const StorylinesSection = ({
 				)}
 				{/* Tabs content */}
 				<div css={contentStyles}>
-					{activeStoryline &&
-						activeStoryline.categories.map((category, idx) => (
-							<div key={idx} css={contentCss}>
-								{category.title !== 'Key Stories' && (
-									<h2 css={categoryTitleCss}>
-										{category.title}
-									</h2>
-								)}
-								<FlexibleGeneral
-									groupedTrails={category.groupedTrails}
-									imageLoading={'eager'}
-									aspectRatio={'5:4'}
-									collectionId={0}
-									containerLevel="Secondary"
-									SCStyle={true}
-								/>
-							</div>
-						))}
+					{activeStoryline?.categories.map((category, idx) => (
+						<div key={idx} css={contentCss}>
+							{category.title !== 'Key Stories' && (
+								<h2 css={categoryTitleCss}>{category.title}</h2>
+							)}
+							<FlexibleGeneral
+								groupedTrails={category.groupedTrails}
+								imageLoading={'eager'}
+								aspectRatio={'5:4'}
+								collectionId={0}
+								containerLevel="Secondary"
+								SCStyle={true}
+							/>
+						</div>
+					))}
 				</div>
 				<div css={articleCountAndDateRangeStyle}>
 					{`These storylines were curated from articles published ${formatDateRangeText(

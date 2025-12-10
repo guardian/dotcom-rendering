@@ -1,4 +1,4 @@
-import { TPSGContent } from '../../src/types/tagPageAIContent';
+import type { TPSGContent } from '../../src/types/tagPageAIContent';
 
 export const storylinesSectionContent: TPSGContent = {
 	created: '2025-12-09T17:14:47.633244289Z',
