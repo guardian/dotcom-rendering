@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	space,
 	textSansBold14,
 	textSansBold15,
 	textSansBold20,
@@ -20,7 +21,7 @@ const containerCss = css`
 		left: 50%;
 		bottom: 0;
 		width: 1px;
-		height: 24px;
+		height: ${space[6]}px;
 		background-color: ${palette('--football-match-stat-border')};
 	}
 `;
@@ -73,7 +74,7 @@ const chartCss = css`
 `;
 
 const barCss = css`
-	height: 8px;
+	height: ${space[2]}px;
 	width: var(--match-stat-percentage);
 	background-color: var(--match-stat-team-colour);
 	border-radius: 8px;
