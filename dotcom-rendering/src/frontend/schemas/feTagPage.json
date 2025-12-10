@@ -2242,8 +2242,7 @@
                                         "type": "string"
                                     },
                                     "mimeType": {
-                                        "type": "string",
-                                        "const": "video/mp4"
+                                        "$ref": "#/definitions/SupportedVideoFileType"
                                     }
                                 },
                                 "required": [
@@ -2285,6 +2284,14 @@
                 "Cinemagraph",
                 "Default",
                 "Loop"
+            ],
+            "type": "string"
+        },
+        "SupportedVideoFileType": {
+            "enum": [
+                "application/vnd.apple.mpegurl",
+                "application/x-mpegURL",
+                "video/mp4"
             ],
             "type": "string"
         },
