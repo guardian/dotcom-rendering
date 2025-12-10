@@ -175,7 +175,7 @@ export function parseTPSGContentToStorylines(data: TPSGContent): Storyline[] {
 	function decideCategoryTitle(category: CategoryContent): string {
 		switch (category.category) {
 			case 'Key Stories':
-				return '';
+				return 'Key Stories';
 			case 'Contrasting opinions':
 				return 'Opinions';
 			case 'Find multimedia':

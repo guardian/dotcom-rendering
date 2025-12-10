@@ -92,6 +92,7 @@ type ImmersiveCardLayoutProps = {
 	imageLoading: Loading;
 	collectionId: number;
 	showLabsRedesign?: boolean;
+	SCStyle?: boolean;
 };
 
 /**
@@ -107,6 +108,7 @@ const ImmersiveCardLayout = ({
 	imageLoading,
 	collectionId,
 	showLabsRedesign,
+	SCStyle,
 }: ImmersiveCardLayoutProps) => {
 	const isLoopingVideo =
 		card.mainMedia?.type === 'SelfHostedVideo' &&
@@ -146,6 +148,7 @@ const ImmersiveCardLayout = ({
 					isImmersive={true}
 					showVideo={card.showVideo}
 					showLabsRedesign={showLabsRedesign}
+					SCStyle={SCStyle}
 				/>
 			</LI>
 		</UL>
@@ -479,6 +482,7 @@ const FullWidthCardLayout = ({
 				imageLoading={imageLoading}
 				collectionId={collectionId}
 				showLabsRedesign={showLabsRedesign}
+				SCStyle={SCStyle}
 			/>
 		);
 	}

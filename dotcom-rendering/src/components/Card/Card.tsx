@@ -514,8 +514,30 @@ export const Card = ({
 			css={css`
 				margin-top: auto;
 				display: flex;
+				${SCStyle &&
+				`
+					flex-direction: column;
+					gap: ${space[1]}px;
+					align-items: flex-start;
+				`}
 			`}
 		>
+			{/* We add this card footer here because ordinarily, it's either the pill or the footer, but
+		 we need to display the date on these cards if they appear in the storylines section */}
+			{SCStyle && (
+				<CardFooter
+					format={format}
+					age={decideAge()}
+					commentCount={<CommentCount />}
+					cardBranding={
+						isOnwardContent || !showLabsRedesign ? (
+							<LabsBranding />
+						) : undefined
+					}
+					showLivePlayable={showLivePlayable}
+				/>
+			)}
+
 			{mainMedia?.type === 'YoutubeVideo' && isVideoArticle && (
 				<>
 					{mainMedia.duration === 0 ? (
@@ -1228,6 +1250,7 @@ export const Card = ({
 							flex-grow: 1;
 						`}
 					>
+						{/* why is this needed, sublinks? */}
 						{SCStyle && isFlexSplash
 							? null
 							: headlinePosition === 'inner' && (
@@ -1260,12 +1283,6 @@ export const Card = ({
 											}
 											showLabsRedesign={showLabsRedesign}
 										/>
-										{!isUndefined(starRating) ? (
-											<StarRatingComponent
-												rating={starRating}
-												cardHasImage={!!image}
-											/>
-										) : null}
 									</HeadlineWrapper>
 							  )}
 
