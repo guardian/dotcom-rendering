@@ -67,7 +67,7 @@ const waveFormContainerCss = css`
 	}
 `;
 
-type ButtonProps = {
+type Props = {
 	onClickHandler: () => void;
 	audioDuration?: string;
 	waveFormSeed?: string;
@@ -81,7 +81,7 @@ export const ListenToArticleButton = ({
 	onClickHandler,
 	audioDuration,
 	waveFormSeed,
-}: ButtonProps) => {
+}: Props) => {
 	return (
 		<div css={waveFormContainerCss}>
 			<WaveForm
