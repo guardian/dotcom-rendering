@@ -23,6 +23,34 @@ const hexToRgb = (
 		: null;
 };
 
+// https://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
+// Based on: https://github.com/siege-media/contrast-ratio/blob/gh-pages/color.js
+const processLuminance = (channel: number): number => {
+	const scaledChannel = channel / 255;
+	return scaledChannel <= 0.03928
+		? scaledChannel / 12.92
+		: Math.pow((scaledChannel + 0.055) / 1.055, 2.4);
+};
+
+const getLuminance = (colour: string): number => {
+	const rgb = hexToRgb(colour);
+	if (!rgb) return 0;
+	return (
+		processLuminance(rgb.r) * 0.2126 +
+		processLuminance(rgb.g) * 0.7152 +
+		processLuminance(rgb.b) * 0.0722
+	);
+};
+
+// http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
+export const getContrast = (colour1: string, colour2: string): number => {
+	const luminance1 = getLuminance(colour1);
+	const luminance2 = getLuminance(colour2);
+	const brightest = Math.max(luminance1, luminance2);
+	const darkest = Math.min(luminance1, luminance2);
+	return (brightest + 0.05) / (darkest + 0.05);
+};
+
 const getBrightness = (colour: string): number => {
 	// http://www.w3.org/TR/AERT#color-contrast
 	const rgb = hexToRgb(colour);

@@ -1,4 +1,6 @@
-import { isLight } from './colour';
+import { getContrast, isLight } from './colour';
+
+const round = (value: number): number => Math.round(value * 100) / 100;
 
 describe('isLight', () => {
 	it('should return the correct response for dark hex colours', () => {
@@ -36,5 +38,20 @@ describe('isLight', () => {
 
 	it('should handle if the colour string is invalid', () => {
 		expect(isLight('wyx')).toBe(false);
+	});
+});
+
+/**
+ * Contrast ratio calculated by `getContrast` should match that calculated
+ * by the WebAIM contrast checker: https://webaim.org/resources/contrastchecker
+ */
+describe('getContrast', () => {
+	it('should return the correct contrast ratio for two colours', () => {
+		expect(round(getContrast('#000', '#fff'))).toEqual(21);
+		expect(round(getContrast('#f00', '#fff'))).toEqual(4);
+		expect(round(getContrast('#faa01b', '#f6f6f6'))).toEqual(1.92);
+		expect(round(getContrast('#2a449a', '#f6f6f6'))).toEqual(8.12);
+		expect(round(getContrast('#f0c650', '#1a1a1a'))).toEqual(10.69);
+		expect(round(getContrast('#559861', '#1a1a1a'))).toEqual(5.01);
 	});
 });
