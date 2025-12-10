@@ -109,11 +109,28 @@ function formatDateRangeText(
 ): string {
 	const earliest = earliestArticleTime ? new Date(earliestArticleTime) : null;
 	const latest = latestArticleTime ? new Date(latestArticleTime) : null;
-	const format = (d?: Date | null) => d?.toLocaleDateString('en-GB') ?? '';
+	const format = (d?: Date | null) => {
+		if (!d) return '';
+		const day = d.getDate();
+		const suffix = (day: number) => {
+			if (day > 3 && day < 21) return 'th';
+			switch (day % 10) {
+				case 1:
+					return 'st';
+				case 2:
+					return 'nd';
+				case 3:
+					return 'rd';
+				default:
+					return 'th';
+			}
+		};
+		return `${day}${suffix(day)} ${d.toLocaleDateString('en-GB', {
+			month: 'long',
+			year: 'numeric',
+		})}`;
+	};
 
-	// if (earliest && latest) {
-	// 	return `between ${format(earliest)} and ${format(latest)}`;
-	// } else
 	if (earliest) {
 		return `since ${format(earliest)}`;
 	} else if (latest) {
