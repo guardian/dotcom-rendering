@@ -529,14 +529,17 @@ export const SelfHostedVideo = ({
 				cue.line = percentFromTop;
 			}
 		}
-
-		setWidth(video.videoWidth);
-		setHeight(video.videoHeight);
 	};
 
 	const handleLoadedData = () => {
-		if (vidRef.current) {
-			setHasAudio(doesVideoHaveAudio(vidRef.current));
+		const video = vidRef.current;
+		if (!video) return;
+
+		setHasAudio(doesVideoHaveAudio(video));
+
+		if (video.videoWidth > 0 && video.videoHeight > 0) {
+			setWidth(video.videoWidth);
+			setHeight(video.videoHeight);
 		}
 	};
 
