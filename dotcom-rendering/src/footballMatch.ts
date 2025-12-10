@@ -1,5 +1,5 @@
 import { isOneOf } from '@guardian/libs';
-import { listParse } from './footballMatches';
+import { listParse, replaceLiveMatchStatus } from './footballMatches';
 import type {
 	FEFootballMatch,
 	FEFootballPlayer,
@@ -48,6 +48,7 @@ export type FootballPlayer = {
 export type FootballMatch = {
 	homeTeam: FootballTeam;
 	awayTeam: FootballTeam;
+	status: string;
 	comments?: string;
 };
 
@@ -118,6 +119,7 @@ export const parse = (
 		parseTeam(feFootballMatch.awayTeam).map((awayTeam) => ({
 			homeTeam,
 			awayTeam,
+			status: replaceLiveMatchStatus(feFootballMatch.status),
 			comments: feFootballMatch.comments,
 		})),
 	);
