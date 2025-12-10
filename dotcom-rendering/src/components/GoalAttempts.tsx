@@ -4,7 +4,7 @@ import {
 	palette as sourcePalette,
 	textSans15,
 } from '@guardian/source/foundations';
-import { isLight } from '../lib/isLight';
+import { isLight } from '../lib/colour';
 import { transparentColour } from '../lib/transparentColour';
 import { palette as themePalette } from '../palette';
 import type { ColourName } from '../paletteDeclarations';

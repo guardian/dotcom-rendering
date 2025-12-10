@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { headlineBold34, text } from '@guardian/source/foundations';
-import { isLight } from '../lib/isLight';
+import { isLight } from '../lib/colour';
 
 type Props = {
 	left: BarType;
