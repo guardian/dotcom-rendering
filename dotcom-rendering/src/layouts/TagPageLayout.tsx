@@ -66,18 +66,18 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	const isAccessibilityPage =
 		tagPage.config.pageId === 'help/accessibility-help';
 
-	const isSCTagPage = process.env.NODE_ENV === 'development';
+	// const isSCTagPage = process.env.NODE_ENV === 'development';
 
-	console.log(
-		'isSCTagPage:',
-		isSCTagPage,
-		'tagPage.webURL:',
-		tagPage.webURL,
-		'isDev:', //isDev doesn't actually work?
-		tagPage.config.isDev,
-		'is node env',
-		process.env.NODE_ENV,
-	);
+	// console.log(
+	// 	'isSCTagPage:',
+	// 	isSCTagPage,
+	// 	'tagPage.webURL:',
+	// 	tagPage.webURL,
+	// 	'isDev:', //isDev doesn't actually work?
+	// 	tagPage.config.isDev,
+	// 	'is node env',
+	// 	process.env.NODE_ENV,
+	// );
 
 	console.log('has tagPage.TPSGContent:', !!tagPage.TagPageAIContent);
 	console.log('tagPage.TPSGContent:', tagPage.TagPageAIContent);
@@ -153,8 +153,8 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 						: undefined;
 
 					const insertSCSection =
-						// tagPage.TPSGContent &&
-						isSCTagPage &&
+						tagPage.TagPageAIContent &&
+						// isSCTagPage &&
 						index == 1 &&
 						(!tagPage.pagination ||
 							tagPage.pagination.currentPage === 1);

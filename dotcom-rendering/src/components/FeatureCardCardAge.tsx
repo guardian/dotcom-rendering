@@ -15,7 +15,6 @@ export const FeatureCardCardAge = ({
 	webPublicationDate,
 	SCStyle,
 }: Props) => {
-	console.log('FeatureCardCardAge webPublicationDate:', webPublicationDate);
 	const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
 	if (withinTwelveHours || SCStyle) {
 		return (

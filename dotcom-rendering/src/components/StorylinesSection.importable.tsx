@@ -147,7 +147,8 @@ export const StorylinesSection = ({
 	TPSGContent,
 	editionId,
 }: StorylinesSectionProps) => {
-	console.log('TPSGContent', TPSGContent);
+	console.log('has TPSGContent', !!TPSGContent);
+	// console.log('TPSGContent', TPSGContent);
 	// const [storylines, SetStorylines] = useState<TPSGContent>();
 	const storylines = TPSGContent;
 
