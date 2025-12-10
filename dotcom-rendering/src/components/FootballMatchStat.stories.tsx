@@ -122,8 +122,6 @@ const teams = [
 	},
 ];
 
-console.log(teams);
-
 export const Default = {
 	args: {
 		label: 'Goal Attempts',
