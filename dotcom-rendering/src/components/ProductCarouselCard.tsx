@@ -125,11 +125,7 @@ export const ProductCarouselCard = ({
 				</a>
 			)}
 			<div css={imageArea}>
-				<ProductCardImage
-					format={format}
-					image={product.image}
-					url={undefined}
-				/>
+				<ProductCardImage format={format} image={product.image} />
 			</div>
 			<div
 				css={css`
