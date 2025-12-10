@@ -23,7 +23,7 @@ export const getUserClient: BridgetApi<'getUserClient'> = () => ({
 });
 
 export const getEnvironmentClient: BridgetApi<'getEnvironmentClient'> = () => ({
-	isMyGuardianEnabled: async () => false,
+	isMyGuardianEnabled: async () => true,
 	nativeThriftPackageVersion: async () => '8.7.0',
 });
 

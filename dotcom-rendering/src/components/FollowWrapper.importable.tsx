@@ -31,11 +31,15 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 		return !blockList.includes(tagId);
 	};
 
-	if (isBridgetCompatible && isMyGuardianEnabled && isNotInBlockList(id)) {
-		setShowFollowTagButton(true);
-	}
-
 	useEffect(() => {
+		if (
+			isBridgetCompatible &&
+			isMyGuardianEnabled &&
+			isNotInBlockList(id)
+		) {
+			setShowFollowTagButton(true);
+		}
+
 		const topic = new Topic({
 			id,
 			displayName,
@@ -67,7 +71,7 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 				);
 				log('dotcom', 'Bridget getTagClient.isFollowing Error:', error);
 			});
-	}, [id, displayName]);
+	}, [id, displayName, isMyGuardianEnabled, isBridgetCompatible]);
 
 	const tagHandler = () => {
 		const topic = new Topic({
