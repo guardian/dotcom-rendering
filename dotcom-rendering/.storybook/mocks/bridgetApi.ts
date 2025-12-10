@@ -24,7 +24,7 @@ export const getUserClient: BridgetApi<'getUserClient'> = () => ({
 
 export const getEnvironmentClient: BridgetApi<'getEnvironmentClient'> = () => ({
 	isMyGuardianEnabled: async () => false,
-	nativeThriftPackageVersion: async () => '2.1.0',
+	nativeThriftPackageVersion: async () => '8.7.0',
 });
 
 export const getGalleryClient: BridgetApi<'getGalleryClient'> = () => ({});
@@ -101,6 +101,7 @@ export const getListenToArticleClient: BridgetApi<
 > = () => ({
 	isAvailable: async () => true,
 	isPlaying: async () => false,
+	getAudioDurationSeconds: async () => 314, // 5:14 minutes
 });
 
 export const getNativeABTestingClient: BridgetApi<
