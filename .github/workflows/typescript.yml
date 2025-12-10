@@ -2,7 +2,6 @@ name: DCR typescript 🕵‍♀
 on:
   push:
     paths-ignore:
-      - 'apps-rendering/**'
       - 'dotcom-rendering/docs/**'
 
 jobs:

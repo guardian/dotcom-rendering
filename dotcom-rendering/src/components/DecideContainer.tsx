@@ -235,7 +235,7 @@ export const DecideContainer = ({
 			return <NavList trails={trails} showImage={true} />;
 		case 'scrollable/highlights':
 			return (
-				<Island priority="critical">
+				<Island priority="critical" defer={{ until: 'visible' }}>
 					<ScrollableHighlights trails={trails} frontId={frontId} />
 				</Island>
 			);
