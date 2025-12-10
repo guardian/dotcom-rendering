@@ -20,6 +20,7 @@ export const ProductCardButtons = ({
 					label={label}
 					url={productCta.url}
 					minimisePadding={true}
+					fullWidthText={productCtas.length > 1}
 					priority={index === 0 ? 'primary' : 'tertiary'}
 					fullwidth={true}
 				/>
