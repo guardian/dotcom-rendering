@@ -86,10 +86,12 @@ const selectedTitleStyles = css`
 	color: ${sourcePalette.news[400]};
 	margin-bottom: ${space[4]}px;
 	margin-top: ${space[2]}px;
+	padding-left: 10px; /* aligns with the headlines of the stories below */
 `;
 
 const numberStyles = () => css`
 	${headlineLight50}
+	line-height: 2rem; /* to align the number with the top of the text */
 	margin-left: -${space[1]}px;
 	margin-right: ${space[2]}px;
 `;
@@ -219,23 +221,37 @@ export const StorylinesSection = ({
 									activeStorylineId === storyline.id,
 									i === 0,
 								)}
-								onClick={() =>
-									setActiveStorylineId(storyline.id)
-								}
+								onClick={() => {
+									console.log(
+										'clicked storyline',
+										storyline.id,
+									);
+									setActiveStorylineId(storyline.id);
+								}}
 								type="button"
 							>
 								{activeStorylineId === storyline.id ? (
-									<span
-										css={[
-											numberStyles,
-											css`
+									<>
+										<span
+											css={[
+												numberStyles,
+												css`
+													color: ${sourcePalette
+														.neutral[60]};
+												`,
+											]}
+										>
+											{i + 1}
+										</span>
+										<span
+											css={css`
 												color: ${sourcePalette
-													.news[400]};
-											`,
-										]}
-									>
-										{i + 1}
-									</span>
+													.neutral[60]};
+											`}
+										>
+											{storyline.title}
+										</span>
+									</>
 								) : (
 									<>
 										<span css={numberStyles}>{i + 1}</span>

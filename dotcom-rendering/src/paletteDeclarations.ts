@@ -2520,8 +2520,14 @@ const cardMetaTextDark: PaletteFunction = () => sourcePalette.neutral[60];
 const cardBackgroundLight: PaletteFunction = () => 'transparent';
 const cardBackgroundDark: PaletteFunction = () => 'transparent';
 
-const cardMediaBackgroundLight: PaletteFunction = () =>
-	sourcePalette.neutral[97];
+const cardMediaBackgroundLight: PaletteFunction = (format) => {
+	switch (format.theme) {
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.neutral[93];
+		default:
+			return sourcePalette.neutral[97];
+	}
+};
 
 const cardMediaBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];

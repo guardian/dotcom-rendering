@@ -359,15 +359,7 @@ const sectionContentBorderFromLeftCol = css`
 	}
 `;
 
-// const sectionBottomContent = css`
-// 	grid-row: bottom-content;
-// 	grid-column: content;
-// 	.hidden > & {
-// 		display: none;
-// 	}
-// `;
-
-const sectionTreats = css`
+const sectionFooter = css`
 	/* Mobile: treats appear at the bottom */
 	grid-row: bottom-content;
 	grid-column: content;
@@ -410,26 +402,6 @@ const sideBorders = css`
 const topBorder = css`
 	border-top-style: solid;
 `;
-
-// const bottomPadding = css`
-// 	padding-bottom: ${space[4]}px;
-// `;
-
-// const bottomPaddingBetaContainer = (
-// 	useLargeSpacingMobile: boolean,
-// 	useLargeSpacingDesktop: boolean,
-// ) => css`
-// 	${until.tablet} {
-// 		padding-bottom: ${useLargeSpacingMobile
-// 			? `${space[8]}px`
-// 			: `${space[4]}px`};
-// 	}
-// 	${from.tablet} {
-// 		padding-bottom: ${useLargeSpacingDesktop
-// 			? `${space[8]}px`
-// 			: `${space[4]}px`};
-// 	}
-// `;
 
 const primaryLevelTopBorder = (
 	title?: string,
@@ -541,11 +513,11 @@ const carouselNavigationPlaceholder = css`
  *
  */
 
-// largely a copy of front section
-// can probably be trimmed down further once we are sure of requirements
-// mainly needed for a couple of reasons:
-// -- so we can have just the section with the gray background (in frontsection this takes up the full screen width)
-// -- so we can tweak the look and positioning of the treat (the "AI use" line) to line up with the bottom of the cards -- todo
+/** This is largely a copy of front section (notably re the grid layout), but with some modifications:
+ * Some text has been added below the title about AI use
+ * In a frontsection, the background normally takes up the full width of the page, but we want just the section to have the grey background
+ * A portion of the props and logic in frontsection aren't relevant here
+ */
 export const StorylineSection = ({
 	title,
 	children,
@@ -635,11 +607,6 @@ export const StorylineSection = ({
 							// only ever having <CPScott> as the leftContent
 							title?.toLowerCase() === 'opinion',
 						),
-						// showVerticalRule &&
-						// 	!isBetaContainer &&
-						// 	sectionHeadlineFromLeftCol(
-						// 		schemePalette('--section-border'),
-						// 	),
 					]}
 				>
 					<FrontSectionTitle
@@ -662,7 +629,7 @@ export const StorylineSection = ({
 									url={url}
 									showDateHeader={showDateHeader}
 									editionId={editionId}
-									containerLevel={'Secondary'}
+									containerLevel={'Primary'}
 								/>
 								<div
 									css={css`
@@ -672,7 +639,9 @@ export const StorylineSection = ({
 									Dive deeper into the Guardian's archive.
 									This product uses GenAI. Learn more about
 									how it works{' '}
-									<a href="https://theguardian.com">here.</a>
+									<a href="https://www.theguardian.com/help/insideguardian/2023/jun/16/the-guardians-approach-to-generative-ai">
+										here.
+									</a>
 								</div>
 							</>
 						}
@@ -711,48 +680,42 @@ export const StorylineSection = ({
 					{children}
 				</div>
 
-				{treats && (
-					<div css={[sectionTreats]}>
-						{/* <Treats
-							treats={treats}
-							borderColour={schemePalette('--section-border')}
-						/> */}
-						<Footer
-							dislikeHandler={
-								dislikeHandler ??
-								(() =>
-									submitComponentEvent(
-										{
-											component: {
-												componentType: 'QANDA_ATOM',
-												id,
-												products: [],
-												labels: [],
-											},
-											action: 'DISLIKE',
+				<div css={[sectionFooter]}>
+					<Footer
+						dislikeHandler={
+							dislikeHandler ??
+							(() =>
+								submitComponentEvent(
+									{
+										component: {
+											componentType: 'QANDA_ATOM',
+											id,
+											products: [],
+											labels: [],
 										},
-										'Web',
-									))
-							}
-							likeHandler={
-								likeHandler ??
-								(() =>
-									submitComponentEvent(
-										{
-											component: {
-												componentType: 'QANDA_ATOM', //todo: update ophan component types to include storyline?
-												id,
-												products: [],
-												labels: [],
-											},
-											action: 'LIKE',
+										action: 'DISLIKE',
+									},
+									'Web',
+								))
+						}
+						likeHandler={
+							likeHandler ??
+							(() =>
+								submitComponentEvent(
+									{
+										component: {
+											componentType: 'QANDA_ATOM', //todo: update ophan component types to include storyline?
+											id,
+											products: [],
+											labels: [],
 										},
-										'Web',
-									))
-							}
-						></Footer>
-					</div>
-				)}
+										action: 'LIKE',
+									},
+									'Web',
+								))
+						}
+					></Footer>
+				</div>
 			</section>
 		</ContainerOverrides>
 	);
