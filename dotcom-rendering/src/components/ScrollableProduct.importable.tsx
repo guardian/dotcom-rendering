@@ -1,11 +1,8 @@
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { ProductBlockElement } from '../types/content';
 import { ProductCarouselCard } from './ProductCarouselCard';
-import {
-	CarouselKind,
-	FixedSlideWidth,
-	ScrollableCarousel,
-} from './ScrollableCarousel';
+import type { FixedSlideWidth } from './ScrollableCarousel';
+import { CarouselKind, ScrollableCarousel } from './ScrollableCarousel';
 
 export const ScrollableProduct = ({
 	products,
