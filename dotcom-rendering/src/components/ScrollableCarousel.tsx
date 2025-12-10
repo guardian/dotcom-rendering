@@ -23,6 +23,7 @@ type Props =
 	| {
 			kind: CarouselKind.VisibleSlides;
 			children: React.ReactNode;
+			isArticle?: boolean;
 			carouselLength: number;
 			visibleCarouselSlidesOnMobile: number;
 			visibleCarouselSlidesOnTablet: number;
@@ -33,6 +34,7 @@ type Props =
 	  }
 	| {
 			kind: CarouselKind.FixedWidthSlides;
+			isArticle?: boolean;
 			children: React.ReactNode;
 			carouselLength: number;
 			visibleCarouselSlidesOnMobile?: never;
@@ -50,6 +52,9 @@ type Props =
 const gridGap = 20;
 const gridGapMobile = 10;
 
+const baseContainerStyles = css`
+	position: relative;
+`;
 /**
  * On mobile the carousel extends into the outer margins to use the full width
  * of the screen. From tablet onwards the carousel sits within the page grid.
@@ -60,8 +65,7 @@ const gridGapMobile = 10;
  * left side so that the carousel extends into the the middle of the gutter
  * between the grid columns to meet the dividing line.
  */
-const containerStyles = css`
-	position: relative;
+const frontContainerStyles = css`
 	margin-left: -${gridGapMobile}px;
 	margin-right: -${gridGapMobile}px;
 	${from.mobileLandscape} {
@@ -77,25 +81,7 @@ const containerStyles = css`
 	}
 `;
 
-const carouselStyles = css`
-	display: grid;
-	width: 100%;
-	grid-auto-columns: 1fr;
-	grid-auto-flow: column;
-	overflow-x: auto;
-	overflow-y: hidden;
-	scroll-snap-type: x mandatory;
-	scroll-behavior: smooth;
-	overscroll-behavior: contain auto;
-	/**
-	 * Hide scrollbars
-	 * See: https://stackoverflow.com/a/38994837
-	 */
-	::-webkit-scrollbar {
-		display: none; /* Safari and Chrome */
-	}
-	scrollbar-width: none; /* Firefox */
-
+const frontCarouselStyles = css`
 	padding-left: ${gridGapMobile}px;
 	padding-right: ${gridGapMobile}px;
 	scroll-padding-left: ${gridGapMobile}px;
@@ -113,6 +99,26 @@ const carouselStyles = css`
 		padding-left: ${gridGap / 2}px;
 		scroll-padding-left: ${gridGap / 2}px;
 	}
+`;
+
+const baseCarouselStyles = css`
+	display: grid;
+	width: 100%;
+	grid-auto-columns: 1fr;
+	grid-auto-flow: column;
+	overflow-x: auto;
+	overflow-y: hidden;
+	scroll-snap-type: x mandatory;
+	scroll-behavior: smooth;
+	overscroll-behavior: contain auto;
+	/**
+	 * Hide scrollbars
+	 * See: https://stackoverflow.com/a/38994837
+	 */
+	::-webkit-scrollbar {
+		display: none; /* Safari and Chrome */
+	}
+	scrollbar-width: none; /* Firefox */
 `;
 
 const carouselGapStyles = (column: number, row: number) => {
@@ -294,6 +300,7 @@ const getGapSize = (gap: GapSize) => {
 export const ScrollableCarousel = ({
 	kind,
 	children,
+	isArticle = false,
 	carouselLength,
 	visibleCarouselSlidesOnMobile,
 	visibleCarouselSlidesOnTablet,
@@ -438,11 +445,12 @@ export const ScrollableCarousel = ({
 	}, []);
 
 	return (
-		<div css={containerStyles}>
+		<div css={[baseContainerStyles, !isArticle && frontContainerStyles]}>
 			<ol
 				ref={carouselRef}
 				css={[
-					carouselStyles,
+					baseCarouselStyles,
+					!isArticle && frontCarouselStyles,
 					carouselGapStyles(columnGap, rowGap),
 					kind === CarouselKind.VisibleSlides &&
 						generateCarouselColumnStyles(

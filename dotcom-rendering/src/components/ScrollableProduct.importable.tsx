@@ -20,6 +20,7 @@ export const ScrollableProduct = ({
 	};
 	return (
 		<ScrollableCarousel
+			isArticle={true}
 			kind={CarouselKind.FixedWidthSlides}
 			carouselLength={products.length}
 			fixedSlideWidth={fixedCardWidth}
