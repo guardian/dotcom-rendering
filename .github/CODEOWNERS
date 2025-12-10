@@ -7,7 +7,6 @@
 /.github/                                       @guardian/dotcom-platform
 /.husky/                                        @guardian/dotcom-platform
 /.vscode/                                       @guardian/dotcom-platform
-/apps-rendering/                                @guardian/dotcom-platform
 
 # Files at the root of `/dotcom-rendering`
 /dotcom-rendering/*                             @guardian/dotcom-platform

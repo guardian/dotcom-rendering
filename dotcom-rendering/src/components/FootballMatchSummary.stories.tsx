@@ -24,6 +24,7 @@ export const FootballMatchSummary = {
 			homeTeam: matchReport.homeTeam,
 			awayTeam: matchReport.awayTeam,
 			comments: matchReport.comments,
+			status: matchReport.status,
 		},
 	},
 } satisfies Story;

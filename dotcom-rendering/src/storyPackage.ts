@@ -1,5 +1,5 @@
 import type { FEStoryPackage } from './frontend/feArticle';
-import { decideTrail } from './lib/decideTrail';
+import { decideTrail, decideTrailWithMasterImage } from './lib/decideTrail';
 import type { TrailType } from './types/trails';
 
 export type StoryPackage = {
@@ -9,6 +9,7 @@ export type StoryPackage = {
 
 export const parse = (
 	feStoryPackage: FEStoryPackage | undefined,
+	withMasterImage: boolean = false,
 ): StoryPackage | undefined => {
 	if (feStoryPackage === undefined) {
 		return undefined;
@@ -16,6 +17,8 @@ export const parse = (
 
 	return {
 		heading: feStoryPackage.heading,
-		trails: feStoryPackage.trails.map(decideTrail),
+		trails: feStoryPackage.trails.map(
+			withMasterImage ? decideTrailWithMasterImage : decideTrail,
+		),
 	};
 };

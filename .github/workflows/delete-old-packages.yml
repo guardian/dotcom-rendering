@@ -25,3 +25,4 @@ jobs:
           package-name: 'dotcom-rendering'
           package-type: 'container'
           min-versions-to-keep: ${{ env.NUM_OF_VERSIONS_TO_KEEP }}
+          ignore-versions: main

@@ -411,6 +411,6 @@ const paStatusToMatchStatus: Record<string, string> = {
 	Cancelled: 'C', // A Match has been Cancelled.
 };
 
-const replaceLiveMatchStatus = (status: string): string => {
+export const replaceLiveMatchStatus = (status: string): string => {
 	return paStatusToMatchStatus[status] ?? status.slice(0, 2);
 };

@@ -1449,7 +1449,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
             "InstanceMetadataTags": "enabled",
           },
           "Monitoring": {
-            "Enabled": false,
+            "Enabled": true,
           },
           "SecurityGroupIds": [
             {

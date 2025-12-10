@@ -2,7 +2,6 @@ name: DCR Stories Check
 on:
   push:
     paths-ignore:
-      - 'apps-rendering/**'
       - 'dotcom-rendering/docs/**'
 
 jobs:

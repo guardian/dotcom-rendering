@@ -84,6 +84,7 @@ export const ListenToArticle = ({ articleId }: Props) => {
 		showButton && (
 			<ListenToArticleButton
 				onClickHandler={listenToArticleHandler}
+				waveFormSeed={articleId}
 				audioDuration={
 					audioDurationSeconds !== undefined
 						? formatAudioDuration(audioDurationSeconds)

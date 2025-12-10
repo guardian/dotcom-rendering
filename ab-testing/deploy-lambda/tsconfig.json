@@ -1,0 +1,10 @@
+{
+	"extends": "@guardian/tsconfig/tsconfig.json",
+	"compilerOptions": {
+		"allowImportingTsExtensions": true,
+		"allowArbitraryExtensions": false,
+		"erasableSyntaxOnly": true,
+		"noEmit": true
+	},
+	"exclude": ["node_modules"]
+}

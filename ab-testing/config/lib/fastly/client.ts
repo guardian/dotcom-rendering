@@ -42,7 +42,7 @@ export type ServiceConfig = {
 
 export class FastlyClient {
 	apiToken: string;
-	baseUrl: string = "https://api.fastly.com/service";
+	baseUrl: string = "https://api.fastly.com";
 
 	constructor(apiToken: string, baseUrl?: string) {
 		this.apiToken = apiToken;
@@ -84,7 +84,7 @@ export class FastlyClient {
 		serviceId: string,
 		serviceName: string,
 	): Promise<FastlyService> {
-		const serviceConfig = await this.fetch(serviceId);
+		const serviceConfig = await this.fetch(`service/${serviceId}`);
 
 		assert(
 			serviceConfig,
@@ -133,7 +133,7 @@ export class FastlyClient {
 		serviceId: string;
 	}): Promise<{ id: string; name: string }> {
 		const dictionary = await this.fetch(
-			`${serviceId}/version/${activeVersion}/dictionary/${dictionaryName}`,
+			`service/${serviceId}/version/${activeVersion}/dictionary/${dictionaryName}`,
 		);
 		assert(dictionary, type({ id: string(), name: string() }));
 
@@ -148,7 +148,7 @@ export class FastlyClient {
 		serviceId: string;
 	}): Promise<FastlyDictionaryItem[]> {
 		const dictionary = await this.fetch(
-			`${serviceId}/dictionary/${dictionaryId}/items?per_page=1000`,
+			`service/${serviceId}/dictionary/${dictionaryId}/items?per_page=1000`,
 		);
 
 		assert(dictionary, array(fastlyDictionaryItemStruct));
@@ -166,7 +166,7 @@ export class FastlyClient {
 		items: UpdateDictionaryItemRequest[];
 	}): Promise<{ status: string }> {
 		const dictionary = await this.fetch(
-			`${serviceId}/dictionary/${dictionaryId}/items`,
+			`service/${serviceId}/dictionary/${dictionaryId}/items`,
 			{
 				method: "PATCH",
 				headers: {

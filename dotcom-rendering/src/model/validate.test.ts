@@ -8,7 +8,10 @@ import { Live } from '../../fixtures/generated/fe-articles/Live';
 import { MatchReport } from '../../fixtures/generated/fe-articles/MatchReport';
 import { Review } from '../../fixtures/generated/fe-articles/Review';
 import { Standard } from '../../fixtures/generated/fe-articles/Standard';
-import { validateAsFEArticle } from './validate';
+import { hostedArticle } from '../../fixtures/manual/hostedArticle';
+import { hostedGallery } from '../../fixtures/manual/hostedGallery';
+import { hostedVideo } from '../../fixtures/manual/hostedVideo';
+import { validateAsFEArticle, validateAsFEHostedContent } from './validate';
 
 const articles = [
 	{
@@ -37,15 +40,39 @@ const articles = [
 	},
 ] as const;
 
+const hostedContent = [
+	{
+		name: 'article',
+		data: hostedArticle,
+	},
+	{
+		name: 'gallery',
+		data: hostedGallery,
+	},
+	{
+		name: 'video',
+		data: hostedVideo,
+	},
+];
+
 describe('validate', () => {
 	it('throws on invalid data', () => {
 		const data = { foo: 'bar' };
 		expect(() => validateAsFEArticle(data)).toThrow(TypeError);
+		expect(() => validateAsFEHostedContent(data)).toThrow(TypeError);
 	});
 
 	for (const article of articles) {
 		it(`validates data for a ${article.name} article`, () => {
 			expect(validateAsFEArticle(article.data)).toBe(article.data);
+		});
+	}
+
+	for (const hostedItem of hostedContent) {
+		it(`validates data for hosted ${hostedItem.name} content`, () => {
+			expect(validateAsFEHostedContent(hostedItem.data)).toBe(
+				hostedItem.data,
+			);
 		});
 	}
 });
