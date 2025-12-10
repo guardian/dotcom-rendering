@@ -1301,9 +1301,6 @@
                             "title": {
                                 "type": "string"
                             },
-                            "description": {
-                                "type": "string"
-                            },
                             "content": {
                                 "type": "array",
                                 "items": {
@@ -1370,7 +1367,6 @@
                         },
                         "required": [
                             "content",
-                            "description",
                             "title"
                         ]
                     }
