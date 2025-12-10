@@ -9,32 +9,37 @@ import { CarouselNavigationButtons } from './CarouselNavigationButtons';
 
 type GapSize = 'small' | 'medium' | 'large' | 'none';
 type GapSizes = { row: GapSize; column: GapSize };
-export type FixedCardWidth = {
+export type FixedSlideWidth = {
 	defaultWidth: number;
 	widthFromBreakpoints: { breakpoint: Breakpoint; width: number }[];
 };
 
+export enum CarouselKind {
+	'VisibleSlides',
+	'FixedWidthSlides',
+}
+
 type Props =
 	| {
-			kind: 'visible-cards';
+			kind: CarouselKind.VisibleSlides;
 			children: React.ReactNode;
 			carouselLength: number;
 			visibleCarouselSlidesOnMobile: number;
 			visibleCarouselSlidesOnTablet: number;
-			fixedCardWidth?: never;
+			fixedSlideWidth?: never;
 			sectionId?: string;
 			shouldStackCards?: { desktop: boolean; mobile: boolean };
 			gapSizes?: GapSizes;
 	  }
 	| {
-			kind: 'fixed-width-cards';
+			kind: CarouselKind.FixedWidthSlides;
 			children: React.ReactNode;
 			carouselLength: number;
 			visibleCarouselSlidesOnMobile?: never;
 			visibleCarouselSlidesOnTablet?: never;
-			fixedCardWidth: FixedCardWidth;
+			fixedSlideWidth: FixedSlideWidth;
 			sectionId?: string;
-			shouldStackCards?: { desktop: boolean; mobile: boolean };
+			shouldStackCards?: never;
 			gapSizes?: GapSizes;
 	  };
 
@@ -184,20 +189,20 @@ const stackedCardRowsStyles = ({
 `;
 
 const generateFixedWidthColumStyles = ({
-	fixedCardWidth,
+	fixedSlideWidth,
 	carouselLength,
 }: {
-	fixedCardWidth: FixedCardWidth;
+	fixedSlideWidth: FixedSlideWidth;
 	carouselLength: number;
 }) => {
 	const fixedWidths: SerializedStyles[] = [];
 	fixedWidths.push(css`
 		grid-template-columns: repeat(
 			${carouselLength},
-			${fixedCardWidth.defaultWidth}px
+			${fixedSlideWidth.defaultWidth}px
 		);
 	`);
-	for (const { breakpoint, width } of fixedCardWidth.widthFromBreakpoints) {
+	for (const { breakpoint, width } of fixedSlideWidth.widthFromBreakpoints) {
 		fixedWidths.push(css`
 				${from[breakpoint]}; {
 					grid-template-columns: repeat(
@@ -292,7 +297,7 @@ export const ScrollableCarousel = ({
 	carouselLength,
 	visibleCarouselSlidesOnMobile,
 	visibleCarouselSlidesOnTablet,
-	fixedCardWidth,
+	fixedSlideWidth,
 	sectionId,
 	shouldStackCards = { desktop: false, mobile: false },
 	gapSizes = { column: 'large', row: 'large' },
@@ -302,9 +307,9 @@ export const ScrollableCarousel = ({
 	const [nextButtonEnabled, setNextButtonEnabled] = useState(true);
 
 	const showNavigation =
-		kind === 'visible-cards'
+		kind === CarouselKind.VisibleSlides
 			? carouselLength > visibleCarouselSlidesOnTablet
-			: true;
+			: false;
 
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
@@ -439,16 +444,16 @@ export const ScrollableCarousel = ({
 				css={[
 					carouselStyles,
 					carouselGapStyles(columnGap, rowGap),
-					kind === 'visible-cards' &&
+					kind === CarouselKind.VisibleSlides &&
 						generateCarouselColumnStyles(
 							carouselLength,
 							visibleCarouselSlidesOnMobile,
 							visibleCarouselSlidesOnTablet,
 						),
-					...(kind === 'fixed-width-cards'
+					...(kind === CarouselKind.FixedWidthSlides
 						? generateFixedWidthColumStyles({
 								carouselLength,
-								fixedCardWidth,
+								fixedSlideWidth,
 						  })
 						: []),
 					stackedCardRowsStyles(shouldStackCards),

@@ -1,7 +1,7 @@
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { ProductBlockElement } from '../types/content';
 import { ProductCarouselCard } from './ProductCarouselCard';
-import type { FixedCardWidth } from './ScrollableCarousel';
+import type { FixedSlideWidth } from './ScrollableCarousel';
 import { ScrollableCarousel } from './ScrollableCarousel';
 
 export const ScrollableProduct = ({
@@ -11,7 +11,7 @@ export const ScrollableProduct = ({
 	products: ProductBlockElement[];
 	format: ArticleFormat;
 }) => {
-	const fixedCardWidth: FixedCardWidth = {
+	const fixedCardWidth: FixedSlideWidth = {
 		defaultWidth: 240,
 		widthFromBreakpoints: [
 			{ breakpoint: 'mobileMedium', width: 280 },
@@ -20,9 +20,9 @@ export const ScrollableProduct = ({
 	};
 	return (
 		<ScrollableCarousel
-			kind="fixed-width-cards"
+			kind="fixed-width-slide"
 			carouselLength={products.length}
-			fixedCardWidth={fixedCardWidth}
+			fixedSlideWidth={fixedCardWidth}
 			gapSizes={{ row: 'none', column: 'large' }}
 		>
 			{products.map((product: ProductBlockElement) => (
