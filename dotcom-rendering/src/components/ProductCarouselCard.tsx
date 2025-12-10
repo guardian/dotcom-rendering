@@ -16,7 +16,6 @@ import { ProductCardImage } from './ProductCardImage';
 export type ProductCarouselCardProps = {
 	product: ProductBlockElement;
 	format: ArticleFormat;
-	showReadMore?: boolean;
 };
 
 const baseCard = css`
@@ -76,7 +75,6 @@ const productNameStyle = css`
 export const ProductCarouselCard = ({
 	product,
 	format,
-	showReadMore,
 }: ProductCarouselCardProps) => {
 	const hasHeading = !!product.primaryHeadingHtml;
 
@@ -102,7 +100,7 @@ export const ProductCarouselCard = ({
 					</div>
 				</>
 			)}
-			{showReadMore && <div css={readMoreCta}>Read more</div>}
+			<div css={readMoreCta}>Read more</div>
 			<div css={imageArea}>
 				<ProductCardImage
 					format={format}

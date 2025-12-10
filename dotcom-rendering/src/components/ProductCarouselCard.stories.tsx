@@ -255,7 +255,6 @@ const meta = {
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Lifestyle,
 		},
-		showReadMore: true,
 	},
 	render: (args) => (
 		<div
@@ -273,22 +272,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {} satisfies Story;
-
-export const WithoutReadMore = {
-	args: {
-		showReadMore: false,
-	},
-} satisfies Story;
-
-export const WithoutHeadingDisclaimerOrReadMore = {
-	args: {
-		product: {
-			...product,
-			primaryHeadingHtml: '',
-		},
-		showReadMore: false,
-	},
-} satisfies Story;
 
 export const WithLongHeadingProductNameAndCTA = {
 	args: {
