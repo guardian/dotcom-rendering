@@ -106,24 +106,28 @@ export const ProductCarouselCard = ({
 					</>
 				)}
 			</div>
-			{showReadMore && !isUndefined(product.h2Id) && (
-				<a
-					href={`#${product.h2Id}`}
-					onClick={(e) => {
-						e.preventDefault();
-						if (product.h2Id) {
-							const el = document.getElementById(product.h2Id);
-							if (el) {
-								el.scrollIntoView({ behavior: 'smooth' });
+			{showReadMore &&
+				!isUndefined(product.h2Id) &&
+				product.displayType !== 'ProductCardOnly' && (
+					<a
+						href={`#${product.h2Id}`}
+						onClick={(e) => {
+							e.preventDefault();
+							if (product.h2Id) {
+								const el = document.getElementById(
+									product.h2Id,
+								);
+								if (el) {
+									el.scrollIntoView({ behavior: 'smooth' });
+								}
 							}
-						}
-					}}
-					onFocus={(event) => event.stopPropagation()}
-					css={readMoreCta}
-				>
-					Read more
-				</a>
-			)}
+						}}
+						onFocus={(event) => event.stopPropagation()}
+						css={readMoreCta}
+					>
+						Read more
+					</a>
+				)}
 			<div css={imageArea}>
 				<ProductCardImage format={format} image={product.image} />
 			</div>
