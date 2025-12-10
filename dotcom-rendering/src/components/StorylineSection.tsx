@@ -10,11 +10,7 @@ import { submitComponentEvent } from '../client/ophan/ophan';
 import { type EditionId, isNetworkFront } from '../lib/edition';
 import { palette as schemePalette } from '../palette';
 import type { CollectionBranding } from '../types/branding';
-import type {
-	DCRContainerLevel,
-	DCRContainerPalette,
-	TreatType,
-} from '../types/front';
+import type { DCRContainerLevel, DCRContainerPalette } from '../types/front';
 import { ContainerOverrides } from './ContainerOverrides';
 import { ContainerTitle } from './ContainerTitle';
 import { Footer } from './ExpandableAtom/Footer';
@@ -61,8 +57,6 @@ type Props = {
 	showDateHeader?: boolean;
 	/** Used in partnership with `showDateHeader` to localise the date string */
 	editionId: EditionId;
-	/** A list of related links that appear in the bottom of the left column on fronts */
-	treats?: TreatType[];
 	collectionBranding?: CollectionBranding;
 	isTagPage?: boolean;
 	hasNavigationButtons?: boolean;
@@ -534,7 +528,6 @@ export const StorylineSection = ({
 	showDateHeader = false,
 	showTopBorder = true,
 	toggleable = false,
-	treats,
 	url,
 	collectionBranding,
 	isTagPage = false,
