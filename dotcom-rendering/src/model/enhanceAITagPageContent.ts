@@ -1,4 +1,4 @@
-import { timeAgo } from '@guardian/libs';
+// import { timeAgo } from '@guardian/libs';
 import type { DCRFrontCard, DCRGroupedTrails } from '../types/front';
 import type {
 	ArticleData,
@@ -93,13 +93,13 @@ function parseArticleDataToFrontCard(
 
 function parseKeyStoriesToFrontCard(category: CategoryContent): DCRFrontCard {
 	const supportingContent = category.articles.slice(1, 5).map((article) => {
-		const articleAge =
-			article.publicationTime &&
-			timeAgo(new Date(article.publicationTime).getTime()).toString();
+		// const articleAge =
+		// 	article.publicationTime &&
+		// 	timeAgo(new Date(article.publicationTime).getTime()).toString();
 		return {
 			headline: article.headline,
 			url: article.url,
-			kickerText: articleAge,
+			kickerText: article.publicationTime,
 			format: { design: 0, display: 0, theme: 0 },
 		};
 	});

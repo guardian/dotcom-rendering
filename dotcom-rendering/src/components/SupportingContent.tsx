@@ -4,6 +4,7 @@ import { ArticleDesign } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
 import { palette } from '../palette';
 import type { DCRContainerPalette, DCRSupportingContent } from '../types/front';
+import { CardAge } from './Card/components/CardAge';
 import { CardHeadline } from './CardHeadline';
 import { ContainerOverrides } from './ContainerOverrides';
 import { FormatBoundary } from './FormatBoundary';
@@ -207,7 +208,16 @@ export const SupportingContent = ({
 										mobile: 'medium',
 									}}
 								/>
-								{/* {subLink.kickerText} */}
+								{/* {subLink.kickerText} 
+								card age below obviously istag page is a lie
+								*/}
+								<CardAge
+									webPublication={{
+										date: subLink.kickerText ?? '',
+										isWithinTwelveHours: false,
+									}}
+									isTagPage={false}
+								/>
 							</ContainerOverrides>
 						</FormatBoundary>
 					</li>
