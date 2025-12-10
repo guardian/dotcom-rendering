@@ -122,7 +122,7 @@ export const FootballMatchStat = ({
 							${visuallyHidden}
 						`}
 					>
-						{away.teamName}
+						{home.teamName}
 					</span>
 					{formatValue(home.value, showPercentage)}
 				</span>
