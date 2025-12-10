@@ -5,7 +5,6 @@ import {
 	palette as sourcePalette,
 	until,
 } from '@guardian/source/foundations';
-import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
@@ -55,7 +54,13 @@ import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
-const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
+const ShowcaseGrid = ({
+	children,
+	renderingTarget,
+}: {
+	children: React.ReactNode;
+	renderingTarget: RenderingTarget;
+}) => (
 	<div
 		css={css`
 			/* IE Fallback */
@@ -89,22 +94,48 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 				*/
 				${from.wide} {
 					grid-template-columns: 219px 1px 620px 80px 300px;
-					grid-template-areas:
-						'title  border  headline   headline headline'
-						'meta   border  media      media    media'
-						'meta   border  standfirst .        right-column'
-						'meta   border  body       .        right-column'
-						'.      border  .          .        right-column';
+
+					${renderingTarget === 'Apps'
+						? css`
+								grid-template-areas:
+									'title  border  headline   headline headline'
+									'.      border  media      media    media'
+									'.      border  standfirst standfirst standfirst'
+									'.      border  meta       meta     meta'
+									'.      border  body       .        right-column'
+									'.      border  .          .        right-column';
+						  `
+						: css`
+								grid-template-areas:
+									'title  border  headline   headline headline'
+									'meta   border  media      media    media'
+									'meta   border  standfirst .        right-column'
+									'meta   border  body       .        right-column'
+									'.      border  .          .        right-column';
+						  `}
 				}
 
 				${until.wide} {
 					grid-template-columns: 140px 1px 620px 300px;
-					grid-template-areas:
-						'title  border  headline    headline'
-						'meta   border  media       media'
-						'meta   border  standfirst  right-column'
-						'meta   border  body        right-column'
-						'.      border  .           right-column';
+
+					${renderingTarget === 'Apps'
+						? css`
+								grid-template-areas:
+									'title  border  headline    headline'
+									'.      border  media       media'
+									'.      border  standfirst  standfirst'
+									'.      border  meta        meta'
+									'.      border  body        right-column'
+									'.      border  .           right-column';
+						  `
+						: css`
+								grid-template-areas:
+									'title  border  headline    headline'
+									'meta   border  media       media'
+									'meta   border  standfirst  right-column'
+									'meta   border  body        right-column'
+									'.      border  .           right-column';
+						  `}
 				}
 
 				/*
@@ -362,7 +393,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					element="article"
 					borderColour={themePalette('--article-border')}
 				>
-					<ShowcaseGrid>
+					<ShowcaseGrid renderingTarget={renderingTarget}>
 						<GridItem area="media">
 							<div css={mainMediaWrapper}>
 								<MainMedia
@@ -430,62 +461,24 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 							</div>
 							<div css={[maxWidth, fullHeight]}>
 								{isApps ? (
-									<>
-										<Hide from="leftCol">
-											<ArticleMetaApps
-												branding={branding}
-												format={format}
-												byline={article.byline}
-												tags={article.tags}
-												primaryDateline={
-													article.webPublicationDateDisplay
-												}
-												secondaryDateline={
-													article.webPublicationSecondaryDateDisplay
-												}
-												isCommentable={
-													article.isCommentable
-												}
-												discussionApiUrl={
-													article.config
-														.discussionApiUrl
-												}
-												shortUrlId={
-													article.config.shortUrlId
-												}
-												pageId={article.config.pageId}
-											></ArticleMetaApps>
-										</Hide>
-										<Hide until="leftCol">
-											<ArticleMeta
-												branding={branding}
-												format={format}
-												pageId={article.pageId}
-												webTitle={article.webTitle}
-												byline={article.byline}
-												tags={article.tags}
-												primaryDateline={
-													article.webPublicationDateDisplay
-												}
-												secondaryDateline={
-													article.webPublicationSecondaryDateDisplay
-												}
-												isCommentable={
-													article.isCommentable
-												}
-												discussionApiUrl={
-													article.config
-														.discussionApiUrl
-												}
-												shortUrlId={
-													article.config.shortUrlId
-												}
-											/>
-											{!!article.affiliateLinksDisclaimer && (
-												<AffiliateDisclaimer />
-											)}
-										</Hide>
-									</>
+									<ArticleMetaApps
+										branding={branding}
+										format={format}
+										byline={article.byline}
+										tags={article.tags}
+										primaryDateline={
+											article.webPublicationDateDisplay
+										}
+										secondaryDateline={
+											article.webPublicationSecondaryDateDisplay
+										}
+										isCommentable={article.isCommentable}
+										discussionApiUrl={
+											article.config.discussionApiUrl
+										}
+										shortUrlId={article.config.shortUrlId}
+										pageId={article.config.pageId}
+									></ArticleMetaApps>
 								) : (
 									<>
 										<ArticleMeta

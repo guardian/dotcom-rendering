@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import {
 	from,
 	palette as sourcePalette,
 	until,
 } from '@guardian/source/foundations';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
@@ -56,9 +56,11 @@ import { BannerWrapper, Stuck } from './lib/stickiness';
 const StandardGrid = ({
 	children,
 	display,
+	renderingTarget,
 }: {
 	children: React.ReactNode;
 	display: ArticleDisplay;
+	renderingTarget: RenderingTarget;
 }) => (
 	<div
 		css={css`
@@ -93,7 +95,29 @@ const StandardGrid = ({
 				${from.wide} {
 					grid-template-columns: 219px 1px 620px 80px 300px;
 
-					${display === ArticleDisplay.Showcase
+					${renderingTarget === 'Apps'
+						? display === ArticleDisplay.Showcase
+							? css`
+									grid-template-areas:
+										'title      border  headline   headline   headline'
+										'lines      border  headline   headline   headline'
+										'.          border  standfirst standfirst standfirst'
+										'.          border  meta       meta       meta'
+										'.          border  media      media      media'
+										'.          border  body       .          right-column'
+										'.          border  .          .          right-column';
+							  `
+							: css`
+									grid-template-areas:
+										'title      border  headline   . right-column'
+										'lines      border  headline   . right-column'
+										'.          border  standfirst . right-column'
+										'.          border  meta       . right-column'
+										'.          border  media      . right-column'
+										'.          border  body       . right-column'
+										'.          border  .          . right-column';
+							  `
+						: display === ArticleDisplay.Showcase
 						? css`
 								grid-template-areas:
 									'title      border  headline   headline   headline'
@@ -125,7 +149,29 @@ const StandardGrid = ({
 				${until.wide} {
 					grid-template-columns: 140px 1px 620px 300px;
 
-					${display === ArticleDisplay.Showcase
+					${renderingTarget === 'Apps'
+						? display === ArticleDisplay.Showcase
+							? css`
+									grid-template-areas:
+										'title      border  headline    headline'
+										'.          border  headline    headline'
+										'.          border  standfirst  standfirst'
+										'.          border  meta        meta'
+										'.          border  media       media'
+										'.          border  body        right-column'
+										'.          border  .           right-column';
+							  `
+							: css`
+									grid-template-areas:
+										'title      border  headline    right-column'
+										'.          border  headline    right-column'
+										'.          border  standfirst  right-column'
+										'.          border  meta        right-column'
+										'.          border  media       right-column'
+										'.          border  body        right-column'
+										'.          border  .           right-column';
+							  `
+						: display === ArticleDisplay.Showcase
 						? css`
 								grid-template-areas:
 									'title      border  headline    headline'
@@ -350,7 +396,10 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 					backgroundColour={themePalette('--article-background')}
 					element="article"
 				>
-					<StandardGrid display={format.display}>
+					<StandardGrid
+						display={format.display}
+						renderingTarget={renderingTarget}
+					>
 						<GridItem area="media">
 							<div
 								css={
@@ -438,19 +487,23 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								</div>
 							</div>
 						</GridItem>
-						<GridItem area="lines">
-							<div css={pushToBottom}>
-								<Hide when="below" breakpoint="desktop">
-									<StraightLines
-										count={8}
-										cssOverrides={css`
-											display: block;
-										`}
-										color={themePalette('--straight-lines')}
-									/>
-								</Hide>
-							</div>
-						</GridItem>
+						{renderingTarget === 'Web' && (
+							<GridItem area="lines">
+								<div css={pushToBottom}>
+									<Hide when="below" breakpoint="desktop">
+										<StraightLines
+											count={8}
+											cssOverrides={css`
+												display: block;
+											`}
+											color={themePalette(
+												'--straight-lines',
+											)}
+										/>
+									</Hide>
+								</div>
+							</GridItem>
+						)}
 						<GridItem area="standfirst">
 							<Standfirst
 								format={format}
@@ -460,59 +513,24 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
 								{isApps ? (
-									<>
-										<Hide when="above" breakpoint="leftCol">
-											<ArticleMetaApps
-												branding={branding}
-												format={format}
-												byline={article.byline}
-												tags={article.tags}
-												primaryDateline={
-													article.webPublicationDateDisplay
-												}
-												secondaryDateline={
-													article.webPublicationSecondaryDateDisplay
-												}
-												isCommentable={
-													article.isCommentable
-												}
-												discussionApiUrl={
-													article.config
-														.discussionApiUrl
-												}
-												shortUrlId={
-													article.config.shortUrlId
-												}
-												pageId={article.config.pageId}
-											></ArticleMetaApps>
-										</Hide>
-										<Hide when="below" breakpoint="leftCol">
-											<ArticleMeta
-												branding={branding}
-												format={format}
-												pageId={article.pageId}
-												webTitle={article.webTitle}
-												byline={article.byline}
-												tags={article.tags}
-												primaryDateline={
-													article.webPublicationDateDisplay
-												}
-												secondaryDateline={
-													article.webPublicationSecondaryDateDisplay
-												}
-												isCommentable={
-													article.isCommentable
-												}
-												discussionApiUrl={
-													article.config
-														.discussionApiUrl
-												}
-												shortUrlId={
-													article.config.shortUrlId
-												}
-											/>
-										</Hide>
-									</>
+									<ArticleMetaApps
+										branding={branding}
+										format={format}
+										byline={article.byline}
+										tags={article.tags}
+										primaryDateline={
+											article.webPublicationDateDisplay
+										}
+										secondaryDateline={
+											article.webPublicationSecondaryDateDisplay
+										}
+										isCommentable={article.isCommentable}
+										discussionApiUrl={
+											article.config.discussionApiUrl
+										}
+										shortUrlId={article.config.shortUrlId}
+										pageId={article.config.pageId}
+									></ArticleMetaApps>
 								) : (
 									<>
 										<ArticleMeta

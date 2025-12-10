@@ -5,7 +5,6 @@ import {
 	palette as sourcePalette,
 	until,
 } from '@guardian/source/foundations';
-import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
@@ -64,10 +63,12 @@ const StandardGrid = ({
 	children,
 	isMatchReport,
 	isMedia,
+	renderingTarget,
 }: {
 	children: React.ReactNode;
 	isMatchReport: boolean;
 	isMedia: boolean;
+	renderingTarget: RenderingTarget;
 }) => (
 	<div
 		css={css`
@@ -101,7 +102,41 @@ const StandardGrid = ({
 				${from.wide} {
 					grid-template-columns: 219px 1px 620px 80px 300px;
 
-					${isMatchReport
+					${renderingTarget === 'Apps'
+						? isMatchReport
+							? css`
+									grid-template-areas:
+										'title  border  matchNav   matchNav   matchNav'
+										'title  border  matchtabs  matchtabs  matchtabs'
+										'title  border  headline   headline   headline'
+										'.      border  standfirst standfirst standfirst'
+										'.      border  meta       meta       meta'
+										'.      border  media      media      media'
+										'.      border  body       .          right-column'
+										'.      border  .          .          right-column';
+							  `
+							: isMedia
+							? css`
+									grid-template-areas:
+										'title  border  headline   headline   headline'
+										'.      border  disclaimer disclaimer disclaimer'
+										'.      border  meta       meta       meta'
+										'.      border  media      media      media'
+										'.      border  standfirst standfirst standfirst'
+										'.      border  body       .          right-column'
+										'.      border  .          .          right-column';
+							  `
+							: css`
+									grid-template-areas:
+										'title  border  headline   . right-column'
+										'.      border  standfirst . right-column'
+										'.      border  disclaimer . right-column'
+										'.      border  meta       . right-column'
+										'.      border  media      . right-column'
+										'.      border  body       . right-column'
+										'.      border  .          . right-column';
+							  `
+						: isMatchReport
 						? css`
 								grid-template-areas:
 									'title  border  matchNav   . right-column'
@@ -144,7 +179,41 @@ const StandardGrid = ({
 			${until.wide} {
 				grid-template-columns: 140px 1px 620px 300px;
 
-				${isMatchReport
+				${renderingTarget === 'Apps'
+					? isMatchReport
+						? css`
+								grid-template-areas:
+									'title  border  matchNav     matchNav'
+									'title  border  matchtabs    matchtabs'
+									'.      border  headline     headline'
+									'.      border  standfirst   standfirst'
+									'.      border  meta         meta'
+									'.      border  media        media'
+									'.      border  body         right-column'
+									'.      border  .            right-column';
+						  `
+						: isMedia
+						? css`
+								grid-template-areas:
+									'title  border  headline     headline'
+									'.      border  disclaimer   disclaimer'
+									'.      border  meta         meta'
+									'.      border  media        media'
+									'.      border  standfirst   standfirst'
+									'.      border  body         right-column'
+									'.      border  .            right-column';
+						  `
+						: css`
+								grid-template-areas:
+									'title  border  headline     right-column'
+									'.      border  standfirst   right-column'
+									'.      border  disclaimer   right-column'
+									'.      border  meta         right-column'
+									'.      border  media        right-column'
+									'.      border  body         right-column'
+									'.      border  .            right-column';
+						  `
+					: isMatchReport
 					? css`
 							grid-template-areas:
 								'title  border  matchNav     right-column'
@@ -463,6 +532,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<StandardGrid
 						isMatchReport={isMatchReport}
 						isMedia={isMedia}
+						renderingTarget={renderingTarget}
 					>
 						<GridItem area="matchNav" element="aside">
 							<div css={maxWidth}>
@@ -584,70 +654,26 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								</div>
 							</div>
 							{isApps ? (
-								<>
-									<Hide from="leftCol">
-										<div css={maxWidth}>
-											<ArticleMetaApps
-												branding={branding}
-												format={format}
-												byline={article.byline}
-												tags={article.tags}
-												primaryDateline={
-													article.webPublicationDateDisplay
-												}
-												secondaryDateline={
-													article.webPublicationSecondaryDateDisplay
-												}
-												isCommentable={
-													article.isCommentable
-												}
-												discussionApiUrl={
-													article.config
-														.discussionApiUrl
-												}
-												shortUrlId={
-													article.config.shortUrlId
-												}
-												pageId={article.config.pageId}
-											></ArticleMetaApps>
-										</div>
-									</Hide>
-									<Hide until="leftCol">
-										<div css={maxWidth}>
-											<ArticleMeta
-												branding={branding}
-												format={format}
-												pageId={article.pageId}
-												webTitle={article.webTitle}
-												byline={article.byline}
-												source={article.config.source}
-												tags={article.tags}
-												primaryDateline={
-													article.webPublicationDateDisplay
-												}
-												secondaryDateline={
-													article.webPublicationSecondaryDateDisplay
-												}
-												isCommentable={
-													article.isCommentable
-												}
-												discussionApiUrl={
-													article.config
-														.discussionApiUrl
-												}
-												shortUrlId={
-													article.config.shortUrlId
-												}
-												mainMediaElements={
-													article.mainMediaElements
-												}
-											/>
-										</div>
-										{!!article.affiliateLinksDisclaimer && (
-											<AffiliateDisclaimer />
-										)}
-									</Hide>
-								</>
+								<div css={maxWidth}>
+									<ArticleMetaApps
+										branding={branding}
+										format={format}
+										byline={article.byline}
+										tags={article.tags}
+										primaryDateline={
+											article.webPublicationDateDisplay
+										}
+										secondaryDateline={
+											article.webPublicationSecondaryDateDisplay
+										}
+										isCommentable={article.isCommentable}
+										discussionApiUrl={
+											article.config.discussionApiUrl
+										}
+										shortUrlId={article.config.shortUrlId}
+										pageId={article.config.pageId}
+									></ArticleMetaApps>
+								</div>
 							) : (
 								<div css={maxWidth}>
 									<ArticleMeta

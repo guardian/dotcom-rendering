@@ -1,12 +1,13 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import {
 	from,
 	palette as sourcePalette,
 	space,
 	until,
 } from '@guardian/source/foundations';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
+import type { RenderingTarget } from 'src/types/renderingTarget';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
@@ -59,7 +60,13 @@ import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
-const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
+const ImmersiveGrid = ({
+	children,
+	renderingTarget,
+}: {
+	children: React.ReactNode;
+	renderingTarget: RenderingTarget;
+}) => (
 	<div
 		css={css`
 			/* IE Fallback */
@@ -91,14 +98,28 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 				${from.wide} {
 					grid-column-gap: 10px;
 					grid-template-columns: 219px 1px 620px 80px 300px;
-					grid-template-areas:
-						'caption    border      title      . right-column'
-						'.          border      headline   . right-column'
-						'.          border      standfirst . right-column'
-						'.          border      byline     . right-column'
-						'meta       border      body       . right-column'
-						'meta       border      body       . right-column'
-						'.          border      .          . right-column';
+
+					${renderingTarget === 'Apps'
+						? css`
+								grid-template-areas:
+									'caption    border      title      title      title'
+									'.          border      headline   headline   headline'
+									'.          border      standfirst standfirst standfirst'
+									'.          border      byline     byline     byline'
+									'.          border      meta       meta       meta'
+									'.          border      body       .          right-column'
+									'.          border      .          .          right-column';
+						  `
+						: css`
+								grid-template-areas:
+									'caption    border      title      . right-column'
+									'.          border      headline   . right-column'
+									'.          border      standfirst . right-column'
+									'.          border      byline     . right-column'
+									'meta       border      body       . right-column'
+									'meta       border      body       . right-column'
+									'.          border      .          . right-column';
+						  `}
 				}
 
 				/*
@@ -112,14 +133,28 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 				${until.wide} {
 					grid-column-gap: 10px;
 					grid-template-columns: 140px 1px 620px 300px;
-					grid-template-areas:
-						'.          border      title       right-column'
-						'.          border      headline    right-column'
-						'.          border      standfirst  right-column'
-						'.          border      byline      right-column'
-						'meta       border      body        right-column'
-						'meta       border      body        right-column'
-						'.          border      .           right-column';
+
+					${renderingTarget === 'Apps'
+						? css`
+								grid-template-areas:
+									'.          border      title       title'
+									'.          border      headline    headline'
+									'.          border      standfirst  standfirst'
+									'.          border      byline      byline'
+									'.          border      meta        meta'
+									'.          border      body        right-column'
+									'.          border      .           right-column';
+						  `
+						: css`
+								grid-template-areas:
+									'.          border      title       right-column'
+									'.          border      headline    right-column'
+									'.          border      standfirst  right-column'
+									'.          border      byline      right-column'
+									'meta       border      body        right-column'
+									'meta       border      body        right-column'
+									'.          border      .           right-column';
+						  `}
 				}
 
 				/*
@@ -449,7 +484,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					backgroundColour={themePalette('--article-background')}
 					element="article"
 				>
-					<ImmersiveGrid>
+					<ImmersiveGrid renderingTarget={renderingTarget}>
 						{/* Above leftCol, the Caption is controlled by Section ^^ */}
 						<GridItem area="caption">
 							<Hide when="above" breakpoint="leftCol">
@@ -549,62 +584,24 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							)}
 							<div css={maxWidth}>
 								{isApps ? (
-									<>
-										<Hide when="above" breakpoint="leftCol">
-											<ArticleMetaApps
-												branding={branding}
-												format={format}
-												byline={article.byline}
-												tags={article.tags}
-												primaryDateline={
-													article.webPublicationDateDisplay
-												}
-												secondaryDateline={
-													article.webPublicationSecondaryDateDisplay
-												}
-												isCommentable={
-													article.isCommentable
-												}
-												discussionApiUrl={
-													article.config
-														.discussionApiUrl
-												}
-												shortUrlId={
-													article.config.shortUrlId
-												}
-												pageId={article.config.pageId}
-											></ArticleMetaApps>
-										</Hide>
-										<Hide when="below" breakpoint="leftCol">
-											<ArticleMeta
-												branding={branding}
-												format={format}
-												pageId={article.pageId}
-												webTitle={article.webTitle}
-												byline={article.byline}
-												tags={article.tags}
-												primaryDateline={
-													article.webPublicationDateDisplay
-												}
-												secondaryDateline={
-													article.webPublicationSecondaryDateDisplay
-												}
-												isCommentable={
-													article.isCommentable
-												}
-												discussionApiUrl={
-													article.config
-														.discussionApiUrl
-												}
-												shortUrlId={
-													article.config.shortUrlId
-												}
-											/>
-											{!!article.affiliateLinksDisclaimer && (
-												<AffiliateDisclaimer />
-											)}
-										</Hide>
-									</>
+									<ArticleMetaApps
+										branding={branding}
+										format={format}
+										byline={article.byline}
+										tags={article.tags}
+										primaryDateline={
+											article.webPublicationDateDisplay
+										}
+										secondaryDateline={
+											article.webPublicationSecondaryDateDisplay
+										}
+										isCommentable={article.isCommentable}
+										discussionApiUrl={
+											article.config.discussionApiUrl
+										}
+										shortUrlId={article.config.shortUrlId}
+										pageId={article.config.pageId}
+									></ArticleMetaApps>
 								) : (
 									<>
 										<ArticleMeta
