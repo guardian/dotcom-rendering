@@ -96,35 +96,14 @@ const getOptimisedPosterImage = (mainImage: string): string => {
 
 /**
  * Runs a series of browser-specific checks to determine if the video has audio.
+ * We have run a test to check that all supported browsers are covered by these checks.
  */
-const doesVideoHaveAudio = (video: HTMLVideoElement): boolean => {
-	// If there exists a browser that does not support any of these properties, we are
-	// unable to detect whether the video has audio. Therefore, we assume it has audio,
-	// so that the unmute/mute icon is displayed.
-	if (
-		!('mozHasAudio' in video) &&
-		!('webkitAudioDecodedByteCount' in video) &&
-		!('audioTracks' in video)
-	) {
-		// Gather data on what browsers do not support these properties.
-		window.guardian.modules.sentry.reportError(
-			new Error(
-				'Could not determine if video has audio. This is likely due to the browser not supporting the necessary properties.',
-			),
-			'self-hosted-video',
-		);
-
-		return true;
-	}
-
-	return (
-		('mozHasAudio' in video && Boolean(video.mozHasAudio)) ||
-		('webkitAudioDecodedByteCount' in video &&
-			Boolean(video.webkitAudioDecodedByteCount)) ||
-		('audioTracks' in video &&
-			Boolean((video.audioTracks as { length: number }).length))
-	);
-};
+const doesVideoHaveAudio = (video: HTMLVideoElement): boolean =>
+	('mozHasAudio' in video && Boolean(video.mozHasAudio)) ||
+	('webkitAudioDecodedByteCount' in video &&
+		Boolean(video.webkitAudioDecodedByteCount)) ||
+	('audioTracks' in video &&
+		Boolean((video.audioTracks as { length: number }).length));
 
 type Props = {
 	sources: Source[];
