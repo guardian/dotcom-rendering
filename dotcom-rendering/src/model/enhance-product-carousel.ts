@@ -11,7 +11,7 @@ const isEligibleForCarousel = (pageId: string) =>
 	allowedPageIds.includes(pageId);
 
 // Extract URLs from 'At a glance' section elements
-const extractAtAGlanceUrls = (elements: FEElement[]): string[] =>
+export const extractAtAGlanceUrls = (elements: FEElement[]): string[] =>
 	elements
 		.filter(
 			(el): el is FEElement & { url: string } =>
@@ -22,7 +22,7 @@ const extractAtAGlanceUrls = (elements: FEElement[]): string[] =>
 		.map((el) => el.url);
 
 // Find product elements which have a matching URL in their CTAs
-const findMatchingProducts = (
+export const findMatchingProducts = (
 	pageElements: FEElement[],
 	urls: string[],
 ): ProductBlockElement[] =>
@@ -52,7 +52,9 @@ type ReducerAccumulator = {
 	atAGlanceElements: FEElement[];
 };
 
-const insertCarouselPlaceholder = (elements: FEElement[]): FEElement[] => {
+export const insertCarouselPlaceholder = (
+	elements: FEElement[],
+): FEElement[] => {
 	const elementsWithReducerContext = elements.reduce(
 		(
 			prev: ReducerAccumulator,
@@ -83,7 +85,7 @@ const insertCarouselPlaceholder = (elements: FEElement[]): FEElement[] => {
 						{
 							_type: 'model.dotcomrendering.pageElements.ProductCarouselElement',
 							matchedProducts,
-						} as any,
+						} as FEElement,
 						currentElement,
 					);
 				} else {
