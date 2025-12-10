@@ -1,8 +1,11 @@
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { ProductBlockElement } from '../types/content';
 import { ProductCarouselCard } from './ProductCarouselCard';
-import type { FixedSlideWidth } from './ScrollableCarousel';
-import { ScrollableCarousel } from './ScrollableCarousel';
+import {
+	CarouselKind,
+	FixedSlideWidth,
+	ScrollableCarousel,
+} from './ScrollableCarousel';
 
 export const ScrollableProduct = ({
 	products,
@@ -20,7 +23,7 @@ export const ScrollableProduct = ({
 	};
 	return (
 		<ScrollableCarousel
-			kind="fixed-width-slide"
+			kind={CarouselKind.FixedWidthSlides}
 			carouselLength={products.length}
 			fixedSlideWidth={fixedCardWidth}
 			gapSizes={{ row: 'none', column: 'large' }}
