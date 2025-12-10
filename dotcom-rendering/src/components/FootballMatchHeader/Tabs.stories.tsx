@@ -11,7 +11,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const MatchInfoWhileFixture = {
+export const MatchInfoWhenFixture = {
 	args: {
 		selected: 'info',
 	},
@@ -24,8 +24,8 @@ export const MatchInfoWhileFixture = {
 	decorators: [gridContainerDecorator],
 } satisfies Story;
 
-export const LiveWhileLive = {
-	...MatchInfoWhileFixture,
+export const LiveWhenLive = {
+	...MatchInfoWhenFixture,
 	args: {
 		selected: 'live',
 		infoURL: new URL(
@@ -34,13 +34,13 @@ export const LiveWhileLive = {
 	},
 } satisfies Story;
 
-export const ReportWhileResult = {
-	...MatchInfoWhileFixture,
+export const ReportWhenResult = {
+	...MatchInfoWhenFixture,
 	args: {
 		selected: 'report',
 		liveURL: new URL(
 			'https://www.theguardian.com/football/live/2025/nov/26/arsenal-v-bayern-munich-champions-league-live',
 		),
-		infoURL: LiveWhileLive.args.infoURL,
+		infoURL: LiveWhenLive.args.infoURL,
 	},
 } satisfies Story;
