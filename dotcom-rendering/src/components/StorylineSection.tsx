@@ -681,7 +681,7 @@ export const StorylineSection = ({
 								submitComponentEvent(
 									{
 										component: {
-											componentType: 'QANDA_ATOM',
+											componentType: 'STORYLINES',
 											id,
 											products: [],
 											labels: [],
@@ -697,7 +697,7 @@ export const StorylineSection = ({
 								submitComponentEvent(
 									{
 										component: {
-											componentType: 'QANDA_ATOM', //todo: update ophan component types to include storyline?
+											componentType: 'STORYLINES',
 											id,
 											products: [],
 											labels: [],
