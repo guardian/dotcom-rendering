@@ -35,7 +35,7 @@ const brandAndProductName = css`
 const readMoreCta = css`
 	${textSansBold15};
 	text-decoration-line: underline;
-	text-decoration-color: #dcdcdc; /* stylelint-disable-line */
+	text-decoration-color: ${palette('--product-card-read-more-decoration')};
 	color: ${palette('--product-card-read-more')};
 	text-underline-offset: 20%;
 	padding-bottom: ${space[2]}px;
@@ -102,11 +102,7 @@ export const ProductCarouselCard = ({
 			)}
 			<div css={readMoreCta}>Read more</div>
 			<div css={imageArea}>
-				<ProductCardImage
-					format={format}
-					image={product.image}
-					url={undefined}
-				/>
+				<ProductCardImage format={format} image={product.image} />
 			</div>
 			{!hasHeading && (
 				<div>
@@ -114,13 +110,13 @@ export const ProductCarouselCard = ({
 					<div css={productNameStyle}>{product.productName}</div>
 				</div>
 			)}
-			<div css={priceStyle}>{firstCta?.price ?? 'Price unavailable'}</div>
+			<div css={priceStyle}>{firstCta?.price}</div>
 
 			<div css={buttonWrapper}>
 				<ProductCardButtons
 					productCtas={firstCta ? [firstCta] : []}
 					buttonLabelOverride={
-						firstCta ? `Buy at ${firstCta.retailer}` : 'Buy'
+						firstCta ? `Buy at ${firstCta.retailer}` : undefined
 					}
 				/>
 			</div>

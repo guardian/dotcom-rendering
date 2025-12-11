@@ -7557,6 +7557,10 @@ const paletteColours = {
 		light: productCardReadMoreLight,
 		dark: productCardReadMoreDark,
 	},
+	'--product-card-read-more-decoration': {
+		light: productCardBorderNeutralLight,
+		dark: productCardBorderNeutralLight,
+	},
 	'--pullquote-background': {
 		light: pullQuoteBackgroundLight,
 		dark: pullQuoteBackgroundDark,
