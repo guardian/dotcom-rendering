@@ -519,28 +519,28 @@ export const FeatureCard = ({
 											}
 										/>
 
-										{mainMedia?.type === 'YoutubeVideo' &&
-											mainMedia.duration > 0 && (
-												<div css={videoPillStyles}>
-													<Pill
-														content={
-															<time>
-																{secondsToDuration(
-																	mainMedia.duration,
-																)}
-															</time>
-														}
-														icon={
-															<SvgMediaControlsPlay />
-														}
-													/>
-												</div>
-											)}
-
 										{mainMedia?.type === 'YoutubeVideo' && (
-											<div css={playIconStyles}>
-												<PlayIcon iconWidth="narrow" />
-											</div>
+											<>
+												{mainMedia.duration > 0 && (
+													<div css={videoPillStyles}>
+														<Pill
+															content={
+																<time>
+																	{secondsToDuration(
+																		mainMedia.duration,
+																	)}
+																</time>
+															}
+															icon={
+																<SvgMediaControlsPlay />
+															}
+														/>
+													</div>
+												)}
+												<div css={playIconStyles}>
+													<PlayIcon iconWidth="narrow" />
+												</div>
+											</>
 										)}
 									</>
 								)}
