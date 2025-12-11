@@ -61,6 +61,7 @@ const cardsContainerStyles = css`
 
 const standardCardStyles = css`
 	position: relative;
+	display: flex;
 	padding: ${space[2]}px;
 	background-color: ${palette('--onward-more-galleries-card-background')};
 
