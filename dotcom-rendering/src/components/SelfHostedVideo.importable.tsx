@@ -506,7 +506,7 @@ export const SelfHostedVideo = ({
 		setPreloadPartialData(isAutoplayAllowed === false || !!isInView);
 	}, [isAutoplayAllowed, isInView]);
 
-	if (renderingTarget !== 'Web') return null;
+	// if (renderingTarget !== 'Web') return null;
 
 	if (adapted) {
 		return FallbackImageComponent;
