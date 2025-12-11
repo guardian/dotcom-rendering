@@ -14,8 +14,6 @@ type Props = {
 	imageLoading: 'lazy' | 'eager';
 	aspectRatio: AspectRatio;
 	collectionId: number;
-	/** Feature flag for the labs redesign work */
-	showLabsRedesign?: boolean;
 };
 
 /**
@@ -32,7 +30,6 @@ export const ScrollableFeature = ({
 	imageLoading,
 	aspectRatio,
 	collectionId,
-	showLabsRedesign = false,
 }: Props) => {
 	return (
 		<ScrollableCarousel
@@ -84,7 +81,6 @@ export const ScrollableFeature = ({
 							isNewsletter={card.isNewsletter}
 							showQuotes={card.showQuotedHeadline}
 							showVideo={card.showVideo}
-							showLabsRedesign={showLabsRedesign}
 						/>
 					</ScrollableCarousel.Item>
 				);

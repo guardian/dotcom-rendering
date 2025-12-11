@@ -156,7 +156,6 @@ export const Labs = {
 			sponsorName: 'Guardian Org',
 			aboutThisLink: '#about',
 		},
-		showLabsRedesign: true,
 	},
 } satisfies Story;
 

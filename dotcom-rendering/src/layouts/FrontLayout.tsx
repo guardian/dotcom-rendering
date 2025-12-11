@@ -21,7 +21,6 @@ import { FrontSection } from '../components/FrontSection';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
-import { LabsSection } from '../components/LabsSection';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { Snap } from '../components/Snap';
@@ -30,7 +29,6 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { ArticleDisplay } from '../lib/articleFormat';
-import { badgeFromBranding } from '../lib/branding';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { editionList } from '../lib/edition';
@@ -106,7 +104,6 @@ const decideLeftContent = (front: Front, collection: DCRCollectionType) => {
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
 		config: {
-			abTests,
 			hasPageSkin: hasPageSkinConfig,
 			isPaidContent,
 			pageId,
@@ -139,15 +136,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		front.isNetworkFront && front.deeplyRead && front.deeplyRead.length > 0;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
-
-	/** We allow the labs redesign to be shown if:
-	 * - the feature switch is ON
-	 * OR
-	 * - the user is opted into the 0% server side test
-	 */
-	const showLabsRedesign =
-		!!switches.guardianLabsRedesign ||
-		abTests.labsRedesignVariant === 'variant';
 
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
@@ -438,84 +426,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						);
 					}
 
-					if (
-						collection.containerPalette === 'Branded' &&
-						!showLabsRedesign
-					) {
-						return (
-							<Fragment key={ophanName}>
-								<LabsSection
-									title={collection.displayName}
-									collectionId={collection.id}
-									pageId={front.pressedPage.id}
-									ajaxUrl={front.config.ajaxUrl}
-									sectionId={`container-${ophanName}`}
-									ophanComponentName={ophanName}
-									ophanComponentLink={ophanComponentLink}
-									containerName={collection.collectionType}
-									canShowMore={collection.canShowMore}
-									url={collection.href}
-									badge={badgeFromBranding(
-										collection.collectionBranding,
-									)}
-									data-print-layout="hide"
-									hasPageSkin={hasPageSkin}
-									discussionApiUrl={
-										front.config.discussionApiUrl
-									}
-									editionId={editionId}
-								>
-									<DecideContainer
-										trails={trails}
-										groupedTrails={collection.grouped}
-										containerType={
-											collection.collectionType
-										}
-										containerPalette={
-											collection.containerPalette
-										}
-										imageLoading={imageLoading}
-										serverTime={serverTime}
-										aspectRatio={
-											collection.aspectRatio ??
-											fallbackAspectRatio(
-												collection.collectionType,
-											)
-										}
-										sectionId={ophanName}
-										collectionId={index + 1}
-										containerLevel={
-											collection.containerLevel
-										}
-										showLabsRedesign={showLabsRedesign}
-									/>
-								</LabsSection>
-
-								{mobileAdPositions.includes(index) && (
-									<MobileAdSlot
-										renderAds={renderAds}
-										adSlotIndex={mobileAdPositions.indexOf(
-											index,
-										)}
-									/>
-								)}
-
-								{index === merchHighAdPosition && (
-									<MerchHighAdSlot
-										renderAds={renderAds}
-										collectionCount={
-											filteredCollections.length
-										}
-										isPaidContent={
-											!!front.pressedPage.frontProperties
-												.isPaidContent
-										}
-									/>
-								)}
-							</Fragment>
-						);
-					}
-
 					return (
 						<Fragment key={ophanName}>
 							{desktopAdPositions.includes(index) && (
@@ -584,7 +494,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									index,
 								)}
 								isLabs={isLabs(collection)}
-								showLabsRedesign={showLabsRedesign}
 							>
 								<DecideContainer
 									trails={trails}
@@ -609,7 +518,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
-									showLabsRedesign={showLabsRedesign}
 									enableHls={switches.enableHlsWeb}
 								/>
 							</FrontSection>
