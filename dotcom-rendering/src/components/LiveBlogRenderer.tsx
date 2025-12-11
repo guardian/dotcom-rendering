@@ -142,7 +142,7 @@ export const LiveBlogRenderer = ({
 				serverTime={serverTime}
 				idApiUrl={idApiUrl}
 			/>
-			{isWeb && blocks.length > 4 && (
+			{isWeb && blocks.length > 4 && !isLiveUpdate && (
 				<Island
 					priority="feature"
 					// this should really be deferred until visible,
