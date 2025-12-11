@@ -138,7 +138,7 @@ export const LiveBlogRenderer = ({
 				shouldHideAds={shouldHideAds}
 				serverTime={serverTime}
 			/>
-			{isWeb && blocks.length > 4 && (
+			{isWeb && blocks.length > 4 && !isLiveUpdate && (
 				<Island
 					priority="feature"
 					// this should really be deferred until visible,

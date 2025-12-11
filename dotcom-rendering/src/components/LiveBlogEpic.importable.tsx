@@ -245,52 +245,8 @@ export const LiveBlogEpic = ({
 
 	const [pageUrl, setPageUrl] = useState<string | undefined>();
 
-	const [epicPlaceholder, setEpicPlaceholder] = useState<HTMLElement | null>(
-		null,
-	);
-
 	useEffect(() => {
 		setPageUrl(window.location.origin + window.location.pathname);
-	}, []);
-
-	useEffect(() => {
-		/**
-		 * Here we decide where to insert the epic.
-		 *
-		 * If the url contains a permalink then we
-		 * want to insert it immediately after that block to prevent any CLS issues.
-		 *
-		 * Otherwise, we choose a random position near the top of the blog
-		 */
-		const placeholder = document.createElement('article');
-		if (window.location.href.includes('#block-')) {
-			// Because we're using a permalink there's a possibility the epic will render in
-			// view. To prevent confusing layout shift we initially hide the message so that
-			// we can reveal (animate in) it once it has been rendered
-			placeholder.classList.add('pending');
-			const blockId = window.location.hash.slice(1);
-			const blockLinkedTo = document.getElementById(blockId);
-			if (blockLinkedTo) {
-				insertAfter(blockLinkedTo, placeholder);
-			}
-			placeholder.classList.add('reveal');
-			placeholder.classList.remove('pending');
-		} else {
-			// This is a simple page load so we simply insert the epic somewhere near the top
-			// of the blog
-			const randomPosition = Math.floor(Math.random() * 3) + 1; // 1, 2 or 3
-			const aBlockNearTheTop =
-				document.querySelectorAll<HTMLElement>('article.block')[
-					randomPosition
-				];
-			if (aBlockNearTheTop) {
-				insertAfter(aBlockNearTheTop, placeholder);
-			}
-		}
-		setEpicPlaceholder(placeholder);
-		return () => {
-			placeholder.remove();
-		};
 	}, []);
 
 	// First construct the payload
@@ -302,8 +258,40 @@ export const LiveBlogEpic = ({
 		pageId,
 		keywordIds,
 	});
-	if (!ophanPageViewId || !payload || !pageUrl || !epicPlaceholder) {
-		return null;
+	if (!ophanPageViewId || !payload || !pageUrl) return null;
+
+	/**
+	 * Here we decide where to insert the epic.
+	 *
+	 * If the url contains a permalink then we
+	 * want to insert it immediately after that block to prevent any CLS issues.
+	 *
+	 * Otherwise, we choose a random position near the top of the blog
+	 */
+	const epicPlaceholder = document.createElement('article');
+	if (window.location.href.includes('#block-')) {
+		// Because we're using a permalink there's a possibility the epic will render in
+		// view. To prevent confusing layout shift we initially hide the message so that
+		// we can reveal (animate in) it once it has been rendered
+		epicPlaceholder.classList.add('pending');
+		const blockId = window.location.hash.slice(1);
+		const blockLinkedTo = document.getElementById(blockId);
+		if (blockLinkedTo) {
+			insertAfter(blockLinkedTo, epicPlaceholder);
+		}
+		epicPlaceholder.classList.add('reveal');
+		epicPlaceholder.classList.remove('pending');
+	} else {
+		// This is a simple page load so we simply insert the epic somewhere near the top
+		// of the blog
+		const randomPosition = Math.floor(Math.random() * 3) + 1; // 1, 2 or 3
+		const aBlockNearTheTop =
+			document.querySelectorAll<HTMLElement>('article.block')[
+				randomPosition
+			];
+		if (aBlockNearTheTop) {
+			insertAfter(aBlockNearTheTop, epicPlaceholder);
+		}
 	}
 
 	return createPortal(
