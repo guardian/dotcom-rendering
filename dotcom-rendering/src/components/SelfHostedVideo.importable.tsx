@@ -30,16 +30,31 @@ import type {
 import { SelfHostedVideoPlayer } from './SelfHostedVideoPlayer';
 import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
-const videoAndBackgroundStyles = (isCinemagraph: boolean) => css`
+const videoAndBackgroundStyles = (
+	isCinemagraph: boolean,
+	aspectRatio?: number,
+) => css`
 	position: relative;
 	display: flex;
 	justify-content: space-around;
 	background-color: ${palette('--video-background')};
 	${!isCinemagraph && `z-index: ${getZIndex('video-container')}`};
+
+	/**
+	 * If the video and its containing slot have different dimensions, the slot will use the aspect
+	 * ratio of the video on mobile, so that the video can take up the full width of the screen.
+	 *
+	 * From tablet breakpoints, the aspect ratio of the slot is maintained, for consistency with other content.
+	 * This will result in grey bars on either side of the video if the video is narrower than the slot.
+	 */
+	${from.tablet} {
+		${typeof aspectRatio === 'number' && `aspect-ratio: ${aspectRatio};`}
+	}
 `;
 
 const videoContainerStyles = (width: number, height: number) => css`
 	position: relative;
+	aspect-ratio: ${width} / ${height};
 	height: 100%;
 	max-height: 100vh;
 	max-height: 100svh;
@@ -113,6 +128,11 @@ type Props = {
 	width: number;
 	videoStyle: VideoPlayerFormat;
 	posterImage: string;
+	/**
+	 * The desired aspect ratio of the container of the video.
+	 * This can differ from the aspect ratio of the video itself.
+	 */
+	containerAspectRatio?: number;
 	fallbackImage: CardPictureProps['mainImage'];
 	fallbackImageSize: CardPictureProps['imageSize'];
 	fallbackImageLoading: CardPictureProps['loading'];
@@ -132,6 +152,7 @@ export const SelfHostedVideo = ({
 	width: expectedWidth,
 	videoStyle,
 	posterImage,
+	containerAspectRatio,
 	fallbackImage,
 	fallbackImageSize,
 	fallbackImageLoading,
@@ -665,7 +686,9 @@ export const SelfHostedVideo = ({
 		: undefined;
 
 	return (
-		<div css={videoAndBackgroundStyles(isCinemagraph)}>
+		<div
+			css={videoAndBackgroundStyles(isCinemagraph, containerAspectRatio)}
+		>
 			<figure
 				ref={setNode}
 				css={videoContainerStyles(width, height)}
