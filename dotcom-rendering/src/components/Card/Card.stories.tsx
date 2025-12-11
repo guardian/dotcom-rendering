@@ -60,7 +60,7 @@ const aBasicLink = {
 	},
 };
 
-const mainVideo: MainMedia = {
+const mainYoutubeVideo: MainMedia = {
 	type: 'YoutubeVideo',
 	id: '1234-abcdef-09876-xyz',
 	videoId: '8M_yH-e9cq8',
@@ -71,6 +71,22 @@ const mainVideo: MainMedia = {
 	width: 480,
 	height: 288,
 	origin: 'The Guardian',
+};
+
+const mainSelfHostedVideo: MainMedia = {
+	type: 'SelfHostedVideo',
+	videoStyle: 'Loop',
+	atomId: '123',
+	sources: [
+		{
+			src: 'https://uploads.guim.co.uk/2024/10/01/241001HeleneLoop_2.mp4',
+			mimeType: 'video/mp4',
+		},
+	],
+	height: 1080,
+	width: 1920,
+	image: `https://i.guim.co.uk/img/media/2eb01d138eb8fba6e59ce7589a60e3ff984f6a7a/0_0_1920_1080/1920.jpg?width=1200&quality=45&dpr=2&s=none`,
+	duration: 100,
 };
 
 const mainAudio: MainMedia = {
@@ -306,7 +322,7 @@ export const WithMediaType = () => {
 						design: ArticleDesign.Video,
 						theme: Pillar.Sport,
 					}}
-					mainMedia={{ ...mainVideo, duration: 30 }}
+					mainMedia={{ ...mainYoutubeVideo, duration: 30 }}
 					headlineText="Video"
 				/>
 			</CardWrapper>
@@ -318,8 +334,20 @@ export const WithMediaType = () => {
 						design: ArticleDesign.Video,
 						theme: Pillar.Sport,
 					}}
-					mainMedia={{ ...mainVideo, duration: 0 }}
+					mainMedia={{ ...mainYoutubeVideo, duration: 0 }}
 					headlineText="Video without duration"
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Video,
+						theme: Pillar.Sport,
+					}}
+					mainMedia={{ ...mainSelfHostedVideo }}
+					headlineText="Video with self-hosted video main media"
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -361,7 +389,7 @@ export const WithMediaTypeAndSublinks = () => {
 						design: ArticleDesign.Video,
 						theme: Pillar.Sport,
 					}}
-					mainMedia={{ ...mainVideo, duration: 30 }}
+					mainMedia={{ ...mainYoutubeVideo, duration: 30 }}
 					headlineText="Video"
 					supportingContent={twoSublinks}
 				/>
@@ -374,8 +402,21 @@ export const WithMediaTypeAndSublinks = () => {
 						design: ArticleDesign.Video,
 						theme: Pillar.Sport,
 					}}
-					mainMedia={{ ...mainVideo, duration: 0 }}
+					mainMedia={{ ...mainYoutubeVideo, duration: 0 }}
 					headlineText="Video without duration"
+					supportingContent={twoSublinks}
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Video,
+						theme: Pillar.Sport,
+					}}
+					mainMedia={{ ...mainSelfHostedVideo }}
+					headlineText="Self-hosted video"
 					supportingContent={twoSublinks}
 				/>
 			</CardWrapper>
@@ -420,7 +461,7 @@ export const WithMediaTypeSpecialReportAlt = () => {
 						design: ArticleDesign.Video,
 						theme: ArticleSpecial.SpecialReportAlt,
 					}}
-					mainMedia={{ ...mainVideo, duration: 30 }}
+					mainMedia={{ ...mainYoutubeVideo, duration: 30 }}
 					headlineText="Video"
 				/>
 			</CardWrapper>
@@ -1049,7 +1090,7 @@ export const WhenOpinionWithImageAtBottom = () => {
 	);
 };
 
-export const WhenVideoWithPlayButton = () => {
+export const WhenYoutubeVideoWithPlayButton = () => {
 	return (
 		<Section title="Play icons" padContent={false} centralBorder="partial">
 			<UL direction="row" padBottom={true}>
@@ -1064,7 +1105,7 @@ export const WhenVideoWithPlayButton = () => {
 						mediaPositionOnDesktop="top"
 						mediaSize="jumbo"
 						mediaPositionOnMobile="top"
-						mainMedia={mainVideo}
+						mainMedia={mainYoutubeVideo}
 					/>
 				</LI>
 			</UL>
@@ -1080,7 +1121,7 @@ export const WhenVideoWithPlayButton = () => {
 						mediaPositionOnDesktop="right"
 						mediaSize="large"
 						mediaPositionOnMobile="top"
-						mainMedia={mainVideo}
+						mainMedia={mainYoutubeVideo}
 					/>
 				</LI>
 				<LI percentage={'25%'} padSides={true} showDivider={true}>
@@ -1092,7 +1133,7 @@ export const WhenVideoWithPlayButton = () => {
 							theme: Pillar.News,
 						}}
 						mediaPositionOnDesktop="top"
-						mainMedia={mainVideo}
+						mainMedia={mainYoutubeVideo}
 						canPlayInline={false}
 					/>
 				</LI>
@@ -1109,7 +1150,7 @@ export const WhenVideoWithPlayButton = () => {
 						mediaPositionOnDesktop="top"
 						mediaSize="medium"
 						mediaPositionOnMobile="bottom"
-						mainMedia={mainVideo}
+						mainMedia={mainYoutubeVideo}
 					/>
 				</LI>
 				<LI percentage="50%">
@@ -1123,7 +1164,7 @@ export const WhenVideoWithPlayButton = () => {
 									theme: Pillar.News,
 								}}
 								mediaPositionOnDesktop="left"
-								mainMedia={mainVideo}
+								mainMedia={mainYoutubeVideo}
 								canPlayInline={false}
 							/>
 						</LI>
@@ -1136,7 +1177,7 @@ export const WhenVideoWithPlayButton = () => {
 									theme: Pillar.News,
 								}}
 								mediaPositionOnDesktop="right"
-								mainMedia={mainVideo}
+								mainMedia={mainYoutubeVideo}
 								canPlayInline={false}
 							/>
 						</LI>
@@ -1150,7 +1191,7 @@ export const WhenVideoWithPlayButton = () => {
 									theme: Pillar.News,
 								}}
 								mediaPositionOnDesktop="right"
-								mainMedia={mainVideo}
+								mainMedia={mainYoutubeVideo}
 								canPlayInline={false}
 							/>
 						</LI>
@@ -1170,7 +1211,7 @@ export const WhenVideoWithPlayButton = () => {
 						mediaPositionOnDesktop="right"
 						mediaSize="large"
 						mediaPositionOnMobile="top"
-						mainMedia={mainVideo}
+						mainMedia={mainYoutubeVideo}
 					/>
 				</LI>
 				<LI percentage={'33.333%'} padSides={true} showDivider={true}>
@@ -1184,7 +1225,7 @@ export const WhenVideoWithPlayButton = () => {
 						mediaPositionOnDesktop="top"
 						mediaPositionOnMobile="left"
 						mediaSize="medium"
-						mainMedia={mainVideo}
+						mainMedia={mainYoutubeVideo}
 					/>
 				</LI>
 			</UL>
