@@ -313,68 +313,98 @@ export const WithExternalLink = () => {
 
 export const WithMediaType = () => {
 	return (
-		<CardGroup>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Video,
-						theme: Pillar.Sport,
-					}}
-					mainMedia={{ ...mainYoutubeVideo, duration: 30 }}
-					headlineText="Video"
-				/>
-			</CardWrapper>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Video,
-						theme: Pillar.Sport,
-					}}
-					mainMedia={{ ...mainYoutubeVideo, duration: 0 }}
-					headlineText="Video without duration"
-				/>
-			</CardWrapper>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Video,
-						theme: Pillar.Sport,
-					}}
-					mainMedia={{ ...mainSelfHostedVideo }}
-					headlineText="Video with self-hosted video main media"
-				/>
-			</CardWrapper>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Audio,
-						theme: Pillar.Sport,
-					}}
-					mainMedia={mainAudio}
-					headlineText="Audio"
-				/>
-			</CardWrapper>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Gallery,
-						theme: Pillar.Sport,
-					}}
-					mainMedia={mainGallery}
-					headlineText="Gallery"
-				/>
-			</CardWrapper>
-		</CardGroup>
+		<>
+			<CardGroup>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Video,
+							theme: Pillar.Sport,
+						}}
+						mainMedia={{ ...mainYoutubeVideo, duration: 30 }}
+						headlineText="Video"
+					/>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Video,
+							theme: Pillar.Sport,
+						}}
+						mainMedia={{ ...mainYoutubeVideo, duration: 0 }}
+						headlineText="Video without duration"
+					/>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Video,
+							theme: Pillar.Sport,
+						}}
+						mainMedia={{ ...mainSelfHostedVideo }}
+						headlineText="Video with self-hosted video main media"
+					/>
+				</CardWrapper>
+			</CardGroup>
+			<CardGroup>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Audio,
+							theme: Pillar.Sport,
+						}}
+						mainMedia={mainAudio}
+						headlineText="Audio"
+					/>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Audio,
+							theme: Pillar.Sport,
+						}}
+						mainMedia={{ ...mainSelfHostedVideo }}
+						headlineText="Audio with self-hosted video main media"
+					/>
+				</CardWrapper>
+			</CardGroup>
+			<CardGroup>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Gallery,
+							theme: Pillar.Sport,
+						}}
+						mainMedia={mainGallery}
+						headlineText="Gallery"
+					/>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Gallery,
+							theme: Pillar.Sport,
+						}}
+						mainMedia={{ ...mainSelfHostedVideo }}
+						headlineText="Gallery with self-hosted video main media"
+					/>
+				</CardWrapper>
+			</CardGroup>
+		</>
 	);
 };
 
@@ -404,19 +434,6 @@ export const WithMediaTypeAndSublinks = () => {
 					}}
 					mainMedia={{ ...mainYoutubeVideo, duration: 0 }}
 					headlineText="Video without duration"
-					supportingContent={twoSublinks}
-				/>
-			</CardWrapper>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Video,
-						theme: Pillar.Sport,
-					}}
-					mainMedia={{ ...mainSelfHostedVideo }}
-					headlineText="Self-hosted video"
 					supportingContent={twoSublinks}
 				/>
 			</CardWrapper>
