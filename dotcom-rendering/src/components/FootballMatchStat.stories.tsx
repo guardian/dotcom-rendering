@@ -178,7 +178,7 @@ export const LargeNumbersOnDesktop = {
 	},
 } satisfies Story;
 
-export const TeamColourContrastCorrection = {
+export const TeamColours = {
 	render: (args) => (
 		<div
 			css={css`
