@@ -14,7 +14,7 @@ type Props = {
 	filterKeyEvents: boolean;
 	enhanceTweetsSwitch: boolean;
 	onFirstPage: boolean;
-	webURL: string;
+	url: string;
 	mostRecentBlockId: string;
 	hasPinnedPost: boolean;
 };
@@ -151,7 +151,7 @@ export const Liveness = ({
 	filterKeyEvents,
 	enhanceTweetsSwitch,
 	onFirstPage,
-	webURL,
+	url,
 	mostRecentBlockId,
 	hasPinnedPost,
 }: Props) => {
@@ -309,9 +309,9 @@ export const Liveness = ({
 			revealPendingBlocks();
 			setNumHiddenBlocks(0);
 		} else {
-			window.location.href = `${webURL}#${placeToScrollTo}`;
+			window.location.href = `${url}#${placeToScrollTo}`;
 		}
-	}, [hasPinnedPost, onFirstPage, webURL]);
+	}, [hasPinnedPost, onFirstPage, url]);
 
 	if (toastRoot && showToast) {
 		/**
