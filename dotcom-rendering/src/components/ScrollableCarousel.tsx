@@ -517,15 +517,17 @@ ScrollableCarousel.Item = ({
 ScrollableCarousel.SubgridItem = ({
 	subgridRows,
 	children,
+	borderColour = palette('--card-border-top'),
 }: {
 	subgridRows: number;
 	children: React.ReactNode;
+	borderColour?: string;
 }) => (
 	<li
 		css={[
 			itemStyles,
 			subgridStyles({ subgridRows }),
-			singleRowLeftBorderStyles,
+			singleRowLeftBorderStyles(borderColour),
 		]}
 	>
 		{children}
