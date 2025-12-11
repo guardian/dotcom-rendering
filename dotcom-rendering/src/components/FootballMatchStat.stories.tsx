@@ -184,12 +184,12 @@ export const TeamColourContrastCorrection = {
 					home={{
 						teamName: match.home.name,
 						teamColour: match.home.colour,
-						value: args.home.value,
+						value: 3,
 					}}
 					away={{
 						teamName: match.away.name,
 						teamColour: match.away.colour,
-						value: args.away.value,
+						value: 3,
 					}}
 					key={index}
 				/>
