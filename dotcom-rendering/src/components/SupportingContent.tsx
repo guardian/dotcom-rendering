@@ -197,7 +197,7 @@ export const SupportingContent = ({
 								<CardHeadline
 									format={{ design: 0, display: 0, theme: 0 }}
 									hasInlineKicker={true}
-									// linkTo={subLink.url}
+									linkTo={subLink.url}
 									showPulsingDot={
 										subLink.format.design ===
 										ArticleDesign.LiveBlog
@@ -209,7 +209,7 @@ export const SupportingContent = ({
 									}}
 								/>
 								{/* {subLink.kickerText} 
-								card age below obviously istag page is a lie
+								card age below obviously istag page is a lie, I'll tweak that in a bit
 								*/}
 								<CardAge
 									webPublication={{
