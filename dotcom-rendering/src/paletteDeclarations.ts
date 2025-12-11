@@ -7124,14 +7124,6 @@ const paletteColours = {
 		light: () => '#00679E', // replace with Source's `calculateHoverColour` when available
 		dark: () => '#00A1E6',
 	},
-	'--football-match-stat-contrast': {
-		light: () => sourcePalette.neutral[7],
-		dark: () => sourcePalette.neutral[86],
-	},
-	'--football-match-stat-border-contrast': {
-		light: () => sourcePalette.neutral[86],
-		dark: () => sourcePalette.neutral[38],
-	},
 	'--football-match-stat-text': {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[86],

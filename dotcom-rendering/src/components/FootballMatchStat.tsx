@@ -66,19 +66,19 @@ const largeNumberCss = css`
 
 const numberLightContrastCss = css`
 	@media (prefers-color-scheme: light) {
-		color: ${palette('--football-match-stat-contrast')};
+		color: ${palette('--football-match-stat-text')};
 	}
 	[data-color-scheme='light'] & {
-		color: ${palette('--football-match-stat-contrast')};
+		color: ${palette('--football-match-stat-text')};
 	}
 `;
 
 const numberDarkContrastCss = css`
 	@media (prefers-color-scheme: dark) {
-		color: ${palette('--football-match-stat-contrast')};
+		color: ${palette('--football-match-stat-text')};
 	}
 	[data-color-scheme='dark'] & {
-		color: ${palette('--football-match-stat-contrast')};
+		color: ${palette('--football-match-stat-text')};
 	}
 `;
 
@@ -102,19 +102,19 @@ const barCss = css`
 
 const barLightContrastCss = css`
 	@media (prefers-color-scheme: light) {
-		border: 1px solid ${palette('--football-match-stat-border-contrast')};
+		border: 1px solid ${palette('--football-match-stat-border')};
 	}
 	[data-color-scheme='light'] & {
-		border: 1px solid ${palette('--football-match-stat-border-contrast')};
+		border: 1px solid ${palette('--football-match-stat-border')};
 	}
 `;
 
 const barDarkContrastCss = css`
 	@media (prefers-color-scheme: dark) {
-		border: 1px solid ${palette('--football-match-stat-border-contrast')};
+		border: 1px solid ${palette('--football-match-stat-border')};
 	}
 	[data-color-scheme='dark'] & {
-		border: 1px solid ${palette('--football-match-stat-border-contrast')};
+		border: 1px solid ${palette('--football-match-stat-border')};
 	}
 `;
 
