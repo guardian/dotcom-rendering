@@ -17,7 +17,7 @@ import type { ActiveCue } from '../lib/useSubtitles';
 import { filterOutHlsSources, type Source } from '../lib/video';
 import { palette } from '../palette';
 import type { VideoPlayerFormat } from '../types/mainMedia';
-import { narrowPlayIconWidth, PlayIcon } from './Card/components/PlayIcon';
+import { narrowPlayIconDiameter, PlayIcon } from './Card/components/PlayIcon';
 import { SubtitleOverlay } from './SubtitleOverlay';
 import { VideoProgressBar } from './VideoProgressBar';
 
@@ -50,8 +50,8 @@ const subtitleStyles = (subtitleSize: SubtitleSize | undefined) => css`
 const playIconStyles = css`
 	position: absolute;
 	/* Center the icon */
-	top: calc(50% - ${narrowPlayIconWidth / 2}px);
-	left: calc(50% - ${narrowPlayIconWidth / 2}px);
+	top: calc(50% - ${narrowPlayIconDiameter / 2}px);
+	left: calc(50% - ${narrowPlayIconDiameter / 2}px);
 	cursor: pointer;
 	border: none;
 	background: none;
