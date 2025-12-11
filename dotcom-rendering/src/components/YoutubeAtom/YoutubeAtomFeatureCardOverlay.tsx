@@ -101,11 +101,7 @@ const immersiveOverlayStyles = css`
 
 const playIconStyles = css`
 	position: absolute;
-	/**
-      * Subject to change. We will wait to see how fronts editors use the
-	  * headlines and standfirsts before we decide on a final position.
-	  */
-	top: 35%;
+	top: calc(50% - ${narrowPlayIconDiameter / 2}px);
 	left: calc(50% - ${narrowPlayIconDiameter / 2}px);
 `;
 
