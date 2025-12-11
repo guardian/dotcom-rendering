@@ -16,7 +16,6 @@ import type {
 import type { MainMedia } from '../../types/mainMedia';
 import { ContainerOverrides } from '../ContainerOverrides';
 import { FrontSection } from '../FrontSection';
-import { LabsSection } from '../LabsSection';
 import { Section } from '../Section';
 import type { Props as CardProps } from './Card';
 import { Card } from './Card';
@@ -1408,7 +1407,6 @@ export const WithBranding = () => {
 							mediaSize="small"
 							containerPalette={containerPalette}
 							branding={branding}
-							showLabsRedesign={true}
 						/>
 					</LI>
 				</UL>
@@ -1477,42 +1475,18 @@ export const WithSpecialPaletteVariations = () => {
 	);
 	return (
 		<>
-			{containerPalettes.map((containerPalette) =>
-				containerPalette === 'Branded' ? (
-					<LabsSection
-						title={containerPalette}
-						discussionApiUrl=""
-						editionId={'UK'}
-						key={containerPalette}
-						ajaxUrl=""
-						collectionId=""
-						ophanComponentLink=""
-						ophanComponentName=""
-						pageId=""
-						sectionId=""
-						badge={{
-							imageSrc:
-								'https://static.theguardian.com/commercial/sponsor/22/Feb/2024/17ea91fc-659b-4c51-8410-9907241c1710-Guardian.orglogos-for%20badge.png',
-							href: 'https://theguardian.org',
-						}}
-					>
-						<Cards
-							isLabs={true}
-							containerPalette={containerPalette}
-						/>
-					</LabsSection>
-				) : (
-					<FrontSection
-						title={containerPalette}
-						discussionApiUrl=""
-						editionId={'UK'}
-						containerPalette={containerPalette}
-						key={containerPalette}
-					>
-						<Cards containerPalette={containerPalette} />
-					</FrontSection>
-				),
-			)}
+			{containerPalettes.map((containerPalette) => (
+				<FrontSection
+					title={containerPalette}
+					discussionApiUrl=""
+					editionId={'UK'}
+					containerPalette={containerPalette}
+					key={containerPalette}
+					isLabs={containerPalette === 'Branded'}
+				>
+					<Cards containerPalette={containerPalette} />
+				</FrontSection>
+			))}
 		</>
 	);
 };
@@ -1585,42 +1559,18 @@ export const DynamoWithSpecialPaletteVariations = () => {
 
 	return (
 		<>
-			{containerPalettes.map((containerPalette) =>
-				containerPalette === 'Branded' ? (
-					<LabsSection
-						title={containerPalette}
-						discussionApiUrl=""
-						editionId={'UK'}
-						key={containerPalette}
-						ajaxUrl=""
-						collectionId=""
-						ophanComponentLink=""
-						ophanComponentName=""
-						pageId=""
-						sectionId=""
-						badge={{
-							imageSrc:
-								'https://static.theguardian.com/commercial/sponsor/22/Feb/2024/17ea91fc-659b-4c51-8410-9907241c1710-Guardian.orglogos-for%20badge.png',
-							href: 'https://theguardian.org',
-						}}
-					>
-						<DynamoCard
-							isLabs={true}
-							containerPalette={containerPalette}
-						/>
-					</LabsSection>
-				) : (
-					<FrontSection
-						title={containerPalette}
-						discussionApiUrl=""
-						editionId={'UK'}
-						containerPalette={containerPalette}
-						key={containerPalette}
-					>
-						<DynamoCard containerPalette={containerPalette} />
-					</FrontSection>
-				),
-			)}
+			{containerPalettes.map((containerPalette) => (
+				<FrontSection
+					title={containerPalette}
+					discussionApiUrl=""
+					editionId={'UK'}
+					containerPalette={containerPalette}
+					key={containerPalette}
+					isLabs={containerPalette === 'Branded'}
+				>
+					<DynamoCard containerPalette={containerPalette} />
+				</FrontSection>
+			))}
 		</>
 	);
 };

@@ -98,8 +98,6 @@ type Props = {
 	isAboveMobileAd?: boolean;
 	/** Indicates whether this is a Guardian Labs container */
 	isLabs?: boolean;
-	/** Feature switch for the labs redesign work */
-	showLabsRedesign?: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -623,7 +621,6 @@ export const FrontSection = ({
 	isAboveDesktopAd = false,
 	isAboveMobileAd = false,
 	isLabs = false,
-	showLabsRedesign = false,
 }: Props) => {
 	const isToggleable = toggleable && !!sectionId;
 	const showVerticalRule = !hasPageSkin;
@@ -700,7 +697,7 @@ export const FrontSection = ({
 					]}
 				/>
 
-				{isLabs && showLabsRedesign ? (
+				{isLabs ? (
 					<div css={labsSectionHeaderStyles}>
 						<LabsSectionHeader
 							title={title}
@@ -747,7 +744,7 @@ export const FrontSection = ({
 									showDateHeader={showDateHeader}
 									editionId={editionId}
 									containerLevel={containerLevel}
-									isLabs={isLabs && showLabsRedesign}
+									isLabs={isLabs}
 								/>
 							}
 							collectionBranding={collectionBranding}
