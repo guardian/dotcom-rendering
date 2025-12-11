@@ -6,10 +6,10 @@ export function allExpirationsValid(tests: ABTest[]): boolean {
 		const now = new Date();
 
 		if (expires < now) {
-			throw new Error(
+			console.warn(
 				`${
 					test.name
-				} has an expiration date in the past: ${expires.toISOString()}, has it expired? If it doesn't belong to you or your team, you can set the status to OFF for now.`,
+				} has an expiration date in the past: ${expires.toISOString()}, has it expired?`,
 			);
 		}
 	});
