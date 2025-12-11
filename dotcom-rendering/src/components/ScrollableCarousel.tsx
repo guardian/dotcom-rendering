@@ -136,7 +136,6 @@ const subgridStyles = ({ subgridRows }: { subgridRows: number }) => css`
 		grid-column: span 1;
 		grid-row: span ${subgridRows};
 		grid-template-rows: subgrid;
-		grid-template-columns: subgrid;
 	}
 `;
 
