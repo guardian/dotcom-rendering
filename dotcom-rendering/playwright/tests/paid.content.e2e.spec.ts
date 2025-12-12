@@ -80,8 +80,8 @@ test.describe('Paid content tests', () => {
 
 		await waitForIsland(page, 'OnwardsUpper');
 
-		await expectToBeVisible(page, '[data-testid=card-branding-logo]');
-		await page.locator('[data-testid=card-branding-logo]').first().click();
+		await expectToBeVisible(page, 'li a[data-testid=branding-logo]');
+		await page.locator('li a[data-testid=branding-logo]').first().click();
 
 		await relatedClickEventRequest;
 	});
