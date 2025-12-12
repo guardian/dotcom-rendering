@@ -7051,6 +7051,10 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[93],
 		dark: () => sourcePalette.neutral[38],
 	},
+	'--football-match-info-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[10],
+	},
 	'--football-match-list-error': {
 		light: () => sourcePalette.error[400],
 		dark: () => sourcePalette.error[500],
@@ -7071,9 +7075,13 @@ const paletteColours = {
 		light: () => '#00679E', // replace with Source's `calculateHoverColour` when available
 		dark: () => '#00A1E6',
 	},
-	'--football-match-stat-name': {
+	'--football-match-stat-text': {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[86],
+	},
+	'--football-match-substitution-icon': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[60],
 	},
 	'--football-score-border': {
 		light: () => sourcePalette.neutral[7],

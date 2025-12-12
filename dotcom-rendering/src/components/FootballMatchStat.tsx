@@ -44,7 +44,7 @@ const labelCss = css`
 	${textSansBold14};
 	grid-area: label;
 	justify-self: center;
-	color: ${palette('--football-match-stat-name')};
+	color: ${palette('--football-match-stat-text')};
 	${from.desktop} {
 		${textSansBold15};
 	}
