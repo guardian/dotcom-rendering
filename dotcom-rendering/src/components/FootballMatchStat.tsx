@@ -12,6 +12,11 @@ import { palette } from '../palette';
 
 const containerCss = css`
 	position: relative;
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	grid-template-areas:
+		'home-stat label away-stat'
+		'graph     graph  graph';
 	padding: 5px 10px 10px;
 	border: 1px solid ${palette('--football-match-stat-border')};
 	border-radius: 6px;
@@ -26,17 +31,12 @@ const containerCss = css`
 	}
 `;
 
-const headerCss = css`
-	display: grid;
-	grid-template-columns: auto 1fr auto;
-	grid-template-areas: 'home-stat label away-stat';
-`;
-
 const raiseLabelCss = css`
 	${from.desktop} {
 		grid-template-areas:
 			'label     label label'
-			'home-stat .     away-stat';
+			'home-stat .     away-stat'
+			'graph     graph graph';
 	}
 `;
 
@@ -67,10 +67,11 @@ const awayStatCss = css`
 	justify-self: end;
 `;
 
-const chartCss = css`
+const graphCss = css`
 	position: relative;
 	display: flex;
 	gap: 10px;
+	grid-area: graph;
 `;
 
 const barCss = css`
@@ -110,41 +111,39 @@ export const FootballMatchStat = ({
 	const awayPercentage = (away.value / (home.value + away.value)) * 100;
 
 	return (
-		<div css={containerCss}>
-			<div css={[headerCss, raiseLabelOnDesktop && raiseLabelCss]}>
-				<span css={labelCss}>{label}</span>
+		<div css={[containerCss, raiseLabelOnDesktop && raiseLabelCss]}>
+			<span css={labelCss}>{label}</span>
+			<span
+				css={[numberCss, largeNumbersOnDesktop && largeNumberCss]}
+				style={{ '--match-stat-team-colour': home.teamColour }}
+			>
 				<span
-					css={[numberCss, largeNumbersOnDesktop && largeNumberCss]}
-					style={{ '--match-stat-team-colour': home.teamColour }}
+					css={css`
+						${visuallyHidden}
+					`}
 				>
-					<span
-						css={css`
-							${visuallyHidden}
-						`}
-					>
-						{home.teamName}
-					</span>
-					{formatValue(home.value, showPercentage)}
+					{home.teamName}
 				</span>
+				{formatValue(home.value, showPercentage)}
+			</span>
+			<span
+				css={[
+					numberCss,
+					awayStatCss,
+					largeNumbersOnDesktop && largeNumberCss,
+				]}
+				style={{ '--match-stat-team-colour': away.teamColour }}
+			>
 				<span
-					css={[
-						numberCss,
-						awayStatCss,
-						largeNumbersOnDesktop && largeNumberCss,
-					]}
-					style={{ '--match-stat-team-colour': away.teamColour }}
+					css={css`
+						${visuallyHidden}
+					`}
 				>
-					<span
-						css={css`
-							${visuallyHidden}
-						`}
-					>
-						{away.teamName}
-					</span>
-					{formatValue(away.value, showPercentage)}
+					{away.teamName}
 				</span>
-			</div>
-			<div aria-hidden="true" css={chartCss}>
+				{formatValue(away.value, showPercentage)}
+			</span>
+			<div aria-hidden="true" css={graphCss}>
 				<div
 					css={barCss}
 					style={{
