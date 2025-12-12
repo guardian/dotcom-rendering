@@ -346,6 +346,13 @@ export const YoutubeVideoCannotPlayInline = {
 	},
 } satisfies Story;
 
+export const YoutubeVideoMainMediaCannotPlayInline = {
+	args: {
+		...YoutubeVideoMainMedia.args,
+		canPlayInline: false,
+	},
+} satisfies Story;
+
 export const WithTrailText = {
 	args: {
 		kickerText: undefined,

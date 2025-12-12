@@ -256,16 +256,14 @@ const getMedia = ({
 	imageUrl,
 	imageAltText,
 	mainMedia,
-	isVideoArticle,
 	showVideo,
 }: {
 	imageUrl?: string;
 	imageAltText?: string;
 	mainMedia?: MainMedia;
-	isVideoArticle: boolean;
 	showVideo?: boolean;
 }): Media | undefined => {
-	if (isVideoArticle && mainMedia?.type === 'YoutubeVideo' && showVideo) {
+	if (mainMedia?.type === 'YoutubeVideo' && showVideo) {
 		return {
 			type: 'youtube-video',
 			mainMedia,
@@ -408,7 +406,6 @@ export const FeatureCard = ({
 		imageUrl: image?.src,
 		imageAltText: image?.altText,
 		mainMedia,
-		isVideoArticle,
 		showVideo: showVideo && canPlayInline,
 	});
 
