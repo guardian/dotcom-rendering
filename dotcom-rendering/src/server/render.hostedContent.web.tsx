@@ -1,7 +1,7 @@
 import { HostedArticleLayout } from '../layouts/HostedArticleLayout';
 import { HostedGalleryLayout } from '../layouts/HostedGalleryLayout';
 import { renderToStringWithEmotion } from '../lib/emotion';
-import { HostedContent } from '../types/hostedContent';
+import type { HostedContent } from '../types/hostedContent';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 type Props = {
@@ -21,6 +21,7 @@ export const renderHtml = ({ hostedContent }: Props) => {
 		<HostedLayout renderingTarget={renderingTarget} />,
 	);
 
+	// We currently don't send any of the data required for page config or window.guardian setup from frontend
 	const pageHtml = htmlPageTemplate({
 		scriptTags: [],
 		css: extractedCss,

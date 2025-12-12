@@ -1,11 +1,11 @@
-import { RequestHandler } from 'express';
-import { recordTypeAndPlatform } from './lib/logging-store';
+import type { RequestHandler } from 'express';
 import { validateAsFEHostedContent } from '../model/validate';
 import { enhanceHostedContentType } from '../types/hostedContent';
-import { renderHtml } from './render.hostedContent.web';
 import { makePrefetchHeader } from './lib/header';
+import { recordTypeAndPlatform } from './lib/logging-store';
+import { renderHtml } from './render.hostedContent.web';
 
-export const handleArticle: RequestHandler = ({ body }, res) => {
+export const handleHostedContent: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'web');
 
 	const frontendData = validateAsFEHostedContent(body);
