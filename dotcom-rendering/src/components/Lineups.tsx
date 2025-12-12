@@ -85,8 +85,8 @@ const Title = ({ text, id }: { text: string; id: string }) => (
 	<h3
 		id={id}
 		css={css`
-			border-bottom: 1px solid ${palette('--football-match-info-border')};
-			color: ${palette('--football-competition-select-text')};
+			border-bottom: 1px solid ${palette('--football-match-stat-border')};
+			color: ${palette('--football-match-stat-text')};
 			grid-column: home-start / away-end;
 			padding-bottom: ${space[1]}px;
 			${textSansBold14}
@@ -132,7 +132,7 @@ const PlayerList = ({
 };
 
 const sectionStyles = css`
-	border: 1px solid ${palette('--football-match-info-border')};
+	border: 1px solid ${palette('--football-match-stat-border')};
 	margin: ${space[2]}px;
 	border-radius: 6px;
 
@@ -163,7 +163,7 @@ const awayStyles = css`
 		top: 0;
 		bottom: 0;
 		width: 1px;
-		background-color: ${palette('--football-match-info-border')};
+		background-color: ${palette('--football-match-stat-border')};
 	}
 `;
 
@@ -191,7 +191,7 @@ const playerName = css`
 	${from.tablet} {
 		${textSans15}
 	}
-	color: ${palette('--football-competition-select-text')};
+	color: ${palette('--football-match-stat-text')};
 `;
 
 const BackgroundRed = sourcePalette.news[400];
@@ -214,7 +214,7 @@ const substitute = css`
 	padding: 0.5px ${space[1]}px 1.5px ${space[1]}px;
 	display: flex;
 	align-items: center;
-	color: ${palette('--football-competition-select-text')};
+	color: ${palette('--football-match-stat-text')};
 	opacity: 0.6;
 	gap: ${space[0]}px;
 
