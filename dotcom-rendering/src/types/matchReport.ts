@@ -13,4 +13,5 @@ export type MatchReportType = {
 	comments: string;
 	minByMinUrl: string;
 	reportUrl: string;
+	status: string;
 };

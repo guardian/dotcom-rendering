@@ -554,6 +554,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									}
 									editionId={article.editionId}
 									shouldHideAds={article.shouldHideAds}
+									idApiUrl={article.config.idApiUrl}
 								/>
 								{showBodyEndSlot && (
 									<Island

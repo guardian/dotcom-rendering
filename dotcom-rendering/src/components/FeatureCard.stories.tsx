@@ -112,9 +112,9 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Standard: Story = {};
+export const Standard = {} satisfies Story;
 
-export const Immersive: Story = {
+export const Immersive = {
 	args: {
 		aspectRatio: '5:3',
 		mobileAspectRatio: '4:5',
@@ -124,9 +124,9 @@ export const Immersive: Story = {
 		trailText:
 			'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
 	},
-};
+} satisfies Story;
 
-export const Labs: Story = {
+export const Labs = {
 	args: {
 		byline: undefined,
 		format: {
@@ -158,17 +158,17 @@ export const Labs: Story = {
 		},
 		showLabsRedesign: true,
 	},
-};
+} satisfies Story;
 
-export const LabsImmersive: Story = {
+export const LabsImmersive = {
 	args: {
 		...Labs.args,
 		...Immersive.args,
 		trailText: undefined,
 	},
-};
+} satisfies Story;
 
-export const Review: Story = {
+export const Review = {
 	args: {
 		image: {
 			src: 'https://media.guim.co.uk/59b7005b3ee36fcdf1215e4424fa6d141a805e3a/0_236_1365_1705/master/1365.jpg',
@@ -180,16 +180,16 @@ export const Review: Story = {
 			'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
 		starRating: 3,
 	},
-};
+} satisfies Story;
 
-export const ReviewImmersive: Story = {
+export const ReviewImmersive = {
 	args: {
 		...Review.args,
 		...Immersive.args,
 	},
-};
+} satisfies Story;
 
-export const SportLiveBlog: Story = {
+export const SportLiveBlog = {
 	args: {
 		image: {
 			src: 'https://media.guim.co.uk/e9a9adba2ba6a984317eeb42ad0ef5dfbee0ed1d/0_229_4972_2984/master/4972.jpg',
@@ -203,16 +203,16 @@ export const SportLiveBlog: Story = {
 		showPulsingDot: true,
 		showClock: true,
 	},
-};
+} satisfies Story;
 
-export const SportLiveBlogImmersive: Story = {
+export const SportLiveBlogImmersive = {
 	args: {
 		...SportLiveBlog.args,
 		...Immersive.args,
 	},
-};
+} satisfies Story;
 
-export const Opinion: Story = {
+export const Opinion = {
 	args: {
 		image: {
 			src: 'https://media.guim.co.uk/e07c6b2dbd2332b89744e0548dc10f5b2dfa58e2/0_2482_6767_4058/master/6767.jpg',
@@ -221,16 +221,16 @@ export const Opinion: Story = {
 		showQuotes: true,
 		format: { ...cardProps.format, theme: Pillar.Opinion },
 	},
-};
+} satisfies Story;
 
-export const OpinionImmersive: Story = {
+export const OpinionImmersive = {
 	args: {
 		...Opinion.args,
 		...Immersive.args,
 	},
-};
+} satisfies Story;
 
-export const Podcast: Story = {
+export const Podcast = {
 	args: {
 		format: {
 			...cardProps.format,
@@ -249,16 +249,16 @@ export const Podcast: Story = {
 			duration: '55:09',
 		},
 	},
-};
+} satisfies Story;
 
-export const PodcastImmersive: Story = {
+export const PodcastImmersive = {
 	args: {
 		...Podcast.args,
 		...Immersive.args,
 	},
-};
+} satisfies Story;
 
-export const Gallery: Story = {
+export const Gallery = {
 	args: {
 		format: {
 			...cardProps.format,
@@ -273,17 +273,19 @@ export const Gallery: Story = {
 			count: '12',
 		},
 	},
-};
+} satisfies Story;
 
-export const GalleryImmersive: Story = {
+export const GalleryImmersive = {
 	args: {
 		...Gallery.args,
 		...Immersive.args,
 	},
-};
+} satisfies Story;
 
-// A video article
-export const Video: Story = {
+/**
+ * A video article
+ */
+export const YoutubeVideo = {
 	args: {
 		format: {
 			...cardProps.format,
@@ -303,41 +305,41 @@ export const Video: Story = {
 			title: 'Video Title',
 			duration: 120,
 			expired: false,
-			image: 'https://media.guim.co.uk/video-thumbnail.jpg',
+			image: 'https://media.guim.co.uk/f2aedd24e5414073a653f68112e0ad070c6f4a2b/254_0_7493_4500/master/7493.jpg',
 		},
+		canPlayInline: true,
+		showVideo: true,
 	},
-};
+} satisfies Story;
 
-export const VideoImmersive: Story = {
+export const YoutubeVideoImmersive = {
 	args: {
-		...Video.args,
+		...YoutubeVideo.args,
 		...Immersive.args,
 	},
-};
+} satisfies Story;
 
-// A standard (non-video) article with a video main media
-export const VideoMainMedia: Story = {
+/**
+ * A standard (non-video) article with a video main media
+ */
+export const YoutubeVideoMainMedia = {
 	args: {
-		...Video.args,
-		image: {
-			src: 'https://media.guim.co.uk/4612af5f4667888fa697139cf570b6373d93a710/2446_345_3218_1931/master/3218.jpg',
-			altText: 'alt text',
-		},
+		...YoutubeVideo.args,
 		format: {
-			...cardProps.format,
+			...YoutubeVideo.args.format,
 			design: ArticleDesign.Standard,
 		},
 	},
-};
+} satisfies Story;
 
-export const VideoMainMediaImmersive: Story = {
+export const YoutubeVideoMainMediaImmersive = {
 	args: {
-		...VideoMainMedia.args,
+		...YoutubeVideoMainMedia.args,
 		...Immersive.args,
 	},
-};
+} satisfies Story;
 
-export const WithTrailText: Story = {
+export const WithTrailText = {
 	args: {
 		kickerText: undefined,
 		headlineText: 'Nigel Slater’s recipe for coffee cream liqueur trifle',
@@ -350,32 +352,32 @@ export const WithTrailText: Story = {
 		trailText:
 			'Part trifle, part tiramisu… this midweek treat ticks all the right boxes',
 	},
-};
+} satisfies Story;
 
-export const WithTrailTextImmersive: Story = {
+export const WithTrailTextImmersive = {
 	args: {
 		...WithTrailText.args,
 		...Immersive.args,
 	},
-};
+} satisfies Story;
 
-export const WithSublinks: Story = {
+export const WithSublinks = {
 	args: {
 		supportingContent,
 	},
-};
+} satisfies Story;
 
-export const WithSublinksImmersive: Story = {
+export const WithSublinksImmersive = {
 	args: {
 		...WithSublinks.args,
 		...Immersive.args,
 	},
-};
+} satisfies Story;
 
-export const WithSublinksLabsImmersive: Story = {
+export const WithSublinksLabsImmersive = {
 	args: {
 		...WithSublinks.args,
 		...Labs.args,
 		...Immersive.args,
 	},
-};
+} satisfies Story;

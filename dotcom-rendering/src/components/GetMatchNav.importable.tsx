@@ -20,6 +20,7 @@ type Props = {
 type MatchData = {
 	homeTeam: Pick<TeamType, 'name' | 'score' | 'scorers' | 'crest'>;
 	awayTeam: Pick<TeamType, 'name' | 'score' | 'scorers' | 'crest'>;
+	status: string;
 	comments?: string;
 	minByMinUrl?: string;
 	venue?: string;
@@ -35,6 +36,7 @@ const fallbackTeam = {
 const fallbackData = {
 	homeTeam: fallbackTeam,
 	awayTeam: fallbackTeam,
+	status: '',
 } satisfies MatchData;
 
 const validateMatchData = (data: unknown): data is MatchData => {

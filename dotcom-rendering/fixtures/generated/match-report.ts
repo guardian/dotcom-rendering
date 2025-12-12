@@ -274,7 +274,7 @@ export const matchReport: MatchReportType = {
 		shotsOff: 6,
 		corners: 10,
 		fouls: 4,
-		colours: '#ffffff',
+		colours: '#01009a',
 		crest: 'https://sport.guim.co.uk/football/crests/120/7699.png',
 	},
 	awayTeam: {
@@ -563,4 +563,5 @@ export const matchReport: MatchReportType = {
 		'https://www.theguardian.com/football/live/2025/jul/08/germany-v-denmark-euro-2025-live',
 	reportUrl:
 		'https://www.theguardian.com/football/2025/jul/08/germany-denmark-women-euro-2025-group-c-match-report',
+	status: 'FT',
 };

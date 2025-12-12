@@ -96,35 +96,14 @@ const getOptimisedPosterImage = (mainImage: string): string => {
 
 /**
  * Runs a series of browser-specific checks to determine if the video has audio.
+ * We have run a test to check that all supported browsers are covered by these checks.
  */
-const doesVideoHaveAudio = (video: HTMLVideoElement): boolean => {
-	// If there exists a browser that does not support any of these properties, we are
-	// unable to detect whether the video has audio. Therefore, we assume it has audio,
-	// so that the unmute/mute icon is displayed.
-	if (
-		!('mozHasAudio' in video) &&
-		!('webkitAudioDecodedByteCount' in video) &&
-		!('audioTracks' in video)
-	) {
-		// Gather data on what browsers do not support these properties.
-		window.guardian.modules.sentry.reportError(
-			new Error(
-				'Could not determine if video has audio. This is likely due to the browser not supporting the necessary properties.',
-			),
-			'self-hosted-video',
-		);
-
-		return true;
-	}
-
-	return (
-		('mozHasAudio' in video && Boolean(video.mozHasAudio)) ||
-		('webkitAudioDecodedByteCount' in video &&
-			Boolean(video.webkitAudioDecodedByteCount)) ||
-		('audioTracks' in video &&
-			Boolean((video.audioTracks as { length: number }).length))
-	);
-};
+const doesVideoHaveAudio = (video: HTMLVideoElement): boolean =>
+	('mozHasAudio' in video && Boolean(video.mozHasAudio)) ||
+	('webkitAudioDecodedByteCount' in video &&
+		Boolean(video.webkitAudioDecodedByteCount)) ||
+	('audioTracks' in video &&
+		Boolean((video.audioTracks as { length: number }).length));
 
 type Props = {
 	sources: Source[];
@@ -149,8 +128,8 @@ export const SelfHostedVideo = ({
 	sources,
 	atomId,
 	uniqueId,
-	height,
-	width,
+	height: expectedHeight,
+	width: expectedWidth,
 	videoStyle,
 	posterImage,
 	fallbackImage,
@@ -179,14 +158,19 @@ export const SelfHostedVideo = ({
 		null,
 	);
 	const [hasPageBecomeActive, setHasPageBecomeActive] = useState(false);
-
 	/**
-	 * Keep a track of whether the video has been in view. We only
-	 * want to pause the video if it has been in view.
+	 * Keeps track of whether the video has been in view.
+	 * For example, we only want to try to pause the video if it has been in view.
 	 */
 	const [hasBeenInView, setHasBeenInView] = useState(false);
 	const [hasBeenPlayed, setHasBeenPlayed] = useState(false);
 	const [hasTrackedPlay, setHasTrackedPlay] = useState(false);
+	/**
+	 * The actual video is a better source of truth of its dimensions.
+	 * The width and height from props are useful to prevent CLS.
+	 */
+	const [width, setWidth] = useState(expectedWidth);
+	const [height, setHeight] = useState(expectedHeight);
 
 	const VISIBILITY_THRESHOLD = 0.5;
 
@@ -522,8 +506,6 @@ export const SelfHostedVideo = ({
 		setPreloadPartialData(isAutoplayAllowed === false || !!isInView);
 	}, [isAutoplayAllowed, isInView]);
 
-	if (renderingTarget !== 'Web') return null;
-
 	if (adapted) {
 		return FallbackImageComponent;
 	}
@@ -548,8 +530,14 @@ export const SelfHostedVideo = ({
 	};
 
 	const handleLoadedData = () => {
-		if (vidRef.current) {
-			setHasAudio(doesVideoHaveAudio(vidRef.current));
+		const video = vidRef.current;
+		if (!video) return;
+
+		setHasAudio(doesVideoHaveAudio(video));
+
+		if (video.videoWidth > 0 && video.videoHeight > 0) {
+			setWidth(video.videoWidth);
+			setHeight(video.videoHeight);
 		}
 	};
 

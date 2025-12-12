@@ -36,6 +36,7 @@ export type FEFootballMatch = {
 	id: string;
 	homeTeam: FEFootballTeam;
 	awayTeam: FEFootballTeam;
+	status: string;
 	comments?: string;
 };
 

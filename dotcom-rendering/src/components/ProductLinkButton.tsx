@@ -15,6 +15,7 @@ type ProductLinkButtonProps = {
 	url: string;
 	size?: 'default' | 'small';
 	fullwidth?: boolean;
+	fullWidthText?: boolean;
 	priority?: ButtonPriority;
 	dataComponent?: string;
 	minimisePadding?: boolean;
@@ -54,6 +55,7 @@ export const ProductLinkButton = ({
 	size = 'default',
 	fullwidth = false,
 	minimisePadding = false,
+	fullWidthText = false,
 	priority = 'primary',
 	dataComponent,
 }: ProductLinkButtonProps) => {
@@ -81,7 +83,10 @@ export const ProductLinkButton = ({
 			cssOverrides={cssOverrides}
 		>
 			<span
+				style={fullWidthText ? { width: '100%' } : {}}
 				css={css`
+					text-wrap: balance;
+					text-align: center;
 					white-space: normal;
 					padding: 4px 0 4px;
 				`}
