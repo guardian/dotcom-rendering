@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	palette as sourcePalette,
 	space,
 	textSansBold14,
 	textSansBold15,
@@ -8,6 +9,7 @@ import {
 	textSansBold28,
 	visuallyHidden,
 } from '@guardian/source/foundations';
+import { getContrast } from '../lib/colour';
 import { palette } from '../palette';
 
 const containerCss = css`
@@ -62,6 +64,24 @@ const largeNumberCss = css`
 	}
 `;
 
+const numberLightContrastCss = css`
+	@media (prefers-color-scheme: light) {
+		color: ${palette('--football-match-stat-text')};
+	}
+	[data-color-scheme='light'] & {
+		color: ${palette('--football-match-stat-text')};
+	}
+`;
+
+const numberDarkContrastCss = css`
+	@media (prefers-color-scheme: dark) {
+		color: ${palette('--football-match-stat-text')};
+	}
+	[data-color-scheme='dark'] & {
+		color: ${palette('--football-match-stat-text')};
+	}
+`;
+
 const awayStatCss = css`
 	grid-area: away-stat;
 	justify-self: end;
@@ -78,6 +98,24 @@ const barCss = css`
 	width: var(--match-stat-percentage);
 	background-color: var(--match-stat-team-colour);
 	border-radius: 8px;
+`;
+
+const barLightContrastCss = css`
+	@media (prefers-color-scheme: light) {
+		border: 1px solid ${palette('--football-match-stat-border')};
+	}
+	[data-color-scheme='light'] & {
+		border: 1px solid ${palette('--football-match-stat-border')};
+	}
+`;
+
+const barDarkContrastCss = css`
+	@media (prefers-color-scheme: dark) {
+		border: 1px solid ${palette('--football-match-stat-border')};
+	}
+	[data-color-scheme='dark'] & {
+		border: 1px solid ${palette('--football-match-stat-border')};
+	}
 `;
 
 type MatchStatistic = {
@@ -109,12 +147,41 @@ export const FootballMatchStat = ({
 	const homePercentage = (home.value / (home.value + away.value)) * 100;
 	const awayPercentage = (away.value / (home.value + away.value)) * 100;
 
+	const minimumContrast = 3.1; // https://www.w3.org/TR/WCAG21/#contrast-minimum
+
+	const backgroundLight = sourcePalette.neutral[97];
+	const backgroundDark = sourcePalette.neutral[10];
+
+	const homeNeedsContrastWhenLight =
+		getContrast(home.teamColour, backgroundLight) < minimumContrast;
+	const awayNeedsContrastWhenLight =
+		getContrast(away.teamColour, backgroundLight) < minimumContrast;
+	const homeNeedsContrastWhenDark =
+		getContrast(home.teamColour, backgroundDark) < minimumContrast;
+	const awayNeedsContrastWhenDark =
+		getContrast(away.teamColour, backgroundDark) < minimumContrast;
+
+	/**
+	 * If either team colour lacks sufficient contrast we adjust both numbers
+	 * so we don't appear to be favouring one team over the other. For the chart
+	 * we keep the team colour and apply a contrasting border colour.
+	 */
+	const numbersNeedContrastWhenLight =
+		homeNeedsContrastWhenLight || awayNeedsContrastWhenLight;
+	const numbersNeedContrastWhenDark =
+		homeNeedsContrastWhenDark || awayNeedsContrastWhenDark;
+
 	return (
 		<div css={containerCss}>
 			<div css={[headerCss, raiseLabelOnDesktop && raiseLabelCss]}>
 				<span css={labelCss}>{label}</span>
 				<span
-					css={[numberCss, largeNumbersOnDesktop && largeNumberCss]}
+					css={[
+						numberCss,
+						largeNumbersOnDesktop && largeNumberCss,
+						numbersNeedContrastWhenLight && numberLightContrastCss,
+						numbersNeedContrastWhenDark && numberDarkContrastCss,
+					]}
 					style={{ '--match-stat-team-colour': home.teamColour }}
 				>
 					<span
@@ -131,6 +198,8 @@ export const FootballMatchStat = ({
 						numberCss,
 						awayStatCss,
 						largeNumbersOnDesktop && largeNumberCss,
+						numbersNeedContrastWhenLight && numberLightContrastCss,
+						numbersNeedContrastWhenDark && numberDarkContrastCss,
 					]}
 					style={{ '--match-stat-team-colour': away.teamColour }}
 				>
@@ -146,14 +215,22 @@ export const FootballMatchStat = ({
 			</div>
 			<div aria-hidden="true" css={chartCss}>
 				<div
-					css={barCss}
+					css={[
+						barCss,
+						homeNeedsContrastWhenLight && barLightContrastCss,
+						homeNeedsContrastWhenDark && barDarkContrastCss,
+					]}
 					style={{
 						'--match-stat-percentage': `${homePercentage}%`,
 						'--match-stat-team-colour': home.teamColour,
 					}}
 				></div>
 				<div
-					css={barCss}
+					css={[
+						barCss,
+						awayNeedsContrastWhenLight && barLightContrastCss,
+						awayNeedsContrastWhenDark && barDarkContrastCss,
+					]}
 					style={{
 						'--match-stat-percentage': `${awayPercentage}%`,
 						'--match-stat-team-colour': away.teamColour,
