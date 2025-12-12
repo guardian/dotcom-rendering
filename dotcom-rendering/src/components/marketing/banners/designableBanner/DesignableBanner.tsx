@@ -291,12 +291,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 			separateArticleCount) &&
 		articleCounts.forTargetedWeeks >= 5;
 
-	// Add detection for the new "Maybe later" AB variant and pass flag to CTAs.
-	// This reuses the existing onCloseClick handler (same behaviour as the Close link).
-	const isMaybeLaterVariant = tracking.abTestVariant.includes(
-		'COLLAPSABLE_V2_MAYBE_LATER',
-	);
-
 	return (
 		<div
 			ref={bannerRef}
@@ -313,7 +307,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 					isCollapsableBanner && isCollapsed
 						? styles.collapsedLayoutOverrides(
 								cardsImageOrSpaceTemplateString,
-								isMaybeLaterVariant,
 						  )
 						: styles.layoutOverrides(
 								cardsImageOrSpaceTemplateString,
@@ -412,9 +405,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									templateSettings.secondaryCtaSettings
 								}
 								onCloseClick={
-									isMaybeLaterVariant && isCollapsed
-										? onCloseClick
-										: undefined
+									isCollapsed ? onCloseClick : undefined
 								}
 							/>
 						</div>
@@ -426,7 +417,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 						isCollapsableBanner
 							? styles.closeAndCollapseButtonContainer(
 									isCollapsed,
-									isMaybeLaterVariant,
 							  )
 							: styles.closeButtonContainer
 					}
@@ -462,14 +452,13 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 							/>
 						</div>
 					)}
-					{(!isCollapsableBanner || isCollapsed) &&
-						!isMaybeLaterVariant && (
-							<DesignableBannerCloseButton
-								onCloseClick={onCloseClick}
-								settings={templateSettings.closeButtonSettings}
-								isCollapsableBanner={isCollapsableBanner}
-							/>
-						)}
+					{(!isCollapsableBanner || isCollapsed) && (
+						<DesignableBannerCloseButton
+							onCloseClick={onCloseClick}
+							settings={templateSettings.closeButtonSettings}
+							isCollapsableBanner={isCollapsableBanner}
+						/>
+					)}
 				</div>
 
 				{choiceCards &&
@@ -521,7 +510,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 										? mainOrMobileContent.primaryCta.ctaText
 										: 'Continue'}
 								</LinkButton>
-								{isMaybeLaterVariant && isCollapsed && (
+								{isCollapsed && (
 									<div css={styles.maybeLaterButtonSizing}>
 										<LinkButton
 											onClick={onCloseClick}
@@ -637,10 +626,7 @@ const styles = {
 				'.		vert-line	cta-container	${cardsImageOrSpaceTemplateString}	.';
 		}
 	`,
-	collapsedLayoutOverrides: (
-		cardsImageOrSpaceTemplateString: string,
-		isMaybeLaterVariant: boolean,
-	) => css`
+	collapsedLayoutOverrides: (cardsImageOrSpaceTemplateString: string) => css`
 		display: grid;
 		background: inherit;
 		position: relative;
@@ -652,18 +638,11 @@ const styles = {
 			margin: 0 auto;
 			padding: ${space[2]}px ${space[3]}px 0 ${space[3]}px;
 			grid-template-columns: auto max(${phabletContentMaxWidth} auto);
-			grid-template-areas: ${isMaybeLaterVariant
-				? `
+			grid-template-areas: ${`
 				'.	.									.'
 				'.	copy-container						close-button'
 				'.	${cardsImageOrSpaceTemplateString}	${cardsImageOrSpaceTemplateString}'
 				'.	cta-container						cta-container'
-				`
-				: `
-				'.	close-button						.'
-				'.	copy-container						.'
-				'.	${cardsImageOrSpaceTemplateString}	.'
-				'.	cta-container						.';
 				`};
 		}
 		${from.phablet} {
@@ -748,10 +727,7 @@ const styles = {
 			padding-left: ${space[8]}px;
 		}
 	`,
-	closeAndCollapseButtonContainer: (
-		isCollapsed: boolean,
-		isMaybeLaterVariant: boolean,
-	) => css`
+	closeAndCollapseButtonContainer: (isCollapsed: boolean) => css`
 		/* Layout changes only here */
 		grid-area: close-button;
 		display: flex;
@@ -770,9 +746,7 @@ const styles = {
 		}
 		${from.desktop} {
 			flex-direction: ${isCollapsed ? 'row' : 'row-reverse'};
-			margin-top: ${isCollapsed && isMaybeLaterVariant
-				? space[9]
-				: space[6]}px;
+			margin-top: ${isCollapsed ? space[9] : space[6]}px;
 		}
 
 		.maybe-later & {
