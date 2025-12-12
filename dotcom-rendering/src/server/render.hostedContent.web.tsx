@@ -1,6 +1,9 @@
+import { isString } from '@guardian/libs';
 import { HostedArticleLayout } from '../layouts/HostedArticleLayout';
 import { HostedGalleryLayout } from '../layouts/HostedGalleryLayout';
+import { getModulesBuild, getPathFromManifest } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
+import { polyfillIO } from '../lib/polyfill.io';
 import type { HostedContent } from '../types/hostedContent';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
@@ -21,6 +24,18 @@ export const renderHtml = ({ hostedContent }: Props) => {
 		<HostedLayout renderingTarget={renderingTarget} />,
 	);
 
+	// We don't send A/B tests or switches from frontend yet- do we need to?
+	const build = getModulesBuild({
+		tests: {},
+		switches: {},
+	});
+
+	const prefetchScripts = [
+		polyfillIO,
+		getPathFromManifest(build, 'frameworks.js'),
+		getPathFromManifest(build, 'index.js'),
+	].filter(isString);
+
 	// We currently don't send any of the data required for page config or window.guardian setup from frontend
 	const pageHtml = htmlPageTemplate({
 		scriptTags: [],
@@ -37,5 +52,5 @@ export const renderHtml = ({ hostedContent }: Props) => {
 		weAreHiring: false,
 	});
 
-	return { html: pageHtml, prefetchScripts: [] };
+	return { html: pageHtml, prefetchScripts };
 };
