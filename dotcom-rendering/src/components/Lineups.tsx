@@ -8,20 +8,22 @@ import {
 	textSansBold12,
 	textSansBold14,
 } from '@guardian/source/foundations';
-import type { FootballTeam } from '../footballMatch';
+import type {
+	FootballMatchStats,
+	FootballMatchTeamWithStats,
+	PlayerEvent,
+} from '../footballMatchStats';
 import { palette } from '../palette';
 import Union from '../static/icons/Union.svg';
-import type { EventType } from '../types/sport';
 
 type Props = {
-	home: FootballTeam;
-	away: FootballTeam;
+	matchStats: FootballMatchStats;
 };
 
 const lineupSectionId = 'lineups';
 const substitutesSectionId = 'substitutes';
 
-export const Lineups = ({ home, away }: Props) => {
+export const Lineups = ({ matchStats }: Props) => {
 	return (
 		<section css={sectionStyles} aria-label="Team Lineups and Substitutes">
 			<section
@@ -29,16 +31,32 @@ export const Lineups = ({ home, away }: Props) => {
 				aria-labelledby={lineupSectionId}
 			>
 				<Title text="Lineups" id={lineupSectionId} />
-				<PlayerList team={home} isSubstitute={false} isHome={true} />
-				<PlayerList team={away} isSubstitute={false} isHome={false} />
+				<PlayerList
+					team={matchStats.homeTeam}
+					isSubstitute={false}
+					isHome={true}
+				/>
+				<PlayerList
+					team={matchStats.awayTeam}
+					isSubstitute={false}
+					isHome={false}
+				/>
 			</section>
 			<section
 				css={playerListSectionGridStyles}
 				aria-labelledby={substitutesSectionId}
 			>
 				<Title text="Substitutes" id={substitutesSectionId} />
-				<PlayerList team={home} isSubstitute={true} isHome={true} />
-				<PlayerList team={away} isSubstitute={true} isHome={false} />
+				<PlayerList
+					team={matchStats.homeTeam}
+					isSubstitute={true}
+					isHome={true}
+				/>
+				<PlayerList
+					team={matchStats.awayTeam}
+					isSubstitute={true}
+					isHome={false}
+				/>
 			</section>
 		</section>
 	);
@@ -101,7 +119,7 @@ const PlayerList = ({
 	isSubstitute,
 	isHome,
 }: {
-	team: FootballTeam;
+	team: FootballMatchTeamWithStats;
 	isSubstitute: boolean;
 	isHome: boolean;
 }) => {
@@ -110,19 +128,18 @@ const PlayerList = ({
 			{team.players
 				.filter((player) => player.substitute === isSubstitute)
 				.map((player) => (
-					<li key={player.id} css={listItem}>
-						<strong css={shirtNumber(team.colours)}>
+					<li key={player.paID} css={listItem}>
+						<strong css={shirtNumber(team.statsColour)}>
 							{player.shirtNumber}
 						</strong>
 						<span css={playerName}>
-							{player.name.charAt(0).toUpperCase()}.{' '}
-							{player.lastName}
+							{player.name.charAt(0).toUpperCase()}. {player.name}
 						</span>
-						{player.events.map((event: EventType) => (
+						{player.events.map((event: PlayerEvent) => (
 							<Event
-								key={event.eventTime + event.eventType}
-								type={event.eventType}
-								time={event.eventTime}
+								key={event.minute + event.kind}
+								type={event.kind}
+								time={event.minute.toString()}
 							/>
 						))}
 					</li>

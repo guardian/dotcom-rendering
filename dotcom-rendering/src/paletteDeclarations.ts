@@ -7066,6 +7066,10 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[10],
 	},
+	'--football-match-info-team-number': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[60],
+	},
 	'--football-match-list-error': {
 		light: () => sourcePalette.error[400],
 		dark: () => sourcePalette.error[500],

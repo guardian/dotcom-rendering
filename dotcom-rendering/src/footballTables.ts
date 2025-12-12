@@ -26,7 +26,7 @@ type Team = {
 	url?: string;
 };
 
-type Entry = {
+export type Entry = {
 	position: number;
 	team: Team;
 	gamesPlayed: number;
