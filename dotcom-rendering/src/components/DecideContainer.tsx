@@ -47,8 +47,6 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
-	/** Feature flag for the labs redesign work */
-	showLabsRedesign?: boolean;
 	enableHls?: boolean;
 };
 
@@ -65,7 +63,6 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
-	showLabsRedesign = false,
 	enableHls = false,
 }: Props) => {
 	switch (containerType) {
@@ -249,7 +246,6 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
-					showLabsRedesign={!!showLabsRedesign}
 					enableHls={enableHls}
 				/>
 			);
@@ -264,7 +260,6 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
-					showLabsRedesign={!!showLabsRedesign}
 					enableHls={enableHls}
 				/>
 			);
@@ -279,7 +274,6 @@ export const DecideContainer = ({
 						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
-						showLabsRedesign={!!showLabsRedesign}
 					/>
 				</Island>
 			);
@@ -294,7 +288,6 @@ export const DecideContainer = ({
 						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
-						showLabsRedesign={!!showLabsRedesign}
 					/>
 				</Island>
 			);
@@ -307,7 +300,6 @@ export const DecideContainer = ({
 					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
-					showLabsRedesign={!!showLabsRedesign}
 				/>
 			);
 		case 'scrollable/feature':
@@ -320,7 +312,6 @@ export const DecideContainer = ({
 						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						collectionId={collectionId}
-						showLabsRedesign={showLabsRedesign}
 					/>
 				</Island>
 			);
@@ -333,7 +324,6 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
-					showLabsRedesign={showLabsRedesign}
 				/>
 			);
 		default:

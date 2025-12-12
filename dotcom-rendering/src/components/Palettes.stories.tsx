@@ -5,7 +5,6 @@ import { trails } from '../../fixtures/manual/trails';
 import type { DCRGroupedTrails } from '../types/front';
 import { DynamicFast } from './DynamicFast';
 import { FrontSection } from './FrontSection';
-import { LabsSection } from './LabsSection';
 
 const meta = {
 	title: 'Layouts/Palettes',
@@ -16,17 +15,7 @@ const meta = {
 			},
 		},
 	},
-	args: {
-		showLabsRedesign: false,
-	},
-	argTypes: {
-		showLabsRedesign: {
-			control: { type: 'boolean' },
-			description:
-				'Toggle between old Labs design (LabsSection) and new design (FrontSection)',
-		},
-	},
-} satisfies Meta<{ showLabsRedesign: boolean }>;
+} satisfies Meta;
 type Story = StoryObj<typeof meta>;
 
 export default meta;
@@ -218,43 +207,22 @@ export const SpecialReportAltPalette = {
 	),
 } satisfies Story;
 
-export const BrandedPalette: StoryObj<{ showLabsRedesign: boolean }> = {
-	render: ({ showLabsRedesign }) =>
-		showLabsRedesign ? (
-			<FrontSection
-				title="Branded Palette Redesign"
+export const BrandedPalette = {
+	render: () => (
+		<FrontSection
+			title="Branded Palette Redesign"
+			containerPalette="Branded"
+			showDateHeader={true}
+			editionId={'UK'}
+			discussionApiUrl={discussionApiUrl}
+			isLabs={true}
+		>
+			<DynamicFast
+				groupedTrails={groupedTrails}
 				containerPalette="Branded"
-				showDateHeader={true}
-				editionId={'UK'}
-				discussionApiUrl={discussionApiUrl}
-				isLabs={true}
-				showLabsRedesign={showLabsRedesign}
-			>
-				<DynamicFast
-					groupedTrails={groupedTrails}
-					containerPalette="Branded"
-					showAge={true}
-					imageLoading="eager"
-				/>
-			</FrontSection>
-		) : (
-			<LabsSection
-				title="Branded Palette"
-				collectionId={''}
-				pageId={''}
-				ajaxUrl={''}
-				sectionId={'branded-palette-toggle'}
-				ophanComponentName={'branded-palette-toggle'}
-				ophanComponentLink={'branded-palette-toggle'}
-				discussionApiUrl={discussionApiUrl}
-				editionId={'UK'}
-			>
-				<DynamicFast
-					groupedTrails={groupedTrails}
-					containerPalette="Branded"
-					showAge={true}
-					imageLoading="eager"
-				/>
-			</LabsSection>
-		),
+				showAge={true}
+				imageLoading="eager"
+			/>
+		</FrontSection>
+	),
 };
