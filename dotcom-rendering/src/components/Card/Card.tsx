@@ -672,6 +672,13 @@ export const Card = ({
 	 */
 	const getGapSizes = (): GapSizes => {
 		if (isOnwardContent && !isGallerySecondaryOnward) {
+			if (isMoreGalleriesOnwardContent) {
+				return {
+					row: 'small',
+					column: 'small',
+				};
+			}
+
 			return {
 				row: 'none',
 				column: 'none',
