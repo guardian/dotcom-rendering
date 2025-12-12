@@ -3,7 +3,7 @@ import { isObject, log } from '@guardian/libs';
 import type { TAction, TComponentType } from '@guardian/ophan-tracker-js';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import type { Result } from '../lib/result';
-import { error, ok, okOrThrow } from '../lib/result';
+import { error, ok } from '../lib/result';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useConsent } from '../lib/useConsent';
 import { useCountryCode } from '../lib/useCountryCode';
@@ -224,8 +224,7 @@ export const initializeFedCM = async ({
 	if (credentials) {
 		log('identity', 'FedCM credentials received');
 
-		const signInEmail = okOrThrow(
-			extractEmailFromToken(credentials.token),
+		const signInEmail = extractEmailFromToken(credentials.token).getOrThrow(
 			'Failed to extract email from FedCM token',
 		);
 

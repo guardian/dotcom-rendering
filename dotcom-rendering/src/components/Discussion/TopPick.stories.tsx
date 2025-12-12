@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import type { ReplyType, SignedInUser } from '../../lib/discussion';
-import { ok } from '../../lib/result';
+import { error, ok, type Result } from '../../lib/result';
 import { TopPick } from './TopPick';
 
 export default { component: TopPick, title: 'Discussion/TopPick' };
@@ -78,10 +78,11 @@ const contributorCommentWithShortBody: ReplyType = {
 	body: "<p>It's still there FrankDeFord - and thanks, I will pass that on</p>",
 };
 
-const commentResponseError = {
-	kind: 'error',
-	error: 'NetworkError',
-} as const;
+const commentResponseError = function <A>(): Promise<
+	Result<'NetworkError', A>
+> {
+	return Promise.resolve(error('NetworkError'));
+};
 
 const aUser = {
 	kind: 'Reader',
@@ -99,8 +100,8 @@ const aUser = {
 			hasCommented: true,
 		},
 	},
-	onComment: () => Promise.resolve(commentResponseError),
-	onReply: () => Promise.resolve(commentResponseError),
+	onComment: commentResponseError,
+	onReply: commentResponseError,
 	onRecommend: () => Promise.resolve(true),
 	addUsername: () => Promise.resolve(ok(true)),
 	reportAbuse: () => Promise.resolve(ok(true)),

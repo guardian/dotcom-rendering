@@ -88,7 +88,7 @@ const parseFEFootballMatchList = (
 ): FootballMatchListPage => {
 	const parsedMatchesList = parseFootballMatches(data.matchesList);
 
-	if (parsedMatchesList.kind === 'error') {
+	if (!parsedMatchesList.ok) {
 		throw new Error(
 			`Failed to parse matches: ${getParserErrorMessage(
 				parsedMatchesList.error,
@@ -136,7 +136,7 @@ const parseFEFootballTables = (
 ): FootballTablesPage => {
 	const parsedFootballTables = parseFootballTables(data.tables);
 
-	if (parsedFootballTables.kind === 'error') {
+	if (!parsedFootballTables.ok) {
 		throw new Error(
 			`Failed to parse tables: ${parsedFootballTables.error.kind}: ${parsedFootballTables.error.message}`,
 		);
@@ -175,7 +175,7 @@ export const handleFootballTablesPage: RequestHandler = ({ body }, res) => {
 const parseFECricketMatch = (data: FECricketMatchPage): CricketMatchPage => {
 	const parsedCricketMatch = parseCricketMatch(data.cricketMatch);
 
-	if (parsedCricketMatch.kind === 'error') {
+	if (!parsedCricketMatch.ok) {
 		throw new Error(
 			`Failed to parse cricket match: ${parsedCricketMatch.error.kind} ${parsedCricketMatch.error.message}`,
 		);
@@ -217,7 +217,7 @@ const parseFEFootballMatch = (
 ): FootballMatchSummaryPage => {
 	const parsedFootballMatch = parseFootballMatch(data.footballMatch);
 
-	if (parsedFootballMatch.kind === 'error') {
+	if (!parsedFootballMatch.ok) {
 		throw new Error(
 			`Failed to parse football match: ${parsedFootballMatch.error.kind} ${parsedFootballMatch.error.message}`,
 		);

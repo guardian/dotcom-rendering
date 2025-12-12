@@ -79,14 +79,8 @@ const parseEvents = listParse(parsePlayerEvent);
 
 const parsePlayer = (
 	feFootballMatchPlayer: FEFootballPlayer,
-): Result<ParserError, FootballPlayer> => {
-	const parsedEvents = parseEvents(feFootballMatchPlayer.events);
-
-	if (parsedEvents.kind === 'error') {
-		return parsedEvents;
-	}
-
-	return ok({
+): Result<ParserError, FootballPlayer> =>
+	parseEvents(feFootballMatchPlayer.events).map((events) => ({
 		id: feFootballMatchPlayer.id,
 		name: feFootballMatchPlayer.name,
 		position: feFootballMatchPlayer.position,
@@ -94,22 +88,15 @@ const parsePlayer = (
 		substitute: feFootballMatchPlayer.substitute,
 		timeOnPitch: feFootballMatchPlayer.timeOnPitch,
 		shirtNumber: feFootballMatchPlayer.shirtNumber,
-		events: parsedEvents.value,
-	});
-};
+		events,
+	}));
 
 const parsePlayers = listParse(parsePlayer);
 
 const parseTeam = (
 	feFootballMatchTeam: FEFootballTeam,
-): Result<ParserError, FootballTeam> => {
-	const parsedPlayers = parsePlayers(feFootballMatchTeam.players);
-
-	if (parsedPlayers.kind === 'error') {
-		return parsedPlayers;
-	}
-
-	return ok({
+): Result<ParserError, FootballTeam> =>
+	parsePlayers(feFootballMatchTeam.players).map((players) => ({
 		id: feFootballMatchTeam.id,
 		name: cleanTeamName(feFootballMatchTeam.name),
 		codename: feFootballMatchTeam.codename,
@@ -122,28 +109,17 @@ const parseTeam = (
 		corners: feFootballMatchTeam.corners,
 		colours: feFootballMatchTeam.colours,
 		crest: feFootballMatchTeam.crest,
-		players: parsedPlayers.value,
-	});
-};
+		players,
+	}));
 
 export const parse = (
 	feFootballMatch: FEFootballMatch,
-): Result<ParserError, FootballMatch> => {
-	const parsedHomeTeam = parseTeam(feFootballMatch.homeTeam);
-	const parsedAwayTeam = parseTeam(feFootballMatch.awayTeam);
-
-	if (parsedHomeTeam.kind === 'error') {
-		return parsedHomeTeam;
-	}
-
-	if (parsedAwayTeam.kind === 'error') {
-		return parsedAwayTeam;
-	}
-
-	return ok({
-		homeTeam: parsedHomeTeam.value,
-		awayTeam: parsedAwayTeam.value,
-		status: replaceLiveMatchStatus(feFootballMatch.status),
-		comments: feFootballMatch.comments,
-	});
-};
+): Result<ParserError, FootballMatch> =>
+	parseTeam(feFootballMatch.homeTeam).flatMap((homeTeam) =>
+		parseTeam(feFootballMatch.awayTeam).map((awayTeam) => ({
+			homeTeam,
+			awayTeam,
+			status: replaceLiveMatchStatus(feFootballMatch.status),
+			comments: feFootballMatch.comments,
+		})),
+	);

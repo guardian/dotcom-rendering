@@ -489,7 +489,7 @@ export const FootballMatchList = ({
 									size="xsmall"
 									onClick={() => {
 										void getMoreDays().then((moreDays) => {
-											if (moreDays.kind === 'ok') {
+											if (moreDays.ok) {
 												setIsError(false);
 												setDays(
 													days.concat(moreDays.value),

@@ -120,7 +120,7 @@ export const CommentContainer = ({
 		setLoading(true);
 		getAllReplies(commentId)
 			.then((result) => {
-				if (result.kind === 'error') {
+				if (!result.ok) {
 					console.error(result.error);
 					return;
 				}

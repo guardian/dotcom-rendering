@@ -1,12 +1,10 @@
 import { cricketMatchData } from '../fixtures/generated/cricket-match';
 import { parse } from './cricketMatch';
 import type { FECricketMatch } from './frontend/feCricketMatchPage';
-import { okOrThrow } from './lib/result';
 
 describe('parse', () => {
 	it('parses cricket match correctly', () => {
-		const parsedResult = okOrThrow(
-			parse(cricketMatchData.cricketMatch),
+		const parsedResult = parse(cricketMatchData.cricketMatch).getOrThrow(
 			'Expected parsing cricket match to succeed',
 		);
 		expect(parsedResult.awayTeam.lineup.length).toBe(11);
@@ -16,8 +14,7 @@ describe('parse', () => {
 	});
 
 	it('reverses the innings for display', () => {
-		const parsedResult = okOrThrow(
-			parse(cricketMatchData.cricketMatch),
+		const parsedResult = parse(cricketMatchData.cricketMatch).getOrThrow(
 			'Expected parsing cricket match to succeed',
 		);
 
@@ -46,8 +43,7 @@ describe('parse', () => {
 	});
 
 	it('calculates the number of wickets fallen', () => {
-		const parsedResult = okOrThrow(
-			parse(cricketMatchData.cricketMatch),
+		const parsedResult = parse(cricketMatchData.cricketMatch).getOrThrow(
 			'Expected parsing cricket match to succeed',
 		);
 
@@ -85,6 +81,6 @@ describe('parse', () => {
 		};
 
 		const parsedResult = parse(cricketMatch);
-		expect(parsedResult.kind).toBe('error');
+		expect(parsedResult.ok).toBe(false);
 	});
 });

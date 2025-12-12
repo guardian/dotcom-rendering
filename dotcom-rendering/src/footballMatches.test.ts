@@ -13,7 +13,6 @@ import type {
 	FEMatchByDateAndCompetition,
 	FEResult,
 } from './frontend/feFootballMatchListPage';
-import { errorOrThrow, okOrThrow } from './lib/result';
 
 const withMatches = (
 	matches: FEFootballMatch[],
@@ -28,8 +27,7 @@ const withMatches = (
 
 describe('footballMatches', () => {
 	it('should parse match fixtures correctly', () => {
-		const result = okOrThrow(
-			parse(footballData.matchesList),
+		const result = parse(footballData.matchesList).getOrThrow(
 			'Expected football match parsing to succeed',
 		);
 
@@ -53,8 +51,7 @@ describe('footballMatches', () => {
 			}),
 		);
 
-		const result = errorOrThrow(
-			parse(invalidDate),
+		const result = parse(invalidDate).getErrorOrThrow(
 			'Expected football match parsing to fail',
 		);
 
@@ -78,16 +75,13 @@ describe('footballMatches', () => {
 			{ ...matchDayLive, date: '' },
 		]);
 
-		const resultOne = errorOrThrow(
-			parse(invalidMatchResult),
+		const resultOne = parse(invalidMatchResult).getErrorOrThrow(
 			'Expected football match parsing to fail',
 		);
-		const resultTwo = errorOrThrow(
-			parse(invalidMatchFixture),
+		const resultTwo = parse(invalidMatchFixture).getErrorOrThrow(
 			'Expected football match parsing to fail',
 		);
-		const resultThree = errorOrThrow(
-			parse(invalidLiveMatch),
+		const resultThree = parse(invalidLiveMatch).getErrorOrThrow(
 			'Expected football match parsing to fail',
 		);
 
@@ -102,8 +96,7 @@ describe('footballMatches', () => {
 	});
 
 	it('should return an error when it receives a live match', () => {
-		const result = errorOrThrow(
-			parse(withMatches([liveMatch])),
+		const result = parse(withMatches([liveMatch])).getErrorOrThrow(
 			'Expected football match parsing to fail',
 		);
 
@@ -129,10 +122,9 @@ describe('footballMatches', () => {
 		for (const [uncleanName, cleanName] of Object.entries(
 			uncleanToCleanNames,
 		)) {
-			const matchDay = okOrThrow(
-				parse(withMatches([matchesListWithTeamName(uncleanName)])),
-				'Expected football match parsing to succeed',
-			);
+			const matchDay = parse(
+				withMatches([matchesListWithTeamName(uncleanName)]),
+			).getOrThrow('Expected football match parsing to succeed');
 
 			const match = matchDay[0]!.competitions[0]!.matches[0];
 			if (match?.kind !== 'Result') {
@@ -143,10 +135,9 @@ describe('footballMatches', () => {
 		}
 	});
 	it('should replace known live match status with our status', () => {
-		const matchDay = okOrThrow(
-			parse(withMatches([matchDayLiveSecondHalf])),
-			'Expected football live match parsing to succeed',
-		);
+		const matchDay = parse(
+			withMatches([matchDayLiveSecondHalf]),
+		).getOrThrow('Expected football live match parsing to succeed');
 
 		const match = matchDay[0]!.competitions[0]!.matches[0];
 		if (match?.kind !== 'Live') {
@@ -161,10 +152,9 @@ describe('footballMatches', () => {
 			matchStatus: 'Something odd',
 		};
 
-		const matchDay = okOrThrow(
-			parse(withMatches([matchDayLiveUnknownStatus])),
-			'Expected football live match parsing to succeed',
-		);
+		const matchDay = parse(
+			withMatches([matchDayLiveUnknownStatus]),
+		).getOrThrow('Expected football live match parsing to succeed');
 
 		const match = matchDay[0]!.competitions[0]!.matches[0];
 		if (match?.kind !== 'Live') {

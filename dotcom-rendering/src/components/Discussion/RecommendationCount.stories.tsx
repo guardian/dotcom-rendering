@@ -1,16 +1,17 @@
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import type { SignedInUser } from '../../lib/discussion';
-import { ok } from '../../lib/result';
+import { error, ok, type Result } from '../../lib/result';
 import { palette as themePalette } from '../../palette';
 import { RecommendationCount } from './RecommendationCount';
 
 export default { title: 'Discussion/RecommendationCount' };
 
-const commentResponseError = {
-	kind: 'error',
-	error: 'NetworkError',
-} as const;
+const commentResponseError = function <A>(): Promise<
+	Result<'NetworkError', A>
+> {
+	return Promise.resolve(error('NetworkError'));
+};
 
 const aUser = {
 	kind: 'Reader',
@@ -28,8 +29,8 @@ const aUser = {
 			hasCommented: true,
 		},
 	},
-	onComment: () => Promise.resolve(commentResponseError),
-	onReply: () => Promise.resolve(commentResponseError),
+	onComment: commentResponseError,
+	onReply: commentResponseError,
 	onRecommend: () => Promise.resolve(true),
 	addUsername: () => Promise.resolve(ok(true)),
 	reportAbuse: () => Promise.resolve(ok(true)),

@@ -313,7 +313,7 @@ export const CommentForm = ({
 		const preview = onPreview ?? defaultPreview;
 		const response = await preview(body);
 
-		if (response.kind === 'error') {
+		if (!response.ok) {
 			// If the preview fails, we handle the error and reset the preview body
 			handleError(response.error, false);
 			setPreviewBody('');
@@ -416,7 +416,7 @@ export const CommentForm = ({
 				? await user.onReply(shortUrl, body, commentBeingRepliedTo.id)
 				: await user.onComment(shortUrl, body);
 			// Check response message for error states
-			if (response.kind === 'error') {
+			if (!response.ok) {
 				handleError(response.error);
 			} else {
 				onAddComment(
@@ -447,7 +447,7 @@ export const CommentForm = ({
 		}
 
 		const response = await user.addUsername(userName);
-		if (response.kind === 'ok') {
+		if (response.ok) {
 			// If we are able to submit userName we should continue with submitting comment
 			void submitForm();
 			setUserNameMissing(false);

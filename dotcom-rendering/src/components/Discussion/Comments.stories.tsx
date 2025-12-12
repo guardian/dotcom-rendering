@@ -12,7 +12,7 @@ import type {
 	Reader,
 } from '../../lib/discussion';
 import { discussionApiResponseSchema } from '../../lib/discussion';
-import { ok } from '../../lib/result';
+import { error, ok, type Result } from '../../lib/result';
 import { Comments } from './Comments';
 
 const meta = {
@@ -44,10 +44,11 @@ const discussionWithTwoComments = parse(
 );
 if (discussionWithTwoComments.status !== 'ok') throw new Error('Invalid mock');
 
-const commentResponseError = {
-	kind: 'error',
-	error: 'NetworkError',
-} as const;
+const commentResponseError = function <A>(): Promise<
+	Result<'NetworkError', A>
+> {
+	return Promise.resolve(error('NetworkError'));
+};
 
 const aUser: Reader = {
 	kind: 'Reader',
@@ -65,8 +66,8 @@ const aUser: Reader = {
 			hasCommented: true,
 		},
 	},
-	onComment: () => Promise.resolve(commentResponseError),
-	onReply: () => Promise.resolve(commentResponseError),
+	onComment: commentResponseError,
+	onReply: commentResponseError,
 	onRecommend: () => Promise.resolve(true),
 	addUsername: () => Promise.resolve(ok(true)),
 	reportAbuse: () => Promise.resolve(ok(true)),

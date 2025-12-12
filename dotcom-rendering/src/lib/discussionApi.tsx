@@ -110,8 +110,10 @@ export const getDiscussion = async ({
 		signal,
 	});
 
-	if (jsonResult.kind === 'error') {
-		return signal.aborted ? error('AbortedSignal') : jsonResult;
+	if (!jsonResult.ok) {
+		return signal.aborted
+			? error('AbortedSignal')
+			: error(jsonResult.error);
 	}
 
 	const result = safeParse(discussionApiResponseSchema, jsonResult.value);
@@ -158,15 +160,13 @@ export const preview = async (body: string): Promise<CommentResponse> => {
 		},
 	});
 
-	if (jsonResult.kind === 'error') return jsonResult;
-
-	return parsePreviewResponse(jsonResult.value);
+	return jsonResult.flatMap(parsePreviewResponse);
 };
 
 export type CommentResponse = Result<
 	| 'NetworkError'
 	| 'ApiError'
-	| (ReturnType<typeof parseCommentResponse> & { kind: 'error' })['error'],
+	| (ReturnType<typeof parseCommentResponse> & { ok: false })['error'],
 	string
 >;
 
@@ -192,9 +192,7 @@ export const comment =
 			credentials: authOptions.credentials,
 		});
 
-		if (jsonResult.kind === 'error') return jsonResult;
-
-		return parseCommentResponse(jsonResult.value);
+		return jsonResult.flatMap(parseCommentResponse);
 	};
 
 export const reply =
@@ -228,9 +226,7 @@ export const reply =
 			credentials: authOptions.credentials,
 		});
 
-		if (jsonResult.kind === 'error') return jsonResult;
-
-		return parseCommentResponse(jsonResult.value);
+		return jsonResult.flatMap(parseCommentResponse);
 	};
 
 export const getPicks = async (
@@ -246,7 +242,7 @@ export const getPicks = async (
 		},
 	});
 
-	if (jsonResult.kind === 'error') return jsonResult;
+	if (!jsonResult.ok) return error(jsonResult.error);
 
 	const result = safeParse(discussionApiResponseSchema, jsonResult.value);
 
@@ -301,11 +297,9 @@ export const reportAbuse =
 			credentials: authOptions?.credentials,
 		});
 
-		if (jsonResult.kind === 'error') {
-			return error('An unknown error occured');
-		}
-
-		return parseAbuseResponse(jsonResult.value);
+		return jsonResult
+			.mapError(() => 'An unknown error occured')
+			.flatMap(parseAbuseResponse);
 	};
 
 export const recommend =
@@ -326,8 +320,7 @@ export const recommend =
 			credentials: authOptions.credentials,
 		});
 
-		if (jsonResult.kind === 'error') return false;
-		return parseRecommendResponse(jsonResult.value).kind === 'ok';
+		return jsonResult.flatMap(parseRecommendResponse).ok;
 	};
 
 export const addUserName =
@@ -351,8 +344,8 @@ export const addUserName =
 			credentials: authOptions.credentials,
 		});
 
-		if (jsonResult.kind === 'error') {
-			return jsonResult;
+		if (!jsonResult.ok) {
+			return error(jsonResult.error);
 		}
 
 		const result = safeParse(postUsernameResponseSchema, jsonResult.value);
@@ -387,7 +380,7 @@ export const pickComment =
 			credentials: authOptions.credentials,
 		});
 
-		if (jsonResult.kind === 'error') return jsonResult;
+		if (!jsonResult.ok) return error(jsonResult.error);
 
 		const result = safeParse(pickResponseSchema, jsonResult.value);
 
@@ -414,7 +407,7 @@ export const unPickComment =
 			credentials: authOptions.credentials,
 		});
 
-		if (jsonResult.kind === 'error') return jsonResult;
+		if (!jsonResult.ok) return error(jsonResult.error);
 
 		const result = safeParse(pickResponseSchema, jsonResult.value);
 
@@ -442,7 +435,7 @@ export const getAllReplies = async (
 		},
 	});
 
-	if (jsonResult.kind === 'error') return jsonResult;
+	if (!jsonResult.ok) return error(jsonResult.error);
 
 	return parseRepliesResponse(jsonResult.value);
 };
@@ -472,7 +465,7 @@ export const getCommentContext = async (
 
 	const jsonResult = await fetchJSON(url + '?' + params.toString());
 
-	if (jsonResult.kind === 'error') return jsonResult;
+	if (!jsonResult.ok) return error(jsonResult.error);
 
 	const result = safeParse(getCommentContextResponseSchema, jsonResult.value);
 
