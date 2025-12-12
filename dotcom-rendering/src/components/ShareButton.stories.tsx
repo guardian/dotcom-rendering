@@ -59,6 +59,12 @@ export const LinkCopied = () => {
 			isCopied={true}
 			isLiveBlogMeta={false}
 			size="small"
+			format={{
+				display: ArticleDisplay.Standard,
+				theme: Pillar.News,
+				design: ArticleDesign.Standard,
+			}}
+			context="ArticleMeta"
 		/>
 	);
 };
@@ -72,6 +78,12 @@ export const LiveBlogMobileMeta = () => {
 			isCopied={false}
 			isLiveBlogMeta={true}
 			size="small"
+			format={{
+				display: ArticleDisplay.Standard,
+				theme: Pillar.News,
+				design: ArticleDesign.Standard,
+			}}
+			context="ArticleMeta"
 		/>
 	);
 };
@@ -99,6 +111,12 @@ export const EmailLinkStory = () => {
 			`}
 			isLiveBlogMeta={true}
 			size="small"
+			format={{
+				display: ArticleDisplay.Standard,
+				theme: Pillar.News,
+				design: ArticleDesign.Standard,
+			}}
+			context="ArticleMeta"
 		/>
 	);
 };
