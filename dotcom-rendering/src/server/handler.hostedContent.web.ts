@@ -7,7 +7,7 @@ export const handleArticle: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'web');
 
 	const frontendData = validateAsFEHostedContent(body);
-	const article = enhanceHostedContentType(frontendData);
+	const hostedContent = enhanceHostedContentType(frontendData);
 	// const { html, prefetchScripts } = renderHtml({
 	// 	article,
 	// });
