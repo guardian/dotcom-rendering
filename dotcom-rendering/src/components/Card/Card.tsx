@@ -1127,7 +1127,7 @@ export const Card = ({
 									loading={imageLoading}
 									aspectRatio={aspectRatio}
 								/>
-								{format.design !== ArticleDesign.Video &&
+								{!isVideoArticle &&
 									mainMedia?.type === 'YoutubeVideo' &&
 									mainMedia.duration > 0 && (
 										<div
