@@ -43,10 +43,10 @@ const wideIconStyles = (
 	}
 `;
 
-export const narrowPlayIconWidth = 56;
+export const narrowPlayIconDiameter = 56;
 const narrowStyles = css`
-	width: ${narrowPlayIconWidth}px;
-	height: ${narrowPlayIconWidth}px;
+	width: ${narrowPlayIconDiameter}px;
+	height: ${narrowPlayIconDiameter}px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
