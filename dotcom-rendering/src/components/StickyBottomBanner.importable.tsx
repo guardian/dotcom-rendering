@@ -343,8 +343,24 @@ export const StickyBottomBanner = ({
 			host,
 		);
 
+		const hasForceBannerParam =
+			window.location.search.includes('force-banner');
+		const hasForceBrazeMessageParam = window.location.hash.includes(
+			'force-braze-message',
+		);
+
+		let candidates: SlotConfig['candidates'];
+
+		if (hasForceBannerParam) {
+			candidates = [CMP, readerRevenue];
+		} else if (hasForceBrazeMessageParam) {
+			candidates = [CMP, brazeBanner];
+		} else {
+			candidates = [CMP, signInGate, brazeBanner, readerRevenue];
+		}
+
 		const bannerConfig: SlotConfig = {
-			candidates: [CMP, signInGate, brazeBanner, readerRevenue],
+			candidates,
 			name: 'banner',
 		};
 

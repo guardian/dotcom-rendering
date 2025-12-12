@@ -360,7 +360,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 				{footballMatchUrl ? (
 					<Section
 						showTopBorder={false}
-						backgroundColour={'red'}
+						backgroundColour={themePalette(
+							'--match-nav-background',
+						)}
 						borderColour={themePalette('--headline-border')}
 						leftContent={
 							<ArticleTitle
@@ -845,6 +847,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													article.shouldHideAds
 												}
 												serverTime={serverTime}
+												idApiUrl={
+													article.config.idApiUrl
+												}
 											/>
 											{pagination.totalPages > 1 && (
 												<Pagination
