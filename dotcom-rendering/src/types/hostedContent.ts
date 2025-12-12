@@ -1,10 +1,6 @@
 import type { FEHostedContent } from '../frontend/feHostedContent';
 
-enum HostedContentType {
-	Article,
-	Video,
-	Gallery,
-}
+type HostedContentType = 'article' | 'video' | 'gallery';
 
 export type HostedContent = {
 	frontendData: FEHostedContent;
@@ -14,12 +10,12 @@ export type HostedContent = {
 export const enhanceHostedContentType = (
 	data: FEHostedContent,
 ): HostedContent => {
-	let type = HostedContentType.Article;
+	let type: HostedContentType = 'article';
 
 	if (data.video) {
-		type = HostedContentType.Video;
+		type = 'video';
 	} else if (data.images.length) {
-		type = HostedContentType.Gallery;
+		type = 'gallery';
 	}
 
 	return {
