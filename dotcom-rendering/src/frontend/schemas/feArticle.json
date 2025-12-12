@@ -2110,6 +2110,24 @@
                 "mimeType": {
                     "type": "string"
                 },
+                "dimensions": {
+                    "type": "object",
+                    "properties": {
+                        "width": {
+                            "type": "number"
+                        },
+                        "height": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "height",
+                        "width"
+                    ]
+                },
+                "aspectRatio": {
+                    "type": "string"
+                },
                 "fields": {
                     "type": "object",
                     "properties": {
@@ -2698,6 +2716,9 @@
                 },
                 "duration": {
                     "type": "number"
+                },
+                "videoPlayerFormat": {
+                    "$ref": "#/definitions/VideoPlayerFormat"
                 }
             },
             "required": [
@@ -2706,6 +2727,14 @@
                 "elementId",
                 "id"
             ]
+        },
+        "VideoPlayerFormat": {
+            "enum": [
+                "Cinemagraph",
+                "Default",
+                "Loop"
+            ],
+            "type": "string"
         },
         "MiniProfilesBlockElement": {
             "type": "object",
@@ -5472,8 +5501,7 @@
                                         "type": "string"
                                     },
                                     "mimeType": {
-                                        "type": "string",
-                                        "const": "video/mp4"
+                                        "$ref": "#/definitions/SupportedVideoFileType"
                                     }
                                 },
                                 "required": [
@@ -5510,11 +5538,11 @@
                 }
             ]
         },
-        "VideoPlayerFormat": {
+        "SupportedVideoFileType": {
             "enum": [
-                "Cinemagraph",
-                "Default",
-                "Loop"
+                "application/vnd.apple.mpegurl",
+                "application/x-mpegURL",
+                "video/mp4"
             ],
             "type": "string"
         },

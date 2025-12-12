@@ -92,9 +92,9 @@ If you're interested in how it works please visit the docs [here](https://github
 
 ### 1. Configure your A/B test
 
-Create an A/B test in [ab-testing/abTest.ts](../ab-testing/abTest.ts) **both server _and_ client side tests** are defined here.
+Create an A/B test in [ab-testing/config/abTests.ts](../ab-testing/config/abTests.ts) **both server _and_ client side tests** are defined here.
 
-Add your A/B tests to the `abTests` array in the `abTest.ts` file. Each test should have a unique name.
+Add your A/B tests to the `abTests` array in the `abTests.ts` file. Each test should have a unique name.
 
 ```ts
 {
@@ -111,17 +111,17 @@ Add your A/B tests to the `abTests` array in the `abTest.ts` file. Each test sho
 }
 ```
 
-When you create a PR that modifies the `abTest.ts` file, a git hook and CI will run checks to ensure that your A/B test is valid (not expired, enough space for the test etc.).
+When you create a PR that modifies the `abTests.ts` file, a git hook and CI will run checks to ensure that your A/B test is valid (not expired, enough space for the test etc.).
 
 When your PR is merged, the A/B test will be automatically deployed to Fastly and be available at the same time as your changes.
 
 #### Guidelines for A/B tests
 
-#### Naming Conventions
+##### Naming Conventions
 
 A/B tests should be prefixed with the team associated with the test, for example `webex-example-test`. This helps to identify the team responsible for the test and is enforced by typescript validation, you can inspect & edit the allowed team name definitions [here](https://github.com/guardian/dotcom-rendering/blob/main/ab-testing/types.ts#L9).
 
-#### Test Size and Groups
+##### Test Size and Groups
 
 The `audienceSize` is the size of the whole test and is divided between the test groups that you specify. The "resolution" of sizing is down to 0.1%, so groups will be rounded to the nearest 0.1%.
 
@@ -129,7 +129,7 @@ Convention is to have groups named control and variant, but you can name them as
 
 A single group is also possible, for example if you're rolling out a new feature and don't need a control.
 
-#### Client vs Server Side Tests
+##### Client vs Server Side Tests
 
 All requests are processed by Fastly at the edge, however, A/B testing of server-side logic in Frontend or DCR will need to be cached separately. Client side tests do not need to be cached separately, as they are applied in the browser after the response is delivered.
 
@@ -137,7 +137,7 @@ Ensure that the `type` field is set to either `client` or `server` to indicate t
 
 There's a limit of the number of concurrent server-side tests that can be run, enforced by the validation script, so it's important to use client-side tests where possible.
 
-#### Test Expiration
+##### Test Expiration
 
 A/B tests should have an expiration date set in the future. This is to ensure that tests do not run indefinitely.
 
@@ -145,7 +145,7 @@ Expired tests will cause the A/B testing validation to fail, and will not be dep
 
 Tests that expire while they are are in-flight will not be served by fastly, and should be removed from the `abTest.ts` file as soon as possible.
 
-#### Audience Spaces
+##### Audience Spaces
 
 Ideally A/B tests would never overlap (users being in multiple tests), but sometimes this is unavoidable, for example when running a very large 50+% test without interrupting existing tests.
 
@@ -153,7 +153,7 @@ To add a test where there is not enough space in the default audience space (`A`
 
 For example if there are already 3 25% tests in space `A` totalling 75%, and you want to run a 50% test, you can set the `audienceSpace` to `B` to allow this test to overlap with the existing tests.
 
-#### Test Status
+##### Test Status
 
 Tests can be set to `ON` or `OFF` using the `status` field. Only tests with status `ON` will be validated and deployed.
 
@@ -167,7 +167,11 @@ The test will appear in https://frontend.gutools.co.uk/analytics/ab-testing once
 
 Once your A/B test has been configured you can conditionally put your code changes behind an A/B test participation. The instructions below describe how to do this, and are applicable to both client and server side tests.
 
-#### Use in Components
+### 3. Ways to check your participation
+
+#### In DCR React Components
+
+The `useAB` module exposes methods for getting a user's A/B test participations, this works both client and server side.
 
 ```ts
 // Within the components
@@ -209,39 +213,17 @@ const someComponent = () => {
 
 ```
 
-### 3. Ways to check your participation
-
-#### In source code
-
-As detailed above the `useAB` module exposes methods for getting a user's A/B test participations.
-
-```ts
-import { useBetaAB } from '../lib/useAB';
-
-const abTests = useBetaAB();
-
-// Get all of the user's server/client-side A/B test participations
-const abTestParticipations = abTests?.getParticipations(); // EG. { commercial-dev-client-side-test: 'variant', commercial-dev-server-side-test: 'variant' }
-
-// Is user in the webex-example-test test (any cohort)
-const isInTest = abTests?.isUserInTest('webex-example-test') ?? false;
-
-// Is user in the webex-example-test test (control cohort)
-const isInControlGroup =
-	abTests?.isUserInTestGroup('webex-example-test', 'control') ?? false;
-
-// Is user in the webex-example-test test (variant cohort)
-const isInVariantGroup =
-	abTests?.isUserInTestGroup('webex-example-test', 'variant') ?? false;
-```
-
-#### On the Client
+#### In client side code (outside of React components)
 
 The A/B test API described above is also available on the window object as `window.guardian.modules.abTests`. **Note:** This only works client side, you should use the `useBetaAB` hook described above in React components.
 
-#### On the Server
+#### In server side code
 
 Server side tests are also available in the CAPI object e.g. `CAPIArticle.config.serverSideABTests`.
+
+#### In Frontend
+
+See the [Frontend A/B testing class](https://github.com/guardian/frontend/blob/main/common/app/ab/ABTests.scala) with methods to get user participations.
 
 #### In the response headers
 
@@ -253,9 +235,9 @@ If you want to test your changes on CODE you need to follow these steps:
 
 1. Configure the A/B tests on your branch
 
-2. Deploy your branch to CODE
+2. Deploy your code changes on DCR and/or Frontend to CODE as normal
 
-3. Manually run the [🧪 AB testing CI (CODE)](https://github.com/guardian/dotcom-rendering/actions/workflows/ab-testing-ci-code.yml) worfklow using your branch. This deploys the test config to Fastly CODE.
+3. Deploy the A/B test config to CODE by deploying the `dotcom::ab-testing` riff-raff project against your branch, there will be a comment in the PR with a link to do this once the config has been validated.
 
 The 3rd step is crucial as Fastly buckets users into tests/cohorts and returns your A/B test participations as response headers.
 
@@ -273,3 +255,20 @@ These links are also in the [frontend admin](https://frontend.gutools.co.uk/anal
 -   Opt-out on PROD: `https://theguardian.com/ab-tests/opt/out`
 
 You can use the same routes on CODE.
+
+### 6. Forcing yourself into a test locally
+
+Use the opt-in and opt-out URL fragments to force yourself into or out of a test using a query parameter.
+
+When opted-in, the test will override any mvt based assignment and you'll only be in the opted-in test group.
+
+**Opt-in Example**
+
+-   Articles: `http://localhost:3030/Article/?ab-commercial-test-example=variant`
+-   Fronts: `http://localhost:3030/Front/https://www.theguardian.com/international?ab-commercial-test-example=variant`
+-   Interactives: `http://localhost:3030/Interactive/https://www.theguardian.com/global-development/ng-interactive/2022/jun/09/the-black-sea-blockade-mapping-the-impact-of-war-in-ukraine-on-the-worlds-food-supply-interactive?ab--commercial-test-example=variant`
+
+You can verify that you're in the test by checking:
+
+-   Server-side tests: `window.guardian.config.serverSideABTests` in the browser console
+-   Client-side tests: `window.guardian.modules.abTests.getParticipations()` in the browser console

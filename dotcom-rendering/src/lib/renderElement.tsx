@@ -12,7 +12,7 @@ import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { CrosswordComponent } from '../components/CrosswordComponent.importable';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
-import { EmailSignUpWrapper } from '../components/EmailSignUpWrapper';
+import { EmailSignUpWrapper } from '../components/EmailSignUpWrapper.importable';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
 import { ExplainerAtom } from '../components/ExplainerAtom';
 import { Figure } from '../components/Figure';
@@ -29,6 +29,7 @@ import { Island } from '../components/Island';
 import { ItemLinkBlockElement } from '../components/ItemLinkBlockElement';
 import { KeyTakeaways } from '../components/KeyTakeaways';
 import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
+import { LoopVideoInArticle } from '../components/LoopVideoInArticle';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
 import { MiniProfiles } from '../components/MiniProfiles';
@@ -99,6 +100,7 @@ type Props = {
 	shouldHideAds: boolean;
 	contentType?: string;
 	contentLayout?: string;
+	idApiUrl?: string;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -170,6 +172,7 @@ export const renderElement = ({
 	shouldHideAds,
 	contentType,
 	contentLayout,
+	idApiUrl,
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
@@ -490,15 +493,35 @@ export const renderElement = ({
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
-			return (
-				<VideoAtom
-					format={format}
-					assets={element.assets}
-					poster={element.posterImage?.[0]?.url}
-					caption={element.title}
-					isMainMedia={isMainMedia}
-				/>
-			);
+			/*
+				- MediaAtomBlockElement is used for self-hosted videos
+				- Historically, these videos have been self-hosted for legal or sensitive reasons
+					- These videos play in the `VideoAtom` component
+				- Looping videos, introduced in July 2025, are also self-hosted
+					- Thus they are delivered as a MediaAtomBlockElement
+					- However they need to display in a different video player
+				- We need to differentiate between the two forms of video
+					- We can do this by interrogating the atom's metadata, which includes the new attribute `videoPlayerFormat`
+			*/
+			if (element.videoPlayerFormat === 'Loop') {
+				return (
+					<LoopVideoInArticle
+						element={element}
+						format={format}
+						isMainMedia={isMainMedia}
+					/>
+				);
+			} else {
+				return (
+					<VideoAtom
+						format={format}
+						assets={element.assets}
+						poster={element.posterImage?.[0]?.url}
+						caption={element.title}
+						isMainMedia={isMainMedia}
+					/>
+				);
+			}
 		case 'model.dotcomrendering.pageElements.MiniProfilesBlockElement':
 			return (
 				<MiniProfiles
@@ -546,15 +569,21 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
 			const emailSignUpProps = {
 				index,
+				listId: element.newsletter.listId,
 				identityName: element.newsletter.identityName,
 				description: element.newsletter.description,
 				name: element.newsletter.name,
 				frequency: element.newsletter.frequency,
 				successDescription: element.newsletter.successDescription,
 				theme: element.newsletter.theme,
+				idApiUrl: idApiUrl ?? '',
 			};
 			if (isListElement || isTimeline) return null;
-			return <EmailSignUpWrapper {...emailSignUpProps} />;
+			return (
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<EmailSignUpWrapper {...emailSignUpProps} />
+				</Island>
+			);
 		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
 			return renderAds && <AdPlaceholder />;
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
@@ -992,6 +1021,7 @@ export const RenderArticleElement = ({
 	shouldHideAds,
 	contentType,
 	contentLayout,
+	idApiUrl,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -1020,6 +1050,7 @@ export const RenderArticleElement = ({
 		shouldHideAds,
 		contentType,
 		contentLayout,
+		idApiUrl,
 	});
 
 	const needsFigure = !bareElements.has(element._type);

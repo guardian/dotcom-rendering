@@ -49,6 +49,7 @@ type Props = {
 	containerLevel?: DCRContainerLevel;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
+	enableHls?: boolean;
 };
 
 export const DecideContainer = ({
@@ -65,6 +66,7 @@ export const DecideContainer = ({
 	collectionId,
 	containerLevel,
 	showLabsRedesign = false,
+	enableHls = false,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -233,7 +235,7 @@ export const DecideContainer = ({
 			return <NavList trails={trails} showImage={true} />;
 		case 'scrollable/highlights':
 			return (
-				<Island priority="critical">
+				<Island priority="critical" defer={{ until: 'visible' }}>
 					<ScrollableHighlights trails={trails} frontId={frontId} />
 				</Island>
 			);
@@ -248,6 +250,7 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
 					showLabsRedesign={!!showLabsRedesign}
+					enableHls={enableHls}
 				/>
 			);
 		case 'flexible/general':
@@ -262,6 +265,7 @@ export const DecideContainer = ({
 					containerLevel={containerLevel}
 					collectionId={collectionId}
 					showLabsRedesign={!!showLabsRedesign}
+					enableHls={enableHls}
 				/>
 			);
 		case 'scrollable/small':
