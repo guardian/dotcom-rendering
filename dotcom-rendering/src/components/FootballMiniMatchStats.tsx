@@ -26,7 +26,7 @@ const buttonTextShortCss = css`
 	}
 `;
 
-type FootballTeam = {
+type Team = {
 	name: string;
 	colour: string;
 };
@@ -39,8 +39,8 @@ type MatchStatistic = {
 };
 
 type Props = {
-	homeTeam: FootballTeam;
-	awayTeam: FootballTeam;
+	homeTeam: Team;
+	awayTeam: Team;
 	stats: MatchStatistic[];
 };
 
@@ -55,16 +55,16 @@ export const FootballMiniMatchStats = ({
 				<FootballMatchStat
 					key={stat.label}
 					label={stat.label}
-					home={{
-						teamName: homeTeam.name,
-						teamColour: homeTeam.colour,
-						value: stat.homeValue,
+					homeTeam={{
+						name: homeTeam.name,
+						colour: homeTeam.colour,
 					}}
-					away={{
-						teamName: awayTeam.name,
-						teamColour: awayTeam.colour,
-						value: stat.awayValue,
+					awayTeam={{
+						name: awayTeam.name,
+						colour: awayTeam.colour,
 					}}
+					homeValue={stat.homeValue}
+					awayValue={stat.awayValue}
 					showPercentage={stat.showPercentage}
 					raiseLabelOnDesktop={true}
 				/>

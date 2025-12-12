@@ -33,33 +33,33 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
 	args: {
-		label: 'Goal Attempts',
-		home: {
-			teamName: 'Manchester United',
-			teamColour: '#da020e',
-			value: 7,
+		label: 'Goal attempts',
+		homeTeam: {
+			name: 'Manchester United',
+			colour: '#da020e',
 		},
-		away: {
-			teamName: 'Arsenal',
-			teamColour: '#023474',
-			value: 4,
+		awayTeam: {
+			name: 'Arsenal',
+			colour: '#023474',
 		},
+		homeValue: 7,
+		awayValue: 4,
 	},
 } satisfies Story;
 
 export const ShownAsPercentage = {
 	args: {
 		label: 'Possession',
-		home: {
-			teamName: 'West Ham',
-			teamColour: '#722642',
-			value: 39,
+		homeTeam: {
+			name: 'West Ham',
+			colour: '#722642',
 		},
-		away: {
-			teamName: 'Newcastle',
-			teamColour: '#383838',
-			value: 61,
+		awayTeam: {
+			name: 'Newcastle',
+			colour: '#383838',
 		},
+		homeValue: 39,
+		awayValue: 61,
 		showPercentage: true,
 	},
 } satisfies Story;
