@@ -79,8 +79,8 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	// 	process.env.NODE_ENV,
 	// );
 
-	console.log('has tagPage.TPSGContent:', !!tagPage.TagPageAIContent);
-	console.log('tagPage.TPSGContent:', tagPage.TagPageAIContent);
+	console.log('has tagPage.StorylinesContent:', !!tagPage.storylinesContent);
+	console.log('tagPage.StorylinesContent:', tagPage.storylinesContent);
 
 	return (
 		<>
@@ -153,7 +153,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 						: undefined;
 
 					const insertSCSection =
-						tagPage.TagPageAIContent &&
+						tagPage.storylinesContent &&
 						// isSCTagPage &&
 						index == 1 &&
 						(!tagPage.pagination ||
@@ -175,7 +175,9 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									<StorylinesSection
 										index={1}
 										editionId={tagPage.editionId}
-										TPSGContent={tagPage.TagPageAIContent}
+										storylinesContent={
+											tagPage.storylinesContent
+										}
 									/>
 								</Island>
 							)}

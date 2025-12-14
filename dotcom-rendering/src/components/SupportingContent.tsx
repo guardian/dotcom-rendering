@@ -22,7 +22,7 @@ type Props = {
 	fillBackgroundOnMobile?: boolean;
 	/** Allows sublinks container to have a background colour on desktop screen sizes */
 	fillBackgroundOnDesktop?: boolean;
-	SCStyle?: boolean;
+	storylinesStyle?: boolean;
 };
 
 /**
@@ -151,11 +151,11 @@ export const SupportingContent = ({
 	isMedia = false,
 	fillBackgroundOnMobile = false,
 	fillBackgroundOnDesktop = false,
-	SCStyle = false,
+	storylinesStyle = false,
 }: Props) => {
 	const columnSpan = getColumnSpan(supportingContent.length);
 
-	return SCStyle ? (
+	return storylinesStyle ? (
 		<ul
 			className="sublinks"
 			css={[

@@ -11,7 +11,7 @@ const meta = {
 		index: 1,
 		containerId: 'container-1 | storylines-section',
 		editionId: 'UK',
-		TPSGContent: storylinesSectionContent,
+		storylinesContent: storylinesSectionContent,
 	},
 	render: (args) => (
 		<div

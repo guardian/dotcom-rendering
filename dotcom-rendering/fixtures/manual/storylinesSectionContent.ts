@@ -1,6 +1,6 @@
-import type { TPSGContent } from '../../src/types/tagPageAIContent';
+import type { StorylinesContent } from '../../src/types/storylinesContent';
 
-export const storylinesSectionContent: TPSGContent = {
+export const storylinesSectionContent: StorylinesContent = {
 	created: '2025-12-09T17:14:47.633244289Z',
 	tag: 'technology/artificialintelligenceai',
 	storylines: [

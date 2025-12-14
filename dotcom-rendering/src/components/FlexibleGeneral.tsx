@@ -36,7 +36,7 @@ type Props = {
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 	enableHls?: boolean;
-	SCStyle?: boolean;
+	storylinesStyle?: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -92,7 +92,7 @@ type ImmersiveCardLayoutProps = {
 	imageLoading: Loading;
 	collectionId: number;
 	showLabsRedesign?: boolean;
-	SCStyle?: boolean;
+	storylinesStyle?: boolean;
 };
 
 /**
@@ -108,7 +108,7 @@ const ImmersiveCardLayout = ({
 	imageLoading,
 	collectionId,
 	showLabsRedesign,
-	SCStyle,
+	storylinesStyle,
 }: ImmersiveCardLayoutProps) => {
 	const isLoopingVideo =
 		card.mainMedia?.type === 'SelfHostedVideo' &&
@@ -148,7 +148,7 @@ const ImmersiveCardLayout = ({
 					isImmersive={true}
 					showVideo={card.showVideo}
 					showLabsRedesign={showLabsRedesign}
-					SCStyle={SCStyle}
+					storylinesStyle={storylinesStyle}
 				/>
 			</LI>
 		</UL>
@@ -177,7 +177,7 @@ const decideSplashCardProperties = (
 	mediaCard: boolean,
 	useLargerHeadlineSizeDesktop: boolean,
 	avatarUrl: boolean,
-	SCStyle?: boolean,
+	storylinesStyle?: boolean,
 ): BoostedSplashProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
@@ -207,13 +207,13 @@ const decideSplashCardProperties = (
 				mediaPositionOnDesktop: 'right',
 				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
 				mediaSize: avatarUrl ? 'large' : 'xlarge',
-				supportingContentAlignment: SCStyle
+				supportingContentAlignment: storylinesStyle
 					? 'vertical'
 					: supportingContentLength >= 4
 					? 'horizontal'
 					: 'vertical',
 				liveUpdatesAlignment: 'vertical',
-				trailTextSize: SCStyle ? 'large' : 'regular',
+				trailTextSize: storylinesStyle ? 'large' : 'regular',
 				subtitleSize: 'medium',
 			};
 		case 'megaboost':
@@ -266,7 +266,7 @@ type SplashCardLayoutProps = {
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 	enableHls?: boolean;
-	SCStyle?: boolean;
+	storylinesStyle?: boolean;
 };
 
 const SplashCardLayout = ({
@@ -281,7 +281,7 @@ const SplashCardLayout = ({
 	collectionId,
 	showLabsRedesign,
 	enableHls,
-	SCStyle,
+	storylinesStyle,
 }: SplashCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -321,7 +321,7 @@ const SplashCardLayout = ({
 		isMediaCard(card.format),
 		useLargerHeadlineSizeDesktop,
 		!!card.avatarUrl,
-		SCStyle,
+		storylinesStyle,
 	);
 
 	return (
@@ -369,7 +369,7 @@ const SplashCardLayout = ({
 					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
 					showLabsRedesign={showLabsRedesign}
 					enableHls={enableHls}
-					SCStyle={SCStyle}
+					storylinesStyle={storylinesStyle}
 				/>
 			</LI>
 		</UL>
@@ -438,7 +438,7 @@ type FullWidthCardLayoutProps = {
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 	enableHls?: boolean;
-	SCStyle?: boolean;
+	storylinesStyle?: boolean;
 };
 
 const FullWidthCardLayout = ({
@@ -454,7 +454,7 @@ const FullWidthCardLayout = ({
 	collectionId,
 	showLabsRedesign,
 	enableHls,
-	SCStyle,
+	storylinesStyle,
 }: FullWidthCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -482,7 +482,7 @@ const FullWidthCardLayout = ({
 				imageLoading={imageLoading}
 				collectionId={collectionId}
 				showLabsRedesign={showLabsRedesign}
-				SCStyle={SCStyle}
+				storylinesStyle={storylinesStyle}
 			/>
 		);
 	}
@@ -533,7 +533,7 @@ const FullWidthCardLayout = ({
 					showLabsRedesign={showLabsRedesign}
 					subtitleSize={subtitleSize}
 					enableHls={enableHls}
-					SCStyle={SCStyle}
+					storylinesStyle={storylinesStyle}
 				/>
 			</LI>
 		</UL>
@@ -554,7 +554,7 @@ type HalfWidthCardLayoutProps = {
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 	enableHls?: boolean;
-	SCStyle?: boolean;
+	storylinesStyle?: boolean;
 };
 
 const HalfWidthCardLayout = ({
@@ -570,7 +570,7 @@ const HalfWidthCardLayout = ({
 	containerLevel,
 	showLabsRedesign,
 	enableHls,
-	SCStyle,
+	storylinesStyle,
 }: HalfWidthCardLayoutProps) => {
 	if (cards.length === 0) return null;
 
@@ -627,7 +627,7 @@ const HalfWidthCardLayout = ({
 							canPlayInline={false}
 							showLabsRedesign={showLabsRedesign}
 							enableHls={enableHls}
-							SCStyle={SCStyle}
+							storylinesStyle={storylinesStyle}
 						/>
 					</LI>
 				);
@@ -647,7 +647,7 @@ export const FlexibleGeneral = ({
 	collectionId,
 	showLabsRedesign,
 	enableHls,
-	SCStyle = false,
+	storylinesStyle = false,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
 		...snap,
@@ -678,7 +678,7 @@ export const FlexibleGeneral = ({
 					collectionId={collectionId}
 					showLabsRedesign={showLabsRedesign}
 					enableHls={enableHls}
-					SCStyle={SCStyle}
+					storylinesStyle={storylinesStyle}
 				/>
 			)}
 			{groupedCards.map((row, i) => {
@@ -699,7 +699,7 @@ export const FlexibleGeneral = ({
 								collectionId={collectionId}
 								showLabsRedesign={showLabsRedesign}
 								enableHls={enableHls}
-								SCStyle={SCStyle}
+								storylinesStyle={storylinesStyle}
 							/>
 						);
 
@@ -721,7 +721,7 @@ export const FlexibleGeneral = ({
 								containerLevel={containerLevel}
 								showLabsRedesign={showLabsRedesign}
 								enableHls={enableHls}
-								SCStyle={SCStyle}
+								storylinesStyle={storylinesStyle}
 							/>
 						);
 				}

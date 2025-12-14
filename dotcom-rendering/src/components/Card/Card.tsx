@@ -166,7 +166,7 @@ export type Props = {
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 	enableHls?: boolean;
-	SCStyle?: boolean;
+	storylinesStyle?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -426,7 +426,7 @@ export const Card = ({
 	showLabsRedesign = false,
 	subtitleSize = 'small',
 	enableHls = false,
-	SCStyle = false,
+	storylinesStyle = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -458,7 +458,7 @@ export const Card = ({
 		const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
 
 		const shouldShowAge =
-			SCStyle ||
+			storylinesStyle ||
 			isTagPage ||
 			!!onwardsSource ||
 			(showAge && withinTwelveHours);
@@ -514,7 +514,7 @@ export const Card = ({
 			css={css`
 				margin-top: auto;
 				display: flex;
-				${SCStyle &&
+				${storylinesStyle &&
 				`
 					flex-direction: column;
 					gap: ${space[1]}px;
@@ -524,7 +524,7 @@ export const Card = ({
 		>
 			{/* We add this card footer here because ordinarily, it's either the pill or the footer, but
 		 we need to display the date on these cards if they appear in the storylines section */}
-			{SCStyle && (
+			{storylinesStyle && (
 				<CardFooter
 					format={format}
 					age={decideAge()}
@@ -787,7 +787,6 @@ export const Card = ({
 		if (sublinkPosition === 'outer') {
 			return (
 				<>
-					<div>test </div>
 					<Sublinks />
 				</>
 			);
@@ -813,7 +812,7 @@ export const Card = ({
 					containerPalette={containerPalette}
 					isDynamo={isDynamo}
 					fillBackgroundOnMobile={isFlexSplash}
-					SCStyle={SCStyle}
+					storylinesStyle={storylinesStyle}
 				/>
 			</Hide>
 		);
@@ -1251,7 +1250,7 @@ export const Card = ({
 						`}
 					>
 						{/* why is this needed, sublinks? */}
-						{SCStyle && isFlexSplash
+						{storylinesStyle && isFlexSplash
 							? null
 							: headlinePosition === 'inner' && (
 									<HeadlineWrapper>

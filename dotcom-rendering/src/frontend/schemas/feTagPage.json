@@ -1284,7 +1284,7 @@
         "contributionsServiceUrl": {
             "type": "string"
         },
-        "TPSGContent": {
+        "storylinesContent": {
             "type": "object",
             "properties": {
                 "created": {
@@ -1345,7 +1345,6 @@
                                                         "required": [
                                                             "altText",
                                                             "isAvatar",
-                                                            "mediaData",
                                                             "src"
                                                         ]
                                                     }

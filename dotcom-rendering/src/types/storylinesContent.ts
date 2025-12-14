@@ -1,14 +1,14 @@
 import type { DCRGroupedTrails } from './front';
 import type { MainMedia } from './mainMedia';
 
-export type Storyline = {
+export type ParsedStoryline = {
 	id: string;
 	title: string;
-	categories: Category[];
+	categories: ParsedCategory[];
 };
 
 // probably want to add a generic category type mapping to those in supercharger (e.g. opinions) and map this to a container type and title (e.g. "Contrasting Opinions" + "flexible/general")
-export type Category = {
+export type ParsedCategory = {
 	title: string;
 	containerType: string;
 	groupedTrails: DCRGroupedTrails;
@@ -18,7 +18,7 @@ export type ImageData = {
 	src: string;
 	altText: string;
 	isAvatar: boolean;
-	mediaData: MainMedia | null;
+	mediaData?: MainMedia | null;
 };
 
 export type ArticleData = {
@@ -34,15 +34,15 @@ export type CategoryContent = {
 	articles: ArticleData[];
 };
 
-export type StorylineContent = {
+export type Storyline = {
 	title: string;
 	content: CategoryContent[];
 };
 
-export type TPSGContent = {
+export type StorylinesContent = {
 	created: string;
 	tag: string;
-	storylines: StorylineContent[];
+	storylines: Storyline[];
 	articleCount?: number | null;
 	earliestArticleTime?: string | null;
 	latestArticleTime?: string | null;

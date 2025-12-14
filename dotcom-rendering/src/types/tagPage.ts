@@ -6,8 +6,8 @@ import type { CommercialProperties } from './commercial';
 import type { FooterType } from './footer';
 import type { DCRFrontCard } from './front';
 import type { FENavType } from './frontend';
+import type { StorylinesContent } from './storylinesContent';
 import type { FETagType } from './tag';
-import type { TPSGContent } from './tagPageAIContent';
 
 /**
  * Represents a set of trails grouped by their year, month & optionally day of publication.
@@ -62,7 +62,7 @@ export interface TagPage {
 	branding: CollectionBranding | undefined;
 	canonicalUrl?: string;
 	contributionsServiceUrl: string;
-	TagPageAIContent?: TPSGContent;
+	storylinesContent?: StorylinesContent;
 }
 
 export type HeaderImage =

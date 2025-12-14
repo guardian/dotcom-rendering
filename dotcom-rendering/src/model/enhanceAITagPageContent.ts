@@ -3,9 +3,9 @@ import type { DCRFrontCard, DCRGroupedTrails } from '../types/front';
 import type {
 	ArticleData,
 	CategoryContent,
-	Storyline,
-	TPSGContent,
-} from '../types/tagPageAIContent';
+	ParsedStoryline,
+	StorylinesContent,
+} from '../types/storylinesContent';
 
 function decideFormatForArticle(
 	category: CategoryContent,
@@ -171,7 +171,9 @@ function decideGroupedTrails(category: CategoryContent): DCRGroupedTrails {
 	}
 }
 
-export function parseTPSGContentToStorylines(data: TPSGContent): Storyline[] {
+export function parseStorylinesContentToStorylines(
+	data: StorylinesContent,
+): ParsedStoryline[] {
 	function decideCategoryTitle(category: CategoryContent): string {
 		switch (category.category) {
 			case 'Key Stories':

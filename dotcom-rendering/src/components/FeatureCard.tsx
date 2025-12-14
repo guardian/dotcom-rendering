@@ -344,7 +344,7 @@ export type Props = {
 	showVideo?: boolean;
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
-	SCStyle?: boolean;
+	storylinesStyle?: boolean;
 };
 
 export const FeatureCard = ({
@@ -381,7 +381,7 @@ export const FeatureCard = ({
 	isImmersive = false,
 	showVideo = false,
 	showLabsRedesign = false,
-	SCStyle = false,
+	storylinesStyle = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -669,7 +669,9 @@ export const FeatureCard = ({
 														}
 														showClock={!!showClock}
 														serverTime={serverTime}
-														SCStyle={SCStyle}
+														storylinesStyle={
+															storylinesStyle
+														}
 													/>
 												) : undefined
 											}

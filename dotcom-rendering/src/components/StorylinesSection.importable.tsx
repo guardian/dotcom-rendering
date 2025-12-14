@@ -11,9 +11,9 @@ import {
 } from '@guardian/source/foundations';
 import { useState } from 'react';
 import type { EditionId } from '../lib/edition';
-import { parseTPSGContentToStorylines } from '../model/enhanceAITagPageContent';
+import { parseStorylinesContentToStorylines } from '../model/enhanceAITagPageContent';
 import { palette } from '../palette';
-import type { TPSGContent } from '../types/tagPageAIContent';
+import type { StorylinesContent } from '../types/storylinesContent';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { ScrollableCarousel } from './ScrollableCarousel';
 import { StorylineSection } from './StorylineSection';
@@ -23,7 +23,7 @@ type StorylinesSectionProps = {
 	index: number;
 	containerId?: string;
 	editionId: EditionId;
-	TPSGContent?: TPSGContent;
+	storylinesContent?: StorylinesContent;
 };
 
 const categoryTitleCss = css`
@@ -144,13 +144,13 @@ export const StorylinesSection = ({
 	url,
 	index,
 	containerId, //need to check
-	TPSGContent,
+	storylinesContent,
 	editionId,
 }: StorylinesSectionProps) => {
-	console.log('has TPSGContent', !!TPSGContent);
-	// console.log('TPSGContent', TPSGContent);
-	// const [storylines, SetStorylines] = useState<TPSGContent>();
-	const storylines = TPSGContent;
+	console.log('has StorylinesContent', !!storylinesContent);
+	// console.log('StorylinesContent', StorylinesContent);
+	// const [storylines, SetStorylines] = useState<StorylinesContent>();
+	const storylines = storylinesContent;
 
 	// useEffect(() => {
 	// 	fetch(
@@ -173,7 +173,7 @@ export const StorylinesSection = ({
 	// }, []);
 
 	const parsedStorylines =
-		storylines && parseTPSGContentToStorylines(storylines);
+		storylines && parseStorylinesContentToStorylines(storylines);
 
 	const [activeStorylineId, setActiveStorylineId] = useState<string>(
 		parsedStorylines?.[0]?.id ?? '',
@@ -285,7 +285,7 @@ export const StorylinesSection = ({
 								aspectRatio={'5:4'}
 								collectionId={0}
 								containerLevel="Secondary"
-								SCStyle={true}
+								storylinesStyle={true}
 							/>
 						</div>
 					))}
