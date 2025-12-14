@@ -41,13 +41,10 @@ type Context = 'ArticleMeta' | 'LiveBlock' | 'SubMeta' | 'ImageCaption';
 
 const sharedButtonStyles = (
 	sizeXSmall: boolean,
-	context: Context,
-	format: ArticleFormat,
+	isNonLabsGalleryMeta: boolean,
 ) => css`
 	transition: none;
-	border-color: ${format.design === ArticleDesign.Gallery &&
-	format.theme !== ArticleSpecial.Labs &&
-	context == 'ArticleMeta'
+	border-color: ${isNonLabsGalleryMeta
 		? themePalette('--share-button-border-meta')
 		: sizeXSmall
 		? themePalette('--share-button-xsmall-border')
@@ -135,17 +132,16 @@ export const CopyNativeShareButton = ({
 	size,
 	isLiveBlogMeta,
 	isCopied,
-	context,
-	format,
+	isNonLabsGalleryMeta,
 }: {
 	onShare: () => void;
 	size?: Size;
 	isLiveBlogMeta: boolean;
 	isCopied: boolean;
-	context: Context;
-	format: ArticleFormat;
+	isNonLabsGalleryMeta: boolean;
 }) => {
 	const sizeXSmall = size === 'xsmall';
+
 	return (
 		<Button
 			onClick={onShare}
@@ -158,7 +154,7 @@ export const CopyNativeShareButton = ({
 				...(isCopied
 					? [copiedButtonStyles(sizeXSmall)]
 					: [buttonStyles(sizeXSmall)]),
-				sharedButtonStyles(sizeXSmall, context, format),
+				sharedButtonStyles(sizeXSmall, isNonLabsGalleryMeta),
 				isLiveBlogMeta && liveBlogMobileMeta(isCopied),
 			])}
 			data-gu-name="share-button"
@@ -172,16 +168,15 @@ export const EmailLink = ({
 	href,
 	size,
 	isLiveBlogMeta,
-	format,
-	context,
+	isNonLabsGalleryMeta,
 }: {
 	href: string;
 	size?: Size;
 	isLiveBlogMeta: boolean;
-	format: ArticleFormat;
-	context: Context;
+	isNonLabsGalleryMeta: boolean;
 }) => {
 	const sizeXSmall = size === 'xsmall';
+
 	return (
 		<LinkButton
 			href={href}
@@ -192,7 +187,7 @@ export const EmailLink = ({
 			icon={<SvgShareWeb />}
 			cssOverrides={css([
 				buttonStyles(sizeXSmall),
-				sharedButtonStyles(sizeXSmall, context, format),
+				sharedButtonStyles(sizeXSmall, isNonLabsGalleryMeta),
 				isLiveBlogMeta && liveBlogMobileMeta(false),
 			])}
 		>
@@ -230,6 +225,11 @@ export const ShareButton = ({
 
 	const isLiveBlogMeta =
 		format.design === ArticleDesign.LiveBlog && context === 'ArticleMeta';
+
+	const isNonLabsGalleryMeta =
+		format.design === ArticleDesign.Gallery &&
+		format.theme !== ArticleSpecial.Labs &&
+		context === 'ArticleMeta';
 
 	const isDesktop = useMatchMedia(`(min-width: ${breakpoints.desktop}px)`);
 
@@ -281,8 +281,7 @@ export const ShareButton = ({
 					size={size}
 					isLiveBlogMeta={isLiveBlogMeta}
 					isCopied={isCopied}
-					context={context}
-					format={format}
+					isNonLabsGalleryMeta={isNonLabsGalleryMeta}
 				/>
 			);
 		case 'copy':
@@ -299,8 +298,7 @@ export const ShareButton = ({
 					size={size}
 					isLiveBlogMeta={isLiveBlogMeta}
 					isCopied={isCopied}
-					context={context}
-					format={format}
+					isNonLabsGalleryMeta={isNonLabsGalleryMeta}
 				/>
 			);
 		case 'email':
@@ -309,8 +307,7 @@ export const ShareButton = ({
 					href={`mailto:?subject=${webTitle}&body=${shareData.url}`}
 					size={size}
 					isLiveBlogMeta={isLiveBlogMeta}
-					context={context}
-					format={format}
+					isNonLabsGalleryMeta={isNonLabsGalleryMeta}
 				/>
 			);
 	}
