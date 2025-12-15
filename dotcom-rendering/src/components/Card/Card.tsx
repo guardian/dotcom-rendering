@@ -836,6 +836,7 @@ export const Card = ({
 						ophanComponentLink={dataAttributes?.ophanComponentLink}
 						ophanComponentName={dataAttributes?.ophanComponentName}
 						isLabs={isLabs}
+						dataTestId="card-branding-logo"
 					/>
 				</div>
 				{/** Tablet sized screens have vertical orientation */}

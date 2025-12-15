@@ -836,6 +836,7 @@ export const FrontSection = ({
 										labsDataAttributes?.ophanComponentName
 									}
 									isLabs={isLabs}
+									dataTestId="front-branding-logo"
 								/>
 							</div>
 						)}

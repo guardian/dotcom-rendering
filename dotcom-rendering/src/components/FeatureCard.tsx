@@ -736,6 +736,7 @@ export const FeatureCard = ({
 								labsDataAttributes?.ophanComponentName
 							}
 							isLabs={isLabs}
+							dataTestId="card-branding-logo"
 						/>
 					)}
 				</div>
