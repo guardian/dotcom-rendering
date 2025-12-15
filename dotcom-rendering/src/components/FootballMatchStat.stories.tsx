@@ -60,20 +60,13 @@ export const ShownAsPercentage = {
 		},
 		homeValue: 39,
 		awayValue: 61,
-		showPercentage: true,
+		isPercentage: true,
 	},
 } satisfies Story;
 
-export const RaisedLabelOnDesktop = {
+export const CompactLayout = {
 	args: {
 		...Default.args,
-		raiseLabelOnDesktop: true,
-	},
-} satisfies Story;
-
-export const LargeNumbersOnDesktop = {
-	args: {
-		...Default.args,
-		largeNumbersOnDesktop: true,
+		layout: 'compact',
 	},
 } satisfies Story;

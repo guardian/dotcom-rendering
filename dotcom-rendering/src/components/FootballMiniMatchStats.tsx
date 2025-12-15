@@ -35,7 +35,7 @@ type MatchStatistic = {
 	label: string;
 	homeValue: number;
 	awayValue: number;
-	showPercentage?: boolean;
+	isPercentage?: boolean;
 };
 
 type Props = {
@@ -65,8 +65,8 @@ export const FootballMiniMatchStats = ({
 					}}
 					homeValue={stat.homeValue}
 					awayValue={stat.awayValue}
-					showPercentage={stat.showPercentage}
-					raiseLabelOnDesktop={true}
+					isPercentage={stat.isPercentage}
+					layout="compact"
 				/>
 			))}
 			<LinkButton

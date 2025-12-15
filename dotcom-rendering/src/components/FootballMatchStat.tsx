@@ -31,15 +31,6 @@ const containerCss = css`
 	}
 `;
 
-const raiseLabelCss = css`
-	${from.desktop} {
-		grid-template-areas:
-			'label     label label'
-			'home-stat .     away-stat'
-			'graph     graph graph';
-	}
-`;
-
 const labelCss = css`
 	${textSansBold14};
 	grid-area: label;
@@ -47,6 +38,15 @@ const labelCss = css`
 	color: ${palette('--football-match-stat-text')};
 	${from.desktop} {
 		${textSansBold15};
+	}
+`;
+
+const labelSeparateRowCss = css`
+	${from.desktop} {
+		grid-template-areas:
+			'label     label label'
+			'home-stat .     away-stat'
+			'graph     graph graph';
 	}
 `;
 
@@ -92,9 +92,8 @@ type Props = {
 	awayTeam: Team;
 	homeValue: number;
 	awayValue: number;
-	showPercentage?: boolean;
-	raiseLabelOnDesktop?: boolean;
-	largeNumbersOnDesktop?: boolean;
+	layout?: 'regular' | 'compact';
+	isPercentage?: boolean;
 };
 
 const formatValue = (value: number, showPercentage: boolean) =>
@@ -106,18 +105,18 @@ export const FootballMatchStat = ({
 	awayTeam,
 	homeValue,
 	awayValue,
-	showPercentage = false,
-	raiseLabelOnDesktop = false,
-	largeNumbersOnDesktop = false,
+	layout,
+	isPercentage = false,
 }: Props) => {
+	const compactLayout = layout === 'compact';
 	const homePercentage = (homeValue / (homeValue + awayValue)) * 100;
 	const awayPercentage = (awayValue / (homeValue + awayValue)) * 100;
 
 	return (
-		<div css={[containerCss, raiseLabelOnDesktop && raiseLabelCss]}>
+		<div css={[containerCss, compactLayout && labelSeparateRowCss]}>
 			<span css={labelCss}>{label}</span>
 			<span
-				css={[numberCss, largeNumbersOnDesktop && largeNumberCss]}
+				css={[numberCss, !compactLayout && largeNumberCss]}
 				style={{ '--match-stat-team-colour': homeTeam.colour }}
 			>
 				<span
@@ -127,14 +126,10 @@ export const FootballMatchStat = ({
 				>
 					{homeTeam.name}
 				</span>
-				{formatValue(homeValue, showPercentage)}
+				{formatValue(homeValue, isPercentage)}
 			</span>
 			<span
-				css={[
-					numberCss,
-					awayStatCss,
-					largeNumbersOnDesktop && largeNumberCss,
-				]}
+				css={[numberCss, awayStatCss, !compactLayout && largeNumberCss]}
 				style={{ '--match-stat-team-colour': awayTeam.colour }}
 			>
 				<span
@@ -144,7 +139,7 @@ export const FootballMatchStat = ({
 				>
 					{awayTeam.name}
 				</span>
-				{formatValue(awayValue, showPercentage)}
+				{formatValue(awayValue, isPercentage)}
 			</span>
 			<div aria-hidden="true" css={graphCss}>
 				<div
