@@ -122,6 +122,7 @@ type Props = {
 	posterImage?: string;
 	preloadPartialData: boolean;
 	showPlayIcon: boolean;
+	enableCors?: boolean;
 	subtitleSource?: string;
 	subtitleSize?: SubtitleSize;
 	/* used in custom subtitle overlays */
@@ -132,12 +133,10 @@ type Props = {
 /**
  * Note that in React 19, forwardRef is no longer necessary:
  * https://react.dev/reference/react/forwardRef
- */
-/**
+ *
  * NB: To develop the video player locally, use `https://r.thegulocal.com/` instead of `localhost`.
  * This is required because CORS restrictions prevent accessing the subtitles and video file from localhost.
  */
-
 export const SelfHostedVideoPlayer = forwardRef(
 	(
 		{
@@ -165,6 +164,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			AudioIcon,
 			preloadPartialData,
 			showPlayIcon,
+			enableCors = true,
 			subtitleSource,
 			subtitleSize,
 			activeCue,
@@ -200,7 +200,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 						videoStyles(width, height),
 						showSubtitles && subtitleStyles(subtitleSize),
 					]}
-					crossOrigin="anonymous"
+					crossOrigin={enableCors ? 'anonymous' : undefined}
 					ref={ref}
 					tabIndex={0}
 					data-testid="self-hosted-video-player"

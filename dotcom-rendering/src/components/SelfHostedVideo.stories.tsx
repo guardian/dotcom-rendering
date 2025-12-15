@@ -32,6 +32,7 @@ export const Loop5to4: Story = {
 		uniqueId: 'test-video-1',
 		atomId: 'test-atom-1',
 		videoStyle: 'Loop',
+		enableCors: false,
 		height: 720,
 		width: 900,
 		posterImage:
