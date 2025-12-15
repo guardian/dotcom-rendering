@@ -28,8 +28,13 @@ const containerCss = css`
 		left: 50%;
 		bottom: 0;
 		width: 1px;
-		height: ${space[6]}px;
+		height: calc(100% - 25px);
 		background-color: ${palette('--football-match-stat-border')};
+	}
+	${from.desktop} {
+		&::before {
+			height: calc(100% - 27px);
+		}
 	}
 `;
 
@@ -181,14 +186,8 @@ const goalAttemptsLayoutCss = css`
 		'label         label'
 		'home-attempts away-attempts';
 	column-gap: 10px;
-	&:before {
-		height: 121px;
-	}
 	${from.desktop} {
 		column-gap: 20px;
-		&:before {
-			height: 125px;
-		}
 	}
 `;
 
