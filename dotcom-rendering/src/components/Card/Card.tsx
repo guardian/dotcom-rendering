@@ -447,17 +447,7 @@ export const Card = ({
 	 * A "video article" refers to standalone video content presented as the main focus of the article.
 	 * It is treated as a media card in the design system.
 	 */
-	const isVideoArticle =
-		mainMedia?.type === 'YoutubeVideo' &&
-		format.design === ArticleDesign.Video;
-
-	/**
-	 * Articles with a video as the main media but not classified as "video articles"
-	 * are styled differently and are not treated as media cards.
-	 */
-	const isVideoMainMedia =
-		mainMedia?.type === 'YoutubeVideo' &&
-		format.design !== ArticleDesign.Video;
+	const isVideoArticle = format.design === ArticleDesign.Video;
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
@@ -521,7 +511,7 @@ export const Card = ({
 				display: flex;
 			`}
 		>
-			{isVideoArticle && (
+			{mainMedia?.type === 'YoutubeVideo' && isVideoArticle && (
 				<>
 					{mainMedia.duration === 0 ? (
 						<Pill
@@ -537,7 +527,6 @@ export const Card = ({
 					)}
 				</>
 			)}
-
 			{mainMedia?.type === 'Audio' && (
 				<Pill
 					content={mainMedia.duration}
@@ -552,6 +541,22 @@ export const Card = ({
 					prefix="Gallery"
 				/>
 			)}
+			{mainMedia?.type === 'SelfHostedVideo' &&
+				(format.design === ArticleDesign.Video ? (
+					<Pill
+						content=""
+						icon={<SvgMediaControlsPlay width={18} />}
+						prefix="Video"
+					/>
+				) : format.design === ArticleDesign.Audio ? (
+					<Pill
+						content=""
+						icon={<SvgMediaControlsPlay width={18} />}
+						prefix="Podcast"
+					/>
+				) : format.design === ArticleDesign.Gallery ? (
+					<Pill content="" icon={<SvgCamera />} prefix="Gallery" />
+				) : null)}
 			{isNewsletter && <Pill content="Newsletter" />}
 		</div>
 	);
@@ -667,6 +672,13 @@ export const Card = ({
 	 */
 	const getGapSizes = (): GapSizes => {
 		if (isOnwardContent && !isGallerySecondaryOnward) {
+			if (isMoreGalleriesOnwardContent) {
+				return {
+					row: 'small',
+					column: 'small',
+				};
+			}
+
 			return {
 				row: 'none',
 				column: 'none',
@@ -1122,26 +1134,28 @@ export const Card = ({
 									loading={imageLoading}
 									aspectRatio={aspectRatio}
 								/>
-								{isVideoMainMedia && mainMedia.duration > 0 && (
-									<div
-										css={css`
-											position: absolute;
-											top: ${space[2]}px;
-											right: ${space[2]}px;
-										`}
-									>
-										<Pill
-											content={secondsToDuration(
-												mainMedia.duration,
-											)}
-											icon={
-												<SvgMediaControlsPlay
-													width={18}
-												/>
-											}
-										/>
-									</div>
-								)}
+								{!isVideoArticle &&
+									mainMedia?.type === 'YoutubeVideo' &&
+									mainMedia.duration > 0 && (
+										<div
+											css={css`
+												position: absolute;
+												top: ${space[2]}px;
+												right: ${space[2]}px;
+											`}
+										>
+											<Pill
+												content={secondsToDuration(
+													mainMedia.duration,
+												)}
+												icon={
+													<SvgMediaControlsPlay
+														width={18}
+													/>
+												}
+											/>
+										</div>
+									)}
 							</>
 						)}
 						{media.type === 'crossword' && (
