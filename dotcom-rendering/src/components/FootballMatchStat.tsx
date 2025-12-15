@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	palette as sourcePalette,
 	space,
 	textSans14,
 	textSans15,
@@ -213,7 +214,7 @@ const offTargetAwayCss = css`
 
 const onTargetCss = css`
 	padding: ${space[2]}px 0 0 6px;
-	color: #fff;
+	color: ${sourcePalette.neutral[100]};
 	background-color: var(--on-target-colour);
 	border-radius: 4px;
 	width: 80%;
