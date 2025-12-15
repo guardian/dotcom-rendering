@@ -388,7 +388,7 @@ export const Discussion = ({
 			signal: controller.signal,
 		})
 			.then((result) => {
-				if (result.kind === 'error') {
+				if (!result.ok) {
 					if (result.error !== 'AbortedSignal') {
 						console.error(`getDiscussion - error: ${result.error}`);
 					}
@@ -440,7 +440,7 @@ export const Discussion = ({
 				remapToValidFilters(filters, hashCommentId),
 			)
 				.then((context) => {
-					if (context.kind === 'ok') {
+					if (context.ok) {
 						dispatch({
 							type: 'updateCommentPage',
 							commentPage: context.value.page,

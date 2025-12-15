@@ -1,7 +1,7 @@
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import type { CommentType, Reader, ReplyType } from '../../lib/discussion';
-import { ok } from '../../lib/result';
+import { error, ok, type Result } from '../../lib/result';
 import { CommentContainer } from './CommentContainer';
 
 export default { title: 'Discussion/CommentContainer' };
@@ -134,10 +134,11 @@ const commentDataWithLongThread: CommentType = {
 	},
 };
 
-const commentResponseError = {
-	kind: 'error',
-	error: 'NetworkError',
-} as const;
+const commentResponseError = function <A>(): Promise<
+	Result<'NetworkError', A>
+> {
+	return Promise.resolve(error('NetworkError'));
+};
 
 const aUser: Reader = {
 	kind: 'Reader',
@@ -155,8 +156,8 @@ const aUser: Reader = {
 			hasCommented: true,
 		},
 	},
-	onComment: () => Promise.resolve(commentResponseError),
-	onReply: () => Promise.resolve(commentResponseError),
+	onComment: commentResponseError,
+	onReply: commentResponseError,
 	onRecommend: () => Promise.resolve(true),
 	addUsername: () => Promise.resolve(ok(true)),
 	reportAbuse: () => Promise.resolve(ok(true)),
