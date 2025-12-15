@@ -117,6 +117,7 @@ export const ProductCarouselCard = ({
 					<ProductLinkButton
 						label={`Buy at ${firstCta.retailer}`}
 						url={firstCta.url}
+						fullwidth={true}
 						minimisePadding={true}
 					/>
 				</div>
