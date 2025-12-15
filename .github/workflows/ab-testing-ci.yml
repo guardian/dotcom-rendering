@@ -125,19 +125,19 @@ jobs:
         uses: ./.github/actions/setup-node-env
 
       - name: Fetch config build
-        uses: actions/download-artifact@v6.0.0
+        uses: actions/download-artifact@v7.0.0
         with:
           name: ab-testing-build
           path: ab-testing/config/dist
 
       - name: Fetch UI build
-        uses: actions/download-artifact@v6.0.0
+        uses: actions/download-artifact@v7.0.0
         with:
           name: ui-build
           path: ab-testing/frontend/output/ab-tests.html
 
       - name: Fetch Lambda build
-        uses: actions/download-artifact@v6.0.0
+        uses: actions/download-artifact@v7.0.0
         with:
           name: ab-testing-lambda-build
           path: ab-testing/deploy-lambda/dist/lambda.zip
