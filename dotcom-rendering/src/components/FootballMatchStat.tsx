@@ -2,6 +2,8 @@ import { css } from '@emotion/react';
 import {
 	from,
 	space,
+	textSans14,
+	textSans15,
 	textSansBold14,
 	textSansBold15,
 	textSansBold20,
@@ -31,13 +33,9 @@ const containerCss = css`
 	}
 `;
 
-const labelCss = css`
-	${textSansBold14};
-	grid-area: label;
-	justify-self: center;
-	color: ${palette('--football-match-stat-text')};
+const desktopPaddingCss = css`
 	${from.desktop} {
-		${textSansBold15};
+		padding-bottom: 14px;
 	}
 `;
 
@@ -47,6 +45,16 @@ const labelSeparateRowCss = css`
 			'label     label label'
 			'home-stat .     away-stat'
 			'graph     graph graph';
+	}
+`;
+
+const labelCss = css`
+	${textSansBold14};
+	grid-area: label;
+	justify-self: center;
+	color: ${palette('--football-match-stat-text')};
+	${from.desktop} {
+		${textSansBold15};
 	}
 `;
 
@@ -86,7 +94,7 @@ type Team = {
 	colour: string;
 };
 
-type Props = {
+type MatchStatProps = {
 	label: string;
 	homeTeam: Team;
 	awayTeam: Team;
@@ -107,13 +115,19 @@ export const FootballMatchStat = ({
 	awayValue,
 	layout,
 	isPercentage = false,
-}: Props) => {
+}: MatchStatProps) => {
 	const compactLayout = layout === 'compact';
 	const homePercentage = (homeValue / (homeValue + awayValue)) * 100;
 	const awayPercentage = (awayValue / (homeValue + awayValue)) * 100;
 
 	return (
-		<div css={[containerCss, compactLayout && labelSeparateRowCss]}>
+		<div
+			css={[
+				containerCss,
+				compactLayout && labelSeparateRowCss,
+				!compactLayout && desktopPaddingCss,
+			]}
+		>
 			<span css={labelCss}>{label}</span>
 			<span
 				css={[numberCss, !compactLayout && largeNumberCss]}
@@ -156,6 +170,99 @@ export const FootballMatchStat = ({
 						'--match-stat-team-colour': awayTeam.colour,
 					}}
 				></div>
+			</div>
+		</div>
+	);
+};
+
+const goalAttemptsLayoutCss = css`
+	grid-template-columns: 1fr 1fr;
+	grid-template-areas:
+		'label         label'
+		'home-attempts away-attempts';
+	column-gap: 10px;
+	&:before {
+		height: 121px;
+	}
+	${from.desktop} {
+		column-gap: 20px;
+		&:before {
+			height: 125px;
+		}
+	}
+`;
+
+const offTargetCss = css`
+	${textSans14};
+	grid-area: home-attempts;
+	margin-top: 5px;
+	padding: ${space[2]}px 0 0 6px;
+	background-color: rgba(218, 2, 14, 0.1);
+	border-radius: 4px;
+	${from.desktop} {
+		${textSans15};
+	}
+`;
+
+const offTargetAwayCss = css`
+	grid-area: away-attempts;
+	text-align: right;
+	padding-left: 0;
+	padding-right: 6px;
+	background-color: rgba(2, 52, 116, 0.1);
+`;
+
+const onTargetCss = css`
+	padding: ${space[2]}px 0 0 6px;
+	color: #fff;
+	background-color: rgba(218, 2, 14, 1);
+	border-radius: 4px;
+	width: 80%;
+	justify-self: end;
+`;
+
+const onTargetAwayCss = css`
+	padding-left: 0;
+	padding-right: 6px;
+	background-color: rgba(2, 52, 116, 1);
+	justify-self: start;
+`;
+
+const attemptCountCss = css`
+	display: block;
+	${textSansBold20};
+	${from.desktop} {
+		${textSansBold28};
+	}
+`;
+
+type GoalAttemptProps = {
+	homeTeam: Team;
+	awayTeam: Team;
+};
+
+export const FootballMatchGoalAttempts = ({
+	homeTeam,
+	awayTeam,
+}: GoalAttemptProps) => {
+	return (
+		<div css={[containerCss, desktopPaddingCss, goalAttemptsLayoutCss]}>
+			<div css={labelCss}>Goal attempts</div>
+			<div css={offTargetCss}>
+				Off target
+				<span css={attemptCountCss}>6</span>
+				<div css={onTargetCss}>
+					On target
+					<span css={attemptCountCss}>5</span>
+				</div>
+			</div>
+			<div css={[offTargetCss, offTargetAwayCss]}>
+				Off target
+				<span css={attemptCountCss}>6</span>
+				<div css={[onTargetCss, onTargetAwayCss]}>
+					On target
+					<span css={attemptCountCss}>2</span>
+				</div>
 			</div>
 		</div>
 	);
