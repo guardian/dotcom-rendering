@@ -7043,7 +7043,7 @@ const paletteColours = {
 		light: () => '#3DB540',
 		dark: () => '#3DB540',
 	},
-  '--football-live-blog-background': {
+	'--football-live-blog-background': {
 		light: () => sourcePalette.neutral[97],
 		dark: () => sourcePalette.neutral[10],
 	},
@@ -7066,7 +7066,7 @@ const paletteColours = {
 	'--football-match-header-fixture-result-selected': {
 		light: () => sourcePalette.sport[600],
 		dark: () => sourcePalette.sport[600],
-  },
+	},
 	'--football-match-hover': {
 		light: () => sourcePalette.neutral[93],
 		dark: () => sourcePalette.neutral[38],
