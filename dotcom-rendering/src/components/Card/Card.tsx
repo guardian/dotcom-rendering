@@ -785,11 +785,7 @@ export const Card = ({
 		);
 
 		if (sublinkPosition === 'outer') {
-			return (
-				<>
-					<Sublinks />
-				</>
-			);
+			return <Sublinks />;
 		}
 
 		return (
@@ -1249,7 +1245,7 @@ export const Card = ({
 							flex-grow: 1;
 						`}
 					>
-						{/* why is this needed, sublinks? */}
+						{/* why is this needed, to hide the headline if we're in the splash? */}
 						{storylinesStyle && isFlexSplash
 							? null
 							: headlinePosition === 'inner' && (
@@ -1282,6 +1278,12 @@ export const Card = ({
 											}
 											showLabsRedesign={showLabsRedesign}
 										/>
+										{!isUndefined(starRating) ? (
+											<StarRatingComponent
+												rating={starRating}
+												cardHasImage={!!image}
+											/>
+										) : null}
 									</HeadlineWrapper>
 							  )}
 
