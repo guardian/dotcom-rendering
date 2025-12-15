@@ -2745,6 +2745,8 @@ const captionTextDark: PaletteFunction = ({ design, theme }) => {
 
 const captionMainMediaTextLight: PaletteFunction = (format) => {
 	switch (format.design) {
+		case ArticleDesign.PhotoEssay:
+			return sourcePalette.neutral[46];
 		case ArticleDesign.Gallery:
 			switch (format.theme) {
 				case ArticleSpecial.Labs:
@@ -2756,8 +2758,14 @@ const captionMainMediaTextLight: PaletteFunction = (format) => {
 			return captionTextLight(format);
 	}
 };
-const captionMainMediaTextDark: PaletteFunction = (format) =>
-	captionTextDark(format);
+const captionMainMediaTextDark: PaletteFunction = (format) => {
+	switch (format.design) {
+		case ArticleDesign.PhotoEssay:
+			return sourcePalette.neutral[60];
+		default:
+			return captionTextDark(format);
+	}
+};
 
 const captionLink: PaletteFunction = ({ design, theme }) => {
 	if (design === ArticleDesign.Analysis && theme === Pillar.News) {
