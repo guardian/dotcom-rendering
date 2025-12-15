@@ -217,8 +217,17 @@ const sidePaddingDesktop = css`
 const bodyWrapper = css`
 	position: relative;
 	margin-bottom: ${space[3]}px;
+	padding: ${space[3]}px;
+	overflow: hidden;
+
+	${from.mobileLandscape} {
+		padding: ${space[3]}px ${space[5]}px;
+	}
+
 	${from.desktop} {
 		margin-bottom: 0;
+		padding: 0;
+		overflow: visible;
 	}
 `;
 

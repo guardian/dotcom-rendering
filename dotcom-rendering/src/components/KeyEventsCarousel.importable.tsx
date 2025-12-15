@@ -31,12 +31,17 @@ const carouselStyles = css`
 	scroll-behavior: smooth;
 	overflow-x: auto;
 	overflow-y: hidden;
+	margin-right: -10px;
 	scrollbar-width: none;
 	&::-webkit-scrollbar {
 		display: none;
 	}
+	${from.tablet} {
+		margin-right: -20px;
+	}
 
 	${from.desktop} {
+		margin-right: 0px;
 		background-color: ${palette('--key-event-background-desktop')};
 	}
 `;
