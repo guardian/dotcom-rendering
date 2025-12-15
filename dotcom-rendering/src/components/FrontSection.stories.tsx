@@ -404,7 +404,6 @@ export const GuardianLabs = {
 			hasMultipleBranding: false,
 		},
 		isLabs: true,
-		showLabsRedesign: true,
 	},
 };
 

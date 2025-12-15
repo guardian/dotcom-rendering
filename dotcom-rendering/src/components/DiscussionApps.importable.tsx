@@ -31,7 +31,7 @@ const onComment = async (
 			const result = parseCommentResponse(
 				JSON.parse(apiResponse.response),
 			);
-			if (result.kind === 'error') {
+			if (!result.ok) {
 				window.guardian.modules.sentry.reportError(
 					Error(`Failed parseCommentResponse: ${result.error}`),
 					'discussion',
@@ -58,7 +58,7 @@ const onReply = async (
 			const result = parseCommentResponse(
 				JSON.parse(apiResponse.response),
 			);
-			if (result.kind === 'error') {
+			if (!result.ok) {
 				window.guardian.modules.sentry.reportError(
 					Error(`Failed parseCommentResponse: ${result.error}`),
 					'discussion',
@@ -83,7 +83,7 @@ const onRecommend = async (commentId: string): Promise<boolean> => {
 				JSON.parse(discussionApiResponse.response),
 			);
 
-			return result.kind === 'ok';
+			return result.ok;
 		});
 };
 
@@ -125,7 +125,7 @@ export const DiscussionApps = (props: Props) => {
 					JSON.parse(userProfile.response),
 				);
 
-				if (profileResult.kind !== 'ok') return setUser(undefined);
+				if (!profileResult.ok) return setUser(undefined);
 
 				setUser({
 					kind: 'Reader',

@@ -205,7 +205,7 @@ export const AbuseReportForm = ({
 			commentId,
 		})
 			.then((response) => {
-				if (response.kind === 'error') {
+				if (!response.ok) {
 					// Fallback to errors returned from the API
 					setErrors({ ...errors, response: response.error });
 				} else {

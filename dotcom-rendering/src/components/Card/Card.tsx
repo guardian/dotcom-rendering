@@ -56,7 +56,6 @@ import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
 import { YoutubeBlockComponent } from '../YoutubeBlockComponent.importable';
 import { AvatarContainer } from './components/AvatarContainer';
 import { CardAge } from './components/CardAge';
-import { CardBranding } from './components/CardBranding';
 import { CardFooter } from './components/CardFooter';
 import {
 	CardLayout,
@@ -163,8 +162,6 @@ export type Props = {
 	subtitleSize?: SubtitleSize;
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
-	/** Feature flag for the labs redesign work */
-	showLabsRedesign?: boolean;
 	enableHls?: boolean;
 };
 
@@ -422,7 +419,6 @@ export const Card = ({
 	trailTextSize,
 	showKickerImage = false,
 	headlinePosition = 'inner',
-	showLabsRedesign = false,
 	subtitleSize = 'small',
 	enableHls = false,
 }: Props) => {
@@ -822,7 +818,7 @@ export const Card = ({
 			  })
 			: undefined;
 
-		return showLabsRedesign ? (
+		return (
 			<>
 				{/** All screen sizes apart from tablet have horizontal orientation */}
 				<div
@@ -840,6 +836,7 @@ export const Card = ({
 						ophanComponentLink={dataAttributes?.ophanComponentLink}
 						ophanComponentName={dataAttributes?.ophanComponentName}
 						isLabs={isLabs}
+						dataTestId="card-branding-logo"
 					/>
 				</div>
 				{/** Tablet sized screens have vertical orientation */}
@@ -864,12 +861,6 @@ export const Card = ({
 					/>
 				</div>
 			</>
-		) : (
-			<CardBranding
-				branding={branding}
-				containerPalette={containerPalette}
-				onwardsSource={onwardsSource}
-			/>
 		);
 	};
 
@@ -916,7 +907,6 @@ export const Card = ({
 						byline={byline}
 						showByline={showByline}
 						isExternalLink={isExternalLink}
-						showLabsRedesign={showLabsRedesign}
 					/>
 					{!isUndefined(starRating) ? (
 						<StarRatingComponent
@@ -1245,7 +1235,6 @@ export const Card = ({
 											? media.podcastImage
 											: undefined
 									}
-									showLabsRedesign={showLabsRedesign}
 								/>
 								{!isUndefined(starRating) ? (
 									<StarRatingComponent
@@ -1270,11 +1259,6 @@ export const Card = ({
 								{showPill ? (
 									<>
 										<MediaOrNewsletterPill />
-										{!showLabsRedesign &&
-											format.theme ===
-												ArticleSpecial.Labs && (
-												<LabsBranding />
-											)}
 									</>
 								) : (
 									<CardFooter
@@ -1282,8 +1266,7 @@ export const Card = ({
 										age={decideAge()}
 										commentCount={<CommentCount />}
 										cardBranding={
-											isOnwardContent ||
-											!showLabsRedesign ? (
+											isOnwardContent ? (
 												<LabsBranding />
 											) : undefined
 										}
@@ -1379,9 +1362,6 @@ export const Card = ({
 						format={format}
 						age={decideAge()}
 						commentCount={<CommentCount />}
-						cardBranding={
-							!showLabsRedesign ? <LabsBranding /> : undefined
-						}
 						showLivePlayable={showLivePlayable}
 						shouldReserveSpace={{
 							mobile: avatarPosition.mobile === 'bottom',
@@ -1391,9 +1371,9 @@ export const Card = ({
 				)}
 			</div>
 
-			{showLabsRedesign &&
-				!isOnwardContent &&
-				format.theme === ArticleSpecial.Labs && <LabsBranding />}
+			{!isOnwardContent && format.theme === ArticleSpecial.Labs && (
+				<LabsBranding />
+			)}
 		</CardWrapper>
 	);
 };
