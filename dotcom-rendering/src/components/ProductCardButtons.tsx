@@ -8,14 +8,12 @@ const getLabel = (cta: ProductCta): string => {
 
 export const ProductCardButtons = ({
 	productCtas,
-	buttonLabelOverride,
 }: {
 	productCtas: ProductCta[];
-	buttonLabelOverride?: string;
 }) => (
 	<>
 		{productCtas.map((productCta, index) => {
-			const label = buttonLabelOverride ?? getLabel(productCta);
+			const label = getLabel(productCta);
 			return (
 				<ProductLinkButton
 					key={label}

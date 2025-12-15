@@ -10,8 +10,8 @@ import {
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import type { ProductBlockElement } from '../types/content';
-import { ProductCardButtons } from './ProductCardButtons';
 import { ProductCardImage } from './ProductCardImage';
+import { ProductLinkButton } from './ProductLinkButton';
 
 export type ProductCarouselCardProps = {
 	product: ProductBlockElement;
@@ -112,14 +112,15 @@ export const ProductCarouselCard = ({
 			)}
 			<div css={priceStyle}>{firstCta?.price}</div>
 
-			<div css={buttonWrapper}>
-				<ProductCardButtons
-					productCtas={firstCta ? [firstCta] : []}
-					buttonLabelOverride={
-						firstCta ? `Buy at ${firstCta.retailer}` : undefined
-					}
-				/>
-			</div>
+			{firstCta && (
+				<div css={buttonWrapper}>
+					<ProductLinkButton
+						label={`Buy at ${firstCta.retailer}`}
+						url={firstCta.url}
+						minimisePadding={true}
+					/>
+				</div>
+			)}
 		</div>
 	);
 };
