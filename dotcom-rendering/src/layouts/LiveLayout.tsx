@@ -219,6 +219,7 @@ const bodyWrapper = css`
 	margin-bottom: ${space[3]}px;
 	padding: ${space[3]}px;
 	overflow: hidden;
+	background-color: ${themePalette('--accordion-background')};
 
 	${from.mobileLandscape} {
 		padding: ${space[3]}px ${space[5]}px;
@@ -228,6 +229,7 @@ const bodyWrapper = css`
 		margin-bottom: 0;
 		padding: 0;
 		overflow: visible;
+		background-color: transparent;
 	}
 `;
 
