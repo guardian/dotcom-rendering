@@ -10,6 +10,7 @@ import {
 	textSansBold28,
 	visuallyHidden,
 } from '@guardian/source/foundations';
+import { transparentColour } from '../lib/transparentColour';
 import { palette } from '../palette';
 
 const containerCss = css`
@@ -196,7 +197,7 @@ const offTargetCss = css`
 	grid-area: home-attempts;
 	margin-top: 5px;
 	padding: ${space[2]}px 0 0 6px;
-	background-color: rgba(218, 2, 14, 0.1);
+	background-color: var(--off-target-colour);
 	border-radius: 4px;
 	${from.desktop} {
 		${textSans15};
@@ -208,13 +209,12 @@ const offTargetAwayCss = css`
 	text-align: right;
 	padding-left: 0;
 	padding-right: 6px;
-	background-color: rgba(2, 52, 116, 0.1);
 `;
 
 const onTargetCss = css`
 	padding: ${space[2]}px 0 0 6px;
 	color: #fff;
-	background-color: rgba(218, 2, 14, 1);
+	background-color: var(--on-target-colour);
 	border-radius: 4px;
 	width: 80%;
 	justify-self: end;
@@ -223,7 +223,6 @@ const onTargetCss = css`
 const onTargetAwayCss = css`
 	padding-left: 0;
 	padding-right: 6px;
-	background-color: rgba(2, 52, 116, 1);
 	justify-self: start;
 `;
 
@@ -247,7 +246,16 @@ export const FootballMatchGoalAttempts = ({
 	return (
 		<div css={[containerCss, desktopPaddingCss, goalAttemptsLayoutCss]}>
 			<div css={labelCss}>Goal attempts</div>
-			<div css={offTargetCss}>
+			<div
+				css={offTargetCss}
+				style={{
+					'--off-target-colour': transparentColour(
+						homeTeam.colour,
+						0.1,
+					),
+					'--on-target-colour': homeTeam.colour,
+				}}
+			>
 				Off target
 				<span css={attemptCountCss}>6</span>
 				<div css={onTargetCss}>
@@ -255,7 +263,16 @@ export const FootballMatchGoalAttempts = ({
 					<span css={attemptCountCss}>5</span>
 				</div>
 			</div>
-			<div css={[offTargetCss, offTargetAwayCss]}>
+			<div
+				css={[offTargetCss, offTargetAwayCss]}
+				style={{
+					'--off-target-colour': transparentColour(
+						awayTeam.colour,
+						0.1,
+					),
+					'--on-target-colour': awayTeam.colour,
+				}}
+			>
 				Off target
 				<span css={attemptCountCss}>6</span>
 				<div css={[onTargetCss, onTargetAwayCss]}>
