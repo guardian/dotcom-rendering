@@ -327,6 +327,9 @@ export const CrosswordLayout = (props: Props) => {
 												shouldHideAds={
 													article.shouldHideAds
 												}
+												idApiUrl={
+													article.config.idApiUrl
+												}
 											/>
 										</ArticleContainer>
 									</GridItem>

@@ -62,18 +62,11 @@ type MissingScore = {
 
 type ParserError = MissingScore;
 
-const parseTable = (feGroup: FEGroup): Result<ParserError, FootballTable> => {
-	const parsedEntries = parseEntries(feGroup.entries);
-
-	if (parsedEntries.kind === 'error') {
-		return parsedEntries;
-	}
-
-	return ok({
+const parseTable = (feGroup: FEGroup): Result<ParserError, FootballTable> =>
+	parseEntries(feGroup.entries).map((entries) => ({
 		groupName: feGroup.round.name,
-		entries: parsedEntries.value.sort((a, b) => a.position - b.position),
-	});
-};
+		entries: entries.sort((a, b) => a.position - b.position),
+	}));
 
 const parseTables = listParse(parseTable);
 
@@ -114,13 +107,7 @@ const parseEntry = (
 ): Result<ParserError, Entry> => {
 	const { team, teamUrl } = feEntry;
 
-	const parsedResults = parseResults(feEntry.results);
-
-	if (parsedResults.kind === 'error') {
-		return parsedResults;
-	}
-
-	return ok({
+	return parseResults(feEntry.results).map((results) => ({
 		position: team.rank,
 		team: {
 			name: cleanTeamName(team.name),
@@ -135,28 +122,21 @@ const parseEntry = (
 		goalsAgainst: team.total.goalsAgainst,
 		goalDifference: team.goalDifference,
 		points: team.points,
-		results: parsedResults.value,
-	});
+		results,
+	}));
 };
 
 const parseEntries = listParse(parseEntry);
 
 const parseFootballTableCompetition = (
 	table: FEFootballTable,
-): Result<ParserError, FootballTableCompetition> => {
-	const parsedTables = parseTables(table.groups);
-
-	if (parsedTables.kind === 'error') {
-		return parsedTables;
-	}
-
-	return ok({
+): Result<ParserError, FootballTableCompetition> =>
+	parseTables(table.groups).map((tables) => ({
 		url: table.competition.url,
 		name: table.competition.fullName,
 		hasGroups: table.hasGroups,
 		dividers: table.competition.tableDividers,
-		tables: parsedTables.value,
-	});
-};
+		tables,
+	}));
 
 export const parse = listParse(parseFootballTableCompetition);

@@ -255,3 +255,20 @@ These links are also in the [frontend admin](https://frontend.gutools.co.uk/anal
 -   Opt-out on PROD: `https://theguardian.com/ab-tests/opt/out`
 
 You can use the same routes on CODE.
+
+### 6. Forcing yourself into a test locally
+
+Use the opt-in and opt-out URL fragments to force yourself into or out of a test using a query parameter.
+
+When opted-in, the test will override any mvt based assignment and you'll only be in the opted-in test group.
+
+**Opt-in Example**
+
+-   Articles: `http://localhost:3030/Article/?ab-commercial-test-example=variant`
+-   Fronts: `http://localhost:3030/Front/https://www.theguardian.com/international?ab-commercial-test-example=variant`
+-   Interactives: `http://localhost:3030/Interactive/https://www.theguardian.com/global-development/ng-interactive/2022/jun/09/the-black-sea-blockade-mapping-the-impact-of-war-in-ukraine-on-the-worlds-food-supply-interactive?ab--commercial-test-example=variant`
+
+You can verify that you're in the test by checking:
+
+-   Server-side tests: `window.guardian.config.serverSideABTests` in the browser console
+-   Client-side tests: `window.guardian.modules.abTests.getParticipations()` in the browser console

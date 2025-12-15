@@ -307,7 +307,9 @@ export const Caption = ({
 				shouldLimitWidth && limitedWidth,
 				isOverlaid ? overlaidStyles(format) : bottomMarginStyles,
 				isMainMedia &&
-					(isBlog || mediaType === 'YoutubeVideo') &&
+					(isBlog ||
+						mediaType === 'YoutubeVideo' ||
+						mediaType === 'SelfHostedVideo') &&
 					tabletCaptionPadding,
 				padCaption && captionPadding,
 				isImmersive && immersivePadding,
@@ -315,7 +317,7 @@ export const Caption = ({
 			]}
 			data-spacefinder-role="inline"
 		>
-			{mediaType === 'YoutubeVideo' ? (
+			{mediaType === 'YoutubeVideo' || mediaType === 'SelfHostedVideo' ? (
 				<VideoIcon format={format} />
 			) : (
 				<CameraIcon format={format} />

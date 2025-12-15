@@ -7043,6 +7043,10 @@ const paletteColours = {
 		light: () => '#3DB540',
 		dark: () => '#3DB540',
 	},
+  '--football-live-blog-background': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[10],
+	},
 	'--football-match-header-fixture-result-background': {
 		light: () => sourcePalette.sport[300],
 		dark: () => sourcePalette.sport[300],
@@ -7062,10 +7066,14 @@ const paletteColours = {
 	'--football-match-header-fixture-result-selected': {
 		light: () => sourcePalette.sport[600],
 		dark: () => sourcePalette.sport[600],
-	},
+  },
 	'--football-match-hover': {
 		light: () => sourcePalette.neutral[93],
 		dark: () => sourcePalette.neutral[38],
+	},
+	'--football-match-info-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[10],
 	},
 	'--football-match-list-error': {
 		light: () => sourcePalette.error[400],
@@ -7074,6 +7082,26 @@ const paletteColours = {
 	'--football-match-list-live-status': {
 		light: () => sourcePalette.sport[500],
 		dark: () => sourcePalette.sport[500],
+	},
+	'--football-match-stat-border': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[38],
+	},
+	'--football-match-stat-button-background': {
+		light: () => sourcePalette.sport[400],
+		dark: () => sourcePalette.sport[500],
+	},
+	'--football-match-stat-button-background-hover': {
+		light: () => '#00679E', // replace with Source's `calculateHoverColour` when available
+		dark: () => '#00A1E6',
+	},
+	'--football-match-stat-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--football-match-substitution-icon': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[60],
 	},
 	'--football-score-border': {
 		light: () => sourcePalette.neutral[7],

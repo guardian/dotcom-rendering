@@ -716,6 +716,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									}
 									editionId={article.editionId}
 									shouldHideAds={article.shouldHideAds}
+									idApiUrl={article.config.idApiUrl}
 								/>
 								{format.design === ArticleDesign.MatchReport &&
 									!!footballMatchUrl && (

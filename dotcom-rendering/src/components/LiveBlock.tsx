@@ -27,6 +27,7 @@ type Props = {
 	editionId: EditionId;
 	shouldHideAds: boolean;
 	serverTime?: number;
+	idApiUrl?: string;
 };
 
 export const LiveBlock = ({
@@ -46,6 +47,7 @@ export const LiveBlock = ({
 	editionId,
 	shouldHideAds,
 	serverTime,
+	idApiUrl,
 }: Props) => {
 	if (block.elements.length === 0) return null;
 
@@ -91,6 +93,7 @@ export const LiveBlock = ({
 					isPinnedPost={isPinnedPost}
 					editionId={editionId}
 					shouldHideAds={shouldHideAds}
+					idApiUrl={idApiUrl}
 				/>
 			))}
 			<footer

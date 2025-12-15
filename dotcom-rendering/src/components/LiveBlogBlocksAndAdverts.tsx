@@ -25,6 +25,7 @@ type Props = {
 	isLiveUpdate?: boolean;
 	shouldHideAds: boolean;
 	serverTime?: number;
+	idApiUrl?: string;
 };
 /**
  * On liveblogs we insert two sets of ad slots into the page: one set for small
@@ -50,6 +51,7 @@ export const LiveBlogBlocksAndAdverts = ({
 	editionId,
 	shouldHideAds,
 	serverTime,
+	idApiUrl,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const isWeb = renderingTarget === 'Web';
@@ -74,6 +76,7 @@ export const LiveBlogBlocksAndAdverts = ({
 				editionId={editionId}
 				shouldHideAds={shouldHideAds}
 				serverTime={serverTime}
+				idApiUrl={idApiUrl}
 			/>
 		);
 	};
