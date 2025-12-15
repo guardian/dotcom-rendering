@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
 import { getOptionsHeaders } from './identity';
+import {
+	clearSubscriptionCache,
+	getCachedSubscriptions,
+	setCachedSubscriptions,
+	shouldInvalidateCache,
+} from './newsletterSubscriptionCache';
 import { useAuthStatus } from './useAuthStatus';
 
 interface NewsletterSubscriptionResponse {
@@ -25,6 +31,7 @@ export const useNewsletterSubscription = (
 
 	useEffect(() => {
 		// Wait for auth to be determined
+
 		if (authStatus.kind === 'Pending') {
 			setIsSubscribed(undefined);
 			return;
@@ -33,6 +40,7 @@ export const useNewsletterSubscription = (
 		// User is not signed in
 		if (authStatus.kind === 'SignedOut') {
 			setIsSubscribed(false);
+			clearSubscriptionCache();
 			return;
 		}
 
@@ -44,7 +52,16 @@ export const useNewsletterSubscription = (
 
 		// At this point: authStatus.kind === 'SignedIn'
 
-		// User is signed in, fetch their newsletters
+		// Checking cache first
+		const cachedData = getCachedSubscriptions();
+		const currentUserId = authStatus.idToken.claims.sub;
+
+		if (cachedData && !shouldInvalidateCache(cachedData, currentUserId)) {
+			const isUserSubscribed = cachedData.listIds.includes(newsletterId);
+			setIsSubscribed(isUserSubscribed);
+			return;
+		}
+
 		const fetchNewsletters = async () => {
 			try {
 				const options = getOptionsHeaders(authStatus);
@@ -61,20 +78,18 @@ export const useNewsletterSubscription = (
 				);
 
 				if (!response.ok) {
-					console.error('Failed to fetch user newsletters');
 					setIsSubscribed(false);
 					return;
 				}
 
-				const data: NewsletterSubscriptionResponse =
-					await response.json();
+				const data =
+					(await response.json()) as NewsletterSubscriptionResponse;
+				const newsletters = data.result.subscriptions;
+				const listIds = newsletters.map((n) => Number(n.listId));
 
-				const newsletters = data.result?.subscriptions ?? [];
+				setCachedSubscriptions(listIds, currentUserId);
 
-				// If newsletter exists in the subscriptions array, user is subscribed
-				const isUserSubscribed = newsletters.some(
-					(n) => Number(n.listId) === newsletterId,
-				);
+				const isUserSubscribed = listIds.includes(newsletterId);
 
 				setIsSubscribed(isUserSubscribed);
 			} catch (error) {
