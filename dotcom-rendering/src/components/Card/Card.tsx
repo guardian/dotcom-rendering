@@ -583,7 +583,11 @@ export const Card = ({
 -	 */
 	const isMediaCardOrNewsletter = isMediaCard(format) || isNewsletter;
 
-	const showPill = isMediaCardOrNewsletter && !isGallerySecondaryOnward;
+	const showPill =
+		isMediaCardOrNewsletter &&
+		// mainMedia is not available for onward content cards
+		!isOnwardContent &&
+		!isGallerySecondaryOnward;
 
 	const media = getMedia({
 		imageUrl: image?.src,
