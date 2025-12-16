@@ -478,6 +478,52 @@ export const AllCards = () => {
 			showQuotedHeadline: false,
 		},
 		{
+			url: 'https://www.theguardian.com/the-heattech-edit/gallery/2025/oct/23/autumn-layering-eight-stylish-ways-in-pictures',
+			linkText: 'Labs gallery example',
+			showByline: false,
+			image: {
+				src: 'https://i.guim.co.uk/img/media/d075b0c262aaf650c17fe0db92fe7364eb48d50c/0_5_2989_2391/master/2989.jpg?width=220&dpr=2&s=none&crop=5%3A4g',
+				altText: 'Some test alt text',
+			},
+			format: {
+				display: ArticleDisplay.Standard,
+				theme: ArticleSpecial.Labs,
+				design: ArticleDesign.Gallery,
+			},
+			webPublicationDate: new Date(
+				Date.now() - 60 * 60 * 1000,
+			).toString(),
+			headline: 'Labs Gallery example',
+			branding: {
+				brandingType: {
+					name: 'paid-content',
+				},
+				sponsorName: 'Uniqlo',
+				logo: {
+					src: 'https://static.theguardian.com/commercial/sponsor/24/Sep/2025/29031955-e7d9-4e14-ae3a-58ad9b26e759-uniqlologo_280.png',
+					dimensions: {
+						width: 280,
+						height: 180,
+					},
+					link: 'https://www.uniqlo.com/uk/en/?utm_source=TheGuardian&utm_medium=referral&utm_campaign=BMK_UK_fw25_prospecting_Logo_Articles',
+					label: 'Paid for by',
+				},
+				logoForDarkBackground: {
+					src: 'https://static.theguardian.com/commercial/sponsor/24/Sep/2025/4f2385fc-eec1-4514-96b3-9632a13176ea-uniqlologo_280.png',
+					dimensions: {
+						width: 280,
+						height: 180,
+					},
+					link: 'https://www.uniqlo.com/uk/en/?utm_source=TheGuardian&utm_medium=referral&utm_campaign=BMK_UK_fw25_prospecting_Logo_Articles',
+					label: 'Paid for by',
+				},
+				aboutThisLink:
+					'https://www.theguardian.com/info/2016/jan/25/content-funding',
+			},
+			dataLinkName: 'labs | group-2 | card-@2',
+			showQuotedHeadline: false,
+		},
+		{
 			url: 'https://www.theguardian.com/news/2022/jul/12/eu-urged-investigate-ex-politician-uber-links-rein-in-tech-lobbyists',
 			linkText: 'Special report example',
 			showByline: false,
@@ -496,7 +542,7 @@ export const AllCards = () => {
 			webPublicationDate: '2022-07-12T16:24:48.000Z',
 			headline: 'Special report example',
 			shortUrl: 'https://www.theguardian.com/p/yzmgf',
-			dataLinkName: 'special-report | group-0 | card-@2',
+			dataLinkName: 'special-report | group-0 | card-@3',
 		},
 		{
 			url: 'https://www.theguardian.com/commentisfree/2023/dec/04/uk-government-hydrogen-plan-oil-industry-taxpayer-blue-hydrogen-climate-crisis',
@@ -522,7 +568,7 @@ export const AllCards = () => {
 				isClosedForComments: false,
 				discussionId: mockDiscussionId,
 			},
-			dataLinkName: 'comment | group-0 | card-@2',
+			dataLinkName: 'comment | group-0 | card-@4',
 		},
 		{
 			url: 'https://www.theguardian.com/sport/2023/dec/04/golf-pga-tour-liv-rory-mcilroy-tiger-woods-jon-rahm',
@@ -542,7 +588,7 @@ export const AllCards = () => {
 			webPublicationDate: '2023-12-04T08:00:38.000Z',
 			headline: 'Sport opinion card example',
 			shortUrl: 'https://www.theguardian.com/p/pf8g9',
-			dataLinkName: 'comment | group-0 | card-@1',
+			dataLinkName: 'comment | group-0 | card-@5',
 		},
 		{
 			url: 'https://www.theguardian.com/food/2023/dec/04/quick-easy-carrot-brie-tart-recipe-christmas-rukmini-iyer',
@@ -563,7 +609,7 @@ export const AllCards = () => {
 			headline: 'Colourful kicker',
 			shortUrl: 'https://www.theguardian.com/p/pakay',
 			kickerText: 'A Christmas snack',
-			dataLinkName: 'news | group-0 | card-@1',
+			dataLinkName: 'news | group-0 | card-@6',
 		},
 		{
 			url: 'https://www.theguardian.com/world/live/2023/dec/04/israel-hamas-war-live-updates-hundreds-palestinians-killed-israel-ground-attack-gaza-strip-news',
@@ -582,7 +628,7 @@ export const AllCards = () => {
 			webPublicationDate: '2023-12-04T13:48:55.000Z',
 			headline: 'Video card example',
 			shortUrl: 'https://www.theguardian.com/p/pfagg',
-			dataLinkName: 'live | group-0 | card-@1',
+			dataLinkName: 'live | group-0 | card-@7',
 		},
 		{
 			url: 'https://www.theguardian.com/music/2023/dec/04/the-20-best-songs-of-2023',
@@ -602,7 +648,7 @@ export const AllCards = () => {
 			headline: 'Galleries example',
 			shortUrl: 'https://www.theguardian.com/p/pa4v3',
 			kickerText: '2023',
-			dataLinkName: 'feature | group-0 | card-@1',
+			dataLinkName: 'feature | group-0 | card-@8',
 		},
 		{
 			url: 'https://www.theguardian.com/fashion/2023/dec/03/male-pale-and-out-of-step-why-fashion-houses-have-such-a-problem-with-diversity',
@@ -622,7 +668,7 @@ export const AllCards = () => {
 			headline: 'Podcast example',
 			shortUrl: 'https://www.theguardian.com/p/pepdn',
 			kickerText: 'Kicker example',
-			dataLinkName: 'feature | group-0 | card-@3',
+			dataLinkName: 'feature | group-0 | card-@9',
 		},
 	];
 
