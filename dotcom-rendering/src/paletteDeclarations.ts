@@ -5873,9 +5873,8 @@ const highlightsCardKickerTextDark: PaletteFunction = (format) => {
 		case ArticleSpecial.Labs:
 			return sourcePalette.labs[200];
 		case ArticleSpecial.SpecialReport:
-			return sourcePalette.news[400];
 		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.specialReportAlt[200];
+			return sourcePalette.news[500];
 	}
 };
 
@@ -5890,9 +5889,8 @@ const highlightsCardBackgroudLight: PaletteFunction = (format) => {
 		case ArticleSpecial.Labs:
 			return sourcePalette.labs[200];
 		case ArticleSpecial.SpecialReport:
-			return sourcePalette.news[400];
 		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.specialReportAlt[200];
+			return sourcePalette.news[800];
 	}
 };
 const highlightsCardBackgroundDark: PaletteFunction = () =>
@@ -5909,9 +5907,8 @@ const highlightsCardHeadlineLight: PaletteFunction = (format) => {
 		case ArticleSpecial.Labs:
 			return sourcePalette.labs[200];
 		case ArticleSpecial.SpecialReport:
-			return sourcePalette.news[400];
 		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.specialReportAlt[200];
+			return sourcePalette.news[400];
 	}
 };
 const highlightsCardHeadlineDark: PaletteFunction = () =>
@@ -5928,9 +5925,8 @@ const highlightsCardQuoteIconLight: PaletteFunction = (format) => {
 		case ArticleSpecial.Labs:
 			return sourcePalette.labs[200];
 		case ArticleSpecial.SpecialReport:
-			return sourcePalette.news[400];
 		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.specialReportAlt[200];
+			return sourcePalette.news[400];
 	}
 };
 const highlightsCardQuoteIconDark: PaletteFunction = () =>
