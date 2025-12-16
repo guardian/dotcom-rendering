@@ -59,6 +59,7 @@ export const LinkCopied = () => {
 			isCopied={true}
 			isLiveBlogMeta={false}
 			size="small"
+			isNonLabsGalleryMeta={false}
 		/>
 	);
 };
@@ -72,6 +73,7 @@ export const LiveBlogMobileMeta = () => {
 			isCopied={false}
 			isLiveBlogMeta={true}
 			size="small"
+			isNonLabsGalleryMeta={false}
 		/>
 	);
 };
@@ -99,6 +101,7 @@ export const EmailLinkStory = () => {
 			`}
 			isLiveBlogMeta={true}
 			size="small"
+			isNonLabsGalleryMeta={false}
 		/>
 	);
 };
