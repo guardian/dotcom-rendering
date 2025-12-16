@@ -36,6 +36,19 @@ const determineSize = (size: RatingSizeType) => {
 					height: 12px;
 				}
 			`;
+
+		case 'medium':
+			return css`
+				column-gap: 2px;
+				div {
+					width: 22px;
+					height: 22px;
+				}
+				svg {
+					width: 14px;
+					height: 14px;
+				}
+			`;
 		case 'large':
 			return css`
 				column-gap: 2px;
