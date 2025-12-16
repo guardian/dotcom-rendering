@@ -6,7 +6,6 @@ import type { StarRating as Rating, RatingSizeType } from '../../types/content';
 const flex = css`
 	display: flex;
 	flex-direction: row;
-	padding: 2px;
 `;
 
 const starBackground = css`
