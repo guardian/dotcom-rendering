@@ -5,6 +5,7 @@ import type { StarRating as Rating, RatingSizeType } from '../../types/content';
 const flex = css`
 	display: flex;
 	flex-direction: row;
+	padding: 2px;
 `;
 
 const starBackground = css`
@@ -23,6 +24,7 @@ const determineSize = (size: RatingSizeType) => {
 	switch (size) {
 		case 'small':
 			return css`
+				column-gap: 1px;
 				svg {
 					width: 1.3em;
 					height: 1.3em;
@@ -31,6 +33,7 @@ const determineSize = (size: RatingSizeType) => {
 			`;
 		case 'large':
 			return css`
+				column-gap: 2px;
 				svg {
 					width: 1.6em;
 					height: 1.6em;
