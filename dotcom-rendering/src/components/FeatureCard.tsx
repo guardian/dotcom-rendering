@@ -437,7 +437,6 @@ export const FeatureCard = ({
 					<div css={contentStyles}>
 						{media.type === 'youtube-video' && (
 							<div
-								data-chromatic="ignore"
 								data-component="youtube-atom"
 								css={css`
 									display: block;
