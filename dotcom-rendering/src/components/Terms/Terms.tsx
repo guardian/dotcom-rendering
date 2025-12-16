@@ -15,7 +15,9 @@ export const GuardianTerms = () => (
 		>
 			terms and conditions
 		</ExternalLink>
-		. For information about how we use your data, see our{' '}
+		. For information about how we use your data, including the generation
+		of random identifiers based on your email address for advertising and
+		marketing, visit our{' '}
 		<ExternalLink
 			href="https://www.theguardian.com/help/privacy-policy"
 			data-ignore="global-link-styling"
