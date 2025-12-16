@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { SvgStar, SvgStarOutline } from '@guardian/source/react-components';
+import { palette } from '../../palette';
 import type { StarRating as Rating, RatingSizeType } from '../../types/content';
 
 const flex = css`
@@ -16,10 +17,10 @@ const starBackground = css`
 `;
 
 const filledStarColor = css`
-	background-color: yellow;
+	background-color: ${palette('--star-rating-background')};
 `;
 const emptyStarColor = css`
-	background-color: grey;
+	background-color: ${palette('--star-rating-empty-background')};
 `;
 const determineSize = (size: RatingSizeType) => {
 	switch (size) {
