@@ -78,6 +78,7 @@ export const useNewsletterSubscription = (
 				);
 
 				if (!response.ok) {
+					console.error('Failed to fetch user newsletters');
 					setIsSubscribed(false);
 					return;
 				}

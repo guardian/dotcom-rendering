@@ -1,4 +1,5 @@
 import { renderHook, waitFor } from '@testing-library/react';
+import { clearSubscriptionCache } from './newsletterSubscriptionCache';
 import { useAuthStatus } from './useAuthStatus';
 import { useNewsletterSubscription } from './useNewsletterSubscription';
 
@@ -21,6 +22,12 @@ const mockUseAuthStatus = useAuthStatus as jest.MockedFunction<
 	typeof useAuthStatus
 >;
 
+const idTokenMock = {
+	claims: {
+		sub: 'mock-user-id',
+	},
+};
+
 describe('useNewsletterSubscription', () => {
 	const mockIdApiUrl = 'https://idapi.theguardian.com';
 	const mockNewsletterId = 4147;
@@ -28,6 +35,7 @@ describe('useNewsletterSubscription', () => {
 	beforeEach(() => {
 		jest.clearAllMocks();
 		global.fetch = jest.fn();
+		clearSubscriptionCache();
 	});
 
 	afterEach(() => {
@@ -63,7 +71,7 @@ describe('useNewsletterSubscription', () => {
 		mockUseAuthStatus.mockReturnValue({
 			kind: 'SignedIn',
 			accessToken: {} as never,
-			idToken: {} as never,
+			idToken: idTokenMock as never,
 		});
 
 		const { result } = renderHook(() =>
@@ -81,12 +89,12 @@ describe('useNewsletterSubscription', () => {
 		mockUseAuthStatus.mockReturnValue({
 			kind: 'SignedIn',
 			accessToken: {} as never,
-			idToken: {} as never,
+			idToken: idTokenMock as never,
 		});
 
 		(global.fetch as jest.Mock).mockResolvedValueOnce({
 			ok: true,
-			json: async () => ({
+			json: () => ({
 				result: {
 					subscriptions: [
 						{ listId: '1234' },
@@ -118,12 +126,12 @@ describe('useNewsletterSubscription', () => {
 		mockUseAuthStatus.mockReturnValue({
 			kind: 'SignedIn',
 			accessToken: {} as never,
-			idToken: {} as never,
+			idToken: idTokenMock as never,
 		});
 
 		(global.fetch as jest.Mock).mockResolvedValueOnce({
 			ok: true,
-			json: async () => ({
+			json: () => ({
 				result: {
 					subscriptions: [{ listId: '1234' }, { listId: '5678' }],
 				},
@@ -140,14 +148,12 @@ describe('useNewsletterSubscription', () => {
 	});
 
 	it('should return false when API returns non-ok response', async () => {
-		const consoleSpy = jest
-			.spyOn(console, 'error')
-			.mockImplementation(() => {});
+		const consoleSpy = jest.spyOn(console, 'error');
 
 		mockUseAuthStatus.mockReturnValue({
 			kind: 'SignedIn',
 			accessToken: {} as never,
-			idToken: {} as never,
+			idToken: idTokenMock as never,
 		});
 
 		(global.fetch as jest.Mock).mockResolvedValueOnce({
@@ -183,7 +189,7 @@ describe('useNewsletterSubscription', () => {
 		mockUseAuthStatus.mockReturnValue({
 			kind: 'SignedIn',
 			accessToken: {} as never,
-			idToken: {} as never,
+			idToken: idTokenMock as never,
 		});
 
 		(global.fetch as jest.Mock).mockRejectedValueOnce(
