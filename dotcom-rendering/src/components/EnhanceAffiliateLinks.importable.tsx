@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { getSkimlinksAccountId, isSkimlink } from '../lib/affiliateLinksUtils';
 import { useBetaAB } from '../lib/useAB';
-import { submitComponentEvent } from '../client/ophan/ophan';
 
 /**
  * Add custom parameters to skimlink URLs:
@@ -82,18 +81,6 @@ export const EnhanceAffiliateLinks = () => {
 		const affiliateLinksOnPage = allLinksOnPage.filter((link) =>
 			isSkimlink(link.href),
 		);
-
-		if (affiliateLinksOnPage.length) {
-			submitComponentEvent(
-				{
-					action: 'DETECT',
-					component: {
-						componentType: 'AFFILIATE_DISCLAIMER',
-					},
-				},
-				'Web',
-			);
-		}
 
 		for (const link of affiliateLinksOnPage) {
 			const referrerDomain =
