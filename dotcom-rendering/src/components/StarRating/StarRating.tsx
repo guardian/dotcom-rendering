@@ -9,15 +9,16 @@ const flex = css`
 `;
 
 const starBackground = css`
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	border-radius: 50%;
-	width: fit-content;
-	height: fit-content;
 `;
 
-const filledColor = css`
+const filledStarColor = css`
 	background-color: yellow;
 `;
-const outlineColor = css`
+const emptyStarColor = css`
 	background-color: grey;
 `;
 const determineSize = (size: RatingSizeType) => {
@@ -25,19 +26,25 @@ const determineSize = (size: RatingSizeType) => {
 		case 'small':
 			return css`
 				column-gap: 1px;
+				div {
+					width: 18px;
+					height: 18px;
+				}
 				svg {
-					width: 1.3em;
-					height: 1.3em;
-					margin: 0 -1px -2px;
+					width: 12px;
+					height: 12px;
 				}
 			`;
 		case 'large':
 			return css`
 				column-gap: 2px;
+				div {
+					width: 28px;
+					height: 28px;
+				}
 				svg {
-					width: 1.6em;
-					height: 1.6em;
-					margin: 0 -2px -2px;
+					width: 18px;
+					height: 18px;
 				}
 			`;
 	}
@@ -52,11 +59,11 @@ export const StarRating = ({ rating, size }: Props) => (
 	<div css={[determineSize(size), flex]}>
 		{Array.from({ length: 5 }, (_, i) =>
 			i < rating ? (
-				<div key={i} css={[starBackground, filledColor]}>
+				<div key={i} css={[starBackground, filledStarColor]}>
 					<SvgStar />
 				</div>
 			) : (
-				<div key={i} css={[starBackground, outlineColor]}>
+				<div key={i} css={[starBackground, emptyStarColor]}>
 					<SvgStarOutline />
 				</div>
 			),
