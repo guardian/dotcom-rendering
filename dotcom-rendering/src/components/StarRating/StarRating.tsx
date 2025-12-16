@@ -6,6 +6,18 @@ const padding = css`
 	padding: 0 2px;
 `;
 
+const starBackground = css`
+	border-radius: 50%;
+	width: fit-content;
+	height: fit-content;
+`;
+
+const filledColor = css`
+	background-color: yellow;
+`;
+const outlineColor = css`
+	background-color: grey;
+`;
 const determineSize = (size: RatingSizeType) => {
 	switch (size) {
 		case 'small':
@@ -35,7 +47,15 @@ type Props = {
 export const StarRating = ({ rating, size }: Props) => (
 	<div css={[determineSize(size), padding]}>
 		{Array.from({ length: 5 }, (_, i) =>
-			i < rating ? <SvgStar key={i} /> : <SvgStarOutline key={i} />,
+			i < rating ? (
+				<div css={[starBackground, filledColor]}>
+					<SvgStar key={i} />
+				</div>
+			) : (
+				<div css={[starBackground, outlineColor]}>
+					<SvgStarOutline key={i} />
+				</div>
+			),
 		)}
 	</div>
 );
