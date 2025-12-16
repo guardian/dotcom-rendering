@@ -9,7 +9,6 @@ type Props = {
 };
 
 const starsWrapper = css`
-	background-color: ${palette('--star-rating-background')};
 	color: ${palette('--star-rating-fill')};
 	display: inline-block;
 `;
