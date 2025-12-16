@@ -1490,9 +1490,19 @@ const starRatingFillColourLight: PaletteFunction = () =>
 	sourcePalette.neutral[7];
 const starRatingFillColourDark: PaletteFunction = () =>
 	sourcePalette.neutral[0];
+
 const starRatingBackgroundColourLight: PaletteFunction = () =>
 	sourcePalette.brandAlt[400];
 const starRatingBackgroundColourDark: PaletteFunction = () =>
+	sourcePalette.brandAlt[200];
+const starRatingEmptyBackgroundColourLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const starRatingEmptyBackgroundColourDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+
+const calloutHighlightBackgroundColourLight: PaletteFunction = () =>
+	sourcePalette.brandAlt[400];
+const calloutHighlightBackgroundColourDark: PaletteFunction = () =>
 	sourcePalette.brandAlt[200];
 
 const blockQuoteFillLight: PaletteFunction = (format: ArticleFormat) => {
@@ -6557,8 +6567,8 @@ const paletteColours = {
 		dark: bylineUnderline,
 	},
 	'--callout-highlight-background': {
-		light: starRatingBackgroundColourLight,
-		dark: starRatingBackgroundColourDark,
+		light: calloutHighlightBackgroundColourLight,
+		dark: calloutHighlightBackgroundColourDark,
 	},
 	'--callout-highlight-text': {
 		light: starRatingFillColourLight,
@@ -7952,6 +7962,10 @@ const paletteColours = {
 	'--star-rating-background': {
 		light: starRatingBackgroundColourLight,
 		dark: starRatingBackgroundColourDark,
+	},
+	'--star-rating-empty-background': {
+		light: starRatingEmptyBackgroundColourLight,
+		dark: starRatingEmptyBackgroundColourDark,
 	},
 	'--star-rating-fill': {
 		light: starRatingFillColourLight,
