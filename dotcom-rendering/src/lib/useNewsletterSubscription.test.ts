@@ -1,5 +1,10 @@
 import { renderHook, waitFor } from '@testing-library/react';
-import { clearSubscriptionCache } from './newsletterSubscriptionCache';
+import {
+	addNewsletterToCache,
+	clearSubscriptionCache,
+	getCachedSubscriptions,
+	setCachedSubscriptions,
+} from './newsletterSubscriptionCache';
 import { useAuthStatus } from './useAuthStatus';
 import { useNewsletterSubscription } from './useNewsletterSubscription';
 
@@ -208,5 +213,216 @@ describe('useNewsletterSubscription', () => {
 			expect.any(Error),
 			'errors-fetching-newsletters',
 		);
+	});
+
+	describe('newsletter subscription data caching', () => {
+		it('should fetch from API when no cache exists', async () => {
+			mockUseAuthStatus.mockReturnValue({
+				kind: 'SignedIn',
+				accessToken: {} as never,
+				idToken: idTokenMock as never,
+			});
+
+			(global.fetch as jest.Mock).mockResolvedValueOnce({
+				ok: true,
+				json: () => ({
+					result: {
+						subscriptions: [
+							{ listId: '1234' },
+							{ listId: String(mockNewsletterId) },
+						],
+					},
+				}),
+			});
+
+			const { result } = renderHook(() =>
+				useNewsletterSubscription(mockNewsletterId, mockIdApiUrl),
+			);
+
+			await waitFor(() => {
+				expect(result.current).toBe(true);
+			});
+
+			expect(global.fetch).toHaveBeenCalledTimes(1);
+		});
+
+		it('should use cache when it exists and includes the newsletter', async () => {
+			mockUseAuthStatus.mockReturnValue({
+				kind: 'SignedIn',
+				accessToken: {} as never,
+				idToken: idTokenMock as never,
+			});
+
+			// Set up cache with newsletter subscriptions including the one we're checking
+			setCachedSubscriptions(
+				[1234, mockNewsletterId, 5678],
+				'mock-user-id',
+			);
+
+			const { result } = renderHook(() =>
+				useNewsletterSubscription(mockNewsletterId, mockIdApiUrl),
+			);
+
+			await waitFor(() => {
+				expect(result.current).toBe(true);
+			});
+
+			// Should NOT call fetch when cache is available
+			expect(global.fetch).not.toHaveBeenCalled();
+		});
+
+		it('should use cache when it exists but does not include the newsletter', async () => {
+			mockUseAuthStatus.mockReturnValue({
+				kind: 'SignedIn',
+				accessToken: {} as never,
+				idToken: idTokenMock as never,
+			});
+
+			// Set up cache with newsletter subscriptions NOT including the one we're checking
+			setCachedSubscriptions([1234, 5678, 9999], 'mock-user-id');
+
+			const { result } = renderHook(() =>
+				useNewsletterSubscription(mockNewsletterId, mockIdApiUrl),
+			);
+
+			await waitFor(() => {
+				expect(result.current).toBe(false);
+			});
+
+			// Should NOT call fetch when cache is available
+			expect(global.fetch).not.toHaveBeenCalled();
+		});
+
+		it('should invalidate cache and fetch when user ID changes', async () => {
+			mockUseAuthStatus.mockReturnValue({
+				kind: 'SignedIn',
+				accessToken: {} as never,
+				idToken: idTokenMock as never,
+			});
+
+			// Set up cache with a different user ID
+			setCachedSubscriptions([mockNewsletterId], 'different-user-id');
+
+			(global.fetch as jest.Mock).mockResolvedValueOnce({
+				ok: true,
+				json: () => ({
+					result: {
+						subscriptions: [
+							{ listId: '1234' },
+							{ listId: String(mockNewsletterId) },
+						],
+					},
+				}),
+			});
+
+			const { result } = renderHook(() =>
+				useNewsletterSubscription(mockNewsletterId, mockIdApiUrl),
+			);
+
+			await waitFor(() => {
+				expect(result.current).toBe(true);
+			});
+
+			// Should call fetch because user ID doesn't match
+			expect(global.fetch).toHaveBeenCalledTimes(1);
+
+			// Verify cache was overridden with new user's data
+			const cache = getCachedSubscriptions();
+			expect(cache?.userId).toBe('mock-user-id');
+			expect(cache?.listIds).toEqual([1234, mockNewsletterId]);
+		});
+
+		it('should clear cache when user signs out', async () => {
+			// First, set up cache
+			setCachedSubscriptions([mockNewsletterId], 'mock-user-id');
+
+			mockUseAuthStatus.mockReturnValue({ kind: 'SignedOut' });
+
+			const { result } = renderHook(() =>
+				useNewsletterSubscription(mockNewsletterId, mockIdApiUrl),
+			);
+
+			await waitFor(() => {
+				expect(result.current).toBe(false);
+			});
+
+			// Verify cache was cleared by checking that a subsequent signed-in request fetches
+			mockUseAuthStatus.mockReturnValue({
+				kind: 'SignedIn',
+				accessToken: {} as never,
+				idToken: idTokenMock as never,
+			});
+
+			(global.fetch as jest.Mock).mockResolvedValueOnce({
+				ok: true,
+				json: () => ({
+					result: {
+						subscriptions: [{ listId: String(mockNewsletterId) }],
+					},
+				}),
+			});
+
+			const { result: result2 } = renderHook(() =>
+				useNewsletterSubscription(mockNewsletterId, mockIdApiUrl),
+			);
+
+			await waitFor(() => {
+				expect(result2.current).toBe(true);
+			});
+
+			// Should have called fetch because cache was cleared
+			expect(global.fetch).toHaveBeenCalledTimes(1);
+		});
+	});
+
+	describe('adding subscriptions to cache', () => {
+		it('should add newsletter to cache when no cache exists', () => {
+			const newNewsletterId = 7777;
+
+			addNewsletterToCache(newNewsletterId, 'mock-user-id');
+
+			const cache = getCachedSubscriptions();
+			expect(cache).not.toBeNull();
+			expect(cache?.listIds).toContain(newNewsletterId);
+			expect(cache?.userId).toBe('mock-user-id');
+		});
+
+		it('should add newsletter to existing cache', () => {
+			// Set up initial cache
+			setCachedSubscriptions([1234, 5678], 'mock-user-id');
+
+			const newNewsletterId = 9999;
+			addNewsletterToCache(newNewsletterId, 'mock-user-id');
+
+			const cache = getCachedSubscriptions();
+			expect(cache?.listIds).toEqual([1234, 5678, 9999]);
+			expect(cache?.userId).toBe('mock-user-id');
+		});
+
+		it('should not duplicate newsletter if already in cache', () => {
+			// Set up initial cache with newsletter already in it
+			setCachedSubscriptions(
+				[1234, mockNewsletterId, 5678],
+				'mock-user-id',
+			);
+
+			addNewsletterToCache(mockNewsletterId, 'mock-user-id');
+
+			const cache = getCachedSubscriptions();
+			expect(cache?.listIds).toEqual([1234, mockNewsletterId, 5678]);
+		});
+
+		it('should replace cache when user ID differs', () => {
+			// Set up cache with different user
+			setCachedSubscriptions([1234, 5678], 'different-user-id');
+
+			const newNewsletterId = 9999;
+			addNewsletterToCache(newNewsletterId, 'mock-user-id');
+
+			const cache = getCachedSubscriptions();
+
+			expect(cache?.listIds).toEqual([9999]);
+			expect(cache?.userId).toBe('mock-user-id');
+		});
 	});
 });

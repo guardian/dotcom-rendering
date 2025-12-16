@@ -21,7 +21,8 @@ import { useEffect, useRef, useState } from 'react';
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
-import { useIsSignedIn } from '../lib/useAuthStatus';
+import { addNewsletterToCache } from '../lib/newsletterSubscriptionCache';
+import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { palette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
@@ -286,6 +287,7 @@ export const SecureSignup = ({
 		undefined,
 	);
 	const isSignedIn = useIsSignedIn();
+	const authStatus = useAuthStatus();
 
 	useEffect(() => {
 		if (isSignedIn !== 'Pending' && !isSignedIn) {
@@ -326,6 +328,17 @@ export const SecureSignup = ({
 		// so a generic failure message is used.
 		setIsWaitingForResponse(false);
 		setResponseOk(response.ok);
+
+		// Update cache on successful subscription
+		if (response.ok) {
+			const userId =
+				authStatus.kind === 'SignedIn'
+					? authStatus.idToken.claims.sub
+					: undefined;
+			if (userId) {
+				addNewsletterToCache(Number(newsletterId), userId);
+			}
+		}
 
 		sendTracking(
 			newsletterId,

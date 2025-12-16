@@ -1,12 +1,12 @@
 import { storage } from '@guardian/libs';
 
 const CACHE_KEY = 'gu.newsletter.subscriptions';
-const CACHE_DURATION_MS = 10 * 60 * 1000; // 10 minutes
+const CACHE_DURATION_MS = 5 * 60 * 1000; // 5 minutes
 
 interface NewsletterSubscriptionCache {
 	listIds: number[];
 	timestamp: number;
-	userId?: string;
+	userId: string;
 }
 
 export const getCachedSubscriptions =
@@ -32,7 +32,7 @@ export const getCachedSubscriptions =
 
 export const setCachedSubscriptions = (
 	listIds: number[],
-	userId?: string,
+	userId: string,
 ): void => {
 	try {
 		const cache: NewsletterSubscriptionCache = {
@@ -42,7 +42,7 @@ export const setCachedSubscriptions = (
 		};
 		storage.session.set(CACHE_KEY, JSON.stringify(cache));
 	} catch (error) {
-		// do nothing - silent failure should be fine here
+		// Silent failure - cache update is not critical
 	}
 };
 
@@ -54,8 +54,29 @@ export const shouldInvalidateCache = (
 	cache: NewsletterSubscriptionCache,
 	currentUserId?: string,
 ): boolean => {
-	if (cache.userId && cache.userId !== currentUserId) {
+	if (!currentUserId || (cache.userId && cache.userId !== currentUserId)) {
 		return true;
 	}
 	return false;
+};
+
+export const addNewsletterToCache = (
+	newsletterId: number,
+	userId: string,
+): void => {
+	try {
+		const cachedData = getCachedSubscriptions();
+
+		if (cachedData && !shouldInvalidateCache(cachedData, userId)) {
+			if (!cachedData.listIds.includes(newsletterId)) {
+				const updatedListIds = [...cachedData.listIds, newsletterId];
+				setCachedSubscriptions(updatedListIds, userId);
+			}
+		} else {
+			// No valid cache exists, create a new one with just this newsletter
+			setCachedSubscriptions([newsletterId], userId);
+		}
+	} catch (error) {
+		// Silent failure - cache update is not critical
+	}
 };
