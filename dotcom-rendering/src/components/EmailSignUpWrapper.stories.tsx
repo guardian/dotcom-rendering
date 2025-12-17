@@ -23,6 +23,7 @@ const defaultArgs = {
 	successDescription: "We'll send you The Recap every week",
 	theme: 'sport',
 	idApiUrl: 'https://idapi.theguardian.com',
+	hideNewsletterForSubscribers: true, // Feature flag enabled by default in stories
 } satisfies Story['args'];
 
 // Loading state - shows placeholder while auth status is being determined
@@ -90,6 +91,32 @@ export const SignedInAlreadySubscribed: Story = {
 	},
 	async beforeEach() {
 		mocked(useNewsletterSubscription).mockReturnValue(true);
+	},
+};
+
+// Feature flag disabled - always shows signup form regardless of subscription status
+// When hideNewsletterForSubscribers is false, the subscription check is skipped
+export const FeatureFlagDisabled: Story = {
+	args: {
+		hidePrivacyMessage: false,
+		...defaultArgs,
+		hideNewsletterForSubscribers: false,
+	},
+	async beforeEach() {
+		// Even though we mock this to return true (subscribed),
+		// the feature flag being disabled means it won't be checked
+		mocked(useNewsletterSubscription).mockReturnValue(false);
+		mocked(useIsSignedIn).mockReturnValue(true);
+		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
+			Promise.resolve('test@example.com'),
+		);
+	},
+	parameters: {
+		docs: {
+			description: {
+				story: 'When the hideNewsletterForSubscribers feature flag is disabled, the signup form is always shown regardless of subscription status.',
+			},
+		},
 	},
 };
 

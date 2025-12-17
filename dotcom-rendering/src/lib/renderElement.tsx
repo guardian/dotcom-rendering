@@ -577,6 +577,8 @@ export const renderElement = ({
 				successDescription: element.newsletter.successDescription,
 				theme: element.newsletter.theme,
 				idApiUrl: idApiUrl ?? '',
+				hideNewsletterForSubscribers:
+					!!switches.hideNewsletterForSubscribers,
 			};
 			if (isListElement || isTimeline) return null;
 			return (
