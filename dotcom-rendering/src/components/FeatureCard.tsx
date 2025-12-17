@@ -49,17 +49,6 @@ import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
 
 export type Position = 'inner' | 'outer' | 'none';
 
-// type Media =
-// 	| {
-// 			type: 'picture';
-// 			imageUrl: string;
-// 			imageAltText?: string;
-// 	  }
-// 	| {
-// 			type: 'youtube-video';
-// 			mainMedia: YoutubeVideo;
-// 	  };
-
 const baseCardStyles = css`
 	display: flex;
 	flex-direction: column;
@@ -547,6 +536,13 @@ export const FeatureCard = ({
 											uniqueId={uniqueId}
 											height={media.mainMedia.height}
 											width={media.mainMedia.width}
+											containerAspectRatio={
+												isImmersive ? 5 / 3 : 4 / 5
+											}
+											// height={2 * 720}
+											// width={
+											// 	2 * (isImmersive ? 1200 : 576)
+											// }
 											// Only cinemagraphs are currently supported in feature cards
 											videoStyle="Cinemagraph"
 											posterImage={

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined, log, storage } from '@guardian/libs';
-import { from, space } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
@@ -55,19 +55,27 @@ const videoContainerStyles = (
 	}
 `;
 
-const figureStyles = (aspectRatio: number) => css`
+const figureStyles = (
+	aspectRatio: number,
+	containerAspectRatio?: number,
+) => css`
 	position: relative;
 	aspect-ratio: ${aspectRatio};
 	height: 100%;
+	/** TODO Remove for feature cards */
 	max-height: 100vh;
 	max-height: 100svh;
 	max-width: 100%;
+	${until.tablet} {
+		width: 100%; // Safari
+	}
 	${from.tablet} {
 		/**
 		 * The value "80" is derived from the aspect ratio of the 5:4 slot.
 		 * When other slots are used for self-hosted videos, this will need to be adjusted.
 		 */
-		max-width: ${aspectRatio * 80}%;
+		${typeof containerAspectRatio === 'number' &&
+		`max-width: ${aspectRatio * (1 / containerAspectRatio) * 100}%;`}
 	}
 `;
 
@@ -693,6 +701,18 @@ export const SelfHostedVideo = ({
 		? getOptimisedPosterImage(posterImage)
 		: undefined;
 
+	// const aspectRatioOfCard = (aspectRatioOfImage: string | undefined) => {
+	// 	if (!aspectRatioOfImage) return null;
+
+	// 	const aspectRatio = aspectRatioOfImage.split(':');
+	// 	if (!aspectRatio[0] || !aspectRatio[1]) return null;
+
+	// 	const aspectRatioWidth = parseInt(aspectRatio[0]);
+	// 	const aspectRatioHeight = parseInt(aspectRatio[1]);
+
+	// 	return aspectRatioWidth / aspectRatioHeight;
+	// };
+
 	return (
 		<div
 			css={videoContainerStyles(
@@ -703,7 +723,7 @@ export const SelfHostedVideo = ({
 		>
 			<figure
 				ref={setNode}
-				css={figureStyles(aspectRatio)}
+				css={figureStyles(aspectRatio, containerAspectRatio)}
 				className={`video-container ${videoStyle.toLocaleLowerCase()}`}
 				data-component="gu-video-loop"
 			>

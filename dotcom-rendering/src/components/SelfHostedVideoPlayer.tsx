@@ -26,8 +26,9 @@ export type SubtitleSize = 'small' | 'medium' | 'large';
 const videoStyles = (aspectRatio: number) => css`
 	position: relative;
 	display: block;
-	height: auto;
+	height: 100%;
 	width: 100%;
+	/** TODO Remove for feature cards */
 	max-height: 100vh;
 	max-height: 100svh;
 	cursor: pointer;
@@ -202,7 +203,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 						videoStyles(aspectRatio),
 						showSubtitles && subtitleStyles(subtitleSize),
 					]}
-					crossOrigin="anonymous"
+					// crossOrigin="anonymous"
 					ref={ref}
 					tabIndex={0}
 					data-testid="self-hosted-video-player"
