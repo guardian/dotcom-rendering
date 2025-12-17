@@ -3,9 +3,10 @@ import { SvgStar, SvgStarOutline } from '@guardian/source/react-components';
 import { palette } from '../../palette';
 import type { StarRating as Rating, RatingSizeType } from '../../types/content';
 
-const flex = css`
+const container = css`
 	display: flex;
 	flex-direction: row;
+	padding-top: 4px;
 `;
 
 const starBackground = css`
@@ -75,7 +76,7 @@ type Props = {
 };
 
 export const StarRating = ({ rating, size }: Props) => (
-	<div css={[determineSize(size), flex]}>
+	<div css={[determineSize(size), container]}>
 		{Array.from({ length: 5 }, (_, i) =>
 			i < rating ? (
 				<div key={i} css={[starBackground, filledStarColor]}>
