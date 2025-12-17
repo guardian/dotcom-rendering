@@ -26,38 +26,44 @@ const determineSize = (size: RatingSizeType) => {
 		case 'small':
 			return css`
 				column-gap: 1px;
+
 				div {
 					width: 18px;
 					height: 18px;
 				}
+
 				svg {
-					width: 12px;
-					height: 12px;
+					width: 16px;
+					height: 16px;
 				}
 			`;
 
 		case 'medium':
 			return css`
 				column-gap: 2px;
+
 				div {
 					width: 22px;
 					height: 22px;
 				}
+
 				svg {
-					width: 14px;
-					height: 14px;
+					width: 20px;
+					height: 20px;
 				}
 			`;
 		case 'large':
 			return css`
 				column-gap: 2px;
+
 				div {
 					width: 28px;
 					height: 28px;
 				}
+
 				svg {
-					width: 18px;
-					height: 18px;
+					width: 24px;
+					height: 24px;
 				}
 			`;
 	}
