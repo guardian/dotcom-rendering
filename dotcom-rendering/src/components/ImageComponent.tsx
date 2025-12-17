@@ -28,7 +28,6 @@ import { Hide } from './Hide';
 import { Island } from './Island';
 import { LightboxLink } from './LightboxLink';
 import { Picture } from './Picture';
-import { StarRating } from './StarRating/StarRating';
 
 type Props = {
 	element: ImageBlockElement;
@@ -65,25 +64,6 @@ const timelineBulletStyles = css`
 		}
 	}
 `;
-
-const starsWrapper = css`
-	background-color: ${themePalette('--star-rating-background')};
-	color: ${themePalette('--star-rating-fill')};
-
-	position: absolute;
-	${until.tablet} {
-		bottom: 0;
-	}
-	${from.tablet} {
-		top: 0;
-	}
-`;
-
-const PositionStarRating = ({ rating }: { rating: Rating }) => (
-	<div css={starsWrapper}>
-		<StarRating rating={rating} size="large" />
-	</div>
-);
 
 const basicTitlePadding = css`
 	${until.tablet} {
@@ -429,9 +409,6 @@ export const ImageComponent = ({
 				{isTimeline && isMainMedia && role === 'showcase' && (
 					<div css={timelineBulletStyles} aria-hidden="true" />
 				)}
-				{!isUndefined(starRating) ? (
-					<PositionStarRating rating={starRating} />
-				) : null}
 				{!!title && <ImageTitle title={title} role={role} />}
 				{isWeb && !isUndefined(element.position) && (
 					<LightboxLink
@@ -533,9 +510,6 @@ export const ImageComponent = ({
 						</Row>
 					</Hide>
 				)}
-				{!isUndefined(starRating) ? (
-					<PositionStarRating rating={starRating} />
-				) : null}
 				{!!title && <ImageTitle title={title} role={role} />}
 
 				{isWeb && !isUndefined(element.position) && (
