@@ -32,6 +32,9 @@ import type { TagType } from '../types/tag';
 import { AgeWarning } from './AgeWarning';
 import { DesignTag } from './DesignTag';
 import { HeadlineByline } from './HeadlineByline';
+import type { StarRating as Rating } from '../types/content';
+import { isUndefined } from '@guardian/libs';
+import { StarRating } from './StarRating/StarRating';
 
 type Props = {
 	headlineString: string;
@@ -41,6 +44,7 @@ type Props = {
 	webPublicationDateDeprecated: string;
 	hasAvatar?: boolean;
 	isMatch?: boolean;
+	starRating?: Rating;
 };
 
 const topPadding = css`
@@ -121,7 +125,6 @@ const headlineFont = (format: ArticleFormat) => {
 	if (format.design === ArticleDesign.Gallery) {
 		return css`
 			${decideMobileHeadlineFont(format)}
-
 			${from.desktop} {
 				${decideHeadlineFont(format)}
 			}
@@ -129,7 +132,6 @@ const headlineFont = (format: ArticleFormat) => {
 	}
 	return css`
 		${decideMobileHeadlineFont(format)}
-
 		${from.tablet} {
 			${decideHeadlineFont(format)}
 		}
@@ -138,6 +140,7 @@ const headlineFont = (format: ArticleFormat) => {
 
 const invertedFontLineHeight = css`
 	line-height: 2.1875rem;
+
 	${from.tablet} {
 		line-height: 2.625rem;
 	}
@@ -146,6 +149,7 @@ const invertedFontLineHeight = css`
 const labsFont = css`
 	${textSansBold28};
 	line-height: 2rem;
+
 	${from.tablet} {
 		${textSansBold34};
 		line-height: 2.375rem;
@@ -155,6 +159,7 @@ const labsFont = css`
 const labsGalleryFont = css`
 	${textSansBold34};
 	line-height: 2.1875rem;
+
 	${from.desktop} {
 		${textSansBold34};
 		font-size: 50px;
@@ -166,6 +171,7 @@ const jumboLabsFont = css`
 	${textSansBold34};
 	font-size: 3.125rem;
 	line-height: 3.5rem;
+
 	${until.desktop} {
 		${textSansBold34};
 		line-height: 2.375rem;
@@ -203,12 +209,15 @@ const immersiveStyles = css`
 	min-height: 112px;
 	padding-bottom: ${space[6]}px;
 	padding-left: ${space[1]}px;
+
 	${from.mobileLandscape} {
 		padding-left: ${space[3]}px;
 	}
+
 	${from.tablet} {
 		padding-left: ${space[1]}px;
 	}
+
 	margin-right: ${space[5]}px;
 `;
 
@@ -242,12 +251,15 @@ const immersiveWrapper = css`
         Make sure we vertically align the headline font with the body font
     */
 	margin-left: 6px;
+
 	${from.tablet} {
 		margin-left: 16px;
 	}
+
 	${from.leftCol} {
 		margin-left: 25px;
 	}
+
 	/*
         We need this grow to ensure the headline fills the main content column
     */
@@ -257,6 +269,7 @@ const immersiveWrapper = css`
         box that extends the black background to the right
     */
 	z-index: ${getZIndex('articleHeadline')};
+
 	${until.mobileLandscape} {
 		margin-right: 40px;
 	}
@@ -352,6 +365,7 @@ const decideBottomPadding = ({
 					if (format.display === ArticleDisplay.Showcase) {
 						return css`
 							padding-bottom: ${space[1]}px;
+
 							${from.tablet} {
 								padding-bottom: ${space[6]}px;
 							}
@@ -364,7 +378,8 @@ const decideBottomPadding = ({
 				case ArticleDesign.Review: {
 					if (format.display === ArticleDisplay.Showcase) {
 						return css`
-							padding-bottom: 28px;
+							padding-bottom: ${space[5]}px;
+
 							${from.tablet} {
 								padding-bottom: ${space[6]}px;
 							}
@@ -384,6 +399,7 @@ const decideBottomPadding = ({
 						? ''
 						: css`
 								padding-bottom: 28px;
+
 								${from.tablet} {
 									padding-bottom: ${space[9]}px;
 								}
@@ -396,7 +412,7 @@ const decideBottomPadding = ({
 const galleryStyles = css`
 	${grid.between('grid-start', 'centre-column-end')}
 
-	grid-row: 7/9;
+	grid-row: 7 / 9;
 	position: relative;
 
 	${from.tablet} {
@@ -413,6 +429,7 @@ export const ArticleHeadline = ({
 	webPublicationDateDeprecated,
 	hasAvatar,
 	isMatch,
+	starRating,
 }: Props) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
@@ -496,6 +513,13 @@ export const ArticleHeadline = ({
 									{headlineString}
 								</span>
 							</h1>
+							{!isUndefined(starRating) && (
+								<StarRating
+									rating={starRating}
+									paddingSize={'large'}
+									size={'large'}
+								/>
+							)}
 						</WithAgeWarning>
 					);
 			}
@@ -572,6 +596,13 @@ export const ArticleHeadline = ({
 								>
 									{headlineString}
 								</h1>
+								{!isUndefined(starRating) && (
+									<StarRating
+										rating={starRating}
+										paddingSize={'medium'}
+										size={'large'}
+									/>
+								)}
 							</WithAgeWarning>
 						</div>
 					);
