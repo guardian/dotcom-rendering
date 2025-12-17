@@ -16,11 +16,7 @@ import {
 } from '../lib/articleFormat';
 import { getLargest, getMaster } from '../lib/image';
 import { palette as themePalette } from '../palette';
-import type {
-	ImageBlockElement,
-	StarRating as Rating,
-	RoleType,
-} from '../types/content';
+import type { ImageBlockElement, StarRating, RoleType } from '../types/content';
 import { AppsLightboxImage } from './AppsLightboxImage.importable';
 import { Caption } from './Caption';
 import { useConfig } from './ConfigContext';
@@ -35,7 +31,6 @@ type Props = {
 	format: ArticleFormat;
 	hideCaption?: boolean;
 	isMainMedia?: boolean;
-	starRating?: Rating;
 	title?: string;
 	isAvatar?: boolean;
 	isTimeline?: boolean;
@@ -241,7 +236,6 @@ export const ImageComponent = ({
 	hideCaption,
 	role,
 	isMainMedia,
-	starRating,
 	title,
 	isAvatar,
 	isTimeline = false,

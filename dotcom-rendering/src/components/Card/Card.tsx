@@ -16,7 +16,7 @@ import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { BETA_CONTAINERS } from '../../model/enhanceCollections';
 import { palette } from '../../palette';
 import type { Branding } from '../../types/branding';
-import type { RatingSizeType, StarRating as Rating } from '../../types/content';
+import type { StarRating as Rating, RatingSizeType } from '../../types/content';
 import type {
 	AspectRatio,
 	DCRContainerPalette,

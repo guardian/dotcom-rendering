@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
+import { from } from '@guardian/source/foundations';
 import { SvgStar, SvgStarOutline } from '@guardian/source/react-components';
 import { palette } from '../../palette';
 import type { StarRating as Rating, RatingSizeType } from '../../types/content';
-import { from } from '@guardian/source/foundations';
 
 const container = css`
 	display: flex;

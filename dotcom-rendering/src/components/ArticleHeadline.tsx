@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import {
 	between,
 	from,
@@ -28,12 +29,11 @@ import {
 } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { palette as themePalette } from '../palette';
+import type { StarRating as Rating } from '../types/content';
 import type { TagType } from '../types/tag';
 import { AgeWarning } from './AgeWarning';
 import { DesignTag } from './DesignTag';
 import { HeadlineByline } from './HeadlineByline';
-import type { StarRating as Rating } from '../types/content';
-import { isUndefined } from '@guardian/libs';
 import { StarRating } from './StarRating/StarRating';
 
 type Props = {
