@@ -202,6 +202,7 @@ export const OneCardLayout = ({
 					headlinePosition={isSplashCard ? 'outer' : 'inner'}
 					subtitleSize={subtitleSize}
 					enableHls={enableHls}
+					starRatingSize={'medium'}
 				/>
 			</LI>
 		</UL>

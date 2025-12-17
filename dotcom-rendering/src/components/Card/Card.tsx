@@ -1,12 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import {
-	between,
-	from,
-	palette as sourcePalette,
-	space,
-	until,
-} from '@guardian/source/foundations';
+import { between, from, space, until } from '@guardian/source/foundations';
 import { Hide, Link, SvgCamera } from '@guardian/source/react-components';
 import {
 	ArticleDesign,
@@ -22,7 +16,7 @@ import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { BETA_CONTAINERS } from '../../model/enhanceCollections';
 import { palette } from '../../palette';
 import type { Branding } from '../../types/branding';
-import type { StarRating as Rating } from '../../types/content';
+import type { RatingSizeType, StarRating as Rating } from '../../types/content';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
@@ -163,30 +157,8 @@ export type Props = {
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
 	enableHls?: boolean;
+	starRatingSize?: RatingSizeType;
 };
-
-const starWrapper = (cardHasImage: boolean) => css`
-	background-color: ${sourcePalette.brandAlt[400]};
-	color: ${sourcePalette.neutral[0]};
-	margin-top: ${cardHasImage ? '2' : space[1]}px;
-	display: inline-block;
-
-	${from.tablet} {
-		margin-top: ${space[1]}px;
-	}
-`;
-
-const StarRatingComponent = ({
-	rating,
-	cardHasImage,
-}: {
-	rating: Rating;
-	cardHasImage: boolean;
-}) => (
-	<div css={starWrapper(cardHasImage)}>
-		<StarRating rating={rating} size="small" />
-	</div>
-);
 
 const waveformWrapper = (
 	mediaPositionOnMobile?: MediaPositionType,
@@ -196,13 +168,16 @@ const waveformWrapper = (
 	left: 0;
 	right: 0;
 	bottom: 0;
+
 	svg {
 		display: block;
 		width: 100%;
 		height: ${mediaPositionOnMobile === 'top' ? 50 : 29}px;
+
 		${from.mobileMedium} {
 			height: ${mediaPositionOnMobile === 'top' ? 50 : 33}px;
 		}
+
 		${from.tablet} {
 			height: ${mediaPositionOnDesktop === 'top' ? 50 : 33}px;
 		}
@@ -216,12 +191,15 @@ const HorizontalDivider = () => (
 				border-top: 1px solid ${palette('--card-border-top')};
 				height: 1px;
 				width: 50%;
+
 				${from.tablet} {
 					width: 100px;
 				}
+
 				${from.desktop} {
 					width: 140px;
 				}
+
 				margin-top: ${space[3]}px;
 			}
 		`}
@@ -236,6 +214,7 @@ const podcastImageStyles = (
 		return css`
 			width: 69px;
 			height: 69px;
+
 			${from.tablet} {
 				width: 98px;
 				height: 98px;
@@ -249,11 +228,14 @@ const podcastImageStyles = (
 	return css`
 		width: 98px;
 		height: 98px;
+
 		${from.tablet} {
 			width: 120px;
 			height: 120px;
 		}
+
 		/** The image takes the full height on desktop, so that the waveform sticks to the bottom of the card. */
+
 		${from.desktop} {
 			width: ${isHorizontalOnDesktop ? 'unset' : '120px'};
 			height: ${isHorizontalOnDesktop ? 'unset' : '120px'};
@@ -421,6 +403,7 @@ export const Card = ({
 	headlinePosition = 'inner',
 	subtitleSize = 'small',
 	enableHls = false,
+	starRatingSize = 'small',
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -579,8 +562,8 @@ export const Card = ({
 
 	/**
 -	 * Media cards have contrasting background colours. We add additional
-	 * padding to these cards to keep the text readable.
--	 */
+* padding to these cards to keep the text readable.
+-     */
 	const isMediaCardOrNewsletter = isMediaCard(format) || isNewsletter;
 
 	const showPill = isMediaCardOrNewsletter && !isGallerySecondaryOnward;
@@ -845,6 +828,7 @@ export const Card = ({
 						${until.tablet} {
 							display: none;
 						}
+
 						${from.desktop} {
 							display: none;
 						}
@@ -909,10 +893,7 @@ export const Card = ({
 						isExternalLink={isExternalLink}
 					/>
 					{!isUndefined(starRating) ? (
-						<StarRatingComponent
-							rating={starRating}
-							cardHasImage={!!image}
-						/>
+						<StarRating rating={starRating} size="small" />
 					) : null}
 				</div>
 			)}
@@ -1237,9 +1218,9 @@ export const Card = ({
 									}
 								/>
 								{!isUndefined(starRating) ? (
-									<StarRatingComponent
+									<StarRating
 										rating={starRating}
-										cardHasImage={!!image}
+										size={starRatingSize}
 									/>
 								) : null}
 							</HeadlineWrapper>

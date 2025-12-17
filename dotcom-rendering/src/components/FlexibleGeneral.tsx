@@ -140,6 +140,7 @@ const ImmersiveCardLayout = ({
 					supportingContent={card.supportingContent}
 					isImmersive={true}
 					showVideo={card.showVideo}
+					starRatingSize={'medium'}
 				/>
 			</LI>
 		</UL>
@@ -348,6 +349,7 @@ const SplashCardLayout = ({
 					subtitleSize={subtitleSize}
 					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
 					enableHls={enableHls}
+					starRatingSize={'medium'}
 				/>
 			</LI>
 		</UL>
@@ -503,6 +505,7 @@ const FullWidthCardLayout = ({
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 					subtitleSize={subtitleSize}
 					enableHls={enableHls}
+					starRatingSize={'medium'}
 				/>
 			</LI>
 		</UL>
