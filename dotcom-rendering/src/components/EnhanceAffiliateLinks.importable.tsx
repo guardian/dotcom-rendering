@@ -78,24 +78,24 @@ export const EnhanceAffiliateLinks = () => {
 				? utmParamsFromReferrer
 				: '';
 
-		const affiliateLinksOnPage = allLinksOnPage.filter((link) =>
-			isSkimlink(link.href),
-		);
+		for (const link of allLinksOnPage) {
+			if (isSkimlink(link.href)) {
+				const referrerDomain =
+					document.referrer === ''
+						? 'none'
+						: new URL(document.referrer).hostname;
 
-		for (const link of affiliateLinksOnPage) {
-			const referrerDomain =
-				document.referrer === ''
-					? 'none'
-					: new URL(document.referrer).hostname;
+				const skimlinksAccountId = getSkimlinksAccountId(link.href);
 
-			const skimlinksAccountId = getSkimlinksAccountId(link.href);
+				// Skimlinks treats xcust as one long string, so we use | to separate values
+				const xcustValue = `referrer|${referrerDomain}|accountId|${skimlinksAccountId}${
+					abTestString ? `|abTestParticipations|${abTestString}` : ''
+				}${utmParamsString ? `|${utmParamsString}` : ''}`;
 
-			// Skimlinks treats xcust as one long string, so we use | to separate values
-			const xcustValue = `referrer|${referrerDomain}|accountId|${skimlinksAccountId}${
-				abTestString ? `|abTestParticipations|${abTestString}` : ''
-			}${utmParamsString ? `|${utmParamsString}` : ''}`;
-
-			link.href = `${link.href}&xcust=${encodeURIComponent(xcustValue)}`;
+				link.href = `${link.href}&xcust=${encodeURIComponent(
+					xcustValue,
+				)}`;
+			}
 		}
 	});
 
