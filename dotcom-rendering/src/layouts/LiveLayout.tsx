@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -44,7 +43,6 @@ import { Pagination } from '../components/Pagination';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
-import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
@@ -66,12 +64,15 @@ const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 			/* IE Fallback */
 			display: flex;
 			flex-direction: column;
+
 			${until.desktop} {
 				margin-left: 0px;
 			}
+
 			${from.desktop} {
 				margin-left: 240px;
 			}
+
 			@supports (display: grid) {
 				display: grid;
 				width: 100%;
@@ -86,12 +87,14 @@ const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-columns: 220px 700px;
 					grid-template-areas: 'title	headline';
 				}
+
 				${until.desktop} {
 					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'title'
 						'headline';
 				}
+
 				${until.tablet} {
 					grid-column-gap: 0px;
 				}
@@ -108,12 +111,15 @@ const StandFirstGrid = ({ children }: { children: React.ReactNode }) => (
 			/* IE Fallback */
 			display: flex;
 			flex-direction: column;
+
 			${until.desktop} {
 				margin-left: 0px;
 			}
+
 			${from.desktop} {
 				margin-left: 240px;
 			}
+
 			@supports (display: grid) {
 				display: grid;
 				width: 100%;
@@ -127,6 +133,7 @@ const StandFirstGrid = ({ children }: { children: React.ReactNode }) => (
 						'meta';
 					grid-column-gap: 0px;
 				}
+
 				${from.desktop} {
 					grid-template-columns: 220px 620px;
 					grid-template-areas: 'lastupdated standfirst';
@@ -144,12 +151,15 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 			/* IE Fallback */
 			display: flex;
 			flex-direction: column;
+
 			${until.desktop} {
 				margin-left: 0px;
 			}
+
 			${from.desktop} {
 				margin-left: 320px;
 			}
+
 			@supports (display: grid) {
 				display: grid;
 				width: 100%;
@@ -169,6 +179,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'info		media'
 						'info		body';
 				}
+
 				/* from wide define fixed body width */
 				${from.wide} {
 					grid-column-gap: 20px;
@@ -177,6 +188,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'info		media		right-column'
 						'info		body		right-column';
 				}
+
 				/* until desktop define fixed body width */
 				${until.desktop} {
 					grid-template-columns: 100%; /* Main content */
@@ -203,6 +215,7 @@ const stretchLines = css`
 		margin-left: -20px;
 		margin-right: -20px;
 	}
+
 	${until.mobileLandscape} {
 		margin-left: -10px;
 		margin-right: -10px;
@@ -218,27 +231,10 @@ const sidePaddingDesktop = css`
 const bodyWrapper = css`
 	position: relative;
 	margin-bottom: ${space[3]}px;
+
 	${from.desktop} {
 		margin-bottom: 0;
 	}
-`;
-
-const starWrapper = css`
-	margin-bottom: 18px;
-	margin-top: 6px;
-	background-color: ${themePalette('--star-rating-background')};
-	color: ${themePalette('--star-rating-fill')};
-	display: inline-block;
-	${until.phablet} {
-		padding-left: 20px;
-		margin-left: -20px;
-	}
-	${until.leftCol} {
-		padding-left: 0px;
-		margin-left: -0px;
-	}
-	padding-left: 10px;
-	margin-left: -10px;
 `;
 
 interface BaseProps {
@@ -431,17 +427,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
 											}
+											starRating={article.starRating}
 										/>
 									)}
 								</div>
-								{!isUndefined(article.starRating) ? (
-									<div css={starWrapper}>
-										<StarRating
-											rating={article.starRating}
-											size="large"
-										/>
-									</div>
-								) : null}
 							</GridItem>
 						</HeadlineGrid>
 					</Section>
@@ -903,17 +892,20 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								<div
 									css={css`
 										height: 100%;
+
 										${from.desktop} {
 											/* above 980 */
 											margin-left: 20px;
 											margin-right: -20px;
 											display: none;
 										}
+
 										${from.leftCol} {
 											/* above 1140 */
 											margin-left: 0px;
 											margin-right: 0px;
 										}
+
 										${from.wide} {
 											display: block;
 											padding-bottom: 255px;
