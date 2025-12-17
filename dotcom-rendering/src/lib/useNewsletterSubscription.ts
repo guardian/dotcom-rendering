@@ -31,7 +31,6 @@ export const useNewsletterSubscription = (
 
 	useEffect(() => {
 		// Wait for auth to be determined
-
 		if (authStatus.kind === 'Pending') {
 			setIsSubscribed(undefined);
 			return;
