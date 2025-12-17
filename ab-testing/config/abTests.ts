@@ -46,18 +46,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "thefilter-product-element",
-		description:
-			"A hold back test to measure uplift of the product element",
-		owners: ["thefilter.dev@guardian.co.uk"],
-		status: "ON",
-		expirationDate: "2025-12-30",
-		type: "server",
-		audienceSize: 40 / 100,
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "commercial-user-module-uid2",
 		description:
 			"A hold back test to measure the impact of integrating UID2 module",
