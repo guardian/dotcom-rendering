@@ -1,6 +1,5 @@
 import type { CountryCode } from '@guardian/libs';
 import { isObject, log } from '@guardian/libs';
-import type { TAction, TComponentType } from '@guardian/ophan-tracker-js';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import type { Result } from '../lib/result';
 import { error, ok } from '../lib/result';
@@ -138,15 +137,9 @@ export const initializeFedCM = async ({
 
 	void submitComponentEvent(
 		{
-			// TODO: @guardian/ophan-tracker-js@v2.4.1 has some changes to how page views are tracked
-			// unrelated to Google One Tap which isn't safe to be released yet. Upgrade this once
-			// v2.4.1 is safe to use.
-			action: 'DETECT' as TAction,
+			action: 'DETECT',
 			component: {
-				// TODO: @guardian/ophan-tracker-js@v2.4.1 has some changes to how page views are tracked
-				// unrelated to Google One Tap which isn't safe to be released yet. Upgrade this once
-				// v2.4.1 is safe to use.
-				componentType: 'SIGN_IN_GOOGLE_ONE_TAP' as TComponentType,
+				componentType: 'SIGN_IN_GOOGLE_ONE_TAP',
 			},
 			value: isSupported ? 'SUPPORTED' : 'NOT_SUPPORTED',
 		},
@@ -232,10 +225,7 @@ export const initializeFedCM = async ({
 			{
 				action: 'SIGN_IN',
 				component: {
-					// TODO: @guardian/ophan-tracker-js@v2.4.1 has some changes to how page views are tracked
-					// unrelated to Google One Tap which isn't safe to be released yet. Upgrade this once
-					// v2.4.1 is safe to use.
-					componentType: 'SIGN_IN_GOOGLE_ONE_TAP' as TComponentType,
+					componentType: 'SIGN_IN_GOOGLE_ONE_TAP',
 				},
 			},
 			'Web',
@@ -253,10 +243,7 @@ export const initializeFedCM = async ({
 			{
 				action: 'CLOSE',
 				component: {
-					// TODO: @guardian/ophan-tracker-js@v2.4.1 has some changes to how page views are tracked
-					// unrelated to Google One Tap which isn't safe to be released yet. Upgrade this once
-					// v2.4.1 is safe to use.
-					componentType: 'SIGN_IN_GOOGLE_ONE_TAP' as TComponentType,
+					componentType: 'SIGN_IN_GOOGLE_ONE_TAP',
 				},
 			},
 			'Web',
