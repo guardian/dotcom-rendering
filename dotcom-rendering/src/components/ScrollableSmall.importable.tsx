@@ -14,8 +14,6 @@ type Props = {
 	imageLoading: 'lazy' | 'eager';
 	aspectRatio: AspectRatio;
 	sectionId: string;
-	/** Feature flag for the labs redesign work */
-	showLabsRedesign?: boolean;
 };
 
 /**
@@ -59,7 +57,6 @@ export const ScrollableSmall = ({
 	showAge,
 	aspectRatio,
 	sectionId,
-	showLabsRedesign,
 }: Props) => {
 	const mobileBottomCards = [1, 3];
 	const desktopBottomCards = [2, 3];
@@ -103,7 +100,6 @@ export const ScrollableSmall = ({
 							)}
 							showTopBarMobile={mobileBottomCards.includes(index)}
 							canPlayInline={false}
-							showLabsRedesign={showLabsRedesign}
 						/>
 					</ScrollableCarousel.Item>
 				);

@@ -136,6 +136,7 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 							Paid for by
 							<BrandingLabel
 								branding={collectionBranding.branding}
+								dataTestId="front-branding-logo"
 							/>
 						</div>
 					</div>
@@ -151,6 +152,7 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 						<Hide from="leftCol">
 							<BrandingLabel
 								branding={collectionBranding.branding}
+								dataTestId="front-branding-logo"
 							/>
 						</Hide>
 						{title}
@@ -194,6 +196,7 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 								isAdvertisingPartner={
 									isAdvertisingPartnerOrExclusive
 								}
+								dataTestId="front-branding-logo"
 							/>
 							<a
 								href={aboutThisLink}
