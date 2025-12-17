@@ -121,6 +121,8 @@ const getProviders = (stage: StageType): IdentityProviderConfig[] => {
 	}
 };
 
+const ENABLED_COUNTRIES: CountryCode[] = ['IE', 'NZ'];
+
 export const initializeFedCM = async ({
 	isSignedIn,
 	countryCode,
@@ -147,7 +149,7 @@ export const initializeFedCM = async ({
 	);
 
 	// TODO: Expand Google One Tap to outside Ireland
-	if (countryCode !== 'IE') return;
+	if (!countryCode || !ENABLED_COUNTRIES.includes(countryCode)) return;
 	if (isSignedIn) return;
 
 	/**
