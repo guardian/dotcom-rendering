@@ -189,7 +189,7 @@ const goalAttemptsLayoutCss = css`
 		'home-attempts away-attempts';
 	column-gap: 10px;
 	${from.desktop} {
-		column-gap: 20px;
+		column-gap: ${space[5]}px;
 	}
 `;
 
@@ -197,7 +197,7 @@ const offTargetCss = css`
 	${textSans14};
 	grid-area: home-attempts;
 	margin-top: 5px;
-	padding: ${space[2]}px 0 0 6px;
+	padding: ${space[1]}px 0 0 6px;
 	background-color: var(--off-target-colour);
 	border-radius: 4px;
 	${from.desktop} {
@@ -213,12 +213,16 @@ const offTargetAwayCss = css`
 `;
 
 const onTargetCss = css`
-	padding: ${space[2]}px 0 0 6px;
+	padding: ${space[1]}px 0 0 6px;
 	color: ${sourcePalette.neutral[100]};
 	background-color: var(--on-target-colour);
 	border-radius: 4px;
 	width: 80%;
+	min-height: 62px;
 	justify-self: end;
+	${from.desktop} {
+		margin-top: -${space[3]}px;
+	}
 `;
 
 const onTargetAwayCss = css`
@@ -230,6 +234,7 @@ const onTargetAwayCss = css`
 const attemptCountCss = css`
 	display: block;
 	${textSansBold20};
+	margin-top: -3px;
 	${from.desktop} {
 		${textSansBold28};
 	}
