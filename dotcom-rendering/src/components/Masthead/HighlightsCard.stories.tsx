@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
+import { ArticleSpecial } from '@guardian/libs';
 import { from } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { ArticleTheme } from '../../lib/articleFormat';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
 import type { MainMedia } from '../../types/mainMedia';
 import { HighlightsCard } from './HighlightsCard';
@@ -68,7 +70,7 @@ export const WithQuotes: Story = {
 		showQuotedHeadline: true,
 	},
 	render: (args) => {
-		const Card = ({ pillar }: { pillar: Pillar }) => (
+		const Card = ({ pillar }: { pillar: ArticleTheme }) => (
 			<CardWrapper>
 				<HighlightsCard
 					{...args}
@@ -88,6 +90,7 @@ export const WithQuotes: Story = {
 				<Card pillar={Pillar.Sport} />
 				<Card pillar={Pillar.Culture} />
 				<Card pillar={Pillar.Lifestyle} />
+				<Card pillar={ArticleSpecial.SpecialReport} />
 			</>
 		);
 	},

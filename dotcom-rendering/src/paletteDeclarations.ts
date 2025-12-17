@@ -979,7 +979,12 @@ export const tabs = {
 const datelineLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
-			return sourcePalette.neutral[86];
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[86];
+				default:
+					return sourcePalette.neutral[60];
+			}
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
@@ -2738,8 +2743,29 @@ const captionTextDark: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const captionPhotoEssayMainMediaTextLight = () => sourcePalette.neutral[46];
-const captionPhotoEssayMainMediaTextDark = () => sourcePalette.neutral[60];
+const captionMainMediaTextLight: PaletteFunction = (format) => {
+	switch (format.design) {
+		case ArticleDesign.PhotoEssay:
+			return sourcePalette.neutral[46];
+		case ArticleDesign.Gallery:
+			switch (format.theme) {
+				case ArticleSpecial.Labs:
+					return captionTextLight(format);
+				default:
+					return sourcePalette.neutral[60];
+			}
+		default:
+			return captionTextLight(format);
+	}
+};
+const captionMainMediaTextDark: PaletteFunction = (format) => {
+	switch (format.design) {
+		case ArticleDesign.PhotoEssay:
+			return sourcePalette.neutral[60];
+		default:
+			return captionTextDark(format);
+	}
+};
 
 const captionLink: PaletteFunction = ({ design, theme }) => {
 	if (design === ArticleDesign.Analysis && theme === Pillar.News) {
@@ -3691,6 +3717,18 @@ const shareButtonBorderLight: PaletteFunction = ({ design }) => {
 };
 
 const shareButtonBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
+
+const shareButtonBorderMetaLight: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[38];
+		default:
+			return sourcePalette.neutral[86];
+	}
+};
+
+const shareButtonBorderMetaDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
 
 const shareButtonBorderXSmallLight: PaletteFunction = ({ design }) => {
 	switch (design) {
@@ -5096,10 +5134,21 @@ const productCardBorderLight: PaletteFunction = () =>
 	sourcePalette.lifestyle[300];
 const productCardBorderDark: PaletteFunction = () =>
 	sourcePalette.lifestyle[500];
+const productCardHeadingTextLight: PaletteFunction = () =>
+	sourcePalette.lifestyle[300];
+const productCardHeadingTextDark: PaletteFunction = () =>
+	sourcePalette.lifestyle[500];
 const productCardBorderNeutralDark: PaletteFunction = () =>
 	sourcePalette.neutral[38];
 const productCardBorderNeutralLight: PaletteFunction = () =>
 	sourcePalette.neutral[86];
+const productCardReadMoreLight: PaletteFunction = () =>
+	sourcePalette.lifestyle[400];
+const productCardReadMoreDark: PaletteFunction = () =>
+	sourcePalette.lifestyle[600];
+const productCardReadMoreDecoration: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
 const privacyTextRegularLight: PaletteFunction = () => sourcePalette.neutral[7];
 const privacyTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 const witnessTitleText: PaletteFunction = ({ theme }) => {
@@ -5862,9 +5911,8 @@ const highlightsCardKickerTextDark: PaletteFunction = (format) => {
 		case ArticleSpecial.Labs:
 			return sourcePalette.labs[200];
 		case ArticleSpecial.SpecialReport:
-			return sourcePalette.news[400];
 		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.specialReportAlt[200];
+			return sourcePalette.news[500];
 	}
 };
 
@@ -5879,9 +5927,8 @@ const highlightsCardBackgroudLight: PaletteFunction = (format) => {
 		case ArticleSpecial.Labs:
 			return sourcePalette.labs[200];
 		case ArticleSpecial.SpecialReport:
-			return sourcePalette.news[400];
 		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.specialReportAlt[200];
+			return sourcePalette.news[800];
 	}
 };
 const highlightsCardBackgroundDark: PaletteFunction = () =>
@@ -5898,9 +5945,8 @@ const highlightsCardHeadlineLight: PaletteFunction = (format) => {
 		case ArticleSpecial.Labs:
 			return sourcePalette.labs[200];
 		case ArticleSpecial.SpecialReport:
-			return sourcePalette.news[400];
 		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.specialReportAlt[200];
+			return sourcePalette.news[400];
 	}
 };
 const highlightsCardHeadlineDark: PaletteFunction = () =>
@@ -5917,9 +5963,8 @@ const highlightsCardQuoteIconLight: PaletteFunction = (format) => {
 		case ArticleSpecial.Labs:
 			return sourcePalette.labs[200];
 		case ArticleSpecial.SpecialReport:
-			return sourcePalette.news[400];
 		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.specialReportAlt[200];
+			return sourcePalette.news[400];
 	}
 };
 const highlightsCardQuoteIconDark: PaletteFunction = () =>
@@ -6539,13 +6584,13 @@ const paletteColours = {
 		light: captionLink,
 		dark: captionLink,
 	},
+	'--caption-main-media-text': {
+		light: captionMainMediaTextLight,
+		dark: captionMainMediaTextDark,
+	},
 	'--caption-overlay-text': {
 		light: captionOverlayText,
 		dark: captionOverlayText,
-	},
-	'--caption-photo-essay-main-media-text': {
-		light: captionPhotoEssayMainMediaTextLight,
-		dark: captionPhotoEssayMainMediaTextDark,
 	},
 	'--caption-text': {
 		light: captionTextLight,
@@ -7568,6 +7613,18 @@ const paletteColours = {
 		light: productCardBorderNeutralLight,
 		dark: productCardBorderNeutralDark,
 	},
+	'--product-card-headline': {
+		light: productCardHeadingTextLight,
+		dark: productCardHeadingTextDark,
+	},
+	'--product-card-read-more': {
+		light: productCardReadMoreLight,
+		dark: productCardReadMoreDark,
+	},
+	'--product-card-read-more-decoration': {
+		light: productCardReadMoreDecoration,
+		dark: productCardReadMoreDecoration,
+	},
 	'--pullquote-background': {
 		light: pullQuoteBackgroundLight,
 		dark: pullQuoteBackgroundDark,
@@ -7771,6 +7828,10 @@ const paletteColours = {
 	'--share-button-border': {
 		light: shareButtonBorderLight,
 		dark: shareButtonBorderDark,
+	},
+	'--share-button-border-meta': {
+		light: shareButtonBorderMetaLight,
+		dark: shareButtonBorderMetaDark,
 	},
 	'--share-button-copied': {
 		light: shareButtonCopiedLight,
