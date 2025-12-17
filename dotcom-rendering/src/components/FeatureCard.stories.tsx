@@ -400,7 +400,7 @@ export const WithSublinksLabsImmersive = {
 	},
 } satisfies Story;
 
-export const WithSelfHostedVideo: Story = {
+export const WithSelfHostedVideo = {
 	args: {
 		...cardProps,
 		showVideo: true,
@@ -410,20 +410,45 @@ export const WithSelfHostedVideo: Story = {
 			atomId: 'atom-id-123',
 			sources: [
 				{
-					src: 'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
+					src: 'https://uploads.guim.co.uk/2025/11/27/4_5_Test--1d34df3e-8c92-4090-8bb6-d79fc7fb9467-1.0.mp4',
 					mimeType: 'video/mp4',
 				},
 			],
-			width: 900,
 			height: 720,
+			width: 576,
 			duration: 18,
 		},
 	},
-};
+} satisfies Story;
 
-export const WithSelfHostedImmersiveVideo: Story = {
+export const WithSelfHostedImmersiveVideo = {
 	args: {
 		...WithSelfHostedVideo.args,
-		isImmersive: true,
+		...Immersive.args,
+		mainMedia: {
+			...WithSelfHostedVideo.args.mainMedia,
+			sources: [
+				{
+					src: 'https://uploads.guim.co.uk/2025/11/27/5_3_Test--26763e61-c16b-4c10-8c16-3f11882da154-1.0.mp4',
+					mimeType: 'video/mp4',
+				},
+			],
+			height: 720,
+			width: 1200,
+		},
 	},
-};
+} satisfies Story;
+
+export const WithSelfHostedVideoOnShortScreen = {
+	args: {
+		...WithSelfHostedVideo.args,
+	},
+	parameters: {
+		viewport: {
+			shortViewport: {
+				name: 'Short viewport',
+				styles: { height: '1000px', width: '700px' },
+			},
+		},
+	},
+} satisfies Story;

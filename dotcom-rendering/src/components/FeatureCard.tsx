@@ -560,7 +560,9 @@ export const FeatureCard = ({
 											fallbackImageAlt={
 												media.imageAltText
 											}
-											fallbackImageAspectRatio="5:4"
+											fallbackImageAspectRatio={
+												isImmersive ? '5:3' : '4:5'
+											}
 											linkTo={linkTo}
 											subtitleSource={
 												media.mainMedia.subtitleSource
