@@ -112,13 +112,6 @@ const content = css`
 	}
 `;
 
-const starWrapper = css`
-	width: fit-content;
-	margin-top: ${space[1]}px;
-	color: ${palette('--star-rating-fill')};
-	background-color: ${palette('--star-rating-background')};
-`;
-
 export const HighlightsCard = ({
 	linkTo,
 	format,
@@ -168,9 +161,7 @@ export const HighlightsCard = ({
 					/>
 
 					{!isUndefined(starRating) && (
-						<div css={starWrapper}>
-							<StarRating rating={starRating} size="small" />
-						</div>
+						<StarRating rating={starRating} size="small" />
 					)}
 
 					{!!mainMedia && isMediaCard && (
