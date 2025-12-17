@@ -23,7 +23,7 @@ const defaultArgs = {
 	successDescription: "We'll send you The Recap every week",
 	theme: 'sport',
 	idApiUrl: 'https://idapi.theguardian.com',
-	hideNewsletterForSubscribers: true, // Feature flag enabled by default in stories
+	// hideNewsletterForSubscribers defaults to false (matching production default)
 } satisfies Story['args'];
 
 // Loading state - shows placeholder while auth status is being determined
@@ -84,10 +84,12 @@ export const SignedInNotSubscribed: Story = {
 
 // User is signed in and IS subscribed - component returns null (hidden)
 // Note: This story will render nothing as the component returns null when subscribed
+// Requires hideNewsletterForSubscribers: true to enable the subscription check
 export const SignedInAlreadySubscribed: Story = {
 	args: {
 		hidePrivacyMessage: false,
 		...defaultArgs,
+		hideNewsletterForSubscribers: true,
 	},
 	async beforeEach() {
 		mocked(useNewsletterSubscription).mockReturnValue(true);
