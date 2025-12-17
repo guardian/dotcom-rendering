@@ -399,6 +399,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 										webPublicationDateDeprecated={
 											article.webPublicationDateDeprecated
 										}
+										starRating={article.starRating}
 									/>
 								</div>
 							</GridItem>
@@ -414,13 +415,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 								<MainMedia
 									format={format}
 									elements={article.mainMediaElements}
-									starRating={
-										format.design ===
-											ArticleDesign.Review &&
-										!isUndefined(article.starRating)
-											? article.starRating
-											: undefined
-									}
 									host={host}
 									pageId={article.pageId}
 									webTitle={article.webTitle}
