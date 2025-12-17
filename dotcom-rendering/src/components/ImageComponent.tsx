@@ -16,7 +16,7 @@ import {
 } from '../lib/articleFormat';
 import { getLargest, getMaster } from '../lib/image';
 import { palette as themePalette } from '../palette';
-import type { ImageBlockElement, StarRating, RoleType } from '../types/content';
+import type { ImageBlockElement, RoleType } from '../types/content';
 import { AppsLightboxImage } from './AppsLightboxImage.importable';
 import { Caption } from './Caption';
 import { useConfig } from './ConfigContext';

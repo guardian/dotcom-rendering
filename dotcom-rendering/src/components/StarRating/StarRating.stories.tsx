@@ -81,18 +81,18 @@ LargeStory.storyName = 'Large stars';
 export const StarPadding = () => (
 	<>
 		<div>
-			<p>Small Padding</p>
-			<div style={{ backgroundColor: 'red' }}>
-				<StarRating rating={0} size="large" paddingSize={'small'} />
-			</div>
-			<p>Medium Padding</p>
-			<div style={{ backgroundColor: 'orange' }}>
-				<StarRating rating={1} size="large" paddingSize={'medium'} />
-			</div>
+			<span>Small Padding</span>
+			<StarRating rating={0} size="large" paddingSize={'small'} />
+			<br />
+			<br />
+			<span>Medium Padding</span>
+			<StarRating rating={1} size="large" paddingSize={'medium'} />
+			<br />
+			<br />
 			<p>Large Padding</p>
-			<div style={{ backgroundColor: 'yellow' }}>
-				<StarRating rating={2} size="large" paddingSize={'large'} />
-			</div>
+			<StarRating rating={2} size="large" paddingSize={'large'} />
+			<br />
+			<br />
 		</div>
 	</>
 );

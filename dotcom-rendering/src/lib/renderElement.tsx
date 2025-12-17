@@ -380,7 +380,6 @@ export const renderElement = ({
 					element={element}
 					hideCaption={hideCaption}
 					isMainMedia={isMainMedia}
-					starRating={starRating ?? element.starRating}
 					title={element.title}
 					isAvatar={element.isAvatar}
 					isTimeline={isTimeline}
