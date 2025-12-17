@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -359,12 +358,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					<MainMedia
 						format={format}
 						elements={article.mainMediaElements}
-						starRating={
-							format.design === ArticleDesign.Review &&
-							!isUndefined(article.starRating)
-								? article.starRating
-								: undefined
-						}
 						host={host}
 						hideCaption={true}
 						pageId={article.pageId}
@@ -424,6 +417,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 										webPublicationDateDeprecated={
 											article.webPublicationDateDeprecated
 										}
+										starRating={article.starRating}
 									/>
 								</Section>
 							</Box>
