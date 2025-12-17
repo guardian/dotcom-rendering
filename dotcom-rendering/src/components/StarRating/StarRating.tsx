@@ -2,11 +2,11 @@ import { css } from '@emotion/react';
 import { SvgStar, SvgStarOutline } from '@guardian/source/react-components';
 import { palette } from '../../palette';
 import type { StarRating as Rating, RatingSizeType } from '../../types/content';
+import { from } from '@guardian/source/foundations';
 
 const container = css`
 	display: flex;
 	flex-direction: row;
-	padding-top: 4px;
 `;
 
 const starBackground = css`
@@ -70,13 +70,44 @@ const determineSize = (size: RatingSizeType) => {
 	}
 };
 
+type PaddingSizeType = 'small' | 'medium' | 'large';
+
+const determinePaddingTop = (size: PaddingSizeType) => {
+	switch (size) {
+		case 'small':
+			return css`
+				padding-top: 4px;
+			`;
+
+		case 'medium':
+			return css`
+				padding-top: 4px;
+
+				${from.tablet} {
+					padding-top: 8px;
+				}
+			`;
+		case 'large':
+			return css`
+				padding-top: 8px;
+
+				${from.tablet} {
+					padding-top: 12px;
+				}
+			`;
+	}
+};
+
 type Props = {
 	rating: Rating;
 	size: RatingSizeType;
+	paddingSize?: PaddingSizeType;
 };
 
-export const StarRating = ({ rating, size }: Props) => (
-	<div css={[determineSize(size), container]}>
+export const StarRating = ({ rating, size, paddingSize = 'small' }: Props) => (
+	<div
+		css={[determineSize(size), determinePaddingTop(paddingSize), container]}
+	>
 		{Array.from({ length: 5 }, (_, i) =>
 			i < rating ? (
 				<div key={i} css={[starBackground, filledStarColor]}>
