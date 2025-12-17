@@ -150,7 +150,6 @@ const PlayerList = ({
 
 const sectionStyles = css`
 	border: 1px solid ${palette('--football-match-stat-border')};
-	margin: ${space[2]}px;
 	border-radius: 6px;
 
 	padding-top: 6px;
