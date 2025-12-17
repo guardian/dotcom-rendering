@@ -41,6 +41,7 @@ interface Props {
 	contributorImage?: string;
 	isPlaceholder?: boolean; // use 'true' for server-side default prior to client-side enrichment
 }
+
 interface RichLinkImageData {
 	thumbnailUrl: string;
 	altText: string;
@@ -50,6 +51,7 @@ interface RichLinkImageData {
 
 const backgroundStyles = css`
 	background-color: ${themePalette('--rich-link-background')};
+
 	:hover {
 		background-color: ${themePalette('--rich-link-background-hover')};
 	}
@@ -97,7 +99,6 @@ const titleStyles = (parentIsBlog: boolean) => css`
 
 const labsTitleStyles = css`
 	${textSansBold15}
-
 	${from.wide} {
 		${textSansBold17}
 	}
@@ -127,12 +128,6 @@ const contributorWrapperStyles = css`
 const paidForBrandingStyles = css`
 	color: ${themePalette('--rich-link-branding-text')};
 	${textSansBold12};
-`;
-
-const starWrapperStyles = css`
-	background-color: ${themePalette('--star-rating-background')};
-	color: ${themePalette('--star-rating-fill')};
-	display: inline-block;
 `;
 
 const readMoreStyles = css`
@@ -269,12 +264,7 @@ export const RichLink = ({
 							)}
 
 							{!isUndefined(starRating) ? (
-								<div css={starWrapperStyles}>
-									<StarRating
-										rating={starRating}
-										size="small"
-									/>
-								</div>
+								<StarRating rating={starRating} size="small" />
 							) : null}
 
 							{!!(isPaidContent && sponsorName) && (

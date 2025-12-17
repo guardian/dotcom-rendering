@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -368,13 +367,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								<MainMedia
 									format={format}
 									elements={article.mainMediaElements}
-									starRating={
-										format.design ===
-											ArticleDesign.Review &&
-										!isUndefined(article.starRating)
-											? article.starRating
-											: undefined
-									}
 									host={host}
 									pageId={article.pageId}
 									webTitle={article.webTitle}
@@ -410,6 +402,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									webPublicationDateDeprecated={
 										article.webPublicationDateDeprecated
 									}
+									starRating={article.starRating}
 								/>
 							</PositionHeadline>
 						</GridItem>
