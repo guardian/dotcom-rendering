@@ -54,7 +54,7 @@ export const shouldInvalidateCache = (
 	cache: NewsletterSubscriptionCache,
 	currentUserId?: string,
 ): boolean => {
-	if (!currentUserId || (cache.userId && cache.userId !== currentUserId)) {
+	if (!currentUserId || cache.userId !== currentUserId) {
 		return true;
 	}
 	return false;

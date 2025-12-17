@@ -99,7 +99,7 @@ describe('useNewsletterSubscription', () => {
 
 		(global.fetch as jest.Mock).mockResolvedValueOnce({
 			ok: true,
-			json: () => ({
+			json: async () => ({
 				result: {
 					subscriptions: [
 						{ listId: '1234' },
@@ -136,7 +136,7 @@ describe('useNewsletterSubscription', () => {
 
 		(global.fetch as jest.Mock).mockResolvedValueOnce({
 			ok: true,
-			json: () => ({
+			json: async () => ({
 				result: {
 					subscriptions: [{ listId: '1234' }, { listId: '5678' }],
 				},
@@ -225,7 +225,7 @@ describe('useNewsletterSubscription', () => {
 
 			(global.fetch as jest.Mock).mockResolvedValueOnce({
 				ok: true,
-				json: () => ({
+				json: async () => ({
 					result: {
 						subscriptions: [
 							{ listId: '1234' },
@@ -305,7 +305,7 @@ describe('useNewsletterSubscription', () => {
 
 			(global.fetch as jest.Mock).mockResolvedValueOnce({
 				ok: true,
-				json: () => ({
+				json: async () => ({
 					result: {
 						subscriptions: [
 							{ listId: '1234' },
@@ -355,7 +355,7 @@ describe('useNewsletterSubscription', () => {
 
 			(global.fetch as jest.Mock).mockResolvedValueOnce({
 				ok: true,
-				json: () => ({
+				json: async () => ({
 					result: {
 						subscriptions: [{ listId: String(mockNewsletterId) }],
 					},
