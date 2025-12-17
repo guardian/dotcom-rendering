@@ -55,6 +55,8 @@ type ReducerAccumulator = {
 export const insertCarouselPlaceholder = (
 	elements: FEElement[],
 ): FEElement[] => {
+	if (!Array.isArray(elements) || elements.length === 0) return [];
+
 	const elementsWithReducerContext = elements.reduce(
 		(
 			prev: ReducerAccumulator,
@@ -73,21 +75,36 @@ export const insertCarouselPlaceholder = (
 				if (isSubheadingOrDivider(currentElement)) {
 					inAtAGlance = false;
 
-					const urls = extractAtAGlanceUrls(atAGlanceElements);
+					// Filter out duplicate and empty URLs
+					const urls = Array.from(
+						new Set(
+							extractAtAGlanceUrls(atAGlanceElements).filter(
+								(url) => url.trim() !== '',
+							),
+						),
+					);
 
 					const matchedProducts = findMatchingProducts(
 						elements,
 						urls,
 					);
 
-					// Insert carousel with matched products
-					elementsToReturn.push(
-						{
-							_type: 'model.dotcomrendering.pageElements.ProductCarouselElement',
-							matchedProducts,
-						} as FEElement,
-						currentElement,
-					);
+					if (matchedProducts.length >= 2) {
+						// Insert carousel with matched products
+						elementsToReturn.push(
+							{
+								_type: 'model.dotcomrendering.pageElements.ProductCarouselElement',
+								matchedProducts,
+							} as FEElement,
+							currentElement,
+						);
+					} else {
+						//Less than two products matched, so just return the original elements
+						elementsToReturn.push(
+							...atAGlanceElements,
+							currentElement,
+						);
+					}
 				} else {
 					atAGlanceElements.push(currentElement);
 				}
@@ -99,7 +116,6 @@ export const insertCarouselPlaceholder = (
 				atAGlanceElements,
 			};
 		},
-		// Initial value for reducer function
 		{
 			elements: [],
 			inAtAGlanceSection: false,
