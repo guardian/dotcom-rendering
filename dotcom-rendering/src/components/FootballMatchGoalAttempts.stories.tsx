@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { FootballMatchGoalAttempts } from './FootballMatchStat';
+import { FootballMatchGoalAttempts as FootballMatchGoalAttemptsComponent } from './FootballMatchStat';
 
 const meta = {
 	title: 'Components/Football Match Goal Attempts',
-	component: FootballMatchGoalAttempts,
+	component: FootballMatchGoalAttemptsComponent,
 	parameters: {
 		layout: 'padded',
 	},
-} satisfies Meta<typeof FootballMatchGoalAttempts>;
+} satisfies Meta<typeof FootballMatchGoalAttemptsComponent>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default = {
+export const FootballMatchGoalAttempts = {
 	args: {
 		homeTeam: {
 			name: 'Manchester United',
