@@ -204,10 +204,10 @@ export const getActiveMediaAtom = (
 			({ version }) => version === mediaAtom.activeVersion,
 		);
 
-		const videoAssets = assets.filter(
+		const firstVideoAsset = assets.filter(
 			({ assetType }) => assetType === 'Video',
-		);
-		if (!videoAssets.length) return undefined;
+		)[0];
+		if (!firstVideoAsset) return undefined;
 
 		const image = decideMediaAtomImage(
 			videoReplace,
@@ -219,7 +219,7 @@ export const getActiveMediaAtom = (
 		 * Each version of a media atom will contain assets for self-hosted OR YouTube, but not both.
 		 * Therefore, we check the platform of the first asset and assume the rest are the same.
 		 */
-		if (assets[0]?.platform === 'Url') {
+		if (firstVideoAsset.platform === 'Url') {
 			/**
 			 * Take one source for each supported video file type.
 			 */
@@ -249,8 +249,8 @@ export const getActiveMediaAtom = (
 				})),
 				subtitleSource: subtitleAsset?.id,
 				duration: mediaAtom.duration ?? 0,
-				width: mediaAtom.dimensions?.width ?? 500,
-				height: mediaAtom.dimensions?.height ?? 400,
+				width: firstVideoAsset.dimensions?.width ?? 500,
+				height: firstVideoAsset.dimensions?.height ?? 400,
 				image,
 			};
 		}
@@ -258,11 +258,11 @@ export const getActiveMediaAtom = (
 		/**
 		 * There should only be one asset for Youtube atoms.
 		 */
-		if (assets[0]?.platform === 'Youtube') {
+		if (firstVideoAsset.platform === 'Youtube') {
 			return {
 				type: 'YoutubeVideo',
 				id: mediaAtom.id,
-				videoId: assets[0].id,
+				videoId: firstVideoAsset.id,
 				duration: mediaAtom.duration ?? 0,
 				title: mediaAtom.title,
 				// Size fixed to a 5:3 ratio
