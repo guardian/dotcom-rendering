@@ -257,15 +257,19 @@ export const RichLink = ({
 								)}
 
 								{linkText}
+
+								{!isUndefined(starRating) ? (
+									<StarRating
+										rating={starRating}
+										paddingSize={'medium'}
+										size="small"
+									/>
+								) : null}
 							</div>
 
 							{isOpinion && byline !== '' && (
 								<div css={[bylineStyles]}>{byline}</div>
 							)}
-
-							{!isUndefined(starRating) ? (
-								<StarRating rating={starRating} size="small" />
-							) : null}
 
 							{!!(isPaidContent && sponsorName) && (
 								<div css={paidForBrandingStyles}>
