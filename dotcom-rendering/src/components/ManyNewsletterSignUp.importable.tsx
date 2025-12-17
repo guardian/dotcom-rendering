@@ -300,7 +300,7 @@ export const ManyNewsletterSignUp = ({
 			},
 		);
 
-		// Update cache with all successfully subscribed newsletters
+		// Update cache with subscribed newsletters
 		const userId =
 			authStatus.kind === 'SignedIn'
 				? authStatus.idToken.claims.sub
