@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { log, storage } from '@guardian/libs';
+import { isUndefined, log, storage } from '@guardian/libs';
 import { from, space } from '@guardian/source/foundations';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -32,8 +32,8 @@ import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
 const videoContainerStyles = (
 	isCinemagraph: boolean,
-	videoAspectRatio: number,
-	aspectRatio?: number, // The aspect ratio of the container
+	aspectRatio: number,
+	containerAspectRatio?: number, // The aspect ratio of the container
 ) => css`
 	position: relative;
 	display: flex;
@@ -48,9 +48,10 @@ const videoContainerStyles = (
 	 * From tablet breakpoints, the aspect ratio of the slot is maintained, for consistency with other content.
 	 * This will result in grey bars on either side of the video if the video is narrower than the slot.
 	 */
-	aspect-ratio: ${videoAspectRatio};
+	aspect-ratio: ${aspectRatio};
 	${from.tablet} {
-		${typeof aspectRatio === 'number' && `aspect-ratio: ${aspectRatio};`}
+		${!isUndefined(containerAspectRatio) &&
+		`aspect-ratio: ${containerAspectRatio};`}
 	}
 `;
 
