@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -37,11 +36,7 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	type ArticleFormat,
-} from '../lib/articleFormat';
+import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
 import { getSoleContributor } from '../lib/byline';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
@@ -362,13 +357,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								<MainMedia
 									format={format}
 									elements={article.mainMediaElements}
-									starRating={
-										format.design ===
-											ArticleDesign.Review &&
-										!isUndefined(article.starRating)
-											? article.starRating
-											: undefined
-									}
 									host={host}
 									pageId={article.pageId}
 									webTitle={article.webTitle}
@@ -412,6 +400,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 											article.webPublicationDateDeprecated
 										}
 										hasAvatar={!!avatarUrl}
+										starRating={article.starRating}
 									/>
 									{/* BOTTOM */}
 									<div>
