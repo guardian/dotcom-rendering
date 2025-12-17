@@ -11,7 +11,7 @@ import {
 } from '@guardian/source/foundations';
 import { useState } from 'react';
 import type { EditionId } from '../lib/edition';
-import { parseStorylinesContentToStorylines } from '../model/enhanceAITagPageContent';
+import { parseStorylinesContentToStorylines } from '../model/enhanceTagPageStorylinesContent';
 import { palette } from '../palette';
 import type { StorylinesContent } from '../types/storylinesContent';
 import { FlexibleGeneral } from './FlexibleGeneral';
@@ -51,10 +51,10 @@ const tabsContainerStyles = css`
 	width: 100%;
 	${from.wide} {
 		width: 110%;
-	} /* bit hacky, but looks a touch better on wide. Maybe there's a better way though */
+	} /* bit hacky, but looks a touch better on wide. */
 	align-items: stretch; /* Makes all tabs the same height */
 	margin-bottom: ${space[6]}px;
-	margin-left: -${space[2]}px; /* on mobile at least */
+	margin-left: -${space[2]}px;
 `;
 
 const tabStyles = (isActive: boolean, isFirst: boolean) => css`
@@ -78,8 +78,6 @@ const contentStyles = css`
 	padding-top: ${space[0]}px 0;
 `;
 
-// ${textSans17};
-// 	font-weight: 700;
 const selectedTitleStyles = css`
 	${textSansBold34}
 	color: ${sourcePalette.news[400]};
@@ -147,33 +145,9 @@ export const StorylinesSection = ({
 	storylinesContent,
 	editionId,
 }: StorylinesSectionProps) => {
-	console.log('has StorylinesContent', !!storylinesContent);
-	// console.log('StorylinesContent', StorylinesContent);
-	// const [storylines, SetStorylines] = useState<StorylinesContent>();
-	const storylines = storylinesContent;
-
-	// useEffect(() => {
-	// 	fetch(
-	// 		`http://localhost:9000/api/tag-page-rendering/${tagPage.pageId}`,
-	// 		{
-	// 			headers: {
-	// 				'Content-Type': 'application/json',
-	// 			},
-	// 			credentials: 'include',
-	// 		},
-	// 	)
-	// 		.then((response) => {
-	// 			console.log('response', response);
-	// 			return response.json();
-	// 		})
-	// 		.then((data) => SetStorylines(data))
-	// 		.catch((error) => {
-	// 			console.error('Error fetching storylines data:', error);
-	// 		});
-	// }, []);
-
 	const parsedStorylines =
-		storylines && parseStorylinesContentToStorylines(storylines);
+		storylinesContent &&
+		parseStorylinesContentToStorylines(storylinesContent);
 
 	const [activeStorylineId, setActiveStorylineId] = useState<string>(
 		parsedStorylines?.[0]?.id ?? '',
@@ -187,14 +161,6 @@ export const StorylinesSection = ({
 		(s) => s.id === activeStorylineId,
 	);
 
-	/** frontsection with background, title, AI warning on the left,
-	 *
-	 * section - mostly a copy of frontsection - done?
-	 * tabs - tweak style
-	 * tab content
-	 *  -> container wrapper (category title or not)
-	 *  ---> decide container
-	 */
 	return (
 		<>
 			<StorylineSection
@@ -206,8 +172,6 @@ export const StorylinesSection = ({
 				ophanComponentLink={`container-${index} | ${containerId}`}
 				ophanComponentName={containerId}
 				sectionId={containerId}
-				toggleable={false} //maybe set to true if this still works?
-				// pageId={tagPage.pageId}
 				editionId={editionId}
 			>
 				{/* Tab selector */}
@@ -227,13 +191,9 @@ export const StorylinesSection = ({
 									activeStorylineId === storyline.id,
 									i === 0,
 								)}
-								onClick={() => {
-									console.log(
-										'clicked storyline',
-										storyline.id,
-									);
-									setActiveStorylineId(storyline.id);
-								}}
+								onClick={() =>
+									setActiveStorylineId(storyline.id)
+								}
 								type="button"
 							>
 								{activeStorylineId === storyline.id ? (
@@ -268,11 +228,11 @@ export const StorylinesSection = ({
 						))}
 					</ScrollableCarousel>
 				</div>
-				{/* Selected title */}
+				{/* Storyline title */}
 				{activeStoryline && (
 					<div css={selectedTitleStyles}>{activeStoryline.title}</div>
 				)}
-				{/* Tabs content */}
+				{/* Content by categories */}
 				<div css={contentStyles}>
 					{activeStoryline?.categories.map((category, idx) => (
 						<div key={idx} css={contentCss}>
@@ -290,12 +250,13 @@ export const StorylinesSection = ({
 						</div>
 					))}
 				</div>
+				{/* Context on article date range */}
 				<div css={articleCountAndDateRangeStyle}>
 					{`These storylines were curated from articles published ${formatDateRangeText(
-						storylines.earliestArticleTime,
-						storylines.latestArticleTime,
+						storylinesContent.earliestArticleTime,
+						storylinesContent.latestArticleTime,
 					)}. Some articles may be older to provide further context.`}
-				</div>{' '}
+				</div>
 			</StorylineSection>
 		</>
 	);

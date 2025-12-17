@@ -66,22 +66,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	const isAccessibilityPage =
 		tagPage.config.pageId === 'help/accessibility-help';
 
-	// const isSCTagPage = process.env.NODE_ENV === 'development';
-
-	// console.log(
-	// 	'isSCTagPage:',
-	// 	isSCTagPage,
-	// 	'tagPage.webURL:',
-	// 	tagPage.webURL,
-	// 	'isDev:', //isDev doesn't actually work?
-	// 	tagPage.config.isDev,
-	// 	'is node env',
-	// 	process.env.NODE_ENV,
-	// );
-
-	console.log('has tagPage.StorylinesContent:', !!tagPage.storylinesContent);
-	console.log('tagPage.StorylinesContent:', tagPage.storylinesContent);
-
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -126,7 +110,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					image={tagPage.header.image}
 				/>
 				{tagPage.groupedTrails.map((groupedTrails, index) => {
-					// console.log("groupedTrails in TagPageLayout:", groupedTrails);
 					const imageLoading = index > 0 ? 'lazy' : 'eager';
 
 					const title = isUndefined(groupedTrails.day)
@@ -154,7 +137,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 
 					const insertSCSection =
 						tagPage.storylinesContent &&
-						// isSCTagPage &&
 						index == 1 &&
 						(!tagPage.pagination ||
 							tagPage.pagination.currentPage === 1);

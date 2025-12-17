@@ -278,22 +278,6 @@ const sectionHeadlineUntilLeftCol = (isOpinion: boolean) => css`
 	}
 `;
 
-// const sectionHeadlineFromLeftCol = (borderColour: string) => css`
-// 	${from.leftCol} {
-// 		position: relative;
-// 		::after {
-// 			content: '';
-// 			display: block;
-// 			width: 1px;
-// 			top: 0;
-// 			height: 1.875rem;
-// 			right: -10px;
-// 			position: absolute;
-// 			background-color: ${borderColour};
-// 		}
-// 	}
-// `;
-
 const topPadding = css`
 	padding-top: ${space[2]}px;
 `;
@@ -424,6 +408,8 @@ const carouselNavigationPlaceholder = css`
 	}
 `;
 
+/// todo: finish mobile and tablet representation
+
 /**
  * # Front Container
  *
@@ -468,42 +454,37 @@ const carouselNavigationPlaceholder = css`
  *  1 2 3 4 5 6 7 8 9 a b c d e (14)
  * ┌───┬───────────────────┬─┐
  * │Tit│                   │X│
- * │Dat├───────────────────┴─┤
+ * │AI├───────────────────┴─┤
  * ├───┤▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │   │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * │Tre│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * │ats│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
+ * │Foo│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
+ * │ter│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * ├───┼─────────────────────┤
- * │   │Show More            │
- * └───┴─────────────────────┘
  *
  * on `leftCol` (1140) if component is not toggleable
  *
  *  1 2 3 4 5 6 7 8 9 a b c d e (14)
  * ┌───┬──────────────────────┐
  * │Tit│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * │Dat│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
+ * │AI │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * ├───┤▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │   │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * │Tre│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * │ats│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
+ * │Foo│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
+ * │ter │Content context line  │
  * ├───┼──────────────────────┤
- * │   │Show More             │
- * └───┴──────────────────────┘
  *
  * on `wide` (1300)
  *
  *  1 2 3 4 5 6 7 8 9 a b c d e f g (16)
- * ┌─────┬───────────────────────┬─┐
- * │Title│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│X│
- * │Date │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒└─┤
- * ├─────┤▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
- * │     │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
- * │     │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
- * │Treat│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
- * ├─────┼─────────────────────────┤
- * │     │Show More                │
- * └─────┴─────────────────────────┘
+ * ┌──────┬───────────────────────┬─┐
+ * │Title │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│X│
+ * │AI    │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒└─┤
+ * │Notice│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
+ * ├─────-┤▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
+ * │      │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
+ * │      │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
+ * │Footer│Content context line	    │
+ * ├────────────────────────────────┤
  *
  */
 
@@ -538,11 +519,6 @@ export const StorylineSection = ({
 	const id = sectionId || 'unknown-id'; //todo: figure out what this should be
 	const isToggleable = toggleable && !!sectionId;
 	const isBetaContainer = !!containerLevel;
-
-	// These are for beta containers only
-	// const useLargeSpacingMobile = !!isNextCollectionPrimary || isAboveMobileAd;
-	// const useLargeSpacingDesktop =
-	// 	!!isNextCollectionPrimary || isAboveDesktopAd;
 
 	const showSectionColours = isNetworkFront(pageId ?? '');
 
@@ -595,9 +571,6 @@ export const StorylineSection = ({
 				<div
 					css={[
 						sectionHeadlineUntilLeftCol(
-							// TODO FIXME:
-							// This relies on sections called "opinion"
-							// only ever having <CPScott> as the leftContent
 							title?.toLowerCase() === 'opinion',
 						),
 					]}
@@ -665,7 +638,6 @@ export const StorylineSection = ({
 						sectionContentHorizontalMargins,
 						sectionContentRow(toggleable),
 						topPadding,
-						// showVerticalRule &&
 						isBetaContainer && sectionContentBorderFromLeftCol,
 					]}
 					id={`container-${sectionId}`}

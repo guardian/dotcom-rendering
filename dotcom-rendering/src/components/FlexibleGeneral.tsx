@@ -36,6 +36,7 @@ type Props = {
 	/** Feature flag for the labs redesign work */
 	showLabsRedesign?: boolean;
 	enableHls?: boolean;
+	/** Passed through to cards to enable tag page storyline section specific rendering */
 	storylinesStyle?: boolean;
 };
 

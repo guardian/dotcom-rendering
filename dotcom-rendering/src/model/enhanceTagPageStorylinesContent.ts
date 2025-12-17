@@ -1,4 +1,3 @@
-// import { timeAgo } from '@guardian/libs';
 import type { DCRFrontCard, DCRGroupedTrails } from '../types/front';
 import type {
 	ArticleData,
@@ -58,7 +57,7 @@ function parseArticleDataToFrontCard(
 		supportingContent: [],
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		byline: article.byline ?? '',
-		showByline: category.category === 'Contrasting opinions' ? true : false, // could be true if opinion?
+		showByline: category.category === 'Contrasting opinions' ? true : false,
 		boostLevel:
 			category.category === 'Profiles and Interviews' ||
 			category.category === 'Deep Reads'
@@ -68,15 +67,14 @@ function parseArticleDataToFrontCard(
 			category.category === 'Profiles and Interviews' ||
 			category.category === 'Deep Reads'
 				? true
-				: false, //would be true for profiles/deep reads?
+				: false,
 		showQuotedHeadline: false,
 		showLivePlayable: false,
 		avatarUrl:
 			category.category === 'Contrasting opinions' &&
 			article.image?.isAvatar
 				? article.image?.src
-				: undefined, // will need to be set for opinion pieces
-		// mainMedia: undefined, // ought to be set for multimedia pieces, but missing the extra info like count?
+				: undefined,
 		mainMedia:
 			category.category === 'Find multimedia' && article.image?.mediaData
 				? article.image?.mediaData
@@ -92,10 +90,7 @@ function parseArticleDataToFrontCard(
 }
 
 function parseKeyStoriesToFrontCard(category: CategoryContent): DCRFrontCard {
-	const supportingContent = category.articles.slice(1, 5).map((article) => {
-		// const articleAge =
-		// 	article.publicationTime &&
-		// 	timeAgo(new Date(article.publicationTime).getTime()).toString();
+	const supportingContent = category.articles.slice(0, 4).map((article) => {
 		return {
 			headline: article.headline,
 			url: article.url,

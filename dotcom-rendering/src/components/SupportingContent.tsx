@@ -209,7 +209,7 @@ export const SupportingContent = ({
 									}}
 								/>
 								{/* {subLink.kickerText} 
-								card age below obviously istag page is a lie, I'll tweak that in a bit
+								todo: card age below obviously istag page is a lie, I'll tweak that in a bit
 								*/}
 								<CardAge
 									webPublication={{

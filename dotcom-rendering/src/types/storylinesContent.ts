@@ -1,13 +1,22 @@
 import type { DCRGroupedTrails } from './front';
 import type { MainMedia } from './mainMedia';
 
+// // These should match the categories defined in the tool: https://github.com/guardian/tag-page-supercharger/blob/main/app/services/FrontendRendererService.scala#L59
+// export enum StorylineCategory {
+// 	Explainers = 'Explainers',
+// 	ContrastingOpinions = 'Contrasting opinions',
+// 	FindMultimedia = 'Find multimedia',
+// 	DeepReads = 'Deep Reads',
+// 	ProfilesAndInterviews = 'Profiles and Interviews',
+// 	KeyStories = 'Key Stories',
+// }
+
 export type ParsedStoryline = {
 	id: string;
 	title: string;
 	categories: ParsedCategory[];
 };
 
-// probably want to add a generic category type mapping to those in supercharger (e.g. opinions) and map this to a container type and title (e.g. "Contrasting Opinions" + "flexible/general")
 export type ParsedCategory = {
 	title: string;
 	containerType: string;

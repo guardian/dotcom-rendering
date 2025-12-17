@@ -522,20 +522,27 @@ export const Card = ({
 				`}
 			`}
 		>
-			{/* We add this card footer here because ordinarily, it's either the pill or the footer, but
-		 we need to display the date on these cards if they appear in the storylines section */}
+			{/* Ordinarily, it's either the pill or the footer, but we want to display the date on these cards if they appear in the storylines section on tag pages.
+				Bit of padding to align with the start of the pill type. 
+			*/}
 			{storylinesStyle && (
-				<CardFooter
-					format={format}
-					age={decideAge()}
-					commentCount={<CommentCount />}
-					cardBranding={
-						isOnwardContent || !showLabsRedesign ? (
-							<LabsBranding />
-						) : undefined
-					}
-					showLivePlayable={showLivePlayable}
-				/>
+				<div
+					css={css`
+						padding-left: ${space[2]}px;
+					`}
+				>
+					<CardFooter
+						format={format}
+						age={decideAge()}
+						commentCount={<CommentCount />}
+						cardBranding={
+							isOnwardContent || !showLabsRedesign ? (
+								<LabsBranding />
+							) : undefined
+						}
+						showLivePlayable={showLivePlayable}
+					/>
+				</div>
 			)}
 
 			{mainMedia?.type === 'YoutubeVideo' && isVideoArticle && (
@@ -1245,7 +1252,11 @@ export const Card = ({
 							flex-grow: 1;
 						`}
 					>
-						{/* why is this needed, to hide the headline if we're in the splash? */}
+						{/* In the storylines section on tag pages, the flex splash is used to display key stories. 
+							This is shown as a large image taken from the first article in the group, and the  headlines of the first four key articles (include that of the first article).
+							Therefore, we don't display an article headline in the conventional sense, these are displayed as "supporting content". 
+							However, simply passing an empty string as the article headline still reserves space, so this check enables us to avoid rendering that space at all. 
+						*/}
 						{storylinesStyle && isFlexSplash
 							? null
 							: headlinePosition === 'inner' && (
