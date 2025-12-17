@@ -213,14 +213,6 @@ const nonImmersivePodcastImageStyles = css`
 	left: ${space[2]}px;
 `;
 
-const starRatingWrapper = css`
-	background-color: ${palette('--star-rating-background')};
-	color: ${palette('--star-rating-fill')};
-	margin-top: ${space[1]}px;
-	display: inline-block;
-	width: fit-content;
-`;
-
 const trailTextWrapper = css`
 	margin-top: ${space[3]}px;
 
@@ -635,12 +627,10 @@ export const FeatureCard = ({
 										</div>
 
 										{starRating !== undefined ? (
-											<div css={starRatingWrapper}>
-												<StarRating
-													rating={starRating}
-													size="small"
-												/>
-											</div>
+											<StarRating
+												rating={starRating}
+												size="medium"
+											/>
 										) : null}
 
 										{!!trailText && (
