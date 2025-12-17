@@ -1,3 +1,5 @@
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
+
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
 	ArticleDesign,
@@ -13,22 +15,32 @@ const articleFormat: ArticleFormat = {
 	theme: Pillar.News,
 };
 
-export default {
+const meta = {
 	component: StarRatingBlockComponent,
 	title: 'Components/StarRatingBlockComponent',
-};
+	decorators: [splitTheme([articleFormat])],
+} satisfies Meta<typeof StarRatingBlockComponent>;
 
-export const AllSizes = () => (
-	<>
-		<h1>Small</h1>
-		<br />
-		<StarRatingBlockComponent rating={3} size="small" />
-		<br />
-		<br />
-		<h1>Large</h1>
-		<br />
-		<StarRatingBlockComponent rating={3} size="large" />
-	</>
-);
-AllSizes.storyName = 'All stars sizes';
-AllSizes.decorators = [splitTheme([articleFormat])];
+export default meta;
+type Story = StoryObj<typeof StarRatingBlockComponent>;
+
+export const AllSizes: Story = {
+	name: 'All stars sizes',
+	render: () => (
+		<>
+			<h1>Small</h1>
+			<br />
+			<StarRatingBlockComponent rating={3} size="small" />
+			<br />
+			<br />
+			<h1>medium</h1>
+			<br />
+			<StarRatingBlockComponent rating={3} size="medium" />
+			<br />
+			<br />
+			<h1>Large</h1>
+			<br />
+			<StarRatingBlockComponent rating={3} size="large" />
+		</>
+	),
+};

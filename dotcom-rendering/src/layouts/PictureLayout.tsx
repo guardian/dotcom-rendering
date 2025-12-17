@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -34,7 +33,7 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
-import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
+import type { ArticleFormat } from '../lib/articleFormat';
 import { getSoleContributor } from '../lib/byline';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';

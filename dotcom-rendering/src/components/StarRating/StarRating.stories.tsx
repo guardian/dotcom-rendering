@@ -78,29 +78,22 @@ export const LargeStory = () => (
 );
 LargeStory.storyName = 'Large stars';
 
-export const StarColours = () => (
+export const StarPadding = () => (
 	<>
-		<div style={{ backgroundColor: '#f6dde1' }}>
-			<p>Stars take the colour of the parent by default</p>
-			<div style={{ color: 'red' }}>
-				<StarRating rating={0} size="large" />
+		<div>
+			<p>Small Padding</p>
+			<div style={{ backgroundColor: 'red' }}>
+				<StarRating rating={0} size="large" paddingSize={'small'} />
 			</div>
-			<div style={{ color: 'orange' }}>
-				<StarRating rating={1} size="large" />
+			<p>Medium Padding</p>
+			<div style={{ backgroundColor: 'orange' }}>
+				<StarRating rating={1} size="large" paddingSize={'medium'} />
 			</div>
-			<div style={{ color: 'yellow' }}>
-				<StarRating rating={2} size="large" />
-			</div>
-			<div style={{ color: 'green' }}>
-				<StarRating rating={3} size="large" />
-			</div>
-			<div style={{ color: 'blue' }}>
-				<StarRating rating={4} size="large" />
-			</div>
-			<div style={{ color: 'purple' }}>
-				<StarRating rating={5} size="large" />
+			<p>Large Padding</p>
+			<div style={{ backgroundColor: 'yellow' }}>
+				<StarRating rating={2} size="large" paddingSize={'large'} />
 			</div>
 		</div>
 	</>
 );
-StarColours.storyName = 'Star colours';
+StarPadding.storyName = 'Star padding';
