@@ -9,10 +9,11 @@ import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { ServerSideTests, Switches } from '../types/config';
-import type { FEElement, StarRating } from '../types/content';
+import type { FEElement } from '../types/content';
 
 const mainMedia = css`
 	height: 100%;
+
 	${until.tablet} {
 		margin: 0;
 		order: 2;
@@ -77,7 +78,6 @@ type Props = {
 	format: ArticleFormat;
 	elements: FEElement[];
 	hideCaption?: boolean;
-	starRating?: StarRating;
 	host?: string;
 	pageId: string;
 	webTitle: string;
@@ -96,7 +96,6 @@ export const MainMedia = ({
 	elements,
 	format,
 	hideCaption,
-	starRating,
 	host,
 	pageId,
 	webTitle,
@@ -129,7 +128,6 @@ export const MainMedia = ({
 					abTests={abTests}
 					switches={switches}
 					hideCaption={hideCaption}
-					starRating={starRating}
 					editionId={editionId}
 					shouldHideAds={shouldHideAds}
 					contentType={contentType}
