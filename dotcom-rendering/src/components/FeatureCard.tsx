@@ -17,7 +17,7 @@ import { getOphanComponents } from '../lib/labs';
 import { transparentColour } from '../lib/transparentColour';
 import { palette } from '../palette';
 import type { Branding } from '../types/branding';
-import type { StarRating as Rating } from '../types/content';
+import type { RatingSizeType, StarRating as Rating } from '../types/content';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
@@ -44,6 +44,7 @@ import { StarRating } from './StarRating/StarRating';
 import { SupportingContent } from './SupportingContent';
 import { WaveForm } from './WaveForm';
 import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
+import { isUndefined } from '@guardian/libs';
 
 export type Position = 'inner' | 'outer' | 'none';
 
@@ -94,6 +95,7 @@ const hoverStyles = css`
 	}
 
 	/* Only underline the headline element we want to target (not kickers/sublink headlines) */
+
 	:hover .card-headline .show-underline {
 		text-decoration: underline;
 	}
@@ -105,6 +107,7 @@ const sublinkHoverStyles = css`
 		.card-headline .show-underline {
 			text-decoration: none;
 		}
+
 		.media-overlay {
 			background-color: transparent;
 		}
@@ -175,6 +178,7 @@ const overlayStyles = css`
 	${overlayMaskGradientStyles('180deg')};
 
 	/* Ensure the waveform is behind the other elements, e.g. headline, pill */
+
 	> :not(.waveform) {
 		z-index: 1;
 	}
@@ -351,6 +355,7 @@ export type Props = {
 	 */
 	isImmersive?: boolean;
 	showVideo?: boolean;
+	starRatingSize: RatingSizeType;
 };
 
 export const FeatureCard = ({
@@ -386,6 +391,7 @@ export const FeatureCard = ({
 	isNewsletter = false,
 	isImmersive = false,
 	showVideo = false,
+	starRatingSize,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -626,10 +632,10 @@ export const FeatureCard = ({
 											/>
 										</div>
 
-										{starRating !== undefined ? (
+										{!isUndefined(starRating) ? (
 											<StarRating
 												rating={starRating}
-												size="medium"
+												size={starRatingSize}
 											/>
 										) : null}
 

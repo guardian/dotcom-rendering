@@ -81,6 +81,7 @@ export const ScrollableFeature = ({
 							isNewsletter={card.isNewsletter}
 							showQuotes={card.showQuotedHeadline}
 							showVideo={card.showVideo}
+							starRatingSize={'small'}
 						/>
 					</ScrollableCarousel.Item>
 				);
