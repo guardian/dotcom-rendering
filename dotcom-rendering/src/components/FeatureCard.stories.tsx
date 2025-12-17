@@ -35,6 +35,7 @@ const cardProps: CardProps = {
 	showClock: false,
 	imageSize: 'feature',
 	collectionId: 1,
+	uniqueId: `collection-1-feature-0`,
 };
 
 const aBasicLink = {
@@ -324,6 +325,10 @@ export const YoutubeVideoImmersive = {
 export const YoutubeVideoMainMedia = {
 	args: {
 		...YoutubeVideo.args,
+		image: {
+			src: 'https://media.guim.co.uk/4612af5f4667888fa697139cf570b6373d93a710/2446_345_3218_1931/master/3218.jpg',
+			altText: 'alt text',
+		},
 		format: {
 			...YoutubeVideo.args.format,
 			design: ArticleDesign.Standard,
@@ -394,3 +399,31 @@ export const WithSublinksLabsImmersive = {
 		...Immersive.args,
 	},
 } satisfies Story;
+
+export const WithSelfHostedVideo: Story = {
+	args: {
+		...cardProps,
+		showVideo: true,
+		mainMedia: {
+			type: 'SelfHostedVideo',
+			videoStyle: 'Loop',
+			atomId: 'atom-id-123',
+			sources: [
+				{
+					src: 'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
+					mimeType: 'video/mp4',
+				},
+			],
+			width: 900,
+			height: 720,
+			duration: 18,
+		},
+	},
+};
+
+export const WithSelfHostedImmersiveVideo: Story = {
+	args: {
+		...WithSelfHostedVideo.args,
+		isImmersive: true,
+	},
+};
