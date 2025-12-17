@@ -15,12 +15,12 @@ interface NewsletterSubscriptionResponse {
  *
  * @param newsletterId
  * @param idApiUrl
- * @param enableCheck - Feature flag to enable/disable subscription check. When false, returns false immediately.
+ * @param shouldCheckSubscription - Feature flag to enable/disable subscription check. When false, returns false immediately.
  */
 export const useNewsletterSubscription = (
 	newsletterId: number,
 	idApiUrl: string | undefined,
-	enableCheck: boolean = true,
+	shouldCheckSubscription: boolean = true,
 ): boolean | undefined => {
 	const [isSubscribed, setIsSubscribed] = useState<boolean | undefined>(
 		undefined,
@@ -30,7 +30,7 @@ export const useNewsletterSubscription = (
 
 	useEffect(() => {
 		// Feature flag is disabled - skip subscription check
-		if (!enableCheck) {
+		if (!shouldCheckSubscription) {
 			setIsSubscribed(false);
 			return;
 		}
@@ -99,7 +99,7 @@ export const useNewsletterSubscription = (
 		};
 
 		void fetchNewsletters();
-	}, [authStatus, newsletterId, idApiUrl, enableCheck]);
+	}, [authStatus, newsletterId, idApiUrl, shouldCheckSubscription]);
 
 	return isSubscribed;
 };
