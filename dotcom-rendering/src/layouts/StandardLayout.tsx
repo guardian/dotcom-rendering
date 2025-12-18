@@ -392,6 +392,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
+	console.log(
+		'1',
+		article.config.abTests,
+		article.config.abTests.starRatingRedesignVariant,
+	);
 	const isInStarRatingVariant =
 		article.config.abTests.starRatingRedesignVariant === 'variant';
 
@@ -890,6 +895,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								}
 								serverTime={serverTime}
 								renderingTarget={renderingTarget}
+								isInStarRatingVariant={isInStarRatingVariant}
 							/>
 						</Island>
 					</Section>
@@ -915,6 +921,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						webURL={article.webURL}
+						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Island>
 				{showComments && (

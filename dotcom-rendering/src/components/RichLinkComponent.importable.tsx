@@ -135,6 +135,7 @@ export const RichLinkComponent = ({
 		width: (data.imageAsset ?? fallbackData.imageAsset).fields.width,
 		height: (data.imageAsset ?? fallbackData.imageAsset).fields.height,
 	} satisfies Parameters<typeof RichLink>[0]['imageData'];
+	console.log('rich link component', isInStarRatingVariant);
 
 	return (
 		<RichLink
@@ -155,7 +156,7 @@ export const RichLinkComponent = ({
 				// https://github.com/guardian/frontend/blob/8256fe148f9abb5842e30339ac64dfa43d758226/common/app/model/Asset.scala#L64
 				data.imageAsset?.index === -1
 			}
-			isInStarRatingVariant={!!isInStarRatingVariant}
+			isInStarRatingVariant={isInStarRatingVariant}
 		/>
 	);
 };

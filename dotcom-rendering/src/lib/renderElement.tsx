@@ -174,6 +174,7 @@ export const renderElement = ({
 	contentLayout,
 	idApiUrl,
 }: Props) => {
+	console.log({ abTests });
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
@@ -717,6 +718,8 @@ export const renderElement = ({
 				</>
 			);
 		case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
+			console.log('render element', abTests);
+
 			return (
 				<Island priority="feature" defer={{ until: 'idle' }}>
 					<RichLinkComponent

@@ -767,6 +767,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						webURL={article.webURL}
+						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Island>
 

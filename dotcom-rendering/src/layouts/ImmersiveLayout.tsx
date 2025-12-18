@@ -852,6 +852,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						webURL={article.webURL}
+						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Island>
 
