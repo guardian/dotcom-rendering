@@ -174,7 +174,6 @@ export const renderElement = ({
 	contentLayout,
 	idApiUrl,
 }: Props) => {
-	console.log({ abTests });
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;

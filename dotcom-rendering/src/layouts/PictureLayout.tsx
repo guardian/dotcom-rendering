@@ -279,7 +279,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 
 	const displayAvatarUrl = avatarUrl ? true : false;
 
-	console.log('1,', article.config.abTests);
 	const isInStarRatingVariant =
 		article.config.abTests.starRatingRedesignVariant === 'variant';
 
