@@ -17,6 +17,7 @@ import {
 import { handleAppsAssets } from './handler.assets.apps';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import { handleFront, handleTagPage } from './handler.front.web';
+import { handleHostedContent } from './handler.hostedContent.web';
 import {
 	handleCricketMatchPage,
 	handleFootballMatchListPage,
@@ -75,6 +76,7 @@ export const prodServer = (): void => {
 		logRenderTime,
 		handleFootballMatchPage,
 	);
+	app.post('/HostedContent', logRenderTime, handleHostedContent);
 
 	app.post(
 		'/EmailNewsletters',
