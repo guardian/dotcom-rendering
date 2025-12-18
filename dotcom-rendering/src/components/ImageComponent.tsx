@@ -28,7 +28,7 @@ import { Hide } from './Hide';
 import { Island } from './Island';
 import { LightboxLink } from './LightboxLink';
 import { Picture } from './Picture';
-import { StarRating } from './StarRating/StarRating';
+import { StarRatingDeprecated } from './StarRating/StarRatingDeprecated';
 
 type Props = {
 	element: ImageBlockElement;
@@ -81,7 +81,7 @@ const starsWrapper = css`
 
 const PositionStarRating = ({ rating }: { rating: Rating }) => (
 	<div css={starsWrapper}>
-		<StarRating rating={rating} size="large" />
+		<StarRatingDeprecated rating={rating} size="large" />
 	</div>
 );
 

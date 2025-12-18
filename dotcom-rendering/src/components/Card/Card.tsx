@@ -49,7 +49,7 @@ import type { SubtitleSize } from '../SelfHostedVideoPlayer';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
 import { Snap } from '../Snap';
 import { SnapCssSandbox } from '../SnapCssSandbox';
-import { StarRating } from '../StarRating/StarRating';
+import { StarRatingDeprecated } from '../StarRating/StarRatingDeprecated';
 import type { Alignment } from '../SupportingContent';
 import { SupportingContent } from '../SupportingContent';
 import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
@@ -184,7 +184,7 @@ const StarRatingComponent = ({
 	cardHasImage: boolean;
 }) => (
 	<div css={starWrapper(cardHasImage)}>
-		<StarRating rating={rating} size="small" />
+		<StarRatingDeprecated rating={rating} size="small" />
 	</div>
 );
 

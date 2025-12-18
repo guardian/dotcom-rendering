@@ -32,7 +32,7 @@ type Props = {
 	size: RatingSizeType;
 };
 
-export const StarRating = ({ rating, size }: Props) => (
+export const StarRatingDeprecated = ({ rating, size }: Props) => (
 	<div css={[determineSize(size), padding]}>
 		{Array.from({ length: 5 }, (_, i) =>
 			i < rating ? <SvgStar key={i} /> : <SvgStarOutline key={i} />,

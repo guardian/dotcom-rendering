@@ -14,7 +14,7 @@ import { CardHeadline } from '../CardHeadline';
 import type { Loading } from '../CardPicture';
 import { FormatBoundary } from '../FormatBoundary';
 import { Pill } from '../Pill';
-import { StarRating } from '../StarRating/StarRating';
+import { StarRatingDeprecated } from '../StarRating/StarRatingDeprecated';
 import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
 import { HighlightsCardImage } from './HighlightsCardImage';
 
@@ -169,7 +169,10 @@ export const HighlightsCard = ({
 
 					{!isUndefined(starRating) && (
 						<div css={starWrapper}>
-							<StarRating rating={starRating} size="small" />
+							<StarRatingDeprecated
+								rating={starRating}
+								size="small"
+							/>
 						</div>
 					)}
 

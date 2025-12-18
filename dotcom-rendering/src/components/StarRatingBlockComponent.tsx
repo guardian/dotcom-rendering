@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { palette } from '../palette';
 import type { StarRating as Rating, RatingSizeType } from '../types/content';
-import { StarRating } from './StarRating/StarRating';
+import { StarRatingDeprecated } from './StarRating/StarRatingDeprecated';
 
 type Props = {
 	rating: Rating;
@@ -16,6 +16,6 @@ const starsWrapper = css`
 
 export const StarRatingBlockComponent = ({ rating, size }: Props) => (
 	<div css={starsWrapper} data-spacefinder-role="inline">
-		<StarRating rating={rating} size={size} />
+		<StarRatingDeprecated rating={rating} size={size} />
 	</div>
 );

@@ -40,7 +40,7 @@ import { FeatureCardCommentCount } from './FeatureCardCommentCount';
 import { FormatBoundary } from './FormatBoundary';
 import { Island } from './Island';
 import { Pill } from './Pill';
-import { StarRating } from './StarRating/StarRating';
+import { StarRatingDeprecated } from './StarRating/StarRatingDeprecated';
 import { SupportingContent } from './SupportingContent';
 import { WaveForm } from './WaveForm';
 import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
@@ -636,7 +636,7 @@ export const FeatureCard = ({
 
 										{starRating !== undefined ? (
 											<div css={starRatingWrapper}>
-												<StarRating
+												<StarRatingDeprecated
 													rating={starRating}
 													size="small"
 												/>

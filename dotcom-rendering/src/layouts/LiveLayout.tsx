@@ -44,7 +44,7 @@ import { Pagination } from '../components/Pagination';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
-import { StarRating } from '../components/StarRating/StarRating';
+import { StarRatingDeprecated } from '../components/StarRating/StarRatingDeprecated';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
@@ -436,7 +436,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								</div>
 								{!isUndefined(article.starRating) ? (
 									<div css={starWrapper}>
-										<StarRating
+										<StarRatingDeprecated
 											rating={article.starRating}
 											size="large"
 										/>

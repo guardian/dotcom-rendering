@@ -24,7 +24,7 @@ import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { FormatBoundary } from './FormatBoundary';
 import { QuoteIcon } from './QuoteIcon';
-import { StarRating } from './StarRating/StarRating';
+import { StarRatingDeprecated } from './StarRating/StarRatingDeprecated';
 
 interface Props {
 	richLinkIndex: number;
@@ -270,7 +270,7 @@ export const RichLink = ({
 
 							{!isUndefined(starRating) ? (
 								<div css={starWrapperStyles}>
-									<StarRating
+									<StarRatingDeprecated
 										rating={starRating}
 										size="small"
 									/>
