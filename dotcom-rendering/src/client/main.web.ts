@@ -1,6 +1,6 @@
 import './webpackPublicPath';
 import { adaptSite, shouldAdapt } from './adaptiveSite';
-import { setDeviceClassCookie } from './deviceDetection';
+import { setDeviceClassCookie } from './deviceDetection/iPadDetection';
 import { startup } from './startup';
 import { maybeSIndicatorCapiKey } from './userFeatures/cookies/sIndicatorCapiKey';
 
