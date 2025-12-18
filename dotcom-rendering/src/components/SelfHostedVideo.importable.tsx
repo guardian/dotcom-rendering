@@ -248,7 +248,6 @@ export const SelfHostedVideo = ({
 	const [isPlayable, setIsPlayable] = useState(false);
 	const [isMuted, setIsMuted] = useState(true);
 	const [hasAudio, setHasAudio] = useState(true);
-	const [showPlayIcon, setShowPlayIcon] = useState(false);
 	const [showPosterImage, setShowPosterImage] = useState<boolean>(false);
 	const [currentTime, setCurrentTime] = useState(0);
 	const [playerState, setPlayerState] =
@@ -568,19 +567,6 @@ export const SelfHostedVideo = ({
 	]);
 
 	/**
-	 * Show the play icon when the video is not playing, except for when it is scrolled
-	 * out of view. In this case, the intersection observer will resume playback and
-	 * having a play icon would falsely indicate a user action is required to resume playback.
-	 */
-	useEffect(() => {
-		const shouldShowPlayIcon =
-			playerState === 'PAUSED_BY_USER' ||
-			playerState === 'PAUSED_BY_BROWSER' ||
-			(playerState === 'NOT_STARTED' && !isAutoplayAllowed);
-		setShowPlayIcon(shouldShowPlayIcon);
-	}, [playerState, isAutoplayAllowed]);
-
-	/**
 	 * Show a poster image if a video does NOT play automatically. Otherwise, we do not need
 	 * to download the image as the video will be autoplayed and the image will not be seen.
 	 *
@@ -745,6 +731,16 @@ export const SelfHostedVideo = ({
 				break;
 		}
 	};
+
+	/**
+	 * Show the play icon when the video is not playing, except for when it is scrolled
+	 * out of view. In this case, the intersection observer will resume playback and
+	 * having a play icon would falsely indicate a user action is required to resume playback.
+	 */
+	const showPlayIcon =
+		playerState === 'PAUSED_BY_USER' ||
+		playerState === 'PAUSED_BY_BROWSER' ||
+		(playerState === 'NOT_STARTED' && !isAutoplayAllowed);
 
 	const aspectRatio = width / height;
 
