@@ -33,7 +33,7 @@ export type HighlightsCardProps = {
 	byline?: string;
 	isExternalLink: boolean;
 	starRating?: Rating;
-	isInStarRatingVariant: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 const container = css`

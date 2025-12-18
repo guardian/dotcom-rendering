@@ -41,7 +41,7 @@ interface Props {
 	sponsorName: string;
 	contributorImage?: string;
 	isPlaceholder?: boolean; // use 'true' for server-side default prior to client-side enrichment
-	isInStarRatingVariant: boolean;
+	isInStarRatingVariant?: boolean;
 }
 interface RichLinkImageData {
 	thumbnailUrl: string;

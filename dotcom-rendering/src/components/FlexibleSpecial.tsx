@@ -32,7 +32,7 @@ type Props = {
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
 	enableHls?: boolean;
-	isInStarRatingVariant: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 type BoostProperties = {
@@ -135,7 +135,7 @@ type OneCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	isSplashCard?: boolean;
 	enableHls?: boolean;
-	isInStarRatingVariant: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 export const OneCardLayout = ({
@@ -234,7 +234,7 @@ type TwoOrFourCardLayoutProps = {
 	aspectRatio: AspectRatio;
 	isFirstRow: boolean;
 	containerLevel: DCRContainerLevel;
-	isInStarRatingVariant: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 const TwoOrFourCardLayout = ({

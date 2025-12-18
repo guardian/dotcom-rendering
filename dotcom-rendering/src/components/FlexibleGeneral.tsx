@@ -34,7 +34,7 @@ type Props = {
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
 	enableHls?: boolean;
-	isInStarRatingVariant: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -89,7 +89,7 @@ type ImmersiveCardLayoutProps = {
 	serverTime?: number;
 	imageLoading: Loading;
 	collectionId: number;
-	isInStarRatingVariant: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 /**
@@ -256,7 +256,7 @@ type SplashCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
 	enableHls?: boolean;
-	isInStarRatingVariant: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 const SplashCardLayout = ({
@@ -424,7 +424,7 @@ type FullWidthCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
 	enableHls?: boolean;
-	isInStarRatingVariant: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 const FullWidthCardLayout = ({
@@ -536,7 +536,7 @@ type HalfWidthCardLayoutProps = {
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	enableHls?: boolean;
-	isInStarRatingVariant: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 const HalfWidthCardLayout = ({

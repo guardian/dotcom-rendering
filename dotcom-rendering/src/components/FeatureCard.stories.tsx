@@ -36,7 +36,6 @@ const cardProps: CardProps = {
 	imageSize: 'feature',
 	collectionId: 1,
 	starRatingSize: 'medium',
-	isInStarRatingVariant: true,
 };
 
 const aBasicLink = {

@@ -15,7 +15,7 @@ type Props = {
 	imageLoading: 'lazy' | 'eager';
 	aspectRatio: AspectRatio;
 	sectionId: string;
-	isInStarRatingVariant: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 /**

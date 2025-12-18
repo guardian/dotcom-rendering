@@ -361,7 +361,7 @@ export type Props = {
 	 */
 	isImmersive?: boolean;
 	showVideo?: boolean;
-	isInStarRatingVariant: boolean;
+	isInStarRatingVariant?: boolean;
 	starRatingSize: RatingSizeType;
 };
 

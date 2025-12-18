@@ -32,7 +32,7 @@ type Props = {
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
-	isInStarRatingVariant: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 export const StaticMediumFour = ({

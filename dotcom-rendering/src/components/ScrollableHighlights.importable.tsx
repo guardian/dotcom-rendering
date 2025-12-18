@@ -16,7 +16,7 @@ import { HighlightsCard } from './Masthead/HighlightsCard';
 type Props = {
 	trails: DCRFrontCard[];
 	frontId?: string;
-	isInStarRatingVariant: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 const containerStyles = css`

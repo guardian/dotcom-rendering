@@ -164,7 +164,7 @@ export type Props = {
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
 	enableHls?: boolean;
-	isInStarRatingVariant: boolean;
+	isInStarRatingVariant?: boolean;
 	starRatingSize?: RatingSizeType;
 };
 

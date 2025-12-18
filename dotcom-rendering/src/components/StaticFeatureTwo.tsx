@@ -16,7 +16,7 @@ type Props = {
 	serverTime?: number;
 	aspectRatio: AspectRatio;
 	collectionId: number;
-	isInStarRatingVariant: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 /**

@@ -40,7 +40,7 @@ type Props = {
 	title?: string;
 	isAvatar?: boolean;
 	isTimeline?: boolean;
-	isInStarRatingVariant: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 const timelineBulletStyles = css`

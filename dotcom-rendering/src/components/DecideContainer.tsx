@@ -48,7 +48,7 @@ type Props = {
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
 	enableHls?: boolean;
-	isInStarRatingVariant: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 export const DecideContainer = ({
