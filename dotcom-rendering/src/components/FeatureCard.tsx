@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -17,7 +18,7 @@ import { getOphanComponents } from '../lib/labs';
 import { transparentColour } from '../lib/transparentColour';
 import { palette } from '../palette';
 import type { Branding } from '../types/branding';
-import type { RatingSizeType, StarRating as Rating } from '../types/content';
+import type { StarRating as Rating, RatingSizeType } from '../types/content';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
@@ -45,7 +46,6 @@ import { StarRatingDeprecated } from './StarRating/StarRatingDeprecated';
 import { SupportingContent } from './SupportingContent';
 import { WaveForm } from './WaveForm';
 import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
-import { isUndefined } from '@guardian/libs';
 
 export type Position = 'inner' | 'outer' | 'none';
 

@@ -14,10 +14,10 @@ import { CardHeadline } from '../CardHeadline';
 import type { Loading } from '../CardPicture';
 import { FormatBoundary } from '../FormatBoundary';
 import { Pill } from '../Pill';
+import { StarRating } from '../StarRating/StarRating';
 import { StarRatingDeprecated } from '../StarRating/StarRatingDeprecated';
 import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
 import { HighlightsCardImage } from './HighlightsCardImage';
-import { StarRating } from '../StarRating/StarRating';
 
 export type HighlightsCardProps = {
 	linkTo: string;

@@ -24,8 +24,8 @@ import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { FormatBoundary } from './FormatBoundary';
 import { QuoteIcon } from './QuoteIcon';
-import { StarRatingDeprecated } from './StarRating/StarRatingDeprecated';
 import { StarRating } from './StarRating/StarRating';
+import { StarRatingDeprecated } from './StarRating/StarRatingDeprecated';
 
 interface Props {
 	richLinkIndex: number;

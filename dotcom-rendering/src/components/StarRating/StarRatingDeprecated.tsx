@@ -9,6 +9,7 @@ const padding = css`
 const determineSize = (size: RatingSizeType) => {
 	switch (size) {
 		case 'small':
+		case 'medium':
 			return css`
 				svg {
 					width: 1.3em;
