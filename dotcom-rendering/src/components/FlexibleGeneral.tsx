@@ -34,6 +34,7 @@ type Props = {
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
 	enableHls?: boolean;
+	isInStarRatingVariant: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -88,6 +89,7 @@ type ImmersiveCardLayoutProps = {
 	serverTime?: number;
 	imageLoading: Loading;
 	collectionId: number;
+	isInStarRatingVariant: boolean;
 };
 
 /**
@@ -102,6 +104,7 @@ const ImmersiveCardLayout = ({
 	serverTime,
 	imageLoading,
 	collectionId,
+	isInStarRatingVariant,
 }: ImmersiveCardLayoutProps) => {
 	const isLoopingVideo =
 		card.mainMedia?.type === 'SelfHostedVideo' &&
@@ -140,6 +143,7 @@ const ImmersiveCardLayout = ({
 					supportingContent={card.supportingContent}
 					isImmersive={true}
 					showVideo={card.showVideo}
+					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			</LI>
 		</UL>
@@ -251,6 +255,7 @@ type SplashCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
 	enableHls?: boolean;
+	isInStarRatingVariant: boolean;
 };
 
 const SplashCardLayout = ({
@@ -264,6 +269,7 @@ const SplashCardLayout = ({
 	containerLevel,
 	collectionId,
 	enableHls,
+	isInStarRatingVariant,
 }: SplashCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -277,6 +283,7 @@ const SplashCardLayout = ({
 				serverTime={serverTime}
 				imageLoading={imageLoading}
 				collectionId={collectionId}
+				isInStarRatingVariant={isInStarRatingVariant}
 			/>
 		);
 	}
@@ -348,6 +355,7 @@ const SplashCardLayout = ({
 					subtitleSize={subtitleSize}
 					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
 					enableHls={enableHls}
+					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			</LI>
 		</UL>
@@ -414,6 +422,7 @@ type FullWidthCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
 	enableHls?: boolean;
+	isInStarRatingVariant: boolean;
 };
 
 const FullWidthCardLayout = ({
@@ -428,6 +437,7 @@ const FullWidthCardLayout = ({
 	containerLevel,
 	collectionId,
 	enableHls,
+	isInStarRatingVariant,
 }: FullWidthCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -454,6 +464,7 @@ const FullWidthCardLayout = ({
 				serverTime={serverTime}
 				imageLoading={imageLoading}
 				collectionId={collectionId}
+				isInStarRatingVariant={isInStarRatingVariant}
 			/>
 		);
 	}
@@ -503,6 +514,7 @@ const FullWidthCardLayout = ({
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 					subtitleSize={subtitleSize}
 					enableHls={enableHls}
+					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			</LI>
 		</UL>
@@ -521,6 +533,7 @@ type HalfWidthCardLayoutProps = {
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	enableHls?: boolean;
+	isInStarRatingVariant: boolean;
 };
 
 const HalfWidthCardLayout = ({
@@ -535,6 +548,7 @@ const HalfWidthCardLayout = ({
 	isLastRow,
 	containerLevel,
 	enableHls,
+	isInStarRatingVariant,
 }: HalfWidthCardLayoutProps) => {
 	if (cards.length === 0) return null;
 
@@ -590,6 +604,7 @@ const HalfWidthCardLayout = ({
 							headlineSizes={undefined}
 							canPlayInline={false}
 							enableHls={enableHls}
+							isInStarRatingVariant={isInStarRatingVariant}
 						/>
 					</LI>
 				);
@@ -608,6 +623,7 @@ export const FlexibleGeneral = ({
 	containerLevel = 'Primary',
 	collectionId,
 	enableHls,
+	isInStarRatingVariant,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
 		...snap,
@@ -637,6 +653,7 @@ export const FlexibleGeneral = ({
 					containerLevel={containerLevel}
 					collectionId={collectionId}
 					enableHls={enableHls}
+					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			)}
 			{groupedCards.map((row, i) => {
@@ -656,6 +673,7 @@ export const FlexibleGeneral = ({
 								containerLevel={containerLevel}
 								collectionId={collectionId}
 								enableHls={enableHls}
+								isInStarRatingVariant={isInStarRatingVariant}
 							/>
 						);
 
@@ -676,6 +694,7 @@ export const FlexibleGeneral = ({
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
 								enableHls={enableHls}
+								isInStarRatingVariant={isInStarRatingVariant}
 							/>
 						);
 				}
