@@ -49,6 +49,7 @@ import type { SubtitleSize } from '../SelfHostedVideoPlayer';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
 import { Snap } from '../Snap';
 import { SnapCssSandbox } from '../SnapCssSandbox';
+import { StarRating } from '../StarRating/StarRating';
 import { StarRatingDeprecated } from '../StarRating/StarRatingDeprecated';
 import type { Alignment } from '../SupportingContent';
 import { SupportingContent } from '../SupportingContent';
@@ -163,6 +164,7 @@ export type Props = {
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
 	enableHls?: boolean;
+	isInStarRatingVariant: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -421,6 +423,7 @@ export const Card = ({
 	headlinePosition = 'inner',
 	subtitleSize = 'small',
 	enableHls = false,
+	isInStarRatingVariant,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -908,12 +911,15 @@ export const Card = ({
 						showByline={showByline}
 						isExternalLink={isExternalLink}
 					/>
-					{!isUndefined(starRating) ? (
-						<StarRatingComponent
-							rating={starRating}
-							cardHasImage={!!image}
-						/>
-					) : null}
+					{!isUndefined(starRating) &&
+						(isInStarRatingVariant ? (
+							<StarRating rating={starRating} size="small" />
+						) : (
+							<StarRatingComponent
+								rating={starRating}
+								cardHasImage={!!image}
+							/>
+						))}
 				</div>
 			)}
 
