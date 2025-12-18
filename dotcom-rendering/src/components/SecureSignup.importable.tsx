@@ -40,7 +40,7 @@ type OphanABTest = ComponentEvent['abTest'];
 type Props = {
 	newsletterId: string;
 	successDescription: string;
-	idApiUrl: string;
+	idApiUrl?: string;
 	abTest?: OphanABTest;
 };
 
@@ -160,8 +160,6 @@ const buildFormData = (
 };
 
 const resolveEmailIfSignedIn = async (): Promise<string | undefined> => {
-	const { idApiUrl } = window.guardian.config.page;
-	if (!idApiUrl) return;
 	const fetchedEmail = await lazyFetchEmailWithTimeout()();
 	if (!fetchedEmail) return;
 	return fetchedEmail;
@@ -335,9 +333,10 @@ export const SecureSignup = ({
 		if (response.ok && authStatus.kind === 'SignedIn') {
 			try {
 				const userId = authStatus.idToken.claims.sub;
-				if (userId && idApiUrl) {
+				const apiUrl = idApiUrl ?? window.guardian.config.page.idApiUrl;
+				if (userId && apiUrl) {
 					await fetchNewsletterSubscriptions(
-						idApiUrl,
+						apiUrl,
 						userId,
 						authStatus,
 					);
