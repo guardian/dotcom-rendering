@@ -22,7 +22,7 @@ import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { BETA_CONTAINERS } from '../../model/enhanceCollections';
 import { palette } from '../../palette';
 import type { Branding } from '../../types/branding';
-import type { StarRating as Rating } from '../../types/content';
+import type { StarRating as Rating, RatingSizeType } from '../../types/content';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
@@ -165,6 +165,7 @@ export type Props = {
 	headlinePosition?: 'inner' | 'outer';
 	enableHls?: boolean;
 	isInStarRatingVariant: boolean;
+	starRatingSize?: RatingSizeType;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -424,6 +425,7 @@ export const Card = ({
 	subtitleSize = 'small',
 	enableHls = false,
 	isInStarRatingVariant,
+	starRatingSize = 'small',
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -913,7 +915,10 @@ export const Card = ({
 					/>
 					{!isUndefined(starRating) &&
 						(isInStarRatingVariant ? (
-							<StarRating rating={starRating} size="small" />
+							<StarRating
+								rating={starRating}
+								size={starRatingSize}
+							/>
 						) : (
 							<StarRatingComponent
 								rating={starRating}
@@ -1243,12 +1248,19 @@ export const Card = ({
 											: undefined
 									}
 								/>
-								{!isUndefined(starRating) ? (
-									<StarRatingComponent
-										rating={starRating}
-										cardHasImage={!!image}
-									/>
-								) : null}
+
+								{!isUndefined(starRating) &&
+									(isInStarRatingVariant ? (
+										<StarRating
+											rating={starRating}
+											size={starRatingSize}
+										/>
+									) : (
+										<StarRatingComponent
+											rating={starRating}
+											cardHasImage={!!image}
+										/>
+									))}
 							</HeadlineWrapper>
 						)}
 
