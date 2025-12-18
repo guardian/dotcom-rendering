@@ -1,9 +1,13 @@
 import './webpackPublicPath';
 import { adaptSite, shouldAdapt } from './adaptiveSite';
+import { setDeviceClassCookie } from './deviceDetection';
 import { startup } from './startup';
 import { maybeSIndicatorCapiKey } from './userFeatures/cookies/sIndicatorCapiKey';
 
 void (async () => {
+	// Set device class cookie for iPadOS detection (runs immediately, before any SDC requests)
+	setDeviceClassCookie();
+
 	if (await shouldAdapt()) {
 		adaptSite('Web');
 	}
