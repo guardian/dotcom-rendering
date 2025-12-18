@@ -44,6 +44,8 @@ import { StarRatingDeprecated } from './StarRating/StarRatingDeprecated';
 import { SupportingContent } from './SupportingContent';
 import { WaveForm } from './WaveForm';
 import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
+import { isUndefined } from '@guardian/libs';
+import { StarRating } from './StarRating/StarRating';
 
 export type Position = 'inner' | 'outer' | 'none';
 
@@ -359,6 +361,7 @@ export type Props = {
 	 */
 	isImmersive?: boolean;
 	showVideo?: boolean;
+	isInStarRatingVariant: boolean;
 };
 
 export const FeatureCard = ({
@@ -394,6 +397,7 @@ export const FeatureCard = ({
 	isNewsletter = false,
 	isImmersive = false,
 	showVideo = false,
+	isInStarRatingVariant,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -634,14 +638,20 @@ export const FeatureCard = ({
 											/>
 										</div>
 
-										{starRating !== undefined ? (
-											<div css={starRatingWrapper}>
-												<StarRatingDeprecated
+										{!isUndefined(starRating) &&
+											(isInStarRatingVariant ? (
+												<StarRating
 													rating={starRating}
 													size="small"
 												/>
-											</div>
-										) : null}
+											) : (
+												<div css={starRatingWrapper}>
+													<StarRatingDeprecated
+														rating={starRating}
+														size="small"
+													/>
+												</div>
+											))}
 
 										{!!trailText && (
 											<div css={trailTextWrapper}>
