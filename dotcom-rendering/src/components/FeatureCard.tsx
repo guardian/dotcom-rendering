@@ -17,7 +17,7 @@ import { getOphanComponents } from '../lib/labs';
 import { transparentColour } from '../lib/transparentColour';
 import { palette } from '../palette';
 import type { Branding } from '../types/branding';
-import type { StarRating as Rating } from '../types/content';
+import type { RatingSizeType, StarRating as Rating } from '../types/content';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
@@ -40,12 +40,12 @@ import { FeatureCardCommentCount } from './FeatureCardCommentCount';
 import { FormatBoundary } from './FormatBoundary';
 import { Island } from './Island';
 import { Pill } from './Pill';
+import { StarRating } from './StarRating/StarRating';
 import { StarRatingDeprecated } from './StarRating/StarRatingDeprecated';
 import { SupportingContent } from './SupportingContent';
 import { WaveForm } from './WaveForm';
 import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
 import { isUndefined } from '@guardian/libs';
-import { StarRating } from './StarRating/StarRating';
 
 export type Position = 'inner' | 'outer' | 'none';
 
@@ -362,6 +362,7 @@ export type Props = {
 	isImmersive?: boolean;
 	showVideo?: boolean;
 	isInStarRatingVariant: boolean;
+	starRatingSize: RatingSizeType;
 };
 
 export const FeatureCard = ({
@@ -398,6 +399,7 @@ export const FeatureCard = ({
 	isImmersive = false,
 	showVideo = false,
 	isInStarRatingVariant,
+	starRatingSize,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -642,7 +644,7 @@ export const FeatureCard = ({
 											(isInStarRatingVariant ? (
 												<StarRating
 													rating={starRating}
-													size="small"
+													size={starRatingSize}
 												/>
 											) : (
 												<div css={starRatingWrapper}>

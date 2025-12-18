@@ -84,6 +84,7 @@ export const StaticFeatureTwo = ({
 							showQuotes={card.showQuotedHeadline}
 							showVideo={card.showVideo}
 							isInStarRatingVariant={isInStarRatingVariant}
+							starRatingSize={'medium'}
 						/>
 					</LI>
 				);

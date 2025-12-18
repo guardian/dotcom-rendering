@@ -84,6 +84,7 @@ export const ScrollableFeature = ({
 							showQuotes={card.showQuotedHeadline}
 							showVideo={card.showVideo}
 							isInStarRatingVariant={isInStarRatingVariant}
+							starRatingSize={'small'}
 						/>
 					</ScrollableCarousel.Item>
 				);
