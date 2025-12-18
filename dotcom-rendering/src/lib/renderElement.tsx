@@ -751,6 +751,9 @@ export const renderElement = ({
 					key={index}
 					rating={element.rating}
 					size={element.size}
+					isInStarRatingVariant={
+						abTests.starRatingRedesignVariant === 'variant'
+					}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.SubheadingBlockElement':

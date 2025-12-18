@@ -393,7 +393,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const renderAds = canRenderAds(article);
 
 	const isInStarRatingVariant =
-		article.config.switches.isInStarRatingVariant === true;
+		article.config.abTests.starRatingRedesignVariant === 'variant';
 
 	return (
 		<>

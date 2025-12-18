@@ -295,7 +295,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	const showComments = article.isCommentable && !isPaidContent;
 
 	const isInStarRatingVariant =
-		article.config.switches.isInStarRatingVariant === true;
+		article.config.abTests.starRatingRedesignVariant === 'variant';
 
 	return (
 		<>

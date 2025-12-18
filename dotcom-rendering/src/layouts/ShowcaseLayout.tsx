@@ -249,7 +249,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const isInStarRatingVariant =
-		article.config.switches.isInStarRatingVariant === true;
+		article.config.abTests.starRatingRedesignVariant === 'variant';
 
 	return (
 		<>
