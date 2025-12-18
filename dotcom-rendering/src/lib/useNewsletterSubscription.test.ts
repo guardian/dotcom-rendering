@@ -1,6 +1,5 @@
 import { renderHook, waitFor } from '@testing-library/react';
 import {
-	addNewsletterToCache,
 	clearSubscriptionCache,
 	getCachedSubscriptions,
 	setCachedSubscriptions,
@@ -372,57 +371,6 @@ describe('useNewsletterSubscription', () => {
 
 			// Should have called fetch because cache was cleared
 			expect(global.fetch).toHaveBeenCalledTimes(1);
-		});
-	});
-
-	describe('adding subscriptions to cache', () => {
-		it('should add newsletter to cache when no cache exists', () => {
-			const newNewsletterId = 7777;
-
-			addNewsletterToCache(newNewsletterId, 'mock-user-id');
-
-			const cache = getCachedSubscriptions();
-			expect(cache).not.toBeNull();
-			expect(cache?.listIds).toContain(newNewsletterId);
-			expect(cache?.userId).toBe('mock-user-id');
-		});
-
-		it('should add newsletter to existing cache', () => {
-			// Set up initial cache
-			setCachedSubscriptions([1234, 5678], 'mock-user-id');
-
-			const newNewsletterId = 9999;
-			addNewsletterToCache(newNewsletterId, 'mock-user-id');
-
-			const cache = getCachedSubscriptions();
-			expect(cache?.listIds).toEqual([1234, 5678, 9999]);
-			expect(cache?.userId).toBe('mock-user-id');
-		});
-
-		it('should not duplicate newsletter if already in cache', () => {
-			// Set up initial cache with newsletter already in it
-			setCachedSubscriptions(
-				[1234, mockNewsletterId, 5678],
-				'mock-user-id',
-			);
-
-			addNewsletterToCache(mockNewsletterId, 'mock-user-id');
-
-			const cache = getCachedSubscriptions();
-			expect(cache?.listIds).toEqual([1234, mockNewsletterId, 5678]);
-		});
-
-		it('should replace cache when user ID differs', () => {
-			// Set up cache with different user
-			setCachedSubscriptions([1234, 5678], 'different-user-id');
-
-			const newNewsletterId = 9999;
-			addNewsletterToCache(newNewsletterId, 'mock-user-id');
-
-			const cache = getCachedSubscriptions();
-
-			expect(cache?.listIds).toEqual([9999]);
-			expect(cache?.userId).toBe('mock-user-id');
 		});
 	});
 });

@@ -75,6 +75,7 @@ export const AllEditorialNewslettersPageLayout = ({
 							!!newslettersPage.config.switches
 								.manyNewsletterVisibleRecaptcha
 						}
+						idApiUrl={newslettersPage.config.idApiUrl}
 					/>
 				</Island>
 			</main>

@@ -21,7 +21,7 @@ import { useEffect, useRef, useState } from 'react';
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
-import { addNewsletterToCache } from '../lib/newsletterSubscriptionCache';
+import { fetchNewsletterSubscriptions } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { palette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -40,6 +40,7 @@ type OphanABTest = ComponentEvent['abTest'];
 type Props = {
 	newsletterId: string;
 	successDescription: string;
+	idApiUrl: string;
 	abTest?: OphanABTest;
 };
 
@@ -270,6 +271,7 @@ const sendTracking = (
 export const SecureSignup = ({
 	newsletterId,
 	successDescription,
+	idApiUrl,
 	abTest,
 }: Props) => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
@@ -329,14 +331,19 @@ export const SecureSignup = ({
 		setIsWaitingForResponse(false);
 		setResponseOk(response.ok);
 
-		// Update cache on successful subscription
-		if (response.ok) {
-			const userId =
-				authStatus.kind === 'SignedIn'
-					? authStatus.idToken.claims.sub
-					: undefined;
-			if (userId) {
-				addNewsletterToCache(Number(newsletterId), userId);
+		// Update cache by refetching from API
+		if (response.ok && authStatus.kind === 'SignedIn') {
+			try {
+				const userId = authStatus.idToken.claims.sub;
+				if (userId && idApiUrl) {
+					await fetchNewsletterSubscriptions(
+						idApiUrl,
+						userId,
+						authStatus,
+					);
+				}
+			} catch {
+				// Silent failure - cache update is not critical
 			}
 		}
 

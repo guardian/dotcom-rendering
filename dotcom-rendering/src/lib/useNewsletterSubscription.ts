@@ -1,20 +1,11 @@
 import { useEffect, useState } from 'react';
-import { getOptionsHeaders } from './identity';
 import {
 	clearSubscriptionCache,
+	fetchNewsletterSubscriptions,
 	getCachedSubscriptions,
-	setCachedSubscriptions,
 	shouldInvalidateCache,
 } from './newsletterSubscriptionCache';
 import { useAuthStatus } from './useAuthStatus';
-
-interface NewsletterSubscriptionResponse {
-	result: {
-		subscriptions: Array<{
-			listId: string;
-		}>;
-	};
-}
 
 /**
  * A hook to check if a user is subscribed to a specific newsletter.
@@ -62,44 +53,24 @@ export const useNewsletterSubscription = (
 		}
 
 		const fetchNewsletters = async () => {
-			try {
-				const options = getOptionsHeaders(authStatus);
-				const response = await fetch(
-					`${idApiUrl}/users/me/newsletters`,
-					{
-						method: 'GET',
-						credentials: 'include',
-						...options,
-						headers: {
-							...options.headers,
-						},
-					},
-				);
+			const listIds = await fetchNewsletterSubscriptions(
+				idApiUrl,
+				currentUserId,
+				authStatus,
+			);
 
-				if (!response.ok) {
-					console.error('Failed to fetch user newsletters');
-					setIsSubscribed(false);
-					return;
-				}
-
-				const data =
-					(await response.json()) as NewsletterSubscriptionResponse;
-				const newsletters = data.result.subscriptions;
-				const listIds = newsletters.map((n) => Number(n.listId));
-
-				setCachedSubscriptions(listIds, currentUserId);
-
-				const isUserSubscribed = listIds.includes(newsletterId);
-
-				setIsSubscribed(isUserSubscribed);
-			} catch (error) {
-				const message = `Error fetching newsletters: ${String(error)}`;
+			if (listIds === null) {
+				const message = 'Failed to fetch newsletter subscriptions';
 				window.guardian.modules.sentry.reportError(
-					new Error(message, { cause: error }),
+					new Error(message),
 					'errors-fetching-newsletters',
 				);
 				setIsSubscribed(false);
+				return;
 			}
+
+			const isUserSubscribed = listIds.includes(newsletterId);
+			setIsSubscribed(isUserSubscribed);
 		};
 
 		void fetchNewsletters();

@@ -1,4 +1,6 @@
 import { storage } from '@guardian/libs';
+import type { SignedIn } from './identity';
+import { getOptionsHeaders } from './identity';
 
 const CACHE_KEY = 'gu.newsletter.subscriptions';
 const CACHE_DURATION_MS = 5 * 60 * 1000; // 5 minutes
@@ -60,23 +62,41 @@ export const shouldInvalidateCache = (
 	return false;
 };
 
-export const addNewsletterToCache = (
-	newsletterId: number,
-	userId: string,
-): void => {
-	try {
-		const cachedData = getCachedSubscriptions();
+export interface NewsletterSubscriptionResponse {
+	result: {
+		subscriptions: Array<{
+			listId: string;
+		}>;
+	};
+}
 
-		if (cachedData && !shouldInvalidateCache(cachedData, userId)) {
-			if (!cachedData.listIds.includes(newsletterId)) {
-				const updatedListIds = [...cachedData.listIds, newsletterId];
-				setCachedSubscriptions(updatedListIds, userId);
-			}
-		} else {
-			// No valid cache exists, create a new one with just this newsletter
-			setCachedSubscriptions([newsletterId], userId);
+/**
+ * Fetches newsletter subscriptions from the Identity API and updates the cache.
+ */
+export const fetchNewsletterSubscriptions = async (
+	idApiUrl: string,
+	userId: string,
+	authStatus: SignedIn,
+): Promise<number[] | null> => {
+	try {
+		const options = getOptionsHeaders(authStatus);
+		const response = await fetch(`${idApiUrl}/users/me/newsletters`, {
+			method: 'GET',
+			credentials: 'include',
+			...options,
+		});
+
+		if (!response.ok) {
+			return null;
 		}
+
+		const data = (await response.json()) as NewsletterSubscriptionResponse;
+		const newsletters = data.result.subscriptions;
+		const listIds = newsletters.map((n) => Number(n.listId));
+
+		setCachedSubscriptions(listIds, userId);
+		return listIds;
 	} catch (error) {
-		// Silent failure - cache update is not critical
+		return null;
 	}
 };

@@ -17,7 +17,7 @@ import {
 	reportTrackingEvent,
 	requestMultipleSignUps,
 } from '../lib/newsletter-sign-up-requests';
-import { addNewsletterToCache } from '../lib/newsletterSubscriptionCache';
+import { fetchNewsletterSubscriptions } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { useConfig } from './ConfigContext';
 import { Flex } from './Flex';
@@ -124,12 +124,14 @@ type Props = {
 	useReCaptcha: boolean;
 	captchaSiteKey?: string;
 	visibleRecaptcha?: boolean;
+	idApiUrl: string;
 };
 
 export const ManyNewsletterSignUp = ({
 	useReCaptcha,
 	captchaSiteKey,
 	visibleRecaptcha = false,
+	idApiUrl,
 }: Props) => {
 	const isSignedIn = useIsSignedIn();
 	const authStatus = useAuthStatus();
@@ -300,14 +302,19 @@ export const ManyNewsletterSignUp = ({
 			},
 		);
 
-		// Update cache with subscribed newsletters
-		const userId =
-			authStatus.kind === 'SignedIn'
-				? authStatus.idToken.claims.sub
-				: undefined;
-		if (userId) {
-			for (const listId of listIds) {
-				addNewsletterToCache(listId, userId);
+		// Update cache by refetching subscriptions from API
+		if (authStatus.kind === 'SignedIn') {
+			try {
+				const userId = authStatus.idToken.claims.sub;
+				if (userId && idApiUrl) {
+					await fetchNewsletterSubscriptions(
+						idApiUrl,
+						userId,
+						authStatus,
+					);
+				}
+			} catch {
+				// Silent failure - cache update is not critical
 			}
 		}
 
