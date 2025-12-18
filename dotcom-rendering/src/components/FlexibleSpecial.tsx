@@ -206,6 +206,7 @@ export const OneCardLayout = ({
 					subtitleSize={subtitleSize}
 					enableHls={enableHls}
 					isInStarRatingVariant={isInStarRatingVariant}
+					starRatingSize={'medium'}
 				/>
 			</LI>
 		</UL>

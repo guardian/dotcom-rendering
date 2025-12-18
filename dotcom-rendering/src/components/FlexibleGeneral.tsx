@@ -144,6 +144,7 @@ const ImmersiveCardLayout = ({
 					isImmersive={true}
 					showVideo={card.showVideo}
 					isInStarRatingVariant={isInStarRatingVariant}
+					starRatingSize={'medium'}
 				/>
 			</LI>
 		</UL>
@@ -356,6 +357,7 @@ const SplashCardLayout = ({
 					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
 					enableHls={enableHls}
 					isInStarRatingVariant={isInStarRatingVariant}
+					starRatingSize={'medium'}
 				/>
 			</LI>
 		</UL>
@@ -515,6 +517,7 @@ const FullWidthCardLayout = ({
 					subtitleSize={subtitleSize}
 					enableHls={enableHls}
 					isInStarRatingVariant={isInStarRatingVariant}
+					starRatingSize={'medium'}
 				/>
 			</LI>
 		</UL>
