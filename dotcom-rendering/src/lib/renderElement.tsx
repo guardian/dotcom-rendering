@@ -384,6 +384,9 @@ export const renderElement = ({
 					title={element.title}
 					isAvatar={element.isAvatar}
 					isTimeline={isTimeline}
+					isInStarRatingVariant={
+						abTests.starRatingRedesignVariant === 'variant'
+					}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':

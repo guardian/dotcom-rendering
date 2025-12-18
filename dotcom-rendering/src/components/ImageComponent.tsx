@@ -40,6 +40,7 @@ type Props = {
 	title?: string;
 	isAvatar?: boolean;
 	isTimeline?: boolean;
+	isInStarRatingVariant: boolean;
 };
 
 const timelineBulletStyles = css`
@@ -265,6 +266,7 @@ export const ImageComponent = ({
 	title,
 	isAvatar,
 	isTimeline = false,
+	isInStarRatingVariant,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	// Its possible the tools wont send us any images urls
@@ -429,7 +431,7 @@ export const ImageComponent = ({
 				{isTimeline && isMainMedia && role === 'showcase' && (
 					<div css={timelineBulletStyles} aria-hidden="true" />
 				)}
-				{!isUndefined(starRating) ? (
+				{!isUndefined(starRating) && !isInStarRatingVariant ? (
 					<PositionStarRating rating={starRating} />
 				) : null}
 				{!!title && <ImageTitle title={title} role={role} />}
@@ -533,7 +535,7 @@ export const ImageComponent = ({
 						</Row>
 					</Hide>
 				)}
-				{!isUndefined(starRating) ? (
+				{!isUndefined(starRating) && !isInStarRatingVariant ? (
 					<PositionStarRating rating={starRating} />
 				) : null}
 				{!!title && <ImageTitle title={title} role={role} />}

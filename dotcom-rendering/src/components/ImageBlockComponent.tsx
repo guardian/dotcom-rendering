@@ -11,6 +11,7 @@ type Props = {
 	starRating?: StarRating;
 	isAvatar?: boolean;
 	isTimeline?: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 export const ImageBlockComponent = ({
@@ -22,6 +23,7 @@ export const ImageBlockComponent = ({
 	starRating,
 	isAvatar,
 	isTimeline = false,
+	isInStarRatingVariant,
 }: Props) => {
 	const { role } = element;
 	return (
@@ -35,6 +37,7 @@ export const ImageBlockComponent = ({
 			title={title}
 			isAvatar={isAvatar}
 			isTimeline={isTimeline}
+			isInStarRatingVariant={!!isInStarRatingVariant}
 		/>
 	);
 };
