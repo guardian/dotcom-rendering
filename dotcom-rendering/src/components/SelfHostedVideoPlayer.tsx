@@ -23,7 +23,7 @@ import { VideoProgressBar } from './VideoProgressBar';
 
 export type SubtitleSize = 'small' | 'medium' | 'large';
 
-const videoStyles = (width: number, height: number) => css`
+const videoStyles = (aspectRatio: number) => css`
 	position: relative;
 	display: block;
 	height: auto;
@@ -32,7 +32,7 @@ const videoStyles = (width: number, height: number) => css`
 	max-height: 100svh;
 	cursor: pointer;
 	/* Prevents CLS by letting the browser know the space the video will take up. */
-	aspect-ratio: ${width} / ${height};
+	aspect-ratio: ${aspectRatio};
 `;
 
 const subtitleStyles = (subtitleSize: SubtitleSize | undefined) => css`
@@ -191,13 +191,15 @@ export const SelfHostedVideoPlayer = forwardRef(
 			? sources
 			: filterOutHlsSources(sources);
 
+		const aspectRatio = width / height;
+
 		return (
 			<>
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Not all videos require captions. */}
 				<video
 					id={videoId}
 					css={[
-						videoStyles(width, height),
+						videoStyles(aspectRatio),
 						showSubtitles && subtitleStyles(subtitleSize),
 					]}
 					crossOrigin="anonymous"
