@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from } from '@guardian/source/foundations';
+import { from, space } from '@guardian/source/foundations';
 import { SvgStar, SvgStarOutline } from '@guardian/source/react-components';
 import { palette } from '../../palette';
 import type { StarRating as Rating, RatingSizeType } from '../../types/content';
@@ -39,8 +39,8 @@ const determineSize = (size: RatingSizeType) => {
 				}
 
 				svg {
-					width: 16px;
-					height: 16px;
+					width: ${space[4]}px;
+					height: ${space[4]}px;
 				}
 			`;
 
@@ -54,8 +54,8 @@ const determineSize = (size: RatingSizeType) => {
 				}
 
 				svg {
-					width: 20px;
-					height: 20px;
+					width: ${space[5]}px;
+					height: ${space[5]}px;
 				}
 			`;
 
@@ -69,8 +69,8 @@ const determineSize = (size: RatingSizeType) => {
 				}
 
 				svg {
-					width: 24px;
-					height: 24px;
+					width: ${space[6]}px;
+					height: ${space[6]}px;
 				}
 			`;
 	}
@@ -82,23 +82,23 @@ const determinePaddingTop = (size: PaddingSizeType) => {
 	switch (size) {
 		case 'small':
 			return css`
-				padding-top: 4px;
+				padding-top: ${space[1]}px;
 			`;
 
 		case 'medium':
 			return css`
-				padding-top: 4px;
+				padding-top: ${space[1]}px;
 
 				${from.tablet} {
-					padding-top: 8px;
+					padding-top: ${space[2]}px;
 				}
 			`;
 		case 'large':
 			return css`
-				padding-top: 8px;
+				padding-top: ${space[2]}px;
 
 				${from.tablet} {
-					padding-top: 12px;
+					padding-top: ${space[3]}px;
 				}
 			`;
 	}
