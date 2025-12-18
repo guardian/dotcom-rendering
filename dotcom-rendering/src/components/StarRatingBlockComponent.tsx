@@ -6,6 +6,7 @@ import { StarRatingDeprecated } from './StarRating/StarRatingDeprecated';
 type Props = {
 	rating: Rating;
 	size: RatingSizeType;
+	isInStarRatingVariant?: boolean;
 };
 
 const starsWrapper = css`
@@ -17,8 +18,15 @@ const starWrapperColour = css`
 	color: ${palette('--star-rating-fill')};
 `;
 
-export const StarRatingBlockComponent = ({ rating, size }: Props) => (
-	<div css={[starsWrapper, starWrapperColour]} data-spacefinder-role="inline">
+export const StarRatingBlockComponent = ({
+	rating,
+	size,
+	isInStarRatingVariant,
+}: Props) => (
+	<div
+		css={[starsWrapper, !isInStarRatingVariant && starWrapperColour]}
+		data-spacefinder-role="inline"
+	>
 		<StarRatingDeprecated rating={rating} size={size} />
 	</div>
 );
