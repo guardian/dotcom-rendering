@@ -76,7 +76,6 @@ export const DecideContainer = ({
 					showAge={showAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		case 'dynamic/slow':
@@ -87,7 +86,6 @@ export const DecideContainer = ({
 					showAge={showAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		case 'dynamic/package':
@@ -98,7 +96,6 @@ export const DecideContainer = ({
 					showAge={showAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		case 'fixed/large/slow-XIV':
@@ -109,7 +106,6 @@ export const DecideContainer = ({
 					showAge={showAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		case 'fixed/small/slow-IV':
@@ -120,7 +116,6 @@ export const DecideContainer = ({
 					showAge={showAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		case 'fixed/small/slow-V-mpu':
@@ -131,7 +126,6 @@ export const DecideContainer = ({
 					showAge={showAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		case 'fixed/small/slow-III':
@@ -142,7 +136,6 @@ export const DecideContainer = ({
 					showAge={showAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		case 'fixed/small/slow-I':
@@ -153,7 +146,6 @@ export const DecideContainer = ({
 					showAge={showAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		case 'fixed/small/slow-V-third':
@@ -164,7 +156,6 @@ export const DecideContainer = ({
 					showAge={showAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		case 'fixed/small/slow-V-half':
@@ -175,7 +166,6 @@ export const DecideContainer = ({
 					showAge={showAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		case 'fixed/medium/slow-VI':
@@ -186,7 +176,6 @@ export const DecideContainer = ({
 					showAge={showAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		case 'fixed/medium/slow-VII':
@@ -197,7 +186,6 @@ export const DecideContainer = ({
 					showAge={showAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		case 'fixed/medium/slow-XII-mpu':
@@ -208,7 +196,6 @@ export const DecideContainer = ({
 					showAge={showAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		case 'fixed/medium/fast-XII':
@@ -219,7 +206,6 @@ export const DecideContainer = ({
 					showAge={showAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		case 'fixed/medium/fast-XI':
@@ -230,7 +216,6 @@ export const DecideContainer = ({
 					showAge={showAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		case 'fixed/small/fast-VIII':
@@ -241,7 +226,6 @@ export const DecideContainer = ({
 					showAge={showAge}
 					serverTime={serverTime}
 					imageLoading={imageLoading}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		case 'nav/list':
