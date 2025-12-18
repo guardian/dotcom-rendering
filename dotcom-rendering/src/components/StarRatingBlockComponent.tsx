@@ -9,13 +9,16 @@ type Props = {
 };
 
 const starsWrapper = css`
-	background-color: ${palette('--star-rating-background')};
-	color: ${palette('--star-rating-fill')};
 	display: inline-block;
 `;
 
+const starWrapperColour = css`
+	background-color: ${palette('--star-rating-background')};
+	color: ${palette('--star-rating-fill')};
+`;
+
 export const StarRatingBlockComponent = ({ rating, size }: Props) => (
-	<div css={starsWrapper} data-spacefinder-role="inline">
+	<div css={[starsWrapper, starWrapperColour]} data-spacefinder-role="inline">
 		<StarRatingDeprecated rating={rating} size={size} />
 	</div>
 );
