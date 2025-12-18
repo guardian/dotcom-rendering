@@ -17,6 +17,7 @@ import { Pill } from '../Pill';
 import { StarRatingDeprecated } from '../StarRating/StarRatingDeprecated';
 import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
 import { HighlightsCardImage } from './HighlightsCardImage';
+import { StarRating } from '../StarRating/StarRating';
 
 export type HighlightsCardProps = {
 	linkTo: string;
@@ -32,6 +33,7 @@ export type HighlightsCardProps = {
 	byline?: string;
 	isExternalLink: boolean;
 	starRating?: Rating;
+	isInStarRatingVariant: boolean;
 };
 
 const container = css`
@@ -133,6 +135,7 @@ export const HighlightsCard = ({
 	byline,
 	isExternalLink,
 	starRating,
+	isInStarRatingVariant,
 }: HighlightsCardProps) => {
 	const isMediaCard = isMedia(format);
 
@@ -167,14 +170,17 @@ export const HighlightsCard = ({
 						quoteColour={palette('--highlights-card-quote-icon')}
 					/>
 
-					{!isUndefined(starRating) && (
-						<div css={starWrapper}>
-							<StarRatingDeprecated
-								rating={starRating}
-								size="small"
-							/>
-						</div>
-					)}
+					{!isUndefined(starRating) &&
+						(isInStarRatingVariant ? (
+							<StarRating rating={starRating} size="small" />
+						) : (
+							<div css={starWrapper}>
+								<StarRatingDeprecated
+									rating={starRating}
+									size="small"
+								/>
+							</div>
+						))}
 
 					{!!mainMedia && isMediaCard && (
 						<div>
