@@ -399,7 +399,7 @@ const decideBottomPadding = ({
 					return hasAvatar
 						? ''
 						: css`
-								padding-bottom: 28px;
+								padding-bottom: ${space[5]}px;
 
 								${from.tablet} {
 									padding-bottom: ${space[9]}px;
