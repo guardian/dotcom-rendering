@@ -645,6 +645,7 @@ export const FeatureCard = ({
 												<StarRating
 													rating={starRating}
 													size={starRatingSize}
+													useDarkTheme={true}
 												/>
 											) : (
 												<div css={starRatingWrapper}>
