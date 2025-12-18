@@ -304,6 +304,9 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 	const renderAds = canRenderAds(article);
 
+	const isInStarRatingVariant =
+		article.config.switches.isInStarRatingVariant === true;
+
 	return (
 		<>
 			{isWeb && (
@@ -363,6 +366,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 									format={format}
 									elements={article.mainMediaElements}
 									starRating={
+										!isInStarRatingVariant &&
 										format.design ===
 											ArticleDesign.Review &&
 										!isUndefined(article.starRating)
@@ -412,6 +416,10 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 											article.webPublicationDateDeprecated
 										}
 										hasAvatar={!!avatarUrl}
+										isInStarRatingVariant={
+											isInStarRatingVariant
+										}
+										starRating={article.starRating}
 									/>
 									{/* BOTTOM */}
 									<div>

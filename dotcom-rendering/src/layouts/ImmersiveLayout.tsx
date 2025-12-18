@@ -309,6 +309,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
+	const isInStarRatingVariant =
+		article.config.switches.isInStarRatingVariant === true;
+
 	return (
 		<>
 			{isWeb && (
@@ -360,6 +363,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						format={format}
 						elements={article.mainMediaElements}
 						starRating={
+							!isInStarRatingVariant &&
 							format.design === ArticleDesign.Review &&
 							!isUndefined(article.starRating)
 								? article.starRating
@@ -424,6 +428,10 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 										webPublicationDateDeprecated={
 											article.webPublicationDateDeprecated
 										}
+										isInStarRatingVariant={
+											isInStarRatingVariant
+										}
+										starRating={article.starRating}
 									/>
 								</Section>
 							</Box>
@@ -506,6 +514,10 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
 											}
+											isInStarRatingVariant={
+												isInStarRatingVariant
+											}
+											starRating={article.starRating}
 										/>
 									</div>
 								)}

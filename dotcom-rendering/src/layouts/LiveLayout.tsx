@@ -294,6 +294,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const showComments = article.isCommentable && !isPaidContent;
 
+	const isInStarRatingVariant =
+		article.config.switches.isInStarRatingVariant === true;
+
 	return (
 		<>
 			{isWeb && (
@@ -431,10 +434,15 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
 											}
+											isInStarRatingVariant={
+												isInStarRatingVariant
+											}
+											starRating={article.starRating}
 										/>
 									)}
 								</div>
-								{!isUndefined(article.starRating) ? (
+								{!isUndefined(article.starRating) &&
+								!isInStarRatingVariant ? (
 									<div css={starWrapper}>
 										<StarRatingDeprecated
 											rating={article.starRating}

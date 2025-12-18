@@ -279,6 +279,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 
 	const displayAvatarUrl = avatarUrl ? true : false;
 
+	const isInStarRatingVariant =
+		article.config.switches.isInStarRatingVariant === true;
+
 	return (
 		<>
 			{isWeb && (
@@ -362,6 +365,10 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 												article.webPublicationDateDeprecated
 											}
 											hasAvatar={displayAvatarUrl}
+											isInStarRatingVariant={
+												isInStarRatingVariant
+											}
+											starRating={article.starRating}
 										/>
 									</div>
 
@@ -399,6 +406,10 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 										webPublicationDateDeprecated={
 											article.webPublicationDateDeprecated
 										}
+										isInStarRatingVariant={
+											isInStarRatingVariant
+										}
+										starRating={article.starRating}
 									/>
 								</div>
 							</GridItem>
@@ -415,6 +426,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 									format={format}
 									elements={article.mainMediaElements}
 									starRating={
+										!isInStarRatingVariant &&
 										format.design ===
 											ArticleDesign.Review &&
 										!isUndefined(article.starRating)

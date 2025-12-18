@@ -392,6 +392,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
+	const isInStarRatingVariant =
+		article.config.switches.isInStarRatingVariant === true;
+
 	return (
 		<>
 			{isWeb && (
@@ -547,11 +550,16 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									webPublicationDateDeprecated={
 										article.webPublicationDateDeprecated
 									}
+									isInStarRatingVariant={
+										isInStarRatingVariant
+									}
+									starRating={article.starRating}
 								/>
 							</div>
 						</GridItem>
 						<GridItem area="standfirst">
-							{!isUndefined(article.starRating) ? (
+							{!isUndefined(article.starRating) &&
+							!isInStarRatingVariant ? (
 								<div css={starWrapper}>
 									<StarRatingDeprecated
 										rating={article.starRating}
