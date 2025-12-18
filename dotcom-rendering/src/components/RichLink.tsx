@@ -25,6 +25,7 @@ import { Avatar } from './Avatar';
 import { FormatBoundary } from './FormatBoundary';
 import { QuoteIcon } from './QuoteIcon';
 import { StarRatingDeprecated } from './StarRating/StarRatingDeprecated';
+import { StarRating } from './StarRating/StarRating';
 
 interface Props {
 	richLinkIndex: number;
@@ -40,6 +41,7 @@ interface Props {
 	sponsorName: string;
 	contributorImage?: string;
 	isPlaceholder?: boolean; // use 'true' for server-side default prior to client-side enrichment
+	isInStarRatingVariant: boolean;
 }
 interface RichLinkImageData {
 	thumbnailUrl: string;
@@ -198,6 +200,7 @@ export const RichLink = ({
 	sponsorName,
 	contributorImage,
 	isPlaceholder,
+	isInStarRatingVariant,
 }: Props) => {
 	const linkText =
 		cardStyle === 'letters' ? `${headlineText} | Letters ` : headlineText;
@@ -268,14 +271,20 @@ export const RichLink = ({
 								<div css={[bylineStyles]}>{byline}</div>
 							)}
 
-							{!isUndefined(starRating) ? (
-								<div css={starWrapperStyles}>
-									<StarRatingDeprecated
+							{!isUndefined(starRating) &&
+								(isInStarRatingVariant ? (
+									<StarRating
 										rating={starRating}
 										size="small"
 									/>
-								</div>
-							) : null}
+								) : (
+									<div css={starWrapperStyles}>
+										<StarRatingDeprecated
+											rating={starRating}
+											size="small"
+										/>
+									</div>
+								))}
 
 							{!!(isPaidContent && sponsorName) && (
 								<div css={paidForBrandingStyles}>

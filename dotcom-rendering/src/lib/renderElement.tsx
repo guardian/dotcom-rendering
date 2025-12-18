@@ -721,6 +721,9 @@ export const renderElement = ({
 						element={element}
 						ajaxUrl={ajaxUrl}
 						format={format}
+						isInStarRatingVariant={
+							abTests.starRatingRedesignVariant === 'variant'
+						}
 					/>
 				</Island>
 			);
