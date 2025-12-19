@@ -35,7 +35,7 @@ const galleryBylineStyles = css`
 	a {
 		font-style: italic;
 		:hover {
-			text-decoration: none;
+			text-decoration: underline;
 			border-color: ${schemedPalette('--byline-anchor')};
 		}
 	}
