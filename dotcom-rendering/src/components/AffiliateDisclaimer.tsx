@@ -7,8 +7,6 @@ import {
 	textSans15,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import { useEffect } from 'react';
-import { submitComponentEvent } from '../client/ophan/ophan';
 import { palette as themePalette } from '../palette';
 
 const disclaimerLeftColStyles = css`
@@ -77,59 +75,36 @@ const DisclaimerText = () => (
 	</p>
 );
 
-const useAffiliateDisclaimerEvent = () => {
-	useEffect(() => {
-		void submitComponentEvent(
-			{
-				action: 'DETECT',
-				component: {
-					componentType: 'AFFILIATE_DISCLAIMER',
-				},
-			},
-			'Web',
-		);
-	}, []);
-};
-
-const AffiliateDisclaimer = () => {
-	useAffiliateDisclaimerEvent();
-	return (
-		<Hide until="leftCol">
-			<aside
-				css={[disclaimerLeftColStyles]}
-				data-testid="affiliate-disclaimer"
-			>
-				<DisclaimerText />
-			</aside>
-		</Hide>
-	);
-};
-
-const AffiliateDisclaimerInline = () => {
-	useAffiliateDisclaimerEvent();
-	return (
-		<Hide from="leftCol">
-			<aside
-				css={[disclaimerInlineStyles]}
-				data-testid="affiliate-disclaimer-inline"
-			>
-				<DisclaimerText />
-			</aside>
-		</Hide>
-	);
-};
-
-const GalleryAffiliateDisclaimer = () => {
-	useAffiliateDisclaimerEvent();
-	return (
+const AffiliateDisclaimer = () => (
+	<Hide until="leftCol">
 		<aside
-			css={[disclaimerLeftColStyles, galleryDisclaimerStyles]}
+			css={[disclaimerLeftColStyles]}
 			data-testid="affiliate-disclaimer"
 		>
 			<DisclaimerText />
 		</aside>
-	);
-};
+	</Hide>
+);
+
+const AffiliateDisclaimerInline = () => (
+	<Hide from="leftCol">
+		<aside
+			css={[disclaimerInlineStyles]}
+			data-testid="affiliate-disclaimer-inline"
+		>
+			<DisclaimerText />
+		</aside>
+	</Hide>
+);
+
+const GalleryAffiliateDisclaimer = () => (
+	<aside
+		css={[disclaimerLeftColStyles, galleryDisclaimerStyles]}
+		data-testid="affiliate-disclaimer"
+	>
+		<DisclaimerText />
+	</aside>
+);
 
 export {
 	AffiliateDisclaimer,
