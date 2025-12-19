@@ -261,7 +261,6 @@ export const SelfHostedVideo = ({
 	 * For example, we only want to try to pause the video if it has been in view.
 	 */
 	const [hasBeenInView, setHasBeenInView] = useState(false);
-	const [hasBeenPlayed, setHasBeenPlayed] = useState(false);
 	const [hasTrackedPlay, setHasTrackedPlay] = useState(false);
 	/**
 	 * The actual video is a better source of truth of its dimensions.
@@ -302,7 +301,6 @@ export const SelfHostedVideo = ({
 				.then(() => {
 					// Autoplay succeeded
 					dispatchOphanAttentionEvent('videoPlaying');
-					setHasBeenPlayed(true);
 					setPlayerState('PLAYING');
 				})
 				.catch((error: Error) => {
@@ -469,6 +467,7 @@ export const SelfHostedVideo = ({
 	useEffect(() => {
 		const video = vidRef.current;
 		if (!video) return;
+
 		const trackAttention = async () => {
 			try {
 				const ophan = await getOphan('Web');
@@ -509,19 +508,6 @@ export const SelfHostedVideo = ({
 			setHasBeenInView(true);
 		}
 	}, [isInView, hasBeenInView, atomId, linkTo]);
-
-	/**
-	 * Track the first successful video play in Ophan.
-	 *
-	 * This effect runs only after the video has actually started playing
-	 * for the first time. This is to ensure we don't double-report the event.
-	 */
-	useEffect(() => {
-		if (!hasBeenPlayed || hasTrackedPlay) return;
-
-		ophanTrackerWeb(atomId, 'loop')('play');
-		setHasTrackedPlay(true);
-	}, [atomId, hasBeenPlayed, hasTrackedPlay]);
 
 	/**
 	 * Handle play/pause, when instigated by the browser.
@@ -621,6 +607,16 @@ export const SelfHostedVideo = ({
 		if (!isPlayable) {
 			setIsPlayable(true);
 		}
+	};
+
+	/**
+	 * Track the first successful video play in Ophan.
+	 */
+	const handlePlaying = () => {
+		if (hasTrackedPlay) return;
+
+		ophanTrackerWeb(atomId, 'loop')('play');
+		setHasTrackedPlay(true);
 	};
 
 	const handlePlayPauseClick = (event: React.SyntheticEvent) => {
@@ -817,6 +813,7 @@ export const SelfHostedVideo = ({
 					handleLoadedMetadata={handleLoadedMetadata}
 					handleLoadedData={handleLoadedData}
 					handleCanPlay={handleCanPlay}
+					handlePlaying={handlePlaying}
 					handlePlayPauseClick={handlePlayPauseClick}
 					handleAudioClick={handleAudioClick}
 					handleKeyDown={handleKeyDown}
