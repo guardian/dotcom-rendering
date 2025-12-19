@@ -6,7 +6,7 @@ import {
 	storage,
 } from '@guardian/libs';
 import type { ComponentEvent } from '@guardian/ophan-tracker-js';
-import { getEpic, getEpicViewLog } from '@guardian/support-dotcom-components';
+import { getEpicViewLog } from '@guardian/support-dotcom-components';
 import type {
 	EpicPayload,
 	ModuleData,
@@ -27,7 +27,7 @@ import {
 } from '../../lib/contributions';
 import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import type { CanShowResult } from '../../lib/messagePicker';
-import { appendDeviceClassParam } from '../../lib/sdcUrl';
+import { getEpicWithDeviceClass } from '../../lib/sdcUrl';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { TagType } from '../../types/tag';
 
@@ -110,11 +110,12 @@ export const canShowReaderRevenueEpic = async (
 
 	const headers = await getAuthHeaders();
 
-	const response: ModuleDataResponse<EpicProps> = await getEpic(
-		appendDeviceClassParam(contributionsServiceUrl),
-		contributionsPayload,
-		headers,
-	);
+	const response: ModuleDataResponse<EpicProps> =
+		await getEpicWithDeviceClass(
+			contributionsServiceUrl,
+			contributionsPayload,
+			headers,
+		);
 	const module: ModuleData<EpicProps> | undefined = response.data?.module;
 
 	endPerformanceMeasure();

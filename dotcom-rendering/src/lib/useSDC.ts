@@ -1,9 +1,4 @@
 import type { ModuleDataResponse } from '@guardian/support-dotcom-components';
-import {
-	getBanner,
-	getEpic,
-	getLiveblogEpic,
-} from '@guardian/support-dotcom-components';
 import type {
 	BannerPayload,
 	EpicPayload,
@@ -13,7 +8,11 @@ import type {
 	EpicProps,
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import useSWRImmutable from 'swr/immutable';
-import { appendDeviceClassParam } from './sdcUrl';
+import {
+	getBannerWithDeviceClass,
+	getEpicWithDeviceClass,
+	getLiveblogEpicWithDeviceClass,
+} from './sdcUrl';
 
 const useSDC = <PAYLOAD, PROPS>(
 	key: string,
@@ -40,18 +39,17 @@ type UseSDC<PAYLOAD, PROPS> = (
 ) => ModuleDataResponse<PROPS> | undefined;
 
 export const useSDCEpic: UseSDC<EpicPayload, EpicProps> = (baseUrl, payload) =>
-	useSDC('epic', () => getEpic(appendDeviceClassParam(baseUrl), payload));
+	useSDC('epic', () => getEpicWithDeviceClass(baseUrl, payload));
 
 export const useSDCLiveblogEpic: UseSDC<EpicPayload, EpicProps> = (
 	baseUrl,
 	payload,
 ) =>
 	useSDC('liveblog-epic', () =>
-		getLiveblogEpic(appendDeviceClassParam(baseUrl), payload),
+		getLiveblogEpicWithDeviceClass(baseUrl, payload),
 	);
 
 export const useSDCBanner: UseSDC<BannerPayload, BannerProps> = (
 	baseUrl,
 	payload,
-) =>
-	useSDC('banner', () => getBanner(appendDeviceClassParam(baseUrl), payload));
+) => useSDC('banner', () => getBannerWithDeviceClass(baseUrl, payload));

@@ -2,10 +2,7 @@ import { css } from '@emotion/react';
 import type { ConsentState, CountryCode } from '@guardian/libs';
 import { getCookie, onConsent } from '@guardian/libs';
 import type { ComponentEvent } from '@guardian/ophan-tracker-js';
-import {
-	abandonedBasketSchema,
-	getBanner,
-} from '@guardian/support-dotcom-components';
+import { abandonedBasketSchema } from '@guardian/support-dotcom-components';
 import type {
 	BannerPayload,
 	ModuleData,
@@ -31,7 +28,7 @@ import { getToday } from '../../lib/dailyArticleCount';
 import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import { getZIndex } from '../../lib/getZIndex';
 import type { CanShowResult } from '../../lib/messagePicker';
-import { appendDeviceClassParam } from '../../lib/sdcUrl';
+import { getBannerWithDeviceClass } from '../../lib/sdcUrl';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { TagType } from '../../types/tag';
 
@@ -251,10 +248,8 @@ export const canShowRRBanner: CanShowFunctionType<
 		pageId,
 	});
 
-	const response: ModuleDataResponse<BannerProps> = await getBanner(
-		appendDeviceClassParam(contributionsServiceUrl),
-		bannerPayload,
-	);
+	const response: ModuleDataResponse<BannerProps> =
+		await getBannerWithDeviceClass(contributionsServiceUrl, bannerPayload);
 	if (!response.data) {
 		if (engagementBannerLastClosedAt && subscriptionBannerLastClosedAt) {
 			setLocalNoBannerCachePeriod();
