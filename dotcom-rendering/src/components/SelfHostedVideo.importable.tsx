@@ -30,6 +30,8 @@ import type {
 import { SelfHostedVideoPlayer } from './SelfHostedVideoPlayer';
 import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
+const VISIBILITY_THRESHOLD = 0.5;
+
 const videoContainerStyles = (
 	isCinemagraph: boolean,
 	aspectRatioOfVisibleVideo: number,
@@ -141,6 +143,26 @@ const logAndReportError = (src: string, error: Error) => {
 	}
 
 	log('dotcom', message);
+};
+
+/**
+ * Initiates attention tracking for ophan
+ */
+const trackAttention = async (
+	videoElement: HTMLVideoElement,
+	atomId: string,
+) => {
+	try {
+		const ophan = await getOphan('Web');
+		ophan.trackComponentAttention(
+			`gu-video-loop-${atomId}`,
+			videoElement,
+			VISIBILITY_THRESHOLD,
+			true,
+		);
+	} catch (error) {
+		log('dotcom', 'Failed to track video attention:', error);
+	}
 };
 
 const dispatchOphanAttentionEvent = (
@@ -269,8 +291,6 @@ export const SelfHostedVideo = ({
 	const [width, setWidth] = useState(expectedWidth);
 	const [height, setHeight] = useState(expectedHeight);
 
-	const VISIBILITY_THRESHOLD = 0.5;
-
 	/**
 	 * All controls on the video are hidden: the video looks like a GIF.
 	 * This includes but may not be limited to: audio icon, play/pause icon, subtitles, progress bar.
@@ -374,10 +394,18 @@ export const SelfHostedVideo = ({
 	 * Setup.
 	 *
 	 * 1. Determine whether we can autoplay video.
-	 * 2. Creates event listeners to control playback when there are multiple videos.
+	 * 2. Initialise Ophan attention tracking.
+	 * 3. Creates event listeners to control playback when there are multiple videos.
 	 */
 	useEffect(() => {
 		setIsAutoplayAllowed(doesUserPermitAutoplay());
+
+		/**
+		 * Initialise Ophan attention tracking
+		 */
+		if (vidRef.current) {
+			void trackAttention(vidRef.current, atomId);
+		}
 
 		/**
 		 * Mutes the current video when another video is unmuted
@@ -459,31 +487,7 @@ export const SelfHostedVideo = ({
 				handlePageBecomesVisible();
 			});
 		};
-	}, [uniqueId]);
-
-	/**
-	 * Initiates attention tracking for ophan
-	 */
-	useEffect(() => {
-		const video = vidRef.current;
-		if (!video) return;
-
-		const trackAttention = async () => {
-			try {
-				const ophan = await getOphan('Web');
-				ophan.trackComponentAttention(
-					`gu-video-loop-${atomId}`,
-					video,
-					VISIBILITY_THRESHOLD,
-					true,
-				);
-			} catch (error) {
-				log('dotcom', 'Failed to track video attention:', error);
-			}
-		};
-
-		void trackAttention();
-	}, [atomId]);
+	}, [uniqueId, atomId]);
 
 	/**
 	 * Keeps track of whether the video has been in view or not.
