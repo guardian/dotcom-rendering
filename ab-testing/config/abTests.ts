@@ -39,7 +39,7 @@ const ABTests: ABTest[] = [
 		owners: ["commercial.dev@guardian.co.uk"],
 		expirationDate: `2026-01-15`,
 		type: "client",
-		status: "ON",
+		status: "OFF",
 		audienceSize: 10 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant"],
