@@ -12,7 +12,7 @@ export type FootballMatchStats = {
  * Extended stats information about a given team in a football match, including
  * a list of players.
  */
-type FootballMatchTeamWithStats = FootballTeam & {
+export type FootballMatchTeamWithStats = FootballTeam & {
 	abbreviatedName: string;
 	possession: number;
 	shotsOnTarget: number;
@@ -37,7 +37,7 @@ type FootballPlayer = {
 /**
  * Events involving a particular player in a given football match.
  */
-type PlayerEvent = {
+export type PlayerEvent = {
 	kind: 'substitution' | 'booking' | 'dismissal';
 	minute: number;
 };
