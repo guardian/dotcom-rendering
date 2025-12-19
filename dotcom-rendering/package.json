@@ -46,7 +46,7 @@
 		"@guardian/support-dotcom-components": "8.3.1",
 		"@guardian/tsconfig": "0.2.0",
 		"@playwright/test": "1.56.1",
-		"@sentry/browser": "10.24.0",
+		"@sentry/browser": "10.32.1",
 		"@storybook/addon-a11y": "10.1.10",
 		"@storybook/addon-docs": "10.1.10",
 		"@storybook/addon-webpack5-compiler-swc": "4.0.2",
