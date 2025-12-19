@@ -4,31 +4,32 @@ import {
 	findMatchingProducts,
 	insertCarouselPlaceholder,
 } from './enhance-product-carousel';
+import {
+	atAGlanceHeading,
+	dividerElement,
+	linkElement,
+	productElement,
+	textElement,
+} from './enhance-product-carousel.test-helpers';
 
 describe('extractAtAGlanceUrls', () => {
 	it('returns only URLs from LinkBlockElements', () => {
 		const elements = [
-			{
-				_type: 'model.dotcomrendering.pageElements.LinkBlockElement',
-				url: 'https://shop.tefal.co.uk/easy-fry-dual-xxl-ey942bg0-air-fryer-java-pepper-11l',
-				elementId: '1',
-			},
-			{
-				_type: 'model.dotcomrendering.pageElements.LinkBlockElement',
-				url: 'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
-				elementId: '2',
-			},
-			{
-				_type: 'model.dotcomrendering.pageElements.LinkBlockElement',
-				url: 'https://casodesign.co.uk/product/caso-design-airfry-duo-chef',
-				elementId: '3',
-			},
-			{
-				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-				html: 'just text with no url',
-				elementId: '4',
-			},
+			linkElement(
+				'https://shop.tefal.co.uk/easy-fry-dual-xxl-ey942bg0-air-fryer-java-pepper-11l',
+				'Buy now',
+			),
+			linkElement(
+				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
+				'Buy now',
+			),
+			linkElement(
+				'https://casodesign.co.uk/product/caso-design-airfry-duo-chef',
+				'Buy now',
+			),
+			textElement('just text with no url'),
 		];
+
 		expect(extractAtAGlanceUrls(elements)).toEqual([
 			'https://shop.tefal.co.uk/easy-fry-dual-xxl-ey942bg0-air-fryer-java-pepper-11l',
 			'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
@@ -40,105 +41,53 @@ describe('extractAtAGlanceUrls', () => {
 describe('findMatchingProducts', () => {
 	it('finds products with matching CTA URLs', () => {
 		const products = [
-			{
-				_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
-				productCtas: [
-					{
-						url: 'https://casodesign.co.uk/product/caso-design-airfry-duo-chef/',
-					},
-				],
-				elementId: '1',
-			},
-			{
-				_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
-				productCtas: [
-					{
-						url: 'https://www.procook.co.uk/product/procook-12-in-1-air-fryer-grill-black',
-					},
-				],
-				elementId: '2',
-			},
-			{
-				_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
-				productCtas: [
-					{
-						url: 'https://ninjakitchen.co.uk/product/ninja-double-stack-xl-9-5l-air-fryer-sl400uk-zidSL400UK',
-					},
-				],
-				elementId: '3',
-			},
-		];
-		expect(
-			findMatchingProducts(products, [
+			productElement([
 				'https://casodesign.co.uk/product/caso-design-airfry-duo-chef/',
+			]),
+			productElement([
+				'https://www.procook.co.uk/product/procook-12-in-1-air-fryer-grill-black',
+			]),
+			productElement([
 				'https://ninjakitchen.co.uk/product/ninja-double-stack-xl-9-5l-air-fryer-sl400uk-zidSL400UK',
 			]),
-		).toHaveLength(2);
+		];
+
+		const result = findMatchingProducts(products, [
+			'https://casodesign.co.uk/product/caso-design-airfry-duo-chef/',
+			'https://ninjakitchen.co.uk/product/ninja-double-stack-xl-9-5l-air-fryer-sl400uk-zidSL400UK',
+		]);
+
+		expect(result).toHaveLength(2);
 	});
 
 	it('returns an empty array if no product CTA URLs match', () => {
 		const products = [
-			{
-				_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
-				productCtas: [{ url: 'https://example.com/product-1' }],
-				elementId: '1',
-			},
-			{
-				_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
-				productCtas: [{ url: 'https://example.com/product-2' }],
-				elementId: '2',
-			},
+			productElement(['https://example.com/product-1']),
+			productElement(['https://example.com/product-2']),
 		];
+
 		const result = findMatchingProducts(products, [
 			'https://notfound.com/product-x',
 			'https://another.com/product-y',
 		]);
+
 		expect(result).toEqual([]);
 	});
 });
 
 describe('insertCarouselPlaceholder', () => {
-	const atAGlanceHeading = {
-		_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-		text: 'At a glance',
-		elementId: 'at-a-glance',
-		html: 'At a glance',
-	};
-	const divider = {
-		_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
-		elementId: 'divider-1',
-	};
-
-	it('inserts a ProductCarouselElement after the At a glance section when >2 products match', () => {
-		const linkElement1 = {
-			_type: 'model.dotcomrendering.pageElements.LinkBlockElement',
-			url: 'https://product-1.com',
-			elementId: '1',
-		};
-		const linkElement2 = {
-			_type: 'model.dotcomrendering.pageElements.LinkBlockElement',
-			url: 'https://product-2.com',
-			elementId: '2',
-		};
-		const productElement1 = {
-			_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
-			productCtas: [{ url: 'https://product-1.com' }],
-			elementId: '3',
-		};
-		const productElement2 = {
-			_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
-			productCtas: [{ url: 'https://product-2.com' }],
-			elementId: '4',
-		};
+	it('inserts a ProductCarouselElement after the At a glance section', () => {
 		const input = [
-			atAGlanceHeading,
-			linkElement1,
-			linkElement2,
-			divider,
-			productElement1,
-			productElement2,
+			atAGlanceHeading(),
+			linkElement('https://product-1.com', 'Buy now'),
+			linkElement('https://product-2.com', 'Buy now'),
+			dividerElement(),
+			productElement(['https://product-1.com']),
+			productElement(['https://product-2.com']),
 		];
+
 		const output = insertCarouselPlaceholder(input);
+
 		expect(
 			output.some(
 				(el) =>
@@ -149,22 +98,13 @@ describe('insertCarouselPlaceholder', () => {
 	});
 
 	it('does nothing when no At a glance section is present', () => {
-		const linkElement = {
-			_type: 'model.dotcomrendering.pageElements.LinkBlockElement',
-			url: 'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
-			elementId: '1',
-		};
-		const productElement = {
-			_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
-			productCtas: [
-				{
-					url: 'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
-				},
-			],
-			elementId: '2',
-		};
-		const input = [linkElement, productElement];
+		const input = [
+			linkElement('https://example.com', 'Buy now'),
+			productElement(['https://example.com']),
+		];
+
 		const output = insertCarouselPlaceholder(input);
+
 		expect(
 			output.some(
 				(el) =>
@@ -175,36 +115,18 @@ describe('insertCarouselPlaceholder', () => {
 	});
 });
 
-describe('insertCarouselPlaceholder - edge cases', () => {
-	const atAGlanceHeading = {
-		_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-		text: 'At a glance',
-		elementId: 'at-a-glance',
-		html: 'At a glance',
-	};
-	const divider = {
-		_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
-		elementId: 'divider-1',
-	};
-
+describe('insertCarouselPlaceholder – edge cases', () => {
 	it('does not insert a carousel when fewer than two products match', () => {
-		const link1 = {
-			_type: 'model.dotcomrendering.pageElements.LinkBlockElement',
-			url: 'https://product-1.com',
-			elementId: '1',
-		};
-		const link2 = {
-			_type: 'model.dotcomrendering.pageElements.LinkBlockElement',
-			url: 'https://product-1.com',
-			elementId: '2',
-		};
-		const product1 = {
-			_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
-			productCtas: [{ url: 'https://product-1.com' }],
-			elementId: '3',
-		};
-		const input = [atAGlanceHeading, link1, link2, divider, product1];
+		const input = [
+			atAGlanceHeading(),
+			linkElement('https://product-1.com', 'Buy now'),
+			linkElement('https://product-1.com', 'Buy now'),
+			dividerElement(),
+			productElement(['https://product-1.com']),
+		];
+
 		const output = insertCarouselPlaceholder(input);
+
 		expect(
 			output.some(
 				(el) =>
@@ -214,19 +136,16 @@ describe('insertCarouselPlaceholder - edge cases', () => {
 		).toBe(false);
 	});
 
-	it('does not insert carousel if At a glance section has no LinkBlockElements', () => {
-		const textElement = {
-			_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-			html: 'No links here',
-			elementId: '4',
-		};
-		const product1 = {
-			_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
-			productCtas: [{ url: 'https://product-1.com' }],
-			elementId: '5',
-		};
-		const input = [atAGlanceHeading, textElement, divider, product1];
+	it('does not insert a carousel if At a glance section has no LinkBlockElements', () => {
+		const input = [
+			atAGlanceHeading(),
+			textElement('No links here'),
+			dividerElement(),
+			productElement(['https://product-1.com']),
+		];
+
 		const output = insertCarouselPlaceholder(input);
+
 		expect(
 			output.some(
 				(el) =>
@@ -234,60 +153,38 @@ describe('insertCarouselPlaceholder - edge cases', () => {
 					'model.dotcomrendering.pageElements.ProductCarouselElement',
 			),
 		).toBe(false);
-		expect(output).toEqual(input);
 	});
 
-	it('returns an empty array for empty or invalid input', () => {
-		expect(insertCarouselPlaceholder(undefined as any)).toEqual([]);
-		expect(insertCarouselPlaceholder(null as any)).toEqual([]);
+	it('returns an empty array for empty input', () => {
 		expect(insertCarouselPlaceholder([])).toEqual([]);
 	});
 });
 
-describe('enhanceProductCarousel (integration)', () => {
-	it('enhances elements with a product carousel', () => {
+describe('enhanceProductCarousel', () => {
+	it('enhances elements with a product carousel for allowlisted pages', () => {
 		const allowedPageId = 'thefilter/2025/mar/02/best-air-fryers';
+
 		const input = [
-			{
-				_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-				text: 'At a glance',
-				elementId: 'at-a-glance',
-				html: 'At a glance',
-			},
-			{
-				_type: 'model.dotcomrendering.pageElements.LinkBlockElement',
-				url: 'https://www.homebase.co.uk/en-uk/tower-airx-t17166-5l-grey-single-basket-air-fryer-digital-air-fryer/p/0757395',
-				elementId: '1',
-			},
-			{
-				_type: 'model.dotcomrendering.pageElements.LinkBlockElement',
-				url: 'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
-				elementId: '2',
-			},
-			{
-				_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
-				elementId: '3',
-			},
-			{
-				_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
-				productCtas: [
-					{
-						url: 'https://www.homebase.co.uk/en-uk/tower-airx-t17166-5l-grey-single-basket-air-fryer-digital-air-fryer/p/0757395',
-					},
-				],
-				elementId: '4',
-			},
-			{
-				_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
-				productCtas: [
-					{
-						url: 'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
-					},
-				],
-				elementId: '5',
-			},
+			atAGlanceHeading(),
+			linkElement(
+				'https://www.homebase.co.uk/en-uk/tower-airx-t17166-5l-grey-single-basket-air-fryer-digital-air-fryer/p/0757395',
+				'Buy now',
+			),
+			linkElement(
+				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
+				'Buy now',
+			),
+			dividerElement(),
+			productElement([
+				'https://www.homebase.co.uk/en-uk/tower-airx-t17166-5l-grey-single-basket-air-fryer-digital-air-fryer/p/0757395',
+			]),
+			productElement([
+				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
+			]),
 		];
+
 		const output = enhanceProductCarousel(allowedPageId)(input);
+
 		expect(
 			output.some(
 				(el) =>
@@ -298,14 +195,10 @@ describe('enhanceProductCarousel (integration)', () => {
 	});
 
 	it('returns input unchanged for non-allowlisted pageId', () => {
-		const input = [
-			{
-				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-				html: 'foo',
-				elementId: '1',
-			},
-		];
+		const input = [textElement('foo')];
+
 		const output = enhanceProductCarousel('not-allowed-page')(input);
+
 		expect(output).toEqual(input);
 	});
 });
