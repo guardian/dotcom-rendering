@@ -329,8 +329,6 @@ export const SecureSignup = ({
 		setIsWaitingForResponse(false);
 		setResponseOk(response.ok);
 
-		// Invalidate cache so it will be refetched with fresh data
-		// (there's a delay in idapi -> braze sync, so we can't refetch immediately)
 		if (response.ok && authStatus.kind === 'SignedIn') {
 			clearSubscriptionCache();
 		}
