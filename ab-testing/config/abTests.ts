@@ -37,7 +37,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Tests whether we can get the users email, hash it and pass pd value to the userId array",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: `2025-12-19`,
+		expirationDate: `2026-01-15`,
 		type: "client",
 		status: "ON",
 		audienceSize: 10 / 100,
