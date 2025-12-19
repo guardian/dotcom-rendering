@@ -21,7 +21,7 @@ import { useEffect, useRef, useState } from 'react';
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
-import { fetchNewsletterSubscriptions } from '../lib/newsletterSubscriptionCache';
+import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { palette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -40,7 +40,6 @@ type OphanABTest = ComponentEvent['abTest'];
 type Props = {
 	newsletterId: string;
 	successDescription: string;
-	idApiUrl?: string;
 	abTest?: OphanABTest;
 };
 
@@ -159,11 +158,9 @@ const buildFormData = (
 	return formData;
 };
 
-const resolveEmailIfSignedIn = async (
-	idApiUrl?: string,
-): Promise<string | undefined> => {
-	const apiUrl = idApiUrl ?? window.guardian.config.page.idApiUrl;
-	if (!apiUrl) return;
+const resolveEmailIfSignedIn = async (): Promise<string | undefined> => {
+	const { idApiUrl } = window.guardian.config.page;
+	if (!idApiUrl) return;
 	const fetchedEmail = await lazyFetchEmailWithTimeout()();
 	if (!fetchedEmail) return;
 	return fetchedEmail;
@@ -273,7 +270,6 @@ const sendTracking = (
 export const SecureSignup = ({
 	newsletterId,
 	successDescription,
-	idApiUrl,
 	abTest,
 }: Props) => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
@@ -301,8 +297,8 @@ export const SecureSignup = ({
 
 	useEffect(() => {
 		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
-		void resolveEmailIfSignedIn(idApiUrl).then(setSignedInUserEmail);
-	}, [idApiUrl]);
+		void resolveEmailIfSignedIn().then(setSignedInUserEmail);
+	}, []);
 	const { renderingTarget } = useConfig();
 
 	const hasResponse = typeof responseOk === 'boolean';
@@ -333,21 +329,10 @@ export const SecureSignup = ({
 		setIsWaitingForResponse(false);
 		setResponseOk(response.ok);
 
-		// Update cache by refetching from API
+		// Invalidate cache so it will be refetched with fresh data
+		// (there's a delay in idapi -> braze sync, so we can't refetch immediately)
 		if (response.ok && authStatus.kind === 'SignedIn') {
-			try {
-				const userId = authStatus.idToken.claims.sub;
-				const apiUrl = idApiUrl ?? window.guardian.config.page.idApiUrl;
-				if (userId && apiUrl) {
-					await fetchNewsletterSubscriptions(
-						apiUrl,
-						userId,
-						authStatus,
-					);
-				}
-			} catch {
-				// Silent failure - cache update is not critical
-			}
+			clearSubscriptionCache();
 		}
 
 		sendTracking(

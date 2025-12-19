@@ -52,7 +52,6 @@ export const Default = {
 				<SecureSignup
 					newsletterId="patriarchy"
 					successDescription="Reviewing the most important stories on feminism and sexism and those fighting for equality"
-					idApiUrl="https://idapi.theguardian.com"
 				/>
 				<NewsletterPrivacyMessage />
 			</>
@@ -81,7 +80,6 @@ export const NewsTheme = {
 				<SecureSignup
 					newsletterId="morning-briefing"
 					successDescription="Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning"
-					idApiUrl="https://idapi.theguardian.com"
 				/>
 				<NewsletterPrivacyMessage />
 			</>
@@ -110,7 +108,6 @@ export const IrregularFrequency = {
 				<SecureSignup
 					newsletterId="documentaries"
 					successDescription="Be the first to see our latest thought-provoking films, bringing you bold and original storytelling from around the world"
-					idApiUrl="https://idapi.theguardian.com"
 				/>
 				<NewsletterPrivacyMessage />
 			</>

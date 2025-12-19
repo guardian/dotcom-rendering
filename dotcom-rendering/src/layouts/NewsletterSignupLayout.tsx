@@ -376,7 +376,6 @@ export const NewsletterSignupLayout = ({
 											successDescription={
 												promotedNewsletter.successDescription
 											}
-											idApiUrl={article.config.idApiUrl}
 										/>
 									</Island>
 									<NewsletterPrivacyMessage />

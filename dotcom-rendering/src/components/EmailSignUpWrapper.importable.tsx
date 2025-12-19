@@ -66,7 +66,6 @@ export const EmailSignUpWrapper = ({
 					<SecureSignup
 						newsletterId={emailSignUpProps.identityName}
 						successDescription={emailSignUpProps.description}
-						idApiUrl={idApiUrl}
 					/>
 				</Island>
 				{!emailSignUpProps.hidePrivacyMessage && (

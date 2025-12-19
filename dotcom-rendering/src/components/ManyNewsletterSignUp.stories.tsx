@@ -45,7 +45,6 @@ export const Default = () => {
 				useReCaptcha={false}
 				visibleRecaptcha={false}
 				captchaSiteKey="TEST_RECAPTCHA_SITE_KEY"
-				idApiUrl="https://idapi.theguardian.com"
 			/>
 		</>
 	);
