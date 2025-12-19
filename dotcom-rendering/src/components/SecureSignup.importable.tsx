@@ -159,7 +159,11 @@ const buildFormData = (
 	return formData;
 };
 
-const resolveEmailIfSignedIn = async (): Promise<string | undefined> => {
+const resolveEmailIfSignedIn = async (
+	idApiUrl?: string,
+): Promise<string | undefined> => {
+	const apiUrl = idApiUrl ?? window.guardian.config.page.idApiUrl;
+	if (!apiUrl) return;
 	const fetchedEmail = await lazyFetchEmailWithTimeout()();
 	if (!fetchedEmail) return;
 	return fetchedEmail;
@@ -297,8 +301,8 @@ export const SecureSignup = ({
 
 	useEffect(() => {
 		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
-		void resolveEmailIfSignedIn().then(setSignedInUserEmail);
-	}, []);
+		void resolveEmailIfSignedIn(idApiUrl).then(setSignedInUserEmail);
+	}, [idApiUrl]);
 	const { renderingTarget } = useConfig();
 
 	const hasResponse = typeof responseOk === 'boolean';
