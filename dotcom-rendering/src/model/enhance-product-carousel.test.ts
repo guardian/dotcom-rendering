@@ -62,8 +62,12 @@ describe('findMatchingProducts', () => {
 
 	it('returns an empty array if no product CTA URLs match', () => {
 		const products = [
-			productElement(['https://example.com/product-1']),
-			productElement(['https://example.com/product-2']),
+			productElement([
+				'https://ao.com/product/ec230bk-delonghi-stilosa-traditional-pump-espresso-coffee-machine-black-79705-66.aspx',
+			]),
+			productElement([
+				'https://petertysonelectricals.co.uk/delonghi-ecam290-83-tb-magnifica-evo-fully-automatic-bean-to-cup-machine-titanium-black',
+			]),
 		];
 
 		const result = findMatchingProducts(products, [
@@ -79,11 +83,21 @@ describe('insertCarouselPlaceholder', () => {
 	it('inserts a ProductCarouselElement after the At a glance section', () => {
 		const input = [
 			atAGlanceHeading(),
-			linkElement('https://product-1.com', 'Buy now'),
-			linkElement('https://product-2.com', 'Buy now'),
+			linkElement(
+				'https://casodesign.co.uk/product/caso-design-airfry-duo-chef',
+				'Buy now',
+			),
+			linkElement(
+				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
+				'Buy now',
+			),
 			dividerElement(),
-			productElement(['https://product-1.com']),
-			productElement(['https://product-2.com']),
+			productElement([
+				'https://casodesign.co.uk/product/caso-design-airfry-duo-chef',
+			]),
+			productElement([
+				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
+			]),
 		];
 
 		const output = insertCarouselPlaceholder(input);
@@ -99,8 +113,13 @@ describe('insertCarouselPlaceholder', () => {
 
 	it('does nothing when no At a glance section is present', () => {
 		const input = [
-			linkElement('https://example.com', 'Buy now'),
-			productElement(['https://example.com']),
+			linkElement(
+				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
+				'Buy now',
+			),
+			productElement([
+				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
+			]),
 		];
 
 		const output = insertCarouselPlaceholder(input);
@@ -119,10 +138,18 @@ describe('insertCarouselPlaceholder – edge cases', () => {
 	it('does not insert a carousel when fewer than two products match', () => {
 		const input = [
 			atAGlanceHeading(),
-			linkElement('https://product-1.com', 'Buy now'),
-			linkElement('https://product-1.com', 'Buy now'),
+			linkElement(
+				'https://casodesign.co.uk/product/caso-design-airfry-duo-chef',
+				'Buy now',
+			),
+			linkElement(
+				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
+				'Buy now',
+			),
 			dividerElement(),
-			productElement(['https://product-1.com']),
+			productElement([
+				'https://casodesign.co.uk/product/caso-design-airfry-duo-chef',
+			]),
 		];
 
 		const output = insertCarouselPlaceholder(input);
@@ -141,7 +168,9 @@ describe('insertCarouselPlaceholder – edge cases', () => {
 			atAGlanceHeading(),
 			textElement('No links here'),
 			dividerElement(),
-			productElement(['https://product-1.com']),
+			productElement([
+				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
+			]),
 		];
 
 		const output = insertCarouselPlaceholder(input);
@@ -195,7 +224,7 @@ describe('enhanceProductCarousel', () => {
 	});
 
 	it('returns input unchanged for non-allowlisted pageId', () => {
-		const input = [textElement('foo')];
+		const input = [textElement('Buy here')];
 
 		const output = enhanceProductCarousel('not-allowed-page')(input);
 
