@@ -1,7 +1,7 @@
-import { getCookie, removeCookie } from '@guardian/libs';
-import { isIPad, setDeviceClassCookie } from './iPadDetection';
+import { storage } from '@guardian/libs';
+import { getDeviceClass, isIPad, setDeviceClass } from './iPadDetection';
 
-const DEVICE_CLASS_COOKIE = 'device_class';
+const DEVICE_CLASS_STORAGE_KEY = 'gu.deviceClass';
 
 describe('iPadDetection', () => {
 	const originalPlatform = navigator.platform;
@@ -16,7 +16,7 @@ describe('iPadDetection', () => {
 			value: originalMaxTouchPoints,
 			configurable: true,
 		});
-		removeCookie({ name: DEVICE_CLASS_COOKIE });
+		storage.local.remove(DEVICE_CLASS_STORAGE_KEY);
 	});
 
 	describe('isIPad', () => {
@@ -93,8 +93,8 @@ describe('iPadDetection', () => {
 		});
 	});
 
-	describe('setDeviceClassCookie', () => {
-		it('sets device_class cookie to tablet on iPadOS', () => {
+	describe('setDeviceClass', () => {
+		it('sets device class to tablet in localStorage on iPad', () => {
 			Object.defineProperty(navigator, 'platform', {
 				value: 'MacIntel',
 				configurable: true,
@@ -104,12 +104,12 @@ describe('iPadDetection', () => {
 				configurable: true,
 			});
 
-			setDeviceClassCookie();
+			setDeviceClass();
 
-			expect(getCookie({ name: DEVICE_CLASS_COOKIE })).toBe('tablet');
+			expect(getDeviceClass()).toBe('tablet');
 		});
 
-		it('does not set cookie on Mac desktop', () => {
+		it('does not set device class on Mac desktop', () => {
 			Object.defineProperty(navigator, 'platform', {
 				value: 'MacIntel',
 				configurable: true,
@@ -119,12 +119,12 @@ describe('iPadDetection', () => {
 				configurable: true,
 			});
 
-			setDeviceClassCookie();
+			setDeviceClass();
 
-			expect(getCookie({ name: DEVICE_CLASS_COOKIE })).toBeNull();
+			expect(getDeviceClass()).toBeUndefined();
 		});
 
-		it('does not overwrite existing tablet cookie', () => {
+		it('does not overwrite existing tablet value', () => {
 			Object.defineProperty(navigator, 'platform', {
 				value: 'MacIntel',
 				configurable: true,
@@ -134,14 +134,25 @@ describe('iPadDetection', () => {
 				configurable: true,
 			});
 
-			setDeviceClassCookie();
-			const firstCookieValue = getCookie({ name: DEVICE_CLASS_COOKIE });
+			setDeviceClass();
+			const firstValue = getDeviceClass();
 
-			setDeviceClassCookie();
-			const secondCookieValue = getCookie({ name: DEVICE_CLASS_COOKIE });
+			setDeviceClass();
+			const secondValue = getDeviceClass();
 
-			expect(firstCookieValue).toBe('tablet');
-			expect(secondCookieValue).toBe('tablet');
+			expect(firstValue).toBe('tablet');
+			expect(secondValue).toBe('tablet');
+		});
+	});
+
+	describe('getDeviceClass', () => {
+		it('returns tablet when device class is set', () => {
+			storage.local.set(DEVICE_CLASS_STORAGE_KEY, 'tablet');
+			expect(getDeviceClass()).toBe('tablet');
+		});
+
+		it('returns undefined when device class is not set', () => {
+			expect(getDeviceClass()).toBeUndefined();
 		});
 	});
 });

@@ -1,6 +1,6 @@
-import { getCookie, setCookie } from '@guardian/libs';
+import { storage } from '@guardian/libs';
 
-const DEVICE_CLASS_COOKIE = 'device_class';
+const DEVICE_CLASS_STORAGE_KEY = 'gu.deviceClass';
 
 /**
  * Detects iPad devices using feature detection.
@@ -23,17 +23,22 @@ export const isIPad = (): boolean => {
 };
 
 /**
- * Sets the device_class cookie if the device is detected as iPadOS.
- * This cookie will be sent to the backend (SDC) for proper targeting.
+ * Sets the device class in localStorage if the device is detected as iPad.
+ * This value will be read and appended as a query parameter to SDC requests.
  */
-export const setDeviceClassCookie = (): void => {
-	const existingCookie = getCookie({ name: DEVICE_CLASS_COOKIE });
+export const setDeviceClass = (): void => {
+	const existingValue = storage.local.get(DEVICE_CLASS_STORAGE_KEY);
 
-	if (isIPad() && existingCookie !== 'tablet') {
-		setCookie({
-			name: DEVICE_CLASS_COOKIE,
-			value: 'tablet',
-			daysToLive: 365,
-		});
+	if (isIPad() && existingValue !== 'tablet') {
+		storage.local.set(DEVICE_CLASS_STORAGE_KEY, 'tablet');
 	}
+};
+
+/**
+ * Gets the device class from localStorage.
+ * Returns 'tablet' for iPads, undefined otherwise.
+ */
+export const getDeviceClass = (): string | undefined => {
+	const value = storage.local.get(DEVICE_CLASS_STORAGE_KEY);
+	return typeof value === 'string' ? value : undefined;
 };

@@ -27,6 +27,7 @@ import {
 } from '../../lib/contributions';
 import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import type { CanShowResult } from '../../lib/messagePicker';
+import { appendDeviceClassParam } from '../../lib/sdcUrl';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { TagType } from '../../types/tag';
 
@@ -110,7 +111,7 @@ export const canShowReaderRevenueEpic = async (
 	const headers = await getAuthHeaders();
 
 	const response: ModuleDataResponse<EpicProps> = await getEpic(
-		contributionsServiceUrl,
+		appendDeviceClassParam(contributionsServiceUrl),
 		contributionsPayload,
 		headers,
 	);
