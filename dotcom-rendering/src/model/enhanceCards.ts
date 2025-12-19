@@ -176,10 +176,11 @@ const decideMediaAtomImage = (
 	videoReplace: boolean,
 	mediaAtom: FEMediaAtom,
 	cardTrailImage?: string,
+	isSelfHostedVideo?: boolean,
 ) => {
-	const largestMediaAtomImage = getLargestImageUrl(
-		mediaAtom.trailImage?.allImages,
-	);
+	const largestMediaAtomImage = isSelfHostedVideo
+		? getLargestImageUrl(mediaAtom.posterImage?.allImages)
+		: getLargestImageUrl(mediaAtom.trailImage?.allImages);
 
 	if (videoReplace) {
 		return largestMediaAtomImage ?? cardTrailImage;
@@ -213,6 +214,7 @@ export const getActiveMediaAtom = (
 			videoReplace,
 			mediaAtom,
 			cardTrailImage,
+			firstVideoAsset.platform === 'Url',
 		);
 
 		/**
