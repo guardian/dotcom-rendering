@@ -11,6 +11,7 @@ import {
 import { getZIndex } from '../lib/getZIndex';
 import { generateImageURL } from '../lib/image';
 import { useIsInView } from '../lib/useIsInView';
+import { useOnce } from '../lib/useOnce';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useSubtitles } from '../lib/useSubtitles';
 import type { CustomPlayEventDetail, Source } from '../lib/video';
@@ -278,11 +279,6 @@ export const SelfHostedVideo = ({
 		null,
 	);
 	const [hasPageBecomeActive, setHasPageBecomeActive] = useState(false);
-	/**
-	 * Keeps track of whether the video has been in view.
-	 * For example, we only want to try to pause the video if it has been in view.
-	 */
-	const [hasBeenInView, setHasBeenInView] = useState(false);
 	const [hasTrackedPlay, setHasTrackedPlay] = useState(false);
 	/**
 	 * The actual video is a better source of truth of its dimensions.
@@ -490,28 +486,21 @@ export const SelfHostedVideo = ({
 	}, [uniqueId, atomId]);
 
 	/**
-	 * Keeps track of whether the video has been in view or not.
+	 * Track the first time the video comes into view.
 	 */
-	useEffect(() => {
-		if (isInView && !hasBeenInView) {
-			/**
-			 * Track the first time the video comes into view.
-			 */
-			void submitComponentEvent(
-				{
-					component: {
-						componentType: 'LOOP_VIDEO',
-						id: `gu-video-loop-${atomId}`,
-						labels: [linkTo],
-					},
-					action: 'VIEW',
+	useOnce(() => {
+		void submitComponentEvent(
+			{
+				component: {
+					componentType: 'LOOP_VIDEO',
+					id: `gu-video-loop-${atomId}`,
+					labels: [linkTo],
 				},
-				'Web',
-			);
-
-			setHasBeenInView(true);
-		}
-	}, [isInView, hasBeenInView, atomId, linkTo]);
+				action: 'VIEW',
+			},
+			'Web',
+		);
+	}, [isInView ? true : undefined]);
 
 	/**
 	 * Handle play/pause, when instigated by the browser.
@@ -524,9 +513,7 @@ export const SelfHostedVideo = ({
 		/**
 		 * Stops playback when the video is scrolled out of view.
 		 */
-		const isNoLongerInView =
-			playerState === 'PLAYING' && hasBeenInView && isInView === false;
-		if (isNoLongerInView) {
+		if (playerState === 'PLAYING' && isInView === false) {
 			pauseVideo('PAUSED_BY_INTERSECTION_OBSERVER');
 			return;
 		}
@@ -546,14 +533,12 @@ export const SelfHostedVideo = ({
 			void playVideo();
 		}
 	}, [
+		isPlayable,
 		isAutoplayAllowed,
 		isInView,
-		isPlayable,
 		playerState,
-		playVideo,
-		hasBeenInView,
 		hasPageBecomeActive,
-		atomId,
+		playVideo,
 	]);
 
 	/**
@@ -566,11 +551,11 @@ export const SelfHostedVideo = ({
 	useEffect(() => {
 		if (
 			isAutoplayAllowed === false ||
-			(isInView === false && !hasBeenInView)
+			(isInView === false && playerState === 'NOT_STARTED')
 		) {
 			setShowPosterImage(true);
 		}
-	}, [isAutoplayAllowed, isInView, hasBeenInView]);
+	}, [isAutoplayAllowed, isInView, playerState]);
 
 	if (adapted) {
 		return FallbackImageComponent;
