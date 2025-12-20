@@ -178,7 +178,6 @@ export const SelfHostedVideo = ({
 	const [isMuted, setIsMuted] = useState(true);
 	const [hasAudio, setHasAudio] = useState(true);
 	const [showPlayIcon, setShowPlayIcon] = useState(false);
-	const [preloadPartialData, setPreloadPartialData] = useState(false);
 	const [showPosterImage, setShowPosterImage] = useState<boolean>(false);
 	const [currentTime, setCurrentTime] = useState(0);
 	const [playerState, setPlayerState] =
@@ -526,15 +525,6 @@ export const SelfHostedVideo = ({
 		}
 	}, [isAutoplayAllowed, isInView, hasBeenInView]);
 
-	/**
-	 * We almost always want to preload some of the video data. If a user has prefers-reduced-motion
-	 * enabled, then the video will only be partially preloaded (metadata + small amount of video)
-	 * when it comes into view.
-	 */
-	useEffect(() => {
-		setPreloadPartialData(isAutoplayAllowed === false || !!isInView);
-	}, [isAutoplayAllowed, isInView]);
-
 	if (adapted) {
 		return FallbackImageComponent;
 	}
@@ -692,6 +682,12 @@ export const SelfHostedVideo = ({
 	const optimisedPosterImage = showPosterImage
 		? getOptimisedPosterImage(posterImage)
 		: undefined;
+
+	/**
+	 * We almost always want to preload some of the video data. The exception
+	 * is when autoplay is off and the video is only partially in view.
+	 */
+	const preloadPartialData = !!isAutoplayAllowed || !!isInView;
 
 	return (
 		<div
