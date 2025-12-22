@@ -1,9 +1,8 @@
 import type { CountryCode } from '@guardian/libs';
 import { isObject, log } from '@guardian/libs';
-import type { TAction, TComponentType } from '@guardian/ophan-tracker-js';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import type { Result } from '../lib/result';
-import { error, ok, okOrThrow } from '../lib/result';
+import { error, ok } from '../lib/result';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useConsent } from '../lib/useConsent';
 import { useCountryCode } from '../lib/useCountryCode';
@@ -122,6 +121,8 @@ const getProviders = (stage: StageType): IdentityProviderConfig[] => {
 	}
 };
 
+const ENABLED_COUNTRIES: CountryCode[] = ['IE', 'NZ'];
+
 export const initializeFedCM = async ({
 	isSignedIn,
 	countryCode,
@@ -138,15 +139,9 @@ export const initializeFedCM = async ({
 
 	void submitComponentEvent(
 		{
-			// TODO: @guardian/ophan-tracker-js@v2.4.1 has some changes to how page views are tracked
-			// unrelated to Google One Tap which isn't safe to be released yet. Upgrade this once
-			// v2.4.1 is safe to use.
-			action: 'DETECT' as TAction,
+			action: 'DETECT',
 			component: {
-				// TODO: @guardian/ophan-tracker-js@v2.4.1 has some changes to how page views are tracked
-				// unrelated to Google One Tap which isn't safe to be released yet. Upgrade this once
-				// v2.4.1 is safe to use.
-				componentType: 'SIGN_IN_GOOGLE_ONE_TAP' as TComponentType,
+				componentType: 'SIGN_IN_GOOGLE_ONE_TAP',
 			},
 			value: isSupported ? 'SUPPORTED' : 'NOT_SUPPORTED',
 		},
@@ -154,7 +149,7 @@ export const initializeFedCM = async ({
 	);
 
 	// TODO: Expand Google One Tap to outside Ireland
-	if (countryCode !== 'IE') return;
+	if (!countryCode || !ENABLED_COUNTRIES.includes(countryCode)) return;
 	if (isSignedIn) return;
 
 	/**
@@ -224,8 +219,7 @@ export const initializeFedCM = async ({
 	if (credentials) {
 		log('identity', 'FedCM credentials received');
 
-		const signInEmail = okOrThrow(
-			extractEmailFromToken(credentials.token),
+		const signInEmail = extractEmailFromToken(credentials.token).getOrThrow(
 			'Failed to extract email from FedCM token',
 		);
 
@@ -233,10 +227,7 @@ export const initializeFedCM = async ({
 			{
 				action: 'SIGN_IN',
 				component: {
-					// TODO: @guardian/ophan-tracker-js@v2.4.1 has some changes to how page views are tracked
-					// unrelated to Google One Tap which isn't safe to be released yet. Upgrade this once
-					// v2.4.1 is safe to use.
-					componentType: 'SIGN_IN_GOOGLE_ONE_TAP' as TComponentType,
+					componentType: 'SIGN_IN_GOOGLE_ONE_TAP',
 				},
 			},
 			'Web',
@@ -254,10 +245,7 @@ export const initializeFedCM = async ({
 			{
 				action: 'CLOSE',
 				component: {
-					// TODO: @guardian/ophan-tracker-js@v2.4.1 has some changes to how page views are tracked
-					// unrelated to Google One Tap which isn't safe to be released yet. Upgrade this once
-					// v2.4.1 is safe to use.
-					componentType: 'SIGN_IN_GOOGLE_ONE_TAP' as TComponentType,
+					componentType: 'SIGN_IN_GOOGLE_ONE_TAP',
 				},
 			},
 			'Web',

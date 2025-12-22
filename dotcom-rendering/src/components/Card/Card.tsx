@@ -56,7 +56,6 @@ import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
 import { YoutubeBlockComponent } from '../YoutubeBlockComponent.importable';
 import { AvatarContainer } from './components/AvatarContainer';
 import { CardAge } from './components/CardAge';
-import { CardBranding } from './components/CardBranding';
 import { CardFooter } from './components/CardFooter';
 import {
 	CardLayout,
@@ -163,8 +162,6 @@ export type Props = {
 	subtitleSize?: SubtitleSize;
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
-	/** Feature flag for the labs redesign work */
-	showLabsRedesign?: boolean;
 	enableHls?: boolean;
 };
 
@@ -422,7 +419,6 @@ export const Card = ({
 	trailTextSize,
 	showKickerImage = false,
 	headlinePosition = 'inner',
-	showLabsRedesign = false,
 	subtitleSize = 'small',
 	enableHls = false,
 }: Props) => {
@@ -447,17 +443,7 @@ export const Card = ({
 	 * A "video article" refers to standalone video content presented as the main focus of the article.
 	 * It is treated as a media card in the design system.
 	 */
-	const isVideoArticle =
-		mainMedia?.type === 'YoutubeVideo' &&
-		format.design === ArticleDesign.Video;
-
-	/**
-	 * Articles with a video as the main media but not classified as "video articles"
-	 * are styled differently and are not treated as media cards.
-	 */
-	const isVideoMainMedia =
-		mainMedia?.type === 'YoutubeVideo' &&
-		format.design !== ArticleDesign.Video;
+	const isVideoArticle = format.design === ArticleDesign.Video;
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
@@ -521,7 +507,7 @@ export const Card = ({
 				display: flex;
 			`}
 		>
-			{isVideoArticle && (
+			{mainMedia?.type === 'YoutubeVideo' && isVideoArticle && (
 				<>
 					{mainMedia.duration === 0 ? (
 						<Pill
@@ -537,7 +523,6 @@ export const Card = ({
 					)}
 				</>
 			)}
-
 			{mainMedia?.type === 'Audio' && (
 				<Pill
 					content={mainMedia.duration}
@@ -552,6 +537,22 @@ export const Card = ({
 					prefix="Gallery"
 				/>
 			)}
+			{mainMedia?.type === 'SelfHostedVideo' &&
+				(format.design === ArticleDesign.Video ? (
+					<Pill
+						content=""
+						icon={<SvgMediaControlsPlay width={18} />}
+						prefix="Video"
+					/>
+				) : format.design === ArticleDesign.Audio ? (
+					<Pill
+						content=""
+						icon={<SvgMediaControlsPlay width={18} />}
+						prefix="Podcast"
+					/>
+				) : format.design === ArticleDesign.Gallery ? (
+					<Pill content="" icon={<SvgCamera />} prefix="Gallery" />
+				) : null)}
 			{isNewsletter && <Pill content="Newsletter" />}
 		</div>
 	);
@@ -667,6 +668,13 @@ export const Card = ({
 	 */
 	const getGapSizes = (): GapSizes => {
 		if (isOnwardContent && !isGallerySecondaryOnward) {
+			if (isMoreGalleriesOnwardContent) {
+				return {
+					row: 'small',
+					column: 'small',
+				};
+			}
+
 			return {
 				row: 'none',
 				column: 'none',
@@ -810,7 +818,7 @@ export const Card = ({
 			  })
 			: undefined;
 
-		return showLabsRedesign ? (
+		return (
 			<>
 				{/** All screen sizes apart from tablet have horizontal orientation */}
 				<div
@@ -828,6 +836,7 @@ export const Card = ({
 						ophanComponentLink={dataAttributes?.ophanComponentLink}
 						ophanComponentName={dataAttributes?.ophanComponentName}
 						isLabs={isLabs}
+						dataTestId="card-branding-logo"
 					/>
 				</div>
 				{/** Tablet sized screens have vertical orientation */}
@@ -852,12 +861,6 @@ export const Card = ({
 					/>
 				</div>
 			</>
-		) : (
-			<CardBranding
-				branding={branding}
-				containerPalette={containerPalette}
-				onwardsSource={onwardsSource}
-			/>
 		);
 	};
 
@@ -904,7 +907,6 @@ export const Card = ({
 						byline={byline}
 						showByline={showByline}
 						isExternalLink={isExternalLink}
-						showLabsRedesign={showLabsRedesign}
 					/>
 					{!isUndefined(starRating) ? (
 						<StarRatingComponent
@@ -999,6 +1001,7 @@ export const Card = ({
 									width={media.mainMedia.width}
 									videoStyle={media.mainMedia.videoStyle}
 									posterImage={media.mainMedia.image ?? ''}
+									containerAspectRatio={5 / 4}
 									fallbackImage={media.mainMedia.image ?? ''}
 									fallbackImageSize={mediaSize}
 									fallbackImageLoading={imageLoading}
@@ -1122,26 +1125,28 @@ export const Card = ({
 									loading={imageLoading}
 									aspectRatio={aspectRatio}
 								/>
-								{isVideoMainMedia && mainMedia.duration > 0 && (
-									<div
-										css={css`
-											position: absolute;
-											top: ${space[2]}px;
-											right: ${space[2]}px;
-										`}
-									>
-										<Pill
-											content={secondsToDuration(
-												mainMedia.duration,
-											)}
-											icon={
-												<SvgMediaControlsPlay
-													width={18}
-												/>
-											}
-										/>
-									</div>
-								)}
+								{!isVideoArticle &&
+									mainMedia?.type === 'YoutubeVideo' &&
+									mainMedia.duration > 0 && (
+										<div
+											css={css`
+												position: absolute;
+												top: ${space[2]}px;
+												right: ${space[2]}px;
+											`}
+										>
+											<Pill
+												content={secondsToDuration(
+													mainMedia.duration,
+												)}
+												icon={
+													<SvgMediaControlsPlay
+														width={18}
+													/>
+												}
+											/>
+										</div>
+									)}
 							</>
 						)}
 						{media.type === 'crossword' && (
@@ -1231,7 +1236,6 @@ export const Card = ({
 											? media.podcastImage
 											: undefined
 									}
-									showLabsRedesign={showLabsRedesign}
 								/>
 								{!isUndefined(starRating) ? (
 									<StarRatingComponent
@@ -1255,12 +1259,10 @@ export const Card = ({
 							<>
 								{showPill ? (
 									<>
+										{!!branding && isOnwardContent && (
+											<LabsBranding />
+										)}
 										<MediaOrNewsletterPill />
-										{!showLabsRedesign &&
-											format.theme ===
-												ArticleSpecial.Labs && (
-												<LabsBranding />
-											)}
 									</>
 								) : (
 									<CardFooter
@@ -1268,8 +1270,7 @@ export const Card = ({
 										age={decideAge()}
 										commentCount={<CommentCount />}
 										cardBranding={
-											isOnwardContent ||
-											!showLabsRedesign ? (
+											isOnwardContent ? (
 												<LabsBranding />
 											) : undefined
 										}
@@ -1365,9 +1366,6 @@ export const Card = ({
 						format={format}
 						age={decideAge()}
 						commentCount={<CommentCount />}
-						cardBranding={
-							!showLabsRedesign ? <LabsBranding /> : undefined
-						}
 						showLivePlayable={showLivePlayable}
 						shouldReserveSpace={{
 							mobile: avatarPosition.mobile === 'bottom',
@@ -1377,9 +1375,9 @@ export const Card = ({
 				)}
 			</div>
 
-			{showLabsRedesign &&
-				!isOnwardContent &&
-				format.theme === ArticleSpecial.Labs && <LabsBranding />}
+			{!isOnwardContent && format.theme === ArticleSpecial.Labs && (
+				<LabsBranding />
+			)}
 		</CardWrapper>
 	);
 };

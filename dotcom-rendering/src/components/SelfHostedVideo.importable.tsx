@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { log, storage } from '@guardian/libs';
+import { isUndefined, log, storage } from '@guardian/libs';
 import { from, space } from '@guardian/source/foundations';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -30,22 +30,44 @@ import type {
 import { SelfHostedVideoPlayer } from './SelfHostedVideoPlayer';
 import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
-const videoAndBackgroundStyles = (isCinemagraph: boolean) => css`
+const videoContainerStyles = (
+	isCinemagraph: boolean,
+	aspectRatio: number,
+	containerAspectRatio?: number, // The aspect ratio of the container
+) => css`
 	position: relative;
 	display: flex;
 	justify-content: space-around;
 	background-color: ${palette('--video-background')};
 	${!isCinemagraph && `z-index: ${getZIndex('video-container')}`};
+
+	/**
+	 * If the video and its containing slot have different dimensions, the slot will use the aspect
+	 * ratio of the video on mobile, so that the video can take up the full width of the screen.
+	 *
+	 * From tablet breakpoints, the aspect ratio of the slot is maintained, for consistency with other content.
+	 * This will result in grey bars on either side of the video if the video is narrower than the slot.
+	 */
+	aspect-ratio: ${aspectRatio};
+	${from.tablet} {
+		${!isUndefined(containerAspectRatio) &&
+		`aspect-ratio: ${containerAspectRatio};`}
+	}
 `;
 
-const videoContainerStyles = (width: number, height: number) => css`
+const figureStyles = (aspectRatio: number) => css`
 	position: relative;
+	aspect-ratio: ${aspectRatio};
 	height: 100%;
 	max-height: 100vh;
 	max-height: 100svh;
 	max-width: 100%;
 	${from.tablet} {
-		max-width: ${(width / height) * 80}%;
+		/**
+		 * The value "80" is derived from the aspect ratio of the 5:4 slot.
+		 * When other slots are used for self-hosted videos, this will need to be adjusted.
+		 */
+		max-width: ${aspectRatio * 80}%;
 	}
 `;
 
@@ -113,6 +135,12 @@ type Props = {
 	width: number;
 	videoStyle: VideoPlayerFormat;
 	posterImage: string;
+	/**
+	 * The desired aspect ratio of the container of the video, which can differ from the
+	 * aspect ratio of the video itself. Only applied from the tablet breakpoint, as below this
+	 * breakpoint, the video always takes up the full width of the screen.
+	 */
+	containerAspectRatio?: number;
 	fallbackImage: CardPictureProps['mainImage'];
 	fallbackImageSize: CardPictureProps['imageSize'];
 	fallbackImageLoading: CardPictureProps['loading'];
@@ -132,6 +160,7 @@ export const SelfHostedVideo = ({
 	width: expectedWidth,
 	videoStyle,
 	posterImage,
+	containerAspectRatio,
 	fallbackImage,
 	fallbackImageSize,
 	fallbackImageLoading,
@@ -506,8 +535,6 @@ export const SelfHostedVideo = ({
 		setPreloadPartialData(isAutoplayAllowed === false || !!isInView);
 	}, [isAutoplayAllowed, isInView]);
 
-	if (renderingTarget !== 'Web') return null;
-
 	if (adapted) {
 		return FallbackImageComponent;
 	}
@@ -658,6 +685,8 @@ export const SelfHostedVideo = ({
 		}
 	};
 
+	const aspectRatio = width / height;
+
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
 
 	const optimisedPosterImage = showPosterImage
@@ -665,10 +694,16 @@ export const SelfHostedVideo = ({
 		: undefined;
 
 	return (
-		<div css={videoAndBackgroundStyles(isCinemagraph)}>
+		<div
+			css={videoContainerStyles(
+				isCinemagraph,
+				aspectRatio,
+				containerAspectRatio,
+			)}
+		>
 			<figure
 				ref={setNode}
-				css={videoContainerStyles(width, height)}
+				css={figureStyles(aspectRatio)}
 				className={`video-container ${videoStyle.toLocaleLowerCase()}`}
 				data-component="gu-video-loop"
 			>

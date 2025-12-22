@@ -35,14 +35,17 @@ type Props = {
 
 type IconProps = {
 	format: ArticleFormat;
+	isMainMedia?: boolean;
 };
 
-const captionStyle = css`
+const captionStyle = (isMainMedia: boolean) => css`
 	${textSans14};
 	line-height: 135%;
 	padding-top: 6px;
 	overflow-wrap: break-word;
-	color: ${palette('--caption-text')};
+	color: ${isMainMedia
+		? palette('--caption-main-media-text')
+		: palette('--caption-text')};
 `;
 
 const bottomMarginStyles = css`
@@ -167,8 +170,10 @@ const hideIconBelowLeftCol = css`
 const pictureRatio = (13 / 18) * 100;
 const videoRatio = (23 / 36) * 100;
 
-const iconStyle = css`
-	fill: ${palette('--caption-text')};
+const iconStyle = (isMainMedia?: boolean) => css`
+	fill: ${isMainMedia
+		? palette('--caption-main-media-text')
+		: palette('--caption-text')};
 	margin-right: ${space[1]}px;
 	display: inline-block;
 	position: relative;
@@ -246,11 +251,11 @@ const galleryStyles = css`
 	}
 `;
 
-const CameraIcon = ({ format }: IconProps) => {
+const CameraIcon = ({ format, isMainMedia }: IconProps) => {
 	return (
 		<span
 			css={[
-				iconStyle,
+				iconStyle(isMainMedia),
 				format.display === ArticleDisplay.Immersive &&
 					hideIconBelowLeftCol,
 			]}
@@ -260,11 +265,11 @@ const CameraIcon = ({ format }: IconProps) => {
 	);
 };
 
-const VideoIcon = ({ format }: IconProps) => {
+const VideoIcon = ({ format, isMainMedia }: IconProps) => {
 	return (
 		<span
 			css={[
-				iconStyle,
+				iconStyle(isMainMedia),
 				format.display === ArticleDisplay.Immersive &&
 					hideIconBelowLeftCol,
 				videoIconStyle,
@@ -303,11 +308,13 @@ export const Caption = ({
 	const defaultCaption = (
 		<figcaption
 			css={[
-				captionStyle,
+				captionStyle(isMainMedia),
 				shouldLimitWidth && limitedWidth,
 				isOverlaid ? overlaidStyles(format) : bottomMarginStyles,
 				isMainMedia &&
-					(isBlog || mediaType === 'YoutubeVideo') &&
+					(isBlog ||
+						mediaType === 'YoutubeVideo' ||
+						mediaType === 'SelfHostedVideo') &&
 					tabletCaptionPadding,
 				padCaption && captionPadding,
 				isImmersive && immersivePadding,
@@ -315,10 +322,10 @@ export const Caption = ({
 			]}
 			data-spacefinder-role="inline"
 		>
-			{mediaType === 'YoutubeVideo' ? (
-				<VideoIcon format={format} />
+			{mediaType === 'YoutubeVideo' || mediaType === 'SelfHostedVideo' ? (
+				<VideoIcon format={format} isMainMedia={isMainMedia} />
 			) : (
-				<CameraIcon format={format} />
+				<CameraIcon format={format} isMainMedia={isMainMedia} />
 			)}
 			{!!captionText && (
 				<span
@@ -350,9 +357,7 @@ export const Caption = ({
 							 */
 							line-height: 1.15;
 							color: ${isMainMedia
-								? palette(
-										'--caption-photo-essay-main-media-text',
-								  )
+								? palette('--caption-main-media-text')
 								: palette('--caption-text')};
 							width: 100%;
 							margin-top: ${space[3]}px;
@@ -363,9 +368,7 @@ export const Caption = ({
 								padding-top: ${space[2]}px;
 								border-top: 1px solid
 									${isMainMedia
-										? palette(
-												'--caption-photo-essay-main-media-text',
-										  )
+										? palette('--caption-main-media-text')
 										: palette('--caption-text')};
 							}
 						`,

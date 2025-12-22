@@ -15,12 +15,14 @@ import {
 import { handleAppsAssets } from './handler.assets.apps';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import { handleFront, handleTagPage } from './handler.front.web';
+import { handleHostedContent } from './handler.hostedContent.web';
 import {
 	handleCricketMatchPage,
 	handleFootballMatchListPage,
 	handleFootballMatchPage,
 	handleFootballTablesPage,
 } from './handler.sportDataPage.web';
+import { getABTestsFromQueryParams } from './lib/get-abtests-from-query-params';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 
 /** article URLs contain a part that looks like “2022/nov/25” */
@@ -90,6 +92,7 @@ const renderer = Router();
 // populates req.body with the content data from a production
 // URL if req.params.url is present
 renderer.use(getContentFromURLMiddleware);
+renderer.use(getABTestsFromQueryParams);
 renderer.get('/Article/*url', handleArticle);
 renderer.get('/Interactive/*url', handleInteractive);
 renderer.get('/Blocks/*url', handleBlocks);
@@ -104,6 +107,8 @@ renderer.get('/FootballMatchListPage/*url', handleFootballMatchListPage);
 renderer.get('/FootballTablesPage/*url', handleFootballTablesPage);
 renderer.get('/CricketMatchPage/*url', handleCricketMatchPage);
 renderer.get('/FootballMatchSummaryPage/*url', handleFootballMatchPage);
+renderer.get('/HostedContent/*url', handleHostedContent);
+
 // POST routes for running frontend locally
 renderer.post('/Article', handleArticle);
 renderer.post('/Interactive', handleInteractive);
@@ -119,6 +124,7 @@ renderer.post('/FootballMatchListPage', handleFootballMatchListPage);
 renderer.post('/FootballTablesPage', handleFootballTablesPage);
 renderer.post('/CricketMatchPage', handleCricketMatchPage);
 renderer.post('/FootballMatchSummaryPage', handleFootballMatchPage);
+renderer.post('/HostedContent', handleHostedContent);
 
 renderer.get('/assets/rendered-items-assets', handleAppsAssets);
 

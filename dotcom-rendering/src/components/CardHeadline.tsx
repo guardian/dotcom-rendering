@@ -57,8 +57,6 @@ type Props = {
 	kickerColour?: string;
 	quoteColour?: string;
 	kickerImage?: PodcastSeriesImage;
-	/** Feature flag for the labs redesign work */
-	showLabsRedesign?: boolean;
 };
 
 const sublinkStyles = css`
@@ -180,15 +178,9 @@ const getFontSize = (sizes: ResponsiveFontSize, family: FontFamily) => {
 	`;
 };
 
-const getFonts = (
-	format: ArticleFormat,
-	fontSizes: ResponsiveFontSize,
-	showLabsRedesign: boolean,
-) => {
+const getFonts = (format: ArticleFormat, fontSizes: ResponsiveFontSize) => {
 	if (format.theme === ArticleSpecial.Labs) {
-		return showLabsRedesign
-			? getFontSize(fontSizes, FontFamily.TextSansBold)
-			: getFontSize(fontSizes, FontFamily.TextSans);
+		return getFontSize(fontSizes, FontFamily.TextSansBold);
 	}
 
 	return getFontSize(fontSizes, FontFamily.HeadlineMedium);
@@ -228,12 +220,11 @@ export const CardHeadline = ({
 	kickerColour = palette('--card-kicker-text'),
 	quoteColour = palette('--card-quote-icon'),
 	kickerImage,
-	showLabsRedesign = false,
 }: Props) => {
 	// The link is only applied directly to the headline if it is a sublink
 	const isSublink = !!linkTo;
 
-	const fontStyles = getFonts(format, fontSizes, showLabsRedesign);
+	const fontStyles = getFonts(format, fontSizes);
 
 	return (
 		<WithLink linkTo={linkTo}>

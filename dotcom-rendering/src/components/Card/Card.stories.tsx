@@ -16,7 +16,6 @@ import type {
 import type { MainMedia } from '../../types/mainMedia';
 import { ContainerOverrides } from '../ContainerOverrides';
 import { FrontSection } from '../FrontSection';
-import { LabsSection } from '../LabsSection';
 import { Section } from '../Section';
 import type { Props as CardProps } from './Card';
 import { Card } from './Card';
@@ -60,7 +59,7 @@ const aBasicLink = {
 	},
 };
 
-const mainVideo: MainMedia = {
+const mainYoutubeVideo: MainMedia = {
 	type: 'YoutubeVideo',
 	id: '1234-abcdef-09876-xyz',
 	videoId: '8M_yH-e9cq8',
@@ -71,6 +70,22 @@ const mainVideo: MainMedia = {
 	width: 480,
 	height: 288,
 	origin: 'The Guardian',
+};
+
+const mainSelfHostedVideo: MainMedia = {
+	type: 'SelfHostedVideo',
+	videoStyle: 'Loop',
+	atomId: '123',
+	sources: [
+		{
+			src: 'https://uploads.guim.co.uk/2024/10/01/241001HeleneLoop_2.mp4',
+			mimeType: 'video/mp4',
+		},
+	],
+	height: 1080,
+	width: 1920,
+	image: `https://i.guim.co.uk/img/media/2eb01d138eb8fba6e59ce7589a60e3ff984f6a7a/0_0_1920_1080/1920.jpg?width=1200&quality=45&dpr=2&s=none`,
+	duration: 100,
 };
 
 const mainAudio: MainMedia = {
@@ -297,56 +312,98 @@ export const WithExternalLink = () => {
 
 export const WithMediaType = () => {
 	return (
-		<CardGroup>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Video,
-						theme: Pillar.Sport,
-					}}
-					mainMedia={{ ...mainVideo, duration: 30 }}
-					headlineText="Video"
-				/>
-			</CardWrapper>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Video,
-						theme: Pillar.Sport,
-					}}
-					mainMedia={{ ...mainVideo, duration: 0 }}
-					headlineText="Video without duration"
-				/>
-			</CardWrapper>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Audio,
-						theme: Pillar.Sport,
-					}}
-					mainMedia={mainAudio}
-					headlineText="Audio"
-				/>
-			</CardWrapper>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Gallery,
-						theme: Pillar.Sport,
-					}}
-					mainMedia={mainGallery}
-					headlineText="Gallery"
-				/>
-			</CardWrapper>
-		</CardGroup>
+		<>
+			<CardGroup>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Video,
+							theme: Pillar.Sport,
+						}}
+						mainMedia={{ ...mainYoutubeVideo, duration: 30 }}
+						headlineText="Video"
+					/>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Video,
+							theme: Pillar.Sport,
+						}}
+						mainMedia={{ ...mainYoutubeVideo, duration: 0 }}
+						headlineText="Video without duration"
+					/>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Video,
+							theme: Pillar.Sport,
+						}}
+						mainMedia={{ ...mainSelfHostedVideo }}
+						headlineText="Video with self-hosted video main media"
+					/>
+				</CardWrapper>
+			</CardGroup>
+			<CardGroup>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Audio,
+							theme: Pillar.Sport,
+						}}
+						mainMedia={mainAudio}
+						headlineText="Audio"
+					/>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Audio,
+							theme: Pillar.Sport,
+						}}
+						mainMedia={{ ...mainSelfHostedVideo }}
+						headlineText="Audio with self-hosted video main media"
+					/>
+				</CardWrapper>
+			</CardGroup>
+			<CardGroup>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Gallery,
+							theme: Pillar.Sport,
+						}}
+						mainMedia={mainGallery}
+						headlineText="Gallery"
+					/>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Gallery,
+							theme: Pillar.Sport,
+						}}
+						mainMedia={{ ...mainSelfHostedVideo }}
+						headlineText="Gallery with self-hosted video main media"
+					/>
+				</CardWrapper>
+			</CardGroup>
+		</>
 	);
 };
 
@@ -361,7 +418,7 @@ export const WithMediaTypeAndSublinks = () => {
 						design: ArticleDesign.Video,
 						theme: Pillar.Sport,
 					}}
-					mainMedia={{ ...mainVideo, duration: 30 }}
+					mainMedia={{ ...mainYoutubeVideo, duration: 30 }}
 					headlineText="Video"
 					supportingContent={twoSublinks}
 				/>
@@ -374,7 +431,7 @@ export const WithMediaTypeAndSublinks = () => {
 						design: ArticleDesign.Video,
 						theme: Pillar.Sport,
 					}}
-					mainMedia={{ ...mainVideo, duration: 0 }}
+					mainMedia={{ ...mainYoutubeVideo, duration: 0 }}
 					headlineText="Video without duration"
 					supportingContent={twoSublinks}
 				/>
@@ -420,7 +477,7 @@ export const WithMediaTypeSpecialReportAlt = () => {
 						design: ArticleDesign.Video,
 						theme: ArticleSpecial.SpecialReportAlt,
 					}}
-					mainMedia={{ ...mainVideo, duration: 30 }}
+					mainMedia={{ ...mainYoutubeVideo, duration: 30 }}
 					headlineText="Video"
 				/>
 			</CardWrapper>
@@ -1049,7 +1106,7 @@ export const WhenOpinionWithImageAtBottom = () => {
 	);
 };
 
-export const WhenVideoWithPlayButton = () => {
+export const WhenYoutubeVideoWithPlayButton = () => {
 	return (
 		<Section title="Play icons" padContent={false} centralBorder="partial">
 			<UL direction="row" padBottom={true}>
@@ -1064,7 +1121,7 @@ export const WhenVideoWithPlayButton = () => {
 						mediaPositionOnDesktop="top"
 						mediaSize="jumbo"
 						mediaPositionOnMobile="top"
-						mainMedia={mainVideo}
+						mainMedia={mainYoutubeVideo}
 					/>
 				</LI>
 			</UL>
@@ -1080,7 +1137,7 @@ export const WhenVideoWithPlayButton = () => {
 						mediaPositionOnDesktop="right"
 						mediaSize="large"
 						mediaPositionOnMobile="top"
-						mainMedia={mainVideo}
+						mainMedia={mainYoutubeVideo}
 					/>
 				</LI>
 				<LI percentage={'25%'} padSides={true} showDivider={true}>
@@ -1092,7 +1149,7 @@ export const WhenVideoWithPlayButton = () => {
 							theme: Pillar.News,
 						}}
 						mediaPositionOnDesktop="top"
-						mainMedia={mainVideo}
+						mainMedia={mainYoutubeVideo}
 						canPlayInline={false}
 					/>
 				</LI>
@@ -1109,7 +1166,7 @@ export const WhenVideoWithPlayButton = () => {
 						mediaPositionOnDesktop="top"
 						mediaSize="medium"
 						mediaPositionOnMobile="bottom"
-						mainMedia={mainVideo}
+						mainMedia={mainYoutubeVideo}
 					/>
 				</LI>
 				<LI percentage="50%">
@@ -1123,7 +1180,7 @@ export const WhenVideoWithPlayButton = () => {
 									theme: Pillar.News,
 								}}
 								mediaPositionOnDesktop="left"
-								mainMedia={mainVideo}
+								mainMedia={mainYoutubeVideo}
 								canPlayInline={false}
 							/>
 						</LI>
@@ -1136,7 +1193,7 @@ export const WhenVideoWithPlayButton = () => {
 									theme: Pillar.News,
 								}}
 								mediaPositionOnDesktop="right"
-								mainMedia={mainVideo}
+								mainMedia={mainYoutubeVideo}
 								canPlayInline={false}
 							/>
 						</LI>
@@ -1150,7 +1207,7 @@ export const WhenVideoWithPlayButton = () => {
 									theme: Pillar.News,
 								}}
 								mediaPositionOnDesktop="right"
-								mainMedia={mainVideo}
+								mainMedia={mainYoutubeVideo}
 								canPlayInline={false}
 							/>
 						</LI>
@@ -1170,7 +1227,7 @@ export const WhenVideoWithPlayButton = () => {
 						mediaPositionOnDesktop="right"
 						mediaSize="large"
 						mediaPositionOnMobile="top"
-						mainMedia={mainVideo}
+						mainMedia={mainYoutubeVideo}
 					/>
 				</LI>
 				<LI percentage={'33.333%'} padSides={true} showDivider={true}>
@@ -1184,7 +1241,7 @@ export const WhenVideoWithPlayButton = () => {
 						mediaPositionOnDesktop="top"
 						mediaPositionOnMobile="left"
 						mediaSize="medium"
-						mainMedia={mainVideo}
+						mainMedia={mainYoutubeVideo}
 					/>
 				</LI>
 			</UL>
@@ -1244,34 +1301,34 @@ const containerPalettes = [
 	'Branded',
 ] as const satisfies readonly DCRContainerPalette[];
 
-export const WithBranding = () => {
-	const branding = {
-		brandingType: {
-			name: 'sponsored',
+const branding = {
+	brandingType: {
+		name: 'sponsored',
+	},
+	sponsorName: 'theguardian.org',
+	logo: {
+		src: 'https://static.theguardian.com/commercial/sponsor/22/Feb/2024/17ea91fc-659b-4c51-8410-9907241c1710-Guardian.orglogos-for badge.png',
+		dimensions: {
+			width: 280,
+			height: 180,
 		},
-		sponsorName: 'theguardian.org',
-		logo: {
-			src: 'https://static.theguardian.com/commercial/sponsor/22/Feb/2024/17ea91fc-659b-4c51-8410-9907241c1710-Guardian.orglogos-for badge.png',
-			dimensions: {
-				width: 280,
-				height: 180,
-			},
-			link: 'https://theguardian.org/',
-			label: 'Supported by',
+		link: 'https://theguardian.org/',
+		label: 'Supported by',
+	},
+	logoForDarkBackground: {
+		src: 'https://static.theguardian.com/commercial/sponsor/22/Feb/2024/21f5a3a5-30e7-4db7-a09f-031af569454d-guardian.org new logo - white version (3).png',
+		dimensions: {
+			width: 280,
+			height: 180,
 		},
-		logoForDarkBackground: {
-			src: 'https://static.theguardian.com/commercial/sponsor/22/Feb/2024/21f5a3a5-30e7-4db7-a09f-031af569454d-guardian.org new logo - white version (3).png',
-			dimensions: {
-				width: 280,
-				height: 180,
-			},
-			link: 'https://theguardian.org/',
-			label: 'Supported by',
-		},
-		aboutThisLink:
-			'https://www.theguardian.com/environment/2023/jan/06/about-animals-farmed-investigating-modern-farming-around-the-world',
-	} satisfies Branding;
+		link: 'https://theguardian.org/',
+		label: 'Supported by',
+	},
+	aboutThisLink:
+		'https://www.theguardian.com/environment/2023/jan/06/about-animals-farmed-investigating-modern-farming-around-the-world',
+} satisfies Branding;
 
+export const WithBranding = () => {
 	return [undefined, ...containerPalettes].map((containerPalette) => (
 		<ContainerOverrides
 			key={containerPalette}
@@ -1279,7 +1336,7 @@ export const WithBranding = () => {
 		>
 			<Section title={containerPalette ?? 'Standard'}>
 				<UL direction="row" padBottom={true}>
-					<LI percentage={'25%'} padSides={true}>
+					<LI percentage={'33.333%'} padSides={true}>
 						<Card
 							{...basicCardProps}
 							format={{
@@ -1297,7 +1354,7 @@ export const WithBranding = () => {
 							branding={branding}
 						/>
 					</LI>
-					<LI percentage={'25%'} padSides={true}>
+					<LI percentage={'33.333%'} padSides={true}>
 						<Card
 							{...basicCardProps}
 							format={{
@@ -1316,7 +1373,7 @@ export const WithBranding = () => {
 							branding={branding}
 						/>
 					</LI>
-					<LI percentage={'25%'} padSides={true}>
+					<LI percentage={'33.333%'} padSides={true}>
 						<Card
 							{...basicCardProps}
 							format={{
@@ -1332,25 +1389,6 @@ export const WithBranding = () => {
 							mediaSize="small"
 							containerPalette={containerPalette}
 							branding={branding}
-						/>
-					</LI>
-					<LI percentage={'25%'} padSides={true}>
-						<Card
-							{...basicCardProps}
-							format={{
-								display: ArticleDisplay.Standard,
-								design: ArticleDesign.Standard,
-								theme: ArticleSpecial.Labs,
-							}}
-							headlineText="Redesigned Labs card"
-							kickerText="Kicker"
-							trailText=""
-							mediaPositionOnDesktop="top"
-							mediaPositionOnMobile="left"
-							mediaSize="small"
-							containerPalette={containerPalette}
-							branding={branding}
-							showLabsRedesign={true}
 						/>
 					</LI>
 				</UL>
@@ -1387,6 +1425,7 @@ export const WithSpecialPaletteVariations = () => {
 					containerPalette={containerPalette}
 					discussionId="/p/d8ex5"
 					discussionApiUrl="https://discussion.theguardian.com/discussion-api"
+					branding={branding}
 				/>
 			</LI>
 			<LI percentage={'33.333%'} padSides={true} showDivider={true}>
@@ -1413,48 +1452,36 @@ export const WithSpecialPaletteVariations = () => {
 					mediaSize="medium"
 					mainMedia={mainAudio}
 					containerPalette={containerPalette}
+					branding={branding}
 				/>
 			</LI>
 		</UL>
 	);
 	return (
 		<>
-			{containerPalettes.map((containerPalette) =>
-				containerPalette === 'Branded' ? (
-					<LabsSection
-						title={containerPalette}
-						discussionApiUrl=""
-						editionId={'UK'}
-						key={containerPalette}
-						ajaxUrl=""
-						collectionId=""
-						ophanComponentLink=""
-						ophanComponentName=""
-						pageId=""
-						sectionId=""
-						badge={{
-							imageSrc:
-								'https://static.theguardian.com/commercial/sponsor/22/Feb/2024/17ea91fc-659b-4c51-8410-9907241c1710-Guardian.orglogos-for%20badge.png',
-							href: 'https://theguardian.org',
-						}}
-					>
-						<Cards
-							isLabs={true}
-							containerPalette={containerPalette}
-						/>
-					</LabsSection>
-				) : (
-					<FrontSection
-						title={containerPalette}
-						discussionApiUrl=""
-						editionId={'UK'}
-						containerPalette={containerPalette}
-						key={containerPalette}
-					>
-						<Cards containerPalette={containerPalette} />
-					</FrontSection>
-				),
-			)}
+			{containerPalettes.map((containerPalette) => (
+				<FrontSection
+					title={containerPalette}
+					discussionApiUrl=""
+					editionId={'UK'}
+					containerPalette={containerPalette}
+					key={containerPalette}
+					isLabs={containerPalette === 'Branded'}
+					collectionBranding={
+						containerPalette === 'Branded'
+							? {
+									kind: 'paid-content',
+									branding,
+									isContainerBranding: true,
+									hasMultipleBranding: false,
+									isFrontBranding: false,
+							  }
+							: undefined
+					}
+				>
+					<Cards containerPalette={containerPalette} />
+				</FrontSection>
+			))}
 		</>
 	);
 };
@@ -1527,42 +1554,29 @@ export const DynamoWithSpecialPaletteVariations = () => {
 
 	return (
 		<>
-			{containerPalettes.map((containerPalette) =>
-				containerPalette === 'Branded' ? (
-					<LabsSection
-						title={containerPalette}
-						discussionApiUrl=""
-						editionId={'UK'}
-						key={containerPalette}
-						ajaxUrl=""
-						collectionId=""
-						ophanComponentLink=""
-						ophanComponentName=""
-						pageId=""
-						sectionId=""
-						badge={{
-							imageSrc:
-								'https://static.theguardian.com/commercial/sponsor/22/Feb/2024/17ea91fc-659b-4c51-8410-9907241c1710-Guardian.orglogos-for%20badge.png',
-							href: 'https://theguardian.org',
-						}}
-					>
-						<DynamoCard
-							isLabs={true}
-							containerPalette={containerPalette}
-						/>
-					</LabsSection>
-				) : (
-					<FrontSection
-						title={containerPalette}
-						discussionApiUrl=""
-						editionId={'UK'}
-						containerPalette={containerPalette}
-						key={containerPalette}
-					>
-						<DynamoCard containerPalette={containerPalette} />
-					</FrontSection>
-				),
-			)}
+			{containerPalettes.map((containerPalette) => (
+				<FrontSection
+					title={containerPalette}
+					discussionApiUrl=""
+					editionId={'UK'}
+					containerPalette={containerPalette}
+					key={containerPalette}
+					isLabs={containerPalette === 'Branded'}
+					collectionBranding={
+						containerPalette === 'Branded'
+							? {
+									kind: 'paid-content',
+									branding,
+									isContainerBranding: true,
+									hasMultipleBranding: false,
+									isFrontBranding: false,
+							  }
+							: undefined
+					}
+				>
+					<DynamoCard containerPalette={containerPalette} />
+				</FrontSection>
+			))}
 		</>
 	);
 };

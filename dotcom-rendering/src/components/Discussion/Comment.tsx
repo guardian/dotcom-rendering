@@ -342,7 +342,7 @@ export const Comment = ({
 	const pick = async (staffUser: Staff) => {
 		setPickError('');
 		const response = await staffUser.onPick(comment.id);
-		if (response.kind === 'error') {
+		if (!response.ok) {
 			setPickError(response.error);
 		} else {
 			setIsHighlighted(response.value);
@@ -352,7 +352,7 @@ export const Comment = ({
 	const unPick = async (staffUser: Staff) => {
 		setPickError('');
 		const response = await staffUser.onUnpick(comment.id);
-		if (response.kind === 'error') {
+		if (!response.ok) {
 			setPickError(response.error);
 		} else {
 			setIsHighlighted(response.value);

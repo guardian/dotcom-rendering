@@ -360,7 +360,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 				{footballMatchUrl ? (
 					<Section
 						showTopBorder={false}
-						backgroundColour={'red'}
+						backgroundColour={themePalette(
+							'--match-nav-background',
+						)}
 						borderColour={themePalette('--headline-border')}
 						leftContent={
 							<ArticleTitle
@@ -612,6 +614,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									}
 									onFirstPage={pagination.currentPage === 1}
 									webURL={article.webURL}
+									renderingTarget={renderingTarget}
 									// We default to string here because the property is optional but we
 									// know it will exist for all blogs
 									mostRecentBlockId={
@@ -845,6 +848,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 													article.shouldHideAds
 												}
 												serverTime={serverTime}
+												idApiUrl={
+													article.config.idApiUrl
+												}
 											/>
 											{pagination.totalPages > 1 && (
 												<Pagination
