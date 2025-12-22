@@ -312,7 +312,7 @@ export const ScrollableCarousel = ({
 	const showNavigation =
 		kind === CarouselKind.VisibleSlides
 			? carouselLength > visibleCarouselSlidesOnTablet
-			: false;
+			: true;
 
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
