@@ -19,6 +19,7 @@ type CarouselNavigationProps = {
 	dataLinkNamePreviousButton: string;
 	/** Unique identifier for the carousel navigation container. */
 	sectionId: string;
+	showFromTabletOnly?: boolean;
 };
 
 const themeButton: Partial<ThemeButton> = {
@@ -33,13 +34,22 @@ const themeButtonDisabled: Partial<ThemeButton> = {
 	backgroundTertiaryHover: 'transparent',
 };
 
-const buttonStyles = css`
+const showFromTablet = css`
 	display: none;
 	${from.tablet} {
 		display: flex;
 		gap: ${space[1]}px;
 		margin-left: auto;
 	}
+`;
+
+/**
+ * In the Articles we will control the visibility in the portal node
+ */
+const showAlways = css`
+	display: flex;
+	gap: ${space[1]}px;
+	margin-left: auto;
 `;
 
 /**
@@ -68,6 +78,7 @@ export const CarouselNavigationButtons = ({
 	dataLinkNamePreviousButton,
 	dataLinkNameNextButton,
 	sectionId,
+	showFromTabletOnly = true,
 }: CarouselNavigationProps) => {
 	const [portalNode, setPortalNode] = useState<HTMLElement | null>(null);
 	useEffect(() => {
@@ -88,7 +99,7 @@ export const CarouselNavigationButtons = ({
 		<div
 			aria-controls="carousel"
 			aria-label="carousel arrows"
-			css={buttonStyles}
+			css={showFromTabletOnly ? showFromTablet : showAlways}
 		>
 			<Button
 				hideLabel={true}

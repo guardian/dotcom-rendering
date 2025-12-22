@@ -2,9 +2,10 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { Breakpoint } from '@guardian/source/foundations';
 import { from, space, until } from '@guardian/source/foundations';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { palette } from '../palette';
+import { CarouselCount } from './CarouselCount';
 import { CarouselNavigationButtons } from './CarouselNavigationButtons';
 
 type GapSize = 'small' | 'medium' | 'large' | 'none';
@@ -308,6 +309,7 @@ export const ScrollableCarousel = ({
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
 	const [nextButtonEnabled, setNextButtonEnabled] = useState(true);
+	const [cardCount, setCardCount] = useState(1);
 
 	const showNavigation =
 		kind === CarouselKind.VisibleSlides
@@ -345,10 +347,28 @@ export const ScrollableCarousel = ({
 		const maxScrollLeft =
 			carouselElement.scrollWidth - carouselElement.clientWidth;
 		const cardWidth = carouselElement.querySelector('li')?.offsetWidth ?? 0;
-
 		setPreviousButtonEnabled(scrollLeft > cardWidth / 2);
 		setNextButtonEnabled(scrollLeft < maxScrollLeft - cardWidth / 2);
 	};
+
+	/**
+	 * Update the count of the first card / how far scrolled the carousel is
+	 *
+	 * This function checks how far along the carousel is scrolled and then
+	 * updates the state of cardCount. we use the half of a card because at
+	 * this scroll amount the carousel will snap to that card.
+	 */
+	const updateCardCountOnScroll = useCallback(() => {
+		const carouselElement = carouselRef.current;
+		if (!carouselElement) return;
+		const cardWidth = carouselElement.querySelector('li')?.offsetWidth ?? 0;
+		const count = Math.ceil(
+			(carouselElement.scrollLeft + cardWidth / 2) / cardWidth,
+		);
+		if (count !== cardCount) {
+			setCardCount(count);
+		}
+	}, [cardCount]);
 
 	/**
 	 * Throttle scroll events to optimise performance. As we're only using this
@@ -431,7 +451,6 @@ export const ScrollableCarousel = ({
 			'scroll',
 			throttleEvent(updateButtonVisibilityOnScroll),
 		);
-
 		return () => {
 			carouselElement.removeEventListener(
 				'scroll',
@@ -439,6 +458,20 @@ export const ScrollableCarousel = ({
 			);
 		};
 	}, []);
+
+	useEffect(() => {
+		const carouselElement = carouselRef.current;
+		if (!carouselElement) return;
+		if (!isArticle) return;
+
+		carouselElement.addEventListener('scroll', updateCardCountOnScroll);
+		return () => {
+			carouselElement.removeEventListener(
+				'scroll',
+				updateCardCountOnScroll,
+			);
+		};
+	}, [isArticle, updateCardCountOnScroll]);
 
 	return (
 		<div css={[baseContainerStyles, !isArticle && frontContainerStyles]}>
@@ -470,6 +503,7 @@ export const ScrollableCarousel = ({
 
 			{showNavigation && (
 				<CarouselNavigationButtons
+					showFromTabletOnly={!isArticle}
 					previousButtonEnabled={previousButtonEnabled}
 					nextButtonEnabled={nextButtonEnabled}
 					onClickPreviousButton={() => scrollTo('left')}
@@ -483,6 +517,13 @@ export const ScrollableCarousel = ({
 						'carousel',
 						'next-button',
 					)}
+				/>
+			)}
+			{isArticle && (
+				<CarouselCount
+					sectionId={sectionId ?? ''}
+					count={cardCount}
+					total={carouselLength}
 				/>
 			)}
 		</div>
