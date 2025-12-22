@@ -42,10 +42,11 @@ export const FootballMatchInfo = ({ match, table }: Props) => {
 						match={match}
 						homeValue={match.homeTeam.possession}
 						awayValue={match.awayTeam.possession}
+						isPercentage={true}
 					/>
 					{/* Add Goal Attempts here */}
 					<StatsContainer
-						label="Corrners"
+						label="Corners"
 						match={match}
 						homeValue={match.homeTeam.corners}
 						awayValue={match.awayTeam.corners}
@@ -86,11 +87,13 @@ const StatsContainer = ({
 	match,
 	homeValue,
 	awayValue,
+	isPercentage = false,
 }: {
 	label: string;
 	match: FootballMatchStats;
 	homeValue: number;
 	awayValue: number;
+	isPercentage?: boolean;
 }) => (
 	<div
 		css={css`
@@ -100,16 +103,17 @@ const StatsContainer = ({
 	>
 		<FootballMatchStat
 			label={label}
-			home={{
-				teamName: match.homeTeam.name,
-				teamColour: match.homeTeam.statsColour,
-				value: homeValue,
+			homeTeam={{
+				name: match.homeTeam.name,
+				colour: match.homeTeam.statsColour,
 			}}
-			away={{
-				teamName: match.awayTeam.name,
-				teamColour: match.awayTeam.statsColour,
-				value: awayValue,
+			awayTeam={{
+				name: match.awayTeam.name,
+				colour: match.awayTeam.statsColour,
 			}}
+			homeValue={homeValue}
+			awayValue={awayValue}
+			isPercentage={isPercentage}
 		/>
 	</div>
 );
