@@ -406,9 +406,13 @@ export const StickyBottomBanner = ({
 		return <SelectedBanner />;
 	}
 
-	document.dispatchEvent(
-		new CustomEvent('banner:none', { detail: { readerRevenue: false } }),
-	);
+	useEffect(() => {
+		document.dispatchEvent(
+			new CustomEvent('banner:none', {
+				detail: { readerRevenue: false },
+			}),
+		);
+	});
 
 	return null;
 };
