@@ -1001,6 +1001,7 @@ export const Card = ({
 									width={media.mainMedia.width}
 									videoStyle={media.mainMedia.videoStyle}
 									posterImage={media.mainMedia.image ?? ''}
+									containerAspectRatio={5 / 4}
 									fallbackImage={media.mainMedia.image ?? ''}
 									fallbackImageSize={mediaSize}
 									fallbackImageLoading={imageLoading}
@@ -1258,6 +1259,9 @@ export const Card = ({
 							<>
 								{showPill ? (
 									<>
+										{!!branding && isOnwardContent && (
+											<LabsBranding />
+										)}
 										<MediaOrNewsletterPill />
 									</>
 								) : (

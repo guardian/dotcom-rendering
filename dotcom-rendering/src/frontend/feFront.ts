@@ -112,6 +112,10 @@ export interface FEMediaAsset {
 	platform: string;
 	mimeType?: string;
 	assetType: string;
+	dimensions?: {
+		width: number;
+		height: number;
+	};
 }
 
 /** @see https://github.com/guardian/frontend/blob/0bf69f55a/common/app/model/content/Atom.scala#L158-L169 */
@@ -128,10 +132,6 @@ export interface FEMediaAtom {
 	activeVersion?: number;
 	videoPlayerFormat?: 'Default' | 'Loop' | 'Cinemagraph';
 	// channelId?: string; // currently unused
-	dimensions?: {
-		width: number;
-		height: number;
-	};
 }
 
 export type FEFrontCard = {
