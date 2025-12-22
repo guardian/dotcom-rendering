@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette, space } from '@guardian/source/foundations';
+import { from, palette, space, textSans14 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { ProductBlockElement } from '../types/content';
 import { ProductCarouselCard } from './ProductCarouselCard';
@@ -14,6 +14,22 @@ const carouselHeader = css`
 	margin-bottom: 10px;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
+`;
+
+const navigation = css`
+	display: none;
+	${from.phablet} {
+		display: block;
+	}
+`;
+const count = css`
+	${textSans14};
+	color: ${palette.neutral[46]};
+	display: block;
+	${from.phablet} {
+		display: none;
+	}
 `;
 
 export const ScrollableProduct = ({
@@ -40,7 +56,11 @@ export const ScrollableProduct = ({
 				>
 					At a glance
 				</Subheading>
-				<div id={'at-a-glance-carousel-navigation'}></div>
+				<div
+					css={navigation}
+					id={'at-a-glance-carousel-navigation'}
+				></div>
+				<div css={count} id={'at-a-glance-carousel-count'}></div>
 			</div>
 			<ScrollableCarousel
 				isArticle={true}
