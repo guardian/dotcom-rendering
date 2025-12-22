@@ -6,7 +6,7 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { ScrollableProduct } from './ScrollableProduct.importable';
 
 const meta = {
-	title: 'Article Carousel/Scrollable Products',
+	title: 'Components/Scrollable Products',
 	component: ScrollableProduct,
 	parameters: {
 		chromatic: {
