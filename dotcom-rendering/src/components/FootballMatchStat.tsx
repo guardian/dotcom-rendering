@@ -240,14 +240,23 @@ const attemptCountCss = css`
 	}
 `;
 
+type GoalAttempt = {
+	offTarget: number;
+	onTarget: number;
+};
+
 type GoalAttemptProps = {
 	homeTeam: Team;
 	awayTeam: Team;
+	homeValues: GoalAttempt;
+	awayValues: GoalAttempt;
 };
 
 export const FootballMatchGoalAttempts = ({
 	homeTeam,
 	awayTeam,
+	homeValues,
+	awayValues,
 }: GoalAttemptProps) => {
 	return (
 		<div css={[containerCss, desktopPaddingCss, goalAttemptsLayoutCss]}>
@@ -263,10 +272,10 @@ export const FootballMatchGoalAttempts = ({
 				}}
 			>
 				Off target
-				<span css={attemptCountCss}>6</span>
+				<span css={attemptCountCss}>{homeValues.offTarget}</span>
 				<div css={onTargetCss}>
 					On target
-					<span css={attemptCountCss}>5</span>
+					<span css={attemptCountCss}>{homeValues.onTarget}</span>
 				</div>
 			</div>
 			<div
@@ -280,10 +289,10 @@ export const FootballMatchGoalAttempts = ({
 				}}
 			>
 				Off target
-				<span css={attemptCountCss}>6</span>
+				<span css={attemptCountCss}>{awayValues.offTarget}</span>
 				<div css={[onTargetCss, onTargetAwayCss]}>
 					On target
-					<span css={attemptCountCss}>2</span>
+					<span css={attemptCountCss}>{awayValues.onTarget}</span>
 				</div>
 			</div>
 		</div>

@@ -22,5 +22,13 @@ export const FootballMatchGoalAttempts = {
 			name: 'Arsenal',
 			colour: '#023474',
 		},
+		homeValues: {
+			offTarget: 6,
+			onTarget: 5,
+		},
+		awayValues: {
+			offTarget: 6,
+			onTarget: 2,
+		},
 	},
 } satisfies Story;
