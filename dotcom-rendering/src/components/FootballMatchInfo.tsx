@@ -4,7 +4,6 @@ import type {
 	FootballMatchTeamWithStats,
 } from '../footballMatchStats';
 import type { FootballTable as FootballTableData } from '../footballTables';
-import { grid } from '../grid';
 import { FootballMatchStat } from './FootballMatchStat';
 import { LeagueTable } from './LeagueTable';
 import { Lineups } from './Lineups';
@@ -13,6 +12,12 @@ type Props = {
 	match: FootballMatchStats;
 	table?: FootballTableData;
 };
+
+const layoutCss = css`
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+`;
 
 function teamHasStats({
 	shotsOffTarget,
@@ -34,86 +39,54 @@ export const FootballMatchInfo = ({ match, table }: Props) => {
 	const showLineups =
 		match.homeTeam.players.length > 0 && match.awayTeam.players.length > 0;
 	return (
-		<section aria-label={'match-info'}>
+		<section aria-label={'match-info'} css={layoutCss}>
 			{showStats && (
 				<>
-					<StatsContainer
+					<FootballMatchStat
 						label="Possession"
-						match={match}
+						homeTeam={{
+							name: match.homeTeam.name,
+							colour: match.homeTeam.statsColour,
+						}}
+						awayTeam={{
+							name: match.awayTeam.name,
+							colour: match.awayTeam.statsColour,
+						}}
 						homeValue={match.homeTeam.possession}
 						awayValue={match.awayTeam.possession}
 						isPercentage={true}
 					/>
 					{/* Add Goal Attempts here */}
-					<StatsContainer
+					<FootballMatchStat
 						label="Corners"
-						match={match}
+						homeTeam={{
+							name: match.homeTeam.name,
+							colour: match.homeTeam.statsColour,
+						}}
+						awayTeam={{
+							name: match.awayTeam.name,
+							colour: match.awayTeam.statsColour,
+						}}
 						homeValue={match.homeTeam.corners}
 						awayValue={match.awayTeam.corners}
 					/>
-					<StatsContainer
+					<FootballMatchStat
 						label="Fouls"
-						match={match}
+						homeTeam={{
+							name: match.homeTeam.name,
+							colour: match.homeTeam.statsColour,
+						}}
+						awayTeam={{
+							name: match.awayTeam.name,
+							colour: match.awayTeam.statsColour,
+						}}
 						homeValue={match.homeTeam.fouls}
 						awayValue={match.awayTeam.fouls}
 					/>
 				</>
 			)}
-
-			{showLineups && (
-				<div
-					css={css`
-						padding-bottom: 10px;
-					`}
-				>
-					<Lineups matchStats={match} />
-				</div>
-			)}
-			{table && (
-				<div
-					css={css`
-						padding-bottom: 10px;
-					`}
-				>
-					<LeagueTable table={table} />
-				</div>
-			)}
+			{showLineups && <Lineups matchStats={match} />}
+			{table && <LeagueTable table={table} />}
 		</section>
 	);
 };
-
-const StatsContainer = ({
-	label,
-	match,
-	homeValue,
-	awayValue,
-	isPercentage = false,
-}: {
-	label: string;
-	match: FootballMatchStats;
-	homeValue: number;
-	awayValue: number;
-	isPercentage?: boolean;
-}) => (
-	<div
-		css={css`
-			${grid.column.centre}
-			padding-bottom: 10px;
-		`}
-	>
-		<FootballMatchStat
-			label={label}
-			homeTeam={{
-				name: match.homeTeam.name,
-				colour: match.homeTeam.statsColour,
-			}}
-			awayTeam={{
-				name: match.awayTeam.name,
-				colour: match.awayTeam.statsColour,
-			}}
-			homeValue={homeValue}
-			awayValue={awayValue}
-			isPercentage={isPercentage}
-		/>
-	</div>
-);
