@@ -4,7 +4,10 @@ import type {
 	FootballMatchTeamWithStats,
 } from '../footballMatchStats';
 import type { FootballTable as FootballTableData } from '../footballTables';
-import { FootballMatchStat } from './FootballMatchStat';
+import {
+	FootballMatchGoalAttempts,
+	FootballMatchStat,
+} from './FootballMatchStat';
 import { LeagueTable } from './LeagueTable';
 import { Lineups } from './Lineups';
 
@@ -56,7 +59,24 @@ export const FootballMatchInfo = ({ match, table }: Props) => {
 						awayValue={match.awayTeam.possession}
 						isPercentage={true}
 					/>
-					{/* Add Goal Attempts here */}
+					<FootballMatchGoalAttempts
+						homeTeam={{
+							name: match.homeTeam.name,
+							colour: match.homeTeam.statsColour,
+						}}
+						awayTeam={{
+							name: match.awayTeam.name,
+							colour: match.awayTeam.statsColour,
+						}}
+						homeValues={{
+							onTarget: match.homeTeam.shotsOnTarget,
+							offTarget: match.homeTeam.shotsOffTarget,
+						}}
+						awayValues={{
+							onTarget: match.awayTeam.shotsOnTarget,
+							offTarget: match.awayTeam.shotsOffTarget,
+						}}
+					/>
 					<FootballMatchStat
 						label="Corners"
 						homeTeam={{
