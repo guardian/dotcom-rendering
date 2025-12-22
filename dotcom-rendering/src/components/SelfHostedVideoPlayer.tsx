@@ -113,6 +113,7 @@ type Props = {
 	handleLoadedMetadata: (event: SyntheticEvent) => void;
 	handleLoadedData: (event: SyntheticEvent) => void;
 	handleCanPlay: (event: SyntheticEvent) => void;
+	handlePlaying: (event: SyntheticEvent) => void;
 	handlePlayPauseClick: (event: SyntheticEvent) => void;
 	handleAudioClick: (event: SyntheticEvent) => void;
 	handleKeyDown: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
@@ -157,6 +158,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			handleLoadedMetadata,
 			handleLoadedData,
 			handleCanPlay,
+			handlePlaying,
 			handlePlayPauseClick,
 			handleAudioClick,
 			handleKeyDown,
@@ -219,6 +221,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					onLoadedData={handleLoadedData}
 					onCanPlay={handleCanPlay}
 					onCanPlayThrough={handleCanPlay}
+					onPlaying={handlePlaying}
 					onTimeUpdate={() => {
 						if (
 							ref &&
