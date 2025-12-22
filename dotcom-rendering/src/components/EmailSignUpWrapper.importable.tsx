@@ -26,7 +26,7 @@ interface EmailSignUpWrapperProps extends EmailSignUpProps {
 	/** You should only set this to true if the privacy message will be shown elsewhere on the page */
 	hidePrivacyMessage?: boolean;
 	/** Feature flag to enable hiding newsletter signup for already subscribed users */
-	hideNewsletterForSubscribers?: boolean;
+	hideNewsletterSignupComponentForSubscribers?: boolean;
 }
 
 /**
@@ -43,13 +43,13 @@ export const EmailSignUpWrapper = ({
 	index,
 	listId,
 	idApiUrl,
-	hideNewsletterForSubscribers = false,
+	hideNewsletterSignupComponentForSubscribers = false,
 	...emailSignUpProps
 }: EmailSignUpWrapperProps) => {
 	const isSubscribed = useNewsletterSubscription(
 		listId,
 		idApiUrl,
-		hideNewsletterForSubscribers,
+		hideNewsletterSignupComponentForSubscribers,
 	);
 
 	// Show placeholder while subscription status is being determined
