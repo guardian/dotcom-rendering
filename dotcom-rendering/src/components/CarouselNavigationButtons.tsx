@@ -7,7 +7,7 @@ import {
 	type ThemeButton,
 } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 import { palette } from '../palette';
 
 type CarouselNavigationProps = {
@@ -84,7 +84,7 @@ export const CarouselNavigationButtons = ({
 
 	if (!portalNode) return null;
 
-	return ReactDOM.createPortal(
+	return createPortal(
 		<div
 			aria-controls="carousel"
 			aria-label="carousel arrows"
@@ -101,6 +101,7 @@ export const CarouselNavigationButtons = ({
 				}
 				size="small"
 				disabled={!previousButtonEnabled}
+				data-testid="carousel-back-button"
 				aria-label="previous"
 				value="previous"
 				data-link-name={dataLinkNamePreviousButton}
@@ -109,6 +110,7 @@ export const CarouselNavigationButtons = ({
 			<Button
 				hideLabel={true}
 				iconSide="left"
+				data-testid="carousel-forward-button"
 				icon={<SvgChevronRightSingle />}
 				onClick={onClickNextButton}
 				priority="tertiary"
