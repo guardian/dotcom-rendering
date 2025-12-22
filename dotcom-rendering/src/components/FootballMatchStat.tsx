@@ -53,7 +53,7 @@ const labelCss = css`
 const numberCss = css`
 	${textSansBold20};
 	grid-area: home-stat;
-	color: var(--match-stat-team-colour);
+	color: ${palette('--football-match-stat-text')};
 `;
 
 const largeNumberCss = css`
@@ -115,7 +115,6 @@ export const FootballMatchStat = ({
 				<span css={labelCss}>{label}</span>
 				<span
 					css={[numberCss, largeNumbersOnDesktop && largeNumberCss]}
-					style={{ '--match-stat-team-colour': home.teamColour }}
 				>
 					<span
 						css={css`
@@ -132,7 +131,6 @@ export const FootballMatchStat = ({
 						awayStatCss,
 						largeNumbersOnDesktop && largeNumberCss,
 					]}
-					style={{ '--match-stat-team-colour': away.teamColour }}
 				>
 					<span
 						css={css`
