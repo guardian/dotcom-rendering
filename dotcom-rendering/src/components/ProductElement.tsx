@@ -4,7 +4,6 @@ import type { ReactNode } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { parseHtml } from '../lib/domUtils';
 import type { NestedArticleElement } from '../lib/renderElement';
-import { useBetaAB } from '../lib/useAB';
 import type { ProductBlockElement } from '../types/content';
 import { ProductCardInline } from './ProductCardInline';
 import { ProductCardLeftCol } from './ProductCardLeftCol';
@@ -40,22 +39,12 @@ export const ProductElement = ({
 	format: ArticleFormat;
 	shouldShowLeftColCard: boolean;
 }) => {
-	const abTests = useBetaAB();
-	const isInHoldBackTestVariant =
-		abTests?.isUserInTestGroup('thefilter-product-element', 'variant') ??
-		false;
-
 	const showContent =
 		product.displayType === 'InlineOnly' ||
 		product.displayType === 'InlineWithProductCard';
-	// In the hold back test variant, if the product element has a display type of ProductCardOnly,
-	// we should still render the product card. This is because there may not be any suitable
-	// nested content to render, which could result in some unintended display issues. For the
-	// InlineWithProductCard display type, we won't render the cards in the hold back test.
 	const showProductCard =
 		product.displayType === 'ProductCardOnly' ||
-		(!isInHoldBackTestVariant &&
-			product.displayType === 'InlineWithProductCard');
+		product.displayType === 'InlineWithProductCard';
 	return (
 		<>
 			{showContent && (
@@ -63,9 +52,7 @@ export const ProductElement = ({
 					product={product}
 					format={format}
 					ArticleElementComponent={ArticleElementComponent}
-					shouldShowLeftColCard={
-						shouldShowLeftColCard && !isInHoldBackTestVariant
-					}
+					shouldShowLeftColCard={shouldShowLeftColCard}
 				/>
 			)}
 			{showProductCard && (

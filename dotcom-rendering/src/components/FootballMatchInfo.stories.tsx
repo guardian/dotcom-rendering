@@ -1,18 +1,19 @@
 import { css } from '@emotion/react';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
+import { table } from '../../fixtures/manual/footballTable';
 import { matchStats } from '../../fixtures/manual/matchStats';
 import { grid } from '../grid';
 import { palette } from '../palette';
-import { Lineups as LineupsComponent } from './Lineups';
+import { FootballMatchInfo as FootballMatchInfoComponent } from './FootballMatchInfo';
 
 const meta = {
-	title: 'Components/Lineups',
-	component: LineupsComponent,
+	title: 'Components/Football Match Info',
+	component: FootballMatchInfoComponent,
 	parameters: {
 		chromatic: {
 			modes: {
-				'light leftCol': allModes['light leftCol'],
+				'vertical mobileMedium': allModes['vertical mobileMedium'],
 			},
 		},
 	},
@@ -29,6 +30,8 @@ const meta = {
 				<div
 					css={css`
 						${grid.column.centre}
+						padding-top: 10px;
+						padding-bottom: 10px;
 					`}
 				>
 					<Story />
@@ -36,14 +39,14 @@ const meta = {
 			</div>
 		),
 	],
-} satisfies Meta<typeof LineupsComponent>;
+} satisfies Meta<typeof FootballMatchInfoComponent>;
 
 export default meta;
-
 type Story = StoryObj<typeof meta>;
 
-export const LineupsStory = {
+export const FootballMatchInfo = {
 	args: {
-		matchStats,
+		match: matchStats,
+		table,
 	},
 } satisfies Story;

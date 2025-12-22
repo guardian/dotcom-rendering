@@ -15,8 +15,6 @@ type Props = {
 	imageLoading: 'lazy' | 'eager';
 	aspectRatio: AspectRatio;
 	sectionId: string;
-	/** Feature flag for the labs redesign work */
-	showLabsRedesign?: boolean;
 };
 
 /**
@@ -34,7 +32,6 @@ export const ScrollableMedium = ({
 	showAge,
 	aspectRatio,
 	sectionId,
-	showLabsRedesign,
 }: Props) => {
 	return (
 		<ScrollableCarousel
@@ -72,7 +69,6 @@ export const ScrollableMedium = ({
 							showTopBarDesktop={false}
 							showTopBarMobile={false}
 							canPlayInline={false}
-							showLabsRedesign={showLabsRedesign}
 						/>
 					</ScrollableCarousel.Item>
 				);

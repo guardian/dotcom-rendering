@@ -33,8 +33,6 @@ type Props = {
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
-	/** Feature flag for the labs redesign work */
-	showLabsRedesign?: boolean;
 	enableHls?: boolean;
 };
 
@@ -90,7 +88,6 @@ type ImmersiveCardLayoutProps = {
 	serverTime?: number;
 	imageLoading: Loading;
 	collectionId: number;
-	showLabsRedesign?: boolean;
 };
 
 /**
@@ -105,7 +102,6 @@ const ImmersiveCardLayout = ({
 	serverTime,
 	imageLoading,
 	collectionId,
-	showLabsRedesign,
 }: ImmersiveCardLayoutProps) => {
 	const isLoopingVideo =
 		card.mainMedia?.type === 'SelfHostedVideo' &&
@@ -144,7 +140,6 @@ const ImmersiveCardLayout = ({
 					supportingContent={card.supportingContent}
 					isImmersive={true}
 					showVideo={card.showVideo}
-					showLabsRedesign={showLabsRedesign}
 				/>
 			</LI>
 		</UL>
@@ -255,8 +250,6 @@ type SplashCardLayoutProps = {
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
-	/** Feature flag for the labs redesign work */
-	showLabsRedesign?: boolean;
 	enableHls?: boolean;
 };
 
@@ -270,7 +263,6 @@ const SplashCardLayout = ({
 	isLastRow,
 	containerLevel,
 	collectionId,
-	showLabsRedesign,
 	enableHls,
 }: SplashCardLayoutProps) => {
 	const card = cards[0];
@@ -285,7 +277,6 @@ const SplashCardLayout = ({
 				serverTime={serverTime}
 				imageLoading={imageLoading}
 				collectionId={collectionId}
-				showLabsRedesign={showLabsRedesign}
 			/>
 		);
 	}
@@ -356,7 +347,6 @@ const SplashCardLayout = ({
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 					subtitleSize={subtitleSize}
 					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
-					showLabsRedesign={showLabsRedesign}
 					enableHls={enableHls}
 				/>
 			</LI>
@@ -423,8 +413,6 @@ type FullWidthCardLayoutProps = {
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
-	/** Feature flag for the labs redesign work */
-	showLabsRedesign?: boolean;
 	enableHls?: boolean;
 };
 
@@ -439,7 +427,6 @@ const FullWidthCardLayout = ({
 	isLastRow,
 	containerLevel,
 	collectionId,
-	showLabsRedesign,
 	enableHls,
 }: FullWidthCardLayoutProps) => {
 	const card = cards[0];
@@ -467,7 +454,6 @@ const FullWidthCardLayout = ({
 				serverTime={serverTime}
 				imageLoading={imageLoading}
 				collectionId={collectionId}
-				showLabsRedesign={showLabsRedesign}
 			/>
 		);
 	}
@@ -515,7 +501,6 @@ const FullWidthCardLayout = ({
 					liveUpdatesPosition={liveUpdatesPosition}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
-					showLabsRedesign={showLabsRedesign}
 					subtitleSize={subtitleSize}
 					enableHls={enableHls}
 				/>
@@ -535,8 +520,6 @@ type HalfWidthCardLayoutProps = {
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
-	/** Feature flag for the labs redesign work */
-	showLabsRedesign?: boolean;
 	enableHls?: boolean;
 };
 
@@ -551,7 +534,6 @@ const HalfWidthCardLayout = ({
 	aspectRatio,
 	isLastRow,
 	containerLevel,
-	showLabsRedesign,
 	enableHls,
 }: HalfWidthCardLayoutProps) => {
 	if (cards.length === 0) return null;
@@ -607,7 +589,6 @@ const HalfWidthCardLayout = ({
 							trailText={undefined}
 							headlineSizes={undefined}
 							canPlayInline={false}
-							showLabsRedesign={showLabsRedesign}
 							enableHls={enableHls}
 						/>
 					</LI>
@@ -626,7 +607,6 @@ export const FlexibleGeneral = ({
 	aspectRatio,
 	containerLevel = 'Primary',
 	collectionId,
-	showLabsRedesign,
 	enableHls,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
@@ -656,7 +636,6 @@ export const FlexibleGeneral = ({
 					isLastRow={cards.length === 0}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
-					showLabsRedesign={showLabsRedesign}
 					enableHls={enableHls}
 				/>
 			)}
@@ -676,7 +655,6 @@ export const FlexibleGeneral = ({
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
 								collectionId={collectionId}
-								showLabsRedesign={showLabsRedesign}
 								enableHls={enableHls}
 							/>
 						);
@@ -697,7 +675,6 @@ export const FlexibleGeneral = ({
 								aspectRatio={aspectRatio}
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
-								showLabsRedesign={showLabsRedesign}
 								enableHls={enableHls}
 							/>
 						);

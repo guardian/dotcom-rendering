@@ -156,7 +156,6 @@ export const Labs = {
 			sponsorName: 'Guardian Org',
 			aboutThisLink: '#about',
 		},
-		showLabsRedesign: true,
 	},
 } satisfies Story;
 
@@ -292,7 +291,7 @@ export const YoutubeVideo = {
 			design: ArticleDesign.Video,
 		},
 		image: {
-			src: 'https://media.guim.co.uk/f2aedd24e5414073a653f68112e0ad070c6f4a2b/254_0_7493_4500/master/7493.jpg',
+			src: 'https://media.guim.co.uk/7b500cfe9afe4e211ad771c86e66297c9c22993b/0_61_4801_2880/master/4801.jpg',
 			altText: 'alt text',
 		},
 		mainMedia: {
@@ -336,6 +335,20 @@ export const YoutubeVideoMainMediaImmersive = {
 	args: {
 		...YoutubeVideoMainMedia.args,
 		...Immersive.args,
+	},
+} satisfies Story;
+
+export const YoutubeVideoCannotPlayInline = {
+	args: {
+		...YoutubeVideo.args,
+		canPlayInline: false,
+	},
+} satisfies Story;
+
+export const YoutubeVideoMainMediaCannotPlayInline = {
+	args: {
+		...YoutubeVideoMainMedia.args,
+		canPlayInline: false,
 	},
 } satisfies Story;
 

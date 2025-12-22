@@ -5,6 +5,7 @@ import { getEmotionCache } from '../client/islands/emotion';
 import { initHydration } from '../client/islands/initHydration';
 import { useApi } from '../lib/useApi';
 import type { LiveUpdateType } from '../types/liveBlog';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { Toast } from './Toast';
 
 type Props = {
@@ -17,6 +18,7 @@ type Props = {
 	webURL: string;
 	mostRecentBlockId: string;
 	hasPinnedPost: boolean;
+	renderingTarget: RenderingTarget;
 };
 
 /**
@@ -154,6 +156,7 @@ export const Liveness = ({
 	webURL,
 	mostRecentBlockId,
 	hasPinnedPost,
+	renderingTarget,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [topOfBlogVisible, setTopOfBlogVisible] = useState<boolean>();
@@ -309,9 +312,15 @@ export const Liveness = ({
 			revealPendingBlocks();
 			setNumHiddenBlocks(0);
 		} else {
-			window.location.href = `${webURL}#${placeToScrollTo}`;
+			const url = new URL(webURL);
+			if (renderingTarget === 'Apps') {
+				url.searchParams.set('dcr', 'apps');
+			}
+			url.hash = placeToScrollTo;
+
+			window.location.href = url.href;
 		}
-	}, [hasPinnedPost, onFirstPage, webURL]);
+	}, [hasPinnedPost, onFirstPage, webURL, renderingTarget]);
 
 	if (toastRoot && showToast) {
 		/**

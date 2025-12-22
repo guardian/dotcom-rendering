@@ -267,6 +267,7 @@ describe('Island: server-side rendering', () => {
 					enhanceTweetsSwitch={false}
 					onFirstPage={true}
 					webURL=""
+					renderingTarget="Web"
 					mostRecentBlockId=""
 					hasPinnedPost={false}
 				/>,

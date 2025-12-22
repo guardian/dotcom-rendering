@@ -16,8 +16,6 @@ type Props = {
 	serverTime?: number;
 	aspectRatio: AspectRatio;
 	collectionId: number;
-	/** Feature flag for the labs redesign work */
-	showLabsRedesign?: boolean;
 };
 
 /**
@@ -33,7 +31,6 @@ export const StaticFeatureTwo = ({
 	imageLoading,
 	aspectRatio,
 	collectionId,
-	showLabsRedesign = false,
 }: Props) => {
 	const cards = trails.slice(0, 2);
 	return (
@@ -74,7 +71,6 @@ export const StaticFeatureTwo = ({
 							isExternalLink={card.isExternalLink}
 							branding={card.branding}
 							containerPalette={containerPalette}
-							trailText={undefined}
 							serverTime={serverTime}
 							imageLoading={imageLoading}
 							aspectRatio={aspectRatio}
@@ -85,7 +81,6 @@ export const StaticFeatureTwo = ({
 							isNewsletter={card.isNewsletter}
 							showQuotes={card.showQuotedHeadline}
 							showVideo={card.showVideo}
-							showLabsRedesign={showLabsRedesign}
 						/>
 					</LI>
 				);

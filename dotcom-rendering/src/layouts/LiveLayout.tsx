@@ -624,6 +624,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									}
 									onFirstPage={pagination.currentPage === 1}
 									webURL={article.webURL}
+									renderingTarget={renderingTarget}
 									// We default to string here because the property is optional but we
 									// know it will exist for all blogs
 									mostRecentBlockId={

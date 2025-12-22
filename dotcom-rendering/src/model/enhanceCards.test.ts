@@ -11,6 +11,10 @@ describe('Enhance Cards', () => {
 				platform: 'Url',
 				mimeType: 'video/mp4',
 				assetType: 'Video',
+				dimensions: {
+					height: 400,
+					width: 500,
+				},
 			},
 			{
 				id: 'https://guim-example.co.uk/atomID-1.m3u8',
@@ -18,6 +22,10 @@ describe('Enhance Cards', () => {
 				platform: 'Url',
 				mimeType: 'application/x-mpegURL',
 				assetType: 'Video',
+				dimensions: {
+					height: 400,
+					width: 500,
+				},
 			},
 		];
 		const mediaAtom: FEMediaAtom = {
@@ -73,6 +81,10 @@ describe('Enhance Cards', () => {
 				platform: 'Url',
 				mimeType: 'application/x-mpegURL',
 				assetType: 'Video',
+				dimensions: {
+					height: 400,
+					width: 500,
+				},
 			},
 			{
 				id: 'https://guim-example.co.uk/atomID-1.mp4',
@@ -80,6 +92,10 @@ describe('Enhance Cards', () => {
 				platform: 'Url',
 				mimeType: 'video/mp4',
 				assetType: 'Video',
+				dimensions: {
+					height: 400,
+					width: 500,
+				},
 			},
 		];
 		const mediaAtom: FEMediaAtom = {
