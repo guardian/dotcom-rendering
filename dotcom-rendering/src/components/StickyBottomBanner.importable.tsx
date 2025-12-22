@@ -402,17 +402,18 @@ export const StickyBottomBanner = ({
 		isInAuxiaControlGroup,
 	]);
 
+	useEffect(() => {
+		if (SelectedBanner == null) {
+			document.dispatchEvent(
+				new CustomEvent('banner:none', {
+					detail: { readerRevenue: false },
+				}),
+			);
+		}
+	}, [SelectedBanner]);
 	if (SelectedBanner) {
 		return <SelectedBanner />;
 	}
-
-	useEffect(() => {
-		document.dispatchEvent(
-			new CustomEvent('banner:none', {
-				detail: { readerRevenue: false },
-			}),
-		);
-	});
 
 	return null;
 };
