@@ -3,7 +3,7 @@ import { snapshot } from "node:test";
 import { basename } from "path";
 import { GuRoot } from "@guardian/cdk/lib/constructs/root.js";
 import { Template } from "aws-cdk-lib/assertions";
-import { AbTestingDeploymentLambda } from "./deploymentLambda.ts";
+import { AbTestingNotificationLambda } from "./notificationLambda.ts";
 
 snapshot.setResolveSnapshotPath(
 	() =>
@@ -12,10 +12,10 @@ snapshot.setResolveSnapshotPath(
 		)}.snap`,
 );
 
-void describe("The AB testing deployment lambda stack", () => {
+void describe("The AB testing notification lambda stack", () => {
 	void it("matches the CODE snapshot", ({ assert }) => {
 		const app = new GuRoot();
-		const stack = new AbTestingDeploymentLambda(
+		const stack = new AbTestingNotificationLambda(
 			app,
 			"AbTestingDeploymentLambda",
 			{
@@ -32,7 +32,7 @@ void describe("The AB testing deployment lambda stack", () => {
 
 	void it("matches the PROD snapshot", ({ assert }) => {
 		const app = new GuRoot();
-		const stack = new AbTestingDeploymentLambda(
+		const stack = new AbTestingNotificationLambda(
 			app,
 			"AbTestingDeploymentLambda",
 			{
