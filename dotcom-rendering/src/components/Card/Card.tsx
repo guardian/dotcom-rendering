@@ -163,6 +163,7 @@ export type Props = {
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
 	enableHls?: boolean;
+	storylinesStyle?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -421,6 +422,7 @@ export const Card = ({
 	headlinePosition = 'inner',
 	subtitleSize = 'small',
 	enableHls = false,
+	storylinesStyle = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -452,7 +454,10 @@ export const Card = ({
 		const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
 
 		const shouldShowAge =
-			isTagPage || !!onwardsSource || (showAge && withinTwelveHours);
+			storylinesStyle ||
+			isTagPage ||
+			!!onwardsSource ||
+			(showAge && withinTwelveHours);
 
 		if (!shouldShowAge) return undefined;
 
@@ -505,8 +510,35 @@ export const Card = ({
 			css={css`
 				margin-top: auto;
 				display: flex;
+				${storylinesStyle &&
+				`
+					flex-direction: column;
+					gap: ${space[1]}px;
+					align-items: flex-start;
+				`}
 			`}
 		>
+			{/* Ordinarily, it's either the pill or the footer, but we want to display the date on these cards if they appear in the storylines section on tag pages.
+				Bit of padding to align with the start of the pill type. 
+			*/}
+			{storylinesStyle && (
+				<div
+					css={css`
+						padding-left: ${space[2]}px;
+					`}
+				>
+					<CardFooter
+						format={format}
+						age={decideAge()}
+						commentCount={<CommentCount />}
+						cardBranding={
+							isOnwardContent ? <LabsBranding /> : undefined
+						}
+						showLivePlayable={showLivePlayable}
+					/>
+				</div>
+			)}
+
 			{mainMedia?.type === 'YoutubeVideo' && isVideoArticle && (
 				<>
 					{mainMedia.duration === 0 ? (
@@ -777,6 +809,7 @@ export const Card = ({
 					containerPalette={containerPalette}
 					isDynamo={isDynamo}
 					fillBackgroundOnMobile={isFlexSplash}
+					storylinesStyle={storylinesStyle}
 				/>
 			</Hide>
 		);
@@ -1208,43 +1241,50 @@ export const Card = ({
 							flex-grow: 1;
 						`}
 					>
-						{headlinePosition === 'inner' && (
-							<HeadlineWrapper>
-								<CardHeadline
-									headlineText={headlineText}
-									format={format}
-									fontSizes={headlineSizes}
-									showQuotes={showQuotes}
-									kickerText={
-										format.design ===
-											ArticleDesign.LiveBlog &&
-										!kickerText
-											? 'Live'
-											: kickerText
-									}
-									showPulsingDot={
-										format.design ===
-											ArticleDesign.LiveBlog ||
-										showPulsingDot
-									}
-									byline={byline}
-									showByline={showByline}
-									isExternalLink={isExternalLink}
-									kickerImage={
-										showKickerImage &&
-										media?.type === 'podcast'
-											? media.podcastImage
-											: undefined
-									}
-								/>
-								{!isUndefined(starRating) ? (
-									<StarRatingComponent
-										rating={starRating}
-										cardHasImage={!!image}
-									/>
-								) : null}
-							</HeadlineWrapper>
-						)}
+						{/* In the storylines section on tag pages, the flex splash is used to display key stories. 
+							This is shown as a large image taken from the first article in the group, and the  headlines of the first four key articles (include that of the first article).
+							Therefore, we don't display an article headline in the conventional sense, these are displayed as "supporting content". 
+							However, simply passing an empty string as the article headline still reserves space, so this check enables us to avoid rendering that space at all. 
+						*/}
+						{storylinesStyle && isFlexSplash
+							? null
+							: headlinePosition === 'inner' && (
+									<HeadlineWrapper>
+										<CardHeadline
+											headlineText={headlineText}
+											format={format}
+											fontSizes={headlineSizes}
+											showQuotes={showQuotes}
+											kickerText={
+												format.design ===
+													ArticleDesign.LiveBlog &&
+												!kickerText
+													? 'Live'
+													: kickerText
+											}
+											showPulsingDot={
+												format.design ===
+													ArticleDesign.LiveBlog ||
+												showPulsingDot
+											}
+											byline={byline}
+											showByline={showByline}
+											isExternalLink={isExternalLink}
+											kickerImage={
+												showKickerImage &&
+												media?.type === 'podcast'
+													? media.podcastImage
+													: undefined
+											}
+										/>
+										{!isUndefined(starRating) ? (
+											<StarRatingComponent
+												rating={starRating}
+												cardHasImage={!!image}
+											/>
+										) : null}
+									</HeadlineWrapper>
+							  )}
 
 						{!!trailText && shouldShowTrailText && (
 							<TrailText

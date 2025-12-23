@@ -15,6 +15,7 @@ import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { StorylinesSection } from '../components/StorylinesSection.importable';
 import { SubNav } from '../components/SubNav.importable';
 import { TagPageHeader } from '../components/TagPageHeader';
 import { TrendingTopics } from '../components/TrendingTopics';
@@ -134,6 +135,12 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 						  )
 						: undefined;
 
+					const insertSCSection =
+						tagPage.storylinesContent &&
+						index == 1 &&
+						(!tagPage.pagination ||
+							tagPage.pagination.currentPage === 1);
+
 					return (
 						<Fragment key={containerId}>
 							{desktopAdPositions.includes(index) && (
@@ -144,6 +151,17 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 										index,
 									)}
 								/>
+							)}
+							{insertSCSection && (
+								<Island priority="critical">
+									<StorylinesSection
+										index={1}
+										editionId={tagPage.editionId}
+										storylinesContent={
+											tagPage.storylinesContent
+										}
+									/>
+								</Island>
 							)}
 							<FrontSection
 								title={title}

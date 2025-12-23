@@ -4,6 +4,7 @@ import { ArticleDesign } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
 import { palette } from '../palette';
 import type { DCRContainerPalette, DCRSupportingContent } from '../types/front';
+import { CardAge } from './Card/components/CardAge';
 import { CardHeadline } from './CardHeadline';
 import { ContainerOverrides } from './ContainerOverrides';
 import { FormatBoundary } from './FormatBoundary';
@@ -21,6 +22,7 @@ type Props = {
 	fillBackgroundOnMobile?: boolean;
 	/** Allows sublinks container to have a background colour on desktop screen sizes */
 	fillBackgroundOnDesktop?: boolean;
+	storylinesStyle?: boolean;
 };
 
 /**
@@ -149,10 +151,80 @@ export const SupportingContent = ({
 	isMedia = false,
 	fillBackgroundOnMobile = false,
 	fillBackgroundOnDesktop = false,
+	storylinesStyle = false,
 }: Props) => {
 	const columnSpan = getColumnSpan(supportingContent.length);
 
-	return (
+	return storylinesStyle ? (
+		<ul
+			className="sublinks"
+			css={[
+				wrapperStyles,
+				baseGrid,
+				(isDynamo ?? alignment === 'horizontal') && horizontalGrid,
+				fillBackgroundOnMobile && backgroundFillMobile(isMedia),
+				fillBackgroundOnDesktop && backgroundFillDesktop(isMedia),
+			]}
+		>
+			{supportingContent.map((subLink, index) => {
+				// The model has this property as optional but it is very likely to exist
+				if (!subLink.headline) return null;
+
+				/** Force the format design to be Standard if sublink format
+				 * is not compatible with transparent backgrounds */
+				const subLinkFormat = {
+					...subLink.format,
+					design: isMediaCard(subLink.format)
+						? ArticleDesign.Standard
+						: subLink.format.design,
+				};
+
+				return (
+					<li
+						key={subLink.url}
+						css={[
+							sublinkBaseStyles,
+							isDynamo ?? alignment === 'horizontal'
+								? horizontalSublinkStyles(columnSpan)
+								: verticalSublinkStyles,
+						]}
+						data-link-name={`sublinks | ${index + 1}`}
+					>
+						<FormatBoundary format={subLinkFormat}>
+							<ContainerOverrides
+								containerPalette={containerPalette}
+							>
+								<CardHeadline
+									format={{ design: 0, display: 0, theme: 0 }}
+									hasInlineKicker={true}
+									linkTo={subLink.url}
+									showPulsingDot={
+										subLink.format.design ===
+										ArticleDesign.LiveBlog
+									}
+									headlineText={subLink.headline}
+									fontSizes={{
+										desktop: 'xsmall',
+										mobile: 'medium',
+									}}
+								/>
+								{/* {subLink.kickerText} 
+								todo: card age below obviously istag page is a lie, I'll tweak that in a bit
+								*/}
+								<CardAge
+									webPublication={{
+										date: subLink.kickerText ?? '',
+										isWithinTwelveHours: false,
+									}}
+									isTagPage={false}
+								/>
+							</ContainerOverrides>
+						</FormatBoundary>
+					</li>
+				);
+			})}
+		</ul>
+	) : (
 		<ul
 			className="sublinks"
 			css={[
