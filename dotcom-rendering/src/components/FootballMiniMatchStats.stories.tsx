@@ -67,7 +67,7 @@ export const FootballMiniMatchStats = {
 				label: 'Possession',
 				homeValue: 39,
 				awayValue: 61,
-				showPercentage: true,
+				isPercentage: true,
 			},
 			{ label: 'Goal Attempts', homeValue: 7, awayValue: 4 },
 		],
