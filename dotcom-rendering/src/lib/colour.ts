@@ -23,7 +23,7 @@ const hexToRgb = (
 		: null;
 };
 
-const getBrightness = (colour: string): number => {
+export const getBrightness = (colour: string): number => {
 	// http://www.w3.org/TR/AERT#color-contrast
 	const rgb = hexToRgb(colour);
 	return rgb ? (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000 : 0;

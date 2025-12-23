@@ -8,6 +8,7 @@ import {
 	textSansBold28,
 	visuallyHidden,
 } from '@guardian/source/foundations';
+import { getBrightness } from '../lib/colour';
 import { palette } from '../palette';
 
 const containerCss = css`
@@ -80,6 +81,24 @@ const barCss = css`
 	border-radius: 8px;
 `;
 
+const barAddContrastLightCss = css`
+	@media (prefers-color-scheme: light) {
+		border: 1px solid ${palette('--football-match-stat-border')};
+	}
+	[data-color-scheme='light'] & {
+		border: 1px solid ${palette('--football-match-stat-border')};
+	}
+`;
+
+const barAddContrastDarkCss = css`
+	@media (prefers-color-scheme: dark) {
+		border: 1px solid ${palette('--football-match-stat-border')};
+	}
+	[data-color-scheme='dark'] & {
+		border: 1px solid ${palette('--football-match-stat-border')};
+	}
+`;
+
 type MatchStatistic = {
 	teamName: string;
 	teamColour: string;
@@ -108,6 +127,13 @@ export const FootballMatchStat = ({
 }: Props) => {
 	const homePercentage = (home.value / (home.value + away.value)) * 100;
 	const awayPercentage = (away.value / (home.value + away.value)) * 100;
+
+	const homeColourBrightness = getBrightness(home.teamColour);
+	const awayColourBrightness = getBrightness(away.teamColour);
+	const awayNeedsContrastWhenLight = awayColourBrightness > 205;
+	const homeNeedsContrastWhenLight = homeColourBrightness > 205;
+	const awayNeedsContrastWhenDark = awayColourBrightness < 50;
+	const homeNeedsContrastWhenDark = homeColourBrightness < 50;
 
 	return (
 		<div css={containerCss}>
@@ -144,14 +170,22 @@ export const FootballMatchStat = ({
 			</div>
 			<div aria-hidden="true" css={chartCss}>
 				<div
-					css={barCss}
+					css={[
+						barCss,
+						homeNeedsContrastWhenLight && barAddContrastLightCss,
+						homeNeedsContrastWhenDark && barAddContrastDarkCss,
+					]}
 					style={{
 						'--match-stat-percentage': `${homePercentage}%`,
 						'--match-stat-team-colour': home.teamColour,
 					}}
 				></div>
 				<div
-					css={barCss}
+					css={[
+						barCss,
+						awayNeedsContrastWhenLight && barAddContrastLightCss,
+						awayNeedsContrastWhenDark && barAddContrastDarkCss,
+					]}
 					style={{
 						'--match-stat-percentage': `${awayPercentage}%`,
 						'--match-stat-team-colour': away.teamColour,
