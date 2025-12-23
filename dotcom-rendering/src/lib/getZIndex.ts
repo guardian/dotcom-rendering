@@ -89,6 +89,9 @@ const indices = [
 	// Media overlay
 	'mediaOverlay',
 
+	// Feature card overlay
+	'feature-card-overlay',
+
 	// Self-hosted video
 	'video-progress-bar-foreground',
 	'video-progress-bar-background',
