@@ -261,6 +261,13 @@ export const FootballMatchGoalAttempts = ({
 	return (
 		<div css={[containerCss, desktopPaddingCss, goalAttemptsLayoutCss]}>
 			<div css={labelCss}>Goal attempts</div>
+			<span
+				css={css`
+					${visuallyHidden}
+				`}
+			>
+				{homeTeam.name}
+			</span>
 			<div
 				css={offTargetCss}
 				style={{
@@ -278,6 +285,13 @@ export const FootballMatchGoalAttempts = ({
 					<span css={attemptCountCss}>{homeValues.onTarget}</span>
 				</div>
 			</div>
+			<span
+				css={css`
+					${visuallyHidden}
+				`}
+			>
+				{awayTeam.name}
+			</span>
 			<div
 				css={[offTargetCss, offTargetAwayCss]}
 				style={{
