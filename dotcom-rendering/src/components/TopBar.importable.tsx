@@ -10,6 +10,7 @@ import { Hide } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
 import type { EditionId } from '../lib/edition';
+import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { usePageViewId } from '../lib/usePageViewId';
@@ -123,6 +124,12 @@ export const TopBar = ({
 	useEffect(() => {
 		setReferrerUrl(window.location.origin + window.location.pathname);
 	}, []);
+
+	useEffect(() => {
+		if (authStatus.kind === 'SignedOut') {
+			clearSubscriptionCache();
+		}
+	}, [authStatus.kind]);
 
 	const printSubscriptionsHref = addTrackingCodesToUrl({
 		base: `https://support.theguardian.com/subscribe${
