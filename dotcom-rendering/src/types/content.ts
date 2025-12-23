@@ -989,7 +989,7 @@ export type TimelineAtomType = {
 	expandCallback?: () => void;
 };
 
-export type RatingSizeType = 'large' | 'small';
+export type RatingSizeType = 'large' | 'medium' | 'small';
 
 export type ImageForLightbox = {
 	masterUrl: string;

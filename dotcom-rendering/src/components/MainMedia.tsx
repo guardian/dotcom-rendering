@@ -96,6 +96,9 @@ export const MainMedia = ({
 	elements,
 	format,
 	hideCaption,
+	/*
+	 *  TODO : Remove this once new star rating designs are merged into production as this will no longer be required
+	 */
 	starRating,
 	host,
 	pageId,

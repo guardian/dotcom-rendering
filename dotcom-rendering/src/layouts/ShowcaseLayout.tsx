@@ -248,6 +248,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
+	const isInStarRatingVariant =
+		article.config.abTests.starRatingRedesignVariant === 'variant';
+
 	return (
 		<>
 			{isWeb && (
@@ -369,6 +372,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									format={format}
 									elements={article.mainMediaElements}
 									starRating={
+										!isInStarRatingVariant &&
 										format.design ===
 											ArticleDesign.Review &&
 										!isUndefined(article.starRating)
@@ -410,6 +414,10 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									webPublicationDateDeprecated={
 										article.webPublicationDateDeprecated
 									}
+									isInStarRatingVariant={
+										isInStarRatingVariant
+									}
+									starRating={article.starRating}
 								/>
 							</PositionHeadline>
 						</GridItem>
@@ -720,6 +728,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						webURL={article.webURL}
+						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Island>
 
