@@ -65,15 +65,12 @@ const productCardHeading = css`
 	color: ${palette('--product-card-headline')};
 `;
 
-const productNameFont = css`
+const secondaryHeading = css`
 	${headlineMedium17};
 `;
 
 const price = css`
 	margin-top: auto;
-	${from.phablet} {
-		margin-top: 0;
-	}
 	${textSansBold17};
 `;
 
@@ -103,7 +100,7 @@ export const HorizontalSummaryProductCard = ({
 						__html: product.primaryHeadingHtml,
 					}}
 				></div>
-				<div css={productNameFont}>{product.productName}</div>
+				<div css={secondaryHeading}>{product.secondaryHeadingHtml}</div>
 				<a href={`#${product.h2Id}`} css={readMore}>
 					Read more
 				</a>

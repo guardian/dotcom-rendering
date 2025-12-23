@@ -4,7 +4,7 @@ import { productImage } from './productImage';
 export const exampleProduct: ProductBlockElement = {
 	_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
 	elementId: 'b1f6e8e2-3f3a-4f0c-8d1e-5f3e3e3e3e3e',
-	primaryHeadingHtml: '<em>Best Kettle overall</em>',
+	primaryHeadingHtml: 'Best overall',
 	secondaryHeadingHtml: 'Bosch Sky Kettle',
 	brandName: 'Bosch',
 	productName: 'Sky Kettle',
