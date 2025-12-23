@@ -11,7 +11,7 @@ import { transparentColour } from '../../lib/transparentColour';
 import { palette } from '../../palette';
 import type { AspectRatio } from '../../types/front';
 import { CardFooter } from '../Card/components/CardFooter';
-import { narrowPlayIconWidth, PlayIcon } from '../Card/components/PlayIcon';
+import { narrowPlayIconDiameter, PlayIcon } from '../Card/components/PlayIcon';
 import { TrailText } from '../Card/components/TrailText';
 import type { ResponsiveFontSize } from '../CardHeadline';
 import { CardHeadline } from '../CardHeadline';
@@ -106,7 +106,7 @@ const playIconStyles = css`
 	  * headlines and standfirsts before we decide on a final position.
 	  */
 	top: 35%;
-	left: calc(50% - ${narrowPlayIconWidth / 2}px);
+	left: calc(50% - ${narrowPlayIconDiameter / 2}px);
 `;
 
 const videoPillStyles = css`

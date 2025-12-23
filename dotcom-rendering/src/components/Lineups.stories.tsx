@@ -1,15 +1,10 @@
 import { css } from '@emotion/react';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
-import { matchReport } from '../../fixtures/generated/match-report';
+import { matchStats } from '../../fixtures/manual/matchStats';
 import { grid } from '../grid';
 import { palette } from '../palette';
-import { type TeamType } from '../types/sport';
 import { Lineups as LineupsComponent } from './Lineups';
-
-const homeTeam: TeamType = matchReport.homeTeam;
-
-const awayTeam: TeamType = matchReport.awayTeam;
 
 const meta = {
 	title: 'Components/Lineups',
@@ -49,7 +44,6 @@ type Story = StoryObj<typeof meta>;
 
 export const LineupsStory = {
 	args: {
-		home: homeTeam,
-		away: awayTeam,
+		matchStats,
 	},
 } satisfies Story;

@@ -1522,21 +1522,6 @@
                         "Loop"
                     ],
                     "type": "string"
-                },
-                "dimensions": {
-                    "type": "object",
-                    "properties": {
-                        "width": {
-                            "type": "number"
-                        },
-                        "height": {
-                            "type": "number"
-                        }
-                    },
-                    "required": [
-                        "height",
-                        "width"
-                    ]
                 }
             },
             "required": [
@@ -1562,6 +1547,21 @@
                 },
                 "assetType": {
                     "type": "string"
+                },
+                "dimensions": {
+                    "type": "object",
+                    "properties": {
+                        "width": {
+                            "type": "number"
+                        },
+                        "height": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "height",
+                        "width"
+                    ]
                 }
             },
             "required": [

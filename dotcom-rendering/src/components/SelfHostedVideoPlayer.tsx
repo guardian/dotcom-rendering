@@ -17,13 +17,13 @@ import type { ActiveCue } from '../lib/useSubtitles';
 import { filterOutHlsSources, type Source } from '../lib/video';
 import { palette } from '../palette';
 import type { VideoPlayerFormat } from '../types/mainMedia';
-import { narrowPlayIconWidth, PlayIcon } from './Card/components/PlayIcon';
+import { narrowPlayIconDiameter, PlayIcon } from './Card/components/PlayIcon';
 import { SubtitleOverlay } from './SubtitleOverlay';
 import { VideoProgressBar } from './VideoProgressBar';
 
 export type SubtitleSize = 'small' | 'medium' | 'large';
 
-const videoStyles = (width: number, height: number) => css`
+const videoStyles = (aspectRatio: number) => css`
 	position: relative;
 	display: block;
 	height: auto;
@@ -32,7 +32,7 @@ const videoStyles = (width: number, height: number) => css`
 	max-height: 100svh;
 	cursor: pointer;
 	/* Prevents CLS by letting the browser know the space the video will take up. */
-	aspect-ratio: ${width} / ${height};
+	aspect-ratio: ${aspectRatio};
 `;
 
 const subtitleStyles = (subtitleSize: SubtitleSize | undefined) => css`
@@ -50,8 +50,8 @@ const subtitleStyles = (subtitleSize: SubtitleSize | undefined) => css`
 const playIconStyles = css`
 	position: absolute;
 	/* Center the icon */
-	top: calc(50% - ${narrowPlayIconWidth / 2}px);
-	left: calc(50% - ${narrowPlayIconWidth / 2}px);
+	top: calc(50% - ${narrowPlayIconDiameter / 2}px);
+	left: calc(50% - ${narrowPlayIconDiameter / 2}px);
 	cursor: pointer;
 	border: none;
 	background: none;
@@ -191,13 +191,15 @@ export const SelfHostedVideoPlayer = forwardRef(
 			? sources
 			: filterOutHlsSources(sources);
 
+		const aspectRatio = width / height;
+
 		return (
 			<>
 				{/* eslint-disable-next-line jsx-a11y/media-has-caption -- Not all videos require captions. */}
 				<video
 					id={videoId}
 					css={[
-						videoStyles(width, height),
+						videoStyles(aspectRatio),
 						showSubtitles && subtitleStyles(subtitleSize),
 					]}
 					crossOrigin="anonymous"

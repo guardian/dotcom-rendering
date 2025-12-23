@@ -24,11 +24,12 @@ import type {
 	DCRFrontImage,
 	DCRSupportingContent,
 } from '../types/front';
-import type { MainMedia } from '../types/mainMedia';
+import type { MainMedia, YoutubeVideo } from '../types/mainMedia';
 import { BrandingLabel } from './BrandingLabel';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
 import type { MediaSizeType } from './Card/components/MediaWrapper';
+import { narrowPlayIconDiameter, PlayIcon } from './Card/components/PlayIcon';
 import { TrailText } from './Card/components/TrailText';
 import { CardHeadline, type ResponsiveFontSize } from './CardHeadline';
 import type { Loading } from './CardPicture';
@@ -38,7 +39,6 @@ import { FeatureCardCardAge } from './FeatureCardCardAge';
 import { FeatureCardCommentCount } from './FeatureCardCommentCount';
 import { FormatBoundary } from './FormatBoundary';
 import { Island } from './Island';
-import { MediaDuration } from './MediaDuration';
 import { Pill } from './Pill';
 import { StarRating } from './StarRating/StarRating';
 import { SupportingContent } from './SupportingContent';
@@ -46,6 +46,17 @@ import { WaveForm } from './WaveForm';
 import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
 
 export type Position = 'inner' | 'outer' | 'none';
+
+type Media =
+	| {
+			type: 'picture';
+			imageUrl: string;
+			imageAltText?: string;
+	  }
+	| {
+			type: 'youtube-video';
+			mainMedia: YoutubeVideo;
+	  };
 
 const baseCardStyles = css`
 	display: flex;
@@ -224,6 +235,12 @@ const videoPillStyles = css`
 	right: ${space[2]}px;
 `;
 
+const playIconStyles = css`
+	position: absolute;
+	top: calc(50% - ${narrowPlayIconDiameter / 2}px);
+	left: calc(50% - ${narrowPlayIconDiameter / 2}px);
+`;
+
 const waveformStyles = css`
 	position: absolute;
 	bottom: 0;
@@ -239,16 +256,16 @@ const getMedia = ({
 	imageUrl,
 	imageAltText,
 	mainMedia,
-	canPlayInline,
+	showVideo,
 }: {
 	imageUrl?: string;
 	imageAltText?: string;
 	mainMedia?: MainMedia;
-	canPlayInline?: boolean;
-}) => {
-	if (mainMedia && mainMedia.type === 'YoutubeVideo' && canPlayInline) {
+	showVideo?: boolean;
+}): Media | undefined => {
+	if (mainMedia?.type === 'YoutubeVideo' && showVideo) {
 		return {
-			type: 'video',
+			type: 'youtube-video',
 			mainMedia,
 		} as const;
 	}
@@ -361,7 +378,7 @@ export const FeatureCard = ({
 	imageLoading,
 	showClock,
 	mainMedia,
-	canPlayInline,
+	canPlayInline = false,
 	kickerText,
 	showPulsingDot,
 	dataLinkName,
@@ -385,21 +402,14 @@ export const FeatureCard = ({
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
-	const isVideoMainMedia = mainMedia?.type === 'YoutubeVideo';
 	const isVideoArticle = format.design === ArticleDesign.Video;
-
-	const videoDuration =
-		mainMedia?.type === 'YoutubeVideo' ? mainMedia.duration : undefined;
 
 	const media = getMedia({
 		imageUrl: image?.src,
 		imageAltText: image?.altText,
 		mainMedia,
-		canPlayInline,
+		showVideo: showVideo && canPlayInline,
 	});
-
-	const showYoutubeVideo =
-		canPlayInline && showVideo && mainMedia?.type === 'YoutubeVideo';
 
 	const showCardAge =
 		webPublicationDate !== undefined && showClock !== undefined;
@@ -415,11 +425,13 @@ export const FeatureCard = ({
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
+	if (!media) return null;
+
 	return (
 		<FormatBoundary format={format}>
 			<ContainerOverrides containerPalette={containerPalette}>
 				<div css={[baseCardStyles, hoverStyles, sublinkHoverStyles]}>
-					{!showYoutubeVideo && (
+					{media.type !== 'youtube-video' && (
 						<CardLink
 							linkTo={linkTo}
 							headlineText={headlineText}
@@ -428,7 +440,7 @@ export const FeatureCard = ({
 						/>
 					)}
 					<div css={contentStyles}>
-						{showYoutubeVideo && (
+						{media.type === 'youtube-video' && (
 							<div
 								data-chromatic="ignore"
 								data-component="youtube-atom"
@@ -443,15 +455,15 @@ export const FeatureCard = ({
 									defer={{ until: 'visible' }}
 								>
 									<YoutubeBlockComponent
-										id={mainMedia.id}
-										assetId={mainMedia.videoId}
+										id={media.mainMedia.id}
+										assetId={media.mainMedia.videoId}
 										index={collectionId}
-										expired={mainMedia.expired}
+										expired={media.mainMedia.expired}
 										format={format}
 										stickyVideos={false}
 										enableAds={false}
-										duration={mainMedia.duration}
-										posterImage={mainMedia.image}
+										duration={media.mainMedia.duration}
+										posterImage={media.mainMedia.image}
 										width={300}
 										height={375}
 										origin="The Guardian"
@@ -483,7 +495,7 @@ export const FeatureCard = ({
 								</Island>
 							</div>
 						)}
-						{!showYoutubeVideo && media && (
+						{media.type !== 'youtube-video' && (
 							<div
 								css={css`
 									position: relative;
@@ -492,23 +504,7 @@ export const FeatureCard = ({
 									)};
 								`}
 							>
-								{media.type === 'video' && (
-									<div>
-										<CardPicture
-											mainImage={
-												media.mainMedia.image ?? ''
-											}
-											imageSize={imageSize}
-											alt={headlineText}
-											loading={imageLoading}
-											aspectRatio={aspectRatio}
-											mobileAspectRatio={
-												mobileAspectRatio
-											}
-										/>
-									</div>
-								)}
-
+								{/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- A PR to add self-hosted video is upcoming where this check will be needed. */}
 								{media.type === 'picture' && (
 									<>
 										<CardPicture
@@ -521,20 +517,30 @@ export const FeatureCard = ({
 												mobileAspectRatio
 											}
 										/>
-										{isVideoMainMedia &&
-											mainMedia.duration > 0 && (
-												<MediaDuration
-													mediaDuration={
-														mainMedia.duration
-													}
-													mediaPositionOnDesktop={
-														'top'
-													}
-													mediaPositionOnMobile={
-														'left'
-													}
-												/>
-											)}
+
+										{mainMedia?.type === 'YoutubeVideo' && (
+											<>
+												{mainMedia.duration > 0 && (
+													<div css={videoPillStyles}>
+														<Pill
+															content={
+																<time>
+																	{secondsToDuration(
+																		mainMedia.duration,
+																	)}
+																</time>
+															}
+															icon={
+																<SvgMediaControlsPlay />
+															}
+														/>
+													</div>
+												)}
+												<div css={playIconStyles}>
+													<PlayIcon iconWidth="narrow" />
+												</div>
+											</>
+										)}
 									</>
 								)}
 
@@ -630,9 +636,6 @@ export const FeatureCard = ({
 												quoteColour={palette(
 													'--feature-card-quote-icon',
 												)}
-												showLabsRedesign={
-													showLabsRedesign
-												}
 											/>
 										</div>
 
@@ -689,7 +692,6 @@ export const FeatureCard = ({
 												) : undefined
 											}
 											showLivePlayable={false}
-											mainMedia={mainMedia}
 											isNewsletter={isNewsletter}
 										/>
 
@@ -700,23 +702,6 @@ export const FeatureCard = ({
 												233,
 											)}
 									</div>
-									{/* On video article cards, the duration is displayed in the footer */}
-									{!isVideoArticle &&
-									isVideoMainMedia &&
-									videoDuration !== undefined ? (
-										<div css={videoPillStyles}>
-											<Pill
-												content={
-													<time>
-														{secondsToDuration(
-															videoDuration,
-														)}
-													</time>
-												}
-												icon={<SvgMediaControlsPlay />}
-											/>
-										</div>
-									) : null}
 								</div>
 
 								{isImmersive &&
@@ -734,7 +719,7 @@ export const FeatureCard = ({
 							fillBackgroundOnMobile={true}
 						/>
 					)}
-					{isLabs && branding && showLabsRedesign && (
+					{isLabs && branding && (
 						<BrandingLabel
 							branding={branding}
 							containerPalette={containerPalette}
@@ -747,6 +732,7 @@ export const FeatureCard = ({
 								labsDataAttributes?.ophanComponentName
 							}
 							isLabs={isLabs}
+							dataTestId="card-branding-logo"
 						/>
 					)}
 				</div>

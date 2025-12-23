@@ -33,8 +33,6 @@ type Props = {
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
-	/** Feature flag for the labs redesign work */
-	showLabsRedesign?: boolean;
 	enableHls?: boolean;
 	/** Passed through to cards to enable tag page storyline section specific rendering */
 	storylinesStyle?: boolean;
@@ -264,8 +262,6 @@ type SplashCardLayoutProps = {
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
-	/** Feature flag for the labs redesign work */
-	showLabsRedesign?: boolean;
 	enableHls?: boolean;
 	storylinesStyle?: boolean;
 };
@@ -280,7 +276,6 @@ const SplashCardLayout = ({
 	isLastRow,
 	containerLevel,
 	collectionId,
-	showLabsRedesign,
 	enableHls,
 	storylinesStyle,
 }: SplashCardLayoutProps) => {
@@ -296,7 +291,6 @@ const SplashCardLayout = ({
 				serverTime={serverTime}
 				imageLoading={imageLoading}
 				collectionId={collectionId}
-				showLabsRedesign={showLabsRedesign}
 			/>
 		);
 	}
@@ -368,7 +362,6 @@ const SplashCardLayout = ({
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 					subtitleSize={subtitleSize}
 					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
-					showLabsRedesign={showLabsRedesign}
 					enableHls={enableHls}
 					storylinesStyle={storylinesStyle}
 				/>
@@ -436,8 +429,6 @@ type FullWidthCardLayoutProps = {
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
-	/** Feature flag for the labs redesign work */
-	showLabsRedesign?: boolean;
 	enableHls?: boolean;
 	storylinesStyle?: boolean;
 };
@@ -453,7 +444,6 @@ const FullWidthCardLayout = ({
 	isLastRow,
 	containerLevel,
 	collectionId,
-	showLabsRedesign,
 	enableHls,
 	storylinesStyle,
 }: FullWidthCardLayoutProps) => {
@@ -482,7 +472,6 @@ const FullWidthCardLayout = ({
 				serverTime={serverTime}
 				imageLoading={imageLoading}
 				collectionId={collectionId}
-				showLabsRedesign={showLabsRedesign}
 				storylinesStyle={storylinesStyle}
 			/>
 		);
@@ -531,7 +520,6 @@ const FullWidthCardLayout = ({
 					liveUpdatesPosition={liveUpdatesPosition}
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
-					showLabsRedesign={showLabsRedesign}
 					subtitleSize={subtitleSize}
 					enableHls={enableHls}
 					storylinesStyle={storylinesStyle}
@@ -552,8 +540,6 @@ type HalfWidthCardLayoutProps = {
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
-	/** Feature flag for the labs redesign work */
-	showLabsRedesign?: boolean;
 	enableHls?: boolean;
 	storylinesStyle?: boolean;
 };
@@ -569,7 +555,6 @@ const HalfWidthCardLayout = ({
 	aspectRatio,
 	isLastRow,
 	containerLevel,
-	showLabsRedesign,
 	enableHls,
 	storylinesStyle,
 }: HalfWidthCardLayoutProps) => {
@@ -626,7 +611,6 @@ const HalfWidthCardLayout = ({
 							trailText={undefined}
 							headlineSizes={undefined}
 							canPlayInline={false}
-							showLabsRedesign={showLabsRedesign}
 							enableHls={enableHls}
 							storylinesStyle={storylinesStyle}
 						/>
@@ -646,7 +630,6 @@ export const FlexibleGeneral = ({
 	aspectRatio,
 	containerLevel = 'Primary',
 	collectionId,
-	showLabsRedesign,
 	enableHls,
 	storylinesStyle = false,
 }: Props) => {
@@ -677,7 +660,6 @@ export const FlexibleGeneral = ({
 					isLastRow={cards.length === 0}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
-					showLabsRedesign={showLabsRedesign}
 					enableHls={enableHls}
 					storylinesStyle={storylinesStyle}
 				/>
@@ -698,7 +680,6 @@ export const FlexibleGeneral = ({
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
 								collectionId={collectionId}
-								showLabsRedesign={showLabsRedesign}
 								enableHls={enableHls}
 								storylinesStyle={storylinesStyle}
 							/>
@@ -720,7 +701,6 @@ export const FlexibleGeneral = ({
 								aspectRatio={aspectRatio}
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
-								showLabsRedesign={showLabsRedesign}
 								enableHls={enableHls}
 								storylinesStyle={storylinesStyle}
 							/>
