@@ -32,6 +32,10 @@ const carouselStyles = css`
 	overflow-x: auto;
 	overflow-y: hidden;
 	margin-right: -10px;
+	scrollbar-width: none;
+	&::-webkit-scrollbar {
+		display: none;
+	}
 	${from.tablet} {
 		margin-right: -20px;
 	}
@@ -39,10 +43,6 @@ const carouselStyles = css`
 	${from.desktop} {
 		margin-right: 0px;
 		background-color: ${palette('--key-event-background-desktop')};
-		scrollbar-width: none;
-		&::-webkit-scrollbar {
-			display: none;
-		}
 	}
 `;
 const leftMarginStyles = css`
