@@ -55,30 +55,12 @@ const labelCss = css`
 const numberCss = css`
 	${textSansBold20};
 	grid-area: home-stat;
-	color: var(--match-stat-team-colour);
+	color: ${palette('--football-match-stat-text')};
 `;
 
 const largeNumberCss = css`
 	${from.desktop} {
 		${textSansBold28}
-	}
-`;
-
-const numberLightContrastCss = css`
-	@media (prefers-color-scheme: light) {
-		color: ${palette('--football-match-stat-text')};
-	}
-	[data-color-scheme='light'] & {
-		color: ${palette('--football-match-stat-text')};
-	}
-`;
-
-const numberDarkContrastCss = css`
-	@media (prefers-color-scheme: dark) {
-		color: ${palette('--football-match-stat-text')};
-	}
-	[data-color-scheme='dark'] & {
-		color: ${palette('--football-match-stat-text')};
 	}
 `;
 
@@ -100,7 +82,7 @@ const barCss = css`
 	border-radius: 8px;
 `;
 
-const barLightContrastCss = css`
+const barAddContrastLightCss = css`
 	@media (prefers-color-scheme: light) {
 		border: 1px solid ${palette('--football-match-stat-border')};
 	}
@@ -109,7 +91,7 @@ const barLightContrastCss = css`
 	}
 `;
 
-const barDarkContrastCss = css`
+const barAddContrastDarkCss = css`
 	@media (prefers-color-scheme: dark) {
 		border: 1px solid ${palette('--football-match-stat-border')};
 	}
@@ -147,7 +129,7 @@ export const FootballMatchStat = ({
 	const homePercentage = (home.value / (home.value + away.value)) * 100;
 	const awayPercentage = (away.value / (home.value + away.value)) * 100;
 
-	const minimumContrast = 3.1; // https://www.w3.org/TR/WCAG21/#contrast-minimum
+	const minimumContrast = 3.1; // https://www.w3.org/WAI/WCAG21/Understanding/non-text-contrast.html
 
 	const backgroundLight = sourcePalette.neutral[97];
 	const backgroundDark = sourcePalette.neutral[10];
@@ -161,27 +143,12 @@ export const FootballMatchStat = ({
 	const awayNeedsContrastWhenDark =
 		getContrast(away.teamColour, backgroundDark) < minimumContrast;
 
-	/**
-	 * If either team colour lacks sufficient contrast we adjust both numbers
-	 * so we don't appear to be favouring one team over the other. For the chart
-	 * we keep the team colour and apply a contrasting border colour.
-	 */
-	const numbersNeedContrastWhenLight =
-		homeNeedsContrastWhenLight || awayNeedsContrastWhenLight;
-	const numbersNeedContrastWhenDark =
-		homeNeedsContrastWhenDark || awayNeedsContrastWhenDark;
-
 	return (
 		<div css={containerCss}>
 			<div css={[headerCss, raiseLabelOnDesktop && raiseLabelCss]}>
 				<span css={labelCss}>{label}</span>
 				<span
-					css={[
-						numberCss,
-						largeNumbersOnDesktop && largeNumberCss,
-						numbersNeedContrastWhenLight && numberLightContrastCss,
-						numbersNeedContrastWhenDark && numberDarkContrastCss,
-					]}
+					css={[numberCss, largeNumbersOnDesktop && largeNumberCss]}
 					style={{ '--match-stat-team-colour': home.teamColour }}
 				>
 					<span
@@ -198,8 +165,6 @@ export const FootballMatchStat = ({
 						numberCss,
 						awayStatCss,
 						largeNumbersOnDesktop && largeNumberCss,
-						numbersNeedContrastWhenLight && numberLightContrastCss,
-						numbersNeedContrastWhenDark && numberDarkContrastCss,
 					]}
 					style={{ '--match-stat-team-colour': away.teamColour }}
 				>
@@ -217,8 +182,8 @@ export const FootballMatchStat = ({
 				<div
 					css={[
 						barCss,
-						homeNeedsContrastWhenLight && barLightContrastCss,
-						homeNeedsContrastWhenDark && barDarkContrastCss,
+						homeNeedsContrastWhenLight && barAddContrastLightCss,
+						homeNeedsContrastWhenDark && barAddContrastDarkCss,
 					]}
 					style={{
 						'--match-stat-percentage': `${homePercentage}%`,
@@ -228,8 +193,8 @@ export const FootballMatchStat = ({
 				<div
 					css={[
 						barCss,
-						awayNeedsContrastWhenLight && barLightContrastCss,
-						awayNeedsContrastWhenDark && barDarkContrastCss,
+						awayNeedsContrastWhenLight && barAddContrastLightCss,
+						awayNeedsContrastWhenDark && barAddContrastDarkCss,
 					]}
 					style={{
 						'--match-stat-percentage': `${awayPercentage}%`,
