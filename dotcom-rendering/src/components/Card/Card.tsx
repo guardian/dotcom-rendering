@@ -1013,6 +1013,7 @@ export const Card = ({
 									}
 									subtitleSize={subtitleSize}
 									enableHls={enableHls}
+									fullWidth={false}
 								/>
 							</Island>
 						)}
