@@ -136,11 +136,17 @@ jobs:
           name: ui-build
           path: ab-testing/frontend/output/ab-tests.html
 
-      - name: Fetch Lambda build
+      - name: Fetch Deploy Lambda build
         uses: actions/download-artifact@v6.0.0
         with:
           name: ab-testing-lambda-build
-          path: ab-testing/deploy-lambda/dist/lambda.zip
+          path: ab-testing/deploy-lambda/dist/deployment-lambda.zip
+
+      - name: Fetch Notification Lambda build
+        uses: actions/download-artifact@v6.0.0
+        with:
+          name: ab-testing-notification-build
+          path: ab-testing/notification-lambda/dist/notification-lambda.zip
 
       - name: CDK Test
         run: pnpm --filter @guardian/ab-testing-cdk test
@@ -159,7 +165,9 @@ jobs:
             ab-testing-config-artifacts:
               - ab-testing/config/dist
             ab-testing-deployment-lambda:
-              - ab-testing/deploy-lambda/dist/lambda.zip
+              - ab-testing/deploy-lambda/dist/deployment-lambda.zip
+            ab-testing-notification-lambda:
+              - ab-testing/notification-lambda/dist/notification-lambda.zip
             ab-testing-ui-artifact:
               - ab-testing/frontend/output/ab-tests.html
             cdk.out:
