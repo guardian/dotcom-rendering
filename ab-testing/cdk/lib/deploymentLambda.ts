@@ -41,7 +41,7 @@ export class AbTestingDeploymentLambda extends GuStack {
 
 		const lambda = new GuLambdaFunction(this, "AbTestingDeploymentLambda", {
 			functionName: `${lambdaFunctionName}-${this.stage}`,
-			fileName: "lambda.zip",
+			fileName: "deployment-lambda.zip",
 			handler: "index.handler",
 			app: lambdaFunctionName,
 			runtime: Runtime.NODEJS_22_X,
