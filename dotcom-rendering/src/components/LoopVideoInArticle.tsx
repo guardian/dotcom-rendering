@@ -29,6 +29,17 @@ export const LoopVideoInArticle = ({
 		return null;
 	}
 
+	const calculateAspectRatio = (): number => {
+		const dimensions = firstVideoAsset?.dimensions;
+
+		if (dimensions) {
+			return dimensions.width / dimensions.height;
+		}
+
+		// Default aspect ratio if dimensions are not available
+		return 5 / 4;
+	};
+
 	return (
 		<>
 			<Island priority="critical" defer={{ until: 'visible' }}>
@@ -39,6 +50,7 @@ export const LoopVideoInArticle = ({
 					fallbackImageAspectRatio={
 						(firstVideoAsset?.aspectRatio ?? '5:4') as FEAspectRatio
 					}
+					containerAspectRatio={calculateAspectRatio()}
 					fallbackImageLoading="lazy"
 					fallbackImageSize="small"
 					height={firstVideoAsset?.dimensions?.height ?? 400}
