@@ -98,15 +98,8 @@ const decideContrastRequired = (colour: string) => {
 const addContrastingBorderCss = (colour: string) => {
 	const mode = decideContrastRequired(colour);
 	if (mode === 'none') return null;
-
 	return css`
-		/* stylelint-disable-next-line media-query-no-invalid */
-		@media (prefers-color-scheme: ${mode}) {
-			border: 1px solid ${palette('--football-match-stat-border')};
-		}
-		[data-color-scheme='${mode}'] & {
-			border: 1px solid ${palette('--football-match-stat-border')};
-		}
+		border: 1px solid ${palette(`--football-match-stat-contrast-${mode}`)};
 	`;
 };
 
