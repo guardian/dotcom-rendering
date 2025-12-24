@@ -82,23 +82,33 @@ const barCss = css`
 	border-radius: 8px;
 `;
 
-const barAddContrastLightCss = css`
-	@media (prefers-color-scheme: light) {
-		border: 1px solid ${palette('--football-match-stat-border')};
-	}
-	[data-color-scheme='light'] & {
-		border: 1px solid ${palette('--football-match-stat-border')};
-	}
-`;
+const decideContrastRequired = (colour: string) => {
+	// https://www.w3.org/WAI/WCAG21/Understanding/non-text-contrast.html
+	const minimumContrast = 3.1;
 
-const barAddContrastDarkCss = css`
-	@media (prefers-color-scheme: dark) {
-		border: 1px solid ${palette('--football-match-stat-border')};
-	}
-	[data-color-scheme='dark'] & {
-		border: 1px solid ${palette('--football-match-stat-border')};
-	}
-`;
+	const backgroundLight = sourcePalette.neutral[97];
+	const backgroundDark = sourcePalette.neutral[10];
+
+	if (getContrast(colour, backgroundLight) < minimumContrast) return 'light';
+	if (getContrast(colour, backgroundDark) < minimumContrast) return 'dark';
+
+	return 'none';
+};
+
+const addContrastingBorderCss = (colour: string) => {
+	const mode = decideContrastRequired(colour);
+	if (mode === 'none') return null;
+
+	return css`
+		/* stylelint-disable-next-line media-query-no-invalid */
+		@media (prefers-color-scheme: ${mode}) {
+			border: 1px solid ${palette('--football-match-stat-border')};
+		}
+		[data-color-scheme='${mode}'] & {
+			border: 1px solid ${palette('--football-match-stat-border')};
+		}
+	`;
+};
 
 type MatchStatistic = {
 	teamName: string;
@@ -128,20 +138,6 @@ export const FootballMatchStat = ({
 }: Props) => {
 	const homePercentage = (home.value / (home.value + away.value)) * 100;
 	const awayPercentage = (away.value / (home.value + away.value)) * 100;
-
-	const minimumContrast = 3.1; // https://www.w3.org/WAI/WCAG21/Understanding/non-text-contrast.html
-
-	const backgroundLight = sourcePalette.neutral[97];
-	const backgroundDark = sourcePalette.neutral[10];
-
-	const homeNeedsContrastWhenLight =
-		getContrast(home.teamColour, backgroundLight) < minimumContrast;
-	const awayNeedsContrastWhenLight =
-		getContrast(away.teamColour, backgroundLight) < minimumContrast;
-	const homeNeedsContrastWhenDark =
-		getContrast(home.teamColour, backgroundDark) < minimumContrast;
-	const awayNeedsContrastWhenDark =
-		getContrast(away.teamColour, backgroundDark) < minimumContrast;
 
 	return (
 		<div css={containerCss}>
@@ -180,22 +176,14 @@ export const FootballMatchStat = ({
 			</div>
 			<div aria-hidden="true" css={chartCss}>
 				<div
-					css={[
-						barCss,
-						homeNeedsContrastWhenLight && barAddContrastLightCss,
-						homeNeedsContrastWhenDark && barAddContrastDarkCss,
-					]}
+					css={[barCss, addContrastingBorderCss(home.teamColour)]}
 					style={{
 						'--match-stat-percentage': `${homePercentage}%`,
 						'--match-stat-team-colour': home.teamColour,
 					}}
 				></div>
 				<div
-					css={[
-						barCss,
-						awayNeedsContrastWhenLight && barAddContrastLightCss,
-						awayNeedsContrastWhenDark && barAddContrastDarkCss,
-					]}
+					css={[barCss, addContrastingBorderCss(away.teamColour)]}
 					style={{
 						'--match-stat-percentage': `${awayPercentage}%`,
 						'--match-stat-team-colour': away.teamColour,
