@@ -155,6 +155,12 @@ export const SupportingContent = ({
 }: Props) => {
 	const columnSpan = getColumnSpan(supportingContent.length);
 
+	{
+		/* In the storylines section on tag pages, the flex splash is used to display key stories. 
+		This is shown as a large image taken from the first article in the group, and the headlines of the first four key articles (include that of the first article).
+		Therefore, we don't display an article headline in the conventional sense, these are displayed as "supporting content". 
+	*/
+	}
 	return storylinesStyle ? (
 		<ul
 			className="sublinks"
@@ -207,6 +213,7 @@ export const SupportingContent = ({
 										desktop: 'xsmall',
 										mobile: 'medium',
 									}}
+									storylinesStyle={storylinesStyle}
 								/>
 								{/* {subLink.kickerText} 
 								todo: card age below obviously istag page is a lie, I'll tweak that in a bit
@@ -216,7 +223,8 @@ export const SupportingContent = ({
 										date: subLink.kickerText ?? '',
 										isWithinTwelveHours: false,
 									}}
-									isTagPage={false}
+									isTagPage={true}
+									storylinesStyle={true}
 								/>
 							</ContainerOverrides>
 						</FormatBoundary>

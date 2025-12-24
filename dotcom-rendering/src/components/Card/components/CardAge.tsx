@@ -30,6 +30,8 @@ type Props = {
 	isTagPage: boolean;
 	showClock?: boolean;
 	colour?: string;
+	// We use storylinesStyle to force the desired appearance of the CardAge in storylines sections on tag pages
+	storylinesStyle?: boolean;
 };
 
 export const CardAge = ({
@@ -38,6 +40,7 @@ export const CardAge = ({
 	isTagPage,
 	showClock,
 	colour = palette('--card-footer-text'),
+	storylinesStyle,
 }: Props) => {
 	if (timeAgo(new Date(webPublication.date).getTime()) === false) {
 		return null;
@@ -46,7 +49,7 @@ export const CardAge = ({
 	return (
 		<span css={ageStyles(colour)}>
 			{showClock && <ClockIcon />}
-			{isTagPage ? (
+			{isTagPage && !storylinesStyle ? (
 				<DateTime
 					date={new Date(webPublication.date)}
 					display={'absolute'}

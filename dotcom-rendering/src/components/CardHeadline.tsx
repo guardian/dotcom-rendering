@@ -57,6 +57,7 @@ type Props = {
 	kickerColour?: string;
 	quoteColour?: string;
 	kickerImage?: PodcastSeriesImage;
+	storylinesStyle?: boolean;
 };
 
 const sublinkStyles = css`
@@ -220,9 +221,12 @@ export const CardHeadline = ({
 	kickerColour = palette('--card-kicker-text'),
 	quoteColour = palette('--card-quote-icon'),
 	kickerImage,
+	storylinesStyle,
 }: Props) => {
 	// The link is only applied directly to the headline if it is a sublink
-	const isSublink = !!linkTo;
+	const isSublink = !!linkTo && !storylinesStyle;
+	console.log('storylinesStyle in CardHeadline:', storylinesStyle);
+	console.log('isSublink in CardHeadline:', isSublink);
 
 	const fontStyles = getFonts(format, fontSizes);
 
@@ -236,6 +240,10 @@ export const CardHeadline = ({
 					isSublink
 						? css`
 								${textSans14}
+						  `
+						: storylinesStyle
+						? css`
+								${textSans20}
 						  `
 						: fontStyles,
 				]}
