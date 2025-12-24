@@ -63,7 +63,6 @@ export const LoopVideoInArticle = ({
 					uniqueId={element.id}
 					width={firstVideoAsset?.dimensions?.width ?? 500}
 					enableHls={false}
-					fullWidth={true}
 				/>
 			</Island>
 			{!!caption && (

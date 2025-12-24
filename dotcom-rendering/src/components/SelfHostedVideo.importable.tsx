@@ -55,11 +55,11 @@ const videoContainerStyles = (
 	}
 `;
 
-const figureStyles = (aspectRatio: number, fullWidth: boolean) => css`
+const figureStyles = (aspectRatio: number, letterboxed: boolean) => css`
 	position: relative;
 	aspect-ratio: ${aspectRatio};
 	height: 100%;
-	${!fullWidth &&
+	${letterboxed &&
 	css`
 		max-height: 100vh;
 		max-height: 100svh;
@@ -153,7 +153,7 @@ type Props = {
 	subtitleSource?: string;
 	subtitleSize: SubtitleSize;
 	enableHls: boolean;
-	fullWidth: boolean;
+	letterboxed?: boolean;
 };
 
 export const SelfHostedVideo = ({
@@ -174,7 +174,7 @@ export const SelfHostedVideo = ({
 	subtitleSource,
 	subtitleSize,
 	enableHls,
-	fullWidth,
+	letterboxed = false,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -708,7 +708,7 @@ export const SelfHostedVideo = ({
 		>
 			<figure
 				ref={setNode}
-				css={figureStyles(aspectRatio, fullWidth)}
+				css={figureStyles(aspectRatio, letterboxed)}
 				className={`video-container ${videoStyle.toLocaleLowerCase()}`}
 				data-component="gu-video-loop"
 			>
@@ -742,7 +742,7 @@ export const SelfHostedVideo = ({
 					subtitleSize={subtitleSize}
 					activeCue={activeCue}
 					enableHls={enableHls}
-					fullWidth={fullWidth}
+					letterboxed={letterboxed}
 				/>
 			</figure>
 		</div>
