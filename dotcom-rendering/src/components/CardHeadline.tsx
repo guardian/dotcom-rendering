@@ -240,10 +240,6 @@ export const CardHeadline = ({
 						? css`
 								${textSans14}
 						  `
-						: storylinesStyle
-						? css`
-								${textSans20}
-						  `
 						: fontStyles,
 				]}
 			>

@@ -519,25 +519,19 @@ export const Card = ({
 				`}
 			`}
 		>
-			{/* Ordinarily, it's either the pill or the footer, but we want to display the date on these cards if they appear in the storylines section on tag pages.
-				Bit of padding to align with the start of the pill type. 
+			{/* Ordinarily, it's either the pill or the footer, but we want to display the date on these cards 
+				if they appear in the storylines section on tag pages.
 			*/}
 			{storylinesStyle && (
-				<div
-					css={css`
-						padding-left: ${space[2]}px;
-					`}
-				>
-					<CardFooter
-						format={format}
-						age={decideAge()}
-						commentCount={<CommentCount />}
-						cardBranding={
-							isOnwardContent ? <LabsBranding /> : undefined
-						}
-						showLivePlayable={showLivePlayable}
-					/>
-				</div>
+				<CardFooter
+					format={format}
+					age={decideAge()}
+					commentCount={<CommentCount />}
+					cardBranding={
+						isOnwardContent ? <LabsBranding /> : undefined
+					}
+					showLivePlayable={showLivePlayable}
+				/>
 			)}
 
 			{mainMedia?.type === 'YoutubeVideo' && isVideoArticle && (
@@ -766,25 +760,40 @@ export const Card = ({
 		if (!hasSublinks) return null;
 		if (sublinkPosition === 'none') return null;
 
-		const Sublinks = () => (
-			<SupportingContent
-				supportingContent={supportingContent}
-				containerPalette={containerPalette}
-				alignment={supportingContentAlignment}
-				isDynamo={isDynamo}
-				isMedia={isMediaCard(format)}
-				fillBackgroundOnMobile={
-					!!isFlexSplash ||
-					(isBetaContainer &&
-						!!image &&
-						(mediaPositionOnMobile === 'bottom' ||
-							isMediaCard(format)))
-				}
-				fillBackgroundOnDesktop={
-					isBetaContainer && isMediaCardOrNewsletter
-				}
-			/>
-		);
+		const Sublinks = () => {
+			return storylinesStyle ? (
+				<SupportingKeyStoriesContent
+					supportingContent={supportingContent}
+					containerPalette={containerPalette}
+					alignment={supportingContentAlignment}
+					isDynamo={isDynamo}
+					isMedia={isMediaCard(format)}
+					fillBackgroundOnMobile={false}
+					fillBackgroundOnDesktop={
+						isBetaContainer && isMediaCardOrNewsletter
+					}
+					storylinesStyle={storylinesStyle}
+				/>
+			) : (
+				<SupportingContent
+					supportingContent={supportingContent}
+					containerPalette={containerPalette}
+					alignment={supportingContentAlignment}
+					isDynamo={isDynamo}
+					isMedia={isMediaCard(format)}
+					fillBackgroundOnMobile={
+						!!isFlexSplash ||
+						(isBetaContainer &&
+							!!image &&
+							(mediaPositionOnMobile === 'bottom' ||
+								isMediaCard(format)))
+					}
+					fillBackgroundOnDesktop={
+						isBetaContainer && isMediaCardOrNewsletter
+					}
+				/>
+			);
+		};
 
 		if (sublinkPosition === 'outer') {
 			return <Sublinks />;
@@ -1251,7 +1260,6 @@ export const Card = ({
 						*/}
 					{!(storylinesStyle && isFlexSplash) && (
 						<div
-							id="test"
 							css={css`
 								position: relative;
 								display: flex;

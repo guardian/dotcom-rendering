@@ -6,6 +6,7 @@ import {
 	textSans14,
 	until,
 } from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { type EditionId, isNetworkFront } from '../lib/edition';
 import { palette as schemePalette } from '../palette';
@@ -603,11 +604,15 @@ export const StorylineSection = ({
 									`}
 								>
 									Dive deeper into the Guardian's archive.
-									This product uses GenAI. Learn more about
-									how it works{' '}
-									<a href="https://www.theguardian.com/help/insideguardian/2023/jun/16/the-guardians-approach-to-generative-ai">
-										here.
-									</a>
+									<Hide until="leftCol">
+										<span>
+											This product uses GenAI. Learn more
+											about how it works{' '}
+											<a href="https://www.theguardian.com/help/insideguardian/2023/jun/16/the-guardians-approach-to-generative-ai">
+												here.
+											</a>
+										</span>
+									</Hide>
 								</div>
 							</>
 						}

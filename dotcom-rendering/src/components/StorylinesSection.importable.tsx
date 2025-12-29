@@ -9,6 +9,7 @@ import {
 	textSans20,
 	textSansBold34,
 } from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { useState } from 'react';
 import type { EditionId } from '../lib/edition';
 import { parseStorylinesContentToStorylines } from '../model/enhanceTagPageStorylinesContent';
@@ -252,6 +253,16 @@ export const StorylinesSection = ({
 				</div>
 				{/* Context on article date range */}
 				<div css={articleCountAndDateRangeStyle}>
+					<Hide from="leftCol">
+						<span>
+							This product uses GenAI. Learn more about how it
+							works{' '}
+							<a href="https://www.theguardian.com/help/insideguardian/2023/jun/16/the-guardians-approach-to-generative-ai">
+								here
+							</a>
+							.{' '}
+						</span>
+					</Hide>
 					{`These storylines were curated from articles published ${formatDateRangeText(
 						storylinesContent.earliestArticleTime,
 						storylinesContent.latestArticleTime,

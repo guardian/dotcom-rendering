@@ -104,6 +104,9 @@ const wrapperStyles = css`
 	@media (pointer: coarse) {
 		padding-bottom: 0;
 	}
+	${until.leftCol} {
+		margin-top: ${space[2]}px;
+	}
 `;
 
 const backgroundFillMobile = (isMedia: boolean) => css`
@@ -189,7 +192,7 @@ export const SupportingKeyStoriesContent = ({
 									headlineText={subLink.headline}
 									fontSizes={{
 										desktop: 'xsmall',
-										mobile: 'medium',
+										mobile: 'xxsmall',
 									}}
 									storylinesStyle={storylinesStyle}
 								/>
