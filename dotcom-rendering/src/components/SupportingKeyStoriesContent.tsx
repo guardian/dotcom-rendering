@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source/foundations';
 import { ArticleDesign } from '../lib/articleFormat';
-import { isMediaCard } from '../lib/cardHelpers';
 import { palette } from '../palette';
 import type { DCRContainerPalette, DCRSupportingContent } from '../types/front';
+import { CardAge } from './Card/components/CardAge';
 import { CardHeadline } from './CardHeadline';
 import { ContainerOverrides } from './ContainerOverrides';
 import { FormatBoundary } from './FormatBoundary';
@@ -21,6 +21,7 @@ type Props = {
 	fillBackgroundOnMobile?: boolean;
 	/** Allows sublinks container to have a background colour on desktop screen sizes */
 	fillBackgroundOnDesktop?: boolean;
+	storylinesStyle?: boolean;
 };
 
 /**
@@ -56,8 +57,10 @@ const horizontalGrid = css`
 `;
 
 const horizontalLineStyle = css`
-	margin-top: ${space[3]}px;
-	::before {
+	:not(:first-child) {
+		margin-top: ${space[3]}px;
+	}
+	:not(:first-child)::before {
 		position: absolute;
 		top: -${space[2]}px;
 		left: 0;
@@ -71,19 +74,6 @@ const horizontalLineStyle = css`
 		${from.desktop} {
 			width: 140px;
 		}
-	}
-`;
-
-const verticalLineStyle = css`
-	/* The last child doesn't need a dividing right line */
-	:not(:last-child)::after {
-		content: '';
-		position: absolute;
-		top: 0;
-		right: -10px; /* Half of the column-gap to center the line */
-		height: 100%;
-		width: 1px;
-		background-color: ${palette('--card-border-supporting')};
 	}
 `;
 
@@ -107,15 +97,10 @@ const horizontalSublinkStyles = (totalColumns: number) => css`
 	${until.tablet} {
 		${horizontalLineStyle}
 	}
-
-	${from.tablet} {
-		${verticalLineStyle}
-	}
 `;
 
 const wrapperStyles = css`
 	position: relative;
-	padding-top: ${space[2]}px;
 	@media (pointer: coarse) {
 		padding-bottom: 0;
 	}
@@ -133,7 +118,7 @@ const backgroundFillMobile = (isMedia: boolean) => css`
 
 const backgroundFillDesktop = (isMedia: boolean) => css`
 	${from.tablet} {
-		padding: ${space[2]}px;
+		padding: ${space[0]}px;
 		padding-bottom: ${space[3]}px;
 		background-color: ${isMedia
 			? palette('--card-media-sublinks-background')
@@ -141,7 +126,11 @@ const backgroundFillDesktop = (isMedia: boolean) => css`
 	}
 `;
 
-export const SupportingContent = ({
+/** In the storylines section on tag pages, the flex splash is used to display key stories. 
+   This is shown as a large image taken from the first article in the group, and the headlines of the first four key articles (include that of the first article).
+   Therefore, we don't display an article headline in the conventional sense, these are displayed as "supporting content". 
+*/
+export const SupportingKeyStoriesContent = ({
 	supportingContent,
 	alignment,
 	containerPalette,
@@ -149,16 +138,16 @@ export const SupportingContent = ({
 	isMedia = false,
 	fillBackgroundOnMobile = false,
 	fillBackgroundOnDesktop = false,
+	storylinesStyle = false,
 }: Props) => {
 	const columnSpan = getColumnSpan(supportingContent.length);
-
 	return (
 		<ul
 			className="sublinks"
 			css={[
 				wrapperStyles,
 				baseGrid,
-				(isDynamo ?? alignment === 'horizontal') && horizontalGrid,
+				alignment === 'horizontal' && horizontalGrid,
 				fillBackgroundOnMobile && backgroundFillMobile(isMedia),
 				fillBackgroundOnDesktop && backgroundFillDesktop(isMedia),
 			]}
@@ -167,13 +156,11 @@ export const SupportingContent = ({
 				// The model has this property as optional but it is very likely to exist
 				if (!subLink.headline) return null;
 
-				/** Force the format design to be Standard if sublink format
-				 * is not compatible with transparent backgrounds */
+				/** Force the format design to be Standard to ensure
+				 * it is compatible with transparent backgrounds */
 				const subLinkFormat = {
 					...subLink.format,
-					design: isMediaCard(subLink.format)
-						? ArticleDesign.Standard
-						: subLink.format.design,
+					design: ArticleDesign.Standard,
 				};
 
 				return (
@@ -192,7 +179,7 @@ export const SupportingContent = ({
 								containerPalette={containerPalette}
 							>
 								<CardHeadline
-									format={subLinkFormat}
+									format={{ design: 0, display: 0, theme: 0 }}
 									hasInlineKicker={true}
 									linkTo={subLink.url}
 									showPulsingDot={
@@ -200,8 +187,28 @@ export const SupportingContent = ({
 										ArticleDesign.LiveBlog
 									}
 									headlineText={subLink.headline}
-									kickerText={subLink.kickerText}
+									fontSizes={{
+										desktop: 'xsmall',
+										mobile: 'medium',
+									}}
+									storylinesStyle={storylinesStyle}
 								/>
+								<div
+									css={css`
+										margin-top: ${space[1]}px;
+									`}
+								>
+									<CardAge
+										webPublication={{
+											date:
+												subLink.webPublicationDate ??
+												'',
+											isWithinTwelveHours: false,
+										}}
+										isTagPage={true}
+										storylinesStyle={true}
+									/>
+								</div>
 							</ContainerOverrides>
 						</FormatBoundary>
 					</li>

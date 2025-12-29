@@ -94,8 +94,9 @@ function parseKeyStoriesToFrontCard(category: CategoryContent): DCRFrontCard {
 		return {
 			headline: article.headline,
 			url: article.url,
-			kickerText: article.publicationTime,
+			kickerText: '',
 			format: { design: 0, display: 0, theme: 0 },
+			webPublicationDate: article.publicationTime,
 		};
 	});
 
