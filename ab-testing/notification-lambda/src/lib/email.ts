@@ -1,5 +1,5 @@
 import { MessageRejected, SendEmailCommand } from "@aws-sdk/client-ses";
-import { sesClient } from "./sesClient";
+import { sesClient } from "./sesClient.ts";
 
 const createSendEmailCommand = (
 	recipients: string[],
@@ -31,16 +31,18 @@ const createSendEmailCommand = (
 				Data: "Expiring AB Tests",
 			},
 		},
-		Source: "ab-testing-notifications@guardian.co.uk",
+		Source: "dig.dev.web-engineers@theguardian.com",
 	});
 };
 
 export const sendEmail = async (recipients: string[], messageHtml: string) => {
 	const sendEmailCommand = createSendEmailCommand(recipients, messageHtml);
-
+	console.log("sending email");
 	try {
-		return await sesClient.send(sendEmailCommand);
+		return void sesClient.send(sendEmailCommand);
 	} catch (caught) {
+		console.log("error");
+		console.log(caught);
 		// Continue on error for MessageRejected error
 		if (caught instanceof MessageRejected) {
 			return caught;
