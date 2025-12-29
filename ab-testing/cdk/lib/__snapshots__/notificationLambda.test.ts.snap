@@ -232,66 +232,6 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
         "AbTestingNotificationLambdaServiceRoleDefaultPolicyA2BC1639",
         "AbTestingNotificationLambdaServiceRole529D80CF"
       ]
-    },
-    "AbTestingNotificationLambdaAbTestingNotificationLambdacron05MONFRI0C4257EF9": {
-      "Type": "AWS::Events::Rule",
-      "Properties": {
-        "Description": "Daily expiry checks for AB testing configuration",
-        "ScheduleExpression": "cron(0 5 ? * MON-FRI *)",
-        "State": "ENABLED",
-        "Tags": [
-          {
-            "Key": "App",
-            "Value": "ab-testing-notification-lambda"
-          },
-          {
-            "Key": "gu:cdk:version",
-            "Value": "62.0.1"
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering"
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend"
-          },
-          {
-            "Key": "Stage",
-            "Value": "CODE"
-          }
-        ],
-        "Targets": [
-          {
-            "Arn": {
-              "Fn::GetAtt": [
-                "AbTestingNotificationLambda36F153E8",
-                "Arn"
-              ]
-            },
-            "Id": "Target0"
-          }
-        ]
-      }
-    },
-    "AbTestingNotificationLambdaAbTestingNotificationLambdacron05MONFRI0AllowEventRuleAbTestingDeploymentLambdaAbTestingNotificationLambda7D0C1DC424065784": {
-      "Type": "AWS::Lambda::Permission",
-      "Properties": {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "AbTestingNotificationLambda36F153E8",
-            "Arn"
-          ]
-        },
-        "Principal": "events.amazonaws.com",
-        "SourceArn": {
-          "Fn::GetAtt": [
-            "AbTestingNotificationLambdaAbTestingNotificationLambdacron05MONFRI0C4257EF9",
-            "Arn"
-          ]
-        }
-      }
     }
   }
 }
@@ -573,7 +513,7 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
         ]
       }
     },
-    "AbTestingNotificationLambdaAbTestingNotificationLambdacron05MONFRI0AllowEventRuleAbTestingDeploymentLambdaAbTestingNotificationLambda7D0C1DC424065784": {
+    "AbTestingNotificationLambdaAbTestingNotificationLambdacron05MONFRI0AllowEventRuleAbTestingNotificationLambdaPRODAbTestingNotificationLambdaF3B31E96F2DB1058": {
       "Type": "AWS::Lambda::Permission",
       "Properties": {
         "Action": "lambda:InvokeFunction",

@@ -17,7 +17,7 @@ void describe("The AB testing notification lambda stack", () => {
 		const app = new GuRoot();
 		const stack = new AbTestingNotificationLambda(
 			app,
-			"AbTestingDeploymentLambda",
+			"AbTestingNotificationLambdaCODE",
 			{
 				stack: "frontend",
 				stage: "CODE",
@@ -34,7 +34,7 @@ void describe("The AB testing notification lambda stack", () => {
 		const app = new GuRoot();
 		const stack = new AbTestingNotificationLambda(
 			app,
-			"AbTestingDeploymentLambda",
+			"AbTestingNotificationLambdaPROD",
 			{
 				stack: "frontend",
 				stage: "PROD",
