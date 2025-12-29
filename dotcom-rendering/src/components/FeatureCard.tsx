@@ -359,8 +359,6 @@ export type Props = {
 	 */
 	isImmersive?: boolean;
 	showVideo?: boolean;
-	/** Feature flag for the labs redesign work */
-	showLabsRedesign?: boolean;
 	storylinesStyle?: boolean;
 };
 
@@ -397,7 +395,6 @@ export const FeatureCard = ({
 	isNewsletter = false,
 	isImmersive = false,
 	showVideo = false,
-	showLabsRedesign = false,
 	storylinesStyle = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;

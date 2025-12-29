@@ -90,7 +90,6 @@ type ImmersiveCardLayoutProps = {
 	serverTime?: number;
 	imageLoading: Loading;
 	collectionId: number;
-	showLabsRedesign?: boolean;
 	storylinesStyle?: boolean;
 };
 
@@ -106,7 +105,6 @@ const ImmersiveCardLayout = ({
 	serverTime,
 	imageLoading,
 	collectionId,
-	showLabsRedesign,
 	storylinesStyle,
 }: ImmersiveCardLayoutProps) => {
 	const isLoopingVideo =
@@ -146,7 +144,6 @@ const ImmersiveCardLayout = ({
 					supportingContent={card.supportingContent}
 					isImmersive={true}
 					showVideo={card.showVideo}
-					showLabsRedesign={showLabsRedesign}
 					storylinesStyle={storylinesStyle}
 				/>
 			</LI>
