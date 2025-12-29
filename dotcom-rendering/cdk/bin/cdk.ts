@@ -68,8 +68,8 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 	stage: 'PROD',
 	domainName: 'facia-rendering.guardianapis.com',
 	scaling: {
-		minimumInstances: 48,
-		maximumInstances: 240,
+		minimumInstances: 21,
+		maximumInstances: 210,
 		policies: {
 			step: {
 				cpu: cpuScalingSteps,
