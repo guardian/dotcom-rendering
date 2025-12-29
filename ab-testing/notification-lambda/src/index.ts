@@ -1,6 +1,6 @@
 import { activeABtests } from "@guardian/ab-testing-config";
-import { ABExpiryChecks, checkExpiry } from "./lib/checkExpiry";
-import { sendEmail } from "./lib/email";
+import { type ABExpiryChecks, checkExpiry } from "./lib/checkExpiry.ts";
+import { sendEmail } from "./lib/email.ts";
 
 const getMessageBody = (
 	recipient: string,
@@ -9,7 +9,7 @@ const getMessageBody = (
 	return `
 	<h1>AB Tests Expiring soon</h1>
 	${recipient}
-	${checks}
+	${JSON.stringify(checks)}
 	`;
 };
 
@@ -22,12 +22,14 @@ const arrangeByEmail = (
 
 export const handler = async (): Promise<void> => {
 	const expiryChecks = checkExpiry(activeABtests);
-
+	console.dir(expiryChecks, { depth: null });
 	const expiryChecksByEmail = arrangeByEmail(expiryChecks);
 
 	expiryChecksByEmail.forEach(
 		([email, checks]: [string, Record<string, unknown[]>]) => {
 			const message = getMessageBody(email, checks);
+			console.dir({ message, email }, { depth: null });
+
 			sendEmail([email], message);
 		},
 	);
