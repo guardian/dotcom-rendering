@@ -74,22 +74,6 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
         "PolicyDocument": {
           "Statement": [
             {
-              "Action": "ses:SendEmail",
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:aws:ses:eu-west-1:",
-                    {
-                      "Ref": "AWS::AccountId"
-                    },
-                    ":identity/dig.dev.web-engineers@theguardian.com"
-                  ]
-                ]
-              }
-            },
-            {
               "Action": [
                 "s3:GetObject*",
                 "s3:GetBucket*",
@@ -161,6 +145,22 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
                       "Ref": "AWS::AccountId"
                     },
                     ":parameter/CODE/frontend/ab-testing-notification-lambda/*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": "ses:SendEmail",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:ses:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":identity/dig.dev.web-engineers@theguardian.com"
                   ]
                 ]
               }
@@ -313,22 +313,6 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
         "PolicyDocument": {
           "Statement": [
             {
-              "Action": "ses:SendEmail",
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:aws:ses:eu-west-1:",
-                    {
-                      "Ref": "AWS::AccountId"
-                    },
-                    ":identity/dig.dev.web-engineers@theguardian.com"
-                  ]
-                ]
-              }
-            },
-            {
               "Action": [
                 "s3:GetObject*",
                 "s3:GetBucket*",
@@ -400,6 +384,22 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
                       "Ref": "AWS::AccountId"
                     },
                     ":parameter/PROD/frontend/ab-testing-notification-lambda/*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": "ses:SendEmail",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:ses:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":identity/dig.dev.web-engineers@theguardian.com"
                   ]
                 ]
               }
