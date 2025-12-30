@@ -5,6 +5,7 @@ import type {
 	ParsedStoryline,
 	StorylinesContent,
 } from '../types/storylinesContent';
+import { getDataLinkNameCard, Group } from '../lib/getDataLinkName';
 
 function decideFormatForArticle(
 	category: CategoryContent,
@@ -45,11 +46,15 @@ function decideFormatForArticle(
 function parseArticleDataToFrontCard(
 	category: CategoryContent,
 	article: ArticleData,
+	categoryIndex: number,
+	index: number,
 ): DCRFrontCard {
 	const format = decideFormatForArticle(category, article);
+	const group: Group = `${categoryIndex}`;
+	const dataLinkName = getDataLinkNameCard(format, group, index);
 	return {
 		format,
-		dataLinkName: '',
+		dataLinkName: dataLinkName,
 		url: article.url,
 		headline: article.headline,
 		trailText: undefined,
@@ -102,7 +107,7 @@ function parseKeyStoriesToFrontCard(category: CategoryContent): DCRFrontCard {
 
 	return {
 		format: { design: 0, display: 0, theme: 0 },
-		dataLinkName: '',
+		dataLinkName: '', // the actual links to articles are in supportingContent
 		url: category.articles[0]?.url ?? '',
 		headline: '',
 		trailText: '',
@@ -127,7 +132,10 @@ function parseKeyStoriesToFrontCard(category: CategoryContent): DCRFrontCard {
 	};
 }
 
-function decideGroupedTrails(category: CategoryContent): DCRGroupedTrails {
+function decideGroupedTrails(
+	category: CategoryContent,
+	categoryIndex: number,
+): DCRGroupedTrails {
 	if (category.category === 'Key Stories') {
 		return {
 			splash: [parseKeyStoriesToFrontCard(category)],
@@ -143,7 +151,14 @@ function decideGroupedTrails(category: CategoryContent): DCRGroupedTrails {
 	) {
 		const frontCards = category.articles
 			.slice(0, 1)
-			.map((article) => parseArticleDataToFrontCard(category, article));
+			.map((article, index) =>
+				parseArticleDataToFrontCard(
+					category,
+					article,
+					categoryIndex,
+					index,
+				),
+			);
 		return {
 			splash: [],
 			huge: [],
@@ -155,7 +170,14 @@ function decideGroupedTrails(category: CategoryContent): DCRGroupedTrails {
 	} else {
 		const frontCards = category.articles
 			.slice(0, 2)
-			.map((article) => parseArticleDataToFrontCard(category, article));
+			.map((article, index) =>
+				parseArticleDataToFrontCard(
+					category,
+					article,
+					categoryIndex,
+					index,
+				),
+			);
 		return {
 			splash: [],
 			huge: [],
@@ -185,9 +207,9 @@ export function parseStorylinesContentToStorylines(
 	return data.storylines.map((storyline, i) => ({
 		id: `storyline-${i + 1}`,
 		title: storyline.title,
-		categories: storyline.content.map((category) => ({
+		categories: storyline.content.map((category, categoryIndex) => ({
 			title: decideCategoryTitle(category),
-			groupedTrails: decideGroupedTrails(category),
+			groupedTrails: decideGroupedTrails(category, categoryIndex),
 		})),
 	}));
 }

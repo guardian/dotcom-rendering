@@ -148,7 +148,7 @@ function formatDateRangeText(
 export const StorylinesSectionContent = ({
 	url,
 	index,
-	containerId, //gltodo: need to check
+	containerId,
 	storylinesContent,
 	editionId,
 }: StorylinesSectionProps) => {
@@ -178,7 +178,6 @@ export const StorylinesSectionContent = ({
 				showTopBorder={true}
 				ophanComponentLink={`container-${index} | ${containerId}`}
 				ophanComponentName={containerId}
-				sectionId={containerId}
 				editionId={editionId}
 			>
 				{/* Storylines tab selector. This is a carousel on mobile. */}
@@ -187,7 +186,7 @@ export const StorylinesSectionContent = ({
 						carouselLength={Math.ceil(parsedStorylines.length)}
 						visibleCarouselSlidesOnMobile={2}
 						visibleCarouselSlidesOnTablet={4}
-						sectionId={'sectionId'}
+						sectionId={'storylines-tabs-carousel'}
 						shouldStackCards={{ desktop: false, mobile: false }}
 						gapSizes={{ column: 'large', row: 'medium' }}
 					>
@@ -250,7 +249,7 @@ export const StorylinesSectionContent = ({
 								groupedTrails={category.groupedTrails}
 								imageLoading={'eager'}
 								aspectRatio={'5:4'}
-								collectionId={0} //gltodo: need to check
+								collectionId={index}
 								containerLevel="Secondary"
 								storylinesStyle={true}
 							/>

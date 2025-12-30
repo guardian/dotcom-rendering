@@ -24,8 +24,6 @@ type Props = {
 	description?: string;
 	/** The title can be made into a link using this property */
 	url?: string;
-	/** The html `id` property of the element */
-	sectionId?: string;
 	// collectionId?: string;
 	pageId?: string;
 	/** Defaults to `true`. If we should render the top border */
@@ -501,7 +499,6 @@ export const StorylinesSection = ({
 	editionId,
 	ophanComponentLink,
 	ophanComponentName,
-	sectionId = '',
 	pageId,
 	showDateHeader = false,
 	showTopBorder = true,
@@ -512,7 +509,7 @@ export const StorylinesSection = ({
 	dislikeHandler,
 	likeHandler,
 }: Props) => {
-	const id = sectionId || 'unknown-id'; //gltodo: figure out what this should be
+	const sectionId = 'storylines-section';
 	const isToggleable = toggleable && !!sectionId;
 	const isBetaContainer = !!containerLevel;
 
@@ -653,7 +650,7 @@ export const StorylinesSection = ({
 									{
 										component: {
 											componentType: 'STORYLINES',
-											id,
+											id: sectionId,
 											products: [],
 											labels: [],
 										},
@@ -669,7 +666,7 @@ export const StorylinesSection = ({
 									{
 										component: {
 											componentType: 'STORYLINES',
-											id,
+											id: sectionId,
 											products: [],
 											labels: [],
 										},
