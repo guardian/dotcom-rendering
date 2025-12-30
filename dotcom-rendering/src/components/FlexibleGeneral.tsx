@@ -209,7 +209,7 @@ const decideSplashCardProperties = (
 					? 'horizontal'
 					: 'vertical',
 				liveUpdatesAlignment: 'vertical',
-				trailTextSize: storylinesStyle ? 'large' : 'regular',
+				trailTextSize: 'regular',
 				subtitleSize: 'medium',
 			};
 		case 'megaboost':

@@ -7,7 +7,7 @@ import { CardAge } from './Card/components/CardAge';
 import { CardHeadline } from './CardHeadline';
 import { ContainerOverrides } from './ContainerOverrides';
 import { FormatBoundary } from './FormatBoundary';
-import { Alignment } from './SupportingContent';
+import type { Alignment } from './SupportingContent';
 
 type Props = {
 	supportingContent: DCRSupportingContent[];
@@ -126,9 +126,6 @@ const backgroundFillDesktop = (isMedia: boolean) => css`
 			: palette('--card-sublinks-background')};
 	}
 `;
-4;
-//gltodo: remove horizontal alignment option?
-//what about on tablet?
 
 /** In the storylines section on tag pages, the flex splash is used to display key stories. 
    This is shown as a large image taken from the first article in the group, and the headlines of the first four key articles (include that of the first article).

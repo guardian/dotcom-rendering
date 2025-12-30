@@ -519,8 +519,9 @@ export const Card = ({
 				`}
 			`}
 		>
-			{/* Ordinarily, it's either the pill or the footer, but we want to display the date on these cards 
-				if they appear in the storylines section on tag pages.
+			{/* Usually, we either display the pill or the footer,
+				but if the card appears in the storylines section on tag pages
+				then we do want to display the date on these cards as well as the media pill.
 			*/}
 			{storylinesStyle && (
 				<CardFooter
@@ -765,7 +766,7 @@ export const Card = ({
 				<SupportingKeyStoriesContent
 					supportingContent={supportingContent}
 					containerPalette={containerPalette}
-					alignment={supportingContentAlignment}
+					alignment="vertical"
 					isMedia={isMediaCard(format)}
 					fillBackgroundOnMobile={false}
 					fillBackgroundOnDesktop={
@@ -1250,12 +1251,12 @@ export const Card = ({
 						isOnwardContent,
 					)}
 				>
-					{/* This div is needed to keep the headline and trail text justified at the start */}
 					{/* In the storylines section on tag pages, the flex splash is used to display key stories. 
-							This is shown as a large image taken from the first article in the group, and the headlines of the first four key articles (include that of the first article).
-							Therefore, we don't display an article headline in the conventional sense, these are displayed as "supporting content". 
-							However, simply passing an empty string as the article headline still reserves space, so this check enables us to avoid rendering that space at all. 
-						*/}
+						We don't display an article headline in the conventional sense, the key stories are instead displayed as "supporting content". 
+						However, simply passing an empty string as the article headline still reserves space. 
+						The storylines check enables us to avoid rendering that space at all. 
+					*/}
+					{/* the div is needed to keep the headline and trail text justified at the start */}
 					{!(storylinesStyle && isFlexSplash) && (
 						<div
 							css={css`

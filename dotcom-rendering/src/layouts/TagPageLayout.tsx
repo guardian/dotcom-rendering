@@ -135,11 +135,10 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 						  )
 						: undefined;
 
-					//gltodo: check the pagination if it works as expected on single container tag pages
-					// also
+					// We insert the storylines section after the first section or if there's only one section
 					const insertStorylinesSection =
 						tagPage.storylinesContent &&
-						index == 1 &&
+						(index === 1 || tagPage.groupedTrails.length === 1) &&
 						(!tagPage.pagination ||
 							tagPage.pagination.currentPage === 1);
 

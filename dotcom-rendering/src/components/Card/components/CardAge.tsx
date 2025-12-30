@@ -30,7 +30,6 @@ type Props = {
 	isTagPage: boolean;
 	showClock?: boolean;
 	colour?: string;
-	// We use storylinesStyle to force the desired appearance of the CardAge in storylines sections on tag pages
 	storylinesStyle?: boolean;
 };
 

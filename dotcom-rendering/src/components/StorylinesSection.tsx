@@ -10,7 +10,6 @@ import { Hide } from '@guardian/source/react-components';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { type EditionId, isNetworkFront } from '../lib/edition';
 import { palette as schemePalette } from '../palette';
-import type { CollectionBranding } from '../types/branding';
 import type { DCRContainerLevel, DCRContainerPalette } from '../types/front';
 import { ContainerOverrides } from './ContainerOverrides';
 import { ContainerTitle } from './ContainerTitle';
@@ -31,8 +30,6 @@ type Props = {
 	pageId?: string;
 	/** Defaults to `true`. If we should render the top border */
 	showTopBorder?: boolean;
-	/** A React component can be passed to be inserted inside the left column */
-	leftContent?: React.ReactNode;
 	children?: React.ReactNode;
 	/** The string used to set the `data-component` Ophan attribute */
 	ophanComponentName?: string;
@@ -58,7 +55,6 @@ type Props = {
 	showDateHeader?: boolean;
 	/** Used in partnership with `showDateHeader` to localise the date string */
 	editionId: EditionId;
-	collectionBranding?: CollectionBranding;
 	isTagPage?: boolean;
 	hasNavigationButtons?: boolean;
 	likeHandler?: () => void;
@@ -409,12 +405,11 @@ const carouselNavigationPlaceholder = css`
 	}
 `;
 
-/// todo: finish mobile and tablet representation
-
 /**
  * # Front Container
  *
- * A container for fronts, which generally contains sets of cards.
+ * A container for the storylines content on tag pages,
+ * which contains sets of cards.
  *
  * Provides borders, spacing, colours, a title and features specific to fronts
  * such as show/hide toggle button. Content slotted as `children` is placed
@@ -433,8 +428,9 @@ const carouselNavigationPlaceholder = css`
  * │▒▒▒▒▒▒▒│
  * │▒▒▒▒▒▒▒│
  * ├───────┤
- * │Show   │
- * |More   │
+ * │AI Note│
+ * │Context│
+ * │Footer │
  * └───────┘
  *
  * from `tablet` (740) to `desktop` (980)
@@ -442,12 +438,11 @@ const carouselNavigationPlaceholder = css`
  *  1 2 3 4 5 6 7 8 9 a b c (12)
  * ┌───────────────────────┐
  * │Title                  │
- * │Date                   │
  * ├───────────────────────┤
  * │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * ├───────────────────────┤
- * │Show More              │
+ * │AI note,context,footer │
  * └───────────────────────┘
  *
  * on `leftCol` (1140) if component is toggleable
@@ -455,11 +450,11 @@ const carouselNavigationPlaceholder = css`
  *  1 2 3 4 5 6 7 8 9 a b c d e (14)
  * ┌───┬───────────────────┬─┐
  * │Tit│                   │X│
- * │AI├───────────────────┴─┤
+ * │AI ├───────────────────┴─┤
  * ├───┤▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │   │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │Foo│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * │ter│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
+ * │ter│Content context info │
  * ├───┼─────────────────────┤
  *
  * on `leftCol` (1140) if component is not toggleable
@@ -471,7 +466,7 @@ const carouselNavigationPlaceholder = css`
  * ├───┤▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │   │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │Foo│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * │ter │Content context line  │
+ * │ter│Content context info  │
  * ├───┼──────────────────────┤
  *
  * on `wide` (1300)
@@ -484,15 +479,17 @@ const carouselNavigationPlaceholder = css`
  * ├─────-┤▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
  * │      │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
  * │      │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
- * │Footer│Content context line	    │
+ * │Footer│Content context info	    │
  * ├────────────────────────────────┤
  *
  */
 
-/** This is largely a copy of front section (notably re the grid layout), but with some modifications:
- * Some text has been added below the title about AI use
- * In a frontsection, the background normally takes up the full width of the page, but we want just the section to have the grey background
- * A portion of the props and logic in frontsection aren't relevant here
+/**
+ * This is based on @see {FrontSection.tsx} but with some modifications:
+ * - Some text has been added regarding the use of AI in this section
+ * - In a frontsection, the background normally takes up the full width of the page, but we want just the section to have the grey background
+ * - Instead of treats, we have a footer with like/dislike buttons
+ * - A portion of the props and logic in frontsection aren't relevant here
  */
 export const StorylinesSection = ({
 	title,
@@ -502,7 +499,6 @@ export const StorylinesSection = ({
 	containerLevel,
 	description,
 	editionId,
-	leftContent,
 	ophanComponentLink,
 	ophanComponentName,
 	sectionId = '',
@@ -511,20 +507,20 @@ export const StorylinesSection = ({
 	showTopBorder = true,
 	toggleable = false,
 	url,
-	collectionBranding,
 	isTagPage = false,
 	hasNavigationButtons = false,
 	dislikeHandler,
 	likeHandler,
 }: Props) => {
-	const id = sectionId || 'unknown-id'; //todo: figure out what this should be
+	const id = sectionId || 'unknown-id'; //gltodo: figure out what this should be
 	const isToggleable = toggleable && !!sectionId;
 	const isBetaContainer = !!containerLevel;
 
 	const showSectionColours = isNetworkFront(pageId ?? '');
 
 	/**
-	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
+	 * In a front section, id is being used to set the containerId in @see {ShowMore.importable.tsx}
+	 * We don't use show more here, however as noted in the front section component:
 	 * this id pre-existed showMore so is probably also being used for something else.
 	 */
 	return (
@@ -616,10 +612,8 @@ export const StorylinesSection = ({
 								</div>
 							</>
 						}
-						collectionBranding={collectionBranding}
+						collectionBranding={undefined}
 					/>
-
-					{leftContent}
 				</div>
 
 				{(isToggleable || hasNavigationButtons) && (
