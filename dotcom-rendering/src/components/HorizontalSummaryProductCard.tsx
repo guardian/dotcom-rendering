@@ -83,6 +83,14 @@ export const HorizontalSummaryProductCard = ({
 }) => {
 	const cardCta = product.productCtas[0];
 	if (!cardCta) return null;
+	const primaryHeadingWithoutEmTags = product.primaryHeadingHtml.replace(
+		/<\/?em>/g,
+		'',
+	);
+	const primaryHeadingWithoutColon = primaryHeadingWithoutEmTags.replace(
+		/:$/g,
+		'',
+	);
 
 	return (
 		<div css={horizontalCard}>
@@ -94,12 +102,7 @@ export const HorizontalSummaryProductCard = ({
 				/>
 			</div>
 			<div css={informationContainer}>
-				<div
-					css={productCardHeading}
-					dangerouslySetInnerHTML={{
-						__html: product.primaryHeadingHtml,
-					}}
-				></div>
+				<div css={productCardHeading}>{primaryHeadingWithoutColon}</div>
 				<div css={secondaryHeading}>{product.secondaryHeadingHtml}</div>
 				<a href={`#${product.h2Id}`} css={readMore}>
 					Read more
