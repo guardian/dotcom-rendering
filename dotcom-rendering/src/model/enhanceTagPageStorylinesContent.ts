@@ -1,3 +1,5 @@
+import type { Group } from '../lib/getDataLinkName';
+import { getDataLinkNameCard } from '../lib/getDataLinkName';
 import type { DCRFrontCard, DCRGroupedTrails } from '../types/front';
 import type {
 	ArticleData,
@@ -5,7 +7,6 @@ import type {
 	ParsedStoryline,
 	StorylinesContent,
 } from '../types/storylinesContent';
-import { getDataLinkNameCard, Group } from '../lib/getDataLinkName';
 
 function decideFormatForArticle(
 	category: CategoryContent,
@@ -54,7 +55,7 @@ function parseArticleDataToFrontCard(
 	const dataLinkName = getDataLinkNameCard(format, group, index);
 	return {
 		format,
-		dataLinkName: dataLinkName,
+		dataLinkName,
 		url: article.url,
 		headline: article.headline,
 		trailText: undefined,

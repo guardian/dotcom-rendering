@@ -224,7 +224,6 @@ export const CardHeadline = ({
 	storylinesStyle,
 }: Props) => {
 	// The link is only applied directly to the headline if it is a sublink
-	// When storylinesStyle is true, treat it as a sublink for hover purposes
 	const isSublink = !!linkTo;
 
 	const fontStyles = getFonts(format, fontSizes);
