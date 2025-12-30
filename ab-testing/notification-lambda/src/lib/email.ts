@@ -38,18 +38,13 @@ const getEmailBodyHtml = (abTestExpiryChecks: ABExpiryChecks) => {
 			<th>Owners</th>
 		</thead>
 		<tbody style="text-align: center;">
-		${abTestExpiryChecks[group].map(
-			(test) =>
-				`<tr style="padding: 10px;">
+		${abTestExpiryChecks[group].map((test) => {
+			return `<tr style="padding: 10px;">
 					<td><strong>${test.name}</strong></td>
 					<td>${test.expirationDate}</td>
-					<td>
-						<ul style="list-style: none; margin: unset; padding-left: 2px;">
-						${test.owners.map((owner) => `<li>${owner}</li>`)}
-						</ul>
-					</td>
-				</tr>`,
-		)}
+					<td>${test.owners.join("<br/>")}</td>
+				</tr>`;
+		})}
 		</tbody>
 		</table>`;
 	};
@@ -73,11 +68,13 @@ const getEmailBodyHtml = (abTestExpiryChecks: ABExpiryChecks) => {
 		}
 
 		<br></br>
-		If you are not ready to remove a test yet but are happy to leave it expired for now, please turn it <strong>OFF</strong> in <a href="https://github.com/guardian/dotcom-rendering/blob/main/ab-testing/config/abTests.ts">the code</a>
+
+		If you are not ready to remove a test yet but are happy to leave it expired for now, please turn it <strong>OFF</strong> in <a href="https://github.com/guardian/dotcom-rendering/blob/main/ab-testing/config/abTests.ts">the code</a>.
 
 		<br></br>
-		<em>See https://frontend.gutools.co.uk/analytics/ab-testing for more details</em>
+		<br></br>
 
+		<em>See https://frontend.gutools.co.uk/analytics/ab-testing for more details</em>
 	</div>
 	`;
 };
@@ -111,13 +108,13 @@ const getEmailBodyPlainText = (abTestsByExpiryDate: ABExpiryChecks): string => {
 };
 
 export const getEmailCommand = (
-	recipients: string[],
+	recipient: string,
 	abTestsByExpiryDate: ABExpiryChecks,
 ) =>
 	new SendEmailCommand({
 		Source: "dig.dev.web-engineers@theguardian.com",
 		Destination: {
-			ToAddresses: recipients,
+			ToAddresses: [recipient],
 		},
 		Message: {
 			Subject: {
@@ -138,20 +135,20 @@ export const getEmailCommand = (
 	});
 
 export const sendEmail = async (
-	recipients: string[],
+	recipient: string,
 	expiringAbTests: ABExpiryChecks,
 ): Promise<void> => {
-	const emailCommand = getEmailCommand(recipients, expiringAbTests);
+	const emailCommand = getEmailCommand(recipient, expiringAbTests);
 
 	try {
 		await sesClient
 			.send(emailCommand)
 			.then(() =>
 				console.log(
-					`Sent AB test expiry reminder email to ${recipients}`,
+					`Sent AB test expiry reminder email to ${recipient}`,
 				),
 			);
 	} catch (error) {
-		console.log(`Error sending email to ${recipients}`, error);
+		console.log(`Error sending email to ${recipient}`, error);
 	}
 };
