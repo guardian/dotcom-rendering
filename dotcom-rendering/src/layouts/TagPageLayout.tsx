@@ -66,6 +66,8 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	const isAccessibilityPage =
 		tagPage.config.pageId === 'help/accessibility-help';
 
+	// console.dir(tagPage.nav, { depth: null });
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -162,6 +164,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 											tagPage.storylinesContent
 										}
 										containerId="storylines"
+										pillar={tagPage.nav.currentPillarTitle}
 									/>
 								</Island>
 							)}

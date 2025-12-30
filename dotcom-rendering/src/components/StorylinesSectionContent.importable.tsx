@@ -25,12 +25,55 @@ type StorylinesSectionProps = {
 	containerId?: string;
 	editionId: EditionId;
 	storylinesContent?: StorylinesContent;
+	pillar?: string;
 };
 
-const categoryTitleCss = css`
+const setSelectedStorylineColour = (pillar?: string) => {
+	switch (pillar?.toLowerCase()) {
+		case 'news':
+			return sourcePalette.news[400];
+		case 'opinion':
+			return sourcePalette.opinion[400];
+		case 'sport':
+			return sourcePalette.sport[400];
+		case 'culture':
+			return sourcePalette.culture[400];
+		case 'lifestyle':
+			return sourcePalette.lifestyle[400];
+		default:
+			return sourcePalette.news[400];
+	}
+};
+
+const selectedTitleStyles = (selectedStorylineColour: string) => css`
+	${textSansBold34}
+	color: ${selectedStorylineColour};
+	margin-bottom: ${space[4]}px;
+	margin-top: ${space[2]}px;
+	padding-left: 10px; /* aligns with the headlines of the stories below */
+`;
+
+const setCategoryColour = (pillar?: string) => {
+	switch (pillar?.toLowerCase()) {
+		case 'news':
+			return sourcePalette.news[300];
+		case 'opinion':
+			return sourcePalette.opinion[400];
+		case 'sport':
+			return sourcePalette.sport[300];
+		case 'culture':
+			return sourcePalette.culture[300];
+		case 'lifestyle':
+			return sourcePalette.lifestyle[300];
+		default:
+			return sourcePalette.news[300];
+	}
+};
+
+const categoryTitleCss = (pillarColour: string) => css`
 	${textSans20};
 	font-weight: 700;
-	color: ${sourcePalette.news[300]};
+	color: ${pillarColour};
 	margin: ${space[2]}px 0;
 	padding: ${space[2]}px 0;
 	${from.tablet} {
@@ -67,7 +110,7 @@ const tabStyles = (isActive: boolean, isFirst: boolean) => css`
 	border: none;
 	${!isFirst && `border-left: 1px ${sourcePalette.neutral[86]} solid;`}
 	color: ${isActive
-		? `${sourcePalette.news[400]}`
+		? `${sourcePalette.neutral[60]}`
 		: `${sourcePalette.neutral[38]}`};
 	flex: 1;
 	min-width: 0;
@@ -79,15 +122,7 @@ const contentStyles = css`
 	padding-top: ${space[0]}px 0;
 `;
 
-const selectedTitleStyles = css`
-	${textSansBold34}
-	color: ${sourcePalette.news[400]};
-	margin-bottom: ${space[4]}px;
-	margin-top: ${space[2]}px;
-	padding-left: 10px; /* aligns with the headlines of the stories below */
-`;
-
-const numberStyles = () => css`
+const numberStyles = css`
 	${headlineLight50}
 	line-height: 2rem; /* to align the number with the top of the text */
 	margin-left: -${space[1]}px;
@@ -151,6 +186,7 @@ export const StorylinesSectionContent = ({
 	containerId,
 	storylinesContent,
 	editionId,
+	pillar,
 }: StorylinesSectionProps) => {
 	const parsedStorylines =
 		storylinesContent &&
@@ -167,6 +203,10 @@ export const StorylinesSectionContent = ({
 	const activeStoryline = parsedStorylines.find(
 		(s) => s.id === activeStorylineId,
 	);
+
+	const selectedStorylineColour = setSelectedStorylineColour(pillar);
+
+	const categoryColour = setCategoryColour(pillar);
 
 	return (
 		<>
@@ -204,25 +244,10 @@ export const StorylinesSectionContent = ({
 							>
 								{activeStorylineId === storyline.id ? (
 									<>
-										<span
-											css={[
-												numberStyles,
-												css`
-													color: ${sourcePalette
-														.neutral[60]};
-												`,
-											]}
-										>
+										<span css={[numberStyles]}>
 											{i + 1}
 										</span>
-										<span
-											css={css`
-												color: ${sourcePalette
-													.neutral[60]};
-											`}
-										>
-											{storyline.title}
-										</span>
+										<span>{storyline.title}</span>
 									</>
 								) : (
 									<>
@@ -236,14 +261,18 @@ export const StorylinesSectionContent = ({
 				</div>
 				{/* Active storyline title */}
 				{activeStoryline && (
-					<div css={selectedTitleStyles}>{activeStoryline.title}</div>
+					<div css={selectedTitleStyles(selectedStorylineColour)}>
+						{activeStoryline.title}
+					</div>
 				)}
 				{/* Content by categories */}
 				<div css={contentStyles}>
 					{activeStoryline?.categories.map((category, idx) => (
 						<div key={idx} css={contentCss}>
 							{category.title !== 'Key Stories' && (
-								<h2 css={categoryTitleCss}>{category.title}</h2>
+								<h2 css={categoryTitleCss(categoryColour)}>
+									{category.title}
+								</h2>
 							)}
 							<FlexibleGeneral
 								groupedTrails={category.groupedTrails}
