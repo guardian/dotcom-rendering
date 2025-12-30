@@ -6,27 +6,30 @@ export type ABExpiryChecks = {
 	expired: ABTest[];
 };
 
-export function checkExpiry(tests: ABTest[]) {
+export const testExpiresWithinDays = (days: number) => (test: ABTest) => {
+	const now = Date.now();
+	const oneDay = 1000 * 60 * 60 * 24; // a day in millis
+	const daysInMillis = days * oneDay;
+	return new Date(test.expirationDate) < new Date(now + daysInMillis);
+};
+
+export const checkExpiry = (tests: ABTest[]) => {
 	return tests.reduce(
 		(acc: ABExpiryChecks, test: ABTest) => {
-			const expirationDate = new Date(test.expirationDate);
-			const now = Date.now();
-			const oneDay = 1000 * 60 * 60 * 24; // a day in millis
-
 			// Has the test expired?
-			if (expirationDate < new Date(now)) {
+			if (testExpiresWithinDays(0)) {
 				acc.expired.push(test);
 				return acc;
 			}
 
 			// Is the test expiring within the next day?
-			if (expirationDate < new Date(now + oneDay)) {
+			if (testExpiresWithinDays(1)) {
 				acc.within1Day.push(test);
 				return acc;
 			}
 
 			// Is the test expiring within the next two days?
-			if (expirationDate < new Date(now + oneDay + oneDay)) {
+			if (testExpiresWithinDays(2)) {
 				acc.within2Days.push(test);
 				return acc;
 			}
@@ -35,4 +38,4 @@ export function checkExpiry(tests: ABTest[]) {
 		},
 		{ within2Days: [], within1Day: [], expired: [] },
 	);
-}
+};

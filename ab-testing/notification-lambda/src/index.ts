@@ -1,11 +1,12 @@
-import { activeABtests } from "@guardian/ab-testing-config";
-import { checkExpiry } from "./lib/checkExpiry.ts";
 import { sendEmail } from "./lib/email.ts";
-
-const testEmail = "charlotte.emms@theguardian.com";
+import { getExpiringAbTestsGroupedByOwner } from "./lib/groupExpiryChecksByEmail.ts";
 
 export const handler = async (): Promise<void> => {
-	const expiryChecks = checkExpiry(activeABtests);
+	const abTestsByOwner = getExpiringAbTestsGroupedByOwner();
 
-	await sendEmail([testEmail], expiryChecks);
+	await Promise.all(
+		Object.entries(abTestsByOwner).map(([owner, abTests]) =>
+			sendEmail(owner, abTests),
+		),
+	);
 };
