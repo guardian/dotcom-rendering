@@ -20,22 +20,27 @@ export class AbTestingNotificationLambda extends GuStack {
 			description: "Daily expiry checks for AB testing configuration",
 		};
 
-		new GuScheduledLambda(this, "AbTestingNotificationLambda", {
-			app: lambdaFunctionName,
-			fileName: "lambda.zip",
-			handler: "index.handler",
-			rules: this.stage === "PROD" ? [runDailyRule] : [],
-			monitoringConfiguration: { noMonitoring: true },
-			runtime: Runtime.NODEJS_22_X,
-			initialPolicy: [
-				new PolicyStatement({
-					effect: Effect.ALLOW,
-					actions: ["ses:SendEmail"],
-					resources: [
-						`arn:aws:ses:${this.region}:${this.account}:identity/dig.dev.web-engineers@theguardian.com`,
-					],
-				}),
-			],
-		});
+		const lambda = new GuScheduledLambda(
+			this,
+			"AbTestingNotificationLambda",
+			{
+				app: lambdaFunctionName,
+				fileName: "lambda.zip",
+				handler: "index.handler",
+				rules: this.stage === "PROD" ? [runDailyRule] : [],
+				monitoringConfiguration: { noMonitoring: true },
+				runtime: Runtime.NODEJS_22_X,
+			},
+		);
+
+		lambda.addToRolePolicy(
+			new PolicyStatement({
+				effect: Effect.ALLOW,
+				actions: ["ses:SendEmail"],
+				resources: [
+					`arn:aws:ses:${this.region}:${this.account}:identity/dig.dev.web-engineers@theguardian.com`,
+				],
+			}),
+		);
 	}
 }
