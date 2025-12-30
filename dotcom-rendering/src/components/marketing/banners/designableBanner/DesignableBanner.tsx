@@ -449,6 +449,11 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									'secondary',
 								)}
 								hideLabel={true}
+								aria-label={
+									isCollapsed
+										? 'Expand banner'
+										: 'Collapse banner'
+								}
 							/>
 						</div>
 					)}

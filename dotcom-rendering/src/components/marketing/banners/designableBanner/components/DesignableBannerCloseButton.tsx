@@ -55,6 +55,7 @@ export function DesignableBannerCloseButton({
 					icon={<SvgCross />}
 					size="small"
 					hideLabel={true}
+					aria-label="Close banner"
 				>
 					Close
 				</Button>
