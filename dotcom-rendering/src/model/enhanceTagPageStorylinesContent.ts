@@ -187,7 +187,6 @@ export function parseStorylinesContentToStorylines(
 		title: storyline.title,
 		categories: storyline.content.map((category) => ({
 			title: decideCategoryTitle(category),
-			containerType: 'flexible/general',
 			groupedTrails: decideGroupedTrails(category),
 		})),
 	}));

@@ -494,7 +494,7 @@ const carouselNavigationPlaceholder = css`
  * In a frontsection, the background normally takes up the full width of the page, but we want just the section to have the grey background
  * A portion of the props and logic in frontsection aren't relevant here
  */
-export const StorylineSection = ({
+export const StorylinesSection = ({
 	title,
 	children,
 	containerName,
@@ -603,7 +603,7 @@ export const StorylineSection = ({
 										${textSans14};
 									`}
 								>
-									Dive deeper into the Guardian's archive.
+									Dive deeper into the Guardian's archive.{' '}
 									<Hide until="leftCol">
 										<span>
 											This product uses GenAI. Learn more

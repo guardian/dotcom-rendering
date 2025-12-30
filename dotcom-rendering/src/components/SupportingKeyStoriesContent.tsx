@@ -7,15 +7,13 @@ import { CardAge } from './Card/components/CardAge';
 import { CardHeadline } from './CardHeadline';
 import { ContainerOverrides } from './ContainerOverrides';
 import { FormatBoundary } from './FormatBoundary';
-
-export type Alignment = 'vertical' | 'horizontal';
+import { Alignment } from './SupportingContent';
 
 type Props = {
 	supportingContent: DCRSupportingContent[];
 	/** Determines if the content is arranged vertically or horizontally */
 	alignment: Alignment;
 	containerPalette?: DCRContainerPalette;
-	isDynamo?: boolean;
 	isMedia?: boolean;
 	/** Allows sublinks container to have a background colour on mobile screen sizes */
 	fillBackgroundOnMobile?: boolean;
@@ -128,6 +126,9 @@ const backgroundFillDesktop = (isMedia: boolean) => css`
 			: palette('--card-sublinks-background')};
 	}
 `;
+4;
+//gltodo: remove horizontal alignment option?
+//what about on tablet?
 
 /** In the storylines section on tag pages, the flex splash is used to display key stories. 
    This is shown as a large image taken from the first article in the group, and the headlines of the first four key articles (include that of the first article).
@@ -137,7 +138,6 @@ export const SupportingKeyStoriesContent = ({
 	supportingContent,
 	alignment,
 	containerPalette,
-	isDynamo,
 	isMedia = false,
 	fillBackgroundOnMobile = false,
 	fillBackgroundOnDesktop = false,
@@ -171,7 +171,7 @@ export const SupportingKeyStoriesContent = ({
 						key={subLink.url}
 						css={[
 							sublinkBaseStyles,
-							isDynamo ?? alignment === 'horizontal'
+							alignment === 'horizontal'
 								? horizontalSublinkStyles(columnSpan)
 								: verticalSublinkStyles,
 						]}
@@ -185,10 +185,6 @@ export const SupportingKeyStoriesContent = ({
 									format={{ design: 0, display: 0, theme: 0 }}
 									hasInlineKicker={true}
 									linkTo={subLink.url}
-									showPulsingDot={
-										subLink.format.design ===
-										ArticleDesign.LiveBlog
-									}
 									headlineText={subLink.headline}
 									fontSizes={{
 										desktop: 'xsmall',

@@ -766,7 +766,6 @@ export const Card = ({
 					supportingContent={supportingContent}
 					containerPalette={containerPalette}
 					alignment={supportingContentAlignment}
-					isDynamo={isDynamo}
 					isMedia={isMediaCard(format)}
 					fillBackgroundOnMobile={false}
 					fillBackgroundOnDesktop={
@@ -818,7 +817,6 @@ export const Card = ({
 						/* inner links are always vertically stacked */
 						alignment="vertical"
 						containerPalette={containerPalette}
-						isDynamo={isDynamo}
 						fillBackgroundOnMobile={isFlexSplash}
 						storylinesStyle={storylinesStyle}
 					/>

@@ -1,6 +1,6 @@
 import type { StorylinesContent } from '../../src/types/storylinesContent';
 
-export const storylinesSectionContent: StorylinesContent = {
+export const mockStorylinesSectionContent: StorylinesContent = {
 	created: '2025-12-09T17:14:47.633244289Z',
 	tag: 'technology/artificialintelligenceai',
 	storylines: [

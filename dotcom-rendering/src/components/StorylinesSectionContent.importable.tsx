@@ -17,7 +17,7 @@ import { palette } from '../palette';
 import type { StorylinesContent } from '../types/storylinesContent';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { ScrollableCarousel } from './ScrollableCarousel';
-import { StorylineSection } from './StorylineSection';
+import { StorylinesSection } from './StorylinesSection';
 
 type StorylinesSectionProps = {
 	url?: string;
@@ -138,11 +138,17 @@ function formatDateRangeText(
 	}
 }
 
-// importable because we need js to handle the tabs
-export const StorylinesSection = ({
+/**
+ * Used to display the content of the storylines section on specific tag pages.
+ *
+ * ## Why does this need to be an Island?
+ *
+ * Selecting a storyline via the tabs (a carousel on mobile) requires javascript.
+ */
+export const StorylinesSectionContent = ({
 	url,
 	index,
-	containerId, //need to check
+	containerId, //gltodo: need to check
 	storylinesContent,
 	editionId,
 }: StorylinesSectionProps) => {
@@ -164,7 +170,7 @@ export const StorylinesSection = ({
 
 	return (
 		<>
-			<StorylineSection
+			<StorylinesSection
 				title="Storylines"
 				containerPalette="LongRunningAltPalette"
 				url={url}
@@ -175,7 +181,7 @@ export const StorylinesSection = ({
 				sectionId={containerId}
 				editionId={editionId}
 			>
-				{/* Tab selector */}
+				{/* Storylines tab selector. This is a carousel on mobile. */}
 				<div css={tabsContainerStyles}>
 					<ScrollableCarousel
 						carouselLength={Math.ceil(parsedStorylines.length)}
@@ -229,7 +235,7 @@ export const StorylinesSection = ({
 						))}
 					</ScrollableCarousel>
 				</div>
-				{/* Storyline title */}
+				{/* Active storyline title */}
 				{activeStoryline && (
 					<div css={selectedTitleStyles}>{activeStoryline.title}</div>
 				)}
@@ -244,14 +250,14 @@ export const StorylinesSection = ({
 								groupedTrails={category.groupedTrails}
 								imageLoading={'eager'}
 								aspectRatio={'5:4'}
-								collectionId={0}
+								collectionId={0} //gltodo: need to check
 								containerLevel="Secondary"
 								storylinesStyle={true}
 							/>
 						</div>
 					))}
 				</div>
-				{/* Context on article date range */}
+				{/* Context on article date range and mobile AI disclaimer */}
 				<div css={articleCountAndDateRangeStyle}>
 					<Hide from="leftCol">
 						<span>
@@ -268,7 +274,7 @@ export const StorylinesSection = ({
 						storylinesContent.latestArticleTime,
 					)}. Some articles may be older to provide further context.`}
 				</div>
-			</StorylineSection>
+			</StorylinesSection>
 		</>
 	);
 };

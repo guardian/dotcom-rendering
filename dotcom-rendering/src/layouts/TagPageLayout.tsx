@@ -15,7 +15,7 @@ import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
-import { StorylinesSection } from '../components/StorylinesSection.importable';
+import { StorylinesSectionContent } from '../components/StorylinesSectionContent.importable';
 import { SubNav } from '../components/SubNav.importable';
 import { TagPageHeader } from '../components/TagPageHeader';
 import { TrendingTopics } from '../components/TrendingTopics';
@@ -135,7 +135,9 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 						  )
 						: undefined;
 
-					const insertSCSection =
+					//gltodo: check the pagination if it works as expected on single container tag pages
+					// also
+					const insertStorylinesSection =
 						tagPage.storylinesContent &&
 						index == 1 &&
 						(!tagPage.pagination ||
@@ -152,9 +154,9 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									)}
 								/>
 							)}
-							{insertSCSection && (
+							{insertStorylinesSection && (
 								<Island priority="critical">
-									<StorylinesSection
+									<StorylinesSectionContent
 										index={1}
 										editionId={tagPage.editionId}
 										storylinesContent={

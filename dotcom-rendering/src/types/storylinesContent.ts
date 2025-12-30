@@ -1,16 +1,7 @@
 import type { DCRGroupedTrails } from './front';
 import type { MainMedia } from './mainMedia';
 
-// // These should match the categories defined in the tool: https://github.com/guardian/tag-page-supercharger/blob/main/app/services/FrontendRendererService.scala#L59
-// export enum StorylineCategory {
-// 	Explainers = 'Explainers',
-// 	ContrastingOpinions = 'Contrasting opinions',
-// 	FindMultimedia = 'Find multimedia',
-// 	DeepReads = 'Deep Reads',
-// 	ProfilesAndInterviews = 'Profiles and Interviews',
-// 	KeyStories = 'Key Stories',
-// }
-
+/** Result of the enhance tag page storylines logic */
 export type ParsedStoryline = {
 	id: string;
 	title: string;
@@ -19,10 +10,11 @@ export type ParsedStoryline = {
 
 export type ParsedCategory = {
 	title: string;
-	containerType: string;
 	groupedTrails: DCRGroupedTrails;
 };
 
+// The types below should match up with those defined in the tool:
+// https://github.com/guardian/tag-page-supercharger/blob/main/app/models/FrontendContent.scala#L9
 export type ImageData = {
 	src: string;
 	altText: string;
