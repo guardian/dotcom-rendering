@@ -7,6 +7,7 @@ import type { App } from "aws-cdk-lib";
 import { Schedule } from "aws-cdk-lib/aws-events";
 import { Effect, PolicyStatement } from "aws-cdk-lib/aws-iam";
 import { Runtime } from "aws-cdk-lib/aws-lambda";
+import { Topic } from "aws-cdk-lib/aws-sns";
 
 export const lambdaFunctionName = "ab-testing-notification-lambda";
 
@@ -20,6 +21,8 @@ export class AbTestingNotificationLambda extends GuStack {
 			description: "Daily expiry checks for AB testing configuration",
 		};
 
+		const snsTopic = new Topic(this, "AbTestingNotificationSnsTopic");
+
 		const lambda = new GuScheduledLambda(
 			this,
 			"AbTestingNotificationLambda",
@@ -28,7 +31,10 @@ export class AbTestingNotificationLambda extends GuStack {
 				fileName: "lambda.zip",
 				handler: "index.handler",
 				rules: this.stage === "PROD" ? [runDailyRule] : [],
-				monitoringConfiguration: { noMonitoring: true },
+				monitoringConfiguration: {
+					snsTopicName: snsTopic.topicName,
+					toleratedErrorPercentage: 1,
+				},
 				runtime: Runtime.NODEJS_22_X,
 			},
 		);

@@ -3,18 +3,35 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
   "Metadata": {
     "gu:cdk:constructs": [
       "GuDistributionBucketParameter",
-      "GuScheduledLambda"
+      "GuScheduledLambda",
+      "GuLambdaErrorPercentageAlarm"
     ],
     "gu:cdk:version": "62.0.1"
   },
-  "Parameters": {
-    "DistributionBucketName": {
-      "Type": "AWS::SSM::Parameter::Value<String>",
-      "Default": "/account/services/artifact.bucket",
-      "Description": "SSM parameter containing the S3 bucket name holding distribution artifacts"
-    }
-  },
   "Resources": {
+    "AbTestingNotificationSnsTopicB3559144": {
+      "Type": "AWS::SNS::Topic",
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "62.0.1"
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend"
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE"
+          }
+        ]
+      }
+    },
     "AbTestingNotificationLambdaServiceRole529D80CF": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -232,6 +249,142 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
         "AbTestingNotificationLambdaServiceRoleDefaultPolicyA2BC1639",
         "AbTestingNotificationLambdaServiceRole529D80CF"
       ]
+    },
+    "AbTestingNotificationLambdaErrorPercentageAlarmForLambdaD5D1F4B7": {
+      "Type": "AWS::CloudWatch::Alarm",
+      "Properties": {
+        "ActionsEnabled": true,
+        "AlarmActions": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:sns:eu-west-1:",
+                {
+                  "Ref": "AWS::AccountId"
+                },
+                ":",
+                {
+                  "Fn::GetAtt": [
+                    "AbTestingNotificationSnsTopicB3559144",
+                    "TopicName"
+                  ]
+                }
+              ]
+            ]
+          }
+        ],
+        "AlarmDescription": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "AbTestingNotificationLambda36F153E8"
+              },
+              " exceeded 1% error rate"
+            ]
+          ]
+        },
+        "AlarmName": {
+          "Fn::Join": [
+            "",
+            [
+              "High error percentage from ",
+              {
+                "Ref": "AbTestingNotificationLambda36F153E8"
+              },
+              " lambda in CODE"
+            ]
+          ]
+        },
+        "ComparisonOperator": "GreaterThanThreshold",
+        "EvaluationPeriods": 1,
+        "Metrics": [
+          {
+            "Expression": "100*m1/m2",
+            "Id": "expr_1",
+            "Label": {
+              "Fn::Join": [
+                "",
+                [
+                  "Error % of ",
+                  {
+                    "Ref": "AbTestingNotificationLambda36F153E8"
+                  }
+                ]
+              ]
+            },
+            "ReturnData": true
+          },
+          {
+            "Id": "m1",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "FunctionName",
+                    "Value": {
+                      "Ref": "AbTestingNotificationLambda36F153E8"
+                    }
+                  }
+                ],
+                "MetricName": "Errors",
+                "Namespace": "AWS/Lambda"
+              },
+              "Period": 60,
+              "Stat": "Sum"
+            },
+            "ReturnData": false
+          },
+          {
+            "Id": "m2",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "FunctionName",
+                    "Value": {
+                      "Ref": "AbTestingNotificationLambda36F153E8"
+                    }
+                  }
+                ],
+                "MetricName": "Invocations",
+                "Namespace": "AWS/Lambda"
+              },
+              "Period": 60,
+              "Stat": "Sum"
+            },
+            "ReturnData": false
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "62.0.1"
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend"
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE"
+          }
+        ],
+        "Threshold": 1,
+        "TreatMissingData": "notBreaching"
+      }
+    }
+  },
+  "Parameters": {
+    "DistributionBucketName": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/account/services/artifact.bucket",
+      "Description": "SSM parameter containing the S3 bucket name holding distribution artifacts"
     }
   }
 }
@@ -242,18 +395,35 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
   "Metadata": {
     "gu:cdk:constructs": [
       "GuDistributionBucketParameter",
-      "GuScheduledLambda"
+      "GuScheduledLambda",
+      "GuLambdaErrorPercentageAlarm"
     ],
     "gu:cdk:version": "62.0.1"
   },
-  "Parameters": {
-    "DistributionBucketName": {
-      "Type": "AWS::SSM::Parameter::Value<String>",
-      "Default": "/account/services/artifact.bucket",
-      "Description": "SSM parameter containing the S3 bucket name holding distribution artifacts"
-    }
-  },
   "Resources": {
+    "AbTestingNotificationSnsTopicB3559144": {
+      "Type": "AWS::SNS::Topic",
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "62.0.1"
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend"
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD"
+          }
+        ]
+      }
+    },
     "AbTestingNotificationLambdaServiceRole529D80CF": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -531,6 +701,142 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
           ]
         }
       }
+    },
+    "AbTestingNotificationLambdaErrorPercentageAlarmForLambdaD5D1F4B7": {
+      "Type": "AWS::CloudWatch::Alarm",
+      "Properties": {
+        "ActionsEnabled": true,
+        "AlarmActions": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:sns:eu-west-1:",
+                {
+                  "Ref": "AWS::AccountId"
+                },
+                ":",
+                {
+                  "Fn::GetAtt": [
+                    "AbTestingNotificationSnsTopicB3559144",
+                    "TopicName"
+                  ]
+                }
+              ]
+            ]
+          }
+        ],
+        "AlarmDescription": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "AbTestingNotificationLambda36F153E8"
+              },
+              " exceeded 1% error rate"
+            ]
+          ]
+        },
+        "AlarmName": {
+          "Fn::Join": [
+            "",
+            [
+              "High error percentage from ",
+              {
+                "Ref": "AbTestingNotificationLambda36F153E8"
+              },
+              " lambda in PROD"
+            ]
+          ]
+        },
+        "ComparisonOperator": "GreaterThanThreshold",
+        "EvaluationPeriods": 1,
+        "Metrics": [
+          {
+            "Expression": "100*m1/m2",
+            "Id": "expr_1",
+            "Label": {
+              "Fn::Join": [
+                "",
+                [
+                  "Error % of ",
+                  {
+                    "Ref": "AbTestingNotificationLambda36F153E8"
+                  }
+                ]
+              ]
+            },
+            "ReturnData": true
+          },
+          {
+            "Id": "m1",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "FunctionName",
+                    "Value": {
+                      "Ref": "AbTestingNotificationLambda36F153E8"
+                    }
+                  }
+                ],
+                "MetricName": "Errors",
+                "Namespace": "AWS/Lambda"
+              },
+              "Period": 60,
+              "Stat": "Sum"
+            },
+            "ReturnData": false
+          },
+          {
+            "Id": "m2",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "FunctionName",
+                    "Value": {
+                      "Ref": "AbTestingNotificationLambda36F153E8"
+                    }
+                  }
+                ],
+                "MetricName": "Invocations",
+                "Namespace": "AWS/Lambda"
+              },
+              "Period": 60,
+              "Stat": "Sum"
+            },
+            "ReturnData": false
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "62.0.1"
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend"
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD"
+          }
+        ],
+        "Threshold": 1,
+        "TreatMissingData": "notBreaching"
+      }
+    }
+  },
+  "Parameters": {
+    "DistributionBucketName": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/account/services/artifact.bucket",
+      "Description": "SSM parameter containing the S3 bucket name holding distribution artifacts"
     }
   }
 }
