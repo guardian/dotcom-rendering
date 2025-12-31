@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
+import { space } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { ProductBlockElement } from '../types/content';
 import { HorizontalSummaryProductCard } from './HorizontalSummaryProductCard';
-import { space } from '@guardian/source/foundations';
 
 export const StackedProducts = ({
 	products,
@@ -20,8 +20,9 @@ export const StackedProducts = ({
 				`,
 			]}
 		>
-			{products.map((product: ProductBlockElement) => (
+			{products.map((product: ProductBlockElement, index) => (
 				<HorizontalSummaryProductCard
+					key={index}
 					product={product}
 					format={format}
 				/>
