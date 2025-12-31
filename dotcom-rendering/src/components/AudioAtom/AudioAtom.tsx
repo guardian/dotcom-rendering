@@ -368,6 +368,7 @@ export const AudioAtom = ({
 							value={percentPlayed}
 							onClick={updateAudioCurrentTime}
 							readOnly={true}
+							aria-label="Audio progress"
 						/>
 					</div>
 					<div css={timeDurationStyle}>
