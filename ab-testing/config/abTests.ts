@@ -58,18 +58,6 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
 	},
-	{
-		name: "commercial-test-deploy",
-		description: "A test to verify the deployment process works correctly",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: `2026-01-15`,
-		type: "client",
-		status: "ON",
-		audienceSize: 10 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: true,
-	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
