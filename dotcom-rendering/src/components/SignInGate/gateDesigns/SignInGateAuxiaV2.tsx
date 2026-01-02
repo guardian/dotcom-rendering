@@ -144,6 +144,7 @@ export const SignInGateAuxiaV2 = ({
 								data-testid="sign-in-gate-main_dismiss"
 								data-ignore="global-link-styling"
 								css={dismissButtonStyles}
+								aria-label="Dismiss sign-in gate"
 								onClick={() => {
 									dismissGate();
 									trackLink(
@@ -189,6 +190,7 @@ export const SignInGateAuxiaV2 = ({
 									data-testid="sign-in-gate-main_dismiss"
 									data-ignore="global-link-styling"
 									css={signInDismissButtonStyles}
+									aria-label="Dismiss sign-in gate"
 									onClick={() => {
 										dismissGate();
 										trackLink(

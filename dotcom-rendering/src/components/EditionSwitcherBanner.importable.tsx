@@ -108,6 +108,7 @@ export const EditionSwitcherBanner = ({ pageId, edition }: Props) => {
 					type="button"
 					css={closeButton}
 					data-link-name="edition-switcher-banner close-banner"
+					aria-label="Close banner"
 					onClick={() => {
 						hideEditionSwitcherBanner();
 					}}

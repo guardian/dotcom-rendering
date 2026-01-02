@@ -67,6 +67,7 @@ export const SignInGateAuxiaV1 = ({
 						data-testid="sign-in-gate-main_dismiss"
 						data-ignore="global-link-styling"
 						css={dismissButtonStyles}
+						aria-label="Dismiss sign-in gate"
 						onClick={() => {
 							dismissGate();
 							trackLink(
