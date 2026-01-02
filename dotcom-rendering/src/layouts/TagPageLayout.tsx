@@ -15,6 +15,7 @@ import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { StorylinesSectionContent } from '../components/StorylinesSectionContent.importable';
 import { SubNav } from '../components/SubNav.importable';
 import { TagPageHeader } from '../components/TagPageHeader';
 import { TrendingTopics } from '../components/TrendingTopics';
@@ -64,6 +65,8 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 
 	const isAccessibilityPage =
 		tagPage.config.pageId === 'help/accessibility-help';
+
+	// console.dir(tagPage.nav, { depth: null });
 
 	return (
 		<>
@@ -134,6 +137,13 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 						  )
 						: undefined;
 
+					// We insert the storylines section after the first section or if there's only one section
+					const insertStorylinesSection =
+						tagPage.storylinesContent &&
+						(index === 1 || tagPage.groupedTrails.length === 1) &&
+						(!tagPage.pagination ||
+							tagPage.pagination.currentPage === 1);
+
 					return (
 						<Fragment key={containerId}>
 							{desktopAdPositions.includes(index) && (
@@ -144,6 +154,19 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 										index,
 									)}
 								/>
+							)}
+							{insertStorylinesSection && (
+								<Island priority="critical">
+									<StorylinesSectionContent
+										index={1}
+										editionId={tagPage.editionId}
+										storylinesContent={
+											tagPage.storylinesContent
+										}
+										containerId="storylines"
+										pillar={tagPage.nav.currentPillarTitle}
+									/>
+								</Island>
 							)}
 							<FrontSection
 								title={title}
