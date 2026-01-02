@@ -17,7 +17,8 @@ import {
 	reportTrackingEvent,
 	requestMultipleSignUps,
 } from '../lib/newsletter-sign-up-requests';
-import { useIsSignedIn } from '../lib/useAuthStatus';
+import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
+import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { useConfig } from './ConfigContext';
 import { Flex } from './Flex';
 import { ManyNewslettersForm } from './ManyNewslettersForm';
@@ -131,6 +132,7 @@ export const ManyNewsletterSignUp = ({
 	visibleRecaptcha = false,
 }: Props) => {
 	const isSignedIn = useIsSignedIn();
+	const authStatus = useAuthStatus();
 
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		{
@@ -297,6 +299,11 @@ export const ManyNewsletterSignUp = ({
 				...(marketingOptIn !== undefined && { marketingOptInType }),
 			},
 		);
+
+		if (authStatus.kind === 'SignedIn') {
+			clearSubscriptionCache();
+		}
+
 		setStatus('Success');
 	};
 

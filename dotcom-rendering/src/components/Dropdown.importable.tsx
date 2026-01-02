@@ -31,6 +31,7 @@ export interface DropdownLinkType {
 	isActive?: boolean;
 	dataLinkName: string;
 	notifications?: Notification[];
+	onClick?: () => void;
 }
 
 interface Props {
@@ -370,6 +371,7 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 							renderingTarget,
 						);
 					}
+					link.onClick?.();
 				}}
 			>
 				<div>
