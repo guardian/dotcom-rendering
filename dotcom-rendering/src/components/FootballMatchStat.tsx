@@ -1,17 +1,26 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	palette as sourcePalette,
 	space,
+	textSans14,
+	textSans15,
 	textSansBold14,
 	textSansBold15,
 	textSansBold20,
 	textSansBold28,
 	visuallyHidden,
 } from '@guardian/source/foundations';
+import { transparentColour } from '../lib/transparentColour';
 import { palette } from '../palette';
 
 const containerCss = css`
 	position: relative;
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	grid-template-areas:
+		'home-stat label away-stat'
+		'graph     graph  graph';
 	padding: 5px 10px 10px;
 	border: 1px solid ${palette('--football-match-stat-border')};
 	border-radius: 6px;
@@ -21,22 +30,28 @@ const containerCss = css`
 		left: 50%;
 		bottom: 0;
 		width: 1px;
-		height: ${space[6]}px;
+		height: calc(100% - 25px);
 		background-color: ${palette('--football-match-stat-border')};
+	}
+	${from.desktop} {
+		&::before {
+			height: calc(100% - 27px);
+		}
 	}
 `;
 
-const headerCss = css`
-	display: grid;
-	grid-template-columns: auto 1fr auto;
-	grid-template-areas: 'home-stat label away-stat';
+const desktopPaddingCss = css`
+	${from.desktop} {
+		padding-bottom: 14px;
+	}
 `;
 
-const raiseLabelCss = css`
+const labelSeparateRowCss = css`
 	${from.desktop} {
 		grid-template-areas:
 			'label     label label'
-			'home-stat .     away-stat';
+			'home-stat .     away-stat'
+			'graph     graph graph';
 	}
 `;
 
@@ -67,10 +82,11 @@ const awayStatCss = css`
 	justify-self: end;
 `;
 
-const chartCss = css`
+const graphCss = css`
 	position: relative;
 	display: flex;
 	gap: 10px;
+	grid-area: graph;
 `;
 
 const barCss = css`
@@ -80,19 +96,19 @@ const barCss = css`
 	border-radius: 8px;
 `;
 
-type MatchStatistic = {
-	teamName: string;
-	teamColour: string;
-	value: number;
+type Team = {
+	name: string;
+	colour: string;
 };
 
-type Props = {
+type MatchStatProps = {
 	label: string;
-	home: MatchStatistic;
-	away: MatchStatistic;
-	showPercentage?: boolean;
-	raiseLabelOnDesktop?: boolean;
-	largeNumbersOnDesktop?: boolean;
+	homeTeam: Team;
+	awayTeam: Team;
+	homeValue: number;
+	awayValue: number;
+	layout?: 'regular' | 'compact';
+	isPercentage?: boolean;
 };
 
 const formatValue = (value: number, showPercentage: boolean) =>
@@ -100,65 +116,198 @@ const formatValue = (value: number, showPercentage: boolean) =>
 
 export const FootballMatchStat = ({
 	label,
-	home,
-	away,
-	showPercentage = false,
-	raiseLabelOnDesktop = false,
-	largeNumbersOnDesktop = false,
-}: Props) => {
-	const homePercentage = (home.value / (home.value + away.value)) * 100;
-	const awayPercentage = (away.value / (home.value + away.value)) * 100;
+	homeTeam,
+	awayTeam,
+	homeValue,
+	awayValue,
+	layout,
+	isPercentage = false,
+}: MatchStatProps) => {
+	const compactLayout = layout === 'compact';
+	const homePercentage = (homeValue / (homeValue + awayValue)) * 100;
+	const awayPercentage = (awayValue / (homeValue + awayValue)) * 100;
 
 	return (
-		<div css={containerCss}>
-			<div css={[headerCss, raiseLabelOnDesktop && raiseLabelCss]}>
-				<span css={labelCss}>{label}</span>
+		<div
+			css={[
+				containerCss,
+				compactLayout && labelSeparateRowCss,
+				!compactLayout && desktopPaddingCss,
+			]}
+		>
+			<span css={labelCss}>{label}</span>
+			<span
+				css={[numberCss, !compactLayout && largeNumberCss]}
+				style={{ '--match-stat-team-colour': homeTeam.colour }}
+			>
 				<span
-					css={[numberCss, largeNumbersOnDesktop && largeNumberCss]}
-					style={{ '--match-stat-team-colour': home.teamColour }}
+					css={css`
+						${visuallyHidden}
+					`}
 				>
-					<span
-						css={css`
-							${visuallyHidden}
-						`}
-					>
-						{home.teamName}
-					</span>
-					{formatValue(home.value, showPercentage)}
+					{homeTeam.name}
 				</span>
+				{formatValue(homeValue, isPercentage)}
+			</span>
+			<span
+				css={[numberCss, awayStatCss, !compactLayout && largeNumberCss]}
+				style={{ '--match-stat-team-colour': awayTeam.colour }}
+			>
 				<span
-					css={[
-						numberCss,
-						awayStatCss,
-						largeNumbersOnDesktop && largeNumberCss,
-					]}
-					style={{ '--match-stat-team-colour': away.teamColour }}
+					css={css`
+						${visuallyHidden}
+					`}
 				>
-					<span
-						css={css`
-							${visuallyHidden}
-						`}
-					>
-						{away.teamName}
-					</span>
-					{formatValue(away.value, showPercentage)}
+					{awayTeam.name}
 				</span>
-			</div>
-			<div aria-hidden="true" css={chartCss}>
+				{formatValue(awayValue, isPercentage)}
+			</span>
+			<div aria-hidden="true" css={graphCss}>
 				<div
 					css={barCss}
 					style={{
 						'--match-stat-percentage': `${homePercentage}%`,
-						'--match-stat-team-colour': home.teamColour,
+						'--match-stat-team-colour': homeTeam.colour,
 					}}
 				></div>
 				<div
 					css={barCss}
 					style={{
 						'--match-stat-percentage': `${awayPercentage}%`,
-						'--match-stat-team-colour': away.teamColour,
+						'--match-stat-team-colour': awayTeam.colour,
 					}}
 				></div>
+			</div>
+		</div>
+	);
+};
+
+const goalAttemptsLayoutCss = css`
+	grid-template-columns: 1fr 1fr;
+	grid-template-areas:
+		'label         label'
+		'home-attempts away-attempts';
+	column-gap: 10px;
+	${from.desktop} {
+		column-gap: ${space[5]}px;
+	}
+`;
+
+const offTargetCss = css`
+	${textSans14};
+	grid-area: home-attempts;
+	margin-top: 5px;
+	padding: ${space[1]}px 0 0 6px;
+	background-color: var(--off-target-colour);
+	border-radius: 4px;
+	${from.desktop} {
+		${textSans15};
+	}
+`;
+
+const offTargetAwayCss = css`
+	grid-area: away-attempts;
+	text-align: right;
+	padding-left: 0;
+	padding-right: 6px;
+`;
+
+const onTargetCss = css`
+	padding: ${space[1]}px 0 0 6px;
+	color: ${sourcePalette.neutral[100]};
+	background-color: var(--on-target-colour);
+	border-radius: 4px;
+	width: 80%;
+	min-height: 62px;
+	justify-self: end;
+	${from.desktop} {
+		margin-top: -${space[3]}px;
+	}
+`;
+
+const onTargetAwayCss = css`
+	padding-left: 0;
+	padding-right: 6px;
+	justify-self: start;
+`;
+
+const attemptCountCss = css`
+	display: block;
+	${textSansBold20};
+	margin-top: -3px;
+	${from.desktop} {
+		${textSansBold28};
+	}
+`;
+
+type GoalAttempt = {
+	offTarget: number;
+	onTarget: number;
+};
+
+type GoalAttemptProps = {
+	homeTeam: Team;
+	awayTeam: Team;
+	homeValues: GoalAttempt;
+	awayValues: GoalAttempt;
+};
+
+export const FootballMatchGoalAttempts = ({
+	homeTeam,
+	awayTeam,
+	homeValues,
+	awayValues,
+}: GoalAttemptProps) => {
+	return (
+		<div css={[containerCss, desktopPaddingCss, goalAttemptsLayoutCss]}>
+			<div css={labelCss}>Goal attempts</div>
+			<span
+				css={css`
+					${visuallyHidden}
+				`}
+			>
+				{homeTeam.name}
+			</span>
+			<div
+				css={offTargetCss}
+				style={{
+					'--off-target-colour': transparentColour(
+						homeTeam.colour,
+						0.1,
+					),
+					'--on-target-colour': homeTeam.colour,
+				}}
+			>
+				Off target
+				<span css={attemptCountCss}>{homeValues.offTarget}</span>
+				<div css={onTargetCss}>
+					On target
+					<span css={attemptCountCss}>{homeValues.onTarget}</span>
+				</div>
+			</div>
+			<span
+				css={css`
+					${visuallyHidden}
+				`}
+			>
+				{awayTeam.name}
+			</span>
+			<div
+				css={[offTargetCss, offTargetAwayCss]}
+				style={{
+					'--off-target-colour': transparentColour(
+						awayTeam.colour,
+						0.1,
+					),
+					'--on-target-colour': awayTeam.colour,
+				}}
+			>
+				Off target
+				<span css={attemptCountCss}>{awayValues.offTarget}</span>
+				<div css={[onTargetCss, onTargetAwayCss]}>
+					On target
+					<span css={attemptCountCss}>{awayValues.onTarget}</span>
+				</div>
 			</div>
 		</div>
 	);
