@@ -43,7 +43,7 @@ import { Pagination } from '../components/Pagination';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
-import { StarRating } from '../components/StarRating/StarRating';
+import { StarRatingDeprecated } from '../components/StarRating/StarRatingDeprecated';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
@@ -304,6 +304,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const showComments = article.isCommentable && !isPaidContent;
 
+	const isInStarRatingVariant =
+		article.config.abTests.starRatingRedesignVariant === 'variant';
+
 	return (
 		<>
 			{isWeb && (
@@ -441,12 +444,17 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
 											}
+											isInStarRatingVariant={
+												isInStarRatingVariant
+											}
+											starRating={article.starRating}
 										/>
 									)}
 								</div>
-								{!isUndefined(article.starRating) ? (
+								{!isUndefined(article.starRating) &&
+								!isInStarRatingVariant ? (
 									<div css={starWrapper}>
-										<StarRating
+										<StarRatingDeprecated
 											rating={article.starRating}
 											size="large"
 										/>
@@ -1004,6 +1012,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							serverTime={serverTime}
 							renderingTarget={renderingTarget}
 							webURL={article.webURL}
+							isInStarRatingVariant={isInStarRatingVariant}
 						/>
 					</Island>
 

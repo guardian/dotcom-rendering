@@ -9,7 +9,7 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import { Caption } from './Caption';
-import { StarRating } from './StarRating/StarRating';
+import { StarRatingDeprecated } from './StarRating/StarRatingDeprecated';
 
 const meta = {
 	component: Caption,
@@ -191,7 +191,7 @@ export const WhenOverlaidWithStars = {
 						color: ${palette.neutral[7]};
 					`}
 				>
-					<StarRating rating={3} size="large" />
+					<StarRatingDeprecated rating={3} size="large" />
 				</div>
 			</>
 		),

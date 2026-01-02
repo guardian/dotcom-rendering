@@ -242,27 +242,31 @@ export const LightboxImages = ({ format, images }: Props) => {
 										{image.title}
 									</h2>
 								)}
-								{typeof image.starRating === 'number' && (
-									<div
-										css={css`
-											display: inline-block;
-											background-color: ${palette
-												.brandAlt[400]};
-											margin-bottom: ${space[2]}px;
-											${from.tablet} {
-												margin-bottom: ${space[3]}px;
-											}
-											figcaption {
-												height: 0;
-											}
-										`}
-									>
-										<StarRating
-											size="medium"
-											rating={image.starRating}
-										/>
-									</div>
-								)}
+
+								{
+									/* TODO : Remove this star rating once the starRatingVariant testing is complete and new designs are merged (eta Jan 2026)*/
+									typeof image.starRating === 'number' && (
+										<div
+											css={css`
+												display: inline-block;
+												background-color: ${palette
+													.brandAlt[400]};
+												margin-bottom: ${space[2]}px;
+												${from.tablet} {
+													margin-bottom: ${space[3]}px;
+												}
+												figcaption {
+													height: 0;
+												}
+											`}
+										>
+											<StarRating
+												size="medium"
+												rating={image.starRating}
+											/>
+										</div>
+									)
+								}
 								<Hide from="tablet">
 									<Selection
 										countOfImages={images.length}

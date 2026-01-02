@@ -45,6 +45,7 @@ type Props = {
 	discussionApiUrl: string;
 	serverTime?: number;
 	renderingTarget: RenderingTarget;
+	isInStarRatingVariant?: boolean;
 };
 
 type ArticleProps = Props & {
@@ -464,6 +465,7 @@ type CarouselCardProps = {
 	onwardsSource?: OnwardsSource;
 	containerType?: DCRContainerType;
 	starRating?: StarRating;
+	isInStarRatingVariant?: boolean;
 };
 
 const CarouselCard = ({
@@ -486,6 +488,7 @@ const CarouselCard = ({
 	serverTime,
 	starRating,
 	index,
+	isInStarRatingVariant,
 }: CarouselCardProps) => {
 	const cardImagePosition = isOnwardContent ? 'bottom' : 'top';
 
@@ -533,6 +536,7 @@ const CarouselCard = ({
 				showTopBarDesktop={!isOnwardContent}
 				showTopBarMobile={!isOnwardContent}
 				aspectRatio={'5:4'}
+				isInStarRatingVariant={isInStarRatingVariant}
 			/>
 		</LI>
 	);
@@ -753,6 +757,7 @@ export const Carousel = ({
 	isOnwardContent = true,
 	serverTime,
 	renderingTarget,
+	isInStarRatingVariant,
 	...props
 }: ArticleProps | FrontProps) => {
 	const carouselRef = useRef<HTMLUListElement>(null);
@@ -990,6 +995,9 @@ export const Carousel = ({
 									discussionApiUrl={discussionApiUrl}
 									isOnwardContent={isOnwardContent}
 									starRating={starRating}
+									isInStarRatingVariant={
+										isInStarRatingVariant
+									}
 								/>
 							);
 						})}

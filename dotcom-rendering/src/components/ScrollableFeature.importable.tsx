@@ -14,6 +14,7 @@ type Props = {
 	imageLoading: 'lazy' | 'eager';
 	aspectRatio: AspectRatio;
 	collectionId: number;
+	isInStarRatingVariant?: boolean;
 };
 
 /**
@@ -30,6 +31,7 @@ export const ScrollableFeature = ({
 	imageLoading,
 	aspectRatio,
 	collectionId,
+	isInStarRatingVariant,
 }: Props) => {
 	return (
 		<ScrollableCarousel
@@ -81,6 +83,8 @@ export const ScrollableFeature = ({
 							isNewsletter={card.isNewsletter}
 							showQuotes={card.showQuotedHeadline}
 							showVideo={card.showVideo}
+							isInStarRatingVariant={isInStarRatingVariant}
+							starRatingSize={'small'}
 						/>
 					</ScrollableCarousel.Item>
 				);

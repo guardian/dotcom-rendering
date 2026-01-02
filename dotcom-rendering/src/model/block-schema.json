@@ -2873,6 +2873,7 @@
         "RatingSizeType": {
             "enum": [
                 "large",
+                "medium",
                 "small"
             ],
             "type": "string"

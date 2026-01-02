@@ -384,6 +384,9 @@ export const renderElement = ({
 					title={element.title}
 					isAvatar={element.isAvatar}
 					isTimeline={isTimeline}
+					isInStarRatingVariant={
+						abTests.starRatingRedesignVariant === 'variant'
+					}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
@@ -714,6 +717,8 @@ export const renderElement = ({
 				</>
 			);
 		case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
+			console.log('render element', abTests);
+
 			return (
 				<Island priority="feature" defer={{ until: 'idle' }}>
 					<RichLinkComponent
@@ -721,6 +726,9 @@ export const renderElement = ({
 						element={element}
 						ajaxUrl={ajaxUrl}
 						format={format}
+						isInStarRatingVariant={
+							abTests.starRatingRedesignVariant === 'variant'
+						}
 					/>
 				</Island>
 			);
@@ -751,6 +759,9 @@ export const renderElement = ({
 					key={index}
 					rating={element.rating}
 					size={element.size}
+					isInStarRatingVariant={
+						abTests.starRatingRedesignVariant === 'variant'
+					}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
