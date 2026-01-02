@@ -25,7 +25,8 @@ import type {
 	DCRFrontImage,
 	DCRSupportingContent,
 } from '../types/front';
-import type { MainMedia, YoutubeVideo } from '../types/mainMedia';
+import type { CardMediaType } from '../types/layout';
+import type { MainMedia } from '../types/mainMedia';
 import { BrandingLabel } from './BrandingLabel';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
@@ -41,6 +42,7 @@ import { FeatureCardCommentCount } from './FeatureCardCommentCount';
 import { FormatBoundary } from './FormatBoundary';
 import { Island } from './Island';
 import { Pill } from './Pill';
+import { SelfHostedVideo } from './SelfHostedVideo.importable';
 import { StarRating } from './StarRating/StarRating';
 import { StarRatingDeprecated } from './StarRating/StarRatingDeprecated';
 import { SupportingContent } from './SupportingContent';
@@ -48,17 +50,6 @@ import { WaveForm } from './WaveForm';
 import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
 
 export type Position = 'inner' | 'outer' | 'none';
-
-type Media =
-	| {
-			type: 'picture';
-			imageUrl: string;
-			imageAltText?: string;
-	  }
-	| {
-			type: 'youtube-video';
-			mainMedia: YoutubeVideo;
-	  };
 
 const baseCardStyles = css`
 	display: flex;
@@ -138,7 +129,7 @@ const immersiveOverlayContainerStyles = css`
 		* 48px is to ensure the gradient does not render the content inaccessible.
 		*/
 		width: 268px;
-		z-index: 1;
+		z-index: ${getZIndex('feature-card-overlay')};
 	}
 `;
 
@@ -165,11 +156,14 @@ const overlayMaskGradientStyles = (angle: string) => css`
 	);
 `;
 const overlayStyles = css`
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	text-align: start;
 	gap: ${space[1]}px;
 	padding: 64px ${space[2]}px ${space[2]}px;
+	/* Needs to be above self-hosted video  */
+	z-index: ${getZIndex('feature-card-overlay')};
 	backdrop-filter: blur(12px) brightness(0.5);
 	@supports not (backdrop-filter: blur(12px)) {
 		background-color: ${transparentColour(sourcePalette.neutral[10], 0.7)};
@@ -264,7 +258,26 @@ const getMedia = ({
 	imageAltText?: string;
 	mainMedia?: MainMedia;
 	showVideo?: boolean;
-}): Media | undefined => {
+}) => {
+	if (mainMedia?.type === 'SelfHostedVideo' && showVideo) {
+		let type: CardMediaType;
+		switch (mainMedia.videoStyle) {
+			case 'Loop':
+				type = 'loop-video';
+				break;
+			case 'Cinemagraph':
+				type = 'cinemagraph';
+				break;
+			default:
+				type = 'default-video';
+		}
+
+		return {
+			type,
+			mainMedia,
+		} as const;
+	}
+
 	if (mainMedia?.type === 'YoutubeVideo' && showVideo) {
 		return {
 			type: 'youtube-video',
@@ -328,8 +341,11 @@ export type Props = {
 	 * Note YouTube recommends a minimum width of 480px @see https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-youtube-player-size
 	 * At 300px or below, the player will begin to lose functionality e.g. volume controls being omitted.
 	 * Youtube requires a minimum width 200px.
+	 * Similarly for self-hosted videos, we shouldn't display videos in too small a container.
+	 * For example, subtitles will not be legible in too small a player.
 	 */
 	canPlayInline?: boolean;
+	showVideo?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	starRating?: Rating;
@@ -354,13 +370,13 @@ export type Props = {
 	 * The highlights container above the header is 0, the first container below the header is 1, etc.
 	 */
 	collectionId: number;
+	uniqueId: string;
 	isNewsletter?: boolean;
 	/**
 	 * An immersive feature card variant. It dictates that the card has a full width background image on
 	 * all breakpoints. It also dictates the the card change aspect ratio to 5:3 on desktop and 4:5 on mobile.
 	 */
 	isImmersive?: boolean;
-	showVideo?: boolean;
 	isStorylines?: boolean;
 	isInStarRatingVariant?: boolean;
 	starRatingSize: RatingSizeType;
@@ -381,6 +397,7 @@ export const FeatureCard = ({
 	showClock,
 	mainMedia,
 	canPlayInline = false,
+	showVideo = false,
 	kickerText,
 	showPulsingDot,
 	dataLinkName,
@@ -396,9 +413,9 @@ export const FeatureCard = ({
 	starRating,
 	showQuotes,
 	collectionId,
+	uniqueId,
 	isNewsletter = false,
 	isImmersive = false,
-	showVideo = false,
 	isStorylines = false,
 	isInStarRatingVariant,
 	starRatingSize,
@@ -407,6 +424,10 @@ export const FeatureCard = ({
 
 	const isVideoArticle = format.design === ArticleDesign.Video;
 
+	/**
+	 * Determine which type of media to use for the card.
+	 * For example, a video might be available, but if we don't want to show it, use an image instead.
+	 */
 	const media = getMedia({
 		imageUrl: image?.src,
 		imageAltText: image?.altText,
@@ -418,6 +439,11 @@ export const FeatureCard = ({
 		webPublicationDate !== undefined && showClock !== undefined;
 
 	const showCommentCount = discussionId !== undefined;
+
+	const isSelfHostedVideo =
+		media?.type === 'loop-video' ||
+		media?.type === 'default-video' ||
+		media?.type === 'cinemagraph';
 
 	const labsDataAttributes = branding
 		? getOphanComponents({
@@ -507,7 +533,47 @@ export const FeatureCard = ({
 									)};
 								`}
 							>
-								{/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- A PR to add self-hosted video is upcoming where this check will be needed. */}
+								{isSelfHostedVideo && (
+									<Island
+										priority="critical"
+										defer={{ until: 'visible' }}
+									>
+										<SelfHostedVideo
+											sources={media.mainMedia.sources}
+											atomId={media.mainMedia.atomId}
+											uniqueId={uniqueId}
+											height={media.mainMedia.height}
+											width={media.mainMedia.width}
+											containerAspectRatio={
+												isImmersive ? 5 / 3 : 4 / 5
+											}
+											// Only cinemagraphs are currently supported in feature cards
+											videoStyle="Cinemagraph"
+											posterImage={
+												media.mainMedia.image ?? ''
+											}
+											fallbackImage={
+												media.mainMedia.image ?? ''
+											}
+											fallbackImageSize={imageSize}
+											fallbackImageLoading={imageLoading}
+											fallbackImageAlt={
+												media.imageAltText
+											}
+											fallbackImageAspectRatio={
+												isImmersive ? '5:3' : '4:5'
+											}
+											linkTo={linkTo}
+											subtitleSource={
+												media.mainMedia.subtitleSource
+											}
+											subtitleSize="large"
+											enableHls={false}
+											isFeatureCard={true}
+										/>
+									</Island>
+								)}
+
 								{media.type === 'picture' && (
 									<>
 										<CardPicture
