@@ -26,21 +26,6 @@ const DisclaimerText = () => (
 	</p>
 );
 
-// const useAffiliateDisclaimerEvent = () => {
-// 	useEffect(() => {
-// 		console.log('*** useAffiliateDisclaimerEvent AffiliateDisclaimer ***');
-// 		void submitComponentEvent(
-// 			{
-// 				action: 'DETECT',
-// 				component: {
-// 					componentType: 'AFFILIATE_DISCLAIMER',
-// 				},
-// 			},
-// 			'Web',
-// 		);
-// 	}, []);
-// };
-
 const AffiliateDisclaimer = () => {
 	useAffiliateDisclaimerEvent();
 	return (
