@@ -26,23 +26,6 @@ new AbTestingDeploymentLambda(app, "AbTestingDeploymentLambdaProd", {
 	},
 });
 
-new AbTestingNotificationLambda(app, "AbTestingNotificationLambdaCode", {
-	stack,
-	stage: "CODE",
-	env: {
-		region,
-	},
-});
-
-// Commented out during testing
-// new AbTestingNotificationLambda(app, "AbTestingNotificationLambdaProd", {
-// 	stack,
-// 	stage: "PROD",
-// 	env: {
-// 		region,
-// 	},
-// });
-
 new AbTestingConfig(app, "AbTestingConfigCode", {
 	stack,
 	stage: "CODE",
@@ -52,6 +35,22 @@ new AbTestingConfig(app, "AbTestingConfigCode", {
 });
 
 new AbTestingConfig(app, "AbTestingConfigProd", {
+	stack,
+	stage: "PROD",
+	env: {
+		region,
+	},
+});
+
+new AbTestingNotificationLambda(app, "AbTestingNotificationLambdaCode", {
+	stack,
+	stage: "CODE",
+	env: {
+		region,
+	},
+});
+
+new AbTestingNotificationLambda(app, "AbTestingNotificationLambdaProd", {
 	stack,
 	stage: "PROD",
 	env: {

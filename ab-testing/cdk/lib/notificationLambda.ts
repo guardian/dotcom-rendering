@@ -17,10 +17,8 @@ const getEmailDomain = (stage: GuStackProps["stage"]) => {
 		case "PROD":
 			return "abtesting.gutools.co.uk";
 		case "CODE":
-			return "abtesting.code.dev-gutools.co.uk";
-		case "LOCAL":
 		default:
-			return "abtesting.local.dev-gutools.co.uk";
+			return "abtesting.code.dev-gutools.co.uk";
 	}
 };
 

@@ -117,7 +117,7 @@ export const sendEmail = async (
 			.send(
 				new SendEmailCommand({
 					// Verified email domain in AWS. Ensure to update in CDK if changing
-					Source: `notifications@${process.env.EMAIL_DOMAIN}`,
+					Source: `AB Testing <notifications@${process.env.EMAIL_DOMAIN}>`,
 					Destination: {
 						ToAddresses: [recipient],
 					},
