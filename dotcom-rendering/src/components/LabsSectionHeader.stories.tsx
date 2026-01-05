@@ -15,6 +15,7 @@ const meta = {
 		title: 'Container Title',
 		url: '/',
 		editionId: 'AU',
+		hasPageSkin: false,
 	},
 	render: (args) => (
 		<div
@@ -43,6 +44,12 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
+
+export const WithPageSkin: Story = {
+	args: {
+		hasPageSkin: true,
+	},
+};
 
 export const WithDetailsOpen: Story = {
 	play: async ({ canvasElement }) => {
