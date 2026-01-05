@@ -2,7 +2,7 @@ import { SendEmailCommand } from "@aws-sdk/client-ses";
 import { type ABExpiryChecks } from "./checkExpiry.ts";
 import { sesClient } from "./sesClient.ts";
 
-const getEmailBodyHtml = (abTestExpiryChecks: ABExpiryChecks) => {
+const getEmailBodyHtml = (abTestExpiryChecks: ABExpiryChecks): string => {
 	const tableConfig: Record<
 		keyof ABExpiryChecks,
 		{ title: string; accentColour: string }
@@ -21,7 +21,7 @@ const getEmailBodyHtml = (abTestExpiryChecks: ABExpiryChecks) => {
 		},
 	};
 
-	const getTestsTableHtml = (group: keyof typeof tableConfig) => {
+	const getTestsTableHtml = (group: keyof typeof tableConfig): string => {
 		const config = tableConfig[group];
 		return `
 		<h2 style="margin-bottom: 0.5rem; font-size: 1.2rem; color: ${
@@ -38,13 +38,15 @@ const getEmailBodyHtml = (abTestExpiryChecks: ABExpiryChecks) => {
 			<th>Owners</th>
 		</thead>
 		<tbody style="text-align: center;">
-		${abTestExpiryChecks[group].map((test) => {
-			return `<tr style="padding: 10px;">
+		${abTestExpiryChecks[group]
+			.map((test) => {
+				return `<tr style="padding: 10px;">
 					<td><strong>${test.name}</strong></td>
 					<td>${test.expirationDate}</td>
 					<td>${test.owners.join("<br/>")}</td>
 				</tr>`;
-		})}
+			})
+			.join("<br />")}
 		</tbody>
 		</table>`;
 	};
@@ -53,16 +55,16 @@ const getEmailBodyHtml = (abTestExpiryChecks: ABExpiryChecks) => {
 	<div style="margin:auto; margin:10px; font-family: sans-serif;">
 		<h1 style="font-size: 1.4rem">AB Tests Expiry Reminder</h1>
 
-		${!!abTestExpiryChecks["expired"].length ? getTestsTableHtml("expired") : ""}
+		${abTestExpiryChecks["expired"].length ? getTestsTableHtml("expired") : ""}
 
 		${
-			!!abTestExpiryChecks["within1Day"].length
+			abTestExpiryChecks["within1Day"].length
 				? getTestsTableHtml("within1Day")
 				: ""
 		}
 
 		${
-			!!abTestExpiryChecks["within2Days"].length
+			abTestExpiryChecks["within2Days"].length
 				? getTestsTableHtml("within2Days")
 				: ""
 		}
@@ -84,22 +86,34 @@ const getEmailBodyPlainText = (abTestsByExpiryDate: ABExpiryChecks): string => {
 	AB Tests Expiry Reminder
 
 	Expired:
-	${abTestsByExpiryDate.expired.map(
-		(test) =>
-			`${test.name} expired ${test.expirationDate}. Owners: ${test.owners}`,
-	)}
+	${abTestsByExpiryDate.expired
+		.map(
+			(test) =>
+				`${test.name} expired ${
+					test.expirationDate
+				}. Owners: ${test.owners.join(", ")}`,
+		)
+		.join("\n")}
 
 	Expiring today (at 23:59):
-	${abTestsByExpiryDate.within1Day.map(
-		(test) =>
-			`${test.name} expired ${test.expirationDate}. Owners: ${test.owners}`,
-	)}
+	${abTestsByExpiryDate.within1Day
+		.map(
+			(test) =>
+				`${test.name} expired ${
+					test.expirationDate
+				}. Owners: ${test.owners.join(", ")}`,
+		)
+		.join("\n")}
 
 	Expiring tomorrow (at 23:59):
-	${abTestsByExpiryDate.within2Days.map(
-		(test) =>
-			`${test.name} expired ${test.expirationDate}. Owners: ${test.owners}`,
-	)}
+	${abTestsByExpiryDate.within2Days
+		.map(
+			(test) =>
+				`${test.name} expired ${
+					test.expirationDate
+				}. Owners: ${test.owners.join(", ")}`,
+		)
+		.join("\n")}
 
 	If you are not ready to remove a test yet but are happy to leave it expired for now, please turn it OFF in the code (https://github.com/guardian/dotcom-rendering/blob/main/ab-testing/config/abTests.ts)
 
