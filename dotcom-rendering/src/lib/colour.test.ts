@@ -1,4 +1,4 @@
-import { getContrast, isLight } from './colour';
+import { addAlpha, getContrast, isLight } from './colour';
 
 const round = (value: number): number => Math.round(value * 100) / 100;
 
@@ -53,5 +53,20 @@ describe('getContrast', () => {
 		expect(round(getContrast('#2a449a', '#f6f6f6'))).toEqual(8.12);
 		expect(round(getContrast('#f0c650', '#1a1a1a'))).toEqual(10.69);
 		expect(round(getContrast('#559861', '#1a1a1a'))).toEqual(5.01);
+	});
+});
+
+describe('addAlpha', () => {
+	it('should return new colour adjusted for opacity against background colour', () => {
+		expect(addAlpha('#da020e', '#ffffff', 1)).toBe('#da020e');
+		expect(addAlpha('#da020e', '#1a1a1a', 1)).toBe('#da020e');
+		expect(addAlpha('#da020e', '#ffffff', 0.1)).toBe('#fbe6e7');
+		expect(addAlpha('#da020e', '#1a1a1a', 0.1)).toBe('#2d1819');
+		expect(addAlpha('#023474', '#ffffff', 0.1)).toBe('#e6ebf1');
+		expect(addAlpha('#023474', '#1a1a1a', 0.1)).toBe('#181d23');
+	});
+	it('should return fallback colour if invalid colour passed in', () => {
+		expect(addAlpha('#xyz', '#ffffff', 1)).toBe('#7f7f7f');
+		expect(addAlpha('#ffffff', '#xyz', 1)).toBe('#7f7f7f');
 	});
 });

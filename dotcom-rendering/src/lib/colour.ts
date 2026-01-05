@@ -23,6 +23,26 @@ const hexToRgb = (
 		: null;
 };
 
+export const addAlpha = (
+	colour: string,
+	background: string,
+	alpha: number,
+): string => {
+	const rgbColour = hexToRgb(colour);
+	const rgbBackground = hexToRgb(background);
+	if (!rgbColour || !rgbBackground) return '#7f7f7f'; // fallback to mid grey
+
+	const bg = [rgbBackground.r, rgbBackground.g, rgbBackground.b];
+	const alphaColour = [rgbColour.r, rgbColour.g, rgbColour.b].map(
+		(channel, index) =>
+			Math.round(alpha * channel + (1 - alpha) * bg[index]!)
+				.toString(16)
+				.padStart(2, '0'),
+	);
+
+	return `#${alphaColour[0]}${alphaColour[1]}${alphaColour[2]}`;
+};
+
 // https://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
 // Based on: https://github.com/siege-media/contrast-ratio/blob/gh-pages/color.js
 const processLuminance = (channel: number): number => {
