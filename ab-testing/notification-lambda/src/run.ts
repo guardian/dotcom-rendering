@@ -14,6 +14,11 @@ import type { CloudFormationCustomResourceEvent, Context } from "aws-lambda";
 import { handler } from "./index.ts";
 
 const stage = process.env.STAGE ?? "CODE";
+const emailDomain =
+	process.env.EMAIL_DOMAIN ??
+	`notifications@abtesting.local.dev-gutools.co.uk`;
+
+process.env.EMAIL_DOMAIN = emailDomain;
 
 // Create a mock CloudFormation event
 const mockEvent: CloudFormationCustomResourceEvent = {
@@ -50,7 +55,9 @@ const mockContext: Context = {
 	succeed: () => {},
 };
 
-console.log(`Running lambda handler locally with STAGE=${stage}\n`);
+console.log(
+	`Running lambda handler locally with STAGE=${stage} and EMAIL_DOMAIN=${emailDomain}\n`,
+);
 
 // Run the handler
 // Cast to unknown then to the correct function type to work around typing issues

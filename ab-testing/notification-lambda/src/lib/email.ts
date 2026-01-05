@@ -112,7 +112,8 @@ export const getEmailCommand = (
 	abTestsByExpiryDate: ABExpiryChecks,
 ) =>
 	new SendEmailCommand({
-		Source: "dig.dev.web-engineers@theguardian.com",
+		// Verified email domain in AWS
+		Source: `notifications@${process.env.EMAIL_DOMAIN}`,
 		Destination: {
 			ToAddresses: [recipient],
 		},

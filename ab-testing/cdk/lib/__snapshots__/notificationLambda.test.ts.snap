@@ -2,6 +2,10 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
 {
   "Metadata": {
     "gu:cdk:constructs": [
+      "GuEmailIdentity",
+      "GuCname",
+      "GuCname",
+      "GuCname",
       "GuDistributionBucketParameter",
       "GuScheduledLambda",
       "GuLambdaErrorPercentageAlarm"
@@ -9,6 +13,100 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
     "gu:cdk:version": "62.0.1"
   },
   "Resources": {
+    "EmailIdentityAbtestingnotificationlambdaE053C648": {
+      "Type": "AWS::SES::EmailIdentity",
+      "Properties": {
+        "EmailIdentity": "abtesting.code.dev-gutools.co.uk",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "ab-testing-notification-lambda"
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "62.0.1"
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend"
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE"
+          }
+        ]
+      }
+    },
+    "EmailIdentityDkimabtestingnotificationlambda0": {
+      "Type": "Guardian::DNS::RecordSet",
+      "Properties": {
+        "Name": {
+          "Fn::GetAtt": [
+            "EmailIdentityAbtestingnotificationlambdaE053C648",
+            "DkimDNSTokenName1"
+          ]
+        },
+        "ResourceRecords": [
+          {
+            "Fn::GetAtt": [
+              "EmailIdentityAbtestingnotificationlambdaE053C648",
+              "DkimDNSTokenValue1"
+            ]
+          }
+        ],
+        "RecordType": "CNAME",
+        "TTL": 3600,
+        "Stage": "CODE"
+      }
+    },
+    "EmailIdentityDkimabtestingnotificationlambda1": {
+      "Type": "Guardian::DNS::RecordSet",
+      "Properties": {
+        "Name": {
+          "Fn::GetAtt": [
+            "EmailIdentityAbtestingnotificationlambdaE053C648",
+            "DkimDNSTokenName2"
+          ]
+        },
+        "ResourceRecords": [
+          {
+            "Fn::GetAtt": [
+              "EmailIdentityAbtestingnotificationlambdaE053C648",
+              "DkimDNSTokenValue2"
+            ]
+          }
+        ],
+        "RecordType": "CNAME",
+        "TTL": 3600,
+        "Stage": "CODE"
+      }
+    },
+    "EmailIdentityDkimabtestingnotificationlambda2": {
+      "Type": "Guardian::DNS::RecordSet",
+      "Properties": {
+        "Name": {
+          "Fn::GetAtt": [
+            "EmailIdentityAbtestingnotificationlambdaE053C648",
+            "DkimDNSTokenName3"
+          ]
+        },
+        "ResourceRecords": [
+          {
+            "Fn::GetAtt": [
+              "EmailIdentityAbtestingnotificationlambdaE053C648",
+              "DkimDNSTokenValue3"
+            ]
+          }
+        ],
+        "RecordType": "CNAME",
+        "TTL": 3600,
+        "Stage": "CODE"
+      }
+    },
     "AbTestingNotificationSnsTopicB3559144": {
       "Type": "AWS::SNS::Topic",
       "Properties": {
@@ -173,11 +271,18 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
                 "Fn::Join": [
                   "",
                   [
-                    "arn:aws:ses:eu-west-1:",
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ses:eu-west-1:",
                     {
                       "Ref": "AWS::AccountId"
                     },
-                    ":identity/dig.dev.web-engineers@theguardian.com"
+                    ":identity/",
+                    {
+                      "Ref": "EmailIdentityAbtestingnotificationlambdaE053C648"
+                    }
                   ]
                 ]
               }
@@ -204,6 +309,9 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
         },
         "Environment": {
           "Variables": {
+            "EMAIL_DOMAIN": {
+              "Ref": "EmailIdentityAbtestingnotificationlambdaE053C648"
+            },
             "STACK": "frontend",
             "STAGE": "CODE",
             "APP": "ab-testing-notification-lambda"
@@ -394,6 +502,10 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
 {
   "Metadata": {
     "gu:cdk:constructs": [
+      "GuEmailIdentity",
+      "GuCname",
+      "GuCname",
+      "GuCname",
       "GuDistributionBucketParameter",
       "GuScheduledLambda",
       "GuLambdaErrorPercentageAlarm"
@@ -401,6 +513,100 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
     "gu:cdk:version": "62.0.1"
   },
   "Resources": {
+    "EmailIdentityAbtestingnotificationlambdaE053C648": {
+      "Type": "AWS::SES::EmailIdentity",
+      "Properties": {
+        "EmailIdentity": "abtesting.gutools.co.uk",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "ab-testing-notification-lambda"
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "62.0.1"
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend"
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD"
+          }
+        ]
+      }
+    },
+    "EmailIdentityDkimabtestingnotificationlambda0": {
+      "Type": "Guardian::DNS::RecordSet",
+      "Properties": {
+        "Name": {
+          "Fn::GetAtt": [
+            "EmailIdentityAbtestingnotificationlambdaE053C648",
+            "DkimDNSTokenName1"
+          ]
+        },
+        "ResourceRecords": [
+          {
+            "Fn::GetAtt": [
+              "EmailIdentityAbtestingnotificationlambdaE053C648",
+              "DkimDNSTokenValue1"
+            ]
+          }
+        ],
+        "RecordType": "CNAME",
+        "TTL": 3600,
+        "Stage": "PROD"
+      }
+    },
+    "EmailIdentityDkimabtestingnotificationlambda1": {
+      "Type": "Guardian::DNS::RecordSet",
+      "Properties": {
+        "Name": {
+          "Fn::GetAtt": [
+            "EmailIdentityAbtestingnotificationlambdaE053C648",
+            "DkimDNSTokenName2"
+          ]
+        },
+        "ResourceRecords": [
+          {
+            "Fn::GetAtt": [
+              "EmailIdentityAbtestingnotificationlambdaE053C648",
+              "DkimDNSTokenValue2"
+            ]
+          }
+        ],
+        "RecordType": "CNAME",
+        "TTL": 3600,
+        "Stage": "PROD"
+      }
+    },
+    "EmailIdentityDkimabtestingnotificationlambda2": {
+      "Type": "Guardian::DNS::RecordSet",
+      "Properties": {
+        "Name": {
+          "Fn::GetAtt": [
+            "EmailIdentityAbtestingnotificationlambdaE053C648",
+            "DkimDNSTokenName3"
+          ]
+        },
+        "ResourceRecords": [
+          {
+            "Fn::GetAtt": [
+              "EmailIdentityAbtestingnotificationlambdaE053C648",
+              "DkimDNSTokenValue3"
+            ]
+          }
+        ],
+        "RecordType": "CNAME",
+        "TTL": 3600,
+        "Stage": "PROD"
+      }
+    },
     "AbTestingNotificationSnsTopicB3559144": {
       "Type": "AWS::SNS::Topic",
       "Properties": {
@@ -565,11 +771,18 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
                 "Fn::Join": [
                   "",
                   [
-                    "arn:aws:ses:eu-west-1:",
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ses:eu-west-1:",
                     {
                       "Ref": "AWS::AccountId"
                     },
-                    ":identity/dig.dev.web-engineers@theguardian.com"
+                    ":identity/",
+                    {
+                      "Ref": "EmailIdentityAbtestingnotificationlambdaE053C648"
+                    }
                   ]
                 ]
               }
@@ -596,6 +809,9 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
         },
         "Environment": {
           "Variables": {
+            "EMAIL_DOMAIN": {
+              "Ref": "EmailIdentityAbtestingnotificationlambdaE053C648"
+            },
             "STACK": "frontend",
             "STAGE": "PROD",
             "APP": "ab-testing-notification-lambda"
