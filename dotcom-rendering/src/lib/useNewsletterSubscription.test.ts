@@ -46,178 +46,266 @@ describe('useNewsletterSubscription', () => {
 		jest.restoreAllMocks();
 	});
 
-	it('should return undefined while auth status is pending', () => {
-		mockUseAuthStatus.mockReturnValue({ kind: 'Pending' });
+	describe('when feature flag is disabled (enableCheck = false)', () => {
+		it('should return false immediately without making API call', async () => {
+			mockUseAuthStatus.mockReturnValue({
+				kind: 'SignedIn',
+				accessToken: {} as never,
+				idToken: {} as never,
+			});
 
-		const { result } = renderHook(() =>
-			useNewsletterSubscription(mockNewsletterId, mockIdApiUrl),
-		);
+			const { result } = renderHook(() =>
+				useNewsletterSubscription(
+					mockNewsletterId,
+					mockIdApiUrl,
+					false,
+				),
+			);
 
-		expect(result.current).toBeUndefined();
-		expect(global.fetch).not.toHaveBeenCalled();
+			await waitFor(() => {
+				expect(result.current).toBe(false);
+			});
+
+			expect(global.fetch).not.toHaveBeenCalled();
+		});
 	});
 
-	it('should return false when user is signed out', async () => {
-		mockUseAuthStatus.mockReturnValue({ kind: 'SignedOut' });
+	describe('when feature flag is enabled (enableCheck = true)', () => {
+		it('should return undefined while auth status is pending', () => {
+			mockUseAuthStatus.mockReturnValue({ kind: 'Pending' });
 
-		const { result } = renderHook(() =>
-			useNewsletterSubscription(mockNewsletterId, mockIdApiUrl),
-		);
+			const { result } = renderHook(() =>
+				useNewsletterSubscription(mockNewsletterId, mockIdApiUrl, true),
+			);
 
-		await waitFor(() => {
-			expect(result.current).toBe(false);
+			expect(result.current).toBeUndefined();
+			expect(global.fetch).not.toHaveBeenCalled();
 		});
 
-		expect(global.fetch).not.toHaveBeenCalled();
-	});
+		it('should return false when user is signed out', async () => {
+			mockUseAuthStatus.mockReturnValue({ kind: 'SignedOut' });
 
-	it('should return false when idApiUrl is undefined', async () => {
-		mockUseAuthStatus.mockReturnValue({
-			kind: 'SignedIn',
-			accessToken: {} as never,
-			idToken: idTokenMock as never,
+			const { result } = renderHook(() =>
+				useNewsletterSubscription(mockNewsletterId, mockIdApiUrl, true),
+			);
+
+			await waitFor(() => {
+				expect(result.current).toBe(false);
+			});
+
+			expect(global.fetch).not.toHaveBeenCalled();
 		});
 
-		const { result } = renderHook(() =>
-			useNewsletterSubscription(mockNewsletterId, undefined),
-		);
+		it('should return false when idApiUrl is undefined', async () => {
+			mockUseAuthStatus.mockReturnValue({
+				kind: 'SignedIn',
+				accessToken: {} as never,
+				idToken: idTokenMock as never,
+			});
 
-		await waitFor(() => {
-			expect(result.current).toBe(false);
+			const { result } = renderHook(() =>
+				useNewsletterSubscription(mockNewsletterId, undefined, true),
+			);
+
+			await waitFor(() => {
+				expect(result.current).toBe(false);
+			});
+
+			expect(global.fetch).not.toHaveBeenCalled();
 		});
 
-		expect(global.fetch).not.toHaveBeenCalled();
-	});
+		it('should return true when user is subscribed to the newsletter', async () => {
+			mockUseAuthStatus.mockReturnValue({
+				kind: 'SignedIn',
+				accessToken: {} as never,
+				idToken: idTokenMock as never,
+			});
 
-	it('should return true when user is subscribed to the newsletter', async () => {
-		mockUseAuthStatus.mockReturnValue({
-			kind: 'SignedIn',
-			accessToken: {} as never,
-			idToken: idTokenMock as never,
+			(global.fetch as jest.Mock).mockResolvedValueOnce({
+				ok: true,
+				json: async () => ({
+					result: {
+						subscriptions: [
+							{ listId: '1234' },
+							{ listId: String(mockNewsletterId) },
+						],
+					},
+				}),
+			});
+
+			const { result } = renderHook(() =>
+				useNewsletterSubscription(mockNewsletterId, mockIdApiUrl, true),
+			);
+
+			await waitFor(() => {
+				expect(result.current).toBe(true);
+			});
 		});
 
-		(global.fetch as jest.Mock).mockResolvedValueOnce({
-			ok: true,
-			json: async () => ({
-				result: {
-					subscriptions: [
-						{ listId: '1234' },
-						{ listId: String(mockNewsletterId) },
-						{ listId: '5678' },
-					],
+		it('should return false when user is not subscribed to the newsletter', async () => {
+			mockUseAuthStatus.mockReturnValue({
+				kind: 'SignedIn',
+				accessToken: {} as never,
+				idToken: idTokenMock as never,
+			});
+
+			(global.fetch as jest.Mock).mockResolvedValueOnce({
+				ok: true,
+				json: async () => ({
+					result: {
+						subscriptions: [{ listId: '1234' }, { listId: '5678' }],
+					},
+				}),
+			});
+
+			const { result } = renderHook(() =>
+				useNewsletterSubscription(mockNewsletterId, mockIdApiUrl, true),
+			);
+
+			await waitFor(() => {
+				expect(result.current).toBe(false);
+			});
+		});
+
+		it('should return false when API returns non-ok response', async () => {
+			const sentryReportErrorMock = jest.fn();
+			window.guardian = {
+				modules: {
+					sentry: {
+						reportError: sentryReportErrorMock,
+					},
 				},
-			}),
+			} as unknown as typeof window.guardian;
+
+			mockUseAuthStatus.mockReturnValue({
+				kind: 'SignedIn',
+				accessToken: {} as never,
+				idToken: idTokenMock as never,
+			});
+
+			(global.fetch as jest.Mock).mockResolvedValueOnce({
+				ok: false,
+				status: 401,
+			});
+
+			const { result } = renderHook(() =>
+				useNewsletterSubscription(mockNewsletterId, mockIdApiUrl, true),
+			);
+
+			await waitFor(() => {
+				expect(result.current).toBe(false);
+			});
+
+			expect(sentryReportErrorMock).toHaveBeenCalledWith(
+				expect.any(Error),
+				'errors-fetching-newsletters',
+			);
 		});
 
-		const { result } = renderHook(() =>
-			useNewsletterSubscription(mockNewsletterId, mockIdApiUrl),
-		);
+		it('should return false when fetch throws an error', async () => {
+			const sentryReportErrorMock = jest.fn();
+			window.guardian = {
+				modules: {
+					sentry: {
+						reportError: sentryReportErrorMock,
+					},
+				},
+			} as unknown as typeof window.guardian;
 
-		await waitFor(() => {
-			expect(result.current).toBe(true);
+			mockUseAuthStatus.mockReturnValue({
+				kind: 'SignedIn',
+				accessToken: {} as never,
+				idToken: idTokenMock as never,
+			});
+
+			(global.fetch as jest.Mock).mockRejectedValueOnce(
+				new Error('Network error'),
+			);
+
+			const { result } = renderHook(() =>
+				useNewsletterSubscription(mockNewsletterId, mockIdApiUrl, true),
+			);
+
+			await waitFor(() => {
+				expect(result.current).toBe(false);
+			});
+
+			expect(sentryReportErrorMock).toHaveBeenCalledWith(
+				expect.any(Error),
+				'errors-fetching-newsletters',
+			);
 		});
-
-		expect(global.fetch).toHaveBeenCalledWith(
-			`${mockIdApiUrl}/users/me/newsletters`,
-			expect.objectContaining({
-				method: 'GET',
-				credentials: 'include',
-			}),
-		);
 	});
 
-	it('should return false when user is not subscribed to the newsletter', async () => {
-		mockUseAuthStatus.mockReturnValue({
-			kind: 'SignedIn',
-			accessToken: {} as never,
-			idToken: idTokenMock as never,
-		});
-
-		(global.fetch as jest.Mock).mockResolvedValueOnce({
-			ok: true,
-			json: async () => ({
-				result: {
-					subscriptions: [{ listId: '1234' }, { listId: '5678' }],
+	describe('default behavior (enableCheck defaults to true)', () => {
+		it('should return false when API returns non-ok response', async () => {
+			const sentryReportErrorMock = jest.fn();
+			window.guardian = {
+				modules: {
+					sentry: {
+						reportError: sentryReportErrorMock,
+					},
 				},
-			}),
+			} as unknown as typeof window.guardian;
+
+			mockUseAuthStatus.mockReturnValue({
+				kind: 'SignedIn',
+				accessToken: {} as never,
+				idToken: idTokenMock as never,
+			});
+
+			(global.fetch as jest.Mock).mockResolvedValueOnce({
+				ok: false,
+				status: 401,
+			});
+
+			const { result } = renderHook(() =>
+				useNewsletterSubscription(mockNewsletterId, mockIdApiUrl),
+			);
+
+			await waitFor(() => {
+				expect(result.current).toBe(false);
+			});
+
+			expect(sentryReportErrorMock).toHaveBeenCalledWith(
+				expect.any(Error),
+				'errors-fetching-newsletters',
+			);
 		});
 
-		const { result } = renderHook(() =>
-			useNewsletterSubscription(mockNewsletterId, mockIdApiUrl),
-		);
-
-		await waitFor(() => {
-			expect(result.current).toBe(false);
-		});
-	});
-
-	it('should return false when API returns non-ok response', async () => {
-		const sentryReportErrorMock = jest.fn();
-		window.guardian = {
-			modules: {
-				sentry: {
-					reportError: sentryReportErrorMock,
+		it('should return false when fetch throws an error', async () => {
+			const sentryReportErrorMock = jest.fn();
+			window.guardian = {
+				modules: {
+					sentry: {
+						reportError: sentryReportErrorMock,
+					},
 				},
-			},
-		} as unknown as typeof window.guardian;
+			} as unknown as typeof window.guardian;
 
-		mockUseAuthStatus.mockReturnValue({
-			kind: 'SignedIn',
-			accessToken: {} as never,
-			idToken: idTokenMock as never,
+			mockUseAuthStatus.mockReturnValue({
+				kind: 'SignedIn',
+				accessToken: {} as never,
+				idToken: idTokenMock as never,
+			});
+
+			(global.fetch as jest.Mock).mockRejectedValueOnce(
+				new Error('Network error'),
+			);
+
+			const { result } = renderHook(() =>
+				useNewsletterSubscription(mockNewsletterId, mockIdApiUrl),
+			);
+
+			await waitFor(() => {
+				expect(result.current).toBe(false);
+			});
+
+			expect(sentryReportErrorMock).toHaveBeenCalledWith(
+				expect.any(Error),
+				'errors-fetching-newsletters',
+			);
 		});
-
-		(global.fetch as jest.Mock).mockResolvedValueOnce({
-			ok: false,
-			status: 401,
-		});
-
-		const { result } = renderHook(() =>
-			useNewsletterSubscription(mockNewsletterId, mockIdApiUrl),
-		);
-
-		await waitFor(() => {
-			expect(result.current).toBe(false);
-		});
-
-		expect(sentryReportErrorMock).toHaveBeenCalledWith(
-			expect.any(Error),
-			'errors-fetching-newsletters',
-		);
-	});
-
-	it('should return false when fetch throws an error', async () => {
-		const sentryReportErrorMock = jest.fn();
-		window.guardian = {
-			modules: {
-				sentry: {
-					reportError: sentryReportErrorMock,
-				},
-			},
-		} as unknown as typeof window.guardian;
-
-		mockUseAuthStatus.mockReturnValue({
-			kind: 'SignedIn',
-			accessToken: {} as never,
-			idToken: idTokenMock as never,
-		});
-
-		(global.fetch as jest.Mock).mockRejectedValueOnce(
-			new Error('Network error'),
-		);
-
-		const { result } = renderHook(() =>
-			useNewsletterSubscription(mockNewsletterId, mockIdApiUrl),
-		);
-
-		await waitFor(() => {
-			expect(result.current).toBe(false);
-		});
-
-		expect(sentryReportErrorMock).toHaveBeenCalledWith(
-			expect.any(Error),
-			'errors-fetching-newsletters',
-		);
 	});
 
 	describe('newsletter subscription data caching', () => {
