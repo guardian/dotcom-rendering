@@ -225,7 +225,12 @@ export const AbuseReportForm = ({
 		formVariables.categoryId === legalIssueCategoryId;
 
 	return (
-		<div aria-modal="true" ref={modalRef}>
+		<div
+			role="dialog"
+			aria-modal="true"
+			aria-label="Report abuse"
+			ref={modalRef}
+		>
 			<form css={formWrapper} onSubmit={onSubmit}>
 				<div
 					css={[
