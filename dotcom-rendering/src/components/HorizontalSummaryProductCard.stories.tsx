@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
+import { allModes } from '../../.storybook/modes';
 import { exampleProduct } from '../../fixtures/manual/productBlockElement';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { HorizontalSummaryProductCard } from './HorizontalSummaryProductCard';
@@ -13,6 +14,14 @@ const meta = {
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Lifestyle,
+		},
+	},
+	parameters: {
+		chromatic: {
+			modes: {
+				'vertical mobile': allModes['vertical mobile'],
+				'vertical wide': allModes['vertical wide'],
+			},
 		},
 	},
 	decorators: [centreColumnDecorator],
