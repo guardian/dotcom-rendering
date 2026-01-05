@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react';
-import { getOptionsHeaders } from './identity';
+import {
+	clearSubscriptionCache,
+	fetchNewsletterSubscriptions,
+	getCachedSubscriptions,
+	shouldInvalidateCache,
+} from './newsletterSubscriptionCache';
 import { useAuthStatus } from './useAuthStatus';
-
-interface NewsletterSubscriptionResponse {
-	result: {
-		subscriptions: Array<{
-			listId: string;
-		}>;
-	};
-}
 
 /**
  * A hook to check if a user is subscribed to a specific newsletter.
@@ -44,6 +41,7 @@ export const useNewsletterSubscription = (
 		// User is not signed in
 		if (authStatus.kind === 'SignedOut') {
 			setIsSubscribed(false);
+			clearSubscriptionCache();
 			return;
 		}
 
@@ -55,47 +53,35 @@ export const useNewsletterSubscription = (
 
 		// At this point: authStatus.kind === 'SignedIn'
 
-		// User is signed in, fetch their newsletters
+		// Checking cache first
+		const cachedData = getCachedSubscriptions();
+		const currentUserId = authStatus.idToken.claims.sub;
+
+		if (cachedData && !shouldInvalidateCache(cachedData, currentUserId)) {
+			const isUserSubscribed = cachedData.listIds.includes(newsletterId);
+			setIsSubscribed(isUserSubscribed);
+			return;
+		}
+
 		const fetchNewsletters = async () => {
-			try {
-				const options = getOptionsHeaders(authStatus);
-				const response = await fetch(
-					`${idApiUrl}/users/me/newsletters`,
-					{
-						method: 'GET',
-						credentials: 'include',
-						...options,
-						headers: {
-							...options.headers,
-						},
-					},
-				);
+			const listIds = await fetchNewsletterSubscriptions(
+				idApiUrl,
+				currentUserId,
+				authStatus,
+			);
 
-				if (!response.ok) {
-					console.error('Failed to fetch user newsletters');
-					setIsSubscribed(false);
-					return;
-				}
-
-				const data: NewsletterSubscriptionResponse =
-					await response.json();
-
-				const newsletters = data.result?.subscriptions ?? [];
-
-				// If newsletter exists in the subscriptions array, user is subscribed
-				const isUserSubscribed = newsletters.some(
-					(n) => Number(n.listId) === newsletterId,
-				);
-
-				setIsSubscribed(isUserSubscribed);
-			} catch (error) {
-				const message = `Error fetching newsletters: ${String(error)}`;
+			if (listIds === null) {
+				const message = 'Failed to fetch newsletter subscriptions';
 				window.guardian.modules.sentry.reportError(
-					new Error(message, { cause: error }),
+					new Error(message),
 					'errors-fetching-newsletters',
 				);
 				setIsSubscribed(false);
+				return;
 			}
+
+			const isUserSubscribed = listIds.includes(newsletterId);
+			setIsSubscribed(isUserSubscribed);
 		};
 
 		void fetchNewsletters();

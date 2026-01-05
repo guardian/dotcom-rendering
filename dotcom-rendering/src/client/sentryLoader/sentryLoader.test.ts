@@ -34,7 +34,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 			}),
 		).toEqual(true);
 	});
-	it('does enable Sentry for 0.1% of users', () => {
+	it('does enable Sentry for 1% of users', () => {
 		expect(
 			isSentryEnabled({
 				isDev: false,
@@ -56,7 +56,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: false,
 				enableSentryReporting: true,
 				isInBrowserVariantTest: false,
-				random: 99.9001 / 100,
+				random: 99.0001 / 100,
 			}),
 		).toEqual(true);
 		expect(
