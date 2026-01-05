@@ -717,8 +717,6 @@ export const renderElement = ({
 				</>
 			);
 		case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
-			console.log('render element', abTests);
-
 			return (
 				<Island priority="feature" defer={{ until: 'idle' }}>
 					<RichLinkComponent

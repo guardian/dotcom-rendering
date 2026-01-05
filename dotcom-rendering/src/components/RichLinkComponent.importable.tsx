@@ -135,7 +135,6 @@ export const RichLinkComponent = ({
 		width: (data.imageAsset ?? fallbackData.imageAsset).fields.width,
 		height: (data.imageAsset ?? fallbackData.imageAsset).fields.height,
 	} satisfies Parameters<typeof RichLink>[0]['imageData'];
-	console.log('rich link component', isInStarRatingVariant);
 
 	return (
 		<RichLink
