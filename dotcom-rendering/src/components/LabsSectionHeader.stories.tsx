@@ -15,6 +15,7 @@ const meta = {
 		title: 'Container Title',
 		url: '/',
 		editionId: 'AU',
+		hasPageSkin: false,
 	},
 	render: (args) => (
 		<div
@@ -52,4 +53,20 @@ export const WithDetailsOpen: Story = {
 			expandDetailsButtons.map((button) => userEvent.click(button)),
 		);
 	},
+};
+
+export const WithPageSkin: Story = {
+	args: {
+		hasPageSkin: true,
+	},
+	render: (args) => (
+		<div
+			css={css`
+				margin: 20px auto 100px;
+				width: 600px;
+			`}
+		>
+			<LabsSectionHeader {...args} />
+		</div>
+	),
 };
