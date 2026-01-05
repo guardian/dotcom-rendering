@@ -160,7 +160,6 @@ export const MoreSection = ({
 				pillarDivider,
 				pillarDividerExtended,
 			]}
-			role="none"
 		>
 			<ul css={columnLinks} role="menu" id={moreSectionId}>
 				{links.map((link) => (

@@ -91,7 +91,11 @@ const searchSubmit = css`
 export const SearchBar = () => {
 	const searchId = 'gu-search';
 	return (
-		<form css={searchBar} action="https://www.google.co.uk/search">
+		<form
+			css={searchBar}
+			action="https://www.google.co.uk/search"
+			role="search"
+		>
 			<TextInput
 				hideLabel={true}
 				label="Search input"

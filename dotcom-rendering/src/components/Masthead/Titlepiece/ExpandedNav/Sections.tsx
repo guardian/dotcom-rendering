@@ -10,12 +10,15 @@ import {
 	space,
 	textSans17,
 } from '@guardian/source/foundations';
-import { Hide } from '@guardian/source/react-components';
 import type { EditionId } from '../../../../lib/edition';
 import { nestedOphanComponents } from '../../../../lib/ophan-helpers';
 import type { LinkType, NavType } from '../../../../model/extract-nav';
 import { palette as themePalette } from '../../../../palette';
-import { expandedNavLinkStyles, listAccessibility } from '../commonStyles';
+import {
+	expandedNavLinkStyles,
+	hideFromDesktop,
+	listAccessibility,
+} from '../commonStyles';
 import { MoreSection } from './MoreSection';
 import { lineStyle, Pillar } from './Pillar';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
@@ -111,7 +114,6 @@ export const Sections = ({ nav, editionId, hasPageSkin }: Props) => {
 	return (
 		<ul
 			css={[columnsStyle, !hasPageSkin && columnsStyleFromLeftCol]}
-			role="menubar"
 			data-testid="nav-menu-columns"
 		>
 			{nav.pillars.map((column, i) => {
@@ -142,17 +144,17 @@ export const Sections = ({ nav, editionId, hasPageSkin }: Props) => {
 				);
 			})}
 
-			<Hide from="desktop">
-				<li role="none">
-					<SearchBar />
-				</li>
-			</Hide>
-			<div css={lineStyle}></div>
+			<li css={hideFromDesktop}>
+				<SearchBar />
+			</li>
+			<li css={lineStyle}></li>
 
-			<ReaderRevenueLinks
-				readerRevenueLinks={nav.readerRevenueLinks}
-				editionId={editionId}
-			/>
+			<li>
+				<ReaderRevenueLinks
+					readerRevenueLinks={nav.readerRevenueLinks}
+					editionId={editionId}
+				/>
+			</li>
 
 			{/* Mobile only Brand Extensions list */}
 			<MoreSection
@@ -163,7 +165,7 @@ export const Sections = ({ nav, editionId, hasPageSkin }: Props) => {
 			/>
 
 			{/* Desktop only Brand Extensions list*/}
-			<li css={desktopBrandExtensionColumn} role="none">
+			<li css={desktopBrandExtensionColumn}>
 				<SearchBar />
 
 				<ul
@@ -177,6 +179,7 @@ export const Sections = ({ nav, editionId, hasPageSkin }: Props) => {
 						<li
 							css={brandExtensionListItem}
 							key={brandExtension.title}
+							role="none"
 						>
 							<a
 								className="selectableMenuItem"
