@@ -2,6 +2,7 @@ import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
+	getSublinks,
 	opinionTrails,
 	selfHostedVideo54Card,
 	slideshowCard,
@@ -275,6 +276,21 @@ export const GigaBoostedSplashWithLiveUpdates: Story = {
 			...emptyGroupedTrails,
 			snap: [],
 			standard: [{ ...liveUpdatesCard, boostLevel: 'gigaboost' }],
+		},
+		collectionId: 1,
+	},
+};
+
+export const SplashWithLiveUpdatesAndTwoSublinks: Story = {
+	name: 'Standard splash with live updates and two sublinks',
+	args: {
+		frontSectionTitle: 'Standard splash',
+		groupedTrails: {
+			...emptyGroupedTrails,
+			snap: [],
+			standard: [
+				{ ...liveUpdatesCard, supportingContent: getSublinks(2) },
+			],
 		},
 		collectionId: 1,
 	},
