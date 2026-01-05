@@ -24,11 +24,11 @@ const isSentryEnabled = ({
 	if (isInBrowserVariantTest) return true;
 	// Sentry lets you configure sampleRate to reduce the volume of events sent
 	// but this filter only happens _after_ the library is loaded. The Guardian
-	// measures page views in the billions so we only want to log 0.1% of errors that
+	// measures page views in the billions so we only want to log 1% of errors that
 	// happen but if we used sampleRate to do this we'd be needlessly downloading
-	// Sentry 99.9% of the time. So instead we just do some math here and use that
+	// Sentry 99% of the time. So instead we just do some math here and use that
 	// to prevent the Sentry script from ever loading.
-	if (random <= 999 / 1000) return false;
+	if (random <= 99 / 100) return false;
 	return true;
 };
 
