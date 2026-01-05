@@ -104,7 +104,7 @@ const determinePaddingTop = (size: PaddingSizeType) => {
 	}
 };
 
-type Props = {
+export type Props = {
 	rating: Rating;
 	size: RatingSizeType;
 	paddingSize?: PaddingSizeType;
