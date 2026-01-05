@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-
 import { type Props, StarRating } from './StarRating';
 
 const meta = {
@@ -61,9 +60,9 @@ export const StarsWithLargePadding: Story = {
 	},
 };
 
-export const StarsWithDarkTheme: Story = {
+export const StarsWithAlternativeTheme: Story = {
 	args: {
 		size: 'large',
-		useDarkTheme: true,
+		useAlternativeTheme: true,
 	},
 };

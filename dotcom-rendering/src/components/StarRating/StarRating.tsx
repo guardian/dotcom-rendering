@@ -23,8 +23,8 @@ const emptyStarColor = css`
 	background-color: ${palette('--star-rating-empty-background')};
 `;
 
-const emptyStarDarkColor = css`
-	background-color: ${palette('--star-rating-empty-dark-background')};
+const emptyStarAltColor = css`
+	background-color: ${palette('--star-rating-empty-alt-background')};
 `;
 
 const determineSize = (size: RatingSizeType) => {
@@ -108,15 +108,19 @@ export type Props = {
 	rating: Rating;
 	size: RatingSizeType;
 	paddingSize?: PaddingSizeType;
-	/** The dark theme is to account for star ratings that appear on lighter / translucent backgrounds (eg feature cards). The dark theme ensures we meet AA accessibility standard*/
-	useDarkTheme?: boolean;
+	/**
+	 * The alternative theme is to account for star ratings that appear on
+	 *  lighter / translucent backgrounds (e.g. feature cards).
+	 *  The alternative theme ensures we meet AA accessibility standards.
+	 */
+	useAlternativeTheme?: boolean;
 };
 
 export const StarRating = ({
 	rating,
 	size,
 	paddingSize = 'small',
-	useDarkTheme = false,
+	useAlternativeTheme = false,
 }: Props) => (
 	<div
 		css={[determineSize(size), determinePaddingTop(paddingSize), container]}
@@ -131,7 +135,9 @@ export const StarRating = ({
 					key={i}
 					css={[
 						starBackground,
-						useDarkTheme ? emptyStarDarkColor : emptyStarColor,
+						useAlternativeTheme
+							? emptyStarAltColor
+							: emptyStarColor,
 					]}
 				>
 					<SvgStarOutline />

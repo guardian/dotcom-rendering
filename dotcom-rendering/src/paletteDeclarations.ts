@@ -7963,12 +7963,12 @@ const paletteColours = {
 		light: starRatingBackgroundColourLight,
 		dark: starRatingBackgroundColourDark,
 	},
-	'--star-rating-empty-background': {
-		light: starRatingEmptyBackgroundColourLight,
+	'--star-rating-empty-alt-background': {
+		light: starRatingEmptyBackgroundColourDark,
 		dark: starRatingEmptyBackgroundColourDark,
 	},
-	'--star-rating-empty-dark-background': {
-		light: starRatingEmptyBackgroundColourDark,
+	'--star-rating-empty-background': {
+		light: starRatingEmptyBackgroundColourLight,
 		dark: starRatingEmptyBackgroundColourDark,
 	},
 	'--star-rating-fill': {
