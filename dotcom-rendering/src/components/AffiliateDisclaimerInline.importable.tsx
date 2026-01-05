@@ -1,8 +1,9 @@
 import { css } from '@emotion/react';
 import { space, textSans14 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import { useEffect } from 'react';
-import { submitComponentEvent } from '../client/ophan/ophan';
+// import { useEffect } from 'react';
+// import { submitComponentEvent } from '../client/ophan/ophan';
+import { useAffiliateDisclaimerEvent } from '../lib/affiliateDisclaimerHelpers';
 import { palette as themePalette } from '../palette';
 
 const disclaimerInlineStyles = css`
@@ -42,23 +43,23 @@ const DisclaimerText = () => (
 	</p>
 );
 
-const useAffiliateDisclaimerEvent = () => {
-	useEffect(() => {
-		console.log(
-			'*** useAffiliateDisclaimerEvent AffiliateDisclaimerInline ***',
-		);
+// const useAffiliateDisclaimerEvent = () => {
+// 	useEffect(() => {
+// 		console.log(
+// 			'*** useAffiliateDisclaimerEvent AffiliateDisclaimerInline ***',
+// 		);
 
-		void submitComponentEvent(
-			{
-				action: 'DETECT',
-				component: {
-					componentType: 'AFFILIATE_DISCLAIMER',
-				},
-			},
-			'Web',
-		);
-	}, []);
-};
+// 		void submitComponentEvent(
+// 			{
+// 				action: 'DETECT',
+// 				component: {
+// 					componentType: 'AFFILIATE_DISCLAIMER',
+// 				},
+// 			},
+// 			'Web',
+// 		);
+// 	}, []);
+// };
 
 const AffiliateDisclaimerInline = () => {
 	useAffiliateDisclaimerEvent();

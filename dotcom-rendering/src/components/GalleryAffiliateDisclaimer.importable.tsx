@@ -5,8 +5,7 @@ import {
 	textSans12,
 	textSans15,
 } from '@guardian/source/foundations';
-import { useEffect } from 'react';
-import { submitComponentEvent } from '../client/ophan/ophan';
+import { useAffiliateDisclaimerEvent } from '../lib/affiliateDisclaimerHelpers';
 import { palette as themePalette } from '../palette';
 
 const disclaimerLeftColStyles = css`
@@ -48,24 +47,6 @@ const DisclaimerText = () => (
 		.
 	</p>
 );
-
-const useAffiliateDisclaimerEvent = () => {
-	useEffect(() => {
-		console.log(
-			'*** useAffiliateDisclaimerEvent GalleryAffiliateDisclaimer ***',
-		);
-
-		void submitComponentEvent(
-			{
-				action: 'DETECT',
-				component: {
-					componentType: 'AFFILIATE_DISCLAIMER',
-				},
-			},
-			'Web',
-		);
-	}, []);
-};
 
 const GalleryAffiliateDisclaimer = () => {
 	useAffiliateDisclaimerEvent();
