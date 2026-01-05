@@ -2,116 +2,103 @@ import { SendEmailCommand } from "@aws-sdk/client-ses";
 import { type ABExpiryChecks } from "./checkExpiry.ts";
 import { sesClient } from "./sesClient.ts";
 
-const getEmailBodyHtml = (abTestExpiryChecks: ABExpiryChecks): string => {
+const getEmailBodyHtml = (expiryChecks: ABExpiryChecks): string => {
 	const tableConfig: Record<
 		keyof ABExpiryChecks,
 		{ title: string; accentColour: string }
 	> = {
 		expired: {
-			title: "‼️ Expired",
-			accentColour: "orangered",
-		},
-		within1Day: {
-			title: "⚠️ Expiring today @ 23:59",
+			title: "Expired",
 			accentColour: "firebrick",
 		},
-		within2Days: {
-			title: "⏰ Expires tomorrow @ 23:59",
+		within1Day: {
+			title: "Expiring today at 23:59",
 			accentColour: "chocolate",
+		},
+		within2Days: {
+			title: "Expires tomorrow at 23:59",
+			accentColour: "peru",
 		},
 	};
 
 	const getTestsTableHtml = (group: keyof typeof tableConfig): string => {
-		const config = tableConfig[group];
+		const { accentColour, title } = tableConfig[group];
+
 		return `
-		<h2 style="margin-bottom: 0.5rem; font-size: 1.2rem; color: ${
-			config.accentColour
-		};">
-			${config.title}
-		</h2>
-		<table style="border-spacing: 4px; padding: 6px; border: 1px dashed ${
-			config.accentColour
-		};">
-		<thead style>
-			<th>Test name</th>
-			<th>Expiry date</th>
-			<th>Owners</th>
-		</thead>
-		<tbody style="text-align: center;">
-		${abTestExpiryChecks[group]
-			.map((test) => {
-				return `<tr style="padding: 10px;">
-					<td><strong>${test.name}</strong></td>
-					<td>${test.expirationDate}</td>
-					<td>${test.owners.join("<br/>")}</td>
-				</tr>`;
-			})
-			.join("<br />")}
-		</tbody>
-		</table>`;
+			<h2 style="margin-bottom: 0.5rem; font-size: 1.2rem; color: ${accentColour};">
+				${title}
+			</h2>
+			<table style="width: 100%; border-spacing: 4px; padding: 6px; border: 1px dashed ${accentColour};">
+			<thead style="text-align: left;">
+				<th style="width: 30%; border-bottom: 1px solid rgba(0,0,0,0.3);">Name</th>
+				<th style="width: 10%; border-bottom: 1px solid rgba(0,0,0,0.3);">Expiry</th>
+				<th style="width: 30%; border-bottom: 1px solid rgba(0,0,0,0.3);">Owners</th>
+				<th style="width: 30%; border-bottom: 1px solid rgba(0,0,0,0.3);">Description</th>
+			</thead>
+			<tbody style="text-align: left;">
+			${expiryChecks[group]
+				.map((test) => {
+					return `
+					<tr>
+						<td><strong>${test.name}</strong></td>
+						<td>${test.expirationDate}</td>
+						<td>${test.owners.join("<br/>")}</td>
+						<td>${test.description}</td>
+					</tr>`;
+				})
+				.join("")}
+			</tbody>
+			</table>
+		`;
 	};
 
-	return `
-	<div style="margin:auto; margin:10px; font-family: sans-serif;">
+	return `<div style="margin:auto; font-family: sans-serif;">
 		<h1 style="font-size: 1.4rem">AB Tests Expiry Reminder</h1>
-
-		${abTestExpiryChecks["expired"].length ? getTestsTableHtml("expired") : ""}
-
-		${
-			abTestExpiryChecks["within1Day"].length
-				? getTestsTableHtml("within1Day")
-				: ""
-		}
-
-		${
-			abTestExpiryChecks["within2Days"].length
-				? getTestsTableHtml("within2Days")
-				: ""
-		}
-
-		<br></br>
-
-		If you are not ready to remove a test yet but are happy to leave it expired for now, please turn it <strong>OFF</strong> in <a href="https://github.com/guardian/dotcom-rendering/blob/main/ab-testing/config/abTests.ts">the code</a>.
-
-		<br></br>
-		<br></br>
-
-		<em>See https://frontend.gutools.co.uk/analytics/ab-testing for more details</em>
-	</div>
-	`;
+		${expiryChecks["expired"].length ? getTestsTableHtml("expired") : ""}
+		${expiryChecks["within1Day"].length ? getTestsTableHtml("within1Day") : ""}
+		${expiryChecks["within2Days"].length ? getTestsTableHtml("within2Days") : ""}
+		<br>
+		<p>
+			If you are not ready to remove a test yet but are happy to leave it expired for now, please turn it <strong>OFF</strong>
+			in <a href="https://github.com/guardian/dotcom-rendering/blob/main/ab-testing/config/abTests.ts">the code</a>.
+		</p>
+		<br>
+		<p>
+			<em>See https://frontend.gutools.co.uk/analytics/ab-testing for more details</em>
+		</p>
+	</div>`;
 };
 
-const getEmailBodyPlainText = (abTestsByExpiryDate: ABExpiryChecks): string => {
-	return `
-	AB Tests Expiry Reminder
+const getEmailBodyPlainText = (expiryChecks: ABExpiryChecks): string => {
+	return `AB Tests Expiry Reminder
 
 	Expired:
-	${abTestsByExpiryDate.expired
+	${expiryChecks.expired
 		.map(
-			(test) =>
-				`${test.name} expired ${
-					test.expirationDate
-				}. Owners: ${test.owners.join(", ")}`,
+			({ name, expirationDate, owners }) =>
+				`${name} expired ${expirationDate}. Owners: ${owners.join(
+					", ",
+				)}`,
 		)
 		.join("\n")}
 
 	Expiring today (at 23:59):
-	${abTestsByExpiryDate.within1Day
+	${expiryChecks.within1Day
 		.map(
-			(test) =>
-				`${test.name} expired ${
-					test.expirationDate
-				}. Owners: ${test.owners.join(", ")}`,
+			({ name, expirationDate, owners }) =>
+				`${name} expires ${expirationDate} at 00:00. Owners: ${owners.join(
+					", ",
+				)}`,
 		)
 		.join("\n")}
 
 	Expiring tomorrow (at 23:59):
-	${abTestsByExpiryDate.within2Days
+	${expiryChecks.within2Days
 		.map(
-			(test) =>
-				`${test.name} expired ${
-					test.expirationDate
-				}. Owners: ${test.owners.join(", ")}`,
+			({ name, expirationDate, owners }) =>
+				`${name} expires ${expirationDate} at 00:00. Owners: ${owners.join(
+					", ",
+				)}`,
 		)
 		.join("\n")}
 
@@ -121,43 +108,37 @@ const getEmailBodyPlainText = (abTestsByExpiryDate: ABExpiryChecks): string => {
 	`;
 };
 
-export const getEmailCommand = (
-	recipient: string,
-	abTestsByExpiryDate: ABExpiryChecks,
-) =>
-	new SendEmailCommand({
-		// Verified email domain in AWS
-		Source: `AB Testing <notifications@${process.env.EMAIL_DOMAIN}>`,
-		Destination: {
-			ToAddresses: [recipient],
-		},
-		Message: {
-			Subject: {
-				Data: "Expiring AB Tests",
-				Charset: "UTF-8",
-			},
-			Body: {
-				Html: {
-					Data: getEmailBodyHtml(abTestsByExpiryDate),
-					Charset: "UTF-8",
-				},
-				Text: {
-					Data: getEmailBodyPlainText(abTestsByExpiryDate),
-					Charset: "UTF-8",
-				},
-			},
-		},
-	});
-
 export const sendEmail = async (
 	recipient: string,
 	expiringAbTests: ABExpiryChecks,
 ): Promise<void> => {
-	const emailCommand = getEmailCommand(recipient, expiringAbTests);
-
 	try {
 		await sesClient
-			.send(emailCommand)
+			.send(
+				new SendEmailCommand({
+					// Verified email domain in AWS. Ensure to update in CDK if changing
+					Source: `notifications@${process.env.EMAIL_DOMAIN}`,
+					Destination: {
+						ToAddresses: [recipient],
+					},
+					Message: {
+						Subject: {
+							Data: "Expiring AB Tests",
+							Charset: "UTF-8",
+						},
+						Body: {
+							Html: {
+								Data: getEmailBodyHtml(expiringAbTests),
+								Charset: "UTF-8",
+							},
+							Text: {
+								Data: getEmailBodyPlainText(expiringAbTests),
+								Charset: "UTF-8",
+							},
+						},
+					},
+				}),
+			)
 			.then(() =>
 				console.log(
 					`Sent AB test expiry reminder email to ${recipient}`,
