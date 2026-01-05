@@ -444,7 +444,7 @@ export const SecureSignup = ({
 				</Button>
 			</form>
 			{isWaitingForResponse && (
-				<div aria-label="loading">
+				<div role="status" aria-label="loading">
 					<Spinner size="small" />
 				</div>
 			)}

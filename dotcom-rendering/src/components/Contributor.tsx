@@ -106,7 +106,6 @@ type Props = {
 
 export const Contributor = ({ byline, tags, format, source }: Props) => (
 	<address
-		aria-label="Contributor info"
 		data-component="meta-byline"
 		data-link-name="byline"
 		data-gu-name="byline"
