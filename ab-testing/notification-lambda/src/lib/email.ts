@@ -12,11 +12,11 @@ const getEmailBodyHtml = (expiryChecks: ABExpiryChecks): string => {
 			accentColour: "firebrick",
 		},
 		within1Day: {
-			title: "Expiring today at 23:59",
+			title: "Expiring today after 23:59",
 			accentColour: "chocolate",
 		},
 		within2Days: {
-			title: "Expires tomorrow at 23:59",
+			title: "Expires tomorrow after 23:59",
 			accentColour: "peru",
 		},
 	};
@@ -70,42 +70,51 @@ const getEmailBodyHtml = (expiryChecks: ABExpiryChecks): string => {
 };
 
 const getEmailBodyPlainText = (expiryChecks: ABExpiryChecks): string => {
-	return `AB Tests Expiry Reminder
+	return [
+		`AB Tests Expiry Reminder\n`,
 
-	Expired:
-	${expiryChecks.expired
-		.map(
-			({ name, expirationDate, owners }) =>
-				`${name} expired ${expirationDate}. Owners: ${owners.join(
-					", ",
-				)}`,
-		)
-		.join("\n")}
+		`${expiryChecks.expired.length ? "Expired:" : ""}`,
+		`${expiryChecks.expired
+			.map(({ name, owners, description }) =>
+				[
+					`\tName: ${name}`,
+					`Description: ${description}`,
+					`Owners: ${owners.join(", ")}`,
+				].join("\n\t"),
+			)
+			.join("\n\n")}`,
 
-	Expiring today (at 23:59):
-	${expiryChecks.within1Day
-		.map(
-			({ name, expirationDate, owners }) =>
-				`${name} expires ${expirationDate} at 00:00. Owners: ${owners.join(
-					", ",
-				)}`,
-		)
-		.join("\n")}
+		`${
+			expiryChecks.within1Day.length ? "Expiring today at midnight:" : ""
+		}`,
+		`${expiryChecks.within1Day
+			.map(({ name, owners, description }) =>
+				[
+					`\tName: ${name}`,
+					`Description: ${description}`,
+					`Owners: ${owners.join(", ")}`,
+				].join("\n\t"),
+			)
+			.join("\n\n")}`,
 
-	Expiring tomorrow (at 23:59):
-	${expiryChecks.within2Days
-		.map(
-			({ name, expirationDate, owners }) =>
-				`${name} expires ${expirationDate} at 00:00. Owners: ${owners.join(
-					", ",
-				)}`,
-		)
-		.join("\n")}
+		`${
+			expiryChecks.within2Days.length
+				? "Expiring tomorrow at midnight:"
+				: ""
+		}`,
+		`${expiryChecks.within2Days
+			.map(({ name, owners, description }) =>
+				[
+					`\tName: ${name}`,
+					`Description: ${description}`,
+					`Owners: ${owners.join(", ")}`,
+				].join("\n\t"),
+			)
+			.join("\n\n")}`,
 
-	If you are not ready to remove a test yet but are happy to leave it expired for now, please turn it OFF in the code (https://github.com/guardian/dotcom-rendering/blob/main/ab-testing/config/abTests.ts)
-
-	See https://frontend.gutools.co.uk/analytics/ab-testing for more details
-	`;
+		`If you are not ready to remove a test yet but are happy to leave it expired for now, please turn it OFF in the code (https://github.com/guardian/dotcom-rendering/blob/main/ab-testing/config/abTests.ts)\n`,
+		`See https://frontend.gutools.co.uk/analytics/ab-testing for more details\n`,
+	].join("\n");
 };
 
 export const sendEmail = async (
