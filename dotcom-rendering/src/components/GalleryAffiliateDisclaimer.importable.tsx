@@ -1,8 +1,13 @@
 import { css } from '@emotion/react';
-import { space, textSans15 } from '@guardian/source/foundations';
-import { Hide } from '@guardian/source/react-components';
+import {
+	palette,
+	space,
+	textSans12,
+	textSans15,
+} from '@guardian/source/foundations';
 import { useEffect } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
+import { palette as themePalette } from '../palette';
 
 const disclaimerLeftColStyles = css`
 	${textSans15};
@@ -14,6 +19,23 @@ const disclaimerLeftColStyles = css`
 	line-height: 1.15;
 	padding-top: ${space[1]}px;
 	padding-bottom: ${space[1]}px;
+`;
+
+const galleryDisclaimerStyles = css`
+	${textSans12};
+	line-height: 1.5;
+	color: ${themePalette('--affiliate-disclaimer-text')};
+	a {
+		color: ${themePalette('--affiliate-disclaimer-text')};
+		transition: border-color 0.15s ease-out;
+		border-bottom: 1px solid ${palette.neutral[46]};
+		text-decoration: none;
+	}
+	a:hover {
+		border-bottom: 1px solid
+			${themePalette('--affiliate-disclaimer-text-hover')};
+		text-decoration: none;
+	}
 `;
 
 const DisclaimerText = () => (
@@ -29,7 +51,10 @@ const DisclaimerText = () => (
 
 const useAffiliateDisclaimerEvent = () => {
 	useEffect(() => {
-		console.log('*** useAffiliateDisclaimerEvent AffiliateDisclaimer ***');
+		console.log(
+			'*** useAffiliateDisclaimerEvent GalleryAffiliateDisclaimer ***',
+		);
+
 		void submitComponentEvent(
 			{
 				action: 'DETECT',
@@ -42,18 +67,16 @@ const useAffiliateDisclaimerEvent = () => {
 	}, []);
 };
 
-const AffiliateDisclaimer = () => {
+const GalleryAffiliateDisclaimer = () => {
 	useAffiliateDisclaimerEvent();
 	return (
-		<Hide until="leftCol">
-			<aside
-				css={[disclaimerLeftColStyles]}
-				data-testid="affiliate-disclaimer"
-			>
-				<DisclaimerText />
-			</aside>
-		</Hide>
+		<aside
+			css={[disclaimerLeftColStyles, galleryDisclaimerStyles]}
+			data-testid="affiliate-disclaimer"
+		>
+			<DisclaimerText />
+		</aside>
 	);
 };
 
-export { AffiliateDisclaimer };
+export { GalleryAffiliateDisclaimer };
