@@ -11,7 +11,7 @@ import { submitComponentEvent } from '../client/ophan/ophan';
  */
 let affiliateDisclaimerDetectTracked = false;
 
-const useAffiliateDisclaimerEvent: void = () => {
+const useAffiliateDisclaimerEvent = (): void => {
 	useEffect(() => {
 		if (!affiliateDisclaimerDetectTracked) {
 			void submitComponentEvent(
