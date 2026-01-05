@@ -45,12 +45,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const WithPageSkin: Story = {
-	args: {
-		hasPageSkin: true,
-	},
-};
-
 export const WithDetailsOpen: Story = {
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
@@ -59,4 +53,20 @@ export const WithDetailsOpen: Story = {
 			expandDetailsButtons.map((button) => userEvent.click(button)),
 		);
 	},
+};
+
+export const WithPageSkin: Story = {
+	args: {
+		hasPageSkin: true,
+	},
+	render: (args) => (
+		<div
+			css={css`
+				margin: 20px auto 100px;
+				width: 600px;
+			`}
+		>
+			<LabsSectionHeader {...args} />
+		</div>
+	),
 };

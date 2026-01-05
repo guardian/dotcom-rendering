@@ -62,9 +62,11 @@ const dividerStylesUntilLeftCol = css`
 `;
 
 const dividerStylesFromLeftCol = css`
-	margin-right: unset;
-	::after {
-		display: none;
+	${from.leftCol} {
+		margin-right: unset;
+		::after {
+			display: none;
+		}
 	}
 `;
 
