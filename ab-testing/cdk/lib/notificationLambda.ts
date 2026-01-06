@@ -10,7 +10,7 @@ import { Effect, PolicyStatement } from "aws-cdk-lib/aws-iam";
 import { Runtime } from "aws-cdk-lib/aws-lambda";
 import { Subscription, SubscriptionProtocol, Topic } from "aws-cdk-lib/aws-sns";
 
-const lambdaFunctionName = "ab-testing-notification-lambda";
+const appName = "ab-testing-notification-lambda";
 
 const getEmailDomain = (stage: GuStackProps["stage"]) => {
 	switch (stage) {
@@ -33,7 +33,7 @@ export class AbTestingNotificationLambda extends GuStack {
 		};
 
 		const emailIdentity = new GuEmailIdentity(this, "EmailIdentity", {
-			app: lambdaFunctionName,
+			app: appName,
 			domainName: getEmailDomain(props.stage),
 		});
 
@@ -53,13 +53,17 @@ export class AbTestingNotificationLambda extends GuStack {
 			this,
 			"AbTestingNotificationLambda",
 			{
-				app: lambdaFunctionName,
+				functionName: `${appName}-${props.stage}`,
+				app: appName,
 				fileName: "lambda.zip",
 				handler: "index.handler",
 				rules: this.stage === "PROD" ? [runDailyRule] : [],
 				monitoringConfiguration: {
 					snsTopicName: snsTopic.topicName,
 					toleratedErrorPercentage: 0,
+					alarmName: "AB Testing Notification Lambda Failures",
+					alarmDescription: `Something went wrong notifying test owners of upcoming AB test expiries in the ${props.stage} AB Testing Notification Lambda. Please check the logs`,
+					okAction: true,
 				},
 				runtime: Runtime.NODEJS_22_X,
 				environment: {
