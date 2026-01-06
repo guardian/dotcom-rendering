@@ -1,5 +1,5 @@
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
-import { AffiliateDisclaimerInline } from '../components/AffiliateDisclaimer.importable';
+import { AffiliateDisclaimerInline } from '../components/AffiliateDisclaimer';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
@@ -577,6 +577,8 @@ export const renderElement = ({
 				successDescription: element.newsletter.successDescription,
 				theme: element.newsletter.theme,
 				idApiUrl: idApiUrl ?? '',
+				hideNewsletterSignupComponentForSubscribers:
+					!!switches.hideNewsletterSignupComponentForSubscribers,
 			};
 			if (isListElement || isTimeline) return null;
 			return (
@@ -956,11 +958,7 @@ export const renderElement = ({
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.DisclaimerBlockElement': {
-			return (
-				<Island priority="enhancement" defer={{ until: 'idle' }}>
-					<AffiliateDisclaimerInline />
-				</Island>
-			);
+			return <AffiliateDisclaimerInline />;
 		}
 		case 'model.dotcomrendering.pageElements.CrosswordElement':
 			return (

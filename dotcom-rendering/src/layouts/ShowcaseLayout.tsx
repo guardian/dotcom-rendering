@@ -9,7 +9,7 @@ import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
-import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer.importable';
+import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -482,12 +482,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 												}
 											/>
 											{!!article.affiliateLinksDisclaimer && (
-												<Island
-													priority="enhancement"
-													defer={{ until: 'idle' }}
-												>
-													<AffiliateDisclaimer />
-												</Island>
+												<AffiliateDisclaimer />
 											)}
 										</Hide>
 									</>
@@ -517,12 +512,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											}
 										/>
 										{!!article.affiliateLinksDisclaimer && (
-											<Island
-												priority="enhancement"
-												defer={{ until: 'idle' }}
-											>
-												<AffiliateDisclaimer />
-											</Island>
+											<AffiliateDisclaimer />
 										)}
 									</>
 								)}

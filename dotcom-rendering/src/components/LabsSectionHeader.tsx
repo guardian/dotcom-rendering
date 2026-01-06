@@ -5,7 +5,6 @@ import {
 	space,
 	textSans14,
 	textSansBold15,
-	until,
 } from '@guardian/source/foundations';
 import {
 	Link,
@@ -26,6 +25,7 @@ type Props = {
 	url?: string;
 	/** The ID of the edition, used to construct the Labs front URL */
 	editionId: EditionId;
+	hasPageSkin: boolean;
 };
 
 const headerStyles = css`
@@ -36,6 +36,9 @@ const headerStyles = css`
 	display: flex;
 	flex-grow: 1;
 	flex-direction: row;
+`;
+
+const headerStylesFromLeftCol = css`
 	${from.leftCol} {
 		flex-direction: column;
 	}
@@ -47,15 +50,22 @@ const logoStyles = css`
 
 const dividerStylesUntilLeftCol = css`
 	position: relative;
-	${until.leftCol} {
-		margin-right: ${space[4]}px;
+	margin-right: ${space[4]}px;
+	::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: -${space[2]}px;
+		border-right: 1px solid ${schemePalette('--section-border')};
+	}
+`;
+
+const dividerStylesFromLeftCol = css`
+	${from.leftCol} {
+		margin-right: unset;
 		::after {
-			content: '';
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			right: -${space[2]}px;
-			border-right: 1px solid ${schemePalette('--section-border')};
+			display: none;
 		}
 	}
 `;
@@ -76,7 +86,9 @@ const labelAndAboutStyles = css`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+`;
 
+const labelAndAboutStylesFromLeftCol = css`
 	${between.leftCol.and.wide} {
 		flex-direction: column;
 	}
@@ -90,15 +102,17 @@ const labelStyles = css`
 const aboutStyles = css`
 	justify-self: end;
 	${textSans14}
+`;
 
+const aboutStylesFromLeftCol = css`
 	${between.leftCol.and.wide} {
 		margin-top: ${space[1]}px;
 	}
 `;
 
-const positionStyles = css`
+const positionStyles = (hasPageSkin: boolean) => css`
 	right: 0;
-	${from.leftCol} {
+	${!hasPageSkin && from.leftCol} {
 		left: 0;
 		right: auto;
 	}
@@ -113,9 +127,20 @@ const detailsStyles = css`
 	}
 `;
 
-export const LabsSectionHeader = ({ title, url, editionId }: Props) => (
-	<div css={headerStyles}>
-		<div css={[logoStyles, dividerStylesUntilLeftCol]}>
+export const LabsSectionHeader = ({
+	title,
+	url,
+	editionId,
+	hasPageSkin,
+}: Props) => (
+	<div css={[headerStyles, !hasPageSkin && headerStylesFromLeftCol]}>
+		<div
+			css={[
+				logoStyles,
+				dividerStylesUntilLeftCol,
+				!hasPageSkin && dividerStylesFromLeftCol,
+			]}
+		>
 			<Link
 				href={`https://www.theguardian.com/guardian-labs${getLabsUrlSuffix(
 					editionId,
@@ -126,13 +151,20 @@ export const LabsSectionHeader = ({ title, url, editionId }: Props) => (
 		</div>
 
 		<div css={textLayoutStyles}>
-			<div css={labelAndAboutStyles}>
+			<div
+				css={[
+					labelAndAboutStyles,
+					!hasPageSkin && labelAndAboutStylesFromLeftCol,
+				]}
+			>
 				<span css={labelStyles}>Paid content</span>
-				<div css={aboutStyles}>
+				<div
+					css={[aboutStyles, !hasPageSkin && aboutStylesFromLeftCol]}
+				>
 					<Details
 						label="About"
 						labelSize="xsmall"
-						positionStyles={positionStyles}
+						positionStyles={positionStyles(hasPageSkin)}
 					>
 						<div css={detailsStyles}>
 							<p>
