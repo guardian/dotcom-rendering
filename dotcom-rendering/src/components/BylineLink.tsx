@@ -1,5 +1,4 @@
 import { isString } from '@guardian/libs';
-import { Hide } from '@guardian/source/react-components';
 import { DottedLines } from '@guardian/source-development-kitchen/react-components';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import {
@@ -191,7 +190,7 @@ export const BylineLink = ({
 		<>
 			{renderedTokens}
 			{isApps && !isLiveBlog && !isHeadline && hasSoleContributor ? (
-				<Hide from="leftCol">
+				<>
 					<DottedLines
 						count={1}
 						color={themePalette('--article-meta-lines')}
@@ -202,7 +201,7 @@ export const BylineLink = ({
 							id={soleContributor.id}
 						/>
 					</Island>
-				</Hide>
+				</>
 			) : null}
 		</>
 	);
