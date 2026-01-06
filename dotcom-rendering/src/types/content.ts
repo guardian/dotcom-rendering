@@ -111,6 +111,19 @@ export interface CalloutBlockElementV2 {
 	contacts?: CalloutContactType[];
 }
 
+export interface ReporterCalloutBlockElement {
+	_type: 'model.dotcomrendering.pageElements.ReporterCalloutBlockElement';
+	elementId: string;
+	id: string;
+	activeFrom?: number;
+	activeUntil?: number;
+	displayOnSensitive: boolean;
+	title: string;
+	description: string;
+	role?: RoleType;
+	contacts?: CalloutContactType[];
+}
+
 export interface CartoonBlockElement {
 	_type: 'model.dotcomrendering.pageElements.CartoonBlockElement';
 	elementId: string;
@@ -796,6 +809,7 @@ export type FEElement =
 	| CaptionBlockElement
 	| CalloutBlockElement
 	| CalloutBlockElementV2
+	| ReporterCalloutBlockElement
 	| CartoonBlockElement
 	| ChartAtomBlockElement
 	| CodeBlockElement

@@ -42,6 +42,7 @@ import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable'
 import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
 import { QandaAtom } from '../components/QandaAtom.importable';
 import { QAndAExplainers } from '../components/QAndAExplainers';
+import { ReporterCalloutBlockComponent } from '../components/ReporterCalloutBlockComponent.importable';
 import { RichLinkComponent } from '../components/RichLinkComponent.importable';
 import { SoundcloudBlockComponent } from '../components/SoundcloudBlockComponent';
 import { SpotifyBlockComponent } from '../components/SpotifyBlockComponent.importable';
@@ -216,6 +217,15 @@ export const renderElement = ({
 							callout={element}
 							pageId={pageId}
 						/>
+					</Island>
+				);
+			}
+			return null;
+		case 'model.dotcomrendering.pageElements.ReporterCalloutBlockElement':
+			if (switches.callouts) {
+				return (
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<ReporterCalloutBlockComponent callout={element} />
 					</Island>
 				);
 			}
