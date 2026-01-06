@@ -612,6 +612,9 @@
                     "$ref": "#/definitions/CalloutBlockElementV2"
                 },
                 {
+                    "$ref": "#/definitions/ReporterCalloutBlockElement"
+                },
+                {
                     "$ref": "#/definitions/CartoonBlockElement"
                 },
                 {
@@ -1545,6 +1548,53 @@
                 "name",
                 "urlPrefix",
                 "value"
+            ]
+        },
+        "ReporterCalloutBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.ReporterCalloutBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "activeFrom": {
+                    "type": "number"
+                },
+                "activeUntil": {
+                    "type": "number"
+                },
+                "displayOnSensitive": {
+                    "type": "boolean"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                },
+                "contacts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CalloutContactType"
+                    }
+                }
+            },
+            "required": [
+                "_type",
+                "description",
+                "displayOnSensitive",
+                "elementId",
+                "id",
+                "title"
             ]
         },
         "CartoonBlockElement": {
