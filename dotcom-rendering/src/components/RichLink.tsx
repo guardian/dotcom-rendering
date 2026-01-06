@@ -83,7 +83,6 @@ const headerStyles = css`
 const titleStyles = (parentIsBlog: boolean) => css`
 	${parentIsBlog ? headlineMedium17 : headlineMedium14};
 	padding-top: 1px;
-	padding-bottom: 1px;
 
 	${from.wide} {
 		${headlineMedium20};
