@@ -60,7 +60,7 @@ export class AbTestingNotificationLambda extends GuStack {
 				monitoringConfiguration: {
 					snsTopicName: snsTopic.topicName,
 					toleratedErrorPercentage: 0,
-					alarmName: "AB Testing Notification Failures",
+					alarmName: `${appName}-${props.stage}-alarm`,
 					alarmDescription: `Something went wrong notifying test owners of upcoming AB test expiries in ${appName}-${props.stage}. Please check the logs`,
 					lengthOfEvaluationPeriod: Duration.minutes(1),
 					numberOfEvaluationPeriodsAboveThresholdBeforeAlarm: 1,
