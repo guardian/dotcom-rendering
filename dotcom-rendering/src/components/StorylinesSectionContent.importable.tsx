@@ -165,11 +165,11 @@ function formatDateRangeText(
 	};
 
 	if (earliest) {
-		return `since ${format(earliest)}`;
+		return `articles published since ${format(earliest)}`;
 	} else if (latest) {
-		return `up to ${format(latest)}`;
+		return `articles published up to ${format(latest)}`;
 	} else {
-		return '';
+		return 'recent articles in our archives';
 	}
 }
 
@@ -297,7 +297,7 @@ export const StorylinesSectionContent = ({
 							.{' '}
 						</span>
 					</Hide>
-					{`These storylines were curated from articles published ${formatDateRangeText(
+					{`These storylines were curated from ${formatDateRangeText(
 						storylinesContent.earliestArticleTime,
 						storylinesContent.latestArticleTime,
 					)}. Some articles may be older to provide further context.`}
