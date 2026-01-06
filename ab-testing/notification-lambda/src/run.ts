@@ -12,8 +12,6 @@
 import type { CloudFormationCustomResourceEvent, Context } from "aws-lambda";
 import { handler } from "./index.ts";
 
-const stage = process.env.STAGE ?? "CODE";
-
 process.env.EMAIL_DOMAIN = `abtesting.code.dev-gutools.co.uk`;
 
 // Create a mock CloudFormation event
@@ -51,7 +49,7 @@ const mockContext: Context = {
 	succeed: () => {},
 };
 
-console.log(`Running lambda handler locally with STAGE=${stage}\n`);
+console.log(`Running lambda handler locally\n`);
 console.log(`EMAIL_DOMAIN=${process.env.EMAIL_DOMAIN}\n`);
 
 // Run the handler
