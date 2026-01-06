@@ -1066,6 +1066,7 @@ export const Card = ({
 									}
 									subtitleSize={subtitleSize}
 									enableHls={enableHls}
+									letterboxed={true}
 								/>
 							</Island>
 						)}

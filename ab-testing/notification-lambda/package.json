@@ -1,0 +1,37 @@
+{
+	"name": "@guardian/ab-testing-notification-lambda",
+	"version": "1.0.0",
+	"description": "Scheduled Lambda that checks expiry dates for active AB tests and notifies if close to expiry or has expired",
+	"main": "index.ts",
+	"type": "module",
+	"scripts": {
+		"dev": "node src/run.ts",
+		"build": "rollup -c rollup.config.js",
+		"test": "node --test --experimental-test-module-mocks --test-reporter spec './**/*.test.ts'",
+		"lint": "eslint .",
+		"prettier:check": "prettier . --check --cache",
+		"prettier:fix": "prettier . --write --cache"
+	},
+	"dependencies": {
+		"@aws-sdk/client-ses": "3.958.0",
+		"@aws-sdk/credential-providers": "3.958.0",
+		"@guardian/ab-testing-config": "workspace:ab-testing-config"
+	},
+	"devDependencies": {
+		"@guardian/eslint-config": "12.0.1",
+		"@guardian/tsconfig": "1.0.1",
+		"@rollup/plugin-commonjs": "29.0.0",
+		"@rollup/plugin-json": "6.1.0",
+		"@rollup/plugin-node-resolve": "16.0.3",
+		"@types/aws-lambda": "8.10.158",
+		"@types/node": "22.17.0",
+		"aws-lambda": "1.0.7",
+		"esbuild": "0.27.0",
+		"eslint": "9.39.1",
+		"prettier": "3.0.3",
+		"rollup": "4.53.2",
+		"rollup-plugin-esbuild": "6.2.1",
+		"type-fest": "4.21.0",
+		"typescript": "5.9.3"
+	}
+}

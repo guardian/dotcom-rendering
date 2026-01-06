@@ -8,7 +8,6 @@ import {
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
-import { Accordion } from '../components/Accordion';
 import { RightAdsPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
@@ -218,8 +217,19 @@ const sidePaddingDesktop = css`
 const bodyWrapper = css`
 	position: relative;
 	margin-bottom: ${space[3]}px;
+	padding: ${space[3]}px;
+	overflow: hidden;
+	background-color: ${themePalette('--accordion-background')};
+
+	${from.mobileLandscape} {
+		padding: ${space[3]}px ${space[5]}px;
+	}
+
 	${from.desktop} {
 		margin-bottom: 0;
+		padding: 0;
+		overflow: visible;
+		background-color: transparent;
 	}
 `;
 
@@ -768,135 +778,118 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									) : (
 										<></>
 									)}
-									<Accordion accordionTitle="Live feed">
-										<ArticleContainer format={format}>
-											{pagination.currentPage !== 1 && (
-												<Pagination
-													currentPage={
-														pagination.currentPage
-													}
-													totalPages={
-														pagination.totalPages
-													}
-													newest={pagination.newest}
-													oldest={pagination.oldest}
-													newer={pagination.newer}
-													older={pagination.older}
-													renderingTarget={
-														renderingTarget
-													}
-												/>
+									<ArticleContainer format={format}>
+										{pagination.currentPage !== 1 && (
+											<Pagination
+												currentPage={
+													pagination.currentPage
+												}
+												totalPages={
+													pagination.totalPages
+												}
+												newest={pagination.newest}
+												oldest={pagination.oldest}
+												newer={pagination.newer}
+												older={pagination.older}
+												renderingTarget={
+													renderingTarget
+												}
+											/>
+										)}
+										<ArticleBody
+											format={format}
+											blocks={article.blocks}
+											pinnedPost={article.pinnedPost}
+											host={host}
+											pageId={article.pageId}
+											webTitle={article.webTitle}
+											ajaxUrl={article.config.ajaxUrl}
+											sectionId={article.config.section}
+											abTests={article.config.abTests}
+											switches={article.config.switches}
+											isSensitive={
+												article.config.isSensitive
+											}
+											isAdFreeUser={article.isAdFreeUser}
+											shouldHideReaderRevenue={
+												article.shouldHideReaderRevenue
+											}
+											tags={article.tags}
+											isPaidContent={
+												!!article.config.isPaidContent
+											}
+											contributionsServiceUrl={
+												contributionsServiceUrl
+											}
+											contentType={article.contentType}
+											isPreview={article.config.isPreview}
+											idUrl={article.config.idUrl ?? ''}
+											isDev={!!article.config.isDev}
+											onFirstPage={
+												pagination.currentPage === 1
+											}
+											keyEvents={article.keyEvents}
+											filterKeyEvents={
+												article.filterKeyEvents
+											}
+											keywordIds={
+												article.config.keywordIds
+											}
+											lang={article.lang}
+											isRightToLeftLang={
+												article.isRightToLeftLang
+											}
+											editionId={article.editionId}
+											shouldHideAds={
+												article.shouldHideAds
+											}
+											serverTime={serverTime}
+											idApiUrl={article.config.idApiUrl}
+										/>
+										{pagination.totalPages > 1 && (
+											<Pagination
+												currentPage={
+													pagination.currentPage
+												}
+												totalPages={
+													pagination.totalPages
+												}
+												newest={pagination.newest}
+												oldest={pagination.oldest}
+												newer={pagination.newer}
+												older={pagination.older}
+												renderingTarget={
+													renderingTarget
+												}
+											/>
+										)}
+										<StraightLines
+											data-print-layout="hide"
+											count={4}
+											color={themePalette(
+												'--straight-lines',
 											)}
-											<ArticleBody
-												format={format}
-												blocks={article.blocks}
-												pinnedPost={article.pinnedPost}
-												host={host}
-												pageId={article.pageId}
-												webTitle={article.webTitle}
-												ajaxUrl={article.config.ajaxUrl}
-												sectionId={
-													article.config.section
-												}
-												abTests={article.config.abTests}
-												switches={
-													article.config.switches
-												}
-												isSensitive={
-													article.config.isSensitive
-												}
-												isAdFreeUser={
-													article.isAdFreeUser
-												}
-												shouldHideReaderRevenue={
-													article.shouldHideReaderRevenue
-												}
-												tags={article.tags}
-												isPaidContent={
-													!!article.config
-														.isPaidContent
-												}
-												contributionsServiceUrl={
-													contributionsServiceUrl
-												}
-												contentType={
-													article.contentType
-												}
-												isPreview={
-													article.config.isPreview
-												}
-												idUrl={
-													article.config.idUrl ?? ''
-												}
-												isDev={!!article.config.isDev}
-												onFirstPage={
-													pagination.currentPage === 1
-												}
-												keyEvents={article.keyEvents}
-												filterKeyEvents={
-													article.filterKeyEvents
-												}
-												keywordIds={
-													article.config.keywordIds
-												}
-												lang={article.lang}
-												isRightToLeftLang={
-													article.isRightToLeftLang
-												}
-												editionId={article.editionId}
-												shouldHideAds={
-													article.shouldHideAds
-												}
-												serverTime={serverTime}
-												idApiUrl={
-													article.config.idApiUrl
-												}
-											/>
-											{pagination.totalPages > 1 && (
-												<Pagination
-													currentPage={
-														pagination.currentPage
-													}
-													totalPages={
-														pagination.totalPages
-													}
-													newest={pagination.newest}
-													oldest={pagination.oldest}
-													newer={pagination.newer}
-													older={pagination.older}
-													renderingTarget={
-														renderingTarget
-													}
-												/>
-											)}
-											<StraightLines
-												data-print-layout="hide"
-												count={4}
-												color={themePalette(
-													'--straight-lines',
-												)}
-												cssOverrides={css`
-													display: block;
-												`}
-											/>
-											<SubMeta
-												format={format}
-												subMetaKeywordLinks={
-													article.subMetaKeywordLinks
-												}
-												subMetaSectionLinks={
-													article.subMetaSectionLinks
-												}
-												pageId={article.pageId}
-												webUrl={article.webURL}
-												webTitle={article.webTitle}
-												showBottomSocialButtons={
-													article.showBottomSocialButtons &&
-													renderingTarget === 'Web'
-												}
-											/>
-										</ArticleContainer>
-									</Accordion>
+											cssOverrides={css`
+												display: block;
+											`}
+										/>
+										<SubMeta
+											format={format}
+											subMetaKeywordLinks={
+												article.subMetaKeywordLinks
+											}
+											subMetaSectionLinks={
+												article.subMetaSectionLinks
+											}
+											pageId={article.pageId}
+											webUrl={article.webURL}
+											webTitle={article.webTitle}
+											showBottomSocialButtons={
+												article.showBottomSocialButtons &&
+												renderingTarget === 'Web'
+											}
+										/>
+									</ArticleContainer>
 								</div>
 							</GridItem>
 							<GridItem area="right-column">

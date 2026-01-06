@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import type { SignedIn } from '../lib/identity';
 import { createAuthenticationEventParams } from '../lib/identity-component-event';
+import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import {
 	addNotificationsToDropdownLinks,
 	mapBrazeCardsToNotifications,
@@ -131,6 +132,9 @@ export const buildIdentityLinks = (
 
 	return links.map((link) => ({
 		...link,
+		...(link.id === 'sign_out'
+			? { onClick: () => clearSubscriptionCache() }
+			: {}),
 		dataLinkName: nestedOphanComponents(
 			'header',
 			'topbar',
