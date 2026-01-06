@@ -28,7 +28,7 @@ type Team = {
 	url?: string;
 };
 
-type EntrySummary = {
+export type EntrySummary = {
 	position: number;
 	team: Team;
 	gamesPlayed: number;
@@ -41,7 +41,7 @@ type EntrySummary = {
 	points: number;
 };
 
-export type Entry = EntrySummary & {
+type Entry = EntrySummary & {
 	results: TeamResult[];
 };
 
