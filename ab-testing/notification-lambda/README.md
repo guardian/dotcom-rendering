@@ -23,5 +23,11 @@ install dependencies:
 Call the `run.ts` script (this will send emails to owners of tests which are close to expiry or which have expired in your local [/ab-testing/config/abTests.ts](/ab-testing/config/abTests.ts) file):
 
 ```bash
+ pnpm dev
+```
+
+or
+
+```bash
  node src/run.ts
 ```
