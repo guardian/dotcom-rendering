@@ -387,7 +387,7 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
           }
         ],
         "AlarmDescription": "Something went wrong notifying test owners of upcoming AB test expiries in ab-testing-notification-lambda-CODE. Please check the logs",
-        "AlarmName": "AB Testing Notification Failures",
+        "AlarmName": "ab-testing-notification-lambda-CODE-alarm",
         "ComparisonOperator": "GreaterThanThreshold",
         "DatapointsToAlarm": 1,
         "EvaluationPeriods": 1,
@@ -941,7 +941,7 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
           }
         ],
         "AlarmDescription": "Something went wrong notifying test owners of upcoming AB test expiries in ab-testing-notification-lambda-PROD. Please check the logs",
-        "AlarmName": "AB Testing Notification Failures",
+        "AlarmName": "ab-testing-notification-lambda-PROD-alarm",
         "ComparisonOperator": "GreaterThanThreshold",
         "DatapointsToAlarm": 1,
         "EvaluationPeriods": 1,
