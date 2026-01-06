@@ -20,8 +20,8 @@ install dependencies:
  pnpm install
 ```
 
-Call the `run.ts` script, (be sure to announce you're using the CODE stage in the semaphore chat channel):
+Call the `run.ts` script (this will send emails to owners of tests which are close to expiry or which have expired in your local [/ab-testing/config/abTests.ts](/ab-testing/config/abTests.ts) file):
 
 ```bash
- STAGE=CODE node src/run.ts
+ node src/run.ts
 ```

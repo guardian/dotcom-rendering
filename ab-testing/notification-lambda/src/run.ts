@@ -3,8 +3,7 @@
  * Run the lambda handler locally using frontend AWS account credentials
  *
  * Usage:
- *   STAGE=CODE node src/run.ts
- *   STAGE=PROD node src/run.ts
+ *   node src/run.ts
  *
  * Prerequisites:
  *   - AWS credentials for the frontend account must be configured
