@@ -309,11 +309,11 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
         },
         "Environment": {
           "Variables": {
+            "STAGE": "CODE",
             "EMAIL_DOMAIN": {
               "Ref": "EmailIdentityAbtestingnotificationlambdaE053C648"
             },
             "STACK": "frontend",
-            "STAGE": "CODE",
             "APP": "ab-testing-notification-lambda"
           }
         },
@@ -389,7 +389,7 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
               {
                 "Ref": "AbTestingNotificationLambda36F153E8"
               },
-              " exceeded 1% error rate"
+              " exceeded 0% error rate"
             ]
           ]
         },
@@ -483,7 +483,7 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
             "Value": "CODE"
           }
         ],
-        "Threshold": 1,
+        "Threshold": 0,
         "TreatMissingData": "notBreaching"
       }
     }
@@ -628,6 +628,16 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
             "Value": "PROD"
           }
         ]
+      }
+    },
+    "ABTestingNotificationErrors7CB687D5": {
+      "Type": "AWS::SNS::Subscription",
+      "Properties": {
+        "Endpoint": "commercial.dev@guardian.co.uk",
+        "Protocol": "email",
+        "TopicArn": {
+          "Ref": "AbTestingNotificationSnsTopicB3559144"
+        }
       }
     },
     "AbTestingNotificationLambdaServiceRole529D80CF": {
@@ -809,11 +819,11 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
         },
         "Environment": {
           "Variables": {
+            "STAGE": "PROD",
             "EMAIL_DOMAIN": {
               "Ref": "EmailIdentityAbtestingnotificationlambdaE053C648"
             },
             "STACK": "frontend",
-            "STAGE": "PROD",
             "APP": "ab-testing-notification-lambda"
           }
         },
@@ -949,7 +959,7 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
               {
                 "Ref": "AbTestingNotificationLambda36F153E8"
               },
-              " exceeded 1% error rate"
+              " exceeded 0% error rate"
             ]
           ]
         },
@@ -1043,7 +1053,7 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
             "Value": "PROD"
           }
         ],
-        "Threshold": 1,
+        "Threshold": 0,
         "TreatMissingData": "notBreaching"
       }
     }

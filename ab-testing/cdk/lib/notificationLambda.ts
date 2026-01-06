@@ -8,7 +8,7 @@ import type { App } from "aws-cdk-lib";
 import { Schedule } from "aws-cdk-lib/aws-events";
 import { Effect, PolicyStatement } from "aws-cdk-lib/aws-iam";
 import { Runtime } from "aws-cdk-lib/aws-lambda";
-import { Topic } from "aws-cdk-lib/aws-sns";
+import { Subscription, SubscriptionProtocol, Topic } from "aws-cdk-lib/aws-sns";
 
 const lambdaFunctionName = "ab-testing-notification-lambda";
 
@@ -39,6 +39,16 @@ export class AbTestingNotificationLambda extends GuStack {
 
 		const snsTopic = new Topic(this, "AbTestingNotificationSnsTopic");
 
+		// Notify teams in PROD if this lambda errors
+		if (props.stage === "PROD") {
+			new Subscription(this, "ABTestingNotificationErrors", {
+				topic: snsTopic,
+				// TODO: Change this to dig.dev.web-engineers@theguardian.com after testing for a while
+				endpoint: "commercial.dev@guardian.co.uk",
+				protocol: SubscriptionProtocol.EMAIL,
+			});
+		}
+
 		const lambda = new GuScheduledLambda(
 			this,
 			"AbTestingNotificationLambda",
@@ -49,10 +59,11 @@ export class AbTestingNotificationLambda extends GuStack {
 				rules: this.stage === "PROD" ? [runDailyRule] : [],
 				monitoringConfiguration: {
 					snsTopicName: snsTopic.topicName,
-					toleratedErrorPercentage: 1,
+					toleratedErrorPercentage: 0,
 				},
 				runtime: Runtime.NODEJS_22_X,
 				environment: {
+					STAGE: props.stage,
 					EMAIL_DOMAIN: emailIdentity.emailIdentityName,
 				},
 			},
