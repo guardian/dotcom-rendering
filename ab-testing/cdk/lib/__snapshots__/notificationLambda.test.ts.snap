@@ -1,0 +1,1059 @@
+exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`] = `
+{
+  "Metadata": {
+    "gu:cdk:constructs": [
+      "GuEmailIdentity",
+      "GuCname",
+      "GuCname",
+      "GuCname",
+      "GuDistributionBucketParameter",
+      "GuScheduledLambda",
+      "GuLambdaErrorPercentageAlarm"
+    ],
+    "gu:cdk:version": "62.0.1"
+  },
+  "Resources": {
+    "EmailIdentityAbtestingnotificationlambdaE053C648": {
+      "Type": "AWS::SES::EmailIdentity",
+      "Properties": {
+        "EmailIdentity": "abtesting.code.dev-gutools.co.uk",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "ab-testing-notification-lambda"
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "62.0.1"
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend"
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE"
+          }
+        ]
+      }
+    },
+    "EmailIdentityDkimabtestingnotificationlambda0": {
+      "Type": "Guardian::DNS::RecordSet",
+      "Properties": {
+        "Name": {
+          "Fn::GetAtt": [
+            "EmailIdentityAbtestingnotificationlambdaE053C648",
+            "DkimDNSTokenName1"
+          ]
+        },
+        "ResourceRecords": [
+          {
+            "Fn::GetAtt": [
+              "EmailIdentityAbtestingnotificationlambdaE053C648",
+              "DkimDNSTokenValue1"
+            ]
+          }
+        ],
+        "RecordType": "CNAME",
+        "TTL": 3600,
+        "Stage": "CODE"
+      }
+    },
+    "EmailIdentityDkimabtestingnotificationlambda1": {
+      "Type": "Guardian::DNS::RecordSet",
+      "Properties": {
+        "Name": {
+          "Fn::GetAtt": [
+            "EmailIdentityAbtestingnotificationlambdaE053C648",
+            "DkimDNSTokenName2"
+          ]
+        },
+        "ResourceRecords": [
+          {
+            "Fn::GetAtt": [
+              "EmailIdentityAbtestingnotificationlambdaE053C648",
+              "DkimDNSTokenValue2"
+            ]
+          }
+        ],
+        "RecordType": "CNAME",
+        "TTL": 3600,
+        "Stage": "CODE"
+      }
+    },
+    "EmailIdentityDkimabtestingnotificationlambda2": {
+      "Type": "Guardian::DNS::RecordSet",
+      "Properties": {
+        "Name": {
+          "Fn::GetAtt": [
+            "EmailIdentityAbtestingnotificationlambdaE053C648",
+            "DkimDNSTokenName3"
+          ]
+        },
+        "ResourceRecords": [
+          {
+            "Fn::GetAtt": [
+              "EmailIdentityAbtestingnotificationlambdaE053C648",
+              "DkimDNSTokenValue3"
+            ]
+          }
+        ],
+        "RecordType": "CNAME",
+        "TTL": 3600,
+        "Stage": "CODE"
+      }
+    },
+    "AbTestingNotificationSnsTopicB3559144": {
+      "Type": "AWS::SNS::Topic",
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "62.0.1"
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend"
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE"
+          }
+        ]
+      }
+    },
+    "AbTestingNotificationLambdaServiceRole529D80CF": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+              ]
+            ]
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "ab-testing-notification-lambda"
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "62.0.1"
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend"
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE"
+          }
+        ]
+      }
+    },
+    "AbTestingNotificationLambdaServiceRoleDefaultPolicyA2BC1639": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":s3:::",
+                      {
+                        "Ref": "DistributionBucketName"
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":s3:::",
+                      {
+                        "Ref": "DistributionBucketName"
+                      },
+                      "/frontend/CODE/ab-testing-notification-lambda/lambda.zip"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": "ssm:GetParametersByPath",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:ssm:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":parameter/CODE/frontend/ab-testing-notification-lambda"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:GetParameters",
+                "ssm:GetParameter"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:ssm:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":parameter/CODE/frontend/ab-testing-notification-lambda/*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": "ses:SendEmail",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ses:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":identity/",
+                    {
+                      "Ref": "EmailIdentityAbtestingnotificationlambdaE053C648"
+                    }
+                  ]
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "AbTestingNotificationLambdaServiceRoleDefaultPolicyA2BC1639",
+        "Roles": [
+          {
+            "Ref": "AbTestingNotificationLambdaServiceRole529D80CF"
+          }
+        ]
+      }
+    },
+    "AbTestingNotificationLambda36F153E8": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "DistributionBucketName"
+          },
+          "S3Key": "frontend/CODE/ab-testing-notification-lambda/lambda.zip"
+        },
+        "Environment": {
+          "Variables": {
+            "EMAIL_DOMAIN": {
+              "Ref": "EmailIdentityAbtestingnotificationlambdaE053C648"
+            },
+            "STACK": "frontend",
+            "STAGE": "CODE",
+            "APP": "ab-testing-notification-lambda"
+          }
+        },
+        "Handler": "index.handler",
+        "LoggingConfig": {
+          "LogFormat": "JSON"
+        },
+        "MemorySize": 512,
+        "Role": {
+          "Fn::GetAtt": [
+            "AbTestingNotificationLambdaServiceRole529D80CF",
+            "Arn"
+          ]
+        },
+        "Runtime": "nodejs22.x",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "ab-testing-notification-lambda"
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "62.0.1"
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend"
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE"
+          }
+        ],
+        "Timeout": 30
+      },
+      "DependsOn": [
+        "AbTestingNotificationLambdaServiceRoleDefaultPolicyA2BC1639",
+        "AbTestingNotificationLambdaServiceRole529D80CF"
+      ]
+    },
+    "AbTestingNotificationLambdaErrorPercentageAlarmForLambdaD5D1F4B7": {
+      "Type": "AWS::CloudWatch::Alarm",
+      "Properties": {
+        "ActionsEnabled": true,
+        "AlarmActions": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:sns:eu-west-1:",
+                {
+                  "Ref": "AWS::AccountId"
+                },
+                ":",
+                {
+                  "Fn::GetAtt": [
+                    "AbTestingNotificationSnsTopicB3559144",
+                    "TopicName"
+                  ]
+                }
+              ]
+            ]
+          }
+        ],
+        "AlarmDescription": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "AbTestingNotificationLambda36F153E8"
+              },
+              " exceeded 1% error rate"
+            ]
+          ]
+        },
+        "AlarmName": {
+          "Fn::Join": [
+            "",
+            [
+              "High error percentage from ",
+              {
+                "Ref": "AbTestingNotificationLambda36F153E8"
+              },
+              " lambda in CODE"
+            ]
+          ]
+        },
+        "ComparisonOperator": "GreaterThanThreshold",
+        "EvaluationPeriods": 1,
+        "Metrics": [
+          {
+            "Expression": "100*m1/m2",
+            "Id": "expr_1",
+            "Label": {
+              "Fn::Join": [
+                "",
+                [
+                  "Error % of ",
+                  {
+                    "Ref": "AbTestingNotificationLambda36F153E8"
+                  }
+                ]
+              ]
+            },
+            "ReturnData": true
+          },
+          {
+            "Id": "m1",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "FunctionName",
+                    "Value": {
+                      "Ref": "AbTestingNotificationLambda36F153E8"
+                    }
+                  }
+                ],
+                "MetricName": "Errors",
+                "Namespace": "AWS/Lambda"
+              },
+              "Period": 60,
+              "Stat": "Sum"
+            },
+            "ReturnData": false
+          },
+          {
+            "Id": "m2",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "FunctionName",
+                    "Value": {
+                      "Ref": "AbTestingNotificationLambda36F153E8"
+                    }
+                  }
+                ],
+                "MetricName": "Invocations",
+                "Namespace": "AWS/Lambda"
+              },
+              "Period": 60,
+              "Stat": "Sum"
+            },
+            "ReturnData": false
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "62.0.1"
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend"
+          },
+          {
+            "Key": "Stage",
+            "Value": "CODE"
+          }
+        ],
+        "Threshold": 1,
+        "TreatMissingData": "notBreaching"
+      }
+    }
+  },
+  "Parameters": {
+    "DistributionBucketName": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/account/services/artifact.bucket",
+      "Description": "SSM parameter containing the S3 bucket name holding distribution artifacts"
+    }
+  }
+}
+`;
+
+exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`] = `
+{
+  "Metadata": {
+    "gu:cdk:constructs": [
+      "GuEmailIdentity",
+      "GuCname",
+      "GuCname",
+      "GuCname",
+      "GuDistributionBucketParameter",
+      "GuScheduledLambda",
+      "GuLambdaErrorPercentageAlarm"
+    ],
+    "gu:cdk:version": "62.0.1"
+  },
+  "Resources": {
+    "EmailIdentityAbtestingnotificationlambdaE053C648": {
+      "Type": "AWS::SES::EmailIdentity",
+      "Properties": {
+        "EmailIdentity": "abtesting.gutools.co.uk",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "ab-testing-notification-lambda"
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "62.0.1"
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend"
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD"
+          }
+        ]
+      }
+    },
+    "EmailIdentityDkimabtestingnotificationlambda0": {
+      "Type": "Guardian::DNS::RecordSet",
+      "Properties": {
+        "Name": {
+          "Fn::GetAtt": [
+            "EmailIdentityAbtestingnotificationlambdaE053C648",
+            "DkimDNSTokenName1"
+          ]
+        },
+        "ResourceRecords": [
+          {
+            "Fn::GetAtt": [
+              "EmailIdentityAbtestingnotificationlambdaE053C648",
+              "DkimDNSTokenValue1"
+            ]
+          }
+        ],
+        "RecordType": "CNAME",
+        "TTL": 3600,
+        "Stage": "PROD"
+      }
+    },
+    "EmailIdentityDkimabtestingnotificationlambda1": {
+      "Type": "Guardian::DNS::RecordSet",
+      "Properties": {
+        "Name": {
+          "Fn::GetAtt": [
+            "EmailIdentityAbtestingnotificationlambdaE053C648",
+            "DkimDNSTokenName2"
+          ]
+        },
+        "ResourceRecords": [
+          {
+            "Fn::GetAtt": [
+              "EmailIdentityAbtestingnotificationlambdaE053C648",
+              "DkimDNSTokenValue2"
+            ]
+          }
+        ],
+        "RecordType": "CNAME",
+        "TTL": 3600,
+        "Stage": "PROD"
+      }
+    },
+    "EmailIdentityDkimabtestingnotificationlambda2": {
+      "Type": "Guardian::DNS::RecordSet",
+      "Properties": {
+        "Name": {
+          "Fn::GetAtt": [
+            "EmailIdentityAbtestingnotificationlambdaE053C648",
+            "DkimDNSTokenName3"
+          ]
+        },
+        "ResourceRecords": [
+          {
+            "Fn::GetAtt": [
+              "EmailIdentityAbtestingnotificationlambdaE053C648",
+              "DkimDNSTokenValue3"
+            ]
+          }
+        ],
+        "RecordType": "CNAME",
+        "TTL": 3600,
+        "Stage": "PROD"
+      }
+    },
+    "AbTestingNotificationSnsTopicB3559144": {
+      "Type": "AWS::SNS::Topic",
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "62.0.1"
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend"
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD"
+          }
+        ]
+      }
+    },
+    "AbTestingNotificationLambdaServiceRole529D80CF": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+              ]
+            ]
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "ab-testing-notification-lambda"
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "62.0.1"
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend"
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD"
+          }
+        ]
+      }
+    },
+    "AbTestingNotificationLambdaServiceRoleDefaultPolicyA2BC1639": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":s3:::",
+                      {
+                        "Ref": "DistributionBucketName"
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":s3:::",
+                      {
+                        "Ref": "DistributionBucketName"
+                      },
+                      "/frontend/PROD/ab-testing-notification-lambda/lambda.zip"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": "ssm:GetParametersByPath",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:ssm:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":parameter/PROD/frontend/ab-testing-notification-lambda"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "ssm:GetParameters",
+                "ssm:GetParameter"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:ssm:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":parameter/PROD/frontend/ab-testing-notification-lambda/*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": "ses:SendEmail",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":ses:eu-west-1:",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":identity/",
+                    {
+                      "Ref": "EmailIdentityAbtestingnotificationlambdaE053C648"
+                    }
+                  ]
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "AbTestingNotificationLambdaServiceRoleDefaultPolicyA2BC1639",
+        "Roles": [
+          {
+            "Ref": "AbTestingNotificationLambdaServiceRole529D80CF"
+          }
+        ]
+      }
+    },
+    "AbTestingNotificationLambda36F153E8": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "DistributionBucketName"
+          },
+          "S3Key": "frontend/PROD/ab-testing-notification-lambda/lambda.zip"
+        },
+        "Environment": {
+          "Variables": {
+            "EMAIL_DOMAIN": {
+              "Ref": "EmailIdentityAbtestingnotificationlambdaE053C648"
+            },
+            "STACK": "frontend",
+            "STAGE": "PROD",
+            "APP": "ab-testing-notification-lambda"
+          }
+        },
+        "Handler": "index.handler",
+        "LoggingConfig": {
+          "LogFormat": "JSON"
+        },
+        "MemorySize": 512,
+        "Role": {
+          "Fn::GetAtt": [
+            "AbTestingNotificationLambdaServiceRole529D80CF",
+            "Arn"
+          ]
+        },
+        "Runtime": "nodejs22.x",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "ab-testing-notification-lambda"
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "62.0.1"
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend"
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD"
+          }
+        ],
+        "Timeout": 30
+      },
+      "DependsOn": [
+        "AbTestingNotificationLambdaServiceRoleDefaultPolicyA2BC1639",
+        "AbTestingNotificationLambdaServiceRole529D80CF"
+      ]
+    },
+    "AbTestingNotificationLambdaAbTestingNotificationLambdacron05MONFRI0C4257EF9": {
+      "Type": "AWS::Events::Rule",
+      "Properties": {
+        "Description": "Daily expiry checks for AB testing configuration",
+        "ScheduleExpression": "cron(0 5 ? * MON-FRI *)",
+        "State": "ENABLED",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "ab-testing-notification-lambda"
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "62.0.1"
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend"
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD"
+          }
+        ],
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::GetAtt": [
+                "AbTestingNotificationLambda36F153E8",
+                "Arn"
+              ]
+            },
+            "Id": "Target0"
+          }
+        ]
+      }
+    },
+    "AbTestingNotificationLambdaAbTestingNotificationLambdacron05MONFRI0AllowEventRuleAbTestingNotificationLambdaPRODAbTestingNotificationLambdaF3B31E96F2DB1058": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "AbTestingNotificationLambda36F153E8",
+            "Arn"
+          ]
+        },
+        "Principal": "events.amazonaws.com",
+        "SourceArn": {
+          "Fn::GetAtt": [
+            "AbTestingNotificationLambdaAbTestingNotificationLambdacron05MONFRI0C4257EF9",
+            "Arn"
+          ]
+        }
+      }
+    },
+    "AbTestingNotificationLambdaErrorPercentageAlarmForLambdaD5D1F4B7": {
+      "Type": "AWS::CloudWatch::Alarm",
+      "Properties": {
+        "ActionsEnabled": true,
+        "AlarmActions": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:sns:eu-west-1:",
+                {
+                  "Ref": "AWS::AccountId"
+                },
+                ":",
+                {
+                  "Fn::GetAtt": [
+                    "AbTestingNotificationSnsTopicB3559144",
+                    "TopicName"
+                  ]
+                }
+              ]
+            ]
+          }
+        ],
+        "AlarmDescription": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "AbTestingNotificationLambda36F153E8"
+              },
+              " exceeded 1% error rate"
+            ]
+          ]
+        },
+        "AlarmName": {
+          "Fn::Join": [
+            "",
+            [
+              "High error percentage from ",
+              {
+                "Ref": "AbTestingNotificationLambda36F153E8"
+              },
+              " lambda in PROD"
+            ]
+          ]
+        },
+        "ComparisonOperator": "GreaterThanThreshold",
+        "EvaluationPeriods": 1,
+        "Metrics": [
+          {
+            "Expression": "100*m1/m2",
+            "Id": "expr_1",
+            "Label": {
+              "Fn::Join": [
+                "",
+                [
+                  "Error % of ",
+                  {
+                    "Ref": "AbTestingNotificationLambda36F153E8"
+                  }
+                ]
+              ]
+            },
+            "ReturnData": true
+          },
+          {
+            "Id": "m1",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "FunctionName",
+                    "Value": {
+                      "Ref": "AbTestingNotificationLambda36F153E8"
+                    }
+                  }
+                ],
+                "MetricName": "Errors",
+                "Namespace": "AWS/Lambda"
+              },
+              "Period": 60,
+              "Stat": "Sum"
+            },
+            "ReturnData": false
+          },
+          {
+            "Id": "m2",
+            "MetricStat": {
+              "Metric": {
+                "Dimensions": [
+                  {
+                    "Name": "FunctionName",
+                    "Value": {
+                      "Ref": "AbTestingNotificationLambda36F153E8"
+                    }
+                  }
+                ],
+                "MetricName": "Invocations",
+                "Namespace": "AWS/Lambda"
+              },
+              "Period": 60,
+              "Stat": "Sum"
+            },
+            "ReturnData": false
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "62.0.1"
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering"
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend"
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD"
+          }
+        ],
+        "Threshold": 1,
+        "TreatMissingData": "notBreaching"
+      }
+    }
+  },
+  "Parameters": {
+    "DistributionBucketName": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/account/services/artifact.bucket",
+      "Description": "SSM parameter containing the S3 bucket name holding distribution artifacts"
+    }
+  }
+}
+`;
