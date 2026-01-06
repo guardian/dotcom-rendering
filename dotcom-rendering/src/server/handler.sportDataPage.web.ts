@@ -5,7 +5,10 @@ import {
 	getParserErrorMessage,
 	parse as parseFootballMatches,
 } from '../footballMatches';
-import { parse as parseFootballTables, parseTable } from '../footballTables';
+import {
+	parse as parseFootballTables,
+	parseTableSummary,
+} from '../footballTables';
 import type { FECricketMatchPage } from '../frontend/feCricketMatchPage';
 import type { FEFootballCompetition } from '../frontend/feFootballDataPage';
 import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
@@ -211,7 +214,7 @@ const parseFEFootballMatch = (
 	data: FEFootballMatchPage,
 ): FootballMatchSummaryPage => {
 	const parsedFootballMatch = parseFootballMatch(data.footballMatch);
-	const group = data.group && parseTable(data.group);
+	const group = data.group && parseTableSummary(data.group);
 
 	if (!parsedFootballMatch.ok) {
 		throw new Error(
