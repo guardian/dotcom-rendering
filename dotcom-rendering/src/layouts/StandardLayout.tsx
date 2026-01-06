@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import {
 	from,
 	palette as sourcePalette,
 	until,
 } from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';

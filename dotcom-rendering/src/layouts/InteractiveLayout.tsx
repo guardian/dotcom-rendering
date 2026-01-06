@@ -5,7 +5,6 @@ import {
 	palette as sourcePalette,
 	until,
 } from '@guardian/source/foundations';
-import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import React from 'react';
 import { AdPortals } from '../components/AdPortals.importable';
@@ -412,63 +411,28 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							<GridItem area="meta" element="aside">
 								<div css={maxWidth}>
 									{isApps ? (
-										<>
-											<Hide from="leftCol">
-												<ArticleMetaApps
-													branding={branding}
-													format={format}
-													byline={article.byline}
-													tags={article.tags}
-													primaryDateline={
-														article.webPublicationDateDisplay
-													}
-													secondaryDateline={
-														article.webPublicationSecondaryDateDisplay
-													}
-													isCommentable={
-														article.isCommentable
-													}
-													discussionApiUrl={
-														article.config
-															.discussionApiUrl
-													}
-													shortUrlId={
-														article.config
-															.shortUrlId
-													}
-													pageId={
-														article.config.pageId
-													}
-												></ArticleMetaApps>
-											</Hide>
-											<Hide until="leftCol">
-												<ArticleMeta
-													branding={branding}
-													format={format}
-													pageId={article.pageId}
-													webTitle={article.webTitle}
-													byline={article.byline}
-													tags={article.tags}
-													primaryDateline={
-														article.webPublicationDateDisplay
-													}
-													secondaryDateline={
-														article.webPublicationSecondaryDateDisplay
-													}
-													isCommentable={
-														article.isCommentable
-													}
-													discussionApiUrl={
-														article.config
-															.discussionApiUrl
-													}
-													shortUrlId={
-														article.config
-															.shortUrlId
-													}
-												/>
-											</Hide>
-										</>
+										<ArticleMetaApps
+											branding={branding}
+											format={format}
+											byline={article.byline}
+											tags={article.tags}
+											primaryDateline={
+												article.webPublicationDateDisplay
+											}
+											secondaryDateline={
+												article.webPublicationSecondaryDateDisplay
+											}
+											isCommentable={
+												article.isCommentable
+											}
+											discussionApiUrl={
+												article.config.discussionApiUrl
+											}
+											shortUrlId={
+												article.config.shortUrlId
+											}
+											pageId={article.config.pageId}
+										></ArticleMetaApps>
 									) : (
 										<ArticleMeta
 											branding={branding}

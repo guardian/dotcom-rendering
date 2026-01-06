@@ -1,13 +1,12 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import {
 	from,
 	palette as sourcePalette,
 	space,
 	until,
 } from '@guardian/source/foundations';
-import type { RenderingTarget } from 'src/types/renderingTarget';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
@@ -58,6 +57,7 @@ import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const ImmersiveGrid = ({

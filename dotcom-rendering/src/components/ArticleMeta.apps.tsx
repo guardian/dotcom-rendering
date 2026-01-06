@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { from, space, until } from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { ReactNode } from 'react';
 import { grid } from '../grid';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
