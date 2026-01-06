@@ -1,12 +1,11 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import {
 	from,
 	palette as sourcePalette,
 	until,
 } from '@guardian/source/foundations';
-import { Hide } from '@guardian/source/react-components';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
@@ -55,7 +54,13 @@ import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
-const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
+const ShowcaseGrid = ({
+	children,
+	renderingTarget,
+}: {
+	children: React.ReactNode;
+	renderingTarget: RenderingTarget;
+}) => (
 	<div
 		css={css`
 			/* IE Fallback */
@@ -75,6 +80,12 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 				display: grid;
 				width: 100%;
 				margin-left: 0;
+				${renderingTarget === 'Apps' &&
+				css`
+					${from.leftCol} {
+						margin-left: 270px;
+					}
+				`}
 
 				grid-column-gap: 10px;
 
@@ -87,25 +98,28 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 					Right Column
 
 				*/
-				${from.wide} {
-					grid-template-columns: 219px 1px 620px 80px 300px;
-					grid-template-areas:
-						'title  border  headline   headline headline'
-						'meta   border  media      media    media'
-						'meta   border  standfirst .        right-column'
-						'meta   border  body       .        right-column'
-						'.      border  .          .        right-column';
-				}
+				${renderingTarget === 'Web' &&
+				css`
+					${from.wide} {
+						grid-template-columns: 219px 1px 620px 80px 300px;
+						grid-template-areas:
+							'title  border  headline   headline headline'
+							'meta   border  media      media    media'
+							'meta   border  standfirst .        right-column'
+							'meta   border  body       .        right-column'
+							'.      border  .          .        right-column';
+					}
 
-				${until.wide} {
-					grid-template-columns: 140px 1px 620px 300px;
-					grid-template-areas:
-						'title  border  headline    headline'
-						'meta   border  media       media'
-						'meta   border  standfirst  right-column'
-						'meta   border  body        right-column'
-						'.      border  .           right-column';
-				}
+					${until.wide} {
+						grid-template-columns: 140px 1px 620px 300px;
+						grid-template-areas:
+							'title  border  headline    headline'
+							'meta   border  media       media'
+							'meta   border  standfirst  right-column'
+							'meta   border  body        right-column'
+							'.      border  .           right-column';
+					}
+				`}
 
 				/*
 					Explanation of each unit of grid-template-columns
@@ -113,6 +127,23 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 					Main content
 					Right Column
 				*/
+
+
+				/* Apply until.leftCol layout from leftCol for Apps targets */
+				${renderingTarget === 'Apps' &&
+				css`
+					${from.leftCol} {
+						grid-template-columns: 620px 300px;
+						grid-template-areas:
+							'title      right-column'
+							'headline   right-column'
+							'standfirst right-column'
+							'media      right-column'
+							'meta       right-column'
+							'body       right-column'
+							'.          right-column';
+					}
+				`}
 				${until.leftCol} {
 					grid-template-columns: 620px 300px;
 					grid-template-areas:
@@ -362,7 +393,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					element="article"
 					borderColour={themePalette('--article-border')}
 				>
-					<ShowcaseGrid>
+					<ShowcaseGrid renderingTarget={renderingTarget}>
 						<GridItem area="media">
 							<div css={mainMediaWrapper}>
 								<MainMedia
@@ -430,62 +461,24 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 							</div>
 							<div css={[maxWidth, fullHeight]}>
 								{isApps ? (
-									<>
-										<Hide from="leftCol">
-											<ArticleMetaApps
-												branding={branding}
-												format={format}
-												byline={article.byline}
-												tags={article.tags}
-												primaryDateline={
-													article.webPublicationDateDisplay
-												}
-												secondaryDateline={
-													article.webPublicationSecondaryDateDisplay
-												}
-												isCommentable={
-													article.isCommentable
-												}
-												discussionApiUrl={
-													article.config
-														.discussionApiUrl
-												}
-												shortUrlId={
-													article.config.shortUrlId
-												}
-												pageId={article.config.pageId}
-											></ArticleMetaApps>
-										</Hide>
-										<Hide until="leftCol">
-											<ArticleMeta
-												branding={branding}
-												format={format}
-												pageId={article.pageId}
-												webTitle={article.webTitle}
-												byline={article.byline}
-												tags={article.tags}
-												primaryDateline={
-													article.webPublicationDateDisplay
-												}
-												secondaryDateline={
-													article.webPublicationSecondaryDateDisplay
-												}
-												isCommentable={
-													article.isCommentable
-												}
-												discussionApiUrl={
-													article.config
-														.discussionApiUrl
-												}
-												shortUrlId={
-													article.config.shortUrlId
-												}
-											/>
-											{!!article.affiliateLinksDisclaimer && (
-												<AffiliateDisclaimer />
-											)}
-										</Hide>
-									</>
+									<ArticleMetaApps
+										branding={branding}
+										format={format}
+										byline={article.byline}
+										tags={article.tags}
+										primaryDateline={
+											article.webPublicationDateDisplay
+										}
+										secondaryDateline={
+											article.webPublicationSecondaryDateDisplay
+										}
+										isCommentable={article.isCommentable}
+										discussionApiUrl={
+											article.config.discussionApiUrl
+										}
+										shortUrlId={article.config.shortUrlId}
+										pageId={article.config.pageId}
+									></ArticleMetaApps>
 								) : (
 									<>
 										<ArticleMeta
@@ -622,7 +615,8 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 										margin-left: 20px;
 										margin-right: -20px;
 									}
-									${from.leftCol} {
+									${renderingTarget !== 'Apps' &&
+									from.leftCol} {
 										/* above 1140 */
 										margin-left: 0px;
 										margin-right: 0px;
