@@ -14,7 +14,7 @@ const enhanceProductBlockElement = (
 	...element,
 	content: elementsEnhancer(element.content),
 	lowestPrice: getLowestPrice(element.productCtas),
-	primaryHeadingText: getHeadingText(element.primaryHeadingHtml),
+	primaryHeadingText: extractHeadingText(element.primaryHeadingHtml),
 });
 
 /**
@@ -75,7 +75,7 @@ export const enhanceProductElement =
 	(elements: FEElement[]): FEElement[] =>
 		elements.flatMap(enhance(elementsEnhancer));
 
-const getHeadingText = (headingHtml: string): string => {
+export const extractHeadingText = (headingHtml: string): string => {
 	return removeTrailingColon(extractText(headingHtml));
 };
 
