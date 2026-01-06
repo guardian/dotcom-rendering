@@ -23,3 +23,14 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {} satisfies Story;
+
+export const OnlyThreeProducts = {
+	args: {
+		products: exampleAtAGlanceProductArray.slice(0, 3),
+		format: {
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Lifestyle,
+		},
+	},
+} satisfies Story;
