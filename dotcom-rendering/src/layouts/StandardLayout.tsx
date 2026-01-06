@@ -1,12 +1,11 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import {
 	from,
 	palette as sourcePalette,
 	until,
 } from '@guardian/source/foundations';
-import { Hide } from '@guardian/source/react-components';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
@@ -64,10 +63,12 @@ const StandardGrid = ({
 	children,
 	isMatchReport,
 	isMedia,
+	renderingTarget,
 }: {
 	children: React.ReactNode;
 	isMatchReport: boolean;
 	isMedia: boolean;
+	renderingTarget: RenderingTarget;
 }) => (
 	<div
 		css={css`
@@ -88,6 +89,12 @@ const StandardGrid = ({
 				display: grid;
 				width: 100%;
 				margin-left: 0;
+				${renderingTarget === 'Apps' &&
+				css`
+					${from.leftCol} {
+						margin-left: 230px;
+					}
+				`}
 				grid-column-gap: 10px;
 
 				/*
@@ -98,42 +105,44 @@ const StandardGrid = ({
 					Main content
 					Right Column
 				*/
-				${from.wide} {
-					grid-template-columns: 219px 1px 620px 80px 300px;
+				${renderingTarget === 'Web' &&
+				css`
+					${from.wide} {
+						grid-template-columns: 219px 1px 620px 80px 300px;
 
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'title  border  matchNav   . right-column'
-									'title  border  matchtabs  . right-column'
-									'title  border  headline   . right-column'
-									'.      border  standfirst . right-column'
-									'meta   border  media      . right-column'
-									'meta   border  body       . right-column'
-									'.      border  .          . right-column';
-						  `
-						: isMedia
-						? css`
-								grid-template-areas:
-									'title  border  headline   headline   .'
-									'.      border  disclaimer disclaimer right-column'
-									'meta   border  media      media      right-column'
-									'meta   border  standfirst standfirst right-column'
-									'.      border  body       body       right-column'
-									'.      border  .          .          right-column';
-						  `
-						: css`
-								grid-template-areas:
-									'title  border  headline   . right-column'
-									'.      border  standfirst . right-column'
-									'meta   border  media      . right-column'
-									'meta   border  body       . right-column'
-									'.      border  .          . right-column';
-						  `}
-				}
-			}
+						${isMatchReport
+							? css`
+									grid-template-areas:
+										'title  border  matchNav   . right-column'
+										'title  border  matchtabs  . right-column'
+										'title  border  headline   . right-column'
+										'.      border  standfirst . right-column'
+										'meta   border  media      . right-column'
+										'meta   border  body       . right-column'
+										'.      border  .          . right-column';
+							  `
+							: isMedia
+							? css`
+									grid-template-areas:
+										'title  border  headline   headline   .'
+										'.      border  disclaimer disclaimer right-column'
+										'meta   border  media      media      right-column'
+										'meta   border  standfirst standfirst right-column'
+										'.      border  body       body       right-column'
+										'.      border  .          .          right-column';
+							  `
+							: css`
+									grid-template-areas:
+										'title  border  headline   . right-column'
+										'.      border  standfirst . right-column'
+										'meta   border  media      . right-column'
+										'meta   border  body       . right-column'
+										'.      border  .          . right-column';
+							  `}
+					}
+				`}
 
-			/*
+				/*
 					Explanation of each unit of grid-template-columns
 
 					Left Column
@@ -141,161 +150,208 @@ const StandardGrid = ({
 					Main content
 					Right Column
 				*/
-			${until.wide} {
-				grid-template-columns: 140px 1px 620px 300px;
+				${renderingTarget === 'Web' &&
+				css`
+					${until.wide} {
+						grid-template-columns: 140px 1px 620px 300px;
 
-				${isMatchReport
-					? css`
-							grid-template-areas:
-								'title  border  matchNav     right-column'
-								'title  border  matchtabs    right-column'
-								'title  border  headline     right-column'
-								'.      border  standfirst   right-column'
-								'meta   border  media        right-column'
-								'meta   border  body         right-column'
-								'.      border  .            right-column';
-					  `
-					: isMedia
-					? css`
-							grid-template-areas:
-								'title  border  headline     .'
-								'.      border  disclaimer   right-column'
-								'meta   border  media        right-column'
-								'meta   border  standfirst   right-column'
-								'meta   border  body         right-column'
-								'.      border  .            right-column';
-					  `
-					: css`
-							grid-template-areas:
-								'title  border  headline     right-column'
-								'.      border  standfirst   right-column'
-								'.      border  disclaimer   right-column'
-								'meta   border  media        right-column'
-								'meta   border  body         right-column'
-								'.      border  .            right-column';
-					  `}
-			}
+						${isMatchReport
+							? css`
+									grid-template-areas:
+										'title  border  matchNav     right-column'
+										'title  border  matchtabs    right-column'
+										'title  border  headline     right-column'
+										'.      border  standfirst   right-column'
+										'meta   border  media        right-column'
+										'meta   border  body         right-column'
+										'.      border  .            right-column';
+							  `
+							: isMedia
+							? css`
+									grid-template-areas:
+										'title  border  headline     .'
+										'.      border  disclaimer   right-column'
+										'meta   border  media        right-column'
+										'meta   border  standfirst   right-column'
+										'meta   border  body         right-column'
+										'.      border  .            right-column';
+							  `
+							: css`
+									grid-template-areas:
+										'title  border  headline     right-column'
+										'.      border  standfirst   right-column'
+										'.      border  disclaimer   right-column'
+										'meta   border  media        right-column'
+										'meta   border  body         right-column'
+										'.      border  .            right-column';
+							  `}
+					}
+				`}
+				${renderingTarget === 'Apps' &&
+				css`
+					${from.leftCol} {
+						grid-template-columns: 620px 300px;
 
-			/*
+						${isMatchReport
+							? css`
+									grid-template-areas:
+										'matchNav      right-column'
+										'matchtabs	   right-column'
+										'title         right-column'
+										'headline      right-column'
+										'standfirst    right-column'
+										'media         right-column'
+										'meta          right-column'
+										'body          right-column'
+										'.             right-column';
+							  `
+							: isMedia
+							? css`
+									grid-template-areas:
+										'title         .'
+										'headline      .'
+										'disclaimer    right-column'
+										'media         right-column'
+										'standfirst    right-column'
+										'meta          right-column'
+										'body          right-column'
+										'.             right-column';
+							  `
+							: css`
+									grid-template-areas:
+										'title         right-column'
+										'headline      right-column'
+										'standfirst    right-column'
+										'disclaimer    right-column'
+										'media         right-column'
+										'meta          right-column'
+										'body          right-column'
+										'.             right-column';
+							  `}
+					}
+				`}
+
+				/*
 					Explanation of each unit of grid-template-columns
 
 					Main content
 					Right Column
 				*/
-			${until.leftCol} {
-				grid-template-columns: 620px 300px;
-				${isMatchReport
-					? css`
-							grid-template-areas:
-								'matchNav      right-column'
-								'matchtabs	   right-column'
-								'title         right-column'
-								'headline      right-column'
-								'standfirst    right-column'
-								'media         right-column'
-								'meta          right-column'
-								'body          right-column'
-								'.             right-column';
-					  `
-					: isMedia
-					? css`
-							grid-template-areas:
-								'title         .'
-								'headline      .'
-								'disclaimer    right-column'
-								'media         right-column'
-								'standfirst    right-column'
-								'meta          right-column'
-								'body          right-column'
-								'.             right-column';
-					  `
-					: css`
-							grid-template-areas:
-								'title         right-column'
-								'headline      right-column'
-								'standfirst    right-column'
-								'disclaimer    right-column'
-								'media         right-column'
-								'meta          right-column'
-								'body          right-column'
-								'.             right-column';
-					  `}
-			}
+				${until.leftCol} {
+					grid-template-columns: 620px 300px;
+					${isMatchReport
+						? css`
+								grid-template-areas:
+									'matchNav      right-column'
+									'matchtabs	   right-column'
+									'title         right-column'
+									'headline      right-column'
+									'standfirst    right-column'
+									'media         right-column'
+									'meta          right-column'
+									'body          right-column'
+									'.             right-column';
+						  `
+						: isMedia
+						? css`
+								grid-template-areas:
+									'title         .'
+									'headline      .'
+									'disclaimer    right-column'
+									'media         right-column'
+									'standfirst    right-column'
+									'meta          right-column'
+									'body          right-column'
+									'.             right-column';
+						  `
+						: css`
+								grid-template-areas:
+									'title         right-column'
+									'headline      right-column'
+									'standfirst    right-column'
+									'disclaimer    right-column'
+									'media         right-column'
+									'meta          right-column'
+									'body          right-column'
+									'.             right-column';
+						  `}
+				}
 
-			${until.desktop} {
-				grid-template-columns: 100%; /* Main content */
-				${isMatchReport
-					? css`
-							grid-template-areas:
-								'matchNav'
-								'matchtabs'
-								'title'
-								'headline'
-								'standfirst'
-								'media'
-								'meta'
-								'body';
-					  `
-					: isMedia
-					? css`
-							grid-template-areas:
-								'title'
-								'headline'
-								'disclaimer'
-								'media'
-								'standfirst'
-								'meta'
-								'body';
-					  `
-					: css`
-							grid-template-areas:
-								'title'
-								'headline'
-								'standfirst'
-								'disclaimer'
-								'media'
-								'meta'
-								'body';
-					  `}
-			}
+				${until.desktop} {
+					grid-template-columns: 100%; /* Main content */
+					${isMatchReport
+						? css`
+								grid-template-areas:
+									'matchNav'
+									'matchtabs'
+									'title'
+									'headline'
+									'standfirst'
+									'media'
+									'meta'
+									'body';
+						  `
+						: isMedia
+						? css`
+								grid-template-areas:
+									'title'
+									'headline'
+									'disclaimer'
+									'media'
+									'standfirst'
+									'meta'
+									'body';
+						  `
+						: css`
+								grid-template-areas:
+									'title'
+									'headline'
+									'standfirst'
+									'disclaimer'
+									'media'
+									'meta'
+									'body';
+						  `}
+				}
 
-			${until.tablet} {
-				grid-column-gap: 0px;
+				${until.tablet} {
+					grid-column-gap: 0px;
 
-				grid-template-columns: 100%; /* Main content */
-				${isMatchReport
-					? css`
-							grid-template-areas:
-								'matchNav'
-								'matchtabs'
-								'media'
-								'title'
-								'headline'
-								'standfirst'
-								'meta'
-								'body';
-					  `
-					: isMedia
-					? css`
-							grid-template-areas:
-								'title'
-								'headline'
-								'disclaimer'
-								'media'
-								'standfirst'
-								'meta'
-								'body';
-					  `
-					: css`
-							grid-template-areas:
-								'media'
-								'title'
-								'headline'
-								'standfirst'
-								'disclaimer'
-								'meta'
-								'body';
-					  `}
+					grid-template-columns: 100%; /* Main content */
+					${isMatchReport
+						? css`
+								grid-template-areas:
+									'matchNav'
+									'matchtabs'
+									'media'
+									'title'
+									'headline'
+									'standfirst'
+									'meta'
+									'body';
+						  `
+						: isMedia
+						? css`
+								grid-template-areas:
+									'title'
+									'headline'
+									'disclaimer'
+									'media'
+									'standfirst'
+									'meta'
+									'body';
+						  `
+						: css`
+								grid-template-areas:
+									'media'
+									'title'
+									'headline'
+									'standfirst'
+									'disclaimer'
+									'meta'
+									'body';
+						  `}
+				}
 			}
 		`}
 	>
@@ -463,6 +519,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<StandardGrid
 						isMatchReport={isMatchReport}
 						isMedia={isMedia}
+						renderingTarget={renderingTarget}
 					>
 						<GridItem area="matchNav" element="aside">
 							<div css={maxWidth}>
@@ -584,70 +641,26 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								</div>
 							</div>
 							{isApps ? (
-								<>
-									<Hide from="leftCol">
-										<div css={maxWidth}>
-											<ArticleMetaApps
-												branding={branding}
-												format={format}
-												byline={article.byline}
-												tags={article.tags}
-												primaryDateline={
-													article.webPublicationDateDisplay
-												}
-												secondaryDateline={
-													article.webPublicationSecondaryDateDisplay
-												}
-												isCommentable={
-													article.isCommentable
-												}
-												discussionApiUrl={
-													article.config
-														.discussionApiUrl
-												}
-												shortUrlId={
-													article.config.shortUrlId
-												}
-												pageId={article.config.pageId}
-											></ArticleMetaApps>
-										</div>
-									</Hide>
-									<Hide until="leftCol">
-										<div css={maxWidth}>
-											<ArticleMeta
-												branding={branding}
-												format={format}
-												pageId={article.pageId}
-												webTitle={article.webTitle}
-												byline={article.byline}
-												source={article.config.source}
-												tags={article.tags}
-												primaryDateline={
-													article.webPublicationDateDisplay
-												}
-												secondaryDateline={
-													article.webPublicationSecondaryDateDisplay
-												}
-												isCommentable={
-													article.isCommentable
-												}
-												discussionApiUrl={
-													article.config
-														.discussionApiUrl
-												}
-												shortUrlId={
-													article.config.shortUrlId
-												}
-												mainMediaElements={
-													article.mainMediaElements
-												}
-											/>
-										</div>
-										{!!article.affiliateLinksDisclaimer && (
-											<AffiliateDisclaimer />
-										)}
-									</Hide>
-								</>
+								<div css={maxWidth}>
+									<ArticleMetaApps
+										branding={branding}
+										format={format}
+										byline={article.byline}
+										tags={article.tags}
+										primaryDateline={
+											article.webPublicationDateDisplay
+										}
+										secondaryDateline={
+											article.webPublicationSecondaryDateDisplay
+										}
+										isCommentable={article.isCommentable}
+										discussionApiUrl={
+											article.config.discussionApiUrl
+										}
+										shortUrlId={article.config.shortUrlId}
+										pageId={article.config.pageId}
+									></ArticleMetaApps>
+								</div>
 							) : (
 								<div css={maxWidth}>
 									<ArticleMeta
@@ -806,7 +819,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										margin-right: -20px;
 										padding-bottom: ${isMedia ? 41 : 0}px;
 									}
-									${from.leftCol} {
+									${renderingTarget !== 'Apps' &&
+									from.leftCol} {
 										/* above 1140 */
 										margin-left: 0px;
 										margin-right: 0px;
