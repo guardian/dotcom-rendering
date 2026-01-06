@@ -4,9 +4,8 @@ import {
 	type GuStackProps,
 } from "@guardian/cdk/lib/constructs/core/stack.js";
 import { GuEmailIdentity } from "@guardian/cdk/lib/constructs/ses/index.js";
-import type { App } from "aws-cdk-lib";
+import { type App, Duration } from "aws-cdk-lib";
 import { Schedule } from "aws-cdk-lib/aws-events";
-import { Effect, PolicyStatement } from "aws-cdk-lib/aws-iam";
 import { Runtime } from "aws-cdk-lib/aws-lambda";
 import { Subscription, SubscriptionProtocol, Topic } from "aws-cdk-lib/aws-sns";
 
@@ -61,9 +60,11 @@ export class AbTestingNotificationLambda extends GuStack {
 				monitoringConfiguration: {
 					snsTopicName: snsTopic.topicName,
 					toleratedErrorPercentage: 0,
-					alarmName: "AB Testing Notification Lambda Failures",
-					alarmDescription: `Something went wrong notifying test owners of upcoming AB test expiries in the ${props.stage} AB Testing Notification Lambda. Please check the logs`,
-					okAction: true,
+					alarmName: "AB Testing Notification Failures",
+					alarmDescription: `Something went wrong notifying test owners of upcoming AB test expiries in ${appName}-${props.stage}. Please check the logs`,
+					lengthOfEvaluationPeriod: Duration.minutes(1),
+					numberOfEvaluationPeriodsAboveThresholdBeforeAlarm: 1,
+					datapointsToAlarm: 1,
 				},
 				runtime: Runtime.NODEJS_22_X,
 				environment: {
@@ -73,12 +74,6 @@ export class AbTestingNotificationLambda extends GuStack {
 			},
 		);
 
-		lambda.addToRolePolicy(
-			new PolicyStatement({
-				effect: Effect.ALLOW,
-				actions: ["ses:SendEmail"],
-				resources: [emailIdentity.emailIdentityArn],
-			}),
-		);
+		emailIdentity.grantSendEmail(lambda);
 	}
 }

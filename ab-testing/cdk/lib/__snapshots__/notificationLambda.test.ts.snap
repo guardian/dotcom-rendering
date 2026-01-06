@@ -265,7 +265,10 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
               }
             },
             {
-              "Action": "ses:SendEmail",
+              "Action": [
+                "ses:SendEmail",
+                "ses:SendRawEmail"
+              ],
               "Effect": "Allow",
               "Resource": {
                 "Fn::Join": [
@@ -383,9 +386,10 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
             ]
           }
         ],
-        "AlarmDescription": "Something went wrong notifying test owners of upcoming AB test expiries in the CODE AB Testing Notification Lambda. Please check the logs",
-        "AlarmName": "AB Testing Notification Lambda Failures",
+        "AlarmDescription": "Something went wrong notifying test owners of upcoming AB test expiries in ab-testing-notification-lambda-CODE. Please check the logs",
+        "AlarmName": "AB Testing Notification Failures",
         "ComparisonOperator": "GreaterThanThreshold",
+        "DatapointsToAlarm": 1,
         "EvaluationPeriods": 1,
         "Metrics": [
           {
@@ -443,26 +447,6 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
               "Stat": "Sum"
             },
             "ReturnData": false
-          }
-        ],
-        "OKActions": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:aws:sns:eu-west-1:",
-                {
-                  "Ref": "AWS::AccountId"
-                },
-                ":",
-                {
-                  "Fn::GetAtt": [
-                    "AbTestingNotificationSnsTopicB3559144",
-                    "TopicName"
-                  ]
-                }
-              ]
-            ]
           }
         ],
         "Tags": [
@@ -775,7 +759,10 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
               }
             },
             {
-              "Action": "ses:SendEmail",
+              "Action": [
+                "ses:SendEmail",
+                "ses:SendRawEmail"
+              ],
               "Effect": "Allow",
               "Resource": {
                 "Fn::Join": [
@@ -953,9 +940,10 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
             ]
           }
         ],
-        "AlarmDescription": "Something went wrong notifying test owners of upcoming AB test expiries in the PROD AB Testing Notification Lambda. Please check the logs",
-        "AlarmName": "AB Testing Notification Lambda Failures",
+        "AlarmDescription": "Something went wrong notifying test owners of upcoming AB test expiries in ab-testing-notification-lambda-PROD. Please check the logs",
+        "AlarmName": "AB Testing Notification Failures",
         "ComparisonOperator": "GreaterThanThreshold",
+        "DatapointsToAlarm": 1,
         "EvaluationPeriods": 1,
         "Metrics": [
           {
@@ -1013,26 +1001,6 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
               "Stat": "Sum"
             },
             "ReturnData": false
-          }
-        ],
-        "OKActions": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:aws:sns:eu-west-1:",
-                {
-                  "Ref": "AWS::AccountId"
-                },
-                ":",
-                {
-                  "Fn::GetAtt": [
-                    "AbTestingNotificationSnsTopicB3559144",
-                    "TopicName"
-                  ]
-                }
-              ]
-            ]
           }
         ],
         "Tags": [
