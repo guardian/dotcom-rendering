@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import {
 	from,
 	palette as sourcePalette,
 	until,
 } from '@guardian/source/foundations';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
@@ -56,9 +56,11 @@ import { BannerWrapper, Stuck } from './lib/stickiness';
 const StandardGrid = ({
 	children,
 	display,
+	renderingTarget,
 }: {
 	children: React.ReactNode;
 	display: ArticleDisplay;
+	renderingTarget: RenderingTarget;
 }) => (
 	<div
 		css={css`
@@ -79,6 +81,12 @@ const StandardGrid = ({
 				display: grid;
 				width: 100%;
 				margin-left: 0;
+				${renderingTarget === 'Apps' &&
+				css`
+					${from.leftCol} {
+						margin-left: 230px;
+					}
+				`}
 
 				grid-column-gap: 10px;
 
@@ -145,7 +153,21 @@ const StandardGrid = ({
 									'.          border  .           right-column';
 						  `}
 				}
-
+				/* Apply until.leftCol layout from leftCol for Apps targets */
+				${renderingTarget === 'Apps' &&
+				css`
+					${from.leftCol} {
+						grid-template-columns: 620px 300px;
+						grid-template-areas:
+							'title      right-column'
+							'headline   right-column'
+							'standfirst right-column'
+							'meta       right-column'
+							'media      right-column'
+							'body       right-column'
+							'.          right-column';
+					}
+				`}
 				/*
 					Explanation of each unit of grid-template-columns
 
@@ -350,7 +372,10 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 					backgroundColour={themePalette('--article-background')}
 					element="article"
 				>
-					<StandardGrid display={format.display}>
+					<StandardGrid
+						display={format.display}
+						renderingTarget={renderingTarget}
+					>
 						<GridItem area="media">
 							<div
 								css={
@@ -460,85 +485,44 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
 								{isApps ? (
-									<>
-										<Hide when="above" breakpoint="leftCol">
-											<ArticleMetaApps
-												branding={branding}
-												format={format}
-												byline={article.byline}
-												tags={article.tags}
-												primaryDateline={
-													article.webPublicationDateDisplay
-												}
-												secondaryDateline={
-													article.webPublicationSecondaryDateDisplay
-												}
-												isCommentable={
-													article.isCommentable
-												}
-												discussionApiUrl={
-													article.config
-														.discussionApiUrl
-												}
-												shortUrlId={
-													article.config.shortUrlId
-												}
-												pageId={article.config.pageId}
-											></ArticleMetaApps>
-										</Hide>
-										<Hide when="below" breakpoint="leftCol">
-											<ArticleMeta
-												branding={branding}
-												format={format}
-												pageId={article.pageId}
-												webTitle={article.webTitle}
-												byline={article.byline}
-												tags={article.tags}
-												primaryDateline={
-													article.webPublicationDateDisplay
-												}
-												secondaryDateline={
-													article.webPublicationSecondaryDateDisplay
-												}
-												isCommentable={
-													article.isCommentable
-												}
-												discussionApiUrl={
-													article.config
-														.discussionApiUrl
-												}
-												shortUrlId={
-													article.config.shortUrlId
-												}
-											/>
-										</Hide>
-									</>
+									<ArticleMetaApps
+										branding={branding}
+										format={format}
+										byline={article.byline}
+										tags={article.tags}
+										primaryDateline={
+											article.webPublicationDateDisplay
+										}
+										secondaryDateline={
+											article.webPublicationSecondaryDateDisplay
+										}
+										isCommentable={article.isCommentable}
+										discussionApiUrl={
+											article.config.discussionApiUrl
+										}
+										shortUrlId={article.config.shortUrlId}
+										pageId={article.config.pageId}
+									></ArticleMetaApps>
 								) : (
-									<>
-										<ArticleMeta
-											branding={branding}
-											format={format}
-											pageId={article.pageId}
-											webTitle={article.webTitle}
-											byline={article.byline}
-											tags={article.tags}
-											primaryDateline={
-												article.webPublicationDateDisplay
-											}
-											secondaryDateline={
-												article.webPublicationSecondaryDateDisplay
-											}
-											isCommentable={
-												article.isCommentable
-											}
-											discussionApiUrl={
-												article.config.discussionApiUrl
-											}
-											shortUrlId={
-												article.config.shortUrlId
-											}
-										/>
-									</>
+									<ArticleMeta
+										branding={branding}
+										format={format}
+										pageId={article.pageId}
+										webTitle={article.webTitle}
+										byline={article.byline}
+										tags={article.tags}
+										primaryDateline={
+											article.webPublicationDateDisplay
+										}
+										secondaryDateline={
+											article.webPublicationSecondaryDateDisplay
+										}
+										isCommentable={article.isCommentable}
+										discussionApiUrl={
+											article.config.discussionApiUrl
+										}
+										shortUrlId={article.config.shortUrlId}
+									/>
 								)}
 							</div>
 						</GridItem>
@@ -659,7 +643,9 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 										margin-left: 20px;
 										margin-right: -20px;
 									}
-									${from.leftCol} {
+
+									${renderingTarget !== 'Apps' &&
+									from.leftCol} {
 										/* above 1140 */
 										margin-left: 0px;
 										margin-right: 0px;
