@@ -3968,6 +3968,9 @@
                 "primaryHeadingHtml": {
                     "type": "string"
                 },
+                "primaryHeadingText": {
+                    "type": "string"
+                },
                 "customAttributes": {
                     "type": "array",
                     "items": {
