@@ -172,7 +172,11 @@ export const HighlightsCard = ({
 
 					{!isUndefined(starRating) &&
 						(isInStarRatingVariant ? (
-							<StarRating rating={starRating} size="small" />
+							<StarRating
+								rating={starRating}
+								size="small"
+								paddingSize="none"
+							/>
 						) : (
 							<div css={starWrapper}>
 								<StarRatingDeprecated

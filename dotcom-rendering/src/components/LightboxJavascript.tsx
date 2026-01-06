@@ -595,7 +595,6 @@ export const LightboxJavascript = ({
 				images={images}
 				isInStarRatingVariant={isInStarRatingVariant}
 			/>
-			;
 		</ul>
 	);
 };

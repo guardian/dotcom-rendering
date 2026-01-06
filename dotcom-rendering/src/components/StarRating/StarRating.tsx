@@ -76,10 +76,14 @@ const determineSize = (size: RatingSizeType) => {
 	}
 };
 
-type PaddingSizeType = 'small' | 'medium' | 'large';
+type PaddingSizeType = 'small' | 'medium' | 'large' | 'none';
 
 const determinePaddingTop = (size: PaddingSizeType) => {
 	switch (size) {
+		case 'none':
+			return css`
+				padding-top: 0;
+			`;
 		case 'small':
 			return css`
 				padding-top: ${space[1]}px;
