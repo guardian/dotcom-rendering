@@ -265,7 +265,10 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
               }
             },
             {
-              "Action": "ses:SendEmail",
+              "Action": [
+                "ses:SendEmail",
+                "ses:SendRawEmail"
+              ],
               "Effect": "Allow",
               "Resource": {
                 "Fn::Join": [
@@ -309,14 +312,15 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
         },
         "Environment": {
           "Variables": {
+            "STAGE": "CODE",
             "EMAIL_DOMAIN": {
               "Ref": "EmailIdentityAbtestingnotificationlambdaE053C648"
             },
             "STACK": "frontend",
-            "STAGE": "CODE",
             "APP": "ab-testing-notification-lambda"
           }
         },
+        "FunctionName": "ab-testing-notification-lambda-CODE",
         "Handler": "index.handler",
         "LoggingConfig": {
           "LogFormat": "JSON"
@@ -382,30 +386,10 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
             ]
           }
         ],
-        "AlarmDescription": {
-          "Fn::Join": [
-            "",
-            [
-              {
-                "Ref": "AbTestingNotificationLambda36F153E8"
-              },
-              " exceeded 1% error rate"
-            ]
-          ]
-        },
-        "AlarmName": {
-          "Fn::Join": [
-            "",
-            [
-              "High error percentage from ",
-              {
-                "Ref": "AbTestingNotificationLambda36F153E8"
-              },
-              " lambda in CODE"
-            ]
-          ]
-        },
+        "AlarmDescription": "Something went wrong notifying test owners of upcoming AB test expiries in ab-testing-notification-lambda-CODE. Please check the logs",
+        "AlarmName": "ab-testing-notification-lambda-CODE-alarm",
         "ComparisonOperator": "GreaterThanThreshold",
+        "DatapointsToAlarm": 1,
         "EvaluationPeriods": 1,
         "Metrics": [
           {
@@ -483,7 +467,7 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
             "Value": "CODE"
           }
         ],
-        "Threshold": 1,
+        "Threshold": 0,
         "TreatMissingData": "notBreaching"
       }
     }
@@ -630,6 +614,16 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
         ]
       }
     },
+    "ABTestingNotificationErrors7CB687D5": {
+      "Type": "AWS::SNS::Subscription",
+      "Properties": {
+        "Endpoint": "commercial.dev@guardian.co.uk",
+        "Protocol": "email",
+        "TopicArn": {
+          "Ref": "AbTestingNotificationSnsTopicB3559144"
+        }
+      }
+    },
     "AbTestingNotificationLambdaServiceRole529D80CF": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -765,7 +759,10 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
               }
             },
             {
-              "Action": "ses:SendEmail",
+              "Action": [
+                "ses:SendEmail",
+                "ses:SendRawEmail"
+              ],
               "Effect": "Allow",
               "Resource": {
                 "Fn::Join": [
@@ -809,14 +806,15 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
         },
         "Environment": {
           "Variables": {
+            "STAGE": "PROD",
             "EMAIL_DOMAIN": {
               "Ref": "EmailIdentityAbtestingnotificationlambdaE053C648"
             },
             "STACK": "frontend",
-            "STAGE": "PROD",
             "APP": "ab-testing-notification-lambda"
           }
         },
+        "FunctionName": "ab-testing-notification-lambda-PROD",
         "Handler": "index.handler",
         "LoggingConfig": {
           "LogFormat": "JSON"
@@ -942,30 +940,10 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
             ]
           }
         ],
-        "AlarmDescription": {
-          "Fn::Join": [
-            "",
-            [
-              {
-                "Ref": "AbTestingNotificationLambda36F153E8"
-              },
-              " exceeded 1% error rate"
-            ]
-          ]
-        },
-        "AlarmName": {
-          "Fn::Join": [
-            "",
-            [
-              "High error percentage from ",
-              {
-                "Ref": "AbTestingNotificationLambda36F153E8"
-              },
-              " lambda in PROD"
-            ]
-          ]
-        },
+        "AlarmDescription": "Something went wrong notifying test owners of upcoming AB test expiries in ab-testing-notification-lambda-PROD. Please check the logs",
+        "AlarmName": "ab-testing-notification-lambda-PROD-alarm",
         "ComparisonOperator": "GreaterThanThreshold",
+        "DatapointsToAlarm": 1,
         "EvaluationPeriods": 1,
         "Metrics": [
           {
@@ -1043,7 +1021,7 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
             "Value": "PROD"
           }
         ],
-        "Threshold": 1,
+        "Threshold": 0,
         "TreatMissingData": "notBreaching"
       }
     }

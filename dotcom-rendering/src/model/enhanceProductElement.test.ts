@@ -1,4 +1,3 @@
-// typescript
 import type { ArticleFormat } from '../lib/articleFormat';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type {
@@ -26,8 +25,8 @@ const productBlockElement: ProductBlockElement = {
 	starRating: '5',
 	productName: 'Sky Kettle',
 	image: productImage,
-	secondaryHeadingHtml: 'Best Kettle Overall',
-	primaryHeadingHtml: 'Bosch Sky Kettle',
+	primaryHeadingHtml: '<em>Best Kettle: Overall:</em>',
+	secondaryHeadingHtml: 'Bosch Sky Kettle',
 	customAttributes: [
 		{ name: 'What we love', value: 'It packs away pretty small' },
 		{
@@ -166,5 +165,12 @@ describe('enhanceProductBlockElements', () => {
 		}
 
 		expect(enhancedElementWithNaN.lowestPrice).toEqual('£29.99');
+	});
+
+	it('extracts all html from primary heading and removes trailing `:` only', () => {
+		enhanceProductElement(elementsEnhancer)(inputElements);
+		expect(enhancedElements.primaryHeadingText).toEqual(
+			'Best Kettle: Overall',
+		);
 	});
 });
