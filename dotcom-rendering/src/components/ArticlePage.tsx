@@ -23,6 +23,7 @@ import { SendTargetingParams } from './SendTargetingParams.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
 import { SkipTo } from './SkipTo';
+import { SomeComponent } from './SomeComponent';
 
 interface BaseProps {
 	article: Article;
@@ -68,6 +69,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 
 	return (
 		<StrictMode>
+			<SomeComponent />
 			<Global styles={rootStyles(format, darkModeAvailable)} />
 			{isWeb && (
 				<>
