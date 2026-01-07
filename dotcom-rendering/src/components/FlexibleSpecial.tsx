@@ -54,7 +54,11 @@ const determineCardProperties = (
 	supportingContentLength: number,
 	mediaCard: boolean,
 	imageSuppressed: boolean,
+	hasLiveUpdates: boolean,
 ): BoostProperties => {
+	const shouldDisplaySublinksHorizontally =
+		supportingContentLength >= 3 || hasLiveUpdates;
+
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
 		case 'default':
@@ -67,8 +71,9 @@ const determineCardProperties = (
 				mediaSize: 'xlarge',
 				mediaPositionOnDesktop: 'right',
 				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
-				supportingContentAlignment:
-					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
+				supportingContentAlignment: shouldDisplaySublinksHorizontally
+					? 'horizontal'
+					: 'vertical',
 				liveUpdatesAlignment: 'vertical',
 				trailTextSize: 'regular',
 				subtitleSize: 'medium',
@@ -83,8 +88,9 @@ const determineCardProperties = (
 				mediaSize: 'xlarge',
 				mediaPositionOnDesktop: 'right',
 				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
-				supportingContentAlignment:
-					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
+				supportingContentAlignment: shouldDisplaySublinksHorizontally
+					? 'horizontal'
+					: 'vertical',
 				liveUpdatesAlignment: 'vertical',
 				trailTextSize: 'regular',
 				subtitleSize: 'medium',
@@ -166,6 +172,7 @@ export const OneCardLayout = ({
 		card.supportingContent?.length ?? 0,
 		isMediaCard(card.format),
 		!card.image,
+		card.showLivePlayable,
 	);
 
 	return (
