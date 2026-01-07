@@ -295,7 +295,7 @@ const Score = (props: { score: number }) => (
 			paddingLeft: 4,
 			// For when there are two numbers.
 			'& > :nth-of-type(2)': {
-				marginLeft: -8,
+				marginLeft: -10,
 			},
 		}}
 	>
@@ -328,7 +328,6 @@ const ScoreNumber = (props: { score: number }) => {
 		case 7:
 		case 8:
 		case 9:
-		case 10:
 			return <BigNumber index={props.score} />;
 		default:
 			return (
