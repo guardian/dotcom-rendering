@@ -78,9 +78,9 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 	return (
 		<StrictMode>
 			{isInVariantGroup ? (
-				<h1>This is an AB test</h1>
+				<h1>User is in variant</h1>
 			) : (
-				<h1>Not in test</h1>
+				<h1>User is in control</h1>
 			)}
 			<Global styles={rootStyles(format, darkModeAvailable)} />
 			{isWeb && (
