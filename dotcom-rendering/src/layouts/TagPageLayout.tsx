@@ -135,6 +135,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 						  )
 						: undefined;
 
+					// AIStorylines logic to determine where to insert the section
 					const insertStorylinesSection =
 						tagPage.storylinesContent &&
 						(!tagPage.pagination ||

@@ -216,7 +216,7 @@ export const StorylinesSectionContent = ({
 				url={url}
 				isTagPage={true}
 				showTopBorder={true}
-				ophanComponentLink={`container-${index} | ${containerId}`}
+				ophanComponentLink={`container | ${containerId}`}
 				ophanComponentName={containerId}
 				editionId={editionId}
 			>

@@ -160,7 +160,7 @@ export type DCRSupportingContent = {
 	url?: string;
 	kickerText?: string;
 	format: ArticleFormat;
-	/** The date is shown in the supporting content for the key stories container in a tag page storyline section */
+	/** // AIStorylines: The date is shown in the supporting content for the key stories container in a tag page */
 	webPublicationDate?: string;
 };
 
