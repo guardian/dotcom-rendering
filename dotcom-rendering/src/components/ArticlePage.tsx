@@ -77,17 +77,17 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 
 	return (
 		<StrictMode>
-			{isInVariantGroup ? (
-				<h1>User is in variant</h1>
-			) : (
-				<h1>User is in control</h1>
-			)}
 			<Global styles={rootStyles(format, darkModeAvailable)} />
 			{isWeb && (
 				<>
 					<SkipTo id="maincontent" label="Skip to main content" />
 					<SkipTo id="navigation" label="Skip to navigation" />
 				</>
+			)}
+			{isInVariantGroup ? (
+				<h1>User is in variant</h1>
+			) : (
+				<h1>User is in control</h1>
 			)}
 			<Lightbox
 				format={format}
