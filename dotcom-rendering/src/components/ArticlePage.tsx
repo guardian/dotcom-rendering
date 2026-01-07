@@ -4,6 +4,7 @@ import { DecideLayout } from '../layouts/DecideLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { ArticleDesign } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
+import { useBetaAB } from '../lib/useAB';
 import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
 import type { Article } from '../types/article';
@@ -23,7 +24,6 @@ import { SendTargetingParams } from './SendTargetingParams.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
 import { SkipTo } from './SkipTo';
-import { SomeComponent } from './SomeComponent';
 
 interface BaseProps {
 	article: Article;
@@ -67,9 +67,21 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 		theme,
 	};
 
+	const abTests = useBetaAB();
+
+	const isInVariantGroup =
+		abTests?.isUserInTestGroup(
+			'commercial-testing-beta-ab-test',
+			'variant',
+		) ?? false;
+
 	return (
 		<StrictMode>
-			<SomeComponent />
+			{isInVariantGroup ? (
+				<h1>This is an AB test</h1>
+			) : (
+				<h1>Not in test</h1>
+			)}
 			<Global styles={rootStyles(format, darkModeAvailable)} />
 			{isWeb && (
 				<>
