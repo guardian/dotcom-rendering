@@ -1,13 +1,9 @@
 import './webpackPublicPath';
 import { adaptSite, shouldAdapt } from './adaptiveSite';
-import { setDeviceClass } from './deviceDetection/iPadDetection';
 import { startup } from './startup';
 import { maybeSIndicatorCapiKey } from './userFeatures/cookies/sIndicatorCapiKey';
 
 void (async () => {
-	// Set device class in localStorage for iPadOS detection (runs immediately, before any SDC requests)
-	setDeviceClass();
-
 	if (await shouldAdapt()) {
 		adaptSite('Web');
 	}

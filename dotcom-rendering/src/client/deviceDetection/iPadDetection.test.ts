@@ -1,7 +1,4 @@
-import { storage } from '@guardian/libs';
-import { getDeviceClass, isIPad, setDeviceClass } from './iPadDetection';
-
-const DEVICE_CLASS_STORAGE_KEY = 'gu.deviceClass';
+import { getDeviceClass, isIPad } from './iPadDetection';
 
 describe('iPadDetection', () => {
 	const originalPlatform = navigator.platform;
@@ -16,7 +13,6 @@ describe('iPadDetection', () => {
 			value: originalMaxTouchPoints,
 			configurable: true,
 		});
-		storage.local.remove(DEVICE_CLASS_STORAGE_KEY);
 	});
 
 	describe('isIPad', () => {
@@ -93,23 +89,21 @@ describe('iPadDetection', () => {
 		});
 	});
 
-	describe('setDeviceClass', () => {
-		it('sets device class to tablet in localStorage on iPad', () => {
+	describe('getDeviceClass', () => {
+		it('returns tablet when device is iPad', () => {
 			Object.defineProperty(navigator, 'platform', {
 				value: 'MacIntel',
 				configurable: true,
 			});
 			Object.defineProperty(navigator, 'maxTouchPoints', {
-				value: 5,
+				value: 1,
 				configurable: true,
 			});
-
-			setDeviceClass();
 
 			expect(getDeviceClass()).toBe('tablet');
 		});
 
-		it('does not set device class on Mac desktop', () => {
+		it('returns undefined when device is not iPad', () => {
 			Object.defineProperty(navigator, 'platform', {
 				value: 'MacIntel',
 				configurable: true,
@@ -119,39 +113,6 @@ describe('iPadDetection', () => {
 				configurable: true,
 			});
 
-			setDeviceClass();
-
-			expect(getDeviceClass()).toBeUndefined();
-		});
-
-		it('does not overwrite existing tablet value', () => {
-			Object.defineProperty(navigator, 'platform', {
-				value: 'MacIntel',
-				configurable: true,
-			});
-			Object.defineProperty(navigator, 'maxTouchPoints', {
-				value: 5,
-				configurable: true,
-			});
-
-			setDeviceClass();
-			const firstValue = getDeviceClass();
-
-			setDeviceClass();
-			const secondValue = getDeviceClass();
-
-			expect(firstValue).toBe('tablet');
-			expect(secondValue).toBe('tablet');
-		});
-	});
-
-	describe('getDeviceClass', () => {
-		it('returns tablet when device class is set', () => {
-			storage.local.set(DEVICE_CLASS_STORAGE_KEY, 'tablet');
-			expect(getDeviceClass()).toBe('tablet');
-		});
-
-		it('returns undefined when device class is not set', () => {
 			expect(getDeviceClass()).toBeUndefined();
 		});
 	});

@@ -1,12 +1,10 @@
-import { storage } from '@guardian/libs';
-
-const DEVICE_CLASS_STORAGE_KEY = 'gu.deviceClass';
-
 // We need to test the buildSDCUrl function indirectly since it's not exported.
 // We can test it by mocking fetch and checking the URL that's passed to it.
 
 describe('sdcUrl', () => {
 	const originalFetch = global.fetch;
+	const originalPlatform = navigator.platform;
+	const originalMaxTouchPoints = navigator.maxTouchPoints;
 
 	beforeEach(() => {
 		global.fetch = jest.fn().mockResolvedValue({
@@ -15,13 +13,27 @@ describe('sdcUrl', () => {
 	});
 
 	afterEach(() => {
-		storage.local.remove(DEVICE_CLASS_STORAGE_KEY);
+		Object.defineProperty(navigator, 'platform', {
+			value: originalPlatform,
+			configurable: true,
+		});
+		Object.defineProperty(navigator, 'maxTouchPoints', {
+			value: originalMaxTouchPoints,
+			configurable: true,
+		});
 		global.fetch = originalFetch;
 	});
 
 	describe('getEpicWithDeviceClass', () => {
-		it('appends deviceClass query param when device class is set', async () => {
-			storage.local.set(DEVICE_CLASS_STORAGE_KEY, 'tablet');
+		it('appends deviceClass query param when device is iPad', async () => {
+			Object.defineProperty(navigator, 'platform', {
+				value: 'MacIntel',
+				configurable: true,
+			});
+			Object.defineProperty(navigator, 'maxTouchPoints', {
+				value: 1,
+				configurable: true,
+			});
 
 			const { getEpicWithDeviceClass } = await import('./sdcUrl');
 			await getEpicWithDeviceClass(
@@ -50,8 +62,15 @@ describe('sdcUrl', () => {
 	});
 
 	describe('getBannerWithDeviceClass', () => {
-		it('appends deviceClass query param when device class is set', async () => {
-			storage.local.set(DEVICE_CLASS_STORAGE_KEY, 'tablet');
+		it('appends deviceClass query param when device is iPad', async () => {
+			Object.defineProperty(navigator, 'platform', {
+				value: 'MacIntel',
+				configurable: true,
+			});
+			Object.defineProperty(navigator, 'maxTouchPoints', {
+				value: 1,
+				configurable: true,
+			});
 
 			const { getBannerWithDeviceClass } = await import('./sdcUrl');
 			await getBannerWithDeviceClass(
@@ -67,8 +86,15 @@ describe('sdcUrl', () => {
 	});
 
 	describe('getLiveblogEpicWithDeviceClass', () => {
-		it('appends deviceClass query param when device class is set', async () => {
-			storage.local.set(DEVICE_CLASS_STORAGE_KEY, 'tablet');
+		it('appends deviceClass query param when device is iPad', async () => {
+			Object.defineProperty(navigator, 'platform', {
+				value: 'MacIntel',
+				configurable: true,
+			});
+			Object.defineProperty(navigator, 'maxTouchPoints', {
+				value: 1,
+				configurable: true,
+			});
 
 			const { getLiveblogEpicWithDeviceClass } = await import('./sdcUrl');
 			await getLiveblogEpicWithDeviceClass(
