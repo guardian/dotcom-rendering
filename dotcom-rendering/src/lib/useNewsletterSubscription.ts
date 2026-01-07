@@ -9,10 +9,15 @@ import { useAuthStatus } from './useAuthStatus';
 
 /**
  * A hook to check if a user is subscribed to a specific newsletter.
+ *
+ * @param newsletterId
+ * @param idApiUrl
+ * @param shouldCheckSubscription - Feature flag to enable/disable subscription check. When false, returns false immediately.
  */
 export const useNewsletterSubscription = (
 	newsletterId: number,
 	idApiUrl: string | undefined,
+	shouldCheckSubscription: boolean = true,
 ): boolean | undefined => {
 	const [isSubscribed, setIsSubscribed] = useState<boolean | undefined>(
 		undefined,
@@ -21,6 +26,12 @@ export const useNewsletterSubscription = (
 	const authStatus = useAuthStatus();
 
 	useEffect(() => {
+		// Feature flag is disabled - skip subscription check
+		if (!shouldCheckSubscription) {
+			setIsSubscribed(false);
+			return;
+		}
+
 		// Wait for auth to be determined
 		if (authStatus.kind === 'Pending') {
 			setIsSubscribed(undefined);
@@ -74,7 +85,7 @@ export const useNewsletterSubscription = (
 		};
 
 		void fetchNewsletters();
-	}, [authStatus, newsletterId, idApiUrl]);
+	}, [authStatus, newsletterId, idApiUrl, shouldCheckSubscription]);
 
 	return isSubscribed;
 };

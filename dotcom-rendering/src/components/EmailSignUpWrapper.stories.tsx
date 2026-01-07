@@ -83,13 +83,41 @@ export const SignedInNotSubscribed: Story = {
 
 // User is signed in and IS subscribed - component returns null (hidden)
 // Note: This story will render nothing as the component returns null when subscribed
+// Requires hideNewsletterSignupComponentForSubscribers: true to enable the subscription check
 export const SignedInAlreadySubscribed: Story = {
 	args: {
 		hidePrivacyMessage: false,
 		...defaultArgs,
+		hideNewsletterSignupComponentForSubscribers: true,
 	},
 	async beforeEach() {
 		mocked(useNewsletterSubscription).mockReturnValue(true);
+	},
+};
+
+// Feature flag disabled - always shows signup form regardless of subscription status
+// When hideNewsletterSignupComponentForSubscribers is false, the subscription check is skipped
+export const FeatureFlagDisabled: Story = {
+	args: {
+		hidePrivacyMessage: false,
+		...defaultArgs,
+		hideNewsletterSignupComponentForSubscribers: false,
+	},
+	async beforeEach() {
+		// Even though we mock this to return true (subscribed),
+		// the feature flag being disabled means it won't be checked
+		mocked(useNewsletterSubscription).mockReturnValue(false);
+		mocked(useIsSignedIn).mockReturnValue(true);
+		mocked(lazyFetchEmailWithTimeout).mockReturnValue(() =>
+			Promise.resolve('test@example.com'),
+		);
+	},
+	parameters: {
+		docs: {
+			description: {
+				story: 'When the hideNewsletterSignupComponentForSubscribers feature flag is disabled, the signup form is always shown regardless of subscription status.',
+			},
+		},
 	},
 };
 

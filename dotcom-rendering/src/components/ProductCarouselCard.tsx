@@ -91,12 +91,9 @@ export const ProductCarouselCard = ({
 			<div css={headingArea}>
 				{hasHeading && (
 					<>
-						<div
-							css={headingFont}
-							dangerouslySetInnerHTML={{
-								__html: product.primaryHeadingHtml,
-							}}
-						/>
+						<div css={headingFont}>
+							{product.primaryHeadingText}
+						</div>
 						<div css={brandAndProductNameFont}>
 							{productAndBrandName}
 						</div>

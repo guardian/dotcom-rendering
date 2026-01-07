@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { exampleProduct } from '../../fixtures/manual/productBlockElement';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { extractHeadingText } from '../model/enhanceProductElement';
 import { ProductCarouselCard } from './ProductCarouselCard';
 
 const meta = {
@@ -38,6 +39,9 @@ export const WithLongHeadingProductNameAndCTA = {
 			...exampleProduct,
 			h2Id: 'h2-id',
 			primaryHeadingHtml: 'Super long product category review name',
+			primaryHeadingText: extractHeadingText(
+				'<em>Super long product: category review name:</em>',
+			),
 			productName:
 				'Sky Kettle with a super duper long name that goes on and on',
 			productCtas: [
