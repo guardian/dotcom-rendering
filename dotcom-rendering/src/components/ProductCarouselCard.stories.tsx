@@ -2,13 +2,15 @@ import { css } from '@emotion/react';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { productImage } from '../../fixtures/manual/productImage';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { extractHeadingText } from '../model/enhanceProductElement';
 import type { ProductBlockElement } from '../types/content';
 import { ProductCarouselCard } from './ProductCarouselCard';
 
 const product = {
 	_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
 	elementId: 'b1f6e8e2-3f3a-4f0c-8d1e-5f3e3e3e3e3e',
-	primaryHeadingHtml: 'Best Kettle overall',
+	primaryHeadingHtml: '<em>Best Kettle overall:<em/>',
+	primaryHeadingText: extractHeadingText('<em>Best Kettle overall:</em>'),
 	secondaryHeadingHtml: 'Bosch Sky Kettle',
 	brandName: 'Bosch',
 	productName: 'Sky Kettle',
@@ -277,7 +279,9 @@ export const WithLongHeadingProductNameAndCTA = {
 	args: {
 		product: {
 			...product,
-			primaryHeadingHtml: 'Super long product category review name',
+			primaryHeadingText: extractHeadingText(
+				'<em>Super long product: category review name:</em>',
+			),
 			productName:
 				'Sky Kettle with a super duper long name that goes on and on',
 			productCtas: [

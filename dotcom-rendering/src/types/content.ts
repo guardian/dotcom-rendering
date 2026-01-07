@@ -480,6 +480,7 @@ export interface ProductBlockElement {
 	image?: ProductImage;
 	secondaryHeadingHtml: string;
 	primaryHeadingHtml: string;
+	primaryHeadingText?: string;
 	customAttributes: ProductCustomAttribute[];
 	content: FEElement[];
 	h2Id?: string;
