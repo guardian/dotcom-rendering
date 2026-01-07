@@ -5148,6 +5148,8 @@ const productCardReadMoreDark: PaletteFunction = () =>
 	sourcePalette.lifestyle[600];
 const productCardReadMoreDecoration: PaletteFunction = () =>
 	sourcePalette.neutral[86];
+const productCardCountLight: PaletteFunction = () => sourcePalette.neutral[46];
+const productCardCountDark: PaletteFunction = () => sourcePalette.neutral[97];
 
 const privacyTextRegularLight: PaletteFunction = () => sourcePalette.neutral[7];
 const privacyTextDark: PaletteFunction = () => sourcePalette.neutral[86];
@@ -7636,6 +7638,10 @@ const paletteColours = {
 	'--product-card-border-neutral': {
 		light: productCardBorderNeutralLight,
 		dark: productCardBorderNeutralDark,
+	},
+	'--product-card-count': {
+		light: productCardCountLight,
+		dark: productCardCountDark,
 	},
 	'--product-card-headline': {
 		light: productCardHeadingTextLight,
