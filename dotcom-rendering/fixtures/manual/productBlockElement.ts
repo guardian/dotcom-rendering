@@ -1,3 +1,4 @@
+import { extractHeadingText } from '../../src/model/enhanceProductElement';
 import type { ProductBlockElement } from '../../src/types/content';
 import { productImage } from './productImage';
 
@@ -5,6 +6,7 @@ export const exampleProduct: ProductBlockElement = {
 	_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
 	elementId: 'b1f6e8e2-3f3a-4f0c-8d1e-5f3e3e3e3e3e',
 	primaryHeadingHtml: 'Best overall',
+	primaryHeadingText: extractHeadingText('Best overall'),
 	secondaryHeadingHtml: 'Bosch Sky Kettle',
 	brandName: 'Bosch',
 	productName: 'Sky Kettle',
@@ -246,6 +248,9 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 		_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
 		elementId: 'b85ec38b-091b-40c2-8902-a9114df3cfe3',
 		primaryHeadingHtml: '<em>Best running watch for beginners:</em>',
+		primaryHeadingText: extractHeadingText(
+			'<em>Best running watch for beginners:</em>',
+		),
 		secondaryHeadingHtml: 'Garmin Forerunner 55',
 		brandName: 'Garmin',
 		productName: 'Forerunner 55',
@@ -282,6 +287,9 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 		_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
 		elementId: '1cb32565-86fa-4d95-a944-de49a065e71e',
 		primaryHeadingHtml: '<em>Best budget running watch:</em>',
+		primaryHeadingText: extractHeadingText(
+			'<em>Best budget running watch:</em>',
+		),
 		secondaryHeadingHtml: 'Suunto Run',
 		brandName: 'Suunto',
 		productName: 'Run',
@@ -317,6 +325,9 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 		_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
 		elementId: '43670bc5-00f2-460d-853e-3e6e0bf205c5',
 		primaryHeadingHtml: '<em>Best mid-range running watch:</em>',
+		primaryHeadingText: extractHeadingText(
+			'<em>Best mid-range running watch:</em>',
+		),
 		secondaryHeadingHtml: 'Coros Pace Pro',
 		brandName: 'Coros',
 		productName: 'Pace Pro',
@@ -352,6 +363,9 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 		_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
 		elementId: '830b3256-bd3a-4fc2-a4a3-6d42fcf0467f',
 		primaryHeadingHtml: '<em>Best-looking mid-range running watch:</em>',
+		primaryHeadingText: extractHeadingText(
+			'<em>Best-looking mid-range running watch:</em>',
+		),
 		secondaryHeadingHtml: 'Suunto Race 2',
 		brandName: 'Suunto',
 		productName: 'Race 2',
@@ -387,6 +401,9 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 		_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
 		elementId: '407575ba-5898-4995-a94b-f7ab624c60de',
 		primaryHeadingHtml: '<em>The best running watch money can buy:</em>',
+		primaryHeadingText: extractHeadingText(
+			'<em>The best running watch money can buy:</em>',
+		),
 		secondaryHeadingHtml: 'Garmin Forerunner 970',
 		brandName: 'Garmin',
 		productName: 'Forerunner 970',
@@ -422,6 +439,9 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 		_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
 		elementId: 'd7de82bb-fd1c-4efb-a54d-9844156db9e5',
 		primaryHeadingHtml: '<em>Best running watch for battery life:</em>',
+		primaryHeadingText: extractHeadingText(
+			'<em>Best running watch for battery life:</em>',
+		),
 		secondaryHeadingHtml: 'Garmin Enduro 3',
 		brandName: 'Garmin',
 		productName: 'Enduro 3',
@@ -457,6 +477,9 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 		_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
 		elementId: 'c75a0b5a-929e-4550-a146-ccc080c76655',
 		primaryHeadingHtml: '<em>Best running watch with LTE/satellite:</em>',
+		primaryHeadingText: extractHeadingText(
+			'<em>Best running watch with LTE/satellite:</em>',
+		),
 		secondaryHeadingHtml: 'Garmin Fenix 8 Pro',
 		brandName: 'Garmin',
 		productName: 'Fenix 8 Pro',

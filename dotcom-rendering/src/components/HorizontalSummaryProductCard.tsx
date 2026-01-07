@@ -94,12 +94,7 @@ export const HorizontalSummaryProductCard = ({
 				/>
 			</div>
 			<div css={informationContainer}>
-				<div
-					css={productCardHeading}
-					dangerouslySetInnerHTML={{
-						__html: product.primaryHeadingHtml,
-					}}
-				></div>
+				<div css={productCardHeading}>{product.primaryHeadingText}</div>
 				<div css={secondaryHeading}>{product.secondaryHeadingHtml}</div>
 				<a href={`#${product.h2Id}`} css={readMore}>
 					Read more
