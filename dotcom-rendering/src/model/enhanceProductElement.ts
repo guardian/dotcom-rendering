@@ -1,3 +1,4 @@
+import { JSDOM } from 'jsdom';
 import type {
 	FEElement,
 	ProductBlockElement,
@@ -13,6 +14,7 @@ const enhanceProductBlockElement = (
 	...element,
 	content: elementsEnhancer(element.content),
 	lowestPrice: getLowestPrice(element.productCtas),
+	primaryHeadingText: extractHeadingText(element.primaryHeadingHtml),
 });
 
 /**
@@ -72,3 +74,15 @@ export const enhanceProductElement =
 	(elementsEnhancer: ElementsEnhancer) =>
 	(elements: FEElement[]): FEElement[] =>
 		elements.flatMap(enhance(elementsEnhancer));
+
+export const extractHeadingText = (headingHtml: string): string => {
+	return removeTrailingColon(extractText(headingHtml));
+};
+
+const removeTrailingColon = (text: string): string => {
+	return text.replace(/\s*:\s*$/, '');
+};
+
+const extractText = (html: string): string => {
+	return JSDOM.fragment(html).textContent?.trim() ?? '';
+};

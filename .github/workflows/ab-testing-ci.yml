@@ -73,7 +73,7 @@ jobs:
           path: ab-testing/frontend/output/ab-tests.html
           if-no-files-found: error
 
-  lambda-ci:
+  deploy-lambda-ci:
     name: Lambda CI
     runs-on: ubuntu-latest
     defaults:
@@ -99,13 +99,42 @@ jobs:
       - name: Save build
         uses: actions/upload-artifact@v5
         with:
-          name: ab-testing-lambda-build
+          name: ab-testing-deploy-lambda-build
           path: ab-testing/deploy-lambda/dist/lambda.zip
+
+  notification-lambda-ci:
+    name: Notification Lambda CI
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ab-testing/notification-lambda
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Node environment
+        uses: ./.github/actions/setup-node-env
+
+      - name: Build Lambda
+        run: pnpm build
+
+      - name: Zip app artifact
+        run: |
+          cd dist
+          zip -r lambda.zip .
+          zip -j lambda.zip ../package.json
+
+      - name: Save build
+        uses: actions/upload-artifact@v5
+        with:
+          name: ab-testing-notification-lambda-build
+          path: ab-testing/notification-lambda/dist/lambda.zip
 
   riff-raff:
     name: Riff-Raff Artifacts
     runs-on: ubuntu-latest
-    needs: [config-ci, ui-ci, lambda-ci]
+    needs: [config-ci, ui-ci, deploy-lambda-ci, notification-lambda-ci]
     permissions:
       id-token: write
       contents: read
@@ -136,11 +165,17 @@ jobs:
           name: ui-build
           path: ab-testing/frontend/output/ab-tests.html
 
-      - name: Fetch Lambda build
+      - name: Fetch Deploy Lambda build
         uses: actions/download-artifact@v6.0.0
         with:
-          name: ab-testing-lambda-build
+          name: ab-testing-deploy-lambda-build
           path: ab-testing/deploy-lambda/dist/lambda.zip
+
+      - name: Fetch Notification Lambda build
+        uses: actions/download-artifact@v6.0.0
+        with:
+          name: ab-testing-notification-lambda-build
+          path: ab-testing/notification-lambda/dist/lambda.zip
 
       - name: CDK Test
         run: pnpm --filter @guardian/ab-testing-cdk test
@@ -160,6 +195,8 @@ jobs:
               - ab-testing/config/dist
             ab-testing-deployment-lambda:
               - ab-testing/deploy-lambda/dist/lambda.zip
+            ab-testing-notification-lambda:
+              - ab-testing/notification-lambda/dist/lambda.zip
             ab-testing-ui-artifact:
               - ab-testing/frontend/output/ab-tests.html
             cdk.out:
