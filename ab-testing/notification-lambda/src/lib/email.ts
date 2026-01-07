@@ -150,10 +150,15 @@ export const sendEmail = async (
 			)
 			.then(() =>
 				console.log(
-					`Sent AB test expiry reminder email to ${recipient}`,
+					`Sent AB test expiry reminder email to ${recipient} for tests
+					${Object.values(expiringAbTests)
+						.flat()
+						.map((test) => test.name)
+						.join(", ")}`,
 				),
 			);
 	} catch (error) {
-		console.log(`Error sending email to ${recipient}`, error);
+		console.error(`Error sending email to ${recipient}`, error);
+		throw error;
 	}
 };
