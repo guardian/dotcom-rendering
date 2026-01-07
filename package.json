@@ -6,10 +6,6 @@
 	"private": true,
 	"scripts": {
 		"postinstall": "./scripts/postinstall.sh",
-		"storybook": "pnpm '/^storybook:.*/'",
-		"storybook:dcr": "pnpm --filter @guardian/dotcom-rendering storybook --no-open --quiet",
-		"build-storybook": "pnpm '/^build-storybook:.*/'",
-		"build-storybook:dcr": "pnpm --filter @guardian/dotcom-rendering build-storybook",
 		"build:dcr": "cd dotcom-rendering && make build",
 		"chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
 		"prepare": "husky",
@@ -24,7 +20,7 @@
 	"dependencies": {
 		"@guardian/prettier": "5.0.0",
 		"@types/chai": "5.2.2",
-		"chromatic": "13.3.0",
+		"chromatic": "13.3.4",
 		"husky": "9.1.7",
 		"lint-staged": "15.2.0",
 		"prettier": "3.0.3",

@@ -31,7 +31,6 @@ type Props = {
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
-	showLabsRedesign?: boolean;
 	enableHls?: boolean;
 };
 
@@ -55,7 +54,11 @@ const determineCardProperties = (
 	supportingContentLength: number,
 	mediaCard: boolean,
 	imageSuppressed: boolean,
+	hasLiveUpdates: boolean,
 ): BoostProperties => {
+	const shouldDisplaySublinksHorizontally =
+		supportingContentLength >= 3 || hasLiveUpdates;
+
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
 		case 'default':
@@ -68,8 +71,9 @@ const determineCardProperties = (
 				mediaSize: 'xlarge',
 				mediaPositionOnDesktop: 'right',
 				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
-				supportingContentAlignment:
-					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
+				supportingContentAlignment: shouldDisplaySublinksHorizontally
+					? 'horizontal'
+					: 'vertical',
 				liveUpdatesAlignment: 'vertical',
 				trailTextSize: 'regular',
 				subtitleSize: 'medium',
@@ -84,8 +88,9 @@ const determineCardProperties = (
 				mediaSize: 'xlarge',
 				mediaPositionOnDesktop: 'right',
 				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
-				supportingContentAlignment:
-					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
+				supportingContentAlignment: shouldDisplaySublinksHorizontally
+					? 'horizontal'
+					: 'vertical',
 				liveUpdatesAlignment: 'vertical',
 				trailTextSize: 'regular',
 				subtitleSize: 'medium',
@@ -134,7 +139,6 @@ type OneCardLayoutProps = {
 	isFirstRow: boolean;
 	containerLevel: DCRContainerLevel;
 	isSplashCard?: boolean;
-	showLabsRedesign?: boolean;
 	enableHls?: boolean;
 };
 
@@ -149,7 +153,6 @@ export const OneCardLayout = ({
 	isFirstRow,
 	containerLevel,
 	isSplashCard,
-	showLabsRedesign,
 	enableHls,
 }: OneCardLayoutProps) => {
 	const card = cards[0];
@@ -169,6 +172,7 @@ export const OneCardLayout = ({
 		card.supportingContent?.length ?? 0,
 		isMediaCard(card.format),
 		!card.image,
+		card.showLivePlayable,
 	);
 
 	return (
@@ -203,7 +207,6 @@ export const OneCardLayout = ({
 					canPlayInline={true}
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 					headlinePosition={isSplashCard ? 'outer' : 'inner'}
-					showLabsRedesign={showLabsRedesign}
 					subtitleSize={subtitleSize}
 					enableHls={enableHls}
 				/>
@@ -233,8 +236,6 @@ type TwoOrFourCardLayoutProps = {
 	aspectRatio: AspectRatio;
 	isFirstRow: boolean;
 	containerLevel: DCRContainerLevel;
-	/** Feature flag for the labs redesign work */
-	showLabsRedesign?: boolean;
 };
 
 const TwoOrFourCardLayout = ({
@@ -247,7 +248,6 @@ const TwoOrFourCardLayout = ({
 	aspectRatio,
 	isFirstRow,
 	containerLevel,
-	showLabsRedesign,
 }: TwoOrFourCardLayoutProps) => {
 	if (cards.length === 0) return null;
 	const hasTwoOrFewerCards = cards.length <= 2;
@@ -290,7 +290,6 @@ const TwoOrFourCardLayout = ({
 									!isMediaCard(card.format))
 							}
 							canPlayInline={false}
-							showLabsRedesign={showLabsRedesign}
 						/>
 					</LI>
 				);
@@ -308,7 +307,6 @@ export const FlexibleSpecial = ({
 	aspectRatio,
 	containerLevel = 'Primary',
 	collectionId,
-	showLabsRedesign,
 	enableHls,
 }: Props) => {
 	const snaps = [...groupedTrails.snap].slice(0, 1).map((snap) => ({
@@ -338,7 +336,6 @@ export const FlexibleSpecial = ({
 					isLastRow={splash.length === 0 && cards.length === 0}
 					containerLevel={containerLevel}
 					isSplashCard={false}
-					showLabsRedesign={showLabsRedesign}
 					enableHls={enableHls}
 				/>
 			)}
@@ -354,7 +351,6 @@ export const FlexibleSpecial = ({
 					isFirstRow={!isNonEmptyArray(snaps)}
 					containerLevel={containerLevel}
 					isSplashCard={true}
-					showLabsRedesign={showLabsRedesign}
 					enableHls={enableHls}
 				/>
 			)}
@@ -368,7 +364,6 @@ export const FlexibleSpecial = ({
 				aspectRatio={aspectRatio}
 				isFirstRow={!isNonEmptyArray(snaps) && !isNonEmptyArray(splash)}
 				containerLevel={containerLevel}
-				showLabsRedesign={showLabsRedesign}
 			/>
 		</>
 	);

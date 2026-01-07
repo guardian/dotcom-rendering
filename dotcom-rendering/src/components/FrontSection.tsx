@@ -98,8 +98,6 @@ type Props = {
 	isAboveMobileAd?: boolean;
 	/** Indicates whether this is a Guardian Labs container */
 	isLabs?: boolean;
-	/** Feature switch for the labs redesign work */
-	showLabsRedesign?: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -489,6 +487,9 @@ const labsSectionHeaderStyles = css`
 	grid-row: headline;
 	grid-column: title;
 	margin-top: ${space[2]}px;
+`;
+
+const labsSectionHeaderStylesFromLeftCol = css`
 	${from.leftCol} {
 		grid-row: content;
 		grid-column: title;
@@ -623,7 +624,6 @@ export const FrontSection = ({
 	isAboveDesktopAd = false,
 	isAboveMobileAd = false,
 	isLabs = false,
-	showLabsRedesign = false,
 }: Props) => {
 	const isToggleable = toggleable && !!sectionId;
 	const showVerticalRule = !hasPageSkin;
@@ -700,12 +700,18 @@ export const FrontSection = ({
 					]}
 				/>
 
-				{isLabs && showLabsRedesign ? (
-					<div css={labsSectionHeaderStyles}>
+				{isLabs ? (
+					<div
+						css={[
+							labsSectionHeaderStyles,
+							!hasPageSkin && labsSectionHeaderStylesFromLeftCol,
+						]}
+					>
 						<LabsSectionHeader
 							title={title}
 							url={url}
 							editionId={editionId}
+							hasPageSkin={hasPageSkin}
 						/>
 					</div>
 				) : (
@@ -747,7 +753,7 @@ export const FrontSection = ({
 									showDateHeader={showDateHeader}
 									editionId={editionId}
 									containerLevel={containerLevel}
-									isLabs={isLabs && showLabsRedesign}
+									isLabs={isLabs}
 								/>
 							}
 							collectionBranding={collectionBranding}
@@ -839,6 +845,7 @@ export const FrontSection = ({
 										labsDataAttributes?.ophanComponentName
 									}
 									isLabs={isLabs}
+									dataTestId="front-branding-logo"
 								/>
 							</div>
 						)}

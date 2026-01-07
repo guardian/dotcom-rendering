@@ -22,6 +22,7 @@ type Props = {
 	ophanComponentName?: string;
 	isLabs?: boolean;
 	isAdvertisingPartner?: boolean;
+	dataTestId?: string;
 };
 
 const logoImageStyle = css`
@@ -103,8 +104,8 @@ const imageAdvertisingPartnerStyles = css`
  * Component used to display branding labels with sponsor logos for
  * various types of branded content (paid-content, sponsored, foundation, etc.)
  *
- * This is used for front container level branding and supports both Labs
- * and non-Labs designs. Should eventually replace `CardBranding` and `Badge`.
+ * This is used for front container level branding and card level branding.
+ * It supports both Labs and non-Labs designs. This should eventually replace `Badge`.
  */
 export const BrandingLabel = ({
 	branding,
@@ -115,6 +116,7 @@ export const BrandingLabel = ({
 	ophanComponentName,
 	isLabs = false,
 	isAdvertisingPartner = false,
+	dataTestId = 'branding-logo',
 }: Props) => {
 	const { darkModeAvailable } = useConfig();
 	const logo = decideBrandingLogo(branding, containerPalette);
@@ -146,7 +148,7 @@ export const BrandingLabel = ({
 					data-sponsor={branding.sponsorName.toLowerCase()}
 					rel="nofollow"
 					aria-label={`Visit the ${branding.sponsorName} website`}
-					data-testid="branding-logo"
+					data-testid={dataTestId}
 					data-component={ophanComponentName}
 					data-link-name={ophanComponentLink}
 					className="branding-logo"

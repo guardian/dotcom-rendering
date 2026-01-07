@@ -31,6 +31,15 @@ const standfirstColourBelowDesktop = css`
 	}
 `;
 
+const galleryBylineStyles = css`
+	a {
+		font-style: italic;
+		:hover {
+			border-color: ${schemedPalette('--byline-anchor')};
+		}
+	}
+`;
+
 const bylineStyles = (format: ArticleFormat) => {
 	const defaultStyles = css`
 		${headlineMedium17}
@@ -53,18 +62,25 @@ const bylineStyles = (format: ArticleFormat) => {
 
 	switch (format.design) {
 		case ArticleDesign.Gallery:
-			return css`
-				${defaultStyles}
-				a {
-					font-style: italic;
-					border-bottom: 0.5px solid ${sourcePalette.neutral[46]};
-					:hover {
-						text-decoration: none;
-						border-color: ${schemedPalette('--byline-anchor')};
-					}
-				}
-			`;
+			switch (format.theme) {
+				case ArticleSpecial.Labs: {
+					return css`
+						${defaultStyles}
+						${galleryBylineStyles}
 
+						a {
+							border-bottom: 0.5px solid
+								${sourcePalette.neutral[46]};
+						}
+					`;
+				}
+				default: {
+					return css`
+						${defaultStyles}
+						${galleryBylineStyles}
+					`;
+				}
+			}
 		default:
 			return defaultStyles;
 	}
@@ -90,7 +106,6 @@ type Props = {
 
 export const Contributor = ({ byline, tags, format, source }: Props) => (
 	<address
-		aria-label="Contributor info"
 		data-component="meta-byline"
 		data-link-name="byline"
 		data-gu-name="byline"

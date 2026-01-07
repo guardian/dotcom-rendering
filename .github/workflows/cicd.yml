@@ -2,9 +2,6 @@ name: DCR CICD
 
 on:
   push:
-    paths-ignore:
-      - 'ab-testing/**'
-      - '!ab-testing/config/abTests.ts'
 
 jobs:
   container:
