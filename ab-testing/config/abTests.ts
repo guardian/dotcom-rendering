@@ -71,6 +71,18 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
 	},
+	{
+		name: "commercial-testing-beta-ab-test",
+		description: "Testing the beta ab test framework for commercial team",
+		owners: ["dina.hafez@guardian.co.uk"],
+		expirationDate: `2026-01-14`,
+		type: "client",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
