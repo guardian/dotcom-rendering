@@ -299,7 +299,9 @@ export const WithoutHeading = {
 		product: {
 			...product,
 			primaryHeadingHtml: '',
+			primaryHeadingText: '',
 			secondaryHeadingHtml: '',
+			secondaryHeadingText: '',
 		},
 	},
 } satisfies Story;
@@ -319,6 +321,7 @@ export const NoSecondaryHeading = {
 			...product,
 			primaryHeadingHtml: '<em>Primary heading only</em>',
 			secondaryHeadingHtml: '',
+			secondaryHeadingText: '',
 		},
 	},
 } satisfies Story;
@@ -328,6 +331,7 @@ export const NoPrimaryHeading = {
 		product: {
 			...product,
 			primaryHeadingHtml: '',
+			primaryHeadingText: '',
 			secondaryHeadingHtml: 'Secondary heading only',
 		},
 	},
