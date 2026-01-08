@@ -11,7 +11,7 @@
 
 import { AsyncLocalStorage } from 'node:async_hooks';
 
-type DCRLoggingStore = {
+export type DCRLoggingStore = {
 	request: {
 		pageId: string;
 		path: string;
