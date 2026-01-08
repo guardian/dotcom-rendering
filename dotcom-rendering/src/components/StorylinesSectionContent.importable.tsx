@@ -130,11 +130,13 @@ const numberStyles = css`
 	margin-right: ${space[2]}px;
 `;
 
-const articleCountAndDateRangeStyle = css`
+const articleDateRangeStyle = css`
 	${textSans14}
 	margin-bottom: ${space[4]}px;
 	margin-top: ${space[2]}px;
-	margin-left: ${space[2]}px;
+	${from.tablet} {
+		margin-left: ${space[2]}px;
+	}
 `;
 
 function formatDateRangeText(
@@ -288,7 +290,7 @@ export const StorylinesSectionContent = ({
 					))}
 				</div>
 				{/* Context on article date range and mobile AI disclaimer */}
-				<div css={articleCountAndDateRangeStyle}>
+				<div css={articleDateRangeStyle}>
 					<Hide from="leftCol">
 						<span>
 							This product uses GenAI. Learn more about how it
