@@ -1,5 +1,6 @@
 import { isString } from '@guardian/libs';
 import { ConfigProvider } from '../components/ConfigContext';
+import { DateTimeProvider } from '../components/DateTimeContext';
 import { FrontPage } from '../components/FrontPage';
 import { TagPage } from '../components/TagPage';
 import { Pillar } from '../lib/articleFormat';
@@ -92,9 +93,13 @@ export const renderFront = ({
 		editionId: front.editionId,
 	} satisfies Config;
 
+	const serverTime = Date.now();
+
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
-			<FrontPage front={front} NAV={enhancedNAV} />
+			<DateTimeProvider value={serverTime}>
+				<FrontPage front={front} NAV={enhancedNAV} />
+			</DateTimeProvider>
 		</ConfigProvider>,
 	);
 
@@ -191,9 +196,13 @@ export const renderTagPage = ({
 		editionId: tagPage.editionId,
 	};
 
+	const serverTime = Date.now();
+
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
-			<TagPage tagPage={tagPage} NAV={enhancedNAV} />
+			<DateTimeProvider value={serverTime}>
+				<TagPage tagPage={tagPage} NAV={enhancedNAV} />
+			</DateTimeProvider>
 		</ConfigProvider>,
 	);
 

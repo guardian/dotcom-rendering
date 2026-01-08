@@ -1,6 +1,7 @@
 import { isString } from '@guardian/libs';
 import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
+import { DateTimeProvider } from '../components/DateTimeContext';
 import { LiveBlogRenderer } from '../components/LiveBlogRenderer';
 import {
 	ArticleDesign,
@@ -58,14 +59,17 @@ export const renderHtml = ({
 		assetOrigin: ASSET_ORIGIN,
 		editionId: frontendData.editionId,
 	};
+	const serverTime = Date.now();
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
-			<ArticlePage
-				article={article}
-				NAV={NAV}
-				renderingTarget={renderingTarget}
-			/>
+			<DateTimeProvider value={serverTime}>
+				<ArticlePage
+					article={article}
+					NAV={NAV}
+					renderingTarget={renderingTarget}
+				/>
+			</DateTimeProvider>
 		</ConfigProvider>,
 	);
 
@@ -246,33 +250,37 @@ export const renderBlocks = ({
 		editionId,
 	};
 
+	const serverTime = Date.now();
+
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
-			<LiveBlogRenderer
-				blocks={blocks}
-				format={format}
-				host={host}
-				pageId={pageId}
-				webTitle={webTitle}
-				ajaxUrl={ajaxUrl}
-				isSensitive={isSensitive}
-				isAdFreeUser={isAdFreeUser}
-				abTests={abTests}
-				switches={switches}
-				isLiveUpdate={true}
-				sectionId={section}
-				// The props below are never used because isLiveUpdate is true but, typescript...
-				shouldHideReaderRevenue={false}
-				tags={[]}
-				isPaidContent={false}
-				contributionsServiceUrl=""
-				keywordIds={keywordIds}
-				editionId={editionId}
-				onFirstPage={false}
-				keyEvents={[]}
-				filterKeyEvents={false}
-				shouldHideAds={shouldHideAds}
-			/>
+			<DateTimeProvider value={serverTime}>
+				<LiveBlogRenderer
+					blocks={blocks}
+					format={format}
+					host={host}
+					pageId={pageId}
+					webTitle={webTitle}
+					ajaxUrl={ajaxUrl}
+					isSensitive={isSensitive}
+					isAdFreeUser={isAdFreeUser}
+					abTests={abTests}
+					switches={switches}
+					isLiveUpdate={true}
+					sectionId={section}
+					// The props below are never used because isLiveUpdate is true but, typescript...
+					shouldHideReaderRevenue={false}
+					tags={[]}
+					isPaidContent={false}
+					contributionsServiceUrl=""
+					keywordIds={keywordIds}
+					editionId={editionId}
+					onFirstPage={false}
+					keyEvents={[]}
+					filterKeyEvents={false}
+					shouldHideAds={shouldHideAds}
+				/>
+			</DateTimeProvider>
 		</ConfigProvider>,
 	);
 
