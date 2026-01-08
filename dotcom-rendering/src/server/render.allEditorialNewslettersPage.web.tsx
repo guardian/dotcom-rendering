@@ -1,5 +1,6 @@
 import { AllEditorialNewslettersPage } from '../components/AllEditorialNewslettersPage';
 import { ConfigProvider } from '../components/ConfigContext';
+import { DateTimeProvider } from '../components/DateTimeContext';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -32,12 +33,16 @@ export const renderEditorialNewslettersPage = ({
 		editionId: newslettersPage.editionId,
 	} satisfies Config;
 
+	const serverTime = Date.now();
+
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
-			<AllEditorialNewslettersPage
-				newslettersPage={newslettersPage}
-				NAV={NAV}
-			/>
+			<DateTimeProvider value={serverTime}>
+				<AllEditorialNewslettersPage
+					newslettersPage={newslettersPage}
+					NAV={NAV}
+				/>
+			</DateTimeProvider>
 		</ConfigProvider>,
 	);
 
