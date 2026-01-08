@@ -361,6 +361,7 @@ export type Props = {
 	 */
 	isImmersive?: boolean;
 	showVideo?: boolean;
+	isStorylines?: boolean;
 	isInStarRatingVariant?: boolean;
 	starRatingSize: RatingSizeType;
 };
@@ -398,6 +399,7 @@ export const FeatureCard = ({
 	isNewsletter = false,
 	isImmersive = false,
 	showVideo = false,
+	isStorylines = false,
 	isInStarRatingVariant,
 	starRatingSize,
 }: Props) => {
@@ -680,6 +682,9 @@ export const FeatureCard = ({
 														}
 														showClock={!!showClock}
 														serverTime={serverTime}
+														isStorylines={
+															isStorylines
+														}
 													/>
 												) : undefined
 											}
