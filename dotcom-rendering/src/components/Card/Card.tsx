@@ -22,7 +22,7 @@ import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { BETA_CONTAINERS } from '../../model/enhanceCollections';
 import { palette } from '../../palette';
 import type { Branding } from '../../types/branding';
-import type { StarRating as Rating } from '../../types/content';
+import type { StarRating as Rating, RatingSizeType } from '../../types/content';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
@@ -50,6 +50,7 @@ import { SlideshowCarousel } from '../SlideshowCarousel.importable';
 import { Snap } from '../Snap';
 import { SnapCssSandbox } from '../SnapCssSandbox';
 import { StarRating } from '../StarRating/StarRating';
+import { StarRatingDeprecated } from '../StarRating/StarRatingDeprecated';
 import type { Alignment } from '../SupportingContent';
 import { SupportingContent } from '../SupportingContent';
 import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
@@ -163,6 +164,8 @@ export type Props = {
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
 	enableHls?: boolean;
+	isInStarRatingVariant?: boolean;
+	starRatingSize?: RatingSizeType;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -184,7 +187,7 @@ const StarRatingComponent = ({
 	cardHasImage: boolean;
 }) => (
 	<div css={starWrapper(cardHasImage)}>
-		<StarRating rating={rating} size="small" />
+		<StarRatingDeprecated rating={rating} size="small" />
 	</div>
 );
 
@@ -421,6 +424,8 @@ export const Card = ({
 	headlinePosition = 'inner',
 	subtitleSize = 'small',
 	enableHls = false,
+	isInStarRatingVariant,
+	starRatingSize = 'small',
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -908,12 +913,18 @@ export const Card = ({
 						showByline={showByline}
 						isExternalLink={isExternalLink}
 					/>
-					{!isUndefined(starRating) ? (
-						<StarRatingComponent
-							rating={starRating}
-							cardHasImage={!!image}
-						/>
-					) : null}
+					{!isUndefined(starRating) &&
+						(isInStarRatingVariant ? (
+							<StarRating
+								rating={starRating}
+								size={starRatingSize}
+							/>
+						) : (
+							<StarRatingComponent
+								rating={starRating}
+								cardHasImage={!!image}
+							/>
+						))}
 				</div>
 			)}
 
@@ -1238,12 +1249,19 @@ export const Card = ({
 											: undefined
 									}
 								/>
-								{!isUndefined(starRating) ? (
-									<StarRatingComponent
-										rating={starRating}
-										cardHasImage={!!image}
-									/>
-								) : null}
+
+								{!isUndefined(starRating) &&
+									(isInStarRatingVariant ? (
+										<StarRating
+											rating={starRating}
+											size={starRatingSize}
+										/>
+									) : (
+										<StarRatingComponent
+											rating={starRating}
+											cardHasImage={!!image}
+										/>
+									))}
 							</HeadlineWrapper>
 						)}
 

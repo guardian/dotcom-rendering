@@ -15,6 +15,7 @@ type Props = {
 	ajaxUrl: string;
 	richLinkIndex: number;
 	format: ArticleFormat;
+	isInStarRatingVariant?: boolean;
 };
 
 interface FERichLinkType {
@@ -82,6 +83,7 @@ export const RichLinkComponent = ({
 	ajaxUrl,
 	richLinkIndex,
 	format,
+	isInStarRatingVariant,
 }: Props) => {
 	/** Render a default (basic) rich link on the server */
 	const fallbackData = {
@@ -153,6 +155,7 @@ export const RichLinkComponent = ({
 				// https://github.com/guardian/frontend/blob/8256fe148f9abb5842e30339ac64dfa43d758226/common/app/model/Asset.scala#L64
 				data.imageAsset?.index === -1
 			}
+			isInStarRatingVariant={isInStarRatingVariant}
 		/>
 	);
 };
