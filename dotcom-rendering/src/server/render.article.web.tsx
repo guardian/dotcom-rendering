@@ -168,7 +168,7 @@ window.twttr = (function(d, s, id) {
 
 	// Interactive dark mode support launched with full DCAR on June 25th 2025
 	const isBeforeInteractiveDarkModeSupportLaunch =
-		Date.parse(webPublicationDate) < Date.parse('2026-01-08T00:00:00Z');
+		Date.parse(webPublicationDate) < Date.parse('2026-01-13T00:00:00Z');
 
 	const pageHtml = htmlPageTemplate({
 		linkedData,
