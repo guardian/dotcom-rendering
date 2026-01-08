@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -17,7 +18,7 @@ import { getOphanComponents } from '../lib/labs';
 import { transparentColour } from '../lib/transparentColour';
 import { palette } from '../palette';
 import type { Branding } from '../types/branding';
-import type { StarRating as Rating } from '../types/content';
+import type { StarRating as Rating, RatingSizeType } from '../types/content';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
@@ -41,6 +42,7 @@ import { FormatBoundary } from './FormatBoundary';
 import { Island } from './Island';
 import { Pill } from './Pill';
 import { StarRating } from './StarRating/StarRating';
+import { StarRatingDeprecated } from './StarRating/StarRatingDeprecated';
 import { SupportingContent } from './SupportingContent';
 import { WaveForm } from './WaveForm';
 import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
@@ -360,6 +362,8 @@ export type Props = {
 	isImmersive?: boolean;
 	showVideo?: boolean;
 	isStorylines?: boolean;
+	isInStarRatingVariant?: boolean;
+	starRatingSize: RatingSizeType;
 };
 
 export const FeatureCard = ({
@@ -396,6 +400,8 @@ export const FeatureCard = ({
 	isImmersive = false,
 	showVideo = false,
 	isStorylines = false,
+	isInStarRatingVariant,
+	starRatingSize,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -636,14 +642,21 @@ export const FeatureCard = ({
 											/>
 										</div>
 
-										{starRating !== undefined ? (
-											<div css={starRatingWrapper}>
+										{!isUndefined(starRating) &&
+											(isInStarRatingVariant ? (
 												<StarRating
 													rating={starRating}
-													size="small"
+													size={starRatingSize}
+													useAlternativeTheme={true}
 												/>
-											</div>
-										) : null}
+											) : (
+												<div css={starRatingWrapper}>
+													<StarRatingDeprecated
+														rating={starRating}
+														size="small"
+													/>
+												</div>
+											))}
 
 										{!!trailText && (
 											<div css={trailTextWrapper}>

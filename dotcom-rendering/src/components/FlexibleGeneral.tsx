@@ -36,6 +36,7 @@ type Props = {
 	enableHls?: boolean;
 	/** Passed through to cards to enable tag page storyline section specific rendering */
 	isStorylines?: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -91,6 +92,7 @@ type ImmersiveCardLayoutProps = {
 	imageLoading: Loading;
 	collectionId: number;
 	isStorylines?: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 /**
@@ -106,6 +108,7 @@ const ImmersiveCardLayout = ({
 	imageLoading,
 	collectionId,
 	isStorylines,
+	isInStarRatingVariant,
 }: ImmersiveCardLayoutProps) => {
 	const isLoopingVideo =
 		card.mainMedia?.type === 'SelfHostedVideo' &&
@@ -145,6 +148,8 @@ const ImmersiveCardLayout = ({
 					isImmersive={true}
 					showVideo={card.showVideo}
 					isStorylines={isStorylines}
+					isInStarRatingVariant={isInStarRatingVariant}
+					starRatingSize={'medium'}
 				/>
 			</LI>
 		</UL>
@@ -262,6 +267,7 @@ type SplashCardLayoutProps = {
 	collectionId: number;
 	enableHls?: boolean;
 	isStorylines?: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 const SplashCardLayout = ({
@@ -276,6 +282,7 @@ const SplashCardLayout = ({
 	collectionId,
 	enableHls,
 	isStorylines,
+	isInStarRatingVariant,
 }: SplashCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -289,6 +296,7 @@ const SplashCardLayout = ({
 				serverTime={serverTime}
 				imageLoading={imageLoading}
 				collectionId={collectionId}
+				isInStarRatingVariant={isInStarRatingVariant}
 			/>
 		);
 	}
@@ -362,6 +370,8 @@ const SplashCardLayout = ({
 					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
 					enableHls={enableHls}
 					isStorylines={isStorylines}
+					isInStarRatingVariant={isInStarRatingVariant}
+					starRatingSize={'medium'}
 				/>
 			</LI>
 		</UL>
@@ -429,6 +439,7 @@ type FullWidthCardLayoutProps = {
 	collectionId: number;
 	enableHls?: boolean;
 	isStorylines?: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 const FullWidthCardLayout = ({
@@ -444,6 +455,7 @@ const FullWidthCardLayout = ({
 	collectionId,
 	enableHls,
 	isStorylines,
+	isInStarRatingVariant,
 }: FullWidthCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -471,6 +483,7 @@ const FullWidthCardLayout = ({
 				imageLoading={imageLoading}
 				collectionId={collectionId}
 				isStorylines={isStorylines}
+				isInStarRatingVariant={isInStarRatingVariant}
 			/>
 		);
 	}
@@ -521,6 +534,8 @@ const FullWidthCardLayout = ({
 					subtitleSize={subtitleSize}
 					enableHls={enableHls}
 					isStorylines={isStorylines}
+					isInStarRatingVariant={isInStarRatingVariant}
+					starRatingSize={'medium'}
 				/>
 			</LI>
 		</UL>
@@ -540,6 +555,7 @@ type HalfWidthCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	enableHls?: boolean;
 	isStorylines?: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 const HalfWidthCardLayout = ({
@@ -555,6 +571,7 @@ const HalfWidthCardLayout = ({
 	containerLevel,
 	enableHls,
 	isStorylines,
+	isInStarRatingVariant,
 }: HalfWidthCardLayoutProps) => {
 	if (cards.length === 0) return null;
 
@@ -611,6 +628,7 @@ const HalfWidthCardLayout = ({
 							canPlayInline={false}
 							enableHls={enableHls}
 							isStorylines={isStorylines}
+							isInStarRatingVariant={isInStarRatingVariant}
 						/>
 					</LI>
 				);
@@ -630,6 +648,7 @@ export const FlexibleGeneral = ({
 	collectionId,
 	enableHls,
 	isStorylines = false,
+	isInStarRatingVariant,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
 		...snap,
@@ -660,6 +679,7 @@ export const FlexibleGeneral = ({
 					collectionId={collectionId}
 					enableHls={enableHls}
 					isStorylines={isStorylines}
+					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			)}
 			{groupedCards.map((row, i) => {
@@ -680,6 +700,7 @@ export const FlexibleGeneral = ({
 								collectionId={collectionId}
 								enableHls={enableHls}
 								isStorylines={isStorylines}
+								isInStarRatingVariant={isInStarRatingVariant}
 							/>
 						);
 
@@ -701,6 +722,7 @@ export const FlexibleGeneral = ({
 								containerLevel={containerLevel}
 								enableHls={enableHls}
 								isStorylines={isStorylines}
+								isInStarRatingVariant={isInStarRatingVariant}
 							/>
 						);
 				}

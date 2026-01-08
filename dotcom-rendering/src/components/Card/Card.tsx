@@ -22,7 +22,7 @@ import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { BETA_CONTAINERS } from '../../model/enhanceCollections';
 import { palette } from '../../palette';
 import type { Branding } from '../../types/branding';
-import type { StarRating as Rating } from '../../types/content';
+import type { StarRating as Rating, RatingSizeType } from '../../types/content';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
@@ -50,6 +50,7 @@ import { SlideshowCarousel } from '../SlideshowCarousel.importable';
 import { Snap } from '../Snap';
 import { SnapCssSandbox } from '../SnapCssSandbox';
 import { StarRating } from '../StarRating/StarRating';
+import { StarRatingDeprecated } from '../StarRating/StarRatingDeprecated';
 import type { Alignment } from '../SupportingContent';
 import { SupportingContent } from '../SupportingContent';
 import { SupportingKeyStoriesContent } from '../SupportingKeyStoriesContent';
@@ -165,6 +166,8 @@ export type Props = {
 	headlinePosition?: 'inner' | 'outer';
 	enableHls?: boolean;
 	isStorylines?: boolean;
+	isInStarRatingVariant?: boolean;
+	starRatingSize?: RatingSizeType;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -186,7 +189,7 @@ const StarRatingComponent = ({
 	cardHasImage: boolean;
 }) => (
 	<div css={starWrapper(cardHasImage)}>
-		<StarRating rating={rating} size="small" />
+		<StarRatingDeprecated rating={rating} size="small" />
 	</div>
 );
 
@@ -424,6 +427,8 @@ export const Card = ({
 	subtitleSize = 'small',
 	enableHls = false,
 	isStorylines = false,
+	isInStarRatingVariant,
+	starRatingSize = 'small',
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -961,12 +966,18 @@ export const Card = ({
 						showByline={showByline}
 						isExternalLink={isExternalLink}
 					/>
-					{!isUndefined(starRating) ? (
-						<StarRatingComponent
-							rating={starRating}
-							cardHasImage={!!image}
-						/>
-					) : null}
+					{!isUndefined(starRating) &&
+						(isInStarRatingVariant ? (
+							<StarRating
+								rating={starRating}
+								size={starRatingSize}
+							/>
+						) : (
+							<StarRatingComponent
+								rating={starRating}
+								cardHasImage={!!image}
+							/>
+						))}
 				</div>
 			)}
 
@@ -1252,26 +1263,87 @@ export const Card = ({
 						isOnwardContent,
 					)}
 				>
-					{/* In the storylines section on tag pages, the flex splash is used to display key stories. 
+          		{/* In the storylines section on tag pages, the flex splash is used to display key stories. 
 						We don't display an article headline in the conventional sense, the key stories are instead displayed as "supporting content". 
 						However, simply passing an empty string as the article headline still reserves space. 
 						The storylines check enables us to avoid rendering that space at all. 
 					*/}
 					{/* the div is needed to keep the headline and trail text justified at the start */}
 					{!(isStorylines && isFlexSplash) && (
-						<div
-							css={css`
-								position: relative;
-								display: flex;
-								flex-direction: column;
-								justify-content: flex-start;
-								flex-grow: 1;
-							`}
-						>
-							{headlinePosition === 'inner' && (
-								<HeadlineWrapper>
-									<CardHeadline
-										headlineText={headlineText}
+					<div
+						css={css`
+							position: relative;
+							display: flex;
+							flex-direction: column;
+							justify-content: flex-start;
+							flex-grow: 1;
+						`}
+					>
+						{headlinePosition === 'inner' && (
+							<HeadlineWrapper>
+								<CardHeadline
+									headlineText={headlineText}
+									format={format}
+									fontSizes={headlineSizes}
+									showQuotes={showQuotes}
+									kickerText={
+										format.design ===
+											ArticleDesign.LiveBlog &&
+										!kickerText
+											? 'Live'
+											: kickerText
+									}
+									showPulsingDot={
+										format.design ===
+											ArticleDesign.LiveBlog ||
+										showPulsingDot
+									}
+									byline={byline}
+									showByline={showByline}
+									isExternalLink={isExternalLink}
+									kickerImage={
+										showKickerImage &&
+										media?.type === 'podcast'
+											? media.podcastImage
+											: undefined
+									}
+								/>
+
+								{!isUndefined(starRating) &&
+									(isInStarRatingVariant ? (
+										<StarRating
+											rating={starRating}
+											size={starRatingSize}
+										/>
+									) : (
+										<StarRatingComponent
+											rating={starRating}
+											cardHasImage={!!image}
+										/>
+									))}
+							</HeadlineWrapper>
+						)}
+
+						{!!trailText && shouldShowTrailText && (
+							<TrailText
+								trailText={trailText}
+								trailTextSize={trailTextSize}
+								padTop={headlinePosition === 'inner'}
+								hideUntil={hideTrailTextUntil()}
+							/>
+						)}
+
+						{!isOpinionCardWithAvatar && (
+							<>
+								{showPill ? (
+									<>
+										{!!branding && isOnwardContent && (
+											<LabsBranding />
+										)}
+										<MediaOrNewsletterPill />
+									</>
+								) : (
+									<CardFooter
 										format={format}
 										fontSizes={headlineSizes}
 										showQuotes={showQuotes}

@@ -480,6 +480,7 @@ export interface ProductBlockElement {
 	image?: ProductImage;
 	secondaryHeadingHtml: string;
 	primaryHeadingHtml: string;
+	primaryHeadingText?: string;
 	customAttributes: ProductCustomAttribute[];
 	content: FEElement[];
 	h2Id?: string;
@@ -989,7 +990,7 @@ export type TimelineAtomType = {
 	expandCallback?: () => void;
 };
 
-export type RatingSizeType = 'large' | 'small';
+export type RatingSizeType = 'large' | 'medium' | 'small';
 
 export type ImageForLightbox = {
 	masterUrl: string;
@@ -1002,7 +1003,7 @@ export type ImageForLightbox = {
 	caption?: string;
 	displayCredit?: boolean;
 	title?: string;
-	starRating?: number;
+	starRating?: StarRating;
 	/**
 	 * Used for liveblog images to generate a link back to the
 	 * original post where the image was used

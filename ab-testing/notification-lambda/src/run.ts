@@ -11,10 +11,11 @@
 
 import { handler } from "./index.ts";
 
+process.env.STAGE = `LOCAL`;
 process.env.EMAIL_DOMAIN = `abtesting.code.dev-gutools.co.uk`;
 
-console.log(`Running lambda handler locally\n`);
-console.log(`EMAIL_DOMAIN=${process.env.EMAIL_DOMAIN}\n`);
+console.debug(`Running lambda handler locally\n`);
+console.debug(`EMAIL_DOMAIN=${process.env.EMAIL_DOMAIN}\n`);
 
 void (async () => {
 	try {

@@ -10,17 +10,19 @@ import {
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import { Hide, Link } from '@guardian/source/react-components';
-import { StarRating } from '@guardian/source-development-kitchen/react-components';
+import { StarRating as SourceStarRating } from '@guardian/source-development-kitchen/react-components';
 import { useEffect, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxCaption } from './LightboxCaption';
 import { LightboxLoader } from './LightboxLoader';
 import { Picture } from './Picture';
+import { StarRating } from './StarRating/StarRating';
 
 type Props = {
 	format: ArticleFormat;
 	images: ImageForLightbox[];
+	isInStarRatingVariant?: boolean;
 };
 
 const liStyles = css`
@@ -46,7 +48,7 @@ const imageStyles = (orientation: 'landscape' | 'portrait') => {
 		case 'portrait': {
 			return css`
 				img {
-					${baseImgStyles}
+					${baseImgStyles};
 					width: auto;
 					max-width: 100%;
 					height: 100vh;
@@ -60,7 +62,7 @@ const imageStyles = (orientation: 'landscape' | 'portrait') => {
 		default: {
 			return css`
 				img {
-					${baseImgStyles}
+					${baseImgStyles};
 					width: 100%;
 					height: auto;
 					max-height: 100vh;
@@ -128,6 +130,12 @@ const figureStyles = css`
 	}
 `;
 
+const starRatingMarginStyles = css`
+	margin-bottom: ${space[2]}px;
+	${from.tablet} {
+		margin-bottom: ${space[3]}px;
+	}
+`;
 const Selection = ({
 	countOfImages,
 	initialPosition = 1,
@@ -173,7 +181,11 @@ const Selection = ({
 	);
 };
 
-export const LightboxImages = ({ format, images }: Props) => {
+export const LightboxImages = ({
+	format,
+	images,
+	isInStarRatingVariant,
+}: Props) => {
 	const [loaded, setLoaded] = useState(new Set<number>());
 
 	useEffect(() => {
@@ -231,7 +243,7 @@ export const LightboxImages = ({ format, images }: Props) => {
 									<h2
 										css={css`
 											width: 100%;
-											${headlineLight24}
+											${headlineLight24};
 											color: ${palette.neutral[100]};
 											margin-bottom: ${space[1]}px;
 											${from.tablet} {
@@ -242,27 +254,38 @@ export const LightboxImages = ({ format, images }: Props) => {
 										{image.title}
 									</h2>
 								)}
-								{typeof image.starRating === 'number' && (
-									<div
-										css={css`
-											display: inline-block;
-											background-color: ${palette
-												.brandAlt[400]};
-											margin-bottom: ${space[2]}px;
-											${from.tablet} {
-												margin-bottom: ${space[3]}px;
-											}
-											figcaption {
-												height: 0;
-											}
-										`}
-									>
-										<StarRating
-											size="medium"
-											rating={image.starRating}
-										/>
-									</div>
-								)}
+
+								{!isUndefined(image.starRating) &&
+									(isInStarRatingVariant ? (
+										<div css={starRatingMarginStyles}>
+											<StarRating
+												size="medium"
+												rating={image.starRating}
+												useAlternativeTheme={true}
+											/>
+										</div>
+									) : (
+										<div
+											css={css`
+												display: inline-block;
+												background-color: ${palette
+													.brandAlt[400]};
+												margin-bottom: ${space[2]}px;
+												${from.tablet} {
+													margin-bottom: ${space[3]}px;
+												}
+												figcaption {
+													height: 0;
+												}
+											`}
+										>
+											<SourceStarRating
+												size="medium"
+												rating={image.starRating}
+											/>
+										</div>
+									))}
+
 								<Hide from="tablet">
 									<Selection
 										countOfImages={images.length}

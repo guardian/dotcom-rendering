@@ -3385,6 +3385,7 @@
         "RatingSizeType": {
             "enum": [
                 "large",
+                "medium",
                 "small"
             ],
             "type": "string"
@@ -4478,6 +4479,9 @@
                     "type": "string"
                 },
                 "primaryHeadingHtml": {
+                    "type": "string"
+                },
+                "primaryHeadingText": {
                     "type": "string"
                 },
                 "customAttributes": {

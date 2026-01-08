@@ -187,6 +187,7 @@ type Props = {
 	serverTime?: number;
 	renderingTarget: RenderingTarget;
 	webURL: string;
+	isInStarRatingVariant?: boolean;
 };
 
 /**
@@ -223,6 +224,7 @@ export const OnwardsUpper = ({
 	serverTime,
 	renderingTarget,
 	webURL,
+	isInStarRatingVariant,
 }: Props) => {
 	const isHorizontalScrollingSupported = useIsHorizontalScrollingSupported();
 
@@ -344,6 +346,7 @@ export const OnwardsUpper = ({
 						isAdFreeUser={isAdFreeUser}
 						containerPosition={'first'}
 						webURL={webURL}
+						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Section>
 			)}
@@ -374,6 +377,7 @@ export const OnwardsUpper = ({
 							hasOnwardsContainer ? 'second' : 'first'
 						}
 						webURL={webURL}
+						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Section>
 			)}

@@ -4,13 +4,12 @@ import {
 	type GuStackProps,
 } from "@guardian/cdk/lib/constructs/core/stack.js";
 import { GuEmailIdentity } from "@guardian/cdk/lib/constructs/ses/index.js";
-import type { App } from "aws-cdk-lib";
+import { type App, Duration } from "aws-cdk-lib";
 import { Schedule } from "aws-cdk-lib/aws-events";
-import { Effect, PolicyStatement } from "aws-cdk-lib/aws-iam";
 import { Runtime } from "aws-cdk-lib/aws-lambda";
-import { Topic } from "aws-cdk-lib/aws-sns";
+import { Subscription, SubscriptionProtocol, Topic } from "aws-cdk-lib/aws-sns";
 
-const lambdaFunctionName = "ab-testing-notification-lambda";
+const appName = "ab-testing-notification-lambda";
 
 const getEmailDomain = (stage: GuStackProps["stage"]) => {
 	switch (stage) {
@@ -33,37 +32,48 @@ export class AbTestingNotificationLambda extends GuStack {
 		};
 
 		const emailIdentity = new GuEmailIdentity(this, "EmailIdentity", {
-			app: lambdaFunctionName,
+			app: appName,
 			domainName: getEmailDomain(props.stage),
 		});
 
 		const snsTopic = new Topic(this, "AbTestingNotificationSnsTopic");
 
+		// Notify teams in PROD if this lambda errors
+		if (props.stage === "PROD") {
+			new Subscription(this, "ABTestingNotificationErrors", {
+				topic: snsTopic,
+				// TODO: Change this to dig.dev.web-engineers@theguardian.com after testing for a while
+				endpoint: "commercial.dev@guardian.co.uk",
+				protocol: SubscriptionProtocol.EMAIL,
+			});
+		}
+
 		const lambda = new GuScheduledLambda(
 			this,
 			"AbTestingNotificationLambda",
 			{
-				app: lambdaFunctionName,
+				functionName: `${appName}-${props.stage}`,
+				app: appName,
 				fileName: "lambda.zip",
 				handler: "index.handler",
 				rules: this.stage === "PROD" ? [runDailyRule] : [],
 				monitoringConfiguration: {
 					snsTopicName: snsTopic.topicName,
-					toleratedErrorPercentage: 1,
+					toleratedErrorPercentage: 0,
+					alarmName: `${appName}-${props.stage}-alarm`,
+					alarmDescription: `Something went wrong notifying test owners of upcoming AB test expiries in ${appName}-${props.stage}. Please check the logs`,
+					lengthOfEvaluationPeriod: Duration.minutes(1),
+					numberOfEvaluationPeriodsAboveThresholdBeforeAlarm: 1,
+					datapointsToAlarm: 1,
 				},
 				runtime: Runtime.NODEJS_22_X,
 				environment: {
+					STAGE: props.stage,
 					EMAIL_DOMAIN: emailIdentity.emailIdentityName,
 				},
 			},
 		);
 
-		lambda.addToRolePolicy(
-			new PolicyStatement({
-				effect: Effect.ALLOW,
-				actions: ["ses:SendEmail"],
-				resources: [emailIdentity.emailIdentityArn],
-			}),
-		);
+		emailIdentity.grantSendEmail(lambda);
 	}
 }
