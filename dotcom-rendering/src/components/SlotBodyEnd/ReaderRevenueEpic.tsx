@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import {
 	cmp,
 	getCookie,
+	log,
 	startPerformanceMeasure,
 	storage,
 } from '@guardian/libs';
@@ -27,7 +28,7 @@ import {
 } from '../../lib/contributions';
 import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import type { CanShowResult } from '../../lib/messagePicker';
-import { getEpicWithDeviceClass } from '../../lib/sdcUrl';
+import { getEpic } from '../../lib/sdcRequests';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { TagType } from '../../types/tag';
 
@@ -110,12 +111,11 @@ export const canShowReaderRevenueEpic = async (
 
 	const headers = await getAuthHeaders();
 
-	const response: ModuleDataResponse<EpicProps> =
-		await getEpicWithDeviceClass(
-			contributionsServiceUrl,
-			contributionsPayload,
-			headers,
-		);
+	const response: ModuleDataResponse<EpicProps> = await getEpic(
+		contributionsServiceUrl,
+		contributionsPayload,
+		headers,
+	);
 	const module: ModuleData<EpicProps> | undefined = response.data?.module;
 
 	endPerformanceMeasure();
@@ -183,14 +183,13 @@ export const ReaderRevenueEpic = ({ props }: ModuleData<EpicProps>) => {
 						? `Error importing RR epic: ${error.message}`
 						: 'Unknown error';
 
-				console.log(msg);
+				log('commercial', msg);
 				window.guardian.modules.sentry.reportError(
 					new Error(msg),
 					'rr-epic',
 				);
 			});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps -- Only import epic once on mount
 
 	if (Epic !== null) {
 		return (

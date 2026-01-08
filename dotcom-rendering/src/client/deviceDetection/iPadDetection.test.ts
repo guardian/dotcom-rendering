@@ -3,6 +3,7 @@ import { getDeviceClass, isIPad } from './iPadDetection';
 describe('iPadDetection', () => {
 	const originalPlatform = navigator.platform;
 	const originalMaxTouchPoints = navigator.maxTouchPoints;
+	const originalSearch = window.location.search;
 
 	afterEach(() => {
 		Object.defineProperty(navigator, 'platform', {
@@ -12,6 +13,10 @@ describe('iPadDetection', () => {
 		Object.defineProperty(navigator, 'maxTouchPoints', {
 			value: originalMaxTouchPoints,
 			configurable: true,
+		});
+		Object.defineProperty(window, 'location', {
+			value: { search: originalSearch },
+			writable: true,
 		});
 	});
 
@@ -87,6 +92,54 @@ describe('iPadDetection', () => {
 			});
 			expect(isIPad()).toBe(false);
 		});
+
+		it('returns true when forceiPad query parameter is set to true', () => {
+			Object.defineProperty(window, 'location', {
+				value: { search: '?forceiPad=true' },
+				writable: true,
+			});
+			Object.defineProperty(navigator, 'platform', {
+				value: 'Win32',
+				configurable: true,
+			});
+			Object.defineProperty(navigator, 'maxTouchPoints', {
+				value: 0,
+				configurable: true,
+			});
+			expect(isIPad()).toBe(true);
+		});
+
+		it('returns false when forceiPad query parameter is set to false', () => {
+			Object.defineProperty(window, 'location', {
+				value: { search: '?forceiPad=false' },
+				writable: true,
+			});
+			Object.defineProperty(navigator, 'platform', {
+				value: 'Win32',
+				configurable: true,
+			});
+			Object.defineProperty(navigator, 'maxTouchPoints', {
+				value: 0,
+				configurable: true,
+			});
+			expect(isIPad()).toBe(false);
+		});
+
+		it('returns false when forceiPad query parameter is not present', () => {
+			Object.defineProperty(window, 'location', {
+				value: { search: '?otherParam=value' },
+				writable: true,
+			});
+			Object.defineProperty(navigator, 'platform', {
+				value: 'Win32',
+				configurable: true,
+			});
+			Object.defineProperty(navigator, 'maxTouchPoints', {
+				value: 0,
+				configurable: true,
+			});
+			expect(isIPad()).toBe(false);
+		});
 	});
 
 	describe('getDeviceClass', () => {
@@ -114,6 +167,23 @@ describe('iPadDetection', () => {
 			});
 
 			expect(getDeviceClass()).toBeUndefined();
+		});
+
+		it('returns tablet when forceiPad query parameter is set to true', () => {
+			Object.defineProperty(window, 'location', {
+				value: { search: '?forceiPad=true' },
+				writable: true,
+			});
+			Object.defineProperty(navigator, 'platform', {
+				value: 'Win32',
+				configurable: true,
+			});
+			Object.defineProperty(navigator, 'maxTouchPoints', {
+				value: 0,
+				configurable: true,
+			});
+
+			expect(getDeviceClass()).toBe('tablet');
 		});
 	});
 });

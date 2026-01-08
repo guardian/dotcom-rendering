@@ -28,7 +28,7 @@ import { getToday } from '../../lib/dailyArticleCount';
 import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import { getZIndex } from '../../lib/getZIndex';
 import type { CanShowResult } from '../../lib/messagePicker';
-import { getBannerWithDeviceClass } from '../../lib/sdcUrl';
+import { getBanner } from '../../lib/sdcRequests';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { TagType } from '../../types/tag';
 
@@ -248,8 +248,10 @@ export const canShowRRBanner: CanShowFunctionType<
 		pageId,
 	});
 
-	const response: ModuleDataResponse<BannerProps> =
-		await getBannerWithDeviceClass(contributionsServiceUrl, bannerPayload);
+	const response: ModuleDataResponse<BannerProps> = await getBanner(
+		contributionsServiceUrl,
+		bannerPayload,
+	);
 	if (!response.data) {
 		if (engagementBannerLastClosedAt && subscriptionBannerLastClosedAt) {
 			setLocalNoBannerCachePeriod();

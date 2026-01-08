@@ -1,8 +1,15 @@
 /**
  * Detects iPad devices using feature detection.
  * Returns true for iPad devices including iPadOS which reports as MacIntel.
+ * Can be forced to return true via '?forceiPad=true' query parameter for testing.
  */
 export const isIPad = (): boolean => {
+	// Check for force iPad query parameter for testing
+	const params = new URLSearchParams(window.location.search);
+	if (params.get('forceiPad') === 'true') {
+		return true;
+	}
+
 	// iPadOS 13+ reports as MacIntel but has touch support
 	if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 0) {
 		return true;
