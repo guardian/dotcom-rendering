@@ -1,12 +1,13 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import {
 	from,
 	palette as sourcePalette,
+	space,
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimerLeftCol } from '../components/AffiliateDisclaimerLeftCol.importable';
@@ -26,6 +27,10 @@ import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
+import {
+	ListenToArticle,
+	shouldShowListenToArticleButton,
+} from '../components/ListenToArticle.importable';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
@@ -426,6 +431,30 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								format={format}
 								standfirst={article.standfirst}
 							/>
+							{/* Only show Listen to Article button on App landscape views */}
+							{isApps && (
+								<Hide until="leftCol">
+									{shouldShowListenToArticleButton(
+										format,
+										article.pageId,
+									) && (
+										<div
+											css={css`
+												margin-top: ${space[2]}px;
+											`}
+										>
+											<Island
+												priority="feature"
+												defer={{ until: 'visible' }}
+											>
+												<ListenToArticle
+													articleId={article.pageId}
+												/>
+											</Island>
+										</div>
+									)}
+								</Hide>
+							)}
 						</GridItem>
 						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>

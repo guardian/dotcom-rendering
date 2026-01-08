@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import {
 	from,
 	palette as sourcePalette,
 	until,
 } from '@guardian/source/foundations';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
@@ -24,6 +24,10 @@ import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
+import {
+	ListenToArticle,
+	shouldShowListenToArticleButton,
+} from '../components/ListenToArticle.importable';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
@@ -464,6 +468,30 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								format={format}
 								standfirst={article.standfirst}
 							/>
+							{/* Only show Listen to Article button on App landscape views */}
+							{isApps && (
+								<Hide when="below" breakpoint="leftCol">
+									{shouldShowListenToArticleButton(
+										format,
+										article.pageId,
+									) && (
+										<div
+											css={css`
+												max-width: 620px;
+											`}
+										>
+											<Island
+												priority="feature"
+												defer={{ until: 'visible' }}
+											>
+												<ListenToArticle
+													articleId={article.pageId}
+												/>
+											</Island>
+										</div>
+									)}
+								</Hide>
+							)}
 						</GridItem>
 						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>

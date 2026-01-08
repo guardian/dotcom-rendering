@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import {
 	from,
 	palette as sourcePalette,
 	space,
 	until,
 } from '@guardian/source/foundations';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimerLeftCol } from '../components/AffiliateDisclaimerLeftCol.importable';
@@ -29,6 +29,10 @@ import { HeadlineByline } from '../components/HeadlineByline';
 import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
+import {
+	ListenToArticle,
+	shouldShowListenToArticleButton,
+} from '../components/ListenToArticle.importable';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { minHeaderHeightPx } from '../components/Masthead/Titlepiece/constants';
@@ -536,6 +540,30 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									tags={article.tags}
 									byline={article.byline}
 								/>
+							)}
+							{/* Only show Listen to Article button on App landscape views */}
+							{isApps && (
+								<Hide when="below" breakpoint="leftCol">
+									{shouldShowListenToArticleButton(
+										format,
+										article.pageId,
+									) && (
+										<div
+											css={css`
+												margin-top: ${space[6]}px;
+											`}
+										>
+											<Island
+												priority="feature"
+												defer={{ until: 'visible' }}
+											>
+												<ListenToArticle
+													articleId={article.pageId}
+												/>
+											</Island>
+										</div>
+									)}
+								</Hide>
 							)}
 						</GridItem>
 						<GridItem area="meta" element="aside">

@@ -1,11 +1,24 @@
 import { log } from '@guardian/libs';
 import { useEffect, useState } from 'react';
+import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { getListenToArticleClient } from '../lib/bridgetApi';
 import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
 import { ListenToArticleButton } from './ListenToArticleButton';
 
 type Props = {
 	articleId: string;
+};
+
+export const shouldShowListenToArticleButton = (
+	format: ArticleFormat,
+	pageId: string | undefined,
+): boolean => {
+	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
+	const isGallery = format.design === ArticleDesign.Gallery;
+	const isVideo = format.design === ArticleDesign.Video;
+	const isPicture = format.design === ArticleDesign.Picture;
+
+	return !!pageId && !(isLiveBlog || isPicture || isGallery || isVideo);
 };
 
 export const formatAudioDuration = (
