@@ -25,7 +25,7 @@ const ABTests: ABTest[] = [
 		description: "Testing Prebid.js v10 integration on DCR",
 		owners: ["commercial.dev@guardian.co.uk"],
 		status: "ON",
-		expirationDate: "2026-01-10",
+		expirationDate: "2026-03-10",
 		type: "client",
 		audienceSize: 10 / 100,
 		audienceSpace: "A",
