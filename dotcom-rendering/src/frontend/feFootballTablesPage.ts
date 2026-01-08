@@ -42,17 +42,25 @@ export type FERecentResultsPerTeam = {
 	results: FETeamResult[];
 };
 
-export type FELeagueTableEntry = {
+export type FELeagueTableEntrySummary = {
 	stageNumber: string;
 	round: FERound;
 	team: FELeagueTeam;
 	teamUrl?: string;
+};
+
+export type FELeagueTableEntry = FELeagueTableEntrySummary & {
 	results: FETeamResult[];
 };
 
 export type FEGroup = {
 	round: FERound;
 	entries: FELeagueTableEntry[];
+};
+
+export type FEGroupSummary = {
+	round: FERound;
+	entries: FELeagueTableEntrySummary[];
 };
 
 export type FEFootballTable = {
