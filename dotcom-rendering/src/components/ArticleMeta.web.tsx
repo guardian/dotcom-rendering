@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { between, from, space, until } from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { FEArticle } from '../frontend/feArticle';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
