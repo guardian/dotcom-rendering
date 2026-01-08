@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { between, from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
+import { between, from, space, until } from '@guardian/source/foundations';
 import type { FEArticle } from '../frontend/feArticle';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
@@ -22,7 +22,9 @@ import { useConfig } from './ConfigContext';
 import { Contributor } from './Contributor';
 import { CrosswordSetter } from './CrosswordSetter';
 import { Dateline } from './Dateline';
+import { Hide } from './Hide';
 import { Island } from './Island';
+import { ListenToArticle } from './ListenToArticle.importable';
 import { PodcastMeta } from './PodcastMeta';
 import { ShareButton } from './ShareButton.importable';
 
@@ -332,10 +334,11 @@ export const ArticleMeta = ({
 		? soleContributor?.bylineLargeImageUrl
 		: undefined;
 	const isInteractive = format.design === ArticleDesign.Interactive;
-
 	const isPictureContent = format.design === ArticleDesign.Picture;
-
 	const isAudio = format.design === ArticleDesign.Audio;
+	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
+	const isGallery = format.design === ArticleDesign.Gallery;
+	const isVideo = format.design === ArticleDesign.Video;
 
 	const { renderingTarget } = useConfig();
 
@@ -343,6 +346,9 @@ export const ArticleMeta = ({
 	const audioData = getAudioData(mainMediaElements);
 	const podcast = getPodcast(tags);
 	const rssFeedUrl = getRssFeedUrl(tags);
+
+	const shouldShowListenToArticleButton =
+		!!pageId && !(isLiveBlog || isPictureContent || isGallery || isVideo);
 
 	return (
 		<div
@@ -403,19 +409,32 @@ export const ArticleMeta = ({
 									source={source}
 								/>
 							)}
-
 							{crossword?.creator && (
 								<CrosswordSetter
 									setter={crossword.creator.name}
 									profileUrl={crossword.creator.webUrl}
 								/>
 							)}
-
 							<Dateline
 								primaryDateline={primaryDateline}
 								secondaryDateline={secondaryDateline}
 								format={format}
 							/>
+							{/* Only show Listen to Article button on App landscape views */}
+							{renderingTarget === 'Apps' && (
+								<Hide when="below" breakpoint="leftCol">
+									{shouldShowListenToArticleButton && (
+										<Island
+											priority="feature"
+											defer={{ until: 'visible' }}
+										>
+											<ListenToArticle
+												articleId={pageId}
+											/>
+										</Island>
+									)}
+								</Hide>
+							)}
 						</div>
 					</>
 				</RowBelowLeftCol>
