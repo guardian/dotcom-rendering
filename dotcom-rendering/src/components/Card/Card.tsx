@@ -164,7 +164,7 @@ export type Props = {
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
 	enableHls?: boolean;
-	storylinesStyle?: boolean;
+	isStorylines?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -423,7 +423,7 @@ export const Card = ({
 	headlinePosition = 'inner',
 	subtitleSize = 'small',
 	enableHls = false,
-	storylinesStyle = false,
+	isStorylines = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -455,7 +455,7 @@ export const Card = ({
 		const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
 
 		const shouldShowAge =
-			storylinesStyle ||
+			isStorylines ||
 			isTagPage ||
 			!!onwardsSource ||
 			(showAge && withinTwelveHours);
@@ -511,7 +511,7 @@ export const Card = ({
 			css={css`
 				margin-top: auto;
 				display: flex;
-				${storylinesStyle &&
+				${isStorylines &&
 				`
 					flex-direction: column;
 					gap: ${space[1]}px;
@@ -523,7 +523,7 @@ export const Card = ({
 				but if the card appears in the storylines section on tag pages
 				then we do want to display the date on these cards as well as the media pill.
 			*/}
-			{storylinesStyle && (
+			{isStorylines && (
 				<CardFooter
 					format={format}
 					age={decideAge()}
@@ -762,7 +762,7 @@ export const Card = ({
 		if (sublinkPosition === 'none') return null;
 
 		const Sublinks = () => {
-			return storylinesStyle ? (
+			return isStorylines ? (
 				<SupportingKeyStoriesContent
 					supportingContent={supportingContent}
 					containerPalette={containerPalette}
@@ -772,7 +772,7 @@ export const Card = ({
 					fillBackgroundOnDesktop={
 						isBetaContainer && isMediaCardOrNewsletter
 					}
-					storylinesStyle={storylinesStyle}
+					isStorylines={true}
 				/>
 			) : (
 				<SupportingContent
@@ -812,14 +812,14 @@ export const Card = ({
 
 		return (
 			<Hide until={isFlexSplash ? 'desktop' : 'tablet'}>
-				{storylinesStyle ? (
+				{isStorylines ? (
 					<SupportingKeyStoriesContent
 						supportingContent={supportingContent}
 						/* inner links are always vertically stacked */
 						alignment="vertical"
 						containerPalette={containerPalette}
 						fillBackgroundOnMobile={isFlexSplash}
-						storylinesStyle={storylinesStyle}
+						isStorylines={true}
 					/>
 				) : (
 					<SupportingContent
@@ -1258,7 +1258,7 @@ export const Card = ({
 						The storylines check enables us to avoid rendering that space at all. 
 					*/}
 					{/* the div is needed to keep the headline and trail text justified at the start */}
-					{!(storylinesStyle && isFlexSplash) && (
+					{!(isStorylines && isFlexSplash) && (
 						<div
 							css={css`
 								position: relative;

@@ -28,6 +28,7 @@ type StorylinesSectionProps = {
 	pillar?: string;
 };
 
+// AIStorylines: this would be better handled in paletteDeclarations by creating a new css variable if we keep this feature.
 const setSelectedStorylineColour = (pillar?: string) => {
 	switch (pillar?.toLowerCase()) {
 		case 'news':
@@ -212,6 +213,9 @@ export const StorylinesSectionContent = ({
 		<>
 			<StorylinesSection
 				title="Storylines"
+				// Feels a bit hacky to hard code the container palette like this, but this provides some styling (notably the greyed background)
+				// Without having to add more palette variations and still sticking to the “container overrides” pattern in a section.
+				// Future improvement would be to add the palette variation specifically for this case.
 				containerPalette="LongRunningAltPalette"
 				url={url}
 				isTagPage={true}
@@ -244,9 +248,7 @@ export const StorylinesSectionContent = ({
 							>
 								{activeStorylineId === storyline.id ? (
 									<>
-										<span css={[numberStyles]}>
-											{i + 1}
-										</span>
+										<span css={numberStyles}>{i + 1}</span>
 										<span>{storyline.title}</span>
 									</>
 								) : (
@@ -280,7 +282,7 @@ export const StorylinesSectionContent = ({
 								aspectRatio={'5:4'}
 								collectionId={index}
 								containerLevel="Secondary"
-								storylinesStyle={true}
+								isStorylines={true}
 							/>
 						</div>
 					))}

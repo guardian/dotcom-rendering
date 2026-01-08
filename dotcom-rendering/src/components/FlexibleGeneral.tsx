@@ -35,7 +35,7 @@ type Props = {
 	collectionId: number;
 	enableHls?: boolean;
 	/** Passed through to cards to enable tag page storyline section specific rendering */
-	storylinesStyle?: boolean;
+	isStorylines?: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -90,7 +90,7 @@ type ImmersiveCardLayoutProps = {
 	serverTime?: number;
 	imageLoading: Loading;
 	collectionId: number;
-	storylinesStyle?: boolean;
+	isStorylines?: boolean;
 };
 
 /**
@@ -105,7 +105,7 @@ const ImmersiveCardLayout = ({
 	serverTime,
 	imageLoading,
 	collectionId,
-	storylinesStyle,
+	isStorylines,
 }: ImmersiveCardLayoutProps) => {
 	const isLoopingVideo =
 		card.mainMedia?.type === 'SelfHostedVideo' &&
@@ -144,7 +144,7 @@ const ImmersiveCardLayout = ({
 					supportingContent={card.supportingContent}
 					isImmersive={true}
 					showVideo={card.showVideo}
-					storylinesStyle={storylinesStyle}
+					isStorylines={isStorylines}
 				/>
 			</LI>
 		</UL>
@@ -173,7 +173,7 @@ const decideSplashCardProperties = (
 	mediaCard: boolean,
 	useLargerHeadlineSizeDesktop: boolean,
 	avatarUrl: boolean,
-	storylinesStyle?: boolean,
+	isStorylines?: boolean,
 ): BoostedSplashProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
@@ -194,6 +194,11 @@ const decideSplashCardProperties = (
 				subtitleSize: 'medium',
 			};
 		case 'boost':
+			const boostSupportingContentAlignment: Alignment =
+				isStorylines || supportingContentLength < 4
+					? 'vertical'
+					: 'horizontal';
+
 			return {
 				headlineSizes: {
 					desktop: useLargerHeadlineSizeDesktop ? 'xlarge' : 'large',
@@ -203,11 +208,7 @@ const decideSplashCardProperties = (
 				mediaPositionOnDesktop: 'right',
 				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
 				mediaSize: avatarUrl ? 'large' : 'xlarge',
-				supportingContentAlignment: storylinesStyle
-					? 'vertical'
-					: supportingContentLength >= 4
-					? 'horizontal'
-					: 'vertical',
+				supportingContentAlignment: boostSupportingContentAlignment,
 				liveUpdatesAlignment: 'vertical',
 				trailTextSize: 'regular',
 				subtitleSize: 'medium',
@@ -260,7 +261,7 @@ type SplashCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
 	enableHls?: boolean;
-	storylinesStyle?: boolean;
+	isStorylines?: boolean;
 };
 
 const SplashCardLayout = ({
@@ -274,7 +275,7 @@ const SplashCardLayout = ({
 	containerLevel,
 	collectionId,
 	enableHls,
-	storylinesStyle,
+	isStorylines,
 }: SplashCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -313,7 +314,7 @@ const SplashCardLayout = ({
 		isMediaCard(card.format),
 		useLargerHeadlineSizeDesktop,
 		!!card.avatarUrl,
-		storylinesStyle,
+		isStorylines,
 	);
 
 	return (
@@ -360,7 +361,7 @@ const SplashCardLayout = ({
 					subtitleSize={subtitleSize}
 					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
 					enableHls={enableHls}
-					storylinesStyle={storylinesStyle}
+					isStorylines={isStorylines}
 				/>
 			</LI>
 		</UL>
@@ -427,7 +428,7 @@ type FullWidthCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
 	enableHls?: boolean;
-	storylinesStyle?: boolean;
+	isStorylines?: boolean;
 };
 
 const FullWidthCardLayout = ({
@@ -442,7 +443,7 @@ const FullWidthCardLayout = ({
 	containerLevel,
 	collectionId,
 	enableHls,
-	storylinesStyle,
+	isStorylines,
 }: FullWidthCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -469,7 +470,7 @@ const FullWidthCardLayout = ({
 				serverTime={serverTime}
 				imageLoading={imageLoading}
 				collectionId={collectionId}
-				storylinesStyle={storylinesStyle}
+				isStorylines={isStorylines}
 			/>
 		);
 	}
@@ -519,7 +520,7 @@ const FullWidthCardLayout = ({
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 					subtitleSize={subtitleSize}
 					enableHls={enableHls}
-					storylinesStyle={storylinesStyle}
+					isStorylines={isStorylines}
 				/>
 			</LI>
 		</UL>
@@ -538,7 +539,7 @@ type HalfWidthCardLayoutProps = {
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	enableHls?: boolean;
-	storylinesStyle?: boolean;
+	isStorylines?: boolean;
 };
 
 const HalfWidthCardLayout = ({
@@ -553,7 +554,7 @@ const HalfWidthCardLayout = ({
 	isLastRow,
 	containerLevel,
 	enableHls,
-	storylinesStyle,
+	isStorylines,
 }: HalfWidthCardLayoutProps) => {
 	if (cards.length === 0) return null;
 
@@ -609,7 +610,7 @@ const HalfWidthCardLayout = ({
 							headlineSizes={undefined}
 							canPlayInline={false}
 							enableHls={enableHls}
-							storylinesStyle={storylinesStyle}
+							isStorylines={isStorylines}
 						/>
 					</LI>
 				);
@@ -628,7 +629,7 @@ export const FlexibleGeneral = ({
 	containerLevel = 'Primary',
 	collectionId,
 	enableHls,
-	storylinesStyle = false,
+	isStorylines = false,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
 		...snap,
@@ -658,7 +659,7 @@ export const FlexibleGeneral = ({
 					containerLevel={containerLevel}
 					collectionId={collectionId}
 					enableHls={enableHls}
-					storylinesStyle={storylinesStyle}
+					isStorylines={isStorylines}
 				/>
 			)}
 			{groupedCards.map((row, i) => {
@@ -678,7 +679,7 @@ export const FlexibleGeneral = ({
 								containerLevel={containerLevel}
 								collectionId={collectionId}
 								enableHls={enableHls}
-								storylinesStyle={storylinesStyle}
+								isStorylines={isStorylines}
 							/>
 						);
 
@@ -699,7 +700,7 @@ export const FlexibleGeneral = ({
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
 								enableHls={enableHls}
-								storylinesStyle={storylinesStyle}
+								isStorylines={isStorylines}
 							/>
 						);
 				}

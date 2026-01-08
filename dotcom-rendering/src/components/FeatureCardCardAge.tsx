@@ -6,17 +6,17 @@ type Props = {
 	showClock: boolean;
 	serverTime?: number;
 	webPublicationDate: string;
-	storylinesStyle?: boolean;
+	isStorylines?: boolean;
 };
 
 export const FeatureCardCardAge = ({
 	showClock,
 	serverTime,
 	webPublicationDate,
-	storylinesStyle,
+	isStorylines,
 }: Props) => {
 	const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
-	if (withinTwelveHours || storylinesStyle) {
+	if (withinTwelveHours || isStorylines) {
 		return (
 			<CardAge
 				webPublication={{

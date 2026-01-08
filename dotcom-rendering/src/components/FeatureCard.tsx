@@ -359,7 +359,7 @@ export type Props = {
 	 */
 	isImmersive?: boolean;
 	showVideo?: boolean;
-	storylinesStyle?: boolean;
+	isStorylines?: boolean;
 };
 
 export const FeatureCard = ({
@@ -395,7 +395,7 @@ export const FeatureCard = ({
 	isNewsletter = false,
 	isImmersive = false,
 	showVideo = false,
-	storylinesStyle = false,
+	isStorylines = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -669,8 +669,8 @@ export const FeatureCard = ({
 														}
 														showClock={!!showClock}
 														serverTime={serverTime}
-														storylinesStyle={
-															storylinesStyle
+														isStorylines={
+															isStorylines
 														}
 													/>
 												) : undefined

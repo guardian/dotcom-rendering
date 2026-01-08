@@ -19,7 +19,7 @@ type Props = {
 	fillBackgroundOnMobile?: boolean;
 	/** Allows sublinks container to have a background colour on desktop screen sizes */
 	fillBackgroundOnDesktop?: boolean;
-	storylinesStyle?: boolean;
+	isStorylines?: boolean;
 };
 
 /**
@@ -138,7 +138,7 @@ export const SupportingKeyStoriesContent = ({
 	isMedia = false,
 	fillBackgroundOnMobile = false,
 	fillBackgroundOnDesktop = false,
-	storylinesStyle = false,
+	isStorylines = false,
 }: Props) => {
 	const columnSpan = getColumnSpan(supportingContent.length);
 	return (
@@ -187,7 +187,7 @@ export const SupportingKeyStoriesContent = ({
 										desktop: 'xsmall',
 										mobile: 'xxsmall',
 									}}
-									storylinesStyle={storylinesStyle}
+									isStorylines={isStorylines}
 								/>
 								<div
 									css={css`
@@ -202,7 +202,7 @@ export const SupportingKeyStoriesContent = ({
 											isWithinTwelveHours: false,
 										}}
 										isTagPage={true}
-										storylinesStyle={true}
+										isStorylines={true}
 									/>
 								</div>
 							</ContainerOverrides>
