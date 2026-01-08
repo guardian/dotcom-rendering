@@ -401,7 +401,10 @@ export const WithSublinksLabsImmersive = {
 	},
 } satisfies Story;
 
-export const WithSelfHostedVideo = {
+/**
+ * Loops look like cinemagraphs, as only cinemagraphs are currently supported in Feature Cards.
+ */
+export const WithSelfHostedLoopVideo = {
 	args: {
 		...cardProps,
 		showVideo: true,
@@ -422,12 +425,26 @@ export const WithSelfHostedVideo = {
 	},
 } satisfies Story;
 
-export const WithSelfHostedImmersiveVideo = {
+export const WithSelfHostedCinemagraphVideo = {
 	args: {
-		...WithSelfHostedVideo.args,
+		...WithSelfHostedLoopVideo.args,
+		showVideo: true,
+		mainMedia: {
+			...WithSelfHostedLoopVideo.args.mainMedia,
+			videoStyle: 'Cinemagraph',
+		},
+	},
+} satisfies Story;
+
+/**
+ * Loops look like cinemagraphs, as only cinemagraphs are currently supported in Feature Cards.
+ */
+export const WithSelfHostedImmersiveLoopVideo = {
+	args: {
+		...WithSelfHostedLoopVideo.args,
 		...Immersive.args,
 		mainMedia: {
-			...WithSelfHostedVideo.args.mainMedia,
+			...WithSelfHostedLoopVideo.args.mainMedia,
 			sources: [
 				{
 					src: 'https://uploads.guim.co.uk/2025/11/27/5_3_Test--26763e61-c16b-4c10-8c16-3f11882da154-1.0.mp4',
@@ -436,6 +453,16 @@ export const WithSelfHostedImmersiveVideo = {
 			],
 			height: 720,
 			width: 1200,
+		},
+	},
+} satisfies Story;
+
+export const WithSelfHostedImmersiveCinemagraphVideo = {
+	args: {
+		...WithSelfHostedImmersiveLoopVideo.args,
+		mainMedia: {
+			...WithSelfHostedImmersiveLoopVideo.args.mainMedia,
+			videoStyle: 'Cinemagraph',
 		},
 	},
 } satisfies Story;
