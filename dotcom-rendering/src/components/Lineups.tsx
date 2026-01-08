@@ -74,21 +74,22 @@ const Event = ({
 			return (
 				<span
 					css={rectangle(BackgroundRed)}
+					role="img"
 					aria-label="Red Card"
-					aria-hidden="false"
 				/>
 			);
 		case 'booking':
 			return (
 				<span
 					css={rectangle(BackgroundYellow)}
+					role="img"
 					aria-label="Yellow Card"
-					aria-hidden="false"
 				/>
 			);
 		case 'substitution':
 			return (
 				<span
+					role="img"
 					aria-label={`Substitution in ${time} minute`}
 					css={substitute}
 				>

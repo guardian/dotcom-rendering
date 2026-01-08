@@ -32,6 +32,7 @@ type Props = {
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
 	enableHls?: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 type BoostProperties = {
@@ -54,7 +55,11 @@ const determineCardProperties = (
 	supportingContentLength: number,
 	mediaCard: boolean,
 	imageSuppressed: boolean,
+	hasLiveUpdates: boolean,
 ): BoostProperties => {
+	const shouldDisplaySublinksHorizontally =
+		supportingContentLength >= 3 || hasLiveUpdates;
+
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
 		case 'default':
@@ -67,8 +72,9 @@ const determineCardProperties = (
 				mediaSize: 'xlarge',
 				mediaPositionOnDesktop: 'right',
 				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
-				supportingContentAlignment:
-					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
+				supportingContentAlignment: shouldDisplaySublinksHorizontally
+					? 'horizontal'
+					: 'vertical',
 				liveUpdatesAlignment: 'vertical',
 				trailTextSize: 'regular',
 				subtitleSize: 'medium',
@@ -83,8 +89,9 @@ const determineCardProperties = (
 				mediaSize: 'xlarge',
 				mediaPositionOnDesktop: 'right',
 				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
-				supportingContentAlignment:
-					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
+				supportingContentAlignment: shouldDisplaySublinksHorizontally
+					? 'horizontal'
+					: 'vertical',
 				liveUpdatesAlignment: 'vertical',
 				trailTextSize: 'regular',
 				subtitleSize: 'medium',
@@ -134,6 +141,7 @@ type OneCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	isSplashCard?: boolean;
 	enableHls?: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 export const OneCardLayout = ({
@@ -148,6 +156,7 @@ export const OneCardLayout = ({
 	containerLevel,
 	isSplashCard,
 	enableHls,
+	isInStarRatingVariant,
 }: OneCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -166,6 +175,7 @@ export const OneCardLayout = ({
 		card.supportingContent?.length ?? 0,
 		isMediaCard(card.format),
 		!card.image,
+		card.showLivePlayable,
 	);
 
 	return (
@@ -202,6 +212,8 @@ export const OneCardLayout = ({
 					headlinePosition={isSplashCard ? 'outer' : 'inner'}
 					subtitleSize={subtitleSize}
 					enableHls={enableHls}
+					isInStarRatingVariant={isInStarRatingVariant}
+					starRatingSize={'medium'}
 				/>
 			</LI>
 		</UL>
@@ -229,6 +241,7 @@ type TwoOrFourCardLayoutProps = {
 	aspectRatio: AspectRatio;
 	isFirstRow: boolean;
 	containerLevel: DCRContainerLevel;
+	isInStarRatingVariant?: boolean;
 };
 
 const TwoOrFourCardLayout = ({
@@ -241,6 +254,7 @@ const TwoOrFourCardLayout = ({
 	aspectRatio,
 	isFirstRow,
 	containerLevel,
+	isInStarRatingVariant,
 }: TwoOrFourCardLayoutProps) => {
 	if (cards.length === 0) return null;
 	const hasTwoOrFewerCards = cards.length <= 2;
@@ -283,6 +297,7 @@ const TwoOrFourCardLayout = ({
 									!isMediaCard(card.format))
 							}
 							canPlayInline={false}
+							isInStarRatingVariant={isInStarRatingVariant}
 						/>
 					</LI>
 				);
@@ -301,6 +316,7 @@ export const FlexibleSpecial = ({
 	containerLevel = 'Primary',
 	collectionId,
 	enableHls,
+	isInStarRatingVariant,
 }: Props) => {
 	const snaps = [...groupedTrails.snap].slice(0, 1).map((snap) => ({
 		...snap,
@@ -330,6 +346,7 @@ export const FlexibleSpecial = ({
 					containerLevel={containerLevel}
 					isSplashCard={false}
 					enableHls={enableHls}
+					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			)}
 			{isNonEmptyArray(splash) && (
@@ -345,6 +362,7 @@ export const FlexibleSpecial = ({
 					containerLevel={containerLevel}
 					isSplashCard={true}
 					enableHls={enableHls}
+					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			)}
 
@@ -357,6 +375,7 @@ export const FlexibleSpecial = ({
 				aspectRatio={aspectRatio}
 				isFirstRow={!isNonEmptyArray(snaps) && !isNonEmptyArray(splash)}
 				containerLevel={containerLevel}
+				isInStarRatingVariant={isInStarRatingVariant}
 			/>
 		</>
 	);

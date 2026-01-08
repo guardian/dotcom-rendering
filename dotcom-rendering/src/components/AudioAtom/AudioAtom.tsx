@@ -349,6 +349,7 @@ export const AudioAtom = ({
 						data-testid={isPlaying ? 'pause-button' : 'play-button'}
 						onClick={() => (isPlaying ? pauseAudio() : playAudio())}
 						css={buttonStyle}
+						aria-label={isPlaying ? 'Pause' : 'Play'}
 					>
 						{isPlaying ? <PauseSVG /> : <PlaySVG />}
 					</button>

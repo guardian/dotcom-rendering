@@ -487,6 +487,9 @@ const labsSectionHeaderStyles = css`
 	grid-row: headline;
 	grid-column: title;
 	margin-top: ${space[2]}px;
+`;
+
+const labsSectionHeaderStylesFromLeftCol = css`
 	${from.leftCol} {
 		grid-row: content;
 		grid-column: title;
@@ -698,11 +701,17 @@ export const FrontSection = ({
 				/>
 
 				{isLabs ? (
-					<div css={labsSectionHeaderStyles}>
+					<div
+						css={[
+							labsSectionHeaderStyles,
+							!hasPageSkin && labsSectionHeaderStylesFromLeftCol,
+						]}
+					>
 						<LabsSectionHeader
 							title={title}
 							url={url}
 							editionId={editionId}
+							hasPageSkin={hasPageSkin}
 						/>
 					</div>
 				) : (

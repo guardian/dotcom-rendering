@@ -58,6 +58,19 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
 	},
+	{
+		name: "commercial-user-module-liveramp",
+		description:
+			"Hold-back test measuring ad targeting from liveramp's identityLinkIdSystem module integration",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: `2026-01-30`,
+		type: "client",
+		status: "ON",
+		audienceSize: 10 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
