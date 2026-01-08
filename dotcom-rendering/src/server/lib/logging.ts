@@ -24,14 +24,10 @@ const logFields = (logEvent: LoggingEvent): unknown => {
 				? process.env.GU_STAGE.toUpperCase()
 				: 'DEV',
 		'@timestamp': logEvent.startTime,
-		'@version': 1,
 		level: logEvent.level.levelStr,
-		level_value: logEvent.level.level,
 		request,
 		requestId,
 		abTests,
-		// NODE_APP_INSTANCE is set by cluster mode
-		thread_name: process.env.NODE_APP_INSTANCE ?? '0',
 	};
 	// log4js uses any[] to type data but we want to coerce it here
 	// because we now depend on the type to log the result properly
