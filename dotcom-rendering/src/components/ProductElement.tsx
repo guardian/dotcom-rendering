@@ -130,7 +130,7 @@ const ProductSubheading = ({
 	} ${product.secondaryHeadingHtml || ''}`;
 
 	const isSubheading =
-		!!product.primaryHeadingText && !!product.secondaryHeadingText;
+		!!product.primaryHeadingText || !!product.secondaryHeadingText;
 
 	if (!isSubheading) {
 		return null;
