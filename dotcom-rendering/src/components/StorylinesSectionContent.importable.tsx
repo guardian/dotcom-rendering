@@ -76,7 +76,7 @@ const categoryTitleCss = (pillarColour: string) => css`
 	font-weight: 700;
 	color: ${pillarColour};
 	margin: ${space[2]}px 0;
-	padding: ${space[2]}px 0;
+	padding: ${space[1]}px 0;
 	${from.tablet} {
 		margin: 10px;
 	}
