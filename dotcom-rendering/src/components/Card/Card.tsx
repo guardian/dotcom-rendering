@@ -166,6 +166,7 @@ export type Props = {
 	enableHls?: boolean;
 	isInStarRatingVariant?: boolean;
 	starRatingSize?: RatingSizeType;
+	isInOnwardsAbTestVariantStandardCard?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -426,6 +427,7 @@ export const Card = ({
 	enableHls = false,
 	isInStarRatingVariant,
 	starRatingSize = 'small',
+	isInOnwardsAbTestVariantStandardCard,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -673,7 +675,12 @@ export const Card = ({
 	 */
 	const getGapSizes = (): GapSizes => {
 		if (isOnwardContent && !isGallerySecondaryOnward) {
-			if (isMoreGalleriesOnwardContent) {
+			if (
+				isMoreGalleriesOnwardContent ||
+				// This is untidy. If we implement the gallery-style redesign for onwards content
+				// in all articles, we can refactor how we determine gap sizes for onwards cards.
+				isInOnwardsAbTestVariantStandardCard
+			) {
 				return {
 					row: 'small',
 					column: 'small',
