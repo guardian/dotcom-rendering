@@ -3966,6 +3966,9 @@
                 "secondaryHeadingHtml": {
                     "type": "string"
                 },
+                "secondaryHeadingText": {
+                    "type": "string"
+                },
                 "primaryHeadingHtml": {
                     "type": "string"
                 },
