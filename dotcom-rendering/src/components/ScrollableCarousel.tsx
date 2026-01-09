@@ -211,7 +211,7 @@ const generateFixedWidthColumStyles = ({
  * @param {number} visibleCarouselSlidesOnTablet - Number of cards to show at once on tablet.
  * @returns {string} - The CSS styles for the grid layout.
  */
-const generateCarouselColumnStyles = (
+const generateFrontColumnStyles = (
 	totalCards: number,
 	visibleCarouselSlidesOnMobile: number,
 	visibleCarouselSlidesOnTablet: number,
@@ -309,7 +309,7 @@ export const ScrollableCarousel = ({
 		...(kind === CarouselKind.FrontCarousel
 			? [
 					frontCarouselStyles,
-					generateCarouselColumnStyles(
+					generateFrontColumnStyles(
 						carouselLength,
 						visibleCarouselSlidesOnMobile,
 						visibleCarouselSlidesOnTablet,
