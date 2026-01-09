@@ -33,3 +33,17 @@ export const textElement = (html: string): FEElement =>
 		html,
 		elementId: '4',
 	}) as FEElement;
+
+export type ProductCarouselTestElement = FEElement & {
+	_type: 'model.dotcomrendering.pageElements.ProductCarouselElement';
+	matchedProducts: ProductBlockElement[];
+};
+
+export const findCarousel = (
+	elements: FEElement[],
+): ProductCarouselTestElement | undefined =>
+	elements.find(
+		(el): el is ProductCarouselTestElement =>
+			el._type ===
+			'model.dotcomrendering.pageElements.ProductCarouselElement',
+	);

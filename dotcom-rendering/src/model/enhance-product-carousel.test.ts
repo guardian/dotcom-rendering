@@ -7,6 +7,7 @@ import {
 import {
 	atAGlanceHeading,
 	dividerElement,
+	findCarousel,
 	linkElement,
 	productElement,
 	textElement,
@@ -102,13 +103,8 @@ describe('insertCarouselPlaceholder', () => {
 
 		const output = insertCarouselPlaceholder(input);
 
-		expect(
-			output.some(
-				(el) =>
-					el._type ===
-					'model.dotcomrendering.pageElements.ProductCarouselElement',
-			),
-		).toBe(true);
+		const carousel = findCarousel(output);
+		expect(carousel).toBeDefined();
 	});
 
 	it('does nothing when no At a glance section is present', () => {
@@ -124,13 +120,8 @@ describe('insertCarouselPlaceholder', () => {
 
 		const output = insertCarouselPlaceholder(input);
 
-		expect(
-			output.some(
-				(el) =>
-					el._type ===
-					'model.dotcomrendering.pageElements.ProductCarouselElement',
-			),
-		).toBe(false);
+		const carousel = findCarousel(output);
+		expect(carousel).toBeUndefined();
 	});
 });
 
@@ -153,14 +144,8 @@ describe('insertCarouselPlaceholder – edge cases', () => {
 		];
 
 		const output = insertCarouselPlaceholder(input);
-
-		expect(
-			output.some(
-				(el) =>
-					el._type ===
-					'model.dotcomrendering.pageElements.ProductCarouselElement',
-			),
-		).toBe(false);
+		const carousel = findCarousel(output);
+		expect(carousel).toBeUndefined();
 	});
 
 	it('does not insert a carousel if At a glance section has no LinkBlockElements', () => {
@@ -175,13 +160,8 @@ describe('insertCarouselPlaceholder – edge cases', () => {
 
 		const output = insertCarouselPlaceholder(input);
 
-		expect(
-			output.some(
-				(el) =>
-					el._type ===
-					'model.dotcomrendering.pageElements.ProductCarouselElement',
-			),
-		).toBe(false);
+		const carousel = findCarousel(output);
+		expect(carousel).toBeUndefined();
 	});
 
 	it('returns an empty array for empty input', () => {
@@ -214,16 +194,11 @@ describe('enhanceProductCarousel', () => {
 
 		const output = enhanceProductCarousel(allowedPageId)(input);
 
-		expect(
-			output.some(
-				(el) =>
-					el._type ===
-					'model.dotcomrendering.pageElements.ProductCarouselElement',
-			),
-		).toBe(true);
+		const carousel = findCarousel(output);
+		expect(carousel).toBeDefined();
 	});
 
-	it('when two products have the same CTA URL, only including the first occurrence', () => {
+	it('includes only the first product when multiple products share the same CTA URL', () => {
 		const input = [
 			atAGlanceHeading(),
 			linkElement('www.test-product1.com', 'Buy now'),
@@ -238,13 +213,8 @@ describe('enhanceProductCarousel', () => {
 
 		const output = insertCarouselPlaceholder(input);
 
-		const carousel = output.find(
-			(el) =>
-				el._type ===
-				'model.dotcomrendering.pageElements.ProductCarouselElement',
-		);
-
+		const carousel = findCarousel(output);
 		expect(carousel).toBeDefined();
-		expect(carousel.matchedProducts).toHaveLength(3);
+		expect(carousel!.matchedProducts).toHaveLength(3);
 	});
 });
