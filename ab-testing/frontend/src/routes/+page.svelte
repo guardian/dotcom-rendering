@@ -21,11 +21,10 @@
 	</p>
 	<p>
 		Use the test group links in the table to opt in to those test groups,
-		this will override any cookie based test assignment, and you will only
-		be in that test until you opt out.
+		this will override any cookie based test assignment.
 	</p>
 	<p>
-		<a href="https://www.theguardian.com/ab-tests/opt/out"
+		<a href="https://www.theguardian.com/ab-tests/opt-out"
 			>Use this link to opt out of any tests</a
 		>
 	</p>

@@ -247,12 +247,13 @@ Use the opt-in and opt-out URL fragments to force yourself into or out of a test
 
 When opted-in, the test will override any mvt based assignment and you'll only be in the opted-in test group.
 
-When opted-out, you'll return to random/mvt based assignment.
+Once opted-out of any tests you've opted into, you'll be back to your mvt based assignment.
 
-These links are also in the [frontend admin](https://frontend.gutools.co.uk/analytics/ab-testing).
+These links are also in the [frontend admin](https://frontend.gutools.co.uk/analytics/ab-testing) and [CODE frontend admin](https://frontend.code.dev-gutools.co.uk/analytics/ab-testing).
 
--   Opt-in Example on PROD: `https://theguardian.com/ab-tests/opt/in/commercial-test-example:variant`
--   Opt-out on PROD: `https://theguardian.com/ab-tests/opt/out`
+-   Opt-in Example on PROD: `https://theguardian.com/ab-tests/opt-in/commercial-test-example:variant`
+-   Opt-out Example on PROD: `https://theguardian.com/ab-tests/opt-out/commercial-test-example:variant`
+-   Opt-out on PROD: `https://theguardian.com/ab-tests/opt-out`
 
 You can use the same routes on CODE.
 
