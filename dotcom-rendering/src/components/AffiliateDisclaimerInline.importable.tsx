@@ -1,7 +1,10 @@
 import { css } from '@emotion/react';
 import { space, textSans14 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import { useAffiliateDisclaimerEvent } from '../lib/affiliateDisclaimerHelpers';
+import {
+	DisclaimerText,
+	useAffiliateDisclaimerEvent,
+} from '../lib/affiliateDisclaimerHelpers';
 import { palette as themePalette } from '../palette';
 
 const disclaimerInlineStyles = css`
@@ -29,17 +32,6 @@ const disclaimerInlineStyles = css`
 	padding-left: 5px;
 	padding-bottom: ${space[3]}px;
 `;
-
-const DisclaimerText = () => (
-	<p>
-		The Guardian’s journalism is independent. We will earn a commission if
-		you buy something through an affiliate link.&nbsp;
-		<a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">
-			Learn more
-		</a>
-		.
-	</p>
-);
 
 const AffiliateDisclaimerInline = () => {
 	useAffiliateDisclaimerEvent();

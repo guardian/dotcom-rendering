@@ -5,7 +5,10 @@ import {
 	textSans12,
 	textSans15,
 } from '@guardian/source/foundations';
-import { useAffiliateDisclaimerEvent } from '../lib/affiliateDisclaimerHelpers';
+import {
+	DisclaimerText,
+	useAffiliateDisclaimerEvent,
+} from '../lib/affiliateDisclaimerHelpers';
 import { palette as themePalette } from '../palette';
 
 const disclaimerLeftColStyles = css`
@@ -36,17 +39,6 @@ const galleryDisclaimerStyles = css`
 		text-decoration: none;
 	}
 `;
-
-const DisclaimerText = () => (
-	<p>
-		The Guardian’s journalism is independent. We will earn a commission if
-		you buy something through an affiliate link.&nbsp;
-		<a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">
-			Learn more
-		</a>
-		.
-	</p>
-);
 
 const GalleryAffiliateDisclaimer = () => {
 	useAffiliateDisclaimerEvent();
