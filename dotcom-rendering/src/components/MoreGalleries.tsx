@@ -53,10 +53,6 @@ const cardsContainerStyles = css`
 	${from.desktop} {
 		${grid.between('centre-column-start', 'right-column-end')}
 	}
-
-	${from.leftCol} {
-		${grid.between('centre-column-start', 'right-column-end')}
-	}
 `;
 
 const standardCardStyles = css`
