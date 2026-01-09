@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	palette as sourcePalette,
 	space,
 	textSansBold14,
 	textSansBold15,
@@ -8,6 +9,7 @@ import {
 	textSansBold28,
 	visuallyHidden,
 } from '@guardian/source/foundations';
+import { getContrast } from '../lib/colour';
 import { palette } from '../palette';
 
 const containerCss = css`
@@ -53,7 +55,7 @@ const labelCss = css`
 const numberCss = css`
 	${textSansBold20};
 	grid-area: home-stat;
-	color: var(--match-stat-team-colour);
+	color: ${palette('--football-match-stat-text')};
 `;
 
 const largeNumberCss = css`
@@ -79,6 +81,27 @@ const barCss = css`
 	background-color: var(--match-stat-team-colour);
 	border-radius: 8px;
 `;
+
+const decideContrastRequired = (colour: string) => {
+	// https://www.w3.org/WAI/WCAG21/Understanding/non-text-contrast.html
+	const minimumContrast = 3.1;
+
+	const backgroundLight = sourcePalette.neutral[97];
+	const backgroundDark = sourcePalette.neutral[10];
+
+	if (getContrast(colour, backgroundLight) < minimumContrast) return 'light';
+	if (getContrast(colour, backgroundDark) < minimumContrast) return 'dark';
+
+	return 'none';
+};
+
+const addContrastingBorderCss = (colour: string) => {
+	const mode = decideContrastRequired(colour);
+	if (mode === 'none') return null;
+	return css`
+		border: 1px solid ${palette(`--football-match-stat-contrast-${mode}`)};
+	`;
+};
 
 type MatchStatistic = {
 	teamName: string;
@@ -146,14 +169,14 @@ export const FootballMatchStat = ({
 			</div>
 			<div aria-hidden="true" css={chartCss}>
 				<div
-					css={barCss}
+					css={[barCss, addContrastingBorderCss(home.teamColour)]}
 					style={{
 						'--match-stat-percentage': `${homePercentage}%`,
 						'--match-stat-team-colour': home.teamColour,
 					}}
 				></div>
 				<div
-					css={barCss}
+					css={[barCss, addContrastingBorderCss(away.teamColour)]}
 					style={{
 						'--match-stat-percentage': `${awayPercentage}%`,
 						'--match-stat-team-colour': away.teamColour,
