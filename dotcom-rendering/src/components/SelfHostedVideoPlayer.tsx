@@ -32,13 +32,13 @@ const videoStyles = (
 	display: block;
 	height: auto;
 	width: 100%;
-	${letterboxed ||
-	(!isFeatureCard &&
-		css`
-			max-height: 100vh;
-			max-height: 100svh;
-		`)}
+	${letterboxed &&
+	css`
+		max-height: 100vh;
+		max-height: 100svh;
+	`}
 	cursor: pointer;
+
 	/* Prevents CLS by letting the browser know the space the video will take up. */
 	aspect-ratio: ${aspectRatio};
 

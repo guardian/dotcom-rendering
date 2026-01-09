@@ -73,11 +73,10 @@ const figureStyles = (
 	height: 100%;
 
 	${letterboxed &&
-	!isFeatureCard &&
 	css`
-		max-width: 100%;
 		max-height: 100vh;
 		max-height: 100svh;
+		max-width: 100%;
 
 		${from.tablet} {
 			${typeof containerAspectRatio === 'number' &&
@@ -85,8 +84,7 @@ const figureStyles = (
 		}
 	`}
 
-	${letterboxed &&
-	isFeatureCard &&
+	${isFeatureCard &&
 	css`
 		width: 100%;
 		max-width: 100%;
