@@ -21,7 +21,7 @@ jobs:
       FASTLY_API_TOKEN: ${{ secrets.FASTLY_PROD_API_TOKEN }}
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
@@ -58,7 +58,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
@@ -82,7 +82,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
@@ -145,7 +145,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           persist-credentials: false
