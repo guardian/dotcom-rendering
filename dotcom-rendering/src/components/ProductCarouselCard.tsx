@@ -82,7 +82,7 @@ export const ProductCarouselCard = ({
 }: ProductCarouselCardProps) => {
 	const hasHeading = !!product.primaryHeadingHtml;
 	const firstCta = product.productCtas[0];
-	const h2Id = product.h2Id;
+	const headingId = product.h2Id;
 	const productAndBrandName = [product.brandName, product.productName]
 		.filter(Boolean)
 		.join(' ');
@@ -101,11 +101,11 @@ export const ProductCarouselCard = ({
 				)}
 			</div>
 			<div css={readMoreArea}>
-				{!isUndefined(h2Id) &&
+				{!isUndefined(headingId) &&
 					hasHeading &&
 					product.displayType !== 'ProductCardOnly' && (
 						<a
-							href={`#${h2Id}`}
+							href={`#${headingId}`}
 							onFocus={(event) => event.stopPropagation()}
 							css={readMoreCta}
 						>
