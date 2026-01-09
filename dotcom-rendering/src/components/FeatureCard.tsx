@@ -621,6 +621,11 @@ export const FeatureCard = ({
 										overlayContainerStyles,
 										isImmersive &&
 											immersiveOverlayContainerStyles,
+										// The whole card is clickable on cinemagraphs
+										media.type === 'cinemagraph' &&
+											css`
+												pointer-events: none;
+											`,
 									]}
 								>
 									{mainMedia?.type === 'Audio' &&
