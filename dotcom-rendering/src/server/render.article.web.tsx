@@ -166,8 +166,7 @@ window.twttr = (function(d, s, id) {
 
 	const { canonicalUrl, webPublicationDate } = frontendData;
 
-	// Interactive dark mode support launched with full DCAR on June 25th 2025
-	const isBeforeInteractiveDarkModeSupportLaunch =
+	const isBeforeInteractiveDarkModeSupport =
 		Date.parse(webPublicationDate) < Date.parse('2026-01-13T00:00:00Z');
 
 	const pageHtml = htmlPageTemplate({
@@ -192,9 +191,9 @@ window.twttr = (function(d, s, id) {
 		hasLiveBlogTopAd: !!frontendData.config.hasLiveBlogTopAd,
 		hasSurveyAd: !!frontendData.config.hasSurveyAd,
 		onlyLightColourScheme:
-			design === ArticleDesign.FullPageInteractive ||
-			(design === ArticleDesign.Interactive &&
-				isBeforeInteractiveDarkModeSupportLaunch),
+			(design === ArticleDesign.FullPageInteractive ||
+				design === ArticleDesign.Interactive) &&
+			isBeforeInteractiveDarkModeSupport,
 	});
 
 	return { html: pageHtml, prefetchScripts };
