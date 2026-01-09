@@ -18,7 +18,6 @@ import type { Props as CardProps } from './Card/Card';
 import { ScrollableCarousel } from './ScrollableCarousel';
 
 type Props = {
-	serverTime?: number;
 	trails: TrailType[];
 	discussionApiUrl: string;
 	heading: string;
@@ -120,7 +119,6 @@ export const ScrollableSmallOnwards = (props: Props) => {
 										props.discussionApiUrl,
 										props.onwardsSource,
 										props.format,
-										props.serverTime,
 									)}
 									showTopBarDesktop={desktopBottomCards.includes(
 										index,
@@ -194,12 +192,10 @@ const getDefaultCardProps = (
 	discussionApiUrl: string,
 	onwardsSource: OnwardsSource,
 	format: ArticleFormat,
-	serverTime?: number,
 ) => {
 	const defaultProps: CardProps = {
 		linkTo: trail.url,
 		imageLoading: 'lazy',
-		serverTime,
 		format: trail.format,
 		contextFormat: format,
 		containerType: 'scrollable/small',

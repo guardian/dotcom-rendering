@@ -14,7 +14,6 @@ type Props = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	serverTime?: number;
 };
 
 /*ø
@@ -32,14 +31,12 @@ const Snap100 = ({
 	snaps,
 	containerPalette,
 	showAge,
-	serverTime,
 	imageLoading,
 }: {
 	snaps: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	serverTime?: number;
 }) => {
 	if (!snaps[0]) return null;
 	return (
@@ -50,7 +47,6 @@ const Snap100 = ({
 					containerPalette={containerPalette}
 					containerType="dynamic/package"
 					showAge={showAge}
-					serverTime={serverTime}
 					headlineSizes={{
 						desktop: 'small',
 						tablet: 'xxsmall',
@@ -71,14 +67,12 @@ const Card100 = ({
 	cards,
 	containerPalette,
 	showAge,
-	serverTime,
 	imageLoading,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	serverTime?: number;
 }) => {
 	if (!cards[0]) return null;
 
@@ -90,7 +84,6 @@ const Card100 = ({
 					containerPalette={containerPalette}
 					containerType="dynamic/package"
 					showAge={showAge}
-					serverTime={serverTime}
 					headlineSizes={
 						cards[0].isBoosted
 							? {
@@ -117,14 +110,12 @@ const Card75_Card25 = ({
 	cards,
 	containerPalette,
 	showAge,
-	serverTime,
 	imageLoading,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	serverTime?: number;
 }) => {
 	if (cards.length < 2) return null;
 	const card75 = cards.slice(0, 1);
@@ -139,7 +130,6 @@ const Card75_Card25 = ({
 						containerPalette={containerPalette}
 						containerType="dynamic/package"
 						showAge={showAge}
-						serverTime={serverTime}
 						headlineSizes={{ desktop: 'small' }}
 						mediaPositionOnDesktop="right"
 						mediaPositionOnMobile="bottom"
@@ -161,7 +151,6 @@ const Card75_Card25 = ({
 						containerPalette={containerPalette}
 						containerType="dynamic/package"
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 				</LI>
@@ -174,7 +163,6 @@ const Card25_Card25_Card25_Card25 = ({
 	cards,
 	containerPalette,
 	showAge,
-	serverTime,
 	showImage = true,
 	padBottom,
 	imageLoading,
@@ -183,7 +171,6 @@ const Card25_Card25_Card25_Card25 = ({
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	serverTime?: number;
 	showImage?: boolean;
 	padBottom?: boolean;
 }) => {
@@ -201,7 +188,6 @@ const Card25_Card25_Card25_Card25 = ({
 							containerPalette={containerPalette}
 							containerType="dynamic/package"
 							showAge={showAge}
-							serverTime={serverTime}
 							supportingContent={limitSupportingContent(card)}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
@@ -217,14 +203,12 @@ const Card25_Card25_Card25_ColumnOfTwo25 = ({
 	cards,
 	containerPalette,
 	showAge,
-	serverTime,
 	imageLoading,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	serverTime?: number;
 }) => {
 	const bigs = cards.slice(0, 3);
 	const remaining = cards.slice(3);
@@ -244,7 +228,6 @@ const Card25_Card25_Card25_ColumnOfTwo25 = ({
 							containerPalette={containerPalette}
 							containerType="dynamic/package"
 							showAge={showAge}
-							serverTime={serverTime}
 							supportingContent={limitSupportingContent(card)}
 							imageLoading={imageLoading}
 						/>
@@ -265,7 +248,6 @@ const Card25_Card25_Card25_ColumnOfTwo25 = ({
 									containerPalette={containerPalette}
 									containerType="dynamic/package"
 									showAge={showAge}
-									serverTime={serverTime}
 									supportingContent={limitSupportingContent(
 										card,
 									)}
@@ -285,14 +267,12 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 	cards,
 	containerPalette,
 	showAge,
-	serverTime,
 	imageLoading,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	serverTime?: number;
 }) => {
 	const bigs = cards.slice(0, 2);
 	const remaining = cards.slice(2, 6);
@@ -312,7 +292,6 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 							containerPalette={containerPalette}
 							containerType="dynamic/package"
 							showAge={showAge}
-							serverTime={serverTime}
 							supportingContent={limitSupportingContent(card)}
 							imageLoading={imageLoading}
 						/>
@@ -339,7 +318,6 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 									containerPalette={containerPalette}
 									containerType="dynamic/package"
 									showAge={showAge}
-									serverTime={serverTime}
 									supportingContent={limitSupportingContent(
 										card,
 									)}
@@ -359,14 +337,12 @@ const Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25 = ({
 	cards,
 	containerPalette,
 	showAge,
-	serverTime,
 	imageLoading,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	serverTime?: number;
 }) => {
 	const bigs = cards.slice(0, 1);
 	const remaining = cards.slice(1, 7);
@@ -381,7 +357,6 @@ const Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25 = ({
 							containerPalette={containerPalette}
 							containerType="dynamic/package"
 							showAge={showAge}
-							serverTime={serverTime}
 							supportingContent={limitSupportingContent(card)}
 							imageLoading={imageLoading}
 						/>
@@ -408,7 +383,6 @@ const Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25 = ({
 									containerPalette={containerPalette}
 									containerType="dynamic/package"
 									showAge={showAge}
-									serverTime={serverTime}
 									supportingContent={limitSupportingContent(
 										card,
 									)}
@@ -428,14 +402,12 @@ const Card75_ColumnOfCards25 = ({
 	cards,
 	containerPalette,
 	showAge,
-	serverTime,
 	imageLoading,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	serverTime?: number;
 }) => {
 	const card75 = cards.slice(0, 1);
 	const remaining = cards.slice(1, 4);
@@ -449,7 +421,6 @@ const Card75_ColumnOfCards25 = ({
 						containerPalette={containerPalette}
 						containerType="dynamic/package"
 						showAge={showAge}
-						serverTime={serverTime}
 						headlineSizes={{ desktop: 'medium', tablet: 'small' }}
 						mediaPositionOnDesktop="bottom"
 						mediaPositionOnMobile="bottom"
@@ -481,7 +452,6 @@ const Card75_ColumnOfCards25 = ({
 									containerPalette={containerPalette}
 									containerType="dynamic/package"
 									showAge={showAge}
-									serverTime={serverTime}
 									image={
 										shouldShowImage ? card.image : undefined
 									}
@@ -512,7 +482,6 @@ export const DynamicPackage = ({
 	groupedTrails,
 	containerPalette,
 	showAge,
-	serverTime,
 	imageLoading,
 }: Props) => {
 	let layout:
@@ -603,14 +572,12 @@ export const DynamicPackage = ({
 						snaps={firstSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 					<Card100
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 				</>
@@ -622,7 +589,6 @@ export const DynamicPackage = ({
 						snaps={firstSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 					{/* Card75_Card25 does not support the first card being boosted - on Frontend the 75% card would
@@ -632,7 +598,6 @@ export const DynamicPackage = ({
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 				</>
@@ -644,21 +609,18 @@ export const DynamicPackage = ({
 						snaps={firstSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 					<Card100
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 					<Card25_Card25_Card25_Card25
 						cards={thirdSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 				</>
@@ -670,14 +632,12 @@ export const DynamicPackage = ({
 						snaps={firstSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 					<Card75_ColumnOfCards25
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 				</>
@@ -689,21 +649,18 @@ export const DynamicPackage = ({
 						snaps={firstSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 					<Card100
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 					<Card25_Card25_Card25_Card25
 						cards={thirdSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 				</>
@@ -715,21 +672,18 @@ export const DynamicPackage = ({
 						snaps={firstSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 					<Card100
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 					<Card25_Card25_Card25_ColumnOfTwo25
 						cards={thirdSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 				</>
@@ -741,21 +695,18 @@ export const DynamicPackage = ({
 						snaps={firstSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 					<Card100
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 					<Card25_Card25_ColumnOfTwo25_ColumnOfTwo25
 						cards={thirdSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 				</>
@@ -767,21 +718,18 @@ export const DynamicPackage = ({
 						snaps={firstSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 					<Card100
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 					<Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25
 						cards={thirdSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 				</>
@@ -793,21 +741,18 @@ export const DynamicPackage = ({
 						snaps={firstSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 					<Card100
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 					<Card25_Card25_Card25_Card25
 						cards={thirdSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						padBottom={true}
 						imageLoading={imageLoading}
 					/>
@@ -815,7 +760,6 @@ export const DynamicPackage = ({
 						cards={fourthSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						showImage={false}
 						imageLoading={imageLoading}
 					/>

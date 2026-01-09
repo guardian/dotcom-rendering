@@ -82,7 +82,6 @@ export type Props = {
 	format: ArticleFormat;
 	/** The format of the article holding the card */
 	contextFormat?: ArticleFormat;
-	serverTime?: number;
 	headlineText: string;
 	headlineSizes?: ResponsiveFontSize;
 	showQuotedHeadline?: boolean;
@@ -410,7 +409,6 @@ export const Card = ({
 	liveUpdatesPosition = 'inner',
 	onwardsSource,
 	showVideo = true,
-	serverTime,
 	isTagPage = false,
 	aspectRatio,
 	index = 0,
@@ -468,7 +466,6 @@ export const Card = ({
 					isWithinTwelveHours: withinTwelveHours,
 				}}
 				showClock={showClock}
-				serverTime={serverTime}
 				isTagPage={isTagPage}
 			/>
 		);
@@ -1313,7 +1310,6 @@ export const Card = ({
 												: supportingContentAlignment
 										}
 										containerPalette={containerPalette}
-										serverTime={serverTime}
 										displayHeader={isFlexibleContainer}
 										directionOnMobile={
 											isFlexibleContainer
@@ -1371,7 +1367,6 @@ export const Card = ({
 									: supportingContentAlignment
 							}
 							containerPalette={containerPalette}
-							serverTime={serverTime}
 							displayHeader={isFlexibleContainer}
 							directionOnMobile={'horizontal'}
 						></LatestLinks>

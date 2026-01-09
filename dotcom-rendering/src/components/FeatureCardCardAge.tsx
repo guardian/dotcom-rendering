@@ -4,13 +4,11 @@ import { CardAge } from './Card/components/CardAge';
 
 type Props = {
 	showClock: boolean;
-	serverTime?: number;
 	webPublicationDate: string;
 };
 
 export const FeatureCardCardAge = ({
 	showClock,
-	serverTime,
 	webPublicationDate,
 }: Props) => {
 	const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
@@ -22,7 +20,6 @@ export const FeatureCardCardAge = ({
 					isWithinTwelveHours: true,
 				}}
 				showClock={showClock}
-				serverTime={serverTime}
 				isTagPage={false}
 				colour={palette('--feature-card-footer-text')}
 			/>

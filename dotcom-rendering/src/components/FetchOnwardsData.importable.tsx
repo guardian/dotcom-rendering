@@ -26,7 +26,6 @@ type Props = {
 	onwardsSource: OnwardsSource;
 	format: ArticleFormat;
 	discussionApiUrl: string;
-	serverTime?: number;
 	renderingTarget: RenderingTarget;
 	isAdFreeUser: boolean;
 	containerPosition: string;
@@ -68,7 +67,6 @@ export const FetchOnwardsData = ({
 	onwardsSource,
 	format,
 	discussionApiUrl,
-	serverTime,
 	renderingTarget,
 	isAdFreeUser,
 	containerPosition,
@@ -132,7 +130,6 @@ export const FetchOnwardsData = ({
 		<div ref={setIsInViewRef} css={minHeight(format.design)}>
 			{format.design === ArticleDesign.Gallery ? (
 				<ScrollableSmallOnwards
-					serverTime={serverTime}
 					trails={trails({ withMasterImage: true })}
 					discussionApiUrl={discussionApiUrl}
 					heading={data.heading || data.displayname}
@@ -154,7 +151,6 @@ export const FetchOnwardsData = ({
 							: 'compact'
 					}
 					discussionApiUrl={discussionApiUrl}
-					serverTime={serverTime}
 					renderingTarget={renderingTarget}
 					isInStarRatingVariant={isInStarRatingVariant}
 				/>

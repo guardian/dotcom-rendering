@@ -1,6 +1,7 @@
-import { isString, isUndefined } from '@guardian/libs';
+import { isString } from '@guardian/libs';
 import { getEditionFromId } from '../lib/edition';
 import { useConfig } from './ConfigContext';
+import { useDateTime } from './DateTimeContext';
 import { Island } from './Island';
 import { RelativeTime } from './RelativeTime.importable';
 
@@ -14,11 +15,9 @@ type Props = {
 type DisplayProps =
 	| {
 			display?: 'absolute';
-			serverTime?: never;
 	  }
 	| {
 			display: 'relative';
-			serverTime?: number;
 	  };
 
 const formatWeekday = (date: Date, locale: string, timeZone: string) =>
@@ -57,10 +56,10 @@ export const DateTime = ({
 	showDate,
 	showTime,
 	display = 'absolute',
-	serverTime,
 }: Props & DisplayProps) => {
 	const { editionId } = useConfig();
 	const { dateLocale, timeZone } = getEditionFromId(editionId);
+	const serverTime = useDateTime();
 
 	/**
 	 * Server time (if set) is rounded down to the previous minute to ensure
@@ -70,9 +69,9 @@ export const DateTime = ({
 	 *
 	 * [1] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#the_epoch_timestamps_and_invalid_date
 	 */
-	const now = isUndefined(serverTime)
-		? MAX_DATE
-		: Math.floor(serverTime / ONE_MINUTE) * ONE_MINUTE;
+	const now = serverTime
+		? Math.floor(serverTime / ONE_MINUTE) * ONE_MINUTE
+		: MAX_DATE;
 	const then = date.getTime();
 
 	return display === 'relative' ? (

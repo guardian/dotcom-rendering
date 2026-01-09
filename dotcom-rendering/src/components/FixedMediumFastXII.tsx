@@ -9,14 +9,12 @@ type Props = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	serverTime?: number;
 };
 
 export const FixedMediumFastXII = ({
 	trails,
 	containerPalette,
 	showAge,
-	serverTime,
 	imageLoading,
 }: Props) => {
 	const firstSlice25 = trails.slice(0, 4);
@@ -37,7 +35,6 @@ export const FixedMediumFastXII = ({
 								trail={trail}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								serverTime={serverTime}
 								imageLoading={imageLoading}
 							/>
 						</LI>
@@ -57,7 +54,6 @@ export const FixedMediumFastXII = ({
 								trail={trail}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								serverTime={serverTime}
 							/>
 						</LI>
 					);

@@ -41,7 +41,6 @@ type Props = {
 	containerType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	serverTime?: number;
 	aspectRatio: AspectRatio;
 	sectionId: string;
 	frontId?: string;
@@ -57,7 +56,6 @@ export const DecideContainer = ({
 	containerType,
 	containerPalette,
 	showAge,
-	serverTime,
 	imageLoading,
 	aspectRatio,
 	sectionId,
@@ -74,7 +72,6 @@ export const DecideContainer = ({
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -84,7 +81,6 @@ export const DecideContainer = ({
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -94,7 +90,6 @@ export const DecideContainer = ({
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -104,7 +99,6 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -114,7 +108,6 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -124,7 +117,6 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -134,7 +126,6 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -144,7 +135,6 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -154,7 +144,6 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -164,7 +153,6 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -174,7 +162,6 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -184,7 +171,6 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -194,7 +180,6 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -204,7 +189,6 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -214,7 +198,6 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -224,7 +207,6 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -248,7 +230,6 @@ export const DecideContainer = ({
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
@@ -262,7 +243,6 @@ export const DecideContainer = ({
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
@@ -279,7 +259,6 @@ export const DecideContainer = ({
 						imageLoading={imageLoading}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
 						isInStarRatingVariant={isInStarRatingVariant}
@@ -294,7 +273,6 @@ export const DecideContainer = ({
 						imageLoading={imageLoading}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
 						isInStarRatingVariant={isInStarRatingVariant}
@@ -307,7 +285,6 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					isInStarRatingVariant={isInStarRatingVariant}
@@ -320,7 +297,6 @@ export const DecideContainer = ({
 						trails={trails}
 						imageLoading={imageLoading}
 						containerPalette={containerPalette}
-						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						collectionId={collectionId}
 						isInStarRatingVariant={isInStarRatingVariant}
@@ -332,7 +308,6 @@ export const DecideContainer = ({
 				<StaticFeatureTwo
 					trails={trails}
 					containerPalette={containerPalette}
-					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}

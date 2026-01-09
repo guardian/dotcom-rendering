@@ -339,7 +339,6 @@ interface Props {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
-	serverTime?: number;
 }
 
 interface WebProps extends Props {
@@ -352,7 +351,7 @@ interface AppProps extends Props {
 }
 
 export const StandardLayout = (props: WebProps | AppProps) => {
-	const { article, format, renderingTarget, serverTime } = props;
+	const { article, format, renderingTarget } = props;
 	const {
 		config: { isPaidContent, host, hasSurveyAd },
 		editionId,
@@ -888,7 +887,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
-								serverTime={serverTime}
 								renderingTarget={renderingTarget}
 								isInStarRatingVariant={isInStarRatingVariant}
 							/>
@@ -913,7 +911,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
-						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						webURL={article.webURL}
 						isInStarRatingVariant={isInStarRatingVariant}

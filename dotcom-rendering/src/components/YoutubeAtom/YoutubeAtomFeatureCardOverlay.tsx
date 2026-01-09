@@ -133,7 +133,6 @@ type Props = {
 	isVideoArticle?: boolean;
 	webPublicationDate?: string;
 	showClock?: boolean;
-	serverTime?: number;
 	linkTo?: string;
 	discussionApiUrl?: string;
 	discussionId?: string;
@@ -160,7 +159,6 @@ export const YoutubeAtomFeatureCardOverlay = ({
 	isVideoArticle,
 	webPublicationDate,
 	showClock,
-	serverTime,
 	linkTo,
 	discussionId,
 	discussionApiUrl,
@@ -172,9 +170,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 	const hasDuration = !isUndefined(duration) && duration > 0;
 
 	const showCardAge =
-		webPublicationDate !== undefined &&
-		showClock !== undefined &&
-		serverTime === undefined;
+		webPublicationDate !== undefined && showClock !== undefined;
 
 	const showCommentCount =
 		linkTo !== undefined &&
@@ -263,7 +259,6 @@ export const YoutubeAtomFeatureCardOverlay = ({
 								<FeatureCardCardAge
 									webPublicationDate={webPublicationDate}
 									showClock={!!showClock}
-									serverTime={serverTime}
 								/>
 							) : undefined
 						}

@@ -14,7 +14,6 @@ type Story = StoryObj<typeof meta>;
 
 export const ScrollableSmallOnwardsStory = {
 	args: {
-		serverTime: new Date('2022-09-01T20:00:25.000Z').getTime(),
 		discussionApiUrl:
 			'https://discussion.code.dev-theguardian.com/discussion-api',
 		heading: 'More on this story',

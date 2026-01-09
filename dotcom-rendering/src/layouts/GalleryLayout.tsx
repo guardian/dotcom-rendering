@@ -55,7 +55,6 @@ import { BannerWrapper, Stuck } from './lib/stickiness';
 interface Props {
 	gallery: Gallery;
 	renderingTarget: RenderingTarget;
-	serverTime?: number;
 }
 
 interface WebProps extends Props {
@@ -77,7 +76,7 @@ const headerStyles = css`
 `;
 
 export const GalleryLayout = (props: WebProps | AppProps) => {
-	const { gallery, renderingTarget, serverTime } = props;
+	const { gallery, renderingTarget } = props;
 
 	const {
 		config: {
@@ -201,7 +200,6 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						ajaxUrl={gallery.frontendData.config.ajaxUrl}
 						guardianBaseUrl={gallery.frontendData.guardianBaseURL}
 						discussionApiUrl={discussionApiUrl}
-						serverTime={serverTime}
 						isAdFreeUser={frontendData.isAdFreeUser}
 						format={format}
 					/>
@@ -214,7 +212,6 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 				display={format.display}
 			/>
 			<ScrollableSmallOnwards
-				serverTime={serverTime}
 				trails={gallery.storyPackage?.trails ?? []}
 				discussionApiUrl={discussionApiUrl}
 				format={format}
@@ -238,7 +235,6 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					editionId={frontendData.editionId}
 					shortUrlId={frontendData.config.shortUrlId}
 					discussionApiUrl={frontendData.config.discussionApiUrl}
-					serverTime={serverTime}
 					renderingTarget={renderingTarget}
 					webURL={frontendData.webURL}
 				/>

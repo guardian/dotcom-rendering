@@ -56,7 +56,6 @@ export type Props = {
 	isVideoArticle?: boolean;
 	webPublicationDate?: string;
 	showClock?: boolean;
-	serverTime?: number;
 	linkTo?: string;
 	discussionApiUrl?: string;
 	discussionId?: string;
@@ -111,7 +110,6 @@ export const YoutubeAtom = ({
 	isVideoArticle,
 	webPublicationDate,
 	showClock,
-	serverTime,
 	linkTo,
 	discussionApiUrl,
 	discussionId,
@@ -260,7 +258,6 @@ export const YoutubeAtom = ({
 								isVideoArticle={isVideoArticle}
 								webPublicationDate={webPublicationDate}
 								showClock={!!showClock}
-								serverTime={serverTime}
 								linkTo={linkTo}
 								discussionId={discussionId}
 								discussionApiUrl={discussionApiUrl}

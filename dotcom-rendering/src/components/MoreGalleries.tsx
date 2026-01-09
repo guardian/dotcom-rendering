@@ -15,7 +15,6 @@ import { Card } from './Card/Card';
 import type { Props as CardProps } from './Card/Card';
 
 type Props = {
-	serverTime?: number;
 	trails: TrailType[];
 	discussionApiUrl: string;
 	guardianBaseUrl: string;
@@ -164,7 +163,6 @@ const getDefaultCardProps = (
 	trail: TrailType,
 	discussionApiUrl: string,
 	format: ArticleFormat,
-	serverTime?: number,
 ) => {
 	const defaultProps: CardProps = {
 		linkTo: trail.url,
@@ -191,7 +189,6 @@ const getDefaultCardProps = (
 		mainMedia: trail.mainMedia,
 		isExternalLink: false,
 		branding: trail.branding,
-		serverTime,
 		imageLoading: 'lazy',
 		trailText: trail.trailText,
 		showAge: false,
@@ -239,7 +236,6 @@ export const MoreGalleries = (props: Props) => {
 						firstTrail,
 						props.discussionApiUrl,
 						props.format,
-						props.serverTime,
 					)}
 				/>
 				<StraightLines
@@ -262,7 +258,6 @@ export const MoreGalleries = (props: Props) => {
 									trail,
 									props.discussionApiUrl,
 									props.format,
-									props.serverTime,
 								)}
 								mediaSize="medium"
 							/>

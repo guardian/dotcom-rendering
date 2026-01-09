@@ -9,7 +9,6 @@ type Props = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	serverTime?: number;
 };
 
 /**
@@ -20,7 +19,6 @@ export const FixedSmallSlowVMPU = ({
 	trails,
 	containerPalette,
 	showAge,
-	serverTime,
 	imageLoading,
 }: Props) => (
 	<UL direction="row" padBottom={true}>
@@ -36,7 +34,6 @@ export const FixedSmallSlowVMPU = ({
 						trail={card}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 				</LI>

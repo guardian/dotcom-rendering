@@ -39,8 +39,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 		theme: article.theme,
 	};
 
-	const serverTime = article.serverTime;
-
 	switch (article.display) {
 		case ArticleDisplay.Immersive: {
 			switch (article.design) {
@@ -59,7 +57,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 				}
@@ -75,7 +72,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 				case ArticleDesign.Comment:
@@ -86,7 +82,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 				case ArticleDesign.Picture:
@@ -95,7 +90,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 				default:
@@ -104,7 +98,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 			}
@@ -118,7 +111,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 
@@ -138,7 +130,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 				case ArticleDesign.Comment:
@@ -149,7 +140,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 				case ArticleDesign.NewsletterSignup:
@@ -160,7 +150,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 						<GalleryLayout
 							gallery={article}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 				default:
@@ -169,7 +158,6 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 			}
@@ -184,8 +172,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 		theme: article.theme,
 	};
 
-	const serverTime = article.serverTime;
-
 	switch (article.display) {
 		case ArticleDisplay.Immersive: {
 			switch (article.design) {
@@ -206,7 +192,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							format={format}
 							NAV={NAV}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 				}
@@ -223,7 +208,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							NAV={NAV}
 							format={format}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 				case ArticleDesign.Comment:
@@ -235,7 +219,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							NAV={NAV}
 							format={format}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 				case ArticleDesign.Picture:
@@ -245,7 +228,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							NAV={NAV}
 							format={format}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 				default:
@@ -255,7 +237,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							NAV={NAV}
 							format={format}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 			}
@@ -270,7 +251,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							NAV={NAV}
 							format={format}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 				case ArticleDesign.FullPageInteractive: {
@@ -291,7 +271,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							NAV={NAV}
 							format={format}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 				case ArticleDesign.Comment:
@@ -303,7 +282,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							NAV={NAV}
 							format={format}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 				case ArticleDesign.NewsletterSignup:
@@ -313,7 +291,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							NAV={NAV}
 							format={format}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 				case ArticleDesign.Audio:
@@ -323,7 +300,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							format={format}
 							NAV={NAV}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 				case ArticleDesign.Crossword:
@@ -340,7 +316,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							gallery={article}
 							NAV={NAV}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 				default:
@@ -350,7 +325,6 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							NAV={NAV}
 							format={format}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					);
 			}
