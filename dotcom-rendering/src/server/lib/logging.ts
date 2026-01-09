@@ -1,7 +1,8 @@
 import path from 'node:path';
-import type { LoggingEvent } from 'log4js';
+import { isObject } from '@guardian/libs';
+import type { Configuration, Layout, LoggingEvent } from 'log4js';
 import { addLayout, configure, getLogger, shutdown } from 'log4js';
-import { loggingStore } from './logging-store';
+import { type DCRLoggingStore, loggingStore } from './logging-store';
 
 const logName = `dotcom-rendering.log`;
 
@@ -11,7 +12,10 @@ const logLocation =
 		? `/var/log/dotcom-rendering/${logName}`
 		: `${path.resolve('logs')}/${logName}`;
 
-const logFields = (logEvent: LoggingEvent): unknown => {
+type LogFields = Partial<DCRLoggingStore> &
+	Record<string | number | symbol, unknown>;
+
+const logFields = (logEvent: LoggingEvent): LogFields => {
 	const { request, requestId, abTests } = loggingStore.getStore() ?? {
 		request: { pageId: 'outside-request-context' },
 	};
@@ -47,13 +51,39 @@ const logFields = (logEvent: LoggingEvent): unknown => {
 	};
 };
 
+const consoleLayout: Layout = {
+	type: 'pattern',
+	pattern: '%d{hh:mm:ss.SSS} %[[%p]%] - %x{message}',
+	tokens: {
+		message: (logEvent: LoggingEvent) => {
+			const fields = logFields(logEvent);
+
+			if (fields.request !== undefined && isObject(fields.response)) {
+				const status =
+					typeof fields.response.status === 'number'
+						? fields.response.status
+						: '[status missing]';
+				const {
+					platform = '[platform missing]',
+					pageId = '[pageId missing]',
+					type: requestType = '[request type missing]',
+				} = fields.request;
+
+				return `${status} response for ${platform} ${requestType}: ${pageId}`;
+			} else {
+				return logEvent.data;
+			}
+		},
+	},
+};
+
 addLayout('json', () => {
 	return (logEvent) => {
 		return JSON.stringify(logFields(logEvent));
 	};
 });
 
-const disableLog4js = {
+const disableLog4js: Configuration = {
 	appenders: {
 		console: { type: 'console' },
 	},
@@ -63,9 +93,12 @@ const disableLog4js = {
 	},
 };
 
-const enableLog4j = {
+const enableLog4js: Configuration = {
 	appenders: {
-		console: { type: 'console' },
+		console: {
+			type: 'console',
+			layout: consoleLayout,
+		},
 		fileAppender: {
 			type: 'file',
 			filename: logLocation,
@@ -92,12 +125,6 @@ const enableLog4j = {
 	disableClustering: true,
 };
 
-if (process.env.DISABLE_LOGGING_AND_METRICS === 'true') {
-	configure(disableLog4js);
-} else {
-	configure(enableLog4j);
-}
-
 // We do this to ensure no memory leaks during development as hot reloading
 // doesn't clear up old listeners.
 if (process.env.NODE_ENV === 'development') {
@@ -108,6 +135,12 @@ if (process.env.NODE_ENV === 'development') {
 			console.log(e);
 		}
 	});
+}
+
+if (process.env.DISABLE_LOGGING_AND_METRICS === 'true') {
+	configure(disableLog4js);
+} else {
+	configure(enableLog4js);
 }
 
 export const logger =
