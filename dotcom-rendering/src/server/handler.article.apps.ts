@@ -5,12 +5,9 @@ import { validateAsBlock, validateAsFEArticle } from '../model/validate';
 import { enhanceArticleType } from '../types/article';
 import type { FEBlocksRequest } from '../types/frontend';
 import { makePrefetchHeader } from './lib/header';
-import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderAppsBlocks, renderArticle } from './render.article.apps';
 
 export const handleAppsArticle: RequestHandler = ({ body }, res) => {
-	recordTypeAndPlatform('article', 'apps');
-
 	const frontendData = validateAsFEArticle(body);
 	const article = enhanceArticleType(frontendData, 'Apps');
 	const { html, prefetchScripts } = renderArticle(article);
@@ -20,8 +17,6 @@ export const handleAppsArticle: RequestHandler = ({ body }, res) => {
 };
 
 export const handleAppsInteractive: RequestHandler = ({ body }, res) => {
-	recordTypeAndPlatform('interactive', 'app');
-
 	const frontendData = validateAsFEArticle(body);
 	const article = enhanceArticleType(frontendData, 'Apps');
 	const { html, prefetchScripts } = renderArticle(article);
@@ -30,7 +25,6 @@ export const handleAppsInteractive: RequestHandler = ({ body }, res) => {
 };
 
 export const handleAppsBlocks: RequestHandler = ({ body }, res) => {
-	recordTypeAndPlatform('blocks', 'app');
 	const {
 		blocks,
 		format,

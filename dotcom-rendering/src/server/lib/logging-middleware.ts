@@ -42,9 +42,7 @@ export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 	};
 
 	res.on('finish', () => {
-		const { request, error } = loggingStore.getStore() ?? {};
-
-		if (!request?.type) return;
+		const { error } = loggingStore.getStore() ?? {};
 
 		const logArgs = {
 			response: {

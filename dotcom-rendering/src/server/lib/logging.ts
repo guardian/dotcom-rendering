@@ -59,13 +59,9 @@ const consoleLayout: Layout = {
 					typeof fields.response.status === 'number'
 						? fields.response.status
 						: '[status missing]';
-				const {
-					platform = '[platform missing]',
-					pageId = '[pageId missing]',
-					type: requestType = '[request type missing]',
-				} = fields.request;
+				const requestPath = fields.request.path ?? '[path missing]';
 
-				return `${status} response for ${platform} ${requestType}: ${pageId}`;
+				return `${status} response for ${requestPath}`;
 			} else {
 				return logEvent.data;
 			}

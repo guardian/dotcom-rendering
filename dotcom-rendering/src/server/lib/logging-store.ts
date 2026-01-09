@@ -16,8 +16,6 @@ export type DCRLoggingStore = {
 		pageId: string;
 		path: string;
 		method: string;
-		type?: string;
-		platform?: string;
 	};
 	requestId: string;
 	abTests: string;
@@ -28,18 +26,6 @@ export type DCRLoggingStore = {
 };
 
 export const loggingStore = new AsyncLocalStorage<DCRLoggingStore>();
-
-export const recordTypeAndPlatform = (
-	type: string,
-	platform?: string,
-): void => {
-	const { request } = loggingStore.getStore() ?? {};
-
-	if (request) {
-		request.type = type;
-		request.platform = platform;
-	}
-};
 
 export const recordError = (error: unknown): void => {
 	const store = loggingStore.getStore();
