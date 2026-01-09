@@ -34,19 +34,12 @@ const videoContainerStyles = (
 	isCinemagraph: boolean,
 	aspectRatio: number,
 	containerAspectRatio?: number, // The aspect ratio of the container
-	isFeatureCard?: boolean,
 ) => css`
 	position: relative;
 	display: flex;
 	justify-content: space-around;
 	background-color: ${palette('--video-background')};
 	${!isCinemagraph && `z-index: ${getZIndex('video-container')}`};
-
-	${!isFeatureCard &&
-	css`
-		max-height: 100vh;
-		max-height: 100svh;
-	`}
 
 	/**
 	 * If the video and its containing slot have different dimensions, the slot will use the aspect
@@ -723,7 +716,6 @@ export const SelfHostedVideo = ({
 				isCinemagraph,
 				aspectRatio,
 				containerAspectRatio,
-				isFeatureCard,
 			)}
 		>
 			<figure
