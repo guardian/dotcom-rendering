@@ -223,11 +223,28 @@ describe('enhanceProductCarousel', () => {
 		).toBe(true);
 	});
 
-	it('returns input unchanged for non-allowlisted pageId', () => {
-		const input = [textElement('Buy here')];
+	it('when two products have the same CTA URL, only including the first occurrence', () => {
+		const input = [
+			atAGlanceHeading(),
+			linkElement('www.test-product1.com', 'Buy now'),
+			linkElement('www.test-product2.com', 'Buy now'),
+			linkElement('www.test-product3.com', 'Buy now'),
+			dividerElement(),
+			productElement(['www.test-product1.com']),
+			productElement(['www.test-product2.com']),
+			productElement(['www.test-product3.com']),
+			productElement(['www.test-product1.com']), // Duplicate CTA URL, should be skipped
+		];
 
-		const output = enhanceProductCarousel('not-allowed-page')(input);
+		const output = insertCarouselPlaceholder(input);
 
-		expect(output).toEqual(input);
+		const carousel = output.find(
+			(el) =>
+				el._type ===
+				'model.dotcomrendering.pageElements.ProductCarouselElement',
+		);
+
+		expect(carousel).toBeDefined();
+		expect(carousel.matchedProducts).toHaveLength(3);
 	});
 });

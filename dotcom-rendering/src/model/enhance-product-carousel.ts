@@ -75,7 +75,7 @@ export const insertCarouselPlaceholder = (
 				if (isSubheadingOrDivider(currentElement)) {
 					inAtAGlance = false;
 
-					// Filter out duplicate and empty URLs
+					// Extract and deduplicate URLs
 					const urls = Array.from(
 						new Set(
 							extractAtAGlanceUrls(atAGlanceElements).filter(
@@ -89,12 +89,25 @@ export const insertCarouselPlaceholder = (
 						urls,
 					);
 
-					if (matchedProducts.length >= 2) {
-						// Insert carousel with matched products
+					// Only include the first product for each unique CTA URL
+					const uniqueProducts: ProductBlockElement[] = [];
+					const seenUrls = new Set<string>();
+					for (const product of matchedProducts) {
+						const productUrls = product.productCtas.map(
+							(cta) => cta.url,
+						);
+						// If none of the product's URLs have been seen add the product
+						if (productUrls.every((url) => !seenUrls.has(url))) {
+							uniqueProducts.push(product);
+							for (const url of productUrls) seenUrls.add(url);
+						}
+					}
+
+					if (uniqueProducts.length >= 2) {
 						elementsToReturn.push(
 							{
 								_type: 'model.dotcomrendering.pageElements.ProductCarouselElement',
-								matchedProducts,
+								matchedProducts: uniqueProducts,
 							} as FEElement,
 							currentElement,
 						);
