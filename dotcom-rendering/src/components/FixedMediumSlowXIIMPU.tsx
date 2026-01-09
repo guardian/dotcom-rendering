@@ -14,7 +14,6 @@ type Props = {
 	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	imageLoading: Loading;
-	serverTime?: number;
 	showAge?: boolean;
 };
 
@@ -29,11 +28,9 @@ const Card33_Card33_Card33 = ({
 	showAge,
 	padBottom,
 	imageLoading,
-	serverTime,
 }: {
 	trails: DCRFrontCard[];
 	imageLoading: Loading;
-	serverTime?: number;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	padBottom?: boolean;
@@ -49,7 +46,6 @@ const Card33_Card33_Card33 = ({
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 				</LI>
@@ -65,7 +61,6 @@ const Card33_Card33_Card33 = ({
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 				</LI>
@@ -85,11 +80,9 @@ const Card50_Card50 = ({
 	showAge,
 	padBottom,
 	imageLoading,
-	serverTime,
 }: {
 	trails: DCRFrontCard[];
 	imageLoading: Loading;
-	serverTime?: number;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	padBottom?: boolean;
@@ -104,7 +97,6 @@ const Card50_Card50 = ({
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 				</LI>
@@ -120,7 +112,6 @@ const Card50_Card50 = ({
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 				</LI>
@@ -138,7 +129,6 @@ export const FixedMediumSlowXIIMPU = ({
 	containerPalette,
 	showAge,
 	imageLoading,
-	serverTime,
 }: Props) => {
 	const firstSlice = trails.slice(0, 3);
 	const remaining = trails.slice(3, 9);
@@ -152,7 +142,6 @@ export const FixedMediumSlowXIIMPU = ({
 								trail={trail}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								serverTime={serverTime}
 								key={trail.url}
 								imageLoading={imageLoading}
 							/>
@@ -164,7 +153,6 @@ export const FixedMediumSlowXIIMPU = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					serverTime={serverTime}
 					imageLoading={imageLoading}
 				/>
 			) : (
@@ -172,7 +160,6 @@ export const FixedMediumSlowXIIMPU = ({
 					trails={firstSlice}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					serverTime={serverTime}
 					padBottom={true}
 					imageLoading={imageLoading}
 				/>
@@ -196,7 +183,6 @@ export const FixedMediumSlowXIIMPU = ({
 							trail={trail}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							serverTime={serverTime}
 						/>
 					</LI>
 				))}

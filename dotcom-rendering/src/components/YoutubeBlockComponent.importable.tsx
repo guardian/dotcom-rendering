@@ -43,7 +43,6 @@ type Props = {
 	headlineSizes?: ResponsiveFontSize;
 	webPublicationDate?: string;
 	showClock?: boolean;
-	serverTime?: number;
 	linkTo?: string;
 	discussionApiUrl?: string;
 	discussionId?: string;
@@ -85,7 +84,6 @@ export const YoutubeBlockComponent = ({
 	headlineSizes,
 	webPublicationDate,
 	showClock,
-	serverTime,
 	linkTo,
 	discussionApiUrl,
 	discussionId,
@@ -216,7 +214,6 @@ export const YoutubeBlockComponent = ({
 				headlineSizes={headlineSizes}
 				webPublicationDate={webPublicationDate}
 				showClock={!!showClock}
-				serverTime={serverTime}
 				linkTo={linkTo}
 				discussionId={discussionId}
 				discussionApiUrl={discussionApiUrl}

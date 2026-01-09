@@ -13,7 +13,6 @@ type Props = {
 	trails: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
-	serverTime?: number;
 	aspectRatio: AspectRatio;
 	collectionId: number;
 };
@@ -27,7 +26,6 @@ type Props = {
 export const StaticFeatureTwo = ({
 	trails,
 	containerPalette,
-	serverTime,
 	imageLoading,
 	aspectRatio,
 	collectionId,
@@ -68,7 +66,6 @@ export const StaticFeatureTwo = ({
 							isExternalLink={card.isExternalLink}
 							branding={card.branding}
 							containerPalette={containerPalette}
-							serverTime={serverTime}
 							imageLoading={imageLoading}
 							aspectRatio={aspectRatio}
 							imageSize="feature-large"

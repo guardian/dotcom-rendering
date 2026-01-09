@@ -38,7 +38,6 @@ export interface Front {
 	pageId: string;
 	webURL: string;
 	guardianBaseURL: string;
-	serverTime?: number;
 }
 
 interface PressedPage {
@@ -102,7 +101,6 @@ export type DCRFrontCard = {
 	slideshowImages?: DCRSlideshowImage[];
 	showVideo?: boolean;
 	uniqueId?: string;
-	serverTime?: number;
 };
 
 export type DCRSlideshowImage = {

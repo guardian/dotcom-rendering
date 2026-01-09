@@ -54,7 +54,6 @@ type Props = {
 	lang?: string;
 	isRightToLeftLang?: boolean;
 	shouldHideAds: boolean;
-	serverTime?: number;
 	idApiUrl?: string;
 };
 
@@ -139,7 +138,6 @@ export const ArticleBody = ({
 	isRightToLeftLang = false,
 	editionId,
 	shouldHideAds,
-	serverTime,
 	idApiUrl,
 }: Props) => {
 	const isInteractiveContent =
@@ -209,7 +207,6 @@ export const ArticleBody = ({
 					keywordIds={keywordIds}
 					editionId={editionId}
 					shouldHideAds={shouldHideAds}
-					serverTime={serverTime}
 					idApiUrl={idApiUrl}
 				/>
 			</div>

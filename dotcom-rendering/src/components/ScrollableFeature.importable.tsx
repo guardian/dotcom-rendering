@@ -10,7 +10,6 @@ import { ScrollableCarousel } from './ScrollableCarousel';
 type Props = {
 	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
-	serverTime?: number;
 	imageLoading: 'lazy' | 'eager';
 	aspectRatio: AspectRatio;
 	collectionId: number;
@@ -26,7 +25,6 @@ type Props = {
 export const ScrollableFeature = ({
 	trails,
 	containerPalette,
-	serverTime,
 	imageLoading,
 	aspectRatio,
 	collectionId,
@@ -63,7 +61,6 @@ export const ScrollableFeature = ({
 						isExternalLink={card.isExternalLink}
 						branding={card.branding}
 						containerPalette={containerPalette}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 						aspectRatio={aspectRatio}
 						imageSize="feature"

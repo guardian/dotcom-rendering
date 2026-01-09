@@ -36,14 +36,12 @@ export const Card50_Card50 = ({
 	cards,
 	containerPalette,
 	showAge,
-	serverTime,
 	imageLoading,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	serverTime?: number;
 }) => {
 	const cards50 = cards.slice(0, 2);
 
@@ -60,7 +58,6 @@ export const Card50_Card50 = ({
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 				</LI>
@@ -78,14 +75,12 @@ export const Card75_Card25 = ({
 	cards,
 	containerPalette,
 	showAge,
-	serverTime,
 	imageLoading,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	serverTime?: number;
 }) => {
 	const card75 = cards.slice(0, 1);
 	const card25 = cards.slice(1, 2);
@@ -97,7 +92,6 @@ export const Card75_Card25 = ({
 					<Card75Media50Right
 						trail={trail}
 						showAge={showAge}
-						serverTime={serverTime}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>
@@ -113,7 +107,6 @@ export const Card75_Card25 = ({
 					<Card25Media25
 						trail={trail}
 						showAge={showAge}
-						serverTime={serverTime}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>
@@ -132,14 +125,12 @@ export const Card25_Card75 = ({
 	cards,
 	containerPalette,
 	showAge,
-	serverTime,
 	imageLoading,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	serverTime?: number;
 }) => {
 	const card25 = cards.slice(0, 1);
 	const card75 = cards.slice(1, 2);
@@ -151,7 +142,6 @@ export const Card25_Card75 = ({
 					<Card25Media25
 						trail={trail}
 						showAge={showAge}
-						serverTime={serverTime}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>
@@ -167,7 +157,6 @@ export const Card25_Card75 = ({
 					<Card75Media50Left
 						trail={trail}
 						showAge={showAge}
-						serverTime={serverTime}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>
@@ -186,14 +175,12 @@ export const Card50_Card25_Card25 = ({
 	cards,
 	containerPalette,
 	showAge,
-	serverTime,
 	imageLoading,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	serverTime?: number;
 }) => {
 	const card50 = cards.slice(0, 1);
 	const cards25 = cards.slice(1, 3);
@@ -206,7 +193,6 @@ export const Card50_Card25_Card25 = ({
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 				</LI>
@@ -223,7 +209,6 @@ export const Card50_Card25_Card25 = ({
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 				</LI>
@@ -243,12 +228,10 @@ export const Card100PictureTop = ({
 	showAge,
 	containerPalette,
 	imageLoading,
-	serverTime,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	showAge?: boolean;
-	serverTime?: number;
 	containerPalette?: DCRContainerPalette;
 }) => {
 	const card100 = cards.slice(0, 1);
@@ -260,7 +243,6 @@ export const Card100PictureTop = ({
 					<Card100Media100
 						trail={card}
 						showAge={showAge}
-						serverTime={serverTime}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>
@@ -273,14 +255,12 @@ export const Card100PictureTop = ({
 export const Card25_Card25_Card25_Card25 = ({
 	cards,
 	showAge,
-	serverTime,
 	containerPalette,
 	imageLoading,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	showAge?: boolean;
-	serverTime?: number;
 	containerPalette?: DCRContainerPalette;
 }) => {
 	if (cards.length < 4) return null;
@@ -301,7 +281,6 @@ export const Card25_Card25_Card25_Card25 = ({
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							serverTime={serverTime}
 							imageLoading={imageLoading}
 						/>
 					</LI>
@@ -314,14 +293,12 @@ export const Card25_Card25_Card25_Card25 = ({
 export const ColumnOfCards50_Card25_Card25 = ({
 	cards,
 	showAge,
-	serverTime,
 	containerPalette,
 	imageLoading,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	showAge?: boolean;
-	serverTime?: number;
 	containerPalette?: DCRContainerPalette;
 }) => {
 	const bigs = cards.slice(0, 2).reverse();
@@ -340,7 +317,6 @@ export const ColumnOfCards50_Card25_Card25 = ({
 						<Card25Media25Tall
 							trail={big}
 							showAge={showAge}
-							serverTime={serverTime}
 							containerPalette={containerPalette}
 							imageLoading={imageLoading}
 						/>
@@ -360,7 +336,6 @@ export const ColumnOfCards50_Card25_Card25 = ({
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									serverTime={serverTime}
 									imageLoading={imageLoading}
 								/>
 							</LI>
@@ -381,14 +356,12 @@ export const ColumnOfCards50_Card25_Card25 = ({
 export const Card100PictureRight = ({
 	cards,
 	showAge,
-	serverTime,
 	containerPalette,
 	imageLoading,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	showAge?: boolean;
-	serverTime?: number;
 	containerPalette?: DCRContainerPalette;
 }) => {
 	const card100 = cards.slice(0, 1);
@@ -401,7 +374,6 @@ export const Card100PictureRight = ({
 						trail={card}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						serverTime={serverTime}
 						imageLoading={imageLoading}
 					/>
 				</LI>

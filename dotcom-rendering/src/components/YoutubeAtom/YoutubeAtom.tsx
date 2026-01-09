@@ -55,7 +55,6 @@ export type Props = {
 	headlineSizes?: ResponsiveFontSize;
 	webPublicationDate?: string;
 	showClock?: boolean;
-	serverTime?: number;
 	linkTo?: string;
 	discussionApiUrl?: string;
 	discussionId?: string;
@@ -110,7 +109,6 @@ export const YoutubeAtom = ({
 	headlineSizes,
 	webPublicationDate,
 	showClock,
-	serverTime,
 	linkTo,
 	discussionApiUrl,
 	discussionId,
@@ -259,7 +257,6 @@ export const YoutubeAtom = ({
 								trailText={trailText}
 								webPublicationDate={webPublicationDate}
 								showClock={!!showClock}
-								serverTime={serverTime}
 								linkTo={linkTo}
 								discussionId={discussionId}
 								discussionApiUrl={discussionApiUrl}

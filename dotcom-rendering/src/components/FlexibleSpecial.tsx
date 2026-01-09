@@ -27,7 +27,6 @@ type Props = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	serverTime?: number;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
@@ -132,7 +131,6 @@ type OneCardLayoutProps = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	serverTime?: number;
 	aspectRatio: AspectRatio;
 	isLastRow: boolean;
 	isFirstRow: boolean;
@@ -144,7 +142,6 @@ export const OneCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
-	serverTime,
 	imageLoading,
 	aspectRatio,
 	isLastRow,
@@ -180,7 +177,6 @@ export const OneCardLayout = ({
 					containerPalette={containerPalette}
 					containerType="flexible/special"
 					showAge={showAge}
-					serverTime={serverTime}
 					headlineSizes={headlineSizes}
 					mediaSize={mediaSize}
 					mediaPositionOnDesktop={mediaPositionOnDesktop}
@@ -228,7 +224,6 @@ type TwoOrFourCardLayoutProps = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	serverTime?: number;
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
 	isFirstRow: boolean;
@@ -239,7 +234,6 @@ const TwoOrFourCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
-	serverTime,
 	showImage = true,
 	imageLoading,
 	aspectRatio,
@@ -265,7 +259,6 @@ const TwoOrFourCardLayout = ({
 							containerPalette={containerPalette}
 							containerType="flexible/special"
 							showAge={showAge}
-							serverTime={serverTime}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
 							mediaPositionOnDesktop={getImagePosition(
@@ -299,7 +292,6 @@ export const FlexibleSpecial = ({
 	groupedTrails,
 	containerPalette,
 	showAge,
-	serverTime,
 	imageLoading,
 	aspectRatio,
 	containerLevel = 'Primary',
@@ -325,7 +317,6 @@ export const FlexibleSpecial = ({
 					cards={snaps}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					isFirstRow={true}
@@ -339,7 +330,6 @@ export const FlexibleSpecial = ({
 					cards={splash}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					isLastRow={cards.length === 0}
@@ -353,7 +343,6 @@ export const FlexibleSpecial = ({
 				cards={cards}
 				containerPalette={containerPalette}
 				showAge={showAge}
-				serverTime={serverTime}
 				imageLoading={imageLoading}
 				aspectRatio={aspectRatio}
 				isFirstRow={!isNonEmptyArray(snaps) && !isNonEmptyArray(splash)}

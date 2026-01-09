@@ -26,7 +26,6 @@ type Props = {
 	pinnedPostId?: string;
 	editionId: EditionId;
 	shouldHideAds: boolean;
-	serverTime?: number;
 	idApiUrl?: string;
 };
 
@@ -46,7 +45,6 @@ export const LiveBlock = ({
 	pinnedPostId,
 	editionId,
 	shouldHideAds,
-	serverTime,
 	idApiUrl,
 }: Props) => {
 	if (block.elements.length === 0) return null;
@@ -72,7 +70,6 @@ export const LiveBlock = ({
 			contributors={block.contributors}
 			isPinnedPost={isPinnedPost}
 			isOriginalPinnedPost={isOriginalPinnedPost}
-			serverTime={serverTime}
 		>
 			{block.elements.map((element, index) => (
 				<RenderArticleElement

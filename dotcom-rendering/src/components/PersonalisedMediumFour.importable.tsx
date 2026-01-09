@@ -36,7 +36,6 @@ type Props = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	serverTime?: number;
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
@@ -68,7 +67,6 @@ export const PersonalisedMediumFour = ({
 	trails,
 	containerPalette,
 	showAge,
-	serverTime,
 	imageLoading,
 	showImage = true,
 	aspectRatio,
@@ -155,7 +153,6 @@ export const PersonalisedMediumFour = ({
 								containerPalette={containerPalette}
 								containerType="static/medium/4"
 								showAge={showAge}
-								serverTime={serverTime}
 								image={showImage ? card.image : undefined}
 								imageLoading={imageLoading}
 								mediaPositionOnDesktop={getMediaPositionOnDesktop(

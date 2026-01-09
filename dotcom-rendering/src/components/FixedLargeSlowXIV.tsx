@@ -15,14 +15,12 @@ type Props = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	serverTime?: number;
 };
 
 export const FixedLargeSlowXIV = ({
 	trails,
 	containerPalette,
 	showAge,
-	serverTime,
 	imageLoading,
 }: Props) => {
 	const firstSlice75 = trails.slice(0, 1);
@@ -39,7 +37,6 @@ export const FixedLargeSlowXIV = ({
 							<Card75Media50Right
 								trail={card}
 								showAge={showAge}
-								serverTime={serverTime}
 								containerPalette={containerPalette}
 								imageLoading={imageLoading}
 							/>
@@ -57,7 +54,6 @@ export const FixedLargeSlowXIV = ({
 							<Card25Media25
 								trail={card}
 								showAge={showAge}
-								serverTime={serverTime}
 								containerPalette={containerPalette}
 								imageLoading={imageLoading}
 							/>
@@ -78,7 +74,6 @@ export const FixedLargeSlowXIV = ({
 								trail={card}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								serverTime={serverTime}
 								imageLoading={imageLoading}
 							/>
 						</LI>
@@ -103,7 +98,6 @@ export const FixedLargeSlowXIV = ({
 							<CardDefault
 								trail={card}
 								showAge={showAge}
-								serverTime={serverTime}
 								containerPalette={containerPalette}
 							/>
 						</LI>

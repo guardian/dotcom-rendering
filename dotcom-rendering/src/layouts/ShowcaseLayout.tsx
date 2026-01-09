@@ -210,7 +210,6 @@ interface CommonProps {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
-	serverTime?: number;
 }
 
 interface WebProps extends CommonProps {
@@ -223,7 +222,7 @@ interface AppsProps extends CommonProps {
 }
 
 export const ShowcaseLayout = (props: WebProps | AppsProps) => {
-	const { article, format, renderingTarget, serverTime } = props;
+	const { article, format, renderingTarget } = props;
 	const {
 		config: { isPaidContent, host, hasSurveyAd },
 		editionId,
@@ -712,7 +711,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
-								serverTime={serverTime}
 								renderingTarget={renderingTarget}
 							/>
 						</Island>
@@ -736,7 +734,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
-						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						webURL={article.webURL}
 					/>

@@ -23,8 +23,6 @@ import { renderFront, renderTagPage } from './render.front.web';
 const enhanceFront = (body: unknown): Front => {
 	const data: FEFront = validateAsFEFront(body);
 
-	const serverTime = Date.now();
-
 	const isInPersonalisedContainerTest =
 		data.config.serverSideABTests[
 			`fronts-and-curation-personalised-container`
@@ -86,7 +84,6 @@ const enhanceFront = (body: unknown): Front => {
 		),
 		deeplyRead: data.deeplyRead?.map((trail) => decideTrail(trail)),
 		canonicalUrl: data.canonicalUrl,
-		serverTime,
 	};
 };
 
