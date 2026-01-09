@@ -46,8 +46,36 @@ const isSubheadingOrDivider = (element: FEElement) =>
 		'model.dotcomrendering.pageElements.SubheadingBlockElement' ||
 	element._type === 'model.dotcomrendering.pageElements.DividerBlockElement';
 
+const getAtAGlanceUrls = (elements: FEElement[]): string[] =>
+	Array.from(
+		new Set(
+			extractAtAGlanceUrls(elements).filter((url) => url.trim() !== ''),
+		),
+	);
+
+const getUniqueProductsByCta = (
+	products: ProductBlockElement[],
+): ProductBlockElement[] => {
+	const seenUrls = new Set<string>();
+	const uniqueProducts: ProductBlockElement[] = [];
+
+	for (const product of products) {
+		const productUrls = product.productCtas.map((cta) => cta.url);
+
+		if (productUrls.every((url) => !seenUrls.has(url))) {
+			uniqueProducts.push(product);
+			for (const url of productUrls) seenUrls.add(url);
+		}
+	}
+
+	return uniqueProducts;
+};
+
+const shouldRenderCarousel = (products: ProductBlockElement[]): boolean =>
+	products.length >= 2;
+
 type ReducerAccumulator = {
-	elements: FEElement[];
+	output: FEElement[];
 	inAtAGlanceSection: boolean;
 	atAGlanceElements: FEElement[];
 };
@@ -63,7 +91,7 @@ export const insertCarouselPlaceholder = (
 			currentElement: FEElement,
 		): ReducerAccumulator => {
 			let inAtAGlance = prev.inAtAGlanceSection;
-			const elementsToReturn = prev.elements;
+			const elementsToReturn = prev.output;
 			const atAGlanceElements = prev.atAGlanceElements;
 
 			if (!inAtAGlance) {
@@ -75,35 +103,17 @@ export const insertCarouselPlaceholder = (
 				if (isSubheadingOrDivider(currentElement)) {
 					inAtAGlance = false;
 
-					// Extract and deduplicate URLs
-					const urls = Array.from(
-						new Set(
-							extractAtAGlanceUrls(atAGlanceElements).filter(
-								(url) => url.trim() !== '',
-							),
-						),
-					);
+					const urls = getAtAGlanceUrls(atAGlanceElements);
 
 					const matchedProducts = findMatchingProducts(
 						elements,
 						urls,
 					);
 
-					// Only include the first product for each unique CTA URL
-					const uniqueProducts: ProductBlockElement[] = [];
-					const seenUrls = new Set<string>();
-					for (const product of matchedProducts) {
-						const productUrls = product.productCtas.map(
-							(cta) => cta.url,
-						);
-						// If none of the product's URLs have been seen add the product
-						if (productUrls.every((url) => !seenUrls.has(url))) {
-							uniqueProducts.push(product);
-							for (const url of productUrls) seenUrls.add(url);
-						}
-					}
+					const uniqueProducts =
+						getUniqueProductsByCta(matchedProducts);
 
-					if (uniqueProducts.length >= 2) {
+					if (shouldRenderCarousel(uniqueProducts)) {
 						elementsToReturn.push(
 							{
 								_type: 'model.dotcomrendering.pageElements.ProductCarouselElement',
@@ -124,19 +134,19 @@ export const insertCarouselPlaceholder = (
 			}
 
 			return {
-				elements: elementsToReturn,
+				output: elementsToReturn,
 				inAtAGlanceSection: inAtAGlance,
 				atAGlanceElements,
 			};
 		},
 		{
-			elements: [],
+			output: [],
 			inAtAGlanceSection: false,
 			atAGlanceElements: [],
 		},
 	);
 
-	return elementsWithReducerContext.elements;
+	return elementsWithReducerContext.output;
 };
 
 export const enhanceProductCarousel =
