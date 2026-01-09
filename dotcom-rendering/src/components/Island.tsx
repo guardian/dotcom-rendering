@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import type { ScheduleOptions, SchedulePriority } from '../lib/scheduler';
+import { useDateTime } from './DateTimeContext';
 import { IslandContext, IslandProvider } from './IslandContext';
 
 type DeferredProps = {
@@ -62,6 +63,11 @@ export const Island = ({ priority, defer, children, role }: IslandProps) => {
 	 */
 	const island = useContext(IslandContext);
 
+	/**
+	 * Datetime from server render
+	 */
+	const dateTime = useDateTime();
+
 	return (
 		<IslandProvider value={{ isChild: true }}>
 			{/* Child islands defer to nearest parent island for hydration */}
@@ -74,6 +80,7 @@ export const Island = ({ priority, defer, children, role }: IslandProps) => {
 					deferUntil={defer?.until}
 					props={JSON.stringify(children.props)}
 					rootMargin={rootMargin}
+					dateTime={dateTime}
 					data-spacefinder-role={role}
 				>
 					{children}
@@ -92,6 +99,7 @@ export type GuIsland = {
 	priority: ScheduleOptions['priority'];
 	deferUntil?: NonNullable<IslandProps['defer']>['until'];
 	rootMargin?: string;
+	dateTime?: number;
 	props: string;
 	children: React.ReactNode;
 };

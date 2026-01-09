@@ -3,6 +3,7 @@ import { isUndefined } from '@guardian/libs';
 import { schedule } from '../../lib/scheduler';
 import { doHydration } from './doHydration';
 import { getConfig } from './getConfig';
+import { getDateTime } from './getDateTime';
 import { getName } from './getName';
 import { getPriority } from './getPriority';
 import { getProps } from './getProps';
@@ -41,6 +42,7 @@ export const initHydration = async (
 	const props = getProps(element);
 	const config = getConfig();
 	const priority = getPriority(element);
+	const dateTime = getDateTime(element);
 
 	if (!name) return;
 	if (isUndefined(priority)) return;
@@ -48,7 +50,15 @@ export const initHydration = async (
 	const scheduleHydration = () =>
 		schedule(
 			name,
-			() => doHydration(name, props, element, emotionCache, config),
+			() =>
+				doHydration(
+					name,
+					props,
+					element,
+					emotionCache,
+					config,
+					dateTime,
+				),
 			{ priority },
 		);
 
