@@ -2,11 +2,12 @@ import { css } from '@emotion/react';
 import {
 	cmp,
 	getCookie,
+	log,
 	startPerformanceMeasure,
 	storage,
 } from '@guardian/libs';
 import type { ComponentEvent } from '@guardian/ophan-tracker-js';
-import { getEpic, getEpicViewLog } from '@guardian/support-dotcom-components';
+import { getEpicViewLog } from '@guardian/support-dotcom-components';
 import type {
 	EpicPayload,
 	ModuleData,
@@ -27,6 +28,7 @@ import {
 } from '../../lib/contributions';
 import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import type { CanShowResult } from '../../lib/messagePicker';
+import { getEpic } from '../../lib/sdcRequests';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { TagType } from '../../types/tag';
 
@@ -181,14 +183,13 @@ export const ReaderRevenueEpic = ({ props }: ModuleData<EpicProps>) => {
 						? `Error importing RR epic: ${error.message}`
 						: 'Unknown error';
 
-				console.log(msg);
+				log('commercial', msg);
 				window.guardian.modules.sentry.reportError(
 					new Error(msg),
 					'rr-epic',
 				);
 			});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps -- Only import epic once on mount
 
 	if (Epic !== null) {
 		return (
