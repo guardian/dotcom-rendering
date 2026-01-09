@@ -117,6 +117,7 @@ const overlayContainerStyles = css`
 	bottom: 0;
 	left: 0;
 	width: 100%;
+	cursor: pointer;
 `;
 
 const immersiveOverlayContainerStyles = css`
@@ -129,8 +130,16 @@ const immersiveOverlayContainerStyles = css`
 		* 48px is to ensure the gradient does not render the content inaccessible.
 		*/
 		width: 268px;
-		z-index: ${getZIndex('feature-card-overlay')};
+		z-index: 1;
 	}
+`;
+
+const cinemagraphOverlayStyles = css`
+	/* Needs to be above the video player */
+	z-index: ${getZIndex('mediaOverlay')};
+
+	/* The whole card is clickable on cinemagraphs */
+	pointer-events: none;
 `;
 
 /**
@@ -155,6 +164,7 @@ const overlayMaskGradientStyles = (angle: string) => css`
 		rgb(0, 0, 0) 64px
 	);
 `;
+
 const overlayStyles = css`
 	position: relative;
 	display: flex;
@@ -162,8 +172,6 @@ const overlayStyles = css`
 	text-align: start;
 	gap: ${space[1]}px;
 	padding: 64px ${space[2]}px ${space[2]}px;
-	/* Needs to be above self-hosted video  */
-	z-index: ${getZIndex('feature-card-overlay')};
 	backdrop-filter: blur(12px) brightness(0.5);
 	@supports not (backdrop-filter: blur(12px)) {
 		background-color: ${transparentColour(sourcePalette.neutral[10], 0.7)};
@@ -621,11 +629,8 @@ export const FeatureCard = ({
 										overlayContainerStyles,
 										isImmersive &&
 											immersiveOverlayContainerStyles,
-										// The whole card is clickable on cinemagraphs
 										media.type === 'cinemagraph' &&
-											css`
-												pointer-events: none;
-											`,
+											cinemagraphOverlayStyles,
 									]}
 								>
 									{mainMedia?.type === 'Audio' &&
