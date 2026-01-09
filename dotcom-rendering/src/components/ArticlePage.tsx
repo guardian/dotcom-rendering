@@ -4,6 +4,7 @@ import { DecideLayout } from '../layouts/DecideLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { ArticleDesign } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
+import { useBetaAB } from '../lib/useAB';
 import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
 import type { Article } from '../types/article';
@@ -66,6 +67,14 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 		theme,
 	};
 
+	const abTests = useBetaAB();
+
+	const isInVariantGroup =
+		abTests?.isUserInTestGroup(
+			'commercial-testing-beta-ab-test',
+			'variant',
+		) ?? false;
+
 	return (
 		<StrictMode>
 			<Global styles={rootStyles(format, darkModeAvailable)} />
@@ -74,6 +83,11 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					<SkipTo id="maincontent" label="Skip to main content" />
 					<SkipTo id="navigation" label="Skip to navigation" />
 				</>
+			)}
+			{isInVariantGroup ? (
+				<h1>User is in variant</h1>
+			) : (
+				<h1>User is in control</h1>
 			)}
 			<Lightbox
 				format={format}
