@@ -33,19 +33,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "commercial-user-module-ID5",
-		description:
-			"Tests whether we can get the users email, hash it and pass pd value to the userId array",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: `2026-01-15`,
-		type: "client",
-		status: "OFF",
-		audienceSize: 10 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: true,
-	},
-	{
 		name: "commercial-user-module-uid2",
 		description:
 			"A hold back test to measure the impact of integrating UID2 module",
