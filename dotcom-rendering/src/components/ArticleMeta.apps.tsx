@@ -98,7 +98,7 @@ const MetaGridByline = ({
 	children: ReactNode;
 	isComment: boolean;
 }) => (
-	// address > div > span > div:first-of-type - spacing for the Follow Tag buttons in follow wrapper,
+	// address > div > div:first-of-type - spacing for the Follow Tag buttons in follow wrapper,
 	// which is contextual of the meta by layout type
 	<div
 		css={css`
@@ -111,7 +111,7 @@ const MetaGridByline = ({
 				padding-bottom: 0px;
 			}
 
-			address > div > span > div:first-of-type {
+			address > div > div:first-of-type {
 				display: block;
 				margin-top: ${space[2]}px;
 				${!isComment && `margin-bottom: ${space[2]}px;`}
