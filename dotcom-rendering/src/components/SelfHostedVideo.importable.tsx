@@ -64,13 +64,10 @@ const figureStyles = (
 	position: relative;
 	aspect-ratio: ${aspectRatio};
 	height: 100%;
+	max-width: 100%;
 
 	${letterboxed &&
 	css`
-		max-height: 100vh;
-		max-height: 100svh;
-		max-width: 100%;
-
 		${from.tablet} {
 			${typeof containerAspectRatio === 'number' &&
 			`max-width: ${aspectRatio * (1 / containerAspectRatio) * 100}%;`}
@@ -756,7 +753,6 @@ export const SelfHostedVideo = ({
 					subtitleSource={subtitleSource}
 					subtitleSize={subtitleSize}
 					activeCue={activeCue}
-					letterboxed={letterboxed}
 					isFeatureCard={isFeatureCard}
 				/>
 			</figure>
