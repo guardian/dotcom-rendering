@@ -126,17 +126,6 @@ const carouselGapStyles = (column: number, row: number) => {
 	`;
 };
 
-const subgridStyles = ({ subgridRows }: { subgridRows: number }) => css`
-	scroll-snap-align: start;
-	position: relative;
-	display: grid;
-	@supports (grid-template-rows: subgrid) {
-		grid-column: span 1;
-		grid-row: span ${subgridRows};
-		grid-template-rows: subgrid;
-	}
-`;
-
 const itemStyles = css`
 	display: flex;
 	scroll-snap-align: start;
@@ -155,7 +144,7 @@ const leftBorderStyles = (colour: string) => css`
 	transform: translateX(-50%);
 `;
 
-const singleRowLeftBorderStyles = (colour: string) => css`
+export const singleRowLeftBorderStyles = (colour: string) => css`
 	:not(:first-child)::before {
 		${leftBorderStyles(colour)}
 	}
@@ -511,26 +500,6 @@ ScrollableCarousel.Item = ({
 			isStackingCarousel
 				? stackedRowLeftBorderStyles(borderColour)
 				: singleRowLeftBorderStyles(borderColour),
-		]}
-	>
-		{children}
-	</li>
-);
-
-ScrollableCarousel.SubgridItem = ({
-	subgridRows,
-	children,
-	borderColour = palette('--card-border-top'),
-}: {
-	subgridRows: number;
-	children: React.ReactNode;
-	borderColour?: string;
-}) => (
-	<li
-		css={[
-			itemStyles,
-			subgridStyles({ subgridRows }),
-			singleRowLeftBorderStyles(borderColour),
 		]}
 	>
 		{children}
