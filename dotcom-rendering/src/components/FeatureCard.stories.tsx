@@ -36,6 +36,7 @@ const cardProps: CardProps = {
 	imageSize: 'feature',
 	collectionId: 1,
 	starRatingSize: 'medium',
+	uniqueId: `collection-1-feature-0`,
 };
 
 const aBasicLink = {
@@ -325,6 +326,10 @@ export const YoutubeVideoImmersive = {
 export const YoutubeVideoMainMedia = {
 	args: {
 		...YoutubeVideo.args,
+		image: {
+			src: 'https://media.guim.co.uk/4612af5f4667888fa697139cf570b6373d93a710/2446_345_3218_1931/master/3218.jpg',
+			altText: 'alt text',
+		},
 		format: {
 			...YoutubeVideo.args.format,
 			design: ArticleDesign.Standard,
@@ -393,5 +398,71 @@ export const WithSublinksLabsImmersive = {
 		...WithSublinks.args,
 		...Labs.args,
 		...Immersive.args,
+	},
+} satisfies Story;
+
+/**
+ * Loops look like cinemagraphs, as only cinemagraphs are currently supported in Feature Cards.
+ */
+export const WithSelfHostedLoopVideo = {
+	args: {
+		...cardProps,
+		showVideo: true,
+		mainMedia: {
+			type: 'SelfHostedVideo',
+			videoStyle: 'Loop',
+			atomId: 'atom-id-123',
+			sources: [
+				{
+					src: 'https://uploads.guim.co.uk/2025/11/27/4_5_Test--1d34df3e-8c92-4090-8bb6-d79fc7fb9467-1.0.mp4',
+					mimeType: 'video/mp4',
+				},
+			],
+			height: 720,
+			width: 576,
+			duration: 18,
+		},
+	},
+} satisfies Story;
+
+export const WithSelfHostedCinemagraphVideo = {
+	args: {
+		...WithSelfHostedLoopVideo.args,
+		showVideo: true,
+		mainMedia: {
+			...WithSelfHostedLoopVideo.args.mainMedia,
+			videoStyle: 'Cinemagraph',
+		},
+	},
+} satisfies Story;
+
+/**
+ * Loops look like cinemagraphs, as only cinemagraphs are currently supported in Feature Cards.
+ */
+export const WithSelfHostedImmersiveLoopVideo = {
+	args: {
+		...WithSelfHostedLoopVideo.args,
+		...Immersive.args,
+		mainMedia: {
+			...WithSelfHostedLoopVideo.args.mainMedia,
+			sources: [
+				{
+					src: 'https://uploads.guim.co.uk/2025/11/27/5_3_Test--26763e61-c16b-4c10-8c16-3f11882da154-1.0.mp4',
+					mimeType: 'video/mp4',
+				},
+			],
+			height: 720,
+			width: 1200,
+		},
+	},
+} satisfies Story;
+
+export const WithSelfHostedImmersiveCinemagraphVideo = {
+	args: {
+		...WithSelfHostedImmersiveLoopVideo.args,
+		mainMedia: {
+			...WithSelfHostedImmersiveLoopVideo.args.mainMedia,
+			videoStyle: 'Cinemagraph',
+		},
 	},
 } satisfies Story;
