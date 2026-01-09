@@ -25,7 +25,7 @@
 	</p>
 	<p>
 		<a href="https://www.theguardian.com/ab-tests/opt-out"
-			>Use this link to opt out of any tests</a
+			>Use this link to opt out of all tests you've opted into</a
 		>
 	</p>
 </section>
