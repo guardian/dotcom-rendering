@@ -1,22 +1,47 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { Breakpoint } from '@guardian/source/foundations';
 import { from, space, until } from '@guardian/source/foundations';
 import { useEffect, useRef, useState } from 'react';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { palette } from '../palette';
 import { CarouselNavigationButtons } from './CarouselNavigationButtons';
 
-type GapSize = 'small' | 'medium' | 'large';
+type GapSize = 'small' | 'medium' | 'large' | 'none';
 type GapSizes = { row: GapSize; column: GapSize };
-
-type Props = {
-	children: React.ReactNode;
-	carouselLength: number;
-	visibleCarouselSlidesOnMobile: number;
-	visibleCarouselSlidesOnTablet: number;
-	sectionId?: string;
-	shouldStackCards?: { desktop: boolean; mobile: boolean };
-	gapSizes?: GapSizes;
+export type FixedSlideWidth = {
+	defaultWidth: number;
+	widthFromBreakpoints: { breakpoint: Breakpoint; width: number }[];
 };
+
+export enum CarouselKind {
+	'FrontCarousel',
+	'ProductCarousel',
+}
+
+type Props =
+	| {
+			kind: CarouselKind.FrontCarousel;
+			children: React.ReactNode;
+			carouselLength: number;
+			visibleCarouselSlidesOnMobile: number;
+			visibleCarouselSlidesOnTablet: number;
+			fixedSlideWidth?: never;
+			sectionId?: string;
+			shouldStackCards?: { desktop: boolean; mobile: boolean };
+			gapSizes?: GapSizes;
+	  }
+	| {
+			kind: CarouselKind.ProductCarousel;
+			children: React.ReactNode;
+			carouselLength: number;
+			visibleCarouselSlidesOnMobile?: never;
+			visibleCarouselSlidesOnTablet?: never;
+			fixedSlideWidth: FixedSlideWidth;
+			sectionId?: string;
+			shouldStackCards?: never;
+			gapSizes?: GapSizes;
+	  };
 
 /**
  * Grid sizing values to calculate negative margin used to pull navigation
@@ -25,6 +50,9 @@ type Props = {
 const gridGap = 20;
 const gridGapMobile = 10;
 
+const baseContainerStyles = css`
+	position: relative;
+`;
 /**
  * On mobile the carousel extends into the outer margins to use the full width
  * of the screen. From tablet onwards the carousel sits within the page grid.
@@ -35,8 +63,7 @@ const gridGapMobile = 10;
  * left side so that the carousel extends into the the middle of the gutter
  * between the grid columns to meet the dividing line.
  */
-const containerStyles = css`
-	position: relative;
+const frontContainerStyles = css`
 	margin-left: -${gridGapMobile}px;
 	margin-right: -${gridGapMobile}px;
 	${from.mobileLandscape} {
@@ -52,25 +79,7 @@ const containerStyles = css`
 	}
 `;
 
-const carouselStyles = css`
-	display: grid;
-	width: 100%;
-	grid-auto-columns: 1fr;
-	grid-auto-flow: column;
-	overflow-x: auto;
-	overflow-y: hidden;
-	scroll-snap-type: x mandatory;
-	scroll-behavior: smooth;
-	overscroll-behavior: contain auto;
-	/**
-	 * Hide scrollbars
-	 * See: https://stackoverflow.com/a/38994837
-	 */
-	::-webkit-scrollbar {
-		display: none; /* Safari and Chrome */
-	}
-	scrollbar-width: none; /* Firefox */
-
+const frontCarouselStyles = css`
 	padding-left: ${gridGapMobile}px;
 	padding-right: ${gridGapMobile}px;
 	scroll-padding-left: ${gridGapMobile}px;
@@ -88,6 +97,26 @@ const carouselStyles = css`
 		padding-left: ${gridGap / 2}px;
 		scroll-padding-left: ${gridGap / 2}px;
 	}
+`;
+
+const baseCarouselStyles = css`
+	display: grid;
+	width: 100%;
+	grid-auto-columns: 1fr;
+	grid-auto-flow: column;
+	overflow-x: auto;
+	overflow-y: hidden;
+	scroll-snap-type: x mandatory;
+	scroll-behavior: smooth;
+	overscroll-behavior: contain auto;
+	/**
+	 * Hide scrollbars
+	 * See: https://stackoverflow.com/a/38994837
+	 */
+	::-webkit-scrollbar {
+		display: none; /* Safari and Chrome */
+	}
+	scrollbar-width: none; /* Firefox */
 `;
 
 const carouselGapStyles = (column: number, row: number) => {
@@ -115,7 +144,7 @@ const leftBorderStyles = (colour: string) => css`
 	transform: translateX(-50%);
 `;
 
-const singleRowLeftBorderStyles = (colour: string) => css`
+export const singleRowLeftBorderStyles = (colour: string) => css`
 	:not(:first-child)::before {
 		${leftBorderStyles(colour)}
 	}
@@ -151,6 +180,29 @@ const stackedCardRowsStyles = ({
 	}
 `;
 
+const generateFixedWidthColumStyles = ({
+	fixedSlideWidth,
+	carouselLength,
+}: {
+	fixedSlideWidth: FixedSlideWidth;
+	carouselLength: number;
+}) => {
+	const fixedWidths: SerializedStyles[] = [];
+	fixedWidths.push(css`
+		grid-template-columns: repeat(
+			${carouselLength},
+			${fixedSlideWidth.defaultWidth}px
+		);
+	`);
+	for (const { breakpoint, width } of fixedSlideWidth.widthFromBreakpoints) {
+		fixedWidths.push(css`
+			${from[breakpoint]} {
+				grid-template-columns: repeat(${carouselLength}, ${width}px);
+			}
+		`);
+	}
+	return fixedWidths;
+};
 /**
  * Generates CSS styles for a grid layout used in a carousel.
  *
@@ -159,11 +211,11 @@ const stackedCardRowsStyles = ({
  * @param {number} visibleCarouselSlidesOnTablet - Number of cards to show at once on tablet.
  * @returns {string} - The CSS styles for the grid layout.
  */
-const generateCarouselColumnStyles = (
+const generateFrontColumnStyles = (
 	totalCards: number,
 	visibleCarouselSlidesOnMobile: number,
 	visibleCarouselSlidesOnTablet: number,
-) => {
+): SerializedStyles => {
 	const peepingCardWidth = space[8];
 	const cardGap = 20;
 	const offsetPeepingCardWidth =
@@ -220,6 +272,8 @@ const getGapSize = (gap: GapSize) => {
 			return space[4];
 		case 'large':
 			return space[5];
+		case 'none':
+			return 0;
 	}
 };
 
@@ -227,10 +281,12 @@ const getGapSize = (gap: GapSize) => {
  * A component used in the carousel fronts containers (e.g. small/medium/feature)
  */
 export const ScrollableCarousel = ({
+	kind,
 	children,
 	carouselLength,
 	visibleCarouselSlidesOnMobile,
 	visibleCarouselSlidesOnTablet,
+	fixedSlideWidth,
 	sectionId,
 	shouldStackCards = { desktop: false, mobile: false },
 	gapSizes = { column: 'large', row: 'large' },
@@ -239,7 +295,35 @@ export const ScrollableCarousel = ({
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
 	const [nextButtonEnabled, setNextButtonEnabled] = useState(true);
 
-	const showNavigation = carouselLength > visibleCarouselSlidesOnTablet;
+	const showNavigation =
+		kind === CarouselKind.FrontCarousel
+			? carouselLength > visibleCarouselSlidesOnTablet
+			: false;
+
+	const rowGap = getGapSize(gapSizes.row);
+	const columnGap = getGapSize(gapSizes.column);
+
+	const carouselStyles = [
+		baseCarouselStyles,
+		carouselGapStyles(columnGap, rowGap),
+		...(kind === CarouselKind.FrontCarousel
+			? [
+					frontCarouselStyles,
+					generateFrontColumnStyles(
+						carouselLength,
+						visibleCarouselSlidesOnMobile,
+						visibleCarouselSlidesOnTablet,
+					),
+			  ]
+			: []),
+		...(kind === CarouselKind.ProductCarousel
+			? generateFixedWidthColumStyles({
+					carouselLength,
+					fixedSlideWidth,
+			  })
+			: []),
+		stackedCardRowsStyles(shouldStackCards),
+	];
 
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
@@ -252,9 +336,6 @@ export const ScrollableCarousel = ({
 			behavior: 'smooth',
 		});
 	};
-
-	const rowGap = getGapSize(gapSizes.row);
-	const columnGap = getGapSize(gapSizes.column);
 
 	/**
 	 * Updates state of navigation buttons based on carousel's scroll position.
@@ -368,19 +449,15 @@ export const ScrollableCarousel = ({
 	}, []);
 
 	return (
-		<div css={containerStyles}>
+		<div
+			css={[
+				baseContainerStyles,
+				kind === CarouselKind.FrontCarousel && frontContainerStyles,
+			]}
+		>
 			<ol
 				ref={carouselRef}
-				css={[
-					carouselStyles,
-					carouselGapStyles(columnGap, rowGap),
-					generateCarouselColumnStyles(
-						carouselLength,
-						visibleCarouselSlidesOnMobile,
-						visibleCarouselSlidesOnTablet,
-					),
-					stackedCardRowsStyles(shouldStackCards),
-				]}
+				css={carouselStyles}
 				data-heatphan-type="carousel"
 				onFocus={scrollToCardOnFocus}
 			>
