@@ -5,6 +5,7 @@ import { isUndefined, log, startPerformanceMeasure } from '@guardian/libs';
 import { createElement } from 'react';
 import { hydrateRoot } from 'react-dom/client';
 import { ConfigProvider } from '../../components/ConfigContext';
+import { DateTimeProvider } from '../../components/DateTimeContext';
 import { IslandProvider } from '../../components/IslandContext';
 import type { Config } from '../../types/configContext';
 
@@ -30,6 +31,7 @@ declare global {
  * @param element The location on the DOM where the component to hydrate exists
  * @param emotionCache An instance of an emotion cache to use for the island
  * @param config Application configuration to be passed to the config context for the hydrated component
+ * @param dateTime Datetime value to be passed to DateTime context for the hydrated component
  */
 export const doHydration = async (
 	name: string,
@@ -37,6 +39,7 @@ export const doHydration = async (
 	element: HTMLElement,
 	emotionCache: EmotionCache,
 	config: Config,
+	dateTime?: number,
 ): Promise<void> => {
 	// If this function has already been run for an element then don't try to
 	// run it a second time
@@ -61,13 +64,15 @@ export const doHydration = async (
 			hydrateRoot(
 				element,
 				<ConfigProvider value={config}>
-					<CacheProvider value={emotionCache}>
-						{/* Child islands should not be hydrated separately */}
-						<IslandProvider value={{ isChild: true }}>
-							{/* The component to hydrate must be a single JSX Element */}
-							{createElement(module[name], data)}
-						</IslandProvider>
-					</CacheProvider>
+					<DateTimeProvider value={dateTime}>
+						<CacheProvider value={emotionCache}>
+							{/* Child islands should not be hydrated separately */}
+							<IslandProvider value={{ isChild: true }}>
+								{/* The component to hydrate must be a single JSX Element */}
+								{createElement(module[name], data)}
+							</IslandProvider>
+						</CacheProvider>
+					</DateTimeProvider>
 				</ConfigProvider>,
 			);
 
