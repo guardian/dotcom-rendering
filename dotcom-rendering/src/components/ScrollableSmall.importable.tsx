@@ -63,7 +63,7 @@ export const ScrollableSmall = ({
 
 	return (
 		<ScrollableCarousel
-			kind={CarouselKind.VisibleSlides}
+			kind={CarouselKind.FrontCarousel}
 			carouselLength={Math.ceil(trails.length / 2)}
 			visibleCarouselSlidesOnMobile={1}
 			visibleCarouselSlidesOnTablet={2}

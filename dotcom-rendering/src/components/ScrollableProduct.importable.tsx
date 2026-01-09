@@ -20,8 +20,7 @@ export const ScrollableProduct = ({
 	};
 	return (
 		<ScrollableCarousel
-			isArticle={true}
-			kind={CarouselKind.FixedWidthSlides}
+			kind={CarouselKind.ProductCarousel}
 			carouselLength={products.length}
 			fixedSlideWidth={fixedCardWidth}
 			gapSizes={{ row: 'none', column: 'large' }}

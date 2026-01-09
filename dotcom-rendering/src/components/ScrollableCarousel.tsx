@@ -15,15 +15,14 @@ export type FixedSlideWidth = {
 };
 
 export enum CarouselKind {
-	'VisibleSlides',
-	'FixedWidthSlides',
+	'FrontCarousel',
+	'ProductCarousel',
 }
 
 type Props =
 	| {
-			kind: CarouselKind.VisibleSlides;
+			kind: CarouselKind.FrontCarousel;
 			children: React.ReactNode;
-			isArticle?: boolean;
 			carouselLength: number;
 			visibleCarouselSlidesOnMobile: number;
 			visibleCarouselSlidesOnTablet: number;
@@ -33,8 +32,7 @@ type Props =
 			gapSizes?: GapSizes;
 	  }
 	| {
-			kind: CarouselKind.FixedWidthSlides;
-			isArticle?: boolean;
+			kind: CarouselKind.ProductCarousel;
 			children: React.ReactNode;
 			carouselLength: number;
 			visibleCarouselSlidesOnMobile?: never;
@@ -296,7 +294,6 @@ const getGapSize = (gap: GapSize) => {
 export const ScrollableCarousel = ({
 	kind,
 	children,
-	isArticle = false,
 	carouselLength,
 	visibleCarouselSlidesOnMobile,
 	visibleCarouselSlidesOnTablet,
@@ -310,9 +307,34 @@ export const ScrollableCarousel = ({
 	const [nextButtonEnabled, setNextButtonEnabled] = useState(true);
 
 	const showNavigation =
-		kind === CarouselKind.VisibleSlides
+		kind === CarouselKind.FrontCarousel
 			? carouselLength > visibleCarouselSlidesOnTablet
 			: false;
+
+	const rowGap = getGapSize(gapSizes.row);
+	const columnGap = getGapSize(gapSizes.column);
+
+	const carouselStyles = [
+		baseCarouselStyles,
+		carouselGapStyles(columnGap, rowGap),
+		...(kind === CarouselKind.FrontCarousel
+			? [
+					frontCarouselStyles,
+					generateCarouselColumnStyles(
+						carouselLength,
+						visibleCarouselSlidesOnMobile,
+						visibleCarouselSlidesOnTablet,
+					),
+			  ]
+			: []),
+		...(kind === CarouselKind.ProductCarousel
+			? generateFixedWidthColumStyles({
+					carouselLength,
+					fixedSlideWidth,
+			  })
+			: []),
+		stackedCardRowsStyles(shouldStackCards),
+	];
 
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
@@ -325,9 +347,6 @@ export const ScrollableCarousel = ({
 			behavior: 'smooth',
 		});
 	};
-
-	const rowGap = getGapSize(gapSizes.row);
-	const columnGap = getGapSize(gapSizes.column);
 
 	/**
 	 * Updates state of navigation buttons based on carousel's scroll position.
@@ -441,27 +460,15 @@ export const ScrollableCarousel = ({
 	}, []);
 
 	return (
-		<div css={[baseContainerStyles, !isArticle && frontContainerStyles]}>
+		<div
+			css={[
+				baseContainerStyles,
+				kind === CarouselKind.FrontCarousel && frontContainerStyles,
+			]}
+		>
 			<ol
 				ref={carouselRef}
-				css={[
-					baseCarouselStyles,
-					!isArticle && frontCarouselStyles,
-					carouselGapStyles(columnGap, rowGap),
-					kind === CarouselKind.VisibleSlides &&
-						generateCarouselColumnStyles(
-							carouselLength,
-							visibleCarouselSlidesOnMobile,
-							visibleCarouselSlidesOnTablet,
-						),
-					...(kind === CarouselKind.FixedWidthSlides
-						? generateFixedWidthColumStyles({
-								carouselLength,
-								fixedSlideWidth,
-						  })
-						: []),
-					stackedCardRowsStyles(shouldStackCards),
-				]}
+				css={carouselStyles}
 				data-heatphan-type="carousel"
 				onFocus={scrollToCardOnFocus}
 			>

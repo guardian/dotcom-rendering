@@ -33,7 +33,7 @@ export const ScrollableFeature = ({
 }: Props) => {
 	return (
 		<ScrollableCarousel
-			kind={CarouselKind.VisibleSlides}
+			kind={CarouselKind.FrontCarousel}
 			carouselLength={trails.length}
 			visibleCarouselSlidesOnMobile={1}
 			visibleCarouselSlidesOnTablet={3}

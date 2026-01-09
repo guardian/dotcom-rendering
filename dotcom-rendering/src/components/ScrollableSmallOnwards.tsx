@@ -94,7 +94,7 @@ export const ScrollableSmallOnwards = (props: Props) => {
 			<Title title={props.heading} headingUrl={props.headingUrl} />
 			<div css={cardsContainerStyles}>
 				<ScrollableCarousel
-					kind={CarouselKind.VisibleSlides}
+					kind={CarouselKind.FrontCarousel}
 					carouselLength={Math.ceil(trails.length / 2)}
 					visibleCarouselSlidesOnMobile={1}
 					visibleCarouselSlidesOnTablet={2}
