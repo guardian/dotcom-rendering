@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, textSans15 } from '@guardian/source/foundations';
+import { from, space, textSans15 } from '@guardian/source/foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
@@ -46,7 +46,11 @@ export const StackedProducts = ({
 				css={[
 					css`
 						display: grid;
-						gap: ${space[4]}px;
+						gap: ${space[6]}px;
+
+						${from.phablet} {
+							gap: ${space[4]}px;
+						}
 					`,
 				]}
 			>
