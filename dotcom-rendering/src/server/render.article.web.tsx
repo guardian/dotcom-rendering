@@ -164,7 +164,10 @@ window.twttr = (function(d, s, id) {
 }(document, "script", "twitter-wjs"));
 </script>`;
 
-	const { canonicalUrl } = frontendData;
+	const { canonicalUrl, webPublicationDate } = frontendData;
+
+	const isBeforeInteractiveDarkModeSupport =
+		Date.parse(webPublicationDate) < Date.parse('2026-01-13T00:00:00Z');
 
 	const pageHtml = htmlPageTemplate({
 		linkedData,
@@ -188,8 +191,9 @@ window.twttr = (function(d, s, id) {
 		hasLiveBlogTopAd: !!frontendData.config.hasLiveBlogTopAd,
 		hasSurveyAd: !!frontendData.config.hasSurveyAd,
 		onlyLightColourScheme:
-			design === ArticleDesign.FullPageInteractive ||
-			design === ArticleDesign.Interactive,
+			(design === ArticleDesign.FullPageInteractive ||
+				design === ArticleDesign.Interactive) &&
+			isBeforeInteractiveDarkModeSupport,
 	});
 
 	return { html: pageHtml, prefetchScripts };
