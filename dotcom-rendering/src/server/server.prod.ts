@@ -28,6 +28,7 @@ import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { logger } from './lib/logging';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';
+import { handleAppsHostedContent } from './handler.hostedContent.apps';
 
 // Middleware to track route performance using 'response-time' lib
 // Usage: app.post('/Article', logRenderTime, renderArticle);
@@ -87,6 +88,7 @@ export const prodServer = (): void => {
 	app.post('/AppsInteractive', logRenderTime, handleAppsInteractive);
 	app.post('/AppsBlocks', logRenderTime, handleAppsBlocks);
 	app.post('/EditionsCrossword', logRenderTime, handleEditionsCrossword);
+	app.post('/AppsHostedContent', logRenderTime, handleAppsHostedContent);
 
 	app.get('/assets/rendered-items-assets', handleAppsAssets);
 
