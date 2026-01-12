@@ -34,6 +34,8 @@ type Props = {
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
 	enableHls?: boolean;
+	/** Passed through to cards to enable tag page storyline section specific rendering */
+	isStorylines?: boolean;
 	isInStarRatingVariant?: boolean;
 };
 
@@ -89,6 +91,7 @@ type ImmersiveCardLayoutProps = {
 	serverTime?: number;
 	imageLoading: Loading;
 	collectionId: number;
+	isStorylines?: boolean;
 	isInStarRatingVariant?: boolean;
 };
 
@@ -104,52 +107,49 @@ const ImmersiveCardLayout = ({
 	serverTime,
 	imageLoading,
 	collectionId,
+	isStorylines,
 	isInStarRatingVariant,
-}: ImmersiveCardLayoutProps) => {
-	const isLoopingVideo =
-		card.mainMedia?.type === 'SelfHostedVideo' &&
-		card.mainMedia.videoStyle === 'Loop';
-
-	return (
-		<UL padBottom={true}>
-			<LI padSides={true}>
-				<FeatureCard
-					collectionId={collectionId}
-					linkTo={card.url}
-					format={card.format}
-					headlineText={card.headline}
-					byline={card.byline}
-					showByline={card.showByline}
-					webPublicationDate={card.webPublicationDate}
-					kickerText={card.kickerText}
-					showClock={false}
-					image={card.image}
-					canPlayInline={isLoopingVideo ? false : true}
-					starRating={card.starRating}
-					dataLinkName={card.dataLinkName}
-					discussionApiUrl={card.discussionApiUrl}
-					discussionId={card.discussionId}
-					mainMedia={card.mainMedia}
-					isExternalLink={card.isExternalLink}
-					branding={card.branding}
-					containerPalette={containerPalette}
-					trailText={card.trailText}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-					aspectRatio="5:3"
-					mobileAspectRatio="4:5"
-					imageSize="feature-immersive"
-					headlineSizes={{ desktop: 'medium', tablet: 'small' }}
-					supportingContent={card.supportingContent}
-					isImmersive={true}
-					showVideo={card.showVideo}
-					isInStarRatingVariant={isInStarRatingVariant}
-					starRatingSize={'medium'}
-				/>
-			</LI>
-		</UL>
-	);
-};
+}: ImmersiveCardLayoutProps) => (
+	<UL padBottom={true}>
+		<LI padSides={true}>
+			<FeatureCard
+				collectionId={collectionId}
+				uniqueId={`collection-${collectionId}-immersive-0`}
+				linkTo={card.url}
+				format={card.format}
+				headlineText={card.headline}
+				byline={card.byline}
+				showByline={card.showByline}
+				webPublicationDate={card.webPublicationDate}
+				kickerText={card.kickerText}
+				showClock={false}
+				image={card.image}
+				canPlayInline={true}
+				showVideo={card.showVideo}
+				starRating={card.starRating}
+				dataLinkName={card.dataLinkName}
+				discussionApiUrl={card.discussionApiUrl}
+				discussionId={card.discussionId}
+				mainMedia={card.mainMedia}
+				isExternalLink={card.isExternalLink}
+				branding={card.branding}
+				containerPalette={containerPalette}
+				trailText={card.trailText}
+				serverTime={serverTime}
+				imageLoading={imageLoading}
+				aspectRatio="5:3"
+				mobileAspectRatio="4:5"
+				imageSize="feature-immersive"
+				headlineSizes={{ desktop: 'medium', tablet: 'small' }}
+				supportingContent={card.supportingContent}
+				isImmersive={true}
+				isStorylines={isStorylines}
+				isInStarRatingVariant={isInStarRatingVariant}
+				starRatingSize="medium"
+			/>
+		</LI>
+	</UL>
+);
 
 type BoostedSplashProperties = {
 	headlineSizes: ResponsiveFontSize;
@@ -173,6 +173,7 @@ const decideSplashCardProperties = (
 	mediaCard: boolean,
 	useLargerHeadlineSizeDesktop: boolean,
 	avatarUrl: boolean,
+	isStorylines?: boolean,
 ): BoostedSplashProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
@@ -193,6 +194,11 @@ const decideSplashCardProperties = (
 				subtitleSize: 'medium',
 			};
 		case 'boost':
+			const boostSupportingContentAlignment: Alignment =
+				isStorylines || supportingContentLength < 4
+					? 'vertical'
+					: 'horizontal';
+
 			return {
 				headlineSizes: {
 					desktop: useLargerHeadlineSizeDesktop ? 'xlarge' : 'large',
@@ -202,8 +208,7 @@ const decideSplashCardProperties = (
 				mediaPositionOnDesktop: 'right',
 				mediaPositionOnMobile: mediaCard ? 'top' : 'bottom',
 				mediaSize: avatarUrl ? 'large' : 'xlarge',
-				supportingContentAlignment:
-					supportingContentLength >= 4 ? 'horizontal' : 'vertical',
+				supportingContentAlignment: boostSupportingContentAlignment,
 				liveUpdatesAlignment: 'vertical',
 				trailTextSize: 'regular',
 				subtitleSize: 'medium',
@@ -256,6 +261,7 @@ type SplashCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
 	enableHls?: boolean;
+	isStorylines?: boolean;
 	isInStarRatingVariant?: boolean;
 };
 
@@ -270,6 +276,7 @@ const SplashCardLayout = ({
 	containerLevel,
 	collectionId,
 	enableHls,
+	isStorylines,
 	isInStarRatingVariant,
 }: SplashCardLayoutProps) => {
 	const card = cards[0];
@@ -310,6 +317,7 @@ const SplashCardLayout = ({
 		isMediaCard(card.format),
 		useLargerHeadlineSizeDesktop,
 		!!card.avatarUrl,
+		isStorylines,
 	);
 
 	return (
@@ -356,6 +364,7 @@ const SplashCardLayout = ({
 					subtitleSize={subtitleSize}
 					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
 					enableHls={enableHls}
+					isStorylines={isStorylines}
 					isInStarRatingVariant={isInStarRatingVariant}
 					starRatingSize={'medium'}
 				/>
@@ -424,6 +433,7 @@ type FullWidthCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
 	enableHls?: boolean;
+	isStorylines?: boolean;
 	isInStarRatingVariant?: boolean;
 };
 
@@ -439,6 +449,7 @@ const FullWidthCardLayout = ({
 	containerLevel,
 	collectionId,
 	enableHls,
+	isStorylines,
 	isInStarRatingVariant,
 }: FullWidthCardLayoutProps) => {
 	const card = cards[0];
@@ -466,6 +477,7 @@ const FullWidthCardLayout = ({
 				serverTime={serverTime}
 				imageLoading={imageLoading}
 				collectionId={collectionId}
+				isStorylines={isStorylines}
 				isInStarRatingVariant={isInStarRatingVariant}
 			/>
 		);
@@ -516,6 +528,7 @@ const FullWidthCardLayout = ({
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 					subtitleSize={subtitleSize}
 					enableHls={enableHls}
+					isStorylines={isStorylines}
 					isInStarRatingVariant={isInStarRatingVariant}
 					starRatingSize={'medium'}
 				/>
@@ -536,6 +549,7 @@ type HalfWidthCardLayoutProps = {
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	enableHls?: boolean;
+	isStorylines?: boolean;
 	isInStarRatingVariant?: boolean;
 };
 
@@ -551,6 +565,7 @@ const HalfWidthCardLayout = ({
 	isLastRow,
 	containerLevel,
 	enableHls,
+	isStorylines,
 	isInStarRatingVariant,
 }: HalfWidthCardLayoutProps) => {
 	if (cards.length === 0) return null;
@@ -607,6 +622,7 @@ const HalfWidthCardLayout = ({
 							headlineSizes={undefined}
 							canPlayInline={false}
 							enableHls={enableHls}
+							isStorylines={isStorylines}
 							isInStarRatingVariant={isInStarRatingVariant}
 						/>
 					</LI>
@@ -626,6 +642,7 @@ export const FlexibleGeneral = ({
 	containerLevel = 'Primary',
 	collectionId,
 	enableHls,
+	isStorylines = false,
 	isInStarRatingVariant,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
@@ -656,6 +673,7 @@ export const FlexibleGeneral = ({
 					containerLevel={containerLevel}
 					collectionId={collectionId}
 					enableHls={enableHls}
+					isStorylines={isStorylines}
 					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			)}
@@ -676,6 +694,7 @@ export const FlexibleGeneral = ({
 								containerLevel={containerLevel}
 								collectionId={collectionId}
 								enableHls={enableHls}
+								isStorylines={isStorylines}
 								isInStarRatingVariant={isInStarRatingVariant}
 							/>
 						);
@@ -697,6 +716,7 @@ export const FlexibleGeneral = ({
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
 								enableHls={enableHls}
+								isStorylines={isStorylines}
 								isInStarRatingVariant={isInStarRatingVariant}
 							/>
 						);
