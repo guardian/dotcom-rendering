@@ -1,9 +1,3 @@
-import type { ModuleDataResponse } from '@guardian/support-dotcom-components';
-import {
-	getBanner,
-	getEpic,
-	getLiveblogEpic,
-} from '@guardian/support-dotcom-components';
 import type {
 	BannerPayload,
 	EpicPayload,
@@ -13,6 +7,8 @@ import type {
 	EpicProps,
 } from '@guardian/support-dotcom-components/dist/shared/types';
 import useSWRImmutable from 'swr/immutable';
+import type { ModuleDataResponse } from './sdcRequests';
+import { getBanner, getEpic, getLiveblogEpic } from './sdcRequests';
 
 const useSDC = <PAYLOAD, PROPS>(
 	key: string,
@@ -25,7 +21,7 @@ const useSDC = <PAYLOAD, PROPS>(
 		revalidateOnFocus: false,
 	});
 	if (error) {
-		window.guardian.modules.sentry.reportError(error, 'rr-epic');
+		window.guardian.modules.sentry.reportError(error as Error, 'rr-epic');
 	}
 	return data;
 };
