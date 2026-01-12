@@ -109,52 +109,47 @@ const ImmersiveCardLayout = ({
 	collectionId,
 	isStorylines,
 	isInStarRatingVariant,
-}: ImmersiveCardLayoutProps) => {
-	const isLoopingVideo =
-		card.mainMedia?.type === 'SelfHostedVideo' &&
-		card.mainMedia.videoStyle === 'Loop';
-
-	return (
-		<UL padBottom={true}>
-			<LI padSides={true}>
-				<FeatureCard
-					collectionId={collectionId}
-					linkTo={card.url}
-					format={card.format}
-					headlineText={card.headline}
-					byline={card.byline}
-					showByline={card.showByline}
-					webPublicationDate={card.webPublicationDate}
-					kickerText={card.kickerText}
-					showClock={false}
-					image={card.image}
-					canPlayInline={isLoopingVideo ? false : true}
-					starRating={card.starRating}
-					dataLinkName={card.dataLinkName}
-					discussionApiUrl={card.discussionApiUrl}
-					discussionId={card.discussionId}
-					mainMedia={card.mainMedia}
-					isExternalLink={card.isExternalLink}
-					branding={card.branding}
-					containerPalette={containerPalette}
-					trailText={card.trailText}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-					aspectRatio="5:3"
-					mobileAspectRatio="4:5"
-					imageSize="feature-immersive"
-					headlineSizes={{ desktop: 'medium', tablet: 'small' }}
-					supportingContent={card.supportingContent}
-					isImmersive={true}
-					showVideo={card.showVideo}
-					isStorylines={isStorylines}
-					isInStarRatingVariant={isInStarRatingVariant}
-					starRatingSize={'medium'}
-				/>
-			</LI>
-		</UL>
-	);
-};
+}: ImmersiveCardLayoutProps) => (
+	<UL padBottom={true}>
+		<LI padSides={true}>
+			<FeatureCard
+				collectionId={collectionId}
+				uniqueId={`collection-${collectionId}-immersive-0`}
+				linkTo={card.url}
+				format={card.format}
+				headlineText={card.headline}
+				byline={card.byline}
+				showByline={card.showByline}
+				webPublicationDate={card.webPublicationDate}
+				kickerText={card.kickerText}
+				showClock={false}
+				image={card.image}
+				canPlayInline={true}
+				showVideo={card.showVideo}
+				starRating={card.starRating}
+				dataLinkName={card.dataLinkName}
+				discussionApiUrl={card.discussionApiUrl}
+				discussionId={card.discussionId}
+				mainMedia={card.mainMedia}
+				isExternalLink={card.isExternalLink}
+				branding={card.branding}
+				containerPalette={containerPalette}
+				trailText={card.trailText}
+				serverTime={serverTime}
+				imageLoading={imageLoading}
+				aspectRatio="5:3"
+				mobileAspectRatio="4:5"
+				imageSize="feature-immersive"
+				headlineSizes={{ desktop: 'medium', tablet: 'small' }}
+				supportingContent={card.supportingContent}
+				isImmersive={true}
+				isStorylines={isStorylines}
+				isInStarRatingVariant={isInStarRatingVariant}
+				starRatingSize="medium"
+			/>
+		</LI>
+	</UL>
+);
 
 type BoostedSplashProperties = {
 	headlineSizes: ResponsiveFontSize;

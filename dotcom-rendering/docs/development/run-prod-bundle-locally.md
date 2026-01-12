@@ -6,7 +6,7 @@ production build locally.
 To do this:
 
     $ make build
-    $ make ci
+    $ make prod-local
 
 The PROD server should start on its default port 9000.
 
