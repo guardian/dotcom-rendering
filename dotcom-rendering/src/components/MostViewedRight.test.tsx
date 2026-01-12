@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react';
 import { useApi as useApi_ } from '../lib/useApi';
 import { ConfigProvider } from './ConfigContext';
+import { DateTimeProvider } from './DateTimeContext';
 import { responseWithTwoTabs } from './MostViewed.mocks';
 import { MostViewedRight } from './MostViewedRight';
 
@@ -27,7 +28,9 @@ describe('MostViewedList', () => {
 					editionId: 'UK',
 				}}
 			>
-				<MostViewedRight />
+				<DateTimeProvider value={Date.now()}>
+					<MostViewedRight />
+				</DateTimeProvider>
 			</ConfigProvider>,
 		);
 
@@ -77,7 +80,9 @@ describe('MostViewedList', () => {
 					editionId: 'UK',
 				}}
 			>
-				<MostViewedRight limitItems={3} />
+				<DateTimeProvider value={Date.now()}>
+					<MostViewedRight limitItems={3} />
+				</DateTimeProvider>
 			</ConfigProvider>,
 		);
 
@@ -106,7 +111,9 @@ describe('MostViewedList', () => {
 					editionId: 'UK',
 				}}
 			>
-				<MostViewedRight />
+				<DateTimeProvider value={Date.now()}>
+					<MostViewedRight />
+				</DateTimeProvider>
 			</ConfigProvider>,
 		);
 

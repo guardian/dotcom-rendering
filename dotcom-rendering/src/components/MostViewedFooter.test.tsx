@@ -1,6 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 import { useApi as useApi_ } from '../lib/useApi';
 import { ConfigProvider } from './ConfigContext';
+import { DateTimeProvider } from './DateTimeContext';
 import { responseWithTwoTabs } from './MostViewed.mocks';
 import { MostViewedFooterData } from './MostViewedFooterData.importable';
 
@@ -30,11 +31,13 @@ describe('MostViewedFooterData', () => {
 					editionId: 'UK',
 				}}
 			>
-				<MostViewedFooterData
-					sectionId="Section Name"
-					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-					edition="UK"
-				/>
+				<DateTimeProvider value={Date.now()}>
+					<MostViewedFooterData
+						sectionId="Section Name"
+						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+						edition="UK"
+					/>
+				</DateTimeProvider>
 			</ConfigProvider>,
 		);
 
@@ -73,11 +76,13 @@ describe('MostViewedFooterData', () => {
 					editionId: 'UK',
 				}}
 			>
-				<MostViewedFooterData
-					sectionId="Section Name"
-					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-					edition="UK"
-				/>
+				<DateTimeProvider value={Date.now()}>
+					<MostViewedFooterData
+						sectionId="Section Name"
+						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+						edition="UK"
+					/>
+				</DateTimeProvider>
 			</ConfigProvider>,
 		);
 
@@ -135,11 +140,13 @@ describe('MostViewedFooterData', () => {
 					editionId: 'UK',
 				}}
 			>
-				<MostViewedFooterData
-					sectionId="Section Name"
-					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-					edition="UK"
-				/>
+				<DateTimeProvider value={Date.now()}>
+					<MostViewedFooterData
+						sectionId="Section Name"
+						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+						edition="UK"
+					/>
+				</DateTimeProvider>
 			</ConfigProvider>,
 		);
 
@@ -182,11 +189,13 @@ describe('MostViewedFooterData', () => {
 					editionId: 'UK',
 				}}
 			>
-				<MostViewedFooterData
-					sectionId="Section Name"
-					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-					edition="UK"
-				/>
+				<DateTimeProvider value={Date.now()}>
+					<MostViewedFooterData
+						sectionId="Section Name"
+						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+						edition="UK"
+					/>
+				</DateTimeProvider>
 			</ConfigProvider>,
 		);
 
@@ -205,11 +214,13 @@ describe('MostViewedFooterData', () => {
 					editionId: 'UK',
 				}}
 			>
-				<MostViewedFooterData
-					sectionId="Section Name"
-					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-					edition="UK"
-				/>
+				<DateTimeProvider value={Date.now()}>
+					<MostViewedFooterData
+						sectionId="Section Name"
+						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+						edition="UK"
+					/>
+				</DateTimeProvider>
 			</ConfigProvider>,
 		);
 
