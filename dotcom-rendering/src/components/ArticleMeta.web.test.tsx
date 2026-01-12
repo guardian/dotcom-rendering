@@ -3,6 +3,7 @@ import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStylin
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { ArticleMeta, shouldShowContributor } from './ArticleMeta.web';
 import { ConfigProvider } from './ConfigContext';
+import { DateTimeProvider } from './DateTimeContext';
 
 jest.mock('../lib/bridgetApi', () => jest.fn());
 jest.mock('../lib/useMatchMedia', () => ({
@@ -25,24 +26,26 @@ describe('ArticleMeta', () => {
 					editionId: 'UK',
 				}}
 			>
-				<ArticleMeta
-					format={format}
-					pageId="1234"
-					webTitle="A title"
-					byline="Observer writers"
-					tags={[
-						{
-							id: 'lifeandstyle/series/observer-design',
-							type: 'Series',
-							title: 'Observer Design',
-						},
-					]}
-					primaryDateline="primary date line"
-					secondaryDateline="secondary date line"
-					isCommentable={false}
-					discussionApiUrl=""
-					shortUrlId=""
-				/>
+				<DateTimeProvider value={Date.now()}>
+					<ArticleMeta
+						format={format}
+						pageId="1234"
+						webTitle="A title"
+						byline="Observer writers"
+						tags={[
+							{
+								id: 'lifeandstyle/series/observer-design',
+								type: 'Series',
+								title: 'Observer Design',
+							},
+						]}
+						primaryDateline="primary date line"
+						secondaryDateline="secondary date line"
+						isCommentable={false}
+						discussionApiUrl=""
+						shortUrlId=""
+					/>
+				</DateTimeProvider>
 			</ConfigProvider>,
 		);
 
@@ -72,24 +75,26 @@ describe('ArticleMeta', () => {
 					editionId: 'UK',
 				}}
 			>
-				<ArticleMeta
-					format={format}
-					pageId="1234"
-					webTitle="A title"
-					byline="Observer writers"
-					tags={[
-						{
-							id: 'lifeandstyle/series/observer-design',
-							type: 'Series',
-							title: 'Observer Design',
-						},
-					]}
-					primaryDateline="primary date line"
-					secondaryDateline="secondary date line"
-					isCommentable={false}
-					discussionApiUrl=""
-					shortUrlId=""
-				/>
+				<DateTimeProvider value={Date.now()}>
+					<ArticleMeta
+						format={format}
+						pageId="1234"
+						webTitle="A title"
+						byline="Observer writers"
+						tags={[
+							{
+								id: 'lifeandstyle/series/observer-design',
+								type: 'Series',
+								title: 'Observer Design',
+							},
+						]}
+						primaryDateline="primary date line"
+						secondaryDateline="secondary date line"
+						isCommentable={false}
+						discussionApiUrl=""
+						shortUrlId=""
+					/>
+				</DateTimeProvider>
 			</ConfigProvider>,
 		);
 
