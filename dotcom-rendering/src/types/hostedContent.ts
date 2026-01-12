@@ -1,25 +1,31 @@
+import { ArticleDesign } from '@guardian/libs';
 import type { FEHostedContent } from '../frontend/feHostedContent';
 
-type HostedContentType = 'article' | 'video' | 'gallery';
+type HostedContentDesign =
+	| ArticleDesign.Standard
+	| ArticleDesign.Video
+	| ArticleDesign.Gallery;
 
 export type HostedContent = {
 	frontendData: FEHostedContent;
-	type: HostedContentType;
+	design: HostedContentDesign;
 };
 
-export const enhanceHostedContentType = (
-	data: FEHostedContent,
-): HostedContent => {
-	let type: HostedContentType = 'article';
-
+const getHostedContentDesign = (data: FEHostedContent): HostedContentDesign => {
 	if (data.video) {
-		type = 'video';
+		return ArticleDesign.Video;
 	} else if (data.images.length) {
-		type = 'gallery';
+		return ArticleDesign.Gallery;
+	} else {
+		return ArticleDesign.Standard;
 	}
+};
 
+export const enhanceHostedContent = (
+	frontendData: FEHostedContent,
+): HostedContent => {
 	return {
-		frontendData: data,
-		type,
+		frontendData,
+		design: getHostedContentDesign(frontendData),
 	};
 };

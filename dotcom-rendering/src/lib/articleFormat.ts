@@ -50,6 +50,7 @@ export enum ArticleSpecial {
 	SpecialReport = 5,
 	Labs = 6,
 	SpecialReportAlt = 7,
+	// Hosted = 8,
 }
 
 export type ArticleTheme = Pillar | ArticleSpecial;

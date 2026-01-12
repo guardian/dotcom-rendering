@@ -1,3 +1,6 @@
+import type { Switches } from '@guardian/libs';
+import type { ServerSideTests, StageType } from '../types/config';
+
 export interface FEHostedContent {
 	// general / shared
 	id: string;
@@ -21,6 +24,16 @@ export interface FEHostedContent {
 	video?: HostedVideo;
 	// gallery
 	images: HostedGalleryImage[];
+
+	// TODO!
+	config: {
+		stage: StageType;
+		abTests: ServerSideTests;
+		serverSideABTests: Record<string, string>;
+		switches: Switches;
+		frontendAssetsFullURL: string;
+		isPaidContent?: boolean;
+	};
 }
 
 type HostedCampaign = {
