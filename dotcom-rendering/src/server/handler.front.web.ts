@@ -4,6 +4,7 @@ import type { FEFront } from '../frontend/feFront';
 import type { FETagPage } from '../frontend/feTagPage';
 import { decideTagPageBranding, pickBrandingForEdition } from '../lib/branding';
 import { decideTrail } from '../lib/decideTrail';
+import { createFakeCollection } from '../model/createCollection';
 import { enhanceCards } from '../model/enhanceCards';
 import { enhanceCollections } from '../model/enhanceCollections';
 import {
@@ -24,6 +25,26 @@ const enhanceFront = (body: unknown): Front => {
 
 	const serverTime = Date.now();
 
+	const acrossTheG = createFakeCollection(data.pressedPage.collections);
+	const collections = enhanceCollections({
+		collections: data.pressedPage.collections,
+		editionId: data.editionId,
+		pageId: data.pageId,
+		onPageDescription: data.pressedPage.frontProperties.onPageDescription,
+		isOnPaidContentFront: data.config.isPaidContent,
+		discussionApiUrl: data.config.discussionApiUrl,
+		frontBranding: pickBrandingForEdition(
+			data.pressedPage.frontProperties.commercial.editionBrandings,
+			data.editionId,
+		),
+	});
+
+	const combinedCollections = [
+		...collections.slice(0, 3),
+		acrossTheG,
+		...collections.slice(3),
+	];
+
 	return {
 		...data,
 		webTitle: `${
@@ -31,20 +52,7 @@ const enhanceFront = (body: unknown): Front => {
 		} | The Guardian`,
 		pressedPage: {
 			...data.pressedPage,
-			collections: enhanceCollections({
-				collections: data.pressedPage.collections,
-				editionId: data.editionId,
-				pageId: data.pageId,
-				onPageDescription:
-					data.pressedPage.frontProperties.onPageDescription,
-				isOnPaidContentFront: data.config.isPaidContent,
-				discussionApiUrl: data.config.discussionApiUrl,
-				frontBranding: pickBrandingForEdition(
-					data.pressedPage.frontProperties.commercial
-						.editionBrandings,
-					data.editionId,
-				),
-			}),
+			collections: combinedCollections,
 		},
 		mostViewed: data.mostViewed.map((trail) => decideTrail(trail)),
 		trendingTopics: extractTrendingTopicsFomFront(

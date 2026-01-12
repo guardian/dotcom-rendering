@@ -144,6 +144,7 @@ export type DCRCollectionType = {
 	collectionBranding?: CollectionBranding;
 	targetedTerritory?: Territory;
 	aspectRatio?: AspectRatio;
+	bucket?: DCRFrontCard[];
 };
 
 export type DCRGroupedTrails = {

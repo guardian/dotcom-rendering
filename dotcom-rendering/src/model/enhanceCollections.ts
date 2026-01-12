@@ -122,7 +122,7 @@ export const enhanceCollections = ({
 			collection.collectionType,
 		);
 
-		return {
+		const x = {
 			id,
 			displayName,
 			description:
@@ -169,5 +169,7 @@ export const enhanceCollections = ({
 			targetedTerritory: collection.targetedTerritory,
 			aspectRatio: collection.config.aspectRatio,
 		};
+		console.log(x);
+		return x;
 	});
 };
