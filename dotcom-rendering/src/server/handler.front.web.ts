@@ -156,6 +156,7 @@ const enhanceTagPage = (body: unknown): TagPage => {
 		},
 		branding: tagPageBranding,
 		canonicalUrl: data.canonicalUrl,
+		storylinesContent: data.storylinesContent ?? undefined,
 	};
 };
 
