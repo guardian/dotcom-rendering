@@ -1,4 +1,5 @@
 import { storage } from '@guardian/libs';
+import { Button } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
@@ -14,7 +15,6 @@ import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
 // eslint-disable-next-line import/no-cycle
 import { FrontCard } from './FrontCard';
-import { Button } from '@guardian/source/react-components';
 
 const getMediaPositionOnDesktop = (
 	format: ArticleFormat,
