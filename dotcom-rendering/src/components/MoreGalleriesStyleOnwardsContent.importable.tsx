@@ -107,6 +107,10 @@ const headerStyles = css`
 	padding-bottom: ${space[2]}px;
 	padding-top: ${space[1]}px;
 	margin-left: 0;
+
+	&::first-letter {
+		text-transform: capitalize;
+	}
 `;
 
 const mobileHeaderStyles = css`
@@ -239,13 +243,9 @@ export const MoreGalleriesStyleOnwardsContent = ({
 			css={containerStyles}
 		>
 			<LeftColumn>
-				<h2 css={headerStyles}>
-					<span>{heading}</span>
-				</h2>
+				<h2 css={headerStyles}>{heading}</h2>
 			</LeftColumn>
-			<h2 css={mobileHeaderStyles}>
-				<span>{heading}</span>
-			</h2>
+			<h2 css={mobileHeaderStyles}>{heading}</h2>
 			<div>
 				<div css={[cardsContainerStyles, splashCardStyles]}>
 					<Card
