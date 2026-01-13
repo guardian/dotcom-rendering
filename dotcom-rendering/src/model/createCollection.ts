@@ -29,8 +29,14 @@ const acrossTheGuardianCollection: DCRCollectionType = {
 };
 
 const PILLAR_CONTAINERS = ['Culture', 'Opinion', 'Sport', 'Lifestyle'];
+const MORE_PILLAR_CONTAINERS = ['More culture', 'More sport', 'More lifestyle'];
+
 const isPillarContainer = (collection: FECollection) =>
 	PILLAR_CONTAINERS.includes(collection.displayName);
+
+const isMorePillarContainer = (collection: FECollection) => {
+	return MORE_PILLAR_CONTAINERS.includes(collection.displayName);
+};
 
 type PillarCollection = {
 	pillar: string;
@@ -40,6 +46,15 @@ const getPillarCards = (collections: FECollection[]) => {
 	return collections.filter(isPillarContainer).map((collection) => {
 		return { pillar: collection.displayName, curated: collection.curated };
 	});
+};
+
+const getMoreCards = (collections: FECollection[]) => {
+	return collections
+		.filter(isMorePillarContainer)
+		.map((collection) => {
+			return collection.curated;
+		})
+		.flat();
 };
 
 const getCuratedList = (PillarCollections: PillarCollection[]) => {
@@ -59,8 +74,9 @@ export const createFakeCollection = (
 	collections: FECollection[],
 ): DCRCollectionType => {
 	const pillarCards = getPillarCards(collections);
+	const moreBucket = getMoreCards(collections);
 	const { curatedList, bucketList } = getCuratedList(pillarCards);
-
+	const combineBucket = [...bucketList, ...moreBucket];
 	return {
 		...acrossTheGuardianCollection,
 		curated: enhanceCards(curatedList, {
@@ -68,7 +84,7 @@ export const createFakeCollection = (
 			discussionApiUrl: 'string',
 			editionId: 'UK',
 		}),
-		bucket: enhanceCards(bucketList, {
+		bucket: enhanceCards(combineBucket, {
 			cardInTagPage: false,
 			discussionApiUrl: 'string',
 			editionId: 'UK',
