@@ -74,7 +74,7 @@ const figureStyles = (
 		}
 	`}
 
-	${isFeatureCard &&
+	${(letterboxed || isFeatureCard) &&
 	css`
 		width: 100%;
 		max-width: 100%;
@@ -141,6 +141,23 @@ const doesVideoHaveAudio = (video: HTMLVideoElement): boolean =>
 	('audioTracks' in video &&
 		Boolean((video.audioTracks as { length: number }).length));
 
+/**
+ * If the video is cropped, ensure its aspect ratio falls between 4:5 and 5:4.
+ * This prevents rendering unsupported aspect ratios.
+ */
+const getAspectRatioOfVisibleVideo = (
+	width: number,
+	height: number,
+	cropVideo: boolean,
+): number => {
+	if (cropVideo) {
+		if (width / height < 4 / 5) return 4 / 5;
+		if (width / height > 5 / 4) return 5 / 4;
+	}
+
+	return width / height;
+};
+
 type Props = {
 	sources: Source[];
 	atomId: string;
@@ -150,9 +167,9 @@ type Props = {
 	videoStyle: VideoPlayerFormat;
 	posterImage: string;
 	/**
-	 * The desired aspect ratio of the container of the video, which can differ from the
-	 * aspect ratio of the video itself. Only applied from the tablet breakpoint, as below this
-	 * breakpoint, the video always takes up the full width of the screen.
+	 * Setting the aspect ratio of the container allows for letterboxing at and above the tablet breakpoint.
+	 * If this value is set, the video container will maintain this aspect ratio from this breakpoint, whilst
+	 * the video maintains its own aspect ratio. This will result in grey bars on either side of the video.
 	 */
 	containerAspectRatio?: number;
 	fallbackImage: CardPictureProps['mainImage'];
@@ -163,8 +180,13 @@ type Props = {
 	linkTo: string;
 	subtitleSource?: string;
 	subtitleSize: SubtitleSize;
-	letterboxed?: boolean;
 	isFeatureCard?: boolean;
+	/**
+	 * If set to true, the video's visible aspect ratio will fall somewhere
+	 * between 4:5 and 5:4. For example, a 9:16 video would be "cropped" to 4:5,
+	 * meaning the top and bottom of the article are hidden to the user.
+	 */
+	cropVideo?: boolean;
 };
 
 export const SelfHostedVideo = ({
@@ -184,8 +206,8 @@ export const SelfHostedVideo = ({
 	linkTo,
 	subtitleSource,
 	subtitleSize,
-	letterboxed = false,
 	isFeatureCard = false,
+	cropVideo = false,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -692,6 +714,12 @@ export const SelfHostedVideo = ({
 	};
 
 	const aspectRatio = width / height;
+	const aspectRatioOfVisibleVideo = getAspectRatioOfVisibleVideo(
+		width,
+		height,
+		cropVideo,
+	);
+	const letterboxed = aspectRatio !== aspectRatioOfVisibleVideo;
 
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
 
@@ -709,14 +737,14 @@ export const SelfHostedVideo = ({
 		<div
 			css={videoContainerStyles(
 				isCinemagraph,
-				aspectRatio,
+				aspectRatioOfVisibleVideo,
 				containerAspectRatio,
 			)}
 		>
 			<figure
 				ref={setNode}
 				css={figureStyles(
-					aspectRatio,
+					aspectRatioOfVisibleVideo,
 					letterboxed,
 					containerAspectRatio,
 					isFeatureCard,
