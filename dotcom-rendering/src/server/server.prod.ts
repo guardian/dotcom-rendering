@@ -1,7 +1,6 @@
 import compression from 'compression';
 import type { ErrorRequestHandler, Request, Response } from 'express';
 import express from 'express';
-import responseTime from 'response-time';
 import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
 import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslettersPage.web';
 import {
@@ -30,16 +29,6 @@ import { logger } from './lib/logging';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';
 
-// Middleware to track route performance using 'response-time' lib
-// Usage: app.post('/Article', logRenderTime, renderArticle);
-const logRenderTime = responseTime(
-	(_1: Request, _2: Response, renderTime: number) => {
-		logger.info('Page render time', {
-			renderTime,
-		});
-	},
-);
-
 export const prodServer = (): void => {
 	logger.info('dotcom-rendering is GO.');
 
@@ -60,35 +49,23 @@ export const prodServer = (): void => {
 		app.use('/assets', express.static(__dirname));
 	}
 
-	app.post('/Article', logRenderTime, handleArticle);
-	app.post('/Interactive', logRenderTime, handleInteractive);
-	app.post('/Blocks', logRenderTime, handleBlocks);
-	app.post('/Front', logRenderTime, handleFront);
-	app.post('/TagPage', logRenderTime, handleTagPage);
-	app.post(
-		'/FootballMatchListPage',
-		logRenderTime,
-		handleFootballMatchListPage,
-	);
-	app.post('/CricketMatchPage', logRenderTime, handleCricketMatchPage);
-	app.post('/FootballTablesPage', logRenderTime, handleFootballTablesPage);
-	app.post(
-		'/FootballMatchSummaryPage',
-		logRenderTime,
-		handleFootballMatchPage,
-	);
-	app.post('/HostedContent', logRenderTime, handleHostedContent);
+	app.post('/Article', handleArticle);
+	app.post('/Interactive', handleInteractive);
+	app.post('/Blocks', handleBlocks);
+	app.post('/Front', handleFront);
+	app.post('/TagPage', handleTagPage);
+	app.post('/FootballMatchListPage', handleFootballMatchListPage);
+	app.post('/CricketMatchPage', handleCricketMatchPage);
+	app.post('/FootballTablesPage', handleFootballTablesPage);
+	app.post('/FootballMatchSummaryPage', handleFootballMatchPage);
+	app.post('/HostedContent', handleHostedContent);
 
-	app.post(
-		'/EmailNewsletters',
-		logRenderTime,
-		handleAllEditorialNewslettersPage,
-	);
-	app.post('/AppsArticle', logRenderTime, handleAppsArticle);
-	app.post('/AppsInteractive', logRenderTime, handleAppsInteractive);
-	app.post('/AppsBlocks', logRenderTime, handleAppsBlocks);
-	app.post('/EditionsCrossword', logRenderTime, handleEditionsCrossword);
-	app.post('/AppsHostedContent', logRenderTime, handleAppsHostedContent);
+	app.post('/EmailNewsletters', handleAllEditorialNewslettersPage);
+	app.post('/AppsArticle', handleAppsArticle);
+	app.post('/AppsInteractive', handleAppsInteractive);
+	app.post('/AppsBlocks', handleAppsBlocks);
+	app.post('/EditionsCrossword', handleEditionsCrossword);
+	app.post('/AppsHostedContent', handleAppsHostedContent);
 
 	app.get('/assets/rendered-items-assets', handleAppsAssets);
 
