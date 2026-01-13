@@ -406,15 +406,12 @@ export const StickyBottomBanner = ({
 		isInAuxiaControlGroup,
 	]);
 
-	//Dispatches 'banner:none' event after pickMessage completes with no banner selected.
-	//hasPickMessageCompleted distinguishes between initial state (not picked yet) and final state (picked nothing).
+	// Dispatches 'banner:none' event for mobile sticky ad integration (see @guardian/commercial-dev).
+	// Ensures ads only insert when no banner will be shown.
+	// hasPickMessageCompleted distinguishes between initial state (not picked yet) and final state (picked nothing).
 	useEffect(() => {
 		if (hasPickMessageCompleted && SelectedBanner == null) {
-			document.dispatchEvent(
-				new CustomEvent('banner:none', {
-					detail: { readerRevenue: false },
-				}),
-			);
+			document.dispatchEvent(new CustomEvent('banner:none'));
 		}
 	}, [SelectedBanner, hasPickMessageCompleted]);
 	if (SelectedBanner) {
