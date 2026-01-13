@@ -8,6 +8,7 @@ import type {
 	DCRGroupedTrails,
 } from '../types/front';
 import { DynamicFast } from './DynamicFast';
+import { DynamicMediumFour } from './DynamicMediumFour.importable';
 import { DynamicPackage } from './DynamicPackage';
 import { DynamicSlow } from './DynamicSlow';
 import { FixedLargeSlowXIV } from './FixedLargeSlowXIV';
@@ -48,6 +49,7 @@ type Props = {
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
 	isInStarRatingVariant?: boolean;
+	backfillBucket?: DCRFrontCard[];
 };
 
 export const DecideContainer = ({
@@ -64,6 +66,7 @@ export const DecideContainer = ({
 	collectionId,
 	containerLevel,
 	isInStarRatingVariant,
+	backfillBucket,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -298,6 +301,22 @@ export const DecideContainer = ({
 				</Island>
 			);
 		case 'static/medium/4':
+			if (backfillBucket) {
+				return (
+					<Island priority="critical" defer={{ until: 'visible' }}>
+						<DynamicMediumFour
+							trails={trails}
+							containerPalette={containerPalette}
+							showAge={showAge}
+							serverTime={serverTime}
+							imageLoading={imageLoading}
+							aspectRatio={aspectRatio}
+							isInStarRatingVariant={isInStarRatingVariant}
+							backfillBucket={backfillBucket}
+						/>
+					</Island>
+				);
+			}
 			return (
 				<StaticMediumFour
 					trails={trails}

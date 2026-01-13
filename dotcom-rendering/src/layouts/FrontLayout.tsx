@@ -530,6 +530,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									isInStarRatingVariant={
 										isInStarRatingVariant
 									}
+									backfillBucket={collection.bucket}
 								/>
 							</FrontSection>
 
