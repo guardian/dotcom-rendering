@@ -15,6 +15,7 @@ import {
 import { handleAppsAssets } from './handler.assets.apps';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import { handleFront, handleTagPage } from './handler.front.web';
+import { handleAppsHostedContent } from './handler.hostedContent.apps';
 import { handleHostedContent } from './handler.hostedContent.web';
 import {
 	handleCricketMatchPage,
@@ -26,7 +27,6 @@ import { getABTestsFromQueryParams } from './lib/get-abtests-from-query-params';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';
-import { handleAppsHostedContent } from './handler.hostedContent.apps';
 
 /** article URLs contain a part that looks like “2022/nov/25” */
 const ARTICLE_URL = /(\/\d{4}\/[a-z]{3}\/\d{2}\/)/;

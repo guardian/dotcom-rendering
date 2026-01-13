@@ -17,6 +17,7 @@ import {
 import { handleAppsAssets } from './handler.assets.apps';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import { handleFront, handleTagPage } from './handler.front.web';
+import { handleAppsHostedContent } from './handler.hostedContent.apps';
 import { handleHostedContent } from './handler.hostedContent.web';
 import {
 	handleCricketMatchPage,
@@ -28,7 +29,6 @@ import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { logger } from './lib/logging';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';
-import { handleAppsHostedContent } from './handler.hostedContent.apps';
 
 // Middleware to track route performance using 'response-time' lib
 // Usage: app.post('/Article', logRenderTime, renderArticle);
