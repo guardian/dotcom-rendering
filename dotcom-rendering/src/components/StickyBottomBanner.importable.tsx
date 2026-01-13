@@ -406,6 +406,8 @@ export const StickyBottomBanner = ({
 		isInAuxiaControlGroup,
 	]);
 
+	//Dispatches 'banner:none' event after pickMessage completes with no banner selected.
+	//hasPickMessageCompleted distinguishes between initial state (not picked yet) and final state (picked nothing).
 	useEffect(() => {
 		if (hasPickMessageCompleted && SelectedBanner == null) {
 			document.dispatchEvent(
