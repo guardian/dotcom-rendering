@@ -70,6 +70,25 @@ const roleCss = {
 		}
 	`,
 
+	fullWidth: css`
+		position: relative;
+		margin-top: ${space[3]}px;
+		margin-bottom: ${space[3]}px;
+		width: calc(100vw - var(--scrollbar-width));
+		left: 50%;
+		right: 50%;
+		margin-left: calc(-50vw + var(--half-scrollbar-width));
+		${from.tablet} {
+			margin-left: calc(-50vw + var(--half-scrollbar-width) + 10px);
+		}
+		${from.leftCol} {
+			margin-left: calc(-50vw - var(--half-scrollbar-width));
+		}
+		${from.wide} {
+			margin-left: calc(-50vw + var(--half-scrollbar-width));
+		}
+	`,
+
 	showcase: css`
 		margin-top: ${space[3]}px;
 		margin-bottom: ${space[3]}px;
@@ -150,7 +169,7 @@ const roleCss = {
 
 // Used for vast majority of layouts.
 export const defaultRoleStyles = (
-	role: RoleType | 'richLink',
+	role: RoleType | 'richLink' | 'fullWidth',
 	format: ArticleFormat,
 	isTimeline = false,
 ) => {
@@ -161,6 +180,8 @@ export const defaultRoleStyles = (
 			return roleCss.supporting;
 		case 'immersive':
 			return roleCss.immersive;
+		case 'fullWidth':
+			return roleCss.fullWidth;
 		case 'showcase':
 			if (isTimeline) {
 				return css`
