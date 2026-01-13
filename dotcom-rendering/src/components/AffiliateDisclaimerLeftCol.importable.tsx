@@ -18,7 +18,7 @@ const disclaimerLeftColStyles = css`
 	padding-bottom: ${space[1]}px;
 `;
 
-const AffiliateDisclaimer = () => {
+const AffiliateDisclaimerLeftCol = () => {
 	useAffiliateDisclaimerEvent();
 	return (
 		<Hide until="leftCol">
@@ -32,4 +32,4 @@ const AffiliateDisclaimer = () => {
 	);
 };
 
-export { AffiliateDisclaimer };
+export { AffiliateDisclaimerLeftCol };

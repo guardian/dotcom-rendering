@@ -11,22 +11,12 @@ import {
 } from '../lib/affiliateDisclaimerHelpers';
 import { palette as themePalette } from '../palette';
 
-const disclaimerLeftColStyles = css`
-	${textSans15};
-	/**
-	 * Typography preset styles should not be overridden.
-	 * This has been done because the styles do not directly map to the new presets.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	 */
-	line-height: 1.15;
-	padding-top: ${space[1]}px;
-	padding-bottom: ${space[1]}px;
-`;
-
 const galleryDisclaimerStyles = css`
 	${textSans12};
 	line-height: 1.5;
 	color: ${themePalette('--affiliate-disclaimer-text')};
+	padding-top: ${space[1]}px;
+	padding-bottom: ${space[1]}px;
 	a {
 		color: ${themePalette('--affiliate-disclaimer-text')};
 		transition: border-color 0.15s ease-out;
@@ -44,7 +34,7 @@ const GalleryAffiliateDisclaimer = () => {
 	useAffiliateDisclaimerEvent();
 	return (
 		<aside
-			css={[disclaimerLeftColStyles, galleryDisclaimerStyles]}
+			css={[galleryDisclaimerStyles]}
 			data-testid="affiliate-disclaimer"
 		>
 			<DisclaimerText />
