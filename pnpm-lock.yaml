@@ -454,9 +454,6 @@ importers:
       '@types/relateurl':
         specifier: 0.2.33
         version: 0.2.33
-      '@types/response-time':
-        specifier: 2.3.8
-        version: 2.3.8
       '@types/sanitize-html':
         specifier: 2.11.0
         version: 2.11.0
@@ -634,9 +631,6 @@ importers:
       remark-rehype:
         specifier: 11.1.2
         version: 11.1.2
-      response-time:
-        specifier: 2.3.2
-        version: 2.3.2
       sanitize-html:
         specifier: 2.13.0
         version: 2.13.0
@@ -4222,9 +4216,6 @@ packages:
 
   '@types/resolve@1.20.6':
     resolution: {integrity: sha512-A4STmOXPhMUtHH+S6ymgE2GiBSMqf4oTvcQZMcHzokuTLVYzXTB8ttjcgxOVaAp2lGwEdzZ0J+cRbbeevQj1UQ==}
-
-  '@types/response-time@2.3.8':
-    resolution: {integrity: sha512-7qGaNYvdxc0zRab8oHpYx7AW17qj+G0xuag1eCrw3M2VWPJQ/HyKaaghWygiaOUl0y9x7QGQwppDpqLJ5V9pzw==}
 
   '@types/retry@0.12.2':
     resolution: {integrity: sha512-XISRgDJ2Tc5q4TRqvgJtzsRkFYNJzZrhTdtMoGVBttwzzQJkPnS3WWTFc7kuDRoPtPakl+T+OfdEUjYJj7Jbow==}
@@ -8451,10 +8442,6 @@ packages:
   resolve@2.0.0-next.5:
     resolution: {integrity: sha512-U7WjGVG9sH8tvjW5SmGbQuui75FiyjAX72HX15DwBBwF9dNiQZRQAg9nnPhYy+TUnE0+VcrttuvNI8oSxZcocA==}
     hasBin: true
-
-  response-time@2.3.2:
-    resolution: {integrity: sha512-MUIDaDQf+CVqflfTdQ5yam+aYCkXj1PY8fjlPDQ6ppxJlmgZb864pHtA750mayywNg8tx4rS7qH9JXd/OF+3gw==}
-    engines: {node: '>= 0.8.0'}
 
   responselike@3.0.0:
     resolution: {integrity: sha512-40yHxbNcl2+rzXvZuVkrYohathsSJlMTXKryG5y8uciHv1+xDLHQpgjG64JUO9nrEq2jGLH6IZ8BcZyw3wrweg==}
@@ -15147,11 +15134,6 @@ snapshots:
 
   '@types/resolve@1.20.6': {}
 
-  '@types/response-time@2.3.8':
-    dependencies:
-      '@types/express': 5.0.1
-      '@types/node': 22.17.0
-
   '@types/retry@0.12.2': {}
 
   '@types/sanitize-html@2.11.0':
@@ -20418,11 +20400,6 @@ snapshots:
       is-core-module: 2.16.1
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
-
-  response-time@2.3.2:
-    dependencies:
-      depd: 1.1.2
-      on-headers: 1.0.2
 
   responselike@3.0.0:
     dependencies:
