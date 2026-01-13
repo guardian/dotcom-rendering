@@ -34,7 +34,7 @@ import { recordError } from './lib/logging-store';
 // Usage: app.post('/Article', logRenderTime, renderArticle);
 const logRenderTime = responseTime(
 	(_1: Request, _2: Response, renderTime: number) => {
-		logger.info('Page render time', {
+		logger.debug('Page render time', {
 			renderTime,
 		});
 	},
