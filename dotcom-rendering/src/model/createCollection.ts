@@ -49,14 +49,32 @@ const getPillarCards = (collections: FECollection[]) => {
 };
 
 const getMoreCards = (collections: FECollection[]) => {
-	return collections
+	const buckets = collections
 		.filter(isMorePillarContainer)
-		.map((collection) => {
-			return collection.curated;
-		})
-		.flat();
+		.map((collection) => collection.curated);
+
+	const maxLength = Math.max(...buckets.map((b) => b.length));
+
+	const result = [];
+
+	for (let i = 0; i < maxLength; i++) {
+		for (const bucket of buckets) {
+			if (bucket[i]) {
+				result.push(bucket[i]);
+			}
+		}
+	}
+
+	return result;
 };
 
+function shuffle(array: (FEFrontCard | undefined)[]) {
+	for (let i = array.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[array[i], array[j]] = [array[j], array[i]];
+	}
+	return array;
+}
 const getCuratedList = (PillarCollections: PillarCollection[]) => {
 	const curatedList: FEFrontCard[] = [];
 	const bucketList: FEFrontCard[] = [];
@@ -77,6 +95,8 @@ export const createFakeCollection = (
 	const moreBucket = getMoreCards(collections);
 	const { curatedList, bucketList } = getCuratedList(pillarCards);
 	const combineBucket = [...bucketList, ...moreBucket];
+
+	const shuffledBucket = shuffle(combineBucket) as FEFrontCard[];
 	return {
 		...acrossTheGuardianCollection,
 		curated: enhanceCards(curatedList, {
@@ -84,7 +104,7 @@ export const createFakeCollection = (
 			discussionApiUrl: 'string',
 			editionId: 'UK',
 		}),
-		bucket: enhanceCards(combineBucket, {
+		bucket: enhanceCards(shuffledBucket, {
 			cardInTagPage: false,
 			discussionApiUrl: 'string',
 			editionId: 'UK',
