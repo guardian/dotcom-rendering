@@ -144,8 +144,6 @@ const datawrapperRoleStyles = (role: RoleType): SerializedStyles | null => {
 		case 'thumbnail':
 		case 'halfWidth':
 			return null;
-		default:
-			return null;
 	}
 };
 
