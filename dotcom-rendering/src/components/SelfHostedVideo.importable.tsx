@@ -55,22 +55,36 @@ const videoContainerStyles = (
 	}
 `;
 
-const figureStyles = (aspectRatio: number, letterboxed: boolean) => css`
+const figureStyles = (
+	aspectRatio: number,
+	letterboxed: boolean,
+	containerAspectRatio?: number,
+	isFeatureCard?: boolean,
+) => css`
 	position: relative;
 	aspect-ratio: ${aspectRatio};
 	height: 100%;
+
 	${letterboxed &&
 	css`
 		max-height: 100vh;
 		max-height: 100svh;
 		max-width: 100%;
+
 		${from.tablet} {
-			/**
-			 * The value "80" is derived from the aspect ratio of the 5:4 slot.
-			 * When other slots are used for self-hosted videos, this will need to be adjusted.
-			 */
-			max-width: ${aspectRatio * 80}%;
+			${typeof containerAspectRatio === 'number' &&
+			`max-width: ${aspectRatio * (1 / containerAspectRatio) * 100}%;`}
 		}
+	`}
+
+	${isFeatureCard &&
+	css`
+		width: 100%;
+		max-width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		overflow: hidden;
 	`}
 `;
 
@@ -154,6 +168,7 @@ type Props = {
 	subtitleSize: SubtitleSize;
 	enableHls: boolean;
 	letterboxed?: boolean;
+	isFeatureCard?: boolean;
 };
 
 export const SelfHostedVideo = ({
@@ -175,6 +190,7 @@ export const SelfHostedVideo = ({
 	subtitleSize,
 	enableHls,
 	letterboxed = false,
+	isFeatureCard = false,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -704,7 +720,12 @@ export const SelfHostedVideo = ({
 		>
 			<figure
 				ref={setNode}
-				css={figureStyles(aspectRatio, letterboxed)}
+				css={figureStyles(
+					aspectRatio,
+					letterboxed,
+					containerAspectRatio,
+					isFeatureCard,
+				)}
 				className={`video-container ${videoStyle.toLocaleLowerCase()}`}
 				data-component="gu-video-loop"
 			>
@@ -739,6 +760,7 @@ export const SelfHostedVideo = ({
 					activeCue={activeCue}
 					enableHls={enableHls}
 					letterboxed={letterboxed}
+					isFeatureCard={isFeatureCard}
 				/>
 			</figure>
 		</div>

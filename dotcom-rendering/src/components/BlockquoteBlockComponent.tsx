@@ -122,6 +122,8 @@ const textElement =
 					key,
 					children,
 				});
+			case '#comment':
+				return null;
 			default:
 				logger.warn(
 					'BlockquoteBlockComponent: Unknown element received',
