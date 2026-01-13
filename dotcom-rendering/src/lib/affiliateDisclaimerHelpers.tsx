@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
+import { useConfig } from 'src/components/ConfigContext';
 
 /**
  * On Articles we render multiple Affiliate Disclaimer components,
@@ -12,6 +13,8 @@ import { submitComponentEvent } from '../client/ophan/ophan';
 let affiliateDisclaimerDetectTracked = false;
 
 const useAffiliateDisclaimerEvent = (): void => {
+	const { renderingTarget } = useConfig();
+
 	useEffect(() => {
 		if (!affiliateDisclaimerDetectTracked) {
 			void submitComponentEvent(
@@ -21,7 +24,7 @@ const useAffiliateDisclaimerEvent = (): void => {
 						componentType: 'AFFILIATE_DISCLAIMER',
 					},
 				},
-				'Web',
+				renderingTarget,
 			);
 
 			affiliateDisclaimerDetectTracked = true;
