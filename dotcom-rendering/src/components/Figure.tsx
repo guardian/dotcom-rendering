@@ -7,7 +7,7 @@ type Props = {
 	children: React.ReactNode;
 	format: ArticleFormat;
 	isMainMedia: boolean;
-	role?: RoleType | 'richLink';
+	role?: RoleType | 'richLink' | 'fullWidth';
 	id?: string;
 	className?: string;
 	type?: FEElement['_type'];
@@ -71,22 +71,9 @@ const roleCss = {
 	`,
 
 	fullWidth: css`
-		position: relative;
 		margin-top: ${space[3]}px;
 		margin-bottom: ${space[3]}px;
-		width: calc(100vw - var(--scrollbar-width));
-		left: 50%;
-		right: 50%;
-		margin-left: calc(-50vw + var(--half-scrollbar-width));
-		${from.tablet} {
-			margin-left: calc(-50vw + var(--half-scrollbar-width) + 10px);
-		}
-		${from.leftCol} {
-			margin-left: calc(-50vw - var(--half-scrollbar-width));
-		}
-		${from.wide} {
-			margin-left: calc(-50vw + var(--half-scrollbar-width));
-		}
+		grid-column: 1 / -1;
 	`,
 
 	showcase: css`
