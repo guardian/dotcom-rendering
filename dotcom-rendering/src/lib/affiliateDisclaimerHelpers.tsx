@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
-import { useConfig } from 'src/components/ConfigContext';
+import { useConfig } from '../components/ConfigContext';
 
 /**
  * On Articles we render multiple Affiliate Disclaimer components,
