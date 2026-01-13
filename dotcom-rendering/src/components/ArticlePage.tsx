@@ -78,6 +78,10 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			<Lightbox
 				format={format}
 				switches={frontendData.config.switches}
+				isInStarRatingVariant={
+					frontendData.config.abTests.starRatingRedesignVariant ===
+					'variant'
+				}
 				{...(renderingTarget === 'Web'
 					? {
 							lightboxImages: frontendData.imagesForLightbox,

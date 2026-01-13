@@ -12,6 +12,7 @@ interface BaseProps {
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 	switches: Switches;
+	isInStarRatingVariant?: boolean;
 }
 
 interface WebProps extends BaseProps {
@@ -29,6 +30,7 @@ export const Lightbox = ({
 	lightboxImages,
 	renderingTarget,
 	switches,
+	isInStarRatingVariant,
 }: WebProps | AppProps) => {
 	switch (renderingTarget) {
 		case 'Web':
@@ -46,6 +48,7 @@ export const Lightbox = ({
 						<LightboxLayout
 							format={format}
 							images={lightboxImages}
+							isInStarRatingVariant={isInStarRatingVariant}
 						/>
 					</Island>
 					<Island priority="feature" defer={{ until: 'idle' }}>

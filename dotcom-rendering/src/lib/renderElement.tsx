@@ -29,7 +29,6 @@ import { Island } from '../components/Island';
 import { ItemLinkBlockElement } from '../components/ItemLinkBlockElement';
 import { KeyTakeaways } from '../components/KeyTakeaways';
 import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
-import { LoopVideoInArticle } from '../components/LoopVideoInArticle';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
 import { MiniProfiles } from '../components/MiniProfiles';
@@ -44,6 +43,7 @@ import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
 import { QandaAtom } from '../components/QandaAtom.importable';
 import { QAndAExplainers } from '../components/QAndAExplainers';
 import { RichLinkComponent } from '../components/RichLinkComponent.importable';
+import { SelfHostedVideoInArticle } from '../components/SelfHostedVideoInArticle';
 import { SoundcloudBlockComponent } from '../components/SoundcloudBlockComponent';
 import { SpotifyBlockComponent } from '../components/SpotifyBlockComponent.importable';
 import { StarRatingBlockComponent } from '../components/StarRatingBlockComponent';
@@ -384,6 +384,9 @@ export const renderElement = ({
 					title={element.title}
 					isAvatar={element.isAvatar}
 					isTimeline={isTimeline}
+					isInStarRatingVariant={
+						abTests.starRatingRedesignVariant === 'variant'
+					}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
@@ -493,22 +496,16 @@ export const renderElement = ({
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
-			/*
-				- MediaAtomBlockElement is used for self-hosted videos
-				- Historically, these videos have been self-hosted for legal or sensitive reasons
-					- These videos play in the `VideoAtom` component
-				- Looping videos, introduced in July 2025, are also self-hosted
-					- Thus they are delivered as a MediaAtomBlockElement
-					- However they need to display in a different video player
-				- We need to differentiate between the two forms of video
-					- We can do this by interrogating the atom's metadata, which includes the new attribute `videoPlayerFormat`
-			*/
-			if (element.videoPlayerFormat === 'Loop') {
+			if (
+				element.videoPlayerFormat &&
+				['Loop', 'Cinemagraph'].includes(element.videoPlayerFormat)
+			) {
 				return (
-					<LoopVideoInArticle
+					<SelfHostedVideoInArticle
 						element={element}
 						format={format}
 						isMainMedia={isMainMedia}
+						videoStyle={element.videoPlayerFormat}
 					/>
 				);
 			} else {
@@ -723,6 +720,9 @@ export const renderElement = ({
 						element={element}
 						ajaxUrl={ajaxUrl}
 						format={format}
+						isInStarRatingVariant={
+							abTests.starRatingRedesignVariant === 'variant'
+						}
 					/>
 				</Island>
 			);
@@ -753,6 +753,9 @@ export const renderElement = ({
 					key={index}
 					rating={element.rating}
 					size={element.size}
+					isInStarRatingVariant={
+						abTests.starRatingRedesignVariant === 'variant'
+					}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.SubheadingBlockElement':

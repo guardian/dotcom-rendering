@@ -7,12 +7,14 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
+import { useAB } from '../lib/useAB';
 import { useIsHorizontalScrollingSupported } from '../lib/useIsHorizontalScrollingSupported';
 import { palette } from '../palette';
 import type { OnwardsSource } from '../types/onwards';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { FetchOnwardsData } from './FetchOnwardsData.importable';
+import { MoreGalleriesStyleOnwardsContent } from './MoreGalleriesStyleOnwardsContent.importable';
 import { Section } from './Section';
 
 type PillarForContainer =
@@ -187,6 +189,7 @@ type Props = {
 	serverTime?: number;
 	renderingTarget: RenderingTarget;
 	webURL: string;
+	isInStarRatingVariant?: boolean;
 };
 
 /**
@@ -223,9 +226,14 @@ export const OnwardsUpper = ({
 	serverTime,
 	renderingTarget,
 	webURL,
+	isInStarRatingVariant,
 }: Props) => {
-	const isHorizontalScrollingSupported = useIsHorizontalScrollingSupported();
+	const abTestAPI = useAB()?.api;
+	const isInOnwardsAbTestVariant =
+		renderingTarget === 'Web' &&
+		abTestAPI?.isUserInVariant('OnwardJourneys', 'variant');
 
+	const isHorizontalScrollingSupported = useIsHorizontalScrollingSupported();
 	if (!isHorizontalScrollingSupported) return null;
 
 	// Related content can be a collection of articles based on
@@ -234,7 +242,7 @@ export const OnwardsUpper = ({
 
 	// In this context, Blog tags are treated the same as Series tags
 	const seriesTag = tags.find(
-		(tag) => tag.type === 'Series' || tag.type === 'Blog',
+		({ type }) => type === 'Series' || type === 'Blog',
 	);
 
 	let url: string | undefined;
@@ -317,21 +325,29 @@ export const OnwardsUpper = ({
 	const showCuratedContainer =
 		!!curatedDataUrl && !isPaidContent && canHaveCuratedContent;
 
+	const isGalleryArticle = format.design === ArticleDesign.Gallery;
+
 	return (
 		<div css={onwardsWrapper}>
-			{!!url && (
+			{!!url && isInOnwardsAbTestVariant && (
 				<Section
 					fullWidth={true}
 					borderColour={palette('--article-section-border')}
-					padSides={
-						format.design === ArticleDesign.Gallery ? false : true
-					}
-					showTopBorder={
-						format.design === ArticleDesign.Gallery ? false : true
-					}
-					showSideBorders={
-						format.design === ArticleDesign.Gallery ? false : true
-					}
+				>
+					<MoreGalleriesStyleOnwardsContent
+						url={url}
+						discussionApiUrl={discussionApiUrl}
+						isInOnwardsAbTestVariant={isInOnwardsAbTestVariant}
+					/>
+				</Section>
+			)}
+			{!!url && !isInOnwardsAbTestVariant && (
+				<Section
+					fullWidth={true}
+					borderColour={palette('--article-section-border')}
+					padSides={!isGalleryArticle}
+					showTopBorder={!isGalleryArticle}
+					showSideBorders={!isGalleryArticle}
 				>
 					<FetchOnwardsData
 						url={url}
@@ -342,8 +358,9 @@ export const OnwardsUpper = ({
 						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						isAdFreeUser={isAdFreeUser}
-						containerPosition={'first'}
+						containerPosition="first"
 						webURL={webURL}
+						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Section>
 			)}
@@ -351,15 +368,9 @@ export const OnwardsUpper = ({
 				<Section
 					fullWidth={true}
 					borderColour={palette('--article-section-border')}
-					showTopBorder={
-						format.design === ArticleDesign.Gallery ? false : true
-					}
-					showSideBorders={
-						format.design === ArticleDesign.Gallery ? false : true
-					}
-					padSides={
-						format.design === ArticleDesign.Gallery ? false : true
-					}
+					showTopBorder={!isGalleryArticle}
+					showSideBorders={!isGalleryArticle}
+					padSides={!isGalleryArticle}
 				>
 					<FetchOnwardsData
 						url={curatedDataUrl}
@@ -374,6 +385,7 @@ export const OnwardsUpper = ({
 							hasOnwardsContainer ? 'second' : 'first'
 						}
 						webURL={webURL}
+						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Section>
 			)}

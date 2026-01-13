@@ -1490,9 +1490,19 @@ const starRatingFillColourLight: PaletteFunction = () =>
 	sourcePalette.neutral[7];
 const starRatingFillColourDark: PaletteFunction = () =>
 	sourcePalette.neutral[0];
+
 const starRatingBackgroundColourLight: PaletteFunction = () =>
 	sourcePalette.brandAlt[400];
 const starRatingBackgroundColourDark: PaletteFunction = () =>
+	sourcePalette.brandAlt[200];
+const starRatingEmptyBackgroundColourLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const starRatingEmptyBackgroundColourDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+
+const calloutHighlightBackgroundColourLight: PaletteFunction = () =>
+	sourcePalette.brandAlt[400];
+const calloutHighlightBackgroundColourDark: PaletteFunction = () =>
 	sourcePalette.brandAlt[200];
 
 const blockQuoteFillLight: PaletteFunction = (format: ArticleFormat) => {
@@ -2525,8 +2535,15 @@ const cardMetaTextDark: PaletteFunction = () => sourcePalette.neutral[60];
 const cardBackgroundLight: PaletteFunction = () => 'transparent';
 const cardBackgroundDark: PaletteFunction = () => 'transparent';
 
-const cardMediaBackgroundLight: PaletteFunction = () =>
-	sourcePalette.neutral[97];
+const cardMediaBackgroundLight: PaletteFunction = (format) => {
+	switch (format.theme) {
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.neutral[93];
+		default:
+			return sourcePalette.neutral[97];
+	}
+};
+
 const cardMediaBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
 
@@ -6559,8 +6576,8 @@ const paletteColours = {
 		dark: bylineUnderline,
 	},
 	'--callout-highlight-background': {
-		light: starRatingBackgroundColourLight,
-		dark: starRatingBackgroundColourDark,
+		light: calloutHighlightBackgroundColourLight,
+		dark: calloutHighlightBackgroundColourDark,
 	},
 	'--callout-highlight-text': {
 		light: starRatingFillColourLight,
@@ -7982,6 +7999,14 @@ const paletteColours = {
 	'--star-rating-background': {
 		light: starRatingBackgroundColourLight,
 		dark: starRatingBackgroundColourDark,
+	},
+	'--star-rating-empty-alt-background': {
+		light: starRatingEmptyBackgroundColourDark,
+		dark: starRatingEmptyBackgroundColourDark,
+	},
+	'--star-rating-empty-background': {
+		light: starRatingEmptyBackgroundColourLight,
+		dark: starRatingEmptyBackgroundColourDark,
 	},
 	'--star-rating-fill': {
 		light: starRatingFillColourLight,

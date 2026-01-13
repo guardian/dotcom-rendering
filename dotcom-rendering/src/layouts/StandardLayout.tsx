@@ -41,7 +41,7 @@ import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
-import { StarRating } from '../components/StarRating/StarRating';
+import { StarRatingDeprecated } from '../components/StarRating/StarRatingDeprecated';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
@@ -392,6 +392,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
+	const isInStarRatingVariant =
+		article.config.abTests.starRatingRedesignVariant === 'variant';
+
 	return (
 		<>
 			{isWeb && (
@@ -547,13 +550,18 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									webPublicationDateDeprecated={
 										article.webPublicationDateDeprecated
 									}
+									isInStarRatingVariant={
+										isInStarRatingVariant
+									}
+									starRating={article.starRating}
 								/>
 							</div>
 						</GridItem>
 						<GridItem area="standfirst">
-							{!isUndefined(article.starRating) ? (
+							{!isUndefined(article.starRating) &&
+							!isInStarRatingVariant ? (
 								<div css={starWrapper}>
-									<StarRating
+									<StarRatingDeprecated
 										rating={article.starRating}
 										size="large"
 									/>
@@ -882,6 +890,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								}
 								serverTime={serverTime}
 								renderingTarget={renderingTarget}
+								isInStarRatingVariant={isInStarRatingVariant}
 							/>
 						</Island>
 					</Section>
@@ -907,6 +916,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						webURL={article.webURL}
+						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Island>
 				{showComments && (
