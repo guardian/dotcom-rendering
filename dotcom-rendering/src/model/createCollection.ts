@@ -1,5 +1,5 @@
 import type { FECollection, FEFrontCard } from '../frontend/feFront';
-import type { DCRCollectionType } from '../types/front';
+import type { DCRCollectionType, PillarBucket } from '../types/front';
 import { enhanceCards } from './enhanceCards';
 
 const acrossTheGuardianCollection: DCRCollectionType = {
@@ -29,7 +29,12 @@ const acrossTheGuardianCollection: DCRCollectionType = {
 };
 
 const PILLAR_CONTAINERS = ['Culture', 'Opinion', 'Sport', 'Lifestyle'];
-const MORE_PILLAR_CONTAINERS = ['More culture', 'More sport', 'More lifestyle'];
+const MORE_PILLAR_CONTAINERS = [
+	'More culture',
+	'More sport',
+	'More lifestyle',
+	'More opinion',
+];
 
 const isPillarContainer = (collection: FECollection) =>
 	PILLAR_CONTAINERS.includes(collection.displayName);
@@ -37,52 +42,48 @@ const isPillarContainer = (collection: FECollection) =>
 const isMorePillarContainer = (collection: FECollection) => {
 	return MORE_PILLAR_CONTAINERS.includes(collection.displayName);
 };
+const normaliseMorePillarName = (displayName: string): string =>
+	displayName.replace(/^More\s+/i, '').replace(/^./, (c) => c.toUpperCase());
 
 type PillarCollection = {
 	pillar: string;
 	curated: FEFrontCard[];
 };
 const getPillarCards = (collections: FECollection[]) => {
-	return collections.filter(isPillarContainer).map((collection) => {
-		return { pillar: collection.displayName, curated: collection.curated };
-	});
-};
+	const pillarCards = collections
+		.filter(isPillarContainer)
+		.map((collection) => {
+			return {
+				pillar: collection.displayName,
+				curated: [...collection.curated],
+			};
+		});
 
-const getMoreCards = (collections: FECollection[]) => {
-	const buckets = collections
-		.filter(isMorePillarContainer)
-		.map((collection) => collection.curated);
+	for (const collection of collections.filter(isMorePillarContainer)) {
+		const pillarName = normaliseMorePillarName(collection.displayName);
 
-	const maxLength = Math.max(...buckets.map((b) => b.length));
+		const pillar = pillarCards.find((p) => p.pillar === pillarName);
 
-	const result = [];
-
-	for (let i = 0; i < maxLength; i++) {
-		for (const bucket of buckets) {
-			if (bucket[i]) {
-				result.push(bucket[i]);
-			}
+		if (pillar) {
+			pillar.curated.push(...collection.curated);
 		}
 	}
 
-	return result;
+	return pillarCards;
 };
 
-function shuffle(array: (FEFrontCard | undefined)[]) {
-	for (let i = array.length - 1; i > 0; i--) {
-		const j = Math.floor(Math.random() * (i + 1));
-		[array[i], array[j]] = [array[j], array[i]];
-	}
-	return array;
-}
 const getCuratedList = (PillarCollections: PillarCollection[]) => {
 	const curatedList: FEFrontCard[] = [];
-	const bucketList: FEFrontCard[] = [];
+	const bucketList: PillarBucket = {};
 
 	for (const collection of PillarCollections) {
-		const [firstCard, ...remaining] = collection.curated;
+		const firstCard = collection.curated[0];
 		if (firstCard) curatedList.push(firstCard);
-		bucketList.push(...remaining);
+		bucketList[collection.pillar] = enhanceCards(collection.curated, {
+			cardInTagPage: false,
+			discussionApiUrl: 'string',
+			editionId: 'UK',
+		});
 	}
 
 	return { curatedList, bucketList };
@@ -92,11 +93,10 @@ export const createFakeCollection = (
 	collections: FECollection[],
 ): DCRCollectionType => {
 	const pillarCards = getPillarCards(collections);
-	const moreBucket = getMoreCards(collections);
 	const { curatedList, bucketList } = getCuratedList(pillarCards);
-	const combineBucket = [...bucketList, ...moreBucket];
 
-	const shuffledBucket = shuffle(combineBucket) as FEFrontCard[];
+	console.log(bucketList);
+
 	return {
 		...acrossTheGuardianCollection,
 		curated: enhanceCards(curatedList, {
@@ -104,11 +104,7 @@ export const createFakeCollection = (
 			discussionApiUrl: 'string',
 			editionId: 'UK',
 		}),
-		bucket: enhanceCards(shuffledBucket, {
-			cardInTagPage: false,
-			discussionApiUrl: 'string',
-			editionId: 'UK',
-		}),
+		bucket: bucketList,
 	};
 };
 

@@ -8,6 +8,7 @@ import type {
 	DCRContainerLevel,
 	DCRContainerPalette,
 	DCRFrontCard,
+	PillarBucket,
 } from '../types/front';
 import { LI } from './Card/components/LI';
 import type { MediaPositionType } from './Card/components/MediaWrapper';
@@ -37,21 +38,19 @@ type Props = {
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	isInStarRatingVariant?: boolean;
-	backfillBucket?: DCRFrontCard[];
+	backfillBucket?: PillarBucket;
 };
 
-// const LOCAL_STATE = ["/commentisfree/2026/jan/13/iran-protesters-western-intervention-us-israel", "ID", "ID"]
-
-const filterViewedCards = (
-	cards?: DCRFrontCard[],
-	viewedCards?: string[],
-): DCRFrontCard[] => {
-	if (!cards) return [];
-	return cards.filter((card) => {
-		return !viewedCards?.includes(card.url);
-	});
-};
 export const ViewHistoryKey = 'gu.history.viewedCards';
+
+const filterBuckets = (backfillBucket: PillarBucket, viewedList: string[]) => {
+	return Object.fromEntries(
+		Object.entries(backfillBucket).map(([key, values]) => [
+			key,
+			values.filter((card) => !viewedList.includes(card.url)),
+		]),
+	);
+};
 
 export const DynamicMediumFour = ({
 	trails,
@@ -71,21 +70,35 @@ export const DynamicMediumFour = ({
 	const [shouldShowHighlights, setShouldShowHighlights] =
 		useState<boolean>(false);
 	useEffect(() => {
-		// get local state
-		const viewedCards = storage.local.get(ViewHistoryKey) as string[];
-		const unviewedFirstCards = filterViewedCards(
-			trails.slice(0, 4),
-			viewedCards,
-		);
-		const unviewedSecondCards = filterViewedCards(
+		if (!backfillBucket) {
+			setShouldShowHighlights(true);
+			return;
+		}
+		// // get local state
+		const viewedCards = storage.local.get(ViewHistoryKey);
+
+		if (!viewedCards) {
+			setShouldShowHighlights(true);
+			return;
+		}
+		const filteredBuckets = filterBuckets(
 			backfillBucket,
-			viewedCards,
+			viewedCards as string[],
 		);
-		const leftOver = 4 - unviewedFirstCards.length;
-		setOrderedTrails([
-			...unviewedFirstCards,
-			...unviewedSecondCards.slice(0, leftOver),
-		]);
+		console.log('filteredBuckets', filteredBuckets);
+		const { Opinion, Sport, Culture, Lifestyle } = filteredBuckets;
+		const newTrails = [
+			Opinion[0],
+			Sport[0],
+			Culture[0],
+			Lifestyle[0],
+		].filter(Boolean);
+		console.log(newTrails);
+		if (newTrails.length <= 0) {
+			setShouldShowHighlights(true);
+			return;
+		}
+		setOrderedTrails(newTrails);
 		setShouldShowHighlights(true);
 	}, [trails, backfillBucket]);
 

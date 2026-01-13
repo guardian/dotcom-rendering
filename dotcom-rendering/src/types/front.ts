@@ -117,7 +117,9 @@ export type DCRSnapType = {
 };
 
 export type AspectRatio = FEAspectRatio;
-
+export type PillarBucket = {
+	[key: string]: DCRFrontCard[];
+};
 export type DCRCollectionType = {
 	id: string;
 	displayName: string;
@@ -144,7 +146,7 @@ export type DCRCollectionType = {
 	collectionBranding?: CollectionBranding;
 	targetedTerritory?: Territory;
 	aspectRatio?: AspectRatio;
-	bucket?: DCRFrontCard[];
+	bucket?: PillarBucket;
 };
 
 export type DCRGroupedTrails = {
