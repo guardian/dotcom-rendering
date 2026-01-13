@@ -29,7 +29,7 @@ const useAffiliateDisclaimerEvent = (): void => {
 
 			affiliateDisclaimerDetectTracked = true;
 		}
-	}, []);
+	}, [renderingTarget]);
 };
 
 const DisclaimerText = () => (
