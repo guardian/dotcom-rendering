@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	palette,
-	space,
-	textSans12,
-	textSans15,
-} from '@guardian/source/foundations';
+import { palette, space, textSans12 } from '@guardian/source/foundations';
 import {
 	DisclaimerText,
 	useAffiliateDisclaimerEvent,
