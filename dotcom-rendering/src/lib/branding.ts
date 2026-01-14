@@ -77,13 +77,11 @@ const getBrandingType = ([
 /**
  * Check each branding has the same sponsor name
  */
-const everyCardHasSameSponsor = ([
+const isAllBrandingEqual = ([
 	firstBranding,
 	...restBranding
 ]: NonEmptyArray<Branding>): boolean =>
-	restBranding.every(
-		(branding) => branding.sponsorName === firstBranding.sponsorName,
-	);
+	restBranding.every((branding) => brandingEqual(firstBranding, branding));
 
 /**
  * TODO verify that this is what is necessary for two branding to be equal
@@ -91,7 +89,8 @@ const everyCardHasSameSponsor = ([
 export const brandingEqual = (b1: Branding, b2: Branding): boolean => {
 	return (
 		b1.brandingType?.name === b2.brandingType?.name &&
-		b1.sponsorName === b2.sponsorName
+		b1.sponsorName === b2.sponsorName &&
+		b1.logo.src === b2.logo.src
 	);
 };
 
@@ -123,9 +122,7 @@ export const shouldStripBrandingFromCards = (
 		return false;
 	}
 
-	const sameSponsor = everyCardHasSameSponsor(brandingsFromCards);
-
-	return sameSponsor;
+	return isAllBrandingEqual(brandingsFromCards);
 };
 
 export const badgeFromBranding = (
@@ -210,7 +207,7 @@ export const decideCollectionBranding = ({
 		return undefined;
 	}
 
-	const hasMultipleBranding = !everyCardHasSameSponsor(brandingForCards);
+	const hasMultipleBranding = !isAllBrandingEqual(brandingForCards);
 	if (kind !== 'paid-content' && hasMultipleBranding) {
 		return undefined;
 	}
