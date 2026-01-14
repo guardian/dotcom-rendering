@@ -55,20 +55,37 @@ const videoContainerStyles = (
 	}
 `;
 
-const figureStyles = (aspectRatio: number) => css`
+const figureStyles = (
+	aspectRatio: number,
+	letterboxed: boolean,
+	containerAspectRatio?: number,
+	isFeatureCard?: boolean,
+) => css`
 	position: relative;
 	aspect-ratio: ${aspectRatio};
 	height: 100%;
-	max-height: 100vh;
-	max-height: 100svh;
-	max-width: 100%;
-	${from.tablet} {
-		/**
-		 * The value "80" is derived from the aspect ratio of the 5:4 slot.
-		 * When other slots are used for self-hosted videos, this will need to be adjusted.
-		 */
-		max-width: ${aspectRatio * 80}%;
-	}
+
+	${letterboxed &&
+	css`
+		max-height: 100vh;
+		max-height: 100svh;
+		max-width: 100%;
+
+		${from.tablet} {
+			${typeof containerAspectRatio === 'number' &&
+			`max-width: ${aspectRatio * (1 / containerAspectRatio) * 100}%;`}
+		}
+	`}
+
+	${isFeatureCard &&
+	css`
+		width: 100%;
+		max-width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		overflow: hidden;
+	`}
 `;
 
 /**
@@ -150,6 +167,8 @@ type Props = {
 	subtitleSource?: string;
 	subtitleSize: SubtitleSize;
 	enableHls: boolean;
+	letterboxed?: boolean;
+	isFeatureCard?: boolean;
 };
 
 export const SelfHostedVideo = ({
@@ -170,6 +189,8 @@ export const SelfHostedVideo = ({
 	subtitleSource,
 	subtitleSize,
 	enableHls,
+	letterboxed = false,
+	isFeatureCard = false,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -178,7 +199,6 @@ export const SelfHostedVideo = ({
 	const [isMuted, setIsMuted] = useState(true);
 	const [hasAudio, setHasAudio] = useState(true);
 	const [showPlayIcon, setShowPlayIcon] = useState(false);
-	const [preloadPartialData, setPreloadPartialData] = useState(false);
 	const [showPosterImage, setShowPosterImage] = useState<boolean>(false);
 	const [currentTime, setCurrentTime] = useState(0);
 	const [playerState, setPlayerState] =
@@ -526,15 +546,6 @@ export const SelfHostedVideo = ({
 		}
 	}, [isAutoplayAllowed, isInView, hasBeenInView]);
 
-	/**
-	 * We almost always want to preload some of the video data. If a user has prefers-reduced-motion
-	 * enabled, then the video will only be partially preloaded (metadata + small amount of video)
-	 * when it comes into view.
-	 */
-	useEffect(() => {
-		setPreloadPartialData(isAutoplayAllowed === false || !!isInView);
-	}, [isAutoplayAllowed, isInView]);
-
 	if (adapted) {
 		return FallbackImageComponent;
 	}
@@ -693,6 +704,12 @@ export const SelfHostedVideo = ({
 		? getOptimisedPosterImage(posterImage)
 		: undefined;
 
+	/**
+	 * We almost always want to preload some of the video data. The exception
+	 * is when autoplay is off and the video is only partially in view.
+	 */
+	const preloadPartialData = !!isAutoplayAllowed || !!isInView;
+
 	return (
 		<div
 			css={videoContainerStyles(
@@ -703,7 +720,12 @@ export const SelfHostedVideo = ({
 		>
 			<figure
 				ref={setNode}
-				css={figureStyles(aspectRatio)}
+				css={figureStyles(
+					aspectRatio,
+					letterboxed,
+					containerAspectRatio,
+					isFeatureCard,
+				)}
 				className={`video-container ${videoStyle.toLocaleLowerCase()}`}
 				data-component="gu-video-loop"
 			>
@@ -737,6 +759,8 @@ export const SelfHostedVideo = ({
 					subtitleSize={subtitleSize}
 					activeCue={activeCue}
 					enableHls={enableHls}
+					letterboxed={letterboxed}
+					isFeatureCard={isFeatureCard}
 				/>
 			</figure>
 		</div>

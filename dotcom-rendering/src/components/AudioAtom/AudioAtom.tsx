@@ -349,6 +349,7 @@ export const AudioAtom = ({
 						data-testid={isPlaying ? 'pause-button' : 'play-button'}
 						onClick={() => (isPlaying ? pauseAudio() : playAudio())}
 						css={buttonStyle}
+						aria-label={isPlaying ? 'Pause' : 'Play'}
 					>
 						{isPlaying ? <PauseSVG /> : <PlaySVG />}
 					</button>
@@ -368,6 +369,7 @@ export const AudioAtom = ({
 							value={percentPlayed}
 							onClick={updateAudioCurrentTime}
 							readOnly={true}
+							aria-label="Audio progress percent played"
 						/>
 					</div>
 					<div css={timeDurationStyle}>

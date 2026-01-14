@@ -17,6 +17,7 @@ import {
 import { handleAppsAssets } from './handler.assets.apps';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import { handleFront, handleTagPage } from './handler.front.web';
+import { handleAppsHostedContent } from './handler.hostedContent.apps';
 import { handleHostedContent } from './handler.hostedContent.web';
 import {
 	handleCricketMatchPage,
@@ -87,6 +88,7 @@ export const prodServer = (): void => {
 	app.post('/AppsInteractive', logRenderTime, handleAppsInteractive);
 	app.post('/AppsBlocks', logRenderTime, handleAppsBlocks);
 	app.post('/EditionsCrossword', logRenderTime, handleEditionsCrossword);
+	app.post('/AppsHostedContent', logRenderTime, handleAppsHostedContent);
 
 	app.get('/assets/rendered-items-assets', handleAppsAssets);
 

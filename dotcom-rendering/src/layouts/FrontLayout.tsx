@@ -108,6 +108,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			isPaidContent,
 			pageId,
 			switches,
+			abTests,
 		},
 		editionId,
 	} = front;
@@ -136,6 +137,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		front.isNetworkFront && front.deeplyRead && front.deeplyRead.length > 0;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
+
+	/**
+	 * We are running an 0% opt in test which replaces the Star Rating component with
+	 * a refreshed design
+	 */
+	const isInStarRatingVariant =
+		abTests.starRatingRedesignVariant === 'variant';
 
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
@@ -180,6 +188,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 					frontId={front.pressedPage.id}
 					collectionId={0}
+					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			)
 		);
@@ -519,6 +528,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
 									enableHls={switches.enableHlsWeb}
+									isInStarRatingVariant={
+										isInStarRatingVariant
+									}
 								/>
 							</FrontSection>
 

@@ -4,6 +4,12 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
     "gu:cdk:constructs": [],
     "gu:cdk:version": "62.0.1"
   },
+  "Parameters": {
+    "BuildId": {
+      "Type": "String",
+      "Description": "The riff-raff build id, automatically generated and provided by riff-raff"
+    }
+  },
   "Resources": {
     "InvokeDictionaryDeployLambda": {
       "Type": "Custom::FastlyEdgeDictionaryDeploy",
@@ -24,7 +30,10 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
             ]
           ]
         },
-        "ServiceTimeout": "300"
+        "ServiceTimeout": "300",
+        "BuildId": {
+          "Ref": "BuildId"
+        }
       },
       "UpdateReplacePolicy": "Delete",
       "DeletionPolicy": "Delete"
@@ -38,6 +47,12 @@ exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
   "Metadata": {
     "gu:cdk:constructs": [],
     "gu:cdk:version": "62.0.1"
+  },
+  "Parameters": {
+    "BuildId": {
+      "Type": "String",
+      "Description": "The riff-raff build id, automatically generated and provided by riff-raff"
+    }
   },
   "Resources": {
     "InvokeDictionaryDeployLambda": {
@@ -59,7 +74,10 @@ exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
             ]
           ]
         },
-        "ServiceTimeout": "300"
+        "ServiceTimeout": "300",
+        "BuildId": {
+          "Ref": "BuildId"
+        }
       },
       "UpdateReplacePolicy": "Delete",
       "DeletionPolicy": "Delete"

@@ -6,21 +6,24 @@ import {
 	getSubtitleAsset,
 } from '../lib/video';
 import type { MediaAtomBlockElement } from '../types/content';
+import type { VideoPlayerFormat } from '../types/mainMedia';
 import { Caption } from './Caption';
 import { Island } from './Island';
 import { SelfHostedVideo } from './SelfHostedVideo.importable';
 
-type LoopVideoInArticleProps = {
+type SelfHostedVideoInArticleProps = {
 	element: MediaAtomBlockElement;
 	format: ArticleFormat;
 	isMainMedia: boolean;
+	videoStyle: VideoPlayerFormat;
 };
 
-export const LoopVideoInArticle = ({
+export const SelfHostedVideoInArticle = ({
 	element,
 	format,
 	isMainMedia,
-}: LoopVideoInArticleProps) => {
+	videoStyle,
+}: SelfHostedVideoInArticleProps) => {
 	const posterImageUrl = element.posterImage?.[0]?.url;
 	const caption = element.title;
 	const firstVideoAsset = getFirstVideoAsset(element.assets);
@@ -28,6 +31,17 @@ export const LoopVideoInArticle = ({
 	if (!posterImageUrl) {
 		return null;
 	}
+
+	const calculateAspectRatio = (): number => {
+		const dimensions = firstVideoAsset?.dimensions;
+
+		if (dimensions) {
+			return dimensions.width / dimensions.height;
+		}
+
+		// Default aspect ratio if dimensions are not available
+		return 5 / 4;
+	};
 
 	return (
 		<>
@@ -39,6 +53,7 @@ export const LoopVideoInArticle = ({
 					fallbackImageAspectRatio={
 						(firstVideoAsset?.aspectRatio ?? '5:4') as FEAspectRatio
 					}
+					containerAspectRatio={calculateAspectRatio()}
 					fallbackImageLoading="lazy"
 					fallbackImageSize="small"
 					height={firstVideoAsset?.dimensions?.height ?? 400}
@@ -47,7 +62,7 @@ export const LoopVideoInArticle = ({
 					sources={convertAssetsToVideoSources(element.assets)}
 					subtitleSize="medium"
 					subtitleSource={getSubtitleAsset(element.assets)}
-					videoStyle="Loop"
+					videoStyle={videoStyle}
 					uniqueId={element.id}
 					width={firstVideoAsset?.dimensions?.width ?? 500}
 					enableHls={false}

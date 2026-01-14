@@ -1,4 +1,4 @@
-import { type Handler, Router } from 'express';
+import { type ErrorRequestHandler, type Handler, Router } from 'express';
 import { pages } from '../devServer/routers/pages';
 import { targets } from '../devServer/routers/targets';
 import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslettersPage.web';
@@ -15,6 +15,7 @@ import {
 import { handleAppsAssets } from './handler.assets.apps';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import { handleFront, handleTagPage } from './handler.front.web';
+import { handleAppsHostedContent } from './handler.hostedContent.apps';
 import { handleHostedContent } from './handler.hostedContent.web';
 import {
 	handleCricketMatchPage,
@@ -24,6 +25,8 @@ import {
 } from './handler.sportDataPage.web';
 import { getABTestsFromQueryParams } from './lib/get-abtests-from-query-params';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
+import { requestLoggerMiddleware } from './lib/logging-middleware';
+import { recordError } from './lib/logging-store';
 
 /** article URLs contain a part that looks like “2022/nov/25” */
 const ARTICLE_URL = /(\/\d{4}\/[a-z]{3}\/\d{2}\/)/;
@@ -88,11 +91,17 @@ const redirects: Handler = (req, res, next) => {
 	next();
 };
 
+const logError: ErrorRequestHandler = (e, _req, _res, next) => {
+	recordError(e);
+	next(e);
+};
+
 const renderer = Router();
 // populates req.body with the content data from a production
 // URL if req.params.url is present
 renderer.use(getContentFromURLMiddleware);
 renderer.use(getABTestsFromQueryParams);
+renderer.use(requestLoggerMiddleware);
 renderer.get('/Article/*url', handleArticle);
 renderer.get('/Interactive/*url', handleInteractive);
 renderer.get('/Blocks/*url', handleBlocks);
@@ -108,6 +117,7 @@ renderer.get('/FootballTablesPage/*url', handleFootballTablesPage);
 renderer.get('/CricketMatchPage/*url', handleCricketMatchPage);
 renderer.get('/FootballMatchSummaryPage/*url', handleFootballMatchPage);
 renderer.get('/HostedContent/*url', handleHostedContent);
+renderer.get('/AppsHostedContent/*url', handleAppsHostedContent);
 
 // POST routes for running frontend locally
 renderer.post('/Article', handleArticle);
@@ -125,6 +135,7 @@ renderer.post('/FootballTablesPage', handleFootballTablesPage);
 renderer.post('/CricketMatchPage', handleCricketMatchPage);
 renderer.post('/FootballMatchSummaryPage', handleFootballMatchPage);
 renderer.post('/HostedContent', handleHostedContent);
+renderer.post('/AppsHostedContent', handleAppsHostedContent);
 
 renderer.get('/assets/rendered-items-assets', handleAppsAssets);
 
@@ -133,6 +144,7 @@ router.use('/pages', pages);
 router.use('/targets', targets);
 router.use(renderer);
 router.use(redirects);
+renderer.use(logError);
 
 // see https://www.npmjs.com/package/webpack-hot-server-middleware
 // for more info
