@@ -16,23 +16,11 @@ import { LeftColumn } from './LeftColumn';
 const standardCardListStyles = css`
 	width: 100%;
 	display: grid;
-	gap: ${space[5]}px;
+	gap: ${space[4]}px;
 	padding-top: ${space[2]}px;
 
 	${from.tablet} {
 		grid-template-columns: repeat(4, 1fr);
-	}
-
-	${from.leftCol} {
-		&::before {
-			content: '';
-			position: absolute;
-			left: -11px;
-			bottom: 0;
-			top: 8px;
-			width: 1px;
-			background-color: ${palette('--onward-content-border')};
-		}
 	}
 `;
 
@@ -48,16 +36,6 @@ const cardsContainerStyles = css`
 const splashCardStyles = css`
 	${from.leftCol} {
 		margin-top: ${space[2]}px;
-
-		&::before {
-			content: '';
-			position: absolute;
-			left: -11px;
-			top: 8px;
-			bottom: 0;
-			width: 1px;
-			background-color: ${palette('--onward-content-border')};
-		}
 	}
 `;
 
