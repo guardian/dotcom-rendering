@@ -7,6 +7,7 @@ import {
 } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { grid } from '../grid';
+import { ArticleDesign } from '../lib/articleFormat';
 import { palette } from '../palette';
 import type { TrailType } from '../types/trails';
 import { Card } from './Card/Card';
@@ -94,7 +95,6 @@ const getDefaultCardProps = (trail: TrailType) => {
 		aspectRatio: '5:4',
 		avatarUrl: trail.avatarUrl,
 		branding: trail.branding,
-		byline: trail.byline,
 		dataLinkName: `onwards-content-gallery-style ${trail.dataLinkName}`,
 		discussionApiUrl: '',
 		discussionId: trail.discussion?.isCommentable
@@ -114,7 +114,7 @@ const getDefaultCardProps = (trail: TrailType) => {
 		showByline: trail.showByline,
 		showClock: false,
 		showPulsingDot: false,
-		showQuotedHeadline: trail.showQuotedHeadline,
+		showQuotedHeadline: trail.format.design === ArticleDesign.Comment,
 		showTopBarDesktop: false,
 		showTopBarMobile: true,
 		snapData: trail.snapData,
