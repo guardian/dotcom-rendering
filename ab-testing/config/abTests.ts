@@ -37,7 +37,7 @@ const ABTests: ABTest[] = [
 		description:
 			"A hold back test to measure the impact of integrating UID2 module",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: `2026-01-15`,
+		expirationDate: `2026-01-29`,
 		type: "client",
 		status: "ON",
 		audienceSize: 10 / 100,
