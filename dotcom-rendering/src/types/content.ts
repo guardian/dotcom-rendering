@@ -119,10 +119,16 @@ export interface ReporterCalloutBlockElement {
 	activeFrom?: number;
 	activeUntil?: number;
 	displayOnSensitive: boolean;
-	title: string;
-	description: string;
 	role?: RoleType;
-	contacts?: CalloutContactType[];
+	title: string;
+	subtitle: string;
+	intro: string;
+	mainTextHeading: string;
+	mainText: string;
+	emailContact?: string;
+	messagingContact?: string;
+	securedropContact?: string;
+	endNote?: string;
 }
 
 export interface CartoonBlockElement {

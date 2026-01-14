@@ -1572,28 +1572,48 @@
                 "displayOnSensitive": {
                     "type": "boolean"
                 },
-                "title": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
                 "role": {
                     "$ref": "#/definitions/RoleType"
                 },
-                "contacts": {
+                "title": {
+                    "type": "string"
+                },
+                "subtitle": {
+                    "type": "string"
+                },
+                "intro": {
+                    "type": "string"
+                },
+                "mainText": {
+                    "type": "string"
+                },
+                "emailContact1": {
+                    "type": "string"
+                },
+                "emailContact2": {
+                    "type": "string"
+                },
+                "massagingContacts": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/CalloutContactType"
                     }
+                },
+                "securedropContact": {
+                    "type": "string"
+                },
+                "endNote": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
-                "description",
                 "displayOnSensitive",
                 "elementId",
                 "id",
+                "intro",
+                "mainText",
+                "subtitle",
                 "title"
             ]
         },
