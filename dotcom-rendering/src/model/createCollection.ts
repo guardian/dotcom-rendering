@@ -1,5 +1,5 @@
 import type { FECollection, FEFrontCard } from '../frontend/feFront';
-import type { DCRCollectionType, PillarBucket } from '../types/front';
+import type { DCRCollectionType, DCRFrontCard } from '../types/front';
 import { enhanceCards } from './enhanceCards';
 
 const acrossTheGuardianCollection: DCRCollectionType = {
@@ -17,7 +17,6 @@ const acrossTheGuardianCollection: DCRCollectionType = {
 		standard: [],
 	},
 	curated: [],
-	bucket: [],
 	backfill: [],
 	treats: [],
 	config: {
@@ -28,101 +27,115 @@ const acrossTheGuardianCollection: DCRCollectionType = {
 	aspectRatio: '5:4',
 };
 
-const PILLAR_CONTAINERS = ['Culture', 'Opinion', 'Sport', 'Lifestyle'];
-const MORE_PILLAR_CONTAINERS = [
-	'More culture',
-	'More sport',
-	'More lifestyle',
-	'More opinion',
+type Pillar = 'sport' | 'lifestyle' | 'opinion' | 'culture';
+
+type PillarContainer = {
+	pillar: Pillar;
+	containerName: string;
+};
+const pillarContainers: PillarContainer[] = [
+	//culture
+	{ containerName: 'Culture', pillar: 'culture' },
+	{ containerName: 'What to watch', pillar: 'culture' },
+	{ containerName: 'What to listen to', pillar: 'culture' },
+	{ containerName: 'What to read', pillar: 'culture' },
+	{ containerName: 'What to play', pillar: 'culture' },
+	{ containerName: 'What to visit', pillar: 'culture' },
+	{ containerName: 'More culture', pillar: 'culture' },
+	//opinion
+	{ containerName: 'Opinion', pillar: 'opinion' },
+	{ containerName: 'More opinion', pillar: 'opinion' },
+	{ containerName: 'Editorials', pillar: 'opinion' },
+	//sport
+	{ containerName: 'Sport', pillar: 'sport' },
+	{ containerName: 'More sport', pillar: 'sport' },
+	//lifestyle
+	{ containerName: 'Lifestyle', pillar: 'lifestyle' },
+	{ containerName: 'The Filter', pillar: 'lifestyle' },
+	{ containerName: 'Food', pillar: 'lifestyle' },
+	{ containerName: 'Relationships', pillar: 'lifestyle' },
+	{ containerName: 'Money & consumer', pillar: 'lifestyle' },
+	{ containerName: 'Health & fitness', pillar: 'lifestyle' },
+	{ containerName: 'Fashion & beauty', pillar: 'lifestyle' },
+	{ containerName: 'Travel', pillar: 'lifestyle' },
+	{ containerName: 'More Lifestyle', pillar: 'lifestyle' },
 ];
 
-const isPillarContainer = (collection: FECollection) =>
-	PILLAR_CONTAINERS.includes(collection.displayName);
-
-const isMorePillarContainer = (collection: FECollection) => {
-	return MORE_PILLAR_CONTAINERS.includes(collection.displayName);
+type DCRPillarCards = {
+	lifestyle: DCRFrontCard[];
+	opinion: DCRFrontCard[];
+	sport: DCRFrontCard[];
+	culture: DCRFrontCard[];
 };
-const normaliseMorePillarName = (displayName: string): string =>
-	displayName.replace(/^More\s+/i, '').replace(/^./, (c) => c.toUpperCase());
 
-type PillarCollection = {
-	pillar: string;
-	curated: FEFrontCard[];
-};
-const getPillarCards = (collections: FECollection[]) => {
-	const pillarCards = collections
-		.filter(isPillarContainer)
-		.map((collection) => {
-			return {
-				pillar: collection.displayName,
-				curated: [...collection.curated],
-			};
-		});
+const getPillarCards = (collections: FECollection[]): DCRPillarCards => {
+	const HighlightUrls = collections
+		.filter((collection) => 'Highlights' === collection.displayName)
+		.flatMap((collection) => collection.curated)
+		.map((card) => card.properties.webUrl);
 
-	for (const collection of collections.filter(isMorePillarContainer)) {
-		const pillarName = normaliseMorePillarName(collection.displayName);
+	const pillarCards: Record<Pillar, FEFrontCard[]> = {
+		lifestyle: [],
+		opinion: [],
+		sport: [],
+		culture: [],
+	};
 
-		const pillar = pillarCards.find((p) => p.pillar === pillarName);
+	for (const collection of collections) {
+		const pillarContainer = pillarContainers.find(
+			(pillar) => pillar.containerName === collection.displayName,
+		);
 
-		if (pillar) {
-			pillar.curated.push(...collection.curated);
-		}
+		if (!pillarContainer) continue;
+		const curatedCards = [...collection.curated].filter(
+			(card) => !HighlightUrls.includes(card.properties.webUrl),
+		);
+
+		pillarCards[pillarContainer.pillar].push(...curatedCards);
 	}
 
-	return pillarCards;
-};
-
-const getCuratedList = (PillarCollections: PillarCollection[]) => {
-	const curatedList: FEFrontCard[] = [];
-	const bucketList: PillarBucket = {};
-
-	for (const collection of PillarCollections) {
-		const firstCard = collection.curated[0];
-		if (firstCard) curatedList.push(firstCard);
-		bucketList[collection.pillar] = enhanceCards(collection.curated, {
+	return {
+		lifestyle: enhanceCards(pillarCards.lifestyle, {
 			cardInTagPage: false,
 			discussionApiUrl: 'string',
 			editionId: 'UK',
-		});
-	}
+		}),
+		opinion: enhanceCards(pillarCards.opinion, {
+			cardInTagPage: false,
+			discussionApiUrl: 'string',
+			editionId: 'UK',
+		}),
+		sport: enhanceCards(pillarCards.sport, {
+			cardInTagPage: false,
+			discussionApiUrl: 'string',
+			editionId: 'UK',
+		}),
+		culture: enhanceCards(pillarCards.culture, {
+			cardInTagPage: false,
+			discussionApiUrl: 'string',
+			editionId: 'UK',
+		}),
+	};
+};
 
-	return { curatedList, bucketList };
+const getCuratedList = (buckets: DCRPillarCards): DCRFrontCard[] => {
+	return [
+		buckets.opinion[0],
+		buckets.sport[0],
+		buckets.culture[0],
+		buckets.lifestyle[0],
+	] as DCRFrontCard[];
 };
 
 export const createFakeCollection = (
 	collections: FECollection[],
 ): DCRCollectionType => {
 	const pillarCards = getPillarCards(collections);
-	const { curatedList, bucketList } = getCuratedList(pillarCards);
-
-	console.log(bucketList);
+	const curatedList = getCuratedList(pillarCards);
 
 	return {
 		...acrossTheGuardianCollection,
-		curated: enhanceCards(curatedList, {
-			cardInTagPage: false,
-			discussionApiUrl: 'string',
-			editionId: 'UK',
-		}),
-		bucket: bucketList,
+		curated: curatedList,
+		bucket: pillarCards,
 	};
 };
-
-/*
- * History = {
- * cardId = "1234"
- * viewCount = 1
- * }
- * */
-
-// curated = [
-// 	{opinion 1},
-// 	{sport 1},
-// 	{culture 1 },
-// 	{lifestyle 1 },
-// ]
-
-// bucket = [
-//
-// ]
-// console.log(getPillarCards())
