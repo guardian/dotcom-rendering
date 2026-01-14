@@ -27,7 +27,14 @@ const acrossTheGuardianCollection: DCRCollectionType = {
 	aspectRatio: '5:4',
 };
 
-type Pillar = 'sport' | 'lifestyle' | 'opinion' | 'culture';
+export type Pillar = 'sport' | 'lifestyle' | 'opinion' | 'culture';
+
+export const PILLARS = [
+	'sport',
+	'lifestyle',
+	'opinion',
+	'culture',
+] as const satisfies readonly Pillar[];
 
 type PillarContainer = {
 	pillar: Pillar;
@@ -61,12 +68,7 @@ const pillarContainers: PillarContainer[] = [
 	{ containerName: 'More Lifestyle', pillar: 'lifestyle' },
 ];
 
-type DCRPillarCards = {
-	lifestyle: DCRFrontCard[];
-	opinion: DCRFrontCard[];
-	sport: DCRFrontCard[];
-	culture: DCRFrontCard[];
-};
+export type DCRPillarCards = Record<Pillar, DCRFrontCard[]>;
 
 const getPillarCards = (collections: FECollection[]): DCRPillarCards => {
 	const HighlightUrls = collections
@@ -118,13 +120,10 @@ const getPillarCards = (collections: FECollection[]): DCRPillarCards => {
 	};
 };
 
-const getCuratedList = (buckets: DCRPillarCards): DCRFrontCard[] => {
-	return [
-		buckets.opinion[0],
-		buckets.sport[0],
-		buckets.culture[0],
-		buckets.lifestyle[0],
-	] as DCRFrontCard[];
+export const getCuratedList = (buckets: DCRPillarCards): DCRFrontCard[] => {
+	return PILLARS.map((pillar) => buckets[pillar][0]).filter(
+		(card): card is DCRFrontCard => card !== undefined,
+	);
 };
 
 export const createFakeCollection = (

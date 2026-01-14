@@ -3,6 +3,8 @@ import { Button } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
+import type { DCRPillarCards } from '../model/createCollection';
+import { getCuratedList, PILLARS } from '../model/createCollection';
 import type {
 	AspectRatio,
 	DCRContainerLevel,
@@ -43,13 +45,25 @@ type Props = {
 
 export const ViewHistoryKey = 'gu.history.viewedCards';
 
-const filterBuckets = (backfillBucket: PillarBucket, viewedList: string[]) => {
-	return Object.fromEntries(
-		Object.entries(backfillBucket).map(([key, values]) => [
-			key,
-			values.filter((card) => !viewedList.includes(card.url)),
-		]),
-	);
+const filterBuckets = (
+	backfillBucket: PillarBucket,
+	viewedList: string[],
+): DCRPillarCards => {
+	const result: DCRPillarCards = {
+		opinion: [],
+		sport: [],
+		culture: [],
+		lifestyle: [],
+	};
+
+	for (const pillar of PILLARS) {
+		result[pillar] =
+			backfillBucket[pillar]?.filter(
+				(card) => !viewedList.includes(card.url),
+			) ?? [];
+	}
+
+	return result;
 };
 
 export const DynamicMediumFour = ({
@@ -70,6 +84,7 @@ export const DynamicMediumFour = ({
 	const [shouldShowHighlights, setShouldShowHighlights] =
 		useState<boolean>(false);
 	useEffect(() => {
+		// if we don't have a backfill bucket, show the default 4
 		if (!backfillBucket) {
 			setShouldShowHighlights(true);
 			return;
@@ -77,28 +92,18 @@ export const DynamicMediumFour = ({
 		// // get local state
 		const viewedCards = storage.local.get(ViewHistoryKey);
 
-		if (!viewedCards) {
+		// if we don't have a view history, show the default 4
+		if (!Array.isArray(viewedCards)) {
 			setShouldShowHighlights(true);
 			return;
 		}
-		const filteredBuckets = filterBuckets(
-			backfillBucket,
-			viewedCards as string[],
-		);
-		console.log('filteredBuckets', filteredBuckets);
-		const { Opinion, Sport, Culture, Lifestyle } = filteredBuckets;
-		const newTrails = [
-			Opinion[0],
-			Sport[0],
-			Culture[0],
-			Lifestyle[0],
-		].filter(Boolean);
-		console.log(newTrails);
-		if (newTrails.length <= 0) {
-			setShouldShowHighlights(true);
-			return;
+		const filteredBuckets = filterBuckets(backfillBucket, viewedCards);
+
+		const newTrails = getCuratedList(filteredBuckets);
+		if (newTrails.length > 0) {
+			setOrderedTrails(newTrails);
 		}
-		setOrderedTrails(newTrails);
+
 		setShouldShowHighlights(true);
 	}, [trails, backfillBucket]);
 
