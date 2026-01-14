@@ -5,7 +5,6 @@ import type { ProductBlockElement } from '../types/content';
 import type { FixedSlideWidth } from './ProductCarousel';
 import { ProductCarousel } from './ProductCarousel';
 import { ProductCarouselCard } from './ProductCarouselCard';
-import { singleRowLeftBorderStyles } from './ScrollableCarousel';
 
 const subgridStyles = css`
 	scroll-snap-align: start;
@@ -15,6 +14,12 @@ const subgridStyles = css`
 		grid-column: span 1;
 		grid-row: span 4;
 		grid-template-rows: subgrid;
+	}
+`;
+
+const leftBorderStyles = css`
+	:not(:first-child)::before {
+		${palette('--card-border-top')}
 	}
 `;
 
@@ -40,10 +45,7 @@ export const ScrollableProduct = ({
 			{products.map((product: ProductBlockElement) => (
 				<li
 					key={product.productCtas[0]?.url ?? product.elementId}
-					css={[
-						subgridStyles,
-						singleRowLeftBorderStyles(palette('--card-border-top')),
-					]}
+					css={[subgridStyles, leftBorderStyles]}
 				>
 					<ProductCarouselCard product={product} format={format} />
 				</li>

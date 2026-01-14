@@ -115,7 +115,7 @@ const leftBorderStyles = (colour: string) => css`
 	transform: translateX(-50%);
 `;
 
-export const singleRowLeftBorderStyles = (colour: string) => css`
+const singleRowLeftBorderStyles = (colour: string) => css`
 	:not(:first-child)::before {
 		${leftBorderStyles(colour)}
 	}
