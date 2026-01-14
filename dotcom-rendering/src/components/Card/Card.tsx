@@ -168,7 +168,7 @@ export type Props = {
 	isStorylines?: boolean;
 	isInStarRatingVariant?: boolean;
 	starRatingSize?: RatingSizeType;
-	isInOnwardsAbTestVariantStandardCard?: boolean;
+	isInOnwardsAbTestVariant?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -430,7 +430,7 @@ export const Card = ({
 	isStorylines = false,
 	isInStarRatingVariant,
 	starRatingSize = 'small',
-	isInOnwardsAbTestVariantStandardCard,
+	isInOnwardsAbTestVariant,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -707,7 +707,7 @@ export const Card = ({
 				isMoreGalleriesOnwardContent ||
 				// This is untidy. If we implement the gallery-style redesign for onwards content
 				// in all articles, we can refactor how we determine gap sizes for onwards cards.
-				isInOnwardsAbTestVariantStandardCard
+				isInOnwardsAbTestVariant
 			) {
 				return {
 					row: 'small',
@@ -1270,10 +1270,10 @@ export const Card = ({
 						isOnwardContent,
 					)}
 				>
-					{/* In the storylines section on tag pages, the flex splash is used to display key stories. 
-						We don't display an article headline in the conventional sense, the key stories are instead displayed as "supporting content". 
-						However, simply passing an empty string as the article headline still reserves space. 
-						The storylines check enables us to avoid rendering that space at all. 
+					{/* In the storylines section on tag pages, the flex splash is used to display key stories.
+						We don't display an article headline in the conventional sense, the key stories are instead displayed as "supporting content".
+						However, simply passing an empty string as the article headline still reserves space.
+						The storylines check enables us to avoid rendering that space at all.
 					*/}
 					{/* the div is needed to keep the headline and trail text justified at the start */}
 					{!(isStorylines && isFlexSplash) && (
