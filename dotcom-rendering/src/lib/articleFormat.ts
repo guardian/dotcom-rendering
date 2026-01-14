@@ -29,6 +29,7 @@ export enum ArticleDesign {
 	Timeline,
 	Profile,
 	Crossword,
+	HostedArticle,
 }
 
 export enum ArticleDisplay {

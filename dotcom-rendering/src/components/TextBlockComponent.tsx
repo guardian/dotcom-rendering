@@ -103,6 +103,7 @@ const isValidFormatForDropCap = (format: ArticleFormat) => {
 		case ArticleDesign.Interview:
 		case ArticleDesign.PhotoEssay:
 		case ArticleDesign.Recipe:
+		case ArticleDesign.HostedArticle:
 			return true;
 		default:
 			return false;
@@ -348,10 +349,15 @@ const buildElementTree =
 			case 'VAR':
 			case 'U':
 			case 'DEL':
+			case 'FIGURE':
 				return jsx(node.nodeName.toLowerCase(), {
 					css: textBlockStyles(format),
 					key,
 					children,
+				});
+			case 'IMG':
+				return jsx('img', {
+					src: getAttrs(node)?.getNamedItem('src')?.value,
 				});
 			default:
 				logger.warn('TextBlockComponent: Unknown element received', {

@@ -2,7 +2,8 @@ import { css } from '@emotion/react';
 import { grid } from '../grid';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { HostedContent } from '../types/hostedContent';
-import { HostedArticleBody } from '../components/HostedArticleBody';
+import { TextBlockComponent } from '../components/TextBlockComponent';
+import { ArticleDesign, ArticleDisplay } from '../lib/articleFormat';
 
 interface Props {
 	hostedContent: HostedContent;
@@ -46,8 +47,14 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 					</div>
 					<div css={[border, grid.column.centre]}>Meta</div>
 					<article css={[border, grid.column.centre]}>
-						<HostedArticleBody
-							body={props.hostedContent.frontendData.body}
+						<TextBlockComponent
+							html={props.hostedContent.frontendData.body ?? ''}
+							format={{
+								design: ArticleDesign.HostedArticle,
+								display: ArticleDisplay.Standard,
+								theme: 0,
+							}}
+							isFirstParagraph={true}
 						/>
 					</article>
 				</div>
