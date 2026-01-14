@@ -268,7 +268,13 @@ const imageStyle = css`
 	}
 `;
 
-const BylineImage = ({ image }: { image: string }) => {
+const BylineImage = ({
+	image,
+	altText,
+}: {
+	image: string;
+	altText: string;
+}) => {
 	const sources = generateSources(image, [
 		{ breakpoint: breakpoints.mobile, width: 80 },
 		{ breakpoint: breakpoints.desktop, width: 100 },
@@ -281,7 +287,7 @@ const BylineImage = ({ image }: { image: string }) => {
 	return (
 		<>
 			<Sources sources={sources} />
-			<img alt="" src={fallback} css={imageStyle} />
+			<img alt={altText} src={fallback} css={imageStyle} />
 		</>
 	);
 };
@@ -322,7 +328,10 @@ const HeaderImage = (props: { image: Props['image']; title: string }) => {
 		case 'byline':
 			return (
 				<HeaderPicture>
-					<BylineImage image={props.image.url} />
+					<BylineImage
+						image={props.image.url}
+						altText={`Headshot of ${props.title}`}
+					/>
 				</HeaderPicture>
 			);
 		case 'footballCrest':
