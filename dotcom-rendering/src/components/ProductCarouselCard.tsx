@@ -8,6 +8,7 @@ import {
 	textSansBold15,
 	textSansBold17,
 } from '@guardian/source/foundations';
+import { Link } from '@guardian/source/react-components';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import type { ProductBlockElement } from '../types/content';
@@ -48,10 +49,8 @@ const brandNameFont = css`
 
 const readMoreCta = css`
 	${textSansBold15};
-	text-decoration-line: underline;
 	text-decoration-color: ${palette('--product-card-read-more-decoration')};
 	color: ${palette('--product-card-read-more')};
-	text-underline-offset: 20%;
 `;
 
 const priceStyle = css`
@@ -104,13 +103,13 @@ export const ProductCarouselCard = ({
 				{!isUndefined(headingId) &&
 					hasHeading &&
 					product.displayType !== 'ProductCardOnly' && (
-						<a
+						<Link
 							href={`#${headingId}`}
 							onFocus={(event) => event.stopPropagation()}
-							css={readMoreCta}
+							cssOverrides={readMoreCta}
 						>
 							Read more
-						</a>
+						</Link>
 					)}
 			</div>
 			<div css={imageArea}>
