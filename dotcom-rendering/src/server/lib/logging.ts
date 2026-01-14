@@ -107,7 +107,7 @@ const enableLog4js: Configuration = {
 		},
 	},
 	categories: {
-		default: { appenders: ['out', 'fileAppender'], level: 'info' },
+		default: { appenders: ['out'], level: 'off' },
 		production: { appenders: ['out', 'fileAppender'], level: 'info' },
 		code: { appenders: ['out', 'fileAppender'], level: 'debug' },
 		development: { appenders: ['console'], level: 'debug' },
