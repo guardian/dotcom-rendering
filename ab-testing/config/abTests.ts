@@ -58,6 +58,18 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
 	},
+	{
+		name: "fronts-and-curation-onward-journeys",
+		description: "Testing the new Onward Journey component on all articles",
+		owners: ["fronts.and.curation@guardian.co.uk"],
+		expirationDate: `2026-02-25`,
+		type: "client",
+		status: "ON",
+		audienceSize: 50 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
