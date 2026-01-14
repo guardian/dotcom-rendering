@@ -113,17 +113,9 @@ export const FetchOnwardsData = ({
 	}
 
 	if (!data?.trails) {
-		const placeholderHeights = isInOnwardsAbTestVariant
-			? new Map<'mobile' | 'tablet' | 'desktop', number>([
-					['mobile', 900],
-					['tablet', 600],
-					['desktop', 900],
-			  ])
-			: new Map<'mobile', number>([['mobile', 340]]);
-
 		return (
 			<Placeholder
-				heights={placeholderHeights} // best guess at typical height
+				heights={new Map<'mobile', number>([['mobile', 340]])} // best guess at typical height
 				shouldShimmer={false}
 				backgroundColor={palette('--article-background')}
 			/>
