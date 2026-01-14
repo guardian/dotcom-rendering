@@ -1,8 +1,11 @@
 import { css } from '@emotion/react';
 import { grid } from '../grid';
 import type { RenderingTarget } from '../types/renderingTarget';
+import type { HostedContent } from '../types/hostedContent';
+import { HostedArticleBody } from '../components/HostedArticleBody';
 
 interface Props {
+	hostedContent: HostedContent;
 	renderingTarget: RenderingTarget;
 }
 
@@ -42,7 +45,11 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						Standfirst
 					</div>
 					<div css={[border, grid.column.centre]}>Meta</div>
-					<article css={[border, grid.column.centre]}>Body</article>
+					<article css={[border, grid.column.centre]}>
+						<HostedArticleBody
+							body={props.hostedContent.frontendData.body}
+						/>
+					</article>
 				</div>
 				<div css={[grid.container, border]}>
 					<div css={[grid.column.all]}>Footer</div>

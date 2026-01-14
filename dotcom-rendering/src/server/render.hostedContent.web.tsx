@@ -21,7 +21,10 @@ export const renderHtml = ({ hostedContent }: Props) => {
 	const renderingTarget = 'Web';
 
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<HostedLayout renderingTarget={renderingTarget} />,
+		<HostedLayout
+			hostedContent={hostedContent}
+			renderingTarget={renderingTarget}
+		/>,
 	);
 
 	// We don't send A/B tests or switches from frontend yet- do we need to?
