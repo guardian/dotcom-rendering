@@ -2,13 +2,10 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import type { ProductBlockElement } from '../types/content';
+import type { FixedSlideWidth } from './ProductCarousel';
+import { ProductCarousel } from './ProductCarousel';
 import { ProductCarouselCard } from './ProductCarouselCard';
-import type { FixedSlideWidth } from './ScrollableCarousel';
-import {
-	CarouselKind,
-	ScrollableCarousel,
-	singleRowLeftBorderStyles,
-} from './ScrollableCarousel';
+import { singleRowLeftBorderStyles } from './ScrollableCarousel';
 
 const subgridStyles = css`
 	scroll-snap-align: start;
@@ -36,11 +33,9 @@ export const ScrollableProduct = ({
 		],
 	};
 	return (
-		<ScrollableCarousel
-			kind={CarouselKind.ProductCarousel}
+		<ProductCarousel
 			carouselLength={products.length}
 			fixedSlideWidth={fixedCardWidth}
-			gapSizes={{ row: 'none', column: 'large' }}
 		>
 			{products.map((product: ProductBlockElement) => (
 				<li
@@ -53,6 +48,6 @@ export const ScrollableProduct = ({
 					<ProductCarouselCard product={product} format={format} />
 				</li>
 			))}
-		</ScrollableCarousel>
+		</ProductCarousel>
 	);
 };

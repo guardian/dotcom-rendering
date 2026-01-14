@@ -5,7 +5,7 @@ import type {
 	DCRFrontCard,
 } from '../types/front';
 import { FrontCard } from './FrontCard';
-import { CarouselKind, ScrollableCarousel } from './ScrollableCarousel';
+import { ScrollableCarousel } from './ScrollableCarousel';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -35,7 +35,6 @@ export const ScrollableMedium = ({
 }: Props) => {
 	return (
 		<ScrollableCarousel
-			kind={CarouselKind.FrontCarousel}
 			carouselLength={trails.length}
 			visibleCarouselSlidesOnMobile={2}
 			visibleCarouselSlidesOnTablet={4}

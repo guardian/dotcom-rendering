@@ -13,9 +13,9 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import { type OnwardsSource } from '../types/onwards';
 import { type TrailType } from '../types/trails';
-import type { Props as CardProps } from './Card/Card';
 import { Card } from './Card/Card';
-import { CarouselKind, ScrollableCarousel } from './ScrollableCarousel';
+import type { Props as CardProps } from './Card/Card';
+import { ScrollableCarousel } from './ScrollableCarousel';
 
 type Props = {
 	serverTime?: number;
@@ -94,7 +94,6 @@ export const ScrollableSmallOnwards = (props: Props) => {
 			<Title title={props.heading} headingUrl={props.headingUrl} />
 			<div css={cardsContainerStyles}>
 				<ScrollableCarousel
-					kind={CarouselKind.FrontCarousel}
 					carouselLength={Math.ceil(trails.length / 2)}
 					visibleCarouselSlidesOnMobile={1}
 					visibleCarouselSlidesOnTablet={2}
