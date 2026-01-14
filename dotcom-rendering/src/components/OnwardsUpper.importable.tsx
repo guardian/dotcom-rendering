@@ -14,7 +14,6 @@ import type { OnwardsSource } from '../types/onwards';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { FetchOnwardsData } from './FetchOnwardsData.importable';
-import { MoreGalleriesStyleOnwardsContent } from './MoreGalleriesStyleOnwardsContent.importable';
 import { Section } from './Section';
 
 type PillarForContainer =
@@ -329,19 +328,7 @@ export const OnwardsUpper = ({
 
 	return (
 		<div css={onwardsWrapper}>
-			{!!url && isInOnwardsAbTestVariant && (
-				<Section
-					fullWidth={true}
-					borderColour={palette('--article-section-border')}
-				>
-					<MoreGalleriesStyleOnwardsContent
-						url={url}
-						discussionApiUrl={discussionApiUrl}
-						isInOnwardsAbTestVariant={isInOnwardsAbTestVariant}
-					/>
-				</Section>
-			)}
-			{!!url && !isInOnwardsAbTestVariant && (
+			{!!url && (
 				<Section
 					fullWidth={true}
 					borderColour={palette('--article-section-border')}
@@ -359,6 +346,7 @@ export const OnwardsUpper = ({
 						renderingTarget={renderingTarget}
 						isAdFreeUser={isAdFreeUser}
 						containerPosition="first"
+						isInOnwardsAbTestVariant={isInOnwardsAbTestVariant}
 						webURL={webURL}
 						isInStarRatingVariant={isInStarRatingVariant}
 					/>

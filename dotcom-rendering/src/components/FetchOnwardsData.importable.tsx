@@ -17,6 +17,7 @@ import type { OnwardsSource } from '../types/onwards';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { FETrailType, TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
+import { MoreGalleriesStyleOnwardsContent } from './MoreGalleriesStyleOnwardsContent.importable';
 import { Placeholder } from './Placeholder';
 import { ScrollableSmallOnwards } from './ScrollableSmallOnwards';
 
@@ -30,6 +31,7 @@ type Props = {
 	renderingTarget: RenderingTarget;
 	isAdFreeUser: boolean;
 	containerPosition: string;
+	isInOnwardsAbTestVariant?: boolean;
 	webURL: string;
 	isInStarRatingVariant?: boolean;
 };
@@ -72,6 +74,7 @@ export const FetchOnwardsData = ({
 	renderingTarget,
 	isAdFreeUser,
 	containerPosition,
+	isInOnwardsAbTestVariant,
 	webURL,
 	isInStarRatingVariant,
 }: Props) => {
@@ -110,9 +113,17 @@ export const FetchOnwardsData = ({
 	}
 
 	if (!data?.trails) {
+		const placeholderHeights = isInOnwardsAbTestVariant
+			? new Map<'mobile' | 'tablet' | 'desktop', number>([
+					['mobile', 900],
+					['tablet', 600],
+					['desktop', 900],
+			  ])
+			: new Map<'mobile', number>([['mobile', 340]]);
+
 		return (
 			<Placeholder
-				heights={new Map([['mobile', 340]])} // best guess at typical height
+				heights={placeholderHeights} // best guess at typical height
 				shouldShimmer={false}
 				backgroundColor={palette('--article-background')}
 			/>
@@ -139,6 +150,14 @@ export const FetchOnwardsData = ({
 					onwardsSource={onwardsSource}
 					format={format}
 					isInStarRatingVariant={isInStarRatingVariant}
+				/>
+			) : isInOnwardsAbTestVariant ? (
+				<MoreGalleriesStyleOnwardsContent
+					heading={data.heading || data.displayname}
+					trails={trails({ withMasterImage: true })}
+					discussionApiUrl={discussionApiUrl}
+					isAdFreeUser={isAdFreeUser}
+					isInStarRatingVariant={!!isInStarRatingVariant}
 				/>
 			) : (
 				<Carousel

@@ -7,31 +7,20 @@ import {
 } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { grid } from '../grid';
-import { decideFormat } from '../lib/articleFormat';
-import { useApi } from '../lib/useApi';
 import { palette } from '../palette';
-import type { DCRFrontCard } from '../types/front';
-import type { FETrailType } from '../types/trails';
+import type { TrailType } from '../types/trails';
 import { Card } from './Card/Card';
 import type { Props as CardProps } from './Card/Card';
 import { LeftColumn } from './LeftColumn';
-import { Placeholder } from './Placeholder';
-
-type OnwardsResponse = {
-	trails: FETrailType[];
-	heading: string;
-	displayname: string;
-	description: string;
-};
 
 const standardCardListStyles = css`
 	width: 100%;
 	display: grid;
 	gap: ${space[5]}px;
+	padding-top: ${space[2]}px;
 
 	${from.tablet} {
 		grid-template-columns: repeat(4, 1fr);
-		padding-top: ${space[2]}px;
 	}
 
 	${from.leftCol} {
@@ -57,7 +46,6 @@ const cardsContainerStyles = css`
 `;
 
 const splashCardStyles = css`
-	margin-bottom: ${space[4]}px;
 	${from.leftCol} {
 		margin-top: ${space[2]}px;
 
@@ -105,8 +93,12 @@ const headerStyles = css`
 	${headlineBold24};
 	color: ${palette('--carousel-text')};
 	padding-bottom: ${space[2]}px;
-	padding-top: ${space[1]}px;
+	padding-top: ${space[2]}px;
 	margin-left: 0;
+
+	&::first-letter {
+		text-transform: capitalize;
+	}
 `;
 
 const mobileHeaderStyles = css`
@@ -119,50 +111,24 @@ const mobileHeaderStyles = css`
 	}
 `;
 
-const convertFETrailToDcrTrail = (
-	trails: FETrailType[],
-	discussionApiUrl: string,
-): DCRFrontCard[] =>
-	trails.map((trail) => ({
-		dataLinkName: 'onwards-content-card',
-		discussionId: trail.discussion?.discussionId,
-		discussionApiUrl,
-		format: decideFormat(trail.format),
-		headline: trail.headline,
-		image: {
-			src: trail.masterImage ?? '',
-			altText: trail.linkText ?? '',
-		},
-		isExternalLink: false,
-		onwardsSource: 'related-content',
-		showLivePlayable: false,
-		showQuotedHeadline: false,
-		url: trail.url,
-		webPublicationDate: trail.webPublicationDate,
-		isImmersive: false,
-	}));
-
-const getDefaultCardProps = (
-	trail: DCRFrontCard,
-	isInOnwardsAbTestVariantStandardCard: boolean,
-) => {
+const getDefaultCardProps = (trail: TrailType) => {
 	const defaultProps: CardProps = {
 		aspectRatio: '5:4',
 		avatarUrl: trail.avatarUrl,
 		branding: trail.branding,
 		byline: trail.byline,
 		dataLinkName: `onwards-content-gallery-style ${trail.dataLinkName}`,
-		discussionApiUrl: trail.discussionApiUrl,
-		discussionId: trail.discussionId,
+		discussionApiUrl: '',
+		discussionId: trail.discussion?.isCommentable
+			? trail.discussion.discussionId
+			: undefined,
 		format: trail.format,
 		headlineText: trail.headline,
 		image: trail.image,
 		imageLoading: 'lazy',
-		isCrossword: trail.isCrossword,
 		isExternalLink: false,
-		isInOnwardsAbTestVariantStandardCard,
+		isInOnwardsAbTestVariant: true,
 		isOnwardContent: true,
-		kickerText: trail.kickerText,
 		linkTo: trail.url,
 		mainMedia: trail.mainMedia,
 		onwardsSource: 'related-content',
@@ -172,10 +138,9 @@ const getDefaultCardProps = (
 		showPulsingDot: false,
 		showQuotedHeadline: trail.showQuotedHeadline,
 		showTopBarDesktop: false,
-		showTopBarMobile: false,
+		showTopBarMobile: true,
 		snapData: trail.snapData,
 		starRating: trail.starRating,
-		trailText: trail.trailText,
 		webPublicationDate: trail.webPublicationDate,
 	};
 
@@ -183,9 +148,11 @@ const getDefaultCardProps = (
 };
 
 type Props = {
-	url: string;
+	heading: string;
+	trails: TrailType[];
+	isAdFreeUser: boolean;
 	discussionApiUrl: string;
-	isInOnwardsAbTestVariant?: boolean;
+	isInStarRatingVariant: boolean;
 };
 
 /**
@@ -195,43 +162,13 @@ type Props = {
  * test is not successful, this component will be removed.
  */
 export const MoreGalleriesStyleOnwardsContent = ({
-	url,
+	heading,
+	trails,
 	discussionApiUrl,
-	isInOnwardsAbTestVariant,
+	isInStarRatingVariant,
 }: Props) => {
-	const { data, error } = useApi<OnwardsResponse>(url);
-
-	if (error) {
-		// Send the error to Sentry and then prevent the element from rendering
-		window.guardian.modules.sentry.reportError(error, 'onwards-lower');
-		return null;
-	}
-
-	if (!data?.trails) {
-		return (
-			<Placeholder
-				heights={
-					new Map([
-						['mobile', 900],
-						['tablet', 600],
-						['desktop', 900],
-					])
-				}
-				shouldShimmer={false}
-				backgroundColor={palette('--article-background')}
-			/>
-		);
-	}
-
-	const trails: DCRFrontCard[] = convertFETrailToDcrTrail(
-		data.trails,
-		discussionApiUrl,
-	);
-
 	const [firstTrail, ...standardTrails] = trails;
 	if (!firstTrail) return null;
-
-	const heading = data.heading || data.displayname;
 
 	return (
 		<div
@@ -239,20 +176,18 @@ export const MoreGalleriesStyleOnwardsContent = ({
 			css={containerStyles}
 		>
 			<LeftColumn>
-				<h2 css={headerStyles}>
-					<span>{heading}</span>
-				</h2>
+				<h2 css={headerStyles}>{heading}</h2>
 			</LeftColumn>
-			<h2 css={mobileHeaderStyles}>
-				<span>{heading}</span>
-			</h2>
+			<h2 css={mobileHeaderStyles}>{heading}</h2>
 			<div>
 				<div css={[cardsContainerStyles, splashCardStyles]}>
 					<Card
-						{...getDefaultCardProps(firstTrail, false)}
+						{...getDefaultCardProps(firstTrail)}
 						mediaPositionOnDesktop="right"
 						mediaPositionOnMobile="top"
 						mediaSize="medium"
+						discussionApiUrl={discussionApiUrl}
+						isInStarRatingVariant={isInStarRatingVariant}
 						headlineSizes={{
 							desktop: 'small',
 							tablet: 'small',
@@ -273,16 +208,15 @@ export const MoreGalleriesStyleOnwardsContent = ({
 					color={palette('--onward-content-border')}
 				/>
 				<ul css={[cardsContainerStyles, standardCardListStyles]}>
-					{standardTrails.slice(0, 4).map((trail) => (
+					{standardTrails.slice(0, 4).map((trail: TrailType) => (
 						<li key={trail.url} css={standardCardStyles}>
 							<Card
-								{...getDefaultCardProps(
-									trail,
-									!!isInOnwardsAbTestVariant,
-								)}
+								{...getDefaultCardProps(trail)}
 								mediaPositionOnDesktop="bottom"
 								mediaPositionOnMobile="left"
 								mediaSize="small"
+								discussionApiUrl={discussionApiUrl}
+								isInStarRatingVariant={isInStarRatingVariant}
 							/>
 						</li>
 					))}
