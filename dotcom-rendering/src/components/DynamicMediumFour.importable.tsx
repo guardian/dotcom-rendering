@@ -83,6 +83,7 @@ export const DynamicMediumFour = ({
 	);
 	const [shouldShowHighlights, setShouldShowHighlights] =
 		useState<boolean>(false);
+
 	useEffect(() => {
 		// if we don't have a backfill bucket, show the default 4
 		if (!backfillBucket) {

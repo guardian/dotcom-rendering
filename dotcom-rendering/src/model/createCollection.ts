@@ -27,13 +27,13 @@ const acrossTheGuardianCollection: DCRCollectionType = {
 	aspectRatio: '5:4',
 };
 
-export type Pillar = 'sport' | 'lifestyle' | 'opinion' | 'culture';
+export type Pillar = 'opinion' | 'sport' | 'culture' | 'lifestyle';
 
 export const PILLARS = [
-	'sport',
-	'lifestyle',
 	'opinion',
+	'sport',
 	'culture',
+	'lifestyle',
 ] as const satisfies readonly Pillar[];
 
 type PillarContainer = {
