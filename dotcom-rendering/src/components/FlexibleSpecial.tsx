@@ -31,7 +31,6 @@ type Props = {
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
-	enableHls?: boolean;
 	isInStarRatingVariant?: boolean;
 };
 
@@ -140,7 +139,6 @@ type OneCardLayoutProps = {
 	isFirstRow: boolean;
 	containerLevel: DCRContainerLevel;
 	isSplashCard?: boolean;
-	enableHls?: boolean;
 	isInStarRatingVariant?: boolean;
 };
 
@@ -155,7 +153,6 @@ export const OneCardLayout = ({
 	isFirstRow,
 	containerLevel,
 	isSplashCard,
-	enableHls,
 	isInStarRatingVariant,
 }: OneCardLayoutProps) => {
 	const card = cards[0];
@@ -211,9 +208,8 @@ export const OneCardLayout = ({
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 					headlinePosition={isSplashCard ? 'outer' : 'inner'}
 					subtitleSize={subtitleSize}
-					enableHls={enableHls}
 					isInStarRatingVariant={isInStarRatingVariant}
-					starRatingSize={'medium'}
+					starRatingSize="medium"
 				/>
 			</LI>
 		</UL>
@@ -315,7 +311,6 @@ export const FlexibleSpecial = ({
 	aspectRatio,
 	containerLevel = 'Primary',
 	collectionId,
-	enableHls,
 	isInStarRatingVariant,
 }: Props) => {
 	const snaps = [...groupedTrails.snap].slice(0, 1).map((snap) => ({
@@ -345,7 +340,6 @@ export const FlexibleSpecial = ({
 					isLastRow={splash.length === 0 && cards.length === 0}
 					containerLevel={containerLevel}
 					isSplashCard={false}
-					enableHls={enableHls}
 					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			)}
@@ -361,7 +355,6 @@ export const FlexibleSpecial = ({
 					isFirstRow={!isNonEmptyArray(snaps)}
 					containerLevel={containerLevel}
 					isSplashCard={true}
-					enableHls={enableHls}
 					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			)}
