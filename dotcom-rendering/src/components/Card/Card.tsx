@@ -1269,6 +1269,7 @@ export const Card = ({
 						isBetaContainer,
 						isOnwardContent,
 					)}
+					isInOnwardsAbTestVariant={!!isInOnwardsAbTestVariant}
 				>
 					{/* In the storylines section on tag pages, the flex splash is used to display key stories.
 						We don't display an article headline in the conventional sense, the key stories are instead displayed as "supporting content".
