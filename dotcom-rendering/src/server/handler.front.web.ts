@@ -39,15 +39,15 @@ const enhanceFront = (body: unknown): Front => {
 		),
 	});
 
-	const inFocusIndex =
+	const acrossTheGPosition =
 		data.pressedPage.collections.findIndex(
-			(c) => c.displayName === 'In focus',
+			(c) => c.displayName === 'News',
 		) + 1;
 
 	const combinedCollections = [
-		...collections.slice(0, inFocusIndex),
+		...collections.slice(0, acrossTheGPosition),
 		acrossTheG,
-		...collections.slice(inFocusIndex),
+		...collections.slice(acrossTheGPosition),
 	];
 
 	return {
