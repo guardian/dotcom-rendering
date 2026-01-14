@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { exampleAtAGlanceProductArray } from '../../fixtures/manual/productBlockElement';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { StackedProducts } from './StackedProducts';
+import { StackedProducts } from './StackedProducts.importable';
 
 const meta = {
 	title: 'Components/Stacked Horizontal Summary Product Cards',
