@@ -15,19 +15,39 @@ const meta = {
 				breakpoints.tablet,
 				breakpoints.wide,
 			],
+			// Because this component uses react.createPortal
+			// we delay to give the portals time to hydrate
+			delay: 500,
 		},
 	},
 	args: {
 		products: [
-			{ ...exampleProduct, h2Id: 'product' },
 			{
 				...exampleProduct,
+				primaryHeadingHtml: '<em>Product 0</em>',
+				h2Id: 'product',
+			},
+			{
+				...exampleProduct,
+				primaryHeadingHtml: '<em>Product 1</em>',
 				h2Id: 'product-1',
 				productName: 'Lorem ipsum dolor sit amet',
 			},
-			{ ...exampleProduct, h2Id: 'product-2' },
-			{ ...exampleProduct, h2Id: 'product-3' },
-			{ ...exampleProduct, h2Id: 'product-4' },
+			{
+				...exampleProduct,
+				primaryHeadingHtml: '<em>Product 2</em>',
+				h2Id: 'product-2',
+			},
+			{
+				...exampleProduct,
+				primaryHeadingHtml: '<em>Product 3</em>',
+				h2Id: 'product-3',
+			},
+			{
+				...exampleProduct,
+				primaryHeadingHtml: '<em>Product 4</em>',
+				h2Id: 'product-4',
+			},
 		],
 		format: {
 			design: ArticleDesign.Review,
@@ -78,3 +98,20 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const With5Cards = {} satisfies Story;
+
+export const ClickForwardArrow = {
+	play: async ({ canvas, userEvent }) => {
+		await userEvent.click(canvas.getByTestId('carousel-forward-button'));
+	},
+} satisfies Story;
+
+export const ClickForwardTwiceAndBackOnce = {
+	play: async ({ canvas, userEvent }) => {
+		const user = userEvent.setup({
+			delay: 500, // delay between each interaction
+		});
+		await user.click(canvas.getByTestId('carousel-forward-button'));
+		await user.click(canvas.getByTestId('carousel-forward-button'));
+		await user.click(canvas.getByTestId('carousel-back-button'));
+	},
+} satisfies Story;

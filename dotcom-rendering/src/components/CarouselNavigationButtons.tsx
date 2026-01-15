@@ -105,6 +105,7 @@ export const CarouselNavigationButtons = ({
 				aria-label="previous"
 				value="previous"
 				data-link-name={dataLinkNamePreviousButton}
+				data-testid="carousel-back-button"
 			/>
 
 			<Button
@@ -119,6 +120,7 @@ export const CarouselNavigationButtons = ({
 				aria-label="next"
 				value="next"
 				data-link-name={dataLinkNameNextButton}
+				data-testid="carousel-forward-button"
 			/>
 		</div>,
 		portalNode,
