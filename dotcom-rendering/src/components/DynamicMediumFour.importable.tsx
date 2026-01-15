@@ -1,8 +1,9 @@
-import { storage } from '@guardian/libs';
+import { isUndefined, storage } from '@guardian/libs';
 import { Button } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
+import { getDemotedState } from '../lib/personalisationHistory';
 import type { DCRPillarCards } from '../model/createCollection';
 import { getCuratedList, PILLARS } from '../model/createCollection';
 import type {
@@ -49,7 +50,7 @@ const filterBuckets = (
 	backfillBucket: PillarBucket,
 	viewedList: string[],
 ): DCRPillarCards => {
-	const result: DCRPillarCards = {
+	const filteredPillarBuckets: DCRPillarCards = {
 		opinion: [],
 		sport: [],
 		culture: [],
@@ -57,13 +58,13 @@ const filterBuckets = (
 	};
 
 	for (const pillar of PILLARS) {
-		result[pillar] =
+		filteredPillarBuckets[pillar] =
 			backfillBucket[pillar]?.filter(
 				(card) => !viewedList.includes(card.url),
 			) ?? [];
 	}
 
-	return result;
+	return filteredPillarBuckets;
 };
 
 export const DynamicMediumFour = ({
@@ -86,15 +87,15 @@ export const DynamicMediumFour = ({
 
 	useEffect(() => {
 		// if we don't have a backfill bucket, show the default 4
-		if (!backfillBucket) {
+		if (isUndefined(backfillBucket)) {
 			setShouldShowHighlights(true);
 			return;
 		}
 		// // get local state
-		const viewedCards = storage.local.get(ViewHistoryKey);
+		const viewedCards = getDemotedState();
 
 		// if we don't have a view history, show the default 4
-		if (!Array.isArray(viewedCards)) {
+		if (isUndefined(viewedCards) || viewedCards.length === 0) {
 			setShouldShowHighlights(true);
 			return;
 		}
