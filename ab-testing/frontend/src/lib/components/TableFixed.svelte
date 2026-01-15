@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { ABTest } from '../../../../types.js';
-	import OphanLink from '$lib/components/OphanLink.svelte';
-	import TestVariants from '$lib/components/TestVariants.svelte';
+	import OphanLink from "$lib/components/OphanLink.svelte";
+	import TestVariants from "$lib/components/TestVariants.svelte";
+	import type { ABTest } from "@guardian/ab-testing-config";
 
 	interface Props {
 		tests: ABTest[];
@@ -25,12 +25,12 @@
 		{@const expired = daysToExpiry(test.expirationDate) < 0}
 		<table>
 			<colgroup>
+				<col span="1" style="width: 30%;" />
+				<col span="1" style="width: 10%;" />
 				<col span="1" style="width: 25%;" />
 				<col span="1" style="width: 10%;" />
-				<col span="1" style="width: 35%;" />
 				<col span="1" style="width: 10%;" />
-				<col span="1" style="width: 10%;" />
-				<col span="1" style="width: 10%;" />
+				<col span="1" style="width: 15%;" />
 			</colgroup>
 			<thead>
 				<tr>
@@ -49,7 +49,7 @@
 					>
 					<td
 						class="status"
-						class:off={test.status === 'OFF'}
+						class:off={test.status === "OFF"}
 						class:expired
 					>
 						{#if expired}
@@ -69,7 +69,12 @@
 						>{daysToExpiry(test.expirationDate)} days</td
 					>
 					<td>{test.audienceSize * 100}%</td>
-					<td><OphanLink testName={test.name} /></td>
+					<td
+						><OphanLink
+							testName={test.name}
+							testGroups={test.groups}
+						/></td
+					>
 				</tr>
 				<tr>
 					<th scope="row">Description</th>
@@ -106,7 +111,7 @@
 		padding: 8px;
 	}
 
-	th[scope='col'] {
+	th[scope="col"] {
 		background-color: var(--light-grey);
 	}
 
