@@ -95,6 +95,7 @@ const withBannerData =
 			abandonedBasket,
 			promoCodes,
 			isCollapsible,
+			children,
 		} = bannerProps;
 
 		const [hasBeenSeen, setNode] = useIsInView({
@@ -331,6 +332,7 @@ const withBannerData =
 					onNotNowClick,
 					onCollapseClick,
 					onExpandClick,
+					bannerChannel,
 					content: {
 						mainContent: renderedContent,
 						mobileContent: renderedMobileContent ?? renderedContent,
@@ -353,12 +355,12 @@ const withBannerData =
 
 				return (
 					<div ref={setNode}>
-						<Banner {...props} />
+						<Banner {...props}>{children}</Banner>
 					</div>
 				);
 			}
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 		}
 
 		return <></>;

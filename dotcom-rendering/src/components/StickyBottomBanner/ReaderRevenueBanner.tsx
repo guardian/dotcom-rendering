@@ -297,14 +297,22 @@ export const ReaderRevenueBanner = ({
 	const [Banner, setBanner] = useState<React.ElementType | null>(null);
 
 	useEffect(() => {
+		const params = new URLSearchParams(window.location.search);
+		const version = params.get('banner-version');
+
 		(name === 'SignInPromptBanner'
 			? /* webpackChunkName: "sign-in-prompt-banner" */
 			  import(`../marketing/banners/signInPrompt/SignInPromptBanner`)
+			: version === 'v2'
+			? /* webpackChunkName: "designable-banner-v2" */
+			  import(`../marketing/banners/designableBanner/v2/Banner`)
 			: /* webpackChunkName: "designable-banner" */
 			  import(`../marketing/banners/designableBanner/DesignableBanner`)
 		)
 			.then((bannerModule: { [key: string]: React.ElementType }) => {
-				setBanner(() => bannerModule[name] ?? null);
+				// When using banner-version=v2, always use DesignableBanner export
+				const bannerName = version === 'v2' ? 'DesignableBanner' : name;
+				setBanner(() => bannerModule[bannerName] ?? null);
 			})
 			.catch((error) => {
 				const msg = `Error importing RR banner: ${String(error)}`;
