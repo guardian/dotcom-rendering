@@ -189,7 +189,7 @@ You can verify that you're in the test by checking `window.guardian.modules.abTe
 
 ---
 
-<span style="background-color: yellow;">The documentation below is for the **legacy** AB test framework. This framework will be deprecated. It is recommended that any AB tests introduced now use the new framework, documented above.</span>
+:warning: The documentation below is for the LEGACY AB test framework. This framework will be deprecated. It is recommended that any AB tests introduced now use the new framework, documented above. :warning:
 
 # AB Testing in DCR
 
