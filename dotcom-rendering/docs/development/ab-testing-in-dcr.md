@@ -1,8 +1,8 @@
 # AB Testing in DCR
 
-This documentation covers the updated AB test framework, developed by commercial-dev to support both client and server side A/B tests in DCR and launched in January 2026.
+This documentation covers the updated AB test framework, developed by commercial-dev to support both client and server side A/B tests in DCR and launched in January 2026. If you're interested in how it works please visit the docs [here](https://github.com/guardian/dotcom-rendering/tree/main/ab-testing).
 
-If you're interested in how it works please visit the docs [here](https://github.com/guardian/dotcom-rendering/tree/main/ab-testing#beta-ab-test-framework).
+Instructions for the legacy framework can still be found [here](./legacy-ab-testing-in-dcr.md).
 
 ## Creating a new A/B test
 
