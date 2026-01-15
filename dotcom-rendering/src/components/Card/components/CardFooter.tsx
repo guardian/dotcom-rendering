@@ -22,7 +22,7 @@ const contentStyles = css`
 	> {
 		/* The dividing line is applied only to the second child. This ensures that no
 		   dividing line is added when there is only one child in the container. */
-		:nth-of-type(2) {
+		:nth-child(2) {
 			::before {
 				content: '';
 				display: block;
