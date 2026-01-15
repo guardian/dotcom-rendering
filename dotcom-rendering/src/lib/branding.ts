@@ -89,8 +89,7 @@ const isAllBrandingEqual = ([
 export const brandingEqual = (b1: Branding, b2: Branding): boolean => {
 	return (
 		b1.brandingType?.name === b2.brandingType?.name &&
-		b1.sponsorName === b2.sponsorName &&
-		b1.logo.src === b2.logo.src
+		b1.sponsorName === b2.sponsorName
 	);
 };
 
