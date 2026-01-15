@@ -3,7 +3,12 @@ import { Button } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
-import { getDemotedState } from '../lib/personalisationHistory';
+import {
+	DemotedCardsHistoryKey,
+	getDemotedState,
+	trackView,
+	ViewedCardsHistoryKey,
+} from '../lib/personalisationHistory';
 import type { DCRPillarCards } from '../model/createCollection';
 import { getCuratedList, PILLARS } from '../model/createCollection';
 import type {
@@ -17,7 +22,6 @@ import { LI } from './Card/components/LI';
 import type { MediaPositionType } from './Card/components/MediaWrapper';
 import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
-// eslint-disable-next-line import/no-cycle
 import { FrontCard } from './FrontCard';
 
 const getMediaPositionOnDesktop = (
@@ -41,14 +45,12 @@ type Props = {
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
 	isInStarRatingVariant?: boolean;
-	backfillBucket?: PillarBucket;
+	pillarBuckets?: PillarBucket;
 };
 
-export const ViewHistoryKey = 'gu.history.viewedCards';
-
 const filterBuckets = (
-	backfillBucket: PillarBucket,
-	viewedList: string[],
+	pillarBuckets: PillarBucket,
+	demotedCards: string[],
 ): DCRPillarCards => {
 	const filteredPillarBuckets: DCRPillarCards = {
 		opinion: [],
@@ -59,8 +61,8 @@ const filterBuckets = (
 
 	for (const pillar of PILLARS) {
 		filteredPillarBuckets[pillar] =
-			backfillBucket[pillar]?.filter(
-				(card) => !viewedList.includes(card.url),
+			pillarBuckets[pillar]?.filter(
+				(card) => !demotedCards.includes(card.url),
 			) ?? [];
 	}
 
@@ -77,45 +79,56 @@ export const DynamicMediumFour = ({
 	aspectRatio,
 	containerLevel = 'Primary',
 	isInStarRatingVariant,
-	backfillBucket,
+	pillarBuckets,
 }: Props) => {
 	const [orderedTrails, setOrderedTrails] = useState<DCRFrontCard[]>(
 		trails.slice(0, 4),
 	);
-	const [shouldShowHighlights, setShouldShowHighlights] =
-		useState<boolean>(false);
+	const [shouldShowCards, setShouldShowCards] = useState<boolean>(false);
+
+	const [hasTrackedView, setHasTrackedView] = useState<boolean>(false);
 
 	useEffect(() => {
-		// if we don't have a backfill bucket, show the default 4
-		if (isUndefined(backfillBucket)) {
-			setShouldShowHighlights(true);
+		if (isUndefined(pillarBuckets)) {
+			setShouldShowCards(true);
 			return;
 		}
-		// // get local state
-		const viewedCards = getDemotedState();
 
-		// if we don't have a view history, show the default 4
-		if (isUndefined(viewedCards) || viewedCards.length === 0) {
-			setShouldShowHighlights(true);
+		const demotedCards = getDemotedState() ?? [];
+
+		if (demotedCards.length === 0) {
+			setShouldShowCards(true);
 			return;
 		}
-		const filteredBuckets = filterBuckets(backfillBucket, viewedCards);
 
-		const newTrails = getCuratedList(filteredBuckets);
-		if (newTrails.length > 0) {
-			setOrderedTrails(newTrails);
+		const filteredBuckets = filterBuckets(pillarBuckets, demotedCards);
+
+		const curatedTrails = getCuratedList(filteredBuckets);
+
+		if (curatedTrails.length > 0) {
+			setOrderedTrails(curatedTrails);
 		}
 
-		setShouldShowHighlights(true);
-	}, [trails, backfillBucket]);
+		setShouldShowCards(true);
+	}, [trails, pillarBuckets]);
+
+	useEffect(() => {
+		if (shouldShowCards && !hasTrackedView) {
+			trackView(orderedTrails);
+			setHasTrackedView(true);
+		}
+	}, [orderedTrails, hasTrackedView, shouldShowCards]);
 
 	return (
 		<>
 			<Button
 				type={'button'}
-				onClick={() => storage.local.remove(ViewHistoryKey)}
+				size={'small'}
+				onClick={() => {
+					storage.local.remove(DemotedCardsHistoryKey);
+					storage.local.remove(ViewedCardsHistoryKey);
+				}}
 			>
-				{' '}
 				reset storage
 			</Button>
 			<UL direction="row">
@@ -127,7 +140,7 @@ export const DynamicMediumFour = ({
 							key={card.url}
 							padSides={true}
 							showDivider={cardIndex > 0}
-							isVisible={shouldShowHighlights}
+							isVisible={shouldShowCards}
 						>
 							<FrontCard
 								trail={card}

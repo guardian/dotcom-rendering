@@ -6,6 +6,7 @@ import type {
 	DCRContainerType,
 	DCRFrontCard,
 	DCRGroupedTrails,
+	PillarBucket,
 } from '../types/front';
 import { DynamicFast } from './DynamicFast';
 import { DynamicMediumFour } from './DynamicMediumFour.importable';
@@ -49,7 +50,7 @@ type Props = {
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
 	isInStarRatingVariant?: boolean;
-	backfillBucket?: DCRFrontCard[];
+	pillarBuckets?: PillarBucket;
 };
 
 export const DecideContainer = ({
@@ -66,7 +67,7 @@ export const DecideContainer = ({
 	collectionId,
 	containerLevel,
 	isInStarRatingVariant,
-	backfillBucket,
+	pillarBuckets,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -301,7 +302,7 @@ export const DecideContainer = ({
 				</Island>
 			);
 		case 'static/medium/4':
-			if (backfillBucket) {
+			if (pillarBuckets) {
 				return (
 					<Island priority="critical" defer={{ until: 'visible' }}>
 						<DynamicMediumFour
@@ -312,7 +313,7 @@ export const DecideContainer = ({
 							imageLoading={imageLoading}
 							aspectRatio={aspectRatio}
 							isInStarRatingVariant={isInStarRatingVariant}
-							backfillBucket={backfillBucket}
+							pillarBuckets={pillarBuckets}
 						/>
 					</Island>
 				);
