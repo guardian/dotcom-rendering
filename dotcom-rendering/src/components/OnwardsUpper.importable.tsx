@@ -7,7 +7,7 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
-import { useAB } from '../lib/useAB';
+import { useBetaAB } from '../lib/useAB';
 import { useIsHorizontalScrollingSupported } from '../lib/useIsHorizontalScrollingSupported';
 import { palette } from '../palette';
 import type { OnwardsSource } from '../types/onwards';
@@ -227,10 +227,13 @@ export const OnwardsUpper = ({
 	webURL,
 	isInStarRatingVariant,
 }: Props) => {
-	const abTestAPI = useAB()?.api;
+	const abTests = useBetaAB();
 	const isInOnwardsAbTestVariant =
 		renderingTarget === 'Web' &&
-		abTestAPI?.isUserInVariant('OnwardJourneys', 'variant');
+		abTests?.isUserInTestGroup(
+			'fronts-and-curation-onward-journeys',
+			'variant',
+		);
 
 	const isHorizontalScrollingSupported = useIsHorizontalScrollingSupported();
 	if (!isHorizontalScrollingSupported) return null;
