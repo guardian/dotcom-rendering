@@ -77,7 +77,7 @@ const headerStyles = css`
 	}
 `;
 
-const captionContainer = css`
+const captionStyles = css`
 	${grid.column.centre};
 
 	${from.leftCol} {
@@ -201,32 +201,48 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 						}
 					/>
 
-					{/*New component*/}
-					<div css={standfirstStyles}>
-						<Standfirst
-							format={format}
-							standfirst={frontendData.standfirst}
-						/>
-					</div>
+					{isLabs ? (
+						<>
+							<Standfirst
+								format={format}
+								standfirst={frontendData.standfirst}
+							/>
+							<Caption
+								captionText={captionText}
+								format={format}
+								isMainMedia={true}
+							/>
+						</>
+					) : (
+						<>
+							<div css={standfirstStyles}>
+								<Standfirst
+									format={format}
+									standfirst={frontendData.standfirst}
+								/>
+							</div>
 
-					<div css={captionContainer}>
-						<Caption
-							captionText={captionText}
-							format={format}
-							isMainMedia={true}
-						/>
-					</div>
-					<div css={straightLinesStyles}>
-						<StraightLines
-							count={4}
-							color={palette('--straight-lines')}
-						/>
-					</div>
+							<div css={captionStyles}>
+								<Caption
+									captionText={captionText}
+									format={format}
+									isMainMedia={true}
+								/>
+							</div>
+							<div css={straightLinesStyles}>
+								<StraightLines
+									count={4}
+									color={palette('--straight-lines')}
+								/>
+							</div>
+						</>
+					)}
 
 					<Meta
 						renderingTarget={renderingTarget}
 						format={format}
 						frontendData={frontendData}
+						isLabs={isLabs}
 					/>
 				</header>
 				<Body
@@ -485,10 +501,12 @@ const Meta = ({
 	renderingTarget,
 	format,
 	frontendData,
+	isLabs,
 }: {
 	renderingTarget: RenderingTarget;
 	format: ArticleFormat;
 	frontendData: ArticleDeprecated;
+	isLabs: boolean;
 }) => (
 	<div
 		css={{
@@ -506,11 +524,13 @@ const Meta = ({
 					backgroundColor: palette('--article-border'),
 				},
 			},
-			[from.leftCol]: {
-				'&': css(grid.column.left),
-				gridRowStart: 9,
-				paddingTop: space[10],
-			},
+			...(!isLabs && {
+				[from.leftCol]: {
+					'&': css(grid.column.left),
+					gridRowStart: 9,
+					paddingTop: space[10],
+				},
+			}),
 		}}
 	>
 		{renderingTarget === 'Web' ? (
