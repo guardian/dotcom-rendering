@@ -275,6 +275,7 @@ export const SecureSignup = ({
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
 	const [signedInUserEmail, setSignedInUserEmail] = useState<string>();
+	const [hideEmailInput, setHideEmailInput] = useState<boolean>();
 	const [isWaitingForResponse, setIsWaitingForResponse] =
 		useState<boolean>(false);
 	const [responseOk, setResponseOk] = useState<boolean | undefined>(
@@ -297,7 +298,10 @@ export const SecureSignup = ({
 
 	useEffect(() => {
 		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
-		void resolveEmailIfSignedIn().then(setSignedInUserEmail);
+		void resolveEmailIfSignedIn().then((email) => {
+			setSignedInUserEmail(email);
+			setHideEmailInput(isString(email));
+		});
 	}, []);
 	const { renderingTarget } = useConfig();
 
@@ -398,8 +402,6 @@ export const SecureSignup = ({
 		recaptchaRef.current?.execute();
 	};
 
-	const hideEmailInput = isString(signedInUserEmail);
-
 	return (
 		<>
 			<form
@@ -420,7 +422,8 @@ export const SecureSignup = ({
 					name="email"
 					label="Enter your email address"
 					type="email"
-					value={signedInUserEmail}
+					value={signedInUserEmail ?? ''}
+					onChange={(e) => setSignedInUserEmail(e.target.value)}
 				/>
 				{isSignedIn === false && (
 					<CheckboxGroup
@@ -432,7 +435,7 @@ export const SecureSignup = ({
 						<Checkbox
 							label="Get updates about our journalism and ways to support and enjoy our work."
 							value="marketing-opt-in"
-							checked={marketingOptIn}
+							checked={marketingOptIn ?? false}
 							onChange={(e) =>
 								setMarketingOptIn(e.target.checked)
 							}
