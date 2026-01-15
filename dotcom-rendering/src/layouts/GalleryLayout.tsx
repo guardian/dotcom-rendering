@@ -6,6 +6,7 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot } from '../components/AdSlot.web';
@@ -73,6 +74,43 @@ const headerStyles = css`
 
 	${from.tablet} {
 		border-bottom: 1px solid ${palette('--article-border')};
+	}
+`;
+
+const captionContainer = css`
+	${grid.column.centre};
+
+	${from.leftCol} {
+		${grid.column.left};
+		grid-row-start: auto;
+	}
+
+	grid-row: 10;
+`;
+
+const straightLinesStyles = css`
+	${grid.column.all};
+
+	${from.tablet} {
+		${grid.column.centre};
+	}
+
+	${from.leftCol} {
+		${grid.column.left};
+		grid-row: 9;
+		padding-top: ${space[6]}px;
+	}
+
+	grid-row: 11;
+`;
+
+const standfirstStyles = css`
+	${grid.column.centre}
+
+	${from.leftCol} {
+		width: 75%;
+		grid-row: 9;
+		padding-top: ${space[6]}px;
 	}
 `;
 
@@ -162,15 +200,29 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 							frontendData.webPublicationDateDeprecated
 						}
 					/>
-					<Standfirst
-						format={format}
-						standfirst={frontendData.standfirst}
-					/>
-					<Caption
-						captionText={captionText}
-						format={format}
-						isMainMedia={true}
-					/>
+
+					{/*New component*/}
+					<div css={standfirstStyles}>
+						<Standfirst
+							format={format}
+							standfirst={frontendData.standfirst}
+						/>
+					</div>
+
+					<div css={captionContainer}>
+						<Caption
+							captionText={captionText}
+							format={format}
+							isMainMedia={true}
+						/>
+					</div>
+					<div css={straightLinesStyles}>
+						<StraightLines
+							count={4}
+							color={palette('--straight-lines')}
+						/>
+					</div>
+
 					<Meta
 						renderingTarget={renderingTarget}
 						format={format}
@@ -453,6 +505,11 @@ const Meta = ({
 					width: 1,
 					backgroundColor: palette('--article-border'),
 				},
+			},
+			[from.leftCol]: {
+				'&': css(grid.column.left),
+				gridRowStart: 9,
+				paddingTop: space[10],
 			},
 		}}
 	>
