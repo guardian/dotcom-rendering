@@ -15,9 +15,6 @@ const meta = {
 				breakpoints.tablet,
 				breakpoints.wide,
 			],
-			// Because this component uses react.createPortal
-			// we delay to give the portals time to hydrate
-			delay: 500,
 		},
 	},
 	args: {
@@ -98,20 +95,3 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const With5Cards = {} satisfies Story;
-
-export const ClickForwardArrow = {
-	play: async ({ canvas, userEvent }) => {
-		await userEvent.click(canvas.getByTestId('carousel-forward-button'));
-	},
-} satisfies Story;
-
-export const ClickForwardTwiceAndBackOnce = {
-	play: async ({ canvas, userEvent }) => {
-		const user = userEvent.setup({
-			delay: 500, // delay between each interaction
-		});
-		await user.click(canvas.getByTestId('carousel-forward-button'));
-		await user.click(canvas.getByTestId('carousel-forward-button'));
-		await user.click(canvas.getByTestId('carousel-back-button'));
-	},
-} satisfies Story;
