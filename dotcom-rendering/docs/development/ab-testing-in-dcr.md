@@ -140,19 +140,17 @@ const getAllTestParticipations =
 	window.guardian.modules.abTests.getParicipations(); // eg. {webex-example-test: 'control'}
 
 const isInTest =
-	window.guardian.modules.abTests.isUserInTest('webex-example-test') ?? false;
+	window.guardian.modules.abTests.isUserInTest('webex-example-test');
 
-const isInControlGroup =
-	window.guardian.modules.abTests.isUserInTestGroup(
-		'webex-example-test',
-		'control',
-	) ?? false;
+const isInControlGroup = window.guardian.modules.abTests.isUserInTestGroup(
+	'webex-example-test',
+	'control',
+);
 
-const isInVariantGroup =
-	window.guardian.modules.abTests.isUserInTestGroup(
-		'webex-example-test',
-		'variant',
-	) ?? false;
+const isInVariantGroup = window.guardian.modules.abTests.isUserInTestGroup(
+	'webex-example-test',
+	'variant',
+);
 ```
 
 #### In server side code
