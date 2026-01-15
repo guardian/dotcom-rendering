@@ -83,6 +83,19 @@ const captionStyles = css`
 	${from.leftCol} {
 		${grid.column.left};
 		grid-row-start: auto;
+
+		::before {
+			content: '';
+			display: block;
+			position: absolute;
+			left: -${space[5]}px;
+			top: 0;
+			bottom: 0;
+			width: 1px;
+			background-color: ${palette('--article-border')};
+		}
+
+	,
 	}
 
 	grid-row: 10;
@@ -202,40 +215,17 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 					/>
 
 					{isLabs ? (
-						<>
-							<Standfirst
-								format={format}
-								standfirst={frontendData.standfirst}
-							/>
-							<Caption
-								captionText={captionText}
-								format={format}
-								isMainMedia={true}
-							/>
-						</>
+						<GalleryLabsStandfirstCaption
+							format={format}
+							frontendData={frontendData}
+							captionText={captionText}
+						/>
 					) : (
-						<>
-							<div css={standfirstStyles}>
-								<Standfirst
-									format={format}
-									standfirst={frontendData.standfirst}
-								/>
-							</div>
-
-							<div css={captionStyles}>
-								<Caption
-									captionText={captionText}
-									format={format}
-									isMainMedia={true}
-								/>
-							</div>
-							<div css={straightLinesStyles}>
-								<StraightLines
-									count={4}
-									color={palette('--straight-lines')}
-								/>
-							</div>
-						</>
+						<GalleryStandfirstCaption
+							format={format}
+							frontendData={frontendData}
+							captionText={captionText}
+						/>
 					)}
 
 					<Meta
@@ -497,6 +487,48 @@ const GalleryLabsHeader = (props: {
 		</Stuck>
 	) : null;
 
+const GalleryLabsStandfirstCaption = ({
+	format,
+	frontendData,
+	captionText,
+}: {
+	format: ArticleFormat;
+	frontendData: ArticleDeprecated;
+	captionText: string;
+}) => (
+	<>
+		<Standfirst format={format} standfirst={frontendData.standfirst} />
+		<Caption captionText={captionText} format={format} isMainMedia={true} />
+	</>
+);
+
+const GalleryStandfirstCaption = ({
+	format,
+	frontendData,
+	captionText,
+}: {
+	format: ArticleFormat;
+	frontendData: ArticleDeprecated;
+	captionText: string;
+}) => (
+	<>
+		<div css={standfirstStyles}>
+			<Standfirst format={format} standfirst={frontendData.standfirst} />
+		</div>
+
+		<div css={captionStyles}>
+			<Caption
+				captionText={captionText}
+				format={format}
+				isMainMedia={true}
+			/>
+		</div>
+		<div css={straightLinesStyles}>
+			<StraightLines count={4} color={palette('--straight-lines')} />
+		</div>
+	</>
+);
+
 const Meta = ({
 	renderingTarget,
 	format,
@@ -529,6 +561,9 @@ const Meta = ({
 					'&': css(grid.column.left),
 					gridRowStart: 9,
 					paddingTop: space[10],
+					'&::before': {
+						left: -space[5],
+					},
 				},
 			}),
 		}}
