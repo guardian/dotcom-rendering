@@ -85,7 +85,10 @@ Once your A/B test has been configured you can conditionally put your code chang
 
 ### 3. Ways to check your participation
 
-#### In DCR React Components
+#### In React Components
+
+> [!NOTE]
+> You should use the `useBetaAB` hook described below in React components
 
 The `useAB` module exposes methods for getting a user's A/B test participations, this works both client and server side.
 
@@ -101,10 +104,10 @@ const someComponent = () => {
 	const isInTest = abTests?.isUserInTest('webex-example-test') ?? false;
 
 	const isInControlGroup =
-		(abTests?.isUserInTestGroup('webex-example-test', 'control') ?? false);
+		abTests?.isUserInTestGroup('webex-example-test', 'control') ?? false;
 
 	const isInVariantGroup =
-	abTests?.isUserInTestGroup('webex-example-test', 'variant') ?? false;
+		abTests?.isUserInTestGroup('webex-example-test', 'variant') ?? false;
 
 	if (isInControlGroup) {
 		return (
@@ -131,7 +134,27 @@ const someComponent = () => {
 
 #### In client side code (outside of React components)
 
-The A/B test API described above is also available on the window object as `window.guardian.modules.abTests`. **Note:** This only works client side, you should use the `useBetaAB` hook described above in React components.
+The A/B test API described above is also available on the window object as `window.guardian.modules.abTests`. **Note:** This only works client side.
+
+```ts
+const getAllTestParticipations =
+	window.guardian.modules.abTests.getParicipations(); // eg. {my-test: 'control'}
+
+const isInTest =
+	window.guardian.modules.abTests.isUserInTest('webex-example-test') ?? false;
+
+const isInControlGroup =
+	window.guardian.modules.abTests.isUserInTestGroup(
+		'webex-example-test',
+		'control',
+	) ?? false;
+
+const isInVariantGroup =
+	window.guardian.modules.abTests.isUserInTestGroup(
+		'webex-example-test',
+		'variant',
+	) ?? false;
+```
 
 #### In server side code
 
@@ -159,7 +182,7 @@ The 3rd step is crucial as Fastly buckets users into tests/cohorts and returns y
 
 ### 5. Forcing yourself into a test on PROD/CODE
 
-Use the opt-in and opt-out URL fragments to force yourself into or out of a test.
+Use the opt-in and opt-out routes to force yourself into or out of a test.
 
 When opted-in, the test will override any mvt based assignment and you'll only be in the opted-in test group.
 
@@ -175,21 +198,20 @@ You can use the same routes on CODE.
 
 ### 6. Forcing yourself into a test locally
 
-Use the opt-in and opt-out URL fragments to force yourself into or out of a test using a query parameter.
-
-When opted-in, the test will override any mvt based assignment and you'll only be in the opted-in test group.
+A URL query parameter can be used to force yourself into a test locally. The parameter is `ab-commercial-test-example=variant` where `commercial-test-example` is the name of the test in config and `variant` is the cohort you wish to opt-in to.
 
 **Opt-in Example**
 
 -   Articles: `http://localhost:3030/Article/https://www.theguardian.com/politics/2026/jan/08/go-back-home-farage-schoolmate-accounts-bring-total-alleging-racist-behaviour-to-34?ab-commercial-test-example=variant`
 -   Fronts: `http://localhost:3030/Front/https://www.theguardian.com/international?ab-commercial-test-example=variant`
--   Interactives: `http://localhost:3030/Interactive/https://www.theguardian.com/global-development/ng-interactive/2022/jun/09/the-black-sea-blockade-mapping-the-impact-of-war-in-ukraine-on-the-worlds-food-supply-interactive?ab--commercial-test-example=variant`
+-   Interactives: `http://localhost:3030/Interactive/https://www.theguardian.com/global-development/ng-interactive/2022/jun/09/the-black-sea-blockade-mapping-the-impact-of-war-in-ukraine-on-the-worlds-food-supply-interactive?ab-commercial-test-example=variant`
 
-You can verify that you're in the test by checking `window.guardian.modules.abTests.getParticipations()` in the browser console
+You can verify that you're in the test by checking `window.guardian.modules.abTests.getParticipations()` in the browser console.
 
 ---
 
-:warning: The documentation below is for the LEGACY AB test framework. This framework will be deprecated. It is recommended that any AB tests introduced now use the new framework, documented above. :warning:
+> [!NOTE :warning:]
+> The documentation below is for the **LEGACY** AB test framework. This framework will be deprecated. It is recommended that any AB tests introduced now use the new framework, documented above.
 
 # AB Testing in DCR
 
