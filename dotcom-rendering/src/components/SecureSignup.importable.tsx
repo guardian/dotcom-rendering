@@ -274,7 +274,7 @@ export const SecureSignup = ({
 }: Props) => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
-	const [signedInUserEmail, setSignedInUserEmail] = useState<string>();
+	const [userEmail, setUserEmail] = useState<string>();
 	const [hideEmailInput, setHideEmailInput] = useState<boolean>();
 	const [isWaitingForResponse, setIsWaitingForResponse] =
 		useState<boolean>(false);
@@ -299,7 +299,7 @@ export const SecureSignup = ({
 	useEffect(() => {
 		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
 		void resolveEmailIfSignedIn().then((email) => {
-			setSignedInUserEmail(email);
+			setUserEmail(email);
 			setHideEmailInput(isString(email));
 		});
 	}, []);
@@ -422,8 +422,8 @@ export const SecureSignup = ({
 					name="email"
 					label="Enter your email address"
 					type="email"
-					value={signedInUserEmail ?? ''}
-					onChange={(e) => setSignedInUserEmail(e.target.value)}
+					value={userEmail ?? ''}
+					onChange={(e) => setUserEmail(e.target.value)}
 				/>
 				{isSignedIn === false && (
 					<CheckboxGroup
