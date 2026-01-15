@@ -40,8 +40,9 @@ export const fetchAndDeployArtifacts = async (deployments: ArtifactInfo[]) => {
 				`Successfully deployed artifact to Fastly dictionary ${dictionary.name}`,
 			);
 			if (i !== artifacts.length - 1) {
-				// Adding a small delay between deployments to avoid overwhelming Fastly API,
-				// and ensure dictionaries are updated in order.
+				// Adding a small delay between calls to be sure the updates are not concurrent
+				// See note in this section of the fastly docs
+				// https://www.fastly.com/documentation/reference/api/#rate-limiting
 				await new Promise((resolve) => setTimeout(resolve, 500));
 			}
 		}
