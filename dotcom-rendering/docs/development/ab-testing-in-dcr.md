@@ -88,9 +88,9 @@ Once your A/B test has been configured you can conditionally put your code chang
 #### In React Components
 
 > [!NOTE]
-> You should use the `useBetaAB` hook described below in React components
+> You should use the `useBetaAB` hook described below in React components **_only_**.
 
-The `useAB` module exposes methods for getting a user's A/B test participations, this works both client and server side.
+The `useAB` module exposes methods for getting a user's A/B test participations, this can be used **both client _and_ server side**.
 
 ```ts
 // Within the components
@@ -129,16 +129,15 @@ const someComponent = () => {
 		);
 	}
 }
-
 ```
 
 #### In client side code (outside of React components)
 
-The A/B test API described above is also available on the window object as `window.guardian.modules.abTests`. **Note:** This only works client side.
+The A/B test API described above is also available on the window at `window.guardian.modules.abTests`. **This _only_ works client side**.
 
 ```ts
 const getAllTestParticipations =
-	window.guardian.modules.abTests.getParicipations(); // eg. {my-test: 'control'}
+	window.guardian.modules.abTests.getParicipations(); // eg. {webex-example-test: 'control'}
 
 const isInTest =
 	window.guardian.modules.abTests.isUserInTest('webex-example-test') ?? false;
