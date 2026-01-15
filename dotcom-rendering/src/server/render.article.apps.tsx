@@ -27,7 +27,7 @@ export const renderArticle = (
 	prefetchScripts: string[];
 	html: string;
 } => {
-	const { design, frontendData } = article;
+	const { design, frontendData, theme } = article;
 	const renderingTarget = 'Apps';
 	const config: Config = {
 		renderingTarget,
@@ -127,6 +127,7 @@ window.twttr = (function(d, s, id) {
 		isInteractive:
 			design === ArticleDesign.FullPageInteractive ||
 			design === ArticleDesign.Interactive,
+		theme,
 	});
 
 	return {

@@ -1,3 +1,4 @@
+import type { ArticleTheme } from '@guardian/libs';
 import { isUndefined } from '@guardian/libs';
 import { resets, palette as sourcePalette } from '@guardian/source/foundations';
 import CleanCSS from 'clean-css';
@@ -28,6 +29,7 @@ type BaseProps = {
 	onlyLightColourScheme?: boolean;
 	isInteractive?: boolean;
 	rssFeedUrl?: string;
+	theme?: ArticleTheme;
 };
 
 interface WebProps extends BaseProps {
@@ -79,6 +81,7 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		config,
 		isInteractive = false,
 		rssFeedUrl,
+		theme,
 	} = props;
 
 	const doNotIndex = (): boolean => {
@@ -214,7 +217,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 --->`;
 
 	return `<!doctype html>
-        <html lang="en" ${
+        <html lang="en" ${theme != null ? `data-theme="${theme}"` : ''} ${
 			onlyLightColourScheme ? 'data-color-scheme="light"' : ''
 		} ${
 			renderingTarget === 'Apps' && isInteractive
