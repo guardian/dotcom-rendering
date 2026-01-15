@@ -2,7 +2,7 @@
 
 This directory contains the code and configuration for the AB testing framework used on theguardian.com.
 
-If you're looking for instructions regarding setting up a new server or client side AB test using this framework then please visit the docs [here](https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/docs/development/ab-testing-in-dcr.md).
+Instructions for setting up a new server-side or client-side AB test using this framework can be found [here](https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/docs/development/ab-testing-in-dcr.md).
 
 ## How it works
 
