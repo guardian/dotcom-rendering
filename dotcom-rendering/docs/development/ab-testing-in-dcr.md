@@ -207,7 +207,7 @@ You can verify that you're in the test by checking `window.guardian.modules.abTe
 
 ---
 
-> [!NOTE :warning:]
+> [!NOTE]
 > The documentation below is for the **LEGACY** AB test framework. This framework will be deprecated. It is recommended that any AB tests introduced now use the new framework, documented above.
 
 # AB Testing in DCR
