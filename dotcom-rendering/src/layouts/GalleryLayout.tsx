@@ -83,6 +83,7 @@ const captionStyles = css`
 	${from.leftCol} {
 		${grid.column.left};
 		grid-row-start: auto;
+		position: relative;
 
 		::before {
 			content: '';
@@ -94,8 +95,6 @@ const captionStyles = css`
 			width: 1px;
 			background-color: ${palette('--article-border')};
 		}
-
-	,
 	}
 
 	grid-row: 10;
