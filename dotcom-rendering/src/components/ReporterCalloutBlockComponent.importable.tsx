@@ -1,18 +1,14 @@
-import { isUndefined } from '@guardian/libs';
-import type {
-	CalloutContactType,
-	ReporterCalloutBlockElement,
-} from '../types/content';
-import { palette } from '../palette';
-import { Deadline } from './Callout/Deadline';
-import { ExpandingWrapper } from '@guardian/source-development-kitchen/react-components';
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import {
 	article17,
 	headlineBold20,
 	headlineMedium20,
 	space,
 } from '@guardian/source/foundations';
+import { ExpandingWrapper } from '@guardian/source-development-kitchen/react-components';
+import { palette } from '../palette';
+import type { ReporterCalloutBlockElement } from '../types/content';
 
 /**
  * A callout to readers to share tips with reporters
@@ -21,12 +17,30 @@ import {
  *
  */
 
+const expandingWrapperTheme = {
+	'--background': palette('--expandingWrapper--background'),
+	'--border': palette('--expandingWrapper--border'),
+	'--collapseBackground': palette('--expandingWrapper--collapseBackground'),
+	'--collapseBackgroundHover': palette(
+		'--expandingWrapper--collapseBackgroundHover',
+	),
+	'--collapseText': palette('--expandingWrapper--collapseText'),
+	'--collapseTextHover': palette('--expandingWrapper--collapseTextHover'),
+	'--text': palette('--expandingWrapper--text'),
+	'--horizontalRules': palette('--expandingWrapper--horizontalRules'),
+	'--expandBackground': palette('--expandingWrapper--expandBackground'),
+	'--expandBackgroundHover': palette(
+		'--expandingWrapper--expandBackgroundHover',
+	),
+	'--expandText': palette('--expandingWrapper--expandText'),
+};
+
 const promptStyles = css`
 	${headlineBold20};
 `;
 
 const subtitleTextHeaderStyles = css`
-	${headlineMedium20}
+	${headlineMedium20};
 	padding-bottom: ${space[3]}px;
 `;
 
@@ -51,6 +65,12 @@ const calloutStyles = css`
 	}
 `;
 
+const reporterCalloutWrapperStyles = css`
+	padding-bottom: ${space[8]}px;
+	margin-left: ${space[2]}px;
+	margin-right: ${space[2]}px;
+`;
+
 const dangerouslyRenderField = (field?: string, title?: string) => {
 	return field ? (
 		<div css={[linkStyles, calloutStyles]}>
@@ -72,7 +92,6 @@ export const ReporterCalloutBlockComponent = ({
 	callout: ReporterCalloutBlockElement;
 }) => {
 	const {
-		id,
 		title,
 		subtitle,
 		intro,
@@ -88,48 +107,16 @@ export const ReporterCalloutBlockComponent = ({
 		? false
 		: Math.floor(new Date().getTime() / 1000) > activeUntil;
 
-	console.log('CONTACTS', mainText);
-
 	return isExpired ? (
 		<></>
 	) : (
-		<div data-gu-name="callout">
+		<div data-gu-name="reporter-callout">
 			<ExpandingWrapper
-				name={`${title} callout`}
-				theme={{
-					'--background': palette('--expandingWrapper--background'),
-					'--border': palette('--expandingWrapper--border'),
-					'--collapseBackground': palette(
-						'--expandingWrapper--collapseBackground',
-					),
-					'--collapseBackgroundHover': palette(
-						'--expandingWrapper--collapseBackgroundHover',
-					),
-					'--collapseText': palette(
-						'--expandingWrapper--collapseText',
-					),
-					'--collapseTextHover': palette(
-						'--expandingWrapper--collapseTextHover',
-					),
-					'--text': palette('--expandingWrapper--text'),
-					'--horizontalRules': palette(
-						'--expandingWrapper--horizontalRules',
-					),
-					'--expandBackground': palette(
-						'--expandingWrapper--expandBackground',
-					),
-					'--expandBackgroundHover': palette(
-						'--expandingWrapper--expandBackgroundHover',
-					),
-					'--expandText': palette('--expandingWrapper--expandText'),
-				}}
+				name={`${title} reporter callout`}
+				theme={expandingWrapperTheme}
 				collapsedHeight={'160px'}
 			>
-				<div
-					style={css`
-						paddingbottom: ${space[4]}px;
-					`}
-				>
+				<div style={reporterCalloutWrapperStyles}>
 					<div
 						css={promptStyles}
 						style={{
@@ -142,8 +129,7 @@ export const ReporterCalloutBlockComponent = ({
 					<h4 css={subtitleTextHeaderStyles}>{subtitle}</h4>
 
 					{dangerouslyRenderField(intro)}
-					<h4 css={subtitleTextHeaderStyles}>{mainTextHeading}</h4>
-					{dangerouslyRenderField(mainText)}
+					{dangerouslyRenderField(mainText, mainTextHeading)}
 					{dangerouslyRenderField(emailContact, 'Email')}
 					{dangerouslyRenderField(messagingContact, 'Messaging apps')}
 					{dangerouslyRenderField(securedropContact, 'SecureDrop')}

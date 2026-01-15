@@ -1584,20 +1584,17 @@
                 "intro": {
                     "type": "string"
                 },
+                "mainTextHeading": {
+                    "type": "string"
+                },
                 "mainText": {
                     "type": "string"
                 },
-                "emailContact1": {
+                "emailContact": {
                     "type": "string"
                 },
-                "emailContact2": {
+                "messagingContact": {
                     "type": "string"
-                },
-                "massagingContacts": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/CalloutContactType"
-                    }
                 },
                 "securedropContact": {
                     "type": "string"
@@ -1613,6 +1610,7 @@
                 "id",
                 "intro",
                 "mainText",
+                "mainTextHeading",
                 "subtitle",
                 "title"
             ]
