@@ -7,6 +7,7 @@ import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import {
 	decideTrail,
 	decideTrailWithMasterImage,
+	decideTrailWithMasterImagePreferred,
 	dedupeTrail,
 } from '../lib/decideTrail';
 import { useApi } from '../lib/useApi';
@@ -56,12 +57,20 @@ const buildTrails = (
 	isAdFreeUser: boolean,
 	webURL: string,
 	withMasterImage: boolean,
+	permitFallbackImage: boolean,
 ): TrailType[] => {
 	return trails
 		.filter((trailType) => !(isTrailPaidContent(trailType) && isAdFreeUser))
 		.filter((trailType) => dedupeTrail(trailType, webURL))
 		.slice(0, trailLimit)
-		.map(withMasterImage ? decideTrailWithMasterImage : decideTrail);
+		.map((trail, index) => {
+			if (permitFallbackImage) {
+				return decideTrailWithMasterImagePreferred(trail, index);
+			}
+			return withMasterImage
+				? decideTrailWithMasterImage(trail, index)
+				: decideTrail(trail, index);
+		});
 };
 
 export const FetchOnwardsData = ({
@@ -128,15 +137,31 @@ export const FetchOnwardsData = ({
 			.filter(isNonNullable),
 	);
 
-	const trails = ({ withMasterImage }: { withMasterImage: boolean }) =>
-		buildTrails(data.trails, limit, isAdFreeUser, webURL, withMasterImage);
+	const trails = ({
+		withMasterImage,
+		permitFallbackImage,
+	}: {
+		withMasterImage: boolean;
+		permitFallbackImage: boolean;
+	}) =>
+		buildTrails(
+			data.trails,
+			limit,
+			isAdFreeUser,
+			webURL,
+			withMasterImage,
+			permitFallbackImage,
+		);
 
 	return (
 		<div ref={setIsInViewRef} css={minHeight(format.design)}>
 			{format.design === ArticleDesign.Gallery ? (
 				<ScrollableSmallOnwards
 					serverTime={serverTime}
-					trails={trails({ withMasterImage: true })}
+					trails={trails({
+						withMasterImage: true,
+						permitFallbackImage: false,
+					})}
 					discussionApiUrl={discussionApiUrl}
 					heading={data.heading || data.displayname}
 					onwardsSource={onwardsSource}
@@ -146,7 +171,10 @@ export const FetchOnwardsData = ({
 			) : isInOnwardsAbTestVariant ? (
 				<MoreGalleriesStyleOnwardsContent
 					heading={data.heading || data.displayname}
-					trails={trails({ withMasterImage: true })}
+					trails={trails({
+						withMasterImage: true,
+						permitFallbackImage: true,
+					})}
 					discussionApiUrl={discussionApiUrl}
 					isAdFreeUser={isAdFreeUser}
 					isInStarRatingVariant={!!isInStarRatingVariant}
@@ -154,7 +182,10 @@ export const FetchOnwardsData = ({
 			) : (
 				<Carousel
 					heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
-					trails={trails({ withMasterImage: false })}
+					trails={trails({
+						withMasterImage: false,
+						permitFallbackImage: false,
+					})}
 					description={data.description}
 					onwardsSource={onwardsSource}
 					format={format}
