@@ -16,6 +16,7 @@ type SelfHostedVideoInArticleProps = {
 	format: ArticleFormat;
 	isMainMedia: boolean;
 	videoStyle: VideoPlayerFormat;
+	displayCaption?: boolean;
 };
 
 export const SelfHostedVideoInArticle = ({
@@ -23,6 +24,7 @@ export const SelfHostedVideoInArticle = ({
 	format,
 	isMainMedia,
 	videoStyle,
+	displayCaption = true,
 }: SelfHostedVideoInArticleProps) => {
 	const posterImageUrl = element.posterImage?.[0]?.url;
 	const caption = element.title;
@@ -68,7 +70,7 @@ export const SelfHostedVideoInArticle = ({
 					enableHls={false}
 				/>
 			</Island>
-			{!!caption && (
+			{displayCaption && !!caption && (
 				<Caption
 					captionText={caption}
 					format={format}

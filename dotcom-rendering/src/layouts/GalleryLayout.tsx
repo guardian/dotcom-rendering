@@ -21,6 +21,7 @@ import { Footer } from '../components/Footer';
 import { DesktopAdSlot, MobileAdSlot } from '../components/GalleryAdSlots';
 import { GalleryAffiliateDisclaimer } from '../components/GalleryAffiliateDisclaimer.importable';
 import { GalleryImage } from '../components/GalleryImage';
+import { GalleryVideo } from '../components/GalleryVideo';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
@@ -534,6 +535,16 @@ const Body = (props: {
 								pageId={props.pageId}
 								webTitle={props.webTitle}
 								renderingTarget={props.renderingTarget}
+								key={element.elementId}
+							/>
+						);
+					case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
+						return (
+							<GalleryVideo
+								video={element}
+								format={props.format}
+								pageId={props.pageId}
+								webTitle={props.webTitle}
 								key={element.elementId}
 							/>
 						);

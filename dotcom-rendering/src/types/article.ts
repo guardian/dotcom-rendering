@@ -25,6 +25,7 @@ import type {
 	FEElement,
 	ImageBlockElement,
 	ImageForLightbox,
+	MediaAtomBlockElement,
 } from './content';
 import { type RenderingTarget } from './renderingTarget';
 
@@ -49,7 +50,11 @@ export type ArticleFields = {
 
 export type Gallery = ArticleFields & {
 	design: ArticleDesign.Gallery;
-	bodyElements: (ImageBlockElement | AdPlaceholderBlockElement)[];
+	bodyElements: (
+		| ImageBlockElement
+		| MediaAtomBlockElement
+		| AdPlaceholderBlockElement
+	)[];
 	mainMedia?: ImageBlockElement;
 };
 
@@ -153,6 +158,8 @@ export const enhanceArticleType = (
 					(element) =>
 						element._type ===
 							'model.dotcomrendering.pageElements.ImageBlockElement' ||
+						element._type ===
+							'model.dotcomrendering.pageElements.MediaAtomBlockElement' ||
 						element._type ===
 							'model.dotcomrendering.pageElements.AdPlaceholderBlockElement',
 				),
