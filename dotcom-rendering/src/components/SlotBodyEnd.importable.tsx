@@ -33,7 +33,7 @@ import {
 	ReaderRevenueEpic,
 } from './SlotBodyEnd/ReaderRevenueEpic';
 import type { CanShowData as RRCanShowData } from './SlotBodyEnd/ReaderRevenueEpic';
-import { canShowBrazeBannersSystem } from './SlotBodyEnd/BrazeBannersSystem';
+import { canShowBrazeBannersSystem } from '../lib/braze/BrazeBannersSystem';
 import { BrazeBannersSystemPlacementId } from '../lib/braze/buildBrazeMessaging';
 import { BrazeInstance } from '../lib/braze/initialiseBraze';
 

@@ -1,6 +1,6 @@
-import type { CanShowResult } from '../../lib/messagePicker';
-import { BrazeInstance } from '../../lib/braze/initialiseBraze';
-import { BrazeBannersSystemPlacementId } from '../../lib/braze/buildBrazeMessaging';
+import type { CanShowResult } from '../messagePicker';
+import { BrazeInstance } from './initialiseBraze';
+import { BrazeBannersSystemPlacementId } from './buildBrazeMessaging';
 
 type BrazeBanner = {
 	// dataFromBraze: { [key: string]: string };
