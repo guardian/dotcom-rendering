@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
-import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import { buttonStyles, buttonThemes } from '../../styles/buttonStyles';
 import { useBanner } from '../useBanner';
 
@@ -100,6 +99,15 @@ export const BannerCtas = (): JSX.Element | null => {
 
 	const { primaryCta, secondaryCta } = mainOrMobileContent;
 
+	// Check if secondaryCta has the expected structure
+	const hasCustomCta =
+		secondaryCta &&
+		'type' in secondaryCta &&
+		'cta' in secondaryCta &&
+		typeof secondaryCta.cta === 'object' &&
+		'ctaUrl' in secondaryCta.cta &&
+		'ctaText' in secondaryCta.cta;
+
 	if (!primaryCta && !secondaryCta && !isCollapsed) {
 		return null;
 	}
@@ -122,7 +130,7 @@ export const BannerCtas = (): JSX.Element | null => {
 						{primaryCta.ctaText}
 					</LinkButton>
 				)}
-				{secondaryCta?.type === SecondaryCtaType.Custom && (
+				{hasCustomCta && (
 					<LinkButton
 						href={secondaryCta.cta.ctaUrl}
 						onClick={actions.onSecondaryCtaClick}

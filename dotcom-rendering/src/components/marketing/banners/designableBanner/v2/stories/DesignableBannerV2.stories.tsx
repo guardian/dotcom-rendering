@@ -394,8 +394,8 @@ export const Default: Story = {
 		content: content as any,
 		tracking,
 		articleCounts: {
-			forTargetedWeeks: 0,
-			for52Weeks: 0,
+			forTargetedWeeks: 12,
+			for52Weeks: 12,
 		},
 		submitComponentEvent: () => Promise.resolve(),
 		onCloseClick: () => {
@@ -624,6 +624,7 @@ export const CollapsableWithThreeTierChoiceCards: Story = {
 			<BannerLogo />
 			<BannerContent>
 				<BannerHeader />
+				<BannerTicker />
 				<BannerArticleCount />
 				<BannerBody />
 			</BannerContent>
@@ -699,6 +700,10 @@ export const CollapsableMaybeLaterVariant: Story = {
 	),
 	args: {
 		...CollapsableWithMainImage.args,
+		tracking: {
+			...tracking,
+			abTestVariant: 'COLLAPSABLE_V2_MAYBE_LATER',
+		},
 	},
 };
 
@@ -709,6 +714,7 @@ export const CollapsableWithThreeTierChoiceCardsMaybeLaterVariant: Story = {
 			<BannerLogo />
 			<BannerContent>
 				<BannerHeader />
+				<BannerTicker />
 				<BannerArticleCount />
 				<BannerBody />
 			</BannerContent>
@@ -719,6 +725,10 @@ export const CollapsableWithThreeTierChoiceCardsMaybeLaterVariant: Story = {
 	),
 	args: {
 		...CollapsableWithThreeTierChoiceCards.args,
+		tracking: {
+			...tracking,
+			abTestVariant: 'COLLAPSABLE_V2_MAYBE_LATER',
+		},
 	},
 };
 

@@ -16,7 +16,6 @@ const styles = {
 		}
 		${from.desktop} {
 			padding-right: ${space[5]}px;
-			margin-bottom: ${space[2]}px;
 		}
 		${from.leftCol} {
 			padding-left: ${space[3]}px;

@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source/foundations';
 import {
 	Button,
-	LinkButton,
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 	SvgCross,
@@ -132,23 +131,6 @@ export const BannerCloseButton = (): JSX.Element => {
 						{isCollapsed ? 'Expand banner' : 'Collapse banner'}
 					</Button>
 				</div>
-				{isCollapsed && (
-					<LinkButton
-						onClick={actions.onClose}
-						cssOverrides={buttonStyles(
-							settings.closeButtonSettings,
-							styles.closeABTestButtonOverrides,
-						)}
-						priority="tertiary"
-						theme={buttonThemes(
-							settings.closeButtonSettings,
-							'tertiary',
-						)}
-						size="small"
-					>
-						Close
-					</LinkButton>
-				)}
 			</div>
 		);
 	}

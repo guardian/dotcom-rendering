@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { between, from, space } from '@guardian/source/foundations';
+import { between, from } from '@guardian/source/foundations';
 import type { Image } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ImageAttrs } from '../../../../shared/ResponsiveImage';
 import { ResponsiveImage } from '../../../../shared/ResponsiveImage';
@@ -42,7 +42,6 @@ const getStyles = (isHeaderImage = false) => {
 	}
 	return {
 		container: css`
-			grid-area: main-image;
 			display: block;
 			width: calc(100% + 20px);
 			margin-left: -10px;
@@ -67,23 +66,6 @@ const getStyles = (isHeaderImage = false) => {
 				height: 100%;
 				width: 100%;
 				align-items: center;
-			}
-
-			${from.phablet} {
-				max-width: 492px; // phabletContentMaxWidth
-				justify-self: center;
-			}
-			${from.desktop} {
-				margin-top: ${space[6]}px;
-				padding-left: ${space[2]}px;
-				justify-self: end;
-			}
-			${between.desktop.and.wide} {
-				max-width: 380px;
-			}
-			${from.wide} {
-				max-width: 485px;
-				align-self: start;
 			}
 		`,
 	};

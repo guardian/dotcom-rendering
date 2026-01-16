@@ -10,10 +10,13 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
+import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import { enrichSupportUrl, getChoiceCardUrl } from '../../../../lib/tracking';
 import { ThreeTierChoiceCards } from '../../../../shared/ThreeTierChoiceCards';
 import { buttonStyles, buttonThemes } from '../../styles/buttonStyles';
 import { useBanner } from '../useBanner';
+
+const phabletContentMaxWidth = '492px';
 
 const styles = {
 	threeTierChoiceCardsContainer: css`
@@ -24,7 +27,7 @@ const styles = {
 			margin-top: -${space[6]}px;
 		}
 		${from.phablet} {
-			max-width: 492px; // phabletContentMaxWidth
+			max-width: ${phabletContentMaxWidth};
 		}
 		${from.desktop} {
 			justify-self: end;
@@ -181,6 +184,24 @@ export const BannerChoiceCards = (): JSX.Element | null => {
 						? mainOrMobileContent.primaryCta?.ctaText
 						: 'Continue'}
 				</LinkButton>
+				{!isCollapsed &&
+					mainOrMobileContent.secondaryCta?.type ===
+						SecondaryCtaType.Custom && (
+						<LinkButton
+							href={mainOrMobileContent.secondaryCta.cta.ctaUrl}
+							onClick={actions.onSecondaryCtaClick}
+							priority="secondary"
+							cssOverrides={buttonStyles(
+								settings.secondaryCtaSettings,
+							)}
+							theme={buttonThemes(
+								settings.secondaryCtaSettings,
+								'secondary',
+							)}
+						>
+							{mainOrMobileContent.secondaryCta.cta.ctaText}
+						</LinkButton>
+					)}
 				{isCollapsed && (
 					<div css={styles.maybeLaterButtonSizing}>
 						<LinkButton

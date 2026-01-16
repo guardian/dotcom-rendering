@@ -171,7 +171,7 @@ describe('DesignableBanner V2', () => {
 		expect(mockProps.onCloseClick).toHaveBeenCalled();
 	});
 
-	it('renders as collapsed when isCollapsible is true', () => {
+	it('renders as uncollapsed by default when isCollapsible is true', () => {
 		render(
 			<BannerComponent {...mockProps} isCollapsible={true}>
 				<BannerContent>
@@ -181,11 +181,9 @@ describe('DesignableBanner V2', () => {
 			</BannerComponent>,
 		);
 
-		// When collapsed, the body is usually hidden or different
-		// Based on BannerBody.tsx: {!isCollapsed && (...)}
-		expect(screen.queryByText('Main Paragraph 1')).not.toBeInTheDocument();
-		// Header renders mobile content when collapsed
-		expect(screen.getByText('Mobile Heading')).toBeInTheDocument();
+		// Now starts uncollapsed by default
+		expect(screen.getByText('Main Paragraph 1')).toBeInTheDocument();
+		expect(screen.getByText('Main Heading')).toBeInTheDocument();
 	});
 
 	it('toggles collapse when the toggle button is clicked', () => {
@@ -197,15 +195,17 @@ describe('DesignableBanner V2', () => {
 			</BannerComponent>,
 		);
 
-		expect(screen.queryByText('Main Paragraph 1')).not.toBeInTheDocument();
+		// Starts uncollapsed
+		expect(screen.getByText('Main Paragraph 1')).toBeInTheDocument();
 
 		const toggleButton = screen.getByRole('button', {
-			name: /Expand banner/i,
+			name: /Collapse banner/i,
 		});
 		fireEvent.click(toggleButton);
 
-		expect(screen.getByText('Main Paragraph 1')).toBeInTheDocument();
-		expect(mockProps.onExpandClick).toHaveBeenCalled();
+		// Now should be collapsed
+		expect(screen.queryByText('Main Paragraph 1')).not.toBeInTheDocument();
+		expect(mockProps.onCollapseClick).toHaveBeenCalled();
 	});
 
 	it('renders the ticker when tickerSettings are provided', () => {

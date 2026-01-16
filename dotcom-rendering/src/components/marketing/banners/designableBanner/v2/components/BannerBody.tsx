@@ -1,22 +1,25 @@
 import { css } from '@emotion/react';
-import {
-	from,
-	textEgyptian15,
-	textEgyptian17,
-	textEgyptianBold15,
-	textEgyptianBold17,
-} from '@guardian/source/foundations';
+import { from, space, textSans15 } from '@guardian/source/foundations';
 import { createBannerBodyCopy } from '../../components/BannerText';
 import { useBanner } from '../useBanner';
 
 const getStyles = (textColour: string, highlightColour?: string) => ({
 	container: css`
+		margin-bottom: ${space[4]}px;
+
+		${from.tablet} {
+			margin-bottom: ${space[6]}px;
+		}
+
 		p {
 			margin: 0 0 0.5em 0;
 		}
-		${textEgyptian15};
-		${from.desktop} {
-			${textEgyptian17};
+		${textSans15};
+		span {
+			${textSans15};
+		}
+		.rr_banner_highlight > span {
+			font-weight: 700;
 		}
 	`,
 	highlightedText: css`
@@ -30,11 +33,6 @@ const getStyles = (textColour: string, highlightColour?: string) => ({
             box-decoration-break: clone;
         `
 			: ''}
-
-		${textEgyptianBold15};
-		${from.desktop} {
-			${textEgyptianBold17};
-		}
 	`,
 });
 
