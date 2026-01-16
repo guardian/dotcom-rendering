@@ -107,6 +107,11 @@ const buildBrazeEpicConfig = (
 	};
 };
 
+/**
+ * Build the Braze Banners System Epic Config
+ * @param braze The Braze instance
+ * @returns CandidateConfig for the Braze Banners System Epic
+ */
 const buildBrazeBannersSystemEpicConfig = (
 	braze: BrazeInstance | null,
 ): CandidateConfig<any> => {

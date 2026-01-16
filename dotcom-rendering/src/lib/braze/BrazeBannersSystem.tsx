@@ -4,6 +4,9 @@ import { BrazeBannersSystemPlacementId } from './buildBrazeMessaging';
 import { Banner } from '@braze/web-sdk';
 import { useEffect, useRef } from 'react';
 
+/**
+ * Meta information required to display a Braze Banner.
+ */
 export type BrazeBannersSystemMeta = {
 	braze: BrazeInstance;
 	banner: Banner;
@@ -54,6 +57,11 @@ export const canShowBrazeBannersSystem = async (
 	}
 };
 
+/**
+ * Displays a Braze Banner using the Braze Banners System.
+ * @param param0 Meta information required to display the banner
+ * @returns React component that renders the Braze Banner
+ */
 export const BrazeBannersSystemDisplay = ({
 	meta,
 }: {
