@@ -33,7 +33,11 @@ import {
 	ReaderRevenueEpic,
 } from './SlotBodyEnd/ReaderRevenueEpic';
 import type { CanShowData as RRCanShowData } from './SlotBodyEnd/ReaderRevenueEpic';
-import { canShowBrazeBannersSystem } from '../lib/braze/BrazeBannersSystem';
+import {
+	BrazeBannersSystemDisplay,
+	BrazeBannersSystemMeta,
+	canShowBrazeBannersSystem,
+} from '../lib/braze/BrazeBannersSystem';
 import { BrazeBannersSystemPlacementId } from '../lib/braze/buildBrazeMessaging';
 import { BrazeInstance } from '../lib/braze/initialiseBraze';
 
@@ -115,7 +119,9 @@ const buildBrazeBannersSystemEpicConfig = (
 					BrazeBannersSystemPlacementId.EndOfArticle,
 				);
 			},
-			show: () => () => <h1>Hello from the End of Article! v2</h1>,
+			show: (meta: BrazeBannersSystemMeta) => () => (
+				<BrazeBannersSystemDisplay meta={meta} />
+			),
 		},
 		timeoutMillis: null,
 	};

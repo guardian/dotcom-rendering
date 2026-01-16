@@ -1,17 +1,24 @@
 import type { CanShowResult } from '../messagePicker';
 import { BrazeInstance } from './initialiseBraze';
 import { BrazeBannersSystemPlacementId } from './buildBrazeMessaging';
+import { Banner } from '@braze/web-sdk';
+import { useEffect, useRef } from 'react';
 
-type BrazeBanner = {
-	// dataFromBraze: { [key: string]: string };
-	// logImpressionWithBraze: () => void;
-	// logButtonClickWithBraze: (id: number) => void;
+export type BrazeBannersSystemMeta = {
+	braze: BrazeInstance;
+	banner: Banner;
 };
 
+/**
+ * Checks if a Braze Banner for the given placement ID can be shown.
+ * @param braze Braze instance
+ * @param placementId Placement ID to check for a banner
+ * @returns CanShowResult with the Banner meta if it can be shown
+ */
 export const canShowBrazeBannersSystem = async (
 	braze: BrazeInstance | null,
 	placementId: BrazeBannersSystemPlacementId,
-): Promise<CanShowResult<BrazeBanner>> => {
+): Promise<CanShowResult<BrazeBannersSystemMeta>> => {
 	// First, check if Braze dependencies are satisfied
 	if (!braze) {
 		return { show: false };
@@ -27,13 +34,48 @@ export const canShowBrazeBannersSystem = async (
 	 * But should we? 🤔
 	 */
 
-	const banner = braze.getBanner(placementId);
+	/**
+	 * Banner for the placement ID.
+	 * It is an object of type Banner, if a banner with the given placement ID exists.
+	 * It is null if the banner does not exist, or if banners are disabled.
+	 * It is undefined if the SDK has not been initialized.
+	 */
+	const banner: Banner | null | undefined = braze.getBanner(placementId);
 	if (!!banner) {
 		return {
 			show: true,
-			meta: banner,
+			meta: {
+				braze,
+				banner,
+			},
 		};
 	} else {
 		return { show: false };
 	}
+};
+
+export const BrazeBannersSystemDisplay = ({
+	meta,
+}: {
+	meta: BrazeBannersSystemMeta;
+}) => {
+	const containerRef = useRef<HTMLDivElement>(null);
+	useEffect(() => {
+		// Render the banner ONLY when we have both the Data and the DOM Element
+		if (containerRef.current) {
+			// Clear any existing content to prevent duplicates
+			containerRef.current.innerHTML = '';
+
+			// Let Braze inject the HTML/CSS
+			meta.braze.insertBanner(meta.banner, containerRef.current);
+		}
+	}, [meta.banner]);
+
+	return (
+		<div
+			ref={containerRef}
+			className="braze-banner-container"
+			style={{ minHeight: '50px' }} // Optional: prevents layout shift
+		/>
+	);
 };
