@@ -379,11 +379,25 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 	}
 };
 
-const hoverStyles = css`
-	a:hover {
-		border-bottom: solid 1px ${palette('--standfirst-link-border')};
+const hoverStyles = ({ design, theme }: ArticleFormat) => {
+	if (design === ArticleDesign.Gallery && theme !== ArticleSpecial.Labs) {
+		return css`
+			a {
+				border-bottom: solid 1px ${palette('--article-border')};
+			}
+
+			a:hover {
+				border-bottom: solid 1px ${palette('--standfirst-link-border')};
+			}
+		`;
 	}
-`;
+
+	return css`
+		a:hover {
+			border-bottom: solid 1px ${palette('--standfirst-link-border')};
+		}
+	`;
+};
 
 export const Standfirst = ({ format, standfirst }: Props) => {
 	if (standfirst.trim() === '') return null;
@@ -395,7 +409,7 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 					standfirstStyles(format),
 					decideFont(format),
 					decidePadding(format),
-					hoverStyles,
+					hoverStyles(format),
 				]}
 				className={
 					format.design === ArticleDesign.Interactive
