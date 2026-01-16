@@ -88,6 +88,7 @@ const brandingLogoStyle = css`
 	display: block;
 
 	& img {
+		max-width: 140px;
 		display: block;
 	}
 `;
