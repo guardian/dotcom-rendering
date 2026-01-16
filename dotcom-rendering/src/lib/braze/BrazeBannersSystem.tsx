@@ -59,7 +59,7 @@ export const canShowBrazeBannersSystem = async (
 
 /**
  * Displays a Braze Banner using the Braze Banners System.
- * @param param0 Meta information required to display the banner
+ * @param meta Meta information required to display the banner
  * @returns React component that renders the Braze Banner
  */
 export const BrazeBannersSystemDisplay = ({
