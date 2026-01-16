@@ -1,5 +1,5 @@
 import type { ProductCta } from '../types/content';
-import { LinkElementButton } from './ProductLinkButton';
+import { LinkElementButton } from './LinkElementButton';
 
 const getLabel = (cta: ProductCta): string => {
 	const overrideLabel = cta.text.trim().length > 0;

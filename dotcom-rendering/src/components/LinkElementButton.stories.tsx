@@ -1,6 +1,6 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { LinkElementButton } from './ProductLinkButton';
+import { LinkElementButton } from './LinkElementButton';
 
 const meta = {
 	component: LinkElementButton,
