@@ -5469,6 +5469,37 @@ const productButtonPrimaryTextDark: PaletteFunction = () =>
 	sourcePalette.neutral[7];
 const productButtonPrimaryTextLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
+
+const getStandardButtonColour = (
+	{ theme }: ArticleFormat,
+	weight: 100 | 200 | 300 | 400 | 500 | 600 | 800,
+) => {
+	console.log(theme);
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Lifestyle:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Opinion:
+			return pillarPalette(theme, weight);
+		default:
+			return pillarPalette(Pillar.News, weight);
+	}
+};
+
+const standardButtonPrimaryBackgroundLight: PaletteFunction = (format) =>
+	getStandardButtonColour(format, 400);
+const standardButtonPrimaryBackgroundDark: PaletteFunction = (format) =>
+	getStandardButtonColour(format, 300);
+const standardButtonPrimaryBackgroundHoverLight: PaletteFunction = (format) =>
+	getStandardButtonColour(format, 300);
+const standardButtonPrimaryBackgroundHoverDark: PaletteFunction = (format) =>
+	getStandardButtonColour(format, 400);
+const standardButtonPrimaryTextDark: PaletteFunction = () =>
+	sourcePalette.neutral[7];
+const standardButtonPrimaryTextLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+
 const discussionPrimaryButtonBackgroundLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
@@ -7965,6 +7996,18 @@ const paletteColours = {
 	'--staff-pick-badge-text': {
 		light: staffPickBadgeTextLight,
 		dark: staffPickBadgeTextDark,
+	},
+	'--standard-button-primary-background': {
+		light: standardButtonPrimaryBackgroundLight,
+		dark: standardButtonPrimaryBackgroundDark,
+	},
+	'--standard-button-primary-background-hover': {
+		light: standardButtonPrimaryBackgroundHoverLight,
+		dark: standardButtonPrimaryBackgroundHoverDark,
+	},
+	'--standard-button-primary-text': {
+		light: standardButtonPrimaryTextLight,
+		dark: standardButtonPrimaryTextDark,
 	},
 	'--standfirst-background': {
 		light: standfirstBackgroundLight,
