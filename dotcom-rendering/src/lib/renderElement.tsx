@@ -37,7 +37,7 @@ import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent
 import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
 import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importable';
 import { ProductElement } from '../components/ProductElement';
-import { ProductLinkButton } from '../components/ProductLinkButton';
+import { LinkElementButton } from '../components/ProductLinkButton';
 import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable';
 import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
 import { QandaAtom } from '../components/QandaAtom.importable';
@@ -606,15 +606,13 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.LinkBlockElement':
 			return (
-				<>
-					{element.linkType === 'ProductButton' && (
-						<ProductLinkButton
-							label={element.label}
-							url={element.url}
-							dataComponent={'in-body-product-link-button'}
-						/>
-					)}
-				</>
+				<LinkElementButton
+					label={element.label}
+					url={element.url}
+					linkType={element.linkType}
+					priority={element.priority}
+					dataComponent={'in-body-product-link-button'}
+				/>
 			);
 		case 'model.dotcomrendering.pageElements.ProductBlockElement':
 			return (
