@@ -84,15 +84,21 @@ export const LinkElementButton = ({
 		...(minimisePadding ? [minimisePaddingStyle] : []),
 	];
 
+	const isInternal = new URL(url).hostname.endsWith('theguardian.com');
+	const targetProps = isInternal
+		? {}
+		: {
+				target: '_blank',
+				'aria-label': `Open ${label} in a new tab`,
+				icon: <SvgArrowRightStraight />,
+		  };
+
 	return (
 		<LinkButton
 			href={url}
 			rel="sponsored noreferrer noopener"
-			target="_blank"
 			iconSide="right"
 			priority={LinkTypePriorityToButtonPriority[priority]}
-			aria-label={`Open ${label} in a new tab`}
-			icon={<SvgArrowRightStraight />}
 			theme={linkTypeToTheme[linkType]}
 			data-ignore="global-link-styling"
 			data-component={dataComponent}
@@ -100,6 +106,7 @@ export const LinkElementButton = ({
 			data-spacefinder-role="inline"
 			size={size}
 			cssOverrides={cssOverrides}
+			{...targetProps}
 		>
 			<span
 				style={fullWidthText ? { width: '100%' } : {}}
