@@ -127,7 +127,7 @@ window.twttr = (function(d, s, id) {
 		isInteractive:
 			design === ArticleDesign.FullPageInteractive ||
 			design === ArticleDesign.Interactive,
-		theme,
+		articleTheme: theme,
 	});
 
 	return {

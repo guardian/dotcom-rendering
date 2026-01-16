@@ -1,5 +1,5 @@
 import type { ArticleTheme } from '@guardian/libs';
-import { isUndefined } from '@guardian/libs';
+import { ArticleSpecial, isUndefined, Pillar } from '@guardian/libs';
 import { resets, palette as sourcePalette } from '@guardian/source/foundations';
 import CleanCSS from 'clean-css';
 import he from 'he';
@@ -29,7 +29,7 @@ type BaseProps = {
 	onlyLightColourScheme?: boolean;
 	isInteractive?: boolean;
 	rssFeedUrl?: string;
-	theme?: ArticleTheme;
+	articleTheme?: ArticleTheme;
 };
 
 interface WebProps extends BaseProps {
@@ -81,8 +81,13 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		config,
 		isInteractive = false,
 		rssFeedUrl,
-		theme,
+		articleTheme,
 	} = props;
+
+	const maybeArticleThemeString = (() => {
+		if (articleTheme == null) return undefined;
+		return Pillar[articleTheme] ?? ArticleSpecial[articleTheme];
+	})();
 
 	const doNotIndex = (): boolean => {
 		if (process.env.GU_STAGE !== 'PROD') return true;
@@ -217,9 +222,11 @@ https://workforus.theguardian.com/careers/product-engineering/
 --->`;
 
 	return `<!doctype html>
-        <html lang="en" ${theme != null ? `data-theme="${theme}"` : ''} ${
-			onlyLightColourScheme ? 'data-color-scheme="light"' : ''
-		} ${
+        <html lang="en" ${
+			maybeArticleThemeString
+				? `data-article-theme="${maybeArticleThemeString}"`
+				: ''
+		} ${onlyLightColourScheme ? 'data-color-scheme="light"' : ''} ${
 			renderingTarget === 'Apps' && isInteractive
 				? 'data-rendering-target="apps"'
 				: ''

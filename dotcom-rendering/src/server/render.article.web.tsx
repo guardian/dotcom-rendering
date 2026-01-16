@@ -194,7 +194,7 @@ window.twttr = (function(d, s, id) {
 			(design === ArticleDesign.FullPageInteractive ||
 				design === ArticleDesign.Interactive) &&
 			isBeforeInteractiveDarkModeSupport,
-		theme,
+		articleTheme: theme,
 	});
 
 	return { html: pageHtml, prefetchScripts };
