@@ -28,7 +28,7 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 	stage: 'PROD',
 	domainName: 'article-rendering.guardianapis.com',
 	scaling: {
-		minimumInstances: 36,
+		minimumInstances: 24,
 		maximumInstances: 240,
 		policies: {
 			step: {
