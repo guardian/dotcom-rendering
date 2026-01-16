@@ -24,6 +24,7 @@ const carouselHeader = css`
 const countStyles = css`
 	${textSans14};
 	color: ${palette('--card-trail-text')};
+	align-content: center;
 	display: block;
 	${from.tablet} {
 		display: none;
