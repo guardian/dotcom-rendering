@@ -1,8 +1,12 @@
-import type { ArticleTheme } from '@guardian/libs';
-import { ArticleSpecial, isUndefined, Pillar } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import { resets, palette as sourcePalette } from '@guardian/source/foundations';
 import CleanCSS from 'clean-css';
 import he from 'he';
+import {
+	ArticleSpecial,
+	type ArticleTheme,
+	Pillar,
+} from '../lib/articleFormat';
 import { ASSET_ORIGIN } from '../lib/assets';
 import { escapeData } from '../lib/escapeData';
 import { rawFontsCss } from '../lib/fonts-css';
@@ -61,6 +65,15 @@ const fontPreloadTags = fontFiles
 
 const minifiedFontsCss = new CleanCSS().minify(rawFontsCss).styles;
 
+const getArticleThemeString = (
+	theme: ArticleTheme | undefined,
+): string | undefined => {
+	if (theme === undefined) {
+		return undefined;
+	}
+	return Pillar[theme] ?? ArticleSpecial[theme];
+};
+
 export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 	const {
 		css,
@@ -84,10 +97,7 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		articleTheme,
 	} = props;
 
-	const maybeArticleThemeString = (() => {
-		if (articleTheme == null) return undefined;
-		return Pillar[articleTheme] ?? ArticleSpecial[articleTheme];
-	})();
+	const maybeArticleThemeString = getArticleThemeString(articleTheme);
 
 	const doNotIndex = (): boolean => {
 		if (process.env.GU_STAGE !== 'PROD') return true;
@@ -223,7 +233,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 
 	return `<!doctype html>
         <html lang="en" ${
-			maybeArticleThemeString
+			maybeArticleThemeString && isInteractive
 				? `data-article-theme="${maybeArticleThemeString}"`
 				: ''
 		} ${onlyLightColourScheme ? 'data-color-scheme="light"' : ''} ${
