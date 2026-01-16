@@ -2,7 +2,7 @@ import type { CanShowResult } from '../messagePicker';
 import { BrazeInstance } from './initialiseBraze';
 import { BrazeBannersSystemPlacementId } from './buildBrazeMessaging';
 import { Banner } from '@braze/web-sdk';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 /**
  * Meta information required to display a Braze Banner.
@@ -68,11 +68,18 @@ export const BrazeBannersSystemDisplay = ({
 	meta: BrazeBannersSystemMeta;
 }) => {
 	const containerRef = useRef<HTMLDivElement>(null);
+	const [minHeight, setMinHeight] = useState<string>('50px');
 	useEffect(() => {
 		// Render the banner ONLY when we have both the Data and the DOM Element
 		if (containerRef.current) {
 			// Clear any existing content to prevent duplicates
 			containerRef.current.innerHTML = '';
+
+			// Returns the string property
+			const minHeight = meta.banner.getStringProperty('minHeight');
+			if (minHeight) {
+				setMinHeight(minHeight);
+			}
 
 			// Let Braze inject the HTML/CSS
 			meta.braze.insertBanner(meta.banner, containerRef.current);
@@ -83,7 +90,7 @@ export const BrazeBannersSystemDisplay = ({
 		<div
 			ref={containerRef}
 			className="braze-banner-container"
-			style={{ minHeight: '50px' }} // Optional: prevents layout shift
+			style={{ minHeight: minHeight }} // Optional: prevents layout shift
 		/>
 	);
 };

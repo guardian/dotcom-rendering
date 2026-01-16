@@ -281,8 +281,8 @@ importers:
         specifier: 7.27.2
         version: 7.27.2
       '@braze/web-sdk':
-        specifier: 5.8.1
-        version: 5.8.1
+        specifier: 6.5.0
+        version: 6.5.0
       '@creditkarma/thrift-server-core':
         specifier: 1.0.4
         version: 1.0.4
@@ -1906,8 +1906,8 @@ packages:
   '@bcoe/v8-coverage@0.2.3':
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
 
-  '@braze/web-sdk@5.8.1':
-    resolution: {integrity: sha512-J7op9y15tGwAKBXYT2rVryV59+YvRekWHk3lq1Z+oqsNa+BdrboiHTa3r7eBPww8TVcRtWDoreG2Sb3ELAb37w==}
+  '@braze/web-sdk@6.5.0':
+    resolution: {integrity: sha512-MdfwZn+tfe7+tR8Ir5468/njQDGhgVB9tBthq7gwSETsjv6Q+Hw2bXiQy3scDcACI2RLqiq+dNXKh6fD+pN4/Q==}
 
   '@creditkarma/thrift-server-core@1.0.4':
     resolution: {integrity: sha512-Jook5uFJqPeM/D0taSdKHeoerZB6HboSDMqBDWhVDJVSKJGWPSMch4GNALRqr8nCekLKMYkdCgj4FAVetnxpGA==}
@@ -12444,7 +12444,7 @@ snapshots:
 
   '@bcoe/v8-coverage@0.2.3': {}
 
-  '@braze/web-sdk@5.8.1': {}
+  '@braze/web-sdk@6.5.0': {}
 
   '@creditkarma/thrift-server-core@1.0.4':
     dependencies:
