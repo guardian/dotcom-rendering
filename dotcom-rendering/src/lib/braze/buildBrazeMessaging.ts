@@ -50,8 +50,30 @@ const maybeWipeUserData = async (
 	}
 };
 
+/**
+ * Braze Banners System Placement IDs used in DCR
+ */
 export enum BrazeBannersSystemPlacementId {
 	EndOfArticle = 'dotcom-rendering_end-of-article',
+}
+
+/**
+ * Trigger a refresh of Braze Banners System banners
+ * @param braze The Braze instance
+ * @returns A promise that resolves when the refresh is complete
+ */
+function refreshBanners(braze: BrazeInstance): Promise<void> {
+	return new Promise<void>((resolve) => {
+		braze.requestBannersRefresh(
+			[BrazeBannersSystemPlacementId.EndOfArticle],
+			() => {
+				resolve();
+			},
+			() => {
+				resolve();
+			},
+		);
+	});
 }
 
 export const buildBrazeMessaging = async (
@@ -125,13 +147,12 @@ export const buildBrazeMessaging = async (
 		setHasCurrentBrazeUser();
 		braze.changeUser(dependenciesResult.data.brazeUuid as string);
 
+		// DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY
 		// Subscribe to Braze Banners System updates
 		// (This callback runs every time Braze has new data (initially empty, then populated))
 		const subscriptionId = braze.subscribeToBannersUpdates((banners) => {
 			console.log('📢 Banners updated:', banners);
 		});
-
-		// DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY
 		console.log(
 			'🆔 Subscribed to Braze banner updates. Subscription ID:',
 			subscriptionId,
@@ -141,9 +162,9 @@ export const buildBrazeMessaging = async (
 		// Trigger the Braze Banners System refresh (Ask Braze to fetch data)
 		// (Requests banners by a list of placement IDs from the Braze backend.)
 		// (Note that this method can only be called once per session.)
-		braze.requestBannersRefresh([
-			BrazeBannersSystemPlacementId.EndOfArticle,
-		]);
+		// Since we want to suppress In-App Messages if a banner exists, we must
+		// call requestBannersRefresh before openSession.
+		await refreshBanners(braze);
 
 		braze.openSession();
 
