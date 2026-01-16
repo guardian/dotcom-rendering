@@ -32,6 +32,7 @@ type Props = {
 	containerLevel?: DCRContainerLevel;
 	collectionId: number;
 	enableHls?: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 type BoostProperties = {
@@ -140,6 +141,7 @@ type OneCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	isSplashCard?: boolean;
 	enableHls?: boolean;
+	isInStarRatingVariant?: boolean;
 };
 
 export const OneCardLayout = ({
@@ -154,6 +156,7 @@ export const OneCardLayout = ({
 	containerLevel,
 	isSplashCard,
 	enableHls,
+	isInStarRatingVariant,
 }: OneCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -209,6 +212,8 @@ export const OneCardLayout = ({
 					headlinePosition={isSplashCard ? 'outer' : 'inner'}
 					subtitleSize={subtitleSize}
 					enableHls={enableHls}
+					isInStarRatingVariant={isInStarRatingVariant}
+					starRatingSize={'medium'}
 				/>
 			</LI>
 		</UL>
@@ -236,6 +241,7 @@ type TwoOrFourCardLayoutProps = {
 	aspectRatio: AspectRatio;
 	isFirstRow: boolean;
 	containerLevel: DCRContainerLevel;
+	isInStarRatingVariant?: boolean;
 };
 
 const TwoOrFourCardLayout = ({
@@ -248,6 +254,7 @@ const TwoOrFourCardLayout = ({
 	aspectRatio,
 	isFirstRow,
 	containerLevel,
+	isInStarRatingVariant,
 }: TwoOrFourCardLayoutProps) => {
 	if (cards.length === 0) return null;
 	const hasTwoOrFewerCards = cards.length <= 2;
@@ -290,6 +297,7 @@ const TwoOrFourCardLayout = ({
 									!isMediaCard(card.format))
 							}
 							canPlayInline={false}
+							isInStarRatingVariant={isInStarRatingVariant}
 						/>
 					</LI>
 				);
@@ -308,6 +316,7 @@ export const FlexibleSpecial = ({
 	containerLevel = 'Primary',
 	collectionId,
 	enableHls,
+	isInStarRatingVariant,
 }: Props) => {
 	const snaps = [...groupedTrails.snap].slice(0, 1).map((snap) => ({
 		...snap,
@@ -337,6 +346,7 @@ export const FlexibleSpecial = ({
 					containerLevel={containerLevel}
 					isSplashCard={false}
 					enableHls={enableHls}
+					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			)}
 			{isNonEmptyArray(splash) && (
@@ -352,6 +362,7 @@ export const FlexibleSpecial = ({
 					containerLevel={containerLevel}
 					isSplashCard={true}
 					enableHls={enableHls}
+					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			)}
 
@@ -364,6 +375,7 @@ export const FlexibleSpecial = ({
 				aspectRatio={aspectRatio}
 				isFirstRow={!isNonEmptyArray(snaps) && !isNonEmptyArray(splash)}
 				containerLevel={containerLevel}
+				isInStarRatingVariant={isInStarRatingVariant}
 			/>
 		</>
 	);

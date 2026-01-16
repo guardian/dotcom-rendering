@@ -3,7 +3,7 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/designableBanner/components/DesignableBannerCtas.tsx
  */
-import { LinkButton } from '@guardian/source/react-components';
+import { Button, LinkButton } from '@guardian/source/react-components';
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { BannerRenderedContent } from '../../common/types';
 import type { CtaSettings } from '../settings';
@@ -55,7 +55,7 @@ export function DesignableBannerCtas({
 				</LinkButton>
 			)}
 			{onCloseClick ? (
-				<LinkButton
+				<Button
 					onClick={onCloseClick}
 					size="small"
 					priority="tertiary"
@@ -63,7 +63,7 @@ export function DesignableBannerCtas({
 					theme={buttonThemes(secondaryCtaSettings, 'tertiary')}
 				>
 					Maybe later
-				</LinkButton>
+				</Button>
 			) : null}
 		</>
 	);

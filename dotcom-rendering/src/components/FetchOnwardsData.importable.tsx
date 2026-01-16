@@ -7,6 +7,7 @@ import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import {
 	decideTrail,
 	decideTrailWithMasterImage,
+	decideTrailWithMasterImagePreferred,
 	dedupeTrail,
 } from '../lib/decideTrail';
 import { useApi } from '../lib/useApi';
@@ -17,6 +18,7 @@ import type { OnwardsSource } from '../types/onwards';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { FETrailType, TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
+import { MoreGalleriesStyleOnwardsContent } from './MoreGalleriesStyleOnwardsContent.importable';
 import { Placeholder } from './Placeholder';
 import { ScrollableSmallOnwards } from './ScrollableSmallOnwards';
 
@@ -30,7 +32,9 @@ type Props = {
 	renderingTarget: RenderingTarget;
 	isAdFreeUser: boolean;
 	containerPosition: string;
+	isInOnwardsAbTestVariant?: boolean;
 	webURL: string;
+	isInStarRatingVariant?: boolean;
 };
 
 type OnwardsResponse = {
@@ -53,12 +57,20 @@ const buildTrails = (
 	isAdFreeUser: boolean,
 	webURL: string,
 	withMasterImage: boolean,
+	permitFallbackImage: boolean,
 ): TrailType[] => {
 	return trails
 		.filter((trailType) => !(isTrailPaidContent(trailType) && isAdFreeUser))
 		.filter((trailType) => dedupeTrail(trailType, webURL))
 		.slice(0, trailLimit)
-		.map(withMasterImage ? decideTrailWithMasterImage : decideTrail);
+		.map((trail, index) => {
+			if (permitFallbackImage) {
+				return decideTrailWithMasterImagePreferred(trail, index);
+			}
+			return withMasterImage
+				? decideTrailWithMasterImage(trail, index)
+				: decideTrail(trail, index);
+		});
 };
 
 export const FetchOnwardsData = ({
@@ -71,7 +83,9 @@ export const FetchOnwardsData = ({
 	renderingTarget,
 	isAdFreeUser,
 	containerPosition,
+	isInOnwardsAbTestVariant,
 	webURL,
+	isInStarRatingVariant,
 }: Props) => {
 	const [hasBeenSeen, setIsInViewRef] = useIsInView({ rootMargin: `-100px` });
 
@@ -110,7 +124,7 @@ export const FetchOnwardsData = ({
 	if (!data?.trails) {
 		return (
 			<Placeholder
-				heights={new Map([['mobile', 340]])} // best guess at typical height
+				heights={new Map<'mobile', number>([['mobile', 340]])} // best guess at typical height
 				shouldShimmer={false}
 				backgroundColor={palette('--article-background')}
 			/>
@@ -123,24 +137,55 @@ export const FetchOnwardsData = ({
 			.filter(isNonNullable),
 	);
 
-	const trails = ({ withMasterImage }: { withMasterImage: boolean }) =>
-		buildTrails(data.trails, limit, isAdFreeUser, webURL, withMasterImage);
+	const trails = ({
+		withMasterImage,
+		permitFallbackImage,
+	}: {
+		withMasterImage: boolean;
+		permitFallbackImage: boolean;
+	}) =>
+		buildTrails(
+			data.trails,
+			limit,
+			isAdFreeUser,
+			webURL,
+			withMasterImage,
+			permitFallbackImage,
+		);
 
 	return (
 		<div ref={setIsInViewRef} css={minHeight(format.design)}>
 			{format.design === ArticleDesign.Gallery ? (
 				<ScrollableSmallOnwards
 					serverTime={serverTime}
-					trails={trails({ withMasterImage: true })}
+					trails={trails({
+						withMasterImage: true,
+						permitFallbackImage: false,
+					})}
 					discussionApiUrl={discussionApiUrl}
 					heading={data.heading || data.displayname}
 					onwardsSource={onwardsSource}
 					format={format}
+					isInStarRatingVariant={isInStarRatingVariant}
+				/>
+			) : isInOnwardsAbTestVariant ? (
+				<MoreGalleriesStyleOnwardsContent
+					heading={data.heading || data.displayname}
+					trails={trails({
+						withMasterImage: true,
+						permitFallbackImage: true,
+					})}
+					discussionApiUrl={discussionApiUrl}
+					isAdFreeUser={isAdFreeUser}
+					isInStarRatingVariant={!!isInStarRatingVariant}
 				/>
 			) : (
 				<Carousel
 					heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
-					trails={trails({ withMasterImage: false })}
+					trails={trails({
+						withMasterImage: false,
+						permitFallbackImage: false,
+					})}
 					description={data.description}
 					onwardsSource={onwardsSource}
 					format={format}
@@ -153,6 +198,7 @@ export const FetchOnwardsData = ({
 					discussionApiUrl={discussionApiUrl}
 					serverTime={serverTime}
 					renderingTarget={renderingTarget}
+					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			)}
 		</div>

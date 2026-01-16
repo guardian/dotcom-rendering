@@ -9,7 +9,7 @@ import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
-import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
+import { AffiliateDisclaimerLeftCol } from '../components/AffiliateDisclaimerLeftCol.importable';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -248,6 +248,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
+	const isInStarRatingVariant =
+		article.config.abTests.starRatingRedesignVariant === 'variant';
+
 	return (
 		<>
 			{isWeb && (
@@ -369,6 +372,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									format={format}
 									elements={article.mainMediaElements}
 									starRating={
+										!isInStarRatingVariant &&
 										format.design ===
 											ArticleDesign.Review &&
 										!isUndefined(article.starRating)
@@ -410,6 +414,10 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									webPublicationDateDeprecated={
 										article.webPublicationDateDeprecated
 									}
+									isInStarRatingVariant={
+										isInStarRatingVariant
+									}
+									starRating={article.starRating}
 								/>
 							</PositionHeadline>
 						</GridItem>
@@ -482,7 +490,12 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 												}
 											/>
 											{!!article.affiliateLinksDisclaimer && (
-												<AffiliateDisclaimer />
+												<Island
+													priority="enhancement"
+													defer={{ until: 'idle' }}
+												>
+													<AffiliateDisclaimerLeftCol />
+												</Island>
 											)}
 										</Hide>
 									</>
@@ -512,7 +525,12 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											}
 										/>
 										{!!article.affiliateLinksDisclaimer && (
-											<AffiliateDisclaimer />
+											<Island
+												priority="enhancement"
+												defer={{ until: 'idle' }}
+											>
+												<AffiliateDisclaimerLeftCol />
+											</Island>
 										)}
 									</>
 								)}
@@ -720,6 +738,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						webURL={article.webURL}
+						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Island>
 
