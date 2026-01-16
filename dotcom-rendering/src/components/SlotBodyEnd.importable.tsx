@@ -33,6 +33,9 @@ import {
 	ReaderRevenueEpic,
 } from './SlotBodyEnd/ReaderRevenueEpic';
 import type { CanShowData as RRCanShowData } from './SlotBodyEnd/ReaderRevenueEpic';
+import { canShowBrazeBannersSystem } from './SlotBodyEnd/BrazeBannersSystem';
+import { BrazeBannersSystemPlacementId } from '../lib/braze/buildBrazeMessaging';
+import { BrazeInstance } from '../lib/braze/initialiseBraze';
 
 type Props = {
 	contentType: string;
@@ -100,6 +103,24 @@ const buildBrazeEpicConfig = (
 	};
 };
 
+const buildBrazeBannersSystemEpicConfig = (
+	braze: BrazeInstance | null,
+): CandidateConfig<any> => {
+	return {
+		candidate: {
+			id: 'braze-banners-system',
+			canShow: () => {
+				return canShowBrazeBannersSystem(
+					braze,
+					BrazeBannersSystemPlacementId.EndOfArticle,
+				);
+			},
+			show: () => () => <h1>Hello from the End of Article! v2</h1>,
+		},
+		timeoutMillis: null,
+	};
+};
+
 export const SlotBodyEnd = ({
 	contentType,
 	sectionId,
@@ -115,7 +136,7 @@ export const SlotBodyEnd = ({
 	articleEndSlot,
 }: Props) => {
 	const { renderingTarget } = useConfig();
-	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
+	const { brazeMessages, braze } = useBraze(idApiUrl, renderingTarget);
 	const countryCode = useCountryCode('slot-body-end');
 	const isSignedIn = useIsSignedIn();
 	const ophanPageViewId = usePageViewId(renderingTarget);
@@ -178,8 +199,10 @@ export const SlotBodyEnd = ({
 			tags,
 			shouldHideReaderRevenue,
 		);
+		const brazeBannersSystemEpic = buildBrazeBannersSystemEpicConfig(braze);
+
 		const epicConfig: SlotConfig = {
-			candidates: [brazeEpic, readerRevenueEpic],
+			candidates: [brazeBannersSystemEpic, brazeEpic, readerRevenueEpic],
 			name: 'slotBodyEnd',
 		};
 		pickMessage(epicConfig, renderingTarget)

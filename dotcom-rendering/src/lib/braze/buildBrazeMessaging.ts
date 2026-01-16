@@ -19,7 +19,7 @@ import {
 	setHasCurrentBrazeUser,
 } from '../hasCurrentBrazeUser';
 import { checkBrazeDependencies } from './checkBrazeDependencies';
-import { getInitialisedBraze } from './initialiseBraze';
+import { BrazeInstance, getInitialisedBraze } from './initialiseBraze';
 
 const maybeWipeUserData = async (
 	apiKey?: string,
@@ -50,6 +50,10 @@ const maybeWipeUserData = async (
 	}
 };
 
+export enum BrazeBannersSystemPlacementId {
+	EndOfArticle = 'dotcom-rendering_end-of-article',
+}
+
 export const buildBrazeMessaging = async (
 	idApiUrl: string,
 	isSignedIn: boolean,
@@ -57,6 +61,7 @@ export const buildBrazeMessaging = async (
 ): Promise<{
 	brazeMessages: BrazeMessagesInterface;
 	brazeCards: BrazeCardsInterface;
+	braze: BrazeInstance | null;
 }> => {
 	if (!storage.local.isAvailable()) {
 		// we require local storage for using any message channel so that we know
@@ -64,6 +69,7 @@ export const buildBrazeMessaging = async (
 		return {
 			brazeMessages: new NullBrazeMessages(),
 			brazeCards: new NullBrazeCards(),
+			braze: null,
 		};
 	}
 
@@ -89,6 +95,7 @@ export const buildBrazeMessaging = async (
 		return {
 			brazeMessages: new NullBrazeMessages(),
 			brazeCards: new NullBrazeCards(),
+			braze: null,
 		};
 	}
 
@@ -117,7 +124,33 @@ export const buildBrazeMessaging = async (
 
 		setHasCurrentBrazeUser();
 		braze.changeUser(dependenciesResult.data.brazeUuid as string);
+
+		// Subscribe to Braze Banners System updates
+		// (This callback runs every time Braze has new data (initially empty, then populated))
+		const subscriptionId = braze.subscribeToBannersUpdates((banners) => {
+			console.log('📢 Banners updated:', banners);
+		});
+
+		// DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY
+		console.log(
+			'🆔 Subscribed to Braze banner updates. Subscription ID:',
+			subscriptionId,
+		);
+		// DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY
+
+		// Trigger the Braze Banners System refresh (Ask Braze to fetch data)
+		// (Requests banners by a list of placement IDs from the Braze backend.)
+		// (Note that this method can only be called once per session.)
+		braze.requestBannersRefresh([
+			BrazeBannersSystemPlacementId.EndOfArticle,
+		]);
+
 		braze.openSession();
+
+		// DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY
+		// Force the trigger immediately
+		braze.logCustomEvent('afs_trigger_braze');
+		// DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY
 
 		const brazeCards = window.guardian.config.switches.brazeContentCards
 			? new BrazeCards(braze, errorHandler)
@@ -128,11 +161,12 @@ export const buildBrazeMessaging = async (
 			errorHandler,
 			canRenderBrazeMsg,
 		);
-		return { brazeMessages, brazeCards };
+		return { brazeMessages, brazeCards, braze };
 	} catch {
 		return {
 			brazeMessages: new NullBrazeMessages(),
 			brazeCards: new NullBrazeCards(),
+			braze: null,
 		};
 	}
 };

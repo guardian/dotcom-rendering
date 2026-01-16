@@ -10,6 +10,7 @@ import useSWRImmutable from 'swr/immutable';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { buildBrazeMessaging } from './braze/buildBrazeMessaging';
 import { useAuthStatus } from './useAuthStatus';
+import { BrazeInstance } from './braze/initialiseBraze';
 
 /**
  * Returns brazeMessaging as BrazeMessagesInterface and BrazeCardsInterface
@@ -26,6 +27,7 @@ export const useBraze = (
 ): {
 	brazeMessages: BrazeMessagesInterface | undefined;
 	brazeCards: BrazeCardsInterface | undefined;
+	braze: BrazeInstance | null;
 } => {
 	const authStatus = useAuthStatus();
 	const isSignedIn = authStatus.kind === 'SignedIn';
@@ -39,11 +41,13 @@ export const useBraze = (
 		return {
 			brazeMessages: new NullBrazeMessages(),
 			brazeCards: new NullBrazeCards(),
+			braze: null,
 		};
 	}
 
 	return {
 		brazeMessages: data?.brazeMessages,
 		brazeCards: data?.brazeCards,
+		braze: data?.braze ? data?.braze : null,
 	};
 };
