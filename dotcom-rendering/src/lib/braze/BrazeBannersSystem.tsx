@@ -68,7 +68,7 @@ export const BrazeBannersSystemDisplay = ({
 	meta: BrazeBannersSystemMeta;
 }) => {
 	const containerRef = useRef<HTMLDivElement>(null);
-	const [minHeight, setMinHeight] = useState<string>('50px');
+	const [minHeight, setMinHeight] = useState<string>('0px');
 	useEffect(() => {
 		// Render the banner ONLY when we have both the Data and the DOM Element
 		if (containerRef.current) {
