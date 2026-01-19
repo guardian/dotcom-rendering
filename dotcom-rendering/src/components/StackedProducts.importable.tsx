@@ -51,6 +51,7 @@ export const StackedProducts = ({
 						display: flex;
 						justify-content: space-between;
 						align-items: center;
+						padding-bottom: ${space[2]}px;
 					`,
 				]}
 			>
