@@ -9,8 +9,9 @@ const meta = {
 	component: StackedProducts,
 	args: {
 		products: exampleAtAGlanceProductArray,
+		heading: 'At a glance',
 		format: {
-			design: ArticleDesign.Standard,
+			design: ArticleDesign.Review,
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Lifestyle,
 		},
@@ -27,8 +28,9 @@ export const Default = {} satisfies Story;
 export const OnlyThreeProducts = {
 	args: {
 		products: exampleAtAGlanceProductArray.slice(0, 3),
+		heading: 'At a glance',
 		format: {
-			design: ArticleDesign.Standard,
+			design: ArticleDesign.Review,
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Lifestyle,
 		},

@@ -9,6 +9,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import type { ProductBlockElement } from '../types/content';
 import { HorizontalSummaryProductCard } from './HorizontalSummaryProductCard';
+import { Subheading } from './Subheading';
 
 const showAllButtonStyles = css`
 	background-color: transparent;
@@ -34,14 +35,19 @@ const cardCounterStyles = css`
 
 export const StackedProducts = ({
 	products,
+	heading,
 	format,
 }: {
 	products: ProductBlockElement[];
+	heading: string;
 	format: ArticleFormat;
 }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	return (
 		<div>
+			<Subheading format={format} topPadding={false}>
+				{heading}
+			</Subheading>
 			<div
 				css={[
 					css`
