@@ -39,7 +39,7 @@ const decideImageWidths = (
 		// 	];
 
 		case 'podcast':
-			return [{ breakpoint: breakpoints.mobile, width: 80, aspectRatio }];
+			return [{ breakpoint: breakpoints.mobile, width: 60, aspectRatio }];
 
 		case 'highlights-card':
 			return [{ breakpoint: breakpoints.mobile, width: 98, aspectRatio }];
