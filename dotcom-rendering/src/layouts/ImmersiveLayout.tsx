@@ -29,10 +29,7 @@ import { HeadlineByline } from '../components/HeadlineByline';
 import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
-import {
-	ListenToArticle,
-	shouldShowListenToArticleButton,
-} from '../components/ListenToArticle.importable';
+import { ListenToArticle } from '../components/ListenToArticle.importable';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { minHeaderHeightPx } from '../components/Masthead/Titlepiece/constants';
@@ -544,10 +541,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							{/* Only show Listen to Article button on App landscape views */}
 							{isApps && (
 								<Hide when="below" breakpoint="leftCol">
-									{shouldShowListenToArticleButton(
-										format,
-										article.pageId,
-									) && (
+									{!!article.pageId && (
 										<div
 											css={css`
 												margin-top: ${space[6]}px;

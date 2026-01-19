@@ -22,10 +22,7 @@ import { Contributor } from './Contributor';
 import { Dateline } from './Dateline';
 import { FollowWrapper } from './FollowWrapper.importable';
 import { Island } from './Island';
-import {
-	ListenToArticle,
-	shouldShowListenToArticleButton,
-} from './ListenToArticle.importable';
+import { ListenToArticle } from './ListenToArticle.importable';
 import { LiveblogNotifications } from './LiveblogNotifications.importable';
 
 type Props = {
@@ -247,12 +244,16 @@ export const ArticleMetaApps = ({
 	const isAnalysis = format.design === ArticleDesign.Analysis;
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 	const isGallery = format.design === ArticleDesign.Gallery;
+	const isVideo = format.design === ArticleDesign.Video;
 
 	const shouldShowFollowButtons = (layoutOrDesignType: boolean) =>
 		layoutOrDesignType && !!byline && !isUndefined(soleContributor);
 
 	const shouldShowLiveblogNotifications =
 		isLiveBlog && !!pageId && !!headline;
+
+	const shouldShowListenToArticleButton =
+		!!pageId && !(isLiveBlog || isPicture || isGallery || isVideo);
 
 	const isImmersiveOrAnalysisWithMultipleAuthors =
 		(isAnalysis || isImmersive) && !!byline && isUndefined(soleContributor);
@@ -370,7 +371,7 @@ export const ArticleMetaApps = ({
 					</MetaGridBranding>
 				)}
 			</div>
-			{!!pageId && shouldShowListenToArticleButton(format, pageId) && (
+			{shouldShowListenToArticleButton && (
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<ListenToArticle articleId={pageId} />
 				</Island>

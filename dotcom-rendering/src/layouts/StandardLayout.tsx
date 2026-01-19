@@ -32,10 +32,7 @@ import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
-import {
-	ListenToArticle,
-	shouldShowListenToArticleButton,
-} from '../components/ListenToArticle.importable';
+import { ListenToArticle } from '../components/ListenToArticle.importable';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
@@ -387,6 +384,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 		format.design === ArticleDesign.Video ||
 		format.design === ArticleDesign.Audio;
 
+	const isVideo = format.design === ArticleDesign.Video;
+
 	const showComments = article.isCommentable && !isPaidContent;
 
 	const { branding } = article.commercialProperties[article.editionId];
@@ -706,10 +705,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							{/* Only show Listen to Article button on App landscape views */}
 							{isApps && (
 								<Hide until="leftCol">
-									{shouldShowListenToArticleButton(
-										format,
-										article.pageId,
-									) && (
+									{!!article.pageId && !isVideo && (
 										<div
 											css={css`
 												margin-top: ${space[2]}px;

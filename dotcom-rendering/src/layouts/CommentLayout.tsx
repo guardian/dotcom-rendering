@@ -24,10 +24,7 @@ import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
-import {
-	ListenToArticle,
-	shouldShowListenToArticleButton,
-} from '../components/ListenToArticle.importable';
+import { ListenToArticle } from '../components/ListenToArticle.importable';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
@@ -471,10 +468,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 							{/* Only show Listen to Article button on App landscape views */}
 							{isApps && (
 								<Hide when="below" breakpoint="leftCol">
-									{shouldShowListenToArticleButton(
-										format,
-										article.pageId,
-									) && (
+									{!!article.pageId && (
 										<div
 											css={css`
 												max-width: 620px;

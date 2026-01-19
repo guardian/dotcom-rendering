@@ -27,10 +27,7 @@ import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
-import {
-	ListenToArticle,
-	shouldShowListenToArticleButton,
-} from '../components/ListenToArticle.importable';
+import { ListenToArticle } from '../components/ListenToArticle.importable';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
@@ -434,10 +431,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 							{/* Only show Listen to Article button on App landscape views */}
 							{isApps && (
 								<Hide until="leftCol">
-									{shouldShowListenToArticleButton(
-										format,
-										article.pageId,
-									) && (
+									{!!article.pageId && (
 										<div
 											css={css`
 												margin-top: ${space[2]}px;
