@@ -17,6 +17,7 @@ import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import type { ArticleCounts } from '../../lib/articleCount';
 import {
+	getAuthHeaders,
 	getPurchaseInfo,
 	hasOptedOutOfArticleCount,
 	recentlyClosedBanner,
@@ -248,9 +249,12 @@ export const canShowRRBanner: CanShowFunctionType<
 		pageId,
 	});
 
+	const headers = await getAuthHeaders();
+
 	const response: ModuleDataResponse<BannerProps> = await getBanner(
 		contributionsServiceUrl,
 		bannerPayload,
+		headers,
 	);
 	if (!response.data) {
 		if (engagementBannerLastClosedAt && subscriptionBannerLastClosedAt) {
