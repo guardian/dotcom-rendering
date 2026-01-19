@@ -129,7 +129,7 @@ See the [Frontend A/B testing class](https://github.com/guardian/frontend/blob/m
 
 #### In the response headers (Debugging)
 
-Fastly sends a user's AB participations via the `x-gu-server-ab-tests` response header (server side A/B tests) and `gu_client_ab_tests` response cookie (client side A/B tests).
+Fastly sends a user's A/B participations via the `x-gu-server-ab-tests` response header (server side A/B tests) and `gu_client_ab_tests` response cookie (client side A/B tests).
 
 ### 3. Testing your changes on CODE
 
