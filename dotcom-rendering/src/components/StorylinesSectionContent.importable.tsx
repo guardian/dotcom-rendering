@@ -11,6 +11,7 @@ import {
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { useState } from 'react';
+import { submitComponentEvent } from '../client/ophan/ophan';
 import type { EditionId } from '../lib/edition';
 import { parseStorylinesContentToStorylines } from '../model/enhanceTagPageStorylinesContent';
 import { palette } from '../palette';
@@ -199,6 +200,24 @@ export const StorylinesSectionContent = ({
 		parsedStorylines?.[0]?.id ?? '',
 	);
 
+	function handleStorylineChange(newStorylineId: string) {
+		const currentId = activeStorylineId;
+		setActiveStorylineId(newStorylineId);
+		void submitComponentEvent(
+			{
+				component: {
+					componentType: 'STORYLINES',
+					id: `${storylinesContent?.tag} storylines`,
+					products: [],
+					labels: [],
+				},
+				action: 'CLICK',
+				value: `${currentId} : ${newStorylineId}`,
+			},
+			'Web',
+		);
+	}
+
 	if (!parsedStorylines || parsedStorylines.length === 0) {
 		return null;
 	}
@@ -244,7 +263,7 @@ export const StorylinesSectionContent = ({
 									i === 0,
 								)}
 								onClick={() =>
-									setActiveStorylineId(storyline.id)
+									handleStorylineChange(storyline.id)
 								}
 								type="button"
 							>
