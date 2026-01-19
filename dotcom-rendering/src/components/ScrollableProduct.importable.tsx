@@ -7,7 +7,6 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { palette } from '../palette';
 import type { ProductBlockElement } from '../types/content';
-import { CarouselNavigationButtons } from './CarouselNavigationButtons';
 import { ProductCarouselCard } from './ProductCarouselCard';
 import { Subheading } from './Subheading';
 
@@ -106,6 +105,12 @@ const generateFixedWidthColumStyles = ({
 	return fixedWidths;
 };
 
+/**
+ * This product carousel has some functionality copied from the ScrollableCarousel.
+ * As this is part of an A/B/C test, we have decided to copy this functionality so
+ * we can move quickly. There will be some work to define a base carousel at some
+ * point to see what functionality can be shared.
+ */
 export const ScrollableProduct = ({ products, format }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
@@ -127,7 +132,9 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 			fixedSlideWidth,
 		}),
 	];
-
+	/**
+	 * --- COPIED FROM ScrollableCarousel ---
+	 */
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
 
@@ -179,6 +186,7 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 	};
 
 	/**
+	 * --- COPIED FROM ScrollableCarousel ---
 	 * Scrolls the carousel to a certain position when a card gains focus.
 	 *
 	 * If a card gains focus (e.g. by tabbing through the elements of the page) then the browser

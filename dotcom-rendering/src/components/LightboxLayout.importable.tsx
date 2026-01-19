@@ -21,6 +21,7 @@ import { LightboxJavascript } from './LightboxJavascript';
 type Props = {
 	format: ArticleFormat;
 	images: ImageForLightbox[];
+	isInStarRatingVariant?: boolean;
 };
 
 const lightboxStyles = css`
@@ -196,7 +197,11 @@ const Selection = ({
 	);
 };
 
-export const LightboxLayout = ({ format, images }: Props) => {
+export const LightboxLayout = ({
+	format,
+	images,
+	isInStarRatingVariant,
+}: Props) => {
 	return (
 		<>
 			<Global
@@ -222,7 +227,11 @@ export const LightboxLayout = ({ format, images }: Props) => {
 				hidden={true}
 			>
 				<div css={containerStyles}>
-					<LightboxJavascript format={format} images={images} />
+					<LightboxJavascript
+						format={format}
+						images={images}
+						isInStarRatingVariant={isInStarRatingVariant}
+					/>
 					<nav css={navStyles}>
 						<button
 							type="button"
