@@ -45,9 +45,25 @@ export const StackedProducts = ({
 	const [isExpanded, setIsExpanded] = useState(false);
 	return (
 		<div>
-			<Subheading format={format} topPadding={false}>
-				{heading}
-			</Subheading>
+			<div
+				css={[
+					css`
+						display: flex;
+						justify-content: space-between;
+						align-items: center;
+					`,
+				]}
+			>
+				<Subheading format={format} topPadding={false}>
+					{heading}
+				</Subheading>
+				{products.length > 3 && (
+					<p css={cardCounterStyles}>
+						{isExpanded ? products.length : '3'}/{products.length}
+					</p>
+				)}
+			</div>
+
 			<div
 				css={[
 					css`
@@ -105,10 +121,6 @@ export const StackedProducts = ({
 							/>
 						)}
 					</button>
-
-					<p css={cardCounterStyles}>
-						{isExpanded ? products.length : '3'}/{products.length}
-					</p>
 				</div>
 			)}
 		</div>
