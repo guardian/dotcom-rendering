@@ -85,7 +85,8 @@ export const LinkElementButton = ({
 	];
 
 	const isInternal = new URL(url).hostname.endsWith('theguardian.com');
-	const targetProps = isInternal
+	const shouldOpenInSameWindow = isInternal && linkType !== 'ProductButton';
+	const targetProps = shouldOpenInSameWindow
 		? {}
 		: {
 				target: '_blank',
