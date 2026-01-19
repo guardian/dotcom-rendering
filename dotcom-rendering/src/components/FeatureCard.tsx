@@ -390,6 +390,16 @@ export type Props = {
 	starRatingSize: RatingSizeType;
 };
 
+const decideKicker = (
+	format: ArticleFormat,
+	mainMedia?: MainMedia,
+	kickerText?: string,
+) => {
+	if (mainMedia?.type === 'Audio') return undefined;
+	if (format.design === ArticleDesign.LiveBlog && !kickerText) return 'Live';
+	return kickerText;
+};
+
 export const FeatureCard = ({
 	linkTo,
 	format,
@@ -453,6 +463,8 @@ export const FeatureCard = ({
 		media?.type === 'default-video' ||
 		media?.type === 'cinemagraph';
 
+	const maybeKicker = decideKicker(format, mainMedia, kickerText);
+
 	const labsDataAttributes = branding
 		? getOphanComponents({
 				branding,
@@ -511,7 +523,7 @@ export const FeatureCard = ({
 										aspectRatio={aspectRatio}
 										mobileAspectRatio={mobileAspectRatio}
 										altText={headlineText}
-										kickerText={kickerText}
+										kickerText={maybeKicker}
 										trailText={trailText}
 										isVideoArticle={isVideoArticle}
 										hidePillOnMobile={false}
@@ -691,13 +703,7 @@ export const FeatureCard = ({
 												format={format}
 												fontSizes={headlineSizes}
 												showQuotes={showQuotes}
-												kickerText={
-													format.design ===
-														ArticleDesign.LiveBlog &&
-													!kickerText
-														? 'Live'
-														: kickerText
-												}
+												kickerText={maybeKicker}
 												showPulsingDot={
 													format.design ===
 														ArticleDesign.LiveBlog ||
