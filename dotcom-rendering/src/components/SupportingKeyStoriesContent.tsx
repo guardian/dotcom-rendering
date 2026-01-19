@@ -20,6 +20,7 @@ type Props = {
 	/** Allows sublinks container to have a background colour on desktop screen sizes */
 	fillBackgroundOnDesktop?: boolean;
 	isStorylines?: boolean;
+	dataLinkName?: string;
 };
 
 /**
@@ -139,6 +140,7 @@ export const SupportingKeyStoriesContent = ({
 	fillBackgroundOnMobile = false,
 	fillBackgroundOnDesktop = false,
 	isStorylines = false,
+	dataLinkName,
 }: Props) => {
 	const columnSpan = getColumnSpan(supportingContent.length);
 	return (
@@ -172,7 +174,7 @@ export const SupportingKeyStoriesContent = ({
 								? horizontalSublinkStyles(columnSpan)
 								: verticalSublinkStyles,
 						]}
-						data-link-name={`sublinks | ${index + 1}`}
+						data-link-name={`${dataLinkName} | ${index + 1}`} //
 					>
 						<FormatBoundary format={subLinkFormat}>
 							<ContainerOverrides

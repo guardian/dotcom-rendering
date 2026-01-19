@@ -49,10 +49,18 @@ function parseArticleDataToFrontCard(
 	article: ArticleData,
 	categoryIndex: number,
 	index: number,
+	storylineId: string,
 ): DCRFrontCard {
 	const format = decideFormatForArticle(category, article);
 	const group: Group = `${categoryIndex}`;
-	const dataLinkName = getDataLinkNameCard(format, group, index);
+	const normalizedCategory = category.category
+		.toLowerCase()
+		.replace(/\s+/g, '-');
+	const dataLinkName = `${storylineId} | ${normalizedCategory} | ${getDataLinkNameCard(
+		format,
+		group,
+		index,
+	)}`;
 	return {
 		format,
 		dataLinkName,
@@ -95,7 +103,10 @@ function parseArticleDataToFrontCard(
 	};
 }
 
-function parseKeyStoriesToFrontCard(category: CategoryContent): DCRFrontCard {
+function parseKeyStoriesToFrontCard(
+	category: CategoryContent,
+	storylineId: string,
+): DCRFrontCard {
 	const supportingContent = category.articles.slice(0, 4).map((article) => {
 		return {
 			headline: article.headline,
@@ -108,7 +119,7 @@ function parseKeyStoriesToFrontCard(category: CategoryContent): DCRFrontCard {
 
 	return {
 		format: { design: 0, display: 0, theme: 0 },
-		dataLinkName: '', // the actual links to articles are in supportingContent
+		dataLinkName: `${storylineId} | key-stories`,
 		url: category.articles[0]?.url ?? '',
 		headline: '',
 		trailText: '',
@@ -136,10 +147,11 @@ function parseKeyStoriesToFrontCard(category: CategoryContent): DCRFrontCard {
 function decideGroupedTrails(
 	category: CategoryContent,
 	categoryIndex: number,
+	storylineId: string,
 ): DCRGroupedTrails {
 	if (category.category === 'Key Stories') {
 		return {
-			splash: [parseKeyStoriesToFrontCard(category)],
+			splash: [parseKeyStoriesToFrontCard(category, storylineId)],
 			huge: [],
 			veryBig: [],
 			big: [],
@@ -158,6 +170,7 @@ function decideGroupedTrails(
 					article,
 					categoryIndex,
 					index,
+					storylineId,
 				),
 			);
 		return {
@@ -177,6 +190,7 @@ function decideGroupedTrails(
 					article,
 					categoryIndex,
 					index,
+					storylineId,
 				),
 			);
 		return {
@@ -205,12 +219,19 @@ export function parseStorylinesContentToStorylines(
 				return category.category;
 		}
 	}
-	return data.storylines.map((storyline, i) => ({
-		id: `storyline-${i + 1}`,
-		title: storyline.title,
-		categories: storyline.content.map((category, categoryIndex) => ({
-			title: decideCategoryTitle(category),
-			groupedTrails: decideGroupedTrails(category, categoryIndex),
-		})),
-	}));
+	return data.storylines.map((storyline, i) => {
+		const storylineId = `storyline-${i + 1}`;
+		return {
+			id: storylineId,
+			title: storyline.title,
+			categories: storyline.content.map((category, categoryIndex) => ({
+				title: decideCategoryTitle(category),
+				groupedTrails: decideGroupedTrails(
+					category,
+					categoryIndex,
+					storylineId,
+				),
+			})),
+		};
+	});
 }
