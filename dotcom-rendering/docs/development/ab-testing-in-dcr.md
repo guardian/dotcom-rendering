@@ -22,8 +22,9 @@ Add your A/B tests to the `abTests` array in the `abTests.ts` file. Each test sh
 	expirationDate: '2025-12-30',
 	type: 'client',
 	audienceSize: 10 / 100,
+	audienceSpace: "A",
 	groups: ['control', 'variant'],
-	shouldForceMetricsCollection: true
+shouldForceMetricsCollection: true
 }
 ```
 
@@ -31,59 +32,24 @@ When you create a PR that modifies the `abTests.ts` file, a git hook and CI will
 
 When your PR is merged, the A/B test will be automatically deployed to Fastly and be available at the same time as your changes.
 
-#### Guidelines for A/B tests
+#### Guidelines for A/B test configuration
 
-##### Naming Conventions
+| Prop                         | Optional | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ---------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name                         | false    | A/B tests should be prefixed with the team associated with the test, for example `webex-example-test`. This helps to identify the team responsible for the test and is enforced by typescript validation, you can inspect & edit the allowed team name definitions [here](https://github.com/guardian/dotcom-rendering/blob/main/ab-testing/config/types.ts#L7).                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| description                  | false    | A meaningful description of the AB test.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| owners                       | false    | Email address of owner(s) of the test, to be used when notifying of near-expiry or expired tests.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| status                       | false    | Tests can be set to `ON` or `OFF` using the `status` field. Only tests with status `ON` will be validated and deployed. <br><br>When the config is merged, the A/B test will be automatically deployed and be available at the same time as your changes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| expirationDate               | false    | A/B tests should have an expiration date set in the future. This is to ensure that tests do not run indefinitely. The duration of a test should be determined by how long we believe it will need to run in order to reach a statistically significant result - if you're unsure how long this is we'd recommend reaching out to our Data Analysts. Adding a buffer of an additional +2 weeks beyond the expected completion date will ensure tests do not end unexpectedly before we have a statistically significant result. <br><br>Expired tests will cause the A/B testing validation to fail, and will not be deployed. <br><br>Tests that expire while they are are in-flight will not be served by Fastly, and should be removed from the `abTest.ts` file as soon as possible. |
+| type                         | false    | All requests are processed by Fastly at the edge, however, A/B testing of server-side logic in Frontend or DCR will need to be cached separately. Client side tests do not need to be cached separately, as they are applied in the browser after the response is delivered. <br><br>Ensure that the `type` field is set to either `client` or `server` to indicate the type of test so that server side tests can be cached correctly, and client side tests are not splitting the cache unnecessarily. <br><br>There's a limit of the number of concurrent server-side tests that can be run, enforced by the validation script, so it's important to use client-side tests where possible.                                                                                           |
+| audienceSize                 | false    | The `audienceSize` is the size of the whole test and is divided between the test groups that you specify. For example, consider an audience size of 10% (`10 / 100`) with two test groups: control and variant. The control and variant test groups will each be allocated 5%. The "resolution" of sizing is down to 0.1%, so groups will be rounded to the nearest 0.1%.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| audienceSpace                | true     | Ideally A/B tests would never overlap (users being in multiple tests), but sometimes this is unavoidable, for example when running a very large 50+% test without interrupting existing tests. <br><br>To add a test where there is not enough space in the default audience space (`A`), you can specify a different `audienceSpace` in the test definition. <br><br>For example if there are already 3 25% tests in space `A` totalling 75%, and you want to run a 50% test, you can set the `audienceSpace` to `B` to allow this test to overlap with the existing tests.                                                                                                                                                                                                            |
+| groups                       | false    | Test group definitions, eg. `['control', 'variant']`. Convention is to have groups named control and variant, but you can name them as you wish. <br><br>A single group is also possible, for example if you're rolling out a new feature and don't need a control.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| shouldForceMetricsCollection | true     | `true` or `false`. Bypasses sampling to force metrics collection for this test. See DCR Metrics component for end usage.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
-A/B tests should be prefixed with the team associated with the test, for example `webex-example-test`. This helps to identify the team responsible for the test and is enforced by typescript validation, you can inspect & edit the allowed team name definitions [here](https://github.com/guardian/dotcom-rendering/blob/main/ab-testing/config/types.ts#L7).
-
-##### Test Size and Groups
-
-The `audienceSize` is the size of the whole test and is divided between the test groups that you specify. For example, consider an audience size of 10% (`10 / 100`) with two test groups: control and variant. The control and variant test groups will each be allocated 5%. The "resolution" of sizing is down to 0.1%, so groups will be rounded to the nearest 0.1%.
-
-Convention is to have groups named control and variant, but you can name them as you wish.
-
-A single group is also possible, for example if you're rolling out a new feature and don't need a control.
-
-##### Client vs Server Side Tests
-
-All requests are processed by Fastly at the edge, however, A/B testing of server-side logic in Frontend or DCR will need to be cached separately. Client side tests do not need to be cached separately, as they are applied in the browser after the response is delivered.
-
-Ensure that the `type` field is set to either `client` or `server` to indicate the type of test so that server side tests can be cached correctly, and client side tests are not splitting the cache unnecessarily.
-
-There's a limit of the number of concurrent server-side tests that can be run, enforced by the validation script, so it's important to use client-side tests where possible.
-
-##### Test Expiration
-
-A/B tests should have an expiration date set in the future. This is to ensure that tests do not run indefinitely. The duration of a test should be determined by how long we believe it will need to run in order to reach a statistically significant result - if you're unsure how long this is we'd recommend reaching out to our Data Analysts. Adding a buffer of an additional +2 weeks beyond the expected completion date will ensure tests do not end unexpectedly before we have a statistically significant result.
-
-Expired tests will cause the A/B testing validation to fail, and will not be deployed.
-
-Tests that expire while they are are in-flight will not be served by Fastly, and should be removed from the `abTest.ts` file as soon as possible.
-
-##### Audience Spaces
-
-Ideally A/B tests would never overlap (users being in multiple tests), but sometimes this is unavoidable, for example when running a very large 50+% test without interrupting existing tests.
-
-To add a test where there is not enough space in the default audience space (`A`), you can specify a different `audienceSpace` in the test definition.
-
-For example if there are already 3 25% tests in space `A` totalling 75%, and you want to run a 50% test, you can set the `audienceSpace` to `B` to allow this test to overlap with the existing tests.
-
-##### Test Status
-
-Tests can be set to `ON` or `OFF` using the `status` field. Only tests with status `ON` will be validated and deployed.
-
-When the config is merged, the A/B test will be automatically deployed and be available at the same time as your changes.
-
-A/B test on/off state is controlled only by the config. Expired tests will cause the A/B testing validation to fail, they will also not be served. In effect expired tests are turned off "automatically", but their config needs to be cleaned up.
-
-The test will appear in https://frontend.gutools.co.uk/analytics/ab-testing once the config is deployed.
-
-### 2. Putting your code changes behind an A/B test
+### 2. Putting your code changes behind an A/B test & checking AB test participations
 
 Once your A/B test has been configured you can conditionally put your code changes behind an A/B test participation. The instructions below describe how to do this, and are applicable to both client and server side tests.
-
-### 3. Ways to check A/B test participation
 
 #### In React Components (DCR)
 
@@ -165,7 +131,7 @@ See the [Frontend A/B testing class](https://github.com/guardian/frontend/blob/m
 
 Fastly sends a user's AB participations via the `x-gu-server-ab-tests` response header (server side A/B tests) and `gu_client_ab_tests` response cookie (client side A/B tests).
 
-### 4. Testing your changes on CODE
+### 3. Testing your changes on CODE
 
 If you want to test your changes on CODE you need to follow these steps:
 
@@ -177,7 +143,7 @@ If you want to test your changes on CODE you need to follow these steps:
 
 The 3rd step is crucial as Fastly buckets users into tests/cohorts and returns your A/B test participations as response headers.
 
-### 5. Forcing yourself into a test on PROD/CODE
+### 4. Forcing yourself into a test on PROD/CODE
 
 Use the opt-in and opt-out routes to force yourself into or out of a test.
 
@@ -193,7 +159,7 @@ These links are also in the [frontend admin](https://frontend.gutools.co.uk/anal
 
 You can use the same routes on CODE.
 
-### 6. Forcing yourself into a test locally
+### 5. Forcing yourself into a test locally
 
 A URL query parameter can be used to force yourself into a test locally. The parameter is `ab-commercial-test-example=variant` where `commercial-test-example` is the name of the test in config and `variant` is the cohort you wish to opt-in to.
 
@@ -204,3 +170,7 @@ A URL query parameter can be used to force yourself into a test locally. The par
 -   Interactives: `http://localhost:3030/Interactive/https://www.theguardian.com/global-development/ng-interactive/2022/jun/09/the-black-sea-blockade-mapping-the-impact-of-war-in-ukraine-on-the-worlds-food-supply-interactive?ab-commercial-test-example=variant`
 
 You can verify that you're in the test by checking `window.guardian.modules.abTests.getParticipations()` in the browser console.
+
+### 6. Admin page
+
+AB tests will appear in https://frontend.gutools.co.uk/analytics/ab-testing once the config is deployed. This page provides an overview of currently running A/B tests on theguardian.com, including audience segmentation across all tests, test opt-in/out links, status reporting (eg. on/off) and the duration of each test.
