@@ -93,6 +93,7 @@ export const GutterAsk: ReactComponent<GutterAskRenderProps> = ({
 	enrichedUrl,
 	onCtaClick,
 }: GutterAskRenderProps) => {
+	console.log('actually rendering GutterAsk');
 	return (
 		<>
 			{variant && (

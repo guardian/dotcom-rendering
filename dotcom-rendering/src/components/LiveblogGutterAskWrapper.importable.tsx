@@ -20,8 +20,6 @@ import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
-import type { GutterAskRenderProps } from './marketing/gutters/GutterAsk';
-import { GutterAsk } from './marketing/gutters/GutterAsk';
 
 interface LiveblogGutterAskBuilderProps {
 	sectionId: string | undefined;
@@ -204,14 +202,4 @@ export const LiveblogGutterAskWrapper = ({
 			pageId={pageId}
 		/>
 	);
-};
-
-export const BasicGutterAsk = (props: GutterAskRenderProps) => {
-	const [ready, setReady] = useState(false);
-	console.log('BasicGutterAsk');
-	useEffect(() => {
-		console.log('ready?');
-		setReady(true);
-	}, []);
-	return <>{ready && <GutterAsk {...props} />}</>;
 };
