@@ -3,6 +3,7 @@ import {
 	from,
 	headlineBold15,
 	headlineBold17,
+	space,
 } from '@guardian/source/foundations';
 import { CustomArticleCountCopy } from '../../components/CustomArticleCountCopy';
 import { DesignableBannerArticleCountOptOut } from '../../components/DesignableBannerArticleCountOptOut';
@@ -14,6 +15,7 @@ const containsArticleCountTemplate = (copy: string): boolean =>
 const styles = {
 	container: (textColor: string = 'inherit') => css`
 		margin: 0;
+		margin-bottom: ${space[3]}px;
 		color: ${textColor};
 		${headlineBold15}
 		${from.desktop} {
@@ -23,8 +25,18 @@ const styles = {
 };
 
 export const BannerArticleCount = (): JSX.Element | null => {
-	const { articleCounts, settings, separateArticleCountSettings } =
-		useBanner();
+	const {
+		articleCounts,
+		settings,
+		separateArticleCountSettings,
+		isCollapsed,
+	} = useBanner();
+
+	// Don't render article count when banner is collapsed
+	if (isCollapsed) {
+		return null;
+	}
+
 	const numArticles = articleCounts.forTargetedWeeks;
 	const copy = separateArticleCountSettings?.copy;
 

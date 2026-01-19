@@ -551,6 +551,49 @@ export const MainImage: Story = {
 	},
 };
 
+export const DesignThreeAnimatedHeaderImage: Story = {
+	name: 'With animated header image',
+	render: (args) => (
+		<BannerComponent {...args}>
+			<BannerLogo />
+			<BannerContent>
+				<BannerHeader />
+				<BannerBody />
+			</BannerContent>
+			<BannerChoiceCards />
+			<BannerCtas />
+			<BannerCloseButton />
+		</BannerComponent>
+	),
+	args: {
+		...WithThreeTierChoiceCards.args,
+		content: contentNoHeading as any,
+		design: {
+			...design,
+			headerImage: {
+				mobileUrl:
+					'https://uploads.guim.co.uk/2024/05/13/GuardianLogo.svg',
+				tabletUrl:
+					'https://uploads.guim.co.uk/2024/05/13/GuardianLogo.svg',
+				desktopUrl:
+					'https://uploads.guim.co.uk/2024/05/13/GuardianLogo.svg',
+				altText: 'Guardian: News provider of the year',
+			},
+			visual: {
+				kind: 'ChoiceCards',
+				buttonColour: stringToHexColour('FFFFFF'),
+			},
+			colours: {
+				...design.colours,
+				basic: {
+					...design.colours.basic,
+					background: stringToHexColour('FFFFFF'),
+				},
+			},
+		} as any,
+	},
+};
+
 export const WithTickerAndThreeTierChoiceCards: Story = {
 	name: 'With ticker + three tier choice cards',
 	render: (args) => (
@@ -617,6 +660,47 @@ export const NoChoiceCardOrImage: Story = {
 	},
 };
 
+export const WithMixedDestinations: Story = {
+	name: 'With destinationUrl on all choice cards',
+	render: (args) => (
+		<BannerComponent {...args}>
+			<BannerLogo />
+			<BannerContent>
+				<BannerHeader />
+				<BannerBody />
+			</BannerContent>
+			<BannerChoiceCards />
+			<BannerCtas />
+			<BannerCloseButton />
+		</BannerComponent>
+	),
+	args: {
+		...WithThreeTierChoiceCards.args,
+		choiceCardsSettings: choiceCardsWithMixedDestinations as any,
+	},
+};
+
+export const WithReminder: Story = {
+	name: 'With contributions reminder',
+	render: (args) => (
+		<BannerComponent {...args}>
+			<BannerLogo />
+			<BannerContent>
+				<BannerHeader />
+				<BannerBody />
+				<BannerReminder />
+			</BannerContent>
+			<BannerCtas />
+			<BannerVisual />
+			<BannerCloseButton />
+		</BannerComponent>
+	),
+	args: {
+		...Default.args,
+		content: contentWithReminder as any,
+	},
+};
+
 export const CollapsableWithThreeTierChoiceCards: Story = {
 	name: 'Collapsable with three tier choice cards',
 	render: (args) => (
@@ -624,8 +708,8 @@ export const CollapsableWithThreeTierChoiceCards: Story = {
 			<BannerLogo />
 			<BannerContent>
 				<BannerHeader />
-				<BannerTicker />
 				<BannerArticleCount />
+				<BannerTicker />
 				<BannerBody />
 			</BannerContent>
 			<BannerChoiceCards />
@@ -663,27 +747,6 @@ export const CollapsableWithMainImage: Story = {
 	},
 };
 
-export const WithReminder: Story = {
-	name: 'With contributions reminder',
-	render: (args) => (
-		<BannerComponent {...args}>
-			<BannerLogo />
-			<BannerContent>
-				<BannerHeader />
-				<BannerBody />
-				<BannerReminder />
-			</BannerContent>
-			<BannerCtas />
-			<BannerVisual />
-			<BannerCloseButton />
-		</BannerComponent>
-	),
-	args: {
-		...Default.args,
-		content: contentWithReminder as any,
-	},
-};
-
 export const CollapsableMaybeLaterVariant: Story = {
 	name: 'Collapsable - Maybe later variant',
 	render: (args) => (
@@ -714,8 +777,8 @@ export const CollapsableWithThreeTierChoiceCardsMaybeLaterVariant: Story = {
 			<BannerLogo />
 			<BannerContent>
 				<BannerHeader />
-				<BannerTicker />
 				<BannerArticleCount />
+				<BannerTicker />
 				<BannerBody />
 			</BannerContent>
 			<BannerChoiceCards />
@@ -729,68 +792,5 @@ export const CollapsableWithThreeTierChoiceCardsMaybeLaterVariant: Story = {
 			...tracking,
 			abTestVariant: 'COLLAPSABLE_V2_MAYBE_LATER',
 		},
-	},
-};
-
-export const WithMixedDestinations: Story = {
-	name: 'With destinationUrl on all choice cards',
-	render: (args) => (
-		<BannerComponent {...args}>
-			<BannerLogo />
-			<BannerContent>
-				<BannerHeader />
-				<BannerBody />
-			</BannerContent>
-			<BannerChoiceCards />
-			<BannerCtas />
-			<BannerCloseButton />
-		</BannerComponent>
-	),
-	args: {
-		...WithThreeTierChoiceCards.args,
-		choiceCardsSettings: choiceCardsWithMixedDestinations as any,
-	},
-};
-
-export const DesignThreeAnimatedHeaderImage: Story = {
-	name: 'With animated header image',
-	render: (args) => (
-		<BannerComponent {...args}>
-			<BannerLogo />
-			<BannerContent>
-				<BannerHeader />
-				<BannerBody />
-			</BannerContent>
-			<BannerChoiceCards />
-			<BannerCtas />
-			<BannerCloseButton />
-		</BannerComponent>
-	),
-	args: {
-		...WithThreeTierChoiceCards.args,
-		content: contentNoHeading as any,
-		design: {
-			...design,
-			headerImage: {
-				mobileUrl:
-					'https://uploads.guim.co.uk/2024/05/13/GuardianLogo.svg',
-				tabletUrl:
-					'https://uploads.guim.co.uk/2024/05/13/GuardianLogo.svg',
-				desktopUrl:
-					'https://uploads.guim.co.uk/2024/05/13/GuardianLogo.svg',
-				altText: 'Guardian: News provider of the year',
-			},
-			visual: {
-				kind: 'ChoiceCards',
-				buttonColour: stringToHexColour('FFFFFF'),
-			},
-			colours: {
-				...design.colours,
-				basic: {
-					...design.colours.basic,
-					background: stringToHexColour('FFFFFF'),
-				},
-			},
-		} as any,
 	},
 };

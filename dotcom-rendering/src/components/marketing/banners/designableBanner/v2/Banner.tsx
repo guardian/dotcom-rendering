@@ -475,23 +475,13 @@ const Banner = ({
 	// Create tracking handlers that always run
 	const componentIds = getComponentIds('designable-banner');
 	const trackingHandlers = useMemo(() => {
-		if (!tracking || !submitComponentEvent) {
-			return {
-				onCloseClick: () => {},
-				onCollapseClick: () => {},
-				onExpandClick: () => {},
-				onCtaClick: () => {},
-				onSecondaryCtaClick: () => {},
-			};
-		}
-
 		const clickHandlerFor = (componentId: string, close: boolean) => {
 			return (): void => {
 				const componentClickEvent = createClickEventFromTracking(
 					tracking,
 					componentId,
 				);
-				void submitComponentEvent(componentClickEvent);
+				void submitComponentEvent?.(componentClickEvent);
 				if (close) {
 					// This would need the onClose function from withCloseable HOC
 					// For now, just handle tracking
@@ -636,8 +626,8 @@ const Banner = ({
 				role="alert"
 				tabIndex={-1}
 				css={styles.outerContainer(
-					settings?.containerSettings?.backgroundColour ?? '',
-					settings?.containerSettings?.textColor ?? 'inherit',
+					settings?.containerSettings.backgroundColour ?? '',
+					settings?.containerSettings.textColor ?? 'inherit',
 				)}
 				className={contextClassName}
 			>

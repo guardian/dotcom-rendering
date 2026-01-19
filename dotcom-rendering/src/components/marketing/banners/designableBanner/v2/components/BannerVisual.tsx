@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { between, from } from '@guardian/source/foundations';
+import { between, from, space } from '@guardian/source/foundations';
 import type { Image } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ImageAttrs } from '../../../../shared/ResponsiveImage';
 import { ResponsiveImage } from '../../../../shared/ResponsiveImage';
@@ -42,10 +42,27 @@ const getStyles = (isHeaderImage = false) => {
 	}
 	return {
 		container: css`
-			display: block;
-			width: calc(100% + 20px);
-			margin-left: -10px;
-			margin-right: -10px;
+			grid-area: main-image;
+
+			margin-left: ${space[2]}px;
+			margin-right: ${space[2]}px;
+
+			${from.phablet} {
+				max-width: 492px;
+				justify-self: center;
+			}
+			${from.desktop} {
+				margin-top: ${space[6]}px;
+				padding-left: ${space[2]}px;
+				justify-self: end;
+			}
+			${between.desktop.and.wide} {
+				max-width: 380px;
+			}
+			${from.wide} {
+				max-width: 485px;
+				align-self: start;
+			}
 
 			img {
 				width: 100%;
@@ -136,11 +153,12 @@ export const BannerVisual = ({
 	}
 
 	return (
-		<ResponsiveImage
-			baseImage={baseImage}
-			images={images}
-			bannerId={bannerSettings.bannerId}
-			cssOverrides={styles.container}
-		/>
+		<div css={styles.container}>
+			<ResponsiveImage
+				baseImage={baseImage}
+				images={images}
+				bannerId={bannerSettings.bannerId}
+			/>
+		</div>
 	);
 };
