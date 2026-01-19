@@ -7,6 +7,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { palette } from '../palette';
 import type { ProductBlockElement } from '../types/content';
+import { CarouselNavigationButtons } from './CarouselNavigationButtons';
 import { ProductCarouselCard } from './ProductCarouselCard';
 import { Subheading } from './Subheading';
 
