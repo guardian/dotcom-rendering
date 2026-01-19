@@ -252,11 +252,11 @@ export const ArticleMetaApps = ({
 	const shouldShowLiveblogNotifications =
 		isLiveBlog && !!pageId && !!headline;
 
-	const shouldShowListenToArticleButton =
-		!!pageId && !(isLiveBlog || isPicture || isGallery || isVideo);
-
 	const isImmersiveOrAnalysisWithMultipleAuthors =
 		(isAnalysis || isImmersive) && !!byline && isUndefined(soleContributor);
+
+	const shouldShowListenToArticleButton =
+		!!pageId && !(isLiveBlog || isPicture || isGallery || isVideo);
 
 	return (
 		<div
