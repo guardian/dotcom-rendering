@@ -149,6 +149,7 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 	};
 
 	/**
+	 * --- COPIED FROM ScrollableCarousel ---
 	 * Throttle scroll events to optimise performance. As we're only using this
 	 * to toggle button state as the carousel is scrolled we don't need to
 	 * handle every event. This function ensures the callback is only called
@@ -166,8 +167,9 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 	};
 
 	/**
-	 * Updates state of navigation buttons based on carousel's scroll position.
+	 * --- COPIED FROM ScrollableCarousel ---
 	 *
+	 * Updates state of navigation buttons based on carousel's scroll position.
 	 * This function checks the current scroll position of the carousel and sets
 	 * the styles of the previous and next buttons accordingly. The button state
 	 * is toggled when the midpoint of the first or last card has been scrolled
