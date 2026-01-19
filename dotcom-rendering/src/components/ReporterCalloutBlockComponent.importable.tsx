@@ -44,7 +44,7 @@ const subtitleTextHeaderStyles = css`
 	padding-bottom: ${space[3]}px;
 `;
 
-const linkStyles = css`
+const reporterCalloutFieldStyles = css`
 	a {
 		color: ${palette('--article-link-text')};
 		text-decoration-color: ${palette('--article-link-border')};
@@ -55,25 +55,21 @@ const linkStyles = css`
 	a:active {
 		text-decoration-color: currentColor;
 	}
-`;
-
-const calloutStyles = css`
 	padding-bottom: ${space[4]}px;
 	${article17}
 	b {
 		font-weight: bold;
 	}
 `;
-
 const reporterCalloutWrapperStyles = css`
-	padding-bottom: ${space[8]}px;
+	padding-bottom: ${space[4]}px;
 	margin-left: ${space[2]}px;
 	margin-right: ${space[2]}px;
 `;
 
 const dangerouslyRenderField = (field?: string, title?: string) => {
 	return field ? (
-		<div css={[linkStyles, calloutStyles]}>
+		<div css={reporterCalloutFieldStyles}>
 			{!!title && <h4 css={subtitleTextHeaderStyles}>{title}</h4>}
 			<div
 				dangerouslySetInnerHTML={{
@@ -116,11 +112,11 @@ export const ReporterCalloutBlockComponent = ({
 				theme={expandingWrapperTheme}
 				collapsedHeight={'160px'}
 			>
-				<div style={reporterCalloutWrapperStyles}>
+				<div css={reporterCalloutWrapperStyles}>
 					<div
 						css={promptStyles}
 						style={{
-							color: palette('--callout-prompt'),
+							color: palette('--expandable-atom-text-hover'),
 						}}
 					>
 						{title}

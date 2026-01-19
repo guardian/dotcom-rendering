@@ -47,6 +47,13 @@ export const Default: Story = {
 	decorators: [splitTheme([defaultFormat])],
 };
 
+export const DefaultSport: Story = {
+	args: {
+		callout: defaultCallout,
+	},
+	decorators: [splitTheme([{ ...defaultFormat, theme: Pillar.Sport }])],
+};
+
 export const MinimalContacts: Story = {
 	args: {
 		callout: {
