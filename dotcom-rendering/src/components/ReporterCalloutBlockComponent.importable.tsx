@@ -116,6 +116,7 @@ export const ReporterCalloutBlockComponent = ({
 					<div
 						css={promptStyles}
 						style={{
+							// reuse atom styling for now unless we get special callout designs
 							color: palette('--expandable-atom-text-hover'),
 						}}
 					>
