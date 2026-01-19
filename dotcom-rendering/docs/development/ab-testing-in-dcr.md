@@ -19,7 +19,7 @@ Add your A/B tests to the `abTests` array in the `abTests.ts` file. Each test sh
 		'Test something interesting on the site',
 	owners: ['webex@guardian.co.uk'],
 	status: 'ON',
-	expirationDate: '2050-12-30',
+	expirationDate: '2025-12-30',
 	type: 'client',
 	audienceSize: 10 / 100,
 	groups: ['control', 'variant'],
@@ -39,7 +39,7 @@ A/B tests should be prefixed with the team associated with the test, for example
 
 ##### Test Size and Groups
 
-The `audienceSize` is the size of the whole test and is divided between the test groups that you specify. The "resolution" of sizing is down to 0.1%, so groups will be rounded to the nearest 0.1%.
+The `audienceSize` is the size of the whole test and is divided between the test groups that you specify. For example, consider an audience size of 10% (`10 / 100`) with two test groups: control and variant. The control and variant test groups will each be allocated 5%. The "resolution" of sizing is down to 0.1%, so groups will be rounded to the nearest 0.1%.
 
 Convention is to have groups named control and variant, but you can name them as you wish.
 
@@ -55,11 +55,11 @@ There's a limit of the number of concurrent server-side tests that can be run, e
 
 ##### Test Expiration
 
-A/B tests should have an expiration date set in the future. This is to ensure that tests do not run indefinitely.
+A/B tests should have an expiration date set in the future. This is to ensure that tests do not run indefinitely. The duration of a test should be determined by how long we believe it will need to run in order to reach a statistically significant result - if you're unsure how long this is we'd recommend reaching out to our Data Analysts. Adding a buffer of an additional +2 weeks beyond the expected completion date will ensure tests do not end unexpectedly before we have a statistically significant result.
 
 Expired tests will cause the A/B testing validation to fail, and will not be deployed.
 
-Tests that expire while they are are in-flight will not be served by fastly, and should be removed from the `abTest.ts` file as soon as possible.
+Tests that expire while they are are in-flight will not be served by Fastly, and should be removed from the `abTest.ts` file as soon as possible.
 
 ##### Audience Spaces
 
@@ -83,9 +83,9 @@ The test will appear in https://frontend.gutools.co.uk/analytics/ab-testing once
 
 Once your A/B test has been configured you can conditionally put your code changes behind an A/B test participation. The instructions below describe how to do this, and are applicable to both client and server side tests.
 
-### 3. Ways to check your participation
+### 3. Ways to check A/B test participation
 
-#### In React Components
+#### In React Components (DCR)
 
 > [!NOTE]
 > You should use the `useBetaAB` hook described below in React components **_only_**.
@@ -131,7 +131,7 @@ const someComponent = () => {
 }
 ```
 
-#### In client side code (outside of React components)
+#### In client side code outside of React components (DCR)
 
 The A/B test API described above is also available on the window at `window.guardian.modules.abTests`. **This _only_ works client side**.
 
@@ -153,15 +153,15 @@ const isInVariantGroup = window.guardian.modules.abTests.isUserInTestGroup(
 );
 ```
 
-#### In server side code
+#### In server side code (DCR)
 
-Server side tests are also available in the CAPI object e.g. `CAPIArticle.config.serverSideABTests`.
+Server side test participations are available in the CAPI object e.g. `CAPIArticle.config.serverSideABTests`.
 
-#### In Frontend
+#### In server side code (Frontend)
 
 See the [Frontend A/B testing class](https://github.com/guardian/frontend/blob/main/common/app/ab/ABTests.scala) with methods to get user participations.
 
-#### In the response headers
+#### In the response headers (Debugging)
 
 Fastly sends a user's AB participations via the `x-gu-server-ab-tests` response header (server side A/B tests) and `gu_client_ab_tests` response cookie (client side A/B tests).
 
