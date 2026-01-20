@@ -324,19 +324,23 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 					data-heatphan-type="carousel"
 					onFocus={scrollToCardOnFocus}
 				>
-					{products.map((product: ProductBlockElement) => (
-						<li
-							key={
-								product.productCtas[0]?.url ?? product.elementId
-							}
-							css={[subgridStyles, leftBorderStyles]}
-						>
-							<ProductCarouselCard
-								product={product}
-								format={format}
-							/>
-						</li>
-					))}
+					{products.map(
+						(product: ProductBlockElement, index: number) => (
+							<li
+								key={
+									product.productCtas[0]?.url ??
+									product.elementId
+								}
+								css={[subgridStyles, leftBorderStyles]}
+								data-component={`at-a-glance-carousel-card-${index}`}
+							>
+								<ProductCarouselCard
+									product={product}
+									format={format}
+								/>
+							</li>
+						),
+					)}
 				</ol>
 				<CarouselNavigationButtons
 					previousButtonEnabled={previousButtonEnabled}
