@@ -208,8 +208,6 @@ export const StorylinesSectionContent = ({
 				component: {
 					componentType: 'STORYLINES',
 					id: `${storylinesContent?.tag} storylines`,
-					products: [],
-					labels: [],
 				},
 				action: 'CLICK',
 				value: `${currentId} -> ${newStorylineId}`,
