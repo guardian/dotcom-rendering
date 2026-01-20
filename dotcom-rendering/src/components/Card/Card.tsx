@@ -1259,10 +1259,10 @@ export const Card = ({
 					mediaSize={mediaSize}
 					isBetaContainer={isBetaContainer}
 					mediaPositionOnDesktop={
-						image ? mediaPositionOnDesktop : 'none'
+						media ? mediaPositionOnDesktop : 'none'
 					}
 					mediaPositionOnMobile={
-						image ? mediaPositionOnMobile : 'none'
+						media ? mediaPositionOnMobile : 'none'
 					}
 					padContent={determinePadContent(
 						isMediaCardOrNewsletter,
