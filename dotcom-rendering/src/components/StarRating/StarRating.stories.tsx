@@ -1,101 +1,68 @@
-// ----- Imports ----- //
-import type { Meta } from '@storybook/react-webpack5';
-import { StarRating } from './StarRating';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { type Props, StarRating } from './StarRating';
 
-// ----- Meta ----- //
-
-const meta: Meta<typeof StarRating> = {
-	title: 'components/StarRating',
+const meta = {
 	component: StarRating,
-};
+	title: 'Components/StarRating',
+	render: (args) => <AllRatings {...args} />,
+	parameters: {
+		chromatic: {
+			disableSnapshot: true,
+		},
+	},
+} satisfies Meta<typeof StarRating>;
 
 export default meta;
+type Story = StoryObj<typeof StarRating>;
 
-// ----- Stories ----- //
+const Ratings = [0, 1, 2, 3, 4, 5] as const;
 
-export const AllSizeStars = () => (
-	<>
-		<h1>Small</h1>
-		<br />
-		<StarRating rating={3} size="small" />
-		<br />
-		<br />
-		<h1>Large</h1>
-		<br />
-		<StarRating rating={3} size="large" />
-	</>
-);
-AllSizeStars.storyName = 'All Sizes';
+const AllRatings = (args: Props) => {
+	return Ratings.map((x) => <StarRating {...args} rating={x} key={x} />);
+};
 
-export const SmallStory = () => (
-	<>
-		<h1>0 Star</h1>
-		<StarRating rating={0} size="small" />
-		<br />
-		<h1>1 Star</h1>
-		<StarRating rating={1} size="small" />
-		<br />
-		<h1>2 Star</h1>
-		<StarRating rating={2} size="small" />
-		<br />
-		<h1>3 Star</h1>
-		<StarRating rating={3} size="small" />
-		<br />
-		<h1>4 Star</h1>
-		<StarRating rating={4} size="small" />
-		<br />
-		<h1>5 Star</h1>
-		<StarRating rating={5} size="small" />
-	</>
-);
-SmallStory.storyName = 'Small Stars';
+export const SmallStars: Story = {
+	args: {
+		size: 'small',
+	},
+};
 
-export const LargeStory = () => (
-	<>
-		<h1>0 Star</h1>
-		<StarRating rating={0} size="large" />
-		<br />
-		<h1>1 Star</h1>
-		<StarRating rating={1} size="large" />
-		<br />
-		<h1>2 Star</h1>
-		<StarRating rating={2} size="large" />
-		<br />
-		<h1>3 Star</h1>
-		<StarRating rating={3} size="large" />
-		<br />
-		<h1>4 Star</h1>
-		<StarRating rating={4} size="large" />
-		<br />
-		<h1>5 Star</h1>
-		<StarRating rating={5} size="large" />
-	</>
-);
-LargeStory.storyName = 'Large stars';
+export const MediumStars: Story = {
+	args: {
+		size: 'medium',
+	},
+};
 
-export const StarColours = () => (
-	<>
-		<div style={{ backgroundColor: '#f6dde1' }}>
-			<p>Stars take the colour of the parent by default</p>
-			<div style={{ color: 'red' }}>
-				<StarRating rating={0} size="large" />
-			</div>
-			<div style={{ color: 'orange' }}>
-				<StarRating rating={1} size="large" />
-			</div>
-			<div style={{ color: 'yellow' }}>
-				<StarRating rating={2} size="large" />
-			</div>
-			<div style={{ color: 'green' }}>
-				<StarRating rating={3} size="large" />
-			</div>
-			<div style={{ color: 'blue' }}>
-				<StarRating rating={4} size="large" />
-			</div>
-			<div style={{ color: 'purple' }}>
-				<StarRating rating={5} size="large" />
-			</div>
-		</div>
-	</>
-);
-StarColours.storyName = 'Star colours';
+export const LargeStars: Story = {
+	args: {
+		size: 'large',
+	},
+};
+
+export const StarsWithSmallPadding: Story = {
+	args: {
+		size: 'large',
+		paddingSize: 'small',
+	},
+};
+
+export const StarsWithMediumPadding: Story = {
+	args: {
+		size: 'large',
+		paddingSize: 'medium',
+	},
+};
+
+export const StarsWithLargePadding: Story = {
+	args: {
+		size: 'large',
+		paddingSize: 'large',
+	},
+};
+
+export const StarsWithAlternativeTheme: Story = {
+	args: {
+		size: 'large',
+		useAlternativeTheme: true,
+	},
+};

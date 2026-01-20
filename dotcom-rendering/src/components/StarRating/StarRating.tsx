@@ -1,41 +1,152 @@
 import { css } from '@emotion/react';
+import { from, space } from '@guardian/source/foundations';
 import { SvgStar, SvgStarOutline } from '@guardian/source/react-components';
+import { palette } from '../../palette';
 import type { StarRating as Rating, RatingSizeType } from '../../types/content';
 
-const padding = css`
-	padding: 0 2px;
+const container = css`
+	display: flex;
+	flex-direction: row;
+`;
+
+const starBackground = css`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+`;
+
+const filledStarColor = css`
+	background-color: ${palette('--star-rating-background')};
+`;
+const emptyStarColor = css`
+	background-color: ${palette('--star-rating-empty-background')};
+`;
+
+const emptyStarAltColor = css`
+	background-color: ${palette('--star-rating-empty-alt-background')};
 `;
 
 const determineSize = (size: RatingSizeType) => {
 	switch (size) {
 		case 'small':
 			return css`
+				column-gap: 1px;
+
+				div {
+					width: 18px;
+					height: 18px;
+				}
+
 				svg {
-					width: 1.3em;
-					height: 1.3em;
-					margin: 0 -1px -2px;
+					width: ${space[4]}px;
+					height: ${space[4]}px;
 				}
 			`;
+
+		case 'medium':
+			return css`
+				column-gap: 2px;
+
+				div {
+					width: 22px;
+					height: 22px;
+				}
+
+				svg {
+					width: ${space[5]}px;
+					height: ${space[5]}px;
+				}
+			`;
+
 		case 'large':
 			return css`
+				column-gap: 2px;
+
+				div {
+					width: 28px;
+					height: 28px;
+				}
+
 				svg {
-					width: 1.6em;
-					height: 1.6em;
-					margin: 0 -2px -2px;
+					width: ${space[6]}px;
+					height: ${space[6]}px;
 				}
 			`;
 	}
 };
 
-type Props = {
-	rating: Rating;
-	size: RatingSizeType;
+type PaddingSizeType = 'small' | 'medium' | 'large' | 'none';
+
+const determinePaddingTop = (size: PaddingSizeType) => {
+	switch (size) {
+		case 'none':
+			return css`
+				padding-top: 0;
+			`;
+		case 'small':
+			return css`
+				padding-top: ${space[1]}px;
+			`;
+
+		case 'medium':
+			return css`
+				padding-top: ${space[1]}px;
+
+				${from.tablet} {
+					padding-top: ${space[2]}px;
+				}
+			`;
+		case 'large':
+			return css`
+				padding-top: ${space[2]}px;
+
+				${from.tablet} {
+					padding-top: ${space[3]}px;
+				}
+			`;
+	}
 };
 
-export const StarRating = ({ rating, size }: Props) => (
-	<div css={[determineSize(size), padding]}>
+export type Props = {
+	rating: Rating;
+	size: RatingSizeType;
+	paddingSize?: PaddingSizeType;
+	/**
+	 * The alternative theme is to account for star ratings that appear on
+	 *  lighter / translucent backgrounds (e.g. feature cards).
+	 *  The alternative theme ensures we meet AA accessibility standards.
+	 */
+	useAlternativeTheme?: boolean;
+};
+
+export const StarRating = ({
+	rating,
+	size,
+	paddingSize = 'small',
+	useAlternativeTheme = false,
+}: Props) => (
+	<div
+		css={[determineSize(size), determinePaddingTop(paddingSize), container]}
+	>
 		{Array.from({ length: 5 }, (_, i) =>
-			i < rating ? <SvgStar key={i} /> : <SvgStarOutline key={i} />,
+			i < rating ? (
+				<div key={i} css={[starBackground, filledStarColor]}>
+					<SvgStar />
+				</div>
+			) : (
+				<div
+					key={i}
+					css={[
+						starBackground,
+						useAlternativeTheme
+							? emptyStarAltColor
+							: emptyStarColor,
+					]}
+				>
+					<SvgStarOutline />
+				</div>
+			),
 		)}
 	</div>
 );

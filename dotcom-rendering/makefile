@@ -42,8 +42,8 @@ prod:
 	@echo '' # just a spacer
 	NODE_ENV=production node dist/server.js
 
-ci: export DISABLE_LOGGING_AND_METRICS = true
-ci: prod
+prod-local: export DISABLE_LOGGING_AND_METRICS = true
+prod-local: prod
 
 # dev #########################################
 
