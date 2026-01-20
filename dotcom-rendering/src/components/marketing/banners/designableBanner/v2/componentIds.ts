@@ -1,6 +1,19 @@
 import type { BannerId } from '../../common/types';
 
-export const getComponentIds = (bannerId: BannerId) => ({
+export const getComponentIds = (
+	bannerId: BannerId,
+): {
+	close: string;
+	cta: string;
+	secondaryCta: string;
+	notNow: string;
+	signIn: string;
+	reminderCta: string;
+	reminderSet: string;
+	reminderClose: string;
+	collapse: string;
+	expand: string;
+} => ({
 	close: `${bannerId} : close`,
 	cta: `${bannerId} : cta`,
 	secondaryCta: `${bannerId} : secondary-cta`,
