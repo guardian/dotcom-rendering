@@ -45,6 +45,7 @@ const carouselStyles = css`
 	scroll-behavior: auto;
 	overscroll-behavior-x: contain;
 	overscroll-behavior-y: auto;
+	scroll-snap-type: x mandatory;
 
 	${from.mobileLandscape} {
 		padding: 0 ${horizontalPaddingMobileLandscape}px;

@@ -4,7 +4,7 @@ import { enhanceHostedContentType } from '../types/hostedContent';
 import { makePrefetchHeader } from './lib/header';
 import { renderHtml } from './render.hostedContent.web';
 
-export const handleHostedContent: RequestHandler = ({ body }, res) => {
+export const handleAppsHostedContent: RequestHandler = ({ body }, res) => {
 	const frontendData = validateAsFEHostedContent(body);
 	const hostedContent = enhanceHostedContentType(frontendData);
 	const { html, prefetchScripts } = renderHtml({

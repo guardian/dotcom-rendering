@@ -40,7 +40,7 @@ const decideTitle = ({ theme, frontendData }: Article): string => {
 export const renderHtml = ({
 	article,
 }: Props): { html: string; prefetchScripts: string[] } => {
-	const { design, frontendData } = article;
+	const { design, frontendData, theme } = article;
 	const NAV = {
 		...extractNAV(frontendData.nav),
 		selectedPillar: getCurrentPillar(frontendData),
@@ -194,6 +194,7 @@ window.twttr = (function(d, s, id) {
 			(design === ArticleDesign.FullPageInteractive ||
 				design === ArticleDesign.Interactive) &&
 			isBeforeInteractiveDarkModeSupport,
+		articleTheme: theme,
 	});
 
 	return { html: pageHtml, prefetchScripts };

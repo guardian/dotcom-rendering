@@ -59,13 +59,9 @@ const consoleLayout: Layout = {
 					typeof fields.response.status === 'number'
 						? fields.response.status
 						: '[status missing]';
-				const {
-					platform = '[platform missing]',
-					pageId = '[pageId missing]',
-					type: requestType = '[request type missing]',
-				} = fields.request;
+				const requestPath = fields.request.path ?? '[path missing]';
 
-				return `${status} response for ${platform} ${requestType}: ${pageId}`;
+				return `${status} response for ${requestPath}`;
 			} else {
 				return logEvent.data;
 			}
@@ -111,9 +107,10 @@ const enableLog4js: Configuration = {
 		},
 	},
 	categories: {
-		default: { appenders: ['out', 'fileAppender'], level: 'info' },
+		default: { appenders: ['out'], level: 'off' },
 		production: { appenders: ['out', 'fileAppender'], level: 'info' },
-		development: { appenders: ['console'], level: 'info' },
+		code: { appenders: ['out', 'fileAppender'], level: 'debug' },
+		development: { appenders: ['console'], level: 'debug' },
 	},
 	// log4js cluster mode handling does not work as it prevents
 	// logs from processes other than the main process from
@@ -139,7 +136,17 @@ if (process.env.DISABLE_LOGGING_AND_METRICS === 'true') {
 	configure(enableLog4js);
 }
 
-export const logger =
-	process.env.DISABLE_LOGGING_AND_METRICS === 'true'
-		? getLogger('off')
-		: getLogger(process.env.NODE_ENV);
+const getLoggerCategory = (): string => {
+	if (process.env.DISABLE_LOGGING_AND_METRICS === 'true') {
+		return 'off';
+	}
+	if (process.env.NODE_ENV === 'development') {
+		return 'development';
+	}
+	if (process.env.NODE_ENV === 'production') {
+		return process.env.GU_STAGE === 'CODE' ? 'code' : 'production';
+	}
+	return 'default';
+};
+
+export const logger = getLogger(getLoggerCategory());

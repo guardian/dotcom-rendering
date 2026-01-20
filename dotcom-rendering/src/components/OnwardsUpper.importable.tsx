@@ -7,6 +7,7 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
+import { useBetaAB } from '../lib/useAB';
 import { useIsHorizontalScrollingSupported } from '../lib/useIsHorizontalScrollingSupported';
 import { palette } from '../palette';
 import type { OnwardsSource } from '../types/onwards';
@@ -226,8 +227,15 @@ export const OnwardsUpper = ({
 	webURL,
 	isInStarRatingVariant,
 }: Props) => {
-	const isHorizontalScrollingSupported = useIsHorizontalScrollingSupported();
+	const abTests = useBetaAB();
+	const isInOnwardsAbTestVariant =
+		renderingTarget === 'Web' &&
+		abTests?.isUserInTestGroup(
+			'fronts-and-curation-onward-journeys',
+			'variant',
+		);
 
+	const isHorizontalScrollingSupported = useIsHorizontalScrollingSupported();
 	if (!isHorizontalScrollingSupported) return null;
 
 	// Related content can be a collection of articles based on
@@ -236,7 +244,7 @@ export const OnwardsUpper = ({
 
 	// In this context, Blog tags are treated the same as Series tags
 	const seriesTag = tags.find(
-		(tag) => tag.type === 'Series' || tag.type === 'Blog',
+		({ type }) => type === 'Series' || type === 'Blog',
 	);
 
 	let url: string | undefined;
@@ -319,21 +327,17 @@ export const OnwardsUpper = ({
 	const showCuratedContainer =
 		!!curatedDataUrl && !isPaidContent && canHaveCuratedContent;
 
+	const isGalleryArticle = format.design === ArticleDesign.Gallery;
+
 	return (
 		<div css={onwardsWrapper}>
 			{!!url && (
 				<Section
 					fullWidth={true}
 					borderColour={palette('--article-section-border')}
-					padSides={
-						format.design === ArticleDesign.Gallery ? false : true
-					}
-					showTopBorder={
-						format.design === ArticleDesign.Gallery ? false : true
-					}
-					showSideBorders={
-						format.design === ArticleDesign.Gallery ? false : true
-					}
+					padSides={!isGalleryArticle}
+					showTopBorder={!isGalleryArticle}
+					showSideBorders={!isGalleryArticle}
 				>
 					<FetchOnwardsData
 						url={url}
@@ -344,7 +348,8 @@ export const OnwardsUpper = ({
 						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						isAdFreeUser={isAdFreeUser}
-						containerPosition={'first'}
+						containerPosition="first"
+						isInOnwardsAbTestVariant={isInOnwardsAbTestVariant}
 						webURL={webURL}
 						isInStarRatingVariant={isInStarRatingVariant}
 					/>
@@ -354,15 +359,9 @@ export const OnwardsUpper = ({
 				<Section
 					fullWidth={true}
 					borderColour={palette('--article-section-border')}
-					showTopBorder={
-						format.design === ArticleDesign.Gallery ? false : true
-					}
-					showSideBorders={
-						format.design === ArticleDesign.Gallery ? false : true
-					}
-					padSides={
-						format.design === ArticleDesign.Gallery ? false : true
-					}
+					showTopBorder={!isGalleryArticle}
+					showSideBorders={!isGalleryArticle}
+					padSides={!isGalleryArticle}
 				>
 					<FetchOnwardsData
 						url={curatedDataUrl}

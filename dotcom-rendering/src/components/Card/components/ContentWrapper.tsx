@@ -149,6 +149,7 @@ type Props = {
 	isBetaContainer: boolean;
 	mediaPositionOnDesktop: MediaPositionType;
 	mediaPositionOnMobile: MediaPositionType;
+	isInOnwardsAbTestVariant: boolean;
 	padContent?: 'small' | 'large';
 };
 
@@ -159,6 +160,7 @@ export const ContentWrapper = ({
 	isBetaContainer,
 	mediaPositionOnDesktop,
 	mediaPositionOnMobile,
+	isInOnwardsAbTestVariant,
 	padContent,
 }: Props) => {
 	const mediaDirectionDesktop = getMediaDirection(mediaPositionOnDesktop);
@@ -176,6 +178,7 @@ export const ContentWrapper = ({
 					}),
 				padContent &&
 					!isBetaContainer &&
+					!isInOnwardsAbTestVariant &&
 					css`
 						padding: ${space[paddingSpace]}px;
 					`,

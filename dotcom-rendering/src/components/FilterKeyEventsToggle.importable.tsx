@@ -57,6 +57,7 @@ export const FilterKeyEventsToggle = ({ filterKeyEvents, id }: Props) => {
 			<span id={id} />
 			<div css={toggleWrapperStyles}>
 				<ToggleSwitch
+					id={`${id}-switch`}
 					label="Show key events only"
 					checked={checked}
 					onClick={() => handleClick()}

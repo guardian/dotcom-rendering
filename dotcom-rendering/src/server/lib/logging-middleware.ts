@@ -26,6 +26,7 @@ const hasConfig = (body: unknown): body is { config: ConfigType } => {
  * completed.
  */
 export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
+	const start = process.hrtime.bigint();
 	const headerValue = req.headers['x-gu-xid'];
 	const requestId = Array.isArray(headerValue) ? headerValue[0] : headerValue;
 	const loggerState = {
@@ -42,9 +43,7 @@ export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 	};
 
 	res.on('finish', () => {
-		const { request, error } = loggingStore.getStore() ?? {};
-
-		if (!request?.type) return;
+		const { error } = loggingStore.getStore() ?? {};
 
 		const logArgs = {
 			response: {
@@ -61,8 +60,22 @@ export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 		if (error?.message ?? error?.stack) {
 			logger.error('Error rendering page', logArgs);
 		} else {
-			logger.info('Rendered page', logArgs);
+			logger.debug('Rendered page', logArgs);
 		}
+	});
+
+	res.on('close', () => {
+		loggingStore.run(loggerState, () => {
+			if (!res.writableFinished) {
+				const durationMs = Number(
+					(process.hrtime.bigint() - start) / 1000000n,
+				);
+				logger.error(
+					`Connection closed before the response was sent, approximate time spent so far: ${durationMs}ms`,
+					{ durationMs },
+				);
+			}
+		});
 	});
 
 	loggingStore.run(loggerState, () => {
