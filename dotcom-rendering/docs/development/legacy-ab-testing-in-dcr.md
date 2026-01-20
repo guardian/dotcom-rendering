@@ -3,11 +3,7 @@
 > [!NOTE]
 > The documentation below is for the **LEGACY** AB test framework. This framework will be deprecated. It is recommended that any AB tests introduced now use the new framework, documented [here](./ab-testing-in-dcr.md).
 
-# AB Testing in DCR
-
 This document explains how to set up A/B tests in Dotcom Rendering (DCR).
-
-There's a new beta A/B testing framework in DCR that supports both client-side and server-side tests with the same API. It's currently in it's beta/testing phase, so please get in touch with the commercial-dev team if you'd like to use it. [Details on how to use the new framework are at the bottom of this document](#beta-ab-test-framework).
 
 ## Client-side A/B tests
 
