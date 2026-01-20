@@ -39,7 +39,6 @@ export type HighlightsCardProps = {
 const container = css`
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
 	height: 100%;
 	column-gap: ${space[2]}px;
 	/** Relative positioning is required to absolutely position the card link overlay */
@@ -72,6 +71,10 @@ const container = css`
 	${from.desktop} {
 		width: 300px;
 	}
+`;
+
+const spaceBetween = css`
+	justify-content: space-between;
 `;
 
 const hoverStyles = css`
@@ -139,9 +142,26 @@ export const HighlightsCard = ({
 }: HighlightsCardProps) => {
 	const isMediaCard = isMedia(format);
 
+	/*
+	 * We do not apply space-between to the card if it has star rating as star ratings should be aligned to the headline.
+	 * We do apply it for anything else as pills should be aligned with the bottom of the image
+	 *
+	 * We also apply it for any card not in the star rating redesign test.
+	 * This can be removed once the redesign it rolled out to production
+	 * */
+	const shouldJustifyContent =
+		!isInStarRatingVariant ||
+		(isInStarRatingVariant && isUndefined(starRating));
+
 	return (
 		<FormatBoundary format={format}>
-			<div css={[container, hoverStyles]}>
+			<div
+				css={[
+					container,
+					hoverStyles,
+					shouldJustifyContent && spaceBetween,
+				]}
+			>
 				<CardLink
 					linkTo={linkTo}
 					headlineText={headlineText}

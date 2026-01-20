@@ -17,7 +17,6 @@ import type { Front } from '../types/front';
 import type { FETagType } from '../types/tag';
 import type { TagPage } from '../types/tagPage';
 import { makePrefetchHeader } from './lib/header';
-import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderFront, renderTagPage } from './render.front.web';
 
 const enhanceFront = (body: unknown): Front => {
@@ -157,11 +156,11 @@ const enhanceTagPage = (body: unknown): TagPage => {
 		},
 		branding: tagPageBranding,
 		canonicalUrl: data.canonicalUrl,
+		storylinesContent: data.storylinesContent ?? undefined,
 	};
 };
 
 export const handleFront: RequestHandler = ({ body }, res) => {
-	recordTypeAndPlatform('front');
 	const front = enhanceFront(body);
 	const { html, prefetchScripts } = renderFront({
 		front,
@@ -170,7 +169,6 @@ export const handleFront: RequestHandler = ({ body }, res) => {
 };
 
 export const handleTagPage: RequestHandler = ({ body }, res) => {
-	recordTypeAndPlatform('tagPage');
 	const tagPage = enhanceTagPage(body);
 	const { html, prefetchScripts } = renderTagPage({
 		tagPage,

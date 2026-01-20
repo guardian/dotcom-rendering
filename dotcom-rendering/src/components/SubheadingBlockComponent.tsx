@@ -54,6 +54,8 @@ export const buildElementTree =
 		} else if (node.nodeType === node.TEXT_NODE) {
 			// plain text receives no styling
 			return node.textContent;
+		} else if (node.nodeName === '#comment') {
+			return null;
 		} else {
 			logger.warn('SubheadingBlockComponent: Unknown element received', {
 				isDev: process.env.NODE_ENV !== 'production',

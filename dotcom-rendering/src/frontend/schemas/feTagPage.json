@@ -1285,105 +1285,112 @@
             "type": "string"
         },
         "storylinesContent": {
-            "type": "object",
-            "properties": {
-                "created": {
-                    "type": "string"
-                },
-                "tag": {
-                    "type": "string"
-                },
-                "storylines": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "title": {
-                                "type": "string"
-                            },
-                            "content": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "category": {
-                                            "type": "string"
-                                        },
-                                        "articles": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "url": {
-                                                        "type": "string"
-                                                    },
-                                                    "headline": {
-                                                        "type": "string"
-                                                    },
-                                                    "byline": {
-                                                        "type": "string"
-                                                    },
-                                                    "publicationTime": {
-                                                        "type": "string"
-                                                    },
-                                                    "image": {
+            "anyOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "created": {
+                            "type": "string"
+                        },
+                        "tag": {
+                            "type": "string"
+                        },
+                        "storylines": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "content": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "category": {
+                                                    "type": "string"
+                                                },
+                                                "articles": {
+                                                    "type": "array",
+                                                    "items": {
                                                         "type": "object",
                                                         "properties": {
-                                                            "src": {
+                                                            "url": {
                                                                 "type": "string"
                                                             },
-                                                            "altText": {
+                                                            "headline": {
                                                                 "type": "string"
                                                             },
-                                                            "isAvatar": {
-                                                                "type": "boolean"
+                                                            "byline": {
+                                                                "type": "string"
                                                             },
-                                                            "mediaData": {
-                                                                "$ref": "#/definitions/MainMedia"
+                                                            "publicationTime": {
+                                                                "type": "string"
+                                                            },
+                                                            "image": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "src": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "altText": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "isAvatar": {
+                                                                        "type": "boolean"
+                                                                    },
+                                                                    "mediaData": {
+                                                                        "$ref": "#/definitions/MainMedia"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "altText",
+                                                                    "isAvatar",
+                                                                    "src"
+                                                                ]
                                                             }
                                                         },
                                                         "required": [
-                                                            "altText",
-                                                            "isAvatar",
-                                                            "src"
+                                                            "headline",
+                                                            "publicationTime",
+                                                            "url"
                                                         ]
                                                     }
-                                                },
-                                                "required": [
-                                                    "headline",
-                                                    "publicationTime",
-                                                    "url"
-                                                ]
-                                            }
+                                                }
+                                            },
+                                            "required": [
+                                                "articles",
+                                                "category"
+                                            ]
                                         }
-                                    },
-                                    "required": [
-                                        "articles",
-                                        "category"
-                                    ]
-                                }
+                                    }
+                                },
+                                "required": [
+                                    "content",
+                                    "title"
+                                ]
                             }
                         },
-                        "required": [
-                            "content",
-                            "title"
-                        ]
-                    }
+                        "articleCount": {
+                            "type": "number"
+                        },
+                        "earliestArticleTime": {
+                            "type": "string"
+                        },
+                        "latestArticleTime": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "created",
+                        "storylines",
+                        "tag"
+                    ]
                 },
-                "articleCount": {
-                    "type": "number"
-                },
-                "earliestArticleTime": {
-                    "type": "string"
-                },
-                "latestArticleTime": {
-                    "type": "string"
+                {
+                    "type": "null"
                 }
-            },
-            "required": [
-                "created",
-                "storylines",
-                "tag"
             ]
         }
     },

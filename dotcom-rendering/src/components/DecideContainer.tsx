@@ -47,7 +47,6 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
-	enableHls?: boolean;
 	isInStarRatingVariant?: boolean;
 };
 
@@ -64,7 +63,6 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
-	enableHls = false,
 	isInStarRatingVariant,
 }: Props) => {
 	switch (containerType) {
@@ -252,7 +250,6 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
-					enableHls={enableHls}
 					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
@@ -267,7 +264,6 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
-					enableHls={enableHls}
 					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
