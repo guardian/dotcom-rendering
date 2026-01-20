@@ -14,7 +14,7 @@ import type {
 } from 'react';
 import { forwardRef } from 'react';
 import type { ActiveCue } from '../lib/useSubtitles';
-import { filterOutHlsSources, type Source } from '../lib/video';
+import type { Source } from '../lib/video';
 import { palette } from '../palette';
 import type { VideoPlayerFormat } from '../types/mainMedia';
 import { narrowPlayIconDiameter, PlayIcon } from './Card/components/PlayIcon';
@@ -139,7 +139,6 @@ type Props = {
 	subtitleSize?: SubtitleSize;
 	/* used in custom subtitle overlays */
 	activeCue?: ActiveCue | null;
-	enableHls: boolean;
 	letterboxed: boolean;
 	isFeatureCard: boolean;
 };
@@ -183,7 +182,6 @@ export const SelfHostedVideoPlayer = forwardRef(
 			subtitleSource,
 			subtitleSize,
 			activeCue,
-			enableHls,
 			letterboxed,
 			isFeatureCard,
 		}: Props,
@@ -203,10 +201,6 @@ export const SelfHostedVideoPlayer = forwardRef(
 		const dataLinkName = `gu-video-${videoStyle}-${
 			showPlayIcon ? 'play' : 'pause'
 		}-${atomId}`;
-
-		const filteredVideoSources = enableHls
-			? sources
-			: filterOutHlsSources(sources);
 
 		const aspectRatio = width / height;
 
@@ -251,7 +245,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					onKeyDown={handleKeyDown}
 					onError={onError}
 				>
-					{filteredVideoSources.map((source) => (
+					{sources.map((source) => (
 						<source
 							key={source.mimeType}
 							/* The start time is set to 1ms so that Safari will autoplay the video */

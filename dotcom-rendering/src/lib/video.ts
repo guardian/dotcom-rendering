@@ -20,13 +20,6 @@ export const supportedVideoFileTypes = [
 	'video/mp4', // MP4 format
 ] as const;
 
-export const filterOutHlsSources = (sources: Source[]): Source[] =>
-	sources.filter(
-		(source) =>
-			source.mimeType.toLowerCase() !== 'application/x-mpegurl' &&
-			source.mimeType.toLowerCase() !== 'application/vnd.apple.mpegurl',
-	);
-
 export type SupportedVideoFileType = (typeof supportedVideoFileTypes)[number];
 
 const isSupportedMimeType = (

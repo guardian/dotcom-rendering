@@ -166,7 +166,6 @@ type Props = {
 	linkTo: string;
 	subtitleSource?: string;
 	subtitleSize: SubtitleSize;
-	enableHls: boolean;
 	letterboxed?: boolean;
 	isFeatureCard?: boolean;
 };
@@ -188,7 +187,6 @@ export const SelfHostedVideo = ({
 	linkTo,
 	subtitleSource,
 	subtitleSize,
-	enableHls,
 	letterboxed = false,
 	isFeatureCard = false,
 }: Props) => {
@@ -758,7 +756,6 @@ export const SelfHostedVideo = ({
 					subtitleSource={subtitleSource}
 					subtitleSize={subtitleSize}
 					activeCue={activeCue}
-					enableHls={enableHls}
 					letterboxed={letterboxed}
 					isFeatureCard={isFeatureCard}
 				/>

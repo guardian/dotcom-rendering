@@ -516,7 +516,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								</LinkButton>
 								{isCollapsed && (
 									<div css={styles.maybeLaterButtonSizing}>
-										<LinkButton
+										<Button
 											onClick={onCloseClick}
 											priority="tertiary"
 											cssOverrides={[
@@ -531,7 +531,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 											)}
 										>
 											Maybe later
-										</LinkButton>
+										</Button>
 									</div>
 								)}
 							</div>
