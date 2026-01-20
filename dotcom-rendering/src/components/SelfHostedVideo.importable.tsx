@@ -57,7 +57,7 @@ const videoContainerStyles = (
 
 const figureStyles = (
 	aspectRatio: number,
-	letterboxed: boolean,
+	isInArticle: boolean,
 	containerAspectRatio?: number,
 	isFeatureCard?: boolean,
 ) => css`
@@ -65,7 +65,12 @@ const figureStyles = (
 	aspect-ratio: ${aspectRatio};
 	height: 100%;
 
-	${letterboxed &&
+	/**
+	 * Videos on cards (i.e. not in articles) should not exceed the viewport
+	 * height. Instead, they should be scaled and grey bars should be shown on
+	 * either side.
+	 */
+	${!isInArticle &&
 	css`
 		max-height: 100vh;
 		max-height: 100svh;
@@ -166,7 +171,7 @@ type Props = {
 	linkTo: string;
 	subtitleSource?: string;
 	subtitleSize: SubtitleSize;
-	letterboxed?: boolean;
+	isInArticle?: boolean;
 	isFeatureCard?: boolean;
 };
 
@@ -187,7 +192,7 @@ export const SelfHostedVideo = ({
 	linkTo,
 	subtitleSource,
 	subtitleSize,
-	letterboxed = false,
+	isInArticle = false,
 	isFeatureCard = false,
 }: Props) => {
 	const adapted = useShouldAdapt();
@@ -720,7 +725,7 @@ export const SelfHostedVideo = ({
 				ref={setNode}
 				css={figureStyles(
 					aspectRatio,
-					letterboxed,
+					isInArticle,
 					containerAspectRatio,
 					isFeatureCard,
 				)}
@@ -756,7 +761,7 @@ export const SelfHostedVideo = ({
 					subtitleSource={subtitleSource}
 					subtitleSize={subtitleSize}
 					activeCue={activeCue}
-					letterboxed={letterboxed}
+					isInArticle={isInArticle}
 					isFeatureCard={isFeatureCard}
 				/>
 			</figure>

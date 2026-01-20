@@ -25,14 +25,20 @@ export type SubtitleSize = 'small' | 'medium' | 'large';
 
 const videoStyles = (
 	aspectRatio: number,
-	letterboxed: boolean,
+	isInArticle: boolean,
 	isFeatureCard: boolean,
+	isCinemagraph: boolean,
 ) => css`
 	position: relative;
 	display: block;
 	height: auto;
 	width: 100%;
-	${letterboxed &&
+	/**
+	 * Videos on cards (i.e. not in articles) should not exceed the viewport
+	 * height. Instead, they should be scaled and grey bars should be shown on
+	 * either side.
+	 */
+	${!isInArticle &&
 	css`
 		max-height: 100vh;
 		max-height: 100svh;
@@ -139,7 +145,7 @@ type Props = {
 	subtitleSize?: SubtitleSize;
 	/* used in custom subtitle overlays */
 	activeCue?: ActiveCue | null;
-	letterboxed: boolean;
+	isInArticle: boolean;
 	isFeatureCard: boolean;
 };
 
@@ -182,7 +188,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			subtitleSource,
 			subtitleSize,
 			activeCue,
-			letterboxed,
+			isInArticle,
 			isFeatureCard,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
@@ -210,7 +216,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 				<video
 					id={videoId}
 					css={[
-						videoStyles(aspectRatio, letterboxed, isFeatureCard),
+						videoStyles(aspectRatio, isInArticle, isFeatureCard),
 						showSubtitles && subtitleStyles(subtitleSize),
 					]}
 					crossOrigin="anonymous"

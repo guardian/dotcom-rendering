@@ -1081,7 +1081,6 @@ export const Card = ({
 										media.mainMedia.subtitleSource
 									}
 									subtitleSize={subtitleSize}
-									letterboxed={true}
 								/>
 							</Island>
 						)}
