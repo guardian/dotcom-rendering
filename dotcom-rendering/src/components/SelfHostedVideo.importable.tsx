@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined, log, storage } from '@guardian/libs';
-import { from, space } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
@@ -33,75 +33,86 @@ import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 const videoContainerStyles = (
 	isCinemagraph: boolean,
 	aspectRatioOfVisibleVideo: number,
-	containerAspectRatio?: number, // The aspect ratio of the container
+	containerAspectRatioMobile?: number,
+	containerAspectRatioDesktop?: number,
 ) => css`
 	position: relative;
 	display: flex;
 	background-color: ${palette('--video-background')};
+	align-items: center;
+	justify-content: space-around;
 	${!isCinemagraph && `z-index: ${getZIndex('video-container')}`};
 
 	/**
-	 * If the video and its containing slot have different dimensions, the slot will use the aspect
-	 * ratio of the video on mobile, so that the video can take up the full width of the screen.
-	 *
-	 * From tablet breakpoints, the aspect ratio of the slot is maintained, for consistency with other content.
-	 * This will result in grey bars on either side of the video if the video is narrower than the slot.
+	 * Use the aspect ratio of the video, unless the aspect-ratio of the container is fixed
 	 */
 	aspect-ratio: ${aspectRatioOfVisibleVideo};
+	${until.tablet} {
+		${!isUndefined(containerAspectRatioMobile) &&
+		`aspect-ratio: ${containerAspectRatioMobile};`}
+	}
 	${from.tablet} {
-		${!isUndefined(containerAspectRatio) &&
-		`aspect-ratio: ${containerAspectRatio};`}
+		${!isUndefined(containerAspectRatioDesktop) &&
+		`aspect-ratio: ${containerAspectRatioDesktop};`}
 	}
 `;
 
 const figureStyles = (
 	aspectRatio: number,
-	greyBarsAtSides: boolean,
-	greyBarsAtTopAndBottom: boolean,
-	isVideoCropped: boolean,
-	containerAspectRatio?: number,
-	isFeatureCard?: boolean,
+	aspectRatioOfVisibleVideo: number,
+	greyBarsAtSidesOnDesktop: boolean,
+	greyBarsAtTopAndBottomOnDesktop: boolean,
+	isVideoCroppedAtTopBottom: boolean,
+	isVideoCroppedAtLeftRight: boolean,
+	containerAspectRatioDesktop?: number,
 ) => css`
 	position: relative;
-	aspect-ratio: ${aspectRatio};
+	aspect-ratio: ${aspectRatioOfVisibleVideo};
 	max-width: 100%;
+	height: 100%;
 
-	${greyBarsAtSides &&
+	/**
+	 * The grey bars fall outside of the figure element. The figure is the full height of the container.
+	 * We need to work out how wide the video needs to be so that the height of the video matches
+	 * the height of the container AND the video can maintain its aspect ratio.
+	 */
+	${greyBarsAtSidesOnDesktop &&
 	css`
-		width: 100%;
-		height: fit-content;
 		${from.tablet} {
-			${typeof containerAspectRatio === 'number' &&
-			`max-width: ${aspectRatio * (1 / containerAspectRatio) * 100}%;`}
+			${!isUndefined(containerAspectRatioDesktop) &&
+			`max-width: ${
+				aspectRatioOfVisibleVideo *
+				(1 / containerAspectRatioDesktop) *
+				100
+			}%;`}
 		}
 	`}
 
-	${!greyBarsAtTopAndBottom &&
+	${greyBarsAtTopAndBottomOnDesktop &&
 	css`
-		height: 100%;
+		${from.tablet} {
+			height: fit-content;
+		}
 	`}
 
-	${isVideoCropped &&
+	${isVideoCroppedAtTopBottom &&
 	css`
 		overflow: hidden;
-	`}
-
-	${isFeatureCard &&
-	css`
-		width: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		overflow: hidden;
 	`}
-`;
+	${isVideoCroppedAtLeftRight &&
+	css`
+		overflow: hidden;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
 
-const centerHorizontally = css`
-	justify-content: space-around;
-`;
-
-const centerVertically = css`
-	align-items: center;
+		video {
+			width: ${(aspectRatio / containerAspectRatioDesktop!) * 100}%;
+		}
+	`}
 `;
 
 /**
@@ -161,19 +172,22 @@ const doesVideoHaveAudio = (video: HTMLVideoElement): boolean =>
 		Boolean((video.audioTracks as { length: number }).length));
 
 /**
- * If the video can be cropped, ensure its aspect ratio does not exceed 4:5.
- * This prevents us from rendering unsupported aspect ratios.
+ * Ensure the aspect ratio of the video is within the boundary, if specified.
+ * For example, we may not want to render a square video inside a 4:5 feature card.
  */
 const getAspectRatioOfVisibleVideo = (
-	width: number,
-	height: number,
-	cropTallVideo: boolean,
+	aspectRatio: number,
+	minAspectRatio?: number,
+	maxAspectRatio?: number,
 ): number => {
-	if (cropTallVideo) {
-		if (width / height < 4 / 5) return 4 / 5;
+	if (minAspectRatio !== undefined && aspectRatio < minAspectRatio) {
+		return minAspectRatio;
+	}
+	if (maxAspectRatio !== undefined && aspectRatio > maxAspectRatio) {
+		return maxAspectRatio;
 	}
 
-	return width / height;
+	return aspectRatio;
 };
 
 type Props = {
@@ -184,12 +198,6 @@ type Props = {
 	width: number;
 	videoStyle: VideoPlayerFormat;
 	posterImage: string;
-	/**
-	 * Setting the aspect ratio of the container allows for letterboxing at and above the tablet breakpoint.
-	 * If this value is set, the video container will maintain this aspect ratio from this breakpoint, whilst
-	 * the video maintains its own aspect ratio. This will result in grey bars on either side of the video.
-	 */
-	containerAspectRatio?: number;
 	fallbackImage: CardPictureProps['mainImage'];
 	fallbackImageSize: CardPictureProps['imageSize'];
 	fallbackImageLoading: CardPictureProps['loading'];
@@ -198,13 +206,10 @@ type Props = {
 	linkTo: string;
 	subtitleSource?: string;
 	subtitleSize: SubtitleSize;
-	isFeatureCard?: boolean;
-	/**
-	 * If set to true, the video's visible aspect ratio will fall somewhere
-	 * between 4:5 and 5:4. For example, a 9:16 video would be "cropped" to 4:5,
-	 * meaning the top and bottom of the article are hidden to the user.
-	 */
-	cropVideo?: boolean;
+	minAspectRatio?: number;
+	maxAspectRatio?: number;
+	containerAspectRatioMobile?: number;
+	containerAspectRatioDesktop?: number;
 };
 
 export const SelfHostedVideo = ({
@@ -215,7 +220,6 @@ export const SelfHostedVideo = ({
 	width: expectedWidth,
 	videoStyle,
 	posterImage,
-	containerAspectRatio,
 	fallbackImage,
 	fallbackImageSize,
 	fallbackImageLoading,
@@ -224,8 +228,10 @@ export const SelfHostedVideo = ({
 	linkTo,
 	subtitleSource,
 	subtitleSize,
-	isFeatureCard = false,
-	cropVideo = false,
+	minAspectRatio,
+	maxAspectRatio,
+	containerAspectRatioMobile,
+	containerAspectRatioDesktop,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -732,20 +738,24 @@ export const SelfHostedVideo = ({
 	};
 
 	const aspectRatio = width / height;
+
+	/** The aspect ratio of the video will be clamped within the specified range */
 	const aspectRatioOfVisibleVideo = getAspectRatioOfVisibleVideo(
-		width,
-		height,
-		cropVideo,
+		aspectRatio,
+		minAspectRatio,
+		maxAspectRatio,
 	);
-	const greyBarsAtSides =
-		cropVideo &&
-		containerAspectRatio !== undefined &&
-		containerAspectRatio !== aspectRatioOfVisibleVideo;
-	const greyBarsAtTopAndBottom =
-		cropVideo &&
-		containerAspectRatio !== undefined &&
-		aspectRatio > containerAspectRatio;
-	const isVideoCropped = aspectRatio !== aspectRatioOfVisibleVideo;
+
+	const isVideoCroppedAtTopBottom = aspectRatio < aspectRatioOfVisibleVideo;
+	const isVideoCroppedAtLeftRight = aspectRatio > aspectRatioOfVisibleVideo;
+
+	const isGreyBarsAtSidesOnDesktop =
+		containerAspectRatioDesktop !== undefined &&
+		containerAspectRatioDesktop > aspectRatioOfVisibleVideo;
+
+	const isGreyBarsAtTopAndBottomOnDesktop =
+		containerAspectRatioDesktop !== undefined &&
+		containerAspectRatioDesktop < aspectRatioOfVisibleVideo;
 
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
 
@@ -765,21 +775,21 @@ export const SelfHostedVideo = ({
 				videoContainerStyles(
 					isCinemagraph,
 					aspectRatioOfVisibleVideo,
-					containerAspectRatio,
+					containerAspectRatioMobile,
+					containerAspectRatioDesktop,
 				),
-				greyBarsAtSides && centerHorizontally,
-				greyBarsAtTopAndBottom && centerVertically,
 			]}
 		>
 			<figure
 				ref={setNode}
 				css={figureStyles(
+					aspectRatio,
 					aspectRatioOfVisibleVideo,
-					greyBarsAtSides,
-					greyBarsAtTopAndBottom,
-					isVideoCropped,
-					containerAspectRatio,
-					isFeatureCard,
+					isGreyBarsAtSidesOnDesktop,
+					isGreyBarsAtTopAndBottomOnDesktop,
+					isVideoCroppedAtTopBottom,
+					isVideoCroppedAtLeftRight,
+					containerAspectRatioDesktop,
 				)}
 				className={`video-container ${videoStyle.toLocaleLowerCase()}`}
 				data-component="gu-video-loop"
@@ -813,7 +823,6 @@ export const SelfHostedVideo = ({
 					subtitleSource={subtitleSource}
 					subtitleSize={subtitleSize}
 					activeCue={activeCue}
-					isFeatureCard={isFeatureCard}
 				/>
 			</figure>
 		</div>

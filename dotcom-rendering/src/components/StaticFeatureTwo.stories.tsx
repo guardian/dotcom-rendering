@@ -111,11 +111,11 @@ export const SelfHostedVideo = {
 			<>
 				<Section
 					title="Video the same aspect ratio as container"
-					videos={[selfHostedVideo45Card]}
+					videos={[selfHostedVideo45Card, selfHostedVideo45Card]}
 				/>
 				<Section
 					title="Video taller than the container"
-					videos={[selfHostedVideo916Card]}
+					videos={[selfHostedVideo916Card, selfHostedVideo916Card]}
 				/>
 				<Section
 					title="Video wider than the container"

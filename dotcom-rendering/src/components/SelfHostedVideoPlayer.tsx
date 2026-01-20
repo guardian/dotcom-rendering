@@ -23,20 +23,14 @@ import { VideoProgressBar } from './VideoProgressBar';
 
 export type SubtitleSize = 'small' | 'medium' | 'large';
 
-const videoStyles = (aspectRatio: number, isFeatureCard: boolean) => css`
+const videoStyles = (aspectRatio: number) => css`
 	position: relative;
 	display: block;
 	height: auto;
-	width: 100%;
 	cursor: pointer;
 
 	/* Prevents CLS by letting the browser know the space the video will take up. */
 	aspect-ratio: ${aspectRatio};
-
-	${isFeatureCard &&
-	css`
-		object-fit: cover;
-	`}
 `;
 
 const subtitleStyles = (subtitleSize: SubtitleSize | undefined) => css`
@@ -130,7 +124,6 @@ type Props = {
 	subtitleSize?: SubtitleSize;
 	/* used in custom subtitle overlays */
 	activeCue?: ActiveCue | null;
-	isFeatureCard: boolean;
 };
 
 /**
@@ -172,7 +165,6 @@ export const SelfHostedVideoPlayer = forwardRef(
 			subtitleSource,
 			subtitleSize,
 			activeCue,
-			isFeatureCard,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -199,7 +191,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 				<video
 					id={videoId}
 					css={[
-						videoStyles(aspectRatio, isFeatureCard),
+						videoStyles(aspectRatio),
 						showSubtitles && subtitleStyles(subtitleSize),
 					]}
 					crossOrigin="anonymous"

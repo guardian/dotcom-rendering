@@ -367,9 +367,9 @@ export type Props = {
 	discussionApiUrl: string;
 	discussionId?: string;
 	isExternalLink: boolean;
-	/** Alows the consumer to set an aspect ratio on the image */
+	/** Allows the consumer to set an aspect ratio on the image */
 	aspectRatio?: AspectRatio;
-	/** Alows the consumer to set an aspect ratio on the image specifically on mobile breakpoints */
+	/** Allows the consumer to set an aspect ratio on the image specifically on mobile breakpoints */
 	mobileAspectRatio?: AspectRatio;
 	showQuotes?: boolean;
 	/**
@@ -462,6 +462,8 @@ export const FeatureCard = ({
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
+	const aspectRatioNumber = isImmersive ? 5 / 3 : 4 / 5;
+
 	if (!media) return null;
 
 	return (
@@ -552,9 +554,6 @@ export const FeatureCard = ({
 											uniqueId={uniqueId}
 											height={media.mainMedia.height}
 											width={media.mainMedia.width}
-											containerAspectRatio={
-												isImmersive ? 5 / 3 : 4 / 5
-											}
 											// Only cinemagraphs are currently supported in feature cards
 											videoStyle="Cinemagraph"
 											posterImage={
@@ -576,8 +575,14 @@ export const FeatureCard = ({
 												media.mainMedia.subtitleSource
 											}
 											subtitleSize="large"
-											isFeatureCard={true}
-											cropVideo={true}
+											minAspectRatio={aspectRatioNumber}
+											maxAspectRatio={aspectRatioNumber}
+											containerAspectRatioMobile={
+												aspectRatioNumber
+											}
+											containerAspectRatioDesktop={
+												aspectRatioNumber
+											}
 										/>
 									</Island>
 								)}
