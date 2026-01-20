@@ -212,7 +212,7 @@ export const StorylinesSectionContent = ({
 					labels: [],
 				},
 				action: 'CLICK',
-				value: `${currentId} : ${newStorylineId}`,
+				value: `${currentId} -> ${newStorylineId}`,
 			},
 			'Web',
 		);
