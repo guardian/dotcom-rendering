@@ -349,16 +349,28 @@ const buildElementTree =
 			case 'VAR':
 			case 'U':
 			case 'DEL':
-			case 'FIGURE':
 				return jsx(node.nodeName.toLowerCase(), {
 					css: textBlockStyles(format),
 					key,
 					children,
 				});
+			case 'FIGURE':
+				if (format.design === ArticleDesign.HostedArticle) {
+					return jsx(node.nodeName.toLowerCase(), {
+						css: textBlockStyles(format),
+						key,
+						children,
+					});
+				}
+				return null;
 			case 'IMG':
-				return jsx('img', {
-					src: getAttrs(node)?.getNamedItem('src')?.value,
-				});
+				if (format.design === ArticleDesign.HostedArticle) {
+					return jsx('img', {
+						src: getAttrs(node)?.getNamedItem('src')?.value,
+						alt: getAttrs(node)?.getNamedItem('alt')?.value,
+					});
+				}
+				return null;
 			default:
 				logger.warn('TextBlockComponent: Unknown element received', {
 					isDev: process.env.NODE_ENV !== 'production',

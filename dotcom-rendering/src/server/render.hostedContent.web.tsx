@@ -6,18 +6,18 @@ import { renderToStringWithEmotion } from '../lib/emotion';
 import { polyfillIO } from '../lib/polyfill.io';
 import type { HostedContent } from '../types/hostedContent';
 import { htmlPageTemplate } from './htmlPageTemplate';
+import { Article } from '../types/article';
 
 type Props = {
-	hostedContent: HostedContent;
+	hostedContent: Article;
 };
 
 export const renderHtml = ({ hostedContent }: Props) => {
-	const { type, frontendData } = hostedContent;
+	const { frontendData } = hostedContent;
 
-	const title = `Advertiser content hosted by the Guardian: ${frontendData.title} | The Guardian`;
+	const title = `Advertiser content hosted by the Guardian: ${frontendData.headline} | The Guardian`;
 
-	const HostedLayout =
-		type === 'gallery' ? HostedGalleryLayout : HostedArticleLayout;
+	const HostedLayout = HostedArticleLayout;
 	const renderingTarget = 'Web';
 
 	const { html, extractedCss } = renderToStringWithEmotion(
