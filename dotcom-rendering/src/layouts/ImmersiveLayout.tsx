@@ -541,22 +541,20 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							{/* Only show Listen to Article button on App landscape views */}
 							{isApps && (
 								<Hide when="below" breakpoint="leftCol">
-									{!!article.pageId && (
-										<div
-											css={css`
-												margin-top: ${space[6]}px;
-											`}
+									<div
+										css={css`
+											margin-top: ${space[6]}px;
+										`}
+									>
+										<Island
+											priority="feature"
+											defer={{ until: 'visible' }}
 										>
-											<Island
-												priority="feature"
-												defer={{ until: 'visible' }}
-											>
-												<ListenToArticle
-													articleId={article.pageId}
-												/>
-											</Island>
-										</div>
-									)}
+											<ListenToArticle
+												articleId={article.pageId}
+											/>
+										</Island>
+									</div>
 								</Hide>
 							)}
 						</GridItem>

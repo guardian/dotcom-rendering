@@ -705,7 +705,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							{/* Only show Listen to Article button on App landscape views */}
 							{isApps && (
 								<Hide until="leftCol">
-									{!!article.pageId && !isVideo && (
+									{!isVideo && (
 										<div
 											css={css`
 												margin-top: ${space[2]}px;

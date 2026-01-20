@@ -468,22 +468,20 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 							{/* Only show Listen to Article button on App landscape views */}
 							{isApps && (
 								<Hide when="below" breakpoint="leftCol">
-									{!!article.pageId && (
-										<div
-											css={css`
-												max-width: 620px;
-											`}
+									<div
+										css={css`
+											max-width: 620px;
+										`}
+									>
+										<Island
+											priority="feature"
+											defer={{ until: 'visible' }}
 										>
-											<Island
-												priority="feature"
-												defer={{ until: 'visible' }}
-											>
-												<ListenToArticle
-													articleId={article.pageId}
-												/>
-											</Island>
-										</div>
-									)}
+											<ListenToArticle
+												articleId={article.pageId}
+											/>
+										</Island>
+									</div>
 								</Hide>
 							)}
 						</GridItem>
