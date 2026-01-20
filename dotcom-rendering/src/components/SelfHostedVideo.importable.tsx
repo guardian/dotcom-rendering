@@ -737,7 +737,10 @@ export const SelfHostedVideo = ({
 		height,
 		cropVideo,
 	);
-	const greyBarsAtSides = containerAspectRatio !== aspectRatioOfVisibleVideo;
+	const greyBarsAtSides =
+		cropVideo &&
+		containerAspectRatio !== undefined &&
+		containerAspectRatio !== aspectRatioOfVisibleVideo;
 	const greyBarsAtTopAndBottom =
 		cropVideo &&
 		containerAspectRatio !== undefined &&

@@ -13,7 +13,7 @@ import {
 	selfHostedVideo916Card,
 	slideshowCard,
 	trails,
-	videoTrails,
+	youtubeVideoTrails,
 } from '../../fixtures/manual/trails';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { customMockFetch } from '../lib/mockRESTCalls';
@@ -466,7 +466,7 @@ export const StandardCards: Story = {
 				...opinionTrails.slice(0, 2),
 				...audioTrails.slice(0, 2),
 				...galleryTrails.slice(0, 2),
-				...videoTrails.slice(0, 2),
+				...youtubeVideoTrails.slice(0, 2),
 			],
 		},
 	},

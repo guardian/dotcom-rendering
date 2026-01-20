@@ -577,6 +577,7 @@ export const FeatureCard = ({
 											}
 											subtitleSize="large"
 											isFeatureCard={true}
+											cropVideo={true}
 										/>
 									</Island>
 								)}

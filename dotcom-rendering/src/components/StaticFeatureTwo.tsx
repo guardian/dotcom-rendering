@@ -81,7 +81,7 @@ export const StaticFeatureTwo = ({
 							isNewsletter={card.isNewsletter}
 							showQuotes={card.showQuotedHeadline}
 							isInStarRatingVariant={isInStarRatingVariant}
-							starRatingSize={'medium'}
+							starRatingSize="medium"
 						/>
 					</LI>
 				);

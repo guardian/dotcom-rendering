@@ -4,10 +4,14 @@ import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
 	audioTrails,
 	galleryTrails,
+	selfHostedVideo45Card,
+	selfHostedVideo53Card,
+	selfHostedVideo54Card,
+	selfHostedVideo916Card,
 	trails,
-	videoTrails,
+	youtubeVideoTrails,
 } from '../../fixtures/manual/trails';
-import type { DCRContainerPalette } from '../types/front';
+import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import { FrontSection } from './FrontSection';
 import { StaticFeatureTwo } from './StaticFeatureTwo';
 
@@ -76,11 +80,53 @@ export const Gallery = {
 	},
 } satisfies Story;
 
-const videoCards = videoTrails.slice(0, 2);
-export const Video = {
+const youtubeVideoCards = youtubeVideoTrails.slice(0, 2);
+export const YoutubeVideo = {
 	args: {
 		...Default,
-		trails: videoCards,
+		trails: youtubeVideoCards,
+	},
+} satisfies Story;
+
+export const SelfHostedVideo = {
+	render: (args) => {
+		const Section = ({
+			title,
+			videos,
+		}: {
+			title: string;
+			videos: DCRFrontCard[];
+		}) => (
+			<FrontSection
+				title={title}
+				discussionApiUrl={discussionApiUrl}
+				editionId="UK"
+				showTopBorder={true}
+			>
+				<StaticFeatureTwo {...args} trails={videos} />
+			</FrontSection>
+		);
+
+		return (
+			<>
+				<Section
+					title="Video the same aspect ratio as container"
+					videos={[selfHostedVideo45Card]}
+				/>
+				<Section
+					title="Video taller than the container"
+					videos={[selfHostedVideo916Card]}
+				/>
+				<Section
+					title="Video wider than the container"
+					videos={[selfHostedVideo54Card, selfHostedVideo53Card]}
+				/>
+			</>
+		);
+	},
+	args: {
+		...Default,
+		trails: [selfHostedVideo45Card],
 	},
 } satisfies Story;
 

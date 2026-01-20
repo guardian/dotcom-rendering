@@ -548,7 +548,7 @@ export const galleryTrails: [DCRFrontCard, DCRFrontCard] = [
 	},
 ];
 
-export const videoTrails: [DCRFrontCard, DCRFrontCard] = [
+export const youtubeVideoTrails: [DCRFrontCard, DCRFrontCard] = [
 	{
 		...defaultCardProps,
 		format: { design: 4, display: 0, theme: 2 },
@@ -673,6 +673,7 @@ export const selfHostedVideo54Card = {
 		src: 'https://media.guim.co.uk/966bf085fb982b1103aaba42a812b09726cc0a3c/1417_104_1378_1104/master/1378.jpg',
 		altText: 'Wyatt Russell and Florence Pugh in Thunderbolts*.',
 	},
+	showVideo: true,
 } satisfies DCRFrontCard;
 
 export const selfHostedVideo45Card = {
