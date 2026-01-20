@@ -32,12 +32,11 @@ import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
 const videoContainerStyles = (
 	isCinemagraph: boolean,
-	aspectRatio: number,
+	aspectRatioOfVisibleVideo: number,
 	containerAspectRatio?: number, // The aspect ratio of the container
 ) => css`
 	position: relative;
 	display: flex;
-	justify-content: space-around;
 	background-color: ${palette('--video-background')};
 	${!isCinemagraph && `z-index: ${getZIndex('video-container')}`};
 
@@ -48,7 +47,7 @@ const videoContainerStyles = (
 	 * From tablet breakpoints, the aspect ratio of the slot is maintained, for consistency with other content.
 	 * This will result in grey bars on either side of the video if the video is narrower than the slot.
 	 */
-	aspect-ratio: ${aspectRatio};
+	aspect-ratio: ${aspectRatioOfVisibleVideo};
 	${from.tablet} {
 		${!isUndefined(containerAspectRatio) &&
 		`aspect-ratio: ${containerAspectRatio};`}
@@ -57,32 +56,52 @@ const videoContainerStyles = (
 
 const figureStyles = (
 	aspectRatio: number,
-	letterboxed: boolean,
+	greyBarsAtSides: boolean,
+	greyBarsAtTopAndBottom: boolean,
+	isVideoCropped: boolean,
 	containerAspectRatio?: number,
 	isFeatureCard?: boolean,
 ) => css`
 	position: relative;
 	aspect-ratio: ${aspectRatio};
-	height: 100%;
 	max-width: 100%;
 
-	${letterboxed &&
+	${greyBarsAtSides &&
 	css`
+		width: 100%;
+		height: fit-content;
 		${from.tablet} {
 			${typeof containerAspectRatio === 'number' &&
 			`max-width: ${aspectRatio * (1 / containerAspectRatio) * 100}%;`}
 		}
 	`}
 
-	${(letterboxed || isFeatureCard) &&
+	${!greyBarsAtTopAndBottom &&
+	css`
+		height: 100%;
+	`}
+
+	${isVideoCropped &&
+	css`
+		overflow: hidden;
+	`}
+
+	${isFeatureCard &&
 	css`
 		width: 100%;
-		max-width: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		overflow: hidden;
 	`}
+`;
+
+const centerHorizontally = css`
+	justify-content: space-around;
+`;
+
+const centerVertically = css`
+	align-items: center;
 `;
 
 /**
@@ -142,17 +161,16 @@ const doesVideoHaveAudio = (video: HTMLVideoElement): boolean =>
 		Boolean((video.audioTracks as { length: number }).length));
 
 /**
- * If the video is cropped, ensure its aspect ratio falls between 4:5 and 5:4.
- * This prevents rendering unsupported aspect ratios.
+ * If the video can be cropped, ensure its aspect ratio does not exceed 4:5.
+ * This prevents us from rendering unsupported aspect ratios.
  */
 const getAspectRatioOfVisibleVideo = (
 	width: number,
 	height: number,
-	cropVideo: boolean,
+	cropTallVideo: boolean,
 ): number => {
-	if (cropVideo) {
+	if (cropTallVideo) {
 		if (width / height < 4 / 5) return 4 / 5;
-		if (width / height > 5 / 4) return 5 / 4;
 	}
 
 	return width / height;
@@ -719,7 +737,12 @@ export const SelfHostedVideo = ({
 		height,
 		cropVideo,
 	);
-	const letterboxed = aspectRatio !== aspectRatioOfVisibleVideo;
+	const greyBarsAtSides = containerAspectRatio !== aspectRatioOfVisibleVideo;
+	const greyBarsAtTopAndBottom =
+		cropVideo &&
+		containerAspectRatio !== undefined &&
+		aspectRatio > containerAspectRatio;
+	const isVideoCropped = aspectRatio !== aspectRatioOfVisibleVideo;
 
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
 
@@ -735,17 +758,23 @@ export const SelfHostedVideo = ({
 
 	return (
 		<div
-			css={videoContainerStyles(
-				isCinemagraph,
-				aspectRatioOfVisibleVideo,
-				containerAspectRatio,
-			)}
+			css={[
+				videoContainerStyles(
+					isCinemagraph,
+					aspectRatioOfVisibleVideo,
+					containerAspectRatio,
+				),
+				greyBarsAtSides && centerHorizontally,
+				greyBarsAtTopAndBottom && centerVertically,
+			]}
 		>
 			<figure
 				ref={setNode}
 				css={figureStyles(
 					aspectRatioOfVisibleVideo,
-					letterboxed,
+					greyBarsAtSides,
+					greyBarsAtTopAndBottom,
+					isVideoCropped,
 					containerAspectRatio,
 					isFeatureCard,
 				)}
