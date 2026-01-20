@@ -10,7 +10,7 @@ import {
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import type { ProductBlockElement } from '../types/content';
-import { LinkElementButton } from './LinkElementButton';
+import { ProductLinkButton } from './Button/ProductLinkElementButton';
 import { ProductCardImage } from './ProductCardImage';
 
 const horizontalCard = css`
@@ -107,13 +107,12 @@ export const HorizontalSummaryProductCard = ({
 				<div css={price}>{cardCta.price}</div>
 			</div>
 			<div css={buttonContainer}>
-				<LinkElementButton
+				<ProductLinkButton
 					size="small"
 					fullwidth={true}
 					minimisePadding={true}
 					label={'Buy at ' + cardCta.retailer}
 					url={cardCta.url}
-					linkType="ProductButton"
 				/>
 			</div>
 		</div>

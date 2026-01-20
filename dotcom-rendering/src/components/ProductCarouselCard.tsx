@@ -12,6 +12,7 @@ import { Link } from '@guardian/source/react-components';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import type { ProductBlockElement } from '../types/content';
+import { ProductLinkElementButton } from './Button/ProductLinkElementButton';
 import { ProductCardImage } from './ProductCardImage';
 
 export type ProductCarouselCardProps = {
@@ -121,7 +122,6 @@ export const ProductCarouselCard = ({
 						<div css={productNameFont}>{product.productName}</div>
 					</div>
 				)}
-
 				{firstCta && (
 					<>
 						<div css={priceStyle}>{firstCta.price}</div>

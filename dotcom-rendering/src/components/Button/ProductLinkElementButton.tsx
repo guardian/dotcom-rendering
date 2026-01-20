@@ -1,21 +1,20 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ThemeButton } from '@guardian/source/react-components';
-import {
-	LinkButton,
-	SvgArrowRightStraight,
+import type {
+	ButtonPriority,
+	ThemeButton,
 } from '@guardian/source/react-components';
-import { palette } from '../palette';
+import { LinkButton } from '@guardian/source/react-components';
+import { palette } from '../../palette';
+import { getPropsForLinkUrl } from './utils';
 
-type LinkElementButtonProps = {
+type ProductLinkButtonProps = {
 	label: string;
 	url: string;
 	size?: 'default' | 'small';
 	fullwidth?: boolean;
 	fullWidthText?: boolean;
-	linkType: 'StandardButton' | 'ProductButton';
-	priority?: 'Primary' | 'Tertiary';
-	dataComponent?: string;
+	priority?: ButtonPriority;
 	minimisePadding?: boolean;
 };
 
@@ -37,7 +36,7 @@ const minimisePaddingStyle = css`
 	}
 `;
 
-const productTheme: Partial<ThemeButton> = {
+export const theme: Partial<ThemeButton> = {
 	backgroundPrimary: palette('--product-button-primary-background'),
 	backgroundPrimaryHover: palette(
 		'--product-button-primary-background-hover',
@@ -47,67 +46,34 @@ const productTheme: Partial<ThemeButton> = {
 	borderTertiary: palette('--product-button-primary-background'),
 };
 
-const standardTheme: Partial<ThemeButton> = {
-	backgroundPrimary: palette('--standard-button-primary-background'),
-	backgroundPrimaryHover: palette(
-		'--standard-button-primary-background-hover',
-	),
-	textPrimary: palette('--standard-button-primary-text'),
-	textTertiary: palette('--standard-button-primary-background'),
-	borderTertiary: palette('--standard-button-primary-background'),
-};
-
-const LinkTypePriorityToButtonPriority = {
-	Primary: 'primary',
-	Tertiary: 'tertiary',
-} as const;
-
-const linkTypeToTheme = {
-	ProductButton: productTheme,
-	StandardButton: standardTheme,
-} as const;
-
-export const LinkElementButton = ({
+export const ProductLinkButton = ({
 	label,
 	url,
 	size = 'default',
 	fullwidth = false,
 	minimisePadding = false,
 	fullWidthText = false,
-	priority = 'Primary',
-	linkType,
-	dataComponent,
-}: LinkElementButtonProps) => {
+	priority = 'primary',
+}: ProductLinkButtonProps) => {
 	const cssOverrides: SerializedStyles[] = [
 		heightAutoStyle,
 		...(fullwidth ? [fullWidthStyle] : []),
 		...(minimisePadding ? [minimisePaddingStyle] : []),
 	];
 
-	const isInternal = new URL(url).hostname.endsWith('theguardian.com');
-	const shouldOpenInSameWindow = isInternal && linkType !== 'ProductButton';
-	const targetProps = shouldOpenInSameWindow
-		? {}
-		: {
-				target: '_blank',
-				'aria-label': `Open ${label} in a new tab`,
-				icon: <SvgArrowRightStraight />,
-		  };
-
 	return (
 		<LinkButton
+			{...getPropsForLinkUrl(url, label)}
 			href={url}
 			rel="sponsored noreferrer noopener"
 			iconSide="right"
-			priority={LinkTypePriorityToButtonPriority[priority]}
-			theme={linkTypeToTheme[linkType]}
+			priority={priority}
+			theme={theme}
 			data-ignore="global-link-styling"
-			data-component={dataComponent}
 			data-link-name={`product link button ${priority}`}
 			data-spacefinder-role="inline"
 			size={size}
 			cssOverrides={cssOverrides}
-			{...targetProps}
 		>
 			<span
 				style={fullWidthText ? { width: '100%' } : {}}
