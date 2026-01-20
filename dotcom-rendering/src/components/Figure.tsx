@@ -73,7 +73,48 @@ const roleCss = {
 	fullWidth: css`
 		margin-top: ${space[3]}px;
 		margin-bottom: ${space[3]}px;
-		grid-column: 1 / -1;
+
+		overflow-x: clip;
+
+		${until.mobileLandscape} {
+			margin-left: -10px;
+			margin-right: -10px;
+		}
+		${until.tablet} {
+			margin-left: -20px;
+			margin-right: -20px;
+		}
+		${from.tablet} {
+			width: calc(100vw - var(--scrollbar-width, 0px));
+			max-width: calc(100vw - var(--scrollbar-width, 0px));
+
+			--grid-container-max-width: 740px;
+			--grid-container-left-margin: calc(
+				((-100vw + (var(--grid-container-max-width) - 42px)) / 2) +
+					var(--half-scrollbar-width, 0px)
+			);
+			--grid-body-column-left: calc(
+				(var(--grid-container-left-margin, 0px) * -1) +
+					var(--grid-left-col-width, 0px)
+			);
+
+			margin-left: var(--grid-container-left-margin);
+		}
+		${from.desktop} {
+			--grid-container-max-width: 980px;
+		}
+		${from.leftCol} {
+			--grid-container-max-width: 1140px;
+			--grid-left-col-width: 140px;
+			--grid-body-column-left: calc(
+				(var(--grid-container-left-margin, 0px) * -1) +
+					var(--grid-left-col-width, 0px) + 21px
+			);
+		}
+		${from.wide} {
+			--grid-container-max-width: 1300px;
+			--grid-left-col-width: 219px;
+		}
 	`,
 
 	showcase: css`
