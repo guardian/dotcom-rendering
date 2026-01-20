@@ -576,7 +576,6 @@ export const FeatureCard = ({
 												media.mainMedia.subtitleSource
 											}
 											subtitleSize="large"
-											enableHls={false}
 											isFeatureCard={true}
 										/>
 									</Island>
