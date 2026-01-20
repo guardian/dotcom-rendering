@@ -164,7 +164,6 @@ export type Props = {
 	subtitleSize?: SubtitleSize;
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
-	enableHls?: boolean;
 	isStorylines?: boolean;
 	isInStarRatingVariant?: boolean;
 	starRatingSize?: RatingSizeType;
@@ -426,7 +425,6 @@ export const Card = ({
 	showKickerImage = false,
 	headlinePosition = 'inner',
 	subtitleSize = 'small',
-	enableHls = false,
 	isStorylines = false,
 	isInStarRatingVariant,
 	starRatingSize = 'small',
@@ -1085,7 +1083,6 @@ export const Card = ({
 										media.mainMedia.subtitleSource
 									}
 									subtitleSize={subtitleSize}
-									enableHls={enableHls}
 									letterboxed={true}
 								/>
 							</Island>
@@ -1261,10 +1258,10 @@ export const Card = ({
 					mediaSize={mediaSize}
 					isBetaContainer={isBetaContainer}
 					mediaPositionOnDesktop={
-						image ? mediaPositionOnDesktop : 'none'
+						media ? mediaPositionOnDesktop : 'none'
 					}
 					mediaPositionOnMobile={
-						image ? mediaPositionOnMobile : 'none'
+						media ? mediaPositionOnMobile : 'none'
 					}
 					padContent={determinePadContent(
 						isMediaCardOrNewsletter,

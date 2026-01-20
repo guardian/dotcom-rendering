@@ -19,15 +19,32 @@ const meta = {
 	},
 	args: {
 		products: [
-			{ ...exampleProduct, h2Id: 'product' },
 			{
 				...exampleProduct,
+				primaryHeadingHtml: '<em>Product 0</em>',
+				h2Id: 'product',
+			},
+			{
+				...exampleProduct,
+				primaryHeadingHtml: '<em>Product 1</em>',
 				h2Id: 'product-1',
 				productName: 'Lorem ipsum dolor sit amet',
 			},
-			{ ...exampleProduct, h2Id: 'product-2' },
-			{ ...exampleProduct, h2Id: 'product-3' },
-			{ ...exampleProduct, h2Id: 'product-4' },
+			{
+				...exampleProduct,
+				primaryHeadingHtml: '<em>Product 2</em>',
+				h2Id: 'product-2',
+			},
+			{
+				...exampleProduct,
+				primaryHeadingHtml: '<em>Product 3</em>',
+				h2Id: 'product-3',
+			},
+			{
+				...exampleProduct,
+				primaryHeadingHtml: '<em>Product 4</em>',
+				h2Id: 'product-4',
+			},
 		],
 		format: {
 			design: ArticleDesign.Review,

@@ -1,12 +1,35 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { Breakpoint } from '@guardian/source/foundations';
-import { from, space } from '@guardian/source/foundations';
-import { useRef } from 'react';
+import { from, space, textSans14 } from '@guardian/source/foundations';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { palette } from '../palette';
 import type { ProductBlockElement } from '../types/content';
+import { CarouselCount } from './CarouselCount';
+import { CarouselNavigationButtons } from './CarouselNavigationButtons';
 import { ProductCarouselCard } from './ProductCarouselCard';
+import { Subheading } from './Subheading';
+
+const carouselHeader = css`
+	padding-bottom: 10px;
+	padding-top: ${space[6]}px;
+	border-bottom: 1px solid ${palette('--card-border-supporting')};
+	margin-bottom: 10px;
+	display: flex;
+	justify-content: space-between;
+`;
+
+const countStyles = css`
+	${textSans14};
+	color: ${palette('--card-trail-text')};
+	align-content: center;
+	display: block;
+	${from.tablet} {
+		display: none;
+	}
+`;
 
 export type FixedSlideWidth = {
 	defaultWidth: number;
@@ -20,6 +43,9 @@ type Props = {
 
 const baseContainerStyles = css`
 	position: relative;
+`;
+const navigationStyles = css`
+	padding-bottom: ${space[1]}px;
 `;
 
 const subgridStyles = css`
@@ -41,7 +67,7 @@ const leftBorderStyles = css`
 		bottom: 0;
 		left: -10px;
 		width: 1px;
-		background-color: ${palette('--card-border-top')};
+		background-color: ${palette('--card-border-supporting')};
 		transform: translateX(-50%);
 	}
 `;
@@ -90,6 +116,7 @@ const generateFixedWidthColumStyles = ({
 	}
 	return fixedWidths;
 };
+
 /**
  * This product carousel has some functionality copied from the ScrollableCarousel.
  * As this is part of an A/B/C test, we have decided to copy this functionality so
@@ -98,6 +125,10 @@ const generateFixedWidthColumStyles = ({
  */
 export const ScrollableProduct = ({ products, format }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
+	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
+	const [nextButtonEnabled, setNextButtonEnabled] = useState(true);
+	const [cardCount, setCardCount] = useState(1);
+
 	const carouselLength = products.length;
 	const fixedSlideWidth: FixedSlideWidth = {
 		defaultWidth: 240,
@@ -127,6 +158,24 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 			left: offset,
 			behavior: 'smooth',
 		});
+	};
+
+	/**
+	 * --- COPIED FROM ScrollableCarousel ---
+	 * Throttle scroll events to optimise performance. As we're only using this
+	 * to toggle button state as the carousel is scrolled we don't need to
+	 * handle every event. This function ensures the callback is only called
+	 * once every 200ms, no matter how many scroll events are fired.
+	 */
+	const throttleEvent = (callback: () => void) => {
+		let isThrottled: boolean = false;
+		return function () {
+			if (!isThrottled) {
+				callback();
+				isThrottled = true;
+				setTimeout(() => (isThrottled = false), 200);
+			}
+		};
 	};
 
 	/**
@@ -184,26 +233,132 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 		}
 	};
 
+	/**
+	 * Update the count of the first card / how far scrolled the carousel is
+	 *
+	 * This function checks how far along the carousel is scrolled and then
+	 * updates the state of cardCount. we use the half of a card because at
+	 * this scroll amount the carousel will snap to that card.
+	 */
+	const updateCardCountOnScroll = useCallback(() => {
+		const carouselElement = carouselRef.current;
+		if (!carouselElement) return;
+
+		const cardWidth = carouselElement.querySelector('li')?.offsetWidth ?? 0;
+		if (!cardWidth) return;
+
+		const count = Math.ceil(
+			(carouselElement.scrollLeft + cardWidth / 2) / cardWidth,
+		);
+
+		setCardCount((prev) => (prev === count ? prev : count));
+	}, []);
+
+	/**
+	 * Updates state of navigation buttons based on carousel's scroll position.
+	 *
+	 * This function checks the current scroll position of the carousel and sets
+	 * the styles of the previous and next buttons accordingly. The button state
+	 * is toggled when the midpoint of the first or last card has been scrolled
+	 * in or out of view.
+	 */
+	const updateButtonVisibilityOnScroll = useCallback(() => {
+		const carouselElement = carouselRef.current;
+		if (!carouselElement) return;
+
+		const scrollLeft = carouselElement.scrollLeft;
+		const maxScrollLeft =
+			carouselElement.scrollWidth - carouselElement.clientWidth;
+		const cardWidth = carouselElement.querySelector('li')?.offsetWidth ?? 0;
+
+		setPreviousButtonEnabled(scrollLeft > cardWidth / 2);
+		setNextButtonEnabled(scrollLeft < maxScrollLeft - cardWidth / 2);
+	}, []);
+
+	const throttledCardCount = useMemo(
+		() => throttleEvent(updateCardCountOnScroll),
+		[updateCardCountOnScroll],
+	);
+
+	const throttledButtonVisibility = useMemo(
+		() => throttleEvent(updateButtonVisibilityOnScroll),
+		[updateButtonVisibilityOnScroll],
+	);
+
+	useEffect(() => {
+		const carouselElement = carouselRef.current;
+		if (!carouselElement) return;
+
+		carouselElement.addEventListener('scroll', throttledCardCount);
+		carouselElement.addEventListener('scroll', throttledButtonVisibility);
+
+		return () => {
+			carouselElement.removeEventListener('scroll', throttledCardCount);
+			carouselElement.removeEventListener(
+				'scroll',
+				throttledButtonVisibility,
+			);
+		};
+	}, [throttledCardCount, throttledButtonVisibility]);
+
 	return (
-		<div css={[baseContainerStyles]}>
-			<ol
-				ref={carouselRef}
-				css={carouselStyles}
-				data-heatphan-type="carousel"
-				onFocus={scrollToCardOnFocus}
-			>
-				{products.map((product: ProductBlockElement) => (
-					<li
-						key={product.productCtas[0]?.url ?? product.elementId}
-						css={[subgridStyles, leftBorderStyles]}
-					>
-						<ProductCarouselCard
-							product={product}
-							format={format}
-						/>
-					</li>
-				))}
-			</ol>
-		</div>
+		<>
+			<div css={carouselHeader}>
+				<Subheading
+					format={format}
+					id={'at-a-glance'}
+					topPadding={false}
+				>
+					At a glance
+				</Subheading>
+				<div
+					css={navigationStyles}
+					id={'at-a-glance-carousel-navigation'}
+				></div>
+				<div css={countStyles} id={'at-a-glance-carousel-count'}></div>
+			</div>
+			<div css={[baseContainerStyles]}>
+				<ol
+					ref={carouselRef}
+					css={carouselStyles}
+					data-heatphan-type="carousel"
+					onFocus={scrollToCardOnFocus}
+				>
+					{products.map((product: ProductBlockElement) => (
+						<li
+							key={
+								product.productCtas[0]?.url ?? product.elementId
+							}
+							css={[subgridStyles, leftBorderStyles]}
+						>
+							<ProductCarouselCard
+								product={product}
+								format={format}
+							/>
+						</li>
+					))}
+				</ol>
+				<CarouselNavigationButtons
+					previousButtonEnabled={previousButtonEnabled}
+					nextButtonEnabled={nextButtonEnabled}
+					onClickPreviousButton={() => scrollTo('left')}
+					onClickNextButton={() => scrollTo('right')}
+					sectionId={'at-a-glance'}
+					dataLinkNamePreviousButton={nestedOphanComponents(
+						'carousel',
+						'previous-button',
+					)}
+					dataLinkNameNextButton={nestedOphanComponents(
+						'carousel',
+						'next-button',
+					)}
+				/>
+				<CarouselCount
+					sectionId={'at-a-glance'}
+					count={cardCount}
+					total={carouselLength}
+				/>
+			</div>
+		</>
 	);
 };
