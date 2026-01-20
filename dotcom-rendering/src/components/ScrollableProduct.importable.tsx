@@ -1,8 +1,8 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { Breakpoint } from '@guardian/source/foundations';
-import { from, space } from '@guardian/source/foundations';
-import { useEffect, useRef, useState } from 'react';
+import { from, space, textSans14 } from '@guardian/source/foundations';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { palette } from '../palette';
@@ -176,28 +176,6 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 				setTimeout(() => (isThrottled = false), 200);
 			}
 		};
-	};
-
-	/**
-	 * --- COPIED FROM ScrollableCarousel ---
-	 *
-	 * Updates state of navigation buttons based on carousel's scroll position.
-	 * This function checks the current scroll position of the carousel and sets
-	 * the styles of the previous and next buttons accordingly. The button state
-	 * is toggled when the midpoint of the first or last card has been scrolled
-	 * in or out of view.
-	 */
-	const updateButtonVisibilityOnScroll = () => {
-		const carouselElement = carouselRef.current;
-		if (!carouselElement) return;
-
-		const scrollLeft = carouselElement.scrollLeft;
-		const maxScrollLeft =
-			carouselElement.scrollWidth - carouselElement.clientWidth;
-		const cardWidth = carouselElement.querySelector('li')?.offsetWidth ?? 0;
-
-		setPreviousButtonEnabled(scrollLeft > cardWidth / 2);
-		setNextButtonEnabled(scrollLeft < maxScrollLeft - cardWidth / 2);
 	};
 
 	/**
