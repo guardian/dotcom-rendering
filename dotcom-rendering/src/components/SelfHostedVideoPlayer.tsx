@@ -43,7 +43,12 @@ const videoStyles = (
 		max-height: 100vh;
 		max-height: 100svh;
 	`}
-	cursor: pointer;
+	/**
+	 * Cinemagraphs should only show a pointer cursor when on a card (where clicking
+	 * navigates to the article). In articles, they should not show a pointer cursor
+	 * as clicking does nothing.
+	 */
+	cursor: ${isCinemagraph && isInArticle ? 'default' : 'pointer'};
 
 	/* Prevents CLS by letting the browser know the space the video will take up. */
 	aspect-ratio: ${aspectRatio};
@@ -194,11 +199,12 @@ export const SelfHostedVideoPlayer = forwardRef(
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
 		const videoId = `video-${uniqueId}`;
+		const isCinemagraph = videoStyle === 'Cinemagraph';
 		const showSubtitles =
-			videoStyle !== 'Cinemagraph' && !!subtitleSource && !!subtitleSize;
+			!isCinemagraph && !!subtitleSource && !!subtitleSize;
 
 		const showControls =
-			videoStyle !== 'Cinemagraph' &&
+			!isCinemagraph &&
 			ref &&
 			'current' in ref &&
 			ref.current &&
@@ -216,7 +222,12 @@ export const SelfHostedVideoPlayer = forwardRef(
 				<video
 					id={videoId}
 					css={[
-						videoStyles(aspectRatio, isInArticle, isFeatureCard),
+						videoStyles(
+							aspectRatio,
+							isInArticle,
+							isFeatureCard,
+							isCinemagraph,
+						),
 						showSubtitles && subtitleStyles(subtitleSize),
 					]}
 					crossOrigin="anonymous"
