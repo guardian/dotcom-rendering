@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { from, space, textSans15 } from '@guardian/source/foundations';
 import {
-	SvgChevronDownSingle,
-	SvgChevronUpSingle,
+	LinkButton,
+	type ThemeButton,
 } from '@guardian/source/react-components';
 import { useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
@@ -11,27 +11,21 @@ import type { ProductBlockElement } from '../types/content';
 import { HorizontalSummaryProductCard } from './HorizontalSummaryProductCard';
 import { Subheading } from './Subheading';
 
-const showAllButtonStyles = css`
-	background-color: transparent;
-	border: none;
-	display: flex;
-`;
-
-const showAllTextStyles = css`
-	${textSans15};
-	color: ${palette('--product-card-read-more')};
-	font-weight: 700;
-	text-decoration-line: underline;
-	text-decoration-color: ${palette('--product-card-read-more-decoration')};
-	text-underline-offset: 20%;
-	padding-right: ${space[1]}px;
-`;
-
 const cardCounterStyles = css`
 	${textSans15};
 	color: ${palette('--product-card-count')};
 	font-weight: 700;
 `;
+
+const showAllButtonStyles = css`
+	width: 100%;
+	margin-top: ${space[6]}px;
+`;
+
+export const theme: Partial<ThemeButton> = {
+	textTertiary: palette('--product-button-primary-background'),
+	borderTertiary: palette('--product-button-primary-background'),
+};
 
 export const StackedProducts = ({
 	products,
@@ -90,39 +84,15 @@ export const StackedProducts = ({
 			</div>
 
 			{products.length > 3 && (
-				<div
-					css={[
-						css`
-							display: flex;
-							justify-content: space-between;
-							padding-top: ${space[4]}px;
-						`,
-					]}
+				<LinkButton
+					onClick={() => setIsExpanded(!isExpanded)}
+					cssOverrides={showAllButtonStyles}
+					priority="tertiary"
+					size="small"
+					theme={theme}
 				>
-					<button
-						onClick={() => setIsExpanded(!isExpanded)}
-						css={showAllButtonStyles}
-					>
-						<p css={showAllTextStyles}>
-							{isExpanded ? 'Show less' : 'Show all'}
-						</p>
-						{isExpanded ? (
-							<SvgChevronUpSingle
-								size="xsmall"
-								theme={{
-									fill: palette('--product-card-read-more'),
-								}}
-							/>
-						) : (
-							<SvgChevronDownSingle
-								size="xsmall"
-								theme={{
-									fill: palette('--product-card-read-more'),
-								}}
-							/>
-						)}
-					</button>
-				</div>
+					{isExpanded ? 'Show less' : `Show all (${products.length})`}
+				</LinkButton>
 			)}
 		</div>
 	);
