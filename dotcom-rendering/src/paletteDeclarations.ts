@@ -6147,7 +6147,7 @@ const latestLinksDottedLineDark: PaletteFunction = () =>
 	sourcePalette.neutral[38];
 
 const editorialButtonBackground =
-	(weight: 500 | 400): PaletteFunction =>
+	(weight: 500 | 300): PaletteFunction =>
 	(format: ArticleFormat) => {
 		switch (format.theme) {
 			case Pillar.News:
@@ -6168,7 +6168,7 @@ const editorialButtonBackground =
 		}
 	};
 const editorialButtonBackgroundHover =
-	(weight: 300 | 400 | 500): PaletteFunction =>
+	(weight: 200 | 300 | 400 | 500): PaletteFunction =>
 	(format: ArticleFormat) => {
 		switch (format.theme) {
 			case Pillar.News:
@@ -6943,11 +6943,11 @@ const paletteColours = {
 		dark: dropCapDark,
 	},
 	'--editorial-button-background': {
-		light: editorialButtonBackground(400),
+		light: editorialButtonBackground(300),
 		dark: editorialButtonBackground(500),
 	},
 	'--editorial-button-background-hover': {
-		light: editorialButtonBackgroundHover(300),
+		light: editorialButtonBackgroundHover(200),
 		dark: editorialButtonBackgroundHover(400),
 	},
 	'--editorial-button-border-hover': {
