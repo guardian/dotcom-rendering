@@ -5,7 +5,11 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "rm -rf ./output && vite build && mv ./output/index.html ./output/ab-tests.html",
+		"build": "pnpm build:clean && pnpm build:prod && pnpm build:code && pnpm build:finalize",
+		"build:clean": "rm -rf ./output ./output-temp",
+		"build:prod": "AB_TESTING_OUTPUT=output-temp AB_TESTING_ENV=production vite build",
+		"build:code": "AB_TESTING_ENV=code vite build",
+		"build:finalize": "mv ./output-temp/index.html ./output/ab-tests.html && mv ./output/index.html ./output/ab-tests-code.html && rm -rf ./output-temp",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",

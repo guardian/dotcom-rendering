@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { hostname } from "@guardian/ab-testing-config";
+
 	interface Props {
 		testName: string;
 		testGroups: string[];
@@ -26,7 +28,7 @@
 					</td>
 					<td>
 						<a
-							href={`https://www.theguardian.com/ab-tests/opt-in/${testName}:${group}`}
+							href={`${hostname}/ab-tests/opt-in/${testName}:${group}`}
 							target="_blank"
 						>
 							opt in
@@ -34,7 +36,7 @@
 					</td>
 					<td>
 						<a
-							href={`https://www.theguardian.com/ab-tests/opt-out/${testName}:${group}`}
+							href={`${hostname}/ab-tests/opt-out/${testName}:${group}`}
 							target="_blank"
 						>
 							opt out

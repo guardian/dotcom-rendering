@@ -66,11 +66,18 @@ jobs:
       - name: Build UI
         run: pnpm build
 
-      - name: Save build
+      - name: Save PROD build
         uses: actions/upload-artifact@v5
         with:
-          name: ui-build
+          name: ui-build-prod
           path: ab-testing/frontend/output/ab-tests.html
+          if-no-files-found: error
+
+      - name: Save CODE build
+        uses: actions/upload-artifact@v5
+        with:
+          name: ui-build-code
+          path: ab-testing/frontend/output/ab-tests-code.html
           if-no-files-found: error
 
   deploy-lambda-ci:
@@ -159,11 +166,17 @@ jobs:
           name: ab-testing-build
           path: ab-testing/config/dist
 
-      - name: Fetch UI build
+      - name: Fetch UI PROD build
         uses: actions/download-artifact@v6.0.0
         with:
-          name: ui-build
+          name: ui-build-prod
           path: ab-testing/frontend/output/ab-tests.html
+
+      - name: Fetch UI CODE build
+        uses: actions/download-artifact@v6.0.0
+        with:
+          name: ui-build-code
+          path: ab-testing/frontend/output/ab-tests-code.html
 
       - name: Fetch Deploy Lambda build
         uses: actions/download-artifact@v6.0.0
@@ -199,5 +212,6 @@ jobs:
               - ab-testing/notification-lambda/dist/lambda.zip
             ab-testing-ui-artifact:
               - ab-testing/frontend/output/ab-tests.html
+              - ab-testing/frontend/output/ab-tests-code.html
             cdk.out:
               - ab-testing/cdk/cdk.out
