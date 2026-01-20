@@ -14,7 +14,7 @@ import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import { enrichSupportUrl, getChoiceCardUrl } from '../../../../lib/tracking';
 import { ThreeTierChoiceCards } from '../../../../shared/ThreeTierChoiceCards';
 import { buttonStyles, buttonThemes } from '../../styles/buttonStyles';
-import { useBanner } from '../useBanner';
+import type { BannerData } from '../BannerProps';
 
 const phabletContentMaxWidth = '492px';
 
@@ -124,95 +124,101 @@ const styles = {
 	`,
 };
 
-export const BannerChoiceCards = (): JSX.Element | null => {
-	const {
-		settings,
-		isCollapsed,
-		choices,
-		selectedChoiceCard,
-		actions,
-		tracking,
-		promoCodes,
-		countryCode,
-		content,
-		isTabletOrAbove,
-	} = useBanner();
-
-	if (!settings.choiceCardSettings || !selectedChoiceCard || !choices) {
+export const BannerChoiceCards = ({
+	bannerData,
+}: {
+	bannerData: BannerData;
+}): JSX.Element | null => {
+	if (
+		!bannerData.settings.choiceCardSettings ||
+		!bannerData.selectedChoiceCard ||
+		!bannerData.choices
+	) {
 		return null;
 	}
 
-	const mainOrMobileContent = isTabletOrAbove
-		? content.mainContent
-		: content.mobileContent;
+	const mainOrMobileContent = bannerData.isTabletOrAbove
+		? bannerData.content.mainContent
+		: bannerData.content.mobileContent;
 
 	return (
 		<div css={styles.threeTierChoiceCardsContainer}>
-			{!isCollapsed && (
+			{!bannerData.isCollapsed && (
 				<ThreeTierChoiceCards
-					selectedChoiceCard={selectedChoiceCard}
-					setSelectedChoiceCard={actions.onChoiceCardChange}
-					choices={choices}
+					selectedChoiceCard={bannerData.selectedChoiceCard}
+					setSelectedChoiceCard={
+						bannerData.actions.onChoiceCardChange
+					}
+					choices={bannerData.choices}
 					id={'banner'}
-					submitComponentEvent={actions.submitComponentEvent}
-					choiceCardSettings={settings.choiceCardSettings}
+					submitComponentEvent={
+						bannerData.actions.submitComponentEvent
+					}
+					choiceCardSettings={bannerData.settings.choiceCardSettings}
 				/>
 			)}
 			<div
 				css={styles.ctaContainer(
-					isCollapsed,
-					settings.containerSettings.backgroundColour,
+					bannerData.isCollapsed,
+					bannerData.settings.containerSettings.backgroundColour,
 				)}
 			>
 				<LinkButton
 					href={enrichSupportUrl({
-						baseUrl: getChoiceCardUrl(selectedChoiceCard),
-						tracking,
-						promoCodes: promoCodes ?? [],
-						countryCode,
+						baseUrl: getChoiceCardUrl(
+							bannerData.selectedChoiceCard,
+						),
+						tracking: bannerData.tracking,
+						promoCodes: bannerData.promoCodes ?? [],
+						countryCode: bannerData.countryCode,
 					})}
-					onClick={actions.onCtaClick}
+					onClick={bannerData.actions.onCtaClick}
 					priority="primary"
 					cssOverrides={[styles.linkButtonStyles]}
-					theme={buttonThemes(settings.primaryCtaSettings, 'primary')}
+					theme={buttonThemes(
+						bannerData.settings.primaryCtaSettings,
+						'primary',
+					)}
 					icon={<SvgArrowRightStraight />}
 					iconSide="right"
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					{isCollapsed
+					{bannerData.isCollapsed
 						? mainOrMobileContent.primaryCta?.ctaText
 						: 'Continue'}
 				</LinkButton>
-				{!isCollapsed &&
+				{!bannerData.isCollapsed &&
 					mainOrMobileContent.secondaryCta?.type ===
 						SecondaryCtaType.Custom && (
 						<LinkButton
 							href={mainOrMobileContent.secondaryCta.cta.ctaUrl}
-							onClick={actions.onSecondaryCtaClick}
+							onClick={bannerData.actions.onSecondaryCtaClick}
 							priority="secondary"
 							cssOverrides={buttonStyles(
-								settings.secondaryCtaSettings,
+								bannerData.settings.secondaryCtaSettings,
 							)}
 							theme={buttonThemes(
-								settings.secondaryCtaSettings,
+								bannerData.settings.secondaryCtaSettings,
 								'secondary',
 							)}
 						>
 							{mainOrMobileContent.secondaryCta.cta.ctaText}
 						</LinkButton>
 					)}
-				{isCollapsed && (
+				{bannerData.isCollapsed && (
 					<div css={styles.maybeLaterButtonSizing}>
 						<LinkButton
-							onClick={actions.onClose}
+							onClick={bannerData.actions.onClose}
 							priority="tertiary"
 							cssOverrides={[
-								buttonStyles(settings.secondaryCtaSettings),
+								buttonStyles(
+									bannerData.settings.secondaryCtaSettings,
+								),
 								styles.maybeLaterButton,
 							]}
 							theme={buttonThemes(
-								settings.secondaryCtaSettings,
+								bannerData.settings.secondaryCtaSettings,
 								'tertiary',
 							)}
 						>

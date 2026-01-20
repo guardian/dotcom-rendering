@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space } from '@guardian/source/foundations';
-import { useBanner } from '../useBanner';
+import type { BannerData } from '../BannerProps';
 
 const phabletContentMaxWidth = '492px';
 
@@ -25,12 +25,12 @@ const styles = {
 
 export const BannerContent = ({
 	children,
+	bannerData,
 }: {
 	children: React.ReactNode;
+	bannerData: BannerData;
 }): JSX.Element | null => {
-	const { design } = useBanner();
-
-	if (!design) {
+	if (!bannerData.design) {
 		return null;
 	}
 

@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
 import { buttonStyles, buttonThemes } from '../../styles/buttonStyles';
-import { useBanner } from '../useBanner';
+import type { BannerData } from '../BannerProps';
 
 const styles = {
 	/* ctas for use with main images */
@@ -79,23 +79,18 @@ const styles = {
 	`,
 };
 
-export const BannerCtas = (): JSX.Element | null => {
-	const {
-		content,
-		settings,
-		actions,
-		isTabletOrAbove,
-		selectedChoiceCard,
-		isCollapsed,
-	} = useBanner();
-
-	if (selectedChoiceCard) {
+export const BannerCtas = ({
+	bannerData,
+}: {
+	bannerData: BannerData;
+}): JSX.Element | null => {
+	if (bannerData.selectedChoiceCard) {
 		return null;
 	}
 
-	const mainOrMobileContent = isTabletOrAbove
-		? content.mainContent
-		: content.mobileContent;
+	const mainOrMobileContent = bannerData.isTabletOrAbove
+		? bannerData.content.mainContent
+		: bannerData.content.mobileContent;
 
 	const { primaryCta, secondaryCta } = mainOrMobileContent;
 
@@ -108,7 +103,7 @@ export const BannerCtas = (): JSX.Element | null => {
 		'ctaUrl' in secondaryCta.cta &&
 		'ctaText' in secondaryCta.cta;
 
-	if (!primaryCta && !secondaryCta && !isCollapsed) {
+	if (!primaryCta && !secondaryCta && !bannerData.isCollapsed) {
 		return null;
 	}
 
@@ -118,12 +113,14 @@ export const BannerCtas = (): JSX.Element | null => {
 				{primaryCta && (
 					<LinkButton
 						href={primaryCta.ctaUrl}
-						onClick={actions.onCtaClick}
+						onClick={bannerData.actions.onCtaClick}
 						size="small"
 						priority="primary"
-						cssOverrides={buttonStyles(settings.primaryCtaSettings)}
+						cssOverrides={buttonStyles(
+							bannerData.settings.primaryCtaSettings,
+						)}
 						theme={buttonThemes(
-							settings.primaryCtaSettings,
+							bannerData.settings.primaryCtaSettings,
 							'primary',
 						)}
 					>
@@ -133,30 +130,32 @@ export const BannerCtas = (): JSX.Element | null => {
 				{hasCustomCta && (
 					<LinkButton
 						href={secondaryCta.cta.ctaUrl}
-						onClick={actions.onSecondaryCtaClick}
+						onClick={bannerData.actions.onSecondaryCtaClick}
 						size="small"
 						priority="secondary"
 						cssOverrides={buttonStyles(
-							settings.secondaryCtaSettings,
+							bannerData.settings.secondaryCtaSettings,
 						)}
 						theme={buttonThemes(
-							settings.secondaryCtaSettings,
+							bannerData.settings.secondaryCtaSettings,
 							'secondary',
 						)}
 					>
 						{secondaryCta.cta.ctaText}
 					</LinkButton>
 				)}
-				{isCollapsed && (
+				{bannerData.isCollapsed && (
 					<LinkButton
-						onClick={actions.onClose}
+						onClick={bannerData.actions.onClose}
 						size="small"
 						priority="tertiary"
 						cssOverrides={[
-							buttonStyles(settings.secondaryCtaSettings),
+							buttonStyles(
+								bannerData.settings.secondaryCtaSettings,
+							),
 						]}
 						theme={buttonThemes(
-							settings.secondaryCtaSettings,
+							bannerData.settings.secondaryCtaSettings,
 							'tertiary',
 						)}
 					>

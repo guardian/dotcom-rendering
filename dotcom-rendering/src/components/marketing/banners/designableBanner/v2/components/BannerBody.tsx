@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { from, space, textSans15 } from '@guardian/source/foundations';
 import { createBannerBodyCopy } from '../../components/BannerText';
-import { useBanner } from '../useBanner';
+import type { BannerData } from '../BannerProps';
 
 const getStyles = (textColour: string, highlightColour?: string) => ({
 	container: css`
@@ -36,21 +36,24 @@ const getStyles = (textColour: string, highlightColour?: string) => ({
 	`,
 });
 
-export const BannerBody = (): JSX.Element | null => {
-	const { content, settings, isTabletOrAbove, isCollapsed } = useBanner();
-
-	const textColour = settings.containerSettings.textColor ?? '';
-	const highlightColour = settings.highlightedTextSettings.highlightColour;
+export const BannerBody = ({
+	bannerData,
+}: {
+	bannerData: BannerData;
+}): JSX.Element | null => {
+	const textColour = bannerData.settings.containerSettings.textColor ?? '';
+	const highlightColour =
+		bannerData.settings.highlightedTextSettings.highlightColour;
 
 	const styles = getStyles(textColour, highlightColour);
 
-	const mainOrMobileContent = isTabletOrAbove
-		? content.mainContent
-		: content.mobileContent;
+	const mainOrMobileContent = bannerData.isTabletOrAbove
+		? bannerData.content.mainContent
+		: bannerData.content.mobileContent;
 
 	return (
 		<div css={styles.container}>
-			{!isCollapsed &&
+			{!bannerData.isCollapsed &&
 				createBannerBodyCopy(
 					mainOrMobileContent.paragraphs,
 					mainOrMobileContent.highlightedText,

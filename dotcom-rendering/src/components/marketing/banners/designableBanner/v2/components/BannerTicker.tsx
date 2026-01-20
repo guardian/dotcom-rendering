@@ -1,14 +1,16 @@
 import { Ticker } from '@guardian/source-development-kitchen/react-components';
 import { templateSpacing } from '../../styles/templateStyles';
-import { useBanner } from '../useBanner';
+import type { BannerData } from '../BannerProps';
 
-export const BannerTicker = (): JSX.Element | null => {
-	const { tickerSettings, settings, isCollapsed } = useBanner();
-
+export const BannerTicker = ({
+	bannerData,
+}: {
+	bannerData: BannerData;
+}): JSX.Element | null => {
 	if (
-		!tickerSettings?.tickerData ||
-		isCollapsed ||
-		!settings.tickerStylingSettings
+		!bannerData.tickerSettings?.tickerData ||
+		bannerData.isCollapsed ||
+		!bannerData.settings.tickerStylingSettings
 	) {
 		return null;
 	}
@@ -16,13 +18,15 @@ export const BannerTicker = (): JSX.Element | null => {
 	return (
 		<div css={templateSpacing.bannerTicker}>
 			<Ticker
-				currencySymbol={tickerSettings.currencySymbol}
+				currencySymbol={bannerData.tickerSettings.currencySymbol}
 				copy={{
-					headline: tickerSettings.copy.countLabel,
-					goalCopy: tickerSettings.copy.goalCopy,
+					headline: bannerData.tickerSettings.copy.countLabel,
+					goalCopy: bannerData.tickerSettings.copy.goalCopy,
 				}}
-				tickerData={tickerSettings.tickerData}
-				tickerStylingSettings={settings.tickerStylingSettings}
+				tickerData={bannerData.tickerSettings.tickerData}
+				tickerStylingSettings={
+					bannerData.settings.tickerStylingSettings
+				}
 				size={'medium'}
 			/>
 		</div>

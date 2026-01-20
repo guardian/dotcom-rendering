@@ -28,7 +28,7 @@ import {
 import type { BannerRenderProps } from '../../common/types';
 import { setChannelClosedTimestamp } from '../../utils/localStorage';
 import type { BannerTemplateSettings, ChoiceCardSettings } from '../settings';
-import { BannerContext, type BannerContextType } from './BannerContext';
+import type { BannerData } from './BannerProps';
 import { getComponentIds } from './componentIds';
 import { BannerArticleCount } from './components/BannerArticleCount';
 import { BannerBody } from './components/BannerBody';
@@ -119,10 +119,6 @@ const buildChoiceCardSettings = (
 			: undefined,
 	};
 };
-
-interface BannerComponentProps extends BannerRenderProps {
-	children?: React.ReactNode;
-}
 
 const phabletContentMaxWidth = '492px';
 
@@ -334,8 +330,7 @@ const Banner = ({
 	promoCodes,
 	separateArticleCount,
 	isCollapsible,
-	children,
-}: BannerComponentProps): JSX.Element | null => {
+}: BannerRenderProps): JSX.Element | null => {
 	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
 	const bannerRef = useRef<HTMLDivElement>(null);
 	const [isOpen, setIsOpen] = useState(true);
@@ -547,7 +542,7 @@ const Banner = ({
 		handleClose,
 	]);
 
-	const contextValue: BannerContextType | null = useMemo(() => {
+	const bannerData: BannerData | null = useMemo(() => {
 		if (!design || !settings) {
 			return null;
 		}
@@ -601,7 +596,7 @@ const Banner = ({
 		bannerChannel,
 	]);
 
-	if (!isOpen) {
+	if (!isOpen || !bannerData) {
 		return null;
 	}
 
@@ -620,47 +615,41 @@ const Banner = ({
 		: '.';
 
 	return (
-		<BannerContext.Provider value={contextValue ?? undefined}>
+		<div
+			ref={bannerRef}
+			role="alert"
+			tabIndex={-1}
+			css={styles.outerContainer(
+				bannerData.settings.containerSettings.backgroundColour ?? '',
+				bannerData.settings.containerSettings.textColor ?? 'inherit',
+			)}
+			className={contextClassName}
+		>
 			<div
-				ref={bannerRef}
-				role="alert"
-				tabIndex={-1}
-				css={styles.outerContainer(
-					settings?.containerSettings.backgroundColour ?? '',
-					settings?.containerSettings.textColor ?? 'inherit',
-				)}
-				className={contextClassName}
+				css={
+					isCollapsableBanner && isCollapsed
+						? styles.collapsedLayoutOverrides(
+								cardsImageOrSpaceTemplateString,
+						  )
+						: styles.layoutOverrides(
+								cardsImageOrSpaceTemplateString,
+						  )
+				}
 			>
-				<div
-					css={
-						isCollapsableBanner && isCollapsed
-							? styles.collapsedLayoutOverrides(
-									cardsImageOrSpaceTemplateString,
-							  )
-							: styles.layoutOverrides(
-									cardsImageOrSpaceTemplateString,
-							  )
-					}
-				>
-					<div css={styles.verticalLine} />
-					{children ?? (
-						<>
-							<BannerLogo />
-							<BannerContent>
-								<BannerHeader />
-								<BannerTicker />
-								<BannerArticleCount />
-								<BannerBody />
-							</BannerContent>
-							<BannerChoiceCards />
-							<BannerCtas />
-							<BannerVisual />
-							<BannerCloseButton />
-						</>
-					)}
-				</div>
+				<div css={styles.verticalLine} />
+				<BannerLogo bannerData={bannerData} />
+				<BannerContent bannerData={bannerData}>
+					<BannerHeader bannerData={bannerData} />
+					<BannerArticleCount bannerData={bannerData} />
+					<BannerTicker bannerData={bannerData} />
+					<BannerBody bannerData={bannerData} />
+				</BannerContent>
+				<BannerChoiceCards bannerData={bannerData} />
+				<BannerCtas bannerData={bannerData} />
+				<BannerVisual bannerData={bannerData} />
+				<BannerCloseButton bannerData={bannerData} />
 			</div>
-		</BannerContext.Provider>
+		</div>
 	);
 };
 

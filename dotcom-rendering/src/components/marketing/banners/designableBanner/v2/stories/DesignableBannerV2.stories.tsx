@@ -1,19 +1,6 @@
 import type { OphanComponentType } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import {
-	BannerArticleCount,
-	BannerBody,
-	BannerChoiceCards,
-	BannerCloseButton,
-	BannerComponent,
-	BannerContent,
-	BannerCtas,
-	BannerHeader,
-	BannerLogo,
-	BannerReminder,
-	BannerTicker,
-	BannerVisual,
-} from '../index';
+import { BannerComponent } from '../index';
 
 const meta: Meta<typeof BannerComponent> = {
 	title: 'Components/Marketing/DesignableBannerV2',
@@ -377,18 +364,6 @@ const contentWithReminder = {
 
 export const Default: Story = {
 	name: 'Basic DesignableBanner',
-	render: (args) => (
-		<BannerComponent {...args}>
-			<BannerLogo />
-			<BannerContent>
-				<BannerHeader />
-				<BannerBody />
-			</BannerContent>
-			<BannerCtas />
-			<BannerVisual />
-			<BannerCloseButton />
-		</BannerComponent>
-	),
 	args: {
 		design: design as any,
 		content: content as any,
@@ -433,18 +408,6 @@ export const Default: Story = {
 
 export const WithThreeTierChoiceCards: Story = {
 	name: 'With three tier choice cards',
-	render: (args) => (
-		<BannerComponent {...args}>
-			<BannerLogo />
-			<BannerContent>
-				<BannerHeader />
-				<BannerBody />
-			</BannerContent>
-			<BannerChoiceCards />
-			<BannerCtas />
-			<BannerCloseButton />
-		</BannerComponent>
-	),
 	args: {
 		...Default.args,
 		design: {
@@ -464,18 +427,6 @@ export const WithThreeTierChoiceCards: Story = {
 
 export const ThreeTierChoiceCardsWithHeaderImageAndCopy: Story = {
 	name: 'With three tier choice cards + header image + header copy',
-	render: (args) => (
-		<BannerComponent {...args}>
-			<BannerLogo />
-			<BannerContent>
-				<BannerHeader />
-				<BannerBody />
-			</BannerContent>
-			<BannerChoiceCards />
-			<BannerCtas />
-			<BannerCloseButton />
-		</BannerComponent>
-	),
 	args: {
 		...WithThreeTierChoiceCards.args,
 		design: {
@@ -491,18 +442,6 @@ export const ThreeTierChoiceCardsWithHeaderImageAndCopy: Story = {
 
 export const HeaderImageOnly: Story = {
 	name: 'With header image and no header copy',
-	render: (args) => (
-		<BannerComponent {...args}>
-			<BannerLogo />
-			<BannerContent>
-				<BannerHeader />
-				<BannerBody />
-			</BannerContent>
-			<BannerChoiceCards />
-			<BannerCtas />
-			<BannerCloseButton />
-		</BannerComponent>
-	),
 	args: {
 		...WithThreeTierChoiceCards.args,
 		content: contentNoHeading as any,
@@ -526,18 +465,6 @@ export const HeaderImageOnly: Story = {
 
 export const MainImage: Story = {
 	name: 'With main image',
-	render: (args) => (
-		<BannerComponent {...args}>
-			<BannerLogo />
-			<BannerContent>
-				<BannerHeader />
-				<BannerBody />
-			</BannerContent>
-			<BannerCtas />
-			<BannerVisual />
-			<BannerCloseButton />
-		</BannerComponent>
-	),
 	args: {
 		...Default.args,
 		design: {
@@ -553,18 +480,6 @@ export const MainImage: Story = {
 
 export const DesignThreeAnimatedHeaderImage: Story = {
 	name: 'With animated header image',
-	render: (args) => (
-		<BannerComponent {...args}>
-			<BannerLogo />
-			<BannerContent>
-				<BannerHeader />
-				<BannerBody />
-			</BannerContent>
-			<BannerChoiceCards />
-			<BannerCtas />
-			<BannerCloseButton />
-		</BannerComponent>
-	),
 	args: {
 		...WithThreeTierChoiceCards.args,
 		content: contentNoHeading as any,
@@ -596,19 +511,6 @@ export const DesignThreeAnimatedHeaderImage: Story = {
 
 export const WithTickerAndThreeTierChoiceCards: Story = {
 	name: 'With ticker + three tier choice cards',
-	render: (args) => (
-		<BannerComponent {...args}>
-			<BannerLogo />
-			<BannerContent>
-				<BannerHeader />
-				<BannerTicker />
-				<BannerBody />
-			</BannerContent>
-			<BannerChoiceCards />
-			<BannerCtas />
-			<BannerCloseButton />
-		</BannerComponent>
-	),
 	args: {
 		...WithThreeTierChoiceCards.args,
 		tickerSettings: tickerSettings as any,
@@ -617,19 +519,6 @@ export const WithTickerAndThreeTierChoiceCards: Story = {
 
 export const WithThreeTierChoiceCardsAndArticleCount: Story = {
 	name: 'With article count + three tier choice cards',
-	render: (args) => (
-		<BannerComponent {...args}>
-			<BannerLogo />
-			<BannerContent>
-				<BannerHeader />
-				<BannerArticleCount />
-				<BannerBody />
-			</BannerContent>
-			<BannerChoiceCards />
-			<BannerCtas />
-			<BannerCloseButton />
-		</BannerComponent>
-	),
 	args: {
 		...WithThreeTierChoiceCards.args,
 		separateArticleCountSettings: {
@@ -640,17 +529,6 @@ export const WithThreeTierChoiceCardsAndArticleCount: Story = {
 
 export const NoChoiceCardOrImage: Story = {
 	name: 'With no choice cards or image',
-	render: (args) => (
-		<BannerComponent {...args}>
-			<BannerLogo />
-			<BannerContent>
-				<BannerHeader />
-				<BannerBody />
-			</BannerContent>
-			<BannerCtas />
-			<BannerCloseButton />
-		</BannerComponent>
-	),
 	args: {
 		...Default.args,
 		design: {
@@ -662,18 +540,6 @@ export const NoChoiceCardOrImage: Story = {
 
 export const WithMixedDestinations: Story = {
 	name: 'With destinationUrl on all choice cards',
-	render: (args) => (
-		<BannerComponent {...args}>
-			<BannerLogo />
-			<BannerContent>
-				<BannerHeader />
-				<BannerBody />
-			</BannerContent>
-			<BannerChoiceCards />
-			<BannerCtas />
-			<BannerCloseButton />
-		</BannerComponent>
-	),
 	args: {
 		...WithThreeTierChoiceCards.args,
 		choiceCardsSettings: choiceCardsWithMixedDestinations as any,
@@ -682,19 +548,6 @@ export const WithMixedDestinations: Story = {
 
 export const WithReminder: Story = {
 	name: 'With contributions reminder',
-	render: (args) => (
-		<BannerComponent {...args}>
-			<BannerLogo />
-			<BannerContent>
-				<BannerHeader />
-				<BannerBody />
-				<BannerReminder />
-			</BannerContent>
-			<BannerCtas />
-			<BannerVisual />
-			<BannerCloseButton />
-		</BannerComponent>
-	),
 	args: {
 		...Default.args,
 		content: contentWithReminder as any,
@@ -703,20 +556,6 @@ export const WithReminder: Story = {
 
 export const CollapsableWithThreeTierChoiceCards: Story = {
 	name: 'Collapsable with three tier choice cards',
-	render: (args) => (
-		<BannerComponent {...args}>
-			<BannerLogo />
-			<BannerContent>
-				<BannerHeader />
-				<BannerArticleCount />
-				<BannerTicker />
-				<BannerBody />
-			</BannerContent>
-			<BannerChoiceCards />
-			<BannerCtas />
-			<BannerCloseButton />
-		</BannerComponent>
-	),
 	args: {
 		...WithThreeTierChoiceCards.args,
 		tickerSettings: tickerSettings as any,
@@ -729,18 +568,6 @@ export const CollapsableWithThreeTierChoiceCards: Story = {
 
 export const CollapsableWithMainImage: Story = {
 	name: 'Collapsable with main image',
-	render: (args) => (
-		<BannerComponent {...args}>
-			<BannerLogo />
-			<BannerContent>
-				<BannerHeader />
-				<BannerBody />
-			</BannerContent>
-			<BannerCtas />
-			<BannerVisual />
-			<BannerCloseButton />
-		</BannerComponent>
-	),
 	args: {
 		...MainImage.args,
 		isCollapsible: true,
@@ -749,18 +576,6 @@ export const CollapsableWithMainImage: Story = {
 
 export const CollapsableMaybeLaterVariant: Story = {
 	name: 'Collapsable - Maybe later variant',
-	render: (args) => (
-		<BannerComponent {...args}>
-			<BannerLogo />
-			<BannerContent>
-				<BannerHeader />
-				<BannerBody />
-			</BannerContent>
-			<BannerCtas />
-			<BannerVisual />
-			<BannerCloseButton />
-		</BannerComponent>
-	),
 	args: {
 		...CollapsableWithMainImage.args,
 		tracking: {
@@ -772,20 +587,6 @@ export const CollapsableMaybeLaterVariant: Story = {
 
 export const CollapsableWithThreeTierChoiceCardsMaybeLaterVariant: Story = {
 	name: 'Collapsable with three tier choice cards - Maybe later variant',
-	render: (args) => (
-		<BannerComponent {...args}>
-			<BannerLogo />
-			<BannerContent>
-				<BannerHeader />
-				<BannerArticleCount />
-				<BannerTicker />
-				<BannerBody />
-			</BannerContent>
-			<BannerChoiceCards />
-			<BannerCtas />
-			<BannerCloseButton />
-		</BannerComponent>
-	),
 	args: {
 		...CollapsableWithThreeTierChoiceCards.args,
 		tracking: {

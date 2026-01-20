@@ -3,6 +3,7 @@ export {
 	DesignableBannerUnvalidated as BannerUnvalidated,
 	BannerComponent,
 } from './Banner';
+export type { BannerData } from './BannerProps';
 export { BannerHeader } from './components/BannerHeader';
 export { BannerBody } from './components/BannerBody';
 export { BannerVisual } from './components/BannerVisual';
@@ -14,4 +15,3 @@ export { BannerArticleCount } from './components/BannerArticleCount';
 export { BannerLogo } from './components/BannerLogo';
 export { BannerContent } from './components/BannerContent';
 export { BannerReminder } from './components/BannerReminder';
-export { useBanner } from './useBanner';

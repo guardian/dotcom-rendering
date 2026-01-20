@@ -7,7 +7,7 @@ import {
 	SvgCross,
 } from '@guardian/source/react-components';
 import { buttonStyles, buttonThemes } from '../../styles/buttonStyles';
-import { useBanner } from '../useBanner';
+import type { BannerData } from '../BannerProps';
 
 const styles = {
 	closeButtonContainer: css`
@@ -97,25 +97,32 @@ const styles = {
 	`,
 };
 
-export const BannerCloseButton = (): JSX.Element => {
-	const { isCollapsible, isCollapsed, settings, actions } = useBanner();
-
-	if (isCollapsible) {
+export const BannerCloseButton = ({
+	bannerData,
+}: {
+	bannerData: BannerData;
+}): JSX.Element => {
+	if (bannerData.isCollapsible) {
 		return (
-			<div css={styles.closeAndCollapseButtonContainer(isCollapsed)}>
+			<div
+				css={styles.closeAndCollapseButtonContainer(
+					bannerData.isCollapsed,
+				)}
+			>
 				<div css={styles.collapsableButtonContainer}>
 					<Button
-						onClick={actions.onToggleCollapse}
+						onClick={bannerData.actions.onToggleCollapse}
 						cssOverrides={[
 							styles.iconOverrides(
-								settings.closeButtonSettings.default
+								bannerData.settings.closeButtonSettings.default
 									.backgroundColour,
-								settings.closeButtonSettings.default.textColour,
+								bannerData.settings.closeButtonSettings.default
+									.textColour,
 							),
 						]}
 						priority="secondary"
 						icon={
-							isCollapsed ? (
+							bannerData.isCollapsed ? (
 								<SvgChevronUpSingle />
 							) : (
 								<SvgChevronDownSingle />
@@ -123,12 +130,14 @@ export const BannerCloseButton = (): JSX.Element => {
 						}
 						size="small"
 						theme={buttonThemes(
-							settings.closeButtonSettings,
+							bannerData.settings.closeButtonSettings,
 							'secondary',
 						)}
 						hideLabel={true}
 					>
-						{isCollapsed ? 'Expand banner' : 'Collapse banner'}
+						{bannerData.isCollapsed
+							? 'Expand banner'
+							: 'Collapse banner'}
 					</Button>
 				</div>
 			</div>
@@ -138,13 +147,16 @@ export const BannerCloseButton = (): JSX.Element => {
 	return (
 		<div css={styles.closeButtonContainer}>
 			<Button
-				onClick={actions.onClose}
+				onClick={bannerData.actions.onClose}
 				cssOverrides={buttonStyles(
-					settings.closeButtonSettings,
+					bannerData.settings.closeButtonSettings,
 					styles.closeButtonOverrides,
 				)}
 				priority="tertiary"
-				theme={buttonThemes(settings.closeButtonSettings, 'tertiary')}
+				theme={buttonThemes(
+					bannerData.settings.closeButtonSettings,
+					'tertiary',
+				)}
 				icon={<SvgCross />}
 				size="small"
 				hideLabel={true}

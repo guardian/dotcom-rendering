@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source/foundations';
 import { SvgGuardianLogo } from '@guardian/source/react-components';
 import { hexColourToString } from '@guardian/support-dotcom-components';
-import { useBanner } from '../useBanner';
+import type { BannerData } from '../BannerProps';
 
 const styles = {
 	guardianLogoContainer: css`
@@ -21,17 +21,21 @@ const styles = {
 	`,
 };
 
-export const BannerLogo = (): JSX.Element | null => {
-	const { design } = useBanner();
-
-	if (!design) {
+export const BannerLogo = ({
+	bannerData,
+}: {
+	bannerData: BannerData;
+}): JSX.Element | null => {
+	if (!bannerData.design) {
 		return null;
 	}
 
 	return (
 		<div css={styles.guardianLogoContainer}>
 			<SvgGuardianLogo
-				textColor={hexColourToString(design.colours.basic.logo)}
+				textColor={hexColourToString(
+					bannerData.design.colours.basic.logo,
+				)}
 			/>
 		</div>
 	);

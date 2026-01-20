@@ -7,17 +7,7 @@ import type {
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import type { BannerRenderProps } from '../../../common/types';
-import {
-	BannerArticleCount,
-	BannerBody,
-	BannerChoiceCards,
-	BannerCloseButton,
-	BannerComponent,
-	BannerContent,
-	BannerCtas,
-	BannerHeader,
-	BannerTicker,
-} from '../index';
+import { BannerComponent } from '../index';
 
 jest.mock('../../../../../../lib/useMatchMedia', () => ({
 	useMatchMedia: jest.fn(() => true),
@@ -128,15 +118,7 @@ const mockProps: BannerRenderProps = {
 
 describe('DesignableBanner V2', () => {
 	it('renders the banner with heading and body', () => {
-		render(
-			<BannerComponent {...mockProps}>
-				<BannerContent>
-					<BannerHeader />
-					<BannerBody />
-					<BannerCtas />
-				</BannerContent>
-			</BannerComponent>,
-		);
+		render(<BannerComponent {...mockProps} />);
 
 		expect(screen.getByText('Main Heading')).toBeInTheDocument();
 		expect(screen.getByText('Main Paragraph 1')).toBeInTheDocument();
@@ -144,13 +126,7 @@ describe('DesignableBanner V2', () => {
 	});
 
 	it('calls onCtaClick when the primary CTA is clicked', () => {
-		render(
-			<BannerComponent {...mockProps}>
-				<BannerContent>
-					<BannerCtas />
-				</BannerContent>
-			</BannerComponent>,
-		);
+		render(<BannerComponent {...mockProps} />);
 
 		const cta = screen.getByText('Main CTA');
 		fireEvent.click(cta);
@@ -159,11 +135,7 @@ describe('DesignableBanner V2', () => {
 	});
 
 	it('calls onCloseClick when the close button is clicked', () => {
-		render(
-			<BannerComponent {...mockProps}>
-				<BannerCloseButton />
-			</BannerComponent>,
-		);
+		render(<BannerComponent {...mockProps} />);
 
 		const closeButton = screen.getByRole('button', { name: /Close/i });
 		fireEvent.click(closeButton);
@@ -172,14 +144,7 @@ describe('DesignableBanner V2', () => {
 	});
 
 	it('renders as uncollapsed by default when isCollapsible is true', () => {
-		render(
-			<BannerComponent {...mockProps} isCollapsible={true}>
-				<BannerContent>
-					<BannerHeader />
-					<BannerBody />
-				</BannerContent>
-			</BannerComponent>,
-		);
+		render(<BannerComponent {...mockProps} isCollapsible={true} />);
 
 		// Now starts uncollapsed by default
 		expect(screen.getByText('Main Paragraph 1')).toBeInTheDocument();
@@ -187,13 +152,7 @@ describe('DesignableBanner V2', () => {
 	});
 
 	it('toggles collapse when the toggle button is clicked', () => {
-		render(
-			<BannerComponent {...mockProps} isCollapsible={true}>
-				<BannerHeader />
-				<BannerBody />
-				<BannerCloseButton />
-			</BannerComponent>,
-		);
+		render(<BannerComponent {...mockProps} isCollapsible={true} />);
 
 		// Starts uncollapsed
 		expect(screen.getByText('Main Paragraph 1')).toBeInTheDocument();
@@ -222,11 +181,7 @@ describe('DesignableBanner V2', () => {
 			},
 		};
 
-		render(
-			<BannerComponent {...tickerProps}>
-				<BannerTicker />
-			</BannerComponent>,
-		);
+		render(<BannerComponent {...tickerProps} />);
 
 		// Ticker is a complex component, we just check if the container is there
 		// or if we should mock it. For now, let's see if it renders something recognizable.
@@ -272,11 +227,7 @@ describe('DesignableBanner V2', () => {
 			},
 		};
 
-		render(
-			<BannerComponent {...choiceCardProps}>
-				<BannerChoiceCards />
-			</BannerComponent>,
-		);
+		render(<BannerComponent {...choiceCardProps} />);
 
 		expect(screen.getByText('£10')).toBeInTheDocument();
 		expect(screen.getByText('£20')).toBeInTheDocument();
@@ -292,11 +243,7 @@ describe('DesignableBanner V2', () => {
 			},
 		};
 
-		render(
-			<BannerComponent {...articleCountProps}>
-				<BannerArticleCount />
-			</BannerComponent>,
-		);
+		render(<BannerComponent {...articleCountProps} />);
 
 		// We look for the article count text
 		// Usually it's something like "You've read 5 articles..."

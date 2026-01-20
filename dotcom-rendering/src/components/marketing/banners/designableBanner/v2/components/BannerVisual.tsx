@@ -3,9 +3,10 @@ import { between, from, space } from '@guardian/source/foundations';
 import type { Image } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ImageAttrs } from '../../../../shared/ResponsiveImage';
 import { ResponsiveImage } from '../../../../shared/ResponsiveImage';
-import { useBanner } from '../useBanner';
+import type { BannerData } from '../BannerProps';
 
 interface BannerVisualProps {
+	bannerData: BannerData;
 	settings?: Image;
 	isHeaderImage?: boolean;
 }
@@ -89,14 +90,13 @@ const getStyles = (isHeaderImage = false) => {
 };
 
 export const BannerVisual = ({
+	bannerData,
 	settings,
 	isHeaderImage,
 }: BannerVisualProps): JSX.Element | null => {
-	const { settings: bannerSettings, isCollapsed } = useBanner();
+	const imageSettings = settings ?? bannerData.settings.imageSettings;
 
-	const imageSettings = settings ?? bannerSettings.imageSettings;
-
-	if (!imageSettings || (isCollapsed && !isHeaderImage)) {
+	if (!imageSettings || (bannerData.isCollapsed && !isHeaderImage)) {
 		return null;
 	}
 
@@ -118,7 +118,7 @@ export const BannerVisual = ({
 	if (imageSettings.tabletUrl) {
 		images.push({
 			url: getImageUrl(
-				isCollapsed,
+				bannerData.isCollapsed,
 				imageSettings.mobileUrl,
 				imageSettings.tabletUrl,
 			),
@@ -128,7 +128,7 @@ export const BannerVisual = ({
 	if (imageSettings.desktopUrl) {
 		images.push({
 			url: getImageUrl(
-				isCollapsed,
+				bannerData.isCollapsed,
 				imageSettings.tabletUrl,
 				imageSettings.desktopUrl,
 			),
@@ -144,7 +144,7 @@ export const BannerVisual = ({
 	if (imageSettings.wideUrl) {
 		images.push({
 			url: getImageUrl(
-				isCollapsed,
+				bannerData.isCollapsed,
 				imageSettings.tabletUrl,
 				imageSettings.wideUrl,
 			),
@@ -157,7 +157,7 @@ export const BannerVisual = ({
 			<ResponsiveImage
 				baseImage={baseImage}
 				images={images}
-				bannerId={bannerSettings.bannerId}
+				bannerId={bannerData.settings.bannerId}
 			/>
 		</div>
 	);

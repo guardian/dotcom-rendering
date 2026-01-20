@@ -1,14 +1,13 @@
 import type { BannerChannel } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import type { Dispatch, SetStateAction } from 'react';
-import { createContext } from 'react';
 import type {
 	BannerRenderProps,
 	ContributionsReminderTracking,
 } from '../../common/types';
 import type { BannerTemplateSettings } from '../settings';
 
-export interface BannerContextType {
+export interface BannerData {
 	// --- Raw Data ---
 	bannerChannel: BannerChannel;
 	content: BannerRenderProps['content'];
@@ -42,7 +41,3 @@ export interface BannerContextType {
 		submitComponentEvent: BannerRenderProps['submitComponentEvent'];
 	};
 }
-
-export const BannerContext = createContext<BannerContextType | undefined>(
-	undefined,
-);

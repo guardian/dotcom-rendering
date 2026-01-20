@@ -11,7 +11,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import type { JSX } from 'react';
-import { useBanner } from '../useBanner';
+import type { BannerData } from '../BannerProps';
 import { BannerVisual } from './BannerVisual';
 
 const getStyles = (
@@ -100,25 +100,26 @@ const getStyles = (
 	};
 };
 
-export const BannerHeader = (): JSX.Element | null => {
-	const { content, design, settings, isCollapsed, isTabletOrAbove } =
-		useBanner();
-
-	if (!design) {
+export const BannerHeader = ({
+	bannerData,
+}: {
+	bannerData: BannerData;
+}): JSX.Element | null => {
+	if (!bannerData.design) {
 		return null;
 	}
 
-	const headlineSize = design.fonts?.heading.size ?? 'medium';
+	const headlineSize = bannerData.design.fonts?.heading.size ?? 'medium';
 	const styles = getStyles(
-		settings.headerSettings?.textColour,
-		settings.containerSettings.backgroundColour,
+		bannerData.settings.headerSettings?.textColour,
+		bannerData.settings.containerSettings.backgroundColour,
 		headlineSize,
-		isCollapsed,
-		!!settings.headerSettings?.headerImage,
-		!!settings.imageSettings,
+		bannerData.isCollapsed,
+		!!bannerData.settings.headerSettings?.headerImage,
+		!!bannerData.settings.imageSettings,
 	);
 
-	const containerCss = settings.headerSettings?.headerImage
+	const containerCss = bannerData.settings.headerSettings?.headerImage
 		? styles.headerWithImageContainer
 		: styles.headerContainer;
 
@@ -126,18 +127,22 @@ export const BannerHeader = (): JSX.Element | null => {
 		<div css={containerCss}>
 			<div css={styles.container}>
 				<header css={styles.header}>
-					{settings.headerSettings?.headerImage && (
+					{bannerData.settings.headerSettings?.headerImage && (
 						<BannerVisual
-							settings={settings.headerSettings.headerImage}
+							bannerData={bannerData}
+							settings={
+								bannerData.settings.headerSettings.headerImage
+							}
 							isHeaderImage={true}
 						/>
 					)}
-					{(content.mainContent.heading ??
-						content.mobileContent.heading) && (
+					{(bannerData.content.mainContent.heading ??
+						bannerData.content.mobileContent.heading) && (
 						<h2>
-							{isTabletOrAbove && !isCollapsed
-								? content.mainContent.heading
-								: content.mobileContent.heading}
+							{bannerData.isTabletOrAbove &&
+							!bannerData.isCollapsed
+								? bannerData.content.mainContent.heading
+								: bannerData.content.mobileContent.heading}
 						</h2>
 					)}
 				</header>
