@@ -7,7 +7,7 @@ import type {
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import type { BannerRenderProps } from '../../../common/types';
-import { BannerComponent } from '../index';
+import { BannerComponent } from '../exports';
 
 jest.mock('../../../../../../lib/useMatchMedia', () => ({
 	useMatchMedia: jest.fn(() => true),

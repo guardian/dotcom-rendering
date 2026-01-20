@@ -1,6 +1,6 @@
 import type { OphanComponentType } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { BannerComponent } from '../index';
+import { BannerComponent } from '../exports';
 
 const meta: Meta<typeof BannerComponent> = {
 	title: 'Components/Marketing/DesignableBannerV2',
