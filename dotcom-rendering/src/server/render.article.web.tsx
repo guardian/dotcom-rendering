@@ -166,6 +166,10 @@ window.twttr = (function(d, s, id) {
 
 	const { canonicalUrl, webPublicationDate } = frontendData;
 
+	const isInteractive =
+		design === ArticleDesign.FullPageInteractive ||
+		design === ArticleDesign.Interactive;
+
 	const isBeforeInteractiveDarkModeSupport =
 		Date.parse(webPublicationDate) < Date.parse('2026-01-13T00:00:00Z');
 
@@ -190,10 +194,9 @@ window.twttr = (function(d, s, id) {
 		config,
 		hasLiveBlogTopAd: !!frontendData.config.hasLiveBlogTopAd,
 		hasSurveyAd: !!frontendData.config.hasSurveyAd,
+		isInteractive,
 		onlyLightColourScheme:
-			(design === ArticleDesign.FullPageInteractive ||
-				design === ArticleDesign.Interactive) &&
-			isBeforeInteractiveDarkModeSupport,
+			isInteractive && isBeforeInteractiveDarkModeSupport,
 		articleTheme: theme,
 	});
 
