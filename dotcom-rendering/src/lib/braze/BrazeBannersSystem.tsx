@@ -121,16 +121,6 @@ export const canShowBrazeBannersSystem = async (
 	}
 
 	/**
-	 * NOTE: ℹ️
-	 * If loading the banners for the first time, Braze requires some time to fetch them from their servers.
-	 * Therefore, on the first load, there might be no banners available yet.
-	 * Question for the relevant team: Should we implement a retry mechanism here to wait for the banners to be fetched?
-	 * Or is it acceptable to not show any banners on the first load?
-	 * We can implement a waiting mechanism with a timeout to avoid blocking the other candidates for too long.
-	 * But should we? 🤔
-	 */
-
-	/**
 	 * Banner for the placement ID.
 	 * It is an object of type Banner, if a banner with the given placement ID exists.
 	 * It is null if the banner does not exist, or if banners are disabled.
