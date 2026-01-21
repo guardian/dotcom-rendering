@@ -53,10 +53,10 @@ function parseArticleDataToFrontCard(
 ): DCRFrontCard {
 	const format = decideFormatForArticle(category, article);
 	const group: Group = `${categoryIndex}`;
-	const normalizedCategory = category.category
+	const normalisedCategory = category.category
 		.toLowerCase()
 		.replace(/\s+/g, '-');
-	const dataLinkName = `${storylineId} | ${normalizedCategory} | ${getDataLinkNameCard(
+	const dataLinkName = `${storylineId} | ${normalisedCategory} | ${getDataLinkNameCard(
 		format,
 		group,
 		index,
