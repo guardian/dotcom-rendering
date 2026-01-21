@@ -7,6 +7,7 @@ import {
 	textSansBold15,
 	textSansBold17,
 } from '@guardian/source/foundations';
+import { Link } from '@guardian/source/react-components';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import type { ProductBlockElement } from '../types/content';
@@ -54,10 +55,12 @@ const buttonContainer = css`
 
 const readMore = css`
 	${textSansBold15};
-	text-decoration-line: underline;
 	text-decoration-color: ${palette('--product-card-read-more-decoration')};
 	color: ${palette('--product-card-read-more')};
-	text-underline-offset: 20%;
+	:hover {
+		color: ${palette('--product-card-read-more')};
+		text-decoration-color: ${palette('--product-card-read-more')};
+	}
 `;
 
 const productCardHeading = css`
@@ -96,9 +99,13 @@ export const HorizontalSummaryProductCard = ({
 			<div css={informationContainer}>
 				<div css={productCardHeading}>{product.primaryHeadingText}</div>
 				<div css={secondaryHeading}>{product.secondaryHeadingHtml}</div>
-				<a href={`#${product.h2Id}`} css={readMore}>
+				<Link
+					href={`#${product.h2Id}`}
+					onFocus={(event) => event.stopPropagation()}
+					cssOverrides={readMore}
+				>
 					Read more
-				</a>
+				</Link>
 				<div css={price}>{cardCta.price}</div>
 			</div>
 			<div css={buttonContainer}>
