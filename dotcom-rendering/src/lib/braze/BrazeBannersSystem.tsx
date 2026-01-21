@@ -1,8 +1,8 @@
-import type { CanShowResult } from '../messagePicker';
-import { BrazeInstance } from './initialiseBraze';
-import { BrazeBannersSystemPlacementId } from './buildBrazeMessaging';
-import { Banner } from '@braze/web-sdk';
+import type { Banner } from '@braze/web-sdk';
 import { useEffect, useRef, useState } from 'react';
+import type { CanShowResult } from '../messagePicker';
+import type { BrazeBannersSystemPlacementId } from './buildBrazeMessaging';
+import type { BrazeInstance } from './initialiseBraze';
 
 /**
  * Meta information required to display a Braze Banner.
@@ -44,7 +44,7 @@ export const canShowBrazeBannersSystem = async (
 	 * It is undefined if the SDK has not been initialized.
 	 */
 	const banner: Banner | null | undefined = braze.getBanner(placementId);
-	if (!!banner) {
+	if (banner) {
 		return {
 			show: true,
 			meta: {
@@ -76,15 +76,16 @@ export const BrazeBannersSystemDisplay = ({
 			containerRef.current.innerHTML = '';
 
 			// Returns the string property
-			const minHeight = meta.banner.getStringProperty('minHeight');
-			if (minHeight) {
-				setMinHeight(minHeight);
+			const metaMinHeight = meta.banner.getStringProperty('minHeight');
+			if (metaMinHeight) {
+				setMinHeight(metaMinHeight);
 			}
 
 			// Let Braze inject the HTML/CSS
 			meta.braze.insertBanner(meta.banner, containerRef.current);
 		}
-	}, [meta.banner]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<div
