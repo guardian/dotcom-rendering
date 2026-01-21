@@ -1,4 +1,4 @@
-import { ProductLinkButton } from './ProductLinkElementButton';
+import { ProductLinkElementButton } from './ProductLinkElementButton';
 import { StandardLinkElementButton } from './StandardLinkElementButton';
 
 type LinkElementButtonProps = {
@@ -31,7 +31,7 @@ export const LinkElementButton = ({
 		}
 		case 'ProductButton': {
 			return (
-				<ProductLinkButton
+				<ProductLinkElementButton
 					label={label}
 					url={url}
 					priority={LinkTypePriorityToButtonPriority[priority]}

@@ -1,9 +1,9 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { LinkElementButton } from './LinkElementButton';
+import { ProductLinkElementButton } from './ProductLinkElementButton';
 
 const meta = {
-	component: LinkElementButton,
+	component: ProductLinkElementButton,
 	title: 'Components/ProductLinkButton',
 	parameters: {
 		layout: 'padded',
@@ -19,10 +19,9 @@ const meta = {
 	args: {
 		label: '£6.50 for 350g at Ollie’s Kimchi',
 		url: 'https://ollieskimchi.co.uk/shop/ols/products/ollies-kimchi',
-		linkType: 'ProductButton',
-		priority: 'Primary',
+		priority: 'primary',
 	},
-} satisfies Meta<typeof LinkElementButton>;
+} satisfies Meta<typeof ProductLinkElementButton>;
 
 export default meta;
 

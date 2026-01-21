@@ -2,7 +2,7 @@ import type { ButtonPriority } from '@guardian/source/react-components';
 import { EditorialLinkButton } from './EditorialLinkButton';
 import { getPropsForLinkUrl } from './utils';
 
-type LinkElementButtonProps = {
+export type StandardLinkElementButtonProps = {
 	label: string;
 	url: string;
 	priority?: ButtonPriority;
@@ -12,7 +12,7 @@ export const StandardLinkElementButton = ({
 	label,
 	url,
 	priority,
-}: LinkElementButtonProps) => {
+}: StandardLinkElementButtonProps) => {
 	return (
 		<EditorialLinkButton
 			iconSide="right"

@@ -6190,7 +6190,7 @@ const editorialButtonBackgroundHover =
 	};
 
 const editorialButtonBorderHover =
-	(weight: 300 | 400 | 500): PaletteFunction =>
+	(weight: 200 | 400 | 500): PaletteFunction =>
 	(format: ArticleFormat) => {
 		switch (format.theme) {
 			case Pillar.News:
@@ -6951,7 +6951,7 @@ const paletteColours = {
 		dark: editorialButtonBackgroundHover(400),
 	},
 	'--editorial-button-border-hover': {
-		light: editorialButtonBorderHover(300),
+		light: editorialButtonBorderHover(200),
 		dark: editorialButtonBorderHover(400),
 	},
 	'--editorial-button-text': {
