@@ -750,7 +750,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									)}
 
 								{isApps && (
-									<Island priority="critical">
+									<Island
+										priority="critical"
+										defer={{ until: 'visible' }}
+									>
 										<AppsEpic />
 									</Island>
 								)}
