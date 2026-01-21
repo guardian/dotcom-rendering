@@ -27,6 +27,7 @@ const videoStyles = (aspectRatio: number) => css`
 	position: relative;
 	display: block;
 	height: auto;
+	width: 100%;
 	cursor: pointer;
 
 	/* Prevents CLS by letting the browser know the space the video will take up. */
