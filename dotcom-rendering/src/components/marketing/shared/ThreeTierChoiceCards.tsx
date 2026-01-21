@@ -325,7 +325,6 @@ export const ThreeTierChoiceCards = ({
 										}
 										checked={selected}
 										onChange={() => {
-											console.log('changed');
 											setSelectedChoiceCard(card);
 										}}
 										theme={customRadioTheme}
