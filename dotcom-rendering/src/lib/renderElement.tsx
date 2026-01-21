@@ -1065,7 +1065,17 @@ export const RenderArticleElement = ({
 	});
 
 	const needsFigure = !bareElements.has(element._type);
-	const role = 'role' in element ? (element.role as RoleType) : undefined;
+
+	const isInteractiveFormat =
+		format.design === ArticleDesign.Interactive ||
+		format.design === ArticleDesign.FullPageInteractive;
+
+	const role: RoleType | 'fullWidth' | undefined =
+		'role' in element
+			? element.role === 'fullWidth' && !isInteractiveFormat
+				? 'immersive'
+				: (element.role as RoleType | undefined)
+			: undefined;
 
 	return needsFigure ? (
 		<Figure
