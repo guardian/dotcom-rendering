@@ -1,7 +1,6 @@
 import { isString } from '@guardian/libs';
 import type { BannerProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import { BasicBanner } from '../components/BasicBanner.importable';
-import { BasicGutterAsk } from '../components/BasicGutterAsk.importable';
 import { ConfigProvider } from '../components/ConfigContext';
 import { Island } from '../components/Island';
 import { DesignableBanner } from '../components/marketing/banners/designableBanner/DesignableBanner';
@@ -20,33 +19,6 @@ import { polyfillIO } from '../lib/polyfill.io';
 import { createGuardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
 import { htmlPageTemplate } from './htmlPageTemplate';
-
-const Gutter = () => {
-	return (
-		<Island priority="feature" defer={{ until: 'visible' }}>
-			<BasicGutterAsk
-				variant={{
-					image: {
-						mainUrl:
-							'https://uploads.guim.co.uk/2025/06/12/not_for_sale_bg_scaled.svg',
-						altText: 'alt',
-					},
-					bodyCopy: [
-						'The Guardian’s expert news coverage is funded by people like you, not a billionaire owner. Will you help us keep our independent journalism free and open to all today?',
-					],
-					cta: {
-						text: 'Support us',
-						baseUrl: 'https://support.theguardian.com/contribute',
-					},
-				}}
-				enrichedUrl={'https://support.theguardian.com'}
-				onCtaClick={() => {
-					console.log('click');
-				}}
-			/>
-		</Island>
-	);
-};
 
 const bannerProps: BannerProps = {
 	tracking: {
@@ -117,7 +89,7 @@ const Banner = () => {
 };
 
 interface Props {
-	name: 'gutter' | 'banner';
+	name: 'banner' | 'static-banner';
 }
 export const renderComponent = ({
 	name,
@@ -138,7 +110,7 @@ export const renderComponent = ({
 		switches: {},
 	});
 	const config = {
-		renderingTarget: 'Web',
+		renderingTarget: 'Apps',
 		darkModeAvailable: false,
 		assetOrigin: ASSET_ORIGIN,
 		editionId: 'UK',
@@ -155,9 +127,7 @@ export const renderComponent = ({
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
 			<div>
-				<h1>testing!</h1>
-				{name === 'gutter' && <Gutter />}
-				{/*{name === 'banner' && <StaticBanner />}*/}
+				{name === 'static-banner' && <StaticBanner />}
 				{name === 'banner' && <Banner />}
 			</div>
 		</ConfigProvider>,
@@ -166,12 +136,11 @@ export const renderComponent = ({
 	const pageHtml = htmlPageTemplate({
 		html,
 		css: extractedCss,
-		renderingTarget: 'Web',
+		renderingTarget: 'Apps',
 		config,
 		guardian,
 		scriptTags,
 		weAreHiring: false,
-		section: 'uk',
 	});
 	return {
 		html: pageHtml,

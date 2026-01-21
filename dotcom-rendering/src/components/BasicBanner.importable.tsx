@@ -5,9 +5,7 @@ export const BasicBanner = (props: BannerProps) => {
 	const [BannerComponent, setBannerComponent] =
 		useState<React.ElementType<BannerProps>>();
 
-	console.log('rendering BasicBanner');
 	useEffect(() => {
-		console.log('importing DesignableBanner');
 		import(`./marketing/banners/designableBanner/DesignableBanner`)
 			.then((module) => {
 				setBannerComponent(() => module.DesignableBanner);
