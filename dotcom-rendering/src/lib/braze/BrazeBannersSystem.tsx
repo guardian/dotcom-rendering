@@ -199,6 +199,11 @@ export const BrazeBannersSystemDisplay = ({
 						subscribed: true,
 					}),
 					...options,
+				}).catch((error) => {
+					brazeBannersSystemLogger.warn(
+						'Error subscribing to newsletter:',
+						error,
+					);
 				});
 			}
 		},
