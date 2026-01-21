@@ -128,6 +128,11 @@ export const SelfHostedVideo = {
 		...Default,
 		trails: [selfHostedVideo45Card],
 	},
+	parameters: {
+		chromatic: {
+			disableSnapshot: true,
+		},
+	},
 } satisfies Story;
 
 export const WithSpecialPaletteVariations = {

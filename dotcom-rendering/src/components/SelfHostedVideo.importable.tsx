@@ -206,8 +206,16 @@ type Props = {
 	linkTo: string;
 	subtitleSource?: string;
 	subtitleSize: SubtitleSize;
+	/**
+	 * The minimum/maximum aspect ratio the video will have. The video will be cropped if this
+	 * value is defined and the video aspect ratio is less/greater than this value.
+	 */
 	minAspectRatio?: number;
 	maxAspectRatio?: number;
+	/**
+	 * Specify this value to enforce the size of the video container on mobile/desktop.
+	 * Grey bars will appear if this value is defined and differs from the video aspect ratio.
+	 */
 	containerAspectRatioMobile?: number;
 	containerAspectRatioDesktop?: number;
 };

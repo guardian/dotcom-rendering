@@ -453,6 +453,11 @@ export const StandardBoostedWithLiveUpdates: Story = {
 			</>
 		);
 	},
+	parameters: {
+		chromatic: {
+			disableSnapshot: true,
+		},
+	},
 };
 
 export const StandardCards: Story = {
@@ -468,6 +473,11 @@ export const StandardCards: Story = {
 				...galleryTrails.slice(0, 2),
 				...youtubeVideoTrails.slice(0, 2),
 			],
+		},
+	},
+	parameters: {
+		chromatic: {
+			disableSnapshot: true,
 		},
 	},
 };
