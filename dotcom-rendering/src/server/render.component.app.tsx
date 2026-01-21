@@ -6,8 +6,10 @@ import { Island } from '../components/Island';
 import { DesignableBanner } from '../components/marketing/banners/designableBanner/DesignableBanner';
 import {
 	design,
+	props,
 	stringToHexColour,
 } from '../components/marketing/banners/utils/storybook';
+import { choiceCardsSettings } from '../components/marketing/lib/storybook';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -21,50 +23,7 @@ import type { Config } from '../types/configContext';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 const bannerProps: BannerProps = {
-	tracking: {
-		ophanPageId: '',
-		platformId: '',
-		referrerUrl: '',
-		abTestName: '',
-		abTestVariant: '',
-		campaignCode: '',
-		componentType: 'ACQUISITIONS_ENGAGEMENT_BANNER',
-	},
-	bannerChannel: 'contributions',
-	articleCounts: {
-		for52Weeks: 0,
-		forTargetedWeeks: 0,
-	},
-	content: {
-		heading: 'Support the Guardian',
-		paragraphs: ['Help us deliver independent journalism'],
-		cta: {
-			text: 'Support',
-			baseUrl: 'https://support.theguardian.com',
-		},
-	},
-	choiceCardsSettings: {
-		choiceCards: [
-			{
-				product: {
-					supportTier: 'Contribution',
-					ratePlan: 'Monthly',
-				},
-				label: '£5/month',
-				isDefault: false,
-				benefits: [{ copy: 'Support independent journalism' }],
-			},
-			{
-				product: {
-					supportTier: 'SupporterPlus',
-					ratePlan: 'Monthly',
-				},
-				label: '£12/month',
-				isDefault: true,
-				benefits: [{ copy: 'Support independent journalism' }],
-			},
-		],
-	},
+	...props,
 	design: {
 		...design,
 		visual: {
@@ -72,6 +31,7 @@ const bannerProps: BannerProps = {
 			buttonColour: stringToHexColour('F1F8FC'),
 		},
 	},
+	choiceCardsSettings,
 };
 
 // Purely server rendered, not interactive
