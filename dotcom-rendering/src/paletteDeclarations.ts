@@ -5469,6 +5469,7 @@ const productButtonPrimaryTextDark: PaletteFunction = () =>
 	sourcePalette.neutral[7];
 const productButtonPrimaryTextLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
+
 const discussionPrimaryButtonBackgroundLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
@@ -6145,85 +6146,73 @@ const latestLinksDottedLineLight: PaletteFunction = () =>
 const latestLinksDottedLineDark: PaletteFunction = () =>
 	sourcePalette.neutral[38];
 
-const editorialButtonBackground: PaletteFunction = (format: ArticleFormat) => {
-	switch (format.theme) {
-		case Pillar.News:
-			return sourcePalette.news[300];
-		case Pillar.Culture:
-			return sourcePalette.culture[300];
-		case Pillar.Lifestyle:
-			return sourcePalette.lifestyle[300];
-		case Pillar.Sport:
-			return sourcePalette.sport[300];
-		case Pillar.Opinion:
-			return sourcePalette.opinion[300];
-		case ArticleSpecial.Labs:
-			return sourcePalette.labs[300];
-		case ArticleSpecial.SpecialReport:
-		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.specialReport[300];
-	}
-};
-const editorialButtonBackgroundHover: PaletteFunction = (
-	format: ArticleFormat,
-) => {
-	switch (format.theme) {
-		case Pillar.News:
-			return sourcePalette.news[400];
-		case Pillar.Culture:
-			return sourcePalette.culture[400];
-		case Pillar.Lifestyle:
-			return sourcePalette.lifestyle[400];
-		case Pillar.Sport:
-			return sourcePalette.sport[400];
-		case Pillar.Opinion:
-			return sourcePalette.opinion[400];
-		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
-		case ArticleSpecial.SpecialReport:
-		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.specialReport[400];
-	}
-};
-const editorialButtonBorderHover: PaletteFunction = (format: ArticleFormat) => {
-	switch (format.theme) {
-		case Pillar.News:
-			return sourcePalette.news[400];
-		case Pillar.Culture:
-			return sourcePalette.culture[400];
-		case Pillar.Lifestyle:
-			return sourcePalette.lifestyle[400];
-		case Pillar.Sport:
-			return sourcePalette.sport[400];
-		case Pillar.Opinion:
-			return sourcePalette.opinion[400];
-		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
-		case ArticleSpecial.SpecialReport:
-		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.specialReport[400];
-	}
-};
+const editorialButtonBackground =
+	(weight: 500 | 300): PaletteFunction =>
+	(format: ArticleFormat) => {
+		switch (format.theme) {
+			case Pillar.News:
+				return sourcePalette.news[weight];
+			case Pillar.Culture:
+				return sourcePalette.culture[weight];
+			case Pillar.Lifestyle:
+				return sourcePalette.lifestyle[weight];
+			case Pillar.Sport:
+				return sourcePalette.sport[weight];
+			case Pillar.Opinion:
+				return sourcePalette.opinion[weight];
+			case ArticleSpecial.Labs:
+				return sourcePalette.labs[weight];
+			case ArticleSpecial.SpecialReport:
+			case ArticleSpecial.SpecialReportAlt:
+				return sourcePalette.specialReport[weight];
+		}
+	};
+const editorialButtonBackgroundHover =
+	(weight: 200 | 300 | 400 | 500): PaletteFunction =>
+	(format: ArticleFormat) => {
+		switch (format.theme) {
+			case Pillar.News:
+				return sourcePalette.news[weight];
+			case Pillar.Culture:
+				return sourcePalette.culture[weight];
+			case Pillar.Lifestyle:
+				return sourcePalette.lifestyle[weight];
+			case Pillar.Sport:
+				return sourcePalette.sport[weight];
+			case Pillar.Opinion:
+				return sourcePalette.opinion[weight];
+			case ArticleSpecial.Labs:
+				return sourcePalette.labs[weight];
+			case ArticleSpecial.SpecialReport:
+			case ArticleSpecial.SpecialReportAlt:
+				return sourcePalette.specialReport[weight];
+		}
+	};
 
-const editorialButtonText: PaletteFunction = (format: ArticleFormat) => {
-	switch (format.theme) {
-		case Pillar.News:
-			return sourcePalette.news[400];
-		case Pillar.Culture:
-			return sourcePalette.culture[400];
-		case Pillar.Lifestyle:
-			return sourcePalette.lifestyle[400];
-		case Pillar.Sport:
-			return sourcePalette.sport[400];
-		case Pillar.Opinion:
-			return sourcePalette.opinion[400];
-		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
-		case ArticleSpecial.SpecialReport:
-		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.specialReport[200];
-	}
-};
+const editorialButtonBorderHover =
+	(weight: 200 | 400 | 500): PaletteFunction =>
+	(format: ArticleFormat) => {
+		switch (format.theme) {
+			case Pillar.News:
+				return sourcePalette.news[weight];
+			case Pillar.Culture:
+				return sourcePalette.culture[weight];
+			case Pillar.Lifestyle:
+				return sourcePalette.lifestyle[weight];
+			case Pillar.Sport:
+				return sourcePalette.sport[weight];
+			case Pillar.Opinion:
+				return sourcePalette.opinion[weight];
+			case ArticleSpecial.Labs:
+				return sourcePalette.labs[weight];
+			case ArticleSpecial.SpecialReport:
+			case ArticleSpecial.SpecialReportAlt:
+				return sourcePalette.specialReport[weight];
+		}
+	};
+
+const editorialButtonText: PaletteFunction = () => sourcePalette.neutral[100];
+const editorialButtonTextDark: PaletteFunction = () => sourcePalette.neutral[7];
 
 const featureCardKickerText: PaletteFunction = ({ theme }) => {
 	switch (theme) {
@@ -6954,20 +6943,20 @@ const paletteColours = {
 		dark: dropCapDark,
 	},
 	'--editorial-button-background': {
-		light: editorialButtonBackground,
-		dark: editorialButtonBackground,
+		light: editorialButtonBackground(300),
+		dark: editorialButtonBackground(500),
 	},
 	'--editorial-button-background-hover': {
-		light: editorialButtonBackgroundHover,
-		dark: editorialButtonBackgroundHover,
+		light: editorialButtonBackgroundHover(200),
+		dark: editorialButtonBackgroundHover(400),
 	},
 	'--editorial-button-border-hover': {
-		light: editorialButtonBorderHover,
-		dark: editorialButtonBorderHover,
+		light: editorialButtonBorderHover(200),
+		dark: editorialButtonBorderHover(400),
 	},
 	'--editorial-button-text': {
 		light: editorialButtonText,
-		dark: editorialButtonText,
+		dark: editorialButtonTextDark,
 	},
 	'--email-signup-button-background': {
 		light: emailSignupButtonBackgroundLight,
