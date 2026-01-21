@@ -200,6 +200,18 @@ export const StorylinesSectionContent = ({
 		parsedStorylines?.[0]?.id ?? '',
 	);
 
+	if (!parsedStorylines || parsedStorylines.length === 0) {
+		return null;
+	}
+
+	const activeStoryline = parsedStorylines.find(
+		(s) => s.id === activeStorylineId,
+	);
+
+	const selectedStorylineColour = setSelectedStorylineColour(pillar);
+
+	const categoryColour = setCategoryColour(pillar);
+
 	function handleStorylineChange(newStorylineId: string) {
 		const currentId = activeStorylineId;
 		setActiveStorylineId(newStorylineId);
@@ -215,18 +227,6 @@ export const StorylinesSectionContent = ({
 			'Web',
 		);
 	}
-
-	if (!parsedStorylines || parsedStorylines.length === 0) {
-		return null;
-	}
-
-	const activeStoryline = parsedStorylines.find(
-		(s) => s.id === activeStorylineId,
-	);
-
-	const selectedStorylineColour = setSelectedStorylineColour(pillar);
-
-	const categoryColour = setCategoryColour(pillar);
 
 	return (
 		<>
