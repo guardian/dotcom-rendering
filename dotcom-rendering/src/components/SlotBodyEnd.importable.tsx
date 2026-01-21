@@ -110,10 +110,12 @@ const buildBrazeEpicConfig = (
 /**
  * Build the Braze Banners System Epic Config
  * @param braze The Braze instance
+ * @param idApiUrl Identity API URL for newsletter subscriptions
  * @returns CandidateConfig for the Braze Banners System Epic
  */
 const buildBrazeBannersSystemEpicConfig = (
 	braze: BrazeInstance | null,
+	idApiUrl: string,
 ): CandidateConfig<any> => {
 	return {
 		candidate: {
@@ -125,7 +127,7 @@ const buildBrazeBannersSystemEpicConfig = (
 				);
 			},
 			show: (meta: BrazeBannersSystemMeta) => () => (
-				<BrazeBannersSystemDisplay meta={meta} />
+				<BrazeBannersSystemDisplay meta={meta} idApiUrl={idApiUrl} />
 			),
 		},
 		timeoutMillis: null,
@@ -210,7 +212,10 @@ export const SlotBodyEnd = ({
 			tags,
 			shouldHideReaderRevenue,
 		);
-		const brazeBannersSystemEpic = buildBrazeBannersSystemEpicConfig(braze);
+		const brazeBannersSystemEpic = buildBrazeBannersSystemEpicConfig(
+			braze,
+			idApiUrl,
+		);
 
 		const epicConfig: SlotConfig = {
 			candidates: [brazeBannersSystemEpic, brazeEpic, readerRevenueEpic],

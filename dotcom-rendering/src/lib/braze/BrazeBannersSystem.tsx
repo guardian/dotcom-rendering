@@ -2,6 +2,8 @@ import type { Banner } from '@braze/web-sdk';
 import { useEffect, useRef, useState } from 'react';
 import type { CanShowResult } from '../messagePicker';
 import type { BrazeInstance } from './initialiseBraze';
+import { useAuthStatus } from '../useAuthStatus';
+import { getOptionsHeaders } from '../identity';
 
 /**
  * Logger prefix for Braze Banners System logs.
@@ -141,20 +143,67 @@ export const canShowBrazeBannersSystem = async (
 };
 
 /**
+ * Types of messages that can be sent from the Braze Banner iframe.
+ */
+enum BrazeBannersSystemMessageType {
+	GetAuthStatus = 'BRAZE_BANNERS_SYSTEM:GET_AUTH_STATUS',
+	NewsletterSubscribe = 'BRAZE_BANNERS_SYSTEM:NEWSLETTER_SUBSCRIBE',
+}
+
+/**
  * Displays a Braze Banner using the Braze Banners System.
  * @param meta Meta information required to display the banner
- * @param customData Optional custom data to send to the banner via postMessage
+ * @param idApiUrl Identity API URL for newsletter subscriptions
  * @returns React component that renders the Braze Banner
  */
 export const BrazeBannersSystemDisplay = ({
 	meta,
-	customData,
+	idApiUrl,
 }: {
 	meta: BrazeBannersSystemMeta;
-	customData?: Record<string, any>;
+	idApiUrl: string;
 }) => {
+	const authStatus = useAuthStatus();
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [minHeight, setMinHeight] = useState<string>('0px');
+
+	const postMessageToBrazeBanner = (
+		type: BrazeBannersSystemMessageType,
+		customData: Record<string, any>,
+	) => {
+		if (containerRef.current) {
+			const iframe = containerRef.current.querySelector('iframe');
+			if (iframe && iframe.contentWindow) {
+				const data = {
+					...customData,
+					type: `${type}:RESPONSE`,
+				};
+				brazeBannersSystemLogger.log(
+					'📤 Sent message to Braze Banner:',
+					data,
+				);
+				iframe.contentWindow.postMessage(
+					data,
+					'*', // Target origin (use specific domain in prod if possible)
+				);
+			}
+		}
+	};
+
+	const subscribeToNewsletter = async (newsletterId: string) => {
+		if (authStatus.kind == 'SignedIn') {
+			const options = getOptionsHeaders(authStatus);
+
+			await fetch(`${idApiUrl}/users/me/newsletters`, {
+				method: 'PATCH',
+				body: JSON.stringify({
+					id: newsletterId,
+					subscribed: true,
+				}),
+				...options,
+			});
+		}
+	};
 
 	// Handle DOM Insertion
 	useEffect(() => {
@@ -177,55 +226,53 @@ export const BrazeBannersSystemDisplay = ({
 	// Handle "postMessage" from the Banner's Buttons
 	useEffect(() => {
 		const handleBrazeBannerMessage = (
-			event: MessageEvent<{
-				type: 'NEWSLETTER_SUBSCRIBE';
-			}>,
+			event: MessageEvent<
+				| {
+						type: BrazeBannersSystemMessageType.GetAuthStatus;
+				  }
+				| {
+						type: BrazeBannersSystemMessageType.NewsletterSubscribe;
+						newsletterId?: string;
+				  }
+			>,
 		) => {
-			if (event.data?.type === 'NEWSLETTER_SUBSCRIBE') {
+			if (
+				Object.values(BrazeBannersSystemMessageType).includes(
+					event.data?.type,
+				)
+			) {
 				brazeBannersSystemLogger.log(
-					'Subscribed user to newsletter:',
+					'📥 Received message from Braze Banner:',
 					event.data,
 				);
-				// const { newsletterId } = event.data;
-				// subscribeUserToNewsletter(newsletterId);
+			}
+			switch (event.data?.type) {
+				case BrazeBannersSystemMessageType.GetAuthStatus:
+					postMessageToBrazeBanner(
+						BrazeBannersSystemMessageType.GetAuthStatus,
+						{
+							kind: authStatus.kind,
+						},
+					);
+					break;
+				case BrazeBannersSystemMessageType.NewsletterSubscribe:
+					brazeBannersSystemLogger.log(
+						'Subscribed user to newsletter:',
+						event.data,
+					);
+					const { newsletterId } = event.data;
+					if (newsletterId) {
+						subscribeToNewsletter(newsletterId);
+					}
+					break;
 			}
 		};
 
 		window.addEventListener('message', handleBrazeBannerMessage);
-
-		// Cleanup listener on unmount
-		return () =>
+		return () => {
 			window.removeEventListener('message', handleBrazeBannerMessage);
+		};
 	}, [meta.banner]);
-
-	// Handle sending data down to the Banner
-	useEffect(() => {
-		if (!customData) return;
-
-		// We use a timeout because Braze takes a few ms to render the <iframe>
-		const timer = setTimeout(() => {
-			if (containerRef.current) {
-				const iframe = containerRef.current.querySelector('iframe');
-
-				if (iframe && iframe.contentWindow) {
-					brazeBannersSystemLogger.log(
-						'📤 Sending data to Braze banner:',
-						customData,
-					);
-
-					iframe.contentWindow.postMessage(
-						{
-							type: 'BRAZE_BANNERS_SYSTEM_DATA_UPLOAD',
-							...customData,
-						},
-						'*', // Target origin (use specific domain in prod if possible)
-					);
-				}
-			}
-		}, 500); // 500ms delay to ensure DOM is ready
-
-		return () => clearTimeout(timer);
-	}, [meta.banner, customData]); // Re-send if banner or data changes
 
 	return (
 		<div
