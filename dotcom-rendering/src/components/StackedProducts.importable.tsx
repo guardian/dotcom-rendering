@@ -74,11 +74,17 @@ export const StackedProducts = ({
 				{products.map(
 					(product: ProductBlockElement, index) =>
 						(index < 3 || isExpanded) && (
-							<HorizontalSummaryProductCard
+							<div
 								key={index}
-								product={product}
-								format={format}
-							/>
+								data-component={`at-a-glance-stacked-card-${
+									index + 1
+								}`}
+							>
+								<HorizontalSummaryProductCard
+									product={product}
+									format={format}
+								/>
+							</div>
 						),
 				)}
 			</div>
