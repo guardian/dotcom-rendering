@@ -63,7 +63,7 @@ export const ProductLinkElementButton = ({
 
 	return (
 		<LinkButton
-			{...getPropsForLinkUrl(url, label)}
+			{...getPropsForLinkUrl(label)}
 			href={url}
 			rel="sponsored noreferrer noopener"
 			iconSide="right"

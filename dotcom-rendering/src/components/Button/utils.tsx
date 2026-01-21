@@ -8,15 +8,12 @@ const platformHostnames = [
 	'www.theguardian.com',
 ];
 
-const isExternalLink = (url: string) =>
+export const isExternalLink = (url: string) =>
 	platformHostnames.includes(new URL(url).hostname);
 
-export const getPropsForLinkUrl = (url: string, label: string) =>
-	isExternalLink(url)
-		? {}
-		: {
-				rel: 'noreferrer noopener',
-				target: '_blank',
-				'aria-label': `${label} (opens in a new tab)`,
-				icon: <SvgArrowRightStraight />,
-		  };
+export const getPropsForLinkUrl = (label: string) => ({
+	rel: 'noreferrer noopener',
+	target: '_blank',
+	'aria-label': `${label} (opens in a new tab)`,
+	icon: <SvgArrowRightStraight />,
+});
