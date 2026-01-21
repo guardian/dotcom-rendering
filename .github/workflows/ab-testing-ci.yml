@@ -63,21 +63,25 @@ jobs:
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
 
+      - name: Set environment for build
+        id: set-env
+        run: |
+          if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+            echo "AB_TESTING_ENV=production" >> $GITHUB_ENV
+          else
+            echo "AB_TESTING_ENV=code" >> $GITHUB_ENV
+          fi
+
       - name: Build UI
         run: pnpm build
+        env:
+          AB_TESTING_ENV: ${{ env.AB_TESTING_ENV }}
 
-      - name: Save PROD build
+      - name: Save build
         uses: actions/upload-artifact@v5
         with:
-          name: ui-build-prod
+          name: ui-build
           path: ab-testing/frontend/output/ab-tests.html
-          if-no-files-found: error
-
-      - name: Save CODE build
-        uses: actions/upload-artifact@v5
-        with:
-          name: ui-build-code
-          path: ab-testing/frontend/output/ab-tests-code.html
           if-no-files-found: error
 
   deploy-lambda-ci:
@@ -166,17 +170,11 @@ jobs:
           name: ab-testing-build
           path: ab-testing/config/dist
 
-      - name: Fetch UI PROD build
+      - name: Fetch UI build
         uses: actions/download-artifact@v6.0.0
         with:
-          name: ui-build-prod
+          name: ui-build
           path: ab-testing/frontend/output/ab-tests.html
-
-      - name: Fetch UI CODE build
-        uses: actions/download-artifact@v6.0.0
-        with:
-          name: ui-build-code
-          path: ab-testing/frontend/output/ab-tests-code.html
 
       - name: Fetch Deploy Lambda build
         uses: actions/download-artifact@v6.0.0
@@ -212,6 +210,5 @@ jobs:
               - ab-testing/notification-lambda/dist/lambda.zip
             ab-testing-ui-artifact:
               - ab-testing/frontend/output/ab-tests.html
-              - ab-testing/frontend/output/ab-tests-code.html
             cdk.out:
               - ab-testing/cdk/cdk.out

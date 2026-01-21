@@ -1,14 +1,14 @@
 import type { ABTest } from "./types.ts";
 
 /**
- * Base URL for A/B test opt-in/opt-out links
+ * URL for AB test opt-in/opt-out links
  * PROD: https://www.theguardian.com/
  * CODE: https://m.code.dev-theguardian.com/
  */
 const hostname =
-	process.env.AB_TESTING_ENV === "production"
-		? "https://www.theguardian.com"
-		: "https://m.code.dev-theguardian.com";
+	process.env.AB_TESTING_ENV === "code"
+		? "https://m.code.dev-theguardian.com"
+		: "https://www.theguardian.com";
 
 /**
  * Tests are defined here. They will be assigned mvt ranges based on the
