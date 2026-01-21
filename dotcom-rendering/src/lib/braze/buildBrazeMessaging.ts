@@ -21,26 +21,7 @@ import {
 import { checkBrazeDependencies } from './checkBrazeDependencies';
 import type { BrazeInstance } from './initialiseBraze';
 import { getInitialisedBraze } from './initialiseBraze';
-
-const DEBUG_DOMAINS = ['localhost', 'r.thegulocal.com'];
-const isDebugDomain = (): boolean => {
-	if (typeof window === 'undefined') return false; // Safety for SSR/Node environments
-	return DEBUG_DOMAINS.includes(window.location.hostname);
-};
-export const logger = {
-	log: (...args: any[]): void => {
-		if (isDebugDomain()) console.log(...args);
-	},
-	info: (...args: any[]): void => {
-		if (isDebugDomain()) console.info(...args);
-	},
-	warn: (...args: any[]): void => {
-		if (isDebugDomain()) console.warn(...args);
-	},
-	error: (...args: any[]): void => {
-		console.error(...args);
-	},
-};
+import { brazeBannersSystemLogger, isDebugDomain } from './BrazeBannersSystem';
 
 const maybeWipeUserData = async (
 	apiKey?: string,
@@ -97,8 +78,8 @@ function refreshBanners(braze: BrazeInstance): Promise<void> {
 	// Create the Timeout Promise
 	const timeout = new Promise<void>((resolve) => {
 		timeoutId = setTimeout(() => {
-			logger.warn(
-				'⏱️ Braze Banners refresh timed out. Proceeding anyway...',
+			brazeBannersSystemLogger.warn(
+				'⏱️ Refresh timed out. Proceeding anyway...',
 			);
 			// We can't cancel the Braze network request,
 			// but we can ensure we stop waiting for it.
@@ -111,12 +92,12 @@ function refreshBanners(braze: BrazeInstance): Promise<void> {
 		braze.requestBannersRefresh(
 			Object.values(BrazeBannersSystemPlacementId),
 			() => {
-				logger.info('✅ Braze Banners refreshed.');
+				brazeBannersSystemLogger.info('✅ Refresh completed.');
 				clearTimeout(timeoutId); // Cancel the timeout
 				resolve();
 			},
 			() => {
-				logger.warn('⚠️ Braze Banner refresh failed.');
+				brazeBannersSystemLogger.warn('⚠️ Refresh failed.');
 				clearTimeout(timeoutId); // Cancel the timeout
 				resolve();
 			},
@@ -206,7 +187,7 @@ export const buildBrazeMessaging = async (
 					console.log('📢 Braze Banners check:', banners);
 				},
 			);
-			logger.info(
+			brazeBannersSystemLogger.info(
 				'🆔 Subscribed to Braze Banners updates. Subscription ID:',
 				subscriptionId,
 			);

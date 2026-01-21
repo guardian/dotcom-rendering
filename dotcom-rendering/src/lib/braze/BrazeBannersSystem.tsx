@@ -4,6 +4,30 @@ import type { CanShowResult } from '../messagePicker';
 import type { BrazeBannersSystemPlacementId } from './buildBrazeMessaging';
 import type { BrazeInstance } from './initialiseBraze';
 
+const LOG_PREFIX = '[BrazeBannersSystem]';
+const DEBUG_DOMAINS = ['localhost', 'r.thegulocal.com'];
+
+export const isDebugDomain = (): boolean => {
+	if (typeof window === 'undefined') return false; // Safety for SSR/Node environments
+	return DEBUG_DOMAINS.includes(window.location.hostname);
+};
+
+export const brazeBannersSystemLogger = {
+	log: (...args: any[]): void => {
+		if (isDebugDomain()) console.log(LOG_PREFIX, ...args);
+	},
+	info: (...args: any[]): void => {
+		if (isDebugDomain()) console.info(LOG_PREFIX, ...args);
+	},
+	warn: (...args: any[]): void => {
+		if (isDebugDomain()) console.warn(LOG_PREFIX, ...args);
+	},
+	error: (...args: any[]): void => {
+		// Even for errors, we add the prefix so we know where it came from
+		console.error(LOG_PREFIX, ...args);
+	},
+};
+
 /**
  * Meta information required to display a Braze Banner.
  */
@@ -69,6 +93,8 @@ export const BrazeBannersSystemDisplay = ({
 }) => {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [minHeight, setMinHeight] = useState<string>('0px');
+
+	// Handle DOM Insertion
 	useEffect(() => {
 		// Render the banner ONLY when we have both the Data and the DOM Element
 		if (containerRef.current) {
@@ -84,8 +110,31 @@ export const BrazeBannersSystemDisplay = ({
 			// Let Braze inject the HTML/CSS
 			meta.braze.insertBanner(meta.banner, containerRef.current);
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [meta.banner, meta.braze]);
+
+	// Handle "postMessage" from the Banner's Buttons
+	useEffect(() => {
+		const handleBrazeBannerMessage = (event: MessageEvent) => {
+			brazeBannersSystemLogger.info(
+				'Received message from Braze Banner:',
+				event.data,
+			);
+			if (event.data?.type === 'NEWSLETTER_SUBSCRIBE') {
+				const { newsletterId } = event.data;
+				// subscribeUserToNewsletter(newsletterId);
+				brazeBannersSystemLogger.log(
+					'Subscribed user to newsletter:',
+					newsletterId,
+				);
+			}
+		};
+
+		window.addEventListener('message', handleBrazeBannerMessage);
+
+		// Cleanup listener on unmount
+		return () =>
+			window.removeEventListener('message', handleBrazeBannerMessage);
+	}, [meta.banner]);
 
 	return (
 		<div
