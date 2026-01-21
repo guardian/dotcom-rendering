@@ -9,8 +9,8 @@ import {
 import useSWRImmutable from 'swr/immutable';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { buildBrazeMessaging } from './braze/buildBrazeMessaging';
+import type { BrazeInstance } from './braze/initialiseBraze';
 import { useAuthStatus } from './useAuthStatus';
-import { BrazeInstance } from './braze/initialiseBraze';
 
 /**
  * Returns brazeMessaging as BrazeMessagesInterface and BrazeCardsInterface
