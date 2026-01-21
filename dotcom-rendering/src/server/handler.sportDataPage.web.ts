@@ -214,13 +214,14 @@ const parseFEFootballMatch = (
 	data: FEFootballMatchPage,
 ): FootballMatchSummaryPage => {
 	const parsedFootballMatch = parseFootballMatch(data.footballMatch);
-	const group = data.group && parseTableSummary(data.group);
 
 	if (!parsedFootballMatch.ok) {
 		throw new Error(
 			`Failed to parse football match: ${parsedFootballMatch.error.kind} ${parsedFootballMatch.error.message}`,
 		);
 	}
+
+	const group = data.group && parseTableSummary(data.group);
 
 	if (group && !group.ok) {
 		throw new Error(
