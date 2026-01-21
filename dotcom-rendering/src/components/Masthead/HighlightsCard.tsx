@@ -15,7 +15,6 @@ import type { Loading } from '../CardPicture';
 import { FormatBoundary } from '../FormatBoundary';
 import { Pill } from '../Pill';
 import { StarRating } from '../StarRating/StarRating';
-import { StarRatingDeprecated } from '../StarRating/StarRatingDeprecated';
 import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
 import { HighlightsCardImage } from './HighlightsCardImage';
 
@@ -33,7 +32,6 @@ export type HighlightsCardProps = {
 	byline?: string;
 	isExternalLink: boolean;
 	starRating?: Rating;
-	isInStarRatingVariant?: boolean;
 };
 
 const container = css`
@@ -117,13 +115,6 @@ const content = css`
 	}
 `;
 
-const starWrapper = css`
-	width: fit-content;
-	margin-top: ${space[1]}px;
-	color: ${palette('--star-rating-fill')};
-	background-color: ${palette('--star-rating-background')};
-`;
-
 export const HighlightsCard = ({
 	linkTo,
 	format,
@@ -138,20 +129,14 @@ export const HighlightsCard = ({
 	byline,
 	isExternalLink,
 	starRating,
-	isInStarRatingVariant,
 }: HighlightsCardProps) => {
 	const isMediaCard = isMedia(format);
 
 	/*
 	 * We do not apply space-between to the card if it has star rating as star ratings should be aligned to the headline.
 	 * We do apply it for anything else as pills should be aligned with the bottom of the image
-	 *
-	 * We also apply it for any card not in the star rating redesign test.
-	 * This can be removed once the redesign it rolled out to production
 	 * */
-	const shouldJustifyContent =
-		!isInStarRatingVariant ||
-		(isInStarRatingVariant && isUndefined(starRating));
+	const shouldJustifyContent = isUndefined(starRating);
 
 	return (
 		<FormatBoundary format={format}>
@@ -190,21 +175,13 @@ export const HighlightsCard = ({
 						quoteColour={palette('--highlights-card-quote-icon')}
 					/>
 
-					{!isUndefined(starRating) &&
-						(isInStarRatingVariant ? (
-							<StarRating
-								rating={starRating}
-								size="small"
-								paddingSize="none"
-							/>
-						) : (
-							<div css={starWrapper}>
-								<StarRatingDeprecated
-									rating={starRating}
-									size="small"
-								/>
-							</div>
-						))}
+					{!isUndefined(starRating) && (
+						<StarRating
+							rating={starRating}
+							size="small"
+							paddingSize="none"
+						/>
+					)}
 
 					{!!mainMedia && isMediaCard && (
 						<div>

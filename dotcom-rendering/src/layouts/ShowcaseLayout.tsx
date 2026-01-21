@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -248,9 +247,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
-	const isInStarRatingVariant =
-		article.config.abTests.starRatingRedesignVariant === 'variant';
-
 	return (
 		<>
 			{isWeb && (
@@ -371,14 +367,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								<MainMedia
 									format={format}
 									elements={article.mainMediaElements}
-									starRating={
-										!isInStarRatingVariant &&
-										format.design ===
-											ArticleDesign.Review &&
-										!isUndefined(article.starRating)
-											? article.starRating
-											: undefined
-									}
 									host={host}
 									pageId={article.pageId}
 									webTitle={article.webTitle}
@@ -413,9 +401,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									byline={article.byline}
 									webPublicationDateDeprecated={
 										article.webPublicationDateDeprecated
-									}
-									isInStarRatingVariant={
-										isInStarRatingVariant
 									}
 									starRating={article.starRating}
 								/>
@@ -738,7 +723,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						webURL={article.webURL}
-						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Island>
 
