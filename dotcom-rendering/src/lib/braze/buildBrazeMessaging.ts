@@ -18,14 +18,14 @@ import {
 	hasCurrentBrazeUser,
 	setHasCurrentBrazeUser,
 } from '../hasCurrentBrazeUser';
-import { checkBrazeDependencies } from './checkBrazeDependencies';
-import type { BrazeInstance } from './initialiseBraze';
-import { getInitialisedBraze } from './initialiseBraze';
 import {
 	brazeBannersSystemLogger,
 	isDebugDomain,
 	refreshBanners,
 } from './BrazeBannersSystem';
+import { checkBrazeDependencies } from './checkBrazeDependencies';
+import type { BrazeInstance } from './initialiseBraze';
+import { getInitialisedBraze } from './initialiseBraze';
 
 const maybeWipeUserData = async (
 	apiKey?: string,
