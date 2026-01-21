@@ -19,7 +19,8 @@ import {
 	setHasCurrentBrazeUser,
 } from '../hasCurrentBrazeUser';
 import { checkBrazeDependencies } from './checkBrazeDependencies';
-import { BrazeInstance, getInitialisedBraze } from './initialiseBraze';
+import type { BrazeInstance } from './initialiseBraze';
+import { getInitialisedBraze } from './initialiseBraze';
 
 const DEBUG_DOMAINS = ['localhost', 'thegulocal'];
 const isDebugDomain = (): boolean => {
@@ -27,16 +28,16 @@ const isDebugDomain = (): boolean => {
 	return DEBUG_DOMAINS.includes(window.location.hostname);
 };
 export const logger = {
-	log: (...args: any[]) => {
+	log: (...args: any[]): void => {
 		if (isDebugDomain()) console.log(...args);
 	},
-	info: (...args: any[]) => {
+	info: (...args: any[]): void => {
 		if (isDebugDomain()) console.info(...args);
 	},
-	warn: (...args: any[]) => {
+	warn: (...args: any[]): void => {
 		if (isDebugDomain()) console.warn(...args);
 	},
-	error: (...args: any[]) => {
+	error: (...args: any[]): void => {
 		console.error(...args);
 	},
 };
