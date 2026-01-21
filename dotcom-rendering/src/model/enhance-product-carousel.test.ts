@@ -52,14 +52,18 @@ describe('findMatchingProducts', () => {
 			productElement([
 				'https://ninjakitchen.co.uk/product/ninja-double-stack-xl-9-5l-air-fryer-sl400uk-zidSL400UK',
 			]),
+			productElement([
+				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
+			]),
 		];
 
 		const result = findMatchingProducts(products, [
 			'https://casodesign.co.uk/product/caso-design-airfry-duo-chef/',
 			'https://ninjakitchen.co.uk/product/ninja-double-stack-xl-9-5l-air-fryer-sl400uk-zidSL400UK',
+			'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
 		]);
 
-		expect(result).toHaveLength(2);
+		expect(result).toHaveLength(3);
 	});
 
 	it('returns an empty array if no product CTA URLs match', () => {
@@ -93,12 +97,19 @@ describe('insertCarouselPlaceholder', () => {
 				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
 				'Buy now',
 			),
+			linkElement(
+				'https://ninjakitchen.co.uk/product/ninja-double-stack-xl-9-5l-air-fryer-sl400uk-zidSL400UK',
+				'Buy now',
+			),
 			dividerElement(),
 			productElement([
 				'https://casodesign.co.uk/product/caso-design-airfry-duo-chef',
 			]),
 			productElement([
 				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
+			]),
+			productElement([
+				'https://ninjakitchen.co.uk/product/ninja-double-stack-xl-9-5l-air-fryer-sl400uk-zidSL400UK',
 			]),
 		];
 
@@ -127,7 +138,7 @@ describe('insertCarouselPlaceholder', () => {
 });
 
 describe('insertCarouselPlaceholder – edge cases', () => {
-	it('does not insert a carousel when fewer than two products match', () => {
+	it('does not insert a carousel when fewer than three products match', () => {
 		const input = [
 			atAGlanceHeading(),
 			linkElement(
@@ -136,6 +147,10 @@ describe('insertCarouselPlaceholder – edge cases', () => {
 			),
 			linkElement(
 				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
+				'Buy now',
+			),
+			linkElement(
+				'https://ninjakitchen.co.uk/product/ninja-double-stack-xl-9-5l-air-fryer-sl400uk-zidSL400UK',
 				'Buy now',
 			),
 			dividerElement(),
@@ -191,12 +206,19 @@ describe('enhanceProductCarousel', () => {
 				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
 				'Buy now',
 			),
+			linkElement(
+				'https://ninjakitchen.co.uk/product/ninja-double-stack-xl-9-5l-air-fryer-sl400uk-zidSL400UK',
+				'Buy now',
+			),
 			dividerElement(),
 			productElement([
 				'https://www.homebase.co.uk/en-uk/tower-airx-t17166-5l-grey-single-basket-air-fryer-digital-air-fryer/p/0757395',
 			]),
 			productElement([
 				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
+			]),
+			productElement([
+				'https://ninjakitchen.co.uk/product/ninja-double-stack-xl-9-5l-air-fryer-sl400uk-zidSL400UK',
 			]),
 		];
 
