@@ -22,6 +22,7 @@ import { SubtitleOverlay } from './SubtitleOverlay';
 import { VideoProgressBar } from './VideoProgressBar';
 
 export type SubtitleSize = 'small' | 'medium' | 'large';
+export type ControlsPosition = 'top' | 'bottom';
 
 const videoStyles = (aspectRatio: number) => css`
 	position: relative;
@@ -57,15 +58,17 @@ const playIconStyles = css`
 	padding: 0;
 `;
 
-const audioButtonStyles = css`
+const audioButtonStyles = (position: ControlsPosition) => css`
 	border: none;
 	background: none;
 	padding: 0;
 	position: absolute;
-	/* Take into account the progress bar height */
-	bottom: ${space[3]}px;
-	right: ${space[2]}px;
 	cursor: pointer;
+
+	right: ${space[2]}px;
+	/* Take into account the progress bar height */
+	${position === 'bottom' && `bottom: ${space[3]}px;`}
+	${position === 'top' && `top: ${space[2]}px;`}
 `;
 
 const audioIconContainerStyles = css`
@@ -121,8 +124,10 @@ type Props = {
 	posterImage?: string;
 	preloadPartialData: boolean;
 	showPlayIcon: boolean;
+	showProgressBar: boolean;
 	subtitleSource?: string;
 	subtitleSize?: SubtitleSize;
+	controlsPosition: ControlsPosition;
 	/* used in custom subtitle overlays */
 	activeCue?: ActiveCue | null;
 };
@@ -130,12 +135,10 @@ type Props = {
 /**
  * Note that in React 19, forwardRef is no longer necessary:
  * https://react.dev/reference/react/forwardRef
- */
-/**
- * NB: To develop the video player locally, use `https://r.thegulocal.com/` instead of `localhost`.
+ *
+ * NB: When DEVELOPING LOCALLY, use `https://r.thegulocal.com/` instead of `localhost`.
  * This is required because CORS restrictions prevent accessing the subtitles and video file from localhost.
  */
-
 export const SelfHostedVideoPlayer = forwardRef(
 	(
 		{
@@ -163,8 +166,10 @@ export const SelfHostedVideoPlayer = forwardRef(
 			AudioIcon,
 			preloadPartialData,
 			showPlayIcon,
+			showProgressBar,
 			subtitleSource,
 			subtitleSize,
+			controlsPosition,
 			activeCue,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
@@ -249,12 +254,12 @@ export const SelfHostedVideoPlayer = forwardRef(
 				{showSubtitles && !!activeCue?.text && (
 					<SubtitleOverlay
 						text={activeCue.text}
-						subtitleSize={subtitleSize}
+						size={subtitleSize}
+						position={controlsPosition}
 					/>
 				)}
 				{showControls && (
 					<>
-						{/* Play icon */}
 						{showPlayIcon && (
 							<button
 								type="button"
@@ -266,18 +271,18 @@ export const SelfHostedVideoPlayer = forwardRef(
 								<PlayIcon iconWidth="narrow" />
 							</button>
 						)}
-						{/* Progress bar */}
-						<VideoProgressBar
-							videoId={videoId}
-							currentTime={currentTime}
-							duration={ref.current!.duration}
-						/>
-						{/* Audio icon */}
+						{showProgressBar && (
+							<VideoProgressBar
+								videoId={videoId}
+								currentTime={currentTime}
+								duration={ref.current!.duration}
+							/>
+						)}
 						{AudioIcon && (
 							<button
 								type="button"
 								onClick={handleAudioClick}
-								css={audioButtonStyles}
+								css={audioButtonStyles(controlsPosition)}
 								data-link-name={`gu-video-loop-${
 									isMuted ? 'unmute' : 'mute'
 								}-${atomId}`}

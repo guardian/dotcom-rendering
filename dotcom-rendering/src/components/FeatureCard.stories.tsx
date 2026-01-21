@@ -414,8 +414,8 @@ export const WithSelfHostedLoopVideo = {
 			atomId: 'atom-id-123',
 			sources: [
 				{
-					src: 'https://uploads.guim.co.uk/2025/11/27/4_5_Test--1d34df3e-8c92-4090-8bb6-d79fc7fb9467-1.0.mp4',
-					mimeType: 'video/mp4',
+					src: 'https://uploads.guim.co.uk/2026/01/09/Front_loop__Iran_TiF_Latest--64220ebf-d63d-48dd-9317-16b3b150a4ac-1.1.m3u8',
+					mimeType: 'application/vnd.apple.mpegurl',
 				},
 			],
 			height: 720,
@@ -432,6 +432,12 @@ export const WithSelfHostedCinemagraphVideo = {
 		mainMedia: {
 			...WithSelfHostedLoopVideo.args.mainMedia,
 			videoStyle: 'Cinemagraph',
+			sources: [
+				{
+					src: 'https://uploads.guim.co.uk/2025/11/27/4_5_Test--1d34df3e-8c92-4090-8bb6-d79fc7fb9467-1.0.mp4',
+					mimeType: 'video/mp4',
+				},
+			],
 		},
 	},
 } satisfies Story;

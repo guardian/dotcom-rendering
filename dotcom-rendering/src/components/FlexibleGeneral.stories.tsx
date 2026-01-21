@@ -6,11 +6,11 @@ import {
 	galleryTrails,
 	getSublinks,
 	opinionTrails,
-	selfHostedVideo169Card,
-	selfHostedVideo45Card,
-	selfHostedVideo53Card,
-	selfHostedVideo54Card,
-	selfHostedVideo916Card,
+	selfHostedLoopVideo169Card,
+	selfHostedLoopVideo45Card,
+	selfHostedLoopVideo53Card,
+	selfHostedLoopVideo54Card,
+	selfHostedLoopVideo916Card,
 	slideshowCard,
 	trails,
 	youtubeVideoTrails,
@@ -592,11 +592,11 @@ export const SelfHostedVideoCardsInSplashSlots: Story = {
 		] as BoostLevel[];
 
 		const videos = [
-			selfHostedVideo54Card,
-			selfHostedVideo45Card,
-			selfHostedVideo53Card,
-			selfHostedVideo916Card,
-			selfHostedVideo169Card,
+			selfHostedLoopVideo54Card,
+			selfHostedLoopVideo45Card,
+			selfHostedLoopVideo53Card,
+			selfHostedLoopVideo916Card,
+			selfHostedLoopVideo169Card,
 		];
 
 		return (
@@ -623,7 +623,7 @@ export const SelfHostedVideoInStandardSlot: Story = {
 			'This slot is too small for video. Show image instead',
 		groupedTrails: {
 			...emptyGroupedTrails,
-			standard: [selfHostedVideo54Card], // Self-hosted video is disabled at standard card size
+			standard: [selfHostedLoopVideo54Card], // Self-hosted video is disabled at standard card size
 		},
 	},
 };
