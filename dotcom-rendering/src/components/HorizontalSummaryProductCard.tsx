@@ -103,6 +103,8 @@ export const HorizontalSummaryProductCard = ({
 					href={`#${product.h2Id}`}
 					onFocus={(event) => event.stopPropagation()}
 					cssOverrides={readMore}
+					data-component="at-a-glance-stacked-card-read-more"
+					data-link-name="product read more link"
 				>
 					Read more
 				</Link>
