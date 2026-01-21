@@ -84,28 +84,12 @@ export const BannerCtas = ({
 }: {
 	bannerData: BannerData;
 }): JSX.Element | null => {
-	if (bannerData.selectedChoiceCard) {
+	if (!bannerData.selectors.showStandardCtas) {
 		return null;
 	}
 
-	const mainOrMobileContent = bannerData.isTabletOrAbove
-		? bannerData.content.mainContent
-		: bannerData.content.mobileContent;
-
-	const { primaryCta, secondaryCta } = mainOrMobileContent;
-
-	// Check if secondaryCta has the expected structure
-	const hasCustomCta =
-		secondaryCta &&
-		'type' in secondaryCta &&
-		'cta' in secondaryCta &&
-		typeof secondaryCta.cta === 'object' &&
-		'ctaUrl' in secondaryCta.cta &&
-		'ctaText' in secondaryCta.cta;
-
-	if (!primaryCta && !secondaryCta && !bannerData.isCollapsed) {
-		return null;
-	}
+	const { copyForViewport, customSecondaryCta } = bannerData.selectors;
+	const { primaryCta } = copyForViewport;
 
 	return (
 		<div css={styles.outerImageCtaContainer}>
@@ -127,9 +111,9 @@ export const BannerCtas = ({
 						{primaryCta.ctaText}
 					</LinkButton>
 				)}
-				{hasCustomCta && (
+				{customSecondaryCta && (
 					<LinkButton
-						href={secondaryCta.cta.ctaUrl}
+						href={customSecondaryCta.cta.ctaUrl}
 						onClick={bannerData.actions.onSecondaryCtaClick}
 						size="small"
 						priority="secondary"
@@ -141,7 +125,7 @@ export const BannerCtas = ({
 							'secondary',
 						)}
 					>
-						{secondaryCta.cta.ctaText}
+						{customSecondaryCta.cta.ctaText}
 					</LinkButton>
 				)}
 				{bannerData.isCollapsed && (

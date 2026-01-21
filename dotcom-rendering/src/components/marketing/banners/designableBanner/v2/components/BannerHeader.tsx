@@ -115,36 +115,28 @@ export const BannerHeader = ({
 		bannerData.settings.containerSettings.backgroundColour,
 		headlineSize,
 		bannerData.isCollapsed,
-		!!bannerData.settings.headerSettings?.headerImage,
+		bannerData.selectors.showHeaderImage,
 		!!bannerData.settings.imageSettings,
 	);
 
-	const containerCss = bannerData.settings.headerSettings?.headerImage
+	const containerCss = bannerData.selectors.showHeaderImage
 		? styles.headerWithImageContainer
 		: styles.headerContainer;
+	const { headingCopy } = bannerData.selectors;
+	const headerImage = bannerData.settings.headerSettings?.headerImage;
 
 	return (
 		<div css={containerCss}>
 			<div css={styles.container}>
 				<header css={styles.header}>
-					{bannerData.settings.headerSettings?.headerImage && (
+					{bannerData.selectors.showHeaderImage && headerImage && (
 						<BannerVisual
 							bannerData={bannerData}
-							settings={
-								bannerData.settings.headerSettings.headerImage
-							}
+							settings={headerImage}
 							isHeaderImage={true}
 						/>
 					)}
-					{(bannerData.content.mainContent.heading ??
-						bannerData.content.mobileContent.heading) && (
-						<h2>
-							{bannerData.isTabletOrAbove &&
-							!bannerData.isCollapsed
-								? bannerData.content.mainContent.heading
-								: bannerData.content.mobileContent.heading}
-						</h2>
-					)}
+					{headingCopy.heading && <h2>{headingCopy.heading}</h2>}
 				</header>
 			</div>
 		</div>

@@ -7,10 +7,15 @@ export const BannerTicker = ({
 }: {
 	bannerData: BannerData;
 }): JSX.Element | null => {
+	const tickerSettings = bannerData.tickerSettings;
+	const tickerStylingSettings = bannerData.settings.tickerStylingSettings;
+	const tickerData = tickerSettings?.tickerData;
+
 	if (
-		!bannerData.tickerSettings?.tickerData ||
-		bannerData.isCollapsed ||
-		!bannerData.settings.tickerStylingSettings
+		!bannerData.selectors.showTicker ||
+		!tickerSettings ||
+		!tickerStylingSettings ||
+		!tickerData
 	) {
 		return null;
 	}
@@ -18,15 +23,13 @@ export const BannerTicker = ({
 	return (
 		<div css={templateSpacing.bannerTicker}>
 			<Ticker
-				currencySymbol={bannerData.tickerSettings.currencySymbol}
+				currencySymbol={tickerSettings.currencySymbol}
 				copy={{
-					headline: bannerData.tickerSettings.copy.countLabel,
-					goalCopy: bannerData.tickerSettings.copy.goalCopy,
+					headline: tickerSettings.copy.countLabel,
+					goalCopy: tickerSettings.copy.goalCopy,
 				}}
-				tickerData={bannerData.tickerSettings.tickerData}
-				tickerStylingSettings={
-					bannerData.settings.tickerStylingSettings
-				}
+				tickerData={tickerData}
+				tickerStylingSettings={tickerStylingSettings}
 				size={'medium'}
 			/>
 		</div>

@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import { useContributionsReminderSignup } from '../../../../hooks/useContributionsReminderSignup';
 import { DesignableBannerReminderSignedOut } from '../../components/DesignableBannerReminderSignedOut';
 import type { BannerData } from '../BannerProps';
@@ -19,16 +18,7 @@ export const BannerReminder = ({
 }: {
 	bannerData: BannerData;
 }): JSX.Element | null => {
-	const mainOrMobileContent = bannerData.isTabletOrAbove
-		? bannerData.content.mainContent
-		: bannerData.content.mobileContent;
-
-	const { secondaryCta } = mainOrMobileContent;
-
-	const reminderFields =
-		secondaryCta?.type === SecondaryCtaType.ContributionsReminder
-			? secondaryCta.reminderFields
-			: undefined;
+	const reminderFields = bannerData.selectors.reminderCta?.reminderFields;
 
 	const { reminderStatus, createReminder } = useContributionsReminderSignup(
 		reminderFields?.reminderPeriod ?? '',
@@ -38,7 +28,7 @@ export const BannerReminder = ({
 		reminderFields?.reminderOption,
 	);
 
-	if (secondaryCta?.type !== SecondaryCtaType.ContributionsReminder) {
+	if (!bannerData.selectors.reminderCta) {
 		return null;
 	}
 
@@ -50,7 +40,7 @@ export const BannerReminder = ({
 	return (
 		<div css={styles.container}>
 			<DesignableBannerReminderSignedOut
-				reminderCta={secondaryCta}
+				reminderCta={bannerData.selectors.reminderCta}
 				reminderStatus={reminderStatus}
 				onReminderSetClick={onReminderSetClick}
 				setReminderCtaSettings={

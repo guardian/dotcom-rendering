@@ -10,7 +10,6 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
-import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import { enrichSupportUrl, getChoiceCardUrl } from '../../../../lib/tracking';
 import { ThreeTierChoiceCards } from '../../../../shared/ThreeTierChoiceCards';
 import { buttonStyles, buttonThemes } from '../../styles/buttonStyles';
@@ -130,20 +129,19 @@ export const BannerChoiceCards = ({
 	bannerData: BannerData;
 }): JSX.Element | null => {
 	if (
-		!bannerData.settings.choiceCardSettings ||
+		!bannerData.selectors.showChoiceCardCtas ||
 		!bannerData.selectedChoiceCard ||
 		!bannerData.choices
 	) {
 		return null;
 	}
 
-	const mainOrMobileContent = bannerData.isTabletOrAbove
-		? bannerData.content.mainContent
-		: bannerData.content.mobileContent;
+	const { copyForViewport, customSecondaryCta, showChoiceCardSelector } =
+		bannerData.selectors;
 
 	return (
 		<div css={styles.threeTierChoiceCardsContainer}>
-			{!bannerData.isCollapsed && (
+			{showChoiceCardSelector && (
 				<ThreeTierChoiceCards
 					selectedChoiceCard={bannerData.selectedChoiceCard}
 					setSelectedChoiceCard={
@@ -185,27 +183,25 @@ export const BannerChoiceCards = ({
 					rel="noopener noreferrer"
 				>
 					{bannerData.isCollapsed
-						? mainOrMobileContent.primaryCta?.ctaText
+						? copyForViewport.primaryCta?.ctaText
 						: 'Continue'}
 				</LinkButton>
-				{!bannerData.isCollapsed &&
-					mainOrMobileContent.secondaryCta?.type ===
-						SecondaryCtaType.Custom && (
-						<LinkButton
-							href={mainOrMobileContent.secondaryCta.cta.ctaUrl}
-							onClick={bannerData.actions.onSecondaryCtaClick}
-							priority="secondary"
-							cssOverrides={buttonStyles(
-								bannerData.settings.secondaryCtaSettings,
-							)}
-							theme={buttonThemes(
-								bannerData.settings.secondaryCtaSettings,
-								'secondary',
-							)}
-						>
-							{mainOrMobileContent.secondaryCta.cta.ctaText}
-						</LinkButton>
-					)}
+				{!bannerData.isCollapsed && customSecondaryCta && (
+					<LinkButton
+						href={customSecondaryCta.cta.ctaUrl}
+						onClick={bannerData.actions.onSecondaryCtaClick}
+						priority="secondary"
+						cssOverrides={buttonStyles(
+							bannerData.settings.secondaryCtaSettings,
+						)}
+						theme={buttonThemes(
+							bannerData.settings.secondaryCtaSettings,
+							'secondary',
+						)}
+					>
+						{customSecondaryCta.cta.ctaText}
+					</LinkButton>
+				)}
 				{bannerData.isCollapsed && (
 					<div css={styles.maybeLaterButtonSizing}>
 						<LinkButton

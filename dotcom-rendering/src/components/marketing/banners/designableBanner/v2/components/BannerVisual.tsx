@@ -96,7 +96,11 @@ export const BannerVisual = ({
 }: BannerVisualProps): JSX.Element | null => {
 	const imageSettings = settings ?? bannerData.settings.imageSettings;
 
-	if (!imageSettings || (bannerData.isCollapsed && !isHeaderImage)) {
+	if (!imageSettings) {
+		return null;
+	}
+
+	if (!isHeaderImage && !bannerData.selectors.showBodyVisual) {
 		return null;
 	}
 

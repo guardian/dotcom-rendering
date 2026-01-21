@@ -29,11 +29,7 @@ export const BannerArticleCount = ({
 }: {
 	bannerData: BannerData;
 }): JSX.Element | null => {
-	if (
-		bannerData.isCollapsed ||
-		(!bannerData.separateArticleCount &&
-			!bannerData.separateArticleCountSettings)
-	) {
+	if (!bannerData.selectors.showArticleCount) {
 		return null;
 	}
 

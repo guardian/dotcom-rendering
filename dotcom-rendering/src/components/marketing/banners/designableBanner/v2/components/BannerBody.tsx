@@ -46,17 +46,14 @@ export const BannerBody = ({
 		bannerData.settings.highlightedTextSettings.highlightColour;
 
 	const styles = getStyles(textColour, highlightColour);
-
-	const mainOrMobileContent = bannerData.isTabletOrAbove
-		? bannerData.content.mainContent
-		: bannerData.content.mobileContent;
+	const { copyForViewport, showBody } = bannerData.selectors;
 
 	return (
 		<div css={styles.container}>
-			{!bannerData.isCollapsed &&
+			{showBody &&
 				createBannerBodyCopy(
-					mainOrMobileContent.paragraphs,
-					mainOrMobileContent.highlightedText,
+					copyForViewport.paragraphs,
+					copyForViewport.highlightedText,
 					styles,
 				)}
 		</div>
