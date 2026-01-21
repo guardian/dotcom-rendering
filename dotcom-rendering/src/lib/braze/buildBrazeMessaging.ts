@@ -21,6 +21,26 @@ import {
 import { checkBrazeDependencies } from './checkBrazeDependencies';
 import { BrazeInstance, getInitialisedBraze } from './initialiseBraze';
 
+const DEBUG_DOMAINS = ['localhost', 'thegulocal'];
+const isDebugDomain = (): boolean => {
+	if (typeof window === 'undefined') return false; // Safety for SSR/Node environments
+	return DEBUG_DOMAINS.includes(window.location.hostname);
+};
+export const logger = {
+	log: (...args: any[]) => {
+		if (isDebugDomain()) console.log(...args);
+	},
+	info: (...args: any[]) => {
+		if (isDebugDomain()) console.info(...args);
+	},
+	warn: (...args: any[]) => {
+		if (isDebugDomain()) console.warn(...args);
+	},
+	error: (...args: any[]) => {
+		console.error(...args);
+	},
+};
+
 const maybeWipeUserData = async (
 	apiKey?: string,
 	brazeUuid?: null | string,
@@ -76,7 +96,7 @@ function refreshBanners(braze: BrazeInstance): Promise<void> {
 	// Create the Timeout Promise
 	const timeout = new Promise<void>((resolve) => {
 		timeoutId = setTimeout(() => {
-			console.warn(
+			logger.warn(
 				'⏱️ Braze Banners refresh timed out. Proceeding anyway...',
 			);
 			// We can't cancel the Braze network request,
@@ -90,12 +110,12 @@ function refreshBanners(braze: BrazeInstance): Promise<void> {
 		braze.requestBannersRefresh(
 			[BrazeBannersSystemPlacementId.EndOfArticle],
 			() => {
-				console.log('✅ Braze Banners refreshed.');
+				logger.info('✅ Braze Banners refreshed.');
 				clearTimeout(timeoutId); // Cancel the timeout
 				resolve();
 			},
 			() => {
-				console.warn('⚠️ Braze Banner refresh failed.');
+				logger.warn('⚠️ Braze Banner refresh failed.');
 				clearTimeout(timeoutId); // Cancel the timeout
 				resolve();
 			},
@@ -177,17 +197,19 @@ export const buildBrazeMessaging = async (
 		setHasCurrentBrazeUser();
 		braze.changeUser(dependenciesResult.data.brazeUuid as string);
 
-		// DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY
 		// Subscribe to Braze Banners System updates
-		// (This callback runs every time Braze has new data (initially empty, then populated))
-		const subscriptionId = braze.subscribeToBannersUpdates((banners) => {
-			console.log('📢 Banners updated:', banners);
-		});
-		console.log(
-			'🆔 Subscribed to Braze banner updates. Subscription ID:',
-			subscriptionId,
-		);
-		// DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY
+		if (isDebugDomain()) {
+			// This callback runs every time Braze has new data (initially empty, then populated)
+			const subscriptionId = braze.subscribeToBannersUpdates(
+				(banners) => {
+					console.log('📢 Banners updated:', banners);
+				},
+			);
+			logger.info(
+				'🆔 Subscribed to Braze banner updates. Subscription ID:',
+				subscriptionId,
+			);
+		}
 
 		// Trigger the Braze Banners System refresh (Ask Braze to fetch data)
 		// (Requests banners by a list of placement IDs from the Braze backend.)
