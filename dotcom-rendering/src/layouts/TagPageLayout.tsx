@@ -153,19 +153,22 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									)}
 								/>
 							)}
-							{insertStorylinesSection && (
-								<Island priority="critical">
-									<StorylinesSectionContent
-										index={1}
-										editionId={tagPage.editionId}
-										storylinesContent={
-											tagPage.storylinesContent
-										}
-										containerId="storylines"
-										pillar={tagPage.nav.currentPillarTitle}
-									/>
-								</Island>
-							)}
+							{insertStorylinesSection &&
+								tagPage.storylinesContent && (
+									<Island priority="critical">
+										<StorylinesSectionContent
+											index={1}
+											editionId={tagPage.editionId}
+											storylinesContent={
+												tagPage.storylinesContent
+											}
+											containerId="storylines"
+											pillar={
+												tagPage.nav.currentPillarTitle
+											}
+										/>
+									</Island>
+								)}
 							<FrontSection
 								title={title}
 								url={url}

@@ -783,6 +783,7 @@ export const Card = ({
 						isBetaContainer && isMediaCardOrNewsletter
 					}
 					isStorylines={true}
+					dataLinkName={dataLinkName}
 				/>
 			) : (
 				<SupportingContent
@@ -830,6 +831,7 @@ export const Card = ({
 						containerPalette={containerPalette}
 						fillBackgroundOnMobile={isFlexSplash}
 						isStorylines={true}
+						dataLinkName={dataLinkName}
 					/>
 				) : (
 					<SupportingContent
