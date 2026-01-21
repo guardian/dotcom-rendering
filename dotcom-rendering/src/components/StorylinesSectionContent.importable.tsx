@@ -196,10 +196,10 @@ export const StorylinesSectionContent = ({
 		parseStorylinesContentToStorylines(storylinesContent);
 
 	const [activeStorylineId, setActiveStorylineId] = useState<string>(
-		parsedStorylines?.[0]?.id ?? '',
+		parsedStorylines[0]?.id ?? '',
 	);
 
-	if (!parsedStorylines || parsedStorylines.length === 0) {
+	if (!parsedStorylines[0]) {
 		return null;
 	}
 
