@@ -53,7 +53,7 @@ const getAtAGlanceUrls = (elements: FEElement[]): string[] =>
 	);
 
 const shouldRenderCarousel = (products: ProductBlockElement[]): boolean =>
-	products.length >= 2;
+	products.length >= 3;
 
 const insertCarouselPlaceholder = (elements: FEElement[]): FEElement[] => {
 	if (!Array.isArray(elements) || elements.length === 0) return [];
@@ -68,6 +68,7 @@ const insertCarouselPlaceholder = (elements: FEElement[]): FEElement[] => {
 			if (isAtAGlance(element)) {
 				inAtAGlanceSection = true;
 				atAGlanceElements = [];
+				continue;
 			}
 
 			output.push(element);

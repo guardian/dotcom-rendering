@@ -979,10 +979,12 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.ProductCarouselElement':
 			return (
-				<ScrollableProduct
-					products={element.matchedProducts}
-					format={format}
-				/>
+				<Island priority="critical" defer={{ until: 'idle' }}>
+					<ScrollableProduct
+						products={element.matchedProducts}
+						format={format}
+					/>
+				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
