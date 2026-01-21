@@ -143,12 +143,15 @@ export const canShowBrazeBannersSystem = async (
 /**
  * Displays a Braze Banner using the Braze Banners System.
  * @param meta Meta information required to display the banner
+ * @param customData Optional custom data to send to the banner via postMessage
  * @returns React component that renders the Braze Banner
  */
 export const BrazeBannersSystemDisplay = ({
 	meta,
+	customData,
 }: {
 	meta: BrazeBannersSystemMeta;
+	customData?: Record<string, any>;
 }) => {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [minHeight, setMinHeight] = useState<string>('0px');
@@ -194,6 +197,35 @@ export const BrazeBannersSystemDisplay = ({
 		return () =>
 			window.removeEventListener('message', handleBrazeBannerMessage);
 	}, [meta.banner]);
+
+	// Handle sending data down to the Banner
+	useEffect(() => {
+		if (!customData) return;
+
+		// We use a timeout because Braze takes a few ms to render the <iframe>
+		const timer = setTimeout(() => {
+			if (containerRef.current) {
+				const iframe = containerRef.current.querySelector('iframe');
+
+				if (iframe && iframe.contentWindow) {
+					brazeBannersSystemLogger.log(
+						'📤 Sending data to Braze banner:',
+						customData,
+					);
+
+					iframe.contentWindow.postMessage(
+						{
+							type: 'BRAZE_BANNERS_SYSTEM_DATA_UPLOAD',
+							...customData,
+						},
+						'*', // Target origin (use specific domain in prod if possible)
+					);
+				}
+			}
+		}, 500); // 500ms delay to ensure DOM is ready
+
+		return () => clearTimeout(timer);
+	}, [meta.banner, customData]); // Re-send if banner or data changes
 
 	return (
 		<div
