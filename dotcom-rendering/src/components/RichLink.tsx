@@ -80,7 +80,10 @@ const headerStyles = css`
 	color: ${themePalette('--rich-link-header')};
 `;
 
-const titleStyles = (parentIsBlog: boolean) => css`
+const titleStyles = (
+	parentIsBlog: boolean,
+	isStarRatingRedesign: boolean,
+) => css`
 	${parentIsBlog ? headlineMedium17 : headlineMedium14};
 	padding-top: 1px;
 
@@ -92,7 +95,7 @@ const titleStyles = (parentIsBlog: boolean) => css`
 		 * Please speak to your team's designer and update this to use a more appropriate preset.
 		 */
 		font-weight: 400;
-		padding-bottom: 5px;
+		${!isStarRatingRedesign && `padding-bottom: 5px`};
 	}
 `;
 
@@ -223,6 +226,8 @@ export const RichLink = ({
 
 	const isLabs = linkFormat.theme === ArticleSpecial.Labs;
 
+	const isStarRatingRedesign =
+		!isUndefined(starRating) && isInStarRatingVariant;
 	return (
 		<div
 			data-print-layout="hide"
@@ -251,7 +256,10 @@ export const RichLink = ({
 						<div css={headerStyles}>
 							<div
 								css={[
-									titleStyles(parentIsBlog),
+									titleStyles(
+										parentIsBlog,
+										!!isStarRatingRedesign,
+									),
 									isLabs && labsTitleStyles,
 								]}
 							>

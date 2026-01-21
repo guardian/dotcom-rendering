@@ -65,7 +65,6 @@ export const SelfHostedVideoInArticle = ({
 					videoStyle={videoStyle}
 					uniqueId={element.id}
 					width={firstVideoAsset?.dimensions?.width ?? 500}
-					enableHls={false}
 				/>
 			</Island>
 			{!!caption && (

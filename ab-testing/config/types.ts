@@ -4,7 +4,7 @@ type AudienceSpace = Map<string, FastlyTestParams>;
 
 type AllSpace = Map<string, FastlyTestParams[]>;
 
-type Team = "commercial" | "webex" | "thefilter";
+type Team = "commercial" | "webex" | "thefilter" | "fronts-and-curation";
 
 type TestName = `${Team}-${string}`;
 
@@ -23,7 +23,8 @@ type ABTest = {
 	expirationDate: `${Year}-${Month}-${Day}`;
 	/** Test type: should this run on the server or client */
 	type: "server" | "client";
-	/** Whether the AB test is currently running or not
+	/**
+	 * Whether the AB test is currently running or not
 	 * Would be nice to know who changed the status last and when
 	 */
 	status: "ON" | "OFF";
@@ -37,7 +38,8 @@ type ABTest = {
 	audienceSpace?: "A" | "B" | "C";
 	/** Test group definition */
 	groups: string[];
-	/** Bypasses sampling to force metrics collection for this test
+	/**
+	 * Bypasses sampling to force metrics collection for this test
 	 * See DCR Metrics component for end usage
 	 */
 	shouldForceMetricsCollection?: boolean;
