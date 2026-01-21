@@ -5,6 +5,7 @@ import {
 	getParserErrorMessage,
 	parse as parseFootballMatches,
 } from '../footballMatches';
+import { parseMatchStats } from '../footballMatchStats';
 import {
 	parse as parseFootballTables,
 	parseTableSummary,
@@ -215,6 +216,21 @@ const parseFEFootballMatch = (
 ): FootballMatchSummaryPage => {
 	const parsedFootballMatch = parseFootballMatch(data.footballMatch);
 
+	const parsedFootballMatchStats = parseMatchStats(data.footballMatch);
+
+	if (!parsedFootballMatchStats.ok) {
+		throw new Error(
+			`Failed to parse football match: ${parsedFootballMatchStats.error.kind} ${parsedFootballMatchStats.error.message}`,
+		);
+	}
+
+	console.log(
+		`colour: ${parsedFootballMatchStats.value.homeTeam.statsColour}`,
+	);
+	console.log(
+		`colour: ${parsedFootballMatchStats.value.awayTeam.statsColour}`,
+	);
+
 	if (!parsedFootballMatch.ok) {
 		throw new Error(
 			`Failed to parse football match: ${parsedFootballMatch.error.kind} ${parsedFootballMatch.error.message}`,
@@ -231,6 +247,7 @@ const parseFEFootballMatch = (
 
 	return {
 		match: parsedFootballMatch.value,
+		matchV2: parsedFootballMatchStats.value,
 		group: group?.value,
 		kind: 'FootballMatchSummary',
 		nav: {

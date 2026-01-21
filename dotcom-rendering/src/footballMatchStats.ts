@@ -1,4 +1,18 @@
+import { isOneOf } from '@guardian/libs';
+import { listParse } from './footballMatches';
 import type { FootballTeam } from './footballTeam';
+import type {
+	FEFootballMatch,
+	FEFootballPlayer,
+	FEFootballPlayerEvent,
+	FEFootballTeam,
+} from './frontend/feFootballMatchPage';
+import type { Result } from './lib/result';
+import { error, ok } from './lib/result';
+import { cleanTeamName } from './sportDataPage';
+
+const eventTypes = ['substitution', 'dismissal', 'booking'] as const;
+const isEventType = isOneOf(eventTypes);
 
 /**
  * The stats for each team in a given football match.
@@ -38,6 +52,70 @@ type FootballPlayer = {
  * Events involving a particular player in a given football match.
  */
 export type PlayerEvent = {
-	kind: 'substitution' | 'booking' | 'dismissal';
+	kind: (typeof eventTypes)[number];
 	minute: number;
 };
+
+type UnknownEventType = {
+	kind: 'UnknownEventType';
+	message: string;
+};
+
+type ParserError = UnknownEventType;
+
+const parsePlayerEvent = (
+	feFootballMatchPlayerEvent: FEFootballPlayerEvent,
+): Result<ParserError, PlayerEvent> => {
+	if (!isEventType(feFootballMatchPlayerEvent.eventType)) {
+		return error({
+			kind: 'UnknownEventType',
+			message: `Unknown Player Event Type - ${feFootballMatchPlayerEvent.eventType}`,
+		});
+	}
+
+	return ok({
+		kind: feFootballMatchPlayerEvent.eventType,
+		minute: parseInt(feFootballMatchPlayerEvent.eventTime), // TODO
+	});
+};
+
+const parseEvents = listParse(parsePlayerEvent);
+
+const parseFootballPlayer = (
+	feFootballMatchPlayer: FEFootballPlayer,
+): Result<ParserError, FootballPlayer> =>
+	parseEvents(feFootballMatchPlayer.events).map((events) => ({
+		paID: feFootballMatchPlayer.id,
+		name: feFootballMatchPlayer.name,
+		substitute: feFootballMatchPlayer.substitute,
+		shirtNumber: parseInt(feFootballMatchPlayer.shirtNumber), // TODO
+		events,
+	}));
+
+const parsePlayers = listParse(parseFootballPlayer);
+
+const parseTeamWithStats = (
+	feFootballMatchTeam: FEFootballTeam,
+): Result<ParserError, FootballMatchTeamWithStats> =>
+	parsePlayers(feFootballMatchTeam.players).map((players) => ({
+		paID: feFootballMatchTeam.id,
+		name: cleanTeamName(feFootballMatchTeam.name),
+		abbreviatedName: feFootballMatchTeam.codename,
+		possession: feFootballMatchTeam.possession,
+		shotsOnTarget: feFootballMatchTeam.shotsOn,
+		shotsOffTarget: feFootballMatchTeam.shotsOff,
+		corners: feFootballMatchTeam.corners,
+		fouls: feFootballMatchTeam.fouls,
+		players,
+		statsColour: feFootballMatchTeam.colours,
+	}));
+
+export const parseMatchStats = (
+	feFootballMatch: FEFootballMatch,
+): Result<ParserError, FootballMatchStats> =>
+	parseTeamWithStats(feFootballMatch.homeTeam).flatMap((homeTeam) =>
+		parseTeamWithStats(feFootballMatch.awayTeam).map((awayTeam) => ({
+			homeTeam,
+			awayTeam,
+		})),
+	);

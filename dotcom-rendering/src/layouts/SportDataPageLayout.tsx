@@ -2,6 +2,7 @@ import { palette } from '@guardian/source/foundations';
 import { AdSlot } from '../components/AdSlot.web';
 import { CricketScorecardPage } from '../components/CricketScorecardPage';
 import { FootballMatchesPageWrapper } from '../components/FootballMatchesPageWrapper.importable';
+import { FootballMatchInfo } from '../components/FootballMatchInfo';
 import { FootballMatchSummary } from '../components/FootballMatchSummary';
 import { FootballTablesPage } from '../components/FootballTablesPage';
 import { Footer } from '../components/Footer';
@@ -27,6 +28,9 @@ const SportsPage = ({
 	sportData: SportDataPage;
 	renderAds: boolean;
 }) => {
+	const isFootballRedesignVariant =
+		sportData.config.abTests.starRatingRedesignVariant === 'variant';
+
 	switch (sportData.kind) {
 		case 'FootballFixtures':
 		case 'FootballLiveScores':
@@ -66,8 +70,18 @@ const SportsPage = ({
 					guardianBaseUrl={sportData.guardianBaseURL}
 				/>
 			);
-		case 'FootballMatchSummary':
+		case 'FootballMatchSummary': {
+			if (isFootballRedesignVariant) {
+				return (
+					<FootballMatchInfo
+						match={sportData.matchV2}
+						table={sportData.group}
+					/>
+				);
+			}
+
 			return <FootballMatchSummary match={sportData.match} />;
+		}
 	}
 };
 
