@@ -25,7 +25,7 @@ type StorylinesSectionProps = {
 	index: number;
 	containerId?: string;
 	editionId: EditionId;
-	storylinesContent?: StorylinesContent;
+	storylinesContent: StorylinesContent;
 	pillar?: string;
 };
 
@@ -193,7 +193,6 @@ export const StorylinesSectionContent = ({
 	pillar,
 }: StorylinesSectionProps) => {
 	const parsedStorylines =
-		storylinesContent &&
 		parseStorylinesContentToStorylines(storylinesContent);
 
 	const [activeStorylineId, setActiveStorylineId] = useState<string>(
@@ -219,7 +218,7 @@ export const StorylinesSectionContent = ({
 			{
 				component: {
 					componentType: 'STORYLINES',
-					id: `${storylinesContent?.tag} storylines`,
+					id: `${storylinesContent.tag} storylines`,
 				},
 				action: 'CLICK',
 				value: `${currentId} -> ${newStorylineId}`,

@@ -205,7 +205,7 @@ function decideGroupedTrails(
 }
 
 export function parseStorylinesContentToStorylines(
-	data: StorylinesContent,
+	storylinesContent: StorylinesContent,
 ): ParsedStoryline[] {
 	function decideCategoryTitle(category: CategoryContent): string {
 		switch (category.category) {
@@ -219,7 +219,7 @@ export function parseStorylinesContentToStorylines(
 				return category.category;
 		}
 	}
-	return data.storylines.map((storyline, i) => {
+	return storylinesContent.storylines.map((storyline, i) => {
 		const storylineId = `storyline-${i + 1}`;
 		return {
 			id: storylineId,
