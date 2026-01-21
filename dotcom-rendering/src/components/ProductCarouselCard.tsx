@@ -12,8 +12,8 @@ import { Link } from '@guardian/source/react-components';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import type { ProductBlockElement } from '../types/content';
+import { ProductLinkElementButton } from './Button/ProductLinkElementButton';
 import { ProductCardImage } from './ProductCardImage';
-import { ProductLinkButton } from './ProductLinkButton';
 
 export type ProductCarouselCardProps = {
 	product: ProductBlockElement;
@@ -122,12 +122,11 @@ export const ProductCarouselCard = ({
 						<div css={productNameFont}>{product.productName}</div>
 					</div>
 				)}
-
 				{firstCta && (
 					<>
 						<div css={priceStyle}>{firstCta.price}</div>
 						<div css={buttonWrapper}>
-							<ProductLinkButton
+							<ProductLinkElementButton
 								label={`Buy at ${firstCta.retailer}`}
 								url={firstCta.url}
 								fullwidth={true}
