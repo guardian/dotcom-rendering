@@ -115,17 +115,13 @@ export const BrazeBannersSystemDisplay = ({
 	// Handle "postMessage" from the Banner's Buttons
 	useEffect(() => {
 		const handleBrazeBannerMessage = (event: MessageEvent) => {
-			brazeBannersSystemLogger.info(
-				'Received message from Braze Banner:',
-				event.data,
-			);
 			if (event.data?.type === 'NEWSLETTER_SUBSCRIBE') {
-				const { newsletterId } = event.data;
-				// subscribeUserToNewsletter(newsletterId);
 				brazeBannersSystemLogger.log(
 					'Subscribed user to newsletter:',
-					newsletterId,
+					event.data,
 				);
+				// const { newsletterId } = event.data;
+				// subscribeUserToNewsletter(newsletterId);
 			}
 		};
 
