@@ -91,7 +91,7 @@ export const BrazeBannersSystemDisplay = ({
 		<div
 			ref={containerRef}
 			className="braze-banner-container"
-			style={{ minHeight: minHeight }} // Optional: prevents layout shift
+			style={{ minHeight }} // Optional: prevents layout shift
 		/>
 	);
 };
