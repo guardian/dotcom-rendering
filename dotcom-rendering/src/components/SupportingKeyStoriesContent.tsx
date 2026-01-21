@@ -174,7 +174,7 @@ export const SupportingKeyStoriesContent = ({
 								? horizontalSublinkStyles(columnSpan)
 								: verticalSublinkStyles,
 						]}
-						data-link-name={`${dataLinkName} | ${index + 1}`} //
+						data-link-name={`${dataLinkName} | ${index + 1}`}
 					>
 						<FormatBoundary format={subLinkFormat}>
 							<ContainerOverrides
