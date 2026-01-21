@@ -9,7 +9,7 @@ const platformHostnames = [
 ];
 
 export const isExternalLink = (url: string) =>
-	platformHostnames.includes(new URL(url).hostname);
+	!platformHostnames.includes(new URL(url).hostname);
 
 export const getPropsForLinkUrl = (label: string) => ({
 	rel: 'noreferrer noopener',
