@@ -14,6 +14,13 @@ import type {
 import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';
+import type { BrazeBannersSystemMeta } from '../lib/braze/BrazeBannersSystem';
+import {
+	BrazeBannersSystemDisplay,
+	canShowBrazeBannersSystem,
+} from '../lib/braze/BrazeBannersSystem';
+import { BrazeBannersSystemPlacementId } from '../lib/braze/buildBrazeMessaging';
+import type { BrazeInstance } from '../lib/braze/initialiseBraze';
 import type {
 	CandidateConfig,
 	MaybeFC,
@@ -33,13 +40,6 @@ import {
 	ReaderRevenueEpic,
 } from './SlotBodyEnd/ReaderRevenueEpic';
 import type { CanShowData as RRCanShowData } from './SlotBodyEnd/ReaderRevenueEpic';
-import {
-	BrazeBannersSystemDisplay,
-	BrazeBannersSystemMeta,
-	canShowBrazeBannersSystem,
-} from '../lib/braze/BrazeBannersSystem';
-import { BrazeBannersSystemPlacementId } from '../lib/braze/buildBrazeMessaging';
-import { BrazeInstance } from '../lib/braze/initialiseBraze';
 
 type Props = {
 	contentType: string;
@@ -237,6 +237,7 @@ export const SlotBodyEnd = ({
 		tags,
 		ophanPageViewId,
 		pageId,
+		braze,
 	]);
 
 	useEffect(() => {
