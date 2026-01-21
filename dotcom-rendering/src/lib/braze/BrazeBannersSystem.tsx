@@ -199,12 +199,19 @@ export const BrazeBannersSystemDisplay = ({
 						subscribed: true,
 					}),
 					...options,
-				}).catch((error) => {
-					brazeBannersSystemLogger.warn(
-						'Error subscribing to newsletter:',
-						error,
-					);
-				});
+				})
+					.catch((error) => {
+						brazeBannersSystemLogger.warn(
+							'Error subscribing to newsletter:',
+							error,
+						);
+					})
+					.then(() => {
+						brazeBannersSystemLogger.info(
+							'Successfully subscribed to newsletter:',
+							newsletterId,
+						);
+					});
 			}
 		},
 		[authStatus, idApiUrl],
@@ -261,10 +268,6 @@ export const BrazeBannersSystemDisplay = ({
 					);
 					break;
 				case BrazeBannersSystemMessageType.NewsletterSubscribe:
-					brazeBannersSystemLogger.log(
-						'Subscribed user to newsletter:',
-						event.data,
-					);
 					const { newsletterId } = event.data;
 					if (newsletterId) {
 						void subscribeToNewsletter(newsletterId);
