@@ -1,9 +1,9 @@
 import type { Banner } from '@braze/web-sdk';
-import { useEffect, useRef, useState } from 'react';
-import type { CanShowResult } from '../messagePicker';
-import type { BrazeInstance } from './initialiseBraze';
-import { useAuthStatus } from '../useAuthStatus';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { getOptionsHeaders } from '../identity';
+import type { CanShowResult } from '../messagePicker';
+import { useAuthStatus } from '../useAuthStatus';
+import type { BrazeInstance } from './initialiseBraze';
 
 /**
  * Logger prefix for Braze Banners System logs.
@@ -173,7 +173,7 @@ export const BrazeBannersSystemDisplay = ({
 	) => {
 		if (containerRef.current) {
 			const iframe = containerRef.current.querySelector('iframe');
-			if (iframe && iframe.contentWindow) {
+			if (iframe?.contentWindow) {
 				const data = {
 					...customData,
 					type: `${type}:RESPONSE`,
@@ -190,20 +190,23 @@ export const BrazeBannersSystemDisplay = ({
 		}
 	};
 
-	const subscribeToNewsletter = async (newsletterId: string) => {
-		if (authStatus.kind == 'SignedIn') {
-			const options = getOptionsHeaders(authStatus);
+	const subscribeToNewsletter = useCallback(
+		async (newsletterId: string) => {
+			if (authStatus.kind == 'SignedIn') {
+				const options = getOptionsHeaders(authStatus);
 
-			await fetch(`${idApiUrl}/users/me/newsletters`, {
-				method: 'PATCH',
-				body: JSON.stringify({
-					id: newsletterId,
-					subscribed: true,
-				}),
-				...options,
-			});
-		}
-	};
+				await fetch(`${idApiUrl}/users/me/newsletters`, {
+					method: 'PATCH',
+					body: JSON.stringify({
+						id: newsletterId,
+						subscribed: true,
+					}),
+					...options,
+				});
+			}
+		},
+		[authStatus, idApiUrl],
+	);
 
 	// Handle DOM Insertion
 	useEffect(() => {
@@ -262,7 +265,7 @@ export const BrazeBannersSystemDisplay = ({
 					);
 					const { newsletterId } = event.data;
 					if (newsletterId) {
-						subscribeToNewsletter(newsletterId);
+						void subscribeToNewsletter(newsletterId);
 					}
 					break;
 			}
@@ -272,7 +275,7 @@ export const BrazeBannersSystemDisplay = ({
 		return () => {
 			window.removeEventListener('message', handleBrazeBannerMessage);
 		};
-	}, [meta.banner]);
+	}, [meta.banner, authStatus.kind, subscribeToNewsletter]);
 
 	return (
 		<div
