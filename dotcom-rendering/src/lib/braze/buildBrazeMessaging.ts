@@ -22,7 +22,7 @@ import { checkBrazeDependencies } from './checkBrazeDependencies';
 import type { BrazeInstance } from './initialiseBraze';
 import { getInitialisedBraze } from './initialiseBraze';
 
-const DEBUG_DOMAINS = ['localhost', 'thegulocal'];
+const DEBUG_DOMAINS = ['localhost', 'r.thegulocal.com'];
 const isDebugDomain = (): boolean => {
 	if (typeof window === 'undefined') return false; // Safety for SSR/Node environments
 	return DEBUG_DOMAINS.includes(window.location.hostname);
@@ -109,7 +109,7 @@ function refreshBanners(braze: BrazeInstance): Promise<void> {
 	// Create the Braze Promise
 	const brazeRequest = new Promise<void>((resolve) => {
 		braze.requestBannersRefresh(
-			[BrazeBannersSystemPlacementId.EndOfArticle],
+			Object.values(BrazeBannersSystemPlacementId),
 			() => {
 				logger.info('✅ Braze Banners refreshed.');
 				clearTimeout(timeoutId); // Cancel the timeout
@@ -123,7 +123,7 @@ function refreshBanners(braze: BrazeInstance): Promise<void> {
 		);
 	});
 
-	// 3. Race them
+	// Race them
 	return Promise.race([brazeRequest, timeout]);
 }
 
@@ -203,11 +203,11 @@ export const buildBrazeMessaging = async (
 			// This callback runs every time Braze has new data (initially empty, then populated)
 			const subscriptionId = braze.subscribeToBannersUpdates(
 				(banners) => {
-					console.log('📢 Banners updated:', banners);
+					console.log('📢 Braze Banners check:', banners);
 				},
 			);
 			logger.info(
-				'🆔 Subscribed to Braze banner updates. Subscription ID:',
+				'🆔 Subscribed to Braze Banners updates. Subscription ID:',
 				subscriptionId,
 			);
 		}
