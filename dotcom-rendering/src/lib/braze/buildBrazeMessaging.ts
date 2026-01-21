@@ -150,11 +150,6 @@ export const buildBrazeMessaging = async (
 
 		braze.openSession();
 
-		// DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY
-		// Force the trigger immediately
-		braze.logCustomEvent('afs_trigger_braze');
-		// DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY
-
 		const brazeCards = window.guardian.config.switches.brazeContentCards
 			? new BrazeCards(braze, errorHandler)
 			: new NullBrazeCards();
