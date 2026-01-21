@@ -17,9 +17,9 @@ import { getArticleCounts } from '../lib/articleCount';
 import type { BrazeBannersSystemMeta } from '../lib/braze/BrazeBannersSystem';
 import {
 	BrazeBannersSystemDisplay,
+	BrazeBannersSystemPlacementId,
 	canShowBrazeBannersSystem,
 } from '../lib/braze/BrazeBannersSystem';
-import { BrazeBannersSystemPlacementId } from '../lib/braze/buildBrazeMessaging';
 import type { BrazeInstance } from '../lib/braze/initialiseBraze';
 import type {
 	CandidateConfig,

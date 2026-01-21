@@ -1,17 +1,30 @@
 import type { Banner } from '@braze/web-sdk';
 import { useEffect, useRef, useState } from 'react';
 import type { CanShowResult } from '../messagePicker';
-import type { BrazeBannersSystemPlacementId } from './buildBrazeMessaging';
 import type { BrazeInstance } from './initialiseBraze';
 
+/**
+ * Logger prefix for Braze Banners System logs.
+ */
 const LOG_PREFIX = '[BrazeBannersSystem]';
+
+/**
+ * List of debug domains where Braze Banners System logs will be shown.
+ */
 const DEBUG_DOMAINS = ['localhost', 'r.thegulocal.com'];
 
+/**
+ * Checks if the current domain is a debug domain.
+ * @returns boolean indicating if the current domain is a debug domain
+ */
 export const isDebugDomain = (): boolean => {
 	if (typeof window === 'undefined') return false; // Safety for SSR/Node environments
 	return DEBUG_DOMAINS.includes(window.location.hostname);
 };
 
+/**
+ * Logger for the Braze Banners System.
+ */
 export const brazeBannersSystemLogger = {
 	log: (...args: any[]): void => {
 		if (isDebugDomain()) console.log(LOG_PREFIX, ...args);
@@ -27,6 +40,62 @@ export const brazeBannersSystemLogger = {
 		console.error(LOG_PREFIX, ...args);
 	},
 };
+
+/**
+ * Braze Banners System Placement IDs used in DCR
+ */
+export enum BrazeBannersSystemPlacementId {
+	EndOfArticle = 'dotcom-rendering_end-of-article',
+}
+
+/**
+ * Trigger a refresh of Braze Banners System banners
+ * "Each call to requestBannersRefresh consumes one token. If you attempt a refresh
+ * when no tokens are available, the SDK doesn’t make the request and logs an error
+ * until a token refills. This is important for mid-session and event-triggered
+ * updates. To implement dynamic updates (for example, after a user completes an
+ * action on the same page), call the refresh method after the custom event is
+ * logged, but note the necessary delay for Braze to ingest and process the event
+ * before the user qualifies for a different Banner campaign."
+ * https://www.braze.com/docs/developer_guide/banners/#rate-limiting-for-refresh-requests
+ * @param braze The Braze instance
+ * @returns A promise that resolves when the refresh is complete
+ */
+export function refreshBanners(braze: BrazeInstance): Promise<void> {
+	let timeoutId: NodeJS.Timeout;
+
+	// Create the Timeout Promise
+	const timeout = new Promise<void>((resolve) => {
+		timeoutId = setTimeout(() => {
+			brazeBannersSystemLogger.warn(
+				'⏱️ Refresh timed out. Proceeding anyway...',
+			);
+			// We can't cancel the Braze network request,
+			// but we can ensure we stop waiting for it.
+			resolve();
+		}, 2000);
+	});
+
+	// Create the Braze Promise
+	const brazeRequest = new Promise<void>((resolve) => {
+		braze.requestBannersRefresh(
+			Object.values(BrazeBannersSystemPlacementId),
+			() => {
+				brazeBannersSystemLogger.info('✅ Refresh completed.');
+				clearTimeout(timeoutId); // Cancel the timeout
+				resolve();
+			},
+			() => {
+				brazeBannersSystemLogger.warn('⚠️ Refresh failed.');
+				clearTimeout(timeoutId); // Cancel the timeout
+				resolve();
+			},
+		);
+	});
+
+	// Race them
+	return Promise.race([brazeRequest, timeout]);
+}
 
 /**
  * Meta information required to display a Braze Banner.
