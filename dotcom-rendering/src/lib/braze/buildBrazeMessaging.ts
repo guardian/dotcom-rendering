@@ -184,11 +184,11 @@ export const buildBrazeMessaging = async (
 			// This callback runs every time Braze has new data (initially empty, then populated)
 			const subscriptionId = braze.subscribeToBannersUpdates(
 				(banners) => {
-					console.log('📢 Braze Banners check:', banners);
+					brazeBannersSystemLogger.log('📢 Check:', banners);
 				},
 			);
 			brazeBannersSystemLogger.info(
-				'🆔 Subscribed to Braze Banners updates. Subscription ID:',
+				'🆔 Subscribed to Updates. Subscription ID:',
 				subscriptionId,
 			);
 		}
