@@ -51,6 +51,10 @@ const readMoreCta = css`
 	${textSansBold15};
 	text-decoration-color: ${palette('--product-card-read-more-decoration')};
 	color: ${palette('--product-card-read-more')};
+	:hover {
+		color: ${palette('--product-card-read-more')};
+		text-decoration-color: ${palette('--product-card-read-more')};
+	}
 `;
 
 const priceStyle = css`
