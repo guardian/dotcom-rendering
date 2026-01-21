@@ -182,10 +182,7 @@ export const BrazeBannersSystemDisplay = ({
 					'📤 Sent message to Braze Banner:',
 					data,
 				);
-				iframe.contentWindow.postMessage(
-					data,
-					'*', // Target origin (use specific domain in prod if possible)
-				);
+				iframe.contentWindow.postMessage(data, window.location.origin);
 			}
 		}
 	};
