@@ -1344,9 +1344,12 @@ export const Card = ({
 								<>
 									{showPill ? (
 										<>
-											{!!branding && isOnwardContent && (
-												<LabsBranding />
-											)}
+											{!!branding &&
+												format.theme ===
+													ArticleSpecial.Labs &&
+												isOnwardContent && (
+													<LabsBranding />
+												)}
 											<MediaOrNewsletterPill />
 										</>
 									) : (
