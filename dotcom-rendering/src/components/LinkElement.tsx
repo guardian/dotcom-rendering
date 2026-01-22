@@ -34,6 +34,7 @@ export const LinkElement = ({
 					data-spacefinder-role="inline"
 					data-ignore="global-link-styling"
 					{...propsForLinkUrl}
+					href={url}
 				>
 					{label}
 				</EditorialLinkButton>
