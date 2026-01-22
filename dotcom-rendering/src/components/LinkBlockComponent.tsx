@@ -1,5 +1,5 @@
 import { EditorialLinkButton } from './Button/EditorialLinkButton';
-import { ProductLinkElementButton } from './Button/ProductLinkElementButton';
+import { ProductLinkButton } from './Button/ProductLinkButton';
 import { getPropsForLinkUrl, isExternalLink } from './Button/utils';
 
 export type LinkBlockComponentProps = {
@@ -42,7 +42,7 @@ export const LinkBlockComponent = ({
 		}
 		case 'ProductButton': {
 			return (
-				<ProductLinkElementButton
+				<ProductLinkButton
 					priority={buttonPriority}
 					label={label}
 					url={url}

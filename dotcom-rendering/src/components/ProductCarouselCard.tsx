@@ -12,7 +12,7 @@ import { Link } from '@guardian/source/react-components';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import type { ProductBlockElement } from '../types/content';
-import { ProductLinkElementButton } from './Button/ProductLinkElementButton';
+import { ProductLinkButton } from './Button/ProductLinkButton';
 import { ProductCardImage } from './ProductCardImage';
 
 export type ProductCarouselCardProps = {
@@ -126,7 +126,7 @@ export const ProductCarouselCard = ({
 					<>
 						<div css={priceStyle}>{firstCta.price}</div>
 						<div css={buttonWrapper}>
-							<ProductLinkElementButton
+							<ProductLinkButton
 								label={`Buy at ${firstCta.retailer}`}
 								url={firstCta.url}
 								fullwidth={true}

@@ -10,7 +10,7 @@ import type { LinkBlockComponentProps } from './LinkBlockComponent';
 import { LinkBlockComponent } from './LinkBlockComponent';
 
 const meta: Meta<typeof LinkBlockComponent> = {
-	title: 'Components/LinkElement',
+	title: 'Components/LinkBlockComponent',
 	component: LinkBlockComponent,
 } satisfies Meta<typeof LinkBlockComponent>;
 

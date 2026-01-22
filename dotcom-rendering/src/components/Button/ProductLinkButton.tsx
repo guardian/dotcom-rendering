@@ -46,7 +46,7 @@ export const theme: Partial<ThemeButton> = {
 	borderTertiary: palette('--product-button-primary-background'),
 };
 
-export const ProductLinkElementButton = ({
+export const ProductLinkButton = ({
 	label,
 	url,
 	size = 'default',
