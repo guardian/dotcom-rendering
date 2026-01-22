@@ -1,5 +1,6 @@
+import { EditorialLinkButton } from './EditorialLinkButton';
 import { ProductLinkElementButton } from './ProductLinkElementButton';
-import { StandardLinkElementButton } from './StandardLinkElementButton';
+import { getPropsForLinkUrl, isExternalLink } from './utils';
 
 type LinkElementButtonProps = {
 	label: string;
@@ -19,22 +20,31 @@ export const LinkElementButton = ({
 	priority = 'Primary',
 	linkType,
 }: LinkElementButtonProps) => {
+	const buttonPriority = LinkTypePriorityToButtonPriority[priority];
 	switch (linkType) {
 		case 'StandardButton': {
+			const propsForLinkUrl = isExternalLink(url)
+				? getPropsForLinkUrl(label)
+				: {};
+
 			return (
-				<StandardLinkElementButton
-					label={label}
-					url={url}
-					priority={LinkTypePriorityToButtonPriority[priority]}
-				/>
+				<EditorialLinkButton
+					priority={buttonPriority}
+					data-link-name={`standard link button ${priority}`}
+					data-spacefinder-role="inline"
+					data-ignore="global-link-styling"
+					{...propsForLinkUrl}
+				>
+					{label}
+				</EditorialLinkButton>
 			);
 		}
 		case 'ProductButton': {
 			return (
 				<ProductLinkElementButton
+					priority={buttonPriority}
 					label={label}
 					url={url}
-					priority={LinkTypePriorityToButtonPriority[priority]}
 				/>
 			);
 		}

@@ -66,7 +66,6 @@ export const ProductLinkElementButton = ({
 			{...getPropsForLinkUrl(label)}
 			href={url}
 			rel="sponsored noreferrer noopener"
-			iconSide="right"
 			priority={priority}
 			theme={theme}
 			data-ignore="global-link-styling"
