@@ -11,6 +11,7 @@ import {
 	textSansBold28,
 	visuallyHidden,
 } from '@guardian/source/foundations';
+import { getContrast } from '../lib/colour';
 import { transparentColour } from '../lib/transparentColour';
 import { palette } from '../palette';
 
@@ -96,6 +97,27 @@ const barCss = css`
 	border-radius: 8px;
 `;
 
+const decideContrastRequired = (colour: string) => {
+	// https://www.w3.org/WAI/WCAG21/Understanding/non-text-contrast.html
+	const minimumContrast = 3.1;
+
+	const backgroundLight = sourcePalette.neutral[97];
+	const backgroundDark = sourcePalette.neutral[10];
+
+	if (getContrast(colour, backgroundLight) < minimumContrast) return 'light';
+	if (getContrast(colour, backgroundDark) < minimumContrast) return 'dark';
+
+	return 'none';
+};
+
+const addContrastingBorderCss = (colour: string) => {
+	const mode = decideContrastRequired(colour);
+	if (mode === 'none') return null;
+	return css`
+		border: 1px solid ${palette(`--football-match-stat-contrast-${mode}`)};
+	`;
+};
+
 type Team = {
 	name: string;
 	colour: string;
@@ -160,14 +182,14 @@ export const FootballMatchStat = ({
 			</span>
 			<div aria-hidden="true" css={graphCss}>
 				<div
-					css={barCss}
+					css={[barCss, addContrastingBorderCss(homeTeam.colour)]}
 					style={{
 						'--match-stat-percentage': `${homePercentage}%`,
 						'--match-stat-team-colour': homeTeam.colour,
 					}}
 				></div>
 				<div
-					css={barCss}
+					css={[barCss, addContrastingBorderCss(awayTeam.colour)]}
 					style={{
 						'--match-stat-percentage': `${awayPercentage}%`,
 						'--match-stat-team-colour': awayTeam.colour,
