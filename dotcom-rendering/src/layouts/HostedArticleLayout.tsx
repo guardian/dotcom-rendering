@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { HostedContentHeader } from '../components/HostedContentHeader';
 import { grid } from '../grid';
 import type { RenderingTarget } from '../types/renderingTarget';
 
@@ -21,7 +22,12 @@ const border = css`
 export const HostedArticleLayout = (props: WebProps | AppProps) => {
 	return (
 		<>
-			{props.renderingTarget === 'Web' ? 'Masthead' : null}
+			{props.renderingTarget === 'Web' ? (
+				<HostedContentHeader
+					accentColor="pink"
+					branding="someBranding"
+				/>
+			) : null}
 			<main>
 				<header css={[grid.container, border]}>
 					<div css={[grid.column.all]}>Main media</div>
