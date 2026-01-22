@@ -44,7 +44,7 @@ export const StackedProducts = ({
 					css`
 						display: flex;
 						justify-content: space-between;
-						align-items: center;
+						align-items: baseline;
 						padding-bottom: ${space[2]}px;
 					`,
 				]}
