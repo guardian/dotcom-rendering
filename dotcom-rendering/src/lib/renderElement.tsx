@@ -2,7 +2,6 @@ import { AdPlaceholder } from '../components/AdPlaceholder.apps';
 import { AffiliateDisclaimerInline } from '../components/AffiliateDisclaimerInline.importable';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
-import { LinkElementButton } from '../components/Button/LinkElementButton';
 import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
 import { CalloutEmbedBlockComponent } from '../components/CalloutEmbedBlockComponent.importable';
 import { CaptionBlockComponent } from '../components/CaptionBlockComponent';
@@ -30,6 +29,7 @@ import { Island } from '../components/Island';
 import { ItemLinkBlockElement } from '../components/ItemLinkBlockElement';
 import { KeyTakeaways } from '../components/KeyTakeaways';
 import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
+import { LinkElement } from '../components/LinkElement';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
 import { MiniProfiles } from '../components/MiniProfiles';
@@ -606,7 +606,7 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.LinkBlockElement':
 			return (
-				<LinkElementButton
+				<LinkElement
 					label={element.label}
 					url={element.url}
 					linkType={element.linkType}

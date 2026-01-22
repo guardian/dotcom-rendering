@@ -1,8 +1,8 @@
-import { EditorialLinkButton } from './EditorialLinkButton';
-import { ProductLinkElementButton } from './ProductLinkElementButton';
-import { getPropsForLinkUrl, isExternalLink } from './utils';
+import { EditorialLinkButton } from './Button/EditorialLinkButton';
+import { ProductLinkElementButton } from './Button/ProductLinkElementButton';
+import { getPropsForLinkUrl, isExternalLink } from './Button/utils';
 
-type LinkElementButtonProps = {
+export type LinkElementProps = {
 	label: string;
 	url: string;
 	linkType: 'StandardButton' | 'ProductButton';
@@ -14,12 +14,12 @@ const LinkTypePriorityToButtonPriority = {
 	Tertiary: 'tertiary',
 } as const;
 
-export const LinkElementButton = ({
+export const LinkElement = ({
 	label,
 	url,
 	priority = 'Primary',
 	linkType,
-}: LinkElementButtonProps) => {
+}: LinkElementProps) => {
 	const buttonPriority = LinkTypePriorityToButtonPriority[priority];
 	switch (linkType) {
 		case 'StandardButton': {
