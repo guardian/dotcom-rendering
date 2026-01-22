@@ -173,7 +173,9 @@ window.twttr = (function(d, s, id) {
 
 	const onlyLightColourScheme =
 		isInteractive &&
-		Date.parse(webPublicationDate) < Date.parse('2026-01-13T00:00:00Z');
+		(!config.darkModeAvailable ||
+			Date.parse(webPublicationDate) <
+				Date.parse('2026-01-13T00:00:00Z'));
 
 	const maybeArticleThemeString = getArticleThemeString(theme);
 
