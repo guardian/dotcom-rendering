@@ -9,7 +9,7 @@ import type {
 	PillarBucket,
 } from '../types/front';
 import { DynamicFast } from './DynamicFast';
-import { DynamicMediumFour } from './DynamicMediumFour.importable';
+import { PersonalisedMediumFour } from './DynamicMediumFour.importable';
 import { DynamicPackage } from './DynamicPackage';
 import { DynamicSlow } from './DynamicSlow';
 import { FixedLargeSlowXIV } from './FixedLargeSlowXIV';
@@ -305,7 +305,7 @@ export const DecideContainer = ({
 			if (pillarBuckets) {
 				return (
 					<Island priority="critical" defer={{ until: 'visible' }}>
-						<DynamicMediumFour
+						<PersonalisedMediumFour
 							trails={trails}
 							containerPalette={containerPalette}
 							showAge={showAge}

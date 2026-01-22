@@ -25,7 +25,10 @@ const enhanceFront = (body: unknown): Front => {
 
 	const serverTime = Date.now();
 
-	const acrossTheG = createFakeCollection(data.pressedPage.collections);
+	const personalisedContainer = createFakeCollection(
+		data.pressedPage.collections,
+	);
+
 	const collections = enhanceCollections({
 		collections: data.pressedPage.collections,
 		editionId: data.editionId,
@@ -39,15 +42,15 @@ const enhanceFront = (body: unknown): Front => {
 		),
 	});
 
-	const acrossTheGPosition =
+	const personalisedContainerPosition =
 		data.pressedPage.collections.findIndex(
 			(c) => c.displayName === 'News',
 		) + 1;
 
 	const combinedCollections = [
-		...collections.slice(0, acrossTheGPosition),
-		acrossTheG,
-		...collections.slice(acrossTheGPosition),
+		...collections.slice(0, personalisedContainerPosition),
+		personalisedContainer,
+		...collections.slice(personalisedContainerPosition),
 	];
 
 	return {

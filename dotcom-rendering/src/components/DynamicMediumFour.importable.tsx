@@ -69,7 +69,7 @@ const filterBuckets = (
 	return filteredPillarBuckets;
 };
 
-export const DynamicMediumFour = ({
+export const PersonalisedMediumFour = ({
 	trails,
 	containerPalette,
 	showAge,

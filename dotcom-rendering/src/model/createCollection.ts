@@ -2,7 +2,7 @@ import type { FECollection, FEFrontCard } from '../frontend/feFront';
 import type { DCRCollectionType, DCRFrontCard } from '../types/front';
 import { enhanceCards } from './enhanceCards';
 
-const acrossTheGuardianCollection: DCRCollectionType = {
+const personalisedCollection: DCRCollectionType = {
 	id: 'hardcoded-collection',
 	displayName: 'Across The Guardian',
 	description: undefined,
@@ -133,7 +133,7 @@ export const createFakeCollection = (
 	const curatedList = getCuratedList(pillarCards);
 
 	return {
-		...acrossTheGuardianCollection,
+		...personalisedCollection,
 		curated: curatedList,
 		bucket: pillarCards,
 	};
