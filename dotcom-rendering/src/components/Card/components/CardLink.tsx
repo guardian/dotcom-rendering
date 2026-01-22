@@ -22,6 +22,7 @@ type Props = {
 	headlineText: string;
 	dataLinkName?: string;
 	isExternalLink: boolean;
+	isInPersonalisationVariant?: boolean;
 };
 
 const InternalLink = ({
@@ -77,6 +78,7 @@ export const CardLink = ({
 	headlineText,
 	dataLinkName = 'article', //this makes sense if the link is to an article, but should this say something like "external" if it's an external link? are there any other uses/alternatives?
 	isExternalLink,
+	isInPersonalisationVariant,
 }: Props) => {
 	return (
 		<>
@@ -86,6 +88,7 @@ export const CardLink = ({
 					headlineText={headlineText}
 					dataLinkName={dataLinkName}
 					trackPersonalisationCardClick={() =>
+						isInPersonalisationVariant &&
 						trackPersonalisationClick(linkTo)
 					}
 				/>
@@ -96,6 +99,7 @@ export const CardLink = ({
 					headlineText={headlineText}
 					dataLinkName={dataLinkName}
 					trackPersonalisationCardClick={() =>
+						isInPersonalisationVariant &&
 						trackPersonalisationClick(linkTo)
 					}
 				/>

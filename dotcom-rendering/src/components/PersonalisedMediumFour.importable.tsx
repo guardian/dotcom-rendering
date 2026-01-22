@@ -1,14 +1,9 @@
-import { isUndefined, storage } from '@guardian/libs';
-import { Button } from '@guardian/source/react-components';
+import { isUndefined } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
-import {
-	DemotedCardsHistoryKey,
-	getDemotedState,
-	trackView,
-	ViewedCardsHistoryKey,
-} from '../lib/personalisationHistory';
+import { getDemotedState, trackView } from '../lib/personalisationHistory';
+import { useBetaAB } from '../lib/useAB';
 import type { DCRPillarCards } from '../model/createCollection';
 import { getCuratedList, PILLARS } from '../model/createCollection';
 import type {
@@ -88,8 +83,15 @@ export const PersonalisedMediumFour = ({
 
 	const [hasTrackedView, setHasTrackedView] = useState<boolean>(false);
 
+	const abTests = useBetaAB();
+	const isInPersonalisationVariant =
+		abTests?.isUserInTestGroup(
+			'fronts-and-curation-personalised-container',
+			'variant',
+		) ?? false;
+
 	useEffect(() => {
-		if (isUndefined(pillarBuckets)) {
+		if (isUndefined(pillarBuckets) || !isInPersonalisationVariant) {
 			setShouldShowCards(true);
 			return;
 		}
@@ -110,27 +112,22 @@ export const PersonalisedMediumFour = ({
 		}
 
 		setShouldShowCards(true);
-	}, [trails, pillarBuckets]);
+	}, [trails, pillarBuckets, isInPersonalisationVariant]);
 
 	useEffect(() => {
-		if (shouldShowCards && !hasTrackedView) {
+		if (shouldShowCards && !hasTrackedView && isInPersonalisationVariant) {
 			trackView(orderedTrails);
 			setHasTrackedView(true);
 		}
-	}, [orderedTrails, hasTrackedView, shouldShowCards]);
+	}, [
+		orderedTrails,
+		hasTrackedView,
+		shouldShowCards,
+		isInPersonalisationVariant,
+	]);
 
 	return (
 		<>
-			<Button
-				type={'button'}
-				size={'small'}
-				onClick={() => {
-					storage.local.remove(DemotedCardsHistoryKey);
-					storage.local.remove(ViewedCardsHistoryKey);
-				}}
-			>
-				reset storage
-			</Button>
 			<UL direction="row">
 				{orderedTrails.map((card, cardIndex) => {
 					return (
@@ -170,6 +167,9 @@ export const PersonalisedMediumFour = ({
 								}
 								canPlayInline={false}
 								isInStarRatingVariant={isInStarRatingVariant}
+								isInPersonalisationVariant={
+									isInPersonalisationVariant
+								}
 							/>
 						</LI>
 					);

@@ -9,7 +9,6 @@ import type {
 	PillarBucket,
 } from '../types/front';
 import { DynamicFast } from './DynamicFast';
-import { PersonalisedMediumFour } from './DynamicMediumFour.importable';
 import { DynamicPackage } from './DynamicPackage';
 import { DynamicSlow } from './DynamicSlow';
 import { FixedLargeSlowXIV } from './FixedLargeSlowXIV';
@@ -29,6 +28,7 @@ import { FlexibleGeneral } from './FlexibleGeneral';
 import { FlexibleSpecial } from './FlexibleSpecial';
 import { Island } from './Island';
 import { NavList } from './NavList';
+import { PersonalisedMediumFour } from './PersonalisedMediumFour.importable';
 import { ScrollableFeature } from './ScrollableFeature.importable';
 import { ScrollableHighlights } from './ScrollableHighlights.importable';
 import { ScrollableMedium } from './ScrollableMedium.importable';

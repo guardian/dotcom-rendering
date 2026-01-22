@@ -25,9 +25,14 @@ const enhanceFront = (body: unknown): Front => {
 
 	const serverTime = Date.now();
 
-	const personalisedContainer = createFakeCollection(
-		data.pressedPage.collections,
-	);
+	const isInPersonalisedContainerTest =
+		data.config.serverSideABTests[
+			`fronts-and-curation-personalised-container`
+		];
+
+	const personalisedContainer = isInPersonalisedContainerTest
+		? createFakeCollection(data.pressedPage.collections)
+		: undefined;
 
 	const collections = enhanceCollections({
 		collections: data.pressedPage.collections,
@@ -47,11 +52,13 @@ const enhanceFront = (body: unknown): Front => {
 			(c) => c.displayName === 'News',
 		) + 1;
 
-	const combinedCollections = [
-		...collections.slice(0, personalisedContainerPosition),
-		personalisedContainer,
-		...collections.slice(personalisedContainerPosition),
-	];
+	const combinedCollections = personalisedContainer
+		? [
+				...collections.slice(0, personalisedContainerPosition),
+				personalisedContainer,
+				...collections.slice(personalisedContainerPosition),
+		  ]
+		: collections;
 
 	return {
 		...data,

@@ -99,7 +99,7 @@ export const trackView = (cards: DCRFrontCard[]): void => {
 				cardsForDemotion.push(updatedCard.cardUrl);
 			}
 		} else {
-			// New card → add with count 1
+			// New card -> add with count 1
 			updatedViewedCards.push({
 				cardUrl: url,
 				viewCount: 1,
