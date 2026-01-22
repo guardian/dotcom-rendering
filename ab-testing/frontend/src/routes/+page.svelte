@@ -2,6 +2,7 @@
 	import { allABTests, activeABtests } from "@guardian/ab-testing-config";
 	import Table from "$lib/components/TableFixed.svelte";
 	import AudienceBreakdown from "$lib/components/AudienceBreakdown.svelte";
+	import { hostname } from "$lib/stores/environment";
 </script>
 
 <h1 class="headline">A/B Tests (Beta)</h1>
@@ -24,7 +25,7 @@
 		this will override any cookie based test assignment.
 	</p>
 	<p>
-		<a href="https://www.theguardian.com/ab-tests/opt-out"
+		<a href={`${$hostname}/ab-tests/opt-out`}
 			>Use this link to opt out of all tests you've opted into</a
 		>
 	</p>
