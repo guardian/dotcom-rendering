@@ -432,19 +432,24 @@ export const WithSelfHostedCinemagraphVideo = {
 		mainMedia: {
 			...WithSelfHostedLoopVideo.args.mainMedia,
 			videoStyle: 'Cinemagraph',
-			sources: [
-				{
-					src: 'https://uploads.guim.co.uk/2025/11/27/4_5_Test--1d34df3e-8c92-4090-8bb6-d79fc7fb9467-1.0.mp4',
-					mimeType: 'video/mp4',
-				},
-			],
 		},
 	},
 } satisfies Story;
 
 /**
- * Loops look like cinemagraphs, as only cinemagraphs are currently supported in Feature Cards.
+ * Default video will loop until non-looping video is supported.
  */
+export const WithSelfHostedDefaultVideo = {
+	args: {
+		...WithSelfHostedLoopVideo.args,
+		showVideo: true,
+		mainMedia: {
+			...WithSelfHostedLoopVideo.args.mainMedia,
+			videoStyle: 'Default',
+		},
+	},
+} satisfies Story;
+
 export const WithSelfHostedImmersiveLoopVideo = {
 	args: {
 		...WithSelfHostedLoopVideo.args,
@@ -469,6 +474,19 @@ export const WithSelfHostedImmersiveCinemagraphVideo = {
 		mainMedia: {
 			...WithSelfHostedImmersiveLoopVideo.args.mainMedia,
 			videoStyle: 'Cinemagraph',
+		},
+	},
+} satisfies Story;
+
+/**
+ * Default video will loop until non-looping video is supported.
+ */
+export const WithSelfHostedImmersiveDefaultVideo = {
+	args: {
+		...WithSelfHostedImmersiveLoopVideo.args,
+		mainMedia: {
+			...WithSelfHostedImmersiveLoopVideo.args.mainMedia,
+			videoStyle: 'Default',
 		},
 	},
 } satisfies Story;
