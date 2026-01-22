@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined, log, storage } from '@guardian/libs';
-import { from, space } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import { SvgAudio, SvgAudioMute } from '@guardian/source/react-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
@@ -32,59 +32,87 @@ import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
 const videoContainerStyles = (
 	isCinemagraph: boolean,
-	aspectRatio: number,
-	containerAspectRatio?: number, // The aspect ratio of the container
+	aspectRatioOfVisibleVideo: number,
+	containerAspectRatioMobile?: number,
+	containerAspectRatioDesktop?: number,
 ) => css`
 	position: relative;
 	display: flex;
-	justify-content: space-around;
 	background-color: ${palette('--video-background')};
+	align-items: center;
+	justify-content: space-around;
 	${!isCinemagraph && `z-index: ${getZIndex('video-container')}`};
 
 	/**
-	 * If the video and its containing slot have different dimensions, the slot will use the aspect
-	 * ratio of the video on mobile, so that the video can take up the full width of the screen.
-	 *
-	 * From tablet breakpoints, the aspect ratio of the slot is maintained, for consistency with other content.
-	 * This will result in grey bars on either side of the video if the video is narrower than the slot.
+	 * Use the aspect ratio of the video, unless the aspect-ratio of the container is fixed
 	 */
-	aspect-ratio: ${aspectRatio};
+	aspect-ratio: ${aspectRatioOfVisibleVideo};
+	${until.tablet} {
+		${!isUndefined(containerAspectRatioMobile) &&
+		`aspect-ratio: ${containerAspectRatioMobile};`}
+	}
 	${from.tablet} {
-		${!isUndefined(containerAspectRatio) &&
-		`aspect-ratio: ${containerAspectRatio};`}
+		${!isUndefined(containerAspectRatioDesktop) &&
+		`aspect-ratio: ${containerAspectRatioDesktop};`}
 	}
 `;
 
 const figureStyles = (
 	aspectRatio: number,
-	letterboxed: boolean,
-	containerAspectRatio?: number,
-	isFeatureCard?: boolean,
+	aspectRatioOfVisibleVideo: number,
+	greyBarsAtSidesOnDesktop: boolean,
+	greyBarsAtTopAndBottomOnDesktop: boolean,
+	isVideoCroppedAtTopBottom: boolean,
+	isVideoCroppedAtLeftRight: boolean,
+	containerAspectRatioDesktop?: number,
 ) => css`
 	position: relative;
-	aspect-ratio: ${aspectRatio};
+	aspect-ratio: ${aspectRatioOfVisibleVideo};
+	max-width: 100%;
 	height: 100%;
 
-	${letterboxed &&
+	/**
+	 * The grey bars fall outside of the figure element. The figure is the full height of the container.
+	 * We need to work out how wide the video needs to be so that the height of the video matches
+	 * the height of the container AND the video can maintain its aspect ratio.
+	 */
+	${greyBarsAtSidesOnDesktop &&
 	css`
-		max-height: 100vh;
-		max-height: 100svh;
-		max-width: 100%;
-
 		${from.tablet} {
-			${typeof containerAspectRatio === 'number' &&
-			`max-width: ${aspectRatio * (1 / containerAspectRatio) * 100}%;`}
+			${!isUndefined(containerAspectRatioDesktop) &&
+			`max-width: ${
+				aspectRatioOfVisibleVideo *
+				(1 / containerAspectRatioDesktop) *
+				100
+			}%;`}
 		}
 	`}
 
-	${isFeatureCard &&
+	${greyBarsAtTopAndBottomOnDesktop &&
 	css`
-		width: 100%;
-		max-width: 100%;
+		${from.tablet} {
+			height: fit-content;
+		}
+	`}
+
+	${isVideoCroppedAtTopBottom &&
+	css`
+		overflow: hidden;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+	`}
+
+	${isVideoCroppedAtLeftRight &&
+	css`
 		overflow: hidden;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+
+		video {
+			width: ${(aspectRatio / aspectRatioOfVisibleVideo) * 100}%;
+		}
 	`}
 `;
 
@@ -144,6 +172,25 @@ const doesVideoHaveAudio = (video: HTMLVideoElement): boolean =>
 	('audioTracks' in video &&
 		Boolean((video.audioTracks as { length: number }).length));
 
+/**
+ * Ensure the aspect ratio of the video is within the boundary, if specified.
+ * For example, we may not want to render a square video inside a 4:5 feature card.
+ */
+const getAspectRatioOfVisibleVideo = (
+	aspectRatio: number,
+	minAspectRatio?: number,
+	maxAspectRatio?: number,
+): number => {
+	if (minAspectRatio !== undefined && aspectRatio < minAspectRatio) {
+		return minAspectRatio;
+	}
+	if (maxAspectRatio !== undefined && aspectRatio > maxAspectRatio) {
+		return maxAspectRatio;
+	}
+
+	return aspectRatio;
+};
+
 type Props = {
 	sources: Source[];
 	atomId: string;
@@ -152,12 +199,6 @@ type Props = {
 	width: number;
 	videoStyle: VideoPlayerFormat;
 	posterImage: string;
-	/**
-	 * The desired aspect ratio of the container of the video, which can differ from the
-	 * aspect ratio of the video itself. Only applied from the tablet breakpoint, as below this
-	 * breakpoint, the video always takes up the full width of the screen.
-	 */
-	containerAspectRatio?: number;
 	fallbackImage: CardPictureProps['mainImage'];
 	fallbackImageSize: CardPictureProps['imageSize'];
 	fallbackImageLoading: CardPictureProps['loading'];
@@ -166,8 +207,18 @@ type Props = {
 	linkTo: string;
 	subtitleSource?: string;
 	subtitleSize: SubtitleSize;
-	letterboxed?: boolean;
-	isFeatureCard?: boolean;
+	/**
+	 * The minimum/maximum aspect ratio the video will have. The video will be cropped if this
+	 * value is defined and the video aspect ratio is less/greater than this value.
+	 */
+	minAspectRatio?: number;
+	maxAspectRatio?: number;
+	/**
+	 * Specify this value to enforce the size of the video container on mobile/desktop.
+	 * Grey bars will appear if this value is defined and differs from the video aspect ratio.
+	 */
+	containerAspectRatioMobile?: number;
+	containerAspectRatioDesktop?: number;
 };
 
 export const SelfHostedVideo = ({
@@ -178,7 +229,6 @@ export const SelfHostedVideo = ({
 	width: expectedWidth,
 	videoStyle,
 	posterImage,
-	containerAspectRatio,
 	fallbackImage,
 	fallbackImageSize,
 	fallbackImageLoading,
@@ -187,8 +237,10 @@ export const SelfHostedVideo = ({
 	linkTo,
 	subtitleSource,
 	subtitleSize,
-	letterboxed = false,
-	isFeatureCard = false,
+	minAspectRatio,
+	maxAspectRatio,
+	containerAspectRatioMobile,
+	containerAspectRatioDesktop,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -696,6 +748,24 @@ export const SelfHostedVideo = ({
 
 	const aspectRatio = width / height;
 
+	/** The aspect ratio of the video will be clamped within the specified range */
+	const aspectRatioOfVisibleVideo = getAspectRatioOfVisibleVideo(
+		aspectRatio,
+		minAspectRatio,
+		maxAspectRatio,
+	);
+
+	const isVideoCroppedAtTopBottom = aspectRatio < aspectRatioOfVisibleVideo;
+	const isVideoCroppedAtLeftRight = aspectRatio > aspectRatioOfVisibleVideo;
+
+	const isGreyBarsAtSidesOnDesktop =
+		containerAspectRatioDesktop !== undefined &&
+		containerAspectRatioDesktop > aspectRatioOfVisibleVideo;
+
+	const isGreyBarsAtTopAndBottomOnDesktop =
+		containerAspectRatioDesktop !== undefined &&
+		containerAspectRatioDesktop < aspectRatioOfVisibleVideo;
+
 	const AudioIcon = isMuted ? SvgAudioMute : SvgAudio;
 
 	const optimisedPosterImage = showPosterImage
@@ -710,19 +780,25 @@ export const SelfHostedVideo = ({
 
 	return (
 		<div
-			css={videoContainerStyles(
-				isCinemagraph,
-				aspectRatio,
-				containerAspectRatio,
-			)}
+			css={[
+				videoContainerStyles(
+					isCinemagraph,
+					aspectRatioOfVisibleVideo,
+					containerAspectRatioMobile,
+					containerAspectRatioDesktop,
+				),
+			]}
 		>
 			<figure
 				ref={setNode}
 				css={figureStyles(
 					aspectRatio,
-					letterboxed,
-					containerAspectRatio,
-					isFeatureCard,
+					aspectRatioOfVisibleVideo,
+					isGreyBarsAtSidesOnDesktop,
+					isGreyBarsAtTopAndBottomOnDesktop,
+					isVideoCroppedAtTopBottom,
+					isVideoCroppedAtLeftRight,
+					containerAspectRatioDesktop,
 				)}
 				className={`video-container ${videoStyle.toLocaleLowerCase()}`}
 				data-component="gu-video-loop"
@@ -756,8 +832,6 @@ export const SelfHostedVideo = ({
 					subtitleSource={subtitleSource}
 					subtitleSize={subtitleSize}
 					activeCue={activeCue}
-					letterboxed={letterboxed}
-					isFeatureCard={isFeatureCard}
 				/>
 			</figure>
 		</div>
