@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { Breakpoint } from '@guardian/source/foundations';
-import { from, space, textSans14 } from '@guardian/source/foundations';
+import { from, space, textSans14, until } from '@guardian/source/foundations';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
@@ -44,6 +44,12 @@ type Props = {
 
 const baseContainerStyles = css`
 	position: relative;
+	${until.tablet} {
+		margin-right: -20px;
+	}
+	${until.mobileLandscape} {
+		margin-right: -10px; /* Align right card edge with edge of screen on mobile */
+	}
 `;
 const navigationStyles = css`
 	padding-bottom: ${space[1]}px;
