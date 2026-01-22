@@ -102,6 +102,7 @@ const figureStyles = (
 		flex-direction: column;
 		justify-content: center;
 	`}
+
 	${isVideoCroppedAtLeftRight &&
 	css`
 		overflow: hidden;
@@ -110,7 +111,7 @@ const figureStyles = (
 		justify-content: center;
 
 		video {
-			width: ${(aspectRatio / containerAspectRatioDesktop!) * 100}%;
+			width: ${(aspectRatio / aspectRatioOfVisibleVideo) * 100}%;
 		}
 	`}
 `;

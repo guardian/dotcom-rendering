@@ -577,12 +577,6 @@ export const FeatureCard = ({
 											subtitleSize="large"
 											minAspectRatio={aspectRatioNumber}
 											maxAspectRatio={aspectRatioNumber}
-											containerAspectRatioMobile={
-												aspectRatioNumber
-											}
-											containerAspectRatioDesktop={
-												aspectRatioNumber
-											}
 										/>
 									</Island>
 								)}
