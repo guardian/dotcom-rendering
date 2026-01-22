@@ -329,28 +329,30 @@ export const SelfHostedVideo = ({
 	}, []);
 
 	const pauseVideo = (
-		reason: Extract<
+		pauseReason: Extract<
 			PlayerStates,
 			| 'PAUSED_BY_USER'
 			| 'PAUSED_BY_INTERSECTION_OBSERVER'
 			| 'PAUSED_BY_BROWSER'
 		>,
 	) => {
-		if (!vidRef.current) return;
+		const video = vidRef.current;
+		if (!video) return;
 
-		if (reason === 'PAUSED_BY_INTERSECTION_OBSERVER') {
+		if (pauseReason === 'PAUSED_BY_INTERSECTION_OBSERVER') {
 			setIsMuted(true);
 		}
 
-		setPlayerState(reason);
+		setPlayerState(pauseReason);
 		dispatchOphanAttentionEvent('videoPause');
-		void vidRef.current.pause();
+
+		void video.pause();
 	};
 
 	const playPauseVideo = () => {
 		if (playerState === 'PLAYING') {
 			if (isInView) {
-				pauseVideo('PAUSED_BY_USER');
+				void pauseVideo('PAUSED_BY_USER');
 			}
 		} else {
 			void playVideo();
@@ -501,45 +503,6 @@ export const SelfHostedVideo = ({
 			'Web',
 		);
 	}, [isInView ? true : undefined]);
-
-	/**
-	 * Handle play/pause, when instigated by the browser.
-	 */
-	useEffect(() => {
-		if (!vidRef.current || !isPlayable) {
-			return;
-		}
-
-		/**
-		 * Stops playback when the video is scrolled out of view.
-		 */
-		if (playerState === 'PLAYING' && isInView === false) {
-			pauseVideo('PAUSED_BY_INTERSECTION_OBSERVER');
-			return;
-		}
-
-		/**
-		 * Autoplay/resume playback when the player comes into view or when
-		 * the page has been restored from the BFCache.
-		 */
-		if (
-			isAutoplayAllowed &&
-			isInView &&
-			(playerState === 'NOT_STARTED' ||
-				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' ||
-				(hasPageBecomeActive && playerState === 'PAUSED_BY_BROWSER'))
-		) {
-			setHasPageBecomeActive(false);
-			void playVideo();
-		}
-	}, [
-		isPlayable,
-		isAutoplayAllowed,
-		isInView,
-		playerState,
-		hasPageBecomeActive,
-		playVideo,
-	]);
 
 	/**
 	 * Show a poster image if a video does NOT play automatically. Otherwise, we do not need
@@ -716,6 +679,27 @@ export const SelfHostedVideo = ({
 				break;
 		}
 	};
+
+	/**
+	 * Autoplay/resume playback when the player comes into view or when
+	 * the page has been restored from the BFCache.
+	 *
+	 * Stops playback when the video is scrolled out of view.
+	 */
+	if (vidRef.current && isPlayable) {
+		if (
+			isAutoplayAllowed &&
+			isInView &&
+			(playerState === 'NOT_STARTED' ||
+				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' ||
+				(hasPageBecomeActive && playerState === 'PAUSED_BY_BROWSER'))
+		) {
+			setHasPageBecomeActive(false);
+			void playVideo();
+		} else if (playerState === 'PLAYING' && isInView === false) {
+			void pauseVideo('PAUSED_BY_INTERSECTION_OBSERVER');
+		}
+	}
 
 	/**
 	 * Show the play icon when the video is not playing, except for when it is scrolled
