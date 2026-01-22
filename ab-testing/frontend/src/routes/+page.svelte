@@ -15,7 +15,7 @@
 	</p>
 	<p>
 		AB tests are defined in <a
-			href="https://github.com/guardian/dotcom-rendering/blob/main/ab-testing/abTest.ts"
+			href="https://github.com/guardian/dotcom-rendering/blob/main/ab-testing/config/abTest.ts"
 			>guardian/dotcom-rendering</a
 		>
 	</p>
