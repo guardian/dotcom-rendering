@@ -203,8 +203,8 @@ const podcastImageContainerStyles = css`
 `;
 
 const podcastImageStyles = css`
-	height: 80px;
-	width: 80px;
+	height: 60px;
+	width: 60px;
 `;
 
 const nonImmersivePodcastImageStyles = css`
