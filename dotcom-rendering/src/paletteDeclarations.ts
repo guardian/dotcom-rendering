@@ -7152,10 +7152,10 @@ const paletteColours = {
 	},
 	'--football-match-stat-contrast-dark': {
 		light: () => 'transparent',
-		dark: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[38],
 	},
 	'--football-match-stat-contrast-light': {
-		light: () => sourcePalette.neutral[46],
+		light: () => sourcePalette.neutral[86],
 		dark: () => 'transparent',
 	},
 	'--football-match-stat-text': {

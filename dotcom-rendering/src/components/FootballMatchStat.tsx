@@ -217,6 +217,7 @@ const offTargetCss = css`
 	margin-top: 5px;
 	padding: ${space[1]}px 0 0 6px;
 	background-color: var(--off-target-colour);
+	border: 1px solid var(--target-border-colour);
 	border-radius: 4px;
 	${from.desktop} {
 		${textSans15};
@@ -234,6 +235,8 @@ const onTargetCss = css`
 	padding: ${space[1]}px 0 0 6px;
 	color: ${sourcePalette.neutral[100]};
 	background-color: var(--on-target-colour);
+	border-top: 1px solid var(--target-border-colour);
+	border-left: 1px solid var(--target-border-colour);
 	border-radius: 4px;
 	width: 80%;
 	min-height: 62px;
@@ -247,6 +250,8 @@ const onTargetAwayCss = css`
 	padding-left: 0;
 	padding-right: 6px;
 	justify-self: start;
+	border-left: none;
+	border-right: 1px solid var(--target-border-colour);
 `;
 
 const attemptCountCss = css`
@@ -276,9 +281,16 @@ export const FootballMatchGoalAttempts = ({
 	homeValues,
 	awayValues,
 }: GoalAttemptProps) => {
+	const targetBorderColour = (colour: string) => {
+		const mode = decideContrastRequired(colour);
+		if (mode === 'none') return 'transparent';
+		return palette(`--football-match-stat-contrast-${mode}`);
+	};
+
 	return (
 		<div css={[containerCss, desktopPaddingCss, goalAttemptsLayoutCss]}>
 			<div css={labelCss}>Goal attempts</div>
+
 			<span
 				css={css`
 					${visuallyHidden}
@@ -294,6 +306,9 @@ export const FootballMatchGoalAttempts = ({
 						0.1,
 					),
 					'--on-target-colour': homeTeam.colour,
+					'--target-border-colour': targetBorderColour(
+						homeTeam.colour,
+					),
 				}}
 			>
 				Off target
@@ -303,6 +318,7 @@ export const FootballMatchGoalAttempts = ({
 					<span css={attemptCountCss}>{homeValues.onTarget}</span>
 				</div>
 			</div>
+
 			<span
 				css={css`
 					${visuallyHidden}
@@ -318,6 +334,9 @@ export const FootballMatchGoalAttempts = ({
 						0.1,
 					),
 					'--on-target-colour': awayTeam.colour,
+					'--target-border-colour': targetBorderColour(
+						awayTeam.colour,
+					),
 				}}
 			>
 				Off target
