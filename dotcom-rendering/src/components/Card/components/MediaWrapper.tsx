@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { between, from, space, until } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import { getZIndex } from '../../../lib/getZIndex';
 import type { CardMediaType } from '../../../types/layout';
 
@@ -32,7 +32,6 @@ type Props = {
 	mediaType?: CardMediaType;
 	mediaPositionOnDesktop: MediaPositionType;
 	mediaPositionOnMobile: MediaPositionType;
-	isBetaContainer: boolean;
 	isSmallCard: boolean;
 	padMedia?: boolean;
 };
@@ -77,41 +76,11 @@ const flexBasisStyles = ({
 	mediaSize,
 	mediaType,
 	isSmallCard,
-	isBetaContainer,
 }: {
 	mediaSize: MediaSizeType;
 	mediaType: CardMediaType;
 	isSmallCard: boolean;
-	isBetaContainer: boolean;
 }): SerializedStyles => {
-	if (!isBetaContainer) {
-		switch (mediaSize) {
-			default:
-			case 'small':
-				return css`
-					flex-basis: 25%;
-					${between.tablet.and.desktop} {
-						flex-basis: 40%;
-					}
-					${from.desktop} {
-						flex-basis: 30%;
-					}
-				`;
-			case 'medium':
-				return css`
-					flex-basis: 50%;
-				`;
-			case 'large':
-				return css`
-					flex-basis: 66%;
-				`;
-			case 'jumbo':
-				return css`
-					flex-basis: 75%;
-				`;
-		}
-	}
-
 	if (mediaType === 'podcast' && !isSmallCard) {
 		return css`
 			flex-basis: 120px;
@@ -166,18 +135,7 @@ const fixMediaWidthStyles = (width: number) => css`
 	align-self: flex-start;
 `;
 
-const fixMobileMediaWidth = (
-	isBetaContainer: boolean,
-	isSmallCard: boolean,
-) => {
-	if (!isBetaContainer) {
-		return css`
-			${until.tablet} {
-				${fixMediaWidthStyles(mediaFixedSize.medium)}
-			}
-		`;
-	}
-
+const fixMobileMediaWidth = (isSmallCard: boolean) => {
 	const size = isSmallCard ? mediaFixedSize.tiny : mediaFixedSize.small;
 
 	return css`
@@ -201,7 +159,6 @@ export const MediaWrapper = ({
 	mediaType,
 	mediaPositionOnDesktop,
 	mediaPositionOnMobile,
-	isBetaContainer,
 	isSmallCard,
 	padMedia,
 }: Props) => {
@@ -225,7 +182,6 @@ export const MediaWrapper = ({
 						mediaSize,
 						mediaType,
 						isSmallCard,
-						isBetaContainer,
 					}),
 				mediaType === 'avatar' &&
 					css`
@@ -241,7 +197,7 @@ export const MediaWrapper = ({
 					`,
 				isHorizontalOnMobile &&
 					mediaType !== 'podcast' &&
-					fixMobileMediaWidth(isBetaContainer, isSmallCard),
+					fixMobileMediaWidth(isSmallCard),
 				isSmallCard && fixDesktopMediaWidth(),
 				isHorizontalOnDesktop &&
 					css`

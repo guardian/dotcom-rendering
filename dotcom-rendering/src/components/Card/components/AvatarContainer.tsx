@@ -7,7 +7,6 @@ type Props = {
 	imageSize: MediaSizeType;
 	imagePositionOnDesktop: MediaPositionType;
 	imagePositionOnMobile: MediaPositionType;
-	isBetaContainer: boolean;
 	isFlexibleContainer: boolean;
 };
 
@@ -27,47 +26,10 @@ const largerTopMargin = css`
 
 const sizingStyles = (
 	imageSize: MediaSizeType,
-	isBetaContainer: boolean,
 	isFlexibleContainer: boolean,
 	isVerticalOnDesktop: boolean,
 	isVerticalOnMobile: boolean,
 ) => {
-	if (!isBetaContainer) {
-		switch (imageSize) {
-			case 'small':
-				return css`
-					${until.tablet} {
-						height: 73px;
-						width: 73px;
-					}
-
-					height: ${isVerticalOnDesktop ? '132px' : '73px'};
-					width: ${isVerticalOnDesktop ? '132px' : '73px'};
-				`;
-			case 'jumbo':
-				return css`
-					height: ${isVerticalOnDesktop ? '132px' : '180px'};
-					width: ${isVerticalOnDesktop ? '132px' : '180px'};
-				`;
-			default:
-				return css`
-					/* Below 980 */
-					${until.desktop} {
-						height: 108px;
-						width: 108px;
-					}
-					/* Below 740 */
-					${until.tablet} {
-						height: 73px;
-						width: 73px;
-					}
-					/* Otherwise */
-					height: 132px;
-					width: 132px;
-				`;
-		}
-	}
-
 	if (isVerticalOnDesktop && !isVerticalOnMobile) {
 		return css`
 			width: 90px;
@@ -136,7 +98,6 @@ export const AvatarContainer = ({
 	imageSize,
 	imagePositionOnDesktop,
 	imagePositionOnMobile,
-	isBetaContainer,
 	isFlexibleContainer,
 }: Props) => {
 	const isVerticalOnDesktop =
@@ -148,11 +109,10 @@ export const AvatarContainer = ({
 		<div
 			css={[
 				sideMarginStyles,
-				!isBetaContainer && topMarginStyles,
-				!isBetaContainer && isVerticalOnDesktop && largerTopMargin,
+				topMarginStyles,
+				isVerticalOnDesktop && largerTopMargin,
 				sizingStyles(
 					imageSize,
-					isBetaContainer,
 					isFlexibleContainer,
 					isVerticalOnDesktop,
 					isVerticalOnMobile,
