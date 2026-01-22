@@ -2,7 +2,7 @@ import { EditorialLinkButton } from './Button/EditorialLinkButton';
 import { ProductLinkElementButton } from './Button/ProductLinkElementButton';
 import { getPropsForLinkUrl, isExternalLink } from './Button/utils';
 
-export type LinkElementProps = {
+export type LinkBlockComponentProps = {
 	label: string;
 	url: string;
 	linkType: 'StandardButton' | 'ProductButton';
@@ -14,12 +14,12 @@ const LinkTypePriorityToButtonPriority = {
 	Tertiary: 'tertiary',
 } as const;
 
-export const LinkElement = ({
+export const LinkBlockComponent = ({
 	label,
 	url,
 	priority = 'Primary',
 	linkType,
-}: LinkElementProps) => {
+}: LinkBlockComponentProps) => {
 	const buttonPriority = LinkTypePriorityToButtonPriority[priority];
 	switch (linkType) {
 		case 'StandardButton': {

@@ -29,7 +29,7 @@ import { Island } from '../components/Island';
 import { ItemLinkBlockElement } from '../components/ItemLinkBlockElement';
 import { KeyTakeaways } from '../components/KeyTakeaways';
 import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
-import { LinkElement } from '../components/LinkElement';
+import { LinkBlockComponent } from '../components/LinkBlockComponent';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
 import { MiniProfiles } from '../components/MiniProfiles';
@@ -606,7 +606,7 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.LinkBlockElement':
 			return (
-				<LinkElement
+				<LinkBlockComponent
 					label={element.label}
 					url={element.url}
 					linkType={element.linkType}

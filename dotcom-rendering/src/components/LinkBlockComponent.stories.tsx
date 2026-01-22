@@ -6,13 +6,13 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '../lib/articleFormat';
-import type { LinkElementProps } from './LinkElement';
-import { LinkElement } from './LinkElement';
+import type { LinkBlockComponentProps } from './LinkBlockComponent';
+import { LinkBlockComponent } from './LinkBlockComponent';
 
-const meta: Meta<typeof LinkElement> = {
+const meta: Meta<typeof LinkBlockComponent> = {
 	title: 'Components/LinkElement',
-	component: LinkElement,
-} satisfies Meta<typeof LinkElement>;
+	component: LinkBlockComponent,
+} satisfies Meta<typeof LinkBlockComponent>;
 
 export default meta;
 
@@ -36,13 +36,13 @@ const allThemeStandardVariations = pillars.map((theme) => ({
 
 const urls = ['https://www.theguardian.com/uk', 'https://www.bbc.co.uk'];
 
-const Template: StoryFn<typeof LinkElement> = (
-	args: Omit<LinkElementProps, 'url' | 'priority'>,
+const Template: StoryFn<typeof LinkBlockComponent> = (
+	args: Omit<LinkBlockComponentProps, 'url' | 'priority'>,
 ) => {
 	return (
 		<>
 			{urls.map((url) => (
-				<LinkElement key={url} url={url} {...args} />
+				<LinkBlockComponent key={url} url={url} {...args} />
 			))}
 		</>
 	);
