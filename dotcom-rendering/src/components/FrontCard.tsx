@@ -2,6 +2,7 @@ import { ArticleDesign } from '../lib/articleFormat';
 import type { DCRFrontCard } from '../types/front';
 import type { Props as CardProps } from './Card/Card';
 import { Card } from './Card/Card';
+import { GridCard } from './Card/GridCard';
 
 type Props = {
 	trail: DCRFrontCard;
@@ -54,5 +55,5 @@ export const FrontCard = (props: Props) => {
 		uniqueId: trail.uniqueId,
 	};
 
-	return Card({ ...defaultProps, ...cardProps });
+	return GridCard({ ...defaultProps, ...cardProps });
 };
