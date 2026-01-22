@@ -19,6 +19,7 @@ const carouselHeader = css`
 	margin-bottom: 10px;
 	display: flex;
 	justify-content: space-between;
+	align-items: baseline;
 `;
 
 const countStyles = css`
