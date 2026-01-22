@@ -1,16 +1,6 @@
 import type { ABTest } from "./types.ts";
 
 /**
- * URL for AB test opt-in/opt-out links
- * PROD: https://www.theguardian.com/
- * CODE: https://m.code.dev-theguardian.com/
- */
-const hostname =
-	process.env.AB_TESTING_ENV === "code"
-		? "https://m.code.dev-theguardian.com"
-		: "https://www.theguardian.com";
-
-/**
  * Tests are defined here. They will be assigned mvt ranges based on the
  * size of the test and the number of groups, these ranges may not be contiguous.
  *
@@ -84,4 +74,4 @@ const ABTests: ABTest[] = [
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
 
-export { ABTests as allABTests, activeABtests, hostname };
+export { ABTests as allABTests, activeABtests };

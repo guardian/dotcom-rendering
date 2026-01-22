@@ -63,13 +63,8 @@ jobs:
       - name: Set up Node environment
         uses: ./.github/actions/setup-node-env
 
-      - name: Build UI for CODE
-        if: github.ref != 'refs/heads/main'
-        run: AB_TESTING_ENV=code pnpm build
-
-      - name: Build UI for PROD
-        if: github.ref == 'refs/heads/main'
-        run: AB_TESTING_ENV=production pnpm build
+      - name: Build UI
+        run: pnpm build
 
       - name: Save build
         uses: actions/upload-artifact@v5

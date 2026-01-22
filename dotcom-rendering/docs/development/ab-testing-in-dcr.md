@@ -139,7 +139,7 @@ If you want to test your changes on CODE you need to follow these steps:
 
 2. Deploy your code changes on DCR and/or Frontend to CODE as normal
 
-3. Deploy the A/B test config to CODE by deploying the `dotcom:ab-testing` riff-raff project against your branch, there will be a comment in the PR with a link to do this once the config has been validated.
+3. Deploy the A/B test config to CODE by deploying the `dotcom::ab-testing` riff-raff project against your branch, there will be a comment in the PR with a link to do this once the config has been validated.
 
 The 3rd step is crucial as Fastly buckets users into tests/cohorts and returns your A/B test participations as response headers.
 
