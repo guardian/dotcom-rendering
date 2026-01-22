@@ -11,6 +11,7 @@ import {
 import { getZIndex } from '../lib/getZIndex';
 import { generateImageURL } from '../lib/image';
 import { useIsInView } from '../lib/useIsInView';
+import { useOnce } from '../lib/useOnce';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
 import { useSubtitles } from '../lib/useSubtitles';
 import type { CustomPlayEventDetail, Source } from '../lib/video';
@@ -29,6 +30,8 @@ import type {
 } from './SelfHostedVideoPlayer';
 import { SelfHostedVideoPlayer } from './SelfHostedVideoPlayer';
 import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
+
+const VISIBILITY_THRESHOLD = 0.5;
 
 const videoContainerStyles = (
 	isCinemagraph: boolean,
@@ -143,6 +146,26 @@ const logAndReportError = (src: string, error: Error) => {
 	log('dotcom', message);
 };
 
+/**
+ * Initiates attention tracking for ophan
+ */
+const trackAttention = async (
+	videoElement: HTMLVideoElement,
+	atomId: string,
+) => {
+	try {
+		const ophan = await getOphan('Web');
+		ophan.trackComponentAttention(
+			`gu-video-loop-${atomId}`,
+			videoElement,
+			VISIBILITY_THRESHOLD,
+			true,
+		);
+	} catch (error) {
+		log('dotcom', 'Failed to track video attention:', error);
+	}
+};
+
 const dispatchOphanAttentionEvent = (
 	eventType: 'videoPlaying' | 'videoPause',
 ) => {
@@ -248,7 +271,6 @@ export const SelfHostedVideo = ({
 	const [isPlayable, setIsPlayable] = useState(false);
 	const [isMuted, setIsMuted] = useState(true);
 	const [hasAudio, setHasAudio] = useState(true);
-	const [showPlayIcon, setShowPlayIcon] = useState(false);
 	const [showPosterImage, setShowPosterImage] = useState<boolean>(false);
 	const [currentTime, setCurrentTime] = useState(0);
 	const [playerState, setPlayerState] =
@@ -257,12 +279,6 @@ export const SelfHostedVideo = ({
 		null,
 	);
 	const [hasPageBecomeActive, setHasPageBecomeActive] = useState(false);
-	/**
-	 * Keeps track of whether the video has been in view.
-	 * For example, we only want to try to pause the video if it has been in view.
-	 */
-	const [hasBeenInView, setHasBeenInView] = useState(false);
-	const [hasBeenPlayed, setHasBeenPlayed] = useState(false);
 	const [hasTrackedPlay, setHasTrackedPlay] = useState(false);
 	/**
 	 * The actual video is a better source of truth of its dimensions.
@@ -270,8 +286,6 @@ export const SelfHostedVideo = ({
 	 */
 	const [width, setWidth] = useState(expectedWidth);
 	const [height, setHeight] = useState(expectedHeight);
-
-	const VISIBILITY_THRESHOLD = 0.5;
 
 	/**
 	 * All controls on the video are hidden: the video looks like a GIF.
@@ -303,7 +317,6 @@ export const SelfHostedVideo = ({
 				.then(() => {
 					// Autoplay succeeded
 					dispatchOphanAttentionEvent('videoPlaying');
-					setHasBeenPlayed(true);
 					setPlayerState('PLAYING');
 				})
 				.catch((error: Error) => {
@@ -316,28 +329,30 @@ export const SelfHostedVideo = ({
 	}, []);
 
 	const pauseVideo = (
-		reason: Extract<
+		pauseReason: Extract<
 			PlayerStates,
 			| 'PAUSED_BY_USER'
 			| 'PAUSED_BY_INTERSECTION_OBSERVER'
 			| 'PAUSED_BY_BROWSER'
 		>,
 	) => {
-		if (!vidRef.current) return;
+		const video = vidRef.current;
+		if (!video) return;
 
-		if (reason === 'PAUSED_BY_INTERSECTION_OBSERVER') {
+		if (pauseReason === 'PAUSED_BY_INTERSECTION_OBSERVER') {
 			setIsMuted(true);
 		}
 
-		setPlayerState(reason);
+		setPlayerState(pauseReason);
 		dispatchOphanAttentionEvent('videoPause');
-		void vidRef.current.pause();
+
+		void video.pause();
 	};
 
 	const playPauseVideo = () => {
 		if (playerState === 'PLAYING') {
 			if (isInView) {
-				pauseVideo('PAUSED_BY_USER');
+				void pauseVideo('PAUSED_BY_USER');
 			}
 		} else {
 			void playVideo();
@@ -377,10 +392,18 @@ export const SelfHostedVideo = ({
 	 * Setup.
 	 *
 	 * 1. Determine whether we can autoplay video.
-	 * 2. Creates event listeners to control playback when there are multiple videos.
+	 * 2. Initialise Ophan attention tracking.
+	 * 3. Creates event listeners to control playback when there are multiple videos.
 	 */
 	useEffect(() => {
 		setIsAutoplayAllowed(doesUserPermitAutoplay());
+
+		/**
+		 * Initialise Ophan attention tracking
+		 */
+		if (vidRef.current) {
+			void trackAttention(vidRef.current, atomId);
+		}
 
 		/**
 		 * Mutes the current video when another video is unmuted
@@ -462,123 +485,24 @@ export const SelfHostedVideo = ({
 				handlePageBecomesVisible();
 			});
 		};
-	}, [uniqueId]);
+	}, [uniqueId, atomId]);
 
 	/**
-	 * Initiates attention tracking for ophan
+	 * Track the first time the video comes into view.
 	 */
-	useEffect(() => {
-		const video = vidRef.current;
-		if (!video) return;
-		const trackAttention = async () => {
-			try {
-				const ophan = await getOphan('Web');
-				ophan.trackComponentAttention(
-					`gu-video-loop-${atomId}`,
-					video,
-					VISIBILITY_THRESHOLD,
-					true,
-				);
-			} catch (error) {
-				log('dotcom', 'Failed to track video attention:', error);
-			}
-		};
-
-		void trackAttention();
-	}, [atomId]);
-
-	/**
-	 * Keeps track of whether the video has been in view or not.
-	 */
-	useEffect(() => {
-		if (isInView && !hasBeenInView) {
-			/**
-			 * Track the first time the video comes into view.
-			 */
-			void submitComponentEvent(
-				{
-					component: {
-						componentType: 'LOOP_VIDEO',
-						id: `gu-video-loop-${atomId}`,
-						labels: [linkTo],
-					},
-					action: 'VIEW',
+	useOnce(() => {
+		void submitComponentEvent(
+			{
+				component: {
+					componentType: 'LOOP_VIDEO',
+					id: `gu-video-loop-${atomId}`,
+					labels: [linkTo],
 				},
-				'Web',
-			);
-
-			setHasBeenInView(true);
-		}
-	}, [isInView, hasBeenInView, atomId, linkTo]);
-
-	/**
-	 * Track the first successful video play in Ophan.
-	 *
-	 * This effect runs only after the video has actually started playing
-	 * for the first time. This is to ensure we don't double-report the event.
-	 */
-	useEffect(() => {
-		if (!hasBeenPlayed || hasTrackedPlay) return;
-
-		ophanTrackerWeb(atomId, 'loop')('play');
-		setHasTrackedPlay(true);
-	}, [atomId, hasBeenPlayed, hasTrackedPlay]);
-
-	/**
-	 * Handle play/pause, when instigated by the browser.
-	 */
-	useEffect(() => {
-		if (!vidRef.current || !isPlayable) {
-			return;
-		}
-
-		/**
-		 * Stops playback when the video is scrolled out of view.
-		 */
-		const isNoLongerInView =
-			playerState === 'PLAYING' && hasBeenInView && isInView === false;
-		if (isNoLongerInView) {
-			pauseVideo('PAUSED_BY_INTERSECTION_OBSERVER');
-			return;
-		}
-
-		/**
-		 * Autoplay/resume playback when the player comes into view or when
-		 * the page has been restored from the BFCache.
-		 */
-		if (
-			isAutoplayAllowed &&
-			isInView &&
-			(playerState === 'NOT_STARTED' ||
-				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' ||
-				(hasPageBecomeActive && playerState === 'PAUSED_BY_BROWSER'))
-		) {
-			setHasPageBecomeActive(false);
-			void playVideo();
-		}
-	}, [
-		isAutoplayAllowed,
-		isInView,
-		isPlayable,
-		playerState,
-		playVideo,
-		hasBeenInView,
-		hasPageBecomeActive,
-		atomId,
-	]);
-
-	/**
-	 * Show the play icon when the video is not playing, except for when it is scrolled
-	 * out of view. In this case, the intersection observer will resume playback and
-	 * having a play icon would falsely indicate a user action is required to resume playback.
-	 */
-	useEffect(() => {
-		const shouldShowPlayIcon =
-			playerState === 'PAUSED_BY_USER' ||
-			playerState === 'PAUSED_BY_BROWSER' ||
-			(playerState === 'NOT_STARTED' && !isAutoplayAllowed);
-		setShowPlayIcon(shouldShowPlayIcon);
-	}, [playerState, isAutoplayAllowed]);
+				action: 'VIEW',
+			},
+			'Web',
+		);
+	}, [isInView ? true : undefined]);
 
 	/**
 	 * Show a poster image if a video does NOT play automatically. Otherwise, we do not need
@@ -590,11 +514,11 @@ export const SelfHostedVideo = ({
 	useEffect(() => {
 		if (
 			isAutoplayAllowed === false ||
-			(isInView === false && !hasBeenInView)
+			(isInView === false && playerState === 'NOT_STARTED')
 		) {
 			setShowPosterImage(true);
 		}
-	}, [isAutoplayAllowed, isInView, hasBeenInView]);
+	}, [isAutoplayAllowed, isInView, playerState]);
 
 	if (adapted) {
 		return FallbackImageComponent;
@@ -635,6 +559,16 @@ export const SelfHostedVideo = ({
 		if (!isPlayable) {
 			setIsPlayable(true);
 		}
+	};
+
+	/**
+	 * Track the first successful video play in Ophan.
+	 */
+	const handlePlaying = () => {
+		if (hasTrackedPlay) return;
+
+		ophanTrackerWeb(atomId, 'loop')('play');
+		setHasTrackedPlay(true);
 	};
 
 	const handlePlayPauseClick = (event: React.SyntheticEvent) => {
@@ -746,6 +680,37 @@ export const SelfHostedVideo = ({
 		}
 	};
 
+	/**
+	 * Autoplay/resume playback when the player comes into view or when
+	 * the page has been restored from the BFCache.
+	 *
+	 * Stops playback when the video is scrolled out of view.
+	 */
+	if (vidRef.current && isPlayable) {
+		if (
+			isAutoplayAllowed &&
+			isInView &&
+			(playerState === 'NOT_STARTED' ||
+				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' ||
+				(hasPageBecomeActive && playerState === 'PAUSED_BY_BROWSER'))
+		) {
+			setHasPageBecomeActive(false);
+			void playVideo();
+		} else if (playerState === 'PLAYING' && isInView === false) {
+			void pauseVideo('PAUSED_BY_INTERSECTION_OBSERVER');
+		}
+	}
+
+	/**
+	 * Show the play icon when the video is not playing, except for when it is scrolled
+	 * out of view. In this case, the intersection observer will resume playback and
+	 * having a play icon would falsely indicate a user action is required to resume playback.
+	 */
+	const showPlayIcon =
+		playerState === 'PAUSED_BY_USER' ||
+		playerState === 'PAUSED_BY_BROWSER' ||
+		(playerState === 'NOT_STARTED' && !isAutoplayAllowed);
+
 	const aspectRatio = width / height;
 
 	/** The aspect ratio of the video will be clamped within the specified range */
@@ -821,6 +786,7 @@ export const SelfHostedVideo = ({
 					handleLoadedMetadata={handleLoadedMetadata}
 					handleLoadedData={handleLoadedData}
 					handleCanPlay={handleCanPlay}
+					handlePlaying={handlePlaying}
 					handlePlayPauseClick={handlePlayPauseClick}
 					handleAudioClick={handleAudioClick}
 					handleKeyDown={handleKeyDown}
