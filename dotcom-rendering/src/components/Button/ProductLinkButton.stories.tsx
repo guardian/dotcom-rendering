@@ -1,9 +1,9 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { ProductLinkElementButton } from './ProductLinkElementButton';
+import { ProductLinkButton } from './ProductLinkButton';
 
 const meta = {
-	component: ProductLinkElementButton,
+	component: ProductLinkButton,
 	title: 'Components/ProductLinkButton',
 	parameters: {
 		layout: 'padded',
@@ -21,7 +21,7 @@ const meta = {
 		url: 'https://ollieskimchi.co.uk/shop/ols/products/ollies-kimchi',
 		priority: 'primary',
 	},
-} satisfies Meta<typeof ProductLinkElementButton>;
+} satisfies Meta<typeof ProductLinkButton>;
 
 export default meta;
 
