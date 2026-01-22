@@ -7,14 +7,13 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
-import { useAB } from '../lib/useAB';
+import { useBetaAB } from '../lib/useAB';
 import { useIsHorizontalScrollingSupported } from '../lib/useIsHorizontalScrollingSupported';
 import { palette } from '../palette';
 import type { OnwardsSource } from '../types/onwards';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { FetchOnwardsData } from './FetchOnwardsData.importable';
-import { MoreGalleriesStyleOnwardsContent } from './MoreGalleriesStyleOnwardsContent.importable';
 import { Section } from './Section';
 
 type PillarForContainer =
@@ -228,10 +227,13 @@ export const OnwardsUpper = ({
 	webURL,
 	isInStarRatingVariant,
 }: Props) => {
-	const abTestAPI = useAB()?.api;
+	const abTests = useBetaAB();
 	const isInOnwardsAbTestVariant =
 		renderingTarget === 'Web' &&
-		abTestAPI?.isUserInVariant('OnwardJourneys', 'variant');
+		abTests?.isUserInTestGroup(
+			'fronts-and-curation-onward-journeys',
+			'variant',
+		);
 
 	const isHorizontalScrollingSupported = useIsHorizontalScrollingSupported();
 	if (!isHorizontalScrollingSupported) return null;
@@ -329,19 +331,7 @@ export const OnwardsUpper = ({
 
 	return (
 		<div css={onwardsWrapper}>
-			{!!url && isInOnwardsAbTestVariant && (
-				<Section
-					fullWidth={true}
-					borderColour={palette('--article-section-border')}
-				>
-					<MoreGalleriesStyleOnwardsContent
-						url={url}
-						discussionApiUrl={discussionApiUrl}
-						isInOnwardsAbTestVariant={isInOnwardsAbTestVariant}
-					/>
-				</Section>
-			)}
-			{!!url && !isInOnwardsAbTestVariant && (
+			{!!url && (
 				<Section
 					fullWidth={true}
 					borderColour={palette('--article-section-border')}
@@ -359,6 +349,7 @@ export const OnwardsUpper = ({
 						renderingTarget={renderingTarget}
 						isAdFreeUser={isAdFreeUser}
 						containerPosition="first"
+						isInOnwardsAbTestVariant={isInOnwardsAbTestVariant}
 						webURL={webURL}
 						isInStarRatingVariant={isInStarRatingVariant}
 					/>

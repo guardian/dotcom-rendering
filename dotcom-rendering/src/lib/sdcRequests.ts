@@ -99,8 +99,9 @@ export const getLiveblogEpic = (
 export const getBanner = (
 	baseUrl: string,
 	payload: BannerPayload,
+	headers?: HeadersInit,
 ): Promise<ModuleDataResponse<BannerProps>> =>
-	getModuleData('banner', baseUrl, payload);
+	getModuleData('banner', baseUrl, payload, headers);
 
 export const getGutterLiveblog = (
 	baseUrl: string,

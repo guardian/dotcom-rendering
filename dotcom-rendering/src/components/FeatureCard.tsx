@@ -203,8 +203,8 @@ const podcastImageContainerStyles = css`
 `;
 
 const podcastImageStyles = css`
-	height: 80px;
-	width: 80px;
+	height: 60px;
+	width: 60px;
 `;
 
 const nonImmersivePodcastImageStyles = css`
@@ -576,7 +576,6 @@ export const FeatureCard = ({
 												media.mainMedia.subtitleSource
 											}
 											subtitleSize="large"
-											enableHls={false}
 											isFeatureCard={true}
 										/>
 									</Island>
@@ -779,6 +778,7 @@ export const FeatureCard = ({
 											}
 											showLivePlayable={false}
 											isNewsletter={isNewsletter}
+											mainMedia={mainMedia}
 										/>
 
 										{!isImmersive &&
