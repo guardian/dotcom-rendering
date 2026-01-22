@@ -1,9 +1,7 @@
-import { writable } from "svelte/store";
+import { readable } from "svelte/store";
 import { browser } from "$app/environment";
 
-const createEnvironmentStore = () => {
-	const { subscribe, set } = writable("https://www.theguardian.com");
-
+export const hostname = readable("https://www.theguardian.com", (set) => {
 	// Only run in browser, not during SSR
 	if (browser) {
 		if (
@@ -14,8 +12,4 @@ const createEnvironmentStore = () => {
 			set("https://m.code.dev-theguardian.com");
 		}
 	}
-
-	return { subscribe };
-};
-
-export const hostname = createEnvironmentStore();
+});
