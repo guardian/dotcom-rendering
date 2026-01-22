@@ -13,7 +13,7 @@ import { ProductCarouselCard } from './ProductCarouselCard';
 import { Subheading } from './Subheading';
 
 const carouselHeader = css`
-	padding-bottom: 10px;
+	padding-bottom: ${space[2]}px;
 	padding-top: ${space[6]}px;
 	border-bottom: 1px solid ${palette('--product-carousel-card-border')};
 	margin-bottom: 10px;
