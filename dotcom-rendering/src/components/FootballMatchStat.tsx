@@ -93,6 +93,7 @@ const barCss = css`
 	height: ${space[2]}px;
 	width: var(--match-stat-percentage);
 	background-color: var(--match-stat-team-colour);
+	border: 1px solid ${palette('--football-match-stat-border')};
 	border-radius: 8px;
 `;
 
@@ -195,6 +196,7 @@ const offTargetCss = (colour: string) => css`
 	margin-top: 5px;
 	padding: ${space[1]}px 0 0 6px;
 	background-color: ${transparentColour(colour, 0.1)};
+	border: 1px solid ${palette('--football-match-stat-border')};
 	border-radius: 4px;
 	${from.desktop} {
 		${textSans15};
@@ -214,6 +216,8 @@ const onTargetCss = (colour: string) => css`
 		? sourcePalette.neutral[7]
 		: sourcePalette.neutral[100]};
 	background-color: ${colour};
+	border-top: 1px solid ${palette('--football-match-stat-border')};
+	border-left: 1px solid ${palette('--football-match-stat-border')};
 	border-radius: 4px;
 	width: 80%;
 	min-height: 62px;
@@ -227,6 +231,8 @@ const onTargetAwayCss = css`
 	padding-left: 0;
 	padding-right: 6px;
 	justify-self: start;
+	border-left: none;
+	border-right: 1px solid ${palette('--football-match-stat-border')};
 `;
 
 const attemptCountCss = css`
