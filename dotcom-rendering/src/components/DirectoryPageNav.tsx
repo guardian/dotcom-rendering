@@ -12,69 +12,88 @@ import {
 import { grid } from '../grid';
 
 type Props = {
-	selected: 'fixtures' | 'tables' | 'none';
+	selected: string;
 	pageId: string;
 };
 
-export const FootballCompetitionNav = ({ selected, pageId }: Props) =>
-	pageId.includes('women-s-euro-2025') ? (
+interface DirectoryPageNavConfig {
+	pageId: string;
+	// backgroundColor: string;
+	// textColor: string;
+	title: { label: string; link: string };
+	links: { label: string; href: string; selectedSlug?: string }[];
+}
+
+// TODO: Configurable colours for different navs
+
+const configs: { [key: string]: DirectoryPageNavConfig } = {
+	'women-s-euro-2025': {
+		pageId: 'women-s-euro-2025',
+		// backgroundColor: palette.news[400],
+		// textColor: palette.neutral[100],
+		title: {
+			label: "Women's Euro 2025",
+			link: '/football/women-s-euro-2025',
+		},
+		links: [
+			{
+				label: 'Fixtures',
+				href: '/football/women-s-euro-2025/fixtures',
+				selectedSlug: 'fixtures',
+			},
+			{
+				label: 'Tables',
+				href: '/football/women-s-euro-2025/overview',
+				selectedSlug: 'tables',
+			},
+			{ label: 'Top scorers', href: '/p/x2e3za' },
+			{ label: 'Players guide', href: '/p/x27nz8' },
+			{
+				label: 'Full coverage',
+				href: '/football/women-s-euro-2025',
+			},
+		],
+	},
+};
+
+export const DirectoryPageNav = ({ selected, pageId }: Props) => {
+	const config = Object.values(configs).find((cfg) =>
+		pageId.includes(cfg.pageId),
+	);
+
+	if (!config) {
+		return null;
+	}
+
+	return (
 		<nav css={nav}>
-			<a
-				href="https://www.theguardian.com/football/women-s-euro-2025"
-				css={largeLinkStyles}
-			>
-				Women's Euro 2025
+			<a href={config.title.link} css={largeLinkStyles}>
+				{config.title.label}
 			</a>
 			<ul css={list}>
-				<li
-					css={listItem}
-					style={selected === 'fixtures' ? selectedStyles : undefined}
-				>
-					<a
-						href="https://www.theguardian.com/football/women-s-euro-2025/fixtures"
-						css={smallLink}
-					>
-						Fixtures
-					</a>
-				</li>
-				<li
-					css={listItem}
-					style={selected === 'tables' ? selectedStyles : undefined}
-				>
-					<a
-						href="https://www.theguardian.com/football/women-s-euro-2025/overview"
-						css={smallLink}
-					>
-						Tables
-					</a>
-				</li>
-				<li css={listItem}>
-					<a
-						href="https://www.theguardian.com/p/x2e3za"
-						css={smallLink}
-					>
-						Top scorers
-					</a>
-				</li>
-				<li css={listItem}>
-					<a
-						href="https://www.theguardian.com/p/x27nz8"
-						css={smallLink}
-					>
-						Players guide
-					</a>
-				</li>
-				<li css={listItem}>
-					<a
-						href="https://www.theguardian.com/football/women-s-euro-2025"
-						css={lastSmallLink}
-					>
-						Full coverage
-					</a>
-				</li>
+				{config.links.map((link, i) => (
+					<li key={link.label} css={listItem}>
+						<a
+							href={link.href}
+							css={
+								i === config.links.length - 1
+									? lastSmallLink
+									: smallLink
+							}
+							style={
+								link.selectedSlug === selected
+									? selectedStyles
+									: {}
+							}
+						>
+							{link.label}
+						</a>
+					</li>
+				))}
 			</ul>
 		</nav>
-	) : null;
+	);
+};
 
 const nav = css({
 	backgroundColor: palette.news[400],
