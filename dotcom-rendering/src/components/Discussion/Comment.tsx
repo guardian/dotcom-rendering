@@ -772,7 +772,7 @@ export const Comment = ({
 										<></>
 									)}
 									<Space amount={4} />
-									{/* You can't report abuse unless logged in */}
+									{/* You can't report abuse unless logged in and not banned */}
 									{user &&
 										user.profile.privateFields
 											?.canPostComment &&
