@@ -439,6 +439,7 @@ const Meta = ({
 	frontendData: ArticleDeprecated;
 }) => (
 	<div
+		id="marjan"
 		css={{
 			'&': css(grid.column.centre),
 			paddingBottom: space[6],
@@ -453,6 +454,11 @@ const Meta = ({
 					width: 1,
 					backgroundColor: palette('--article-border'),
 				},
+			},
+			[from.leftCol]: {
+				'&': css(grid.column.left),
+				gridRow: '10',
+				alignSelf: 'end',
 			},
 		}}
 	>

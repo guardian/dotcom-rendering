@@ -325,6 +325,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					return css`
 						${grid.span('centre-column-start', 3)}
 						color: ${palette('--standfirst-text')};
+						grid-row: 10;
 						background-color: ${palette('--standfirst-background')};
 
 						${from.tablet} {
