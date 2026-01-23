@@ -8,7 +8,6 @@ import {
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import React from 'react';
-import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
@@ -313,11 +312,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				</>
 			)}
 			<main data-layout="InteractiveLayout">
-				{isApps && renderAds && (
-					<Island priority="critical">
-						<AdPortals />
-					</Island>
-				)}
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
