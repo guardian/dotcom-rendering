@@ -11,6 +11,7 @@ import {
 	textSansBold28,
 	visuallyHidden,
 } from '@guardian/source/foundations';
+import { isLight } from '../lib/isLight';
 import { transparentColour } from '../lib/transparentColour';
 import { palette } from '../palette';
 
@@ -22,6 +23,7 @@ const containerCss = css`
 		'home-stat label away-stat'
 		'graph     graph  graph';
 	padding: 5px 10px 10px;
+	color: ${palette('--football-match-stat-text')};
 	border: 1px solid ${palette('--football-match-stat-border')};
 	border-radius: 6px;
 	&::before {
@@ -59,7 +61,6 @@ const labelCss = css`
 	${textSansBold14};
 	grid-area: label;
 	justify-self: center;
-	color: ${palette('--football-match-stat-text')};
 	${from.desktop} {
 		${textSansBold15};
 	}
@@ -68,7 +69,6 @@ const labelCss = css`
 const numberCss = css`
 	${textSansBold20};
 	grid-area: home-stat;
-	color: var(--football-match-stat-text);
 `;
 
 const largeNumberCss = css`
@@ -189,12 +189,12 @@ const goalAttemptsLayoutCss = css`
 	}
 `;
 
-const offTargetCss = css`
+const offTargetCss = (colour: string) => css`
 	${textSans14};
 	grid-area: home-attempts;
 	margin-top: 5px;
 	padding: ${space[1]}px 0 0 6px;
-	background-color: var(--off-target-colour);
+	background-color: ${transparentColour(colour, 0.1)};
 	border-radius: 4px;
 	${from.desktop} {
 		${textSans15};
@@ -208,10 +208,12 @@ const offTargetAwayCss = css`
 	padding-right: 6px;
 `;
 
-const onTargetCss = css`
+const onTargetCss = (colour: string) => css`
 	padding: ${space[1]}px 0 0 6px;
-	color: ${sourcePalette.neutral[100]};
-	background-color: var(--on-target-colour);
+	color: ${isLight(colour)
+		? sourcePalette.neutral[7]
+		: sourcePalette.neutral[100]};
+	background-color: ${colour};
 	border-radius: 4px;
 	width: 80%;
 	min-height: 62px;
@@ -264,19 +266,10 @@ export const FootballMatchGoalAttempts = ({
 			>
 				{homeTeam.name}
 			</span>
-			<div
-				css={offTargetCss}
-				style={{
-					'--off-target-colour': transparentColour(
-						homeTeam.colour,
-						0.1,
-					),
-					'--on-target-colour': homeTeam.colour,
-				}}
-			>
+			<div css={offTargetCss(homeTeam.colour)}>
 				Off target
 				<span css={attemptCountCss}>{homeValues.offTarget}</span>
-				<div css={onTargetCss}>
+				<div css={onTargetCss(homeTeam.colour)}>
 					On target
 					<span css={attemptCountCss}>{homeValues.onTarget}</span>
 				</div>
@@ -288,19 +281,10 @@ export const FootballMatchGoalAttempts = ({
 			>
 				{awayTeam.name}
 			</span>
-			<div
-				css={[offTargetCss, offTargetAwayCss]}
-				style={{
-					'--off-target-colour': transparentColour(
-						awayTeam.colour,
-						0.1,
-					),
-					'--on-target-colour': awayTeam.colour,
-				}}
-			>
+			<div css={[offTargetCss(awayTeam.colour), offTargetAwayCss]}>
 				Off target
 				<span css={attemptCountCss}>{awayValues.offTarget}</span>
-				<div css={[onTargetCss, onTargetAwayCss]}>
+				<div css={[onTargetCss(awayTeam.colour), onTargetAwayCss]}>
 					On target
 					<span css={attemptCountCss}>{awayValues.onTarget}</span>
 				</div>
