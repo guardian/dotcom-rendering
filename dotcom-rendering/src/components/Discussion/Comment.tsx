@@ -772,27 +772,31 @@ export const Comment = ({
 										<></>
 									)}
 									<Space amount={4} />
-									{isExpanded && (
-										<div
-											css={[
-												buttonLinkBaseStyles,
-												css`
-													button {
-														${textSans12}
-													}
-												`,
-											]}
-										>
-											<Button
-												priority="subdued"
-												size="small"
-												onClick={toggleSetShowForm}
-												data-link-name="Open report abuse"
+									{/* You can't report abuse unless logged in and not banned */}
+									{user &&
+										user.profile.privateFields
+											?.canPostComment &&
+										isExpanded && (
+											<div
+												css={[
+													buttonLinkBaseStyles,
+													css`
+														button {
+															${textSans12}
+														}
+													`,
+												]}
 											>
-												Report
-											</Button>
-										</div>
-									)}
+												<Button
+													priority="subdued"
+													size="small"
+													onClick={toggleSetShowForm}
+													data-link-name="Open report abuse"
+												>
+													Report
+												</Button>
+											</div>
+										)}
 									{showAbuseReportForm && (
 										<div
 											css={css`
