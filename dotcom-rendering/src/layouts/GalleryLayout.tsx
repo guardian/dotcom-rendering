@@ -19,7 +19,7 @@ import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FetchMoreGalleriesData } from '../components/FetchMoreGalleriesData.importable';
 import { Footer } from '../components/Footer';
 import { DesktopAdSlot, MobileAdSlot } from '../components/GalleryAdSlots';
-import { GalleryAffiliateDisclaimer } from '../components/GalleryAffiliateDisclaimer.importable';
+import { AffiliateDisclaimerGallery } from '../components/AffiliateDisclaimer';
 import { GalleryImage } from '../components/GalleryImage';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
@@ -496,9 +496,7 @@ const Meta = ({
 			/>
 		) : null}
 		{!!frontendData.affiliateLinksDisclaimer && (
-			<Island priority="enhancement" defer={{ until: 'idle' }}>
-				<GalleryAffiliateDisclaimer />
-			</Island>
+			<AffiliateDisclaimerGallery />
 		)}
 	</div>
 );

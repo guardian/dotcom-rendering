@@ -9,7 +9,7 @@ import {
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
-import { AffiliateDisclaimerLeftCol } from '../components/AffiliateDisclaimerLeftCol.importable';
+import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -633,12 +633,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 												}
 											/>
 											{!!article.affiliateLinksDisclaimer && (
-												<Island
-													priority="enhancement"
-													defer={{ until: 'idle' }}
-												>
-													<AffiliateDisclaimerLeftCol />
-												</Island>
+												<AffiliateDisclaimer />
 											)}
 										</Hide>
 									</>
@@ -668,12 +663,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											}
 										/>
 										{!!article.affiliateLinksDisclaimer && (
-											<Island
-												priority="enhancement"
-												defer={{ until: 'idle' }}
-											>
-												<AffiliateDisclaimerLeftCol />
-											</Island>
+											<AffiliateDisclaimer />
 										)}
 									</>
 								)}
