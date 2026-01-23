@@ -103,26 +103,26 @@ type Team = {
 };
 
 type MatchStatProps = {
-	label: string;
+	heading: string;
 	homeTeam: Team;
 	awayTeam: Team;
 	homeValue: number;
 	awayValue: number;
-	layout?: 'regular' | 'compact';
 	isPercentage?: boolean;
+	layout?: 'regular' | 'compact';
 };
 
 const formatValue = (value: number, showPercentage: boolean) =>
 	`${value}${showPercentage ? '%' : ''}`;
 
 export const FootballMatchStat = ({
-	label,
+	heading,
 	homeTeam,
 	awayTeam,
 	homeValue,
 	awayValue,
-	layout,
 	isPercentage = false,
+	layout,
 }: MatchStatProps) => {
 	const compactLayout = layout === 'compact';
 	const homePercentage = (homeValue / (homeValue + awayValue)) * 100;
@@ -136,7 +136,7 @@ export const FootballMatchStat = ({
 				!compactLayout && desktopPaddingCss,
 			]}
 		>
-			<span css={labelCss}>{label}</span>
+			<span css={labelCss}>{heading}</span>
 			<span css={[numberCss, !compactLayout && largeNumberCss]}>
 				<span
 					css={css`
@@ -264,7 +264,7 @@ export const FootballMatchGoalAttempts = ({
 }: GoalAttemptProps) => {
 	return (
 		<div css={[containerCss, desktopPaddingCss, goalAttemptsLayoutCss]}>
-			<div css={labelCss}>Goal attempts</div>
+			<span css={labelCss}>Goal attempts</span>
 			<span
 				css={css`
 					${visuallyHidden}
