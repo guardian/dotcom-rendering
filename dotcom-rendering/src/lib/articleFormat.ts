@@ -230,3 +230,12 @@ export const formatToString = ({
 		`${ArticleDisplay[display]} Display`,
 		`and ${Pillar[theme] ?? ArticleSpecial[theme]} Theme`,
 	].join(', ');
+
+export const getArticleThemeString = (
+	articleTheme: ArticleTheme | undefined,
+): string | undefined => {
+	if (articleTheme === undefined) {
+		return undefined;
+	}
+	return Pillar[articleTheme] ?? ArticleSpecial[articleTheme];
+};

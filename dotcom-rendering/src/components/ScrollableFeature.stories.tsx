@@ -4,7 +4,7 @@ import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
 	audioTrails,
 	galleryTrails,
-	videoTrails,
+	youtubeVideoTrails,
 } from '../../fixtures/manual/trails';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
@@ -104,7 +104,7 @@ export const Media = {
 
 export const MoreMedia = {
 	args: {
-		trails: [audioTrails[1], videoTrails[0], videoTrails[1]],
+		trails: [audioTrails[1], youtubeVideoTrails[0], youtubeVideoTrails[1]],
 	},
 } satisfies Story;
 
