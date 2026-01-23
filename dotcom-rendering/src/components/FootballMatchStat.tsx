@@ -110,6 +110,7 @@ type MatchStatProps = {
 	awayValue: number;
 	isPercentage?: boolean;
 	layout?: 'regular' | 'compact';
+	headingLevel?: 2 | 3 | 4;
 };
 
 const formatValue = (value: number, showPercentage: boolean) =>
@@ -123,7 +124,9 @@ export const FootballMatchStat = ({
 	awayValue,
 	isPercentage = false,
 	layout,
+	headingLevel = 3,
 }: MatchStatProps) => {
+	const Heading: React.ElementType = `h${headingLevel}`;
 	const compactLayout = layout === 'compact';
 	const homePercentage = (homeValue / (homeValue + awayValue)) * 100;
 	const awayPercentage = (awayValue / (homeValue + awayValue)) * 100;
@@ -136,7 +139,7 @@ export const FootballMatchStat = ({
 				!compactLayout && desktopPaddingCss,
 			]}
 		>
-			<span css={labelCss}>{heading}</span>
+			<Heading css={labelCss}>{heading}</Heading>
 			<span css={[numberCss, !compactLayout && largeNumberCss]}>
 				<span
 					css={css`
@@ -254,6 +257,7 @@ type GoalAttemptProps = {
 	awayTeam: Team;
 	homeValues: GoalAttempt;
 	awayValues: GoalAttempt;
+	headingLevel?: 2 | 3 | 4;
 };
 
 export const FootballMatchGoalAttempts = ({
@@ -261,10 +265,13 @@ export const FootballMatchGoalAttempts = ({
 	awayTeam,
 	homeValues,
 	awayValues,
+	headingLevel = 3,
 }: GoalAttemptProps) => {
+	const Heading: React.ElementType = `h${headingLevel}`;
+
 	return (
 		<div css={[containerCss, desktopPaddingCss, goalAttemptsLayoutCss]}>
-			<span css={labelCss}>Goal attempts</span>
+			<Heading css={labelCss}>Goal attempts</Heading>
 			<span
 				css={css`
 					${visuallyHidden}
