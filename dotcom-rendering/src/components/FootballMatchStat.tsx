@@ -68,7 +68,7 @@ const labelCss = css`
 const numberCss = css`
 	${textSansBold20};
 	grid-area: home-stat;
-	color: var(--match-stat-team-colour);
+	color: var(--football-match-stat-text);
 `;
 
 const largeNumberCss = css`
@@ -136,10 +136,7 @@ export const FootballMatchStat = ({
 			]}
 		>
 			<span css={labelCss}>{label}</span>
-			<span
-				css={[numberCss, !compactLayout && largeNumberCss]}
-				style={{ '--match-stat-team-colour': homeTeam.colour }}
-			>
+			<span css={[numberCss, !compactLayout && largeNumberCss]}>
 				<span
 					css={css`
 						${visuallyHidden}
@@ -151,7 +148,6 @@ export const FootballMatchStat = ({
 			</span>
 			<span
 				css={[numberCss, awayStatCss, !compactLayout && largeNumberCss]}
-				style={{ '--match-stat-team-colour': awayTeam.colour }}
 			>
 				<span
 					css={css`
