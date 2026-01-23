@@ -1,18 +1,17 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import { between, from, space, until } from '@guardian/source/foundations';
-import { Hide, Link, SvgCamera } from '@guardian/source/react-components';
+import { Hide } from '@guardian/source/react-components';
 import {
 	ArticleDesign,
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../../lib/articleFormat';
 import { isMediaCard } from '../../lib/cardHelpers';
-import { isWithinTwelveHours, secondsToDuration } from '../../lib/formatTime';
+import { secondsToDuration } from '../../lib/formatTime';
 import { appendLinkNameMedia } from '../../lib/getDataLinkName';
 import { getZIndex } from '../../lib/getZIndex';
 import { getOphanComponents } from '../../lib/labs';
-import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { BETA_CONTAINERS } from '../../model/enhanceCollections';
 import { palette } from '../../palette';
 import type { Branding } from '../../types/branding';
@@ -31,7 +30,6 @@ import type { MainMedia } from '../../types/mainMedia';
 import type { OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
 import { BrandingLabel } from '../BrandingLabel';
-import { CardCommentCount } from '../CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from '../CardHeadline';
 import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
@@ -50,8 +48,7 @@ import { SupportingKeyStoriesContent } from '../SupportingKeyStoriesContent';
 import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
 import { YoutubeBlockComponent } from '../YoutubeBlockComponent.importable';
 import { AvatarContainer } from './components/AvatarContainer';
-import { CardAge } from './components/CardAge';
-import { CardFooter } from './components/CardFooter';
+import { CardFooter } from './components/CardFooterNew';
 import {
 	CardLayout,
 	decideAvatarPosition,
@@ -337,14 +334,6 @@ const decideSublinkPosition = (
 	return alignment === 'vertical' ? 'inner' : 'outer';
 };
 
-const liveBulletStyles = css`
-	width: 9px;
-	height: 9px;
-	border-radius: 50%;
-	background-color: ${palette('--pill-bullet')};
-	margin-right: ${space[1]}px;
-`;
-
 export const Card = ({
 	linkTo,
 	format,
@@ -430,143 +419,6 @@ export const Card = ({
 	 * It is treated as a media card in the design system.
 	 */
 	const isVideoArticle = format.design === ArticleDesign.Video;
-
-	const isLabs = format.theme === ArticleSpecial.Labs;
-
-	const decideAge = () => {
-		if (!webPublicationDate) return undefined;
-		const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
-
-		const shouldShowAge =
-			isStorylines ||
-			isTagPage ||
-			!!onwardsSource ||
-			(showAge && withinTwelveHours);
-
-		if (!shouldShowAge) return undefined;
-
-		return (
-			<CardAge
-				webPublication={{
-					date: webPublicationDate,
-					isWithinTwelveHours: withinTwelveHours,
-				}}
-				showClock={showClock}
-				serverTime={serverTime}
-				isTagPage={isTagPage}
-			/>
-		);
-	};
-
-	const CommentCount = () =>
-		!!discussionId && (
-			<Link
-				{...{
-					[DISCUSSION_ID_DATA_ATTRIBUTE]: discussionId,
-				}}
-				data-ignore="global-link-styling"
-				data-link-name="Comment count"
-				href={`${linkTo}#comments`}
-				cssOverrides={css`
-					/* See: https://css-tricks.com/nested-links/ */
-					z-index: ${getZIndex('card-nested-link')};
-					/* The following styles turn off those provided by Link */
-					color: inherit;
-					/* stylelint-disable-next-line property-disallowed-list */
-					font-family: inherit;
-					font-size: inherit;
-					line-height: inherit;
-					text-decoration: none;
-					min-height: 10px;
-				`}
-			>
-				<Island priority="feature" defer={{ until: 'visible' }}>
-					<CardCommentCount
-						discussionApiUrl={discussionApiUrl}
-						discussionId={discussionId}
-					/>
-				</Island>
-			</Link>
-		);
-
-	const MediaOrNewsletterPill = () => (
-		<div
-			css={css`
-				margin-top: auto;
-				display: flex;
-				${isStorylines &&
-				`
-					flex-direction: column;
-					gap: ${space[1]}px;
-					align-items: flex-start;
-				`}
-			`}
-		>
-			{/* Usually, we either display the pill or the footer,
-				but if the card appears in the storylines section on tag pages
-				then we do want to display the date on these cards as well as the media pill.
-			*/}
-			{isStorylines && (
-				<CardFooter
-					format={format}
-					age={decideAge()}
-					commentCount={<CommentCount />}
-					cardBranding={
-						isOnwardContent ? <LabsBranding /> : undefined
-					}
-					showLivePlayable={showLivePlayable}
-				/>
-			)}
-
-			{mainMedia?.type === 'YoutubeVideo' && isVideoArticle && (
-				<>
-					{mainMedia.isLive ? (
-						<Pill
-							content="Live"
-							icon={<div css={liveBulletStyles} />}
-						/>
-					) : (
-						<Pill
-							content={secondsToDuration(mainMedia.duration)}
-							icon={<SvgMediaControlsPlay width={18} />}
-							prefix="Video"
-						/>
-					)}
-				</>
-			)}
-			{mainMedia?.type === 'Audio' && (
-				<Pill
-					content={mainMedia.duration}
-					icon={<SvgMediaControlsPlay width={18} />}
-					prefix="Podcast"
-				/>
-			)}
-			{mainMedia?.type === 'Gallery' && (
-				<Pill
-					content={mainMedia.count}
-					icon={<SvgCamera />}
-					prefix="Gallery"
-				/>
-			)}
-			{mainMedia?.type === 'SelfHostedVideo' &&
-				(format.design === ArticleDesign.Video ? (
-					<Pill
-						content=""
-						icon={<SvgMediaControlsPlay width={18} />}
-						prefix="Video"
-					/>
-				) : format.design === ArticleDesign.Audio ? (
-					<Pill
-						content=""
-						icon={<SvgMediaControlsPlay width={18} />}
-						prefix="Podcast"
-					/>
-				) : format.design === ArticleDesign.Gallery ? (
-					<Pill content="" icon={<SvgCamera />} prefix="Gallery" />
-				) : null)}
-			{isNewsletter && <Pill content="Newsletter" />}
-		</div>
-	);
 
 	if (snapData?.embedHtml) {
 		return (
@@ -873,7 +725,7 @@ export const Card = ({
 						alignment="end"
 						ophanComponentLink={dataAttributes?.ophanComponentLink}
 						ophanComponentName={dataAttributes?.ophanComponentName}
-						isLabs={isLabs}
+						isLabs={format.theme === ArticleSpecial.Labs}
 						dataTestId="card-branding-logo"
 					/>
 				</div>
@@ -896,7 +748,7 @@ export const Card = ({
 						alignment="end"
 						ophanComponentLink={dataAttributes?.ophanComponentLink}
 						ophanComponentName={dataAttributes?.ophanComponentName}
-						isLabs={isLabs}
+						isLabs={format.theme === ArticleSpecial.Labs}
 					/>
 				</div>
 			</>
@@ -1300,33 +1152,28 @@ export const Card = ({
 								/>
 							)}
 
+							{/** Footer rendered inside the card boundary */}
 							{!isOpinionCardWithAvatar && (
-								<>
-									{showPill ? (
-										<>
-											{!!branding &&
-												format.theme ===
-													ArticleSpecial.Labs &&
-												isOnwardContent && (
-													<LabsBranding />
-												)}
-											<MediaOrNewsletterPill />
-										</>
-									) : (
-										<CardFooter
-											format={format}
-											age={decideAge()}
-											commentCount={<CommentCount />}
-											cardBranding={
-												isOnwardContent ? (
-													<LabsBranding />
-												) : undefined
-											}
-											showLivePlayable={showLivePlayable}
-										/>
-									)}
-								</>
+								<CardFooter
+									format={format}
+									showLivePlayable={showLivePlayable}
+									showAge={showAge}
+									cardBranding={<LabsBranding />}
+									mainMedia={mainMedia}
+									isNewsletter={isNewsletter}
+									showPill={showPill}
+									isStorylines={isStorylines}
+									onwardsSource={onwardsSource}
+									webPublicationDate={webPublicationDate}
+									showClock={showClock}
+									serverTime={serverTime}
+									isTagPage={isTagPage}
+									discussionId={discussionId}
+									discussionApiUrl={discussionApiUrl}
+									linkTo={linkTo}
+								/>
 							)}
+
 							{showLivePlayable &&
 								liveUpdatesPosition === 'inner' && (
 									<Island
@@ -1413,20 +1260,28 @@ export const Card = ({
 				{isOpinionCardWithAvatar && (
 					<CardFooter
 						format={format}
-						age={decideAge()}
-						commentCount={<CommentCount />}
 						showLivePlayable={showLivePlayable}
+						showAge={showAge}
+						cardBranding={<LabsBranding />}
+						mainMedia={mainMedia}
+						isNewsletter={isNewsletter}
 						shouldReserveSpace={{
 							mobile: avatarPosition.mobile === 'bottom',
 							desktop: avatarPosition.desktop === 'bottom',
 						}}
+						showPill={showPill}
+						isStorylines={isStorylines}
+						onwardsSource={onwardsSource}
+						webPublicationDate={webPublicationDate}
+						showClock={showClock}
+						serverTime={serverTime}
+						isTagPage={isTagPage}
+						discussionId={discussionId}
+						discussionApiUrl={discussionApiUrl}
+						linkTo={linkTo}
 					/>
 				)}
 			</div>
-
-			{!isOnwardContent && format.theme === ArticleSpecial.Labs && (
-				<LabsBranding />
-			)}
 		</CardWrapper>
 	);
 };
