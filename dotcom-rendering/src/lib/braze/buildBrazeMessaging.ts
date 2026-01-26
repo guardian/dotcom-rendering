@@ -20,7 +20,7 @@ import {
 } from '../hasCurrentBrazeUser';
 import {
 	brazeBannersSystemLogger,
-	isDebugDomain,
+	isDevelopmentDomain,
 	refreshBanners,
 } from './BrazeBannersSystem';
 import { checkBrazeDependencies } from './checkBrazeDependencies';
@@ -128,7 +128,7 @@ export const buildBrazeMessaging = async (
 		braze.changeUser(dependenciesResult.data.brazeUuid as string);
 
 		// Subscribe to Braze Banners System updates
-		if (isDebugDomain()) {
+		if (isDevelopmentDomain()) {
 			// This callback runs every time Braze has new data (initially empty, then populated)
 			const subscriptionId = braze.subscribeToBannersUpdates(
 				(banners) => {

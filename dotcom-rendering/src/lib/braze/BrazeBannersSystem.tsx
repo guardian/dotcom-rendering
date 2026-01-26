@@ -13,17 +13,17 @@ import { TagType } from '../../types/tag';
 const LOG_PREFIX = '[BrazeBannersSystem]';
 
 /**
- * List of debug domains where Braze Banners System logs will be shown.
+ * List of development domains where Braze Banners System logs will be shown.
  */
-const DEBUG_DOMAINS = ['localhost', 'r.thegulocal.com'];
+const DEVELOPMENT_DOMAINS = ['localhost', 'r.thegulocal.com'];
 
 /**
- * Checks if the current domain is a debug domain.
- * @returns boolean indicating if the current domain is a debug domain
+ * Checks if the current domain is a development domain.
+ * @returns boolean indicating if the current domain is a development domain
  */
-export const isDebugDomain = (): boolean => {
+export const isDevelopmentDomain = (): boolean => {
 	if (typeof window === 'undefined') return false; // Safety for SSR/Node environments
-	return DEBUG_DOMAINS.includes(window.location.hostname);
+	return DEVELOPMENT_DOMAINS.includes(window.location.hostname);
 };
 
 /**
@@ -31,13 +31,13 @@ export const isDebugDomain = (): boolean => {
  */
 export const brazeBannersSystemLogger = {
 	log: (...args: any[]): void => {
-		if (isDebugDomain()) console.log(LOG_PREFIX, ...args);
+		if (isDevelopmentDomain()) console.log(LOG_PREFIX, ...args);
 	},
 	info: (...args: any[]): void => {
-		if (isDebugDomain()) console.info(LOG_PREFIX, ...args);
+		if (isDevelopmentDomain()) console.info(LOG_PREFIX, ...args);
 	},
 	warn: (...args: any[]): void => {
-		if (isDebugDomain()) console.warn(LOG_PREFIX, ...args);
+		if (isDevelopmentDomain()) console.warn(LOG_PREFIX, ...args);
 	},
 	error: (...args: any[]): void => {
 		// Even for errors, we add the prefix so we know where it came from
