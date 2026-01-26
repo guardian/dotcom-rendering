@@ -111,11 +111,17 @@ const buildBrazeEpicConfig = (
  * Build the Braze Banners System Epic Config
  * @param braze The Braze instance
  * @param idApiUrl Identity API URL for newsletter subscriptions
+ * @param contentType Content type of the article
+ * @param shouldHideReaderRevenue Whether to hide reader revenue components
+ * @param tags Tags associated with the article
  * @returns CandidateConfig for the Braze Banners System Epic
  */
 const buildBrazeBannersSystemEpicConfig = (
 	braze: BrazeInstance | null,
 	idApiUrl: string,
+	contentType: string,
+	shouldHideReaderRevenue: boolean,
+	tags: TagType[],
 ): CandidateConfig<any> => {
 	return {
 		candidate: {
@@ -124,6 +130,9 @@ const buildBrazeBannersSystemEpicConfig = (
 				return canShowBrazeBannersSystem(
 					braze,
 					BrazeBannersSystemPlacementId.EndOfArticle,
+					contentType,
+					shouldHideReaderRevenue,
+					tags,
 				);
 			},
 			show: (meta: BrazeBannersSystemMeta) => () => (
@@ -215,6 +224,9 @@ export const SlotBodyEnd = ({
 		const brazeBannersSystemEpic = buildBrazeBannersSystemEpicConfig(
 			braze,
 			idApiUrl,
+			contentType,
+			shouldHideReaderRevenue,
+			tags,
 		);
 
 		const epicConfig: SlotConfig = {

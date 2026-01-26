@@ -4,6 +4,8 @@ import { getOptionsHeaders } from '../identity';
 import type { CanShowResult } from '../messagePicker';
 import { useAuthStatus } from '../useAuthStatus';
 import type { BrazeInstance } from './initialiseBraze';
+import { suppressForTaylorReport } from './taylorReport';
+import { TagType } from '../../types/tag';
 
 /**
  * Logger prefix for Braze Banners System logs.
@@ -111,14 +113,44 @@ export type BrazeBannersSystemMeta = {
  * Checks if a Braze Banner for the given placement ID can be shown.
  * @param braze Braze instance
  * @param placementId Placement ID to check for a banner
+ * @param contentType Content type of the article
+ * @param shouldHideReaderRevenue Whether to hide reader revenue components
+ * @param tags Tags associated with the article
  * @returns CanShowResult with the Banner meta if it can be shown
  */
 export const canShowBrazeBannersSystem = async (
 	braze: BrazeInstance | null,
 	placementId: BrazeBannersSystemPlacementId,
+	contentType: string,
+	shouldHideReaderRevenue: boolean,
+	tags: TagType[],
 ): Promise<CanShowResult<BrazeBannersSystemMeta>> => {
 	// First, check if Braze dependencies are satisfied
 	if (!braze) {
+		return { show: false };
+	}
+
+	// Do not show banners on Interactive articles
+	if (contentType.toLowerCase() === 'interactive') {
+		return { show: false };
+	}
+
+	/**
+	 * Prevent Reader Revenue messaging from appearing on specific pages.
+	 * This is typically used for:
+	 * - Paid content (Advertisements)
+	 * - Sensitive content
+	 * - Pages where asking for money is deemed inappropriate or disabled by editorial tools.
+	 */
+	if (shouldHideReaderRevenue) {
+		return { show: false };
+	}
+
+	/**
+	 * When the brazeTaylorReport switch is enabled, this logic restricts the Braze Epic
+	 * so that it only appears on articles in the "Cotton Capital" series.
+	 */
+	if (suppressForTaylorReport(tags)) {
 		return { show: false };
 	}
 
