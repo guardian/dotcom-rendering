@@ -11,9 +11,8 @@ import { palette } from '../palette';
 import type { ReporterCalloutBlockElement } from '../types/content';
 
 /**
- * A callout to readers to share tips with reporters
- *
- * ## TODO: check if this needs to be an island - possibly not as there's no user interaction beyond expanding the box
+ * A callout to readers to share tips with reporters, typically focused on secure messaging (coverdrop), with references
+ * to securedrop, signal, protonmail etc.
  *
  */
 
