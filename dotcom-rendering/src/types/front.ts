@@ -117,9 +117,11 @@ export type DCRSnapType = {
 };
 
 export type AspectRatio = FEAspectRatio;
-export type PillarBucket = {
-	[key: string]: DCRFrontCard[];
-};
+
+type BucketPillar = 'opinion' | 'sport' | 'culture' | 'lifestyle';
+
+export type PillarBucket = Partial<Record<BucketPillar, DCRFrontCard[]>>;
+
 export type DCRCollectionType = {
 	id: string;
 	displayName: string;
