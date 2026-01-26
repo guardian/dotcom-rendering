@@ -228,8 +228,11 @@ type Props = {
 	fallbackImageAlt: CardPictureProps['alt'];
 	fallbackImageAspectRatio: CardPictureProps['aspectRatio'];
 	linkTo: string;
+	showProgressBar?: boolean;
 	subtitleSource?: string;
 	subtitleSize: SubtitleSize;
+	/** The position of subtitles and the audio icon. Usually at the bottom, with the exception of Feature Cards. */
+	controlsPosition?: 'top' | 'bottom';
 	/**
 	 * The minimum/maximum aspect ratio the video will have. The video will be cropped if this
 	 * value is defined and the video aspect ratio is less/greater than this value.
@@ -258,8 +261,10 @@ export const SelfHostedVideo = ({
 	fallbackImageAlt,
 	fallbackImageAspectRatio,
 	linkTo,
+	showProgressBar = true,
 	subtitleSource,
 	subtitleSize,
+	controlsPosition = 'bottom',
 	minAspectRatio,
 	maxAspectRatio,
 	containerAspectRatioMobile,
@@ -795,8 +800,10 @@ export const SelfHostedVideo = ({
 					AudioIcon={hasAudio ? AudioIcon : null}
 					preloadPartialData={preloadPartialData}
 					showPlayIcon={showPlayIcon}
+					showProgressBar={showProgressBar}
 					subtitleSource={subtitleSource}
 					subtitleSize={subtitleSize}
+					controlsPosition={controlsPosition}
 					activeCue={activeCue}
 				/>
 			</figure>
