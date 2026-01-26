@@ -43,7 +43,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
 	args: {
-		label: 'Goal attempts',
+		heading: 'Goal attempts',
 		homeTeam: {
 			name: 'Manchester United',
 			colour: '#da020e',
@@ -59,7 +59,7 @@ export const Default = {
 
 export const ShownAsPercentage = {
 	args: {
-		label: 'Possession',
+		heading: 'Possession',
 		homeTeam: {
 			name: 'West Ham',
 			colour: '#722642',
