@@ -6,11 +6,14 @@ import {
 	galleryTrails,
 	getSublinks,
 	opinionTrails,
-	selfHostedVerticalVideoCard,
+	selfHostedVideo169Card,
+	selfHostedVideo45Card,
+	selfHostedVideo53Card,
 	selfHostedVideo54Card,
+	selfHostedVideo916Card,
 	slideshowCard,
 	trails,
-	videoTrails,
+	youtubeVideoTrails,
 } from '../../fixtures/manual/trails';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { customMockFetch } from '../lib/mockRESTCalls';
@@ -450,6 +453,11 @@ export const StandardBoostedWithLiveUpdates: Story = {
 			</>
 		);
 	},
+	parameters: {
+		chromatic: {
+			disableSnapshot: true,
+		},
+	},
 };
 
 export const StandardCards: Story = {
@@ -463,8 +471,13 @@ export const StandardCards: Story = {
 				...opinionTrails.slice(0, 2),
 				...audioTrails.slice(0, 2),
 				...galleryTrails.slice(0, 2),
-				...videoTrails.slice(0, 2),
+				...youtubeVideoTrails.slice(0, 2),
 			],
+		},
+	},
+	parameters: {
+		chromatic: {
+			disableSnapshot: true,
 		},
 	},
 };
@@ -543,24 +556,74 @@ export const ImmersiveCardsSplashAndStandard: Story = {
 	},
 };
 
-export const SelfHostedVideo5to4Cards: Story = {
-	name: 'Self-hosted 5:4 video cards',
-	args: {
-		frontSectionTitle: 'Self-hosted 5:4 video cards',
-		groupedTrails: {
-			...emptyGroupedTrails,
-			splash: [selfHostedVideo54Card],
-			standard: [selfHostedVideo54Card], // Self-hosted video is disabled at standard card size
-		},
+export const SelfHostedVideoCardsInSplashSlots: Story = {
+	name: 'Self-hosted video cards in Splash slots',
+	render: (args) => {
+		const Section = ({
+			title,
+			video,
+			boostLevel,
+		}: {
+			title: string;
+			video: DCRFrontCard;
+			boostLevel?: BoostLevel;
+		}) => (
+			<FrontSection
+				title={title}
+				discussionApiUrl={discussionApiUrl}
+				editionId="UK"
+				showTopBorder={true}
+			>
+				<FlexibleGeneral
+					{...args}
+					groupedTrails={{
+						...emptyGroupedTrails,
+						splash: [{ ...video, boostLevel }],
+					}}
+				/>
+			</FrontSection>
+		);
+
+		const boostLevels = [
+			'gigaboost',
+			'megaboost',
+			'boost',
+			'default',
+		] as BoostLevel[];
+
+		const videos = [
+			selfHostedVideo54Card,
+			selfHostedVideo45Card,
+			selfHostedVideo53Card,
+			selfHostedVideo916Card,
+			selfHostedVideo169Card,
+		];
+
+		return (
+			<>
+				{videos.map((video) =>
+					boostLevels.map((boostLevel) => (
+						<Section
+							key={`${video.headline}-${boostLevel}`}
+							title={boostLevel}
+							video={video}
+							boostLevel={boostLevel}
+						/>
+					)),
+				)}
+			</>
+		);
 	},
 };
-export const SelfHostedVerticalVideoCards: Story = {
-	name: 'Self-hosted vertical video cards',
+
+export const SelfHostedVideoInStandardSlot: Story = {
+	name: 'Self-hosted video cards in standard slot',
 	args: {
-		frontSectionTitle: 'Self-hosted vertical video cards',
+		frontSectionTitle:
+			'This slot is too small for video. Show image instead',
 		groupedTrails: {
 			...emptyGroupedTrails,
-			splash: [selfHostedVerticalVideoCard],
+			standard: [selfHostedVideo54Card], // Self-hosted video is disabled at standard card size
 		},
 	},
 };

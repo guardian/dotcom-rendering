@@ -19,6 +19,7 @@ const meta = {
 	args: {
 		label: '£6.50 for 350g at Ollie’s Kimchi',
 		url: 'https://ollieskimchi.co.uk/shop/ols/products/ollies-kimchi',
+		priority: 'primary',
 	},
 } satisfies Meta<typeof ProductLinkButton>;
 

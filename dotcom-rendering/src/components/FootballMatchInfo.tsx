@@ -3,7 +3,7 @@ import type {
 	FootballMatchStats,
 	FootballMatchTeamWithStats,
 } from '../footballMatchStats';
-import type { FootballTable as FootballTableData } from '../footballTables';
+import type { FootballTableSummary } from '../footballTables';
 import {
 	FootballMatchGoalAttempts,
 	FootballMatchStat,
@@ -13,7 +13,7 @@ import { Lineups } from './Lineups';
 
 type Props = {
 	match: FootballMatchStats;
-	table?: FootballTableData;
+	table?: FootballTableSummary;
 };
 
 const layoutCss = css`
