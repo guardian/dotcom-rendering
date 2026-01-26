@@ -343,7 +343,7 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 							</li>
 						),
 					)}
-				</ol>
+				</ul>
 				<CarouselNavigationButtons
 					previousButtonEnabled={previousButtonEnabled}
 					nextButtonEnabled={nextButtonEnabled}
