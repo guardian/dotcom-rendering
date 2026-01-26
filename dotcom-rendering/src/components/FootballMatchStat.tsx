@@ -20,8 +20,8 @@ const containerCss = css`
 	display: grid;
 	grid-template-columns: auto 1fr auto;
 	grid-template-areas:
-		'home-stat label away-stat'
-		'graph     graph  graph';
+		'home-stat heading away-stat'
+		'graph     graph   graph';
 	padding: 5px 10px 10px;
 	color: ${palette('--football-match-stat-text')};
 	border: 1px solid ${palette('--football-match-stat-border')};
@@ -48,18 +48,18 @@ const desktopPaddingCss = css`
 	}
 `;
 
-const labelSeparateRowCss = css`
+const headingSeparateRowCss = css`
 	${from.desktop} {
 		grid-template-areas:
-			'label     label label'
-			'home-stat .     away-stat'
-			'graph     graph graph';
+			'heading   heading heading'
+			'home-stat .       away-stat'
+			'graph     graph   graph';
 	}
 `;
 
-const labelCss = css`
+const headingCss = css`
 	${textSansBold14};
-	grid-area: label;
+	grid-area: heading;
 	justify-self: center;
 	${from.desktop} {
 		${textSansBold15};
@@ -135,11 +135,11 @@ export const FootballMatchStat = ({
 		<div
 			css={[
 				containerCss,
-				compactLayout && labelSeparateRowCss,
+				compactLayout && headingSeparateRowCss,
 				!compactLayout && desktopPaddingCss,
 			]}
 		>
-			<Heading css={labelCss}>{heading}</Heading>
+			<Heading css={headingCss}>{heading}</Heading>
 			<span css={[numberCss, !compactLayout && largeNumberCss]}>
 				<span
 					css={css`
@@ -185,7 +185,7 @@ export const FootballMatchStat = ({
 const goalAttemptsLayoutCss = css`
 	grid-template-columns: 1fr 1fr;
 	grid-template-areas:
-		'label         label'
+		'heading       heading'
 		'home-attempts away-attempts';
 	column-gap: 10px;
 	${from.desktop} {
@@ -271,7 +271,7 @@ export const FootballMatchGoalAttempts = ({
 
 	return (
 		<div css={[containerCss, desktopPaddingCss, goalAttemptsLayoutCss]}>
-			<Heading css={labelCss}>Goal attempts</Heading>
+			<Heading css={headingCss}>Goal attempts</Heading>
 			<span
 				css={css`
 					${visuallyHidden}
