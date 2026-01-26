@@ -38,6 +38,13 @@ import {
 	canShowSignInGatePortal,
 	SignInGatePortal,
 } from './StickyBottomBanner/SignInGatePortal';
+import {
+	canShowBrazeBannersSystem,
+	BrazeBannersSystemPlacementId,
+	BrazeBannersSystemMeta,
+	BrazeBannersSystemDisplay,
+} from '../lib/braze/BrazeBannersSystem';
+import { BrazeInstance } from '../lib/braze/initialiseBraze';
 
 type Props = {
 	contentType: string;
@@ -234,6 +241,42 @@ const buildBrazeBanner = (
 });
 
 /**
+ * Build the Braze Banners System Epic Config
+ * @param braze The Braze instance
+ * @param idApiUrl Identity API URL for newsletter subscriptions
+ * @param contentType Content type of the article
+ * @param shouldHideReaderRevenue Whether to hide reader revenue components
+ * @param tags Tags associated with the article
+ * @returns CandidateConfig for the Braze Banners System Epic
+ */
+const buildBrazeBannersSystemEpicConfig = (
+	braze: BrazeInstance | null,
+	idApiUrl: string,
+	contentType: string,
+	shouldHideReaderRevenue: boolean,
+	tags: TagType[],
+): CandidateConfig<any> => {
+	return {
+		candidate: {
+			id: 'braze-banners-system',
+			canShow: () => {
+				return canShowBrazeBannersSystem(
+					braze,
+					BrazeBannersSystemPlacementId.Banner,
+					contentType,
+					shouldHideReaderRevenue,
+					tags,
+				);
+			},
+			show: (meta: BrazeBannersSystemMeta) => () => (
+				<BrazeBannersSystemDisplay meta={meta} idApiUrl={idApiUrl} />
+			),
+		},
+		timeoutMillis: null,
+	};
+};
+
+/**
  * The reader revenue banner at the end of articles
  *
  * ## Why does this need to be an Island?
@@ -263,7 +306,7 @@ export const StickyBottomBanner = ({
 	isSensitive: boolean;
 }) => {
 	const { renderingTarget, editionId } = useConfig();
-	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
+	const { brazeMessages, braze } = useBraze(idApiUrl, renderingTarget);
 
 	const countryCode = useCountryCode('sticky-bottom-banner');
 	const isSignedIn = useIsSignedIn();
@@ -326,6 +369,13 @@ export const StickyBottomBanner = ({
 			tags,
 			shouldHideReaderRevenue,
 		);
+		const brazeBannersSystemEpic = buildBrazeBannersSystemEpicConfig(
+			braze,
+			idApiUrl,
+			contentType,
+			shouldHideReaderRevenue,
+			tags,
+		);
 
 		const signInGate = buildSignInGateConfig(
 			{
@@ -354,9 +404,15 @@ export const StickyBottomBanner = ({
 		if (hasForceBannerParam) {
 			candidates = [CMP, readerRevenue];
 		} else if (hasForceBrazeMessageParam) {
-			candidates = [CMP, brazeBanner];
+			candidates = [CMP, brazeBannersSystemEpic, brazeBanner];
 		} else {
-			candidates = [CMP, signInGate, brazeBanner, readerRevenue];
+			candidates = [
+				CMP,
+				signInGate,
+				brazeBannersSystemEpic,
+				brazeBanner,
+				readerRevenue,
+			];
 		}
 
 		const bannerConfig: SlotConfig = {
