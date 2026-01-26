@@ -50,6 +50,7 @@ export const brazeBannersSystemLogger = {
  */
 export enum BrazeBannersSystemPlacementId {
 	EndOfArticle = 'dotcom-rendering_end-of-article',
+	Banner = 'dotcom-rendering_banner',
 }
 
 /**
