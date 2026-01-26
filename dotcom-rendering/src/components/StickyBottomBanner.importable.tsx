@@ -9,6 +9,13 @@ import type { BannerProps } from '@guardian/support-dotcom-components/dist/share
 import { useEffect, useState } from 'react';
 import type { ArticleCounts } from '../lib/articleCount';
 import { getArticleCounts } from '../lib/articleCount';
+import {
+	BrazeBannersSystemDisplay,
+	BrazeBannersSystemPlacementId,
+	canShowBrazeBannersSystem,
+} from '../lib/braze/BrazeBannersSystem';
+import type { BrazeBannersSystemMeta } from '../lib/braze/BrazeBannersSystem';
+import type { BrazeInstance } from '../lib/braze/initialiseBraze';
 import type {
 	CandidateConfig,
 	MaybeFC,
@@ -38,13 +45,6 @@ import {
 	canShowSignInGatePortal,
 	SignInGatePortal,
 } from './StickyBottomBanner/SignInGatePortal';
-import {
-	canShowBrazeBannersSystem,
-	BrazeBannersSystemPlacementId,
-	BrazeBannersSystemMeta,
-	BrazeBannersSystemDisplay,
-} from '../lib/braze/BrazeBannersSystem';
-import { BrazeInstance } from '../lib/braze/initialiseBraze';
 
 type Props = {
 	contentType: string;
@@ -456,6 +456,7 @@ export const StickyBottomBanner = ({
 		pageId,
 		host,
 		isInAuxiaControlGroup,
+		braze,
 	]);
 
 	if (SelectedBanner) {
