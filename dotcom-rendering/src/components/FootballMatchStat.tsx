@@ -189,12 +189,12 @@ const goalAttemptsLayoutCss = css`
 	}
 `;
 
-const offTargetCss = (colour: string) => css`
+const offTargetCss = css`
 	${textSans14};
 	grid-area: home-attempts;
 	margin-top: 5px;
 	padding: ${space[1]}px 0 0 6px;
-	background-color: ${transparentColour(colour, 0.1)};
+	background-color: var(--goal-attempt-off-target-bg);
 	border: 1px solid ${palette('--football-match-stat-border')};
 	border-radius: 4px;
 	${from.desktop} {
@@ -209,12 +209,10 @@ const offTargetAwayCss = css`
 	padding-right: 6px;
 `;
 
-const onTargetCss = (colour: string) => css`
+const onTargetCss = css`
 	padding: ${space[1]}px 0 0 6px;
-	color: ${isLight(colour)
-		? sourcePalette.neutral[7]
-		: sourcePalette.neutral[100]};
-	background-color: ${colour};
+	color: var(--goal-attempt-on-target-text);
+	background-color: var(--goal-attempt-on-target-bg);
 	border-top: 1px solid ${palette('--football-match-stat-border')};
 	border-left: 1px solid ${palette('--football-match-stat-border')};
 	border-radius: 4px;
@@ -243,12 +241,15 @@ const attemptCountCss = css`
 	}
 `;
 
+const onTargetTextColour = (colour: string) =>
+	sourcePalette.neutral[isLight(colour) ? 7 : 100];
+
 type GoalAttempt = {
 	offTarget: number;
 	onTarget: number;
 };
 
-type GoalAttemptProps = {
+type GoalAttemptsProps = {
 	homeTeam: Team;
 	awayTeam: Team;
 	homeValues: GoalAttempt;
@@ -262,9 +263,8 @@ export const FootballMatchGoalAttempts = ({
 	homeValues,
 	awayValues,
 	headingLevel = 3,
-}: GoalAttemptProps) => {
+}: GoalAttemptsProps) => {
 	const Heading: React.ElementType = `h${headingLevel}`;
-
 	return (
 		<div css={[containerCss, desktopPaddingCss, goalAttemptsLayoutCss]}>
 			<Heading css={headingCss}>Goal attempts</Heading>
@@ -275,10 +275,26 @@ export const FootballMatchGoalAttempts = ({
 			>
 				{homeTeam.name}
 			</span>
-			<div css={offTargetCss(homeTeam.colour)}>
+			<div
+				css={offTargetCss}
+				style={{
+					'--goal-attempt-off-target-bg': transparentColour(
+						homeTeam.colour,
+						0.1,
+					),
+				}}
+			>
 				Off target
 				<span css={attemptCountCss}>{homeValues.offTarget}</span>
-				<div css={onTargetCss(homeTeam.colour)}>
+				<div
+					css={onTargetCss}
+					style={{
+						'--goal-attempt-on-target-bg': homeTeam.colour,
+						'--goal-attempt-on-target-text': onTargetTextColour(
+							homeTeam.colour,
+						),
+					}}
+				>
 					On target
 					<span css={attemptCountCss}>{homeValues.onTarget}</span>
 				</div>
@@ -290,10 +306,26 @@ export const FootballMatchGoalAttempts = ({
 			>
 				{awayTeam.name}
 			</span>
-			<div css={[offTargetCss(awayTeam.colour), offTargetAwayCss]}>
+			<div
+				css={[offTargetCss, offTargetAwayCss]}
+				style={{
+					'--goal-attempt-off-target-bg': transparentColour(
+						awayTeam.colour,
+						0.1,
+					),
+				}}
+			>
 				Off target
 				<span css={attemptCountCss}>{awayValues.offTarget}</span>
-				<div css={[onTargetCss(awayTeam.colour), onTargetAwayCss]}>
+				<div
+					css={[onTargetCss, onTargetAwayCss]}
+					style={{
+						'--goal-attempt-on-target-bg': awayTeam.colour,
+						'--goal-attempt-on-target-text': onTargetTextColour(
+							awayTeam.colour,
+						),
+					}}
+				>
 					On target
 					<span css={attemptCountCss}>{awayValues.onTarget}</span>
 				</div>
