@@ -2,7 +2,7 @@ import { palette } from '@guardian/source/foundations';
 import { AdSlot } from '../components/AdSlot.web';
 import { CricketScorecardPage } from '../components/CricketScorecardPage';
 import { FootballMatchesPageWrapper } from '../components/FootballMatchesPageWrapper.importable';
-import { FootballMatchInfo } from '../components/FootballMatchInfo';
+import { FootballMatchInfoPage } from '../components/FootballMatchInfoPage';
 import { FootballMatchSummary } from '../components/FootballMatchSummary';
 import { FootballTablesPage } from '../components/FootballTablesPage';
 import { Footer } from '../components/Footer';
@@ -30,7 +30,7 @@ const SportsPage = ({
 	renderAds: boolean;
 }) => {
 	const abTests = useBetaAB();
-	const isInControlGroup =
+	const isInVariantGroup =
 		abTests?.isUserInTestGroup('webex-football-redesign', 'variant') ??
 		false;
 
@@ -74,9 +74,9 @@ const SportsPage = ({
 				/>
 			);
 		case 'FootballMatchSummary': {
-			if (isInControlGroup) {
+			if (isInVariantGroup) {
 				return (
-					<FootballMatchInfo
+					<FootballMatchInfoPage
 						match={sportData.matchV2}
 						table={sportData.group}
 					/>

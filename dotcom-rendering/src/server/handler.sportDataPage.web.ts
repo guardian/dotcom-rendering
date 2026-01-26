@@ -224,13 +224,6 @@ const parseFEFootballMatch = (
 		);
 	}
 
-	console.log(
-		`colour: ${parsedFootballMatchStats.value.homeTeam.statsColour}`,
-	);
-	console.log(
-		`colour: ${parsedFootballMatchStats.value.awayTeam.statsColour}`,
-	);
-
 	if (!parsedFootballMatch.ok) {
 		throw new Error(
 			`Failed to parse football match: ${parsedFootballMatch.error.kind} ${parsedFootballMatch.error.message}`,
