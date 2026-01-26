@@ -16,6 +16,8 @@ import { ContainerTitle } from './ContainerTitle';
 import { Footer } from './ExpandableAtom/Footer';
 import { FrontSectionTitle } from './FrontSectionTitle';
 import { ShowHideButton } from './ShowHideButton';
+import { FrontPagination } from './FrontPagination';
+import { TagPagePagination } from '../types/tagPage';
 
 type Props = {
 	/** This text will be used as the h2 shown in the left column for the section */
@@ -57,6 +59,9 @@ type Props = {
 	hasNavigationButtons?: boolean;
 	likeHandler?: () => void;
 	dislikeHandler?: () => void;
+	/** Puts pagination at the bottom of the container allowing the user to navigate to other pages,
+	 * usually used on the last container on a page */
+	pagination?: TagPagePagination;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -147,7 +152,8 @@ const containerStylesUntilLeftCol = css`
 		[headline-start controls-start] auto
 		[controls-end headline-end content-toggleable-start content-start] auto
 		[content-end content-toggleable-end bottom-content-start] auto
-		[bottom-content-end];
+		[bottom-content-end pagination-start] auto
+		[pagination-end];
 
 	grid-template-columns:
 		[decoration-start]
@@ -196,7 +202,8 @@ const containerScrollableStylesFromLeftCol = css`
 			[controls-end content-toggleable-start content-start] auto
 			[headline-end treats-start] auto
 			[content-end content-toggleable-end treats-end bottom-content-start] auto
-			[bottom-content-end];
+			[bottom-content-end pagination-start] auto
+			[pagination-end];
 	}
 
 	${from.wide} {
@@ -204,7 +211,8 @@ const containerScrollableStylesFromLeftCol = css`
 			[headline-start content-start content-toggleable-start controls-start] auto
 			[headline-end treats-start] auto
 			[content-end content-toggleable-end treats-end controls-end bottom-content-start] auto
-			[bottom-content-end];
+			[bottom-content-end pagination-start] auto
+			[pagination-end];
 	}
 `;
 
@@ -215,7 +223,8 @@ const containerStylesFromLeftCol = css`
 			[controls-end content-toggleable-start] auto
 			[headline-end treats-start] auto
 			[content-end content-toggleable-end treats-end bottom-content-start] auto
-			[bottom-content-end];
+			[bottom-content-end pagination-start] auto
+			[pagination-end];
 
 		grid-template-columns:
 			minmax(0, 1fr)
@@ -235,7 +244,8 @@ const containerStylesFromLeftCol = css`
 			[controls-end] auto
 			[headline-end treats-start] auto
 			[content-end content-toggleable-end treats-end bottom-content-start] auto
-			[bottom-content-end];
+			[bottom-content-end pagination-start] auto
+			[pagination-end];
 
 		grid-template-columns:
 			minmax(0, 1fr)
@@ -332,27 +342,6 @@ const sectionContentBorderFromLeftCol = css`
 	}
 `;
 
-const sectionFooter = css`
-	/* Mobile: treats appear at the bottom */
-	grid-row: bottom-content;
-	grid-column: content;
-	${from.leftCol} {
-		padding-top: ${space[2]}px;
-	}
-	padding-bottom: ${space[3]}px;
-
-	${from.leftCol} {
-		align-self: end;
-		grid-row: treats;
-		grid-column: title;
-		padding-top: 0;
-	}
-
-	.hidden > & {
-		display: none;
-	}
-`;
-
 const decoration = css`
 	/** element which contains border and inner background colour, if set */
 	grid-row: 1 / -1;
@@ -401,6 +390,49 @@ const carouselNavigationPlaceholder = css`
 	.hidden & {
 		display: none;
 	}
+`;
+
+const sectionPaginationBackground = css`
+	grid-row: pagination;
+	grid-column: decoration;
+	background-color: white;
+	${from.tablet} {
+		margin: 0 -20px;
+		border-left-style: solid;
+		border-right-style: solid;
+		border-width: 1px;
+		border-color: ${schemePalette('--section-border')};
+	}
+	.hidden > & {
+		display: none;
+	}
+`;
+
+const sectionPagination = css`
+	grid-row: pagination;
+	grid-column: content;
+	.hidden > & {
+		display: none;
+	}
+`;
+
+const bottomPaddingBetaContainer = (
+	useLargeSpacingMobile: boolean,
+	useLargeSpacingDesktop: boolean,
+) => css`
+	${until.tablet} {
+		padding-bottom: ${useLargeSpacingMobile
+			? `${space[10]}px`
+			: `${space[6]}px`};
+	}
+	${from.tablet} {
+		padding-bottom: ${useLargeSpacingDesktop
+			? `${space[10]}px`
+			: `${space[6]}px`};
+	}
+`;
+const bottomPadding = css`
+	padding-bottom: ${space[9]}px;
 `;
 
 /**
@@ -508,12 +540,16 @@ export const StorylinesSection = ({
 	hasNavigationButtons = false,
 	dislikeHandler,
 	likeHandler,
+	pagination,
 }: Props) => {
 	const sectionId = 'storylines-section';
 	const isToggleable = toggleable && !!sectionId;
 	const isBetaContainer = !!containerLevel;
 
 	const showSectionColours = isNetworkFront(pageId ?? '');
+
+	const useLargeSpacingMobile = true;
+	const useLargeSpacingDesktop = true;
 
 	/**
 	 * In a front section, id is being used to set the containerId in @see {ShowMore.importable.tsx}
@@ -605,6 +641,52 @@ export const StorylinesSection = ({
 												here.
 											</a>
 										</span>
+
+										<div
+											css={css`
+												margin-top: ${space[2]}px;
+											`}
+										>
+											<Footer
+												dislikeHandler={
+													dislikeHandler ??
+													(() =>
+														submitComponentEvent(
+															{
+																component: {
+																	componentType:
+																		'STORYLINES',
+																	id: sectionId,
+																	products:
+																		[],
+																	labels: [],
+																},
+																action: 'DISLIKE',
+															},
+															'Web',
+														))
+												}
+												likeHandler={
+													likeHandler ??
+													(() =>
+														submitComponentEvent(
+															{
+																component: {
+																	componentType:
+																		'STORYLINES',
+																	id: sectionId,
+																	products:
+																		[],
+																	labels: [],
+																},
+																action: 'LIKE',
+															},
+															'Web',
+														))
+												}
+												storylinesStyle={true}
+											></Footer>
+										</div>
 									</Hide>
 								</div>
 							</>
@@ -642,42 +724,32 @@ export const StorylinesSection = ({
 					{children}
 				</div>
 
-				<div css={[sectionFooter]}>
-					<Footer
-						dislikeHandler={
-							dislikeHandler ??
-							(() =>
-								submitComponentEvent(
-									{
-										component: {
-											componentType: 'STORYLINES',
-											id: sectionId,
-											products: [],
-											labels: [],
-										},
-										action: 'DISLIKE',
-									},
-									'Web',
-								))
-						}
-						likeHandler={
-							likeHandler ??
-							(() =>
-								submitComponentEvent(
-									{
-										component: {
-											componentType: 'STORYLINES',
-											id: sectionId,
-											products: [],
-											labels: [],
-										},
-										action: 'LIKE',
-									},
-									'Web',
-								))
-						}
-					></Footer>
-				</div>
+				{pagination && (
+					<>
+						<div css={sectionPaginationBackground} />
+						<div
+							id="pagination"
+							css={[
+								sectionContentHorizontalMargins,
+								sectionPagination,
+								isBetaContainer
+									? bottomPaddingBetaContainer(
+											useLargeSpacingMobile,
+											useLargeSpacingDesktop,
+									  )
+									: bottomPadding,
+							]}
+						>
+							<FrontPagination
+								sectionName={pagination.sectionName}
+								totalContent={pagination.totalContent}
+								currentPage={pagination.currentPage}
+								lastPage={pagination.lastPage}
+								pageId={pagination.pageId}
+							/>
+						</div>
+					</>
+				)}
 			</section>
 		</ContainerOverrides>
 	);
