@@ -78,6 +78,7 @@ const baseCardStyles = css`
 
 const underlineOnHoverStyles = css`
 	/* Only underline the headline element we want to target (not kickers/sublink headlines) */
+
 	:hover .card-headline .show-underline {
 		text-decoration: underline;
 	}
@@ -94,12 +95,12 @@ const hoverStyles = css`
 	}
 
 	${underlineOnHoverStyles}
-
 	/** When we hover on sublinks, we want to prevent the general hover styles applying */
 	:has(ul.sublinks:hover, .branding-logo:hover) {
 		.card-headline .show-underline {
 			text-decoration: none;
 		}
+
 		.media-overlay {
 			background-color: transparent;
 		}
@@ -181,6 +182,7 @@ const overlayStyles = css`
 	 * Ensure the waveform is behind the other elements, e.g. headline, pill.
 	 * Links define their own z-index.
 	 */
+
 	> :not(.waveform):not(a) {
 		z-index: 1;
 	}
@@ -473,6 +475,10 @@ export const FeatureCard = ({
 
 	const aspectRatioNumber = isImmersive ? 5 / 3 : 4 / 5;
 
+	/* The whole card is clickable on cinemagraphs and pictures */
+	const allowLinkThroughOverlay =
+		media.type === 'cinemagraph' || media.type === 'picture';
+
 	return (
 		<FormatBoundary format={format}>
 			<ContainerOverrides containerPalette={containerPalette}>
@@ -644,8 +650,7 @@ export const FeatureCard = ({
 										overlayContainerStyles,
 										isImmersive &&
 											immersiveOverlayContainerStyles,
-										/* The whole card is clickable on cinemagraphs */
-										media.type === 'cinemagraph' &&
+										allowLinkThroughOverlay &&
 											noPointerEvents,
 									]}
 								>
