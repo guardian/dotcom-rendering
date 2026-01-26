@@ -230,6 +230,43 @@ export const BrazeBannersSystemDisplay = ({
 				setMinHeight(metaMinHeight);
 			}
 
+			// Replace Settings Placeholders
+			const getPropertyValue = (propertyKey: string): string => {
+				if (meta.banner.properties[propertyKey]?.type === 'string') {
+					return meta.banner.properties[propertyKey]?.value;
+				}
+				if (meta.banner.properties[propertyKey]?.type === 'number') {
+					return String(meta.banner.properties[propertyKey]?.value);
+				}
+				if (meta.banner.properties[propertyKey]?.type === 'boolean') {
+					return String(meta.banner.properties[propertyKey]?.value);
+				}
+				if (meta.banner.properties[propertyKey]?.type === 'image') {
+					return meta.banner.properties[propertyKey]?.value;
+				}
+				if (
+					meta.banner.properties[propertyKey]?.type === 'jsonobject'
+				) {
+					return JSON.stringify(
+						meta.banner.properties[propertyKey]?.value,
+						null,
+						2,
+					);
+				}
+				if (meta.banner.properties[propertyKey]?.type === 'datetime') {
+					return new Date(
+						meta.banner.properties[propertyKey]?.value,
+					).toISOString();
+				}
+				return '';
+			};
+			Object.keys(meta.banner.properties).forEach((propertyKey) => {
+				meta.banner.html = meta.banner.html.replaceAll(
+					`{{settings.${propertyKey}}}`,
+					getPropertyValue(propertyKey),
+				);
+			});
+
 			// Let Braze inject the HTML/CSS
 			meta.braze.insertBanner(meta.banner, containerRef.current);
 		}
