@@ -66,12 +66,12 @@ const headingCss = css`
 	}
 `;
 
-const numberCss = css`
+const statCss = css`
 	${textSansBold20};
 	grid-area: home-stat;
 `;
 
-const largeNumberCss = css`
+const largeStatCss = css`
 	${from.desktop} {
 		${textSansBold28}
 	}
@@ -140,7 +140,7 @@ export const FootballMatchStat = ({
 			]}
 		>
 			<Heading css={headingCss}>{heading}</Heading>
-			<span css={[numberCss, !compactLayout && largeNumberCss]}>
+			<span css={[statCss, !compactLayout && largeStatCss]}>
 				<span
 					css={css`
 						${visuallyHidden}
@@ -150,9 +150,7 @@ export const FootballMatchStat = ({
 				</span>
 				{formatValue(homeValue, isPercentage)}
 			</span>
-			<span
-				css={[numberCss, awayStatCss, !compactLayout && largeNumberCss]}
-			>
+			<span css={[statCss, awayStatCss, !compactLayout && largeStatCss]}>
 				<span
 					css={css`
 						${visuallyHidden}
