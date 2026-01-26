@@ -29,29 +29,45 @@ type CardWrapperProps = {
 	topBarColour?: string;
 };
 
-const horizontalCardStyles = css`
-	grid-template-columns: 150px 1fr;
+const basicHorizontalCardStyles = css`
+	grid-template-columns: 122.5px 3fr;
 	grid-template-areas: 'image headline' 'image standfirst' 'image meta';
 `;
 
+const basicVerticalCardStyles = css`
+	grid-template-areas: 'headline' 'image' 'standfirst' 'meta';
+`;
+
+const getGridLayout = (cardType: CardType) => {
+	switch (cardType) {
+		case 'standard':
+			return css`
+				${until.desktop} {
+					${basicHorizontalCardStyles}
+				}
+
+				${basicVerticalCardStyles}
+			`;
+		case 'boosted':
+			return css`
+				${basicVerticalCardStyles}
+			`;
+	}
+};
+
 const baseCardStyles = css`
 	display: grid;
-	grid-template-areas: 'headline' 'image' 'standfirst' 'meta';
 
 	width: 100%;
 	/* We absolutely position the faux link so this is required here */
 	position: relative;
 
-	${until.desktop} {
-		grid-template-columns: 1fr 3fr;
-		grid-template-areas: 'image headline' 'image standfirst' 'image meta';
-	}
-
+	column-gap: 10px;
 	/*
-	 * Target Safari 10.1 to 14.0
-	 * https://www.browserstack.com/guide/create-browser-specific-css
-	 * Flexbox with gap is not supported until Safari 14.1
-	 */
+ * Target Safari 10.1 to 14.0
+ * https://www.browserstack.com/guide/create-browser-specific-css
+ * Flexbox with gap is not supported until Safari 14.1
+ */
 	@media not all and (min-resolution: 0.001dpcm) {
 		@supports (-webkit-appearance: none) and (not (display: flex; gap: 1em)) {
 			display: grid;
@@ -199,6 +215,8 @@ const getMedia = ({
 	return undefined;
 };
 
+type CardType = 'standard' | 'boosted';
+
 export type CardProps = {
 	format: ArticleFormat;
 	headlineText: string;
@@ -223,6 +241,7 @@ export type CardProps = {
 	showTopBarDesktop?: boolean;
 	showTopBarMobile?: boolean;
 	trailText?: string;
+	cardType: CardType;
 };
 export const GridCard = ({
 	format,
@@ -244,6 +263,7 @@ export const GridCard = ({
 	isExternalLink,
 	showTopBarDesktop = true,
 	showTopBarMobile = true,
+	cardType = 'standard',
 }: CardProps) => {
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -254,16 +274,18 @@ export const GridCard = ({
 		mainMedia,
 		canPlayInline,
 	});
+
+	const gridLayout = getGridLayout(cardType);
 	return (
 		<FormatBoundary format={format}>
-			{' '}
 			<ContainerOverrides containerPalette={containerPalette}>
 				<div
 					css={[
 						baseCardStyles,
 						hoverStyles,
-						showTopBarDesktop && desktopTopBarStyles('undefined'),
-						showTopBarMobile && mobileTopBarStyles('undefined'),
+						desktopTopBarStyles('undefined'),
+						mobileTopBarStyles('undefined'),
+						gridLayout,
 					]}
 				>
 					{!!media?.imageUrl && (

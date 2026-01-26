@@ -167,6 +167,7 @@ export type Props = {
 	isInStarRatingVariant?: boolean;
 	starRatingSize?: RatingSizeType;
 	isInOnwardsAbTestVariant?: boolean;
+	cardType?: 'standard' | 'boosted';
 };
 
 const starWrapper = (cardHasImage: boolean) => css`

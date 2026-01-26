@@ -614,6 +614,7 @@ const HalfWidthCardLayout = ({
 							canPlayInline={false}
 							isStorylines={isStorylines}
 							isInStarRatingVariant={isInStarRatingVariant}
+							cardType={'standard'}
 						/>
 					</LI>
 				);
