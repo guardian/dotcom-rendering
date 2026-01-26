@@ -332,7 +332,9 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 									product.elementId
 								}
 								css={[subgridStyles, leftBorderStyles]}
-								data-component={`at-a-glance-carousel-card-${index}`}
+								data-component={`at-a-glance-carousel-card-${
+									index + 1
+								}`}
 							>
 								<ProductCarouselCard
 									product={product}
