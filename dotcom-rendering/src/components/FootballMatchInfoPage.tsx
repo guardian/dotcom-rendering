@@ -7,10 +7,10 @@ import { palette } from '../palette';
 import { FootballMatchInfo } from './FootballMatchInfo';
 
 export const FootballMatchInfoPage = ({
-	match,
+	matchStats,
 	table,
 }: {
-	match: FootballMatchStats;
+	matchStats: FootballMatchStats;
 	table?: FootballTableSummary;
 }) => {
 	return (
@@ -20,7 +20,7 @@ export const FootballMatchInfoPage = ({
 					${grid.column.centre};
 				`}
 			>
-				<FootballMatchInfo match={match} table={table} />
+				<FootballMatchInfo matchStats={matchStats} table={table} />
 			</div>
 		</main>
 	);

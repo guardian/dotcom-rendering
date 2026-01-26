@@ -52,7 +52,7 @@ export type CricketMatchPage = SportPageConfig & {
 
 export type FootballMatchSummaryPage = SportPageConfig & {
 	match: FootballMatch;
-	matchV2: FootballMatchStats;
+	matchStats: FootballMatchStats;
 	group?: FootballTableSummary;
 	kind: 'FootballMatchSummary';
 };

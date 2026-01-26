@@ -240,7 +240,7 @@ const parseFEFootballMatch = (
 
 	return {
 		match: parsedFootballMatch.value,
-		matchV2: parsedFootballMatchStats.value,
+		matchStats: parsedFootballMatchStats.value,
 		group: group?.value,
 		kind: 'FootballMatchSummary',
 		nav: {

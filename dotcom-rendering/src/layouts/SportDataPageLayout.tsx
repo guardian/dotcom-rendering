@@ -77,7 +77,7 @@ const SportsPage = ({
 			if (isInVariantGroup) {
 				return (
 					<FootballMatchInfoPage
-						match={sportData.matchV2}
+						matchStats={sportData.matchStats}
 						table={sportData.group}
 					/>
 				);
