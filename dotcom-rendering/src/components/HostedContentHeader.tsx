@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import {
 	from,
 	palette as sourcePalette,
+	textSans15,
 	textSansBold14,
 } from '@guardian/source/foundations';
 import { Left, Right } from './LabsHeader';
@@ -34,14 +35,19 @@ const HeaderWrapper = ({ children }: { children: React.ReactNode }) => (
 	<div css={headerWrapperStyles}>{children}</div>
 );
 
-const HeaderSection = ({ children }: { children: React.ReactNode }) => (
+const HeaderSection = ({
+	children,
+	isFirst,
+}: {
+	children: React.ReactNode;
+	isFirst?: boolean;
+}) => (
 	<div
 		css={css`
 			height: 100%;
 			display: flex;
 			align-items: center;
-			padding-right: 10px;
-			margin-left: 20px;
+			${isFirst ? 'margin-left: 1.25rem;' : 'margin-left: 0.625rem;'}
 		`}
 	>
 		{children}
@@ -52,6 +58,7 @@ const TitleAndBadge = ({ accentColor, branding }: Props) => (
 	<div
 		css={css`
 			width: 80px;
+			align-self: flex-end;
 
 			${from.desktop} {
 				width: 132px;
@@ -87,18 +94,43 @@ const TitleAndBadge = ({ accentColor, branding }: Props) => (
 	</div>
 );
 
+const About = () => (
+	<div
+		css={css`
+			${textSans15};
+			background-color: ${sourcePalette.neutral[7]};
+			color: ${sourcePalette.neutral[100]};
+			align-self: end;
+			width: 100vw;
+			padding: 0;
+
+			${from.desktop} {
+				width: 235px;
+			}
+		`}
+	>
+		<p
+			css={css`
+				padding: 0;
+			`}
+		>
+			About
+		</p>
+	</div>
+);
+
 export const HostedContentHeader = ({ accentColor, branding }: Props) => {
 	return (
 		<HeaderWrapper>
 			<Left>
-				<HeaderSection>
+				<HeaderSection isFirst={true}>
 					<TitleAndBadge
 						accentColor={accentColor}
 						branding={branding}
 					/>
 				</HeaderSection>
 				<HeaderSection>
-					<div>About</div>
+					<About />
 				</HeaderSection>
 			</Left>
 			<Right>
