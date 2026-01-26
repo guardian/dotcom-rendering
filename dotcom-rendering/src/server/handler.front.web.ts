@@ -4,7 +4,7 @@ import type { FEFront } from '../frontend/feFront';
 import type { FETagPage } from '../frontend/feTagPage';
 import { decideTagPageBranding, pickBrandingForEdition } from '../lib/branding';
 import { decideTrail } from '../lib/decideTrail';
-import { createFakeCollection } from '../model/createCollection';
+import { createPersonalisedCollection } from '../model/createCollection';
 import { enhanceCards } from '../model/enhanceCards';
 import { enhanceCollections } from '../model/enhanceCollections';
 import {
@@ -31,7 +31,11 @@ const enhanceFront = (body: unknown): Front => {
 		];
 
 	const personalisedContainer = isInPersonalisedContainerTest
-		? createFakeCollection(data.pressedPage.collections)
+		? createPersonalisedCollection(
+				data.pressedPage.collections,
+				data.config.discussionApiUrl,
+				data.editionId,
+		  )
 		: undefined;
 
 	const collections = enhanceCollections({

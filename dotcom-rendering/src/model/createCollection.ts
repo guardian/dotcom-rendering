@@ -1,4 +1,5 @@
 import type { FECollection, FEFrontCard } from '../frontend/feFront';
+import type { EditionId } from '../lib/edition';
 import type { DCRCollectionType, DCRFrontCard } from '../types/front';
 import { enhanceCards } from './enhanceCards';
 
@@ -70,7 +71,11 @@ const pillarContainers: PillarContainer[] = [
 
 export type DCRPillarCards = Record<Pillar, DCRFrontCard[]>;
 
-const getPillarCards = (collections: FECollection[]): DCRPillarCards => {
+const getPillarCards = (
+	collections: FECollection[],
+	discussionApiUrl: string,
+	editionId: EditionId,
+): DCRPillarCards => {
 	const HighlightUrls = collections
 		.filter((collection) => 'Highlights' === collection.displayName)
 		.flatMap((collection) => collection.curated)
@@ -99,23 +104,23 @@ const getPillarCards = (collections: FECollection[]): DCRPillarCards => {
 	return {
 		lifestyle: enhanceCards(pillarCards.lifestyle, {
 			cardInTagPage: false,
-			discussionApiUrl: 'string',
+			discussionApiUrl,
 			editionId: 'UK',
 		}),
 		opinion: enhanceCards(pillarCards.opinion, {
 			cardInTagPage: false,
-			discussionApiUrl: 'string',
-			editionId: 'UK',
+			discussionApiUrl,
+			editionId,
 		}),
 		sport: enhanceCards(pillarCards.sport, {
 			cardInTagPage: false,
-			discussionApiUrl: 'string',
-			editionId: 'UK',
+			discussionApiUrl,
+			editionId,
 		}),
 		culture: enhanceCards(pillarCards.culture, {
 			cardInTagPage: false,
-			discussionApiUrl: 'string',
-			editionId: 'UK',
+			discussionApiUrl,
+			editionId,
 		}),
 	};
 };
@@ -126,10 +131,16 @@ export const getCuratedList = (buckets: DCRPillarCards): DCRFrontCard[] => {
 	);
 };
 
-export const createFakeCollection = (
+export const createPersonalisedCollection = (
 	collections: FECollection[],
+	discussionApiUrl: string,
+	editionId: EditionId,
 ): DCRCollectionType => {
-	const pillarCards = getPillarCards(collections);
+	const pillarCards = getPillarCards(
+		collections,
+		discussionApiUrl,
+		editionId,
+	);
 	const curatedList = getCuratedList(pillarCards);
 
 	return {
