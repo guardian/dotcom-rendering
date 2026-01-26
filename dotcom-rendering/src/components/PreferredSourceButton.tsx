@@ -15,6 +15,7 @@ export const PreferredSourceButton = ({ text }: Props) => (
 		href="https://www.google.com/preferences/source?q=theguardian.com"
 		cssOverrides={css({
 			...textSans14Object,
+			padding: '8px 12px 10px',
 			'.src-button-space': {
 				flexBasis: space[1],
 			},
