@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { palette } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
 import {
@@ -9,7 +8,6 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import { Caption } from './Caption';
-import { StarRatingDeprecated } from './StarRating/StarRatingDeprecated';
 
 const meta = {
 	component: Caption,
@@ -166,38 +164,6 @@ export const WhenOverlaid = {
 			},
 		},
 	},
-} satisfies Story;
-
-export const WhenOverlaidWithStars = {
-	args: {
-		...WhenOverlaid.args,
-		captionText:
-			"This is how a caption looks when it's overlaid with stars",
-		format: {
-			design: ArticleDesign.Review,
-			display: ArticleDisplay.Showcase,
-			theme: Pillar.News,
-		},
-	},
-	decorators: [
-		(Story) => (
-			<>
-				<Story />
-				<div
-					css={css`
-						position: absolute;
-						bottom: 0;
-						background-color: ${palette.brandAlt[400]};
-						color: ${palette.neutral[7]};
-					`}
-				>
-					<StarRatingDeprecated rating={3} size="large" />
-				</div>
-			</>
-		),
-		WhenOverlaid.decorators,
-	],
-	parameters: WhenOverlaid.parameters,
 } satisfies Story;
 
 export const ForVideos = {

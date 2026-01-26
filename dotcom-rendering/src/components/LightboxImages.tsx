@@ -10,7 +10,6 @@ import {
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import { Hide, Link } from '@guardian/source/react-components';
-import { StarRating as SourceStarRating } from '@guardian/source-development-kitchen/react-components';
 import { useEffect, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { ImageForLightbox } from '../types/content';
@@ -22,7 +21,6 @@ import { StarRating } from './StarRating/StarRating';
 type Props = {
 	format: ArticleFormat;
 	images: ImageForLightbox[];
-	isInStarRatingVariant?: boolean;
 };
 
 const liStyles = css`
@@ -181,11 +179,7 @@ const Selection = ({
 	);
 };
 
-export const LightboxImages = ({
-	format,
-	images,
-	isInStarRatingVariant,
-}: Props) => {
+export const LightboxImages = ({ format, images }: Props) => {
 	const [loaded, setLoaded] = useState(new Set<number>());
 
 	useEffect(() => {
@@ -255,36 +249,15 @@ export const LightboxImages = ({
 									</h2>
 								)}
 
-								{!isUndefined(image.starRating) &&
-									(isInStarRatingVariant ? (
-										<div css={starRatingMarginStyles}>
-											<StarRating
-												size="medium"
-												rating={image.starRating}
-												useAlternativeTheme={true}
-											/>
-										</div>
-									) : (
-										<div
-											css={css`
-												display: inline-block;
-												background-color: ${palette
-													.brandAlt[400]};
-												margin-bottom: ${space[2]}px;
-												${from.tablet} {
-													margin-bottom: ${space[3]}px;
-												}
-												figcaption {
-													height: 0;
-												}
-											`}
-										>
-											<SourceStarRating
-												size="medium"
-												rating={image.starRating}
-											/>
-										</div>
-									))}
+								{!isUndefined(image.starRating) && (
+									<div css={starRatingMarginStyles}>
+										<StarRating
+											size="medium"
+											rating={image.starRating}
+											useAlternativeTheme={true}
+										/>
+									</div>
+								)}
 
 								<Hide from="tablet">
 									<Selection

@@ -1,5 +1,5 @@
 import type { ArticleFormat } from '../lib/articleFormat';
-import type { ImageBlockElement, StarRating } from '../types/content';
+import type { ImageBlockElement } from '../types/content';
 import { ImageComponent } from './ImageComponent';
 
 type Props = {
@@ -8,10 +8,8 @@ type Props = {
 	hideCaption?: boolean;
 	title?: string;
 	isMainMedia?: boolean;
-	starRating?: StarRating;
 	isAvatar?: boolean;
 	isTimeline?: boolean;
-	isInStarRatingVariant?: boolean;
 };
 
 export const ImageBlockComponent = ({
@@ -20,10 +18,8 @@ export const ImageBlockComponent = ({
 	hideCaption,
 	title,
 	isMainMedia,
-	starRating,
 	isAvatar,
 	isTimeline = false,
-	isInStarRatingVariant,
 }: Props) => {
 	const { role } = element;
 	return (
@@ -32,12 +28,10 @@ export const ImageBlockComponent = ({
 			format={format}
 			hideCaption={hideCaption}
 			isMainMedia={isMainMedia}
-			starRating={starRating}
 			role={role}
 			title={title}
 			isAvatar={isAvatar}
 			isTimeline={isTimeline}
-			isInStarRatingVariant={!!isInStarRatingVariant}
 		/>
 	);
 };

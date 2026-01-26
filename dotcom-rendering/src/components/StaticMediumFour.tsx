@@ -32,7 +32,6 @@ type Props = {
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
-	isInStarRatingVariant?: boolean;
 };
 
 export const StaticMediumFour = ({
@@ -44,7 +43,6 @@ export const StaticMediumFour = ({
 	showImage = true,
 	aspectRatio,
 	containerLevel = 'Primary',
-	isInStarRatingVariant,
 }: Props) => {
 	const cards = trails.slice(0, 4);
 
@@ -86,7 +84,6 @@ export const StaticMediumFour = ({
 									!isMediaCard(card.format))
 							}
 							canPlayInline={false}
-							isInStarRatingVariant={isInStarRatingVariant}
 						/>
 					</LI>
 				);

@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -43,7 +42,6 @@ import { Pagination } from '../components/Pagination';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
-import { StarRatingDeprecated } from '../components/StarRating/StarRatingDeprecated';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
@@ -233,24 +231,6 @@ const bodyWrapper = css`
 	}
 `;
 
-const starWrapper = css`
-	margin-bottom: 18px;
-	margin-top: 6px;
-	background-color: ${themePalette('--star-rating-background')};
-	color: ${themePalette('--star-rating-fill')};
-	display: inline-block;
-	${until.phablet} {
-		padding-left: 20px;
-		margin-left: -20px;
-	}
-	${until.leftCol} {
-		padding-left: 0px;
-		margin-left: -0px;
-	}
-	padding-left: 10px;
-	margin-left: -10px;
-`;
-
 interface BaseProps {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
@@ -303,9 +283,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	const isApps = renderingTarget === 'Apps';
 
 	const showComments = article.isCommentable && !isPaidContent;
-
-	const isInStarRatingVariant =
-		article.config.abTests.starRatingRedesignVariant === 'variant';
 
 	return (
 		<>
@@ -444,22 +421,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
 											}
-											isInStarRatingVariant={
-												isInStarRatingVariant
-											}
 											starRating={article.starRating}
 										/>
 									)}
 								</div>
-								{!isUndefined(article.starRating) &&
-								!isInStarRatingVariant ? (
-									<div css={starWrapper}>
-										<StarRatingDeprecated
-											rating={article.starRating}
-											size="large"
-										/>
-									</div>
-								) : null}
 							</GridItem>
 						</HeadlineGrid>
 					</Section>
@@ -1012,7 +977,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							serverTime={serverTime}
 							renderingTarget={renderingTarget}
 							webURL={article.webURL}
-							isInStarRatingVariant={isInStarRatingVariant}
 						/>
 					</Island>
 

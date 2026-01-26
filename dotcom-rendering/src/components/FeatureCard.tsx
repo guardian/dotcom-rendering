@@ -44,7 +44,6 @@ import { Island } from './Island';
 import { Pill } from './Pill';
 import { SelfHostedVideo } from './SelfHostedVideo.importable';
 import { StarRating } from './StarRating/StarRating';
-import { StarRatingDeprecated } from './StarRating/StarRatingDeprecated';
 import { SupportingContent } from './SupportingContent';
 import { WaveForm } from './WaveForm';
 import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
@@ -217,14 +216,6 @@ const nonImmersivePodcastImageStyles = css`
 	left: ${space[2]}px;
 `;
 
-const starRatingWrapper = css`
-	background-color: ${palette('--star-rating-background')};
-	color: ${palette('--star-rating-fill')};
-	margin-top: ${space[1]}px;
-	display: inline-block;
-	width: fit-content;
-`;
-
 const trailTextWrapper = css`
 	margin-top: ${space[3]}px;
 
@@ -386,7 +377,6 @@ export type Props = {
 	 */
 	isImmersive?: boolean;
 	isStorylines?: boolean;
-	isInStarRatingVariant?: boolean;
 	starRatingSize: RatingSizeType;
 };
 
@@ -425,7 +415,6 @@ export const FeatureCard = ({
 	isNewsletter = false,
 	isImmersive = false,
 	isStorylines = false,
-	isInStarRatingVariant,
 	starRatingSize,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
@@ -717,21 +706,13 @@ export const FeatureCard = ({
 											/>
 										</div>
 
-										{!isUndefined(starRating) &&
-											(isInStarRatingVariant ? (
-												<StarRating
-													rating={starRating}
-													size={starRatingSize}
-													useAlternativeTheme={true}
-												/>
-											) : (
-												<div css={starRatingWrapper}>
-													<StarRatingDeprecated
-														rating={starRating}
-														size="small"
-													/>
-												</div>
-											))}
+										{!isUndefined(starRating) && (
+											<StarRating
+												rating={starRating}
+												size={starRatingSize}
+												useAlternativeTheme={true}
+											/>
+										)}
 
 										{!!trailText && (
 											<div css={trailTextWrapper}>

@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -34,7 +33,7 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
-import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
+import type { ArticleFormat } from '../lib/articleFormat';
 import { getSoleContributor } from '../lib/byline';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
@@ -279,9 +278,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 
 	const displayAvatarUrl = avatarUrl ? true : false;
 
-	const isInStarRatingVariant =
-		article.config.abTests.starRatingRedesignVariant === 'variant';
-
 	return (
 		<>
 			{isWeb && (
@@ -365,9 +361,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 												article.webPublicationDateDeprecated
 											}
 											hasAvatar={displayAvatarUrl}
-											isInStarRatingVariant={
-												isInStarRatingVariant
-											}
 											starRating={article.starRating}
 										/>
 									</div>
@@ -406,9 +399,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 										webPublicationDateDeprecated={
 											article.webPublicationDateDeprecated
 										}
-										isInStarRatingVariant={
-											isInStarRatingVariant
-										}
 										starRating={article.starRating}
 									/>
 								</div>
@@ -425,14 +415,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 								<MainMedia
 									format={format}
 									elements={article.mainMediaElements}
-									starRating={
-										!isInStarRatingVariant &&
-										format.design ===
-											ArticleDesign.Review &&
-										!isUndefined(article.starRating)
-											? article.starRating
-											: undefined
-									}
 									host={host}
 									pageId={article.pageId}
 									webTitle={article.webTitle}
@@ -632,7 +614,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							serverTime={serverTime}
 							renderingTarget={renderingTarget}
 							webURL={article.webURL}
-							isInStarRatingVariant={isInStarRatingVariant}
 						/>
 					</Island>
 				)}

@@ -35,7 +35,6 @@ type Props = {
 	collectionId: number;
 	/** Passed through to cards to enable tag page storyline section specific rendering */
 	isStorylines?: boolean;
-	isInStarRatingVariant?: boolean;
 };
 
 type RowLayout = 'oneCardHalfWidth' | 'oneCardFullWidth' | 'twoCard';
@@ -91,7 +90,6 @@ type ImmersiveCardLayoutProps = {
 	imageLoading: Loading;
 	collectionId: number;
 	isStorylines?: boolean;
-	isInStarRatingVariant?: boolean;
 };
 
 /**
@@ -107,7 +105,6 @@ const ImmersiveCardLayout = ({
 	imageLoading,
 	collectionId,
 	isStorylines,
-	isInStarRatingVariant,
 }: ImmersiveCardLayoutProps) => (
 	<UL padBottom={true}>
 		<LI padSides={true}>
@@ -143,7 +140,6 @@ const ImmersiveCardLayout = ({
 				supportingContent={card.supportingContent}
 				isImmersive={true}
 				isStorylines={isStorylines}
-				isInStarRatingVariant={isInStarRatingVariant}
 				starRatingSize="medium"
 			/>
 		</LI>
@@ -260,7 +256,6 @@ type SplashCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
 	isStorylines?: boolean;
-	isInStarRatingVariant?: boolean;
 };
 
 const SplashCardLayout = ({
@@ -274,7 +269,6 @@ const SplashCardLayout = ({
 	containerLevel,
 	collectionId,
 	isStorylines,
-	isInStarRatingVariant,
 }: SplashCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -288,7 +282,6 @@ const SplashCardLayout = ({
 				serverTime={serverTime}
 				imageLoading={imageLoading}
 				collectionId={collectionId}
-				isInStarRatingVariant={isInStarRatingVariant}
 			/>
 		);
 	}
@@ -361,7 +354,6 @@ const SplashCardLayout = ({
 					subtitleSize={subtitleSize}
 					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
 					isStorylines={isStorylines}
-					isInStarRatingVariant={isInStarRatingVariant}
 					starRatingSize={'medium'}
 				/>
 			</LI>
@@ -429,7 +421,6 @@ type FullWidthCardLayoutProps = {
 	containerLevel: DCRContainerLevel;
 	collectionId: number;
 	isStorylines?: boolean;
-	isInStarRatingVariant?: boolean;
 };
 
 const FullWidthCardLayout = ({
@@ -444,7 +435,6 @@ const FullWidthCardLayout = ({
 	containerLevel,
 	collectionId,
 	isStorylines,
-	isInStarRatingVariant,
 }: FullWidthCardLayoutProps) => {
 	const card = cards[0];
 	if (!card) return null;
@@ -472,7 +462,6 @@ const FullWidthCardLayout = ({
 				imageLoading={imageLoading}
 				collectionId={collectionId}
 				isStorylines={isStorylines}
-				isInStarRatingVariant={isInStarRatingVariant}
 			/>
 		);
 	}
@@ -522,7 +511,6 @@ const FullWidthCardLayout = ({
 					showKickerImage={card.format.design === ArticleDesign.Audio}
 					subtitleSize={subtitleSize}
 					isStorylines={isStorylines}
-					isInStarRatingVariant={isInStarRatingVariant}
 					starRatingSize={'medium'}
 				/>
 			</LI>
@@ -542,7 +530,6 @@ type HalfWidthCardLayoutProps = {
 	isLastRow: boolean;
 	containerLevel: DCRContainerLevel;
 	isStorylines?: boolean;
-	isInStarRatingVariant?: boolean;
 };
 
 const HalfWidthCardLayout = ({
@@ -557,7 +544,6 @@ const HalfWidthCardLayout = ({
 	isLastRow,
 	containerLevel,
 	isStorylines,
-	isInStarRatingVariant,
 }: HalfWidthCardLayoutProps) => {
 	if (cards.length === 0) return null;
 
@@ -613,7 +599,6 @@ const HalfWidthCardLayout = ({
 							headlineSizes={undefined}
 							canPlayInline={false}
 							isStorylines={isStorylines}
-							isInStarRatingVariant={isInStarRatingVariant}
 						/>
 					</LI>
 				);
@@ -632,7 +617,6 @@ export const FlexibleGeneral = ({
 	containerLevel = 'Primary',
 	collectionId,
 	isStorylines = false,
-	isInStarRatingVariant,
 }: Props) => {
 	const splash = [...groupedTrails.splash].slice(0, 1).map((snap) => ({
 		...snap,
@@ -662,7 +646,6 @@ export const FlexibleGeneral = ({
 					containerLevel={containerLevel}
 					collectionId={collectionId}
 					isStorylines={isStorylines}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			)}
 			{groupedCards.map((row, i) => {
@@ -682,7 +665,6 @@ export const FlexibleGeneral = ({
 								containerLevel={containerLevel}
 								collectionId={collectionId}
 								isStorylines={isStorylines}
-								isInStarRatingVariant={isInStarRatingVariant}
 							/>
 						);
 
@@ -703,7 +685,6 @@ export const FlexibleGeneral = ({
 								isLastRow={i === groupedCards.length - 1}
 								containerLevel={containerLevel}
 								isStorylines={isStorylines}
-								isInStarRatingVariant={isInStarRatingVariant}
 							/>
 						);
 				}

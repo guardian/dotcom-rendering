@@ -34,7 +34,6 @@ type Props = {
 	containerPosition: string;
 	isInOnwardsAbTestVariant?: boolean;
 	webURL: string;
-	isInStarRatingVariant?: boolean;
 };
 
 type OnwardsResponse = {
@@ -85,7 +84,6 @@ export const FetchOnwardsData = ({
 	containerPosition,
 	isInOnwardsAbTestVariant,
 	webURL,
-	isInStarRatingVariant,
 }: Props) => {
 	const [hasBeenSeen, setIsInViewRef] = useIsInView({ rootMargin: `-100px` });
 
@@ -166,7 +164,6 @@ export const FetchOnwardsData = ({
 					heading={data.heading || data.displayname}
 					onwardsSource={onwardsSource}
 					format={format}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			) : isInOnwardsAbTestVariant ? (
 				<MoreGalleriesStyleOnwardsContent
@@ -177,7 +174,6 @@ export const FetchOnwardsData = ({
 					})}
 					discussionApiUrl={discussionApiUrl}
 					isAdFreeUser={isAdFreeUser}
-					isInStarRatingVariant={!!isInStarRatingVariant}
 				/>
 			) : (
 				<Carousel
@@ -198,7 +194,6 @@ export const FetchOnwardsData = ({
 					discussionApiUrl={discussionApiUrl}
 					serverTime={serverTime}
 					renderingTarget={renderingTarget}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			)}
 		</div>

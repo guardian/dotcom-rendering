@@ -16,7 +16,6 @@ type Props = {
 	serverTime?: number;
 	aspectRatio: AspectRatio;
 	collectionId: number;
-	isInStarRatingVariant?: boolean;
 };
 
 /**
@@ -32,7 +31,6 @@ export const StaticFeatureTwo = ({
 	imageLoading,
 	aspectRatio,
 	collectionId,
-	isInStarRatingVariant,
 }: Props) => {
 	const cards = trails.slice(0, 2);
 	return (
@@ -80,7 +78,6 @@ export const StaticFeatureTwo = ({
 							uniqueId={`collection-${collectionId}-feature-${index}`}
 							isNewsletter={card.isNewsletter}
 							showQuotes={card.showQuotedHeadline}
-							isInStarRatingVariant={isInStarRatingVariant}
 							starRatingSize={'medium'}
 						/>
 					</LI>
