@@ -125,7 +125,7 @@ const buildBrazeBannersSystemConfig = (
 ): CandidateConfig<any> => {
 	return {
 		candidate: {
-			id: 'braze-banners-system',
+			id: 'braze-banners-system_SlotBodyEnd',
 			canShow: () => {
 				return canShowBrazeBannersSystem(
 					braze,
