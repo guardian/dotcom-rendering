@@ -2543,8 +2543,18 @@
                     "type": "string"
                 },
                 "linkType": {
-                    "type": "string",
-                    "const": "ProductButton"
+                    "enum": [
+                        "ProductButton",
+                        "StandardButton"
+                    ],
+                    "type": "string"
+                },
+                "priority": {
+                    "enum": [
+                        "Primary",
+                        "Tertiary"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [

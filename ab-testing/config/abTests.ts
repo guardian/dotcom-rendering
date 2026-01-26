@@ -70,6 +70,18 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
+	{
+		name: "webex-football-redesign",
+		description: "Testing the Redesign for the football pages",
+		owners: ["dotcom.platform@theguardian.com"],
+		expirationDate: `2026-02-28`,
+		type: "server",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");

@@ -11,6 +11,7 @@ import {
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { useState } from 'react';
+import { submitComponentEvent } from '../client/ophan/ophan';
 import type { EditionId } from '../lib/edition';
 import { parseStorylinesContentToStorylines } from '../model/enhanceTagPageStorylinesContent';
 import { palette } from '../palette';
@@ -24,7 +25,7 @@ type StorylinesSectionProps = {
 	index: number;
 	containerId?: string;
 	editionId: EditionId;
-	storylinesContent?: StorylinesContent;
+	storylinesContent: StorylinesContent;
 	pillar?: string;
 };
 
@@ -192,14 +193,13 @@ export const StorylinesSectionContent = ({
 	pillar,
 }: StorylinesSectionProps) => {
 	const parsedStorylines =
-		storylinesContent &&
 		parseStorylinesContentToStorylines(storylinesContent);
 
 	const [activeStorylineId, setActiveStorylineId] = useState<string>(
-		parsedStorylines?.[0]?.id ?? '',
+		parsedStorylines[0]?.id ?? '',
 	);
 
-	if (!parsedStorylines || parsedStorylines.length === 0) {
+	if (!parsedStorylines[0]) {
 		return null;
 	}
 
@@ -210,6 +210,22 @@ export const StorylinesSectionContent = ({
 	const selectedStorylineColour = setSelectedStorylineColour(pillar);
 
 	const categoryColour = setCategoryColour(pillar);
+
+	function handleStorylineChange(newStorylineId: string) {
+		const currentId = activeStorylineId;
+		setActiveStorylineId(newStorylineId);
+		void submitComponentEvent(
+			{
+				component: {
+					componentType: 'STORYLINES',
+					id: `${storylinesContent.tag} storylines`,
+				},
+				action: 'CLICK',
+				value: `${currentId} -> ${newStorylineId}`,
+			},
+			'Web',
+		);
+	}
 
 	return (
 		<>
@@ -244,7 +260,7 @@ export const StorylinesSectionContent = ({
 									i === 0,
 								)}
 								onClick={() =>
-									setActiveStorylineId(storyline.id)
+									handleStorylineChange(storyline.id)
 								}
 								type="button"
 							>

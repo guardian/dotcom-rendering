@@ -22,30 +22,17 @@ import { SubtitleOverlay } from './SubtitleOverlay';
 import { VideoProgressBar } from './VideoProgressBar';
 
 export type SubtitleSize = 'small' | 'medium' | 'large';
+export type ControlsPosition = 'top' | 'bottom';
 
-const videoStyles = (
-	aspectRatio: number,
-	letterboxed: boolean,
-	isFeatureCard: boolean,
-) => css`
+const videoStyles = (aspectRatio: number) => css`
 	position: relative;
 	display: block;
 	height: auto;
 	width: 100%;
-	${letterboxed &&
-	css`
-		max-height: 100vh;
-		max-height: 100svh;
-	`}
 	cursor: pointer;
 
 	/* Prevents CLS by letting the browser know the space the video will take up. */
 	aspect-ratio: ${aspectRatio};
-
-	${isFeatureCard &&
-	css`
-		object-fit: cover;
-	`}
 `;
 
 const subtitleStyles = (subtitleSize: SubtitleSize | undefined) => css`
@@ -71,15 +58,17 @@ const playIconStyles = css`
 	padding: 0;
 `;
 
-const audioButtonStyles = css`
+const audioButtonStyles = (position: ControlsPosition) => css`
 	border: none;
 	background: none;
 	padding: 0;
 	position: absolute;
-	/* Take into account the progress bar height */
-	bottom: ${space[3]}px;
-	right: ${space[2]}px;
 	cursor: pointer;
+
+	right: ${space[2]}px;
+	/* Take into account the progress bar height */
+	${position === 'bottom' && `bottom: ${space[3]}px;`}
+	${position === 'top' && `top: ${space[2]}px;`}
 `;
 
 const audioIconContainerStyles = css`
@@ -126,6 +115,7 @@ type Props = {
 	handleLoadedMetadata: (event: SyntheticEvent) => void;
 	handleLoadedData: (event: SyntheticEvent) => void;
 	handleCanPlay: (event: SyntheticEvent) => void;
+	handlePlaying: (event: SyntheticEvent) => void;
 	handlePlayPauseClick: (event: SyntheticEvent) => void;
 	handleAudioClick: (event: SyntheticEvent) => void;
 	handleKeyDown: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
@@ -135,23 +125,21 @@ type Props = {
 	posterImage?: string;
 	preloadPartialData: boolean;
 	showPlayIcon: boolean;
+	showProgressBar: boolean;
 	subtitleSource?: string;
 	subtitleSize?: SubtitleSize;
+	controlsPosition: ControlsPosition;
 	/* used in custom subtitle overlays */
 	activeCue?: ActiveCue | null;
-	letterboxed: boolean;
-	isFeatureCard: boolean;
 };
 
 /**
  * Note that in React 19, forwardRef is no longer necessary:
  * https://react.dev/reference/react/forwardRef
- */
-/**
- * NB: To develop the video player locally, use `https://r.thegulocal.com/` instead of `localhost`.
+ *
+ * NB: When DEVELOPING LOCALLY, use `https://r.thegulocal.com/` instead of `localhost`.
  * This is required because CORS restrictions prevent accessing the subtitles and video file from localhost.
  */
-
 export const SelfHostedVideoPlayer = forwardRef(
 	(
 		{
@@ -171,6 +159,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			handleLoadedMetadata,
 			handleLoadedData,
 			handleCanPlay,
+			handlePlaying,
 			handlePlayPauseClick,
 			handleAudioClick,
 			handleKeyDown,
@@ -179,11 +168,11 @@ export const SelfHostedVideoPlayer = forwardRef(
 			AudioIcon,
 			preloadPartialData,
 			showPlayIcon,
+			showProgressBar,
 			subtitleSource,
 			subtitleSize,
+			controlsPosition,
 			activeCue,
-			letterboxed,
-			isFeatureCard,
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
@@ -210,7 +199,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 				<video
 					id={videoId}
 					css={[
-						videoStyles(aspectRatio, letterboxed, isFeatureCard),
+						videoStyles(aspectRatio),
 						showSubtitles && subtitleStyles(subtitleSize),
 					]}
 					crossOrigin="anonymous"
@@ -230,6 +219,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					onLoadedData={handleLoadedData}
 					onCanPlay={handleCanPlay}
 					onCanPlayThrough={handleCanPlay}
+					onPlaying={handlePlaying}
 					onTimeUpdate={() => {
 						if (
 							ref &&
@@ -267,12 +257,12 @@ export const SelfHostedVideoPlayer = forwardRef(
 				{showSubtitles && !!activeCue?.text && (
 					<SubtitleOverlay
 						text={activeCue.text}
-						subtitleSize={subtitleSize}
+						size={subtitleSize}
+						position={controlsPosition}
 					/>
 				)}
 				{showControls && (
 					<>
-						{/* Play icon */}
 						{showPlayIcon && (
 							<button
 								type="button"
@@ -284,18 +274,18 @@ export const SelfHostedVideoPlayer = forwardRef(
 								<PlayIcon iconWidth="narrow" />
 							</button>
 						)}
-						{/* Progress bar */}
-						<VideoProgressBar
-							videoId={videoId}
-							currentTime={currentTime}
-							duration={ref.current!.duration}
-						/>
-						{/* Audio icon */}
+						{showProgressBar && (
+							<VideoProgressBar
+								videoId={videoId}
+								currentTime={currentTime}
+								duration={ref.current!.duration}
+							/>
+						)}
 						{AudioIcon && (
 							<button
 								type="button"
 								onClick={handleAudioClick}
-								css={audioButtonStyles}
+								css={audioButtonStyles(controlsPosition)}
 								data-link-name={`gu-video-loop-${
 									isMuted ? 'unmute' : 'mute'
 								}-${atomId}`}

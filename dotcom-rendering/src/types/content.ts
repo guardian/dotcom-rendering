@@ -398,7 +398,8 @@ export interface LinkBlockElement {
 	_type: 'model.dotcomrendering.pageElements.LinkBlockElement';
 	url: string;
 	label: string;
-	linkType: 'ProductButton';
+	linkType: 'ProductButton' | 'StandardButton';
+	priority?: 'Primary' | 'Tertiary';
 }
 
 export interface ListBlockElement {

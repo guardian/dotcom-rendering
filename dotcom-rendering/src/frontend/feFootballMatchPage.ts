@@ -1,4 +1,5 @@
 import type { FEFootballDataPage } from './feFootballDataPage';
+import { type FEGroupSummary } from './feFootballTablesPage';
 
 export type FEFootballPlayerEvent = {
 	eventTime: string;
@@ -42,4 +43,5 @@ export type FEFootballMatch = {
 
 export type FEFootballMatchPage = FEFootballDataPage & {
 	footballMatch: FEFootballMatch;
+	group?: FEGroupSummary;
 };

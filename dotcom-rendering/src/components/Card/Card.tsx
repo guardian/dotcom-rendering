@@ -783,6 +783,7 @@ export const Card = ({
 						isBetaContainer && isMediaCardOrNewsletter
 					}
 					isStorylines={true}
+					dataLinkName={dataLinkName}
 				/>
 			) : (
 				<SupportingContent
@@ -830,6 +831,7 @@ export const Card = ({
 						containerPalette={containerPalette}
 						fillBackgroundOnMobile={isFlexSplash}
 						isStorylines={true}
+						dataLinkName={dataLinkName}
 					/>
 				) : (
 					<SupportingContent
@@ -1070,7 +1072,6 @@ export const Card = ({
 									width={media.mainMedia.width}
 									videoStyle={media.mainMedia.videoStyle}
 									posterImage={media.mainMedia.image ?? ''}
-									containerAspectRatio={5 / 4}
 									fallbackImage={media.mainMedia.image ?? ''}
 									fallbackImageSize={mediaSize}
 									fallbackImageLoading={imageLoading}
@@ -1081,7 +1082,8 @@ export const Card = ({
 										media.mainMedia.subtitleSource
 									}
 									subtitleSize={subtitleSize}
-									letterboxed={true}
+									minAspectRatio={4 / 5}
+									containerAspectRatioDesktop={5 / 4}
 								/>
 							</Island>
 						)}
@@ -1342,9 +1344,12 @@ export const Card = ({
 								<>
 									{showPill ? (
 										<>
-											{!!branding && isOnwardContent && (
-												<LabsBranding />
-											)}
+											{!!branding &&
+												format.theme ===
+													ArticleSpecial.Labs &&
+												isOnwardContent && (
+													<LabsBranding />
+												)}
 											<MediaOrNewsletterPill />
 										</>
 									) : (

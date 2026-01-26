@@ -3,7 +3,7 @@ import type {
 	FootballMatchStats,
 	FootballMatchTeamWithStats,
 } from '../footballMatchStats';
-import type { FootballTable as FootballTableData } from '../footballTables';
+import type { FootballTableSummary } from '../footballTables';
 import {
 	FootballMatchGoalAttempts,
 	FootballMatchStat,
@@ -13,7 +13,7 @@ import { Lineups } from './Lineups';
 
 type Props = {
 	match: FootballMatchStats;
-	table?: FootballTableData;
+	table?: FootballTableSummary;
 };
 
 const layoutCss = css`
@@ -46,7 +46,7 @@ export const FootballMatchInfo = ({ match, table }: Props) => {
 			{showStats && (
 				<>
 					<FootballMatchStat
-						label="Possession"
+						heading="Possession"
 						homeTeam={{
 							name: match.homeTeam.name,
 							colour: match.homeTeam.statsColour,
@@ -78,7 +78,7 @@ export const FootballMatchInfo = ({ match, table }: Props) => {
 						}}
 					/>
 					<FootballMatchStat
-						label="Corners"
+						heading="Corners"
 						homeTeam={{
 							name: match.homeTeam.name,
 							colour: match.homeTeam.statsColour,
@@ -91,7 +91,7 @@ export const FootballMatchInfo = ({ match, table }: Props) => {
 						awayValue={match.awayTeam.corners}
 					/>
 					<FootballMatchStat
-						label="Fouls"
+						heading="Fouls"
 						homeTeam={{
 							name: match.homeTeam.name,
 							colour: match.homeTeam.statsColour,
