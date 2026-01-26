@@ -1,11 +1,11 @@
 import type { Banner } from '@braze/web-sdk';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import type { TagType } from '../../types/tag';
 import { getOptionsHeaders } from '../identity';
 import type { CanShowResult } from '../messagePicker';
 import { useAuthStatus } from '../useAuthStatus';
 import type { BrazeInstance } from './initialiseBraze';
 import { suppressForTaylorReport } from './taylorReport';
-import { TagType } from '../../types/tag';
 
 /**
  * Logger prefix for Braze Banners System logs.
@@ -132,7 +132,10 @@ export const canShowBrazeBannersSystem = async (
 	}
 
 	// Do not show banners on Interactive articles
-	if (contentType.toLowerCase() === 'interactive') {
+	if (
+		placementId === BrazeBannersSystemPlacementId.EndOfArticle &&
+		contentType.toLowerCase() === 'interactive'
+	) {
 		return { show: false };
 	}
 
@@ -293,12 +296,12 @@ export const BrazeBannersSystemDisplay = ({
 				}
 				return '';
 			};
-			Object.keys(meta.banner.properties).forEach((propertyKey) => {
+			for (const propertyKey of Object.keys(meta.banner.properties)) {
 				meta.banner.html = meta.banner.html.replaceAll(
 					`{{settings.${propertyKey}}}`,
 					getPropertyValue(propertyKey),
 				);
-			});
+			}
 
 			// Let Braze inject the HTML/CSS
 			meta.braze.insertBanner(meta.banner, containerRef.current);
