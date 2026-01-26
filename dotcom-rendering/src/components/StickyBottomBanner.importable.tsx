@@ -241,15 +241,15 @@ const buildBrazeBanner = (
 });
 
 /**
- * Build the Braze Banners System Epic Config
+ * Build the Braze Banners System Config
  * @param braze The Braze instance
  * @param idApiUrl Identity API URL for newsletter subscriptions
  * @param contentType Content type of the article
  * @param shouldHideReaderRevenue Whether to hide reader revenue components
  * @param tags Tags associated with the article
- * @returns CandidateConfig for the Braze Banners System Epic
+ * @returns CandidateConfig for the Braze Banners System
  */
-const buildBrazeBannersSystemEpicConfig = (
+const buildBrazeBannersSystemConfig = (
 	braze: BrazeInstance | null,
 	idApiUrl: string,
 	contentType: string,
@@ -369,7 +369,7 @@ export const StickyBottomBanner = ({
 			tags,
 			shouldHideReaderRevenue,
 		);
-		const brazeBannersSystemEpic = buildBrazeBannersSystemEpicConfig(
+		const brazeBannersSystem = buildBrazeBannersSystemConfig(
 			braze,
 			idApiUrl,
 			contentType,
@@ -404,12 +404,12 @@ export const StickyBottomBanner = ({
 		if (hasForceBannerParam) {
 			candidates = [CMP, readerRevenue];
 		} else if (hasForceBrazeMessageParam) {
-			candidates = [CMP, brazeBannersSystemEpic, brazeBanner];
+			candidates = [CMP, brazeBannersSystem, brazeBanner];
 		} else {
 			candidates = [
 				CMP,
 				signInGate,
-				brazeBannersSystemEpic,
+				brazeBannersSystem,
 				brazeBanner,
 				readerRevenue,
 			];
