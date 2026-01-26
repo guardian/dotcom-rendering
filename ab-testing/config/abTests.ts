@@ -71,6 +71,18 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
+		name: "fronts-and-curation-personalised-container",
+		description: "Testing the a personalised container component on fronts",
+		owners: ["fronts.and.curation@guardian.co.uk"],
+		expirationDate: `2026-02-22`,
+		type: "server",
+		status: "OFF",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
+	{
 		name: "webex-football-redesign",
 		description: "Testing the Redesign for the football pages",
 		owners: ["dotcom.platform@theguardian.com"],
