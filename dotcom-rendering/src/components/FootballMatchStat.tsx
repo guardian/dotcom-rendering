@@ -34,9 +34,7 @@ const containerCss = css`
 		width: 1px;
 		height: calc(100% - 25px);
 		background-color: ${palette('--football-match-stat-border')};
-	}
-	${from.desktop} {
-		&::before {
+		${from.desktop} {
 			height: calc(100% - 27px);
 		}
 	}
