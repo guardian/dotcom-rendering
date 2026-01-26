@@ -10,8 +10,8 @@ import {
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import type { ProductBlockElement } from '../types/content';
+import { ProductLinkButton } from './Button/ProductLinkButton';
 import { ProductCardImage } from './ProductCardImage';
-import { ProductLinkButton } from './ProductLinkButton';
 
 const horizontalCard = css`
 	position: relative;

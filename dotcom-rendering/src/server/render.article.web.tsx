@@ -6,6 +6,7 @@ import {
 	ArticleDesign,
 	type ArticleFormat,
 	decideFormat,
+	getArticleThemeString,
 	Pillar,
 } from '../lib/articleFormat';
 import {
@@ -166,8 +167,17 @@ window.twttr = (function(d, s, id) {
 
 	const { canonicalUrl, webPublicationDate } = frontendData;
 
-	const isBeforeInteractiveDarkModeSupport =
-		Date.parse(webPublicationDate) < Date.parse('2026-01-13T00:00:00Z');
+	const isInteractive =
+		design === ArticleDesign.FullPageInteractive ||
+		design === ArticleDesign.Interactive;
+
+	const onlyLightColourScheme =
+		isInteractive &&
+		(!config.darkModeAvailable ||
+			Date.parse(webPublicationDate) <
+				Date.parse('2026-01-13T00:00:00Z'));
+
+	const maybeArticleThemeString = getArticleThemeString(theme);
 
 	const pageHtml = htmlPageTemplate({
 		linkedData,
@@ -190,11 +200,14 @@ window.twttr = (function(d, s, id) {
 		config,
 		hasLiveBlogTopAd: !!frontendData.config.hasLiveBlogTopAd,
 		hasSurveyAd: !!frontendData.config.hasSurveyAd,
-		onlyLightColourScheme:
-			(design === ArticleDesign.FullPageInteractive ||
-				design === ArticleDesign.Interactive) &&
-			isBeforeInteractiveDarkModeSupport,
-		articleTheme: theme,
+		dataAttributes: {
+			...(maybeArticleThemeString && {
+				'article-theme': maybeArticleThemeString,
+			}),
+			...(onlyLightColourScheme && {
+				'color-scheme': 'light',
+			}),
+		},
 	});
 
 	return { html: pageHtml, prefetchScripts };
