@@ -1,6 +1,9 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { footballTeams } from '../../fixtures/manual/footballTeams';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { palette } from '../palette';
 import { FootballMatchStat } from './FootballMatchStat';
 
@@ -20,6 +23,13 @@ const meta = {
 				<Story />
 			</div>
 		),
+		splitTheme([
+			{
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.News,
+			},
+		]),
 	],
 	parameters: {
 		viewport: {
@@ -68,5 +78,35 @@ export const CompactLayout = {
 	args: {
 		...Default.args,
 		layout: 'compact',
+	},
+} satisfies Story;
+
+export const TeamColours = {
+	render: (args) => (
+		<div
+			css={css`
+				display: flex;
+				flex-direction: column;
+				gap: ${space[2]}px;
+			`}
+		>
+			{footballTeams.map((match, index) => (
+				<FootballMatchStat
+					{...args}
+					homeTeam={{
+						name: match.home.name,
+						colour: match.home.colour,
+					}}
+					awayTeam={{
+						name: match.away.name,
+						colour: match.away.colour,
+					}}
+					key={index}
+				/>
+			))}
+		</div>
+	),
+	args: {
+		...ShownAsPercentage.args,
 	},
 } satisfies Story;
