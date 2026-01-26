@@ -269,36 +269,36 @@ export const BrazeBannersSystemDisplay = ({
 			// Replace Settings Placeholders
 			const getPropertyValue = (propertyKey: string): string => {
 				if (meta.banner.properties[propertyKey]?.type === 'string') {
-					return meta.banner.properties[propertyKey]?.value;
+					return meta.banner.getStringProperty(propertyKey) || '';
 				}
 				if (meta.banner.properties[propertyKey]?.type === 'number') {
-					return String(meta.banner.properties[propertyKey]?.value);
+					return String(meta.banner.getNumberProperty(propertyKey));
 				}
 				if (meta.banner.properties[propertyKey]?.type === 'boolean') {
-					return String(meta.banner.properties[propertyKey]?.value);
+					return String(meta.banner.getBooleanProperty(propertyKey));
 				}
 				if (meta.banner.properties[propertyKey]?.type === 'image') {
-					return meta.banner.properties[propertyKey]?.value;
+					return meta.banner.getImageProperty(propertyKey) || '';
 				}
 				if (
 					meta.banner.properties[propertyKey]?.type === 'jsonobject'
 				) {
 					return JSON.stringify(
-						meta.banner.properties[propertyKey]?.value,
+						meta.banner.getJsonProperty(propertyKey),
 						null,
 						2,
 					);
 				}
 				if (meta.banner.properties[propertyKey]?.type === 'datetime') {
 					return new Date(
-						meta.banner.properties[propertyKey]?.value,
+						meta.banner.getTimestampProperty(propertyKey) || 0,
 					).toISOString();
 				}
 				return '';
 			};
 			for (const propertyKey of Object.keys(meta.banner.properties)) {
 				meta.banner.html = meta.banner.html.replaceAll(
-					`{{settings.${propertyKey}}}`,
+					`##settings.${propertyKey}##`,
 					getPropertyValue(propertyKey),
 				);
 			}
