@@ -7,14 +7,11 @@ import {
 	textSansBold14,
 	textSansBold15,
 } from '@guardian/source/foundations';
-import type {
-	Entry,
-	FootballTable as FootballTableData,
-} from '../footballTables';
+import type { EntrySummary, FootballTableSummary } from '../footballTables';
 import { palette } from '../palette';
 
 type Props = {
-	table: FootballTableData;
+	table: FootballTableSummary;
 };
 
 export const LeagueTable = ({ table }: Props) => {
@@ -43,7 +40,7 @@ const Title = ({ text }: { text: string }) => (
 	</h3>
 );
 
-const Table = ({ table }: { table: FootballTableData }) => {
+const Table = ({ table }: { table: FootballTableSummary }) => {
 	return (
 		<table
 			css={css`
@@ -78,7 +75,7 @@ const Table = ({ table }: { table: FootballTableData }) => {
 	);
 };
 
-const TableRow = ({ entry }: { entry: Entry }) => {
+const TableRow = ({ entry }: { entry: EntrySummary }) => {
 	return (
 		<tr css={[gridContainer, tableRowStyles]}>
 			<th scope="row" css={[between('pos', 'team'), position]}>
