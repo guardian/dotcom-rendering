@@ -1,12 +1,18 @@
-import { writable } from "svelte/store";
-import { browser } from "$app/environment";
+import { page } from "$app/state";
 
-// Start with production URL
-export const hostname = writable("https://www.theguardian.com");
+export function getHostname(): string {
+	const url = page.url.href;
 
-// Update on client side only
-if (browser) {
-	if (window.location.href.includes("CODE/admin")) {
-		hostname.set("https://m.code.dev-theguardian.com");
+	console.log("Checking URL:", url);
+	console.log("Checking Hostname:", page.url.hostname);
+
+	// Check for CODE environment
+	if (
+		url.includes("frontend.code.dev-gutools.co.uk") ||
+		page.url.hostname.includes("code.dev-gutools.co.uk")
+	) {
+		return "https://m.code.dev-theguardian.com";
 	}
+
+	return "https://www.theguardian.com";
 }
