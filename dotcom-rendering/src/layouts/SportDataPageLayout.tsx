@@ -14,6 +14,7 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
+import { useBetaAB } from '../lib/useAB';
 import type { SportDataPage } from '../sportDataPage';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -28,8 +29,10 @@ const SportsPage = ({
 	sportData: SportDataPage;
 	renderAds: boolean;
 }) => {
-	const isFootballRedesignVariant =
-		sportData.config.abTests.starRatingRedesignVariant === 'variant';
+	const abTests = useBetaAB();
+	const isInControlGroup =
+		abTests?.isUserInTestGroup('webex-football-redesign', 'variant') ??
+		false;
 
 	switch (sportData.kind) {
 		case 'FootballFixtures':
@@ -71,7 +74,7 @@ const SportsPage = ({
 				/>
 			);
 		case 'FootballMatchSummary': {
-			if (isFootballRedesignVariant) {
+			if (isInControlGroup) {
 				return (
 					<FootballMatchInfo
 						match={sportData.matchV2}
