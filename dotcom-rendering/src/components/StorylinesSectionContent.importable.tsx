@@ -19,6 +19,8 @@ import type { StorylinesContent } from '../types/storylinesContent';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { ScrollableCarousel } from './ScrollableCarousel';
 import { StorylinesSection } from './StorylinesSection';
+import { TagPagePagination } from '../types/tagPage';
+import { Footer } from './ExpandableAtom/Footer';
 
 type StorylinesSectionProps = {
 	url?: string;
@@ -27,6 +29,9 @@ type StorylinesSectionProps = {
 	editionId: EditionId;
 	storylinesContent: StorylinesContent;
 	pillar?: string;
+	pagination?: TagPagePagination;
+	likeHandler?: () => void;
+	dislikeHandler?: () => void;
 };
 
 // AIStorylines: this would be better handled in paletteDeclarations by creating a new css variable if we keep this feature.
@@ -111,6 +116,7 @@ const tabStyles = (isActive: boolean, isFirst: boolean) => css`
 	cursor: pointer;
 	border: none;
 	${!isFirst && `border-left: 1px ${sourcePalette.neutral[86]} solid;`}
+	background-color: ${sourcePalette.neutral[93]};
 	color: ${isActive
 		? `${sourcePalette.neutral[60]}`
 		: `${sourcePalette.neutral[38]}`};
@@ -191,6 +197,9 @@ export const StorylinesSectionContent = ({
 	storylinesContent,
 	editionId,
 	pillar,
+	pagination,
+	dislikeHandler,
+	likeHandler,
 }: StorylinesSectionProps) => {
 	const parsedStorylines =
 		parseStorylinesContentToStorylines(storylinesContent);
@@ -241,6 +250,7 @@ export const StorylinesSectionContent = ({
 				ophanComponentLink={`container | ${containerId}`}
 				ophanComponentName={containerId}
 				editionId={editionId}
+				pagination={pagination}
 			>
 				{/* Storylines tab selector. This is a carousel on mobile. */}
 				<div css={tabsContainerStyles}>
@@ -322,6 +332,52 @@ export const StorylinesSectionContent = ({
 						storylinesContent.latestArticleTime,
 					)}. Some articles may be older to provide further context.`}
 				</div>
+
+				<Hide from="leftCol">
+					<div
+						css={css`
+							margin-top: ${space[1]}px;
+							padding-bottom: ${space[4]}px;
+							display: flex;
+							justify-content: end;
+						`}
+					>
+						<Footer
+							dislikeHandler={
+								dislikeHandler ??
+								(() =>
+									submitComponentEvent(
+										{
+											component: {
+												componentType: 'STORYLINES',
+												id: 'storylines-section',
+												products: [],
+												labels: [],
+											},
+											action: 'DISLIKE',
+										},
+										'Web',
+									))
+							}
+							likeHandler={
+								likeHandler ??
+								(() =>
+									submitComponentEvent(
+										{
+											component: {
+												componentType: 'STORYLINES',
+												id: 'storylines-section',
+												products: [],
+												labels: [],
+											},
+											action: 'LIKE',
+										},
+										'Web',
+									))
+							}
+						></Footer>
+					</div>
+				</Hide>
 			</StorylinesSection>
 		</>
 	);
