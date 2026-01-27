@@ -113,7 +113,7 @@ describe('insertCarouselPlaceholder', () => {
 			]),
 		];
 
-		const output = insertCarouselPlaceholder(input);
+		const output = insertCarouselPlaceholder(input, 'carousel');
 
 		const carousel = findCarousel(output);
 		expect(carousel).toBeDefined();
@@ -130,7 +130,7 @@ describe('insertCarouselPlaceholder', () => {
 			]),
 		];
 
-		const output = insertCarouselPlaceholder(input);
+		const output = insertCarouselPlaceholder(input, 'carousel');
 
 		const carousel = findCarousel(output);
 		expect(carousel).toBeUndefined();
@@ -159,7 +159,7 @@ describe('insertCarouselPlaceholder – edge cases', () => {
 			]),
 		];
 
-		const output = insertCarouselPlaceholder(input);
+		const output = insertCarouselPlaceholder(input, 'carousel');
 		const carousel = findCarousel(output);
 		expect(carousel).toBeUndefined();
 	});
@@ -174,14 +174,14 @@ describe('insertCarouselPlaceholder – edge cases', () => {
 			]),
 		];
 
-		const output = insertCarouselPlaceholder(input);
+		const output = insertCarouselPlaceholder(input, 'carousel');
 
 		const carousel = findCarousel(output);
 		expect(carousel).toBeUndefined();
 	});
 
 	it('returns an empty array for empty input', () => {
-		expect(insertCarouselPlaceholder([])).toEqual([]);
+		expect(insertCarouselPlaceholder([], 'carousel')).toEqual([]);
 	});
 });
 
