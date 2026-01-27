@@ -83,9 +83,8 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "commercial-force-article-body-adverts",
-		description:
-			"Force displaying adverts within the article body, for testing on Interactive articles",
+		name: "commercial-enable-spacefinder-on-interactives",
+		description: "Enable spacefinder on interactive articles on mobile web",
 		owners: ["commercial.dev@guardian.co.uk"],
 		expirationDate: `2026-02-28`,
 		type: "client",
