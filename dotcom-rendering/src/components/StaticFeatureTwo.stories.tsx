@@ -4,10 +4,10 @@ import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
 	audioTrails,
 	galleryTrails,
-	selfHostedVideo45Card,
-	selfHostedVideo53Card,
-	selfHostedVideo54Card,
-	selfHostedVideo916Card,
+	selfHostedLoopVideo45Card,
+	selfHostedLoopVideo53Card,
+	selfHostedLoopVideo54Card,
+	selfHostedLoopVideo916Card,
 	trails,
 	youtubeVideoTrails,
 } from '../../fixtures/manual/trails';
@@ -111,22 +111,52 @@ export const SelfHostedVideo = {
 			<>
 				<Section
 					title="Video the same aspect ratio as container"
-					videos={[selfHostedVideo45Card, selfHostedVideo45Card]}
+					videos={[
+						selfHostedLoopVideo45Card,
+						{
+							...selfHostedLoopVideo45Card,
+							headline: 'Self-hosted 4:5 cinemagraph video card',
+							mainMedia: {
+								...selfHostedLoopVideo45Card.mainMedia,
+								videoStyle: 'Cinemagraph',
+							},
+						},
+					]}
 				/>
 				<Section
 					title="Video taller than the container"
-					videos={[selfHostedVideo916Card, selfHostedVideo916Card]}
+					videos={[
+						selfHostedLoopVideo916Card,
+						{
+							...selfHostedLoopVideo916Card,
+							headline: 'Self-hosted 9:16 cinemagraph video card',
+							mainMedia: {
+								...selfHostedLoopVideo916Card.mainMedia,
+								videoStyle: 'Cinemagraph',
+							},
+						},
+					]}
 				/>
 				<Section
 					title="Video wider than the container"
-					videos={[selfHostedVideo54Card, selfHostedVideo53Card]}
+					videos={[
+						selfHostedLoopVideo54Card,
+						{
+							...selfHostedLoopVideo53Card,
+							headline: 'Self-hosted 5:3 cinemagraph video card',
+							mainMedia: {
+								...selfHostedLoopVideo53Card.mainMedia,
+								videoStyle: 'Cinemagraph',
+							},
+						},
+					]}
 				/>
 			</>
 		);
 	},
 	args: {
 		...Default,
-		trails: [selfHostedVideo45Card],
+		trails: [selfHostedLoopVideo45Card],
 	},
 	parameters: {
 		chromatic: {

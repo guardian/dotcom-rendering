@@ -648,11 +648,11 @@ export const newsletterTrails: [DCRFrontCard, DCRFrontCard] = [
 	},
 ];
 
-export const selfHostedVideo54Card = {
+export const selfHostedLoopVideo54Card = {
 	...defaultCardProps,
 	dataLinkName: 'news | group-0 | card-@2',
 	url: '/uk-news/2025/jan/22/prince-harry-says-sun-publisher-made-historic-admission-as-he-settles-case',
-	headline: 'Self-hosted 5:4 video card',
+	headline: 'Self-hosted 5:4 loop video card',
 	trailText: 'Trail text for looping video card',
 	mainMedia: {
 		type: 'SelfHostedVideo',
@@ -676,11 +676,11 @@ export const selfHostedVideo54Card = {
 	showVideo: true,
 } satisfies DCRFrontCard;
 
-export const selfHostedVideo45Card = {
-	...selfHostedVideo54Card,
-	headline: 'Self-hosted 4:5 video card',
+export const selfHostedLoopVideo45Card = {
+	...selfHostedLoopVideo54Card,
+	headline: 'Self-hosted 4:5 loop video card',
 	mainMedia: {
-		...selfHostedVideo54Card.mainMedia,
+		...selfHostedLoopVideo54Card.mainMedia,
 		sources: [
 			{
 				mimeType: 'video/mp4',
@@ -692,11 +692,11 @@ export const selfHostedVideo45Card = {
 	},
 } satisfies DCRFrontCard;
 
-export const selfHostedVideo53Card = {
-	...selfHostedVideo54Card,
-	headline: 'Self-hosted 5:3 video card',
+export const selfHostedLoopVideo53Card = {
+	...selfHostedLoopVideo54Card,
+	headline: 'Self-hosted 5:3 loop video card',
 	mainMedia: {
-		...selfHostedVideo54Card.mainMedia,
+		...selfHostedLoopVideo54Card.mainMedia,
 		sources: [
 			{
 				mimeType: 'video/mp4',
@@ -708,11 +708,11 @@ export const selfHostedVideo53Card = {
 	},
 } satisfies DCRFrontCard;
 
-export const selfHostedVideo916Card = {
-	...selfHostedVideo54Card,
-	headline: 'Self-hosted 9:16 video card',
+export const selfHostedLoopVideo916Card = {
+	...selfHostedLoopVideo54Card,
+	headline: 'Self-hosted 9:16 loop video card',
 	mainMedia: {
-		...selfHostedVideo54Card.mainMedia,
+		...selfHostedLoopVideo54Card.mainMedia,
 		sources: [
 			{
 				mimeType: 'video/mp4',
@@ -724,11 +724,11 @@ export const selfHostedVideo916Card = {
 	},
 } satisfies DCRFrontCard;
 
-export const selfHostedVideo169Card = {
-	...selfHostedVideo54Card,
-	headline: 'Self-hosted 16:9 video card',
+export const selfHostedLoopVideo169Card = {
+	...selfHostedLoopVideo54Card,
+	headline: 'Self-hosted 16:9 loop video card',
 	mainMedia: {
-		...selfHostedVideo54Card.mainMedia,
+		...selfHostedLoopVideo54Card.mainMedia,
 		sources: [
 			{
 				mimeType: 'video/mp4',
