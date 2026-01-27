@@ -269,7 +269,7 @@ export const BrazeBannersSystemDisplay = ({
 			// Replace Settings Placeholders
 			const getPropertyValue = (propertyKey: string): string => {
 				if (meta.banner.properties[propertyKey]?.type === 'string') {
-					return meta.banner.getStringProperty(propertyKey) || '';
+					return meta.banner.getStringProperty(propertyKey) ?? '';
 				}
 				if (meta.banner.properties[propertyKey]?.type === 'number') {
 					return String(meta.banner.getNumberProperty(propertyKey));
@@ -278,7 +278,7 @@ export const BrazeBannersSystemDisplay = ({
 					return String(meta.banner.getBooleanProperty(propertyKey));
 				}
 				if (meta.banner.properties[propertyKey]?.type === 'image') {
-					return meta.banner.getImageProperty(propertyKey) || '';
+					return meta.banner.getImageProperty(propertyKey) ?? '';
 				}
 				if (
 					meta.banner.properties[propertyKey]?.type === 'jsonobject'
@@ -291,7 +291,7 @@ export const BrazeBannersSystemDisplay = ({
 				}
 				if (meta.banner.properties[propertyKey]?.type === 'datetime') {
 					return new Date(
-						meta.banner.getTimestampProperty(propertyKey) || 0,
+						meta.banner.getTimestampProperty(propertyKey) ?? 0,
 					).toISOString();
 				}
 				return '';
