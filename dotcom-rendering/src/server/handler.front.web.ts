@@ -59,7 +59,7 @@ const enhanceFront = (body: unknown): Front => {
 
 	const personalisedContainerPosition =
 		data.pressedPage.collections.findIndex(
-			(c) => c.displayName === 'News',
+			(c) => c.displayName === 'In focus',
 		) + 1;
 
 	const combinedCollections = personalisedContainer
