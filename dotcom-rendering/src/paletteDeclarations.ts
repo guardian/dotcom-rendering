@@ -7609,6 +7609,18 @@ const paletteColours = {
 		light: podcastMetaTitleLight,
 		dark: podcastMetaTitleDark,
 	},
+	'--preferred-source-button-border': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[38],
+	},
+	'--preferred-source-button-hover': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--preferred-source-button-text': {
+		light: () => sourcePalette.neutral[38],
+		dark: () => sourcePalette.neutral[73],
+	},
 	'--privacy-text-regular': {
 		light: privacyTextRegularLight,
 		dark: privacyTextDark,
