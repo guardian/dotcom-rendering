@@ -305,11 +305,8 @@ export const ReaderRevenueBanner = ({
 		(name === 'SignInPromptBanner'
 			? /* webpackChunkName: "sign-in-prompt-banner" */
 			  import(`../marketing/banners/signInPrompt/SignInPromptBanner`)
-			: version === 'v2'
-			? /* webpackChunkName: "designable-banner-v2" */
+			: /* webpackChunkName: "designable-banner-v2" */
 			  import(`../marketing/banners/designableBanner/v2/Banner`)
-			: /* webpackChunkName: "designable-banner" */
-			  import(`../marketing/banners/designableBanner/DesignableBanner`)
 		)
 			.then((bannerModule: { [key: string]: React.ElementType }) => {
 				// When using banner-version=v2, always use DesignableBanner export

@@ -95,7 +95,6 @@ const withBannerData =
 			abandonedBasket,
 			promoCodes,
 			isCollapsible,
-			children,
 		} = bannerProps;
 
 		const [hasBeenSeen, setNode] = useIsInView({
@@ -355,7 +354,7 @@ const withBannerData =
 
 				return (
 					<div ref={setNode}>
-						<Banner {...props}>{children}</Banner>
+						<Banner {...props} />
 					</div>
 				);
 			}
