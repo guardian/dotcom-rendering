@@ -315,27 +315,15 @@ const circleStyles = {
 const ScoreNumber = (props: { score: number }) => {
 	if (!Number.isInteger(props.score) || props.score < 0) {
 		return null;
-	}
-
-	switch (props.score) {
-		case 0:
-		case 1:
-		case 2:
-		case 3:
-		case 4:
-		case 5:
-		case 6:
-		case 7:
-		case 8:
-		case 9:
-			return <BigNumber index={props.score} />;
-		default:
-			return (
-				<>
-					<ScoreNumber score={Math.trunc(props.score / 10)} />
-					<ScoreNumber score={props.score % 10} />
-				</>
-			);
+	} else if (props.score < 10) {
+		return <BigNumber index={props.score} />;
+	} else {
+		return (
+			<>
+				<ScoreNumber score={Math.trunc(props.score / 10)} />
+				<ScoreNumber score={props.score % 10} />
+			</>
+		);
 	}
 };
 
