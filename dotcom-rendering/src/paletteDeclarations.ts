@@ -5142,6 +5142,16 @@ const privacyTextSupportingSubduedLight: PaletteFunction = () =>
 const privacyTextSupportingSubduedDark: PaletteFunction = () =>
 	sourcePalette.neutral[60];
 
+const productCarouselCardBorderLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const productCarouselCardBorderDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+
+const productCarouselCardCounterLight: PaletteFunction = () =>
+	sourcePalette.neutral[46];
+const productCarouselCardCounterDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+
 const productCardBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 const productCardBackgroundDark: PaletteFunction = () =>
@@ -7688,6 +7698,14 @@ const paletteColours = {
 	'--product-card-read-more-decoration': {
 		light: productCardReadMoreDecoration,
 		dark: productCardReadMoreDecoration,
+	},
+	'--product-carousel-card-border': {
+		light: productCarouselCardBorderLight,
+		dark: productCarouselCardBorderDark,
+	},
+	'--product-carousel-card-counter': {
+		light: productCarouselCardCounterLight,
+		dark: productCarouselCardCounterDark,
 	},
 	'--pullquote-background': {
 		light: pullQuoteBackgroundLight,

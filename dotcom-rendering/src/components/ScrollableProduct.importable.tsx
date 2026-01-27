@@ -13,17 +13,18 @@ import { ProductCarouselCard } from './ProductCarouselCard';
 import { Subheading } from './Subheading';
 
 const carouselHeader = css`
-	padding-bottom: 10px;
+	padding-bottom: ${space[2]}px;
 	padding-top: ${space[6]}px;
-	border-bottom: 1px solid ${palette('--card-border-supporting')};
+	border-bottom: 1px solid ${palette('--product-carousel-card-border')};
 	margin-bottom: 10px;
 	display: flex;
 	justify-content: space-between;
+	align-items: baseline;
 `;
 
 const countStyles = css`
 	${textSans14};
-	color: ${palette('--card-trail-text')};
+	color: ${palette('--product-carousel-card-counter')};
 	align-content: center;
 	display: block;
 	${from.tablet} {
@@ -43,6 +44,13 @@ type Props = {
 
 const baseContainerStyles = css`
 	position: relative;
+	margin-right: -10px; /* Align right card edge with edge of screen on mobile */
+	${from.mobileLandscape} {
+		margin-right: -20px;
+	}
+	${from.tablet} {
+		margin-right: 0;
+	}
 `;
 const navigationStyles = css`
 	padding-bottom: ${space[1]}px;
@@ -67,7 +75,7 @@ const leftBorderStyles = css`
 		bottom: 0;
 		left: -10px;
 		width: 1px;
-		background-color: ${palette('--card-border-supporting')};
+		background-color: ${palette('--product-carousel-card-border')};
 		transform: translateX(-50%);
 	}
 `;
