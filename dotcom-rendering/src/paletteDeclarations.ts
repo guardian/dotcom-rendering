@@ -7120,6 +7120,22 @@ const paletteColours = {
 		light: () => sourcePalette.sport[600],
 		dark: () => sourcePalette.sport[600],
 	},
+	'--football-match-header-live-background': {
+		light: () => sourcePalette.brandAlt[400],
+		dark: () => sourcePalette.brandAlt[400],
+	},
+	'--football-match-header-live-border': {
+		light: () => `${sourcePalette.neutral[7]}33`,
+		dark: () => `${sourcePalette.neutral[7]}33`,
+	},
+	'--football-match-header-live-primary-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[7],
+	},
+	'--football-match-header-live-selected': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[7],
+	},
 	'--football-match-hover': {
 		light: () => sourcePalette.neutral[93],
 		dark: () => sourcePalette.neutral[38],
