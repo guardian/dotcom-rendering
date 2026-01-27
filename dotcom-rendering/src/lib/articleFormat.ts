@@ -29,6 +29,9 @@ export enum ArticleDesign {
 	Timeline,
 	Profile,
 	Crossword,
+	HostedArticle,
+	HostedVideo,
+	HostedGallery,
 }
 
 export enum ArticleDisplay {
@@ -118,6 +121,12 @@ export const decideDesign = ({ design }: Partial<FEFormat>): ArticleDesign => {
 			return ArticleDesign.Profile;
 		case 'CrosswordDesign':
 			return ArticleDesign.Crossword;
+		case 'HostedArticle':
+			return ArticleDesign.HostedArticle;
+		case 'HostedVideo':
+			return ArticleDesign.HostedVideo;
+		case 'HostedGallery':
+			return ArticleDesign.HostedGallery;
 		default:
 			return ArticleDesign.Standard;
 	}
@@ -167,7 +176,14 @@ export const decideTheme = ({ theme }: Partial<FEFormat>): ArticleTheme => {
 	}
 };
 
-export const decideFormat = (format: Partial<FEFormat>): ArticleFormat => ({
+export const decideFormat = (
+	format: Partial<FEFormat> = {
+		// TODO: Only here for testing. Please remove this!
+		design: 'HostedArticle',
+		display: 'StandardDisplay',
+		theme: 'Labs',
+	},
+): ArticleFormat => ({
 	design: decideDesign(format),
 	display: decideDisplay(format),
 	theme: decideTheme(format),
