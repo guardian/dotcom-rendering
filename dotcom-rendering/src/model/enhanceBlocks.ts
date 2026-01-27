@@ -133,7 +133,6 @@ export const enhanceBlocks = (
 	if (options.audioArticleImage) {
 		additionalElements.push(options.audioArticleImage);
 	}
-	console.log(options.serverSideABTests);
 	return [
 		...blocks.map((block) => ({
 			...block,
