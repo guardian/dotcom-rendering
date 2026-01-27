@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { getOrigin } from "$lib/stores/environment";
+
 	interface Props {
 		testName: string;
 		testGroups: string[];
@@ -12,6 +14,8 @@
 		minimumFractionDigits: 0,
 		maximumFractionDigits: 2,
 	});
+
+	let frontendAdminUrl = $derived(getOrigin());
 </script>
 
 <div>
@@ -26,7 +30,7 @@
 					</td>
 					<td>
 						<a
-							href={`https://www.theguardian.com/ab-tests/opt-in/${testName}:${group}`}
+							href={`${frontendAdminUrl}/ab-tests/opt-in/${testName}:${group}`}
 							target="_blank"
 						>
 							opt in
@@ -34,7 +38,7 @@
 					</td>
 					<td>
 						<a
-							href={`https://www.theguardian.com/ab-tests/opt-out/${testName}:${group}`}
+							href={`${frontendAdminUrl}/ab-tests/opt-out/${testName}:${group}`}
 							target="_blank"
 						>
 							opt out
