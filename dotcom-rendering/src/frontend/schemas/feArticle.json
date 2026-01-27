@@ -4631,7 +4631,7 @@
             "properties": {
                 "_type": {
                     "type": "string",
-                    "const": "model.dotcomrendering.pageElements.ProductCarouselElement"
+                    "const": "model.dotcomrendering.pageElements.ProductSummaryElement"
                 },
                 "matchedProducts": {
                     "type": "array",
