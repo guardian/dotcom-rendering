@@ -7,6 +7,7 @@ import type {
 	FEFootballPlayerEvent,
 	FEFootballTeam,
 } from './frontend/feFootballMatchPage';
+import { parseIntResult } from './lib/parse';
 import type { Result } from './lib/result';
 import { error, ok } from './lib/result';
 import { cleanTeamName } from './sportDataPage';
@@ -61,7 +62,20 @@ type UnknownEventType = {
 	message: string;
 };
 
-type ParserError = UnknownEventType;
+type FootballInvalidEventTime = {
+	kind: 'FootballInvalidEventTime';
+	message: string;
+};
+
+type FootballInvalidShirtNumber = {
+	kind: 'FootballInvalidShirtNumber';
+	message: string;
+};
+
+type ParserError =
+	| UnknownEventType
+	| FootballInvalidEventTime
+	| FootballInvalidShirtNumber;
 
 const parsePlayerEvent = (
 	feFootballMatchPlayerEvent: FEFootballPlayerEvent,
@@ -73,10 +87,19 @@ const parsePlayerEvent = (
 		});
 	}
 
-	return ok({
-		kind: feFootballMatchPlayerEvent.eventType,
-		minute: parseInt(feFootballMatchPlayerEvent.eventTime), // TODO
-	});
+	const eventType = feFootballMatchPlayerEvent.eventType;
+
+	return parseIntResult(feFootballMatchPlayerEvent.eventTime)
+		.mapError<ParserError>((message) => ({
+			kind: 'FootballInvalidEventTime',
+			message,
+		}))
+		.flatMap<ParserError, PlayerEvent>((min) =>
+			ok({
+				kind: eventType,
+				minute: min,
+			}),
+		);
 };
 
 const parseEvents = listParse(parsePlayerEvent);
@@ -84,13 +107,20 @@ const parseEvents = listParse(parsePlayerEvent);
 const parseFootballPlayer = (
 	feFootballMatchPlayer: FEFootballPlayer,
 ): Result<ParserError, FootballPlayer> =>
-	parseEvents(feFootballMatchPlayer.events).map((events) => ({
-		paID: feFootballMatchPlayer.id,
-		name: feFootballMatchPlayer.name,
-		substitute: feFootballMatchPlayer.substitute,
-		shirtNumber: parseInt(feFootballMatchPlayer.shirtNumber), // TODO
-		events,
-	}));
+	parseEvents(feFootballMatchPlayer.events).flatMap((events) =>
+		parseIntResult(feFootballMatchPlayer.shirtNumber)
+			.mapError<ParserError>((message) => ({
+				kind: 'FootballInvalidShirtNumber',
+				message,
+			}))
+			.map((shirtNumber) => ({
+				paID: feFootballMatchPlayer.id,
+				name: feFootballMatchPlayer.name,
+				substitute: feFootballMatchPlayer.substitute,
+				shirtNumber,
+				events,
+			})),
+	);
 
 const parsePlayers = listParse(parseFootballPlayer);
 
