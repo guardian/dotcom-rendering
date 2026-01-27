@@ -4,7 +4,7 @@
 	import AudienceBreakdown from "$lib/components/AudienceBreakdown.svelte";
 	import { getOrigin } from "$lib/stores/environment";
 
-	let origin = $derived(getOrigin());
+	let frontendAdminUrl = $derived(getOrigin());
 </script>
 
 <h1 class="headline">A/B Tests (Beta)</h1>
@@ -27,7 +27,7 @@
 		this will override any cookie based test assignment.
 	</p>
 	<p>
-		<a href={`${origin}/ab-tests/opt-out`} target="_blank"
+		<a href={`${frontendAdminUrl}/ab-tests/opt-out`} target="_blank"
 			>Use this link to opt out of all tests you've opted into</a
 		>
 	</p>

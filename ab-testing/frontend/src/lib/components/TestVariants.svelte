@@ -15,7 +15,7 @@
 		maximumFractionDigits: 2,
 	});
 
-	let origin = $derived(getOrigin());
+	let frontendAdminUrl = $derived(getOrigin());
 </script>
 
 <div>
@@ -30,7 +30,7 @@
 					</td>
 					<td>
 						<a
-							href={`${origin}/ab-tests/opt-in/${testName}:${group}`}
+							href={`${frontendAdminUrl}/ab-tests/opt-in/${testName}:${group}`}
 							target="_blank"
 						>
 							opt in
@@ -38,7 +38,7 @@
 					</td>
 					<td>
 						<a
-							href={`${origin}/ab-tests/opt-out/${testName}:${group}`}
+							href={`${frontendAdminUrl}/ab-tests/opt-out/${testName}:${group}`}
 							target="_blank"
 						>
 							opt out
