@@ -1,4 +1,5 @@
 import type { FEFootballDataPage } from './feFootballDataPage';
+import { type FEFootballMatch } from './feFootballMatchListPage';
 import { type FEGroupSummary } from './feFootballTablesPage';
 
 export type FEFootballPlayerEvent = {
@@ -33,7 +34,7 @@ export type FEFootballTeam = {
 	crest: string;
 };
 
-export type FEFootballMatch = {
+export type FEFootballMatchStats = {
 	id: string;
 	homeTeam: FEFootballTeam;
 	awayTeam: FEFootballTeam;
@@ -42,6 +43,7 @@ export type FEFootballMatch = {
 };
 
 export type FEFootballMatchPage = FEFootballDataPage & {
-	footballMatch: FEFootballMatch;
+	footballMatch: FEFootballMatchStats;
+	matchInfo: FEFootballMatch;
 	group?: FEGroupSummary;
 };

@@ -6,6 +6,7 @@ import {
 	parse as parseFootballMatches,
 } from '../footballMatches';
 import { parseMatchStats } from '../footballMatchStats';
+import { parseFootballMatchV2 } from '../footballMatchV2';
 import {
 	parse as parseFootballTables,
 	parseTableSummary,
@@ -223,10 +224,18 @@ const parseFEFootballMatch = (
 	}
 
 	const parsedFootballMatchStats = parseMatchStats(data.footballMatch);
+	const matchInfo = parseFootballMatchV2(data.matchInfo);
 
 	if (!parsedFootballMatchStats.ok) {
 		throw new Error(
 			`Failed to parse football match stats: ${parsedFootballMatchStats.error.kind} ${parsedFootballMatchStats.error.message}`,
+		);
+	}
+
+	if (!matchInfo.ok) {
+		const aggeregatedErrors = getParserErrorMessage(matchInfo.error);
+		throw new Error(
+			`Failed to parse football match info: ${matchInfo.error.kind} ${aggeregatedErrors}`,
 		);
 	}
 
@@ -241,6 +250,7 @@ const parseFEFootballMatch = (
 	return {
 		match: parsedFootballMatch.value,
 		matchStats: parsedFootballMatchStats.value,
+		matchInfo: matchInfo.value,
 		group: group?.value,
 		kind: 'FootballMatchSummary',
 		nav: {

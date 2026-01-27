@@ -74,16 +74,24 @@ const SportsPage = ({
 				/>
 			);
 		case 'FootballMatchSummary': {
-			if (isInVariantGroup) {
-				return (
-					<FootballMatchInfoPage
-						matchStats={sportData.matchStats}
-						table={sportData.group}
-					/>
-				);
-			}
+			return (
+				<FootballMatchInfoPage
+					matchStats={sportData.matchStats}
+					matchInfo={sportData.matchInfo}
+					table={sportData.group}
+				/>
+			);
+			// if (isInVariantGroup) {
+			// 	return (
+			// 		<FootballMatchInfoPage
+			// 			matchStats={sportData.matchStats}
+			// 			matchInfo={sportData.matchInfo}
+			// 			table={sportData.group}
+			// 		/>
+			// 	);
+			// }
 
-			return <FootballMatchSummary match={sportData.match} />;
+			// return <FootballMatchSummary match={sportData.match} />;
 		}
 	}
 };
