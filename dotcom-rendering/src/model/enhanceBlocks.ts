@@ -1,7 +1,6 @@
 import { isUndefined } from '@guardian/libs';
 import { type ArticleFormat } from '../lib/articleFormat';
 import type { Block } from '../types/blocks';
-import type { ServerSideTests } from '../types/config';
 import type {
 	FEElement,
 	ImageBlockElement,
@@ -37,7 +36,7 @@ type Options = {
 	tags?: TagType[];
 	shouldHideAds: boolean;
 	pageId: string;
-	serverSideABTests?: ServerSideTests;
+	serverSideABTests?: Record<string, string>;
 };
 
 const enhanceNewsletterSignup =

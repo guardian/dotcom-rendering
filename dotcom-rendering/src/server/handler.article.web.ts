@@ -59,6 +59,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		hasAffiliateLinksDisclaimer: false,
 		shouldHideAds,
 		pageId,
+		serverSideABTests,
 	});
 	const html = renderBlocks({
 		blocks: enhancedBlocks,
