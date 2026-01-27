@@ -11,7 +11,6 @@ import { setChannelClosedTimestamp } from './localStorage';
 
 export interface CloseableBannerProps extends BannerProps {
 	onClose: () => void;
-	children?: React.ReactNode;
 }
 
 const withCloseable = (
