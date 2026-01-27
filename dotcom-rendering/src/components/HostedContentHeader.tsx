@@ -5,6 +5,7 @@ import {
 	textSans15,
 	textSansBold14,
 } from '@guardian/source/foundations';
+import { Link } from '@guardian/source/react-components';
 import { Left, Right } from './LabsHeader';
 
 type Props = {
@@ -69,10 +70,10 @@ const TitleAndBadge = ({ accentColor, branding }: Props) => (
 			css={css`
 				${textSansBold14};
 				position: relative;
-				align-self: flex-end;
-				padding: 5px 6px 4px;
+				height: auto;
+				line-height: 0.945rem; /* We shouldn't override this but need to confirm if it's ok for the design to look slighly different */
+				padding: 0.3125rem 0.375rem 0.25rem;
 				letter-spacing: 0.03125rem;
-				line-height: 0.9375; /* We shouldn't override this but need to confirm if it's ok for the design to look slighly different */
 				background-color: ${accentColor};
 			`}
 		>
@@ -82,9 +83,10 @@ const TitleAndBadge = ({ accentColor, branding }: Props) => (
 		<div
 			css={css`
 				position: absolute;
-				bottom: -50px;
-				left: 20px;
-				height: 46px;
+				display: block;
+				width: 80px;
+				height: 45px; /* This is temporary, replace with actual badge height */
+				top: 100%;
 				background-color: ${sourcePalette.neutral[100]};
 				z-index: 10;
 			`}
@@ -100,7 +102,7 @@ const About = () => (
 			${textSans15};
 			background-color: ${sourcePalette.neutral[7]};
 			color: ${sourcePalette.neutral[100]};
-			align-self: end;
+			margin-top: 1.25rem;
 			width: 100vw;
 			padding: 0;
 
@@ -119,6 +121,25 @@ const About = () => (
 	</div>
 );
 
+const HostedContentLogo = () => (
+	<span>
+		<svg />
+	</span>
+);
+
+const Logo = () => (
+	<Link href="https://www.theguardian.com/uk">
+		<p
+			css={css`
+				color: ${sourcePalette.neutral[100]};
+			`}
+		>
+			Hosted by
+		</p>
+		<HostedContentLogo />
+	</Link>
+);
+
 export const HostedContentHeader = ({ accentColor, branding }: Props) => {
 	return (
 		<HeaderWrapper>
@@ -134,7 +155,7 @@ export const HostedContentHeader = ({ accentColor, branding }: Props) => {
 				</HeaderSection>
 			</Left>
 			<Right>
-				<div>logo</div>
+				<Logo />
 			</Right>
 		</HeaderWrapper>
 	);
