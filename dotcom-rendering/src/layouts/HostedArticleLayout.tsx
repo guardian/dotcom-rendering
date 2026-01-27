@@ -24,12 +24,12 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 		<>
 			{props.renderingTarget === 'Web' ? (
 				<HostedContentHeader
-					accentColor="pink"
+					accentColor="#1b1f71"
 					branding="someBranding"
 				/>
 			) : null}
 			<main>
-				<header css={[grid.container, border]}>
+				<header css={[grid.container]}>
 					<div css={[grid.column.all]}>Main media</div>
 					<div
 						css={[grid.between('centre-column-start', 'grid-end')]}
