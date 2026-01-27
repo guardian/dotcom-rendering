@@ -52,6 +52,29 @@ const configs: { [key: string]: DirectoryPageNavConfig } = {
 			},
 		],
 	},
+	'winter-olympics-2026': {
+		pageId: 'winter-olympics-2026',
+		textColor: palette.neutral[7],
+		backgroundColor: '#CCCCCC',
+		title: {
+			label: 'Milano Cortina Winter Olympics 2026',
+			link: '/tbd',
+		},
+		links: [
+			{
+				label: 'Schedule',
+				href: '/p/x4x38e',
+				selectedSlug: 'schedule',
+			},
+			{
+				label: 'Results',
+				href: '/p/x4x3k4',
+				selectedSlug: 'results',
+			},
+			{ label: 'Medal table', href: '/p/x4x3k6' },
+			{ label: 'Full coverage', href: '/tbd' },
+		],
+	},
 };
 
 export const DirectoryPageNav = ({ selected, pageId }: Props) => {
