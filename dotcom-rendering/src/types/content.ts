@@ -493,6 +493,7 @@ export interface ProductBlockElement {
 export interface ProductCarouselElement {
 	_type: 'model.dotcomrendering.pageElements.ProductSummaryElement';
 	matchedProducts: ProductBlockElement[];
+	variant: 'carousel' | 'stacked';
 }
 
 interface ProfileAtomBlockElement {

@@ -1,4 +1,3 @@
-import { isUndefined } from '@guardian/libs';
 import type { FEElement, ProductBlockElement } from '../types/content';
 import { generateId } from './enhance-H2s';
 
@@ -6,24 +5,18 @@ import { generateId } from './enhance-H2s';
 For example thefilter/2025/jan/29/best-sunrise-alarm-clocks
 Update list with actual article URLs as needed.*/
 
+export type ABTestVariant = 'carousel' | 'stacked';
+
 export const allowedPageIds: string[] = [
 	'thefilter/2025/nov/18/best-pillows-tested-uk',
 ];
 //todo - rename to summary component test
-const isEligibleForCarousel = ({
-	pageId,
-	serverSideABTests,
-}: {
-	pageId: string;
-	serverSideABTests: Record<string, string>;
-}) => {
-	if (
-		serverSideABTests['thefilter-at-a-glance-redesign'] &&
-		serverSideABTests['thefilter-at-a-glance-redesign'] !== 'control'
-	) {
-		return allowedPageIds.includes(pageId);
-	}
-	return false;
+const isEligibleForSummary = ({ pageId }: { pageId: string }) => {
+	return allowedPageIds.includes(pageId);
+};
+
+const isCarouselOrStacked = (string: string) => {
+	return string === 'carousel' || string === 'stacked';
 };
 
 // Extract URLs from 'At a glance' section elements
@@ -68,10 +61,13 @@ const getAtAGlanceUrls = (elements: FEElement[]): string[] =>
 		),
 	);
 
-const shouldRenderCarousel = (products: ProductBlockElement[]): boolean =>
+const shouldRenderSummary = (products: ProductBlockElement[]): boolean =>
 	products.length >= 3;
 
-const insertCarouselPlaceholder = (elements: FEElement[]): FEElement[] => {
+const insertSummaryPlaceholder = (
+	elements: FEElement[],
+	abTestVariant: ABTestVariant,
+): FEElement[] => {
 	const output: FEElement[] = [];
 	let inAtAGlanceSection = false;
 	let atAGlanceElements: FEElement[] = [];
@@ -96,10 +92,11 @@ const insertCarouselPlaceholder = (elements: FEElement[]): FEElement[] => {
 			const urls = getAtAGlanceUrls(atAGlanceElements);
 			const matchedProducts = findMatchingProducts(elements, urls);
 
-			if (shouldRenderCarousel(matchedProducts)) {
+			if (shouldRenderSummary(matchedProducts)) {
 				output.push({
 					_type: 'model.dotcomrendering.pageElements.ProductSummaryElement',
 					matchedProducts,
+					variant: abTestVariant,
 				} as FEElement);
 			} else {
 				// Less than two products matched, so return original elements
@@ -117,7 +114,7 @@ const insertCarouselPlaceholder = (elements: FEElement[]): FEElement[] => {
 	return output;
 };
 
-export const enhanceProductCarousel =
+export const enhanceProductSummary =
 	({
 		pageId,
 		serverSideABTests,
@@ -127,11 +124,15 @@ export const enhanceProductCarousel =
 	}) =>
 	(elements: FEElement[]): FEElement[] => {
 		// do nothing if article is not on allow list
+		const abTestVariant =
+			serverSideABTests?.['thefilter-at-a-glance-redesign'];
+
 		if (
-			!isUndefined(serverSideABTests) &&
-			isEligibleForCarousel({ pageId, serverSideABTests })
+			abTestVariant &&
+			isCarouselOrStacked(abTestVariant) &&
+			isEligibleForSummary({ pageId })
 		) {
-			return insertCarouselPlaceholder(elements);
+			return insertSummaryPlaceholder(elements, abTestVariant);
 		}
 
 		return elements;
@@ -141,6 +142,6 @@ export const enhanceProductCarousel =
 export const _testOnly = {
 	extractAtAGlanceUrls,
 	findMatchingProducts,
-	insertCarouselPlaceholder,
+	insertCarouselPlaceholder: insertSummaryPlaceholder,
 	allowedPageIds,
 };

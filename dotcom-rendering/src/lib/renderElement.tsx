@@ -979,6 +979,7 @@ export const renderElement = ({
 				<ProductSummary
 					products={element.matchedProducts}
 					format={format}
+					variant={element.variant}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
