@@ -441,7 +441,7 @@ export const renderElement = ({
 				<Island
 					priority="critical"
 					defer={{ until: 'idle' }}
-					role={element.role}
+					role={element.role ?? 'inline'}
 				>
 					<InteractiveBlockComponent
 						url={element.url}
