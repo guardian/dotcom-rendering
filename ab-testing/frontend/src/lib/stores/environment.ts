@@ -1,8 +1,11 @@
 import { page } from "$app/state";
 
-export const getHostname = (): string => {
-	if (page.url.href.includes("CODE/admin/ab-testing")) {
-		return "https://m.code.dev-theguardian.com";
-	}
-	return "https://www.theguardian.com";
+const getStage = (): string => {
+	return page.url.href.includes("CODE/admin/ab-testing") ? "CODE" : "PROD";
+};
+
+export const getOrigin = (): string => {
+	return getStage() === "CODE"
+		? "https://m.code.dev-theguardian.com"
+		: "https://www.theguardian.com";
 };

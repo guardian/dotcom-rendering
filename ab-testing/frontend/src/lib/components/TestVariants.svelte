@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getHostname } from "$lib/stores/environment";
+	import { getOrigin } from "$lib/stores/environment";
 
 	interface Props {
 		testName: string;
@@ -15,7 +15,7 @@
 		maximumFractionDigits: 2,
 	});
 
-	let hostname = $derived(getHostname());
+	let origin = $derived(getOrigin());
 </script>
 
 <div>
@@ -30,7 +30,7 @@
 					</td>
 					<td>
 						<a
-							href={`${hostname}/ab-tests/opt-in/${testName}:${group}`}
+							href={`${origin}/ab-tests/opt-in/${testName}:${group}`}
 							target="_blank"
 						>
 							opt in
@@ -38,7 +38,7 @@
 					</td>
 					<td>
 						<a
-							href={`${hostname}/ab-tests/opt-out/${testName}:${group}`}
+							href={`${origin}/ab-tests/opt-out/${testName}:${group}`}
 							target="_blank"
 						>
 							opt out
