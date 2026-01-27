@@ -9,27 +9,11 @@ import { FootballMatchGoalAttempts } from './FootballMatchStat';
 const meta = {
 	title: 'Components/Football Match Goal Attempts',
 	component: FootballMatchGoalAttempts,
-	decorators: [
-		(Story) => (
-			<div
-				css={css`
-					padding: ${space[4]}px;
-				`}
-			>
-				<Story />
-			</div>
-		),
-		splitTheme([
-			{
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.News,
-			},
-		]),
-	],
-	parameters: {
-		layout: 'padded',
-	},
+	render: (args) => (
+		<div css={{ padding: space[2] }}>
+			<FootballMatchGoalAttempts {...args} />
+		</div>
+	),
 } satisfies Meta<typeof FootballMatchGoalAttempts>;
 
 export default meta;
@@ -63,6 +47,7 @@ export const TeamColours = {
 				display: flex;
 				flex-direction: column;
 				gap: ${space[2]}px;
+				padding: ${space[2]}px;
 			`}
 		>
 			{footballTeams.map((match, index) => (
@@ -81,6 +66,15 @@ export const TeamColours = {
 			))}
 		</div>
 	),
+	decorators: [
+		splitTheme([
+			{
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Sport,
+			},
+		]),
+	],
 	args: {
 		...Default.args,
 	},
