@@ -222,7 +222,10 @@ describe('enhanceProductCarousel', () => {
 			]),
 		];
 
-		const output = enhanceProductCarousel(allowedPageId)(input);
+		const output = enhanceProductCarousel({
+			pageId: allowedPageId,
+			serverSideABTests: { 'thefilter-at-a-glance-redesign': 'variant1' },
+		})(input);
 
 		const carousel = findCarousel(output);
 		expect(carousel).toBeDefined();
