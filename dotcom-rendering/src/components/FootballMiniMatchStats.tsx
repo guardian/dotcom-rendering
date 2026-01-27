@@ -32,7 +32,7 @@ type Team = {
 };
 
 type MatchStatistic = {
-	label: string;
+	heading: string;
 	homeValue: number;
 	awayValue: number;
 	isPercentage?: boolean;
@@ -53,8 +53,8 @@ export const FootballMiniMatchStats = ({
 		<div css={containerCss}>
 			{stats.map((stat) => (
 				<FootballMatchStat
-					key={stat.label}
-					label={stat.label}
+					key={stat.heading}
+					heading={stat.heading}
 					homeTeam={{
 						name: homeTeam.name,
 						colour: homeTeam.colour,
