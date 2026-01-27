@@ -224,7 +224,7 @@ describe('enhanceProductSummary', () => {
 
 		const output = enhanceProductSummary({
 			pageId: allowedPageId,
-			serverSideABTests: { 'thefilter-at-a-glance-redesign': 'variant1' },
+			serverSideABTests: { 'thefilter-at-a-glance-redesign': 'carousel' },
 		})(input);
 
 		const carousel = findCarousel(output);
