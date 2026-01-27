@@ -7120,6 +7120,22 @@ const paletteColours = {
 		light: () => sourcePalette.sport[600],
 		dark: () => sourcePalette.sport[600],
 	},
+	'--football-match-header-live-background': {
+		light: () => sourcePalette.brandAlt[400],
+		dark: () => sourcePalette.brandAlt[400],
+	},
+	'--football-match-header-live-border': {
+		light: () => `${sourcePalette.neutral[7]}33`,
+		dark: () => `${sourcePalette.neutral[7]}33`,
+	},
+	'--football-match-header-live-primary-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[7],
+	},
+	'--football-match-header-live-selected': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[7],
+	},
 	'--football-match-hover': {
 		light: () => sourcePalette.neutral[93],
 		dark: () => sourcePalette.neutral[38],
@@ -7608,6 +7624,18 @@ const paletteColours = {
 	'--podcast-meta-title': {
 		light: podcastMetaTitleLight,
 		dark: podcastMetaTitleDark,
+	},
+	'--preferred-source-button-border': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[38],
+	},
+	'--preferred-source-button-hover': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--preferred-source-button-text': {
+		light: () => sourcePalette.neutral[38],
+		dark: () => sourcePalette.neutral[73],
 	},
 	'--privacy-text-regular': {
 		light: privacyTextRegularLight,
