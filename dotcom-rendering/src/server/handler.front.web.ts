@@ -30,13 +30,19 @@ const enhanceFront = (body: unknown): Front => {
 			`fronts-and-curation-personalised-container`
 		];
 
-	const personalisedContainer = isInPersonalisedContainerTest
-		? createPersonalisedCollection(
-				data.pressedPage.collections,
-				data.config.discussionApiUrl,
-				data.editionId,
-		  )
-		: undefined;
+	const isPersonalisationNetworkFrontWhitelist =
+		data.pageId === 'uk' ||
+		data.pageId === 'international' ||
+		data.pageId === 'europe';
+
+	const personalisedContainer =
+		isInPersonalisedContainerTest && isPersonalisationNetworkFrontWhitelist
+			? createPersonalisedCollection(
+					data.pressedPage.collections,
+					data.config.discussionApiUrl,
+					data.editionId,
+			  )
+			: undefined;
 
 	const collections = enhanceCollections({
 		collections: data.pressedPage.collections,
