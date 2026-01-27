@@ -28,17 +28,19 @@ export const Fixture = {
 		},
 		tabs: {
 			selected: 'info',
+			matchKind: 'Fixture',
 		},
 		edition: 'UK',
 	},
 } satisfies Story;
 
-export const Result = {
+export const Live = {
 	args: {
-		leagueName: 'Premier League',
+		leagueName: Fixture.args.leagueName,
 		match: {
 			...Fixture.args.match,
-			kind: 'Result',
+			kind: 'Live',
+			status: '1st',
 			homeTeam: {
 				...Fixture.args.match.homeTeam,
 				score: 0,
@@ -56,7 +58,26 @@ export const Result = {
 			comment: undefined,
 		},
 		tabs: {
+			selected: 'live',
+			matchKind: 'Live',
+			infoURL: new URL(
+				'https://www.theguardian.com/football/match/2025/nov/26/arsenal-v-bayernmunich',
+			),
+		},
+		edition: 'EUR',
+	},
+} satisfies Story;
+
+export const Result = {
+	args: {
+		leagueName: Fixture.args.leagueName,
+		match: {
+			...Live.args.match,
+			kind: 'Result',
+		},
+		tabs: {
 			selected: 'info',
+			matchKind: 'Result',
 			liveURL: new URL(
 				'https://www.theguardian.com/football/live/2025/nov/26/arsenal-v-bayern-munich-champions-league-live',
 			),
