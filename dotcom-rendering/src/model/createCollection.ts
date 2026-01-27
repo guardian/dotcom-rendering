@@ -5,7 +5,7 @@ import { enhanceCards } from './enhanceCards';
 
 const personalisedCollection: DCRCollectionType = {
 	id: 'hardcoded-collection',
-	displayName: 'Across The Guardian',
+	displayName: 'Across the Guardian',
 	description: undefined,
 	collectionType: 'static/medium/4',
 	href: undefined,
