@@ -104,6 +104,7 @@ export const enhanceArticleType = (
 		tags: data.tags,
 		shouldHideAds: data.shouldHideAds,
 		pageId: data.pageId,
+		serverSideABTests: data.serverSideABTests,
 	});
 
 	const crosswordBlock = buildCrosswordBlock(data);
