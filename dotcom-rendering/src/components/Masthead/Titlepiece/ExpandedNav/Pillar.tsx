@@ -190,7 +190,6 @@ export const Pillar = ({
 				!hasPageSkin && columnStyleFromLeftCol,
 				pillarDivider,
 			]}
-			role="none"
 		>
 			{/*
                 IMPORTANT NOTE: Supporting NoJS and accessibility is hard.
