@@ -25,6 +25,7 @@ import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { InteractivesDisableArticleSwipe } from '../components/InteractivesDisableArticleSwipe.importable';
 import { InteractivesNativePlatformWrapper } from '../components/InteractivesNativePlatformWrapper.importable';
+import { InteractivesScrollbarWidth } from '../components/InteractivesScrollbarWidth.importable';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
@@ -222,6 +223,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 
 	return (
 		<>
+			<Island priority="critical">
+				<InteractivesScrollbarWidth />
+			</Island>
 			{isApps && (
 				<>
 					<Island priority="critical">

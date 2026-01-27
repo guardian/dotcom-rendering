@@ -74,21 +74,13 @@ const roleCss = {
 		margin-top: ${space[3]}px;
 		margin-bottom: ${space[3]}px;
 
-		@property --scrollbar-width {
-			syntax: '<length>';
-			inherits: true;
-			initial-value: 15px;
-		}
-
-		--scrollbar-width: 15px;
-
-		${until.mobileLandscape} {
-			margin-left: -10px;
-			margin-right: -10px;
-		}
 		${until.tablet} {
 			margin-left: -20px;
 			margin-right: -20px;
+		}
+		${until.mobileLandscape} {
+			margin-left: -10px;
+			margin-right: -10px;
 		}
 		${from.tablet} {
 			width: calc(100vw - var(--scrollbar-width, 15px));
@@ -97,7 +89,7 @@ const roleCss = {
 			--grid-container-max-width: 740px;
 			--grid-container-left-margin: calc(
 				((-100vw + (var(--grid-container-max-width) - 42px)) / 2) +
-					(var(--scrollbar-width, 15px) / 2)
+					var(--half-scrollbar-width, 7.5px)
 			);
 			--grid-body-column-left: calc(
 				(var(--grid-container-left-margin, 0px) * -1) +
