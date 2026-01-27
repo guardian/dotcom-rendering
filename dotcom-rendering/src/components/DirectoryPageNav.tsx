@@ -18,19 +18,17 @@ type Props = {
 
 interface DirectoryPageNavConfig {
 	pageId: string;
-	// backgroundColor: string;
-	// textColor: string;
+	textColor: string;
+	backgroundColor: string;
 	title: { label: string; link: string };
 	links: { label: string; href: string; selectedSlug?: string }[];
 }
 
-// TODO: Configurable colours for different navs
-
 const configs: { [key: string]: DirectoryPageNavConfig } = {
 	'women-s-euro-2025': {
 		pageId: 'women-s-euro-2025',
-		// backgroundColor: palette.news[400],
-		// textColor: palette.neutral[100],
+		textColor: palette.neutral[100],
+		backgroundColor: palette.news[400],
 		title: {
 			label: "Women's Euro 2025",
 			link: '/football/women-s-euro-2025',
@@ -65,6 +63,112 @@ export const DirectoryPageNav = ({ selected, pageId }: Props) => {
 		return null;
 	}
 
+	const { textColor, backgroundColor } = config;
+
+	const nav = css({
+		backgroundColor,
+		'&': css(grid.paddedContainer),
+		alignContent: 'space-between',
+		height: 116,
+		[from.tablet]: {
+			height: 140,
+		},
+		[from.desktop]: {
+			height: 150,
+		},
+	});
+
+	const largeLinkStyles = css({
+		...headlineBold24Object,
+		color: textColor,
+		textDecoration: 'none',
+		'&': css(grid.column.centre),
+		[from.tablet]: headlineBold42Object,
+		[from.leftCol]: css(
+			grid.between('left-column-start', 'right-column-end'),
+		),
+	});
+
+	const list = css({
+		display: 'flex',
+		flexWrap: 'wrap',
+		'&': css(grid.column.all),
+		position: 'relative',
+		'--top-border-gap': '1.55rem',
+		[from.mobileLandscape]: {
+			paddingLeft: 10,
+		},
+		[from.tablet]: {
+			'--top-border-gap': '3rem',
+		},
+		backgroundImage: `
+			linear-gradient(
+				color-mix(in srgb, ${textColor} 40%, transparent) 0,
+				color-mix(in srgb, ${textColor} 40%, transparent) 1px,
+				transparent 1px,
+				transparent var(--top-border-gap),
+				color-mix(in srgb, ${textColor} 40%, transparent) var(--top-border-gap),
+				color-mix(in srgb, ${textColor} 40%, transparent) calc(var(--top-border-gap) + 1px),
+				transparent calc(var(--top-border-gap) + 1px),
+				transparent var(--top-border-gap)
+			)
+		`,
+	});
+
+	const selectedStyles = {
+		'--selected-height': '4px',
+		'--selected-opacity': '1',
+	};
+
+	const listItem = css({
+		position: 'relative',
+		'&::before': {
+			content: '""',
+			display: 'block',
+			position: 'absolute',
+			left: 0,
+			top: 0,
+			width: '100%',
+			height: 'var(--selected-height, 0)',
+			opacity: 'var(--selected-opacity, 0)',
+			backgroundColor: textColor,
+			transition: 'height 0.3s ease-in-out, opacity 0.05s 0.1s linear',
+		},
+		'&:hover': selectedStyles,
+		[from.leftCol]: {
+			flexBasis: 160,
+		},
+	});
+
+	const smallLink = css({
+		...headlineBold15Object,
+		padding: '4px 10px 6px',
+		display: 'block',
+		lineHeight: 1,
+		color: textColor,
+		textDecoration: 'none',
+		'&::after': {
+			content: '""',
+			display: 'block',
+			position: 'absolute',
+			top: 0,
+			right: 0,
+			width: 1,
+			height: '1.3rem',
+			backgroundColor: textColor,
+		},
+		[from.tablet]: headlineBold17Object,
+		[from.leftCol]: {
+			padding: '9px 10px 10px',
+		},
+	});
+
+	const lastSmallLink = css(smallLink, {
+		...headlineMedium15Object,
+		lineHeight: 1,
+		[from.tablet]: headlineMedium17Object,
+	});
+
 	return (
 		<nav css={nav}>
 			<a href={config.title.link} css={largeLinkStyles}>
@@ -94,103 +198,3 @@ export const DirectoryPageNav = ({ selected, pageId }: Props) => {
 		</nav>
 	);
 };
-
-const nav = css({
-	backgroundColor: palette.news[400],
-	'&': css(grid.paddedContainer),
-	alignContent: 'space-between',
-	height: 116,
-	[from.tablet]: {
-		height: 140,
-	},
-	[from.desktop]: {
-		height: 150,
-	},
-});
-
-const largeLinkStyles = css({
-	...headlineBold24Object,
-	color: palette.neutral[100],
-	textDecoration: 'none',
-	'&': css(grid.column.centre),
-	[from.tablet]: headlineBold42Object,
-	[from.leftCol]: css(grid.between('left-column-start', 'right-column-end')),
-});
-
-const list = css({
-	display: 'flex',
-	flexWrap: 'wrap',
-	'&': css(grid.column.all),
-	position: 'relative',
-	'--top-border-gap': '1.55rem',
-	[from.mobileLandscape]: {
-		paddingLeft: 10,
-	},
-	[from.tablet]: {
-		'--top-border-gap': '3rem',
-	},
-	backgroundImage: `linear-gradient(
-        #d84d4d 0,
-        #d84d4d 1px,
-        transparent 1px,
-        transparent var(--top-border-gap),
-        #d84d4d var(--top-border-gap),
-        #d84d4d calc(var(--top-border-gap) + 1px),
-        transparent 1px,
-        transparent var(--top-border-gap)
-    )`,
-});
-
-const selectedStyles = {
-	'--selected-height': '4px',
-	'--selected-opacity': '1',
-};
-
-const listItem = css({
-	position: 'relative',
-	'&::before': {
-		content: '""',
-		display: 'block',
-		position: 'absolute',
-		left: 0,
-		top: 0,
-		width: '100%',
-		height: 'var(--selected-height, 0)',
-		opacity: 'var(--selected-opacity, 0)',
-		backgroundColor: palette.neutral[100],
-		transition: 'height 0.3s ease-in-out, opacity 0.05s 0.1s linear',
-	},
-	'&:hover': selectedStyles,
-	[from.leftCol]: {
-		flexBasis: 160,
-	},
-});
-
-const smallLink = css({
-	...headlineBold15Object,
-	padding: '4px 10px 6px',
-	display: 'block',
-	lineHeight: 1,
-	color: palette.neutral[100],
-	textDecoration: 'none',
-	'&::after': {
-		content: '""',
-		display: 'block',
-		position: 'absolute',
-		top: 0,
-		right: 0,
-		width: 1,
-		height: '1.3rem',
-		backgroundColor: '#d84d4d',
-	},
-	[from.tablet]: headlineBold17Object,
-	[from.leftCol]: {
-		padding: '9px 10px 10px',
-	},
-});
-
-const lastSmallLink = css(smallLink, {
-	...headlineMedium15Object,
-	lineHeight: 1,
-	[from.tablet]: headlineMedium17Object,
-});
