@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import type { FEElement, ProductBlockElement } from '../types/content';
 import { generateId } from './enhance-H2s';
 
@@ -5,10 +6,25 @@ import { generateId } from './enhance-H2s';
 For example thefilter/2025/jan/29/best-sunrise-alarm-clocks
 Update list with actual article URLs as needed.*/
 
-export const allowedPageIds: string[] = [];
-
-const isEligibleForCarousel = (pageId: string) =>
-	allowedPageIds.includes(pageId);
+export const allowedPageIds: string[] = [
+	'thefilter/2025/nov/18/best-pillows-tested-uk',
+];
+//todo - rename to summary component test
+const isEligibleForCarousel = ({
+	pageId,
+	serverSideABTests,
+}: {
+	pageId: string;
+	serverSideABTests: Record<string, string>;
+}) => {
+	if (
+		serverSideABTests['thefilter-at-a-glance-redesign'] &&
+		serverSideABTests['thefilter-at-a-glance-redesign'] !== 'control'
+	) {
+		return allowedPageIds.includes(pageId);
+	}
+	return false;
+};
 
 // Extract URLs from 'At a glance' section elements
 export const extractAtAGlanceUrls = (elements: FEElement[]): string[] =>
@@ -82,7 +98,7 @@ const insertCarouselPlaceholder = (elements: FEElement[]): FEElement[] => {
 
 			if (shouldRenderCarousel(matchedProducts)) {
 				output.push({
-					_type: 'model.dotcomrendering.pageElements.ProductCarouselElement',
+					_type: 'model.dotcomrendering.pageElements.ProductSummaryElement',
 					matchedProducts,
 				} as FEElement);
 			} else {
@@ -102,10 +118,19 @@ const insertCarouselPlaceholder = (elements: FEElement[]): FEElement[] => {
 };
 
 export const enhanceProductCarousel =
-	(pageId: string) =>
+	({
+		pageId,
+		serverSideABTests,
+	}: {
+		pageId: string;
+		serverSideABTests?: Record<string, string>;
+	}) =>
 	(elements: FEElement[]): FEElement[] => {
 		// do nothing if article is not on allow list
-		if (isEligibleForCarousel(pageId)) {
+		if (
+			!isUndefined(serverSideABTests) &&
+			isEligibleForCarousel({ pageId, serverSideABTests })
+		) {
 			return insertCarouselPlaceholder(elements);
 		}
 

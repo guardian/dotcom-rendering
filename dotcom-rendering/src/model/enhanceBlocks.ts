@@ -1,6 +1,7 @@
 import { isUndefined } from '@guardian/libs';
 import { type ArticleFormat } from '../lib/articleFormat';
 import type { Block } from '../types/blocks';
+import type { ServerSideTests } from '../types/config';
 import type {
 	FEElement,
 	ImageBlockElement,
@@ -36,6 +37,7 @@ type Options = {
 	tags?: TagType[];
 	shouldHideAds: boolean;
 	pageId: string;
+	serverSideABTests?: ServerSideTests;
 };
 
 const enhanceNewsletterSignup =
@@ -96,7 +98,10 @@ export const enhanceElements =
 				options.shouldHideAds,
 			),
 			enhanceDisclaimer(options.hasAffiliateLinksDisclaimer, isNested),
-			enhanceProductCarousel(options.pageId),
+			enhanceProductCarousel({
+				pageId: options.pageId,
+				serverSideABTests: options.serverSideABTests,
+			}),
 		].reduce(
 			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),
 			elements,
@@ -128,6 +133,7 @@ export const enhanceBlocks = (
 	if (options.audioArticleImage) {
 		additionalElements.push(options.audioArticleImage);
 	}
+	console.log(options.serverSideABTests);
 	return [
 		...blocks.map((block) => ({
 			...block,

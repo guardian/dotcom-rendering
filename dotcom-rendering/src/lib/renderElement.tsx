@@ -38,12 +38,12 @@ import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent
 import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
 import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importable';
 import { ProductElement } from '../components/ProductElement';
+import { ProductSummary } from '../components/ProductSummary.Importable';
 import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable';
 import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
 import { QandaAtom } from '../components/QandaAtom.importable';
 import { QAndAExplainers } from '../components/QAndAExplainers';
 import { RichLinkComponent } from '../components/RichLinkComponent.importable';
-import { ScrollableProduct } from '../components/ScrollableProduct.importable';
 import { SelfHostedVideoInArticle } from '../components/SelfHostedVideoInArticle';
 import { SoundcloudBlockComponent } from '../components/SoundcloudBlockComponent';
 import { SpotifyBlockComponent } from '../components/SpotifyBlockComponent.importable';
@@ -974,14 +974,12 @@ export const renderElement = ({
 					/>
 				</Island>
 			);
-		case 'model.dotcomrendering.pageElements.ProductCarouselElement':
+		case 'model.dotcomrendering.pageElements.ProductSummaryElement':
 			return (
-				<Island priority="critical" defer={{ until: 'idle' }}>
-					<ScrollableProduct
-						products={element.matchedProducts}
-						format={format}
-					/>
-				</Island>
+				<ProductSummary
+					products={element.matchedProducts}
+					format={format}
+				/>
 			);
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':

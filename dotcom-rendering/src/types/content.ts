@@ -491,7 +491,7 @@ export interface ProductBlockElement {
 }
 
 export interface ProductCarouselElement {
-	_type: 'model.dotcomrendering.pageElements.ProductCarouselElement';
+	_type: 'model.dotcomrendering.pageElements.ProductSummaryElement';
 	matchedProducts: ProductBlockElement[];
 }
 
