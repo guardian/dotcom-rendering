@@ -4126,11 +4126,19 @@
                     "items": {
                         "$ref": "#/definitions/ProductBlockElement"
                     }
+                },
+                "variant": {
+                    "enum": [
+                        "carousel",
+                        "stacked"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
-                "matchedProducts"
+                "matchedProducts",
+                "variant"
             ]
         },
         "Attributes": {
