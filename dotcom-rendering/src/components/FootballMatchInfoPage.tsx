@@ -31,6 +31,7 @@ export const FootballMatchInfoPage = ({
 					selected: 'info',
 					reportURL: undefined,
 					liveURL: undefined,
+					matchKind: matchInfo.kind,
 				}}
 				edition={edition}
 			/>
