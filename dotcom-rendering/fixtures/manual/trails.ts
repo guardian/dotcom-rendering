@@ -548,7 +548,7 @@ export const galleryTrails: [DCRFrontCard, DCRFrontCard] = [
 	},
 ];
 
-export const videoTrails: [DCRFrontCard, DCRFrontCard] = [
+export const youtubeVideoTrails: [DCRFrontCard, DCRFrontCard] = [
 	{
 		...defaultCardProps,
 		format: { design: 4, display: 0, theme: 2 },
@@ -648,11 +648,11 @@ export const newsletterTrails: [DCRFrontCard, DCRFrontCard] = [
 	},
 ];
 
-export const selfHostedVideo54Card = {
+export const selfHostedLoopVideo54Card = {
 	...defaultCardProps,
 	dataLinkName: 'news | group-0 | card-@2',
 	url: '/uk-news/2025/jan/22/prince-harry-says-sun-publisher-made-historic-admission-as-he-settles-case',
-	headline: 'Headline for looping video card',
+	headline: 'Self-hosted 5:4 loop video card',
 	trailText: 'Trail text for looping video card',
 	mainMedia: {
 		type: 'SelfHostedVideo',
@@ -673,12 +673,46 @@ export const selfHostedVideo54Card = {
 		src: 'https://media.guim.co.uk/966bf085fb982b1103aaba42a812b09726cc0a3c/1417_104_1378_1104/master/1378.jpg',
 		altText: 'Wyatt Russell and Florence Pugh in Thunderbolts*.',
 	},
+	showVideo: true,
 } satisfies DCRFrontCard;
 
-export const selfHostedVerticalVideoCard = {
-	...selfHostedVideo54Card,
+export const selfHostedLoopVideo45Card = {
+	...selfHostedLoopVideo54Card,
+	headline: 'Self-hosted 4:5 loop video card',
 	mainMedia: {
-		...selfHostedVideo54Card.mainMedia,
+		...selfHostedLoopVideo54Card.mainMedia,
+		sources: [
+			{
+				mimeType: 'video/mp4',
+				src: 'https://uploads.guim.co.uk/2025/11/27/4_5_Test--1d34df3e-8c92-4090-8bb6-d79fc7fb9467-1.0.mp4',
+			},
+		],
+		width: 576,
+		height: 720,
+	},
+} satisfies DCRFrontCard;
+
+export const selfHostedLoopVideo53Card = {
+	...selfHostedLoopVideo54Card,
+	headline: 'Self-hosted 5:3 loop video card',
+	mainMedia: {
+		...selfHostedLoopVideo54Card.mainMedia,
+		sources: [
+			{
+				mimeType: 'video/mp4',
+				src: 'https://uploads.guim.co.uk/2025/11/27/5_3_Test--26763e61-c16b-4c10-8c16-3f11882da154-1.0.mp4',
+			},
+		],
+		width: 1200,
+		height: 720,
+	},
+} satisfies DCRFrontCard;
+
+export const selfHostedLoopVideo916Card = {
+	...selfHostedLoopVideo54Card,
+	headline: 'Self-hosted 9:16 loop video card',
+	mainMedia: {
+		...selfHostedLoopVideo54Card.mainMedia,
 		sources: [
 			{
 				mimeType: 'video/mp4',
@@ -686,6 +720,22 @@ export const selfHostedVerticalVideoCard = {
 			},
 		],
 		width: 406,
+		height: 720,
+	},
+} satisfies DCRFrontCard;
+
+export const selfHostedLoopVideo169Card = {
+	...selfHostedLoopVideo54Card,
+	headline: 'Self-hosted 16:9 loop video card',
+	mainMedia: {
+		...selfHostedLoopVideo54Card.mainMedia,
+		sources: [
+			{
+				mimeType: 'video/mp4',
+				src: 'https://uploads.guim.co.uk/2026/01/02/Social_media_footage_shows_person_trying_to_put_out_flames_in_Crans-Montana_bar___video--77ec00d2-7e58-4698-898c-08174f65a94b-1.0.mp4',
+			},
+		],
+		width: 1280,
 		height: 720,
 	},
 } satisfies DCRFrontCard;

@@ -5142,6 +5142,16 @@ const privacyTextSupportingSubduedLight: PaletteFunction = () =>
 const privacyTextSupportingSubduedDark: PaletteFunction = () =>
 	sourcePalette.neutral[60];
 
+const productCarouselCardBorderLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const productCarouselCardBorderDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+
+const productCarouselCardCounterLight: PaletteFunction = () =>
+	sourcePalette.neutral[46];
+const productCarouselCardCounterDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+
 const productCardBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 const productCardBackgroundDark: PaletteFunction = () =>
@@ -5165,6 +5175,8 @@ const productCardReadMoreDark: PaletteFunction = () =>
 	sourcePalette.lifestyle[600];
 const productCardReadMoreDecoration: PaletteFunction = () =>
 	sourcePalette.neutral[86];
+const productCardCountLight: PaletteFunction = () => sourcePalette.neutral[46];
+const productCardCountDark: PaletteFunction = () => sourcePalette.neutral[97];
 
 const privacyTextRegularLight: PaletteFunction = () => sourcePalette.neutral[7];
 const privacyTextDark: PaletteFunction = () => sourcePalette.neutral[86];
@@ -7118,6 +7130,22 @@ const paletteColours = {
 		light: () => sourcePalette.sport[600],
 		dark: () => sourcePalette.sport[600],
 	},
+	'--football-match-header-live-background': {
+		light: () => sourcePalette.brandAlt[400],
+		dark: () => sourcePalette.brandAlt[400],
+	},
+	'--football-match-header-live-border': {
+		light: () => `${sourcePalette.neutral[7]}33`,
+		dark: () => `${sourcePalette.neutral[7]}33`,
+	},
+	'--football-match-header-live-primary-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[7],
+	},
+	'--football-match-header-live-selected': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[7],
+	},
 	'--football-match-hover': {
 		light: () => sourcePalette.neutral[93],
 		dark: () => sourcePalette.neutral[38],
@@ -7607,6 +7635,18 @@ const paletteColours = {
 		light: podcastMetaTitleLight,
 		dark: podcastMetaTitleDark,
 	},
+	'--preferred-source-button-border': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[38],
+	},
+	'--preferred-source-button-hover': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--preferred-source-button-text': {
+		light: () => sourcePalette.neutral[38],
+		dark: () => sourcePalette.neutral[73],
+	},
 	'--privacy-text-regular': {
 		light: privacyTextRegularLight,
 		dark: privacyTextDark,
@@ -7643,6 +7683,10 @@ const paletteColours = {
 		light: productCardBorderNeutralLight,
 		dark: productCardBorderNeutralDark,
 	},
+	'--product-card-count': {
+		light: productCardCountLight,
+		dark: productCardCountDark,
+	},
 	'--product-card-headline': {
 		light: productCardHeadingTextLight,
 		dark: productCardHeadingTextDark,
@@ -7654,6 +7698,14 @@ const paletteColours = {
 	'--product-card-read-more-decoration': {
 		light: productCardReadMoreDecoration,
 		dark: productCardReadMoreDecoration,
+	},
+	'--product-carousel-card-border': {
+		light: productCarouselCardBorderLight,
+		dark: productCarouselCardBorderDark,
+	},
+	'--product-carousel-card-counter': {
+		light: productCarouselCardCounterLight,
+		dark: productCarouselCardCounterDark,
 	},
 	'--pullquote-background': {
 		light: pullQuoteBackgroundLight,

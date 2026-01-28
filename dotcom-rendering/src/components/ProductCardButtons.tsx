@@ -1,5 +1,5 @@
 import type { ProductCta } from '../types/content';
-import { ProductLinkElementButton } from './Button/ProductLinkElementButton';
+import { ProductLinkButton } from './Button/ProductLinkButton';
 
 const getLabel = (cta: ProductCta): string => {
 	const overrideLabel = cta.text.trim().length > 0;
@@ -15,7 +15,7 @@ export const ProductCardButtons = ({
 		{productCtas.map((productCta, index) => {
 			const label = getLabel(productCta);
 			return (
-				<ProductLinkElementButton
+				<ProductLinkButton
 					key={label}
 					label={label}
 					url={productCta.url}

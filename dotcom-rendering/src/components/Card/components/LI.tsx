@@ -100,6 +100,8 @@ type Props = {
 	offsetBottomPaddingOnDivider?: boolean;
 	/** Overrides the vertical divider colour */
 	verticalDividerColour?: string;
+
+	isVisible?: boolean;
 };
 
 export const LI = ({
@@ -114,6 +116,7 @@ export const LI = ({
 	snapAlignStart = false,
 	offsetBottomPaddingOnDivider = false,
 	verticalDividerColour = palette('--section-border'),
+	isVisible = true,
 }: Props) => {
 	// Decide sizing
 	const sizeStyles = decideSize(percentage, stretch);
@@ -133,6 +136,7 @@ export const LI = ({
 				padSidesOnMobile &&
 					sidePaddingStylesMobile(padSidesMobileOverride),
 				snapAlignStart && snapAlignStartStyles,
+				{ visibility: isVisible ? 'visible' : 'hidden' },
 			]}
 		>
 			{children}

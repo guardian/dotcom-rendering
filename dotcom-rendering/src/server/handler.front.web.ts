@@ -4,6 +4,7 @@ import type { FEFront } from '../frontend/feFront';
 import type { FETagPage } from '../frontend/feTagPage';
 import { decideTagPageBranding, pickBrandingForEdition } from '../lib/branding';
 import { decideTrail } from '../lib/decideTrail';
+import { createPersonalisedCollection } from '../model/createCollection';
 import { enhanceCards } from '../model/enhanceCards';
 import { enhanceCollections } from '../model/enhanceCollections';
 import {
@@ -24,6 +25,45 @@ const enhanceFront = (body: unknown): Front => {
 
 	const serverTime = Date.now();
 
+	const isInPersonalisedContainerTest =
+		data.config.serverSideABTests[
+			`fronts-and-curation-personalised-container`
+		];
+
+	const personalisedContainer = isInPersonalisedContainerTest
+		? createPersonalisedCollection(
+				data.pressedPage.collections,
+				data.config.discussionApiUrl,
+				data.editionId,
+		  )
+		: undefined;
+
+	const collections = enhanceCollections({
+		collections: data.pressedPage.collections,
+		editionId: data.editionId,
+		pageId: data.pageId,
+		onPageDescription: data.pressedPage.frontProperties.onPageDescription,
+		isOnPaidContentFront: data.config.isPaidContent,
+		discussionApiUrl: data.config.discussionApiUrl,
+		frontBranding: pickBrandingForEdition(
+			data.pressedPage.frontProperties.commercial.editionBrandings,
+			data.editionId,
+		),
+	});
+
+	const personalisedContainerPosition =
+		data.pressedPage.collections.findIndex(
+			(c) => c.displayName === 'News',
+		) + 1;
+
+	const combinedCollections = personalisedContainer
+		? [
+				...collections.slice(0, personalisedContainerPosition),
+				personalisedContainer,
+				...collections.slice(personalisedContainerPosition),
+		  ]
+		: collections;
+
 	return {
 		...data,
 		webTitle: `${
@@ -31,20 +71,7 @@ const enhanceFront = (body: unknown): Front => {
 		} | The Guardian`,
 		pressedPage: {
 			...data.pressedPage,
-			collections: enhanceCollections({
-				collections: data.pressedPage.collections,
-				editionId: data.editionId,
-				pageId: data.pageId,
-				onPageDescription:
-					data.pressedPage.frontProperties.onPageDescription,
-				isOnPaidContentFront: data.config.isPaidContent,
-				discussionApiUrl: data.config.discussionApiUrl,
-				frontBranding: pickBrandingForEdition(
-					data.pressedPage.frontProperties.commercial
-						.editionBrandings,
-					data.editionId,
-				),
-			}),
+			collections: combinedCollections,
 		},
 		mostViewed: data.mostViewed.map((trail) => decideTrail(trail)),
 		trendingTopics: extractTrendingTopicsFomFront(

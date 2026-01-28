@@ -414,8 +414,8 @@ export const WithSelfHostedLoopVideo = {
 			atomId: 'atom-id-123',
 			sources: [
 				{
-					src: 'https://uploads.guim.co.uk/2025/11/27/4_5_Test--1d34df3e-8c92-4090-8bb6-d79fc7fb9467-1.0.mp4',
-					mimeType: 'video/mp4',
+					src: 'https://uploads.guim.co.uk/2026/01/09/Front_loop__Iran_TiF_Latest--64220ebf-d63d-48dd-9317-16b3b150a4ac-1.1.m3u8',
+					mimeType: 'application/vnd.apple.mpegurl',
 				},
 			],
 			height: 720,
@@ -437,8 +437,19 @@ export const WithSelfHostedCinemagraphVideo = {
 } satisfies Story;
 
 /**
- * Loops look like cinemagraphs, as only cinemagraphs are currently supported in Feature Cards.
+ * Default video will loop until non-looping video is supported.
  */
+export const WithSelfHostedDefaultVideo = {
+	args: {
+		...WithSelfHostedLoopVideo.args,
+		showVideo: true,
+		mainMedia: {
+			...WithSelfHostedLoopVideo.args.mainMedia,
+			videoStyle: 'Default',
+		},
+	},
+} satisfies Story;
+
 export const WithSelfHostedImmersiveLoopVideo = {
 	args: {
 		...WithSelfHostedLoopVideo.args,
@@ -463,6 +474,19 @@ export const WithSelfHostedImmersiveCinemagraphVideo = {
 		mainMedia: {
 			...WithSelfHostedImmersiveLoopVideo.args.mainMedia,
 			videoStyle: 'Cinemagraph',
+		},
+	},
+} satisfies Story;
+
+/**
+ * Default video will loop until non-looping video is supported.
+ */
+export const WithSelfHostedImmersiveDefaultVideo = {
+	args: {
+		...WithSelfHostedImmersiveLoopVideo.args,
+		mainMedia: {
+			...WithSelfHostedImmersiveLoopVideo.args.mainMedia,
+			videoStyle: 'Default',
 		},
 	},
 } satisfies Story;

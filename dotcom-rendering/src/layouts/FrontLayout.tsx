@@ -530,6 +530,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									isInStarRatingVariant={
 										isInStarRatingVariant
 									}
+									pillarBuckets={collection.bucket}
 								/>
 							</FrontSection>
 

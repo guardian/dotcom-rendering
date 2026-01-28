@@ -202,7 +202,7 @@ const tryToInsert = (
 	const insertPosition = findInsertPosition(elements);
 
 	if (insertPosition === null) {
-		logger.warn(
+		logger.debug(
 			`Unable to find suitable place for NewsletterSignupBlockElement`,
 			blockId,
 		);

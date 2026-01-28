@@ -5,11 +5,15 @@ import {
 	headlineBold17Object,
 	space,
 } from '@guardian/source/foundations';
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
+import type { FootballMatch } from '../../footballMatchV2';
 import { grid } from '../../grid';
 import { palette } from '../../palette';
+import { border, primaryText, selected } from './colours';
 
-type Props =
+type Props = {
+	matchKind: FootballMatch['kind'];
+} & (
 	| {
 			selected: 'info';
 			reportURL?: URL;
@@ -24,7 +28,8 @@ type Props =
 			selected: 'report';
 			liveURL?: URL;
 			infoURL: URL;
-	  };
+	  }
+);
 
 export const Tabs = (props: Props) => (
 	<nav css={[grid.column.centre]}>
@@ -36,10 +41,10 @@ export const Tabs = (props: Props) => (
 				width: '100%',
 				borderBottomWidth: 1,
 				borderStyle: 'solid',
-				borderColor: palette(
-					'--football-match-header-fixture-result-border',
-				),
 				[from.leftCol]: headlineBold17Object,
+			}}
+			style={{
+				borderColor: palette(border(props.matchKind)),
 			}}
 		>
 			<MatchReport {...props} />
@@ -51,11 +56,15 @@ export const Tabs = (props: Props) => (
 
 const MatchReport = (props: Props) => {
 	if (props.selected === 'report') {
-		return <Tab>Match report</Tab>;
+		return <Tab matchKind={props.matchKind}>Match report</Tab>;
 	}
 
 	if (props.reportURL !== undefined) {
-		return <Tab href={props.reportURL}>Match report</Tab>;
+		return (
+			<Tab matchKind={props.matchKind} href={props.reportURL}>
+				Match report
+			</Tab>
+		);
 	}
 
 	return null;
@@ -63,11 +72,15 @@ const MatchReport = (props: Props) => {
 
 const LiveFeed = (props: Props) => {
 	if (props.selected === 'live') {
-		return <Tab>Live feed</Tab>;
+		return <Tab matchKind={props.matchKind}>Live feed</Tab>;
 	}
 
 	if (props.liveURL !== undefined) {
-		return <Tab href={props.liveURL}>Live feed</Tab>;
+		return (
+			<Tab matchKind={props.matchKind} href={props.liveURL}>
+				Live feed
+			</Tab>
+		);
 	}
 
 	return null;
@@ -75,21 +88,26 @@ const LiveFeed = (props: Props) => {
 
 const MatchInfo = (props: Props) => {
 	if (props.selected === 'info') {
-		return <Tab>Match info</Tab>;
+		return <Tab matchKind={props.matchKind}>Match info</Tab>;
 	}
 
-	return <Tab href={props.infoURL}>Match info</Tab>;
+	return (
+		<Tab matchKind={props.matchKind} href={props.infoURL}>
+			Match info
+		</Tab>
+	);
 };
 
-const Tab = (props: { children: ReactNode; href?: URL }) => (
+const Tab = (props: {
+	children: ReactNode;
+	href?: URL;
+	matchKind: FootballMatch['kind'];
+}) => (
 	<li
 		css={{
 			// Ensures that if there are only two tabs they take up exactly 50%
 			flex: '1 1 50%',
 			borderLeftStyle: 'solid',
-			borderLeftColor: palette(
-				'--football-match-header-fixture-result-border',
-			),
 			'&:not(:first-of-type)': {
 				paddingLeft: space[2],
 				borderLeftWidth: 1,
@@ -100,15 +118,28 @@ const Tab = (props: { children: ReactNode; href?: URL }) => (
 				flex: '0 0 auto',
 			},
 		}}
+		style={{
+			borderLeftColor: palette(border(props.matchKind)),
+		}}
 	>
-		<TabText href={props.href}>{props.children}</TabText>
+		<TabText href={props.href} matchKind={props.matchKind}>
+			{props.children}
+		</TabText>
 	</li>
 );
 
-const TabText = (props: { children: ReactNode; href?: URL }) => {
+const TabText = (props: {
+	children: ReactNode;
+	href?: URL;
+	matchKind: FootballMatch['kind'];
+}) => {
 	if (props.href !== undefined) {
 		return (
-			<a href={props.href.toString()} css={tabTextStyles}>
+			<a
+				href={props.href.toString()}
+				css={tabTextCss}
+				style={tabTextStyle(props.matchKind)}
+			>
 				{props.children}
 			</a>
 		);
@@ -116,11 +147,10 @@ const TabText = (props: { children: ReactNode; href?: URL }) => {
 
 	return (
 		<span
-			css={tabTextStyles}
+			css={tabTextCss}
 			style={{
-				borderBottomColor: palette(
-					'--football-match-header-fixture-result-selected',
-				),
+				...tabTextStyle(props.matchKind),
+				borderBottomColor: palette(selected(props.matchKind)),
 			}}
 		>
 			{props.children}
@@ -128,21 +158,23 @@ const TabText = (props: { children: ReactNode; href?: URL }) => {
 	);
 };
 
-const tabTextStyles = css({
+const tabTextCss = css({
 	display: 'block',
 	paddingBottom: space[2],
 	borderBottomWidth: space[1],
 	borderBottomStyle: 'solid',
 	borderBottomColor: 'transparent',
-	color: palette('--football-match-header-fixture-result-primary-text'),
 	textDecoration: 'none',
 	'&:hover': {
-		borderBottomColor: palette(
-			'--football-match-header-fixture-result-selected',
-		),
+		borderBottomColor: 'var(--hover-colour)',
 	},
 	[from.leftCol]: {
 		paddingRight: space[6],
 		paddingBottom: space[3],
 	},
+});
+
+const tabTextStyle = (matchKind: FootballMatch['kind']): CSSProperties => ({
+	color: palette(primaryText(matchKind)),
+	'--hover-colour': palette(selected(matchKind)),
 });

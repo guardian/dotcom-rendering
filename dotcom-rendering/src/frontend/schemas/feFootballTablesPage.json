@@ -105,210 +105,7 @@
                                         "entries": {
                                             "type": "array",
                                             "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "stageNumber": {
-                                                        "type": "string"
-                                                    },
-                                                    "round": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "roundNumber": {
-                                                                "type": "string"
-                                                            },
-                                                            "name": {
-                                                                "type": "string"
-                                                            }
-                                                        },
-                                                        "required": [
-                                                            "roundNumber"
-                                                        ]
-                                                    },
-                                                    "team": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "id": {
-                                                                "type": "string"
-                                                            },
-                                                            "name": {
-                                                                "type": "string"
-                                                            },
-                                                            "rank": {
-                                                                "type": "number"
-                                                            },
-                                                            "total": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "played": {
-                                                                        "type": "number"
-                                                                    },
-                                                                    "won": {
-                                                                        "type": "number"
-                                                                    },
-                                                                    "drawn": {
-                                                                        "type": "number"
-                                                                    },
-                                                                    "lost": {
-                                                                        "type": "number"
-                                                                    },
-                                                                    "goalsFor": {
-                                                                        "type": "number"
-                                                                    },
-                                                                    "goalsAgainst": {
-                                                                        "type": "number"
-                                                                    }
-                                                                },
-                                                                "required": [
-                                                                    "drawn",
-                                                                    "goalsAgainst",
-                                                                    "goalsFor",
-                                                                    "lost",
-                                                                    "played",
-                                                                    "won"
-                                                                ]
-                                                            },
-                                                            "home": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "played": {
-                                                                        "type": "number"
-                                                                    },
-                                                                    "won": {
-                                                                        "type": "number"
-                                                                    },
-                                                                    "drawn": {
-                                                                        "type": "number"
-                                                                    },
-                                                                    "lost": {
-                                                                        "type": "number"
-                                                                    },
-                                                                    "goalsFor": {
-                                                                        "type": "number"
-                                                                    },
-                                                                    "goalsAgainst": {
-                                                                        "type": "number"
-                                                                    }
-                                                                },
-                                                                "required": [
-                                                                    "drawn",
-                                                                    "goalsAgainst",
-                                                                    "goalsFor",
-                                                                    "lost",
-                                                                    "played",
-                                                                    "won"
-                                                                ]
-                                                            },
-                                                            "away": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "played": {
-                                                                        "type": "number"
-                                                                    },
-                                                                    "won": {
-                                                                        "type": "number"
-                                                                    },
-                                                                    "drawn": {
-                                                                        "type": "number"
-                                                                    },
-                                                                    "lost": {
-                                                                        "type": "number"
-                                                                    },
-                                                                    "goalsFor": {
-                                                                        "type": "number"
-                                                                    },
-                                                                    "goalsAgainst": {
-                                                                        "type": "number"
-                                                                    }
-                                                                },
-                                                                "required": [
-                                                                    "drawn",
-                                                                    "goalsAgainst",
-                                                                    "goalsFor",
-                                                                    "lost",
-                                                                    "played",
-                                                                    "won"
-                                                                ]
-                                                            },
-                                                            "goalDifference": {
-                                                                "type": "number"
-                                                            },
-                                                            "points": {
-                                                                "type": "number"
-                                                            }
-                                                        },
-                                                        "required": [
-                                                            "away",
-                                                            "goalDifference",
-                                                            "home",
-                                                            "id",
-                                                            "name",
-                                                            "points",
-                                                            "rank",
-                                                            "total"
-                                                        ]
-                                                    },
-                                                    "teamUrl": {
-                                                        "type": "string"
-                                                    },
-                                                    "results": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "matchId": {
-                                                                    "type": "string"
-                                                                },
-                                                                "self": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "id": {
-                                                                            "type": "string"
-                                                                        },
-                                                                        "name": {
-                                                                            "type": "string"
-                                                                        },
-                                                                        "score": {
-                                                                            "type": "number"
-                                                                        }
-                                                                    },
-                                                                    "required": [
-                                                                        "id",
-                                                                        "name"
-                                                                    ]
-                                                                },
-                                                                "foe": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "id": {
-                                                                            "type": "string"
-                                                                        },
-                                                                        "name": {
-                                                                            "type": "string"
-                                                                        },
-                                                                        "score": {
-                                                                            "type": "number"
-                                                                        }
-                                                                    },
-                                                                    "required": [
-                                                                        "id",
-                                                                        "name"
-                                                                    ]
-                                                                }
-                                                            },
-                                                            "required": [
-                                                                "foe",
-                                                                "matchId",
-                                                                "self"
-                                                            ]
-                                                        }
-                                                    }
-                                                },
-                                                "required": [
-                                                    "results",
-                                                    "round",
-                                                    "stageNumber",
-                                                    "team"
-                                                ]
+                                                "$ref": "#/definitions/FELeagueTableEntry"
                                             }
                                         }
                                     },
@@ -904,6 +701,223 @@
         },
         "Record<string,FEFootballCompetition[]>": {
             "type": "object"
+        },
+        "FELeagueTableEntry": {
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "stageNumber": {
+                            "type": "string"
+                        },
+                        "round": {
+                            "type": "object",
+                            "properties": {
+                                "roundNumber": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "roundNumber"
+                            ]
+                        },
+                        "team": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "rank": {
+                                    "type": "number"
+                                },
+                                "total": {
+                                    "type": "object",
+                                    "properties": {
+                                        "played": {
+                                            "type": "number"
+                                        },
+                                        "won": {
+                                            "type": "number"
+                                        },
+                                        "drawn": {
+                                            "type": "number"
+                                        },
+                                        "lost": {
+                                            "type": "number"
+                                        },
+                                        "goalsFor": {
+                                            "type": "number"
+                                        },
+                                        "goalsAgainst": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "drawn",
+                                        "goalsAgainst",
+                                        "goalsFor",
+                                        "lost",
+                                        "played",
+                                        "won"
+                                    ]
+                                },
+                                "home": {
+                                    "type": "object",
+                                    "properties": {
+                                        "played": {
+                                            "type": "number"
+                                        },
+                                        "won": {
+                                            "type": "number"
+                                        },
+                                        "drawn": {
+                                            "type": "number"
+                                        },
+                                        "lost": {
+                                            "type": "number"
+                                        },
+                                        "goalsFor": {
+                                            "type": "number"
+                                        },
+                                        "goalsAgainst": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "drawn",
+                                        "goalsAgainst",
+                                        "goalsFor",
+                                        "lost",
+                                        "played",
+                                        "won"
+                                    ]
+                                },
+                                "away": {
+                                    "type": "object",
+                                    "properties": {
+                                        "played": {
+                                            "type": "number"
+                                        },
+                                        "won": {
+                                            "type": "number"
+                                        },
+                                        "drawn": {
+                                            "type": "number"
+                                        },
+                                        "lost": {
+                                            "type": "number"
+                                        },
+                                        "goalsFor": {
+                                            "type": "number"
+                                        },
+                                        "goalsAgainst": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "drawn",
+                                        "goalsAgainst",
+                                        "goalsFor",
+                                        "lost",
+                                        "played",
+                                        "won"
+                                    ]
+                                },
+                                "goalDifference": {
+                                    "type": "number"
+                                },
+                                "points": {
+                                    "type": "number"
+                                }
+                            },
+                            "required": [
+                                "away",
+                                "goalDifference",
+                                "home",
+                                "id",
+                                "name",
+                                "points",
+                                "rank",
+                                "total"
+                            ]
+                        },
+                        "teamUrl": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "round",
+                        "stageNumber",
+                        "team"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "matchId": {
+                                        "type": "string"
+                                    },
+                                    "self": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "score": {
+                                                "type": "number"
+                                            }
+                                        },
+                                        "required": [
+                                            "id",
+                                            "name"
+                                        ]
+                                    },
+                                    "foe": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "score": {
+                                                "type": "number"
+                                            }
+                                        },
+                                        "required": [
+                                            "id",
+                                            "name"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "foe",
+                                    "matchId",
+                                    "self"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "results"
+                    ]
+                }
+            ]
         }
     },
     "$schema": "http://json-schema.org/draft-07/schema#"

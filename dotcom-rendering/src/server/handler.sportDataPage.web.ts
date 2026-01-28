@@ -5,7 +5,10 @@ import {
 	getParserErrorMessage,
 	parse as parseFootballMatches,
 } from '../footballMatches';
-import { parse as parseFootballTables } from '../footballTables';
+import {
+	parse as parseFootballTables,
+	parseTableSummary,
+} from '../footballTables';
 import type { FECricketMatchPage } from '../frontend/feCricketMatchPage';
 import type { FEFootballCompetition } from '../frontend/feFootballDataPage';
 import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
@@ -218,8 +221,17 @@ const parseFEFootballMatch = (
 		);
 	}
 
+	const group = data.group && parseTableSummary(data.group);
+
+	if (group && !group.ok) {
+		throw new Error(
+			`Failed to parse football league table group: ${group.error.kind} ${group.error.message}`,
+		);
+	}
+
 	return {
 		match: parsedFootballMatch.value,
+		group: group?.value,
 		kind: 'FootballMatchSummary',
 		nav: {
 			...extractNAV(data.nav),

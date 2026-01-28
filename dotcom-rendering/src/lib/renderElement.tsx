@@ -2,7 +2,6 @@ import { AdPlaceholder } from '../components/AdPlaceholder.apps';
 import { AffiliateDisclaimerInline } from '../components/AffiliateDisclaimerInline.importable';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
-import { LinkElementButton } from '../components/Button/LinkElementButton';
 import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
 import { CalloutEmbedBlockComponent } from '../components/CalloutEmbedBlockComponent.importable';
 import { CaptionBlockComponent } from '../components/CaptionBlockComponent';
@@ -30,6 +29,7 @@ import { Island } from '../components/Island';
 import { ItemLinkBlockElement } from '../components/ItemLinkBlockElement';
 import { KeyTakeaways } from '../components/KeyTakeaways';
 import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
+import { LinkBlockComponent } from '../components/LinkBlockComponent';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
 import { MiniProfiles } from '../components/MiniProfiles';
@@ -42,6 +42,7 @@ import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable'
 import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
 import { QandaAtom } from '../components/QandaAtom.importable';
 import { QAndAExplainers } from '../components/QAndAExplainers';
+import { ReporterCalloutBlockComponent } from '../components/ReporterCalloutBlockComponent.importable';
 import { RichLinkComponent } from '../components/RichLinkComponent.importable';
 import { SelfHostedVideoInArticle } from '../components/SelfHostedVideoInArticle';
 import { SoundcloudBlockComponent } from '../components/SoundcloudBlockComponent';
@@ -219,6 +220,15 @@ export const renderElement = ({
 							callout={element}
 							pageId={pageId}
 						/>
+					</Island>
+				);
+			}
+			return null;
+		case 'model.dotcomrendering.pageElements.ReporterCalloutBlockElement':
+			if (switches.callouts) {
+				return (
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<ReporterCalloutBlockComponent callout={element} />
 					</Island>
 				);
 			}
@@ -431,7 +441,7 @@ export const renderElement = ({
 				<Island
 					priority="critical"
 					defer={{ until: 'idle' }}
-					role={element.role}
+					role={element.role ?? 'inline'}
 				>
 					<InteractiveBlockComponent
 						url={element.url}
@@ -606,7 +616,7 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.LinkBlockElement':
 			return (
-				<LinkElementButton
+				<LinkBlockComponent
 					label={element.label}
 					url={element.url}
 					linkType={element.linkType}

@@ -4,7 +4,7 @@ import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
 	getSublinks,
 	opinionTrails,
-	selfHostedVideo54Card,
+	selfHostedLoopVideo54Card,
 	slideshowCard,
 	snapLink,
 	trails,
@@ -303,7 +303,7 @@ export const SelfHostedVideoCard: Story = {
 		groupedTrails: {
 			...emptyGroupedTrails,
 			snap: [],
-			standard: [selfHostedVideo54Card],
+			standard: [selfHostedLoopVideo54Card],
 		},
 		collectionId: 1,
 	},

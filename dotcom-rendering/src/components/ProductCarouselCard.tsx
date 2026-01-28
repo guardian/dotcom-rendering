@@ -12,7 +12,7 @@ import { Link } from '@guardian/source/react-components';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import type { ProductBlockElement } from '../types/content';
-import { ProductLinkElementButton } from './Button/ProductLinkElementButton';
+import { ProductLinkButton } from './Button/ProductLinkButton';
 import { ProductCardImage } from './ProductCardImage';
 
 export type ProductCarouselCardProps = {
@@ -51,6 +51,10 @@ const readMoreCta = css`
 	${textSansBold15};
 	text-decoration-color: ${palette('--product-card-read-more-decoration')};
 	color: ${palette('--product-card-read-more')};
+	:hover {
+		color: ${palette('--product-card-read-more')};
+		text-decoration-color: ${palette('--product-card-read-more')};
+	}
 `;
 
 const priceStyle = css`
@@ -126,7 +130,7 @@ export const ProductCarouselCard = ({
 					<>
 						<div css={priceStyle}>{firstCta.price}</div>
 						<div css={buttonWrapper}>
-							<ProductLinkElementButton
+							<ProductLinkButton
 								label={`Buy at ${firstCta.retailer}`}
 								url={firstCta.url}
 								fullwidth={true}

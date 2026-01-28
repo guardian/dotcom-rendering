@@ -118,6 +118,10 @@ export type DCRSnapType = {
 
 export type AspectRatio = FEAspectRatio;
 
+type BucketPillar = 'opinion' | 'sport' | 'culture' | 'lifestyle';
+
+export type PillarBucket = Partial<Record<BucketPillar, DCRFrontCard[]>>;
+
 export type DCRCollectionType = {
 	id: string;
 	displayName: string;
@@ -144,6 +148,7 @@ export type DCRCollectionType = {
 	collectionBranding?: CollectionBranding;
 	targetedTerritory?: Territory;
 	aspectRatio?: AspectRatio;
+	bucket?: PillarBucket;
 };
 
 export type DCRGroupedTrails = {

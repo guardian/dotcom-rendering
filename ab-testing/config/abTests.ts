@@ -1,16 +1,6 @@
 import type { ABTest } from "./types.ts";
 
 /**
- * URL for AB test opt-in/opt-out links
- * PROD: https://www.theguardian.com/
- * CODE: https://m.code.dev-theguardian.com/
- */
-const hostname =
-	process.env.AB_TESTING_ENV === "code"
-		? "https://m.code.dev-theguardian.com"
-		: "https://www.theguardian.com";
-
-/**
  * Tests are defined here. They will be assigned mvt ranges based on the
  * size of the test and the number of groups, these ranges may not be contiguous.
  *
@@ -43,19 +33,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "commercial-user-module-uid2",
-		description:
-			"A hold back test to measure the impact of integrating UID2 module",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: `2026-01-29`,
-		type: "client",
-		status: "ON",
-		audienceSize: 10 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: true,
-	},
-	{
 		name: "commercial-user-module-liveramp",
 		description:
 			"Hold-back test measuring ad targeting from liveramp's identityLinkIdSystem module integration",
@@ -80,8 +57,44 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
+	{
+		name: "fronts-and-curation-personalised-container",
+		description: "Testing the a personalised container component on fronts",
+		owners: ["fronts.and.curation@guardian.co.uk"],
+		expirationDate: `2026-02-22`,
+		type: "server",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
+	{
+		name: "webex-football-redesign",
+		description: "Testing the Redesign for the football pages",
+		owners: ["dotcom.platform@theguardian.com"],
+		expirationDate: `2026-02-28`,
+		type: "server",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
+	{
+		name: "commercial-enable-spacefinder-on-interactives",
+		description: "Enable spacefinder on interactive articles on mobile web",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: `2026-02-28`,
+		type: "client",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["true"],
+		shouldForceMetricsCollection: false,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
 
-export { ABTests as allABTests, activeABtests, hostname };
+export { ABTests as allABTests, activeABtests };

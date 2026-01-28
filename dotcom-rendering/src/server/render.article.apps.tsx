@@ -6,6 +6,7 @@ import {
 	ArticleDesign,
 	type ArticleFormat,
 	decideFormat,
+	getArticleThemeString,
 } from '../lib/articleFormat';
 import {
 	ASSET_ORIGIN,
@@ -123,11 +124,12 @@ window.twttr = (function(d, s, id) {
 				? initTwitter
 				: undefined,
 		config,
-		onlyLightColourScheme: false,
-		isInteractive:
-			design === ArticleDesign.FullPageInteractive ||
-			design === ArticleDesign.Interactive,
-		articleTheme: theme,
+		dataAttributes: {
+			'rendering-target': 'apps',
+			...(getArticleThemeString(theme) && {
+				'article-theme': getArticleThemeString(theme)!,
+			}),
+		},
 	});
 
 	return {
