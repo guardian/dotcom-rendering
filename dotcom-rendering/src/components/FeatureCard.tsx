@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -17,14 +18,15 @@ import { getOphanComponents } from '../lib/labs';
 import { transparentColour } from '../lib/transparentColour';
 import { palette } from '../palette';
 import type { Branding } from '../types/branding';
-import type { StarRating as Rating } from '../types/content';
+import type { StarRating as Rating, RatingSizeType } from '../types/content';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
 	DCRFrontImage,
 	DCRSupportingContent,
 } from '../types/front';
-import type { MainMedia, YoutubeVideo } from '../types/mainMedia';
+import type { CardMediaType } from '../types/layout';
+import type { MainMedia } from '../types/mainMedia';
 import { BrandingLabel } from './BrandingLabel';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
@@ -40,23 +42,14 @@ import { FeatureCardCommentCount } from './FeatureCardCommentCount';
 import { FormatBoundary } from './FormatBoundary';
 import { Island } from './Island';
 import { Pill } from './Pill';
+import { SelfHostedVideo } from './SelfHostedVideo.importable';
 import { StarRating } from './StarRating/StarRating';
+import { StarRatingDeprecated } from './StarRating/StarRatingDeprecated';
 import { SupportingContent } from './SupportingContent';
 import { WaveForm } from './WaveForm';
 import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
 
 export type Position = 'inner' | 'outer' | 'none';
-
-type Media =
-	| {
-			type: 'picture';
-			imageUrl: string;
-			imageAltText?: string;
-	  }
-	| {
-			type: 'youtube-video';
-			mainMedia: YoutubeVideo;
-	  };
 
 const baseCardStyles = css`
 	display: flex;
@@ -83,6 +76,14 @@ const baseCardStyles = css`
 	text-decoration: none;
 `;
 
+const underlineOnHoverStyles = css`
+	/* Only underline the headline element we want to target (not kickers/sublink headlines) */
+
+	:hover .card-headline .show-underline {
+		text-decoration: underline;
+	}
+`;
+
 const hoverStyles = css`
 	:hover .media-overlay {
 		position: absolute;
@@ -93,18 +94,13 @@ const hoverStyles = css`
 		background-color: ${palette('--card-background-hover')};
 	}
 
-	/* Only underline the headline element we want to target (not kickers/sublink headlines) */
-	:hover .card-headline .show-underline {
-		text-decoration: underline;
-	}
-`;
-
-/** When we hover on sublinks, we want to prevent the general hover styles applying */
-const sublinkHoverStyles = css`
+	${underlineOnHoverStyles}
+	/** When we hover on sublinks, we want to prevent the general hover styles applying */
 	:has(ul.sublinks:hover, .branding-logo:hover) {
 		.card-headline .show-underline {
 			text-decoration: none;
 		}
+
 		.media-overlay {
 			background-color: transparent;
 		}
@@ -124,6 +120,8 @@ const overlayContainerStyles = css`
 	bottom: 0;
 	left: 0;
 	width: 100%;
+	cursor: pointer;
+	z-index: ${getZIndex('mediaOverlay')};
 `;
 
 const immersiveOverlayContainerStyles = css`
@@ -136,8 +134,12 @@ const immersiveOverlayContainerStyles = css`
 		* 48px is to ensure the gradient does not render the content inaccessible.
 		*/
 		width: 268px;
-		z-index: 1;
+		z-index: ${getZIndex('mediaOverlay')};
 	}
+`;
+
+const noPointerEvents = css`
+	pointer-events: none;
 `;
 
 /**
@@ -162,7 +164,9 @@ const overlayMaskGradientStyles = (angle: string) => css`
 		rgb(0, 0, 0) 64px
 	);
 `;
+
 const overlayStyles = css`
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	text-align: start;
@@ -174,8 +178,12 @@ const overlayStyles = css`
 	}
 	${overlayMaskGradientStyles('180deg')};
 
-	/* Ensure the waveform is behind the other elements, e.g. headline, pill */
-	> :not(.waveform) {
+	/*
+	 * Ensure the waveform is behind the other elements, e.g. headline, pill.
+	 * Links define their own z-index.
+	 */
+
+	> :not(.waveform):not(a) {
 		z-index: 1;
 	}
 `;
@@ -194,13 +202,13 @@ const immersiveOverlayStyles = css`
 
 const podcastImageContainerStyles = css`
 	position: relative;
-	/* Needs to display above of the image mask overlay */
+	/* Needs to display above the image mask overlay */
 	z-index: ${getZIndex('card-podcast-image')};
 `;
 
 const podcastImageStyles = css`
-	height: 80px;
-	width: 80px;
+	height: 60px;
+	width: 60px;
 `;
 
 const nonImmersivePodcastImageStyles = css`
@@ -262,7 +270,26 @@ const getMedia = ({
 	imageAltText?: string;
 	mainMedia?: MainMedia;
 	showVideo?: boolean;
-}): Media | undefined => {
+}) => {
+	if (mainMedia?.type === 'SelfHostedVideo' && showVideo) {
+		let type: CardMediaType;
+		switch (mainMedia.videoStyle) {
+			case 'Loop':
+				type = 'loop-video';
+				break;
+			case 'Cinemagraph':
+				type = 'cinemagraph';
+				break;
+			default:
+				type = 'default-video';
+		}
+
+		return {
+			type,
+			mainMedia,
+		} as const;
+	}
+
 	if (mainMedia?.type === 'YoutubeVideo' && showVideo) {
 		return {
 			type: 'youtube-video',
@@ -326,8 +353,11 @@ export type Props = {
 	 * Note YouTube recommends a minimum width of 480px @see https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-youtube-player-size
 	 * At 300px or below, the player will begin to lose functionality e.g. volume controls being omitted.
 	 * Youtube requires a minimum width 200px.
+	 * Similarly for self-hosted videos, we shouldn't display videos in too small a container.
+	 * For example, subtitles will not be legible in too small a player.
 	 */
 	canPlayInline?: boolean;
+	showVideo?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	starRating?: Rating;
@@ -341,9 +371,9 @@ export type Props = {
 	discussionApiUrl: string;
 	discussionId?: string;
 	isExternalLink: boolean;
-	/** Alows the consumer to set an aspect ratio on the image */
+	/** Allows the consumer to set an aspect ratio on the image */
 	aspectRatio?: AspectRatio;
-	/** Alows the consumer to set an aspect ratio on the image specifically on mobile breakpoints */
+	/** Allows the consumer to set an aspect ratio on the image specifically on mobile breakpoints */
 	mobileAspectRatio?: AspectRatio;
 	showQuotes?: boolean;
 	/**
@@ -352,13 +382,16 @@ export type Props = {
 	 * The highlights container above the header is 0, the first container below the header is 1, etc.
 	 */
 	collectionId: number;
+	uniqueId: string;
 	isNewsletter?: boolean;
 	/**
 	 * An immersive feature card variant. It dictates that the card has a full width background image on
 	 * all breakpoints. It also dictates the the card change aspect ratio to 5:3 on desktop and 4:5 on mobile.
 	 */
 	isImmersive?: boolean;
-	showVideo?: boolean;
+	isStorylines?: boolean;
+	isInStarRatingVariant?: boolean;
+	starRatingSize: RatingSizeType;
 };
 
 export const FeatureCard = ({
@@ -376,6 +409,7 @@ export const FeatureCard = ({
 	showClock,
 	mainMedia,
 	canPlayInline = false,
+	showVideo = false,
 	kickerText,
 	showPulsingDot,
 	dataLinkName,
@@ -391,14 +425,21 @@ export const FeatureCard = ({
 	starRating,
 	showQuotes,
 	collectionId,
+	uniqueId,
 	isNewsletter = false,
 	isImmersive = false,
-	showVideo = false,
+	isStorylines = false,
+	isInStarRatingVariant,
+	starRatingSize,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
 	const isVideoArticle = format.design === ArticleDesign.Video;
 
+	/**
+	 * Determine which type of media to use for the card.
+	 * For example, a video might be available, but if we don't want to show it, use an image instead.
+	 */
 	const media = getMedia({
 		imageUrl: image?.src,
 		imageAltText: image?.altText,
@@ -406,10 +447,22 @@ export const FeatureCard = ({
 		showVideo: showVideo && canPlayInline,
 	});
 
+	if (!media) return null;
+
 	const showCardAge =
 		webPublicationDate !== undefined && showClock !== undefined;
 
 	const showCommentCount = discussionId !== undefined;
+
+	const isYoutubeVideo = media.type === 'youtube-video';
+
+	const isSelfHostedVideo =
+		media.type === 'loop-video' ||
+		media.type === 'default-video' ||
+		media.type === 'cinemagraph';
+
+	const isSelfHostedVideoWithControls =
+		media.type === 'loop-video' || media.type === 'default-video';
 
 	const labsDataAttributes = branding
 		? getOphanComponents({
@@ -420,13 +473,22 @@ export const FeatureCard = ({
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
-	if (!media) return null;
+	const aspectRatioNumber = isImmersive ? 5 / 3 : 4 / 5;
+
+	/* The whole card is clickable on cinemagraphs and pictures */
+	const allowLinkThroughOverlay =
+		media.type === 'cinemagraph' || media.type === 'picture';
 
 	return (
 		<FormatBoundary format={format}>
 			<ContainerOverrides containerPalette={containerPalette}>
-				<div css={[baseCardStyles, hoverStyles, sublinkHoverStyles]}>
-					{media.type !== 'youtube-video' && (
+				<div
+					css={[
+						baseCardStyles,
+						!isSelfHostedVideoWithControls && hoverStyles,
+					]}
+				>
+					{!isYoutubeVideo && !isSelfHostedVideoWithControls && (
 						<CardLink
 							linkTo={linkTo}
 							headlineText={headlineText}
@@ -435,7 +497,7 @@ export const FeatureCard = ({
 						/>
 					)}
 					<div css={contentStyles}>
-						{media.type === 'youtube-video' && (
+						{isYoutubeVideo && (
 							<div
 								data-chromatic="ignore"
 								data-component="youtube-atom"
@@ -490,7 +552,7 @@ export const FeatureCard = ({
 								</Island>
 							</div>
 						)}
-						{media.type !== 'youtube-video' && (
+						{!isYoutubeVideo && (
 							<div
 								css={css`
 									position: relative;
@@ -499,7 +561,47 @@ export const FeatureCard = ({
 									)};
 								`}
 							>
-								{/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- A PR to add self-hosted video is upcoming where this check will be needed. */}
+								{isSelfHostedVideo && (
+									<Island
+										priority="critical"
+										defer={{ until: 'visible' }}
+									>
+										<SelfHostedVideo
+											sources={media.mainMedia.sources}
+											atomId={media.mainMedia.atomId}
+											uniqueId={uniqueId}
+											height={media.mainMedia.height}
+											width={media.mainMedia.width}
+											videoStyle={
+												media.mainMedia.videoStyle
+											}
+											posterImage={
+												media.mainMedia.image ?? ''
+											}
+											fallbackImage={
+												media.mainMedia.image ?? ''
+											}
+											fallbackImageSize={imageSize}
+											fallbackImageLoading={imageLoading}
+											fallbackImageAlt={
+												media.imageAltText
+											}
+											fallbackImageAspectRatio={
+												aspectRatio
+											}
+											linkTo={linkTo}
+											showProgressBar={false}
+											subtitleSource={
+												media.mainMedia.subtitleSource
+											}
+											subtitleSize="small"
+											controlsPosition="top"
+											minAspectRatio={aspectRatioNumber}
+											maxAspectRatio={aspectRatioNumber}
+										/>
+									</Island>
+								)}
+
 								{media.type === 'picture' && (
 									<>
 										<CardPicture
@@ -540,13 +642,16 @@ export const FeatureCard = ({
 								)}
 
 								{/* This overlay is styled when the CardLink is hovered */}
-								<div className="media-overlay" />
-
+								{!isSelfHostedVideoWithControls && (
+									<div className="media-overlay" />
+								)}
 								<div
 									css={[
 										overlayContainerStyles,
 										isImmersive &&
 											immersiveOverlayContainerStyles,
+										allowLinkThroughOverlay &&
+											noPointerEvents,
 									]}
 								>
 									{mainMedia?.type === 'Audio' &&
@@ -573,8 +678,20 @@ export const FeatureCard = ({
 											overlayStyles,
 											isImmersive &&
 												immersiveOverlayStyles,
+											isSelfHostedVideoWithControls &&
+												underlineOnHoverStyles,
 										]}
 									>
+										{/** Only the overlay is a link for self-hosted videos with controls. */}
+										{isSelfHostedVideoWithControls && (
+											<CardLink
+												linkTo={linkTo}
+												headlineText={headlineText}
+												dataLinkName={dataLinkName}
+												isExternalLink={isExternalLink}
+											/>
+										)}
+
 										{isImmersive &&
 											mainMedia?.type === 'Audio' &&
 											!!mainMedia.podcastImage?.src && (
@@ -634,14 +751,21 @@ export const FeatureCard = ({
 											/>
 										</div>
 
-										{starRating !== undefined ? (
-											<div css={starRatingWrapper}>
+										{!isUndefined(starRating) &&
+											(isInStarRatingVariant ? (
 												<StarRating
 													rating={starRating}
-													size="small"
+													size={starRatingSize}
+													useAlternativeTheme={true}
 												/>
-											</div>
-										) : null}
+											) : (
+												<div css={starRatingWrapper}>
+													<StarRatingDeprecated
+														rating={starRating}
+														size="small"
+													/>
+												</div>
+											))}
 
 										{!!trailText && (
 											<div css={trailTextWrapper}>
@@ -667,6 +791,9 @@ export const FeatureCard = ({
 														}
 														showClock={!!showClock}
 														serverTime={serverTime}
+														isStorylines={
+															isStorylines
+														}
 													/>
 												) : undefined
 											}
@@ -685,6 +812,7 @@ export const FeatureCard = ({
 											}
 											showLivePlayable={false}
 											isNewsletter={isNewsletter}
+											mainMedia={mainMedia}
 										/>
 
 										{!isImmersive &&

@@ -1,6 +1,9 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { footballTeams } from '../../fixtures/manual/footballTeams';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { palette } from '../palette';
 import { FootballMatchStat } from './FootballMatchStat';
 
@@ -20,6 +23,13 @@ const meta = {
 				<Story />
 			</div>
 		),
+		splitTheme([
+			{
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.News,
+			},
+		]),
 	],
 	parameters: {
 		viewport: {
@@ -33,47 +43,70 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
 	args: {
-		label: 'Goal Attempts',
-		home: {
-			teamName: 'Manchester United',
-			teamColour: '#da020e',
-			value: 7,
+		heading: 'Goal attempts',
+		homeTeam: {
+			name: 'Manchester United',
+			colour: '#da020e',
 		},
-		away: {
-			teamName: 'Arsenal',
-			teamColour: '#023474',
-			value: 4,
+		awayTeam: {
+			name: 'Arsenal',
+			colour: '#023474',
 		},
+		homeValue: 7,
+		awayValue: 4,
 	},
 } satisfies Story;
 
 export const ShownAsPercentage = {
 	args: {
-		label: 'Possession',
-		home: {
-			teamName: 'West Ham',
-			teamColour: '#722642',
-			value: 39,
+		heading: 'Possession',
+		homeTeam: {
+			name: 'West Ham',
+			colour: '#722642',
 		},
-		away: {
-			teamName: 'Newcastle',
-			teamColour: '#383838',
-			value: 61,
+		awayTeam: {
+			name: 'Newcastle',
+			colour: '#383838',
 		},
-		showPercentage: true,
+		homeValue: 39,
+		awayValue: 61,
+		isPercentage: true,
 	},
 } satisfies Story;
 
-export const RaisedLabelOnDesktop = {
+export const CompactLayout = {
 	args: {
 		...Default.args,
-		raiseLabelOnDesktop: true,
+		layout: 'compact',
 	},
 } satisfies Story;
 
-export const LargeNumbersOnDesktop = {
+export const TeamColours = {
+	render: (args) => (
+		<div
+			css={css`
+				display: flex;
+				flex-direction: column;
+				gap: ${space[2]}px;
+			`}
+		>
+			{footballTeams.map((match, index) => (
+				<FootballMatchStat
+					{...args}
+					homeTeam={{
+						name: match.home.name,
+						colour: match.home.colour,
+					}}
+					awayTeam={{
+						name: match.away.name,
+						colour: match.away.colour,
+					}}
+					key={index}
+				/>
+			))}
+		</div>
+	),
 	args: {
-		...Default.args,
-		largeNumbersOnDesktop: true,
+		...ShownAsPercentage.args,
 	},
 } satisfies Story;

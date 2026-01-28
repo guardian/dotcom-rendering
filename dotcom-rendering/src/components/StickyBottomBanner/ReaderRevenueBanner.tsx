@@ -2,10 +2,7 @@ import { css } from '@emotion/react';
 import type { ConsentState, CountryCode } from '@guardian/libs';
 import { getCookie, onConsent } from '@guardian/libs';
 import type { ComponentEvent } from '@guardian/ophan-tracker-js';
-import {
-	abandonedBasketSchema,
-	getBanner,
-} from '@guardian/support-dotcom-components';
+import { abandonedBasketSchema } from '@guardian/support-dotcom-components';
 import type {
 	BannerPayload,
 	ModuleData,
@@ -20,6 +17,7 @@ import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import type { ArticleCounts } from '../../lib/articleCount';
 import {
+	getAuthHeaders,
 	getPurchaseInfo,
 	hasOptedOutOfArticleCount,
 	recentlyClosedBanner,
@@ -31,6 +29,7 @@ import { getToday } from '../../lib/dailyArticleCount';
 import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import { getZIndex } from '../../lib/getZIndex';
 import type { CanShowResult } from '../../lib/messagePicker';
+import { getBanner } from '../../lib/sdcRequests';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { TagType } from '../../types/tag';
 
@@ -250,9 +249,12 @@ export const canShowRRBanner: CanShowFunctionType<
 		pageId,
 	});
 
+	const headers = await getAuthHeaders();
+
 	const response: ModuleDataResponse<BannerProps> = await getBanner(
 		contributionsServiceUrl,
 		bannerPayload,
+		headers,
 	);
 	if (!response.data) {
 		if (engagementBannerLastClosedAt && subscriptionBannerLastClosedAt) {

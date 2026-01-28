@@ -15,6 +15,7 @@ import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { StorylinesSectionContent } from '../components/StorylinesSectionContent.importable';
 import { SubNav } from '../components/SubNav.importable';
 import { TagPageHeader } from '../components/TagPageHeader';
 import { TrendingTopics } from '../components/TrendingTopics';
@@ -134,6 +135,13 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 						  )
 						: undefined;
 
+					// AIStorylines logic to determine where to insert the section
+					const insertStorylinesSection =
+						tagPage.storylinesContent &&
+						(!tagPage.pagination ||
+							tagPage.pagination.currentPage === 1) && // Only on the first page
+						(index === 1 || tagPage.groupedTrails.length === 1); // After the first section or if there's only one section on the page
+
 					return (
 						<Fragment key={containerId}>
 							{desktopAdPositions.includes(index) && (
@@ -145,6 +153,22 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									)}
 								/>
 							)}
+							{insertStorylinesSection &&
+								tagPage.storylinesContent && (
+									<Island priority="critical">
+										<StorylinesSectionContent
+											index={1}
+											editionId={tagPage.editionId}
+											storylinesContent={
+												tagPage.storylinesContent
+											}
+											containerId="storylines"
+											pillar={
+												tagPage.nav.currentPillarTitle
+											}
+										/>
+									</Island>
+								)}
 							<FrontSection
 								title={title}
 								url={url}

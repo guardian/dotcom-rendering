@@ -6,15 +6,17 @@ import {
 	textSans20,
 } from '@guardian/source/foundations';
 import { palette } from '../palette';
-import type { SubtitleSize } from './SelfHostedVideoPlayer';
+import type { ControlsPosition, SubtitleSize } from './SelfHostedVideoPlayer';
 
-const subtitleOverlayStyles = css`
+const subtitleOverlayStyles = (position: ControlsPosition) => css`
 	max-width: 71%;
 	pointer-events: none;
 	position: absolute;
-	bottom: ${space[4]}px;
 	left: 50%;
 	transform: translateX(-50%);
+
+	${position === 'top' && `top: ${space[4]}px;`};
+	${position === 'bottom' && `bottom: ${space[4]}px;`};
 `;
 
 const cueBoxStyles = css`
@@ -55,15 +57,17 @@ const cueTextStyles = (subtitleSize: SubtitleSize) => {
 
 export const SubtitleOverlay = ({
 	text,
-	subtitleSize,
+	size,
+	position,
 }: {
 	text: string;
-	subtitleSize: SubtitleSize;
+	size: SubtitleSize;
+	position: 'top' | 'bottom';
 }) => {
 	return (
-		<div css={subtitleOverlayStyles}>
+		<div css={subtitleOverlayStyles(position)}>
 			<div css={cueBoxStyles}>
-				<div css={[cueStyles, cueTextStyles(subtitleSize)]}>{text}</div>
+				<div css={[cueStyles, cueTextStyles(size)]}>{text}</div>
 			</div>
 		</div>
 	);

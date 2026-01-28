@@ -8,7 +8,6 @@ import {
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import React from 'react';
-import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
@@ -36,7 +35,7 @@ import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { Section } from '../components/Section';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
-import { StarRating } from '../components/StarRating/StarRating';
+import { StarRatingDeprecated } from '../components/StarRating/StarRatingDeprecated';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
@@ -313,11 +312,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				</>
 			)}
 			<main data-layout="InteractiveLayout">
-				{isApps && renderAds && (
-					<Island priority="critical">
-						<AdPortals />
-					</Island>
-				)}
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
@@ -384,7 +378,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 								</div>
 								{!isUndefined(article.starRating) ? (
 									<div css={starWrapper}>
-										<StarRating
+										<StarRatingDeprecated
 											rating={article.starRating}
 											size="large"
 										/>

@@ -4,11 +4,9 @@ import type {
 	ButtonPriority,
 	ThemeButton,
 } from '@guardian/source/react-components';
-import {
-	LinkButton,
-	SvgArrowRightStraight,
-} from '@guardian/source/react-components';
-import { palette } from '../palette';
+import { LinkButton } from '@guardian/source/react-components';
+import { palette } from '../../palette';
+import { getPropsForLinkUrl } from './utils';
 
 type ProductLinkButtonProps = {
 	label: string;
@@ -17,7 +15,6 @@ type ProductLinkButtonProps = {
 	fullwidth?: boolean;
 	fullWidthText?: boolean;
 	priority?: ButtonPriority;
-	dataComponent?: string;
 	minimisePadding?: boolean;
 };
 
@@ -57,7 +54,6 @@ export const ProductLinkButton = ({
 	minimisePadding = false,
 	fullWidthText = false,
 	priority = 'primary',
-	dataComponent,
 }: ProductLinkButtonProps) => {
 	const cssOverrides: SerializedStyles[] = [
 		heightAutoStyle,
@@ -67,16 +63,12 @@ export const ProductLinkButton = ({
 
 	return (
 		<LinkButton
+			{...getPropsForLinkUrl(label)}
 			href={url}
 			rel="sponsored noreferrer noopener"
-			target="_blank"
-			iconSide="right"
 			priority={priority}
-			aria-label={`Open ${label} in a new tab`}
-			icon={<SvgArrowRightStraight />}
 			theme={theme}
 			data-ignore="global-link-styling"
-			data-component={dataComponent}
 			data-link-name={`product link button ${priority}`}
 			data-spacefinder-role="inline"
 			size={size}

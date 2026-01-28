@@ -9,7 +9,7 @@ import {
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
-import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
+import { AffiliateDisclaimerLeftCol } from '../components/AffiliateDisclaimerLeftCol.importable';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -29,6 +29,7 @@ import { HeadlineByline } from '../components/HeadlineByline';
 import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
+import { ListenToArticle } from '../components/ListenToArticle.importable';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { minHeaderHeightPx } from '../components/Masthead/Titlepiece/constants';
@@ -309,6 +310,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
+	const isInStarRatingVariant =
+		article.config.abTests.starRatingRedesignVariant === 'variant';
+
 	return (
 		<>
 			{isWeb && (
@@ -360,6 +364,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						format={format}
 						elements={article.mainMediaElements}
 						starRating={
+							!isInStarRatingVariant &&
 							format.design === ArticleDesign.Review &&
 							!isUndefined(article.starRating)
 								? article.starRating
@@ -424,6 +429,10 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 										webPublicationDateDeprecated={
 											article.webPublicationDateDeprecated
 										}
+										isInStarRatingVariant={
+											isInStarRatingVariant
+										}
+										starRating={article.starRating}
 									/>
 								</Section>
 							</Box>
@@ -506,6 +515,10 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
 											}
+											isInStarRatingVariant={
+												isInStarRatingVariant
+											}
+											starRating={article.starRating}
 										/>
 									</div>
 								)}
@@ -524,6 +537,25 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									tags={article.tags}
 									byline={article.byline}
 								/>
+							)}
+							{/* Only show Listen to Article button on App landscape views */}
+							{isApps && (
+								<Hide when="below" breakpoint="leftCol">
+									<div
+										css={css`
+											margin-top: ${space[6]}px;
+										`}
+									>
+										<Island
+											priority="feature"
+											defer={{ until: 'visible' }}
+										>
+											<ListenToArticle
+												articleId={article.pageId}
+											/>
+										</Island>
+									</div>
+								</Hide>
 							)}
 						</GridItem>
 						<GridItem area="meta" element="aside">
@@ -601,7 +633,12 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 												}
 											/>
 											{!!article.affiliateLinksDisclaimer && (
-												<AffiliateDisclaimer />
+												<Island
+													priority="enhancement"
+													defer={{ until: 'idle' }}
+												>
+													<AffiliateDisclaimerLeftCol />
+												</Island>
 											)}
 										</Hide>
 									</>
@@ -631,7 +668,12 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											}
 										/>
 										{!!article.affiliateLinksDisclaimer && (
-											<AffiliateDisclaimer />
+											<Island
+												priority="enhancement"
+												defer={{ until: 'idle' }}
+											>
+												<AffiliateDisclaimerLeftCol />
+											</Island>
 										)}
 									</>
 								)}
@@ -840,6 +882,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						webURL={article.webURL}
+						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Island>
 

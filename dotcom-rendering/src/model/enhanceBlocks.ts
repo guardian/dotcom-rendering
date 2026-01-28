@@ -19,6 +19,7 @@ import { enhanceH2s } from './enhance-H2s';
 import { enhanceElementsImages, enhanceImages } from './enhance-images';
 import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
+import { enhanceProductCarousel } from './enhance-product-carousel';
 import { enhanceTweets } from './enhance-tweets';
 import { enhanceGuVideos } from './enhance-videos';
 import { enhanceLists } from './enhanceLists';
@@ -34,6 +35,7 @@ type Options = {
 	audioArticleImage?: ImageBlockElement;
 	tags?: TagType[];
 	shouldHideAds: boolean;
+	pageId: string;
 };
 
 const enhanceNewsletterSignup =
@@ -94,6 +96,7 @@ export const enhanceElements =
 				options.shouldHideAds,
 			),
 			enhanceDisclaimer(options.hasAffiliateLinksDisclaimer, isNested),
+			enhanceProductCarousel(options.pageId),
 		].reduce(
 			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),
 			elements,

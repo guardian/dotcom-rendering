@@ -1,5 +1,5 @@
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
-import { AffiliateDisclaimerInline } from '../components/AffiliateDisclaimer';
+import { AffiliateDisclaimerInline } from '../components/AffiliateDisclaimerInline.importable';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
@@ -29,7 +29,7 @@ import { Island } from '../components/Island';
 import { ItemLinkBlockElement } from '../components/ItemLinkBlockElement';
 import { KeyTakeaways } from '../components/KeyTakeaways';
 import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
-import { LoopVideoInArticle } from '../components/LoopVideoInArticle';
+import { LinkBlockComponent } from '../components/LinkBlockComponent';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
 import { MiniProfiles } from '../components/MiniProfiles';
@@ -38,12 +38,14 @@ import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent
 import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
 import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importable';
 import { ProductElement } from '../components/ProductElement';
-import { ProductLinkButton } from '../components/ProductLinkButton';
 import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable';
 import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
 import { QandaAtom } from '../components/QandaAtom.importable';
 import { QAndAExplainers } from '../components/QAndAExplainers';
+import { ReporterCalloutBlockComponent } from '../components/ReporterCalloutBlockComponent.importable';
 import { RichLinkComponent } from '../components/RichLinkComponent.importable';
+import { ScrollableProduct } from '../components/ScrollableProduct.importable';
+import { SelfHostedVideoInArticle } from '../components/SelfHostedVideoInArticle';
 import { SoundcloudBlockComponent } from '../components/SoundcloudBlockComponent';
 import { SpotifyBlockComponent } from '../components/SpotifyBlockComponent.importable';
 import { StarRatingBlockComponent } from '../components/StarRatingBlockComponent';
@@ -223,6 +225,15 @@ export const renderElement = ({
 				);
 			}
 			return null;
+		case 'model.dotcomrendering.pageElements.ReporterCalloutBlockElement':
+			if (switches.callouts) {
+				return (
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<ReporterCalloutBlockComponent callout={element} />
+					</Island>
+				);
+			}
+			return null;
 
 		case 'model.dotcomrendering.pageElements.CaptionBlockElement':
 			return (
@@ -384,6 +395,9 @@ export const renderElement = ({
 					title={element.title}
 					isAvatar={element.isAvatar}
 					isTimeline={isTimeline}
+					isInStarRatingVariant={
+						abTests.starRatingRedesignVariant === 'variant'
+					}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
@@ -428,7 +442,7 @@ export const renderElement = ({
 				<Island
 					priority="critical"
 					defer={{ until: 'idle' }}
-					role={element.role}
+					role={element.role ?? 'inline'}
 				>
 					<InteractiveBlockComponent
 						url={element.url}
@@ -493,22 +507,16 @@ export const renderElement = ({
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
-			/*
-				- MediaAtomBlockElement is used for self-hosted videos
-				- Historically, these videos have been self-hosted for legal or sensitive reasons
-					- These videos play in the `VideoAtom` component
-				- Looping videos, introduced in July 2025, are also self-hosted
-					- Thus they are delivered as a MediaAtomBlockElement
-					- However they need to display in a different video player
-				- We need to differentiate between the two forms of video
-					- We can do this by interrogating the atom's metadata, which includes the new attribute `videoPlayerFormat`
-			*/
-			if (element.videoPlayerFormat === 'Loop') {
+			if (
+				element.videoPlayerFormat &&
+				['Loop', 'Cinemagraph'].includes(element.videoPlayerFormat)
+			) {
 				return (
-					<LoopVideoInArticle
+					<SelfHostedVideoInArticle
 						element={element}
 						format={format}
 						isMainMedia={isMainMedia}
+						videoStyle={element.videoPlayerFormat}
 					/>
 				);
 			} else {
@@ -609,15 +617,12 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.LinkBlockElement':
 			return (
-				<>
-					{element.linkType === 'ProductButton' && (
-						<ProductLinkButton
-							label={element.label}
-							url={element.url}
-							dataComponent={'in-body-product-link-button'}
-						/>
-					)}
-				</>
+				<LinkBlockComponent
+					label={element.label}
+					url={element.url}
+					linkType={element.linkType}
+					priority={element.priority}
+				/>
 			);
 		case 'model.dotcomrendering.pageElements.ProductBlockElement':
 			return (
@@ -723,6 +728,9 @@ export const renderElement = ({
 						element={element}
 						ajaxUrl={ajaxUrl}
 						format={format}
+						isInStarRatingVariant={
+							abTests.starRatingRedesignVariant === 'variant'
+						}
 					/>
 				</Island>
 			);
@@ -753,6 +761,9 @@ export const renderElement = ({
 					key={index}
 					rating={element.rating}
 					size={element.size}
+					isInStarRatingVariant={
+						abTests.starRatingRedesignVariant === 'variant'
+					}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
@@ -958,7 +969,11 @@ export const renderElement = ({
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.DisclaimerBlockElement': {
-			return <AffiliateDisclaimerInline />;
+			return (
+				<Island priority="enhancement" defer={{ until: 'idle' }}>
+					<AffiliateDisclaimerInline />
+				</Island>
+			);
 		}
 		case 'model.dotcomrendering.pageElements.CrosswordElement':
 			return (
@@ -966,6 +981,15 @@ export const renderElement = ({
 					<CrosswordComponent
 						data={element.crossword}
 						canRenderAds={renderAds}
+					/>
+				</Island>
+			);
+		case 'model.dotcomrendering.pageElements.ProductCarouselElement':
+			return (
+				<Island priority="critical" defer={{ until: 'idle' }}>
+					<ScrollableProduct
+						products={element.matchedProducts}
+						format={format}
 					/>
 				</Island>
 			);

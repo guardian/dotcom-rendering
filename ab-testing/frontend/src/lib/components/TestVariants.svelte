@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { getOrigin } from "$lib/stores/environment";
+
 	interface Props {
 		testName: string;
 		testGroups: string[];
@@ -7,37 +9,54 @@
 
 	const { testName, testGroups, size }: Props = $props();
 
-	const formatter = new Intl.NumberFormat('en-US', {
-		style: 'percent',
+	const formatter = new Intl.NumberFormat("en-US", {
+		style: "percent",
 		minimumFractionDigits: 0,
 		maximumFractionDigits: 2,
 	});
+
+	let frontendAdminUrl = $derived(getOrigin());
 </script>
 
 <div>
-	<ul>
-		{#each testGroups as group, i}
-			<li>
-				<a
-					href={`https://www.theguardian.com/ab-tests/opt/in/${testName}:${group}`}
-					target="_blank"
-				>
-					{group} ({formatter.format(
-						((1 / testGroups.length) * size) / 100,
-					)})
-				</a>{#if i < testGroups.length - 1}&nbsp;|&nbsp;{/if}
-			</li>
-		{/each}
-	</ul>
+	<table>
+		<tbody>
+			{#each testGroups as group, i}
+				<tr>
+					<td>
+						{group} ({formatter.format(
+							((1 / testGroups.length) * size) / 100,
+						)})
+					</td>
+					<td>
+						<a
+							href={`${frontendAdminUrl}/ab-tests/opt-in/${testName}:${group}`}
+							target="_blank"
+						>
+							opt in
+						</a>
+					</td>
+					<td>
+						<a
+							href={`${frontendAdminUrl}/ab-tests/opt-out/${testName}:${group}`}
+							target="_blank"
+						>
+							opt out
+						</a>
+					</td>
+				</tr>
+			{/each}
+		</tbody>
+	</table>
 </div>
 
 <style>
-	ul {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
+	table {
+		border-collapse: collapse;
+	}
+
+	td {
+		padding: 0.1rem 0.5rem;
+		border: 1px solid var(--color-border);
 	}
 </style>

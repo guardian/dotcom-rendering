@@ -7,6 +7,7 @@ export const enhancePinnedPost = (
 	format: ArticleFormat,
 	renderingTarget: RenderingTarget,
 	pinnedPost: Block | undefined,
+	pageId: string,
 ): Block | undefined => {
 	if (pinnedPost === undefined) {
 		return undefined;
@@ -18,5 +19,6 @@ export const enhancePinnedPost = (
 		promotedNewsletter: undefined,
 		hasAffiliateLinksDisclaimer: false,
 		shouldHideAds: false,
+		pageId,
 	})[0];
 };

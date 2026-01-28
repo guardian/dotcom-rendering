@@ -6,6 +6,7 @@ import type {
 	DCRContainerType,
 	DCRFrontCard,
 	DCRGroupedTrails,
+	PillarBucket,
 } from '../types/front';
 import { DynamicFast } from './DynamicFast';
 import { DynamicPackage } from './DynamicPackage';
@@ -27,6 +28,7 @@ import { FlexibleGeneral } from './FlexibleGeneral';
 import { FlexibleSpecial } from './FlexibleSpecial';
 import { Island } from './Island';
 import { NavList } from './NavList';
+import { PersonalisedMediumFour } from './PersonalisedMediumFour.importable';
 import { ScrollableFeature } from './ScrollableFeature.importable';
 import { ScrollableHighlights } from './ScrollableHighlights.importable';
 import { ScrollableMedium } from './ScrollableMedium.importable';
@@ -47,7 +49,8 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
-	enableHls?: boolean;
+	isInStarRatingVariant?: boolean;
+	pillarBuckets?: PillarBucket;
 };
 
 export const DecideContainer = ({
@@ -63,7 +66,8 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
-	enableHls = false,
+	isInStarRatingVariant,
+	pillarBuckets,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -233,7 +237,11 @@ export const DecideContainer = ({
 		case 'scrollable/highlights':
 			return (
 				<Island priority="critical" defer={{ until: 'visible' }}>
-					<ScrollableHighlights trails={trails} frontId={frontId} />
+					<ScrollableHighlights
+						trails={trails}
+						frontId={frontId}
+						isInStarRatingVariant={isInStarRatingVariant}
+					/>
 				</Island>
 			);
 		case 'flexible/special':
@@ -246,7 +254,7 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
-					enableHls={enableHls}
+					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		case 'flexible/general':
@@ -260,7 +268,7 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
-					enableHls={enableHls}
+					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		case 'scrollable/small':
@@ -274,6 +282,7 @@ export const DecideContainer = ({
 						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
+						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Island>
 			);
@@ -288,10 +297,27 @@ export const DecideContainer = ({
 						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
+						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Island>
 			);
 		case 'static/medium/4':
+			if (pillarBuckets) {
+				return (
+					<Island priority="critical" defer={{ until: 'visible' }}>
+						<PersonalisedMediumFour
+							trails={trails}
+							containerPalette={containerPalette}
+							showAge={showAge}
+							serverTime={serverTime}
+							imageLoading={imageLoading}
+							aspectRatio={aspectRatio}
+							isInStarRatingVariant={isInStarRatingVariant}
+							pillarBuckets={pillarBuckets}
+						/>
+					</Island>
+				);
+			}
 			return (
 				<StaticMediumFour
 					trails={trails}
@@ -300,6 +326,7 @@ export const DecideContainer = ({
 					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
+					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		case 'scrollable/feature':
@@ -312,6 +339,7 @@ export const DecideContainer = ({
 						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						collectionId={collectionId}
+						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Island>
 			);
@@ -324,6 +352,7 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
+					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		default:

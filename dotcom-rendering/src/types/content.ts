@@ -112,6 +112,25 @@ export interface CalloutBlockElementV2 {
 	contacts?: CalloutContactType[];
 }
 
+export interface ReporterCalloutBlockElement {
+	_type: 'model.dotcomrendering.pageElements.ReporterCalloutBlockElement';
+	elementId: string;
+	id: string;
+	activeFrom?: number;
+	activeUntil?: number;
+	displayOnSensitive: boolean;
+	role?: RoleType;
+	title: string;
+	subtitle: string;
+	intro: string;
+	mainTextHeading: string;
+	mainText: string;
+	emailContact?: string;
+	messagingContact?: string;
+	securedropContact?: string;
+	endNote?: string;
+}
+
 export interface CartoonBlockElement {
 	_type: 'model.dotcomrendering.pageElements.CartoonBlockElement';
 	elementId: string;
@@ -398,7 +417,8 @@ export interface LinkBlockElement {
 	_type: 'model.dotcomrendering.pageElements.LinkBlockElement';
 	url: string;
 	label: string;
-	linkType: 'ProductButton';
+	linkType: 'ProductButton' | 'StandardButton';
+	priority?: 'Primary' | 'Tertiary';
 }
 
 export interface ListBlockElement {
@@ -488,6 +508,11 @@ export interface ProductBlockElement {
 	displayType: ProductDisplayType;
 	productCtas: ProductCta[];
 	lowestPrice?: string;
+}
+
+export interface ProductCarouselElement {
+	_type: 'model.dotcomrendering.pageElements.ProductCarouselElement';
+	matchedProducts: ProductBlockElement[];
 }
 
 interface ProfileAtomBlockElement {
@@ -800,6 +825,7 @@ export type FEElement =
 	| CaptionBlockElement
 	| CalloutBlockElement
 	| CalloutBlockElementV2
+	| ReporterCalloutBlockElement
 	| CartoonBlockElement
 	| ChartAtomBlockElement
 	| CodeBlockElement
@@ -855,7 +881,8 @@ export type FEElement =
 	| YoutubeBlockElement
 	| WitnessTypeBlockElement
 	| CrosswordElement
-	| ProductBlockElement;
+	| ProductBlockElement
+	| ProductCarouselElement;
 
 // -------------------------------------
 // Misc
@@ -991,7 +1018,7 @@ export type TimelineAtomType = {
 	expandCallback?: () => void;
 };
 
-export type RatingSizeType = 'large' | 'small';
+export type RatingSizeType = 'large' | 'medium' | 'small';
 
 export type ImageForLightbox = {
 	masterUrl: string;
@@ -1004,7 +1031,7 @@ export type ImageForLightbox = {
 	caption?: string;
 	displayCredit?: boolean;
 	title?: string;
-	starRating?: number;
+	starRating?: StarRating;
 	/**
 	 * Used for liveblog images to generate a link back to the
 	 * original post where the image was used

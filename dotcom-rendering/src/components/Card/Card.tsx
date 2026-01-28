@@ -22,7 +22,7 @@ import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { BETA_CONTAINERS } from '../../model/enhanceCollections';
 import { palette } from '../../palette';
 import type { Branding } from '../../types/branding';
-import type { StarRating as Rating } from '../../types/content';
+import type { StarRating as Rating, RatingSizeType } from '../../types/content';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
@@ -50,8 +50,10 @@ import { SlideshowCarousel } from '../SlideshowCarousel.importable';
 import { Snap } from '../Snap';
 import { SnapCssSandbox } from '../SnapCssSandbox';
 import { StarRating } from '../StarRating/StarRating';
+import { StarRatingDeprecated } from '../StarRating/StarRatingDeprecated';
 import type { Alignment } from '../SupportingContent';
 import { SupportingContent } from '../SupportingContent';
+import { SupportingKeyStoriesContent } from '../SupportingKeyStoriesContent';
 import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
 import { YoutubeBlockComponent } from '../YoutubeBlockComponent.importable';
 import { AvatarContainer } from './components/AvatarContainer';
@@ -162,7 +164,11 @@ export type Props = {
 	subtitleSize?: SubtitleSize;
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
-	enableHls?: boolean;
+	isStorylines?: boolean;
+	isInStarRatingVariant?: boolean;
+	starRatingSize?: RatingSizeType;
+	isInOnwardsAbTestVariant?: boolean;
+	isInPersonalisationVariant?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -184,7 +190,7 @@ const StarRatingComponent = ({
 	cardHasImage: boolean;
 }) => (
 	<div css={starWrapper(cardHasImage)}>
-		<StarRating rating={rating} size="small" />
+		<StarRatingDeprecated rating={rating} size="small" />
 	</div>
 );
 
@@ -196,13 +202,16 @@ const waveformWrapper = (
 	left: 0;
 	right: 0;
 	bottom: 0;
+
 	svg {
 		display: block;
 		width: 100%;
 		height: ${mediaPositionOnMobile === 'top' ? 50 : 29}px;
+
 		${from.mobileMedium} {
 			height: ${mediaPositionOnMobile === 'top' ? 50 : 33}px;
 		}
+
 		${from.tablet} {
 			height: ${mediaPositionOnDesktop === 'top' ? 50 : 33}px;
 		}
@@ -216,12 +225,15 @@ const HorizontalDivider = () => (
 				border-top: 1px solid ${palette('--card-border-top')};
 				height: 1px;
 				width: 50%;
+
 				${from.tablet} {
 					width: 100px;
 				}
+
 				${from.desktop} {
 					width: 140px;
 				}
+
 				margin-top: ${space[3]}px;
 			}
 		`}
@@ -236,6 +248,7 @@ const podcastImageStyles = (
 		return css`
 			width: 69px;
 			height: 69px;
+
 			${from.tablet} {
 				width: 98px;
 				height: 98px;
@@ -249,11 +262,14 @@ const podcastImageStyles = (
 	return css`
 		width: 98px;
 		height: 98px;
+
 		${from.tablet} {
 			width: 120px;
 			height: 120px;
 		}
+
 		/** The image takes the full height on desktop, so that the waveform sticks to the bottom of the card. */
+
 		${from.desktop} {
 			width: ${isHorizontalOnDesktop ? 'unset' : '120px'};
 			height: ${isHorizontalOnDesktop ? 'unset' : '120px'};
@@ -420,7 +436,11 @@ export const Card = ({
 	showKickerImage = false,
 	headlinePosition = 'inner',
 	subtitleSize = 'small',
-	enableHls = false,
+	isStorylines = false,
+	isInStarRatingVariant,
+	starRatingSize = 'small',
+	isInOnwardsAbTestVariant,
+	isInPersonalisationVariant,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -452,7 +472,10 @@ export const Card = ({
 		const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
 
 		const shouldShowAge =
-			isTagPage || !!onwardsSource || (showAge && withinTwelveHours);
+			isStorylines ||
+			isTagPage ||
+			!!onwardsSource ||
+			(showAge && withinTwelveHours);
 
 		if (!shouldShowAge) return undefined;
 
@@ -505,8 +528,30 @@ export const Card = ({
 			css={css`
 				margin-top: auto;
 				display: flex;
+				${isStorylines &&
+				`
+					flex-direction: column;
+					gap: ${space[1]}px;
+					align-items: flex-start;
+				`}
 			`}
 		>
+			{/* Usually, we either display the pill or the footer,
+				but if the card appears in the storylines section on tag pages
+				then we do want to display the date on these cards as well as the media pill.
+			*/}
+			{isStorylines && (
+				<CardFooter
+					format={format}
+					age={decideAge()}
+					commentCount={<CommentCount />}
+					cardBranding={
+						isOnwardContent ? <LabsBranding /> : undefined
+					}
+					showLivePlayable={showLivePlayable}
+				/>
+			)}
+
 			{mainMedia?.type === 'YoutubeVideo' && isVideoArticle && (
 				<>
 					{mainMedia.duration === 0 ? (
@@ -579,8 +624,8 @@ export const Card = ({
 
 	/**
 -	 * Media cards have contrasting background colours. We add additional
-	 * padding to these cards to keep the text readable.
--	 */
+* padding to these cards to keep the text readable.
+-     */
 	const isMediaCardOrNewsletter = isMediaCard(format) || isNewsletter;
 
 	const showPill = isMediaCardOrNewsletter && !isGallerySecondaryOnward;
@@ -668,7 +713,12 @@ export const Card = ({
 	 */
 	const getGapSizes = (): GapSizes => {
 		if (isOnwardContent && !isGallerySecondaryOnward) {
-			if (isMoreGalleriesOnwardContent) {
+			if (
+				isMoreGalleriesOnwardContent ||
+				// This is untidy. If we implement the gallery-style redesign for onwards content
+				// in all articles, we can refactor how we determine gap sizes for onwards cards.
+				isInOnwardsAbTestVariant
+			) {
 				return {
 					row: 'small',
 					column: 'small',
@@ -733,25 +783,40 @@ export const Card = ({
 		if (!hasSublinks) return null;
 		if (sublinkPosition === 'none') return null;
 
-		const Sublinks = () => (
-			<SupportingContent
-				supportingContent={supportingContent}
-				containerPalette={containerPalette}
-				alignment={supportingContentAlignment}
-				isDynamo={isDynamo}
-				isMedia={isMediaCard(format)}
-				fillBackgroundOnMobile={
-					!!isFlexSplash ||
-					(isBetaContainer &&
-						!!image &&
-						(mediaPositionOnMobile === 'bottom' ||
-							isMediaCard(format)))
-				}
-				fillBackgroundOnDesktop={
-					isBetaContainer && isMediaCardOrNewsletter
-				}
-			/>
-		);
+		const Sublinks = () => {
+			return isStorylines ? (
+				<SupportingKeyStoriesContent
+					supportingContent={supportingContent}
+					containerPalette={containerPalette}
+					alignment="vertical"
+					isMedia={isMediaCard(format)}
+					fillBackgroundOnMobile={false}
+					fillBackgroundOnDesktop={
+						isBetaContainer && isMediaCardOrNewsletter
+					}
+					isStorylines={true}
+					dataLinkName={dataLinkName}
+				/>
+			) : (
+				<SupportingContent
+					supportingContent={supportingContent}
+					containerPalette={containerPalette}
+					alignment={supportingContentAlignment}
+					isDynamo={isDynamo}
+					isMedia={isMediaCard(format)}
+					fillBackgroundOnMobile={
+						!!isFlexSplash ||
+						(isBetaContainer &&
+							!!image &&
+							(mediaPositionOnMobile === 'bottom' ||
+								isMediaCard(format)))
+					}
+					fillBackgroundOnDesktop={
+						isBetaContainer && isMediaCardOrNewsletter
+					}
+				/>
+			);
+		};
 
 		if (sublinkPosition === 'outer') {
 			return <Sublinks />;
@@ -770,14 +835,26 @@ export const Card = ({
 
 		return (
 			<Hide until={isFlexSplash ? 'desktop' : 'tablet'}>
-				<SupportingContent
-					supportingContent={supportingContent}
-					/* inner links are always vertically stacked */
-					alignment="vertical"
-					containerPalette={containerPalette}
-					isDynamo={isDynamo}
-					fillBackgroundOnMobile={isFlexSplash}
-				/>
+				{isStorylines ? (
+					<SupportingKeyStoriesContent
+						supportingContent={supportingContent}
+						/* inner links are always vertically stacked */
+						alignment="vertical"
+						containerPalette={containerPalette}
+						fillBackgroundOnMobile={isFlexSplash}
+						isStorylines={true}
+						dataLinkName={dataLinkName}
+					/>
+				) : (
+					<SupportingContent
+						supportingContent={supportingContent}
+						/* inner links are always vertically stacked */
+						alignment="vertical"
+						containerPalette={containerPalette}
+						isDynamo={isDynamo}
+						fillBackgroundOnMobile={isFlexSplash}
+					/>
+				)}
 			</Hide>
 		);
 	};
@@ -845,6 +922,7 @@ export const Card = ({
 						${until.tablet} {
 							display: none;
 						}
+
 						${from.desktop} {
 							display: none;
 						}
@@ -881,6 +959,7 @@ export const Card = ({
 				headlineText={headlineText}
 				dataLinkName={resolvedDataLinkName}
 				isExternalLink={isExternalLink}
+				isInPersonalisationVariant={isInPersonalisationVariant}
 			/>
 			{headlinePosition === 'outer' && (
 				<div
@@ -908,12 +987,18 @@ export const Card = ({
 						showByline={showByline}
 						isExternalLink={isExternalLink}
 					/>
-					{!isUndefined(starRating) ? (
-						<StarRatingComponent
-							rating={starRating}
-							cardHasImage={!!image}
-						/>
-					) : null}
+					{!isUndefined(starRating) &&
+						(isInStarRatingVariant ? (
+							<StarRating
+								rating={starRating}
+								size={starRatingSize}
+							/>
+						) : (
+							<StarRatingComponent
+								rating={starRating}
+								cardHasImage={!!image}
+							/>
+						))}
 				</div>
 			)}
 
@@ -1001,7 +1086,6 @@ export const Card = ({
 									width={media.mainMedia.width}
 									videoStyle={media.mainMedia.videoStyle}
 									posterImage={media.mainMedia.image ?? ''}
-									containerAspectRatio={5 / 4}
 									fallbackImage={media.mainMedia.image ?? ''}
 									fallbackImageSize={mediaSize}
 									fallbackImageLoading={imageLoading}
@@ -1012,8 +1096,8 @@ export const Card = ({
 										media.mainMedia.subtitleSource
 									}
 									subtitleSize={subtitleSize}
-									enableHls={enableHls}
-									letterboxed={true}
+									minAspectRatio={4 / 5}
+									containerAspectRatioDesktop={5 / 4}
 								/>
 							</Island>
 						)}
@@ -1188,124 +1272,142 @@ export const Card = ({
 					mediaSize={mediaSize}
 					isBetaContainer={isBetaContainer}
 					mediaPositionOnDesktop={
-						image ? mediaPositionOnDesktop : 'none'
+						media ? mediaPositionOnDesktop : 'none'
 					}
 					mediaPositionOnMobile={
-						image ? mediaPositionOnMobile : 'none'
+						media ? mediaPositionOnMobile : 'none'
 					}
 					padContent={determinePadContent(
 						isMediaCardOrNewsletter,
 						isBetaContainer,
 						isOnwardContent,
 					)}
+					isInOnwardsAbTestVariant={!!isInOnwardsAbTestVariant}
 				>
-					{/* This div is needed to keep the headline and trail text justified at the start */}
-					<div
-						css={css`
-							position: relative;
-							display: flex;
-							flex-direction: column;
-							justify-content: flex-start;
-							flex-grow: 1;
-						`}
-					>
-						{headlinePosition === 'inner' && (
-							<HeadlineWrapper>
-								<CardHeadline
-									headlineText={headlineText}
-									format={format}
-									fontSizes={headlineSizes}
-									showQuotes={showQuotes}
-									kickerText={
-										format.design ===
-											ArticleDesign.LiveBlog &&
-										!kickerText
-											? 'Live'
-											: kickerText
-									}
-									showPulsingDot={
-										format.design ===
-											ArticleDesign.LiveBlog ||
-										showPulsingDot
-									}
-									byline={byline}
-									showByline={showByline}
-									isExternalLink={isExternalLink}
-									kickerImage={
-										showKickerImage &&
-										media?.type === 'podcast'
-											? media.podcastImage
-											: undefined
-									}
-								/>
-								{!isUndefined(starRating) ? (
-									<StarRatingComponent
-										rating={starRating}
-										cardHasImage={!!image}
-									/>
-								) : null}
-							</HeadlineWrapper>
-						)}
-
-						{!!trailText && shouldShowTrailText && (
-							<TrailText
-								trailText={trailText}
-								trailTextSize={trailTextSize}
-								padTop={headlinePosition === 'inner'}
-								hideUntil={hideTrailTextUntil()}
-							/>
-						)}
-
-						{!isOpinionCardWithAvatar && (
-							<>
-								{showPill ? (
-									<>
-										{!!branding && isOnwardContent && (
-											<LabsBranding />
-										)}
-										<MediaOrNewsletterPill />
-									</>
-								) : (
-									<CardFooter
+					{/* In the storylines section on tag pages, the flex splash is used to display key stories.
+						We don't display an article headline in the conventional sense, the key stories are instead displayed as "supporting content".
+						However, simply passing an empty string as the article headline still reserves space.
+						The storylines check enables us to avoid rendering that space at all.
+					*/}
+					{/* the div is needed to keep the headline and trail text justified at the start */}
+					{!(isStorylines && isFlexSplash) && (
+						<div
+							css={css`
+								position: relative;
+								display: flex;
+								flex-direction: column;
+								justify-content: flex-start;
+								flex-grow: 1;
+							`}
+						>
+							{headlinePosition === 'inner' && (
+								<HeadlineWrapper>
+									<CardHeadline
+										headlineText={headlineText}
 										format={format}
-										age={decideAge()}
-										commentCount={<CommentCount />}
-										cardBranding={
-											isOnwardContent ? (
-												<LabsBranding />
-											) : undefined
+										fontSizes={headlineSizes}
+										showQuotes={showQuotes}
+										kickerText={
+											format.design ===
+												ArticleDesign.LiveBlog &&
+											!kickerText
+												? 'Live'
+												: kickerText
 										}
-										showLivePlayable={showLivePlayable}
-									/>
-								)}
-							</>
-						)}
-						{showLivePlayable &&
-							liveUpdatesPosition === 'inner' && (
-								<Island
-									priority="feature"
-									defer={{ until: 'visible' }}
-								>
-									<LatestLinks
-										id={linkTo}
-										isDynamo={isDynamo}
-										direction={
-											isFlexibleContainer
-												? liveUpdatesAlignment
-												: supportingContentAlignment
+										showPulsingDot={
+											format.design ===
+												ArticleDesign.LiveBlog ||
+											showPulsingDot
 										}
-										containerPalette={containerPalette}
-										serverTime={serverTime}
-										displayHeader={isFlexibleContainer}
-										directionOnMobile={
-											isFlexibleContainer
-												? 'horizontal'
+										byline={byline}
+										showByline={showByline}
+										isExternalLink={isExternalLink}
+										kickerImage={
+											showKickerImage &&
+											media?.type === 'podcast'
+												? media.podcastImage
 												: undefined
 										}
-									></LatestLinks>
-								</Island>
+									/>
+
+									{!isUndefined(starRating) &&
+										(isInStarRatingVariant ? (
+											<StarRating
+												rating={starRating}
+												size={starRatingSize}
+											/>
+										) : (
+											<StarRatingComponent
+												rating={starRating}
+												cardHasImage={!!image}
+											/>
+										))}
+								</HeadlineWrapper>
 							)}
-					</div>
+
+							{!!trailText && shouldShowTrailText && (
+								<TrailText
+									trailText={trailText}
+									trailTextSize={trailTextSize}
+									padTop={headlinePosition === 'inner'}
+									hideUntil={hideTrailTextUntil()}
+								/>
+							)}
+
+							{!isOpinionCardWithAvatar && (
+								<>
+									{showPill ? (
+										<>
+											{!!branding &&
+												format.theme ===
+													ArticleSpecial.Labs &&
+												isOnwardContent && (
+													<LabsBranding />
+												)}
+											<MediaOrNewsletterPill />
+										</>
+									) : (
+										<CardFooter
+											format={format}
+											age={decideAge()}
+											commentCount={<CommentCount />}
+											cardBranding={
+												isOnwardContent ? (
+													<LabsBranding />
+												) : undefined
+											}
+											showLivePlayable={showLivePlayable}
+										/>
+									)}
+								</>
+							)}
+							{showLivePlayable &&
+								liveUpdatesPosition === 'inner' && (
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
+										<LatestLinks
+											id={linkTo}
+											isDynamo={isDynamo}
+											direction={
+												isFlexibleContainer
+													? liveUpdatesAlignment
+													: supportingContentAlignment
+											}
+											containerPalette={containerPalette}
+											serverTime={serverTime}
+											displayHeader={isFlexibleContainer}
+											directionOnMobile={
+												isFlexibleContainer
+													? 'horizontal'
+													: undefined
+											}
+										></LatestLinks>
+									</Island>
+								)}
+						</div>
+					)}
 
 					{/* This div is needed to push this content to the bottom of the card */}
 					<div style={isOnwardContent ? { marginTop: 'auto' } : {}}>

@@ -19,18 +19,33 @@ export const fetchAndDeployArtifacts = async (deployments: ArtifactInfo[]) => {
 	const CONFIG_PREFIX = `${STAGE}/config/ab-testing`;
 
 	try {
-		await Promise.all(
+		const artifacts = await Promise.all(
 			deployments.map(async ({ artifact, dictionary }) => {
 				console.log(
 					`Fetching artifact /${ARTIFACT_BUCKET_NAME}${CONFIG_PREFIX}/${artifact} from S3 and deploying to Fastly dictionary ${dictionary.name}`,
 				);
-				const abTestGroups = await fetchDictionaryArtifact(
-					ARTIFACT_BUCKET_NAME,
-					`${CONFIG_PREFIX}/${artifact}`,
-				);
-				return await deployDictionary(dictionary, abTestGroups);
+				return {
+					dictionary,
+					keyValues: await fetchDictionaryArtifact(
+						ARTIFACT_BUCKET_NAME,
+						`${CONFIG_PREFIX}/${artifact}`,
+					),
+				};
 			}),
 		);
+
+		for (const [i, { dictionary, keyValues }] of artifacts.entries()) {
+			await deployDictionary(dictionary, keyValues);
+			console.log(
+				`Successfully deployed artifact to Fastly dictionary ${dictionary.name}`,
+			);
+			if (i !== artifacts.length - 1) {
+				// Adding a small delay between calls to be sure the updates are not concurrent
+				// See note in this section of the fastly docs
+				// https://www.fastly.com/documentation/reference/api/#rate-limiting
+				await new Promise((resolve) => setTimeout(resolve, 500));
+			}
+		}
 	} catch (error) {
 		console.error("Error in fetchAndDeployArtifacts:", error);
 		throw error;

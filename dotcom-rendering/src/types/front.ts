@@ -118,6 +118,10 @@ export type DCRSnapType = {
 
 export type AspectRatio = FEAspectRatio;
 
+type BucketPillar = 'opinion' | 'sport' | 'culture' | 'lifestyle';
+
+export type PillarBucket = Partial<Record<BucketPillar, DCRFrontCard[]>>;
+
 export type DCRCollectionType = {
 	id: string;
 	displayName: string;
@@ -144,6 +148,7 @@ export type DCRCollectionType = {
 	collectionBranding?: CollectionBranding;
 	targetedTerritory?: Territory;
 	aspectRatio?: AspectRatio;
+	bucket?: PillarBucket;
 };
 
 export type DCRGroupedTrails = {
@@ -160,6 +165,8 @@ export type DCRSupportingContent = {
 	url?: string;
 	kickerText?: string;
 	format: ArticleFormat;
+	/** // AIStorylines: The date is shown in the supporting content for the key stories container in a tag page */
+	webPublicationDate?: string;
 };
 
 export type TreatType = {

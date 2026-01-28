@@ -5,7 +5,10 @@ import {
 	getParserErrorMessage,
 	parse as parseFootballMatches,
 } from '../footballMatches';
-import { parse as parseFootballTables } from '../footballTables';
+import {
+	parse as parseFootballTables,
+	parseTableSummary,
+} from '../footballTables';
 import type { FECricketMatchPage } from '../frontend/feCricketMatchPage';
 import type { FEFootballCompetition } from '../frontend/feFootballDataPage';
 import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
@@ -28,7 +31,6 @@ import type {
 	Region,
 } from '../sportDataPage';
 import { makePrefetchHeader } from './lib/header';
-import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderSportPage } from './render.sportDataPage.web';
 
 const decideMatchListPageKind = (pageId: string): FootballMatchListPageKind => {
@@ -122,7 +124,6 @@ const parseFEFootballMatchList = (
 };
 
 export const handleFootballMatchListPage: RequestHandler = ({ body }, res) => {
-	recordTypeAndPlatform('footballMatchListPage', 'web');
 	const footballDataValidated: FEFootballMatchListPage =
 		validateAsFootballMatchListPage(body);
 
@@ -161,7 +162,6 @@ const parseFEFootballTables = (
 };
 
 export const handleFootballTablesPage: RequestHandler = ({ body }, res) => {
-	recordTypeAndPlatform('FootballTablesPage', 'web');
 	const footballTablesPageValidated: FEFootballTablesPage =
 		validateAsFootballTablesPage(body);
 
@@ -199,8 +199,6 @@ const parseFECricketMatch = (data: FECricketMatchPage): CricketMatchPage => {
 };
 
 export const handleCricketMatchPage: RequestHandler = ({ body }, res) => {
-	recordTypeAndPlatform('CricketMatchPage', 'web');
-
 	const cricketMatchPageValidated: FECricketMatchPage =
 		validateAsCricketMatchPageType(body);
 
@@ -223,8 +221,17 @@ const parseFEFootballMatch = (
 		);
 	}
 
+	const group = data.group && parseTableSummary(data.group);
+
+	if (group && !group.ok) {
+		throw new Error(
+			`Failed to parse football league table group: ${group.error.kind} ${group.error.message}`,
+		);
+	}
+
 	return {
 		match: parsedFootballMatch.value,
+		group: group?.value,
 		kind: 'FootballMatchSummary',
 		nav: {
 			...extractNAV(data.nav),
@@ -241,8 +248,6 @@ const parseFEFootballMatch = (
 };
 
 export const handleFootballMatchPage: RequestHandler = ({ body }, res) => {
-	recordTypeAndPlatform('FootballMatchPage', 'web');
-
 	const footballMatchPageValidated: FEFootballMatchPage =
 		validateAsFootballMatchPageType(body);
 	const parsedFootballMatchData = parseFEFootballMatch(

@@ -3,13 +3,14 @@ import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
+	space,
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
-import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
+import { AffiliateDisclaimerLeftCol } from '../components/AffiliateDisclaimerLeftCol.importable';
 import { AppsEpic } from '../components/AppsEpic.importable';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
@@ -31,6 +32,7 @@ import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
+import { ListenToArticle } from '../components/ListenToArticle.importable';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
@@ -41,7 +43,7 @@ import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
-import { StarRating } from '../components/StarRating/StarRating';
+import { StarRatingDeprecated } from '../components/StarRating/StarRatingDeprecated';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
@@ -382,6 +384,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 		format.design === ArticleDesign.Video ||
 		format.design === ArticleDesign.Audio;
 
+	const isVideo = format.design === ArticleDesign.Video;
+
 	const showComments = article.isCommentable && !isPaidContent;
 
 	const { branding } = article.commercialProperties[article.editionId];
@@ -391,6 +395,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const renderAds = canRenderAds(article);
+
+	const isInStarRatingVariant =
+		article.config.abTests.starRatingRedesignVariant === 'variant';
 
 	return (
 		<>
@@ -547,13 +554,18 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									webPublicationDateDeprecated={
 										article.webPublicationDateDeprecated
 									}
+									isInStarRatingVariant={
+										isInStarRatingVariant
+									}
+									starRating={article.starRating}
 								/>
 							</div>
 						</GridItem>
 						<GridItem area="standfirst">
-							{!isUndefined(article.starRating) ? (
+							{!isUndefined(article.starRating) &&
+							!isInStarRatingVariant ? (
 								<div css={starWrapper}>
-									<StarRating
+									<StarRatingDeprecated
 										rating={article.starRating}
 										size="large"
 									/>
@@ -644,7 +656,12 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											/>
 										</div>
 										{!!article.affiliateLinksDisclaimer && (
-											<AffiliateDisclaimer />
+											<Island
+												priority="enhancement"
+												defer={{ until: 'idle' }}
+											>
+												<AffiliateDisclaimerLeftCol />
+											</Island>
 										)}
 									</Hide>
 								</>
@@ -674,12 +691,38 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										}
 									/>
 									{!!article.affiliateLinksDisclaimer && (
-										<AffiliateDisclaimer />
+										<Island
+											priority="enhancement"
+											defer={{ until: 'idle' }}
+										>
+											<AffiliateDisclaimerLeftCol />
+										</Island>
 									)}
 								</div>
 							)}
 						</GridItem>
 						<GridItem area="body">
+							{/* Only show Listen to Article button on App landscape views */}
+							{isApps && (
+								<Hide until="leftCol">
+									{!isVideo && (
+										<div
+											css={css`
+												margin-top: ${space[2]}px;
+											`}
+										>
+											<Island
+												priority="feature"
+												defer={{ until: 'visible' }}
+											>
+												<ListenToArticle
+													articleId={article.pageId}
+												/>
+											</Island>
+										</div>
+									)}
+								</Hide>
+							)}
 							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}
@@ -732,7 +775,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									)}
 
 								{isApps && (
-									<Island priority="critical">
+									<Island
+										priority="critical"
+										defer={{ until: 'visible' }}
+									>
 										<AppsEpic />
 									</Island>
 								)}
@@ -882,6 +928,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								}
 								serverTime={serverTime}
 								renderingTarget={renderingTarget}
+								isInStarRatingVariant={isInStarRatingVariant}
 							/>
 						</Island>
 					</Section>
@@ -907,6 +954,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						webURL={article.webURL}
+						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Island>
 				{showComments && (

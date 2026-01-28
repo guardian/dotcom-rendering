@@ -3,13 +3,14 @@ import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
+	space,
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
-import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
+import { AffiliateDisclaimerLeftCol } from '../components/AffiliateDisclaimerLeftCol.importable';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -26,6 +27,7 @@ import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
+import { ListenToArticle } from '../components/ListenToArticle.importable';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
@@ -248,6 +250,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
+	const isInStarRatingVariant =
+		article.config.abTests.starRatingRedesignVariant === 'variant';
+
 	return (
 		<>
 			{isWeb && (
@@ -369,6 +374,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									format={format}
 									elements={article.mainMediaElements}
 									starRating={
+										!isInStarRatingVariant &&
 										format.design ===
 											ArticleDesign.Review &&
 										!isUndefined(article.starRating)
@@ -410,6 +416,10 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									webPublicationDateDeprecated={
 										article.webPublicationDateDeprecated
 									}
+									isInStarRatingVariant={
+										isInStarRatingVariant
+									}
+									starRating={article.starRating}
 								/>
 							</PositionHeadline>
 						</GridItem>
@@ -418,6 +428,25 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								format={format}
 								standfirst={article.standfirst}
 							/>
+							{/* Only show Listen to Article button on App landscape views */}
+							{isApps && (
+								<Hide until="leftCol">
+									<div
+										css={css`
+											margin-top: ${space[2]}px;
+										`}
+									>
+										<Island
+											priority="feature"
+											defer={{ until: 'visible' }}
+										>
+											<ListenToArticle
+												articleId={article.pageId}
+											/>
+										</Island>
+									</div>
+								</Hide>
+							)}
 						</GridItem>
 						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
@@ -482,7 +511,12 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 												}
 											/>
 											{!!article.affiliateLinksDisclaimer && (
-												<AffiliateDisclaimer />
+												<Island
+													priority="enhancement"
+													defer={{ until: 'idle' }}
+												>
+													<AffiliateDisclaimerLeftCol />
+												</Island>
 											)}
 										</Hide>
 									</>
@@ -512,7 +546,12 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											}
 										/>
 										{!!article.affiliateLinksDisclaimer && (
-											<AffiliateDisclaimer />
+											<Island
+												priority="enhancement"
+												defer={{ until: 'idle' }}
+											>
+												<AffiliateDisclaimerLeftCol />
+											</Island>
 										)}
 									</>
 								)}
@@ -720,6 +759,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						webURL={article.webURL}
+						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Island>
 
