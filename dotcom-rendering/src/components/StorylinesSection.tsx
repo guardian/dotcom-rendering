@@ -11,13 +11,13 @@ import { submitComponentEvent } from '../client/ophan/ophan';
 import { type EditionId, isNetworkFront } from '../lib/edition';
 import { palette as schemePalette } from '../palette';
 import type { DCRContainerLevel, DCRContainerPalette } from '../types/front';
+import type { TagPagePagination } from '../types/tagPage';
 import { ContainerOverrides } from './ContainerOverrides';
 import { ContainerTitle } from './ContainerTitle';
 import { Footer } from './ExpandableAtom/Footer';
+import { FrontPagination } from './FrontPagination';
 import { FrontSectionTitle } from './FrontSectionTitle';
 import { ShowHideButton } from './ShowHideButton';
-import { FrontPagination } from './FrontPagination';
-import { TagPagePagination } from '../types/tagPage';
 
 type Props = {
 	/** This text will be used as the h2 shown in the left column for the section */
