@@ -2,12 +2,11 @@ import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import type { ReactNode } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
-import { parseHtml } from '../lib/domUtils';
 import type { NestedArticleElement } from '../lib/renderElement';
 import type { ProductBlockElement } from '../types/content';
 import { ProductCardInline } from './ProductCardInline';
 import { ProductCardLeftCol } from './ProductCardLeftCol';
-import { buildElementTree } from './SubheadingBlockComponent';
+import { Subheading } from './Subheading';
 
 const contentContainer = css`
 	position: relative;
@@ -86,23 +85,10 @@ const Content = ({
 	const showLeftCol =
 		product.displayType === 'InlineWithProductCard' &&
 		shouldShowLeftColCard;
-	const subheadingHtml = parseHtml(
-		`<h2 id="${product.h2Id ?? product.elementId}">${
-			product.primaryHeadingHtml
-				? `${product.primaryHeadingHtml}<br />`
-				: ''
-		} ${product.secondaryHeadingHtml || ''}</h2>`,
-	);
 
-	const isSubheading = subheadingHtml.textContent
-		? subheadingHtml.textContent.trim().length > 0
-		: false;
 	return (
 		<div>
-			{isSubheading &&
-				Array.from(subheadingHtml.childNodes).map(
-					buildElementTree(format),
-				)}
+			<ProductSubheading product={product} format={format} />
 			<div css={contentContainer} data-spacefinder-role="nested">
 				{showLeftCol && (
 					<LeftColProductCardContainer>
@@ -129,5 +115,34 @@ const Content = ({
 				))}
 			</div>
 		</div>
+	);
+};
+
+const ProductSubheading = ({
+	product,
+	format,
+}: {
+	product: ProductBlockElement;
+	format: ArticleFormat;
+}) => {
+	const subheadingHtml = `${
+		product.primaryHeadingHtml ? `${product.primaryHeadingHtml}<br />` : ''
+	} ${product.secondaryHeadingHtml || ''}`;
+
+	const isSubheading =
+		!!product.primaryHeadingText || !!product.secondaryHeadingText;
+
+	if (!isSubheading) {
+		return null;
+	}
+
+	return (
+		<Subheading
+			id={`${product.h2Id ?? product.elementId}`}
+			format={format}
+			topPadding={true}
+		>
+			<span dangerouslySetInnerHTML={{ __html: subheadingHtml }}></span>
+		</Subheading>
 	);
 };
