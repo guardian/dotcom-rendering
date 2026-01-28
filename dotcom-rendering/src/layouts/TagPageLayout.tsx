@@ -142,29 +142,25 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 						tagPage.storylinesContent &&
 						(!tagPage.pagination ||
 							tagPage.pagination.currentPage === 1) && // Only on the first page
-						// (index === 1 || tagPage.groupedTrails.length === 1); // After the first section or if there's only one section on the page
-						(index === 0 || tagPage.groupedTrails.length === 1); // At the start if there's only one section on the page
+						index === 0; // Only after the first section
 
-					const maybeStorylinesPagination =
+					// The pagination should appear at the bottom of the page; usually this is done by passing to FrontSection.
+					// If the storylines section is being inserted when there's only one other container on the page,
+					// we want to attach the pagination to it instead of the last trails section.
+					const tagPagePagination =
+						index === tagPage.groupedTrails.length - 1 &&
+						tagPage.pagination &&
+						!(
+							insertStorylinesSection &&
+							tagPage.groupedTrails.length === 1
+						)
+							? tagPage.pagination
+							: undefined;
+
+					const paginationForStorylines =
 						tagPage.groupedTrails.length === 1
 							? tagPage.pagination
 							: undefined;
-					const tagPagePagination = () => {
-						if (
-							insertStorylinesSection &&
-							tagPage.groupedTrails.length === 1
-						) {
-							return undefined;
-						}
-						if (
-							index === tagPage.groupedTrails.length - 1 &&
-							tagPage.pagination
-						) {
-							return tagPage.pagination;
-						} else {
-							return undefined;
-						}
-					};
 
 					return (
 						<Fragment key={containerId}>
@@ -194,12 +190,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								editionId={tagPage.editionId}
 								canShowMore={false}
 								ajaxUrl={tagPage.config.ajaxUrl}
-								pagination={
-									// index === tagPage.groupedTrails.length - 1
-									// 	? tagPage.pagination
-									// 	: undefined
-									tagPagePagination()
-								}
+								pagination={tagPagePagination}
 								discussionApiUrl={
 									tagPage.config.discussionApiUrl
 								}
@@ -225,12 +216,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 											pillar={
 												tagPage.nav.currentPillarTitle
 											}
-											pagination={
-												// index === tagPage.groupedTrails.length - 1
-												// 	? tagPage.pagination
-												// 	: undefined
-												maybeStorylinesPagination
-											}
+											pagination={paginationForStorylines}
 										/>
 									</Island>
 								)}
