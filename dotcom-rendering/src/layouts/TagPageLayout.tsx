@@ -161,7 +161,9 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 							tagPage.pagination
 						) {
 							return tagPage.pagination;
-						} else return undefined;
+						} else {
+							return undefined;
+						}
 					};
 
 					return (

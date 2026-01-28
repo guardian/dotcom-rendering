@@ -16,11 +16,11 @@ import type { EditionId } from '../lib/edition';
 import { parseStorylinesContentToStorylines } from '../model/enhanceTagPageStorylinesContent';
 import { palette } from '../palette';
 import type { StorylinesContent } from '../types/storylinesContent';
+import type { TagPagePagination } from '../types/tagPage';
+import { Footer } from './ExpandableAtom/Footer';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { ScrollableCarousel } from './ScrollableCarousel';
 import { StorylinesSection } from './StorylinesSection';
-import { TagPagePagination } from '../types/tagPage';
-import { Footer } from './ExpandableAtom/Footer';
 
 type StorylinesSectionProps = {
 	url?: string;
