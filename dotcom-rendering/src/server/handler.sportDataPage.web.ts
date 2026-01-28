@@ -251,6 +251,7 @@ const parseFEFootballMatch = (
 		match: parsedFootballMatch.value,
 		matchStats: parsedFootballMatchStats.value,
 		matchInfo: matchInfo.value,
+		competitionName: data.competitionName,
 		group: group?.value,
 		kind: 'FootballMatchSummary',
 		nav: {

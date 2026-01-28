@@ -78,6 +78,8 @@ const SportsPage = ({
 				<FootballMatchInfoPage
 					matchStats={sportData.matchStats}
 					matchInfo={sportData.matchInfo}
+					competitionName={sportData.competitionName}
+					edition={sportData.editionId}
 					table={sportData.group}
 				/>
 			);
