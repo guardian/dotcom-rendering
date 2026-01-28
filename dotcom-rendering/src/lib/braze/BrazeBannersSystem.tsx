@@ -67,6 +67,7 @@ export enum BrazeBannersSystemPlacementId {
  * @returns A promise that resolves when the refresh is complete
  */
 export function refreshBanners(braze: BrazeInstance): Promise<void> {
+	return Promise.resolve();
 	let timeoutId: NodeJS.Timeout;
 
 	// Create the Timeout Promise
@@ -228,12 +229,22 @@ const getPropertyValueAsString = (
  * changing there rendering engine without notice. This could lead to broken
  * styles on the banners and a bad user experience.
  * @param meta Braze Banner meta information
- * @param document Document object of the Braze Banner iframe
+ * @param stopOnFirstProblem Whether to stop checking on the first problem found
+ * @returns boolean indicating if the CSS passed the checks
  */
 const runCssCheckerOnBrazeBanner = (
 	meta: BrazeBannersSystemMeta,
-	document: Document | null,
-) => {
+	stopOnFirstProblem?: boolean,
+): boolean => {
+	// Flag to indicate if any problems were found
+	let isValid = true;
+
+	// Initialize the parser
+	const parser = new DOMParser();
+
+	// Parse the string into an HTML Document
+	const document = parser.parseFromString(meta.banner.html, 'text/html');
+
 	// Get all style elements inside the banner
 	const styleElements = document?.querySelectorAll('style');
 	if (styleElements) {
@@ -253,16 +264,18 @@ const runCssCheckerOnBrazeBanner = (
 							brazeBannersSystemLogger.warn(
 								`CSS Checker: Selector "${selector}" did not match any elements in the Braze Banner with component name "${meta.banner.id} (${meta.banner.placementId})". This may indicate broken styles.`,
 							);
-						} else if (matchedElements) {
-							brazeBannersSystemLogger.log(
-								`CSS Checker: Selector "${selector}" matched ${matchedElements.length} elements in the Braze Banner with component name "${meta.banner.id} (${meta.banner.placementId})".`,
-							);
+							isValid = false;
+							if (stopOnFirstProblem) {
+								return false;
+							}
 						}
 					}
 				}
 			}
 		});
 	}
+
+	return isValid;
 };
 
 /**
@@ -349,21 +362,7 @@ export const BrazeBannersSystemDisplay = ({
 			meta.braze.insertBanner(meta.banner, containerRef.current);
 
 			// CSS Checker
-			const iframe = containerRef.current.querySelector('iframe');
-			if (iframe) {
-				// Execution timing: srcdoc is usually available very quickly
-				// but we check readyState to be safe.
-				if (iframe.contentDocument?.readyState === 'complete') {
-					runCssCheckerOnBrazeBanner(meta, iframe.contentDocument);
-				} else {
-					iframe.addEventListener('load', () => {
-						runCssCheckerOnBrazeBanner(
-							meta,
-							iframe.contentDocument,
-						);
-					});
-				}
-			}
+			runCssCheckerOnBrazeBanner(meta);
 		}
 	}, [meta.banner, meta.braze]);
 
