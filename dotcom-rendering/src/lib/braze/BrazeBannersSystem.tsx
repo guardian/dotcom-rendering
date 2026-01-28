@@ -184,6 +184,7 @@ export const canShowBrazeBannersSystem = async (
 enum BrazeBannersSystemMessageType {
 	GetAuthStatus = 'BRAZE_BANNERS_SYSTEM:GET_AUTH_STATUS',
 	NewsletterSubscribe = 'BRAZE_BANNERS_SYSTEM:NEWSLETTER_SUBSCRIBE',
+	GetSettingsPropertyValue = 'BRAZE_BANNERS_SYSTEM:GET_SETTINGS_PROPERTY_VALUE',
 }
 
 /**
@@ -192,7 +193,7 @@ enum BrazeBannersSystemMessageType {
  * @param propertyKey Key of the property to retrieve
  * @returns The value of the property as a string
  */
-const getPropertyValue = (
+const getPropertyValueAsString = (
 	meta: BrazeBannersSystemMeta,
 	propertyKey: string,
 ): string => {
@@ -209,11 +210,7 @@ const getPropertyValue = (
 		return meta.banner.getImageProperty(propertyKey) ?? '';
 	}
 	if (meta.banner.properties[propertyKey]?.type === 'jsonobject') {
-		return JSON.stringify(
-			meta.banner.getJsonProperty(propertyKey),
-			null,
-			2,
-		);
+		return JSON.stringify(meta.banner.getJsonProperty(propertyKey));
 	}
 	if (meta.banner.properties[propertyKey]?.type === 'datetime') {
 		return new Date(
@@ -305,35 +302,6 @@ export const BrazeBannersSystemDisplay = ({
 
 			// Let Braze inject the HTML/CSS
 			meta.braze.insertBanner(meta.banner, containerRef.current);
-
-			// Replace settings placeholders in the banner content
-			const iframe = containerRef.current.querySelector('iframe');
-			if (iframe) {
-				const replaceSettingsPlaceholders = () => {
-					let html = meta.banner.html;
-					for (const propertyKey in meta.banner.properties) {
-						const placeholder = `##settings.${propertyKey}##`;
-						const value = getPropertyValue(meta, propertyKey);
-						html = html.replaceAll(placeholder, value);
-					}
-
-					// Set iframe srcdoc attribute
-					iframe.setAttribute('srcdoc', html);
-					brazeBannersSystemLogger.info(
-						'✅ Replaced placeholders in Braze Banner iframe.',
-					);
-				};
-
-				// If the iframe is already loaded (rare but possible), run immediately
-				if (iframe.contentDocument?.readyState === 'complete') {
-					replaceSettingsPlaceholders();
-				} else {
-					iframe.addEventListener(
-						'load',
-						replaceSettingsPlaceholders,
-					);
-				}
-			}
 		}
 	}, [meta.banner, meta.braze]);
 
@@ -347,6 +315,10 @@ export const BrazeBannersSystemDisplay = ({
 				| {
 						type: BrazeBannersSystemMessageType.NewsletterSubscribe;
 						newsletterId?: string;
+				  }
+				| {
+						type: BrazeBannersSystemMessageType.GetSettingsPropertyValue;
+						key?: string;
 				  }
 			>,
 		) => {
@@ -375,6 +347,24 @@ export const BrazeBannersSystemDisplay = ({
 						void subscribeToNewsletter(newsletterId);
 					}
 					break;
+				case BrazeBannersSystemMessageType.GetSettingsPropertyValue:
+					const { key } = event.data;
+					if (key) {
+						const value = getPropertyValueAsString(meta, key);
+						postMessageToBrazeBanner(
+							BrazeBannersSystemMessageType.GetSettingsPropertyValue,
+							{
+								key,
+								value,
+							},
+						);
+					}
+					break;
+				default:
+					brazeBannersSystemLogger.warn(
+						'Received unknown message type from Braze Banner:',
+						event.data,
+					);
 			}
 		};
 
