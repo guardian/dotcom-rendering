@@ -24,12 +24,15 @@ import { VideoProgressBar } from './VideoProgressBar';
 export type SubtitleSize = 'small' | 'medium' | 'large';
 export type ControlsPosition = 'top' | 'bottom';
 
-const videoStyles = (aspectRatio: number) => css`
+const videoStyles = (aspectRatio: number, isCinemagraph: boolean) => css`
 	position: relative;
 	display: block;
 	height: auto;
 	width: 100%;
-	cursor: pointer;
+	${!isCinemagraph &&
+	css`
+		cursor: pointer;
+	`}
 
 	/* Prevents CLS by letting the browser know the space the video will take up. */
 	aspect-ratio: ${aspectRatio};
@@ -176,12 +179,13 @@ export const SelfHostedVideoPlayer = forwardRef(
 		}: Props,
 		ref: React.ForwardedRef<HTMLVideoElement>,
 	) => {
+		const isCinemagraph = videoStyle === 'Cinemagraph';
 		const videoId = `video-${uniqueId}`;
 		const showSubtitles =
-			videoStyle !== 'Cinemagraph' && !!subtitleSource && !!subtitleSize;
+			!isCinemagraph && !!subtitleSource && !!subtitleSize;
 
 		const showControls =
-			videoStyle !== 'Cinemagraph' &&
+			!isCinemagraph &&
 			ref &&
 			'current' in ref &&
 			ref.current &&
@@ -199,7 +203,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 				<video
 					id={videoId}
 					css={[
-						videoStyles(aspectRatio),
+						videoStyles(aspectRatio, isCinemagraph),
 						showSubtitles && subtitleStyles(subtitleSize),
 					]}
 					crossOrigin="anonymous"
