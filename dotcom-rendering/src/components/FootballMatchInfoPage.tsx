@@ -4,6 +4,7 @@ import { type FootballMatchStats } from '../footballMatchStats';
 import { type FootballMatch } from '../footballMatchV2';
 import { type FootballTableSummary } from '../footballTables';
 import { grid } from '../grid';
+import { type EditionId } from '../lib/edition';
 import { palette } from '../palette';
 import { FootballMatchHeader } from './FootballMatchHeader/FootballMatchHeader';
 import { FootballMatchInfo } from './FootballMatchInfo';
@@ -11,30 +12,36 @@ import { FootballMatchInfo } from './FootballMatchInfo';
 export const FootballMatchInfoPage = ({
 	matchStats,
 	matchInfo,
+	competitionName,
+	edition,
 	table,
 }: {
 	matchStats: FootballMatchStats;
 	matchInfo: FootballMatch;
+	competitionName: string;
+	edition: EditionId;
 	table?: FootballTableSummary;
 }) => {
 	return (
-		<main id="maincontent" css={gridStyles}>
-			<div
-				css={css`
-					${grid.column.centre};
-				`}
-			>
-				<FootballMatchHeader
-					leagueName={''}
-					match={matchInfo}
-					tabs={{
-						selected: 'info',
-						reportURL: undefined,
-						liveURL: undefined,
-					}}
-					edition={'UK'}
-				/>
-				<FootballMatchInfo matchStats={matchStats} table={table} />
+		<main id="maincontent">
+			<FootballMatchHeader
+				leagueName={competitionName}
+				match={matchInfo}
+				tabs={{
+					selected: 'info',
+					reportURL: undefined,
+					liveURL: undefined,
+				}}
+				edition={edition}
+			/>
+			<div css={gridStyles}>
+				<div
+					css={css`
+						${grid.column.centre};
+					`}
+				>
+					<FootballMatchInfo matchStats={matchStats} table={table} />
+				</div>
 			</div>
 		</main>
 	);

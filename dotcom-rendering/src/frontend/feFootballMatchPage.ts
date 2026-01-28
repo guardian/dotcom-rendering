@@ -46,4 +46,5 @@ export type FEFootballMatchPage = FEFootballDataPage & {
 	footballMatch: FEFootballMatchStats;
 	matchInfo: FEFootballMatch;
 	group?: FEGroupSummary;
+	competitionName: string;
 };
