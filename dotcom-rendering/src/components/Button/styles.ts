@@ -56,3 +56,14 @@ export const decideFont = (priority: ButtonPriority): SerializedStyles => {
 			`;
 	}
 };
+
+export const heightAutoStyle = css`
+	height: auto;
+`;
+
+export const wrapButtonTextStyle = css`
+	text-wrap: balance;
+	text-align: center;
+	white-space: normal;
+	padding: 4px 0 4px;
+`;

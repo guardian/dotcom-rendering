@@ -13,6 +13,7 @@ export type EditorialLinkButtonProps = CoreLinkButtonProps;
 export const EditorialLinkButton = ({
 	children,
 	priority = 'primary',
+	cssOverrides,
 	...props
 }: EditorialLinkButtonProps) => {
 	const backgroundOverrides = decideBackground(priority);
@@ -22,7 +23,12 @@ export const EditorialLinkButton = ({
 	return (
 		<CoreLinkButton
 			priority={priority}
-			cssOverrides={[backgroundOverrides, borderOverrides, fontOverrides]}
+			cssOverrides={[
+				...(cssOverrides ? [cssOverrides] : []).flat(),
+				backgroundOverrides,
+				borderOverrides,
+				fontOverrides,
+			]}
 			{...props}
 		>
 			{children}
