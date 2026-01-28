@@ -416,23 +416,13 @@ const sectionPagination = css`
 	}
 `;
 
-const bottomPaddingBetaContainer = (
-	useLargeSpacingMobile: boolean,
-	useLargeSpacingDesktop: boolean,
-) => css`
+const bottomPaddingBetaContainer = css`
 	${until.tablet} {
-		padding-bottom: ${useLargeSpacingMobile
-			? `${space[10]}px`
-			: `${space[6]}px`};
+		padding-bottom: ${space[10]}px;
 	}
 	${from.tablet} {
-		padding-bottom: ${useLargeSpacingDesktop
-			? `${space[10]}px`
-			: `${space[6]}px`};
+		padding-bottom: ${space[10]}px;
 	}
-`;
-const bottomPadding = css`
-	padding-bottom: ${space[9]}px;
 `;
 
 /**
@@ -547,9 +537,6 @@ export const StorylinesSection = ({
 	const isBetaContainer = !!containerLevel;
 
 	const showSectionColours = isNetworkFront(pageId ?? '');
-
-	const useLargeSpacingMobile = true;
-	const useLargeSpacingDesktop = true;
 
 	/**
 	 * In a front section, id is being used to set the containerId in @see {ShowMore.importable.tsx}
@@ -732,12 +719,7 @@ export const StorylinesSection = ({
 							css={[
 								sectionContentHorizontalMargins,
 								sectionPagination,
-								isBetaContainer
-									? bottomPaddingBetaContainer(
-											useLargeSpacingMobile,
-											useLargeSpacingDesktop,
-									  )
-									: bottomPadding,
+								bottomPaddingBetaContainer,
 							]}
 						>
 							<FrontPagination
