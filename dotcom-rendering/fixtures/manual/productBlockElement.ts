@@ -8,7 +8,7 @@ export const exampleProduct: ProductBlockElement = {
 	primaryHeadingHtml: 'Best Kettle Overall',
 	primaryHeadingText: extractHeadingText('Best Kettle Overall'),
 	secondaryHeadingHtml: 'Bosch Sky Kettle',
-	secondaryHeadingText: extractHeadingText('Best Kettle Overall'),
+	secondaryHeadingText: extractHeadingText('Bosch Sky Kettle'),
 	brandName: 'Bosch',
 	productName: 'Sky Kettle',
 	image: productImage,
