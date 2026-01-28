@@ -4,11 +4,12 @@ import { useState } from 'react';
 import { palette as themePalette } from '../../palette';
 
 /// LIKE/DISLIKE FEEDBACK FOOTER
-const footerStyling = css`
+// The storylines style variable enables left alignment in the tag page storylines section
+const footerStyling = (storylinesStyle?: boolean) => css`
 	font-size: 13px;
 	line-height: 16px;
 	display: flex;
-	justify-content: flex-end;
+	${!storylinesStyle && 'justify-content: flex-end;'}
 `;
 
 // Currently no thumb icon in src-icons so a path is needed
@@ -29,9 +30,11 @@ const ThumbImage = () => {
 export const Footer = ({
 	likeHandler,
 	dislikeHandler,
+	storylinesStyle,
 }: {
 	likeHandler: () => void;
 	dislikeHandler: () => void;
+	storylinesStyle?: boolean;
 }): JSX.Element => {
 	// This is defined here because adding the hover styling using cx breaks the text styling
 	const buttonStyling = css`
@@ -58,7 +61,7 @@ export const Footer = ({
 	`;
 	const [showThankYou, setShowThankYou] = useState(false);
 	return (
-		<footer css={footerStyling}>
+		<footer css={footerStyling(storylinesStyle)}>
 			<div hidden={showThankYou}>
 				<div
 					css={css`
