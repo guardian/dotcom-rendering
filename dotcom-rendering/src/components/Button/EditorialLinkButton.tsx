@@ -24,10 +24,10 @@ export const EditorialLinkButton = ({
 		<CoreLinkButton
 			priority={priority}
 			cssOverrides={[
-				...(cssOverrides ? [cssOverrides] : []).flat(),
 				backgroundOverrides,
 				borderOverrides,
 				fontOverrides,
+				...(cssOverrides ? [cssOverrides] : []).flat(),
 			]}
 			{...props}
 		>
