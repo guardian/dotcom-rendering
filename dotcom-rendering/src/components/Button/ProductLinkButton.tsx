@@ -6,6 +6,7 @@ import type {
 } from '@guardian/source/react-components';
 import { LinkButton } from '@guardian/source/react-components';
 import { palette } from '../../palette';
+import { heightAutoStyle, wrapButtonTextStyle } from './styles';
 import { getPropsForLinkUrl } from './utils';
 
 type ProductLinkButtonProps = {
@@ -20,10 +21,6 @@ type ProductLinkButtonProps = {
 
 const fullWidthStyle = css`
 	width: 100%;
-`;
-
-const heightAutoStyle = css`
-	height: auto;
 `;
 
 const minimisePaddingStyle = css`
@@ -76,12 +73,7 @@ export const ProductLinkButton = ({
 		>
 			<span
 				style={fullWidthText ? { width: '100%' } : {}}
-				css={css`
-					text-wrap: balance;
-					text-align: center;
-					white-space: normal;
-					padding: 4px 0 4px;
-				`}
+				css={wrapButtonTextStyle}
 			>
 				{label}
 			</span>
