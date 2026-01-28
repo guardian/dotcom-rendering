@@ -9,9 +9,7 @@ const footerStyling = (storylinesStyle?: boolean) => css`
 	font-size: 13px;
 	line-height: 16px;
 	display: flex;
-	!${storylinesStyle} {
-		justify-content: flex-end;
-	}
+	${!storylinesStyle && 'justify-content: flex-end;'}
 `;
 
 // Currently no thumb icon in src-icons so a path is needed
