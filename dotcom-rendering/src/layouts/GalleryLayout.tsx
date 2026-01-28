@@ -6,6 +6,7 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot } from '../components/AdSlot.web';
@@ -73,6 +74,55 @@ const headerStyles = css`
 
 	${from.tablet} {
 		border-bottom: 1px solid ${palette('--article-border')};
+	}
+`;
+
+const captionStyles = css`
+	${grid.column.centre};
+
+	${from.leftCol} {
+		${grid.column.left};
+		grid-row-start: auto;
+		position: relative;
+
+		::before {
+			content: '';
+			display: block;
+			position: absolute;
+			left: -${space[5]}px;
+			top: 0;
+			bottom: 0;
+			width: 1px;
+			background-color: ${palette('--article-border')};
+		}
+	}
+
+	grid-row: 10;
+`;
+
+const straightLinesStyles = css`
+	${grid.column.all};
+
+	${from.tablet} {
+		${grid.column.centre};
+	}
+
+	${from.leftCol} {
+		${grid.column.left};
+		grid-row: 9;
+		padding-top: ${space[6]}px;
+	}
+
+	grid-row: 11;
+`;
+
+const standfirstStyles = css`
+	${grid.column.centre}
+
+	${from.leftCol} {
+		width: 75%;
+		grid-row: 9;
+		padding-top: ${space[6]}px;
 	}
 `;
 
@@ -162,19 +212,26 @@ export const GalleryLayout = (props: WebProps | AppProps) => {
 							frontendData.webPublicationDateDeprecated
 						}
 					/>
-					<Standfirst
-						format={format}
-						standfirst={frontendData.standfirst}
-					/>
-					<Caption
-						captionText={captionText}
-						format={format}
-						isMainMedia={true}
-					/>
+
+					{isLabs ? (
+						<GalleryLabsStandfirstCaption
+							format={format}
+							frontendData={frontendData}
+							captionText={captionText}
+						/>
+					) : (
+						<GalleryStandfirstCaption
+							format={format}
+							frontendData={frontendData}
+							captionText={captionText}
+						/>
+					)}
+
 					<Meta
 						renderingTarget={renderingTarget}
 						format={format}
 						frontendData={frontendData}
+						isLabs={isLabs}
 					/>
 				</header>
 				<Body
@@ -429,14 +486,58 @@ const GalleryLabsHeader = (props: {
 		</Stuck>
 	) : null;
 
+const GalleryLabsStandfirstCaption = ({
+	format,
+	frontendData,
+	captionText,
+}: {
+	format: ArticleFormat;
+	frontendData: ArticleDeprecated;
+	captionText: string;
+}) => (
+	<>
+		<Standfirst format={format} standfirst={frontendData.standfirst} />
+		<Caption captionText={captionText} format={format} isMainMedia={true} />
+	</>
+);
+
+const GalleryStandfirstCaption = ({
+	format,
+	frontendData,
+	captionText,
+}: {
+	format: ArticleFormat;
+	frontendData: ArticleDeprecated;
+	captionText: string;
+}) => (
+	<>
+		<div css={standfirstStyles}>
+			<Standfirst format={format} standfirst={frontendData.standfirst} />
+		</div>
+
+		<div css={captionStyles}>
+			<Caption
+				captionText={captionText}
+				format={format}
+				isMainMedia={true}
+			/>
+		</div>
+		<div css={straightLinesStyles}>
+			<StraightLines count={4} color={palette('--straight-lines')} />
+		</div>
+	</>
+);
+
 const Meta = ({
 	renderingTarget,
 	format,
 	frontendData,
+	isLabs,
 }: {
 	renderingTarget: RenderingTarget;
 	format: ArticleFormat;
 	frontendData: ArticleDeprecated;
+	isLabs: boolean;
 }) => (
 	<div
 		css={{
@@ -454,6 +555,16 @@ const Meta = ({
 					backgroundColor: palette('--article-border'),
 				},
 			},
+			...(!isLabs && {
+				[from.leftCol]: {
+					'&': css(grid.column.left),
+					gridRowStart: 9,
+					paddingTop: space[10],
+					'&::before': {
+						left: -space[5],
+					},
+				},
+			}),
 		}}
 	>
 		{renderingTarget === 'Web' ? (
