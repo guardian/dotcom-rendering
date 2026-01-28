@@ -44,11 +44,14 @@ type Props = {
 
 const baseContainerStyles = css`
 	position: relative;
+	margin-left: -10px; /* Align left card edge with edge of screen on mobile */
 	margin-right: -10px; /* Align right card edge with edge of screen on mobile */
 	${from.mobileLandscape} {
+		margin-left: -20px;
 		margin-right: -20px;
 	}
 	${from.tablet} {
+		margin-left: 0;
 		margin-right: 0;
 	}
 `;
@@ -99,6 +102,19 @@ const baseCarouselStyles = css`
 		display: none; /* Safari and Chrome */
 	}
 	scrollbar-width: none; /* Firefox */
+	scroll-padding-left: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	${from.mobileLandscape} {
+		scroll-padding-left: 20px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+	${from.tablet} {
+		scroll-padding-left: 0;
+		padding-left: 0;
+		padding-right: 0;
+	}
 `;
 
 const generateFixedWidthColumStyles = ({
