@@ -67,7 +67,6 @@ export enum BrazeBannersSystemPlacementId {
  * @returns A promise that resolves when the refresh is complete
  */
 export function refreshBanners(braze: BrazeInstance): Promise<void> {
-	return Promise.resolve();
 	let timeoutId: NodeJS.Timeout;
 
 	// Create the Timeout Promise
@@ -236,43 +235,61 @@ const runCssCheckerOnBrazeBanner = (
 	meta: BrazeBannersSystemMeta,
 	stopOnFirstProblem?: boolean,
 ): boolean => {
-	// Flag to indicate if any problems were found
 	let isValid = true;
-
-	// Initialize the parser
 	const parser = new DOMParser();
-
-	// Parse the string into an HTML Document
 	const document = parser.parseFromString(meta.banner.html, 'text/html');
 
-	// Get all style elements inside the banner
-	const styleElements = document?.querySelectorAll('style');
-	if (styleElements) {
-		styleElements.forEach((styleElement) => {
-			// Get all CSS rules from the style element
-			const cssRules = styleElement.sheet?.cssRules;
-			if (cssRules) {
-				for (let i = 0; i < cssRules.length; i++) {
-					const rule = cssRules[i];
-					// Only check style rules (ignore @media, @keyframes, etc.)
-					if (rule instanceof CSSStyleRule) {
-						const selector = rule.selectorText;
-						// Check if any elements match the selector
-						const matchedElements =
-							document?.querySelectorAll(selector);
-						if (matchedElements && matchedElements.length === 0) {
-							brazeBannersSystemLogger.warn(
-								`CSS Checker: Selector "${selector}" did not match any elements in the Braze Banner with component name "${meta.banner.id} (${meta.banner.placementId})". This may indicate broken styles.`,
-							);
-							isValid = false;
-							if (stopOnFirstProblem) {
-								return false;
-							}
-						}
-					}
+	// Target specifically the .bz-banner container
+	const bzContainer = document.querySelector('.bz-banner');
+
+	// If the container doesn't exist, we can't find nested styles
+	if (!bzContainer) {
+		brazeBannersSystemLogger.warn(
+			'CSS Checker: .bz-banner container not found in HTML.',
+		);
+		return false;
+	}
+
+	// Helper to check a list of rules (allows recursion)
+	const styleElements = bzContainer.querySelectorAll('style');
+	const checkRules = (rules: CSSRuleList): boolean => {
+		for (let i = 0; i < rules.length; i++) {
+			const rule = rules[i];
+
+			if (rule instanceof CSSStyleRule) {
+				const selector = rule.selectorText;
+				const matchedElements = document.querySelectorAll(selector);
+
+				if (matchedElements.length === 0) {
+					brazeBannersSystemLogger.warn(
+						`CSS Checker: Selector "${selector}" did not match any elements. This may indicate broken styles in the Braze Banner. Check UI/UX ASAP!`,
+					);
+					isValid = false;
+					if (stopOnFirstProblem) return false;
 				}
 			}
-		});
+			// Check if the rule is a group (like @media or @supports)
+			else if (
+				rule instanceof CSSGroupingRule ||
+				(rule as any).cssRules
+			) {
+				const nestedRules = (rule as CSSGroupingRule).cssRules;
+				if (!checkRules(nestedRules) && stopOnFirstProblem)
+					return false;
+			}
+		}
+		return true;
+	};
+
+	for (const styleElement of styleElements) {
+		if (styleElement.sheet) {
+			if (
+				!checkRules(styleElement.sheet.cssRules) &&
+				stopOnFirstProblem
+			) {
+				return false;
+			}
+		}
 	}
 
 	return isValid;
