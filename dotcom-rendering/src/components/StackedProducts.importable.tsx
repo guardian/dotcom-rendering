@@ -101,6 +101,7 @@ export const StackedProducts = ({
 					priority="tertiary"
 					size="small"
 					theme={theme}
+					data-ignore="global-link-styling"
 				>
 					{isExpanded ? 'Show less' : `Show all (${products.length})`}
 				</LinkButton>
