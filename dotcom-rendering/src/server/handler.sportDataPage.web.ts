@@ -216,17 +216,17 @@ const parseFEFootballMatch = (
 ): FootballMatchSummaryPage => {
 	const parsedFootballMatch = parseFootballMatch(data.footballMatch);
 
+	if (!parsedFootballMatch.ok) {
+		throw new Error(
+			`Failed to parse football match: ${parsedFootballMatch.error.kind} ${parsedFootballMatch.error.message}`,
+		);
+	}
+
 	const parsedFootballMatchStats = parseMatchStats(data.footballMatch);
 
 	if (!parsedFootballMatchStats.ok) {
 		throw new Error(
-			`Failed to parse football match: ${parsedFootballMatchStats.error.kind} ${parsedFootballMatchStats.error.message}`,
-		);
-	}
-
-	if (!parsedFootballMatch.ok) {
-		throw new Error(
-			`Failed to parse football match: ${parsedFootballMatch.error.kind} ${parsedFootballMatch.error.message}`,
+			`Failed to parse football match stats: ${parsedFootballMatchStats.error.kind} ${parsedFootballMatchStats.error.message}`,
 		);
 	}
 

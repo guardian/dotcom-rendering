@@ -12,9 +12,6 @@ import type { Result } from './lib/result';
 import { error, ok } from './lib/result';
 import { cleanTeamName } from './sportDataPage';
 
-const eventTypes = ['substitution', 'dismissal', 'booking'] as const;
-const isEventType = isOneOf(eventTypes);
-
 /**
  * The stats for each team in a given football match.
  */
@@ -48,6 +45,9 @@ type FootballPlayer = {
 	shirtNumber: number;
 	events: PlayerEvent[];
 };
+
+const eventTypes = ['substitution', 'dismissal', 'booking'] as const;
+const isEventType = isOneOf(eventTypes);
 
 /**
  * Events involving a particular player in a given football match.

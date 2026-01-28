@@ -4,7 +4,7 @@ export const parseIntResult = (int: string): Result<string, number> => {
 	const parsed = parseInt(int);
 
 	if (isNaN(parsed)) {
-		return error(`${String(int)} isn't a valid integer`);
+		return error(`${int} isn't a valid integer`);
 	}
 
 	return ok(parsed);
