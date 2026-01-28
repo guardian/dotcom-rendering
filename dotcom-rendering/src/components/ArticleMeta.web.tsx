@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { CSSProperties } from 'react';
+import { preferredSourceExperiment } from '../experiments/preferredSource';
 import type { FEArticle } from '../frontend/feArticle';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
@@ -26,9 +27,8 @@ import { CrosswordSetter } from './CrosswordSetter';
 import { Dateline } from './Dateline';
 import { Island } from './Island';
 import { PodcastMeta } from './PodcastMeta';
-import { ShareButton } from './ShareButton.importable';
-import { preferredSourceExperiment } from '../experiments/preferredSource';
 import { PreferredSourceButton } from './PreferredSourceButton';
+import { ShareButton } from './ShareButton.importable';
 
 type Props = {
 	format: ArticleFormat;

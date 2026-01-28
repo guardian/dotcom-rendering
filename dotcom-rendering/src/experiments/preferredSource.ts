@@ -1,7 +1,7 @@
 import {
 	ArticleDesign,
-	ArticleSpecial,
 	type ArticleFormat,
+	ArticleSpecial,
 } from '../lib/articleFormat';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { BetaABTestAPI } from './lib/beta-ab-tests';
