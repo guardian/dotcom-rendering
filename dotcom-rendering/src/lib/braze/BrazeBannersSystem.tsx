@@ -422,11 +422,6 @@ export const BrazeBannersSystemDisplay = ({
 						);
 					}
 					break;
-				default:
-					brazeBannersSystemLogger.warn(
-						'Received unknown message type from Braze Banner:',
-						event.data,
-					);
 			}
 		};
 
