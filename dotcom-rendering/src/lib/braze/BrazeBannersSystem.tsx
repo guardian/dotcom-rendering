@@ -187,6 +187,43 @@ enum BrazeBannersSystemMessageType {
 }
 
 /**
+ * Retrieves the value of a property from the Braze Banner meta.
+ * @param meta Braze Banner meta information
+ * @param propertyKey Key of the property to retrieve
+ * @returns The value of the property as a string
+ */
+const getPropertyValue = (
+	meta: BrazeBannersSystemMeta,
+	propertyKey: string,
+): string => {
+	if (meta.banner.properties[propertyKey]?.type === 'string') {
+		return meta.banner.getStringProperty(propertyKey) ?? '';
+	}
+	if (meta.banner.properties[propertyKey]?.type === 'number') {
+		return String(meta.banner.getNumberProperty(propertyKey));
+	}
+	if (meta.banner.properties[propertyKey]?.type === 'boolean') {
+		return String(meta.banner.getBooleanProperty(propertyKey));
+	}
+	if (meta.banner.properties[propertyKey]?.type === 'image') {
+		return meta.banner.getImageProperty(propertyKey) ?? '';
+	}
+	if (meta.banner.properties[propertyKey]?.type === 'jsonobject') {
+		return JSON.stringify(
+			meta.banner.getJsonProperty(propertyKey),
+			null,
+			2,
+		);
+	}
+	if (meta.banner.properties[propertyKey]?.type === 'datetime') {
+		return new Date(
+			meta.banner.getTimestampProperty(propertyKey) ?? 0,
+		).toISOString();
+	}
+	return '';
+};
+
+/**
  * Displays a Braze Banner using the Braze Banners System.
  * @param meta Meta information required to display the banner
  * @param idApiUrl Identity API URL for newsletter subscriptions
@@ -256,7 +293,7 @@ export const BrazeBannersSystemDisplay = ({
 	// Handle DOM Insertion
 	useEffect(() => {
 		// Render the banner ONLY when we have both the Data and the DOM Element
-		if (containerRef.current) {
+		if (containerRef.current && meta.braze && meta.banner) {
 			// Clear any existing content to prevent duplicates
 			containerRef.current.innerHTML = '';
 
@@ -266,45 +303,37 @@ export const BrazeBannersSystemDisplay = ({
 				setMinHeight(metaMinHeight);
 			}
 
-			// Replace Settings Placeholders
-			const getPropertyValue = (propertyKey: string): string => {
-				if (meta.banner.properties[propertyKey]?.type === 'string') {
-					return meta.banner.getStringProperty(propertyKey) ?? '';
-				}
-				if (meta.banner.properties[propertyKey]?.type === 'number') {
-					return String(meta.banner.getNumberProperty(propertyKey));
-				}
-				if (meta.banner.properties[propertyKey]?.type === 'boolean') {
-					return String(meta.banner.getBooleanProperty(propertyKey));
-				}
-				if (meta.banner.properties[propertyKey]?.type === 'image') {
-					return meta.banner.getImageProperty(propertyKey) ?? '';
-				}
-				if (
-					meta.banner.properties[propertyKey]?.type === 'jsonobject'
-				) {
-					return JSON.stringify(
-						meta.banner.getJsonProperty(propertyKey),
-						null,
-						2,
-					);
-				}
-				if (meta.banner.properties[propertyKey]?.type === 'datetime') {
-					return new Date(
-						meta.banner.getTimestampProperty(propertyKey) ?? 0,
-					).toISOString();
-				}
-				return '';
-			};
-			for (const propertyKey of Object.keys(meta.banner.properties)) {
-				meta.banner.html = meta.banner.html.replaceAll(
-					`##settings.${propertyKey}##`,
-					getPropertyValue(propertyKey),
-				);
-			}
-
 			// Let Braze inject the HTML/CSS
 			meta.braze.insertBanner(meta.banner, containerRef.current);
+
+			// Replace settings placeholders in the banner content
+			const iframe = containerRef.current.querySelector('iframe');
+			if (iframe) {
+				const replaceSettingsPlaceholders = () => {
+					let html = meta.banner.html;
+					for (const propertyKey in meta.banner.properties) {
+						const placeholder = `##settings.${propertyKey}##`;
+						const value = getPropertyValue(meta, propertyKey);
+						html = html.replaceAll(placeholder, value);
+					}
+
+					// Set iframe srcdoc attribute
+					iframe.setAttribute('srcdoc', html);
+					brazeBannersSystemLogger.info(
+						'✅ Replaced placeholders in Braze Banner iframe.',
+					);
+				};
+
+				// If the iframe is already loaded (rare but possible), run immediately
+				if (iframe.contentDocument?.readyState === 'complete') {
+					replaceSettingsPlaceholders();
+				} else {
+					iframe.addEventListener(
+						'load',
+						replaceSettingsPlaceholders,
+					);
+				}
+			}
 		}
 	}, [meta.banner, meta.braze]);
 
