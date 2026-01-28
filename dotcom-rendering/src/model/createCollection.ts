@@ -4,7 +4,7 @@ import type { DCRCollectionType, DCRFrontCard } from '../types/front';
 import { enhanceCards } from './enhanceCards';
 
 const personalisedCollection: DCRCollectionType = {
-	id: 'hardcoded-collection',
+	id: 'across-the-guardian',
 	displayName: 'Across the Guardian',
 	description: undefined,
 	collectionType: 'static/medium/4',
