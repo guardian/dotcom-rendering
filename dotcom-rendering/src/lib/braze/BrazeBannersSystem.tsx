@@ -221,6 +221,51 @@ const getPropertyValueAsString = (
 };
 
 /**
+ * Runs a CSS checker on the Braze Banner to ensure that all custom styles
+ * selectors are selecting existent elements.
+ * This is important because since Braze does not allow personalization of CSS,
+ * any CSS rules that do not match any elements are likely caused by Braze
+ * changing there rendering engine without notice. This could lead to broken
+ * styles on the banners and a bad user experience.
+ * @param meta Braze Banner meta information
+ * @param document Document object of the Braze Banner iframe
+ */
+const runCssCheckerOnBrazeBanner = (
+	meta: BrazeBannersSystemMeta,
+	document: Document | null,
+) => {
+	// Get all style elements inside the banner
+	const styleElements = document?.querySelectorAll('style');
+	if (styleElements) {
+		styleElements.forEach((styleElement) => {
+			// Get all CSS rules from the style element
+			const cssRules = styleElement.sheet?.cssRules;
+			if (cssRules) {
+				for (let i = 0; i < cssRules.length; i++) {
+					const rule = cssRules[i];
+					// Only check style rules (ignore @media, @keyframes, etc.)
+					if (rule instanceof CSSStyleRule) {
+						const selector = rule.selectorText;
+						// Check if any elements match the selector
+						const matchedElements =
+							document?.querySelectorAll(selector);
+						if (matchedElements && matchedElements.length === 0) {
+							brazeBannersSystemLogger.warn(
+								`CSS Checker: Selector "${selector}" did not match any elements in the Braze Banner with component name "${meta.banner.id} (${meta.banner.placementId})". This may indicate broken styles.`,
+							);
+						} else if (matchedElements) {
+							brazeBannersSystemLogger.log(
+								`CSS Checker: Selector "${selector}" matched ${matchedElements.length} elements in the Braze Banner with component name "${meta.banner.id} (${meta.banner.placementId})".`,
+							);
+						}
+					}
+				}
+			}
+		});
+	}
+};
+
+/**
  * Displays a Braze Banner using the Braze Banners System.
  * @param meta Meta information required to display the banner
  * @param idApiUrl Identity API URL for newsletter subscriptions
@@ -302,6 +347,23 @@ export const BrazeBannersSystemDisplay = ({
 
 			// Let Braze inject the HTML/CSS
 			meta.braze.insertBanner(meta.banner, containerRef.current);
+
+			// CSS Checker
+			const iframe = containerRef.current.querySelector('iframe');
+			if (iframe) {
+				// Execution timing: srcdoc is usually available very quickly
+				// but we check readyState to be safe.
+				if (iframe.contentDocument?.readyState === 'complete') {
+					runCssCheckerOnBrazeBanner(meta, iframe.contentDocument);
+				} else {
+					iframe.addEventListener('load', () => {
+						runCssCheckerOnBrazeBanner(
+							meta,
+							iframe.contentDocument,
+						);
+					});
+				}
+			}
 		}
 	}, [meta.banner, meta.braze]);
 
