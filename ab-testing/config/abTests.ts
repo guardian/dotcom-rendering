@@ -94,6 +94,18 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
+	{
+		name: "commercial-enable-spacefinder-on-interactives",
+		description: "Enable spacefinder on interactive articles on mobile web",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: `2026-02-28`,
+		type: "client",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["true"],
+		shouldForceMetricsCollection: false,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
