@@ -12,7 +12,7 @@ import {
 import { grid } from '../grid';
 
 type Props = {
-	selected: string;
+	selected: Selected;
 	pageId: string;
 };
 
@@ -21,7 +21,7 @@ interface DirectoryPageNavConfig {
 	textColor: string;
 	backgroundColor: string;
 	title: { label: string; link: string };
-	links: { label: string; href: string; selectedSlug?: string }[];
+	links: { label: string; href: string; selectedSlug: string | undefined }[];
 }
 
 const configs = [
@@ -44,11 +44,20 @@ const configs = [
 				href: '/football/women-s-euro-2025/overview',
 				selectedSlug: 'tables',
 			},
-			{ label: 'Top scorers', href: '/p/x2e3za' },
-			{ label: 'Players guide', href: '/p/x27nz8' },
+			{
+				label: 'Top scorers',
+				href: '/p/x2e3za',
+				selectedSlug: undefined,
+			},
+			{
+				label: 'Players guide',
+				href: '/p/x27nz8',
+				selectedSlug: undefined,
+			},
 			{
 				label: 'Full coverage',
 				href: '/football/women-s-euro-2025',
+				selectedSlug: undefined,
 			},
 		],
 	},
@@ -71,11 +80,23 @@ const configs = [
 				href: '/p/x4x3k4',
 				selectedSlug: 'results',
 			},
-			{ label: 'Medal table', href: '/p/x4x3k6' },
-			{ label: 'Full coverage', href: '/tbd' },
+			{
+				label: 'Medal table',
+				href: '/p/x4x3k6',
+				selectedSlug: undefined,
+			},
+			{
+				label: 'Full coverage',
+				href: '/tbd',
+				selectedSlug: undefined,
+			},
 		],
 	},
 ] satisfies DirectoryPageNavConfig[];
+
+type Configs = typeof configs;
+type SelectedSlug = Configs[number]['links'][number]['selectedSlug'];
+type Selected = Exclude<SelectedSlug, undefined>;
 
 export const DirectoryPageNav = ({ selected, pageId }: Props) => {
 	const config = configs.find((cfg) => pageId.includes(cfg.sectionSlug));
