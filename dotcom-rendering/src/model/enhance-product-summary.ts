@@ -10,8 +10,7 @@ export type ABTestVariant = 'carousel' | 'stacked';
 export const allowedPageIds: string[] = [
 	'thefilter/2025/nov/18/best-pillows-tested-uk',
 ];
-//todo - rename to summary component test
-const isEligibleForSummary = ({ pageId }: { pageId: string }) => {
+const isEligibleForSummary = (pageId: string) => {
 	return allowedPageIds.includes(pageId);
 };
 
@@ -123,14 +122,14 @@ export const enhanceProductSummary =
 		serverSideABTests?: Record<string, string>;
 	}) =>
 	(elements: FEElement[]): FEElement[] => {
-		// do nothing if article is not on allow list
 		const abTestVariant =
 			serverSideABTests?.['thefilter-at-a-glance-redesign'];
 
+		// do nothing if article is not on allow list / not in the test / variant is 'control'
 		if (
 			abTestVariant &&
 			isCarouselOrStacked(abTestVariant) &&
-			isEligibleForSummary({ pageId })
+			isEligibleForSummary(pageId)
 		) {
 			return insertSummaryPlaceholder(elements, abTestVariant);
 		}
