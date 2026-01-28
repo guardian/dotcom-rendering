@@ -160,6 +160,8 @@ const sanitiserOptions: IOptions = {
 				},
 			};
 		},
+		div: 'p',
+		h1: 'h2',
 	},
 };
 
