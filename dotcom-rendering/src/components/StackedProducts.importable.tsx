@@ -11,6 +11,8 @@ import type { ProductBlockElement } from '../types/content';
 import { HorizontalSummaryProductCard } from './HorizontalSummaryProductCard';
 import { Subheading } from './Subheading';
 
+const cardsShownByDefault = 4;
+
 const cardCounterStyles = css`
 	${textSans15};
 	color: ${palette('--product-card-count')};
@@ -52,9 +54,12 @@ export const StackedProducts = ({
 				<Subheading format={format} topPadding={false}>
 					{heading}
 				</Subheading>
-				{products.length > 3 && (
+				{products.length > cardsShownByDefault && (
 					<p css={cardCounterStyles}>
-						{isExpanded ? products.length : '3'}/{products.length}
+						{isExpanded
+							? products.length
+							: cardsShownByDefault.toString()}
+						/{products.length}
 					</p>
 				)}
 			</div>
@@ -73,7 +78,7 @@ export const StackedProducts = ({
 			>
 				{products.map(
 					(product: ProductBlockElement, index) =>
-						(index < 3 || isExpanded) && (
+						(index < cardsShownByDefault || isExpanded) && (
 							<div
 								key={index}
 								data-component={`at-a-glance-stacked-card-${
@@ -89,13 +94,14 @@ export const StackedProducts = ({
 				)}
 			</div>
 
-			{products.length > 3 && (
+			{products.length > cardsShownByDefault && (
 				<LinkButton
 					onClick={() => setIsExpanded(!isExpanded)}
 					cssOverrides={showAllButtonStyles}
 					priority="tertiary"
 					size="small"
 					theme={theme}
+					data-ignore="global-link-styling"
 				>
 					{isExpanded ? 'Show less' : `Show all (${products.length})`}
 				</LinkButton>
