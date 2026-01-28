@@ -1,27 +1,42 @@
 import { isString } from '@guardian/libs';
-import { HostedArticleLayout } from '../layouts/HostedArticleLayout';
-import { HostedGalleryLayout } from '../layouts/HostedGalleryLayout';
-import { getModulesBuild, getPathFromManifest } from '../lib/assets';
+import { ConfigProvider } from '../components/ConfigContext';
+import { HostedContentPage } from '../components/HostedContentPage';
+import {
+	ASSET_ORIGIN,
+	getModulesBuild,
+	getPathFromManifest,
+} from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { polyfillIO } from '../lib/polyfill.io';
-import type { HostedContent } from '../types/hostedContent';
+import type { Article } from '../types/article';
+import type { Config } from '../types/configContext';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 type Props = {
-	hostedContent: HostedContent;
+	hostedContent: Article;
 };
 
 export const renderHtml = ({ hostedContent }: Props) => {
-	const { type, frontendData } = hostedContent;
+	const { frontendData } = hostedContent;
 
-	const title = `Advertiser content hosted by the Guardian: ${frontendData.title} | The Guardian`;
+	const title = `Advertiser content hosted by the Guardian: ${frontendData.webTitle} | The Guardian`;
 
-	const HostedLayout =
-		type === 'gallery' ? HostedGalleryLayout : HostedArticleLayout;
 	const renderingTarget = 'Web';
+	const config: Config = {
+		renderingTarget,
+		darkModeAvailable:
+			frontendData.config.abTests.darkModeWebVariant === 'variant',
+		assetOrigin: ASSET_ORIGIN,
+		editionId: frontendData.editionId,
+	};
 
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<HostedLayout renderingTarget={renderingTarget} />,
+		<ConfigProvider value={config}>
+			<HostedContentPage
+				hostedContent={hostedContent}
+				renderingTarget={renderingTarget}
+			/>
+		</ConfigProvider>,
 	);
 
 	// We don't send A/B tests or switches from frontend yet- do we need to?
