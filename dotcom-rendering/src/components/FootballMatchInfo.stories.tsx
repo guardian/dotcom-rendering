@@ -46,7 +46,7 @@ type Story = StoryObj<typeof meta>;
 
 export const FootballMatchInfo = {
 	args: {
-		matchStats,
+		match: matchStats,
 		table,
 	},
 } satisfies Story;
