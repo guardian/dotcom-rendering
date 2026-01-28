@@ -2,6 +2,9 @@
 	import { allABTests, activeABtests } from "@guardian/ab-testing-config";
 	import Table from "$lib/components/TableFixed.svelte";
 	import AudienceBreakdown from "$lib/components/AudienceBreakdown.svelte";
+	import { getOrigin } from "$lib/stores/environment";
+
+	let frontendAdminUrl = $derived(getOrigin());
 </script>
 
 <h1 class="headline">A/B Tests (Beta)</h1>
@@ -15,7 +18,7 @@
 	</p>
 	<p>
 		AB tests are defined in <a
-			href="https://github.com/guardian/dotcom-rendering/blob/main/ab-testing/abTest.ts"
+			href="https://github.com/guardian/dotcom-rendering/blob/main/ab-testing/config/abTest.ts"
 			>guardian/dotcom-rendering</a
 		>
 	</p>
@@ -24,7 +27,7 @@
 		this will override any cookie based test assignment.
 	</p>
 	<p>
-		<a href="https://www.theguardian.com/ab-tests/opt-out"
+		<a href={`${frontendAdminUrl}/ab-tests/opt-out`} target="_blank"
 			>Use this link to opt out of all tests you've opted into</a
 		>
 	</p>
