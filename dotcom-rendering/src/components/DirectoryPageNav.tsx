@@ -17,16 +17,16 @@ type Props = {
 };
 
 interface DirectoryPageNavConfig {
-	pageId: string;
+	sectionSlug: string;
 	textColor: string;
 	backgroundColor: string;
 	title: { label: string; link: string };
 	links: { label: string; href: string; selectedSlug?: string }[];
 }
 
-const configs: { [key: string]: DirectoryPageNavConfig } = {
-	'women-s-euro-2025': {
-		pageId: 'women-s-euro-2025',
+const configs = [
+	{
+		sectionSlug: 'women-s-euro-2025',
 		textColor: palette.neutral[100],
 		backgroundColor: palette.news[400],
 		title: {
@@ -52,8 +52,8 @@ const configs: { [key: string]: DirectoryPageNavConfig } = {
 			},
 		],
 	},
-	'winter-olympics-2026': {
-		pageId: 'winter-olympics-2026',
+	{
+		sectionSlug: 'winter-olympics-2026',
 		textColor: palette.neutral[7],
 		backgroundColor: '#CCCCCC',
 		title: {
@@ -75,12 +75,10 @@ const configs: { [key: string]: DirectoryPageNavConfig } = {
 			{ label: 'Full coverage', href: '/tbd' },
 		],
 	},
-};
+] satisfies DirectoryPageNavConfig[];
 
 export const DirectoryPageNav = ({ selected, pageId }: Props) => {
-	const config = Object.values(configs).find((cfg) =>
-		pageId.includes(cfg.pageId),
-	);
+	const config = configs.find((cfg) => pageId.includes(cfg.sectionSlug));
 
 	if (!config) {
 		return null;
@@ -126,13 +124,13 @@ export const DirectoryPageNav = ({ selected, pageId }: Props) => {
 		},
 		backgroundImage: `
 			linear-gradient(
-				color-mix(in srgb, ${textColor} 40%, transparent) 0,
-				color-mix(in srgb, ${textColor} 40%, transparent) 1px,
+				${textColor} 0,
+				${textColor} 1px,
 				transparent 1px,
 				transparent var(--top-border-gap),
-				color-mix(in srgb, ${textColor} 40%, transparent) var(--top-border-gap),
-				color-mix(in srgb, ${textColor} 40%, transparent) calc(var(--top-border-gap) + 1px),
-				transparent calc(var(--top-border-gap) + 1px),
+				${textColor} var(--top-border-gap),
+				${textColor} calc(var(--top-border-gap) + 1px),
+				transparent 1px,
 				transparent var(--top-border-gap)
 			)
 		`,
