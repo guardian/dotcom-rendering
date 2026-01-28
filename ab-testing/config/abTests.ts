@@ -93,6 +93,19 @@ const ABTests: ABTest[] = [
 		groups: ["true"],
 		shouldForceMetricsCollection: false,
 	},
+	{
+		name: "webex-preferred-source",
+		description:
+			"Testing the Preferred Source on Google button in the meta section of articles",
+		owners: ["dotcom.platform@theguardian.com"],
+		expirationDate: "2026-02-25",
+		type: "server",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["control", "prefer", "add"],
+		shouldForceMetricsCollection: false,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");

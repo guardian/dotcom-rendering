@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
+import type { CSSProperties } from 'react';
 import type { FEArticle } from '../frontend/feArticle';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
@@ -11,6 +12,7 @@ import {
 } from '../lib/articleFormat';
 import { getAudioData } from '../lib/audio-data';
 import { getSoleContributor } from '../lib/byline';
+import { useBetaAB } from '../lib/useAB';
 import { palette as themePalette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
 import type { FEElement } from '../types/content';
@@ -25,6 +27,8 @@ import { Dateline } from './Dateline';
 import { Island } from './Island';
 import { PodcastMeta } from './PodcastMeta';
 import { ShareButton } from './ShareButton.importable';
+import { preferredSourceExperiment } from '../experiments/preferredSource';
+import { PreferredSourceButton } from './PreferredSourceButton';
 
 type Props = {
 	format: ArticleFormat;
@@ -92,6 +96,13 @@ const metaFlex = css`
 	flex-wrap: wrap;
 `;
 
+const preferredSourceMetaFlex = (hasButton: boolean): CSSProperties =>
+	hasButton
+		? {
+				marginBottom: 8,
+		  }
+		: {};
+
 const stretchLines = css`
 	display: block;
 
@@ -127,6 +138,13 @@ const metaExtras = (isPictureContent: boolean) => css`
 		padding-bottom: 6px;
 	}
 `;
+
+const preferredSourceMetaExtras = (hasButton: boolean): CSSProperties =>
+	hasButton
+		? {
+				paddingTop: 8,
+		  }
+		: {};
 
 const metaNumbers = (isPictureContent: boolean) => css`
 	border-top: 1px solid ${themePalette('--article-border')};
@@ -325,6 +343,13 @@ export const ArticleMeta = ({
 	mainMediaElements,
 	crossword,
 }: Props) => {
+	const abTests = useBetaAB();
+	const { renderingTarget } = useConfig();
+	const preferredSource = preferredSourceExperiment(
+		renderingTarget,
+		format,
+		abTests,
+	);
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
 
@@ -336,8 +361,6 @@ export const ArticleMeta = ({
 	const isPictureContent = format.design === ArticleDesign.Picture;
 
 	const isAudio = format.design === ArticleDesign.Audio;
-
-	const { renderingTarget } = useConfig();
 
 	const seriesTag = getSeriesTag(tags);
 	const audioData = getAudioData(mainMediaElements);
@@ -420,7 +443,11 @@ export const ArticleMeta = ({
 					</>
 				</RowBelowLeftCol>
 
-				<div data-print-layout="hide" css={metaFlex}>
+				<div
+					data-print-layout="hide"
+					css={metaFlex}
+					style={preferredSourceMetaFlex(preferredSource.hasButton)}
+				>
 					{renderingTarget === 'Web' && (
 						<div
 							className={
@@ -436,6 +463,9 @@ export const ArticleMeta = ({
 										metaExtrasLiveBlog,
 									),
 							]}
+							style={preferredSourceMetaExtras(
+								preferredSource.hasButton,
+							)}
 						>
 							<Island
 								priority="feature"
@@ -488,6 +518,9 @@ export const ArticleMeta = ({
 						</div>
 					</div>
 				</div>
+				{preferredSource.hasButton ? (
+					<PreferredSourceButton text={preferredSource.copy} />
+				) : null}
 			</div>
 		</div>
 	);
