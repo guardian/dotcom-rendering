@@ -1,4 +1,5 @@
 import type { FootballMatches } from '../../src/footballMatches';
+import type { FootballMatch } from '../../src/footballMatchV2';
 import type { Region } from '../../src/sportDataPage';
 
 export const regions: Region[] = [
@@ -19,6 +20,26 @@ export const regions: Region[] = [
 		],
 	},
 ];
+
+export const footballMatchResult: FootballMatch = {
+	kind: 'Result',
+	kickOff: new Date('2022-01-01T11:11:00Z'),
+	paId: '4479251',
+	homeTeam: {
+		name: 'Germany',
+		paID: '7699',
+		score: 2,
+		scorers: ['Sjoeke Nusken 56 Pen', 'Lea Schuller 66'],
+	},
+	awayTeam: {
+		name: 'Denmark',
+		paID: '35854',
+		score: 1,
+		scorers: ['Amalie Vangsgaard 26'],
+	},
+	venue: 'St Jakob Park',
+	comment: '',
+};
 
 export const initialDays: FootballMatches = [
 	{
