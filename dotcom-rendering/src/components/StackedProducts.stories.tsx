@@ -25,9 +25,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {} satisfies Story;
 
-export const OnlyThreeProducts = {
+export const FourProducts = {
 	args: {
-		products: exampleAtAGlanceProductArray.slice(0, 3),
+		products: exampleAtAGlanceProductArray.slice(0, 4),
 		heading: 'At a glance',
 		format: {
 			design: ArticleDesign.Review,
