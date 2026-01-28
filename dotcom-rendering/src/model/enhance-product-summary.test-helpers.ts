@@ -35,7 +35,7 @@ export const textElement = (html: string): FEElement =>
 	}) as FEElement;
 
 export type ProductCarouselTestElement = FEElement & {
-	_type: 'model.dotcomrendering.pageElements.ProductCarouselElement';
+	_type: 'model.dotcomrendering.pageElements.ProductSummaryElement';
 	matchedProducts: ProductBlockElement[];
 };
 
@@ -45,5 +45,5 @@ export const findCarousel = (
 	elements.find(
 		(el): el is ProductCarouselTestElement =>
 			el._type ===
-			'model.dotcomrendering.pageElements.ProductCarouselElement',
+			'model.dotcomrendering.pageElements.ProductSummaryElement',
 	);

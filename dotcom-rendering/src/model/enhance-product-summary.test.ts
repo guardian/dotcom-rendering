@@ -1,4 +1,4 @@
-import { _testOnly, enhanceProductCarousel } from './enhance-product-carousel';
+import { _testOnly, enhanceProductSummary } from './enhance-product-summary';
 import {
 	atAGlanceHeading,
 	dividerElement,
@@ -6,7 +6,7 @@ import {
 	linkElement,
 	productElement,
 	textElement,
-} from './enhance-product-carousel.test-helpers';
+} from './enhance-product-summary.test-helpers';
 
 const {
 	extractAtAGlanceUrls,
@@ -113,7 +113,7 @@ describe('insertCarouselPlaceholder', () => {
 			]),
 		];
 
-		const output = insertCarouselPlaceholder(input);
+		const output = insertCarouselPlaceholder(input, 'carousel');
 
 		const carousel = findCarousel(output);
 		expect(carousel).toBeDefined();
@@ -130,7 +130,7 @@ describe('insertCarouselPlaceholder', () => {
 			]),
 		];
 
-		const output = insertCarouselPlaceholder(input);
+		const output = insertCarouselPlaceholder(input, 'carousel');
 
 		const carousel = findCarousel(output);
 		expect(carousel).toBeUndefined();
@@ -159,7 +159,7 @@ describe('insertCarouselPlaceholder – edge cases', () => {
 			]),
 		];
 
-		const output = insertCarouselPlaceholder(input);
+		const output = insertCarouselPlaceholder(input, 'carousel');
 		const carousel = findCarousel(output);
 		expect(carousel).toBeUndefined();
 	});
@@ -174,18 +174,18 @@ describe('insertCarouselPlaceholder – edge cases', () => {
 			]),
 		];
 
-		const output = insertCarouselPlaceholder(input);
+		const output = insertCarouselPlaceholder(input, 'carousel');
 
 		const carousel = findCarousel(output);
 		expect(carousel).toBeUndefined();
 	});
 
 	it('returns an empty array for empty input', () => {
-		expect(insertCarouselPlaceholder([])).toEqual([]);
+		expect(insertCarouselPlaceholder([], 'carousel')).toEqual([]);
 	});
 });
 
-describe('enhanceProductCarousel', () => {
+describe('enhanceProductSummary', () => {
 	beforeAll(() => {
 		_testOnly.allowedPageIds.push(
 			'thefilter/test-article-example-for-product-carousel',
@@ -222,7 +222,10 @@ describe('enhanceProductCarousel', () => {
 			]),
 		];
 
-		const output = enhanceProductCarousel(allowedPageId)(input);
+		const output = enhanceProductSummary({
+			pageId: allowedPageId,
+			serverSideABTests: { 'thefilter-at-a-glance-redesign': 'carousel' },
+		})(input);
 
 		const carousel = findCarousel(output);
 		expect(carousel).toBeDefined();

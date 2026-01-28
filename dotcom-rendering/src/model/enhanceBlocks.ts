@@ -19,7 +19,7 @@ import { enhanceH2s } from './enhance-H2s';
 import { enhanceElementsImages, enhanceImages } from './enhance-images';
 import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
-import { enhanceProductCarousel } from './enhance-product-carousel';
+import { enhanceProductSummary } from './enhance-product-summary';
 import { enhanceTweets } from './enhance-tweets';
 import { enhanceGuVideos } from './enhance-videos';
 import { enhanceLists } from './enhanceLists';
@@ -36,6 +36,7 @@ type Options = {
 	tags?: TagType[];
 	shouldHideAds: boolean;
 	pageId: string;
+	serverSideABTests?: Record<string, string>;
 };
 
 const enhanceNewsletterSignup =
@@ -96,7 +97,10 @@ export const enhanceElements =
 				options.shouldHideAds,
 			),
 			enhanceDisclaimer(options.hasAffiliateLinksDisclaimer, isNested),
-			enhanceProductCarousel(options.pageId),
+			enhanceProductSummary({
+				pageId: options.pageId,
+				serverSideABTests: options.serverSideABTests,
+			}),
 		].reduce(
 			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),
 			elements,

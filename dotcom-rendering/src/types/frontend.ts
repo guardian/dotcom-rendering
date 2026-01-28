@@ -23,6 +23,7 @@ export interface FEBlocksRequest {
 	videoDuration?: number;
 	switches: { [key: string]: boolean };
 	abTests?: ServerSideTests;
+	serverSideABTests?: Record<string, string>;
 	keywordIds: string;
 	shouldHideAds: boolean;
 }
