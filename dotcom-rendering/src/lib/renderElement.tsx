@@ -44,6 +44,7 @@ import { QandaAtom } from '../components/QandaAtom.importable';
 import { QAndAExplainers } from '../components/QAndAExplainers';
 import { ReporterCalloutBlockComponent } from '../components/ReporterCalloutBlockComponent.importable';
 import { RichLinkComponent } from '../components/RichLinkComponent.importable';
+import { ScrollableProduct } from '../components/ScrollableProduct.importable';
 import { SelfHostedVideoInArticle } from '../components/SelfHostedVideoInArticle';
 import { SoundcloudBlockComponent } from '../components/SoundcloudBlockComponent';
 import { SpotifyBlockComponent } from '../components/SpotifyBlockComponent.importable';
@@ -976,6 +977,15 @@ export const renderElement = ({
 					<CrosswordComponent
 						data={element.crossword}
 						canRenderAds={renderAds}
+					/>
+				</Island>
+			);
+		case 'model.dotcomrendering.pageElements.ProductCarouselElement':
+			return (
+				<Island priority="critical" defer={{ until: 'idle' }}>
+					<ScrollableProduct
+						products={element.matchedProducts}
+						format={format}
 					/>
 				</Island>
 			);

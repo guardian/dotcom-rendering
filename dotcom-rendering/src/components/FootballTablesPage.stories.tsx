@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { regions } from '../../fixtures/manual/footballData';
-import { WomensEuro2025 } from './FootballCompetitionNav.stories';
+import { WomensEuro2025 } from './DirectoryPageNav.stories';
 import { FootballTableList as TableListDefault } from './FootballTableList.stories';
 import { FootballTablesPage } from './FootballTablesPage';
 

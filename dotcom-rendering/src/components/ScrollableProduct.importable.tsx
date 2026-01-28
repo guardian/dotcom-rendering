@@ -326,7 +326,7 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 				<div css={countStyles} id={'at-a-glance-carousel-count'}></div>
 			</div>
 			<div css={[baseContainerStyles]}>
-				<ol
+				<ul
 					ref={carouselRef}
 					css={carouselStyles}
 					data-heatphan-type="carousel"
@@ -351,7 +351,7 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 							</li>
 						),
 					)}
-				</ol>
+				</ul>
 				<CarouselNavigationButtons
 					previousButtonEnabled={previousButtonEnabled}
 					nextButtonEnabled={nextButtonEnabled}

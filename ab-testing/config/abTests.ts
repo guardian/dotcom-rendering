@@ -33,19 +33,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "commercial-user-module-uid2",
-		description:
-			"A hold back test to measure the impact of integrating UID2 module",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: `2026-01-29`,
-		type: "client",
-		status: "ON",
-		audienceSize: 10 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: true,
-	},
-	{
 		name: "commercial-user-module-liveramp",
 		description:
 			"Hold-back test measuring ad targeting from liveramp's identityLinkIdSystem module integration",
@@ -92,6 +79,18 @@ const ABTests: ABTest[] = [
 		audienceSize: 0 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
+	{
+		name: "commercial-enable-spacefinder-on-interactives",
+		description: "Enable spacefinder on interactive articles on mobile web",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: `2026-02-28`,
+		type: "client",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["true"],
 		shouldForceMetricsCollection: false,
 	},
 ];

@@ -876,6 +876,9 @@
                 },
                 {
                     "$ref": "#/definitions/ProductBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/ProductCarouselElement"
                 }
             ]
         },
@@ -4690,6 +4693,25 @@
                 "ProductCardOnly"
             ],
             "type": "string"
+        },
+        "ProductCarouselElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.ProductCarouselElement"
+                },
+                "matchedProducts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ProductBlockElement"
+                    }
+                }
+            },
+            "required": [
+                "_type",
+                "matchedProducts"
+            ]
         },
         "Block": {
             "type": "object",

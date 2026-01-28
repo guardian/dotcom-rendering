@@ -105,6 +105,7 @@ export const HorizontalSummaryProductCard = ({
 					cssOverrides={readMore}
 					data-component="at-a-glance-stacked-card-read-more"
 					data-link-name="product read more link"
+					data-ignore="global-link-styling"
 				>
 					Read more
 				</Link>
