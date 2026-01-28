@@ -8,6 +8,7 @@ export const exampleProduct: ProductBlockElement = {
 	primaryHeadingHtml: 'Best Kettle Overall',
 	primaryHeadingText: extractHeadingText('Best Kettle Overall'),
 	secondaryHeadingHtml: 'Bosch Sky Kettle',
+	secondaryHeadingText: extractHeadingText('Best Kettle Overall'),
 	brandName: 'Bosch',
 	productName: 'Sky Kettle',
 	image: productImage,
@@ -252,6 +253,7 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 			'<em>Best running watch for beginners:</em>',
 		),
 		secondaryHeadingHtml: 'Garmin Forerunner 55',
+		secondaryHeadingText: extractHeadingText('Garmin Forerunner 55'),
 		brandName: 'Garmin',
 		productName: 'Forerunner 55',
 		image: {
@@ -291,6 +293,7 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 			'<em>Best budget running watch:</em>',
 		),
 		secondaryHeadingHtml: 'Suunto Run',
+		secondaryHeadingText: extractHeadingText('Suunto Run'),
 		brandName: 'Suunto',
 		productName: 'Run',
 		image: {
@@ -329,6 +332,7 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 			'<em>Best mid-range running watch:</em>',
 		),
 		secondaryHeadingHtml: 'Coros Pace Pro',
+		secondaryHeadingText: extractHeadingText('Coros Pace Pro'),
 		brandName: 'Coros',
 		productName: 'Pace Pro',
 		image: {
@@ -367,6 +371,7 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 			'<em>Best-looking mid-range running watch:</em>',
 		),
 		secondaryHeadingHtml: 'Suunto Race 2',
+		secondaryHeadingText: extractHeadingText('Suunto Race 2'),
 		brandName: 'Suunto',
 		productName: 'Race 2',
 		image: {
@@ -405,6 +410,7 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 			'<em>The best running watch money can buy:</em>',
 		),
 		secondaryHeadingHtml: 'Garmin Forerunner 970',
+		secondaryHeadingText: extractHeadingText('Garmin Forerunner 970'),
 		brandName: 'Garmin',
 		productName: 'Forerunner 970',
 		image: {
@@ -443,6 +449,7 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 			'<em>Best running watch for battery life:</em>',
 		),
 		secondaryHeadingHtml: 'Garmin Enduro 3',
+		secondaryHeadingText: extractHeadingText('Garmin Enduro 3'),
 		brandName: 'Garmin',
 		productName: 'Enduro 3',
 		image: {
@@ -481,6 +488,7 @@ export const exampleAtAGlanceProductArray: ProductBlockElement[] = [
 			'<em>Best running watch with LTE/satellite:</em>',
 		),
 		secondaryHeadingHtml: 'Garmin Fenix 8 Pro',
+		secondaryHeadingText: extractHeadingText('Garmin Fenix 8 Pro'),
 		brandName: 'Garmin',
 		productName: 'Fenix 8 Pro',
 		image: {
