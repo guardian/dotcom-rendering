@@ -1,5 +1,6 @@
 import { EditorialLinkButton } from './Button/EditorialLinkButton';
 import { ProductLinkButton } from './Button/ProductLinkButton';
+import { heightAutoStyle, wrapButtonTextStyle } from './Button/styles';
 import { getPropsForLinkUrl, isExternalLink } from './Button/utils';
 
 export type LinkBlockComponentProps = {
@@ -34,9 +35,10 @@ export const LinkBlockComponent = ({
 					data-spacefinder-role="inline"
 					data-ignore="global-link-styling"
 					{...propsForLinkUrl}
+					cssOverrides={heightAutoStyle}
 					href={url}
 				>
-					{label}
+					<span css={wrapButtonTextStyle}>{label}</span>
 				</EditorialLinkButton>
 			);
 		}
