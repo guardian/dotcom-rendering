@@ -44,8 +44,8 @@ export const Default: Story = {
 	},
 };
 
-export const WithCustomPillColorsFromDesign: Story = {
-	name: 'Custom pill colors from design settings',
+export const WithCustomPillColoursFromDesign: Story = {
+	name: 'Custom pill colours from design settings',
 	args: {
 		id: 'banner',
 		choiceCardDesignSettings: {
@@ -56,16 +56,16 @@ export const WithCustomPillColorsFromDesign: Story = {
 	},
 };
 
-export const WithCustomPillColorsFromChoiceCard: Story = {
-	name: 'Custom pill colors from choice card settings',
+export const WithCustomPillColoursFromChoiceCard: Story = {
+	name: 'Custom pill colours from choice card settings',
 	args: {
 		choices: choiceCardsSettingsWithDiscountPill.choiceCards,
 		id: 'banner',
 	},
 };
 
-export const WithCustomButtonColors: Story = {
-	name: 'Custom button and pill colors',
+export const WithCustomButtonColours: Story = {
+	name: 'Custom button and pill colours',
 	args: {
 		choices: choiceCardsSettingsWithDiscountPill.choiceCards,
 		id: 'banner',
