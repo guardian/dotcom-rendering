@@ -98,7 +98,7 @@ export const HorizontalSummaryProductCard = ({
 			</div>
 			<div css={informationContainer}>
 				<div css={productCardHeading}>{product.primaryHeadingText}</div>
-				<div css={secondaryHeading}>{product.secondaryHeadingHtml}</div>
+				<div css={secondaryHeading}>{product.secondaryHeadingText}</div>
 				<Link
 					href={`#${product.h2Id}`}
 					onFocus={(event) => event.stopPropagation()}

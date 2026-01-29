@@ -21,6 +21,7 @@ export const PreferredSourceButton = ({ text }: Props) => (
 		cssOverrides={css({
 			...textSans14Object,
 			padding: '8px 12px 10px',
+			transitionProperty: 'background-color',
 			'.src-button-space': {
 				flexBasis: space[1],
 			},
