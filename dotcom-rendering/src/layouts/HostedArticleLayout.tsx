@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import { grid } from '../grid';
-import type { DCRHostedContent } from '../types/hostedContent';
+import type { HostedContent } from '../types/hostedContent';
 import type { RenderingTarget } from '../types/renderingTarget';
 
 interface Props {
 	renderingTarget: RenderingTarget;
-	content: DCRHostedContent;
+	content: HostedContent;
 }
 
 interface WebProps extends Props {

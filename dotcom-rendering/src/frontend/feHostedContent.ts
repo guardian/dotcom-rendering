@@ -1,28 +1,19 @@
-/** @todo Remove this? */
-export interface FEHostedContent {
-	// general / shared
-	id: string;
-	url: string;
-	encodedUrl: string;
-	campaign?: HostedCampaign;
-	title: string;
-	mainImageUrl: string;
-	thumbnailUrl: string;
-	standfirst: string;
-	cta: HostedCallToAction;
-	name: string;
-	owner: string;
-	logo: HostedLogo;
-	fontColour: Colour;
-	// article
-	body?: string;
-	mainPicture?: string;
-	mainPictureCaption?: string;
-	// video
-	video?: HostedVideo;
-	// gallery
-	images: HostedGalleryImage[];
-}
+import type { FEArticle } from './feArticle';
+
+/**
+ * This type is what we receive from `frontend`,
+ * hence the FE prefix.
+ *
+ * WARNING: run `gen-schema` task if changing this to update the associated JSON
+ * schema definition.
+ */
+export type FEHostedContent = Omit<
+	FEArticle,
+	'beaconURL' | 'blocks' | 'crossword'
+>;
+
+/**
+// Not sure if the following types are needed:
 
 type HostedCampaign = {
 	id: string;
@@ -76,3 +67,5 @@ type Encoding = {
 	url: string;
 	rawFormat: string;
 };
+
+ */

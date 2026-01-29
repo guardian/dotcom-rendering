@@ -10,12 +10,12 @@ import {
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { polyfillIO } from '../lib/polyfill.io';
 import { createGuardian } from '../model/guardian';
-import type { Article } from '../types/article';
 import type { Config } from '../types/configContext';
+import type { HostedContent } from '../types/hostedContent';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 type Props = {
-	hostedContent: Article;
+	hostedContent: HostedContent;
 };
 
 export const renderHtml = ({ hostedContent }: Props) => {
