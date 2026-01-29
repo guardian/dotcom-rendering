@@ -1,9 +1,11 @@
 import { css } from '@emotion/react';
 import { grid } from '../grid';
+import type { DCRHostedContent } from '../types/hostedContent';
 import type { RenderingTarget } from '../types/renderingTarget';
 
 interface Props {
 	renderingTarget: RenderingTarget;
+	content: DCRHostedContent;
 }
 
 interface WebProps extends Props {
@@ -19,16 +21,24 @@ const border = css`
 `;
 
 export const HostedArticleLayout = (props: WebProps | AppProps) => {
+	const {
+		content: {
+			frontendData: { headline, standfirst },
+		},
+		renderingTarget,
+	} = props;
+
 	return (
 		<>
-			{props.renderingTarget === 'Web' ? 'Masthead' : null}
+			{renderingTarget === 'Web' ? 'Masthead' : null}
 			<main>
 				<header css={[grid.container, border]}>
 					<div css={[grid.column.all]}>Main media</div>
 					<div
 						css={[grid.between('centre-column-start', 'grid-end')]}
 					>
-						Headline
+						{/** @todo Use ArticleHeadline component */}
+						{headline}
 					</div>
 				</header>
 				<div css={[grid.container]}>
@@ -39,7 +49,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						Onward content
 					</div>
 					<div css={[border, grid.column.centre, 'grid-row: 1']}>
-						Standfirst
+						{standfirst}
 					</div>
 					<div css={[border, grid.column.centre]}>Meta</div>
 					<article css={[border, grid.column.centre]}>Body</article>

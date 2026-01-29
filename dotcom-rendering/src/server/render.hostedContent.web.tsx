@@ -3,11 +3,13 @@ import { ConfigProvider } from '../components/ConfigContext';
 import { HostedContentPage } from '../components/HostedContentPage';
 import {
 	ASSET_ORIGIN,
+	generateScriptTags,
 	getModulesBuild,
 	getPathFromManifest,
 } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { polyfillIO } from '../lib/polyfill.io';
+import { createGuardian } from '../model/guardian';
 import type { Article } from '../types/article';
 import type { Config } from '../types/configContext';
 import { htmlPageTemplate } from './htmlPageTemplate';
@@ -39,27 +41,65 @@ export const renderHtml = ({ hostedContent }: Props) => {
 		</ConfigProvider>,
 	);
 
-	// We don't send A/B tests or switches from frontend yet- do we need to?
 	const build = getModulesBuild({
-		tests: {},
-		switches: {},
+		tests: frontendData.config.abTests,
+		switches: frontendData.config.switches,
 	});
 
+	/**
+	 * The highest priority scripts.
+	 * These scripts have a considerable impact on site performance.
+	 * Only scripts critical to application execution may go in here.
+	 * Please talk to the dotcom platform team before adding more.
+	 * Scripts will be executed in the order they appear in this array
+	 */
 	const prefetchScripts = [
 		polyfillIO,
 		getPathFromManifest(build, 'frameworks.js'),
 		getPathFromManifest(build, 'index.js'),
 	].filter(isString);
 
-	// We currently don't send any of the data required for page config or window.guardian setup from frontend
+	const scriptTags = generateScriptTags(prefetchScripts);
+
+	/**
+	 * We escape windowGuardian here to prevent errors when the data
+	 * is placed in a script tag on the page
+	 */
+	const guardian = createGuardian({
+		editionId: frontendData.editionId,
+		stage: frontendData.config.stage,
+		frontendAssetsFullURL: frontendData.config.frontendAssetsFullURL,
+		revisionNumber: frontendData.config.revisionNumber,
+		sentryPublicApiKey: frontendData.config.sentryPublicApiKey,
+		sentryHost: frontendData.config.sentryHost,
+		keywordIds: frontendData.config.keywordIds,
+		dfpAccountId: frontendData.config.dfpAccountId,
+		adUnit: frontendData.config.adUnit,
+		ajaxUrl: frontendData.config.ajaxUrl,
+		googletagUrl: frontendData.config.googletagUrl,
+		switches: frontendData.config.switches,
+		abTests: frontendData.config.abTests,
+		serverSideABTests: frontendData.config.serverSideABTests,
+		brazeApiKey: frontendData.config.brazeApiKey,
+		isPaidContent: frontendData.pageType.isPaidContent,
+		contentType: frontendData.contentType,
+		shouldHideReaderRevenue: true,
+		googleRecaptchaSiteKey: frontendData.config.googleRecaptchaSiteKey,
+		// Until we understand exactly what config we need to make available client-side,
+		// add everything we haven't explicitly typed as unknown config
+		unknownConfig: frontendData.config,
+	});
+
+	/**
+	 * @todo Create a separate hosted content page template
+	 */
 	const pageHtml = htmlPageTemplate({
-		scriptTags: [],
+		scriptTags,
 		css: extractedCss,
 		html,
 		title,
 		description: frontendData.standfirst,
-		// @ts-expect-error no config data
-		guardian: {},
+		guardian,
 		canonicalUrl: '',
 		renderingTarget: 'Web',
 		// @ts-expect-error no config data
