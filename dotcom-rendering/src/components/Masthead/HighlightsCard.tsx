@@ -39,6 +39,7 @@ const container = css`
 	flex-direction: column;
 	height: 100%;
 	column-gap: ${space[2]}px;
+	justify-content: space-between;
 	/** Relative positioning is required to absolutely position the card link overlay */
 	position: relative;
 	padding: ${space[2]}px ${space[2]}px 0 ${space[2]}px;
