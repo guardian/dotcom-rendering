@@ -13,6 +13,11 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
+import {
+	type EditionId,
+	getLocaleFromEdition,
+	getTimeZoneFromEdition,
+} from '../lib/edition';
 import { palette } from '../palette';
 
 const containerCss = css`
@@ -56,6 +61,8 @@ type PreMatchProps = {
 	awayTeam: string;
 	league: string;
 	venue: string;
+	kickOff: Date;
+	edition: EditionId;
 };
 
 export const FootballPreMatchDetails = ({
@@ -63,7 +70,23 @@ export const FootballPreMatchDetails = ({
 	awayTeam,
 	league,
 	venue,
+	kickOff,
+	edition,
 }: PreMatchProps) => {
+	const kickOffTime = new Intl.DateTimeFormat(getLocaleFromEdition(edition), {
+		hour: 'numeric',
+		minute: 'numeric',
+		hour12: true,
+		weekday: 'long',
+		day: 'numeric',
+		month: 'short',
+		year: 'numeric',
+		timeZoneName: 'short',
+		timeZone: getTimeZoneFromEdition(edition),
+	}).format(kickOff);
+
+	console.log(new Date());
+
 	return (
 		<div css={containerCss}>
 			<h3 css={headingCss}>
@@ -72,7 +95,7 @@ export const FootballPreMatchDetails = ({
 			<div css={detailsCss}>
 				<span>{league}</span>
 				<span>{venue}</span>
-				<time css={kickOffCss}>Today, 8:30pm</time>
+				<time css={kickOffCss}>{kickOffTime}</time>
 			</div>
 			<LinkButton
 				href="/football/fixtures"
