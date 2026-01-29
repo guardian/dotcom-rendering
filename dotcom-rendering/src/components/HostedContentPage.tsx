@@ -4,7 +4,7 @@ import { HostedArticleLayout } from '../layouts/HostedArticleLayout';
 import { ArticleDesign } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
 import { filterABTestSwitches } from '../model/enhance-switches';
-import type { Article } from '../types/article';
+import type { HostedContent } from '../types/hostedContent';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
@@ -16,7 +16,7 @@ import { SetABTests } from './SetABTests.importable';
 import { SkipTo } from './SkipTo';
 
 interface BaseProps {
-	hostedContent: Article;
+	hostedContent: HostedContent;
 	renderingTarget: RenderingTarget;
 }
 
