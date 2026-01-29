@@ -104,6 +104,18 @@ const ABTests: ABTest[] = [
 		audienceSize: 0 / 100,
 		audienceSpace: "A",
 		groups: ["control", "prefer", "add"],
+	},
+	{
+		name: "commercial-mobile-inline1-halfpage",
+		description:
+			"To measure impact (RPM) and CLS of adding halfPage as an additional size option to mobile inline1 ad slot",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: `2026-02-28`,
+		type: "client",
+		status: "ON",
+		audienceSize: 20 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
 	{
