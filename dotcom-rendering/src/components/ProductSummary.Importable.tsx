@@ -1,5 +1,5 @@
 import type { ArticleFormat } from '../lib/articleFormat';
-import type { ABTestVariant } from '../model/enhance-product-summary';
+import type { ABTestVariant } from '../model/enhance-product-carousel';
 import type { ProductBlockElement } from '../types/content';
 import { Island } from './Island';
 import { ScrollableProduct } from './ScrollableProduct.importable';

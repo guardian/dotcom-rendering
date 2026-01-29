@@ -1,4 +1,4 @@
-import { _testOnly, enhanceProductSummary } from './enhance-product-summary';
+import { _testOnly, enhanceProductCarousel } from './enhance-product-carousel';
 import {
 	atAGlanceHeading,
 	dividerElement,
@@ -185,7 +185,7 @@ describe('insertCarouselPlaceholder – edge cases', () => {
 	});
 });
 
-describe('enhanceProductSummary', () => {
+describe('enhanceProductCarousel', () => {
 	beforeAll(() => {
 		_testOnly.allowedPageIds.push(
 			'thefilter/test-article-example-for-product-carousel',
@@ -222,7 +222,7 @@ describe('enhanceProductSummary', () => {
 			]),
 		];
 
-		const output = enhanceProductSummary({
+		const output = enhanceProductCarousel({
 			pageId: allowedPageId,
 			serverSideABTests: { 'thefilter-at-a-glance-redesign': 'carousel' },
 		})(input);

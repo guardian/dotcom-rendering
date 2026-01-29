@@ -116,7 +116,7 @@ const insertSummaryPlaceholder = (
 	return output;
 };
 
-export const enhanceProductSummary =
+export const enhanceProductCarousel =
 	({
 		pageId,
 		serverSideABTests,
