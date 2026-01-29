@@ -6,18 +6,21 @@ import {
 	textSans14Object,
 } from '@guardian/source/foundations';
 import { LinkButton, SvgGoogleBrand } from '@guardian/source/react-components';
+import type { ButtonKind } from '../experiments/preferredSource';
 import { palette } from '../palette';
 
 type Props = {
-	text: string;
+	kind: ButtonKind;
 };
 
-export const PreferredSourceButton = ({ text }: Props) => (
+export const PreferredSourceButton = ({ kind }: Props) => (
 	<LinkButton
 		priority="tertiary"
 		icon={<SvgGoogleBrand />}
 		size="small"
 		href="https://www.google.com/preferences/source?q=theguardian.com"
+		data-component={`preferred-source-button-${kind}`}
+		data-link-name={`preferred-source-button-${kind}`}
 		cssOverrides={css({
 			...textSans14Object,
 			padding: '8px 12px 10px',
@@ -49,6 +52,15 @@ export const PreferredSourceButton = ({ text }: Props) => (
 			backgroundTertiaryHover: palette('--preferred-source-button-hover'),
 		}}
 	>
-		{text}
+		{copy(kind)}
 	</LinkButton>
 );
+
+const copy = (kind: Props['kind']): string => {
+	switch (kind) {
+		case 'prefer':
+			return 'Prefer the Guardian on Google';
+		case 'add':
+			return 'Add the Guardian on Google';
+	}
+};
