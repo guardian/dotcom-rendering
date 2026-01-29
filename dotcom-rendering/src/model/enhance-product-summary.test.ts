@@ -135,7 +135,7 @@ describe('insertCarouselPlaceholder', () => {
 	});
 });
 
-describe('insertCarouselPlaceholder – edge cases', () => {
+describe('insertSummaryPlaceholder – edge cases', () => {
 	it('does not insert a carousel when fewer than three products match', () => {
 		const input = [
 			atAGlanceHeading(),
@@ -162,7 +162,7 @@ describe('insertCarouselPlaceholder – edge cases', () => {
 		expect(carousel).toBeUndefined();
 	});
 
-	it('does not insert a carousel if At a glance section has no LinkBlockElements', () => {
+	it('does not insert a summary if At a glance section has no LinkBlockElements', () => {
 		const input = [
 			atAGlanceHeading(),
 			textElement('No links here'),
