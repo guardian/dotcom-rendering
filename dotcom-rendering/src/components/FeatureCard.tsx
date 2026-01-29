@@ -164,6 +164,13 @@ const overlayMaskGradientStyles = (angle: string) => css`
 	);
 `;
 
+const contentOverlayStyle = css`
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+`;
+
 const overlayStyles = css`
 	position: relative;
 	display: flex;
@@ -171,31 +178,36 @@ const overlayStyles = css`
 	text-align: start;
 	gap: ${space[1]}px;
 	padding: ${space[9]}px ${space[2]}px ${space[2]}px;
+
+	/*
+ * Ensure the waveform is behind the other elements, e.g. headline, pill.
+ * Links define their own z-index.
+ */
+	> :not(.waveform):not(a) {
+		z-index: 1;
+	}
+`;
+
+const blurStyles = css`
+	position: absolute;
+	inset: 0;
 	backdrop-filter: blur(12px) brightness(0.5);
 	@supports not (backdrop-filter: blur(12px)) {
 		background-color: ${transparentColour(sourcePalette.neutral[10], 0.7)};
 	}
 	${overlayMaskGradientStyles('180deg')};
+`;
 
-	/*
-	 * Ensure the waveform is behind the other elements, e.g. headline, pill.
-	 * Links define their own z-index.
-	 */
-
-	> :not(.waveform):not(a) {
-		z-index: 1;
+const immersiveOverlayBlurStyles = css`
+	${from.tablet} {
+		padding: ${space[2]}px ${space[12]}px ${space[2]}px ${space[2]}px;
+		${overlayMaskGradientStyles('270deg')}
 	}
 `;
 
 const immersiveOverlayStyles = css`
 	${from.tablet} {
 		height: 100%;
-		/**
-		* Why 48px right padding?
-		* 48px is to point at which the gradient can go behind the content whilst maintaining accessibility.
-		*/
-		padding: ${space[2]}px ${space[12]}px ${space[2]}px ${space[2]}px;
-		${overlayMaskGradientStyles('270deg')}
 	}
 `;
 
@@ -644,165 +656,186 @@ export const FeatureCard = ({
 											noPointerEvents,
 									]}
 								>
-									{mainMedia?.type === 'Audio' &&
-										!!mainMedia.podcastImage?.src &&
-										(isImmersive ? (
-											<Hide from="tablet">
-												{renderPodcastImage(
+									<div css={contentOverlayStyle}>
+										{mainMedia?.type === 'Audio' &&
+											!!mainMedia.podcastImage?.src &&
+											(isImmersive ? (
+												<Hide from="tablet">
+													{renderPodcastImage(
+														mainMedia.podcastImage
+															.src,
+														mainMedia.podcastImage
+															.altText ?? '',
+														false, // Immersive cards are styled as feature cards below the tablet viewport
+													)}
+												</Hide>
+											) : (
+												renderPodcastImage(
 													mainMedia.podcastImage.src,
 													mainMedia.podcastImage
 														.altText ?? '',
-													false, // Immersive cards are styled as feature cards below the tablet viewport
-												)}
-											</Hide>
-										) : (
-											renderPodcastImage(
-												mainMedia.podcastImage.src,
-												mainMedia.podcastImage
-													.altText ?? '',
-												false,
-											)
-										))}
-									<div
-										css={[
-											overlayStyles,
-											isImmersive &&
-												immersiveOverlayStyles,
-											isSelfHostedVideoWithControls &&
-												underlineOnHoverStyles,
-										]}
-									>
-										{/** Only the overlay is a link for self-hosted videos with controls. */}
-										{isSelfHostedVideoWithControls && (
-											<CardLink
-												linkTo={linkTo}
-												headlineText={headlineText}
-												dataLinkName={dataLinkName}
-												isExternalLink={isExternalLink}
-											/>
-										)}
+													false,
+												)
+											))}
+										<div
+											css={[
+												blurStyles,
+												isImmersive &&
+													immersiveOverlayBlurStyles,
+											]}
+										/>
 
-										{isImmersive &&
-											mainMedia?.type === 'Audio' &&
-											!!mainMedia.podcastImage?.src && (
-												<div
-													css={
-														podcastImageContainerStyles
+										<div
+											css={[
+												overlayStyles,
+												isImmersive &&
+													immersiveOverlayStyles,
+												isSelfHostedVideoWithControls &&
+													underlineOnHoverStyles,
+											]}
+										>
+											{/** Only the overlay is a link for self-hosted videos with controls. */}
+											{isSelfHostedVideoWithControls && (
+												<CardLink
+													linkTo={linkTo}
+													headlineText={headlineText}
+													dataLinkName={dataLinkName}
+													isExternalLink={
+														isExternalLink
 													}
-												>
-													<Hide until="tablet">
-														{renderPodcastImage(
-															mainMedia
-																.podcastImage
-																.src,
-															mainMedia
-																.podcastImage
-																.altText ?? '',
-															true,
+												/>
+											)}
+
+											{isImmersive &&
+												mainMedia?.type === 'Audio' &&
+												!!mainMedia.podcastImage
+													?.src && (
+													<div
+														css={
+															podcastImageContainerStyles
+														}
+													>
+														<Hide until="tablet">
+															{renderPodcastImage(
+																mainMedia
+																	.podcastImage
+																	.src,
+																mainMedia
+																	.podcastImage
+																	.altText ??
+																	'',
+																true,
+															)}
+														</Hide>
+													</div>
+												)}
+
+											{/**
+											 * Without the wrapping div the headline and byline would have space
+											 * inserted between them due to being direct children of the flex container
+											 */}
+											<div>
+												<CardHeadline
+													headlineText={headlineText}
+													format={format}
+													fontSizes={headlineSizes}
+													showQuotes={showQuotes}
+													kickerText={
+														format.design ===
+															ArticleDesign.LiveBlog &&
+														!kickerText
+															? 'Live'
+															: kickerText
+													}
+													showPulsingDot={
+														format.design ===
+															ArticleDesign.LiveBlog ||
+														showPulsingDot
+													}
+													byline={byline}
+													showByline={showByline}
+													isExternalLink={
+														isExternalLink
+													}
+													headlineColour={palette(
+														'--feature-card-headline',
+													)}
+													kickerColour={palette(
+														'--feature-card-kicker-text',
+													)}
+													quoteColour={palette(
+														'--feature-card-quote-icon',
+													)}
+												/>
+											</div>
+
+											{!isUndefined(starRating) && (
+												<StarRating
+													rating={starRating}
+													size={starRatingSize}
+													useAlternativeTheme={true}
+												/>
+											)}
+
+											{!!trailText && (
+												<div css={trailTextWrapper}>
+													<TrailText
+														trailText={trailText}
+														trailTextColour={palette(
+															'--feature-card-trail-text',
 														)}
-													</Hide>
+														trailTextSize="regular"
+														padBottom={false}
+														hideUntil="tablet"
+													/>
 												</div>
 											)}
 
-										{/**
-										 * Without the wrapping div the headline and byline would have space
-										 * inserted between them due to being direct children of the flex container
-										 */}
-										<div>
-											<CardHeadline
-												headlineText={headlineText}
+											<CardFooter
 												format={format}
-												fontSizes={headlineSizes}
-												showQuotes={showQuotes}
-												kickerText={
-													format.design ===
-														ArticleDesign.LiveBlog &&
-													!kickerText
-														? 'Live'
-														: kickerText
+												age={
+													showCardAge ? (
+														<FeatureCardCardAge
+															webPublicationDate={
+																webPublicationDate
+															}
+															showClock={
+																!!showClock
+															}
+															serverTime={
+																serverTime
+															}
+															isStorylines={
+																isStorylines
+															}
+														/>
+													) : undefined
 												}
-												showPulsingDot={
-													format.design ===
-														ArticleDesign.LiveBlog ||
-													showPulsingDot
+												commentCount={
+													showCommentCount ? (
+														<FeatureCardCommentCount
+															linkTo={linkTo}
+															discussionId={
+																discussionId
+															}
+															discussionApiUrl={
+																discussionApiUrl
+															}
+														/>
+													) : undefined
 												}
-												byline={byline}
-												showByline={showByline}
-												isExternalLink={isExternalLink}
-												headlineColour={palette(
-													'--feature-card-headline',
-												)}
-												kickerColour={palette(
-													'--feature-card-kicker-text',
-												)}
-												quoteColour={palette(
-													'--feature-card-quote-icon',
-												)}
+												showLivePlayable={false}
+												isNewsletter={isNewsletter}
+												mainMedia={mainMedia}
 											/>
+
+											{!isImmersive &&
+												mainMedia?.type === 'Audio' &&
+												renderWaveform(
+													mainMedia.duration,
+													233,
+												)}
 										</div>
-
-										{!isUndefined(starRating) && (
-											<StarRating
-												rating={starRating}
-												size={starRatingSize}
-												useAlternativeTheme={true}
-											/>
-										)}
-
-										{!!trailText && (
-											<div css={trailTextWrapper}>
-												<TrailText
-													trailText={trailText}
-													trailTextColour={palette(
-														'--feature-card-trail-text',
-													)}
-													trailTextSize="regular"
-													padBottom={false}
-													hideUntil="tablet"
-												/>
-											</div>
-										)}
-
-										<CardFooter
-											format={format}
-											age={
-												showCardAge ? (
-													<FeatureCardCardAge
-														webPublicationDate={
-															webPublicationDate
-														}
-														showClock={!!showClock}
-														serverTime={serverTime}
-														isStorylines={
-															isStorylines
-														}
-													/>
-												) : undefined
-											}
-											commentCount={
-												showCommentCount ? (
-													<FeatureCardCommentCount
-														linkTo={linkTo}
-														discussionId={
-															discussionId
-														}
-														discussionApiUrl={
-															discussionApiUrl
-														}
-													/>
-												) : undefined
-											}
-											showLivePlayable={false}
-											isNewsletter={isNewsletter}
-											mainMedia={mainMedia}
-										/>
-
-										{!isImmersive &&
-											mainMedia?.type === 'Audio' &&
-											renderWaveform(
-												mainMedia.duration,
-												233,
-											)}
 									</div>
 								</div>
 
