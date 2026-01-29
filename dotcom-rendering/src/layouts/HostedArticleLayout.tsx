@@ -23,10 +23,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 	return (
 		<>
 			{props.renderingTarget === 'Web' ? (
-				<HostedContentHeader
-					accentColor="#1b1f71"
-					branding="someBranding"
-				/>
+				<HostedContentHeader accentColor="#1b1f71" branding="logo" />
 			) : null}
 			<main>
 				<header css={[grid.container]}>

@@ -3,8 +3,9 @@ import {
 	from,
 	palette as sourcePalette,
 	space,
-	textSans12,
 	textSans15,
+	textSans17,
+	textSansBold12,
 	textSansBold14,
 	visuallyHidden,
 } from '@guardian/source/foundations';
@@ -23,24 +24,31 @@ const headerWrapperStyles = css`
 	position: relative;
 	display: flex;
 	justify-content: space-between;
-	width: 100%;
-	margin: 0;
+	width: 100vw;
+	margin: 0 auto;
 	padding: 0;
 	height: ${HOSTED_CONTENT_HEIGHT_MOBILE}rem;
-	background-color: ${sourcePalette.neutral[7]};
 	color: ${sourcePalette.neutral[100]};
+	background-color: ${sourcePalette.neutral[7]};
 
 	${from.tablet} {
 		height: ${HOSTED_CONTENT_HEIGHT_DESKTOP}rem;
 	}
+
+	${from.desktop} {
+		max-width: 61.25rem;
+	}
 `;
 
 const hostedByStyles = css`
-	${textSans12};
+	${textSansBold12};
 	margin-right: -9px;
-	font-weight: 600;
 	letter-spacing: 0.03125rem;
 	color: rgba(255, 255, 255, 0.5);
+
+	${from.tablet} {
+		${textSansBold14};
+	}
 `;
 
 const logoStyles = css`
@@ -53,8 +61,33 @@ const logoStyles = css`
 	svg {
 		width: 94px;
 		height: auto;
+
+		${from.tablet} {
+			width: 125px;
+		}
 	}
 `;
+
+export const Left = ({ children }: { children: React.ReactNode }) => (
+	<div
+		css={css`
+			display: flex;
+		`}
+	>
+		{children}
+	</div>
+);
+
+export const Right = ({ children }: { children: React.ReactNode }) => (
+	<div
+		css={css`
+			display: flex;
+			padding: ${space[1]}px 10px;
+		`}
+	>
+		{children}
+	</div>
+);
 
 const HeaderWrapper = ({ children }: { children: React.ReactNode }) => (
 	<div css={headerWrapperStyles}>{children}</div>
@@ -80,29 +113,37 @@ const HeaderSection = ({
 );
 
 const TitleAndBadge = ({ accentColor, branding }: Props) => (
-	<div
-		css={css`
-			width: 80px;
-			align-self: flex-end;
-
-			${from.desktop} {
-				width: 132px;
-			}
-		`}
-	>
-		<p
+	<>
+		<div
 			css={css`
-				${textSansBold14};
-				position: relative;
-				height: auto;
-				line-height: 0.945rem; /* We shouldn't override this but need to confirm if it's ok for the design to look slighly different */
-				padding: 0.3125rem 0.375rem 0.25rem;
-				letter-spacing: 0.03125rem;
-				background-color: ${accentColor};
+				box-sizing: border-box;
+				width: 80px;
+				align-self: flex-end;
+
+				${from.desktop} {
+					width: 132px;
+				}
 			`}
 		>
-			Advertiser content
-		</p>
+			<p
+				css={css`
+					${textSansBold14};
+					position: relative;
+					height: auto;
+					line-height: 0.945rem; /* We shouldn't override this but need to confirm if it's ok for the design to look slighly different */
+					padding: 0.3125rem 0.375rem 0.25rem;
+					letter-spacing: 0.03125rem;
+					background-color: ${accentColor};
+
+					${from.desktop} {
+						text-align: center;
+					}
+				`}
+			>
+				Advertiser content
+			</p>
+		</div>
+
 		{/* The following div is a placeholder for the badge */}
 		<div
 			css={css`
@@ -111,13 +152,19 @@ const TitleAndBadge = ({ accentColor, branding }: Props) => (
 				width: 80px;
 				height: 45px; /* This is temporary, replace with actual badge height */
 				top: 100%;
-				background-color: ${sourcePalette.neutral[100]};
+				background-color: ${sourcePalette.neutral[60]};
+				text-align: center;
 				z-index: 10;
+
+				${from.desktop} {
+					width: 132px;
+					height: 75px;
+				}
 			`}
 		>
 			{branding}
 		</div>
-	</div>
+	</>
 );
 
 const About = () => (
@@ -129,7 +176,12 @@ const About = () => (
 			margin-top: 1.25rem;
 			padding: 0;
 
+			${from.tablet} {
+				margin-top: 1.8rem;
+			}
+
 			${from.desktop} {
+				${textSans17};
 				width: 235px;
 			}
 		`}
@@ -144,38 +196,11 @@ const About = () => (
 	</div>
 );
 
-export const Left = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			display: flex;
-		`}
-	>
-		{children}
-	</div>
-);
-
-export const Right = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			display: flex;
-			padding: ${space[1]}px 10px;
-		`}
-	>
-		{children}
-	</div>
-);
-
 {
 	/* The following was copied from Logo.tsx because of the logo textColor doesn't work with palette --masthead-nav-link-text */
 }
 const Logo = () => (
-	<a
-		href="/"
-		data-link-name={nestedOphanComponents('header', 'logo')}
-		css={css`
-			text-decoration: none;
-		`}
-	>
+	<a href="/" data-link-name={nestedOphanComponents('header', 'logo')}>
 		<span
 			css={css`
 				${visuallyHidden};
@@ -194,6 +219,7 @@ const HostedContentLogo = () => (
 			display: flex;
 		`}
 	>
+		{/* The following hosted by is included in the link for logo */}
 		<p css={hostedByStyles}>Hosted by</p>
 		<div css={logoStyles}>
 			<Logo />
