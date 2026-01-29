@@ -17,6 +17,7 @@ type ProductLinkButtonProps = {
 	fullWidthText?: boolean;
 	priority?: ButtonPriority;
 	minimisePadding?: boolean;
+	dataComponent?: string;
 };
 
 const fullWidthStyle = css`
@@ -51,6 +52,7 @@ export const ProductLinkButton = ({
 	minimisePadding = false,
 	fullWidthText = false,
 	priority = 'primary',
+	dataComponent,
 }: ProductLinkButtonProps) => {
 	const cssOverrides: SerializedStyles[] = [
 		heightAutoStyle,
@@ -65,6 +67,7 @@ export const ProductLinkButton = ({
 			rel="sponsored noreferrer noopener"
 			priority={priority}
 			theme={theme}
+			data-component={dataComponent}
 			data-ignore="global-link-styling"
 			data-link-name={`product link button ${priority}`}
 			data-spacefinder-role="inline"

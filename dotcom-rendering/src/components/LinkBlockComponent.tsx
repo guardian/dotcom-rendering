@@ -48,6 +48,7 @@ export const LinkBlockComponent = ({
 					priority={buttonPriority}
 					label={label}
 					url={url}
+					dataComponent={'in-body-product-link-button'}
 				/>
 			);
 		}
