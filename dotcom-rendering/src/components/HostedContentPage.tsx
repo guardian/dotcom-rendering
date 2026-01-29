@@ -36,7 +36,7 @@ const DecideHostedLayout = ({
 		case ArticleDesign.HostedArticle:
 			return (
 				<HostedArticleLayout
-					hostedArticle={hostedContent}
+					content={hostedContent}
 					renderingTarget={renderingTarget}
 				/>
 			);

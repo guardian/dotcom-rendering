@@ -14,11 +14,13 @@ import {
 	ArticleDisplay,
 	ArticleSpecial,
 } from '../lib/articleFormat';
+import type { DCRHostedContent } from '../types/hostedContent';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
 	renderingTarget: RenderingTarget;
+	content: DCRHostedContent;
 }
 
 interface WebProps extends Props {
@@ -50,6 +52,12 @@ const shareButtonWrapper = css`
 `;
 
 export const HostedArticleLayout = (props: WebProps | AppProps) => {
+	const {
+		content: {
+			frontendData: { headline, standfirst },
+		},
+	} = props;
+
 	return (
 		<>
 			{props.renderingTarget === 'Web' ? (
@@ -85,7 +93,8 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 					<div
 						css={[grid.between('centre-column-start', 'grid-end')]}
 					>
-						Headline
+						{/** @todo Use ArticleHeadline component */}
+						{headline}
 					</div>
 				</header>
 				<div
@@ -127,7 +136,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						Onward content
 					</div>
 					<div css={[border, grid.column.centre, 'grid-row: 1']}>
-						Standfirst
+						{standfirst}
 					</div>
 					<div css={[border, grid.column.centre]}>Meta</div>
 					<article css={[border, grid.column.centre]}>Body</article>
