@@ -15,7 +15,6 @@ type Props = {
 	imageLoading: 'lazy' | 'eager';
 	aspectRatio: AspectRatio;
 	sectionId: string;
-	isInStarRatingVariant?: boolean;
 };
 
 /**
@@ -33,7 +32,6 @@ export const ScrollableMedium = ({
 	showAge,
 	aspectRatio,
 	sectionId,
-	isInStarRatingVariant,
 }: Props) => {
 	return (
 		<ScrollableCarousel
@@ -71,7 +69,6 @@ export const ScrollableMedium = ({
 							showTopBarDesktop={false}
 							showTopBarMobile={false}
 							canPlayInline={false}
-							isInStarRatingVariant={isInStarRatingVariant}
 						/>
 					</ScrollableCarousel.Item>
 				);
