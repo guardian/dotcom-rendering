@@ -16,11 +16,7 @@ import {
 } from '../lib/articleFormat';
 import { getLargest, getMaster } from '../lib/image';
 import { palette as themePalette } from '../palette';
-import type {
-	ImageBlockElement,
-	StarRating as Rating,
-	RoleType,
-} from '../types/content';
+import type { ImageBlockElement, RoleType } from '../types/content';
 import { AppsLightboxImage } from './AppsLightboxImage.importable';
 import { Caption } from './Caption';
 import { useConfig } from './ConfigContext';
@@ -28,7 +24,6 @@ import { Hide } from './Hide';
 import { Island } from './Island';
 import { LightboxLink } from './LightboxLink';
 import { Picture } from './Picture';
-import { StarRatingDeprecated } from './StarRating/StarRatingDeprecated';
 
 type Props = {
 	element: ImageBlockElement;
@@ -36,15 +31,14 @@ type Props = {
 	format: ArticleFormat;
 	hideCaption?: boolean;
 	isMainMedia?: boolean;
-	starRating?: Rating;
 	title?: string;
 	isAvatar?: boolean;
 	isTimeline?: boolean;
-	isInStarRatingVariant?: boolean;
 };
 
 const timelineBulletStyles = css`
 	position: relative;
+
 	::before {
 		content: '';
 		position: absolute;
@@ -66,25 +60,6 @@ const timelineBulletStyles = css`
 		}
 	}
 `;
-
-const starsWrapper = css`
-	background-color: ${themePalette('--star-rating-background')};
-	color: ${themePalette('--star-rating-fill')};
-
-	position: absolute;
-	${until.tablet} {
-		bottom: 0;
-	}
-	${from.tablet} {
-		top: 0;
-	}
-`;
-
-const PositionStarRating = ({ rating }: { rating: Rating }) => (
-	<div css={starsWrapper}>
-		<StarRatingDeprecated rating={rating} size="large" />
-	</div>
-);
 
 const basicTitlePadding = css`
 	${until.tablet} {
@@ -151,9 +126,11 @@ const titleWrapper = css`
 	${until.desktop} {
 		${headlineLight20};
 	}
+
 	${until.phablet} {
 		${headlineLight17};
 	}
+
 	${from.desktop} {
 		${headlineLight24};
 	}
@@ -166,9 +143,11 @@ const titleWrapper = css`
 		display: block;
 		content: '';
 		width: 8.75rem;
+
 		${until.desktop} {
 			height: 0.5rem;
 		}
+
 		${from.desktop} {
 			height: 0.75rem;
 		}
@@ -262,11 +241,9 @@ export const ImageComponent = ({
 	hideCaption,
 	role,
 	isMainMedia,
-	starRating,
 	title,
 	isAvatar,
 	isTimeline = false,
-	isInStarRatingVariant,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	// Its possible the tools wont send us any images urls
@@ -331,12 +308,15 @@ export const ImageComponent = ({
 					${from.desktop} {
 						min-height: 31.25rem;
 					}
+
 					img {
 						object-fit: cover;
 					}
+
 					picture {
 						height: 100%;
 					}
+
 					/* We need position relative here to contain the absolute positioned ClickOverlay added by LightboxLink */
 					position: relative;
 				`}
@@ -431,9 +411,7 @@ export const ImageComponent = ({
 				{isTimeline && isMainMedia && role === 'showcase' && (
 					<div css={timelineBulletStyles} aria-hidden="true" />
 				)}
-				{!isUndefined(starRating) && !isInStarRatingVariant ? (
-					<PositionStarRating rating={starRating} />
-				) : null}
+
 				{!!title && <ImageTitle title={title} role={role} />}
 				{isWeb && !isUndefined(element.position) && (
 					<LightboxLink
@@ -508,10 +486,12 @@ export const ImageComponent = ({
 										/* Never show the input */
 										display: none;
 									}
+
 									#the-caption {
 										/* Hide caption by default */
 										display: none;
 									}
+
 									#the-checkbox:checked + #the-caption {
 										/* Show the caption if the input is checked */
 										display: block;
@@ -535,9 +515,7 @@ export const ImageComponent = ({
 						</Row>
 					</Hide>
 				)}
-				{!isUndefined(starRating) && !isInStarRatingVariant ? (
-					<PositionStarRating rating={starRating} />
-				) : null}
+
 				{!!title && <ImageTitle title={title} role={role} />}
 
 				{isWeb && !isUndefined(element.position) && (

@@ -25,7 +25,6 @@ import { Avatar } from './Avatar';
 import { FormatBoundary } from './FormatBoundary';
 import { QuoteIcon } from './QuoteIcon';
 import { StarRating } from './StarRating/StarRating';
-import { StarRatingDeprecated } from './StarRating/StarRatingDeprecated';
 
 interface Props {
 	richLinkIndex: number;
@@ -41,7 +40,6 @@ interface Props {
 	sponsorName: string;
 	contributorImage?: string;
 	isPlaceholder?: boolean; // use 'true' for server-side default prior to client-side enrichment
-	isInStarRatingVariant?: boolean;
 }
 interface RichLinkImageData {
 	thumbnailUrl: string;
@@ -80,10 +78,7 @@ const headerStyles = css`
 	color: ${themePalette('--rich-link-header')};
 `;
 
-const titleStyles = (
-	parentIsBlog: boolean,
-	isStarRatingRedesign: boolean,
-) => css`
+const titleStyles = (parentIsBlog: boolean) => css`
 	${parentIsBlog ? headlineMedium17 : headlineMedium14};
 	padding-top: 1px;
 
@@ -95,7 +90,6 @@ const titleStyles = (
 		 * Please speak to your team's designer and update this to use a more appropriate preset.
 		 */
 		font-weight: 400;
-		${!isStarRatingRedesign && `padding-bottom: 5px`};
 	}
 `;
 
@@ -131,12 +125,6 @@ const contributorWrapperStyles = css`
 const paidForBrandingStyles = css`
 	color: ${themePalette('--rich-link-branding-text')};
 	${textSansBold12};
-`;
-
-const starWrapperStyles = css`
-	background-color: ${themePalette('--star-rating-background')};
-	color: ${themePalette('--star-rating-fill')};
-	display: inline-block;
 `;
 
 const readMoreStyles = css`
@@ -202,7 +190,6 @@ export const RichLink = ({
 	sponsorName,
 	contributorImage,
 	isPlaceholder,
-	isInStarRatingVariant,
 }: Props) => {
 	const linkText =
 		cardStyle === 'letters' ? `${headlineText} | Letters ` : headlineText;
@@ -226,8 +213,6 @@ export const RichLink = ({
 
 	const isLabs = linkFormat.theme === ArticleSpecial.Labs;
 
-	const isStarRatingRedesign =
-		!isUndefined(starRating) && isInStarRatingVariant;
 	return (
 		<div
 			data-print-layout="hide"
@@ -256,10 +241,7 @@ export const RichLink = ({
 						<div css={headerStyles}>
 							<div
 								css={[
-									titleStyles(
-										parentIsBlog,
-										!!isStarRatingRedesign,
-									),
+									titleStyles(parentIsBlog),
 									isLabs && labsTitleStyles,
 								]}
 							>
@@ -278,20 +260,9 @@ export const RichLink = ({
 								<div css={[bylineStyles]}>{byline}</div>
 							)}
 
-							{!isUndefined(starRating) &&
-								(isInStarRatingVariant ? (
-									<StarRating
-										rating={starRating}
-										size="small"
-									/>
-								) : (
-									<div css={starWrapperStyles}>
-										<StarRatingDeprecated
-											rating={starRating}
-											size="small"
-										/>
-									</div>
-								))}
+							{!isUndefined(starRating) && (
+								<StarRating rating={starRating} size="small" />
+							)}
 
 							{!!(isPaidContent && sponsorName) && (
 								<div css={paidForBrandingStyles}>

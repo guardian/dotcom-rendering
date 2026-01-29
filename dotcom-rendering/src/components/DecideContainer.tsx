@@ -49,7 +49,6 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
-	isInStarRatingVariant?: boolean;
 	pillarBuckets?: PillarBucket;
 };
 
@@ -66,7 +65,6 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
-	isInStarRatingVariant,
 	pillarBuckets,
 }: Props) => {
 	switch (containerType) {
@@ -237,11 +235,7 @@ export const DecideContainer = ({
 		case 'scrollable/highlights':
 			return (
 				<Island priority="critical" defer={{ until: 'visible' }}>
-					<ScrollableHighlights
-						trails={trails}
-						frontId={frontId}
-						isInStarRatingVariant={isInStarRatingVariant}
-					/>
+					<ScrollableHighlights trails={trails} frontId={frontId} />
 				</Island>
 			);
 		case 'flexible/special':
@@ -254,7 +248,6 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		case 'flexible/general':
@@ -268,7 +261,6 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		case 'scrollable/small':
@@ -282,7 +274,6 @@ export const DecideContainer = ({
 						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
-						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Island>
 			);
@@ -297,7 +288,6 @@ export const DecideContainer = ({
 						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
-						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Island>
 			);
@@ -312,7 +302,6 @@ export const DecideContainer = ({
 							serverTime={serverTime}
 							imageLoading={imageLoading}
 							aspectRatio={aspectRatio}
-							isInStarRatingVariant={isInStarRatingVariant}
 							pillarBuckets={pillarBuckets}
 						/>
 					</Island>
@@ -326,7 +315,6 @@ export const DecideContainer = ({
 					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		case 'scrollable/feature':
@@ -339,7 +327,6 @@ export const DecideContainer = ({
 						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						collectionId={collectionId}
-						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Island>
 			);
@@ -352,7 +339,6 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			);
 		default:

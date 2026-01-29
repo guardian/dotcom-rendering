@@ -391,13 +391,9 @@ export const renderElement = ({
 					element={element}
 					hideCaption={hideCaption}
 					isMainMedia={isMainMedia}
-					starRating={starRating ?? element.starRating}
 					title={element.title}
 					isAvatar={element.isAvatar}
 					isTimeline={isTimeline}
-					isInStarRatingVariant={
-						abTests.starRatingRedesignVariant === 'variant'
-					}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
@@ -728,9 +724,6 @@ export const renderElement = ({
 						element={element}
 						ajaxUrl={ajaxUrl}
 						format={format}
-						isInStarRatingVariant={
-							abTests.starRatingRedesignVariant === 'variant'
-						}
 					/>
 				</Island>
 			);
@@ -761,9 +754,6 @@ export const renderElement = ({
 					key={index}
 					rating={element.rating}
 					size={element.size}
-					isInStarRatingVariant={
-						abTests.starRatingRedesignVariant === 'variant'
-					}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
