@@ -18,5 +18,7 @@ export const Default = {
 		awayTeam: 'Arsenal',
 		league: 'Premier League',
 		venue: 'Old Trafford',
+		kickOff: new Date('2026-02-15T17:00:00Z'),
+		edition: 'UK',
 	},
 } satisfies Story;
