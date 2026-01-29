@@ -2,11 +2,14 @@ import { css } from '@emotion/react';
 import {
 	from,
 	palette as sourcePalette,
+	space,
+	textSans12,
 	textSans15,
 	textSansBold14,
+	visuallyHidden,
 } from '@guardian/source/foundations';
-import { Link } from '@guardian/source/react-components';
-import { Left, Right } from './LabsHeader';
+import { SvgGuardianLogo } from '@guardian/source/react-components';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
 
 type Props = {
 	accentColor: string;
@@ -29,6 +32,27 @@ const headerWrapperStyles = css`
 
 	${from.tablet} {
 		height: ${HOSTED_CONTENT_HEIGHT_DESKTOP}rem;
+	}
+`;
+
+const hostedByStyles = css`
+	${textSans12};
+	margin-right: -9px;
+	font-weight: 600;
+	letter-spacing: 0.03125rem;
+	color: rgba(255, 255, 255, 0.5);
+`;
+
+const logoStyles = css`
+	position: relative;
+	display: flex;
+	align-self: end;
+	margin-right: 0.625rem;
+	margin-bottom: 1px;
+
+	svg {
+		width: 94px;
+		height: auto;
 	}
 `;
 
@@ -103,7 +127,6 @@ const About = () => (
 			background-color: ${sourcePalette.neutral[7]};
 			color: ${sourcePalette.neutral[100]};
 			margin-top: 1.25rem;
-			width: 100vw;
 			padding: 0;
 
 			${from.desktop} {
@@ -121,23 +144,61 @@ const About = () => (
 	</div>
 );
 
-const HostedContentLogo = () => (
-	<span>
-		<svg />
-	</span>
+export const Left = ({ children }: { children: React.ReactNode }) => (
+	<div
+		css={css`
+			display: flex;
+		`}
+	>
+		{children}
+	</div>
 );
 
+export const Right = ({ children }: { children: React.ReactNode }) => (
+	<div
+		css={css`
+			display: flex;
+			padding: ${space[1]}px 10px;
+		`}
+	>
+		{children}
+	</div>
+);
+
+{
+	/* The following was copied from Logo.tsx because of the logo textColor doesn't work with palette --masthead-nav-link-text */
+}
 const Logo = () => (
-	<Link href="https://www.theguardian.com/uk">
-		<p
+	<a
+		href="/"
+		data-link-name={nestedOphanComponents('header', 'logo')}
+		css={css`
+			text-decoration: none;
+		`}
+	>
+		<span
 			css={css`
-				color: ${sourcePalette.neutral[100]};
+				${visuallyHidden};
 			`}
 		>
-			Hosted by
-		</p>
-		<HostedContentLogo />
-	</Link>
+			The Guardian - Back to home
+		</span>
+		<SvgGuardianLogo textColor={`${sourcePalette.neutral[100]}`} />
+	</a>
+);
+
+const HostedContentLogo = () => (
+	<div
+		css={css`
+			position: relative;
+			display: flex;
+		`}
+	>
+		<p css={hostedByStyles}>Hosted by</p>
+		<div css={logoStyles}>
+			<Logo />
+		</div>
+	</div>
 );
 
 export const HostedContentHeader = ({ accentColor, branding }: Props) => {
@@ -155,7 +216,7 @@ export const HostedContentHeader = ({ accentColor, branding }: Props) => {
 				</HeaderSection>
 			</Left>
 			<Right>
-				<Logo />
+				<HostedContentLogo />
 			</Right>
 		</HeaderWrapper>
 	);
