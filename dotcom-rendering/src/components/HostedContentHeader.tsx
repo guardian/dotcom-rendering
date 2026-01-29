@@ -29,7 +29,6 @@ const headerWrapperStyles = css`
 	padding: 0;
 	height: ${HOSTED_CONTENT_HEIGHT_MOBILE}rem;
 	color: ${sourcePalette.neutral[100]};
-	background-color: ${sourcePalette.neutral[7]};
 
 	${from.tablet} {
 		height: ${HOSTED_CONTENT_HEIGHT_DESKTOP}rem;
@@ -37,6 +36,10 @@ const headerWrapperStyles = css`
 
 	${from.desktop} {
 		max-width: 61.25rem;
+	}
+
+	${from.leftCol} {
+		max-width: 71.25rem;
 	}
 `;
 
@@ -106,6 +109,14 @@ const HeaderSection = ({
 			display: flex;
 			align-items: center;
 			${isFirst ? 'margin-left: 1.25rem;' : 'margin-left: 0.625rem;'}
+
+			${from.desktop} {
+				${isFirst ? null : 'margin-left: 1.25rem;'}
+			}
+
+			${from.leftCol} {
+				${isFirst ? null : 'margin-left: 2rem;'}
+			}
 		`}
 	>
 		{children}
@@ -119,6 +130,7 @@ const TitleAndBadge = ({ accentColor, branding }: Props) => (
 				box-sizing: border-box;
 				width: 80px;
 				align-self: flex-end;
+				background-color: ${accentColor};
 
 				${from.desktop} {
 					width: 132px;
@@ -133,10 +145,10 @@ const TitleAndBadge = ({ accentColor, branding }: Props) => (
 					line-height: 0.945rem; /* We shouldn't override this but need to confirm if it's ok for the design to look slighly different */
 					padding: 0.3125rem 0.375rem 0.25rem;
 					letter-spacing: 0.03125rem;
-					background-color: ${accentColor};
 
 					${from.desktop} {
 						text-align: center;
+						margin: 2px 0;
 					}
 				`}
 			>
