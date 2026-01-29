@@ -106,6 +106,19 @@ const ABTests: ABTest[] = [
 		groups: ["control", "prefer", "add"],
 		shouldForceMetricsCollection: false,
 	},
+	{
+		name: "thefilter-at-a-glance-redesign",
+		description:
+			"Testing redesigned at a glance component on The Filter articles",
+		owners: ["thefilter.dev@guardian.co.uk"],
+		expirationDate: "2026-02-25",
+		type: "server",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["control", "stacked", "carousel"],
+		shouldForceMetricsCollection: false,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
