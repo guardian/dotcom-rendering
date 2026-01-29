@@ -1,7 +1,7 @@
 import type { StoryObj } from '@storybook/react-webpack5';
 import { fn } from 'storybook/test';
 import { initialDays, regions } from '../../fixtures/manual/footballData';
-import { WomensEuro2025 } from './FootballCompetitionNav.stories';
+import { WomensEuro2025 } from './DirectoryPageNav.stories';
 import { FootballMatchesPage } from './FootballMatchesPage';
 
 const meta = {

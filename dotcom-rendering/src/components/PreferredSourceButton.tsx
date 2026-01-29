@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { from, space, textSans14Object } from '@guardian/source/foundations';
+import {
+	from,
+	space,
+	textSans12Object,
+	textSans14Object,
+} from '@guardian/source/foundations';
 import { LinkButton, SvgGoogleBrand } from '@guardian/source/react-components';
 import { palette } from '../palette';
 
@@ -23,13 +28,18 @@ export const PreferredSourceButton = ({ text }: Props) => (
 				flexBasis: 20,
 			},
 			[from.leftCol]: {
+				...textSans12Object,
 				textWrap: 'wrap',
 				height: 'unset',
-				padding: '4px 16px 6px',
+				padding: '4px 8px 6px 6px',
 				'.src-button-space': {
 					flexBasis: space[2],
 					flexShrink: 0,
 				},
+			},
+			[from.wide]: {
+				padding: '10px 12px',
+				height: 36,
 			},
 		})}
 		theme={{
