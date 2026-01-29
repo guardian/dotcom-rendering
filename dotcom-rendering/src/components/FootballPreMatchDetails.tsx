@@ -5,12 +5,13 @@ import {
 	textSans14,
 	textSansBold14,
 } from '@guardian/source/foundations';
+import {
+	LinkButton,
+	SvgArrowRightStraight,
+} from '@guardian/source/react-components';
 import { palette } from '../palette';
 
 const containerCss = css`
-	display: flex;
-	flex-direction: column;
-	gap: ${space[2]}px;
 	padding: 6px 10px 10px;
 	color: ${palette('--football-match-stat-text')};
 	background-color: ${palette('--football-pre-match-background')};
@@ -29,6 +30,7 @@ const detailsCss = css`
 	display: flex;
 	flex-direction: column;
 	gap: ${space[1]}px;
+	margin: ${space[2]}px 0;
 `;
 
 const kickOffCss = css`
@@ -59,7 +61,22 @@ export const FootballPreMatchDetails = ({
 				<span>{venue}</span>
 				<time css={kickOffCss}>Today, 8:30pm</time>
 			</div>
-			<a href="/football/fixtures">Today's fixtures</a>
+			<LinkButton
+				href="/football/fixtures"
+				size="xsmall"
+				priority="tertiary"
+				icon={<SvgArrowRightStraight />}
+				iconSide="right"
+				theme={{
+					textTertiary: palette('--football-pre-match-button'),
+					borderTertiary: palette('--football-pre-match-button'),
+					backgroundTertiaryHover: palette(
+						'--football-pre-match-button-hover',
+					),
+				}}
+			>
+				Today's fixtures
+			</LinkButton>
 		</div>
 	);
 };
