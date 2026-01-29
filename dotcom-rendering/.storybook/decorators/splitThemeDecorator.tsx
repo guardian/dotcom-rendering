@@ -308,6 +308,7 @@ const Theme = ({
  * mode, once for each format, and three times in dark mode, once for each
  * format.
  *
+ * @deprecated
  * The returned "splitTheme" decorator was historically used directly in story
  * files. This approach is now deprecated in favour of the "global colour
  * scheme" decorator and toolbar item, which use the "splitTheme" decorator in
