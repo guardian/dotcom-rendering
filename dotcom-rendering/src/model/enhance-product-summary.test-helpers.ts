@@ -1,4 +1,8 @@
-import type { FEElement, ProductBlockElement } from '../types/content';
+import type {
+	FEElement,
+	ProductBlockElement,
+	ProductSummaryElement,
+} from '../types/content';
 
 export const linkElement = (url: string, label: string): FEElement =>
 	({
@@ -34,16 +38,22 @@ export const textElement = (html: string): FEElement =>
 		elementId: '4',
 	}) as FEElement;
 
-export type ProductCarouselTestElement = FEElement & {
-	_type: 'model.dotcomrendering.pageElements.ProductSummaryElement';
-	matchedProducts: ProductBlockElement[];
-};
-
 export const findCarousel = (
 	elements: FEElement[],
-): ProductCarouselTestElement | undefined =>
+): ProductSummaryElement | undefined =>
 	elements.find(
-		(el): el is ProductCarouselTestElement =>
+		(el): el is ProductSummaryElement =>
 			el._type ===
-			'model.dotcomrendering.pageElements.ProductSummaryElement',
+				'model.dotcomrendering.pageElements.ProductSummaryElement' &&
+			el.variant === 'carousel',
+	);
+
+export const findStacked = (
+	elements: FEElement[],
+): ProductSummaryElement | undefined =>
+	elements.find(
+		(el): el is ProductSummaryElement =>
+			el._type ===
+				'model.dotcomrendering.pageElements.ProductSummaryElement' &&
+			el.variant === 'stacked',
 	);

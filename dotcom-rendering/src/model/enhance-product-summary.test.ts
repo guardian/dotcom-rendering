@@ -3,6 +3,7 @@ import {
 	atAGlanceHeading,
 	dividerElement,
 	findCarousel,
+	findStacked,
 	linkElement,
 	productElement,
 	textElement,
@@ -185,13 +186,13 @@ describe('insertCarouselPlaceholder – edge cases', () => {
 describe('enhanceProductSummary', () => {
 	beforeAll(() => {
 		_testOnly.allowedPageIds.push(
-			'thefilter/test-article-example-for-product-carousel',
+			'thefilter/test-article-example-for-product-summary',
 		);
 	});
 
 	it('enhances elements with a product carousel for allowlisted pages', () => {
 		const allowedPageId =
-			'thefilter/test-article-example-for-product-carousel';
+			'thefilter/test-article-example-for-product-summary';
 
 		const input = [
 			atAGlanceHeading(),
@@ -225,6 +226,47 @@ describe('enhanceProductSummary', () => {
 		})(input);
 
 		const carousel = findCarousel(output);
+
 		expect(carousel).toBeDefined();
+	});
+
+	it('enhances elements with a stacked product for allowlisted pages', () => {
+		const allowedPageId =
+			'thefilter/test-article-example-for-product-summary';
+
+		const input = [
+			atAGlanceHeading(),
+			linkElement(
+				'https://www.homebase.co.uk/en-uk/tower-airx-t17166-5l-grey-single-basket-air-fryer-digital-air-fryer/p/0757395',
+				'Buy now',
+			),
+			linkElement(
+				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
+				'Buy now',
+			),
+			linkElement(
+				'https://ninjakitchen.co.uk/product/ninja-double-stack-xl-9-5l-air-fryer-sl400uk-zidSL400UK',
+				'Buy now',
+			),
+			dividerElement(),
+			productElement([
+				'https://www.homebase.co.uk/en-uk/tower-airx-t17166-5l-grey-single-basket-air-fryer-digital-air-fryer/p/0757395',
+			]),
+			productElement([
+				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
+			]),
+			productElement([
+				'https://ninjakitchen.co.uk/product/ninja-double-stack-xl-9-5l-air-fryer-sl400uk-zidSL400UK',
+			]),
+		];
+
+		const output = enhanceProductSummary({
+			pageId: allowedPageId,
+			serverSideABTests: { 'thefilter-at-a-glance-redesign': 'stacked' },
+		})(input);
+
+		const stacked = findStacked(output);
+
+		expect(stacked).toBeDefined();
 	});
 });
