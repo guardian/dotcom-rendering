@@ -478,7 +478,9 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									choices={choiceCards}
 									id={'banner'}
 									submitComponentEvent={submitComponentEvent}
-									choiceCardSettings={choiceCardSettings}
+									choiceCardDesignSettings={
+										choiceCardSettings
+									}
 								/>
 							)}
 							<div
