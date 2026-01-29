@@ -8,11 +8,8 @@ import {
 	textElement,
 } from './enhance-product-summary.test-helpers';
 
-const {
-	extractAtAGlanceUrls,
-	findMatchingProducts,
-	insertCarouselPlaceholder,
-} = _testOnly;
+const { extractAtAGlanceUrls, findMatchingProducts, insertSummaryPlaceholder } =
+	_testOnly;
 
 describe('extractAtAGlanceUrls', () => {
 	it('returns only URLs from LinkBlockElements', () => {
@@ -113,7 +110,7 @@ describe('insertCarouselPlaceholder', () => {
 			]),
 		];
 
-		const output = insertCarouselPlaceholder(input, 'carousel');
+		const output = insertSummaryPlaceholder(input, 'carousel');
 
 		const carousel = findCarousel(output);
 		expect(carousel).toBeDefined();
@@ -130,7 +127,7 @@ describe('insertCarouselPlaceholder', () => {
 			]),
 		];
 
-		const output = insertCarouselPlaceholder(input, 'carousel');
+		const output = insertSummaryPlaceholder(input, 'carousel');
 
 		const carousel = findCarousel(output);
 		expect(carousel).toBeUndefined();
@@ -159,7 +156,7 @@ describe('insertCarouselPlaceholder – edge cases', () => {
 			]),
 		];
 
-		const output = insertCarouselPlaceholder(input, 'carousel');
+		const output = insertSummaryPlaceholder(input, 'carousel');
 		const carousel = findCarousel(output);
 		expect(carousel).toBeUndefined();
 	});
@@ -174,14 +171,14 @@ describe('insertCarouselPlaceholder – edge cases', () => {
 			]),
 		];
 
-		const output = insertCarouselPlaceholder(input, 'carousel');
+		const output = insertSummaryPlaceholder(input, 'carousel');
 
 		const carousel = findCarousel(output);
 		expect(carousel).toBeUndefined();
 	});
 
 	it('returns an empty array for empty input', () => {
-		expect(insertCarouselPlaceholder([], 'carousel')).toEqual([]);
+		expect(insertSummaryPlaceholder([], 'carousel')).toEqual([]);
 	});
 });
 
