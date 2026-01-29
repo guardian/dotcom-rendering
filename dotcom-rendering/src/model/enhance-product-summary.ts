@@ -153,7 +153,7 @@ const insertSummaryPlaceholder = (
 	return output;
 };
 
-export const enhanceProductCarousel =
+export const enhanceProductSummary =
 	({
 		pageId,
 		serverSideABTests,
