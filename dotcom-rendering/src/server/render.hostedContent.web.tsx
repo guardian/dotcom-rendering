@@ -1,6 +1,7 @@
 import { isString } from '@guardian/libs';
 import { ConfigProvider } from '../components/ConfigContext';
 import { HostedContentPage } from '../components/HostedContentPage';
+import { getArticleThemeString } from '../lib/articleFormat';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -19,7 +20,7 @@ type Props = {
 };
 
 export const renderHtml = ({ hostedContent }: Props) => {
-	const { frontendData } = hostedContent;
+	const { frontendData, theme } = hostedContent;
 
 	const title = `Advertiser content hosted by the Guardian: ${frontendData.webTitle} | The Guardian`;
 
@@ -90,21 +91,31 @@ export const renderHtml = ({ hostedContent }: Props) => {
 		unknownConfig: frontendData.config,
 	});
 
+	const { linkedData, openGraphData, canonicalUrl } = frontendData;
+	const maybeArticleThemeString = getArticleThemeString(theme);
+
 	/**
 	 * @todo Create a separate hosted content page template
 	 */
 	const pageHtml = htmlPageTemplate({
+		linkedData,
 		scriptTags,
 		css: extractedCss,
 		html,
 		title,
-		description: frontendData.standfirst,
+		description: frontendData.trailText,
 		guardian,
-		canonicalUrl: '',
+		openGraphData,
+		section: frontendData.config.section,
+		canonicalUrl,
 		renderingTarget: 'Web',
-		// @ts-expect-error no config data
-		config: {},
-		weAreHiring: false,
+		weAreHiring: !!frontendData.config.switches.weAreHiring,
+		config,
+		dataAttributes: {
+			...(maybeArticleThemeString && {
+				'article-theme': maybeArticleThemeString,
+			}),
+		},
 	});
 
 	return { html: pageHtml, prefetchScripts };
