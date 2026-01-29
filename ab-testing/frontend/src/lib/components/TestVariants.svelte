@@ -19,44 +19,25 @@
 </script>
 
 <div>
-	<table>
-		<tbody>
-			{#each testGroups as group, i}
-				<tr>
-					<td>
-						{group} ({formatter.format(
-							((1 / testGroups.length) * size) / 100,
-						)})
-					</td>
-					<td>
-						<a
-							href={`${frontendAdminUrl}/ab-tests/opt-in/${testName}:${group}`}
-							target="_blank"
-						>
-							opt in
-						</a>
-					</td>
-					<td>
-						<a
-							href={`${frontendAdminUrl}/ab-tests/opt-out/${testName}:${group}`}
-							target="_blank"
-						>
-							opt out
-						</a>
-					</td>
-				</tr>
-			{/each}
-		</tbody>
-	</table>
+	{#each testGroups as group, i}
+		<a
+			class="link"
+			href={`${frontendAdminUrl}/ab-tests/opt-in/${testName}:${group}`}
+			target="_blank"
+		>
+			{group} ({formatter.format(((1 / testGroups.length) * size) / 100)})
+		</a>
+	{/each}
+	<a
+		href={`${frontendAdminUrl}/ab-tests/opt-out/${testName}`}
+		target="_blank"
+	>
+		opt out
+	</a>
 </div>
 
 <style>
-	table {
-		border-collapse: collapse;
-	}
-
-	td {
-		padding: 0.1rem 0.5rem;
-		border: 1px solid var(--color-border);
+	.link {
+		margin: 0 4px;
 	}
 </style>
