@@ -23,7 +23,7 @@ import type { Dispatch, SetStateAction } from 'react';
 import { useEffect } from 'react';
 import sanitise from 'sanitize-html';
 import { useIsInView } from '../../../lib/useIsInView';
-import type { ChoiceCardSettings } from '../banners/designableBanner/settings';
+import type { ChoiceCardDesignSettings } from '../banners/designableBanner/settings';
 
 const benefitsStyles = css`
 	${textSans15};
@@ -65,11 +65,11 @@ const supportingTextStyles = css`
 const SupportingBenefits = ({
 	benefitsLabel,
 	benefits,
-	choiceCardSettings,
+	choiceCardDesignSettings,
 }: {
 	benefitsLabel?: string;
 	benefits: ChoiceCard['benefits'];
-	choiceCardSettings?: ChoiceCardSettings;
+	choiceCardDesignSettings?: ChoiceCardDesignSettings;
 }) => {
 	const showTicks = benefits.length > 1;
 	return (
@@ -77,7 +77,7 @@ const SupportingBenefits = ({
 			{!!benefitsLabel && (
 				<span
 					css={benefitsLabelStyles(
-						choiceCardSettings?.buttonSelectTextColour,
+						choiceCardDesignSettings?.buttonSelectTextColour,
 					)}
 					dangerouslySetInnerHTML={{
 						__html: sanitise(benefitsLabel),
@@ -92,14 +92,14 @@ const SupportingBenefits = ({
 								size="xsmall"
 								theme={{
 									fill:
-										choiceCardSettings?.buttonSelectMarkerColour ??
+										choiceCardDesignSettings?.buttonSelectMarkerColour ??
 										palette.brand[400],
 								}}
 							/>
 						)}
 						<span
 							css={benefitsLabelStyles(
-								choiceCardSettings?.buttonSelectTextColour,
+								choiceCardDesignSettings?.buttonSelectTextColour,
 							)}
 							dangerouslySetInnerHTML={{
 								__html: sanitise(benefit.copy),
@@ -118,7 +118,7 @@ type ThreeTierChoiceCardsProps = {
 	choices: ChoiceCard[];
 	id: 'epic' | 'banner'; // uniquely identify this choice cards component to avoid conflicting with others
 	submitComponentEvent?: (componentEvent: ComponentEvent) => void;
-	choiceCardDesignSettings?: ChoiceCardSettings;
+	choiceCardDesignSettings?: ChoiceCardDesignSettings;
 };
 
 export const ThreeTierChoiceCards = ({
@@ -335,7 +335,7 @@ export const ThreeTierChoiceCards = ({
 															| undefined
 													}
 													benefits={benefits}
-													choiceCardSettings={
+													choiceCardDesignSettings={
 														choiceCardDesignSettings
 													}
 												/>
