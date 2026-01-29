@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { palette as sourcePalette } from '@guardian/source/foundations';
 import { HostedContentHeader } from '../components/HostedContentHeader';
 import { grid } from '../grid';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -23,7 +24,16 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 	return (
 		<>
 			{props.renderingTarget === 'Web' ? (
-				<HostedContentHeader accentColor="#1b1f71" branding="logo" />
+				<div
+					css={css`
+						background-color: ${sourcePalette.neutral[7]};
+					`}
+				>
+					<HostedContentHeader
+						accentColor="#1b1f71"
+						branding="logo"
+					/>
+				</div>
 			) : null}
 			<main>
 				<header css={[grid.container]}>
