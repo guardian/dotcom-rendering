@@ -176,14 +176,7 @@ export const decideTheme = ({ theme }: Partial<FEFormat>): ArticleTheme => {
 	}
 };
 
-export const decideFormat = (
-	format: Partial<FEFormat> = {
-		// TODO: Only here for testing. Please remove this!
-		design: 'HostedArticle',
-		display: 'StandardDisplay',
-		theme: 'Labs',
-	},
-): ArticleFormat => ({
+export const decideFormat = (format: Partial<FEFormat>): ArticleFormat => ({
 	design: decideDesign(format),
 	display: decideDisplay(format),
 	theme: decideTheme(format),
