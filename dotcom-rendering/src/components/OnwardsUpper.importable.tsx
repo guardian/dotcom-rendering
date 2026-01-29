@@ -188,7 +188,6 @@ type Props = {
 	serverTime?: number;
 	renderingTarget: RenderingTarget;
 	webURL: string;
-	isInStarRatingVariant?: boolean;
 };
 
 /**
@@ -225,7 +224,6 @@ export const OnwardsUpper = ({
 	serverTime,
 	renderingTarget,
 	webURL,
-	isInStarRatingVariant,
 }: Props) => {
 	const abTests = useBetaAB();
 	const isInOnwardsAbTestVariant =
@@ -351,7 +349,6 @@ export const OnwardsUpper = ({
 						containerPosition="first"
 						isInOnwardsAbTestVariant={isInOnwardsAbTestVariant}
 						webURL={webURL}
-						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Section>
 			)}
@@ -376,7 +373,6 @@ export const OnwardsUpper = ({
 							hasOnwardsContainer ? 'second' : 'first'
 						}
 						webURL={webURL}
-						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Section>
 			)}

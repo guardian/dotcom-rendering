@@ -338,6 +338,7 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 				<div
 					css={navigationStyles}
 					id={'at-a-glance-carousel-navigation'}
+					data-component="at-a-glance-carousel-navigation"
 				></div>
 				<div css={countStyles} id={'at-a-glance-carousel-count'}></div>
 			</div>

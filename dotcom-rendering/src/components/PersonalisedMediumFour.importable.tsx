@@ -39,7 +39,6 @@ type Props = {
 	showImage?: boolean;
 	aspectRatio: AspectRatio;
 	containerLevel?: DCRContainerLevel;
-	isInStarRatingVariant?: boolean;
 	pillarBuckets?: PillarBucket;
 };
 
@@ -73,7 +72,6 @@ export const PersonalisedMediumFour = ({
 	showImage = true,
 	aspectRatio,
 	containerLevel = 'Primary',
-	isInStarRatingVariant,
 	pillarBuckets,
 }: Props) => {
 	const [orderedTrails, setOrderedTrails] = useState<DCRFrontCard[]>(
@@ -166,7 +164,6 @@ export const PersonalisedMediumFour = ({
 										!isMediaCard(card.format))
 								}
 								canPlayInline={false}
-								isInStarRatingVariant={isInStarRatingVariant}
 								isInPersonalisationVariant={
 									isInPersonalisationVariant
 								}
