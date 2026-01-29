@@ -111,6 +111,7 @@ export const ProductCarouselCard = ({
 							href={`#${headingId}`}
 							onFocus={(event) => event.stopPropagation()}
 							cssOverrides={readMoreCta}
+							data-component="at-a-glance-carousel-card-read-more"
 						>
 							Read more
 						</Link>
