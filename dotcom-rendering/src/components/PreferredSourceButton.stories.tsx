@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>;
 
 export const VariantA = {
 	args: {
-		text: 'Prefer the Guardian on Google',
+		kind: 'prefer',
 	},
 	parameters: {
 		chromatic: {
@@ -27,7 +27,7 @@ export const VariantA = {
 
 export const VariantB = {
 	args: {
-		text: 'Add the Guardian on Google',
+		kind: 'add',
 	},
 	parameters: {
 		chromatic: {

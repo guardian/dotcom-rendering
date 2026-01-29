@@ -519,7 +519,7 @@ export const ArticleMeta = ({
 					</div>
 				</div>
 				{preferredSource.hasButton ? (
-					<PreferredSourceButton text={preferredSource.copy} />
+					<PreferredSourceButton kind={preferredSource.kind} />
 				) : null}
 			</div>
 		</div>
