@@ -17,7 +17,6 @@ export type ABTestVariant = 'carousel' | 'stacked';
  */
 export const allowedPageIds: string[] = [
 	'thefilter/2025/nov/18/best-pillows-tested-uk',
-	'thefilter-us/2025/dec/14/best-cordless-leaf-blowers-battery-powered',
 	'thefilter/2025/jan/29/best-sunrise-alarm-clocks',
 	'thefilter/2025/dec/28/best-running-watches-tested-uk',
 ];
