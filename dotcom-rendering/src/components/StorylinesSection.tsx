@@ -417,12 +417,7 @@ const sectionPagination = css`
 `;
 
 const bottomPaddingBetaContainer = css`
-	${until.tablet} {
-		padding-bottom: ${space[10]}px;
-	}
-	${from.tablet} {
-		padding-bottom: ${space[10]}px;
-	}
+	padding-bottom: ${space[10]}px;
 `;
 
 /**
