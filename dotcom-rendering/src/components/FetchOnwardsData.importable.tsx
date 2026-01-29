@@ -18,7 +18,6 @@ import type { OnwardsSource } from '../types/onwards';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { FETrailType, TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
-import { MoreGalleriesStyleOnwardsContent } from './MoreGalleriesStyleOnwardsContent.importable';
 import { Placeholder } from './Placeholder';
 import { ScrollableSmallOnwards } from './ScrollableSmallOnwards';
 
@@ -32,7 +31,6 @@ type Props = {
 	renderingTarget: RenderingTarget;
 	isAdFreeUser: boolean;
 	containerPosition: string;
-	isInOnwardsAbTestVariant?: boolean;
 	webURL: string;
 };
 
@@ -82,7 +80,6 @@ export const FetchOnwardsData = ({
 	renderingTarget,
 	isAdFreeUser,
 	containerPosition,
-	isInOnwardsAbTestVariant,
 	webURL,
 }: Props) => {
 	const [hasBeenSeen, setIsInViewRef] = useIsInView({ rootMargin: `-100px` });
@@ -164,16 +161,6 @@ export const FetchOnwardsData = ({
 					heading={data.heading || data.displayname}
 					onwardsSource={onwardsSource}
 					format={format}
-				/>
-			) : isInOnwardsAbTestVariant ? (
-				<MoreGalleriesStyleOnwardsContent
-					heading={data.heading || data.displayname}
-					trails={trails({
-						withMasterImage: true,
-						permitFallbackImage: true,
-					})}
-					discussionApiUrl={discussionApiUrl}
-					isAdFreeUser={isAdFreeUser}
 				/>
 			) : (
 				<Carousel

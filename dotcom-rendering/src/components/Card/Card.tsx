@@ -159,7 +159,6 @@ export type Props = {
 	headlinePosition?: 'inner' | 'outer';
 	isStorylines?: boolean;
 	starRatingSize?: RatingSizeType;
-	isInOnwardsAbTestVariant?: boolean;
 	isInPersonalisationVariant?: boolean;
 };
 
@@ -407,7 +406,6 @@ export const Card = ({
 	subtitleSize = 'small',
 	isStorylines = false,
 	starRatingSize = 'small',
-	isInOnwardsAbTestVariant,
 	isInPersonalisationVariant,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
@@ -681,12 +679,7 @@ export const Card = ({
 	 */
 	const getGapSizes = (): GapSizes => {
 		if (isOnwardContent && !isGallerySecondaryOnward) {
-			if (
-				isMoreGalleriesOnwardContent ||
-				// This is untidy. If we implement the gallery-style redesign for onwards content
-				// in all articles, we can refactor how we determine gap sizes for onwards cards.
-				isInOnwardsAbTestVariant
-			) {
+			if (isMoreGalleriesOnwardContent) {
 				return {
 					row: 'small',
 					column: 'small',
@@ -1241,7 +1234,6 @@ export const Card = ({
 						isBetaContainer,
 						isOnwardContent,
 					)}
-					isInOnwardsAbTestVariant={!!isInOnwardsAbTestVariant}
 				>
 					{/* In the storylines section on tag pages, the flex splash is used to display key stories.
 						We don't display an article headline in the conventional sense, the key stories are instead displayed as "supporting content".

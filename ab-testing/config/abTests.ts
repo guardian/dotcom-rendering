@@ -46,18 +46,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "fronts-and-curation-onward-journeys",
-		description: "Testing the new Onward Journey component on all articles",
-		owners: ["fronts.and.curation@guardian.co.uk"],
-		expirationDate: `2026-02-25`,
-		type: "client",
-		status: "ON",
-		audienceSize: 50 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "fronts-and-curation-personalised-container",
 		description: "Testing the a personalised container component on fronts",
 		owners: ["fronts.and.curation@guardian.co.uk"],
