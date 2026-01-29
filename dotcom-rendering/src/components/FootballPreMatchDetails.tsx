@@ -1,9 +1,13 @@
 import { css } from '@emotion/react';
 import {
+	from,
 	headlineBold17,
+	headlineBold20,
 	space,
 	textSans14,
+	textSans15,
 	textSansBold14,
+	textSansBold15,
 } from '@guardian/source/foundations';
 import {
 	LinkButton,
@@ -23,6 +27,9 @@ const headingCss = css`
 	${textSansBold14}
 	padding-bottom: ${space[1]}px;
 	border-bottom: 1px solid ${palette('--football-match-stat-border')};
+	${from.desktop} {
+		${textSansBold15}
+	}
 `;
 
 const detailsCss = css`
@@ -30,12 +37,18 @@ const detailsCss = css`
 	display: flex;
 	flex-direction: column;
 	gap: ${space[1]}px;
-	margin: ${space[2]}px 0;
+	margin: ${space[2]}px 0 ${space[3]}px;
+	${from.desktop} {
+		${textSans15}
+	}
 `;
 
 const kickOffCss = css`
 	${headlineBold17}
 	color: ${palette('--football-pre-match-kickoff')};
+	${from.desktop} {
+		${headlineBold20}
+	}
 `;
 
 type PreMatchProps = {
