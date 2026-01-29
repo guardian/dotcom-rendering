@@ -75,6 +75,14 @@ const baseCardStyles = css`
 	text-decoration: none;
 `;
 
+const underlineOnHoverStyles = css`
+	/* Only underline the headline element we want to target (not kickers/sublink headlines) */
+
+	:hover .card-headline .show-underline {
+		text-decoration: underline;
+	}
+`;
+
 const hoverStyles = css`
 	:hover .media-overlay {
 		position: absolute;
@@ -85,18 +93,13 @@ const hoverStyles = css`
 		background-color: ${palette('--card-background-hover')};
 	}
 
-	/* Only underline the headline element we want to target (not kickers/sublink headlines) */
-	:hover .card-headline .show-underline {
-		text-decoration: underline;
-	}
-`;
-
-/** When we hover on sublinks, we want to prevent the general hover styles applying */
-const sublinkHoverStyles = css`
+	${underlineOnHoverStyles}
+	/** When we hover on sublinks, we want to prevent the general hover styles applying */
 	:has(ul.sublinks:hover, .branding-logo:hover) {
 		.card-headline .show-underline {
 			text-decoration: none;
 		}
+
 		.media-overlay {
 			background-color: transparent;
 		}
@@ -117,6 +120,7 @@ const overlayContainerStyles = css`
 	left: 0;
 	width: 100%;
 	cursor: pointer;
+	z-index: ${getZIndex('mediaOverlay')};
 `;
 
 const immersiveOverlayContainerStyles = css`
@@ -129,15 +133,11 @@ const immersiveOverlayContainerStyles = css`
 		* 48px is to ensure the gradient does not render the content inaccessible.
 		*/
 		width: 268px;
-		z-index: 1;
+		z-index: ${getZIndex('mediaOverlay')};
 	}
 `;
 
-const cinemagraphOverlayStyles = css`
-	/* Needs to be above the video player */
-	z-index: ${getZIndex('mediaOverlay')};
-
-	/* The whole card is clickable on cinemagraphs */
+const noPointerEvents = css`
 	pointer-events: none;
 `;
 
@@ -177,8 +177,12 @@ const overlayStyles = css`
 	}
 	${overlayMaskGradientStyles('180deg')};
 
-	/* Ensure the waveform is behind the other elements, e.g. headline, pill */
-	> :not(.waveform) {
+	/*
+	 * Ensure the waveform is behind the other elements, e.g. headline, pill.
+	 * Links define their own z-index.
+	 */
+
+	> :not(.waveform):not(a) {
 		z-index: 1;
 	}
 `;
@@ -197,13 +201,13 @@ const immersiveOverlayStyles = css`
 
 const podcastImageContainerStyles = css`
 	position: relative;
-	/* Needs to display above of the image mask overlay */
+	/* Needs to display above the image mask overlay */
 	z-index: ${getZIndex('card-podcast-image')};
 `;
 
 const podcastImageStyles = css`
-	height: 80px;
-	width: 80px;
+	height: 60px;
+	width: 60px;
 `;
 
 const nonImmersivePodcastImageStyles = css`
@@ -358,9 +362,9 @@ export type Props = {
 	discussionApiUrl: string;
 	discussionId?: string;
 	isExternalLink: boolean;
-	/** Alows the consumer to set an aspect ratio on the image */
+	/** Allows the consumer to set an aspect ratio on the image */
 	aspectRatio?: AspectRatio;
-	/** Alows the consumer to set an aspect ratio on the image specifically on mobile breakpoints */
+	/** Allows the consumer to set an aspect ratio on the image specifically on mobile breakpoints */
 	mobileAspectRatio?: AspectRatio;
 	showQuotes?: boolean;
 	/**
@@ -432,15 +436,22 @@ export const FeatureCard = ({
 		showVideo: showVideo && canPlayInline,
 	});
 
+	if (!media) return null;
+
 	const showCardAge =
 		webPublicationDate !== undefined && showClock !== undefined;
 
 	const showCommentCount = discussionId !== undefined;
 
+	const isYoutubeVideo = media.type === 'youtube-video';
+
 	const isSelfHostedVideo =
-		media?.type === 'loop-video' ||
-		media?.type === 'default-video' ||
-		media?.type === 'cinemagraph';
+		media.type === 'loop-video' ||
+		media.type === 'default-video' ||
+		media.type === 'cinemagraph';
+
+	const isSelfHostedVideoWithControls =
+		media.type === 'loop-video' || media.type === 'default-video';
 
 	const labsDataAttributes = branding
 		? getOphanComponents({
@@ -451,13 +462,22 @@ export const FeatureCard = ({
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
-	if (!media) return null;
+	const aspectRatioNumber = isImmersive ? 5 / 3 : 4 / 5;
+
+	/* The whole card is clickable on cinemagraphs and pictures */
+	const allowLinkThroughOverlay =
+		media.type === 'cinemagraph' || media.type === 'picture';
 
 	return (
 		<FormatBoundary format={format}>
 			<ContainerOverrides containerPalette={containerPalette}>
-				<div css={[baseCardStyles, hoverStyles, sublinkHoverStyles]}>
-					{media.type !== 'youtube-video' && (
+				<div
+					css={[
+						baseCardStyles,
+						!isSelfHostedVideoWithControls && hoverStyles,
+					]}
+				>
+					{!isYoutubeVideo && !isSelfHostedVideoWithControls && (
 						<CardLink
 							linkTo={linkTo}
 							headlineText={headlineText}
@@ -466,7 +486,7 @@ export const FeatureCard = ({
 						/>
 					)}
 					<div css={contentStyles}>
-						{media.type === 'youtube-video' && (
+						{isYoutubeVideo && (
 							<div
 								data-chromatic="ignore"
 								data-component="youtube-atom"
@@ -521,7 +541,7 @@ export const FeatureCard = ({
 								</Island>
 							</div>
 						)}
-						{media.type !== 'youtube-video' && (
+						{!isYoutubeVideo && (
 							<div
 								css={css`
 									position: relative;
@@ -541,11 +561,9 @@ export const FeatureCard = ({
 											uniqueId={uniqueId}
 											height={media.mainMedia.height}
 											width={media.mainMedia.width}
-											containerAspectRatio={
-												isImmersive ? 5 / 3 : 4 / 5
+											videoStyle={
+												media.mainMedia.videoStyle
 											}
-											// Only cinemagraphs are currently supported in feature cards
-											videoStyle="Cinemagraph"
 											posterImage={
 												media.mainMedia.image ?? ''
 											}
@@ -558,14 +576,17 @@ export const FeatureCard = ({
 												media.imageAltText
 											}
 											fallbackImageAspectRatio={
-												isImmersive ? '5:3' : '4:5'
+												aspectRatio
 											}
 											linkTo={linkTo}
+											showProgressBar={false}
 											subtitleSource={
 												media.mainMedia.subtitleSource
 											}
-											subtitleSize="large"
-											isFeatureCard={true}
+											subtitleSize="small"
+											controlsPosition="top"
+											minAspectRatio={aspectRatioNumber}
+											maxAspectRatio={aspectRatioNumber}
 										/>
 									</Island>
 								)}
@@ -610,15 +631,16 @@ export const FeatureCard = ({
 								)}
 
 								{/* This overlay is styled when the CardLink is hovered */}
-								<div className="media-overlay" />
-
+								{!isSelfHostedVideoWithControls && (
+									<div className="media-overlay" />
+								)}
 								<div
 									css={[
 										overlayContainerStyles,
 										isImmersive &&
 											immersiveOverlayContainerStyles,
-										media.type === 'cinemagraph' &&
-											cinemagraphOverlayStyles,
+										allowLinkThroughOverlay &&
+											noPointerEvents,
 									]}
 								>
 									{mainMedia?.type === 'Audio' &&
@@ -645,8 +667,20 @@ export const FeatureCard = ({
 											overlayStyles,
 											isImmersive &&
 												immersiveOverlayStyles,
+											isSelfHostedVideoWithControls &&
+												underlineOnHoverStyles,
 										]}
 									>
+										{/** Only the overlay is a link for self-hosted videos with controls. */}
+										{isSelfHostedVideoWithControls && (
+											<CardLink
+												linkTo={linkTo}
+												headlineText={headlineText}
+												dataLinkName={dataLinkName}
+												isExternalLink={isExternalLink}
+											/>
+										)}
+
 										{isImmersive &&
 											mainMedia?.type === 'Audio' &&
 											!!mainMedia.podcastImage?.src && (
@@ -759,6 +793,7 @@ export const FeatureCard = ({
 											}
 											showLivePlayable={false}
 											isNewsletter={isNewsletter}
+											mainMedia={mainMedia}
 										/>
 
 										{!isImmersive &&

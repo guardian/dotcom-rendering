@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import {
 	from,
 	palette as sourcePalette,
+	space,
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
@@ -25,6 +26,7 @@ import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
+import { ListenToArticle } from '../components/ListenToArticle.importable';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
@@ -411,6 +413,25 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								format={format}
 								standfirst={article.standfirst}
 							/>
+							{/* Only show Listen to Article button on App landscape views */}
+							{isApps && (
+								<Hide until="leftCol">
+									<div
+										css={css`
+											margin-top: ${space[2]}px;
+										`}
+									>
+										<Island
+											priority="feature"
+											defer={{ until: 'visible' }}
+										>
+											<ListenToArticle
+												articleId={article.pageId}
+											/>
+										</Island>
+									</div>
+								</Hide>
+							)}
 						</GridItem>
 						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>

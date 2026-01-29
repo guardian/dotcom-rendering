@@ -130,9 +130,7 @@ const PlayerList = ({
 				.filter((player) => player.substitute === isSubstitute)
 				.map((player) => (
 					<li key={player.paID} css={listItem}>
-						<strong css={shirtNumber(team.statsColour)}>
-							{player.shirtNumber}
-						</strong>
+						<strong css={shirtNumber}>{player.shirtNumber}</strong>
 						<span css={playerName}>
 							{player.name.charAt(0).toUpperCase()}. {player.name}
 						</span>
@@ -184,11 +182,11 @@ const awayStyles = css`
 	}
 `;
 
-const shirtNumber = (color: string) => css`
+const shirtNumber = css`
 	display: inline-block;
 	width: ${space[5]}px;
 	${textSansBold14}
-	color: ${color};
+	color: ${palette('--football-match-stat-text')};
 `;
 
 const listItem = css`

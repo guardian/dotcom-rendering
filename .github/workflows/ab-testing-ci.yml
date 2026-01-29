@@ -44,7 +44,7 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v6
         with:
           name: ab-testing-build
           path: ab-testing/config/dist
@@ -67,7 +67,7 @@ jobs:
         run: pnpm build
 
       - name: Save build
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: ui-build
           path: ab-testing/frontend/output/ab-tests.html
@@ -97,7 +97,7 @@ jobs:
           zip -j lambda.zip ../package.json
 
       - name: Save build
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: ab-testing-deploy-lambda-build
           path: ab-testing/deploy-lambda/dist/lambda.zip
@@ -126,7 +126,7 @@ jobs:
           zip -j lambda.zip ../package.json
 
       - name: Save build
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: ab-testing-notification-lambda-build
           path: ab-testing/notification-lambda/dist/lambda.zip
@@ -154,25 +154,25 @@ jobs:
         uses: ./.github/actions/setup-node-env
 
       - name: Fetch config build
-        uses: actions/download-artifact@v6.0.0
+        uses: actions/download-artifact@v7.0.0
         with:
           name: ab-testing-build
           path: ab-testing/config/dist
 
       - name: Fetch UI build
-        uses: actions/download-artifact@v6.0.0
+        uses: actions/download-artifact@v7.0.0
         with:
           name: ui-build
           path: ab-testing/frontend/output/ab-tests.html
 
       - name: Fetch Deploy Lambda build
-        uses: actions/download-artifact@v6.0.0
+        uses: actions/download-artifact@v7.0.0
         with:
           name: ab-testing-deploy-lambda-build
           path: ab-testing/deploy-lambda/dist/lambda.zip
 
       - name: Fetch Notification Lambda build
-        uses: actions/download-artifact@v6.0.0
+        uses: actions/download-artifact@v7.0.0
         with:
           name: ab-testing-notification-lambda-build
           path: ab-testing/notification-lambda/dist/lambda.zip
@@ -184,7 +184,7 @@ jobs:
         run: pnpm  --filter @guardian/ab-testing-cdk synth
 
       - name: Riff-Raff Upload
-        uses: guardian/actions-riff-raff@v4.1.9
+        uses: guardian/actions-riff-raff@v4.2.4
         with:
           roleArn: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}

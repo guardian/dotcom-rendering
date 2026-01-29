@@ -160,6 +160,7 @@ export type Props = {
 	isStorylines?: boolean;
 	starRatingSize?: RatingSizeType;
 	isInOnwardsAbTestVariant?: boolean;
+	isInPersonalisationVariant?: boolean;
 };
 
 const waveformWrapper = (
@@ -170,13 +171,16 @@ const waveformWrapper = (
 	left: 0;
 	right: 0;
 	bottom: 0;
+
 	svg {
 		display: block;
 		width: 100%;
 		height: ${mediaPositionOnMobile === 'top' ? 50 : 29}px;
+
 		${from.mobileMedium} {
 			height: ${mediaPositionOnMobile === 'top' ? 50 : 33}px;
 		}
+
 		${from.tablet} {
 			height: ${mediaPositionOnDesktop === 'top' ? 50 : 33}px;
 		}
@@ -190,12 +194,15 @@ const HorizontalDivider = () => (
 				border-top: 1px solid ${palette('--card-border-top')};
 				height: 1px;
 				width: 50%;
+
 				${from.tablet} {
 					width: 100px;
 				}
+
 				${from.desktop} {
 					width: 140px;
 				}
+
 				margin-top: ${space[3]}px;
 			}
 		`}
@@ -210,6 +217,7 @@ const podcastImageStyles = (
 		return css`
 			width: 69px;
 			height: 69px;
+
 			${from.tablet} {
 				width: 98px;
 				height: 98px;
@@ -223,11 +231,14 @@ const podcastImageStyles = (
 	return css`
 		width: 98px;
 		height: 98px;
+
 		${from.tablet} {
 			width: 120px;
 			height: 120px;
 		}
+
 		/** The image takes the full height on desktop, so that the waveform sticks to the bottom of the card. */
+
 		${from.desktop} {
 			width: ${isHorizontalOnDesktop ? 'unset' : '120px'};
 			height: ${isHorizontalOnDesktop ? 'unset' : '120px'};
@@ -397,6 +408,7 @@ export const Card = ({
 	isStorylines = false,
 	starRatingSize = 'small',
 	isInOnwardsAbTestVariant,
+	isInPersonalisationVariant,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -580,8 +592,8 @@ export const Card = ({
 
 	/**
 -	 * Media cards have contrasting background colours. We add additional
-	 * padding to these cards to keep the text readable.
--	 */
+* padding to these cards to keep the text readable.
+-     */
 	const isMediaCardOrNewsletter = isMediaCard(format) || isNewsletter;
 
 	const showPill = isMediaCardOrNewsletter && !isGallerySecondaryOnward;
@@ -878,6 +890,7 @@ export const Card = ({
 						${until.tablet} {
 							display: none;
 						}
+
 						${from.desktop} {
 							display: none;
 						}
@@ -914,6 +927,7 @@ export const Card = ({
 				headlineText={headlineText}
 				dataLinkName={resolvedDataLinkName}
 				isExternalLink={isExternalLink}
+				isInPersonalisationVariant={isInPersonalisationVariant}
 			/>
 			{headlinePosition === 'outer' && (
 				<div
@@ -1031,7 +1045,6 @@ export const Card = ({
 									width={media.mainMedia.width}
 									videoStyle={media.mainMedia.videoStyle}
 									posterImage={media.mainMedia.image ?? ''}
-									containerAspectRatio={5 / 4}
 									fallbackImage={media.mainMedia.image ?? ''}
 									fallbackImageSize={mediaSize}
 									fallbackImageLoading={imageLoading}
@@ -1042,7 +1055,8 @@ export const Card = ({
 										media.mainMedia.subtitleSource
 									}
 									subtitleSize={subtitleSize}
-									letterboxed={true}
+									minAspectRatio={4 / 5}
+									containerAspectRatioDesktop={5 / 4}
 								/>
 							</Island>
 						)}
@@ -1297,9 +1311,12 @@ export const Card = ({
 								<>
 									{showPill ? (
 										<>
-											{!!branding && isOnwardContent && (
-												<LabsBranding />
-											)}
+											{!!branding &&
+												format.theme ===
+													ArticleSpecial.Labs &&
+												isOnwardContent && (
+													<LabsBranding />
+												)}
 											<MediaOrNewsletterPill />
 										</>
 									) : (

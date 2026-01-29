@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
-import { FootballCompetitionNav } from './FootballCompetitionNav';
+import { DirectoryPageNav } from './DirectoryPageNav';
 
 const meta = {
-	component: FootballCompetitionNav,
-	title: 'Components/Football Competition Nav',
+	component: DirectoryPageNav,
+	title: 'Components/Directory Page Nav',
 	argTypes: {
 		selected: {
 			options: ['fixtures', 'tables', 'none'],
@@ -20,7 +20,7 @@ const meta = {
 			},
 		},
 	},
-} satisfies Meta<typeof FootballCompetitionNav>;
+} satisfies Meta<typeof DirectoryPageNav>;
 
 export default meta;
 

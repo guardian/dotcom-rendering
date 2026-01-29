@@ -6,7 +6,7 @@ import {
 	audioTrails,
 	galleryTrails,
 	newsletterTrails,
-	videoTrails,
+	youtubeVideoTrails,
 } from '../../fixtures/manual/trails';
 import type { DCRContainerPalette } from '../types/front';
 import { FrontSection } from './FrontSection';
@@ -78,7 +78,7 @@ export const Media = {
 	args: {
 		trails: [
 			audioTrails[0],
-			videoTrails[0],
+			youtubeVideoTrails[0],
 			galleryTrails[0],
 			newsletterTrails[0],
 		],

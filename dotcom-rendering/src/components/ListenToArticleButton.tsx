@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { height, space } from '@guardian/source/foundations';
+import { from, height, space } from '@guardian/source/foundations';
 import type { ThemeIcon } from '@guardian/source/react-components';
 import {
 	Button,
@@ -64,6 +64,9 @@ const waveFormContainerCss = css`
 	> button {
 		position: relative;
 		z-index: 1;
+		${from.tablet} {
+			margin-left: 0;
+		}
 	}
 `;
 

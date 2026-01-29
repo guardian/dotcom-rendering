@@ -97,7 +97,6 @@ const hoverStyles = css`
 const content = css`
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
 	gap: ${space[1]}px;
 
 	${from.tablet} {
@@ -140,13 +139,7 @@ export const HighlightsCard = ({
 
 	return (
 		<FormatBoundary format={format}>
-			<div
-				css={[
-					container,
-					hoverStyles,
-					shouldJustifyContent && spaceBetween,
-				]}
-			>
+			<div css={[container, hoverStyles]}>
 				<CardLink
 					linkTo={linkTo}
 					headlineText={headlineText}
@@ -154,7 +147,7 @@ export const HighlightsCard = ({
 					isExternalLink={isExternalLink}
 				/>
 
-				<div css={content}>
+				<div css={[content, shouldJustifyContent && spaceBetween]}>
 					<CardHeadline
 						headlineText={headlineText}
 						format={format}

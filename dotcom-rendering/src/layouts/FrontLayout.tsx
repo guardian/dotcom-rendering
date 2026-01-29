@@ -518,6 +518,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
+									pillarBuckets={collection.bucket}
 								/>
 							</FrontSection>
 

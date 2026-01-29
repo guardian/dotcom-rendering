@@ -3,7 +3,9 @@ import { listParse } from './footballMatches';
 import type {
 	FEFootballTable,
 	FEGroup,
+	FEGroupSummary,
 	FELeagueTableEntry,
+	FELeagueTableEntrySummary,
 	FETeamResult,
 } from './frontend/feFootballTablesPage';
 import { error, ok, type Result } from './lib/result';
@@ -26,7 +28,7 @@ type Team = {
 	url?: string;
 };
 
-export type Entry = {
+export type EntrySummary = {
 	position: number;
 	team: Team;
 	gamesPlayed: number;
@@ -37,6 +39,9 @@ export type Entry = {
 	goalsAgainst: number;
 	goalDifference: number;
 	points: number;
+};
+
+type Entry = EntrySummary & {
 	results: TeamResult[];
 };
 
@@ -53,6 +58,11 @@ export type FootballTable = {
 	entries: Entry[];
 };
 
+export type FootballTableSummary = {
+	groupName?: string;
+	entries: EntrySummary[];
+};
+
 export type FootballTableCompetitions = FootballTableCompetition[];
 
 type MissingScore = {
@@ -62,8 +72,18 @@ type MissingScore = {
 
 type ParserError = MissingScore;
 
-const parseTable = (feGroup: FEGroup): Result<ParserError, FootballTable> =>
+export const parseTable = (
+	feGroup: FEGroup,
+): Result<ParserError, FootballTable> =>
 	parseEntries(feGroup.entries).map((entries) => ({
+		groupName: feGroup.round.name,
+		entries: entries.sort((a, b) => a.position - b.position),
+	}));
+
+export const parseTableSummary = (
+	feGroup: FEGroupSummary,
+): Result<ParserError, FootballTableSummary> =>
+	parseEntriesSummaries(feGroup.entries).map((entries) => ({
 		groupName: feGroup.round.name,
 		entries: entries.sort((a, b) => a.position - b.position),
 	}));
@@ -102,12 +122,12 @@ const parseResult = (result: FETeamResult): Result<ParserError, TeamResult> => {
 
 const parseResults = listParse(parseResult);
 
-const parseEntry = (
-	feEntry: FELeagueTableEntry,
-): Result<ParserError, Entry> => {
+const mapBaseEntryFields = (
+	feEntry: FELeagueTableEntrySummary,
+): EntrySummary => {
 	const { team, teamUrl } = feEntry;
 
-	return parseResults(feEntry.results).map((results) => ({
+	return {
 		position: team.rank,
 		team: {
 			name: cleanTeamName(team.name),
@@ -122,11 +142,27 @@ const parseEntry = (
 		goalsAgainst: team.total.goalsAgainst,
 		goalDifference: team.goalDifference,
 		points: team.points,
+	};
+};
+
+const parseEntry = (
+	feEntry: FELeagueTableEntry,
+): Result<ParserError, Entry> => {
+	return parseResults(feEntry.results).map((results) => ({
+		...mapBaseEntryFields(feEntry),
 		results,
 	}));
 };
 
 const parseEntries = listParse(parseEntry);
+
+const parseEntrySummary = (
+	feEntry: FELeagueTableEntrySummary,
+): Result<ParserError, EntrySummary> => {
+	return ok(mapBaseEntryFields(feEntry));
+};
+
+const parseEntriesSummaries = listParse(parseEntrySummary);
 
 const parseFootballTableCompetition = (
 	table: FEFootballTable,
