@@ -16,14 +16,14 @@ export const ProductSummary = ({
 }) => {
 	if (variant === 'carousel') {
 		return (
-			<Island priority="critical" defer={{ until: 'idle' }}>
+			<Island priority="feature" defer={{ until: 'idle' }}>
 				<ScrollableProduct products={products} format={format} />
 			</Island>
 		);
 	}
 
 	return (
-		<Island priority="critical" defer={{ until: 'idle' }}>
+		<Island priority="feature" defer={{ until: 'idle' }}>
 			<StackedProducts
 				products={products}
 				heading={'At a glance'}
