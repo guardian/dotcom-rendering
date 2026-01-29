@@ -499,6 +499,7 @@ export interface ProductBlockElement {
 	productName: string;
 	image?: ProductImage;
 	secondaryHeadingHtml: string;
+	secondaryHeadingText?: string;
 	primaryHeadingHtml: string;
 	primaryHeadingText?: string;
 	customAttributes: ProductCustomAttribute[];
