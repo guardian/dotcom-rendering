@@ -1,3 +1,4 @@
+/** @todo Remove this? */
 export interface FEHostedContent {
 	// general / shared
 	id: string;
