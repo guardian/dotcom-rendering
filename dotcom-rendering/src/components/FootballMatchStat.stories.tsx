@@ -10,32 +10,20 @@ import { FootballMatchStat } from './FootballMatchStat';
 const meta = {
 	title: 'Components/Football Match Stat',
 	component: FootballMatchStat,
-	decorators: [
-		(Story) => (
-			<div
-				css={css`
-					padding: ${space[4]}px;
-					background-color: ${palette(
-						'--football-live-blog-background',
-					)};
-				`}
-			>
-				<Story />
-			</div>
-		),
-		splitTheme([
-			{
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.News,
-			},
-		]),
-	],
 	parameters: {
 		viewport: {
 			defaultViewport: 'mobileMedium',
 		},
+		colourSchemeBackground: {
+			light: palette('--football-live-blog-background'),
+			dark: palette('--football-live-blog-background'),
+		},
 	},
+	render: (args) => (
+		<div css={{ padding: space[2] }}>
+			<FootballMatchStat {...args} />
+		</div>
+	),
 } satisfies Meta<typeof FootballMatchStat>;
 
 export default meta;
@@ -88,6 +76,7 @@ export const TeamColours = {
 				display: flex;
 				flex-direction: column;
 				gap: ${space[2]}px;
+				padding: ${space[2]}px;
 			`}
 		>
 			{footballTeams.map((match, index) => (
@@ -106,6 +95,18 @@ export const TeamColours = {
 			))}
 		</div>
 	),
+	decorators: [
+		splitTheme(
+			[
+				{
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+					theme: Pillar.Sport,
+				},
+			],
+			{ hideFormatHeading: true },
+		),
+	],
 	args: {
 		...ShownAsPercentage.args,
 	},

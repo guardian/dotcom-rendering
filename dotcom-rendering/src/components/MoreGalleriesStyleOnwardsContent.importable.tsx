@@ -130,7 +130,6 @@ type Props = {
 	trails: TrailType[];
 	isAdFreeUser: boolean;
 	discussionApiUrl: string;
-	isInStarRatingVariant: boolean;
 };
 
 /**
@@ -143,7 +142,6 @@ export const MoreGalleriesStyleOnwardsContent = ({
 	heading,
 	trails,
 	discussionApiUrl,
-	isInStarRatingVariant,
 }: Props) => {
 	const [firstTrail, ...standardTrails] = trails;
 	if (!firstTrail) return null;
@@ -165,7 +163,6 @@ export const MoreGalleriesStyleOnwardsContent = ({
 						mediaPositionOnMobile="top"
 						mediaSize="medium"
 						discussionApiUrl={discussionApiUrl}
-						isInStarRatingVariant={isInStarRatingVariant}
 						headlineSizes={{
 							desktop: 'small',
 							tablet: 'small',
@@ -194,7 +191,6 @@ export const MoreGalleriesStyleOnwardsContent = ({
 								mediaPositionOnMobile="left"
 								mediaSize="small"
 								discussionApiUrl={discussionApiUrl}
-								isInStarRatingVariant={isInStarRatingVariant}
 							/>
 						</li>
 					))}

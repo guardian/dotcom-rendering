@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -310,9 +309,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
-	const isInStarRatingVariant =
-		article.config.abTests.starRatingRedesignVariant === 'variant';
-
 	return (
 		<>
 			{isWeb && (
@@ -363,13 +359,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					<MainMedia
 						format={format}
 						elements={article.mainMediaElements}
-						starRating={
-							!isInStarRatingVariant &&
-							format.design === ArticleDesign.Review &&
-							!isUndefined(article.starRating)
-								? article.starRating
-								: undefined
-						}
 						host={host}
 						hideCaption={true}
 						pageId={article.pageId}
@@ -428,9 +417,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 										byline={article.byline}
 										webPublicationDateDeprecated={
 											article.webPublicationDateDeprecated
-										}
-										isInStarRatingVariant={
-											isInStarRatingVariant
 										}
 										starRating={article.starRating}
 									/>
@@ -514,9 +500,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											byline={article.byline}
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
-											}
-											isInStarRatingVariant={
-												isInStarRatingVariant
 											}
 											starRating={article.starRating}
 										/>
@@ -882,7 +865,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						webURL={article.webURL}
-						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Island>
 
