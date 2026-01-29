@@ -170,7 +170,7 @@ const overlayStyles = css`
 	flex-direction: column;
 	text-align: start;
 	gap: ${space[1]}px;
-	padding: 64px ${space[2]}px ${space[2]}px;
+	padding: ${space[9]}px ${space[2]}px ${space[2]}px;
 	backdrop-filter: blur(12px) brightness(0.5);
 	@supports not (backdrop-filter: blur(12px)) {
 		background-color: ${transparentColour(sourcePalette.neutral[10], 0.7)};
@@ -214,9 +214,9 @@ const nonImmersivePodcastImageStyles = css`
 	position: absolute;
 	/**
 	* Displays 8px above the text.
-	* desired space above text (8px) - padding-top of text container (64px) = -56px
+	* desired space above text (8px) - padding-top of text container (36px) = -28px
 	*/
-	bottom: -${space[14]}px;
+	bottom: -28px;
 	left: ${space[2]}px;
 `;
 
