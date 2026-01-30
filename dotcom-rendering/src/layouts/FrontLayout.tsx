@@ -8,6 +8,7 @@ import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
+import { DirectoryPageNav } from '../components/DirectoryPageNav';
 import { EditionSwitcherBanner } from '../components/EditionSwitcherBanner.importable';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
@@ -249,6 +250,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				id="maincontent"
 				css={hasPageSkin && pageSkinContainer}
 			>
+				<DirectoryPageNav selected="none" pageId={front.pageId} />
 				{isNetworkFrontPageId(pageId) && (
 					<Island priority="enhancement" defer={{ until: 'idle' }}>
 						<EditionSwitcherBanner

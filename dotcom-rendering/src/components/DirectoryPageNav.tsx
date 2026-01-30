@@ -66,7 +66,7 @@ const configs = [
 		textColor: palette.neutral[7],
 		backgroundColor: '#CCCCCC',
 		title: {
-			label: 'Milano Cortina Winter Olympics 2026',
+			label: 'Winter Olympics 2026',
 			link: '/tbd',
 		},
 		links: [
