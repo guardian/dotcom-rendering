@@ -35,13 +35,13 @@ const ABTests: ABTest[] = [
 	{
 		name: "commercial-user-module-liveramp",
 		description:
-			"Hold-back test measuring ad targeting from liveramp's identityLinkIdSystem module integration",
+			"Test measuring ad targeting from LiveRamp's identityLinkIdSystem module integration",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: `2026-01-30`,
+		expirationDate: `2026-03-04`,
 		type: "client",
 		status: "ON",
 		audienceSize: 10 / 100,
-		audienceSpace: "A",
+		audienceSpace: "B",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
 	},
