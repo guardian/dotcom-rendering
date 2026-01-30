@@ -14,9 +14,11 @@ export function allExpirationsValid(tests: ABTest[]): boolean {
 		}
 
 		/**
-		 * Check if the input date matches the JS interpreted date to check it is valid
-		 * If the input !== output date, we throw an error to highlight the date set is not
-		 * the actual expiration date of the test
+		 * Converts the expiration date to a `Date` object and then back into a string
+		 * This is to confirm Javascript interprets the input the same way humans do
+		 * If there's a difference, we throw an error to highlight the discrepancy
+		 * @example `2026-02-30` is interpreted as `2026-03-02` so this fails
+		 * @example `2026-01-30` is interpreted as `2026-01-30` so this passes
 		 */
 		const interpretedExpirationDate = new Date(test.expirationDate)
 			.toISOString()
