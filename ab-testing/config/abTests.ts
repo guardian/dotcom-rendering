@@ -37,7 +37,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Test measuring ad targeting from LiveRamp's identityLinkIdSystem module integration",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: `2026-03-01`,
+		expirationDate: `2026-03-04`,
 		type: "client",
 		status: "ON",
 		audienceSize: 10 / 100,
