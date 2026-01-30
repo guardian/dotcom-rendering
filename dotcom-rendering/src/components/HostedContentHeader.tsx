@@ -51,8 +51,7 @@ const hostedByStyles = css`
 	${textSansBold12};
 	margin-right: -9px;
 	letter-spacing: 0.03125rem;
-	color: ${sourcePalette
-		.neutral[73]}; // This is rgba in frontend but stylelint fails in CI as we should use source. Using neutral that passes AAA contrast instead.
+	color: ${sourcePalette.neutral[73]};
 
 	${from.tablet} {
 		${textSansBold14};
@@ -90,7 +89,10 @@ export const Right = ({ children }: { children: React.ReactNode }) => (
 		css={css`
 			display: flex;
 			padding: ${space[1]}px 10px;
-			margin-right: 0.625rem;
+
+			@media (min-width: 330px) {
+				margin-right: 0.625rem;
+			}
 		`}
 	>
 		{children}
@@ -236,7 +238,7 @@ const HostedContentLogo = () => (
 			display: flex;
 		`}
 	>
-		{/* The following hosted by is included in the link for logo */}
+		{/* The following hosted by is included in the link for logo in frontend */}
 		<p css={hostedByStyles}>Hosted by</p>
 		<div css={logoStyles}>
 			<Logo />
