@@ -118,6 +118,8 @@ const textElement =
 			case 'SUP':
 			case 'S':
 			case 'I':
+			case 'STRIKE':
+			case 'DEL':
 				return jsx(node.nodeName.toLowerCase(), {
 					key,
 					children,
