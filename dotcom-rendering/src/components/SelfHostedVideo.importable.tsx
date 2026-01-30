@@ -496,12 +496,14 @@ export const SelfHostedVideo = ({
 	 * Track the first time the video comes into view.
 	 */
 	useOnce(() => {
+		const resolution = `${window.innerWidth}x${window.innerHeight}`;
+
 		void submitComponentEvent(
 			{
 				component: {
 					componentType: 'LOOP_VIDEO',
 					id: `gu-video-loop-${atomId}`,
-					labels: [linkTo],
+					labels: [linkTo, resolution],
 				},
 				action: 'VIEW',
 			},
