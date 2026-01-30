@@ -7,7 +7,7 @@ type Props = {
 	children: React.ReactNode;
 	format: ArticleFormat;
 	isMainMedia: boolean;
-	role?: RoleType | 'richLink';
+	role?: RoleType | 'richLink' | 'fullWidth';
 	id?: string;
 	className?: string;
 	type?: FEElement['_type'];
@@ -67,6 +67,51 @@ const roleCss = {
 		${from.wide} {
 			margin-left: -240px;
 			margin-right: -400px;
+		}
+	`,
+
+	fullWidth: css`
+		margin-top: ${space[3]}px;
+		margin-bottom: ${space[3]}px;
+
+		${until.tablet} {
+			margin-left: -20px;
+			margin-right: -20px;
+		}
+		${until.mobileLandscape} {
+			margin-left: -10px;
+			margin-right: -10px;
+		}
+		${from.tablet} {
+			width: calc(100vw - var(--scrollbar-width, 15px));
+			max-width: calc(100vw - var(--scrollbar-width, 15px));
+
+			--grid-container-max-width: 740px;
+			--grid-container-left-margin: calc(
+				((-100vw + (var(--grid-container-max-width) - 42px)) / 2) +
+					var(--half-scrollbar-width, 7.5px)
+			);
+			--grid-body-column-left: calc(
+				(var(--grid-container-left-margin, 0px) * -1) +
+					var(--grid-left-col-width, 0px)
+			);
+
+			margin-left: calc(var(--grid-container-left-margin));
+		}
+		${from.desktop} {
+			--grid-container-max-width: 980px;
+		}
+		${from.leftCol} {
+			--grid-container-max-width: 1140px;
+			--grid-left-col-width: 140px;
+			--grid-body-column-left: calc(
+				(var(--grid-container-left-margin, 0px) * -1) +
+					var(--grid-left-col-width, 0px) + 21px
+			);
+		}
+		${from.wide} {
+			--grid-container-max-width: 1300px;
+			--grid-left-col-width: 219px;
 		}
 	`,
 
@@ -150,7 +195,7 @@ const roleCss = {
 
 // Used for vast majority of layouts.
 export const defaultRoleStyles = (
-	role: RoleType | 'richLink',
+	role: RoleType | 'richLink' | 'fullWidth',
 	format: ArticleFormat,
 	isTimeline = false,
 ) => {
@@ -161,6 +206,8 @@ export const defaultRoleStyles = (
 			return roleCss.supporting;
 		case 'immersive':
 			return roleCss.immersive;
+		case 'fullWidth':
+			return roleCss.fullWidth;
 		case 'showcase':
 			if (isTimeline) {
 				return css`
