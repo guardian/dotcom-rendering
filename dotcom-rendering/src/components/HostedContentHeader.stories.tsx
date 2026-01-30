@@ -12,6 +12,7 @@ export const Default = () => {
 		<Section
 			fullWidth={true}
 			showSideBorders={false}
+			showTopBorder={false}
 			shouldCenter={false}
 			backgroundColour={sourcePalette.neutral[7]}
 			padSides={false}

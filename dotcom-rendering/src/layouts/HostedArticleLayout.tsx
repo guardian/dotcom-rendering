@@ -30,20 +30,21 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 					<Section
 						fullWidth={true}
 						showSideBorders={false}
+						showTopBorder={false}
 						shouldCenter={false}
 						backgroundColour={sourcePalette.neutral[7]}
 						padSides={false}
 						element="aside"
 					>
 						<HostedContentHeader
-							accentColor="#1b1f71"
+							accentColor={sourcePalette.brand[400]}
 							branding="logo"
 						/>
 					</Section>
 				</Stuck>
 			) : null}
 			<main>
-				<header css={[grid.container]}>
+				<header css={[grid.container, border]}>
 					<div css={[grid.column.all]}>Main media</div>
 					<div
 						css={[grid.between('centre-column-start', 'grid-end')]}
