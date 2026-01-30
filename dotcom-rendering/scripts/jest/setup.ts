@@ -107,7 +107,7 @@ if (!isServer) {
  * DOM and NodeJS versions of `TextDecoder`. This affect the running of the application and
  * allows us to update jsdom.
  */
-global.TextEncoder = TextEncoder;
+global.TextEncoder = TextEncoder as unknown as typeof global.TextEncoder;
 global.TextDecoder = TextDecoder as unknown as typeof global.TextDecoder;
 
 // Mocks the version number used by CDK, we don't want our tests to fail every time we update our cdk dependency.
