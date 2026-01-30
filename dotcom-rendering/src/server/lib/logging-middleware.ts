@@ -27,7 +27,7 @@ const hasConfig = (body: unknown): body is { config: ConfigType } => {
  */
 export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 	const start = process.hrtime.bigint();
-	const headerValue = req.headers['x-gu-xid'];
+	const headerValue = req.headers['x-request-id'];
 	const requestId = Array.isArray(headerValue) ? headerValue[0] : headerValue;
 	const loggerState = {
 		request: {
