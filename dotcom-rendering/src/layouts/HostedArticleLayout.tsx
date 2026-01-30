@@ -1,8 +1,10 @@
 import { css } from '@emotion/react';
 import { palette as sourcePalette } from '@guardian/source/foundations';
 import { HostedContentHeader } from '../components/HostedContentHeader';
+import { Section } from '../components/Section';
 import { grid } from '../grid';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { Stuck } from './lib/stickiness';
 
 interface Props {
 	renderingTarget: RenderingTarget;
@@ -24,16 +26,21 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 	return (
 		<>
 			{props.renderingTarget === 'Web' ? (
-				<div
-					css={css`
-						background-color: ${sourcePalette.neutral[7]};
-					`}
-				>
-					<HostedContentHeader
-						accentColor="#1b1f71"
-						branding="logo"
-					/>
-				</div>
+				<Stuck>
+					<Section
+						fullWidth={true}
+						showSideBorders={false}
+						shouldCenter={false}
+						backgroundColour={sourcePalette.neutral[7]}
+						padSides={false}
+						element="aside"
+					>
+						<HostedContentHeader
+							accentColor="#1b1f71"
+							branding="logo"
+						/>
+					</Section>
+				</Stuck>
 			) : null}
 			<main>
 				<header css={[grid.container]}>

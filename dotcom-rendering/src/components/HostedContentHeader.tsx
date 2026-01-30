@@ -24,7 +24,7 @@ const headerWrapperStyles = css`
 	position: relative;
 	display: flex;
 	justify-content: space-between;
-	width: 100vw;
+	width: 100%;
 	margin: 0 auto;
 	padding: 0;
 	height: ${HOSTED_CONTENT_HEIGHT_MOBILE}rem;
@@ -41,13 +41,18 @@ const headerWrapperStyles = css`
 	${from.leftCol} {
 		max-width: 71.25rem;
 	}
+
+	${from.wide} {
+		max-width: 81.25rem;
+	}
 `;
 
 const hostedByStyles = css`
 	${textSansBold12};
 	margin-right: -9px;
 	letter-spacing: 0.03125rem;
-	color: rgba(255, 255, 255, 0.5);
+	color: ${sourcePalette
+		.neutral[73]}; // This is rgba in frontend but stylelint fails in CI as we should use source. Using neutral that passes AAA contrast instead.
 
 	${from.tablet} {
 		${textSansBold14};
@@ -58,7 +63,6 @@ const logoStyles = css`
 	position: relative;
 	display: flex;
 	align-self: end;
-	margin-right: 0.625rem;
 	margin-bottom: 1px;
 
 	svg {
@@ -66,7 +70,7 @@ const logoStyles = css`
 		height: auto;
 
 		${from.tablet} {
-			width: 125px;
+			width: 120px;
 		}
 	}
 `;
@@ -86,6 +90,7 @@ export const Right = ({ children }: { children: React.ReactNode }) => (
 		css={css`
 			display: flex;
 			padding: ${space[1]}px 10px;
+			margin-right: 0.625rem;
 		`}
 	>
 		{children}
