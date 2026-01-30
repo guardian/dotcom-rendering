@@ -174,6 +174,20 @@ const parseMatchResult = (
 		});
 	}
 
+	if (
+		feResult.homeTeam.score === undefined ||
+		feResult.awayTeam.score === undefined
+	) {
+		return error({
+			kind: 'ExpectedMatchDayResult',
+			message: `A result match must have scores for both teams, but this was not the case for ${feResult.id}`,
+		});
+	}
+
+	// Extract validated values so TypeScript can narrow the types
+	const homeScore = feResult.homeTeam.score;
+	const awayScore = feResult.awayTeam.score;
+
 	return parseMatchDate(feResult.date)
 		.mapError<ParserError>((message) => ({
 			kind: 'FootballMatchInvalidDate',
@@ -187,14 +201,14 @@ const parseMatchResult = (
 			homeTeam: {
 				name: cleanTeamName(feResult.homeTeam.name),
 				paID: feResult.homeTeam.id,
-				score: feResult.homeTeam.score ?? 0, // TODO
-				scorers: feResult.homeTeam.scorers?.split(',') ?? [], // TODO
+				score: homeScore,
+				scorers: feResult.homeTeam.scorers?.split(',') ?? [],
 			},
 			awayTeam: {
 				name: cleanTeamName(feResult.awayTeam.name),
 				paID: feResult.awayTeam.id,
-				score: feResult.awayTeam.score ?? 0, // TODO
-				scorers: feResult.awayTeam.scorers?.split(',') ?? [], // TOTO
+				score: awayScore,
+				scorers: feResult.awayTeam.scorers?.split(',') ?? [],
 			},
 			comment: feResult.comments,
 		}));
@@ -210,6 +224,20 @@ const parseLiveMatch = (
 		});
 	}
 
+	if (
+		feMatchDay.homeTeam.score === undefined ||
+		feMatchDay.awayTeam.score === undefined
+	) {
+		return error({
+			kind: 'ExpectedMatchDayLive',
+			message: `A live match must have scores for both teams, but this was not the case for ${feMatchDay.id}`,
+		});
+	}
+
+	// Extract validated values so TypeScript can narrow the types
+	const homeScore = feMatchDay.homeTeam.score;
+	const awayScore = feMatchDay.awayTeam.score;
+
 	return parseMatchDate(feMatchDay.date)
 		.mapError<ParserError>((message) => ({
 			kind: 'FootballMatchInvalidDate',
@@ -223,14 +251,14 @@ const parseLiveMatch = (
 			homeTeam: {
 				name: cleanTeamName(feMatchDay.homeTeam.name),
 				paID: feMatchDay.homeTeam.id,
-				score: feMatchDay.homeTeam.score ?? 0, // TODO
-				scorers: feMatchDay.homeTeam.scorers?.split(',') ?? [], // TOTO
+				score: homeScore,
+				scorers: feMatchDay.homeTeam.scorers?.split(',') ?? [],
 			},
 			awayTeam: {
 				name: cleanTeamName(feMatchDay.awayTeam.name),
 				paID: feMatchDay.awayTeam.id,
-				score: feMatchDay.awayTeam.score ?? 0, // TODO
-				scorers: feMatchDay.awayTeam.scorers?.split(',') ?? [], // TOTO
+				score: awayScore,
+				scorers: feMatchDay.awayTeam.scorers?.split(',') ?? [],
 			},
 			dateTimeISOString,
 			comment: cleanTeamName(feMatchDay.comments ?? ''),

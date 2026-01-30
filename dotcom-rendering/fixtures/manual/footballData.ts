@@ -1,5 +1,5 @@
 import type { FootballMatches } from '../../src/footballMatches';
-import type { FootballMatch } from '../../src/footballMatchV2';
+import type { FootballMatch as FootballMatchV2 } from '../../src/footballMatchV2';
 import type { Region } from '../../src/sportDataPage';
 
 export const regions: Region[] = [
@@ -21,7 +21,7 @@ export const regions: Region[] = [
 	},
 ];
 
-export const footballMatchResult: FootballMatch = {
+export const footballMatchResultV2: FootballMatchV2 = {
 	kind: 'Result',
 	kickOff: new Date('2022-01-01T11:11:00Z'),
 	paId: '4479251',

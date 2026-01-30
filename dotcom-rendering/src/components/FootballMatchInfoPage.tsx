@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from } from '@guardian/source/foundations';
+import { from, space } from '@guardian/source/foundations';
 import { type FootballMatchStats } from '../footballMatchStats';
 import { type FootballMatch } from '../footballMatchV2';
 import { type FootballTableSummary } from '../footballTables';
@@ -29,13 +29,14 @@ export const FootballMatchInfoPage = ({
 				match={matchInfo}
 				tabs={{
 					selected: 'info',
+					matchKind: matchInfo.kind,
+					// We don't have these urls in the data yet. This will be fixed in upcoming PRs.
 					reportURL: undefined,
 					liveURL: undefined,
-					matchKind: matchInfo.kind,
 				}}
 				edition={edition}
 			/>
-			<div css={gridStyles}>
+			<div css={bodyGridStyles}>
 				<div
 					css={css`
 						${grid.column.centre};
@@ -48,10 +49,14 @@ export const FootballMatchInfoPage = ({
 	);
 };
 
-const gridStyles = css`
+const bodyGridStyles = css`
 	${grid.paddedContainer}
 	position: relative;
+	padding-top: ${space[4]}px;
+	padding-bottom: ${space[8]}px;
 	${from.tablet} {
+		padding-top: ${space[2]}px;
+		padding-bottom: ${space[14]}px;
 		&::before,
 		&::after {
 			content: '';
