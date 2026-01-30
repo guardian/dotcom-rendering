@@ -41,7 +41,7 @@ const ABTests: ABTest[] = [
 		type: "client",
 		status: "ON",
 		audienceSize: 10 / 100,
-		audienceSpace: "A",
+		audienceSpace: "B",
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
 	},
