@@ -23,7 +23,7 @@ import type { Dispatch, SetStateAction } from 'react';
 import { useEffect } from 'react';
 import sanitise from 'sanitize-html';
 import { useIsInView } from '../../../lib/useIsInView';
-import type { ChoiceCardSettings } from '../banners/designableBanner/settings';
+import type { ChoiceCardDesignSettings } from '../banners/designableBanner/settings';
 
 const benefitsStyles = css`
 	${textSans15};
@@ -65,11 +65,11 @@ const supportingTextStyles = css`
 const SupportingBenefits = ({
 	benefitsLabel,
 	benefits,
-	choiceCardSettings,
+	choiceCardDesignSettings,
 }: {
 	benefitsLabel?: string;
 	benefits: ChoiceCard['benefits'];
-	choiceCardSettings?: ChoiceCardSettings;
+	choiceCardDesignSettings?: ChoiceCardDesignSettings;
 }) => {
 	const showTicks = benefits.length > 1;
 	return (
@@ -77,7 +77,7 @@ const SupportingBenefits = ({
 			{!!benefitsLabel && (
 				<span
 					css={benefitsLabelStyles(
-						choiceCardSettings?.buttonSelectTextColour,
+						choiceCardDesignSettings?.buttonSelectTextColour,
 					)}
 					dangerouslySetInnerHTML={{
 						__html: sanitise(benefitsLabel),
@@ -92,14 +92,14 @@ const SupportingBenefits = ({
 								size="xsmall"
 								theme={{
 									fill:
-										choiceCardSettings?.buttonSelectMarkerColour ??
+										choiceCardDesignSettings?.buttonSelectMarkerColour ??
 										palette.brand[400],
 								}}
 							/>
 						)}
 						<span
 							css={benefitsLabelStyles(
-								choiceCardSettings?.buttonSelectTextColour,
+								choiceCardDesignSettings?.buttonSelectTextColour,
 							)}
 							dangerouslySetInnerHTML={{
 								__html: sanitise(benefit.copy),
@@ -118,7 +118,7 @@ type ThreeTierChoiceCardsProps = {
 	choices: ChoiceCard[];
 	id: 'epic' | 'banner'; // uniquely identify this choice cards component to avoid conflicting with others
 	submitComponentEvent?: (componentEvent: ComponentEvent) => void;
-	choiceCardSettings?: ChoiceCardSettings;
+	choiceCardDesignSettings?: ChoiceCardDesignSettings;
 };
 
 export const ThreeTierChoiceCards = ({
@@ -127,7 +127,7 @@ export const ThreeTierChoiceCards = ({
 	choices,
 	id,
 	submitComponentEvent,
-	choiceCardSettings,
+	choiceCardDesignSettings,
 }: ThreeTierChoiceCardsProps) => {
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
@@ -138,19 +138,20 @@ export const ThreeTierChoiceCards = ({
 		display: block;
 		border: ${selected
 			? `2px solid ${
-					choiceCardSettings?.buttonSelectBorderColour ??
+					choiceCardDesignSettings?.buttonSelectBorderColour ??
 					palette.brand['500']
 			  }`
 			: `1px solid ${
-					choiceCardSettings?.buttonBorderColour ??
+					choiceCardDesignSettings?.buttonBorderColour ??
 					palette.neutral[46]
 			  }`};
 		background-color: ${selected
-			? choiceCardSettings?.buttonSelectColour ?? palette.neutral[100]
-			: choiceCardSettings?.buttonColour ?? palette.neutral[100]};
+			? choiceCardDesignSettings?.buttonSelectColour ??
+			  palette.neutral[100]
+			: choiceCardDesignSettings?.buttonColour ?? palette.neutral[100]};
 		color: ${selected
-			? choiceCardSettings?.buttonSelectTextColour ?? 'inherit'
-			: choiceCardSettings?.buttonTextColour ?? 'inherit'};
+			? choiceCardDesignSettings?.buttonSelectTextColour ?? 'inherit'
+			: choiceCardDesignSettings?.buttonTextColour ?? 'inherit'};
 		border-radius: 10px;
 		padding: ${selected
 			? `6px ${space[5]}px 10px ${space[5]}px`
@@ -161,8 +162,8 @@ export const ThreeTierChoiceCards = ({
 		+ label div {
 			${isSelected ? 'font-weight: bold;' : ''}
 			color: ${isSelected
-				? choiceCardSettings?.buttonSelectTextColour ?? 'inherit'
-				: choiceCardSettings?.buttonTextColour ?? 'inherit'};
+				? choiceCardDesignSettings?.buttonSelectTextColour ?? 'inherit'
+				: choiceCardDesignSettings?.buttonTextColour ?? 'inherit'};
 			s {
 				font-weight: normal;
 			}
@@ -172,35 +173,52 @@ export const ThreeTierChoiceCards = ({
 	const customRadioTheme: ThemeRadio = {
 		...themeRadio,
 		borderSelected:
-			choiceCardSettings?.buttonSelectBorderColour ??
+			choiceCardDesignSettings?.buttonSelectBorderColour ??
 			palette.brandAlt[400],
 		borderUnselected:
-			choiceCardSettings?.buttonBorderColour ?? palette.neutral[46],
+			choiceCardDesignSettings?.buttonBorderColour ?? palette.neutral[46],
 		borderHover:
-			choiceCardSettings?.buttonSelectBorderColour ??
+			choiceCardDesignSettings?.buttonSelectBorderColour ??
 			palette.brandAlt[400],
 		fillSelected:
-			choiceCardSettings?.buttonSelectMarkerColour ?? palette.brand[400],
+			choiceCardDesignSettings?.buttonSelectMarkerColour ??
+			palette.brand[400],
 	};
 
-	const pillStyles = (pill: NonNullable<ChoiceCard['pill']>) => css`
-		border-radius: 4px;
-		padding: ${space[1]}px ${space[2]}px;
-		background-color: ${pill.backgroundColour
-			? hexColourToString(pill.backgroundColour as HexColour)
-			: choiceCardSettings?.pillBackgroundColour ??
-			  palette.brandAlt[400]};
-		${textSansBold14};
-		color: ${pill.textColour
-			? hexColourToString(pill.textColour as HexColour)
-			: choiceCardSettings?.pillTextColour ?? palette.neutral[7]};
-		position: absolute;
-		top: -${space[2]}px;
-		${until.phablet} {
-			right: ${space[3]}px;
-		}
-		right: ${space[5]}px;
-	`;
+	const pillStyles = (pill: NonNullable<ChoiceCard['pill']>) => {
+		const buildBackgroundColour = (): string => {
+			if (choiceCardDesignSettings?.pillBackgroundColour) {
+				return choiceCardDesignSettings.pillBackgroundColour;
+			}
+			if (pill.backgroundColour) {
+				return hexColourToString(pill.backgroundColour as HexColour);
+			}
+			return palette.brandAlt[400];
+		};
+		const buildTextColour = (): string => {
+			if (choiceCardDesignSettings?.pillTextColour) {
+				return choiceCardDesignSettings.pillTextColour;
+			}
+			if (pill.textColour) {
+				return hexColourToString(pill.textColour as HexColour);
+			}
+			return palette.neutral[7];
+		};
+
+		return css`
+			border-radius: 4px;
+			padding: ${space[1]}px ${space[2]}px;
+			background-color: ${buildBackgroundColour()};
+			${textSansBold14};
+			color: ${buildTextColour()};
+			position: absolute;
+			top: -${space[2]}px;
+			${until.phablet} {
+				right: ${space[3]}px;
+			}
+			right: ${space[5]}px;
+		`;
+	};
 
 	const ChoiceCardPill = ({
 		pill,
@@ -317,8 +335,8 @@ export const ThreeTierChoiceCards = ({
 															| undefined
 													}
 													benefits={benefits}
-													choiceCardSettings={
-														choiceCardSettings
+													choiceCardDesignSettings={
+														choiceCardDesignSettings
 													}
 												/>
 											)
