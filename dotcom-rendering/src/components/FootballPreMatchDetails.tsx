@@ -13,11 +13,8 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
-import {
-	type EditionId,
-	getLocaleFromEdition,
-	getTimeZoneFromEdition,
-} from '../lib/edition';
+import type { EditionId } from '../lib/edition';
+import { formatMatchKickOffTime } from '../lib/formatDate';
 import { palette } from '../palette';
 
 const containerCss = css`
@@ -72,47 +69,33 @@ export const FootballPreMatchDetails = ({
 	venue,
 	kickOff,
 	edition,
-}: PreMatchProps) => {
-	const kickOffTime = new Intl.DateTimeFormat(getLocaleFromEdition(edition), {
-		hour: 'numeric',
-		minute: 'numeric',
-		hour12: true,
-		weekday: 'long',
-		day: 'numeric',
-		month: 'short',
-		year: 'numeric',
-		timeZoneName: 'short',
-		timeZone: getTimeZoneFromEdition(edition),
-	}).format(kickOff);
-
-	console.log(new Date());
-
-	return (
-		<div css={containerCss}>
-			<h3 css={headingCss}>
-				{homeTeam} vs. {awayTeam}
-			</h3>
-			<div css={detailsCss}>
-				<span>{league}</span>
-				<span>{venue}</span>
-				<time css={kickOffCss}>{kickOffTime}</time>
-			</div>
-			<LinkButton
-				href="/football/fixtures"
-				size="xsmall"
-				priority="tertiary"
-				icon={<SvgArrowRightStraight />}
-				iconSide="right"
-				theme={{
-					textTertiary: palette('--football-pre-match-button'),
-					borderTertiary: palette('--football-pre-match-button'),
-					backgroundTertiaryHover: palette(
-						'--football-pre-match-button-hover',
-					),
-				}}
-			>
-				Today's fixtures
-			</LinkButton>
+}: PreMatchProps) => (
+	<div css={containerCss}>
+		<h3 css={headingCss}>
+			{homeTeam} vs. {awayTeam}
+		</h3>
+		<div css={detailsCss}>
+			<span>{league}</span>
+			<span>{venue}</span>
+			<time css={kickOffCss}>
+				{formatMatchKickOffTime(kickOff, edition)}
+			</time>
 		</div>
-	);
-};
+		<LinkButton
+			href="/football/fixtures"
+			size="xsmall"
+			priority="tertiary"
+			icon={<SvgArrowRightStraight />}
+			iconSide="right"
+			theme={{
+				textTertiary: palette('--football-pre-match-button'),
+				borderTertiary: palette('--football-pre-match-button'),
+				backgroundTertiaryHover: palette(
+					'--football-pre-match-button-hover',
+				),
+			}}
+		>
+			Today's fixtures
+		</LinkButton>
+	</div>
+);
