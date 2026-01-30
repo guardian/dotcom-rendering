@@ -9,11 +9,13 @@ import type { BetaABTestAPI } from './lib/beta-ab-tests';
 type PreferredSourceExperiment =
 	| {
 			hasButton: true;
-			copy: string;
+			kind: ButtonKind;
 	  }
 	| {
 			hasButton: false;
 	  };
+
+export type ButtonKind = 'prefer' | 'add';
 
 export const preferredSourceExperiment = (
 	renderingTarget: RenderingTarget,
@@ -58,12 +60,12 @@ export const preferredSourceExperiment = (
 		case 'prefer':
 			return {
 				hasButton: true,
-				copy: 'Prefer the Guardian on Google',
+				kind: 'prefer',
 			};
 		case 'add':
 			return {
 				hasButton: true,
-				copy: 'Add the Guardian on Google',
+				kind: 'add',
 			};
 		case 'control':
 		default:

@@ -510,9 +510,10 @@ export interface ProductBlockElement {
 	lowestPrice?: string;
 }
 
-export interface ProductCarouselElement {
-	_type: 'model.dotcomrendering.pageElements.ProductCarouselElement';
+export interface ProductSummaryElement {
+	_type: 'model.dotcomrendering.pageElements.ProductSummaryElement';
 	matchedProducts: ProductBlockElement[];
+	variant: 'carousel' | 'stacked';
 }
 
 interface ProfileAtomBlockElement {
@@ -882,7 +883,7 @@ export type FEElement =
 	| WitnessTypeBlockElement
 	| CrosswordElement
 	| ProductBlockElement
-	| ProductCarouselElement;
+	| ProductSummaryElement;
 
 // -------------------------------------
 // Misc

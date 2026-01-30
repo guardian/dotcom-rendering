@@ -1,18 +1,16 @@
-import { _testOnly, enhanceProductCarousel } from './enhance-product-carousel';
+import { _testOnly, enhanceProductSummary } from './enhance-product-summary';
 import {
 	atAGlanceHeading,
 	dividerElement,
 	findCarousel,
+	findStacked,
 	linkElement,
 	productElement,
 	textElement,
-} from './enhance-product-carousel.test-helpers';
+} from './enhance-product-summary.test-helpers';
 
-const {
-	extractAtAGlanceUrls,
-	findMatchingProducts,
-	insertCarouselPlaceholder,
-} = _testOnly;
+const { extractAtAGlanceUrls, findMatchingProducts, insertSummaryPlaceholder } =
+	_testOnly;
 
 describe('extractAtAGlanceUrls', () => {
 	it('returns only URLs from LinkBlockElements', () => {
@@ -113,7 +111,7 @@ describe('insertCarouselPlaceholder', () => {
 			]),
 		];
 
-		const output = insertCarouselPlaceholder(input);
+		const output = insertSummaryPlaceholder(input, 'carousel');
 
 		const carousel = findCarousel(output);
 		expect(carousel).toBeDefined();
@@ -130,14 +128,14 @@ describe('insertCarouselPlaceholder', () => {
 			]),
 		];
 
-		const output = insertCarouselPlaceholder(input);
+		const output = insertSummaryPlaceholder(input, 'carousel');
 
 		const carousel = findCarousel(output);
 		expect(carousel).toBeUndefined();
 	});
 });
 
-describe('insertCarouselPlaceholder – edge cases', () => {
+describe('insertSummaryPlaceholder – edge cases', () => {
 	it('does not insert a carousel when fewer than three products match', () => {
 		const input = [
 			atAGlanceHeading(),
@@ -159,12 +157,12 @@ describe('insertCarouselPlaceholder – edge cases', () => {
 			]),
 		];
 
-		const output = insertCarouselPlaceholder(input);
+		const output = insertSummaryPlaceholder(input, 'carousel');
 		const carousel = findCarousel(output);
 		expect(carousel).toBeUndefined();
 	});
 
-	it('does not insert a carousel if At a glance section has no LinkBlockElements', () => {
+	it('does not insert a summary if At a glance section has no LinkBlockElements', () => {
 		const input = [
 			atAGlanceHeading(),
 			textElement('No links here'),
@@ -174,27 +172,27 @@ describe('insertCarouselPlaceholder – edge cases', () => {
 			]),
 		];
 
-		const output = insertCarouselPlaceholder(input);
+		const output = insertSummaryPlaceholder(input, 'carousel');
 
 		const carousel = findCarousel(output);
 		expect(carousel).toBeUndefined();
 	});
 
 	it('returns an empty array for empty input', () => {
-		expect(insertCarouselPlaceholder([])).toEqual([]);
+		expect(insertSummaryPlaceholder([], 'carousel')).toEqual([]);
 	});
 });
 
-describe('enhanceProductCarousel', () => {
+describe('enhanceProductSummary', () => {
 	beforeAll(() => {
 		_testOnly.allowedPageIds.push(
-			'thefilter/test-article-example-for-product-carousel',
+			'thefilter/test-article-example-for-product-summary',
 		);
 	});
 
 	it('enhances elements with a product carousel for allowlisted pages', () => {
 		const allowedPageId =
-			'thefilter/test-article-example-for-product-carousel';
+			'thefilter/test-article-example-for-product-summary';
 
 		const input = [
 			atAGlanceHeading(),
@@ -222,9 +220,53 @@ describe('enhanceProductCarousel', () => {
 			]),
 		];
 
-		const output = enhanceProductCarousel(allowedPageId)(input);
+		const output = enhanceProductSummary({
+			pageId: allowedPageId,
+			serverSideABTests: { 'thefilter-at-a-glance-redesign': 'carousel' },
+		})(input);
 
 		const carousel = findCarousel(output);
+
 		expect(carousel).toBeDefined();
+	});
+
+	it('enhances elements with a stacked product for allowlisted pages', () => {
+		const allowedPageId =
+			'thefilter/test-article-example-for-product-summary';
+
+		const input = [
+			atAGlanceHeading(),
+			linkElement(
+				'https://www.homebase.co.uk/en-uk/tower-airx-t17166-5l-grey-single-basket-air-fryer-digital-air-fryer/p/0757395',
+				'Buy now',
+			),
+			linkElement(
+				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
+				'Buy now',
+			),
+			linkElement(
+				'https://ninjakitchen.co.uk/product/ninja-double-stack-xl-9-5l-air-fryer-sl400uk-zidSL400UK',
+				'Buy now',
+			),
+			dividerElement(),
+			productElement([
+				'https://www.homebase.co.uk/en-uk/tower-airx-t17166-5l-grey-single-basket-air-fryer-digital-air-fryer/p/0757395',
+			]),
+			productElement([
+				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
+			]),
+			productElement([
+				'https://ninjakitchen.co.uk/product/ninja-double-stack-xl-9-5l-air-fryer-sl400uk-zidSL400UK',
+			]),
+		];
+
+		const output = enhanceProductSummary({
+			pageId: allowedPageId,
+			serverSideABTests: { 'thefilter-at-a-glance-redesign': 'stacked' },
+		})(input);
+
+		const stacked = findStacked(output);
+
+		expect(stacked).toBeDefined();
 	});
 });
