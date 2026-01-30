@@ -185,6 +185,7 @@ enum BrazeBannersSystemMessageType {
 	GetAuthStatus = 'BRAZE_BANNERS_SYSTEM:GET_AUTH_STATUS',
 	NewsletterSubscribe = 'BRAZE_BANNERS_SYSTEM:NEWSLETTER_SUBSCRIBE',
 	GetSettingsPropertyValue = 'BRAZE_BANNERS_SYSTEM:GET_SETTINGS_PROPERTY_VALUE',
+	DismissBanner = 'BRAZE_BANNERS_SYSTEM:DISMISS_BANNER',
 }
 
 /**
@@ -398,6 +399,9 @@ export const BrazeBannersSystemDisplay = ({
 						type: BrazeBannersSystemMessageType.GetSettingsPropertyValue;
 						key?: string;
 				  }
+				| {
+						type: BrazeBannersSystemMessageType.DismissBanner;
+				  }
 			>,
 		) => {
 			if (
@@ -436,6 +440,12 @@ export const BrazeBannersSystemDisplay = ({
 								value,
 							},
 						);
+					}
+					break;
+				case BrazeBannersSystemMessageType.DismissBanner:
+					// Remove the banner from the DOM
+					if (containerRef.current) {
+						containerRef.current.innerHTML = '';
 					}
 					break;
 			}
