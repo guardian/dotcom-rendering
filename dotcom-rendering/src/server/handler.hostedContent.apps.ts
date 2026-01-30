@@ -1,12 +1,12 @@
 import type { RequestHandler } from 'express';
 import { validateAsFEHostedContent } from '../model/validate';
-import { enhanceHostedContentType } from '../types/hostedContent';
+import { enhanceHostedContent } from '../types/hostedContent';
 import { makePrefetchHeader } from './lib/header';
 import { renderHtml } from './render.hostedContent.web';
 
 export const handleAppsHostedContent: RequestHandler = ({ body }, res) => {
 	const frontendData = validateAsFEHostedContent(body);
-	const hostedContent = enhanceHostedContentType(frontendData);
+	const hostedContent = enhanceHostedContent(frontendData);
 	const { html, prefetchScripts } = renderHtml({
 		hostedContent,
 	});
