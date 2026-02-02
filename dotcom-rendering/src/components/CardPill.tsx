@@ -22,7 +22,6 @@ const decidePill = (
 	mainMedia?: MainMedia,
 	isNewsletter?: boolean,
 	isVideoArticle?: boolean,
-	isLiveVideo?: boolean,
 ) => {
 	if (isNewsletter) return <Pill content="Newsletter" />;
 	if (!mainMedia) return null;
@@ -45,7 +44,7 @@ const decidePill = (
 			);
 		case 'YoutubeVideo':
 			if (!isVideoArticle) return null;
-			if (isLiveVideo) {
+			if (mainMedia.isLive) {
 				return (
 					<Pill
 						content="Live"
@@ -100,15 +99,11 @@ const PillWrapperStyles = css`
 	display: flex;
 `;
 
-// proxy for live
-// mainMedia.duration === 0
-
 type CardPillProps = {
 	format: ArticleFormat;
 	mainMedia?: MainMedia;
 	isNewsletter?: boolean;
 	isVideoArticle?: boolean;
-	isLiveVideo?: boolean;
 };
 
 export const CardPill = ({
@@ -116,18 +111,10 @@ export const CardPill = ({
 	mainMedia,
 	isNewsletter,
 	isVideoArticle,
-	isLiveVideo,
 }: CardPillProps) => {
 	return (
 		<div css={PillWrapperStyles}>
-			$
-			{decidePill(
-				format,
-				mainMedia,
-				isNewsletter,
-				isVideoArticle,
-				isLiveVideo,
-			)}
+			${decidePill(format, mainMedia, isNewsletter, isVideoArticle)}
 		</div>
 	);
 };
