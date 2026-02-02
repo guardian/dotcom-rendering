@@ -1233,11 +1233,9 @@ export const Card = ({
 												css={[
 													PillWrapperStyles,
 													isStorylines &&
-														`
-					flex-direction: column;
-					gap: ${space[1]}px;
-					align-items: flex-start;
-				`,
+														`   flex-direction: column;
+															gap: ${space[1]}px;
+															align-items: flex-start;`,
 												]}
 											>
 												{/* Usually, we either display the pill or the footer,

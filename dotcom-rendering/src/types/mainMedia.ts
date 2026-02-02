@@ -47,3 +47,9 @@ type Gallery = Media & {
 };
 
 export type MainMedia = YoutubeVideo | SelfHostedVideo | Audio | Gallery;
+
+export type CardFooterMedia =
+	| { type: 'YoutubeVideo'; duration: number; isLive: boolean }
+	| { type: 'SelfHostedVideo'; duration: number }
+	| { type: 'Audio'; duration: string }
+	| { type: 'Gallery'; count: string };

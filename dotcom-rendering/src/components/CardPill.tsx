@@ -5,7 +5,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import { ArticleDesign } from '../lib/articleFormat';
 import { secondsToDuration } from '../lib/formatTime';
 import { palette } from '../palette';
-import type { MainMedia } from '../types/mainMedia';
+import type { CardFooterMedia, MainMedia } from '../types/mainMedia';
 import { Pill } from './Pill';
 import { SvgMediaControlsPlay } from './SvgMediaControlsPlay';
 
@@ -19,7 +19,7 @@ const liveBulletStyles = css`
 
 type CardPillProps = {
 	format: ArticleFormat;
-	mainMedia?: MainMedia;
+	mainMedia?: MainMedia | CardFooterMedia;
 	isNewsletter?: boolean;
 	isVideoArticle?: boolean;
 };
