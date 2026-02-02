@@ -17,12 +17,19 @@ const liveBulletStyles = css`
 	margin-right: ${space[1]}px;
 `;
 
-const decidePill = (
-	format: ArticleFormat,
-	mainMedia?: MainMedia,
-	isNewsletter?: boolean,
-	isVideoArticle?: boolean,
-) => {
+type CardPillProps = {
+	format: ArticleFormat;
+	mainMedia?: MainMedia;
+	isNewsletter?: boolean;
+	isVideoArticle?: boolean;
+};
+
+export const CardPill = ({
+	format,
+	mainMedia,
+	isNewsletter,
+	isVideoArticle,
+}: CardPillProps) => {
 	if (isNewsletter) return <Pill content="Newsletter" />;
 	if (!mainMedia) return null;
 	switch (mainMedia.type) {
@@ -92,29 +99,4 @@ const decidePill = (
 		default:
 			return null;
 	}
-};
-
-const PillWrapperStyles = css`
-	margin-top: auto;
-	display: flex;
-`;
-
-type CardPillProps = {
-	format: ArticleFormat;
-	mainMedia?: MainMedia;
-	isNewsletter?: boolean;
-	isVideoArticle?: boolean;
-};
-
-export const CardPill = ({
-	format,
-	mainMedia,
-	isNewsletter,
-	isVideoArticle,
-}: CardPillProps) => {
-	return (
-		<div css={PillWrapperStyles}>
-			${decidePill(format, mainMedia, isNewsletter, isVideoArticle)}
-		</div>
-	);
 };
