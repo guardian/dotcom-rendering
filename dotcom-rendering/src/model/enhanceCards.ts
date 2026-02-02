@@ -273,6 +273,11 @@ export const getActiveMediaAtom = (
 				origin: mediaAtom.source ?? 'Unknown origin',
 				expired: !!mediaAtom.expired,
 				image,
+				/**
+				 * This is brittle - we should be detecting if the video is live upstream.
+				 * For now, we have to infer it from a duration of 0
+				 */
+				isLive: mediaAtom.duration === 0,
 			};
 		}
 	}
