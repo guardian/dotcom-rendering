@@ -6,14 +6,23 @@ import { useEffect, useState } from 'react';
 import { getNotificationsClient, getTagClient } from '../lib/bridgetApi';
 import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
 import { useIsMyGuardianEnabled } from '../lib/useIsMyGuardianEnabled';
-import { FollowNotificationsButton, FollowTagButton } from './FollowButtons';
+import {
+	FollowNotificationsButton,
+	FollowTagButton,
+	FollowTagButtonPill,
+} from './FollowButtons';
 
 type Props = {
 	id: string;
 	displayName: string;
+	variant?: 'default' | 'pill';
 };
 
-export const FollowWrapper = ({ id, displayName }: Props) => {
+export const FollowWrapper = ({
+	id,
+	displayName,
+	variant = 'default',
+}: Props) => {
 	const [isFollowingNotifications, setIsFollowingNotifications] = useState<
 		boolean | undefined
 	>(undefined);
@@ -177,26 +186,38 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 			`}
 			data-gu-name="follow"
 		>
-			{showFollowTagButton && (
-				<FollowTagButton
-					isFollowing={isFollowingTag ?? false}
-					displayName={displayName}
+			{showFollowTagButton &&
+				(variant === 'pill' ? (
+					<FollowTagButtonPill
+						isFollowing={isFollowingTag ?? false}
+						onClickHandler={
+							!isUndefined(isFollowingTag)
+								? tagHandler
+								: () => undefined
+						}
+					/>
+				) : (
+					<FollowTagButton
+						isFollowing={isFollowingTag ?? false}
+						displayName={displayName}
+						onClickHandler={
+							!isUndefined(isFollowingTag)
+								? tagHandler
+								: () => undefined
+						}
+						withExtraBottomMargin={true}
+					/>
+				))}
+			{variant === 'default' && (
+				<FollowNotificationsButton
+					isFollowing={isFollowingNotifications ?? false}
 					onClickHandler={
-						!isUndefined(isFollowingTag)
-							? tagHandler
+						!isUndefined(isFollowingNotifications)
+							? notificationsHandler
 							: () => undefined
 					}
-					withExtraBottomMargin={true}
 				/>
 			)}
-			<FollowNotificationsButton
-				isFollowing={isFollowingNotifications ?? false}
-				onClickHandler={
-					!isUndefined(isFollowingNotifications)
-						? notificationsHandler
-						: () => undefined
-				}
-			/>
 		</div>
 	);
 };
