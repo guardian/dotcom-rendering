@@ -691,3 +691,157 @@ test("calculateSpaceUpdates - handles insufficient MVTs when resizing middle tes
 		"Not enough available MVTs for test commercial-test2:control",
 	);
 });
+
+test("calculateSpaceUpdates - updates expiration date for existing test", () => {
+	const originalExpirationDate = "2025-12-31";
+	const newExpirationDate = "2026-01-31";
+
+	const existingAudienceSpace = createMockAudienceSpace({
+		"commercial-test1:control": [0],
+		"commercial-test1:variant": [1],
+	});
+
+	// Update the same test with a new expiration date
+	const tests = [
+		createMockABTest("commercial-test1", {
+			audienceSize: 0.002,
+			groups: ["control", "variant"],
+			expirationDate: newExpirationDate,
+		}),
+	];
+
+	const result = calculateSpaceUpdates(existingAudienceSpace, tests);
+
+	// Check that all entries have the updated expiration date
+	const controlEntry = result.get("mvt:0");
+	const variantEntry = result.get("mvt:1");
+
+	equal(
+		controlEntry?.exp,
+		Math.floor(new Date(newExpirationDate).getTime() / 1000),
+	);
+	equal(
+		variantEntry?.exp,
+		Math.floor(new Date(newExpirationDate).getTime() / 1000),
+	);
+
+	// Verify the expiration is NOT the old date
+	const oldExp = Math.floor(
+		new Date(originalExpirationDate).getTime() / 1000,
+	);
+	equal(controlEntry?.exp !== oldExp, true);
+	equal(variantEntry?.exp !== oldExp, true);
+
+	// When only expiration changes (not size), no operations are needed
+	// The expiration is updated when the final Map is created
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 0);
+	equal(resizeTestGroupSpy.mock.callCount(), 0);
+});
+
+test("calculateSpaceUpdates - handles status change from ON to OFF by removing test", () => {
+	const existingAudienceSpace = createMockAudienceSpace({
+		"commercial-test1:control": [0, 1],
+		"commercial-test1:variant": [2, 3],
+		"commercial-test2:control": [4, 5],
+		"commercial-test2:variant": [6, 7],
+	});
+
+	// Only include test1 in the active tests (simulating test2 being turned OFF)
+	const tests = [
+		createMockABTest("commercial-test1", {
+			audienceSize: 0.004,
+			groups: ["control", "variant"],
+			status: "ON",
+		}),
+	];
+
+	const result = calculateSpaceUpdates(existingAudienceSpace, tests);
+
+	// Should only have entries for test1
+	const testNames = new Set(
+		Array.from(result.values()).map((entry) => entry.name.split(":")[0]),
+	);
+	equal(testNames.size, 1);
+	equal(testNames.has("commercial-test1"), true);
+	equal(testNames.has("commercial-test2"), false);
+
+	// test2 should be deleted since it's not in the active tests list
+	equal(deleteTestGroupSpy.mock.callCount(), 2); // 2 groups deleted (test2:control and test2:variant)
+	equal(addTestGroupSpy.mock.callCount(), 0);
+	// test1 keeps the same size, so no resize is needed
+	equal(resizeTestGroupSpy.mock.callCount(), 0);
+});
+
+test("calculateSpaceUpdates - handles status change from OFF to ON by adding test", () => {
+	const existingAudienceSpace = createMockAudienceSpace({
+		"commercial-test1:control": [0, 1],
+		"commercial-test1:variant": [2, 3],
+	});
+
+	// Add test2 which was previously OFF (not in the audience space)
+	const tests = [
+		createMockABTest("commercial-test1", {
+			audienceSize: 0.004,
+			groups: ["control", "variant"],
+			status: "ON",
+		}),
+		createMockABTest("commercial-test2", {
+			audienceSize: 0.002,
+			groups: ["control", "variant"],
+			status: "ON",
+		}),
+	];
+
+	const result = calculateSpaceUpdates(existingAudienceSpace, tests);
+
+	// Should have entries for both tests
+	const testNames = new Set(
+		Array.from(result.values()).map((entry) => entry.name.split(":")[0]),
+	);
+	equal(testNames.size, 2);
+	equal(testNames.has("commercial-test1"), true);
+	equal(testNames.has("commercial-test2"), true);
+
+	// test2 should be added since it wasn't in the existing audience space
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 2); // 2 groups added (test2:control and test2:variant)
+	// test1 keeps the same size, so no resize is needed
+	equal(resizeTestGroupSpy.mock.callCount(), 0);
+});
+
+test("calculateSpaceUpdates - updates both expiration and size simultaneously", () => {
+	const newExpirationDate = "2026-01-31";
+
+	const existingAudienceSpace = createMockAudienceSpace({
+		"commercial-test1:control": [0],
+		"commercial-test1:variant": [1],
+	});
+
+	// Update test with both new expiration date and new size
+	const tests = [
+		createMockABTest("commercial-test1", {
+			audienceSize: 0.004, // Increased from 0.002 to 0.004
+			groups: ["control", "variant"],
+			expirationDate: newExpirationDate,
+		}),
+	];
+
+	const result = calculateSpaceUpdates(existingAudienceSpace, tests);
+
+	// Should have 4 MVT entries (2 per group) instead of 2
+	equal(result.size, 4);
+
+	// Check that all entries have the updated expiration date
+	for (const entry of result.values()) {
+		equal(
+			entry.exp,
+			Math.floor(new Date(newExpirationDate).getTime() / 1000),
+		);
+	}
+
+	// Should resize groups
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 0);
+	equal(resizeTestGroupSpy.mock.callCount(), 2);
+});
