@@ -657,6 +657,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 														soleContributor.title
 													}
 													id={soleContributor.id}
+													variant={'pill'}
 												/>
 											</Island>
 										)}
