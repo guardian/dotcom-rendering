@@ -17,8 +17,8 @@ type Props = {
 	branding: string;
 };
 
-const HOSTED_CONTENT_HEIGHT_MOBILE = 3;
-const HOSTED_CONTENT_HEIGHT_DESKTOP = 3.625;
+const HOSTED_CONTENT_HEIGHT_MOBILE = 48;
+const HOSTED_CONTENT_HEIGHT_DESKTOP = 58;
 
 const headerWrapperStyles = css`
 	position: relative;
@@ -27,11 +27,11 @@ const headerWrapperStyles = css`
 	width: 100%;
 	margin: 0 auto;
 	padding: 0;
-	height: ${HOSTED_CONTENT_HEIGHT_MOBILE}rem;
+	height: ${HOSTED_CONTENT_HEIGHT_MOBILE}px;
 	color: ${sourcePalette.neutral[100]};
 
 	${from.tablet} {
-		height: ${HOSTED_CONTENT_HEIGHT_DESKTOP}rem;
+		height: ${HOSTED_CONTENT_HEIGHT_DESKTOP}px;
 	}
 
 	${from.desktop} {
@@ -49,12 +49,15 @@ const headerWrapperStyles = css`
 
 const hostedByStyles = css`
 	${textSansBold12};
-	margin-right: -9px;
+	display: block;
+	margin-left: -51px;
+	margin-bottom: -11px;
 	letter-spacing: 0.03125rem;
 	color: ${sourcePalette.neutral[73]};
 
 	${from.tablet} {
 		${textSansBold14};
+		margin-left: -60px;
 	}
 `;
 
@@ -74,7 +77,11 @@ const logoStyles = css`
 	}
 `;
 
-export const Left = ({ children }: { children: React.ReactNode }) => (
+const HeaderWrapper = ({ children }: { children: React.ReactNode }) => (
+	<div css={headerWrapperStyles}>{children}</div>
+);
+
+const Left = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			display: flex;
@@ -84,7 +91,7 @@ export const Left = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-export const Right = ({ children }: { children: React.ReactNode }) => (
+const Right = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			display: flex;
@@ -97,10 +104,6 @@ export const Right = ({ children }: { children: React.ReactNode }) => (
 	>
 		{children}
 	</div>
-);
-
-const HeaderWrapper = ({ children }: { children: React.ReactNode }) => (
-	<div css={headerWrapperStyles}>{children}</div>
 );
 
 const HeaderSection = ({
@@ -186,6 +189,9 @@ const TitleAndBadge = ({ accentColor, branding }: Props) => (
 	</>
 );
 
+{
+	/* TODO: waiting for design confirmation so it's just a placeholder for now */
+}
 const About = () => (
 	<div
 		css={css`
@@ -216,10 +222,16 @@ const About = () => (
 );
 
 {
-	/* The following was copied from Logo.tsx because of the logo textColor doesn't work with palette --masthead-nav-link-text */
+	/* Can't reuse Logo.tsx until we add a new palette to work with hosted. The color doesn't work with palette --masthead-nav-link-text */
 }
 const Logo = () => (
-	<a href="/" data-link-name={nestedOphanComponents('header', 'logo')}>
+	<a
+		href="/"
+		data-link-name={nestedOphanComponents('header', 'logo')}
+		css={css`
+			text-decoration: none;
+		`}
+	>
 		<span
 			css={css`
 				${visuallyHidden};
@@ -227,6 +239,9 @@ const Logo = () => (
 		>
 			The Guardian - Back to home
 		</span>
+		{/* The following hosted by is included in the anchor for logo in frontend. Do we need the same here? */}
+		<p css={hostedByStyles}>Hosted by</p>
+
 		<SvgGuardianLogo textColor={`${sourcePalette.neutral[100]}`} />
 	</a>
 );
@@ -238,8 +253,6 @@ const HostedContentLogo = () => (
 			display: flex;
 		`}
 	>
-		{/* The following hosted by is included in the link for logo in frontend */}
-		<p css={hostedByStyles}>Hosted by</p>
 		<div css={logoStyles}>
 			<Logo />
 		</div>

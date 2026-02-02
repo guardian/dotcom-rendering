@@ -32,7 +32,7 @@ const FlexWrapper = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-export const Left = ({ children }: { children: React.ReactNode }) => (
+const Left = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			display: flex;
@@ -42,7 +42,7 @@ export const Left = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-export const Right = ({ children }: { children: React.ReactNode }) => (
+const Right = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			display: flex;
