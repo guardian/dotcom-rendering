@@ -77,6 +77,36 @@ const logoStyles = css`
 	}
 `;
 
+const titleStyles = css`
+	${textSansBold14};
+	position: relative;
+	height: auto;
+	line-height: 0.945rem;
+	padding: 0.3125rem 0.375rem 0.25rem;
+	letter-spacing: 0.03125rem;
+
+	${from.desktop} {
+		text-align: center;
+		margin: 2px 0;
+	}
+`;
+
+const badgeWrapperStyles = css`
+	position: absolute;
+	display: block;
+	width: 80px;
+	height: 45px; /* This is temporary, replace with actual badge height */
+	top: 100%;
+	background-color: ${sourcePalette.neutral[60]};
+	text-align: center;
+	z-index: 10;
+
+	${from.desktop} {
+		width: 132px;
+		height: 75px;
+	}
+`;
+
 const HeaderWrapper = ({ children }: { children: React.ReactNode }) => (
 	<div css={headerWrapperStyles}>{children}</div>
 );
@@ -147,45 +177,11 @@ const TitleAndBadge = ({ accentColor, branding }: Props) => (
 				}
 			`}
 		>
-			<p
-				css={css`
-					${textSansBold14};
-					position: relative;
-					height: auto;
-					line-height: 0.945rem; /* We shouldn't override this but need to confirm if it's ok for the design to look slighly different */
-					padding: 0.3125rem 0.375rem 0.25rem;
-					letter-spacing: 0.03125rem;
-
-					${from.desktop} {
-						text-align: center;
-						margin: 2px 0;
-					}
-				`}
-			>
-				Advertiser content
-			</p>
+			<p css={titleStyles}>Advertiser content</p>
 		</div>
 
 		{/* The following div is a placeholder for the badge */}
-		<div
-			css={css`
-				position: absolute;
-				display: block;
-				width: 80px;
-				height: 45px; /* This is temporary, replace with actual badge height */
-				top: 100%;
-				background-color: ${sourcePalette.neutral[60]};
-				text-align: center;
-				z-index: 10;
-
-				${from.desktop} {
-					width: 132px;
-					height: 75px;
-				}
-			`}
-		>
-			{branding}
-		</div>
+		<div css={badgeWrapperStyles}>{branding}</div>
 	</>
 );
 
@@ -195,25 +191,21 @@ const TitleAndBadge = ({ accentColor, branding }: Props) => (
 const About = () => (
 	<div
 		css={css`
-			${textSans15};
-			background-color: ${sourcePalette.neutral[7]};
 			color: ${sourcePalette.neutral[100]};
 			margin-top: 1.25rem;
-			padding: 0;
 
 			${from.tablet} {
 				margin-top: 1.8rem;
-			}
-
-			${from.desktop} {
-				${textSans17};
-				width: 235px;
 			}
 		`}
 	>
 		<p
 			css={css`
-				padding: 0;
+				${textSans15};
+
+				${from.desktop} {
+					${textSans17};
+				}
 			`}
 		>
 			About
@@ -229,6 +221,7 @@ const Logo = () => (
 		href="/"
 		data-link-name={nestedOphanComponents('header', 'logo')}
 		css={css`
+			cursor: pointer;
 			text-decoration: none;
 		`}
 	>
@@ -239,7 +232,6 @@ const Logo = () => (
 		>
 			The Guardian - Back to home
 		</span>
-		{/* The following hosted by is included in the anchor for logo in frontend. Do we need the same here? */}
 		<p css={hostedByStyles}>Hosted by</p>
 
 		<SvgGuardianLogo textColor={`${sourcePalette.neutral[100]}`} />
