@@ -268,7 +268,13 @@ export const CardPicture = ({
 				src={fallbackSource.lowResUrl}
 				css={[block, isCircular && circularStyles]}
 				loading={loading}
-				data-chromatic="ignore"
+				/**
+				 * Feature cards typically have content overlaid on the image. If we ignore the image,
+				 * this content will also be ignored in Chromatic snapshots.
+				 */
+				data-chromatic={
+					imageSize.startsWith('feature') ? undefined : 'ignore'
+				}
 			/>
 		</picture>
 	);
