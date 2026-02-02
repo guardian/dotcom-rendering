@@ -109,6 +109,12 @@
                                 "type": "string"
                             }
                         }
+                    },
+                    "bio": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
                     }
                 },
                 "required": [
