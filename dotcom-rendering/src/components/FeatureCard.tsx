@@ -164,7 +164,7 @@ const overlayMaskGradientStyles = (angle: string) => css`
 	);
 `;
 
-const contentOverlayStyle = css`
+const contentOverlayStyles = css`
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -180,9 +180,9 @@ const overlayStyles = css`
 	padding: ${space[9]}px ${space[2]}px ${space[2]}px;
 
 	/*
- * Ensure the waveform is behind the other elements, e.g. headline, pill.
- * Links define their own z-index.
- */
+	 * Ensure the waveform is behind the other elements, e.g. headline, pill.
+	 * Links define their own z-index.
+	 */
 	> :not(.waveform):not(a) {
 		z-index: 1;
 	}
@@ -198,7 +198,7 @@ const blurStyles = css`
 	${overlayMaskGradientStyles('180deg')};
 `;
 
-const immersiveOverlayBlurStyles = css`
+const immersiveBlurStyles = css`
 	${from.tablet} {
 		padding: ${space[2]}px ${space[12]}px ${space[2]}px ${space[2]}px;
 		${overlayMaskGradientStyles('270deg')}
@@ -257,7 +257,7 @@ const waveformStyles = css`
 	bottom: 0;
 	left: 0;
 	z-index: 0;
-	height: 64px;
+	height: 40px;
 	max-width: 100%;
 	overflow: hidden;
 	opacity: 0.3;
@@ -309,7 +309,7 @@ const getMedia = ({
 
 const renderWaveform = (duration: string, bars: number) => (
 	<div css={waveformStyles} className="waveform">
-		<WaveForm seed={duration} height={64} bars={bars} barWidth={2} />
+		<WaveForm seed={duration} height={40} bars={bars} barWidth={2} />
 	</div>
 );
 
@@ -656,7 +656,7 @@ export const FeatureCard = ({
 											noPointerEvents,
 									]}
 								>
-									<div css={contentOverlayStyle}>
+									<div css={contentOverlayStyles}>
 										{mainMedia?.type === 'Audio' &&
 											!!mainMedia.podcastImage?.src &&
 											(isImmersive ? (
@@ -681,7 +681,7 @@ export const FeatureCard = ({
 											css={[
 												blurStyles,
 												isImmersive &&
-													immersiveOverlayBlurStyles,
+													immersiveBlurStyles,
 											]}
 										/>
 
