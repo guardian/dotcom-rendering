@@ -1,5 +1,5 @@
-import { RenderingTarget } from '../types/renderingTarget';
 import type { FEElement, ProductBlockElement } from '../types/content';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { generateId } from './enhance-H2s';
 
 /**
