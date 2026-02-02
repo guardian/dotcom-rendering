@@ -17,8 +17,8 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { ContributorAvatar } from '../components/ContributorAvatar';
+import { ContributorProfile } from '../components/ContributorProfile.importable';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { FollowWrapper } from '../components/FollowWrapper.importable';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -652,12 +652,15 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 												priority="feature"
 												defer={{ until: 'visible' }}
 											>
-												<FollowWrapper
+												<ContributorProfile
+													id={soleContributor.id}
 													displayName={
 														soleContributor.title
 													}
-													id={soleContributor.id}
-													variant={'pill'}
+													avatarUrl={
+														soleContributor.bylineLargeImageUrl
+													}
+													bio="<p>A Guardian columnist, and author of The Invisible Doctrine: The Secret History of Neoliberalism (with Peter Hutchison)</p>" // to replace
 												/>
 											</Island>
 										)}
