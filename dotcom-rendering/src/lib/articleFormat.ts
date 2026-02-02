@@ -29,6 +29,9 @@ export enum ArticleDesign {
 	Timeline,
 	Profile,
 	Crossword,
+	HostedArticle,
+	HostedVideo,
+	HostedGallery,
 }
 
 export enum ArticleDisplay {
@@ -118,6 +121,12 @@ export const decideDesign = ({ design }: Partial<FEFormat>): ArticleDesign => {
 			return ArticleDesign.Profile;
 		case 'CrosswordDesign':
 			return ArticleDesign.Crossword;
+		case 'HostedArticleDesign':
+			return ArticleDesign.HostedArticle;
+		case 'HostedVideoDesign':
+			return ArticleDesign.HostedVideo;
+		case 'HostedGalleryDesign':
+			return ArticleDesign.HostedGallery;
 		default:
 			return ArticleDesign.Standard;
 	}
