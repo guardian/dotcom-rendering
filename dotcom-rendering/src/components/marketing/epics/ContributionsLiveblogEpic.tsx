@@ -149,7 +149,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 }: EpicProps): JSX.Element => {
 	const { newsletterSignup, tickerSettings } = variant;
 
-	// Used for analytics events - detects the top coming into view
+	// Used for analytics - detects the top coming into view
 	const [hasBeenSeenAtTop, setNodeAtTop] = useIsInView({
 		debounce: true,
 		threshold: 0,

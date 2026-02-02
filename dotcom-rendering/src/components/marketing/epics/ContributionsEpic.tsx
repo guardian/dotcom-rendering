@@ -276,7 +276,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	const { hasOptedOut, onArticleCountOptIn, onArticleCountOptOut } =
 		useArticleCountOptOut();
 
-	// Used for analytics events - detects the top coming into view
+	// Used for analytics - detects the top coming into view
 	const [hasBeenSeenAtTop, setNodeAtTop] = useIsInView({
 		debounce: true,
 		threshold: 0,
