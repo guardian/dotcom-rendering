@@ -24,7 +24,7 @@ export const LeagueTable = ({ table }: Props) => {
 };
 
 const Title = ({ text }: { text: string }) => (
-	<h3
+	<h2
 		css={css`
 			${textSansBold14}
 			border-bottom: 1px solid ${palette('--football-match-stat-border')};
@@ -37,7 +37,7 @@ const Title = ({ text }: { text: string }) => (
 		`}
 	>
 		{text}
-	</h3>
+	</h2>
 );
 
 const Table = ({ table }: { table: FootballTableSummary }) => {

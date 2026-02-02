@@ -102,7 +102,7 @@ const Event = ({
 };
 
 const Title = ({ text, id }: { text: string; id: string }) => (
-	<h3
+	<h2
 		id={id}
 		css={css`
 			border-bottom: 1px solid ${palette('--football-match-stat-border')};
@@ -116,7 +116,7 @@ const Title = ({ text, id }: { text: string; id: string }) => (
 		`}
 	>
 		{text}
-	</h3>
+	</h2>
 );
 
 const PlayerList = ({

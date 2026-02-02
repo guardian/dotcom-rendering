@@ -122,7 +122,7 @@ export const FootballMatchStat = ({
 	awayValue,
 	isPercentage = false,
 	layout,
-	headingLevel = 3,
+	headingLevel = 2,
 }: MatchStatProps) => {
 	const Heading: React.ElementType = `h${headingLevel}`;
 	const compactLayout = layout === 'compact';
