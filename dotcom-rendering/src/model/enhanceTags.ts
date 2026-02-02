@@ -11,6 +11,8 @@ const enhanceTag = ({
 		twitterHandle,
 		bylineImageUrl,
 		contributorLargeImagePath: bylineLargeImageUrl,
+		bio,
+		description,
 	},
 }: FETagType): TagType => ({
 	id,
@@ -19,4 +21,6 @@ const enhanceTag = ({
 	twitterHandle,
 	bylineImageUrl,
 	bylineLargeImageUrl,
+	bio,
+	description,
 });
