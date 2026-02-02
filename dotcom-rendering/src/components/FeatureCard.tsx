@@ -257,7 +257,7 @@ const waveformStyles = css`
 	bottom: 0;
 	left: 0;
 	z-index: 0;
-	height: 64px;
+	height: 40px;
 	max-width: 100%;
 	overflow: hidden;
 	opacity: 0.3;
@@ -309,7 +309,7 @@ const getMedia = ({
 
 const renderWaveform = (duration: string, bars: number) => (
 	<div css={waveformStyles} className="waveform">
-		<WaveForm seed={duration} height={64} bars={bars} barWidth={2} />
+		<WaveForm seed={duration} height={40} bars={bars} barWidth={2} />
 	</div>
 );
 
