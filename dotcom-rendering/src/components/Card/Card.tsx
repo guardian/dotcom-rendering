@@ -494,30 +494,8 @@ export const Card = ({
 			css={css`
 				margin-top: auto;
 				display: flex;
-				${isStorylines &&
-				`
-					flex-direction: column;
-					gap: ${space[1]}px;
-					align-items: flex-start;
-				`}
 			`}
 		>
-			{/* Usually, we either display the pill or the footer,
-				but if the card appears in the storylines section on tag pages
-				then we do want to display the date on these cards as well as the media pill.
-			*/}
-			{isStorylines && (
-				<CardFooter
-					format={format}
-					age={decideAge()}
-					commentCount={<CommentCount />}
-					cardBranding={
-						isOnwardContent ? <LabsBranding /> : undefined
-					}
-					showLivePlayable={showLivePlayable}
-				/>
-			)}
-
 			{mainMedia?.type === 'YoutubeVideo' && isVideoArticle && (
 				<>
 					{mainMedia.duration === 0 ? (
@@ -594,7 +572,8 @@ export const Card = ({
 -     */
 	const isMediaCardOrNewsletter = isMediaCard(format) || isNewsletter;
 
-	const showPill = isMediaCardOrNewsletter && !isGallerySecondaryOnward;
+	const showPill =
+		isMediaCardOrNewsletter && !isGallerySecondaryOnward && !isStorylines;
 
 	const media = getMedia({
 		imageUrl: image?.src,
