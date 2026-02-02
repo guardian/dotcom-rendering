@@ -100,6 +100,7 @@ export const enhanceElements =
 			enhanceProductSummary({
 				pageId: options.pageId,
 				serverSideABTests: options.serverSideABTests,
+				renderingTarget: options.renderingTarget,
 			}),
 		].reduce(
 			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),

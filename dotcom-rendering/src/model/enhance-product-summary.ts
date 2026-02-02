@@ -1,4 +1,5 @@
 import type { FEElement, ProductBlockElement } from '../types/content';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { generateId } from './enhance-H2s';
 
 /**
@@ -156,19 +157,22 @@ export const enhanceProductSummary =
 	({
 		pageId,
 		serverSideABTests,
+		renderingTarget,
 	}: {
 		pageId: string;
 		serverSideABTests?: Record<string, string>;
+		renderingTarget: RenderingTarget;
 	}) =>
 	(elements: FEElement[]): FEElement[] => {
 		const abTestVariant =
 			serverSideABTests?.['thefilter-at-a-glance-redesign'];
 
-		// do nothing if article is not on allow list / not in the test / variant is 'control'
+		// do nothing if article is not on allow list / not in the test / variant is 'control' / renderingTarget is Apps
 		if (
 			abTestVariant &&
 			isCarouselOrStacked(abTestVariant) &&
-			isEligibleForSummary(pageId)
+			isEligibleForSummary(pageId) &&
+			renderingTarget === 'Web'
 		) {
 			return insertSummaryPlaceholder(elements, abTestVariant);
 		}
