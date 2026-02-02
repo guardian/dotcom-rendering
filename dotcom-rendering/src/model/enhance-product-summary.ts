@@ -20,6 +20,22 @@ export const allowedPageIds: string[] = [
 	'thefilter/2025/nov/18/best-pillows-tested-uk',
 	'thefilter/2025/jan/29/best-sunrise-alarm-clocks',
 	'thefilter/2025/dec/28/best-running-watches-tested-uk',
+	'thefilter/2025/mar/02/best-air-fryers',
+	'thefilter/2024/nov/14/the-8-best-video-doorbells-tried-and-tested',
+	'thefilter/2024/nov/26/best-robot-vacuum-mop,',
+	'thefilter/2025/sep/19/best-led-red-light-therapy-face-masks',
+	'thefilter/2024/dec/27/best-electric-blankets-heated-throws',
+	'technology/article/2025/feb/13/best-apple-iphone',
+	'thefilter/2025/dec/31/best-cross-trainers-ellipticals-uk',
+	'thefilter/2026/jan/02/best-concealer-tested-uk',
+	'thefilter/2025/jun/10/best-apple-watch',
+	'thefilter/2026/jan/15/best-hand-cream-tested-uk',
+	'thefilter/2026/jan/21/best-weighted-blanket-uk',
+	'thefilter/2024/oct/18/best-heated-clothes-airers-dryer-save-time-money-laundry',
+	'thefilter/2026/jan/23/best-duvets-tested-uk',
+	'thefilter/2025/jan/23/best-womens-hiking-walking-boots',
+	'thefilter/2024/nov/07/the-8-best-electric-heaters-tried-and-tested-from-traditional-stove-style-units-to-modern-smart-models',
+	'thefilter/2024/oct/10/best-walking-boots-hiking-men-tried-tested',
 ];
 
 const isEligibleForSummary = (pageId: string) => {
