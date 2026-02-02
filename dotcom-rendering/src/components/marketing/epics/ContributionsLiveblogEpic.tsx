@@ -149,15 +149,20 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 }: EpicProps): JSX.Element => {
 	const { newsletterSignup, tickerSettings } = variant;
 
-	const [hasBeenSeen, setNode] = useIsInView({
+	// Used for analytics events - detects the top coming into view
+	const [hasBeenSeenAtTop, setNodeAtTop] = useIsInView({
+		debounce: true,
+		threshold: 0,
+	});
+
+	// Used for browser storage view record - detects 40% scroll depth
+	const [hasBeenSeenAt40Percent, setNodeAt40Percent] = useIsInView({
 		debounce: true,
 		threshold: 0.4,
 	});
 
 	useEffect(() => {
-		if (hasBeenSeen) {
-			// For epic view count
-			logEpicView(tracking.abTestName);
+		if (hasBeenSeenAtTop) {
 			document.dispatchEvent(
 				new CustomEvent('epic:in-view', {
 					detail: {
@@ -176,7 +181,14 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 				);
 			}
 		}
-	}, [hasBeenSeen, submitComponentEvent, tracking]);
+	}, [hasBeenSeenAtTop, submitComponentEvent, tracking]);
+
+	useEffect(() => {
+		if (hasBeenSeenAt40Percent) {
+			// For epic view count
+			logEpicView(tracking.abTestName);
+		}
+	}, [hasBeenSeenAt40Percent, tracking]);
 
 	useEffect(() => {
 		if (submitComponentEvent) {
@@ -201,7 +213,13 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 	}
 
 	return (
-		<div data-testid="contributions-liveblog-epic" ref={setNode}>
+		<div
+			data-testid="contributions-liveblog-epic"
+			ref={(node) => {
+				setNodeAtTop(node);
+				setNodeAt40Percent(node);
+			}}
+		>
 			{!!cleanHeading && <div css={yellowHeading}>{cleanHeading}</div>}
 			<section css={container}>
 				<LiveblogEpicBody
