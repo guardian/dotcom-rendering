@@ -137,9 +137,6 @@ export const FollowTagButton = ({
 	);
 };
 
-// Pill-style button (with visible border, pillar-aware colors)
-// Not following: filled with pillar color, white bold text
-// Following: transparent, neutral border, pillar text
 const pillButtonStyles = (isFollowing: boolean) => css`
 	${textSans15}
 	display: inline-flex;
@@ -161,15 +158,14 @@ const pillButtonStyles = (isFollowing: boolean) => css`
 	cursor: pointer;
 
 	svg {
-		width: 16px;
-		height: 16px;
+		width: 24px;
+		height: 24px;
 		fill: ${isFollowing
 			? palette('--follow-button-text')
 			: palette('--follow-button-text-not-following')};
 		stroke: ${isFollowing
 			? palette('--follow-button-text')
 			: palette('--follow-button-text-not-following')};
-		stroke-width: 1px;
 	}
 `;
 
