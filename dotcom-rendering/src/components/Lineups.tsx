@@ -7,6 +7,7 @@ import {
 	textSans15,
 	textSansBold12,
 	textSansBold14,
+	textSansBold15,
 } from '@guardian/source/foundations';
 import type {
 	FootballMatchStats,
@@ -109,6 +110,9 @@ const Title = ({ text, id }: { text: string; id: string }) => (
 			grid-column: home-start / away-end;
 			padding-bottom: ${space[1]}px;
 			${textSansBold14}
+			${from.desktop} {
+				${textSansBold15}
+			}
 		`}
 	>
 		{text}
@@ -187,6 +191,9 @@ const shirtNumber = css`
 	width: ${space[5]}px;
 	${textSansBold14}
 	color: ${palette('--football-match-stat-text')};
+	${from.desktop} {
+		${textSansBold15}
+	}
 `;
 
 const listItem = css`
@@ -203,7 +210,7 @@ const listItem = css`
 
 const playerName = css`
 	${textSans14}
-	${from.tablet} {
+	${from.desktop} {
 		${textSans15}
 	}
 	color: ${palette('--football-match-stat-text')};
