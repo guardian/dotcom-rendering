@@ -530,6 +530,38 @@ test("calculateSpaceUpdates - shrinks middle test with adjacent tests", () => {
 	equal(allMVTs.length, uniqueMVTs.length);
 });
 
+test("calculateSpaceUpdates - dividing tests into non integer group sizes should round them down", () => {
+	const existingAudienceSpace = createMockAudienceSpace({});
+	const tests = [
+		createMockABTest("commercial-test1", {
+			audienceSize: 0.2, // 20%
+			groups: ["control", "variant0", "variant1"], // 3 groups, should lead to 67.66 rounded down to 66 MVTs per group
+		}),
+	];
+
+	const result = calculateSpaceUpdates(existingAudienceSpace, tests);
+
+	// Should have 198 MVT entries total
+	equal(result.size, 198);
+
+	// Check that each group has the correct number of MVTs
+	const controlMVTs = Array.from(result.entries())
+		.filter(([, entry]) => entry.name === "commercial-test1:control")
+		.map(([mvtKey]) => parseInt(mvtKey.split(":")[1] as string));
+	const variant0MVTs = Array.from(result.entries())
+		.filter(([, entry]) => entry.name === "commercial-test1:variant0")
+		.map(([mvtKey]) => parseInt(mvtKey.split(":")[1] as string));
+	const variant1MVTs = Array.from(result.entries())
+		.filter(([, entry]) => entry.name === "commercial-test1:variant1")
+		.map(([mvtKey]) => parseInt(mvtKey.split(":")[1] as string));
+
+	// With 198 MVTs and 3 groups, distribution should be:
+	// control: 66 MVTs, variant0: 66 MVTs, variant1: 66 MVTs
+	equal(controlMVTs.length, 66);
+	equal(variant0MVTs.length, 66);
+	equal(variant1MVTs.length, 66);
+});
+
 test("calculateSpaceUpdates - handles insufficient MVTs when resizing middle test", () => {
 	// Create a scenario where most MVTs are occupied
 	const occupiedMVTs: Record<string, number[]> = {};
