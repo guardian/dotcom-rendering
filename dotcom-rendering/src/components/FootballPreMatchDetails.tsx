@@ -92,10 +92,10 @@ export const FootballPreMatchDetails = ({
 	kickOff,
 	edition,
 }: PreMatchProps) => (
-	<div css={containerCss}>
-		<h3 css={headingCss}>
+	<section css={containerCss}>
+		<h2 css={headingCss}>
 			{homeTeam} vs. {awayTeam}
-		</h3>
+		</h2>
 		<div css={detailsCss}>
 			<span>{league}</span>
 			<span>{venue}</span>
@@ -119,5 +119,5 @@ export const FootballPreMatchDetails = ({
 		>
 			Today's fixtures
 		</LinkButton>
-	</div>
+	</section>
 );
