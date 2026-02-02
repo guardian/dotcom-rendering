@@ -1,5 +1,5 @@
 import { deepEqual, equal, throws } from "node:assert";
-import { test } from "node:test";
+import { afterEach, beforeEach, mock, test } from "node:test";
 import type {
 	AllSpace,
 	AudienceSpace,
@@ -10,6 +10,35 @@ import {
 	calculateAllSpaceUpdates,
 	calculateSpaceUpdates,
 } from "./calculate-mvt-updates.ts";
+import { TestGroupMVTManager } from "./test-group-mvt-manager.ts";
+
+// Spy variables accessible across tests
+let deleteTestGroupSpy: ReturnType<typeof mock.method>;
+let addTestGroupSpy: ReturnType<typeof mock.method>;
+let resizeTestGroupSpy: ReturnType<typeof mock.method>;
+
+// Setup mocks before each test
+beforeEach(() => {
+	deleteTestGroupSpy = mock.method(
+		TestGroupMVTManager.prototype,
+		"deleteTestGroup",
+	);
+	addTestGroupSpy = mock.method(
+		TestGroupMVTManager.prototype,
+		"addTestGroup",
+	);
+	resizeTestGroupSpy = mock.method(
+		TestGroupMVTManager.prototype,
+		"resizeTestGroup",
+	);
+});
+
+// Cleanup mocks after each test
+afterEach(() => {
+	deleteTestGroupSpy.mock.restore();
+	addTestGroupSpy.mock.restore();
+	resizeTestGroupSpy.mock.restore();
+});
 
 // Helper function to create mock ABTest
 function createMockABTest(name: string, options: Partial<ABTest> = {}): ABTest {
@@ -56,6 +85,9 @@ test("calculateSpaceUpdates - handles empty audience space and tests", () => {
 	const result = calculateSpaceUpdates(emptyAudienceSpace, emptyTests);
 
 	equal(result.size, 0);
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 0);
+	equal(resizeTestGroupSpy.mock.callCount(), 0);
 });
 
 test("calculateSpaceUpdates - adds new test groups correctly", () => {
@@ -84,6 +116,10 @@ test("calculateSpaceUpdates - adds new test groups correctly", () => {
 	equal(variantEntry?.name, "commercial-test1:variant");
 	equal(controlEntry?.type, "server");
 	equal(variantEntry?.type, "server");
+
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 2); // 2 groups added
+	equal(resizeTestGroupSpy.mock.callCount(), 0);
 });
 
 test("calculateSpaceUpdates - removes tests no longer present", () => {
@@ -110,6 +146,10 @@ test("calculateSpaceUpdates - removes tests no longer present", () => {
 	equal(testNames.size, 1);
 	equal(testNames.has("commercial-test1"), true);
 	equal(testNames.has("commercial-test2"), false);
+
+	equal(deleteTestGroupSpy.mock.callCount(), 1); // 1 test group deleted (test2:control)
+	equal(addTestGroupSpy.mock.callCount(), 0);
+	equal(resizeTestGroupSpy.mock.callCount(), 2); // 2 groups resized (test1:control and test1:variant)
 });
 
 test("calculateSpaceUpdates - resizes existing test groups", () => {
@@ -134,6 +174,10 @@ test("calculateSpaceUpdates - resizes existing test groups", () => {
 	// Should allocate additional MVTs in ascending order
 	const mvtKeys = Array.from(result.keys()).sort();
 	deepEqual(mvtKeys, ["mvt:0", "mvt:1", "mvt:2", "mvt:3"]);
+
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 0);
+	equal(resizeTestGroupSpy.mock.callCount(), 2); // 2 groups resized
 });
 
 test("calculateSpaceUpdates - handles fractional audience sizes correctly", () => {
@@ -149,6 +193,10 @@ test("calculateSpaceUpdates - handles fractional audience sizes correctly", () =
 
 	// With 0.004 audience size and 2 groups, each group gets 0.002 * 1000 = 2 MVTs
 	equal(result.size, 4); // 2 * 2 groups
+
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 2); // 2 groups added
+	equal(resizeTestGroupSpy.mock.callCount(), 0);
 });
 
 test("calculateSpaceUpdates - handles single group test", () => {
@@ -167,6 +215,10 @@ test("calculateSpaceUpdates - handles single group test", () => {
 
 	const entry = result.get("mvt:0");
 	equal(entry?.name, "commercial-test1:variant");
+
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 1); // 1 group added
+	equal(resizeTestGroupSpy.mock.callCount(), 0);
 });
 
 test("calculateSpaceUpdates - handles multiple tests", () => {
@@ -194,6 +246,10 @@ test("calculateSpaceUpdates - handles multiple tests", () => {
 	equal(testNames.size, 2);
 	equal(testNames.has("commercial-test1"), true);
 	equal(testNames.has("webex-test2"), true);
+
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 3); // 3 groups added (2 + 1)
+	equal(resizeTestGroupSpy.mock.callCount(), 0);
 });
 
 test("calculateSpaceUpdates - preserves expiration dates", () => {
@@ -211,6 +267,10 @@ test("calculateSpaceUpdates - preserves expiration dates", () => {
 
 	const entry = result.get("mvt:0");
 	equal(entry?.exp, Math.floor(new Date(expirationDate).getTime() / 1000));
+
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 1);
+	equal(resizeTestGroupSpy.mock.callCount(), 0);
 });
 
 test("calculateSpaceUpdates - handles client-side tests", () => {
@@ -227,6 +287,10 @@ test("calculateSpaceUpdates - handles client-side tests", () => {
 
 	const entry = result.get("mvt:0");
 	equal(entry?.type, "client");
+
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 1);
+	equal(resizeTestGroupSpy.mock.callCount(), 0);
 });
 
 test("calculateAllSpaceUpdates - handles empty inputs", () => {
@@ -461,6 +525,10 @@ test("calculateSpaceUpdates - resizes middle test with adjacent tests", () => {
 	// Each group should have 3 MVTs
 	equal(test2ControlMVTs.length, 3);
 	equal(test2VariantMVTs.length, 3);
+
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 0);
+	equal(resizeTestGroupSpy.mock.callCount(), 2); // 2 groups resized (test2:control and test2:variant)
 });
 
 test("calculateSpaceUpdates - shrinks middle test with adjacent tests", () => {
@@ -528,6 +596,10 @@ test("calculateSpaceUpdates - shrinks middle test with adjacent tests", () => {
 	);
 	const uniqueMVTs = [...new Set(allMVTs)];
 	equal(allMVTs.length, uniqueMVTs.length);
+
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 0);
+	equal(resizeTestGroupSpy.mock.callCount(), 2); // 2 groups resized (test2:control and test2:variant)
 });
 
 test("calculateSpaceUpdates - dividing tests into non integer group sizes should round them down", () => {
@@ -560,6 +632,10 @@ test("calculateSpaceUpdates - dividing tests into non integer group sizes should
 	equal(controlMVTs.length, 66);
 	equal(variant0MVTs.length, 66);
 	equal(variant1MVTs.length, 66);
+
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 3); // 3 groups added
+	equal(resizeTestGroupSpy.mock.callCount(), 0);
 });
 
 test("calculateSpaceUpdates - handles insufficient MVTs when resizing middle test", () => {
