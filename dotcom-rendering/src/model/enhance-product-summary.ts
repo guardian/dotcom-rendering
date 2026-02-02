@@ -22,7 +22,7 @@ export const allowedPageIds: string[] = [
 	'thefilter/2025/dec/28/best-running-watches-tested-uk',
 	'thefilter/2025/mar/02/best-air-fryers',
 	'thefilter/2024/nov/14/the-8-best-video-doorbells-tried-and-tested',
-	'thefilter/2024/nov/26/best-robot-vacuum-mop,',
+	'thefilter/2024/nov/26/best-robot-vacuum-mop',
 	'thefilter/2025/sep/19/best-led-red-light-therapy-face-masks',
 	'thefilter/2024/dec/27/best-electric-blankets-heated-throws',
 	'technology/article/2025/feb/13/best-apple-iphone',
