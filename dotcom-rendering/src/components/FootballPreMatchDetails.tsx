@@ -13,8 +13,11 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
-import type { EditionId } from '../lib/edition';
-import { formatMatchKickOffTime } from '../lib/formatDate';
+import {
+	type EditionId,
+	getLocaleFromEdition,
+	getTimeZoneFromEdition,
+} from '../lib/edition';
 import { palette } from '../palette';
 
 const containerCss = css`
@@ -52,6 +55,25 @@ const kickOffCss = css`
 		${headlineBold20}
 	}
 `;
+
+const formatMatchKickOffTime = (kickOff: Date, edition: EditionId): string => {
+	const dateFormatter = new Intl.DateTimeFormat(
+		getLocaleFromEdition(edition),
+		{
+			weekday: 'long',
+			day: 'numeric',
+			month: 'short',
+			year: 'numeric',
+			hour: 'numeric',
+			minute: 'numeric',
+			hour12: true,
+			timeZoneName: 'short',
+			timeZone: getTimeZoneFromEdition(edition),
+		},
+	);
+
+	return dateFormatter.format(kickOff);
+};
 
 type PreMatchProps = {
 	homeTeam: string;
