@@ -121,11 +121,11 @@ export const decideDesign = ({ design }: Partial<FEFormat>): ArticleDesign => {
 			return ArticleDesign.Profile;
 		case 'CrosswordDesign':
 			return ArticleDesign.Crossword;
-		case 'HostedArticle':
+		case 'HostedArticleDesign':
 			return ArticleDesign.HostedArticle;
-		case 'HostedVideo':
+		case 'HostedVideoDesign':
 			return ArticleDesign.HostedVideo;
-		case 'HostedGallery':
+		case 'HostedGalleryDesign':
 			return ArticleDesign.HostedGallery;
 		default:
 			return ArticleDesign.Standard;

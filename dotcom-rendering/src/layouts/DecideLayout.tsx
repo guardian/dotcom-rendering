@@ -7,6 +7,7 @@ import { CommentLayout } from './CommentLayout';
 import { CrosswordLayout } from './CrosswordLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 import { GalleryLayout } from './GalleryLayout';
+import { HostedArticleLayout } from './HostedArticleLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
@@ -341,6 +342,13 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							NAV={NAV}
 							renderingTarget={renderingTarget}
 							serverTime={serverTime}
+						/>
+					);
+				case ArticleDesign.HostedArticle:
+					return (
+						<HostedArticleLayout
+							content={article}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				default:
