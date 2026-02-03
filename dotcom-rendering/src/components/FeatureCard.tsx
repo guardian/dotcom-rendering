@@ -709,7 +709,7 @@ export const FeatureCard = ({
 										 */}
 										<div>
 											<CardHeadline
-												headlineText={headlineText}
+												headlineText={`${headlineText}...`}
 												format={format}
 												fontSizes={headlineSizes}
 												showQuotes={showQuotes}
