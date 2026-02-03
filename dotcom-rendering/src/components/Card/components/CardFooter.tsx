@@ -55,7 +55,6 @@ const labStyles = css`
 `;
 type Props = {
 	format: ArticleFormat;
-	showLivePlayable: boolean;
 	age?: JSX.Element;
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
@@ -68,7 +67,6 @@ type Props = {
 
 export const CardFooter = ({
 	format,
-	showLivePlayable,
 	age,
 	commentCount,
 	cardBranding,
@@ -78,8 +76,6 @@ export const CardFooter = ({
 	isStorylines,
 	hidePill = false,
 }: Props) => {
-	if (showLivePlayable) return null;
-
 	const shouldShowBranding =
 		format.theme === ArticleSpecial.Labs && !!cardBranding;
 

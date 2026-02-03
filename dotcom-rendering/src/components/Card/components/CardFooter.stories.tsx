@@ -23,7 +23,6 @@ export const WithAge = {
 			design: ArticleDesign.Comment,
 			theme: Pillar.Opinion,
 		},
-		showLivePlayable: false,
 		age: <p>19h ago</p>,
 	},
 } satisfies Story;

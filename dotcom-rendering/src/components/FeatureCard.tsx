@@ -791,7 +791,6 @@ export const FeatureCard = ({
 													/>
 												) : undefined
 											}
-											showLivePlayable={false}
 											isNewsletter={isNewsletter}
 											mainMedia={mainMedia}
 										/>

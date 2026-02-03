@@ -1210,7 +1210,7 @@ export const Card = ({
 								/>
 							)}
 
-							{!isOpinionCardWithAvatar && (
+							{!isOpinionCardWithAvatar && !showLivePlayable && (
 								<CardFooter
 									format={format}
 									age={decideAge()}
@@ -1221,7 +1221,6 @@ export const Card = ({
 										) : undefined
 									}
 									isStorylines={isStorylines}
-									showLivePlayable={showLivePlayable}
 									mainMedia={mainMedia}
 									hidePill={isGallerySecondaryOnward}
 								/>
@@ -1309,12 +1308,11 @@ export const Card = ({
 
 				{decideOuterSublinks()}
 
-				{isOpinionCardWithAvatar && (
+				{isOpinionCardWithAvatar && !showLivePlayable && (
 					<CardFooter
 						format={format}
 						age={decideAge()}
 						commentCount={<CommentCount />}
-						showLivePlayable={showLivePlayable}
 						shouldReserveSpace={{
 							mobile: avatarPosition.mobile === 'bottom',
 							desktop: avatarPosition.desktop === 'bottom',
