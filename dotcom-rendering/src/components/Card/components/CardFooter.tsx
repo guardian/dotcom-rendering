@@ -5,11 +5,7 @@ import {
 	space,
 	textSansBold12,
 } from '@guardian/source/foundations';
-import {
-	ArticleDesign,
-	type ArticleFormat,
-	ArticleSpecial,
-} from '../../../lib/articleFormat';
+import { type ArticleFormat, ArticleSpecial } from '../../../lib/articleFormat';
 import type { CardFooterMedia, MainMedia } from '../../../types/mainMedia';
 import { CardPill } from '../../CardPill';
 
@@ -98,7 +94,6 @@ export const CardFooter = ({
 					format={format}
 					isNewsletter={isNewsletter}
 					mainMedia={mainMedia}
-					isVideoArticle={format.design === ArticleDesign.Video}
 				/>
 			</footer>
 		);
