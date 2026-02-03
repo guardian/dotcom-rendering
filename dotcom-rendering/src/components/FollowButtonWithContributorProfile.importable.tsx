@@ -104,7 +104,7 @@ export const FollowButtonWithContributorProfile = ({
 	return (
 		<div css={containerStyles}>
 			<div css={topRowStyles}>
-				{avatarUrl && (
+				{!!avatarUrl && (
 					<div css={avatarContainerStyles}>
 						<Avatar
 							src={avatarUrl}
@@ -116,7 +116,7 @@ export const FollowButtonWithContributorProfile = ({
 				)}
 				<div css={contentStyles}>
 					<h3 css={titleStyles}>{displayName}</h3>
-					{sanitizedBio && (
+					{!!sanitizedBio && (
 						<div
 							css={bioStyles}
 							dangerouslySetInnerHTML={{ __html: sanitizedBio }}
