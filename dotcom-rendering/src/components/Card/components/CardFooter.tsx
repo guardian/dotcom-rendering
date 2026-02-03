@@ -11,9 +11,8 @@ import { CardPill } from '../../CardPill';
 
 const contentStyles = css`
 	margin-top: auto;
-	padding-top: ${space[1]}px;
 	display: flex;
-	justify-content: 'flex-start';
+	justify-content: flex-start;
 	width: fit-content;
 	align-items: center;
 	${textSansBold12}
@@ -36,6 +35,10 @@ const contentStyles = css`
 			padding-left: ${space[1]}px;
 		}
 	}
+`;
+
+const contentTopPaddingStyles = css`
+	padding-top: ${space[1]}px;
 `;
 
 const reserveSpaceStyles = (mobile: boolean, desktop: boolean) => css`
@@ -84,6 +87,7 @@ export const CardFooter = ({
 		return (
 			<footer css={contentStyles}>
 				{shouldShowBranding && cardBranding}
+
 				{/**
 				 * Usually, we either display the pill or the footer,
 				 * but if the card appears in the storylines section on tag pages
@@ -108,6 +112,7 @@ export const CardFooter = ({
 		<footer
 			css={[
 				contentStyles,
+				contentTopPaddingStyles,
 				shouldReserveSpace &&
 					reserveSpaceStyles(
 						shouldReserveSpace.mobile,
