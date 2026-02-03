@@ -92,7 +92,7 @@ const containsText = (html: string) => {
 	return htmlWithoutTags.length > 0;
 };
 
-export const ContributorProfile = ({
+export const FollowButtonWithContributorProfile = ({
 	id,
 	displayName,
 	avatarUrl,
