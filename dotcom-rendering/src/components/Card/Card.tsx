@@ -1221,6 +1221,11 @@ export const Card = ({
 											<LabsBranding />
 										) : undefined
 									}
+									mainMedia={
+										!isGallerySecondaryOnward
+											? mainMedia
+											: undefined
+									}
 								/>
 							)}
 							{showLivePlayable &&
