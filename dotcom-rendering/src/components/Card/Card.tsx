@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import { between, from, space, until } from '@guardian/source/foundations';
-import { Hide, Link, SvgCamera } from '@guardian/source/react-components';
+import { Hide, Link } from '@guardian/source/react-components';
 import {
 	ArticleDesign,
 	type ArticleFormat,
@@ -35,6 +35,7 @@ import { CardCommentCount } from '../CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from '../CardHeadline';
 import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
+import { CardPill } from '../CardPill';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
 import { Pill } from '../Pill';
@@ -245,6 +246,17 @@ const podcastImageStyles = (
 	`;
 };
 
+const pillWrapperStyles = css`
+	margin-top: auto;
+	display: flex;
+`;
+
+const storyLinesMetaStyles = css`
+	flex-direction: column;
+	gap: ${space[1]}px;
+	align-items: flex-start;
+`;
+
 const getMedia = ({
 	imageUrl,
 	imageAltText,
@@ -336,14 +348,6 @@ const decideSublinkPosition = (
 
 	return alignment === 'vertical' ? 'inner' : 'outer';
 };
-
-const liveBulletStyles = css`
-	width: 9px;
-	height: 9px;
-	border-radius: 50%;
-	background-color: ${palette('--pill-bullet')};
-	margin-right: ${space[1]}px;
-`;
 
 export const Card = ({
 	linkTo,
@@ -488,85 +492,6 @@ export const Card = ({
 				</Island>
 			</Link>
 		);
-
-	const MediaOrNewsletterPill = () => (
-		<div
-			css={css`
-				margin-top: auto;
-				display: flex;
-				${isStorylines &&
-				`
-					flex-direction: column;
-					gap: ${space[1]}px;
-					align-items: flex-start;
-				`}
-			`}
-		>
-			{/* Usually, we either display the pill or the footer,
-				but if the card appears in the storylines section on tag pages
-				then we do want to display the date on these cards as well as the media pill.
-			*/}
-			{isStorylines && (
-				<CardFooter
-					format={format}
-					age={decideAge()}
-					commentCount={<CommentCount />}
-					cardBranding={
-						isOnwardContent ? <LabsBranding /> : undefined
-					}
-					showLivePlayable={showLivePlayable}
-				/>
-			)}
-
-			{mainMedia?.type === 'YoutubeVideo' && isVideoArticle && (
-				<>
-					{mainMedia.isLive ? (
-						<Pill
-							content="Live"
-							icon={<div css={liveBulletStyles} />}
-						/>
-					) : (
-						<Pill
-							content={secondsToDuration(mainMedia.duration)}
-							icon={<SvgMediaControlsPlay width={18} />}
-							prefix="Video"
-						/>
-					)}
-				</>
-			)}
-			{mainMedia?.type === 'Audio' && (
-				<Pill
-					content={mainMedia.duration}
-					icon={<SvgMediaControlsPlay width={18} />}
-					prefix="Podcast"
-				/>
-			)}
-			{mainMedia?.type === 'Gallery' && (
-				<Pill
-					content={mainMedia.count}
-					icon={<SvgCamera />}
-					prefix="Gallery"
-				/>
-			)}
-			{mainMedia?.type === 'SelfHostedVideo' &&
-				(format.design === ArticleDesign.Video ? (
-					<Pill
-						content=""
-						icon={<SvgMediaControlsPlay width={18} />}
-						prefix="Video"
-					/>
-				) : format.design === ArticleDesign.Audio ? (
-					<Pill
-						content=""
-						icon={<SvgMediaControlsPlay width={18} />}
-						prefix="Podcast"
-					/>
-				) : format.design === ArticleDesign.Gallery ? (
-					<Pill content="" icon={<SvgCamera />} prefix="Gallery" />
-				) : null)}
-			{isNewsletter && <Pill content="Newsletter" />}
-		</div>
-	);
 
 	if (snapData?.embedHtml) {
 		return (
@@ -1310,7 +1235,26 @@ export const Card = ({
 												isOnwardContent && (
 													<LabsBranding />
 												)}
-											<MediaOrNewsletterPill />
+											<div
+												css={[
+													pillWrapperStyles,
+													isStorylines &&
+														storyLinesMetaStyles,
+												]}
+											>
+												{/**
+												 * Usually, we either display the pill or the footer,
+												 * but if the card appears in the storylines section on tag pages
+												 * then we do want to display the date on these cards as well as the media pill.
+												 * */}
+												{isStorylines && decideAge()}
+
+												<CardPill
+													format={format}
+													mainMedia={mainMedia}
+													isNewsletter={isNewsletter}
+												/>
+											</div>
 										</>
 									) : (
 										<CardFooter
