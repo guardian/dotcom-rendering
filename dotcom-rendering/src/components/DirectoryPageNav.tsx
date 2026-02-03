@@ -33,42 +33,6 @@ interface DirectoryPageNavConfig {
 
 const configs = [
 	{
-		pageIds: ['football/women-s-euro-2025'],
-		textColor: palette.neutral[100],
-		backgroundColor: palette.news[400],
-		title: {
-			label: "Women's Euro 2025",
-			link: '/football/women-s-euro-2025',
-		},
-		links: [
-			{
-				label: 'Fixtures',
-				href: '/football/women-s-euro-2025/fixtures',
-				selectedSlug: 'fixtures',
-			},
-			{
-				label: 'Tables',
-				href: '/football/women-s-euro-2025/overview',
-				selectedSlug: 'tables',
-			},
-			{
-				label: 'Top scorers',
-				href: '/p/x2e3za',
-				selectedSlug: undefined,
-			},
-			{
-				label: 'Players guide',
-				href: '/p/x27nz8',
-				selectedSlug: undefined,
-			},
-			{
-				label: 'Full coverage',
-				href: '/football/women-s-euro-2025',
-				selectedSlug: undefined,
-			},
-		],
-	},
-	{
 		pageIds: ['pageId1', 'pageId2'],
 		textColor: palette.neutral[7],
 		backgroundColor: '#CCCCCC',

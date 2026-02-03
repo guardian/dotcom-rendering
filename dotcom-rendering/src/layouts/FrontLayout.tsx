@@ -250,7 +250,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				id="maincontent"
 				css={hasPageSkin && pageSkinContainer}
 			>
-				<DirectoryPageNav selected="none" pageId={front.pageId} />
 				{isNetworkFrontPageId(pageId) && (
 					<Island priority="enhancement" defer={{ until: 'idle' }}>
 						<EditionSwitcherBanner
@@ -259,6 +258,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						/>
 					</Island>
 				)}
+				<DirectoryPageNav selected="none" pageId={pageId} />
 
 				{filteredCollections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
