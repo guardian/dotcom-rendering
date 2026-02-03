@@ -5,11 +5,9 @@ import {
 	space,
 	textSansBold12,
 } from '@guardian/source/foundations';
-import { SvgCamera } from '@guardian/source/react-components';
-import { Pill } from '../../../components/Pill';
-import { SvgMediaControlsPlay } from '../../../components/SvgMediaControlsPlay';
 import { type ArticleFormat, ArticleSpecial } from '../../../lib/articleFormat';
-import { secondsToDuration } from '../../../lib/formatTime';
+import type { MainMedia } from '../../../types/mainMedia';
+import { CardPill } from '../../CardPill';
 
 const contentStyles = css`
 	margin-top: auto;
@@ -52,12 +50,6 @@ const labStyles = css`
 	margin-top: ${space[1]}px;
 `;
 
-type MainMedia =
-	| { type: 'YoutubeVideo'; duration: number }
-	| { type: 'SelfHostedVideo'; duration: number }
-	| { type: 'Audio'; duration: string }
-	| { type: 'Gallery'; count: string };
-
 type Props = {
 	format: ArticleFormat;
 	showLivePlayable: boolean;
@@ -85,48 +77,20 @@ export const CardFooter = ({
 		return <footer css={labStyles}>{cardBranding}</footer>;
 	}
 
-	if (mainMedia?.type === 'YoutubeVideo') {
-		return (
-			<footer css={contentStyles}>
-				<Pill
-					content={
-						<time>{secondsToDuration(mainMedia.duration)}</time>
-					}
-					prefix="Video"
-					icon={<SvgMediaControlsPlay width={18} />}
-				/>
-			</footer>
-		);
-	}
+	const shouldShowPill =
+		mainMedia?.type === 'YoutubeVideo' ||
+		mainMedia?.type === 'Audio' ||
+		mainMedia?.type === 'Gallery' ||
+		isNewsletter;
 
-	if (mainMedia?.type === 'Audio') {
+	if (shouldShowPill) {
 		return (
 			<footer css={contentStyles}>
-				<Pill
-					content={<time>{mainMedia.duration}</time>}
-					prefix="Podcast"
-					icon={<SvgMediaControlsPlay width={18} />}
+				<CardPill
+					mainMedia={mainMedia}
+					isNewsletter={isNewsletter}
+					format={format}
 				/>
-			</footer>
-		);
-	}
-
-	if (mainMedia?.type === 'Gallery') {
-		return (
-			<footer css={contentStyles}>
-				<Pill
-					content={mainMedia.count}
-					prefix="Gallery"
-					icon={<SvgCamera />}
-				/>
-			</footer>
-		);
-	}
-
-	if (isNewsletter) {
-		return (
-			<footer css={contentStyles}>
-				<Pill content="Newsletter" />
 			</footer>
 		);
 	}
