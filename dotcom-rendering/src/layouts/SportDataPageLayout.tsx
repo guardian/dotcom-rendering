@@ -78,6 +78,9 @@ const SportsPage = ({
 				return (
 					<FootballMatchInfoPage
 						matchStats={sportData.matchStats}
+						matchInfo={sportData.matchInfo}
+						competitionName={sportData.competitionName}
+						edition={sportData.editionId}
 						table={sportData.group}
 					/>
 				);

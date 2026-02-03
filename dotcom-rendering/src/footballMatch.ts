@@ -1,7 +1,7 @@
 import { isOneOf } from '@guardian/libs';
 import { listParse, replaceLiveMatchStatus } from './footballMatches';
 import type {
-	FEFootballMatch,
+	FEFootballMatchStats,
 	FEFootballPlayer,
 	FEFootballPlayerEvent,
 	FEFootballTeam,
@@ -113,7 +113,7 @@ const parseTeam = (
 	}));
 
 export const parse = (
-	feFootballMatch: FEFootballMatch,
+	feFootballMatch: FEFootballMatchStats,
 ): Result<ParserError, FootballMatch> =>
 	parseTeam(feFootballMatch.homeTeam).flatMap((homeTeam) =>
 		parseTeam(feFootballMatch.awayTeam).map((awayTeam) => ({
