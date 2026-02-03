@@ -15,7 +15,6 @@ import { CardPill } from '../../CardPill';
 
 const contentStyles = css`
 	margin-top: auto;
-	padding-top: ${space[1]}px;
 	display: flex;
 	justify-content: flex-start;
 	width: fit-content;
@@ -42,6 +41,9 @@ const contentStyles = css`
 	}
 `;
 
+const contentPaddingStyles = css`
+	padding-top: ${space[1]}px;
+`;
 const reserveSpaceStyles = (mobile: boolean, desktop: boolean) => css`
 	min-height: ${mobile ? '14px' : 0};
 
@@ -110,6 +112,7 @@ export const CardFooter = ({
 		<footer
 			css={[
 				contentStyles,
+				contentPaddingStyles,
 				shouldReserveSpace &&
 					reserveSpaceStyles(
 						shouldReserveSpace.mobile,
