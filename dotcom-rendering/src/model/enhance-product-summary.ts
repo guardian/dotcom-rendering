@@ -25,7 +25,7 @@ export const allowedPageIds: string[] = [
 	'thefilter/2024/nov/26/best-robot-vacuum-mop',
 	'thefilter/2025/sep/19/best-led-red-light-therapy-face-masks',
 	'thefilter/2024/dec/27/best-electric-blankets-heated-throws',
-	'technology/article/2025/feb/13/best-apple-iphone',
+	'technology/article/2024/jul/08/the-best-apple-iphones-in-2024-tested-reviewed-and-ranked',
 	'thefilter/2025/dec/31/best-cross-trainers-ellipticals-uk',
 	'thefilter/2026/jan/02/best-concealer-tested-uk',
 	'thefilter/2025/jun/10/best-apple-watch',
