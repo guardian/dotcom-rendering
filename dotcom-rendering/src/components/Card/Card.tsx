@@ -245,17 +245,6 @@ const podcastImageStyles = (
 	`;
 };
 
-const pillWrapperStyles = css`
-	margin-top: auto;
-	display: flex;
-`;
-
-const storyLinesMetaStyles = css`
-	flex-direction: column;
-	gap: ${space[1]}px;
-	align-items: flex-start;
-`;
-
 const getMedia = ({
 	imageUrl,
 	imageAltText,
@@ -517,8 +506,6 @@ export const Card = ({
 * padding to these cards to keep the text readable.
 -     */
 	const isMediaCardOrNewsletter = isMediaCard(format) || isNewsletter;
-
-	const showPill = isMediaCardOrNewsletter && !isGallerySecondaryOnward;
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -1224,7 +1211,7 @@ export const Card = ({
 								/>
 							)}
 
-							{!isOpinionCardWithAvatar && (
+							{!isOpinionCardWithAvatar && !showLivePlayable && (
 								<CardFooter
 									format={format}
 									age={decideAge()}
@@ -1234,7 +1221,6 @@ export const Card = ({
 											<LabsBranding />
 										) : undefined
 									}
-									showLivePlayable={showLivePlayable}
 								/>
 							)}
 							{showLivePlayable &&
@@ -1320,12 +1306,11 @@ export const Card = ({
 
 				{decideOuterSublinks()}
 
-				{isOpinionCardWithAvatar && (
+				{isOpinionCardWithAvatar && !showLivePlayable && (
 					<CardFooter
 						format={format}
 						age={decideAge()}
 						commentCount={<CommentCount />}
-						showLivePlayable={showLivePlayable}
 						shouldReserveSpace={{
 							mobile: avatarPosition.mobile === 'bottom',
 							desktop: avatarPosition.desktop === 'bottom',

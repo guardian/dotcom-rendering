@@ -286,7 +286,6 @@ export const YoutubeAtomFeatureCardOverlay = ({
 									/>
 								) : undefined
 							}
-							showLivePlayable={false}
 						/>
 					)}
 				</div>
