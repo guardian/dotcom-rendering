@@ -91,12 +91,8 @@ const roleCss = {
 				((-100vw + (var(--grid-container-max-width) - 42px)) / 2) +
 					var(--half-scrollbar-width, 7.5px)
 			);
-			--grid-body-column-left: calc(
-				(var(--grid-container-left-margin, 0px) * -1) +
-					var(--grid-left-col-width, 0px)
-			);
 
-			margin-left: calc(var(--grid-container-left-margin));
+			margin-left: var(--grid-container-left-margin);
 		}
 		${from.desktop} {
 			--grid-container-max-width: 980px;
@@ -104,10 +100,6 @@ const roleCss = {
 		${from.leftCol} {
 			--grid-container-max-width: 1140px;
 			--grid-left-col-width: 140px;
-			--grid-body-column-left: calc(
-				(var(--grid-container-left-margin, 0px) * -1) +
-					var(--grid-left-col-width, 0px) + 21px
-			);
 		}
 		${from.wide} {
 			--grid-container-max-width: 1300px;
