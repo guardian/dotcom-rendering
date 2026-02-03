@@ -14,7 +14,7 @@ export const parseDate = (a: string): Result<string, Date> => {
 	const d = new Date(a);
 
 	if (d.toString() === 'Invalid Date') {
-		return error(`${String(a)} isn't a valid Date`);
+		return error(`${a} isn't a valid Date`);
 	}
 
 	return ok(d);
