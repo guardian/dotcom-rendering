@@ -65,35 +65,7 @@ export const CardPill = ({
 					prefix="Video"
 				/>
 			);
-
-		case 'SelfHostedVideo':
-			switch (format.design) {
-				case ArticleDesign.Video:
-					return (
-						<Pill
-							content=""
-							icon={<SvgMediaControlsPlay width={18} />}
-							prefix="Video"
-						/>
-					);
-				case ArticleDesign.Audio:
-					return (
-						<Pill
-							content=""
-							icon={<SvgMediaControlsPlay width={18} />}
-							prefix="Podcast"
-						/>
-					);
-				case ArticleDesign.Gallery:
-					return (
-						<Pill
-							content=""
-							icon={<SvgCamera />}
-							prefix="Gallery"
-						/>
-					);
-				default:
-					return null;
-			}
+		default:
+			return null;
 	}
 };
