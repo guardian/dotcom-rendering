@@ -51,4 +51,5 @@ export type FEFootballMatchPage = FEFootballDataPage & {
 	matchInfo: FEFootballMatch;
 	group?: FEGroupSummary;
 	competitionName: string;
+	matchUrl: string;
 };
