@@ -85,7 +85,7 @@ type PreMatchProps = {
 	homeTeam: string;
 	awayTeam: string;
 	league: string;
-	venue: string;
+	venue?: string;
 	kickOff: Date;
 	edition: EditionId;
 };
@@ -105,7 +105,7 @@ export const FootballPreMatchDetails = ({
 		<div css={detailsCss}>
 			<div>
 				<span css={leagueCss}>{league}</span>
-				<span css={venueCss}>{venue}</span>
+				{!!venue && <span css={venueCss}>{venue}</span>}
 			</div>
 			<time css={kickOffCss}>
 				{formatMatchKickOffTime(kickOff, edition)}
