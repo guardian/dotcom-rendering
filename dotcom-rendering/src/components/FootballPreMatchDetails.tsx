@@ -4,8 +4,6 @@ import {
 	headlineBold17,
 	headlineBold20,
 	space,
-	textSans14,
-	textSans15,
 	textSansBold14,
 	textSansBold15,
 } from '@guardian/source/foundations';
@@ -38,14 +36,22 @@ const headingCss = css`
 `;
 
 const detailsCss = css`
-	${textSans14}
+	${textSansBold14}
 	display: flex;
 	flex-direction: column;
-	gap: ${space[1]}px;
-	margin: ${space[2]}px 0 ${space[3]}px;
+	gap: ${space[2]}px;
 	${from.desktop} {
-		${textSans15}
+		${textSansBold15}
 	}
+`;
+
+const leagueCss = css`
+	display: block;
+`;
+
+const venueCss = css`
+	display: block;
+	font-weight: 400;
 `;
 
 const kickOffCss = css`
@@ -97,27 +103,31 @@ export const FootballPreMatchDetails = ({
 			{homeTeam} vs. {awayTeam}
 		</h2>
 		<div css={detailsCss}>
-			<span>{league}</span>
-			<span>{venue}</span>
+			<div>
+				<span css={leagueCss}>{league}</span>
+				<span css={venueCss}>{venue}</span>
+			</div>
 			<time css={kickOffCss}>
 				{formatMatchKickOffTime(kickOff, edition)}
 			</time>
+			<div>
+				<LinkButton
+					href="/football/fixtures"
+					size="xsmall"
+					priority="tertiary"
+					icon={<SvgArrowRightStraight />}
+					iconSide="right"
+					theme={{
+						textTertiary: palette('--football-pre-match-button'),
+						borderTertiary: palette('--football-pre-match-button'),
+						backgroundTertiaryHover: palette(
+							'--football-pre-match-button-hover',
+						),
+					}}
+				>
+					Today's fixtures
+				</LinkButton>
+			</div>
 		</div>
-		<LinkButton
-			href="/football/fixtures"
-			size="xsmall"
-			priority="tertiary"
-			icon={<SvgArrowRightStraight />}
-			iconSide="right"
-			theme={{
-				textTertiary: palette('--football-pre-match-button'),
-				borderTertiary: palette('--football-pre-match-button'),
-				backgroundTertiaryHover: palette(
-					'--football-pre-match-button-hover',
-				),
-			}}
-		>
-			Today's fixtures
-		</LinkButton>
 	</section>
 );
