@@ -269,8 +269,8 @@ export const CardPicture = ({
 				css={[block, isCircular && circularStyles]}
 				loading={loading}
 				/**
-				 * Feature cards typically have content overlaid on the image. If we ignore the image,
-				 * this content will also be ignored in Chromatic snapshots.
+				 * Feature cards typically have content overlaid on the image. In Chromatic, we don't want
+				 * to ignore the image on feature cards, as any change in card content will likely be ignored too.
 				 */
 				data-chromatic={
 					imageSize.startsWith('feature') ? undefined : 'ignore'
