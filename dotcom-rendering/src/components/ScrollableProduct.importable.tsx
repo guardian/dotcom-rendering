@@ -202,6 +202,14 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 		};
 	};
 
+	const debounceEvent = (callback: () => void, delay = 200) => {
+		let timeout: ReturnType<typeof setTimeout>;
+		return () => {
+			clearTimeout(timeout);
+			timeout = setTimeout(callback, delay);
+		};
+	};
+
 	/**
 	 * --- COPIED FROM ScrollableCarousel ---
 	 * Scrolls the carousel to a certain position when a card gains focus.
@@ -293,10 +301,9 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 		const scrollLeft = carouselElement.scrollLeft;
 		const maxScrollLeft =
 			carouselElement.scrollWidth - carouselElement.clientWidth;
-		const cardWidth = carouselElement.querySelector('li')?.offsetWidth ?? 0;
 
-		setPreviousButtonEnabled(scrollLeft > cardWidth / 2);
-		setNextButtonEnabled(scrollLeft < maxScrollLeft - cardWidth / 2);
+		setPreviousButtonEnabled(scrollLeft > 10);
+		setNextButtonEnabled(scrollLeft < maxScrollLeft - 10);
 	}, []);
 
 	const throttledCardCount = useMemo(
@@ -305,7 +312,7 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 	);
 
 	const throttledButtonVisibility = useMemo(
-		() => throttleEvent(updateButtonVisibilityOnScroll),
+		() => debounceEvent(updateButtonVisibilityOnScroll),
 		[updateButtonVisibilityOnScroll],
 	);
 
