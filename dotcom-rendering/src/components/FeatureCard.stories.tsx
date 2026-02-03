@@ -249,6 +249,14 @@ export const Podcast = {
 			},
 			duration: '55:09',
 		},
+		articleMainMedia: {
+			type: 'Audio',
+			podcastImage: {
+				src: 'https://media.guim.co.uk/be8830289638b0948b1ba4ade906e540554ada88/0_0_5000_3000/master/5000.jpg',
+				altText: 'Football Weekly',
+			},
+			duration: '55:09',
+		},
 	},
 } satisfies Story;
 
@@ -270,6 +278,10 @@ export const Gallery = {
 			altText: 'alt text',
 		},
 		mainMedia: {
+			type: 'Gallery',
+			count: '12',
+		},
+		articleMainMedia: {
 			type: 'Gallery',
 			count: '12',
 		},
@@ -297,6 +309,18 @@ export const YoutubeVideo = {
 			altText: 'alt text',
 		},
 		mainMedia: {
+			type: 'YoutubeVideo',
+			id: 'video-id',
+			videoId: 'video-id',
+			height: 1080,
+			width: 1920,
+			origin: 'origin',
+			title: 'Video Title',
+			duration: 120,
+			expired: false,
+			image: 'https://media.guim.co.uk/f2aedd24e5414073a653f68112e0ad070c6f4a2b/254_0_7493_4500/master/7493.jpg',
+		},
+		articleMainMedia: {
 			type: 'YoutubeVideo',
 			id: 'video-id',
 			videoId: 'video-id',
