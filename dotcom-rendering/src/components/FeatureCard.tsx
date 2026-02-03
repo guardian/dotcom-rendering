@@ -385,6 +385,7 @@ export type Props = {
 	isImmersive?: boolean;
 	isStorylines?: boolean;
 	starRatingSize: RatingSizeType;
+	articleMainMedia?: MainMedia;
 };
 
 export const FeatureCard = ({
@@ -423,6 +424,7 @@ export const FeatureCard = ({
 	isImmersive = false,
 	isStorylines = false,
 	starRatingSize,
+	articleMainMedia,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -800,7 +802,7 @@ export const FeatureCard = ({
 												) : undefined
 											}
 											isNewsletter={isNewsletter}
-											mainMedia={mainMedia}
+											mainMedia={articleMainMedia}
 										/>
 
 										{!isImmersive &&

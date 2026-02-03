@@ -160,6 +160,7 @@ export type Props = {
 	isStorylines?: boolean;
 	starRatingSize?: RatingSizeType;
 	isInPersonalisationVariant?: boolean;
+	articleMainMedia?: MainMedia;
 };
 
 const waveformWrapper = (
@@ -399,6 +400,7 @@ export const Card = ({
 	isStorylines = false,
 	starRatingSize = 'small',
 	isInPersonalisationVariant,
+	articleMainMedia,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -1223,7 +1225,7 @@ export const Card = ({
 									}
 									mainMedia={
 										!isGallerySecondaryOnward
-											? mainMedia
+											? articleMainMedia
 											: undefined
 									}
 									isNewsletter={isNewsletter}

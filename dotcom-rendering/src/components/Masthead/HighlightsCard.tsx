@@ -29,6 +29,7 @@ export type HighlightsCardProps = {
 	byline?: string;
 	isExternalLink: boolean;
 	starRating?: Rating;
+	articleMainMedia?: MainMedia;
 };
 
 const container = css`
@@ -126,6 +127,7 @@ export const HighlightsCard = ({
 	byline,
 	isExternalLink,
 	starRating,
+	articleMainMedia,
 }: HighlightsCardProps) => {
 	const isMediaCard = isMedia(format);
 
@@ -176,7 +178,10 @@ export const HighlightsCard = ({
 
 					{!!mainMedia && isMediaCard && (
 						<div>
-							<CardPill format={format} mainMedia={mainMedia} />
+							<CardPill
+								format={format}
+								mainMedia={articleMainMedia}
+							/>
 						</div>
 					)}
 				</div>
