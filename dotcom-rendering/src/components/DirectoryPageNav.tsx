@@ -17,7 +17,7 @@ type Props = {
 };
 
 interface DirectoryPageNavConfig {
-	sectionSlug: string;
+	pageIds: string[];
 	textColor: string;
 	backgroundColor: string;
 	title: { label: string; link: string };
@@ -33,7 +33,7 @@ interface DirectoryPageNavConfig {
 
 const configs = [
 	{
-		sectionSlug: 'women-s-euro-2025',
+		pageIds: ['football/women-s-euro-2025'],
 		textColor: palette.neutral[100],
 		backgroundColor: palette.news[400],
 		title: {
@@ -69,7 +69,7 @@ const configs = [
 		],
 	},
 	{
-		sectionSlug: 'winter-olympics-2026',
+		pageIds: ['pageId1', 'pageId2'],
 		textColor: palette.neutral[7],
 		backgroundColor: '#CCCCCC',
 		title: {
@@ -141,7 +141,7 @@ const backgroundImageStyles = (
 };
 
 export const DirectoryPageNav = ({ selected, pageId }: Props) => {
-	const config = configs.find((cfg) => pageId.includes(cfg.sectionSlug));
+	const config = configs.find((cfg) => cfg.pageIds.includes(pageId));
 
 	if (!config) {
 		return null;
