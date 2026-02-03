@@ -23,21 +23,25 @@ export const regions: Region[] = [
 
 export const footballMatchResultV2: FootballMatchV2 = {
 	kind: 'Result',
-	kickOff: new Date('2022-01-01T11:11:00Z'),
-	paId: '4479251',
+	kickOff: new Date('2026-02-02T20:00:00Z'),
+	paId: '4531954',
 	homeTeam: {
-		name: 'Germany',
-		paID: '7699',
-		score: 2,
-		scorers: ['Sjoeke Nusken 56 Pen', 'Lea Schuller 66'],
+		name: 'Sunderland',
+		paID: '39',
+		score: 3,
+		scorers: [
+			'Axel Tuanzebe (9 o.g.)',
+			'Habib Diarra (32)',
+			'Chemsdine Talbi (72)',
+		],
 	},
 	awayTeam: {
-		name: 'Denmark',
-		paID: '35854',
-		score: 1,
-		scorers: ['Amalie Vangsgaard 26'],
+		name: 'Burnley',
+		paID: '70',
+		score: 0,
+		scorers: [],
 	},
-	venue: 'St Jakob Park',
+	venue: 'Stadium of Light',
 	comment: undefined,
 };
 

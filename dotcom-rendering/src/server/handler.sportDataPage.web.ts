@@ -253,6 +253,7 @@ const parseFEFootballMatch = (
 		matchInfo: matchInfo.value,
 		competitionName: data.competitionName,
 		group: group?.value,
+		matchUrl: data.matchUrl,
 		kind: 'FootballMatchSummary',
 		nav: {
 			...extractNAV(data.nav),

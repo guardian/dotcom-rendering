@@ -2,7 +2,7 @@ import { palette } from '@guardian/source/foundations';
 import { AdSlot } from '../components/AdSlot.web';
 import { CricketScorecardPage } from '../components/CricketScorecardPage';
 import { FootballMatchesPageWrapper } from '../components/FootballMatchesPageWrapper.importable';
-import { FootballMatchInfoPage } from '../components/FootballMatchInfoPage';
+import { FootballMatchInfoPage } from '../components/FootballMatchInfoPage.importable';
 import { FootballMatchSummary } from '../components/FootballMatchSummary';
 import { FootballTablesPage } from '../components/FootballTablesPage';
 import { Footer } from '../components/Footer';
@@ -76,13 +76,16 @@ const SportsPage = ({
 		case 'FootballMatchSummary': {
 			if (isInVariantGroup) {
 				return (
-					<FootballMatchInfoPage
-						matchStats={sportData.matchStats}
-						matchInfo={sportData.matchInfo}
-						competitionName={sportData.competitionName}
-						edition={sportData.editionId}
-						table={sportData.group}
-					/>
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<FootballMatchInfoPage
+							matchStats={sportData.matchStats}
+							matchInfo={sportData.matchInfo}
+							competitionName={sportData.competitionName}
+							edition={sportData.editionId}
+							matchUrl={sportData.matchUrl}
+							table={sportData.group}
+						/>
+					</Island>
 				);
 			}
 
