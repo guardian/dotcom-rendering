@@ -103,6 +103,7 @@ export type DCRFrontCard = {
 	showVideo?: boolean;
 	uniqueId?: string;
 	serverTime?: number;
+	articleMainMedia?: MainMedia;
 };
 
 export type DCRSlideshowImage = {

@@ -285,23 +285,15 @@ export const getActiveMediaAtom = (
 	return undefined;
 };
 
-const decideMedia = (
+const decideArticleMedia = (
 	format: ArticleFormat,
-	showMainVideo?: boolean,
 	mediaAtom?: FEMediaAtom,
 	galleryCount: number = 0,
 	audioDuration: string = '',
 	podcastImage?: PodcastSeriesImage,
 	imageHide?: boolean,
-	videoReplace?: boolean,
 	cardImage?: string,
 ): MainMedia | undefined => {
-	// If the showVideo toggle is enabled in the fronts tool,
-	// we should return the active mediaAtom regardless of the design
-	if (!!showMainVideo || !!videoReplace) {
-		return getActiveMediaAtom(!!videoReplace, mediaAtom, cardImage);
-	}
-
 	switch (format.design) {
 		case ArticleDesign.Gallery:
 			return { type: 'Gallery', count: galleryCount.toString() };
@@ -320,6 +312,19 @@ const decideMedia = (
 		default:
 			return undefined;
 	}
+};
+
+const decideReplacementMedia = (
+	showMainVideo?: boolean,
+	mediaAtom?: FEMediaAtom,
+	videoReplace?: boolean,
+	cardImage?: string,
+): MainMedia | undefined => {
+	/* Force video on the card when enabled by the fronts tool */
+	if (!!showMainVideo || !!videoReplace) {
+		return getActiveMediaAtom(!!videoReplace, mediaAtom, cardImage);
+	}
+	return undefined;
 };
 
 export const enhanceCards = (
@@ -382,10 +387,8 @@ export const enhanceCards = (
 
 		const isContributorTagPage = !!pageId && pageId.startsWith('profile/');
 
-		const mainMedia = decideMedia(
+		const articleMainMedia = decideArticleMedia(
 			format,
-			faciaCard.properties.showMainVideo ??
-				faciaCard.properties.mediaSelect?.showMainVideo,
 			faciaCard.mediaAtom ??
 				faciaCard.properties.maybeContent?.elements.mainMediaAtom ??
 				faciaCard.properties.maybeContent?.elements.mediaAtoms[0],
@@ -393,9 +396,19 @@ export const enhanceCards = (
 			faciaCard.card.audioDuration,
 			podcastImage,
 			faciaCard.display.imageHide,
+			imageSrc,
+		);
+		const replacementMainMedia = decideReplacementMedia(
+			faciaCard.properties.showMainVideo ??
+				faciaCard.properties.mediaSelect?.showMainVideo,
+			faciaCard.mediaAtom ??
+				faciaCard.properties.maybeContent?.elements.mainMediaAtom ??
+				faciaCard.properties.maybeContent?.elements.mediaAtoms[0],
 			faciaCard.properties.mediaSelect?.videoReplace,
 			imageSrc,
 		);
+
+		const cardMainMedia = replacementMainMedia ?? articleMainMedia;
 
 		return {
 			format,
@@ -439,7 +452,8 @@ export const enhanceCards = (
 							faciaCard.properties.maybeContent.trail.byline,
 					  )
 					: undefined,
-			mainMedia,
+			mainMedia: cardMainMedia,
+			articleMainMedia,
 			isExternalLink: faciaCard.card.cardStyle.type === 'ExternalLink',
 			embedUri: faciaCard.properties.embedUri ?? undefined,
 			branding: stripBranding ? undefined : branding,
