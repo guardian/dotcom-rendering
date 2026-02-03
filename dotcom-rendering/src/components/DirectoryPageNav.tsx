@@ -22,6 +22,13 @@ interface DirectoryPageNavConfig {
 	backgroundColor: string;
 	title: { label: string; link: string };
 	links: { label: string; href: string; selectedSlug: string | undefined }[];
+	backgroundImages?: {
+		mobile: string;
+		mobileLandscape: string;
+		phablet: string;
+		tablet: string;
+		desktop: string;
+	};
 }
 
 const configs = [
@@ -91,12 +98,47 @@ const configs = [
 				selectedSlug: undefined,
 			},
 		],
+		backgroundImages: {
+			mobile: 'https://uploads.guim.co.uk/2026/02/03/winter-olympics-414px.jpg',
+			mobileLandscape:
+				'https://uploads.guim.co.uk/2026/02/03/winter-olympics-480px.jpg',
+			phablet:
+				'https://uploads.guim.co.uk/2026/02/03/winter-olympics-740_px.jpg',
+			tablet: 'https://uploads.guim.co.uk/2026/02/03/winter-olympics-740px-thin.jpg',
+			desktop:
+				'https://uploads.guim.co.uk/2026/02/03/winter-olympics-980px.jpg',
+		},
 	},
 ] satisfies DirectoryPageNavConfig[];
 
 type Configs = typeof configs;
 type SelectedSlug = Configs[number]['links'][number]['selectedSlug'];
 type Selected = Exclude<SelectedSlug, undefined>;
+
+const backgroundImageStyles = (
+	images?: DirectoryPageNavConfig['backgroundImages'],
+) => {
+	if (!images) return {};
+
+	return {
+		backgroundImage: `url(${images.mobile})`,
+		backgroundSize: 'cover',
+		backgroundPosition: 'top center',
+
+		[from.mobileLandscape]: {
+			backgroundImage: `url(${images.mobileLandscape})`,
+		},
+		[from.phablet]: {
+			backgroundImage: `url(${images.phablet})`,
+		},
+		[from.tablet]: {
+			backgroundImage: `url(${images.tablet})`,
+		},
+		[from.desktop]: {
+			backgroundImage: `url(${images.desktop})`,
+		},
+	};
+};
 
 export const DirectoryPageNav = ({ selected, pageId }: Props) => {
 	const config = configs.find((cfg) => pageId.includes(cfg.sectionSlug));
@@ -118,6 +160,7 @@ export const DirectoryPageNav = ({ selected, pageId }: Props) => {
 		[from.desktop]: {
 			height: 150,
 		},
+		...backgroundImageStyles(config.backgroundImages),
 	});
 
 	const largeLinkStyles = css({
