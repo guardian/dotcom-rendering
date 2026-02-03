@@ -272,6 +272,7 @@ export const getActiveMediaAtom = (
 				height: 300,
 				origin: mediaAtom.source ?? 'Unknown origin',
 				expired: !!mediaAtom.expired,
+				isLive: mediaAtom.duration === 0,
 				image,
 			};
 		}
