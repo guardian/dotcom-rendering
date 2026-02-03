@@ -8,15 +8,14 @@ import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { palette } from '../palette';
 import { Avatar } from './Avatar';
-import { FollowButtonWithContributorProfile } from './FollowButtonWithContributorProfile.importable';
 import { FollowTagButtonPill } from './FollowButtons';
+import { FollowButtonWithContributorProfile } from './FollowButtonWithContributorProfile.importable';
 
 export default {
 	component: FollowButtonWithContributorProfile,
-	title: 'Components/ContributorProfile',
+	title: 'Components/FollowButtonWithProfile',
 };
 
-// Mock contributor data
 const mockContributor = {
 	id: 'profile/george-monbiot',
 	displayName: 'George Monbiot',
@@ -70,58 +69,6 @@ const allPillarsDecorator = splitTheme([
 	},
 ]);
 
-// Component stories
-export const WithAvatarAndBio = () => (
-	<div css={containerStyles}>
-		<FollowButtonWithContributorProfile
-			id={mockContributor.id}
-			displayName={mockContributor.displayName}
-			avatarUrl={mockContributor.avatarUrl}
-			bio={mockContributor.bio}
-		/>
-	</div>
-);
-WithAvatarAndBio.storyName = 'With Avatar and Bio';
-WithAvatarAndBio.decorators = [opinionDecorator];
-
-export const WithoutAvatar = () => (
-	<div css={containerStyles}>
-		<FollowButtonWithContributorProfile
-			id={mockContributor.id}
-			displayName={mockContributor.displayName}
-			bio={mockContributor.bio}
-		/>
-	</div>
-);
-WithoutAvatar.storyName = 'Without Avatar';
-WithoutAvatar.decorators = [opinionDecorator];
-
-export const AllPillars = () => (
-	<div css={containerStyles}>
-		<FollowButtonWithContributorProfile
-			id={mockContributor.id}
-			displayName={mockContributor.displayName}
-			avatarUrl={mockContributor.avatarUrl}
-			bio={mockContributor.bio}
-		/>
-	</div>
-);
-AllPillars.storyName = 'All Pillars';
-AllPillars.decorators = [allPillarsDecorator];
-
-export const LongBio = () => (
-	<div css={containerStyles}>
-		<FollowButtonWithContributorProfile
-			id="profile/marina-hyde"
-			displayName="Marina Hyde"
-			avatarUrl={mockContributor.avatarUrl}
-			bio={longBio}
-		/>
-	</div>
-);
-LongBio.storyName = 'Long Bio';
-LongBio.decorators = [opinionDecorator];
-
 const previewContainerStyles = css`
 	display: flex;
 	flex-direction: column;
@@ -161,7 +108,11 @@ const previewBioStyles = css`
 	margin: 0;
 `;
 
-const ProfilePreview = ({ isFollowing }: { isFollowing: boolean }) => (
+const FollowButtonWithProfilePreview = ({
+	isFollowing,
+}: {
+	isFollowing: boolean;
+}) => (
 	<div css={containerStyles}>
 		<div css={previewContainerStyles}>
 			<div css={previewTopRowStyles}>
@@ -191,19 +142,19 @@ const ProfilePreview = ({ isFollowing }: { isFollowing: boolean }) => (
 );
 
 export const VisualPreviewWithButton = () => (
-	<ProfilePreview isFollowing={false} />
+	<FollowButtonWithProfilePreview isFollowing={false} />
 );
-VisualPreviewWithButton.storyName = 'With Follow Button (Follow)';
+VisualPreviewWithButton.storyName = 'Follow';
 VisualPreviewWithButton.decorators = [opinionDecorator];
 
 export const VisualPreviewFollowingState = () => (
-	<ProfilePreview isFollowing={true} />
+	<FollowButtonWithProfilePreview isFollowing={true} />
 );
-VisualPreviewFollowingState.storyName = 'With Follow Button (Following)';
+VisualPreviewFollowingState.storyName = 'Following';
 VisualPreviewFollowingState.decorators = [opinionDecorator];
 
 export const VisualPreviewAllPillars = () => (
-	<ProfilePreview isFollowing={false} />
+	<FollowButtonWithProfilePreview isFollowing={false} />
 );
-VisualPreviewAllPillars.storyName = 'With Follow Button (All Pillars)';
+VisualPreviewAllPillars.storyName = 'All Pillars';
 VisualPreviewAllPillars.decorators = [allPillarsDecorator];
