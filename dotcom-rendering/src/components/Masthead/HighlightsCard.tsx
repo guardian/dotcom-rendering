@@ -1,10 +1,8 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import { between, from, space, until } from '@guardian/source/foundations';
-import { SvgCamera } from '@guardian/source/react-components';
 import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import { isMediaCard as isMedia } from '../../lib/cardHelpers';
-import { secondsToDuration } from '../../lib/formatTime';
 import { palette } from '../../palette';
 import type { StarRating as Rating } from '../../types/content';
 import type { DCRFrontImage } from '../../types/front';
@@ -12,10 +10,9 @@ import type { MainMedia } from '../../types/mainMedia';
 import { CardLink } from '../Card/components/CardLink';
 import { CardHeadline } from '../CardHeadline';
 import type { Loading } from '../CardPicture';
+import { CardPill } from '../CardPill';
 import { FormatBoundary } from '../FormatBoundary';
-import { Pill } from '../Pill';
 import { StarRating } from '../StarRating/StarRating';
-import { SvgMediaControlsPlay } from '../SvgMediaControlsPlay';
 import { HighlightsCardImage } from './HighlightsCardImage';
 
 export type HighlightsCardProps = {
@@ -179,29 +176,7 @@ export const HighlightsCard = ({
 
 					{!!mainMedia && isMediaCard && (
 						<div>
-							{mainMedia.type === 'YoutubeVideo' && (
-								<Pill
-									content={secondsToDuration(
-										mainMedia.duration,
-									)}
-									prefix="Video"
-									icon={<SvgMediaControlsPlay width={18} />}
-								/>
-							)}
-							{mainMedia.type === 'Audio' && (
-								<Pill
-									content={mainMedia.duration}
-									prefix="Podcast"
-									icon={<SvgMediaControlsPlay width={18} />}
-								/>
-							)}
-							{mainMedia.type === 'Gallery' && (
-								<Pill
-									content={mainMedia.count}
-									prefix="Gallery"
-									icon={<SvgCamera />}
-								/>
-							)}
+							<CardPill format={format} mainMedia={mainMedia} />
 						</div>
 					)}
 				</div>

@@ -21,14 +21,12 @@ type CardPillProps = {
 	format: ArticleFormat;
 	mainMedia?: MainMedia | CardFooterMedia;
 	isNewsletter?: boolean;
-	isVideoArticle?: boolean;
 };
 
 export const CardPill = ({
 	format,
 	mainMedia,
 	isNewsletter,
-	isVideoArticle,
 }: CardPillProps) => {
 	if (isNewsletter) return <Pill content="Newsletter" />;
 	if (!mainMedia) return null;
@@ -50,7 +48,7 @@ export const CardPill = ({
 				/>
 			);
 		case 'YoutubeVideo':
-			if (!isVideoArticle) return null;
+			if (ArticleDesign.Video !== format.design) return null;
 			if (mainMedia.isLive) {
 				return (
 					<Pill
