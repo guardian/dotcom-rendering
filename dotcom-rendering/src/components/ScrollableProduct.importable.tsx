@@ -2,6 +2,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { Breakpoint } from '@guardian/source/foundations';
 import { from, space, textSans14 } from '@guardian/source/foundations';
+import libDebounce from 'lodash.debounce';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
@@ -238,10 +239,9 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 		const scrollLeft = carouselElement.scrollLeft;
 		const maxScrollLeft =
 			carouselElement.scrollWidth - carouselElement.clientWidth;
-		const cardWidth = carouselElement.querySelector('li')?.offsetWidth ?? 0;
 
-		setPreviousButtonEnabled(scrollLeft > cardWidth / 2);
-		setNextButtonEnabled(scrollLeft < maxScrollLeft - cardWidth / 2);
+		setPreviousButtonEnabled(scrollLeft > 10);
+		setNextButtonEnabled(scrollLeft < maxScrollLeft - 10);
 	}, []);
 
 	const throttledCardCount = useMemo(
@@ -249,8 +249,8 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 		[updateCardCountOnScroll],
 	);
 
-	const throttledButtonVisibility = useMemo(
-		() => throttleEvent(updateButtonVisibilityOnScroll),
+	const debouncedButtonVisibility = useMemo(
+		() => libDebounce(updateButtonVisibilityOnScroll, 200),
 		[updateButtonVisibilityOnScroll],
 	);
 
@@ -259,16 +259,16 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 		if (!carouselElement) return;
 
 		carouselElement.addEventListener('scroll', throttledCardCount);
-		carouselElement.addEventListener('scroll', throttledButtonVisibility);
+		carouselElement.addEventListener('scroll', debouncedButtonVisibility);
 
 		return () => {
 			carouselElement.removeEventListener('scroll', throttledCardCount);
 			carouselElement.removeEventListener(
 				'scroll',
-				throttledButtonVisibility,
+				debouncedButtonVisibility,
 			);
 		};
-	}, [throttledCardCount, throttledButtonVisibility]);
+	}, [throttledCardCount, debouncedButtonVisibility]);
 
 	return (
 		<>
