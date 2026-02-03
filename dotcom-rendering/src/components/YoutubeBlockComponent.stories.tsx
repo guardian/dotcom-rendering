@@ -351,7 +351,7 @@ export const WithLiveStream = () => {
 				iconSizeOnDesktop="large"
 				iconSizeOnMobile="large"
 				hidePillOnMobile={false}
-				isLiveStream={true}
+				isLive={true}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

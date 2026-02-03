@@ -64,7 +64,7 @@ export type Props = {
 	isImmersive?: boolean;
 	byline?: string;
 	showByline?: boolean;
-	isLiveStream?: boolean;
+	isLive?: boolean;
 };
 
 /**
@@ -120,7 +120,7 @@ export const YoutubeAtom = ({
 	isImmersive,
 	byline,
 	showByline,
-	isLiveStream,
+	isLive,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -285,7 +285,7 @@ export const YoutubeAtom = ({
 								iconSizeOnMobile={iconSizeOnMobile}
 								hidePillOnMobile={hidePillOnMobile}
 								aspectRatio={aspectRatio}
-								isLiveStream={isLiveStream}
+								isLive={isLive}
 							/>
 						))}
 					{showPlaceholder && (

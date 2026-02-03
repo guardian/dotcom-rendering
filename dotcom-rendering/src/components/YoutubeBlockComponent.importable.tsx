@@ -55,7 +55,7 @@ type Props = {
 	showByline?: boolean;
 	contentType?: string;
 	contentLayout?: string;
-	isLiveStream?: boolean;
+	isLive?: boolean;
 };
 
 export const YoutubeBlockComponent = ({
@@ -98,7 +98,7 @@ export const YoutubeBlockComponent = ({
 	showByline,
 	contentType,
 	contentLayout,
-	isLiveStream,
+	isLive,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -227,7 +227,7 @@ export const YoutubeBlockComponent = ({
 				isImmersive={isImmersive}
 				byline={byline}
 				showByline={showByline}
-				isLiveStream={isLiveStream}
+				isLive={isLive}
 			/>
 			{!hideCaption && (
 				<Caption

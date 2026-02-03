@@ -69,7 +69,7 @@ type Props = {
 	image?: string;
 	duration?: number; // in seconds
 	aspectRatio?: AspectRatio;
-	isLiveStream?: boolean;
+	isLive?: boolean;
 };
 
 export const YoutubeAtomOverlay = ({
@@ -86,7 +86,7 @@ export const YoutubeAtomOverlay = ({
 	image,
 	duration,
 	aspectRatio,
-	isLiveStream,
+	isLive,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
@@ -109,7 +109,7 @@ export const YoutubeAtomOverlay = ({
 						aspectRatio={aspectRatio}
 					/>
 				)}
-				{isLiveStream ? (
+				{isLive ? (
 					<div
 						css={
 							hidePillOnMobile

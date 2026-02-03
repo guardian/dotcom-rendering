@@ -1135,9 +1135,7 @@ export const Card = ({
 												}
 												enableAds={false}
 												aspectRatio={aspectRatio}
-												isLiveStream={
-													media.mainMedia.isLive
-												}
+												isLive={media.mainMedia.isLive}
 											/>
 										</Island>
 									</div>
