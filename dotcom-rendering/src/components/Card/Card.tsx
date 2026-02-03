@@ -35,7 +35,6 @@ import { CardCommentCount } from '../CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from '../CardHeadline';
 import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
-import { CardPill } from '../CardPill';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
 import { Pill } from '../Pill';
@@ -185,11 +184,6 @@ const waveformWrapper = (
 			height: ${mediaPositionOnDesktop === 'top' ? 50 : 33}px;
 		}
 	}
-`;
-
-const PillWrapperStyles = css`
-	margin-top: auto;
-	display: flex;
 `;
 
 const HorizontalDivider = () => (
@@ -512,8 +506,6 @@ export const Card = ({
 * padding to these cards to keep the text readable.
 -     */
 	const isMediaCardOrNewsletter = isMediaCard(format) || isNewsletter;
-
-	const showPill = isMediaCardOrNewsletter && !isGallerySecondaryOnward;
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -1219,54 +1211,20 @@ export const Card = ({
 							)}
 
 							{!isOpinionCardWithAvatar && (
-								<>
-									{showPill ? (
-										<>
-											{!!branding &&
-												format.theme ===
-													ArticleSpecial.Labs &&
-												isOnwardContent && (
-													<LabsBranding />
-												)}
-
-											<div
-												css={[
-													PillWrapperStyles,
-													isStorylines &&
-														`   flex-direction: column;
-															gap: ${space[1]}px;
-															align-items: flex-start;`,
-												]}
-											>
-												{/* Usually, we either display the pill or the footer,
-				but if the card appears in the storylines section on tag pages
-				then we do want to display the date on these cards as well as the media pill.
-			*/}
-												{isStorylines && decideAge()}
-												<CardPill
-													format={format}
-													mainMedia={mainMedia}
-													isVideoArticle={
-														isVideoArticle
-													}
-													isNewsletter={isNewsletter}
-												/>
-											</div>
-										</>
-									) : (
-										<CardFooter
-											format={format}
-											age={decideAge()}
-											commentCount={<CommentCount />}
-											cardBranding={
-												isOnwardContent ? (
-													<LabsBranding />
-												) : undefined
-											}
-											showLivePlayable={showLivePlayable}
-										/>
-									)}
-								</>
+								<CardFooter
+									format={format}
+									age={decideAge()}
+									commentCount={<CommentCount />}
+									cardBranding={
+										isOnwardContent ? (
+											<LabsBranding />
+										) : undefined
+									}
+									isStorylines={isStorylines}
+									showLivePlayable={showLivePlayable}
+									mainMedia={mainMedia}
+									hidePill={isGallerySecondaryOnward}
+								/>
 							)}
 							{showLivePlayable &&
 								liveUpdatesPosition === 'inner' && (

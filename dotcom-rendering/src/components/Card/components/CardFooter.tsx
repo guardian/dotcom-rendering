@@ -62,6 +62,8 @@ type Props = {
 	mainMedia?: MainMedia | CardFooterMedia;
 	isNewsletter?: boolean;
 	shouldReserveSpace?: { mobile: boolean; desktop: boolean };
+	isStorylines?: boolean;
+	hidePill?: boolean;
 };
 
 export const CardFooter = ({
@@ -73,22 +75,27 @@ export const CardFooter = ({
 	mainMedia,
 	isNewsletter,
 	shouldReserveSpace,
+	isStorylines,
+	hidePill = false,
 }: Props) => {
 	if (showLivePlayable) return null;
 
-	if (format.theme === ArticleSpecial.Labs && cardBranding) {
-		return <footer css={labStyles}>{cardBranding}</footer>;
-	}
+	const shouldShowBranding =
+		format.theme === ArticleSpecial.Labs && !!cardBranding;
 
-	if (
-		mainMedia?.type === 'YoutubeVideo' ||
-		mainMedia?.type === 'Audio' ||
-		mainMedia?.type === 'Gallery' ||
-		mainMedia?.type === 'SelfHostedVideo' ||
-		isNewsletter
-	) {
+	const shouldShowPill =
+		!hidePill &&
+		(mainMedia?.type === 'YoutubeVideo' ||
+			mainMedia?.type === 'Audio' ||
+			mainMedia?.type === 'Gallery' ||
+			mainMedia?.type === 'SelfHostedVideo' ||
+			isNewsletter);
+
+	if (shouldShowPill) {
 		return (
 			<footer css={contentStyles}>
+				{shouldShowBranding && cardBranding}
+				{isStorylines && age}
 				<CardPill
 					format={format}
 					isNewsletter={isNewsletter}
@@ -97,6 +104,10 @@ export const CardFooter = ({
 				/>
 			</footer>
 		);
+	}
+
+	if (shouldShowBranding) {
+		return <footer css={labStyles}>{cardBranding}</footer>;
 	}
 
 	return (

@@ -282,6 +282,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 								? {
 										type: 'YoutubeVideo',
 										duration: duration ?? 0,
+										isLive: duration === 0,
 								  }
 								: undefined
 						}

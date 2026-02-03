@@ -57,6 +57,7 @@ export const WithVideo = {
 		mainMedia: {
 			type: 'YoutubeVideo',
 			duration: 972,
+			isLive: false,
 		},
 	},
 } satisfies Story;
