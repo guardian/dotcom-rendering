@@ -25,9 +25,6 @@ const mockContributor = {
 		'A Guardian columnist, and author of The Invisible Doctrine: The Secret History of Neoliberalism (with Peter Hutchison)',
 };
 
-const longBio = `<p>Marina Hyde is a Guardian columnist. She has won multiple awards for her writing, including the British Press Awards' Columnist of the Year in 2022. Her work covers politics, sport, and celebrity culture with a distinctive satirical edge.</p><p>She is also the author of several books and appears regularly on podcasts discussing current affairs.</p>`;
-
-// Shared styles
 const containerStyles = css`
 	max-width: 400px;
 	padding: 16px;

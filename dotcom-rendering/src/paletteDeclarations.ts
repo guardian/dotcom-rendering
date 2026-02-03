@@ -7084,18 +7084,6 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[20],
 	},
-	'--follow-icon-background': {
-		light: followIconBackgroundLight,
-		dark: followIconBackgroundDark,
-	},
-	'--follow-icon-fill': {
-		light: followIconFillLight,
-		dark: followIconFillDark,
-	},
-	'--follow-text': {
-		light: followTextLight,
-		dark: followTextDark,
-	},
 	'--follow-button-border': {
 		light: followIconFillLight,
 		dark: followIconFillDark,
@@ -7115,6 +7103,18 @@ const paletteColours = {
 	'--follow-button-text-not-following': {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[100],
+	},
+	'--follow-icon-background': {
+		light: followIconBackgroundLight,
+		dark: followIconBackgroundDark,
+	},
+	'--follow-icon-fill': {
+		light: followIconFillLight,
+		dark: followIconFillDark,
+	},
+	'--follow-text': {
+		light: followTextLight,
+		dark: followTextDark,
 	},
 	'--football-competition-select-text': {
 		light: () => sourcePalette.neutral[7],
