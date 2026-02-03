@@ -17,7 +17,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { ContributorAvatar } from '../components/ContributorAvatar';
-import { ContributorProfile } from '../components/ContributorProfile.importable';
+import { FollowButtonWithContributorProfile } from '../components/FollowButtonWithContributorProfile.importable';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -652,7 +652,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 												priority="feature"
 												defer={{ until: 'visible' }}
 											>
-												<ContributorProfile
+												<FollowButtonWithContributorProfile
 													id={soleContributor.id}
 													displayName={
 														soleContributor.title
