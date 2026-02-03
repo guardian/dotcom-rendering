@@ -2,6 +2,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { Breakpoint } from '@guardian/source/foundations';
 import { from, space, textSans14 } from '@guardian/source/foundations';
+import libDebounce from 'lodash.debounce';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
@@ -203,61 +204,6 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 	};
 
 	/**
-	 * --- COPIED FROM ScrollableCarousel ---
-	 * Scrolls the carousel to a certain position when a card gains focus.
-	 *
-	 * If a card gains focus (e.g. by tabbing through the elements of the page) then the browser
-	 * will scroll the container to the focused card if it is NOT visible. If it is partially visible,
-	 * such as in the case with our carousel, then the browser will not bring the card in to view.
-	 * (Tested with Chrome and Firefox).
-	 */
-	const scrollToCardOnFocus = () => {
-		const carouselElement = carouselRef.current;
-		if (!carouselElement) return;
-
-		/**
-		 * We know the carousel has focus,
-		 */
-		let focusedCarouselPosition = null;
-		for (const [index, element] of Array.from(
-			carouselElement.childNodes,
-		).entries()) {
-			if (element.contains(document.activeElement)) {
-				focusedCarouselPosition = index + 1;
-			}
-		}
-
-		/**
-		 * If none of the cards in the carousel have focus, we don't change the carousel scroll position.
-		 */
-		if (focusedCarouselPosition === null) return;
-
-		const cardWidth = carouselElement.querySelector('li')?.offsetWidth ?? 0;
-
-		/**
-		 * We use rounding as the users left scroll position is not always equal to the card width, but it is
-		 * very close. If the user is mid-scroll when starting focus on a carousel item (unlikely!) then the
-		 * scroll position is whichever is closest. We don't need to be exact as the number of carousel slides is small.
-		 */
-		const scrollPosition = Math.round(
-			(carouselElement.scrollLeft + cardWidth) / cardWidth,
-		);
-
-		/**
-		 * If the focused card is next to the card in the left-most position, then it
-		 * is not completely off-screen. It is either partially visible or entirely
-		 * visible (when the number of visible carousel slides is greater than 1).
-		 *
-		 * Bring this adjacent card into the left-most position.
-		 */
-		if (focusedCarouselPosition === scrollPosition + 1) {
-			scrollTo('right');
-		} else if (focusedCarouselPosition === scrollPosition - 1) {
-			scrollTo('left');
-		}
-	};
-
-	/**
 	 * Update the count of the first card / how far scrolled the carousel is
 	 *
 	 * This function checks how far along the carousel is scrolled and then
@@ -293,10 +239,9 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 		const scrollLeft = carouselElement.scrollLeft;
 		const maxScrollLeft =
 			carouselElement.scrollWidth - carouselElement.clientWidth;
-		const cardWidth = carouselElement.querySelector('li')?.offsetWidth ?? 0;
 
-		setPreviousButtonEnabled(scrollLeft > cardWidth / 2);
-		setNextButtonEnabled(scrollLeft < maxScrollLeft - cardWidth / 2);
+		setPreviousButtonEnabled(scrollLeft > 10);
+		setNextButtonEnabled(scrollLeft < maxScrollLeft - 10);
 	}, []);
 
 	const throttledCardCount = useMemo(
@@ -304,8 +249,8 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 		[updateCardCountOnScroll],
 	);
 
-	const throttledButtonVisibility = useMemo(
-		() => throttleEvent(updateButtonVisibilityOnScroll),
+	const debouncedButtonVisibility = useMemo(
+		() => libDebounce(updateButtonVisibilityOnScroll, 200),
 		[updateButtonVisibilityOnScroll],
 	);
 
@@ -314,16 +259,16 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 		if (!carouselElement) return;
 
 		carouselElement.addEventListener('scroll', throttledCardCount);
-		carouselElement.addEventListener('scroll', throttledButtonVisibility);
+		carouselElement.addEventListener('scroll', debouncedButtonVisibility);
 
 		return () => {
 			carouselElement.removeEventListener('scroll', throttledCardCount);
 			carouselElement.removeEventListener(
 				'scroll',
-				throttledButtonVisibility,
+				debouncedButtonVisibility,
 			);
 		};
-	}, [throttledCardCount, throttledButtonVisibility]);
+	}, [throttledCardCount, debouncedButtonVisibility]);
 
 	return (
 		<>
@@ -347,7 +292,6 @@ export const ScrollableProduct = ({ products, format }: Props) => {
 					ref={carouselRef}
 					css={carouselStyles}
 					data-heatphan-type="carousel"
-					onFocus={scrollToCardOnFocus}
 				>
 					{products.map(
 						(product: ProductBlockElement, index: number) => (
