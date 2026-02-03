@@ -24,20 +24,20 @@ export const LeagueTable = ({ table }: Props) => {
 };
 
 const Title = ({ text }: { text: string }) => (
-	<h3
+	<h2
 		css={css`
 			${textSansBold14}
 			border-bottom: 1px solid ${palette('--football-match-stat-border')};
 			color: ${palette('--football-match-stat-text')};
 			padding-bottom: ${space[1]}px;
-			${from.phablet} {
+			${from.desktop} {
 				${textSansBold15}
 				padding-bottom: ${space[2]}px;
 			}
 		`}
 	>
 		{text}
-	</h3>
+	</h2>
 );
 
 const Table = ({ table }: { table: FootballTableSummary }) => {
@@ -103,7 +103,7 @@ const leagueTableSection = css`
 
 const tableRowStyles = css`
 	${textSans14}
-	${from.phablet} {
+	${from.desktop} {
 		${textSans15}
 	}
 
@@ -135,7 +135,7 @@ const tableHeaders = css`
 	th {
 		text-align: left;
 	}
-	${from.phablet} {
+	${from.desktop} {
 		${textSansBold15}
 	}
 `;
@@ -147,7 +147,7 @@ const position = css`
 
 const pointsText = css`
 	${textSansBold14}
-	${from.phablet} {
+	${from.desktop} {
 		${textSansBold15}
 	}
 `;
