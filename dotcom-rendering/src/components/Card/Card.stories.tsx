@@ -346,6 +346,22 @@ export const WithMediaType = () => {
 							design: ArticleDesign.Video,
 							theme: Pillar.Sport,
 						}}
+						mainMedia={{
+							...mainYoutubeVideo,
+							duration: 0,
+							isLive: true,
+						}}
+						headlineText="Live video"
+					/>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Video,
+							theme: Pillar.Sport,
+						}}
 						mainMedia={{ ...mainSelfHostedVideo }}
 						headlineText="Video with self-hosted video main media"
 					/>
