@@ -69,6 +69,7 @@ type Props = {
 	image?: string;
 	duration?: number; // in seconds
 	aspectRatio?: AspectRatio;
+	isLiveStream?: boolean;
 };
 
 export const YoutubeAtomOverlay = ({
@@ -85,14 +86,10 @@ export const YoutubeAtomOverlay = ({
 	image,
 	duration,
 	aspectRatio,
+	isLiveStream,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
-	/**
-	 * We infer that a video is a livestream if the duration is set to 0. This is
-	 * a soft contract with Editorial who manual set the duration of videos
-	 */
-	const isLiveStream = !isUndefined(duration) && duration === 0;
 
 	return (
 		<FormatBoundary format={format}>

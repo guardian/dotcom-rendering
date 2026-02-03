@@ -537,6 +537,7 @@ export const FeatureCard = ({
 										isImmersive={isImmersive}
 										byline={byline}
 										showByline={showByline}
+										isLiveStream={media.mainMedia.isLive}
 									/>
 								</Island>
 							</div>
