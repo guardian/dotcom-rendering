@@ -35,7 +35,6 @@ import { CardCommentCount } from '../CardCommentCount.importable';
 import { CardHeadline, type ResponsiveFontSize } from '../CardHeadline';
 import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
-import { CardPill } from '../CardPill';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
 import { Pill } from '../Pill';
@@ -1226,50 +1225,17 @@ export const Card = ({
 							)}
 
 							{!isOpinionCardWithAvatar && (
-								<>
-									{showPill ? (
-										<>
-											{!!branding &&
-												format.theme ===
-													ArticleSpecial.Labs &&
-												isOnwardContent && (
-													<LabsBranding />
-												)}
-											<div
-												css={[
-													pillWrapperStyles,
-													isStorylines &&
-														storyLinesMetaStyles,
-												]}
-											>
-												{/**
-												 * Usually, we either display the pill or the footer,
-												 * but if the card appears in the storylines section on tag pages
-												 * then we do want to display the date on these cards as well as the media pill.
-												 * */}
-												{isStorylines && decideAge()}
-
-												<CardPill
-													format={format}
-													mainMedia={mainMedia}
-													isNewsletter={isNewsletter}
-												/>
-											</div>
-										</>
-									) : (
-										<CardFooter
-											format={format}
-											age={decideAge()}
-											commentCount={<CommentCount />}
-											cardBranding={
-												isOnwardContent ? (
-													<LabsBranding />
-												) : undefined
-											}
-											showLivePlayable={showLivePlayable}
-										/>
-									)}
-								</>
+								<CardFooter
+									format={format}
+									age={decideAge()}
+									commentCount={<CommentCount />}
+									cardBranding={
+										isOnwardContent ? (
+											<LabsBranding />
+										) : undefined
+									}
+									showLivePlayable={showLivePlayable}
+								/>
 							)}
 							{showLivePlayable &&
 								liveUpdatesPosition === 'inner' && (

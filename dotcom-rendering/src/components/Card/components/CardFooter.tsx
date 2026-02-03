@@ -59,6 +59,7 @@ type Props = {
 	mainMedia?: MainMedia;
 	isNewsletter?: boolean;
 	shouldReserveSpace?: { mobile: boolean; desktop: boolean };
+	isStorylines?: boolean;
 };
 
 export const CardFooter = ({
@@ -70,12 +71,12 @@ export const CardFooter = ({
 	mainMedia,
 	isNewsletter,
 	shouldReserveSpace,
+	isStorylines,
 }: Props) => {
 	if (showLivePlayable) return null;
 
-	if (format.theme === ArticleSpecial.Labs && cardBranding) {
-		return <footer css={labStyles}>{cardBranding}</footer>;
-	}
+	const shouldShowBranding =
+		format.theme === ArticleSpecial.Labs && !!cardBranding;
 
 	const shouldShowPill =
 		mainMedia?.type === 'YoutubeVideo' ||
@@ -86,6 +87,14 @@ export const CardFooter = ({
 	if (shouldShowPill) {
 		return (
 			<footer css={contentStyles}>
+				{shouldShowBranding && cardBranding}
+				{/**
+				 * Usually, we either display the pill or the footer,
+				 * but if the card appears in the storylines section on tag pages
+				 * then we do want to display the date on these cards as well as the media pill.
+				 * */}
+				{isStorylines && age}
+
 				<CardPill
 					mainMedia={mainMedia}
 					isNewsletter={isNewsletter}
@@ -94,6 +103,9 @@ export const CardFooter = ({
 			</footer>
 		);
 	}
+
+	if (shouldShowBranding)
+		return <footer css={labStyles}>{cardBranding}</footer>;
 
 	return (
 		<footer
