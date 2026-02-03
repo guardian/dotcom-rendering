@@ -38,7 +38,7 @@ export const footballMatchResultV2: FootballMatchV2 = {
 		scorers: ['Amalie Vangsgaard 26'],
 	},
 	venue: 'St Jakob Park',
-	comment: '',
+	comment: undefined,
 };
 
 export const initialDays: FootballMatches = [
