@@ -7186,6 +7186,22 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[46],
 		dark: () => sourcePalette.neutral[60],
 	},
+	'--football-pre-match-background': {
+		light: () => sourcePalette.sport[800],
+		dark: () => sourcePalette.sport[800], // TODO: Update with dark mode colour
+	},
+	'--football-pre-match-button': {
+		light: () => sourcePalette.sport[300],
+		dark: () => sourcePalette.sport[300], // TODO: Update with dark mode colour
+	},
+	'--football-pre-match-button-hover': {
+		light: () => '#c8e4f3', // replace with Source's `calculateHoverColour` when available
+		dark: () => '#c8e4f3',
+	},
+	'--football-pre-match-kickoff': {
+		light: () => sourcePalette.sport[300],
+		dark: () => sourcePalette.sport[300], // TODO: Update with dark mode colour
+	},
 	'--football-score-border': {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[7],

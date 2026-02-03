@@ -77,6 +77,9 @@ class TestGroupMVTManager {
 		if (this.testGroups.has(name)) {
 			throw new Error(`Test ${name} already exists`);
 		}
+		if (!Number.isInteger(size)) {
+			throw new Error(`Size for test ${name} must be an integer`);
+		}
 		const mvts = this.availableMVTs.splice(0, size);
 		this.testGroups.set(name, mvts);
 		mvts.forEach((mvt) => {
@@ -92,6 +95,10 @@ class TestGroupMVTManager {
 	resizeTestGroup(name: string, newSize: number) {
 		if (!this.testGroups.has(name)) {
 			throw new Error(`Test ${name} does not exist`);
+		}
+
+		if (!Number.isInteger(newSize)) {
+			throw new Error(`New size for test ${name} must be an integer`);
 		}
 
 		const currentMVTs = this.testGroups.get(name) ?? [];
