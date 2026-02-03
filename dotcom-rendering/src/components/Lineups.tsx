@@ -18,7 +18,7 @@ import { palette } from '../palette';
 import Union from '../static/icons/Union.svg';
 
 type Props = {
-	matchStats: FootballMatchStats;
+	matchStats?: FootballMatchStats;
 };
 
 const lineupSectionId = 'lineups';
@@ -32,33 +32,41 @@ export const Lineups = ({ matchStats }: Props) => {
 				aria-labelledby={lineupSectionId}
 			>
 				<Title text="Lineups" id={lineupSectionId} />
-				<PlayerList
-					team={matchStats.homeTeam}
-					isSubstitute={false}
-					isHome={true}
-				/>
-				<PlayerList
-					team={matchStats.awayTeam}
-					isSubstitute={false}
-					isHome={false}
-				/>
+				{matchStats ? (
+					<>
+						<PlayerList
+							team={matchStats.homeTeam}
+							isSubstitute={false}
+							isHome={true}
+						/>
+						<PlayerList
+							team={matchStats.awayTeam}
+							isSubstitute={false}
+							isHome={false}
+						/>{' '}
+					</>
+				) : (
+					<span css={comingSoon}>Coming soon</span>
+				)}
 			</section>
-			<section
-				css={playerListSectionGridStyles}
-				aria-labelledby={substitutesSectionId}
-			>
-				<Title text="Substitutes" id={substitutesSectionId} />
-				<PlayerList
-					team={matchStats.homeTeam}
-					isSubstitute={true}
-					isHome={true}
-				/>
-				<PlayerList
-					team={matchStats.awayTeam}
-					isSubstitute={true}
-					isHome={false}
-				/>
-			</section>
+			{matchStats && (
+				<section
+					css={playerListSectionGridStyles}
+					aria-labelledby={substitutesSectionId}
+				>
+					<Title text="Substitutes" id={substitutesSectionId} />
+					<PlayerList
+						team={matchStats.homeTeam}
+						isSubstitute={true}
+						isHome={true}
+					/>
+					<PlayerList
+						team={matchStats.awayTeam}
+						isSubstitute={true}
+						isHome={false}
+					/>
+				</section>
+			)}
 		</section>
 	);
 };
@@ -154,9 +162,8 @@ const PlayerList = ({
 const sectionStyles = css`
 	border: 1px solid ${palette('--football-match-stat-border')};
 	border-radius: 6px;
-
 	padding-top: 6px;
-
+	color: ${palette('--football-match-stat-text')};
 	background-color: ${palette('--football-match-info-background')};
 `;
 
@@ -190,7 +197,6 @@ const shirtNumber = css`
 	display: inline-block;
 	width: ${space[5]}px;
 	${textSansBold14}
-	color: ${palette('--football-match-stat-text')};
 	${from.desktop} {
 		${textSansBold15}
 	}
@@ -213,7 +219,14 @@ const playerName = css`
 	${from.desktop} {
 		${textSans15}
 	}
-	color: ${palette('--football-match-stat-text')};
+`;
+
+const comingSoon = css`
+	padding-top: ${space[2]}px;
+	${textSans14}
+	${from.desktop} {
+		${textSans15}
+	}
 `;
 
 const BackgroundRed = sourcePalette.news[400];
