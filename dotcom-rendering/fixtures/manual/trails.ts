@@ -112,6 +112,18 @@ export const trails: [
 			expired: false,
 			image: 'https://i.guim.co.uk/img/media/e060e9b7c92433b3dfeccc98b9206778cda8b8e8/0_180_6680_4009/master/6680.jpg?width=600&quality=45&dpr=2&s=none',
 		},
+		articleMainMedia: {
+			type: 'YoutubeVideo',
+			id: 'abcdef',
+			videoId: 'abcd',
+			title: 'some title',
+			duration: 378,
+			width: 480,
+			height: 288,
+			origin: 'The Guardian',
+			expired: false,
+			image: 'https://i.guim.co.uk/img/media/e060e9b7c92433b3dfeccc98b9206778cda8b8e8/0_180_6680_4009/master/6680.jpg?width=600&quality=45&dpr=2&s=none',
+		},
 	},
 	{
 		...defaultCardProps,
@@ -327,6 +339,18 @@ export const trails: [
 			image: 'https://media.guim.co.uk/13dd7e5c4ca32a53cd22dfd90ac1845ef5e5d643/0_0_1920_1080/1920.jpg',
 			expired: false,
 		},
+		articleMainMedia: {
+			type: 'YoutubeVideo',
+			id: '966acc06-a238-4d5f-b477-816eec0476f3',
+			videoId: '4JUvvbpx2So',
+			duration: 322,
+			title: 'How plastics are invading our brain cells – video',
+			width: 500,
+			height: 300,
+			origin: 'The Guardian',
+			image: 'https://media.guim.co.uk/13dd7e5c4ca32a53cd22dfd90ac1845ef5e5d643/0_0_1920_1080/1920.jpg',
+			expired: false,
+		},
 		trailText:
 			'Plastics are everywhere, but their smallest fragments – nanoplastics – are making their way into the deepest parts of our bodies, including our brains and breast milk',
 		supportingContent: [
@@ -419,6 +443,18 @@ export const trails: [
 			expired: false,
 			image: 'https://i.guim.co.uk/img/media/e060e9b7c92433b3dfeccc98b9206778cda8b8e8/0_180_6680_4009/master/6680.jpg?width=600&quality=45&dpr=2&s=none',
 		},
+		articleMainMedia: {
+			type: 'YoutubeVideo',
+			id: 'abcdef',
+			videoId: 'abcd',
+			title: 'some title',
+			duration: 378,
+			width: 480,
+			height: 288,
+			origin: 'The Guardian',
+			expired: false,
+			image: 'https://i.guim.co.uk/img/media/e060e9b7c92433b3dfeccc98b9206778cda8b8e8/0_180_6680_4009/master/6680.jpg?width=600&quality=45&dpr=2&s=none',
+		},
 	},
 ];
 
@@ -435,6 +471,14 @@ export const audioTrails: [DCRFrontCard, DCRFrontCard] = [
 		webPublicationDate: '2025-02-19T05:00:25.000Z',
 		kickerText: 'The Audio Long Read',
 		mainMedia: {
+			type: 'Audio',
+			duration: '46:12',
+			podcastImage: {
+				src: 'https://uploads.guim.co.uk/2021/01/22/AudioLongReadJan2021.jpg',
+				altText: 'The Audio Long Read',
+			},
+		},
+		articleMainMedia: {
 			type: 'Audio',
 			duration: '46:12',
 			podcastImage: {
@@ -459,6 +503,14 @@ export const audioTrails: [DCRFrontCard, DCRFrontCard] = [
 		webPublicationDate: '2025-02-19T14:11:54.000Z',
 		kickerText: 'Football Weekly',
 		mainMedia: {
+			type: 'Audio',
+			duration: '54:52',
+			podcastImage: {
+				src: 'https://uploads.guim.co.uk/2024/08/01/FootballWeekly_FINAL_3000_(1).jpg',
+				altText: 'Football Weekly',
+			},
+		},
+		articleMainMedia: {
 			type: 'Audio',
 			duration: '54:52',
 			podcastImage: {
@@ -522,6 +574,7 @@ export const galleryTrails: [DCRFrontCard, DCRFrontCard] = [
 		webPublicationDate: '2025-02-01T23:45:55.000Z',
 		kickerText: 'Fashion fixes',
 		mainMedia: { type: 'Gallery', count: '6' },
+		articleMainMedia: { type: 'Gallery', count: '6' },
 		image: {
 			src: 'https://media.guim.co.uk/003d9dbe35c7a64a1e109a38450f3704deaeac24/2_240_3598_2159/master/3598.jpg',
 			altText:
@@ -539,6 +592,7 @@ export const galleryTrails: [DCRFrontCard, DCRFrontCard] = [
 		webPublicationDate: '2025-02-07T05:00:36.000Z',
 		kickerText: 'Democratic Republic of the Congo',
 		mainMedia: { type: 'Gallery', count: '27' },
+		articleMainMedia: { type: 'Gallery', count: '27' },
 		showVideo: false,
 		image: {
 			src: 'https://media.guim.co.uk/69ac2383ea611126b54373865dac3e7e77981d7e/0_39_5500_3302/master/5500.jpg',
@@ -571,6 +625,18 @@ export const youtubeVideoTrails: [DCRFrontCard, DCRFrontCard] = [
 			expired: false,
 			image: 'https://media.guim.co.uk/0cab2d745b3423b0fac318c9ee09b79678f568f8/0_56_3000_1688/3000.jpg',
 		},
+		articleMainMedia: {
+			type: 'YoutubeVideo',
+			id: 'fa2ee832-c5e7-4305-8387-f0277d2d9e27',
+			videoId: '9kIN--VV2LQ',
+			duration: 117,
+			title: "Rashford and Garnacho omission from team to 'push them harder' says Amorim – video ",
+			width: 500,
+			height: 300,
+			origin: 'SNTV',
+			expired: false,
+			image: 'https://media.guim.co.uk/0cab2d745b3423b0fac318c9ee09b79678f568f8/0_56_3000_1688/3000.jpg',
+		},
 		image: {
 			src: 'https://media.guim.co.uk/0cab2d745b3423b0fac318c9ee09b79678f568f8/0_47_3000_1800/master/3000.jpg',
 			altText:
@@ -587,6 +653,18 @@ export const youtubeVideoTrails: [DCRFrontCard, DCRFrontCard] = [
 			'News Group Newspapers offered Harry ‘full and unequivocal apology’ for ‘serious intrusion’ by the paper',
 		webPublicationDate: '2025-01-22T18:51:14.000Z',
 		mainMedia: {
+			type: 'YoutubeVideo',
+			id: '03ac0c90-3a66-448c-8562-b66a9ca9360e',
+			videoId: '_2wsSKq6yAk',
+			duration: 71,
+			title: "Prince Harry's lawyer says settlement is 'monumental victory' – video ",
+			width: 500,
+			height: 300,
+			origin: 'Reuters',
+			expired: false,
+			image: 'https://media.guim.co.uk/908aa315f66a09bc6ea607b6049cd72decd2dfa6/0_0_5358_3014/5358.jpg',
+		},
+		articleMainMedia: {
 			type: 'YoutubeVideo',
 			id: '03ac0c90-3a66-448c-8562-b66a9ca9360e',
 			videoId: '_2wsSKq6yAk',

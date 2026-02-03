@@ -333,6 +333,7 @@ export const WithMediaType = () => {
 							theme: Pillar.Sport,
 						}}
 						mainMedia={{ ...mainYoutubeVideo, duration: 30 }}
+						articleMainMedia={{ ...mainYoutubeVideo, duration: 30 }}
 						headlineText="Video"
 					/>
 				</CardWrapper>
@@ -345,6 +346,7 @@ export const WithMediaType = () => {
 							theme: Pillar.Sport,
 						}}
 						mainMedia={{ ...mainYoutubeVideo, duration: 0 }}
+						articleMainMedia={{ ...mainYoutubeVideo, duration: 0 }}
 						headlineText="Video without duration"
 					/>
 				</CardWrapper>
@@ -373,6 +375,7 @@ export const WithMediaType = () => {
 							theme: Pillar.Sport,
 						}}
 						mainMedia={{ ...mainSelfHostedVideo }}
+						articleMainMedia={{ ...mainYoutubeVideo, duration: 30 }}
 						headlineText="Video with self-hosted video main media"
 					/>
 				</CardWrapper>
@@ -387,6 +390,7 @@ export const WithMediaType = () => {
 							theme: Pillar.Sport,
 						}}
 						mainMedia={mainAudio}
+						articleMainMedia={mainAudio}
 						headlineText="Audio"
 					/>
 				</CardWrapper>
@@ -399,6 +403,7 @@ export const WithMediaType = () => {
 							theme: Pillar.Sport,
 						}}
 						mainMedia={{ ...mainSelfHostedVideo }}
+						articleMainMedia={mainAudio}
 						headlineText="Audio with self-hosted video main media"
 					/>
 				</CardWrapper>
@@ -413,6 +418,7 @@ export const WithMediaType = () => {
 							theme: Pillar.Sport,
 						}}
 						mainMedia={mainGallery}
+						articleMainMedia={mainGallery}
 						headlineText="Gallery"
 					/>
 				</CardWrapper>
@@ -425,6 +431,7 @@ export const WithMediaType = () => {
 							theme: Pillar.Sport,
 						}}
 						mainMedia={{ ...mainSelfHostedVideo }}
+						articleMainMedia={mainGallery}
 						headlineText="Gallery with self-hosted video main media"
 					/>
 				</CardWrapper>
@@ -445,6 +452,7 @@ export const WithMediaTypeAndSublinks = () => {
 						theme: Pillar.Sport,
 					}}
 					mainMedia={{ ...mainYoutubeVideo, duration: 30 }}
+					articleMainMedia={{ ...mainYoutubeVideo, duration: 30 }}
 					headlineText="Video"
 					supportingContent={twoSublinks}
 				/>
@@ -458,6 +466,7 @@ export const WithMediaTypeAndSublinks = () => {
 						theme: Pillar.Sport,
 					}}
 					mainMedia={{ ...mainYoutubeVideo, duration: 0 }}
+					articleMainMedia={{ ...mainYoutubeVideo, duration: 0 }}
 					headlineText="Video without duration"
 					supportingContent={twoSublinks}
 				/>
@@ -471,6 +480,7 @@ export const WithMediaTypeAndSublinks = () => {
 						theme: Pillar.Sport,
 					}}
 					mainMedia={mainAudio}
+					articleMainMedia={mainAudio}
 					headlineText="Audio"
 					supportingContent={twoSublinks}
 				/>
@@ -484,6 +494,7 @@ export const WithMediaTypeAndSublinks = () => {
 						theme: Pillar.Sport,
 					}}
 					mainMedia={mainGallery}
+					articleMainMedia={mainGallery}
 					headlineText="Gallery"
 					supportingContent={twoSublinks}
 				/>
@@ -504,6 +515,7 @@ export const WithMediaTypeSpecialReportAlt = () => {
 						theme: ArticleSpecial.SpecialReportAlt,
 					}}
 					mainMedia={{ ...mainYoutubeVideo, duration: 30 }}
+					articleMainMedia={{ ...mainYoutubeVideo, duration: 30 }}
 					headlineText="Video"
 				/>
 			</CardWrapper>
@@ -516,6 +528,7 @@ export const WithMediaTypeSpecialReportAlt = () => {
 						theme: ArticleSpecial.SpecialReportAlt,
 					}}
 					mainMedia={mainAudio}
+					articleMainMedia={mainAudio}
 					headlineText="Audio"
 				/>
 			</CardWrapper>
@@ -528,6 +541,7 @@ export const WithMediaTypeSpecialReportAlt = () => {
 						theme: ArticleSpecial.SpecialReportAlt,
 					}}
 					mainMedia={mainGallery}
+					articleMainMedia={mainGallery}
 					headlineText="Gallery"
 				/>
 			</CardWrapper>
@@ -1148,6 +1162,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 						mediaSize="jumbo"
 						mediaPositionOnMobile="top"
 						mainMedia={mainYoutubeVideo}
+						articleMainMedia={mainYoutubeVideo}
 					/>
 				</LI>
 			</UL>
@@ -1164,6 +1179,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 						mediaSize="large"
 						mediaPositionOnMobile="top"
 						mainMedia={mainYoutubeVideo}
+						articleMainMedia={mainYoutubeVideo}
 					/>
 				</LI>
 				<LI percentage={'25%'} padSides={true} showDivider={true}>
@@ -1176,6 +1192,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 						}}
 						mediaPositionOnDesktop="top"
 						mainMedia={mainYoutubeVideo}
+						articleMainMedia={mainYoutubeVideo}
 						canPlayInline={false}
 					/>
 				</LI>
@@ -1193,6 +1210,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 						mediaSize="medium"
 						mediaPositionOnMobile="bottom"
 						mainMedia={mainYoutubeVideo}
+						articleMainMedia={mainYoutubeVideo}
 					/>
 				</LI>
 				<LI percentage="50%">
@@ -1207,6 +1225,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 								}}
 								mediaPositionOnDesktop="left"
 								mainMedia={mainYoutubeVideo}
+								articleMainMedia={mainYoutubeVideo}
 								canPlayInline={false}
 							/>
 						</LI>
@@ -1220,6 +1239,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 								}}
 								mediaPositionOnDesktop="right"
 								mainMedia={mainYoutubeVideo}
+								articleMainMedia={mainYoutubeVideo}
 								canPlayInline={false}
 							/>
 						</LI>
@@ -1234,6 +1254,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 								}}
 								mediaPositionOnDesktop="right"
 								mainMedia={mainYoutubeVideo}
+								articleMainMedia={mainYoutubeVideo}
 								canPlayInline={false}
 							/>
 						</LI>
@@ -1254,6 +1275,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 						mediaSize="large"
 						mediaPositionOnMobile="top"
 						mainMedia={mainYoutubeVideo}
+						articleMainMedia={mainYoutubeVideo}
 					/>
 				</LI>
 				<LI percentage={'33.333%'} padSides={true} showDivider={true}>
@@ -1268,6 +1290,7 @@ export const WhenYoutubeVideoWithPlayButton = () => {
 						mediaPositionOnMobile="left"
 						mediaSize="medium"
 						mainMedia={mainYoutubeVideo}
+						articleMainMedia={mainYoutubeVideo}
 					/>
 				</LI>
 			</UL>
@@ -1395,6 +1418,7 @@ export const WithBranding = () => {
 							mediaPositionOnMobile="left"
 							mediaSize="small"
 							mainMedia={mainGallery}
+							articleMainMedia={mainGallery}
 							containerPalette={containerPalette}
 							branding={branding}
 						/>
@@ -1477,6 +1501,7 @@ export const WithSpecialPaletteVariations = () => {
 					mediaPositionOnMobile="left"
 					mediaSize="medium"
 					mainMedia={mainAudio}
+					articleMainMedia={mainAudio}
 					containerPalette={containerPalette}
 					branding={branding}
 				/>
