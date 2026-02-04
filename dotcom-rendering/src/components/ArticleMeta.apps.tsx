@@ -37,6 +37,7 @@ type Props = {
 	isCommentable: boolean;
 	pageId?: string;
 	headline?: string;
+	inArticleFollowButtonVariant?: boolean;
 };
 
 const metaGridContainer = css`
@@ -230,6 +231,7 @@ export const ArticleMetaApps = ({
 	isCommentable,
 	pageId,
 	headline,
+	inArticleFollowButtonVariant,
 }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
@@ -297,7 +299,11 @@ export const ArticleMetaApps = ({
 							format={format}
 						/>
 					)}
-					{shouldShowFollowButtons(isAnalysis || isImmersive) &&
+					{shouldShowFollowButtons(
+						(isComment && !inArticleFollowButtonVariant) ||
+							isAnalysis ||
+							isImmersive,
+					) &&
 						soleContributor && (
 							<Island
 								priority="feature"

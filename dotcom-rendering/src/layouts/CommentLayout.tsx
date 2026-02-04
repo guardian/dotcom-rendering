@@ -297,6 +297,11 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 	const showComments = article.isCommentable && !isPaidContent;
 
 	const soleContributor = getSoleContributor(article.tags, article.byline);
+	const inArticleFollowButtonVariant =
+		isApps &&
+		format.design === ArticleDesign.Comment &&
+		!!soleContributor &&
+		article.config.abTests.inArticleFollowButtonVariant === 'variant';
 	const avatarUrl = soleContributor?.bylineLargeImageUrl;
 
 	const { branding } = article.commercialProperties[article.editionId];
@@ -498,6 +503,9 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 													article.config.shortUrlId
 												}
 												pageId={article.config.pageId}
+												inArticleFollowButtonVariant={
+													inArticleFollowButtonVariant
+												}
 											></ArticleMetaApps>
 										</Hide>
 										<Hide when="below" breakpoint="leftCol">
@@ -644,26 +652,23 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 										`}
 										color={themePalette('--straight-lines')}
 									/>
-									{isApps &&
-										format.design ===
-											ArticleDesign.Comment &&
-										soleContributor && (
-											<Island
-												priority="feature"
-												defer={{ until: 'visible' }}
-											>
-												<FollowButtonWithContributorProfile
-													id={soleContributor.id}
-													displayName={
-														soleContributor.title
-													}
-													avatarUrl={
-														soleContributor.bylineLargeImageUrl
-													}
-													bio="<p>A Guardian columnist, and author of The Invisible Doctrine: The Secret History of Neoliberalism (with Peter Hutchison)</p>" // to replace
-												/>
-											</Island>
-										)}
+									{inArticleFollowButtonVariant && (
+										<Island
+											priority="feature"
+											defer={{ until: 'visible' }}
+										>
+											<FollowButtonWithContributorProfile
+												id={soleContributor.id}
+												displayName={
+													soleContributor.title
+												}
+												avatarUrl={
+													soleContributor.bylineLargeImageUrl
+												}
+												bio="<p>A Guardian columnist, and author of The Invisible Doctrine: The Secret History of Neoliberalism (with Peter Hutchison)</p>" // to replace
+											/>
+										</Island>
+									)}
 									<SubMeta
 										format={format}
 										subMetaKeywordLinks={
