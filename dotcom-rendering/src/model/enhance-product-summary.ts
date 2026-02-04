@@ -1,4 +1,5 @@
 import type { FEElement, ProductBlockElement } from '../types/content';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { generateId } from './enhance-H2s';
 
 /**
@@ -19,6 +20,26 @@ export const allowedPageIds: string[] = [
 	'thefilter/2025/nov/18/best-pillows-tested-uk',
 	'thefilter/2025/jan/29/best-sunrise-alarm-clocks',
 	'thefilter/2025/dec/28/best-running-watches-tested-uk',
+	'thefilter/2025/mar/02/best-air-fryers',
+	'thefilter/2024/nov/14/the-8-best-video-doorbells-tried-and-tested',
+	'thefilter/2024/nov/26/best-robot-vacuum-mop',
+	'thefilter/2025/sep/19/best-led-red-light-therapy-face-masks',
+	'thefilter/2024/dec/27/best-electric-blankets-heated-throws',
+	'technology/article/2024/jul/08/the-best-apple-iphones-in-2024-tested-reviewed-and-ranked',
+	'thefilter/2025/dec/31/best-cross-trainers-ellipticals-uk',
+	'thefilter/2026/jan/02/best-concealer-tested-uk',
+	'thefilter/2025/jun/10/best-apple-watch',
+	'thefilter/2026/jan/15/best-hand-cream-tested-uk',
+	'thefilter/2026/jan/21/best-weighted-blanket-uk',
+	'thefilter/2024/oct/18/best-heated-clothes-airers-dryer-save-time-money-laundry',
+	'thefilter/2026/jan/23/best-duvets-tested-uk',
+	'thefilter/2025/jan/23/best-womens-hiking-walking-boots',
+	'thefilter/2024/nov/07/the-8-best-electric-heaters-tried-and-tested-from-traditional-stove-style-units-to-modern-smart-models',
+	'thefilter/2024/oct/10/best-walking-boots-hiking-men-tried-tested',
+	'thefilter-us/2025/dec/27/best-wine-subscriptions-us',
+	'thefilter-us/2025/dec/14/best-cordless-leaf-blowers-battery-powered',
+	'thefilter-us/2026/jan/07/best-packing-cubes',
+	'thefilter-us/2026/jan/09/best-induction-cookware',
 ];
 
 const isEligibleForSummary = (pageId: string) => {
@@ -58,11 +79,13 @@ const isAtAGlance = (element: FEElement) =>
 		'model.dotcomrendering.pageElements.SubheadingBlockElement' &&
 	generateId(element.elementId, element.html, []) === 'at-a-glance';
 
-const isSubheadingOrDivider = (element: FEElement) =>
-	// A subheading or divider signals the end of the "At a glance" section
+const isEndOfAtAGlanceSection = (element: FEElement) =>
+	// A subheading, divider, or a product block signals the end of the "At a glance" section
 	element._type ===
 		'model.dotcomrendering.pageElements.SubheadingBlockElement' ||
-	element._type === 'model.dotcomrendering.pageElements.DividerBlockElement';
+	element._type ===
+		'model.dotcomrendering.pageElements.DividerBlockElement' ||
+	element._type === 'model.dotcomrendering.pageElements.ProductBlockElement';
 
 const getAtAGlanceUrls = (elements: FEElement[]): string[] =>
 	Array.from(
@@ -123,7 +146,7 @@ const insertSummaryPlaceholder = (
 
 		// Hitting a divider or another subheading means we've reached the end
 		// of the current "At a glance" section
-		if (isSubheadingOrDivider(element)) {
+		if (isEndOfAtAGlanceSection(element)) {
 			inAtAGlanceSection = false;
 
 			const urls = getAtAGlanceUrls(atAGlanceElements);
@@ -156,19 +179,22 @@ export const enhanceProductSummary =
 	({
 		pageId,
 		serverSideABTests,
+		renderingTarget,
 	}: {
 		pageId: string;
 		serverSideABTests?: Record<string, string>;
+		renderingTarget: RenderingTarget;
 	}) =>
 	(elements: FEElement[]): FEElement[] => {
 		const abTestVariant =
 			serverSideABTests?.['thefilter-at-a-glance-redesign'];
 
-		// do nothing if article is not on allow list / not in the test / variant is 'control'
+		// do nothing if article is not on allow list / not in the test / variant is 'control' / renderingTarget is Apps
 		if (
 			abTestVariant &&
 			isCarouselOrStacked(abTestVariant) &&
-			isEligibleForSummary(pageId)
+			isEligibleForSummary(pageId) &&
+			renderingTarget === 'Web'
 		) {
 			return insertSummaryPlaceholder(elements, abTestVariant);
 		}

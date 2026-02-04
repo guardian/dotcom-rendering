@@ -16,6 +16,8 @@
 	});
 
 	let frontendAdminUrl = $derived(getOrigin());
+
+	let isRounded = Math.floor((size / testGroups.length) * 10) % 10 !== 0;
 </script>
 
 <div>
@@ -25,7 +27,9 @@
 			href={`${frontendAdminUrl}/ab-tests/opt-in/${testName}:${group}`}
 			target="_blank"
 		>
-			{group} ({formatter.format(((1 / testGroups.length) * size) / 100)})
+			{group} ({formatter.format(
+				Math.floor((size / testGroups.length) * 10) / 1000,
+			)}{isRounded ? "*" : ""})
 		</a>
 	{/each}
 	<a
@@ -34,10 +38,23 @@
 	>
 		opt out
 	</a>
+	{#if isRounded}
+		<div class="note">
+			* Rounded down to nearest 0.1% from ~{formatter.format(
+				Math.floor((size / testGroups.length) * 1000) / 100000,
+			)}
+		</div>
+	{/if}
 </div>
 
 <style>
 	.link {
 		margin: 0 4px;
+	}
+
+	.note {
+		font-size: 0.8em;
+		color: var(--color-text-secondary);
+		margin-top: 4px;
 	}
 </style>

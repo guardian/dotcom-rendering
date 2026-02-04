@@ -1,5 +1,5 @@
 import { deepEqual, equal, throws } from "node:assert";
-import { test } from "node:test";
+import { afterEach, beforeEach, mock, test } from "node:test";
 import type {
 	AllSpace,
 	AudienceSpace,
@@ -10,6 +10,35 @@ import {
 	calculateAllSpaceUpdates,
 	calculateSpaceUpdates,
 } from "./calculate-mvt-updates.ts";
+import { TestGroupMVTManager } from "./test-group-mvt-manager.ts";
+
+// Spy variables accessible across tests
+let deleteTestGroupSpy: ReturnType<typeof mock.method>;
+let addTestGroupSpy: ReturnType<typeof mock.method>;
+let resizeTestGroupSpy: ReturnType<typeof mock.method>;
+
+// Setup mocks before each test
+beforeEach(() => {
+	deleteTestGroupSpy = mock.method(
+		TestGroupMVTManager.prototype,
+		"deleteTestGroup",
+	);
+	addTestGroupSpy = mock.method(
+		TestGroupMVTManager.prototype,
+		"addTestGroup",
+	);
+	resizeTestGroupSpy = mock.method(
+		TestGroupMVTManager.prototype,
+		"resizeTestGroup",
+	);
+});
+
+// Cleanup mocks after each test
+afterEach(() => {
+	deleteTestGroupSpy.mock.restore();
+	addTestGroupSpy.mock.restore();
+	resizeTestGroupSpy.mock.restore();
+});
 
 // Helper function to create mock ABTest
 function createMockABTest(name: string, options: Partial<ABTest> = {}): ABTest {
@@ -56,6 +85,9 @@ test("calculateSpaceUpdates - handles empty audience space and tests", () => {
 	const result = calculateSpaceUpdates(emptyAudienceSpace, emptyTests);
 
 	equal(result.size, 0);
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 0);
+	equal(resizeTestGroupSpy.mock.callCount(), 0);
 });
 
 test("calculateSpaceUpdates - adds new test groups correctly", () => {
@@ -84,6 +116,10 @@ test("calculateSpaceUpdates - adds new test groups correctly", () => {
 	equal(variantEntry?.name, "commercial-test1:variant");
 	equal(controlEntry?.type, "server");
 	equal(variantEntry?.type, "server");
+
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 2); // 2 groups added
+	equal(resizeTestGroupSpy.mock.callCount(), 0);
 });
 
 test("calculateSpaceUpdates - removes tests no longer present", () => {
@@ -110,6 +146,10 @@ test("calculateSpaceUpdates - removes tests no longer present", () => {
 	equal(testNames.size, 1);
 	equal(testNames.has("commercial-test1"), true);
 	equal(testNames.has("commercial-test2"), false);
+
+	equal(deleteTestGroupSpy.mock.callCount(), 1); // 1 test group deleted (test2:control)
+	equal(addTestGroupSpy.mock.callCount(), 0);
+	equal(resizeTestGroupSpy.mock.callCount(), 2); // 2 groups resized (test1:control and test1:variant)
 });
 
 test("calculateSpaceUpdates - resizes existing test groups", () => {
@@ -134,6 +174,10 @@ test("calculateSpaceUpdates - resizes existing test groups", () => {
 	// Should allocate additional MVTs in ascending order
 	const mvtKeys = Array.from(result.keys()).sort();
 	deepEqual(mvtKeys, ["mvt:0", "mvt:1", "mvt:2", "mvt:3"]);
+
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 0);
+	equal(resizeTestGroupSpy.mock.callCount(), 2); // 2 groups resized
 });
 
 test("calculateSpaceUpdates - handles fractional audience sizes correctly", () => {
@@ -149,6 +193,10 @@ test("calculateSpaceUpdates - handles fractional audience sizes correctly", () =
 
 	// With 0.004 audience size and 2 groups, each group gets 0.002 * 1000 = 2 MVTs
 	equal(result.size, 4); // 2 * 2 groups
+
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 2); // 2 groups added
+	equal(resizeTestGroupSpy.mock.callCount(), 0);
 });
 
 test("calculateSpaceUpdates - handles single group test", () => {
@@ -167,6 +215,10 @@ test("calculateSpaceUpdates - handles single group test", () => {
 
 	const entry = result.get("mvt:0");
 	equal(entry?.name, "commercial-test1:variant");
+
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 1); // 1 group added
+	equal(resizeTestGroupSpy.mock.callCount(), 0);
 });
 
 test("calculateSpaceUpdates - handles multiple tests", () => {
@@ -194,6 +246,10 @@ test("calculateSpaceUpdates - handles multiple tests", () => {
 	equal(testNames.size, 2);
 	equal(testNames.has("commercial-test1"), true);
 	equal(testNames.has("webex-test2"), true);
+
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 3); // 3 groups added (2 + 1)
+	equal(resizeTestGroupSpy.mock.callCount(), 0);
 });
 
 test("calculateSpaceUpdates - preserves expiration dates", () => {
@@ -211,6 +267,10 @@ test("calculateSpaceUpdates - preserves expiration dates", () => {
 
 	const entry = result.get("mvt:0");
 	equal(entry?.exp, Math.floor(new Date(expirationDate).getTime() / 1000));
+
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 1);
+	equal(resizeTestGroupSpy.mock.callCount(), 0);
 });
 
 test("calculateSpaceUpdates - handles client-side tests", () => {
@@ -227,6 +287,10 @@ test("calculateSpaceUpdates - handles client-side tests", () => {
 
 	const entry = result.get("mvt:0");
 	equal(entry?.type, "client");
+
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 1);
+	equal(resizeTestGroupSpy.mock.callCount(), 0);
 });
 
 test("calculateAllSpaceUpdates - handles empty inputs", () => {
@@ -461,6 +525,10 @@ test("calculateSpaceUpdates - resizes middle test with adjacent tests", () => {
 	// Each group should have 3 MVTs
 	equal(test2ControlMVTs.length, 3);
 	equal(test2VariantMVTs.length, 3);
+
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 0);
+	equal(resizeTestGroupSpy.mock.callCount(), 2); // 2 groups resized (test2:control and test2:variant)
 });
 
 test("calculateSpaceUpdates - shrinks middle test with adjacent tests", () => {
@@ -528,6 +596,46 @@ test("calculateSpaceUpdates - shrinks middle test with adjacent tests", () => {
 	);
 	const uniqueMVTs = [...new Set(allMVTs)];
 	equal(allMVTs.length, uniqueMVTs.length);
+
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 0);
+	equal(resizeTestGroupSpy.mock.callCount(), 2); // 2 groups resized (test2:control and test2:variant)
+});
+
+test("calculateSpaceUpdates - dividing tests into non integer group sizes should round them down", () => {
+	const existingAudienceSpace = createMockAudienceSpace({});
+	const tests = [
+		createMockABTest("commercial-test1", {
+			audienceSize: 0.2, // 20%
+			groups: ["control", "variant0", "variant1"], // 3 groups, should lead to 67.66 rounded down to 66 MVTs per group
+		}),
+	];
+
+	const result = calculateSpaceUpdates(existingAudienceSpace, tests);
+
+	// Should have 198 MVT entries total
+	equal(result.size, 198);
+
+	// Check that each group has the correct number of MVTs
+	const controlMVTs = Array.from(result.entries())
+		.filter(([, entry]) => entry.name === "commercial-test1:control")
+		.map(([mvtKey]) => parseInt(mvtKey.split(":")[1] as string));
+	const variant0MVTs = Array.from(result.entries())
+		.filter(([, entry]) => entry.name === "commercial-test1:variant0")
+		.map(([mvtKey]) => parseInt(mvtKey.split(":")[1] as string));
+	const variant1MVTs = Array.from(result.entries())
+		.filter(([, entry]) => entry.name === "commercial-test1:variant1")
+		.map(([mvtKey]) => parseInt(mvtKey.split(":")[1] as string));
+
+	// With 198 MVTs and 3 groups, distribution should be:
+	// control: 66 MVTs, variant0: 66 MVTs, variant1: 66 MVTs
+	equal(controlMVTs.length, 66);
+	equal(variant0MVTs.length, 66);
+	equal(variant1MVTs.length, 66);
+
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 3); // 3 groups added
+	equal(resizeTestGroupSpy.mock.callCount(), 0);
 });
 
 test("calculateSpaceUpdates - handles insufficient MVTs when resizing middle test", () => {
@@ -582,4 +690,158 @@ test("calculateSpaceUpdates - handles insufficient MVTs when resizing middle tes
 		Error,
 		"Not enough available MVTs for test commercial-test2:control",
 	);
+});
+
+test("calculateSpaceUpdates - updates expiration date for existing test", () => {
+	const originalExpirationDate = "2025-12-31";
+	const newExpirationDate = "2026-01-31";
+
+	const existingAudienceSpace = createMockAudienceSpace({
+		"commercial-test1:control": [0],
+		"commercial-test1:variant": [1],
+	});
+
+	// Update the same test with a new expiration date
+	const tests = [
+		createMockABTest("commercial-test1", {
+			audienceSize: 0.002,
+			groups: ["control", "variant"],
+			expirationDate: newExpirationDate,
+		}),
+	];
+
+	const result = calculateSpaceUpdates(existingAudienceSpace, tests);
+
+	// Check that all entries have the updated expiration date
+	const controlEntry = result.get("mvt:0");
+	const variantEntry = result.get("mvt:1");
+
+	equal(
+		controlEntry?.exp,
+		Math.floor(new Date(newExpirationDate).getTime() / 1000),
+	);
+	equal(
+		variantEntry?.exp,
+		Math.floor(new Date(newExpirationDate).getTime() / 1000),
+	);
+
+	// Verify the expiration is NOT the old date
+	const oldExp = Math.floor(
+		new Date(originalExpirationDate).getTime() / 1000,
+	);
+	equal(controlEntry?.exp !== oldExp, true);
+	equal(variantEntry?.exp !== oldExp, true);
+
+	// When only expiration changes (not size), no operations are needed
+	// The expiration is updated when the final Map is created
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 0);
+	equal(resizeTestGroupSpy.mock.callCount(), 0);
+});
+
+test("calculateSpaceUpdates - handles status change from ON to OFF by removing test", () => {
+	const existingAudienceSpace = createMockAudienceSpace({
+		"commercial-test1:control": [0, 1],
+		"commercial-test1:variant": [2, 3],
+		"commercial-test2:control": [4, 5],
+		"commercial-test2:variant": [6, 7],
+	});
+
+	// Only include test1 in the active tests (simulating test2 being turned OFF)
+	const tests = [
+		createMockABTest("commercial-test1", {
+			audienceSize: 0.004,
+			groups: ["control", "variant"],
+			status: "ON",
+		}),
+	];
+
+	const result = calculateSpaceUpdates(existingAudienceSpace, tests);
+
+	// Should only have entries for test1
+	const testNames = new Set(
+		Array.from(result.values()).map((entry) => entry.name.split(":")[0]),
+	);
+	equal(testNames.size, 1);
+	equal(testNames.has("commercial-test1"), true);
+	equal(testNames.has("commercial-test2"), false);
+
+	// test2 should be deleted since it's not in the active tests list
+	equal(deleteTestGroupSpy.mock.callCount(), 2); // 2 groups deleted (test2:control and test2:variant)
+	equal(addTestGroupSpy.mock.callCount(), 0);
+	// test1 keeps the same size, so no resize is needed
+	equal(resizeTestGroupSpy.mock.callCount(), 0);
+});
+
+test("calculateSpaceUpdates - handles status change from OFF to ON by adding test", () => {
+	const existingAudienceSpace = createMockAudienceSpace({
+		"commercial-test1:control": [0, 1],
+		"commercial-test1:variant": [2, 3],
+	});
+
+	// Add test2 which was previously OFF (not in the audience space)
+	const tests = [
+		createMockABTest("commercial-test1", {
+			audienceSize: 0.004,
+			groups: ["control", "variant"],
+			status: "ON",
+		}),
+		createMockABTest("commercial-test2", {
+			audienceSize: 0.002,
+			groups: ["control", "variant"],
+			status: "ON",
+		}),
+	];
+
+	const result = calculateSpaceUpdates(existingAudienceSpace, tests);
+
+	// Should have entries for both tests
+	const testNames = new Set(
+		Array.from(result.values()).map((entry) => entry.name.split(":")[0]),
+	);
+	equal(testNames.size, 2);
+	equal(testNames.has("commercial-test1"), true);
+	equal(testNames.has("commercial-test2"), true);
+
+	// test2 should be added since it wasn't in the existing audience space
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 2); // 2 groups added (test2:control and test2:variant)
+	// test1 keeps the same size, so no resize is needed
+	equal(resizeTestGroupSpy.mock.callCount(), 0);
+});
+
+test("calculateSpaceUpdates - updates both expiration and size simultaneously", () => {
+	const newExpirationDate = "2026-01-31";
+
+	const existingAudienceSpace = createMockAudienceSpace({
+		"commercial-test1:control": [0],
+		"commercial-test1:variant": [1],
+	});
+
+	// Update test with both new expiration date and new size
+	const tests = [
+		createMockABTest("commercial-test1", {
+			audienceSize: 0.004, // Increased from 0.002 to 0.004
+			groups: ["control", "variant"],
+			expirationDate: newExpirationDate,
+		}),
+	];
+
+	const result = calculateSpaceUpdates(existingAudienceSpace, tests);
+
+	// Should have 4 MVT entries (2 per group) instead of 2
+	equal(result.size, 4);
+
+	// Check that all entries have the updated expiration date
+	for (const entry of result.values()) {
+		equal(
+			entry.exp,
+			Math.floor(new Date(newExpirationDate).getTime() / 1000),
+		);
+	}
+
+	// Should resize groups
+	equal(deleteTestGroupSpy.mock.callCount(), 0);
+	equal(addTestGroupSpy.mock.callCount(), 0);
+	equal(resizeTestGroupSpy.mock.callCount(), 2);
 });

@@ -45,7 +45,7 @@ import { DesignableBannerHeader } from './components/DesignableBannerHeader';
 import { DesignableBannerVisual } from './components/DesignableBannerVisual';
 import type {
 	BannerTemplateSettings,
-	ChoiceCardSettings,
+	ChoiceCardDesignSettings,
 	CtaSettings,
 } from './settings';
 import { buttonStyles, buttonThemes } from './styles/buttonStyles';
@@ -82,7 +82,7 @@ const buildHeaderImageSettings = (
 
 const buildChoiceCardSettings = (
 	design: ConfigurableDesign,
-): ChoiceCardSettings | undefined => {
+): ChoiceCardDesignSettings | undefined => {
 	if (design.visual?.kind === 'ChoiceCards') {
 		const {
 			buttonColour,
@@ -478,7 +478,9 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 									choices={choiceCards}
 									id={'banner'}
 									submitComponentEvent={submitComponentEvent}
-									choiceCardSettings={choiceCardSettings}
+									choiceCardDesignSettings={
+										choiceCardSettings
+									}
 								/>
 							)}
 							<div

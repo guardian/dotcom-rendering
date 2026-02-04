@@ -86,7 +86,7 @@ const StatusLine = (props: {
 		}}
 	>
 		<LeagueName matchKind={props.match.kind}>{props.leagueName}</LeagueName>
-		{props.match.venue} •{' '}
+		{props.match.venue ? `${props.match.venue} • ` : null}
 		<MatchStatus edition={props.edition} match={props.match} />
 	</p>
 );

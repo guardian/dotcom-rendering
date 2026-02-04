@@ -12,8 +12,8 @@
 		"prettier:fix": "prettier . --write --cache"
 	},
 	"dependencies": {
-		"@aws-sdk/client-s3": "3.931.0",
-		"@aws-sdk/client-ssm": "3.621.0",
+		"@aws-sdk/client-s3": "3.981.0",
+		"@aws-sdk/client-ssm": "3.981.0",
 		"@guardian/ab-testing-config": "workspace:ab-testing-config",
 		"superstruct": "2.0.2"
 	},

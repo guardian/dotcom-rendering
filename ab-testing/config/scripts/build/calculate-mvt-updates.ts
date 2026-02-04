@@ -25,7 +25,11 @@ const calculateSpaceUpdates = (
 				{
 					name: test.name,
 					type: test.type,
-					audienceSize: test.audienceSize / test.groups.length,
+					audienceSize:
+						Math.floor(
+							(test.audienceSize / test.groups.length) *
+								MVT_COUNT,
+						) / MVT_COUNT,
 					expirationDate: test.expirationDate,
 					group,
 				},
@@ -42,19 +46,29 @@ const calculateSpaceUpdates = (
 	});
 
 	// Add or update tests
-	updateTestGroups.forEach((test) => {
-		const currentTest = testGroupMVTs.getTestGroup(getTestGroupName(test));
-		if (!currentTest) {
-			console.log(`Adding new test group: ${test.name}:${test.group}`);
-			testGroupMVTs.addTestGroup(
-				getTestGroupName(test),
-				test.audienceSize * MVT_COUNT,
+	updateTestGroups.forEach((group) => {
+		const currentTestGroup = testGroupMVTs.getTestGroup(
+			getTestGroupName(group),
+		);
+		if (!currentTestGroup) {
+			console.log(
+				`Adding new test group: ${group.name}:${
+					group.group
+				} with size ${group.audienceSize * MVT_COUNT}`,
 			);
-		} else {
-			console.log(`Resizing test group: ${test.name}:${test.group}`);
+			testGroupMVTs.addTestGroup(
+				getTestGroupName(group),
+				group.audienceSize * MVT_COUNT,
+			);
+		} else if (currentTestGroup.length !== group.audienceSize * MVT_COUNT) {
+			console.log(
+				`Resizing test group: ${group.name}:${group.group} from ${
+					currentTestGroup.length
+				} to ${group.audienceSize * MVT_COUNT}`,
+			);
 			testGroupMVTs.resizeTestGroup(
-				getTestGroupName(test),
-				test.audienceSize * MVT_COUNT,
+				getTestGroupName(group),
+				group.audienceSize * MVT_COUNT,
 			);
 		}
 	});
