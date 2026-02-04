@@ -1,4 +1,4 @@
-// ----- Imports ----- //
+/// ----- Imports ----- //
 /* eslint sort-keys: ["error", "asc", { minKeys: 12, natural: true }]
   --
   the palette object is large and ordering helps knowing where to insert new elements
@@ -7092,7 +7092,7 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[73],
 		dark: () => sourcePalette.neutral[73],
 	},
-	'--follow-button-fill': {
+	'--follow-accent-color': {
 		light: followIconFillLight,
 		dark: followIconFillLight,
 	},
@@ -7103,6 +7103,10 @@ const paletteColours = {
 	'--follow-button-text-not-following': {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[100],
+	},
+	'--follow-bio-text': {
+		light: () => sourcePalette.neutral[10],
+		dark: () => sourcePalette.neutral[86],
 	},
 	'--follow-icon-background': {
 		light: followIconBackgroundLight,
@@ -7115,6 +7119,10 @@ const paletteColours = {
 	'--follow-text': {
 		light: followTextLight,
 		dark: followTextDark,
+	},
+	'--follow-bottom-border': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[97],
 	},
 	'--football-competition-select-text': {
 		light: () => sourcePalette.neutral[7],

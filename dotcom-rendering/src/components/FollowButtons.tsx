@@ -142,7 +142,7 @@ const pillButtonStyles = (isFollowing: boolean) => css`
 	display: inline-flex;
 	align-items: center;
 	gap: ${space[1]}px;
-	padding: ${space[2]}px ${space[3]}px;
+	padding: ${space[1] + 1}px ${space[3] + 2}px;
 	border-radius: ${space[5]}px;
 	border: 1px solid
 		${isFollowing
@@ -150,7 +150,7 @@ const pillButtonStyles = (isFollowing: boolean) => css`
 			: palette('--follow-button-border')};
 	background: ${isFollowing
 		? 'transparent'
-		: palette('--follow-button-fill')};
+		: palette('--follow-accent-color')};
 	color: ${isFollowing
 		? palette('--follow-button-text')
 		: palette('--follow-button-text-not-following')};

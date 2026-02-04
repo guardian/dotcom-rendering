@@ -50,7 +50,7 @@ const contentStyles = css`
 
 const titleStyles = css`
 	${headlineBold17};
-	color: ${palette('--byline-anchor')};
+	color: ${palette('--follow-accent-color')};
 	margin: 0 0 ${space[1]}px;
 `;
 
@@ -58,8 +58,7 @@ const bioStyles = css`
 	${textEgyptian14};
 	font-weight: 500;
 	line-height: 1.3;
-	letter-spacing: -0.01em;
-	color: ${palette('--article-text')};
+	color: ${palette('--follow-bio-text')};
 	margin: 0;
 
 	p {
@@ -83,7 +82,11 @@ const bioStyles = css`
 const followButtonContainerStyles = css`
 	display: flex;
 `;
-
+const borderStyles = css`
+	height: 13px;
+	background-color: ${palette('--follow-bottom-border')};
+	margin-top: ${space[3]}px;
+`;
 const containsText = (html: string) => {
 	const htmlWithoutTags = sanitise(html, {
 		allowedTags: [],
@@ -131,6 +134,7 @@ export const FollowButtonWithContributorProfile = ({
 					variant="pill"
 				/>
 			</div>
+			<div css={borderStyles} />
 		</div>
 	);
 };

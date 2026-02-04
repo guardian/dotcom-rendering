@@ -297,11 +297,11 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 	const showComments = article.isCommentable && !isPaidContent;
 
 	const soleContributor = getSoleContributor(article.tags, article.byline);
-	const inArticleFollowButtonVariant =
-		isApps &&
-		format.design === ArticleDesign.Comment &&
-		!!soleContributor &&
-		article.config.abTests.inArticleFollowButtonVariant === 'variant';
+	const inArticleFollowButtonVariant = true;
+	// isApps &&
+	// format.design === ArticleDesign.Comment &&
+	// !!soleContributor &&
+	// article.config.abTests.inArticleFollowButtonVariant === 'variant';
 	const avatarUrl = soleContributor?.bylineLargeImageUrl;
 
 	const { branding } = article.commercialProperties[article.editionId];
@@ -658,12 +658,13 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 											defer={{ until: 'visible' }}
 										>
 											<FollowButtonWithContributorProfile
-												id={soleContributor.id}
+												id={soleContributor!.id}
 												displayName={
-													soleContributor.title
+													soleContributor!.title
 												}
 												avatarUrl={
-													soleContributor.bylineLargeImageUrl
+													soleContributor!
+														.bylineLargeImageUrl
 												}
 												bio="<p>A Guardian columnist, and author of The Invisible Doctrine: The Secret History of Neoliberalism (with Peter Hutchison)</p>" // to replace
 											/>
