@@ -36,6 +36,10 @@ export const allowedPageIds: string[] = [
 	'thefilter/2025/jan/23/best-womens-hiking-walking-boots',
 	'thefilter/2024/nov/07/the-8-best-electric-heaters-tried-and-tested-from-traditional-stove-style-units-to-modern-smart-models',
 	'thefilter/2024/oct/10/best-walking-boots-hiking-men-tried-tested',
+	'thefilter-us/2025/dec/27/best-wine-subscriptions-us',
+	'thefilter-us/2025/dec/14/best-cordless-leaf-blowers-battery-powered',
+	'thefilter-us/2026/jan/07/best-packing-cubes',
+	'thefilter-us/2026/jan/09/best-induction-cookware',
 ];
 
 const isEligibleForSummary = (pageId: string) => {
