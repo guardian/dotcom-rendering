@@ -496,7 +496,11 @@ export const SelfHostedVideo = ({
 	 * Track the first time the video comes into view.
 	 */
 	useOnce(() => {
-		const resolution = `${window.innerWidth}x${window.innerHeight}`;
+		const video = vidRef.current;
+		const resolution =
+			video === null
+				? 'unknown'
+				: `${video.offsetWidth}x${video.offsetHeight}`;
 
 		void submitComponentEvent(
 			{
