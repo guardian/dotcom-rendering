@@ -18,13 +18,17 @@ import { palette } from '../palette';
 import Union from '../static/icons/Union.svg';
 
 type Props = {
-	matchStats?: FootballMatchStats;
+	matchStats: FootballMatchStats;
 };
 
 const lineupSectionId = 'lineups';
 const substitutesSectionId = 'substitutes';
 
 export const Lineups = ({ matchStats }: Props) => {
+	const lineupAvailable =
+		matchStats.homeTeam.players.length > 0 &&
+		matchStats.awayTeam.players.length > 0;
+
 	return (
 		<section css={sectionStyles} aria-label="Team Lineups and Substitutes">
 			<section
@@ -32,7 +36,7 @@ export const Lineups = ({ matchStats }: Props) => {
 				aria-labelledby={lineupSectionId}
 			>
 				<Title text="Lineups" id={lineupSectionId} />
-				{matchStats ? (
+				{lineupAvailable ? (
 					<>
 						<PlayerList
 							team={matchStats.homeTeam}
@@ -49,7 +53,7 @@ export const Lineups = ({ matchStats }: Props) => {
 					<span css={comingSoon}>Coming soon</span>
 				)}
 			</section>
-			{matchStats && (
+			{lineupAvailable && (
 				<section
 					css={playerListSectionGridStyles}
 					aria-labelledby={substitutesSectionId}
