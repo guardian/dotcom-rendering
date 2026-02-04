@@ -19,7 +19,7 @@ const bold = css`
 	font-weight: bold;
 `;
 
-const forceTestGroupsCookieName = 'gu_force_ab_test_groups';
+const forceTestGroupsCookieName = 'gu_force_test_groups';
 const darkModeTestGroup = 'webex-dark-mode-web:enable';
 
 const appendToForceTestGroupsCookie = (group: string) => {
