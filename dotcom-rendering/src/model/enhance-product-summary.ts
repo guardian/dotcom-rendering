@@ -59,11 +59,13 @@ const isAtAGlance = (element: FEElement) =>
 		'model.dotcomrendering.pageElements.SubheadingBlockElement' &&
 	generateId(element.elementId, element.html, []) === 'at-a-glance';
 
-const isSubheadingOrDivider = (element: FEElement) =>
-	// A subheading or divider signals the end of the "At a glance" section
+const isEndOfAtAGlanceSection = (element: FEElement) =>
+	// A subheading, divider, or a product block signals the end of the "At a glance" section
 	element._type ===
 		'model.dotcomrendering.pageElements.SubheadingBlockElement' ||
-	element._type === 'model.dotcomrendering.pageElements.DividerBlockElement';
+	element._type ===
+		'model.dotcomrendering.pageElements.DividerBlockElement' ||
+	element._type === 'model.dotcomrendering.pageElements.ProductBlockElement';
 
 const getAtAGlanceUrls = (elements: FEElement[]): string[] =>
 	Array.from(
@@ -124,7 +126,7 @@ const insertSummaryPlaceholder = (
 
 		// Hitting a divider or another subheading means we've reached the end
 		// of the current "At a glance" section
-		if (isSubheadingOrDivider(element)) {
+		if (isEndOfAtAGlanceSection(element)) {
 			inAtAGlanceSection = false;
 
 			const urls = getAtAGlanceUrls(atAGlanceElements);
