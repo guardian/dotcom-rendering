@@ -48,4 +48,11 @@ export const WithLineup = {
 	},
 } satisfies Story;
 
-export const ComingSoon = {} satisfies Story;
+export const ComingSoon = {
+	args: {
+		matchStats: {
+			homeTeam: { ...matchStats.homeTeam, players: [] },
+			awayTeam: { ...matchStats.awayTeam, players: [] },
+		},
+	},
+} satisfies Story;
