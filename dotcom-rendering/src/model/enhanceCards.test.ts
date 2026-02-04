@@ -2,7 +2,7 @@ import type { FEMediaAsset, FEMediaAtom } from '../frontend/feFront';
 import { getActiveMediaAtom } from './enhanceCards';
 
 describe('Enhance Cards', () => {
-	it('prioritises m3u8 assets over MP4 assets', () => {
+	it('prioritises MP4 assets over m3u8 assets', () => {
 		const videoReplace = true;
 		const assets: FEMediaAsset[] = [
 			{
@@ -53,12 +53,12 @@ describe('Enhance Cards', () => {
 			subtitleSource: undefined,
 			sources: [
 				{
-					mimeType: 'application/x-mpegURL',
-					src: 'https://guim-example.co.uk/atomID-1.m3u8',
-				},
-				{
 					mimeType: 'video/mp4',
 					src: 'https://guim-example.co.uk/atomID-1.mp4',
+				},
+				{
+					mimeType: 'application/x-mpegURL',
+					src: 'https://guim-example.co.uk/atomID-1.m3u8',
 				},
 			],
 			width: 500,
@@ -123,12 +123,12 @@ describe('Enhance Cards', () => {
 			subtitleSource: 'https://guim-example.co.uk/atomID-1.vtt',
 			sources: [
 				{
-					mimeType: 'application/x-mpegURL',
-					src: 'https://guim-example.co.uk/atomID-1.m3u8',
-				},
-				{
 					mimeType: 'video/mp4',
 					src: 'https://guim-example.co.uk/atomID-1.mp4',
+				},
+				{
+					mimeType: 'application/x-mpegURL',
+					src: 'https://guim-example.co.uk/atomID-1.m3u8',
 				},
 			],
 			width: 500,

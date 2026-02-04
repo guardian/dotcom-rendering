@@ -1,4 +1,15 @@
+import { isUndefined } from '@guardian/libs';
+import { replaceLiveMatchStatus } from './footballMatches';
 import type { FootballTeam } from './footballTeam';
+import type {
+	FEFixture,
+	FEFootballMatch,
+	FEMatchDay,
+	FEResult,
+} from './frontend/feFootballMatchListPage';
+import { oneOf, parseDate } from './lib/parse';
+import { error, type Result } from './lib/result';
+import { cleanTeamName } from './sportDataPage';
 
 /**
  * There are three states a football match can be in.
@@ -50,7 +61,7 @@ export type MatchResult = MatchData & {
 type MatchData = {
 	paId: string;
 	kickOff: Date;
-	venue: string;
+	venue?: string;
 };
 
 /**
@@ -60,4 +71,228 @@ type MatchData = {
 type FootballMatchTeamWithScore = FootballTeam & {
 	score: number;
 	scorers: string[];
+};
+
+type FootballDayInvalidDate = {
+	kind: 'FootballDayInvalidDate';
+	message: string;
+};
+
+type ExpectedMatchDayFixture = {
+	kind: 'ExpectedMatchDayFixture';
+	message: string;
+};
+
+type FootballMatchInvalidDate = {
+	kind: 'FootballMatchInvalidDate';
+	message: string;
+};
+
+type ExpectedMatchDayResult = {
+	kind: 'ExpectedMatchDayResult';
+	message: string;
+};
+
+type ExpectedMatchDayLive = {
+	kind: 'ExpectedMatchDayLive';
+	message: string;
+};
+
+type InvalidMatchDay = {
+	kind: 'InvalidMatchDay';
+	errors: Array<ParserError>;
+};
+
+type UnexpectedLiveMatch = {
+	kind: 'UnexpectedLiveMatch';
+	message: string;
+};
+
+type ParserError =
+	| FootballDayInvalidDate
+	| ExpectedMatchDayFixture
+	| FootballMatchInvalidDate
+	| ExpectedMatchDayResult
+	| ExpectedMatchDayLive
+	| InvalidMatchDay
+	| UnexpectedLiveMatch;
+
+const parseMatchDate = (date: string): Result<string, Date> => {
+	// Frontend appends a timezone in square brackets
+	const isoDate = date.split('[')[0];
+
+	if (isUndefined(isoDate)) {
+		return error(
+			`Expected a match date with a timezone appended in square brackets at the end, but instead got ${date}`,
+		);
+	}
+
+	return parseDate(isoDate);
+};
+
+const parseFixture = (
+	feFixture: FEFixture | FEMatchDay,
+): Result<ParserError, MatchFixture> => {
+	if (
+		feFixture.type === 'MatchDay' &&
+		(feFixture.result || feFixture.liveMatch)
+	) {
+		return error({
+			kind: 'ExpectedMatchDayFixture',
+			message: `A fixture match day must not have 'liveMatch' or 'result' set to 'true', but this was not the case for ${feFixture.id}`,
+		});
+	}
+
+	return parseMatchDate(feFixture.date)
+		.mapError<ParserError>((message) => ({
+			kind: 'FootballMatchInvalidDate',
+			message,
+		}))
+		.map<MatchFixture>((dateTimeISOString) => ({
+			kind: 'Fixture',
+			paId: feFixture.id,
+			kickOff: dateTimeISOString,
+			venue: feFixture.venue?.name,
+			homeTeam: {
+				name: cleanTeamName(feFixture.homeTeam.name),
+				paID: feFixture.homeTeam.id,
+			},
+			awayTeam: {
+				name: cleanTeamName(feFixture.awayTeam.name),
+				paID: feFixture.awayTeam.id,
+			},
+		}));
+};
+
+const parseMatchResult = (
+	feResult: FEResult | FEMatchDay,
+): Result<ParserError, MatchResult> => {
+	if (feResult.type === 'MatchDay' && !feResult.result) {
+		return error({
+			kind: 'ExpectedMatchDayResult',
+			message: `A result match day must have 'result' set to 'true', but this was not the case for ${feResult.id}`,
+		});
+	}
+
+	if (
+		feResult.homeTeam.score === undefined ||
+		feResult.awayTeam.score === undefined
+	) {
+		return error({
+			kind: 'ExpectedMatchDayResult',
+			message: `A result match must have scores for both teams, but this was not the case for ${feResult.id}`,
+		});
+	}
+
+	// Extract validated values so TypeScript can narrow the types
+	const homeScore = feResult.homeTeam.score;
+	const awayScore = feResult.awayTeam.score;
+
+	return parseMatchDate(feResult.date)
+		.mapError<ParserError>((message) => ({
+			kind: 'FootballMatchInvalidDate',
+			message,
+		}))
+		.map<MatchResult>((dateTimeISOString) => ({
+			kind: 'Result',
+			paId: feResult.id,
+			kickOff: dateTimeISOString,
+			venue: feResult.venue?.name,
+			homeTeam: {
+				name: cleanTeamName(feResult.homeTeam.name),
+				paID: feResult.homeTeam.id,
+				score: homeScore,
+				scorers: feResult.homeTeam.scorers?.split(',') ?? [],
+			},
+			awayTeam: {
+				name: cleanTeamName(feResult.awayTeam.name),
+				paID: feResult.awayTeam.id,
+				score: awayScore,
+				scorers: feResult.awayTeam.scorers?.split(',') ?? [],
+			},
+			comment: feResult.comments,
+		}));
+};
+
+const parseLiveMatch = (
+	feMatchDay: FEMatchDay,
+): Result<ParserError, LiveMatch> => {
+	if (!feMatchDay.liveMatch) {
+		return error({
+			kind: 'ExpectedMatchDayLive',
+			message: `A live match day must have 'liveMatch' set to 'true', but this was not the case for ${feMatchDay.id}`,
+		});
+	}
+
+	if (
+		feMatchDay.homeTeam.score === undefined ||
+		feMatchDay.awayTeam.score === undefined
+	) {
+		return error({
+			kind: 'ExpectedMatchDayLive',
+			message: `A live match must have scores for both teams, but this was not the case for ${feMatchDay.id}`,
+		});
+	}
+
+	// Extract validated values so TypeScript can narrow the types
+	const homeScore = feMatchDay.homeTeam.score;
+	const awayScore = feMatchDay.awayTeam.score;
+
+	return parseMatchDate(feMatchDay.date)
+		.mapError<ParserError>((message) => ({
+			kind: 'FootballMatchInvalidDate',
+			message,
+		}))
+		.map((dateTimeISOString) => ({
+			kind: 'Live',
+			paId: feMatchDay.id,
+			kickOff: dateTimeISOString,
+			venue: feMatchDay.venue?.name,
+			homeTeam: {
+				name: cleanTeamName(feMatchDay.homeTeam.name),
+				paID: feMatchDay.homeTeam.id,
+				score: homeScore,
+				scorers: feMatchDay.homeTeam.scorers?.split(',') ?? [],
+			},
+			awayTeam: {
+				name: cleanTeamName(feMatchDay.awayTeam.name),
+				paID: feMatchDay.awayTeam.id,
+				score: awayScore,
+				scorers: feMatchDay.awayTeam.scorers?.split(',') ?? [],
+			},
+			dateTimeISOString,
+			comment: cleanTeamName(feMatchDay.comments ?? ''),
+			status: replaceLiveMatchStatus(feMatchDay.matchStatus),
+		}));
+};
+
+const parseMatchDay = (
+	feMatchDay: FEMatchDay,
+): Result<ParserError, FootballMatch> =>
+	oneOf<ParserError, FEMatchDay, FootballMatch>([
+		parseLiveMatch,
+		parseMatchResult,
+		parseFixture,
+	])(feMatchDay).mapError((errors) => ({
+		kind: 'InvalidMatchDay',
+		errors,
+	}));
+
+export const parseFootballMatchV2 = (
+	feMatch: FEFootballMatch,
+): Result<ParserError, FootballMatch> => {
+	switch (feMatch.type) {
+		case 'Fixture':
+			return parseFixture(feMatch);
+		case 'Result':
+			return parseMatchResult(feMatch);
+		case 'MatchDay':
+			return parseMatchDay(feMatch);
+		case 'LiveMatch':
+			return error({
+				kind: 'UnexpectedLiveMatch',
+				message:
+					"Did not expect to get a match with type 'LiveMatch', allowed options are 'MatchDay', 'Fixture' or 'Result'",
+			});
+	}
 };
