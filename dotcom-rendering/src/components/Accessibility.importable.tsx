@@ -4,7 +4,6 @@ import { article17, palette } from '@guardian/source/foundations';
 import { type SetStateAction, useEffect, useState } from 'react';
 import { useConfig } from './ConfigContext';
 import { FrontSection } from './FrontSection';
-import { isProd } from './marketing/lib/stage';
 
 const formStyle = css`
 	display: flex;
@@ -87,28 +86,6 @@ export const Accessibility = () => {
 		true,
 	);
 
-	const [shouldParticipate, setParticipate] =
-		useState<boolean>(darkModeAvailable);
-
-	useEffect(() => {
-		const redirectPath = shouldParticipate
-			? '/ab-tests/opt-in/webex-dark-mode:enable'
-			: '/ab-tests/opt-out/webex-dark-mode:enable';
-		const redirectUrl = isProd()
-			? `https://www.theguardian.com/${redirectPath}`
-			: `https://m.code.dev-theguardian.com/${redirectPath}`;
-
-		const timeout = setTimeout(() => {
-			// we must reload the page for the preference to take effect,
-			// as this relies on a server-side test & cookie combination
-			if (shouldParticipate !== darkModeAvailable) {
-				window.location.href = redirectUrl;
-			}
-		}, 1200);
-
-		return () => clearTimeout(timeout);
-	}, [shouldParticipate, darkModeAvailable]);
-
 	const togglePreference = (
 		preferenceCallback: (value: SetStateAction<boolean>) => void,
 	): void => {
@@ -149,29 +126,35 @@ export const Accessibility = () => {
 
 				<br />
 
-				<fieldset css={formStyle}>
+				<div css={formStyle}>
 					<p>
 						We offer beta support for a dark colour scheme on the
 						web. The colour scheme preference will follow your
 						system settings.
 					</p>
-					<label>
-						<input
-							type="checkbox"
-							checked={shouldParticipate}
-							onChange={(e) => {
-								setParticipate(e.target.checked);
-							}}
-							data-link-name="prefers-colour-scheme"
-						/>
-						<span css={bold}>
-							Participate in the dark colour scheme beta{' '}
-						</span>
-						{shouldParticipate
-							? ' Untick this to opt out (will redirect to homepage)'
-							: ' Tick this to opt in (will redirect to homepage)'}
-					</label>
-				</fieldset>
+					{darkModeAvailable ? (
+						<>
+							<p css={bold}>
+								You are currently participating in the dark
+								colour scheme beta.
+							</p>
+							<a href="/ab-tests/opt-out/webex-dark-mode:enable">
+								Click here to opt out (will redirect to
+								homepage)
+							</a>
+						</>
+					) : (
+						<>
+							<p css={bold}>
+								You are not currently participating in the dark
+								colour scheme beta.
+							</p>
+							<a href="/ab-tests/opt-in/webex-dark-mode:enable">
+								Click here to opt in (will redirect to homepage)
+							</a>
+						</>
+					)}
+				</div>
 			</form>
 		</FrontSection>
 	);
