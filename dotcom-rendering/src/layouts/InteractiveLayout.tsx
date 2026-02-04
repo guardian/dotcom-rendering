@@ -18,6 +18,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
+import { DirectoryPageNav } from '../components/DirectoryPageNav';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -290,6 +291,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				</>
 			)}
 			<main data-layout="InteractiveLayout">
+				<DirectoryPageNav selected="none" pageId={article.pageId} />
 				<Section
 					fullWidth={true}
 					showTopBorder={false}

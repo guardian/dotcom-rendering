@@ -17,80 +17,66 @@ type Props = {
 };
 
 interface DirectoryPageNavConfig {
-	sectionSlug: string;
+	pageIds: string[];
 	textColor: string;
 	backgroundColor: string;
 	title: { label: string; link: string };
 	links: { label: string; href: string; selectedSlug: string | undefined }[];
+	backgroundImages?: {
+		mobile: string;
+		mobileLandscape: string;
+		phablet: string;
+		tablet: string;
+		desktop: string;
+	};
 }
 
 const configs = [
 	{
-		sectionSlug: 'women-s-euro-2025',
-		textColor: palette.neutral[100],
-		backgroundColor: palette.news[400],
-		title: {
-			label: "Women's Euro 2025",
-			link: '/football/women-s-euro-2025',
-		},
-		links: [
-			{
-				label: 'Fixtures',
-				href: '/football/women-s-euro-2025/fixtures',
-				selectedSlug: 'fixtures',
-			},
-			{
-				label: 'Tables',
-				href: '/football/women-s-euro-2025/overview',
-				selectedSlug: 'tables',
-			},
-			{
-				label: 'Top scorers',
-				href: '/p/x2e3za',
-				selectedSlug: undefined,
-			},
-			{
-				label: 'Players guide',
-				href: '/p/x27nz8',
-				selectedSlug: undefined,
-			},
-			{
-				label: 'Full coverage',
-				href: '/football/women-s-euro-2025',
-				selectedSlug: undefined,
-			},
+		pageIds: [
+			'sport/winter-olympics-2026',
+			'sport/ng-interactive/2026/feb/04/winter-olympics-full-schedule-milano-cortina-2026',
+			'sport/ng-interactive/2026/feb/04/winter-olympics-results-milano-cortina-2026',
+			'sport/ng-interactive/2026/feb/04/winter-olympics-2026-latest-medal-table-milano-cortina',
 		],
-	},
-	{
-		sectionSlug: 'winter-olympics-2026',
 		textColor: palette.neutral[7],
 		backgroundColor: '#CCCCCC',
 		title: {
-			label: 'Milano Cortina Winter Olympics 2026',
-			link: '/tbd',
+			label: 'Winter Olympics 2026',
+			link: 'https://www.theguardian.com/sport/winter-olympics-2026',
 		},
 		links: [
 			{
 				label: 'Schedule',
-				href: '/p/x4x38e',
+				href: 'https://www.theguardian.com/sport/ng-interactive/2026/feb/04/winter-olympics-full-schedule-milano-cortina-2026',
 				selectedSlug: 'schedule',
 			},
 			{
 				label: 'Results',
-				href: '/p/x4x3k4',
+				href: 'https://www.theguardian.com/sport/ng-interactive/2026/feb/04/winter-olympics-results-milano-cortina-2026',
 				selectedSlug: 'results',
 			},
 			{
 				label: 'Medal table',
-				href: '/p/x4x3k6',
+				href: 'https://www.theguardian.com/sport/ng-interactive/2026/feb/04/winter-olympics-2026-latest-medal-table-milano-cortina',
 				selectedSlug: undefined,
 			},
 			{
 				label: 'Full coverage',
-				href: '/tbd',
+				href: 'https://www.theguardian.com/sport/winter-olympics-2026',
 				selectedSlug: undefined,
 			},
 		],
+		backgroundImages: {
+			mobile: 'https://uploads.guim.co.uk/2026/02/03/winter-olympics-414px.jpg',
+			mobileLandscape:
+				'https://uploads.guim.co.uk/2026/02/03/winter-olympics-480px.jpg',
+			phablet:
+				'https://uploads.guim.co.uk/2026/02/03/winter-olympics-740_px.jpg',
+			tablet: 'https://uploads.guim.co.uk/2026/02/03/winter-olympics-740px-thin.jpg',
+			desktop:
+				'https://uploads.guim.co.uk/2026/02/03/winter-olympics-980px.jpg',
+		},
 	},
 ] satisfies DirectoryPageNavConfig[];
 
@@ -98,8 +84,33 @@ type Configs = typeof configs;
 type SelectedSlug = Configs[number]['links'][number]['selectedSlug'];
 type Selected = Exclude<SelectedSlug, undefined>;
 
+const backgroundImageStyles = (
+	images?: DirectoryPageNavConfig['backgroundImages'],
+) => {
+	if (!images) return {};
+
+	return {
+		backgroundImage: `url(${images.mobile})`,
+		backgroundSize: 'cover',
+		backgroundPosition: 'top center',
+
+		[from.mobileLandscape]: {
+			backgroundImage: `url(${images.mobileLandscape})`,
+		},
+		[from.phablet]: {
+			backgroundImage: `url(${images.phablet})`,
+		},
+		[from.tablet]: {
+			backgroundImage: `url(${images.tablet})`,
+		},
+		[from.desktop]: {
+			backgroundImage: `url(${images.desktop})`,
+		},
+	};
+};
+
 export const DirectoryPageNav = ({ selected, pageId }: Props) => {
-	const config = configs.find((cfg) => pageId.includes(cfg.sectionSlug));
+	const config = configs.find((cfg) => cfg.pageIds.includes(pageId));
 
 	if (!config) {
 		return null;
@@ -118,6 +129,7 @@ export const DirectoryPageNav = ({ selected, pageId }: Props) => {
 		[from.desktop]: {
 			height: 150,
 		},
+		...backgroundImageStyles(config.backgroundImages),
 	});
 
 	const largeLinkStyles = css({
