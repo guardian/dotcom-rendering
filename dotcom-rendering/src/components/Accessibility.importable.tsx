@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { isUndefined, removeCookie, setCookie, storage } from '@guardian/libs';
+import { getCookie, isUndefined, setCookie, storage } from '@guardian/libs';
 import { article17, palette } from '@guardian/source/foundations';
 import { type SetStateAction, useEffect, useState } from 'react';
 import { useConfig } from './ConfigContext';
@@ -19,9 +19,41 @@ const bold = css`
 	font-weight: bold;
 `;
 
-// This is hard coded, and must be changed if the experiment bucket changes
-// https://github.com/guardian/frontend/blob/09f49b80/common/app/experiments/Experiments.scala#L57
-const darkModeCookieName = 'X-GU-Experiment-0perc-D';
+const forceTestGroupsCookieName = 'gu_force_ab_test_groups';
+const darkModeTestGroup = 'webex-dark-mode-web:enable';
+
+const appendToForceTestGroupsCookie = (group: string) => {
+	const existingValue = getCookie({ name: forceTestGroupsCookieName });
+	let newValue = group;
+	if (
+		typeof existingValue === 'string' &&
+		existingValue.length > 0 &&
+		!existingValue.includes(group)
+	) {
+		newValue = `${existingValue},${group}`;
+
+		setCookie({
+			name: forceTestGroupsCookieName,
+			value: newValue,
+		});
+	}
+};
+
+const removeFromForceTestGroupsCookie = (group: string) => {
+	const existingValue = getCookie({ name: forceTestGroupsCookieName });
+	if (
+		typeof existingValue === 'string' &&
+		existingValue.length > 0 &&
+		existingValue.includes(group)
+	) {
+		const groups = existingValue.split(',').filter((g) => g !== group);
+		const newValue = groups.join(',');
+		setCookie({
+			name: forceTestGroupsCookieName,
+			value: newValue,
+		});
+	}
+};
 
 const PreferenceToggle = ({
 	label,
@@ -95,12 +127,9 @@ export const Accessibility = () => {
 
 	useEffect(() => {
 		if (shouldParticipate) {
-			setCookie({
-				name: darkModeCookieName,
-				value: 'true',
-			});
+			appendToForceTestGroupsCookie(darkModeTestGroup);
 		} else {
-			removeCookie({ name: darkModeCookieName });
+			removeFromForceTestGroupsCookie(darkModeTestGroup);
 		}
 
 		const timeout = setTimeout(() => {

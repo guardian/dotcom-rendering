@@ -83,11 +83,13 @@ export const renderFront = ({
 	const NAV = extractNAV(front.nav);
 	const enhancedNAV = enhanceNav(NAV);
 
+	const darkModeAvailable =
+		front.config.serverSideABTests?.['webex-dark-mode-web'] === 'enable';
+
 	// Fronts are not supported in Apps
 	const config = {
 		renderingTarget: 'Web',
-		darkModeAvailable:
-			front.config.abTests.darkModeWebVariant === 'variant',
+		darkModeAvailable,
 		assetOrigin: ASSET_ORIGIN,
 		editionId: front.editionId,
 	} satisfies Config;
@@ -182,11 +184,13 @@ export const renderTagPage = ({
 	const NAV = extractNAV(tagPage.nav);
 	const enhancedNAV = enhanceNav(NAV);
 
+	const darkModeAvailable =
+		tagPage.config.serverSideABTests?.['webex-dark-mode-web'] === 'enable';
+
 	// Fronts are not supported in Apps
 	const config: Config = {
 		renderingTarget: 'Web',
-		darkModeAvailable:
-			tagPage.config.abTests.darkModeWebVariant === 'variant',
+		darkModeAvailable,
 		assetOrigin: ASSET_ORIGIN,
 		editionId: tagPage.editionId,
 	};
