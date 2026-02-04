@@ -1,9 +1,10 @@
 import { css } from '@emotion/react';
-import { getCookie, isUndefined, setCookie, storage } from '@guardian/libs';
+import { isUndefined, storage } from '@guardian/libs';
 import { article17, palette } from '@guardian/source/foundations';
 import { type SetStateAction, useEffect, useState } from 'react';
 import { useConfig } from './ConfigContext';
 import { FrontSection } from './FrontSection';
+import { isProd } from './marketing/lib/stage';
 
 const formStyle = css`
 	display: flex;
@@ -18,42 +19,6 @@ const formStyle = css`
 const bold = css`
 	font-weight: bold;
 `;
-
-const forceTestGroupsCookieName = 'gu_force_test_groups';
-const darkModeTestGroup = 'webex-dark-mode-web:enable';
-
-const appendToForceTestGroupsCookie = (group: string) => {
-	const existingValue = getCookie({ name: forceTestGroupsCookieName });
-	let newValue = group;
-	if (
-		typeof existingValue === 'string' &&
-		existingValue.length > 0 &&
-		!existingValue.includes(group)
-	) {
-		newValue = `${existingValue},${group}`;
-
-		setCookie({
-			name: forceTestGroupsCookieName,
-			value: newValue,
-		});
-	}
-};
-
-const removeFromForceTestGroupsCookie = (group: string) => {
-	const existingValue = getCookie({ name: forceTestGroupsCookieName });
-	if (
-		typeof existingValue === 'string' &&
-		existingValue.length > 0 &&
-		existingValue.includes(group)
-	) {
-		const groups = existingValue.split(',').filter((g) => g !== group);
-		const newValue = groups.join(',');
-		setCookie({
-			name: forceTestGroupsCookieName,
-			value: newValue,
-		});
-	}
-};
 
 const PreferenceToggle = ({
 	label,
@@ -126,17 +91,18 @@ export const Accessibility = () => {
 		useState<boolean>(darkModeAvailable);
 
 	useEffect(() => {
-		if (shouldParticipate) {
-			appendToForceTestGroupsCookie(darkModeTestGroup);
-		} else {
-			removeFromForceTestGroupsCookie(darkModeTestGroup);
-		}
+		const redirectPath = shouldParticipate
+			? '/ab-tests/opt-in/webex-dark-mode:enable'
+			: '/ab-tests/opt-out/webex-dark-mode:enable';
+		const redirectUrl = isProd()
+			? `https://www.theguardian.com/${redirectPath}`
+			: `https://m.code.dev-theguardian.com/${redirectPath}`;
 
 		const timeout = setTimeout(() => {
 			// we must reload the page for the preference to take effect,
 			// as this relies on a server-side test & cookie combination
 			if (shouldParticipate !== darkModeAvailable) {
-				window.location.reload();
+				window.location.href = redirectUrl;
 			}
 		}, 1200);
 
@@ -202,8 +168,8 @@ export const Accessibility = () => {
 							Participate in the dark colour scheme beta{' '}
 						</span>
 						{shouldParticipate
-							? ' Untick this to opt out (browser will refresh)'
-							: ' Tick this to opt in (browser will refresh)'}
+							? ' Untick this to opt out (will redirect to homepage)'
+							: ' Tick this to opt in (will redirect to homepage)'}
 					</label>
 				</fieldset>
 			</form>
