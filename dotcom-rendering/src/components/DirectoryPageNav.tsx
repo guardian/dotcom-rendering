@@ -33,32 +33,37 @@ interface DirectoryPageNavConfig {
 
 const configs = [
 	{
-		pageIds: ['pageId1', 'pageId2'],
+		pageIds: [
+			'sport/winter-olympics-2026',
+			'sport/ng-interactive/2026/feb/04/winter-olympics-full-schedule-milano-cortina-2026',
+			'sport/ng-interactive/2026/feb/04/winter-olympics-results-milano-cortina-2026',
+			'sport/ng-interactive/2026/feb/04/winter-olympics-2026-latest-medal-table-milano-cortina',
+		],
 		textColor: palette.neutral[7],
 		backgroundColor: '#CCCCCC',
 		title: {
 			label: 'Winter Olympics 2026',
-			link: '/tbd',
+			link: 'https://www.theguardian.com/sport/winter-olympics-2026',
 		},
 		links: [
 			{
 				label: 'Schedule',
-				href: '/p/x4x38e',
+				href: 'https://www.theguardian.com/sport/ng-interactive/2026/feb/04/winter-olympics-full-schedule-milano-cortina-2026',
 				selectedSlug: 'schedule',
 			},
 			{
 				label: 'Results',
-				href: '/p/x4x3k4',
+				href: 'https://www.theguardian.com/sport/ng-interactive/2026/feb/04/winter-olympics-results-milano-cortina-2026',
 				selectedSlug: 'results',
 			},
 			{
 				label: 'Medal table',
-				href: '/p/x4x3k6',
+				href: 'https://www.theguardian.com/sport/ng-interactive/2026/feb/04/winter-olympics-2026-latest-medal-table-milano-cortina',
 				selectedSlug: undefined,
 			},
 			{
 				label: 'Full coverage',
-				href: '/tbd',
+				href: 'https://www.theguardian.com/sport/winter-olympics-2026',
 				selectedSlug: undefined,
 			},
 		],
