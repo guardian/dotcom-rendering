@@ -1,9 +1,11 @@
 import { css } from '@emotion/react';
 import { grid } from '../grid';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { HostedContent } from 'src/types/hostedContent';
 
 interface Props {
 	renderingTarget: RenderingTarget;
+	content: HostedContent;
 }
 
 interface WebProps extends Props {

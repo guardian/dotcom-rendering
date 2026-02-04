@@ -8,6 +8,7 @@ import { CrosswordLayout } from './CrosswordLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 import { GalleryLayout } from './GalleryLayout';
 import { HostedArticleLayout } from './HostedArticleLayout';
+import { HostedGalleryLayout } from './HostedGalleryLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
@@ -345,8 +346,16 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 						/>
 					);
 				case ArticleDesign.HostedArticle:
+				case ArticleDesign.HostedVideo:
 					return (
 						<HostedArticleLayout
+							content={article}
+							renderingTarget={renderingTarget}
+						/>
+					);
+				case ArticleDesign.HostedGallery:
+					return (
+						<HostedGalleryLayout
 							content={article}
 							renderingTarget={renderingTarget}
 						/>
