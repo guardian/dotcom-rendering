@@ -12,6 +12,7 @@ import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
 import { enhanceBlockquotes } from './enhance-blockquotes';
+import { enhanceContributorProfile } from './enhance-contributor-profile';
 import { enhanceDisclaimer } from './enhance-disclaimer';
 import { enhanceDividers } from './enhance-dividers';
 import { enhanceDots } from './enhance-dots';
@@ -97,6 +98,12 @@ export const enhanceElements =
 				format,
 				options.renderingTarget,
 				options.shouldHideAds,
+			),
+			enhanceContributorProfile(
+				format,
+				options.renderingTarget,
+				options.tags,
+				options.byline,
 			),
 			enhanceDisclaimer(options.hasAffiliateLinksDisclaimer, isNested),
 			enhanceProductSummary({

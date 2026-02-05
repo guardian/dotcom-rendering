@@ -194,7 +194,7 @@ export const FollowTagButtonVariant = ({
 			) : (
 				<SvgPlus size="xsmall" />
 			)}
-			<span>{isFollowing ? 'Following in My Guardian' : 'Follow'}</span>
+			<span>{isFollowing ? 'Following' : 'Follow'} in My Guardian</span>
 		</button>
 	);
 };

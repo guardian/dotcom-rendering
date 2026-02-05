@@ -606,6 +606,15 @@ export interface TextBlockElement {
 	html: string;
 }
 
+export interface ContributorProfileBlockElement {
+	_type: 'model.dotcomrendering.pageElements.ContributorProfileBlockElement';
+	elementId: string;
+	contributorId: string;
+	displayName: string;
+	avatarUrl?: string;
+	bio?: string;
+}
+
 export type DCRTimelineEvent = {
 	date: string;
 	title?: string;
@@ -832,6 +841,7 @@ export type FEElement =
 	| CodeBlockElement
 	| CommentBlockElement
 	| ContentAtomBlockElement
+	| ContributorProfileBlockElement
 	| DisclaimerBlockElement
 	| DividerBlockElement
 	| DocumentBlockElement

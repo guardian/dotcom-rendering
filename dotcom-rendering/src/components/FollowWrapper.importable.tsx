@@ -7,7 +7,6 @@ import { getNotificationsClient, getTagClient } from '../lib/bridgetApi';
 import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
 import { useIsMyGuardianEnabled } from '../lib/useIsMyGuardianEnabled';
 import {
-	FollowNotificationsButton,
 	FollowNotificationsButtonVariant,
 	FollowTagButton,
 	FollowTagButtonVariant,
