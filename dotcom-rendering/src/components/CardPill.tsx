@@ -65,6 +65,15 @@ export const CardPill = ({
 					prefix="Video"
 				/>
 			);
+		case 'SelfHostedVideo':
+			if (ArticleDesign.Video !== format.design) return null;
+			return (
+				<Pill
+					content={secondsToDuration(mainMedia.duration)}
+					icon={<SvgMediaControlsPlay width={18} />}
+					prefix="Video"
+				/>
+			);
 		default:
 			return null;
 	}
