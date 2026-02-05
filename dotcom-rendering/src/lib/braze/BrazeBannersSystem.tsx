@@ -357,7 +357,7 @@ export const BrazeBannersSystemDisplay = ({
 
 	const subscribeToNewsletter = useCallback(
 		async (newsletterId: string) => {
-			if (authStatus.kind == 'SignedIn') {
+			if (authStatus.kind === 'SignedIn') {
 				const options = getOptionsHeaders(authStatus);
 
 				await fetch(`${idApiUrl}/users/me/newsletters`, {
@@ -390,12 +390,14 @@ export const BrazeBannersSystemDisplay = ({
 			const authState = await getAuthState();
 			return authState.idToken?.claims.email;
 		};
-		return new Promise((resolve) => {
+		const timeoutPromise = new Promise<string | null>((resolve) => {
 			setTimeout(() => resolve(null), 1000);
-			void getEmail().then((email) => {
-				resolve(email ?? null);
-			});
 		});
+		const result = await Promise.race<string | undefined | null>([
+			getEmail(),
+			timeoutPromise,
+		]);
+		return result ?? null;
 	}, []);
 
 	// Handle DOM Insertion
