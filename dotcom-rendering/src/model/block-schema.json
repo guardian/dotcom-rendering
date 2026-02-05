@@ -2426,8 +2426,9 @@
                 },
                 "presentation": {
                     "enum": [
-                        "grid",
-                        "slideshow"
+                        "side-by-side",
+                        "slideshow",
+                        "stacked"
                     ],
                     "type": "string"
                 }
