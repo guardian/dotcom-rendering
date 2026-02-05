@@ -229,11 +229,14 @@ const notificationTextStylesVariant = css`
 
 const notificationsTextSpanVariant = ({
 	isFollowing,
-}: Pick<ButtonProps, 'isFollowing'>) => (
+	displayName,
+}: Pick<ButtonProps, 'isFollowing'> & { displayName?: string }) => (
 	<span css={notificationTextStylesVariant}>
 		{isFollowing
 			? 'Notifications on'
-			: 'Turn on notifications to be alerted whenever {contributor} publishes an article'}
+			: `Turn on notifications to be alerted whenever ${
+					displayName ?? 'this author'
+			  } publishes an article`}
 	</span>
 );
 
@@ -263,7 +266,8 @@ const iconTextWrapperStyles = css`
 export const FollowNotificationsButtonVariant = ({
 	isFollowing,
 	onClickHandler,
-}: ButtonProps) => {
+	displayName,
+}: ButtonProps & { displayName?: string }) => {
 	return (
 		<div css={buttonStylesVariantNotification}>
 			<span css={containerStylesVariant}>
@@ -275,7 +279,7 @@ export const FollowNotificationsButtonVariant = ({
 							<SvgNotificationsOff size="small" />
 						}
 					/>
-					{notificationsTextSpanVariant({ isFollowing })}
+					{notificationsTextSpanVariant({ isFollowing, displayName })}
 				</span>
 				<ToggleSwitch
 					checked={isFollowing}

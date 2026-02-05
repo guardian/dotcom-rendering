@@ -217,6 +217,7 @@ export const FollowWrapper = ({
 						? notificationsHandler
 						: () => undefined
 				}
+				displayName={displayName}
 			/>
 			{/* )} */}
 		</div>
