@@ -7116,6 +7116,10 @@ const paletteColours = {
 		light: followIconFillLight,
 		dark: followIconFillDark,
 	},
+	'--follow-icon-variant-fill': {
+		light: () => sourcePalette.neutral[10],
+		dark: () => sourcePalette.neutral[86],
+	},
 	'--follow-text': {
 		light: followTextLight,
 		dark: followTextDark,

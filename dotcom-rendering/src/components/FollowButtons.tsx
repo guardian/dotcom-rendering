@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, textSans15 } from '@guardian/source/foundations';
+import { space, textSans12, textSans15 } from '@guardian/source/foundations';
 import {
 	SvgCheckmark,
 	SvgNotificationsOff,
@@ -8,6 +8,7 @@ import {
 } from '@guardian/source/react-components';
 import type { ReactNode } from 'react';
 import { palette } from '../palette';
+import { ToggleSwitch } from '@guardian/source-development-kitchen/react-components';
 
 type IconProps = {
 	isFollowing?: boolean;
@@ -137,7 +138,17 @@ export const FollowTagButton = ({
 	);
 };
 
-const pillButtonStyles = (isFollowing: boolean) => css`
+// Variant style
+
+const containerStylesVariant = css`
+	display: flex;
+	align-items: flex-start;
+	column-gap: 0.2em;
+	justify-content: space-between;
+	width: 100%;
+`;
+
+const buttonStylesVariant = (isFollowing: boolean) => css`
 	${textSans15}
 	display: inline-flex;
 	align-items: center;
@@ -169,7 +180,7 @@ const pillButtonStyles = (isFollowing: boolean) => css`
 	}
 `;
 
-export const FollowTagButtonPill = ({
+export const FollowTagButtonVariant = ({
 	isFollowing,
 	onClickHandler,
 }: ButtonProps) => {
@@ -177,14 +188,101 @@ export const FollowTagButtonPill = ({
 		<button
 			onClick={onClickHandler}
 			type="button"
-			css={pillButtonStyles(isFollowing)}
+			css={buttonStylesVariant(isFollowing)}
 		>
 			{isFollowing ? (
 				<SvgCheckmark size="xsmall" />
 			) : (
 				<SvgPlus size="xsmall" />
 			)}
-			<span>{isFollowing ? 'Following' : 'Follow'} in My Guardian</span>
+			<span>{isFollowing ? 'Following in My Guardian' : 'Follow'}</span>
+		</button>
+	);
+};
+
+const NotificationIconVariant = ({
+	isFollowing,
+	iconIsFollowing,
+	iconIsNotFollowing,
+}: IconProps) => (
+	<div
+		css={css`
+			display: flex;
+			margin: 0;
+			margin-right: ${space[1]}px;
+
+			svg {
+				margin-top: -${space[1] - 1}px;
+			}
+		`}
+		style={{
+			fill: palette('--follow-icon-variant-fill'),
+		}}
+	>
+		{isFollowing ? iconIsFollowing : iconIsNotFollowing}
+	</div>
+);
+
+const notificationTextStylesVariant = css`
+	${textSans12}
+`;
+
+const notificationsTextSpanVariant = ({
+	isFollowing,
+}: Pick<ButtonProps, 'isFollowing'>) => (
+	<span css={notificationTextStylesVariant}>
+		{isFollowing
+			? 'Notifications on'
+			: 'Turn on notifications to be alerted whenever {contributor} publishes an article'}
+	</span>
+);
+
+const toggleSwitchStyles = css`
+	[aria-checked='false'] {
+		background-color: ${palette(
+			'--follow-button-border-following',
+		)} !important;
+		border-color: ${palette('--follow-button-border-following')} !important;
+	}
+	[aria-checked='true'] {
+		background-color: ${palette('--follow-button-border')} !important;
+		border-color: ${palette('--follow-button-border')} !important;
+	}
+`;
+
+const buttonStylesVariantNotification = css`
+	${buttonStyles(true)}
+	width: 100%;
+`;
+
+const iconTextWrapperStyles = css`
+	display: flex;
+	align-items: flex-start;
+`;
+
+export const FollowNotificationsButtonVariant = ({
+	isFollowing,
+	onClickHandler,
+}: ButtonProps) => {
+	return (
+		<button
+			onClick={onClickHandler}
+			type="button"
+			css={buttonStylesVariantNotification}
+		>
+			<span css={containerStylesVariant}>
+				<span css={iconTextWrapperStyles}>
+					<NotificationIconVariant
+						isFollowing={isFollowing}
+						iconIsFollowing={<SvgNotificationsOn size="small" />}
+						iconIsNotFollowing={
+							<SvgNotificationsOff size="small" />
+						}
+					/>
+					{notificationsTextSpanVariant({ isFollowing })}
+				</span>
+				<ToggleSwitch cssOverrides={toggleSwitchStyles} />
+			</span>
 		</button>
 	);
 };

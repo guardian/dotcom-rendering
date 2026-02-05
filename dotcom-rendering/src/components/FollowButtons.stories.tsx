@@ -4,7 +4,7 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import {
 	FollowNotificationsButton,
 	FollowTagButton,
-	FollowTagButtonPill,
+	FollowTagButtonVariant,
 } from './FollowButtons';
 
 export default {
@@ -27,7 +27,7 @@ export const Default = ({ isFollowing }: { isFollowing: boolean }) => {
 				isFollowing={isFollowing}
 				onClickHandler={() => undefined}
 			/>
-			<FollowTagButtonPill
+			<FollowTagButtonVariant
 				isFollowing={isFollowing}
 				onClickHandler={() => undefined}
 			/>
@@ -80,28 +80,28 @@ export const FollowContributorBothStates = () => {
 };
 FollowContributorBothStates.decorators = [splitTheme()];
 
-const pillContainerStyles = css`
+const variantContainerStyles = css`
 	display: flex;
 	gap: 16px;
 	margin-bottom: 16px;
 `;
 
-export const FollowTagButtonPillBothStates = () => {
+export const VariantFollowTagButtonBothStates = () => {
 	return (
-		<div css={pillContainerStyles}>
-			<FollowTagButtonPill
+		<div css={variantContainerStyles}>
+			<FollowTagButtonVariant
 				isFollowing={false}
 				onClickHandler={() => undefined}
 			/>
-			<FollowTagButtonPill
+			<FollowTagButtonVariant
 				isFollowing={true}
 				onClickHandler={() => undefined}
 			/>
 		</div>
 	);
 };
-FollowTagButtonPillBothStates.storyName = 'Pill Button - Both States';
-FollowTagButtonPillBothStates.decorators = [
+VariantFollowTagButtonBothStates.storyName = 'Variant Button - Both States';
+VariantFollowTagButtonBothStates.decorators = [
 	splitTheme([
 		{
 			display: ArticleDisplay.Standard,
@@ -111,22 +111,22 @@ FollowTagButtonPillBothStates.decorators = [
 	]),
 ];
 
-export const FollowTagButtonPillAllPillars = () => {
+export const VariantFollowTagButtonAllPillars = () => {
 	return (
-		<div css={pillContainerStyles}>
-			<FollowTagButtonPill
+		<div css={variantContainerStyles}>
+			<FollowTagButtonVariant
 				isFollowing={false}
 				onClickHandler={() => undefined}
 			/>
-			<FollowTagButtonPill
+			<FollowTagButtonVariant
 				isFollowing={true}
 				onClickHandler={() => undefined}
 			/>
 		</div>
 	);
 };
-FollowTagButtonPillAllPillars.storyName = 'Pill Button - All Pillars';
-FollowTagButtonPillAllPillars.decorators = [
+VariantFollowTagButtonAllPillars.storyName = 'Variant Button - All Pillars';
+VariantFollowTagButtonAllPillars.decorators = [
 	splitTheme([
 		{
 			display: ArticleDisplay.Standard,

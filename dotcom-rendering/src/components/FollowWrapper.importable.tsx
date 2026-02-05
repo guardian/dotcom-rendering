@@ -8,8 +8,9 @@ import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
 import { useIsMyGuardianEnabled } from '../lib/useIsMyGuardianEnabled';
 import {
 	FollowNotificationsButton,
+	FollowNotificationsButtonVariant,
 	FollowTagButton,
-	FollowTagButtonPill,
+	FollowTagButtonVariant,
 } from './FollowButtons';
 
 type Props = {
@@ -188,7 +189,7 @@ export const FollowWrapper = ({
 		>
 			{showFollowTagButton &&
 				(variant === 'pill' ? (
-					<FollowTagButtonPill
+					<FollowTagButtonVariant
 						isFollowing={isFollowingTag ?? false}
 						onClickHandler={
 							!isUndefined(isFollowingTag)
@@ -208,16 +209,16 @@ export const FollowWrapper = ({
 						withExtraBottomMargin={true}
 					/>
 				))}
-			{variant === 'default' && (
-				<FollowNotificationsButton
-					isFollowing={isFollowingNotifications ?? false}
-					onClickHandler={
-						!isUndefined(isFollowingNotifications)
-							? notificationsHandler
-							: () => undefined
-					}
-				/>
-			)}
+			{/* {variant === 'default' && ( */}
+			<FollowNotificationsButtonVariant
+				isFollowing={isFollowingNotifications ?? false}
+				onClickHandler={
+					!isUndefined(isFollowingNotifications)
+						? notificationsHandler
+						: () => undefined
+				}
+			/>
+			{/* )} */}
 		</div>
 	);
 };

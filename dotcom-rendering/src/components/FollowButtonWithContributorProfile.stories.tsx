@@ -8,7 +8,11 @@ import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { palette } from '../palette';
 import { Avatar } from './Avatar';
-import { FollowTagButtonPill } from './FollowButtons';
+import {
+	FollowNotificationsButton,
+	FollowNotificationsButtonVariant,
+	FollowTagButtonVariant,
+} from './FollowButtons';
 import { FollowButtonWithContributorProfile } from './FollowButtonWithContributorProfile.importable';
 
 export default {
@@ -129,8 +133,20 @@ const FollowButtonWithProfilePreview = ({
 				</div>
 			</div>
 			<div>
-				<FollowTagButtonPill
+				<FollowTagButtonVariant
 					isFollowing={isFollowing}
+					onClickHandler={() => undefined}
+				/>
+			</div>
+			<div>
+				<div>
+					<FollowNotificationsButtonVariant
+						isFollowing={false}
+						onClickHandler={() => undefined}
+					/>
+				</div>
+				<FollowNotificationsButtonVariant
+					isFollowing={true}
 					onClickHandler={() => undefined}
 				/>
 			</div>
