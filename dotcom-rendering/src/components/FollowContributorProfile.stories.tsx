@@ -132,16 +132,18 @@ const Wrapper = ({ isFollowing }: { isFollowing: boolean }) => (
 				/>
 			</div>
 			<div>
-				<div>
-					<FollowNotificationsButtonVariant
-						isFollowing={false}
-						onClickHandler={() => undefined}
-					/>
-				</div>
-				<FollowNotificationsButtonVariant
-					isFollowing={true}
-					onClickHandler={() => undefined}
-				/>
+				{isFollowing && (
+					<div>
+						<FollowNotificationsButtonVariant
+							isFollowing={false}
+							onClickHandler={() => undefined}
+						/>
+						<FollowNotificationsButtonVariant
+							isFollowing={true}
+							onClickHandler={() => undefined}
+						/>
+					</div>
+				)}
 			</div>
 		</div>
 	</div>

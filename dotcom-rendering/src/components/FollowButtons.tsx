@@ -265,11 +265,7 @@ export const FollowNotificationsButtonVariant = ({
 	onClickHandler,
 }: ButtonProps) => {
 	return (
-		<button
-			onClick={onClickHandler}
-			type="button"
-			css={buttonStylesVariantNotification}
-		>
+		<div css={buttonStylesVariantNotification}>
 			<span css={containerStylesVariant}>
 				<span css={iconTextWrapperStyles}>
 					<NotificationIconVariant
@@ -283,9 +279,10 @@ export const FollowNotificationsButtonVariant = ({
 				</span>
 				<ToggleSwitch
 					checked={isFollowing}
+					onClick={onClickHandler}
 					cssOverrides={toggleSwitchStyles}
 				/>
 			</span>
-		</button>
+		</div>
 	);
 };
