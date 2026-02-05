@@ -2,21 +2,30 @@
 
 The **Braze Banners System** is a unified framework within Dotcom Rendering (DCR) for integrating [Braze Banners](https://www.braze.com/docs/developer_guide/banners/) - a channel designed for persistent, inline, and personalized messaging.
 
-This system is owned by the **Value** team and serves as the standard implementation for in-article messaging powered by Braze.
+This system is owned by the **Value** team and serves as the replacement for the legacy "Hybrid" setup (custom In-App Messages and `braze-components`).
 
-## Context & Motivation
+## Context: The "Braze Channels" Upgrade
 
-### What are Braze Banners?
+This system is part of a strategic shift from a **Hybrid setup** to a **Native setup** (Braze Banners).
 
-Unlike "In-App Messages" (overlays) or "Content Cards" (feeds), Banners are designed to sit natively within the page layout. They allow marketing and product teams to dynamically personalize content based on real-time user eligibility and behavior without requiring code deployment for every campaign change.
+As we transition to the **Braze Banners System**, the legacy **Hybrid setup** (In-App Messaging system alongside the `braze-components` library) will be deprecated soon.
 
-### Why replace the old implementation?
+This new approach relies on **Braze Banner templates** created directly in the Braze Dashboard - a joint effort between the **CRM**, **Design**, and **Development** teams. This collaborative workflow ensures design consistency while empowering CRM to self-serve.
 
-Previously, we often relied on custom implementations of Content Cards or hardcoded logic to achieve similar effects. The generic Banners product solves several key issues:
+### Motivation
 
-1.  **Efficiency**: Marketing teams can design and launch banners using Braze's drag-and-drop editor creating a "natural" experience without ongoing developer assistance.
-2.  **Persistency**: Banners are designed to be "always-on" and non-intrusive, updating automatically at the start of sessions.
-3.  **Dynamic Personalization**: Through the `iframe` architecture, banners can be personalized (Liquid logic) and refreshed without re-deploying DCR.
+| Metric          | Legacy Hybrid Setup                          | New Braze Banners System                       |
+| :-------------- | :------------------------------------------- | :--------------------------------------------- |
+| **Build Time**  | 5–6 hours (Design + Liquid logic + QA)       | < 1 hour                                       |
+| **Tooling**     | Manual Storybook templates & Key-Value pairs | Braze Drag-and-Drop Editor & CMS               |
+| **Agility**     | dependency on engineering for new formats    | Self-serve to standard Design System templates |
+| **Consistency** | Fragmented logic                             | Shared logic across Web & App                  |
+
+### Goals
+
+1.  **Increase Supporter Value**: Enable highly personalized, cross-platform journeys (leveraging CDP data).
+2.  **Improve Agility**: Reduce campaign build time significantly.
+3.  **Expand Formats**: Move beyond just "Epic" and "Banner" to potential new slots (Sidebar, Menubar) in the future.
 
 ## Architecture
 
@@ -31,59 +40,83 @@ We map DCR-specific slots to Braze Placement IDs. This abstraction allows us to 
 | `BrazeBannersSystemPlacementId.EndOfArticle` | Appears at the bottom of the article body (Epic slot).              |
 | `BrazeBannersSystemPlacementId.Banner`       | Appears fixed at the bottom of the viewport (Sticky Bottom Banner). |
 
-### 2. Display Logic (`canShowBrazeBannersSystem`)
+### 2. Concurrency & Slot Priority
 
-Before a banner is requested or shown, the system performs rigorous checks to ensure suitability. A banner is **suppressed** if:
+To ensure retrocompatibility during the migration phase, the `brazeBannersSystem` is inserted **before** the current implementations (`braze-components`). If a Native Banner is available, it takes precedence over legacy Braze campaigns or Reader Revenue messages.
 
--   The Braze SDK is not initialized.
--   The content type is `Interactive` (for End of Article slots).
--   Reader Revenue is explicitly hidden (e.g., paid content, sensitive pieces).
--   Specific tag exclusions apply (e.g., the Taylor Report logic).
+**End of Article Slot:**
 
-### 3. Rendering & Safety
+1.  **`brazeBannersSystem`** (New Native Banner)
+2.  `brazeEpic` (Legacy Custom Component)
+3.  `readerRevenueEpic` (Support asks)
 
-Banners are delivered as HTML/CSS payloads injected into an `iframe` (or shadow DOM equivalent context managed by the SDK) to ensure style isolation.
+**Sticky Bottom Banner Slot:**
 
-#### The CSS Checker
+1.  `CMP` (Privacy/Consent - Always Top Priority)
+2.  `signInGate` (Auxia)
+3.  **`brazeBannersSystem`** (New Native Banner)
+4.  `brazeBanner` (Legacy Custom Component)
+5.  `readerRevenue` (Support asks)
 
-Because Braze injects styles dynamically, there is a risk of campaigns targeting elements that don't exist, or DCR markup changing and breaking banner styles.
-The system includes a **CSS Checker** (`runCssCheckerOnBrazeBanner`) which:
+### 3. Display Logic (`canShowBrazeBannersSystem`)
+
+Before a banner is requested or shown, the system performs strict checks:
+
+-   **SDK Initialization**: Braze must be loaded.
+-   **Content Type**: Suppressed on `Interactive` articles (for Epics).
+-   **Commercial Rules**: Suppressed if Reader Revenue is hidden (e.g., paid content, sensitive pieces).
+-   **Tag Exclusions**: Specific logic like the generic `suppressForTaylorReport`.
+
+### 4. Safety & Mitigations
+
+Since Braze injects HTML/CSS dynamically, we employ several layers of safety:
+
+#### A. The CSS Checker
+
+Because marketing teams have styling flexibility, there is a risk of campaigns targeting elements that no longer exist in DCR. The system includes a runtime **CSS Checker** (`runCssCheckerOnBrazeBanner`) which:
 
 -   Parses the banner's HTML/CSS.
 -   Validates that every CSS selector matches at least one element.
--   Logs warnings to the console (in development) if "dead" selectors are found.
+-   Logs warnings (in development) if "dead" selectors are found.
+    This ensures broken creatives are caught during the QA process before launch.
 
-This ensures we catch broken campaign creatives early in the QA process.
+#### B. JavaScript Isolation
 
-### 4. Rate Limiting (`refreshBanners`)
+Banners are rendered inside an `iframe` (or Braze-managed shadow DOM context) to sandbox execution.
+
+-   _Risk_: Advanced interaction requiring JS.
+-   _Mitigation_: We establish a trust chain. Strict templates created by Design Systems are used.
+-   _Security_: Cross-origin access is blocked; communication happens solely via the `postMessage` protocol.
+
+### 5. Rate Limiting (`refreshBanners`)
 
 Braze enforces a "Token Bucket" algorithm for refreshing banners (re-checking eligibility):
 
--   Users start with a bucket of tokens (e.g., 5).
--   Tokens refill over time (e.g., 1 every 3 minutes).
--   The `refreshBanners()` function handles the request and creates a race condition with a timeout to ensure DCR simply proceeds if the network request hangs, preventing the page from feeling sluggish.
+-   **Capacity**: 5 tokens per session.
+-   **Refill**: 1 token every 3 minutes.
+-   **Implementation**: The `refreshBanners()` function creates a race condition with a timeout. If the network is slow or tokens are empty, DCR proceeds without blocking the render.
 
 ## Communication Protocol
 
-The banner runs in an isolated environment but often needs to interact with DCR (e.g., to check if the user is signed in or to upgrade them). We use a `postMessage` protocol for this bridge.
+The banner uses a `postMessage` protocol to interact with the host DCR page.
 
 ### Supported Message Types
 
-The banner can send the following messages to the host page:
-
--   `BRAZE_BANNERS_SYSTEM:GET_AUTH_STATUS`: Asks if the user is `SignedIn` or `SignedOut`.
--   `BRAZE_BANNERS_SYSTEM:GET_EMAIL_ADDRESS`: Requests the user's email address (if signed in).
--   `BRAZE_BANNERS_SYSTEM:NEWSLETTER_SUBSCRIBE`: Triggers a subscription to a specific newsletter ID.
--   `BRAZE_BANNERS_SYSTEM:DISMISS_BANNER`: Removes the banner from the DOM (e.g., user clicked "Close").
--   `BRAZE_BANNERS_SYSTEM:GET_SETTINGS_PROPERTY_VALUE`: Retrieve specific key-value pairs configured in the Braze Campaign settings.
+| Message Type                                       | Function                                        |
+| :------------------------------------------------- | :---------------------------------------------- |
+| `BRAZE_BANNERS_SYSTEM:GET_AUTH_STATUS`             | Checks if user is `SignedIn`.                   |
+| `BRAZE_BANNERS_SYSTEM:GET_EMAIL_ADDRESS`           | Requests email (if signed in).                  |
+| `BRAZE_BANNERS_SYSTEM:NEWSLETTER_SUBSCRIBE`        | Subscribes to a newsletter ID.                  |
+| `BRAZE_BANNERS_SYSTEM:DISMISS_BANNER`              | Removes the banner from the DOM.                |
+| `BRAZE_BANNERS_SYSTEM:GET_SETTINGS_PROPERTY_VALUE` | Reads Key-Value pairs from the Campaign config. |
 
 ## Usage for Developers
 
 To add the Braze Banners System to a new slot:
 
 1.  **Define the Placement**: Add a new member to the `BrazeBannersSystemPlacementId` enum.
-2.  **Configure the Candidate**: In the message picker config (e.g., `SlotBodyEnd.importable.tsx`), use `buildBrazeBannersSystemConfig` to create a candidate.
-3.  **Add to Message Picker**: Ensure the new candidate is included in `pickMessage` for that slot.
+2.  **Configure the Candidate**: Use `buildBrazeBannersSystemConfig` to create a candidate in the Message Picker.
+3.  **Set Priority**: Ensure it is placed correctly in the `pickMessage` candidate list (typically before legacy implementations).
 
 ```typescript
 // Example: Adding to a new slot
@@ -96,12 +129,11 @@ const brazeCandidate = buildBrazeBannersSystemConfig(
 );
 ```
 
-## Troubleshooting & Logging
+## Migration & Future Steps
 
-The system uses a dedicated logger `[BrazeBannersSystem]`.
-
--   **Development**: Logs are visible in the console on `localhost` and `r.thegulocal.com`.
--   **Production**: Logs are suppressed to keep the console clean, but critical errors may still appear with the prefix.
+-   **Phase 1 (Current)**: Hybrid state. `brazeBannersSystem` runs alongside `braze-components`.
+-   **Phase 2**: Master template creation (Newsletter, Epic, App Download).
+-   **Phase 3**: Deprecation of `braze-components` once all Canvases are migrated to Braze Banners.
 
 ---
 
