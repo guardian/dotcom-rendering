@@ -49,7 +49,7 @@ export const CardPill = ({
 			);
 		case 'YoutubeVideo':
 			if (ArticleDesign.Video !== format.design) return null;
-			if (mainMedia.duration === 0) {
+			if (mainMedia.isLive) {
 				return (
 					<Pill
 						content="Live"
