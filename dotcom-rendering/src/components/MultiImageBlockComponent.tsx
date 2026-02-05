@@ -354,7 +354,7 @@ const Slideshow = ({
 			<Island priority="feature" defer={{ until: 'visible' }}>
 				<SlideshowCarousel
 					images={imagesForSlideshow}
-					imageSize="small"
+					imageSize="large"
 					hasNavigationBackgroundColour={false}
 					linkTo="https://www.theguardian.com"
 					linkAriaLabel="news | group-3 | card-@1 | media-slideshow"
