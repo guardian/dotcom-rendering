@@ -516,6 +516,14 @@ export interface ProductSummaryElement {
 	variant: 'carousel' | 'stacked';
 }
 
+export interface PollElement {
+	_type: 'model.dotcomrendering.pageElements.PollElement';
+}
+
+export interface SliderPollElement {
+	_type: 'model.dotcomrendering.pageElements.SliderPollElement';
+}
+
 interface ProfileAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ProfileAtomBlockElement';
 	elementId: string;
@@ -883,7 +891,9 @@ export type FEElement =
 	| WitnessTypeBlockElement
 	| CrosswordElement
 	| ProductBlockElement
-	| ProductSummaryElement;
+	| ProductSummaryElement
+	| PollElement
+	| SliderPollElement;
 
 // -------------------------------------
 // Misc

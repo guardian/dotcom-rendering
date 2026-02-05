@@ -37,6 +37,8 @@ import { MultiBylines } from '../components/MultiBylines';
 import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';
 import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
 import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importable';
+import { Poll } from '../components/Poll.importable';
+import { SliderPoll } from '../components/SliderPoll.importable';
 import { ProductElement } from '../components/ProductElement';
 import { ProductSummary } from '../components/ProductSummary.Importable';
 import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable';
@@ -977,6 +979,18 @@ export const renderElement = ({
 					format={format}
 					variant={element.variant}
 				/>
+			);
+		case 'model.dotcomrendering.pageElements.PollElement':
+			return (
+				<Island priority="feature" defer={{ until: 'idle' }}>
+					<Poll />
+				</Island>
+			);
+		case 'model.dotcomrendering.pageElements.SliderPollElement':
+			return (
+				<Island priority="feature" defer={{ until: 'idle' }}>
+					<SliderPoll />
+				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':

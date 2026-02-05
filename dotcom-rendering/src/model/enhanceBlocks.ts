@@ -20,6 +20,7 @@ import { enhanceElementsImages, enhanceImages } from './enhance-images';
 import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceProductSummary } from './enhance-product-summary';
+import { enhancePolls } from './enhance-polls';
 import { enhanceTweets } from './enhance-tweets';
 import { enhanceGuVideos } from './enhance-videos';
 import { enhanceLists } from './enhanceLists';
@@ -100,6 +101,10 @@ export const enhanceElements =
 			enhanceProductSummary({
 				pageId: options.pageId,
 				serverSideABTests: options.serverSideABTests,
+				renderingTarget: options.renderingTarget,
+			}),
+			enhancePolls({
+				pageId: options.pageId,
 				renderingTarget: options.renderingTarget,
 			}),
 		].reduce(
