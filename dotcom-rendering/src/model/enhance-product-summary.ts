@@ -191,8 +191,6 @@ export const enhanceProductSummary =
 		const abTestVariant =
 			serverSideABTests?.['thefilter-at-a-glance-redesign'];
 
-		console.log('**** filterAtAGlanceEnabled ****', filterAtAGlanceEnabled);
-
 		// do nothing if article is not on allow list / not in the test / variant is 'control' / renderingTarget is Apps
 		if (
 			filterAtAGlanceEnabled &&
