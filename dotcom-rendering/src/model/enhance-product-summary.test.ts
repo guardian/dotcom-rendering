@@ -224,6 +224,7 @@ describe('enhanceProductSummary', () => {
 			pageId: allowedPageId,
 			serverSideABTests: { 'thefilter-at-a-glance-redesign': 'carousel' },
 			renderingTarget: 'Web',
+			filterAtAGlanceEnabled: true,
 		})(input);
 
 		const carousel = findCarousel(output);
@@ -265,6 +266,7 @@ describe('enhanceProductSummary', () => {
 			pageId: allowedPageId,
 			serverSideABTests: { 'thefilter-at-a-glance-redesign': 'stacked' },
 			renderingTarget: 'Web',
+			filterAtAGlanceEnabled: true,
 		})(input);
 
 		const stacked = findStacked(output);
@@ -306,6 +308,7 @@ describe('enhanceProductSummary', () => {
 			pageId: allowedPageId,
 			serverSideABTests: { 'thefilter-at-a-glance-redesign': 'stacked' },
 			renderingTarget: 'Apps',
+			filterAtAGlanceEnabled: true,
 		})(input);
 
 		const stacked = findStacked(output);

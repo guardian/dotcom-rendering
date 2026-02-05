@@ -1,6 +1,7 @@
 import { isUndefined } from '@guardian/libs';
 import { type ArticleFormat } from '../lib/articleFormat';
 import type { Block } from '../types/blocks';
+import type { Switches } from '../types/config';
 import type {
 	FEElement,
 	ImageBlockElement,
@@ -37,6 +38,7 @@ type Options = {
 	shouldHideAds: boolean;
 	pageId: string;
 	serverSideABTests?: Record<string, string>;
+	switches?: Switches;
 };
 
 const enhanceNewsletterSignup =
@@ -101,6 +103,7 @@ export const enhanceElements =
 				pageId: options.pageId,
 				serverSideABTests: options.serverSideABTests,
 				renderingTarget: options.renderingTarget,
+				filterAtAGlanceEnabled: !!options.switches?.filterAtAGlance,
 			}),
 		].reduce(
 			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),

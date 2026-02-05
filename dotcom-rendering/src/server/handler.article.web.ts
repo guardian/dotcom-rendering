@@ -60,6 +60,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		shouldHideAds,
 		pageId,
 		serverSideABTests,
+		switches,
 	});
 	const html = renderBlocks({
 		blocks: enhancedBlocks,
