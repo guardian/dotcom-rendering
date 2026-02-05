@@ -103,6 +103,8 @@ export const enhanceArticleType = (
 		audioArticleImage: data.audioArticleImage,
 		tags: data.tags,
 		shouldHideAds: data.shouldHideAds,
+		pageId: data.pageId,
+		serverSideABTests: data.config.serverSideABTests,
 	});
 
 	const crosswordBlock = buildCrosswordBlock(data);
@@ -179,6 +181,7 @@ export const enhanceArticleType = (
 				format,
 				renderingTarget,
 				data.pinnedPost,
+				data.pageId,
 			),
 			standfirst: enhanceStandfirst(data.standfirst),
 			commercialProperties: enhanceCommercialProperties(

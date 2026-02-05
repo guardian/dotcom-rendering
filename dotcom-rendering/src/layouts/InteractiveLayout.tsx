@@ -1,5 +1,4 @@
 import { css, Global } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -8,7 +7,6 @@ import {
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import React from 'react';
-import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
@@ -20,6 +18,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
+import { DirectoryPageNav } from '../components/DirectoryPageNav';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -36,7 +35,6 @@ import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { Section } from '../components/Section';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
-import { StarRatingDeprecated } from '../components/StarRating/StarRatingDeprecated';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
@@ -181,26 +179,6 @@ const stretchLines = css`
 	}
 `;
 
-const starWrapper = css`
-	margin-bottom: 18px;
-	margin-top: 6px;
-	background-color: ${themePalette('--star-rating-background')};
-	color: ${themePalette('--star-rating-fill')};
-	display: inline-block;
-
-	${until.phablet} {
-		padding-left: 20px;
-		margin-left: -20px;
-	}
-	${until.leftCol} {
-		padding-left: 0px;
-		margin-left: -0px;
-	}
-
-	padding-left: 10px;
-	margin-left: -10px;
-`;
-
 export const temporaryBodyCopyColourOverride = css`
 	.content__main-column--interactive p {
 		/* stylelint-disable-next-line declaration-no-important */
@@ -313,11 +291,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				</>
 			)}
 			<main data-layout="InteractiveLayout">
-				{isApps && renderAds && (
-					<Island priority="critical">
-						<AdPortals />
-					</Island>
-				)}
+				<DirectoryPageNav selected="none" pageId={article.pageId} />
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
@@ -380,16 +354,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										webPublicationDateDeprecated={
 											article.webPublicationDateDeprecated
 										}
+										starRating={article.starRating}
 									/>
 								</div>
-								{!isUndefined(article.starRating) ? (
-									<div css={starWrapper}>
-										<StarRatingDeprecated
-											rating={article.starRating}
-											size="large"
-										/>
-									</div>
-								) : null}
 							</GridItem>
 							<GridItem area="standfirst">
 								<Standfirst

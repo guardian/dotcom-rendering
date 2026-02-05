@@ -26,7 +26,8 @@ const hasConfig = (body: unknown): body is { config: ConfigType } => {
  * completed.
  */
 export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
-	const headerValue = req.headers['x-gu-xid'];
+	const start = process.hrtime.bigint();
+	const headerValue = req.headers['x-request-id'];
 	const requestId = Array.isArray(headerValue) ? headerValue[0] : headerValue;
 	const loggerState = {
 		request: {
@@ -61,6 +62,20 @@ export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 		} else {
 			logger.debug('Rendered page', logArgs);
 		}
+	});
+
+	res.on('close', () => {
+		loggingStore.run(loggerState, () => {
+			if (!res.writableFinished) {
+				const durationMs = Number(
+					(process.hrtime.bigint() - start) / 1000000n,
+				);
+				logger.error(
+					`Connection closed before the response was sent, approximate time spent so far: ${durationMs}ms`,
+					{ durationMs },
+				);
+			}
+		});
 	});
 
 	loggingStore.run(loggerState, () => {

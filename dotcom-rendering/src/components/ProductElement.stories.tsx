@@ -4,6 +4,7 @@ import { allModes } from '../../.storybook/modes';
 import { productImage } from '../../fixtures/manual/productImage';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { getNestedArticleElement } from '../lib/renderElement';
+import { extractHeadingText } from '../model/enhanceProductElement';
 import type { ProductBlockElement } from '../types/content';
 import { ProductElement } from './ProductElement';
 
@@ -23,7 +24,9 @@ const product = {
 	_type: 'model.dotcomrendering.pageElements.ProductBlockElement',
 	elementId: 'b1f6e8e2-3f3a-4f0c-8d1e-5f3e3e3e3e3e',
 	primaryHeadingHtml: '<em>Best Kettle overall</em>',
+	primaryHeadingText: extractHeadingText('<em>Best Kettle overall</em>'),
 	secondaryHeadingHtml: 'Bosch Sky Kettle',
+	secondaryHeadingText: extractHeadingText('Bosch Sky Kettle'),
 	brandName: 'Bosch',
 	productName: 'Sky Kettle',
 	image: productImage,
@@ -229,12 +232,14 @@ const product = {
 			url: 'https://www.johnlewis.com/bosch-twk7203gb-sky-variable-temperature-kettle-1-7l-black/p3228625',
 			label: '£79.99 at John Lewis',
 			linkType: 'ProductButton',
+			priority: 'Primary',
 		},
 		{
 			_type: 'model.dotcomrendering.pageElements.LinkBlockElement',
 			url: 'https://www.amazon.co.uk/Bosch-TWK7203GB-Sky-Variable-Temperature/dp/B07Z8VQ2V6',
 			label: '£79.99 at Amazon',
 			linkType: 'ProductButton',
+			priority: 'Primary',
 		},
 		{
 			_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -296,7 +301,9 @@ export const WithoutHeading = {
 		product: {
 			...product,
 			primaryHeadingHtml: '',
+			primaryHeadingText: '',
 			secondaryHeadingHtml: '',
+			secondaryHeadingText: '',
 		},
 	},
 } satisfies Story;
@@ -316,6 +323,7 @@ export const NoSecondaryHeading = {
 			...product,
 			primaryHeadingHtml: '<em>Primary heading only</em>',
 			secondaryHeadingHtml: '',
+			secondaryHeadingText: '',
 		},
 	},
 } satisfies Story;
@@ -325,6 +333,7 @@ export const NoPrimaryHeading = {
 		product: {
 			...product,
 			primaryHeadingHtml: '',
+			primaryHeadingText: '',
 			secondaryHeadingHtml: 'Secondary heading only',
 		},
 	},
@@ -378,7 +387,9 @@ export const EmptyFields = {
 			...product,
 			image: undefined,
 			primaryHeadingHtml: '',
+			primaryHeadingText: extractHeadingText(''),
 			secondaryHeadingHtml: '',
+			secondaryHeadingText: extractHeadingText(''),
 			brandName: '',
 			productName: '',
 			productCtas: [],

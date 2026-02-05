@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -24,6 +23,7 @@ import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
+import { ListenToArticle } from '../components/ListenToArticle.importable';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
@@ -37,11 +37,7 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	type ArticleFormat,
-} from '../lib/articleFormat';
+import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
 import { getSoleContributor } from '../lib/byline';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
@@ -304,9 +300,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 	const renderAds = canRenderAds(article);
 
-	const isInStarRatingVariant =
-		article.config.abTests.starRatingRedesignVariant === 'variant';
-
 	return (
 		<>
 			{isWeb && (
@@ -365,14 +358,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								<MainMedia
 									format={format}
 									elements={article.mainMediaElements}
-									starRating={
-										!isInStarRatingVariant &&
-										format.design ===
-											ArticleDesign.Review &&
-										!isUndefined(article.starRating)
-											? article.starRating
-											: undefined
-									}
 									host={host}
 									pageId={article.pageId}
 									webTitle={article.webTitle}
@@ -416,9 +401,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 											article.webPublicationDateDeprecated
 										}
 										hasAvatar={!!avatarUrl}
-										isInStarRatingVariant={
-											isInStarRatingVariant
-										}
 										starRating={article.starRating}
 									/>
 									{/* BOTTOM */}
@@ -464,6 +446,25 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								format={format}
 								standfirst={article.standfirst}
 							/>
+							{/* Only show Listen to Article button on App landscape views */}
+							{isApps && (
+								<Hide when="below" breakpoint="leftCol">
+									<div
+										css={css`
+											max-width: 620px;
+										`}
+									>
+										<Island
+											priority="feature"
+											defer={{ until: 'visible' }}
+										>
+											<ListenToArticle
+												articleId={article.pageId}
+											/>
+										</Island>
+									</div>
+								</Hide>
+							)}
 						</GridItem>
 						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
@@ -767,7 +768,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						webURL={article.webURL}
-						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Island>
 

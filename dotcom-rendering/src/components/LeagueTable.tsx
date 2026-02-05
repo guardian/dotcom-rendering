@@ -7,14 +7,11 @@ import {
 	textSansBold14,
 	textSansBold15,
 } from '@guardian/source/foundations';
-import type {
-	Entry,
-	FootballTable as FootballTableData,
-} from '../footballTables';
+import type { EntrySummary, FootballTableSummary } from '../footballTables';
 import { palette } from '../palette';
 
 type Props = {
-	table: FootballTableData;
+	table: FootballTableSummary;
 };
 
 export const LeagueTable = ({ table }: Props) => {
@@ -27,23 +24,23 @@ export const LeagueTable = ({ table }: Props) => {
 };
 
 const Title = ({ text }: { text: string }) => (
-	<h3
+	<h2
 		css={css`
 			${textSansBold14}
 			border-bottom: 1px solid ${palette('--football-match-stat-border')};
 			color: ${palette('--football-match-stat-text')};
 			padding-bottom: ${space[1]}px;
-			${from.phablet} {
+			${from.desktop} {
 				${textSansBold15}
 				padding-bottom: ${space[2]}px;
 			}
 		`}
 	>
 		{text}
-	</h3>
+	</h2>
 );
 
-const Table = ({ table }: { table: FootballTableData }) => {
+const Table = ({ table }: { table: FootballTableSummary }) => {
 	return (
 		<table
 			css={css`
@@ -78,7 +75,7 @@ const Table = ({ table }: { table: FootballTableData }) => {
 	);
 };
 
-const TableRow = ({ entry }: { entry: Entry }) => {
+const TableRow = ({ entry }: { entry: EntrySummary }) => {
 	return (
 		<tr css={[gridContainer, tableRowStyles]}>
 			<th scope="row" css={[between('pos', 'team'), position]}>
@@ -106,7 +103,7 @@ const leagueTableSection = css`
 
 const tableRowStyles = css`
 	${textSans14}
-	${from.phablet} {
+	${from.desktop} {
 		${textSans15}
 	}
 
@@ -138,7 +135,7 @@ const tableHeaders = css`
 	th {
 		text-align: left;
 	}
-	${from.phablet} {
+	${from.desktop} {
 		${textSansBold15}
 	}
 `;
@@ -150,7 +147,7 @@ const position = css`
 
 const pointsText = css`
 	${textSansBold14}
-	${from.phablet} {
+	${from.desktop} {
 		${textSansBold15}
 	}
 `;

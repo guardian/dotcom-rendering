@@ -81,6 +81,7 @@ const elementsEnhancer = enhanceElements(
 		imagesForLightbox: [],
 		hasAffiliateLinksDisclaimer: false,
 		shouldHideAds: false,
+		pageId: '',
 	},
 	true,
 );

@@ -97,6 +97,48 @@ export const choiceCardsSettings: ChoiceCardsSettings = {
 	],
 };
 
+export const choiceCardsSettingsWithDiscountPill: ChoiceCardsSettings = {
+	...choiceCardsSettings,
+	choiceCards: choiceCardsSettings.choiceCards.map((card, index) => {
+		if (index === 1) {
+			return {
+				...card,
+				label: 'Support <s>£12</s> £6/monthly',
+				pill: {
+					copy: '50% off',
+					backgroundColour: {
+						kind: 'hex',
+						r: 'BB',
+						g: '80',
+						b: '3B',
+					},
+				},
+			};
+		}
+		return card;
+	}),
+	mobileChoiceCards: choiceCardsSettings.mobileChoiceCards?.map(
+		(card, index) => {
+			if (index === 1) {
+				return {
+					...card,
+					label: 'Support <s>£12</s> £6/monthly',
+					pill: {
+						copy: '50% off',
+						backgroundColour: {
+							kind: 'hex',
+							r: 'BB',
+							g: '80',
+							b: '3B',
+						},
+					},
+				};
+			}
+			return card;
+		},
+	),
+};
+
 export const choiceCardsWithMixedDestinations: ChoiceCardsSettings = {
 	choiceCards: [
 		{

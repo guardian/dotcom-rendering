@@ -612,6 +612,9 @@
                     "$ref": "#/definitions/CalloutBlockElementV2"
                 },
                 {
+                    "$ref": "#/definitions/ReporterCalloutBlockElement"
+                },
+                {
                     "$ref": "#/definitions/CartoonBlockElement"
                 },
                 {
@@ -873,6 +876,9 @@
                 },
                 {
                     "$ref": "#/definitions/ProductBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/ProductSummaryElement"
                 }
             ]
         },
@@ -1545,6 +1551,71 @@
                 "name",
                 "urlPrefix",
                 "value"
+            ]
+        },
+        "ReporterCalloutBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.ReporterCalloutBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "activeFrom": {
+                    "type": "number"
+                },
+                "activeUntil": {
+                    "type": "number"
+                },
+                "displayOnSensitive": {
+                    "type": "boolean"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "subtitle": {
+                    "type": "string"
+                },
+                "intro": {
+                    "type": "string"
+                },
+                "mainTextHeading": {
+                    "type": "string"
+                },
+                "mainText": {
+                    "type": "string"
+                },
+                "emailContact": {
+                    "type": "string"
+                },
+                "messagingContact": {
+                    "type": "string"
+                },
+                "securedropContact": {
+                    "type": "string"
+                },
+                "endNote": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "displayOnSensitive",
+                "elementId",
+                "id",
+                "intro",
+                "mainText",
+                "mainTextHeading",
+                "subtitle",
+                "title"
             ]
         },
         "CartoonBlockElement": {
@@ -2540,8 +2611,18 @@
                     "type": "string"
                 },
                 "linkType": {
-                    "type": "string",
-                    "const": "ProductButton"
+                    "enum": [
+                        "ProductButton",
+                        "StandardButton"
+                    ],
+                    "type": "string"
+                },
+                "priority": {
+                    "enum": [
+                        "Primary",
+                        "Tertiary"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -4478,6 +4559,9 @@
                 "secondaryHeadingHtml": {
                     "type": "string"
                 },
+                "secondaryHeadingText": {
+                    "type": "string"
+                },
                 "primaryHeadingHtml": {
                     "type": "string"
                 },
@@ -4612,6 +4696,33 @@
                 "ProductCardOnly"
             ],
             "type": "string"
+        },
+        "ProductSummaryElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.ProductSummaryElement"
+                },
+                "matchedProducts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ProductBlockElement"
+                    }
+                },
+                "variant": {
+                    "enum": [
+                        "carousel",
+                        "stacked"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "matchedProducts",
+                "variant"
+            ]
         },
         "Block": {
             "type": "object",
@@ -5448,6 +5559,9 @@
                         },
                         "image": {
                             "type": "string"
+                        },
+                        "isLive": {
+                            "type": "boolean"
                         }
                     },
                     "required": [

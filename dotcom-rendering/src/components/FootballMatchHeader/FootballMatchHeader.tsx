@@ -8,6 +8,7 @@ import {
 	textSans15Object,
 	textSansBold14Object,
 	textSansBold17Object,
+	until,
 } from '@guardian/source/foundations';
 import { type ComponentProps, type ReactNode, useMemo } from 'react';
 import type { FootballMatch } from '../../footballMatchV2';
@@ -18,8 +19,10 @@ import {
 	getTimeZoneFromEdition,
 } from '../../lib/edition';
 import { palette } from '../../palette';
+import type { ColourName } from '../../paletteDeclarations';
 import { BigNumber } from '../BigNumber';
 import { FootballCrest } from '../FootballCrest';
+import { background, border, primaryText, secondaryText } from './colours';
 import { Tabs } from './Tabs';
 
 type Props = {
@@ -31,13 +34,9 @@ type Props = {
 
 export const FootballMatchHeader = (props: Props) => (
 	<section
-		css={{
-			backgroundColor: palette(
-				'--football-match-header-fixture-result-background',
-			),
-			color: palette(
-				'--football-match-header-fixture-result-primary-text',
-			),
+		style={{
+			backgroundColor: palette(background(props.match.kind)),
+			color: palette(primaryText(props.match.kind)),
 		}}
 	>
 		<div
@@ -58,9 +57,9 @@ export const FootballMatchHeader = (props: Props) => (
 				match={props.match}
 				edition={props.edition}
 			/>
-			<Hr borderStyle="dotted" />
+			<Hr borderStyle="dotted" borderColour={border(props.match.kind)} />
 			<Teams match={props.match} />
-			<Hr borderStyle="solid" />
+			<Hr borderStyle="solid" borderColour={border(props.match.kind)} />
 			<Tabs {...props.tabs} />
 		</div>
 	</section>
@@ -75,9 +74,6 @@ const StatusLine = (props: {
 		css={{
 			...textSans14Object,
 			'&': css(grid.column.centre),
-			color: palette(
-				'--football-match-header-fixture-result-secondary-text',
-			),
 			paddingTop: space[2],
 			paddingBottom: space[1],
 			[from.leftCol]: {
@@ -85,21 +81,45 @@ const StatusLine = (props: {
 				padding: `${space[3]}px 0 0`,
 			},
 		}}
+		style={{
+			color: palette(secondaryText(props.match.kind)),
+		}}
 	>
-		<LeagueName>{props.leagueName}</LeagueName>
-		{props.match.venue} •{' '}
+		<LeagueName matchKind={props.match.kind}>{props.leagueName}</LeagueName>
+		{props.match.venue ? `${props.match.venue} • ` : null}
 		<MatchStatus edition={props.edition} match={props.match} />
 	</p>
 );
 
-const LeagueName = (props: { children: ReactNode }) => (
+const LeagueName = (props: {
+	matchKind: FootballMatch['kind'];
+	children: ReactNode;
+}) => (
 	<>
 		<span
+			style={{
+				color: palette(primaryText(props.matchKind)),
+				'--live-circle-display':
+					props.matchKind === 'Live' ? 'inline-block' : 'none',
+			}}
 			css={{
 				...textSansBold14Object,
-				color: palette(
-					'--football-match-header-fixture-result-primary-text',
-				),
+				display: 'inline-flex',
+				alignItems: 'center',
+				[until.leftCol]: {
+					'&:before': {
+						content: '""',
+						display: 'var(--live-circle-display)',
+						borderRadius: '100%',
+						marginRight: space[1],
+						width: 12,
+						height: 12,
+						backgroundColor: palette(
+							'--football-match-header-live-primary-text',
+						),
+						opacity: 0.6,
+					},
+				},
 				[from.leftCol]: {
 					...textSansBold17Object,
 					display: 'block',
@@ -131,7 +151,7 @@ const MatchStatus = (props: { match: FootballMatch; edition: EditionId }) => {
 		case 'Fixture':
 			return kickOffFormatter.format(props.match.kickOff);
 		case 'Live':
-			return props.match.status;
+			return <span css={textSansBold14Object}>{props.match.status}</span>;
 		case 'Result':
 			return 'FT';
 	}
@@ -148,7 +168,10 @@ const kickOffFormatterForEdition = (edition: EditionId): Intl.DateTimeFormat =>
 		timeZone: getTimeZoneFromEdition(edition),
 	});
 
-const Hr = (props: { borderStyle: 'dotted' | 'solid' }) => (
+const Hr = (props: {
+	borderStyle: 'dotted' | 'solid';
+	borderColour: ColourName;
+}) => (
 	<hr
 		css={{
 			'&': css(grid.column.all),
@@ -156,14 +179,14 @@ const Hr = (props: { borderStyle: 'dotted' | 'solid' }) => (
 			width: '100%',
 			borderWidth: 0,
 			borderBottomWidth: 1,
-			borderBottomColor: palette(
-				'--football-match-header-fixture-result-border',
-			),
 			[from.leftCol]: {
 				display: 'none',
 			},
 		}}
-		style={{ borderBottomStyle: props.borderStyle }}
+		style={{
+			borderBottomColor: palette(props.borderColour),
+			borderBottomStyle: props.borderStyle,
+		}}
 	/>
 );
 
@@ -195,9 +218,6 @@ const Team = (props: {
 			flex: '1 1 50%',
 			wordBreak: 'break-word',
 			borderLeftStyle: 'solid',
-			borderLeftColor: palette(
-				'--football-match-header-fixture-result-border',
-			),
 			'&:last-of-type': {
 				paddingLeft: space[2],
 				borderLeftWidth: 1,
@@ -207,6 +227,9 @@ const Team = (props: {
 				borderLeftWidth: 1,
 				paddingTop: space[3],
 			},
+		}}
+		style={{
+			borderLeftColor: palette(border(props.match.kind)),
 		}}
 	>
 		<TeamName name={props.match[props.team].name} />
@@ -222,7 +245,10 @@ const Team = (props: {
 				paID={props.match[props.team].paID}
 			/>
 			{props.match.kind !== 'Fixture' ? (
-				<Score score={props.match[props.team].score} />
+				<Score
+					score={props.match[props.team].score}
+					matchKind={props.match.kind}
+				/>
 			) : null}
 		</span>
 		{props.match.kind !== 'Fixture' ? (
@@ -273,7 +299,7 @@ const Crest = (props: { name: string; paID: string }) => (
  *
  * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/img_role
  */
-const Score = (props: { score: number }) => (
+const Score = (props: { score: number; matchKind: FootballMatch['kind'] }) => (
 	<span
 		role="img"
 		aria-label={`Score: ${props.score}`}
@@ -281,15 +307,10 @@ const Score = (props: { score: number }) => (
 			...circleStyles,
 			borderWidth: 1,
 			borderStyle: 'solid',
-			borderColor: palette(
-				'--football-match-header-fixture-result-border',
-			),
 			transform: 'translateX(-10px)',
 			zIndex: 0,
 			svg: {
-				fill: palette(
-					'--football-match-header-fixture-result-primary-text',
-				),
+				fill: 'var(--svg-fill)',
 				height: 30,
 			},
 			paddingLeft: 4,
@@ -297,6 +318,10 @@ const Score = (props: { score: number }) => (
 			'& > :nth-of-type(2)': {
 				marginLeft: -10,
 			},
+		}}
+		style={{
+			borderColor: palette(border(props.matchKind)),
+			'--svg-fill': palette(primaryText(props.matchKind)),
 		}}
 	>
 		<ScoreNumber score={props.score} />
@@ -315,27 +340,15 @@ const circleStyles = {
 const ScoreNumber = (props: { score: number }) => {
 	if (!Number.isInteger(props.score) || props.score < 0) {
 		return null;
-	}
-
-	switch (props.score) {
-		case 0:
-		case 1:
-		case 2:
-		case 3:
-		case 4:
-		case 5:
-		case 6:
-		case 7:
-		case 8:
-		case 9:
-			return <BigNumber index={props.score} />;
-		default:
-			return (
-				<>
-					<ScoreNumber score={Math.trunc(props.score / 10)} />
-					<ScoreNumber score={props.score % 10} />
-				</>
-			);
+	} else if (props.score < 10) {
+		return <BigNumber index={props.score} />;
+	} else {
+		return (
+			<>
+				<ScoreNumber score={Math.trunc(props.score / 10)} />
+				<ScoreNumber score={props.score % 10} />
+			</>
+		);
 	}
 };
 

@@ -5142,6 +5142,16 @@ const privacyTextSupportingSubduedLight: PaletteFunction = () =>
 const privacyTextSupportingSubduedDark: PaletteFunction = () =>
 	sourcePalette.neutral[60];
 
+const productCarouselCardBorderLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const productCarouselCardBorderDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+
+const productCarouselCardCounterLight: PaletteFunction = () =>
+	sourcePalette.neutral[46];
+const productCarouselCardCounterDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+
 const productCardBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 const productCardBackgroundDark: PaletteFunction = () =>
@@ -5165,6 +5175,8 @@ const productCardReadMoreDark: PaletteFunction = () =>
 	sourcePalette.lifestyle[600];
 const productCardReadMoreDecoration: PaletteFunction = () =>
 	sourcePalette.neutral[86];
+const productCardCountLight: PaletteFunction = () => sourcePalette.neutral[46];
+const productCardCountDark: PaletteFunction = () => sourcePalette.neutral[97];
 
 const privacyTextRegularLight: PaletteFunction = () => sourcePalette.neutral[7];
 const privacyTextDark: PaletteFunction = () => sourcePalette.neutral[86];
@@ -5469,6 +5481,7 @@ const productButtonPrimaryTextDark: PaletteFunction = () =>
 	sourcePalette.neutral[7];
 const productButtonPrimaryTextLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
+
 const discussionPrimaryButtonBackgroundLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
@@ -6145,85 +6158,73 @@ const latestLinksDottedLineLight: PaletteFunction = () =>
 const latestLinksDottedLineDark: PaletteFunction = () =>
 	sourcePalette.neutral[38];
 
-const editorialButtonBackground: PaletteFunction = (format: ArticleFormat) => {
-	switch (format.theme) {
-		case Pillar.News:
-			return sourcePalette.news[300];
-		case Pillar.Culture:
-			return sourcePalette.culture[300];
-		case Pillar.Lifestyle:
-			return sourcePalette.lifestyle[300];
-		case Pillar.Sport:
-			return sourcePalette.sport[300];
-		case Pillar.Opinion:
-			return sourcePalette.opinion[300];
-		case ArticleSpecial.Labs:
-			return sourcePalette.labs[300];
-		case ArticleSpecial.SpecialReport:
-		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.specialReport[300];
-	}
-};
-const editorialButtonBackgroundHover: PaletteFunction = (
-	format: ArticleFormat,
-) => {
-	switch (format.theme) {
-		case Pillar.News:
-			return sourcePalette.news[400];
-		case Pillar.Culture:
-			return sourcePalette.culture[400];
-		case Pillar.Lifestyle:
-			return sourcePalette.lifestyle[400];
-		case Pillar.Sport:
-			return sourcePalette.sport[400];
-		case Pillar.Opinion:
-			return sourcePalette.opinion[400];
-		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
-		case ArticleSpecial.SpecialReport:
-		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.specialReport[400];
-	}
-};
-const editorialButtonBorderHover: PaletteFunction = (format: ArticleFormat) => {
-	switch (format.theme) {
-		case Pillar.News:
-			return sourcePalette.news[400];
-		case Pillar.Culture:
-			return sourcePalette.culture[400];
-		case Pillar.Lifestyle:
-			return sourcePalette.lifestyle[400];
-		case Pillar.Sport:
-			return sourcePalette.sport[400];
-		case Pillar.Opinion:
-			return sourcePalette.opinion[400];
-		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
-		case ArticleSpecial.SpecialReport:
-		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.specialReport[400];
-	}
-};
+const editorialButtonBackground =
+	(weight: 500 | 300): PaletteFunction =>
+	(format: ArticleFormat) => {
+		switch (format.theme) {
+			case Pillar.News:
+				return sourcePalette.news[weight];
+			case Pillar.Culture:
+				return sourcePalette.culture[weight];
+			case Pillar.Lifestyle:
+				return sourcePalette.lifestyle[weight];
+			case Pillar.Sport:
+				return sourcePalette.sport[weight];
+			case Pillar.Opinion:
+				return sourcePalette.opinion[weight];
+			case ArticleSpecial.Labs:
+				return sourcePalette.labs[weight];
+			case ArticleSpecial.SpecialReport:
+			case ArticleSpecial.SpecialReportAlt:
+				return sourcePalette.specialReport[weight];
+		}
+	};
+const editorialButtonBackgroundHover =
+	(weight: 200 | 300 | 400 | 500): PaletteFunction =>
+	(format: ArticleFormat) => {
+		switch (format.theme) {
+			case Pillar.News:
+				return sourcePalette.news[weight];
+			case Pillar.Culture:
+				return sourcePalette.culture[weight];
+			case Pillar.Lifestyle:
+				return sourcePalette.lifestyle[weight];
+			case Pillar.Sport:
+				return sourcePalette.sport[weight];
+			case Pillar.Opinion:
+				return sourcePalette.opinion[weight];
+			case ArticleSpecial.Labs:
+				return sourcePalette.labs[weight];
+			case ArticleSpecial.SpecialReport:
+			case ArticleSpecial.SpecialReportAlt:
+				return sourcePalette.specialReport[weight];
+		}
+	};
 
-const editorialButtonText: PaletteFunction = (format: ArticleFormat) => {
-	switch (format.theme) {
-		case Pillar.News:
-			return sourcePalette.news[400];
-		case Pillar.Culture:
-			return sourcePalette.culture[400];
-		case Pillar.Lifestyle:
-			return sourcePalette.lifestyle[400];
-		case Pillar.Sport:
-			return sourcePalette.sport[400];
-		case Pillar.Opinion:
-			return sourcePalette.opinion[400];
-		case ArticleSpecial.Labs:
-			return sourcePalette.labs[400];
-		case ArticleSpecial.SpecialReport:
-		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.specialReport[200];
-	}
-};
+const editorialButtonBorderHover =
+	(weight: 200 | 400 | 500): PaletteFunction =>
+	(format: ArticleFormat) => {
+		switch (format.theme) {
+			case Pillar.News:
+				return sourcePalette.news[weight];
+			case Pillar.Culture:
+				return sourcePalette.culture[weight];
+			case Pillar.Lifestyle:
+				return sourcePalette.lifestyle[weight];
+			case Pillar.Sport:
+				return sourcePalette.sport[weight];
+			case Pillar.Opinion:
+				return sourcePalette.opinion[weight];
+			case ArticleSpecial.Labs:
+				return sourcePalette.labs[weight];
+			case ArticleSpecial.SpecialReport:
+			case ArticleSpecial.SpecialReportAlt:
+				return sourcePalette.specialReport[weight];
+		}
+	};
+
+const editorialButtonText: PaletteFunction = () => sourcePalette.neutral[100];
+const editorialButtonTextDark: PaletteFunction = () => sourcePalette.neutral[7];
 
 const featureCardKickerText: PaletteFunction = ({ theme }) => {
 	switch (theme) {
@@ -6954,20 +6955,20 @@ const paletteColours = {
 		dark: dropCapDark,
 	},
 	'--editorial-button-background': {
-		light: editorialButtonBackground,
-		dark: editorialButtonBackground,
+		light: editorialButtonBackground(300),
+		dark: editorialButtonBackground(500),
 	},
 	'--editorial-button-background-hover': {
-		light: editorialButtonBackgroundHover,
-		dark: editorialButtonBackgroundHover,
+		light: editorialButtonBackgroundHover(200),
+		dark: editorialButtonBackgroundHover(400),
 	},
 	'--editorial-button-border-hover': {
-		light: editorialButtonBorderHover,
-		dark: editorialButtonBorderHover,
+		light: editorialButtonBorderHover(200),
+		dark: editorialButtonBorderHover(400),
 	},
 	'--editorial-button-text': {
 		light: editorialButtonText,
-		dark: editorialButtonText,
+		dark: editorialButtonTextDark,
 	},
 	'--email-signup-button-background': {
 		light: emailSignupButtonBackgroundLight,
@@ -7129,6 +7130,22 @@ const paletteColours = {
 		light: () => sourcePalette.sport[600],
 		dark: () => sourcePalette.sport[600],
 	},
+	'--football-match-header-live-background': {
+		light: () => sourcePalette.brandAlt[400],
+		dark: () => sourcePalette.brandAlt[400],
+	},
+	'--football-match-header-live-border': {
+		light: () => `${sourcePalette.neutral[7]}33`,
+		dark: () => `${sourcePalette.neutral[7]}33`,
+	},
+	'--football-match-header-live-primary-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[7],
+	},
+	'--football-match-header-live-selected': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[7],
+	},
 	'--football-match-hover': {
 		light: () => sourcePalette.neutral[93],
 		dark: () => sourcePalette.neutral[38],
@@ -7168,6 +7185,22 @@ const paletteColours = {
 	'--football-match-substitution-icon': {
 		light: () => sourcePalette.neutral[46],
 		dark: () => sourcePalette.neutral[60],
+	},
+	'--football-pre-match-background': {
+		light: () => sourcePalette.sport[800],
+		dark: () => sourcePalette.sport[800], // TODO: Update with dark mode colour
+	},
+	'--football-pre-match-button': {
+		light: () => sourcePalette.sport[300],
+		dark: () => sourcePalette.sport[300], // TODO: Update with dark mode colour
+	},
+	'--football-pre-match-button-hover': {
+		light: () => '#c8e4f3', // replace with Source's `calculateHoverColour` when available
+		dark: () => '#c8e4f3',
+	},
+	'--football-pre-match-kickoff': {
+		light: () => sourcePalette.sport[300],
+		dark: () => sourcePalette.sport[300], // TODO: Update with dark mode colour
 	},
 	'--football-score-border': {
 		light: () => sourcePalette.neutral[7],
@@ -7618,6 +7651,18 @@ const paletteColours = {
 		light: podcastMetaTitleLight,
 		dark: podcastMetaTitleDark,
 	},
+	'--preferred-source-button-border': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[38],
+	},
+	'--preferred-source-button-hover': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--preferred-source-button-text': {
+		light: () => sourcePalette.neutral[38],
+		dark: () => sourcePalette.neutral[73],
+	},
 	'--privacy-text-regular': {
 		light: privacyTextRegularLight,
 		dark: privacyTextDark,
@@ -7654,6 +7699,10 @@ const paletteColours = {
 		light: productCardBorderNeutralLight,
 		dark: productCardBorderNeutralDark,
 	},
+	'--product-card-count': {
+		light: productCardCountLight,
+		dark: productCardCountDark,
+	},
 	'--product-card-headline': {
 		light: productCardHeadingTextLight,
 		dark: productCardHeadingTextDark,
@@ -7665,6 +7714,14 @@ const paletteColours = {
 	'--product-card-read-more-decoration': {
 		light: productCardReadMoreDecoration,
 		dark: productCardReadMoreDecoration,
+	},
+	'--product-carousel-card-border': {
+		light: productCarouselCardBorderLight,
+		dark: productCarouselCardBorderDark,
+	},
+	'--product-carousel-card-counter': {
+		light: productCarouselCardCounterLight,
+		dark: productCarouselCardCounterDark,
 	},
 	'--pullquote-background': {
 		light: pullQuoteBackgroundLight,

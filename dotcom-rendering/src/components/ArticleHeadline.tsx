@@ -45,7 +45,6 @@ type Props = {
 	hasAvatar?: boolean;
 	isMatch?: boolean;
 	starRating?: Rating;
-	isInStarRatingVariant?: boolean;
 };
 
 const topPadding = css`
@@ -431,7 +430,6 @@ export const ArticleHeadline = ({
 	hasAvatar,
 	isMatch,
 	starRating,
-	isInStarRatingVariant,
 }: Props) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
@@ -515,14 +513,13 @@ export const ArticleHeadline = ({
 									{headlineString}
 								</span>
 							</h1>
-							{!isUndefined(starRating) &&
-								isInStarRatingVariant && (
-									<StarRating
-										rating={starRating}
-										paddingSize={'large'}
-										size={'large'}
-									/>
-								)}
+							{!isUndefined(starRating) && (
+								<StarRating
+									rating={starRating}
+									paddingSize={'large'}
+									size={'large'}
+								/>
+							)}
 						</WithAgeWarning>
 					);
 			}
@@ -599,14 +596,13 @@ export const ArticleHeadline = ({
 								>
 									{headlineString}
 								</h1>
-								{!isUndefined(starRating) &&
-									isInStarRatingVariant && (
-										<StarRating
-											rating={starRating}
-											paddingSize={'medium'}
-											size={'large'}
-										/>
-									)}
+								{!isUndefined(starRating) && (
+									<StarRating
+										rating={starRating}
+										paddingSize={'medium'}
+										size={'large'}
+									/>
+								)}
 							</WithAgeWarning>
 						</div>
 					);

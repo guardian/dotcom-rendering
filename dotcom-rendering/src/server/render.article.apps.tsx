@@ -6,6 +6,7 @@ import {
 	ArticleDesign,
 	type ArticleFormat,
 	decideFormat,
+	getArticleThemeString,
 } from '../lib/articleFormat';
 import {
 	ASSET_ORIGIN,
@@ -27,7 +28,7 @@ export const renderArticle = (
 	prefetchScripts: string[];
 	html: string;
 } => {
-	const { design, frontendData } = article;
+	const { design, frontendData, theme } = article;
 	const renderingTarget = 'Apps';
 	const config: Config = {
 		renderingTarget,
@@ -123,10 +124,12 @@ window.twttr = (function(d, s, id) {
 				? initTwitter
 				: undefined,
 		config,
-		onlyLightColourScheme: false,
-		isInteractive:
-			design === ArticleDesign.FullPageInteractive ||
-			design === ArticleDesign.Interactive,
+		dataAttributes: {
+			'rendering-target': 'apps',
+			...(getArticleThemeString(theme) && {
+				'article-theme': getArticleThemeString(theme)!,
+			}),
+		},
 	});
 
 	return {

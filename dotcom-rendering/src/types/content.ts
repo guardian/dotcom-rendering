@@ -112,6 +112,25 @@ export interface CalloutBlockElementV2 {
 	contacts?: CalloutContactType[];
 }
 
+export interface ReporterCalloutBlockElement {
+	_type: 'model.dotcomrendering.pageElements.ReporterCalloutBlockElement';
+	elementId: string;
+	id: string;
+	activeFrom?: number;
+	activeUntil?: number;
+	displayOnSensitive: boolean;
+	role?: RoleType;
+	title: string;
+	subtitle: string;
+	intro: string;
+	mainTextHeading: string;
+	mainText: string;
+	emailContact?: string;
+	messagingContact?: string;
+	securedropContact?: string;
+	endNote?: string;
+}
+
 export interface CartoonBlockElement {
 	_type: 'model.dotcomrendering.pageElements.CartoonBlockElement';
 	elementId: string;
@@ -398,7 +417,8 @@ export interface LinkBlockElement {
 	_type: 'model.dotcomrendering.pageElements.LinkBlockElement';
 	url: string;
 	label: string;
-	linkType: 'ProductButton';
+	linkType: 'ProductButton' | 'StandardButton';
+	priority?: 'Primary' | 'Tertiary';
 }
 
 export interface ListBlockElement {
@@ -479,6 +499,7 @@ export interface ProductBlockElement {
 	productName: string;
 	image?: ProductImage;
 	secondaryHeadingHtml: string;
+	secondaryHeadingText?: string;
 	primaryHeadingHtml: string;
 	primaryHeadingText?: string;
 	customAttributes: ProductCustomAttribute[];
@@ -487,6 +508,12 @@ export interface ProductBlockElement {
 	displayType: ProductDisplayType;
 	productCtas: ProductCta[];
 	lowestPrice?: string;
+}
+
+export interface ProductSummaryElement {
+	_type: 'model.dotcomrendering.pageElements.ProductSummaryElement';
+	matchedProducts: ProductBlockElement[];
+	variant: 'carousel' | 'stacked';
 }
 
 interface ProfileAtomBlockElement {
@@ -799,6 +826,7 @@ export type FEElement =
 	| CaptionBlockElement
 	| CalloutBlockElement
 	| CalloutBlockElementV2
+	| ReporterCalloutBlockElement
 	| CartoonBlockElement
 	| ChartAtomBlockElement
 	| CodeBlockElement
@@ -854,7 +882,8 @@ export type FEElement =
 	| YoutubeBlockElement
 	| WitnessTypeBlockElement
 	| CrosswordElement
-	| ProductBlockElement;
+	| ProductBlockElement
+	| ProductSummaryElement;
 
 // -------------------------------------
 // Misc

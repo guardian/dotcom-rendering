@@ -39,7 +39,7 @@ const decideImageWidths = (
 		// 	];
 
 		case 'podcast':
-			return [{ breakpoint: breakpoints.mobile, width: 80, aspectRatio }];
+			return [{ breakpoint: breakpoints.mobile, width: 60, aspectRatio }];
 
 		case 'highlights-card':
 			return [{ breakpoint: breakpoints.mobile, width: 98, aspectRatio }];
@@ -268,7 +268,13 @@ export const CardPicture = ({
 				src={fallbackSource.lowResUrl}
 				css={[block, isCircular && circularStyles]}
 				loading={loading}
-				data-chromatic="ignore"
+				/**
+				 * Feature cards typically have content overlaid on the image. In Chromatic, we don't want
+				 * to ignore the image on feature cards, as any change in card content will likely be ignored too.
+				 */
+				data-chromatic={
+					imageSize.startsWith('feature') ? undefined : 'ignore'
+				}
 			/>
 		</picture>
 	);

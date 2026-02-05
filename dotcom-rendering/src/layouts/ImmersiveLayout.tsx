@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -9,7 +8,7 @@ import {
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
-import { AffiliateDisclaimerLeftCol } from '../components/AffiliateDisclaimerLeftCol.importable';
+import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -29,6 +28,7 @@ import { HeadlineByline } from '../components/HeadlineByline';
 import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
+import { ListenToArticle } from '../components/ListenToArticle.importable';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { minHeaderHeightPx } from '../components/Masthead/Titlepiece/constants';
@@ -309,9 +309,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
-	const isInStarRatingVariant =
-		article.config.abTests.starRatingRedesignVariant === 'variant';
-
 	return (
 		<>
 			{isWeb && (
@@ -362,13 +359,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					<MainMedia
 						format={format}
 						elements={article.mainMediaElements}
-						starRating={
-							!isInStarRatingVariant &&
-							format.design === ArticleDesign.Review &&
-							!isUndefined(article.starRating)
-								? article.starRating
-								: undefined
-						}
 						host={host}
 						hideCaption={true}
 						pageId={article.pageId}
@@ -427,9 +417,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 										byline={article.byline}
 										webPublicationDateDeprecated={
 											article.webPublicationDateDeprecated
-										}
-										isInStarRatingVariant={
-											isInStarRatingVariant
 										}
 										starRating={article.starRating}
 									/>
@@ -514,9 +501,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
 											}
-											isInStarRatingVariant={
-												isInStarRatingVariant
-											}
 											starRating={article.starRating}
 										/>
 									</div>
@@ -536,6 +520,25 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									tags={article.tags}
 									byline={article.byline}
 								/>
+							)}
+							{/* Only show Listen to Article button on App landscape views */}
+							{isApps && (
+								<Hide when="below" breakpoint="leftCol">
+									<div
+										css={css`
+											margin-top: ${space[6]}px;
+										`}
+									>
+										<Island
+											priority="feature"
+											defer={{ until: 'visible' }}
+										>
+											<ListenToArticle
+												articleId={article.pageId}
+											/>
+										</Island>
+									</div>
+								</Hide>
 							)}
 						</GridItem>
 						<GridItem area="meta" element="aside">
@@ -613,12 +616,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 												}
 											/>
 											{!!article.affiliateLinksDisclaimer && (
-												<Island
-													priority="enhancement"
-													defer={{ until: 'idle' }}
-												>
-													<AffiliateDisclaimerLeftCol />
-												</Island>
+												<AffiliateDisclaimer />
 											)}
 										</Hide>
 									</>
@@ -648,12 +646,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											}
 										/>
 										{!!article.affiliateLinksDisclaimer && (
-											<Island
-												priority="enhancement"
-												defer={{ until: 'idle' }}
-											>
-												<AffiliateDisclaimerLeftCol />
-											</Island>
+											<AffiliateDisclaimer />
 										)}
 									</>
 								)}
@@ -862,7 +855,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						webURL={article.webURL}
-						isInStarRatingVariant={isInStarRatingVariant}
 					/>
 				</Island>
 
