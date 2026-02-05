@@ -64,12 +64,12 @@ export const FootballMiniMatchStats = {
 		},
 		stats: [
 			{
-				label: 'Possession',
+				heading: 'Possession',
 				homeValue: 39,
 				awayValue: 61,
 				isPercentage: true,
 			},
-			{ label: 'Goal Attempts', homeValue: 7, awayValue: 4 },
+			{ heading: 'Goal Attempts', homeValue: 7, awayValue: 4 },
 		],
 	},
 } satisfies Story;

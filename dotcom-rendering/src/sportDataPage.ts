@@ -1,7 +1,12 @@
 import type { CricketMatch } from './cricketMatch';
 import type { FootballMatch } from './footballMatch';
 import type { FootballMatches } from './footballMatches';
-import type { FootballTableCompetitions } from './footballTables';
+import { type FootballMatchStats } from './footballMatchStats';
+import { type FootballMatch as FootballMatchV2 } from './footballMatchV2';
+import type {
+	FootballTableCompetitions,
+	FootballTableSummary,
+} from './footballTables';
 import type { FESportPageConfig } from './frontend/feFootballDataPage';
 import type { EditionId } from './lib/edition';
 import type { NavType } from './model/extract-nav';
@@ -48,6 +53,10 @@ export type CricketMatchPage = SportPageConfig & {
 
 export type FootballMatchSummaryPage = SportPageConfig & {
 	match: FootballMatch;
+	matchStats: FootballMatchStats;
+	matchInfo: FootballMatchV2;
+	group?: FootballTableSummary;
+	competitionName: string;
 	kind: 'FootballMatchSummary';
 };
 

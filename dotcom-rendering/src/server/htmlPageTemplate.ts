@@ -25,9 +25,8 @@ type BaseProps = {
 	hasLiveBlogTopAd?: boolean;
 	hasSurveyAd?: boolean;
 	weAreHiring: boolean;
-	onlyLightColourScheme?: boolean;
-	isInteractive?: boolean;
 	rssFeedUrl?: string;
+	dataAttributes?: { [key: string]: string };
 };
 
 interface WebProps extends BaseProps {
@@ -74,11 +73,10 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		canonicalUrl,
 		renderingTarget,
 		hasPageSkin = false,
-		onlyLightColourScheme = false,
 		weAreHiring,
 		config,
-		isInteractive = false,
 		rssFeedUrl,
+		dataAttributes,
 	} = props;
 
 	const doNotIndex = (): boolean => {
@@ -215,10 +213,10 @@ https://workforus.theguardian.com/careers/product-engineering/
 
 	return `<!doctype html>
         <html lang="en" ${
-			onlyLightColourScheme ? 'data-color-scheme="light"' : ''
-		} ${
-			renderingTarget === 'Apps' && isInteractive
-				? 'data-rendering-target="apps"'
+			dataAttributes
+				? Object.entries(dataAttributes)
+						.map(([key, value]) => `data-${key}="${value}"`)
+						.join(' ')
 				: ''
 		}>
             <head>

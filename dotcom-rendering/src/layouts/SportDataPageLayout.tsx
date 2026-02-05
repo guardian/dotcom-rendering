@@ -2,6 +2,7 @@ import { palette } from '@guardian/source/foundations';
 import { AdSlot } from '../components/AdSlot.web';
 import { CricketScorecardPage } from '../components/CricketScorecardPage';
 import { FootballMatchesPageWrapper } from '../components/FootballMatchesPageWrapper.importable';
+import { FootballMatchInfoPage } from '../components/FootballMatchInfoPage';
 import { FootballMatchSummary } from '../components/FootballMatchSummary';
 import { FootballTablesPage } from '../components/FootballTablesPage';
 import { Footer } from '../components/Footer';
@@ -13,6 +14,7 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
+import { useBetaAB } from '../lib/useAB';
 import type { SportDataPage } from '../sportDataPage';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -27,6 +29,11 @@ const SportsPage = ({
 	sportData: SportDataPage;
 	renderAds: boolean;
 }) => {
+	const abTests = useBetaAB();
+	const isInVariantGroup =
+		abTests?.isUserInTestGroup('webex-football-redesign', 'variant') ??
+		false;
+
 	switch (sportData.kind) {
 		case 'FootballFixtures':
 		case 'FootballLiveScores':
@@ -66,8 +73,21 @@ const SportsPage = ({
 					guardianBaseUrl={sportData.guardianBaseURL}
 				/>
 			);
-		case 'FootballMatchSummary':
+		case 'FootballMatchSummary': {
+			if (isInVariantGroup) {
+				return (
+					<FootballMatchInfoPage
+						matchStats={sportData.matchStats}
+						matchInfo={sportData.matchInfo}
+						competitionName={sportData.competitionName}
+						edition={sportData.editionId}
+						table={sportData.group}
+					/>
+				);
+			}
+
 			return <FootballMatchSummary match={sportData.match} />;
+		}
 	}
 };
 

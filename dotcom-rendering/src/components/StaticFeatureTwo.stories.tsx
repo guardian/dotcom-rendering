@@ -4,10 +4,14 @@ import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
 	audioTrails,
 	galleryTrails,
+	selfHostedLoopVideo45Card,
+	selfHostedLoopVideo53Card,
+	selfHostedLoopVideo54Card,
+	selfHostedLoopVideo916Card,
 	trails,
-	videoTrails,
+	youtubeVideoTrails,
 } from '../../fixtures/manual/trails';
-import type { DCRContainerPalette } from '../types/front';
+import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import { FrontSection } from './FrontSection';
 import { StaticFeatureTwo } from './StaticFeatureTwo';
 
@@ -76,11 +80,88 @@ export const Gallery = {
 	},
 } satisfies Story;
 
-const videoCards = videoTrails.slice(0, 2);
-export const Video = {
+const youtubeVideoCards = youtubeVideoTrails.slice(0, 2);
+export const YoutubeVideo = {
 	args: {
 		...Default,
-		trails: videoCards,
+		trails: youtubeVideoCards,
+	},
+} satisfies Story;
+
+export const SelfHostedVideo = {
+	render: (args) => {
+		const Section = ({
+			title,
+			videos,
+		}: {
+			title: string;
+			videos: DCRFrontCard[];
+		}) => (
+			<FrontSection
+				title={title}
+				discussionApiUrl={discussionApiUrl}
+				editionId="UK"
+				showTopBorder={true}
+			>
+				<StaticFeatureTwo {...args} trails={videos} />
+			</FrontSection>
+		);
+
+		return (
+			<>
+				<Section
+					title="Video the same aspect ratio as container"
+					videos={[
+						selfHostedLoopVideo45Card,
+						{
+							...selfHostedLoopVideo45Card,
+							headline: 'Self-hosted 4:5 cinemagraph video card',
+							mainMedia: {
+								...selfHostedLoopVideo45Card.mainMedia,
+								videoStyle: 'Cinemagraph',
+							},
+						},
+					]}
+				/>
+				<Section
+					title="Video taller than the container"
+					videos={[
+						selfHostedLoopVideo916Card,
+						{
+							...selfHostedLoopVideo916Card,
+							headline: 'Self-hosted 9:16 cinemagraph video card',
+							mainMedia: {
+								...selfHostedLoopVideo916Card.mainMedia,
+								videoStyle: 'Cinemagraph',
+							},
+						},
+					]}
+				/>
+				<Section
+					title="Video wider than the container"
+					videos={[
+						selfHostedLoopVideo54Card,
+						{
+							...selfHostedLoopVideo53Card,
+							headline: 'Self-hosted 5:3 cinemagraph video card',
+							mainMedia: {
+								...selfHostedLoopVideo53Card.mainMedia,
+								videoStyle: 'Cinemagraph',
+							},
+						},
+					]}
+				/>
+			</>
+		);
+	},
+	args: {
+		...Default,
+		trails: [selfHostedLoopVideo45Card],
+	},
+	parameters: {
+		chromatic: {
+			disableSnapshot: true,
+		},
 	},
 } satisfies Story;
 

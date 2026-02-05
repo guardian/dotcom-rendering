@@ -3,7 +3,7 @@ import type {
 	FootballMatchStats,
 	FootballMatchTeamWithStats,
 } from '../footballMatchStats';
-import type { FootballTable as FootballTableData } from '../footballTables';
+import type { FootballTableSummary } from '../footballTables';
 import {
 	FootballMatchGoalAttempts,
 	FootballMatchStat,
@@ -12,8 +12,8 @@ import { LeagueTable } from './LeagueTable';
 import { Lineups } from './Lineups';
 
 type Props = {
-	match: FootballMatchStats;
-	table?: FootballTableData;
+	matchStats: FootballMatchStats;
+	table?: FootballTableSummary;
 };
 
 const layoutCss = css`
@@ -36,76 +36,77 @@ function teamHasStats({
 	);
 }
 
-export const FootballMatchInfo = ({ match, table }: Props) => {
+export const FootballMatchInfo = ({ matchStats, table }: Props) => {
 	const showStats =
-		teamHasStats(match.homeTeam) && teamHasStats(match.awayTeam);
+		teamHasStats(matchStats.homeTeam) && teamHasStats(matchStats.awayTeam);
 	const showLineups =
-		match.homeTeam.players.length > 0 && match.awayTeam.players.length > 0;
+		matchStats.homeTeam.players.length > 0 &&
+		matchStats.awayTeam.players.length > 0;
 	return (
 		<section aria-label={'match-info'} css={layoutCss}>
 			{showStats && (
 				<>
 					<FootballMatchStat
-						label="Possession"
+						heading="Possession"
 						homeTeam={{
-							name: match.homeTeam.name,
-							colour: match.homeTeam.statsColour,
+							name: matchStats.homeTeam.name,
+							colour: matchStats.homeTeam.statsColour,
 						}}
 						awayTeam={{
-							name: match.awayTeam.name,
-							colour: match.awayTeam.statsColour,
+							name: matchStats.awayTeam.name,
+							colour: matchStats.awayTeam.statsColour,
 						}}
-						homeValue={match.homeTeam.possession}
-						awayValue={match.awayTeam.possession}
+						homeValue={matchStats.homeTeam.possession}
+						awayValue={matchStats.awayTeam.possession}
 						isPercentage={true}
 					/>
 					<FootballMatchGoalAttempts
 						homeTeam={{
-							name: match.homeTeam.name,
-							colour: match.homeTeam.statsColour,
+							name: matchStats.homeTeam.name,
+							colour: matchStats.homeTeam.statsColour,
 						}}
 						awayTeam={{
-							name: match.awayTeam.name,
-							colour: match.awayTeam.statsColour,
+							name: matchStats.awayTeam.name,
+							colour: matchStats.awayTeam.statsColour,
 						}}
 						homeValues={{
-							onTarget: match.homeTeam.shotsOnTarget,
-							offTarget: match.homeTeam.shotsOffTarget,
+							onTarget: matchStats.homeTeam.shotsOnTarget,
+							offTarget: matchStats.homeTeam.shotsOffTarget,
 						}}
 						awayValues={{
-							onTarget: match.awayTeam.shotsOnTarget,
-							offTarget: match.awayTeam.shotsOffTarget,
+							onTarget: matchStats.awayTeam.shotsOnTarget,
+							offTarget: matchStats.awayTeam.shotsOffTarget,
 						}}
 					/>
 					<FootballMatchStat
-						label="Corners"
+						heading="Corners"
 						homeTeam={{
-							name: match.homeTeam.name,
-							colour: match.homeTeam.statsColour,
+							name: matchStats.homeTeam.name,
+							colour: matchStats.homeTeam.statsColour,
 						}}
 						awayTeam={{
-							name: match.awayTeam.name,
-							colour: match.awayTeam.statsColour,
+							name: matchStats.awayTeam.name,
+							colour: matchStats.awayTeam.statsColour,
 						}}
-						homeValue={match.homeTeam.corners}
-						awayValue={match.awayTeam.corners}
+						homeValue={matchStats.homeTeam.corners}
+						awayValue={matchStats.awayTeam.corners}
 					/>
 					<FootballMatchStat
-						label="Fouls"
+						heading="Fouls"
 						homeTeam={{
-							name: match.homeTeam.name,
-							colour: match.homeTeam.statsColour,
+							name: matchStats.homeTeam.name,
+							colour: matchStats.homeTeam.statsColour,
 						}}
 						awayTeam={{
-							name: match.awayTeam.name,
-							colour: match.awayTeam.statsColour,
+							name: matchStats.awayTeam.name,
+							colour: matchStats.awayTeam.statsColour,
 						}}
-						homeValue={match.homeTeam.fouls}
-						awayValue={match.awayTeam.fouls}
+						homeValue={matchStats.homeTeam.fouls}
+						awayValue={matchStats.awayTeam.fouls}
 					/>
 				</>
 			)}
-			{showLineups && <Lineups matchStats={match} />}
+			{showLineups && <Lineups matchStats={matchStats} />}
 			{table && <LeagueTable table={table} />}
 		</section>
 	);

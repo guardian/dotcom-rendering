@@ -1,6 +1,10 @@
 import { css } from '@emotion/react';
+import { palette as sourcePalette } from '@guardian/source/foundations';
+import { HostedContentHeader } from '../components/HostedContentHeader';
+import { Section } from '../components/Section';
 import { grid } from '../grid';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { Stuck } from './lib/stickiness';
 
 interface Props {
 	renderingTarget: RenderingTarget;
@@ -21,7 +25,24 @@ const border = css`
 export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 	return (
 		<>
-			{props.renderingTarget === 'Web' ? 'Masthead' : null}
+			{props.renderingTarget === 'Web' ? (
+				<Stuck>
+					<Section
+						fullWidth={true}
+						showSideBorders={false}
+						showTopBorder={false}
+						shouldCenter={false}
+						backgroundColour={sourcePalette.neutral[7]}
+						padSides={false}
+						element="aside"
+					>
+						<HostedContentHeader
+							accentColor={sourcePalette.brand[400]}
+							branding="logo"
+						/>
+					</Section>
+				</Stuck>
+			) : null}
 			<main>
 				<header css={[grid.container, border]}>
 					<div

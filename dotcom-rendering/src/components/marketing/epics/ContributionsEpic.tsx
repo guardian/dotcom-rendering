@@ -276,15 +276,20 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	const { hasOptedOut, onArticleCountOptIn, onArticleCountOptOut } =
 		useArticleCountOptOut();
 
-	const [hasBeenSeen, setNode] = useIsInView({
+	// Used for analytics - detects the top coming into view
+	const [hasBeenSeenAtTop, setNodeAtTop] = useIsInView({
+		debounce: true,
+		threshold: 0,
+	});
+
+	// Used for browser storage view record - detects 40% scroll depth
+	const [hasBeenSeenAt40Percent, setNodeAt40Percent] = useIsInView({
 		debounce: true,
 		threshold: 0.4,
 	});
 
 	useEffect(() => {
-		if (hasBeenSeen) {
-			// For epic view count
-			logEpicView(tracking.abTestName);
+		if (hasBeenSeenAtTop) {
 			document.dispatchEvent(
 				new CustomEvent('epic:in-view', {
 					detail: {
@@ -303,7 +308,14 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 				);
 			}
 		}
-	}, [hasBeenSeen, submitComponentEvent, countryCode, tracking]);
+	}, [hasBeenSeenAtTop, submitComponentEvent, countryCode, tracking]);
+
+	useEffect(() => {
+		if (hasBeenSeenAt40Percent) {
+			// For epic view count
+			logEpicView(tracking.abTestName);
+		}
+	}, [hasBeenSeenAt40Percent, tracking]);
 
 	useEffect(() => {
 		if (submitComponentEvent) {
@@ -355,7 +367,13 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	);
 
 	return (
-		<section ref={setNode} css={wrapperStyles}>
+		<section
+			ref={(node) => {
+				setNodeAtTop(node);
+				setNodeAt40Percent(node);
+			}}
+			css={wrapperStyles}
+		>
 			{showAboveArticleCount && (
 				<div css={articleCountAboveContainerStyles}>
 					<ContributionsEpicArticleCountAboveWithOptOut

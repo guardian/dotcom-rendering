@@ -4,11 +4,10 @@ import type {
 	ButtonPriority,
 	ThemeButton,
 } from '@guardian/source/react-components';
-import {
-	LinkButton,
-	SvgArrowRightStraight,
-} from '@guardian/source/react-components';
-import { palette } from '../palette';
+import { LinkButton } from '@guardian/source/react-components';
+import { palette } from '../../palette';
+import { heightAutoStyle, wrapButtonTextStyle } from './styles';
+import { getPropsForLinkUrl } from './utils';
 
 type ProductLinkButtonProps = {
 	label: string;
@@ -17,16 +16,12 @@ type ProductLinkButtonProps = {
 	fullwidth?: boolean;
 	fullWidthText?: boolean;
 	priority?: ButtonPriority;
-	dataComponent?: string;
 	minimisePadding?: boolean;
+	dataComponent?: string;
 };
 
 const fullWidthStyle = css`
 	width: 100%;
-`;
-
-const heightAutoStyle = css`
-	height: auto;
 `;
 
 const minimisePaddingStyle = css`
@@ -67,16 +62,13 @@ export const ProductLinkButton = ({
 
 	return (
 		<LinkButton
+			{...getPropsForLinkUrl(label)}
 			href={url}
 			rel="sponsored noreferrer noopener"
-			target="_blank"
-			iconSide="right"
 			priority={priority}
-			aria-label={`Open ${label} in a new tab`}
-			icon={<SvgArrowRightStraight />}
 			theme={theme}
-			data-ignore="global-link-styling"
 			data-component={dataComponent}
+			data-ignore="global-link-styling"
 			data-link-name={`product link button ${priority}`}
 			data-spacefinder-role="inline"
 			size={size}
@@ -84,12 +76,7 @@ export const ProductLinkButton = ({
 		>
 			<span
 				style={fullWidthText ? { width: '100%' } : {}}
-				css={css`
-					text-wrap: balance;
-					text-align: center;
-					white-space: normal;
-					padding: 4px 0 4px;
-				`}
+				css={wrapButtonTextStyle}
 			>
 				{label}
 			</span>

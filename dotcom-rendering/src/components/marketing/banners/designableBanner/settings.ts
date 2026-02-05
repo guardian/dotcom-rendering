@@ -36,7 +36,7 @@ export interface HeaderSettings {
 	headerImage?: Image;
 }
 
-export interface ChoiceCardSettings {
+export interface ChoiceCardDesignSettings {
 	buttonColour?: string;
 	buttonTextColour?: string;
 	buttonBorderColour?: string;
@@ -58,7 +58,7 @@ export interface BannerTemplateSettings {
 	articleCountTextColour?: string;
 	imageSettings?: Image;
 	alternativeVisual?: ReactNode;
-	choiceCardSettings?: ChoiceCardSettings;
+	choiceCardSettings?: ChoiceCardDesignSettings;
 	bannerId?: BannerId;
 	tickerStylingSettings?: TickerSettings['tickerStylingSettings'];
 	headerSettings?: HeaderSettings;

@@ -25,7 +25,6 @@ type Props = {
 	onwardsSource: OnwardsSource;
 	format: ArticleFormat;
 	headingUrl?: string;
-	isInStarRatingVariant?: boolean;
 };
 
 const cardsContainerStyles = css`
@@ -128,9 +127,6 @@ export const ScrollableSmallOnwards = (props: Props) => {
 									showTopBarMobile={mobileBottomCards.includes(
 										index,
 									)}
-									isInStarRatingVariant={
-										props.isInStarRatingVariant
-									}
 								/>
 							</ScrollableCarousel.Item>
 						);

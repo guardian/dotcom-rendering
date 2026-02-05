@@ -214,6 +214,14 @@ export const enhanceAdPlaceholders =
 	(elements: FEElement[]): FEElement[] => {
 		if (shouldHideAds) return elements;
 
+		// Ads are intentionally disabled for apps interactive articles
+		if (
+			renderingTarget === 'Apps' &&
+			format.design === ArticleDesign.Interactive
+		) {
+			return elements;
+		}
+
 		// In galleries the AdPlaceholders are inserted in both
 		// Web & App because the same logic is used for both
 		if (format.design === ArticleDesign.Gallery) {

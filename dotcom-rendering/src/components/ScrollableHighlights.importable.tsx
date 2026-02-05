@@ -16,7 +16,6 @@ import { HighlightsCard } from './Masthead/HighlightsCard';
 type Props = {
 	trails: DCRFrontCard[];
 	frontId?: string;
-	isInStarRatingVariant?: boolean;
 };
 
 const containerStyles = css`
@@ -208,11 +207,7 @@ const getOphanInfo = (frontId?: string) => {
 	};
 };
 
-export const ScrollableHighlights = ({
-	trails,
-	frontId,
-	isInStarRatingVariant,
-}: Props) => {
+export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const carouselLength = trails.length;
 	const imageLoading = 'eager';
@@ -305,7 +300,6 @@ export const ScrollableHighlights = ({
 								showQuotedHeadline={trail.showQuotedHeadline}
 								mainMedia={trail.mainMedia}
 								starRating={trail.starRating}
-								isInStarRatingVariant={isInStarRatingVariant}
 							/>
 						</li>
 					);
