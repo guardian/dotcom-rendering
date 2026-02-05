@@ -1,7 +1,7 @@
 import type { Banner } from '@braze/web-sdk';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { TagType } from '../../types/tag';
-import { getOptionsHeaders } from '../identity';
+import { getAuthState, getOptionsHeaders } from '../identity';
 import type { CanShowResult } from '../messagePicker';
 import { useAuthStatus } from '../useAuthStatus';
 import type { BrazeInstance } from './initialiseBraze';
@@ -183,6 +183,7 @@ export const canShowBrazeBannersSystem = async (
  */
 enum BrazeBannersSystemMessageType {
 	GetAuthStatus = 'BRAZE_BANNERS_SYSTEM:GET_AUTH_STATUS',
+	GetEmailAddress = 'BRAZE_BANNERS_SYSTEM:GET_EMAIL_ADDRESS',
 	NewsletterSubscribe = 'BRAZE_BANNERS_SYSTEM:NEWSLETTER_SUBSCRIBE',
 	GetSettingsPropertyValue = 'BRAZE_BANNERS_SYSTEM:GET_SETTINGS_PROPERTY_VALUE',
 	DismissBanner = 'BRAZE_BANNERS_SYSTEM:DISMISS_BANNER',
@@ -363,6 +364,19 @@ export const BrazeBannersSystemDisplay = ({
 		[authStatus, idApiUrl],
 	);
 
+	const fetchEmail = useCallback(async (): Promise<string | null> => {
+		const getEmail = async (): Promise<string | undefined> => {
+			const authState = await getAuthState();
+			return authState.idToken?.claims.email;
+		};
+		return new Promise((resolve) => {
+			setTimeout(() => resolve(null), 1000);
+			void getEmail().then((email) => {
+				resolve(email ?? null);
+			});
+		});
+	}, [authStatus, idApiUrl]);
+
 	// Handle DOM Insertion
 	useEffect(() => {
 		// Render the banner ONLY when we have both the Data and the DOM Element
@@ -390,6 +404,9 @@ export const BrazeBannersSystemDisplay = ({
 			event: MessageEvent<
 				| {
 						type: BrazeBannersSystemMessageType.GetAuthStatus;
+				  }
+				| {
+						type: BrazeBannersSystemMessageType.GetEmailAddress;
 				  }
 				| {
 						type: BrazeBannersSystemMessageType.NewsletterSubscribe;
@@ -422,6 +439,16 @@ export const BrazeBannersSystemDisplay = ({
 							kind: authStatus.kind,
 						},
 					);
+					break;
+				case BrazeBannersSystemMessageType.GetEmailAddress:
+					void fetchEmail().then((email) => {
+						postMessageToBrazeBanner(
+							BrazeBannersSystemMessageType.GetEmailAddress,
+							{
+								email,
+							},
+						);
+					});
 					break;
 				case BrazeBannersSystemMessageType.NewsletterSubscribe:
 					const { newsletterId } = event.data;
