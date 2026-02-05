@@ -484,6 +484,9 @@ export const BrazeBannersSystemDisplay = ({
 		};
 	}, [meta.banner, authStatus.kind, subscribeToNewsletter]);
 
+	// Log Impressions with Braze and Button Clicks with Ophan
+	// TODO
+
 	return (
 		<div
 			ref={containerRef}
