@@ -232,13 +232,10 @@ const getAllSettingsPropertiesValuesAsString = (
 	meta: BrazeBannersSystemMeta,
 ): Record<string, string> => {
 	const properties = meta.banner.properties;
-	const result: Record<string, string> = Object.keys(properties).reduce(
-		(acc, key) => {
-			acc[key] = getSettingsPropertyValueAsString(meta, key);
-			return acc;
-		},
-		{} as Record<string, string>,
-	);
+	const result: Record<string, string> = {};
+	for (const key in properties) {
+		result[key] = getSettingsPropertyValueAsString(meta, key);
+	}
 	return result;
 };
 
@@ -287,17 +284,21 @@ const runCssCheckerOnBrazeBanner = (
 						`CSS Checker: Selector "${selector}" did not match any elements. This may indicate broken styles in the Braze Banner. Check UI/UX ASAP!`,
 					);
 					isValid = false;
-					if (stopOnFirstProblem) return false;
+					if (stopOnFirstProblem) {
+						return false;
+					}
 				}
 			}
 			// Check if the rule is a group (like @media or @supports)
 			else if (
 				rule instanceof CSSGroupingRule ||
-				(rule as any).cssRules
+				// Fallback check for group rules
+				(rule && 'cssRules' in rule && rule.cssRules)
 			) {
 				const nestedRules = (rule as CSSGroupingRule).cssRules;
-				if (!checkRules(nestedRules) && stopOnFirstProblem)
+				if (!checkRules(nestedRules) && stopOnFirstProblem) {
 					return false;
+				}
 			}
 		}
 		return true;
@@ -395,12 +396,12 @@ export const BrazeBannersSystemDisplay = ({
 				resolve(email ?? null);
 			});
 		});
-	}, [authStatus, idApiUrl]);
+	}, []);
 
 	// Handle DOM Insertion
 	useEffect(() => {
 		// Render the banner ONLY when we have both the Data and the DOM Element
-		if (containerRef.current && meta.braze && meta.banner) {
+		if (containerRef.current) {
 			// Clear any existing content to prevent duplicates
 			containerRef.current.innerHTML = '';
 
@@ -416,7 +417,7 @@ export const BrazeBannersSystemDisplay = ({
 			// CSS Checker
 			runCssCheckerOnBrazeBanner(meta);
 		}
-	}, [meta.banner, meta.braze]);
+	}, [meta, meta.banner, meta.braze]);
 
 	// Handle "postMessage" from the Banner's Buttons
 	useEffect(() => {
@@ -479,9 +480,9 @@ export const BrazeBannersSystemDisplay = ({
 						void subscribeToNewsletter(newsletterId);
 					}
 					break;
-				case BrazeBannersSystemMessageType.GetSettingsPropertyValue:
+				case BrazeBannersSystemMessageType.GetAllSettingsPropertyValues:
 					postMessageToBrazeBanner(
-						BrazeBannersSystemMessageType.GetSettingsPropertyValue,
+						BrazeBannersSystemMessageType.GetAllSettingsPropertyValues,
 						getAllSettingsPropertiesValuesAsString(meta),
 					);
 					break;
@@ -514,7 +515,7 @@ export const BrazeBannersSystemDisplay = ({
 		return () => {
 			window.removeEventListener('message', handleBrazeBannerMessage);
 		};
-	}, [meta.banner, authStatus.kind, subscribeToNewsletter]);
+	}, [meta, meta.banner, authStatus.kind, subscribeToNewsletter, fetchEmail]);
 
 	// Log Impressions with Braze and Button Clicks with Ophan
 	// TODO
