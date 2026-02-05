@@ -185,17 +185,18 @@ enum BrazeBannersSystemMessageType {
 	GetAuthStatus = 'BRAZE_BANNERS_SYSTEM:GET_AUTH_STATUS',
 	GetEmailAddress = 'BRAZE_BANNERS_SYSTEM:GET_EMAIL_ADDRESS',
 	NewsletterSubscribe = 'BRAZE_BANNERS_SYSTEM:NEWSLETTER_SUBSCRIBE',
+	GetAllSettingsPropertyValues = 'BRAZE_BANNERS_SYSTEM:GET_ALL_SETTINGS_PROPERTY_VALUES',
 	GetSettingsPropertyValue = 'BRAZE_BANNERS_SYSTEM:GET_SETTINGS_PROPERTY_VALUE',
 	DismissBanner = 'BRAZE_BANNERS_SYSTEM:DISMISS_BANNER',
 }
 
 /**
- * Retrieves the value of a property from the Braze Banner meta.
+ * Retrieves the value of a property setting from the Braze Banner meta.
  * @param meta Braze Banner meta information
  * @param propertyKey Key of the property to retrieve
  * @returns The value of the property as a string
  */
-const getPropertyValueAsString = (
+const getSettingsPropertyValueAsString = (
 	meta: BrazeBannersSystemMeta,
 	propertyKey: string,
 ): string => {
@@ -220,6 +221,25 @@ const getPropertyValueAsString = (
 		).toISOString();
 	}
 	return '';
+};
+
+/**
+ * Retrieves all property settings from the Braze Banner meta as strings.
+ * @param meta Braze Banner meta information
+ * @returns An object containing all property keys and their values as strings
+ */
+const getAllSettingsPropertiesValuesAsString = (
+	meta: BrazeBannersSystemMeta,
+): Record<string, string> => {
+	const properties = meta.banner.properties;
+	const result: Record<string, string> = Object.keys(properties).reduce(
+		(acc, key) => {
+			acc[key] = getSettingsPropertyValueAsString(meta, key);
+			return acc;
+		},
+		{} as Record<string, string>,
+	);
+	return result;
 };
 
 /**
@@ -413,6 +433,9 @@ export const BrazeBannersSystemDisplay = ({
 						newsletterId?: string;
 				  }
 				| {
+						type: BrazeBannersSystemMessageType.GetAllSettingsPropertyValues;
+				  }
+				| {
 						type: BrazeBannersSystemMessageType.GetSettingsPropertyValue;
 						key?: string;
 				  }
@@ -457,9 +480,18 @@ export const BrazeBannersSystemDisplay = ({
 					}
 					break;
 				case BrazeBannersSystemMessageType.GetSettingsPropertyValue:
+					postMessageToBrazeBanner(
+						BrazeBannersSystemMessageType.GetSettingsPropertyValue,
+						getAllSettingsPropertiesValuesAsString(meta),
+					);
+					break;
+				case BrazeBannersSystemMessageType.GetSettingsPropertyValue:
 					const { key } = event.data;
 					if (key) {
-						const value = getPropertyValueAsString(meta, key);
+						const value = getSettingsPropertyValueAsString(
+							meta,
+							key,
+						);
 						postMessageToBrazeBanner(
 							BrazeBannersSystemMessageType.GetSettingsPropertyValue,
 							{
