@@ -9,15 +9,14 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { palette } from '../palette';
 import { Avatar } from './Avatar';
 import {
-	FollowNotificationsButton,
 	FollowNotificationsButtonVariant,
 	FollowTagButtonVariant,
 } from './FollowButtons';
-import { FollowButtonWithContributorProfile } from './FollowButtonWithContributorProfile.importable';
+import { FollowContributorProfile } from './FollowContributorProfile.importable';
 
 export default {
-	component: FollowButtonWithContributorProfile,
-	title: 'Components/FollowButtonWithProfile',
+	component: FollowContributorProfile,
+	title: 'Components/FollowContributorProfile',
 };
 
 const mockContributor = {
@@ -70,37 +69,37 @@ const allPillarsDecorator = splitTheme([
 	},
 ]);
 
-const previewContainerStyles = css`
+const contributorContainerStyles = css`
 	display: flex;
 	flex-direction: column;
 	gap: ${space[3]}px;
 `;
 
-const previewTopRowStyles = css`
+const topRowStyles = css`
 	display: flex;
 	flex-direction: row;
 	gap: ${space[3]}px;
 `;
 
-const previewAvatarContainerStyles = css`
+const avatarContainerStyles = css`
 	width: 80px;
 	height: 80px;
 	flex-shrink: 0;
 `;
 
-const previewContentStyles = css`
+const contentStyles = css`
 	display: flex;
 	flex-direction: column;
 	flex: 1;
 `;
 
-const previewTitleStyles = css`
+const titleStyles = css`
 	${headlineBold17};
 	color: ${palette('--byline-anchor')};
 	margin: 0 0 ${space[1]}px;
 `;
 
-const previewBioStyles = css`
+const bioStyles = css`
 	${textEgyptian14};
 	font-weight: 500;
 	line-height: 1.3;
@@ -109,15 +108,11 @@ const previewBioStyles = css`
 	margin: 0;
 `;
 
-const FollowButtonWithProfilePreview = ({
-	isFollowing,
-}: {
-	isFollowing: boolean;
-}) => (
+const Wrapper = ({ isFollowing }: { isFollowing: boolean }) => (
 	<div css={containerStyles}>
-		<div css={previewContainerStyles}>
-			<div css={previewTopRowStyles}>
-				<div css={previewAvatarContainerStyles}>
+		<div css={contributorContainerStyles}>
+			<div css={topRowStyles}>
+				<div css={avatarContainerStyles}>
 					<Avatar
 						src={mockContributor.avatarUrl}
 						alt={mockContributor.displayName}
@@ -125,11 +120,9 @@ const FollowButtonWithProfilePreview = ({
 						imageSize="small"
 					/>
 				</div>
-				<div css={previewContentStyles}>
-					<h3 css={previewTitleStyles}>
-						{mockContributor.displayName}
-					</h3>
-					<p css={previewBioStyles}>{mockContributor.bioText}</p>
+				<div css={contentStyles}>
+					<h3 css={titleStyles}>{mockContributor.displayName}</h3>
+					<p css={bioStyles}>{mockContributor.bioText}</p>
 				</div>
 			</div>
 			<div>
@@ -154,20 +147,14 @@ const FollowButtonWithProfilePreview = ({
 	</div>
 );
 
-export const VisualPreviewWithButton = () => (
-	<FollowButtonWithProfilePreview isFollowing={false} />
-);
-VisualPreviewWithButton.storyName = 'Follow';
-VisualPreviewWithButton.decorators = [opinionDecorator];
+export const ContributorFollow = () => <Wrapper isFollowing={false} />;
+ContributorFollow.storyName = 'Follow';
+ContributorFollow.decorators = [opinionDecorator];
 
-export const VisualPreviewFollowingState = () => (
-	<FollowButtonWithProfilePreview isFollowing={true} />
-);
-VisualPreviewFollowingState.storyName = 'Following';
-VisualPreviewFollowingState.decorators = [opinionDecorator];
+export const ContributorFollowing = () => <Wrapper isFollowing={true} />;
+ContributorFollowing.storyName = 'Following';
+ContributorFollowing.decorators = [opinionDecorator];
 
-export const VisualPreviewAllPillars = () => (
-	<FollowButtonWithProfilePreview isFollowing={false} />
-);
-VisualPreviewAllPillars.storyName = 'All Pillars';
-VisualPreviewAllPillars.decorators = [allPillarsDecorator];
+export const ContributorAllPillars = () => <Wrapper isFollowing={false} />;
+ContributorAllPillars.storyName = 'All Pillars';
+ContributorAllPillars.decorators = [allPillarsDecorator];

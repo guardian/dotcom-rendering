@@ -281,7 +281,10 @@ export const FollowNotificationsButtonVariant = ({
 					/>
 					{notificationsTextSpanVariant({ isFollowing })}
 				</span>
-				<ToggleSwitch cssOverrides={toggleSwitchStyles} />
+				<ToggleSwitch
+					checked={isFollowing}
+					cssOverrides={toggleSwitchStyles}
+				/>
 			</span>
 		</button>
 	);

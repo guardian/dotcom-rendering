@@ -18,7 +18,7 @@ import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { FollowButtonWithContributorProfile } from '../components/FollowButtonWithContributorProfile.importable';
+import { FollowContributorProfile } from '../components/FollowContributorProfile.importable';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -657,7 +657,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 											priority="feature"
 											defer={{ until: 'visible' }}
 										>
-											<FollowButtonWithContributorProfile
+											<FollowContributorProfile
 												id={soleContributor!.id}
 												displayName={
 													soleContributor!.title
