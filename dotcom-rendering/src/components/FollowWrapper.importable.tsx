@@ -13,6 +13,10 @@ import {
 	FollowTagButtonVariant,
 } from './FollowButtons';
 
+const notificationContainerStyles = css`
+	margin-top: ${space[3]}px;
+`;
+
 type Props = {
 	id: string;
 	displayName: string;
@@ -210,15 +214,19 @@ export const FollowWrapper = ({
 					/>
 				))}
 			{/* {variant === 'default' && ( */}
-			<FollowNotificationsButtonVariant
-				isFollowing={isFollowingNotifications ?? false}
-				onClickHandler={
-					!isUndefined(isFollowingNotifications)
-						? notificationsHandler
-						: () => undefined
-				}
-				displayName={displayName}
-			/>
+			{isFollowingTag && (
+				<div css={notificationContainerStyles}>
+					<FollowNotificationsButtonVariant
+						isFollowing={isFollowingNotifications ?? false}
+						onClickHandler={
+							!isUndefined(isFollowingNotifications)
+								? notificationsHandler
+								: () => undefined
+						}
+						displayName={displayName}
+					/>
+				</div>
+			)}
 			{/* )} */}
 		</div>
 	);
