@@ -13,7 +13,7 @@ type Props = {
 	images: ImageBlockElement[];
 	format: ArticleFormat;
 	caption?: string;
-	presentation?: 'slideshow' | 'grid';
+	presentation?: 'slideshow' | 'side-by-side' | 'stacked';
 };
 
 const ieFallback = css`
@@ -123,7 +123,7 @@ const OneImage = ({
 	format: ArticleFormat;
 	caption?: string;
 }) => {
-	const captionToUse = caption ?? removeLastFullStop(images[0].data.caption);
+	const captionToUse = caption || removeLastFullStop(images[0].data.caption);
 	return (
 		<div css={wrapper}>
 			<ImageComponent
@@ -158,7 +158,7 @@ const TwoImage = ({
 	const captionRight =
 		images[1].data.caption &&
 		`${removeLastFullStop(images[1].data.caption)} (above right).  `;
-	const captionToUse = caption ?? `${captionLeft ?? ''}${captionRight ?? ''}`;
+	const captionToUse = caption || `${captionLeft ?? ''}${captionRight ?? ''}`;
 	return (
 		<div css={wrapper}>
 			<SideBySideGrid>
@@ -209,7 +209,7 @@ const ThreeImage = ({
 		images[2].data.caption &&
 		`${removeLastFullStop(images[2].data.caption)} (bottom right).  `;
 	const captionToUse =
-		caption ??
+		caption ||
 		`${captionTop ?? ''}${captionBottomLeft ?? ''}${
 			captionBottomRight ?? ''
 		}`;
@@ -279,7 +279,7 @@ const FourImage = ({
 		images[3].data.caption &&
 		`${removeLastFullStop(images[3].data.caption)} (bottom right).  `;
 	const captionToUse =
-		caption ??
+		caption ||
 		`${captionTopLeft ?? ''}${captionTopRight ?? ''}${
 			captionBottomLeft ?? ''
 		}${captionBottomRight ?? ''}`;
