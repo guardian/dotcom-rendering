@@ -9,6 +9,7 @@ import sanitise from 'sanitize-html';
 import { palette } from '../palette';
 import { Avatar } from './Avatar';
 import { FollowWrapper } from './FollowWrapper.importable';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 
 type Props = {
 	id: string;
@@ -82,11 +83,7 @@ const bioStyles = css`
 const followButtonContainerStyles = css`
 	display: flex;
 `;
-const borderStyles = css`
-	height: 13px;
-	background-color: ${palette('--follow-bottom-border')};
-	margin-top: ${space[3]}px;
-`;
+
 const containsText = (html: string) => {
 	const htmlWithoutTags = sanitise(html, {
 		allowedTags: [],
@@ -134,7 +131,7 @@ export const FollowContributorProfile = ({
 					variant="pill"
 				/>
 			</div>
-			<div css={borderStyles} />
+			<StraightLines count={1} />
 		</div>
 	);
 };

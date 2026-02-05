@@ -142,7 +142,6 @@ export const FollowTagButton = ({
 
 const containerStylesVariant = css`
 	display: flex;
-	align-items: flex-start;
 	column-gap: 0.2em;
 	justify-content: space-between;
 	width: 100%;
@@ -270,8 +269,8 @@ export const FollowNotificationsButtonVariant = ({
 }: ButtonProps & { displayName?: string }) => {
 	return (
 		<div css={buttonStylesVariantNotification}>
-			<span css={containerStylesVariant}>
-				<span css={iconTextWrapperStyles}>
+			<div css={containerStylesVariant}>
+				<div css={iconTextWrapperStyles}>
 					<NotificationIconVariant
 						isFollowing={isFollowing}
 						iconIsFollowing={<SvgNotificationsOn size="small" />}
@@ -280,13 +279,15 @@ export const FollowNotificationsButtonVariant = ({
 						}
 					/>
 					{notificationsTextSpanVariant({ isFollowing, displayName })}
-				</span>
-				<ToggleSwitch
-					checked={isFollowing}
-					onClick={onClickHandler}
-					cssOverrides={toggleSwitchStyles}
-				/>
-			</span>
+				</div>
+				<div>
+					<ToggleSwitch
+						checked={isFollowing}
+						onClick={onClickHandler}
+						cssOverrides={toggleSwitchStyles}
+					/>
+				</div>
+			</div>
 		</div>
 	);
 };

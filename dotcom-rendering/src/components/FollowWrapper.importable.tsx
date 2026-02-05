@@ -15,6 +15,7 @@ import {
 
 const notificationContainerStyles = css`
 	margin-top: ${space[3]}px;
+	width: 100%;
 `;
 
 type Props = {
@@ -179,6 +180,7 @@ export const FollowWrapper = ({
 		<div
 			css={css`
 				min-height: ${space[6]}px;
+				width: 100%;
 
 				${from.phablet} {
 					display: inline-flex;
