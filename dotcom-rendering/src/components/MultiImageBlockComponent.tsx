@@ -294,16 +294,25 @@ const Slideshow = ({
 		};
 	});
 	return (
-		<Island priority="feature" defer={{ until: 'visible' }}>
-			<SlideshowCarousel
-				images={imagesForSlideshow}
-				imageSize="medium"
-				hasNavigationBackgroundColour={false}
-				linkTo="https://www.theguardian.com"
-				linkAriaLabel="news | group-3 | card-@1 | media-slideshow"
-				dataLinkName="slideshow-carousel-1"
-			/>
-		</Island>
+		<>
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<SlideshowCarousel
+					images={imagesForSlideshow}
+					imageSize="small"
+					hasNavigationBackgroundColour={false}
+					linkTo="https://www.theguardian.com"
+					linkAriaLabel="news | group-3 | card-@1 | media-slideshow"
+					dataLinkName="slideshow-carousel-1"
+				/>
+			</Island>
+			{!!caption && (
+				<Caption
+					captionText={caption}
+					format={format}
+					shouldLimitWidth={false}
+				/>
+			)}
+		</>
 	);
 };
 
