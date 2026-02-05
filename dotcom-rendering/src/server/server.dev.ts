@@ -13,6 +13,7 @@ import {
 	handleInteractive,
 } from './handler.article.web';
 import { handleAppsAssets } from './handler.assets.apps';
+import { handleComponent } from './handler.component.app';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import { handleFront, handleTagPage } from './handler.front.web';
 import { handleAppsHostedContent } from './handler.hostedContent.apps';
@@ -118,6 +119,7 @@ renderer.get('/CricketMatchPage/*url', handleCricketMatchPage);
 renderer.get('/FootballMatchSummaryPage/*url', handleFootballMatchPage);
 renderer.get('/HostedContent/*url', handleHostedContent);
 renderer.get('/AppsHostedContent/*url', handleAppsHostedContent);
+renderer.get('/AppsComponent/*name', handleComponent);
 
 // POST routes for running frontend locally
 renderer.post('/Article', handleArticle);
