@@ -18,7 +18,6 @@ const containerStyles = css`
 	${textSans17};
 	font-weight: bold;
 	color: ${themePalette('--comment-count-fill')};
-	padding-top: 5px;
 
 	${until.desktop} {
 		color: ${themePalette('--comment-count-mobile-fill')};
@@ -45,6 +44,7 @@ const iconStyles = css`
 
 const longStyles = css`
 	display: block;
+	text-align: center;
 
 	${between.leftCol.and.wide} {
 		display: none;
@@ -53,6 +53,7 @@ const longStyles = css`
 
 const shortStyles = css`
 	display: none;
+	text-align: center;
 
 	${between.leftCol.and.wide} {
 		display: block;
@@ -60,6 +61,9 @@ const shortStyles = css`
 `;
 
 const linkStyles = css`
+	display: flex;
+	align-items: center;
+	gap: 4px;
 	color: inherit;
 	text-decoration: none;
 	:hover {

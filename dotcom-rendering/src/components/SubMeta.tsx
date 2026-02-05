@@ -16,6 +16,7 @@ import type { BaseLinkType } from '../model/extract-nav';
 import { palette } from '../palette';
 import { Island } from './Island';
 import { ShareButton } from './ShareButton.importable';
+import { ShareUpvote } from './ShareUpvote.importable';
 
 const labelStyles = (design: ArticleDesign): SerializedStyles => css`
 	${design === ArticleDesign.Gallery ? grid.column.centre : undefined};
@@ -132,6 +133,8 @@ type Props = {
 };
 
 const syndicationButtonOverrides = css`
+	margin-top: 8px;
+
 	> a {
 		font-weight: normal;
 	}
@@ -269,20 +272,27 @@ export const SubMeta = ({
 				</>
 			)}
 			{showBottomSocialButtons && (
-				<div
-					css={css`
-						display: flex;
-						justify-content: space-between;
-					`}
-				>
-					<Island priority="feature" defer={{ until: 'visible' }}>
-						<ShareButton
-							pageId={pageId}
-							webTitle={webTitle}
-							format={format}
-							context="SubMeta"
-						/>
-					</Island>
+				<div>
+					<div
+						css={css`
+							display: flex;
+							justify-content: space-between;
+							align-items: center;
+							gap: 4px;
+						`}
+					>
+						<Island priority="feature" defer={{ until: 'visible' }}>
+							<ShareButton
+								pageId={pageId}
+								webTitle={webTitle}
+								format={format}
+								context="SubMeta"
+							/>
+						</Island>
+						<Island priority="feature" defer={{ until: 'visible' }}>
+							<ShareUpvote isArticlePage={true} />
+						</Island>
+					</div>
 					<div css={syndicationButtonOverrides}>
 						{showSyndicationButton ? (
 							<LinkButton

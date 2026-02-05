@@ -61,7 +61,8 @@ const hoverStyles = css`
 			ul.sublinks:hover,
 			.video-container:not(.cinemagraph):hover,
 			.slideshow-carousel-footer:hover,
-			.branding-logo:hover
+			.branding-logo:hover,
+			.hackday-upvote:hover
 		) {
 		.card-headline .show-underline {
 			text-decoration: none;

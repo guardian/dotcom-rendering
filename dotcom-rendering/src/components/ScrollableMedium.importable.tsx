@@ -1,11 +1,13 @@
 import { isMediaCard } from '../lib/cardHelpers';
+import { palette } from '../palette';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
 	DCRFrontCard,
 } from '../types/front';
+import { LI } from './Card/components/LI';
+import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
-import { ScrollableCarousel } from './ScrollableCarousel';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -14,7 +16,6 @@ type Props = {
 	serverTime?: number;
 	imageLoading: 'lazy' | 'eager';
 	aspectRatio: AspectRatio;
-	sectionId: string;
 };
 
 /**
@@ -31,22 +32,24 @@ export const ScrollableMedium = ({
 	imageLoading,
 	showAge,
 	aspectRatio,
-	sectionId,
 }: Props) => {
 	return (
-		<ScrollableCarousel
-			carouselLength={trails.length}
-			visibleCarouselSlidesOnMobile={2}
-			visibleCarouselSlidesOnTablet={4}
-			sectionId={sectionId}
-		>
+		<UL direction="row">
 			{trails.map((trail) => {
 				const imagePosition = isMediaCard(trail.format)
 					? 'top'
 					: 'bottom';
 
 				return (
-					<ScrollableCarousel.Item key={trail.url}>
+					<LI
+						key={trail.url}
+						stretch={false}
+						padSides={true}
+						showDivider={true}
+						verticalDividerColour={palette(
+							'--card-border-supporting',
+						)}
+					>
 						<FrontCard
 							trail={trail}
 							imageLoading={imageLoading}
@@ -57,6 +60,7 @@ export const ScrollableMedium = ({
 							headlineSizes={{
 								desktop: 'xsmall',
 								tablet: 'xxsmall',
+								mobile: 'small',
 							}}
 							mediaPositionOnDesktop={imagePosition}
 							mediaPositionOnMobile={imagePosition}
@@ -70,9 +74,9 @@ export const ScrollableMedium = ({
 							showTopBarMobile={false}
 							canPlayInline={false}
 						/>
-					</ScrollableCarousel.Item>
+					</LI>
 				);
 			})}
-		</ScrollableCarousel>
+		</UL>
 	);
 };

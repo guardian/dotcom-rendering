@@ -70,7 +70,7 @@ const decideImageWidths = (
 			return [
 				{
 					breakpoint: breakpoints.mobile,
-					width: 120,
+					width: 465,
 					aspectRatio,
 				},
 				{ breakpoint: breakpoints.tablet, width: 160, aspectRatio },

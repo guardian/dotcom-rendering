@@ -272,8 +272,12 @@ const TwoOrFourCardLayout = ({
 								hasTwoOrFewerCards,
 								isMediaCard(card.format) || !!card.isNewsletter,
 							)}
-							mediaPositionOnMobile="left"
-							headlineSizes={undefined}
+							mediaPositionOnMobile="bottom"
+							headlineSizes={{
+								desktop: 'xsmall',
+								tablet: 'xxsmall',
+								mobile: 'small',
+							}}
 							/* we don't want to support sublinks on standard cards here so we hard code to undefined */
 							supportingContent={undefined}
 							mediaSize="small"

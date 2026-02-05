@@ -87,13 +87,13 @@ const sizingStyles = (
 						width: 90px;
 						height: 90px;
 						${until.tablet} {
-							height: 80px;
-							width: 80px;
+							height: 150px;
+							width: 150px;
 						}
 				  `
 				: css`
-						width: 80px;
-						height: 80px;
+						width: 150px;
+						height: 150px;
 				  `;
 		case 'large':
 		case 'xlarge':

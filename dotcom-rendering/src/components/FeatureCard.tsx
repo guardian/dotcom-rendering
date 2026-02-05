@@ -794,6 +794,7 @@ export const FeatureCard = ({
 											showLivePlayable={false}
 											isNewsletter={isNewsletter}
 											mainMedia={mainMedia}
+											isFeatureCard={true}
 										/>
 
 										{!isImmersive &&

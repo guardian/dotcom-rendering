@@ -1,10 +1,14 @@
+import { css } from '@emotion/react';
+import { from } from '@guardian/source/foundations';
+import { palette } from '../palette';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
 	DCRFrontCard,
 } from '../types/front';
+import { LI } from './Card/components/LI';
+import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
-import { ScrollableCarousel } from './ScrollableCarousel';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -13,7 +17,6 @@ type Props = {
 	serverTime?: number;
 	imageLoading: 'lazy' | 'eager';
 	aspectRatio: AspectRatio;
-	sectionId: string;
 };
 
 /**
@@ -56,54 +59,108 @@ export const ScrollableSmall = ({
 	imageLoading,
 	showAge,
 	aspectRatio,
-	sectionId,
 }: Props) => {
 	const mobileBottomCards = [1, 3];
 	const desktopBottomCards = [2, 3];
 
 	return (
-		<ScrollableCarousel
-			carouselLength={Math.ceil(trails.length / 2)}
-			visibleCarouselSlidesOnMobile={1}
-			visibleCarouselSlidesOnTablet={2}
-			sectionId={sectionId}
-			shouldStackCards={{ desktop: trails.length > 2, mobile: true }}
-			gapSizes={{ column: 'large', row: 'medium' }}
-		>
-			{trails.map((trail, index) => {
-				return (
-					<ScrollableCarousel.Item
-						key={trail.url}
-						isStackingCarousel={true}
-					>
-						<FrontCard
-							trail={trail}
-							imageLoading={imageLoading}
-							serverTime={serverTime}
-							containerPalette={containerPalette}
-							containerType="scrollable/small"
-							showAge={!!showAge}
-							headlineSizes={{
-								desktop: 'xxsmall',
-								mobile: 'xxxsmall',
-							}}
-							mediaPositionOnDesktop="left"
-							mediaPositionOnMobile="left"
-							mediaSize="scrollable-small"
-							trailText={undefined} // unsupported
-							supportingContent={undefined} // unsupported
-							aspectRatio={aspectRatio}
-							kickerText={trail.kickerText}
-							showLivePlayable={false}
-							showTopBarDesktop={desktopBottomCards.includes(
-								index,
+		<>
+			<UL direction="row" padBottom={true}>
+				{trails.slice(0, 2).map((trail, index) => {
+					return (
+						<LI
+							key={trail.url}
+							stretch={false}
+							padSides={true}
+							showDivider={true}
+							verticalDividerColour={palette(
+								'--card-border-supporting',
 							)}
-							showTopBarMobile={mobileBottomCards.includes(index)}
-							canPlayInline={false}
-						/>
-					</ScrollableCarousel.Item>
-				);
-			})}
-		</ScrollableCarousel>
+						>
+							<FrontCard
+								trail={trail}
+								imageLoading={imageLoading}
+								containerPalette={containerPalette}
+								containerType="scrollable/small"
+								showAge={showAge}
+								headlineSizes={{
+									desktop: 'xxsmall',
+									tablet: 'xxxsmall',
+									mobile: 'small',
+								}}
+								mediaPositionOnDesktop="left"
+								mediaPositionOnMobile="bottom"
+								mediaSize="small"
+								trailText={undefined}
+								supportingContent={undefined} // unsupported
+								aspectRatio={aspectRatio}
+								kickerText={trail.kickerText}
+								showLivePlayable={trail.showLivePlayable}
+								showTopBarDesktop={desktopBottomCards.includes(
+									index,
+								)}
+								showTopBarMobile={mobileBottomCards.includes(
+									index,
+								)}
+								canPlayInline={false}
+							/>
+						</LI>
+					);
+				})}
+			</UL>
+			<hr
+				css={css`
+					border: 0;
+					border-top: 1px solid ${palette('--card-border-top')};
+					${from.tablet} {
+						display: none;
+					}
+				`}
+			/>
+			<UL direction="row" showTopBar={true} splitTopBar={true}>
+				{trails.slice(2, 4).map((trail, index) => {
+					return (
+						<LI
+							key={trail.url}
+							stretch={false}
+							padSides={true}
+							showDivider={true}
+							verticalDividerColour={palette(
+								'--card-border-supporting',
+							)}
+						>
+							<FrontCard
+								trail={trail}
+								imageLoading={imageLoading}
+								serverTime={serverTime}
+								containerPalette={containerPalette}
+								containerType="scrollable/small"
+								showAge={!!showAge}
+								headlineSizes={{
+									desktop: 'xxsmall',
+									tablet: 'xxxsmall',
+									mobile: 'small',
+								}}
+								mediaPositionOnDesktop="left"
+								mediaPositionOnMobile="bottom"
+								mediaSize="scrollable-small"
+								trailText={undefined}
+								supportingContent={undefined} // unsupported
+								aspectRatio={aspectRatio}
+								kickerText={trail.kickerText}
+								showLivePlayable={false}
+								showTopBarDesktop={desktopBottomCards.includes(
+									index,
+								)}
+								showTopBarMobile={mobileBottomCards.includes(
+									index,
+								)}
+								canPlayInline={false}
+							/>
+						</LI>
+					);
+				})}
+			</UL>
+		</>
 	);
 };

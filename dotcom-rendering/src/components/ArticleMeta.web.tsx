@@ -29,6 +29,7 @@ import { Island } from './Island';
 import { PodcastMeta } from './PodcastMeta';
 import { PreferredSourceButton } from './PreferredSourceButton';
 import { ShareButton } from './ShareButton.importable';
+import { ShareUpvote } from './ShareUpvote.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -500,20 +501,52 @@ export const ArticleMeta = ({
 								display: flex;
 								flex-direction: row;
 								align-items: flex-start;
+								padding-top: 6px;
 							`}
 						>
-							<div>
+							<div
+								css={css`
+									display: flex;
+									align-items: center;
+									gap: 8px;
+								`}
+							>
 								{isCommentable && (
-									<Island
-										priority="feature"
-										defer={{ until: 'idle' }}
+									<span
+										css={css`
+											display: flex;
+											align-items: center;
+											gap: 8px;
+										`}
 									>
-										<CommentCount
-											discussionApiUrl={discussionApiUrl}
-											shortUrlId={shortUrlId}
+										<Island
+											priority="feature"
+											defer={{ until: 'idle' }}
+										>
+											<CommentCount
+												discussionApiUrl={
+													discussionApiUrl
+												}
+												shortUrlId={shortUrlId}
+											/>
+										</Island>
+										<span
+											css={css`
+												width: 1px;
+												height: 16px;
+												background-color: ${themePalette(
+													'--comment-count-fill',
+												)};
+											`}
 										/>
-									</Island>
+									</span>
 								)}
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
+									<ShareUpvote isArticlePage={true} />
+								</Island>
 							</div>
 						</div>
 					</div>

@@ -6,7 +6,9 @@ import {
 	textSansBold12,
 } from '@guardian/source/foundations';
 import { SvgCamera } from '@guardian/source/react-components';
+import { Island } from '../../../components/Island';
 import { Pill } from '../../../components/Pill';
+import { ShareUpvote } from '../../../components/ShareUpvote.importable';
 import { SvgMediaControlsPlay } from '../../../components/SvgMediaControlsPlay';
 import { type ArticleFormat, ArticleSpecial } from '../../../lib/articleFormat';
 import { secondsToDuration } from '../../../lib/formatTime';
@@ -14,30 +16,6 @@ import { secondsToDuration } from '../../../lib/formatTime';
 const contentStyles = css`
 	margin-top: auto;
 	padding-top: ${space[1]}px;
-	display: flex;
-	justify-content: 'flex-start';
-	width: fit-content;
-	align-items: center;
-	${textSansBold12}
-	> {
-		/* The dividing line is applied only to the second child. This ensures that no
-		   dividing line is added when there is only one child in the container. */
-		:nth-child(2) {
-			::before {
-				content: '';
-				display: block;
-				width: 1px;
-				height: 12px;
-				position: absolute;
-				bottom: 0;
-				left: 0;
-				background-color: ${palette.neutral[60]};
-				margin-right: ${space[1]}px;
-			}
-			margin-left: ${space[1]}px;
-			padding-left: ${space[1]}px;
-		}
-	}
 `;
 
 const reserveSpaceStyles = (mobile: boolean, desktop: boolean) => css`
@@ -67,6 +45,7 @@ type Props = {
 	mainMedia?: MainMedia;
 	isNewsletter?: boolean;
 	shouldReserveSpace?: { mobile: boolean; desktop: boolean };
+	isFeatureCard?: boolean;
 };
 
 export const CardFooter = ({
@@ -78,6 +57,7 @@ export const CardFooter = ({
 	mainMedia,
 	isNewsletter,
 	shouldReserveSpace,
+	isFeatureCard = false,
 }: Props) => {
 	if (showLivePlayable) return null;
 
@@ -140,10 +120,56 @@ export const CardFooter = ({
 						shouldReserveSpace.mobile,
 						shouldReserveSpace.desktop,
 					),
+				css`
+					display: flex;
+					justify-content: space-between;
+				`,
 			]}
 		>
-			{age}
-			{commentCount}
+			<span
+				css={css`
+					display: flex;
+					justify-content: flex-start;
+					width: fit-content;
+					align-items: center;
+					${textSansBold12}
+					> {
+						/* The dividing line is applied only to the second child. This ensures that no
+		   dividing line is added when there is only one child in the container. */
+						:nth-child(2) {
+							::before {
+								content: '';
+								display: block;
+								width: 1px;
+								height: 12px;
+								position: absolute;
+								bottom: 0;
+								left: 0;
+								background-color: ${palette.neutral[60]};
+								margin-right: ${space[1]}px;
+							}
+							margin-left: ${space[1]}px;
+							padding-left: ${space[1]}px;
+						}
+					}
+				`}
+			>
+				{age}
+				{commentCount}
+			</span>
+
+			{!isFeatureCard && (
+				<span
+					css={css`
+						display: flex;
+						gap: 4px;
+					`}
+				>
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<ShareUpvote isArticlePage={false} />
+					</Island>
+				</span>
+			)}
 		</footer>
 	);
 };

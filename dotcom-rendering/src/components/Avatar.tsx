@@ -67,7 +67,7 @@ const decideImageWidths = (
 			return [
 				{
 					breakpoint: breakpoints.mobile,
-					width: 80,
+					width: 150,
 					aspectRatio: '1:1',
 				},
 			];

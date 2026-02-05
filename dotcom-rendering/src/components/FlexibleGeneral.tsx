@@ -577,7 +577,12 @@ const HalfWidthCardLayout = ({
 							image={card.image}
 							imageLoading={imageLoading}
 							mediaPositionOnDesktop="left"
-							mediaPositionOnMobile="left"
+							mediaPositionOnMobile="bottom"
+							headlineSizes={{
+								desktop: 'xsmall',
+								tablet: 'xxsmall',
+								mobile: 'small',
+							}}
 							supportingContent={card.supportingContent?.slice(
 								0,
 								2,
@@ -596,7 +601,6 @@ const HalfWidthCardLayout = ({
 								(containerLevel !== 'Primary' && cardIndex > 0)
 							}
 							trailText={undefined}
-							headlineSizes={undefined}
 							canPlayInline={false}
 							isStorylines={isStorylines}
 						/>
