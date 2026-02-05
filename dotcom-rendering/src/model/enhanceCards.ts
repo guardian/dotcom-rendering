@@ -389,8 +389,7 @@ export const enhanceCards = (
 
 		const articleMainMedia = decideArticleMedia(
 			format,
-			faciaCard.mediaAtom ??
-				faciaCard.properties.maybeContent?.elements.mainMediaAtom ??
+			faciaCard.properties.maybeContent?.elements.mainMediaAtom ??
 				faciaCard.properties.maybeContent?.elements.mediaAtoms[0],
 			faciaCard.card.galleryCount,
 			faciaCard.card.audioDuration,
