@@ -2423,6 +2423,13 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "presentation": {
+                    "enum": [
+                        "grid",
+                        "slideshow"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
