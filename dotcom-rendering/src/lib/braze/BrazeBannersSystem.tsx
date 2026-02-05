@@ -368,16 +368,16 @@ export const BrazeBannersSystemDisplay = ({
 					}),
 					...options,
 				})
-					.catch((error) => {
-						brazeBannersSystemLogger.warn(
-							'Error subscribing to newsletter:',
-							error,
-						);
-					})
 					.then(() => {
 						brazeBannersSystemLogger.info(
 							'Successfully subscribed to newsletter:',
 							newsletterId,
+						);
+					})
+					.catch((error) => {
+						brazeBannersSystemLogger.warn(
+							'Error subscribing to newsletter:',
+							error,
 						);
 					});
 			}
