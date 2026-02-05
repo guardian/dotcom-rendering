@@ -5559,6 +5559,9 @@
                         },
                         "image": {
                             "type": "string"
+                        },
+                        "isLive": {
+                            "type": "boolean"
                         }
                     },
                     "required": [

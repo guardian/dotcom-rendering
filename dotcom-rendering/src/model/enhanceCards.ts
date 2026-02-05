@@ -272,6 +272,11 @@ export const getActiveMediaAtom = (
 				height: 300,
 				origin: mediaAtom.source ?? 'Unknown origin',
 				expired: !!mediaAtom.expired,
+				/**
+				 * We infer that a video is a livestream if the duration is set to 0. This is
+				 * a soft contract with Editorial who manual set the duration of videos
+				 */
+				isLive: mediaAtom.duration === 0,
 				image,
 			};
 		}

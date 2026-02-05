@@ -20,6 +20,7 @@ export type YoutubeVideo = Media & {
 	duration: number;
 	expired: boolean;
 	image?: string;
+	isLive?: boolean;
 };
 
 type SelfHostedVideo = Media & {

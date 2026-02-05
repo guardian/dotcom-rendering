@@ -520,7 +520,7 @@ export const Card = ({
 
 			{mainMedia?.type === 'YoutubeVideo' && isVideoArticle && (
 				<>
-					{mainMedia.duration === 0 ? (
+					{mainMedia.isLive ? (
 						<Pill
 							content="Live"
 							icon={<div css={liveBulletStyles} />}
@@ -1135,6 +1135,7 @@ export const Card = ({
 												}
 												enableAds={false}
 												aspectRatio={aspectRatio}
+												isLive={media.mainMedia.isLive}
 											/>
 										</Island>
 									</div>
