@@ -540,6 +540,7 @@ export const FeatureCard = ({
 										byline={byline}
 										showByline={showByline}
 										isLive={media.mainMedia.isLive}
+										articleMedia={articleMainMedia}
 									/>
 								</Island>
 							</div>
@@ -803,6 +804,7 @@ export const FeatureCard = ({
 											}
 											isNewsletter={isNewsletter}
 											mainMedia={articleMainMedia}
+											headline={headlineText}
 										/>
 
 										{!isImmersive &&

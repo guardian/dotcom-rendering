@@ -11,6 +11,7 @@ import { secondsToDuration } from '../../lib/formatTime';
 import { transparentColour } from '../../lib/transparentColour';
 import { palette } from '../../palette';
 import type { AspectRatio } from '../../types/front';
+import type { MainMedia } from '../../types/mainMedia';
 import { CardFooter } from '../Card/components/CardFooter';
 import { narrowPlayIconDiameter, PlayIcon } from '../Card/components/PlayIcon';
 import { TrailText } from '../Card/components/TrailText';
@@ -140,6 +141,7 @@ type Props = {
 	isImmersive?: boolean;
 	byline?: string;
 	showByline?: boolean;
+	articleMedia?: MainMedia;
 };
 
 export const YoutubeAtomFeatureCardOverlay = ({
@@ -166,6 +168,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 	isImmersive,
 	byline,
 	showByline,
+	articleMedia,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
@@ -255,38 +258,28 @@ export const YoutubeAtomFeatureCardOverlay = ({
 							/>
 						</div>
 					)}
-
-					{isVideoArticle ? (
-						<Pill
-							content={
-								<time>{secondsToDuration(duration ?? 0)}</time>
-							}
-							prefix="Video"
-							icon={<SvgMediaControlsPlay width={18} />}
-						/>
-					) : (
-						<CardFooter
-							format={format}
-							age={
-								showCardAge ? (
-									<FeatureCardCardAge
-										webPublicationDate={webPublicationDate}
-										showClock={!!showClock}
-										serverTime={serverTime}
-									/>
-								) : undefined
-							}
-							commentCount={
-								showCommentCount ? (
-									<FeatureCardCommentCount
-										linkTo={linkTo}
-										discussionId={discussionId}
-										discussionApiUrl={discussionApiUrl}
-									/>
-								) : undefined
-							}
-						/>
-					)}
+					<CardFooter
+						format={format}
+						age={
+							showCardAge ? (
+								<FeatureCardCardAge
+									webPublicationDate={webPublicationDate}
+									showClock={!!showClock}
+									serverTime={serverTime}
+								/>
+							) : undefined
+						}
+						commentCount={
+							showCommentCount ? (
+								<FeatureCardCommentCount
+									linkTo={linkTo}
+									discussionId={discussionId}
+									discussionApiUrl={discussionApiUrl}
+								/>
+							) : undefined
+						}
+						mainMedia={articleMedia}
+					/>
 				</div>
 			</button>
 		</FormatBoundary>

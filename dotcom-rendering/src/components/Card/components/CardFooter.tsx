@@ -62,6 +62,7 @@ type Props = {
 	isNewsletter?: boolean;
 	shouldReserveSpace?: { mobile: boolean; desktop: boolean };
 	isStorylines?: boolean;
+	headline?: string;
 };
 
 export const CardFooter = ({
@@ -73,6 +74,7 @@ export const CardFooter = ({
 	isNewsletter,
 	shouldReserveSpace,
 	isStorylines,
+	headline,
 }: Props) => {
 	const shouldShowBranding =
 		format.theme === ArticleSpecial.Labs && !!cardBranding;
@@ -84,6 +86,7 @@ export const CardFooter = ({
 		mainMedia?.type === 'SelfHostedVideo' ||
 		isNewsletter;
 
+	console.log(headline, shouldShowPill, mainMedia);
 	if (shouldShowPill) {
 		return (
 			<footer css={contentStyles}>
