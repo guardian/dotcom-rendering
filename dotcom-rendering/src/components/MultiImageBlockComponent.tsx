@@ -106,6 +106,14 @@ const GridOfFour = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
+const removeLastFullStop = (text?: string) => {
+	if (!text) return text;
+	if (text.endsWith('.')) {
+		return text.slice(0, -1);
+	}
+	return text;
+};
+
 const OneImage = ({
 	images,
 	format,
@@ -114,23 +122,26 @@ const OneImage = ({
 	images: [ImageBlockElement];
 	format: ArticleFormat;
 	caption?: string;
-}) => (
-	<div css={wrapper}>
-		<ImageComponent
-			format={format}
-			element={images[0]}
-			hideCaption={true}
-			role={images[0].role}
-		/>
-		{!!caption && (
-			<Caption
+}) => {
+	const captionToUse = caption ?? removeLastFullStop(images[0].data.caption);
+	return (
+		<div css={wrapper}>
+			<ImageComponent
 				format={format}
-				captionText={caption}
-				shouldLimitWidth={false}
+				element={images[0]}
+				hideCaption={true}
+				role={images[0].role}
 			/>
-		)}
-	</div>
-);
+			{!!captionToUse && (
+				<Caption
+					format={format}
+					captionText={captionToUse}
+					shouldLimitWidth={false}
+				/>
+			)}
+		</div>
+	);
+};
 
 const TwoImage = ({
 	images,
@@ -140,35 +151,44 @@ const TwoImage = ({
 	images: [ImageBlockElement, ImageBlockElement];
 	format: ArticleFormat;
 	caption?: string;
-}) => (
-	<div css={wrapper}>
-		<SideBySideGrid>
-			<GridItem area="first">
-				<ImageComponent
-					element={images[0]}
+}) => {
+	const captionLeft =
+		images[0].data.caption &&
+		`${removeLastFullStop(images[0].data.caption)} (above left).  `;
+	const captionRight =
+		images[1].data.caption &&
+		`${removeLastFullStop(images[1].data.caption)} (above right).  `;
+	const captionToUse = caption ?? `${captionLeft ?? ''}${captionRight ?? ''}`;
+	return (
+		<div css={wrapper}>
+			<SideBySideGrid>
+				<GridItem area="first">
+					<ImageComponent
+						element={images[0]}
+						format={format}
+						hideCaption={true}
+						role={images[0].role}
+					/>
+				</GridItem>
+				<GridItem area="second">
+					<ImageComponent
+						element={images[1]}
+						format={format}
+						hideCaption={true}
+						role={images[1].role}
+					/>
+				</GridItem>
+			</SideBySideGrid>
+			{!!captionToUse && (
+				<Caption
+					captionText={captionToUse}
 					format={format}
-					hideCaption={true}
-					role={images[0].role}
+					shouldLimitWidth={false}
 				/>
-			</GridItem>
-			<GridItem area="second">
-				<ImageComponent
-					element={images[1]}
-					format={format}
-					hideCaption={true}
-					role={images[1].role}
-				/>
-			</GridItem>
-		</SideBySideGrid>
-		{!!caption && (
-			<Caption
-				captionText={caption}
-				format={format}
-				shouldLimitWidth={false}
-			/>
-		)}
-	</div>
-);
+			)}
+		</div>
+	);
+};
 
 const ThreeImage = ({
 	images,
@@ -178,43 +198,59 @@ const ThreeImage = ({
 	images: [ImageBlockElement, ImageBlockElement, ImageBlockElement];
 	format: ArticleFormat;
 	caption?: string;
-}) => (
-	<div css={wrapper}>
-		<OneAboveTwoGrid>
-			<GridItem area="first">
-				<ImageComponent
-					element={images[0]}
+}) => {
+	const captionTop =
+		images[0].data.caption &&
+		`${removeLastFullStop(images[0].data.caption)} (top).  `;
+	const captionBottomLeft =
+		images[1].data.caption &&
+		`${removeLastFullStop(images[1].data.caption)} (bottom left).  `;
+	const captionBottomRight =
+		images[2].data.caption &&
+		`${removeLastFullStop(images[2].data.caption)} (bottom right).  `;
+	const captionToUse =
+		caption ??
+		`${captionTop ?? ''}${captionBottomLeft ?? ''}${
+			captionBottomRight ?? ''
+		}`;
+	return (
+		<div css={wrapper}>
+			<OneAboveTwoGrid>
+				<GridItem area="first">
+					<ImageComponent
+						element={images[0]}
+						format={format}
+						hideCaption={true}
+						role={images[0].role}
+					/>
+				</GridItem>
+				<GridItem area="second">
+					<ImageComponent
+						element={images[1]}
+						format={format}
+						hideCaption={true}
+						role={images[1].role}
+					/>
+				</GridItem>
+				<GridItem area="third">
+					<ImageComponent
+						element={images[2]}
+						format={format}
+						hideCaption={true}
+						role={images[2].role}
+					/>
+				</GridItem>
+			</OneAboveTwoGrid>
+			{!!captionToUse && (
+				<Caption
+					captionText={captionToUse}
 					format={format}
-					hideCaption={true}
-					role={images[0].role}
+					shouldLimitWidth={false}
 				/>
-			</GridItem>
-			<GridItem area="second">
-				<ImageComponent
-					element={images[1]}
-					format={format}
-					hideCaption={true}
-					role={images[1].role}
-				/>
-			</GridItem>
-			<GridItem area="third">
-				<ImageComponent
-					element={images[2]}
-					format={format}
-					hideCaption={true}
-					role={images[2].role}
-				/>
-			</GridItem>
-		</OneAboveTwoGrid>
-		{!!caption && (
-			<Caption
-				captionText={caption}
-				format={format}
-				shouldLimitWidth={false}
-			/>
-		)}
-	</div>
-);
+			)}
+		</div>
+	);
+};
 
 const FourImage = ({
 	images,
@@ -229,51 +265,70 @@ const FourImage = ({
 	];
 	format: ArticleFormat;
 	caption?: string;
-}) => (
-	<div css={wrapper}>
-		<GridOfFour>
-			<GridItem area="first">
-				<ImageComponent
-					element={images[0]}
+}) => {
+	const captionTopLeft =
+		images[0].data.caption &&
+		`${removeLastFullStop(images[0].data.caption)} (top left).  `;
+	const captionTopRight =
+		images[1].data.caption &&
+		`${removeLastFullStop(images[1].data.caption)} (top right).  `;
+	const captionBottomLeft =
+		images[2].data.caption &&
+		`${removeLastFullStop(images[2].data.caption)} (bottom left).  `;
+	const captionBottomRight =
+		images[3].data.caption &&
+		`${removeLastFullStop(images[3].data.caption)} (bottom right).  `;
+	const captionToUse =
+		caption ??
+		`${captionTopLeft ?? ''}${captionTopRight ?? ''}${
+			captionBottomLeft ?? ''
+		}${captionBottomRight ?? ''}`;
+	return (
+		<div css={wrapper}>
+			<GridOfFour>
+				<GridItem area="first">
+					<ImageComponent
+						element={images[0]}
+						format={format}
+						hideCaption={true}
+						role={images[0].role}
+					/>
+				</GridItem>
+				<GridItem area="second">
+					<ImageComponent
+						element={images[1]}
+						format={format}
+						hideCaption={true}
+						role={images[1].role}
+					/>
+				</GridItem>
+				<GridItem area="third">
+					<ImageComponent
+						element={images[2]}
+						format={format}
+						hideCaption={true}
+						role={images[2].role}
+					/>
+				</GridItem>
+				<GridItem area="forth">
+					<ImageComponent
+						element={images[3]}
+						format={format}
+						hideCaption={true}
+						role={images[3].role}
+					/>
+				</GridItem>
+			</GridOfFour>
+			{!!captionToUse && (
+				<Caption
+					captionText={captionToUse}
 					format={format}
-					hideCaption={true}
-					role={images[0].role}
+					shouldLimitWidth={false}
 				/>
-			</GridItem>
-			<GridItem area="second">
-				<ImageComponent
-					element={images[1]}
-					format={format}
-					hideCaption={true}
-					role={images[1].role}
-				/>
-			</GridItem>
-			<GridItem area="third">
-				<ImageComponent
-					element={images[2]}
-					format={format}
-					hideCaption={true}
-					role={images[2].role}
-				/>
-			</GridItem>
-			<GridItem area="forth">
-				<ImageComponent
-					element={images[3]}
-					format={format}
-					hideCaption={true}
-					role={images[3].role}
-				/>
-			</GridItem>
-		</GridOfFour>
-		{!!caption && (
-			<Caption
-				captionText={caption}
-				format={format}
-				shouldLimitWidth={false}
-			/>
-		)}
-	</div>
-);
+			)}
+		</div>
+	);
+};
 
 const Slideshow = ({
 	images,
