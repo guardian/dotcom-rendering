@@ -14,6 +14,13 @@ import type {
 import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';
+import type { BrazeBannersSystemMeta } from '../lib/braze/BrazeBannersSystem';
+import {
+	BrazeBannersSystemDisplay,
+	BrazeBannersSystemPlacementId,
+	canShowBrazeBannersSystem,
+} from '../lib/braze/BrazeBannersSystem';
+import type { BrazeInstance } from '../lib/braze/initialiseBraze';
 import type {
 	CandidateConfig,
 	MaybeFC,
@@ -100,6 +107,42 @@ const buildBrazeEpicConfig = (
 	};
 };
 
+/**
+ * Build the Braze Banners System Config
+ * @param braze The Braze instance
+ * @param idApiUrl Identity API URL for newsletter subscriptions
+ * @param contentType Content type of the article
+ * @param shouldHideReaderRevenue Whether to hide reader revenue components
+ * @param tags Tags associated with the article
+ * @returns CandidateConfig for the Braze Banners System
+ */
+const buildBrazeBannersSystemConfig = (
+	braze: BrazeInstance | null,
+	idApiUrl: string,
+	contentType: string,
+	shouldHideReaderRevenue: boolean,
+	tags: TagType[],
+): CandidateConfig<any> => {
+	return {
+		candidate: {
+			id: 'braze-banners-system_SlotBodyEnd',
+			canShow: () => {
+				return canShowBrazeBannersSystem(
+					braze,
+					BrazeBannersSystemPlacementId.EndOfArticle,
+					contentType,
+					shouldHideReaderRevenue,
+					tags,
+				);
+			},
+			show: (meta: BrazeBannersSystemMeta) => () => (
+				<BrazeBannersSystemDisplay meta={meta} idApiUrl={idApiUrl} />
+			),
+		},
+		timeoutMillis: null,
+	};
+};
+
 export const SlotBodyEnd = ({
 	contentType,
 	sectionId,
@@ -115,7 +158,7 @@ export const SlotBodyEnd = ({
 	articleEndSlot,
 }: Props) => {
 	const { renderingTarget } = useConfig();
-	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
+	const { brazeMessages, braze } = useBraze(idApiUrl, renderingTarget);
 	const countryCode = useCountryCode('slot-body-end');
 	const isSignedIn = useIsSignedIn();
 	const ophanPageViewId = usePageViewId(renderingTarget);
@@ -178,8 +221,16 @@ export const SlotBodyEnd = ({
 			tags,
 			shouldHideReaderRevenue,
 		);
+		const brazeBannersSystem = buildBrazeBannersSystemConfig(
+			braze,
+			idApiUrl,
+			contentType,
+			shouldHideReaderRevenue,
+			tags,
+		);
+
 		const epicConfig: SlotConfig = {
-			candidates: [brazeEpic, readerRevenueEpic],
+			candidates: [brazeBannersSystem, brazeEpic, readerRevenueEpic],
 			name: 'slotBodyEnd',
 		};
 		pickMessage(epicConfig, renderingTarget)
@@ -203,6 +254,7 @@ export const SlotBodyEnd = ({
 		tags,
 		ophanPageViewId,
 		pageId,
+		braze,
 	]);
 
 	useEffect(() => {

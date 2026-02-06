@@ -9,6 +9,13 @@ import type { BannerProps } from '@guardian/support-dotcom-components/dist/share
 import { useEffect, useState } from 'react';
 import type { ArticleCounts } from '../lib/articleCount';
 import { getArticleCounts } from '../lib/articleCount';
+import {
+	BrazeBannersSystemDisplay,
+	BrazeBannersSystemPlacementId,
+	canShowBrazeBannersSystem,
+} from '../lib/braze/BrazeBannersSystem';
+import type { BrazeBannersSystemMeta } from '../lib/braze/BrazeBannersSystem';
+import type { BrazeInstance } from '../lib/braze/initialiseBraze';
 import type {
 	CandidateConfig,
 	MaybeFC,
@@ -234,6 +241,42 @@ const buildBrazeBanner = (
 });
 
 /**
+ * Build the Braze Banners System Config
+ * @param braze The Braze instance
+ * @param idApiUrl Identity API URL for newsletter subscriptions
+ * @param contentType Content type of the article
+ * @param shouldHideReaderRevenue Whether to hide reader revenue components
+ * @param tags Tags associated with the article
+ * @returns CandidateConfig for the Braze Banners System
+ */
+const buildBrazeBannersSystemConfig = (
+	braze: BrazeInstance | null,
+	idApiUrl: string,
+	contentType: string,
+	shouldHideReaderRevenue: boolean,
+	tags: TagType[],
+): CandidateConfig<any> => {
+	return {
+		candidate: {
+			id: 'braze-banners-system_StickyBottomBanner',
+			canShow: () => {
+				return canShowBrazeBannersSystem(
+					braze,
+					BrazeBannersSystemPlacementId.Banner,
+					contentType,
+					shouldHideReaderRevenue,
+					tags,
+				);
+			},
+			show: (meta: BrazeBannersSystemMeta) => () => (
+				<BrazeBannersSystemDisplay meta={meta} idApiUrl={idApiUrl} />
+			),
+		},
+		timeoutMillis: null,
+	};
+};
+
+/**
  * The reader revenue banner at the end of articles
  *
  * ## Why does this need to be an Island?
@@ -263,7 +306,7 @@ export const StickyBottomBanner = ({
 	isSensitive: boolean;
 }) => {
 	const { renderingTarget, editionId } = useConfig();
-	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
+	const { brazeMessages, braze } = useBraze(idApiUrl, renderingTarget);
 
 	const countryCode = useCountryCode('sticky-bottom-banner');
 	const isSignedIn = useIsSignedIn();
@@ -326,6 +369,13 @@ export const StickyBottomBanner = ({
 			tags,
 			shouldHideReaderRevenue,
 		);
+		const brazeBannersSystem = buildBrazeBannersSystemConfig(
+			braze,
+			idApiUrl,
+			contentType,
+			shouldHideReaderRevenue,
+			tags,
+		);
 
 		const signInGate = buildSignInGateConfig(
 			{
@@ -354,9 +404,15 @@ export const StickyBottomBanner = ({
 		if (hasForceBannerParam) {
 			candidates = [CMP, readerRevenue];
 		} else if (hasForceBrazeMessageParam) {
-			candidates = [CMP, brazeBanner];
+			candidates = [CMP, brazeBannersSystem, brazeBanner];
 		} else {
-			candidates = [CMP, signInGate, brazeBanner, readerRevenue];
+			candidates = [
+				CMP,
+				signInGate,
+				brazeBannersSystem,
+				brazeBanner,
+				readerRevenue,
+			];
 		}
 
 		const bannerConfig: SlotConfig = {
@@ -400,6 +456,7 @@ export const StickyBottomBanner = ({
 		pageId,
 		host,
 		isInAuxiaControlGroup,
+		braze,
 	]);
 
 	if (SelectedBanner) {
