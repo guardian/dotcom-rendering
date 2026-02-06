@@ -258,7 +258,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						/>
 					</Island>
 				)}
-				<DirectoryPageNav selected="none" pageId={pageId} />
+				<DirectoryPageNav pageId={pageId} />
 
 				{filteredCollections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content

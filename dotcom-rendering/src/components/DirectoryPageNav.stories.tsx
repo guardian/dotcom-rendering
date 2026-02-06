@@ -5,12 +5,6 @@ import { DirectoryPageNav } from './DirectoryPageNav';
 const meta = {
 	component: DirectoryPageNav,
 	title: 'Components/Directory Page Nav',
-	argTypes: {
-		selected: {
-			options: ['fixtures', 'tables', 'none'],
-			control: { type: 'select' },
-		},
-	},
 	parameters: {
 		chromatic: {
 			modes: {
@@ -28,14 +22,12 @@ type Story = StoryObj<typeof meta>;
 
 export const WomensEuro2025 = {
 	args: {
-		selected: 'fixtures',
 		pageId: 'football/women-s-euro-2025/table',
 	},
 } satisfies Story;
 
 export const OtherCompetition = {
 	args: {
-		selected: 'none',
 		pageId: 'football/premierleague/table',
 	},
 } satisfies Story;
