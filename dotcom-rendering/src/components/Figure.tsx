@@ -83,13 +83,23 @@ const roleCss = {
 			margin-right: -10px;
 		}
 		${from.tablet} {
-			width: calc(100vw - var(--scrollbar-width, 15px));
-			max-width: calc(100vw - var(--scrollbar-width, 15px));
+			--scrollbar-width-fallback: 15px;
+			--half-scrollbar-width-fallback: 7.5px;
+
+			width: calc(
+				100vw - var(--scrollbar-width, var(--scrollbar-width-fallback))
+			);
+			max-width: calc(
+				100vw - var(--scrollbar-width, var(--scrollbar-width-fallback))
+			);
 
 			--grid-container-max-width: 740px;
 			--grid-container-left-margin: calc(
 				((-100vw + (var(--grid-container-max-width) - 42px)) / 2) +
-					var(--half-scrollbar-width, 7.5px)
+					var(
+						--half-scrollbar-width,
+						var(--half-scrollbar-width-fallback)
+					)
 			);
 
 			margin-left: var(--grid-container-left-margin);
