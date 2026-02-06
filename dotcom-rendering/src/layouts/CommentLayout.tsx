@@ -18,6 +18,7 @@ import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DiscussionLayout } from '../components/DiscussionLayout';
+import { FollowButtonWithContributorProfile } from '../components/FollowButtonWithContributorProfile.importable';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -37,7 +38,11 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
-import { ArticleDisplay, type ArticleFormat } from '../lib/articleFormat';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+} from '../lib/articleFormat';
 import { getSoleContributor } from '../lib/byline';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
@@ -291,8 +296,13 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 	const showComments = article.isCommentable && !isPaidContent;
 
-	const avatarUrl = getSoleContributor(article.tags, article.byline)
-		?.bylineLargeImageUrl;
+	const soleContributor = getSoleContributor(article.tags, article.byline);
+	const inArticleFollowButtonVariant =
+		isApps &&
+		format.design === ArticleDesign.Comment &&
+		!!soleContributor &&
+		article.config.abTests.inArticleFollowButtonVariant === 'variant';
+	const avatarUrl = soleContributor?.bylineLargeImageUrl;
 
 	const { branding } = article.commercialProperties[article.editionId];
 
@@ -493,6 +503,9 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 													article.config.shortUrlId
 												}
 												pageId={article.config.pageId}
+												inArticleFollowButtonVariant={
+													inArticleFollowButtonVariant
+												}
 											></ArticleMetaApps>
 										</Hide>
 										<Hide when="below" breakpoint="leftCol">
@@ -639,6 +652,23 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 										`}
 										color={themePalette('--straight-lines')}
 									/>
+									{inArticleFollowButtonVariant && (
+										<Island
+											priority="feature"
+											defer={{ until: 'visible' }}
+										>
+											<FollowButtonWithContributorProfile
+												id={soleContributor.id}
+												displayName={
+													soleContributor.title
+												}
+												avatarUrl={
+													soleContributor.bylineLargeImageUrl
+												}
+												bio="<p>A Guardian columnist, and author of The Invisible Doctrine: The Secret History of Neoliberalism (with Peter Hutchison)</p>" // to replace
+											/>
+										</Island>
+									)}
 									<SubMeta
 										format={format}
 										subMetaKeywordLinks={

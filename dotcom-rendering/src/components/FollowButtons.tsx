@@ -136,3 +136,55 @@ export const FollowTagButton = ({
 		</button>
 	);
 };
+
+const pillButtonStyles = (isFollowing: boolean) => css`
+	${textSans15}
+	display: inline-flex;
+	align-items: center;
+	gap: ${space[1]}px;
+	padding: ${space[2]}px ${space[3]}px;
+	border-radius: ${space[5]}px;
+	border: 1px solid
+		${isFollowing
+			? palette('--follow-button-border-following')
+			: palette('--follow-button-border')};
+	background: ${isFollowing
+		? 'transparent'
+		: palette('--follow-button-fill')};
+	color: ${isFollowing
+		? palette('--follow-button-text')
+		: palette('--follow-button-text-not-following')};
+	font-weight: 700;
+	cursor: pointer;
+
+	svg {
+		width: 24px;
+		height: 24px;
+		fill: ${isFollowing
+			? palette('--follow-button-text')
+			: palette('--follow-button-text-not-following')};
+		stroke: ${isFollowing
+			? palette('--follow-button-text')
+			: palette('--follow-button-text-not-following')};
+	}
+`;
+
+export const FollowTagButtonPill = ({
+	isFollowing,
+	onClickHandler,
+}: ButtonProps) => {
+	return (
+		<button
+			onClick={onClickHandler}
+			type="button"
+			css={pillButtonStyles(isFollowing)}
+		>
+			{isFollowing ? (
+				<SvgCheckmark size="xsmall" />
+			) : (
+				<SvgPlus size="xsmall" />
+			)}
+			<span>{isFollowing ? 'Following' : 'Follow'} in My Guardian</span>
+		</button>
+	);
+};

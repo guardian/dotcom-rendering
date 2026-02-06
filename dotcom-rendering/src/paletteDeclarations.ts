@@ -7078,6 +7078,26 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[20],
 	},
+	'--follow-button-border': {
+		light: followIconFillLight,
+		dark: followIconFillDark,
+	},
+	'--follow-button-border-following': {
+		light: () => sourcePalette.neutral[73],
+		dark: () => sourcePalette.neutral[73],
+	},
+	'--follow-button-fill': {
+		light: followIconFillLight,
+		dark: followIconFillLight,
+	},
+	'--follow-button-text': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--follow-button-text-not-following': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
 	'--follow-icon-background': {
 		light: followIconBackgroundLight,
 		dark: followIconBackgroundDark,
