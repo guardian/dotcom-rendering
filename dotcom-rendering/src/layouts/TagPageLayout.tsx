@@ -100,7 +100,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 			</div>
 
 			<main data-layout="TagPageLayout" id="maincontent">
-				<DirectoryPageNav selected="none" pageId={tagPage.pageId} />
+				<DirectoryPageNav pageId={tagPage.pageId} />
 				{isAccessibilityPage && (
 					<Island priority="critical" defer={{ until: 'visible' }}>
 						<Accessibility />

@@ -31,7 +31,7 @@ export const FootballTablesPage = ({
 	guardianBaseUrl,
 }: Props) => (
 	<>
-		<DirectoryPageNav selected="none" pageId={pageId} />
+		<DirectoryPageNav pageId={pageId} />
 		<main
 			id="maincontent"
 			data-layout="FootballDataPageLayout"
