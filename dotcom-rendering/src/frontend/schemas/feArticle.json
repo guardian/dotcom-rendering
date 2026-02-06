@@ -2449,7 +2449,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "enum": [
+                        "fullWidth",
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
