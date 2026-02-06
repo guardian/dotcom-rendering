@@ -479,12 +479,16 @@
                 },
                 "competitionName": {
                     "type": "string"
+                },
+                "matchUrl": {
+                    "type": "string"
                 }
             },
             "required": [
                 "competitionName",
                 "footballMatch",
-                "matchInfo"
+                "matchInfo",
+                "matchUrl"
             ]
         }
     ],
