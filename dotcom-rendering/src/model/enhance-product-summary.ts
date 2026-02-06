@@ -180,17 +180,20 @@ export const enhanceProductSummary =
 		pageId,
 		serverSideABTests,
 		renderingTarget,
+		filterAtAGlanceEnabled,
 	}: {
 		pageId: string;
 		serverSideABTests?: Record<string, string>;
 		renderingTarget: RenderingTarget;
+		filterAtAGlanceEnabled: boolean;
 	}) =>
 	(elements: FEElement[]): FEElement[] => {
 		const abTestVariant =
 			serverSideABTests?.['thefilter-at-a-glance-redesign'];
 
-		// do nothing if article is not on allow list / not in the test / variant is 'control' / renderingTarget is Apps
+		// do nothing if article is not on allow list / not in the test / variant is 'control' / renderingTarget is Apps / filterAtAGlance switch is OFF
 		if (
+			filterAtAGlanceEnabled &&
 			abTestVariant &&
 			isCarouselOrStacked(abTestVariant) &&
 			isEligibleForSummary(pageId) &&
