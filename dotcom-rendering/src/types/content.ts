@@ -464,6 +464,7 @@ export interface MultiImageBlockElement {
 	images: ImageBlockElement[];
 	caption?: string;
 	role?: RoleType;
+	presentation?: 'slideshow' | 'side-by-side' | 'stacked';
 }
 
 export interface NewsletterSignupBlockElement {
