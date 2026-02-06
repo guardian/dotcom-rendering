@@ -1,23 +1,18 @@
+import {
+	boolean,
+	literal,
+	object,
+	optional,
+	string,
+	number,
+	union,
+	type Output,
+} from 'valibot';
 import type {
 	FECompetitionSummary,
 	FEFootballCompetition,
 	FEFootballDataPage,
-	FERound,
 } from './feFootballDataPage';
-
-type FEStage = {
-	stageNumber: string;
-};
-
-type FEVenue = {
-	id: string;
-	name: string;
-};
-
-type FEMatchCompetition = {
-	id: string;
-	name: string;
-};
 
 export type FEMatchDayTeam = {
 	id: string;
@@ -28,56 +23,99 @@ export type FEMatchDayTeam = {
 	scorers?: string;
 };
 
-type Official = {
-	id: string;
-	name: string;
-};
+const stageSchema = object({
+	stageNumber: string(),
+});
 
-type FEFootballMatchData = {
-	id: string;
-	date: string;
-	stage: FEStage;
-	round: FERound;
-	leg: string;
-	homeTeam: FEMatchDayTeam;
-	awayTeam: FEMatchDayTeam;
-	venue?: FEVenue;
-	comments?: string;
-};
+const roundSchema = object({
+	roundNumber: string(),
+	name: optional(string()),
+});
 
-export type FELive = FEFootballMatchData & {
-	type: 'LiveMatch';
-	status: string;
-	attendance?: string;
-	referee?: Official;
-};
+const venueSchema = object({
+	id: string(),
+	name: string(),
+});
 
-export type FEFixture = FEFootballMatchData & {
-	type: 'Fixture';
-	competition?: FEMatchCompetition;
-};
+const matchCompetitionSchema = object({
+	id: string(),
+	name: string(),
+});
 
-export type FEMatchDay = FEFootballMatchData & {
-	type: 'MatchDay';
-	liveMatch: boolean;
-	result: boolean;
-	previewAvailable: boolean;
-	reportAvailable: boolean;
-	lineupsAvailable: boolean;
-	matchStatus: string;
-	attendance?: string;
-	referee?: Official;
-	competition?: FEMatchCompetition;
-};
+const matchDayTeamSchema = object({
+	id: string(),
+	name: string(),
+	score: optional(number()),
+	htScore: optional(number()),
+	aggregateScore: optional(number()),
+	scorers: optional(string()),
+});
 
-export type FEResult = FEFootballMatchData & {
-	type: 'Result';
-	reportAvailable: boolean;
-	attendance?: string;
-	referee?: Official;
-};
+const officialSchema = object({
+	id: string(),
+	name: string(),
+});
 
-export type FEFootballMatch = FEFixture | FEMatchDay | FEResult | FELive;
+const footballMatchDataSchema = object({
+	id: string(),
+	date: string(),
+	stage: stageSchema,
+	round: roundSchema,
+	leg: string(),
+	homeTeam: matchDayTeamSchema,
+	awayTeam: matchDayTeamSchema,
+	venue: optional(venueSchema),
+	comments: optional(string()),
+});
+
+const liveSchema = object({
+	...footballMatchDataSchema.entries,
+	type: literal('LiveMatch'),
+	status: string(),
+	attendance: optional(string()),
+	referee: optional(officialSchema),
+});
+
+const fixtureSchema = object({
+	...footballMatchDataSchema.entries,
+	type: literal('Fixture'),
+	competition: optional(matchCompetitionSchema),
+});
+
+const matchDaySchema = object({
+	...footballMatchDataSchema.entries,
+	type: literal('MatchDay'),
+	liveMatch: boolean(),
+	result: boolean(),
+	previewAvailable: boolean(),
+	reportAvailable: boolean(),
+	lineupsAvailable: boolean(),
+	matchStatus: string(),
+	attendance: optional(string()),
+	referee: optional(officialSchema),
+	competition: optional(matchCompetitionSchema),
+});
+
+const resultSchema = object({
+	...footballMatchDataSchema.entries,
+	type: literal('Result'),
+	reportAvailable: boolean(),
+	attendance: optional(string()),
+	referee: optional(officialSchema),
+});
+
+export const footballMatchSchema = union([
+	fixtureSchema,
+	matchDaySchema,
+	resultSchema,
+	liveSchema,
+]);
+
+export type FELive = Output<typeof liveSchema>;
+export type FEFixture = Output<typeof fixtureSchema>;
+export type FEMatchDay = Output<typeof matchDaySchema>;
+export type FEResult = Output<typeof resultSchema>;
+export type FEFootballMatch = Output<typeof footballMatchSchema>;
 
 export type FECompetitionMatch = {
 	competitionSummary: FECompetitionSummary;
