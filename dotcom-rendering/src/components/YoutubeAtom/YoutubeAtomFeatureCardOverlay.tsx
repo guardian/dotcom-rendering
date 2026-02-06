@@ -6,6 +6,7 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../../lib/articleFormat';
+import { ArticleDesign } from '../../lib/articleFormat';
 import { secondsToDuration } from '../../lib/formatTime';
 import { transparentColour } from '../../lib/transparentColour';
 import { palette } from '../../palette';
@@ -130,7 +131,6 @@ type Props = {
 	aspectRatio?: AspectRatio;
 	mobileAspectRatio?: AspectRatio;
 	trailText?: string;
-	isVideoArticle?: boolean;
 	webPublicationDate?: string;
 	showClock?: boolean;
 	serverTime?: number;
@@ -157,7 +157,6 @@ export const YoutubeAtomFeatureCardOverlay = ({
 	aspectRatio,
 	mobileAspectRatio,
 	trailText,
-	isVideoArticle,
 	webPublicationDate,
 	showClock,
 	serverTime,
@@ -170,7 +169,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
-
+	const isVideoArticle = format.design === ArticleDesign.Video;
 	const showCardAge =
 		webPublicationDate !== undefined &&
 		showClock !== undefined &&

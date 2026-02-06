@@ -41,7 +41,6 @@ type Props = {
 	aspectRatio?: AspectRatio;
 	trailText?: string;
 	headlineSizes?: ResponsiveFontSize;
-	isVideoArticle?: boolean;
 	webPublicationDate?: string;
 	showClock?: boolean;
 	serverTime?: number;
@@ -84,7 +83,6 @@ export const YoutubeBlockComponent = ({
 	aspectRatio,
 	trailText,
 	headlineSizes,
-	isVideoArticle,
 	webPublicationDate,
 	showClock,
 	serverTime,
@@ -216,7 +214,6 @@ export const YoutubeBlockComponent = ({
 				mobileAspectRatio={mobileAspectRatio}
 				trailText={trailText}
 				headlineSizes={headlineSizes}
-				isVideoArticle={isVideoArticle}
 				webPublicationDate={webPublicationDate}
 				showClock={!!showClock}
 				serverTime={serverTime}
