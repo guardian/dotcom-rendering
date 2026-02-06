@@ -291,7 +291,10 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				</>
 			)}
 			<main data-layout="InteractiveLayout">
-				<DirectoryPageNav selected="none" pageId={article.pageId} />
+				<DirectoryPageNav
+					pageId={article.pageId}
+					pageTags={article.tags}
+				/>
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
