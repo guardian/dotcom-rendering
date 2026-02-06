@@ -42,7 +42,7 @@ export type FEFootballMatchStats = {
 	comments?: string;
 };
 
-export type FEFootballMatchPage = FEFootballDataPage & {
+export type FEFootballMatchInfoPage = FEFootballDataPage & {
 	// This field name will need to get changed to matchStats in the future PRs.
 	// Since this change needs to happen in both frontend and DCAR, and it also
 	// needs to be backward compatible for a temprary duration, we will handle
@@ -51,4 +51,5 @@ export type FEFootballMatchPage = FEFootballDataPage & {
 	matchInfo: FEFootballMatch;
 	group?: FEGroupSummary;
 	competitionName: string;
+	matchUrl: string;
 };

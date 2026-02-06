@@ -18,7 +18,7 @@ const program = TJS.getProgramFromFiles(
 		path.resolve(`${root}/src/frontend/feCricketMatchPage.ts`),
 		path.resolve(`${root}/src/frontend/feFootballMatchListPage.ts`),
 		path.resolve(`${root}/src/frontend/feFootballTablesPage.ts`),
-		path.resolve(`${root}/src/frontend/feFootballMatchPage.ts`),
+		path.resolve(`${root}/src/frontend/feFootballMatchInfoPage.ts`),
 		path.resolve(`${root}/src/frontend/feHostedContent.ts`),
 	],
 	{
@@ -75,8 +75,8 @@ const schemas = [
 		file: `${root}/src/frontend/schemas/feCricketMatchPage.json`,
 	},
 	{
-		typeName: 'FEFootballMatchPage',
-		file: `${root}/src/frontend/schemas/feFootballMatchPage.json`,
+		typeName: 'FEFootballMatchInfoPage',
+		file: `${root}/src/frontend/schemas/feFootballMatchInfoPage.json`,
 	},
 	{
 		typeName: 'FEHostedContent',

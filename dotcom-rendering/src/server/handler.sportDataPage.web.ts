@@ -13,8 +13,8 @@ import {
 } from '../footballTables';
 import type { FECricketMatchPage } from '../frontend/feCricketMatchPage';
 import type { FEFootballCompetition } from '../frontend/feFootballDataPage';
+import type { FEFootballMatchInfoPage } from '../frontend/feFootballMatchInfoPage';
 import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
-import type { FEFootballMatchPage } from '../frontend/feFootballMatchPage';
 import type { FEFootballTablesPage } from '../frontend/feFootballTablesPage';
 import { Pillar } from '../lib/articleFormat';
 import { extractNAV } from '../model/extract-nav';
@@ -26,9 +26,9 @@ import {
 } from '../model/validate';
 import type {
 	CricketMatchPage,
+	FootballMatchInfoPage,
 	FootballMatchListPage,
 	FootballMatchListPageKind,
-	FootballMatchSummaryPage,
 	FootballTablesPage,
 	Region,
 } from '../sportDataPage';
@@ -213,8 +213,8 @@ export const handleCricketMatchPage: RequestHandler = ({ body }, res) => {
 };
 
 const parseFEFootballMatch = (
-	data: FEFootballMatchPage,
-): FootballMatchSummaryPage => {
+	data: FEFootballMatchInfoPage,
+): FootballMatchInfoPage => {
 	const parsedFootballMatch = parseFootballMatch(data.footballMatch);
 
 	if (!parsedFootballMatch.ok) {
@@ -253,6 +253,7 @@ const parseFEFootballMatch = (
 		matchInfo: matchInfo.value,
 		competitionName: data.competitionName,
 		group: group?.value,
+		matchUrl: data.matchUrl,
 		kind: 'FootballMatchSummary',
 		nav: {
 			...extractNAV(data.nav),
@@ -269,7 +270,7 @@ const parseFEFootballMatch = (
 };
 
 export const handleFootballMatchPage: RequestHandler = ({ body }, res) => {
-	const footballMatchPageValidated: FEFootballMatchPage =
+	const footballMatchPageValidated: FEFootballMatchInfoPage =
 		validateAsFootballMatchPageType(body);
 	const parsedFootballMatchData = parseFEFootballMatch(
 		footballMatchPageValidated,

@@ -6,7 +6,7 @@ import type {
 	FEFootballPlayer,
 	FEFootballPlayerEvent,
 	FEFootballTeam,
-} from './frontend/feFootballMatchPage';
+} from './frontend/feFootballMatchInfoPage';
 import { parseIntResult } from './lib/parse';
 import type { Result } from './lib/result';
 import { error, ok } from './lib/result';
