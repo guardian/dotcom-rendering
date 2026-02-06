@@ -50,11 +50,14 @@ export const renderHtml = ({
 	const title = decideTitle(article);
 	const linkedData = frontendData.linkedData;
 
+	const darkModeAvailable =
+		frontendData.config.serverSideABTests?.['webex-dark-mode-web'] ===
+		'enable';
+
 	const renderingTarget = 'Web';
 	const config: Config = {
 		renderingTarget,
-		darkModeAvailable:
-			frontendData.config.abTests.darkModeWebVariant === 'variant',
+		darkModeAvailable,
 		assetOrigin: ASSET_ORIGIN,
 		editionId: frontendData.editionId,
 	};
@@ -232,6 +235,7 @@ export const renderBlocks = ({
 	switches,
 	keywordIds,
 	abTests = {},
+	serverSideABTests,
 	edition,
 	shouldHideAds,
 }: FEBlocksRequest): string => {
@@ -239,9 +243,12 @@ export const renderBlocks = ({
 
 	const editionId = isEditionId(edition) ? edition : 'UK';
 
+	const darkModeAvailable =
+		serverSideABTests?.['webex-dark-mode-web'] === 'enable';
+
 	const config: Config = {
 		renderingTarget: 'Web',
-		darkModeAvailable: abTests.darkModeWebVariant === 'variant',
+		darkModeAvailable,
 		assetOrigin: ASSET_ORIGIN,
 		editionId,
 	};

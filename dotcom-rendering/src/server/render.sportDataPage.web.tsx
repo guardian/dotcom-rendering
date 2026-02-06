@@ -99,10 +99,13 @@ const createCricketTitle = (sportPage: CricketMatchPage) => {
 
 export const renderSportPage = (sportData: SportDataPage) => {
 	const renderingTarget = 'Web';
+
+	const darkModeAvailable =
+		sportData.config.serverSideABTests?.['webex-dark-mode-web'] ===
+		'enable';
 	const config: Config = {
 		renderingTarget,
-		darkModeAvailable:
-			sportData.config.abTests.darkModeWebVariant === 'variant',
+		darkModeAvailable,
 		assetOrigin: ASSET_ORIGIN,
 		editionId: sportData.editionId,
 	};
