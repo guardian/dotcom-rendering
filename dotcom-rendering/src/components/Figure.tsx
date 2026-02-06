@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, space, until } from '@guardian/source/foundations';
+import { breakpoints, from, space, until } from '@guardian/source/foundations';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import type { FEElement, RoleType } from '../types/content';
 
@@ -105,14 +105,14 @@ const roleCss = {
 			margin-left: var(--grid-container-left-margin);
 		}
 		${from.desktop} {
-			--grid-container-max-width: 980px;
+			--grid-container-max-width: ${breakpoints.desktop}px;
 		}
 		${from.leftCol} {
-			--grid-container-max-width: 1140px;
+			--grid-container-max-width: ${breakpoints.leftCol}px;
 			--grid-left-col-width: 140px;
 		}
 		${from.wide} {
-			--grid-container-max-width: 1300px;
+			--grid-container-max-width: ${breakpoints.wide}px;
 			--grid-left-col-width: 219px;
 		}
 	`,
