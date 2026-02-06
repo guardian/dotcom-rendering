@@ -23,6 +23,7 @@ import {
 	Pillar,
 } from './lib/articleFormat';
 import { transparentColour } from './lib/transparentColour';
+import type { Palette } from './types/palette';
 
 // ----- Palette Functions ----- //
 /**
@@ -8440,4 +8441,13 @@ const paletteDeclarations = (
 			`${colourName}: ${colour[colourScheme](format)};`,
 	);
 
-export { type ColourName, paletteDeclarations };
+const paletteForFormat = (format: ArticleFormat): Palette => ({
+	light: Object.entries(paletteColours).map(
+		([colourName, colour]) => `${colourName}: ${colour['light'](format)};`,
+	),
+	dark: Object.entries(paletteColours).map(
+		([colourName, colour]) => `${colourName}: ${colour['dark'](format)};`,
+	),
+});
+
+export { paletteDeclarations, paletteForFormat, type ColourName };

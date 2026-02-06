@@ -1,8 +1,9 @@
 import { isString } from '@guardian/libs';
 import { ConfigProvider } from '../components/ConfigContext';
 import { FrontPage } from '../components/FrontPage';
+import { PaletteProvider } from '../components/PaletteContext';
 import { TagPage } from '../components/TagPage';
-import { Pillar } from '../lib/articleFormat';
+import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -15,6 +16,7 @@ import { themeToPillar } from '../lib/themeToPillar';
 import type { NavType } from '../model/extract-nav';
 import { extractNAV } from '../model/extract-nav';
 import { createGuardian } from '../model/guardian';
+import { paletteForFormat } from '../paletteDeclarations';
 import type { Config } from '../types/configContext';
 import type { Front } from '../types/front';
 import type { TagPage as TagPageModel } from '../types/tagPage';
@@ -83,18 +85,30 @@ export const renderFront = ({
 	const NAV = extractNAV(front.nav);
 	const enhancedNAV = enhanceNav(NAV);
 
+	const darkModeAvailable =
+		front.config.abTests.darkModeWebVariant === 'variant';
 	// Fronts are not supported in Apps
 	const config = {
 		renderingTarget: 'Web',
-		darkModeAvailable:
-			front.config.abTests.darkModeWebVariant === 'variant',
+		darkModeAvailable,
 		assetOrigin: ASSET_ORIGIN,
 		editionId: front.editionId,
 	} satisfies Config;
 
+	/* We use this as our "base" or default format */
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: Pillar.News,
+	};
+
+	const palette = paletteForFormat(format);
+
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
-			<FrontPage front={front} NAV={enhancedNAV} />
+			<PaletteProvider value={palette}>
+				<FrontPage front={front} NAV={enhancedNAV} />
+			</PaletteProvider>
 		</ConfigProvider>,
 	);
 
