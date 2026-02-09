@@ -2,7 +2,6 @@ import CleanCSS from 'clean-css';
 import { FeastThrasher } from '../components/marketing/thrashers/FeastThrasher';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { rawFontsCss } from '../lib/fonts-css';
-import { FeastThrasherV2 } from '../components/marketing/thrashers/FeastThrasherV2';
 
 export type ThrasherName = 'Feast';
 export const isThrasher = (name?: string): name is ThrasherName =>
@@ -28,7 +27,7 @@ export const thrasherTemplate = (html: string, css: string): string => {
 
 export const renderThrasher = (name: ThrasherName): { html: string } => {
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<div>{name === 'Feast' && <FeastThrasherV2 />}</div>,
+		<div>{name === 'Feast' && <FeastThrasher />}</div>,
 	);
 
 	// We currently don't send any of the data required for page config or window.guardian setup from frontend

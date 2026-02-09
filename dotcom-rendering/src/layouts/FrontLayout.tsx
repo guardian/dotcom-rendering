@@ -6,6 +6,7 @@ import {
 } from '@guardian/source/foundations';
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
+import { ContainerOverrides } from '../components/ContainerOverrides';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
 import { DirectoryPageNav } from '../components/DirectoryPageNav';
@@ -22,6 +23,7 @@ import { FrontSection } from '../components/FrontSection';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
+import { FeastThrasher } from '../components/marketing/thrashers/FeastThrasher';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { Snap } from '../components/Snap';
@@ -49,8 +51,6 @@ import type {
 } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-import { FeastThrasherV2 } from '../components/marketing/thrashers/FeastThrasherV2';
-import { ContainerOverrides } from '../components/ContainerOverrides';
 
 interface Props {
 	front: Front;
@@ -306,7 +306,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									ophanComponentName={ophanName}
 									hasPageSkin={hasPageSkin}
 								>
-									<FeastThrasherV2 />
+									<FeastThrasher />
 								</Section>
 							</ContainerOverrides>
 						);
