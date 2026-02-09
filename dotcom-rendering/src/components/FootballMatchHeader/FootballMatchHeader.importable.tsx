@@ -1,5 +1,5 @@
 import { log } from '@guardian/libs';
-import { type ComponentProps, useEffect, useState } from 'react';
+import { type ComponentProps } from 'react';
 import { safeParse } from 'valibot';
 import {
 	type FootballMatch,
@@ -13,7 +13,7 @@ import { type EditionId } from '../../lib/edition';
 import { safeParseURL } from '../../lib/parse';
 import { error, fromValibot, ok, type Result } from '../../lib/result';
 import { FootballMatchHeader as FootballMatchHeaderComponent } from './FootballMatchHeader';
-
+import useSWR, { SWRConfiguration } from 'swr';
 type Props = {
 	leagueName: string;
 	match: FootballMatch;
@@ -23,35 +23,50 @@ type Props = {
 };
 
 export const FootballMatchHeader = (props: Props) => {
-	const [match, setMatch] = useState(props.match);
-	const [tabs, setTabs] = useState(props.tabs);
+	const options = {
+		errorRetryCount: 1,
+		refreshInterval: (latestData: HeaderData | undefined) => {
+			return latestData?.match.kind === 'Live' ||
+				latestData?.match.kind === 'Fixture'
+				? 16_000
+				: 0;
+		},
+	} satisfies SWRConfiguration<HeaderData>;
 
-	useEffect(() => {
-		fetch(props.matchHeaderURL)
-			.then((res) => res.json())
-			.then(parseHeaderData(props.tabs.selected))
-			.then((result) => {
-				if (!result.ok) {
-					log('dotcom', result.error);
-				} else {
-					setMatch(result.value.match);
-					setTabs(result.value.tabs);
-				}
-			})
-			.catch(() => {
-				log('dotcom', 'Failed to fetch match header json');
-			});
-	}, [props.matchHeaderURL, props.tabs.selected]);
+	const { data } = useSWR<HeaderData, string>(
+		props.matchHeaderURL,
+		fetcher(props.tabs.selected),
+		options,
+	);
 
 	return (
 		<FootballMatchHeaderComponent
 			leagueName={props.leagueName}
-			match={match}
-			tabs={tabs}
+			match={data?.match ?? props.match}
+			tabs={data?.tabs ?? props.tabs}
 			edition={props.edition}
 		/>
 	);
 };
+
+const fetcher =
+	(selected: Props['tabs']['selected']) =>
+	(url: string): Promise<HeaderData> =>
+		fetch(url)
+			.then((res) => res.json())
+			.then(parseHeaderData(selected))
+			.then((result) => {
+				if (!result.ok) {
+					log('dotcom', result.error);
+					throw new Error();
+				} else {
+					return result.value;
+				}
+			})
+			.catch(() => {
+				log('dotcom', 'Failed to fetch match header json');
+				throw new Error();
+			});
 
 type HeaderData = {
 	tabs: Props['tabs'];
