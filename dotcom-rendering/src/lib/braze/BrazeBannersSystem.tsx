@@ -360,26 +360,26 @@ export const BrazeBannersSystemDisplay = ({
 			if (authStatus.kind === 'SignedIn') {
 				const options = getOptionsHeaders(authStatus);
 
-				await fetch(`${idApiUrl}/users/me/newsletters`, {
-					method: 'PATCH',
-					body: JSON.stringify({
-						id: newsletterId,
-						subscribed: true,
-					}),
-					...options,
-				})
-					.then(() => {
-						brazeBannersSystemLogger.info(
-							'Successfully subscribed to newsletter:',
-							newsletterId,
-						);
-					})
-					.catch((error) => {
-						brazeBannersSystemLogger.warn(
-							'Error subscribing to newsletter:',
-							error,
-						);
+				try {
+					await fetch(`${idApiUrl}/users/me/newsletters`, {
+						method: 'PATCH',
+						body: JSON.stringify({
+							id: newsletterId,
+							subscribed: true,
+						}),
+						...options,
 					});
+
+					brazeBannersSystemLogger.info(
+						'Successfully subscribed to newsletter:',
+						newsletterId,
+					);
+				} catch (error) {
+					brazeBannersSystemLogger.warn(
+						'Error subscribing to newsletter:',
+						error,
+					);
+				}
 			}
 		},
 		[authStatus, idApiUrl],
