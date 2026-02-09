@@ -19,6 +19,7 @@ import { ResponsiveImage } from '../shared/ResponsiveImage';
 
 const styles = {
 	container: css`
+		/* stylelint-disable-next-line color-no-hex */
 		background: #f7efe9;
 		color: ${palette.neutral[0]};
 	`,
@@ -69,10 +70,12 @@ const styles = {
 		margin: ${space[5]}px 0 ${space[4]}px;
 	`,
 	linkButton: css`
+		/* stylelint-disable-next-line color-no-hex */
 		background-color: #68773c;
 		color: ${palette.neutral[100]};
 		margin-bottom: ${space[4]}px;
 		:hover {
+			/* stylelint-disable-next-line color-no-hex */
 			background-color: #9a1e1e;
 		}
 	`,
