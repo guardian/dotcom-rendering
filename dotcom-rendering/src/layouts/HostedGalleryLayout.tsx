@@ -29,7 +29,7 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 					<div
 						css={[grid.between('centre-column-start', 'grid-end')]}
 					>
-						Headline
+						{props.content.frontendData.headline}
 					</div>
 				</header>
 				<div css={[grid.container]}>
