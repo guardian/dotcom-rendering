@@ -27,45 +27,20 @@ export const FootballMatchHeader = (props: Props) => {
 	const [tabs, setTabs] = useState(props.tabs);
 
 	useEffect(() => {
-		const run = async () => {
-			const res = await fetch(props.matchHeaderURL);
-			const json = await res.json();
-			const feData = fromValibot(
-				safeParse(feFootballMatchHeaderSchema, json),
-			);
-
-			if (feData.ok) {
-				const parsedMatch = parseFootballMatchV2(
-					feData.value.footballMatch,
-				);
-
-				if (parsedMatch.ok) {
-					setMatch(parsedMatch.value);
-					const maybeTabs = createTabs(
-						props.tabs.selected,
-						feData.value,
-						parsedMatch.value.kind,
-					);
-
-					if (!maybeTabs.ok) {
-						log(
-							'dotcom',
-							`The match header data contained an invalid ${maybeTabs.error.kind} URL`,
-						);
-					} else {
-						setTabs(maybeTabs.value);
-					}
+		fetch(props.matchHeaderURL)
+			.then((res) => res.json())
+			.then(parseHeaderData(props.tabs.selected))
+			.then((result) => {
+				if (!result.ok) {
+					log('dotcom', result.error);
 				} else {
-					log('dotcom', 'Failed to validate match header json');
+					setMatch(result.value.match);
+					setTabs(result.value.tabs);
 				}
-			} else {
-				log('dotcom', 'Failed to validate match header json');
-			}
-		};
-
-		run().catch(() => {
-			log('dotcom', 'Failed to fetch match header json');
-		});
+			})
+			.catch(() => {
+				log('dotcom', 'Failed to fetch match header json');
+			});
 	}, [props.matchHeaderURL, props.tabs.selected]);
 
 	return (
@@ -77,6 +52,46 @@ export const FootballMatchHeader = (props: Props) => {
 		/>
 	);
 };
+
+type HeaderData = {
+	tabs: Props['tabs'];
+	match: FootballMatch;
+};
+
+const parseHeaderData =
+	(selected: Props['tabs']['selected']) =>
+	(json: unknown): Result<string, HeaderData> => {
+		const feData = fromValibot(
+			safeParse(feFootballMatchHeaderSchema, json),
+		);
+
+		if (!feData.ok) {
+			return error('Failed to validate match header json');
+		}
+
+		const parsedMatch = parseFootballMatchV2(feData.value.footballMatch);
+
+		if (!parsedMatch.ok) {
+			return error('Failed to parse the match from the header json');
+		}
+
+		const maybeTabs = createTabs(
+			selected,
+			feData.value,
+			parsedMatch.value.kind,
+		);
+
+		if (!maybeTabs.ok) {
+			return error(
+				`The match header data contained an invalid ${maybeTabs.error.kind} URL`,
+			);
+		}
+
+		return ok({
+			match: parsedMatch.value,
+			tabs: maybeTabs.value,
+		});
+	};
 
 type MatchURLError = {
 	kind: 'live' | 'report' | 'info';
