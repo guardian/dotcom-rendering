@@ -1,19 +1,18 @@
 import { log } from '@guardian/libs';
 import { type ComponentProps } from 'react';
+import type { SWRConfiguration } from 'swr';
+import useSWR from 'swr';
 import { safeParse } from 'valibot';
-import {
-	type FootballMatch,
-	parseFootballMatchV2,
-} from '../../footballMatchV2';
+import { type FootballMatch, parseFootballMatchV2 } from '../footballMatchV2';
 import {
 	type FEFootballMatchHeader,
 	feFootballMatchHeaderSchema,
-} from '../../frontend/feFootballMatchHeader';
-import { type EditionId } from '../../lib/edition';
-import { safeParseURL } from '../../lib/parse';
-import { error, fromValibot, ok, type Result } from '../../lib/result';
-import { FootballMatchHeader as FootballMatchHeaderComponent } from './FootballMatchHeader';
-import useSWR, { SWRConfiguration } from 'swr';
+} from '../frontend/feFootballMatchHeader';
+import { type EditionId } from '../lib/edition';
+import { safeParseURL } from '../lib/parse';
+import { error, fromValibot, ok, type Result } from '../lib/result';
+import { FootballMatchHeader as FootballMatchHeaderComponent } from './FootballMatchHeader/FootballMatchHeader';
+
 type Props = {
 	leagueName: string;
 	match: FootballMatch;
@@ -51,8 +50,8 @@ export const FootballMatchHeader = (props: Props) => {
 
 const fetcher =
 	(selected: Props['tabs']['selected']) =>
-	(url: string): Promise<HeaderData> =>
-		fetch(url)
+	(url: string): Promise<HeaderData> => {
+		return fetch(url)
 			.then((res) => res.json())
 			.then(parseHeaderData(selected))
 			.then((result) => {
@@ -67,6 +66,7 @@ const fetcher =
 				log('dotcom', 'Failed to fetch match header json');
 				throw new Error();
 			});
+	};
 
 type HeaderData = {
 	tabs: Props['tabs'];
