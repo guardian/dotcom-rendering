@@ -3,12 +3,12 @@ import { FeastThrasher } from '../components/marketing/thrashers/FeastThrasher';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { rawFontsCss } from '../lib/fonts-css';
 
-export type ThrasherName = 'Feast';
+type ThrasherName = 'Feast';
 export const isThrasher = (name?: string): name is ThrasherName =>
 	name === 'Feast';
 
 // Minimal html page for the thrasher component
-export const thrasherTemplate = (html: string, css: string): string => {
+const thrasherTemplate = (html: string, css: string): string => {
 	const minifiedFontsCss = new CleanCSS().minify(rawFontsCss).styles;
 	return `<!doctype html>
         <html lang="en">
