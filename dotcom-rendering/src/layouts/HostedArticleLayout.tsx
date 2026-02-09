@@ -1,8 +1,19 @@
 import { css } from '@emotion/react';
-import { palette as sourcePalette } from '@guardian/source/foundations';
+import {
+	from,
+	palette as sourcePalette,
+	space,
+} from '@guardian/source/foundations';
 import { HostedContentHeader } from '../components/HostedContentHeader';
+import { Island } from '../components/Island';
 import { Section } from '../components/Section';
+import { ShareButton } from '../components/ShareButton.importable';
 import { grid } from '../grid';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+} from '../lib/articleFormat';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { Stuck } from './lib/stickiness';
 
@@ -20,6 +31,22 @@ interface AppProps extends Props {
 
 const border = css`
 	border: 1px solid black;
+`;
+
+const metaFlex = css`
+	margin-bottom: ${space[3]}px;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+`;
+
+const shareButtonWrapper = css`
+	${grid.column.centre}
+	grid-row: 1 / -2;
+
+	${from.leftCol} {
+		${grid.column.left}
+	}
 `;
 
 export const HostedArticleLayout = (props: WebProps | AppProps) => {
@@ -52,9 +79,40 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						Headline
 					</div>
 				</header>
-				<div css={[grid.container]}>
-					<div css={[grid.column.left, 'grid-row: 1']}>
-						Left column
+				<div
+					css={[
+						grid.container,
+						css`
+							padding-top: ${space[12]}px;
+
+							${from.leftCol} {
+								padding-top: ${space[5]}px;
+							}
+						`,
+					]}
+				>
+					<div css={shareButtonWrapper}>
+						<div data-print-layout="hide" css={metaFlex}>
+							{props.renderingTarget === 'Web' && (
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
+									<ShareButton
+										pageId={'replace with actual pageId'}
+										webTitle={
+											'replace with actual webTitle'
+										}
+										format={{
+											theme: ArticleSpecial.Labs,
+											design: ArticleDesign.Standard,
+											display: ArticleDisplay.Standard,
+										}} // replace with Hosted Content format if there is one
+										context="ArticleMeta"
+									/>
+								</Island>
+							)}
+						</div>
 					</div>
 					<div css={[grid.column.right, 'grid-row: 1']}>
 						Onward content
