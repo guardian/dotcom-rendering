@@ -30,18 +30,6 @@ export const renderThrasher = (name: ThrasherName): { html: string } => {
 		<div>{name === 'Feast' && <FeastThrasher />}</div>,
 	);
 
-	// We currently don't send any of the data required for page config or window.guardian setup from frontend
-	// const pageHtml = htmlPageTemplate({
-	// 	scriptTags: [],
-	// 	css: extractedCss,
-	// 	html,
-	// 	// @ts-expect-error no config data
-	// 	guardian: {},
-	// 	renderingTarget: 'Apps',
-	// 	// @ts-expect-error no config data
-	// 	config: {},
-	// 	weAreHiring: false,
-	// });
 	const pageHtml = thrasherTemplate(html, extractedCss);
 	return {
 		// No scripts required currently
