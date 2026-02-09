@@ -16,7 +16,10 @@ import { getChoiceCards } from '../../../lib/choiceCards';
 import { createClickEventFromTracking } from '../../../lib/tracking';
 import type { BannerRenderProps } from '../../common/types';
 import { setChannelClosedTimestamp } from '../../utils/localStorage';
-import type { BannerTemplateSettings, ChoiceCardSettings } from '../settings';
+import type {
+	BannerTemplateSettings,
+	ChoiceCardDesignSettings,
+} from '../settings';
 import type { BannerData } from './BannerProps';
 import { buildBannerSelectors } from './bannerSelectors';
 import { getComponentIds } from './componentIds';
@@ -54,7 +57,7 @@ const buildHeaderImageSettings = (
 
 const buildChoiceCardSettings = (
 	design: ConfigurableDesign,
-): ChoiceCardSettings | undefined => {
+): ChoiceCardDesignSettings | undefined => {
 	if (design.visual?.kind !== 'ChoiceCards') {
 		return undefined;
 	}

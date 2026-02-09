@@ -499,6 +499,7 @@ export interface ProductBlockElement {
 	productName: string;
 	image?: ProductImage;
 	secondaryHeadingHtml: string;
+	secondaryHeadingText?: string;
 	primaryHeadingHtml: string;
 	primaryHeadingText?: string;
 	customAttributes: ProductCustomAttribute[];
@@ -507,6 +508,12 @@ export interface ProductBlockElement {
 	displayType: ProductDisplayType;
 	productCtas: ProductCta[];
 	lowestPrice?: string;
+}
+
+export interface ProductSummaryElement {
+	_type: 'model.dotcomrendering.pageElements.ProductSummaryElement';
+	matchedProducts: ProductBlockElement[];
+	variant: 'carousel' | 'stacked';
 }
 
 interface ProfileAtomBlockElement {
@@ -875,7 +882,8 @@ export type FEElement =
 	| YoutubeBlockElement
 	| WitnessTypeBlockElement
 	| CrosswordElement
-	| ProductBlockElement;
+	| ProductBlockElement
+	| ProductSummaryElement;
 
 // -------------------------------------
 // Misc

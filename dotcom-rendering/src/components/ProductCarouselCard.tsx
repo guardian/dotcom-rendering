@@ -109,8 +109,9 @@ export const ProductCarouselCard = ({
 					product.displayType !== 'ProductCardOnly' && (
 						<Link
 							href={`#${headingId}`}
-							onFocus={(event) => event.stopPropagation()}
 							cssOverrides={readMoreCta}
+							data-component="at-a-glance-carousel-card-read-more"
+							data-link-name="product read more link"
 						>
 							Read more
 						</Link>

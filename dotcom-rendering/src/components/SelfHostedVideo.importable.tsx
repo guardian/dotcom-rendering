@@ -496,12 +496,18 @@ export const SelfHostedVideo = ({
 	 * Track the first time the video comes into view.
 	 */
 	useOnce(() => {
+		const video = vidRef.current;
+		const resolution =
+			video === null
+				? 'unknown'
+				: `${video.offsetWidth}x${video.offsetHeight}`;
+
 		void submitComponentEvent(
 			{
 				component: {
 					componentType: 'LOOP_VIDEO',
 					id: `gu-video-loop-${atomId}`,
-					labels: [linkTo],
+					labels: [linkTo, resolution],
 				},
 				action: 'VIEW',
 			},
@@ -699,7 +705,9 @@ export const SelfHostedVideo = ({
 				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' ||
 				(hasPageBecomeActive && playerState === 'PAUSED_BY_BROWSER'))
 		) {
-			setHasPageBecomeActive(false);
+			if (hasPageBecomeActive) {
+				setHasPageBecomeActive(false);
+			}
 			void playVideo();
 		} else if (playerState === 'PLAYING' && isInView === false) {
 			void pauseVideo('PAUSED_BY_INTERSECTION_OBSERVER');

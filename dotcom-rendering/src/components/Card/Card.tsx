@@ -1,12 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import {
-	between,
-	from,
-	palette as sourcePalette,
-	space,
-	until,
-} from '@guardian/source/foundations';
+import { between, from, space, until } from '@guardian/source/foundations';
 import { Hide, Link, SvgCamera } from '@guardian/source/react-components';
 import {
 	ArticleDesign,
@@ -50,7 +44,6 @@ import { SlideshowCarousel } from '../SlideshowCarousel.importable';
 import { Snap } from '../Snap';
 import { SnapCssSandbox } from '../SnapCssSandbox';
 import { StarRating } from '../StarRating/StarRating';
-import { StarRatingDeprecated } from '../StarRating/StarRatingDeprecated';
 import type { Alignment } from '../SupportingContent';
 import { SupportingContent } from '../SupportingContent';
 import { SupportingKeyStoriesContent } from '../SupportingKeyStoriesContent';
@@ -165,34 +158,9 @@ export type Props = {
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
 	isStorylines?: boolean;
-	isInStarRatingVariant?: boolean;
 	starRatingSize?: RatingSizeType;
-	isInOnwardsAbTestVariant?: boolean;
 	isInPersonalisationVariant?: boolean;
 };
-
-const starWrapper = (cardHasImage: boolean) => css`
-	background-color: ${sourcePalette.brandAlt[400]};
-	color: ${sourcePalette.neutral[0]};
-	margin-top: ${cardHasImage ? '2' : space[1]}px;
-	display: inline-block;
-
-	${from.tablet} {
-		margin-top: ${space[1]}px;
-	}
-`;
-
-const StarRatingComponent = ({
-	rating,
-	cardHasImage,
-}: {
-	rating: Rating;
-	cardHasImage: boolean;
-}) => (
-	<div css={starWrapper(cardHasImage)}>
-		<StarRatingDeprecated rating={rating} size="small" />
-	</div>
-);
 
 const waveformWrapper = (
 	mediaPositionOnMobile?: MediaPositionType,
@@ -437,9 +405,7 @@ export const Card = ({
 	headlinePosition = 'inner',
 	subtitleSize = 'small',
 	isStorylines = false,
-	isInStarRatingVariant,
 	starRatingSize = 'small',
-	isInOnwardsAbTestVariant,
 	isInPersonalisationVariant,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
@@ -554,7 +520,7 @@ export const Card = ({
 
 			{mainMedia?.type === 'YoutubeVideo' && isVideoArticle && (
 				<>
-					{mainMedia.duration === 0 ? (
+					{mainMedia.isLive ? (
 						<Pill
 							content="Live"
 							icon={<div css={liveBulletStyles} />}
@@ -713,12 +679,7 @@ export const Card = ({
 	 */
 	const getGapSizes = (): GapSizes => {
 		if (isOnwardContent && !isGallerySecondaryOnward) {
-			if (
-				isMoreGalleriesOnwardContent ||
-				// This is untidy. If we implement the gallery-style redesign for onwards content
-				// in all articles, we can refactor how we determine gap sizes for onwards cards.
-				isInOnwardsAbTestVariant
-			) {
+			if (isMoreGalleriesOnwardContent) {
 				return {
 					row: 'small',
 					column: 'small',
@@ -987,18 +948,9 @@ export const Card = ({
 						showByline={showByline}
 						isExternalLink={isExternalLink}
 					/>
-					{!isUndefined(starRating) &&
-						(isInStarRatingVariant ? (
-							<StarRating
-								rating={starRating}
-								size={starRatingSize}
-							/>
-						) : (
-							<StarRatingComponent
-								rating={starRating}
-								cardHasImage={!!image}
-							/>
-						))}
+					{!isUndefined(starRating) && (
+						<StarRating rating={starRating} size={starRatingSize} />
+					)}
 				</div>
 			)}
 
@@ -1183,6 +1135,7 @@ export const Card = ({
 												}
 												enableAds={false}
 												aspectRatio={aspectRatio}
+												isLive={media.mainMedia.isLive}
 											/>
 										</Island>
 									</div>
@@ -1282,7 +1235,6 @@ export const Card = ({
 						isBetaContainer,
 						isOnwardContent,
 					)}
-					isInOnwardsAbTestVariant={!!isInOnwardsAbTestVariant}
 				>
 					{/* In the storylines section on tag pages, the flex splash is used to display key stories.
 						We don't display an article headline in the conventional sense, the key stories are instead displayed as "supporting content".
@@ -1330,18 +1282,12 @@ export const Card = ({
 										}
 									/>
 
-									{!isUndefined(starRating) &&
-										(isInStarRatingVariant ? (
-											<StarRating
-												rating={starRating}
-												size={starRatingSize}
-											/>
-										) : (
-											<StarRatingComponent
-												rating={starRating}
-												cardHasImage={!!image}
-											/>
-										))}
+									{!isUndefined(starRating) && (
+										<StarRating
+											rating={starRating}
+											size={starRatingSize}
+										/>
+									)}
 								</HeadlineWrapper>
 							)}
 

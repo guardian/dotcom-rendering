@@ -3,6 +3,7 @@ import { palette } from '@guardian/source/foundations';
 import { Fragment } from 'react';
 import { Accessibility } from '../components/Accessibility.importable';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
+import { DirectoryPageNav } from '../components/DirectoryPageNav';
 import { Footer } from '../components/Footer';
 import {
 	FrontsBannerAdSlot,
@@ -99,6 +100,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 			</div>
 
 			<main data-layout="TagPageLayout" id="maincontent">
+				<DirectoryPageNav selected="none" pageId={tagPage.pageId} />
 				{isAccessibilityPage && (
 					<Island priority="critical" defer={{ until: 'visible' }}>
 						<Accessibility />

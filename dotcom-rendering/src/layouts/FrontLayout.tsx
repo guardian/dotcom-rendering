@@ -8,6 +8,7 @@ import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
+import { DirectoryPageNav } from '../components/DirectoryPageNav';
 import { EditionSwitcherBanner } from '../components/EditionSwitcherBanner.importable';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
@@ -108,7 +109,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			isPaidContent,
 			pageId,
 			switches,
-			abTests,
 		},
 		editionId,
 	} = front;
@@ -137,13 +137,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		front.isNetworkFront && front.deeplyRead && front.deeplyRead.length > 0;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
-
-	/**
-	 * We are running an 0% opt in test which replaces the Star Rating component with
-	 * a refreshed design
-	 */
-	const isInStarRatingVariant =
-		abTests.starRatingRedesignVariant === 'variant';
 
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
@@ -188,7 +181,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 					frontId={front.pressedPage.id}
 					collectionId={0}
-					isInStarRatingVariant={isInStarRatingVariant}
 				/>
 			)
 		);
@@ -266,6 +258,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						/>
 					</Island>
 				)}
+				<DirectoryPageNav selected="none" pageId={pageId} />
 
 				{filteredCollections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
@@ -527,9 +520,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
-									isInStarRatingVariant={
-										isInStarRatingVariant
-									}
 									pillarBuckets={collection.bucket}
 								/>
 							</FrontSection>

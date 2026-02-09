@@ -6,6 +6,7 @@ import type {
 } from '@guardian/source/react-components';
 import { LinkButton } from '@guardian/source/react-components';
 import { palette } from '../../palette';
+import { heightAutoStyle, wrapButtonTextStyle } from './styles';
 import { getPropsForLinkUrl } from './utils';
 
 type ProductLinkButtonProps = {
@@ -16,14 +17,11 @@ type ProductLinkButtonProps = {
 	fullWidthText?: boolean;
 	priority?: ButtonPriority;
 	minimisePadding?: boolean;
+	dataComponent?: string;
 };
 
 const fullWidthStyle = css`
 	width: 100%;
-`;
-
-const heightAutoStyle = css`
-	height: auto;
 `;
 
 const minimisePaddingStyle = css`
@@ -54,6 +52,7 @@ export const ProductLinkButton = ({
 	minimisePadding = false,
 	fullWidthText = false,
 	priority = 'primary',
+	dataComponent,
 }: ProductLinkButtonProps) => {
 	const cssOverrides: SerializedStyles[] = [
 		heightAutoStyle,
@@ -68,6 +67,7 @@ export const ProductLinkButton = ({
 			rel="sponsored noreferrer noopener"
 			priority={priority}
 			theme={theme}
+			data-component={dataComponent}
 			data-ignore="global-link-styling"
 			data-link-name={`product link button ${priority}`}
 			data-spacefinder-role="inline"
@@ -76,12 +76,7 @@ export const ProductLinkButton = ({
 		>
 			<span
 				style={fullWidthText ? { width: '100%' } : {}}
-				css={css`
-					text-wrap: balance;
-					text-align: center;
-					white-space: normal;
-					padding: 4px 0 4px;
-				`}
+				css={wrapButtonTextStyle}
 			>
 				{label}
 			</span>

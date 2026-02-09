@@ -94,6 +94,7 @@ export const WithOverrides = {
 	args: {
 		cssOverrides: css`
 			background-color: pink;
+			border: pink;
 		`,
 	},
 	decorators: [lightDecorator(allThemeStandardVariations)],

@@ -19,7 +19,7 @@
 		"build-storybook": "storybook build"
 	},
 	"dependencies": {
-		"@aws-sdk/client-cloudwatch": "3.621.0",
+		"@aws-sdk/client-cloudwatch": "3.981.0",
 		"@babel/helper-compilation-targets": "7.28.6",
 		"@braze/web-sdk": "5.8.1",
 		"@creditkarma/thrift-server-core": "1.0.4",
@@ -45,8 +45,8 @@
 		"@guardian/source-development-kitchen": "18.1.1",
 		"@guardian/support-dotcom-components": "8.3.1",
 		"@guardian/tsconfig": "0.2.0",
-		"@playwright/test": "1.56.1",
-		"@sentry/browser": "10.36.0",
+		"@playwright/test": "1.58.0",
+		"@sentry/browser": "10.37.0",
 		"@storybook/addon-a11y": "10.1.10",
 		"@storybook/addon-docs": "10.1.10",
 		"@storybook/addon-webpack5-compiler-swc": "4.0.2",

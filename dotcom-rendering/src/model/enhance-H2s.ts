@@ -47,7 +47,11 @@ export const slugify = (text: string): string => {
 /**
  * This function attempts to create a slugified string to use as the id. It fails over to elementId.
  */
-const generateId = (elementId: string, html: string, existingIds: string[]) => {
+export const generateId = (
+	elementId: string,
+	html: string,
+	existingIds: string[],
+): string => {
 	const text = extractText(html);
 	if (!text) return elementId;
 	const slug = slugify(text);

@@ -43,6 +43,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		sharedAdTargeting,
 		adUnit,
 		abTests,
+		serverSideABTests,
 		switches,
 		keywordIds,
 		shouldHideAds,
@@ -57,6 +58,9 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		imagesForLightbox: [],
 		hasAffiliateLinksDisclaimer: false,
 		shouldHideAds,
+		pageId,
+		serverSideABTests,
+		switches,
 	});
 	const html = renderBlocks({
 		blocks: enhancedBlocks,
@@ -74,6 +78,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		adUnit,
 		switches,
 		abTests,
+		serverSideABTests,
 		keywordIds,
 		shouldHideAds,
 	});

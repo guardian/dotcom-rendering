@@ -15,6 +15,7 @@ const enhanceProductBlockElement = (
 	content: elementsEnhancer(element.content),
 	lowestPrice: getLowestPrice(element.productCtas),
 	primaryHeadingText: extractHeadingText(element.primaryHeadingHtml),
+	secondaryHeadingText: extractHeadingText(element.secondaryHeadingHtml),
 });
 
 /**

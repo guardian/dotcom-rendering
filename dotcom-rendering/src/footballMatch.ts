@@ -1,11 +1,11 @@
 import { isOneOf } from '@guardian/libs';
 import { listParse, replaceLiveMatchStatus } from './footballMatches';
 import type {
-	FEFootballMatch,
+	FEFootballMatchStats,
 	FEFootballPlayer,
 	FEFootballPlayerEvent,
 	FEFootballTeam,
-} from './frontend/feFootballMatchPage';
+} from './frontend/feFootballMatchInfoPage';
 import type { Result } from './lib/result';
 import { error, ok } from './lib/result';
 import { cleanTeamName } from './sportDataPage';
@@ -113,7 +113,7 @@ const parseTeam = (
 	}));
 
 export const parse = (
-	feFootballMatch: FEFootballMatch,
+	feFootballMatch: FEFootballMatchStats,
 ): Result<ParserError, FootballMatch> =>
 	parseTeam(feFootballMatch.homeTeam).flatMap((homeTeam) =>
 		parseTeam(feFootballMatch.awayTeam).map((awayTeam) => ({

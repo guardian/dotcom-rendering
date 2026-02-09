@@ -1,5 +1,5 @@
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
-import { AffiliateDisclaimerInline } from '../components/AffiliateDisclaimerInline.importable';
+import { AffiliateDisclaimerInline } from '../components/AffiliateDisclaimer';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
@@ -38,6 +38,7 @@ import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent
 import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
 import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importable';
 import { ProductElement } from '../components/ProductElement';
+import { ProductSummary } from '../components/ProductSummary.Importable';
 import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable';
 import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
 import { QandaAtom } from '../components/QandaAtom.importable';
@@ -390,13 +391,9 @@ export const renderElement = ({
 					element={element}
 					hideCaption={hideCaption}
 					isMainMedia={isMainMedia}
-					starRating={starRating ?? element.starRating}
 					title={element.title}
 					isAvatar={element.isAvatar}
 					isTimeline={isTimeline}
-					isInStarRatingVariant={
-						abTests.starRatingRedesignVariant === 'variant'
-					}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
@@ -727,9 +724,6 @@ export const renderElement = ({
 						element={element}
 						ajaxUrl={ajaxUrl}
 						format={format}
-						isInStarRatingVariant={
-							abTests.starRatingRedesignVariant === 'variant'
-						}
 					/>
 				</Island>
 			);
@@ -760,9 +754,6 @@ export const renderElement = ({
 					key={index}
 					rating={element.rating}
 					size={element.size}
-					isInStarRatingVariant={
-						abTests.starRatingRedesignVariant === 'variant'
-					}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
@@ -968,11 +959,7 @@ export const renderElement = ({
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.DisclaimerBlockElement': {
-			return (
-				<Island priority="enhancement" defer={{ until: 'idle' }}>
-					<AffiliateDisclaimerInline />
-				</Island>
-			);
+			return <AffiliateDisclaimerInline />;
 		}
 		case 'model.dotcomrendering.pageElements.CrosswordElement':
 			return (
@@ -982,6 +969,14 @@ export const renderElement = ({
 						canRenderAds={renderAds}
 					/>
 				</Island>
+			);
+		case 'model.dotcomrendering.pageElements.ProductSummaryElement':
+			return (
+				<ProductSummary
+					products={element.matchedProducts}
+					format={format}
+					variant={element.variant}
+				/>
 			);
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':

@@ -16,47 +16,45 @@
 	});
 
 	let frontendAdminUrl = $derived(getOrigin());
+
+	let isRounded = Math.floor((size / testGroups.length) * 10) % 10 !== 0;
 </script>
 
 <div>
-	<table>
-		<tbody>
-			{#each testGroups as group, i}
-				<tr>
-					<td>
-						{group} ({formatter.format(
-							((1 / testGroups.length) * size) / 100,
-						)})
-					</td>
-					<td>
-						<a
-							href={`${frontendAdminUrl}/ab-tests/opt-in/${testName}:${group}`}
-							target="_blank"
-						>
-							opt in
-						</a>
-					</td>
-					<td>
-						<a
-							href={`${frontendAdminUrl}/ab-tests/opt-out/${testName}:${group}`}
-							target="_blank"
-						>
-							opt out
-						</a>
-					</td>
-				</tr>
-			{/each}
-		</tbody>
-	</table>
+	{#each testGroups as group, i}
+		<a
+			class="link"
+			href={`${frontendAdminUrl}/ab-tests/opt-in/${testName}:${group}`}
+			target="_blank"
+		>
+			{group} ({formatter.format(
+				Math.floor((size / testGroups.length) * 10) / 1000,
+			)}{isRounded ? "*" : ""})
+		</a>
+	{/each}
+	<a
+		href={`${frontendAdminUrl}/ab-tests/opt-out/${testName}`}
+		target="_blank"
+	>
+		opt out
+	</a>
+	{#if isRounded}
+		<div class="note">
+			* Rounded down to nearest 0.1% from ~{formatter.format(
+				Math.floor((size / testGroups.length) * 1000) / 100000,
+			)}
+		</div>
+	{/if}
 </div>
 
 <style>
-	table {
-		border-collapse: collapse;
+	.link {
+		margin: 0 4px;
 	}
 
-	td {
-		padding: 0.1rem 0.5rem;
-		border: 1px solid var(--color-border);
+	.note {
+		font-size: 0.8em;
+		color: var(--color-text-secondary);
+		margin-top: 4px;
 	}
 </style>

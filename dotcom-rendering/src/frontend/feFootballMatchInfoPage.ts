@@ -1,4 +1,5 @@
 import type { FEFootballDataPage } from './feFootballDataPage';
+import { type FEFootballMatch } from './feFootballMatchListPage';
 import { type FEGroupSummary } from './feFootballTablesPage';
 
 export type FEFootballPlayerEvent = {
@@ -33,7 +34,7 @@ export type FEFootballTeam = {
 	crest: string;
 };
 
-export type FEFootballMatch = {
+export type FEFootballMatchStats = {
 	id: string;
 	homeTeam: FEFootballTeam;
 	awayTeam: FEFootballTeam;
@@ -41,7 +42,14 @@ export type FEFootballMatch = {
 	comments?: string;
 };
 
-export type FEFootballMatchPage = FEFootballDataPage & {
-	footballMatch: FEFootballMatch;
+export type FEFootballMatchInfoPage = FEFootballDataPage & {
+	// This field name will need to get changed to matchStats in the future PRs.
+	// Since this change needs to happen in both frontend and DCAR, and it also
+	// needs to be backward compatible for a temprary duration, we will handle
+	// that in a separate PR.
+	footballMatch: FEFootballMatchStats;
+	matchInfo: FEFootballMatch;
 	group?: FEGroupSummary;
+	competitionName: string;
+	matchUrl: string;
 };

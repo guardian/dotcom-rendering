@@ -152,7 +152,9 @@ export const BannerChoiceCards = ({
 					submitComponentEvent={
 						bannerData.actions.submitComponentEvent
 					}
-					choiceCardSettings={bannerData.settings.choiceCardSettings}
+					choiceCardDesignSettings={
+						bannerData.settings.choiceCardSettings
+					}
 				/>
 			)}
 			<div

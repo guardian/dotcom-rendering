@@ -364,6 +364,9 @@
                 },
                 {
                     "$ref": "#/definitions/ProductBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/ProductSummaryElement"
                 }
             ]
         },
@@ -4044,6 +4047,9 @@
                 "secondaryHeadingHtml": {
                     "type": "string"
                 },
+                "secondaryHeadingText": {
+                    "type": "string"
+                },
                 "primaryHeadingHtml": {
                     "type": "string"
                 },
@@ -4178,6 +4184,33 @@
                 "ProductCardOnly"
             ],
             "type": "string"
+        },
+        "ProductSummaryElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.ProductSummaryElement"
+                },
+                "matchedProducts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ProductBlockElement"
+                    }
+                },
+                "variant": {
+                    "enum": [
+                        "carousel",
+                        "stacked"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "matchedProducts",
+                "variant"
+            ]
         },
         "Attributes": {
             "type": "object",

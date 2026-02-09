@@ -98,13 +98,14 @@ export const HorizontalSummaryProductCard = ({
 			</div>
 			<div css={informationContainer}>
 				<div css={productCardHeading}>{product.primaryHeadingText}</div>
-				<div css={secondaryHeading}>{product.secondaryHeadingHtml}</div>
+				<div css={secondaryHeading}>{product.secondaryHeadingText}</div>
 				<Link
 					href={`#${product.h2Id}`}
 					onFocus={(event) => event.stopPropagation()}
 					cssOverrides={readMore}
 					data-component="at-a-glance-stacked-card-read-more"
 					data-link-name="product read more link"
+					data-ignore="global-link-styling"
 				>
 					Read more
 				</Link>
