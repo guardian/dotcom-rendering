@@ -16,6 +16,7 @@ const containerStyles = css`
 	flex-direction: column;
 	gap: ${space[2]}px;
 	width: 100%;
+	align-items: flex-start;
 `;
 
 const notificationContainerStyles = css`
