@@ -1,12 +1,12 @@
 import {
 	boolean,
 	literal,
+	number,
 	object,
 	optional,
-	string,
-	number,
-	union,
 	type Output,
+	string,
+	variant,
 } from 'valibot';
 import type {
 	FECompetitionSummary,
@@ -95,7 +95,7 @@ const resultSchema = object({
 	referee: optional(officialSchema),
 });
 
-export const footballMatchSchema = union([
+export const footballMatchSchema = variant('type', [
 	fixtureSchema,
 	matchDaySchema,
 	resultSchema,
