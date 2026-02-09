@@ -45,9 +45,15 @@ export const FollowWrapper = ({
 		return !blockList.includes(tagId);
 	};
 
-	if (isBridgetCompatible && isMyGuardianEnabled && isNotInBlockList(id)) {
-		setShowFollowTagButton(true);
-	}
+	useEffect(() => {
+		if (
+			isBridgetCompatible &&
+			isMyGuardianEnabled &&
+			isNotInBlockList(id)
+		) {
+			setShowFollowTagButton(true);
+		}
+	}, [isBridgetCompatible, isMyGuardianEnabled, id]);
 
 	useEffect(() => {
 		const topic = new Topic({
