@@ -42,15 +42,15 @@ const articles = [
 
 const hostedContent = [
 	{
-		name: 'article',
+		name: 'Hosted Article',
 		data: hostedArticle,
 	},
 	{
-		name: 'gallery',
+		name: 'Hosted Gallery',
 		data: hostedGallery,
 	},
 	{
-		name: 'video',
+		name: 'Hosted Video',
 		data: hostedVideo,
 	},
 ];
