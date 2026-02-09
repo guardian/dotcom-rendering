@@ -14,15 +14,6 @@ import type {
 	FEFootballDataPage,
 } from './feFootballDataPage';
 
-export type FEMatchDayTeam = {
-	id: string;
-	name: string;
-	score?: number;
-	htScore?: number;
-	aggregateScore?: number;
-	scorers?: string;
-};
-
 const stageSchema = object({
 	stageNumber: string(),
 });
@@ -116,6 +107,7 @@ export type FEFixture = Output<typeof fixtureSchema>;
 export type FEMatchDay = Output<typeof matchDaySchema>;
 export type FEResult = Output<typeof resultSchema>;
 export type FEFootballMatch = Output<typeof footballMatchSchema>;
+export type FEMatchDayTeam = Output<typeof matchDayTeamSchema>;
 
 export type FECompetitionMatch = {
 	competitionSummary: FECompetitionSummary;
