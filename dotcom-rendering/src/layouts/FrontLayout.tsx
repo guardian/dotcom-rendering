@@ -290,7 +290,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							'atom/interactive/interactives/thrashers/2024/12/feast-ny-thrasher/default',
 						)
 					) {
-						console.log(trail.embedUri);
 						return (
 							<ContainerOverrides
 								key={ophanName}
