@@ -49,6 +49,8 @@ import type {
 } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { FeastThrasherV2 } from '../components/marketing/thrashers/FeastThrasherV2';
+import { ContainerOverrides } from '../components/ContainerOverrides';
 
 interface Props {
 	front: Front;
@@ -281,6 +283,33 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					if (collection.collectionType === 'scrollable/highlights') {
 						// Highlights are rendered in the Masthead component
 						return null;
+					}
+
+					if (
+						trail.embedUri?.endsWith(
+							'atom/interactive/interactives/thrashers/2024/12/feast-ny-thrasher/default',
+						)
+					) {
+						console.log(trail.embedUri);
+						return (
+							<ContainerOverrides
+								key={ophanName}
+								containerPalette={collection.containerPalette}
+							>
+								<Section
+									fullWidth={true}
+									padBottom={false}
+									showSideBorders={false}
+									padSides={false}
+									showTopBorder={false}
+									ophanComponentLink={ophanComponentLink}
+									ophanComponentName={ophanName}
+									hasPageSkin={hasPageSkin}
+								>
+									<FeastThrasherV2 />
+								</Section>
+							</ContainerOverrides>
+						);
 					}
 
 					if (collection.collectionType === 'fixed/thrasher') {

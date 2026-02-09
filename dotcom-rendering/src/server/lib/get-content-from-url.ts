@@ -72,6 +72,9 @@ export const getContentFromURLMiddleware: Handler = async (req, res, next) => {
 			console.error(error);
 			next(error);
 		}
+	} else if (req.path.startsWith('/AppsComponent/Thrasher/')) {
+		// No data to be fetched for thrashers
+		next();
 	} else {
 		const sourceURL = parseURL(req.originalUrl);
 		if (sourceURL) {

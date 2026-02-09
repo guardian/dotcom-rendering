@@ -23,6 +23,7 @@ import {
 	handleFootballMatchPage,
 	handleFootballTablesPage,
 } from './handler.sportDataPage.web';
+import { handleAppsThrasher } from './handler.thrasher.apps';
 import { getABTestsFromQueryParams } from './lib/get-abtests-from-query-params';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
@@ -118,6 +119,7 @@ renderer.get('/CricketMatchPage/*url', handleCricketMatchPage);
 renderer.get('/FootballMatchSummaryPage/*url', handleFootballMatchPage);
 renderer.get('/HostedContent/*url', handleHostedContent);
 renderer.get('/AppsHostedContent/*url', handleAppsHostedContent);
+renderer.get('/AppsComponent/Thrasher/:name', handleAppsThrasher);
 
 // POST routes for running frontend locally
 renderer.post('/Article', handleArticle);
@@ -136,6 +138,7 @@ renderer.post('/CricketMatchPage', handleCricketMatchPage);
 renderer.post('/FootballMatchSummaryPage', handleFootballMatchPage);
 renderer.post('/HostedContent', handleHostedContent);
 renderer.post('/AppsHostedContent', handleAppsHostedContent);
+renderer.post('/AppsComponent/Thrasher/:name', handleAppsThrasher);
 
 renderer.get('/assets/rendered-items-assets', handleAppsAssets);
 
