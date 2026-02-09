@@ -1,3 +1,11 @@
+import type {
+	BaseSchema,
+	BaseSchemaAsync,
+	Output,
+	SafeParseResult,
+	SchemaIssues,
+} from 'valibot';
+
 /**
  * Represents a value or an error; it's either a {@linkcode Ok} or an
  * {@linkcode Err}. Can be constructed with {@linkcode ok} or {@linkcode error}.
@@ -167,5 +175,17 @@ const ok = <E, A>(value: A): Result<E, A> => new Ok(value);
  * const result = error<string, number>('Something went wrong');
  */
 const error = <E, A>(err: E): Result<E, A> => new Err(err);
+
+/**
+ * Constructs an instance of a {@linkcode Result} from a Valibot
+ * {@linkcode SafeParseResult}, i.e. the output from Valibot `safeParse`.
+ * @example
+ * const valibotResult = safeParse(schema, input);
+ * const result = fromValibot(valibotResult);
+ */
+export const fromValibot = <Schema extends BaseSchema | BaseSchemaAsync>(
+	result: SafeParseResult<Schema>,
+): Result<SchemaIssues, Output<Schema>> =>
+	result.success ? ok(result.output) : error(result.issues);
 
 export { Result, ok, error };

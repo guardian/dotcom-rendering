@@ -95,7 +95,7 @@ const resultSchema = object({
 	referee: optional(officialSchema),
 });
 
-export const footballMatchSchema = variant('type', [
+export const feFootballMatchSchema = variant('type', [
 	fixtureSchema,
 	matchDaySchema,
 	resultSchema,
@@ -106,7 +106,7 @@ export type FELive = Output<typeof liveSchema>;
 export type FEFixture = Output<typeof fixtureSchema>;
 export type FEMatchDay = Output<typeof matchDaySchema>;
 export type FEResult = Output<typeof resultSchema>;
-export type FEFootballMatch = Output<typeof footballMatchSchema>;
+export type FEFootballMatch = Output<typeof feFootballMatchSchema>;
 export type FEMatchDayTeam = Output<typeof matchDayTeamSchema>;
 
 export type FECompetitionMatch = {
