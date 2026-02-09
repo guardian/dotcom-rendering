@@ -794,7 +794,7 @@
                     "$ref": "#/definitions/ProductBlockElement"
                 },
                 {
-                    "$ref": "#/definitions/ProductCarouselElement"
+                    "$ref": "#/definitions/ProductSummaryElement"
                 }
             ]
         },
@@ -4613,23 +4613,31 @@
             ],
             "type": "string"
         },
-        "ProductCarouselElement": {
+        "ProductSummaryElement": {
             "type": "object",
             "properties": {
                 "_type": {
                     "type": "string",
-                    "const": "model.dotcomrendering.pageElements.ProductCarouselElement"
+                    "const": "model.dotcomrendering.pageElements.ProductSummaryElement"
                 },
                 "matchedProducts": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/ProductBlockElement"
                     }
+                },
+                "variant": {
+                    "enum": [
+                        "carousel",
+                        "stacked"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
-                "matchedProducts"
+                "matchedProducts",
+                "variant"
             ]
         },
         "Block": {
@@ -4798,9 +4806,9 @@
                 "FeatureDesign",
                 "FullPageInteractiveDesign",
                 "GalleryDesign",
-				"HostedArticleDesign",
-				"HostedGalleryDesign",
-				"HostedVideoDesign",
+                "HostedArticleDesign",
+                "HostedGalleryDesign",
+                "HostedVideoDesign",
                 "InteractiveDesign",
                 "InterviewDesign",
                 "LetterDesign",
@@ -5449,6 +5457,9 @@
                         },
                         "image": {
                             "type": "string"
+                        },
+                        "isLive": {
+                            "type": "boolean"
                         }
                     },
                     "required": [
