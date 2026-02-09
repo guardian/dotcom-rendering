@@ -72,7 +72,16 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 			) : null}
 			<main>
 				<header css={[grid.container, border]}>
-					<div css={[grid.column.all]}>Main media</div>
+					<div
+						css={[
+							grid.column.all,
+							css`
+								min-height: 200px;
+							`,
+						]}
+					>
+						Main media
+					</div>
 					<div
 						css={[grid.between('centre-column-start', 'grid-end')]}
 					>
