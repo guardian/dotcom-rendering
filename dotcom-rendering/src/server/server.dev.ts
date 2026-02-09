@@ -5,18 +5,18 @@ import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslet
 import {
 	handleAppsArticle,
 	handleAppsBlocks,
+	handleAppsHostedContent,
 	handleAppsInteractive,
 } from './handler.article.apps';
 import {
 	handleArticle,
 	handleBlocks,
+	handleHostedContent,
 	handleInteractive,
 } from './handler.article.web';
 import { handleAppsAssets } from './handler.assets.apps';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import { handleFront, handleTagPage } from './handler.front.web';
-import { handleAppsHostedContent } from './handler.hostedContent.apps';
-import { handleHostedContent } from './handler.hostedContent.web';
 import {
 	handleCricketMatchPage,
 	handleFootballMatchListPage,

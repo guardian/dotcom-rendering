@@ -165,6 +165,21 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							serverTime={serverTime}
 						/>
 					);
+				case ArticleDesign.HostedArticle:
+				case ArticleDesign.HostedVideo:
+					return (
+						<HostedArticleLayout
+							content={article}
+							renderingTarget={renderingTarget}
+						/>
+					);
+				case ArticleDesign.HostedGallery:
+					return (
+						<HostedGalleryLayout
+							content={article}
+							renderingTarget={renderingTarget}
+						/>
+					);
 				default:
 					return (
 						<StandardLayout

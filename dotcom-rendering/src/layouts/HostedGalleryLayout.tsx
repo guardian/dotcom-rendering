@@ -3,13 +3,13 @@ import { palette as sourcePalette } from '@guardian/source/foundations';
 import { HostedContentHeader } from '../components/HostedContentHeader';
 import { Section } from '../components/Section';
 import { grid } from '../grid';
-import type { HostedContent } from '../types/hostedContent';
+import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
 	renderingTarget: RenderingTarget;
-	content: HostedContent;
+	content: Article;
 }
 
 interface WebProps extends Props {

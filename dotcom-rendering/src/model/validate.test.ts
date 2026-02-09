@@ -11,7 +11,7 @@ import { Standard } from '../../fixtures/generated/fe-articles/Standard';
 import { hostedArticle } from '../../fixtures/manual/hostedArticle';
 import { hostedGallery } from '../../fixtures/manual/hostedGallery';
 import { hostedVideo } from '../../fixtures/manual/hostedVideo';
-import { validateAsFEArticle, validateAsFEHostedContent } from './validate';
+import { validateAsFEArticle } from './validate';
 
 const articles = [
 	{
@@ -40,7 +40,7 @@ const articles = [
 	},
 ] as const;
 
-const hostedContent = [
+const hostedContentArticles = [
 	{
 		name: 'Hosted Article',
 		data: hostedArticle,
@@ -59,7 +59,6 @@ describe('validate', () => {
 	it('throws on invalid data', () => {
 		const data = { foo: 'bar' };
 		expect(() => validateAsFEArticle(data)).toThrow(TypeError);
-		expect(() => validateAsFEHostedContent(data)).toThrow(TypeError);
 	});
 
 	for (const article of articles) {
@@ -68,11 +67,9 @@ describe('validate', () => {
 		});
 	}
 
-	for (const hostedItem of hostedContent) {
+	for (const hostedItem of hostedContentArticles) {
 		it(`validates data for hosted ${hostedItem.name} content`, () => {
-			expect(validateAsFEHostedContent(hostedItem.data)).toBe(
-				hostedItem.data,
-			);
+			expect(validateAsFEArticle(hostedItem.data)).toBe(hostedItem.data);
 		});
 	}
 });
