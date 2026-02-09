@@ -10,6 +10,7 @@ import {
 	FollowNotificationsButtonVariant,
 	FollowTagButtonVariant,
 } from './FollowButtons';
+import { isNotInBlockList } from './FollowWrapper.importable';
 
 const containerStyles = css`
 	display: flex;
@@ -26,11 +27,6 @@ const notificationContainerStyles = css`
 type Props = {
 	contributorId: string;
 	displayName: string;
-};
-
-const isNotInBlockList = (tagId: string) => {
-	const blockList = ['profile/anas-al-sharif'];
-	return !blockList.includes(tagId);
 };
 
 /**
