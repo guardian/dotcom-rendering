@@ -205,7 +205,7 @@ interface AppsProps extends CommonProps {
 export const InteractiveLayout = (props: WebProps | AppsProps) => {
 	const { article, format, renderingTarget, serverTime } = props;
 	const {
-		config: { isPaidContent, host, hasSurveyAd },
+		config: { isPaidContent, host, hasSurveyAd, isPreview },
 		editionId,
 	} = article;
 
@@ -406,6 +406,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 													pageId={
 														article.config.pageId
 													}
+													isPreview={isPreview}
 												></ArticleMetaApps>
 											</Hide>
 											<Hide until="leftCol">

@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import {
 	from,
 	palette as sourcePalette,
@@ -6,7 +7,6 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
@@ -224,7 +224,7 @@ interface AppsProps extends CommonProps {
 export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 	const { article, format, renderingTarget, serverTime } = props;
 	const {
-		config: { isPaidContent, host, hasSurveyAd },
+		config: { isPaidContent, host, hasSurveyAd, isPreview },
 		editionId,
 	} = article;
 	const isWeb = renderingTarget === 'Web';
@@ -427,6 +427,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 										>
 											<ListenToArticle
 												articleId={article.pageId}
+												isPreview={isPreview}
 											/>
 										</Island>
 									</div>
@@ -468,6 +469,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 													article.config.shortUrlId
 												}
 												pageId={article.config.pageId}
+												isPreview={isPreview}
 											></ArticleMetaApps>
 										</Hide>
 										<Hide until="leftCol">

@@ -6,6 +6,7 @@ import { ListenToArticleButton } from './ListenToArticleButton';
 
 type Props = {
 	articleId: string;
+	isPreview?: boolean;
 };
 
 export const formatAudioDuration = (
@@ -24,7 +25,7 @@ export const formatAudioDuration = (
 	return formattedDuration;
 };
 
-export const ListenToArticle = ({ articleId }: Props) => {
+export const ListenToArticle = ({ articleId, isPreview }: Props) => {
 	const [showButton, setShowButton] = useState<boolean>(false);
 	const [audioDurationSeconds, setAudioDurationSeconds] = useState<
 		number | undefined
@@ -56,7 +57,11 @@ export const ListenToArticle = ({ articleId }: Props) => {
 					setShowButton(false);
 				});
 		}
-	}, [articleId, isBridgetCompatible]);
+
+		if (isPreview) {
+			setShowButton(true);
+		}
+	}, [articleId, isPreview, isBridgetCompatible]);
 
 	const listenToArticleHandler = () => {
 		void getListenToArticleClient()
