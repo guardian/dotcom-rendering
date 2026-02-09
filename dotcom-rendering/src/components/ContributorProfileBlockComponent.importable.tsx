@@ -9,7 +9,7 @@ import {
 import sanitise from 'sanitize-html';
 import { palette } from '../palette';
 import { Avatar } from './Avatar';
-import { FollowWrapper } from './FollowWrapper.importable';
+import { ContributorProfileFollow } from './ContributorProfileFollow.importable';
 
 type Props = {
 	contributorId: string;
@@ -127,10 +127,9 @@ export const ContributorProfileBlockComponent = ({
 				</div>
 			</div>
 			<div css={followButtonContainerStyles}>
-				<FollowWrapper
-					id={contributorId}
+				<ContributorProfileFollow
+					contributorId={contributorId}
 					displayName={displayName}
-					variant="pill"
 				/>
 			</div>
 			<StraightLines count={1} />
