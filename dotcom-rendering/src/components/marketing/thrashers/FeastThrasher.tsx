@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	breakpoints,
 	from,
 	headlineBold28,
 	headlineBold34,
@@ -14,8 +15,6 @@ import {
 	SvgArrowRightStraight,
 	SvgGuardianLogo,
 } from '@guardian/source/react-components';
-import type { ImageAttrs } from '../shared/ResponsiveImage';
-import { ResponsiveImage } from '../shared/ResponsiveImage';
 
 const styles = {
 	container: css`
@@ -106,22 +105,10 @@ const mobileLink = 'https://guardian-feast.go.link/p0nQT';
 const desktopLink =
 	'https://www.theguardian.com/info/2025/jan/02/feast-the-app-to-avoid-boring-cooking?utm_medium=ACQUISITIONS_THRASHER&utm_campaign=Feast_January_2025&utm_content=Feast_January_2025&utm_term=Feast_January_2025&utm_source=GUARDIAN_WEB';
 
-const baseImage: ImageAttrs = {
-	url: 'https://media.guim.co.uk/a0cc02db1394f8710bdce008e2297759098d53b3/0_0_2000_1200/2000.png',
-	media: '',
-	alt: 'Feast app',
-};
-
-const images: ImageAttrs[] = [
-	{
-		url: 'https://media.guim.co.uk/a0cc02db1394f8710bdce008e2297759098d53b3/0_0_2000_1200/2000.png',
-		media: '(max-width: 739px)',
-	},
-	{
-		url: 'https://media.guim.co.uk/2c4014d476310737dce1e830186e5b6fe18d3327/0_0_2000_2000/2000.jpg',
-		media: '(max-width: 979px)',
-	},
-];
+const tabletImageUrl =
+	'https://media.guim.co.uk/2c4014d476310737dce1e830186e5b6fe18d3327/0_0_2000_2000/2000.jpg';
+const mobileAndDesktopImageUrl =
+	'https://media.guim.co.uk/a0cc02db1394f8710bdce008e2297759098d53b3/0_0_2000_1200/2000.png';
 
 export const FeastThrasher = () => {
 	return (
@@ -181,11 +168,15 @@ export const FeastThrasher = () => {
 					</LinkButton>
 				</div>
 				<div css={styles.imageContainer}>
-					<ResponsiveImage
-						baseImage={baseImage}
-						images={images}
-						cssOverrides={styles.image}
-					/>
+					<picture css={styles.image}>
+						<source
+							srcSet={tabletImageUrl}
+							media={`(min-width: ${
+								breakpoints.tablet
+							}px) and (max-width: ${breakpoints.desktop - 1}px)`}
+						/>
+						<img src={mobileAndDesktopImageUrl} alt="Feast app" />
+					</picture>
 				</div>
 			</div>
 		</div>
