@@ -80,6 +80,7 @@ const styles = {
 		}
 	`,
 	imageContainer: css`
+		/* On mobile the image sits at the top */
 		order: -1;
 		margin-bottom: ${space[4]}px;
 		${from.tablet} {
