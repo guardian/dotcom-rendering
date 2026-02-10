@@ -188,6 +188,13 @@ const overlayStyles = css`
 	}
 `;
 
+const immersiveOverlayStyles = css`
+	${from.tablet} {
+		padding: ${space[2]}px ${space[12]}px ${space[2]}px ${space[2]}px;
+		height: 100%;
+	}
+`;
+
 const blurStyles = css`
 	position: absolute;
 	inset: 0;
@@ -200,14 +207,7 @@ const blurStyles = css`
 
 const immersiveBlurStyles = css`
 	${from.tablet} {
-		padding: ${space[2]}px ${space[12]}px ${space[2]}px ${space[2]}px;
 		${overlayMaskGradientStyles('270deg')}
-	}
-`;
-
-const immersiveOverlayStyles = css`
-	${from.tablet} {
-		height: 100%;
 	}
 `;
 
@@ -656,186 +656,172 @@ export const FeatureCard = ({
 											noPointerEvents,
 									]}
 								>
-									<div css={contentOverlayStyles}>
-										{mainMedia?.type === 'Audio' &&
-											!!mainMedia.podcastImage?.src &&
-											(isImmersive ? (
-												<Hide from="tablet">
-													{renderPodcastImage(
-														mainMedia.podcastImage
-															.src,
-														mainMedia.podcastImage
-															.altText ?? '',
-														false, // Immersive cards are styled as feature cards below the tablet viewport
-													)}
-												</Hide>
-											) : (
-												renderPodcastImage(
+									{mainMedia?.type === 'Audio' &&
+										!!mainMedia.podcastImage?.src &&
+										(isImmersive ? (
+											<Hide from="tablet">
+												{renderPodcastImage(
 													mainMedia.podcastImage.src,
 													mainMedia.podcastImage
 														.altText ?? '',
-													false,
-												)
-											))}
-										<div
-											css={[
-												blurStyles,
-												isImmersive &&
-													immersiveBlurStyles,
-											]}
-										/>
-
-										<div
-											css={[
-												overlayStyles,
-												isImmersive &&
-													immersiveOverlayStyles,
-												isSelfHostedVideoWithControls &&
-													underlineOnHoverStyles,
-											]}
-										>
-											{/** Only the overlay is a link for self-hosted videos with controls. */}
-											{isSelfHostedVideoWithControls && (
-												<CardLink
-													linkTo={linkTo}
-													headlineText={headlineText}
-													dataLinkName={dataLinkName}
-													isExternalLink={
-														isExternalLink
-													}
-												/>
-											)}
-
-											{isImmersive &&
-												mainMedia?.type === 'Audio' &&
-												!!mainMedia.podcastImage
-													?.src && (
-													<div
-														css={
-															podcastImageContainerStyles
-														}
-													>
-														<Hide until="tablet">
-															{renderPodcastImage(
-																mainMedia
-																	.podcastImage
-																	.src,
-																mainMedia
-																	.podcastImage
-																	.altText ??
-																	'',
-																true,
-															)}
-														</Hide>
-													</div>
+													false, // Immersive cards are styled as feature cards below the tablet viewport
 												)}
+											</Hide>
+										) : (
+											renderPodcastImage(
+												mainMedia.podcastImage.src,
+												mainMedia.podcastImage
+													.altText ?? '',
+												false,
+											)
+										))}
+									<div
+										css={[
+											blurStyles,
+											isImmersive && immersiveBlurStyles,
+										]}
+									/>
 
-											{/**
-											 * Without the wrapping div the headline and byline would have space
-											 * inserted between them due to being direct children of the flex container
-											 */}
-											<div>
-												<CardHeadline
-													headlineText={headlineText}
-													format={format}
-													fontSizes={headlineSizes}
-													showQuotes={showQuotes}
-													kickerText={
-														format.design ===
-															ArticleDesign.LiveBlog &&
-														!kickerText
-															? 'Live'
-															: kickerText
-													}
-													showPulsingDot={
-														format.design ===
-															ArticleDesign.LiveBlog ||
-														showPulsingDot
-													}
-													byline={byline}
-													showByline={showByline}
-													isExternalLink={
-														isExternalLink
-													}
-													headlineColour={palette(
-														'--feature-card-headline',
-													)}
-													kickerColour={palette(
-														'--feature-card-kicker-text',
-													)}
-													quoteColour={palette(
-														'--feature-card-quote-icon',
-													)}
-												/>
-											</div>
+									<div
+										css={[
+											overlayStyles,
+											isImmersive &&
+												immersiveOverlayStyles,
+											isSelfHostedVideoWithControls &&
+												underlineOnHoverStyles,
+										]}
+									>
+										{/** Only the overlay is a link for self-hosted videos with controls. */}
+										{isSelfHostedVideoWithControls && (
+											<CardLink
+												linkTo={linkTo}
+												headlineText={headlineText}
+												dataLinkName={dataLinkName}
+												isExternalLink={isExternalLink}
+											/>
+										)}
 
-											{!isUndefined(starRating) && (
-												<StarRating
-													rating={starRating}
-													size={starRatingSize}
-													useAlternativeTheme={true}
-												/>
-											)}
-
-											{!!trailText && (
-												<div css={trailTextWrapper}>
-													<TrailText
-														trailText={trailText}
-														trailTextColour={palette(
-															'--feature-card-trail-text',
+										{isImmersive &&
+											mainMedia?.type === 'Audio' &&
+											!!mainMedia.podcastImage?.src && (
+												<div
+													css={
+														podcastImageContainerStyles
+													}
+												>
+													<Hide until="tablet">
+														{renderPodcastImage(
+															mainMedia
+																.podcastImage
+																.src,
+															mainMedia
+																.podcastImage
+																.altText ?? '',
+															true,
 														)}
-														trailTextSize="regular"
-														padBottom={false}
-														hideUntil="tablet"
-													/>
+													</Hide>
 												</div>
 											)}
 
-											<CardFooter
+										{/**
+										 * Without the wrapping div the headline and byline would have space
+										 * inserted between them due to being direct children of the flex container
+										 */}
+										<div>
+											<CardHeadline
+												headlineText={headlineText}
 												format={format}
-												age={
-													showCardAge ? (
-														<FeatureCardCardAge
-															webPublicationDate={
-																webPublicationDate
-															}
-															showClock={
-																!!showClock
-															}
-															serverTime={
-																serverTime
-															}
-															isStorylines={
-																isStorylines
-															}
-														/>
-													) : undefined
+												fontSizes={headlineSizes}
+												showQuotes={showQuotes}
+												kickerText={
+													format.design ===
+														ArticleDesign.LiveBlog &&
+													!kickerText
+														? 'Live'
+														: kickerText
 												}
-												commentCount={
-													showCommentCount ? (
-														<FeatureCardCommentCount
-															linkTo={linkTo}
-															discussionId={
-																discussionId
-															}
-															discussionApiUrl={
-																discussionApiUrl
-															}
-														/>
-													) : undefined
+												showPulsingDot={
+													format.design ===
+														ArticleDesign.LiveBlog ||
+													showPulsingDot
 												}
-												showLivePlayable={false}
-												isNewsletter={isNewsletter}
-												mainMedia={mainMedia}
-											/>
-
-											{!isImmersive &&
-												mainMedia?.type === 'Audio' &&
-												renderWaveform(
-													mainMedia.duration,
-													233,
+												byline={byline}
+												showByline={showByline}
+												isExternalLink={isExternalLink}
+												headlineColour={palette(
+													'--feature-card-headline',
 												)}
+												kickerColour={palette(
+													'--feature-card-kicker-text',
+												)}
+												quoteColour={palette(
+													'--feature-card-quote-icon',
+												)}
+											/>
 										</div>
+
+										{!isUndefined(starRating) && (
+											<StarRating
+												rating={starRating}
+												size={starRatingSize}
+												useAlternativeTheme={true}
+											/>
+										)}
+
+										{!!trailText && (
+											<div css={trailTextWrapper}>
+												<TrailText
+													trailText={trailText}
+													trailTextColour={palette(
+														'--feature-card-trail-text',
+													)}
+													trailTextSize="regular"
+													padBottom={false}
+													hideUntil="tablet"
+												/>
+											</div>
+										)}
+
+										<CardFooter
+											format={format}
+											age={
+												showCardAge ? (
+													<FeatureCardCardAge
+														webPublicationDate={
+															webPublicationDate
+														}
+														showClock={!!showClock}
+														serverTime={serverTime}
+														isStorylines={
+															isStorylines
+														}
+													/>
+												) : undefined
+											}
+											commentCount={
+												showCommentCount ? (
+													<FeatureCardCommentCount
+														linkTo={linkTo}
+														discussionId={
+															discussionId
+														}
+														discussionApiUrl={
+															discussionApiUrl
+														}
+													/>
+												) : undefined
+											}
+											showLivePlayable={false}
+											isNewsletter={isNewsletter}
+											mainMedia={mainMedia}
+										/>
+
+										{!isImmersive &&
+											mainMedia?.type === 'Audio' &&
+											renderWaveform(
+												mainMedia.duration,
+												233,
+											)}
 									</div>
 								</div>
 
