@@ -4,12 +4,13 @@ import { isUndefined, log } from '@guardian/libs';
 import { space, textSans12, textSans15 } from '@guardian/source/foundations';
 import {
 	SvgCheckmark,
-	SvgNotificationsOff,
 	SvgNotificationsOn,
 	SvgPlus,
 } from '@guardian/source/react-components';
-import { ToggleSwitch } from '@guardian/source-development-kitchen/react-components';
-import type { ReactNode } from 'react';
+import {
+	StraightLines,
+	ToggleSwitch,
+} from '@guardian/source-development-kitchen/react-components';
 import { useEffect, useState } from 'react';
 import { getNotificationsClient, getTagClient } from '../lib/bridgetApi';
 import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
@@ -19,7 +20,7 @@ import { isNotInBlockList } from './FollowWrapper.importable';
 
 // -- Follow button --
 
-type ButtonProps = {
+type FollowButtonProps = {
 	isFollowing: boolean;
 	onClickHandler: () => void;
 };
@@ -56,7 +57,7 @@ const followButtonStyles = (isFollowing: boolean) => css`
 	}
 `;
 
-const FollowTagButton = ({ isFollowing, onClickHandler }: ButtonProps) => {
+const FollowButton = ({ isFollowing, onClickHandler }: FollowButtonProps) => {
 	return (
 		<button
 			onClick={onClickHandler}
@@ -73,71 +74,19 @@ const FollowTagButton = ({ isFollowing, onClickHandler }: ButtonProps) => {
 	);
 };
 
-// -- Notifications toggle --
+// -- notifications --
 
-type IconProps = {
-	isFollowing?: boolean;
-	iconIsFollowing: ReactNode;
-	iconIsNotFollowing: ReactNode;
-};
+const notificationIconStyles = css`
+	display: flex;
+	margin: 0;
+	margin-right: ${space[1]}px;
 
-const NotificationIcon = ({
-	isFollowing,
-	iconIsFollowing,
-	iconIsNotFollowing,
-}: IconProps) => (
-	<div
-		css={css`
-			display: flex;
-			margin: 0;
-			margin-right: ${space[1]}px;
-
-			svg {
-				margin-top: -${space[1] - 1}px;
-			}
-		`}
-		style={{
-			fill: palette('--follow-icon-variant-fill'),
-		}}
-	>
-		{isFollowing ? iconIsFollowing : iconIsNotFollowing}
-	</div>
-);
-
-const notificationsTextSpan = ({
-	isFollowing,
-	displayName,
-}: {
-	isFollowing: boolean;
-	displayName?: string;
-}) => (
-	<span
-		css={css`
-			${textSans12}
-		`}
-	>
-		{isFollowing
-			? 'Notifications on'
-			: `Receive an alert when ${
-					displayName ?? 'this author'
-			  } publishes an article`}
-	</span>
-);
-
-const toggleSwitchStyles = css`
-	[aria-checked='false'] {
-		background-color: ${palette(
-			'--follow-button-border-following',
-		)} !important;
-		border-color: ${palette('--follow-button-border-following')} !important;
-	}
-	[aria-checked='true'] {
-		background-color: ${palette('--follow-button-border')} !important;
-		border-color: ${palette('--follow-button-border')} !important;
+	svg {
+		margin-top: -${space[1] - 1}px;
 	}
 `;
 
-const notificationRowStyles = css`
+const notificationsStatusStyles = css`
 	${textSans15}
 	color: ${palette('--follow-text')};
 	background: none;
@@ -147,45 +96,44 @@ const notificationRowStyles = css`
 	min-height: ${space[6]}px;
 	padding: 0;
 	text-align: left;
-	margin-bottom: ${space[2]}px;
+	margin: ${space[1]}px 0 0 ${space[1]}px;
 	width: 100%;
 `;
 
-const notificationRowContainerStyles = css`
+const notificationsStatusContainerStyles = css`
 	display: flex;
-	column-gap: 0.2em;
+	column-gap: ${space[1]}px;
 	justify-content: space-between;
 	width: 100%;
 `;
 
-const iconTextWrapperStyles = css`
+const notificationIconTextWrapperStyles = css`
 	display: flex;
 	align-items: flex-start;
+	${textSans12}
 `;
 
-const FollowNotificationsButton = ({
+const NotificationsStatus = ({
 	isFollowing,
 	onClickHandler,
 	displayName,
-}: ButtonProps & { displayName?: string }) => {
+}: FollowButtonProps & { displayName?: string }) => {
 	return (
-		<div css={notificationRowStyles}>
-			<div css={notificationRowContainerStyles}>
-				<div css={iconTextWrapperStyles}>
-					<NotificationIcon
-						isFollowing={isFollowing}
-						iconIsFollowing={<SvgNotificationsOn size="small" />}
-						iconIsNotFollowing={
-							<SvgNotificationsOff size="small" />
-						}
-					/>
-					{notificationsTextSpan({ isFollowing, displayName })}
+		<div css={notificationsStatusStyles}>
+			<div css={notificationsStatusContainerStyles}>
+				<div css={notificationIconTextWrapperStyles}>
+					<div css={notificationIconStyles}>
+						<SvgNotificationsOn size="small" />
+					</div>
+					<span>
+						Receive an alert when {displayName ?? 'this author'}{' '}
+						publishes an article
+					</span>
 				</div>
 				<div>
 					<ToggleSwitch
 						checked={isFollowing}
 						onClick={onClickHandler}
-						cssOverrides={toggleSwitchStyles}
 					/>
 				</div>
 			</div>
@@ -193,9 +141,7 @@ const FollowNotificationsButton = ({
 	);
 };
 
-// -- Card layout --
-
-const containerStyles = css`
+const cardContainerStyles = css`
 	display: flex;
 	flex-direction: column;
 	gap: ${space[2]}px;
@@ -203,11 +149,7 @@ const containerStyles = css`
 	align-items: flex-start;
 `;
 
-const notificationContainerStyles = css`
-	width: 100%;
-`;
-
-type Props = {
+type CardContainerProps = {
 	contributorId: string;
 	displayName: string;
 };
@@ -215,13 +157,13 @@ type Props = {
 export const ContributorFollowCard = ({
 	contributorId,
 	displayName,
-}: Props) => {
+}: CardContainerProps) => {
 	const [isFollowingNotifications, setIsFollowingNotifications] = useState<
 		boolean | undefined
 	>(undefined);
-	const [isFollowingTag, setIsFollowingTag] = useState<boolean | undefined>(
-		undefined,
-	);
+	const [isFollowingContributor, setIsFollowingContributor] = useState<
+		boolean | undefined
+	>(undefined);
 
 	const isMyGuardianEnabled = useIsMyGuardianEnabled();
 	const isBridgetCompatible = useIsBridgetCompatible('2.5.0');
@@ -255,7 +197,7 @@ export const ContributorFollowCard = ({
 
 		void getTagClient()
 			.isFollowing(topic)
-			.then(setIsFollowingTag)
+			.then(setIsFollowingContributor)
 			.catch((error) => {
 				window.guardian.modules.sentry.reportError(
 					error,
@@ -272,12 +214,12 @@ export const ContributorFollowCard = ({
 			type: 'tag-contributor',
 		});
 
-		if (isFollowingTag) {
+		if (isFollowingContributor) {
 			void getTagClient()
 				.unfollow(topic)
 				.then((success) => {
 					if (success) {
-						setIsFollowingTag(false);
+						setIsFollowingContributor(false);
 					}
 				})
 				.catch((error) => {
@@ -296,7 +238,7 @@ export const ContributorFollowCard = ({
 				.follow(topic)
 				.then((success) => {
 					if (success) {
-						setIsFollowingTag(true);
+						setIsFollowingContributor(true);
 					}
 				})
 				.catch((error) => {
@@ -362,16 +304,19 @@ export const ContributorFollowCard = ({
 	}
 
 	return (
-		<div css={containerStyles} data-gu-name="contributor-follow-card">
-			<FollowTagButton
-				isFollowing={isFollowingTag ?? false}
+		<div css={cardContainerStyles}>
+			<FollowButton
+				isFollowing={isFollowingContributor ?? false}
 				onClickHandler={
-					!isUndefined(isFollowingTag) ? tagHandler : () => undefined
+					!isUndefined(isFollowingContributor)
+						? tagHandler
+						: () => undefined
 				}
 			/>
-			{isFollowingTag && (
-				<div css={notificationContainerStyles}>
-					<FollowNotificationsButton
+			{isFollowingContributor && (
+				<div>
+					<StraightLines count={1} />
+					<NotificationsStatus
 						isFollowing={isFollowingNotifications ?? false}
 						onClickHandler={
 							!isUndefined(isFollowingNotifications)
