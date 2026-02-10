@@ -6,15 +6,7 @@ import { useEffect, useState } from 'react';
 import { getNotificationsClient, getTagClient } from '../lib/bridgetApi';
 import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
 import { useIsMyGuardianEnabled } from '../lib/useIsMyGuardianEnabled';
-import {
-	FollowNotificationsButtonVariant,
-	FollowTagButton,
-} from './FollowButtons';
-
-const notificationContainerStyles = css`
-	margin-top: ${space[3]}px;
-	width: 100%;
-`;
+import { FollowNotificationsButton, FollowTagButton } from './FollowButtons';
 
 type Props = {
 	id: string;
@@ -39,15 +31,9 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 	const isMyGuardianEnabled = useIsMyGuardianEnabled();
 	const isBridgetCompatible = useIsBridgetCompatible('2.5.0');
 
-	useEffect(() => {
-		if (
-			isBridgetCompatible &&
-			isMyGuardianEnabled &&
-			isNotInBlockList(id)
-		) {
-			setShowFollowTagButton(true);
-		}
-	}, [isBridgetCompatible, isMyGuardianEnabled, id]);
+	if (isBridgetCompatible && isMyGuardianEnabled && isNotInBlockList(id)) {
+		setShowFollowTagButton(true);
+	}
 
 	useEffect(() => {
 		const topic = new Topic({
@@ -204,19 +190,14 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 					withExtraBottomMargin={true}
 				/>
 			)}
-			{showFollowTagButton && isFollowingTag && (
-				<div css={notificationContainerStyles}>
-					<FollowNotificationsButtonVariant
-						isFollowing={isFollowingNotifications ?? false}
-						onClickHandler={
-							!isUndefined(isFollowingNotifications)
-								? notificationsHandler
-								: () => undefined
-						}
-						displayName={displayName}
-					/>
-				</div>
-			)}
+			<FollowNotificationsButton
+				isFollowing={isFollowingNotifications ?? false}
+				onClickHandler={
+					!isUndefined(isFollowingNotifications)
+						? notificationsHandler
+						: () => undefined
+				}
+			/>
 		</div>
 	);
 };

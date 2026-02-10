@@ -58,5 +58,4 @@ export type TagType = {
 	bylineLargeImageUrl?: string;
 	podcast?: Podcast;
 	bio?: string;
-	description?: string;
 };

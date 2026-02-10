@@ -8,7 +8,7 @@ import {
 } from './FollowButtons';
 
 export default {
-	component: FollowTagButton,
+	component: [FollowNotificationsButton, FollowTagButton],
 	title: 'Components/FollowStatus',
 	args: {
 		isFollowing: false,
@@ -23,7 +23,7 @@ export const Default = ({ isFollowing }: { isFollowing: boolean }) => {
 				displayName={'John Doe'}
 				onClickHandler={() => undefined}
 			/>
-			<FollowTagButtonVariant
+			<FollowNotificationsButton
 				isFollowing={isFollowing}
 				onClickHandler={() => undefined}
 			/>

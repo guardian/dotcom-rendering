@@ -12,7 +12,6 @@ const enhanceTag = ({
 		bylineImageUrl,
 		contributorLargeImagePath: bylineLargeImageUrl,
 		bio,
-		description,
 	},
 }: FETagType): TagType => ({
 	id,
@@ -22,5 +21,4 @@ const enhanceTag = ({
 	bylineImageUrl,
 	bylineLargeImageUrl,
 	bio,
-	description,
 });
