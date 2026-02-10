@@ -43,6 +43,7 @@ export const allowedPageIds: string[] = [
 	'thefilter/2025/feb/12/best-flower-delivery',
 	'thefilter-us/2026/feb/06/best-personal-travel-item-backpacks-us',
 	'thefilter/2024/nov/21/best-coffee-machines',
+	'thefilter/2026/feb/04/best-soup-maker-uk',
 ];
 
 const isEligibleForSummary = (pageId: string) => {
