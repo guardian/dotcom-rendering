@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { CSSProperties } from 'react';
-import { preferredSourceExperiment } from '../experiments/preferredSource';
 import type { FEArticle } from '../frontend/feArticle';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
@@ -13,8 +12,8 @@ import {
 } from '../lib/articleFormat';
 import { getAudioData } from '../lib/audio-data';
 import { getSoleContributor } from '../lib/byline';
-import { useBetaAB } from '../lib/useAB';
 import { palette as themePalette } from '../palette';
+import { hasPreferredSourceButton } from '../preferredSource';
 import type { Branding as BrandingType } from '../types/branding';
 import type { FEElement } from '../types/content';
 import type { Podcast, TagType } from '../types/tag';
@@ -343,12 +342,10 @@ export const ArticleMeta = ({
 	mainMediaElements,
 	crossword,
 }: Props) => {
-	const abTests = useBetaAB();
 	const { renderingTarget } = useConfig();
-	const preferredSource = preferredSourceExperiment(
+	const showPreferredSource = hasPreferredSourceButton(
 		renderingTarget,
 		format,
-		abTests,
 	);
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
@@ -446,7 +443,7 @@ export const ArticleMeta = ({
 				<div
 					data-print-layout="hide"
 					css={metaFlex}
-					style={preferredSourceMetaFlex(preferredSource.hasButton)}
+					style={preferredSourceMetaFlex(showPreferredSource)}
 				>
 					{renderingTarget === 'Web' && (
 						<div
@@ -464,7 +461,7 @@ export const ArticleMeta = ({
 									),
 							]}
 							style={preferredSourceMetaExtras(
-								preferredSource.hasButton,
+								showPreferredSource,
 							)}
 						>
 							<Island
@@ -518,9 +515,7 @@ export const ArticleMeta = ({
 						</div>
 					</div>
 				</div>
-				{preferredSource.hasButton ? (
-					<PreferredSourceButton kind={preferredSource.kind} />
-				) : null}
+				{showPreferredSource ? <PreferredSourceButton /> : null}
 			</div>
 		</div>
 	);
