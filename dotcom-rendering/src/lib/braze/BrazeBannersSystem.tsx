@@ -69,7 +69,7 @@ export enum BrazeBannersSystemPlacementId {
  */
 export function refreshBanners(braze: BrazeInstance): Promise<void> {
 	// DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY
-	// return Promise.resolve();
+	return Promise.resolve();
 	// DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY
 	let timeoutId: NodeJS.Timeout;
 
@@ -424,7 +424,10 @@ export const BrazeBannersSystemDisplay = ({
 			// Check for wrapperModeEnabled property to determine if we should apply wrapper styles
 			const metaWrapperModeEnabled =
 				meta.banner.getBooleanProperty('wrapperModeEnabled');
-			if (metaWrapperModeEnabled) {
+			if (
+				metaWrapperModeEnabled !== undefined &&
+				metaWrapperModeEnabled !== null
+			) {
 				setWrapperModeEnabled(metaWrapperModeEnabled);
 			}
 
@@ -558,98 +561,121 @@ export const BrazeBannersSystemDisplay = ({
 		>
 			<div
 				className="braze-banner-content-wrapper"
-				style={{
-					margin: '0 auto',
-					display: 'flex',
-					...(wrapperModeEnabled
-						? {
-								padding: '12px 4px 0px 12px',
-						  }
-						: {}),
-				}}
 				css={
 					wrapperModeEnabled
 						? css`
+								box-sizing: border-box;
+								position: relative;
+								display: grid;
+								margin: 0px auto;
+								padding: 12px 4px 0px 12px;
+								bottom: 0px;
+								column-gap: 10px;
+								align-self: stretch;
 								max-width: 1300px;
+								grid-template:
+									'logo vert-line copy-container close-button'
+									/ 219px 1px 840px auto;
 								@media (max-width: 1300px) {
 									max-width: 1140px;
+									grid-template:
+										'logo vert-line copy-container close-button'
+										/ 140px 1px 840px auto;
 								}
 								@media (max-width: 1140px) {
 									max-width: 980px;
-									padding: 12px 12px 0px;
+									grid-template:
+										'copy-container close-button'
+										/ auto 68px;
 								}
 								@media (max-width: 980px) {
 									max-width: 740px;
+									grid-template:
+										'. copy-container close-button close-button'
+										/ minmax(0px, 0.5fr)
+										492px max-content minmax(0px, 0.5fr);
+									padding: 12px 12px 0px;
+								}
+								@media (max-width: 660px) {
+									max-width: 660px;
+									grid-template:
+										'.'
+										'copy-container' / 100%;
 								}
 						  `
 						: undefined
 				}
 			>
 				{wrapperModeEnabled && (
-					<div
-						css={css`
-							display: flex;
-							width: 247px;
-							@media (max-width: 1300px) {
-								width: 168px;
-							}
-							@media (max-width: 1140px) {
-								display: none;
-							}
-						`}
-					>
+					<>
 						<div
 							className="logo"
-							style={{
-								flex: 1,
-							}}
-						></div>
+							css={css`
+								box-sizing: border-box;
+								grid-area: logo;
+								justify-self: end;
+								width: 128px;
+								height: 41px;
+								-webkit-box-pack: end;
+								justify-content: end;
+								margin-top: 20px;
+
+								@media (max-width: 1140px) {
+									display: none;
+								}
+							`}
+						/>
 						<div
-							className="divider"
-							style={{
-								backgroundColor: '#000000',
-								width: '1px',
-								opacity: '0.2',
-								margin: '24px 8px 0px',
-							}}
-						></div>
-					</div>
+							className="vert-line"
+							css={css`
+								box-sizing: border-box;
+								grid-area: vert-line;
+								background-color: rgb(0, 0, 0);
+								width: 1px;
+								opacity: 0.2;
+								margin: 24px 8px 0px;
+
+								@media (max-width: 1140px) {
+									display: none;
+								}
+							`}
+						/>
+					</>
 				)}
 				<div
 					ref={containerRef}
 					className="braze-banner-content"
 					style={{
-						flex: 1,
+						...(wrapperModeEnabled
+							? {
+									gridArea: 'copy-container',
+							  }
+							: {}),
 					}}
 				/>
 				{wrapperModeEnabled && (
 					<div
+						className="close-button"
 						css={css`
+							box-sizing: border-box;
+							grid-area: close-button;
 							display: flex;
-							width: 184px;
-							@media (max-width: 1300px) {
-								width: 103px;
-							}
-							@media (max-width: 1140px) {
-								width: 68px;
-							}
+							-webkit-box-pack: justify;
+							justify-content: space-between;
+							column-gap: 2px;
+							padding-right: 8px;
+							margin-top: 24px;
+							flex-direction: row-reverse;
+
 							@media (max-width: 980px) {
-								width: 112px;
+								margin-top: 8px;
 							}
-							@media (max-width: 740px) {
-								width: auto;
+							@media (max-width: 660px) {
+								position: sticky;
+								top: 8px;
 							}
 						`}
-					>
-						<div
-							className="close-button"
-							style={{
-								flex: 1,
-							}}
-						>
-							X
-						</div>
-					</div>
+					></div>
 				)}
 			</div>
 		</div>
