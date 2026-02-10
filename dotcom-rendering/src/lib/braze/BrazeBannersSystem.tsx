@@ -1,4 +1,5 @@
 import type { Banner } from '@braze/web-sdk';
+import { css } from '@emotion/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { TagType } from '../../types/tag';
 import { getAuthState, getOptionsHeaders } from '../identity';
@@ -67,6 +68,9 @@ export enum BrazeBannersSystemPlacementId {
  * @returns A promise that resolves when the refresh is complete
  */
 export function refreshBanners(braze: BrazeInstance): Promise<void> {
+	// DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY
+	// return Promise.resolve();
+	// DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY // DEV ONLY
 	let timeoutId: NodeJS.Timeout;
 
 	// Create the Timeout Promise
@@ -334,6 +338,10 @@ export const BrazeBannersSystemDisplay = ({
 	const authStatus = useAuthStatus();
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [minHeight, setMinHeight] = useState<string>('0px');
+	const [wrapperModeEnabled, setWrapperModeEnabled] =
+		useState<boolean>(false);
+	const [wrapperModeBackgroundColor, setWrapperModeBackgroundColor] =
+		useState<string>('#ffffff');
 
 	const postMessageToBrazeBanner = (
 		type: BrazeBannersSystemMessageType,
@@ -407,10 +415,24 @@ export const BrazeBannersSystemDisplay = ({
 			// Clear any existing content to prevent duplicates
 			containerRef.current.innerHTML = '';
 
-			// Returns the string property
+			// Check for minHeight property to prevent layout shifts, if it exists
 			const metaMinHeight = meta.banner.getStringProperty('minHeight');
 			if (metaMinHeight) {
 				setMinHeight(metaMinHeight);
+			}
+
+			// Check for wrapperModeEnabled property to determine if we should apply wrapper styles
+			const metaWrapperModeEnabled =
+				meta.banner.getBooleanProperty('wrapperModeEnabled');
+			if (metaWrapperModeEnabled) {
+				setWrapperModeEnabled(metaWrapperModeEnabled);
+			}
+
+			// Check for wrapperModeBackgroundColor property to set the background color of the wrapper
+			const metaWrapperModeBackgroundColor =
+				meta.banner.getStringProperty('wrapperModeBackgroundColor');
+			if (metaWrapperModeBackgroundColor) {
+				setWrapperModeBackgroundColor(metaWrapperModeBackgroundColor);
 			}
 
 			// Let Braze inject the HTML/CSS
@@ -524,9 +546,112 @@ export const BrazeBannersSystemDisplay = ({
 
 	return (
 		<div
-			ref={containerRef}
-			className="braze-banner-container"
-			style={{ minHeight }} // Optional: prevents layout shift
-		/>
+			className="braze-banner"
+			style={{
+				minHeight,
+				...(wrapperModeEnabled
+					? {
+							backgroundColor: wrapperModeBackgroundColor,
+					  }
+					: {}),
+			}}
+		>
+			<div
+				className="braze-banner-content-wrapper"
+				style={{
+					margin: '0 auto',
+					display: 'flex',
+					...(wrapperModeEnabled
+						? {
+								padding: '12px 4px 0px 12px',
+						  }
+						: {}),
+				}}
+				css={
+					wrapperModeEnabled
+						? css`
+								max-width: 1300px;
+								@media (max-width: 1300px) {
+									max-width: 1140px;
+								}
+								@media (max-width: 1140px) {
+									max-width: 980px;
+									padding: 12px 12px 0px;
+								}
+								@media (max-width: 980px) {
+									max-width: 740px;
+								}
+						  `
+						: undefined
+				}
+			>
+				{wrapperModeEnabled && (
+					<div
+						css={css`
+							display: flex;
+							width: 247px;
+							@media (max-width: 1300px) {
+								width: 168px;
+							}
+							@media (max-width: 1140px) {
+								display: none;
+							}
+						`}
+					>
+						<div
+							className="logo"
+							style={{
+								flex: 1,
+							}}
+						></div>
+						<div
+							className="divider"
+							style={{
+								backgroundColor: '#000000',
+								width: '1px',
+								opacity: '0.2',
+								margin: '24px 8px 0px',
+							}}
+						></div>
+					</div>
+				)}
+				<div
+					ref={containerRef}
+					className="braze-banner-content"
+					style={{
+						flex: 1,
+					}}
+				/>
+				{wrapperModeEnabled && (
+					<div
+						css={css`
+							display: flex;
+							width: 184px;
+							@media (max-width: 1300px) {
+								width: 103px;
+							}
+							@media (max-width: 1140px) {
+								width: 68px;
+							}
+							@media (max-width: 980px) {
+								width: 112px;
+							}
+							@media (max-width: 740px) {
+								width: auto;
+							}
+						`}
+					>
+						<div
+							className="close-button"
+							style={{
+								flex: 1,
+							}}
+						>
+							X
+						</div>
+					</div>
+				)}
+			</div>
+		</div>
 	);
 };
