@@ -29,10 +29,6 @@ type Props = {
 	displayName: string;
 };
 
-/**
- * Follow button specifically for contributor profiles.
- * Always renders when the contributor profile is shown.
- */
 export const ContributorProfileFollow = ({
 	contributorId,
 	displayName,
@@ -53,8 +49,6 @@ export const ContributorProfileFollow = ({
 		isNotInBlockList(contributorId);
 
 	useEffect(() => {
-		if (!shouldShowFollow) return;
-
 		const topic = new Topic({
 			id: contributorId,
 			displayName,
@@ -86,7 +80,7 @@ export const ContributorProfileFollow = ({
 				);
 				log('dotcom', 'Bridget getTagClient.isFollowing Error:', error);
 			});
-	}, [contributorId, displayName, shouldShowFollow]);
+	}, [contributorId, displayName]);
 
 	const tagHandler = () => {
 		const topic = new Topic({
@@ -180,7 +174,6 @@ export const ContributorProfileFollow = ({
 		}
 	};
 
-	// Don't render if feature flags aren't met
 	if (!shouldShowFollow) {
 		return null;
 	}
