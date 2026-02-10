@@ -192,12 +192,22 @@ const isTheme = (theme: string | ArticleTheme): theme is ArticleTheme =>
 const isDesign = (design: string | ArticleDesign): design is ArticleDesign =>
 	!isString(design);
 
+const isHostedContentDesign = (design: ArticleDesign): boolean =>
+	[
+		ArticleDesign.HostedArticle,
+		ArticleDesign.HostedVideo,
+		ArticleDesign.HostedGallery,
+	].includes(design);
+
+/** Fetches all article designs apart from Hosted Content ones, unless specified */
 export const getAllThemes = ({
 	display,
 	design,
+	includeHostedContent = false,
 }: {
 	display: ArticleDisplay;
 	design: ArticleDesign;
+	includeHostedContent?: boolean;
 }): Array<ArticleFormat> =>
 	Object.values({ ...Pillar, ...ArticleSpecial })
 		.filter(isTheme)
@@ -205,17 +215,26 @@ export const getAllThemes = ({
 			theme,
 			display,
 			design,
-		}));
+		}))
+		.filter(({ design: parsedDesign }) =>
+			!includeHostedContent ? !isHostedContentDesign(parsedDesign) : true,
+		);
 
+/** Fetches all article designs apart from Hosted Content ones, unless specified */
 export const getAllDesigns = ({
 	display,
 	theme,
+	includeHostedContent = false,
 }: {
 	display: ArticleDisplay;
 	theme: ArticleTheme;
+	includeHostedContent?: boolean;
 }): Array<ArticleFormat> =>
 	Object.values({ ...ArticleDesign })
 		.filter(isDesign)
+		.filter((design) =>
+			!includeHostedContent ? !isHostedContentDesign(design) : true,
+		)
 		.map((design) => ({
 			theme,
 			display,
