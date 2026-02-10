@@ -423,8 +423,6 @@ export const FeatureCard = ({
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
-	const isVideoArticle = format.design === ArticleDesign.Video;
-
 	/**
 	 * Determine which type of media to use for the card.
 	 * For example, a video might be available, but if we don't want to show it, use an image instead.
@@ -522,7 +520,6 @@ export const FeatureCard = ({
 										altText={headlineText}
 										kickerText={kickerText}
 										trailText={trailText}
-										isVideoArticle={isVideoArticle}
 										hidePillOnMobile={false}
 										iconSizeOnDesktop="large"
 										iconSizeOnMobile="large"
