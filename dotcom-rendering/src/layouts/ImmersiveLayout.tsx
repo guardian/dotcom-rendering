@@ -233,7 +233,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 	const { article, format, renderingTarget, serverTime } = props;
 
 	const {
-		config: { isPaidContent, host, hasSurveyAd, isPreview },
+		config: { isPaidContent, host, hasSurveyAd },
 		editionId,
 	} = article;
 	const isWeb = renderingTarget === 'Web';
@@ -535,7 +535,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 										>
 											<ListenToArticle
 												articleId={article.pageId}
-												isPreview={isPreview}
 											/>
 										</Island>
 									</div>
@@ -589,7 +588,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 													article.config.shortUrlId
 												}
 												pageId={article.config.pageId}
-												isPreview={isPreview}
 											></ArticleMetaApps>
 										</Hide>
 										<Hide when="below" breakpoint="leftCol">

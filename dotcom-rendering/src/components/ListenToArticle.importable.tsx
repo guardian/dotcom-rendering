@@ -7,7 +7,6 @@ import { ListenToArticleButton } from './ListenToArticleButton';
 
 type Props = {
 	articleId: string;
-	isPreview?: boolean;
 };
 
 export const formatAudioDuration = (
@@ -26,14 +25,13 @@ export const formatAudioDuration = (
 	return formattedDuration;
 };
 
-export const ListenToArticle = ({ articleId, isPreview = false }: Props) => {
+export const ListenToArticle = ({ articleId }: Props) => {
 	const { isDev } = useConfig();
 	const [showButton, setShowButton] = useState<boolean>(false);
 	const [audioDurationSeconds, setAudioDurationSeconds] = useState<
 		number | undefined
 	>(undefined);
 
-	console.log('ListenToArticle isPreview=', isPreview);
 	const isBridgetCompatible = useIsBridgetCompatible('8.7.0');
 	useEffect(() => {
 		if (isBridgetCompatible) {
@@ -59,12 +57,12 @@ export const ListenToArticle = ({ articleId, isPreview = false }: Props) => {
 
 					setShowButton(false);
 				});
-		} else if (isPreview || isDev) {
+		} else if (isDev) {
 			// To facilitate design and development in non-Bridget compatible environments,
-			// we want to show the button if we're in preview mode or development mode
+			// we want to show the button if we're in development mode
 			setShowButton(true);
 		}
-	}, [articleId, isPreview, isDev, isBridgetCompatible]);
+	}, [articleId, isDev, isBridgetCompatible]);
 
 	const listenToArticleHandler = () => {
 		void getListenToArticleClient()

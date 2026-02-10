@@ -339,7 +339,7 @@ interface AppProps extends Props {
 export const StandardLayout = (props: WebProps | AppProps) => {
 	const { article, format, renderingTarget, serverTime } = props;
 	const {
-		config: { isPaidContent, host, hasSurveyAd, isPreview },
+		config: { isPaidContent, host, hasSurveyAd },
 		editionId,
 	} = article;
 
@@ -587,7 +587,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 													article.config.shortUrlId
 												}
 												pageId={article.config.pageId}
-												isPreview={isPreview}
 											></ArticleMetaApps>
 										</div>
 									</Hide>
@@ -674,7 +673,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											>
 												<ListenToArticle
 													articleId={article.pageId}
-													isPreview={isPreview}
 												/>
 											</Island>
 										</div>
