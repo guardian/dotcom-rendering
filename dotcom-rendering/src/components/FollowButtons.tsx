@@ -233,7 +233,7 @@ const notificationsTextSpanVariant = ({
 	<span css={notificationTextStylesVariant}>
 		{isFollowing
 			? 'Notifications on'
-			: `Turn on notifications to be alerted whenever ${
+			: `Receive an alert when ${
 					displayName ?? 'this author'
 			  } publishes an article`}
 	</span>
