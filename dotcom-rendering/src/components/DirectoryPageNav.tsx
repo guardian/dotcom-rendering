@@ -226,7 +226,7 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 
 	return (
 		<nav css={nav}>
-			<a href={config.title.id} css={largeLinkStyles}>
+			<a href={`/${config.title.id}`} css={largeLinkStyles}>
 				{config.title.label}
 			</a>
 			<ul css={list}>
