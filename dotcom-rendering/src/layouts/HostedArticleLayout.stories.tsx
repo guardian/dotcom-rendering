@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
-import { Labs as LabsFixture } from '../../fixtures/generated/fe-articles/Labs';
+import { hostedArticle } from '../../fixtures/manual/hostedArticle';
 import { enhanceArticleType } from '../types/article';
 import { HostedArticleLayout } from './HostedArticleLayout';
 
@@ -22,7 +22,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Apps = {
 	args: {
-		content: enhanceArticleType(LabsFixture, 'Apps'),
+		content: enhanceArticleType(hostedArticle, 'Apps'),
 		renderingTarget: 'Apps',
 	},
 	parameters: {
@@ -34,7 +34,7 @@ export const Apps = {
 
 export const Web = {
 	args: {
-		content: enhanceArticleType(LabsFixture, 'Web'),
+		content: enhanceArticleType(hostedArticle, 'Web'),
 		renderingTarget: 'Web',
 	},
 	parameters: {
