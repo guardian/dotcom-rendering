@@ -9,7 +9,7 @@ import { StraightLines } from '@guardian/source-development-kitchen/react-compon
 import sanitise from 'sanitize-html';
 import { palette } from '../palette';
 import { Avatar } from './Avatar';
-import { ContributorProfileFollow } from './ContributorProfileFollow.importable';
+import { ContributorFollowCard } from './ContributorFollowCard.importable';
 import { Island } from './Island';
 
 type Props = {
@@ -53,7 +53,7 @@ const contentStyles = css`
 const titleStyles = css`
 	${headlineBold17};
 	color: ${palette('--follow-accent-color')};
-	margin: 0 0 ${space[1]}px;
+	margin: 0 0 ${space[2]}px;
 `;
 
 const bioStyles = css`
@@ -94,7 +94,7 @@ const containsText = (html: string) => {
 	return htmlWithoutTags.length > 0;
 };
 
-export const ContributorProfileBlockComponent = ({
+export const ContributorFollowCardBlockComponent = ({
 	contributorId,
 	displayName,
 	avatarUrl,
@@ -129,7 +129,7 @@ export const ContributorProfileBlockComponent = ({
 			</div>
 			<div css={followButtonContainerStyles}>
 				<Island priority="feature" defer={{ until: 'visible' }}>
-					<ContributorProfileFollow
+					<ContributorFollowCard
 						contributorId={contributorId}
 						displayName={displayName}
 					/>

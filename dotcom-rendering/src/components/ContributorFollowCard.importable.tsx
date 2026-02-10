@@ -29,7 +29,7 @@ type Props = {
 	displayName: string;
 };
 
-export const ContributorProfileFollow = ({
+export const ContributorFollowCard = ({
 	contributorId,
 	displayName,
 }: Props) => {

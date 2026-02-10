@@ -1,14 +1,14 @@
 import { css } from '@emotion/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { ContributorProfileBlockComponent } from './ContributorProfileBlockComponent.importable';
+import { ContributorFollowCardBlockComponent } from './ContributorFollowCardBlockComponent.importable';
 
 export default {
-	component: ContributorProfileBlockComponent,
-	title: 'Components/ContributorProfileBlockComponent',
+	component: ContributorFollowCardBlockComponent,
+	title: 'Components/ContributorFollowCardBlockComponent',
 };
 
-const mockContributor = {
+const contributor = {
 	contributorId: 'profile/george-monbiot',
 	displayName: 'George Monbiot',
 	avatarUrl:
@@ -59,11 +59,11 @@ const allPillarsDecorator = splitTheme([
 
 const Wrapper = ({ withBio = true }: { withBio?: boolean }) => (
 	<div css={containerStyles}>
-		<ContributorProfileBlockComponent
-			contributorId={mockContributor.contributorId}
-			displayName={mockContributor.displayName}
-			avatarUrl={mockContributor.avatarUrl}
-			bio={withBio ? mockContributor.bio : undefined}
+		<ContributorFollowCardBlockComponent
+			contributorId={contributor.contributorId}
+			displayName={contributor.displayName}
+			avatarUrl={contributor.avatarUrl}
+			bio={withBio ? contributor.bio : undefined}
 		/>
 	</div>
 );

@@ -12,7 +12,7 @@ import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
 import { enhanceBlockquotes } from './enhance-blockquotes';
-import { enhanceContributorProfile } from './enhance-contributor-profile';
+import { enhanceContributorFollowCard } from './enhance-contributor-follow-card';
 import { enhanceDisclaimer } from './enhance-disclaimer';
 import { enhanceDividers } from './enhance-dividers';
 import { enhanceDots } from './enhance-dots';
@@ -99,7 +99,7 @@ export const enhanceElements =
 				options.renderingTarget,
 				options.shouldHideAds,
 			),
-			enhanceContributorProfile(
+			enhanceContributorFollowCard(
 				format,
 				options.renderingTarget,
 				options.tags,
