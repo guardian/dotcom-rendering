@@ -3,11 +3,13 @@ import { palette as sourcePalette } from '@guardian/source/foundations';
 import { HostedContentHeader } from '../components/HostedContentHeader';
 import { Section } from '../components/Section';
 import { grid } from '../grid';
+import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
 	renderingTarget: RenderingTarget;
+	content: Article;
 }
 
 interface WebProps extends Props {
@@ -48,7 +50,7 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 					<div
 						css={[grid.between('centre-column-start', 'grid-end')]}
 					>
-						Headline
+						{props.content.frontendData.headline}
 					</div>
 				</header>
 				<div css={[grid.container]}>
