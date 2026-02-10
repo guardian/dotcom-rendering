@@ -48,8 +48,6 @@ import { SupportingContent } from './SupportingContent';
 import { WaveForm } from './WaveForm';
 import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
 
-export type Position = 'inner' | 'outer' | 'none';
-
 const baseCardStyles = css`
 	display: flex;
 	flex-direction: column;
@@ -162,13 +160,6 @@ const overlayMaskGradientStyles = (angle: string) => css`
 		rgba(0, 0, 0, 0.9619) 56px,
 		rgb(0, 0, 0) 64px
 	);
-`;
-
-const contentOverlayStyles = css`
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
 `;
 
 const overlayStyles = css`
