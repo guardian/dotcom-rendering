@@ -288,14 +288,12 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.ContributorProfileBlockElement':
 			return (
-				<Island priority="feature" defer={{ until: 'visible' }}>
-					<ContributorProfileBlockComponent
-						contributorId={element.contributorId}
-						displayName={element.displayName}
-						avatarUrl={element.avatarUrl}
-						bio={element.bio}
-					/>
-				</Island>
+				<ContributorProfileBlockComponent
+					contributorId={element.contributorId}
+					displayName={element.displayName}
+					avatarUrl={element.avatarUrl}
+					bio={element.bio}
+				/>
 			);
 		case 'model.dotcomrendering.pageElements.DividerBlockElement':
 			return (

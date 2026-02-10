@@ -10,6 +10,7 @@ import sanitise from 'sanitize-html';
 import { palette } from '../palette';
 import { Avatar } from './Avatar';
 import { ContributorProfileFollow } from './ContributorProfileFollow.importable';
+import { Island } from './Island';
 
 type Props = {
 	contributorId: string;
@@ -100,7 +101,7 @@ export const ContributorProfileBlockComponent = ({
 	bio,
 }: Props) => {
 	const hasBio = bio && containsText(bio);
-	const sanitizedBio = hasBio ? sanitise(bio, {}) : undefined;
+	const sanitizedBio = hasBio ? sanitise(bio, {}) : {};
 
 	return (
 		<div css={containerStyles}>
@@ -127,10 +128,12 @@ export const ContributorProfileBlockComponent = ({
 				</div>
 			</div>
 			<div css={followButtonContainerStyles}>
-				<ContributorProfileFollow
-					contributorId={contributorId}
-					displayName={displayName}
-				/>
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<ContributorProfileFollow
+						contributorId={contributorId}
+						displayName={displayName}
+					/>
+				</Island>
 			</div>
 			<StraightLines count={1} />
 		</div>
