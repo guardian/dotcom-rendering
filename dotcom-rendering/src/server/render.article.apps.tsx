@@ -35,6 +35,7 @@ export const renderArticle = (
 		darkModeAvailable: true,
 		assetOrigin: ASSET_ORIGIN,
 		editionId: frontendData.editionId,
+		isDev: process.env.NODE_ENV === 'development',
 	};
 
 	const { html, extractedCss } = renderToStringWithEmotion(
