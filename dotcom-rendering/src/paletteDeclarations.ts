@@ -7431,6 +7431,14 @@ const paletteColours = {
 		light: linkKickerTextLight,
 		dark: linkKickerTextDark,
 	},
+	'--listen-to-article-button-background': {
+		light: followIconBackgroundLight,
+		dark: followIconBackgroundDark,
+	},
+	'--listen-to-article-button-fill': {
+		light: followIconFillLight,
+		dark: followIconFillDark,
+	},
 	'--listen-to-article-waveform': {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[38],

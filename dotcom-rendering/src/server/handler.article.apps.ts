@@ -24,6 +24,14 @@ export const handleAppsInteractive: RequestHandler = ({ body }, res) => {
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
+export const handleAppsHostedContent: RequestHandler = ({ body }, res) => {
+	const frontendData = validateAsFEArticle(body);
+	const article = enhanceArticleType(frontendData, 'Apps');
+	const { html, prefetchScripts } = renderArticle(article);
+
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
+};
+
 export const handleAppsBlocks: RequestHandler = ({ body }, res) => {
 	const {
 		blocks,

@@ -1426,6 +1426,9 @@
                 "FeatureDesign",
                 "FullPageInteractiveDesign",
                 "GalleryDesign",
+                "HostedArticleDesign",
+                "HostedGalleryDesign",
+                "HostedVideoDesign",
                 "InteractiveDesign",
                 "InterviewDesign",
                 "LetterDesign",
@@ -1741,6 +1744,10 @@
                         "link",
                         "src"
                     ]
+                },
+                "hostedCampaignColour": {
+                    "description": "Only applies for Hosted Content",
+                    "type": "string"
                 }
             },
             "required": [
