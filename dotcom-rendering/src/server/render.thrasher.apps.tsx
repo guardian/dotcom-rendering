@@ -3,9 +3,9 @@ import { FeastThrasher } from '../components/marketing/thrashers/FeastThrasher';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { rawFontsCss } from '../lib/fonts-css';
 
-type ThrasherName = 'Feast';
+type ThrasherName = 'feast';
 export const isThrasher = (name?: string): name is ThrasherName =>
-	name === 'Feast';
+	name === 'feast';
 
 // Minimal html page for the thrasher component
 const thrasherTemplate = (html: string, css: string): string => {
@@ -27,7 +27,7 @@ const thrasherTemplate = (html: string, css: string): string => {
 
 export const renderThrasher = (name: ThrasherName): { html: string } => {
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<div>{name === 'Feast' && <FeastThrasher />}</div>,
+		<div>{name === 'feast' && <FeastThrasher />}</div>,
 	);
 
 	const pageHtml = thrasherTemplate(html, extractedCss);

@@ -119,7 +119,7 @@ renderer.get('/CricketMatchPage/*url', handleCricketMatchPage);
 renderer.get('/FootballMatchSummaryPage/*url', handleFootballMatchPage);
 renderer.get('/HostedContent/*url', handleHostedContent);
 renderer.get('/AppsHostedContent/*url', handleAppsHostedContent);
-renderer.get('/AppsComponent/Thrasher/:name', handleAppsThrasher);
+renderer.get('/AppsComponent/thrasher/:name', handleAppsThrasher);
 
 // POST routes for running frontend locally
 renderer.post('/Article', handleArticle);
@@ -138,7 +138,7 @@ renderer.post('/CricketMatchPage', handleCricketMatchPage);
 renderer.post('/FootballMatchSummaryPage', handleFootballMatchPage);
 renderer.post('/HostedContent', handleHostedContent);
 renderer.post('/AppsHostedContent', handleAppsHostedContent);
-renderer.post('/AppsComponent/Thrasher/:name', handleAppsThrasher);
+renderer.post('/AppsComponent/thrasher/:name', handleAppsThrasher);
 
 renderer.get('/assets/rendered-items-assets', handleAppsAssets);
 

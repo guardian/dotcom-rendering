@@ -67,7 +67,7 @@ export const prodServer = (): void => {
 	app.post('/AppsBlocks', handleAppsBlocks);
 	app.post('/EditionsCrossword', handleEditionsCrossword);
 	app.post('/AppsHostedContent', handleAppsHostedContent);
-	app.post('/AppsComponent/Thrasher/:name', handleAppsThrasher);
+	app.post('/AppsComponent/thrasher/:name', handleAppsThrasher);
 
 	app.get('/assets/rendered-items-assets', handleAppsAssets);
 
