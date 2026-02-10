@@ -29,7 +29,7 @@
 		"aws-cdk-lib": "2.220.0",
 		"aws-lambda": "1.0.7",
 		"esbuild": "0.27.0",
-		"eslint": "9.39.1",
+		"eslint": "9.26.0",
 		"prettier": "3.0.3",
 		"rollup": "4.53.2",
 		"rollup-plugin-esbuild": "6.2.1",
