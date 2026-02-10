@@ -42,8 +42,17 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const LineupsStory = {
+export const WithLineup = {
 	args: {
 		matchStats,
+	},
+} satisfies Story;
+
+export const ComingSoon = {
+	args: {
+		matchStats: {
+			homeTeam: { ...matchStats.homeTeam, players: [] },
+			awayTeam: { ...matchStats.awayTeam, players: [] },
+		},
 	},
 } satisfies Story;

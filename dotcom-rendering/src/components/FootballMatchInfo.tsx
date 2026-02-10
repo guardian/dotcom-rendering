@@ -39,9 +39,6 @@ function teamHasStats({
 export const FootballMatchInfo = ({ matchStats, table }: Props) => {
 	const showStats =
 		teamHasStats(matchStats.homeTeam) && teamHasStats(matchStats.awayTeam);
-	const showLineups =
-		matchStats.homeTeam.players.length > 0 &&
-		matchStats.awayTeam.players.length > 0;
 	return (
 		<section aria-label={'match-info'} css={layoutCss}>
 			{showStats && (
@@ -106,7 +103,7 @@ export const FootballMatchInfo = ({ matchStats, table }: Props) => {
 					/>
 				</>
 			)}
-			{showLineups && <Lineups matchStats={matchStats} />}
+			<Lineups matchStats={matchStats} />
 			{table && <LeagueTable table={table} />}
 		</section>
 	);
