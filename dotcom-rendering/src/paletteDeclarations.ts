@@ -7084,6 +7084,18 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[20],
 	},
+	'--follow-accent-color': {
+		light: followIconFillLight,
+		dark: followIconFillLight,
+	},
+	'--follow-bio-text': {
+		light: () => sourcePalette.neutral[10],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--follow-bottom-border': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[97],
+	},
 	'--follow-button-border': {
 		light: followIconFillLight,
 		dark: followIconFillDark,
@@ -7092,10 +7104,6 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[73],
 		dark: () => sourcePalette.neutral[73],
 	},
-	'--follow-accent-color': {
-		light: followIconFillLight,
-		dark: followIconFillLight,
-	},
 	'--follow-button-text': {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[100],
@@ -7103,10 +7111,6 @@ const paletteColours = {
 	'--follow-button-text-not-following': {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[100],
-	},
-	'--follow-bio-text': {
-		light: () => sourcePalette.neutral[10],
-		dark: () => sourcePalette.neutral[86],
 	},
 	'--follow-icon-background': {
 		light: followIconBackgroundLight,
@@ -7123,10 +7127,6 @@ const paletteColours = {
 	'--follow-text': {
 		light: followTextLight,
 		dark: followTextDark,
-	},
-	'--follow-bottom-border': {
-		light: () => sourcePalette.neutral[97],
-		dark: () => sourcePalette.neutral[97],
 	},
 	'--football-competition-select-text': {
 		light: () => sourcePalette.neutral[7],

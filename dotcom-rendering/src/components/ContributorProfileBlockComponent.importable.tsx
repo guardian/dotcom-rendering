@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import {
 	from,
 	headlineBold17,
 	space,
 	textEgyptian14,
 } from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import sanitise from 'sanitize-html';
 import { palette } from '../palette';
 import { Avatar } from './Avatar';
@@ -100,8 +100,8 @@ export const ContributorProfileBlockComponent = ({
 	avatarUrl,
 	bio,
 }: Props) => {
-	const hasBio = bio && containsText(bio);
-	const sanitizedBio = hasBio ? sanitise(bio, {}) : {};
+	const hasBio = bio !== undefined && containsText(bio);
+	const sanitizedBio = hasBio ? sanitise(bio, {}) : undefined;
 
 	return (
 		<div css={containerStyles}>

@@ -6,9 +6,9 @@ import {
 	SvgNotificationsOn,
 	SvgPlus,
 } from '@guardian/source/react-components';
+import { ToggleSwitch } from '@guardian/source-development-kitchen/react-components';
 import type { ReactNode } from 'react';
 import { palette } from '../palette';
-import { ToggleSwitch } from '@guardian/source-development-kitchen/react-components';
 
 type IconProps = {
 	isFollowing?: boolean;
