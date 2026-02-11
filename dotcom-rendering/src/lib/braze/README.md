@@ -96,6 +96,36 @@ Braze enforces a "Token Bucket" algorithm for refreshing banners (re-checking el
 -   **Refill**: 1 token every 3 minutes.
 -   **Implementation**: The `refreshBanners()` function creates a race condition with a timeout. If the network is slow or tokens are empty, DCR proceeds without blocking the render.
 
+### 6. Wrapper Mode & Styling
+
+To support more complex designs while maintaining consistency, the system supports a **"Wrapper Mode"**.
+
+-   **Enabled via**: `wrapperModeEnabled` (Boolean) Key-Value pair.
+-   **Behavior**: When enabled, DCR applies specific styles to the **container** holding the Braze iframe, including:
+    -   `max-height: 65svh` (prevents banners from taking over the full screen).
+    -   `border-top: 1px solid black` (provides visual separation).
+    -   Dynamic Background Color (see below).
+
+#### Automatic Color Contrast
+
+When providing a background color in Wrapper Mode, DCR automatically calculates the optimal foreground (text/icon) color to ensure accessibility standards are met.
+
+-   **Input**: `wrapperModeBackgroundColor` (Hex string).
+-   **Algorithm**: Calculates perceived brightness using the formula `(r * 299 + g * 587 + b * 114) / 1000`.
+-   **Result**: If brightness > 128, the foreground is **Black**. Otherwise, it is **White**.
+
+### 7. Configuration (Key-Value Pairs)
+
+The system automatically reads specific Key-Value pairs from the Braze Campaign to configure the banner wrapper.
+
+| Key                          | Type    | Description                                                                                |
+| :--------------------------- | :------ | :----------------------------------------------------------------------------------------- |
+| `minHeight`                  | String  | Sets the CSS `min-height` of the container (e.g., "300px") to minimize layout shift (CLS). |
+| `wrapperModeEnabled`         | Boolean | Activates Wrapper Mode (see above).                                                        |
+| `wrapperModeBackgroundColor` | String  | Sets the background color of the wrapper and triggers the auto-contrast calculation.       |
+
+_Custom keys can also be retrieved by the banner creative using the `BRAZE_BANNERS_SYSTEM:GET_SETTINGS_PROPERTY_VALUE` message._
+
 ## Communication Protocol
 
 The banner uses a `postMessage` protocol to interact with the host DCR page.
