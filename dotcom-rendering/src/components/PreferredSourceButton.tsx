@@ -32,13 +32,16 @@ export const PreferredSourceButton = () => (
 				height: 'unset',
 				padding: '4px 8px 6px 6px',
 				'.src-button-space': {
-					flexBasis: space[2],
+					flexBasis: 2,
 					flexShrink: 0,
 				},
 			},
 			[from.wide]: {
 				padding: '10px 12px',
 				height: 36,
+				'.src-button-space': {
+					flexBasis: space[2],
+				},
 			},
 		})}
 		theme={{
