@@ -1,6 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
 import { hostedGallery } from '../../fixtures/manual/hostedGallery';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+} from '../lib/articleFormat';
 import { enhanceArticleType } from '../types/article';
 import { HostedGalleryLayout } from './HostedGalleryLayout';
 
@@ -23,6 +28,11 @@ type Story = StoryObj<typeof meta>;
 export const Apps = {
 	args: {
 		content: enhanceArticleType(hostedGallery, 'Apps'),
+		format: {
+			theme: ArticleSpecial.Labs,
+			design: ArticleDesign.HostedArticle,
+			display: ArticleDisplay.Standard,
+		},
 		renderingTarget: 'Apps',
 	},
 	parameters: {
@@ -35,6 +45,11 @@ export const Apps = {
 export const Web = {
 	args: {
 		content: enhanceArticleType(hostedGallery, 'Web'),
+		format: {
+			theme: ArticleSpecial.Labs,
+			design: ArticleDesign.HostedArticle,
+			display: ArticleDisplay.Standard,
+		},
 		renderingTarget: 'Web',
 	},
 	parameters: {
