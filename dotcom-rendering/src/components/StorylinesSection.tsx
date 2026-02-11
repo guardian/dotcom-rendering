@@ -1,11 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	between,
-	from,
-	space,
-	textSans14,
-	until,
-} from '@guardian/source/foundations';
+import { between, from, space, textSans14 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { type EditionId, isNetworkFront } from '../lib/edition';
@@ -18,6 +12,7 @@ import { Footer } from './ExpandableAtom/Footer';
 import { FrontPagination } from './FrontPagination';
 import { FrontSectionTitle } from './FrontSectionTitle';
 import { ShowHideButton } from './ShowHideButton';
+import { SvgBetaLabel } from './SvgBetaLabel';
 
 type Props = {
 	/** This text will be used as the h2 shown in the left column for the section */
@@ -265,20 +260,14 @@ const flexRowStyles = css`
 	justify-content: space-between;
 `;
 
-const sectionHeadlineUntilLeftCol = (isOpinion: boolean) => css`
+const sectionHeadlineUntilLeftCol = css`
 	grid-row: headline;
 	grid-column: title;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
+	justify-content: space-between;
 
 	${between.tablet.and.leftCol} {
-		${flexRowStyles}
-	}
-
-	${isOpinion && until.mobileLandscape} {
-		flex-direction: column;
-	}
-	${isOpinion && between.mobileLandscape.and.tablet} {
 		${flexRowStyles}
 	}
 `;
@@ -580,13 +569,7 @@ export const StorylinesSection = ({
 					}}
 				/>
 
-				<div
-					css={[
-						sectionHeadlineUntilLeftCol(
-							title?.toLowerCase() === 'opinion',
-						),
-					]}
-				>
+				<div css={[sectionHeadlineUntilLeftCol]}>
 					<FrontSectionTitle
 						title={
 							<>
@@ -668,6 +651,15 @@ export const StorylinesSection = ({
 												}
 												storylinesStyle={true}
 											></Footer>
+											<div
+												css={css`
+													display: inline-block;
+													vertical-align: middle;
+													width: 75px;
+												`}
+											>
+												<SvgBetaLabel />
+											</div>
 										</div>
 									</Hide>
 								</div>
@@ -676,6 +668,18 @@ export const StorylinesSection = ({
 						sectionId={sectionId}
 						collectionBranding={undefined}
 					/>
+					<Hide from="leftCol">
+						<div
+							css={css`
+								display: flex;
+								align-items: center;
+								height: 100%;
+								width: 48px;
+							`}
+						>
+							<SvgBetaLabel />
+						</div>
+					</Hide>
 				</div>
 
 				{(isToggleable || hasNavigationButtons) && (

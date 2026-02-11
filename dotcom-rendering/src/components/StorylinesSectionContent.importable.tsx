@@ -8,6 +8,7 @@ import {
 	textSans17,
 	textSans20,
 	textSansBold34,
+	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { useState } from 'react';
@@ -28,59 +29,29 @@ type StorylinesSectionProps = {
 	containerId?: string;
 	editionId: EditionId;
 	storylinesContent: StorylinesContent;
-	pillar?: string;
 	pagination?: TagPagePagination;
 	likeHandler?: () => void;
 	dislikeHandler?: () => void;
 };
 
-// AIStorylines: this would be better handled in paletteDeclarations by creating a new css variable if we keep this feature.
-const setSelectedStorylineColour = (pillar?: string) => {
-	switch (pillar?.toLowerCase()) {
-		case 'news':
-			return sourcePalette.news[400];
-		case 'opinion':
-			return sourcePalette.opinion[400];
-		case 'sport':
-			return sourcePalette.sport[400];
-		case 'culture':
-			return sourcePalette.culture[400];
-		case 'lifestyle':
-			return sourcePalette.lifestyle[400];
-		default:
-			return sourcePalette.news[400];
-	}
-};
-
-const selectedTitleStyles = (selectedStorylineColour: string) => css`
+const selectedTitleStyles = css`
 	${textSansBold34}
-	color: ${selectedStorylineColour};
-	margin-bottom: ${space[4]}px;
-	margin-top: ${space[2]}px;
-	padding-left: 10px; /* aligns with the headlines of the stories below */
+	color: ${sourcePalette.brand[400]};
+	margin-bottom: ${space[2]}px;
+	${until.tablet} {
+		line-height: 1.2;
+		padding-left: 0px;
+	}
+	${from.tablet} {
+		line-height: 1.3;
+		padding-left: 10px; /* aligns with the headlines of the stories below */
+	}
 `;
 
-const setCategoryColour = (pillar?: string) => {
-	switch (pillar?.toLowerCase()) {
-		case 'news':
-			return sourcePalette.news[300];
-		case 'opinion':
-			return sourcePalette.opinion[400];
-		case 'sport':
-			return sourcePalette.sport[300];
-		case 'culture':
-			return sourcePalette.culture[300];
-		case 'lifestyle':
-			return sourcePalette.lifestyle[300];
-		default:
-			return sourcePalette.news[300];
-	}
-};
-
-const categoryTitleCss = (pillarColour: string) => css`
+const categoryTitleCss = css`
 	${textSans20};
 	font-weight: 700;
-	color: ${pillarColour};
+	color: ${sourcePalette.brand[400]};
 	margin: ${space[2]}px 0;
 	padding: ${space[1]}px 0;
 	${from.tablet} {
@@ -101,10 +72,10 @@ const tabsContainerStyles = css`
 	display: flex;
 	width: 100%;
 	${from.wide} {
-		width: 110%;
-	} /* bit hacky, but looks a touch better on wide. */
+		width: 110%; /* bit hacky, but looks a touch better on wide. */
+		margin-bottom: ${space[2]}px;
+	}
 	align-items: stretch; /* Makes all tabs the same height */
-	margin-bottom: ${space[6]}px;
 	margin-left: -${space[2]}px;
 `;
 
@@ -196,7 +167,6 @@ export const StorylinesSectionContent = ({
 	containerId,
 	storylinesContent,
 	editionId,
-	pillar,
 	pagination,
 	dislikeHandler,
 	likeHandler,
@@ -215,10 +185,6 @@ export const StorylinesSectionContent = ({
 	const activeStoryline = parsedStorylines.find(
 		(s) => s.id === activeStorylineId,
 	);
-
-	const selectedStorylineColour = setSelectedStorylineColour(pillar);
-
-	const categoryColour = setCategoryColour(pillar);
 
 	function handleStorylineChange(newStorylineId: string) {
 		const currentId = activeStorylineId;
@@ -291,18 +257,14 @@ export const StorylinesSectionContent = ({
 				</div>
 				{/* Active storyline title */}
 				{activeStoryline && (
-					<div css={selectedTitleStyles(selectedStorylineColour)}>
-						{activeStoryline.title}
-					</div>
+					<div css={selectedTitleStyles}>{activeStoryline.title}</div>
 				)}
 				{/* Content by categories */}
 				<div css={contentStyles}>
 					{activeStoryline?.categories.map((category, idx) => (
 						<div key={idx} css={contentCss}>
 							{category.title !== 'Key Stories' && (
-								<h2 css={categoryTitleCss(categoryColour)}>
-									{category.title}
-								</h2>
+								<h2 css={categoryTitleCss}>{category.title}</h2>
 							)}
 							<FlexibleGeneral
 								groupedTrails={category.groupedTrails}
