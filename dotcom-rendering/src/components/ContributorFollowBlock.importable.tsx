@@ -108,6 +108,7 @@ const notificationIconStyles = css`
 
 	svg {
 		margin-top: -${space[1] - 1}px;
+		fill: currentColor;
 	}
 `;
 const notificationLabelStyles = css`
@@ -328,7 +329,10 @@ export const ContributorFollowBlock = ({
 			/>
 			{isFollowingContributor && (
 				<div>
-					<StraightLines count={1} />
+					<StraightLines
+						count={1}
+						color={palette('--contributor-follow-straight-lines')}
+					/>
 					<NotificationAlert
 						isFollowing={isFollowingNotifications ?? false}
 						onClickHandler={

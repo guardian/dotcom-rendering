@@ -105,7 +105,10 @@ export const ContributorFollowBlockComponent = ({
 
 	return (
 		<div css={contributorBlockStyles}>
-			<StraightLines count={4} />
+			<StraightLines
+				count={4}
+				color={palette('--contributor-follow-straight-lines')}
+			/>
 			<div css={topRowStyles}>
 				{!!avatarUrl && (
 					<div css={avatarContainerStyles}>
@@ -135,7 +138,10 @@ export const ContributorFollowBlockComponent = ({
 					/>
 				</Island>
 			</div>
-			<StraightLines count={1} />
+			<StraightLines
+				count={1}
+				color={palette('--contributor-follow-straight-lines')}
+			/>
 		</div>
 	);
 };

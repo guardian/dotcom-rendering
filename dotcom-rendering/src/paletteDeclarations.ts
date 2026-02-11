@@ -7094,11 +7094,11 @@ const paletteColours = {
 	},
 	'--contributor-follow-button-border': {
 		light: followIconFillLight,
-		dark: followIconFillDark,
+		dark: () => sourcePalette.neutral[20],
 	},
 	'--contributor-follow-button-border-following': {
 		light: () => sourcePalette.neutral[73],
-		dark: () => sourcePalette.neutral[73],
+		dark: () => sourcePalette.neutral[20],
 	},
 	'--contributor-follow-button-text': {
 		light: () => sourcePalette.neutral[7],
@@ -7107,6 +7107,10 @@ const paletteColours = {
 	'--contributor-follow-button-text-not-following': {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[100],
+	},
+	'--contributor-follow-straight-lines': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[38],
 	},
 	'--follow-icon-background': {
 		light: followIconBackgroundLight,
