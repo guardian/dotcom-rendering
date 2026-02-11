@@ -502,9 +502,9 @@ export const Card = ({
 		isOnwardContent && onwardsSource === 'more-galleries';
 
 	/**
--	 * Media cards have contrasting background colours. We add additional
-* padding to these cards to keep the text readable.
--     */
+	 * Media cards have contrasting background colours. We add additional
+	 * padding to these cards to keep the text readable.
+	 */
 	const isMediaCardOrNewsletter = isMediaCard(format) || isNewsletter;
 
 	const media = getMedia({
@@ -1226,6 +1226,7 @@ export const Card = ({
 											? mainMedia
 											: undefined
 									}
+									isNewsletter={isNewsletter}
 								/>
 							)}
 							{showLivePlayable &&
