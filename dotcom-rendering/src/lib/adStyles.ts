@@ -121,6 +121,8 @@ const spacefinderAdSlotContainerStyles = css`
 		text-align: center;
 		display: flex;
 		justify-content: center;
+		max-width: 620px;
+		margin-left: 0;
 
 		${from.tablet} {
 			background-color: ${palette('--ad-background')};
@@ -158,12 +160,17 @@ const spacefinderAdSlotContainerStyles = css`
 	/*
 		To push inline2+ on desktop to the right column
 	*/
-	.ad-slot-container--offset-right {
+	.ad-slot-container--right-column {
 		${from.desktop} {
 			float: right;
 			max-width: 300px;
-			margin-right: -330px;
 			background-color: transparent;
+		}
+	}
+
+	.ad-slot-container--offset-right {
+		${from.desktop} {
+			margin-right: -330px;
 		}
 
 		${from.leftCol} {
