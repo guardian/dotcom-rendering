@@ -82,18 +82,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "webex-preferred-source",
-		description:
-			"Testing the Preferred Source on Google button in the meta section of articles",
-		owners: ["dotcom.platform@theguardian.com"],
-		expirationDate: "2026-02-25",
-		type: "server",
-		status: "ON",
-		audienceSize: 20 / 100,
-		audienceSpace: "A",
-		groups: ["control", "prefer", "add"],
-	},
-	{
 		name: "commercial-mobile-inline1-halfpage",
 		description:
 			"To measure impact (RPM) and CLS of adding halfPage as an additional size option to mobile inline1 ad slot",

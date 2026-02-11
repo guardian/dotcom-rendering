@@ -41,7 +41,7 @@ const configs = [
 			'sport/ng-interactive/2026/feb/04/winter-olympics-results-milano-cortina-2026',
 			'sport/ng-interactive/2026/feb/04/winter-olympics-2026-latest-medal-table-milano-cortina',
 		],
-		tagIds: ['sport/winter-olympics-2026'],
+		tagIds: [],
 		textColor: palette.neutral[7],
 		backgroundColor: '#CCCCCC',
 		title: {

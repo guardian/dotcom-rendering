@@ -5,17 +5,14 @@ import {
 	space,
 	textSansBold12,
 } from '@guardian/source/foundations';
-import { SvgCamera } from '@guardian/source/react-components';
-import { Pill } from '../../../components/Pill';
-import { SvgMediaControlsPlay } from '../../../components/SvgMediaControlsPlay';
 import { type ArticleFormat, ArticleSpecial } from '../../../lib/articleFormat';
-import { secondsToDuration } from '../../../lib/formatTime';
+import type { MainMedia } from '../../../types/mainMedia';
+import { CardPill } from '../../CardPill';
 
 const contentStyles = css`
 	margin-top: auto;
-	padding-top: ${space[1]}px;
 	display: flex;
-	justify-content: 'flex-start';
+	justify-content: flex-start;
 	width: fit-content;
 	align-items: center;
 	${textSansBold12}
@@ -40,6 +37,10 @@ const contentStyles = css`
 	}
 `;
 
+const contentTopPaddingStyles = css`
+	padding-top: ${space[1]}px;
+`;
+
 const reserveSpaceStyles = (mobile: boolean, desktop: boolean) => css`
 	min-height: ${mobile ? '14px' : 0};
 
@@ -52,89 +53,66 @@ const labStyles = css`
 	margin-top: ${space[1]}px;
 `;
 
-type MainMedia =
-	| { type: 'YoutubeVideo'; duration: number }
-	| { type: 'SelfHostedVideo'; duration: number }
-	| { type: 'Audio'; duration: string }
-	| { type: 'Gallery'; count: string };
-
 type Props = {
 	format: ArticleFormat;
-	showLivePlayable: boolean;
 	age?: JSX.Element;
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
 	mainMedia?: MainMedia;
 	isNewsletter?: boolean;
 	shouldReserveSpace?: { mobile: boolean; desktop: boolean };
+	isStorylines?: boolean;
 };
 
 export const CardFooter = ({
 	format,
-	showLivePlayable,
 	age,
 	commentCount,
 	cardBranding,
 	mainMedia,
 	isNewsletter,
 	shouldReserveSpace,
+	isStorylines,
 }: Props) => {
-	if (showLivePlayable) return null;
+	const shouldShowBranding =
+		format.theme === ArticleSpecial.Labs && !!cardBranding;
 
-	if (format.theme === ArticleSpecial.Labs && cardBranding) {
+	const shouldShowPill =
+		mainMedia?.type === 'YoutubeVideo' ||
+		mainMedia?.type === 'Audio' ||
+		mainMedia?.type === 'Gallery' ||
+		isNewsletter;
+
+	if (shouldShowPill) {
+		return (
+			<footer css={contentStyles}>
+				{shouldShowBranding && cardBranding}
+
+				{/**
+				 * Usually, we either display the pill or the footer,
+				 * but if the card appears in the storylines section on tag pages
+				 * then we do want to display the date on these cards as well as the media pill.
+				 * */}
+				{isStorylines && age}
+
+				<CardPill
+					mainMedia={mainMedia}
+					isNewsletter={isNewsletter}
+					format={format}
+				/>
+			</footer>
+		);
+	}
+
+	if (shouldShowBranding) {
 		return <footer css={labStyles}>{cardBranding}</footer>;
-	}
-
-	if (mainMedia?.type === 'YoutubeVideo') {
-		return (
-			<footer css={contentStyles}>
-				<Pill
-					content={
-						<time>{secondsToDuration(mainMedia.duration)}</time>
-					}
-					prefix="Video"
-					icon={<SvgMediaControlsPlay width={18} />}
-				/>
-			</footer>
-		);
-	}
-
-	if (mainMedia?.type === 'Audio') {
-		return (
-			<footer css={contentStyles}>
-				<Pill
-					content={<time>{mainMedia.duration}</time>}
-					prefix="Podcast"
-					icon={<SvgMediaControlsPlay width={18} />}
-				/>
-			</footer>
-		);
-	}
-
-	if (mainMedia?.type === 'Gallery') {
-		return (
-			<footer css={contentStyles}>
-				<Pill
-					content={mainMedia.count}
-					prefix="Gallery"
-					icon={<SvgCamera />}
-				/>
-			</footer>
-		);
-	}
-
-	if (isNewsletter) {
-		return (
-			<footer css={contentStyles}>
-				<Pill content="Newsletter" />
-			</footer>
-		);
 	}
 
 	return (
 		<footer
 			css={[
 				contentStyles,
+				contentTopPaddingStyles,
 				shouldReserveSpace &&
 					reserveSpaceStyles(
 						shouldReserveSpace.mobile,
