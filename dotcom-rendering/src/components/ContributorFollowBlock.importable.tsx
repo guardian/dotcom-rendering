@@ -154,7 +154,7 @@ type CardContainerProps = {
 	displayName: string;
 };
 
-export const ContributorFollowCard = ({
+export const ContributorFollowBlock = ({
 	contributorId,
 	displayName,
 }: CardContainerProps) => {

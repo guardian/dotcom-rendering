@@ -9,7 +9,7 @@ import { CartoonComponent } from '../components/CartoonComponent';
 import { ChartAtom } from '../components/ChartAtom.importable';
 import { CodeBlockComponent } from '../components/CodeBlockComponent';
 import { CommentBlockComponent } from '../components/CommentBlockComponent';
-import { ContributorFollowCardBlockComponent } from '../components/ContributorFollowCardBlockComponent.importable';
+import { ContributorFollowBlockComponent } from '../components/ContributorFollowBlockComponent.importable';
 import { CrosswordComponent } from '../components/CrosswordComponent.importable';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
@@ -286,9 +286,9 @@ export const renderElement = ({
 					permalink={element.permalink}
 				/>
 			);
-		case 'model.dotcomrendering.pageElements.ContributorFollowCardBlockElement':
+		case 'model.dotcomrendering.pageElements.ContributorFollowBlockElement':
 			return (
-				<ContributorFollowCardBlockComponent
+				<ContributorFollowBlockComponent
 					contributorId={element.contributorId}
 					displayName={element.displayName}
 					avatarUrl={element.avatarUrl}

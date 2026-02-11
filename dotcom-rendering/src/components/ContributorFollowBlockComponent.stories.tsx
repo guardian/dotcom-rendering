@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { ContributorFollowCardBlockComponent } from './ContributorFollowCardBlockComponent.importable';
+import { ContributorFollowBlockComponent } from './ContributorFollowBlockComponent.importable';
 
 export default {
-	component: ContributorFollowCardBlockComponent,
-	title: 'Components/ContributorFollowCardBlockComponent',
+	component: ContributorFollowBlockComponent,
+	title: 'Components/ContributorFollowBlockComponent',
 };
 
 const contributor = {
@@ -59,7 +59,7 @@ const allPillarsDecorator = splitTheme([
 
 const Wrapper = ({ withBio = true }: { withBio?: boolean }) => (
 	<div css={containerStyles}>
-		<ContributorFollowCardBlockComponent
+		<ContributorFollowBlockComponent
 			contributorId={contributor.contributorId}
 			displayName={contributor.displayName}
 			avatarUrl={contributor.avatarUrl}

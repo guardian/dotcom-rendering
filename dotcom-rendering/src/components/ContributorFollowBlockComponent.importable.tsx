@@ -9,7 +9,7 @@ import { StraightLines } from '@guardian/source-development-kitchen/react-compon
 import sanitise from 'sanitize-html';
 import { palette } from '../palette';
 import { Avatar } from './Avatar';
-import { ContributorFollowCard } from './ContributorFollowCard.importable';
+import { ContributorFollowBlock } from './ContributorFollowBlock.importable';
 import { Island } from './Island';
 
 type Props = {
@@ -94,7 +94,7 @@ const containsText = (html: string) => {
 	return htmlWithoutTags.length > 0;
 };
 
-export const ContributorFollowCardBlockComponent = ({
+export const ContributorFollowBlockComponent = ({
 	contributorId,
 	displayName,
 	avatarUrl,
@@ -129,7 +129,7 @@ export const ContributorFollowCardBlockComponent = ({
 			</div>
 			<div css={followButtonContainerStyles}>
 				<Island priority="feature" defer={{ until: 'visible' }}>
-					<ContributorFollowCard
+					<ContributorFollowBlock
 						contributorId={contributorId}
 						displayName={displayName}
 					/>

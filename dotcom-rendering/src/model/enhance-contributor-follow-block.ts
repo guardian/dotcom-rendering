@@ -1,7 +1,7 @@
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { getSoleContributor } from '../lib/byline';
 import type {
-	ContributorFollowCardBlockElement,
+	ContributorFollowBlockElement,
 	FEElement,
 } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -12,7 +12,7 @@ const PARAGRAPH_POSITION = 4;
 const isParagraph = (element: FEElement): boolean =>
 	element._type === 'model.dotcomrendering.pageElements.TextBlockElement';
 
-export const enhanceContributorFollowCard =
+export const enhanceContributorFollowBlock =
 	(
 		format: ArticleFormat,
 		renderingTarget: RenderingTarget,
@@ -51,19 +51,18 @@ export const enhanceContributorFollowCard =
 			insertPosition = elements.length;
 		}
 
-		const contributorFollowCardElement: ContributorFollowCardBlockElement =
-			{
-				_type: 'model.dotcomrendering.pageElements.ContributorFollowCardBlockElement',
-				elementId: `contributor-profile-${soleContributor.id}`,
-				contributorId: soleContributor.id,
-				displayName: soleContributor.title,
-				avatarUrl: soleContributor.bylineLargeImageUrl,
-				bio: soleContributor.bio,
-			};
+		const contributorFollowBlockElement: ContributorFollowBlockElement = {
+			_type: 'model.dotcomrendering.pageElements.ContributorFollowBlockElement',
+			elementId: `contributor-profile-${soleContributor.id}`,
+			contributorId: soleContributor.id,
+			displayName: soleContributor.title,
+			avatarUrl: soleContributor.bylineLargeImageUrl,
+			bio: soleContributor.bio,
+		};
 
 		return [
 			...elements.slice(0, insertPosition),
-			contributorFollowCardElement,
+			contributorFollowBlockElement,
 			...elements.slice(insertPosition),
 		];
 	};

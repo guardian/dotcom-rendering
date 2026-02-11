@@ -606,8 +606,8 @@ export interface TextBlockElement {
 	html: string;
 }
 
-export interface ContributorFollowCardBlockElement {
-	_type: 'model.dotcomrendering.pageElements.ContributorFollowCardBlockElement';
+export interface ContributorFollowBlockElement {
+	_type: 'model.dotcomrendering.pageElements.ContributorFollowBlockElement';
 	elementId: string;
 	contributorId: string;
 	displayName: string;
@@ -841,7 +841,7 @@ export type FEElement =
 	| CodeBlockElement
 	| CommentBlockElement
 	| ContentAtomBlockElement
-	| ContributorFollowCardBlockElement
+	| ContributorFollowBlockElement
 	| DisclaimerBlockElement
 	| DividerBlockElement
 	| DocumentBlockElement
