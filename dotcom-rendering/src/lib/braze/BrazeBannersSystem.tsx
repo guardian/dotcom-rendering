@@ -399,7 +399,7 @@ export const BrazeBannersSystemDisplay = ({
 	};
 
 	const subscribeToNewsletter = useCallback(
-		async (newsletterId: string) => {
+		async (newsletterId: string): Promise<boolean> => {
 			if (authStatus.kind === 'SignedIn') {
 				const options = getOptionsHeaders(authStatus);
 
@@ -417,6 +417,8 @@ export const BrazeBannersSystemDisplay = ({
 						'Successfully subscribed to newsletter:',
 						newsletterId,
 					);
+
+					return true;
 				} catch (error) {
 					brazeBannersSystemLogger.warn(
 						'Error subscribing to newsletter:',
@@ -424,6 +426,7 @@ export const BrazeBannersSystemDisplay = ({
 					);
 				}
 			}
+			return false;
 		},
 		[authStatus, idApiUrl],
 	);
@@ -548,7 +551,16 @@ export const BrazeBannersSystemDisplay = ({
 				case BrazeBannersSystemMessageType.NewsletterSubscribe:
 					const { newsletterId } = event.data;
 					if (newsletterId) {
-						void subscribeToNewsletter(newsletterId);
+						void subscribeToNewsletter(newsletterId).then(
+							(success) => {
+								postMessageToBrazeBanner(
+									BrazeBannersSystemMessageType.NewsletterSubscribe,
+									{
+										success,
+									},
+								);
+							},
+						);
 					}
 					break;
 				case BrazeBannersSystemMessageType.GetAllSettingsPropertyValues:
