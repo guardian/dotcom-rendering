@@ -81,6 +81,7 @@ export const CardFooter = ({
 		mainMedia?.type === 'YoutubeVideo' ||
 		mainMedia?.type === 'Audio' ||
 		mainMedia?.type === 'Gallery' ||
+		mainMedia?.type === 'SelfHostedVideo' ||
 		isNewsletter;
 
 	if (shouldShowPill) {
