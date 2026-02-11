@@ -170,6 +170,7 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 					return (
 						<HostedArticleLayout
 							content={article}
+							format={format}
 							renderingTarget={renderingTarget}
 						/>
 					);
@@ -177,6 +178,7 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 					return (
 						<HostedGalleryLayout
 							content={article}
+							format={format}
 							renderingTarget={renderingTarget}
 						/>
 					);
@@ -365,6 +367,7 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 					return (
 						<HostedArticleLayout
 							content={article}
+							format={format}
 							renderingTarget={renderingTarget}
 						/>
 					);
@@ -372,6 +375,7 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 					return (
 						<HostedGalleryLayout
 							content={article}
+							format={format}
 							renderingTarget={renderingTarget}
 						/>
 					);

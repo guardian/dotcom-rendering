@@ -9,18 +9,15 @@ import { Island } from '../components/Island';
 import { Section } from '../components/Section';
 import { ShareButton } from '../components/ShareButton.importable';
 import { grid } from '../grid';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-} from '../lib/articleFormat';
+import type { ArticleFormat } from '../lib/articleFormat';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
-	renderingTarget: RenderingTarget;
 	content: Article;
+	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
 }
 
 interface WebProps extends Props {
@@ -54,8 +51,9 @@ const shareButtonWrapper = css`
 export const HostedArticleLayout = (props: WebProps | AppProps) => {
 	const {
 		content: {
-			frontendData: { headline, standfirst },
+			frontendData: { headline, standfirst, pageId, webTitle },
 		},
+		format,
 	} = props;
 
 	return (
@@ -117,15 +115,9 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 									defer={{ until: 'visible' }}
 								>
 									<ShareButton
-										pageId={'replace with actual pageId'}
-										webTitle={
-											'replace with actual webTitle'
-										}
-										format={{
-											theme: ArticleSpecial.Labs,
-											design: ArticleDesign.Standard,
-											display: ArticleDisplay.Standard,
-										}} // replace with Hosted Content format if there is one
+										pageId={pageId}
+										webTitle={webTitle}
+										format={format}
 										context="ArticleMeta"
 									/>
 								</Island>

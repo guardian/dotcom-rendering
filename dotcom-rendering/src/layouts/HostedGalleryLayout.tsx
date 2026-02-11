@@ -1,15 +1,23 @@
 import { css } from '@emotion/react';
-import { palette as sourcePalette } from '@guardian/source/foundations';
+import {
+	from,
+	palette as sourcePalette,
+	space,
+} from '@guardian/source/foundations';
 import { HostedContentHeader } from '../components/HostedContentHeader';
+import { Island } from '../components/Island';
 import { Section } from '../components/Section';
+import { ShareButton } from '../components/ShareButton.importable';
 import { grid } from '../grid';
+import type { ArticleFormat } from '../lib/articleFormat';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
-	renderingTarget: RenderingTarget;
 	content: Article;
+	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
 }
 
 interface WebProps extends Props {
@@ -24,7 +32,21 @@ const border = css`
 	border: 1px solid black;
 `;
 
+const metaFlex = css`
+	margin-bottom: ${space[3]}px;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+`;
+
 export const HostedGalleryLayout = (props: WebProps | AppProps) => {
+	const {
+		content: {
+			frontendData: { pageId, webTitle },
+		},
+		format,
+	} = props;
+
 	return (
 		<>
 			{props.renderingTarget === 'Web' ? (
@@ -59,8 +81,38 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 						<div css={border}>Onward</div>
 					</article>
 				</div>
-				<div css={[grid.container, border]}>
-					<div css={[grid.column.all]}>Footer</div>
+				<div
+					css={[
+						grid.container,
+						border,
+						css`
+							padding: ${space[2]}px;
+
+							${from.desktop} {
+								padding: ${space[4]}px ${space[8]}px;
+							}
+						`,
+					]}
+				>
+					<div css={[grid.column.all]}>
+						<div css={[grid.column.left]}>
+							<div data-print-layout="hide" css={metaFlex}>
+								{props.renderingTarget === 'Web' && (
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
+										<ShareButton
+											pageId={pageId}
+											webTitle={webTitle}
+											format={format}
+											context="ArticleMeta"
+										/>
+									</Island>
+								)}
+							</div>
+						</div>
+					</div>
 				</div>
 			</main>
 		</>
