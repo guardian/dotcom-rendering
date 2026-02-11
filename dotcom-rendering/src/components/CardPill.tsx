@@ -48,7 +48,8 @@ export const CardPill = ({
 				/>
 			);
 		case 'YoutubeVideo':
-			if (ArticleDesign.Video !== format.design) return null;
+			if (format.design !== ArticleDesign.Video) return null;
+
 			if (mainMedia.isLive) {
 				return (
 					<Pill
@@ -94,7 +95,5 @@ export const CardPill = ({
 				default:
 					return null;
 			}
-		default:
-			return null;
 	}
 };
