@@ -5,6 +5,7 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
+import { CallToActionAtom } from '../components/CallToActionAtom';
 import { Caption } from '../components/Caption';
 import { HostedContentHeader } from '../components/HostedContentHeader';
 import { Island } from '../components/Island';
@@ -206,6 +207,16 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						<div css={[grid.column.all]}>Footer</div>
 					</div>
 				</article>
+				<div css={[grid.container]}>
+					<div css={[grid.column.centre]}>
+						<CallToActionAtom
+							ctaLinkURL="https://safety.epicgames.com/en-US?lang=en-US"
+							ctaBackgroundImage="https://media.guim.co.uk/7fe58f11470360bc9f1e4b6bbcbf45d7cf06cfcf/0_0_1300_375/1300.jpg"
+							ctaText="This is a call to action text"
+							ctaButtonText="Learn more"
+						/>
+					</div>
+				</div>
 			</main>
 		</>
 	);
