@@ -442,7 +442,7 @@ export const BrazeBannersSystemDisplay = ({
 			containerRef.current.innerHTML = '';
 		}
 		setWrapperModeEnabled(false);
-	}, [containerRef.current]);
+	}, []);
 
 	const setWrapperModeColors = useCallback((backgroundColor: string) => {
 		setWrapperModeBackgroundColor(backgroundColor);
@@ -485,7 +485,7 @@ export const BrazeBannersSystemDisplay = ({
 			// CSS Checker
 			runCssCheckerOnBrazeBanner(meta);
 		}
-	}, [meta, meta.banner, meta.braze]);
+	}, [meta, meta.banner, meta.braze, setWrapperModeColors]);
 
 	// Handle "postMessage" from the Banner's Buttons
 	useEffect(() => {
@@ -581,7 +581,14 @@ export const BrazeBannersSystemDisplay = ({
 		return () => {
 			window.removeEventListener('message', handleBrazeBannerMessage);
 		};
-	}, [meta, meta.banner, authStatus.kind, subscribeToNewsletter, fetchEmail]);
+	}, [
+		meta,
+		meta.banner,
+		authStatus.kind,
+		subscribeToNewsletter,
+		fetchEmail,
+		dismissBanner,
+	]);
 
 	// Log Impressions with Braze and Button Clicks with Ophan
 	// TODO
