@@ -22,7 +22,6 @@ type Props = {
 const containerStyles = css`
 	display: flex;
 	flex-direction: column;
-	gap: ${space[2]}px;
 	padding: ${space[2]}px 0;
 `;
 
@@ -30,6 +29,7 @@ const topRowStyles = css`
 	display: flex;
 	flex-direction: row;
 	gap: ${space[3]}px;
+	margin: ${space[2]}px 0;
 `;
 
 const avatarContainerStyles = css`
@@ -83,7 +83,7 @@ const bioStyles = css`
 
 const followButtonContainerStyles = css`
 	display: flex;
-	margin-bottom: ${space[2]}px;
+	margin-bottom: ${space[4]}px;
 `;
 
 const containsText = (html: string) => {

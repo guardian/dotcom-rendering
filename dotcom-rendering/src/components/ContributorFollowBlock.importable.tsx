@@ -1,7 +1,12 @@
 import { css } from '@emotion/react';
 import { Topic } from '@guardian/bridget/Topic';
 import { isUndefined, log } from '@guardian/libs';
-import { space, textSans12, textSans15 } from '@guardian/source/foundations';
+import {
+	palette as sourcePalette,
+	space,
+	textSans12,
+	textSans15,
+} from '@guardian/source/foundations';
 import {
 	SvgCheckmark,
 	SvgNotificationsOn,
@@ -69,22 +74,12 @@ const FollowButton = ({ isFollowing, onClickHandler }: FollowButtonProps) => {
 			) : (
 				<SvgPlus size="xsmall" />
 			)}
-			<span>{isFollowing ? 'Following' : 'Follow'} in My Guardian</span>
+			<span>{isFollowing ? 'Following in My Guardian' : 'Follow'}</span>
 		</button>
 	);
 };
 
 // -- notifications --
-
-const notificationIconStyles = css`
-	display: flex;
-	margin: 0;
-	margin-right: ${space[1]}px;
-
-	svg {
-		margin-top: -${space[1] - 1}px;
-	}
-`;
 
 const notificationsStatusStyles = css`
 	${textSans15}
@@ -96,21 +91,40 @@ const notificationsStatusStyles = css`
 	min-height: ${space[6]}px;
 	padding: 0;
 	text-align: left;
-	margin: ${space[1]}px 0 0 ${space[1]}px;
 	width: 100%;
 `;
 
 const notificationsStatusContainerStyles = css`
 	display: flex;
-	column-gap: ${space[1]}px;
+	column-gap: ${space[6]}px;
 	justify-content: space-between;
 	width: 100%;
 `;
 
+const notificationIconStyles = css`
+	display: flex;
+	margin: 0;
+	margin-right: ${space[1]}px;
+
+	svg {
+		margin-top: -${space[1] - 1}px;
+	}
+`;
 const notificationIconTextWrapperStyles = css`
 	display: flex;
 	align-items: flex-start;
 	${textSans12}
+`;
+
+const toggleSwitchContainerStyles = css`
+	transform: scale(1.2);
+	button[aria-checked='false'] {
+		background-color: ${sourcePalette.neutral[60]};
+		border-color: ${sourcePalette.neutral[60]};
+	}
+	button[aria-checked='true']::before {
+		display: none;
+	}
 `;
 
 const NotificationsStatus = ({
@@ -130,7 +144,7 @@ const NotificationsStatus = ({
 						publishes an article
 					</span>
 				</div>
-				<div>
+				<div css={toggleSwitchContainerStyles}>
 					<ToggleSwitch
 						checked={isFollowing}
 						onClick={onClickHandler}
@@ -141,15 +155,14 @@ const NotificationsStatus = ({
 	);
 };
 
-const cardContainerStyles = css`
+const containerStyles = css`
 	display: flex;
 	flex-direction: column;
-	gap: ${space[2]}px;
 	width: 100%;
 	align-items: flex-start;
 `;
 
-type CardContainerProps = {
+type ContainerProps = {
 	contributorId: string;
 	displayName: string;
 };
@@ -157,7 +170,7 @@ type CardContainerProps = {
 export const ContributorFollowBlock = ({
 	contributorId,
 	displayName,
-}: CardContainerProps) => {
+}: ContainerProps) => {
 	const [isFollowingNotifications, setIsFollowingNotifications] = useState<
 		boolean | undefined
 	>(undefined);
@@ -304,7 +317,7 @@ export const ContributorFollowBlock = ({
 	}
 
 	return (
-		<div css={cardContainerStyles}>
+		<div css={containerStyles}>
 			<FollowButton
 				isFollowing={isFollowingContributor ?? false}
 				onClickHandler={

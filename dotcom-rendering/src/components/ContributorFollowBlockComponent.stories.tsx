@@ -1,14 +1,30 @@
 import { css } from '@emotion/react';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { mocked } from 'storybook/test';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
+import { getNotificationsClient, getTagClient } from '../lib/bridgetApi';
+import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
+import { useIsMyGuardianEnabled } from '../lib/useIsMyGuardianEnabled';
 import { ContributorFollowBlockComponent } from './ContributorFollowBlockComponent.importable';
+
+const opinionFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Comment,
+	theme: Pillar.Opinion,
+};
 
 export default {
 	component: ContributorFollowBlockComponent,
 	title: 'Components/ContributorFollowBlockComponent',
+	async beforeEach() {
+		mocked(useIsMyGuardianEnabled).mockReturnValue(true);
+		mocked(useIsBridgetCompatible).mockReturnValue(true);
+	},
+	parameters: {
+		formats: [opinionFormat],
+	},
 };
 
-const contributor = {
+const contributorData = {
 	contributorId: 'profile/george-monbiot',
 	displayName: 'George Monbiot',
 	avatarUrl:
@@ -21,61 +37,78 @@ const containerStyles = css`
 	padding: 16px;
 `;
 
-const opinionDecorator = splitTheme([
-	{
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Comment,
-		theme: Pillar.Opinion,
-	},
-]);
+const mockBridgetClients = (
+	isFollowingTag: boolean,
+	isFollowingNotifications: boolean,
+) => {
+	mocked(getTagClient).mockReturnValue({
+		isFollowing: () => Promise.resolve(isFollowingTag),
+		follow: () => Promise.resolve(true),
+		unfollow: () => Promise.resolve(true),
+	} as unknown as ReturnType<typeof getTagClient>);
+	mocked(getNotificationsClient).mockReturnValue({
+		isFollowing: () => Promise.resolve(isFollowingNotifications),
+		follow: () => Promise.resolve(true),
+		unfollow: () => Promise.resolve(true),
+	} as unknown as ReturnType<typeof getNotificationsClient>);
+};
 
-const allPillarsDecorator = splitTheme([
-	{
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Comment,
-		theme: Pillar.News,
-	},
-	{
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Comment,
-		theme: Pillar.Opinion,
-	},
-	{
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Comment,
-		theme: Pillar.Sport,
-	},
-	{
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Comment,
-		theme: Pillar.Culture,
-	},
-	{
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Comment,
-		theme: Pillar.Lifestyle,
-	},
-]);
-
-const Wrapper = ({ withBio = true }: { withBio?: boolean }) => (
+const ContributorFollowBlockStory = () => (
 	<div css={containerStyles}>
 		<ContributorFollowBlockComponent
-			contributorId={contributor.contributorId}
-			displayName={contributor.displayName}
-			avatarUrl={contributor.avatarUrl}
-			bio={withBio ? contributor.bio : undefined}
+			contributorId={contributorData.contributorId}
+			displayName={contributorData.displayName}
+			avatarUrl={contributorData.avatarUrl}
+			bio={contributorData.bio}
 		/>
 	</div>
 );
 
-export const Default = () => <Wrapper />;
-Default.storyName = 'Default (Opinion)';
-Default.decorators = [opinionDecorator];
+export const NotFollowing = () => <ContributorFollowBlockStory />;
+NotFollowing.storyName = 'Not Following';
+NotFollowing.beforeEach = () => {
+	mockBridgetClients(false, false);
+};
 
-export const WithoutBio = () => <Wrapper withBio={false} />;
-WithoutBio.storyName = 'Without Bio';
-WithoutBio.decorators = [opinionDecorator];
+export const Following = () => <ContributorFollowBlockStory />;
+Following.storyName = 'Following';
+Following.beforeEach = () => {
+	mockBridgetClients(true, false);
+};
 
-export const AllPillars = () => <Wrapper />;
+export const FollowingWithNotifications = () => <ContributorFollowBlockStory />;
+FollowingWithNotifications.storyName = 'Following with Notifications';
+FollowingWithNotifications.beforeEach = () => {
+	mockBridgetClients(true, true);
+};
+
+export const AllPillars = () => <ContributorFollowBlockStory />;
 AllPillars.storyName = 'All Pillars';
-AllPillars.decorators = [allPillarsDecorator];
+AllPillars.parameters = {
+	formats: [
+		opinionFormat,
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Comment,
+			theme: Pillar.News,
+		},
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Comment,
+			theme: Pillar.Sport,
+		},
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Comment,
+			theme: Pillar.Culture,
+		},
+		{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Comment,
+			theme: Pillar.Lifestyle,
+		},
+	],
+};
+AllPillars.beforeEach = () => {
+	mockBridgetClients(false, false);
+};
