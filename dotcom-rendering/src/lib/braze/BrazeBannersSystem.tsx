@@ -719,7 +719,6 @@ export const BrazeBannersSystemDisplay = ({
 									border: 0;
 									clip: rect(1px, 1px, 1px, 1px);
 									-webkit-clip-path: inset(50%);
-									-webkit-clip-path: inset(50%);
 									clip-path: inset(50%);
 								`}
 							>
@@ -829,10 +828,6 @@ export const BrazeBannersSystemDisplay = ({
 									text-decoration: none;
 									white-space: nowrap;
 									vertical-align: middle;
-									font-family: GuardianTextSans,
-										'Guardian Text Sans Web',
-										'Helvetica Neue', Helvetica, Arial,
-										'Lucida Grande', sans-serif;
 									font-size: 1.0625rem;
 									line-height: 1.3;
 									font-weight: 700;
@@ -863,7 +858,6 @@ export const BrazeBannersSystemDisplay = ({
 										padding: 0;
 										border: 0;
 										clip: rect(1px, 1px, 1px, 1px);
-										-webkit-clip-path: inset(50%);
 										-webkit-clip-path: inset(50%);
 										clip-path: inset(50%);
 									`}
