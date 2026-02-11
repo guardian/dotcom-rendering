@@ -103,20 +103,7 @@ export const WithSelfHostedVideoOnAudio = {
 			design: ArticleDesign.Audio,
 			theme: Pillar.Opinion,
 		},
-		mainMedia: {
-			type: 'SelfHostedVideo',
-			videoStyle: 'Loop',
-			atomId: 'atom-id-123',
-			sources: [
-				{
-					src: 'https://uploads.guim.co.uk/2026/01/09/Front_loop__Iran_TiF_Latest--64220ebf-d63d-48dd-9317-16b3b150a4ac-1.1.m3u8',
-					mimeType: 'application/vnd.apple.mpegurl',
-				},
-			],
-			height: 720,
-			width: 576,
-			duration: 18,
-		},
+		mainMedia: WithSelfHostedVideoOnGallery.args.mainMedia,
 	},
 } satisfies Story;
 
@@ -129,20 +116,7 @@ export const WithSelfHostedVideoOnVideo = {
 			design: ArticleDesign.Video,
 			theme: Pillar.Opinion,
 		},
-		mainMedia: {
-			type: 'SelfHostedVideo',
-			videoStyle: 'Loop',
-			atomId: 'atom-id-123',
-			sources: [
-				{
-					src: 'https://uploads.guim.co.uk/2026/01/09/Front_loop__Iran_TiF_Latest--64220ebf-d63d-48dd-9317-16b3b150a4ac-1.1.m3u8',
-					mimeType: 'application/vnd.apple.mpegurl',
-				},
-			],
-			height: 720,
-			width: 576,
-			duration: 18,
-		},
+		mainMedia: WithSelfHostedVideoOnGallery.args.mainMedia,
 	},
 } satisfies Story;
 
