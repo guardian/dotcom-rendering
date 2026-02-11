@@ -48,7 +48,12 @@ export const Fixture = {
 			matchKind: 'Fixture',
 		},
 		edition: 'UK',
-		getHeaderData: () => Promise.resolve(feHeaderData),
+		getHeaderData: () =>
+			Promise.resolve({
+				...feHeaderData,
+				liveURL: undefined,
+				reportURL: undefined,
+			}),
 		refreshInterval: 3_000,
 		matchHeaderURL: new URL(
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
@@ -58,7 +63,7 @@ export const Fixture = {
 
 export const Live = {
 	args: {
-		leagueName: Fixture.args.leagueName,
+		leagueName: feHeaderData.competitionName,
 		match: {
 			...Fixture.args.match,
 			kind: 'Live',
@@ -87,7 +92,9 @@ export const Live = {
 			),
 		},
 		edition: 'EUR',
-		matchHeaderURL: Fixture.args.matchHeaderURL,
+		matchHeaderURL: new URL(
+			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/11/39/9.json',
+		),
 		refreshInterval: Fixture.args.refreshInterval,
 		getHeaderData: () =>
 			Promise.resolve({
@@ -110,7 +117,9 @@ export const Result = {
 			matchKind: 'Result',
 		},
 		edition: 'AU',
-		matchHeaderURL: Fixture.args.matchHeaderURL,
+		matchHeaderURL: new URL(
+			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/10/45/42.json',
+		),
 		refreshInterval: Fixture.args.refreshInterval,
 		getHeaderData: () =>
 			Promise.resolve({
