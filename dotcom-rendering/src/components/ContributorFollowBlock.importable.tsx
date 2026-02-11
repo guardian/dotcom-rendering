@@ -39,14 +39,14 @@ const followButtonStyles = (isFollowing: boolean) => css`
 	border-radius: ${space[5]}px;
 	border: 1px solid
 		${isFollowing
-			? palette('--follow-button-border-following')
-			: palette('--follow-button-border')};
+			? palette('--contributor-follow-button-border-following')
+			: palette('--contributor-follow-button-border')};
 	background: ${isFollowing
 		? 'transparent'
-		: palette('--follow-accent-color')};
+		: palette('--contributor-follow-accent-color')};
 	color: ${isFollowing
-		? palette('--follow-button-text')
-		: palette('--follow-button-text-not-following')};
+		? palette('--contributor-follow-button-text')
+		: palette('--contributor-follow-button-text-not-following')};
 	font-weight: 700;
 	cursor: pointer;
 
@@ -54,11 +54,11 @@ const followButtonStyles = (isFollowing: boolean) => css`
 		width: 24px;
 		height: 24px;
 		fill: ${isFollowing
-			? palette('--follow-button-text')
-			: palette('--follow-button-text-not-following')};
+			? palette('--contributor-follow-button-text')
+			: palette('--contributor-follow-button-text-not-following')};
 		stroke: ${isFollowing
-			? palette('--follow-button-text')
-			: palette('--follow-button-text-not-following')};
+			? palette('--contributor-follow-button-text')
+			: palette('--contributor-follow-button-text-not-following')};
 	}
 `;
 
@@ -81,7 +81,7 @@ const FollowButton = ({ isFollowing, onClickHandler }: FollowButtonProps) => {
 
 // -- notifications --
 
-const notificationsStatusStyles = css`
+const notificationAlertStyles = css`
 	${textSans15}
 	color: ${palette('--follow-text')};
 	background: none;
@@ -94,7 +94,7 @@ const notificationsStatusStyles = css`
 	width: 100%;
 `;
 
-const notificationsStatusContainerStyles = css`
+const notificationAlertRowStyles = css`
 	display: flex;
 	column-gap: ${space[6]}px;
 	justify-content: space-between;
@@ -110,7 +110,7 @@ const notificationIconStyles = css`
 		margin-top: -${space[1] - 1}px;
 	}
 `;
-const notificationIconTextWrapperStyles = css`
+const notificationLabelStyles = css`
 	display: flex;
 	align-items: flex-start;
 	${textSans12}
@@ -127,15 +127,15 @@ const toggleSwitchContainerStyles = css`
 	}
 `;
 
-const NotificationsStatus = ({
+const NotificationAlert = ({
 	isFollowing,
 	onClickHandler,
 	displayName,
 }: FollowButtonProps & { displayName?: string }) => {
 	return (
-		<div css={notificationsStatusStyles}>
-			<div css={notificationsStatusContainerStyles}>
-				<div css={notificationIconTextWrapperStyles}>
+		<div css={notificationAlertStyles}>
+			<div css={notificationAlertRowStyles}>
+				<div css={notificationLabelStyles}>
 					<div css={notificationIconStyles}>
 						<SvgNotificationsOn size="small" />
 					</div>
@@ -155,14 +155,14 @@ const NotificationsStatus = ({
 	);
 };
 
-const containerStyles = css`
+const followBlockStyles = css`
 	display: flex;
 	flex-direction: column;
 	width: 100%;
 	align-items: flex-start;
 `;
 
-type ContainerProps = {
+type FollowBlockProps = {
 	contributorId: string;
 	displayName: string;
 };
@@ -170,7 +170,7 @@ type ContainerProps = {
 export const ContributorFollowBlock = ({
 	contributorId,
 	displayName,
-}: ContainerProps) => {
+}: FollowBlockProps) => {
 	const [isFollowingNotifications, setIsFollowingNotifications] = useState<
 		boolean | undefined
 	>(undefined);
@@ -317,7 +317,7 @@ export const ContributorFollowBlock = ({
 	}
 
 	return (
-		<div css={containerStyles}>
+		<div css={followBlockStyles}>
 			<FollowButton
 				isFollowing={isFollowingContributor ?? false}
 				onClickHandler={
@@ -329,7 +329,7 @@ export const ContributorFollowBlock = ({
 			{isFollowingContributor && (
 				<div>
 					<StraightLines count={1} />
-					<NotificationsStatus
+					<NotificationAlert
 						isFollowing={isFollowingNotifications ?? false}
 						onClickHandler={
 							!isUndefined(isFollowingNotifications)

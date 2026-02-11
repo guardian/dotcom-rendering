@@ -7084,31 +7084,27 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[86],
 		dark: () => sourcePalette.neutral[20],
 	},
-	'--follow-accent-color': {
+	'--contributor-follow-accent-color': {
 		light: followIconFillLight,
 		dark: followIconFillLight,
 	},
-	'--follow-bio-text': {
+	'--contributor-follow-bio-text': {
 		light: () => sourcePalette.neutral[10],
 		dark: () => sourcePalette.neutral[86],
 	},
-	'--follow-bottom-border': {
-		light: () => sourcePalette.neutral[97],
-		dark: () => sourcePalette.neutral[97],
-	},
-	'--follow-button-border': {
+	'--contributor-follow-button-border': {
 		light: followIconFillLight,
 		dark: followIconFillDark,
 	},
-	'--follow-button-border-following': {
+	'--contributor-follow-button-border-following': {
 		light: () => sourcePalette.neutral[73],
 		dark: () => sourcePalette.neutral[73],
 	},
-	'--follow-button-text': {
+	'--contributor-follow-button-text': {
 		light: () => sourcePalette.neutral[7],
 		dark: () => sourcePalette.neutral[100],
 	},
-	'--follow-button-text-not-following': {
+	'--contributor-follow-button-text-not-following': {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[100],
 	},
@@ -7119,10 +7115,6 @@ const paletteColours = {
 	'--follow-icon-fill': {
 		light: followIconFillLight,
 		dark: followIconFillDark,
-	},
-	'--follow-icon-variant-fill': {
-		light: () => sourcePalette.neutral[10],
-		dark: () => sourcePalette.neutral[86],
 	},
 	'--follow-text': {
 		light: followTextLight,

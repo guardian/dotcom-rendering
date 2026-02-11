@@ -19,7 +19,7 @@ type Props = {
 	bio?: string;
 };
 
-const containerStyles = css`
+const contributorBlockStyles = css`
 	display: flex;
 	flex-direction: column;
 	padding: ${space[2]}px 0;
@@ -43,7 +43,7 @@ const avatarContainerStyles = css`
 	}
 `;
 
-const contentStyles = css`
+const nameAndBioStyles = css`
 	display: flex;
 	flex-direction: column;
 	flex: 1;
@@ -52,7 +52,7 @@ const contentStyles = css`
 
 const titleStyles = css`
 	${headlineBold17};
-	color: ${palette('--follow-accent-color')};
+	color: ${palette('--contributor-follow-accent-color')};
 	margin: 0 0 ${space[2]}px;
 `;
 
@@ -60,7 +60,7 @@ const bioStyles = css`
 	${textEgyptian14};
 	font-weight: 500;
 	line-height: 1.3;
-	color: ${palette('--follow-bio-text')};
+	color: ${palette('--contributor-follow-bio-text')};
 	margin: 0;
 
 	p {
@@ -104,7 +104,7 @@ export const ContributorFollowBlockComponent = ({
 	const sanitizedBio = hasBio ? sanitise(bio, {}) : undefined;
 
 	return (
-		<div css={containerStyles}>
+		<div css={contributorBlockStyles}>
 			<StraightLines count={4} />
 			<div css={topRowStyles}>
 				{!!avatarUrl && (
@@ -117,7 +117,7 @@ export const ContributorFollowBlockComponent = ({
 						/>
 					</div>
 				)}
-				<div css={contentStyles}>
+				<div css={nameAndBioStyles}>
 					<h3 css={titleStyles}>{displayName}</h3>
 					{!!sanitizedBio && (
 						<div
