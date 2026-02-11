@@ -405,6 +405,13 @@ export const BrazeBannersSystemDisplay = ({
 		return result ?? null;
 	}, []);
 
+	const dismissBanner = useCallback(() => {
+		if (containerRef.current) {
+			containerRef.current.innerHTML = '';
+		}
+		setWrapperModeEnabled(false);
+	}, [containerRef.current]);
+
 	// Handle DOM Insertion
 	useEffect(() => {
 		// Render the banner ONLY when we have both the Data and the DOM Element
@@ -528,9 +535,7 @@ export const BrazeBannersSystemDisplay = ({
 					break;
 				case BrazeBannersSystemMessageType.DismissBanner:
 					// Remove the banner from the DOM
-					if (containerRef.current) {
-						containerRef.current.innerHTML = '';
-					}
+					dismissBanner();
 					break;
 			}
 		};
@@ -748,6 +753,9 @@ export const BrazeBannersSystemDisplay = ({
 							`}
 						>
 							<button
+								onClick={() => {
+									dismissBanner();
+								}}
 								type="button"
 								aria-live="polite"
 								css={css`
