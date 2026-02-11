@@ -46,7 +46,12 @@ const LOG_PREFIX = '[BrazeBannersSystem]';
 /**
  * List of development domains where Braze Banners System logs will be shown.
  */
-const DEVELOPMENT_DOMAINS = ['localhost', 'r.thegulocal.com'];
+const DEVELOPMENT_DOMAINS = [
+	'localhost',
+	'r.thegulocal.com',
+	'code.dev-theguardian.com',
+	'm.code.dev-theguardian.com',
+];
 
 /**
  * Checks if the current domain is a development domain.
