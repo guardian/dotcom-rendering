@@ -369,6 +369,7 @@ export const BrazeBannersSystemDisplay = ({
 }) => {
 	const authStatus = useAuthStatus();
 	const containerRef = useRef<HTMLDivElement>(null);
+	const [showBanner, setShowBanner] = useState(true);
 	const [minHeight, setMinHeight] = useState<string>('0px');
 	const [wrapperModeEnabled, setWrapperModeEnabled] =
 		useState<boolean>(false);
@@ -443,10 +444,7 @@ export const BrazeBannersSystemDisplay = ({
 	}, []);
 
 	const dismissBanner = useCallback(() => {
-		if (containerRef.current) {
-			containerRef.current.innerHTML = '';
-		}
-		setWrapperModeEnabled(false);
+		setShowBanner(false);
 	}, []);
 
 	const setWrapperModeColors = useCallback((backgroundColor: string) => {
@@ -457,7 +455,7 @@ export const BrazeBannersSystemDisplay = ({
 	// Handle DOM Insertion
 	useEffect(() => {
 		// Render the banner ONLY when we have both the Data and the DOM Element
-		if (containerRef.current) {
+		if (showBanner && containerRef.current) {
 			// Clear any existing content to prevent duplicates
 			containerRef.current.innerHTML = '';
 
@@ -490,7 +488,7 @@ export const BrazeBannersSystemDisplay = ({
 			// CSS Checker
 			runCssCheckerOnBrazeBanner(meta);
 		}
-	}, [meta, meta.banner, meta.braze, setWrapperModeColors]);
+	}, [showBanner, meta, meta.banner, meta.braze, setWrapperModeColors]);
 
 	// Handle "postMessage" from the Banner's Buttons
 	useEffect(() => {
@@ -597,6 +595,10 @@ export const BrazeBannersSystemDisplay = ({
 
 	// Log Impressions with Braze and Button Clicks with Ophan
 	// TODO
+
+	if (!showBanner) {
+		return null;
+	}
 
 	return (
 		<div
