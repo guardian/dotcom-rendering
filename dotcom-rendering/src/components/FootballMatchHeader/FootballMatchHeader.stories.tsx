@@ -1,5 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { FootballMatchHeader as FootballMatchHeaderComponent } from './FootballMatchHeader';
+import {
+	matchDayLive,
+	matchFixture,
+	matchResult,
+} from '../../../fixtures/manual/footballMatches';
+import type { FEFootballMatchHeader } from '../../frontend/feFootballMatchHeader';
 
 const meta = {
 	component: FootballMatchHeaderComponent,
@@ -7,11 +13,22 @@ const meta = {
 
 export default meta;
 
+const feHeaderData: FEFootballMatchHeader = {
+	footballMatch: matchFixture,
+	competitionName: 'Premier League',
+	liveURL:
+		'https://www.theguardian.com/football/live/2025/nov/26/arsenal-v-bayern-munich-champions-league-live',
+	reportURL:
+		'https://www.theguardian.com/football/2025/nov/26/arsenal-bayern-munich-champions-league-match-report',
+	infoURL:
+		'https://www.theguardian.com/football/match/2025/nov/26/arsenal-v-bayernmunich',
+};
+
 type Story = StoryObj<typeof meta>;
 
 export const Fixture = {
 	args: {
-		leagueName: 'Premier League',
+		leagueName: feHeaderData.competitionName,
 		match: {
 			kind: 'Fixture',
 			kickOff: new Date('2025-11-05T20:30:00Z'),
@@ -31,6 +48,11 @@ export const Fixture = {
 			matchKind: 'Fixture',
 		},
 		edition: 'UK',
+		getHeaderData: () => Promise.resolve(feHeaderData),
+		refreshInterval: 3_000,
+		matchHeaderURL: new URL(
+			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
+		),
 	},
 } satisfies Story;
 
@@ -65,6 +87,14 @@ export const Live = {
 			),
 		},
 		edition: 'EUR',
+		matchHeaderURL: Fixture.args.matchHeaderURL,
+		refreshInterval: Fixture.args.refreshInterval,
+		getHeaderData: () =>
+			Promise.resolve({
+				...feHeaderData,
+				footballMatch: matchDayLive,
+				reportURL: undefined,
+			}),
 	},
 } satisfies Story;
 
@@ -78,13 +108,14 @@ export const Result = {
 		tabs: {
 			selected: 'info',
 			matchKind: 'Result',
-			liveURL: new URL(
-				'https://www.theguardian.com/football/live/2025/nov/26/arsenal-v-bayern-munich-champions-league-live',
-			),
-			reportURL: new URL(
-				'https://www.theguardian.com/football/2025/nov/26/arsenal-bayern-munich-champions-league-match-report',
-			),
 		},
 		edition: 'AU',
+		matchHeaderURL: Fixture.args.matchHeaderURL,
+		refreshInterval: Fixture.args.refreshInterval,
+		getHeaderData: () =>
+			Promise.resolve({
+				...feHeaderData,
+				footballMatch: matchResult,
+			}),
 	},
 } satisfies Story;
