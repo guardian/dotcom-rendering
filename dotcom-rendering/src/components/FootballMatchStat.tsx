@@ -18,7 +18,7 @@ import { palette } from '../palette';
 const containerCss = css`
 	position: relative;
 	display: grid;
-	grid-template-columns: auto 1fr auto;
+	grid-template-columns: 1fr auto 1fr;
 	grid-template-areas:
 		'home-stat heading away-stat'
 		'graph     graph   graph';
