@@ -23,7 +23,6 @@ export const WithAge = {
 			design: ArticleDesign.Comment,
 			theme: Pillar.Opinion,
 		},
-		showLivePlayable: false,
 		age: <p>19h ago</p>,
 	},
 } satisfies Story;
@@ -56,7 +55,15 @@ export const WithVideo = {
 		...WithAge.args,
 		mainMedia: {
 			type: 'YoutubeVideo',
+			id: 'abcdef',
+			videoId: 'abcd',
+			title: 'some title',
 			duration: 972,
+			width: 480,
+			height: 288,
+			origin: 'The Guardian',
+			expired: false,
+			image: 'https://i.guim.co.uk/img/media/e060e9b7c92433b3dfeccc98b9206778cda8b8e8/0_180_6680_4009/master/6680.jpg?width=600&quality=45&dpr=2&s=none',
 		},
 	},
 } satisfies Story;
