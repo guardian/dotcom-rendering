@@ -249,12 +249,8 @@ export const Podcast = {
 			},
 			duration: '55:09',
 		},
-		articleMainMedia: {
+		articleMediaMetadata: {
 			type: 'Audio',
-			podcastImage: {
-				src: 'https://media.guim.co.uk/be8830289638b0948b1ba4ade906e540554ada88/0_0_5000_3000/master/5000.jpg',
-				altText: 'Football Weekly',
-			},
 			duration: '55:09',
 		},
 	},
@@ -281,7 +277,7 @@ export const Gallery = {
 			type: 'Gallery',
 			count: '12',
 		},
-		articleMainMedia: {
+		articleMediaMetadata: {
 			type: 'Gallery',
 			count: '12',
 		},
@@ -320,17 +316,10 @@ export const YoutubeVideo = {
 			expired: false,
 			image: 'https://media.guim.co.uk/f2aedd24e5414073a653f68112e0ad070c6f4a2b/254_0_7493_4500/master/7493.jpg',
 		},
-		articleMainMedia: {
+		articleMediaMetadata: {
 			type: 'YoutubeVideo',
-			id: 'video-id',
-			videoId: 'video-id',
-			height: 1080,
-			width: 1920,
-			origin: 'origin',
-			title: 'Video Title',
 			duration: 120,
-			expired: false,
-			image: 'https://media.guim.co.uk/f2aedd24e5414073a653f68112e0ad070c6f4a2b/254_0_7493_4500/master/7493.jpg',
+			isLive: false,
 		},
 		canPlayInline: true,
 		showVideo: true,
@@ -511,6 +500,69 @@ export const WithSelfHostedImmersiveDefaultVideo = {
 		mainMedia: {
 			...WithSelfHostedImmersiveLoopVideo.args.mainMedia,
 			videoStyle: 'Default',
+		},
+	},
+} satisfies Story;
+
+export const WithReplacementMediaOnGalleryCard = {
+	args: {
+		...Gallery.args,
+		showVideo: true,
+		mainMedia: {
+			type: 'SelfHostedVideo',
+			videoStyle: 'Loop',
+			atomId: 'atom-id-123',
+			sources: [
+				{
+					src: 'https://uploads.guim.co.uk/2026/01/09/Front_loop__Iran_TiF_Latest--64220ebf-d63d-48dd-9317-16b3b150a4ac-1.1.m3u8',
+					mimeType: 'application/vnd.apple.mpegurl',
+				},
+			],
+			height: 720,
+			width: 576,
+			duration: 18,
+		},
+	},
+} satisfies Story;
+
+export const WithReplacementMediaOnVideoCard = {
+	args: {
+		...YoutubeVideo.args,
+		showVideo: true,
+		mainMedia: {
+			type: 'SelfHostedVideo',
+			videoStyle: 'Loop',
+			atomId: 'atom-id-123',
+			sources: [
+				{
+					src: 'https://uploads.guim.co.uk/2026/01/09/Front_loop__Iran_TiF_Latest--64220ebf-d63d-48dd-9317-16b3b150a4ac-1.1.m3u8',
+					mimeType: 'application/vnd.apple.mpegurl',
+				},
+			],
+			height: 720,
+			width: 576,
+			duration: 18,
+		},
+	},
+} satisfies Story;
+
+export const WithReplacementMediaOnPodcastCard = {
+	args: {
+		...Podcast.args,
+		showVideo: true,
+		mainMedia: {
+			type: 'SelfHostedVideo',
+			videoStyle: 'Loop',
+			atomId: 'atom-id-123',
+			sources: [
+				{
+					src: 'https://uploads.guim.co.uk/2026/01/09/Front_loop__Iran_TiF_Latest--64220ebf-d63d-48dd-9317-16b3b150a4ac-1.1.m3u8',
+					mimeType: 'application/vnd.apple.mpegurl',
+				},
+			],
+			height: 720,
+			width: 576,
+			duration: 18,
 		},
 	},
 } satisfies Story;

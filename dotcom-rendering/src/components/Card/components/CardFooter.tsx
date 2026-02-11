@@ -6,7 +6,7 @@ import {
 	textSansBold12,
 } from '@guardian/source/foundations';
 import { type ArticleFormat, ArticleSpecial } from '../../../lib/articleFormat';
-import type { MainMedia } from '../../../types/mainMedia';
+import type { ArticleMediaMetadata } from '../../../types/mainMedia';
 import { CardPill } from '../../CardPill';
 
 const contentStyles = css`
@@ -58,11 +58,10 @@ type Props = {
 	age?: JSX.Element;
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
-	mainMedia?: MainMedia;
+	mediaMetadata?: ArticleMediaMetadata;
 	isNewsletter?: boolean;
 	shouldReserveSpace?: { mobile: boolean; desktop: boolean };
 	isStorylines?: boolean;
-	headline?: string;
 };
 
 export const CardFooter = ({
@@ -70,23 +69,21 @@ export const CardFooter = ({
 	age,
 	commentCount,
 	cardBranding,
-	mainMedia,
+	mediaMetadata,
 	isNewsletter,
 	shouldReserveSpace,
 	isStorylines,
-	headline,
 }: Props) => {
 	const shouldShowBranding =
 		format.theme === ArticleSpecial.Labs && !!cardBranding;
 
 	const shouldShowPill =
-		mainMedia?.type === 'YoutubeVideo' ||
-		mainMedia?.type === 'Audio' ||
-		mainMedia?.type === 'Gallery' ||
-		mainMedia?.type === 'SelfHostedVideo' ||
+		mediaMetadata?.type === 'YoutubeVideo' ||
+		mediaMetadata?.type === 'Audio' ||
+		mediaMetadata?.type === 'Gallery' ||
+		mediaMetadata?.type === 'SelfHostedVideo' ||
 		isNewsletter;
 
-	console.log(headline, shouldShowPill, mainMedia);
 	if (shouldShowPill) {
 		return (
 			<footer css={contentStyles}>
@@ -100,7 +97,7 @@ export const CardFooter = ({
 				{isStorylines && age}
 
 				<CardPill
-					mainMedia={mainMedia}
+					mediaMetadata={mediaMetadata}
 					isNewsletter={isNewsletter}
 					format={format}
 				/>

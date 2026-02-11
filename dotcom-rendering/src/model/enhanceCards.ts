@@ -22,7 +22,7 @@ import type {
 	DCRSlideshowImage,
 	DCRSupportingContent,
 } from '../types/front';
-import type { MainMedia } from '../types/mainMedia';
+import type { ArticleMediaMetadata, MainMedia } from '../types/mainMedia';
 import type { PodcastSeriesImage, TagType } from '../types/tag';
 import { enhanceSnaps } from './enhanceSnaps';
 import { enhanceTags } from './enhanceTags';
@@ -327,6 +327,36 @@ const decideReplacementMedia = (
 	return undefined;
 };
 
+const getArticleMediaMetadata = (
+	articleMainMedia: MainMedia,
+): ArticleMediaMetadata | undefined => {
+	switch (articleMainMedia.type) {
+		case 'Gallery':
+			return {
+				type: 'Gallery',
+				count: articleMainMedia.count,
+			};
+		case 'Audio':
+			return {
+				type: 'Audio',
+				duration: articleMainMedia.duration,
+			};
+		case 'SelfHostedVideo':
+			return {
+				type: 'SelfHostedVideo',
+				duration: articleMainMedia.duration,
+			};
+		case 'YoutubeVideo':
+			return {
+				type: 'YoutubeVideo',
+				duration: articleMainMedia.duration,
+				isLive: !!articleMainMedia.isLive,
+			};
+		default:
+			return undefined;
+	}
+};
+
 export const enhanceCards = (
 	collections: FEFrontCard[],
 	{
@@ -409,6 +439,9 @@ export const enhanceCards = (
 
 		const cardMainMedia = replacementMainMedia ?? articleMainMedia;
 
+		const articleMediaMetadata =
+			articleMainMedia && getArticleMediaMetadata(articleMainMedia);
+
 		return {
 			format,
 			dataLinkName,
@@ -452,7 +485,7 @@ export const enhanceCards = (
 					  )
 					: undefined,
 			mainMedia: cardMainMedia,
-			articleMainMedia,
+			articleMediaMetadata,
 			isExternalLink: faciaCard.card.cardStyle.type === 'ExternalLink',
 			embedUri: faciaCard.properties.embedUri ?? undefined,
 			branding: stripBranding ? undefined : branding,

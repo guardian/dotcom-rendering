@@ -11,7 +11,7 @@ import { secondsToDuration } from '../../lib/formatTime';
 import { transparentColour } from '../../lib/transparentColour';
 import { palette } from '../../palette';
 import type { AspectRatio } from '../../types/front';
-import type { MainMedia } from '../../types/mainMedia';
+import type { ArticleMediaMetadata } from '../../types/mainMedia';
 import { CardFooter } from '../Card/components/CardFooter';
 import { narrowPlayIconDiameter, PlayIcon } from '../Card/components/PlayIcon';
 import { TrailText } from '../Card/components/TrailText';
@@ -141,7 +141,7 @@ type Props = {
 	isImmersive?: boolean;
 	byline?: string;
 	showByline?: boolean;
-	articleMedia?: MainMedia;
+	articleMediaMetadata?: ArticleMediaMetadata;
 };
 
 export const YoutubeAtomFeatureCardOverlay = ({
@@ -168,7 +168,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 	isImmersive,
 	byline,
 	showByline,
-	articleMedia,
+	articleMediaMetadata,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
@@ -278,7 +278,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 								/>
 							) : undefined
 						}
-						mainMedia={articleMedia}
+						mediaMetadata={articleMediaMetadata}
 					/>
 				</div>
 			</button>

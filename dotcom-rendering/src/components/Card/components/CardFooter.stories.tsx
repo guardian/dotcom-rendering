@@ -31,7 +31,7 @@ export const WithGallery = {
 	...WithAge,
 	args: {
 		...WithAge.args,
-		mainMedia: {
+		mediaMetadata: {
 			type: 'Gallery',
 			count: '14',
 		},
@@ -42,28 +42,32 @@ export const WithAudio = {
 	...WithAge,
 	args: {
 		...WithAge.args,
-		mainMedia: {
+		mediaMetadata: {
 			type: 'Audio',
 			duration: '12:34',
 		},
 	},
 } satisfies Story;
 
-export const WithVideo = {
+export const WithYoutubeVideo = {
 	...WithAge,
 	args: {
 		...WithAge.args,
-		mainMedia: {
+		mediaMetadata: {
 			type: 'YoutubeVideo',
-			id: 'abcdef',
-			videoId: 'abcd',
-			title: 'some title',
 			duration: 972,
-			width: 480,
-			height: 288,
-			origin: 'The Guardian',
-			expired: false,
-			image: 'https://i.guim.co.uk/img/media/e060e9b7c92433b3dfeccc98b9206778cda8b8e8/0_180_6680_4009/master/6680.jpg?width=600&quality=45&dpr=2&s=none',
+			isLive: false,
+		},
+	},
+} satisfies Story;
+
+export const WithSelfHostedVideo = {
+	...WithAge,
+	args: {
+		...WithAge.args,
+		mediaMetadata: {
+			type: 'SelfHostedVideo',
+			duration: 254,
 		},
 	},
 } satisfies Story;

@@ -52,7 +52,7 @@ export const FrontCard = (props: Props) => {
 		showLivePlayable: trail.showLivePlayable,
 		showVideo: trail.showVideo,
 		uniqueId: trail.uniqueId,
-		articleMainMedia: trail.articleMainMedia,
+		articleMediaMetadata: trail.articleMediaMetadata,
 	};
 
 	return Card({ ...defaultProps, ...cardProps });

@@ -6,7 +6,7 @@ import { isMediaCard as isMedia } from '../../lib/cardHelpers';
 import { palette } from '../../palette';
 import type { StarRating as Rating } from '../../types/content';
 import type { DCRFrontImage } from '../../types/front';
-import type { MainMedia } from '../../types/mainMedia';
+import type { ArticleMediaMetadata, MainMedia } from '../../types/mainMedia';
 import { CardLink } from '../Card/components/CardLink';
 import { CardHeadline } from '../CardHeadline';
 import type { Loading } from '../CardPicture';
@@ -29,7 +29,7 @@ export type HighlightsCardProps = {
 	byline?: string;
 	isExternalLink: boolean;
 	starRating?: Rating;
-	articleMainMedia?: MainMedia;
+	articleMediaMetadata?: ArticleMediaMetadata;
 };
 
 const container = css`
@@ -127,7 +127,7 @@ export const HighlightsCard = ({
 	byline,
 	isExternalLink,
 	starRating,
-	articleMainMedia,
+	articleMediaMetadata,
 }: HighlightsCardProps) => {
 	const isMediaCard = isMedia(format);
 
@@ -180,7 +180,7 @@ export const HighlightsCard = ({
 						<div>
 							<CardPill
 								format={format}
-								mainMedia={articleMainMedia}
+								mediaMetadata={articleMediaMetadata}
 							/>
 						</div>
 					)}

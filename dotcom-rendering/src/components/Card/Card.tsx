@@ -27,7 +27,7 @@ import type {
 	DCRSupportingContent,
 } from '../../types/front';
 import type { CardMediaType } from '../../types/layout';
-import type { MainMedia } from '../../types/mainMedia';
+import type { ArticleMediaMetadata, MainMedia } from '../../types/mainMedia';
 import type { OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
 import { BrandingLabel } from '../BrandingLabel';
@@ -160,7 +160,7 @@ export type Props = {
 	isStorylines?: boolean;
 	starRatingSize?: RatingSizeType;
 	isInPersonalisationVariant?: boolean;
-	articleMainMedia?: MainMedia;
+	articleMediaMetadata?: ArticleMediaMetadata;
 };
 
 const waveformWrapper = (
@@ -400,7 +400,7 @@ export const Card = ({
 	isStorylines = false,
 	starRatingSize = 'small',
 	isInPersonalisationVariant,
-	articleMainMedia,
+	articleMediaMetadata,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -1223,9 +1223,9 @@ export const Card = ({
 											<LabsBranding />
 										) : undefined
 									}
-									mainMedia={
+									mediaMetadata={
 										!isGallerySecondaryOnward
-											? articleMainMedia
+											? articleMediaMetadata
 											: undefined
 									}
 									isNewsletter={isNewsletter}

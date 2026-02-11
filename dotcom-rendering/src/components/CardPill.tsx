@@ -5,7 +5,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import { ArticleDesign } from '../lib/articleFormat';
 import { secondsToDuration } from '../lib/formatTime';
 import { palette } from '../palette';
-import type { MainMedia } from '../types/mainMedia';
+import type { ArticleMediaMetadata } from '../types/mainMedia';
 import { Pill } from './Pill';
 import { SvgMediaControlsPlay } from './SvgMediaControlsPlay';
 
@@ -19,22 +19,22 @@ const liveBulletStyles = css`
 
 type CardPillProps = {
 	format: ArticleFormat;
-	mainMedia?: MainMedia;
+	mediaMetadata?: ArticleMediaMetadata;
 	isNewsletter?: boolean;
 };
 
 export const CardPill = ({
 	format,
-	mainMedia,
+	mediaMetadata,
 	isNewsletter,
 }: CardPillProps) => {
 	if (isNewsletter) return <Pill content="Newsletter" />;
-	if (!mainMedia) return null;
-	switch (mainMedia.type) {
+	if (!mediaMetadata) return null;
+	switch (mediaMetadata.type) {
 		case 'Gallery':
 			return (
 				<Pill
-					content={mainMedia.count}
+					content={mediaMetadata.count}
 					icon={<SvgCamera />}
 					prefix="Gallery"
 				/>
@@ -42,15 +42,14 @@ export const CardPill = ({
 		case 'Audio':
 			return (
 				<Pill
-					content={mainMedia.duration}
+					content={mediaMetadata.duration}
 					icon={<SvgMediaControlsPlay width={18} />}
 					prefix="Podcast"
 				/>
 			);
 		case 'YoutubeVideo':
-			if (format.design !== ArticleDesign.Video) return null;
-
-			if (mainMedia.isLive) {
+			if (ArticleDesign.Video !== format.design) return null;
+			if (mediaMetadata.isLive) {
 				return (
 					<Pill
 						content="Live"
@@ -60,7 +59,7 @@ export const CardPill = ({
 			}
 			return (
 				<Pill
-					content={secondsToDuration(mainMedia.duration)}
+					content={secondsToDuration(mediaMetadata.duration)}
 					icon={<SvgMediaControlsPlay width={18} />}
 					prefix="Video"
 				/>
@@ -69,12 +68,10 @@ export const CardPill = ({
 			if (ArticleDesign.Video !== format.design) return null;
 			return (
 				<Pill
-					content={secondsToDuration(mainMedia.duration)}
+					content={secondsToDuration(mediaMetadata.duration)}
 					icon={<SvgMediaControlsPlay width={18} />}
 					prefix="Video"
 				/>
 			);
-		default:
-			return null;
 	}
 };
