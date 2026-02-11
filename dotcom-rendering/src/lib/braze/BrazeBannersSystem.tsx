@@ -9,6 +9,36 @@ import type { BrazeInstance } from './initialiseBraze';
 import { suppressForTaylorReport } from './taylorReport';
 
 /**
+ * Determines the best mix color (black or white)
+ * based on a given background hex color.
+ */
+export function getContrastMix(hexColor: string): 'black' | 'white' {
+	// Remove the hash if it exists
+	const hex = hexColor.replace('#', '');
+
+	// Convert hex to RGB
+	const r = parseInt(hex.substring(0, 2), 16);
+	const g = parseInt(hex.substring(2, 4), 16);
+	const b = parseInt(hex.substring(4, 6), 16);
+
+	// Calculate Relative Luminance
+	// Standard formula for perceived brightness
+	const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+
+	// If brightness is > 128, the color is light (return black),
+	// else it's dark (return white)
+	return brightness > 128 ? 'black' : 'white';
+}
+
+/**
+ * Determines the best accessible text color (black or white)
+ * based on a given background hex color.
+ */
+export function getContrastColor(hexColor: string): '#000000' | '#ffffff' {
+	return getContrastMix(hexColor) === 'black' ? '#000000' : '#ffffff';
+}
+
+/**
  * Logger prefix for Braze Banners System logs.
  */
 const LOG_PREFIX = '[BrazeBannersSystem]';
@@ -339,6 +369,8 @@ export const BrazeBannersSystemDisplay = ({
 		useState<boolean>(false);
 	const [wrapperModeBackgroundColor, setWrapperModeBackgroundColor] =
 		useState<string>('#ffffff');
+	const [wrapperModeForegroundColor, setWrapperModeForegroundColor] =
+		useState<string>('#000000');
 
 	const postMessageToBrazeBanner = (
 		type: BrazeBannersSystemMessageType,
@@ -412,6 +444,11 @@ export const BrazeBannersSystemDisplay = ({
 		setWrapperModeEnabled(false);
 	}, [containerRef.current]);
 
+	const setWrapperModeColors = useCallback((backgroundColor: string) => {
+		setWrapperModeBackgroundColor(backgroundColor);
+		setWrapperModeForegroundColor(getContrastColor(backgroundColor));
+	}, []);
+
 	// Handle DOM Insertion
 	useEffect(() => {
 		// Render the banner ONLY when we have both the Data and the DOM Element
@@ -439,7 +476,7 @@ export const BrazeBannersSystemDisplay = ({
 			const metaWrapperModeBackgroundColor =
 				meta.banner.getStringProperty('wrapperModeBackgroundColor');
 			if (metaWrapperModeBackgroundColor) {
-				setWrapperModeBackgroundColor(metaWrapperModeBackgroundColor);
+				setWrapperModeColors(metaWrapperModeBackgroundColor);
 			}
 
 			// Let Braze inject the HTML/CSS
@@ -642,6 +679,7 @@ export const BrazeBannersSystemDisplay = ({
 								aria-hidden="true"
 								css={css`
 									box-sizing: border-box;
+									fill: ${wrapperModeForegroundColor};
 								`}
 							>
 								<path d="M0 70.8c0-19.5 13-26.4 27.3-26.4 6.1 0 12 1 15.1 2.3l.3 13.6h-1.4L33 47.2c-1.5-.7-2.8-.9-5.4-.9-7.6 0-11.5 8.8-11.4 23.3.1 17.3 3.1 25.1 10.2 25.1 1.8 0 3.2-.2 4.2-.7V75.5l-4.7-2.7v-1.5h22.5V73l-4.6 2.5v18.3a50.1 50.1 0 0 1-17 2.9C10.5 96.7 0 89 0 70.8Z"></path>
@@ -681,7 +719,7 @@ export const BrazeBannersSystemDisplay = ({
 							css={css`
 								box-sizing: border-box;
 								grid-area: vert-line;
-								background-color: rgb(0, 0, 0);
+								background-color: ${wrapperModeForegroundColor};
 								width: 1px;
 								opacity: 0.2;
 								margin: 24px 8px 0px;
@@ -766,7 +804,14 @@ export const BrazeBannersSystemDisplay = ({
 									align-items: center;
 									box-sizing: border-box;
 									border: none;
-									background: rgb(230, 236, 239);
+									background: color-mix(
+										in srgb,
+										${wrapperModeBackgroundColor},
+										${getContrastMix(
+												wrapperModeBackgroundColor,
+											)}
+											5%
+									);
 									cursor: pointer;
 									transition: 0.3s ease-in-out;
 									text-decoration: none;
@@ -833,7 +878,7 @@ export const BrazeBannersSystemDisplay = ({
 											d="m1 7.224 10.498 10.498h1.004L23 7.224l-.98-.954L12 14.708 1.98 6.27z"
 											transform="translate(0 0)"
 											css={css`
-												fill: rgb(0, 0, 0);
+												fill: ${wrapperModeForegroundColor};
 											`}
 										></path>
 										<path
@@ -841,7 +886,7 @@ export const BrazeBannersSystemDisplay = ({
 											transform="scale(1 -1) translate(0 -3)"
 											transform-origin="center"
 											css={css`
-												fill: rgb(0, 0, 0);
+												fill: ${wrapperModeForegroundColor};
 											`}
 										></path>
 									</g>
