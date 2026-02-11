@@ -66,7 +66,7 @@ export const matchDayLive: FEMatchDay = {
 	},
 	awayTeam: {
 		...matchData.awayTeam,
-		score: 3,
+		score: 4,
 	},
 };
 

@@ -1,14 +1,24 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { FootballMatchHeader as FootballMatchHeaderComponent } from './FootballMatchHeader';
+import { expect, waitFor, within } from 'storybook/test';
+import { SWRConfig } from 'swr';
 import {
 	matchDayLive,
 	matchFixture,
 	matchResult,
 } from '../../../fixtures/manual/footballMatches';
 import type { FEFootballMatchHeader } from '../../frontend/feFootballMatchHeader';
+import { FootballMatchHeader as FootballMatchHeaderComponent } from './FootballMatchHeader';
 
 const meta = {
 	component: FootballMatchHeaderComponent,
+	decorators: [
+		(Story) => (
+			// This resets the SWR cache on every story
+			<SWRConfig value={{ provider: () => new Map() }}>
+				<Story />
+			</SWRConfig>
+		),
+	],
 } satisfies Meta<typeof FootballMatchHeaderComponent>;
 
 export default meta;
@@ -49,7 +59,7 @@ export const Fixture = {
 		},
 		edition: 'UK',
 		getHeaderData: () =>
-			Promise.resolve({
+			getMockData({
 				...feHeaderData,
 				liveURL: undefined,
 				reportURL: undefined,
@@ -58,6 +68,18 @@ export const Fixture = {
 		matchHeaderURL: new URL(
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
 		),
+	},
+	play: async ({ canvasElement }) => {
+		const list = await getListElement(canvasElement);
+		const items = within(list).getAllByRole('listitem');
+		void expect(items.length).toBe(1);
+		void expect(items[0]).toHaveTextContent('Match info');
+
+		await waitFor(() => {
+			const items = within(list).getAllByRole('listitem');
+			void expect(items.length).toBe(1);
+			void expect(items[0]).toHaveTextContent('Match info');
+		});
 	},
 } satisfies Story;
 
@@ -93,15 +115,25 @@ export const Live = {
 		},
 		edition: 'EUR',
 		matchHeaderURL: new URL(
-			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/11/39/9.json',
+			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
 		),
 		refreshInterval: Fixture.args.refreshInterval,
 		getHeaderData: () =>
-			Promise.resolve({
+			getMockData({
 				...feHeaderData,
 				footballMatch: matchDayLive,
 				reportURL: undefined,
 			}),
+	},
+	play: async ({ canvasElement }) => {
+		const canvas = within(canvasElement);
+		expect(canvas.getByLabelText('Score: 0')).toBeInTheDocument();
+		expect(canvas.getByLabelText('Score: 13')).toBeInTheDocument();
+
+		await waitFor(() => {
+			expect(canvas.getByLabelText('Score: 3')).toBeInTheDocument();
+			expect(canvas.getByLabelText('Score: 4')).toBeInTheDocument();
+		});
 	},
 } satisfies Story;
 
@@ -118,13 +150,43 @@ export const Result = {
 		},
 		edition: 'AU',
 		matchHeaderURL: new URL(
-			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/10/45/42.json',
+			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
 		),
 		refreshInterval: Fixture.args.refreshInterval,
 		getHeaderData: () =>
-			Promise.resolve({
+			getMockData({
 				...feHeaderData,
 				footballMatch: matchResult,
 			}),
 	},
+
+	play: async ({ canvasElement }) => {
+		const list = await getListElement(canvasElement);
+		const items = within(list).getAllByRole('listitem');
+		void expect(items.length).toBe(1);
+		void expect(items[0]).toHaveTextContent('Match info');
+
+		await waitFor(() => {
+			const items = within(list).getAllByRole('listitem');
+			void expect(items.length).toBe(3);
+			void expect(items[0]).toHaveTextContent('Match report');
+			void expect(items[1]).toHaveTextContent('Live feed');
+			void expect(items[2]).toHaveTextContent('Match info');
+		});
+	},
 } satisfies Story;
+
+const getListElement = async (canvasElement: HTMLElement) => {
+	const canvas = within(canvasElement);
+	const nav = await canvas.findByRole('navigation');
+	const navQueries = within(nav);
+	// Get the list element that is within a nav element
+	return await navQueries.findByRole('list');
+};
+
+const getMockData = (data: FEFootballMatchHeader) =>
+	new Promise((resolve) => {
+		setTimeout(() => {
+			resolve(data);
+		}, 1000);
+	});

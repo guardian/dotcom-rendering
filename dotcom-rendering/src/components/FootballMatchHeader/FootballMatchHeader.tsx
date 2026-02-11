@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { log } from '@guardian/libs';
 import {
 	from,
 	headlineBold20Object,
@@ -11,6 +12,8 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { type ComponentProps, type ReactNode, useMemo } from 'react';
+import type { SWRConfiguration } from 'swr';
+import useSWR from 'swr';
 import type { FootballMatch } from '../../footballMatchV2';
 import { grid } from '../../grid';
 import {
@@ -23,11 +26,8 @@ import type { ColourName } from '../../paletteDeclarations';
 import { BigNumber } from '../BigNumber';
 import { FootballCrest } from '../FootballCrest';
 import { background, border, primaryText, secondaryText } from './colours';
-import { Tabs } from './Tabs';
-import type { SWRConfiguration } from 'swr';
-import useSWR from 'swr';
 import { type HeaderData, parse as parseHeaderData } from './headerData';
-import { log } from '@guardian/libs';
+import { Tabs } from './Tabs';
 
 type Props = {
 	leagueName: string;

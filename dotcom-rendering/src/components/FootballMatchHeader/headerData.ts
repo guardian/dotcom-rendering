@@ -1,15 +1,15 @@
+import type { ComponentProps } from 'react';
 import { safeParse } from 'valibot';
 import {
-	parseFootballMatchV2,
 	type FootballMatch,
+	parseFootballMatchV2,
 } from '../../footballMatchV2';
-import { error, fromValibot, ok, type Result } from '../../lib/result';
 import {
-	feFootballMatchHeaderSchema,
 	type FEFootballMatchHeader,
+	feFootballMatchHeaderSchema,
 } from '../../frontend/feFootballMatchHeader';
 import { safeParseURL } from '../../lib/parse';
-import type { ComponentProps } from 'react';
+import { error, fromValibot, ok, type Result } from '../../lib/result';
 import type { Tabs } from './Tabs';
 
 export type HeaderData = {
