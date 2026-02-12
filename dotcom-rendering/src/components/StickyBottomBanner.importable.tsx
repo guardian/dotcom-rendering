@@ -15,7 +15,7 @@ import type {
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
-import { useAB } from '../lib/useAB';
+import { useAB, useBetaAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
@@ -269,6 +269,7 @@ export const StickyBottomBanner = ({
 	const isSignedIn = useIsSignedIn();
 	const ophanPageViewId = usePageViewId(renderingTarget);
 	const abTestAPI = useAB()?.api;
+	const betaABTest = useBetaAB();
 	const isInAuxiaControlGroup = !!abTestAPI?.isUserInVariant(
 		'NoAuxiaSignInGate',
 		'control',
@@ -409,11 +410,23 @@ export const StickyBottomBanner = ({
 	// Dispatches 'banner:none' event for mobile sticky ad integration (see @guardian/commercial-dev).
 	// Ensures ads only insert when no banner will be shown.
 	// hasPickMessageCompleted distinguishes between initial state (not picked yet) and final state (picked nothing).
+	// Gated behind commercial-banner-ad-coordination A/B test (currently at 0%) - users in variant will NOT get the event
 	useEffect(() => {
-		if (hasPickMessageCompleted && SelectedBanner == null) {
+		const isInBannerAdTest =
+			betaABTest?.isUserInTestGroup(
+				'commercial-banner-ad-coordination',
+				'variant',
+			) ?? false;
+
+		if (
+			!isInBannerAdTest &&
+			hasPickMessageCompleted &&
+			SelectedBanner == null
+		) {
 			document.dispatchEvent(new CustomEvent('banner:none'));
 		}
-	}, [SelectedBanner, hasPickMessageCompleted]);
+	}, [SelectedBanner, hasPickMessageCompleted, betaABTest]);
+
 	if (SelectedBanner) {
 		return <SelectedBanner />;
 	}

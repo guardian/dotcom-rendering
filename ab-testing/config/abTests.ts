@@ -107,6 +107,19 @@ const ABTests: ABTest[] = [
 		groups: ["control", "stacked", "carousel"],
 		shouldForceMetricsCollection: false,
 	},
+	{
+		name: "commercial-banner-ad-coordination",
+		description:
+			"Dispatches events to coordinate mobile sticky ad placement with banners. Currently disabled due to CMP banner incorrectly blocking ads.",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-03-01",
+		type: "client",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
