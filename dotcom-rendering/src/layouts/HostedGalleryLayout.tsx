@@ -4,7 +4,6 @@ import {
 	palette as sourcePalette,
 	space,
 } from '@guardian/source/foundations';
-import { CallToActionAtom } from '../components/CallToActionAtom';
 import { HostedContentHeader } from '../components/HostedContentHeader';
 import { Island } from '../components/Island';
 import { Section } from '../components/Section';
@@ -116,51 +115,6 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 					</div>
 				</div>
 			</main>
-			<footer
-				css={css`
-					margin: 0 auto;
-
-					${from.desktop} {
-						max-width: 980px;
-					}
-
-					${from.leftCol} {
-						max-width: 1140px;
-					}
-
-					${from.wide} {
-						max-width: 1300px;
-					}
-				`}
-			>
-				<div
-					css={[
-						grid.container,
-						border,
-						css`
-							height: 200px; /* To be removed or replaced by the actual call to action background image height */
-
-							${from.tablet} {
-								height: 250px;
-							}
-
-							${from.desktop} {
-								height: 300px;
-							}
-						`,
-					]}
-				>
-					<div css={[grid.column.all]}>
-						<CallToActionAtom
-							ctaLinkURL="Link URL"
-							ctaBackgroundImage="Image URL"
-							ctaText="This is a call to action"
-							ctaButtonText="Learn more"
-							accentColour={sourcePalette.brand[400]}
-						/>
-					</div>
-				</div>
-			</footer>
 		</>
 	);
 };
