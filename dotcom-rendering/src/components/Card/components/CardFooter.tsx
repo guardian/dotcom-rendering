@@ -58,7 +58,7 @@ type Props = {
 	age?: JSX.Element;
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
-	mediaMetadata?: ArticleMedia;
+	media?: ArticleMedia;
 	isNewsletter?: boolean;
 	shouldReserveSpace?: { mobile: boolean; desktop: boolean };
 	isStorylines?: boolean;
@@ -69,7 +69,7 @@ export const CardFooter = ({
 	age,
 	commentCount,
 	cardBranding,
-	mediaMetadata,
+	media,
 	isNewsletter,
 	shouldReserveSpace,
 	isStorylines,
@@ -78,10 +78,10 @@ export const CardFooter = ({
 		format.theme === ArticleSpecial.Labs && !!cardBranding;
 
 	const shouldShowPill =
-		mediaMetadata?.type === 'YoutubeVideo' ||
-		mediaMetadata?.type === 'Audio' ||
-		mediaMetadata?.type === 'Gallery' ||
-		mediaMetadata?.type === 'SelfHostedVideo' ||
+		media?.type === 'YoutubeVideo' ||
+		media?.type === 'Audio' ||
+		media?.type === 'Gallery' ||
+		media?.type === 'SelfHostedVideo' ||
 		isNewsletter;
 
 	if (shouldShowPill) {
@@ -97,7 +97,7 @@ export const CardFooter = ({
 				{isStorylines && age}
 
 				<CardPill
-					media={mediaMetadata}
+					media={media}
 					isNewsletter={isNewsletter}
 					format={format}
 				/>

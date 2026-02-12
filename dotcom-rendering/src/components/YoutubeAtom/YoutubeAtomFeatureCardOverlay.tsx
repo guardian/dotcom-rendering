@@ -283,7 +283,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 								/>
 							) : undefined
 						}
-						mediaMetadata={articleMedia}
+						media={articleMedia}
 					/>
 				</div>
 			</button>

@@ -1230,7 +1230,7 @@ export const Card = ({
 											<LabsBranding />
 										) : undefined
 									}
-									mediaMetadata={
+									media={
 										!isGallerySecondaryOnward
 											? articleMedia
 											: undefined

@@ -810,7 +810,7 @@ export const FeatureCard = ({
 												) : undefined
 											}
 											isNewsletter={isNewsletter}
-											mediaMetadata={articleMedia}
+											media={articleMedia}
 										/>
 
 										{!isImmersive &&

@@ -31,7 +31,7 @@ export const WithGallery = {
 	...WithAge,
 	args: {
 		...WithAge.args,
-		mediaMetadata: {
+		media: {
 			type: 'Gallery',
 			count: '14',
 		},
@@ -42,7 +42,7 @@ export const WithAudio = {
 	...WithAge,
 	args: {
 		...WithAge.args,
-		mediaMetadata: {
+		media: {
 			type: 'Audio',
 			duration: '12:34',
 		},
@@ -53,7 +53,7 @@ export const WithYoutubeVideo = {
 	...WithAge,
 	args: {
 		...WithAge.args,
-		mediaMetadata: {
+		media: {
 			type: 'YoutubeVideo',
 			duration: 972,
 			isLive: false,
@@ -65,7 +65,7 @@ export const WithSelfHostedVideo = {
 	...WithAge,
 	args: {
 		...WithAge.args,
-		mediaMetadata: {
+		media: {
 			type: 'SelfHostedVideo',
 			duration: 254,
 		},
