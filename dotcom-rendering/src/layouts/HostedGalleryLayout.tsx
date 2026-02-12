@@ -138,7 +138,7 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 						grid.container,
 						border,
 						css`
-							height: 200px;
+							height: 200px; /* To be removed or replaced by the actual call to action background image height */
 
 							${from.tablet} {
 								height: 250px;
