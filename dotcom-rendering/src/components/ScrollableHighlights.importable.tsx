@@ -300,9 +300,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 								showQuotedHeadline={trail.showQuotedHeadline}
 								mainMedia={trail.mainMedia}
 								starRating={trail.starRating}
-								articleMediaMetadata={
-									trail.articleMediaMetadata
-								}
+								articleMedia={trail.articleMedia}
 							/>
 						</li>
 					);

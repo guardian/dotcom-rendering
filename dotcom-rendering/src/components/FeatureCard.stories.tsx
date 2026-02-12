@@ -249,7 +249,7 @@ export const Podcast = {
 			},
 			duration: '55:09',
 		},
-		articleMediaMetadata: {
+		articleMedia: {
 			type: 'Audio',
 			duration: '55:09',
 		},
@@ -277,7 +277,7 @@ export const Gallery = {
 			type: 'Gallery',
 			count: '12',
 		},
-		articleMediaMetadata: {
+		articleMedia: {
 			type: 'Gallery',
 			count: '12',
 		},
@@ -315,8 +315,9 @@ export const YoutubeVideo = {
 			duration: 120,
 			expired: false,
 			image: 'https://media.guim.co.uk/f2aedd24e5414073a653f68112e0ad070c6f4a2b/254_0_7493_4500/master/7493.jpg',
+			isLive: false,
 		},
-		articleMediaMetadata: {
+		articleMedia: {
 			type: 'YoutubeVideo',
 			duration: 120,
 			isLive: false,

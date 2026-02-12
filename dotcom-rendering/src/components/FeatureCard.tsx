@@ -26,7 +26,7 @@ import type {
 	DCRSupportingContent,
 } from '../types/front';
 import type { CardMediaType } from '../types/layout';
-import type { MainMedia } from '../types/mainMedia';
+import type { ArticleMedia, MainMedia } from '../types/mainMedia';
 import { BrandingLabel } from './BrandingLabel';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
@@ -385,7 +385,7 @@ export type Props = {
 	isImmersive?: boolean;
 	isStorylines?: boolean;
 	starRatingSize: RatingSizeType;
-	articleMediaMetadata?: MediaMetadata;
+	articleMedia?: ArticleMedia;
 };
 
 export const FeatureCard = ({
@@ -424,7 +424,7 @@ export const FeatureCard = ({
 	isImmersive = false,
 	isStorylines = false,
 	starRatingSize,
-	articleMediaMetadata,
+	articleMedia,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -540,9 +540,7 @@ export const FeatureCard = ({
 										byline={byline}
 										showByline={showByline}
 										isLive={media.mainMedia.isLive}
-										articleMediaMetadata={
-											articleMediaMetadata
-										}
+										articleMedia={articleMedia}
 									/>
 								</Island>
 							</div>
@@ -805,7 +803,7 @@ export const FeatureCard = ({
 												) : undefined
 											}
 											isNewsletter={isNewsletter}
-											mediaMetadata={articleMediaMetadata}
+											mediaMetadata={articleMedia}
 										/>
 
 										{!isImmersive &&

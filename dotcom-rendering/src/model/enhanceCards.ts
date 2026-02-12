@@ -22,7 +22,7 @@ import type {
 	DCRSlideshowImage,
 	DCRSupportingContent,
 } from '../types/front';
-import type { MainMedia, MediaMetadata } from '../types/mainMedia';
+import type { ArticleMedia, MainMedia } from '../types/mainMedia';
 import type { PodcastSeriesImage, TagType } from '../types/tag';
 import { enhanceSnaps } from './enhanceSnaps';
 import { enhanceTags } from './enhanceTags';
@@ -329,7 +329,7 @@ const decideReplacementMedia = (
 
 const getMediaMetadata = (
 	articleMainMedia: MainMedia,
-): MediaMetadata | undefined => {
+): ArticleMedia | undefined => {
 	switch (articleMainMedia.type) {
 		case 'Gallery':
 			return {
@@ -439,7 +439,7 @@ export const enhanceCards = (
 
 		const cardMainMedia = replacementMainMedia ?? articleMainMedia;
 
-		const articleMediaMetadata =
+		const articleMedia =
 			articleMainMedia && getMediaMetadata(articleMainMedia);
 
 		return {
@@ -485,7 +485,7 @@ export const enhanceCards = (
 					  )
 					: undefined,
 			mainMedia: cardMainMedia,
-			articleMediaMetadata,
+			articleMedia,
 			isExternalLink: faciaCard.card.cardStyle.type === 'ExternalLink',
 			embedUri: faciaCard.properties.embedUri ?? undefined,
 			branding: stripBranding ? undefined : branding,

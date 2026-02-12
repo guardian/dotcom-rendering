@@ -5,7 +5,7 @@ import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
 import type { AdTargeting } from '../types/commercial';
 import type { AspectRatio } from '../types/front';
-import type { MediaMetadata } from '../types/mainMedia';
+import type { ArticleMedia } from '../types/mainMedia';
 import { Caption } from './Caption';
 import type { PlayButtonSize } from './Card/components/PlayIcon';
 import type { ResponsiveFontSize } from './CardHeadline';
@@ -56,7 +56,7 @@ type Props = {
 	contentType?: string;
 	contentLayout?: string;
 	isLive?: boolean;
-	articleMediaMetadata?: MediaMetadata;
+	articleMedia?: ArticleMedia;
 };
 
 export const YoutubeBlockComponent = ({
@@ -99,7 +99,7 @@ export const YoutubeBlockComponent = ({
 	contentType,
 	contentLayout,
 	isLive,
-	articleMediaMetadata,
+	articleMedia,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -228,7 +228,7 @@ export const YoutubeBlockComponent = ({
 				byline={byline}
 				showByline={showByline}
 				isLive={isLive}
-				articleMediaMetadata={articleMediaMetadata}
+				articleMedia={articleMedia}
 			/>
 			{!hideCaption && (
 				<Caption

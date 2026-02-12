@@ -79,7 +79,7 @@ export const StaticFeatureTwo = ({
 							isNewsletter={card.isNewsletter}
 							showQuotes={card.showQuotedHeadline}
 							starRatingSize={'medium'}
-							articleMediaMetadata={card.articleMediaMetadata}
+							articleMedia={card.articleMedia}
 						/>
 					</LI>
 				);
