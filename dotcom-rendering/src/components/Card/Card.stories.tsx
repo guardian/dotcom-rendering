@@ -310,6 +310,16 @@ export const WithExternalLink = () => {
 	);
 };
 
+export const WithANewsletter = () => {
+	return (
+		<CardGroup>
+			<CardWrapper>
+				<Card {...basicCardProps} isNewsletter={true} />
+			</CardWrapper>
+		</CardGroup>
+	);
+};
+
 export const WithMediaType = () => {
 	return (
 		<>
