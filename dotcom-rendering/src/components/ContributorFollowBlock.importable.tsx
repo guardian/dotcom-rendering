@@ -84,13 +84,7 @@ const FollowButton = ({ isFollowing, onClickHandler }: FollowButtonProps) => {
 const notificationAlertStyles = css`
 	${textSans15}
 	color: ${palette('--follow-text')};
-	background: none;
-	border: none;
-	display: block;
-	margin-left: 0;
 	min-height: ${space[6]}px;
-	padding: 0;
-	text-align: left;
 	width: 100%;
 `;
 
@@ -103,7 +97,6 @@ const notificationAlertRowStyles = css`
 
 const notificationIconStyles = css`
 	display: flex;
-	margin: 0;
 	margin-right: ${space[1]}px;
 
 	svg {

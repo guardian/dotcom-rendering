@@ -22,13 +22,11 @@ type Props = {
 const contributorBlockStyles = css`
 	display: flex;
 	flex-direction: column;
-	padding: ${space[2]}px;
-	padding-left: 0;
+	padding: ${space[2]}px ${space[2]}px ${space[2]}px 0;
 `;
 
 const topRowStyles = css`
 	display: flex;
-	flex-direction: row;
 	gap: ${space[3]}px;
 	margin: ${space[2]}px ${space[3]}px ${space[4]}px 0;
 `;
@@ -60,7 +58,6 @@ const titleStyles = css`
 const bioStyles = css`
 	${textEgyptian14};
 	font-weight: 500;
-	line-height: 1.3;
 	color: ${palette('--contributor-follow-bio-text')};
 	margin: 0;
 `;
