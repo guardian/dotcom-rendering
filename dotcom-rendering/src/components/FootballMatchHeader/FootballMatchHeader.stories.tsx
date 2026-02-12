@@ -71,12 +71,12 @@ export const Fixture = {
 	},
 	play: async ({ canvasElement }) => {
 		const list = await getListElement(canvasElement);
-		const items = within(list).getAllByRole('listitem');
+		let items = within(list).getAllByRole('listitem');
 		void expect(items.length).toBe(1);
 		void expect(items[0]).toHaveTextContent('Match info');
 
 		await waitFor(() => {
-			const items = within(list).getAllByRole('listitem');
+			items = within(list).getAllByRole('listitem');
 			void expect(items.length).toBe(1);
 			void expect(items[0]).toHaveTextContent('Match info');
 		});
@@ -127,12 +127,12 @@ export const Live = {
 	},
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
-		expect(canvas.getByLabelText('Score: 0')).toBeInTheDocument();
-		expect(canvas.getByLabelText('Score: 13')).toBeInTheDocument();
+		void expect(canvas.getByLabelText('Score: 0')).toBeInTheDocument();
+		void expect(canvas.getByLabelText('Score: 13')).toBeInTheDocument();
 
 		await waitFor(() => {
-			expect(canvas.getByLabelText('Score: 3')).toBeInTheDocument();
-			expect(canvas.getByLabelText('Score: 4')).toBeInTheDocument();
+			void expect(canvas.getByLabelText('Score: 3')).toBeInTheDocument();
+			void expect(canvas.getByLabelText('Score: 4')).toBeInTheDocument();
 		});
 	},
 } satisfies Story;
@@ -162,12 +162,12 @@ export const Result = {
 
 	play: async ({ canvasElement }) => {
 		const list = await getListElement(canvasElement);
-		const items = within(list).getAllByRole('listitem');
+		let items = within(list).getAllByRole('listitem');
 		void expect(items.length).toBe(1);
 		void expect(items[0]).toHaveTextContent('Match info');
 
 		await waitFor(() => {
-			const items = within(list).getAllByRole('listitem');
+			items = within(list).getAllByRole('listitem');
 			void expect(items.length).toBe(3);
 			void expect(items[0]).toHaveTextContent('Match report');
 			void expect(items[1]).toHaveTextContent('Live feed');
