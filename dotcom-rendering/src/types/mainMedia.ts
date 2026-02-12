@@ -20,7 +20,7 @@ export type YoutubeVideo = Media & {
 	duration: number;
 	expired: boolean;
 	image?: string;
-	isLive?: boolean;
+	isLive: boolean;
 };
 
 type SelfHostedVideo = Media & {
@@ -48,7 +48,7 @@ type Gallery = Media & {
 
 export type MainMedia = YoutubeVideo | SelfHostedVideo | Audio | Gallery;
 
-export type MediaMetadata =
+export type ArticleMedia =
 	| Pick<Gallery, 'type' | 'count'>
 	| Pick<Audio, 'type' | 'duration'>
 	| Pick<SelfHostedVideo, 'type' | 'duration'>
