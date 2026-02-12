@@ -100,6 +100,11 @@ export type Props = {
 	 */
 	mainMedia?: MainMedia;
 	/**
+	 * The main media from the target article (used for pills/metadata)
+	 * Can differ from mainMedia if the card has replacement media.
+	 */
+	articleMedia?: ArticleMedia;
+	/**
 	 * For interactive media (e.g., video or slideshow), certain card sizes are restricted from displaying
 	 * the interactive content because controls may be unavailable or inaccessible at those sizes.
 	 *
@@ -163,11 +168,6 @@ export type Props = {
 	isStorylines?: boolean;
 	starRatingSize?: RatingSizeType;
 	isInPersonalisationVariant?: boolean;
-	/**
-	 * The main media from the article (used for pills/metadata)
-	 * Can differ from cardMedia when card shows replacement media
-	 */
-	articleMedia?: ArticleMedia;
 };
 
 const waveformWrapper = (

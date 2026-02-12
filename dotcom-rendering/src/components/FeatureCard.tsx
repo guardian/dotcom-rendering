@@ -341,7 +341,15 @@ export type Props = {
 	imageSize: MediaSizeType;
 	imageLoading: Loading;
 	showClock?: boolean;
+	/**
+	 * Media displayed on this card
+	 */
 	mainMedia?: MainMedia;
+	/**
+	 * The main media from the target article (used for pills/metadata)
+	 * Can differ from mainMedia if the card has replacement media.
+	 */
+	articleMedia?: ArticleMedia;
 	trailText?: string;
 	/**
 	 * Note YouTube recommends a minimum width of 480px @see https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-youtube-player-size
@@ -385,7 +393,6 @@ export type Props = {
 	isImmersive?: boolean;
 	isStorylines?: boolean;
 	starRatingSize: RatingSizeType;
-	articleMedia?: ArticleMedia;
 };
 
 export const FeatureCard = ({

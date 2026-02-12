@@ -23,13 +23,20 @@ export type HighlightsCardProps = {
 	image?: DCRFrontImage;
 	imageLoading?: Loading;
 	avatarUrl?: string;
+	/**
+	 * Media displayed on this card
+	 */
 	mainMedia?: MainMedia;
+	/**
+	 * The main media from the target article (used for pills/metadata)
+	 * Can differ from mainMedia if the card has replacement media.
+	 */
+	articleMedia?: ArticleMedia;
 	kickerText?: string;
 	dataLinkName: string;
 	byline?: string;
 	isExternalLink: boolean;
 	starRating?: Rating;
-	articleMedia?: ArticleMedia;
 };
 
 const container = css`

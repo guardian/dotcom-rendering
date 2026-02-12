@@ -141,6 +141,11 @@ type Props = {
 	isImmersive?: boolean;
 	byline?: string;
 	showByline?: boolean;
+	/**
+	 * The main media from the target article (used for pills/metadata)
+	 * Can differ from mainMedia if the card has replacement media.
+	 * As such, it is not used to display media on the card.
+	 */
 	articleMedia?: ArticleMedia;
 };
 
