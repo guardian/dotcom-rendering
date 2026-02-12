@@ -22,14 +22,15 @@ type Props = {
 const contributorBlockStyles = css`
 	display: flex;
 	flex-direction: column;
-	padding: ${space[2]}px 0;
+	padding: ${space[2]}px;
+	padding-left: 0;
 `;
 
 const topRowStyles = css`
 	display: flex;
 	flex-direction: row;
 	gap: ${space[3]}px;
-	margin: ${space[2]}px 0;
+	margin: ${space[2]}px ${space[3]}px ${space[4]}px 0;
 `;
 
 const avatarContainerStyles = css`
@@ -62,23 +63,6 @@ const bioStyles = css`
 	line-height: 1.3;
 	color: ${palette('--contributor-follow-bio-text')};
 	margin: 0;
-
-	p {
-		margin: 0 0 ${space[1]}px;
-	}
-
-	a {
-		color: ${palette('--link-kicker-text')};
-		text-underline-offset: 3px;
-	}
-
-	a:not(:hover) {
-		text-decoration-color: ${palette('--bio-link-underline')};
-	}
-
-	a:hover {
-		text-decoration: underline;
-	}
 `;
 
 const followButtonContainerStyles = css`
