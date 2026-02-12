@@ -95,6 +95,9 @@ export type Props = {
 	trailText?: string;
 	avatarUrl?: string;
 	showClock?: boolean;
+	/**
+	 * Media displayed on this card
+	 */
 	mainMedia?: MainMedia;
 	/**
 	 * For interactive media (e.g., video or slideshow), certain card sizes are restricted from displaying
@@ -160,6 +163,10 @@ export type Props = {
 	isStorylines?: boolean;
 	starRatingSize?: RatingSizeType;
 	isInPersonalisationVariant?: boolean;
+	/**
+	 * The main media from the article (used for pills/metadata)
+	 * Can differ from cardMedia when card shows replacement media
+	 */
 	articleMedia?: ArticleMedia;
 };
 
