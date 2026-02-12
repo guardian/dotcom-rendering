@@ -40,6 +40,7 @@ type Options = {
 	pageId: string;
 	serverSideABTests?: Record<string, string>;
 	switches?: Switches;
+	byline?: string;
 };
 
 const enhanceNewsletterSignup =
