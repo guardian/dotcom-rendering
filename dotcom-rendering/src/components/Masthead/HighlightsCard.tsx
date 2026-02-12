@@ -180,7 +180,7 @@ export const HighlightsCard = ({
 						<div>
 							<CardPill
 								format={format}
-								mediaMetadata={articleMediaMetadata}
+								media={articleMediaMetadata}
 							/>
 						</div>
 					)}

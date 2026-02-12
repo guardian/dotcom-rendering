@@ -97,7 +97,7 @@ export const CardFooter = ({
 				{isStorylines && age}
 
 				<CardPill
-					mediaMetadata={mediaMetadata}
+					media={mediaMetadata}
 					isNewsletter={isNewsletter}
 					format={format}
 				/>

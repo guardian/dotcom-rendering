@@ -19,23 +19,19 @@ const liveBulletStyles = css`
 
 type CardPillProps = {
 	format: ArticleFormat;
-	mediaMetadata?: MediaMetadata;
+	media?: MediaMetadata;
 	isNewsletter?: boolean;
 };
 
-export const CardPill = ({
-	format,
-	mediaMetadata,
-	isNewsletter,
-}: CardPillProps) => {
+export const CardPill = ({ format, media, isNewsletter }: CardPillProps) => {
 	if (isNewsletter) return <Pill content="Newsletter" />;
-	if (!mediaMetadata) return null;
+	if (!media) return null;
 
-	switch (mediaMetadata.type) {
+	switch (media.type) {
 		case 'Gallery':
 			return (
 				<Pill
-					content={mediaMetadata.count}
+					content={media.count}
 					icon={<SvgCamera />}
 					prefix="Gallery"
 				/>
@@ -43,14 +39,14 @@ export const CardPill = ({
 		case 'Audio':
 			return (
 				<Pill
-					content={mediaMetadata.duration}
+					content={media.duration}
 					icon={<SvgMediaControlsPlay width={18} />}
 					prefix="Podcast"
 				/>
 			);
 		case 'YoutubeVideo':
 			if (format.design !== ArticleDesign.Video) return null;
-			if (mediaMetadata.isLive) {
+			if (media.isLive) {
 				return (
 					<Pill
 						content="Live"
@@ -60,7 +56,7 @@ export const CardPill = ({
 			}
 			return (
 				<Pill
-					content={secondsToDuration(mediaMetadata.duration)}
+					content={secondsToDuration(media.duration)}
 					icon={<SvgMediaControlsPlay width={18} />}
 					prefix="Video"
 				/>
@@ -69,7 +65,7 @@ export const CardPill = ({
 			if (format.design !== ArticleDesign.Video) return null;
 			return (
 				<Pill
-					content={secondsToDuration(mediaMetadata.duration)}
+					content={secondsToDuration(media.duration)}
 					icon={<SvgMediaControlsPlay width={18} />}
 					prefix="Video"
 				/>
