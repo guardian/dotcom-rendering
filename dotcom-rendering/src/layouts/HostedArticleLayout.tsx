@@ -90,6 +90,12 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 								css`
 									overflow: hidden;
 									max-height: 400px;
+									${from.leftCol} {
+										${grid.between(
+											'left-column-start',
+											'right-column-end',
+										)}
+									}
 								`,
 							]}
 						>
