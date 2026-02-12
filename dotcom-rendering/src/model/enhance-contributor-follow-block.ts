@@ -20,6 +20,9 @@ export const enhanceContributorFollowBlock =
 		byline: string | undefined,
 	) =>
 	(elements: FEElement[]): FEElement[] => {
+		// TODO: Gate on A/B test before enabling
+		return elements;
+
 		if (renderingTarget !== 'Apps') {
 			return elements;
 		}

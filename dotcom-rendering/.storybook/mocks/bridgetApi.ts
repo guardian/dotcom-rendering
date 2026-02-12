@@ -107,12 +107,7 @@ export const getNativeABTestingClient: BridgetApi<
 	'getNativeABTestingClient'
 > = () => ({
 	getParticipations: async () =>
-		new Map(
-			Object.entries({
-				'test-id': 'variant',
-				contributor_profile_test: 'variant',
-			}),
-		),
+		new Map(Object.entries({ 'test-id': 'variant' })),
 });
 
 export const ensure_all_exports_are_present = {

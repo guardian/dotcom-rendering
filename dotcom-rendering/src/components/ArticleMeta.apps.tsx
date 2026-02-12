@@ -297,7 +297,9 @@ export const ArticleMetaApps = ({
 							format={format}
 						/>
 					)}
-					{shouldShowFollowButtons(isAnalysis || isImmersive) &&
+					{shouldShowFollowButtons(
+						isComment || isAnalysis || isImmersive,
+					) &&
 						soleContributor && (
 							<Island
 								priority="feature"
