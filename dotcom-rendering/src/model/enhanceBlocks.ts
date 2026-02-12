@@ -18,6 +18,7 @@ import { enhanceDots } from './enhance-dots';
 import { enhanceEmbeds } from './enhance-embeds';
 import { enhanceH2s } from './enhance-H2s';
 import { enhanceElementsImages, enhanceImages } from './enhance-images';
+import { enhanceInteractiveAtomElements } from './enhance-interactive-atom';
 import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceProductSummary } from './enhance-product-summary';
@@ -80,6 +81,7 @@ export const enhanceElements =
 			),
 			enhanceDividers,
 			enhanceH2s,
+			enhanceInteractiveAtomElements(format),
 			enhanceInteractiveContentsElements,
 			enhanceBlockquotes(format),
 			enhanceDots,
