@@ -334,7 +334,7 @@ export interface InteractiveAtomBlockElement {
 	html?: string;
 	css?: string;
 	placeholderUrl?: string;
-	role?: RoleType;
+	role?: RoleType | 'fullWidth';
 }
 
 // Can't guarantee anything in interactiveBlockElement :shrug:

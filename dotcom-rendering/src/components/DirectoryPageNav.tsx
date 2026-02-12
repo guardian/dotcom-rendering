@@ -119,19 +119,21 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 
 	const { textColor, backgroundColor } = config;
 
-	const nav = css({
-		backgroundColor,
-		'&': css(grid.paddedContainer),
-		alignContent: 'space-between',
-		height: 116,
-		[from.tablet]: {
-			height: 140,
+	const nav = css(
+		{
+			backgroundColor,
+			'&': css(grid.paddedContainer),
+			alignContent: 'space-between',
+			height: 116,
+			[from.tablet]: {
+				height: 140,
+			},
+			[from.desktop]: {
+				height: 150,
+			},
 		},
-		[from.desktop]: {
-			height: 150,
-		},
-		...backgroundImageStyles(config.backgroundImages),
-	});
+		backgroundImageStyles(config.backgroundImages),
+	);
 
 	const largeLinkStyles = css({
 		...headlineBold24Object,
