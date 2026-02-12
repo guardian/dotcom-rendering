@@ -44,6 +44,8 @@ export const allowedPageIds: string[] = [
 	'thefilter-us/2026/feb/06/best-personal-travel-item-backpacks-us',
 	'thefilter/2024/nov/21/best-coffee-machines',
 	'thefilter/2026/feb/04/best-soup-maker-uk',
+	'thefilter-us/2025/oct/01/best-best-bath-towels-us',
+	'thefilter/2025/apr/03/best-walking-pads-under-desk-treadmills-uk',
 ];
 
 const isEligibleForSummary = (pageId: string) => {
