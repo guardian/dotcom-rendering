@@ -30,6 +30,7 @@ export const CardPill = ({
 }: CardPillProps) => {
 	if (isNewsletter) return <Pill content="Newsletter" />;
 	if (!mediaMetadata) return null;
+
 	switch (mediaMetadata.type) {
 		case 'Gallery':
 			return (
@@ -48,7 +49,7 @@ export const CardPill = ({
 				/>
 			);
 		case 'YoutubeVideo':
-			if (ArticleDesign.Video !== format.design) return null;
+			if (format.design !== ArticleDesign.Video) return null;
 			if (mediaMetadata.isLive) {
 				return (
 					<Pill
@@ -65,7 +66,7 @@ export const CardPill = ({
 				/>
 			);
 		case 'SelfHostedVideo':
-			if (ArticleDesign.Video !== format.design) return null;
+			if (format.design !== ArticleDesign.Video) return null;
 			return (
 				<Pill
 					content={secondsToDuration(mediaMetadata.duration)}
