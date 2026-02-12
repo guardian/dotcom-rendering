@@ -48,8 +48,8 @@ type Gallery = Media & {
 
 export type MainMedia = YoutubeVideo | SelfHostedVideo | Audio | Gallery;
 
-export type ArticleMediaMetadata =
-	| { type: 'Gallery'; count: string }
-	| { type: 'Audio'; duration: string }
-	| { type: 'SelfHostedVideo'; duration: number }
-	| { type: 'YoutubeVideo'; duration: number; isLive: boolean };
+export type MediaMetadata =
+	| Pick<Gallery, 'type' | 'count'>
+	| Pick<Audio, 'type' | 'duration'>
+	| Pick<SelfHostedVideo, 'type' | 'duration'>
+	| Pick<YoutubeVideo, 'type' | 'duration' | 'isLive'>;

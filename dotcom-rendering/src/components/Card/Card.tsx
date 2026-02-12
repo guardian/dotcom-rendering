@@ -27,7 +27,7 @@ import type {
 	DCRSupportingContent,
 } from '../../types/front';
 import type { CardMediaType } from '../../types/layout';
-import type { ArticleMediaMetadata, MainMedia } from '../../types/mainMedia';
+import type { MainMedia, MediaMetadata } from '../../types/mainMedia';
 import type { OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
 import { BrandingLabel } from '../BrandingLabel';
@@ -160,7 +160,7 @@ export type Props = {
 	isStorylines?: boolean;
 	starRatingSize?: RatingSizeType;
 	isInPersonalisationVariant?: boolean;
-	articleMediaMetadata?: ArticleMediaMetadata;
+	articleMediaMetadata?: MediaMetadata;
 };
 
 const waveformWrapper = (

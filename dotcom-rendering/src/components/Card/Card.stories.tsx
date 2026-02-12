@@ -13,7 +13,7 @@ import type {
 	DCRContainerPalette,
 	DCRSupportingContent,
 } from '../../types/front';
-import type { ArticleMediaMetadata, MainMedia } from '../../types/mainMedia';
+import type { MainMedia, MediaMetadata } from '../../types/mainMedia';
 import { ContainerOverrides } from '../ContainerOverrides';
 import { FrontSection } from '../FrontSection';
 import { Section } from '../Section';
@@ -98,22 +98,22 @@ const mainGallery: MainMedia = {
 	count: '5',
 };
 
-const audioMetaData: ArticleMediaMetadata = {
+const audioMetaData: MediaMetadata = {
 	type: 'Audio',
 	duration: '30:24',
 };
 
-const galleryMetaData: ArticleMediaMetadata = {
+const galleryMetaData: MediaMetadata = {
 	type: 'Gallery',
 	count: '5',
 };
-const youtubeMetaData: ArticleMediaMetadata = {
+const youtubeMetaData: MediaMetadata = {
 	type: 'YoutubeVideo',
 	duration: 200,
 	isLive: false,
 };
 
-const selfHostedMetaData: ArticleMediaMetadata = {
+const selfHostedMetaData: MediaMetadata = {
 	type: 'SelfHostedVideo',
 	duration: 320,
 };

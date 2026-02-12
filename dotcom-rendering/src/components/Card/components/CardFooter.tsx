@@ -6,7 +6,7 @@ import {
 	textSansBold12,
 } from '@guardian/source/foundations';
 import { type ArticleFormat, ArticleSpecial } from '../../../lib/articleFormat';
-import type { ArticleMediaMetadata } from '../../../types/mainMedia';
+import type { MediaMetadata } from '../../../types/mainMedia';
 import { CardPill } from '../../CardPill';
 
 const contentStyles = css`
@@ -58,7 +58,7 @@ type Props = {
 	age?: JSX.Element;
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
-	mediaMetadata?: ArticleMediaMetadata;
+	mediaMetadata?: MediaMetadata;
 	isNewsletter?: boolean;
 	shouldReserveSpace?: { mobile: boolean; desktop: boolean };
 	isStorylines?: boolean;

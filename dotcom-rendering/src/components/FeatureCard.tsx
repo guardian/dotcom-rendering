@@ -26,7 +26,7 @@ import type {
 	DCRSupportingContent,
 } from '../types/front';
 import type { CardMediaType } from '../types/layout';
-import type { ArticleMediaMetadata, MainMedia } from '../types/mainMedia';
+import type { MainMedia } from '../types/mainMedia';
 import { BrandingLabel } from './BrandingLabel';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
@@ -385,7 +385,7 @@ export type Props = {
 	isImmersive?: boolean;
 	isStorylines?: boolean;
 	starRatingSize: RatingSizeType;
-	articleMediaMetadata?: ArticleMediaMetadata;
+	articleMediaMetadata?: MediaMetadata;
 };
 
 export const FeatureCard = ({

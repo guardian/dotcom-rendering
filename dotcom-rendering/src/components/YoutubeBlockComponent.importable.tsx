@@ -5,7 +5,7 @@ import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
 import type { AdTargeting } from '../types/commercial';
 import type { AspectRatio } from '../types/front';
-import type { ArticleMediaMetadata } from '../types/mainMedia';
+import type { MediaMetadata } from '../types/mainMedia';
 import { Caption } from './Caption';
 import type { PlayButtonSize } from './Card/components/PlayIcon';
 import type { ResponsiveFontSize } from './CardHeadline';
@@ -56,7 +56,7 @@ type Props = {
 	contentType?: string;
 	contentLayout?: string;
 	isLive?: boolean;
-	articleMediaMetadata?: ArticleMediaMetadata;
+	articleMediaMetadata?: MediaMetadata;
 };
 
 export const YoutubeBlockComponent = ({

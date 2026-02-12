@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react';
 import type { ArticleFormat } from '../../lib/articleFormat';
 import type { AdTargeting } from '../../types/commercial';
 import type { AspectRatio } from '../../types/front';
-import type { ArticleMediaMetadata } from '../../types/mainMedia';
+import type { MediaMetadata } from '../../types/mainMedia';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { PlayButtonSize } from '../Card/components/PlayIcon';
 import type { ResponsiveFontSize } from '../CardHeadline';
@@ -65,7 +65,7 @@ export type Props = {
 	byline?: string;
 	showByline?: boolean;
 	isLive?: boolean;
-	articleMediaMetadata?: ArticleMediaMetadata;
+	articleMediaMetadata?: MediaMetadata;
 };
 
 /**

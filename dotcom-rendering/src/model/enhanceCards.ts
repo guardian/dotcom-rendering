@@ -22,7 +22,7 @@ import type {
 	DCRSlideshowImage,
 	DCRSupportingContent,
 } from '../types/front';
-import type { ArticleMediaMetadata, MainMedia } from '../types/mainMedia';
+import type { MainMedia, MediaMetadata } from '../types/mainMedia';
 import type { PodcastSeriesImage, TagType } from '../types/tag';
 import { enhanceSnaps } from './enhanceSnaps';
 import { enhanceTags } from './enhanceTags';
@@ -327,9 +327,9 @@ const decideReplacementMedia = (
 	return undefined;
 };
 
-const getArticleMediaMetadata = (
+const getMediaMetadata = (
 	articleMainMedia: MainMedia,
-): ArticleMediaMetadata | undefined => {
+): MediaMetadata | undefined => {
 	switch (articleMainMedia.type) {
 		case 'Gallery':
 			return {
@@ -440,7 +440,7 @@ export const enhanceCards = (
 		const cardMainMedia = replacementMainMedia ?? articleMainMedia;
 
 		const articleMediaMetadata =
-			articleMainMedia && getArticleMediaMetadata(articleMainMedia);
+			articleMainMedia && getMediaMetadata(articleMainMedia);
 
 		return {
 			format,

@@ -16,7 +16,7 @@ import type { Branding, CollectionBranding } from './branding';
 import type { BoostLevel, StarRating } from './content';
 import type { FooterType } from './footer';
 import type { FENavType } from './frontend';
-import type { ArticleMediaMetadata, MainMedia } from './mainMedia';
+import type { MainMedia, MediaMetadata } from './mainMedia';
 import type { FETagType } from './tag';
 import type { Territory } from './territory';
 import type { TrailType } from './trails';
@@ -103,7 +103,7 @@ export type DCRFrontCard = {
 	showVideo?: boolean;
 	uniqueId?: string;
 	serverTime?: number;
-	articleMediaMetadata?: ArticleMediaMetadata;
+	articleMediaMetadata?: MediaMetadata;
 };
 
 export type DCRSlideshowImage = {
