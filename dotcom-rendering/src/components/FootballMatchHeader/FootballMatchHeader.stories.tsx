@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { expect, waitFor, within } from 'storybook/test';
+import { expect, within } from 'storybook/test';
 import { SWRConfig } from 'swr';
 import {
 	matchDayLive,
@@ -69,16 +69,21 @@ export const Fixture = {
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
 		),
 	},
-	play: async ({ canvasElement }) => {
-		const list = await getListElement(canvasElement);
-		let items = within(list).getAllByRole('listitem');
-		void expect(items.length).toBe(1);
-		void expect(items[0]).toHaveTextContent('Match info');
+	play: async ({ canvas, step }) => {
+		const nav = canvas.getByRole('navigation');
+		const initialTabs = within(nav).getAllByRole('listitem');
 
-		await waitFor(() => {
-			items = within(list).getAllByRole('listitem');
-			void expect(items.length).toBe(1);
-			void expect(items[0]).toHaveTextContent('Match info');
+		void expect(initialTabs.length).toBe(1);
+		void expect(initialTabs[0]).toHaveTextContent('Match info');
+
+		await step('Fetch updated match header data', async () => {
+			// Wait for 'Home Team' to appear which indicates match header data
+			// has been fetched and the UI updated
+			await canvas.findByText('Home Team');
+
+			const updatedTabs = within(nav).getAllByRole('listitem');
+			void expect(updatedTabs.length).toBe(1);
+			void expect(updatedTabs[0]).toHaveTextContent('Match info');
 		});
 	},
 } satisfies Story;
@@ -125,12 +130,15 @@ export const Live = {
 				reportURL: undefined,
 			}),
 	},
-	play: async ({ canvasElement }) => {
-		const canvas = within(canvasElement);
+	play: async ({ canvas, step }) => {
 		void expect(canvas.getByLabelText('Score: 0')).toBeInTheDocument();
 		void expect(canvas.getByLabelText('Score: 13')).toBeInTheDocument();
 
-		await waitFor(() => {
+		await step('Fetch updated match header data', async () => {
+			// Wait for 'Home Team' to appear which indicates match header data
+			// has been fetched and the UI updated
+			await canvas.findByText('Home Team');
+
 			void expect(canvas.getByLabelText('Score: 3')).toBeInTheDocument();
 			void expect(canvas.getByLabelText('Score: 4')).toBeInTheDocument();
 		});
@@ -160,29 +168,26 @@ export const Result = {
 			}),
 	},
 
-	play: async ({ canvasElement }) => {
-		const list = await getListElement(canvasElement);
-		let items = within(list).getAllByRole('listitem');
-		void expect(items.length).toBe(1);
-		void expect(items[0]).toHaveTextContent('Match info');
+	play: async ({ canvas, step }) => {
+		const nav = canvas.getByRole('navigation');
+		const initialTabs = within(nav).getAllByRole('listitem');
 
-		await waitFor(() => {
-			items = within(list).getAllByRole('listitem');
-			void expect(items.length).toBe(3);
-			void expect(items[0]).toHaveTextContent('Match report');
-			void expect(items[1]).toHaveTextContent('Live feed');
-			void expect(items[2]).toHaveTextContent('Match info');
+		void expect(initialTabs.length).toBe(1);
+		void expect(initialTabs[0]).toHaveTextContent('Match info');
+
+		await step('Fetch updated match header data', async () => {
+			// Wait for 'Home Team' to appear which indicates match header data
+			// has been fetched and the UI updated
+			await canvas.findByText('Home Team');
+
+			const updatedTabs = within(nav).getAllByRole('listitem');
+			void expect(updatedTabs.length).toBe(3);
+			void expect(updatedTabs[0]).toHaveTextContent('Match report');
+			void expect(updatedTabs[1]).toHaveTextContent('Live feed');
+			void expect(updatedTabs[2]).toHaveTextContent('Match info');
 		});
 	},
 } satisfies Story;
-
-const getListElement = async (canvasElement: HTMLElement) => {
-	const canvas = within(canvasElement);
-	const nav = await canvas.findByRole('navigation');
-	const navQueries = within(nav);
-	// Get the list element that is within a nav element
-	return await navQueries.findByRole('list');
-};
 
 const getMockData = (data: FEFootballMatchHeader) =>
 	new Promise((resolve) => {
