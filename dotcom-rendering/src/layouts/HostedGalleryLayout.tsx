@@ -68,7 +68,55 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 					</Section>
 				</Stuck>
 			) : null}
-			<div
+			<main>
+				<header css={[grid.container, border]}>
+					<div
+						css={[grid.between('centre-column-start', 'grid-end')]}
+					>
+						{props.content.frontendData.headline}
+					</div>
+				</header>
+				<div css={[grid.container]}>
+					<article css={[grid.column.all]}>
+						<div css={border}>Gallery</div>
+						<div css={border}>Onward</div>
+					</article>
+				</div>
+				<div
+					css={[
+						grid.container,
+						border,
+						css`
+							padding: ${space[2]}px;
+
+							${from.desktop} {
+								padding: ${space[4]}px ${space[8]}px;
+							}
+						`,
+					]}
+				>
+					<div css={[grid.column.all]}>
+						<div css={[grid.column.left]}>
+							<div data-print-layout="hide" css={metaFlex}>
+								{props.renderingTarget === 'Web' && (
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
+										<ShareButton
+											pageId={pageId}
+											webTitle={webTitle}
+											format={format}
+											context="ArticleMeta"
+										/>
+									</Island>
+								)}
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+			<footer
 				css={css`
 					margin: 0 auto;
 
@@ -85,88 +133,34 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 					}
 				`}
 			>
-				<main>
-					<header css={[grid.container, border]}>
-						<div
-							css={[
-								grid.between('centre-column-start', 'grid-end'),
-							]}
-						>
-							{props.content.frontendData.headline}
-						</div>
-					</header>
-					<div css={[grid.container]}>
-						<article css={[grid.column.all]}>
-							<div css={border}>Gallery</div>
-							<div css={border}>Onward</div>
-						</article>
+				<div
+					css={[
+						grid.container,
+						border,
+						css`
+							height: 200px;
+
+							${from.tablet} {
+								height: 250px;
+							}
+
+							${from.desktop} {
+								height: 300px;
+							}
+						`,
+					]}
+				>
+					<div css={[grid.column.all]}>
+						<CallToActionAtom
+							ctaLinkURL="Link URL"
+							ctaBackgroundImage="Image URL"
+							ctaText="This is a call to action"
+							ctaButtonText="Learn more"
+							accentColour={sourcePalette.brand[400]}
+						/>
 					</div>
-					<div
-						css={[
-							grid.container,
-							border,
-							css`
-								padding: ${space[2]}px;
-
-								${from.desktop} {
-									padding: ${space[4]}px ${space[8]}px;
-								}
-							`,
-						]}
-					>
-						<div css={[grid.column.all]}>
-							<div css={[grid.column.left]}>
-								<div data-print-layout="hide" css={metaFlex}>
-									{props.renderingTarget === 'Web' && (
-										<Island
-											priority="feature"
-											defer={{ until: 'visible' }}
-										>
-											<ShareButton
-												pageId={pageId}
-												webTitle={webTitle}
-												format={format}
-												context="ArticleMeta"
-											/>
-										</Island>
-									)}
-								</div>
-							</div>
-						</div>
-					</div>
-				</main>
-				<footer>
-					{props.renderingTarget === 'Web' ? (
-						<div
-							css={[
-								grid.container,
-								border,
-								css`
-									height: 200px;
-
-									${from.tablet} {
-										height: 250px;
-									}
-
-									${from.desktop} {
-										height: 300px;
-									}
-								`,
-							]}
-						>
-							<div css={[grid.column.all]}>
-								<CallToActionAtom
-									ctaLinkURL="Link URL"
-									ctaBackgroundImage="Image URL"
-									ctaText="This is a call to action"
-									ctaButtonText="Learn more"
-									accentColour={sourcePalette.brand[400]}
-								/>
-							</div>
-						</div>
-					) : null}
-				</footer>
-			</div>
+				</div>
+			</footer>
 		</>
 	);
 };
