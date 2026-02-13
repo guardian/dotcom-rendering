@@ -37,10 +37,9 @@ export const CallToActionAtom = ({
 					alt={''}
 					css={css`
 						height: 200px;
-						width: auto
 						object-fit: cover;
 
-							${from.tablet} {
+						${from.tablet} {
 							height: 250px;
 						}
 						${from.leftCol} {
