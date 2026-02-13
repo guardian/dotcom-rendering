@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	type Breakpoint,
 	breakpoints,
 	from,
 	headlineBold15Object,
@@ -253,11 +254,14 @@ const BackgroundImage = (props: {
 				heightStyles,
 			]}
 		>
-			<Source images={props.images} size="desktop" />
-			<Source images={props.images} size="tablet" />
-			<Source images={props.images} size="phablet" />
-			<Source images={props.images} size="mobileLandscape" />
-			<Source images={props.images} size="mobile" />
+			<Source images={props.images} breakpoint="wide" />
+			<Source images={props.images} breakpoint="leftCol" />
+			<Source images={props.images} breakpoint="desktop" />
+			<Source images={props.images} breakpoint="tablet" />
+			<Source images={props.images} breakpoint="phablet" />
+			<Source images={props.images} breakpoint="mobileLandscape" />
+			<Source images={props.images} breakpoint="mobileMedium" />
+			<Source images={props.images} breakpoint="mobile" />
 			<img
 				src={generateImageURL({
 					mainImage: props.images.mobile,
@@ -276,20 +280,42 @@ const BackgroundImage = (props: {
 	);
 };
 
-const Source = (props: { images: Images; size: ImageSize }) => (
+const Source = (props: { images: Images; breakpoint: Breakpoint }) => (
 	<source
-		media={`(min-width: ${breakpoints[props.size]}px)`}
+		media={`(min-width: ${breakpoints[props.breakpoint]}px)`}
 		srcSet={`${generateImageURL({
-			mainImage: props.images[props.size],
-			imageWidth: breakpoints[props.size],
+			mainImage: props.images[breakpointToImageSize(props.breakpoint)],
+			imageWidth: breakpoints[props.breakpoint],
 			resolution: 'low',
 		})}, ${generateImageURL({
-			mainImage: props.images[props.size],
-			imageWidth: breakpoints[props.size],
+			mainImage: props.images[breakpointToImageSize(props.breakpoint)],
+			imageWidth: breakpoints[props.breakpoint],
 			resolution: 'high',
 		})} 2x`}
 	/>
 );
+
+/**
+ * We don't have an image for every breakpoint, so this picks an appropriate
+ * image size in each case.
+ */
+const breakpointToImageSize = (breakpoint: Breakpoint): ImageSize => {
+	switch (breakpoint) {
+		case 'mobile':
+		case 'mobileMedium':
+			return 'mobile';
+		case 'mobileLandscape':
+			return 'mobileLandscape';
+		case 'phablet':
+			return 'phablet';
+		case 'tablet':
+			return 'tablet';
+		case 'desktop':
+		case 'leftCol':
+		case 'wide':
+			return 'desktop';
+	}
+};
 
 type Images = Exclude<DirectoryPageNavConfig['backgroundImages'], undefined>;
 type ImageSize = keyof Images;
