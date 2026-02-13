@@ -7,6 +7,11 @@ import type { CanShowResult } from '../messagePicker';
 import { useAuthStatus } from '../useAuthStatus';
 import type { BrazeInstance } from './initialiseBraze';
 import { suppressForTaylorReport } from './taylorReport';
+import {
+	ReminderComponent,
+	OneOffSignupRequest,
+	ReminderStage,
+} from '@guardian/support-dotcom-components/dist/shared/types/reminders';
 
 /**
  * Determines the best mix color (black or white)
@@ -221,6 +226,7 @@ enum BrazeBannersSystemMessageType {
 	GetAuthStatus = 'BRAZE_BANNERS_SYSTEM:GET_AUTH_STATUS',
 	GetEmailAddress = 'BRAZE_BANNERS_SYSTEM:GET_EMAIL_ADDRESS',
 	NewsletterSubscribe = 'BRAZE_BANNERS_SYSTEM:NEWSLETTER_SUBSCRIBE',
+	ReminderSubscribe = 'BRAZE_BANNERS_SYSTEM:REMINDER_SUBSCRIBE',
 	GetAllSettingsPropertyValues = 'BRAZE_BANNERS_SYSTEM:GET_ALL_SETTINGS_PROPERTY_VALUES',
 	GetSettingsPropertyValue = 'BRAZE_BANNERS_SYSTEM:GET_SETTINGS_PROPERTY_VALUE',
 	DismissBanner = 'BRAZE_BANNERS_SYSTEM:DISMISS_BANNER',
@@ -378,26 +384,12 @@ export const BrazeBannersSystemDisplay = ({
 	const [wrapperModeForegroundColor, setWrapperModeForegroundColor] =
 		useState<string>('#000000');
 
-	const postMessageToBrazeBanner = (
-		type: BrazeBannersSystemMessageType,
-		customData: Record<string, any>,
-	) => {
-		if (containerRef.current) {
-			const iframe = containerRef.current.querySelector('iframe');
-			if (iframe?.contentWindow) {
-				const data = {
-					...customData,
-					type: `${type}:RESPONSE`,
-				};
-				brazeBannersSystemLogger.log(
-					'📤 Sent message to Braze Banner:',
-					data,
-				);
-				iframe.contentWindow.postMessage(data, window.location.origin);
-			}
-		}
-	};
-
+	/**
+	 * Subscribes the user to a newsletter via the Identity API.
+	 * Only attempts to subscribe if the user is signed in and a newsletter ID is provided.
+	 * @param newsletterId The ID of the newsletter to subscribe to
+	 * @returns A promise that resolves to true if the subscription was successful, or false if it failed or the user is not signed in
+	 */
 	const subscribeToNewsletter = useCallback(
 		async (newsletterId: string): Promise<boolean> => {
 			if (authStatus.kind === 'SignedIn') {
@@ -431,6 +423,11 @@ export const BrazeBannersSystemDisplay = ({
 		[authStatus, idApiUrl],
 	);
 
+	/**
+	 * Fetches the user's email address with a timeout to prevent hanging if the request takes too long.
+	 * This is used to provide the email to the Braze Banner for personalization, but we don't want to wait indefinitely for it.
+	 * @returns A promise that resolves to the user's email address or null if it couldn't be fetched in time
+	 */
 	const fetchEmail = useCallback(async (): Promise<string | null> => {
 		const getEmail = async (): Promise<string | undefined> => {
 			const authState = await getAuthState();
@@ -446,14 +443,107 @@ export const BrazeBannersSystemDisplay = ({
 		return result ?? null;
 	}, []);
 
+	/**
+	 * Create a one-off reminder for contribution
+	 * @param reminderPeriod Date in YYYY-MM-DD format
+	 * @param reminderComponent The component that is requesting the reminder (e.g., 'BANNER')
+	 * @param reminderOption Specific reminder option (e.g., "recurring-contribution-upsell")
+	 * @returns Promise that resolves to true if successful, false if failed
+	 */
+	const createReminder = useCallback(
+		async (
+			reminderPeriod: string,
+			reminderComponent: ReminderComponent,
+			reminderOption?: string,
+		): Promise<boolean> => {
+			try {
+				const email = await fetchEmail();
+				if (!email) {
+					brazeBannersSystemLogger.warn(
+						'Cannot create reminder: email address could not be fetched.',
+					);
+					return false;
+				}
+
+				const reminderSignupData: OneOffSignupRequest = {
+					reminderPeriod,
+					email,
+					reminderPlatform: 'WEB',
+					reminderComponent,
+					reminderStage: 'PRE',
+					country: undefined,
+					reminderOption,
+				};
+
+				const response = await fetch(
+					'https://support.theguardian.com/reminders/create/one-off',
+					{
+						body: JSON.stringify(reminderSignupData),
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+					},
+				);
+
+				if (!response.ok) {
+					console.error(
+						'Failed to create reminder:',
+						response.status,
+						response.statusText,
+					);
+					return false;
+				}
+
+				return true;
+			} catch (error) {
+				console.error('Error creating reminder:', error);
+				return false;
+			}
+		},
+		[],
+	);
+
+	/**
+	 * Dismisses the banner by setting the showBanner state to false, which will remove it from the DOM.
+	 */
 	const dismissBanner = useCallback(() => {
 		setShowBanner(false);
 	}, []);
 
-	const setWrapperModeColors = useCallback((backgroundColor: string) => {
+	/**
+	 * Sets the background and foreground colors for wrapper mode based on a given background color.
+	 * @param backgroundColor The background color to use for the wrapper, which will also determine the foreground color for text and other elements to ensure sufficient contrast and accessibility.
+	 */
+	function setWrapperModeColors(backgroundColor: string) {
 		setWrapperModeBackgroundColor(backgroundColor);
 		setWrapperModeForegroundColor(getContrastColor(backgroundColor));
-	}, []);
+	}
+
+	/**
+	 * Posts a message to the Braze Banner iframe with the given type and custom data.
+	 * @param type The type of message being sent, which should correspond to one of the BrazeBannersSystemMessageType values. This indicates the purpose of the message (e.g., requesting auth status, subscribing to a newsletter, etc.) and will be used by the banner to determine how to handle the message and what response to send back.
+	 * @param customData An object containing any additional data that should be sent along with the message. This can include information such as newsletter IDs, reminder periods, or any other relevant details needed for the banner to process the request and respond appropriately.
+	 */
+	function postMessageToBrazeBanner(
+		type: BrazeBannersSystemMessageType,
+		customData: Record<string, any>,
+	) {
+		if (containerRef.current) {
+			const iframe = containerRef.current.querySelector('iframe');
+			if (iframe?.contentWindow) {
+				const data = {
+					...customData,
+					type: `${type}:RESPONSE`,
+				};
+				brazeBannersSystemLogger.log(
+					'📤 Sent message to Braze Banner:',
+					data,
+				);
+				iframe.contentWindow.postMessage(data, window.location.origin);
+			}
+		}
+	}
 
 	// Handle DOM Insertion
 	useEffect(() => {
@@ -506,6 +596,12 @@ export const BrazeBannersSystemDisplay = ({
 				| {
 						type: BrazeBannersSystemMessageType.NewsletterSubscribe;
 						newsletterId?: string;
+				  }
+				| {
+						type: BrazeBannersSystemMessageType.ReminderSubscribe;
+						reminderPeriod?: string;
+						reminderComponent?: ReminderComponent;
+						reminderOption?: string;
 				  }
 				| {
 						type: BrazeBannersSystemMessageType.GetAllSettingsPropertyValues;
@@ -563,6 +659,27 @@ export const BrazeBannersSystemDisplay = ({
 						);
 					}
 					break;
+				case BrazeBannersSystemMessageType.ReminderSubscribe:
+					const {
+						reminderPeriod,
+						reminderComponent,
+						reminderOption,
+					} = event.data;
+					if (reminderPeriod) {
+						void createReminder(
+							reminderPeriod,
+							reminderComponent ?? 'BANNER',
+							reminderOption ?? 'recurring-contribution-upsell',
+						).then((success) => {
+							postMessageToBrazeBanner(
+								BrazeBannersSystemMessageType.ReminderSubscribe,
+								{
+									success,
+								},
+							);
+						});
+					}
+					break;
 				case BrazeBannersSystemMessageType.GetAllSettingsPropertyValues:
 					postMessageToBrazeBanner(
 						BrazeBannersSystemMessageType.GetAllSettingsPropertyValues,
@@ -608,6 +725,10 @@ export const BrazeBannersSystemDisplay = ({
 	// Log Impressions with Braze and Button Clicks with Ophan
 	// TODO
 
+	/**
+	 * If showBanner is false, we return null to unmount the component and remove the banner from the DOM.
+	 * This can be triggered by the user clicking a dismiss button on the banner, which sends a message that we listen for in the useEffect above. When we receive that message, we set showBanner to false, which causes the component to unmount and the banner to be removed from the DOM.
+	 */
 	if (!showBanner) {
 		return null;
 	}
