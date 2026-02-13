@@ -328,7 +328,7 @@ Below are practical examples of how to call these features from within your Braz
 				reminderComponent: 'BANNER', // Optional: defaults to 'BANNER'
 				reminderOption: 'recurring-contribution-upsell', // Optional: defaults to this value
 			},
-			window.location.origin,
+			'*',
 		);
 	});
 
@@ -373,7 +373,7 @@ Below are practical examples of how to call these features from within your Braz
 		{
 			type: 'BRAZE_BANNERS_SYSTEM:GET_AUTH_STATUS',
 		},
-		window.location.origin,
+		'*',
 	);
 
 	window.addEventListener('message', (event) => {
@@ -389,7 +389,7 @@ Below are practical examples of how to call these features from within your Braz
 					{
 						type: 'BRAZE_BANNERS_SYSTEM:GET_EMAIL_ADDRESS',
 					},
-					window.location.origin,
+					'*',
 				);
 			} else {
 				document.getElementById('guest-content').style.display =
@@ -424,7 +424,7 @@ Below are practical examples of how to call these features from within your Braz
 			{
 				type: 'BRAZE_BANNERS_SYSTEM:DISMISS_BANNER',
 			},
-			window.location.origin,
+			'*',
 		);
 	});
 
@@ -440,7 +440,7 @@ Below are practical examples of how to call these features from within your Braz
 				{
 					type: 'BRAZE_BANNERS_SYSTEM:DISMISS_BANNER',
 				},
-				window.location.origin,
+				'*',
 			);
 		});
 </script>
@@ -458,7 +458,7 @@ Below are practical examples of how to call these features from within your Braz
 			type: 'BRAZE_BANNERS_SYSTEM:GET_SETTINGS_PROPERTY_VALUE',
 			key: 'customMessage',
 		},
-		window.location.origin,
+		'*',
 	);
 
 	window.addEventListener('message', (event) => {
@@ -506,7 +506,7 @@ Below are practical examples of how to call these features from within your Braz
 		window.open('https://support.theguardian.com/contribute', '_blank');
 		window.parent.postMessage(
 			{ type: 'BRAZE_BANNERS_SYSTEM:DISMISS_BANNER' },
-			window.location.origin,
+			'*',
 		);
 	});
 
@@ -514,7 +514,7 @@ Below are practical examples of how to call these features from within your Braz
 		// First check if user is signed in
 		window.parent.postMessage(
 			{ type: 'BRAZE_BANNERS_SYSTEM:GET_AUTH_STATUS' },
-			window.location.origin,
+			'*',
 		);
 	});
 
@@ -533,7 +533,7 @@ Below are practical examples of how to call these features from within your Braz
 					reminderComponent: 'EPIC',
 					reminderOption: 'recurring-contribution-upsell',
 				},
-				window.location.origin,
+				'*',
 			);
 
 			document.getElementById('selected-months').textContent =
@@ -550,7 +550,7 @@ Below are practical examples of how to call these features from within your Braz
 	document.getElementById('close-final').addEventListener('click', () => {
 		window.parent.postMessage(
 			{ type: 'BRAZE_BANNERS_SYSTEM:DISMISS_BANNER' },
-			window.location.origin,
+			'*',
 		);
 	});
 
