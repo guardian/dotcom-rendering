@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	breakpoints,
 	from,
 	headlineBold15Object,
 	headlineBold17Object,
@@ -10,6 +11,7 @@ import {
 	palette,
 } from '@guardian/source/foundations';
 import { grid } from '../grid';
+import { generateImageURL } from '../lib/image';
 import type { TagType } from '../types/tag';
 
 type Props = {
@@ -79,31 +81,6 @@ const configs = [
 	},
 ] satisfies DirectoryPageNavConfig[];
 
-const backgroundImageStyles = (
-	images?: DirectoryPageNavConfig['backgroundImages'],
-) => {
-	if (!images) return {};
-
-	return {
-		backgroundImage: `url(${images.mobile})`,
-		backgroundSize: 'cover',
-		backgroundPosition: 'top center',
-
-		[from.mobileLandscape]: {
-			backgroundImage: `url(${images.mobileLandscape})`,
-		},
-		[from.phablet]: {
-			backgroundImage: `url(${images.phablet})`,
-		},
-		[from.tablet]: {
-			backgroundImage: `url(${images.tablet})`,
-		},
-		[from.desktop]: {
-			backgroundImage: `url(${images.desktop})`,
-		},
-	};
-};
-
 export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 	const config = configs.find(
 		(cfg) =>
@@ -119,27 +96,18 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 
 	const { textColor, backgroundColor } = config;
 
-	const nav = css(
-		{
-			backgroundColor,
-			'&': css(grid.paddedContainer),
-			alignContent: 'space-between',
-			height: 116,
-			[from.tablet]: {
-				height: 140,
-			},
-			[from.desktop]: {
-				height: 150,
-			},
-		},
-		backgroundImageStyles(config.backgroundImages),
-	);
+	const nav = css({
+		backgroundColor,
+		'&': css(grid.paddedContainer),
+		alignContent: 'space-between',
+	});
 
 	const largeLinkStyles = css({
 		...headlineBold24Object,
 		color: textColor,
 		textDecoration: 'none',
 		'&': css(grid.column.centre),
+		gridRow: 1,
 		[from.tablet]: headlineBold42Object,
 		[from.leftCol]: css(
 			grid.between('left-column-start', 'right-column-end'),
@@ -150,6 +118,8 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		display: 'flex',
 		flexWrap: 'wrap',
 		'&': css(grid.column.all),
+		gridRow: 2,
+		alignSelf: 'end',
 		position: 'relative',
 		'--top-border-gap': '1.55rem',
 		[from.mobileLandscape]: {
@@ -227,7 +197,8 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 	});
 
 	return (
-		<nav css={nav}>
+		<nav css={[nav, heightStyles]}>
+			<BackgroundImage images={config.backgroundImages} />
 			<a href={`/${config.title.id}`} css={largeLinkStyles}>
 				{config.title.label}
 			</a>
@@ -254,3 +225,70 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		</nav>
 	);
 };
+
+const heightStyles = css({
+	height: 116,
+	[from.tablet]: {
+		height: 140,
+	},
+	[from.desktop]: {
+		height: 150,
+	},
+});
+
+const BackgroundImage = (props: {
+	images: DirectoryPageNavConfig['backgroundImages'];
+}) => {
+	if (props.images === undefined) {
+		return null;
+	}
+
+	return (
+		<picture
+			css={[
+				{
+					'&': css(grid.column.all),
+					gridRow: '1/3',
+				},
+				heightStyles,
+			]}
+		>
+			<Source images={props.images} size="desktop" />
+			<Source images={props.images} size="tablet" />
+			<Source images={props.images} size="phablet" />
+			<Source images={props.images} size="mobileLandscape" />
+			<Source images={props.images} size="mobile" />
+			<img
+				src={generateImageURL({
+					mainImage: props.images.mobile,
+					imageWidth: breakpoints.mobileMedium,
+					resolution: 'low',
+				})}
+				alt="Winter Olympics background graphic"
+				css={{
+					width: '100%',
+					height: '100%',
+					objectFit: 'cover',
+				}}
+			/>
+		</picture>
+	);
+};
+
+const Source = (props: { images: Images; size: ImageSize }) => (
+	<source
+		media={`(min-width: ${breakpoints[props.size]}px)`}
+		srcSet={`${generateImageURL({
+			mainImage: props.images[props.size],
+			imageWidth: breakpoints[props.size],
+			resolution: 'low',
+		})}, ${generateImageURL({
+			mainImage: props.images[props.size],
+			imageWidth: breakpoints[props.size],
+			resolution: 'high',
+		})} 2x`}
+	/>
+);
+
+type Images = Exclude<DirectoryPageNavConfig['backgroundImages'], undefined>;
+type ImageSize = keyof Images;
