@@ -8,6 +8,7 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Caption } from '../components/Caption';
 import { HostedContentHeader } from '../components/HostedContentHeader';
 import { Island } from '../components/Island';
+import { MainMedia } from '../components/MainMedia';
 import { Section } from '../components/Section';
 import { ShareButton } from '../components/ShareButton.importable';
 import { Standfirst } from '../components/Standfirst';
@@ -87,11 +88,33 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 							css={[
 								grid.column.all,
 								css`
-									min-height: 200px;
+									overflow: hidden;
+									max-height: 400px;
+									${from.leftCol} {
+										${grid.between(
+											'left-column-start',
+											'right-column-end',
+										)}
+									}
 								`,
 							]}
 						>
-							Main media
+							<MainMedia
+								format={format}
+								elements={frontendData.mainMediaElements}
+								host={frontendData.config.host}
+								pageId={frontendData.pageId}
+								webTitle={frontendData.webTitle}
+								ajaxUrl={frontendData.config.ajaxUrl}
+								abTests={frontendData.config.abTests}
+								switches={frontendData.config.switches}
+								isAdFreeUser={frontendData.isAdFreeUser}
+								isSensitive={frontendData.config.isSensitive}
+								editionId={frontendData.editionId}
+								hideCaption={true}
+								shouldHideAds={true}
+								contentType={frontendData.contentType}
+							/>
 						</div>
 						<div
 							css={[
