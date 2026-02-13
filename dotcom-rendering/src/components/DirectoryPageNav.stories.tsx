@@ -31,3 +31,9 @@ export const OtherCompetition = {
 		pageId: 'football/premierleague/table',
 	},
 } satisfies Story;
+
+export const WinterOlympics = {
+	args: {
+		pageId: 'sport/winter-olympics-2026',
+	},
+} satisfies Story;
