@@ -132,13 +132,470 @@ The banner uses a `postMessage` protocol to interact with the host DCR page.
 
 ### Supported Message Types
 
-| Message Type                                       | Function                                        |
-| :------------------------------------------------- | :---------------------------------------------- |
-| `BRAZE_BANNERS_SYSTEM:GET_AUTH_STATUS`             | Checks if user is `SignedIn`.                   |
-| `BRAZE_BANNERS_SYSTEM:GET_EMAIL_ADDRESS`           | Requests email (if signed in).                  |
-| `BRAZE_BANNERS_SYSTEM:NEWSLETTER_SUBSCRIBE`        | Subscribes to a newsletter ID.                  |
-| `BRAZE_BANNERS_SYSTEM:DISMISS_BANNER`              | Removes the banner from the DOM.                |
-| `BRAZE_BANNERS_SYSTEM:GET_SETTINGS_PROPERTY_VALUE` | Reads Key-Value pairs from the Campaign config. |
+| Message Type                                       | Function                                              |
+| :------------------------------------------------- | :---------------------------------------------------- |
+| `BRAZE_BANNERS_SYSTEM:GET_AUTH_STATUS`             | Checks if user is `SignedIn`.                         |
+| `BRAZE_BANNERS_SYSTEM:GET_EMAIL_ADDRESS`           | Requests email (if signed in).                        |
+| `BRAZE_BANNERS_SYSTEM:NEWSLETTER_SUBSCRIBE`        | Subscribes to a newsletter ID.                        |
+| `BRAZE_BANNERS_SYSTEM:REMINDER_SUBSCRIBE`          | Creates a one-off reminder for contribution requests. |
+| `BRAZE_BANNERS_SYSTEM:DISMISS_BANNER`              | Removes the banner from the DOM.                      |
+| `BRAZE_BANNERS_SYSTEM:GET_SETTINGS_PROPERTY_VALUE` | Reads Key-Value pairs from the Campaign config.       |
+
+### Feature Details
+
+#### 1. GET_AUTH_STATUS
+
+Checks the user's authentication status.
+
+**Request Parameters**: None
+
+**Response**:
+
+```javascript
+{
+  type: 'BRAZE_BANNERS_SYSTEM:GET_AUTH_STATUS:RESPONSE',
+  kind: 'SignedIn' | 'SignedOut' | 'Pending'
+}
+```
+
+**Description**: Returns the current authentication state of the user. Use this to conditionally render elements based on whether the user is logged in.
+
+---
+
+#### 2. GET_EMAIL_ADDRESS
+
+Retrieves the user's email address if they are signed in.
+
+**Request Parameters**: None
+
+**Response**:
+
+```javascript
+{
+  type: 'BRAZE_BANNERS_SYSTEM:GET_EMAIL_ADDRESS:RESPONSE',
+  email: string | null
+}
+```
+
+**Description**: Returns the user's email address or `null` if not available. The email is fetched securely and only returned for authenticated users.
+
+---
+
+#### 3. NEWSLETTER_SUBSCRIBE
+
+Subscribes the user to a newsletter.
+
+**Request Parameters**:
+
+-   `newsletterId` (String, **Required**): The ID of the newsletter to subscribe to (e.g., "4156").
+
+**Response**:
+
+```javascript
+{
+  type: 'BRAZE_BANNERS_SYSTEM:NEWSLETTER_SUBSCRIBE:RESPONSE',
+  success: boolean
+}
+```
+
+**Description**: Attempts to subscribe the authenticated user to the specified newsletter using The Guardian's Identity API. Returns `true` if successful, `false` otherwise.
+
+---
+
+#### 4. REMINDER_SUBSCRIBE
+
+Creates a one-off reminder for contribution requests.
+
+**Request Parameters**:
+
+-   `reminderPeriod` (String, **Required**): The target date for the reminder in **YYYY-MM-DD** format (e.g., "2026-03-15").
+-   `reminderComponent` (String, _Optional_): The component requesting the reminder. Defaults to `'BANNER'` if not provided.
+    -   Allowed values: `'BANNER'`, `'EPIC'`.
+-   `reminderOption` (String, _Optional_): Specific reminder option/context. Defaults to `'recurring-contribution-upsell'` if not provided.
+    -   Example values: `'recurring-contribution-upsell'`, `'one-off-contribution'`, `'supporter-plus'`
+
+**Response**:
+
+```javascript
+{
+  type: 'BRAZE_BANNERS_SYSTEM:REMINDER_SUBSCRIBE:RESPONSE',
+  success: boolean
+}
+```
+
+**Description**: Creates a one-off reminder for the user to be contacted about making a contribution at a future date. The system will:
+
+-   Fetch the user's email address
+-   Submit a reminder request to The Guardian's Support API
+-   Set the platform as `'WEB'` and stage as `'PRE'` automatically
+-   Return `true` if the reminder was successfully created, `false` otherwise
+
+**Use Case**: Ideal for campaigns encouraging users to "remind me later" when they're unable or unwilling to contribute immediately. This helps re-engage users at a more convenient time.
+
+---
+
+#### 5. DISMISS_BANNER
+
+Removes the banner from the DOM.
+
+**Request Parameters**: None
+
+**Response**: None (the banner is immediately removed)
+
+**Description**: Programmatically dismisses the banner, removing it from the page. Use this when the user clicks a close button or completes an action that should hide the banner.
+
+---
+
+#### 6. GET_SETTINGS_PROPERTY_VALUE
+
+Reads a specific Key-Value pair from the Campaign configuration.
+
+**Request Parameters**:
+
+-   `key` (String, **Required**): The name of the property to retrieve.
+
+**Response**:
+
+```javascript
+{
+  type: 'BRAZE_BANNERS_SYSTEM:GET_SETTINGS_PROPERTY_VALUE:RESPONSE',
+  key: string,
+  value: string | null
+}
+```
+
+**Description**: Retrieves custom configuration values set in the Braze Campaign's Key-Value pairs. Returns `null` if the key doesn't exist. Useful for dynamic configuration without hardcoding values in the banner creative.
+
+### Code Examples for Braze Banner Custom Code Blocks
+
+Below are practical examples of how to call these features from within your Braze Banner's custom HTML/JavaScript code blocks.
+
+#### Example 1: Newsletter Subscription
+
+```html
+<button id="subscribe-btn">Subscribe to Newsletter</button>
+
+<script>
+	document.getElementById('subscribe-btn').addEventListener('click', () => {
+		// Request newsletter subscription
+		window.parent.postMessage(
+			{
+				type: 'BRAZE_BANNERS_SYSTEM:NEWSLETTER_SUBSCRIBE',
+				newsletterId: '4156', // The Morning Briefing newsletter ID
+			},
+			'*',
+		);
+	});
+
+	// Listen for the response
+	window.addEventListener('message', (event) => {
+		if (
+			event.data.type ===
+			'BRAZE_BANNERS_SYSTEM:NEWSLETTER_SUBSCRIBE:RESPONSE'
+		) {
+			if (event.data.success) {
+				console.log('✅ Successfully subscribed to newsletter!');
+				// Update UI to show success state
+				document.getElementById('subscribe-btn').textContent =
+					'Subscribed!';
+				document.getElementById('subscribe-btn').disabled = true;
+			} else {
+				console.error('❌ Newsletter subscription failed');
+				// Show error message to user
+			}
+		}
+	});
+</script>
+```
+
+#### Example 2: Reminder Subscription (Contribution)
+
+```html
+<button id="remind-me-btn">Remind me in 3 months</button>
+
+<script>
+	document.getElementById('remind-me-btn').addEventListener('click', () => {
+		// Calculate date 3 months from now
+		const futureDate = new Date();
+		futureDate.setMonth(futureDate.getMonth() + 3);
+		const reminderPeriod = futureDate.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+
+		// Request reminder creation
+		window.parent.postMessage(
+			{
+				type: 'BRAZE_BANNERS_SYSTEM:REMINDER_SUBSCRIBE',
+				reminderPeriod: reminderPeriod, // e.g., "2026-05-15"
+				reminderComponent: 'BANNER', // Optional: defaults to 'BANNER'
+				reminderOption: 'recurring-contribution-upsell', // Optional: defaults to this value
+			},
+			window.location.origin,
+		);
+	});
+
+	// Listen for the response
+	window.addEventListener('message', (event) => {
+		if (
+			event.data.type ===
+			'BRAZE_BANNERS_SYSTEM:REMINDER_SUBSCRIBE:RESPONSE'
+		) {
+			if (event.data.success) {
+				console.log('✅ Reminder successfully created!');
+				// Update UI to show confirmation
+				document.getElementById('remind-me-btn').textContent =
+					"We'll remind you!";
+				document.getElementById('remind-me-btn').disabled = true;
+			} else {
+				console.error('❌ Failed to create reminder');
+				alert(
+					'Unable to set reminder. Please ensure you are signed in.',
+				);
+			}
+		}
+	});
+</script>
+```
+
+#### Example 3: Check Auth Status Before Action
+
+```html
+<div id="auth-content" style="display: none;">
+	<p>Welcome back! <span id="user-email"></span></p>
+	<button id="contribute-btn">Contribute Now</button>
+</div>
+<div id="guest-content" style="display: none;">
+	<p>Please sign in to continue.</p>
+	<a href="/signin">Sign In</a>
+</div>
+
+<script>
+	// Check authentication status on load
+	window.parent.postMessage(
+		{
+			type: 'BRAZE_BANNERS_SYSTEM:GET_AUTH_STATUS',
+		},
+		window.location.origin,
+	);
+
+	window.addEventListener('message', (event) => {
+		// Handle auth status response
+		if (
+			event.data.type === 'BRAZE_BANNERS_SYSTEM:GET_AUTH_STATUS:RESPONSE'
+		) {
+			if (event.data.kind === 'SignedIn') {
+				document.getElementById('auth-content').style.display = 'block';
+
+				// Also fetch the email address
+				window.parent.postMessage(
+					{
+						type: 'BRAZE_BANNERS_SYSTEM:GET_EMAIL_ADDRESS',
+					},
+					window.location.origin,
+				);
+			} else {
+				document.getElementById('guest-content').style.display =
+					'block';
+			}
+		}
+
+		// Handle email address response
+		if (
+			event.data.type ===
+			'BRAZE_BANNERS_SYSTEM:GET_EMAIL_ADDRESS:RESPONSE'
+		) {
+			if (event.data.email) {
+				document.getElementById('user-email').textContent =
+					event.data.email;
+			}
+		}
+	});
+</script>
+```
+
+#### Example 4: Dismiss Banner After Action
+
+```html
+<button id="close-btn">Close</button>
+<button id="contribute-and-close">Contribute & Close</button>
+
+<script>
+	// Simple dismiss
+	document.getElementById('close-btn').addEventListener('click', () => {
+		window.parent.postMessage(
+			{
+				type: 'BRAZE_BANNERS_SYSTEM:DISMISS_BANNER',
+			},
+			window.location.origin,
+		);
+	});
+
+	// Perform action then dismiss
+	document
+		.getElementById('contribute-and-close')
+		.addEventListener('click', () => {
+			// Open contribution page
+			window.open('https://support.theguardian.com/contribute', '_blank');
+
+			// Dismiss the banner
+			window.parent.postMessage(
+				{
+					type: 'BRAZE_BANNERS_SYSTEM:DISMISS_BANNER',
+				},
+				window.location.origin,
+			);
+		});
+</script>
+```
+
+#### Example 5: Read Campaign Configuration
+
+```html
+<div id="dynamic-content"></div>
+
+<script>
+	// Request a custom configuration value
+	window.parent.postMessage(
+		{
+			type: 'BRAZE_BANNERS_SYSTEM:GET_SETTINGS_PROPERTY_VALUE',
+			key: 'customMessage',
+		},
+		window.location.origin,
+	);
+
+	window.addEventListener('message', (event) => {
+		if (
+			event.data.type ===
+			'BRAZE_BANNERS_SYSTEM:GET_SETTINGS_PROPERTY_VALUE:RESPONSE'
+		) {
+			if (event.data.key === 'customMessage' && event.data.value) {
+				// Use the custom message from Campaign Key-Value pairs
+				document.getElementById('dynamic-content').textContent =
+					event.data.value;
+			}
+		}
+	});
+</script>
+```
+
+#### Example 6: Complete Reminder Flow with Multiple Steps
+
+```html
+<div id="step-1">
+	<h3>Support The Guardian</h3>
+	<p>Can you contribute today?</p>
+	<button id="contribute-now">Contribute Now</button>
+	<button id="remind-later">Remind me later</button>
+</div>
+
+<div id="step-2" style="display: none;">
+	<h3>When should we remind you?</h3>
+	<button class="reminder-option" data-months="1">In 1 month</button>
+	<button class="reminder-option" data-months="3">In 3 months</button>
+	<button class="reminder-option" data-months="6">In 6 months</button>
+	<button id="back-btn">Back</button>
+</div>
+
+<div id="step-3" style="display: none;">
+	<h3>✅ Reminder Set!</h3>
+	<p>We'll email you in <span id="selected-months"></span>.</p>
+	<button id="close-final">Close</button>
+</div>
+
+<script>
+	// Step 1: Initial choice
+	document.getElementById('contribute-now').addEventListener('click', () => {
+		window.open('https://support.theguardian.com/contribute', '_blank');
+		window.parent.postMessage(
+			{ type: 'BRAZE_BANNERS_SYSTEM:DISMISS_BANNER' },
+			window.location.origin,
+		);
+	});
+
+	document.getElementById('remind-later').addEventListener('click', () => {
+		// First check if user is signed in
+		window.parent.postMessage(
+			{ type: 'BRAZE_BANNERS_SYSTEM:GET_AUTH_STATUS' },
+			window.location.origin,
+		);
+	});
+
+	// Step 2: Select reminder period
+	document.querySelectorAll('.reminder-option').forEach((btn) => {
+		btn.addEventListener('click', function () {
+			const months = parseInt(this.getAttribute('data-months'));
+			const futureDate = new Date();
+			futureDate.setMonth(futureDate.getMonth() + months);
+			const reminderPeriod = futureDate.toISOString().split('T')[0];
+
+			window.parent.postMessage(
+				{
+					type: 'BRAZE_BANNERS_SYSTEM:REMINDER_SUBSCRIBE',
+					reminderPeriod: reminderPeriod,
+					reminderComponent: 'EPIC',
+					reminderOption: 'recurring-contribution-upsell',
+				},
+				window.location.origin,
+			);
+
+			document.getElementById('selected-months').textContent =
+				months + (months === 1 ? ' month' : ' months');
+		});
+	});
+
+	document.getElementById('back-btn').addEventListener('click', () => {
+		document.getElementById('step-2').style.display = 'none';
+		document.getElementById('step-1').style.display = 'block';
+	});
+
+	// Step 3: Confirmation
+	document.getElementById('close-final').addEventListener('click', () => {
+		window.parent.postMessage(
+			{ type: 'BRAZE_BANNERS_SYSTEM:DISMISS_BANNER' },
+			window.location.origin,
+		);
+	});
+
+	// Message event handler
+	window.addEventListener('message', (event) => {
+		// Handle auth status
+		if (
+			event.data.type === 'BRAZE_BANNERS_SYSTEM:GET_AUTH_STATUS:RESPONSE'
+		) {
+			if (event.data.kind === 'SignedIn') {
+				// Show reminder options
+				document.getElementById('step-1').style.display = 'none';
+				document.getElementById('step-2').style.display = 'block';
+			} else {
+				// Redirect to sign in
+				alert('Please sign in to set a reminder.');
+				window.location.href =
+					'/signin?returnUrl=' + window.location.pathname;
+			}
+		}
+
+		// Handle reminder creation
+		if (
+			event.data.type ===
+			'BRAZE_BANNERS_SYSTEM:REMINDER_SUBSCRIBE:RESPONSE'
+		) {
+			if (event.data.success) {
+				document.getElementById('step-2').style.display = 'none';
+				document.getElementById('step-3').style.display = 'block';
+			} else {
+				alert('Failed to set reminder. Please try again.');
+			}
+		}
+	});
+</script>
+```
+
+### Best Practices
+
+1.  **Always listen for responses**: Set up event listeners before sending requests to avoid missing responses.
+2.  **Validate user state**: Check authentication status before attempting actions that require a signed-in user (e.g., newsletter subscriptions, reminders).
+3.  **Handle errors gracefully**: Always handle both success and failure cases to provide good user experience.
+4.  **Use origin validation**: When listening to `postMessage` events, verify the origin if security is critical.
+5.  **Date format for reminders**: Always use ISO 8601 date format (YYYY-MM-DD) for `reminderPeriod`.
+6.  **Clean up events**: Remove event listeners when they're no longer needed to prevent memory leaks.
 
 ## Usage for Developers
 
