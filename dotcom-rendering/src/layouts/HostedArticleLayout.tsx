@@ -84,7 +84,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 			) : null}
 			<main>
 				<article>
-					<header css={grid.container}>
+					<header css={[grid.container]}>
 						<div
 							css={[
 								grid.column.all,
