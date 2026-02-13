@@ -78,14 +78,17 @@ const styles = {
 			background-color: #9a1e1e;
 		}
 	`,
-	imageContainer: css`
-		/* On mobile the image sits at the top */
-		order: -1;
+	imageContainerMobile: css`
 		margin-bottom: ${space[4]}px;
 		${from.tablet} {
-			order: unset;
+			display: none;
+		}
+	`,
+	imageContainerTablet: css`
+		display: none;
+		${from.tablet} {
+			display: block;
 			align-self: stretch;
-			margin-bottom: 0;
 		}
 		${from.leftCol} {
 			margin: 0 ${space[3]}px 0 ${space[5]}px;
@@ -119,6 +122,12 @@ export const FeastThrasher = () => {
 						textColor={palette.neutral[0]}
 						width={100}
 					/>
+				</div>
+				{/* On mobile image is above the content */}
+				<div css={styles.imageContainerMobile}>
+					<div css={styles.image}>
+						<img src={mobileAndDesktopImageUrl} alt="Feast app" />
+					</div>
 				</div>
 				<div css={styles.content}>
 					<h2 css={styles.heading}>
@@ -167,7 +176,7 @@ export const FeastThrasher = () => {
 						Try the Feast app
 					</LinkButton>
 				</div>
-				<div css={styles.imageContainer}>
+				<div css={styles.imageContainerTablet}>
 					<picture css={styles.image}>
 						<source
 							srcSet={tabletImageUrl}
