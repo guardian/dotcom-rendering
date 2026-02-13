@@ -210,10 +210,10 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 				<div css={[grid.container]}>
 					<div css={[grid.column.centre]}>
 						<CallToActionAtom
-							ctaLinkURL="https://safety.epicgames.com/en-US?lang=en-US"
-							ctaBackgroundImage="https://media.guim.co.uk/7fe58f11470360bc9f1e4b6bbcbf45d7cf06cfcf/0_0_1300_375/1300.jpg"
-							ctaText="This is a call to action text"
-							ctaButtonText="Learn more"
+							linkUrl="https://safety.epicgames.com/en-US?lang=en-US"
+							backgroundImage="https://media.guim.co.uk/7fe58f11470360bc9f1e4b6bbcbf45d7cf06cfcf/0_0_1300_375/1300.jpg"
+							text="This is a call to action text"
+							buttonText="Learn more"
 						/>
 					</div>
 				</div>

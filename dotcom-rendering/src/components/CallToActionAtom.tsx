@@ -7,21 +7,21 @@ import {
 import { Button, SvgExternal } from '@guardian/source/react-components';
 
 type Props = {
-	ctaLinkURL: string;
-	ctaBackgroundImage: string;
-	ctaText: string;
-	ctaButtonText: string;
+	linkUrl: string;
+	backgroundImage: string;
+	text: string;
+	buttonText: string;
 };
 
 export const CallToActionAtom = ({
-	ctaLinkURL,
-	ctaBackgroundImage,
-	ctaText,
-	ctaButtonText,
+	linkUrl,
+	backgroundImage,
+	text,
+	buttonText,
 }: Props) => {
 	return (
 		<a
-			href={ctaLinkURL}
+			href={linkUrl}
 			css={css`
 				text-decoration: none;
 			`}
@@ -33,14 +33,13 @@ export const CallToActionAtom = ({
 				`}
 			>
 				<img
-					src={ctaBackgroundImage}
-					alt={
-						'alt text'
-					} /* We need alt text here if it is included in the atom data otherwise we need to have a general description */
+					src={backgroundImage}
+					alt={''}
 					css={css`
 						height: 200px;
 						width: auto
-							/* This might not be necessary once we have the correct grid in place with article body data */
+						object-fit: cover;
+
 							${from.tablet} {
 							height: 250px;
 						}
@@ -64,7 +63,7 @@ export const CallToActionAtom = ({
 							color: white;
 						`}
 					>
-						{ctaText}
+						{text}
 					</h2>
 					<Button
 						iconSide="right"
@@ -76,7 +75,7 @@ export const CallToActionAtom = ({
 							backgroundPrimaryHover: sourcePalette.neutral[73],
 						}}
 					>
-						{ctaButtonText}
+						{buttonText}
 					</Button>
 				</div>
 			</picture>
