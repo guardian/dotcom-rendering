@@ -1,5 +1,9 @@
 import type { Banner } from '@braze/web-sdk';
 import { css } from '@emotion/react';
+import type {
+	OneOffSignupRequest,
+	ReminderComponent,
+} from '@guardian/support-dotcom-components/dist/shared/types/reminders';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { TagType } from '../../types/tag';
 import { getAuthState, getOptionsHeaders } from '../identity';
@@ -7,11 +11,6 @@ import type { CanShowResult } from '../messagePicker';
 import { useAuthStatus } from '../useAuthStatus';
 import type { BrazeInstance } from './initialiseBraze';
 import { suppressForTaylorReport } from './taylorReport';
-import {
-	ReminderComponent,
-	OneOffSignupRequest,
-	ReminderStage,
-} from '@guardian/support-dotcom-components/dist/shared/types/reminders';
 
 /**
  * Determines the best mix color (black or white)
@@ -501,7 +500,7 @@ export const BrazeBannersSystemDisplay = ({
 				return false;
 			}
 		},
-		[],
+		[fetchEmail],
 	);
 
 	/**
@@ -515,35 +514,41 @@ export const BrazeBannersSystemDisplay = ({
 	 * Sets the background and foreground colors for wrapper mode based on a given background color.
 	 * @param backgroundColor The background color to use for the wrapper, which will also determine the foreground color for text and other elements to ensure sufficient contrast and accessibility.
 	 */
-	function setWrapperModeColors(backgroundColor: string) {
+	const setWrapperModeColors = useCallback((backgroundColor: string) => {
 		setWrapperModeBackgroundColor(backgroundColor);
 		setWrapperModeForegroundColor(getContrastColor(backgroundColor));
-	}
+	}, []);
 
 	/**
 	 * Posts a message to the Braze Banner iframe with the given type and custom data.
 	 * @param type The type of message being sent, which should correspond to one of the BrazeBannersSystemMessageType values. This indicates the purpose of the message (e.g., requesting auth status, subscribing to a newsletter, etc.) and will be used by the banner to determine how to handle the message and what response to send back.
 	 * @param customData An object containing any additional data that should be sent along with the message. This can include information such as newsletter IDs, reminder periods, or any other relevant details needed for the banner to process the request and respond appropriately.
 	 */
-	function postMessageToBrazeBanner(
-		type: BrazeBannersSystemMessageType,
-		customData: Record<string, any>,
-	) {
-		if (containerRef.current) {
-			const iframe = containerRef.current.querySelector('iframe');
-			if (iframe?.contentWindow) {
-				const data = {
-					...customData,
-					type: `${type}:RESPONSE`,
-				};
-				brazeBannersSystemLogger.log(
-					'📤 Sent message to Braze Banner:',
-					data,
-				);
-				iframe.contentWindow.postMessage(data, window.location.origin);
+	const postMessageToBrazeBanner = useCallback(
+		(
+			type: BrazeBannersSystemMessageType,
+			customData: Record<string, any>,
+		) => {
+			if (containerRef.current) {
+				const iframe = containerRef.current.querySelector('iframe');
+				if (iframe?.contentWindow) {
+					const data = {
+						...customData,
+						type: `${type}:RESPONSE`,
+					};
+					brazeBannersSystemLogger.log(
+						'📤 Sent message to Braze Banner:',
+						data,
+					);
+					iframe.contentWindow.postMessage(
+						data,
+						window.location.origin,
+					);
+				}
 			}
-		}
-	}
+		},
+		[],
+	);
 
 	// Handle DOM Insertion
 	useEffect(() => {
@@ -717,9 +722,11 @@ export const BrazeBannersSystemDisplay = ({
 		meta,
 		meta.banner,
 		authStatus.kind,
-		subscribeToNewsletter,
 		fetchEmail,
+		subscribeToNewsletter,
+		createReminder,
 		dismissBanner,
+		postMessageToBrazeBanner,
 	]);
 
 	// Log Impressions with Braze and Button Clicks with Ophan
