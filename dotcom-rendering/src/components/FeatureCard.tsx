@@ -48,8 +48,6 @@ import { SupportingContent } from './SupportingContent';
 import { WaveForm } from './WaveForm';
 import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
 
-export type Position = 'inner' | 'outer' | 'none';
-
 const baseCardStyles = css`
 	display: flex;
 	flex-direction: column;
@@ -170,18 +168,12 @@ const overlayStyles = css`
 	flex-direction: column;
 	text-align: start;
 	gap: ${space[1]}px;
-	padding: 64px ${space[2]}px ${space[2]}px;
-	backdrop-filter: blur(12px) brightness(0.5);
-	@supports not (backdrop-filter: blur(12px)) {
-		background-color: ${transparentColour(sourcePalette.neutral[10], 0.7)};
-	}
-	${overlayMaskGradientStyles('180deg')};
+	padding: ${space[9]}px ${space[2]}px ${space[2]}px;
 
 	/*
 	 * Ensure the waveform is behind the other elements, e.g. headline, pill.
 	 * Links define their own z-index.
 	 */
-
 	> :not(.waveform):not(a) {
 		z-index: 1;
 	}
@@ -189,12 +181,23 @@ const overlayStyles = css`
 
 const immersiveOverlayStyles = css`
 	${from.tablet} {
-		height: 100%;
-		/**
-		* Why 48px right padding?
-		* 48px is to point at which the gradient can go behind the content whilst maintaining accessibility.
-		*/
 		padding: ${space[2]}px ${space[12]}px ${space[2]}px ${space[2]}px;
+		height: 100%;
+	}
+`;
+
+const blurStyles = css`
+	position: absolute;
+	inset: 0;
+	backdrop-filter: blur(12px) brightness(0.5);
+	@supports not (backdrop-filter: blur(12px)) {
+		background-color: ${transparentColour(sourcePalette.neutral[10], 0.7)};
+	}
+	${overlayMaskGradientStyles('180deg')};
+`;
+
+const immersiveBlurStyles = css`
+	${from.tablet} {
 		${overlayMaskGradientStyles('270deg')}
 	}
 `;
@@ -214,9 +217,9 @@ const nonImmersivePodcastImageStyles = css`
 	position: absolute;
 	/**
 	* Displays 8px above the text.
-	* desired space above text (8px) - padding-top of text container (64px) = -56px
+	* desired space above text (8px) - padding-top of text container (36px) = -28px
 	*/
-	bottom: -${space[14]}px;
+	bottom: -28px;
 	left: ${space[2]}px;
 `;
 
@@ -245,7 +248,7 @@ const waveformStyles = css`
 	bottom: 0;
 	left: 0;
 	z-index: 0;
-	height: 64px;
+	height: 40px;
 	max-width: 100%;
 	overflow: hidden;
 	opacity: 0.3;
@@ -297,7 +300,7 @@ const getMedia = ({
 
 const renderWaveform = (duration: string, bars: number) => (
 	<div css={waveformStyles} className="waveform">
-		<WaveForm seed={duration} height={64} bars={bars} barWidth={2} />
+		<WaveForm seed={duration} height={40} bars={bars} barWidth={2} />
 	</div>
 );
 
@@ -423,8 +426,6 @@ export const FeatureCard = ({
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
-	const isVideoArticle = format.design === ArticleDesign.Video;
-
 	/**
 	 * Determine which type of media to use for the card.
 	 * For example, a video might be available, but if we don't want to show it, use an image instead.
@@ -522,7 +523,6 @@ export const FeatureCard = ({
 										altText={headlineText}
 										kickerText={kickerText}
 										trailText={trailText}
-										isVideoArticle={isVideoArticle}
 										hidePillOnMobile={false}
 										iconSizeOnDesktop="large"
 										iconSizeOnMobile="large"
@@ -665,6 +665,13 @@ export const FeatureCard = ({
 										))}
 									<div
 										css={[
+											blurStyles,
+											isImmersive && immersiveBlurStyles,
+										]}
+									/>
+
+									<div
+										css={[
 											overlayStyles,
 											isImmersive &&
 												immersiveOverlayStyles,
@@ -792,7 +799,6 @@ export const FeatureCard = ({
 													/>
 												) : undefined
 											}
-											showLivePlayable={false}
 											isNewsletter={isNewsletter}
 											mainMedia={mainMedia}
 										/>

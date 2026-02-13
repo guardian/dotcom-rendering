@@ -7,6 +7,8 @@ import { CommentLayout } from './CommentLayout';
 import { CrosswordLayout } from './CrosswordLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 import { GalleryLayout } from './GalleryLayout';
+import { HostedArticleLayout } from './HostedArticleLayout';
+import { HostedGalleryLayout } from './HostedGalleryLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
@@ -161,6 +163,23 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 							gallery={article}
 							renderingTarget={renderingTarget}
 							serverTime={serverTime}
+						/>
+					);
+				case ArticleDesign.HostedArticle:
+				case ArticleDesign.HostedVideo:
+					return (
+						<HostedArticleLayout
+							content={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
+				case ArticleDesign.HostedGallery:
+					return (
+						<HostedGalleryLayout
+							content={article}
+							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				default:
@@ -341,6 +360,23 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 							NAV={NAV}
 							renderingTarget={renderingTarget}
 							serverTime={serverTime}
+						/>
+					);
+				case ArticleDesign.HostedArticle:
+				case ArticleDesign.HostedVideo:
+					return (
+						<HostedArticleLayout
+							content={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
+				case ArticleDesign.HostedGallery:
+					return (
+						<HostedGalleryLayout
+							content={article}
+							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				default:

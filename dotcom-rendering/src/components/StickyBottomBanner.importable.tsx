@@ -275,6 +275,8 @@ export const StickyBottomBanner = ({
 	);
 
 	const [SelectedBanner, setSelectedBanner] = useState<MaybeFC | null>(null);
+	const [hasPickMessageCompleted, setHasPickMessageCompleted] =
+		useState<boolean>(false);
 	const [asyncArticleCounts, setAsyncArticleCounts] =
 		useState<Promise<ArticleCounts | undefined>>();
 
@@ -369,9 +371,10 @@ export const StickyBottomBanner = ({
 		};
 
 		pickMessage(bannerConfig, renderingTarget)
-			.then((PickedBanner: () => MaybeFC) =>
-				setSelectedBanner(PickedBanner),
-			)
+			.then((PickedBanner: () => MaybeFC) => {
+				setSelectedBanner(PickedBanner);
+				setHasPickMessageCompleted(true);
+			})
 			.catch((e) => {
 				// Report error to Sentry
 				const msg = `StickyBottomBanner pickMessage - error: ${String(
@@ -381,6 +384,7 @@ export const StickyBottomBanner = ({
 					new Error(msg),
 					'sticky-bottom-banner',
 				);
+				setHasPickMessageCompleted(true);
 			});
 	}, [
 		isSignedIn,
@@ -406,6 +410,14 @@ export const StickyBottomBanner = ({
 		isInAuxiaControlGroup,
 	]);
 
+	// Dispatches 'banner:none' event for mobile sticky ad integration (see @guardian/commercial-dev).
+	// Ensures ads only insert when no banner will be shown.
+	// hasPickMessageCompleted distinguishes between initial state (not picked yet) and final state (picked nothing).
+	useEffect(() => {
+		if (hasPickMessageCompleted && SelectedBanner == null) {
+			document.dispatchEvent(new CustomEvent('banner:none'));
+		}
+	}, [SelectedBanner, hasPickMessageCompleted]);
 	if (SelectedBanner) {
 		return <SelectedBanner />;
 	}

@@ -6,6 +6,7 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../../lib/articleFormat';
+import { ArticleDesign } from '../../lib/articleFormat';
 import { secondsToDuration } from '../../lib/formatTime';
 import { transparentColour } from '../../lib/transparentColour';
 import { palette } from '../../palette';
@@ -130,7 +131,6 @@ type Props = {
 	aspectRatio?: AspectRatio;
 	mobileAspectRatio?: AspectRatio;
 	trailText?: string;
-	isVideoArticle?: boolean;
 	webPublicationDate?: string;
 	showClock?: boolean;
 	serverTime?: number;
@@ -157,7 +157,6 @@ export const YoutubeAtomFeatureCardOverlay = ({
 	aspectRatio,
 	mobileAspectRatio,
 	trailText,
-	isVideoArticle,
 	webPublicationDate,
 	showClock,
 	serverTime,
@@ -170,7 +169,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
-
+	const isVideoArticle = format.design === ArticleDesign.Video;
 	const showCardAge =
 		webPublicationDate !== undefined &&
 		showClock !== undefined &&
@@ -256,36 +255,38 @@ export const YoutubeAtomFeatureCardOverlay = ({
 							/>
 						</div>
 					)}
-					<CardFooter
-						format={format}
-						age={
-							showCardAge ? (
-								<FeatureCardCardAge
-									webPublicationDate={webPublicationDate}
-									showClock={!!showClock}
-									serverTime={serverTime}
-								/>
-							) : undefined
-						}
-						commentCount={
-							showCommentCount ? (
-								<FeatureCardCommentCount
-									linkTo={linkTo}
-									discussionId={discussionId}
-									discussionApiUrl={discussionApiUrl}
-								/>
-							) : undefined
-						}
-						showLivePlayable={false}
-						mainMedia={
-							isVideoArticle
-								? {
-										type: 'YoutubeVideo',
-										duration: duration ?? 0,
-								  }
-								: undefined
-						}
-					/>
+
+					{isVideoArticle ? (
+						<Pill
+							content={
+								<time>{secondsToDuration(duration ?? 0)}</time>
+							}
+							prefix="Video"
+							icon={<SvgMediaControlsPlay width={18} />}
+						/>
+					) : (
+						<CardFooter
+							format={format}
+							age={
+								showCardAge ? (
+									<FeatureCardCardAge
+										webPublicationDate={webPublicationDate}
+										showClock={!!showClock}
+										serverTime={serverTime}
+									/>
+								) : undefined
+							}
+							commentCount={
+								showCommentCount ? (
+									<FeatureCardCommentCount
+										linkTo={linkTo}
+										discussionId={discussionId}
+										discussionApiUrl={discussionApiUrl}
+									/>
+								) : undefined
+							}
+						/>
+					)}
 				</div>
 			</button>
 		</FormatBoundary>

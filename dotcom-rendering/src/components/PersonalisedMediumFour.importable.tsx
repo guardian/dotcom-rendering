@@ -1,5 +1,6 @@
 import { isUndefined } from '@guardian/libs';
 import { useEffect, useState } from 'react';
+import { submitComponentEvent } from '../client/ophan/ophan';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { isMediaCard } from '../lib/cardHelpers';
 import { getDemotedState, trackView } from '../lib/personalisationHistory';
@@ -108,6 +109,18 @@ export const PersonalisedMediumFour = ({
 		if (curatedTrails.length > 0) {
 			setOrderedTrails(curatedTrails);
 		}
+
+		/* Fire a view event only if the container has been personalised */
+		void submitComponentEvent(
+			{
+				component: {
+					componentType: 'CONTAINER',
+					id: `reordered-container`,
+				},
+				action: 'VIEW',
+			},
+			'Web',
+		);
 
 		setShouldShowCards(true);
 	}, [trails, pillarBuckets, isInPersonalisationVariant]);

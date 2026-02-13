@@ -3703,6 +3703,9 @@ const shareButtonHoverLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 		case ArticleDesign.Picture:
+		case ArticleDesign.HostedArticle:
+		case ArticleDesign.HostedGallery:
+		case ArticleDesign.HostedVideo:
 			switch (theme) {
 				case ArticleSpecial.Labs:
 					return sourcePalette.neutral[100];
@@ -3780,6 +3783,9 @@ const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 		case ArticleDesign.Picture:
+		case ArticleDesign.HostedArticle:
+		case ArticleDesign.HostedGallery:
+		case ArticleDesign.HostedVideo:
 			switch (theme) {
 				case ArticleSpecial.Labs:
 					return sourcePalette.neutral[7];
@@ -7430,6 +7436,14 @@ const paletteColours = {
 	'--link-kicker-text': {
 		light: linkKickerTextLight,
 		dark: linkKickerTextDark,
+	},
+	'--listen-to-article-button-background': {
+		light: followIconBackgroundLight,
+		dark: followIconBackgroundDark,
+	},
+	'--listen-to-article-button-fill': {
+		light: followIconFillLight,
+		dark: followIconFillDark,
 	},
 	'--listen-to-article-waveform': {
 		light: () => sourcePalette.neutral[86],

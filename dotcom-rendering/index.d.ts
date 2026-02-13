@@ -94,6 +94,7 @@ declare namespace JSX {
 		'data-spacefinder-role'?:
 			| 'nested'
 			| 'immersive'
+			| 'fullWidth'
 			| 'inline'
 			| 'richLink'
 			| 'thumbnail';

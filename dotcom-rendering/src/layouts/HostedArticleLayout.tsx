@@ -1,12 +1,22 @@
 import { css } from '@emotion/react';
-import { palette as sourcePalette } from '@guardian/source/foundations';
+import {
+	from,
+	palette as sourcePalette,
+	space,
+} from '@guardian/source/foundations';
 import { HostedContentHeader } from '../components/HostedContentHeader';
+import { Island } from '../components/Island';
 import { Section } from '../components/Section';
+import { ShareButton } from '../components/ShareButton.importable';
 import { grid } from '../grid';
+import type { ArticleFormat } from '../lib/articleFormat';
+import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
+	content: Article;
+	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 }
 
@@ -22,7 +32,30 @@ const border = css`
 	border: 1px solid black;
 `;
 
+const metaFlex = css`
+	margin-bottom: ${space[3]}px;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+`;
+
+const shareButtonWrapper = css`
+	${grid.column.centre}
+	grid-row: 1 / -2;
+
+	${from.leftCol} {
+		${grid.column.left}
+	}
+`;
+
 export const HostedArticleLayout = (props: WebProps | AppProps) => {
+	const {
+		content: {
+			frontendData: { headline, standfirst, pageId, webTitle },
+		},
+		format,
+	} = props;
+
 	return (
 		<>
 			{props.renderingTarget === 'Web' ? (
@@ -45,22 +78,57 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 			) : null}
 			<main>
 				<header css={[grid.container, border]}>
-					<div css={[grid.column.all]}>Main media</div>
+					<div
+						css={[
+							grid.column.all,
+							css`
+								min-height: 200px;
+							`,
+						]}
+					>
+						Main media
+					</div>
 					<div
 						css={[grid.between('centre-column-start', 'grid-end')]}
 					>
-						Headline
+						{/** @todo Use ArticleHeadline component */}
+						{headline}
 					</div>
 				</header>
-				<div css={[grid.container]}>
-					<div css={[grid.column.left, 'grid-row: 1']}>
-						Left column
+				<div
+					css={[
+						grid.container,
+						css`
+							padding-top: ${space[12]}px;
+
+							${from.leftCol} {
+								padding-top: ${space[5]}px;
+							}
+						`,
+					]}
+				>
+					<div css={shareButtonWrapper}>
+						<div data-print-layout="hide" css={metaFlex}>
+							{props.renderingTarget === 'Web' && (
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
+									<ShareButton
+										pageId={pageId}
+										webTitle={webTitle}
+										format={format}
+										context="ArticleMeta"
+									/>
+								</Island>
+							)}
+						</div>
 					</div>
 					<div css={[grid.column.right, 'grid-row: 1']}>
 						Onward content
 					</div>
 					<div css={[border, grid.column.centre, 'grid-row: 1']}>
-						Standfirst
+						{standfirst}
 					</div>
 					<div css={[border, grid.column.centre]}>Meta</div>
 					<article css={[border, grid.column.centre]}>Body</article>

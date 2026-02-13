@@ -40,6 +40,12 @@ export const allowedPageIds: string[] = [
 	'thefilter-us/2025/dec/14/best-cordless-leaf-blowers-battery-powered',
 	'thefilter-us/2026/jan/07/best-packing-cubes',
 	'thefilter-us/2026/jan/09/best-induction-cookware',
+	'thefilter/2025/feb/12/best-flower-delivery',
+	'thefilter-us/2026/feb/06/best-personal-travel-item-backpacks-us',
+	'thefilter/2024/nov/21/best-coffee-machines',
+	'thefilter/2026/feb/04/best-soup-maker-uk',
+	'thefilter-us/2025/oct/01/best-best-bath-towels-us',
+	'thefilter/2025/apr/03/best-walking-pads-under-desk-treadmills-uk',
 ];
 
 const isEligibleForSummary = (pageId: string) => {

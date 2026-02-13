@@ -10,18 +10,20 @@ import {
 	palette,
 } from '@guardian/source/foundations';
 import { grid } from '../grid';
+import type { TagType } from '../types/tag';
 
 type Props = {
-	selected: Selected;
 	pageId: string;
+	pageTags?: TagType[];
 };
 
 interface DirectoryPageNavConfig {
 	pageIds: string[];
+	tagIds: string[];
 	textColor: string;
 	backgroundColor: string;
-	title: { label: string; link: string };
-	links: { label: string; href: string; selectedSlug: string | undefined }[];
+	title: { label: string; id: string };
+	links: { label: string; id: string }[];
 	backgroundImages?: {
 		mobile: string;
 		mobileLandscape: string;
@@ -39,32 +41,29 @@ const configs = [
 			'sport/ng-interactive/2026/feb/04/winter-olympics-results-milano-cortina-2026',
 			'sport/ng-interactive/2026/feb/04/winter-olympics-2026-latest-medal-table-milano-cortina',
 		],
+		tagIds: [],
 		textColor: palette.neutral[7],
 		backgroundColor: '#CCCCCC',
 		title: {
 			label: 'Winter Olympics 2026',
-			link: 'https://www.theguardian.com/sport/winter-olympics-2026',
+			id: 'sport/winter-olympics-2026',
 		},
 		links: [
 			{
 				label: 'Schedule',
-				href: 'https://www.theguardian.com/sport/ng-interactive/2026/feb/04/winter-olympics-full-schedule-milano-cortina-2026',
-				selectedSlug: 'schedule',
+				id: 'sport/ng-interactive/2026/feb/04/winter-olympics-full-schedule-milano-cortina-2026',
 			},
 			{
 				label: 'Results',
-				href: 'https://www.theguardian.com/sport/ng-interactive/2026/feb/04/winter-olympics-results-milano-cortina-2026',
-				selectedSlug: 'results',
+				id: 'sport/ng-interactive/2026/feb/04/winter-olympics-results-milano-cortina-2026',
 			},
 			{
 				label: 'Medal table',
-				href: 'https://www.theguardian.com/sport/ng-interactive/2026/feb/04/winter-olympics-2026-latest-medal-table-milano-cortina',
-				selectedSlug: undefined,
+				id: 'sport/ng-interactive/2026/feb/04/winter-olympics-2026-latest-medal-table-milano-cortina',
 			},
 			{
 				label: 'Full coverage',
-				href: 'https://www.theguardian.com/sport/winter-olympics-2026',
-				selectedSlug: undefined,
+				id: 'sport/winter-olympics-2026',
 			},
 		],
 		backgroundImages: {
@@ -79,10 +78,6 @@ const configs = [
 		},
 	},
 ] satisfies DirectoryPageNavConfig[];
-
-type Configs = typeof configs;
-type SelectedSlug = Configs[number]['links'][number]['selectedSlug'];
-type Selected = Exclude<SelectedSlug, undefined>;
 
 const backgroundImageStyles = (
 	images?: DirectoryPageNavConfig['backgroundImages'],
@@ -109,8 +104,14 @@ const backgroundImageStyles = (
 	};
 };
 
-export const DirectoryPageNav = ({ selected, pageId }: Props) => {
-	const config = configs.find((cfg) => cfg.pageIds.includes(pageId));
+export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
+	const config = configs.find(
+		(cfg) =>
+			cfg.pageIds.includes(pageId) ||
+			cfg.tagIds.some(
+				(tagId) => pageTags?.some((tag) => tag.id === tagId),
+			),
+	);
 
 	if (!config) {
 		return null;
@@ -225,23 +226,22 @@ export const DirectoryPageNav = ({ selected, pageId }: Props) => {
 
 	return (
 		<nav css={nav}>
-			<a href={config.title.link} css={largeLinkStyles}>
+			<a href={`/${config.title.id}`} css={largeLinkStyles}>
 				{config.title.label}
 			</a>
 			<ul css={list}>
 				{config.links.map((link, i) => (
-					<li key={link.label} css={listItem}>
+					<li
+						key={link.label}
+						css={listItem}
+						style={pageId === link.id ? selectedStyles : {}}
+					>
 						<a
-							href={link.href}
+							href={`/${link.id}`}
 							css={
 								i === config.links.length - 1
 									? lastSmallLink
 									: smallLink
-							}
-							style={
-								link.selectedSlug === selected
-									? selectedStyles
-									: {}
 							}
 						>
 							{link.label}

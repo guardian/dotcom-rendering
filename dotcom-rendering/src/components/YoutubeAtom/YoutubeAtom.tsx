@@ -53,7 +53,6 @@ export type Props = {
 	mobileAspectRatio?: AspectRatio;
 	trailText?: string;
 	headlineSizes?: ResponsiveFontSize;
-	isVideoArticle?: boolean;
 	webPublicationDate?: string;
 	showClock?: boolean;
 	serverTime?: number;
@@ -109,7 +108,6 @@ export const YoutubeAtom = ({
 	mobileAspectRatio,
 	trailText,
 	headlineSizes,
-	isVideoArticle,
 	webPublicationDate,
 	showClock,
 	serverTime,
@@ -259,7 +257,6 @@ export const YoutubeAtom = ({
 								aspectRatio={aspectRatio}
 								mobileAspectRatio={mobileAspectRatio}
 								trailText={trailText}
-								isVideoArticle={isVideoArticle}
 								webPublicationDate={webPublicationDate}
 								showClock={!!showClock}
 								serverTime={serverTime}

@@ -12,12 +12,12 @@ import { WaveForm } from './WaveForm';
 const buttonCss = (audioDuration: string | undefined) => css`
 	display: flex;
 	align-items: center;
-	background-color: ${palette('--follow-icon-fill')};
-	color: ${palette('--follow-icon-background')};
+	background-color: ${palette('--listen-to-article-button-fill')};
+	color: ${palette('--listen-to-article-button-background')};
 	&:active,
 	&:focus,
 	&:hover {
-		background-color: ${palette('--follow-icon-fill')};
+		background-color: ${palette('--listen-to-article-button-fill')};
 	}
 	margin-bottom: ${space[4]}px;
 	margin-left: ${space[2]}px;
