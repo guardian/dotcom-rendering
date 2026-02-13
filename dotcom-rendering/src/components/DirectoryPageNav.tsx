@@ -46,7 +46,7 @@ const configs = [
 		],
 		tagIds: [],
 		textColor: palette.neutral[7],
-		backgroundColor: '#CCCCCC',
+		backgroundColor: '#22B24B',
 		title: {
 			label: 'Winter Olympics 2026',
 			id: 'sport/winter-olympics-2026',
