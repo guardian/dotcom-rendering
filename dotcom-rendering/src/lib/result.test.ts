@@ -178,9 +178,9 @@ describe('fromValibot', () => {
 		const valibotResult = safeParse(schema, 'invalid literal');
 
 		const result = fromValibot(valibotResult);
-		const error = result.getErrorOrThrow('Expected an Err');
+		const err = result.getErrorOrThrow('Expected an Err');
 
-		expect(error[0].reason).toBe('type');
-		expect(error[0].context).toBe('literal');
+		expect(err[0].reason).toBe('type');
+		expect(err[0].context).toBe('literal');
 	});
 });
