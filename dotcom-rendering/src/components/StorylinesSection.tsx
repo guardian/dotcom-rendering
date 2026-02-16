@@ -597,14 +597,27 @@ export const StorylinesSection = ({
 										${textSans14};
 									`}
 								>
-									Dive deeper into the Guardian's archive.{' '}
 									<Hide until="leftCol">
 										<span>
-											This product uses GenAI. Learn more
-											about how it works{' '}
+											Storylines is an experimental
+											feature we are showing to a limited
+											audience as a Beta test.
+											<br /> It uses generative AI to
+											identify three key storylines within
+											this topic and show valuable
+											articles from our archive. The aim
+											is to give readers a better
+											understanding of a topic and access
+											to a wider variety of our
+											journalism. The only text
+											automatically generated is the short
+											description of each storyline. It
+											has been created in line with the
+											Guardian’s{' '}
 											<a href="https://www.theguardian.com/help/insideguardian/2023/jun/16/the-guardians-approach-to-generative-ai">
-												here.
+												generative AI principles
 											</a>
+											.{' '}
 										</span>
 
 										<div
@@ -675,6 +688,7 @@ export const StorylinesSection = ({
 								align-items: center;
 								height: 100%;
 								width: 48px;
+								padding: ${space[1]}px;
 							`}
 						>
 							<SvgBetaLabel />

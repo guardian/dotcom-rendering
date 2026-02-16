@@ -126,20 +126,7 @@ function formatDateRangeText(
 	const format = (d?: Date | null) => {
 		if (!d) return '';
 		const day = d.getDate();
-		const suffix = (dayNum: number) => {
-			if (dayNum > 3 && dayNum < 21) return 'th';
-			switch (dayNum % 10) {
-				case 1:
-					return 'st';
-				case 2:
-					return 'nd';
-				case 3:
-					return 'rd';
-				default:
-					return 'th';
-			}
-		};
-		return `${day}${suffix(day)} ${d.toLocaleDateString('en-GB', {
+		return `${day} ${d.toLocaleDateString('en-GB', {
 			month: 'long',
 			year: 'numeric',
 		})}`;
@@ -280,19 +267,33 @@ export const StorylinesSectionContent = ({
 				{/* Context on article date range and mobile AI disclaimer */}
 				<div css={articleDateRangeStyle}>
 					<Hide from="leftCol">
-						<span>
-							This product uses GenAI. Learn more about how it
-							works{' '}
+						<div
+							css={css`
+								padding-bottom: ${space[2]}px;
+							`}
+						>
+							Storylines is an experimental feature we are showing
+							to a limited audience as a Beta test. It uses
+							generative AI to identify three key storylines
+							within this topic and show valuable articles from
+							our archive. The aim is to give readers a better
+							understanding of a topic and access to a wider
+							variety of our journalism. The only text
+							automatically generated is the short description of
+							each storyline. It has been created in line with the
+							Guardian’s{' '}
 							<a href="https://www.theguardian.com/help/insideguardian/2023/jun/16/the-guardians-approach-to-generative-ai">
-								here
+								generative AI principles
 							</a>
 							.{' '}
-						</span>
+						</div>
 					</Hide>
-					{`These storylines were curated from ${formatDateRangeText(
-						storylinesContent.earliestArticleTime,
-						storylinesContent.latestArticleTime,
-					)}. Some articles may be older to provide further context.`}
+					<div>
+						{`These storylines were curated from ${formatDateRangeText(
+							storylinesContent.earliestArticleTime,
+							storylinesContent.latestArticleTime,
+						)}. Some articles may be older to provide further context.`}
+					</div>
 				</div>
 
 				<Hide from="leftCol">

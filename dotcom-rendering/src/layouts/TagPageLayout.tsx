@@ -149,20 +149,23 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					 * If the storylines section is being inserted when there's only one other container on the page,
 					 * we want to attach the pagination to it instead of the last trails section.
 					 */
+					const isLastGroup =
+						index === tagPage.groupedTrails.length - 1;
+					const hasPagination = !!tagPage.pagination;
+					const isSingleGroup = tagPage.groupedTrails.length === 1;
+					const shouldSuppressPagination =
+						insertStorylinesSection && isSingleGroup;
+
 					const tagPagePagination =
-						index === tagPage.groupedTrails.length - 1 &&
-						tagPage.pagination &&
-						!(
-							insertStorylinesSection &&
-							tagPage.groupedTrails.length === 1
-						)
+						isLastGroup &&
+						hasPagination &&
+						!shouldSuppressPagination
 							? tagPage.pagination
 							: undefined;
 
-					const paginationForStorylines =
-						tagPage.groupedTrails.length === 1
-							? tagPage.pagination
-							: undefined;
+					const storylinesPagination = isSingleGroup
+						? tagPage.pagination
+						: undefined;
 
 					return (
 						<Fragment key={containerId}>
@@ -215,7 +218,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 												tagPage.storylinesContent
 											}
 											containerId="storylines"
-											pagination={paginationForStorylines}
+											pagination={storylinesPagination}
 										/>
 									</Island>
 								)}
