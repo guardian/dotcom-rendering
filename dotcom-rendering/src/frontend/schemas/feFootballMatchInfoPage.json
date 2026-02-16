@@ -495,11 +495,15 @@
                 },
                 "matchUrl": {
                     "type": "string"
+                },
+                "matchHeaderUrl": {
+                    "type": "string"
                 }
             },
             "required": [
                 "competitionName",
                 "footballMatch",
+                "matchHeaderUrl",
                 "matchInfo",
                 "matchUrl"
             ]

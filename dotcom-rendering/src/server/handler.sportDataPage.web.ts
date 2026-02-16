@@ -17,6 +17,7 @@ import type { FEFootballMatchInfoPage } from '../frontend/feFootballMatchInfoPag
 import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
 import type { FEFootballTablesPage } from '../frontend/feFootballTablesPage';
 import { Pillar } from '../lib/articleFormat';
+import { safeParseURL } from '../lib/parse';
 import { extractNAV } from '../model/extract-nav';
 import {
 	validateAsCricketMatchPageType,
@@ -247,6 +248,13 @@ const parseFEFootballMatch = (
 		);
 	}
 
+	const headerUrl = safeParseURL(data.matchHeaderUrl);
+	if (!headerUrl.ok) {
+		throw new Error(
+			`Failed to parse match header URL: ${data.matchHeaderUrl}`,
+		);
+	}
+
 	return {
 		match: parsedFootballMatch.value,
 		matchStats: parsedFootballMatchStats.value,
@@ -254,6 +262,7 @@ const parseFEFootballMatch = (
 		competitionName: data.competitionName,
 		group: group?.value,
 		matchUrl: data.matchUrl,
+		matchHeaderUrl: headerUrl.value,
 		kind: 'FootballMatchSummary',
 		nav: {
 			...extractNAV(data.nav),
