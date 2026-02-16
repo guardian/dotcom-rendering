@@ -1,3 +1,8 @@
+/**
+ * There is a lot of repeated code between this component and FollowWrapper.
+ * This is intentional so that we can implement it as an A/B test.
+ * We will clean this up once the test is complete.
+ */
 import { css } from '@emotion/react';
 import { Topic } from '@guardian/bridget/Topic';
 import { isUndefined, log } from '@guardian/libs';
