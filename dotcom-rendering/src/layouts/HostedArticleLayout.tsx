@@ -5,9 +5,11 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
+import { CallToActionAtom } from '../components/CallToActionAtom';
 import { Caption } from '../components/Caption';
 import { HostedContentHeader } from '../components/HostedContentHeader';
 import { Island } from '../components/Island';
+import { MainMedia } from '../components/MainMedia';
 import { Section } from '../components/Section';
 import { ShareButton } from '../components/ShareButton.importable';
 import { Standfirst } from '../components/Standfirst';
@@ -82,16 +84,38 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 			) : null}
 			<main>
 				<article>
-					<header css={grid.container}>
+					<header css={[grid.container]}>
 						<div
 							css={[
 								grid.column.all,
 								css`
-									min-height: 200px;
+									overflow: hidden;
+									max-height: 400px;
+									${from.leftCol} {
+										${grid.between(
+											'left-column-start',
+											'right-column-end',
+										)}
+									}
 								`,
 							]}
 						>
-							Main media
+							<MainMedia
+								format={format}
+								elements={frontendData.mainMediaElements}
+								host={frontendData.config.host}
+								pageId={frontendData.pageId}
+								webTitle={frontendData.webTitle}
+								ajaxUrl={frontendData.config.ajaxUrl}
+								abTests={frontendData.config.abTests}
+								switches={frontendData.config.switches}
+								isAdFreeUser={frontendData.isAdFreeUser}
+								isSensitive={frontendData.config.isSensitive}
+								editionId={frontendData.editionId}
+								hideCaption={true}
+								shouldHideAds={true}
+								contentType={frontendData.contentType}
+							/>
 						</div>
 						<div
 							css={[
@@ -183,6 +207,30 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						<div css={[grid.column.all]}>Footer</div>
 					</div>
 				</article>
+				<div css={[grid.container]}>
+					<div
+						css={[
+							grid.column.all,
+							css`
+								overflow: hidden;
+								max-height: 400px;
+								${from.leftCol} {
+									${grid.between(
+										'left-column-start',
+										'right-column-end',
+									)}
+								}
+							`,
+						]}
+					>
+						<CallToActionAtom
+							linkUrl="https://safety.epicgames.com/en-US?lang=en-US"
+							backgroundImage="https://media.guim.co.uk/7fe58f11470360bc9f1e4b6bbcbf45d7cf06cfcf/0_0_1300_375/1300.jpg"
+							text="This is a call to action text"
+							buttonText="Learn more"
+						/>
+					</div>
+				</div>
 			</main>
 		</>
 	);

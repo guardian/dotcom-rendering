@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 import {
+	type Breakpoint,
+	breakpoints,
 	from,
 	headlineBold15Object,
 	headlineBold17Object,
@@ -10,6 +12,7 @@ import {
 	palette,
 } from '@guardian/source/foundations';
 import { grid } from '../grid';
+import { generateImageURL } from '../lib/image';
 import type { TagType } from '../types/tag';
 
 type Props = {
@@ -43,7 +46,7 @@ const configs = [
 		],
 		tagIds: [],
 		textColor: palette.neutral[7],
-		backgroundColor: '#CCCCCC',
+		backgroundColor: '#22B24B',
 		title: {
 			label: 'Winter Olympics 2026',
 			id: 'sport/winter-olympics-2026',
@@ -79,31 +82,6 @@ const configs = [
 	},
 ] satisfies DirectoryPageNavConfig[];
 
-const backgroundImageStyles = (
-	images?: DirectoryPageNavConfig['backgroundImages'],
-) => {
-	if (!images) return {};
-
-	return {
-		backgroundImage: `url(${images.mobile})`,
-		backgroundSize: 'cover',
-		backgroundPosition: 'top center',
-
-		[from.mobileLandscape]: {
-			backgroundImage: `url(${images.mobileLandscape})`,
-		},
-		[from.phablet]: {
-			backgroundImage: `url(${images.phablet})`,
-		},
-		[from.tablet]: {
-			backgroundImage: `url(${images.tablet})`,
-		},
-		[from.desktop]: {
-			backgroundImage: `url(${images.desktop})`,
-		},
-	};
-};
-
 export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 	const config = configs.find(
 		(cfg) =>
@@ -119,27 +97,18 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 
 	const { textColor, backgroundColor } = config;
 
-	const nav = css(
-		{
-			backgroundColor,
-			'&': css(grid.paddedContainer),
-			alignContent: 'space-between',
-			height: 116,
-			[from.tablet]: {
-				height: 140,
-			},
-			[from.desktop]: {
-				height: 150,
-			},
-		},
-		backgroundImageStyles(config.backgroundImages),
-	);
+	const nav = css({
+		backgroundColor,
+		'&': css(grid.paddedContainer),
+		alignContent: 'space-between',
+	});
 
 	const largeLinkStyles = css({
 		...headlineBold24Object,
 		color: textColor,
 		textDecoration: 'none',
 		'&': css(grid.column.centre),
+		gridRow: 1,
 		[from.tablet]: headlineBold42Object,
 		[from.leftCol]: css(
 			grid.between('left-column-start', 'right-column-end'),
@@ -150,6 +119,8 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		display: 'flex',
 		flexWrap: 'wrap',
 		'&': css(grid.column.all),
+		gridRow: 2,
+		alignSelf: 'end',
 		position: 'relative',
 		'--top-border-gap': '1.55rem',
 		[from.mobileLandscape]: {
@@ -227,7 +198,8 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 	});
 
 	return (
-		<nav css={nav}>
+		<nav css={[nav, heightStyles]}>
+			<BackgroundImage images={config.backgroundImages} />
 			<a href={`/${config.title.id}`} css={largeLinkStyles}>
 				{config.title.label}
 			</a>
@@ -254,3 +226,96 @@ export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
 		</nav>
 	);
 };
+
+const heightStyles = css({
+	height: 116,
+	[from.tablet]: {
+		height: 140,
+	},
+	[from.desktop]: {
+		height: 150,
+	},
+});
+
+const BackgroundImage = (props: {
+	images: DirectoryPageNavConfig['backgroundImages'];
+}) => {
+	if (props.images === undefined) {
+		return null;
+	}
+
+	return (
+		<picture
+			css={[
+				{
+					'&': css(grid.column.all),
+					gridRow: '1/3',
+				},
+				heightStyles,
+			]}
+		>
+			<Source images={props.images} breakpoint="wide" />
+			<Source images={props.images} breakpoint="leftCol" />
+			<Source images={props.images} breakpoint="desktop" />
+			<Source images={props.images} breakpoint="tablet" />
+			<Source images={props.images} breakpoint="phablet" />
+			<Source images={props.images} breakpoint="mobileLandscape" />
+			<Source images={props.images} breakpoint="mobileMedium" />
+			<Source images={props.images} breakpoint="mobile" />
+			<img
+				src={generateImageURL({
+					mainImage: props.images.mobile,
+					imageWidth: breakpoints.mobileMedium,
+					resolution: 'low',
+				})}
+				alt="Winter Olympics background graphic"
+				css={{
+					width: '100%',
+					height: '100%',
+					objectFit: 'cover',
+					objectPosition: 'top',
+				}}
+			/>
+		</picture>
+	);
+};
+
+const Source = (props: { images: Images; breakpoint: Breakpoint }) => (
+	<source
+		media={`(min-width: ${breakpoints[props.breakpoint]}px)`}
+		srcSet={`${generateImageURL({
+			mainImage: props.images[breakpointToImageSize(props.breakpoint)],
+			imageWidth: breakpoints[props.breakpoint],
+			resolution: 'low',
+		})}, ${generateImageURL({
+			mainImage: props.images[breakpointToImageSize(props.breakpoint)],
+			imageWidth: breakpoints[props.breakpoint],
+			resolution: 'high',
+		})} 2x`}
+	/>
+);
+
+/**
+ * We don't have an image for every breakpoint, so this picks an appropriate
+ * image size in each case.
+ */
+const breakpointToImageSize = (breakpoint: Breakpoint): ImageSize => {
+	switch (breakpoint) {
+		case 'mobile':
+		case 'mobileMedium':
+			return 'mobile';
+		case 'mobileLandscape':
+			return 'mobileLandscape';
+		case 'phablet':
+			return 'phablet';
+		case 'tablet':
+			return 'tablet';
+		case 'desktop':
+		case 'leftCol':
+		case 'wide':
+			return 'desktop';
+	}
+};
+
+type Images = Exclude<DirectoryPageNavConfig['backgroundImages'], undefined>;
+type ImageSize = keyof Images;
