@@ -41,11 +41,12 @@ const metaFlex = css`
 
 export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 	const {
-		content: {
-			frontendData: { pageId, webTitle },
-		},
+		content: { frontendData },
 		format,
 	} = props;
+
+	const branding =
+		frontendData.commercialProperties[frontendData.editionId].branding;
 
 	return (
 		<>
@@ -61,8 +62,8 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 						element="aside"
 					>
 						<HostedContentHeader
-							accentColor={sourcePalette.brand[400]}
-							branding="logo"
+							accentColor={branding.hostedCampaignColour}
+							branding={branding}
 						/>
 					</Section>
 				</Stuck>
@@ -103,8 +104,8 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 										defer={{ until: 'visible' }}
 									>
 										<ShareButton
-											pageId={pageId}
-											webTitle={webTitle}
+											pageId={frontendData.pageId}
+											webTitle={frontendData.webTitle}
 											format={format}
 											context="ArticleMeta"
 										/>
