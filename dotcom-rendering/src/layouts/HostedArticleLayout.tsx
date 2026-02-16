@@ -5,6 +5,7 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
+import { CallToActionAtom } from '../components/CallToActionAtom';
 import { Caption } from '../components/Caption';
 import { HostedContentHeader } from '../components/HostedContentHeader';
 import { Island } from '../components/Island';
@@ -83,7 +84,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 			) : null}
 			<main>
 				<article>
-					<header css={grid.container}>
+					<header css={[grid.container]}>
 						<div
 							css={[
 								grid.column.all,
@@ -206,6 +207,30 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						<div css={[grid.column.all]}>Footer</div>
 					</div>
 				</article>
+				<div css={[grid.container]}>
+					<div
+						css={[
+							grid.column.all,
+							css`
+								overflow: hidden;
+								max-height: 400px;
+								${from.leftCol} {
+									${grid.between(
+										'left-column-start',
+										'right-column-end',
+									)}
+								}
+							`,
+						]}
+					>
+						<CallToActionAtom
+							linkUrl="https://safety.epicgames.com/en-US?lang=en-US"
+							backgroundImage="https://media.guim.co.uk/7fe58f11470360bc9f1e4b6bbcbf45d7cf06cfcf/0_0_1300_375/1300.jpg"
+							text="This is a call to action text"
+							buttonText="Learn more"
+						/>
+					</div>
+				</div>
 			</main>
 		</>
 	);
