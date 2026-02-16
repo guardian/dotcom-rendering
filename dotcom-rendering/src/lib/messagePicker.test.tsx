@@ -58,7 +58,7 @@ describe('pickMessage', () => {
 
 		const got = await pickMessage(config, 'Web');
 
-		expect(got()).toEqual(ChosenMockComponent);
+		expect(got.Message()).toEqual(ChosenMockComponent);
 	});
 
 	it('resolves with null if no messages can show', async () => {
@@ -88,7 +88,7 @@ describe('pickMessage', () => {
 
 		const got = await pickMessage(config, 'Web');
 
-		expect(got()).toEqual(null);
+		expect(got.Message()).toEqual(null);
 	});
 
 	it('falls through to a lower priority message when a higher one times out', async () => {
@@ -131,7 +131,7 @@ describe('pickMessage', () => {
 		jest.advanceTimersByTime(260);
 		const got = await messagePromise;
 
-		expect(got()).toEqual(ChosenMockComponent);
+		expect(got.Message()).toEqual(ChosenMockComponent);
 	});
 
 	it('resolves with null if all messages time out', async () => {
@@ -184,7 +184,7 @@ describe('pickMessage', () => {
 		jest.advanceTimersByTime(260);
 		const got = await messagePromise;
 
-		expect(got()).toEqual(null);
+		expect(got.Message()).toEqual(null);
 
 		clearTimeout(timer1);
 		clearTimeout(timer2);
@@ -212,7 +212,7 @@ describe('pickMessage', () => {
 		};
 
 		const show = await pickMessage(config, 'Web');
-		show();
+		show.Message();
 
 		expect(renderComponent).toHaveBeenCalledWith(meta);
 	});
@@ -248,7 +248,7 @@ describe('pickMessage', () => {
 		jest.advanceTimersByTime(250);
 		const got = await messagePromise;
 
-		expect(got()).toEqual(null);
+		expect(got.Message()).toEqual(null);
 
 		expect(ophanRecordSpy).toHaveBeenCalledWith({
 			component: 'banner-picker-timeout-dcr',
