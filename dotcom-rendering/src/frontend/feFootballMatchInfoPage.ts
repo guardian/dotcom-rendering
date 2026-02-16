@@ -1,46 +1,63 @@
+import {
+	array,
+	boolean,
+	number,
+	object,
+	optional,
+	type Output,
+	string,
+} from 'valibot';
 import type { FEFootballDataPage } from './feFootballDataPage';
 import { type FEFootballMatch } from './feFootballMatchListPage';
 import { type FEGroupSummary } from './feFootballTablesPage';
 
-export type FEFootballPlayerEvent = {
-	eventTime: string;
-	eventType: string;
-};
+const feFootballPlayerrEventSchema = object({
+	eventTime: string(),
+	eventType: string(),
+});
 
-export type FEFootballPlayer = {
-	id: string;
-	name: string;
-	position: string;
-	lastName: string;
-	substitute: boolean;
-	timeOnPitch: string;
-	shirtNumber: string;
-	events: FEFootballPlayerEvent[];
-};
+export type FEFootballPlayerEvent = Output<typeof feFootballPlayerrEventSchema>;
 
-export type FEFootballTeam = {
-	id: string;
-	name: string;
-	codename: string;
-	players: FEFootballPlayer[];
-	score?: number;
-	scorers: string[];
-	possession: number;
-	shotsOn: number;
-	shotsOff: number;
-	corners: number;
-	fouls: number;
-	colours: string;
-	crest: string;
-};
+const feFootballPlayerSchema = object({
+	id: string(),
+	name: string(),
+	position: string(),
+	lastName: string(),
+	substitute: boolean(),
+	timeOnPitch: string(),
+	shirtNumber: string(),
+	events: array(feFootballPlayerrEventSchema),
+});
 
-export type FEFootballMatchStats = {
-	id: string;
-	homeTeam: FEFootballTeam;
-	awayTeam: FEFootballTeam;
-	status: string;
-	comments?: string;
-};
+export type FEFootballPlayer = Output<typeof feFootballPlayerSchema>;
+
+const feFootballTeamSchema = object({
+	id: string(),
+	name: string(),
+	codename: string(),
+	players: array(feFootballPlayerSchema),
+	score: optional(number()),
+	scorers: array(string()),
+	possession: number(),
+	shotsOn: number(),
+	shotsOff: number(),
+	corners: number(),
+	fouls: number(),
+	colours: string(),
+	crest: string(),
+});
+
+export type FEFootballTeam = Output<typeof feFootballTeamSchema>;
+
+export const feFootballMatchStatsSchema = object({
+	id: string(),
+	homeTeam: feFootballTeamSchema,
+	awayTeam: feFootballTeamSchema,
+	status: string(),
+	comments: optional(string()),
+});
+
+export type FEFootballMatchStats = Output<typeof feFootballMatchStatsSchema>;
 
 export type FEFootballMatchInfoPage = FEFootballDataPage & {
 	// This field name will need to get changed to matchStats in the future PRs.
