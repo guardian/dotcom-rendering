@@ -9,18 +9,18 @@ import { palette } from '../palette';
 import type { ControlsPosition, SubtitleSize } from './SelfHostedVideoPlayer';
 
 const subtitleOverlayStyles = (position: ControlsPosition) => css`
-	max-width: 71%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
 	pointer-events: none;
 	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
 
 	${position === 'top' && `top: ${space[4]}px;`};
 	${position === 'bottom' && `bottom: ${space[4]}px;`};
 `;
 
 const cueBoxStyles = css`
-	width: 100%;
+	max-width: 71%;
 	margin: 0 auto;
 	text-align: center;
 	pointer-events: none;
