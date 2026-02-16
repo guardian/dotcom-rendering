@@ -165,7 +165,6 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 		<div
 			css={css`
 				min-height: ${space[6]}px;
-				width: 100%;
 
 				${from.phablet} {
 					display: inline-flex;
