@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { log } from '@guardian/libs';
 import {
 	from,
 	headlineBold20Object,
@@ -11,6 +12,8 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { type ComponentProps, type ReactNode, useMemo } from 'react';
+import type { SWRConfiguration } from 'swr';
+import useSWR from 'swr';
 import type { FootballMatch } from '../../footballMatchV2';
 import { grid } from '../../grid';
 import {
@@ -23,6 +26,7 @@ import type { ColourName } from '../../paletteDeclarations';
 import { BigNumber } from '../BigNumber';
 import { FootballCrest } from '../FootballCrest';
 import { background, border, primaryText, secondaryText } from './colours';
+import { type HeaderData, parse as parseHeaderData } from './headerData';
 import { Tabs } from './Tabs';
 
 type Props = {
@@ -30,40 +34,85 @@ type Props = {
 	match: FootballMatch;
 	tabs: ComponentProps<typeof Tabs>;
 	edition: EditionId;
+	matchHeaderURL: URL;
+	getHeaderData: (url: string) => Promise<unknown>;
+	refreshInterval: number;
 };
 
-export const FootballMatchHeader = (props: Props) => (
-	<section
-		style={{
-			backgroundColor: palette(background(props.match.kind)),
-			color: palette(primaryText(props.match.kind)),
-		}}
-	>
-		<div
-			css={{
-				'&': css(grid.paddedContainer),
-				[from.tablet]: {
-					borderColor: palette(
-						'--football-match-header-fixture-result-border',
-					),
-					borderStyle: 'solid',
-					borderLeftWidth: 1,
-					borderRightWidth: 1,
-				},
+export const FootballMatchHeader = (props: Props) => {
+	const { data } = useSWR<HeaderData, string>(
+		props.matchHeaderURL,
+		fetcher(props.tabs.selected, props.getHeaderData),
+		swrOptions(props.refreshInterval),
+	);
+
+	const match = data?.match ?? props.match;
+	const tabs = data?.tabs ?? props.tabs;
+
+	return (
+		<section
+			style={{
+				backgroundColor: palette(background(match.kind)),
+				color: palette(primaryText(match.kind)),
 			}}
 		>
-			<StatusLine
-				leagueName={props.leagueName}
-				match={props.match}
-				edition={props.edition}
-			/>
-			<Hr borderStyle="dotted" borderColour={border(props.match.kind)} />
-			<Teams match={props.match} />
-			<Hr borderStyle="solid" borderColour={border(props.match.kind)} />
-			<Tabs {...props.tabs} />
-		</div>
-	</section>
-);
+			<div
+				css={{
+					'&': css(grid.paddedContainer),
+					[from.tablet]: {
+						borderColor: palette(
+							'--football-match-header-fixture-result-border',
+						),
+						borderStyle: 'solid',
+						borderLeftWidth: 1,
+						borderRightWidth: 1,
+					},
+				}}
+			>
+				<StatusLine
+					leagueName={props.leagueName}
+					match={match}
+					edition={props.edition}
+				/>
+				<Hr borderStyle="dotted" borderColour={border(match.kind)} />
+				<Teams match={match} />
+				<Hr borderStyle="solid" borderColour={border(match.kind)} />
+				<Tabs {...tabs} />
+			</div>
+		</section>
+	);
+};
+
+const swrOptions = (refreshInterval: number): SWRConfiguration<HeaderData> => ({
+	errorRetryCount: 1,
+	refreshInterval: (latestData: HeaderData | undefined) => {
+		return latestData?.match.kind === 'Live' ||
+			latestData?.match.kind === 'Fixture'
+			? refreshInterval
+			: 0;
+	},
+});
+
+const fetcher =
+	(
+		selected: Props['tabs']['selected'],
+		getHeaderData: Props['getHeaderData'],
+	) =>
+	(url: string): Promise<HeaderData> =>
+		getHeaderData(url)
+			.then(parseHeaderData(selected))
+			.then((result) => {
+				if (!result.ok) {
+					log('dotcom', result.error);
+					throw new Error();
+				} else {
+					return result.value;
+				}
+			})
+			.catch(() => {
+				log('dotcom', 'Failed to fetch match header json');
+				throw new Error();
+			});
 
 const StatusLine = (props: {
 	leagueName: string;
