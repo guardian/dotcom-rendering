@@ -126,10 +126,15 @@ interface WinningMessage<T> {
 	candidate: Candidate<T>;
 }
 
+export type PickMessageResult = {
+	Message: () => MaybeFC;
+	hasMessage?: boolean;
+};
+
 export const pickMessage = (
 	{ candidates, name }: SlotConfig,
 	renderingTarget: RenderingTarget,
-): Promise<() => MaybeFC> =>
+): Promise<PickMessageResult> =>
 	new Promise((resolve) => {
 		const candidateConfigsWithTimeout = candidates.map((c) =>
 			timeoutify(c, name, renderingTarget),
@@ -165,10 +170,13 @@ export const pickMessage = (
 				clearAllTimeouts(candidateConfigsWithTimeout);
 
 				if (winner === null) {
-					resolve(defaultShow);
+					resolve({ Message: defaultShow, hasMessage: false });
 				} else {
 					const { candidate, meta } = winner;
-					resolve(() => candidate.show(meta));
+					resolve({
+						Message: () => candidate.show(meta),
+						hasMessage: true,
+					});
 				}
 			})
 			.catch((e) =>

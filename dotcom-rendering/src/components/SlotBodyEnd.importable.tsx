@@ -16,7 +16,7 @@ import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';
 import type {
 	CandidateConfig,
-	MaybeFC,
+	PickMessageResult,
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
@@ -183,7 +183,9 @@ export const SlotBodyEnd = ({
 			name: 'slotBodyEnd',
 		};
 		pickMessage(epicConfig, renderingTarget)
-			.then((PickedEpic: () => MaybeFC) => setSelectedEpic(PickedEpic))
+			.then((pickedEpic: PickMessageResult) =>
+				setSelectedEpic(pickedEpic.Message),
+			)
 			.catch((e) =>
 				console.error(`SlotBodyEnd pickMessage - error: ${String(e)}`),
 			);

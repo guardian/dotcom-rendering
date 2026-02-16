@@ -12,6 +12,7 @@ import { getArticleCounts } from '../lib/articleCount';
 import type {
 	CandidateConfig,
 	MaybeFC,
+	PickMessageResult,
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
@@ -275,6 +276,7 @@ export const StickyBottomBanner = ({
 	);
 
 	const [SelectedBanner, setSelectedBanner] = useState<MaybeFC | null>(null);
+	const [hasMessage, setHasMessage] = useState<boolean>(false);
 	const [hasPickMessageCompleted, setHasPickMessageCompleted] =
 		useState<boolean>(false);
 	const [asyncArticleCounts, setAsyncArticleCounts] =
@@ -367,9 +369,10 @@ export const StickyBottomBanner = ({
 		};
 
 		pickMessage(bannerConfig, renderingTarget)
-			.then((PickedBanner: () => MaybeFC) => {
-				setSelectedBanner(PickedBanner);
+			.then((pickedMessage: PickMessageResult) => {
+				setSelectedBanner(pickedMessage.Message);
 				setHasPickMessageCompleted(true);
+				setHasMessage(!!pickedMessage.hasMessage);
 			})
 			.catch((e) => {
 				// Report error to Sentry
@@ -410,10 +413,10 @@ export const StickyBottomBanner = ({
 	// Ensures ads only insert when no banner will be shown.
 	// hasPickMessageCompleted distinguishes between initial state (not picked yet) and final state (picked nothing).
 	useEffect(() => {
-		if (hasPickMessageCompleted && SelectedBanner == null) {
+		if (hasPickMessageCompleted && !hasMessage) {
 			document.dispatchEvent(new CustomEvent('banner:none'));
 		}
-	}, [SelectedBanner, hasPickMessageCompleted]);
+	}, [SelectedBanner, hasPickMessageCompleted, hasMessage]);
 	if (SelectedBanner) {
 		return <SelectedBanner />;
 	}
