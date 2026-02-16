@@ -22,6 +22,7 @@ type Props = {
 	ophanComponentName?: string;
 	isLabs?: boolean;
 	isAdvertisingPartner?: boolean;
+	isHosted?: boolean;
 	dataTestId?: string;
 };
 
@@ -100,6 +101,16 @@ const imageAdvertisingPartnerStyles = css`
 	}
 `;
 
+const hostedLogoImageStyles = css`
+	width: 80px;
+	height: auto;
+
+	${from.desktop} {
+		width: 132px;
+		height: auto;
+	}
+`;
+
 /**
  * Component used to display branding labels with sponsor logos for
  * various types of branded content (paid-content, sponsored, foundation, etc.)
@@ -116,6 +127,7 @@ export const BrandingLabel = ({
 	ophanComponentName,
 	isLabs = false,
 	isAdvertisingPartner = false,
+	isHosted = false,
 	dataTestId = 'branding-logo',
 }: Props) => {
 	const { darkModeAvailable } = useConfig();
@@ -183,6 +195,23 @@ export const BrandingLabel = ({
 			</div>
 		);
 	}
+
+	if (isHosted) {
+		return (
+			<a href={logo.link}>
+				<picture>
+					<img
+						css={hostedLogoImageStyles}
+						src={logo.src}
+						alt={branding.sponsorName}
+						width={logo.dimensions.width}
+						height={logo.dimensions.height}
+					/>
+				</picture>
+			</a>
+		);
+	}
+
 	return (
 		<a
 			href={logo.link}
