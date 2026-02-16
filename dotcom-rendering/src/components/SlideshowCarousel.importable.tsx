@@ -212,7 +212,13 @@ export const SlideshowCarousel = ({
 	const slideshowImageCount = slideshowImages.length;
 
 	return (
-		<div css={containerStyles}>
+		<div
+			css={containerStyles}
+			role="region"
+			aria-roledescription="carousel"
+			aria-label="Slideshow"
+			aria-live="polite"
+		>
 			<a
 				href={linkTo}
 				aria-label={linkAriaLabel}
@@ -226,7 +232,14 @@ export const SlideshowCarousel = ({
 					{slideshowImages.map((image, index) => {
 						const loading = index > 0 ? 'lazy' : 'eager';
 						return (
-							<li css={carouselItemStyles} key={image.imageSrc}>
+							<li
+								css={carouselItemStyles}
+								key={image.imageSrc}
+								role="group"
+								aria-roledescription="slide"
+								aria-label={image.imageCaption}
+								aria-hidden={index !== currentPage}
+							>
 								<figure>
 									<CardPicture
 										mainImage={image.imageSrc}
@@ -255,6 +268,8 @@ export const SlideshowCarousel = ({
 				<div
 					className="slideshow-carousel-footer"
 					css={navigationStyles(hasNavigationBackgroundColour)}
+					role="group"
+					aria-label="Slide controls"
 				>
 					<div css={scrollingDotStyles}>
 						<SlideshowCarouselScrollingDots
