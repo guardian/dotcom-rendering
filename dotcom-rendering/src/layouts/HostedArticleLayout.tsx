@@ -208,7 +208,21 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 					</div>
 				</article>
 				<div css={[grid.container]}>
-					<div css={[grid.column.centre]}>
+					<div
+						css={[
+							grid.column.all,
+							css`
+								overflow: hidden;
+								max-height: 400px;
+								${from.leftCol} {
+									${grid.between(
+										'left-column-start',
+										'right-column-end',
+									)}
+								}
+							`,
+						]}
+					>
 						<CallToActionAtom
 							linkUrl="https://safety.epicgames.com/en-US?lang=en-US"
 							backgroundImage="https://media.guim.co.uk/7fe58f11470360bc9f1e4b6bbcbf45d7cf06cfcf/0_0_1300_375/1300.jpg"
