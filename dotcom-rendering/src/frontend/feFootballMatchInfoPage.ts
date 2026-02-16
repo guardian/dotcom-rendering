@@ -11,12 +11,12 @@ import type { FEFootballDataPage } from './feFootballDataPage';
 import { type FEFootballMatch } from './feFootballMatchListPage';
 import { type FEGroupSummary } from './feFootballTablesPage';
 
-const feFootballPlayerrEventSchema = object({
+const feFootballPlayerEventSchema = object({
 	eventTime: string(),
 	eventType: string(),
 });
 
-export type FEFootballPlayerEvent = Output<typeof feFootballPlayerrEventSchema>;
+export type FEFootballPlayerEvent = Output<typeof feFootballPlayerEventSchema>;
 
 const feFootballPlayerSchema = object({
 	id: string(),
@@ -26,7 +26,7 @@ const feFootballPlayerSchema = object({
 	substitute: boolean(),
 	timeOnPitch: string(),
 	shirtNumber: string(),
-	events: array(feFootballPlayerrEventSchema),
+	events: array(feFootballPlayerEventSchema),
 });
 
 export type FEFootballPlayer = Output<typeof feFootballPlayerSchema>;
