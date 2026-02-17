@@ -6,36 +6,42 @@ import { type FootballTableSummary } from '../footballTables';
 import { grid } from '../grid';
 import { type EditionId } from '../lib/edition';
 import { palette } from '../palette';
-import { FootballMatchHeader } from './FootballMatchHeader/FootballMatchHeader';
+import { FootballMatchHeader } from './FootballMatchHeader.importable';
 import { FootballMatchInfo } from './FootballMatchInfo';
+import { Island } from './Island';
 
 export const FootballMatchInfoPage = ({
 	matchStats,
 	matchInfo,
 	competitionName,
 	edition,
+	matchHeaderUrl,
 	table,
 }: {
 	matchStats: FootballMatchStats;
 	matchInfo: FootballMatch;
 	competitionName: string;
 	edition: EditionId;
+	matchHeaderUrl: URL;
 	table?: FootballTableSummary;
 }) => {
 	return (
 		<main id="maincontent">
-			<FootballMatchHeader
-				leagueName={competitionName}
-				match={matchInfo}
-				tabs={{
-					selected: 'info',
-					matchKind: matchInfo.kind,
-					// We don't have these urls in the data yet. This will be fixed in upcoming PRs.
-					reportURL: undefined,
-					liveURL: undefined,
-				}}
-				edition={edition}
-			/>
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<FootballMatchHeader
+					leagueName={competitionName}
+					match={matchInfo}
+					tabs={{
+						selected: 'info',
+						matchKind: matchInfo.kind,
+						// We don't have these urls in the data yet. This will be fixed in upcoming PRs.
+						reportURL: undefined,
+						liveURL: undefined,
+					}}
+					edition={edition}
+					matchHeaderURL={matchHeaderUrl}
+				/>
+			</Island>
 			<div css={bodyGridStyles}>
 				<div
 					css={css`
