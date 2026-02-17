@@ -178,22 +178,6 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						</div>
 						<div
 							css={[
-								grid.column.right,
-								css`
-									grid-row: 1;
-								`,
-							]}
-						>
-							<Caption
-								captionText={mainMediaCaptionText}
-								format={format}
-								isMainMedia={true}
-							/>
-
-							{'Onward content'}
-						</div>
-						<div
-							css={[
 								grid.column.centre,
 								css`
 									grid-row: 1;
@@ -247,6 +231,27 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 								`}
 								color={themePalette('--straight-lines')}
 							/>
+						</div>
+						<div
+							css={[
+								grid.column.centre,
+								css`
+									grid-row: auto;
+
+									${from.leftCol} {
+										${grid.column.right}
+										grid-row: 1;
+									}
+								`,
+							]}
+						>
+							<Caption
+								captionText={mainMediaCaptionText}
+								format={format}
+								isMainMedia={true}
+							/>
+
+							{'Onward content'}
 						</div>
 					</div>
 
