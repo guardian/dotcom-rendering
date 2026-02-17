@@ -90,36 +90,37 @@ const handleMeasureDetectedEvent = (
 		'whitelisted' in e &&
 		'subscribed' in e;
 
-	if (isMeasureDetectedEvent(event)) {
-		if (event.adblocking) {
-			log(
-				'commercial',
-				'🛡️ Admiral - user has an adblocker and it is enabled',
-			);
-			recordAdmiralOphanEvent(ab, { action: 'DETECT', value: 'blocked' });
-		}
-		if (event.whitelisted) {
-			log(
-				'commercial',
-				'🛡️ Admiral - user has seen Engage and subsequently disabled their adblocker',
-			);
-			recordAdmiralOphanEvent(ab, {
-				action: 'DETECT',
-				value: 'whitelisted',
-			});
-		}
-		if (event.subscribed) {
-			log(
-				'commercial',
-				'🛡️ Admiral - user has an active subscription to a transact plan',
-			);
-		}
-	} else {
+	if (!isMeasureDetectedEvent(event)) {
 		log(
 			'commercial',
 			`🛡️ Admiral - Event is not of expected format of measure.detected ${JSON.stringify(
 				event,
 			)}`,
+		);
+		return;
+	}
+
+	if (event.adblocking) {
+		log(
+			'commercial',
+			'🛡️ Admiral - user has an adblocker and it is enabled',
+		);
+		recordAdmiralOphanEvent(ab, { action: 'DETECT', value: 'blocked' });
+	}
+	if (event.whitelisted) {
+		log(
+			'commercial',
+			'🛡️ Admiral - user has seen Engage and subsequently disabled their adblocker',
+		);
+		recordAdmiralOphanEvent(ab, {
+			action: 'DETECT',
+			value: 'whitelisted',
+		});
+	}
+	if (event.subscribed) {
+		log(
+			'commercial',
+			'🛡️ Admiral - user has an active subscription to a transact plan',
 		);
 	}
 };
