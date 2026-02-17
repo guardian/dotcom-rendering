@@ -45,11 +45,12 @@ export type FEFootballMatchStats = {
 export type FEFootballMatchInfoPage = FEFootballDataPage & {
 	// This field name will need to get changed to matchStats in the future PRs.
 	// Since this change needs to happen in both frontend and DCAR, and it also
-	// needs to be backward compatible for a temprary duration, we will handle
+	// needs to be backward compatible for a temporary duration, we will handle
 	// that in a separate PR.
 	footballMatch: FEFootballMatchStats;
 	matchInfo: FEFootballMatch;
 	group?: FEGroupSummary;
 	competitionName: string;
 	matchUrl: string;
+	matchHeaderUrl: string;
 };
