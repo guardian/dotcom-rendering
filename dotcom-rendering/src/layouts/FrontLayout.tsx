@@ -6,6 +6,7 @@ import {
 } from '@guardian/source/foundations';
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
+import { ContainerOverrides } from '../components/ContainerOverrides';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
 import { DirectoryPageNav } from '../components/DirectoryPageNav';
@@ -22,6 +23,7 @@ import { FrontSection } from '../components/FrontSection';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
+import { FeastThrasher } from '../components/marketing/thrashers/FeastThrasher';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { Snap } from '../components/Snap';
@@ -281,6 +283,32 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					if (collection.collectionType === 'scrollable/highlights') {
 						// Highlights are rendered in the Masthead component
 						return null;
+					}
+
+					if (
+						trail.embedUri?.endsWith(
+							'atom/interactive/interactives/thrashers/2024/12/feast-ny-thrasher/default',
+						)
+					) {
+						return (
+							<ContainerOverrides
+								key={ophanName}
+								containerPalette={collection.containerPalette}
+							>
+								<Section
+									fullWidth={true}
+									padBottom={false}
+									showSideBorders={false}
+									padSides={false}
+									showTopBorder={false}
+									ophanComponentLink={ophanComponentLink}
+									ophanComponentName={ophanName}
+									hasPageSkin={hasPageSkin}
+								>
+									<FeastThrasher />
+								</Section>
+							</ContainerOverrides>
+						);
 					}
 
 					if (collection.collectionType === 'fixed/thrasher') {
