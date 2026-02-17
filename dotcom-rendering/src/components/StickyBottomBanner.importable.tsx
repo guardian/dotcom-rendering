@@ -12,6 +12,7 @@ import { getArticleCounts } from '../lib/articleCount';
 import type {
 	CandidateConfig,
 	MaybeFC,
+	PickMessageResult,
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
@@ -367,7 +368,7 @@ export const StickyBottomBanner = ({
 		};
 
 		pickMessage(bannerConfig, renderingTarget)
-			.then((PickedBanner: () => MaybeFC) => {
+			.then((PickedBanner: PickMessageResult) => {
 				setSelectedBanner(PickedBanner);
 				setHasPickMessageCompleted(true);
 			})
