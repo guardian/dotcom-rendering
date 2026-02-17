@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { from, space } from '@guardian/source/foundations';
-import { FootballMatchHeader } from '../components/FootballMatchHeader.importable';
 import { type FootballMatchStats } from '../footballMatchStats';
 import { type FootballMatch } from '../footballMatchV2';
 import { type FootballTableSummary } from '../footballTables';
@@ -8,6 +7,7 @@ import { grid } from '../grid';
 import { type EditionId } from '../lib/edition';
 import { palette } from '../palette';
 import { FootballMatchInfo } from './FootballMatchInfo';
+import { GetFootballMatchHeader } from './GetFootballMatchHeader.importable';
 import { Island } from './Island';
 
 export const FootballMatchInfoPage = ({
@@ -28,7 +28,7 @@ export const FootballMatchInfoPage = ({
 	return (
 		<main id="maincontent">
 			<Island priority="feature" defer={{ until: 'visible' }}>
-				<FootballMatchHeader
+				<GetFootballMatchHeader
 					leagueName={competitionName}
 					match={matchInfo}
 					tabs={{
