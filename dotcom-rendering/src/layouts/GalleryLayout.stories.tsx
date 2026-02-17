@@ -1,3 +1,4 @@
+import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { allModes } from '../../.storybook/modes';
 import { Gallery as GalleryFixture } from '../../fixtures/generated/fe-articles/Gallery';
@@ -68,7 +69,13 @@ export const Apps = {
 			},
 		],
 		config: {
-			renderingTarget: 'Apps',
+			config: {
+				renderingTarget: 'Apps',
+				darkModeAvailable: true,
+			},
+			chromatic: {
+				viewports: [breakpoints.mobileMedium, breakpoints.tablet],
+			},
 		},
 	},
 } satisfies Story;
