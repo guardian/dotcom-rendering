@@ -56,9 +56,12 @@ describe('pickMessage', () => {
 			],
 		};
 
-		const got = await pickMessage(config, 'Web');
+		const result = await pickMessage(config, 'Web');
 
-		expect(got()).toEqual(ChosenMockComponent);
+		expect(result.type).toEqual('MessageSelected');
+		if (result.type === 'MessageSelected') {
+			expect(result.SelectedMessage).toEqual(ChosenMockComponent);
+		}
 	});
 
 	it('resolves with null if no messages can show', async () => {
@@ -86,9 +89,9 @@ describe('pickMessage', () => {
 			],
 		};
 
-		const got = await pickMessage(config, 'Web');
+		const result = await pickMessage(config, 'Web');
 
-		expect(got()).toEqual(null);
+		expect(result.type).toEqual('NoMessageSelected');
 	});
 
 	it('falls through to a lower priority message when a higher one times out', async () => {
@@ -129,9 +132,12 @@ describe('pickMessage', () => {
 
 		const messagePromise = pickMessage(config, 'Web');
 		jest.advanceTimersByTime(260);
-		const got = await messagePromise;
+		const result = await messagePromise;
 
-		expect(got()).toEqual(ChosenMockComponent);
+		expect(result.type).toEqual('MessageSelected');
+		if (result.type === 'MessageSelected') {
+			expect(result.SelectedMessage).toEqual(ChosenMockComponent);
+		}
 	});
 
 	it('resolves with null if all messages time out', async () => {
@@ -182,9 +188,9 @@ describe('pickMessage', () => {
 
 		const messagePromise = pickMessage(config, 'Web');
 		jest.advanceTimersByTime(260);
-		const got = await messagePromise;
+		const result = await messagePromise;
 
-		expect(got()).toEqual(null);
+		expect(result.type).toEqual('NoMessageSelected');
 
 		clearTimeout(timer1);
 		clearTimeout(timer2);
@@ -211,8 +217,7 @@ describe('pickMessage', () => {
 			],
 		};
 
-		const show = await pickMessage(config, 'Web');
-		show();
+		await pickMessage(config, 'Web');
 
 		expect(renderComponent).toHaveBeenCalledWith(meta);
 	});
@@ -246,9 +251,9 @@ describe('pickMessage', () => {
 
 		const messagePromise = pickMessage(config, 'Web');
 		jest.advanceTimersByTime(250);
-		const got = await messagePromise;
+		const result = await messagePromise;
 
-		expect(got()).toEqual(null);
+		expect(result.type).toEqual('NoMessageSelected');
 
 		expect(ophanRecordSpy).toHaveBeenCalledWith({
 			component: 'banner-picker-timeout-dcr',
