@@ -210,8 +210,11 @@ const isComHandlingAdmiral = (): boolean => {
 	const admiralAsRecord = w.admiral as unknown as Record<string, unknown>;
 	const admiralIsOnlyStub = admiralExists && Array.isArray(admiralAsRecord.q);
 	const admiralIsInitialized = admiralExists && !admiralIsOnlyStub;
+	// Check for explicit DCR flag if set
+	const commercialOwnsAdmiral =
+		window.guardian.config.switches.dcrOwnsAdmiral === false;
 
-	if (admiralIsInitialized) {
+	if (admiralIsInitialized || commercialOwnsAdmiral) {
 		log(
 			'dotcom',
 			'🛡️ Admiral - Commercial is handling Admiral, skipping commercial initialization',
