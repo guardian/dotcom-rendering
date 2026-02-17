@@ -61,7 +61,7 @@ const buildReaderRevenueEpicConfig = (
 		candidate: {
 			id: 'reader-revenue-banner',
 			canShow: () => canShowReaderRevenueEpic(canShowData),
-			show: (data: ModuleData<EpicProps>) => () => {
+			show: (data: ModuleData<EpicProps>) => {
 				return <ReaderRevenueEpic {...data} />;
 			},
 		},
@@ -89,7 +89,7 @@ const buildBrazeEpicConfig = (
 					tags,
 					shouldHideReaderRevenue,
 				),
-			show: (meta: any) => () => (
+			show: (meta: any) => (
 				<MaybeBrazeEpic
 					meta={meta}
 					countryCode={countryCode}
@@ -203,7 +203,7 @@ export const SlotBodyEnd = ({
 		pickMessage(epicConfig, renderingTarget)
 			.then((result) => {
 				if (result.type === 'MessageSelected') {
-					setSelectedEpic(() => result.SelectedMessage);
+					setSelectedEpic(result.SelectedMessage);
 				} else {
 					setSelectedEpic(() => null);
 				}
