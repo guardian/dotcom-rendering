@@ -11,7 +11,7 @@ type Props = {
 	matchHeaderURL: URL;
 };
 
-export const GetFootballMatchHeader = (props: Props) => (
+export const FootballMatchHeaderWrapper = (props: Props) => (
 	<FootballMatchHeaderComponent
 		leagueName={props.leagueName}
 		match={props.match}
