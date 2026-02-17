@@ -45,12 +45,12 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 		format,
 	} = props;
 
-	const branding =
-		frontendData.commercialProperties[frontendData.editionId].branding;
+	const { branding } =
+		frontendData.commercialProperties[frontendData.editionId];
 
 	return (
 		<>
-			{props.renderingTarget === 'Web' ? (
+			{props.renderingTarget === 'Web' && branding ? (
 				<Stuck>
 					<Section
 						fullWidth={true}
@@ -62,8 +62,8 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 						element="aside"
 					>
 						<HostedContentHeader
-							accentColor={branding.hostedCampaignColour}
 							branding={branding}
+							accentColor={branding.hostedCampaignColour}
 						/>
 					</Section>
 				</Stuck>

@@ -15,8 +15,8 @@ import type { Branding } from '../types/branding';
 import { BrandingLabel } from './BrandingLabel';
 
 export type Props = {
-	accentColor: string;
 	branding: Branding;
+	accentColor?: string;
 };
 
 const HOSTED_CONTENT_HEIGHT_MOBILE = 48;
@@ -256,14 +256,14 @@ const HostedContentLogo = () => (
 	</div>
 );
 
-export const HostedContentHeader = ({ accentColor, branding }: Props) => {
+export const HostedContentHeader = ({ branding, accentColor }: Props) => {
 	return (
 		<HeaderWrapper>
 			<Left>
 				<HeaderSection isFirst={true}>
 					<TitleAndBadge
-						accentColor={accentColor}
 						branding={branding}
+						accentColor={accentColor}
 					/>
 				</HeaderSection>
 				<HeaderSection>
