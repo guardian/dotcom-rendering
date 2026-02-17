@@ -1,4 +1,4 @@
-import { isUndefined, startPerformanceMeasure } from '@guardian/libs';
+import { isUndefined, log, startPerformanceMeasure } from '@guardian/libs';
 import { getOphan } from '../client/ophan/ophan';
 import type { RenderingTarget } from '../types/renderingTarget';
 
@@ -130,7 +130,7 @@ interface NoMessageSelected {
 interface MessageSelected {
 	type: 'MessageSelected';
 	// The react component is optional because sometimes we selected a message for this slot, but there is nothing to render
-	SelectedMessage: MaybeFC;
+	SelectedMessage: () => MaybeFC;
 }
 export type PickMessageResult = NoMessageSelected | MessageSelected;
 
@@ -139,6 +139,11 @@ export const pickMessage = (
 	renderingTarget: RenderingTarget,
 ): Promise<PickMessageResult> =>
 	new Promise((resolve) => {
+		// Temporary variable to filter messages from the StickyBottomBanner only
+		const allowConsoleLog = candidates.some(
+			(c) => c.candidate.id === 'cmpUi',
+		);
+
 		const candidateConfigsWithTimeout = candidates.map((c) =>
 			timeoutify(c, name, renderingTarget),
 		);
@@ -148,6 +153,14 @@ export const pickMessage = (
 				canShow: candidateConfig.candidate.canShow(),
 			}),
 		);
+
+		if (allowConsoleLog) {
+			log(
+				'commercial',
+				'☑️ [pick] possible messages:',
+				results.map((_) => _.candidateConfig.candidate.id),
+			);
+		}
 
 		const winnerResult = results.reduce<
 			Promise<WinningMessage<any> | null>
@@ -170,6 +183,9 @@ export const pickMessage = (
 
 		winnerResult
 			.then((winner) => {
+				if (allowConsoleLog) {
+					log('commercial', '☑️ [pick] picked message:', winner);
+				}
 				clearAllTimeouts(candidateConfigsWithTimeout);
 
 				if (winner === null) {
@@ -178,7 +194,7 @@ export const pickMessage = (
 					const { candidate, meta } = winner;
 					resolve({
 						type: 'MessageSelected',
-						SelectedMessage: candidate.show(meta),
+						SelectedMessage: () => candidate.show(meta),
 					});
 				}
 			})
