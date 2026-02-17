@@ -369,7 +369,6 @@ export const StickyBottomBanner = ({
 		pickMessage(bannerConfig, renderingTarget)
 			.then((result) => {
 				setPickMessageResult(result);
-				// setHasPickMessageCompleted(true);
 			})
 			.catch((e) => {
 				// Report error to Sentry
@@ -380,7 +379,6 @@ export const StickyBottomBanner = ({
 					new Error(msg),
 					'sticky-bottom-banner',
 				);
-				// setHasPickMessageCompleted(true);
 			});
 	}, [
 		isSignedIn,
@@ -408,17 +406,15 @@ export const StickyBottomBanner = ({
 
 	// Dispatches 'banner:none' event for mobile sticky ad integration (see @guardian/commercial-dev).
 	// Ensures ads only insert when no banner will be shown.
-	// hasPickMessageCompleted distinguishes between initial state (not picked yet) and final state (picked nothing).
 	useEffect(() => {
 		if (pickMessageResult?.type === 'NoMessageSelected') {
 			document.dispatchEvent(new CustomEvent('banner:none'));
 		}
 	}, [pickMessageResult]);
+
 	if (pickMessageResult?.type === 'MessageSelected') {
 		const { SelectedMessage } = pickMessageResult;
-		if (SelectedMessage) {
-			return <SelectedMessage />;
-		}
+		return SelectedMessage();
 	}
 
 	return null;
