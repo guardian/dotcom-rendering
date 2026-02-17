@@ -170,9 +170,9 @@ const buildRRBannerConfigWith = ({
 						ophanPageViewId,
 						pageId,
 					}),
-				show:
-					({ name, props }: ModuleData<BannerProps>) =>
-					() => <BannerComponent name={name} props={props} />,
+				show: ({ name, props }: ModuleData<BannerProps>) => (
+					<BannerComponent name={name} props={props} />
+				),
 			},
 			timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 		};
@@ -188,7 +188,7 @@ const buildSignInGateConfig = (
 		canShow: async () => {
 			return await canShowSignInGatePortal(canShowProps);
 		},
-		show: (meta: AuxiaGateDisplayData) => () => (
+		show: (meta: AuxiaGateDisplayData) => (
 			<SignInGatePortal
 				host={host}
 				isPaidContent={canShowProps.isPaidContent}
@@ -226,7 +226,7 @@ const buildBrazeBanner = (
 				tags,
 				shouldHideReaderRevenue,
 			),
-		show: (meta: BrazeMeta) => () => (
+		show: (meta: BrazeMeta) => (
 			<BrazeBanner meta={meta} idApiUrl={idApiUrl} />
 		),
 	},
@@ -414,7 +414,7 @@ export const StickyBottomBanner = ({
 
 	if (pickMessageResult?.type === 'MessageSelected') {
 		const { SelectedMessage } = pickMessageResult;
-		return SelectedMessage();
+		return <SelectedMessage />;
 	}
 
 	return null;

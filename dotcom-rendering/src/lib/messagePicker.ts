@@ -2,7 +2,7 @@ import { isUndefined, log, startPerformanceMeasure } from '@guardian/libs';
 import { getOphan } from '../client/ophan/ophan';
 import type { RenderingTarget } from '../types/renderingTarget';
 
-export type MaybeFC = React.FC | null;
+export type MaybeFC = React.ReactNode | null;
 type ShowMessage<T> = (meta: T) => MaybeFC;
 
 interface ShouldShow<T> {

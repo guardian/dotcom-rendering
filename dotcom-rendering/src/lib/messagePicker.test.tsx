@@ -31,7 +31,7 @@ describe('pickMessage', () => {
 					candidate: {
 						id: 'banner-1',
 						canShow: () => Promise.resolve({ show: false }),
-						show: () => MockComponent,
+						show: MockComponent,
 					},
 					timeoutMillis: null,
 				},
@@ -40,7 +40,7 @@ describe('pickMessage', () => {
 						id: 'banner-2',
 						canShow: () =>
 							Promise.resolve({ show: true, meta: undefined }),
-						show: () => ChosenMockComponent,
+						show: ChosenMockComponent,
 					},
 					timeoutMillis: null,
 				},
@@ -49,7 +49,7 @@ describe('pickMessage', () => {
 						id: 'banner-3',
 						canShow: () =>
 							Promise.resolve({ show: true, meta: undefined }),
-						show: () => MockComponent,
+						show: MockComponent,
 					},
 					timeoutMillis: null,
 				},
@@ -74,7 +74,7 @@ describe('pickMessage', () => {
 					candidate: {
 						id: 'banner-1',
 						canShow: () => Promise.resolve({ show: false }),
-						show: () => MockComponent,
+						show: MockComponent,
 					},
 					timeoutMillis: null,
 				},
@@ -82,7 +82,7 @@ describe('pickMessage', () => {
 					candidate: {
 						id: 'banner-2',
 						canShow: () => Promise.resolve({ show: false }),
-						show: () => MockComponent,
+						show: MockComponent,
 					},
 					timeoutMillis: null,
 				},
@@ -114,7 +114,7 @@ describe('pickMessage', () => {
 									500,
 								),
 							),
-						show: () => MockComponent,
+						show: MockComponent,
 					},
 					timeoutMillis: 250,
 				},
@@ -123,7 +123,7 @@ describe('pickMessage', () => {
 						id: 'banner-2',
 						canShow: () =>
 							Promise.resolve({ show: true, meta: undefined }),
-						show: () => ChosenMockComponent,
+						show: ChosenMockComponent,
 					},
 					timeoutMillis: null,
 				},
@@ -161,7 +161,7 @@ describe('pickMessage', () => {
 									500,
 								);
 							}),
-						show: () => MockComponent,
+						show: MockComponent,
 					},
 					timeoutMillis: 250,
 				},
@@ -179,7 +179,7 @@ describe('pickMessage', () => {
 									500,
 								);
 							}),
-						show: () => MockComponent,
+						show: MockComponent,
 					},
 					timeoutMillis: 250,
 				},
@@ -197,7 +197,7 @@ describe('pickMessage', () => {
 	});
 
 	it('passes metadata returned by canShow to show', async () => {
-		const renderComponent = jest.fn(() => () => <div />);
+		const renderComponent = jest.fn(() => <div />);
 		const meta = { extra: 'info' };
 		const config: SlotConfig = {
 			name: 'banner',
@@ -242,7 +242,7 @@ describe('pickMessage', () => {
 									300,
 								);
 							}),
-						show: () => MockComponent,
+						show: MockComponent,
 					},
 					timeoutMillis: 200,
 				},
@@ -283,7 +283,7 @@ describe('pickMessage', () => {
 									120,
 								);
 							}),
-						show: () => MockComponent,
+						show: MockComponent,
 					},
 					timeoutMillis: null,
 					reportTiming: true,
@@ -302,7 +302,7 @@ describe('pickMessage', () => {
 									100,
 								);
 							}),
-						show: () => MockComponent,
+						show: MockComponent,
 					},
 					timeoutMillis: null,
 				},
