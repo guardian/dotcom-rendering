@@ -11,7 +11,7 @@ import type { ArticleCounts } from '../lib/articleCount';
 import { getArticleCounts } from '../lib/articleCount';
 import type {
 	CandidateConfig,
-	MaybeFC,
+	PickMessageResult,
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
@@ -274,9 +274,9 @@ export const StickyBottomBanner = ({
 		'control',
 	);
 
-	const [SelectedBanner, setSelectedBanner] = useState<MaybeFC | null>(null);
-	const [hasPickMessageCompleted, setHasPickMessageCompleted] =
-		useState<boolean>(false);
+	const [pickMessageResult, setPickMessageResult] =
+		useState<PickMessageResult | null>(null);
+
 	const [asyncArticleCounts, setAsyncArticleCounts] =
 		useState<Promise<ArticleCounts | undefined>>();
 
@@ -367,9 +367,9 @@ export const StickyBottomBanner = ({
 		};
 
 		pickMessage(bannerConfig, renderingTarget)
-			.then((PickedBanner: () => MaybeFC) => {
-				setSelectedBanner(PickedBanner);
-				setHasPickMessageCompleted(true);
+			.then((result) => {
+				setPickMessageResult(result);
+				// setHasPickMessageCompleted(true);
 			})
 			.catch((e) => {
 				// Report error to Sentry
@@ -380,7 +380,7 @@ export const StickyBottomBanner = ({
 					new Error(msg),
 					'sticky-bottom-banner',
 				);
-				setHasPickMessageCompleted(true);
+				// setHasPickMessageCompleted(true);
 			});
 	}, [
 		isSignedIn,
@@ -410,12 +410,15 @@ export const StickyBottomBanner = ({
 	// Ensures ads only insert when no banner will be shown.
 	// hasPickMessageCompleted distinguishes between initial state (not picked yet) and final state (picked nothing).
 	useEffect(() => {
-		if (hasPickMessageCompleted && SelectedBanner == null) {
+		if (pickMessageResult?.type === 'NoMessageSelected') {
 			document.dispatchEvent(new CustomEvent('banner:none'));
 		}
-	}, [SelectedBanner, hasPickMessageCompleted]);
-	if (SelectedBanner) {
-		return <SelectedBanner />;
+	}, [pickMessageResult]);
+	if (pickMessageResult?.type === 'MessageSelected') {
+		const { SelectedMessage } = pickMessageResult;
+		if (SelectedMessage) {
+			return <SelectedMessage />;
+		}
 	}
 
 	return null;
