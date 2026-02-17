@@ -14,11 +14,7 @@ import type {
 import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';
-import type {
-	CandidateConfig,
-	MaybeFC,
-	SlotConfig,
-} from '../lib/messagePicker';
+import type { CandidateConfig, SlotConfig } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
@@ -183,7 +179,13 @@ export const SlotBodyEnd = ({
 			name: 'slotBodyEnd',
 		};
 		pickMessage(epicConfig, renderingTarget)
-			.then((PickedEpic: () => MaybeFC) => setSelectedEpic(PickedEpic))
+			.then((result) => {
+				if (result.type === 'MessageSelected') {
+					setSelectedEpic(() => result.SelectedMessage);
+				} else {
+					setSelectedEpic(() => null);
+				}
+			})
 			.catch((e) =>
 				console.error(`SlotBodyEnd pickMessage - error: ${String(e)}`),
 			);
