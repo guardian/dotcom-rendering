@@ -213,12 +213,12 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 										contributionsServiceUrl
 									}
 									contentType={frontendData.contentType}
-									keywordIds={frontendData.config.keywordIds}
-									idUrl={frontendData.config.idUrl}
+									idUrl={frontendData.config.idUrl ?? ''}
 									isSensitive={
 										frontendData.config.isSensitive
 									}
-									isDev={frontendData.config.isDev}
+									isDev={!!frontendData.config.isDev}
+									keywordIds={frontendData.config.keywordIds}
 									abTests={frontendData.config.abTests}
 									shouldHideAds={frontendData.shouldHideAds}
 								/>
