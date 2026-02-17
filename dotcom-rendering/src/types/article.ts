@@ -105,6 +105,7 @@ export const enhanceArticleType = (
 		shouldHideAds: data.shouldHideAds,
 		pageId: data.pageId,
 		serverSideABTests: data.config.serverSideABTests,
+		switches: data.config.switches,
 		byline: data.byline,
 	});
 
