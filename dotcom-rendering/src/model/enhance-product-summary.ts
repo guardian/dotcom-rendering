@@ -46,6 +46,9 @@ export const allowedPageIds: string[] = [
 	'thefilter/2026/feb/04/best-soup-maker-uk',
 	'thefilter-us/2025/oct/01/best-best-bath-towels-us',
 	'thefilter/2025/apr/03/best-walking-pads-under-desk-treadmills-uk',
+	'thefilter-us/2026/feb/15/best-winter-boots-women',
+	'thefilter-us/2026/feb/13/best-winter-jackets-men',
+	'thefilter/2026/feb/13/best-vacuum-cleaners-uk-tested',
 ];
 
 const isEligibleForSummary = (pageId: string) => {
