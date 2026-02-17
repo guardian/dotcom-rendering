@@ -198,6 +198,28 @@ const setUpAdmiralEventLogger = (
 	});
 };
 
+// Check if Commercial has already initialized Admiral (bootstrap loaded, not just stub)
+const isComHandlingAdmiral = (): boolean => {
+	// If window.admiral exists and has been initialized by bootstrap (not just the queue stub)
+	// the bootstrap replaces the stub with a proper function that doesn't have .q property
+	type AdmiralStub = Admiral & { q?: any[] };
+	const w = window as Window & { admiral?: AdmiralStub };
+
+	const admiralExists = typeof w.admiral === 'function';
+	const admiralAsRecord = w.admiral as unknown as Record<string, unknown>;
+	const admiralIsOnlyStub = admiralExists && Array.isArray(admiralAsRecord.q);
+	const admiralIsInitialized = admiralExists && !admiralIsOnlyStub;
+
+	if (admiralIsInitialized) {
+		log(
+			'dotcom',
+			'🛡️ Admiral - Commercial is handling Admiral, skipping commercial initialization',
+		);
+		return true;
+	}
+	return false;
+};
+
 export const AdmiralScript = () => {
 	const ab = useAB();
 	const abTestVariant = getAdmiralAbTestVariant(ab);
@@ -218,6 +240,7 @@ export const AdmiralScript = () => {
 		const page = window.guardian.config.page;
 
 		const shouldRun =
+			!isComHandlingAdmiral() &&
 			cmp.hasInitialised() &&
 			!cmp.willShowPrivacyMessageSync() &&
 			isInUsa() &&
@@ -246,7 +269,7 @@ export const AdmiralScript = () => {
 		recordAdmiralOphanEvent(ab, { action: 'INSERT' });
 
 		// Initialize Admiral Adblock Recovery
-		log('commercial', '🛡️ Initialising Admiral Adblock Recovery');
+		log('dotcom', '🛡️ Initialising Admiral Adblock Recovery');
 
 		// Set up window.admiral stub
 		// This initializes admiral before the bootstrap script loads
@@ -263,7 +286,7 @@ export const AdmiralScript = () => {
 			w.admiral = stub;
 		}
 
-		log('commercial', '🛡️ Setting up Admiral event logger');
+		log('dotcom', '🛡️ Setting up Admiral event logger');
 
 		// Set up Admiral event logging
 		setUpAdmiralEventLogger(w.admiral, ab);
@@ -272,9 +295,6 @@ export const AdmiralScript = () => {
 		if (abTestVariant) {
 			w.admiral('targeting', 'set', 'guAbTest', abTestVariant);
 		}
-
-		// Mark that DCR owns Admiral initialization
-		window.guardian.config.switches.dcrOwnsAdmiral = true;
 
 		// Load Admiral bootstrap script
 		const BASE_AJAX_URL =
@@ -287,12 +307,7 @@ export const AdmiralScript = () => {
 		admiralScript.async = true;
 		document.head.appendChild(admiralScript);
 
-		log(
-			'commercial',
-			`🛡️ Loading Admiral bootstrap script: ${admiralScript.src}`,
-		);
-
-		log('commercial', '🛡️ Admiral initialization complete');
+		log('dotcom', '🛡️ Admiral initialization complete');
 
 		return () => {
 			// Clean up Admiral bootstrap script
