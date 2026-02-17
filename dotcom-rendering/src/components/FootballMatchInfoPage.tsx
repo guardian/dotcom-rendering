@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import { from, space } from '@guardian/source/foundations';
+import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.importable';
 import { type FootballMatchStats } from '../footballMatchStats';
 import { type FootballMatch } from '../footballMatchV2';
 import { type FootballTableSummary } from '../footballTables';
 import { grid } from '../grid';
 import { type EditionId } from '../lib/edition';
 import { palette } from '../palette';
-import { FootballMatchHeader } from './FootballMatchHeader.importable';
 import { FootballMatchInfo } from './FootballMatchInfo';
 import { Island } from './Island';
 
@@ -28,7 +28,7 @@ export const FootballMatchInfoPage = ({
 	return (
 		<main id="maincontent">
 			<Island priority="feature" defer={{ until: 'visible' }}>
-				<FootballMatchHeader
+				<FootballMatchHeaderWrapper
 					leagueName={competitionName}
 					match={matchInfo}
 					tabs={{
