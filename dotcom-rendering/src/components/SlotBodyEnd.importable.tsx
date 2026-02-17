@@ -18,11 +18,7 @@ import {
 	BrazeBannersSystemPlacementId,
 	buildBrazeBannersSystemConfig,
 } from '../lib/braze/BrazeBannersSystem';
-import type {
-	CandidateConfig,
-	MaybeFC,
-	SlotConfig,
-} from '../lib/messagePicker';
+import type { CandidateConfig, SlotConfig } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
 import { useBetaAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
@@ -205,7 +201,13 @@ export const SlotBodyEnd = ({
 			name: 'slotBodyEnd',
 		};
 		pickMessage(epicConfig, renderingTarget)
-			.then((PickedEpic: () => MaybeFC) => setSelectedEpic(PickedEpic))
+			.then((result) => {
+				if (result.type === 'MessageSelected') {
+					setSelectedEpic(() => result.SelectedMessage);
+				} else {
+					setSelectedEpic(() => null);
+				}
+			})
 			.catch((e) =>
 				console.error(`SlotBodyEnd pickMessage - error: ${String(e)}`),
 			);
