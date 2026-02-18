@@ -291,7 +291,7 @@ export const SlideshowCarousel = ({
 							}
 							size="small"
 							disabled={!previousButtonEnabled}
-							aria-label="View next image in slideshow"
+							aria-label="Previous image"
 							// TODO: data-link-name="slideshow carousel left chevron"
 						/>
 
@@ -308,7 +308,7 @@ export const SlideshowCarousel = ({
 							}
 							size="small"
 							disabled={!nextButtonEnabled}
-							aria-label="View previous image in slideshow"
+							aria-label="Next image"
 							// TODO: data-link-name="slideshow carousel right chevron"
 						/>
 					</div>

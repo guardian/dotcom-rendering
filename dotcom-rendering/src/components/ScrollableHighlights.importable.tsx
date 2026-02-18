@@ -268,16 +268,23 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 		getOphanInfo(frontId);
 
 	return (
-		<div css={containerStyles} data-link-name={ophanFrontName}>
-			<ol
-				data-link-name={ophanComponentLink}
-				data-component={ophanComponentName}
-				data-container-name={'scrollable/highlights'}
+		<div
+			css={containerStyles}
+			data-link-name={ophanFrontName}
+			role="region"
+			aria-roledescription="carousel"
+			aria-label="Highlights"
+			aria-live="polite"
+		>
+			<ul
 				ref={carouselRef}
 				css={[
 					carouselStyles,
 					generateCarouselColumnStyles(carouselLength),
 				]}
+				data-link-name={ophanComponentLink}
+				data-component={ophanComponentName}
+				data-container-name="scrollable/highlights"
 				data-heatphan-type="carousel"
 			>
 				{trails.map((trail) => {
@@ -285,6 +292,8 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 						<li
 							key={trail.url}
 							css={[itemStyles, verticalLineStyles]}
+							role="group"
+							aria-roledescription="slide"
 						>
 							<HighlightsCard
 								format={trail.format}
@@ -304,7 +313,7 @@ export const ScrollableHighlights = ({ trails, frontId }: Props) => {
 						</li>
 					);
 				})}
-			</ol>
+			</ul>
 
 			<Hide until="tablet">
 				{showPreviousButton && (
