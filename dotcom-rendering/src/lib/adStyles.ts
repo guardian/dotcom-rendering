@@ -160,17 +160,13 @@ const spacefinderAdSlotContainerStyles = css`
 	/*
 		To push inline2+ on desktop to the right column
 	*/
-	.ad-slot-container--right-column {
+	.ad-slot-container--right-column,
+	.ad-slot-container--offset-right {
 		${from.desktop} {
 			float: right;
 			max-width: 300px;
-			background-color: transparent;
-		}
-	}
-
-	.ad-slot-container--offset-right {
-		${from.desktop} {
 			margin-right: -330px;
+			background-color: transparent;
 		}
 
 		${from.leftCol} {
