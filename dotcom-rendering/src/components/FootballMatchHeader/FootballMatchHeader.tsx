@@ -29,12 +29,18 @@ import { background, border, primaryText, secondaryText } from './colours';
 import { type HeaderData, parse as parseHeaderData } from './headerData';
 import { Tabs } from './Tabs';
 
-type Props = {
+export type FootballMatchHeaderData = HeaderData & {
 	leagueName: string;
-	match: FootballMatch;
-	tabs: ComponentProps<typeof Tabs>;
+};
+
+export type FootballMatchHeaderProps = {
+	selectedTab: ComponentProps<typeof Tabs>['selected'];
+	matchData?: FootballMatchHeaderData;
 	edition: EditionId;
 	matchHeaderURL: URL;
+};
+
+type Props = FootballMatchHeaderProps & {
 	getHeaderData: (url: string) => Promise<unknown>;
 	refreshInterval: number;
 };
@@ -42,12 +48,18 @@ type Props = {
 export const FootballMatchHeader = (props: Props) => {
 	const { data } = useSWR<HeaderData, string>(
 		props.matchHeaderURL,
-		fetcher(props.tabs.selected, props.getHeaderData),
+		fetcher(props.selectedTab, props.getHeaderData),
 		swrOptions(props.refreshInterval),
 	);
 
-	const match = data?.match ?? props.match;
-	const tabs = data?.tabs ?? props.tabs;
+	const leagueName = props.matchData?.leagueName ?? ''; // TODO: Get from fetched match header data
+	const match = data?.match ?? props.matchData?.match;
+	const tabs = data?.tabs ?? props.matchData?.tabs;
+
+	if (match === undefined || tabs === undefined) {
+		// TODO: Render a placeholder for the nav to reserve space whilst fetching data
+		return null;
+	}
 
 	return (
 		<section
@@ -70,7 +82,7 @@ export const FootballMatchHeader = (props: Props) => {
 				}}
 			>
 				<StatusLine
-					leagueName={props.leagueName}
+					leagueName={leagueName}
 					match={match}
 					edition={props.edition}
 				/>
@@ -94,10 +106,7 @@ const swrOptions = (refreshInterval: number): SWRConfiguration<HeaderData> => ({
 });
 
 const fetcher =
-	(
-		selected: Props['tabs']['selected'],
-		getHeaderData: Props['getHeaderData'],
-	) =>
+	(selected: Props['selectedTab'], getHeaderData: Props['getHeaderData']) =>
 	(url: string): Promise<HeaderData> =>
 		getHeaderData(url)
 			.then(parseHeaderData(selected))

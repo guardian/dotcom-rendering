@@ -1,21 +1,23 @@
-import { type ComponentProps } from 'react';
-import { type FootballMatch } from '../footballMatchV2';
-import { type EditionId } from '../lib/edition';
-import { FootballMatchHeader as FootballMatchHeaderComponent } from './FootballMatchHeader/FootballMatchHeader';
+import type {
+	FootballMatchHeaderData,
+	FootballMatchHeaderProps,
+} from './FootballMatchHeader/FootballMatchHeader';
+import { FootballMatchHeader } from './FootballMatchHeader/FootballMatchHeader';
 
-type Props = {
-	leagueName: string;
-	match: FootballMatch;
-	tabs: ComponentProps<typeof FootballMatchHeaderComponent>['tabs'];
-	edition: EditionId;
-	matchHeaderURL: URL;
-};
+type Props =
+	| (FootballMatchHeaderProps & {
+			selectedTab: 'info';
+			matchData: FootballMatchHeaderData;
+	  })
+	| (FootballMatchHeaderProps & {
+			selectedTab: 'live' | 'report';
+			matchData?: never;
+	  });
 
 export const FootballMatchHeaderWrapper = (props: Props) => (
-	<FootballMatchHeaderComponent
-		leagueName={props.leagueName}
-		match={props.match}
-		tabs={props.tabs}
+	<FootballMatchHeader
+		selectedTab={props.selectedTab}
+		matchData={props.matchData}
 		edition={props.edition}
 		matchHeaderURL={props.matchHeaderURL}
 		getHeaderData={getHeaderData}
