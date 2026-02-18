@@ -25,7 +25,6 @@ type Props = {
 	isLiveUpdate?: boolean;
 	contributors?: BlockContributor[];
 	isPinnedPost: boolean;
-	serverTime?: number;
 	isOriginalPinnedPost?: boolean;
 };
 
@@ -137,7 +136,6 @@ export const LiveBlockContainer = ({
 	contributors,
 	isPinnedPost,
 	isOriginalPinnedPost = false,
-	serverTime,
 }: Props) => {
 	return (
 		<article
@@ -170,7 +168,6 @@ export const LiveBlockContainer = ({
 						blockId={blockId}
 						isPinnedPost={isPinnedPost}
 						isOriginalPinnedPost={isOriginalPinnedPost}
-						serverTime={serverTime}
 					/>
 				)}
 				{blockTitle ? <BlockTitle title={blockTitle} /> : null}

@@ -10,7 +10,6 @@ type Props = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	serverTime?: number;
 };
 
 const decideOffset = ({
@@ -44,7 +43,6 @@ export const FixedMediumFastXI = ({
 	trails,
 	containerPalette,
 	showAge,
-	serverTime,
 	imageLoading,
 }: Props) => {
 	const firstSlice = trails.slice(0, 3);
@@ -55,7 +53,6 @@ export const FixedMediumFastXI = ({
 				cards={firstSlice}
 				containerPalette={containerPalette}
 				showAge={showAge}
-				serverTime={serverTime}
 				imageLoading={imageLoading}
 			/>
 			{/*
@@ -85,7 +82,6 @@ export const FixedMediumFastXI = ({
 							trail={trail}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							serverTime={serverTime}
 						/>
 					</LI>
 				))}

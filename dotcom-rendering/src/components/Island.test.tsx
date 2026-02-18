@@ -12,6 +12,7 @@ import { BrazeMessaging } from './BrazeMessaging.importable';
 import { CardCommentCount } from './CardCommentCount.importable';
 import { CommentCount } from './CommentCount.importable';
 import { ConfigProvider } from './ConfigContext';
+import { DateTimeProvider } from './DateTimeContext';
 import { DiscussionLayout } from './DiscussionLayout';
 import { DiscussionMeta } from './DiscussionMeta.importable';
 import { EnhanceAffiliateLinks } from './EnhanceAffiliateLinks.importable';
@@ -102,7 +103,7 @@ describe('Island: server-side rendering', () => {
 				editionId: 'UK',
 			}}
 		>
-			{children}
+			<DateTimeProvider value={Date.now()}>{children}</DateTimeProvider>
 		</ConfigProvider>
 	);
 

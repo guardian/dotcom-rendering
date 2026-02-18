@@ -24,7 +24,6 @@ type Props = {
 	isSensitive: boolean;
 	isLiveUpdate?: boolean;
 	shouldHideAds: boolean;
-	serverTime?: number;
 	idApiUrl?: string;
 };
 /**
@@ -50,7 +49,6 @@ export const LiveBlogBlocksAndAdverts = ({
 	isLiveUpdate,
 	editionId,
 	shouldHideAds,
-	serverTime,
 	idApiUrl,
 }: Props) => {
 	const { renderingTarget } = useConfig();
@@ -75,7 +73,6 @@ export const LiveBlogBlocksAndAdverts = ({
 				pinnedPostId={pinnedPost?.id}
 				editionId={editionId}
 				shouldHideAds={shouldHideAds}
-				serverTime={serverTime}
 				idApiUrl={idApiUrl}
 			/>
 		);

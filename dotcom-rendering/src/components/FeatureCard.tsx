@@ -330,7 +330,6 @@ const renderPodcastImage = (
 export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
-	serverTime?: number;
 	headlineText: string;
 	headlineSizes?: ResponsiveFontSize;
 	byline?: string;
@@ -412,7 +411,6 @@ export const FeatureCard = ({
 	discussionApiUrl,
 	discussionId,
 	isExternalLink,
-	serverTime,
 	aspectRatio,
 	mobileAspectRatio,
 	starRating,
@@ -529,7 +527,6 @@ export const FeatureCard = ({
 										headlineSizes={headlineSizes}
 										webPublicationDate={webPublicationDate}
 										showClock={!!showClock}
-										serverTime={serverTime}
 										linkTo={linkTo}
 										discussionId={discussionId}
 										discussionApiUrl={discussionApiUrl}
@@ -779,7 +776,6 @@ export const FeatureCard = ({
 															webPublicationDate
 														}
 														showClock={!!showClock}
-														serverTime={serverTime}
 														isStorylines={
 															isStorylines
 														}

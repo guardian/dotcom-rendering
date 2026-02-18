@@ -1,5 +1,6 @@
 import { isString } from '@guardian/libs';
 import { ConfigProvider } from '../components/ConfigContext';
+import { DateTimeProvider } from '../components/DateTimeContext';
 import { SportDataPageComponent } from '../components/SportDataPageComponent';
 import type { FootballMatch } from '../footballMatch';
 import {
@@ -106,13 +107,16 @@ export const renderSportPage = (sportData: SportDataPage) => {
 		assetOrigin: ASSET_ORIGIN,
 		editionId: sportData.editionId,
 	};
+	const serverTime = Date.now();
 
 	const title = decideTitle(sportData);
 	const description = decideDescription(sportData.kind);
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
-			<SportDataPageComponent sportData={sportData} />
+			<DateTimeProvider value={serverTime}>
+				<SportDataPageComponent sportData={sportData} />
+			</DateTimeProvider>
 		</ConfigProvider>,
 	);
 

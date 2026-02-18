@@ -43,7 +43,6 @@ type Props = {
 	onwardsSource: OnwardsSource;
 	leftColSize: LeftColSize;
 	discussionApiUrl: string;
-	serverTime?: number;
 	renderingTarget: RenderingTarget;
 };
 
@@ -449,7 +448,6 @@ type CarouselCardProps = {
 	linkTo: string;
 	headlineText: string;
 	webPublicationDate: string;
-	serverTime?: number;
 	imageLoading: Loading;
 	kickerText?: string;
 	image?: DCRFrontImage;
@@ -483,7 +481,6 @@ const CarouselCard = ({
 	imageLoading,
 	discussionApiUrl,
 	isOnwardContent,
-	serverTime,
 	starRating,
 	index,
 }: CarouselCardProps) => {
@@ -527,7 +524,6 @@ const CarouselCard = ({
 				isOnwardContent={isOnwardContent}
 				mediaPositionOnDesktop={cardImagePosition}
 				mediaPositionOnMobile={cardImagePosition}
-				serverTime={serverTime}
 				starRating={starRating}
 				index={index}
 				showTopBarDesktop={!isOnwardContent}
@@ -751,7 +747,6 @@ export const Carousel = ({
 	leftColSize,
 	discussionApiUrl,
 	isOnwardContent = true,
-	serverTime,
 	renderingTarget,
 	...props
 }: ArticleProps | FrontProps) => {
@@ -973,7 +968,6 @@ export const Carousel = ({
 									linkTo={linkTo}
 									headlineText={headlineText}
 									webPublicationDate={webPublicationDate}
-									serverTime={serverTime}
 									image={image}
 									kickerText={kickerText}
 									dataLinkName={`carousel-small-card-position-${i}`}

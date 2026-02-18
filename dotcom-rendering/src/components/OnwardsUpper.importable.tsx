@@ -184,7 +184,6 @@ type Props = {
 	pillar: ArticleTheme;
 	shortUrlId: string;
 	discussionApiUrl: string;
-	serverTime?: number;
 	renderingTarget: RenderingTarget;
 	webURL: string;
 };
@@ -220,7 +219,6 @@ export const OnwardsUpper = ({
 	editionId,
 	shortUrlId,
 	discussionApiUrl,
-	serverTime,
 	renderingTarget,
 	webURL,
 }: Props) => {
@@ -334,7 +332,6 @@ export const OnwardsUpper = ({
 						onwardsSource={onwardsSource}
 						format={format}
 						discussionApiUrl={discussionApiUrl}
-						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						isAdFreeUser={isAdFreeUser}
 						containerPosition="first"
@@ -356,7 +353,6 @@ export const OnwardsUpper = ({
 						onwardsSource="curated-content"
 						format={format}
 						discussionApiUrl={discussionApiUrl}
-						serverTime={serverTime}
 						renderingTarget={renderingTarget}
 						isAdFreeUser={isAdFreeUser}
 						containerPosition={

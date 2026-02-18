@@ -235,7 +235,6 @@ interface BaseProps {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
-	serverTime?: number;
 }
 
 interface AppsProps extends BaseProps {
@@ -248,7 +247,7 @@ interface WebProps extends BaseProps {
 }
 
 export const LiveLayout = (props: WebProps | AppsProps) => {
-	const { article, format, renderingTarget, serverTime } = props;
+	const { article, format, renderingTarget } = props;
 	const {
 		config: { isPaidContent, host, hasLiveBlogTopAd, hasSurveyAd },
 	} = article;
@@ -546,7 +545,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									keyEvents={article.keyEvents}
 									filterKeyEvents={article.filterKeyEvents}
 									id={'key-events-carousel-desktop'}
-									serverTime={serverTime}
 									renderingTarget={renderingTarget}
 								/>
 							</Island>
@@ -816,7 +814,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											shouldHideAds={
 												article.shouldHideAds
 											}
-											serverTime={serverTime}
 											idApiUrl={article.config.idApiUrl}
 										/>
 										{pagination.totalPages > 1 && (
@@ -948,7 +945,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									discussionApiUrl={
 										article.config.discussionApiUrl
 									}
-									serverTime={serverTime}
 									renderingTarget={renderingTarget}
 								/>
 							</Island>
@@ -974,7 +970,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							editionId={article.editionId}
 							shortUrlId={article.config.shortUrlId}
 							discussionApiUrl={article.config.discussionApiUrl}
-							serverTime={serverTime}
 							renderingTarget={renderingTarget}
 							webURL={article.webURL}
 						/>

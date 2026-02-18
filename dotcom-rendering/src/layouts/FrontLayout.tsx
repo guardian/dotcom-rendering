@@ -113,8 +113,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		editionId,
 	} = front;
 
-	const serverTime = front.serverTime;
-
 	const renderAds = canRenderAds(front);
 
 	const hasPageSkin = renderAds && hasPageSkinConfig;
@@ -170,7 +168,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					]}
 					groupedTrails={highlightsCollection.grouped}
 					showAge={false}
-					serverTime={serverTime}
 					imageLoading="eager"
 					aspectRatio={
 						highlightsCollection.aspectRatio ??
@@ -510,7 +507,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										)
 									}
 									imageLoading={imageLoading}
-									serverTime={serverTime}
 									aspectRatio={
 										collection.aspectRatio ??
 										fallbackAspectRatio(

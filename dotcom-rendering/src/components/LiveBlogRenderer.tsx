@@ -38,7 +38,6 @@ type Props = {
 	keyEvents: Block[];
 	filterKeyEvents: boolean;
 	shouldHideAds: boolean;
-	serverTime?: number;
 	idApiUrl?: string;
 };
 
@@ -66,7 +65,6 @@ export const LiveBlogRenderer = ({
 	filterKeyEvents = false,
 	editionId,
 	shouldHideAds,
-	serverTime,
 	idApiUrl,
 }: Props) => {
 	const { renderingTarget } = useConfig();
@@ -79,7 +77,7 @@ export const LiveBlogRenderer = ({
 					<Island defer={{ until: 'idle' }} priority="feature">
 						<EnhancePinnedPost />
 					</Island>
-					<PinnedPost pinnedPost={pinnedPost} serverTime={serverTime}>
+					<PinnedPost pinnedPost={pinnedPost}>
 						<LiveBlock
 							format={format}
 							block={pinnedPost}
@@ -95,7 +93,6 @@ export const LiveBlogRenderer = ({
 							isPinnedPost={true}
 							editionId={editionId}
 							shouldHideAds={shouldHideAds}
-							serverTime={serverTime}
 							idApiUrl={idApiUrl}
 						/>
 					</PinnedPost>
@@ -109,7 +106,6 @@ export const LiveBlogRenderer = ({
 							filterKeyEvents={filterKeyEvents}
 							id={'key-events-carousel-mobile'}
 							renderingTarget={renderingTarget}
-							serverTime={serverTime}
 						/>
 					</Island>
 					<Island priority="feature" defer={{ until: 'visible' }}>
@@ -139,7 +135,6 @@ export const LiveBlogRenderer = ({
 				pinnedPost={pinnedPost}
 				editionId={editionId}
 				shouldHideAds={shouldHideAds}
-				serverTime={serverTime}
 				idApiUrl={idApiUrl}
 			/>
 			{isWeb && blocks.length > 4 && !isLiveUpdate && (
