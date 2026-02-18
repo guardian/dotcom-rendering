@@ -58,6 +58,7 @@ export type FootballMatchInfoPage = SportPageConfig & {
 	group?: FootballTableSummary;
 	competitionName: string;
 	matchUrl: string;
+	matchHeaderUrl: URL;
 	kind: 'FootballMatchSummary';
 };
 

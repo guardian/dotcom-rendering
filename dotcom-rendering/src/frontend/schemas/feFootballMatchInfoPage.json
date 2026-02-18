@@ -46,257 +46,23 @@
             "type": "object",
             "properties": {
                 "footballMatch": {
-                    "type": "object",
-                    "properties": {
-                        "id": {
-                            "type": "string"
-                        },
-                        "homeTeam": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                },
-                                "codename": {
-                                    "type": "string"
-                                },
-                                "players": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "id": {
-                                                "type": "string"
-                                            },
-                                            "name": {
-                                                "type": "string"
-                                            },
-                                            "position": {
-                                                "type": "string"
-                                            },
-                                            "lastName": {
-                                                "type": "string"
-                                            },
-                                            "substitute": {
-                                                "type": "boolean"
-                                            },
-                                            "timeOnPitch": {
-                                                "type": "string"
-                                            },
-                                            "shirtNumber": {
-                                                "type": "string"
-                                            },
-                                            "events": {
-                                                "type": "array",
-                                                "items": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "eventTime": {
-                                                            "type": "string"
-                                                        },
-                                                        "eventType": {
-                                                            "type": "string"
-                                                        }
-                                                    },
-                                                    "required": [
-                                                        "eventTime",
-                                                        "eventType"
-                                                    ]
-                                                }
-                                            }
-                                        },
-                                        "required": [
-                                            "events",
-                                            "id",
-                                            "lastName",
-                                            "name",
-                                            "position",
-                                            "shirtNumber",
-                                            "substitute",
-                                            "timeOnPitch"
-                                        ]
-                                    }
-                                },
-                                "score": {
-                                    "type": "number"
-                                },
-                                "scorers": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                },
-                                "possession": {
-                                    "type": "number"
-                                },
-                                "shotsOn": {
-                                    "type": "number"
-                                },
-                                "shotsOff": {
-                                    "type": "number"
-                                },
-                                "corners": {
-                                    "type": "number"
-                                },
-                                "fouls": {
-                                    "type": "number"
-                                },
-                                "colours": {
-                                    "type": "string"
-                                },
-                                "crest": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "codename",
-                                "colours",
-                                "corners",
-                                "crest",
-                                "fouls",
-                                "id",
-                                "name",
-                                "players",
-                                "possession",
-                                "scorers",
-                                "shotsOff",
-                                "shotsOn"
-                            ]
-                        },
-                        "awayTeam": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                },
-                                "codename": {
-                                    "type": "string"
-                                },
-                                "players": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "id": {
-                                                "type": "string"
-                                            },
-                                            "name": {
-                                                "type": "string"
-                                            },
-                                            "position": {
-                                                "type": "string"
-                                            },
-                                            "lastName": {
-                                                "type": "string"
-                                            },
-                                            "substitute": {
-                                                "type": "boolean"
-                                            },
-                                            "timeOnPitch": {
-                                                "type": "string"
-                                            },
-                                            "shirtNumber": {
-                                                "type": "string"
-                                            },
-                                            "events": {
-                                                "type": "array",
-                                                "items": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "eventTime": {
-                                                            "type": "string"
-                                                        },
-                                                        "eventType": {
-                                                            "type": "string"
-                                                        }
-                                                    },
-                                                    "required": [
-                                                        "eventTime",
-                                                        "eventType"
-                                                    ]
-                                                }
-                                            }
-                                        },
-                                        "required": [
-                                            "events",
-                                            "id",
-                                            "lastName",
-                                            "name",
-                                            "position",
-                                            "shirtNumber",
-                                            "substitute",
-                                            "timeOnPitch"
-                                        ]
-                                    }
-                                },
-                                "score": {
-                                    "type": "number"
-                                },
-                                "scorers": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                },
-                                "possession": {
-                                    "type": "number"
-                                },
-                                "shotsOn": {
-                                    "type": "number"
-                                },
-                                "shotsOff": {
-                                    "type": "number"
-                                },
-                                "corners": {
-                                    "type": "number"
-                                },
-                                "fouls": {
-                                    "type": "number"
-                                },
-                                "colours": {
-                                    "type": "string"
-                                },
-                                "crest": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "codename",
-                                "colours",
-                                "corners",
-                                "crest",
-                                "fouls",
-                                "id",
-                                "name",
-                                "players",
-                                "possession",
-                                "scorers",
-                                "shotsOff",
-                                "shotsOn"
-                            ]
-                        },
-                        "status": {
-                            "type": "string"
-                        },
-                        "comments": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "awayTeam",
-                        "homeTeam",
-                        "id",
-                        "status"
-                    ]
+                    "$ref": "#/definitions/{id:string;homeTeam:{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;};awayTeam:{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;};status:string;comments?:string;}"
                 },
                 "matchInfo": {
-                    "$ref": "#/definitions/FEFootballMatch"
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/{stage:{stageNumber:string;};id:string;date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};type:\"LiveMatch\";status:string;venue?:{name:string;id:string;};comments?:string;attendance?:string;referee?:{name:string;id:string;};}"
+                        },
+                        {
+                            "$ref": "#/definitions/{stage:{stageNumber:string;};id:string;date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};type:\"Fixture\";venue?:{name:string;id:string;};comments?:string;competition?:{name:string;id:string;};}"
+                        },
+                        {
+                            "$ref": "#/definitions/{stage:{stageNumber:string;};id:string;date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};type:\"MatchDay\";liveMatch:boolean;result:boolean;previewAvailable:boolean;reportAvailable:boolean;lineupsAvailable:boolean;matchStatus:string;venue?:{name:string;id:string;};comments?:string;attendance?:string;referee?:{name:string;id:string;};competition?:{name:string;id:string;};}"
+                        },
+                        {
+                            "$ref": "#/definitions/{stage:{stageNumber:string;};id:string;date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};type:\"Result\";reportAvailable:boolean;venue?:{name:string;id:string;};comments?:string;attendance?:string;referee?:{name:string;id:string;};}"
+                        }
+                    ]
                 },
                 "group": {
                     "type": "object",
@@ -482,11 +248,15 @@
                 },
                 "matchUrl": {
                     "type": "string"
+                },
+                "matchHeaderUrl": {
+                    "type": "string"
                 }
             },
             "required": [
                 "competitionName",
                 "footballMatch",
+                "matchHeaderUrl",
                 "matchInfo",
                 "matchUrl"
             ]
@@ -1058,680 +828,488 @@
                 "url"
             ]
         },
-        "FEFootballMatch": {
-            "anyOf": [
-                {
-                    "$ref": "#/definitions/FELive"
+        "{id:string;homeTeam:{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;};awayTeam:{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;};status:string;comments?:string;}": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
                 },
-                {
-                    "$ref": "#/definitions/FEFixture"
+                "homeTeam": {
+                    "$ref": "#/definitions/{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;}"
                 },
-                {
-                    "$ref": "#/definitions/FEMatchDay"
+                "awayTeam": {
+                    "$ref": "#/definitions/{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;}"
                 },
-                {
-                    "$ref": "#/definitions/FEResult"
+                "status": {
+                    "type": "string"
+                },
+                "comments": {
+                    "type": "string"
                 }
+            },
+            "required": [
+                "awayTeam",
+                "homeTeam",
+                "id",
+                "status"
             ]
         },
-        "FELive": {
-            "allOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "id": {
-                            "type": "string"
-                        },
-                        "date": {
-                            "type": "string"
-                        },
-                        "stage": {
-                            "type": "object",
-                            "properties": {
-                                "stageNumber": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "stageNumber"
-                            ]
-                        },
-                        "round": {
-                            "type": "object",
-                            "properties": {
-                                "roundNumber": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "roundNumber"
-                            ]
-                        },
-                        "leg": {
-                            "type": "string"
-                        },
-                        "homeTeam": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                },
-                                "score": {
-                                    "type": "number"
-                                },
-                                "htScore": {
-                                    "type": "number"
-                                },
-                                "aggregateScore": {
-                                    "type": "number"
-                                },
-                                "scorers": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "id",
-                                "name"
-                            ]
-                        },
-                        "awayTeam": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                },
-                                "score": {
-                                    "type": "number"
-                                },
-                                "htScore": {
-                                    "type": "number"
-                                },
-                                "aggregateScore": {
-                                    "type": "number"
-                                },
-                                "scorers": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "id",
-                                "name"
-                            ]
-                        },
-                        "venue": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "id",
-                                "name"
-                            ]
-                        },
-                        "comments": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "awayTeam",
-                        "date",
-                        "homeTeam",
-                        "id",
-                        "leg",
-                        "round",
-                        "stage"
-                    ]
+        "{name:string;id:string;scorers:string[];codename:string;players:{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];}[];possession:number;shotsOn:number;shotsOff:number;corners:number;fouls:number;colours:string;crest:string;score?:number;}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
                 },
-                {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "const": "LiveMatch"
-                        },
-                        "status": {
-                            "type": "string"
-                        },
-                        "attendance": {
-                            "type": "string"
-                        },
-                        "referee": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "id",
-                                "name"
-                            ]
-                        }
-                    },
-                    "required": [
-                        "status",
-                        "type"
-                    ]
+                "id": {
+                    "type": "string"
+                },
+                "scorers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "codename": {
+                    "type": "string"
+                },
+                "players": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];}"
+                    }
+                },
+                "possession": {
+                    "type": "number"
+                },
+                "shotsOn": {
+                    "type": "number"
+                },
+                "shotsOff": {
+                    "type": "number"
+                },
+                "corners": {
+                    "type": "number"
+                },
+                "fouls": {
+                    "type": "number"
+                },
+                "colours": {
+                    "type": "string"
+                },
+                "crest": {
+                    "type": "string"
+                },
+                "score": {
+                    "type": "number"
                 }
+            },
+            "required": [
+                "codename",
+                "colours",
+                "corners",
+                "crest",
+                "fouls",
+                "id",
+                "name",
+                "players",
+                "possession",
+                "scorers",
+                "shotsOff",
+                "shotsOn"
             ]
         },
-        "FEFixture": {
-            "allOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "id": {
-                            "type": "string"
-                        },
-                        "date": {
-                            "type": "string"
-                        },
-                        "stage": {
-                            "type": "object",
-                            "properties": {
-                                "stageNumber": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "stageNumber"
-                            ]
-                        },
-                        "round": {
-                            "type": "object",
-                            "properties": {
-                                "roundNumber": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "roundNumber"
-                            ]
-                        },
-                        "leg": {
-                            "type": "string"
-                        },
-                        "homeTeam": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                },
-                                "score": {
-                                    "type": "number"
-                                },
-                                "htScore": {
-                                    "type": "number"
-                                },
-                                "aggregateScore": {
-                                    "type": "number"
-                                },
-                                "scorers": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "id",
-                                "name"
-                            ]
-                        },
-                        "awayTeam": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                },
-                                "score": {
-                                    "type": "number"
-                                },
-                                "htScore": {
-                                    "type": "number"
-                                },
-                                "aggregateScore": {
-                                    "type": "number"
-                                },
-                                "scorers": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "id",
-                                "name"
-                            ]
-                        },
-                        "venue": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "id",
-                                "name"
-                            ]
-                        },
-                        "comments": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "awayTeam",
-                        "date",
-                        "homeTeam",
-                        "id",
-                        "leg",
-                        "round",
-                        "stage"
-                    ]
+        "{name:string;id:string;position:string;lastName:string;substitute:boolean;timeOnPitch:string;shirtNumber:string;events:{eventTime:string;eventType:string;}[];}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
                 },
-                {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "const": "Fixture"
-                        },
-                        "competition": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "id",
-                                "name"
-                            ]
-                        }
-                    },
-                    "required": [
-                        "type"
-                    ]
+                "id": {
+                    "type": "string"
+                },
+                "position": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "substitute": {
+                    "type": "boolean"
+                },
+                "timeOnPitch": {
+                    "type": "string"
+                },
+                "shirtNumber": {
+                    "type": "string"
+                },
+                "events": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/{eventTime:string;eventType:string;}"
+                    }
                 }
+            },
+            "required": [
+                "events",
+                "id",
+                "lastName",
+                "name",
+                "position",
+                "shirtNumber",
+                "substitute",
+                "timeOnPitch"
             ]
         },
-        "FEMatchDay": {
-            "allOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "id": {
-                            "type": "string"
-                        },
-                        "date": {
-                            "type": "string"
-                        },
-                        "stage": {
-                            "type": "object",
-                            "properties": {
-                                "stageNumber": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "stageNumber"
-                            ]
-                        },
-                        "round": {
-                            "type": "object",
-                            "properties": {
-                                "roundNumber": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "roundNumber"
-                            ]
-                        },
-                        "leg": {
-                            "type": "string"
-                        },
-                        "homeTeam": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                },
-                                "score": {
-                                    "type": "number"
-                                },
-                                "htScore": {
-                                    "type": "number"
-                                },
-                                "aggregateScore": {
-                                    "type": "number"
-                                },
-                                "scorers": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "id",
-                                "name"
-                            ]
-                        },
-                        "awayTeam": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                },
-                                "score": {
-                                    "type": "number"
-                                },
-                                "htScore": {
-                                    "type": "number"
-                                },
-                                "aggregateScore": {
-                                    "type": "number"
-                                },
-                                "scorers": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "id",
-                                "name"
-                            ]
-                        },
-                        "venue": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "id",
-                                "name"
-                            ]
-                        },
-                        "comments": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "awayTeam",
-                        "date",
-                        "homeTeam",
-                        "id",
-                        "leg",
-                        "round",
-                        "stage"
-                    ]
+        "{eventTime:string;eventType:string;}": {
+            "type": "object",
+            "properties": {
+                "eventTime": {
+                    "type": "string"
                 },
-                {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "const": "MatchDay"
-                        },
-                        "liveMatch": {
-                            "type": "boolean"
-                        },
-                        "result": {
-                            "type": "boolean"
-                        },
-                        "previewAvailable": {
-                            "type": "boolean"
-                        },
-                        "reportAvailable": {
-                            "type": "boolean"
-                        },
-                        "lineupsAvailable": {
-                            "type": "boolean"
-                        },
-                        "matchStatus": {
-                            "type": "string"
-                        },
-                        "attendance": {
-                            "type": "string"
-                        },
-                        "referee": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "id",
-                                "name"
-                            ]
-                        },
-                        "competition": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "id",
-                                "name"
-                            ]
-                        }
-                    },
-                    "required": [
-                        "lineupsAvailable",
-                        "liveMatch",
-                        "matchStatus",
-                        "previewAvailable",
-                        "reportAvailable",
-                        "result",
-                        "type"
-                    ]
+                "eventType": {
+                    "type": "string"
                 }
+            },
+            "required": [
+                "eventTime",
+                "eventType"
             ]
         },
-        "FEResult": {
-            "allOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "id": {
-                            "type": "string"
-                        },
-                        "date": {
-                            "type": "string"
-                        },
-                        "stage": {
-                            "type": "object",
-                            "properties": {
-                                "stageNumber": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "stageNumber"
-                            ]
-                        },
-                        "round": {
-                            "type": "object",
-                            "properties": {
-                                "roundNumber": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "roundNumber"
-                            ]
-                        },
-                        "leg": {
-                            "type": "string"
-                        },
-                        "homeTeam": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                },
-                                "score": {
-                                    "type": "number"
-                                },
-                                "htScore": {
-                                    "type": "number"
-                                },
-                                "aggregateScore": {
-                                    "type": "number"
-                                },
-                                "scorers": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "id",
-                                "name"
-                            ]
-                        },
-                        "awayTeam": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                },
-                                "score": {
-                                    "type": "number"
-                                },
-                                "htScore": {
-                                    "type": "number"
-                                },
-                                "aggregateScore": {
-                                    "type": "number"
-                                },
-                                "scorers": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "id",
-                                "name"
-                            ]
-                        },
-                        "venue": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "id",
-                                "name"
-                            ]
-                        },
-                        "comments": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "awayTeam",
-                        "date",
-                        "homeTeam",
-                        "id",
-                        "leg",
-                        "round",
-                        "stage"
-                    ]
+        "{stage:{stageNumber:string;};id:string;date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};type:\"LiveMatch\";status:string;venue?:{name:string;id:string;};comments?:string;attendance?:string;referee?:{name:string;id:string;};}": {
+            "type": "object",
+            "properties": {
+                "stage": {
+                    "$ref": "#/definitions/{stageNumber:string;}"
                 },
-                {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "const": "Result"
-                        },
-                        "reportAvailable": {
-                            "type": "boolean"
-                        },
-                        "attendance": {
-                            "type": "string"
-                        },
-                        "referee": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "id",
-                                "name"
-                            ]
-                        }
-                    },
-                    "required": [
-                        "reportAvailable",
-                        "type"
-                    ]
+                "id": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "round": {
+                    "$ref": "#/definitions/{roundNumber:string;name?:string;}"
+                },
+                "leg": {
+                    "type": "string"
+                },
+                "homeTeam": {
+                    "$ref": "#/definitions/{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;}"
+                },
+                "awayTeam": {
+                    "$ref": "#/definitions/{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;}"
+                },
+                "type": {
+                    "type": "string",
+                    "const": "LiveMatch"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "venue": {
+                    "$ref": "#/definitions/{name:string;id:string;}"
+                },
+                "comments": {
+                    "type": "string"
+                },
+                "attendance": {
+                    "type": "string"
+                },
+                "referee": {
+                    "$ref": "#/definitions/{name:string;id:string;}_1"
                 }
+            },
+            "required": [
+                "awayTeam",
+                "date",
+                "homeTeam",
+                "id",
+                "leg",
+                "round",
+                "stage",
+                "status",
+                "type"
+            ]
+        },
+        "{stageNumber:string;}": {
+            "type": "object",
+            "properties": {
+                "stageNumber": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "stageNumber"
+            ]
+        },
+        "{roundNumber:string;name?:string;}": {
+            "type": "object",
+            "properties": {
+                "roundNumber": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "roundNumber"
+            ]
+        },
+        "{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "score": {
+                    "type": "number"
+                },
+                "htScore": {
+                    "type": "number"
+                },
+                "aggregateScore": {
+                    "type": "number"
+                },
+                "scorers": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ]
+        },
+        "{name:string;id:string;}": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ]
+        },
+        "{name:string;id:string;}_1": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ]
+        },
+        "{stage:{stageNumber:string;};id:string;date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};type:\"Fixture\";venue?:{name:string;id:string;};comments?:string;competition?:{name:string;id:string;};}": {
+            "type": "object",
+            "properties": {
+                "stage": {
+                    "$ref": "#/definitions/{stageNumber:string;}"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "round": {
+                    "$ref": "#/definitions/{roundNumber:string;name?:string;}"
+                },
+                "leg": {
+                    "type": "string"
+                },
+                "homeTeam": {
+                    "$ref": "#/definitions/{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;}"
+                },
+                "awayTeam": {
+                    "$ref": "#/definitions/{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;}"
+                },
+                "type": {
+                    "type": "string",
+                    "const": "Fixture"
+                },
+                "venue": {
+                    "$ref": "#/definitions/{name:string;id:string;}"
+                },
+                "comments": {
+                    "type": "string"
+                },
+                "competition": {
+                    "$ref": "#/definitions/{name:string;id:string;}_2"
+                }
+            },
+            "required": [
+                "awayTeam",
+                "date",
+                "homeTeam",
+                "id",
+                "leg",
+                "round",
+                "stage",
+                "type"
+            ]
+        },
+        "{name:string;id:string;}_2": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ]
+        },
+        "{stage:{stageNumber:string;};id:string;date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};type:\"MatchDay\";liveMatch:boolean;result:boolean;previewAvailable:boolean;reportAvailable:boolean;lineupsAvailable:boolean;matchStatus:string;venue?:{name:string;id:string;};comments?:string;attendance?:string;referee?:{name:string;id:string;};competition?:{name:string;id:string;};}": {
+            "type": "object",
+            "properties": {
+                "stage": {
+                    "$ref": "#/definitions/{stageNumber:string;}"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "round": {
+                    "$ref": "#/definitions/{roundNumber:string;name?:string;}"
+                },
+                "leg": {
+                    "type": "string"
+                },
+                "homeTeam": {
+                    "$ref": "#/definitions/{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;}"
+                },
+                "awayTeam": {
+                    "$ref": "#/definitions/{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;}"
+                },
+                "type": {
+                    "type": "string",
+                    "const": "MatchDay"
+                },
+                "liveMatch": {
+                    "type": "boolean"
+                },
+                "result": {
+                    "type": "boolean"
+                },
+                "previewAvailable": {
+                    "type": "boolean"
+                },
+                "reportAvailable": {
+                    "type": "boolean"
+                },
+                "lineupsAvailable": {
+                    "type": "boolean"
+                },
+                "matchStatus": {
+                    "type": "string"
+                },
+                "venue": {
+                    "$ref": "#/definitions/{name:string;id:string;}"
+                },
+                "comments": {
+                    "type": "string"
+                },
+                "attendance": {
+                    "type": "string"
+                },
+                "referee": {
+                    "$ref": "#/definitions/{name:string;id:string;}_1"
+                },
+                "competition": {
+                    "$ref": "#/definitions/{name:string;id:string;}_2"
+                }
+            },
+            "required": [
+                "awayTeam",
+                "date",
+                "homeTeam",
+                "id",
+                "leg",
+                "lineupsAvailable",
+                "liveMatch",
+                "matchStatus",
+                "previewAvailable",
+                "reportAvailable",
+                "result",
+                "round",
+                "stage",
+                "type"
+            ]
+        },
+        "{stage:{stageNumber:string;};id:string;date:string;round:{roundNumber:string;name?:string;};leg:string;homeTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};awayTeam:{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;};type:\"Result\";reportAvailable:boolean;venue?:{name:string;id:string;};comments?:string;attendance?:string;referee?:{name:string;id:string;};}": {
+            "type": "object",
+            "properties": {
+                "stage": {
+                    "$ref": "#/definitions/{stageNumber:string;}"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "round": {
+                    "$ref": "#/definitions/{roundNumber:string;name?:string;}"
+                },
+                "leg": {
+                    "type": "string"
+                },
+                "homeTeam": {
+                    "$ref": "#/definitions/{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;}"
+                },
+                "awayTeam": {
+                    "$ref": "#/definitions/{name:string;id:string;score?:number;htScore?:number;aggregateScore?:number;scorers?:string;}"
+                },
+                "type": {
+                    "type": "string",
+                    "const": "Result"
+                },
+                "reportAvailable": {
+                    "type": "boolean"
+                },
+                "venue": {
+                    "$ref": "#/definitions/{name:string;id:string;}"
+                },
+                "comments": {
+                    "type": "string"
+                },
+                "attendance": {
+                    "type": "string"
+                },
+                "referee": {
+                    "$ref": "#/definitions/{name:string;id:string;}_1"
+                }
+            },
+            "required": [
+                "awayTeam",
+                "date",
+                "homeTeam",
+                "id",
+                "leg",
+                "reportAvailable",
+                "round",
+                "stage",
+                "type"
             ]
         }
     },

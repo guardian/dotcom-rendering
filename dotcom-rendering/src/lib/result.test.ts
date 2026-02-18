@@ -1,4 +1,5 @@
-import { error, ok, type Result } from './result';
+import { literal, safeParse } from 'valibot';
+import { error, fromValibot, ok, type Result } from './result';
 
 describe('ok', () => {
 	it('creates an instance of Ok', () => {
@@ -158,5 +159,28 @@ describe('getErrorOrThrow', () => {
 		expect(() => result.getErrorOrThrow('Expected an Err')).toThrow(
 			'Expected an Err',
 		);
+	});
+});
+
+describe('fromValibot', () => {
+	const schema = literal('string literal');
+
+	it('creates an Ok from a successful parse result', () => {
+		const valibotResult = safeParse(schema, 'string literal');
+
+		const result = fromValibot(valibotResult);
+		const value = result.getOrThrow('Expected an Ok');
+
+		expect(value).toBe('string literal');
+	});
+
+	it('creates an Err from an unsuccessful parse result', () => {
+		const valibotResult = safeParse(schema, 'invalid literal');
+
+		const result = fromValibot(valibotResult);
+		const err = result.getErrorOrThrow('Expected an Err');
+
+		expect(err[0].reason).toBe('type');
+		expect(err[0].context).toBe('literal');
 	});
 });

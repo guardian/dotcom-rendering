@@ -24,6 +24,7 @@ import {
 	handleFootballMatchPage,
 	handleFootballTablesPage,
 } from './handler.sportDataPage.web';
+import { handleAppsThrasher } from './handler.thrasher.apps';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { logger } from './lib/logging';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
@@ -66,6 +67,7 @@ export const prodServer = (): void => {
 	app.post('/AppsBlocks', handleAppsBlocks);
 	app.post('/EditionsCrossword', handleEditionsCrossword);
 	app.post('/AppsHostedContent', handleAppsHostedContent);
+	app.post('/AppsComponent/thrasher/:name', handleAppsThrasher);
 
 	app.get('/assets/rendered-items-assets', handleAppsAssets);
 

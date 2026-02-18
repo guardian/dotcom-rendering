@@ -81,6 +81,7 @@ const SportsPage = ({
 						matchInfo={sportData.matchInfo}
 						competitionName={sportData.competitionName}
 						edition={sportData.editionId}
+						matchHeaderUrl={sportData.matchHeaderUrl}
 						table={sportData.group}
 					/>
 				);
