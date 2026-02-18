@@ -16,21 +16,22 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const defaultFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Comment,
+	theme: Pillar.Opinion,
+};
+
 export const WithAge = {
 	args: {
-		format: {
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Comment,
-			theme: Pillar.Opinion,
-		},
+		format: defaultFormat,
 		age: <p>19h ago</p>,
 	},
 } satisfies Story;
 
 export const WithGallery = {
-	...WithAge,
 	args: {
-		...WithAge.args,
+		format: defaultFormat,
 		media: {
 			type: 'Gallery',
 			count: '14',
@@ -39,9 +40,8 @@ export const WithGallery = {
 } satisfies Story;
 
 export const WithAudio = {
-	...WithAge,
 	args: {
-		...WithAge.args,
+		format: defaultFormat,
 		media: {
 			type: 'Audio',
 			duration: '12:34',
@@ -50,9 +50,8 @@ export const WithAudio = {
 } satisfies Story;
 
 export const WithYoutubeVideo = {
-	...WithAge,
 	args: {
-		...WithAge.args,
+		format: { ...defaultFormat, design: ArticleDesign.Video },
 		media: {
 			type: 'YoutubeVideo',
 			duration: 972,
@@ -62,9 +61,8 @@ export const WithYoutubeVideo = {
 } satisfies Story;
 
 export const WithSelfHostedVideo = {
-	...WithAge,
 	args: {
-		...WithAge.args,
+		format: { ...defaultFormat, design: ArticleDesign.Video },
 		media: {
 			type: 'SelfHostedVideo',
 			duration: 254,
@@ -73,19 +71,16 @@ export const WithSelfHostedVideo = {
 } satisfies Story;
 
 export const WithNewsletter = {
-	...WithAge,
 	args: {
-		...WithAge.args,
+		format: defaultFormat,
 		isNewsletter: true,
 	},
 } satisfies Story;
 
 export const WithBranding = {
-	...WithAge,
 	args: {
-		...WithAge.args,
 		format: {
-			...WithAge.args.format,
+			...defaultFormat,
 			theme: ArticleSpecial.Labs,
 		},
 		cardBranding: <p>Card branding</p>,
