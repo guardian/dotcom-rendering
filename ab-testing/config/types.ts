@@ -4,7 +4,12 @@ type AudienceSpace = Map<string, FastlyTestParams>;
 
 type AllSpace = Map<string, FastlyTestParams[]>;
 
-type Team = "commercial" | "webex" | "thefilter" | "fronts-and-curation";
+type Team =
+	| "commercial"
+	| "webex"
+	| "thefilter"
+	| "fronts-and-curation"
+	| "growth";
 
 type TestName = `${Team}-${string}`;
 
