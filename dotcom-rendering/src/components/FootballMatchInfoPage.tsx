@@ -1,41 +1,47 @@
 import { css } from '@emotion/react';
 import { from, space } from '@guardian/source/foundations';
+import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.importable';
 import { type FootballMatchStats } from '../footballMatchStats';
 import { type FootballMatch } from '../footballMatchV2';
 import { type FootballTableSummary } from '../footballTables';
 import { grid } from '../grid';
 import { type EditionId } from '../lib/edition';
 import { palette } from '../palette';
-import { FootballMatchHeader } from './FootballMatchHeader/FootballMatchHeader';
 import { FootballMatchInfo } from './FootballMatchInfo';
+import { Island } from './Island';
 
 export const FootballMatchInfoPage = ({
 	matchStats,
 	matchInfo,
 	competitionName,
 	edition,
+	matchHeaderUrl,
 	table,
 }: {
 	matchStats: FootballMatchStats;
 	matchInfo: FootballMatch;
 	competitionName: string;
 	edition: EditionId;
+	matchHeaderUrl: URL;
 	table?: FootballTableSummary;
 }) => {
 	return (
 		<main id="maincontent">
-			<FootballMatchHeader
-				leagueName={competitionName}
-				match={matchInfo}
-				tabs={{
-					selected: 'info',
-					matchKind: matchInfo.kind,
-					// We don't have these urls in the data yet. This will be fixed in upcoming PRs.
-					reportURL: undefined,
-					liveURL: undefined,
-				}}
-				edition={edition}
-			/>
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<FootballMatchHeaderWrapper
+					leagueName={competitionName}
+					match={matchInfo}
+					tabs={{
+						selected: 'info',
+						matchKind: matchInfo.kind,
+						// We don't have these urls in the data yet. This will be fixed in upcoming PRs.
+						reportURL: undefined,
+						liveURL: undefined,
+					}}
+					edition={edition}
+					matchHeaderURL={matchHeaderUrl}
+				/>
+			</Island>
 			<div css={bodyGridStyles}>
 				<div
 					css={css`

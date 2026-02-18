@@ -8,6 +8,7 @@ import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { AdmiralScript } from './AdmiralScript.importable';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
 import { useConfig } from './ConfigContext';
@@ -105,6 +106,9 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					<SkipTo id="navigation" label="Skip to navigation" />
 					<Island priority="feature" defer={{ until: 'idle' }}>
 						<AlreadyVisited />
+					</Island>
+					<Island priority="feature" defer={{ until: 'idle' }}>
+						<AdmiralScript />
 					</Island>
 					<Island priority="critical">
 						<Metrics

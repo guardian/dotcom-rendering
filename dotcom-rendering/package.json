@@ -19,7 +19,7 @@
 		"build-storybook": "storybook build"
 	},
 	"dependencies": {
-		"@aws-sdk/client-cloudwatch": "3.981.0",
+		"@aws-sdk/client-cloudwatch": "3.991.0",
 		"@babel/helper-compilation-targets": "7.28.6",
 		"@braze/web-sdk": "5.8.1",
 		"@creditkarma/thrift-server-core": "1.0.4",
@@ -88,7 +88,7 @@
 		"@types/webpack-env": "1.18.8",
 		"@types/webpack-node-externals": "3.0.4",
 		"@types/youtube": "0.0.50",
-		"ajv": "8.17.1",
+		"ajv": "8.18.0",
 		"ajv-formats": "2.1.1",
 		"aws-cdk": "2.1030.0",
 		"aws-cdk-lib": "2.220.0",
