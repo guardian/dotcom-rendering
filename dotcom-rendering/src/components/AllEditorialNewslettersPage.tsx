@@ -5,6 +5,7 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
 import type { NavType } from '../model/extract-nav';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';
+import { AdmiralScript } from './AdmiralScript.importable';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { useConfig } from './ConfigContext';
 import { FocusStyles } from './FocusStyles.importable';
@@ -46,6 +47,9 @@ export const AllEditorialNewslettersPage = ({
 			<SkipTo id="navigation" label="Skip to navigation" />
 			<Island priority="feature" defer={{ until: 'idle' }}>
 				<AlreadyVisited />
+			</Island>
+			<Island priority="feature" defer={{ until: 'idle' }}>
+				<AdmiralScript />
 			</Island>
 			<Island priority="feature" defer={{ until: 'idle' }}>
 				<FocusStyles />
