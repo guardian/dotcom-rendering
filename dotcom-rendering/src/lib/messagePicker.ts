@@ -129,6 +129,7 @@ interface NoMessageSelected {
 }
 interface MessageSelected {
 	type: 'MessageSelected';
+	messageId: string;
 	// The react component is optional because sometimes we selected a message for this slot, but there is nothing to render
 	SelectedMessage: () => MaybeFC;
 }
@@ -194,6 +195,7 @@ export const pickMessage = (
 					const { candidate, meta } = winner;
 					resolve({
 						type: 'MessageSelected',
+						messageId: candidate.id,
 						SelectedMessage: () => candidate.show(meta),
 					});
 				}
