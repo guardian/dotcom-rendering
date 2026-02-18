@@ -141,7 +141,7 @@ export type Props = {
 	/** The index of the card in a carousel */
 	index?: number;
 	/**
-	 * Useful for videos. Has the form: collection-{collection ID}-{card grouping type}-{card index}
+	 * Useful for IDs. Has the form: collection-{collection ID}-{card grouping type}-{card index}
 	 * For example, the first splash card in the second collection would be: "collection-1-splash-0"
 	 */
 	uniqueId?: string;
@@ -152,7 +152,7 @@ export type Props = {
 	showTopBarDesktop?: boolean;
 	showTopBarMobile?: boolean;
 	trailTextSize?: TrailTextSize;
-	/** A kicker image is seperate to the main media and renders as part of the kicker */
+	/** A kicker image is separate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
 	subtitleSize?: SubtitleSize;
 	/** Determines if the headline should be positioned within the content or outside the content */
