@@ -301,10 +301,7 @@ export const AdmiralScript = () => {
 		}
 
 		// Load Admiral bootstrap script
-		const BASE_AJAX_URL =
-			window.guardian.config.stage === 'CODE'
-				? 'https://code.api.nextgen.guardianapps.co.uk'
-				: 'https://api.nextgen.guardianapps.co.uk';
+		const BASE_AJAX_URL = window.guardian.config.page.ajaxUrl;
 
 		const admiralScript = document.createElement('script');
 		admiralScript.src = `${BASE_AJAX_URL}/commercial/admiral-bootstrap.js`;
