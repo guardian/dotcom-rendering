@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import {
 	from,
 	headlineLight50,
-	palette as sourcePalette,
 	space,
 	textSans14,
 	textSans17,
@@ -36,7 +35,7 @@ type StorylinesSectionProps = {
 
 const selectedTitleStyles = css`
 	${textSansBold34}
-	color: ${sourcePalette.brand[400]};
+	color: ${palette('--storylines-titles')};
 	margin-bottom: ${space[2]}px;
 	${until.tablet} {
 		line-height: 1.2;
@@ -51,7 +50,7 @@ const selectedTitleStyles = css`
 const categoryTitleCss = css`
 	${textSans20};
 	font-weight: 700;
-	color: ${sourcePalette.brand[400]};
+	color: ${palette('--storylines-titles')};
 	margin: ${space[2]}px 0;
 	padding: ${space[1]}px 0;
 	${from.tablet} {
@@ -64,7 +63,7 @@ const categoryTitleCss = css`
 const contentCss = css`
 	margin-bottom: ${space[4]}px;
 	${from.leftCol} {
-		border-left: 1px solid ${sourcePalette.neutral[86]};
+		border-left: 1px solid ${palette('--storylines-border')};
 	}
 `;
 
@@ -86,11 +85,11 @@ const tabStyles = (isActive: boolean, isFirst: boolean) => css`
 	padding: ${space[0]}px ${space[0]}px ${space[0]}px ${space[2]}px;
 	cursor: pointer;
 	border: none;
-	${!isFirst && `border-left: 1px ${sourcePalette.neutral[86]} solid;`}
-	background-color: ${sourcePalette.neutral[93]};
+	${!isFirst && `border-left: 1px ${palette('--storylines-border')} solid;`}
+	background-color: ${palette('--storylines-background')};
 	color: ${isActive
-		? `${sourcePalette.neutral[60]}`
-		: `${sourcePalette.neutral[38]}`};
+		? `${palette('--storylines-active-tab')}`
+		: `${palette('--storylines-inactive-tab')}`};
 	flex: 1;
 	min-width: 0;
 	display: flex;
@@ -115,6 +114,13 @@ const articleDateRangeStyle = css`
 	${from.tablet} {
 		margin-left: ${space[2]}px;
 	}
+`;
+
+const footerStyle = css`
+	margin-top: ${space[1]}px;
+	padding-bottom: ${space[4]}px;
+	display: flex;
+	justify-content: end;
 `;
 
 function formatDateRangeText(
@@ -297,14 +303,7 @@ export const StorylinesSectionContent = ({
 				</div>
 
 				<Hide from="leftCol">
-					<div
-						css={css`
-							margin-top: ${space[1]}px;
-							padding-bottom: ${space[4]}px;
-							display: flex;
-							justify-content: end;
-						`}
-					>
+					<div css={footerStyle}>
 						<Footer
 							dislikeHandler={
 								dislikeHandler ??

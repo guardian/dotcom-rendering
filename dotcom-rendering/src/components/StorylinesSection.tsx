@@ -662,7 +662,7 @@ export const StorylinesSection = ({
 															'Web',
 														))
 												}
-												storylinesStyle={true}
+												isStorylines={true}
 											></Footer>
 											<div
 												css={css`
