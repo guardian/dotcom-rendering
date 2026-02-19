@@ -57,8 +57,20 @@ export const FootballMatchHeader = (props: Props) => {
 	const tabs = data?.tabs ?? props.matchData?.tabs;
 
 	if (match === undefined || tabs === undefined) {
-		// TODO: Render a placeholder for the nav to reserve space whilst fetching data
-		return null;
+		return (
+			<section
+				css={{
+					minHeight: 182,
+					[from.leftCol]: {
+						minHeight: 172,
+					},
+				}}
+				style={{
+					backgroundColor: palette(background('Fixture')),
+					color: palette(primaryText('Fixture')),
+				}}
+			></section>
+		);
 	}
 
 	return (
