@@ -115,17 +115,6 @@ const notificationLabelStyles = css`
 	${textSans12}
 `;
 
-const toggleSwitchContainerStyles = css`
-	transform: scale(1.2);
-	button[aria-checked='false'] {
-		background-color: ${sourcePalette.neutral[60]};
-		border-color: ${sourcePalette.neutral[60]};
-	}
-	button[aria-checked='true']::before {
-		display: none;
-	}
-`;
-
 const NotificationAlert = ({
 	isFollowing,
 	onClickHandler,
@@ -143,7 +132,7 @@ const NotificationAlert = ({
 						publishes an article
 					</span>
 				</div>
-				<div css={toggleSwitchContainerStyles}>
+				<div>
 					<ToggleSwitch
 						checked={isFollowing}
 						onClick={onClickHandler}
