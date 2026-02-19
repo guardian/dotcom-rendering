@@ -210,7 +210,6 @@ const testName = 'growth-admiral-adblock-recovery';
 export const AdmiralScript = () => {
 	const { renderingTarget } = useConfig();
 	const abTests = useBetaAB();
-	const isInVariant = abTests?.isUserInTest(testName) ?? false;
 	const isInControlGroup =
 		abTests?.isUserInTestGroup(testName, 'control') ?? false;
 	const variantName = isInControlGroup ? 'control' : undefined;
@@ -235,7 +234,7 @@ export const AdmiralScript = () => {
 			cmp.hasInitialised() &&
 			!cmp.willShowPrivacyMessageSync() &&
 			isInUsa() &&
-			isInVariant &&
+			isInControlGroup &&
 			!getCookie({
 				name: 'gu_hide_support_messaging',
 				shouldMemoize: true,
@@ -307,7 +306,7 @@ export const AdmiralScript = () => {
 			// Clean up Admiral bootstrap script
 			admiralScript.parentNode?.removeChild(admiralScript);
 		};
-	}, [isInVariant, variantName, renderingTarget]);
+	}, [isInControlGroup, variantName, renderingTarget]);
 
 	return null;
 };
