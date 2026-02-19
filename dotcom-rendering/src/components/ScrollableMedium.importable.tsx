@@ -1,4 +1,6 @@
+import { until } from '@guardian/source/foundations';
 import { isMediaCard } from '../lib/cardHelpers';
+import { removeMediaRulePrefix, useMatchMedia } from '../lib/useMatchMedia';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
@@ -33,12 +35,17 @@ export const ScrollableMedium = ({
 	aspectRatio,
 	sectionId,
 }: Props) => {
+	const isBelowTabletBreakpoint = useMatchMedia(
+		removeMediaRulePrefix(until.tablet),
+	);
+
 	return (
 		<ScrollableCarousel
 			carouselLength={trails.length}
 			visibleCarouselSlidesOnMobile={2}
 			visibleCarouselSlidesOnTablet={4}
 			sectionId={sectionId}
+			isBelowTabletBreakpoint={isBelowTabletBreakpoint}
 		>
 			{trails.map((trail) => {
 				const imagePosition = isMediaCard(trail.format)
@@ -46,7 +53,10 @@ export const ScrollableMedium = ({
 					: 'bottom';
 
 				return (
-					<ScrollableCarousel.Item key={trail.url}>
+					<ScrollableCarousel.Item
+						key={trail.url}
+						isBelowTabletBreakpoint={isBelowTabletBreakpoint}
+					>
 						<FrontCard
 							trail={trail}
 							imageLoading={imageLoading}

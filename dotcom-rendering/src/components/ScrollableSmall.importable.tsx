@@ -1,3 +1,5 @@
+import { until } from '@guardian/source/foundations';
+import { removeMediaRulePrefix, useMatchMedia } from '../lib/useMatchMedia';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
@@ -61,6 +63,10 @@ export const ScrollableSmall = ({
 	const mobileBottomCards = [1, 3];
 	const desktopBottomCards = [2, 3];
 
+	const isBelowTabletBreakpoint = useMatchMedia(
+		removeMediaRulePrefix(until.tablet),
+	);
+
 	return (
 		<ScrollableCarousel
 			carouselLength={Math.ceil(trails.length / 2)}
@@ -69,12 +75,14 @@ export const ScrollableSmall = ({
 			sectionId={sectionId}
 			shouldStackCards={{ desktop: trails.length > 2, mobile: true }}
 			gapSizes={{ column: 'large', row: 'medium' }}
+			isBelowTabletBreakpoint={isBelowTabletBreakpoint}
 		>
 			{trails.map((trail, index) => {
 				return (
 					<ScrollableCarousel.Item
 						key={trail.url}
 						isStackingCarousel={true}
+						isBelowTabletBreakpoint={isBelowTabletBreakpoint}
 					>
 						<FrontCard
 							trail={trail}
