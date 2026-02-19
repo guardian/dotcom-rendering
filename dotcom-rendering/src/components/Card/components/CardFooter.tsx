@@ -8,6 +8,12 @@ import {
 import { type ArticleFormat, ArticleSpecial } from '../../../lib/articleFormat';
 import type { MainMedia } from '../../../types/mainMedia';
 import { CardPill } from '../../CardPill';
+import { NewsletterSignupLayout } from '../../../layouts/NewsletterSignupLayout';
+import { Island } from '../../Island';
+import { SecureSignup } from '../../SecureSignup.importable';
+import { NewsletterPrivacyMessage } from '../../NewsletterPrivacyMessage';
+import { EditorialButton } from '../../Button/EditorialButton';
+import { LinkBlockComponent } from '../../LinkBlockComponent';
 
 const contentStyles = css`
 	margin-top: auto;
@@ -35,6 +41,18 @@ const contentStyles = css`
 			padding-left: ${space[1]}px;
 		}
 	}
+`;
+
+const flowVertical = css`
+	flex-direction: column;
+`;
+
+const alignLeft = css`
+	text-align: left;
+`;
+
+const alignRight = css`
+	text-align: right;
 `;
 
 const contentTopPaddingStyles = css`
@@ -81,8 +99,7 @@ export const CardFooter = ({
 		mainMedia?.type === 'YoutubeVideo' ||
 		mainMedia?.type === 'Audio' ||
 		mainMedia?.type === 'Gallery' ||
-		mainMedia?.type === 'SelfHostedVideo' ||
-		isNewsletter;
+		mainMedia?.type === 'SelfHostedVideo';
 
 	if (shouldShowPill) {
 		return (
@@ -105,6 +122,27 @@ export const CardFooter = ({
 		);
 	}
 
+	if (isNewsletter) {
+		return (
+			<footer>
+				<LinkBlockComponent
+					label={'Preview'}
+					url={'https://theguardian.com'}
+					linkType={'StandardButton'}
+					priority={'Tertiary'}
+				/>
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<SecureSignup
+						newsletterId={'moving-the-goalposts'}
+						successDescription={
+							"We'll send you Moving the Goalposts twice every week"
+						}
+					/>
+				</Island>
+				<NewsletterPrivacyMessage />
+			</footer>
+		);
+	}
 	if (shouldShowBranding) {
 		return <footer css={labStyles}>{cardBranding}</footer>;
 	}

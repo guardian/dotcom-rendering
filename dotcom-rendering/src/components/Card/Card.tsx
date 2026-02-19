@@ -826,13 +826,15 @@ export const Card = ({
 					: undefined
 			}
 		>
-			<CardLink
-				linkTo={linkTo}
-				headlineText={headlineText}
-				dataLinkName={resolvedDataLinkName}
-				isExternalLink={isExternalLink}
-				isInPersonalisationVariant={isInPersonalisationVariant}
-			/>
+			{!isNewsletter && (
+				<CardLink
+					linkTo={linkTo}
+					headlineText={headlineText}
+					dataLinkName={resolvedDataLinkName}
+					isExternalLink={isExternalLink}
+					isInPersonalisationVariant={isInPersonalisationVariant}
+				/>
+			)}
 			{headlinePosition === 'outer' && (
 				<div
 					css={css`
@@ -870,10 +872,19 @@ export const Card = ({
 				mediaPositionOnDesktop={mediaPositionOnDesktop}
 				mediaPositionOnMobile={mediaPositionOnMobile}
 				minWidthInPixels={minWidthInPixels}
-				mediaType={media?.type}
+				mediaType={isNewsletter ? 'avatar' : media?.type}
 				gapSizes={getGapSizes()}
 				isBetaContainer={isBetaContainer}
 			>
+				{isNewsletter && (
+					<CardLink
+						linkTo={linkTo}
+						headlineText={headlineText}
+						dataLinkName={resolvedDataLinkName}
+						isExternalLink={isExternalLink}
+						isInPersonalisationVariant={isInPersonalisationVariant}
+					/>
+				)}
 				{/**
 				 * Waveform for podcasts is absolutely positioned at bottom of
 				 * card, behind everything else
@@ -891,7 +902,7 @@ export const Card = ({
 				{media && (
 					<MediaWrapper
 						mediaSize={mediaSize}
-						mediaType={media.type}
+						mediaType={isNewsletter ? 'avatar' : media.type}
 						mediaPositionOnDesktop={mediaPositionOnDesktop}
 						mediaPositionOnMobile={mediaPositionOnMobile}
 						padMedia={
@@ -919,7 +930,7 @@ export const Card = ({
 								/>
 							</Island>
 						)}
-						{media.type === 'avatar' && (
+						{(media.type === 'avatar' || isNewsletter) && (
 							<AvatarContainer
 								imageSize={mediaSize}
 								imagePositionOnDesktop={mediaPositionOnDesktop}
@@ -928,7 +939,7 @@ export const Card = ({
 								isFlexibleContainer={isFlexibleContainer}
 							>
 								<Avatar
-									src={media.avatarUrl}
+									src={media.avatarUrl ?? media.imageUrl}
 									alt={byline ?? ''}
 									imageSize={
 										isBetaContainer ? mediaSize : undefined
@@ -1065,7 +1076,7 @@ export const Card = ({
 								)}
 							</>
 						)}
-						{media.type === 'picture' && (
+						{media.type === 'picture' && !isNewsletter && (
 							<>
 								<CardPicture
 									mainImage={media.imageUrl}
@@ -1132,7 +1143,7 @@ export const Card = ({
 					</MediaWrapper>
 				)}
 				<ContentWrapper
-					mediaType={media?.type}
+					mediaType={isNewsletter ? 'avatar' : media?.type}
 					mediaSize={mediaSize}
 					isBetaContainer={isBetaContainer}
 					mediaPositionOnDesktop={
@@ -1211,24 +1222,26 @@ export const Card = ({
 								/>
 							)}
 
-							{!isOpinionCardWithAvatar && !showLivePlayable && (
-								<CardFooter
-									format={format}
-									age={decideAge()}
-									commentCount={<CommentCount />}
-									cardBranding={
-										isOnwardContent ? (
-											<LabsBranding />
-										) : undefined
-									}
-									mainMedia={
-										!isGallerySecondaryOnward
-											? mainMedia
-											: undefined
-									}
-									isNewsletter={isNewsletter}
-								/>
-							)}
+							{!isNewsletter &&
+								!isOpinionCardWithAvatar &&
+								!showLivePlayable && (
+									<CardFooter
+										format={format}
+										age={decideAge()}
+										commentCount={<CommentCount />}
+										cardBranding={
+											isOnwardContent ? (
+												<LabsBranding />
+											) : undefined
+										}
+										mainMedia={
+											!isGallerySecondaryOnward
+												? mainMedia
+												: undefined
+										}
+										isNewsletter={isNewsletter}
+									/>
+								)}
 							{showLivePlayable &&
 								liveUpdatesPosition === 'inner' && (
 									<Island
@@ -1312,17 +1325,19 @@ export const Card = ({
 
 				{decideOuterSublinks()}
 
-				{isOpinionCardWithAvatar && !showLivePlayable && (
-					<CardFooter
-						format={format}
-						age={decideAge()}
-						commentCount={<CommentCount />}
-						shouldReserveSpace={{
-							mobile: avatarPosition.mobile === 'bottom',
-							desktop: avatarPosition.desktop === 'bottom',
-						}}
-					/>
-				)}
+				{(isNewsletter || isOpinionCardWithAvatar) &&
+					!showLivePlayable && (
+						<CardFooter
+							format={format}
+							age={decideAge()}
+							commentCount={<CommentCount />}
+							shouldReserveSpace={{
+								mobile: avatarPosition.mobile === 'bottom',
+								desktop: avatarPosition.desktop === 'bottom',
+							}}
+							isNewsletter={isNewsletter}
+						/>
+					)}
 			</div>
 
 			{!isOnwardContent && format.theme === ArticleSpecial.Labs && (
