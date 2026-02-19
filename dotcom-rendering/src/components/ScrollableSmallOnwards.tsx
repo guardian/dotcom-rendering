@@ -61,7 +61,7 @@ export const ScrollableSmallOnwards = (props: Props) => {
 					carouselLength={Math.ceil(trails.length / 2)}
 					visibleCarouselSlidesOnMobile={1}
 					visibleCarouselSlidesOnTablet={2}
-					sectionId={'some-section-id-12'}
+					sectionId={props.onwardsSource}
 					shouldStackCards={{
 						desktop: true,
 						mobile: true,
