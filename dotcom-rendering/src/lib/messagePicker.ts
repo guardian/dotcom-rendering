@@ -184,7 +184,8 @@ export const pickMessage = (
 					});
 				}
 			})
-			.catch((e) =>
-				console.error(`pickMessage winner - error: ${String(e)}`),
-			);
+			.catch((e) => {
+				console.error(`pickMessage winner - error: ${String(e)}`);
+				resolve({ type: 'NoMessageSelected' });
+			});
 	});
