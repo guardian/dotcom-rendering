@@ -213,13 +213,7 @@ export const AdmiralScript = () => {
 	const isInVariant = abTests?.isUserInTest(testName) ?? false;
 	const isInControlGroup =
 		abTests?.isUserInTestGroup(testName, 'control') ?? false;
-	const isInVariantRecoverGroup =
-		abTests?.isUserInTestGroup(testName, 'variant-recover') ?? false;
-	const variantName = isInControlGroup
-		? 'control'
-		: isInVariantRecoverGroup
-		? 'variant-recover'
-		: undefined;
+	const variantName = isInControlGroup ? 'control' : undefined;
 
 	useEffect(() => {
 		/**
@@ -227,13 +221,12 @@ export const AdmiralScript = () => {
 		 *
 		 * - Should not run if the CMP is due to show
 		 * - Should only run in the US
-		 * - Should only run if in the AB test (control or variant-recover group)
+		 * - Should only run if in the AB test (control group)
 		 * - Should not run if the gu_hide_support_messaging cookie is set
 		 * - Should not run for content marked as: shouldHideAdverts, shouldHideReaderRevenue, isSensitive
 		 * - Should not run for paid-content sponsorship type (includes Hosted Content)
 		 * - Should not run for certain sections
 		 *
-		 * The modal will only show if the user is in the variant-recover group.
 		 * Control group loads the script but the modal will not be shown.
 		 */
 		const page = window.guardian.config.page;
