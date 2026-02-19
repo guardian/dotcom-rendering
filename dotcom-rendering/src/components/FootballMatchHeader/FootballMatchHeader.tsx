@@ -25,6 +25,7 @@ import { palette } from '../../palette';
 import type { ColourName } from '../../paletteDeclarations';
 import { BigNumber } from '../BigNumber';
 import { FootballCrest } from '../FootballCrest';
+import { Placeholder } from '../Placeholder';
 import { background, border, primaryText, secondaryText } from './colours';
 import { type HeaderData, parse as parseHeaderData } from './headerData';
 import { Tabs } from './Tabs';
@@ -58,18 +59,14 @@ export const FootballMatchHeader = (props: Props) => {
 
 	if (match === undefined || tabs === undefined) {
 		return (
-			<section
-				css={{
-					minHeight: 182,
-					[from.leftCol]: {
-						minHeight: 172,
-					},
-				}}
-				style={{
-					backgroundColor: palette(background('Fixture')),
-					color: palette(primaryText('Fixture')),
-				}}
-			></section>
+			<Placeholder
+				heights={
+					new Map([
+						['mobile', 182],
+						['leftCol', 172],
+					])
+				}
+			/>
 		);
 	}
 
