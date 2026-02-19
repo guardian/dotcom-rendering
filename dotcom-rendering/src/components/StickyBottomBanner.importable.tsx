@@ -404,15 +404,21 @@ export const StickyBottomBanner = ({
 		isInAuxiaControlGroup,
 	]);
 
-	// Dispatches 'banner:none' event for commercial to handle for the mobile sticky ad integration (@guardian/commercial-dev)
-	// Ensures the mobile-sticky ad slots only render when no banner will be shown.
+	/**
+	 * Custom events for commercial purposes to avoid the mobile-sticky ad slot clashing with these banners
+	 * Dispatches events when no banner is due to appear and when the sign in gate is the chosen banner
+	 * Please talk to @guardian/commercial-dev before changing this logic
+	 */
 	useEffect(() => {
-		if (
-			pickMessageResult?.type === 'NoMessageSelected' ||
-			// Explicitly ignore the sign in gate for this
-			pickMessageResult?.messageId === 'sign-in-gate-portal'
-		) {
+		if (pickMessageResult?.type === 'NoMessageSelected') {
 			document.dispatchEvent(new CustomEvent('banner:none'));
+		}
+
+		if (
+			pickMessageResult?.type === 'MessageSelected' &&
+			pickMessageResult.messageId === 'sign-in-gate-portal'
+		) {
+			document.dispatchEvent(new CustomEvent('banner:sign-in-gate'));
 		}
 	}, [pickMessageResult]);
 
