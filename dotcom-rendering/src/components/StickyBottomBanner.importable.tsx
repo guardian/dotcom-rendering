@@ -255,7 +255,7 @@ const buildBrazeBannersSystemConfig = (
 	contentType: string,
 	shouldHideReaderRevenue: boolean,
 	tags: TagType[],
-): CandidateConfig<any> => {
+): CandidateConfig<BrazeBannersSystemMeta> => {
 	return {
 		candidate: {
 			id: 'braze-banners-system_StickyBottomBanner',
