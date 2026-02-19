@@ -198,16 +198,18 @@ export const BrandingLabel = ({
 
 	if (isHosted) {
 		return (
-			<a href={logo.link}>
-				<picture>
-					<img
-						css={hostedLogoImageStyles}
-						src={logo.src}
-						alt={branding.sponsorName}
-						width={logo.dimensions.width}
-						height={logo.dimensions.height}
-					/>
-				</picture>
+			<a
+				href={logo.link}
+				data-link-name={ophanComponentLink}
+				data-component={ophanComponentName}
+			>
+				<img
+					css={hostedLogoImageStyles}
+					src={logo.src}
+					alt={branding.sponsorName}
+					width={logo.dimensions.width}
+					height={logo.dimensions.height}
+				/>
 			</a>
 		);
 	}
