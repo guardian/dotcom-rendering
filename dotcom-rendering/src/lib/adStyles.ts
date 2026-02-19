@@ -121,6 +121,8 @@ const spacefinderAdSlotContainerStyles = css`
 		text-align: center;
 		display: flex;
 		justify-content: center;
+		max-width: 620px;
+		margin-left: 0;
 
 		${from.tablet} {
 			background-color: ${palette('--ad-background')};
@@ -158,6 +160,7 @@ const spacefinderAdSlotContainerStyles = css`
 	/*
 		To push inline2+ on desktop to the right column
 	*/
+	.ad-slot-container--right-column,
 	.ad-slot-container--offset-right {
 		${from.desktop} {
 			float: right;
