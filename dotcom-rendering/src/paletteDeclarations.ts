@@ -6792,29 +6792,13 @@ const paletteColours = {
 		light: commentFormInputBackgroundLight,
 		dark: commentFormInputBackgroundDark,
 	},
-	'--contributor-follow-accent-color': {
+	'--contributor-follow-fill': {
 		light: followIconFillLight,
 		dark: followIconFillDark,
 	},
 	'--contributor-follow-bio-text': {
 		light: () => sourcePalette.neutral[10],
 		dark: () => sourcePalette.neutral[86],
-	},
-	'--contributor-follow-button-border': {
-		light: followIconFillLight,
-		dark: () => sourcePalette.neutral[20],
-	},
-	'--contributor-follow-button-border-following': {
-		light: () => sourcePalette.neutral[73],
-		dark: () => sourcePalette.neutral[20],
-	},
-	'--contributor-follow-button-text': {
-		light: () => sourcePalette.neutral[7],
-		dark: () => sourcePalette.neutral[100],
-	},
-	'--contributor-follow-button-text-not-following': {
-		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[100],
 	},
 	'--contributor-follow-straight-lines': {
 		light: () => sourcePalette.neutral[86],

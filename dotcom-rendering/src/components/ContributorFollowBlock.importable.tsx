@@ -6,12 +6,7 @@
 import { css } from '@emotion/react';
 import { Topic } from '@guardian/bridget/Topic';
 import { isUndefined, log } from '@guardian/libs';
-import {
-	palette as sourcePalette,
-	space,
-	textSans12,
-	textSans15,
-} from '@guardian/source/foundations';
+import { space, textSans12, textSans15 } from '@guardian/source/foundations';
 import {
 	Button,
 	SvgCheckmark,
@@ -36,38 +31,6 @@ type FollowButtonProps = {
 	onClickHandler: () => void;
 };
 
-const followButtonStyles = (isFollowing: boolean) => css`
-	${textSans15}
-	display: inline-flex;
-	align-items: center;
-	gap: ${space[1]}px;
-	padding: ${space[1] + 1}px ${space[3] + 2}px;
-	border-radius: ${space[5]}px;
-	border: 1px solid
-		${isFollowing
-			? palette('--contributor-follow-button-border-following')
-			: palette('--contributor-follow-button-border')};
-	background: ${isFollowing
-		? 'transparent'
-		: palette('--contributor-follow-accent-color')};
-	color: ${isFollowing
-		? palette('--contributor-follow-button-text')
-		: palette('--contributor-follow-button-text-not-following')};
-	font-weight: 700;
-	cursor: pointer;
-
-	svg {
-		width: 24px;
-		height: 24px;
-		fill: ${isFollowing
-			? palette('--contributor-follow-button-text')
-			: palette('--contributor-follow-button-text-not-following')};
-		stroke: ${isFollowing
-			? palette('--contributor-follow-button-text')
-			: palette('--contributor-follow-button-text-not-following')};
-	}
-`;
-
 const FollowButtonPillStyle = ({
 	isFollowing,
 	onClickHandler,
@@ -77,7 +40,7 @@ const FollowButtonPillStyle = ({
 			onClick={onClickHandler}
 			type="button"
 			theme={{
-				backgroundPrimary: palette('--contributor-follow-accent-color'),
+				backgroundPrimary: palette('--contributor-follow-fill'),
 				textPrimary: palette('--quiz-atom-button-text'),
 			}}
 			iconSide="left"

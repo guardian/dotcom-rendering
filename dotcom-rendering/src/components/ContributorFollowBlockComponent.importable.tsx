@@ -51,7 +51,7 @@ const nameAndBioStyles = css`
 
 const titleStyles = css`
 	${headlineBold17};
-	color: ${palette('--contributor-follow-accent-color')};
+	color: ${palette('--contributor-follow-fill')};
 	margin: 0 0 ${space[2]}px;
 `;
 
