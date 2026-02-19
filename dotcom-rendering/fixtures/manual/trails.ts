@@ -111,6 +111,12 @@ export const trails: [
 			origin: 'The Guardian',
 			expired: false,
 			image: 'https://i.guim.co.uk/img/media/e060e9b7c92433b3dfeccc98b9206778cda8b8e8/0_180_6680_4009/master/6680.jpg?width=600&quality=45&dpr=2&s=none',
+			isLive: false,
+		},
+		articleMedia: {
+			type: 'YoutubeVideo',
+			duration: 378,
+			isLive: false,
 		},
 	},
 	{
@@ -326,6 +332,12 @@ export const trails: [
 			origin: 'The Guardian',
 			image: 'https://media.guim.co.uk/13dd7e5c4ca32a53cd22dfd90ac1845ef5e5d643/0_0_1920_1080/1920.jpg',
 			expired: false,
+			isLive: false,
+		},
+		articleMedia: {
+			type: 'YoutubeVideo',
+			duration: 322,
+			isLive: false,
 		},
 		trailText:
 			'Plastics are everywhere, but their smallest fragments – nanoplastics – are making their way into the deepest parts of our bodies, including our brains and breast milk',
@@ -418,6 +430,12 @@ export const trails: [
 			origin: 'The Guardian',
 			expired: false,
 			image: 'https://i.guim.co.uk/img/media/e060e9b7c92433b3dfeccc98b9206778cda8b8e8/0_180_6680_4009/master/6680.jpg?width=600&quality=45&dpr=2&s=none',
+			isLive: false,
+		},
+		articleMedia: {
+			type: 'YoutubeVideo',
+			duration: 378,
+			isLive: false,
 		},
 	},
 ];
@@ -442,6 +460,10 @@ export const audioTrails: [DCRFrontCard, DCRFrontCard] = [
 				altText: 'The Audio Long Read',
 			},
 		},
+		articleMedia: {
+			type: 'Audio',
+			duration: '46:12',
+		},
 		image: {
 			src: 'https://media.guim.co.uk/3c630f4309d8063a5b849bdcd5e57665f837fe13/0_147_4405_2643/master/4405.jpg',
 			altText:
@@ -465,6 +487,10 @@ export const audioTrails: [DCRFrontCard, DCRFrontCard] = [
 				src: 'https://uploads.guim.co.uk/2024/08/01/FootballWeekly_FINAL_3000_(1).jpg',
 				altText: 'Football Weekly',
 			},
+		},
+		articleMedia: {
+			type: 'Audio',
+			duration: '54:52',
 		},
 		image: {
 			src: 'https://media.guim.co.uk/01ded462d3dd730467bdfd652decda4117d925da/0_0_2074_1244/master/2074.jpg',
@@ -522,6 +548,7 @@ export const galleryTrails: [DCRFrontCard, DCRFrontCard] = [
 		webPublicationDate: '2025-02-01T23:45:55.000Z',
 		kickerText: 'Fashion fixes',
 		mainMedia: { type: 'Gallery', count: '6' },
+		articleMedia: { type: 'Gallery', count: '6' },
 		image: {
 			src: 'https://media.guim.co.uk/003d9dbe35c7a64a1e109a38450f3704deaeac24/2_240_3598_2159/master/3598.jpg',
 			altText:
@@ -539,6 +566,7 @@ export const galleryTrails: [DCRFrontCard, DCRFrontCard] = [
 		webPublicationDate: '2025-02-07T05:00:36.000Z',
 		kickerText: 'Democratic Republic of the Congo',
 		mainMedia: { type: 'Gallery', count: '27' },
+		articleMedia: { type: 'Gallery', count: '27' },
 		showVideo: false,
 		image: {
 			src: 'https://media.guim.co.uk/69ac2383ea611126b54373865dac3e7e77981d7e/0_39_5500_3302/master/5500.jpg',
@@ -570,6 +598,12 @@ export const youtubeVideoTrails: [DCRFrontCard, DCRFrontCard] = [
 			origin: 'SNTV',
 			expired: false,
 			image: 'https://media.guim.co.uk/0cab2d745b3423b0fac318c9ee09b79678f568f8/0_56_3000_1688/3000.jpg',
+			isLive: false,
+		},
+		articleMedia: {
+			type: 'YoutubeVideo',
+			duration: 117,
+			isLive: false,
 		},
 		image: {
 			src: 'https://media.guim.co.uk/0cab2d745b3423b0fac318c9ee09b79678f568f8/0_47_3000_1800/master/3000.jpg',
@@ -597,6 +631,12 @@ export const youtubeVideoTrails: [DCRFrontCard, DCRFrontCard] = [
 			origin: 'Reuters',
 			expired: false,
 			image: 'https://media.guim.co.uk/908aa315f66a09bc6ea607b6049cd72decd2dfa6/0_0_5358_3014/5358.jpg',
+			isLive: false,
+		},
+		articleMedia: {
+			type: 'YoutubeVideo',
+			duration: 71,
+			isLive: false,
 		},
 		image: {
 			src: 'https://media.guim.co.uk/4612af5f4667888fa697139cf570b6373d93a710/2446_345_3218_1931/master/3218.jpg',

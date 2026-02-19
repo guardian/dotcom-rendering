@@ -5,7 +5,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import { ArticleDesign } from '../lib/articleFormat';
 import { secondsToDuration } from '../lib/formatTime';
 import { palette } from '../palette';
-import type { MainMedia } from '../types/mainMedia';
+import type { ArticleMedia } from '../types/mainMedia';
 import { Pill } from './Pill';
 import { SvgMediaControlsPlay } from './SvgMediaControlsPlay';
 
@@ -19,22 +19,19 @@ const liveBulletStyles = css`
 
 type CardPillProps = {
 	format: ArticleFormat;
-	mainMedia?: MainMedia;
+	media?: ArticleMedia;
 	isNewsletter?: boolean;
 };
 
-export const CardPill = ({
-	format,
-	mainMedia,
-	isNewsletter,
-}: CardPillProps) => {
+export const CardPill = ({ format, media, isNewsletter }: CardPillProps) => {
 	if (isNewsletter) return <Pill content="Newsletter" />;
-	if (!mainMedia) return null;
-	switch (mainMedia.type) {
+	if (!media) return null;
+
+	switch (media.type) {
 		case 'Gallery':
 			return (
 				<Pill
-					content={mainMedia.count}
+					content={media.count}
 					icon={<SvgCamera />}
 					prefix="Gallery"
 				/>
@@ -42,15 +39,14 @@ export const CardPill = ({
 		case 'Audio':
 			return (
 				<Pill
-					content={mainMedia.duration}
+					content={media.duration}
 					icon={<SvgMediaControlsPlay width={18} />}
 					prefix="Podcast"
 				/>
 			);
 		case 'YoutubeVideo':
 			if (format.design !== ArticleDesign.Video) return null;
-
-			if (mainMedia.isLive) {
+			if (media.isLive) {
 				return (
 					<Pill
 						content="Live"
@@ -60,40 +56,19 @@ export const CardPill = ({
 			}
 			return (
 				<Pill
-					content={secondsToDuration(mainMedia.duration)}
+					content={secondsToDuration(media.duration)}
 					icon={<SvgMediaControlsPlay width={18} />}
 					prefix="Video"
 				/>
 			);
-
 		case 'SelfHostedVideo':
-			switch (format.design) {
-				case ArticleDesign.Video:
-					return (
-						<Pill
-							content=""
-							icon={<SvgMediaControlsPlay width={18} />}
-							prefix="Video"
-						/>
-					);
-				case ArticleDesign.Audio:
-					return (
-						<Pill
-							content=""
-							icon={<SvgMediaControlsPlay width={18} />}
-							prefix="Podcast"
-						/>
-					);
-				case ArticleDesign.Gallery:
-					return (
-						<Pill
-							content=""
-							icon={<SvgCamera />}
-							prefix="Gallery"
-						/>
-					);
-				default:
-					return null;
-			}
+			if (format.design !== ArticleDesign.Video) return null;
+			return (
+				<Pill
+					content={secondsToDuration(media.duration)}
+					icon={<SvgMediaControlsPlay width={18} />}
+					prefix="Video"
+				/>
+			);
 	}
 };

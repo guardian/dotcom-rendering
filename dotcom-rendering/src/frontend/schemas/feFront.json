@@ -4708,6 +4708,7 @@
                         "expired",
                         "height",
                         "id",
+                        "isLive",
                         "origin",
                         "title",
                         "type",

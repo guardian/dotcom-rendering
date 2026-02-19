@@ -626,6 +626,7 @@ export const mockStorylinesSectionContent: StorylinesContent = {
 									duration: 80,
 									expired: false,
 									image: 'https://media.guim.co.uk/ac1bab42ff3dbb663e7469026100437ef837ec14/183_179_1501_901/master/1501.jpg',
+									isLive: false,
 								},
 							},
 						},

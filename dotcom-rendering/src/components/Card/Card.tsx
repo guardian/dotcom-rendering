@@ -27,7 +27,7 @@ import type {
 	DCRSupportingContent,
 } from '../../types/front';
 import type { CardMediaType } from '../../types/layout';
-import type { MainMedia } from '../../types/mainMedia';
+import type { ArticleMedia, MainMedia } from '../../types/mainMedia';
 import type { OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
 import { BrandingLabel } from '../BrandingLabel';
@@ -95,7 +95,15 @@ export type Props = {
 	trailText?: string;
 	avatarUrl?: string;
 	showClock?: boolean;
+	/**
+	 * Media displayed on this card
+	 */
 	mainMedia?: MainMedia;
+	/**
+	 * The main media from the target article (used for pills/metadata)
+	 * Can differ from mainMedia if the card has replacement media.
+	 */
+	articleMedia?: ArticleMedia;
 	/**
 	 * For interactive media (e.g., video or slideshow), certain card sizes are restricted from displaying
 	 * the interactive content because controls may be unavailable or inaccessible at those sizes.
@@ -399,6 +407,7 @@ export const Card = ({
 	isStorylines = false,
 	starRatingSize = 'small',
 	isInPersonalisationVariant,
+	articleMedia,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -1221,9 +1230,9 @@ export const Card = ({
 											<LabsBranding />
 										) : undefined
 									}
-									mainMedia={
+									media={
 										!isGallerySecondaryOnward
-											? mainMedia
+											? articleMedia
 											: undefined
 									}
 									isNewsletter={isNewsletter}

@@ -111,6 +111,10 @@ export const WithMediaIcon: Story = {
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Culture,
 		},
+		articleMedia: {
+			type: 'Audio',
+			duration: '30:65',
+		},
 	},
 
 	name: 'With Media Icon',
@@ -155,6 +159,10 @@ export const WithPodcastSeriesImage: Story = {
 				src: 'https://uploads.guim.co.uk/2024/08/01/FootballWeekly_FINAL_3000_(1).jpg',
 				altText: 'Football Weekly',
 			},
+		},
+		articleMedia: {
+			type: 'Audio',
+			duration: '31:16',
 		},
 	},
 
