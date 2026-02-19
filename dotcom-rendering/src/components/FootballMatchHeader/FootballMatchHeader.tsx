@@ -30,13 +30,9 @@ import { background, border, primaryText, secondaryText } from './colours';
 import { type HeaderData, parse as parseHeaderData } from './headerData';
 import { Tabs } from './Tabs';
 
-export type FootballMatchHeaderData = HeaderData & {
-	leagueName: string;
-};
-
 export type FootballMatchHeaderProps = {
 	initialTab: ComponentProps<typeof Tabs>['selected'];
-	matchData?: FootballMatchHeaderData;
+	initialData?: HeaderData;
 	edition: EditionId;
 	matchHeaderURL: URL;
 };
@@ -53,11 +49,11 @@ export const FootballMatchHeader = (props: Props) => {
 		swrOptions(props.refreshInterval),
 	);
 
-	const leagueName = props.matchData?.leagueName ?? ''; // TODO: Get from fetched match header data
-	const match = data?.match ?? props.matchData?.match;
-	const tabs = data?.tabs ?? props.matchData?.tabs;
+	const match = data?.match ?? props.initialData?.match;
+	const tabs = data?.tabs ?? props.initialData?.tabs;
+	const leagueName = data?.leagueName ?? props.initialData?.leagueName;
 
-	if (match === undefined || tabs === undefined) {
+	if (match === undefined || tabs === undefined || leagueName === undefined) {
 		return (
 			<Placeholder
 				heights={

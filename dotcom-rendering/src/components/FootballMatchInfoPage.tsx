@@ -30,7 +30,7 @@ export const FootballMatchInfoPage = ({
 			<Island priority="feature" defer={{ until: 'visible' }}>
 				<FootballMatchHeaderWrapper
 					initialTab="info"
-					matchData={{
+					initialData={{
 						leagueName: competitionName,
 						match: matchInfo,
 						tabs: {

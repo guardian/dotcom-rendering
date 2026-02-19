@@ -38,7 +38,7 @@ type Story = StoryObj<typeof meta>;
 export const Fixture = {
 	args: {
 		initialTab: 'info',
-		matchData: {
+		initialData: {
 			leagueName: feHeaderData.competitionName,
 			match: {
 				kind: 'Fixture',
