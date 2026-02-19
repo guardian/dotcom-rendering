@@ -1,4 +1,4 @@
-import { isUndefined, log, startPerformanceMeasure } from '@guardian/libs';
+import { isUndefined, startPerformanceMeasure } from '@guardian/libs';
 import { getOphan } from '../client/ophan/ophan';
 import type { RenderingTarget } from '../types/renderingTarget';
 
@@ -140,11 +140,6 @@ export const pickMessage = (
 	renderingTarget: RenderingTarget,
 ): Promise<PickMessageResult> =>
 	new Promise((resolve) => {
-		// Temporary variable to filter messages from the StickyBottomBanner only
-		const allowConsoleLog = candidates.some(
-			(c) => c.candidate.id === 'cmpUi',
-		);
-
 		const candidateConfigsWithTimeout = candidates.map((c) =>
 			timeoutify(c, name, renderingTarget),
 		);
@@ -154,14 +149,6 @@ export const pickMessage = (
 				canShow: candidateConfig.candidate.canShow(),
 			}),
 		);
-
-		if (allowConsoleLog) {
-			log(
-				'commercial',
-				'☑️ [pick] possible messages:',
-				results.map((_) => _.candidateConfig.candidate.id),
-			);
-		}
 
 		const winnerResult = results.reduce<
 			Promise<WinningMessage<any> | null>
@@ -184,9 +171,6 @@ export const pickMessage = (
 
 		winnerResult
 			.then((winner) => {
-				if (allowConsoleLog) {
-					log('commercial', '☑️ [pick] picked message:', winner);
-				}
 				clearAllTimeouts(candidateConfigsWithTimeout);
 
 				if (winner === null) {

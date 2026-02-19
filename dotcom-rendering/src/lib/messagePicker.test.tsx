@@ -20,10 +20,10 @@ afterEach(async () => {
 	jest.clearAllMocks();
 });
 
-describe.skip('pickMessage', () => {
+describe('pickMessage', () => {
 	it('resolves with the highest priority message which can show', async () => {
 		const MockComponent = () => <div />;
-		const ChosenMockComponent = () => <div />;
+		const ChosenMockComponent = () => <div id="chosen" />;
 		const config: SlotConfig = {
 			name: 'banner',
 			candidates: [
@@ -56,11 +56,12 @@ describe.skip('pickMessage', () => {
 			],
 		};
 
-		const result = await pickMessage(config, 'Web');
-
-		expect(result.type).toEqual('MessageSelected');
-		if (result.type === 'MessageSelected') {
-			expect(result.SelectedMessage).toEqual(ChosenMockComponent);
+		const pickMessageResult = await pickMessage(config, 'Web');
+		expect(pickMessageResult.type).toEqual('MessageSelected');
+		if (pickMessageResult.type === 'MessageSelected') {
+			expect(pickMessageResult.SelectedMessage()).toEqual(
+				ChosenMockComponent(),
+			);
 		}
 	});
 
@@ -89,14 +90,14 @@ describe.skip('pickMessage', () => {
 			],
 		};
 
-		const result = await pickMessage(config, 'Web');
+		const pickMessageResult = await pickMessage(config, 'Web');
 
-		expect(result.type).toEqual('NoMessageSelected');
+		expect(pickMessageResult.type).toEqual('NoMessageSelected');
 	});
 
 	it('falls through to a lower priority message when a higher one times out', async () => {
 		const MockComponent = () => <div />;
-		const ChosenMockComponent = () => <div />;
+		const ChosenMockComponent = () => <div id="chosen" />;
 		const config: SlotConfig = {
 			name: 'banner',
 			candidates: [
@@ -132,11 +133,13 @@ describe.skip('pickMessage', () => {
 
 		const messagePromise = pickMessage(config, 'Web');
 		jest.advanceTimersByTime(260);
-		const result = await messagePromise;
 
-		expect(result.type).toEqual('MessageSelected');
-		if (result.type === 'MessageSelected') {
-			expect(result.SelectedMessage).toEqual(() => ChosenMockComponent);
+		const pickMessageResult = await messagePromise;
+		expect(pickMessageResult.type).toEqual('MessageSelected');
+		if (pickMessageResult.type === 'MessageSelected') {
+			expect(pickMessageResult.SelectedMessage()).toEqual(
+				ChosenMockComponent(),
+			);
 		}
 	});
 
@@ -188,15 +191,15 @@ describe.skip('pickMessage', () => {
 
 		const messagePromise = pickMessage(config, 'Web');
 		jest.advanceTimersByTime(260);
-		const result = await messagePromise;
+		const got = await messagePromise;
 
-		expect(result.type).toEqual('NoMessageSelected');
+		expect(got.type).toEqual('NoMessageSelected');
 
 		clearTimeout(timer1);
 		clearTimeout(timer2);
 	});
 
-	it.skip('passes metadata returned by canShow to show', async () => {
+	it('passes metadata returned by canShow to show', async () => {
 		const renderComponent = jest.fn(() => <div />);
 		const meta = { extra: 'info' };
 		const config: SlotConfig = {
@@ -217,7 +220,11 @@ describe.skip('pickMessage', () => {
 			],
 		};
 
-		await pickMessage(config, 'Web');
+		const show = await pickMessage(config, 'Web');
+		expect(show.type).toEqual('MessageSelected');
+		if (show.type === 'MessageSelected') {
+			expect(show.SelectedMessage()).toEqual(renderComponent());
+		}
 
 		expect(renderComponent).toHaveBeenCalledWith(meta);
 	});
@@ -251,9 +258,9 @@ describe.skip('pickMessage', () => {
 
 		const messagePromise = pickMessage(config, 'Web');
 		jest.advanceTimersByTime(250);
-		const result = await messagePromise;
+		const got = await messagePromise;
 
-		expect(result.type).toEqual('NoMessageSelected');
+		expect(got.type).toEqual('NoMessageSelected');
 
 		expect(ophanRecordSpy).toHaveBeenCalledWith({
 			component: 'banner-picker-timeout-dcr',
