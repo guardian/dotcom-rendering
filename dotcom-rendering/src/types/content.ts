@@ -456,6 +456,7 @@ export interface MediaAtomBlockElement {
 	title?: string;
 	duration?: number;
 	videoPlayerFormat?: VideoPlayerFormat;
+	role?: RoleType;
 }
 
 export interface MultiImageBlockElement {

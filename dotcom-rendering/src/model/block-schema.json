@@ -2297,6 +2297,9 @@
                 },
                 "videoPlayerFormat": {
                     "$ref": "#/definitions/VideoPlayerFormat"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
