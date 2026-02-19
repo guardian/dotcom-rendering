@@ -6,17 +6,17 @@ import { FootballMatchHeader } from './FootballMatchHeader/FootballMatchHeader';
 
 type Props =
 	| (FootballMatchHeaderProps & {
-			selectedTab: 'info';
+			initialTab: 'info';
 			matchData: FootballMatchHeaderData;
 	  })
 	| (FootballMatchHeaderProps & {
-			selectedTab: 'live' | 'report';
+			initialTab: 'live' | 'report';
 			matchData?: never;
 	  });
 
 export const FootballMatchHeaderWrapper = (props: Props) => (
 	<FootballMatchHeader
-		selectedTab={props.selectedTab}
+		initialTab={props.initialTab}
 		matchData={props.matchData}
 		edition={props.edition}
 		matchHeaderURL={props.matchHeaderURL}

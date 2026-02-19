@@ -34,7 +34,7 @@ export type FootballMatchHeaderData = HeaderData & {
 };
 
 export type FootballMatchHeaderProps = {
-	selectedTab: ComponentProps<typeof Tabs>['selected'];
+	initialTab: ComponentProps<typeof Tabs>['selected'];
 	matchData?: FootballMatchHeaderData;
 	edition: EditionId;
 	matchHeaderURL: URL;
@@ -48,7 +48,7 @@ type Props = FootballMatchHeaderProps & {
 export const FootballMatchHeader = (props: Props) => {
 	const { data } = useSWR<HeaderData, string>(
 		props.matchHeaderURL,
-		fetcher(props.selectedTab, props.getHeaderData),
+		fetcher(props.initialTab, props.getHeaderData),
 		swrOptions(props.refreshInterval),
 	);
 
@@ -106,7 +106,7 @@ const swrOptions = (refreshInterval: number): SWRConfiguration<HeaderData> => ({
 });
 
 const fetcher =
-	(selected: Props['selectedTab'], getHeaderData: Props['getHeaderData']) =>
+	(selected: Props['initialTab'], getHeaderData: Props['getHeaderData']) =>
 	(url: string): Promise<HeaderData> =>
 		getHeaderData(url)
 			.then(parseHeaderData(selected))

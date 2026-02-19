@@ -37,7 +37,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Fixture = {
 	args: {
-		selectedTab: 'info',
+		initialTab: 'info',
 		matchData: {
 			leagueName: feHeaderData.competitionName,
 			match: {
@@ -92,7 +92,7 @@ export const Fixture = {
 
 export const Live = {
 	args: {
-		selectedTab: 'live',
+		initialTab: 'live',
 		edition: 'EUR',
 		matchHeaderURL: new URL(
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
@@ -122,7 +122,7 @@ export const Live = {
 
 export const Result = {
 	args: {
-		selectedTab: 'report',
+		initialTab: 'report',
 		edition: 'AU',
 		matchHeaderURL: new URL(
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
