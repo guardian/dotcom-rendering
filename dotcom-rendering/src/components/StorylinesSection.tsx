@@ -609,6 +609,7 @@ export const StorylinesSection = ({
 								</div>
 							</>
 						}
+						sectionId={sectionId}
 						collectionBranding={undefined}
 					/>
 				</div>

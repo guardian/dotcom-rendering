@@ -16,6 +16,7 @@ type Props = {
 	sectionId?: string;
 	shouldStackCards?: { desktop: boolean; mobile: boolean };
 	gapSizes?: GapSizes;
+	isBelowTabletBreakpoint?: boolean;
 };
 
 /**
@@ -234,6 +235,7 @@ export const ScrollableCarousel = ({
 	sectionId,
 	shouldStackCards = { desktop: false, mobile: false },
 	gapSizes = { column: 'large', row: 'large' },
+	isBelowTabletBreakpoint = false,
 }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const [previousButtonEnabled, setPreviousButtonEnabled] = useState(false);
@@ -369,7 +371,7 @@ export const ScrollableCarousel = ({
 
 	return (
 		<div css={containerStyles}>
-			<ol
+			<ul
 				ref={carouselRef}
 				css={[
 					carouselStyles,
@@ -383,9 +385,15 @@ export const ScrollableCarousel = ({
 				]}
 				data-heatphan-type="carousel"
 				onFocus={scrollToCardOnFocus}
+				{...(isBelowTabletBreakpoint && {
+					role: 'region',
+					'aria-roledescription': 'carousel',
+					'aria-labelledby': `${sectionId}-title`,
+					'aria-live': 'polite',
+				})}
 			>
 				{children}
-			</ol>
+			</ul>
 
 			{showNavigation && (
 				<CarouselNavigationButtons
@@ -412,10 +420,12 @@ ScrollableCarousel.Item = ({
 	isStackingCarousel = false,
 	children,
 	borderColour = palette('--card-border-top'),
+	isBelowTabletBreakpoint = false,
 }: {
 	isStackingCarousel?: boolean;
 	children: React.ReactNode;
 	borderColour?: string;
+	isBelowTabletBreakpoint?: boolean;
 }) => (
 	<li
 		css={[
@@ -424,6 +434,10 @@ ScrollableCarousel.Item = ({
 				? stackedRowLeftBorderStyles(borderColour)
 				: singleRowLeftBorderStyles(borderColour),
 		]}
+		{...(isBelowTabletBreakpoint && {
+			role: 'group',
+			'aria-roledescription': 'slide',
+		})}
 	>
 		{children}
 	</li>

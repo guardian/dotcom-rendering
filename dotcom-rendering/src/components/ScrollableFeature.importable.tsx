@@ -1,4 +1,6 @@
+import { until } from '@guardian/source/foundations';
 import { ArticleDesign } from '../lib/articleFormat';
+import { removeMediaRulePrefix, useMatchMedia } from '../lib/useMatchMedia';
 import type {
 	AspectRatio,
 	DCRContainerPalette,
@@ -31,14 +33,22 @@ export const ScrollableFeature = ({
 	aspectRatio,
 	collectionId,
 }: Props) => {
+	const isBelowTabletBreakpoint = useMatchMedia(
+		removeMediaRulePrefix(until.tablet),
+	);
+
 	return (
 		<ScrollableCarousel
 			carouselLength={trails.length}
 			visibleCarouselSlidesOnMobile={1}
 			visibleCarouselSlidesOnTablet={3}
+			isBelowTabletBreakpoint={isBelowTabletBreakpoint}
 		>
 			{trails.map((card, index) => (
-				<ScrollableCarousel.Item key={card.url}>
+				<ScrollableCarousel.Item
+					key={card.url}
+					isBelowTabletBreakpoint={isBelowTabletBreakpoint}
+				>
 					<FeatureCard
 						linkTo={card.url}
 						format={card.format}

@@ -758,6 +758,7 @@ export const FrontSection = ({
 									isLabs={isLabs}
 								/>
 							}
+							sectionId={sectionId}
 							collectionBranding={collectionBranding}
 						/>
 
