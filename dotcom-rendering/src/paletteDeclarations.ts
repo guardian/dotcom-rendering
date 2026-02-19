@@ -6794,7 +6794,7 @@ const paletteColours = {
 	},
 	'--contributor-follow-accent-color': {
 		light: followIconFillLight,
-		dark: followIconFillLight,
+		dark: followIconFillDark,
 	},
 	'--contributor-follow-bio-text': {
 		light: () => sourcePalette.neutral[10],

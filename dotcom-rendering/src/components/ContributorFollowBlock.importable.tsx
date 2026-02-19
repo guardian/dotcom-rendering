@@ -13,6 +13,7 @@ import {
 	textSans15,
 } from '@guardian/source/foundations';
 import {
+	Button,
 	SvgCheckmark,
 	SvgNotificationsOn,
 	SvgPlus,
@@ -67,20 +68,23 @@ const followButtonStyles = (isFollowing: boolean) => css`
 	}
 `;
 
-const FollowButton = ({ isFollowing, onClickHandler }: FollowButtonProps) => {
+const FollowButtonPillStyle = ({
+	isFollowing,
+	onClickHandler,
+}: FollowButtonProps) => {
 	return (
-		<button
+		<Button
 			onClick={onClickHandler}
 			type="button"
-			css={followButtonStyles(isFollowing)}
+			theme={{
+				backgroundPrimary: palette('--contributor-follow-accent-color'),
+				textPrimary: palette('--quiz-atom-button-text'),
+			}}
+			iconSide="left"
+			icon={isFollowing ? <SvgCheckmark /> : <SvgPlus />}
 		>
-			{isFollowing ? (
-				<SvgCheckmark size="xsmall" />
-			) : (
-				<SvgPlus size="xsmall" />
-			)}
 			<span>{isFollowing ? 'Following in My Guardian' : 'Follow'}</span>
-		</button>
+		</Button>
 	);
 };
 
@@ -306,7 +310,7 @@ export const ContributorFollowBlock = ({
 
 	return (
 		<div css={followBlockStyles}>
-			<FollowButton
+			<FollowButtonPillStyle
 				isFollowing={isFollowingContributor ?? false}
 				onClickHandler={
 					!isUndefined(isFollowingContributor)
