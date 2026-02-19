@@ -4,6 +4,7 @@ import { useCallback, useState } from 'react';
 import type { ArticleFormat } from '../../lib/articleFormat';
 import type { AdTargeting } from '../../types/commercial';
 import type { AspectRatio } from '../../types/front';
+import type { ArticleMedia } from '../../types/mainMedia';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { PlayButtonSize } from '../Card/components/PlayIcon';
 import type { ResponsiveFontSize } from '../CardHeadline';
@@ -64,6 +65,7 @@ export type Props = {
 	byline?: string;
 	showByline?: boolean;
 	isLive?: boolean;
+	articleMedia?: ArticleMedia;
 };
 
 /**
@@ -119,6 +121,7 @@ export const YoutubeAtom = ({
 	byline,
 	showByline,
 	isLive,
+	articleMedia,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -266,6 +269,7 @@ export const YoutubeAtom = ({
 								isImmersive={isImmersive}
 								byline={byline}
 								showByline={showByline}
+								articleMedia={articleMedia}
 							/>
 						) : (
 							<YoutubeAtomOverlay

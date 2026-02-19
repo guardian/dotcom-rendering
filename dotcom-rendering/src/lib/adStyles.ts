@@ -121,6 +121,8 @@ const spacefinderAdSlotContainerStyles = css`
 		text-align: center;
 		display: flex;
 		justify-content: center;
+		max-width: 620px;
+		margin-left: 0;
 
 		${from.tablet} {
 			background-color: ${palette('--ad-background')};
