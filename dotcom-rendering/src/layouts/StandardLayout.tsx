@@ -561,16 +561,19 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								/>
 							</div>
 						</GridItem>
-						<GridItem area="title" element="aside">
-							<ArticleTitle
-								format={format}
-								tags={article.tags}
-								sectionLabel={article.sectionLabel}
-								sectionUrl={article.sectionUrl}
-								guardianBaseURL={article.guardianBaseURL}
-								isMatch={!!footballMatchUrl}
-							/>
-						</GridItem>
+						{!isInFootballRedesignVariantGroup && (
+							<GridItem area="title" element="aside">
+								<ArticleTitle
+									format={format}
+									tags={article.tags}
+									sectionLabel={article.sectionLabel}
+									sectionUrl={article.sectionUrl}
+									guardianBaseURL={article.guardianBaseURL}
+									isMatch={!!footballMatchUrl}
+								/>
+							</GridItem>
+						)}
+
 						<GridItem area="border">
 							{format.theme === ArticleSpecial.Labs ? (
 								<></>
