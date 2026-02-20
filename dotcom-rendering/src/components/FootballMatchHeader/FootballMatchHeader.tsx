@@ -25,16 +25,19 @@ import { palette } from '../../palette';
 import type { ColourName } from '../../paletteDeclarations';
 import { BigNumber } from '../BigNumber';
 import { FootballCrest } from '../FootballCrest';
+import { Placeholder } from '../Placeholder';
 import { background, border, primaryText, secondaryText } from './colours';
 import { type HeaderData, parse as parseHeaderData } from './headerData';
 import { Tabs } from './Tabs';
 
-type Props = {
-	leagueName: string;
-	match: FootballMatch;
-	tabs: ComponentProps<typeof Tabs>;
+export type FootballMatchHeaderProps = {
+	initialTab: ComponentProps<typeof Tabs>['selected'];
+	initialData?: HeaderData;
 	edition: EditionId;
 	matchHeaderURL: URL;
+};
+
+type Props = FootballMatchHeaderProps & {
 	getHeaderData: (url: string) => Promise<unknown>;
 	refreshInterval: number;
 };
@@ -42,12 +45,26 @@ type Props = {
 export const FootballMatchHeader = (props: Props) => {
 	const { data } = useSWR<HeaderData, string>(
 		props.matchHeaderURL,
-		fetcher(props.tabs.selected, props.getHeaderData),
+		fetcher(props.initialTab, props.getHeaderData),
 		swrOptions(props.refreshInterval),
 	);
 
-	const match = data?.match ?? props.match;
-	const tabs = data?.tabs ?? props.tabs;
+	const match = data?.match ?? props.initialData?.match;
+	const tabs = data?.tabs ?? props.initialData?.tabs;
+	const leagueName = data?.leagueName ?? props.initialData?.leagueName;
+
+	if (match === undefined || tabs === undefined || leagueName === undefined) {
+		return (
+			<Placeholder
+				heights={
+					new Map([
+						['mobile', 182],
+						['leftCol', 172],
+					])
+				}
+			/>
+		);
+	}
 
 	return (
 		<section
@@ -70,7 +87,7 @@ export const FootballMatchHeader = (props: Props) => {
 				}}
 			>
 				<StatusLine
-					leagueName={props.leagueName}
+					leagueName={leagueName}
 					match={match}
 					edition={props.edition}
 				/>
@@ -94,10 +111,7 @@ const swrOptions = (refreshInterval: number): SWRConfiguration<HeaderData> => ({
 });
 
 const fetcher =
-	(
-		selected: Props['tabs']['selected'],
-		getHeaderData: Props['getHeaderData'],
-	) =>
+	(selected: Props['initialTab'], getHeaderData: Props['getHeaderData']) =>
 	(url: string): Promise<HeaderData> =>
 		getHeaderData(url)
 			.then(parseHeaderData(selected))
