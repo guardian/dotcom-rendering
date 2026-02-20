@@ -1,9 +1,12 @@
-import { useApiWithFetcher } from '../lib/useApi';
-import { FootballMatchInfo } from './FootballMatchInfo';
-import { FootballMatchStats, parseMatchStats } from '../footballMatchStats';
-import { error, fromValibot, ok, Result } from '../lib/result';
+import { log } from '@guardian/libs';
 import { safeParse } from 'valibot';
+import type { FootballMatchStats } from '../footballMatchStats';
+import { parseMatchStats } from '../footballMatchStats';
 import { feFootballMatchStatsSchema } from '../frontend/feFootballMatchInfoPage';
+import type { Result } from '../lib/result';
+import { error, fromValibot, ok } from '../lib/result';
+import { useApiWithParse } from '../lib/useApi';
+import { FootballMatchInfo } from './FootballMatchInfo';
 import { Placeholder } from './Placeholder';
 
 const Loading = () => <Placeholder heights={new Map([['mobile', 40]])} />;
@@ -13,18 +16,21 @@ export const FootballMatchInfoWrapper = ({
 }: {
 	matchStatsUrl: string;
 }) => {
-	const { data, error, loading } = useApiWithFetcher<
-		FootballMatchStats,
-		string
-	>(matchStatsUrl, parse, {
+	const {
+		data,
+		error: apiError,
+		loading,
+	} = useApiWithParse<FootballMatchStats>(matchStatsUrl, parse, {
 		errorRetryCount: 1,
 	});
 
 	if (loading) return <Loading />;
 
-	if (error) {
+	if (apiError) {
 		// Send the error to Sentry and then prevent the element from rendering
-		// window.guardian.modules.sentry.reportError(error, 'match-tabs');
+		window.guardian.modules.sentry.reportError(apiError, 'match-stats');
+
+		log('dotcom', apiError);
 
 		return null;
 	}

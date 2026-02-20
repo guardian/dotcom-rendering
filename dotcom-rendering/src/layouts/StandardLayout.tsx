@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { log } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -23,6 +24,7 @@ import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DirectoryPageNav } from '../components/DirectoryPageNav';
 import { DiscussionLayout } from '../components/DiscussionLayout';
+import { FootballMatchInfoWrapper } from '../components/FootballMatchInfoWrapper.importable';
 import { Footer } from '../components/Footer';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { GetMatchStats } from '../components/GetMatchStats.importable';
@@ -54,7 +56,9 @@ import {
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
+import { safeParseURL } from '../lib/parse';
 import { parse } from '../lib/slot-machine-flags';
+import { useBetaAB } from '../lib/useAB';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -344,6 +348,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 		editionId,
 	} = article;
 
+	const abTests = useBetaAB();
+	const isInFootballRedesignVariantGroup =
+		abTests?.isUserInTestGroup('webex-football-redesign', 'variant') ??
+		false;
+
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
@@ -359,6 +368,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const footballMatchUrl =
 		article.matchType === 'FootballMatchType'
 			? article.matchUrl
+			: undefined;
+
+	const footballMatchStatsUrl =
+		article.matchType === 'FootballMatchType'
+			? article.matchStatsUrl
 			: undefined;
 
 	const isMatchReport =
@@ -722,18 +736,17 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									shouldHideAds={article.shouldHideAds}
 									idApiUrl={article.config.idApiUrl}
 								/>
-								{format.design === ArticleDesign.MatchReport &&
-									!!footballMatchUrl && (
-										<Island
-											priority="feature"
-											defer={{ until: 'visible' }}
-										>
-											<GetMatchStats
-												matchUrl={footballMatchUrl}
-												format={format}
-											/>
-										</Island>
-									)}
+								<MatchInfoContainer
+									isMatchReport={isMatchReport}
+									isInVariantGroup={
+										isInFootballRedesignVariantGroup
+									}
+									footballMatchUrl={footballMatchUrl}
+									footballMatchStatsUrl={
+										footballMatchStatsUrl
+									}
+									format={format}
+								/>
 
 								{isApps && (
 									<Island
@@ -1078,4 +1091,49 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 			)}
 		</>
 	);
+};
+
+export const MatchInfoContainer = ({
+	isMatchReport,
+	isInVariantGroup,
+	footballMatchUrl,
+	footballMatchStatsUrl,
+	format,
+}: {
+	isMatchReport: boolean;
+	isInVariantGroup: boolean;
+	footballMatchUrl: string | undefined;
+	footballMatchStatsUrl: string | undefined;
+	format: ArticleFormat;
+}) => {
+	if (isMatchReport && isInVariantGroup && !!footballMatchStatsUrl) {
+		const parsedUrl = safeParseURL(footballMatchStatsUrl);
+		if (!parsedUrl.ok) {
+			log(
+				'dotcom',
+				new Error(
+					`Failed to parse match stats URL: ${footballMatchStatsUrl}`,
+				),
+			);
+
+			return null;
+		}
+		return (
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<FootballMatchInfoWrapper
+					matchStatsUrl={footballMatchStatsUrl}
+				/>
+			</Island>
+		);
+	}
+
+	if (isMatchReport && !!footballMatchUrl) {
+		return (
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<GetMatchStats matchUrl={footballMatchUrl} format={format} />
+			</Island>
+		);
+	}
+
+	return null;
 };
