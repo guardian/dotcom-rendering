@@ -22,6 +22,7 @@ import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
+import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.importable';
 import { Footer } from '../components/Footer';
 import { GetCricketScoreboard } from '../components/GetCricketScoreboard.importable';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
@@ -50,6 +51,7 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
+import { useBetaAB } from '../lib/useAB';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -272,6 +274,11 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			? article.matchUrl
 			: undefined;
 
+	const footballMatchHeaderUrl =
+		article.matchType === 'FootballMatchType'
+			? article.matchHeaderUrl
+			: undefined;
+
 	const cricketMatchUrl =
 		article.matchType === 'CricketMatchType' ? article.matchUrl : undefined;
 
@@ -283,6 +290,11 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	const isApps = renderingTarget === 'Apps';
 
 	const showComments = article.isCommentable && !isPaidContent;
+
+	const abTests = useBetaAB();
+	const isInFootballRedesignTest =
+		abTests?.isUserInTestGroup('webex-football-redesign', 'variant') ??
+		false;
 
 	return (
 		<>
@@ -348,49 +360,67 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					</Island>
 				)}
 				{footballMatchUrl ? (
-					<Section
-						showTopBorder={false}
-						backgroundColour={themePalette(
-							'--match-nav-background',
-						)}
-						borderColour={themePalette('--headline-border')}
-						leftContent={
-							<ArticleTitle
-								format={format}
-								tags={article.tags}
-								sectionLabel={article.sectionLabel}
-								sectionUrl={article.sectionUrl}
-								guardianBaseURL={article.guardianBaseURL}
-								isMatch={true}
-							/>
-						}
-						leftColSize="wide"
-						padContent={false}
-						verticalMargins={false}
-					>
-						<Hide above="leftCol">
-							<ArticleTitle
-								format={format}
-								tags={article.tags}
-								sectionLabel={article.sectionLabel}
-								sectionUrl={article.sectionUrl}
-								guardianBaseURL={article.guardianBaseURL}
-								isMatch={true}
-							/>
-						</Hide>
+					isInFootballRedesignTest ? (
+						footballMatchHeaderUrl && (
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<FootballMatchHeaderWrapper
+									initialTab="live"
+									edition={article.editionId}
+									matchHeaderURL={footballMatchHeaderUrl}
+								/>
+							</Island>
+						)
+					) : (
+						<Section
+							showTopBorder={false}
+							backgroundColour={themePalette(
+								'--match-nav-background',
+							)}
+							borderColour={themePalette('--headline-border')}
+							leftContent={
+								<ArticleTitle
+									format={format}
+									tags={article.tags}
+									sectionLabel={article.sectionLabel}
+									sectionUrl={article.sectionUrl}
+									guardianBaseURL={article.guardianBaseURL}
+									isMatch={true}
+								/>
+							}
+							leftColSize="wide"
+							padContent={false}
+							verticalMargins={false}
+						>
+							<Hide above="leftCol">
+								<ArticleTitle
+									format={format}
+									tags={article.tags}
+									sectionLabel={article.sectionLabel}
+									sectionUrl={article.sectionUrl}
+									guardianBaseURL={article.guardianBaseURL}
+									isMatch={true}
+								/>
+							</Hide>
 
-						<Island priority="feature" defer={{ until: 'visible' }}>
-							<GetMatchNav
-								matchUrl={footballMatchUrl}
-								format={format}
-								headlineString={article.headline}
-								tags={article.tags}
-								webPublicationDateDeprecated={
-									article.webPublicationDateDeprecated
-								}
-							/>
-						</Island>
-					</Section>
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<GetMatchNav
+									matchUrl={footballMatchUrl}
+									format={format}
+									headlineString={article.headline}
+									tags={article.tags}
+									webPublicationDateDeprecated={
+										article.webPublicationDateDeprecated
+									}
+								/>
+							</Island>
+						</Section>
+					)
 				) : (
 					<Section
 						fullWidth={true}
