@@ -49,6 +49,10 @@ export const allowedPageIds: string[] = [
 	'thefilter-us/2026/feb/15/best-winter-boots-women',
 	'thefilter-us/2026/feb/13/best-winter-jackets-men',
 	'thefilter/2026/feb/13/best-vacuum-cleaners-uk-tested',
+	'thefilter/2024/dec/15/best-womens-waterproof-jackets',
+	'thefilter/2026/feb/20/best-drills-power-cordless-uk',
+	'thefilter/2026/feb/19/best-steam-irons-uk-tested',
+	'thefilter/2025/jul/22/best-electric-kettles-uk',
 ];
 
 const isEligibleForSummary = (pageId: string) => {
