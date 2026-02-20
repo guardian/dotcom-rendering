@@ -21,7 +21,7 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-CODE', {
 	stage: 'CODE',
 	domainName: 'article-rendering.code.dev-guardianapis.com',
 	scaling: { minimumInstances: 1, maximumInstances: 3 },
-	instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.MEDIUM),
+	instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.SMALL),
 });
 new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 	guApp: 'article-rendering',
