@@ -2,35 +2,20 @@ import { isInUsa } from '@guardian/commercial-core/geo/geo-utils';
 import type { Admiral, AdmiralEvent } from '@guardian/commercial-core/types';
 import { cmp, getCookie, log } from '@guardian/libs';
 import { useEffect } from 'react';
-import { useAB } from '../lib/useAB';
-
-/**
- * Fetches AB test variant name for Admiral, as there are two variants
- */
-const getAdmiralAbTestVariant = (
-	ab: ReturnType<typeof useAB> | undefined,
-): string | undefined => {
-	if (ab?.api.isUserInVariant('AdmiralAdblockRecovery', 'variant-detect')) {
-		return 'variant-detect';
-	}
-	if (ab?.api.isUserInVariant('AdmiralAdblockRecovery', 'variant-recover')) {
-		return 'variant-recover';
-	}
-	if (ab?.api.isUserInVariant('AdmiralAdblockRecovery', 'control')) {
-		return 'control';
-	}
-	return undefined;
-};
+import { getOphan } from '../client/ophan/ophan';
+import { useBetaAB } from '../lib/useAB';
+import { useConfig } from './ConfigContext';
 
 /**
  * Sends component events to Ophan with the componentType of `AD_BLOCK_RECOVERY`
  * as well as sending the AB test participation
  *
- * @param ab - The AB test API from useAB hook
+ * @param variantName - The AB test variant name
+ * @param renderingTarget - The rendering target to get the correct Ophan instance
  * @param overrides allows overriding / setting values for `action` and `value`
  */
-const recordAdmiralOphanEvent = (
-	ab: ReturnType<typeof useAB> | undefined,
+const recordAdmiralOphanEvent = async (
+	variantName: string | undefined,
 	{
 		action,
 		value,
@@ -38,25 +23,29 @@ const recordAdmiralOphanEvent = (
 		action: 'INSERT' | 'DETECT' | 'VIEW' | 'CLOSE';
 		value?: string;
 	},
+	renderingTarget: 'Web' | 'Apps' = 'Web',
 ) => {
-	const abTestVariant = getAdmiralAbTestVariant(ab);
-
-	window.guardian.ophan?.record({
-		componentEvent: {
-			component: {
-				componentType: 'AD_BLOCK_RECOVERY',
-				id: 'admiral-adblock-recovery',
-			},
-			action,
-			...(value && { value }),
-			...(abTestVariant && {
-				abTest: {
-					name: 'AdmiralAdblockRecovery',
-					variant: abTestVariant,
+	try {
+		const ophan = await getOphan(renderingTarget);
+		ophan.record({
+			componentEvent: {
+				component: {
+					componentType: 'AD_BLOCK_RECOVERY',
+					id: 'admiral-adblock-recovery',
 				},
-			}),
-		},
-	});
+				action,
+				...(value && { value }),
+				...(variantName && {
+					abTest: {
+						name: 'growth-admiral-adblock-recovery',
+						variant: variantName,
+					},
+				}),
+			},
+		});
+	} catch (e) {
+		log('dotcom', '🛡️ Admiral - Error recording Ophan event:', e);
+	}
 };
 
 // Admiral event types
@@ -78,10 +67,11 @@ type CandidateDismissedEvent = {
 };
 
 // Admiral event handlers
-const handleMeasureDetectedEvent = (
-	ab: ReturnType<typeof useAB> | undefined,
+const handleMeasureDetectedEvent = async (
+	variantName: string | undefined,
 	event: AdmiralEvent,
-): void => {
+	renderingTarget: 'Web' | 'Apps',
+): Promise<void> => {
 	const isMeasureDetectedEvent = (
 		e: AdmiralEvent,
 	): e is MeasureDetectedEvent =>
@@ -92,7 +82,7 @@ const handleMeasureDetectedEvent = (
 
 	if (!isMeasureDetectedEvent(event)) {
 		log(
-			'commercial',
+			'dotcom',
 			`🛡️ Admiral - Event is not of expected format of measure.detected ${JSON.stringify(
 				event,
 			)}`,
@@ -101,34 +91,43 @@ const handleMeasureDetectedEvent = (
 	}
 
 	if (event.adblocking) {
-		log(
-			'commercial',
-			'🛡️ Admiral - user has an adblocker and it is enabled',
+		log('dotcom', '🛡️ Admiral - user has an adblocker and it is enabled');
+		await recordAdmiralOphanEvent(
+			variantName,
+			{
+				action: 'DETECT',
+				value: 'blocked',
+			},
+			renderingTarget,
 		);
-		recordAdmiralOphanEvent(ab, { action: 'DETECT', value: 'blocked' });
 	}
 	if (event.whitelisted) {
 		log(
-			'commercial',
+			'dotcom',
 			'🛡️ Admiral - user has seen Engage and subsequently disabled their adblocker',
 		);
-		recordAdmiralOphanEvent(ab, {
-			action: 'DETECT',
-			value: 'whitelisted',
-		});
+		await recordAdmiralOphanEvent(
+			variantName,
+			{
+				action: 'DETECT',
+				value: 'whitelisted',
+			},
+			renderingTarget,
+		);
 	}
 	if (event.subscribed) {
 		log(
-			'commercial',
+			'dotcom',
 			'🛡️ Admiral - user has an active subscription to a transact plan',
 		);
 	}
 };
 
-const handleCandidateShownEvent = (
-	ab: ReturnType<typeof useAB> | undefined,
+const handleCandidateShownEvent = async (
+	variantName: string | undefined,
 	event: AdmiralEvent,
-): void => {
+	renderingTarget: 'Web' | 'Apps',
+): Promise<void> => {
 	const isCandidateShownEvent = (e: AdmiralEvent): e is CandidateShownEvent =>
 		typeof e === 'object' &&
 		'candidateID' in e &&
@@ -136,17 +135,18 @@ const handleCandidateShownEvent = (
 		'candidateGroups' in e;
 
 	if (isCandidateShownEvent(event)) {
-		log(
-			'commercial',
-			`🛡️ Admiral - Launching candidate ${event.candidateID}`,
+		log('dotcom', `🛡️ Admiral - Launching candidate ${event.candidateID}`);
+		await recordAdmiralOphanEvent(
+			variantName,
+			{
+				action: 'VIEW',
+				value: event.candidateID,
+			},
+			renderingTarget,
 		);
-		recordAdmiralOphanEvent(ab, {
-			action: 'VIEW',
-			value: event.candidateID,
-		});
 	} else {
 		log(
-			'commercial',
+			'dotcom',
 			`🛡️ Admiral - Event is not of expected format of candidate.shown ${JSON.stringify(
 				event,
 			)}`,
@@ -154,10 +154,11 @@ const handleCandidateShownEvent = (
 	}
 };
 
-const handleCandidateDismissedEvent = (
-	ab: ReturnType<typeof useAB> | undefined,
+const handleCandidateDismissedEvent = async (
+	variantName: string | undefined,
 	event: AdmiralEvent,
-): void => {
+	renderingTarget: 'Web' | 'Apps',
+): Promise<void> => {
 	const isCandidateDismissedEvent = (
 		e: AdmiralEvent,
 	): e is CandidateDismissedEvent =>
@@ -165,16 +166,20 @@ const handleCandidateDismissedEvent = (
 
 	if (isCandidateDismissedEvent(event)) {
 		log(
-			'commercial',
+			'dotcom',
 			`🛡️ Admiral - Candidate ${event.candidateID} was dismissed`,
 		);
-		recordAdmiralOphanEvent(ab, {
-			action: 'CLOSE',
-			value: event.candidateID,
-		});
+		await recordAdmiralOphanEvent(
+			variantName,
+			{
+				action: 'CLOSE',
+				value: event.candidateID,
+			},
+			renderingTarget,
+		);
 	} else {
 		log(
-			'commercial',
+			'dotcom',
 			`🛡️ Admiral - Event is not of expected format of candidate.dismissed ${JSON.stringify(
 				event,
 			)}`,
@@ -184,50 +189,30 @@ const handleCandidateDismissedEvent = (
 
 const setUpAdmiralEventLogger = (
 	admiral: Admiral,
-	ab: ReturnType<typeof useAB> | undefined,
+	variantName: string | undefined,
+	renderingTarget: 'Web' | 'Apps',
 ): void => {
 	admiral('after', 'measure.detected', function (event) {
-		handleMeasureDetectedEvent(ab, event);
+		void handleMeasureDetectedEvent(variantName, event, renderingTarget);
 	});
 
 	admiral('after', 'candidate.shown', function (event) {
-		handleCandidateShownEvent(ab, event);
+		void handleCandidateShownEvent(variantName, event, renderingTarget);
 	});
 
 	admiral('after', 'candidate.dismissed', function (event) {
-		handleCandidateDismissedEvent(ab, event);
+		void handleCandidateDismissedEvent(variantName, event, renderingTarget);
 	});
 };
 
-// Check if Commercial has already initialized Admiral (bootstrap loaded, not just stub)
-const isComHandlingAdmiral = (): boolean => {
-	// If window.admiral exists and has been initialized by bootstrap (not just the queue stub)
-	// the bootstrap replaces the stub with a proper function that doesn't have .q property
-	type AdmiralStub = Admiral & { q?: any[] };
-	const w = window as Window & { admiral?: AdmiralStub };
-
-	const admiralExists = typeof w.admiral === 'function';
-	const admiralAsRecord = w.admiral as unknown as Record<string, unknown>;
-	const admiralIsOnlyStub = admiralExists && Array.isArray(admiralAsRecord.q);
-	const admiralIsInitialized = admiralExists && !admiralIsOnlyStub;
-	// Check for explicit DCR flag if set
-	const commercialOwnsAdmiral =
-		window.guardian.config.switches.dcrOwnsAdmiral === false;
-
-	if (admiralIsInitialized || commercialOwnsAdmiral) {
-		log(
-			'dotcom',
-			'🛡️ Admiral - Commercial is handling Admiral, skipping commercial initialization',
-		);
-		return true;
-	}
-	return false;
-};
+const testName = 'growth-admiral-adblock-recovery';
 
 export const AdmiralScript = () => {
-	const ab = useAB();
-	const abTestVariant = getAdmiralAbTestVariant(ab);
-	const isInVariant = abTestVariant?.startsWith('variant') ?? false;
+	const { renderingTarget } = useConfig();
+	const abTests = useBetaAB();
+	const isInControlGroup =
+		abTests?.isUserInTestGroup(testName, 'control') ?? false;
+	const variantName = isInControlGroup ? 'control' : undefined;
 
 	useEffect(() => {
 		/**
@@ -235,20 +220,21 @@ export const AdmiralScript = () => {
 		 *
 		 * - Should not run if the CMP is due to show
 		 * - Should only run in the US
-		 * - Should only run if in the variant of the AB test
+		 * - Should only run if in the AB test (control group)
 		 * - Should not run if the gu_hide_support_messaging cookie is set
 		 * - Should not run for content marked as: shouldHideAdverts, shouldHideReaderRevenue, isSensitive
 		 * - Should not run for paid-content sponsorship type (includes Hosted Content)
 		 * - Should not run for certain sections
+		 *
+		 * Control group loads the script but the modal will not be shown.
 		 */
 		const page = window.guardian.config.page;
 
 		const shouldRun =
-			!isComHandlingAdmiral() &&
 			cmp.hasInitialised() &&
 			!cmp.willShowPrivacyMessageSync() &&
 			isInUsa() &&
-			isInVariant &&
+			isInControlGroup &&
 			!getCookie({
 				name: 'gu_hide_support_messaging',
 				shouldMemoize: true,
@@ -270,7 +256,13 @@ export const AdmiralScript = () => {
 		if (!shouldRun) return;
 
 		// Record INSERT Ophan event
-		recordAdmiralOphanEvent(ab, { action: 'INSERT' });
+		void recordAdmiralOphanEvent(
+			variantName,
+			{
+				action: 'INSERT',
+			},
+			renderingTarget,
+		);
 
 		// Initialize Admiral Adblock Recovery
 		log('dotcom', '🛡️ Initialising Admiral Adblock Recovery');
@@ -293,11 +285,11 @@ export const AdmiralScript = () => {
 		log('dotcom', '🛡️ Setting up Admiral event logger');
 
 		// Set up Admiral event logging
-		setUpAdmiralEventLogger(w.admiral, ab);
+		setUpAdmiralEventLogger(w.admiral, variantName, renderingTarget);
 
 		// Set AB test targeting
-		if (abTestVariant) {
-			w.admiral('targeting', 'set', 'guAbTest', abTestVariant);
+		if (variantName) {
+			w.admiral('targeting', 'set', 'guAbTest', variantName);
 		}
 
 		// Load Admiral bootstrap script
@@ -314,7 +306,7 @@ export const AdmiralScript = () => {
 			// Clean up Admiral bootstrap script
 			admiralScript.parentNode?.removeChild(admiralScript);
 		};
-	}, [ab, isInVariant, abTestVariant]);
+	}, [isInControlGroup, variantName, renderingTarget]);
 
 	return null;
 };

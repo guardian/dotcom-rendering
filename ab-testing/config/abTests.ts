@@ -107,6 +107,18 @@ const ABTests: ABTest[] = [
 		groups: ["control", "stacked", "carousel"],
 		shouldForceMetricsCollection: false,
 	},
+	{
+		name: "growth-admiral-adblock-recovery",
+		description: "Test Admiral ad blocker detection and recovery modal",
+		owners: ["growth.dev@guardian.co.uk"],
+		expirationDate: "2027-01-21",
+		type: "client",
+		status: "ON",
+		audienceSize: 10 / 100,
+		audienceSpace: "A",
+		groups: ["control"],
+		shouldForceMetricsCollection: false,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
