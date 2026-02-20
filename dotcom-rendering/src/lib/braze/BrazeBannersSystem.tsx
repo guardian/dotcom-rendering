@@ -168,6 +168,9 @@ export const canShowBrazeBannersSystem = async (
 ): Promise<CanShowResult<BrazeBannersSystemMeta>> => {
 	// First, check if Braze dependencies are satisfied
 	if (!braze) {
+		brazeBannersSystemLogger.info(
+			'Braze instance not available. Cannot show banner.',
+		);
 		return { show: false };
 	}
 
@@ -176,6 +179,9 @@ export const canShowBrazeBannersSystem = async (
 		placementId === BrazeBannersSystemPlacementId.EndOfArticle &&
 		contentType.toLowerCase() === 'interactive'
 	) {
+		brazeBannersSystemLogger.info(
+			'Content type is Interactive. Not showing banner.',
+		);
 		return { show: false };
 	}
 
@@ -187,6 +193,9 @@ export const canShowBrazeBannersSystem = async (
 	 * - Pages where asking for money is deemed inappropriate or disabled by editorial tools.
 	 */
 	if (shouldHideReaderRevenue) {
+		brazeBannersSystemLogger.info(
+			'Reader Revenue messaging is hidden for this user. Not showing banner.',
+		);
 		return { show: false };
 	}
 
@@ -195,6 +204,9 @@ export const canShowBrazeBannersSystem = async (
 	 * so that it only appears on articles in the "Cotton Capital" series.
 	 */
 	if (suppressForTaylorReport(tags)) {
+		brazeBannersSystemLogger.info(
+			'Article is part of the Taylor Report series. Not showing banner.',
+		);
 		return { show: false };
 	}
 
@@ -206,6 +218,9 @@ export const canShowBrazeBannersSystem = async (
 	 */
 	const banner: Banner | null | undefined = braze.getBanner(placementId);
 	if (banner) {
+		brazeBannersSystemLogger.info(
+			`Banner found for placement ID "${placementId}". Showing banner.`,
+		);
 		return {
 			show: true,
 			meta: {
@@ -214,6 +229,9 @@ export const canShowBrazeBannersSystem = async (
 			},
 		};
 	} else {
+		brazeBannersSystemLogger.info(
+			`No banner found for placement ID "${placementId}". Not showing banner.`,
+		);
 		return { show: false };
 	}
 };
