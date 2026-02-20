@@ -4,19 +4,17 @@ import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import type { FEArticle } from '../frontend/feArticle';
 import type { FECricketMatchPage } from '../frontend/feCricketMatchPage';
+import type { FEFootballMatchInfoPage } from '../frontend/feFootballMatchInfoPage';
 import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPage';
-import type { FEFootballMatchPage } from '../frontend/feFootballMatchPage';
 import type { FEFootballTablesPage } from '../frontend/feFootballTablesPage';
 import type { FEFront } from '../frontend/feFront';
-import type { FEHostedContent } from '../frontend/feHostedContent';
 import type { FETagPage } from '../frontend/feTagPage';
 import articleSchema from '../frontend/schemas/feArticle.json';
 import cricketMatchPageSchema from '../frontend/schemas/feCricketMatchPage.json';
+import footballMatchInfoPageSchema from '../frontend/schemas/feFootballMatchInfoPage.json';
 import footballMatchListPageSchema from '../frontend/schemas/feFootballMatchListPage.json';
-import footballMatchPageSchema from '../frontend/schemas/feFootballMatchPage.json';
 import footballTablesPageSchema from '../frontend/schemas/feFootballTablesPage.json';
 import frontSchema from '../frontend/schemas/feFront.json';
-import hostedContentSchema from '../frontend/schemas/feHostedContent.json';
 import tagPageSchema from '../frontend/schemas/feTagPage.json';
 import type { Block } from '../types/blocks';
 import type { FEEditionsCrosswords } from '../types/editionsCrossword';
@@ -55,10 +53,9 @@ const validateFootballTablesPage = ajv.compile<FEFootballTablesPage>(
 const validateCricketMatchPage = ajv.compile<FECricketMatchPage>(
 	cricketMatchPageSchema,
 );
-const validateFootballMatchPage = ajv.compile<FEFootballMatchPage>(
-	footballMatchPageSchema,
+const validateFootballMatchInfoPage = ajv.compile<FEFootballMatchInfoPage>(
+	footballMatchInfoPageSchema,
 );
-const validateHostedContent = ajv.compile<FEHostedContent>(hostedContentSchema);
 
 export const validateAsFEArticle = (data: unknown): FEArticle => {
 	if (validateArticle(data)) return data;
@@ -176,8 +173,8 @@ export const validateAsCricketMatchPageType = (
 
 export const validateAsFootballMatchPageType = (
 	data: unknown,
-): FEFootballMatchPage => {
-	if (validateFootballMatchPage(data)) return data;
+): FEFootballMatchInfoPage => {
+	if (validateFootballMatchInfoPage(data)) return data;
 
 	const url =
 		isObject(data) && isObject(data.config) && isString(data.config.pageId)
@@ -186,18 +183,6 @@ export const validateAsFootballMatchPageType = (
 
 	throw new TypeError(
 		`Unable to validate request body for url ${url}.\n
-            ${JSON.stringify(validateFootballMatchPage.errors, null, 2)}`,
-	);
-};
-
-export const validateAsFEHostedContent = (data: unknown): FEHostedContent => {
-	if (validateHostedContent(data)) return data;
-
-	const url =
-		isObject(data) && isString(data.webURL) ? data.webURL : 'unknown url';
-
-	throw new TypeError(
-		`Unable to validate request body for url ${url}.\n
-            ${JSON.stringify(validateArticle.errors, null, 2)}`,
+            ${JSON.stringify(validateFootballMatchInfoPage.errors, null, 2)}`,
 	);
 };

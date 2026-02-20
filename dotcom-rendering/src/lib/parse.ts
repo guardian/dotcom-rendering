@@ -46,3 +46,13 @@ export const oneOf =
 
 		return f(parsers, []);
 	};
+
+export class URLParseError {}
+
+export const safeParseURL = (s: string): Result<URLParseError, URL> => {
+	try {
+		return ok(new URL(s));
+	} catch {
+		return error(new URLParseError());
+	}
+};

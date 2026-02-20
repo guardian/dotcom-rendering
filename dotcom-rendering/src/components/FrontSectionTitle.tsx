@@ -14,6 +14,7 @@ import { BrandingLabel } from './BrandingLabel';
 type Props = {
 	title: React.ReactNode;
 	collectionBranding: CollectionBranding | undefined;
+	sectionId: string;
 };
 
 const titleStyle = css`
@@ -77,7 +78,11 @@ const aboutThisLinkAdvertisingPartnerStyles = css`
 	color: ${sourcePalette.news[400]};
 `;
 
-export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
+export const FrontSectionTitle = ({
+	title,
+	collectionBranding,
+	sectionId,
+}: Props) => {
 	switch (collectionBranding?.kind) {
 		case 'foundation': {
 			const {
@@ -117,7 +122,7 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 
 			if (isFrontBranding || isContainerBranding) {
 				return (
-					<div css={titleStyle}>
+					<div id={`${sectionId}-title`} css={titleStyle}>
 						{title}
 						<div
 							css={css`
@@ -148,7 +153,7 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 					<Hide until="leftCol">
 						<BrandingLabel branding={collectionBranding.branding} />
 					</Hide>
-					<div css={titleStyle}>
+					<div id={`${sectionId}-title`} css={titleStyle}>
 						<Hide from="leftCol">
 							<BrandingLabel
 								branding={collectionBranding.branding}
@@ -171,7 +176,7 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 				logo.label.toLowerCase() === 'exclusive advertising partner';
 			if (isFrontBranding || isContainerBranding) {
 				return (
-					<div css={titleStyle}>
+					<div id={`${sectionId}-title`} css={titleStyle}>
 						{title}
 						{isAdvertisingPartnerOrExclusive ? (
 							<hr css={advertisingPartnerDottedBorder} />
@@ -212,10 +217,18 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 					</div>
 				);
 			}
-			return <div css={titleStyle}>{title}</div>;
+			return (
+				<div id={`${sectionId}-title`} css={titleStyle}>
+					{title}
+				</div>
+			);
 		}
 		case undefined: {
-			return <div css={titleStyle}>{title}</div>;
+			return (
+				<div id={`${sectionId}-title`} css={titleStyle}>
+					{title}
+				</div>
+			);
 		}
 		default: {
 			assertUnreachable(collectionBranding);

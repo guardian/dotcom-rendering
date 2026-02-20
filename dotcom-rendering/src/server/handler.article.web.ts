@@ -27,6 +27,16 @@ export const handleInteractive: RequestHandler = ({ body }, res) => {
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
+export const handleHostedContent: RequestHandler = ({ body }, res) => {
+	const frontendData = validateAsFEArticle(body);
+	const article = enhanceArticleType(frontendData, 'Web');
+	const { html, prefetchScripts } = renderHtml({
+		article,
+	});
+
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
+};
+
 export const handleBlocks: RequestHandler = ({ body }, res) => {
 	const {
 		blocks,
@@ -60,6 +70,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		shouldHideAds,
 		pageId,
 		serverSideABTests,
+		switches,
 	});
 	const html = renderBlocks({
 		blocks: enhancedBlocks,

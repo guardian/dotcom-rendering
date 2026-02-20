@@ -9,7 +9,7 @@ export const isInteractive = (design: ArticleDesign): boolean =>
 
 export const interactiveLegacyFigureClasses = (
 	elementType: string,
-	role?: RoleType,
+	role?: RoleType | 'fullWidth',
 ): string => {
 	const elementClasses: { [key: string]: string } = {
 		'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':

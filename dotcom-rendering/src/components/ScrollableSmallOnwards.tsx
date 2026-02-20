@@ -27,31 +27,6 @@ type Props = {
 	headingUrl?: string;
 };
 
-const cardsContainerStyles = css`
-	${grid.column.centre}
-	position: relative;
-	${from.desktop} {
-		${grid.between('centre-column-start', 'right-column-end')}
-	}
-	${from.leftCol} {
-		${grid.between('centre-column-start', 'right-column-end')}
-	}
-	${from.leftCol} {
-		&::before {
-			content: '';
-			position: absolute;
-			left: -11px;
-			top: 0;
-			bottom: 0;
-			width: 1px;
-			background-color: ${palette('--onward-content-border')};
-		}
-		ol {
-			padding-left: 0;
-		}
-	}
-`;
-
 export const ScrollableSmallOnwards = (props: Props) => {
 	const trails = props.trails.slice(0, 4); // Limit to 4 cards
 	if (trails.length !== 4) return null;
@@ -63,18 +38,7 @@ export const ScrollableSmallOnwards = (props: Props) => {
 		<section
 			data-component={props.onwardsSource}
 			data-link={props.onwardsSource}
-			css={css`
-				${grid.paddedContainer}
-				background-color: ${palette('--onward-background')};
-				padding-top: ${space[1]}px;
-				padding-bottom: ${space[6]}px;
-				${from.tablet} {
-					padding-top: 0;
-					border-left: 1px solid ${palette('--onward-content-border')};
-					border-right: 1px solid
-						${palette('--onward-content-border')};
-				}
-			`}
+			css={containerStyles}
 		>
 			<StraightLines
 				cssOverrides={[
@@ -97,7 +61,7 @@ export const ScrollableSmallOnwards = (props: Props) => {
 					carouselLength={Math.ceil(trails.length / 2)}
 					visibleCarouselSlidesOnMobile={1}
 					visibleCarouselSlidesOnTablet={2}
-					sectionId={'some-section-id-12'}
+					sectionId={props.onwardsSource}
 					shouldStackCards={{
 						desktop: true,
 						mobile: true,
@@ -136,6 +100,40 @@ export const ScrollableSmallOnwards = (props: Props) => {
 		</section>
 	);
 };
+
+const containerStyles = css`
+	${grid.paddedContainer}
+	background-color: ${palette('--onward-background')};
+	padding-top: ${space[1]}px;
+	padding-bottom: ${space[6]}px;
+	${from.tablet} {
+		padding-top: 0;
+		border-left: 1px solid ${palette('--onward-content-border')};
+		border-right: 1px solid ${palette('--onward-content-border')};
+	}
+`;
+
+const cardsContainerStyles = css`
+	${grid.column.centre}
+	position: relative;
+	${from.desktop} {
+		${grid.between('centre-column-start', 'right-column-end')}
+	}
+	${from.leftCol} {
+		&::before {
+			content: '';
+			position: absolute;
+			left: -11px;
+			top: 0;
+			bottom: 0;
+			width: 1px;
+			background-color: ${palette('--onward-content-border')};
+		}
+		ul {
+			padding-left: 0;
+		}
+	}
+`;
 
 const Title = ({
 	title,
@@ -236,5 +234,6 @@ const getDefaultCardProps = (
 		isOnwardContent: true,
 		showLivePlayable: false,
 	};
+
 	return defaultProps;
 };

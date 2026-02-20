@@ -705,7 +705,9 @@ export const SelfHostedVideo = ({
 				playerState === 'PAUSED_BY_INTERSECTION_OBSERVER' ||
 				(hasPageBecomeActive && playerState === 'PAUSED_BY_BROWSER'))
 		) {
-			setHasPageBecomeActive(false);
+			if (hasPageBecomeActive) {
+				setHasPageBecomeActive(false);
+			}
 			void playVideo();
 		} else if (playerState === 'PLAYING' && isInView === false) {
 			void pauseVideo('PAUSED_BY_INTERSECTION_OBSERVER');

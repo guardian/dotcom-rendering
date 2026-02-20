@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import { between, from, space, until } from '@guardian/source/foundations';
-import { Hide, Link, SvgCamera } from '@guardian/source/react-components';
+import { Hide, Link } from '@guardian/source/react-components';
 import {
 	ArticleDesign,
 	type ArticleFormat,
@@ -27,7 +27,7 @@ import type {
 	DCRSupportingContent,
 } from '../../types/front';
 import type { CardMediaType } from '../../types/layout';
-import type { MainMedia } from '../../types/mainMedia';
+import type { ArticleMedia, MainMedia } from '../../types/mainMedia';
 import type { OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
 import { BrandingLabel } from '../BrandingLabel';
@@ -95,7 +95,15 @@ export type Props = {
 	trailText?: string;
 	avatarUrl?: string;
 	showClock?: boolean;
+	/**
+	 * Media displayed on this card
+	 */
 	mainMedia?: MainMedia;
+	/**
+	 * The main media from the target article (used for pills/metadata)
+	 * Can differ from mainMedia if the card has replacement media.
+	 */
+	articleMedia?: ArticleMedia;
 	/**
 	 * For interactive media (e.g., video or slideshow), certain card sizes are restricted from displaying
 	 * the interactive content because controls may be unavailable or inaccessible at those sizes.
@@ -141,7 +149,7 @@ export type Props = {
 	/** The index of the card in a carousel */
 	index?: number;
 	/**
-	 * Useful for videos. Has the form: collection-{collection ID}-{card grouping type}-{card index}
+	 * Useful for IDs. Has the form: collection-{collection ID}-{card grouping type}-{card index}
 	 * For example, the first splash card in the second collection would be: "collection-1-splash-0"
 	 */
 	uniqueId?: string;
@@ -152,7 +160,7 @@ export type Props = {
 	showTopBarDesktop?: boolean;
 	showTopBarMobile?: boolean;
 	trailTextSize?: TrailTextSize;
-	/** A kicker image is seperate to the main media and renders as part of the kicker */
+	/** A kicker image is separate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
 	subtitleSize?: SubtitleSize;
 	/** Determines if the headline should be positioned within the content or outside the content */
@@ -337,14 +345,6 @@ const decideSublinkPosition = (
 	return alignment === 'vertical' ? 'inner' : 'outer';
 };
 
-const liveBulletStyles = css`
-	width: 9px;
-	height: 9px;
-	border-radius: 50%;
-	background-color: ${palette('--pill-bullet')};
-	margin-right: ${space[1]}px;
-`;
-
 export const Card = ({
 	linkTo,
 	format,
@@ -407,6 +407,7 @@ export const Card = ({
 	isStorylines = false,
 	starRatingSize = 'small',
 	isInPersonalisationVariant,
+	articleMedia,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -489,85 +490,6 @@ export const Card = ({
 			</Link>
 		);
 
-	const MediaOrNewsletterPill = () => (
-		<div
-			css={css`
-				margin-top: auto;
-				display: flex;
-				${isStorylines &&
-				`
-					flex-direction: column;
-					gap: ${space[1]}px;
-					align-items: flex-start;
-				`}
-			`}
-		>
-			{/* Usually, we either display the pill or the footer,
-				but if the card appears in the storylines section on tag pages
-				then we do want to display the date on these cards as well as the media pill.
-			*/}
-			{isStorylines && (
-				<CardFooter
-					format={format}
-					age={decideAge()}
-					commentCount={<CommentCount />}
-					cardBranding={
-						isOnwardContent ? <LabsBranding /> : undefined
-					}
-					showLivePlayable={showLivePlayable}
-				/>
-			)}
-
-			{mainMedia?.type === 'YoutubeVideo' && isVideoArticle && (
-				<>
-					{mainMedia.isLive ? (
-						<Pill
-							content="Live"
-							icon={<div css={liveBulletStyles} />}
-						/>
-					) : (
-						<Pill
-							content={secondsToDuration(mainMedia.duration)}
-							icon={<SvgMediaControlsPlay width={18} />}
-							prefix="Video"
-						/>
-					)}
-				</>
-			)}
-			{mainMedia?.type === 'Audio' && (
-				<Pill
-					content={mainMedia.duration}
-					icon={<SvgMediaControlsPlay width={18} />}
-					prefix="Podcast"
-				/>
-			)}
-			{mainMedia?.type === 'Gallery' && (
-				<Pill
-					content={mainMedia.count}
-					icon={<SvgCamera />}
-					prefix="Gallery"
-				/>
-			)}
-			{mainMedia?.type === 'SelfHostedVideo' &&
-				(format.design === ArticleDesign.Video ? (
-					<Pill
-						content=""
-						icon={<SvgMediaControlsPlay width={18} />}
-						prefix="Video"
-					/>
-				) : format.design === ArticleDesign.Audio ? (
-					<Pill
-						content=""
-						icon={<SvgMediaControlsPlay width={18} />}
-						prefix="Podcast"
-					/>
-				) : format.design === ArticleDesign.Gallery ? (
-					<Pill content="" icon={<SvgCamera />} prefix="Gallery" />
-				) : null)}
-			{isNewsletter && <Pill content="Newsletter" />}
-		</div>
-	);
-
 	if (snapData?.embedHtml) {
 		return (
 			<SnapCssSandbox snapData={snapData}>
@@ -589,12 +511,10 @@ export const Card = ({
 		isOnwardContent && onwardsSource === 'more-galleries';
 
 	/**
--	 * Media cards have contrasting background colours. We add additional
-* padding to these cards to keep the text readable.
--     */
+	 * Media cards have contrasting background colours. We add additional
+	 * padding to these cards to keep the text readable.
+	 */
 	const isMediaCardOrNewsletter = isMediaCard(format) || isNewsletter;
-
-	const showPill = isMediaCardOrNewsletter && !isGallerySecondaryOnward;
 
 	const media = getMedia({
 		imageUrl: image?.src,
@@ -1300,32 +1220,23 @@ export const Card = ({
 								/>
 							)}
 
-							{!isOpinionCardWithAvatar && (
-								<>
-									{showPill ? (
-										<>
-											{!!branding &&
-												format.theme ===
-													ArticleSpecial.Labs &&
-												isOnwardContent && (
-													<LabsBranding />
-												)}
-											<MediaOrNewsletterPill />
-										</>
-									) : (
-										<CardFooter
-											format={format}
-											age={decideAge()}
-											commentCount={<CommentCount />}
-											cardBranding={
-												isOnwardContent ? (
-													<LabsBranding />
-												) : undefined
-											}
-											showLivePlayable={showLivePlayable}
-										/>
-									)}
-								</>
+							{!isOpinionCardWithAvatar && !showLivePlayable && (
+								<CardFooter
+									format={format}
+									age={decideAge()}
+									commentCount={<CommentCount />}
+									cardBranding={
+										isOnwardContent ? (
+											<LabsBranding />
+										) : undefined
+									}
+									media={
+										!isGallerySecondaryOnward
+											? articleMedia
+											: undefined
+									}
+									isNewsletter={isNewsletter}
+								/>
 							)}
 							{showLivePlayable &&
 								liveUpdatesPosition === 'inner' && (
@@ -1410,12 +1321,11 @@ export const Card = ({
 
 				{decideOuterSublinks()}
 
-				{isOpinionCardWithAvatar && (
+				{isOpinionCardWithAvatar && !showLivePlayable && (
 					<CardFooter
 						format={format}
 						age={decideAge()}
 						commentCount={<CommentCount />}
-						showLivePlayable={showLivePlayable}
 						shouldReserveSpace={{
 							mobile: avatarPosition.mobile === 'bottom',
 							desktop: avatarPosition.desktop === 'bottom',

@@ -100,8 +100,8 @@ type Props = {
 	offsetBottomPaddingOnDivider?: boolean;
 	/** Overrides the vertical divider colour */
 	verticalDividerColour?: string;
-
 	isVisible?: boolean;
+	isSlideInCarousel?: boolean;
 };
 
 export const LI = ({
@@ -117,6 +117,7 @@ export const LI = ({
 	offsetBottomPaddingOnDivider = false,
 	verticalDividerColour = palette('--section-border'),
 	isVisible = true,
+	isSlideInCarousel = false,
 }: Props) => {
 	// Decide sizing
 	const sizeStyles = decideSize(percentage, stretch);
@@ -138,6 +139,10 @@ export const LI = ({
 				snapAlignStart && snapAlignStartStyles,
 				{ visibility: isVisible ? 'visible' : 'hidden' },
 			]}
+			{...(isSlideInCarousel && {
+				role: 'group',
+				'aria-roledescription': 'slide',
+			})}
 		>
 			{children}
 		</li>

@@ -40,6 +40,19 @@ export const allowedPageIds: string[] = [
 	'thefilter-us/2025/dec/14/best-cordless-leaf-blowers-battery-powered',
 	'thefilter-us/2026/jan/07/best-packing-cubes',
 	'thefilter-us/2026/jan/09/best-induction-cookware',
+	'thefilter/2025/feb/12/best-flower-delivery',
+	'thefilter-us/2026/feb/06/best-personal-travel-item-backpacks-us',
+	'thefilter/2024/nov/21/best-coffee-machines',
+	'thefilter/2026/feb/04/best-soup-maker-uk',
+	'thefilter-us/2025/oct/01/best-best-bath-towels-us',
+	'thefilter/2025/apr/03/best-walking-pads-under-desk-treadmills-uk',
+	'thefilter-us/2026/feb/15/best-winter-boots-women',
+	'thefilter-us/2026/feb/13/best-winter-jackets-men',
+	'thefilter/2026/feb/13/best-vacuum-cleaners-uk-tested',
+	'thefilter/2024/dec/15/best-womens-waterproof-jackets',
+	'thefilter/2026/feb/20/best-drills-power-cordless-uk',
+	'thefilter/2026/feb/19/best-steam-irons-uk-tested',
+	'thefilter/2025/jul/22/best-electric-kettles-uk',
 ];
 
 const isEligibleForSummary = (pageId: string) => {
@@ -180,17 +193,20 @@ export const enhanceProductSummary =
 		pageId,
 		serverSideABTests,
 		renderingTarget,
+		filterAtAGlanceEnabled,
 	}: {
 		pageId: string;
 		serverSideABTests?: Record<string, string>;
 		renderingTarget: RenderingTarget;
+		filterAtAGlanceEnabled: boolean;
 	}) =>
 	(elements: FEElement[]): FEElement[] => {
 		const abTestVariant =
 			serverSideABTests?.['thefilter-at-a-glance-redesign'];
 
-		// do nothing if article is not on allow list / not in the test / variant is 'control' / renderingTarget is Apps
+		// do nothing if article is not on allow list / not in the test / variant is 'control' / renderingTarget is Apps / filterAtAGlance switch is OFF
 		if (
+			filterAtAGlanceEnabled &&
 			abTestVariant &&
 			isCarouselOrStacked(abTestVariant) &&
 			isEligibleForSummary(pageId) &&

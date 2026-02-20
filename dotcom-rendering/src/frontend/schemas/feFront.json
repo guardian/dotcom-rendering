@@ -3863,6 +3863,10 @@
                         "link",
                         "src"
                     ]
+                },
+                "hostedCampaignColour": {
+                    "description": "Only applies for Hosted Content",
+                    "type": "string"
                 }
             },
             "required": [
@@ -3925,6 +3929,9 @@
                 "FeatureDesign",
                 "FullPageInteractiveDesign",
                 "GalleryDesign",
+                "HostedArticleDesign",
+                "HostedGalleryDesign",
+                "HostedVideoDesign",
                 "InteractiveDesign",
                 "InterviewDesign",
                 "LetterDesign",
@@ -4701,6 +4708,7 @@
                         "expired",
                         "height",
                         "id",
+                        "isLive",
                         "origin",
                         "title",
                         "type",

@@ -501,6 +501,7 @@ const CarouselCard = ({
 				padSidesMobileOverride: space[2],
 				padSidesOverride: space[2],
 			})}
+			isSlideInCarousel={true}
 		>
 			<Card
 				linkTo={linkTo}
@@ -917,6 +918,9 @@ export const Carousel = ({
 					]}
 					data-component={onwardsSource}
 					data-link={formatAttrString(heading)}
+					role="region"
+					aria-roledescription="carousel"
+					aria-label={heading}
 				>
 					<Header
 						heading={heading}
@@ -953,8 +957,8 @@ export const Carousel = ({
 								starRating,
 							} = trail;
 
-							// Don't try to render cards that have no publication date. This property is technically optional
-							// but we rarely if ever expect it not to exist
+							// Don't try to render cards that have no publication date. This property
+							// is technically optional but we rarely if ever expect it not to exist.
 							if (!webPublicationDate) return null;
 
 							const image = trailImage && {

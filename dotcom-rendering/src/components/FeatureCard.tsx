@@ -26,7 +26,7 @@ import type {
 	DCRSupportingContent,
 } from '../types/front';
 import type { CardMediaType } from '../types/layout';
-import type { MainMedia } from '../types/mainMedia';
+import type { ArticleMedia, MainMedia } from '../types/mainMedia';
 import { BrandingLabel } from './BrandingLabel';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
@@ -47,8 +47,6 @@ import { StarRating } from './StarRating/StarRating';
 import { SupportingContent } from './SupportingContent';
 import { WaveForm } from './WaveForm';
 import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
-
-export type Position = 'inner' | 'outer' | 'none';
 
 const baseCardStyles = css`
 	display: flex;
@@ -170,18 +168,12 @@ const overlayStyles = css`
 	flex-direction: column;
 	text-align: start;
 	gap: ${space[1]}px;
-	padding: 64px ${space[2]}px ${space[2]}px;
-	backdrop-filter: blur(12px) brightness(0.5);
-	@supports not (backdrop-filter: blur(12px)) {
-		background-color: ${transparentColour(sourcePalette.neutral[10], 0.7)};
-	}
-	${overlayMaskGradientStyles('180deg')};
+	padding: ${space[9]}px ${space[2]}px ${space[2]}px;
 
 	/*
 	 * Ensure the waveform is behind the other elements, e.g. headline, pill.
 	 * Links define their own z-index.
 	 */
-
 	> :not(.waveform):not(a) {
 		z-index: 1;
 	}
@@ -189,12 +181,23 @@ const overlayStyles = css`
 
 const immersiveOverlayStyles = css`
 	${from.tablet} {
-		height: 100%;
-		/**
-		* Why 48px right padding?
-		* 48px is to point at which the gradient can go behind the content whilst maintaining accessibility.
-		*/
 		padding: ${space[2]}px ${space[12]}px ${space[2]}px ${space[2]}px;
+		height: 100%;
+	}
+`;
+
+const blurStyles = css`
+	position: absolute;
+	inset: 0;
+	backdrop-filter: blur(12px) brightness(0.5);
+	@supports not (backdrop-filter: blur(12px)) {
+		background-color: ${transparentColour(sourcePalette.neutral[10], 0.7)};
+	}
+	${overlayMaskGradientStyles('180deg')};
+`;
+
+const immersiveBlurStyles = css`
+	${from.tablet} {
 		${overlayMaskGradientStyles('270deg')}
 	}
 `;
@@ -214,9 +217,9 @@ const nonImmersivePodcastImageStyles = css`
 	position: absolute;
 	/**
 	* Displays 8px above the text.
-	* desired space above text (8px) - padding-top of text container (64px) = -56px
+	* desired space above text (8px) - padding-top of text container (36px) = -28px
 	*/
-	bottom: -${space[14]}px;
+	bottom: -28px;
 	left: ${space[2]}px;
 `;
 
@@ -245,7 +248,7 @@ const waveformStyles = css`
 	bottom: 0;
 	left: 0;
 	z-index: 0;
-	height: 64px;
+	height: 40px;
 	max-width: 100%;
 	overflow: hidden;
 	opacity: 0.3;
@@ -297,7 +300,7 @@ const getMedia = ({
 
 const renderWaveform = (duration: string, bars: number) => (
 	<div css={waveformStyles} className="waveform">
-		<WaveForm seed={duration} height={64} bars={bars} barWidth={2} />
+		<WaveForm seed={duration} height={40} bars={bars} barWidth={2} />
 	</div>
 );
 
@@ -338,7 +341,15 @@ export type Props = {
 	imageSize: MediaSizeType;
 	imageLoading: Loading;
 	showClock?: boolean;
+	/**
+	 * Media displayed on this card
+	 */
 	mainMedia?: MainMedia;
+	/**
+	 * The main media from the target article (used for pills/metadata)
+	 * Can differ from mainMedia if the card has replacement media.
+	 */
+	articleMedia?: ArticleMedia;
 	trailText?: string;
 	/**
 	 * Note YouTube recommends a minimum width of 480px @see https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-youtube-player-size
@@ -420,10 +431,9 @@ export const FeatureCard = ({
 	isImmersive = false,
 	isStorylines = false,
 	starRatingSize,
+	articleMedia,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
-
-	const isVideoArticle = format.design === ArticleDesign.Video;
 
 	/**
 	 * Determine which type of media to use for the card.
@@ -522,7 +532,6 @@ export const FeatureCard = ({
 										altText={headlineText}
 										kickerText={kickerText}
 										trailText={trailText}
-										isVideoArticle={isVideoArticle}
 										hidePillOnMobile={false}
 										iconSizeOnDesktop="large"
 										iconSizeOnMobile="large"
@@ -538,6 +547,7 @@ export const FeatureCard = ({
 										byline={byline}
 										showByline={showByline}
 										isLive={media.mainMedia.isLive}
+										articleMedia={articleMedia}
 									/>
 								</Island>
 							</div>
@@ -663,6 +673,13 @@ export const FeatureCard = ({
 												false,
 											)
 										))}
+									<div
+										css={[
+											blurStyles,
+											isImmersive && immersiveBlurStyles,
+										]}
+									/>
+
 									<div
 										css={[
 											overlayStyles,
@@ -792,9 +809,8 @@ export const FeatureCard = ({
 													/>
 												) : undefined
 											}
-											showLivePlayable={false}
 											isNewsletter={isNewsletter}
-											mainMedia={mainMedia}
+											media={articleMedia}
 										/>
 
 										{!isImmersive &&

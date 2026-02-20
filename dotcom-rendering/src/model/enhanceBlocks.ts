@@ -1,6 +1,7 @@
 import { isUndefined } from '@guardian/libs';
 import { type ArticleFormat } from '../lib/articleFormat';
 import type { Block } from '../types/blocks';
+import type { Switches } from '../types/config';
 import type {
 	FEElement,
 	ImageBlockElement,
@@ -17,6 +18,7 @@ import { enhanceDots } from './enhance-dots';
 import { enhanceEmbeds } from './enhance-embeds';
 import { enhanceH2s } from './enhance-H2s';
 import { enhanceElementsImages, enhanceImages } from './enhance-images';
+import { enhanceInteractiveAtomElements } from './enhance-interactive-atom';
 import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceProductSummary } from './enhance-product-summary';
@@ -37,6 +39,7 @@ type Options = {
 	shouldHideAds: boolean;
 	pageId: string;
 	serverSideABTests?: Record<string, string>;
+	switches?: Switches;
 };
 
 const enhanceNewsletterSignup =
@@ -78,6 +81,7 @@ export const enhanceElements =
 			),
 			enhanceDividers,
 			enhanceH2s,
+			enhanceInteractiveAtomElements(format),
 			enhanceInteractiveContentsElements,
 			enhanceBlockquotes(format),
 			enhanceDots,
@@ -101,6 +105,7 @@ export const enhanceElements =
 				pageId: options.pageId,
 				serverSideABTests: options.serverSideABTests,
 				renderingTarget: options.renderingTarget,
+				filterAtAGlanceEnabled: !!options.switches?.filterAtAGlance,
 			}),
 		].reduce(
 			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),

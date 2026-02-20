@@ -2449,7 +2449,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "enum": [
+                        "fullWidth",
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -4900,6 +4909,9 @@
                 "FeatureDesign",
                 "FullPageInteractiveDesign",
                 "GalleryDesign",
+                "HostedArticleDesign",
+                "HostedGalleryDesign",
+                "HostedVideoDesign",
                 "InteractiveDesign",
                 "InterviewDesign",
                 "LetterDesign",
@@ -5441,6 +5453,10 @@
                         "link",
                         "src"
                     ]
+                },
+                "hostedCampaignColour": {
+                    "description": "Only applies for Hosted Content",
+                    "type": "string"
                 }
             },
             "required": [
@@ -5569,6 +5585,7 @@
                         "expired",
                         "height",
                         "id",
+                        "isLive",
                         "origin",
                         "title",
                         "type",

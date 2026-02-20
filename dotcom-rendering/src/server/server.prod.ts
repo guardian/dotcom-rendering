@@ -6,24 +6,25 @@ import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslet
 import {
 	handleAppsArticle,
 	handleAppsBlocks,
+	handleAppsHostedContent,
 	handleAppsInteractive,
 } from './handler.article.apps';
 import {
 	handleArticle,
 	handleBlocks,
+	handleHostedContent,
 	handleInteractive,
 } from './handler.article.web';
 import { handleAppsAssets } from './handler.assets.apps';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import { handleFront, handleTagPage } from './handler.front.web';
-import { handleAppsHostedContent } from './handler.hostedContent.apps';
-import { handleHostedContent } from './handler.hostedContent.web';
 import {
 	handleCricketMatchPage,
 	handleFootballMatchListPage,
 	handleFootballMatchPage,
 	handleFootballTablesPage,
 } from './handler.sportDataPage.web';
+import { handleAppsThrasher } from './handler.thrasher.apps';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { logger } from './lib/logging';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
@@ -66,6 +67,7 @@ export const prodServer = (): void => {
 	app.post('/AppsBlocks', handleAppsBlocks);
 	app.post('/EditionsCrossword', handleEditionsCrossword);
 	app.post('/AppsHostedContent', handleAppsHostedContent);
+	app.post('/AppsComponent/thrasher/:name', handleAppsThrasher);
 
 	app.get('/assets/rendered-items-assets', handleAppsAssets);
 
