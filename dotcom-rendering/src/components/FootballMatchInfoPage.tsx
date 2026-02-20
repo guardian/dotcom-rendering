@@ -42,7 +42,7 @@ export const FootballMatchInfoPage = ({
 						},
 					}}
 					edition={edition}
-					matchHeaderURL={matchHeaderUrl}
+					matchHeaderURL={matchHeaderUrl.href}
 				/>
 			</Island>
 			<div css={bodyGridStyles}>

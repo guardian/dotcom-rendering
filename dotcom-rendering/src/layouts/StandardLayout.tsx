@@ -24,6 +24,7 @@ import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DirectoryPageNav } from '../components/DirectoryPageNav';
 import { DiscussionLayout } from '../components/DiscussionLayout';
+import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.importable';
 import { FootballMatchInfoWrapper } from '../components/FootballMatchInfoWrapper.importable';
 import { Footer } from '../components/Footer';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
@@ -56,6 +57,7 @@ import {
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
+import type { EditionId } from '../lib/edition';
 import { safeParseURL } from '../lib/parse';
 import { parse } from '../lib/slot-machine-flags';
 import { useBetaAB } from '../lib/useAB';
@@ -69,10 +71,12 @@ const StandardGrid = ({
 	children,
 	isMatchReport,
 	isMedia,
+	isInFootballRedesignVariantGroup,
 }: {
 	children: React.ReactNode;
 	isMatchReport: boolean;
 	isMedia: boolean;
+	isInFootballRedesignVariantGroup: boolean;
 }) => (
 	<div
 		css={css`
@@ -109,8 +113,11 @@ const StandardGrid = ({
 					${isMatchReport
 						? css`
 								grid-template-areas:
+									${!isInFootballRedesignVariantGroup &&
+									`
 									'title  border  matchNav   . right-column'
-									'title  border  matchtabs  . right-column'
+             						'title  border  matchtabs  . right-column'
+									`}
 									'title  border  headline   . right-column'
 									'.      border  standfirst . right-column'
 									'meta   border  media      . right-column'
@@ -152,8 +159,11 @@ const StandardGrid = ({
 				${isMatchReport
 					? css`
 							grid-template-areas:
+								${!isInFootballRedesignVariantGroup &&
+								`
 								'title  border  matchNav     right-column'
 								'title  border  matchtabs    right-column'
+								`}
 								'title  border  headline     right-column'
 								'.      border  standfirst   right-column'
 								'meta   border  media        right-column'
@@ -192,8 +202,11 @@ const StandardGrid = ({
 				${isMatchReport
 					? css`
 							grid-template-areas:
+								${!isInFootballRedesignVariantGroup &&
+								`
 								'matchNav      right-column'
 								'matchtabs	   right-column'
+								`}
 								'title         right-column'
 								'headline      right-column'
 								'standfirst    right-column'
@@ -232,8 +245,11 @@ const StandardGrid = ({
 				${isMatchReport
 					? css`
 							grid-template-areas:
+								${!isInFootballRedesignVariantGroup &&
+								`
 								'matchNav'
 								'matchtabs'
+								`}
 								'title'
 								'headline'
 								'standfirst'
@@ -271,8 +287,11 @@ const StandardGrid = ({
 				${isMatchReport
 					? css`
 							grid-template-areas:
+								${!isInFootballRedesignVariantGroup &&
+								`
 								'matchNav'
 								'matchtabs'
+								`}
 								'media'
 								'title'
 								'headline'
@@ -348,13 +367,14 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 		editionId,
 	} = article;
 
-	const abTests = useBetaAB();
-	const isInFootballRedesignVariantGroup =
-		abTests?.isUserInTestGroup('webex-football-redesign', 'variant') ??
-		false;
-
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
+
+	const abTests = useBetaAB();
+	const isInFootballRedesignVariantGroup =
+		(abTests?.isUserInTestGroup('webex-football-redesign', 'variant') &&
+			isWeb) ??
+		false;
 
 	const showBodyEndSlot =
 		isWeb &&
@@ -373,6 +393,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const footballMatchStatsUrl =
 		article.matchType === 'FootballMatchType'
 			? article.matchStatsUrl
+			: undefined;
+
+	const footballMatchHeaderUrl =
+		article.matchType === 'FootballMatchType'
+			? article.matchHeaderUrl
 			: undefined;
 
 	const isMatchReport =
@@ -442,6 +467,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				</Stuck>
 			)}
 
+			<MatchHeaderContainer
+				isMatchReport={isMatchReport}
+				isInVariantGroup={isInFootballRedesignVariantGroup}
+				footballMatchHeaderUrl={footballMatchHeaderUrl}
+				editionId={editionId}
+			/>
+
 			{isWeb && renderAds && hasSurveyAd && (
 				<AdSlot position="survey" display={format.display} />
 			)}
@@ -469,6 +501,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<StandardGrid
 						isMatchReport={isMatchReport}
 						isMedia={isMedia}
+						isInFootballRedesignVariantGroup={
+							isInFootballRedesignVariantGroup
+						}
 					>
 						<GridItem area="matchNav" element="aside">
 							<div css={maxWidth}>
@@ -1093,7 +1128,44 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	);
 };
 
-export const MatchInfoContainer = ({
+const MatchHeaderContainer = ({
+	isMatchReport,
+	isInVariantGroup,
+	footballMatchHeaderUrl,
+	editionId,
+}: {
+	isMatchReport: boolean;
+	isInVariantGroup: boolean;
+	footballMatchHeaderUrl: string | undefined;
+	editionId: EditionId;
+}) => {
+	if (isMatchReport && isInVariantGroup && !!footballMatchHeaderUrl) {
+		const parsedUrl = safeParseURL(footballMatchHeaderUrl);
+		if (!parsedUrl.ok) {
+			log(
+				'dotcom',
+				new Error(
+					`Failed to parse match header URL: ${footballMatchHeaderUrl}`,
+				),
+			);
+
+			return null;
+		}
+		return (
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<FootballMatchHeaderWrapper
+					initialTab="report"
+					edition={editionId}
+					matchHeaderURL={footballMatchHeaderUrl}
+				/>
+			</Island>
+		);
+	}
+
+	return null;
+};
+
+const MatchInfoContainer = ({
 	isMatchReport,
 	isInVariantGroup,
 	footballMatchUrl,
