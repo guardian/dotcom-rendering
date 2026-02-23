@@ -1,4 +1,6 @@
+import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
+import { space } from '@guardian/source/foundations';
 import { safeParse } from 'valibot';
 import type { FootballMatchStats } from '../footballMatchStats';
 import { parseMatchStats } from '../footballMatchStats';
@@ -36,7 +38,16 @@ export const FootballMatchInfoWrapper = ({
 	}
 
 	if (data) {
-		return <FootballMatchInfo matchStats={data} />;
+		return (
+			<div
+				css={css`
+					padding-bottom: ${space[5]}px;
+					padding-top: ${space[1]}px;
+				`}
+			>
+				<FootballMatchInfo matchStats={data} />
+			</div>
+		);
 	}
 
 	return null;
