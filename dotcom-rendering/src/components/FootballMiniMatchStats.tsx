@@ -17,6 +17,7 @@ import type { Result } from '../lib/result';
 import { error, fromValibot, ok } from '../lib/result';
 import { palette } from '../palette';
 import { FootballMatchStat } from './FootballMatchStat';
+import { Placeholder } from './Placeholder';
 
 const containerCss = css`
 	display: flex;
@@ -51,8 +52,16 @@ export const FootballMiniMatchStats = (props: Props) => {
 	);
 
 	if (data === undefined) {
-		// TODO: Add placeholder
-		return null;
+		return (
+			<Placeholder
+				heights={
+					new Map([
+						['mobile', 159],
+						['desktop', 197],
+					])
+				}
+			/>
+		);
 	}
 
 	const homeTeam = {
