@@ -74,14 +74,11 @@ const globalOlStyles = () => css`
 	}
 `;
 
-const hostedContentH2Styles = (design: ArticleDesign) => css`
-	${design === ArticleDesign.HostedArticle &&
-	`
-		h2 {
-			${textSansBold20};
-			margin-bottom: ${remSpace[2]};
-		}
-	`}
+const hostedContentH2Styles = css`
+	h2 {
+		${textSansBold20};
+		margin-bottom: ${remSpace[2]};
+	}
 `;
 
 const globalH3Styles = (display: ArticleDisplay) => css`
@@ -156,7 +153,10 @@ export const ArticleBody = ({
 	const isInteractiveContent =
 		format.design === ArticleDesign.Interactive ||
 		format.design === ArticleDesign.Crossword;
-	const isHostedContent = format.design === ArticleDesign.HostedArticle;
+	const isHostedContent =
+		format.design === ArticleDesign.HostedArticle ||
+		format.design === ArticleDesign.HostedVideo ||
+		format.design === ArticleDesign.HostedAudio;
 	const language = decideLanguage(lang);
 	const languageDirection = decideLanguageDirection(isRightToLeftLang);
 	const hasObserverPublicationTag = tags.find(
@@ -242,7 +242,7 @@ export const ArticleBody = ({
 				css={[
 					`margin-top: ${remSpace[3]}`,
 					isInteractiveContent ? null : bodyPadding,
-					isHostedContent && hostedContentH2Styles(format.design),
+					isHostedContent && hostedContentH2Styles,
 					globalH3Styles(format.display),
 					globalOlStyles(),
 					globalStrongStyles,
