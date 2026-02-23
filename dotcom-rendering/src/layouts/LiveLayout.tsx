@@ -23,6 +23,7 @@ import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
 import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.importable';
+import { FootballMiniMatchStatsWrapper } from '../components/FootballMiniMatchStatsWrapper.importable';
 import { Footer } from '../components/Footer';
 import { GetCricketScoreboard } from '../components/GetCricketScoreboard.importable';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
@@ -277,6 +278,11 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	const footballMatchHeaderUrl =
 		article.matchType === 'FootballMatchType'
 			? article.matchHeaderUrl
+			: undefined;
+
+	const footballMatchStatsUrl =
+		article.matchType === 'FootballMatchType'
+			? article.matchStatsUrl
 			: undefined;
 
 	const cricketMatchUrl =
@@ -750,17 +756,30 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								)}
 
 								{/* Match stats */}
-								{!!footballMatchUrl && (
-									<Island
-										priority="feature"
-										defer={{ until: 'visible' }}
-									>
-										<GetMatchStats
-											matchUrl={footballMatchUrl}
-											format={format}
-										/>
-									</Island>
-								)}
+								{isInFootballRedesignTest
+									? !!footballMatchStatsUrl && (
+											<Island
+												priority="feature"
+												defer={{ until: 'visible' }}
+											>
+												<FootballMiniMatchStatsWrapper
+													matchStatsUrl={
+														footballMatchStatsUrl
+													}
+												/>
+											</Island>
+									  )
+									: !!footballMatchUrl && (
+											<Island
+												priority="feature"
+												defer={{ until: 'visible' }}
+											>
+												<GetMatchStats
+													matchUrl={footballMatchUrl}
+													format={format}
+												/>
+											</Island>
+									  )}
 							</GridItem>
 							<GridItem area="body">
 								<div id="maincontent" css={bodyWrapper}>
