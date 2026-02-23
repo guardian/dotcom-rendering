@@ -13,8 +13,8 @@
 		"prettier:fix": "prettier . --write --cache"
 	},
 	"dependencies": {
-		"@aws-sdk/client-ses": "3.991.0",
-		"@aws-sdk/credential-providers": "3.991.0",
+		"@aws-sdk/client-ses": "3.995.0",
+		"@aws-sdk/credential-providers": "3.995.0",
 		"@guardian/ab-testing-config": "workspace:ab-testing-config"
 	},
 	"devDependencies": {

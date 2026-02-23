@@ -19,7 +19,7 @@
 		"build-storybook": "storybook build"
 	},
 	"dependencies": {
-		"@aws-sdk/client-cloudwatch": "3.991.0",
+		"@aws-sdk/client-cloudwatch": "3.995.0",
 		"@babel/helper-compilation-targets": "7.28.6",
 		"@braze/web-sdk": "5.8.1",
 		"@creditkarma/thrift-server-core": "1.0.4",
