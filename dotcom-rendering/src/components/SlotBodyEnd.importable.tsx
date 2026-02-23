@@ -20,6 +20,7 @@ import type {
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
+import { useBetaAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
@@ -54,7 +55,7 @@ const slotStyles = css`
 `;
 
 const buildReaderRevenueEpicConfig = (
-	canShowData: RRCanShowData,
+	canShowData: RRCanShowData & { inHoldbackGroup?: boolean },
 ): CandidateConfig<ModuleData<EpicProps>> => {
 	return {
 		candidate: {
@@ -119,6 +120,7 @@ export const SlotBodyEnd = ({
 	const countryCode = useCountryCode('slot-body-end');
 	const isSignedIn = useIsSignedIn();
 	const ophanPageViewId = usePageViewId(renderingTarget);
+	const abTests = useBetaAB();
 	const [SelectedEpic, setSelectedEpic] = useState<
 		React.ElementType | null | undefined
 	>();
@@ -165,6 +167,11 @@ export const SlotBodyEnd = ({
 			renderingTarget,
 			ophanPageViewId,
 			pageId,
+			inHoldbackGroup:
+				abTests?.isUserInTestGroup(
+					'growth-holdback-group',
+					'control',
+				) ?? false,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionId,
@@ -203,6 +210,7 @@ export const SlotBodyEnd = ({
 		tags,
 		ophanPageViewId,
 		pageId,
+		abTests,
 	]);
 
 	useEffect(() => {

@@ -55,7 +55,9 @@ export type CanShowData = {
 };
 
 const buildPayload = async (
-	data: CanShowData & { hideSupportMessagingForUser: boolean },
+	data: CanShowData & { hideSupportMessagingForUser: boolean } & {
+		inHoldbackGroup?: boolean;
+	},
 ): Promise<EpicPayload> => ({
 	targeting: {
 		contentType: data.contentType,
@@ -73,6 +75,7 @@ const buildPayload = async (
 		url: window.location.origin + window.location.pathname,
 		isSignedIn: data.isSignedIn,
 		pageId: data.pageId,
+		inHoldbackGroup: data.inHoldbackGroup,
 	},
 });
 
@@ -189,7 +192,7 @@ export const ReaderRevenueEpic = ({ props }: ModuleData<EpicProps>) => {
 					'rr-epic',
 				);
 			});
-	}, []); // eslint-disable-line react-hooks/exhaustive-deps -- Only import epic once on mount
+	}, []);
 
 	if (Epic !== null) {
 		return (
