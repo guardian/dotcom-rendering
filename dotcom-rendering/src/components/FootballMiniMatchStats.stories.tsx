@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { breakpoints, from } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { FEFootballMatchStatsSummary } from '../frontend/feFootballMatchInfoPage';
 import { palette } from '../palette';
 import { FootballMiniMatchStats as FootballMiniMatchStatsComponent } from './FootballMiniMatchStats';
 
@@ -52,24 +53,41 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const feMatchStatsSummaryData: FEFootballMatchStatsSummary = {
+	id: '4540747',
+	homeTeam: {
+		id: '49',
+		name: 'Bristol City',
+		possession: 53,
+		shotsOn: 5,
+		shotsOff: 3,
+		colours: '#c70c23',
+	},
+	awayTeam: {
+		id: '91',
+		name: 'Wrexham',
+		possession: 47,
+		shotsOn: 3,
+		shotsOff: 6,
+		colours: '#d82529',
+	},
+	status: 'FT',
+	infoURL:
+		'https://www.theguardian.com/football/match/2026/feb/17/bristolcity-v-wrexham',
+};
+
+const getMockData = (data: FEFootballMatchStatsSummary) =>
+	new Promise((resolve) => {
+		setTimeout(() => {
+			resolve(data);
+		}, 1000);
+	});
+
 export const FootballMiniMatchStats = {
 	args: {
-		homeTeam: {
-			name: 'Manchester United',
-			colour: '#da020e',
-		},
-		awayTeam: {
-			name: 'Arsenal',
-			colour: '#023474',
-		},
-		stats: [
-			{
-				heading: 'Possession',
-				homeValue: 39,
-				awayValue: 61,
-				isPercentage: true,
-			},
-			{ heading: 'Goal Attempts', homeValue: 7, awayValue: 4 },
-		],
+		matchStatsUrl:
+			'https://api.nextgen.guardianapps.co.uk/football/api/match-stats-summary/2026/02/17/49/91.json',
+		getMatchStatsData: () => getMockData(feMatchStatsSummaryData),
+		refreshInterval: 16_000,
 	},
 } satisfies Story;
