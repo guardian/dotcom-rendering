@@ -69,9 +69,12 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 	const mainMedia = frontendData.mainMediaElements[0];
 	const mainMediaCaptionText = decideMainMediaCaption(mainMedia);
 
+	const { branding } =
+		frontendData.commercialProperties[frontendData.editionId];
+
 	return (
 		<>
-			{props.renderingTarget === 'Web' ? (
+			{props.renderingTarget === 'Web' && branding ? (
 				<Stuck>
 					<Section
 						fullWidth={true}
@@ -83,8 +86,8 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						element="aside"
 					>
 						<HostedContentHeader
-							accentColor={sourcePalette.brand[400]}
-							branding="logo"
+							branding={branding}
+							accentColor={branding.hostedCampaignColour}
 						/>
 					</Section>
 				</Stuck>

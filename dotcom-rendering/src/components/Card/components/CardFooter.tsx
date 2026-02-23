@@ -6,7 +6,7 @@ import {
 	textSansBold12,
 } from '@guardian/source/foundations';
 import { type ArticleFormat, ArticleSpecial } from '../../../lib/articleFormat';
-import type { MainMedia } from '../../../types/mainMedia';
+import type { ArticleMedia } from '../../../types/mainMedia';
 import { CardPill } from '../../CardPill';
 
 const contentStyles = css`
@@ -58,7 +58,7 @@ type Props = {
 	age?: JSX.Element;
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
-	mainMedia?: MainMedia;
+	media?: ArticleMedia;
 	isNewsletter?: boolean;
 	shouldReserveSpace?: { mobile: boolean; desktop: boolean };
 	isStorylines?: boolean;
@@ -69,7 +69,7 @@ export const CardFooter = ({
 	age,
 	commentCount,
 	cardBranding,
-	mainMedia,
+	media,
 	isNewsletter,
 	shouldReserveSpace,
 	isStorylines,
@@ -78,10 +78,10 @@ export const CardFooter = ({
 		format.theme === ArticleSpecial.Labs && !!cardBranding;
 
 	const shouldShowPill =
-		mainMedia?.type === 'YoutubeVideo' ||
-		mainMedia?.type === 'Audio' ||
-		mainMedia?.type === 'Gallery' ||
-		mainMedia?.type === 'SelfHostedVideo' ||
+		media?.type === 'YoutubeVideo' ||
+		media?.type === 'Audio' ||
+		media?.type === 'Gallery' ||
+		media?.type === 'SelfHostedVideo' ||
 		isNewsletter;
 
 	if (shouldShowPill) {
@@ -97,7 +97,7 @@ export const CardFooter = ({
 				{isStorylines && age}
 
 				<CardPill
-					mainMedia={mainMedia}
+					media={media}
 					isNewsletter={isNewsletter}
 					format={format}
 				/>
