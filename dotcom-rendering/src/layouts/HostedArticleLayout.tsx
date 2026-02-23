@@ -4,6 +4,9 @@ import {
 	palette as sourcePalette,
 	space,
 } from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
+import { ArticleBody } from '../components/ArticleBody';
+import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { CallToActionAtom } from '../components/CallToActionAtom';
 import { Caption } from '../components/Caption';
@@ -15,7 +18,9 @@ import { ShareButton } from '../components/ShareButton.importable';
 import { Standfirst } from '../components/Standfirst';
 import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
+import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
+import { palette as themePalette } from '../palette';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { Stuck } from './lib/stickiness';
@@ -58,6 +63,8 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 		content: { frontendData },
 		format,
 	} = props;
+
+	const contributionsServiceUrl = getContributionsServiceUrl(frontendData);
 
 	const mainMedia = frontendData.mainMediaElements[0];
 	const mainMediaCaptionText = decideMainMediaCaption(mainMedia);
@@ -174,22 +181,6 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						</div>
 						<div
 							css={[
-								grid.column.right,
-								css`
-									grid-row: 1;
-								`,
-							]}
-						>
-							<Caption
-								captionText={mainMediaCaptionText}
-								format={format}
-								isMainMedia={true}
-							/>
-
-							{'Onward content'}
-						</div>
-						<div
-							css={[
 								grid.column.centre,
 								css`
 									grid-row: 1;
@@ -202,7 +193,68 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 							/>
 						</div>
 						<div id="maincontent" css={[grid.column.centre]}>
-							{'body'}
+							<ArticleContainer format={format}>
+								<ArticleBody
+									format={format}
+									blocks={frontendData.blocks}
+									editionId={frontendData.editionId}
+									host={frontendData.config.host}
+									pageId={frontendData.pageId}
+									webTitle={frontendData.webTitle}
+									ajaxUrl={frontendData.config.ajaxUrl}
+									isAdFreeUser={frontendData.isAdFreeUser}
+									switches={frontendData.config.switches}
+									sectionId={frontendData.config.section}
+									shouldHideReaderRevenue={
+										frontendData.shouldHideReaderRevenue
+									}
+									tags={frontendData.tags}
+									isPaidContent={
+										!!frontendData.config.isPaidContent
+									}
+									contributionsServiceUrl={
+										contributionsServiceUrl
+									}
+									contentType={frontendData.contentType}
+									idUrl={frontendData.config.idUrl ?? ''}
+									isSensitive={
+										frontendData.config.isSensitive
+									}
+									isDev={!!frontendData.config.isDev}
+									keywordIds={frontendData.config.keywordIds}
+									abTests={frontendData.config.abTests}
+									shouldHideAds={frontendData.shouldHideAds}
+								/>
+							</ArticleContainer>
+							<StraightLines
+								data-print-layout="hide"
+								count={1}
+								cssOverrides={css`
+									display: block;
+								`}
+								color={themePalette('--straight-lines')}
+							/>
+						</div>
+						<div
+							css={[
+								grid.column.centre,
+								css`
+									grid-row: auto;
+
+									${from.leftCol} {
+										${grid.column.right}
+										grid-row: 1;
+									}
+								`,
+							]}
+						>
+							<Caption
+								captionText={mainMediaCaptionText}
+								format={format}
+								isMainMedia={true}
+							/>
+
+							{'Onward content'}
 						</div>
 					</div>
 
