@@ -27,7 +27,7 @@ const thrasherTemplate = (html: string, css: string): string => {
 
 export const renderThrasher = (name: ThrasherName): { html: string } => {
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<>{name === 'feast' && <FeastThrasher />}</>,
+		<>{name === 'feast' && <FeastThrasher renderingTarget={'Apps'} />}</>,
 	);
 
 	const pageHtml = thrasherTemplate(html, extractedCss);
