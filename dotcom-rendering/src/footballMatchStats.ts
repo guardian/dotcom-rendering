@@ -3,9 +3,11 @@ import { listParse } from './footballMatches';
 import type { FootballTeam } from './footballTeam';
 import type {
 	FEFootballMatchStats,
+	FEFootballMatchStatsSummary,
 	FEFootballPlayer,
 	FEFootballPlayerEvent,
 	FEFootballTeam,
+	FEFootballTeamSummary,
 } from './frontend/feFootballMatchInfoPage';
 import { parseIntResult } from './lib/parse';
 import type { Result } from './lib/result';
@@ -21,6 +23,16 @@ export type FootballMatchStats = {
 };
 
 /**
+ * The summary stats for each team in a given football match.
+ */
+export type FootballMatchStatsSummary = {
+	homeTeam: FootballMatchTeamWithStatsSummary;
+	awayTeam: FootballMatchTeamWithStatsSummary;
+	status: string;
+	infoURL: string;
+};
+
+/**
  * Extended stats information about a given team in a football match, including
  * a list of players.
  */
@@ -32,6 +44,15 @@ export type FootballMatchTeamWithStats = FootballTeam & {
 	corners: number;
 	fouls: number;
 	players: FootballPlayer[];
+	statsColour: string;
+};
+
+/**
+ * Summary stats information about a given team in a football match
+ */
+export type FootballMatchTeamWithStatsSummary = FootballTeam & {
+	possession: number;
+	shotsTotal: number;
 	statsColour: string;
 };
 
@@ -148,4 +169,30 @@ export const parseMatchStats = (
 			homeTeam,
 			awayTeam,
 		})),
+	);
+
+const parseTeamWithStatsSummary = (
+	feFootballMatchTeam: FEFootballTeamSummary,
+): Result<ParserError, FootballMatchTeamWithStatsSummary> =>
+	ok({
+		paID: feFootballMatchTeam.id,
+		name: cleanTeamName(feFootballMatchTeam.name),
+		possession: feFootballMatchTeam.possession,
+		shotsTotal: feFootballMatchTeam.shotsOn + feFootballMatchTeam.shotsOff,
+		statsColour: feFootballMatchTeam.colours,
+	});
+
+export const parseMatchStatsSummary = (
+	feFootballMatchStatsSummary: FEFootballMatchStatsSummary,
+): Result<ParserError, FootballMatchStatsSummary> =>
+	parseTeamWithStatsSummary(feFootballMatchStatsSummary.homeTeam).flatMap(
+		(homeTeam) =>
+			parseTeamWithStatsSummary(feFootballMatchStatsSummary.awayTeam).map(
+				(awayTeam) => ({
+					homeTeam,
+					awayTeam,
+					status: feFootballMatchStatsSummary.status,
+					infoURL: feFootballMatchStatsSummary.infoURL,
+				}),
+			),
 	);

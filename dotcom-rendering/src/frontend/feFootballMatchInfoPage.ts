@@ -81,16 +81,14 @@ export const feFootballTeamSummarySchema = object({
 	colours: string(),
 });
 
-export type FEFootballTeamSummarySchema = Output<
-	typeof feFootballTeamSummarySchema
->;
+export type FEFootballTeamSummary = Output<typeof feFootballTeamSummarySchema>;
 
 export const feFootballMatchStatsSummarySchema = object({
 	id: string(),
 	homeTeam: feFootballTeamSummarySchema,
 	awayTeam: feFootballTeamSummarySchema,
 	status: string(),
-	infoUrl: string(),
+	infoURL: string(),
 });
 
 export type FEFootballMatchStatsSummary = Output<
