@@ -15,6 +15,7 @@ import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/t
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { shouldHideSupportMessaging } from '../lib/contributions';
+import { useBetaAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
@@ -47,6 +48,7 @@ const LiveblogGutterAskBuilder = ({
 
 	const { renderingTarget } = useConfig();
 	const isSignedIn = useIsSignedIn();
+	const abTests = useBetaAB();
 
 	// get gutter props
 	useEffect((): void => {
@@ -62,6 +64,10 @@ const LiveblogGutterAskBuilder = ({
 			return;
 		}
 
+		const inHoldbackGroup =
+			abTests?.isUserInTestGroup('growth-holdback-group', 'control') ??
+			false;
+
 		// CALL the API
 		const payload: GutterPayload = {
 			targeting: {
@@ -74,6 +80,7 @@ const LiveblogGutterAskBuilder = ({
 				tagIds,
 				sectionId,
 				pageId,
+				inHoldbackGroup,
 			},
 		};
 
@@ -118,6 +125,7 @@ const LiveblogGutterAskBuilder = ({
 		sectionId,
 		tags,
 		pageId,
+		abTests,
 	]);
 
 	if (gutterVariantResponse && !isUndefined(GutterWrapperComponent)) {

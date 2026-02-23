@@ -341,8 +341,8 @@ importers:
         specifier: 18.1.1
         version: 18.1.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@27.1.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/support-dotcom-components':
-        specifier: 8.3.1
-        version: 8.3.1(@guardian/libs@27.1.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.8.0)(zod@4.1.12)
+        specifier: 8.4.0
+        version: 8.4.0(@guardian/libs@27.1.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.8.0)(zod@4.1.12)
       '@guardian/tsconfig':
         specifier: 0.2.0
         version: 0.2.0
@@ -2463,11 +2463,11 @@ packages:
       typescript:
         optional: true
 
-  '@guardian/support-dotcom-components@8.3.1':
-    resolution: {integrity: sha512-3e+BX/FTMHCXHtWqVi0LV3j6geOU0RX7vEb+c51KStsOXKLnM3wLK4eoih8AUiRSBO/Nqd42L0DWXDxaoyKUsw==}
+  '@guardian/support-dotcom-components@8.4.0':
+    resolution: {integrity: sha512-GXAYWoV7CB0lw6tdvMQptepDwnTBjRJceYBjDp0yVgR2eVrDJYSbmOzEhxDWxvani+dsrwrUy72Fm0mn3Kqd7Q==}
     peerDependencies:
       '@guardian/libs': ^22.0.0
-      '@guardian/ophan-tracker-js': 2.6.1
+      '@guardian/ophan-tracker-js': 2.8.0
       zod: ^4.1.12
 
   '@guardian/tsconfig@0.2.0':
@@ -11905,7 +11905,7 @@ snapshots:
       react: 18.3.1
       typescript: 5.5.3
 
-  '@guardian/support-dotcom-components@8.3.1(@guardian/libs@27.1.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.8.0)(zod@4.1.12)':
+  '@guardian/support-dotcom-components@8.4.0(@guardian/libs@27.1.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.8.0)(zod@4.1.12)':
     dependencies:
       '@aws-sdk/client-cloudwatch': 3.995.0
       '@aws-sdk/client-dynamodb': 3.996.0

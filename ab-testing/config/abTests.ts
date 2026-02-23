@@ -107,6 +107,19 @@ const ABTests: ABTest[] = [
 		groups: ["control"],
 		shouldForceMetricsCollection: false,
 	},
+	{
+		name: "growth-holdback-group",
+		description:
+			"Test for 5% holdback group that does not qualify for any testing so long as the test is live in the RRCP",
+		owners: ["growth.dev@guardian.co.uk"],
+		expirationDate: "2027-01-01",
+		type: "client",
+		status: "ON",
+		audienceSize: 5 / 100,
+		audienceSpace: "A",
+		groups: ["control"],
+		shouldForceMetricsCollection: false,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
