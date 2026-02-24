@@ -5,7 +5,7 @@ exports[`The AB testing deployment lambda stack > matches the CODE snapshot 1`] 
       "GuDistributionBucketParameter",
       "GuLambdaFunction"
     ],
-    "gu:cdk:version": "62.0.1"
+    "gu:cdk:version": "62.3.4"
   },
   "Parameters": {
     "SsmParameterValueaccountservicesdotcomstorebucketC96584B6F00A464EAD1953AFF4B05118Parameter": {
@@ -55,7 +55,7 @@ exports[`The AB testing deployment lambda stack > matches the CODE snapshot 1`] 
           },
           {
             "Key": "gu:cdk:version",
-            "Value": "62.0.1"
+            "Value": "62.3.4"
           },
           {
             "Key": "gu:repo",
@@ -294,7 +294,7 @@ exports[`The AB testing deployment lambda stack > matches the CODE snapshot 1`] 
           },
           {
             "Key": "gu:cdk:version",
-            "Value": "62.0.1"
+            "Value": "62.3.4"
           },
           {
             "Key": "gu:repo",
@@ -327,7 +327,7 @@ exports[`The AB testing deployment lambda stack > matches the PROD snapshot 1`] 
       "GuDistributionBucketParameter",
       "GuLambdaFunction"
     ],
-    "gu:cdk:version": "62.0.1"
+    "gu:cdk:version": "62.3.4"
   },
   "Parameters": {
     "SsmParameterValueaccountservicesdotcomstorebucketC96584B6F00A464EAD1953AFF4B05118Parameter": {
@@ -377,7 +377,7 @@ exports[`The AB testing deployment lambda stack > matches the PROD snapshot 1`] 
           },
           {
             "Key": "gu:cdk:version",
-            "Value": "62.0.1"
+            "Value": "62.3.4"
           },
           {
             "Key": "gu:repo",
@@ -616,7 +616,7 @@ exports[`The AB testing deployment lambda stack > matches the PROD snapshot 1`] 
           },
           {
             "Key": "gu:cdk:version",
-            "Value": "62.0.1"
+            "Value": "62.3.4"
           },
           {
             "Key": "gu:repo",
