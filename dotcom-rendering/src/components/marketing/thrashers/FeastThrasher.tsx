@@ -32,10 +32,15 @@ const styles = {
 			: ''}
 	`,
 	grid: css`
-		display: grid;
 		padding: 0 ${space[3]}px ${space[4]}px ${space[3]}px;
 		overflow: hidden;
+
+		${until.tablet} {
+			display: flex;
+			flex-direction: column-reverse;
+		}
 		${from.tablet} {
+			display: grid;
 			grid-template-columns: 1fr 1fr;
 			gap: ${space[4]}px;
 			padding: 0 ${space[5]}px;
