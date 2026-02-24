@@ -1,5 +1,6 @@
 import type { Banner } from '@braze/web-sdk';
 import { css } from '@emotion/react';
+import { until } from '@guardian/source/foundations';
 import { SvgGuardianLogo } from '@guardian/source/react-components';
 import type {
 	OneOffSignupRequest,
@@ -828,7 +829,7 @@ export const BrazeBannersSystemDisplay = ({
 							max-height: 65svh;
 							border-top: 1px solid rgb(0, 0, 0);
 							background-color: ${wrapperModeBackgroundColor};
-							@media (max-width: 660px) {
+							${until.phablet} {
 								border: none;
 							}
 					  `
@@ -853,19 +854,19 @@ export const BrazeBannersSystemDisplay = ({
 								grid-template:
 									'logo vert-line copy-container close-button'
 									/ 219px 1px 840px auto;
-								@media (max-width: 1300px) {
+								${until.wide} {
 									max-width: 1140px;
 									grid-template:
 										'logo vert-line copy-container close-button'
 										/ 140px 1px 840px auto;
 								}
-								@media (max-width: 1140px) {
+								${until.leftCol} {
 									max-width: 980px;
 									grid-template:
 										'copy-container close-button'
 										/ auto 68px;
 								}
-								@media (max-width: 980px) {
+								${until.desktop} {
 									max-width: 740px;
 									grid-template:
 										'. copy-container close-button close-button'
@@ -873,7 +874,7 @@ export const BrazeBannersSystemDisplay = ({
 										492px max-content minmax(0px, 0.5fr);
 									padding: 12px 12px 0px;
 								}
-								@media (max-width: 660px) {
+								${until.phablet} {
 									max-width: 660px;
 									grid-template:
 										'. .'
@@ -897,7 +898,7 @@ export const BrazeBannersSystemDisplay = ({
 								justify-content: end;
 								margin-top: 20px;
 
-								@media (max-width: 1140px) {
+								${until.leftCol} {
 									display: none;
 								}
 							`}
@@ -916,7 +917,7 @@ export const BrazeBannersSystemDisplay = ({
 								opacity: 0.2;
 								margin: 24px 8px 0px;
 
-								@media (max-width: 1140px) {
+								${until.leftCol} {
 									display: none;
 								}
 							`}
@@ -934,15 +935,15 @@ export const BrazeBannersSystemDisplay = ({
 									padding-right: 12px;
 									padding-top: 24px;
 									padding-bottom: 12px;
-									@media (max-width: 1140px) {
+									${until.leftCol} {
 										padding-left: 0px;
 										padding-right: 0px;
 									}
-									@media (max-width: 660px) {
+									${until.phablet} {
 										padding-top: 0px;
 										padding-bottom: 0px;
 									}
-									@media (max-width: 660px) {
+									${until.phablet} {
 										padding-top: 24px;
 									}
 							  `
@@ -963,10 +964,10 @@ export const BrazeBannersSystemDisplay = ({
 							margin-top: 24px;
 							flex-direction: row-reverse;
 
-							@media (max-width: 980px) {
+							${until.desktop} {
 								margin-top: 8px;
 							}
-							@media (max-width: 660px) {
+							${until.phablet} {
 								position: sticky;
 								top: 8px;
 							}
@@ -977,7 +978,7 @@ export const BrazeBannersSystemDisplay = ({
 							css={css`
 								box-sizing: border-box;
 								margin: 0;
-								@media (max-width: 980px) {
+								${until.desktop} {
 									margin-left: 8px;
 								}
 							`}
@@ -1021,7 +1022,7 @@ export const BrazeBannersSystemDisplay = ({
 									padding: 0px;
 									width: 36px;
 									margin: 0;
-									@media (max-width: 980px) {
+									${until.desktop} {
 										margin-top: 4px;
 										margin-right: 4px;
 									}
