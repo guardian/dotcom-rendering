@@ -102,13 +102,8 @@ const imageAdvertisingPartnerStyles = css`
 `;
 
 const hostedLogoImageStyles = css`
-	width: 80px;
+	width: 132px;
 	height: auto;
-
-	${from.desktop} {
-		width: 132px;
-		height: auto;
-	}
 `;
 
 /**
