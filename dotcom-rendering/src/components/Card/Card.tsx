@@ -941,7 +941,9 @@ export const Card = ({
 								isFlexibleContainer={isFlexibleContainer}
 							>
 								<Avatar
-									src={media.avatarUrl ?? media.imageUrl}
+									src={
+										media.avatarUrl ?? media.imageUrl ?? ''
+									}
 									alt={byline ?? ''}
 									imageSize={
 										isBetaContainer ? mediaSize : undefined
