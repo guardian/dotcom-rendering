@@ -37,7 +37,9 @@ import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
+import { NewsletterPrivacyMessage } from '../NewsletterPrivacyMessage';
 import { Pill } from '../Pill';
+import { SecureSignup } from '../SecureSignup.importable';
 import { SelfHostedVideo } from '../SelfHostedVideo.importable';
 import type { SubtitleSize } from '../SelfHostedVideoPlayer';
 import { SlideshowCarousel } from '../SlideshowCarousel.importable';
@@ -1222,26 +1224,25 @@ export const Card = ({
 								/>
 							)}
 
-							{!isNewsletter &&
-								!isOpinionCardWithAvatar &&
-								!showLivePlayable && (
-									<CardFooter
-										format={format}
-										age={decideAge()}
-										commentCount={<CommentCount />}
-										cardBranding={
-											isOnwardContent ? (
-												<LabsBranding />
-											) : undefined
-										}
-										mainMedia={
-											!isGallerySecondaryOnward
-												? mainMedia
-												: undefined
-										}
-										isNewsletter={isNewsletter}
-									/>
-								)}
+							{!isOpinionCardWithAvatar && !showLivePlayable && (
+								<CardFooter
+									format={format}
+									age={decideAge()}
+									commentCount={<CommentCount />}
+									cardBranding={
+										isOnwardContent ? (
+											<LabsBranding />
+										) : undefined
+									}
+									mainMedia={
+										!isGallerySecondaryOnward
+											? mainMedia
+											: undefined
+									}
+									isNewsletter={isNewsletter}
+								/>
+							)}
+
 							{showLivePlayable &&
 								liveUpdatesPosition === 'inner' && (
 									<Island
@@ -1323,21 +1324,38 @@ export const Card = ({
 					</Island>
 				)}
 
-				{decideOuterSublinks()}
+				{isOpinionCardWithAvatar && !showLivePlayable && (
+					<CardFooter
+						format={format}
+						age={decideAge()}
+						commentCount={<CommentCount />}
+						shouldReserveSpace={{
+							mobile: avatarPosition.mobile === 'bottom',
+							desktop: avatarPosition.desktop === 'bottom',
+						}}
+						isNewsletter={isNewsletter}
+					/>
+				)}
 
-				{(isNewsletter || isOpinionCardWithAvatar) &&
-					!showLivePlayable && (
-						<CardFooter
-							format={format}
-							age={decideAge()}
-							commentCount={<CommentCount />}
-							shouldReserveSpace={{
-								mobile: avatarPosition.mobile === 'bottom',
-								desktop: avatarPosition.desktop === 'bottom',
-							}}
-							isNewsletter={isNewsletter}
-						/>
-					)}
+				{isNewsletter && (
+					<footer
+						style={{
+							padding: `0 ${space[2]}px`,
+						}}
+					>
+						<Island priority="feature" defer={{ until: 'visible' }}>
+							<SecureSignup
+								newsletterId={'moving-the-goalposts'}
+								successDescription={
+									"We'll send you Moving the Goalposts twice every week"
+								}
+							/>
+						</Island>
+						<NewsletterPrivacyMessage />
+					</footer>
+				)}
+
+				{decideOuterSublinks()}
 			</div>
 
 			{!isOnwardContent && format.theme === ArticleSpecial.Labs && (

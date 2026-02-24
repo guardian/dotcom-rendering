@@ -54,5 +54,6 @@ export const FrontCard = (props: Props) => {
 		uniqueId: trail.uniqueId,
 	};
 
+	console.log('card props', JSON.stringify(props));
 	return Card({ ...defaultProps, ...cardProps });
 };

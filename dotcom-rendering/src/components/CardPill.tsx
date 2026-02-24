@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import { SvgCamera } from '@guardian/source/react-components';
+import { SvgCamera, SvgEye } from '@guardian/source/react-components';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { ArticleDesign } from '../lib/articleFormat';
 import { secondsToDuration } from '../lib/formatTime';
@@ -28,7 +28,7 @@ export const CardPill = ({
 	mainMedia,
 	isNewsletter,
 }: CardPillProps) => {
-	if (isNewsletter) return <Pill content="Newsletter" />;
+	if (isNewsletter) return <Pill content="Preview" icon={<SvgEye />} />;
 	if (!mainMedia) return null;
 	switch (mainMedia.type) {
 		case 'Gallery':
