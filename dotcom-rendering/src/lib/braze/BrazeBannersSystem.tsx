@@ -8,7 +8,7 @@ import type {
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { TagType } from '../../types/tag';
 import { getAuthState, getOptionsHeaders } from '../identity';
-import type { CanShowResult } from '../messagePicker';
+import type { CandidateConfig, CanShowResult } from '../messagePicker';
 import { useAuthStatus } from '../useAuthStatus';
 import type { BrazeInstance } from './initialiseBraze';
 import { suppressForTaylorReport } from './taylorReport';
@@ -235,6 +235,46 @@ export const canShowBrazeBannersSystem = async (
 		);
 		return { show: false };
 	}
+};
+
+/**
+ * Build the Braze Banners System Config
+ * @param id Unique ID for the message candidate, used for logging and debugging
+ * @param placementId Placement ID to check for a banner
+ * @param braze The Braze instance
+ * @param idApiUrl Identity API URL for newsletter subscriptions
+ * @param contentType Content type of the article
+ * @param shouldHideReaderRevenue Whether to hide reader revenue components
+ * @param tags Tags associated with the article
+ * @returns CandidateConfig for the Braze Banners System
+ */
+export const buildBrazeBannersSystemConfig = (
+	id: string,
+	placementId: BrazeBannersSystemPlacementId,
+	braze: BrazeInstance | null,
+	idApiUrl: string,
+	contentType: string,
+	shouldHideReaderRevenue: boolean,
+	tags: TagType[],
+): CandidateConfig<BrazeBannersSystemMeta> => {
+	return {
+		candidate: {
+			id,
+			canShow: () => {
+				return canShowBrazeBannersSystem(
+					braze,
+					placementId,
+					contentType,
+					shouldHideReaderRevenue,
+					tags,
+				);
+			},
+			show: (meta: BrazeBannersSystemMeta) => () => (
+				<BrazeBannersSystemDisplay meta={meta} idApiUrl={idApiUrl} />
+			),
+		},
+		timeoutMillis: null,
+	};
 };
 
 /**

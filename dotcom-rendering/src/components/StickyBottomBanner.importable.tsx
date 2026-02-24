@@ -10,12 +10,9 @@ import { useEffect, useState } from 'react';
 import type { ArticleCounts } from '../lib/articleCount';
 import { getArticleCounts } from '../lib/articleCount';
 import {
-	BrazeBannersSystemDisplay,
 	BrazeBannersSystemPlacementId,
-	canShowBrazeBannersSystem,
+	buildBrazeBannersSystemConfig,
 } from '../lib/braze/BrazeBannersSystem';
-import type { BrazeBannersSystemMeta } from '../lib/braze/BrazeBannersSystem';
-import type { BrazeInstance } from '../lib/braze/initialiseBraze';
 import type {
 	CandidateConfig,
 	MaybeFC,
@@ -241,42 +238,6 @@ const buildBrazeBanner = (
 });
 
 /**
- * Build the Braze Banners System Config
- * @param braze The Braze instance
- * @param idApiUrl Identity API URL for newsletter subscriptions
- * @param contentType Content type of the article
- * @param shouldHideReaderRevenue Whether to hide reader revenue components
- * @param tags Tags associated with the article
- * @returns CandidateConfig for the Braze Banners System
- */
-const buildBrazeBannersSystemConfig = (
-	braze: BrazeInstance | null,
-	idApiUrl: string,
-	contentType: string,
-	shouldHideReaderRevenue: boolean,
-	tags: TagType[],
-): CandidateConfig<BrazeBannersSystemMeta> => {
-	return {
-		candidate: {
-			id: 'braze-banners-system_StickyBottomBanner',
-			canShow: () => {
-				return canShowBrazeBannersSystem(
-					braze,
-					BrazeBannersSystemPlacementId.Banner,
-					contentType,
-					shouldHideReaderRevenue,
-					tags,
-				);
-			},
-			show: (meta: BrazeBannersSystemMeta) => () => (
-				<BrazeBannersSystemDisplay meta={meta} idApiUrl={idApiUrl} />
-			),
-		},
-		timeoutMillis: null,
-	};
-};
-
-/**
  * The reader revenue banner at the end of articles
  *
  * ## Why does this need to be an Island?
@@ -372,6 +333,8 @@ export const StickyBottomBanner = ({
 			shouldHideReaderRevenue,
 		);
 		const brazeBannersSystem = buildBrazeBannersSystemConfig(
+			'braze-banners-system_StickyBottomBanner',
+			BrazeBannersSystemPlacementId.Banner,
 			braze,
 			idApiUrl,
 			contentType,
