@@ -246,6 +246,7 @@ enum BrazeBannersSystemMessageType {
 	ReminderSubscribe = 'BRAZE_BANNERS_SYSTEM:REMINDER_SUBSCRIBE',
 	GetAllSettingsPropertyValues = 'BRAZE_BANNERS_SYSTEM:GET_ALL_SETTINGS_PROPERTY_VALUES',
 	GetSettingsPropertyValue = 'BRAZE_BANNERS_SYSTEM:GET_SETTINGS_PROPERTY_VALUE',
+	NavigateToUrl = 'BRAZE_BANNERS_SYSTEM:NAVIGATE_TO_URL',
 	DismissBanner = 'BRAZE_BANNERS_SYSTEM:DISMISS_BANNER',
 }
 
@@ -634,11 +635,17 @@ export const BrazeBannersSystemDisplay = ({
 						key?: string;
 				  }
 				| {
+						type: BrazeBannersSystemMessageType.NavigateToUrl;
+						url?: string;
+						target?: 'blank' | 'self';
+				  }
+				| {
 						type: BrazeBannersSystemMessageType.DismissBanner;
 				  }
 			>,
 		) => {
 			if (
+				event.origin === window.location.origin &&
 				Object.values(BrazeBannersSystemMessageType).includes(
 					event.data?.type,
 				)
@@ -708,6 +715,16 @@ export const BrazeBannersSystemDisplay = ({
 						BrazeBannersSystemMessageType.GetAllSettingsPropertyValues,
 						getAllSettingsPropertiesValuesAsString(meta),
 					);
+					break;
+				case BrazeBannersSystemMessageType.NavigateToUrl:
+					const { url, target } = event.data;
+					if (url) {
+						if (target === 'blank') {
+							window.open(url, '_blank');
+						} else {
+							window.location.href = url;
+						}
+					}
 					break;
 				case BrazeBannersSystemMessageType.GetSettingsPropertyValue:
 					const { key } = event.data;
