@@ -21,6 +21,7 @@ import {
 	customYoutubePlayEventName,
 } from '../lib/video';
 import { palette } from '../palette';
+import type { RoleType } from '../types/content';
 import type { VideoPlayerFormat } from '../types/mainMedia';
 import { Caption } from './Caption';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
@@ -250,6 +251,7 @@ type Props = {
 	caption?: string;
 	format?: ArticleFormat;
 	isMainMedia?: boolean;
+	role?: RoleType;
 };
 
 export const SelfHostedVideo = ({
@@ -277,6 +279,7 @@ export const SelfHostedVideo = ({
 	caption,
 	format,
 	isMainMedia,
+	role,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -766,7 +769,9 @@ export const SelfHostedVideo = ({
 
 	return (
 		<figure
-			className={`video-container ${videoStyle.toLocaleLowerCase()}`}
+			className={`video-container ${videoStyle.toLocaleLowerCase()} ${
+				role === 'immersive' ? 'element-video-immersive' : ''
+			}`}
 			data-component="gu-video-loop"
 		>
 			<div

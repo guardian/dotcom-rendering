@@ -5,7 +5,7 @@ import {
 	getFirstVideoAsset,
 	getSubtitleAsset,
 } from '../lib/video';
-import type { MediaAtomBlockElement } from '../types/content';
+import type { MediaAtomBlockElement, RoleType } from '../types/content';
 import type { VideoPlayerFormat } from '../types/mainMedia';
 import { Island } from './Island';
 import { SelfHostedVideo } from './SelfHostedVideo.importable';
@@ -15,6 +15,7 @@ type SelfHostedVideoInArticleProps = {
 	format: ArticleFormat;
 	isMainMedia: boolean;
 	videoStyle: VideoPlayerFormat;
+	role?: RoleType;
 };
 
 export const SelfHostedVideoInArticle = ({
@@ -22,6 +23,7 @@ export const SelfHostedVideoInArticle = ({
 	format,
 	isMainMedia,
 	videoStyle,
+	role = 'inline',
 }: SelfHostedVideoInArticleProps) => {
 	const posterImageUrl = element.posterImage?.[0]?.url;
 	const caption = element.title;
@@ -54,6 +56,7 @@ export const SelfHostedVideoInArticle = ({
 				caption={caption}
 				format={format}
 				isMainMedia={isMainMedia}
+				role={role}
 			/>
 		</Island>
 	);
