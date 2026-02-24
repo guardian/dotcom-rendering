@@ -61,10 +61,7 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						element="aside"
 					>
-						<HostedContentHeader
-							branding={branding}
-							accentColor={branding.hostedCampaignColour}
-						/>
+						<HostedContentHeader branding={branding} />
 					</Section>
 				</Stuck>
 			) : null}

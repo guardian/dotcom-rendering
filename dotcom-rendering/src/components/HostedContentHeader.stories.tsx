@@ -1,4 +1,5 @@
 import { palette as sourcePalette } from '@guardian/source/foundations';
+import type { Branding } from '../types/branding';
 import { HostedContentHeader } from './HostedContentHeader';
 import type { Props as HostedContentHeaderProps } from './HostedContentHeader';
 import { Section } from './Section';
@@ -17,30 +18,26 @@ export default {
 					height: 575,
 				},
 				link: 'https://www.wearestillin.com/',
+				label: 'Paid for by',
 			},
 			aboutThisLink:
 				'https://www.theguardian.com/info/2016/jan/25/content-funding',
 			hostedCampaignColour: '#d90c1f',
-		},
+		} satisfies Branding,
 	},
-};
-export const Default = (args: HostedContentHeaderProps) => {
-	return (
+	render: (args: HostedContentHeaderProps) => {
 		<Section
 			fullWidth={true}
 			showSideBorders={false}
 			showTopBorder={false}
 			shouldCenter={false}
 			backgroundColour={sourcePalette.neutral[7]}
-			padSides={false}
-			element="aside"
+			padSides={true}
+			element="header"
 		>
-			<HostedContentHeader
-				{...args}
-				branding={args.branding}
-				accentColor={args.branding.hostedCampaignColour}
-			/>
-		</Section>
-	);
+			<HostedContentHeader {...args} />
+		</Section>;
+	},
 };
-Default.storyName = 'default';
+
+export const Default = {};
