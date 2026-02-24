@@ -15,7 +15,7 @@ import type {
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
-import { useAB } from '../lib/useAB';
+import { useAB, useBetaAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
@@ -116,6 +116,7 @@ const buildRRBannerConfigWith = ({
 		renderingTarget,
 		ophanPageViewId,
 		pageId,
+		inHoldbackGroup,
 	}: {
 		isSignedIn: boolean;
 		countryCode: CountryCode;
@@ -133,6 +134,7 @@ const buildRRBannerConfigWith = ({
 		renderingTarget: RenderingTarget;
 		ophanPageViewId: string;
 		pageId?: string;
+		inHoldbackGroup?: boolean;
 	}): CandidateConfig<ModuleData<BannerProps>> => {
 		return {
 			candidate: {
@@ -169,6 +171,7 @@ const buildRRBannerConfigWith = ({
 						asyncArticleCounts,
 						ophanPageViewId,
 						pageId,
+						inHoldbackGroup,
 					}),
 				show:
 					({ name, props }: ModuleData<BannerProps>) =>
@@ -269,6 +272,7 @@ export const StickyBottomBanner = ({
 	const isSignedIn = useIsSignedIn();
 	const ophanPageViewId = usePageViewId(renderingTarget);
 	const abTestAPI = useAB()?.api;
+	const abTests = useBetaAB();
 	const isInAuxiaControlGroup = !!abTestAPI?.isUserInVariant(
 		'NoAuxiaSignInGate',
 		'control',
@@ -317,6 +321,11 @@ export const StickyBottomBanner = ({
 			renderingTarget,
 			ophanPageViewId,
 			pageId,
+			inHoldbackGroup:
+				abTests?.isUserInTestGroup(
+					'growth-holdback-group',
+					'control',
+				) ?? false,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionId,
@@ -404,6 +413,7 @@ export const StickyBottomBanner = ({
 		pageId,
 		host,
 		isInAuxiaControlGroup,
+		abTests,
 	]);
 
 	// Dispatches 'banner:none' event for mobile sticky ad integration (see @guardian/commercial-dev).
