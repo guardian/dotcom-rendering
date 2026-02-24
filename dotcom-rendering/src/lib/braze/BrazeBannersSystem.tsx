@@ -305,7 +305,7 @@ const getAllSettingsPropertiesValuesAsString = (
  * selectors are selecting existent elements.
  * This is important because since Braze does not allow personalization of CSS,
  * any CSS rules that do not match any elements are likely caused by Braze
- * changing there rendering engine without notice. This could lead to broken
+ * changing their rendering engine without notice. This could lead to broken
  * styles on the banners and a bad user experience.
  * @param meta Braze Banner meta information
  * @param stopOnFirstProblem Whether to stop checking on the first problem found
