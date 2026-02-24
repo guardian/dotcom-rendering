@@ -138,6 +138,7 @@ The banner uses a `postMessage` protocol to interact with the host DCR page.
 | `BRAZE_BANNERS_SYSTEM:GET_EMAIL_ADDRESS`           | Requests email (if signed in).                        |
 | `BRAZE_BANNERS_SYSTEM:NEWSLETTER_SUBSCRIBE`        | Subscribes to a newsletter ID.                        |
 | `BRAZE_BANNERS_SYSTEM:REMINDER_SUBSCRIBE`          | Creates a one-off reminder for contribution requests. |
+| `BRAZE_BANNERS_SYSTEM:NAVIGATE_TO_URL`             | Navigates the host page to a URL.                     |
 | `BRAZE_BANNERS_SYSTEM:DISMISS_BANNER`              | Removes the banner from the DOM.                      |
 | `BRAZE_BANNERS_SYSTEM:GET_SETTINGS_PROPERTY_VALUE` | Reads Key-Value pairs from the Campaign config.       |
 
@@ -234,7 +235,23 @@ Creates a one-off reminder for contribution requests.
 
 ---
 
-#### 5. DISMISS_BANNER
+#### 5. NAVIGATE_TO_URL
+
+Navigates the host DCR page to a URL (either in the same tab or a new tab).
+
+**Request Parameters**:
+
+-   `url` (String, **Required**): The URL to navigate to.
+-   `target` (String, _Optional_): Where to open the URL. Defaults to `'self'` if not provided.
+    -   Allowed values: `'self'`, `'blank'`.
+
+**Response**: None (navigation happens immediately)
+
+**Description**: Use this when the banner needs to redirect the user (e.g. to Support or Identity) without relying on navigation inside the iframe.
+
+---
+
+#### 6. DISMISS_BANNER
 
 Removes the banner from the DOM.
 
@@ -246,7 +263,7 @@ Removes the banner from the DOM.
 
 ---
 
-#### 6. GET_SETTINGS_PROPERTY_VALUE
+#### 7. GET_SETTINGS_PROPERTY_VALUE
 
 Reads a specific Key-Value pair from the Campaign configuration.
 
@@ -476,7 +493,28 @@ Below are practical examples of how to call these features from within your Braz
 </script>
 ```
 
-#### Example 6: Complete Reminder Flow with Multiple Steps
+#### Example 6: Navigate to URL
+
+```html
+<button id="open-support-btn">Support The Guardian</button>
+
+<script>
+	document
+		.getElementById('open-support-btn')
+		.addEventListener('click', () => {
+			window.parent.postMessage(
+				{
+					type: 'BRAZE_BANNERS_SYSTEM:NAVIGATE_TO_URL',
+					url: 'https://support.theguardian.com/contribute',
+					target: 'blank', // optional: 'self' | 'blank' (defaults to 'self')
+				},
+				'*',
+			);
+		});
+</script>
+```
+
+#### Example 7: Complete Reminder Flow with Multiple Steps
 
 ```html
 <div id="step-1">
