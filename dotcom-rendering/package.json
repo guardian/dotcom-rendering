@@ -157,6 +157,7 @@
 		"typescript": "5.5.3",
 		"typescript-json-schema": "0.64.0",
 		"unified": "11.0.5",
+		"url": "0.11.4",
 		"valibot": "0.28.1",
 		"web-vitals": "4.2.3",
 		"webpack": "5.104.1",
