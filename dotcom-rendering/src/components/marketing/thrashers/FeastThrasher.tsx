@@ -28,6 +28,7 @@ const styles = {
 					border-radius: 8px;
 					overflow: hidden;
 					display: block;
+					box-sizing: border-box;
 			  `
 			: ''}
 	`,
