@@ -8,6 +8,7 @@ import {
 	submitClickComponentEvent,
 	submitComponentEvent,
 } from '../client/ophan/ophan';
+import type { ArticleFormat } from '../lib/articleFormat';
 import { getZIndex } from '../lib/getZIndex';
 import { generateImageURL } from '../lib/image';
 import { useIsInView } from '../lib/useIsInView';
@@ -21,6 +22,7 @@ import {
 } from '../lib/video';
 import { palette } from '../palette';
 import type { VideoPlayerFormat } from '../types/mainMedia';
+import { Caption } from './Caption';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
 import type {
@@ -245,6 +247,9 @@ type Props = {
 	 */
 	containerAspectRatioMobile?: number;
 	containerAspectRatioDesktop?: number;
+	caption?: string;
+	format?: ArticleFormat;
+	isMainMedia?: boolean;
 };
 
 export const SelfHostedVideo = ({
@@ -269,6 +274,9 @@ export const SelfHostedVideo = ({
 	maxAspectRatio,
 	containerAspectRatioMobile,
 	containerAspectRatioDesktop,
+	caption,
+	format,
+	isMainMedia,
 }: Props) => {
 	const adapted = useShouldAdapt();
 	const { renderingTarget } = useConfig();
@@ -757,64 +765,75 @@ export const SelfHostedVideo = ({
 	const preloadPartialData = !!isAutoplayAllowed || !!isInView;
 
 	return (
-		<div
-			css={[
-				videoContainerStyles(
-					isCinemagraph,
-					aspectRatioOfVisibleVideo,
-					containerAspectRatioMobile,
-					containerAspectRatioDesktop,
-				),
-			]}
+		<figure
+			className={`video-container ${videoStyle.toLocaleLowerCase()}`}
+			data-component="gu-video-loop"
 		>
-			<figure
+			<div
 				ref={setNode}
-				css={figureStyles(
-					aspectRatio,
-					aspectRatioOfVisibleVideo,
-					isGreyBarsAtSidesOnDesktop,
-					isGreyBarsAtTopAndBottomOnDesktop,
-					isVideoCroppedAtTopBottom,
-					isVideoCroppedAtLeftRight,
-					containerAspectRatioDesktop,
-				)}
-				className={`video-container ${videoStyle.toLocaleLowerCase()}`}
-				data-component="gu-video-loop"
+				css={[
+					videoContainerStyles(
+						isCinemagraph,
+						aspectRatioOfVisibleVideo,
+						containerAspectRatioMobile,
+						containerAspectRatioDesktop,
+					),
+				]}
 			>
-				<SelfHostedVideoPlayer
-					sources={sources}
-					atomId={atomId}
-					uniqueId={uniqueId}
-					width={width}
-					height={height}
-					videoStyle={videoStyle}
-					posterImage={optimisedPosterImage}
-					FallbackImageComponent={FallbackImageComponent}
-					currentTime={currentTime}
-					setCurrentTime={setCurrentTime}
-					ref={vidRef}
-					isPlayable={isPlayable}
-					playerState={playerState}
-					isMuted={isMuted}
-					handleLoadedMetadata={handleLoadedMetadata}
-					handleLoadedData={handleLoadedData}
-					handleCanPlay={handleCanPlay}
-					handlePlaying={handlePlaying}
-					handlePlayPauseClick={handlePlayPauseClick}
-					handleAudioClick={handleAudioClick}
-					handleKeyDown={handleKeyDown}
-					handlePause={handlePause}
-					onError={onError}
-					AudioIcon={hasAudio ? AudioIcon : null}
-					preloadPartialData={preloadPartialData}
-					showPlayIcon={showPlayIcon}
-					showProgressBar={showProgressBar}
-					subtitleSource={subtitleSource}
-					subtitleSize={subtitleSize}
-					controlsPosition={controlsPosition}
-					activeCue={activeCue}
+				<div
+					css={figureStyles(
+						aspectRatio,
+						aspectRatioOfVisibleVideo,
+						isGreyBarsAtSidesOnDesktop,
+						isGreyBarsAtTopAndBottomOnDesktop,
+						isVideoCroppedAtTopBottom,
+						isVideoCroppedAtLeftRight,
+						containerAspectRatioDesktop,
+					)}
+				>
+					<SelfHostedVideoPlayer
+						sources={sources}
+						atomId={atomId}
+						uniqueId={uniqueId}
+						width={width}
+						height={height}
+						videoStyle={videoStyle}
+						posterImage={optimisedPosterImage}
+						FallbackImageComponent={FallbackImageComponent}
+						currentTime={currentTime}
+						setCurrentTime={setCurrentTime}
+						ref={vidRef}
+						isPlayable={isPlayable}
+						playerState={playerState}
+						isMuted={isMuted}
+						handleLoadedMetadata={handleLoadedMetadata}
+						handleLoadedData={handleLoadedData}
+						handleCanPlay={handleCanPlay}
+						handlePlaying={handlePlaying}
+						handlePlayPauseClick={handlePlayPauseClick}
+						handleAudioClick={handleAudioClick}
+						handleKeyDown={handleKeyDown}
+						handlePause={handlePause}
+						onError={onError}
+						AudioIcon={hasAudio ? AudioIcon : null}
+						preloadPartialData={preloadPartialData}
+						showPlayIcon={showPlayIcon}
+						showProgressBar={showProgressBar}
+						subtitleSource={subtitleSource}
+						subtitleSize={subtitleSize}
+						controlsPosition={controlsPosition}
+						activeCue={activeCue}
+					/>
+				</div>
+			</div>
+			{!!caption && format && (
+				<Caption
+					captionText={caption}
+					format={format}
+					isMainMedia={isMainMedia}
+					mediaType="SelfHostedVideo"
 				/>
-			</figure>
-		</div>
+			)}
+		</figure>
 	);
 };
