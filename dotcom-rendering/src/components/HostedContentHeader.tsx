@@ -20,7 +20,6 @@ import { BrandingLabel } from './BrandingLabel';
 
 export type Props = {
 	branding: Branding;
-	accentColor?: string;
 };
 
 const headerWrapperStyles = css`
@@ -137,10 +136,9 @@ const Logo = () => (
 	</a>
 );
 
-export const HostedContentHeader = ({
-	branding,
-	accentColor = sourcePalette.neutral[38],
-}: Props) => {
+export const HostedContentHeader = ({ branding }: Props) => {
+	const accentColor =
+		branding.hostedCampaignColour ?? sourcePalette.neutral[38];
 	return (
 		<div css={headerWrapperStyles}>
 			<div css={brandingStyles}>
