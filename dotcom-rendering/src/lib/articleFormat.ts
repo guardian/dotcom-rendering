@@ -32,7 +32,6 @@ export enum ArticleDesign {
 	HostedArticle,
 	HostedVideo,
 	HostedGallery,
-	HostedAudio,
 }
 
 export enum ArticleDisplay {

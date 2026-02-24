@@ -156,7 +156,7 @@ export const ArticleBody = ({
 	const isHostedContent =
 		format.design === ArticleDesign.HostedArticle ||
 		format.design === ArticleDesign.HostedVideo ||
-		format.design === ArticleDesign.HostedAudio;
+		format.design === ArticleDesign.HostedGallery;
 	const language = decideLanguage(lang);
 	const languageDirection = decideLanguageDirection(isRightToLeftLang);
 	const hasObserverPublicationTag = tags.find(
