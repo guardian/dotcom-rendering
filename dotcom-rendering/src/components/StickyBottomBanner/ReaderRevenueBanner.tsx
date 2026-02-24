@@ -48,6 +48,7 @@ type BaseProps = {
 	signInBannerLastClosedAt?: string;
 	abandonedBasketBannerLastClosedAt?: string;
 	pageId?: string;
+	inHoldbackGroup?: boolean;
 };
 
 type BuildPayloadProps = BaseProps & {
@@ -127,6 +128,7 @@ const buildPayload = async ({
 	userConsent,
 	hideSupportMessagingForUser,
 	pageId,
+	inHoldbackGroup,
 }: BuildPayloadProps): Promise<BannerPayload> => {
 	const articleCounts = await asyncArticleCounts;
 	const weeklyArticleHistory = articleCounts?.weeklyArticleHistory;
@@ -158,6 +160,7 @@ const buildPayload = async ({
 				getCookie({ name: 'GU_CO_INCOMPLETE', shouldMemoize: true }),
 			),
 			pageId,
+			inHoldbackGroup,
 		},
 	};
 };
@@ -185,6 +188,7 @@ export const canShowRRBanner: CanShowFunctionType<
 	asyncArticleCounts,
 	ophanPageViewId,
 	pageId,
+	inHoldbackGroup,
 }) => {
 	if (!remoteBannerConfig) return { show: false };
 
@@ -247,6 +251,7 @@ export const canShowRRBanner: CanShowFunctionType<
 		userConsent,
 		hideSupportMessagingForUser,
 		pageId,
+		inHoldbackGroup,
 	});
 
 	const headers = await getAuthHeaders();
