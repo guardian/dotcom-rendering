@@ -52,12 +52,11 @@ export type CanShowData = {
 	renderingTarget: RenderingTarget;
 	ophanPageViewId: string;
 	pageId?: string;
+	inHoldbackGroup?: boolean;
 };
 
 const buildPayload = async (
-	data: CanShowData & { hideSupportMessagingForUser: boolean } & {
-		inHoldbackGroup?: boolean;
-	},
+	data: CanShowData & { hideSupportMessagingForUser: boolean },
 ): Promise<EpicPayload> => ({
 	targeting: {
 		contentType: data.contentType,

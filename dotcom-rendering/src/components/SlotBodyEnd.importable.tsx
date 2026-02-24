@@ -55,7 +55,7 @@ const slotStyles = css`
 `;
 
 const buildReaderRevenueEpicConfig = (
-	canShowData: RRCanShowData & { inHoldbackGroup?: boolean },
+	canShowData: RRCanShowData,
 ): CandidateConfig<ModuleData<EpicProps>> => {
 	return {
 		candidate: {
