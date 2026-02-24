@@ -27,6 +27,7 @@ const styles = {
 					margin: 0 4px;
 					border-radius: 8px;
 					overflow: hidden;
+					display: block;
 			  `
 			: ''}
 	`,
