@@ -103,7 +103,6 @@ const textElement =
 					key,
 					children,
 				});
-
 			case 'STRONG':
 				return jsx('strong', {
 					css: { fontWeight: 'bold' },
