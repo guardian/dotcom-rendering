@@ -152,7 +152,7 @@ describe('Enhance Cards', () => {
 				videoId: 'videoID',
 				height: 400,
 				width: 500,
-				origin: 'https://www.gu.com',
+				origin: 'https://guim-example.co.uk/',
 				title: 'Example video',
 				duration: 151,
 				expired: false,
@@ -252,7 +252,7 @@ describe('Enhance Cards', () => {
 			};
 			const audioDuration = '12:45';
 			const podcastImage = {
-				src: 'https://www.gu.com',
+				src: 'https://guim-example.co.uk/',
 				altText: 'Podcast Image',
 			};
 			expect(
@@ -267,7 +267,7 @@ describe('Enhance Cards', () => {
 				type: 'Audio',
 				duration: '12:45',
 				podcastImage: {
-					src: 'https://www.gu.com',
+					src: 'https://guim-example.co.uk/',
 					altText: 'Podcast Image',
 				},
 			});
@@ -280,7 +280,7 @@ describe('Enhance Cards', () => {
 			};
 			const audioDuration = '12:45';
 			const podcastImage = {
-				src: 'https://www.gu.com',
+				src: 'https://guim-example.co.uk/',
 				altText: 'Podcast Image',
 			};
 			const imageHide = true;
@@ -334,14 +334,14 @@ describe('Enhance Cards', () => {
 					undefined,
 					undefined,
 					undefined,
-					'www.gu.com/video-image',
+					'https://guim-example.co.uk/video-image',
 				),
 			).toEqual({
 				type: 'SelfHostedVideo',
 				atomId: 'atomID',
 				duration: 15,
 				height: 400,
-				image: 'www.gu.com/video-image',
+				image: 'https://guim-example.co.uk/video-image',
 				sources: [
 					{
 						mimeType: 'video/mp4',
