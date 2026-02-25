@@ -19,10 +19,24 @@ import { palette } from '../palette';
 import { FootballMatchStat } from './FootballMatchStat';
 import { Placeholder } from './Placeholder';
 
+/**
+ * [1] Create new stacking context so the component flows over ads when
+ *     placed in the left column of live blog layout on desktop
+ */
 const containerCss = css`
+	isolation: isolate; /* [1] */
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
+	padding: 10px;
+	background-color: ${palette('--football-live-blog-background')};
+	${from.mobileLandscape} {
+		padding: 20px;
+	}
+	${from.desktop} {
+		padding-top: 24px;
+		padding-right: 0;
+	}
 `;
 
 const buttonTextCss = css`
