@@ -29,8 +29,6 @@ type StorylinesSectionProps = {
 	editionId: EditionId;
 	storylinesContent: StorylinesContent;
 	pagination?: TagPagePagination;
-	likeHandler?: () => void;
-	dislikeHandler?: () => void;
 };
 
 const selectedTitleStyles = css`
@@ -161,8 +159,6 @@ export const StorylinesSectionContent = ({
 	storylinesContent,
 	editionId,
 	pagination,
-	dislikeHandler,
-	likeHandler,
 }: StorylinesSectionProps) => {
 	const parsedStorylines =
 		parseStorylinesContentToStorylines(storylinesContent);
@@ -196,151 +192,141 @@ export const StorylinesSectionContent = ({
 	}
 
 	return (
-		<>
-			<StorylinesSection
-				title="Storylines"
-				// Feels a bit hacky to hard code the container palette like this, but this provides some styling (notably the greyed background)
-				// Without having to add more palette variations and still sticking to the “container overrides” pattern in a section.
-				// Future improvement would be to add the palette variation specifically for this case.
-				containerPalette="LongRunningAltPalette"
-				url={url}
-				isTagPage={true}
-				showTopBorder={true}
-				ophanComponentLink={`container | ${containerId}`}
-				ophanComponentName={containerId}
-				editionId={editionId}
-				pagination={pagination}
-			>
-				{/* Storylines tab selector. This is a carousel on mobile. */}
-				<div css={tabsContainerStyles}>
-					<ScrollableCarousel
-						carouselLength={Math.ceil(parsedStorylines.length)}
-						visibleCarouselSlidesOnMobile={2}
-						visibleCarouselSlidesOnTablet={4}
-						sectionId={'storylines-tabs-carousel'}
-						shouldStackCards={{ desktop: false, mobile: false }}
-						gapSizes={{ column: 'large', row: 'medium' }}
-					>
-						{parsedStorylines.map((storyline, i) => (
-							<button
-								key={storyline.id}
-								css={tabStyles(
-									activeStorylineId === storyline.id,
-									i === 0,
-								)}
-								onClick={() =>
-									handleStorylineChange(storyline.id)
-								}
-								type="button"
-							>
-								{activeStorylineId === storyline.id ? (
-									<>
-										<span css={numberStyles}>{i + 1}</span>
-										<span>{storyline.title}</span>
-									</>
-								) : (
-									<>
-										<span css={numberStyles}>{i + 1}</span>
-										<span>{storyline.title}</span>
-									</>
-								)}
-							</button>
-						))}
-					</ScrollableCarousel>
-				</div>
-				{/* Active storyline title */}
-				{activeStoryline && (
-					<div css={selectedTitleStyles}>{activeStoryline.title}</div>
-				)}
-				{/* Content by categories */}
-				<div css={contentStyles}>
-					{activeStoryline?.categories.map((category, idx) => (
-						<div key={idx} css={contentCss}>
-							{category.title !== 'Key Stories' && (
-								<h2 css={categoryTitleCss}>{category.title}</h2>
+		<StorylinesSection
+			title="Storylines"
+			// Feels a bit hacky to hard code the container palette like this, but this provides some styling (notably the greyed background)
+			// Without having to add more palette variations and still sticking to the “container overrides” pattern in a section.
+			// Future improvement would be to add the palette variation specifically for this case.
+			containerPalette="LongRunningAltPalette"
+			url={url}
+			isTagPage={true}
+			ophanComponentLink={`container | ${containerId}`}
+			ophanComponentName={containerId}
+			editionId={editionId}
+			pagination={pagination}
+		>
+			{/* Storylines tab selector. This is a carousel on mobile. */}
+			<div css={tabsContainerStyles}>
+				<ScrollableCarousel
+					carouselLength={Math.ceil(parsedStorylines.length)}
+					visibleCarouselSlidesOnMobile={2}
+					visibleCarouselSlidesOnTablet={4}
+					sectionId={'storylines-tabs-carousel'}
+					shouldStackCards={{ desktop: false, mobile: false }}
+					gapSizes={{ column: 'large', row: 'medium' }}
+				>
+					{parsedStorylines.map((storyline, i) => (
+						<button
+							key={storyline.id}
+							css={tabStyles(
+								activeStorylineId === storyline.id,
+								i === 0,
 							)}
-							<FlexibleGeneral
-								groupedTrails={category.groupedTrails}
-								imageLoading={'eager'}
-								aspectRatio={'5:4'}
-								collectionId={index}
-								containerLevel="Secondary"
-								isStorylines={true}
-							/>
-						</div>
-					))}
-				</div>
-				{/* Context on article date range and mobile AI disclaimer */}
-				<div css={articleDateRangeStyle}>
-					<Hide from="leftCol">
-						<div
-							css={css`
-								padding-bottom: ${space[2]}px;
-							`}
+							onClick={() => handleStorylineChange(storyline.id)}
+							type="button"
 						>
-							Storylines is an experimental feature we are showing
-							to a limited audience as a Beta test. It uses
-							generative AI to identify three key storylines
-							within this topic and show valuable articles from
-							our archive. The aim is to give readers a better
-							understanding of a topic and access to a wider
-							variety of our journalism. The only text
-							automatically generated is the short description of
-							each storyline. It has been created in line with the
-							Guardian’s{' '}
-							<a href="https://www.theguardian.com/help/insideguardian/2023/jun/16/the-guardians-approach-to-generative-ai">
-								generative AI principles
-							</a>
-							.{' '}
-						</div>
-					</Hide>
-					<div>
-						{`These storylines were curated from ${formatDateRangeText(
-							storylinesContent.earliestArticleTime,
-							storylinesContent.latestArticleTime,
-						)}. Some articles may be older to provide further context.`}
+							{activeStorylineId === storyline.id ? (
+								<>
+									<span css={numberStyles}>{i + 1}</span>
+									<span>{storyline.title}</span>
+								</>
+							) : (
+								<>
+									<span css={numberStyles}>{i + 1}</span>
+									<span>{storyline.title}</span>
+								</>
+							)}
+						</button>
+					))}
+				</ScrollableCarousel>
+			</div>
+			{/* Active storyline title */}
+			{activeStoryline && (
+				<div css={selectedTitleStyles}>{activeStoryline.title}</div>
+			)}
+			{/* Content by categories */}
+			<div css={contentStyles}>
+				{activeStoryline?.categories.map((category, idx) => (
+					<div key={idx} css={contentCss}>
+						{category.title !== 'Key Stories' && (
+							<h2 css={categoryTitleCss}>{category.title}</h2>
+						)}
+						<FlexibleGeneral
+							groupedTrails={category.groupedTrails}
+							imageLoading={'eager'}
+							aspectRatio={'5:4'}
+							collectionId={index}
+							containerLevel="Secondary"
+							isStorylines={true}
+						/>
 					</div>
-				</div>
-
+				))}
+			</div>
+			{/* Context on article date range and mobile AI disclaimer */}
+			<div css={articleDateRangeStyle}>
 				<Hide from="leftCol">
-					<div css={footerStyle}>
-						<Footer
-							dislikeHandler={
-								dislikeHandler ??
-								(() =>
-									submitComponentEvent(
-										{
-											component: {
-												componentType: 'STORYLINES',
-												id: 'storylines-section',
-												products: [],
-												labels: [],
-											},
-											action: 'DISLIKE',
-										},
-										'Web',
-									))
-							}
-							likeHandler={
-								likeHandler ??
-								(() =>
-									submitComponentEvent(
-										{
-											component: {
-												componentType: 'STORYLINES',
-												id: 'storylines-section',
-												products: [],
-												labels: [],
-											},
-											action: 'LIKE',
-										},
-										'Web',
-									))
-							}
-						></Footer>
+					<div
+						css={css`
+							padding-bottom: ${space[2]}px;
+						`}
+					>
+						Storylines is an experimental feature we are showing to
+						a limited audience as a Beta test. It uses generative AI
+						to identify three key storylines within this topic and
+						show valuable articles from our archive. The aim is to
+						give readers a better understanding of a topic and
+						access to a wider variety of our journalism. The only
+						text automatically generated is the short description of
+						each storyline. It has been created in line with the
+						Guardian’s{' '}
+						<a href="https://www.theguardian.com/help/insideguardian/2023/jun/16/the-guardians-approach-to-generative-ai">
+							generative AI principles
+						</a>
+						.{' '}
 					</div>
 				</Hide>
-			</StorylinesSection>
-		</>
+				<div>
+					{`These storylines were curated from ${formatDateRangeText(
+						storylinesContent.earliestArticleTime,
+						storylinesContent.latestArticleTime,
+					)}. Some articles may be older to provide further context.`}
+				</div>
+			</div>
+
+			<Hide from="leftCol">
+				<div css={footerStyle}>
+					<Footer
+						dislikeHandler={() =>
+							void submitComponentEvent(
+								{
+									component: {
+										componentType: 'STORYLINES',
+										id: 'storylines-section',
+										products: [],
+										labels: [],
+									},
+									action: 'DISLIKE',
+								},
+								'Web',
+							)
+						}
+						likeHandler={() => {
+							void submitComponentEvent(
+								{
+									component: {
+										componentType: 'STORYLINES',
+										id: 'storylines-section',
+										products: [],
+										labels: [],
+									},
+									action: 'LIKE',
+								},
+								'Web',
+							);
+						}}
+					></Footer>
+				</div>
+			</Hide>
+		</StorylinesSection>
 	);
 };

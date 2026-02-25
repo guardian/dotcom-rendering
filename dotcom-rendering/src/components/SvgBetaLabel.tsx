@@ -5,6 +5,7 @@
  */
 export const SvgBetaLabel = () => (
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 74.23 74.23">
+		<title>Guardian Beta Label</title>
 		<defs>
 			<style>
 				{`.cls-1 {

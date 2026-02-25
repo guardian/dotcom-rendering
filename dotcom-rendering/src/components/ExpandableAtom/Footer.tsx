@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { palette as themePalette } from '../../palette';
 
 /// LIKE/DISLIKE FEEDBACK FOOTER
-// The storylines style variable enables left alignment in the tag page storylines section
+// The isStorylines variable enables left alignment in the tag page storylines section
 const footerStyling = (isStorylines?: boolean) => css`
 	font-size: 13px;
 	line-height: 16px;
