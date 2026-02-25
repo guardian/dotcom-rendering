@@ -31,6 +31,10 @@ const headerWrapperStyles = css`
 	height: 48px;
 	color: ${sourcePalette.neutral[100]};
 
+	${from.mobileLandscape} {
+		padding: 0 20px;
+	}
+
 	${from.tablet} {
 		height: 58px;
 	}
