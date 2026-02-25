@@ -368,6 +368,12 @@
         "matchUrl": {
             "type": "string"
         },
+        "matchHeaderUrl": {
+            "type": "string"
+        },
+        "matchStatsUrl": {
+            "type": "string"
+        },
         "matchType": {
             "$ref": "#/definitions/MatchType"
         },
@@ -2809,6 +2815,9 @@
                 },
                 "videoPlayerFormat": {
                     "$ref": "#/definitions/VideoPlayerFormat"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [

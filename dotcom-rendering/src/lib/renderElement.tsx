@@ -513,6 +513,7 @@ export const renderElement = ({
 						format={format}
 						isMainMedia={isMainMedia}
 						videoStyle={element.videoPlayerFormat}
+						role={element.role}
 					/>
 				);
 			} else {
