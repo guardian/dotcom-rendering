@@ -104,6 +104,8 @@ export interface FEArticle {
 	pageType: PageType;
 
 	matchUrl?: string;
+	matchHeaderUrl?: string;
+	matchStatsUrl?: string;
 	matchType?: MatchType;
 	isSpecialReport: boolean;
 
