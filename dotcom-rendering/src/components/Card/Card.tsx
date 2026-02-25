@@ -27,7 +27,7 @@ import type {
 	DCRSupportingContent,
 } from '../../types/front';
 import type { CardMediaType } from '../../types/layout';
-import type { MainMedia } from '../../types/mainMedia';
+import type { ArticleMedia, MainMedia } from '../../types/mainMedia';
 import type { OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
 import { BrandingLabel } from '../BrandingLabel';
@@ -95,7 +95,15 @@ export type Props = {
 	trailText?: string;
 	avatarUrl?: string;
 	showClock?: boolean;
+	/**
+	 * Media displayed on this card
+	 */
 	mainMedia?: MainMedia;
+	/**
+	 * The main media from the target article (used for pills/metadata)
+	 * Can differ from mainMedia if the card has replacement media.
+	 */
+	articleMedia?: ArticleMedia;
 	/**
 	 * For interactive media (e.g., video or slideshow), certain card sizes are restricted from displaying
 	 * the interactive content because controls may be unavailable or inaccessible at those sizes.
@@ -141,7 +149,7 @@ export type Props = {
 	/** The index of the card in a carousel */
 	index?: number;
 	/**
-	 * Useful for videos. Has the form: collection-{collection ID}-{card grouping type}-{card index}
+	 * Useful for IDs. Has the form: collection-{collection ID}-{card grouping type}-{card index}
 	 * For example, the first splash card in the second collection would be: "collection-1-splash-0"
 	 */
 	uniqueId?: string;
@@ -152,14 +160,13 @@ export type Props = {
 	showTopBarDesktop?: boolean;
 	showTopBarMobile?: boolean;
 	trailTextSize?: TrailTextSize;
-	/** A kicker image is seperate to the main media and renders as part of the kicker */
+	/** A kicker image is separate to the main media and renders as part of the kicker */
 	showKickerImage?: boolean;
 	subtitleSize?: SubtitleSize;
 	/** Determines if the headline should be positioned within the content or outside the content */
 	headlinePosition?: 'inner' | 'outer';
 	isStorylines?: boolean;
 	starRatingSize?: RatingSizeType;
-	isInPersonalisationVariant?: boolean;
 };
 
 const waveformWrapper = (
@@ -398,7 +405,7 @@ export const Card = ({
 	subtitleSize = 'small',
 	isStorylines = false,
 	starRatingSize = 'small',
-	isInPersonalisationVariant,
+	articleMedia,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -831,7 +838,6 @@ export const Card = ({
 				headlineText={headlineText}
 				dataLinkName={resolvedDataLinkName}
 				isExternalLink={isExternalLink}
-				isInPersonalisationVariant={isInPersonalisationVariant}
 			/>
 			{headlinePosition === 'outer' && (
 				<div
@@ -1221,9 +1227,9 @@ export const Card = ({
 											<LabsBranding />
 										) : undefined
 									}
-									mainMedia={
+									media={
 										!isGallerySecondaryOnward
-											? mainMedia
+											? articleMedia
 											: undefined
 									}
 									isNewsletter={isNewsletter}

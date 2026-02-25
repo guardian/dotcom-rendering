@@ -16,6 +16,7 @@ import {
 	shouldHideSupportMessaging,
 	useHasOptedOutOfArticleCount,
 } from '../lib/contributions';
+import { useBetaAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
@@ -102,6 +103,7 @@ const usePayload = ({
 	const countryCode = useCountryCode('liveblog-epic');
 	const mvtId = useMvtId();
 	const isSignedIn = useIsSignedIn();
+	const abTests = useBetaAB();
 
 	if (isSignedIn === 'Pending') return;
 	const hideSupportMessagingForUser = shouldHideSupportMessaging(isSignedIn);
@@ -111,6 +113,8 @@ const usePayload = ({
 	log('dotcom', 'LiveBlogEpic has consent state');
 	if (!countryCode) return;
 	log('dotcom', 'LiveBlogEpic has countryCode');
+	const inHoldbackGroup =
+		abTests?.isUserInTestGroup('growth-holdback-group', 'control') ?? false;
 
 	return {
 		targeting: {
@@ -129,6 +133,7 @@ const usePayload = ({
 			url: window.location.origin + window.location.pathname,
 			isSignedIn,
 			pageId,
+			inHoldbackGroup,
 		},
 	};
 };

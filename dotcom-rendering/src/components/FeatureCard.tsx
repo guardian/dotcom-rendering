@@ -26,7 +26,7 @@ import type {
 	DCRSupportingContent,
 } from '../types/front';
 import type { CardMediaType } from '../types/layout';
-import type { MainMedia } from '../types/mainMedia';
+import type { ArticleMedia, MainMedia } from '../types/mainMedia';
 import { BrandingLabel } from './BrandingLabel';
 import { CardFooter } from './Card/components/CardFooter';
 import { CardLink } from './Card/components/CardLink';
@@ -341,7 +341,15 @@ export type Props = {
 	imageSize: MediaSizeType;
 	imageLoading: Loading;
 	showClock?: boolean;
+	/**
+	 * Media displayed on this card
+	 */
 	mainMedia?: MainMedia;
+	/**
+	 * The main media from the target article (used for pills/metadata)
+	 * Can differ from mainMedia if the card has replacement media.
+	 */
+	articleMedia?: ArticleMedia;
 	trailText?: string;
 	/**
 	 * Note YouTube recommends a minimum width of 480px @see https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-youtube-player-size
@@ -423,6 +431,7 @@ export const FeatureCard = ({
 	isImmersive = false,
 	isStorylines = false,
 	starRatingSize,
+	articleMedia,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 
@@ -538,6 +547,7 @@ export const FeatureCard = ({
 										byline={byline}
 										showByline={showByline}
 										isLive={media.mainMedia.isLive}
+										articleMedia={articleMedia}
 									/>
 								</Island>
 							</div>
@@ -800,7 +810,7 @@ export const FeatureCard = ({
 												) : undefined
 											}
 											isNewsletter={isNewsletter}
-											mainMedia={mainMedia}
+											media={articleMedia}
 										/>
 
 										{!isImmersive &&

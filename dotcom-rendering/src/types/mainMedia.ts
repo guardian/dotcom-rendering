@@ -47,3 +47,9 @@ type Gallery = Media & {
 };
 
 export type MainMedia = YoutubeVideo | SelfHostedVideo | Audio | Gallery;
+
+export type ArticleMedia =
+	| Pick<Gallery, 'type' | 'count'>
+	| Pick<Audio, 'type' | 'duration'>
+	| Pick<SelfHostedVideo, 'type' | 'duration'>
+	| Pick<YoutubeVideo, 'type' | 'duration' | 'isLive'>;
