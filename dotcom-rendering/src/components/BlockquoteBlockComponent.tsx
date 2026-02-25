@@ -2,11 +2,11 @@ import { css, jsx } from '@emotion/react';
 import { articleItalic17 } from '@guardian/source/foundations';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
+import { isSkimlink } from '../lib/affiliateLinksUtils';
 import { getAttrs, isElement, parseHtml } from '../lib/domUtils';
 import { palette } from '../palette';
 import { logger } from '../server/lib/logging';
 import { QuoteIcon } from './QuoteIcon';
-import { isSkimlink } from '../lib/affiliateLinksUtils';
 
 type Props = {
 	html: string;
