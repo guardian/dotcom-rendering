@@ -19,23 +19,13 @@ const gridCss = css`
 	}
 `;
 
-const containerCss = css`
-	padding: 10px;
-	${from.desktop} {
-		padding-left: 20px;
-		padding-right: 0;
-	}
-`;
-
 const meta = {
 	title: 'Components/Football Mini Match Stats',
 	component: FootballMiniMatchStatsComponent,
 	decorators: [
 		(Story) => (
 			<div css={gridCss}>
-				<div css={containerCss}>
-					<Story />
-				</div>
+				<Story />
 			</div>
 		),
 	],
