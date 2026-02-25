@@ -10,7 +10,7 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
       "GuScheduledLambda",
       "GuLambdaErrorPercentageAlarm"
     ],
-    "gu:cdk:version": "62.3.4"
+    "gu:cdk:version": "62.3.5"
   },
   "Resources": {
     "EmailIdentityAbtestingnotificationlambdaE053C648": {
@@ -24,7 +24,7 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
           },
           {
             "Key": "gu:cdk:version",
-            "Value": "62.3.4"
+            "Value": "62.3.5"
           },
           {
             "Key": "gu:repo",
@@ -113,7 +113,7 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
         "Tags": [
           {
             "Key": "gu:cdk:version",
-            "Value": "62.3.4"
+            "Value": "62.3.5"
           },
           {
             "Key": "gu:repo",
@@ -166,7 +166,7 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
           },
           {
             "Key": "gu:cdk:version",
-            "Value": "62.3.4"
+            "Value": "62.3.5"
           },
           {
             "Key": "gu:repo",
@@ -340,7 +340,7 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
           },
           {
             "Key": "gu:cdk:version",
-            "Value": "62.3.4"
+            "Value": "62.3.5"
           },
           {
             "Key": "gu:repo",
@@ -452,7 +452,7 @@ exports[`The AB testing notification lambda stack > matches the CODE snapshot 1`
         "Tags": [
           {
             "Key": "gu:cdk:version",
-            "Value": "62.3.4"
+            "Value": "62.3.5"
           },
           {
             "Key": "gu:repo",
@@ -494,7 +494,7 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
       "GuScheduledLambda",
       "GuLambdaErrorPercentageAlarm"
     ],
-    "gu:cdk:version": "62.3.4"
+    "gu:cdk:version": "62.3.5"
   },
   "Resources": {
     "EmailIdentityAbtestingnotificationlambdaE053C648": {
@@ -508,7 +508,7 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
           },
           {
             "Key": "gu:cdk:version",
-            "Value": "62.3.4"
+            "Value": "62.3.5"
           },
           {
             "Key": "gu:repo",
@@ -597,7 +597,7 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
         "Tags": [
           {
             "Key": "gu:cdk:version",
-            "Value": "62.3.4"
+            "Value": "62.3.5"
           },
           {
             "Key": "gu:repo",
@@ -660,7 +660,7 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
           },
           {
             "Key": "gu:cdk:version",
-            "Value": "62.3.4"
+            "Value": "62.3.5"
           },
           {
             "Key": "gu:repo",
@@ -834,7 +834,7 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
           },
           {
             "Key": "gu:cdk:version",
-            "Value": "62.3.4"
+            "Value": "62.3.5"
           },
           {
             "Key": "gu:repo",
@@ -869,7 +869,7 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
           },
           {
             "Key": "gu:cdk:version",
-            "Value": "62.3.4"
+            "Value": "62.3.5"
           },
           {
             "Key": "gu:repo",
@@ -1006,7 +1006,7 @@ exports[`The AB testing notification lambda stack > matches the PROD snapshot 1`
         "Tags": [
           {
             "Key": "gu:cdk:version",
-            "Value": "62.3.4"
+            "Value": "62.3.5"
           },
           {
             "Key": "gu:repo",
