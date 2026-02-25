@@ -327,7 +327,7 @@ const decideReplacementMedia = (
 	return undefined;
 };
 
-const getMediaMetadata = (
+export const getMediaMetadata = (
 	articleMainMedia: MainMedia,
 ): ArticleMedia | undefined => {
 	switch (articleMainMedia.type) {
