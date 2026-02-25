@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	breakpoints,
 	from,
 	palette as sourcePalette,
 	space,
@@ -59,7 +60,8 @@ const mainMediaStyles = css`
 	max-height: 400px;
 
 	${from.wide} {
-		${grid.between('left-column-start', 'right-column-end')}
+		width: ${breakpoints.wide}px;
+		margin: auto;
 	}
 `;
 
@@ -68,6 +70,9 @@ const captionStyles = css`
 	grid-row: 2;
 	justify-self: end;
 	${from.desktop} {
+		${grid.between('centre-column-start', 'right-column-end')}
+	}
+	${from.leftCol} {
 		${grid.column.right}
 	}
 `;
@@ -75,7 +80,10 @@ const captionStyles = css`
 const headlineStyles = css`
 	${grid.column.centre}
 	${from.desktop} {
-		${grid.between(4, 'grid-end')}
+		${grid.span(4, 8)}
+	}
+	${from.leftCol} {
+		${grid.column.centre}
 	}
 `;
 
@@ -96,6 +104,9 @@ const standfirstStyles = css`
 	grid-row: 1;
 	${from.desktop} {
 		${grid.between(4, 'right-column-end')}
+	}
+	${from.leftCol} {
+		${grid.column.centre}
 	}
 `;
 
@@ -134,11 +145,11 @@ const onwardContentStyles = css`
 const ctaStyles = css`
 	${grid.column.all}
 	grid-row:auto;
-
 	overflow: hidden;
 	max-height: 400px;
 	${from.wide} {
-		${grid.between('left-column-start', 'right-column-end')}
+		width: ${breakpoints.wide}px;
+		margin: auto;
 	}
 `;
 
