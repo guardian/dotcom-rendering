@@ -328,7 +328,6 @@ export type FECollection = {
 	config: FECollectionConfig;
 	hasMore: boolean;
 	targetedTerritory?: Territory;
-	bucket?: FEFrontCard[];
 };
 
 export type FEFrontConfig = {

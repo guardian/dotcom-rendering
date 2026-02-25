@@ -4,6 +4,7 @@ import {
 	headlineBold24,
 	remSpace,
 	textEgyptian17,
+	textSansBold20,
 } from '@guardian/source/foundations';
 import {
 	ArticleDesign,
@@ -70,6 +71,13 @@ const globalOlStyles = () => css`
 			margin-right: ${remSpace[1]};
 			float: left;
 		}
+	}
+`;
+
+const hostedContentH2Styles = css`
+	h2 {
+		${textSansBold20};
+		margin-bottom: ${remSpace[2]};
 	}
 `;
 
@@ -145,6 +153,10 @@ export const ArticleBody = ({
 	const isInteractiveContent =
 		format.design === ArticleDesign.Interactive ||
 		format.design === ArticleDesign.Crossword;
+	const isHostedContent =
+		format.design === ArticleDesign.HostedArticle ||
+		format.design === ArticleDesign.HostedVideo ||
+		format.design === ArticleDesign.HostedAudio;
 	const language = decideLanguage(lang);
 	const languageDirection = decideLanguageDirection(isRightToLeftLang);
 	const hasObserverPublicationTag = tags.find(
@@ -230,6 +242,7 @@ export const ArticleBody = ({
 				css={[
 					`margin-top: ${remSpace[3]}`,
 					isInteractiveContent ? null : bodyPadding,
+					isHostedContent && hostedContentH2Styles,
 					globalH3Styles(format.display),
 					globalOlStyles(),
 					globalStrongStyles,

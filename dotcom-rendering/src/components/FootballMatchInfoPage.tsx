@@ -29,17 +29,20 @@ export const FootballMatchInfoPage = ({
 		<main id="maincontent">
 			<Island priority="feature" defer={{ until: 'visible' }}>
 				<FootballMatchHeaderWrapper
-					leagueName={competitionName}
-					match={matchInfo}
-					tabs={{
-						selected: 'info',
-						matchKind: matchInfo.kind,
-						// We don't have these urls in the data yet. This will be fixed in upcoming PRs.
-						reportURL: undefined,
-						liveURL: undefined,
+					initialTab="info"
+					initialData={{
+						leagueName: competitionName,
+						match: matchInfo,
+						tabs: {
+							selected: 'info',
+							matchKind: matchInfo.kind,
+							// We don't have these urls in the data yet. This will be fixed in upcoming PRs.
+							reportURL: undefined,
+							liveURL: undefined,
+						},
 					}}
 					edition={edition}
-					matchHeaderURL={matchHeaderUrl}
+					matchHeaderURL={matchHeaderUrl.href}
 				/>
 			</Island>
 			<div css={bodyGridStyles}>

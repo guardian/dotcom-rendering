@@ -167,7 +167,6 @@ export type Props = {
 	headlinePosition?: 'inner' | 'outer';
 	isStorylines?: boolean;
 	starRatingSize?: RatingSizeType;
-	isInPersonalisationVariant?: boolean;
 };
 
 const waveformWrapper = (
@@ -406,7 +405,6 @@ export const Card = ({
 	subtitleSize = 'small',
 	isStorylines = false,
 	starRatingSize = 'small',
-	isInPersonalisationVariant,
 	articleMedia,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
@@ -840,7 +838,6 @@ export const Card = ({
 				headlineText={headlineText}
 				dataLinkName={resolvedDataLinkName}
 				isExternalLink={isExternalLink}
-				isInPersonalisationVariant={isInPersonalisationVariant}
 			/>
 			{headlinePosition === 'outer' && (
 				<div
