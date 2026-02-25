@@ -68,9 +68,9 @@ const mainMediaStyles = css`
 const captionStyles = css`
 	${grid.column.centre}
 	grid-row: 2;
-	justify-self: end;
+
 	${from.desktop} {
-		${grid.between('centre-column-start', 'right-column-end')}
+		${grid.span(12, 2)}
 	}
 	${from.leftCol} {
 		${grid.column.right}
@@ -78,24 +78,26 @@ const captionStyles = css`
 `;
 
 const headlineStyles = css`
+	margin-top: ${space[4]}px;
 	${grid.column.centre}
 	${from.desktop} {
 		${grid.span(4, 8)}
+		grid-row: 2;
 	}
 	${from.leftCol} {
 		${grid.column.centre}
 	}
 `;
-
 const metaStyles = css`
+	margin-top: ${space[4]}px;
+	padding: ${space[1]}px;
 	${grid.column.centre}
-	grid-row: 2;
+	grid-row: 3;
 	${from.desktop} {
-		grid-row: 1;
+		grid-row: 2;
 	}
 	${from.leftCol} {
 		${grid.column.left}
-		grid-row: 1;
 	}
 `;
 
@@ -246,6 +248,22 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 							/>
 						</div>
 
+						{props.renderingTarget === 'Web' && (
+							<div data-print-layout="hide" css={metaStyles}>
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
+									<ShareButton
+										pageId={frontendData.pageId}
+										webTitle={frontendData.webTitle}
+										format={format}
+										context="ArticleMeta"
+									/>
+								</Island>
+							</div>
+						)}
+
 						<div css={headlineStyles}>
 							<ArticleHeadline
 								format={format}
@@ -266,22 +284,6 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 								standfirst={frontendData.standfirst}
 							/>
 						</div>
-
-						{props.renderingTarget === 'Web' && (
-							<div data-print-layout="hide" css={metaStyles}>
-								<Island
-									priority="feature"
-									defer={{ until: 'visible' }}
-								>
-									<ShareButton
-										pageId={frontendData.pageId}
-										webTitle={frontendData.webTitle}
-										format={format}
-										context="ArticleMeta"
-									/>
-								</Island>
-							</div>
-						)}
 
 						<div css={articleBodyStyles}>
 							<ArticleContainer format={format}>
