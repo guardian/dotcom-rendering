@@ -1,10 +1,11 @@
 import { palette as sourcePalette } from '@guardian/source/foundations';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import type { Branding } from '../types/branding';
 import { HostedContentHeader } from './HostedContentHeader';
 import type { Props as HostedContentHeaderProps } from './HostedContentHeader';
 import { Section } from './Section';
 
-export default {
+const meta = {
 	component: HostedContentHeader,
 	title: 'Components/HostedContentHeader',
 	args: {
@@ -25,19 +26,23 @@ export default {
 			hostedCampaignColour: '#d90c1f',
 		} satisfies Branding,
 	},
-	render: (args: HostedContentHeaderProps) => {
+	render: (args: HostedContentHeaderProps) => (
 		<Section
 			fullWidth={true}
 			showSideBorders={false}
 			showTopBorder={false}
 			shouldCenter={false}
 			backgroundColour={sourcePalette.neutral[7]}
-			padSides={true}
+			padSides={false}
 			element="header"
 		>
 			<HostedContentHeader {...args} />
-		</Section>;
-	},
-};
+		</Section>
+	),
+} satisfies Meta<typeof HostedContentHeader>;
 
-export const Default = {};
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Default = {} satisfies Story;
