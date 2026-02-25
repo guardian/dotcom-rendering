@@ -63,8 +63,8 @@ function parseArticleDataToFrontCard(
 		index,
 	)}`;
 	const mainMedia =
-		category.category === 'Find multimedia' && article.image?.mediaData
-			? article.image.mediaData
+		category.category === 'Find multimedia'
+			? article.image?.mediaData
 			: undefined;
 	const articleMedia = mainMedia && getMediaMetadata(mainMedia);
 	return {
