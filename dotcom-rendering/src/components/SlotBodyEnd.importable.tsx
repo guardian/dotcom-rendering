@@ -190,6 +190,7 @@ export const SlotBodyEnd = ({
 			contentType,
 			shouldHideReaderRevenue,
 			tags,
+			window.guardian.config.stage,
 		);
 
 		const epicConfig: SlotConfig = {

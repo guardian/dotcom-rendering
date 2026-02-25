@@ -340,6 +340,7 @@ export const StickyBottomBanner = ({
 			contentType,
 			shouldHideReaderRevenue,
 			tags,
+			window.guardian.config.stage,
 		);
 
 		const signInGate = buildSignInGateConfig(

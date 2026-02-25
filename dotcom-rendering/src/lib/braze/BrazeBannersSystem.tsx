@@ -7,6 +7,8 @@ import type {
 	ReminderComponent,
 } from '@guardian/support-dotcom-components/dist/shared/types/reminders';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { isProd } from '../../components/marketing/lib/stage';
+import type { StageType } from '../../types/config';
 import type { TagType } from '../../types/tag';
 import { getAuthState, getOptionsHeaders } from '../identity';
 import type { CandidateConfig, CanShowResult } from '../messagePicker';
@@ -257,6 +259,7 @@ export const buildBrazeBannersSystemConfig = (
 	contentType: string,
 	shouldHideReaderRevenue: boolean,
 	tags: TagType[],
+	stage: StageType,
 ): CandidateConfig<BrazeBannersSystemMeta> => {
 	return {
 		candidate: {
@@ -271,7 +274,11 @@ export const buildBrazeBannersSystemConfig = (
 				);
 			},
 			show: (meta: BrazeBannersSystemMeta) => () => (
-				<BrazeBannersSystemDisplay meta={meta} idApiUrl={idApiUrl} />
+				<BrazeBannersSystemDisplay
+					meta={meta}
+					idApiUrl={idApiUrl}
+					stage={stage}
+				/>
 			),
 		},
 		timeoutMillis: null,
@@ -429,10 +436,15 @@ const runCssCheckerOnBrazeBanner = (
 export const BrazeBannersSystemDisplay = ({
 	meta,
 	idApiUrl,
+	stage,
 }: {
 	meta: BrazeBannersSystemMeta;
 	idApiUrl: string;
+	stage: StageType;
 }) => {
+	const supportOrigin = isProd(stage)
+		? 'https://support.theguardian.com'
+		: 'https://support.code.dev-theguardian.com';
 	const authStatus = useAuthStatus();
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [showBanner, setShowBanner] = useState(true);
@@ -536,7 +548,7 @@ export const BrazeBannersSystemDisplay = ({
 				};
 
 				const response = await fetch(
-					'https://support.theguardian.com/reminders/create/one-off',
+					`${supportOrigin}/reminders/create/one-off`,
 					{
 						body: JSON.stringify(reminderSignupData),
 						method: 'POST',
@@ -561,7 +573,7 @@ export const BrazeBannersSystemDisplay = ({
 				return false;
 			}
 		},
-		[fetchEmail],
+		[fetchEmail, supportOrigin],
 	);
 
 	/**
