@@ -1,4 +1,3 @@
-import { ArticleDisplay, ArticleSpecial, Pillar } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
@@ -6,8 +5,11 @@ import { images } from '../../fixtures/generated/images';
 import type { ArticleFormat } from '../lib/articleFormat';
 import {
 	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
 	getAllDesigns,
 	getAllThemes,
+	Pillar,
 } from '../lib/articleFormat';
 import type { EditionId } from '../lib/edition';
 import { RenderArticleElement } from '../lib/renderElement';
