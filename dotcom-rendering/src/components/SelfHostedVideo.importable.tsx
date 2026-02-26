@@ -616,6 +616,20 @@ export const SelfHostedVideo = ({
 		}
 	};
 
+	const handleFullscreenClick = async (event: React.SyntheticEvent) => {
+		void submitClickComponentEvent(event.currentTarget, renderingTarget);
+		event.stopPropagation(); // Don't pause the video
+		const video = vidRef.current;
+
+		if (!video) return;
+
+		if (!document.fullscreenElement) {
+			await video.requestFullscreen();
+		} else {
+			await document.exitFullscreen();
+		}
+	};
+
 	/**
 	 * If the video was paused and we know that it wasn't paused by the user
 	 * or the intersection observer, we can deduce that it was paused by the
