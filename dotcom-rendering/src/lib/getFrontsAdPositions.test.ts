@@ -24,9 +24,6 @@ const testCollection: AdCandidate = {
 	grouped: {
 		snap: [],
 		splash: [],
-		huge: [],
-		veryBig: [],
-		big: [],
 		standard: [],
 	},
 };
@@ -81,7 +78,7 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (2)
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (4)
-			{ ...testCollection, collectionType: 'dynamic/fast' },
+			{ ...testCollection, collectionType: 'flexible/general' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-I' }, // Ad position (6)
 			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (8)
@@ -99,27 +96,27 @@ describe('Mobile Ads', () => {
 	// We used https://www.theguardian.com/uk as a blueprint
 	it('UK Network Front, with more than 4 collections, with thrashers at various places', () => {
 		const testCollections: AdCandidate[] = [
-			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ad position (0)
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (0)
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
-			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ad position (2)
-			{ ...testCollection, collectionType: 'dynamic/slow' },
+			{ ...testCollection, collectionType: 'flexible/special' }, // Ad position (2)
+			{ ...testCollection, collectionType: 'flexible/special' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-V-mpu' }, // Ad position (4)
-			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'flexible/special' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (8)
-			{ ...testCollection, collectionType: 'dynamic/fast' },
-			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (11)
-			{ ...testCollection, collectionType: 'dynamic/fast' },
+			{ ...testCollection, collectionType: 'flexible/general' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (14)
-			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
 			{ ...testCollection, collectionType: 'scrollable/feature' }, // Ad position (17)
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (19)
-			{ ...testCollection, collectionType: 'dynamic/fast' },
+			{ ...testCollection, collectionType: 'flexible/general' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ignored - is before merch high position
 			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ignored - is merch high position
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
@@ -133,21 +130,21 @@ describe('Mobile Ads', () => {
 	// We used https://www.theguardian.com/international as a blueprint
 	it('International Network Front, with more than 4 collections, with thrashers at various places', () => {
 		const testCollections: AdCandidate[] = [
-			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ad position (0)
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (0)
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
-			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ad position (2)
-			{ ...testCollection, collectionType: 'dynamic/fast' },
-			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'flexible/special' }, // Ad position (2)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'flexible/special' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (5)
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
-			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ad position (7)
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (7)
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
-			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (11)
-			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
-			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ad position (14)
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (14)
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (16)
 			{ ...testCollection, collectionType: 'scrollable/feature' },
@@ -163,22 +160,22 @@ describe('Mobile Ads', () => {
 	// We used https://www.theguardian.com/us as a blueprint
 	it('US Network Front, with more than 4 collections, with thrashers at various places', () => {
 		const testCollections: AdCandidate[] = [
-			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ad position (0)
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (0)
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (2)
-			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
-			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ad position (5)
-			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'flexible/special' }, // Ad position (5)
+			{ ...testCollection, collectionType: 'flexible/special' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-III' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (9)
 			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
-			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (12)
 			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' },
-			{ ...testCollection, collectionType: 'dynamic/fast' }, // Ad position (14)
-			{ ...testCollection, collectionType: 'dynamic/fast' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (14)
+			{ ...testCollection, collectionType: 'flexible/general' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-V-mpu' }, // Ad position (16)
 			{ ...testCollection, collectionType: 'scrollable/feature' },
 			{ ...testCollection, collectionType: 'fixed/small/slow-III' }, // Ignored - before thrasher
@@ -194,7 +191,7 @@ describe('Mobile Ads', () => {
 	// We used https://www.theguardian.com/uk/lifeandstyle as a blueprint
 	it('Lifeandstyle front, with more than 4 collections, with thrashers at various places', () => {
 		const testCollections: AdCandidate[] = [
-			{ ...testCollection, collectionType: 'dynamic/slow' }, // Ad position (0)
+			{ ...testCollection, collectionType: 'flexible/special' }, // Ad position (0)
 			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
 			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ad position (3)
