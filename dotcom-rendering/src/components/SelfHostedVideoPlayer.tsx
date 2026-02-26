@@ -127,7 +127,7 @@ type Props = {
 	handleAudioClick: (event: SyntheticEvent) => void;
 	handleKeyDown: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
 	handlePause: (event: SyntheticEvent) => void;
-	handleFullscreenClick?: (event: SyntheticEvent) => Promise<void>;
+	handleFullscreenClick?: (event: SyntheticEvent) => void;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	AudioIcon: ((iconProps: IconProps) => JSX.Element) | null;
 	posterImage?: string;
@@ -321,9 +321,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 							{showFullscreenIcon && (
 								<button
 									type="button"
-									onClick={(event) =>
-										void handleFullscreenClick?.(event)
-									}
+									onClick={handleFullscreenClick}
 									css={buttonStyles}
 									data-link-name={`gu-video-loop-fullscreen-${atomId}`}
 								>

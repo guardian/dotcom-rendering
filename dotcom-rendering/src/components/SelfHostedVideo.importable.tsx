@@ -628,7 +628,7 @@ export const SelfHostedVideo = ({
 		}
 	};
 
-	const handleFullscreenClick = async (event: React.SyntheticEvent) => {
+	const handleFullscreenClick = (event: React.SyntheticEvent) => {
 		void submitClickComponentEvent(event.currentTarget, renderingTarget);
 		event.stopPropagation(); // Don't pause the video
 		const video = vidRef.current;
@@ -656,9 +656,9 @@ export const SelfHostedVideo = ({
 		}
 
 		if (document.fullscreenElement) {
-			await document.exitFullscreen();
+			void document.exitFullscreen();
 		}
-		await video.requestFullscreen();
+		void video.requestFullscreen();
 	};
 
 	/**
