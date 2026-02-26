@@ -13,6 +13,8 @@ import { FormatBoundary } from './FormatBoundary';
 import { LinkHeadline } from './LinkHeadline';
 
 const containerStyles = css`
+	position: absolute;
+	width: 300px;
 	padding-top: ${space[2]}px;
 	display: flex;
 	flex-direction: column;

@@ -14,14 +14,17 @@ import type {
 } from '../types/front';
 import type { TagPagePagination } from '../types/tagPage';
 import { isAustralianTerritory, type Territory } from '../types/territory';
+import type { TrailType } from '../types/trails';
 import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
 import { BrandingLabel } from './BrandingLabel';
 import { ContainerOverrides } from './ContainerOverrides';
 import { ContainerTitle } from './ContainerTitle';
 import { FrontPagination } from './FrontPagination';
 import { FrontSectionTitle } from './FrontSectionTitle';
+import { Hide } from './Hide';
 import { Island } from './Island';
 import { LabsSectionHeader } from './LabsSectionHeader';
+import { MostPopularFrontRight } from './MostPopularFrontRight';
 import { ShowHideButton } from './ShowHideButton';
 import { ShowMore } from './ShowMore.importable';
 import { Treats } from './Treats';
@@ -90,6 +93,11 @@ type Props = {
 	 *   the page skin background showing through the containers
 	 */
 	hasPageSkin?: boolean;
+	/**
+	 * The Slim Homepage AB test requires some sections to have reduced width so that
+	 * the Most Popular Front Right component can be placed on the right-hand side.
+	 */
+	slimifySectionForAbTest?: boolean;
 	discussionApiUrl: string;
 	collectionBranding?: CollectionBranding;
 	isTagPage?: boolean;
@@ -98,6 +106,8 @@ type Props = {
 	isAboveMobileAd?: boolean;
 	/** Indicates whether this is a Guardian Labs container */
 	isLabs?: boolean;
+	mostViewed?: TrailType[];
+	deeplyRead?: TrailType[];
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -354,14 +364,17 @@ const sectionControls = css`
 	}
 `;
 
-const sectionContent = css`
+const sectionContent = (isInSlimHomepageTestVariant: boolean) => css`
 	margin: 0;
+	grid-column: content;
 
 	.hidden > & {
 		display: none;
 	}
 
-	grid-column: content;
+	${from.wide} {
+		grid-column: ${isInSlimHomepageTestVariant ? '5 / 14' : 'content'};
+	}
 `;
 
 const sectionContentRow = (toggleable: boolean) => css`
@@ -384,6 +397,22 @@ const sectionContentBorderFromLeftCol = css`
 			top: ${space[2]}px;
 			bottom: 0;
 			border-left: 1px solid ${schemePalette('--section-border')};
+			transform: translateX(-50%);
+			/** Keeps the vertical divider ontop of carousel item dividers */
+			z-index: 1;
+		}
+	}
+`;
+
+const slimHomepageRightBorderStyles = css`
+	${from.wide} {
+		::after {
+			content: '';
+			position: absolute;
+			top: ${space[2]}px;
+			bottom: 0;
+			right: 0;
+			border-right: 1px solid ${schemePalette('--section-border')};
 			transform: translateX(-50%);
 			/** Keeps the vertical divider ontop of carousel item dividers */
 			z-index: 1;
@@ -619,6 +648,7 @@ export const FrontSection = ({
 	isOnPaidContentFront,
 	targetedTerritory,
 	hasPageSkin = false,
+	slimifySectionForAbTest = false,
 	discussionApiUrl,
 	collectionBranding,
 	isTagPage = false,
@@ -626,6 +656,8 @@ export const FrontSection = ({
 	isAboveDesktopAd = false,
 	isAboveMobileAd = false,
 	isLabs = false,
+	mostViewed = [],
+	deeplyRead = [],
 }: Props) => {
 	const isToggleable = toggleable && !!sectionId;
 	const showVerticalRule = !hasPageSkin;
@@ -690,6 +722,15 @@ export const FrontSection = ({
 										title,
 										showSectionColours,
 								  ),
+							// To reduce the width of the border line between Features
+							// and More features in the Slim Homepage AB test.
+							slimifySectionForAbTest &&
+								sectionId === 'more-features' &&
+								css`
+									${from.wide} {
+										grid-column: 2 / 14;
+									}
+								`,
 						]}
 					/>
 				)}
@@ -783,18 +824,56 @@ export const FrontSection = ({
 
 				<div
 					css={[
-						sectionContent,
+						sectionContent(slimifySectionForAbTest),
 						sectionContentHorizontalMargins,
 						sectionContentRow(toggleable),
 						topPadding,
 						showVerticalRule &&
 							isBetaContainer &&
 							sectionContentBorderFromLeftCol,
+						slimifySectionForAbTest &&
+							slimHomepageRightBorderStyles,
 					]}
 					id={`container-${sectionId}`}
 				>
 					{children}
 				</div>
+
+				{slimifySectionForAbTest && sectionId === 'news' && (
+					<div
+						css={css`
+							${from.wide} {
+								grid-row: content-toggleable;
+								grid-column: 14 / 18;
+							}
+						`}
+					>
+						<Hide when="below" breakpoint="wide">
+							<MostPopularFrontRight
+								heading="Most viewed"
+								trails={mostViewed}
+							/>
+						</Hide>
+					</div>
+				)}
+
+				{slimifySectionForAbTest && sectionId === 'features' && (
+					<div
+						css={css`
+							${from.wide} {
+								grid-row: content-toggleable;
+								grid-column: 14 / 18;
+							}
+						`}
+					>
+						<Hide when="below" breakpoint="wide">
+							<MostPopularFrontRight
+								heading="Deeply read"
+								trails={deeplyRead}
+							/>
+						</Hide>
+					</div>
+				)}
 
 				<div
 					css={[
