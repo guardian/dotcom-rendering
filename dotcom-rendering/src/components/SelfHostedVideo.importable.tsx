@@ -321,6 +321,10 @@ export const SelfHostedVideo = ({
 	 */
 	const isCinemagraph = videoStyle === 'Cinemagraph';
 
+	const singleClickTimerRef = useRef<ReturnType<typeof setTimeout> | null>(
+		null,
+	);
+
 	const [isInView, setNode] = useIsInView({
 		repeat: true,
 		threshold: VISIBILITY_THRESHOLD,
@@ -609,7 +613,25 @@ export const SelfHostedVideo = ({
 		if (isCinemagraph) return;
 
 		event.preventDefault();
-		playPauseVideo();
+
+		{
+			if (singleClickTimerRef.current) {
+				clearTimeout(singleClickTimerRef.current);
+			}
+		}
+		/*
+		 * Why have a delay?
+		 *
+		 * This is to prevent play/pause toggling when the user double-clicks.
+		 * A double-click fires as: click -> click -> dblclick, so without the delay
+		 * the video would toggle play/pause twice before the dblclick handler fires.
+		 * The 250ms delay roughly matches the system double-click threshold, giving
+		 * the dblclick handler enough time to cancel the pending single-click.
+		 *
+		 * */
+		singleClickTimerRef.current = setTimeout(() => {
+			playPauseVideo();
+		}, 250);
 	};
 
 	const handleAudioClick = (event: React.SyntheticEvent) => {
@@ -629,6 +651,10 @@ export const SelfHostedVideo = ({
 	};
 
 	const handleFullscreenClick = (event: React.SyntheticEvent) => {
+		if (singleClickTimerRef.current) {
+			clearTimeout(singleClickTimerRef.current);
+		}
+
 		void submitClickComponentEvent(event.currentTarget, renderingTarget);
 		event.stopPropagation(); // Don't pause the video
 		const video = vidRef.current;
