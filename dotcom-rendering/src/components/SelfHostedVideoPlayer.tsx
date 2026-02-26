@@ -244,6 +244,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 					}}
 					onPause={handlePause}
 					onClick={handlePlayPauseClick}
+					onDoubleClick={handleFullscreenClick}
 					onKeyDown={handleKeyDown}
 					onError={onError}
 				>
