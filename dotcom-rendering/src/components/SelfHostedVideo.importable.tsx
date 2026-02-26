@@ -200,9 +200,9 @@ const doesVideoHaveAudio = (video: HTMLVideoElement): boolean =>
 
 /**
  * 	The Fullscreen api is not supported by Safari mobile,
- * 	so we need to check if we have ios html video element properties we can use instead.
+ * 	so we need to check if we have access to the webkit api we can use instead.
  * */
-const shouldFullscreenOnIOS = (video: HTMLVideoElement): boolean => {
+const shouldUseWebkitFullscreen = (video: HTMLVideoElement): boolean => {
 	return (
 		'webkitDisplayingFullscreen' in video &&
 		'webkitEnterFullscreen' in video &&
@@ -635,7 +635,7 @@ export const SelfHostedVideo = ({
 
 		if (!video) return;
 
-		if (shouldFullscreenOnIOS(video)) {
+		if (shouldUseWebkitFullscreen(video)) {
 			/***
 			 * webkit fullscreen methods are not part of the standard HTMLVideoElement
 			 * type definition as they are iOS only.
