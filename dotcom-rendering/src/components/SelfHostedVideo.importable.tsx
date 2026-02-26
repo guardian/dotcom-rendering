@@ -870,6 +870,7 @@ export const SelfHostedVideo = ({
 						preloadPartialData={preloadPartialData}
 						showPlayIcon={showPlayIcon}
 						showProgressBar={showProgressBar}
+						showFullscreenIcon={videoStyle === 'Default'}
 						subtitleSource={subtitleSource}
 						subtitleSize={subtitleSize}
 						controlsPosition={controlsPosition}
