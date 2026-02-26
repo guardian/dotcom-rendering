@@ -7995,6 +7995,18 @@ const paletteColours = {
 		light: slideshowPaginationDotActiveLight,
 		dark: slideshowPaginationDotActiveDark,
 	},
+	'--slim-homepage-most-viewed-big-number': {
+		light: () => sourcePalette.neutral[60],
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--slim-homepage-most-viewed-header': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[46],
+	},
+	'--slim-homepage-most-viewed-headline': {
+		light: () => sourcePalette.neutral[0],
+		dark: () => sourcePalette.neutral[0],
+	},
 	'--speech-bubble-background': {
 		light: speechBubbleBackgroundLight,
 		dark: speechBubbleBackgroundLight,

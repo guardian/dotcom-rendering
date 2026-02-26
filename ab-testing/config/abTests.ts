@@ -108,6 +108,19 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
+		name: "fronts-and-curation-slim-homepage",
+		description:
+			"Test placing the Most Viewed and Deeply Read components in the right-hand column on the homepage.",
+		owners: ["fronts.and.curation@guardian.co.uk"],
+		status: "OFF",
+		expirationDate: `2026-04-28`,
+		type: "server",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
+	{
 		name: "growth-holdback-group",
 		description:
 			"Test for 5% holdback group that does not qualify for any testing so long as the test is live in the RRCP",
