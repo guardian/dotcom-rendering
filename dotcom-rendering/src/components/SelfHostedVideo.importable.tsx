@@ -833,11 +833,13 @@ export const SelfHostedVideo = ({
 						handleAudioClick={handleAudioClick}
 						handleKeyDown={handleKeyDown}
 						handlePause={handlePause}
+						handleFullscreenClick={handleFullscreenClick}
 						onError={onError}
 						AudioIcon={hasAudio ? AudioIcon : null}
 						preloadPartialData={preloadPartialData}
 						showPlayIcon={showPlayIcon}
 						showProgressBar={showProgressBar}
+						showFullscreenIcon={videoStyle === 'Default'}
 						subtitleSource={subtitleSource}
 						subtitleSize={subtitleSize}
 						controlsPosition={controlsPosition}

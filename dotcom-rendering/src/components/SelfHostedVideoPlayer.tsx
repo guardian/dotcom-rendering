@@ -6,6 +6,7 @@ import {
 	textSans20,
 } from '@guardian/source/foundations';
 import type { IconProps } from '@guardian/source/react-components';
+import { SvgArrowExpand } from '@guardian/source/react-components';
 import type {
 	Dispatch,
 	ReactElement,
@@ -60,29 +61,32 @@ const playIconStyles = css`
 	background: none;
 	padding: 0;
 `;
-
-const audioButtonStyles = (position: ControlsPosition) => css`
-	border: none;
-	background: none;
-	padding: 0;
+const controlContainerStyles = (position: ControlsPosition) => css`
 	position: absolute;
-	cursor: pointer;
-
+	display: flex;
+	gap: ${space[2]}px;
 	right: ${space[2]}px;
 	/* Take into account the progress bar height */
 	${position === 'bottom' && `bottom: ${space[3]}px;`}
 	${position === 'top' && `top: ${space[2]}px;`}
 `;
 
-const audioIconContainerStyles = css`
+const buttonStyles = css`
+	border: none;
+	background: none;
+	padding: 0;
+	cursor: pointer;
+`;
+
+const iconContainerStyles = css`
 	width: ${space[8]}px;
 	height: ${space[8]}px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: ${palette('--video-audio-icon-background')};
+	background-color: ${palette('--video-icon-background')};
 	border-radius: 50%;
-	border: 1px solid ${palette('--video-audio-icon-border')};
+	border: 1px solid ${palette('--video-icon-border')};
 `;
 
 export const PLAYER_STATES = [
@@ -123,12 +127,14 @@ type Props = {
 	handleAudioClick: (event: SyntheticEvent) => void;
 	handleKeyDown: (event: React.KeyboardEvent<HTMLVideoElement>) => void;
 	handlePause: (event: SyntheticEvent) => void;
+	handleFullscreenClick?: (event: SyntheticEvent) => Promise<void>;
 	onError: (event: SyntheticEvent<HTMLVideoElement>) => void;
 	AudioIcon: ((iconProps: IconProps) => JSX.Element) | null;
 	posterImage?: string;
 	preloadPartialData: boolean;
 	showPlayIcon: boolean;
 	showProgressBar: boolean;
+	showFullscreenIcon: boolean;
 	subtitleSource?: string;
 	subtitleSize?: SubtitleSize;
 	controlsPosition: ControlsPosition;
@@ -167,11 +173,13 @@ export const SelfHostedVideoPlayer = forwardRef(
 			handleAudioClick,
 			handleKeyDown,
 			handlePause,
+			handleFullscreenClick,
 			onError,
 			AudioIcon,
 			preloadPartialData,
 			showPlayIcon,
 			showProgressBar,
+			showFullscreenIcon,
 			subtitleSource,
 			subtitleSize,
 			controlsPosition,
@@ -285,30 +293,54 @@ export const SelfHostedVideoPlayer = forwardRef(
 								duration={ref.current!.duration}
 							/>
 						)}
-						{AudioIcon && (
-							<button
-								type="button"
-								onClick={handleAudioClick}
-								css={audioButtonStyles(controlsPosition)}
-								data-link-name={`gu-video-loop-${
-									isMuted ? 'unmute' : 'mute'
-								}-${atomId}`}
-							>
-								<div
-									css={audioIconContainerStyles}
-									data-testid={`${
+						<div css={controlContainerStyles(controlsPosition)}>
+							{AudioIcon && (
+								<button
+									type="button"
+									onClick={handleAudioClick}
+									css={buttonStyles}
+									data-link-name={`gu-video-loop-${
 										isMuted ? 'unmute' : 'mute'
-									}-icon`}
+									}-${atomId}`}
 								>
-									<AudioIcon
-										size="xsmall"
-										theme={{
-											fill: palette('--video-audio-icon'),
-										}}
-									/>
-								</div>
-							</button>
-						)}
+									<div
+										css={iconContainerStyles}
+										data-testid={`${
+											isMuted ? 'unmute' : 'mute'
+										}-icon`}
+									>
+										<AudioIcon
+											size="xsmall"
+											theme={{
+												fill: palette('--video-icon'),
+											}}
+										/>
+									</div>
+								</button>
+							)}
+							{showFullscreenIcon && (
+								<button
+									type="button"
+									onClick={(event) =>
+										void handleFullscreenClick?.(event)
+									}
+									css={buttonStyles}
+									data-link-name={`gu-video-loop-fullscreen-${atomId}`}
+								>
+									<div
+										css={iconContainerStyles}
+										data-testid={`fullscreen-icon`}
+									>
+										<SvgArrowExpand
+											size="xsmall"
+											theme={{
+												fill: palette('--video-icon'),
+											}}
+										/>
+									</div>
+								</button>
+							)}
+						</div>
 					</>
 				)}
 			</>

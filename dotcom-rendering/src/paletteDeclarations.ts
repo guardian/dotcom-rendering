@@ -8333,21 +8333,21 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[46],
 		dark: () => sourcePalette.neutral[60],
 	},
-	'--video-audio-icon': {
-		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[100],
-	},
-	'--video-audio-icon-background': {
-		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
-		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
-	},
-	'--video-audio-icon-border': {
-		light: () => sourcePalette.neutral[60],
-		dark: () => sourcePalette.neutral[60],
-	},
 	'--video-background': {
 		light: () => sourcePalette.neutral[93],
 		dark: () => sourcePalette.neutral[93],
+	},
+	'--video-icon': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[100],
+	},
+	'--video-icon-background': {
+		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
+		dark: () => transparentColour(sourcePalette.neutral[7], 0.7),
+	},
+	'--video-icon-border': {
+		light: () => sourcePalette.neutral[60],
+		dark: () => sourcePalette.neutral[60],
 	},
 	'--video-progress-bar-background': {
 		light: () => transparentColour(sourcePalette.neutral[7], 0.7),
