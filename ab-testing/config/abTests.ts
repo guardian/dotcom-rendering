@@ -49,7 +49,7 @@ const ABTests: ABTest[] = [
 		name: "webex-football-redesign",
 		description: "Testing the Redesign for the football pages",
 		owners: ["dotcom.platform@theguardian.com"],
-		expirationDate: `2026-02-28`,
+		expirationDate: `2026-04-22`,
 		type: "server",
 		status: "ON",
 		audienceSize: 0 / 100,
