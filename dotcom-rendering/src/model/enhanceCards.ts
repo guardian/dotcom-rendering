@@ -285,7 +285,7 @@ export const getActiveMediaAtom = (
 	return undefined;
 };
 
-const decideArticleMedia = (
+export const decideArticleMedia = (
 	format: ArticleFormat,
 	mediaAtom?: FEMediaAtom,
 	galleryCount: number = 0,
@@ -314,7 +314,7 @@ const decideArticleMedia = (
 	}
 };
 
-const decideReplacementMedia = (
+export const decideReplacementMedia = (
 	showMainVideo?: boolean,
 	mediaAtom?: FEMediaAtom,
 	videoReplace?: boolean,
