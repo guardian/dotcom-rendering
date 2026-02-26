@@ -188,22 +188,22 @@ importers:
         version: link:../config
       '@sveltejs/adapter-auto':
         specifier: ^6.0.0
-        version: 6.1.1(@sveltejs/kit@2.49.5(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.40.0)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))(svelte@5.40.0)(typescript@5.5.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))
+        version: 6.1.1(@sveltejs/kit@2.52.2(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.53.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))(svelte@5.53.3)(typescript@5.5.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))
       '@sveltejs/adapter-static':
         specifier: ^3.0.8
-        version: 3.0.10(@sveltejs/kit@2.49.5(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.40.0)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))(svelte@5.40.0)(typescript@5.5.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))
+        version: 3.0.10(@sveltejs/kit@2.52.2(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.53.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))(svelte@5.53.3)(typescript@5.5.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))
       '@sveltejs/kit':
-        specifier: ^2.49.5
-        version: 2.49.5(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.40.0)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))(svelte@5.40.0)(typescript@5.5.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0))
+        specifier: ^2.52.2
+        version: 2.52.2(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.53.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))(svelte@5.53.3)(typescript@5.5.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^5.0.0
-        version: 5.1.1(svelte@5.40.0)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0))
+        version: 5.1.1(svelte@5.53.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0))
       svelte:
-        specifier: ^5.0.0
-        version: 5.40.0
+        specifier: ^5.53.3
+        version: 5.53.3
       svelte-check:
         specifier: ^4.0.0
-        version: 4.3.3(picomatch@4.0.3)(svelte@5.40.0)(typescript@5.5.3)
+        version: 4.3.3(picomatch@4.0.3)(svelte@5.53.3)(typescript@5.5.3)
       typescript:
         specifier: ^5.0.0
         version: 5.5.3
@@ -275,8 +275,8 @@ importers:
         specifier: 7.28.6
         version: 7.28.6
       '@braze/web-sdk':
-        specifier: 5.8.1
-        version: 5.8.1
+        specifier: 6.5.0
+        version: 6.5.0
       '@creditkarma/thrift-server-core':
         specifier: 1.0.4
         version: 1.0.4
@@ -350,8 +350,8 @@ importers:
         specifier: 1.58.0
         version: 1.58.0
       '@sentry/browser':
-        specifier: 10.37.0
-        version: 10.37.0
+        specifier: 10.39.0
+        version: 10.39.0
       '@storybook/addon-a11y':
         specifier: 10.1.10
         version: 10.1.10(storybook@10.1.10(@testing-library/dom@10.4.1)(prettier@3.0.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
@@ -1715,8 +1715,8 @@ packages:
   '@bcoe/v8-coverage@0.2.3':
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
 
-  '@braze/web-sdk@5.8.1':
-    resolution: {integrity: sha512-J7op9y15tGwAKBXYT2rVryV59+YvRekWHk3lq1Z+oqsNa+BdrboiHTa3r7eBPww8TVcRtWDoreG2Sb3ELAb37w==}
+  '@braze/web-sdk@6.5.0':
+    resolution: {integrity: sha512-MdfwZn+tfe7+tR8Ir5468/njQDGhgVB9tBthq7gwSETsjv6Q+Hw2bXiQy3scDcACI2RLqiq+dNXKh6fD+pN4/Q==}
 
   '@creditkarma/thrift-server-core@1.0.4':
     resolution: {integrity: sha512-Jook5uFJqPeM/D0taSdKHeoerZB6HboSDMqBDWhVDJVSKJGWPSMch4GNALRqr8nCekLKMYkdCgj4FAVetnxpGA==}
@@ -2603,9 +2603,6 @@ packages:
     resolution: {integrity: sha512-H9xg1/sfVvyfU7o3zMfBEjQ1gcsdeTMgqHoYdN79tuLqfTtuu7WckRA1R5whDwOzxaZAeMKTYWqP+WCAi0CHsg==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
 
-  '@jridgewell/gen-mapping@0.3.12':
-    resolution: {integrity: sha512-OuLGC46TjB5BbN1dH8JULVVZY4WTdkF7tV9Ys6wLL1rubZnCMstOhNHueU5bLCrnRuDhKPDM4g6sw4Bel5Gzqg==}
-
   '@jridgewell/gen-mapping@0.3.13':
     resolution: {integrity: sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA==}
 
@@ -2621,9 +2618,6 @@ packages:
 
   '@jridgewell/source-map@0.3.6':
     resolution: {integrity: sha512-1ZJTZebgqllO79ue2bm3rIGud/bOe0pP5BjSRCRxxYkEZS8STV7zN84UBbiYu7jy+eCKSnVIUgoWWE/tt+shMQ==}
-
-  '@jridgewell/sourcemap-codec@1.5.4':
-    resolution: {integrity: sha512-VT2+G1VQs/9oz078bLrYbecdZKs912zQlkelYpuf+SXF+QvZDYJlbx/LSx+meSAwdDFnF8FVXW92AVjjkVmgFw==}
 
   '@jridgewell/sourcemap-codec@1.5.5':
     resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
@@ -2866,28 +2860,28 @@ packages:
   '@sec-ant/readable-stream@0.4.1':
     resolution: {integrity: sha512-831qok9r2t8AlxLko40y2ebgSDhenenCatLVeW/uBtnHPyhHOvG0C7TvfgecV+wHzIm5KUICgzmVpWS+IMEAeg==}
 
-  '@sentry-internal/browser-utils@10.37.0':
-    resolution: {integrity: sha512-rqdESYaVio9Ktz55lhUhtBsBUCF3wvvJuWia5YqoHDd+egyIfwWxITTAa0TSEyZl7283A4WNHNl0hyeEMblmfA==}
+  '@sentry-internal/browser-utils@10.39.0':
+    resolution: {integrity: sha512-W6WODonMGiI13Az5P7jd/m2lj/JpIyuVKg7wE4X+YdlMehLspAv6I7gRE4OBSumS14ZjdaYDpD/lwtnBwKAzcA==}
     engines: {node: '>=18'}
 
-  '@sentry-internal/feedback@10.37.0':
-    resolution: {integrity: sha512-P0PVlfrDvfvCYg2KPIS7YUG/4i6ZPf8z1MicXx09C9Cz9W9UhSBh/nii13eBdDtLav2BFMKhvaFMcghXHX03Hw==}
+  '@sentry-internal/feedback@10.39.0':
+    resolution: {integrity: sha512-cRXmmDeOr5FzVsBNRLU4WDEuC3fhuD0XV362EWl4DI3XBGao8ukaueKcLIKic5WZx6uXimjWw/UJmDLgxeCqkg==}
     engines: {node: '>=18'}
 
-  '@sentry-internal/replay-canvas@10.37.0':
-    resolution: {integrity: sha512-PyIYSbjLs+L5essYV0MyIsh4n5xfv2eV7l0nhUoPJv9Bak3kattQY3tholOj0EP3SgKgb+8HSZnmazgF++Hbog==}
+  '@sentry-internal/replay-canvas@10.39.0':
+    resolution: {integrity: sha512-TTiX0XWCcqTqFGJjEZYObk93j/sJmXcqPzcu0cN2mIkKnnaHDY3w74SHZCshKqIr0AOQdt1HDNa36s3TCdt0Jw==}
     engines: {node: '>=18'}
 
-  '@sentry-internal/replay@10.37.0':
-    resolution: {integrity: sha512-snuk12ZaDerxesSnetNIwKoth/51R0y/h3eXD/bGtXp+hnSkeXN5HanI/RJl297llRjn4zJYRShW9Nx86Ay0Dw==}
+  '@sentry-internal/replay@10.39.0':
+    resolution: {integrity: sha512-obZoYOrUfxIYBHkmtPpItRdE38VuzF1VIxSgZ8Mbtq/9UvCWh+eOaVWU2stN/cVu1KYuYX0nQwBvdN28L6y/JA==}
     engines: {node: '>=18'}
 
-  '@sentry/browser@10.37.0':
-    resolution: {integrity: sha512-kheqJNqGZP5TSBCPv4Vienv1sfZwXKHQDYR+xrdHHYdZqwWuZMJJW/cLO9XjYAe+B9NnJ4UwJOoY4fPvU+HQ1Q==}
+  '@sentry/browser@10.39.0':
+    resolution: {integrity: sha512-I50W/1PDJWyqgNrGufGhBYCmmO3Bb159nx2Ut2bKoVveTfgH/hLEtDyW0kHo8Fu454mW+ukyXfU4L4s+kB9aaw==}
     engines: {node: '>=18'}
 
-  '@sentry/core@10.37.0':
-    resolution: {integrity: sha512-hkRz7S4gkKLgPf+p3XgVjVm7tAfvcEPZxeACCC6jmoeKhGkzN44nXwLiqqshJ25RMcSrhfFvJa/FlBg6zupz7g==}
+  '@sentry/core@10.39.0':
+    resolution: {integrity: sha512-xCLip2mBwCdRrvXHtVEULX0NffUTYZZBhEUGht0WFL+GNdNQ7gmBOGOczhZlrf2hgFFtDO0fs1xiP9bqq5orEQ==}
     engines: {node: '>=18'}
 
   '@sinclair/typebox@0.27.8':
@@ -3438,13 +3432,8 @@ packages:
     peerDependencies:
       eslint: '>=8.40.0'
 
-  '@sveltejs/acorn-typescript@1.0.6':
-    resolution: {integrity: sha512-4awhxtMh4cx9blePWl10HRHj8Iivtqj+2QdDCSMDzxG+XKa9+VCNupQuCuvzEhYPzZSrX+0gC+0lHA/0fFKKQQ==}
-    peerDependencies:
-      acorn: ^8.9.0
-
-  '@sveltejs/acorn-typescript@1.0.8':
-    resolution: {integrity: sha512-esgN+54+q0NjB0Y/4BomT9samII7jGwNy/2a3wNZbT2A2RpmXsXwUt24LvLhx6jUq2gVk4cWEvcRO6MFQbOfNA==}
+  '@sveltejs/acorn-typescript@1.0.9':
+    resolution: {integrity: sha512-lVJX6qEgs/4DOcRTpo56tmKzVPtoWAaVbL4hfO7t7NVwl9AAXzQR6cihesW1BmNMPl+bK6dreu2sOKBP2Q9CIA==}
     peerDependencies:
       acorn: ^8.9.0
 
@@ -3458,8 +3447,8 @@ packages:
     peerDependencies:
       '@sveltejs/kit': ^2.0.0
 
-  '@sveltejs/kit@2.49.5':
-    resolution: {integrity: sha512-dCYqelr2RVnWUuxc+Dk/dB/SjV/8JBndp1UovCyCZdIQezd8TRwFLNZctYkzgHxRJtaNvseCSRsuuHPeUgIN/A==}
+  '@sveltejs/kit@2.52.2':
+    resolution: {integrity: sha512-1in76dftrofUt138rVLvYuwiQLkg9K3cG8agXEE6ksf7gCGs8oIr3+pFrVtbRmY9JvW+psW5fvLM/IwVybOLBA==}
     engines: {node: '>=18.13'}
     hasBin: true
     peerDependencies:
@@ -4357,6 +4346,11 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
+  acorn@8.16.0:
+    resolution: {integrity: sha512-UVJyE9MttOsBQIDKw1skb9nAwQuR5wuGD3+82K6JgJlm/Y+KI92oNsMNGZCYdDsVtRHSak0pcV5Dno5+4jh9sw==}
+    engines: {node: '>=0.4.0'}
+    hasBin: true
+
   agent-base@6.0.2:
     resolution: {integrity: sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==}
     engines: {node: '>= 6.0.0'}
@@ -4448,6 +4442,10 @@ packages:
 
   aria-query@5.3.0:
     resolution: {integrity: sha512-b0P0sZPKtyu8HkeRAfCq0IfURZK+SuwMjY1UXGBU27wpAiTwQAIlq56IbIO+ytk/JjS1fMR14ee5WBBfKi5J6A==}
+
+  aria-query@5.3.1:
+    resolution: {integrity: sha512-Z/ZeOgVl7bcSYZ/u/rh0fOpvEpq//LZmdbkXyc7syVzjPAhfOa9ebsdTSjEBDU4vs5nC98Kfduj1uFo0qyET3g==}
+    engines: {node: '>= 0.4'}
 
   aria-query@5.3.2:
     resolution: {integrity: sha512-COROpnaoap1E2F000S62r6A60uHZnmlvomhfyT2DlTcrY1OrBKn2UhH7qn5wTC9zMvD0AY7csdPSNwKP+7WiQw==}
@@ -5312,8 +5310,8 @@ packages:
   detect-node@2.1.0:
     resolution: {integrity: sha512-T0NIuQpnTvFDATNuHN5roPwSBG83rFsuO+MXXH9/3N1eFbn4wcPjttvjMLEPWJ0RGUYgQE7cGgS3tNxbqCGM7g==}
 
-  devalue@5.6.2:
-    resolution: {integrity: sha512-nPRkjWzzDQlsejL1WVifk5rvcFi/y1onBRxjaFMjZeR9mFpqu2gmAZ9xUB9/IEanEP/vBtGeGganC/GO1fmufg==}
+  devalue@5.6.3:
+    resolution: {integrity: sha512-nc7XjUU/2Lb+SvEFVGcWLiKkzfw8+qHI7zn8WYXKkLMgfGSHbgCEaR6bJpev8Cm6Rmrb19Gfd/tZvGqx9is3wg==}
 
   devlop@1.1.0:
     resolution: {integrity: sha512-RWmIqhcFf1lRYBvNmr7qTNuyCt/7/ns2jbpp1+PalgE/rDQcBT0fioSMUpJ93irlUhC5hrg4cYqe6U+0ImW0rA==}
@@ -5773,8 +5771,8 @@ packages:
     resolution: {integrity: sha512-YQLXUplAwJgCydQ78IMJywZCceoqk1oH01OERdSAJc/7U2AylwjhSCLDEtqwg811idIS/9fIU5GjG73IgjKMVg==}
     engines: {node: '>=0.10'}
 
-  esrap@2.1.0:
-    resolution: {integrity: sha512-yzmPNpl7TBbMRC5Lj2JlJZNPml0tzqoqP5B1JXycNUwtqma9AKCO0M2wHrdgsHcy1WRW7S9rJknAMtByg3usgA==}
+  esrap@2.2.3:
+    resolution: {integrity: sha512-8fOS+GIGCQZl/ZIlhl59htOlms6U8NvX6ZYgYHpRU/b6tVSh3uHkOHZikl3D4cMbYM0JlpBe+p/BkZEi8J9XIQ==}
 
   esrecurse@4.3.0:
     resolution: {integrity: sha512-KmfKL3b6G+RXvP8N1vr3Tq1kL/oCFgn2NYXEtqP8/L3pKapUA4G8cFVaoF3SU323CD4XypR/ffioHmkti6/Tag==}
@@ -6147,7 +6145,7 @@ packages:
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
-    deprecated: Glob versions prior to v9 are no longer supported
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   global-modules@2.0.0:
     resolution: {integrity: sha512-NGbfmJBp9x8IxyJSd1P+otYK8vonoJactOogrVfFRIAEY1ukil8RSKDz2Yo7wh1oihl51l/r6W4epkeKJHqL8A==}
@@ -8274,8 +8272,8 @@ packages:
     resolution: {integrity: sha512-xRXBn0pPqQTVQiC8wyQrKs2MOlX24zQ0POGaj0kultvoOCstBQM5yvOhAVSUwOMjQtTvsPWoNCHfPGwaaQJhTw==}
     engines: {node: '>= 18'}
 
-  set-cookie-parser@2.7.2:
-    resolution: {integrity: sha512-oeM1lpU/UvhTxw+g3cIfxXHyJRc/uidd3yK1P242gzHds0udQBYzs3y8j4gCCW+ZJ7ad0yctld8RYO+bdurlvw==}
+  set-cookie-parser@3.0.1:
+    resolution: {integrity: sha512-n7Z7dXZhJbwuAHhNzkTti6Aw9QDDjZtm3JTpTGATIdNzdQz5GuFs22w90BcvF4INfnrL5xrX3oGsuqO5Dx3A1Q==}
 
   set-function-length@1.2.2:
     resolution: {integrity: sha512-pgRc4hJ4/sNjWCSS9AmnS40x3bNMDTknHgL5UaMBTMyJnU90EgWh1Rz+MC9eFu4BuN/UwZjKQuY/1v3rM7HMfg==}
@@ -8620,8 +8618,8 @@ packages:
       svelte: ^4.0.0 || ^5.0.0-next.0
       typescript: '>=5.0.0'
 
-  svelte@5.40.0:
-    resolution: {integrity: sha512-EdA6LIo1vZVQOvlGfM18lhYM1k5Dkk/e93IlpzK4OVM6c11sUMHPgCtGFKmdy1WT4XqbpAvicq9JH5MTNoGaKw==}
+  svelte@5.53.3:
+    resolution: {integrity: sha512-pRUBr6j6uQDgBi208gHnGRMykw0Rf2Yr1HmLyRucsvcaYgIUxswJkT93WZJflsmezu5s8Lq+q78EoyLv2yaFCg==}
     engines: {node: '>=18'}
 
   svg-parser@2.0.4:
@@ -11590,7 +11588,7 @@ snapshots:
 
   '@bcoe/v8-coverage@0.2.3': {}
 
-  '@braze/web-sdk@5.8.1': {}
+  '@braze/web-sdk@6.5.0': {}
 
   '@creditkarma/thrift-server-core@1.0.4':
     dependencies:
@@ -12409,11 +12407,6 @@ snapshots:
       '@types/yargs': 17.0.33
       chalk: 4.1.2
 
-  '@jridgewell/gen-mapping@0.3.12':
-    dependencies:
-      '@jridgewell/sourcemap-codec': 1.5.4
-      '@jridgewell/trace-mapping': 0.3.29
-
   '@jridgewell/gen-mapping@0.3.13':
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
@@ -12421,8 +12414,8 @@ snapshots:
 
   '@jridgewell/remapping@2.3.5':
     dependencies:
-      '@jridgewell/gen-mapping': 0.3.12
-      '@jridgewell/trace-mapping': 0.3.29
+      '@jridgewell/gen-mapping': 0.3.13
+      '@jridgewell/trace-mapping': 0.3.31
 
   '@jridgewell/resolve-uri@3.1.2': {}
 
@@ -12436,14 +12429,12 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.13
       '@jridgewell/trace-mapping': 0.3.31
 
-  '@jridgewell/sourcemap-codec@1.5.4': {}
-
   '@jridgewell/sourcemap-codec@1.5.5': {}
 
   '@jridgewell/trace-mapping@0.3.29':
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
-      '@jridgewell/sourcemap-codec': 1.5.4
+      '@jridgewell/sourcemap-codec': 1.5.5
 
   '@jridgewell/trace-mapping@0.3.31':
     dependencies:
@@ -12653,33 +12644,33 @@ snapshots:
 
   '@sec-ant/readable-stream@0.4.1': {}
 
-  '@sentry-internal/browser-utils@10.37.0':
+  '@sentry-internal/browser-utils@10.39.0':
     dependencies:
-      '@sentry/core': 10.37.0
+      '@sentry/core': 10.39.0
 
-  '@sentry-internal/feedback@10.37.0':
+  '@sentry-internal/feedback@10.39.0':
     dependencies:
-      '@sentry/core': 10.37.0
+      '@sentry/core': 10.39.0
 
-  '@sentry-internal/replay-canvas@10.37.0':
+  '@sentry-internal/replay-canvas@10.39.0':
     dependencies:
-      '@sentry-internal/replay': 10.37.0
-      '@sentry/core': 10.37.0
+      '@sentry-internal/replay': 10.39.0
+      '@sentry/core': 10.39.0
 
-  '@sentry-internal/replay@10.37.0':
+  '@sentry-internal/replay@10.39.0':
     dependencies:
-      '@sentry-internal/browser-utils': 10.37.0
-      '@sentry/core': 10.37.0
+      '@sentry-internal/browser-utils': 10.39.0
+      '@sentry/core': 10.39.0
 
-  '@sentry/browser@10.37.0':
+  '@sentry/browser@10.39.0':
     dependencies:
-      '@sentry-internal/browser-utils': 10.37.0
-      '@sentry-internal/feedback': 10.37.0
-      '@sentry-internal/replay': 10.37.0
-      '@sentry-internal/replay-canvas': 10.37.0
-      '@sentry/core': 10.37.0
+      '@sentry-internal/browser-utils': 10.39.0
+      '@sentry-internal/feedback': 10.39.0
+      '@sentry-internal/replay': 10.39.0
+      '@sentry-internal/replay-canvas': 10.39.0
+      '@sentry/core': 10.39.0
 
-  '@sentry/core@10.37.0': {}
+  '@sentry/core@10.39.0': {}
 
   '@sinclair/typebox@0.27.8': {}
 
@@ -13492,7 +13483,7 @@ snapshots:
   '@stylistic/eslint-plugin-js@2.6.2(eslint@8.57.1)':
     dependencies:
       '@types/eslint': 9.6.1
-      acorn: 8.15.0
+      acorn: 8.16.0
       eslint: 8.57.1
       eslint-visitor-keys: 4.2.1
       espree: 10.4.0
@@ -13548,60 +13539,55 @@ snapshots:
       - supports-color
       - typescript
 
-  '@sveltejs/acorn-typescript@1.0.6(acorn@8.15.0)':
+  '@sveltejs/acorn-typescript@1.0.9(acorn@8.16.0)':
     dependencies:
-      acorn: 8.15.0
+      acorn: 8.16.0
 
-  '@sveltejs/acorn-typescript@1.0.8(acorn@8.15.0)':
+  '@sveltejs/adapter-auto@6.1.1(@sveltejs/kit@2.52.2(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.53.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))(svelte@5.53.3)(typescript@5.5.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))':
     dependencies:
-      acorn: 8.15.0
+      '@sveltejs/kit': 2.52.2(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.53.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))(svelte@5.53.3)(typescript@5.5.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0))
 
-  '@sveltejs/adapter-auto@6.1.1(@sveltejs/kit@2.49.5(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.40.0)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))(svelte@5.40.0)(typescript@5.5.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))':
+  '@sveltejs/adapter-static@3.0.10(@sveltejs/kit@2.52.2(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.53.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))(svelte@5.53.3)(typescript@5.5.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))':
     dependencies:
-      '@sveltejs/kit': 2.49.5(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.40.0)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))(svelte@5.40.0)(typescript@5.5.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0))
+      '@sveltejs/kit': 2.52.2(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.53.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))(svelte@5.53.3)(typescript@5.5.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0))
 
-  '@sveltejs/adapter-static@3.0.10(@sveltejs/kit@2.49.5(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.40.0)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))(svelte@5.40.0)(typescript@5.5.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))':
-    dependencies:
-      '@sveltejs/kit': 2.49.5(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.40.0)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))(svelte@5.40.0)(typescript@5.5.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0))
-
-  '@sveltejs/kit@2.49.5(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.40.0)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))(svelte@5.40.0)(typescript@5.5.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0))':
+  '@sveltejs/kit@2.52.2(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.53.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))(svelte@5.53.3)(typescript@5.5.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0))':
     dependencies:
       '@standard-schema/spec': 1.1.0
-      '@sveltejs/acorn-typescript': 1.0.8(acorn@8.15.0)
-      '@sveltejs/vite-plugin-svelte': 5.1.1(svelte@5.40.0)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0))
+      '@sveltejs/acorn-typescript': 1.0.9(acorn@8.16.0)
+      '@sveltejs/vite-plugin-svelte': 5.1.1(svelte@5.53.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0))
       '@types/cookie': 0.6.0
-      acorn: 8.15.0
+      acorn: 8.16.0
       cookie: 0.6.0
-      devalue: 5.6.2
+      devalue: 5.6.3
       esm-env: 1.2.2
       kleur: 4.1.5
       magic-string: 0.30.21
       mrmime: 2.0.1
-      sade: 1.8.1
-      set-cookie-parser: 2.7.2
+      set-cookie-parser: 3.0.1
       sirv: 3.0.2
-      svelte: 5.40.0
+      svelte: 5.53.3
       vite: 6.4.0(@types/node@22.17.0)(terser@5.46.0)(tsx@4.6.2)
     optionalDependencies:
       typescript: 5.5.3
 
-  '@sveltejs/vite-plugin-svelte-inspector@4.0.1(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.40.0)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))(svelte@5.40.0)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0))':
+  '@sveltejs/vite-plugin-svelte-inspector@4.0.1(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.53.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))(svelte@5.53.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 5.1.1(svelte@5.40.0)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0))
+      '@sveltejs/vite-plugin-svelte': 5.1.1(svelte@5.53.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0))
       debug: 4.4.3(supports-color@8.1.1)
-      svelte: 5.40.0
+      svelte: 5.53.3
       vite: 6.4.0(@types/node@22.17.0)(terser@5.46.0)(tsx@4.6.2)
     transitivePeerDependencies:
       - supports-color
 
-  '@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.40.0)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0))':
+  '@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.53.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 4.0.1(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.40.0)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))(svelte@5.40.0)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0))
+      '@sveltejs/vite-plugin-svelte-inspector': 4.0.1(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.53.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0)))(svelte@5.53.3)(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0))
       debug: 4.4.3(supports-color@8.1.1)
       deepmerge: 4.3.1
       kleur: 4.1.5
       magic-string: 0.30.17
-      svelte: 5.40.0
+      svelte: 5.53.3
       vite: 6.4.0(@types/node@22.17.0)(terser@5.46.0)(tsx@4.6.2)
       vitefu: 1.1.1(vite@6.4.0(@types/node@22.17.0)(terser@5.46.0))
     transitivePeerDependencies:
@@ -14689,7 +14675,7 @@ snapshots:
 
   acorn-globals@7.0.1:
     dependencies:
-      acorn: 8.15.0
+      acorn: 8.16.0
       acorn-walk: 8.3.1
 
   acorn-import-phases@1.0.4(acorn@8.15.0):
@@ -14700,11 +14686,17 @@ snapshots:
     dependencies:
       acorn: 8.15.0
 
+  acorn-jsx@5.3.2(acorn@8.16.0):
+    dependencies:
+      acorn: 8.16.0
+
   acorn-walk@8.3.1: {}
 
   acorn@8.11.2: {}
 
   acorn@8.15.0: {}
+
+  acorn@8.16.0: {}
 
   agent-base@6.0.2:
     dependencies:
@@ -14788,6 +14780,8 @@ snapshots:
   aria-query@5.3.0:
     dependencies:
       dequal: 2.0.3
+
+  aria-query@5.3.1: {}
 
   aria-query@5.3.2: {}
 
@@ -15653,7 +15647,7 @@ snapshots:
 
   detect-node@2.1.0: {}
 
-  devalue@5.6.2: {}
+  devalue@5.6.3: {}
 
   devlop@1.1.0:
     dependencies:
@@ -16455,8 +16449,8 @@ snapshots:
 
   espree@9.6.1:
     dependencies:
-      acorn: 8.15.0
-      acorn-jsx: 5.3.2(acorn@8.15.0)
+      acorn: 8.16.0
+      acorn-jsx: 5.3.2(acorn@8.16.0)
       eslint-visitor-keys: 3.4.3
 
   esprima@4.0.1: {}
@@ -16465,9 +16459,9 @@ snapshots:
     dependencies:
       estraverse: 5.3.0
 
-  esrap@2.1.0:
+  esrap@2.2.3:
     dependencies:
-      '@jridgewell/sourcemap-codec': 1.5.4
+      '@jridgewell/sourcemap-codec': 1.5.5
 
   esrecurse@4.3.0:
     dependencies:
@@ -17940,7 +17934,7 @@ snapshots:
   jsdom@20.0.3:
     dependencies:
       abab: 2.0.6
-      acorn: 8.15.0
+      acorn: 8.16.0
       acorn-globals: 7.0.1
       cssom: 0.5.0
       cssstyle: 2.3.0
@@ -19520,7 +19514,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  set-cookie-parser@2.7.2: {}
+  set-cookie-parser@3.0.1: {}
 
   set-function-length@1.2.2:
     dependencies:
@@ -19974,33 +19968,35 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte-check@4.3.3(picomatch@4.0.3)(svelte@5.40.0)(typescript@5.5.3):
+  svelte-check@4.3.3(picomatch@4.0.3)(svelte@5.53.3)(typescript@5.5.3):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.29
       chokidar: 4.0.3
       fdir: 6.5.0(picomatch@4.0.3)
       picocolors: 1.1.1
       sade: 1.8.1
-      svelte: 5.40.0
+      svelte: 5.53.3
       typescript: 5.5.3
     transitivePeerDependencies:
       - picomatch
 
-  svelte@5.40.0:
+  svelte@5.53.3:
     dependencies:
       '@jridgewell/remapping': 2.3.5
-      '@jridgewell/sourcemap-codec': 1.5.4
-      '@sveltejs/acorn-typescript': 1.0.6(acorn@8.15.0)
+      '@jridgewell/sourcemap-codec': 1.5.5
+      '@sveltejs/acorn-typescript': 1.0.9(acorn@8.16.0)
       '@types/estree': 1.0.8
-      acorn: 8.15.0
-      aria-query: 5.3.2
+      '@types/trusted-types': 2.0.7
+      acorn: 8.16.0
+      aria-query: 5.3.1
       axobject-query: 4.1.0
       clsx: 2.1.1
+      devalue: 5.6.3
       esm-env: 1.2.2
-      esrap: 2.1.0
+      esrap: 2.2.3
       is-reference: 3.0.3
       locate-character: 3.0.0
-      magic-string: 0.30.17
+      magic-string: 0.30.21
       zimmerframe: 1.1.4
 
   svg-parser@2.0.4: {}
@@ -20064,14 +20060,14 @@ snapshots:
   terser@5.26.0:
     dependencies:
       '@jridgewell/source-map': 0.3.6
-      acorn: 8.15.0
+      acorn: 8.16.0
       commander: 2.20.3
       source-map-support: 0.5.21
 
   terser@5.46.0:
     dependencies:
       '@jridgewell/source-map': 0.3.11
-      acorn: 8.15.0
+      acorn: 8.16.0
       commander: 2.20.3
       source-map-support: 0.5.21
 
@@ -20189,7 +20185,7 @@ snapshots:
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
       '@types/node': 16.18.68
-      acorn: 8.15.0
+      acorn: 8.16.0
       acorn-walk: 8.3.1
       arg: 4.1.3
       create-require: 1.1.1
@@ -20209,7 +20205,7 @@ snapshots:
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
       '@types/node': 22.17.0
-      acorn: 8.15.0
+      acorn: 8.16.0
       acorn-walk: 8.3.1
       arg: 4.1.3
       create-require: 1.1.1
@@ -20431,7 +20427,7 @@ snapshots:
   unplugin@2.3.10:
     dependencies:
       '@jridgewell/remapping': 2.3.5
-      acorn: 8.15.0
+      acorn: 8.16.0
       picomatch: 4.0.3
       webpack-virtual-modules: 0.6.2
 

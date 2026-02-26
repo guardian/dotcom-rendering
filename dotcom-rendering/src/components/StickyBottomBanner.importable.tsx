@@ -9,6 +9,10 @@ import type { BannerProps } from '@guardian/support-dotcom-components/dist/share
 import { useEffect, useState } from 'react';
 import type { ArticleCounts } from '../lib/articleCount';
 import { getArticleCounts } from '../lib/articleCount';
+import {
+	BrazeBannersSystemPlacementId,
+	buildBrazeBannersSystemConfig,
+} from '../lib/braze/BrazeBannersSystem';
 import type {
 	CandidateConfig,
 	MaybeFC,
@@ -266,7 +270,7 @@ export const StickyBottomBanner = ({
 	isSensitive: boolean;
 }) => {
 	const { renderingTarget, editionId } = useConfig();
-	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
+	const { brazeMessages, braze } = useBraze(idApiUrl, renderingTarget);
 
 	const countryCode = useCountryCode('sticky-bottom-banner');
 	const isSignedIn = useIsSignedIn();
@@ -337,6 +341,16 @@ export const StickyBottomBanner = ({
 			tags,
 			shouldHideReaderRevenue,
 		);
+		const brazeBannersSystem = buildBrazeBannersSystemConfig(
+			'braze-banners-system_StickyBottomBanner',
+			BrazeBannersSystemPlacementId.Banner,
+			braze,
+			idApiUrl,
+			contentType,
+			shouldHideReaderRevenue,
+			tags,
+			window.guardian.config.stage,
+		);
 
 		const signInGate = buildSignInGateConfig(
 			{
@@ -365,9 +379,15 @@ export const StickyBottomBanner = ({
 		if (hasForceBannerParam) {
 			candidates = [CMP, readerRevenue];
 		} else if (hasForceBrazeMessageParam) {
-			candidates = [CMP, brazeBanner];
+			candidates = [CMP, brazeBannersSystem, brazeBanner];
 		} else {
-			candidates = [CMP, signInGate, brazeBanner, readerRevenue];
+			candidates = [
+				CMP,
+				signInGate,
+				brazeBannersSystem,
+				brazeBanner,
+				readerRevenue,
+			];
 		}
 
 		const bannerConfig: SlotConfig = {
@@ -413,6 +433,7 @@ export const StickyBottomBanner = ({
 		pageId,
 		host,
 		isInAuxiaControlGroup,
+		braze,
 		abTests,
 	]);
 
