@@ -1,12 +1,7 @@
 import { LI } from '../components/Card/components/LI';
 import { UL } from '../components/Card/components/UL';
 import type { Loading } from '../components/CardPicture';
-import type {
-	DCRContainerPalette,
-	DCRFrontCard,
-	DCRGroupedTrails,
-} from '../types/front';
-import type { TrailType } from '../types/trails';
+import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import {
 	Card100Media100,
 	Card100Media75,
@@ -446,30 +441,3 @@ export const shouldPadWrappableRows = (
 	totalCards: number,
 	cardsPerRow: number,
 ): boolean => index < totalCards - (totalCards % cardsPerRow || cardsPerRow);
-
-/**
- * Filter trails an object of grouped trails, removing any trails included in the
- * 'filter' array
- *
- * @param opts.groupedTrails Object of grouped trails we want to filter cards from
- * @param opts.filter Array of cards we want to filter against
- * @returns grouped trails object filtered against the 'filter' array
- */
-export const filterGroupedTrails = ({
-	groupedTrails,
-	filter,
-}: {
-	groupedTrails: DCRGroupedTrails;
-	filter: TrailType[];
-}): DCRGroupedTrails => {
-	const shouldFilterCard = (card: TrailType) =>
-		filter.findIndex((filterCard) => filterCard.url === card.url) === -1;
-	return {
-		snap: groupedTrails.snap.filter(shouldFilterCard),
-		splash: groupedTrails.splash.filter(shouldFilterCard),
-		huge: groupedTrails.huge.filter(shouldFilterCard),
-		veryBig: groupedTrails.veryBig.filter(shouldFilterCard),
-		big: groupedTrails.big.filter(shouldFilterCard),
-		standard: groupedTrails.standard.filter(shouldFilterCard),
-	};
-};
