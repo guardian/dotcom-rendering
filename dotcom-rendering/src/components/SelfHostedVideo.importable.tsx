@@ -623,11 +623,32 @@ export const SelfHostedVideo = ({
 
 		if (!video) return;
 
-		if (!document.fullscreenElement) {
-			await video.requestFullscreen();
-		} else {
+		if ('webkitEnterFullscreen' in video) {
+			/**
+			 * Fullscreen api is not supported by Safari mobile
+			 *
+			 * webkit fullscreen methods are not part of the standard HTMLVideoElement
+			 * type definition as they are iOS only.
+			 * We need to extend the type expect these handlers when we're on iOS to keep TS happy.
+			 * @see https://developer.apple.com/documentation/webkitjs/htmlvideoelement/1633500-webkitenterfullscreen
+			 */
+			const webkitVideo = video as HTMLVideoElement & {
+				webkitDisplayingFullscreen: () => boolean;
+				webkitEnterFullscreen: () => void;
+				webkitExitFullscreen: () => void;
+			};
+
+			if (webkitVideo.webkitDisplayingFullscreen()) {
+				return webkitVideo.webkitExitFullscreen();
+			} else {
+				return webkitVideo.webkitEnterFullscreen();
+			}
+		}
+
+		if (document.fullscreenElement) {
 			await document.exitFullscreen();
 		}
+		await video.requestFullscreen();
 	};
 
 	/**
