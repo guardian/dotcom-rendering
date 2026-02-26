@@ -29,15 +29,15 @@ const styles = {
 					overflow: hidden;
 					display: block;
 					box-sizing: border-box;
-					-webkit-overflow-scrolling: auto;
-					overscroll-behavior: none;
-					touch-action: pan-y;
+					height: fit-content;
+					min-height: 0;
 			  `
 			: ''}
 	`,
 	grid: css`
 		display: grid;
 		padding: 0 ${space[3]}px ${space[4]}px ${space[3]}px;
+		min-height: 0;
 		${from.tablet} {
 			grid-template-columns: 1fr 1fr;
 			gap: ${space[4]}px;
@@ -93,12 +93,16 @@ const styles = {
 	`,
 	imageContainerMobile: css`
 		margin-bottom: ${space[4]}px;
+		align-self: start;
+		max-height: 100%;
 		${from.tablet} {
 			display: none;
 		}
 	`,
 	imageContainerTablet: css`
 		display: none;
+		align-self: start;
+		max-height: 100%;
 		${from.tablet} {
 			display: block;
 			align-self: stretch;
