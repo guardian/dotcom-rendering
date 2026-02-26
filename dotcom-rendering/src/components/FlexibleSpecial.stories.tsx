@@ -23,9 +23,6 @@ type FlexibleSpecialArgsAndCustomArgs = React.ComponentProps<
 > & { frontSectionTitle: string };
 
 const emptyGroupedTrails: DCRGroupedTrails = {
-	huge: [],
-	veryBig: [],
-	big: [],
 	standard: [],
 	snap: [],
 	splash: [],

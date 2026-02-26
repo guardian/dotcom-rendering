@@ -156,9 +156,6 @@ function decideGroupedTrails(
 	if (category.category === 'Key Stories') {
 		return {
 			splash: [parseKeyStoriesToFrontCard(category, storylineId)],
-			huge: [],
-			veryBig: [],
-			big: [],
 			snap: [],
 			standard: [],
 		};
@@ -179,9 +176,6 @@ function decideGroupedTrails(
 			);
 		return {
 			splash: [],
-			huge: [],
-			veryBig: [],
-			big: [],
 			snap: [],
 			standard: frontCards,
 		};
@@ -199,9 +193,6 @@ function decideGroupedTrails(
 			);
 		return {
 			splash: [],
-			huge: [],
-			veryBig: [],
-			big: [],
 			snap: [],
 			standard: frontCards,
 		};
