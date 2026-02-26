@@ -149,9 +149,6 @@ export type DCRCollectionType = {
 
 export type DCRGroupedTrails = {
 	snap: DCRFrontCard[];
-	huge: DCRFrontCard[];
-	veryBig: DCRFrontCard[];
-	big: DCRFrontCard[];
 	standard: DCRFrontCard[];
 	splash: DCRFrontCard[];
 };
