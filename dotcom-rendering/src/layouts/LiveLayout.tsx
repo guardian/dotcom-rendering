@@ -655,17 +655,18 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						<LiveGrid>
 							<GridItem area="media">
 								<div css={maxWidth}>
-									{!!footballMatchUrl && (
-										<Island
-											priority="critical"
-											defer={{ until: 'visible' }}
-										>
-											<GetMatchTabs
-												matchUrl={footballMatchUrl}
-												format={format}
-											/>
-										</Island>
-									)}
+									{!isInFootballRedesignTest &&
+										!!footballMatchUrl && (
+											<Island
+												priority="critical"
+												defer={{ until: 'visible' }}
+											>
+												<GetMatchTabs
+													matchUrl={footballMatchUrl}
+													format={format}
+												/>
+											</Island>
+										)}
 									{!!cricketMatchUrl && (
 										<Island
 											priority="critical"
