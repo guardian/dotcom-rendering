@@ -14,11 +14,7 @@ import type {
 import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';
-import type {
-	CandidateConfig,
-	MaybeFC,
-	SlotConfig,
-} from '../lib/messagePicker';
+import type { CandidateConfig, SlotConfig } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
 import { useBetaAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
@@ -61,7 +57,7 @@ const buildReaderRevenueEpicConfig = (
 		candidate: {
 			id: 'reader-revenue-banner',
 			canShow: () => canShowReaderRevenueEpic(canShowData),
-			show: (data: ModuleData<EpicProps>) => () => {
+			show: (data: ModuleData<EpicProps>) => {
 				return <ReaderRevenueEpic {...data} />;
 			},
 		},
@@ -89,7 +85,7 @@ const buildBrazeEpicConfig = (
 					tags,
 					shouldHideReaderRevenue,
 				),
-			show: (meta: any) => () => (
+			show: (meta: any) => (
 				<MaybeBrazeEpic
 					meta={meta}
 					countryCode={countryCode}
@@ -190,7 +186,13 @@ export const SlotBodyEnd = ({
 			name: 'slotBodyEnd',
 		};
 		pickMessage(epicConfig, renderingTarget)
-			.then((PickedEpic: () => MaybeFC) => setSelectedEpic(PickedEpic))
+			.then((result) => {
+				if (result.type === 'MessageSelected') {
+					setSelectedEpic(result.SelectedMessage);
+				} else {
+					setSelectedEpic(() => null);
+				}
+			})
 			.catch((e) =>
 				console.error(`SlotBodyEnd pickMessage - error: ${String(e)}`),
 			);
