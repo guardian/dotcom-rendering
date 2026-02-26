@@ -45,7 +45,7 @@ importers:
         version: 3.995.0
       '@guardian/cdk':
         specifier: 62.3.5
-        version: 62.3.5(aws-cdk-lib@2.240.0(constructs@10.5.1))(aws-cdk@2.1107.0)(constructs@10.5.1)
+        version: 62.3.5(aws-cdk-lib@2.240.0(constructs@10.5.1))(aws-cdk@2.1108.0)(constructs@10.5.1)
       '@guardian/eslint-config':
         specifier: 12.0.1
         version: 12.0.1(eslint-plugin-import@2.29.1(eslint@9.39.1))(eslint@9.39.1)(typescript@5.9.3)
@@ -56,8 +56,8 @@ importers:
         specifier: 22.17.0
         version: 22.17.0
       aws-cdk:
-        specifier: 2.1107.0
-        version: 2.1107.0
+        specifier: 2.1108.0
+        version: 2.1108.0
       aws-cdk-lib:
         specifier: 2.240.0
         version: 2.240.0(constructs@10.5.1)
@@ -88,7 +88,7 @@ importers:
         version: 3.995.0
       '@guardian/cdk':
         specifier: 62.3.5
-        version: 62.3.5(aws-cdk-lib@2.240.0(constructs@10.5.1))(aws-cdk@2.1107.0)(constructs@10.5.1)
+        version: 62.3.5(aws-cdk-lib@2.240.0(constructs@10.5.1))(aws-cdk@2.1108.0)(constructs@10.5.1)
       '@guardian/eslint-config':
         specifier: 12.0.1
         version: 12.0.1(eslint-plugin-import@2.29.1(eslint@9.39.1))(eslint@9.39.1)(typescript@5.9.3)
@@ -99,8 +99,8 @@ importers:
         specifier: 22.17.0
         version: 22.17.0
       aws-cdk:
-        specifier: 2.1107.0
-        version: 2.1107.0
+        specifier: 2.1108.0
+        version: 2.1108.0
       aws-cdk-lib:
         specifier: 2.240.0
         version: 2.240.0(constructs@10.5.1)
@@ -134,7 +134,7 @@ importers:
     devDependencies:
       '@guardian/cdk':
         specifier: 62.3.5
-        version: 62.3.5(aws-cdk-lib@2.240.0(constructs@10.5.1))(aws-cdk@2.1107.0)(constructs@10.5.1)
+        version: 62.3.5(aws-cdk-lib@2.240.0(constructs@10.5.1))(aws-cdk@2.1108.0)(constructs@10.5.1)
       '@guardian/eslint-config':
         specifier: 12.0.1
         version: 12.0.1(eslint-plugin-import@2.29.1(eslint@9.39.1))(eslint@9.39.1)(typescript@5.9.3)
@@ -306,7 +306,7 @@ importers:
         version: 6.1.0(browserslist@4.24.4)(tslib@2.6.2)
       '@guardian/cdk':
         specifier: 62.3.5
-        version: 62.3.5(aws-cdk-lib@2.240.0(constructs@10.5.1))(aws-cdk@2.1107.0)(constructs@10.5.1)
+        version: 62.3.5(aws-cdk-lib@2.240.0(constructs@10.5.1))(aws-cdk@2.1108.0)(constructs@10.5.1)
       '@guardian/commercial-core':
         specifier: 29.0.0
         version: 29.0.0(@guardian/ab-core@8.0.0(tslib@2.6.2)(typescript@5.5.3))(@guardian/libs@27.1.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3))
@@ -482,8 +482,8 @@ importers:
         specifier: 2.1.1
         version: 2.1.1(ajv@8.18.0)
       aws-cdk:
-        specifier: 2.1107.0
-        version: 2.1107.0
+        specifier: 2.1108.0
+        version: 2.1108.0
       aws-cdk-lib:
         specifier: 2.240.0
         version: 2.240.0(constructs@10.5.1)
@@ -4562,8 +4562,8 @@ packages:
       - yaml
       - mime-types
 
-  aws-cdk@2.1107.0:
-    resolution: {integrity: sha512-7GKCq7p/33Jw+C+Ohwl4LnnKjvI/MzemeNZlTu/Kg8IwuZx5WEXEi32YLOlxbE1JOvleDslCWK5AIkBZ0omx/Q==}
+  aws-cdk@2.1108.0:
+    resolution: {integrity: sha512-FHnyhnYZoRc2W0C9mNzhNn6fO2vH4xNINsKfJaA7AFDuymgQ39JhEnrM4AHaoikIBqXYeNLWElvvkusY9l3ulw==}
     engines: {node: '>= 18.0.0'}
     hasBin: true
 
@@ -12025,13 +12025,13 @@ snapshots:
       browserslist: 4.24.4
       tslib: 2.6.2
 
-  '@guardian/cdk@62.3.5(aws-cdk-lib@2.240.0(constructs@10.5.1))(aws-cdk@2.1107.0)(constructs@10.5.1)':
+  '@guardian/cdk@62.3.5(aws-cdk-lib@2.240.0(constructs@10.5.1))(aws-cdk@2.1108.0)(constructs@10.5.1)':
     dependencies:
       '@aws-sdk/client-ec2': 3.996.0
       '@aws-sdk/client-ssm': 3.996.0
       '@aws-sdk/credential-providers': 3.996.0
       '@oclif/core': 4.8.1
-      aws-cdk: 2.1107.0
+      aws-cdk: 2.1108.0
       aws-cdk-lib: 2.240.0(constructs@10.5.1)
       chalk: 4.1.2
       codemaker: 1.126.0
@@ -14921,7 +14921,7 @@ snapshots:
       '@aws-cdk/cloud-assembly-schema': 50.4.0
       constructs: 10.5.1
 
-  aws-cdk@2.1107.0: {}
+  aws-cdk@2.1108.0: {}
 
   axe-core@4.11.0: {}
 
