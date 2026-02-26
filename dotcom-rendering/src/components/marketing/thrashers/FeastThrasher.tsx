@@ -29,6 +29,9 @@ const styles = {
 					overflow: hidden;
 					display: block;
 					box-sizing: border-box;
+					-webkit-overflow-scrolling: auto;
+					overscroll-behavior: none;
+					touch-action: pan-y;
 			  `
 			: ''}
 	`,
