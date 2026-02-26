@@ -134,7 +134,6 @@ type Props = {
 	preloadPartialData: boolean;
 	showPlayIcon: boolean;
 	showProgressBar: boolean;
-	showFullscreenIcon: boolean;
 	subtitleSource?: string;
 	subtitleSize?: SubtitleSize;
 	controlsPosition: ControlsPosition;
@@ -179,7 +178,6 @@ export const SelfHostedVideoPlayer = forwardRef(
 			preloadPartialData,
 			showPlayIcon,
 			showProgressBar,
-			showFullscreenIcon,
 			subtitleSource,
 			subtitleSize,
 			controlsPosition,
@@ -198,6 +196,8 @@ export const SelfHostedVideoPlayer = forwardRef(
 			'current' in ref &&
 			ref.current &&
 			isPlayable;
+
+		const showFullscreenIcon = videoStyle === 'Default';
 
 		const dataLinkName = `gu-video-${videoStyle}-${
 			showPlayIcon ? 'play' : 'pause'
