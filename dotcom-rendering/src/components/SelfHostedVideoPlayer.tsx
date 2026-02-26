@@ -327,7 +327,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 								>
 									<div
 										css={iconContainerStyles}
-										data-testid={`fullscreen-icon`}
+										data-testid="fullscreen-icon"
 									>
 										<SvgArrowExpand
 											size="xsmall"
