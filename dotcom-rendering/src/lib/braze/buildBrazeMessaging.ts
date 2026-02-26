@@ -18,7 +18,13 @@ import {
 	hasCurrentBrazeUser,
 	setHasCurrentBrazeUser,
 } from '../hasCurrentBrazeUser';
+import {
+	brazeBannersSystemLogger,
+	isDevelopmentDomain,
+	refreshBanners,
+} from './BrazeBannersSystem';
 import { checkBrazeDependencies } from './checkBrazeDependencies';
+import type { BrazeInstance } from './initialiseBraze';
 import { getInitialisedBraze } from './initialiseBraze';
 
 const maybeWipeUserData = async (
@@ -57,6 +63,7 @@ export const buildBrazeMessaging = async (
 ): Promise<{
 	brazeMessages: BrazeMessagesInterface;
 	brazeCards: BrazeCardsInterface;
+	braze: BrazeInstance | null;
 }> => {
 	if (!storage.local.isAvailable()) {
 		// we require local storage for using any message channel so that we know
@@ -64,6 +71,7 @@ export const buildBrazeMessaging = async (
 		return {
 			brazeMessages: new NullBrazeMessages(),
 			brazeCards: new NullBrazeCards(),
+			braze: null,
 		};
 	}
 
@@ -89,6 +97,7 @@ export const buildBrazeMessaging = async (
 		return {
 			brazeMessages: new NullBrazeMessages(),
 			brazeCards: new NullBrazeCards(),
+			braze: null,
 		};
 	}
 
@@ -117,6 +126,28 @@ export const buildBrazeMessaging = async (
 
 		setHasCurrentBrazeUser();
 		braze.changeUser(dependenciesResult.data.brazeUuid as string);
+
+		// Subscribe to Braze Banners System updates
+		if (isDevelopmentDomain()) {
+			// This callback runs every time Braze has new data (initially empty, then populated)
+			const subscriptionId = braze.subscribeToBannersUpdates(
+				(banners) => {
+					brazeBannersSystemLogger.log('📢 Check:', banners);
+				},
+			);
+			brazeBannersSystemLogger.info(
+				'🆔 Subscribed to Updates. Subscription ID:',
+				subscriptionId,
+			);
+		}
+
+		// Trigger the Braze Banners System refresh (Ask Braze to fetch data)
+		// (Requests banners by a list of placement IDs from the Braze backend.)
+		// (Note that this method can only be called once per session.)
+		// Since we want to suppress In-App Messages if a banner exists, we must
+		// call requestBannersRefresh before openSession.
+		await refreshBanners(braze);
+
 		braze.openSession();
 
 		const brazeCards = window.guardian.config.switches.brazeContentCards
@@ -128,11 +159,12 @@ export const buildBrazeMessaging = async (
 			errorHandler,
 			canRenderBrazeMsg,
 		);
-		return { brazeMessages, brazeCards };
+		return { brazeMessages, brazeCards, braze };
 	} catch {
 		return {
 			brazeMessages: new NullBrazeMessages(),
 			brazeCards: new NullBrazeCards(),
+			braze: null,
 		};
 	}
 };
