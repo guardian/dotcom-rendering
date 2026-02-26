@@ -321,6 +321,8 @@ export const SelfHostedVideo = ({
 	 */
 	const isCinemagraph = videoStyle === 'Cinemagraph';
 
+	const isLoop = videoStyle === 'Loop';
+
 	const singleClickTimerRef = useRef<ReturnType<typeof setTimeout> | null>(
 		null,
 	);
@@ -651,8 +653,12 @@ export const SelfHostedVideo = ({
 	};
 
 	const handleFullscreenClick = (event: React.SyntheticEvent) => {
-		if (singleClickTimerRef.current) {
-			clearTimeout(singleClickTimerRef.current);
+		if (isCinemagraph || isLoop) return;
+
+		{
+			if (singleClickTimerRef.current) {
+				clearTimeout(singleClickTimerRef.current);
+			}
 		}
 
 		void submitClickComponentEvent(event.currentTarget, renderingTarget);
