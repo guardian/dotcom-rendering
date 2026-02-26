@@ -1761,33 +1761,7 @@ export const WithNoVerticalGap = () => {
 	);
 };
 
-export const WithAVerticalGapWhenLegacyContainer = () => {
-	return (
-		<>
-			<CardWrapper>
-				<div
-					css={css`
-						width: 280px;
-					`}
-				>
-					<Card
-						{...basicCardProps}
-						containerType={'dynamic/fast'}
-						mediaPositionOnDesktop="bottom"
-						format={{
-							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Standard,
-							theme: Pillar.Opinion,
-						}}
-						discussionId={'p/d8ex5'}
-					/>
-				</div>
-			</CardWrapper>
-		</>
-	);
-};
-
-export const WithAVerticalGapWhenBetaContainer = () => {
+export const WithAVerticalGap = () => {
 	return (
 		<>
 			<CardWrapper>
