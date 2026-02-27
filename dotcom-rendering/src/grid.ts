@@ -151,22 +151,74 @@ const verticalRules = (options: VerticalRuleOptions = {}): string => `
 // ----- API ----- //
 
 /**
- * Ask the element to span all grid columns between two grid lines. The lines
- * can be specified either by `Line` name or by number.
- * @param from The grid line to start from, either a `Line` name or a number.
- * @param to The grid line to end at, either a `Line` name or a number.
- * @returns {string} CSS to place the element on the grid.
+ * Optional vertical grid rules.
  *
- * @example <caption>Will place the element in the centre column.</caption>
- * const styles = css`
- *   ${grid.between('centre-column-start', 'centre-column-end')}
- * `;
- *
- * @example <caption>Will place the element between lines 3 and 5.</caption>
- * const styles = css`
- *   ${grid.between(3, 5)}
- * `;
+ * Usage:
+ * <div css={css`${grid.container} ${grid.verticalRules}`}>
+ *   <div className="grid-rule rule-left" />
+ *   <div className="grid-rule rule-centre" />
+ *   <div className="grid-rule rule-right" />
+ *   ...
+ * </div>
  */
+const verticalRules = `
+  ${fromBreakpoint.tablet} {
+    position: relative;
+	--centre-transform: translateX(-${columnGap});
+
+	${fromBreakpoint.leftCol} {
+		--centre-transform: translateX(calc(${columnGap} / -2));
+	}
+
+    .grid-rule {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 1px;
+		background-color: ${themePalette('--article-border')};
+		pointer-events: none;
+	}
+
+    /* LEFT OUTER RULE — where the left column starts */
+    .rule-left {
+      grid-column: left-column-start;
+      justify-self: start;
+	  transform: translateX(-${columnGap});
+    }
+
+    /* CENTRE RULE — start of centre column */
+    .rule-centre {
+      grid-column: centre-column-start;
+      justify-self: start;
+      transform: var(--centre-transform); /* centre it in gap */
+    }
+
+    /* RIGHT OUTER RULE — end of right column */
+    .rule-right {
+      grid-column: right-column-end;
+      justify-self: start;
+	  transform: translateX(-1px);
+	  ${betweenBreakpoint.tablet.and.desktop} {
+		grid-column: centre-column-end;
+	  }
+    }
+  }
+
+  ${fromBreakpoint.leftCol} {
+    .rule-left {
+      grid-column: left-column-start;
+    }
+  }
+
+  ${fromBreakpoint.wide} {
+    .rule-right {
+      grid-column: right-column-end;
+    }
+  }
+`;
+
+// ----- API ----- //
+
 const between = (from: Line | number, to: Line | number): string => `
     grid-column: ${from} / ${to};
 `;
