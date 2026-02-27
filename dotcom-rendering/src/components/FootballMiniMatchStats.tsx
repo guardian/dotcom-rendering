@@ -1,16 +1,42 @@
 import { css } from '@emotion/react';
+import { log } from '@guardian/libs';
 import { from } from '@guardian/source/foundations';
 import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
+import type { SWRConfiguration } from 'swr';
+import useSWR from 'swr';
+import { safeParse } from 'valibot';
+import {
+	type FootballMatchStatsSummary,
+	parseMatchStatsSummary,
+} from '../footballMatchStats';
+import { feFootballMatchStatsSummarySchema } from '../frontend/feFootballMatchInfoPage';
+import type { Result } from '../lib/result';
+import { error, fromValibot, ok } from '../lib/result';
 import { palette } from '../palette';
 import { FootballMatchStat } from './FootballMatchStat';
+import { Placeholder } from './Placeholder';
 
+/**
+ * [1] Create new stacking context so the component flows over ads when
+ *     placed in the left column of live blog layout on desktop
+ */
 const containerCss = css`
+	isolation: isolate; /* [1] */
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
+	padding: 10px;
+	background-color: ${palette('--football-live-blog-background')};
+	${from.mobileLandscape} {
+		padding: 20px;
+	}
+	${from.desktop} {
+		padding-top: 24px;
+		padding-right: 0;
+	}
 `;
 
 const buttonTextCss = css`
@@ -26,51 +52,62 @@ const buttonTextShortCss = css`
 	}
 `;
 
-type Team = {
-	name: string;
-	colour: string;
-};
-
-type MatchStatistic = {
-	heading: string;
-	homeValue: number;
-	awayValue: number;
-	isPercentage?: boolean;
-};
-
 type Props = {
-	homeTeam: Team;
-	awayTeam: Team;
-	stats: MatchStatistic[];
+	matchStatsUrl: string;
+	getMatchStatsData: (url: string) => Promise<unknown>;
+	refreshInterval: number;
 };
 
-export const FootballMiniMatchStats = ({
-	homeTeam,
-	awayTeam,
-	stats,
-}: Props) => {
+export const FootballMiniMatchStats = (props: Props) => {
+	const { data } = useSWR<FootballMatchStatsSummary, string>(
+		props.matchStatsUrl,
+		fetcher(props.getMatchStatsData),
+		swrOptions(props.refreshInterval),
+	);
+
+	if (data === undefined) {
+		return (
+			<Placeholder
+				heights={
+					new Map([
+						['mobile', 159],
+						['desktop', 197],
+					])
+				}
+			/>
+		);
+	}
+
+	const homeTeam = {
+		name: data.homeTeam.name,
+		colour: data.homeTeam.statsColour,
+	};
+	const awayTeam = {
+		name: data.awayTeam.name,
+		colour: data.awayTeam.statsColour,
+	};
+
 	return (
 		<div css={containerCss}>
-			{stats.map((stat) => (
-				<FootballMatchStat
-					key={stat.heading}
-					heading={stat.heading}
-					homeTeam={{
-						name: homeTeam.name,
-						colour: homeTeam.colour,
-					}}
-					awayTeam={{
-						name: awayTeam.name,
-						colour: awayTeam.colour,
-					}}
-					homeValue={stat.homeValue}
-					awayValue={stat.awayValue}
-					isPercentage={stat.isPercentage}
-					layout="compact"
-				/>
-			))}
+			<FootballMatchStat
+				heading="Posession"
+				homeTeam={homeTeam}
+				awayTeam={awayTeam}
+				homeValue={data.homeTeam.possession}
+				awayValue={data.awayTeam.possession}
+				isPercentage={true}
+				layout="compact"
+			/>
+			<FootballMatchStat
+				heading="Goal Attempts"
+				homeTeam={homeTeam}
+				awayTeam={awayTeam}
+				homeValue={data.homeTeam.shotsTotal}
+				awayValue={data.awayTeam.shotsTotal}
+				layout="compact"
+			/>
 			<LinkButton
-				href="#"
+				href={data.infoURL}
 				size="small"
 				icon={<SvgArrowRightStraight />}
 				iconSide="right"
@@ -88,4 +125,50 @@ export const FootballMiniMatchStats = ({
 			</LinkButton>
 		</div>
 	);
+};
+
+const swrOptions = (
+	refreshInterval: number,
+): SWRConfiguration<FootballMatchStatsSummary> => ({
+	errorRetryCount: 1,
+	refreshInterval: (latestData: FootballMatchStatsSummary | undefined) =>
+		latestData?.status === 'FT' ? 0 : refreshInterval,
+});
+
+const fetcher =
+	(getMatchStatsData: Props['getMatchStatsData']) =>
+	(url: string): Promise<FootballMatchStatsSummary> =>
+		getMatchStatsData(url)
+			.then(parseData)
+			.then((result) => {
+				if (!result.ok) {
+					log('dotcom', result.error);
+					throw new Error();
+				} else {
+					return result.value;
+				}
+			})
+			.catch(() => {
+				log('dotcom', 'Failed to fetch math stats summary data');
+				throw new Error();
+			});
+
+const parseData = (
+	json: unknown,
+): Result<string, FootballMatchStatsSummary> => {
+	const feData = fromValibot(
+		safeParse(feFootballMatchStatsSummarySchema, json),
+	);
+
+	if (!feData.ok) {
+		return error('Failed to validate match stats summary data');
+	}
+
+	const parsedMatchStats = parseMatchStatsSummary(feData.value);
+
+	if (!parsedMatchStats.ok) {
+		return error('Failed to parse match stats summary');
+	}
+
+	return ok(parsedMatchStats.value);
 };
