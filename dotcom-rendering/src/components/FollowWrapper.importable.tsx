@@ -13,6 +13,11 @@ type Props = {
 	displayName: string;
 };
 
+export const isNotInBlockList = (tagId: string) => {
+	const blockList = ['profile/anas-al-sharif'];
+	return !blockList.includes(tagId);
+};
+
 export const FollowWrapper = ({ id, displayName }: Props) => {
 	const [isFollowingNotifications, setIsFollowingNotifications] = useState<
 		boolean | undefined
@@ -25,11 +30,6 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 
 	const isMyGuardianEnabled = useIsMyGuardianEnabled();
 	const isBridgetCompatible = useIsBridgetCompatible('2.5.0');
-
-	const isNotInBlockList = (tagId: string) => {
-		const blockList = ['profile/anas-al-sharif'];
-		return !blockList.includes(tagId);
-	};
 
 	if (isBridgetCompatible && isMyGuardianEnabled && isNotInBlockList(id)) {
 		setShowFollowTagButton(true);

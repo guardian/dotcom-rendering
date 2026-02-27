@@ -12,6 +12,7 @@ import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
 import { enhanceBlockquotes } from './enhance-blockquotes';
+import { enhanceContributorFollowBlock } from './enhance-contributor-follow-block';
 import { enhanceDisclaimer } from './enhance-disclaimer';
 import { enhanceDividers } from './enhance-dividers';
 import { enhanceDots } from './enhance-dots';
@@ -40,6 +41,7 @@ type Options = {
 	pageId: string;
 	serverSideABTests?: Record<string, string>;
 	switches?: Switches;
+	byline?: string;
 };
 
 const enhanceNewsletterSignup =
@@ -99,6 +101,12 @@ export const enhanceElements =
 				format,
 				options.renderingTarget,
 				options.shouldHideAds,
+			),
+			enhanceContributorFollowBlock(
+				format,
+				options.renderingTarget,
+				options.tags,
+				options.byline,
 			),
 			enhanceDisclaimer(options.hasAffiliateLinksDisclaimer, isNested),
 			enhanceProductSummary({

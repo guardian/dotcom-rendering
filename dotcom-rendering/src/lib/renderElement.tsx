@@ -9,6 +9,7 @@ import { CartoonComponent } from '../components/CartoonComponent';
 import { ChartAtom } from '../components/ChartAtom.importable';
 import { CodeBlockComponent } from '../components/CodeBlockComponent';
 import { CommentBlockComponent } from '../components/CommentBlockComponent';
+import { ContributorFollowBlockComponent } from '../components/ContributorFollowBlockComponent.importable';
 import { CrosswordComponent } from '../components/CrosswordComponent.importable';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
@@ -283,6 +284,15 @@ export const renderElement = ({
 					profileName={element.profileName}
 					dateTime={element.dateTime}
 					permalink={element.permalink}
+				/>
+			);
+		case 'model.dotcomrendering.pageElements.ContributorFollowBlockElement':
+			return (
+				<ContributorFollowBlockComponent
+					contributorId={element.contributorId}
+					displayName={element.displayName}
+					avatarUrl={element.avatarUrl}
+					bio={element.bio}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.DividerBlockElement':

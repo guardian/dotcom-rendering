@@ -6798,6 +6798,18 @@ const paletteColours = {
 		light: commentFormInputBackgroundLight,
 		dark: commentFormInputBackgroundDark,
 	},
+	'--contributor-follow-fill': {
+		light: followIconFillLight,
+		dark: followIconFillDark,
+	},
+	'--contributor-follow-bio-text': {
+		light: () => sourcePalette.neutral[10],
+		dark: () => sourcePalette.neutral[86],
+	},
+	'--contributor-follow-straight-lines': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[38],
+	},
 	'--cricket-scoreboard-border-top': {
 		light: cricketScoreboardBorderTop,
 		dark: cricketScoreboardBorderTop,
