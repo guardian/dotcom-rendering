@@ -71,3 +71,26 @@ export type FEFootballMatchInfoPage = FEFootballDataPage & {
 	matchUrl: string;
 	matchHeaderUrl: string;
 };
+
+export const feFootballTeamSummarySchema = object({
+	id: string(),
+	name: string(),
+	possession: number(),
+	shotsOn: number(),
+	shotsOff: number(),
+	colours: string(),
+});
+
+export type FEFootballTeamSummary = Output<typeof feFootballTeamSummarySchema>;
+
+export const feFootballMatchStatsSummarySchema = object({
+	id: string(),
+	homeTeam: feFootballTeamSummarySchema,
+	awayTeam: feFootballTeamSummarySchema,
+	status: string(),
+	infoURL: string(),
+});
+
+export type FEFootballMatchStatsSummary = Output<
+	typeof feFootballMatchStatsSummarySchema
+>;
