@@ -40,6 +40,12 @@ export const Apps = {
 	parameters: {
 		config: {
 			renderingTarget: 'Apps',
+			darkModeAvailable: true,
+		},
+		chromatic: {
+			modes: {
+				'light mobileMedium': allModes['light mobileMedium'],
+			},
 		},
 	},
 } satisfies Story;

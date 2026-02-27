@@ -1,10 +1,11 @@
 import { css } from '@emotion/react';
 import {
+	breakpoints,
 	from,
 	palette as sourcePalette,
 	space,
+	textSans12,
 } from '@guardian/source/foundations';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -20,7 +21,8 @@ import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
-import { palette as themePalette } from '../palette';
+import { decideLanguage, decideLanguageDirection } from '../lib/lang';
+import { palette } from '../palette';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { Stuck } from './lib/stickiness';
@@ -39,22 +41,141 @@ interface AppProps extends Props {
 	renderingTarget: 'Apps';
 }
 
-const border = css`
-	border: 1px solid black;
+const headerStyles = css`
+	${grid.container}
+	${grid.column.all}
+	grid-row: 1;
 `;
 
-const metaFlex = css`
-	margin-bottom: ${space[3]}px;
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
+const contentStyles = css`
+	${grid.container}
+	${grid.column.all}
+	grid-row: 2;
 `;
 
-const shareButtonWrapper = css`
+const mainMediaStyles = css`
+	${grid.column.all}
+	grid-row: 1;
+	overflow: hidden;
+	max-height: 400px;
+
+	${from.wide} {
+		width: ${breakpoints.wide}px;
+		margin: auto;
+	}
+`;
+
+const captionStyles = css`
 	${grid.column.centre}
+	grid-row: 2;
 
+	${from.desktop} {
+		${grid.span(12, 2)}
+	}
+	${from.leftCol} {
+		${grid.column.right}
+	}
+`;
+
+const headlineStyles = css`
+	margin-top: ${space[4]}px;
+	${grid.column.centre}
+	${from.desktop} {
+		${grid.span(4, 8)}
+		grid-row: 2;
+	}
+	${from.leftCol} {
+		${grid.column.centre}
+	}
+`;
+const metaStyles = css`
+	margin-top: ${space[4]}px;
+	padding: ${space[1]}px;
+	${grid.column.centre}
+	grid-row: 3;
+	${from.desktop} {
+		grid-row: 2;
+	}
 	${from.leftCol} {
 		${grid.column.left}
+	}
+`;
+
+const standfirstStyles = css`
+	${grid.column.centre}
+	grid-row: 1;
+	${from.desktop} {
+		${grid.between(4, 'right-column-end')}
+	}
+	${from.leftCol} {
+		${grid.column.centre}
+	}
+`;
+
+const articleBodyStyles = css`
+	${grid.column.centre}
+	grid-row:auto;
+	${from.desktop} {
+		${grid.between(4, 'right-column-end')}
+		grid-row: 2;
+	}
+	${from.leftCol} {
+		${grid.column.centre}
+		grid-row: 2;
+	}
+	padding-bottom: 24px;
+`;
+
+const onwardContentStyles = css`
+	height: 20px;
+	background-color: lightgrey;
+
+	${grid.column.centre}
+	grid-row:auto;
+
+	${from.desktop} {
+		${grid.span(4, 8)}
+		grid-row: 3;
+	}
+	${from.leftCol} {
+		${grid.column.right}
+		grid-row: 1
+	}
+	margin-bottom: 24px;
+`;
+
+const ctaStyles = css`
+	${grid.column.all}
+	grid-row:auto;
+	overflow: hidden;
+	max-height: 400px;
+	${from.wide} {
+		width: ${breakpoints.wide}px;
+		margin: auto;
+	}
+`;
+
+const sideBorders = css`
+	${from.desktop} {
+		position: relative;
+		::before {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			content: '';
+			border-left: 1px solid ${palette('--article-border')};
+			border-right: 1px solid ${palette('--article-border')};
+			left: -${grid.mobileColumnGap};
+			right: -${grid.mobileColumnGap};
+			${from.mobileLandscape} {
+				left: -${grid.columnGap};
+				right: -${grid.columnGap};
+			}
+			${grid.between('centre-column-start', 'right-column-end')}
+			${from.leftCol} {
+				${grid.between('left-column-start', 'right-column-end')}
+			}
+		}
 	}
 `;
 
@@ -74,7 +195,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 
 	return (
 		<>
-			{props.renderingTarget === 'Web' && branding ? (
+			{branding ? (
 				<Stuck>
 					<Section
 						fullWidth={true}
@@ -82,8 +203,8 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						showTopBorder={false}
 						shouldCenter={false}
 						backgroundColour={sourcePalette.neutral[7]}
-						padSides={false}
-						element="aside"
+						padSides={true}
+						element="header"
 					>
 						<HostedContentHeader
 							branding={branding}
@@ -92,24 +213,15 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 					</Section>
 				</Stuck>
 			) : null}
-			<main>
-				<article>
-					<header css={[grid.container]}>
-						<div
-							css={[
-								grid.column.all,
-								css`
-									overflow: hidden;
-									max-height: 400px;
-									${from.leftCol} {
-										${grid.between(
-											'left-column-start',
-											'right-column-end',
-										)}
-									}
-								`,
-							]}
-						>
+
+			<main
+				data-layout="HostedArticleLayout"
+				lang={decideLanguage(frontendData.lang)}
+				dir={decideLanguageDirection(frontendData.isRightToLeftLang)}
+			>
+				<article css={[grid.container, sideBorders]}>
+					<header css={headerStyles}>
+						<div css={mainMediaStyles}>
 							<MainMedia
 								format={format}
 								elements={frontendData.mainMediaElements}
@@ -127,45 +239,17 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 								contentType={frontendData.contentType}
 							/>
 						</div>
-						<div
-							css={[
-								grid.between('centre-column-start', 'grid-end'),
-							]}
-						>
-							<ArticleHeadline
+
+						<div css={captionStyles}>
+							<Caption
+								captionText={mainMediaCaptionText}
 								format={format}
-								headlineString={frontendData.headline}
-								tags={frontendData.tags}
-								byline={frontendData.byline}
-								webPublicationDateDeprecated={
-									frontendData.webPublicationDateDeprecated
-								}
+								isMainMedia={true}
 							/>
 						</div>
-					</header>
-					<div
-						css={[
-							grid.container,
-							css`
-								padding-top: ${space[12]}px;
 
-								${from.leftCol} {
-									padding-top: ${space[5]}px;
-								}
-							`,
-						]}
-					>
-						<div
-							data-print-layout="hide"
-							css={[
-								shareButtonWrapper,
-								metaFlex,
-								css`
-									grid-row: 1;
-								`,
-							]}
-						>
-							{props.renderingTarget === 'Web' && (
+						{props.renderingTarget === 'Web' && (
+							<div data-print-layout="hide" css={metaStyles}>
 								<Island
 									priority="feature"
 									defer={{ until: 'visible' }}
@@ -177,22 +261,31 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 										context="ArticleMeta"
 									/>
 								</Island>
-							)}
+							</div>
+						)}
+
+						<div css={headlineStyles}>
+							<ArticleHeadline
+								format={format}
+								headlineString={frontendData.headline}
+								tags={frontendData.tags}
+								byline={frontendData.byline}
+								webPublicationDateDeprecated={
+									frontendData.webPublicationDateDeprecated
+								}
+							/>
 						</div>
-						<div
-							css={[
-								grid.column.centre,
-								css`
-									grid-row: 1;
-								`,
-							]}
-						>
+					</header>
+
+					<div css={contentStyles}>
+						<div css={standfirstStyles}>
 							<Standfirst
 								format={format}
 								standfirst={frontendData.standfirst}
 							/>
 						</div>
-						<div id="maincontent" css={[grid.column.centre]}>
+
+						<div css={articleBodyStyles}>
 							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}
@@ -226,66 +319,32 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 									shouldHideAds={frontendData.shouldHideAds}
 								/>
 							</ArticleContainer>
-							<StraightLines
-								data-print-layout="hide"
-								count={1}
-								cssOverrides={css`
-									display: block;
+
+							<span
+								css={css`
+									${textSans12}
+									color: ${sourcePalette.neutral[46]};
+									padding-bottom: ${space[4]}px;
 								`}
-								color={themePalette('--straight-lines')}
+							>
+								{'Placeholder - disclaimer text'}
+							</span>
+						</div>
+
+						<div css={onwardContentStyles}>
+							{'Placeholder - onward content'}
+						</div>
+
+						<div css={ctaStyles}>
+							<CallToActionAtom
+								linkUrl="https://safety.epicgames.com/en-US?lang=en-US"
+								backgroundImage="https://media.guim.co.uk/7fe58f11470360bc9f1e4b6bbcbf45d7cf06cfcf/0_0_1300_375/1300.jpg"
+								text="This is a call to action text"
+								buttonText="Learn more"
 							/>
 						</div>
-						<div
-							css={[
-								grid.column.centre,
-								css`
-									grid-row: auto;
-
-									${from.leftCol} {
-										${grid.column.right}
-										grid-row: 1;
-									}
-								`,
-							]}
-						>
-							<Caption
-								captionText={mainMediaCaptionText}
-								format={format}
-								isMainMedia={true}
-							/>
-
-							{'Onward content'}
-						</div>
-					</div>
-
-					<div css={[grid.container, border]}>
-						<div css={[grid.column.all]}>Footer</div>
 					</div>
 				</article>
-				<div css={[grid.container]}>
-					<div
-						css={[
-							grid.column.all,
-							css`
-								overflow: hidden;
-								max-height: 400px;
-								${from.leftCol} {
-									${grid.between(
-										'left-column-start',
-										'right-column-end',
-									)}
-								}
-							`,
-						]}
-					>
-						<CallToActionAtom
-							linkUrl="https://safety.epicgames.com/en-US?lang=en-US"
-							backgroundImage="https://media.guim.co.uk/7fe58f11470360bc9f1e4b6bbcbf45d7cf06cfcf/0_0_1300_375/1300.jpg"
-							text="This is a call to action text"
-							buttonText="Learn more"
-						/>
-					</div>
-				</div>
 			</main>
 		</>
 	);
