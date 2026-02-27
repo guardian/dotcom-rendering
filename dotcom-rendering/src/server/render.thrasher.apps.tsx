@@ -8,9 +8,13 @@ export const isThrasher = (name?: string): name is ThrasherName =>
 	name === 'feast';
 
 // Minimal html page for the thrasher component
+// Note: intentionally omitting <!doctype html> — the doctype triggers standards
+// mode in WebKit, which causes the iOS app's WKWebView to measure the content
+// height slightly larger than the container, creating unwanted vertical scroll.
+// Existing thrashers from the interactives repo also omit the doctype.
 const thrasherTemplate = (html: string, css: string): string => {
 	const minifiedFontsCss = new CleanCSS().minify(rawFontsCss).styles;
-	return `<!doctype html>
+	return `
         <html lang="en">
             <head>
 				<meta charset="utf-8">
