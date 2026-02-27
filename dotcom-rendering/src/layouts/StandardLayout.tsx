@@ -83,8 +83,14 @@ const stretchLines = css`
 	}
 `;
 
-const desktopRow = (row: number) => css`
-	${from.desktop} {
+const tabletRow = (row: number) => css`
+	${from.tablet} {
+		grid-row: ${row};
+	}
+`;
+
+const leftColRow = (row: number) => css`
+	${from.leftCol} {
 		grid-row: ${row};
 	}
 `;
@@ -234,7 +240,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					pageTags={article.tags}
 				/>
 				<article>
-					<div css={css(grid.container)}>
+					<div css={css([grid.container, grid.verticalRules])}>
+						<div className="grid-rule rule-left" />
+						<div className="grid-rule rule-centre" />
+						<div className="grid-rule rule-right" />
 						<aside css={css(grid.column.centre)}>
 							<div css={maxWidth}>
 								{isMatchReport && (
@@ -270,7 +279,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								)}
 							</div>
 						</aside>
-						<div css={css(grid.column.centre, desktopRow(3))}>
+						<div
+							css={css(
+								grid.column.centre,
+								tabletRow(4),
+								leftColRow(3),
+							)}
+						>
 							<div css={!isMedia && maxWidth}>
 								<MainMedia
 									format={format}
@@ -296,12 +311,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								css={[
 									css(grid.column.centre),
 									css`
-										${from.desktop} {
+										${from.leftCol} {
 											${grid.column.left};
 											grid-row: 1;
 											align-self: start;
 										}
 									`,
+									tabletRow(1),
 								]}
 							>
 								<ArticleTitle
@@ -322,7 +338,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<Border />
 							)}
 						</div>
-						<div css={css([grid.column.centre, desktopRow(1)])}>
+						<div
+							css={css([
+								grid.column.centre,
+								tabletRow(2),
+								leftColRow(1),
+							])}
+						>
 							<div css={maxWidth}>
 								<ArticleHeadline
 									format={format}
@@ -336,7 +358,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								/>
 							</div>
 						</div>
-						<div css={css([grid.column.centre, desktopRow(2)])}>
+						<div
+							css={css([
+								grid.column.centre,
+								tabletRow(3),
+								leftColRow(2),
+							])}
+						>
 							<Standfirst
 								format={format}
 								standfirst={article.standfirst}
@@ -346,7 +374,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							css={[
 								css(grid.column.centre),
 								css`
-									${from.desktop} {
+									${from.leftCol} {
 										${grid.column.left};
 										grid-row: 3;
 										align-self: start;
