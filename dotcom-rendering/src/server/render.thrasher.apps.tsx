@@ -11,7 +11,8 @@ export const isThrasher = (name?: string): name is ThrasherName =>
 // The `overflow: hidden` on the body is to fix an issue on the iOS app where it scrolls within the webview.
 const thrasherTemplate = (html: string, css: string): string => {
 	const minifiedFontsCss = new CleanCSS().minify(rawFontsCss).styles;
-	return `<!doctype html><html lang="en">
+	return `<!doctype html>
+		<html lang="en">
             <head>
 				<meta charset="utf-8">
 				<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
