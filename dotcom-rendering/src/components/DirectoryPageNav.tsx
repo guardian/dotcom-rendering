@@ -37,6 +37,7 @@ interface DirectoryPageNavConfig {
 }
 
 const configs = [
+	// Winter Olympics 2026
 	{
 		pageIds: [
 			'sport/winter-olympics-2026',
@@ -79,6 +80,35 @@ const configs = [
 			desktop:
 				'https://uploads.guim.co.uk/2026/02/03/winter-olympics-980px.jpg',
 		},
+	},
+	// Winter Paralympics 2026
+	{
+		pageIds: [
+			'sport/winter-paralympics-2026',
+			'global/ng-interactive/2026/feb/27/2026-winter-paralympics-results',
+			'global/ng-interactive/2026/feb/27/2026-winter-paralympics-medal-table',
+		],
+		tagIds: [],
+		textColor: palette.neutral[7],
+		backgroundColor: '#22B24B',
+		title: {
+			label: 'Winter Paralympics 2026',
+			id: 'sport/winter-paralympics-2026',
+		},
+		links: [
+			{
+				label: 'Results',
+				id: 'global/ng-interactive/2026/feb/27/2026-winter-paralympics-results',
+			},
+			{
+				label: 'Medal table',
+				id: 'global/ng-interactive/2026/feb/27/2026-winter-paralympics-medal-table',
+			},
+			{
+				label: 'Full coverage',
+				id: 'sport/winter-paralympics-2026',
+			},
+		],
 	},
 ] satisfies DirectoryPageNavConfig[];
 
