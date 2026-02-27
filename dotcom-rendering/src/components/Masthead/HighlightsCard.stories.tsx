@@ -1,9 +1,13 @@
 import { css } from '@emotion/react';
-import { ArticleSpecial } from '@guardian/libs';
 import { from } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import type { ArticleTheme } from '../../lib/articleFormat';
-import { ArticleDesign, ArticleDisplay, Pillar } from '../../lib/articleFormat';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	Pillar,
+} from '../../lib/articleFormat';
 import type { MainMedia } from '../../types/mainMedia';
 import { HighlightsCard } from './HighlightsCard';
 
