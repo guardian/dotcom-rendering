@@ -112,7 +112,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Test placing the Most Viewed and Deeply Read components in the right-hand column on the homepage.",
 		owners: ["fronts.and.curation@guardian.co.uk"],
-		status: "OFF",
+		status: "ON",
 		expirationDate: `2026-04-28`,
 		type: "server",
 		audienceSize: 0 / 100,

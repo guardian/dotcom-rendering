@@ -84,7 +84,7 @@ export const MostViewedFooterItem = ({
 			<span css={bigNumber}>
 				<BigNumber index={position} />
 			</span>
-			<div css={[headlineHeader]}>
+			<div css={headlineHeader}>
 				<FormatBoundary format={format}>
 					{format.design === ArticleDesign.LiveBlog ? (
 						<LinkHeadline
