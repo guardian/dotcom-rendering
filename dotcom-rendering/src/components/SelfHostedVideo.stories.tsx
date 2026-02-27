@@ -151,3 +151,40 @@ export const InteractionObserver: Story = {
 		await expect(canvas.queryByTestId('play-icon')).not.toBeInTheDocument();
 	},
 } satisfies Story;
+
+export const FullscreenOpen: Story = {
+	...Loop5to4,
+	name: 'Open fullscreen',
+	args: {
+		...Loop5to4.args,
+		videoStyle: 'Default',
+	},
+	parameters: {
+		test: {
+			// The following error is received without this flag: "TypeError: ophan.trackClickComponentEvent is not a function"
+			dangerouslyIgnoreUnhandledErrors: true,
+		},
+	},
+	play: async ({ canvasElement }) => {
+		/**
+		 * Ideally, this interaction test would open and close fullscreen.
+		 * However, the Fullscreen API is not implemented in jsdom, so
+		 * document.fullscreenElement will always be null regardless of what the
+		 * component does. Instead, we spy on requestFullscreen to ensure
+		 * that the correct handler is invoked when the fullscreen button is clicked.
+		 */
+
+		const canvas = within(canvasElement);
+
+		const requestFullscreenSpy = spyOn(
+			HTMLElement.prototype,
+			'requestFullscreen',
+		);
+
+		await canvas.findByTestId('fullscreen-icon');
+
+		await userEvent.click(canvas.getByTestId('fullscreen-icon'));
+
+		await expect(requestFullscreenSpy).toHaveBeenCalled();
+	},
+} satisfies Story;
