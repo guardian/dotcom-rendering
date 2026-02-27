@@ -79,6 +79,12 @@ const stretchLines = css`
 	}
 `;
 
+const desktopRow = (row: number) => css`
+	${from.desktop} {
+		grid-row: ${row};
+	}
+`;
+
 interface Props {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
@@ -268,7 +274,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<Border />
 							)}
 						</div>
-						<div css={css(grid.column.centre)}>
+						<div css={css([grid.column.centre, desktopRow(1)])}>
 							<div css={maxWidth}>
 								<ArticleHeadline
 									format={format}
@@ -282,17 +288,23 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								/>
 							</div>
 						</div>
-						<div css={css(grid.column.centre)}>
+						<div css={css([grid.column.centre, desktopRow(2)])}>
 							<Standfirst
 								format={format}
 								standfirst={article.standfirst}
 							/>
 						</div>
 						<aside
-							css={{
-								'&': css(grid.column.centre),
-								[from.desktop]: css(grid.column.left),
-							}}
+							css={[
+								css(grid.column.centre),
+								css`
+									${from.desktop} {
+										${grid.column.left};
+										grid-row: 3;
+										align-self: start;
+									}
+								`,
+							]}
 						>
 							<div css={maxWidth}>
 								<div css={stretchLines}>
@@ -541,10 +553,16 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							</ArticleContainer>
 						</div>
 						<div
-							css={{
-								'&': css(grid.column.centre),
-								[from.desktop]: css(grid.column.right),
-							}}
+							css={[
+								css(grid.column.centre),
+								css`
+									${from.desktop} {
+										${grid.column.right};
+										grid-row: 1;
+										align-self: start;
+									}
+								`,
+							]}
 						>
 							<Island
 								priority="feature"
