@@ -331,6 +331,7 @@ const withBannerData =
 					onNotNowClick,
 					onCollapseClick,
 					onExpandClick,
+					bannerChannel,
 					content: {
 						mainContent: renderedContent,
 						mobileContent: renderedMobileContent ?? renderedContent,
@@ -358,7 +359,7 @@ const withBannerData =
 				);
 			}
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 		}
 
 		return <></>;

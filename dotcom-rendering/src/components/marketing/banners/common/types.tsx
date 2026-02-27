@@ -9,6 +9,7 @@ import type { ReminderFields } from '@guardian/support-dotcom-components/dist/sh
 import type {
 	ArticleCounts,
 	ArticleCountType,
+	BannerChannel,
 	ConfigurableDesign,
 	SelectedAmountsVariant,
 	SeparateArticleCount,
@@ -65,6 +66,7 @@ export interface BannerRenderProps {
 	onSignInClick?: () => void;
 	onCollapseClick: () => void;
 	onExpandClick: () => void;
+	bannerChannel: BannerChannel;
 	reminderTracking: ContributionsReminderTracking;
 	content: BannerTextContent;
 	countryCode?: string;
@@ -78,7 +80,7 @@ export interface BannerRenderProps {
 	choiceCardAmounts?: SelectedAmountsVariant;
 	choiceCardsSettings?: ChoiceCardsSettings;
 	tracking: Tracking;
-	submitComponentEvent?: (componentEvent: ComponentEvent) => void;
+	submitComponentEvent?: (componentEvent: ComponentEvent) => Promise<void>;
 	design?: ConfigurableDesign;
 	promoCodes?: string[];
 	isCollapsible?: boolean;

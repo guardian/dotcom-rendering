@@ -368,8 +368,12 @@ export const StickyBottomBanner = ({
 			host,
 		);
 
+		// Check both window.location.search and the full URL for force-banner parameter
+		// This handles cases where the local dev server has a different URL structure
+		const fullUrl = window.location.href;
 		const hasForceBannerParam =
-			window.location.search.includes('force-banner');
+			window.location.search.includes('force-banner') ||
+			fullUrl.includes('force-banner');
 		const hasForceBrazeMessageParam = window.location.hash.includes(
 			'force-braze-message',
 		);
