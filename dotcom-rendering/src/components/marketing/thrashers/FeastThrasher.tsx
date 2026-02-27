@@ -87,16 +87,12 @@ const styles = {
 	`,
 	imageContainerMobile: css`
 		margin-bottom: ${space[4]}px;
-		align-self: start;
-		max-height: 100%;
 		${from.tablet} {
 			display: none;
 		}
 	`,
 	imageContainerTablet: css`
 		display: none;
-		align-self: start;
-		max-height: 100%;
 		${from.tablet} {
 			display: block;
 			align-self: stretch;
