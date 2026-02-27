@@ -8,7 +8,8 @@ export const isThrasher = (name?: string): name is ThrasherName =>
 	name === 'feast';
 
 // Minimal html page for the thrasher component.
-// The `overflow: hidden` on the body is to fix an issue on the iOS app where it scrolls within the webview.
+// The `overflow: hidden` on the body fixes an issue on the iOS app where it scrolls within the webview.
+// The `margin-top: 0` on the body fixes an issue on iOS where the border is clipped.
 const thrasherTemplate = (html: string, css: string): string => {
 	const minifiedFontsCss = new CleanCSS().minify(rawFontsCss).styles;
 	return `<!doctype html>
@@ -18,7 +19,7 @@ const thrasherTemplate = (html: string, css: string): string => {
 				<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 				<meta name="robots" content="noindex">
                 <style class="webfont">${minifiedFontsCss}</style>
-                <style>body { overflow: hidden; }</style>
+                <style>body { overflow: hidden; margin-top: 0; }</style>
                 ${css}
 			</head>
 			<body>
