@@ -26,18 +26,12 @@ const styles = {
 			? css`
 					margin: 0 4px;
 					border-radius: 8px;
-					overflow: hidden;
-					display: block;
-					box-sizing: border-box;
-					height: fit-content;
-					min-height: 0;
 			  `
 			: ''}
 	`,
 	grid: css`
 		display: grid;
 		padding: 0 ${space[3]}px ${space[4]}px ${space[3]}px;
-		min-height: 0;
 		${from.tablet} {
 			grid-template-columns: 1fr 1fr;
 			gap: ${space[4]}px;

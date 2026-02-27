@@ -7,20 +7,17 @@ type ThrasherName = 'feast';
 export const isThrasher = (name?: string): name is ThrasherName =>
 	name === 'feast';
 
-// Minimal html page for the thrasher component
-// Note: intentionally omitting <!doctype html> — the doctype triggers standards
-// mode in WebKit, which causes the iOS app's WKWebView to measure the content
-// height slightly larger than the container, creating unwanted vertical scroll.
-// Existing thrashers from the interactives repo also omit the doctype.
+// Minimal html page for the thrasher component.
+// The `overflow: hidden` on the body is to fix an issue on the iOS app where it scrolls within the webview.
 const thrasherTemplate = (html: string, css: string): string => {
 	const minifiedFontsCss = new CleanCSS().minify(rawFontsCss).styles;
-	return `
-        <html lang="en">
+	return `<!doctype html><html lang="en">
             <head>
 				<meta charset="utf-8">
 				<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 				<meta name="robots" content="noindex">
                 <style class="webfont">${minifiedFontsCss}</style>
+                <style>body { overflow: hidden; }</style>
                 ${css}
 			</head>
 			<body>
