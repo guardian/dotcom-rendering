@@ -1579,101 +1579,6 @@ export const WithSpecialPaletteVariations = () => {
 	);
 };
 
-export const DynamoWithSpecialPaletteVariations = () => {
-	const DynamoCard = ({
-		containerPalette,
-		isLabs = false,
-	}: {
-		containerPalette: DCRContainerPalette;
-		isLabs?: boolean;
-	}) => (
-		<CardWrapper>
-			<Card
-				{...basicCardProps}
-				format={
-					isLabs
-						? {
-								...basicCardProps.format,
-								theme: ArticleSpecial.Labs,
-						  }
-						: basicCardProps.format
-				}
-				containerPalette={containerPalette}
-				containerType="dynamic/package"
-				isDynamo={true}
-				kickerText="Main kicker"
-				headlineSizes={{ desktop: 'medium', tablet: 'small' }}
-				mediaPositionOnDesktop="bottom"
-				mediaPositionOnMobile="bottom"
-				mediaSize="large"
-				supportingContent={[
-					{
-						...aBasicLink,
-						headline: 'Headline 1',
-						kickerText: `${isLabs ? 'Labs' : 'News'} kicker`,
-						format: isLabs
-							? {
-									...basicCardProps.format,
-									theme: ArticleSpecial.Labs,
-							  }
-							: basicCardProps.format,
-					},
-					{
-						...aBasicLink,
-						headline: 'Headline 2',
-						kickerText: `${isLabs ? 'Labs' : 'Sport'} kicker`,
-						format: {
-							theme: isLabs ? ArticleSpecial.Labs : Pillar.Sport,
-							design: ArticleDesign.Gallery,
-							display: ArticleDisplay.Standard,
-						},
-					},
-					{
-						...aBasicLink,
-						headline: 'Headline 3',
-						kickerText: `${isLabs ? 'Labs' : 'Culture'} kicker`,
-						format: {
-							theme: isLabs
-								? ArticleSpecial.Labs
-								: Pillar.Culture,
-							design: ArticleDesign.Standard,
-							display: ArticleDisplay.Standard,
-						},
-					},
-				]}
-			/>
-		</CardWrapper>
-	);
-
-	return (
-		<>
-			{containerPalettes.map((containerPalette) => (
-				<FrontSection
-					title={containerPalette}
-					discussionApiUrl=""
-					editionId={'UK'}
-					containerPalette={containerPalette}
-					key={containerPalette}
-					isLabs={containerPalette === 'Branded'}
-					collectionBranding={
-						containerPalette === 'Branded'
-							? {
-									kind: 'paid-content',
-									branding,
-									isContainerBranding: true,
-									hasMultipleBranding: false,
-									isFrontBranding: false,
-							  }
-							: undefined
-					}
-				>
-					<DynamoCard containerPalette={containerPalette} />
-				</FrontSection>
-			))}
-		</>
-	);
-};
-
 export const WithAFiveFourAspectRatio = () => {
 	return (
 		<>
@@ -1856,33 +1761,7 @@ export const WithNoVerticalGap = () => {
 	);
 };
 
-export const WithAVerticalGapWhenLegacyContainer = () => {
-	return (
-		<>
-			<CardWrapper>
-				<div
-					css={css`
-						width: 280px;
-					`}
-				>
-					<Card
-						{...basicCardProps}
-						containerType={'dynamic/fast'}
-						mediaPositionOnDesktop="bottom"
-						format={{
-							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Standard,
-							theme: Pillar.Opinion,
-						}}
-						discussionId={'p/d8ex5'}
-					/>
-				</div>
-			</CardWrapper>
-		</>
-	);
-};
-
-export const WithAVerticalGapWhenBetaContainer = () => {
+export const WithAVerticalGap = () => {
 	return (
 		<>
 			<CardWrapper>

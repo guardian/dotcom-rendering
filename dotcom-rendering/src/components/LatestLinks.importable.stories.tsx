@@ -162,7 +162,6 @@ export const WorldCupFinal2023 = () => {
 						id="/football/live/2023/aug/20/spain-v-england-womens-world-cup-final-live"
 						direction="horizontal"
 						containerPalette={containerPalette}
-						isDynamo={true}
 					/>
 				</Island>
 			</Wrapper>
@@ -188,7 +187,7 @@ export const LondonPride2022 = () => {
 		<Wrapper
 			styles={css`
 				max-width: 600px;
-				background-color: 'inherit';
+				background-color: inherit;
 			`}
 		>
 			<Island priority="critical">
@@ -219,7 +218,7 @@ export const WithHeader = () => {
 		<Wrapper
 			styles={css`
 				max-width: 600px;
-				background-color: 'inherit';
+				background-color: inherit;
 			`}
 		>
 			<Island priority="critical">

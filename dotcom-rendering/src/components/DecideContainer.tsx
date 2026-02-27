@@ -7,9 +7,6 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import { DynamicFast } from './DynamicFast';
-import { DynamicPackage } from './DynamicPackage';
-import { DynamicSlow } from './DynamicSlow';
 import { FixedLargeSlowXIV } from './FixedLargeSlowXIV';
 import { FixedMediumFastXI } from './FixedMediumFastXI';
 import { FixedMediumFastXII } from './FixedMediumFastXII';
@@ -64,36 +61,6 @@ export const DecideContainer = ({
 	containerLevel,
 }: Props) => {
 	switch (containerType) {
-		case 'dynamic/fast':
-			return (
-				<DynamicFast
-					groupedTrails={groupedTrails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'dynamic/slow':
-			return (
-				<DynamicSlow
-					groupedTrails={groupedTrails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'dynamic/package':
-			return (
-				<DynamicPackage
-					groupedTrails={groupedTrails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
 		case 'fixed/large/slow-XIV':
 			return (
 				<FixedLargeSlowXIV
