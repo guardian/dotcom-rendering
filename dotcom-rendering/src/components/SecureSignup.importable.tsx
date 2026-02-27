@@ -21,6 +21,7 @@ import { useEffect, useRef, useState } from 'react';
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
+import { useBrowserId } from '../lib/metrics';
 import { clearSubscriptionCache } from '../lib/newsletterSubscriptionCache';
 import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { palette } from '../palette';
@@ -136,6 +137,7 @@ const buildFormData = (
 	newsletterId: string,
 	token: string,
 	marketingOptIn?: boolean,
+	browserId?: string,
 ): FormData => {
 	const pageRef = window.location.origin + window.location.pathname;
 	const refViewId = window.guardian.ophan?.pageViewId ?? '';
@@ -153,6 +155,10 @@ const buildFormData = (
 
 	if (marketingOptIn !== undefined) {
 		formData.append('marketing', marketingOptIn ? 'true' : 'false');
+	}
+
+	if (browserId !== undefined) {
+		formData.append('browserId', browserId);
 	}
 
 	return formData;
@@ -304,6 +310,7 @@ export const SecureSignup = ({
 		});
 	}, []);
 	const { renderingTarget } = useConfig();
+	const browserId = useBrowserId();
 
 	const hasResponse = typeof responseOk === 'boolean';
 
@@ -319,6 +326,7 @@ export const SecureSignup = ({
 			newsletterId,
 			token,
 			marketingOptIn,
+			browserId,
 		);
 
 		const response = await postFormData(
