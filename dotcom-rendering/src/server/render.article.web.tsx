@@ -29,6 +29,7 @@ import { htmlPageTemplate } from './htmlPageTemplate';
 
 interface Props {
 	article: Article;
+	isPreview?: boolean;
 }
 
 const decideTitle = ({ theme, frontendData }: Article): string => {
@@ -40,6 +41,7 @@ const decideTitle = ({ theme, frontendData }: Article): string => {
 
 export const renderHtml = ({
 	article,
+	isPreview,
 }: Props): { html: string; prefetchScripts: string[] } => {
 	const { design, frontendData, theme } = article;
 	const NAV = {
@@ -172,6 +174,7 @@ window.twttr = (function(d, s, id) {
 		design === ArticleDesign.Interactive;
 
 	const onlyLightColourScheme =
+		!isPreview &&
 		isInteractive &&
 		(!config.darkModeAvailable ||
 			Date.parse(webPublicationDate) <
