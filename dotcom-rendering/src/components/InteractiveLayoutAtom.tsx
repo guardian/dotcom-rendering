@@ -18,7 +18,7 @@ export const InteractiveLayoutAtom = ({
 	elementJs,
 	elementCss,
 }: InteractiveLayoutAtomType) => (
-	<figure
+	<div
 		className="interactive interactive-atom"
 		css={containerStyles}
 		data-atom-id={id}
@@ -42,5 +42,5 @@ export const InteractiveLayoutAtom = ({
 				dangerouslySetInnerHTML={{ __html: elementJs }}
 			/>
 		)}
-	</figure>
+	</div>
 );
