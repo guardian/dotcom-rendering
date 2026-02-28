@@ -454,7 +454,7 @@ const enhance =
 				.addMultiImageElements()
 				// If any MultiImageBlockElement is followed by a ul/l caption, delete the special caption
 				// element and use the value for the multi image `caption` prop
-				.addCaptionsToMultis()
+				// .addCaptionsToMultis()
 				.addImagePositions(imagesForLightbox).elements
 		);
 	};

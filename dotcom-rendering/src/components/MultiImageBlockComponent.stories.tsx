@@ -144,3 +144,20 @@ export const GridOfFourWithCaption = () => {
 	);
 };
 GridOfFourWithCaption.storyName = 'grid of four with caption';
+
+export const Slideshow = () => {
+	return (
+		<Section showTopBorder={false} showSideBorders={false}>
+			<MultiImageBlockComponent
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: Pillar.News,
+				}}
+				images={fourImages}
+				presentation="slideshow"
+			/>
+		</Section>
+	);
+};
+Slideshow.storyName = 'slideshow';
