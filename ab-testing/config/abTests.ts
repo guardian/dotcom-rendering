@@ -33,6 +33,18 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
+		name: "commercial-test-test",
+		description: "Testing test merge confict resolution",
+		owners: ["commercial.dev@guardian.co.uk"],
+		status: "ON",
+		expirationDate: "2026-03-10",
+		type: "client",
+		audienceSize: 10 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
+	},
+	{
 		name: "commercial-user-module-liveramp",
 		description:
 			"Test measuring ad targeting from LiveRamp's identityLinkIdSystem module integration",
