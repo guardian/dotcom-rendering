@@ -225,7 +225,7 @@ interface AppsProps extends CommonProps {
 export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 	const { article, format, renderingTarget, serverTime } = props;
 	const {
-		config: { isPaidContent, host, hasSurveyAd },
+		config: { isPaidContent, host, hasSurveyAd, isPreview },
 		editionId,
 	} = article;
 	const isWeb = renderingTarget === 'Web';
@@ -432,6 +432,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 										>
 											<ListenToArticle
 												articleId={article.pageId}
+												isPreview={isPreview}
 											/>
 										</Island>
 									</div>
@@ -473,6 +474,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 													article.config.shortUrlId
 												}
 												pageId={article.config.pageId}
+												isPreview={isPreview}
 											></ArticleMetaApps>
 										</Hide>
 										<Hide until="leftCol">
