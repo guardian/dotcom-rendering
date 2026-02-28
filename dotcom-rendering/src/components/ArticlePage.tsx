@@ -179,7 +179,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					You can{' '}
 					<a
 						style={{ color: 'inherit' }}
-						href="/opt/out/dark-mode-web"
+						href="/ab-tests/opt-out/webex-dark-mode-web"
 					>
 						opt out anytime
 					</a>{' '}

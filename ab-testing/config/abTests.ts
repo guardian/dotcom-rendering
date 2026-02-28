@@ -21,6 +21,17 @@ import type { ABTest } from "./types.ts";
 
 const ABTests: ABTest[] = [
 	{
+		name: "webex-dark-mode-web",
+		description: "Dark mode accessibility feature test on web",
+		owners: ["dotcom.platform@theguardian.com"],
+		status: "ON",
+		expirationDate: "2027-04-05",
+		type: "server",
+		audienceSize: 0 / 100,
+		groups: ["enable"],
+		shouldForceMetricsCollection: false,
+	},
+	{
 		name: "commercial-prebid-v10",
 		description: "Testing Prebid.js v10 integration on DCR",
 		owners: ["commercial.dev@guardian.co.uk"],
