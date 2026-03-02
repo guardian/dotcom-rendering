@@ -21,7 +21,6 @@ import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
-import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { palette } from '../palette';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -214,11 +213,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 				</Stuck>
 			) : null}
 
-			<main
-				data-layout="HostedArticleLayout"
-				lang={decideLanguage(frontendData.lang)}
-				dir={decideLanguageDirection(frontendData.isRightToLeftLang)}
-			>
+			<main data-layout="HostedArticleLayout">
 				<article css={[grid.container, sideBorders]}>
 					<header css={headerStyles}>
 						<div css={mainMediaStyles}>
@@ -317,6 +312,10 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 									keywordIds={frontendData.config.keywordIds}
 									abTests={frontendData.config.abTests}
 									shouldHideAds={frontendData.shouldHideAds}
+									lang={frontendData.lang}
+									isRightToLeftLang={
+										frontendData.isRightToLeftLang
+									}
 								/>
 							</ArticleContainer>
 
