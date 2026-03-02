@@ -10,13 +10,17 @@ import {
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import {
-	Button,
+	LinkButton,
+	SvgArrowRightStraight,
 	SvgGuardianLogo,
-	SvgInfoRound,
 } from '@guardian/source/react-components';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { Branding } from '../types/branding';
 import { BrandingLabel } from './BrandingLabel';
+import { Details } from './Details';
+
+const BRANDING_WIDTH_MOBILE = '80px';
+const BRANDING_WIDTH_DESKTOP = '132px';
 
 export type Props = {
 	branding: Branding;
@@ -56,9 +60,17 @@ const headerWrapperStyles = css`
 	}
 `;
 
+const leftContent = css`
+	display: flex;
+	position: relative;
+`;
+
 const brandingStyles = css`
 	display: flex;
-	width: 132px;
+	width: ${BRANDING_WIDTH_MOBILE};
+	${from.tablet} {
+		width: ${BRANDING_WIDTH_DESKTOP};
+	}
 `;
 
 const advertiserContentStyles = css`
@@ -69,13 +81,47 @@ const advertiserContentStyles = css`
 	justify-content: space-around;
 	align-items: center;
 	${textSans14};
-	/** Hard-coded to fit. TODO - address this */
-	font-size: 13px;
 	padding: 0 2px;
 
 	button {
 		width: 16px;
 		height: 16px;
+	}
+`;
+
+const detailsLabelStyles = css`
+	margin-left: ${space[1]}px;
+	align-self: end;
+`;
+
+const detailsPositionStyles = css`
+	left: -(calc(100% + 132px));
+	top: calc(100% + 10px);
+`;
+
+const detailsContentStyles = css`
+	${textSans14};
+	background-color: ${sourcePalette.neutral[38]};
+	border-radius: ${space[2]}px;
+	border: none;
+
+	width: calc(100vw - 20px);
+	${from.tablet} {
+		width: 308px;
+	}
+	padding: ${space[3]}px;
+
+	/* Tooltip/popover arrow */
+	&::before {
+		content: '';
+		position: absolute;
+		top: -8px;
+		left: 24px;
+		width: 0;
+		height: 0;
+		border-left: 8px solid transparent;
+		border-right: 8px solid transparent;
+		border-bottom: 8px solid ${sourcePalette.neutral[38]};
 	}
 `;
 
@@ -114,7 +160,10 @@ const hostedByStyles = css`
 const badgeWrapperStyles = css`
 	position: absolute;
 	display: block;
-	width: 132px;
+	width: ${BRANDING_WIDTH_MOBILE};
+	${from.tablet} {
+		width: ${BRANDING_WIDTH_DESKTOP};
+	}
 	height: auto;
 	top: 100%;
 	text-align: center;
@@ -145,26 +194,50 @@ export const HostedContentHeader = ({ branding }: Props) => {
 		branding.hostedCampaignColour ?? sourcePalette.neutral[38];
 	return (
 		<div css={headerWrapperStyles}>
-			<div css={brandingStyles}>
-				<div
-					css={advertiserContentStyles}
-					style={{ backgroundColor: accentColor }}
-				>
-					<p>Advertiser content</p>
-					{/** TODO - add button action ie on click/on hover handlers */}
-					<Button
-						size="xsmall"
-						icon={<SvgInfoRound />}
-						hideLabel={true}
-						priority="subdued"
-						theme={{
-							textSubdued: sourcePalette.neutral[97],
-						}}
-					/>
+			<div css={leftContent}>
+				<div css={brandingStyles}>
+					<div
+						css={advertiserContentStyles}
+						style={{ backgroundColor: accentColor }}
+					>
+						<p>Advertiser content</p>
+					</div>
+
+					<div css={badgeWrapperStyles}>
+						<BrandingLabel branding={branding} isHosted={true} />
+					</div>
 				</div>
 
-				<div css={badgeWrapperStyles}>
-					<BrandingLabel branding={branding} isHosted={true} />
+				<div css={detailsLabelStyles}>
+					<Details
+						label="About"
+						labelSize="xsmall"
+						positionStyles={detailsPositionStyles}
+					>
+						<div css={detailsContentStyles}>
+							<span>
+								This article was paid for, produced and
+								controlled by the advertiser rather than the
+								publisher. It is subject to regulation by the
+								Advertising Standards Authority. This content is
+								produced by the advertiser with no involvement
+								from Guardian News and Media staff.
+							</span>
+							<br />
+							<LinkButton
+								iconSide="right"
+								size="xsmall"
+								priority="subdued"
+								theme={{
+									textSubdued: sourcePalette.neutral[100],
+								}}
+								icon={<SvgArrowRightStraight />}
+								href="https://www.theguardian.com/info/2016/jan/25/content-funding"
+							>
+								Learn more
+							</LinkButton>
+						</div>
+					</Details>
 				</div>
 			</div>
 

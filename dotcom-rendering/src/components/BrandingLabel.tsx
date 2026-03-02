@@ -102,7 +102,10 @@ const imageAdvertisingPartnerStyles = css`
 `;
 
 const hostedLogoImageStyles = css`
-	width: 132px;
+	width: 80px;
+	${from.tablet} {
+		width: 132px;
+	}
 	height: auto;
 `;
 
