@@ -234,6 +234,19 @@ const bodyWrapper = css`
 	}
 `;
 
+const footballRedesignBodyWrapper = css`
+	padding-top: 0;
+	margin-top: 10px;
+	border-top: 1px solid ${themePalette('--article-border')};
+	${from.mobileLandscape} {
+		padding-top: 0;
+		margin-top: 0;
+	}
+	${from.desktop} {
+		border-top: none;
+	}
+`;
+
 interface BaseProps {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
@@ -783,7 +796,14 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									  )}
 							</GridItem>
 							<GridItem area="body">
-								<div id="maincontent" css={bodyWrapper}>
+								<div
+									id="maincontent"
+									css={[
+										bodyWrapper,
+										isInFootballRedesignTest &&
+											footballRedesignBodyWrapper,
+									]}
+								>
 									{hasKeyEvents ? (
 										<Hide below="desktop">
 											<Island
