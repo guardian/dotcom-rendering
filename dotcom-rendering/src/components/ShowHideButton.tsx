@@ -20,12 +20,13 @@ const showHideButtonCss = css`
 
 /**
  * This component creates the styled button for showing & hiding a container,
- * The functionality for this is implemented in a single island 'ShownHideContainers.importable'
+ * The functionality for this is implemented in a single island 'ShowHideContainers.importable'
  **/
 export const ShowHideButton = ({ sectionId }: Props) => {
 	return (
 		<ButtonLink
 			priority="secondary"
+			className="hidden"
 			data-link-name="Hide"
 			cssOverrides={showHideButtonCss}
 			data-show-hide-button={sectionId}
