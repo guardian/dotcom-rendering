@@ -25,7 +25,7 @@ const ABTests: ABTest[] = [
 		description: "Dark mode accessibility feature test on web",
 		owners: ["dotcom.platform@theguardian.com"],
 		status: "ON",
-		expirationDate: "2027-04-05",
+		expirationDate: "2027-04-09",
 		type: "server",
 		audienceSize: 0 / 100,
 		groups: ["enable"],
