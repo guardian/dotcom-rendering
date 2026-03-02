@@ -23,13 +23,13 @@ const defaultValues = {
 export const testCollectionsUk = [
 	{
 		...defaultValues,
-		collectionType: 'flexible/special',
+		collectionType: 'static/medium/4',
 		containerPalette: 'EventPalette',
 		displayName: 'Israel-Hamas war',
 	},
 	{
 		...defaultValues,
-		collectionType: 'flexible/general',
+		collectionType: 'scrollable/feature',
 		displayName: 'Headlines',
 		grouped: defaultGrouped,
 	},
@@ -46,7 +46,7 @@ export const testCollectionsUk = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'flexible/special',
+		collectionType: 'scrollable/feature',
 		displayName: 'Spotlight',
 	},
 	{
@@ -56,12 +56,12 @@ export const testCollectionsUk = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'flexible/special',
+		collectionType: 'scrollable/feature',
 		displayName: 'Sport',
 	},
 	{
 		...defaultValues,
-		collectionType: 'flexible/special',
+		collectionType: 'scrollable/feature',
 		displayName: 'Opinion',
 	},
 	{
@@ -86,7 +86,7 @@ export const testCollectionsUk = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'flexible/general',
+		collectionType: 'scrollable/feature',
 		displayName: 'Across the country',
 	},
 	{
@@ -96,7 +96,7 @@ export const testCollectionsUk = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'flexible/general',
+		collectionType: 'scrollable/feature',
 		displayName: 'Around the world',
 	},
 	{
@@ -145,19 +145,19 @@ export const testCollectionsWithSecondaryLevel = [
 export const testCollectionsUs = [
 	{
 		...defaultValues,
-		collectionType: 'flexible/special',
+		collectionType: 'static/medium/4',
 		containerPalette: 'EventPalette',
 		displayName: 'Israel-Hamas war',
 	},
 	{
 		...defaultValues,
-		collectionType: 'flexible/special',
+		collectionType: 'static/medium/4',
 		containerPalette: 'EventPalette',
 		displayName: 'Israel-Hamas war',
 	},
 	{
 		...defaultValues,
-		collectionType: 'flexible/general',
+		collectionType: 'scrollable/feature',
 		displayName: 'Headlines',
 	},
 	{
@@ -167,7 +167,7 @@ export const testCollectionsUs = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'flexible/special',
+		collectionType: 'scrollable/feature',
 		displayName: 'Spotlight',
 	},
 	{
@@ -183,7 +183,7 @@ export const testCollectionsUs = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'flexible/special',
+		collectionType: 'scrollable/feature',
 		displayName: 'Sports',
 	},
 	{
@@ -198,15 +198,17 @@ export const testCollectionsUs = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'flexible/general',
+		collectionType: 'scrollable/feature',
 		displayName: 'Across the country',
 	},
 	{
 		...defaultValues,
-		collectionType: 'flexible/general',
+		collectionType: 'flexible/special',
 		displayName: 'Around the world',
 		grouped: {
 			...defaultGrouped,
+			splash: [trails[0]],
+			standard: [trails[1]],
 		},
 	},
 	{
@@ -275,7 +277,7 @@ export const testCollectionsUs = [
 export const brandedTestCollections = [
 	{
 		...defaultValues,
-		collectionType: 'flexible/general',
+		collectionType: 'scrollable/feature',
 		displayName: 'Headlines',
 	},
 	{
@@ -286,7 +288,7 @@ export const brandedTestCollections = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'flexible/general',
+		collectionType: 'scrollable/feature',
 		displayName: 'Headlines',
 	},
 	{
@@ -297,7 +299,7 @@ export const brandedTestCollections = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'flexible/general',
+		collectionType: 'scrollable/feature',
 		displayName: 'Headlines',
 	},
 	{
@@ -308,7 +310,7 @@ export const brandedTestCollections = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'flexible/general',
+		collectionType: 'scrollable/feature',
 		displayName: 'Headlines',
 	},
 ] satisfies DCRCollectionType[];

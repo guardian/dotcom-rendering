@@ -350,13 +350,13 @@ describe('Desktop Ads', () => {
 	it('calculates ad positions correctly for an example of the UK network front', () => {
 		const adPositions = getDesktopAdPositions(testCollectionsUk, 'uk');
 
-		expect(adPositions).toEqual([3, 6, 8, 11, 14, 17]);
+		expect(adPositions).toEqual([3, 6, 8, 11, 14, 17, 20]);
 	});
 
 	it('calculates ad positions correctly for an example of the US network front', () => {
 		const adPositions = getDesktopAdPositions(testCollectionsUs, 'us');
 
-		expect(adPositions).toEqual([3, 6, 8, 11, 13, 18]);
+		expect(adPositions).toEqual([3, 6, 8, 11, 14, 18, 20, 22]);
 	});
 
 	it('does NOT insert ads above or below branded content', () => {
@@ -374,17 +374,7 @@ describe('Desktop Ads', () => {
 		expect(adPositions).toEqual([]);
 	});
 
-	it('inserts a maximum of 6 ads for standard fronts', () => {
-		const adPositions = getDesktopAdPositions(
-			// Double number of UK collections in fixture to reach maximum
-			[...testCollectionsUk, ...testCollectionsUk],
-			'europe',
-		);
-
-		expect(adPositions.length).toEqual(6);
-	});
-
-	it('inserts a maximum of 8 ads for fronts with beta collections', () => {
+	it('inserts a maximum of 8 ads for fronts', () => {
 		const adPositions = getDesktopAdPositions(
 			// 10x number of test collections in fixture to reach maximum level
 			new Array<DCRCollectionType[]>(10)

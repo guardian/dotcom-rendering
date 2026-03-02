@@ -1,7 +1,6 @@
 import { isUndefined } from '@guardian/libs';
 import type { DCRCollectionType, DCRGroupedTrails } from '../types/front';
 import {
-	MAX_FRONTS_BANNER_ADS,
 	MAX_FRONTS_BANNER_ADS_BETA,
 	MAX_FRONTS_MOBILE_ADS,
 } from './commercial-constants';
@@ -361,9 +360,7 @@ const getDesktopAdPositions = (
 	collections: AdCandidate[],
 	pageId: string,
 ): number[] => {
-	const maxAdsAllowed = hasSecondaryLevelContainers(collections)
-		? MAX_FRONTS_BANNER_ADS_BETA
-		: MAX_FRONTS_BANNER_ADS;
+	const maxAdsAllowed = MAX_FRONTS_BANNER_ADS_BETA;
 
 	const adPositionsFromReducer = collections.reduce<{
 		heightSinceAd: number;
@@ -383,6 +380,24 @@ const getDesktopAdPositions = (
 			const prevCollection = collections[index - 1];
 			const isFirstCollection = isUndefined(prevCollection);
 
+			console.log(
+				collection.collectionType,
+				{ heightSinceAd, pageId, collection, prevCollection, index },
+				'can insertDesktopAd? ',
+				!isFirstCollection &&
+					canInsertDesktopAd(
+						heightSinceAd,
+						pageId,
+						collection,
+						prevCollection,
+						index,
+					),
+			);
+			// console.log(collection.collectionType, {heightSinceAd,
+			// 	pageId,
+			// 	collection,
+			// 	prevCollection,
+			// 	index})
 			if (
 				!isFirstCollection &&
 				canInsertDesktopAd(
