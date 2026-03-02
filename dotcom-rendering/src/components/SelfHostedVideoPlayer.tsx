@@ -64,6 +64,7 @@ const playIconStyles = css`
 const controlContainerStyles = (position: ControlsPosition) => css`
 	position: absolute;
 	display: flex;
+	flex-direction: column;
 	gap: ${space[2]}px;
 	right: ${space[2]}px;
 	/* Take into account the progress bar height */
