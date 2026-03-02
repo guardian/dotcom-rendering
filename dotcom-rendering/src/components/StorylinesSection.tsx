@@ -1,116 +1,42 @@
 import { css } from '@emotion/react';
-import {
-	between,
-	from,
-	space,
-	textSans14,
-	until,
-} from '@guardian/source/foundations';
+import { between, from, space, textSans14 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { submitComponentEvent } from '../client/ophan/ophan';
-import { type EditionId, isNetworkFront } from '../lib/edition';
+import { type EditionId } from '../lib/edition';
 import { palette as schemePalette } from '../palette';
-import type { DCRContainerLevel, DCRContainerPalette } from '../types/front';
+import type { DCRContainerPalette } from '../types/front';
+import type { TagPagePagination } from '../types/tagPage';
 import { ContainerOverrides } from './ContainerOverrides';
 import { ContainerTitle } from './ContainerTitle';
 import { Footer } from './ExpandableAtom/Footer';
+import { FrontPagination } from './FrontPagination';
 import { FrontSectionTitle } from './FrontSectionTitle';
-import { ShowHideButton } from './ShowHideButton';
+import { SvgBetaLabel } from './SvgBetaLabel';
 
 type Props = {
 	/** This text will be used as the h2 shown in the left column for the section */
 	title?: string;
-	/** This text shows below the title */
-	description?: string;
 	/** The title can be made into a link using this property */
 	url?: string;
-	// collectionId?: string;
-	pageId?: string;
-	/** Defaults to `true`. If we should render the top border */
-	showTopBorder?: boolean;
 	children?: React.ReactNode;
 	/** The string used to set the `data-component` Ophan attribute */
 	ophanComponentName?: string;
 	/** The string used to set the `data-link-name` Ophan attribute */
 	ophanComponentLink?: string;
-	/**
-	 * 🛠️ DEBUG ONLY 🛠️
-	 * Used to highlight the name of a container when DCR debug mode is enabled
-	 *
-	 * @see https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/client/debug/README.md
-	 */
-	containerName?: string;
 	/** Fronts containers can have their styling overridden using a `containerPalette` */
 	containerPalette?: DCRContainerPalette;
-	/** Fronts containers can have their styling overridden using a `containerLevel`.
-	 * If used, this can be either "Primary" or "Secondary", both of which have different styles */
-	containerLevel?: DCRContainerLevel;
-	/** Fronts containers spacing rules vary depending on the size of their container spacing which is derived from if the next container is a primary or secondary. */
-	toggleable?: boolean;
-	/** Defaults to `false`. If true and `editionId` is also passed, then a date string is
-	 * shown under the title. Typically only used on Headlines containers on fronts
-	 */
-	showDateHeader?: boolean;
 	/** Used in partnership with `showDateHeader` to localise the date string */
 	editionId: EditionId;
 	isTagPage?: boolean;
-	hasNavigationButtons?: boolean;
-	likeHandler?: () => void;
-	dislikeHandler?: () => void;
+	/** Puts pagination at the bottom of the container allowing the user to navigate to other pages,
+	 * usually used on the last container on a page */
+	pagination?: TagPagePagination;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
 	`width: ${columns * columnWidth + (columns - 1) * columnGap}px;`;
 
-const borderColourStyles = (
-	title?: string,
-	showSectionColours?: boolean,
-): string => {
-	if (!showSectionColours) {
-		return schemePalette('--section-border-primary');
-	}
-
-	switch (title) {
-		case 'News':
-			return schemePalette('--section-border-news');
-		case 'Opinion':
-			return schemePalette('--section-border-opinion');
-		case 'Sport':
-		case 'Sports':
-			return schemePalette('--section-border-sport');
-		case 'Lifestyle':
-			return schemePalette('--section-border-lifestyle');
-		case 'Culture':
-			return schemePalette('--section-border-culture');
-		default:
-			return schemePalette('--section-border-primary');
-	}
-};
-
-const articleSectionTitleStyles = (
-	title?: string,
-	showSectionColours?: boolean,
-): string => {
-	if (!showSectionColours) {
-		return schemePalette('--article-section-title');
-	}
-
-	switch (title) {
-		case 'News':
-			return schemePalette('--article-section-title-news');
-		case 'Opinion':
-			return schemePalette('--article-section-title-opinion');
-		case 'Sport':
-		case 'Sports':
-			return schemePalette('--article-section-title-sport');
-		case 'Lifestyle':
-			return schemePalette('--article-section-title-lifestyle');
-		case 'Culture':
-			return schemePalette('--article-section-title-culture');
-		default:
-			return schemePalette('--article-section-title');
-	}
-};
+const articleSectionTitleStyles = schemePalette('--article-section-title');
 
 /** Not all browsers support CSS grid, so we set explicit width as a fallback */
 const fallbackStyles = css`
@@ -147,7 +73,8 @@ const containerStylesUntilLeftCol = css`
 		[headline-start controls-start] auto
 		[controls-end headline-end content-toggleable-start content-start] auto
 		[content-end content-toggleable-end bottom-content-start] auto
-		[bottom-content-end];
+		[bottom-content-end pagination-start] auto
+		[pagination-end];
 
 	grid-template-columns:
 		[decoration-start]
@@ -189,25 +116,6 @@ const containerStylesUntilLeftCol = css`
 	}
 `;
 
-const containerScrollableStylesFromLeftCol = css`
-	${between.leftCol.and.wide} {
-		grid-template-rows:
-			[headline-start controls-start] auto
-			[controls-end content-toggleable-start content-start] auto
-			[headline-end treats-start] auto
-			[content-end content-toggleable-end treats-end bottom-content-start] auto
-			[bottom-content-end];
-	}
-
-	${from.wide} {
-		grid-template-rows:
-			[headline-start content-start content-toggleable-start controls-start] auto
-			[headline-end treats-start] auto
-			[content-end content-toggleable-end treats-end controls-end bottom-content-start] auto
-			[bottom-content-end];
-	}
-`;
-
 const containerStylesFromLeftCol = css`
 	${from.leftCol} {
 		grid-template-rows:
@@ -215,7 +123,8 @@ const containerStylesFromLeftCol = css`
 			[controls-end content-toggleable-start] auto
 			[headline-end treats-start] auto
 			[content-end content-toggleable-end treats-end bottom-content-start] auto
-			[bottom-content-end];
+			[bottom-content-end pagination-start] auto
+			[pagination-end];
 
 		grid-template-columns:
 			minmax(0, 1fr)
@@ -235,7 +144,8 @@ const containerStylesFromLeftCol = css`
 			[controls-end] auto
 			[headline-end treats-start] auto
 			[content-end content-toggleable-end treats-end bottom-content-start] auto
-			[bottom-content-end];
+			[bottom-content-end pagination-start] auto
+			[pagination-end];
 
 		grid-template-columns:
 			minmax(0, 1fr)
@@ -255,44 +165,20 @@ const flexRowStyles = css`
 	justify-content: space-between;
 `;
 
-const sectionHeadlineUntilLeftCol = (isOpinion: boolean) => css`
+const sectionHeadlineUntilLeftCol = css`
 	grid-row: headline;
 	grid-column: title;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
+	justify-content: space-between;
 
 	${between.tablet.and.leftCol} {
-		${flexRowStyles}
-	}
-
-	${isOpinion && until.mobileLandscape} {
-		flex-direction: column;
-	}
-	${isOpinion && between.mobileLandscape.and.tablet} {
 		${flexRowStyles}
 	}
 `;
 
 const topPadding = css`
 	padding-top: ${space[2]}px;
-`;
-
-const sectionControls = css`
-	grid-row: controls;
-	grid-column: hide;
-	justify-self: end;
-	display: flex;
-	padding-top: ${space[2]}px;
-	${from.wide} {
-		flex-direction: column-reverse;
-		justify-content: flex-end;
-		align-items: flex-end;
-		gap: ${space[2]}px;
-		/* we want to add space between the items in the controls section only when there are at least 2 children and neither are hidden */
-		:has(> :not(.hidden):nth-of-type(2)) {
-			justify-content: space-between;
-		}
-	}
 `;
 
 const sectionContent = css`
@@ -305,51 +191,14 @@ const sectionContent = css`
 	grid-column: content;
 `;
 
-const sectionContentRow = (toggleable: boolean) => css`
-	grid-row: ${toggleable ? 'content-toggleable' : 'content'};
+const sectionContentRow = css`
+	grid-row: content;
 `;
 
 const sectionContentHorizontalMargins = css`
 	${from.tablet} {
 		margin-left: -10px;
 		margin-right: -10px;
-	}
-`;
-
-const sectionContentBorderFromLeftCol = css`
-	position: relative;
-	${from.leftCol} {
-		::before {
-			content: '';
-			position: absolute;
-			top: ${space[2]}px;
-			bottom: 0;
-			border-left: 1px solid ${schemePalette('--section-border')};
-			transform: translateX(-50%);
-			/** Keeps the vertical divider ontop of carousel item dividers */
-			z-index: 1;
-		}
-	}
-`;
-
-const sectionFooter = css`
-	/* Mobile: treats appear at the bottom */
-	grid-row: bottom-content;
-	grid-column: content;
-	${from.leftCol} {
-		padding-top: ${space[2]}px;
-	}
-	padding-bottom: ${space[3]}px;
-
-	${from.leftCol} {
-		align-self: end;
-		grid-row: treats;
-		grid-column: title;
-		padding-top: 0;
-	}
-
-	.hidden > & {
-		display: none;
 	}
 `;
 
@@ -376,31 +225,32 @@ const topBorder = css`
 	border-top-style: solid;
 `;
 
-const primaryLevelTopBorder = (
-	title?: string,
-	showSectionColours?: boolean,
-) => css`
-	grid-row: 1;
-	grid-column: 1 / -1;
-	border-top: 2px solid ${borderColourStyles(title, showSectionColours)};
-	/** Ensures the top border sits above the side borders */
-	z-index: 1;
-	height: fit-content;
-`;
-
-const secondaryLevelTopBorder = css`
-	grid-row: 1;
-	grid-column: content;
-	border-top: 1px solid ${schemePalette('--section-border-secondary')};
+const sectionPaginationBackground = css`
+	grid-row: pagination;
+	grid-column: decoration;
+	background-color: white;
 	${from.tablet} {
-		grid-column: decoration;
+		margin: 0 -20px;
+		border-left-style: solid;
+		border-right-style: solid;
+		border-width: 1px;
+		border-color: ${schemePalette('--section-border')};
 	}
-`;
-
-const carouselNavigationPlaceholder = css`
-	.hidden & {
+	.hidden > & {
 		display: none;
 	}
+`;
+
+const sectionPagination = css`
+	grid-row: pagination;
+	grid-column: content;
+	.hidden > & {
+		display: none;
+	}
+`;
+
+const bottomPaddingBetaContainer = css`
+	padding-bottom: ${space[10]}px;
 `;
 
 /**
@@ -492,69 +342,30 @@ const carouselNavigationPlaceholder = css`
 export const StorylinesSection = ({
 	title,
 	children,
-	containerName,
 	containerPalette,
-	containerLevel,
-	description,
 	editionId,
 	ophanComponentLink,
 	ophanComponentName,
-	pageId,
-	showDateHeader = false,
-	showTopBorder = true,
-	toggleable = false,
 	url,
 	isTagPage = false,
-	hasNavigationButtons = false,
-	dislikeHandler,
-	likeHandler,
+	pagination,
 }: Props) => {
 	const sectionId = 'storylines-section';
-	const isToggleable = toggleable && !!sectionId;
-	const isBetaContainer = !!containerLevel;
 
-	const showSectionColours = isNetworkFront(pageId ?? '');
-
-	/**
-	 * In a front section, id is being used to set the containerId in @see {ShowMore.importable.tsx}
-	 * We don't use show more here, however as noted in the front section component:
-	 * this id pre-existed showMore so is probably also being used for something else.
-	 */
 	return (
 		<ContainerOverrides containerPalette={containerPalette}>
 			<section
 				id={sectionId}
 				data-link-name={ophanComponentLink}
 				data-component={ophanComponentName}
-				data-container-name={containerName}
-				data-container-level={containerLevel}
 				css={[
 					fallbackStyles,
 					containerStylesUntilLeftCol,
 					containerStylesFromLeftCol,
-					hasNavigationButtons &&
-						containerScrollableStylesFromLeftCol,
 				]}
 			>
-				{isBetaContainer && showTopBorder && (
-					<div
-						css={[
-							containerLevel === 'Secondary'
-								? secondaryLevelTopBorder
-								: primaryLevelTopBorder(
-										title,
-										showSectionColours,
-								  ),
-						]}
-					/>
-				)}
-
 				<div
-					css={[
-						decoration,
-						sideBorders,
-						showTopBorder && !isBetaContainer && topBorder,
-					]}
+					css={[decoration, sideBorders, topBorder]}
 					style={{
 						backgroundColor: schemePalette(
 							'--front-container-background',
@@ -562,32 +373,15 @@ export const StorylinesSection = ({
 					}}
 				/>
 
-				<div
-					css={[
-						sectionHeadlineUntilLeftCol(
-							title?.toLowerCase() === 'opinion',
-						),
-					]}
-				>
+				<div css={sectionHeadlineUntilLeftCol}>
 					<FrontSectionTitle
 						title={
 							<>
 								<ContainerTitle
 									title={title}
 									lightweightHeader={isTagPage}
-									description={description}
-									fontColour={
-										containerLevel === 'Secondary'
-											? schemePalette(
-													'--article-section-secondary-title',
-											  )
-											: articleSectionTitleStyles(
-													title,
-													showSectionColours,
-											  )
-									}
+									fontColour={articleSectionTitleStyles}
 									url={url}
-									showDateHeader={showDateHeader}
 									editionId={editionId}
 									containerLevel={'Primary'}
 								/>
@@ -596,15 +390,77 @@ export const StorylinesSection = ({
 										${textSans14};
 									`}
 								>
-									Dive deeper into the Guardian's archive.{' '}
 									<Hide until="leftCol">
 										<span>
-											This product uses GenAI. Learn more
-											about how it works{' '}
+											Storylines is an experimental
+											feature we are showing to a limited
+											audience as a Beta test.
+											<br /> It uses generative AI to
+											identify three key storylines within
+											this topic and show valuable
+											articles from our archive. The aim
+											is to give readers a better
+											understanding of a topic and access
+											to a wider variety of our
+											journalism. The only text
+											automatically generated is the short
+											description of each storyline. It
+											has been created in line with the
+											Guardian’s{' '}
 											<a href="https://www.theguardian.com/help/insideguardian/2023/jun/16/the-guardians-approach-to-generative-ai">
-												here.
+												generative AI principles
 											</a>
+											.{' '}
 										</span>
+
+										<div
+											css={css`
+												margin-top: ${space[2]}px;
+											`}
+										>
+											<Footer
+												dislikeHandler={() => {
+													void submitComponentEvent(
+														{
+															component: {
+																componentType:
+																	'STORYLINES',
+																id: sectionId,
+																products: [],
+																labels: [],
+															},
+															action: 'DISLIKE',
+														},
+														'Web',
+													);
+												}}
+												likeHandler={() => {
+													void submitComponentEvent(
+														{
+															component: {
+																componentType:
+																	'STORYLINES',
+																id: sectionId,
+																products: [],
+																labels: [],
+															},
+															action: 'LIKE',
+														},
+														'Web',
+													);
+												}}
+												isStorylines={true}
+											></Footer>
+											<div
+												css={css`
+													display: inline-block;
+													vertical-align: middle;
+													width: 75px;
+												`}
+											>
+												<SvgBetaLabel />
+											</div>
+										</div>
 									</Hide>
 								</div>
 							</>
@@ -612,72 +468,54 @@ export const StorylinesSection = ({
 						sectionId={sectionId}
 						collectionBranding={undefined}
 					/>
+					<Hide from="leftCol">
+						<div
+							css={css`
+								display: flex;
+								align-items: center;
+								height: 100%;
+								width: 48px;
+								padding: ${space[1]}px;
+							`}
+						>
+							<SvgBetaLabel />
+						</div>
+					</Hide>
 				</div>
-
-				{(isToggleable || hasNavigationButtons) && (
-					<div css={sectionControls}>
-						{isToggleable && (
-							<ShowHideButton sectionId={sectionId} />
-						)}
-						{hasNavigationButtons && (
-							<div
-								css={carouselNavigationPlaceholder}
-								className="carouselNavigationPlaceholder"
-								id={`${sectionId}-carousel-navigation`}
-							></div>
-						)}
-					</div>
-				)}
 
 				<div
 					css={[
 						sectionContent,
 						sectionContentHorizontalMargins,
-						sectionContentRow(toggleable),
+						sectionContentRow,
 						topPadding,
-						isBetaContainer && sectionContentBorderFromLeftCol,
 					]}
 					id={`container-${sectionId}`}
 				>
 					{children}
 				</div>
 
-				<div css={[sectionFooter]}>
-					<Footer
-						dislikeHandler={
-							dislikeHandler ??
-							(() =>
-								submitComponentEvent(
-									{
-										component: {
-											componentType: 'STORYLINES',
-											id: sectionId,
-											products: [],
-											labels: [],
-										},
-										action: 'DISLIKE',
-									},
-									'Web',
-								))
-						}
-						likeHandler={
-							likeHandler ??
-							(() =>
-								submitComponentEvent(
-									{
-										component: {
-											componentType: 'STORYLINES',
-											id: sectionId,
-											products: [],
-											labels: [],
-										},
-										action: 'LIKE',
-									},
-									'Web',
-								))
-						}
-					></Footer>
-				</div>
+				{pagination && (
+					<>
+						<div css={sectionPaginationBackground} />
+						<div
+							id="pagination"
+							css={[
+								sectionContentHorizontalMargins,
+								sectionPagination,
+								bottomPaddingBetaContainer,
+							]}
+						>
+							<FrontPagination
+								sectionName={pagination.sectionName}
+								totalContent={pagination.totalContent}
+								currentPage={pagination.currentPage}
+								lastPage={pagination.lastPage}
+								pageId={pagination.pageId}
+							/>
+						</div>
+					</>
+				)}
 			</section>
 		</ContainerOverrides>
 	);

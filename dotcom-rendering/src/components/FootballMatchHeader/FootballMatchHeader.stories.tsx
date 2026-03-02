@@ -68,9 +68,8 @@ export const Fixture = {
 				reportURL: undefined,
 			}),
 		refreshInterval: 3_000,
-		matchHeaderURL: new URL(
+		matchHeaderURL:
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
-		),
 	},
 	play: async ({ canvas, canvasElement, step }) => {
 		const nav = canvas.getByRole('navigation');
@@ -107,9 +106,8 @@ export const Live = {
 	args: {
 		initialTab: 'live',
 		edition: 'EUR',
-		matchHeaderURL: new URL(
+		matchHeaderURL:
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
-		),
 		refreshInterval: Fixture.args.refreshInterval,
 		getHeaderData: () =>
 			getMockData({
@@ -152,9 +150,8 @@ export const Result = {
 	args: {
 		initialTab: 'report',
 		edition: 'AU',
-		matchHeaderURL: new URL(
+		matchHeaderURL:
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
-		),
 		refreshInterval: Fixture.args.refreshInterval,
 		getHeaderData: () =>
 			getMockData({

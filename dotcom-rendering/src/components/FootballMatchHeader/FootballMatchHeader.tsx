@@ -34,7 +34,7 @@ export type FootballMatchHeaderProps = {
 	initialTab: ComponentProps<typeof Tabs>['selected'];
 	initialData?: HeaderData;
 	edition: EditionId;
-	matchHeaderURL: URL;
+	matchHeaderURL: string;
 };
 
 type Props = FootballMatchHeaderProps & {

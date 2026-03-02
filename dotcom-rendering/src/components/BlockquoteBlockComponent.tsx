@@ -2,6 +2,7 @@ import { css, jsx } from '@emotion/react';
 import { articleItalic17 } from '@guardian/source/foundations';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
+import { isSkimlink } from '../lib/affiliateLinksUtils';
 import { getAttrs, isElement, parseHtml } from '../lib/domUtils';
 import { palette } from '../palette';
 import { logger } from '../server/lib/logging';
@@ -88,8 +89,17 @@ const textElement =
 						: simpleBlockquoteStyles,
 				});
 			case 'A':
+				const href = getAttrs(node)?.getNamedItem('href')?.value;
+
 				return jsx('a', {
-					href: getAttrs(node)?.getNamedItem('href')?.value,
+					href,
+					/**
+					 * Affiliate links must have the rel attribute set to "sponsored"
+					 * @see https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links
+					 */
+					rel: isSkimlink(href)
+						? 'sponsored'
+						: getAttrs(node)?.getNamedItem('rel')?.value,
 					key,
 					children,
 				});
