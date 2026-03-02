@@ -13,12 +13,17 @@ import { FormatBoundary } from './FormatBoundary';
 import { LinkHeadline } from './LinkHeadline';
 
 const containerStyles = css`
-	position: absolute;
-	width: 300px;
 	padding-top: ${space[2]}px;
 	display: flex;
 	flex-direction: column;
 	gap: ${space[8]}px;
+`;
+
+const absolutePositionStyles = css`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 300px;
 `;
 
 const headingStyles = css`
@@ -86,7 +91,10 @@ export const MostPopularFrontRight = ({ heading, trails }: Props) => {
 	return (
 		<section
 			data-component="most-popular-front-right"
-			css={containerStyles}
+			css={[
+				containerStyles,
+				heading === 'Deeply read' && absolutePositionStyles,
+			]}
 		>
 			<h3 css={headingStyles}>{heading}</h3>
 			<ol>

@@ -863,6 +863,7 @@ export const FrontSection = ({
 							${from.wide} {
 								grid-row: content-toggleable;
 								grid-column: 14 / 18;
+								position: relative;
 							}
 						`}
 					>
