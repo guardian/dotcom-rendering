@@ -11,10 +11,12 @@ import {
 } from '@guardian/source/foundations';
 import { SvgGuardianLogo } from '@guardian/source/react-components';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
+import type { Branding } from '../types/branding';
+import { BrandingLabel } from './BrandingLabel';
 
-type Props = {
-	accentColor: string;
-	branding: string;
+export type Props = {
+	branding: Branding;
+	accentColor?: string;
 };
 
 const HOSTED_CONTENT_HEIGHT_MOBILE = 48;
@@ -95,15 +97,14 @@ const badgeWrapperStyles = css`
 	position: absolute;
 	display: block;
 	width: 80px;
-	height: 45px; /* This is temporary, replace with actual badge height */
+	height: auto;
 	top: 100%;
-	background-color: ${sourcePalette.neutral[60]};
 	text-align: center;
 	z-index: 10;
 
 	${from.desktop} {
 		width: 132px;
-		height: 75px;
+		height: auto;
 	}
 `;
 
@@ -125,10 +126,11 @@ const Right = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			display: flex;
-			padding: ${space[1]}px 10px;
+			padding: ${space[1]}px 0;
+			margin-right: 10px;
 
-			@media (min-width: 330px) {
-				margin-right: 0.625rem;
+			${from.mobileLandscape} {
+				margin-right: ${space[5]}px;
 			}
 		`}
 	>
@@ -148,14 +150,16 @@ const HeaderSection = ({
 			height: 100%;
 			display: flex;
 			align-items: center;
-			${isFirst ? 'margin-left: 1.25rem;' : 'margin-left: 0.625rem;'}
+			margin-left: 10px;
 
-			${from.desktop} {
-				${isFirst ? null : 'margin-left: 1.25rem;'}
+			${from.mobileLandscape} {
+				${isFirst
+					? `margin-left: ${space[5]}px;`
+					: 'margin-left: 10px;'}
 			}
 
 			${from.leftCol} {
-				${isFirst ? null : 'margin-left: 2rem;'}
+				${isFirst ? null : `margin-left: ${space[8]}px;`}
 			}
 		`}
 	>
@@ -180,8 +184,9 @@ const TitleAndBadge = ({ accentColor, branding }: Props) => (
 			<p css={titleStyles}>Advertiser content</p>
 		</div>
 
-		{/* The following div is a placeholder for the badge */}
-		<div css={badgeWrapperStyles}>{branding}</div>
+		<div css={badgeWrapperStyles}>
+			<BrandingLabel branding={branding} isHosted={true} />
+		</div>
 	</>
 );
 
@@ -251,14 +256,14 @@ const HostedContentLogo = () => (
 	</div>
 );
 
-export const HostedContentHeader = ({ accentColor, branding }: Props) => {
+export const HostedContentHeader = ({ branding, accentColor }: Props) => {
 	return (
 		<HeaderWrapper>
 			<Left>
 				<HeaderSection isFirst={true}>
 					<TitleAndBadge
-						accentColor={accentColor}
 						branding={branding}
+						accentColor={accentColor}
 					/>
 				</HeaderSection>
 				<HeaderSection>

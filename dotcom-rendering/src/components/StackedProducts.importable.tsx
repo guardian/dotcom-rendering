@@ -76,22 +76,23 @@ export const StackedProducts = ({
 					`,
 				]}
 			>
-				{products.map(
-					(product: ProductBlockElement, index) =>
-						(index < cardsShownByDefault || isExpanded) && (
-							<div
-								key={index}
-								data-component={`at-a-glance-stacked-card-${
-									index + 1
-								}`}
-							>
-								<HorizontalSummaryProductCard
-									product={product}
-									format={format}
-								/>
-							</div>
-						),
-				)}
+				{products.map((product: ProductBlockElement, index) => (
+					<div
+						key={index}
+						data-component={`at-a-glance-stacked-card-${index + 1}`}
+						style={{
+							display:
+								!isExpanded && index >= cardsShownByDefault
+									? 'none'
+									: 'block',
+						}}
+					>
+						<HorizontalSummaryProductCard
+							product={product}
+							format={format}
+						/>
+					</div>
+				))}
 			</div>
 
 			{products.length > cardsShownByDefault && (

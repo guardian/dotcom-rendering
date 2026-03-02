@@ -323,7 +323,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					`;
 				case ArticleDesign.Gallery:
 					return css`
-						${grid.span('centre-column-start', 3)}
+						${grid.span('centre-column-start', 5)}
 						color: ${palette('--standfirst-text')};
 						background-color: ${palette('--standfirst-background')};
 

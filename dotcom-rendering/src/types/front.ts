@@ -16,7 +16,7 @@ import type { Branding, CollectionBranding } from './branding';
 import type { BoostLevel, StarRating } from './content';
 import type { FooterType } from './footer';
 import type { FENavType } from './frontend';
-import type { MainMedia } from './mainMedia';
+import type { ArticleMedia, MainMedia } from './mainMedia';
 import type { FETagType } from './tag';
 import type { Territory } from './territory';
 import type { TrailType } from './trails';
@@ -103,6 +103,7 @@ export type DCRFrontCard = {
 	showVideo?: boolean;
 	uniqueId?: string;
 	serverTime?: number;
+	articleMedia?: ArticleMedia;
 };
 
 export type DCRSlideshowImage = {
@@ -117,10 +118,6 @@ export type DCRSnapType = {
 };
 
 export type AspectRatio = FEAspectRatio;
-
-type BucketPillar = 'opinion' | 'sport' | 'culture' | 'lifestyle';
-
-export type PillarBucket = Partial<Record<BucketPillar, DCRFrontCard[]>>;
 
 export type DCRCollectionType = {
 	id: string;
@@ -148,7 +145,6 @@ export type DCRCollectionType = {
 	collectionBranding?: CollectionBranding;
 	targetedTerritory?: Territory;
 	aspectRatio?: AspectRatio;
-	bucket?: PillarBucket;
 };
 
 export type DCRGroupedTrails = {

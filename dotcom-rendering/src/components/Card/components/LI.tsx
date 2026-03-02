@@ -28,6 +28,7 @@ const liStyles = css`
 
 const sidePaddingStylesMobile = (override?: number) => css`
 	/* Set spacing on the li element */
+
 	${until.tablet} {
 		padding-left: ${override ?? 10}px;
 		padding-right: ${override ?? 10}px;
@@ -100,8 +101,7 @@ type Props = {
 	offsetBottomPaddingOnDivider?: boolean;
 	/** Overrides the vertical divider colour */
 	verticalDividerColour?: string;
-
-	isVisible?: boolean;
+	isSlideInCarousel?: boolean;
 };
 
 export const LI = ({
@@ -116,7 +116,7 @@ export const LI = ({
 	snapAlignStart = false,
 	offsetBottomPaddingOnDivider = false,
 	verticalDividerColour = palette('--section-border'),
-	isVisible = true,
+	isSlideInCarousel = false,
 }: Props) => {
 	// Decide sizing
 	const sizeStyles = decideSize(percentage, stretch);
@@ -136,8 +136,11 @@ export const LI = ({
 				padSidesOnMobile &&
 					sidePaddingStylesMobile(padSidesMobileOverride),
 				snapAlignStart && snapAlignStartStyles,
-				{ visibility: isVisible ? 'visible' : 'hidden' },
 			]}
+			{...(isSlideInCarousel && {
+				role: 'group',
+				'aria-roledescription': 'slide',
+			})}
 		>
 			{children}
 		</li>

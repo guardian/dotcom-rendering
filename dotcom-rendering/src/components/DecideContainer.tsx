@@ -6,7 +6,6 @@ import type {
 	DCRContainerType,
 	DCRFrontCard,
 	DCRGroupedTrails,
-	PillarBucket,
 } from '../types/front';
 import { DynamicFast } from './DynamicFast';
 import { DynamicPackage } from './DynamicPackage';
@@ -28,7 +27,6 @@ import { FlexibleGeneral } from './FlexibleGeneral';
 import { FlexibleSpecial } from './FlexibleSpecial';
 import { Island } from './Island';
 import { NavList } from './NavList';
-import { PersonalisedMediumFour } from './PersonalisedMediumFour.importable';
 import { ScrollableFeature } from './ScrollableFeature.importable';
 import { ScrollableHighlights } from './ScrollableHighlights.importable';
 import { ScrollableMedium } from './ScrollableMedium.importable';
@@ -49,7 +47,6 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
-	pillarBuckets?: PillarBucket;
 };
 
 export const DecideContainer = ({
@@ -65,7 +62,6 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
-	pillarBuckets,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -292,21 +288,6 @@ export const DecideContainer = ({
 				</Island>
 			);
 		case 'static/medium/4':
-			if (pillarBuckets) {
-				return (
-					<Island priority="critical" defer={{ until: 'visible' }}>
-						<PersonalisedMediumFour
-							trails={trails}
-							containerPalette={containerPalette}
-							showAge={showAge}
-							serverTime={serverTime}
-							imageLoading={imageLoading}
-							aspectRatio={aspectRatio}
-							pillarBuckets={pillarBuckets}
-						/>
-					</Island>
-				);
-			}
 			return (
 				<StaticMediumFour
 					trails={trails}

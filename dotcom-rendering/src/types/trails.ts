@@ -3,7 +3,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import type { Branding } from './branding';
 import type { BoostLevel, StarRating } from './content';
 import type { DCRFrontImage, DCRSnapType, DCRSupportingContent } from './front';
-import type { MainMedia } from './mainMedia';
+import type { ArticleMedia, MainMedia } from './mainMedia';
 
 interface BaseTrailType {
 	url: string;
@@ -45,6 +45,8 @@ export interface TrailType extends BaseTrailType {
 	isBoosted?: boolean;
 	boostLevel?: BoostLevel;
 	image?: DCRFrontImage;
+	/* Media belonging to the source article */
+	articleMedia?: ArticleMedia;
 }
 
 export interface FETrailType extends BaseTrailType {

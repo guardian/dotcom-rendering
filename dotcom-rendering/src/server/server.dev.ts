@@ -5,24 +5,25 @@ import { handleAllEditorialNewslettersPage } from './handler.allEditorialNewslet
 import {
 	handleAppsArticle,
 	handleAppsBlocks,
+	handleAppsHostedContent,
 	handleAppsInteractive,
 } from './handler.article.apps';
 import {
 	handleArticle,
 	handleBlocks,
+	handleHostedContent,
 	handleInteractive,
 } from './handler.article.web';
 import { handleAppsAssets } from './handler.assets.apps';
 import { handleEditionsCrossword } from './handler.editionsCrossword';
 import { handleFront, handleTagPage } from './handler.front.web';
-import { handleAppsHostedContent } from './handler.hostedContent.apps';
-import { handleHostedContent } from './handler.hostedContent.web';
 import {
 	handleCricketMatchPage,
 	handleFootballMatchListPage,
 	handleFootballMatchPage,
 	handleFootballTablesPage,
 } from './handler.sportDataPage.web';
+import { handleAppsThrasher } from './handler.thrasher.apps';
 import { getABTestsFromQueryParams } from './lib/get-abtests-from-query-params';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
@@ -118,6 +119,7 @@ renderer.get('/CricketMatchPage/*url', handleCricketMatchPage);
 renderer.get('/FootballMatchSummaryPage/*url', handleFootballMatchPage);
 renderer.get('/HostedContent/*url', handleHostedContent);
 renderer.get('/AppsHostedContent/*url', handleAppsHostedContent);
+renderer.get('/AppsComponent/thrasher/:name', handleAppsThrasher);
 
 // POST routes for running frontend locally
 renderer.post('/Article', handleArticle);
@@ -136,6 +138,7 @@ renderer.post('/CricketMatchPage', handleCricketMatchPage);
 renderer.post('/FootballMatchSummaryPage', handleFootballMatchPage);
 renderer.post('/HostedContent', handleHostedContent);
 renderer.post('/AppsHostedContent', handleAppsHostedContent);
+renderer.post('/AppsComponent/thrasher/:name', handleAppsThrasher);
 
 renderer.get('/assets/rendered-items-assets', handleAppsAssets);
 

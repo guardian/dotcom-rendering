@@ -27,5 +27,8 @@ export const FootballMatchInfoPage = {
 		table,
 		competitionName: "Women's Euro 2025",
 		edition: 'UK',
+		matchHeaderUrl: new URL(
+			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
+		),
 	},
 } satisfies Story;

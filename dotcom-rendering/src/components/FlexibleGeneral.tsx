@@ -141,6 +141,7 @@ const ImmersiveCardLayout = ({
 				isImmersive={true}
 				isStorylines={isStorylines}
 				starRatingSize="medium"
+				articleMedia={card.articleMedia}
 			/>
 		</LI>
 	</UL>

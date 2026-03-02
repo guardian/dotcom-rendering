@@ -59,10 +59,7 @@ export const FootballMatchesPage = ({
 	pageId,
 }: Props) => (
 	<>
-		<DirectoryPageNav
-			selected={kind === 'FootballFixtures' ? 'fixtures' : 'none'}
-			pageId={pageId}
-		/>
+		<DirectoryPageNav pageId={pageId} />
 		<main
 			id="maincontent"
 			data-layout="FootballDataPageLayout"

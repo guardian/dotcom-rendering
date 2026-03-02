@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 import {
+	type Breakpoint,
+	breakpoints,
 	from,
 	headlineBold15Object,
 	headlineBold17Object,
@@ -10,96 +12,84 @@ import {
 	palette,
 } from '@guardian/source/foundations';
 import { grid } from '../grid';
+import { generateImageURL } from '../lib/image';
+import type { TagType } from '../types/tag';
 
 type Props = {
-	selected: Selected;
 	pageId: string;
+	pageTags?: TagType[];
 };
 
 interface DirectoryPageNavConfig {
-	sectionSlug: string;
+	pageIds: string[];
+	tagIds: string[];
 	textColor: string;
 	backgroundColor: string;
-	title: { label: string; link: string };
-	links: { label: string; href: string; selectedSlug: string | undefined }[];
+	title: { label: string; id: string };
+	links: { label: string; id: string }[];
+	backgroundImages?: {
+		mobile: string;
+		mobileLandscape: string;
+		phablet: string;
+		tablet: string;
+		desktop: string;
+	};
 }
 
 const configs = [
 	{
-		sectionSlug: 'women-s-euro-2025',
-		textColor: palette.neutral[100],
-		backgroundColor: palette.news[400],
-		title: {
-			label: "Women's Euro 2025",
-			link: '/football/women-s-euro-2025',
-		},
-		links: [
-			{
-				label: 'Fixtures',
-				href: '/football/women-s-euro-2025/fixtures',
-				selectedSlug: 'fixtures',
-			},
-			{
-				label: 'Tables',
-				href: '/football/women-s-euro-2025/overview',
-				selectedSlug: 'tables',
-			},
-			{
-				label: 'Top scorers',
-				href: '/p/x2e3za',
-				selectedSlug: undefined,
-			},
-			{
-				label: 'Players guide',
-				href: '/p/x27nz8',
-				selectedSlug: undefined,
-			},
-			{
-				label: 'Full coverage',
-				href: '/football/women-s-euro-2025',
-				selectedSlug: undefined,
-			},
+		pageIds: [
+			'sport/winter-olympics-2026',
+			'sport/ng-interactive/2026/feb/04/winter-olympics-full-schedule-milano-cortina-2026',
+			'sport/ng-interactive/2026/feb/04/winter-olympics-results-milano-cortina-2026',
+			'sport/ng-interactive/2026/feb/04/winter-olympics-2026-latest-medal-table-milano-cortina',
 		],
-	},
-	{
-		sectionSlug: 'winter-olympics-2026',
+		tagIds: [],
 		textColor: palette.neutral[7],
-		backgroundColor: '#CCCCCC',
+		backgroundColor: '#22B24B',
 		title: {
-			label: 'Milano Cortina Winter Olympics 2026',
-			link: '/tbd',
+			label: 'Winter Olympics 2026',
+			id: 'sport/winter-olympics-2026',
 		},
 		links: [
 			{
 				label: 'Schedule',
-				href: '/p/x4x38e',
-				selectedSlug: 'schedule',
+				id: 'sport/ng-interactive/2026/feb/04/winter-olympics-full-schedule-milano-cortina-2026',
 			},
 			{
 				label: 'Results',
-				href: '/p/x4x3k4',
-				selectedSlug: 'results',
+				id: 'sport/ng-interactive/2026/feb/04/winter-olympics-results-milano-cortina-2026',
 			},
 			{
 				label: 'Medal table',
-				href: '/p/x4x3k6',
-				selectedSlug: undefined,
+				id: 'sport/ng-interactive/2026/feb/04/winter-olympics-2026-latest-medal-table-milano-cortina',
 			},
 			{
 				label: 'Full coverage',
-				href: '/tbd',
-				selectedSlug: undefined,
+				id: 'sport/winter-olympics-2026',
 			},
 		],
+		backgroundImages: {
+			mobile: 'https://uploads.guim.co.uk/2026/02/03/winter-olympics-414px.jpg',
+			mobileLandscape:
+				'https://uploads.guim.co.uk/2026/02/03/winter-olympics-480px.jpg',
+			phablet:
+				'https://uploads.guim.co.uk/2026/02/03/winter-olympics-740_px.jpg',
+			tablet: 'https://uploads.guim.co.uk/2026/02/03/winter-olympics-740px-thin.jpg',
+			desktop:
+				'https://uploads.guim.co.uk/2026/02/03/winter-olympics-980px.jpg',
+		},
 	},
 ] satisfies DirectoryPageNavConfig[];
 
-type Configs = typeof configs;
-type SelectedSlug = Configs[number]['links'][number]['selectedSlug'];
-type Selected = Exclude<SelectedSlug, undefined>;
-
-export const DirectoryPageNav = ({ selected, pageId }: Props) => {
-	const config = configs.find((cfg) => pageId.includes(cfg.sectionSlug));
+export const DirectoryPageNav = ({ pageId, pageTags }: Props) => {
+	const config = configs.find(
+		(cfg) =>
+			cfg.pageIds.includes(pageId) ||
+			cfg.tagIds.some(
+				(tagId) => pageTags?.some((tag) => tag.id === tagId),
+			),
+	);
 
 	if (!config) {
 		return null;
@@ -111,13 +101,6 @@ export const DirectoryPageNav = ({ selected, pageId }: Props) => {
 		backgroundColor,
 		'&': css(grid.paddedContainer),
 		alignContent: 'space-between',
-		height: 116,
-		[from.tablet]: {
-			height: 140,
-		},
-		[from.desktop]: {
-			height: 150,
-		},
 	});
 
 	const largeLinkStyles = css({
@@ -125,6 +108,7 @@ export const DirectoryPageNav = ({ selected, pageId }: Props) => {
 		color: textColor,
 		textDecoration: 'none',
 		'&': css(grid.column.centre),
+		gridRow: 1,
 		[from.tablet]: headlineBold42Object,
 		[from.leftCol]: css(
 			grid.between('left-column-start', 'right-column-end'),
@@ -135,6 +119,8 @@ export const DirectoryPageNav = ({ selected, pageId }: Props) => {
 		display: 'flex',
 		flexWrap: 'wrap',
 		'&': css(grid.column.all),
+		gridRow: 2,
+		alignSelf: 'end',
 		position: 'relative',
 		'--top-border-gap': '1.55rem',
 		[from.mobileLandscape]: {
@@ -212,24 +198,24 @@ export const DirectoryPageNav = ({ selected, pageId }: Props) => {
 	});
 
 	return (
-		<nav css={nav}>
-			<a href={config.title.link} css={largeLinkStyles}>
+		<nav css={[nav, heightStyles]}>
+			<BackgroundImage images={config.backgroundImages} />
+			<a href={`/${config.title.id}`} css={largeLinkStyles}>
 				{config.title.label}
 			</a>
 			<ul css={list}>
 				{config.links.map((link, i) => (
-					<li key={link.label} css={listItem}>
+					<li
+						key={link.label}
+						css={listItem}
+						style={pageId === link.id ? selectedStyles : {}}
+					>
 						<a
-							href={link.href}
+							href={`/${link.id}`}
 							css={
 								i === config.links.length - 1
 									? lastSmallLink
 									: smallLink
-							}
-							style={
-								link.selectedSlug === selected
-									? selectedStyles
-									: {}
 							}
 						>
 							{link.label}
@@ -240,3 +226,96 @@ export const DirectoryPageNav = ({ selected, pageId }: Props) => {
 		</nav>
 	);
 };
+
+const heightStyles = css({
+	height: 116,
+	[from.tablet]: {
+		height: 140,
+	},
+	[from.desktop]: {
+		height: 150,
+	},
+});
+
+const BackgroundImage = (props: {
+	images: DirectoryPageNavConfig['backgroundImages'];
+}) => {
+	if (props.images === undefined) {
+		return null;
+	}
+
+	return (
+		<picture
+			css={[
+				{
+					'&': css(grid.column.all),
+					gridRow: '1/3',
+				},
+				heightStyles,
+			]}
+		>
+			<Source images={props.images} breakpoint="wide" />
+			<Source images={props.images} breakpoint="leftCol" />
+			<Source images={props.images} breakpoint="desktop" />
+			<Source images={props.images} breakpoint="tablet" />
+			<Source images={props.images} breakpoint="phablet" />
+			<Source images={props.images} breakpoint="mobileLandscape" />
+			<Source images={props.images} breakpoint="mobileMedium" />
+			<Source images={props.images} breakpoint="mobile" />
+			<img
+				src={generateImageURL({
+					mainImage: props.images.mobile,
+					imageWidth: breakpoints.mobileMedium,
+					resolution: 'low',
+				})}
+				alt="Winter Olympics background graphic"
+				css={{
+					width: '100%',
+					height: '100%',
+					objectFit: 'cover',
+					objectPosition: 'top',
+				}}
+			/>
+		</picture>
+	);
+};
+
+const Source = (props: { images: Images; breakpoint: Breakpoint }) => (
+	<source
+		media={`(min-width: ${breakpoints[props.breakpoint]}px)`}
+		srcSet={`${generateImageURL({
+			mainImage: props.images[breakpointToImageSize(props.breakpoint)],
+			imageWidth: breakpoints[props.breakpoint],
+			resolution: 'low',
+		})}, ${generateImageURL({
+			mainImage: props.images[breakpointToImageSize(props.breakpoint)],
+			imageWidth: breakpoints[props.breakpoint],
+			resolution: 'high',
+		})} 2x`}
+	/>
+);
+
+/**
+ * We don't have an image for every breakpoint, so this picks an appropriate
+ * image size in each case.
+ */
+const breakpointToImageSize = (breakpoint: Breakpoint): ImageSize => {
+	switch (breakpoint) {
+		case 'mobile':
+		case 'mobileMedium':
+			return 'mobile';
+		case 'mobileLandscape':
+			return 'mobileLandscape';
+		case 'phablet':
+			return 'phablet';
+		case 'tablet':
+			return 'tablet';
+		case 'desktop':
+		case 'leftCol':
+		case 'wide':
+			return 'desktop';
+	}
+};
+
+type Images = Exclude<DirectoryPageNavConfig['backgroundImages'], undefined>;
+type ImageSize = keyof Images;

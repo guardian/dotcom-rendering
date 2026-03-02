@@ -40,12 +40,14 @@ const toGalleryTrail = (trail: FETrailType, index: number): TrailType => {
 		  }
 		: undefined;
 
+	const trailMedia = getMedia(trail.galleryCount);
 	return {
 		...trail,
 		image,
 		format,
 		dataLinkName: getDataLinkNameCard(format, '0', index),
-		mainMedia: getMedia(trail.galleryCount),
+		mainMedia: trailMedia,
+		articleMedia: trailMedia,
 	};
 };
 

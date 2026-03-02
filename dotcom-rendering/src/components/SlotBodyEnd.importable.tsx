@@ -14,12 +14,17 @@ import type {
 import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/types';
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';
+import {
+	BrazeBannersSystemPlacementId,
+	buildBrazeBannersSystemConfig,
+} from '../lib/braze/BrazeBannersSystem';
 import type {
 	CandidateConfig,
 	MaybeFC,
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
+import { useBetaAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
@@ -115,10 +120,11 @@ export const SlotBodyEnd = ({
 	articleEndSlot,
 }: Props) => {
 	const { renderingTarget } = useConfig();
-	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
+	const { brazeMessages, braze } = useBraze(idApiUrl, renderingTarget);
 	const countryCode = useCountryCode('slot-body-end');
 	const isSignedIn = useIsSignedIn();
 	const ophanPageViewId = usePageViewId(renderingTarget);
+	const abTests = useBetaAB();
 	const [SelectedEpic, setSelectedEpic] = useState<
 		React.ElementType | null | undefined
 	>();
@@ -165,6 +171,11 @@ export const SlotBodyEnd = ({
 			renderingTarget,
 			ophanPageViewId,
 			pageId,
+			inHoldbackGroup:
+				abTests?.isUserInTestGroup(
+					'growth-holdback-group',
+					'control',
+				) ?? false,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionId,
@@ -178,8 +189,19 @@ export const SlotBodyEnd = ({
 			tags,
 			shouldHideReaderRevenue,
 		);
+		const brazeBannersSystem = buildBrazeBannersSystemConfig(
+			'braze-banners-system_SlotBodyEnd',
+			BrazeBannersSystemPlacementId.EndOfArticle,
+			braze,
+			idApiUrl,
+			contentType,
+			shouldHideReaderRevenue,
+			tags,
+			window.guardian.config.stage,
+		);
+
 		const epicConfig: SlotConfig = {
-			candidates: [brazeEpic, readerRevenueEpic],
+			candidates: [brazeBannersSystem, brazeEpic, readerRevenueEpic],
 			name: 'slotBodyEnd',
 		};
 		pickMessage(epicConfig, renderingTarget)
@@ -203,6 +225,8 @@ export const SlotBodyEnd = ({
 		tags,
 		ophanPageViewId,
 		pageId,
+		braze,
+		abTests,
 	]);
 
 	useEffect(() => {

@@ -368,6 +368,12 @@
         "matchUrl": {
             "type": "string"
         },
+        "matchHeaderUrl": {
+            "type": "string"
+        },
+        "matchStatsUrl": {
+            "type": "string"
+        },
         "matchType": {
             "$ref": "#/definitions/MatchType"
         },
@@ -2449,7 +2455,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/RoleType"
+                    "enum": [
+                        "fullWidth",
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -2800,6 +2815,9 @@
                 },
                 "videoPlayerFormat": {
                     "$ref": "#/definitions/VideoPlayerFormat"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
@@ -4900,6 +4918,9 @@
                 "FeatureDesign",
                 "FullPageInteractiveDesign",
                 "GalleryDesign",
+                "HostedArticleDesign",
+                "HostedGalleryDesign",
+                "HostedVideoDesign",
                 "InteractiveDesign",
                 "InterviewDesign",
                 "LetterDesign",
@@ -5441,6 +5462,10 @@
                         "link",
                         "src"
                     ]
+                },
+                "hostedCampaignColour": {
+                    "description": "Only applies for Hosted Content",
+                    "type": "string"
                 }
             },
             "required": [
@@ -5559,6 +5584,9 @@
                         },
                         "image": {
                             "type": "string"
+                        },
+                        "isLive": {
+                            "type": "boolean"
                         }
                     },
                     "required": [

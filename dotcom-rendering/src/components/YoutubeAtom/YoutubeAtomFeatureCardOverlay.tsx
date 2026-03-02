@@ -6,10 +6,12 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import type { ArticleFormat } from '../../lib/articleFormat';
+import { ArticleDesign } from '../../lib/articleFormat';
 import { secondsToDuration } from '../../lib/formatTime';
 import { transparentColour } from '../../lib/transparentColour';
 import { palette } from '../../palette';
 import type { AspectRatio } from '../../types/front';
+import type { ArticleMedia } from '../../types/mainMedia';
 import { CardFooter } from '../Card/components/CardFooter';
 import { narrowPlayIconDiameter, PlayIcon } from '../Card/components/PlayIcon';
 import { TrailText } from '../Card/components/TrailText';
@@ -130,7 +132,6 @@ type Props = {
 	aspectRatio?: AspectRatio;
 	mobileAspectRatio?: AspectRatio;
 	trailText?: string;
-	isVideoArticle?: boolean;
 	webPublicationDate?: string;
 	showClock?: boolean;
 	serverTime?: number;
@@ -140,6 +141,12 @@ type Props = {
 	isImmersive?: boolean;
 	byline?: string;
 	showByline?: boolean;
+	/**
+	 * The main media from the target article (used for pills/metadata)
+	 * Can differ from mainMedia if the card has replacement media.
+	 * As such, it is not used to display media on the card.
+	 */
+	articleMedia?: ArticleMedia;
 };
 
 export const YoutubeAtomFeatureCardOverlay = ({
@@ -157,7 +164,6 @@ export const YoutubeAtomFeatureCardOverlay = ({
 	aspectRatio,
 	mobileAspectRatio,
 	trailText,
-	isVideoArticle,
 	webPublicationDate,
 	showClock,
 	serverTime,
@@ -167,10 +173,11 @@ export const YoutubeAtomFeatureCardOverlay = ({
 	isImmersive,
 	byline,
 	showByline,
+	articleMedia,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = !isUndefined(duration) && duration > 0;
-
+	const isVideoArticle = format.design === ArticleDesign.Video;
 	const showCardAge =
 		webPublicationDate !== undefined &&
 		showClock !== undefined &&
@@ -276,15 +283,7 @@ export const YoutubeAtomFeatureCardOverlay = ({
 								/>
 							) : undefined
 						}
-						showLivePlayable={false}
-						mainMedia={
-							isVideoArticle
-								? {
-										type: 'YoutubeVideo',
-										duration: duration ?? 0,
-								  }
-								: undefined
-						}
+						media={articleMedia}
 					/>
 				</div>
 			</button>

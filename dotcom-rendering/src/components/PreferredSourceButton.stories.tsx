@@ -12,27 +12,11 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const VariantA = {
-	args: {
-		kind: 'prefer',
-	},
+export const Default = {
 	parameters: {
 		chromatic: {
 			modes: {
 				'vertical mobileMedium': allModes['vertical mobileMedium'],
-			},
-		},
-	},
-} satisfies Story;
-
-export const VariantB = {
-	args: {
-		kind: 'add',
-	},
-	parameters: {
-		chromatic: {
-			modes: {
-				'vertical leftCol': allModes['vertical leftCol'],
 			},
 		},
 	},

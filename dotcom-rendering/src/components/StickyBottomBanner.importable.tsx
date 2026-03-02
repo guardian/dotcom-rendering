@@ -9,13 +9,17 @@ import type { BannerProps } from '@guardian/support-dotcom-components/dist/share
 import { useEffect, useState } from 'react';
 import type { ArticleCounts } from '../lib/articleCount';
 import { getArticleCounts } from '../lib/articleCount';
+import {
+	BrazeBannersSystemPlacementId,
+	buildBrazeBannersSystemConfig,
+} from '../lib/braze/BrazeBannersSystem';
 import type {
 	CandidateConfig,
 	MaybeFC,
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
-import { useAB } from '../lib/useAB';
+import { useAB, useBetaAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
@@ -116,6 +120,7 @@ const buildRRBannerConfigWith = ({
 		renderingTarget,
 		ophanPageViewId,
 		pageId,
+		inHoldbackGroup,
 	}: {
 		isSignedIn: boolean;
 		countryCode: CountryCode;
@@ -133,6 +138,7 @@ const buildRRBannerConfigWith = ({
 		renderingTarget: RenderingTarget;
 		ophanPageViewId: string;
 		pageId?: string;
+		inHoldbackGroup?: boolean;
 	}): CandidateConfig<ModuleData<BannerProps>> => {
 		return {
 			candidate: {
@@ -169,6 +175,7 @@ const buildRRBannerConfigWith = ({
 						asyncArticleCounts,
 						ophanPageViewId,
 						pageId,
+						inHoldbackGroup,
 					}),
 				show:
 					({ name, props }: ModuleData<BannerProps>) =>
@@ -263,18 +270,21 @@ export const StickyBottomBanner = ({
 	isSensitive: boolean;
 }) => {
 	const { renderingTarget, editionId } = useConfig();
-	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
+	const { brazeMessages, braze } = useBraze(idApiUrl, renderingTarget);
 
 	const countryCode = useCountryCode('sticky-bottom-banner');
 	const isSignedIn = useIsSignedIn();
 	const ophanPageViewId = usePageViewId(renderingTarget);
 	const abTestAPI = useAB()?.api;
+	const abTests = useBetaAB();
 	const isInAuxiaControlGroup = !!abTestAPI?.isUserInVariant(
 		'NoAuxiaSignInGate',
 		'control',
 	);
 
 	const [SelectedBanner, setSelectedBanner] = useState<MaybeFC | null>(null);
+	const [hasPickMessageCompleted, setHasPickMessageCompleted] =
+		useState<boolean>(false);
 	const [asyncArticleCounts, setAsyncArticleCounts] =
 		useState<Promise<ArticleCounts | undefined>>();
 
@@ -315,6 +325,11 @@ export const StickyBottomBanner = ({
 			renderingTarget,
 			ophanPageViewId,
 			pageId,
+			inHoldbackGroup:
+				abTests?.isUserInTestGroup(
+					'growth-holdback-group',
+					'control',
+				) ?? false,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionId,
@@ -325,6 +340,16 @@ export const StickyBottomBanner = ({
 			idApiUrl,
 			tags,
 			shouldHideReaderRevenue,
+		);
+		const brazeBannersSystem = buildBrazeBannersSystemConfig(
+			'braze-banners-system_StickyBottomBanner',
+			BrazeBannersSystemPlacementId.Banner,
+			braze,
+			idApiUrl,
+			contentType,
+			shouldHideReaderRevenue,
+			tags,
+			window.guardian.config.stage,
 		);
 
 		const signInGate = buildSignInGateConfig(
@@ -354,9 +379,15 @@ export const StickyBottomBanner = ({
 		if (hasForceBannerParam) {
 			candidates = [CMP, readerRevenue];
 		} else if (hasForceBrazeMessageParam) {
-			candidates = [CMP, brazeBanner];
+			candidates = [CMP, brazeBannersSystem, brazeBanner];
 		} else {
-			candidates = [CMP, signInGate, brazeBanner, readerRevenue];
+			candidates = [
+				CMP,
+				signInGate,
+				brazeBannersSystem,
+				brazeBanner,
+				readerRevenue,
+			];
 		}
 
 		const bannerConfig: SlotConfig = {
@@ -365,9 +396,10 @@ export const StickyBottomBanner = ({
 		};
 
 		pickMessage(bannerConfig, renderingTarget)
-			.then((PickedBanner: () => MaybeFC) =>
-				setSelectedBanner(PickedBanner),
-			)
+			.then((PickedBanner: () => MaybeFC) => {
+				setSelectedBanner(PickedBanner);
+				setHasPickMessageCompleted(true);
+			})
 			.catch((e) => {
 				// Report error to Sentry
 				const msg = `StickyBottomBanner pickMessage - error: ${String(
@@ -377,6 +409,7 @@ export const StickyBottomBanner = ({
 					new Error(msg),
 					'sticky-bottom-banner',
 				);
+				setHasPickMessageCompleted(true);
 			});
 	}, [
 		isSignedIn,
@@ -400,8 +433,18 @@ export const StickyBottomBanner = ({
 		pageId,
 		host,
 		isInAuxiaControlGroup,
+		braze,
+		abTests,
 	]);
 
+	// Dispatches 'banner:none' event for mobile sticky ad integration (see @guardian/commercial-dev).
+	// Ensures ads only insert when no banner will be shown.
+	// hasPickMessageCompleted distinguishes between initial state (not picked yet) and final state (picked nothing).
+	useEffect(() => {
+		if (hasPickMessageCompleted && SelectedBanner == null) {
+			document.dispatchEvent(new CustomEvent('banner:none'));
+		}
+	}, [SelectedBanner, hasPickMessageCompleted]);
 	if (SelectedBanner) {
 		return <SelectedBanner />;
 	}

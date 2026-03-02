@@ -249,6 +249,10 @@ export const Podcast = {
 			},
 			duration: '55:09',
 		},
+		articleMedia: {
+			type: 'Audio',
+			duration: '55:09',
+		},
 	},
 } satisfies Story;
 
@@ -270,6 +274,10 @@ export const Gallery = {
 			altText: 'alt text',
 		},
 		mainMedia: {
+			type: 'Gallery',
+			count: '12',
+		},
+		articleMedia: {
 			type: 'Gallery',
 			count: '12',
 		},
@@ -307,6 +315,12 @@ export const YoutubeVideo = {
 			duration: 120,
 			expired: false,
 			image: 'https://media.guim.co.uk/f2aedd24e5414073a653f68112e0ad070c6f4a2b/254_0_7493_4500/master/7493.jpg',
+			isLive: false,
+		},
+		articleMedia: {
+			type: 'YoutubeVideo',
+			duration: 120,
+			isLive: false,
 		},
 		canPlayInline: true,
 		showVideo: true,
@@ -487,6 +501,69 @@ export const WithSelfHostedImmersiveDefaultVideo = {
 		mainMedia: {
 			...WithSelfHostedImmersiveLoopVideo.args.mainMedia,
 			videoStyle: 'Default',
+		},
+	},
+} satisfies Story;
+
+export const WithReplacementMediaOnGalleryCard = {
+	args: {
+		...Gallery.args,
+		showVideo: true,
+		mainMedia: {
+			type: 'SelfHostedVideo',
+			videoStyle: 'Loop',
+			atomId: 'atom-id-123',
+			sources: [
+				{
+					src: 'https://uploads.guim.co.uk/2026/01/09/Front_loop__Iran_TiF_Latest--64220ebf-d63d-48dd-9317-16b3b150a4ac-1.1.m3u8',
+					mimeType: 'application/vnd.apple.mpegurl',
+				},
+			],
+			height: 720,
+			width: 576,
+			duration: 18,
+		},
+	},
+} satisfies Story;
+
+export const WithReplacementMediaOnVideoCard = {
+	args: {
+		...YoutubeVideo.args,
+		showVideo: true,
+		mainMedia: {
+			type: 'SelfHostedVideo',
+			videoStyle: 'Loop',
+			atomId: 'atom-id-123',
+			sources: [
+				{
+					src: 'https://uploads.guim.co.uk/2026/01/09/Front_loop__Iran_TiF_Latest--64220ebf-d63d-48dd-9317-16b3b150a4ac-1.1.m3u8',
+					mimeType: 'application/vnd.apple.mpegurl',
+				},
+			],
+			height: 720,
+			width: 576,
+			duration: 18,
+		},
+	},
+} satisfies Story;
+
+export const WithReplacementMediaOnPodcastCard = {
+	args: {
+		...Podcast.args,
+		showVideo: true,
+		mainMedia: {
+			type: 'SelfHostedVideo',
+			videoStyle: 'Loop',
+			atomId: 'atom-id-123',
+			sources: [
+				{
+					src: 'https://uploads.guim.co.uk/2026/01/09/Front_loop__Iran_TiF_Latest--64220ebf-d63d-48dd-9317-16b3b150a4ac-1.1.m3u8',
+					mimeType: 'application/vnd.apple.mpegurl',
+				},
+			],
+			height: 720,
+			width: 576,
+			duration: 18,
 		},
 	},
 } satisfies Story;

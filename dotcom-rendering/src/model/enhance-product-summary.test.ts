@@ -224,6 +224,7 @@ describe('enhanceProductSummary', () => {
 			pageId: allowedPageId,
 			serverSideABTests: { 'thefilter-at-a-glance-redesign': 'carousel' },
 			renderingTarget: 'Web',
+			filterAtAGlanceEnabled: true,
 		})(input);
 
 		const carousel = findCarousel(output);
@@ -265,6 +266,7 @@ describe('enhanceProductSummary', () => {
 			pageId: allowedPageId,
 			serverSideABTests: { 'thefilter-at-a-glance-redesign': 'stacked' },
 			renderingTarget: 'Web',
+			filterAtAGlanceEnabled: true,
 		})(input);
 
 		const stacked = findStacked(output);
@@ -306,6 +308,49 @@ describe('enhanceProductSummary', () => {
 			pageId: allowedPageId,
 			serverSideABTests: { 'thefilter-at-a-glance-redesign': 'stacked' },
 			renderingTarget: 'Apps',
+			filterAtAGlanceEnabled: true,
+		})(input);
+
+		const stacked = findStacked(output);
+
+		expect(stacked).toBeUndefined();
+	});
+
+	it('does not return stacked cards when the filterAtAGlance switch is OFF', () => {
+		const allowedPageId =
+			'thefilter/test-article-example-for-product-summary';
+
+		const input = [
+			atAGlanceHeading(),
+			linkElement(
+				'https://www.homebase.co.uk/en-uk/tower-airx-t17166-5l-grey-single-basket-air-fryer-digital-air-fryer/p/0757395',
+				'Buy now',
+			),
+			linkElement(
+				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
+				'Buy now',
+			),
+			linkElement(
+				'https://ninjakitchen.co.uk/product/ninja-double-stack-xl-9-5l-air-fryer-sl400uk-zidSL400UK',
+				'Buy now',
+			),
+			dividerElement(),
+			productElement([
+				'https://www.homebase.co.uk/en-uk/tower-airx-t17166-5l-grey-single-basket-air-fryer-digital-air-fryer/p/0757395',
+			]),
+			productElement([
+				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
+			]),
+			productElement([
+				'https://ninjakitchen.co.uk/product/ninja-double-stack-xl-9-5l-air-fryer-sl400uk-zidSL400UK',
+			]),
+		];
+
+		const output = enhanceProductSummary({
+			pageId: allowedPageId,
+			serverSideABTests: { 'thefilter-at-a-glance-redesign': 'stacked' },
+			renderingTarget: 'Web',
+			filterAtAGlanceEnabled: false,
 		})(input);
 
 		const stacked = findStacked(output);

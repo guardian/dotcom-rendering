@@ -7,6 +7,7 @@ import { rootStyles } from '../lib/rootStyles';
 import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
 import type { TagPage as TagPageModel } from '../types/tagPage';
+import { AdmiralScript } from './AdmiralScript.importable';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
@@ -57,6 +58,9 @@ export const TagPage = ({ tagPage, NAV }: Props) => {
 			<SkipTo id="navigation" label="Skip to navigation" />
 			<Island priority="feature" defer={{ until: 'idle' }}>
 				<AlreadyVisited />
+			</Island>
+			<Island priority="feature" defer={{ until: 'idle' }}>
+				<AdmiralScript />
 			</Island>
 			<Island priority="feature" defer={{ until: 'idle' }}>
 				<FocusStyles />

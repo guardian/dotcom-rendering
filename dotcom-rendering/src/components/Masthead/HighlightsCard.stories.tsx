@@ -65,7 +65,6 @@ const CardWrapper = ({ children }: { children: React.ReactNode }) => {
 export const Default = {};
 
 export const WithQuotes: Story = {
-	name: 'With Quotes',
 	args: {
 		showQuotedHeadline: true,
 	},
@@ -101,7 +100,6 @@ export const WithAvatar: Story = {
 		avatarUrl:
 			'https://uploads.guim.co.uk/2017/10/06/George-Monbiot,-L.png',
 	},
-	name: 'With Avatar',
 };
 
 export const WithMediaIcon: Story = {
@@ -111,9 +109,11 @@ export const WithMediaIcon: Story = {
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Culture,
 		},
+		articleMedia: {
+			type: 'Audio',
+			duration: '30:65',
+		},
 	},
-
-	name: 'With Media Icon',
 };
 
 export const WithLiveKicker: Story = {
@@ -124,8 +124,6 @@ export const WithLiveKicker: Story = {
 			theme: Pillar.News,
 		},
 	},
-
-	name: 'With Live Kicker',
 };
 
 export const WithStarRating: Story = {
@@ -137,8 +135,6 @@ export const WithStarRating: Story = {
 		},
 		starRating: 4,
 	},
-
-	name: 'With Star Rating',
 };
 
 export const WithPodcastSeriesImage: Story = {
@@ -156,7 +152,9 @@ export const WithPodcastSeriesImage: Story = {
 				altText: 'Football Weekly',
 			},
 		},
+		articleMedia: {
+			type: 'Audio',
+			duration: '31:16',
+		},
 	},
-
-	name: 'With Podcast Series Image',
 };

@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { focusHalo } from '@guardian/source/foundations';
 import { getZIndex } from '../../../lib/getZIndex';
-import { trackPersonalisationClick } from '../../../lib/personalisationHistory';
 
 const fauxLinkStyles = css`
 	position: absolute;
@@ -22,19 +21,16 @@ type Props = {
 	headlineText: string;
 	dataLinkName?: string;
 	isExternalLink: boolean;
-	isInPersonalisationVariant?: boolean;
 };
 
 const InternalLink = ({
 	linkTo,
 	headlineText,
 	dataLinkName,
-	trackPersonalisationCardClick,
 }: {
 	linkTo: string;
 	headlineText: string;
 	dataLinkName?: string;
-	trackPersonalisationCardClick?: () => void;
 }) => {
 	return (
 		// eslint-disable-next-line jsx-a11y/anchor-has-content -- we have an aria-label attribute describing the content
@@ -43,7 +39,6 @@ const InternalLink = ({
 			css={fauxLinkStyles}
 			data-link-name={dataLinkName}
 			aria-label={headlineText}
-			onClick={trackPersonalisationCardClick}
 		/>
 	);
 };
@@ -52,12 +47,10 @@ const ExternalLink = ({
 	linkTo,
 	headlineText,
 	dataLinkName,
-	trackPersonalisationCardClick,
 }: {
 	linkTo: string;
 	headlineText: string;
 	dataLinkName?: string;
-	trackPersonalisationCardClick?: () => void;
 }) => {
 	return (
 		// eslint-disable-next-line jsx-a11y/anchor-has-content -- we have an aria-label attribute describing the content
@@ -68,7 +61,6 @@ const ExternalLink = ({
 			aria-label={headlineText + ' (opens in new tab)'}
 			target="_blank"
 			rel="noreferrer"
-			onClick={trackPersonalisationCardClick}
 		/>
 	);
 };
@@ -78,7 +70,6 @@ export const CardLink = ({
 	headlineText,
 	dataLinkName = 'article', //this makes sense if the link is to an article, but should this say something like "external" if it's an external link? are there any other uses/alternatives?
 	isExternalLink,
-	isInPersonalisationVariant,
 }: Props) => {
 	return (
 		<>
@@ -87,10 +78,6 @@ export const CardLink = ({
 					linkTo={linkTo}
 					headlineText={headlineText}
 					dataLinkName={dataLinkName}
-					trackPersonalisationCardClick={() =>
-						isInPersonalisationVariant &&
-						trackPersonalisationClick(linkTo)
-					}
 				/>
 			)}
 			{!isExternalLink && (
@@ -98,10 +85,6 @@ export const CardLink = ({
 					linkTo={linkTo}
 					headlineText={headlineText}
 					dataLinkName={dataLinkName}
-					trackPersonalisationCardClick={() =>
-						isInPersonalisationVariant &&
-						trackPersonalisationClick(linkTo)
-					}
 				/>
 			)}
 		</>

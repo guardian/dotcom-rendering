@@ -17,7 +17,7 @@ const matchData = {
 	},
 	leg: '1',
 	homeTeam: {
-		id: '1',
+		id: '44',
 		name: 'Home Team',
 	},
 	awayTeam: {
@@ -66,7 +66,7 @@ export const matchDayLive: FEMatchDay = {
 	},
 	awayTeam: {
 		...matchData.awayTeam,
-		score: 3,
+		score: 4,
 	},
 };
 

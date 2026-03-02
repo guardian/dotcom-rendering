@@ -2,7 +2,7 @@ exports[`The ID5 Baton Lambda stack > matches the CODE snapshot 1`] = `
 {
   "Metadata": {
     "gu:cdk:constructs": [],
-    "gu:cdk:version": "62.0.1"
+    "gu:cdk:version": "62.3.5"
   },
   "Parameters": {
     "BuildId": {
@@ -46,7 +46,7 @@ exports[`The ID5 Baton Lambda stack > matches the PROD snapshot 1`] = `
 {
   "Metadata": {
     "gu:cdk:constructs": [],
-    "gu:cdk:version": "62.0.1"
+    "gu:cdk:version": "62.3.5"
   },
   "Parameters": {
     "BuildId": {

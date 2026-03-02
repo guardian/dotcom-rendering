@@ -22,7 +22,7 @@ type Line =
 	| 'grid-end';
 
 const mobileColumns =
-	'[grid-start] 0px [centre-column-start] repeat(4, 1fr) [centre-column-end] 0px [grid-end]';
+	'[grid-start] 0px [centre-column-start] repeat(6, 1fr) [centre-column-end] 0px [grid-end]';
 const tabletColumns =
 	'[grid-start] 1fr [centre-column-start] repeat(12, 40px) [centre-column-end] 1fr [grid-end]';
 const desktopColumns =

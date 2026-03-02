@@ -513,6 +513,7 @@ export const renderElement = ({
 						format={format}
 						isMainMedia={isMainMedia}
 						videoStyle={element.videoPlayerFormat}
+						role={element.role}
 					/>
 				);
 			} else {
@@ -1065,7 +1066,11 @@ export const RenderArticleElement = ({
 	});
 
 	const needsFigure = !bareElements.has(element._type);
-	const role = 'role' in element ? (element.role as RoleType) : undefined;
+
+	const role =
+		'role' in element
+			? (element.role as RoleType | 'fullWidth' | undefined)
+			: undefined;
 
 	return needsFigure ? (
 		<Figure

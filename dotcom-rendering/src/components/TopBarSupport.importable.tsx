@@ -21,6 +21,7 @@ import {
 	getPurchaseInfo,
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
+import { useBetaAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
@@ -58,6 +59,7 @@ const ReaderRevenueLinksRemote = ({
 	const isSignedIn = useIsSignedIn();
 
 	const { renderingTarget } = useConfig();
+	const abTests = useBetaAB();
 
 	useEffect((): void => {
 		if (isUndefined(countryCode) || isSignedIn === 'Pending') {
@@ -80,6 +82,11 @@ const ReaderRevenueLinksRemote = ({
 				),
 				purchaseInfo: getPurchaseInfo(),
 				isSignedIn,
+				inHoldbackGroup:
+					abTests?.isUserInTestGroup(
+						'growth-holdback-group',
+						'control',
+					) ?? false,
 			},
 		};
 
@@ -117,7 +124,14 @@ const ReaderRevenueLinksRemote = ({
 					'rr-header-links',
 				);
 			});
-	}, [countryCode, isSignedIn, contributionsServiceUrl, pageViewId, pageUrl]);
+	}, [
+		countryCode,
+		isSignedIn,
+		contributionsServiceUrl,
+		pageViewId,
+		pageUrl,
+		abTests,
+	]);
 
 	if (SupportHeader !== null && supportHeaderResponse) {
 		const { props } = supportHeaderResponse;

@@ -41,6 +41,10 @@ export interface Guardian {
 			userBenefitsApiUrl?: string;
 			idApiUrl?: string;
 			isPodcast?: boolean;
+			shouldHideAdverts?: boolean;
+			isSensitive?: boolean;
+			sponsorshipType?: string;
+			section?: string;
 		};
 		libs: {
 			googletag: string;

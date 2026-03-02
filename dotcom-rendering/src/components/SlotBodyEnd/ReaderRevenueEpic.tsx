@@ -52,6 +52,7 @@ export type CanShowData = {
 	renderingTarget: RenderingTarget;
 	ophanPageViewId: string;
 	pageId?: string;
+	inHoldbackGroup?: boolean;
 };
 
 const buildPayload = async (
@@ -73,6 +74,7 @@ const buildPayload = async (
 		url: window.location.origin + window.location.pathname,
 		isSignedIn: data.isSignedIn,
 		pageId: data.pageId,
+		inHoldbackGroup: data.inHoldbackGroup,
 	},
 });
 
@@ -189,7 +191,7 @@ export const ReaderRevenueEpic = ({ props }: ModuleData<EpicProps>) => {
 					'rr-epic',
 				);
 			});
-	}, []); // eslint-disable-line react-hooks/exhaustive-deps -- Only import epic once on mount
+	}, []);
 
 	if (Epic !== null) {
 		return (

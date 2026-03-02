@@ -4,6 +4,7 @@ import { useCallback, useState } from 'react';
 import type { ArticleFormat } from '../../lib/articleFormat';
 import type { AdTargeting } from '../../types/commercial';
 import type { AspectRatio } from '../../types/front';
+import type { ArticleMedia } from '../../types/mainMedia';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { PlayButtonSize } from '../Card/components/PlayIcon';
 import type { ResponsiveFontSize } from '../CardHeadline';
@@ -53,7 +54,6 @@ export type Props = {
 	mobileAspectRatio?: AspectRatio;
 	trailText?: string;
 	headlineSizes?: ResponsiveFontSize;
-	isVideoArticle?: boolean;
 	webPublicationDate?: string;
 	showClock?: boolean;
 	serverTime?: number;
@@ -64,6 +64,8 @@ export type Props = {
 	isImmersive?: boolean;
 	byline?: string;
 	showByline?: boolean;
+	isLive?: boolean;
+	articleMedia?: ArticleMedia;
 };
 
 /**
@@ -108,7 +110,6 @@ export const YoutubeAtom = ({
 	mobileAspectRatio,
 	trailText,
 	headlineSizes,
-	isVideoArticle,
 	webPublicationDate,
 	showClock,
 	serverTime,
@@ -119,6 +120,8 @@ export const YoutubeAtom = ({
 	isImmersive,
 	byline,
 	showByline,
+	isLive,
+	articleMedia,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -257,7 +260,6 @@ export const YoutubeAtom = ({
 								aspectRatio={aspectRatio}
 								mobileAspectRatio={mobileAspectRatio}
 								trailText={trailText}
-								isVideoArticle={isVideoArticle}
 								webPublicationDate={webPublicationDate}
 								showClock={!!showClock}
 								serverTime={serverTime}
@@ -267,6 +269,7 @@ export const YoutubeAtom = ({
 								isImmersive={isImmersive}
 								byline={byline}
 								showByline={showByline}
+								articleMedia={articleMedia}
 							/>
 						) : (
 							<YoutubeAtomOverlay
@@ -283,6 +286,7 @@ export const YoutubeAtom = ({
 								iconSizeOnMobile={iconSizeOnMobile}
 								hidePillOnMobile={hidePillOnMobile}
 								aspectRatio={aspectRatio}
+								isLive={isLive}
 							/>
 						))}
 					{showPlaceholder && (

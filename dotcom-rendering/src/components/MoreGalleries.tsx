@@ -11,8 +11,8 @@ import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import { type TrailType } from '../types/trails';
-import { Card } from './Card/Card';
 import type { Props as CardProps } from './Card/Card';
+import { Card } from './Card/Card';
 
 type Props = {
 	serverTime?: number;
@@ -196,6 +196,7 @@ const getDefaultCardProps = (
 		aspectRatio: '5:4',
 		isOnwardContent: true,
 		onwardsSource: 'more-galleries',
+		articleMedia: trail.articleMedia,
 	};
 
 	return defaultProps;

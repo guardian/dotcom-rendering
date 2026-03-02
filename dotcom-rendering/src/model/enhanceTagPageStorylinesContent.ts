@@ -7,6 +7,7 @@ import type {
 	ParsedStoryline,
 	StorylinesContent,
 } from '../types/storylinesContent';
+import { getMediaMetadata } from './enhanceCards';
 
 function decideFormatForArticle(
 	category: CategoryContent,
@@ -61,6 +62,11 @@ function parseArticleDataToFrontCard(
 		group,
 		index,
 	)}`;
+	const mainMedia =
+		category.category === 'Find multimedia' && article.image?.mediaData
+			? article.image.mediaData
+			: undefined;
+	const articleMedia = mainMedia && getMediaMetadata(mainMedia);
 	return {
 		format,
 		dataLinkName,
@@ -87,12 +93,10 @@ function parseArticleDataToFrontCard(
 		avatarUrl:
 			category.category === 'Contrasting opinions' &&
 			article.image?.isAvatar
-				? article.image?.src
+				? article.image.src
 				: undefined,
-		mainMedia:
-			category.category === 'Find multimedia' && article.image?.mediaData
-				? article.image?.mediaData
-				: undefined,
+		mainMedia,
+		articleMedia,
 		isExternalLink: false,
 		image: article.image
 			? {

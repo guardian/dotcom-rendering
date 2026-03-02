@@ -275,6 +275,7 @@ const liveUpdatesCard = {
 		duration: 0,
 		expired: false,
 		image: 'https://media.guim.co.uk/68333e95233d9c68b32b56c12205c5ded94dfbf8/0_117_4791_2696/4791.jpg',
+		isLive: false,
 	},
 	isExternalLink: false,
 	discussionApiUrl,

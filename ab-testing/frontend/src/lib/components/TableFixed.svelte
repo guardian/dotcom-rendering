@@ -1,7 +1,8 @@
 <script lang="ts">
-	import type { ABTest } from '../../../../types.js';
-	import OphanLink from '$lib/components/OphanLink.svelte';
-	import TestVariants from '$lib/components/TestVariants.svelte';
+	import type { ABTest } from "../../../../types.js";
+	import OphanLink from "$lib/components/OphanLink.svelte";
+	import TestVariants from "$lib/components/TestVariants.svelte";
+	import GrafanaLink from "./GrafanaLink.svelte";
 
 	interface Props {
 		tests: ABTest[];
@@ -39,7 +40,7 @@
 					<th scope="col">Test Groups</th>
 					<th scope="col">Expires In</th>
 					<th scope="col">Audience</th>
-					<th scope="col">Ophan</th>
+					<th scope="col">Page Views</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -49,7 +50,7 @@
 					>
 					<td
 						class="status"
-						class:off={test.status === 'OFF'}
+						class:off={test.status === "OFF"}
 						class:expired
 					>
 						{#if expired}
@@ -69,7 +70,11 @@
 						>{daysToExpiry(test.expirationDate)} days</td
 					>
 					<td>{test.audienceSize * 100}%</td>
-					<td><OphanLink testName={test.name} /></td>
+					<td>
+						<GrafanaLink testName={test.name} /> | <OphanLink
+							testName={test.name}
+						/>
+					</td>
 				</tr>
 				<tr>
 					<th scope="row">Description</th>
@@ -106,7 +111,7 @@
 		padding: 8px;
 	}
 
-	th[scope='col'] {
+	th[scope="col"] {
 		background-color: var(--light-grey);
 	}
 

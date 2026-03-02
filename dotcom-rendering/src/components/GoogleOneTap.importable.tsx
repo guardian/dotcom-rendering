@@ -121,7 +121,7 @@ const getProviders = (stage: StageType): IdentityProviderConfig[] => {
 	}
 };
 
-const ENABLED_COUNTRIES: CountryCode[] = ['IE', 'NZ'];
+const ENABLED_COUNTRIES: CountryCode[] = ['IE', 'NZ', 'AU'];
 
 export const initializeFedCM = async ({
 	isSignedIn,

@@ -21,6 +21,8 @@ export interface Branding {
 	logo: BrandingLogo;
 	aboutThisLink: string;
 	logoForDarkBackground?: BrandingLogo;
+	/** Only applies for Hosted Content */
+	hostedCampaignColour?: string;
 }
 
 export interface EditionBranding {

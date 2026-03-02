@@ -45,6 +45,7 @@ export const galleryOnwardsTrails: TrailType[] = [
 			'Guinness World Records is looking back at the extraordinary feats achieved since its inception - as well as unveiling 70 whacky and unclaimed records ',
 		kickerText: 'Politics', // Get data for this
 		mainMedia: { type: 'Gallery', count: '6' },
+		articleMedia: { type: 'Gallery', count: '6' },
 	},
 	{
 		url: 'https://www.theguardian.com/money/gallery/2025/aug/22/characterful-cottages-for-sale-in-england-in-pictures',
@@ -80,6 +81,7 @@ export const galleryOnwardsTrails: TrailType[] = [
 		trailText:
 			'Picked from a record 60,636 entries, the first images from the Natural History Museum’s wildlife photographer of the year competition have been released. The photographs, which range from a lion facing down a cobra to magnified mould spores, show the diversity, beauty and complexity of the natural world and humanity’s relationship with it',
 		mainMedia: { type: 'Gallery', count: '6' },
+		articleMedia: { type: 'Gallery', count: '6' },
 	},
 	{
 		url: 'https://www.theguardian.com/news/gallery/2025/aug/22/sunsets-aid-parachutes-and-giant-pandas-photos-of-the-day-friday',
@@ -117,6 +119,7 @@ export const galleryOnwardsTrails: TrailType[] = [
 		trailText:
 			'From the mock-Tudor fad of the 1920s to drivers refuelling on a roundabout, each era produces its own distinctive petrol stations – as photographer Philip Butler discovered',
 		mainMedia: { type: 'Gallery', count: '6' },
+		articleMedia: { type: 'Gallery', count: '6' },
 	},
 	{
 		url: 'https://www.theguardian.com/fashion/gallery/2025/aug/22/what-to-wear-to-notting-hill-carnival',
@@ -152,6 +155,7 @@ export const galleryOnwardsTrails: TrailType[] = [
 		trailText:
 			'The Guardian’s picture editors select photographs from around the world',
 		mainMedia: { type: 'Gallery', count: '6' },
+		articleMedia: { type: 'Gallery', count: '6' },
 	},
 	{
 		url: 'https://www.theguardian.com/artanddesign/gallery/2025/aug/21/psychedelic-rock-glass-mountain-michael-lundgren',
@@ -188,5 +192,6 @@ export const galleryOnwardsTrails: TrailType[] = [
 		trailText:
 			'Politicians and their partners put on their best show at this year’s Midwinter Ball, an annual dinner hosted by the Federal Parliamentary Press Gallery in Canberra',
 		mainMedia: { type: 'Gallery', count: '6' },
+		articleMedia: { type: 'Gallery', count: '6' },
 	},
 ];
