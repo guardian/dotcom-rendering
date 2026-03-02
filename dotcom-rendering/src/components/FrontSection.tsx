@@ -398,7 +398,7 @@ const sectionContentBorderFromLeftCol = css`
 			bottom: 0;
 			border-left: 1px solid ${schemePalette('--section-border')};
 			transform: translateX(-50%);
-			/** Keeps the vertical divider ontop of carousel item dividers */
+			/** Keeps the vertical divider on top of carousel item dividers */
 			z-index: 1;
 		}
 	}
@@ -414,7 +414,7 @@ const slimHomepageRightBorderStyles = css`
 			right: 0;
 			border-right: 1px solid ${schemePalette('--section-border')};
 			transform: translateX(-50%);
-			/** Keeps the vertical divider ontop of carousel item dividers */
+			/** Keeps the vertical divider on top of carousel item dividers */
 			z-index: 1;
 		}
 	}

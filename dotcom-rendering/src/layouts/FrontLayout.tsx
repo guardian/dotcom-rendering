@@ -78,13 +78,25 @@ const isToggleable = (
 	index: number,
 	collection: DCRCollectionType,
 	isNetworkFront: boolean,
+	isInSlimHomepageAbTestVariant: boolean,
 ) => {
 	if (isNetworkFront) {
+		/**
+		 * The show/hide button would be covered by the MostPopularFrontRight component
+		 * in the variant of the Slim Homepage AB test.
+		 */
+		const hideForSlimHomepageAbTest =
+			isInSlimHomepageAbTestVariant &&
+			(collection.displayName === 'News' ||
+				collection.displayName === 'Features' ||
+				collection.displayName === 'More features');
+
 		return (
 			collection.displayName.toLowerCase() !== 'headlines' &&
 			!isNavList(collection) &&
 			!isHighlights(collection) &&
-			!isLabs(collection)
+			!isLabs(collection) &&
+			!hideForSlimHomepageAbTest
 		);
 	}
 
@@ -487,6 +499,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									index,
 									collection,
 									front.isNetworkFront,
+									isInSlimHomepageAbTestVariant,
 								)}
 								leftContent={decideLeftContent(
 									front,
