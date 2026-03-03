@@ -145,6 +145,19 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
+	{
+		name: "commercial-mobile-sticky",
+		description:
+			"Testing restricting launch of the mobile-sticky to certain conditions",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-03-31",
+		type: "client",
+		status: "ON",
+		audienceSize: 100 / 100,
+		audienceSpace: "B",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
