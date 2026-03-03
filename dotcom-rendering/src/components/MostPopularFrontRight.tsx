@@ -14,6 +14,7 @@ import { LinkHeadline } from './LinkHeadline';
 
 const containerStyles = css`
 	padding-top: ${space[2]}px;
+	padding-bottom: ${space[10]}px;
 	display: flex;
 	flex-direction: column;
 	gap: ${space[8]}px;

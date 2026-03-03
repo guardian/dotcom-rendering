@@ -364,16 +364,18 @@ const sectionControls = css`
 	}
 `;
 
-const sectionContent = (isInSlimHomepageTestVariant: boolean) => css`
+const sectionContent = css`
 	margin: 0;
 	grid-column: content;
 
 	.hidden > & {
 		display: none;
 	}
+`;
 
+const slimSectionContent = css`
 	${from.wide} {
-		grid-column: ${isInSlimHomepageTestVariant ? '5 / 14' : 'content'};
+		grid-column: 5 / 14;
 	}
 `;
 
@@ -824,7 +826,8 @@ export const FrontSection = ({
 
 				<div
 					css={[
-						sectionContent(slimifySectionForAbTest),
+						sectionContent,
+						slimifySectionForAbTest && slimSectionContent,
 						sectionContentHorizontalMargins,
 						sectionContentRow(toggleable),
 						topPadding,
