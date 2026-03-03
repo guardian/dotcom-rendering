@@ -6,7 +6,9 @@ type AllSpace = Map<string, FastlyTestParams[]>;
 
 type Team =
 	| "commercial"
+	// WebX in the canonical name for the team, when the last test using webex expires we should remove webex from this union type
 	| "webex"
+	| "webx"
 	| "thefilter"
 	| "fronts-and-curation"
 	| "growth";

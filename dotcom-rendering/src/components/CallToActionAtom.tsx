@@ -38,6 +38,7 @@ export const CallToActionAtom = ({
 					css={css`
 						height: 200px;
 						object-fit: cover;
+						flex-grow: 1;
 
 						${from.tablet} {
 							height: 250px;

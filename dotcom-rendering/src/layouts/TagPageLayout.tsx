@@ -142,7 +142,30 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 						tagPage.storylinesContent &&
 						(!tagPage.pagination ||
 							tagPage.pagination.currentPage === 1) && // Only on the first page
-						(index === 1 || tagPage.groupedTrails.length === 1); // After the first section or if there's only one section on the page
+						index === 0; // Only after the first section
+
+					/**
+					 * The pagination should appear at the bottom of the page; usually this is done by passing to FrontSection.
+					 * If the storylines section is being inserted when there's only one other container on the page,
+					 * we want to attach the pagination to it instead of the last trails section.
+					 */
+					const isLastGroup =
+						index === tagPage.groupedTrails.length - 1;
+					const hasPagination = !!tagPage.pagination;
+					const isSingleGroup = tagPage.groupedTrails.length === 1;
+					const shouldSuppressPagination =
+						insertStorylinesSection && isSingleGroup;
+
+					const tagPagePagination =
+						isLastGroup &&
+						hasPagination &&
+						!shouldSuppressPagination
+							? tagPage.pagination
+							: undefined;
+
+					const storylinesPagination = isSingleGroup
+						? tagPage.pagination
+						: undefined;
 
 					return (
 						<Fragment key={containerId}>
@@ -155,22 +178,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									)}
 								/>
 							)}
-							{insertStorylinesSection &&
-								tagPage.storylinesContent && (
-									<Island priority="critical">
-										<StorylinesSectionContent
-											index={1}
-											editionId={tagPage.editionId}
-											storylinesContent={
-												tagPage.storylinesContent
-											}
-											containerId="storylines"
-											pillar={
-												tagPage.nav.currentPillarTitle
-											}
-										/>
-									</Island>
-								)}
+
 							<FrontSection
 								title={title}
 								url={url}
@@ -187,11 +195,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								editionId={tagPage.editionId}
 								canShowMore={false}
 								ajaxUrl={tagPage.config.ajaxUrl}
-								pagination={
-									index === tagPage.groupedTrails.length - 1
-										? tagPage.pagination
-										: undefined
-								}
+								pagination={tagPagePagination}
 								discussionApiUrl={
 									tagPage.config.discussionApiUrl
 								}
@@ -204,6 +208,20 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									aspectRatio={'5:4'}
 								/>
 							</FrontSection>
+							{insertStorylinesSection &&
+								tagPage.storylinesContent && (
+									<Island priority="critical">
+										<StorylinesSectionContent
+											index={1}
+											editionId={tagPage.editionId}
+											storylinesContent={
+												tagPage.storylinesContent
+											}
+											containerId="storylines"
+											pagination={storylinesPagination}
+										/>
+									</Island>
+								)}
 							{mobileAdPositions.includes(index) && (
 								<MobileAdSlot
 									renderAds={renderAds}
