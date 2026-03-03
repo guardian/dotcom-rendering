@@ -14,6 +14,7 @@ type BuildBannerSelectorsArgs = {
 	tickerSettings?: BannerRenderProps['tickerSettings'];
 	separateArticleCount?: boolean;
 	separateArticleCountSettings?: BannerRenderProps['separateArticleCountSettings'];
+	articleCounts: BannerRenderProps['articleCounts'];
 };
 
 export const buildBannerSelectors = ({
@@ -26,6 +27,7 @@ export const buildBannerSelectors = ({
 	tickerSettings,
 	separateArticleCount,
 	separateArticleCountSettings,
+	articleCounts,
 }: BuildBannerSelectorsArgs): BannerSelectors => {
 	const copyForViewport = isTabletOrAbove
 		? content.mainContent
@@ -60,7 +62,8 @@ export const buildBannerSelectors = ({
 		!!settings.tickerStylingSettings;
 	const showArticleCount =
 		!isCollapsed &&
-		Boolean(separateArticleCountSettings ?? separateArticleCount);
+		Boolean(separateArticleCountSettings ?? separateArticleCount) &&
+		articleCounts.forTargetedWeeks >= 5;
 	const showBodyVisual = !!settings.imageSettings && !isCollapsed;
 	const showHeaderImage = !!settings.headerSettings?.headerImage;
 

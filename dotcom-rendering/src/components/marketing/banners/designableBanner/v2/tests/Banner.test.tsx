@@ -233,7 +233,7 @@ describe('DesignableBanner V2', () => {
 		expect(screen.getByText('£20')).toBeInTheDocument();
 	});
 
-	it('renders article count when separateArticleCount is true', () => {
+	it('renders article count when separateArticleCount is true and >= 5 articles', () => {
 		const articleCountProps: BannerRenderProps = {
 			...mockProps,
 			separateArticleCount: true,
@@ -249,5 +249,22 @@ describe('DesignableBanner V2', () => {
 		// Usually it's something like "You've read 5 articles..."
 		expect(screen.getByText(/You've read/)).toBeInTheDocument();
 		expect(screen.getByText(/5/)).toBeInTheDocument();
+	});
+
+	it('does not render article count when separateArticleCount is true but user has read < 5 articles', () => {
+		const articleCountProps: BannerRenderProps = {
+			...mockProps,
+			separateArticleCount: true,
+			articleCounts: {
+				forTargetedWeeks: 4,
+				for52Weeks: 10,
+			},
+		};
+
+		render(<BannerComponent {...articleCountProps} />);
+
+		// Should not be in the document
+		expect(screen.queryByText(/You've read/)).not.toBeInTheDocument();
+		expect(screen.queryByText(/4/)).not.toBeInTheDocument();
 	});
 });

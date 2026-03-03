@@ -346,6 +346,7 @@ export const useDesignableBannerModel = ({
 			tickerSettings,
 			separateArticleCount,
 			separateArticleCountSettings,
+			articleCounts,
 		});
 
 		return {
