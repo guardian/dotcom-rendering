@@ -124,7 +124,7 @@ export class NativeConnection extends ThriftConnection {
 				resolve: res,
 				reject: rej,
 				timeoutId: setTimeout(function () {
-					connection.reset(id);
+					// connection.reset(id);
 				}, ACTION_TIMEOUT_MS),
 			});
 			const message: NativeMessage = {

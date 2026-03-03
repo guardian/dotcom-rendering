@@ -569,6 +569,7 @@ export const renderElement = ({
 					key={index}
 					images={element.images}
 					caption={element.caption}
+					presentation={element.presentation}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':

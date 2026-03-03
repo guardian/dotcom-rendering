@@ -2953,6 +2953,14 @@
                 },
                 "role": {
                     "$ref": "#/definitions/RoleType"
+                },
+                "presentation": {
+                    "enum": [
+                        "side-by-side",
+                        "slideshow",
+                        "stacked"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
