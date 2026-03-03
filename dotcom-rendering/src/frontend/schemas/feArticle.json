@@ -109,6 +109,9 @@
                                 "type": "string"
                             }
                         }
+                    },
+                    "bio": {
+                        "type": "string"
                     }
                 },
                 "required": [
@@ -634,6 +637,9 @@
                 },
                 {
                     "$ref": "#/definitions/ContentAtomBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/ContributorFollowBlockElement"
                 },
                 {
                     "$ref": "#/definitions/DisclaimerBlockElement"
@@ -1867,6 +1873,36 @@
             "required": [
                 "_type",
                 "atomId",
+                "elementId"
+            ]
+        },
+        "ContributorFollowBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.ContributorFollowBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "contributorId": {
+                    "type": "string"
+                },
+                "displayName": {
+                    "type": "string"
+                },
+                "avatarUrl": {
+                    "type": "string"
+                },
+                "bio": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "contributorId",
+                "displayName",
                 "elementId"
             ]
         },
