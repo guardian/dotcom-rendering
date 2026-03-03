@@ -11,9 +11,9 @@ import {
 } from '@guardian/core-web-vitals';
 import { isUndefined } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
-import { useBrowserId } from '../lib/metrics';
 import { useAB, useBetaAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
+import { useBrowserId } from '../lib/useBrowserId';
 import { useDetectAdBlock } from '../lib/useDetectAdBlock';
 import { usePageViewId } from '../lib/usePageViewId';
 import type { ServerSideTests } from '../types/config';
