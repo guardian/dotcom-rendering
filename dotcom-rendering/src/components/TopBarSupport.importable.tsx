@@ -5,7 +5,6 @@
 import { css } from '@emotion/react';
 import { getCookie, isUndefined } from '@guardian/libs';
 import type { ComponentEvent } from '@guardian/ophan-tracker-js';
-import { getHeader } from '@guardian/support-dotcom-components';
 import type {
 	HeaderPayload,
 	ModuleData,
@@ -21,8 +20,10 @@ import {
 	getPurchaseInfo,
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
+import { getOptionsHeaders } from '../lib/identity';
+import { getHeader } from '../lib/sdcRequests';
 import { useBetaAB } from '../lib/useAB';
-import { useIsSignedIn } from '../lib/useAuthStatus';
+import { useAuthStatus } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
 import { useConfig } from './ConfigContext';
@@ -56,7 +57,11 @@ const ReaderRevenueLinksRemote = ({
 		useState<ModuleData<HeaderProps> | null>(null);
 	const [SupportHeader, setSupportHeader] =
 		useState<React.ElementType<HeaderProps> | null>(null);
-	const isSignedIn = useIsSignedIn();
+	const authStatus = useAuthStatus();
+	const isSignedIn =
+		authStatus.kind === 'Pending'
+			? 'Pending'
+			: authStatus.kind === 'SignedIn';
 
 	const { renderingTarget } = useConfig();
 	const abTests = useBetaAB();
@@ -90,7 +95,12 @@ const ReaderRevenueLinksRemote = ({
 			},
 		};
 
-		getHeader(contributionsServiceUrl, requestData)
+		const headers =
+			authStatus.kind === 'SignedIn'
+				? getOptionsHeaders(authStatus).headers
+				: undefined;
+
+		getHeader(contributionsServiceUrl, requestData, headers)
 			.then((response: ModuleDataResponse<HeaderProps>) => {
 				if (!response.data) {
 					return null;
@@ -131,6 +141,7 @@ const ReaderRevenueLinksRemote = ({
 		pageViewId,
 		pageUrl,
 		abTests,
+		authStatus,
 	]);
 
 	if (SupportHeader !== null && supportHeaderResponse) {
