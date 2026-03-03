@@ -254,6 +254,28 @@ export const AdmiralScript = () => {
 				'thefilter',
 			].includes(page.section ?? '');
 		if (!shouldRun) return;
+		log('dotcom', `cmp has initialised: ${cmp.hasInitialised()}`);
+		log(
+			'dotcom',
+			`cmp will show privacy message: ${cmp.willShowPrivacyMessageSync()}`,
+		);
+		log('dotcom', `is in USA: ${isInUsa()}`);
+		log('dotcom', `is in control group: ${isInControlGroup}`);
+		log(
+			'dotcom',
+			`gu_hide_support_messaging cookie is set: ${!!getCookie({
+				name: 'gu_hide_support_messaging',
+				shouldMemoize: true,
+			})}`,
+		);
+		log('dotcom', `shouldHideAdverts: ${page.shouldHideAdverts}`);
+		log(
+			'dotcom',
+			`shouldHideReaderRevenue: ${page.shouldHideReaderRevenue}`,
+		);
+		log('dotcom', `isSensitive: ${page.isSensitive}`);
+		log('dotcom', `sponsorshipType: ${page.sponsorshipType}`);
+		log('dotcom', `section: ${page.section}`);
 
 		// Record INSERT Ophan event
 		void recordAdmiralOphanEvent(
