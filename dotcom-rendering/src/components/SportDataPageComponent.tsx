@@ -85,7 +85,7 @@ export const SportDataPageComponent = ({ sportData }: Props) => {
 					You can{' '}
 					<a
 						style={{ color: 'inherit' }}
-						href="/ab-tests/opt-out/webex-dark-mode-web"
+						href="/ab-tests/opt-out/webx-dark-mode-web"
 					>
 						opt out anytime
 					</a>{' '}

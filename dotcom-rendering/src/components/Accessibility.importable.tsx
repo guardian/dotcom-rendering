@@ -138,7 +138,7 @@ export const Accessibility = () => {
 								You are currently participating in the dark
 								colour scheme beta.
 							</p>
-							<a href="/ab-tests/opt-out/webex-dark-mode-web:enable">
+							<a href="/ab-tests/opt-out/webx-dark-mode-web:enable">
 								Click here to opt out (this will redirect you to
 								the homepage)
 							</a>
@@ -149,7 +149,7 @@ export const Accessibility = () => {
 								You are not currently participating in the dark
 								colour scheme beta.
 							</p>
-							<a href="/ab-tests/opt-in/webex-dark-mode-web:enable">
+							<a href="/ab-tests/opt-in/webx-dark-mode-web:enable">
 								Click here to opt in (this will redirect you to
 								the homepage)
 							</a>

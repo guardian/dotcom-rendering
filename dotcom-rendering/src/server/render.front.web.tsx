@@ -84,7 +84,7 @@ export const renderFront = ({
 	const enhancedNAV = enhanceNav(NAV);
 
 	const darkModeAvailable =
-		front.config.serverSideABTests?.['webex-dark-mode-web'] === 'enable';
+		front.config.serverSideABTests?.['webx-dark-mode-web'] === 'enable';
 
 	// Fronts are not supported in Apps
 	const config = {
@@ -185,7 +185,7 @@ export const renderTagPage = ({
 	const enhancedNAV = enhanceNav(NAV);
 
 	const darkModeAvailable =
-		tagPage.config.serverSideABTests?.['webex-dark-mode-web'] === 'enable';
+		tagPage.config.serverSideABTests?.['webx-dark-mode-web'] === 'enable';
 
 	// Fronts are not supported in Apps
 	const config: Config = {

@@ -51,7 +51,7 @@ export const renderHtml = ({
 	const linkedData = frontendData.linkedData;
 
 	const darkModeAvailable =
-		frontendData.config.serverSideABTests?.['webex-dark-mode-web'] ===
+		frontendData.config.serverSideABTests?.['webx-dark-mode-web'] ===
 		'enable';
 
 	const renderingTarget = 'Web';
@@ -244,7 +244,7 @@ export const renderBlocks = ({
 	const editionId = isEditionId(edition) ? edition : 'UK';
 
 	const darkModeAvailable =
-		serverSideABTests?.['webex-dark-mode-web'] === 'enable';
+		serverSideABTests?.['webx-dark-mode-web'] === 'enable';
 
 	const config: Config = {
 		renderingTarget: 'Web',

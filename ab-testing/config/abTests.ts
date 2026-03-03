@@ -21,7 +21,7 @@ import type { ABTest } from "./types.ts";
 
 const ABTests: ABTest[] = [
 	{
-		name: "webex-dark-mode-web",
+		name: "webx-dark-mode-web",
 		description: "Dark mode accessibility feature test on web",
 		owners: ["dotcom.platform@theguardian.com"],
 		status: "ON",
