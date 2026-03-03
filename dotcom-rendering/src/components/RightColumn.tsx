@@ -8,11 +8,7 @@ const hideBelow = (showFrom: Breakpoint) => css`
 	}
 
 	${from[showFrom]} {
-		height: 100%;
 		display: block;
-		flex-basis: 300px;
-		flex-grow: 0;
-		flex-shrink: 0;
 	}
 `;
 
