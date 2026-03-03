@@ -841,6 +841,8 @@ export const BrazeBannersSystemDisplay = ({
 							max-height: 65svh;
 							border-top: 1px solid rgb(0, 0, 0);
 							background-color: ${wrapperModeBackgroundColor};
+							overflow: auto;
+							overscroll-behavior: none;
 							${until.phablet} {
 								border: none;
 							}
