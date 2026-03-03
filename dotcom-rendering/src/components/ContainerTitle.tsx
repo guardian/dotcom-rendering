@@ -41,7 +41,10 @@ const headerStyles = css`
 `;
 
 const primaryTitleStyles = css`
-	${headlineBold28};
+	${headlineBold24};
+	${from.tablet} {
+		${headlineBold28};
+	}
 `;
 const secondaryTitleStyles = css`
 	${textSansBold17};
