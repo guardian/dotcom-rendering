@@ -7,7 +7,11 @@ const meta = {
 	component: MostPopularFrontRight,
 	title: 'Components/MostPopularFrontRight',
 	decorators: [rightColumnDecorator],
-	render: (args) => <MostPopularFrontRight {...args} />,
+	render: (args) => (
+		<div css={{ position: 'relative' }}>
+			<MostPopularFrontRight {...args} />
+		</div>
+	),
 } satisfies Meta<typeof MostPopularFrontRight>;
 
 export default meta;
