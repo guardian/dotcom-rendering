@@ -2,10 +2,12 @@ import { log } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { getListenToArticleClient } from '../lib/bridgetApi';
 import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
+import { useConfig } from './ConfigContext';
 import { ListenToArticleButton } from './ListenToArticleButton';
 
 type Props = {
 	articleId: string;
+	isPreview?: boolean;
 };
 
 export const formatAudioDuration = (
@@ -24,12 +26,14 @@ export const formatAudioDuration = (
 	return formattedDuration;
 };
 
-export const ListenToArticle = ({ articleId }: Props) => {
+export const ListenToArticle = ({ articleId, isPreview = false }: Props) => {
+	const { isDev } = useConfig();
 	const [showButton, setShowButton] = useState<boolean>(false);
 	const [audioDurationSeconds, setAudioDurationSeconds] = useState<
 		number | undefined
 	>(undefined);
 
+	console.log('ListenToArticle isPreview=', isPreview);
 	const isBridgetCompatible = useIsBridgetCompatible('8.7.0');
 	useEffect(() => {
 		if (isBridgetCompatible) {
@@ -55,8 +59,12 @@ export const ListenToArticle = ({ articleId }: Props) => {
 
 					setShowButton(false);
 				});
+		} else if (isPreview || isDev) {
+			// To facilitate design and development in non-Bridget compatible environments,
+			// we want to show the button if we're in preview mode or development mode
+			setShowButton(true);
 		}
-	}, [articleId, isBridgetCompatible]);
+	}, [articleId, isPreview, isDev, isBridgetCompatible]);
 
 	const listenToArticleHandler = () => {
 		void getListenToArticleClient()

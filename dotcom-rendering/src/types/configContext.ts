@@ -14,10 +14,12 @@ export type Config =
 			darkModeAvailable: boolean;
 			assetOrigin: AssetOrigin;
 			editionId: EditionId;
+			isDev?: boolean;
 	  }>
 	| Readonly<{
 			renderingTarget: Extract<RenderingTarget, 'Apps'>;
 			darkModeAvailable: boolean;
 			assetOrigin: AssetOrigin;
 			editionId: EditionId;
+			isDev?: boolean;
 	  }>;
