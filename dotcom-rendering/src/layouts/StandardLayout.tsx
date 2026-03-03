@@ -580,10 +580,12 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							css={[
 								css(grid.column.centre),
 								css`
+									display: none;
 									${from.desktop} {
+										display: block;
+										padding-top: 6px;
 										${grid.column.right};
-										grid-row: 1;
-										align-self: start;
+										grid-row: 1 / span 999;
 									}
 								`,
 							]}
