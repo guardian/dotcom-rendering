@@ -109,6 +109,16 @@ const configs = [
 				id: 'sport/winter-paralympics-2026',
 			},
 		],
+		backgroundImages: {
+			mobile: 'https://uploads.guim.co.uk/2026/03/03/winter-paralympics-414px.jpg',
+			mobileLandscape:
+				'https://uploads.guim.co.uk/2026/03/03/winter-paralympics-480px.jpg',
+			phablet:
+				'https://uploads.guim.co.uk/2026/03/03/winter-paralympics-740px.jpg',
+			tablet: 'https://uploads.guim.co.uk/2026/03/03/winter-paralympics-740px-thin.jpg',
+			desktop:
+				'https://uploads.guim.co.uk/2026/03/03/winter-paralympics-980px.jpg',
+		},
 	},
 ] satisfies DirectoryPageNavConfig[];
 
