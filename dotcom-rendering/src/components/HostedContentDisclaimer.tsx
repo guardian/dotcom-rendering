@@ -1,8 +1,15 @@
 import { css } from '@emotion/react';
 import {
 	palette as sourcePalette,
+	space,
 	textSans12,
 } from '@guardian/source/foundations';
+
+const containerStyles = css`
+	border-top: 2px solid ${sourcePalette.neutral[46]};
+	margin-top: ${space[4]}px;
+	padding-top: ${space[2]}px;
+`;
 
 const textStyles = css`
 	${textSans12};
@@ -11,11 +18,14 @@ const textStyles = css`
 
 export const HostedContentDisclaimer = () => {
 	return (
-		<p css={textStyles}>
-			This article was paid for, produced and controlled by the advertiser
-			rather than the publisher. It is subject to regulation by the
-			Advertising Standards Authority. This content is produced by the
-			advertiser with no involvement from Guardian News and Media staff.
-		</p>
+		<div css={containerStyles}>
+			<p css={textStyles}>
+				This article was paid for, produced and controlled by the
+				advertiser rather than the publisher. It is subject to
+				regulation by the Advertising Standards Authority. This content
+				is produced by the advertiser with no involvement from Guardian
+				News and Media staff.
+			</p>
+		</div>
 	);
 };

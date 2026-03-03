@@ -8,9 +8,15 @@ export default {
 
 export const Default = () => {
 	return (
-		<Section showSideBorders={false} showTopBorder={true} element="section">
+		<Section
+			showSideBorders={false}
+			showTopBorder={false}
+			shouldCenter={false}
+			element="section"
+		>
 			<HostedContentDisclaimer />
 		</Section>
 	);
 };
+
 Default.storyName = 'default';
