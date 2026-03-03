@@ -93,7 +93,7 @@ export const EnhanceAffiliateLinks = () => {
 				const xcustValue = `referrer|${referrerDomain}|accountId|${skimlinksAccountId}${
 					abTestString ? `|abTestParticipations|${abTestString}` : ''
 				}${utmParamsString ? `|${utmParamsString}` : ''}${
-					xcustComponentId ? `|component-id|${xcustComponentId}` : ''
+					xcustComponentId ? `|componentId|${xcustComponentId}` : ''
 				}`;
 				link.href = `${link.href}&xcust=${encodeURIComponent(
 					xcustValue,
