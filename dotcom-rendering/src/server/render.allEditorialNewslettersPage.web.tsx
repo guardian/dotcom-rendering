@@ -24,10 +24,14 @@ export const renderEditorialNewslettersPage = ({
 	const title = newslettersPage.webTitle;
 	const NAV = extractNAV(newslettersPage.nav);
 
+	const darkModeAvailable =
+		newslettersPage.config.serverSideABTests?.['webx-dark-mode-web'] ===
+		'enable';
+
 	// The newsletters page is currently only supported on Web
 	const config = {
 		renderingTarget: 'Web',
-		darkModeAvailable: false,
+		darkModeAvailable,
 		assetOrigin: ASSET_ORIGIN,
 		editionId: newslettersPage.editionId,
 	} satisfies Config;
