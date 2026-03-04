@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, type SerializedStyles } from '@emotion/react';
 import { log } from '@guardian/libs';
 import {
 	from,
@@ -79,17 +79,150 @@ const stretchLines = css`
 	}
 `;
 
-const tabletRow = (row: number) => css`
-	${from.tablet} {
-		grid-row: ${row};
-	}
-`;
+type LayoutType = 'standard' | 'matchReport' | 'media' | 'labs';
 
-const leftColRow = (row: number) => css`
-	${from.leftCol} {
-		grid-row: ${row};
-	}
-`;
+type Area =
+	| 'title'
+	| 'headline'
+	| 'standfirst'
+	| 'main-media'
+	| 'meta'
+	| 'body'
+	| 'right-column'
+	| 'match-nav'
+	| 'match-tabs';
+
+type LayoutRows = Partial<
+	Record<
+		Area,
+		{ mobile?: number; tablet?: number; leftCol?: number; desktop?: number }
+	>
+>;
+
+const rowMaps: Record<LayoutType, LayoutRows> = {
+	standard: {
+		title: { tablet: 1 },
+		headline: { tablet: 2, leftCol: 1 },
+		standfirst: { tablet: 3, leftCol: 2 },
+		'main-media': { tablet: 4, leftCol: 3 },
+		meta: { tablet: 5, leftCol: 3 },
+	},
+	matchReport: {
+		'match-nav': { tablet: 1 },
+		'match-tabs': { tablet: 2 },
+		title: { tablet: 3, leftCol: 1 },
+		headline: { tablet: 4, leftCol: 3 },
+		standfirst: { tablet: 5, leftCol: 4 },
+		'main-media': { tablet: 6, leftCol: 5 },
+		meta: { tablet: 7, leftCol: 5 },
+	},
+	media: {
+		title: { mobile: 1, tablet: 1 },
+		headline: { mobile: 2, tablet: 2, leftCol: 1 },
+		'main-media': { mobile: 3, tablet: 3, leftCol: 2 },
+		standfirst: { mobile: 4, tablet: 4, leftCol: 3 },
+		meta: { mobile: 5, tablet: 5, leftCol: 2 },
+	},
+	labs: {
+		title: { tablet: 1 },
+		headline: { tablet: 2, leftCol: 1 },
+		standfirst: { tablet: 3, leftCol: 2 },
+		'main-media': { tablet: 3 },
+		meta: { tablet: 4, leftCol: 3 },
+		'match-nav': { tablet: 1 },
+		'match-tabs': { tablet: 1 },
+	},
+};
+
+const rowCss = (area: Area, layoutType: LayoutType) => {
+	const rows = rowMaps[layoutType][area] ?? {};
+
+	return css([
+		rows.mobile != null &&
+			css`
+				${until.tablet} {
+					grid-row: ${rows.mobile};
+				}
+			`,
+		rows.tablet != null &&
+			css`
+				${from.tablet} {
+					grid-row: ${rows.tablet};
+				}
+			`,
+		rows.leftCol != null &&
+			css`
+				${from.leftCol} {
+					grid-row: ${rows.leftCol};
+				}
+			`,
+		rows.desktop != null &&
+			css`
+				${from.desktop} {
+					grid-row: ${rows.desktop};
+				}
+			`,
+	]);
+};
+interface GridItemProps {
+	area: Area;
+	layoutType: LayoutType;
+	columns?: {
+		tablet?: 'left' | 'centre' | 'right';
+		desktop?: 'left' | 'centre' | 'right';
+		leftCol?: 'left' | 'centre' | 'right';
+	};
+	element?: 'div' | 'article' | 'main' | 'aside' | 'section';
+	customCss?: SerializedStyles;
+	children: React.ReactNode;
+}
+
+const GridItem = ({
+	area,
+	layoutType,
+	columns,
+	element: Element = 'div',
+	customCss,
+	children,
+}: GridItemProps) => {
+	const mobileCol = 'centre';
+	const tabletCol = columns?.tablet ?? mobileCol;
+	const leftColCol = columns?.leftCol ?? mobileCol;
+	const desktopCol = columns?.desktop ?? mobileCol;
+
+	return (
+		<Element
+			data-gu-name={area}
+			css={css([
+				grid.column[mobileCol],
+				rowCss(area, layoutType),
+				customCss,
+
+				// Override column at breakpoints if specified
+				columns?.tablet &&
+					css`
+						${from.tablet} {
+							${grid.column[tabletCol]};
+						}
+					`,
+				columns?.desktop &&
+					css`
+						${from.desktop} {
+							${grid.column[desktopCol]};
+						}
+					`,
+				columns?.leftCol &&
+					css`
+						${from.leftCol} {
+							${grid.column[leftColCol]};
+						}
+					`,
+			])}
+		>
+			{children}
+		</Element>
+	);
+};
 
 interface Props {
 	article: ArticleDeprecated;
@@ -162,6 +295,14 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const renderAds = canRenderAds(article);
+
+	const layoutType: LayoutType = isLabs
+		? 'labs'
+		: isMatchReport
+		? 'matchReport'
+		: isMedia
+		? 'media'
+		: 'standard';
 
 	return (
 		<>
@@ -280,12 +421,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<Border />
 							)}
 						</div>
-						<div
-							css={css([
-								grid.column.centre,
-								tabletRow(2),
-								leftColRow(1),
-							])}
+						<GridItem
+							area="headline"
+							layoutType={layoutType}
+							element="div"
 						>
 							<div css={maxWidth}>
 								<ArticleHeadline
@@ -299,30 +438,22 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									starRating={article.starRating}
 								/>
 							</div>
-						</div>
-						<div
-							css={css([
-								grid.column.centre,
-								tabletRow(3),
-								leftColRow(2),
-							])}
+						</GridItem>
+						<GridItem
+							area="standfirst"
+							layoutType={layoutType}
+							element="div"
 						>
 							<Standfirst
 								format={format}
 								standfirst={article.standfirst}
 							/>
-						</div>
-						<aside
-							css={[
-								css(grid.column.centre),
-								css`
-									${from.leftCol} {
-										${grid.column.left};
-										grid-row: 3;
-										align-self: start;
-									}
-								`,
-							]}
+						</GridItem>
+						<GridItem
+							area="meta"
+							layoutType={layoutType}
+							columns={{ leftCol: 'left' }}
+							element="aside"
 						>
 							<div css={maxWidth}>
 								<div css={stretchLines}>
@@ -435,8 +566,12 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									)}
 								</div>
 							)}
-						</aside>
-						<div css={css(grid.column.centre)}>
+						</GridItem>
+						<GridItem
+							area="body"
+							layoutType={layoutType}
+							element="div"
+						>
 							{/* Only show Listen to Article button on App landscape views */}
 							{isApps && (
 								<Hide until="leftCol">
@@ -572,20 +707,21 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									}
 								/>
 							</ArticleContainer>
-						</div>
-						<div
-							css={[
-								css(grid.column.centre),
-								css`
-									display: none;
-									${from.desktop} {
-										display: block;
-										padding-top: 6px;
-										${grid.column.right};
-										grid-row: 1 / span 999;
-									}
-								`,
-							]}
+						</GridItem>
+						<GridItem
+							area="right-column"
+							layoutType={layoutType}
+							columns={{ desktop: 'right' }}
+							customCss={css`
+								display: none;
+								${from.desktop} {
+									display: block;
+									padding-top: 6px;
+									${grid.column.right};
+									grid-row: 1 / span 999;
+								}
+							`}
+							element="aside"
 						>
 							<Island
 								priority="feature"
@@ -608,7 +744,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									}
 								/>
 							</Island>
-						</div>
+						</GridItem>
 					</div>
 				</article>
 
