@@ -102,7 +102,7 @@ const ABTests: ABTest[] = [
 		status: "ON",
 		audienceSize: 10 / 100,
 		audienceSpace: "A",
-		groups: ["control"],
+		groups: ["variant-detect"],
 		shouldForceMetricsCollection: false,
 	},
 	{

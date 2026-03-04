@@ -210,9 +210,9 @@ const testName = 'growth-admiral-adblock-recovery';
 export const AdmiralScript = () => {
 	const { renderingTarget } = useConfig();
 	const abTests = useBetaAB();
-	const isInControlGroup =
-		abTests?.isUserInTestGroup(testName, 'control') ?? false;
-	const variantName = isInControlGroup ? 'control' : undefined;
+	const isInVariantGroup =
+		abTests?.isUserInTestGroup(testName, 'variant-detect') ?? false;
+	const variantName = isInVariantGroup ? 'variant-detect' : undefined;
 
 	useEffect(() => {
 		/**
@@ -220,13 +220,13 @@ export const AdmiralScript = () => {
 		 *
 		 * - Should not run if the CMP is due to show
 		 * - Should only run in the US
-		 * - Should only run if in the AB test (control group)
+		 * - Should only run if in the AB test (variant-detect)
 		 * - Should not run if the gu_hide_support_messaging cookie is set
 		 * - Should not run for content marked as: shouldHideAdverts, shouldHideReaderRevenue, isSensitive
 		 * - Should not run for paid-content sponsorship type (includes Hosted Content)
 		 * - Should not run for certain sections
 		 *
-		 * Control group loads the script but the modal will not be shown.
+		 * Variant group loads the script but the modal will not be shown.
 		 */
 		const page = window.guardian.config.page;
 		if (!window.guardian.config.switches.consentManagement) return;
@@ -242,7 +242,7 @@ export const AdmiralScript = () => {
 				const shouldRun =
 					!willShowPrivacyMessage &&
 					isInUsa() &&
-					isInControlGroup &&
+					isInVariantGroup &&
 					!getCookie({
 						name: 'gu_hide_support_messaging',
 						shouldMemoize: true,
@@ -319,7 +319,7 @@ export const AdmiralScript = () => {
 			isCancelled = true;
 			admiralScript?.parentNode?.removeChild(admiralScript);
 		};
-	}, [isInControlGroup, variantName, renderingTarget]);
+	}, [isInVariantGroup, variantName, renderingTarget]);
 
 	return null;
 };
