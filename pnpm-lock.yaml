@@ -341,8 +341,8 @@ importers:
         specifier: 18.1.1
         version: 18.1.1(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@guardian/libs@28.0.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3))(@guardian/source@11.3.0(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3))(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/support-dotcom-components':
-        specifier: 8.4.0
-        version: 8.4.0(@guardian/libs@28.0.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.8.0)(zod@4.1.12)
+        specifier: 8.4.1
+        version: 8.4.1(@guardian/libs@28.0.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.8.0)(zod@4.1.12)
       '@guardian/tsconfig':
         specifier: 0.2.0
         version: 0.2.0
@@ -2684,8 +2684,8 @@ packages:
       typescript:
         optional: true
 
-  '@guardian/support-dotcom-components@8.4.0':
-    resolution: {integrity: sha512-GXAYWoV7CB0lw6tdvMQptepDwnTBjRJceYBjDp0yVgR2eVrDJYSbmOzEhxDWxvani+dsrwrUy72Fm0mn3Kqd7Q==}
+  '@guardian/support-dotcom-components@8.4.1':
+    resolution: {integrity: sha512-2WAUNO8L6PGWT3w+TFfpTyEU7sUWeVU6poFu1bo/xPL0btZv9hMjp81qYbVzTRu1H7zg/hKGzwqMfSZYB8tG4g==}
     peerDependencies:
       '@guardian/libs': ^22.0.0
       '@guardian/ophan-tracker-js': 2.8.0
@@ -10003,32 +10003,32 @@ snapshots:
       '@aws-sdk/util-endpoints': 3.996.0
       '@aws-sdk/util-user-agent-browser': 3.972.3
       '@aws-sdk/util-user-agent-node': 3.972.11
-      '@smithy/config-resolver': 4.4.6
-      '@smithy/core': 3.23.3
-      '@smithy/fetch-http-handler': 5.3.9
-      '@smithy/hash-node': 4.2.8
-      '@smithy/invalid-dependency': 4.2.8
-      '@smithy/middleware-content-length': 4.2.8
-      '@smithy/middleware-endpoint': 4.4.17
-      '@smithy/middleware-retry': 4.4.34
-      '@smithy/middleware-serde': 4.2.9
-      '@smithy/middleware-stack': 4.2.8
-      '@smithy/node-config-provider': 4.3.8
-      '@smithy/node-http-handler': 4.4.10
-      '@smithy/protocol-http': 5.3.8
-      '@smithy/smithy-client': 4.11.6
-      '@smithy/types': 4.12.0
-      '@smithy/url-parser': 4.2.8
-      '@smithy/util-base64': 4.3.0
-      '@smithy/util-body-length-browser': 4.2.0
-      '@smithy/util-body-length-node': 4.2.1
-      '@smithy/util-defaults-mode-browser': 4.3.33
-      '@smithy/util-defaults-mode-node': 4.2.36
-      '@smithy/util-endpoints': 3.2.8
-      '@smithy/util-middleware': 4.2.8
-      '@smithy/util-retry': 4.2.8
-      '@smithy/util-utf8': 4.2.0
-      '@smithy/util-waiter': 4.2.8
+      '@smithy/config-resolver': 4.4.7
+      '@smithy/core': 3.23.4
+      '@smithy/fetch-http-handler': 5.3.10
+      '@smithy/hash-node': 4.2.9
+      '@smithy/invalid-dependency': 4.2.9
+      '@smithy/middleware-content-length': 4.2.9
+      '@smithy/middleware-endpoint': 4.4.18
+      '@smithy/middleware-retry': 4.4.35
+      '@smithy/middleware-serde': 4.2.10
+      '@smithy/middleware-stack': 4.2.9
+      '@smithy/node-config-provider': 4.3.9
+      '@smithy/node-http-handler': 4.4.11
+      '@smithy/protocol-http': 5.3.9
+      '@smithy/smithy-client': 4.11.7
+      '@smithy/types': 4.12.1
+      '@smithy/url-parser': 4.2.9
+      '@smithy/util-base64': 4.3.1
+      '@smithy/util-body-length-browser': 4.2.1
+      '@smithy/util-body-length-node': 4.2.2
+      '@smithy/util-defaults-mode-browser': 4.3.34
+      '@smithy/util-defaults-mode-node': 4.2.37
+      '@smithy/util-endpoints': 3.2.9
+      '@smithy/util-middleware': 4.2.9
+      '@smithy/util-retry': 4.2.9
+      '@smithy/util-utf8': 4.2.1
+      '@smithy/util-waiter': 4.2.9
       tslib: 2.6.2
     transitivePeerDependencies:
       - aws-crt
@@ -10668,10 +10668,10 @@ snapshots:
   '@aws-sdk/dynamodb-codec@3.972.13':
     dependencies:
       '@aws-sdk/core': 3.973.12
-      '@smithy/core': 3.23.3
-      '@smithy/smithy-client': 4.11.6
-      '@smithy/types': 4.12.0
-      '@smithy/util-base64': 4.3.0
+      '@smithy/core': 3.23.4
+      '@smithy/smithy-client': 4.11.7
+      '@smithy/types': 4.12.1
+      '@smithy/util-base64': 4.3.1
       tslib: 2.6.2
 
   '@aws-sdk/endpoint-cache@3.972.2':
@@ -10684,9 +10684,9 @@ snapshots:
       '@aws-sdk/client-dynamodb': 3.996.0
       '@aws-sdk/core': 3.973.12
       '@aws-sdk/util-dynamodb': 3.996.0(@aws-sdk/client-dynamodb@3.996.0)
-      '@smithy/core': 3.23.3
-      '@smithy/smithy-client': 4.11.6
-      '@smithy/types': 4.12.0
+      '@smithy/core': 3.23.4
+      '@smithy/smithy-client': 4.11.7
+      '@smithy/types': 4.12.1
       tslib: 2.6.2
 
   '@aws-sdk/middleware-bucket-endpoint@3.972.3':
@@ -10703,9 +10703,9 @@ snapshots:
     dependencies:
       '@aws-sdk/endpoint-cache': 3.972.2
       '@aws-sdk/types': 3.973.1
-      '@smithy/node-config-provider': 4.3.8
-      '@smithy/protocol-http': 5.3.8
-      '@smithy/types': 4.12.0
+      '@smithy/node-config-provider': 4.3.9
+      '@smithy/protocol-http': 5.3.9
+      '@smithy/types': 4.12.1
       tslib: 2.6.2
 
   '@aws-sdk/middleware-expect-continue@3.972.3':
@@ -12620,7 +12620,7 @@ snapshots:
       react: 18.3.1
       typescript: 5.5.3
 
-  '@guardian/support-dotcom-components@8.4.0(@guardian/libs@28.0.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.8.0)(zod@4.1.12)':
+  '@guardian/support-dotcom-components@8.4.1(@guardian/libs@28.0.0(@guardian/ophan-tracker-js@2.8.0)(tslib@2.6.2)(typescript@5.5.3))(@guardian/ophan-tracker-js@2.8.0)(zod@4.1.12)':
     dependencies:
       '@aws-sdk/client-cloudwatch': 3.995.0
       '@aws-sdk/client-dynamodb': 3.996.0
