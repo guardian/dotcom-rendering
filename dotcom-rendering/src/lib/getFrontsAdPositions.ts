@@ -112,11 +112,11 @@ const canInsertMobileAd =
 		];
 
 		/**
-		 * Additional rules exist for "beta" fronts which have primary and secondary level containers
+		 * Additional rules exist for fronts which have primary and secondary level containers
 		 * - Is NOT before a secondary level container OR is the top container and is large.
 		 * - Is NOT before a branded container
 		 */
-		const betaFrontRules = [
+		const secondaryFrontRules = [
 			!isBeforeSecondaryLevelContainer(index, collections) ||
 				(index === 0 && getCollectionHeight(collection) >= 3),
 			!isBeforeBrandedContainer(index, collections),
@@ -124,7 +124,7 @@ const canInsertMobileAd =
 
 		// Ad insertion is possible if every condition is met
 		return hasSecondaryContainers
-			? [...rules, ...betaFrontRules].every(Boolean)
+			? [...rules, ...secondaryFrontRules].every(Boolean)
 			: rules.every(Boolean);
 	};
 
@@ -380,24 +380,6 @@ const getDesktopAdPositions = (
 			const prevCollection = collections[index - 1];
 			const isFirstCollection = isUndefined(prevCollection);
 
-			console.log(
-				collection.collectionType,
-				{ heightSinceAd, pageId, collection, prevCollection, index },
-				'can insertDesktopAd? ',
-				!isFirstCollection &&
-					canInsertDesktopAd(
-						heightSinceAd,
-						pageId,
-						collection,
-						prevCollection,
-						index,
-					),
-			);
-			// console.log(collection.collectionType, {heightSinceAd,
-			// 	pageId,
-			// 	collection,
-			// 	prevCollection,
-			// 	index})
 			if (
 				!isFirstCollection &&
 				canInsertDesktopAd(
