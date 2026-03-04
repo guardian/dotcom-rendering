@@ -85,8 +85,8 @@ const configs = [
 	{
 		pageIds: [
 			'sport/winter-paralympics-2026',
-			'global/ng-interactive/2026/feb/27/2026-winter-paralympics-results',
-			'global/ng-interactive/2026/feb/27/2026-winter-paralympics-medal-table',
+			'sport/ng-interactive/2026/mar/04/2026-winter-paralympics-results',
+			'sport/ng-interactive/2026/mar/04/2026-winter-paralympics-medal-table',
 		],
 		tagIds: [],
 		textColor: palette.neutral[7],
@@ -98,11 +98,11 @@ const configs = [
 		links: [
 			{
 				label: 'Results',
-				id: 'global/ng-interactive/2026/feb/27/2026-winter-paralympics-results',
+				id: 'sport/ng-interactive/2026/mar/04/2026-winter-paralympics-results',
 			},
 			{
 				label: 'Medal table',
-				id: 'global/ng-interactive/2026/feb/27/2026-winter-paralympics-medal-table',
+				id: 'sport/ng-interactive/2026/mar/04/2026-winter-paralympics-medal-table',
 			},
 			{
 				label: 'Full coverage',
