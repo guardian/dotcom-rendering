@@ -2696,7 +2696,11 @@ const captionTextLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleSpecial.Labs:
 			switch (design) {
 				case ArticleDesign.Gallery:
+				case ArticleDesign.HostedGallery:
 					return sourcePalette.neutral[86];
+				case ArticleDesign.HostedArticle:
+				case ArticleDesign.HostedVideo:
+					return sourcePalette.neutral[46];
 				default:
 					return sourcePalette.neutral[20];
 			}
@@ -3431,7 +3435,13 @@ const articleBorderLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleSpecial.SpecialReportAlt:
 			return transparentColour(sourcePalette.neutral[60], 0.3);
 		case ArticleSpecial.Labs:
-			return sourcePalette.neutral[60];
+			switch (design) {
+				case ArticleDesign.HostedArticle:
+				case ArticleDesign.HostedVideo:
+					return sourcePalette.neutral[86];
+				default:
+					return sourcePalette.neutral[60];
+			}
 		default:
 			switch (design) {
 				case ArticleDesign.Picture:
@@ -3480,7 +3490,15 @@ const straightLinesLight: PaletteFunction = (format) => {
 	) {
 		return transparentColour(sourcePalette.neutral[60], 0.5);
 	}
-	if (format.theme === ArticleSpecial.Labs) return sourcePalette.neutral[60];
+	if (format.theme === ArticleSpecial.Labs) {
+		if (
+			format.design === ArticleDesign.HostedArticle ||
+			format.design === ArticleDesign.HostedVideo
+		) {
+			return sourcePalette.neutral[86];
+		}
+		return sourcePalette.neutral[60];
+	}
 	return sourcePalette.neutral[86];
 };
 
@@ -7994,6 +8012,18 @@ const paletteColours = {
 	'--slideshow-pagination-dot-active': {
 		light: slideshowPaginationDotActiveLight,
 		dark: slideshowPaginationDotActiveDark,
+	},
+	'--slim-homepage-most-viewed-big-number': {
+		light: () => sourcePalette.neutral[60],
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--slim-homepage-most-viewed-header': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[46],
+	},
+	'--slim-homepage-most-viewed-headline': {
+		light: () => sourcePalette.neutral[0],
+		dark: () => sourcePalette.neutral[0],
 	},
 	'--speech-bubble-background': {
 		light: speechBubbleBackgroundLight,
