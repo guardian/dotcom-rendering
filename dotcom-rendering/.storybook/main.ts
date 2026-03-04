@@ -103,7 +103,6 @@ const webpackConfig = (config: Configuration) => {
 	const rules = config.module?.rules ?? [];
 
 	config.resolve ??= {};
-	// config.resolve.alias ??= {};
 
 	config.resolve.alias = {
 		...config.resolve?.alias,
