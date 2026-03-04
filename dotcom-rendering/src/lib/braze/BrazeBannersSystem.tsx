@@ -889,7 +889,7 @@ export const BrazeBannersSystemDisplay = ({
 									max-width: 660px;
 									grid-template:
 										'. .'
-										'copy-container close-button' / auto 0px;
+										'copy-container close-button' / 100% 0px;
 								}
 						  `
 						: undefined
