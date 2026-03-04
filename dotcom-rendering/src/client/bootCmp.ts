@@ -34,12 +34,13 @@ const submitConsentToOphan = async (renderingTarget: RenderingTarget) => {
 			};
 		}
 		if (consentState.aus) {
+			// Similar to USNAT, we check for both the globalcmpUUID and ccpaUUID cookies for users who may have interacted with the CCPA banner before the migration to AUS. The globalcmpUUID cookie is set when the AUS banner is interacted with, and the ccpaUUID cookie is set when the CCPA banner is interacted with. We need to check both cookies to ensure we have a consentUUID.
+			const consentUUID =
+				getCookie({ name: 'globalcmpUUID' }) ??
+				getCookie({ name: 'ccpaUUID' });
 			return {
 				consentJurisdiction: 'AUS',
-				consentUUID: getCookie({ name: 'ccpaUUID' }) ?? '',
-				/*consent =
-						getCookie({ name: 'consentStatus' }) ?? '';
-						*/
+				consentUUID: consentUUID ?? '',
 				consent: consentState.aus.personalisedAdvertising
 					? 'true'
 					: 'false',
