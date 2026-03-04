@@ -546,7 +546,6 @@ export const Card = ({
 	const avatarPosition = decideAvatarPosition(
 		mediaPositionOnMobile,
 		mediaPositionOnDesktop,
-		isBetaContainer,
 	);
 
 	const backgroundColour = () => {
@@ -873,7 +872,6 @@ export const Card = ({
 				minWidthInPixels={minWidthInPixels}
 				mediaType={media?.type}
 				gapSizes={getGapSizes()}
-				isBetaContainer={isBetaContainer}
 			>
 				{/**
 				 * Waveform for podcasts is absolutely positioned at bottom of
