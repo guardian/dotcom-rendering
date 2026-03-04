@@ -44,19 +44,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: true,
 	},
 	{
-		name: "commercial-user-module-liveramp",
-		description:
-			"Test measuring ad targeting from LiveRamp's identityLinkIdSystem module integration",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: `2026-03-04`,
-		type: "client",
-		status: "ON",
-		audienceSize: 10 / 100,
-		audienceSpace: "B",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: true,
-	},
-	{
 		name: "webex-football-redesign",
 		description: "Testing the Redesign for the football pages",
 		owners: ["dotcom.platform@theguardian.com"],
