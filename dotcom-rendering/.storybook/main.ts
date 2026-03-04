@@ -103,24 +103,33 @@ const webpackConfig = (config: Configuration) => {
 	const rules = config.module?.rules ?? [];
 
 	config.resolve ??= {};
-	config.resolve.alias ??= {};
+	// config.resolve.alias ??= {};
 
-	// Mock JSDOM for storybook - it relies on native node.js packages
-	// Allows us to use enhancers in stories for better testing of components & full articles
-	config.resolve.alias['jsdom$'] = path.resolve(
-		__dirname,
-		'./mocks/jsdom.ts',
-	);
+	config.resolve.alias = {
+		...config.resolve?.alias,
 
-	// log4js tries to call "fs" in storybook -- we can ignore it
-	config.resolve.alias[
-		`${path.resolve(__dirname, '../src/server/lib/logging')}$`
-	] = path.resolve(__dirname, './mocks/log4js.ts');
+		Buffer: 'buffer',
+		react: 'react',
+		'react-dom': 'react-dom',
 
-	// Mock BridgetApi for storybook
-	config.resolve.alias[
-		`${path.resolve(__dirname, '../src/lib/bridgetApi')}$`
-	] = path.resolve(__dirname, './mocks/bridgetApi.ts');
+		// Mock JSDOM for storybook - it relies on native node.js packages
+		// Allows us to use enhancers in stories for better testing of components & full articles
+		jsdom$: path.resolve(__dirname, './mocks/jsdom.ts'),
+
+		// log4js tries to call "fs" in storybook -- we can ignore it
+		[`${path.resolve(__dirname, '../src/server/lib/logging')}$`]:
+			path.resolve(__dirname, './mocks/log4js.ts'),
+
+		// Mock BridgetApi for storybook
+		[`${path.resolve(__dirname, '../src/lib/bridgetApi')}$`]: path.resolve(
+			__dirname,
+			'./mocks/bridgetApi.ts',
+		),
+
+		// Mock contributions API so getAuthHeaders does not hang on consent state in Storybook
+		[`${path.resolve(__dirname, '../src/lib/contributions')}$`]:
+			path.resolve(__dirname, './mocks/contributions.ts'),
+	};
 
 	const webpackLoaders = getLoaders('client.web');
 
@@ -149,12 +158,7 @@ const webpackConfig = (config: Configuration) => {
 	config.resolve.modules = [
 		...((config && config.resolve && config.resolve.modules) || []),
 	];
-	config.resolve.alias = {
-		...config.resolve.alias,
-		Buffer: 'buffer',
-		react: 'react',
-		'react-dom': 'react-dom',
-	};
+
 	return config;
 };
 

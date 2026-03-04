@@ -69,6 +69,7 @@ const ReaderRevenueLinksRemote = ({
 
 		const hideSupportMessagingForUser =
 			shouldHideSupportMessaging(isSignedIn);
+
 		if (hideSupportMessagingForUser === 'Pending') {
 			// We don't yet know the user's supporter status
 			return;
@@ -106,9 +107,9 @@ const ReaderRevenueLinksRemote = ({
 				return (
 					module.name === 'SignInPromptHeader'
 						? /* webpackChunkName: "sign-in-prompt-header" */
-						  import(`./marketing/header/SignInPromptHeader`)
+						  import('./marketing/header/SignInPromptHeader')
 						: /* webpackChunkName: "header" */
-						  import(`./marketing/header/Header`)
+						  import('./marketing/header/Header')
 				).then(
 					(headerModule: {
 						[key: string]: React.ElementType<HeaderProps>;
