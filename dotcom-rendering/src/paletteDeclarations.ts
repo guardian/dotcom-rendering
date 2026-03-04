@@ -2696,7 +2696,11 @@ const captionTextLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleSpecial.Labs:
 			switch (design) {
 				case ArticleDesign.Gallery:
+				case ArticleDesign.HostedGallery:
 					return sourcePalette.neutral[86];
+				case ArticleDesign.HostedArticle:
+				case ArticleDesign.HostedVideo:
+					return sourcePalette.neutral[46];
 				default:
 					return sourcePalette.neutral[20];
 			}
@@ -3431,7 +3435,13 @@ const articleBorderLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleSpecial.SpecialReportAlt:
 			return transparentColour(sourcePalette.neutral[60], 0.3);
 		case ArticleSpecial.Labs:
-			return sourcePalette.neutral[60];
+			switch (design) {
+				case ArticleDesign.HostedArticle:
+				case ArticleDesign.HostedVideo:
+					return sourcePalette.neutral[86];
+				default:
+					return sourcePalette.neutral[60];
+			}
 		default:
 			switch (design) {
 				case ArticleDesign.Picture:
@@ -3480,7 +3490,15 @@ const straightLinesLight: PaletteFunction = (format) => {
 	) {
 		return transparentColour(sourcePalette.neutral[60], 0.5);
 	}
-	if (format.theme === ArticleSpecial.Labs) return sourcePalette.neutral[60];
+	if (format.theme === ArticleSpecial.Labs) {
+		if (
+			format.design === ArticleDesign.HostedArticle ||
+			format.design === ArticleDesign.HostedVideo
+		) {
+			return sourcePalette.neutral[86];
+		}
+		return sourcePalette.neutral[60];
+	}
 	return sourcePalette.neutral[86];
 };
 
@@ -6283,6 +6301,12 @@ const crosswordCluesHeaderBorderBottom: PaletteFunction = () =>
 const crosswordTextLight: PaletteFunction = () => sourcePalette.neutral[7];
 const crosswordTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
+const storylinesBackground: PaletteFunction = () => sourcePalette.neutral[93];
+const storylinesBorder: PaletteFunction = () => sourcePalette.neutral[86];
+const storylinesTitles: PaletteFunction = () => sourcePalette.brand[400];
+const storylinesActiveTab: PaletteFunction = () => sourcePalette.neutral[60];
+const storylinesInactiveTab: PaletteFunction = () => sourcePalette.neutral[38];
+
 // ----- Palette ----- //
 
 /**
@@ -7989,6 +8013,18 @@ const paletteColours = {
 		light: slideshowPaginationDotActiveLight,
 		dark: slideshowPaginationDotActiveDark,
 	},
+	'--slim-homepage-most-viewed-big-number': {
+		light: () => sourcePalette.neutral[60],
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--slim-homepage-most-viewed-header': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[46],
+	},
+	'--slim-homepage-most-viewed-headline': {
+		light: () => sourcePalette.neutral[0],
+		dark: () => sourcePalette.neutral[0],
+	},
 	'--speech-bubble-background': {
 		light: speechBubbleBackgroundLight,
 		dark: speechBubbleBackgroundLight,
@@ -8076,6 +8112,26 @@ const paletteColours = {
 	'--star-rating-fill': {
 		light: starRatingFillColourLight,
 		dark: starRatingFillColourDark,
+	},
+	'--storylines-active-tab': {
+		light: storylinesActiveTab,
+		dark: storylinesActiveTab,
+	},
+	'--storylines-background': {
+		light: storylinesBackground,
+		dark: storylinesBackground,
+	},
+	'--storylines-border': {
+		light: storylinesBorder,
+		dark: storylinesBorder,
+	},
+	'--storylines-inactive-tab': {
+		light: storylinesInactiveTab,
+		dark: storylinesInactiveTab,
+	},
+	'--storylines-titles': {
+		light: storylinesTitles,
+		dark: storylinesTitles,
 	},
 	'--straight-lines': {
 		light: straightLinesLight,

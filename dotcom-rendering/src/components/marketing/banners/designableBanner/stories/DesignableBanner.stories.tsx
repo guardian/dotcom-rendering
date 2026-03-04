@@ -1,31 +1,68 @@
-import type {
-	BannerDesignImage,
-	SelectedAmountsVariant,
-	TickerSettings,
-} from '@guardian/support-dotcom-components/dist/shared/types';
+import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import lzstring from 'lz-string';
-import {
-	choiceCardsSettings,
-	choiceCardsWithMixedDestinations,
-} from '../../../lib/storybook';
-import {
-	contentNoHeading,
-	design,
-	mobileContentNoHeading,
-	props,
-	stringToHexColour,
-	tracking,
-} from '../../utils/storybook';
+import { choiceCardsSettings } from '../../../lib/storybook';
+import { design, stringToHexColour, tracking } from '../../utils/storybook';
 import { DesignableBannerUnvalidated as DesignableBanner } from '../DesignableBanner';
 
 type WithJsonProps<T> = T & { json?: string };
 type Props = WithJsonProps<React.ComponentProps<typeof DesignableBanner>>;
+
 const meta: Meta<Props> = {
 	component: DesignableBanner,
 	title: 'Components/marketing/DesignableBanner',
 	args: {
-		...props,
+		bannerChannel: 'contributions',
+		isSupporter: false,
+		countryCode: 'GB',
+		tracking,
+		content: {
+			heading: 'Show your support for reader-funded journalism',
+			paragraphs: [
+				'Fearless, investigative reporting shapes a fairer world. At the Guardian, our independence allows us to chase the truth wherever it takes us. <strong>We have no shareholders.</strong> No vested interests. Just the determination and passion to bring readers quality reporting, including groundbreaking investigations.',
+				'We do not shy away. And we provide all this for free, for everyone.',
+			],
+			highlightedText:
+				'Show your support today from just £1, or sustain us long term with a little more. Thank you.',
+			cta: {
+				text: 'Support once',
+				baseUrl: 'https://support.theguardian.com/contribute/one-off',
+			},
+			secondaryCta: {
+				type: SecondaryCtaType.Custom,
+				cta: {
+					text: 'Support monthly',
+					baseUrl:
+						'https://support.theguardian.com/contribute/recurring',
+				},
+			},
+		},
+		mobileContent: {
+			heading: 'Show your support for reader-funded journalism',
+			paragraphs: [
+				'Fearless, investigative reporting shapes a fairer world. At the Guardian, our independence allows us to chase the truth wherever it takes us. <strong>We have no shareholders.</strong> No vested interests. Just the determination and passion to bring readers quality reporting, including groundbreaking investigations.',
+				'We do not shy away. And we provide all this for free, for everyone.',
+			],
+			highlightedText:
+				'Show your support today from just £1, or sustain us long term with a little more. Thank you.',
+			cta: {
+				text: 'Support us',
+				baseUrl: 'https://support.theguardian.com/contribute/one-off',
+			},
+			secondaryCta: {
+				type: SecondaryCtaType.Custom,
+				cta: {
+					text: 'Learn more',
+					baseUrl:
+						'https://support.theguardian.com/contribute/recurring',
+				},
+			},
+		},
+		articleCounts: {
+			for52Weeks: 12,
+			forTargetedWeeks: 12,
+		},
+		design,
 		json: '',
 	},
 	render: ({ json, ...args }) => {
@@ -40,79 +77,116 @@ const meta: Meta<Props> = {
 		);
 	},
 };
+
 export default meta;
 
 type Story = StoryObj<Props>;
+
+// Base content objects to avoid undefined issues
+const baseContent = {
+	heading: 'Show your support for reader-funded journalism',
+	paragraphs: [
+		'Fearless, investigative reporting shapes a fairer world. At the Guardian, our independence allows us to chase the truth wherever it takes us. <strong>We have no shareholders.</strong> No vested interests. Just the determination and passion to bring readers quality reporting, including groundbreaking investigations.',
+		'We do not shy away. And we provide all this for free, for everyone.',
+	],
+	highlightedText:
+		'Show your support today from just £1, or sustain us long term with a little more. Thank you.',
+	cta: {
+		text: 'Support once',
+		baseUrl: 'https://support.theguardian.com/contribute/one-off',
+	},
+	secondaryCta: {
+		type: SecondaryCtaType.Custom,
+		cta: {
+			text: 'Support monthly',
+			baseUrl: 'https://support.theguardian.com/contribute/recurring',
+		},
+	},
+};
+
+const baseMobileContent = {
+	heading: 'Show your support for reader-funded journalism',
+	paragraphs: [
+		'Fearless, investigative reporting shapes a fairer world. At the Guardian, our independence allows us to chase the truth wherever it takes us. <strong>We have no shareholders.</strong> No vested interests. Just the determination and passion to bring readers quality reporting, including groundbreaking investigations.',
+		'We do not shy away. And we provide all this for free, for everyone.',
+	],
+	highlightedText:
+		'Show your support today from just £1, or sustain us long term with a little more. Thank you.',
+	cta: {
+		text: 'Support us',
+		baseUrl: 'https://support.theguardian.com/contribute/one-off',
+	},
+	secondaryCta: {
+		type: SecondaryCtaType.Custom,
+		cta: {
+			text: 'Learn more',
+			baseUrl: 'https://support.theguardian.com/contribute/recurring',
+		},
+	},
+};
+
 export const Default: Story = {
 	name: 'Basic DesignableBanner',
-};
-
-const regularChoiceCardAmounts: SelectedAmountsVariant = {
-	testName: 'Storybook_test',
-	variantName: 'CONTROL',
-	defaultContributionType: 'MONTHLY',
-	displayContributionType: ['ONE_OFF', 'MONTHLY', 'ANNUAL'],
-	amountsCardData: {
-		// Card should show £5 (default), £10 and "other" buttons
-		ONE_OFF: {
-			amounts: [5, 10, 15, 20],
-			defaultAmount: 5,
-			hideChooseYourAmount: false,
+	args: {
+		...meta.args,
+		content: {
+			heading: 'Show your support for reader-funded journalism',
+			paragraphs: [
+				'Fearless, investigative reporting shapes a fairer world. At the Guardian, our independence allows us to chase the truth wherever it takes us. <strong>We have no shareholders.</strong> No vested interests. Just the determination and passion to bring readers quality reporting, including groundbreaking investigations.',
+				'We do not shy away. And we provide all this for free, for everyone.',
+			],
+			highlightedText:
+				'Show your support today from just £1, or sustain us long term with a little more. Thank you.',
+			cta: {
+				text: 'Support once',
+				baseUrl: 'https://support.theguardian.com/contribute/one-off',
+			},
+			secondaryCta: {
+				type: SecondaryCtaType.Custom,
+				cta: {
+					text: 'Support monthly',
+					baseUrl:
+						'https://support.theguardian.com/contribute/recurring',
+				},
+			},
 		},
-		// Card should initially display showing Monthly amounts
-		// Card should show £3, £6 and £10 (default) buttons
-		MONTHLY: {
-			amounts: [3, 6, 10],
-			defaultAmount: 10,
-			hideChooseYourAmount: true,
+		mobileContent: {
+			heading: 'Show your support for reader-funded journalism',
+			paragraphs: [
+				'Fearless, investigative reporting shapes a fairer world. At the Guardian, our independence allows us to chase the truth wherever it takes us. <strong>We have no shareholders.</strong> No vested interests. Just the determination and passion to bring readers quality reporting, including groundbreaking investigations.',
+				'We do not shy away. And we provide all this for free, for everyone.',
+			],
+			highlightedText:
+				'Show your support today from just £1, or sustain us long term with a little more. Thank you.',
+			cta: {
+				text: 'Support us',
+				baseUrl: 'https://support.theguardian.com/contribute/one-off',
+			},
+			secondaryCta: {
+				type: SecondaryCtaType.Custom,
+				cta: {
+					text: 'Learn more',
+					baseUrl:
+						'https://support.theguardian.com/contribute/recurring',
+				},
+			},
 		},
-		// Card should only show £100 (default) with no "other" button
-		ANNUAL: {
-			amounts: [100],
-			defaultAmount: 100,
-			hideChooseYourAmount: true,
+		tracking: {
+			...tracking,
+			componentType: 'ACQUISITIONS_ENGAGEMENT_BANNER' as any,
 		},
+		articleCounts: {
+			forTargetedWeeks: 12,
+			for52Weeks: 12,
+		},
+		bannerChannel: 'contributions' as const,
 	},
-};
-const headerImage: BannerDesignImage = {
-	kind: 'Image',
-	mobileUrl:
-		'https://i.guim.co.uk/img/media/036510bc15ecdba97355f464006e3db5fbde9129/0_0_620_180/master/620.jpg?width=310&height=90&quality=100&s=01c604815a2f9980a1227c0d91ffa6b1',
-	tabletUrl:
-		'https://i.guim.co.uk/img/media/7030f9d98e368d6e5c7a34c643c76d7d1f5ac63c/0_0_1056_366/master/1056.jpg?width=528&height=183&quality=100&s=f0c02cddda84dfaf4ef261d91bd26159',
-	desktopUrl:
-		'https://i.guim.co.uk/img/media/3c1cb611785d3dccc2674636a6f692da1e2fcdb6/0_0_1392_366/master/1392.jpg?width=696&height=183&quality=100&s=5935c1ae5e8cbc5d9ed616bbadb3b09e',
-	altText: "Guardian: Our Planet can't Speak for itself",
-};
-
-const regularImage: BannerDesignImage = {
-	kind: 'Image',
-	mobileUrl:
-		'https://i.guim.co.uk/img/media/630a3735c02e195be89ab06fd1b8192959e282ab/0_0_1172_560/500.png?width=500&quality=75&s=937595b3f471d6591475955335c7c023',
-	tabletUrl:
-		'https://i.guim.co.uk/img/media/20cc6e0fa146574bb9c4ed410ac1a089fab02ce0/0_0_1428_1344/500.png?width=500&quality=75&s=fe64f647f74a3cb671f8035a473b895f',
-	desktopUrl:
-		'https://i.guim.co.uk/img/media/6c933a058d1ce37a5ad17f79895906150812dfee/0_0_1768_1420/500.png?width=500&quality=75&s=9277532ddf184a308e14218e3576543b',
-	altText: 'Example alt text',
-};
-
-const tickerSettings: TickerSettings = {
-	currencySymbol: '£',
-	copy: {
-		countLabel: '',
-		goalCopy: 'Goal',
-	},
-	tickerData: {
-		total: 500000,
-		goal: 1000000,
-	},
-	name: 'US',
 };
 
 export const WithThreeTierChoiceCards: Story = {
 	name: 'With three tier choice cards',
 	args: {
-		...meta.args,
+		...Default.args,
 		design: {
 			...design,
 			visual: {
@@ -124,7 +198,6 @@ export const WithThreeTierChoiceCards: Story = {
 			...tracking,
 			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
 		},
-		choiceCardAmounts: regularChoiceCardAmounts,
 		choiceCardsSettings,
 	},
 };
@@ -132,34 +205,49 @@ export const WithThreeTierChoiceCards: Story = {
 export const ThreeTierChoiceCardsWithHeaderImageAndCopy: Story = {
 	name: 'With three tier choice cards + header image + header copy',
 	args: {
-		...meta.args,
+		...WithThreeTierChoiceCards.args,
 		design: {
 			...design,
-			headerImage,
+			headerImage: {
+				mobileUrl:
+					'https://i.guim.co.uk/img/media/036510bc15ecdba97355f464006e3db5fbde9129/0_0_620_180/master/620.jpg?width=310&height=90&quality=100&s=01c604815a2f9980a1227c0d91ffa6b1',
+				tabletUrl:
+					'https://i.guim.co.uk/img/media/7030f9d98e368d6e5c7a34c643c76d7d1f5ac63c/0_0_1056_366/master/1056.jpg?width=528&height=183&quality=100&s=f0c02cddda84dfaf4ef261d91bd26159',
+				desktopUrl:
+					'https://i.guim.co.uk/img/media/3c1cb611785d3dccc2674636a6f692da1e2fcdb6/0_0_1392_366/master/1392.jpg?width=696&height=183&quality=100&s=5935c1ae5e8cbc5d9ed616bbadb3b09e',
+				altText: "Guardian: Our Planet can't Speak for itself",
+			},
 			visual: {
 				kind: 'ChoiceCards',
 				buttonColour: stringToHexColour('F1F8FC'),
 			},
 		},
-
-		tracking: {
-			...tracking,
-			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
-		},
-		choiceCardAmounts: regularChoiceCardAmounts,
-		choiceCardsSettings,
 	},
 };
 
 export const HeaderImageOnly: Story = {
 	name: 'With header image and no header copy',
 	args: {
-		...meta.args,
-		content: contentNoHeading,
-		mobileContent: mobileContentNoHeading,
+		...WithThreeTierChoiceCards.args,
+		content: {
+			...baseContent,
+			heading: undefined,
+		},
+		mobileContent: {
+			...baseMobileContent,
+			heading: undefined,
+		},
 		design: {
 			...design,
-			headerImage,
+			headerImage: {
+				mobileUrl:
+					'https://i.guim.co.uk/img/media/036510bc15ecdba97355f464006e3db5fbde9129/0_0_620_180/master/620.jpg?width=310&height=90&quality=100&s=01c604815a2f9980a1227c0d91ffa6b1',
+				tabletUrl:
+					'https://i.guim.co.uk/img/media/7030f9d98e368d6e5c7a34c643c76d7d1f5ac63c/0_0_1056_366/master/1056.jpg?width=528&height=183&quality=100&s=f0c02cddda84dfaf4ef261d91bd26159',
+				desktopUrl:
+					'https://i.guim.co.uk/img/media/3c1cb611785d3dccc2674636a6f692da1e2fcdb6/0_0_1392_366/master/1392.jpg?width=696&height=183&quality=100&s=5935c1ae5e8cbc5d9ed616bbadb3b09e',
+				altText: "Guardian: Our Planet can't Speak for itself",
+			},
 			visual: {
 				kind: 'ChoiceCards',
 				buttonColour: stringToHexColour('FFFFFF'),
@@ -172,22 +260,25 @@ export const HeaderImageOnly: Story = {
 				},
 			},
 		},
-		tracking: {
-			...tracking,
-			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
-		},
-		choiceCardAmounts: regularChoiceCardAmounts,
-		choiceCardsSettings,
 	},
 };
 
 export const MainImage: Story = {
 	name: 'With main image',
 	args: {
-		...meta.args,
+		...Default.args,
 		design: {
 			...design,
-			visual: regularImage,
+			visual: {
+				kind: 'Image' as const,
+				mobileUrl:
+					'https://i.guim.co.uk/img/media/630a3735c02e195be89ab06fd1b8192959e282ab/0_0_1172_560/500.png?width=500&quality=75&s=937595b3f471d6591475955335c7c023',
+				tabletUrl:
+					'https://i.guim.co.uk/img/media/20cc6e0fa146574bb9c4ed410ac1a089fab02ce0/0_0_1428_1344/500.png?width=500&quality=75&s=fe64f647f74a3cb671f8035a473b895f',
+				desktopUrl:
+					'https://i.guim.co.uk/img/media/6c933a058d1ce37a5ad17f79895906150812dfee/0_0_1768_1420/500.png?width=500&quality=75&s=9277532ddf184a308e14218e3576543b',
+				altText: 'Example alt text',
+			},
 		},
 		tracking: {
 			...tracking,
@@ -199,9 +290,15 @@ export const MainImage: Story = {
 export const DesignThreeAnimatedHeaderImage: Story = {
 	name: 'With animated header image',
 	args: {
-		...meta.args,
-		content: contentNoHeading,
-		mobileContent: mobileContentNoHeading,
+		...WithThreeTierChoiceCards.args,
+		content: {
+			...baseContent,
+			heading: undefined,
+		},
+		mobileContent: {
+			...baseMobileContent,
+			heading: undefined,
+		},
 		design: {
 			...design,
 			headerImage: {
@@ -225,59 +322,42 @@ export const DesignThreeAnimatedHeaderImage: Story = {
 				},
 			},
 		},
-		choiceCardAmounts: regularChoiceCardAmounts,
-		choiceCardsSettings,
 	},
 };
 
 export const WithTickerAndThreeTierChoiceCards: Story = {
 	name: 'With ticker + three tier choice cards',
 	args: {
-		...meta.args,
-		tickerSettings,
-		design: {
-			...design,
-			visual: {
-				kind: 'ChoiceCards',
-				buttonColour: stringToHexColour('F1F8FC'),
+		...WithThreeTierChoiceCards.args,
+		tickerSettings: {
+			currencySymbol: '£',
+			copy: {
+				countLabel: '',
+				goalCopy: 'Goal',
 			},
+			tickerData: {
+				total: 500000,
+				goal: 1000000,
+			},
+			name: 'US' as const,
 		},
-		tracking: {
-			...tracking,
-			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
-		},
-		choiceCardAmounts: regularChoiceCardAmounts,
-		choiceCardsSettings,
 	},
 };
 
 export const WithThreeTierChoiceCardsAndArticleCount: Story = {
 	name: 'With article count + three tier choice cards',
 	args: {
-		...meta.args,
+		...WithThreeTierChoiceCards.args,
 		separateArticleCountSettings: {
 			type: 'above',
 		},
-		design: {
-			...design,
-			visual: {
-				kind: 'ChoiceCards',
-				buttonColour: stringToHexColour('F1F8FC'),
-			},
-		},
-		tracking: {
-			...tracking,
-			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
-		},
-		choiceCardAmounts: regularChoiceCardAmounts,
-		choiceCardsSettings,
 	},
 };
 
 export const NoChoiceCardOrImage: Story = {
 	name: 'With no choice cards or image',
 	args: {
-		...meta.args,
+		...Default.args,
 		design: {
 			...design,
 			visual: undefined,
@@ -288,26 +368,58 @@ export const NoChoiceCardOrImage: Story = {
 export const WithMixedDestinations: Story = {
 	name: 'With destinationUrl on all choice cards',
 	args: {
-		...meta.args,
-		design: {
-			...design,
-			visual: {
-				kind: 'ChoiceCards',
-				buttonColour: stringToHexColour('F1F8FC'),
-			},
-		},
-		tracking: {
-			...tracking,
-			abTestVariant: 'THREE_TIER_CHOICE_CARDS',
-		},
-		choiceCardAmounts: regularChoiceCardAmounts,
-		choiceCardsSettings: choiceCardsWithMixedDestinations,
-	},
-	parameters: {
-		docs: {
-			description: {
-				story: 'Two out of three choice cards have destination set to checkout.',
-			},
+		...WithThreeTierChoiceCards.args,
+		choiceCardsSettings: {
+			choiceCards: [
+				{
+					product: {
+						supportTier: 'Contribution' as const,
+						ratePlan: 'Monthly' as const,
+					},
+					label: 'Support £5/month',
+					isDefault: false,
+					destination: 'LandingPage' as const,
+					benefits: [
+						{
+							copy: 'Give to the Guardian every month with Support',
+						},
+					],
+				},
+				{
+					product: {
+						supportTier: 'SupporterPlus' as const,
+						ratePlan: 'Monthly' as const,
+					},
+					label: 'Support £12/month',
+					isDefault: true,
+					destination: 'Checkout' as const,
+					benefitsLabel:
+						'Unlock <strong>All-access digital</strong> benefits:',
+					benefits: [
+						{
+							copy: '<strong>Unlimited</strong> access to the Guardian app',
+						},
+						{ copy: 'Unlimited access to our new Feast App' },
+						{ copy: 'Ad-free reading on all your devices' },
+						{
+							copy: 'Exclusive newsletters for subscribers',
+						},
+					],
+				},
+				{
+					product: {
+						supportTier: 'OneOff' as const,
+					},
+					label: 'One-time support',
+					isDefault: false,
+					destination: 'Checkout' as const,
+					benefits: [
+						{
+							copy: 'Support the Guardian with a one-time contribution',
+						},
+					],
+				},
+			],
 		},
 	},
 };
@@ -315,18 +427,19 @@ export const WithMixedDestinations: Story = {
 export const CollapsableWithThreeTierChoiceCards: Story = {
 	name: 'Collapsable with three tier choice cards',
 	args: {
-		...meta.args,
-		design: {
-			...design,
-			visual: {
-				kind: 'ChoiceCards',
-				buttonColour: stringToHexColour('F1F8FC'),
+		...WithThreeTierChoiceCards.args,
+		tickerSettings: {
+			currencySymbol: '£',
+			copy: {
+				countLabel: '',
+				goalCopy: 'Goal',
 			},
+			tickerData: {
+				total: 500000,
+				goal: 1000000,
+			},
+			name: 'US' as const,
 		},
-		tracking,
-		choiceCardAmounts: regularChoiceCardAmounts,
-		choiceCardsSettings,
-		tickerSettings,
 		separateArticleCountSettings: {
 			type: 'above',
 		},
@@ -337,12 +450,7 @@ export const CollapsableWithThreeTierChoiceCards: Story = {
 export const CollapsableWithMainImage: Story = {
 	name: 'Collapsable with main image',
 	args: {
-		...meta.args,
-		design: {
-			...design,
-			visual: regularImage,
-		},
-		tracking,
+		...MainImage.args,
 		isCollapsible: true,
 	},
 };
@@ -350,34 +458,33 @@ export const CollapsableWithMainImage: Story = {
 export const CollapsableMaybeLaterVariant: Story = {
 	name: 'Collapsable - Maybe later variant',
 	args: {
-		...meta.args,
-		design: {
-			...design,
-			visual: regularImage,
+		...CollapsableWithMainImage.args,
+		tracking: {
+			...tracking,
+			abTestVariant: 'COLLAPSABLE_V2_MAYBE_LATER',
 		},
-		tracking,
-		isCollapsible: true,
 	},
 };
 
 export const CollapsableWithThreeTierChoiceCardsMaybeLaterVariant: Story = {
 	name: 'Collapsable with three tier choice cards - Maybe later variant',
 	args: {
-		...meta.args,
-		design: {
-			...design,
-			visual: {
-				kind: 'ChoiceCards',
-				buttonColour: stringToHexColour('F1F8FC'),
-			},
+		...CollapsableWithThreeTierChoiceCards.args,
+		tracking: {
+			...tracking,
+			abTestVariant: 'COLLAPSABLE_V2_MAYBE_LATER',
 		},
-		tracking,
-		choiceCardAmounts: regularChoiceCardAmounts,
-		choiceCardsSettings,
-		tickerSettings,
-		separateArticleCountSettings: {
-			type: 'above',
+	},
+};
+
+export const WithReminder: Story = {
+	name: 'With contributions reminder',
+	args: {
+		...Default.args,
+		content: {
+			...baseContent,
+			heading: undefined,
 		},
-		isCollapsible: true,
+		mobileContent: baseMobileContent,
 	},
 };

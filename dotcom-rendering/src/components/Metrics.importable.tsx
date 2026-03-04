@@ -9,10 +9,11 @@ import {
 	bypassCoreWebVitalsSampling,
 	initCoreWebVitals,
 } from '@guardian/core-web-vitals';
-import { getCookie, isString, isUndefined } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
 import { useAB, useBetaAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
+import { useBrowserId } from '../lib/useBrowserId';
 import { useDetectAdBlock } from '../lib/useDetectAdBlock';
 import { usePageViewId } from '../lib/usePageViewId';
 import type { ServerSideTests } from '../types/config';
@@ -39,20 +40,6 @@ const shouldCollectMetricsForBetaTests = (userTestParticipations: string[]) => {
 	return userParticipationConfigs.some(
 		(test) => test.shouldForceMetricsCollection,
 	);
-};
-
-const useBrowserId = () => {
-	const [browserId, setBrowserId] = useState<string>();
-
-	useEffect(() => {
-		const cookie = getCookie({ name: 'bwid', shouldMemoize: true });
-
-		const id = isString(cookie) ? cookie : 'no-browser-id-available';
-
-		setBrowserId(id);
-	}, []);
-
-	return browserId;
 };
 
 const useDev = () => {

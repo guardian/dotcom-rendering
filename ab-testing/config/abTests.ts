@@ -21,6 +21,17 @@ import type { ABTest } from "./types.ts";
 
 const ABTests: ABTest[] = [
 	{
+		name: "webx-dark-mode-web",
+		description: "Dark mode accessibility feature test on web",
+		owners: ["dotcom.platform@theguardian.com"],
+		status: "ON",
+		expirationDate: "2027-04-09",
+		type: "server",
+		audienceSize: 0 / 100,
+		groups: ["enable"],
+		shouldForceMetricsCollection: false,
+	},
+	{
 		name: "commercial-prebid-v10",
 		description: "Testing Prebid.js v10 integration on DCR",
 		owners: ["commercial.dev@guardian.co.uk"],
@@ -49,7 +60,7 @@ const ABTests: ABTest[] = [
 		name: "webex-football-redesign",
 		description: "Testing the Redesign for the football pages",
 		owners: ["dotcom.platform@theguardian.com"],
-		expirationDate: `2026-02-28`,
+		expirationDate: `2026-04-22`,
 		type: "server",
 		status: "ON",
 		audienceSize: 0 / 100,
@@ -61,7 +72,7 @@ const ABTests: ABTest[] = [
 		name: "commercial-enable-spacefinder-on-interactives",
 		description: "Enable spacefinder on interactive articles on mobile web",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: `2026-02-28`,
+		expirationDate: `2026-03-14`,
 		type: "client",
 		status: "ON",
 		audienceSize: 0 / 100,
@@ -76,7 +87,7 @@ const ABTests: ABTest[] = [
 		owners: ["commercial.dev@guardian.co.uk"],
 		expirationDate: `2026-02-28`,
 		type: "client",
-		status: "ON",
+		status: "OFF",
 		audienceSize: 20 / 100,
 		audienceSpace: "A",
 		groups: ["control", "variant"],
@@ -108,6 +119,19 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
+		name: "fronts-and-curation-slim-homepage",
+		description:
+			"Test placing the Most Viewed and Deeply Read components in the right-hand column on the homepage.",
+		owners: ["fronts.and.curation@guardian.co.uk"],
+		status: "ON",
+		expirationDate: `2026-04-28`,
+		type: "server",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
+	{
 		name: "growth-holdback-group",
 		description:
 			"Test for 5% holdback group that does not qualify for any testing so long as the test is live in the RRCP",
@@ -118,6 +142,19 @@ const ABTests: ABTest[] = [
 		audienceSize: 5 / 100,
 		audienceSpace: "A",
 		groups: ["control"],
+		shouldForceMetricsCollection: false,
+	},
+	{
+		name: "fronts-and-curation-tag-page-storylines",
+		description:
+			"Testing the AI generated storylines component on tag pages",
+		owners: ["fronts.and.curation@guardian.co.uk"],
+		expirationDate: `2026-03-31`,
+		type: "server",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "B",
+		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
 ];
