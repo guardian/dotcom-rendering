@@ -843,9 +843,6 @@ export const BrazeBannersSystemDisplay = ({
 							background-color: ${wrapperModeBackgroundColor};
 							overflow: auto;
 							overscroll-behavior: none;
-							${until.phablet} {
-								border: none;
-							}
 					  `
 					: undefined
 			}
