@@ -214,7 +214,7 @@ export const AdmiralScript = () => {
 		abTests?.isUserInTestGroup(testName, 'variant-detect') ?? false;
 	const variantName = isInVariantDetectGroup
 		? 'variant-detect'
-		: 'variant-recovery';
+		: 'variant-recover'; //We need to default to 'variant-recover' for users who are not in the AB test in order to show Admiral Modal to all users in the US who are not blocked by the CMP and meet the other criteria.
 
 	useEffect(() => {
 		/**
@@ -222,13 +222,12 @@ export const AdmiralScript = () => {
 		 *
 		 * - Should not run if the CMP is due to show
 		 * - Should only run in the US
-		 * - Should only run if in the AB test (variant-detect)
 		 * - Should not run if the gu_hide_support_messaging cookie is set
 		 * - Should not run for content marked as: shouldHideAdverts, shouldHideReaderRevenue, isSensitive
 		 * - Should not run for paid-content sponsorship type (includes Hosted Content)
 		 * - Should not run for certain sections
 		 *
-		 * Variant group loads the script but the modal will not be shown.
+		 * Variant-detect group loads the script but the modal will not be shown.
 		 */
 		const page = window.guardian.config.page;
 		if (!window.guardian.config.switches.consentManagement) return;

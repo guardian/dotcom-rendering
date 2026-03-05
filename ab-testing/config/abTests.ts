@@ -94,8 +94,8 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "growth-admiral-adblock-recovery",
-		description: "Test Admiral ad blocker detection and recovery modal",
+		name: "growth-admiral-adblock-detect",
+		description: "Test Admiral ad blocker detection",
 		owners: ["growth.dev@guardian.co.uk"],
 		expirationDate: "2027-01-21",
 		type: "client",
