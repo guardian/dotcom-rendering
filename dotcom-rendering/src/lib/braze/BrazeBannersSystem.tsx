@@ -657,7 +657,22 @@ export const BrazeBannersSystemDisplay = ({
 			meta.braze.insertBanner(meta.banner, containerRef.current);
 
 			// CSS Checker
-			runCssCheckerOnBrazeBanner(meta);
+			const cssValidationResult = runCssCheckerOnBrazeBanner(meta);
+			if (!cssValidationResult) {
+				brazeBannersSystemLogger.warn(
+					'CSS validation failed for the Braze Banner. This may indicate broken styles. Check UI/UX ASAP!',
+				);
+				meta.braze.logCustomEvent(
+					'braze_banner_css_validation_failed',
+					{
+						placementId: meta.banner.placementId,
+					},
+				);
+				// We don't want to block the display of the banner if the CSS is broken, but we log it for awareness and action.
+			}
+
+			// Log the impression with Braze
+			meta.braze.logBannerImpressions([meta.banner.placementId]);
 		}
 	}, [showBanner, meta, meta.banner, meta.braze, setWrapperModeColors]);
 
@@ -729,6 +744,10 @@ export const BrazeBannersSystemDisplay = ({
 					});
 					break;
 				case BrazeBannersSystemMessageType.NewsletterSubscribe:
+					meta.braze.logBannerClick(
+						meta.banner,
+						'newsletter_subscribe_button',
+					);
 					const { newsletterId } = event.data;
 					if (newsletterId) {
 						void subscribeToNewsletter(newsletterId).then(
@@ -739,11 +758,23 @@ export const BrazeBannersSystemDisplay = ({
 										success,
 									},
 								);
+								meta.braze.logCustomEvent(
+									'braze_banner_newsletter_subscribe',
+									{
+										placementId: meta.banner.placementId,
+										newsletterId,
+										success,
+									},
+								);
 							},
 						);
 					}
 					break;
 				case BrazeBannersSystemMessageType.ReminderSubscribe:
+					meta.braze.logBannerClick(
+						meta.banner,
+						'reminder_subscribe_button',
+					);
 					const {
 						reminderPeriod,
 						reminderComponent,
@@ -761,6 +792,16 @@ export const BrazeBannersSystemDisplay = ({
 									success,
 								},
 							);
+							meta.braze.logCustomEvent(
+								'braze_banner_reminder_subscribe',
+								{
+									placementId: meta.banner.placementId,
+									reminderPeriod,
+									reminderComponent,
+									reminderOption,
+									success,
+								},
+							);
 						});
 					}
 					break;
@@ -771,8 +812,20 @@ export const BrazeBannersSystemDisplay = ({
 					);
 					break;
 				case BrazeBannersSystemMessageType.NavigateToUrl:
+					meta.braze.logBannerClick(
+						meta.banner,
+						'navigate_to_url_button',
+					);
 					const { url, target } = event.data;
 					if (url) {
+						meta.braze.logCustomEvent(
+							'braze_banner_navigate_to_url',
+							{
+								placementId: meta.banner.placementId,
+								url,
+								target,
+							},
+						);
 						if (target === 'blank') {
 							window.open(url, '_blank');
 						} else {
@@ -797,8 +850,11 @@ export const BrazeBannersSystemDisplay = ({
 					}
 					break;
 				case BrazeBannersSystemMessageType.DismissBanner:
-					// Remove the banner from the DOM
+					meta.braze.logBannerClick(meta.banner, 'dismiss_button');
 					dismissBanner();
+					meta.braze.logCustomEvent('braze_banner_dismissed', {
+						placementId: meta.banner.placementId,
+					});
 					break;
 			}
 		};
@@ -841,7 +897,8 @@ export const BrazeBannersSystemDisplay = ({
 							max-height: 65svh;
 							border-top: 1px solid rgb(0, 0, 0);
 							background-color: ${wrapperModeBackgroundColor};
-							overflow: auto;
+							overflow-y: auto;
+							overflow-x: hidden;
 							overscroll-behavior: none;
 					  `
 					: undefined
