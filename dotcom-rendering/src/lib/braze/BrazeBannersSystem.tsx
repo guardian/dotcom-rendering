@@ -672,7 +672,12 @@ export const BrazeBannersSystemDisplay = ({
 			}
 
 			// Log the impression with Braze
-			meta.braze.logBannerImpressions([meta.banner.placementId]);
+			if (
+				meta.banner.placementId === BrazeBannersSystemPlacementId.Banner
+			) {
+				// We know for sure that the banner was displayed, so we can log the impression immediately.
+				meta.braze.logBannerImpressions([meta.banner.placementId]);
+			}
 		}
 	}, [showBanner, meta, meta.banner, meta.braze, setWrapperModeColors]);
 
