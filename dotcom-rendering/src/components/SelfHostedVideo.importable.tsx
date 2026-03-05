@@ -199,6 +199,18 @@ const doesVideoHaveAudio = (video: HTMLVideoElement): boolean =>
 		Boolean((video.audioTracks as { length: number }).length));
 
 /**
+ * 	The Fullscreen api is not supported by Safari mobile,
+ * 	so we need to check if we have access to the webkit api we can use instead.
+ * */
+const shouldUseWebkitFullscreen = (video: HTMLVideoElement): boolean => {
+	return (
+		'webkitDisplayingFullscreen' in video &&
+		'webkitEnterFullscreen' in video &&
+		'webkitExitFullscreen' in video
+	);
+};
+
+/**
  * Ensure the aspect ratio of the video is within the boundary, if specified.
  * For example, we may not want to render a square video inside a 4:5 feature card.
  */
@@ -616,6 +628,39 @@ export const SelfHostedVideo = ({
 		}
 	};
 
+	const handleFullscreenClick = (event: React.SyntheticEvent) => {
+		void submitClickComponentEvent(event.currentTarget, renderingTarget);
+		event.stopPropagation(); // Don't pause the video
+		const video = vidRef.current;
+
+		if (!video) return;
+
+		if (shouldUseWebkitFullscreen(video)) {
+			/***
+			 * webkit fullscreen methods are not part of the standard HTMLVideoElement
+			 * type definition as they are iOS only.
+			 * We need to extend the type expect these handlers when we're on iOS to keep TS happy.
+			 * @see https://developer.apple.com/documentation/webkitjs/htmlvideoelement/1633500-webkitenterfullscreen
+			 */
+			const webkitVideo = video as HTMLVideoElement & {
+				webkitDisplayingFullscreen: boolean;
+				webkitEnterFullscreen: () => void;
+				webkitExitFullscreen: () => void;
+			};
+
+			if (webkitVideo.webkitDisplayingFullscreen) {
+				return webkitVideo.webkitExitFullscreen();
+			} else {
+				return webkitVideo.webkitEnterFullscreen();
+			}
+		}
+
+		if (document.fullscreenElement) {
+			void document.exitFullscreen();
+		}
+		void video.requestFullscreen();
+	};
+
 	/**
 	 * If the video was paused and we know that it wasn't paused by the user
 	 * or the intersection observer, we can deduce that it was paused by the
@@ -819,6 +864,7 @@ export const SelfHostedVideo = ({
 						handleAudioClick={handleAudioClick}
 						handleKeyDown={handleKeyDown}
 						handlePause={handlePause}
+						handleFullscreenClick={handleFullscreenClick}
 						onError={onError}
 						AudioIcon={hasAudio ? AudioIcon : null}
 						preloadPartialData={preloadPartialData}
