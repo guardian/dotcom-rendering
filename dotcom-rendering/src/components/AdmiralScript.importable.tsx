@@ -210,9 +210,11 @@ const testName = 'growth-admiral-adblock-recovery';
 export const AdmiralScript = () => {
 	const { renderingTarget } = useConfig();
 	const abTests = useBetaAB();
-	const isInVariantGroup =
+	const isInVariantDetectGroup =
 		abTests?.isUserInTestGroup(testName, 'variant-detect') ?? false;
-	const variantName = isInVariantGroup ? 'variant-detect' : undefined;
+	const variantName = isInVariantDetectGroup
+		? 'variant-detect'
+		: 'variant-recovery';
 
 	useEffect(() => {
 		/**
@@ -242,7 +244,6 @@ export const AdmiralScript = () => {
 				const shouldRun =
 					!willShowPrivacyMessage &&
 					isInUsa() &&
-					isInVariantGroup &&
 					!getCookie({
 						name: 'gu_hide_support_messaging',
 						shouldMemoize: true,
@@ -319,7 +320,7 @@ export const AdmiralScript = () => {
 			isCancelled = true;
 			admiralScript?.parentNode?.removeChild(admiralScript);
 		};
-	}, [isInVariantGroup, variantName, renderingTarget]);
+	}, [variantName, renderingTarget]);
 
 	return null;
 };
