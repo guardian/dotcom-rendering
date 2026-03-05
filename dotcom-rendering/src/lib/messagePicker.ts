@@ -2,7 +2,7 @@ import { isUndefined, startPerformanceMeasure } from '@guardian/libs';
 import { getOphan } from '../client/ophan/ophan';
 import type { RenderingTarget } from '../types/renderingTarget';
 
-export type MaybeFC = React.ReactNode | null;
+export type MaybeFC = React.FC | null;
 type ShowMessage<T> = (meta: T) => MaybeFC;
 
 interface ShouldShow<T> {
@@ -114,6 +114,8 @@ const timeoutify = <T>(
 const clearAllTimeouts = (messages: CandidateConfigWithTimeout<any>[]) =>
 	messages.map((m) => m.cancelTimeout());
 
+const defaultShow = () => null;
+
 interface PendingMessage<T> {
 	candidateConfig: CandidateConfigWithTimeout<T>;
 	canShow: Promise<CanShowResult<T>>;
@@ -124,21 +126,10 @@ interface WinningMessage<T> {
 	candidate: Candidate<T>;
 }
 
-interface NoMessageSelected {
-	type: 'NoMessageSelected';
-}
-interface MessageSelected {
-	type: 'MessageSelected';
-	messageId: string;
-	// The react component is optional because sometimes we selected a message for this slot, but there is nothing to render
-	SelectedMessage: () => MaybeFC;
-}
-export type PickMessageResult = NoMessageSelected | MessageSelected;
-
 export const pickMessage = (
 	{ candidates, name }: SlotConfig,
 	renderingTarget: RenderingTarget,
-): Promise<PickMessageResult> =>
+): Promise<() => MaybeFC> =>
 	new Promise((resolve) => {
 		const candidateConfigsWithTimeout = candidates.map((c) =>
 			timeoutify(c, name, renderingTarget),
@@ -174,18 +165,13 @@ export const pickMessage = (
 				clearAllTimeouts(candidateConfigsWithTimeout);
 
 				if (winner === null) {
-					resolve({ type: 'NoMessageSelected' });
+					resolve(defaultShow);
 				} else {
 					const { candidate, meta } = winner;
-					resolve({
-						type: 'MessageSelected',
-						messageId: candidate.id,
-						SelectedMessage: () => candidate.show(meta),
-					});
+					resolve(() => candidate.show(meta));
 				}
 			})
-			.catch((e) => {
-				console.error(`pickMessage winner - error: ${String(e)}`);
-				resolve({ type: 'NoMessageSelected' });
-			});
+			.catch((e) =>
+				console.error(`pickMessage winner - error: ${String(e)}`),
+			);
 	});

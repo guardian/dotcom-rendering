@@ -273,7 +273,7 @@ export const buildBrazeBannersSystemConfig = (
 					tags,
 				);
 			},
-			show: (meta: BrazeBannersSystemMeta) => (
+			show: (meta: BrazeBannersSystemMeta) => () => (
 				<BrazeBannersSystemDisplay
 					meta={meta}
 					idApiUrl={idApiUrl}
