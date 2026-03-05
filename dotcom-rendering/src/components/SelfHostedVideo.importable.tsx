@@ -9,6 +9,7 @@ import {
 	submitComponentEvent,
 } from '../client/ophan/ophan';
 import type { ArticleFormat } from '../lib/articleFormat';
+import { getVideoClient } from '../lib/bridgetApi';
 import { getZIndex } from '../lib/getZIndex';
 import { generateImageURL } from '../lib/image';
 import { useIsInView } from '../lib/useIsInView';
@@ -406,7 +407,7 @@ export const SelfHostedVideo = ({
 		).matches;
 
 		/**
-		 * The user can set this on their Accessibility Settings page.
+		 * The user can set this on their Accessibilzity Settings page.
 		 * Explicitly `false` when the user has said they don't want autoplay video.
 		 */
 		const autoplayPreference = storage.local.get(
@@ -424,7 +425,18 @@ export const SelfHostedVideo = ({
 	 * 3. Creates event listeners to control playback when there are multiple videos.
 	 */
 	useEffect(() => {
-		setIsAutoplayAllowed(doesUserPermitAutoplay());
+		//  check the rendering taget and set autoplay setting dependent on that
+
+		if (renderingTarget === 'Apps') {
+			const videoClient = getVideoClient();
+			void videoClient
+				.isAutoplayEnabled()
+				.then((isAutoplayEnabled: boolean) => {
+					setIsAutoplayAllowed(isAutoplayEnabled);
+				});
+		} else {
+			setIsAutoplayAllowed(doesUserPermitAutoplay());
+		}
 
 		/**
 		 * Initialise Ophan attention tracking
@@ -513,7 +525,7 @@ export const SelfHostedVideo = ({
 				handlePageBecomesVisible();
 			});
 		};
-	}, [uniqueId, atomId]);
+	}, [uniqueId, atomId, renderingTarget]);
 
 	/**
 	 * Track the first time the video comes into view.
