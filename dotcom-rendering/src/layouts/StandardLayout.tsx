@@ -64,6 +64,7 @@ import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
+import { type Area, type LayoutType, rowCss } from './lib/furnitureLayouts';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const maxWidth = css`
@@ -83,91 +84,6 @@ const stretchLines = css`
 	}
 `;
 
-type LayoutType = 'standard' | 'matchReport' | 'media' | 'labs';
-
-type Area =
-	| 'title'
-	| 'headline'
-	| 'standfirst'
-	| 'main-media'
-	| 'meta'
-	| 'body'
-	| 'right-column'
-	| 'match-nav'
-	| 'match-tabs';
-
-type LayoutRows = Partial<
-	Record<
-		Area,
-		{ mobile?: number; tablet?: number; leftCol?: number; desktop?: number }
-	>
->;
-
-const rowMaps: Record<LayoutType, LayoutRows> = {
-	standard: {
-		title: { tablet: 1 },
-		headline: { tablet: 2, leftCol: 1 },
-		standfirst: { tablet: 3, leftCol: 2 },
-		'main-media': { tablet: 4, leftCol: 3 },
-		meta: { tablet: 5, leftCol: 3 },
-	},
-	matchReport: {
-		'match-nav': { tablet: 1 },
-		'match-tabs': { tablet: 2 },
-		title: { tablet: 3, leftCol: 1 },
-		headline: { tablet: 4, leftCol: 3 },
-		standfirst: { tablet: 5, leftCol: 4 },
-		'main-media': { tablet: 6, leftCol: 5 },
-		meta: { tablet: 7, leftCol: 5 },
-	},
-	media: {
-		title: { mobile: 1, tablet: 1 },
-		headline: { mobile: 2, tablet: 2, leftCol: 1 },
-		'main-media': { mobile: 3, tablet: 3, leftCol: 2 },
-		standfirst: { mobile: 4, tablet: 4, leftCol: 3 },
-		meta: { mobile: 5, tablet: 5, leftCol: 2 },
-	},
-	labs: {
-		title: { tablet: 1 },
-		headline: { tablet: 2, leftCol: 1 },
-		standfirst: { tablet: 3, leftCol: 2 },
-		'main-media': { tablet: 3 },
-		meta: { tablet: 4, leftCol: 3 },
-		'match-nav': { tablet: 1 },
-		'match-tabs': { tablet: 1 },
-	},
-};
-
-const rowCss = (area: Area, layoutType: LayoutType) => {
-	const rows = rowMaps[layoutType][area] ?? {};
-
-	return css([
-		rows.mobile != null &&
-			css`
-				${until.tablet} {
-					grid-row: ${rows.mobile};
-				}
-			`,
-		rows.tablet != null &&
-			css`
-				${from.tablet} {
-					grid-row: ${rows.tablet};
-				}
-			`,
-		rows.leftCol != null &&
-			css`
-				${from.leftCol} {
-					grid-row: ${rows.leftCol};
-				}
-			`,
-		rows.desktop != null &&
-			css`
-				${from.desktop} {
-					grid-row: ${rows.desktop};
-				}
-			`,
-	]);
-};
 interface GridItemProps {
 	area: Area;
 	layoutType: LayoutType;
