@@ -159,11 +159,6 @@ export const useDesignableBannerModel = ({
 		setChannelClosedTimestamp(bannerChannel);
 		setIsOpen(false);
 		document.body.focus();
-		document.dispatchEvent(
-			new CustomEvent('banner:close', {
-				detail: { bannerId: 'designable-banner' },
-			}),
-		);
 	}, [bannerChannel]);
 
 	const handleToggleCollapse = useCallback(() => {
