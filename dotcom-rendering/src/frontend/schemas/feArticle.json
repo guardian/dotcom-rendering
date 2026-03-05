@@ -618,6 +618,9 @@
                     "$ref": "#/definitions/CalloutBlockElementV2"
                 },
                 {
+                    "$ref": "#/definitions/CallToActionAtomBlockElement"
+                },
+                {
                     "$ref": "#/definitions/ReporterCalloutBlockElement"
                 },
                 {
@@ -1557,6 +1560,46 @@
                 "name",
                 "urlPrefix",
                 "value"
+            ]
+        },
+        "CallToActionAtomBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.CallToActionAtomBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "trackingCode": {
+                    "type": "string"
+                },
+                "btnText": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "id",
+                "title",
+                "url"
             ]
         },
         "ReporterCalloutBlockElement": {
