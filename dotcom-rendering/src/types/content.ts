@@ -112,6 +112,18 @@ export interface CalloutBlockElementV2 {
 	contacts?: CalloutContactType[];
 }
 
+export interface CallToActionAtomBlockElement {
+	_type: 'model.dotcomrendering.pageElements.CallToActionAtomBlockElement';
+	elementId: string;
+	id: string;
+	title: string;
+	url: string;
+	image?: string;
+	label?: string;
+	trackingCode?: string;
+	btnText?: string;
+}
+
 export interface ReporterCalloutBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ReporterCalloutBlockElement';
 	elementId: string;
@@ -827,6 +839,7 @@ export type FEElement =
 	| CaptionBlockElement
 	| CalloutBlockElement
 	| CalloutBlockElementV2
+	| CallToActionAtomBlockElement
 	| ReporterCalloutBlockElement
 	| CartoonBlockElement
 	| ChartAtomBlockElement

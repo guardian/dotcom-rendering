@@ -81,7 +81,6 @@ const withBannerData =
 			content,
 			mobileContent,
 			countryCode,
-			prices,
 			fetchEmail,
 			articleCounts,
 			tickerSettings,
@@ -141,11 +140,7 @@ const withBannerData =
 			const originalCopy = getParagraphsOrMessageText(paras, text);
 
 			return originalCopy.map((p) =>
-				replaceNonArticleCountPlaceholders(
-					p,
-					countryCode,
-					prices,
-				).trim(),
+				replaceNonArticleCountPlaceholders(p, countryCode).trim(),
 			);
 		};
 
@@ -228,13 +223,11 @@ const withBannerData =
 				replaceNonArticleCountPlaceholders(
 					bannerContent.highlightedText,
 					countryCode,
-					prices,
 				).trim();
 
 			const cleanHeading = replaceNonArticleCountPlaceholders(
 				bannerContent.heading,
 				countryCode,
-				prices,
 			).trim();
 
 			const cleanParagraphs = cleanParagraphsOrMessageText(

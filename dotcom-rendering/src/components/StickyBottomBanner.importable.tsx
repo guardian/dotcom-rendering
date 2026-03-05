@@ -15,7 +15,7 @@ import {
 } from '../lib/braze/BrazeBannersSystem';
 import type {
 	CandidateConfig,
-	MaybeFC,
+	PickMessageResult,
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
@@ -177,9 +177,9 @@ const buildRRBannerConfigWith = ({
 						pageId,
 						inHoldbackGroup,
 					}),
-				show:
-					({ name, props }: ModuleData<BannerProps>) =>
-					() => <BannerComponent name={name} props={props} />,
+				show: ({ name, props }: ModuleData<BannerProps>) => (
+					<BannerComponent name={name} props={props} />
+				),
 			},
 			timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 		};
@@ -195,7 +195,7 @@ const buildSignInGateConfig = (
 		canShow: async () => {
 			return await canShowSignInGatePortal(canShowProps);
 		},
-		show: (meta: AuxiaGateDisplayData) => () => (
+		show: (meta: AuxiaGateDisplayData) => (
 			<SignInGatePortal
 				host={host}
 				isPaidContent={canShowProps.isPaidContent}
@@ -233,7 +233,7 @@ const buildBrazeBanner = (
 				tags,
 				shouldHideReaderRevenue,
 			),
-		show: (meta: BrazeMeta) => () => (
+		show: (meta: BrazeMeta) => (
 			<BrazeBanner meta={meta} idApiUrl={idApiUrl} />
 		),
 	},
@@ -282,9 +282,9 @@ export const StickyBottomBanner = ({
 		'control',
 	);
 
-	const [SelectedBanner, setSelectedBanner] = useState<MaybeFC | null>(null);
-	const [hasPickMessageCompleted, setHasPickMessageCompleted] =
-		useState<boolean>(false);
+	const [pickMessageResult, setPickMessageResult] =
+		useState<PickMessageResult | null>(null);
+
 	const [asyncArticleCounts, setAsyncArticleCounts] =
 		useState<Promise<ArticleCounts | undefined>>();
 
@@ -396,9 +396,8 @@ export const StickyBottomBanner = ({
 		};
 
 		pickMessage(bannerConfig, renderingTarget)
-			.then((PickedBanner: () => MaybeFC) => {
-				setSelectedBanner(PickedBanner);
-				setHasPickMessageCompleted(true);
+			.then((result) => {
+				setPickMessageResult(result);
 			})
 			.catch((e) => {
 				// Report error to Sentry
@@ -409,7 +408,6 @@ export const StickyBottomBanner = ({
 					new Error(msg),
 					'sticky-bottom-banner',
 				);
-				setHasPickMessageCompleted(true);
 			});
 	}, [
 		isSignedIn,
@@ -437,16 +435,27 @@ export const StickyBottomBanner = ({
 		abTests,
 	]);
 
-	// Dispatches 'banner:none' event for mobile sticky ad integration (see @guardian/commercial-dev).
-	// Ensures ads only insert when no banner will be shown.
-	// hasPickMessageCompleted distinguishes between initial state (not picked yet) and final state (picked nothing).
+	/**
+	 * Custom events for commercial purposes to avoid the mobile-sticky ad slot clashing with these banners
+	 * Dispatches events when no banner is due to appear and when the sign in gate is the chosen banner
+	 * Please talk to @guardian/commercial-dev before changing this logic
+	 */
 	useEffect(() => {
-		if (hasPickMessageCompleted && SelectedBanner == null) {
+		if (pickMessageResult?.type === 'NoMessageSelected') {
 			document.dispatchEvent(new CustomEvent('banner:none'));
 		}
-	}, [SelectedBanner, hasPickMessageCompleted]);
-	if (SelectedBanner) {
-		return <SelectedBanner />;
+
+		if (
+			pickMessageResult?.type === 'MessageSelected' &&
+			pickMessageResult.messageId === 'sign-in-gate-portal'
+		) {
+			document.dispatchEvent(new CustomEvent('banner:sign-in-gate'));
+		}
+	}, [pickMessageResult]);
+
+	if (pickMessageResult?.type === 'MessageSelected') {
+		const { SelectedMessage } = pickMessageResult;
+		return <SelectedMessage />;
 	}
 
 	return null;
