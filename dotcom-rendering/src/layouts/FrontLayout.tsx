@@ -78,25 +78,19 @@ const isToggleable = (
 	index: number,
 	collection: DCRCollectionType,
 	isNetworkFront: boolean,
-	isInSlimHomepageAbTestVariant: boolean,
+	/**
+	 * The show/hide button would be covered by the MostPopularFrontRight component
+	 * in the variant of the Slim Homepage AB test.
+	 */
+	isTargetedContainerInSlimHomepageAbTest: boolean,
 ) => {
 	if (isNetworkFront) {
-		/**
-		 * The show/hide button would be covered by the MostPopularFrontRight component
-		 * in the variant of the Slim Homepage AB test.
-		 */
-		const hideForSlimHomepageAbTest =
-			isInSlimHomepageAbTestVariant &&
-			(collection.displayName === 'News' ||
-				collection.displayName === 'Features' ||
-				collection.displayName === 'More features');
-
 		return (
 			collection.displayName.toLowerCase() !== 'headlines' &&
 			!isNavList(collection) &&
 			!isHighlights(collection) &&
 			!isLabs(collection) &&
-			!hideForSlimHomepageAbTest
+			!isTargetedContainerInSlimHomepageAbTest
 		);
 	}
 
@@ -316,9 +310,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					 * content on the right-hand side. Other sections remain full-width.
 					 */
 					const isTargetedContainerInSlimHomepageAbTest =
-						collection.displayName === 'News' ||
-						collection.displayName === 'Features' ||
-						collection.displayName === 'More features';
+						isInSlimHomepageAbTestVariant &&
+						(collection.displayName === 'News' ||
+							collection.displayName === 'Features' ||
+							collection.displayName === 'More features');
 
 					if (collection.collectionType === 'scrollable/highlights') {
 						// Highlights are rendered in the Masthead component
@@ -499,7 +494,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									index,
 									collection,
 									front.isNetworkFront,
-									isInSlimHomepageAbTestVariant,
+									isTargetedContainerInSlimHomepageAbTest,
 								)}
 								leftContent={decideLeftContent(
 									front,
@@ -540,7 +535,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								)}
 								isLabs={isLabs(collection)}
 								slimifySectionForAbTest={
-									isInSlimHomepageAbTestVariant &&
 									isTargetedContainerInSlimHomepageAbTest
 								}
 								mostViewed={front.mostViewed}

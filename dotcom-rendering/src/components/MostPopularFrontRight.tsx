@@ -89,8 +89,13 @@ type Props = {
 export const MostPopularFrontRight = ({ heading, trails }: Props) => {
 	if (trails.length === 0) return null;
 
+	const containerId = `${heading
+		.toLowerCase()
+		.replace(' ', '-')}-front-right-container`;
+
 	return (
 		<section
+			id={containerId}
 			data-component="most-popular-front-right"
 			css={[
 				containerStyles,
