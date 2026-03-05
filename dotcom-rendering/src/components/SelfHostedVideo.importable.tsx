@@ -9,6 +9,7 @@ import {
 	submitComponentEvent,
 } from '../client/ophan/ophan';
 import type { ArticleFormat } from '../lib/articleFormat';
+import { getVideoClient } from '../lib/bridgetApi';
 import { getZIndex } from '../lib/getZIndex';
 import { generateImageURL } from '../lib/image';
 import { useIsInView } from '../lib/useIsInView';
@@ -266,6 +267,30 @@ type Props = {
 	role?: RoleType;
 };
 
+const doesUserPermitAutoplayOnWeb = (): boolean => {
+	/**
+	 * The user indicates a preference for reduced motion: https://web.dev/articles/prefers-reduced-motion
+	 */
+	const userPrefersReducedMotion = window.matchMedia(
+		'(prefers-reduced-motion: reduce)',
+	).matches;
+
+	/**
+	 * The user can set this on their Accessibility Settings page.
+	 * Explicitly `false` when the user has said they don't want autoplay video.
+	 */
+	const autoplayPreference = storage.local.get(
+		'gu.prefs.accessibility.autoplay-video',
+	);
+
+	return !userPrefersReducedMotion && autoplayPreference !== false;
+};
+
+const doesUserPermitAutoplayOnApps = async (): Promise<boolean> => {
+	const videoClient = getVideoClient();
+	return videoClient.isAutoplayEnabled();
+};
+
 export const SelfHostedVideo = ({
 	sources,
 	atomId,
@@ -397,25 +422,6 @@ export const SelfHostedVideo = ({
 		/>
 	);
 
-	const doesUserPermitAutoplay = (): boolean => {
-		/**
-		 * The user indicates a preference for reduced motion: https://web.dev/articles/prefers-reduced-motion
-		 */
-		const userPrefersReducedMotion = window.matchMedia(
-			'(prefers-reduced-motion: reduce)',
-		).matches;
-
-		/**
-		 * The user can set this on their Accessibility Settings page.
-		 * Explicitly `false` when the user has said they don't want autoplay video.
-		 */
-		const autoplayPreference = storage.local.get(
-			'gu.prefs.accessibility.autoplay-video',
-		);
-
-		return !userPrefersReducedMotion && autoplayPreference !== false;
-	};
-
 	/**
 	 * Setup.
 	 *
@@ -424,7 +430,11 @@ export const SelfHostedVideo = ({
 	 * 3. Creates event listeners to control playback when there are multiple videos.
 	 */
 	useEffect(() => {
-		setIsAutoplayAllowed(doesUserPermitAutoplay());
+		if (renderingTarget === 'Apps') {
+			void doesUserPermitAutoplayOnApps().then(setIsAutoplayAllowed);
+		} else {
+			setIsAutoplayAllowed(doesUserPermitAutoplayOnWeb());
+		}
 
 		/**
 		 * Initialise Ophan attention tracking
@@ -464,7 +474,13 @@ export const SelfHostedVideo = ({
 		 */
 		const handleRestoreFromCache = (event: PageTransitionEvent) => {
 			if (event.persisted) {
-				setIsAutoplayAllowed(doesUserPermitAutoplay());
+				if (renderingTarget === 'Apps') {
+					void doesUserPermitAutoplayOnApps().then(
+						setIsAutoplayAllowed,
+					);
+				} else {
+					setIsAutoplayAllowed(doesUserPermitAutoplayOnWeb());
+				}
 				setHasPageBecomeActive(true);
 			} else {
 				setHasPageBecomeActive(false);
@@ -513,7 +529,7 @@ export const SelfHostedVideo = ({
 				handlePageBecomesVisible();
 			});
 		};
-	}, [uniqueId, atomId]);
+	}, [uniqueId, atomId, renderingTarget]);
 
 	/**
 	 * Track the first time the video comes into view.
