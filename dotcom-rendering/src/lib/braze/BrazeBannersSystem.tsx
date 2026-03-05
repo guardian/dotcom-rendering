@@ -7,17 +7,17 @@ import type {
 	ReminderComponent,
 } from '@guardian/support-dotcom-components/dist/shared/types/reminders';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { submitComponentEvent } from '../../client/ophan/ophan';
+import { useConfig } from '../../components/ConfigContext';
 import { isProd } from '../../components/marketing/lib/stage';
 import type { StageType } from '../../types/config';
 import type { TagType } from '../../types/tag';
 import { getAuthState, getOptionsHeaders } from '../identity';
 import type { CandidateConfig, CanShowResult } from '../messagePicker';
 import { useAuthStatus } from '../useAuthStatus';
+import { useIsInView } from '../useIsInView';
 import type { BrazeInstance } from './initialiseBraze';
 import { suppressForTaylorReport } from './taylorReport';
-import { useIsInView } from '../useIsInView';
-import { submitComponentEvent } from 'src/client/ophan/ophan';
-import { useConfig } from 'src/components/ConfigContext';
 
 /**
  * Determines the best mix color (black or white)
@@ -883,6 +883,10 @@ export const BrazeBannersSystemDisplay = ({
 	// Log Impressions when the banner is seen, using the hasBeenSeen value from the useIsInView hook
 	useEffect(() => {
 		if (hasBeenSeen) {
+			brazeBannersSystemLogger.info(
+				`Banner with placement ID "${meta.banner.placementId}" has been seen. Logging impression.`,
+			);
+
 			// Dispatch a custom event
 			document.dispatchEvent(
 				new CustomEvent('banner:open', {
@@ -907,7 +911,7 @@ export const BrazeBannersSystemDisplay = ({
 				renderingTarget,
 			);
 		}
-	}, [hasBeenSeen]);
+	}, [hasBeenSeen, meta.banner, meta.id, meta.braze, renderingTarget]);
 
 	/**
 	 * If showBanner is false, we return null to unmount the component and remove the banner from the DOM.
