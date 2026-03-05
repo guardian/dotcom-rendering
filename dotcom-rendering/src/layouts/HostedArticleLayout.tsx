@@ -4,13 +4,13 @@ import {
 	from,
 	palette as sourcePalette,
 	space,
-	textSans12,
 } from '@guardian/source/foundations';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { CallToActionAtom } from '../components/CallToActionAtom';
 import { Caption } from '../components/Caption';
+import { HostedContentDisclaimer } from '../components/HostedContentDisclaimer';
 import { HostedContentHeader } from '../components/HostedContentHeader';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
@@ -317,17 +317,8 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 										frontendData.isRightToLeftLang
 									}
 								/>
+								<HostedContentDisclaimer />
 							</ArticleContainer>
-
-							<span
-								css={css`
-									${textSans12}
-									color: ${sourcePalette.neutral[46]};
-									padding-bottom: ${space[4]}px;
-								`}
-							>
-								{'Placeholder - disclaimer text'}
-							</span>
 						</div>
 
 						<div css={onwardContentStyles}>
