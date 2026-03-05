@@ -16,6 +16,8 @@ import { useAuthStatus } from '../useAuthStatus';
 import type { BrazeInstance } from './initialiseBraze';
 import { suppressForTaylorReport } from './taylorReport';
 import { useIsInView } from '../useIsInView';
+import { submitComponentEvent } from 'src/client/ophan/ophan';
+import { useConfig } from 'src/components/ConfigContext';
 
 /**
  * Determines the best mix color (black or white)
@@ -457,6 +459,7 @@ export const BrazeBannersSystemDisplay = ({
 		useState<string>('#ffffff');
 	const [wrapperModeForegroundColor, setWrapperModeForegroundColor] =
 		useState<string>('#000000');
+	const { renderingTarget } = useConfig();
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
 		threshold: 0,
@@ -880,12 +883,29 @@ export const BrazeBannersSystemDisplay = ({
 	// Log Impressions when the banner is seen, using the hasBeenSeen value from the useIsInView hook
 	useEffect(() => {
 		if (hasBeenSeen) {
+			// Dispatch a custom event
 			document.dispatchEvent(
 				new CustomEvent('banner:open', {
 					detail: { bannerId: meta.id },
 				}),
 			);
+
+			// Log the impression with Braze
 			meta.braze.logBannerImpressions([meta.banner.placementId]);
+
+			// Log VIEW event with Ophan
+			void submitComponentEvent(
+				{
+					component: {
+						componentType: 'RETENTION_ENGAGEMENT_BANNER',
+						id:
+							meta.banner.getStringProperty('ophanComponentId') ??
+							meta.banner.placementId,
+					},
+					action: 'VIEW',
+				},
+				renderingTarget,
+			);
 		}
 	}, [hasBeenSeen]);
 
