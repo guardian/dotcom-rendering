@@ -18,7 +18,11 @@ import {
 	BrazeBannersSystemPlacementId,
 	buildBrazeBannersSystemConfig,
 } from '../lib/braze/BrazeBannersSystem';
-import type { CandidateConfig, SlotConfig } from '../lib/messagePicker';
+import type {
+	CandidateConfig,
+	PickMessageResult,
+	SlotConfig,
+} from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
 import { useBetaAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
@@ -121,9 +125,8 @@ export const SlotBodyEnd = ({
 	const isSignedIn = useIsSignedIn();
 	const ophanPageViewId = usePageViewId(renderingTarget);
 	const abTests = useBetaAB();
-	const [SelectedEpic, setSelectedEpic] = useState<
-		React.ElementType | null | undefined
-	>();
+	const [pickMessageResult, setPickMessageResult] =
+		useState<PickMessageResult | null>(null);
 	const [asyncArticleCount, setAsyncArticleCount] =
 		useState<Promise<WeeklyArticleHistory | undefined>>();
 
@@ -203,9 +206,7 @@ export const SlotBodyEnd = ({
 		pickMessage(epicConfig, renderingTarget)
 			.then((result) => {
 				if (result.type === 'MessageSelected') {
-					setSelectedEpic(result.SelectedMessage);
-				} else {
-					setSelectedEpic(() => null);
+					setPickMessageResult(result);
 				}
 			})
 			.catch((e) =>
@@ -232,7 +233,10 @@ export const SlotBodyEnd = ({
 	]);
 
 	useEffect(() => {
-		if (SelectedEpic === null && showArticleEndSlot) {
+		if (
+			pickMessageResult?.type === 'NoMessageSelected' &&
+			showArticleEndSlot
+		) {
 			const additionalSizes = (): SizeMapping => {
 				return { mobile: [adSizes.fluid] }; // Public Good additional ad slot sizes
 			};
@@ -245,15 +249,22 @@ export const SlotBodyEnd = ({
 				}),
 			);
 		}
-	}, [SelectedEpic, showArticleEndSlot]);
+	}, [pickMessageResult, showArticleEndSlot]);
 
-	if (SelectedEpic !== null && !isUndefined(SelectedEpic)) {
+	if (
+		pickMessageResult?.type === 'MessageSelected' &&
+		!isUndefined(pickMessageResult.SelectedMessage)
+	) {
+		const { SelectedMessage } = pickMessageResult;
 		return (
 			<div id="slot-body-end" css={slotStyles}>
-				<SelectedEpic />
+				<SelectedMessage />
 			</div>
 		);
-	} else if (SelectedEpic === null && showArticleEndSlot) {
+	} else if (
+		pickMessageResult?.type === 'NoMessageSelected' &&
+		showArticleEndSlot
+	) {
 		return (
 			<div id="slot-body-end" css={slotStyles}>
 				<AdSlot data-print-layout="hide" position="article-end" />
