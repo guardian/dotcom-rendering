@@ -24,7 +24,7 @@ import {
 import { getOptionsHeaders } from '../lib/identity';
 import { getHeader } from '../lib/sdcRequests';
 import { useBetaAB } from '../lib/useAB';
-import { useAuthStatus } from '../lib/useAuthStatus';
+import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
 import { useConfig } from './ConfigContext';
@@ -59,10 +59,7 @@ const ReaderRevenueLinksRemote = ({
 	const [SupportHeader, setSupportHeader] =
 		useState<React.ElementType<HeaderProps> | null>(null);
 	const authStatus = useAuthStatus();
-	const isSignedIn =
-		authStatus.kind === 'Pending'
-			? 'Pending'
-			: authStatus.kind === 'SignedIn';
+	const isSignedIn = useIsSignedIn();
 
 	const { renderingTarget } = useConfig();
 	const abTests = useBetaAB();
