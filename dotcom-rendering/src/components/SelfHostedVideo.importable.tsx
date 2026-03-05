@@ -407,7 +407,7 @@ export const SelfHostedVideo = ({
 		).matches;
 
 		/**
-		 * The user can set this on their Accessibilzity Settings page.
+		 * The user can set this on their Accessibility Settings page.
 		 * Explicitly `false` when the user has said they don't want autoplay video.
 		 */
 		const autoplayPreference = storage.local.get(
@@ -428,12 +428,12 @@ export const SelfHostedVideo = ({
 		//  check the rendering taget and set autoplay setting dependent on that
 
 		if (renderingTarget === 'Apps') {
+			console.log('in apps');
 			const videoClient = getVideoClient();
-			void videoClient
-				.isAutoplayEnabled()
-				.then((isAutoplayEnabled: boolean) => {
-					setIsAutoplayAllowed(isAutoplayEnabled);
-				});
+			void videoClient.isAutoplayEnabled().then((success: boolean) => {
+				console.log('isAutoplayEnabled?', { success });
+				setIsAutoplayAllowed(success);
+			});
 		} else {
 			setIsAutoplayAllowed(doesUserPermitAutoplay());
 		}
