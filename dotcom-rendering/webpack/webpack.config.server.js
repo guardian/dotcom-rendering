@@ -3,6 +3,8 @@ const nodeExternals = require('webpack-node-externals');
 const swcConfig = require('./.swcrc.json');
 const { svgr } = require('./svg.cjs');
 
+const { transpileExclude } = require('./webpack.config.client.js');
+
 const DEV = process.env.NODE_ENV === 'development';
 const nodeVersion = process.versions.node;
 
@@ -77,6 +79,7 @@ module.exports = {
 		rules: [
 			{
 				test: /(\.tsx|\.js|\.ts)$/,
+				exclude: transpileExclude,
 				use: swcLoader,
 			},
 			svgr,
