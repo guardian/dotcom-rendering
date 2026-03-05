@@ -108,7 +108,7 @@ const ReaderRevenueLinksRemote = ({
 			},
 		};
 
-		const headers =
+		const fallbackHeaders =
 			authStatus.kind === 'SignedIn'
 				? getOptionsHeaders(authStatus).headers
 				: undefined;
@@ -130,12 +130,12 @@ const ReaderRevenueLinksRemote = ({
 				reportError(error, 'getAuthHeaders');
 				return undefined;
 			})
-			.then((fallbackHeaders) =>
-				// Fallback to fallbackHeaders if present, otherwise use real headers
+			.then((headers) =>
+				// Fallback to fallbackHeaders if headers are not present
 				getHeader(
 					contributionsServiceUrl,
 					requestData,
-					fallbackHeaders ?? headers,
+					headers ?? fallbackHeaders,
 				),
 			)
 			.then((response: ModuleDataResponse<HeaderProps>) => {
