@@ -160,6 +160,7 @@ export type BrazeBannersSystemMeta = {
 
 /**
  * Checks if a Braze Banner for the given placement ID can be shown.
+ * @param id Unique ID for the message candidate, used for logging and debugging
  * @param braze Braze instance
  * @param placementId Placement ID to check for a banner
  * @param contentType Content type of the article
@@ -168,6 +169,7 @@ export type BrazeBannersSystemMeta = {
  * @returns CanShowResult with the Banner meta if it can be shown
  */
 export const canShowBrazeBannersSystem = async (
+	id: string,
 	braze: BrazeInstance | null,
 	placementId: BrazeBannersSystemPlacementId,
 	contentType: string,
@@ -232,6 +234,7 @@ export const canShowBrazeBannersSystem = async (
 		return {
 			show: true,
 			meta: {
+				id,
 				braze,
 				banner,
 			},
@@ -270,6 +273,7 @@ export const buildBrazeBannersSystemConfig = (
 			id,
 			canShow: () => {
 				return canShowBrazeBannersSystem(
+					id,
 					braze,
 					placementId,
 					contentType,
