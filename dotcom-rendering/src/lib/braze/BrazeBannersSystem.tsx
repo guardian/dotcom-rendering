@@ -15,6 +15,7 @@ import type { CandidateConfig, CanShowResult } from '../messagePicker';
 import { useAuthStatus } from '../useAuthStatus';
 import type { BrazeInstance } from './initialiseBraze';
 import { suppressForTaylorReport } from './taylorReport';
+import { useIsInView } from '../useIsInView';
 
 /**
  * Determines the best mix color (black or white)
@@ -150,6 +151,7 @@ export function refreshBanners(braze: BrazeInstance): Promise<void> {
  * Meta information required to display a Braze Banner.
  */
 export type BrazeBannersSystemMeta = {
+	id: string;
 	braze: BrazeInstance;
 	banner: Banner;
 };
@@ -455,6 +457,10 @@ export const BrazeBannersSystemDisplay = ({
 		useState<string>('#ffffff');
 	const [wrapperModeForegroundColor, setWrapperModeForegroundColor] =
 		useState<string>('#000000');
+	const [hasBeenSeen, setNode] = useIsInView({
+		debounce: true,
+		threshold: 0,
+	});
 
 	/**
 	 * Subscribes the user to a newsletter via the Identity API.
@@ -670,14 +676,6 @@ export const BrazeBannersSystemDisplay = ({
 				);
 				// We don't want to block the display of the banner if the CSS is broken, but we log it for awareness and action.
 			}
-
-			// Log the impression with Braze
-			if (
-				meta.banner.placementId === BrazeBannersSystemPlacementId.Banner
-			) {
-				// We know for sure that the banner was displayed, so we can log the impression immediately.
-				meta.braze.logBannerImpressions([meta.banner.placementId]);
-			}
 		}
 	}, [showBanner, meta, meta.banner, meta.braze, setWrapperModeColors]);
 
@@ -879,8 +877,17 @@ export const BrazeBannersSystemDisplay = ({
 		postMessageToBrazeBanner,
 	]);
 
-	// Log Impressions with Braze and Button Clicks with Ophan
-	// TODO
+	// Log Impressions when the banner is seen, using the hasBeenSeen value from the useIsInView hook
+	useEffect(() => {
+		if (hasBeenSeen) {
+			document.dispatchEvent(
+				new CustomEvent('banner:open', {
+					detail: { bannerId: meta.id },
+				}),
+			);
+			meta.braze.logBannerImpressions([meta.banner.placementId]);
+		}
+	}, [hasBeenSeen]);
 
 	/**
 	 * If showBanner is false, we return null to unmount the component and remove the banner from the DOM.
@@ -892,6 +899,7 @@ export const BrazeBannersSystemDisplay = ({
 
 	return (
 		<div
+			ref={setNode}
 			className="braze-banner"
 			style={{
 				minHeight,
