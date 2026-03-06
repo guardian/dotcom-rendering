@@ -16,6 +16,7 @@ type Props = {
 	imageLoading: 'lazy' | 'eager';
 	aspectRatio: AspectRatio;
 	collectionId: number;
+	isInSlimHomepageAbTestVariant?: boolean;
 };
 
 /**
@@ -32,10 +33,17 @@ export const ScrollableFeature = ({
 	imageLoading,
 	aspectRatio,
 	collectionId,
+	isInSlimHomepageAbTestVariant,
 }: Props) => {
 	const isBelowTabletBreakpoint = useMatchMedia(
 		removeMediaRulePrefix(until.tablet),
 	);
+
+	const headlineSizes = {
+		desktop: 'xsmall',
+		tablet: 'xxsmall',
+		mobile: 'xsmall',
+	} as const;
 
 	return (
 		<ScrollableCarousel
@@ -78,9 +86,10 @@ export const ScrollableFeature = ({
 						aspectRatio={aspectRatio}
 						imageSize="feature"
 						headlineSizes={{
-							desktop: 'xsmall',
-							tablet: 'xxsmall',
-							mobile: 'xsmall',
+							...headlineSizes,
+							wide: isInSlimHomepageAbTestVariant
+								? headlineSizes.tablet
+								: headlineSizes.desktop,
 						}}
 						trailText={undefined}
 						collectionId={collectionId}
