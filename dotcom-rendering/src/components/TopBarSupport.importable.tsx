@@ -5,7 +5,6 @@
 import { css } from '@emotion/react';
 import { getCookie, isUndefined } from '@guardian/libs';
 import type { ComponentEvent } from '@guardian/ophan-tracker-js';
-import { getHeader } from '@guardian/support-dotcom-components';
 import type {
 	HeaderPayload,
 	ModuleData,
@@ -18,11 +17,14 @@ import type {
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import {
+	getAuthHeaders,
 	getPurchaseInfo,
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
+import { getOptionsHeaders } from '../lib/identity';
+import { getHeader } from '../lib/sdcRequests';
 import { useBetaAB } from '../lib/useAB';
-import { useIsSignedIn } from '../lib/useAuthStatus';
+import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
 import { useConfig } from './ConfigContext';
@@ -56,10 +58,22 @@ const ReaderRevenueLinksRemote = ({
 		useState<ModuleData<HeaderProps> | null>(null);
 	const [SupportHeader, setSupportHeader] =
 		useState<React.ElementType<HeaderProps> | null>(null);
+	const authStatus = useAuthStatus();
 	const isSignedIn = useIsSignedIn();
 
 	const { renderingTarget } = useConfig();
 	const abTests = useBetaAB();
+
+	const reportError = (error: unknown, context: string) => {
+		const msg = `Error importing RR header links for ${context}: ${String(
+			error,
+		)}`;
+		console.log(msg);
+		window.guardian.modules.sentry.reportError(
+			new Error(msg),
+			'rr-header-links',
+		);
+	};
 
 	useEffect((): void => {
 		if (isUndefined(countryCode) || isSignedIn === 'Pending') {
@@ -68,6 +82,7 @@ const ReaderRevenueLinksRemote = ({
 
 		const hideSupportMessagingForUser =
 			shouldHideSupportMessaging(isSignedIn);
+
 		if (hideSupportMessagingForUser === 'Pending') {
 			// We don't yet know the user's supporter status
 			return;
@@ -90,7 +105,36 @@ const ReaderRevenueLinksRemote = ({
 			},
 		};
 
-		getHeader(contributionsServiceUrl, requestData)
+		const fallbackHeaders =
+			authStatus.kind === 'SignedIn'
+				? getOptionsHeaders(authStatus).headers
+				: undefined;
+
+		const fetchAuthHeadersWithTimeout = () => {
+			return Promise.race([
+				getAuthHeaders(),
+				new Promise<undefined>((resolve) => {
+					setTimeout(() => {
+						resolve(undefined);
+					}, 2000);
+				}),
+			]);
+		};
+
+		void fetchAuthHeadersWithTimeout()
+			.catch((error: unknown) => {
+				// Catch any errors from getAuthHeaders itself or the timeout
+				reportError(error, 'getAuthHeaders');
+				return undefined;
+			})
+			.then((headers) =>
+				// Fallback to fallbackHeaders if headers are not present
+				getHeader(
+					contributionsServiceUrl,
+					requestData,
+					headers ?? fallbackHeaders,
+				),
+			)
 			.then((response: ModuleDataResponse<HeaderProps>) => {
 				if (!response.data) {
 					return null;
@@ -102,9 +146,9 @@ const ReaderRevenueLinksRemote = ({
 				return (
 					module.name === 'SignInPromptHeader'
 						? /* webpackChunkName: "sign-in-prompt-header" */
-						  import(`./marketing/header/SignInPromptHeader`)
+						  import('./marketing/header/SignInPromptHeader')
 						: /* webpackChunkName: "header" */
-						  import(`./marketing/header/Header`)
+						  import('./marketing/header/Header')
 				).then(
 					(headerModule: {
 						[key: string]: React.ElementType<HeaderProps>;
@@ -116,13 +160,7 @@ const ReaderRevenueLinksRemote = ({
 				);
 			})
 			.catch((error) => {
-				const msg = `Error importing RR header links: ${String(error)}`;
-
-				console.log(msg);
-				window.guardian.modules.sentry.reportError(
-					new Error(msg),
-					'rr-header-links',
-				);
+				reportError(error, 'fetching headers or importing component');
 			});
 	}, [
 		countryCode,
@@ -131,6 +169,7 @@ const ReaderRevenueLinksRemote = ({
 		pageViewId,
 		pageUrl,
 		abTests,
+		authStatus,
 	]);
 
 	if (SupportHeader !== null && supportHeaderResponse) {
