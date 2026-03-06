@@ -105,39 +105,27 @@ const GridItem = ({
 	customCss,
 	children,
 }: GridItemProps) => {
-	const mobileCol = 'centre';
-	const tabletCol = columns?.tablet ?? mobileCol;
-	const leftColCol = columns?.leftCol ?? mobileCol;
-	const desktopCol = columns?.desktop ?? mobileCol;
+	const columnCss = (columnsConfig?: GridItemProps['columns']) => [
+		grid.column.centre,
+		Object.entries({
+			tablet: columnsConfig?.tablet,
+			desktop: columnsConfig?.desktop,
+			leftCol: columnsConfig?.leftCol,
+		})
+			.filter(([, value]) => value != null)
+			.map(
+				([bp, col]) => css`
+					${from[bp as keyof typeof from]} {
+						${grid.column[col!]};
+					}
+				`,
+			),
+	];
 
 	return (
 		<Element
 			data-gu-name={area}
-			css={css([
-				grid.column[mobileCol],
-				rowCss(area, layoutType),
-				customCss,
-
-				// Override column at breakpoints if specified
-				columns?.tablet &&
-					css`
-						${from.tablet} {
-							${grid.column[tabletCol]};
-						}
-					`,
-				columns?.desktop &&
-					css`
-						${from.desktop} {
-							${grid.column[desktopCol]};
-						}
-					`,
-				columns?.leftCol &&
-					css`
-						${from.leftCol} {
-							${grid.column[leftColCol]};
-						}
-					`,
-			])}
+			css={css([columnCss(columns), rowCss(area, layoutType), customCss])}
 		>
 			{children}
 		</Element>
@@ -223,9 +211,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
-	const layoutType: LayoutType = isLabs
-		? 'labs'
-		: isMatchReport
+	const layoutType: LayoutType = isMatchReport
 		? 'matchReport'
 		: isMedia
 		? 'media'
@@ -308,17 +294,21 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						)};
 					`}
 				>
-					<div css={css([grid.container, grid.verticalRules])}>
-						<div className="grid-rule rule-left" />
-						<div className="grid-rule rule-centre" />
-						<div className="grid-rule rule-right" />
-						<GridItem
-							area="match-nav"
-							layoutType={layoutType}
-							element="aside"
-						>
-							<div css={maxWidth}>
-								{isMatchReport && (
+					<div
+						css={css([
+							grid.container,
+							grid.verticalRules({
+								centre: isLabs ? false : true,
+							}),
+						])}
+					>
+						{isMatchReport && !isInFootballRedesignVariantGroup && (
+							<GridItem
+								area="match-summary"
+								layoutType={layoutType}
+								element="aside"
+							>
+								<div css={maxWidth}>
 									<Island
 										priority="feature"
 										defer={{ until: 'visible' }}
@@ -333,16 +323,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											}
 										/>
 									</Island>
-								)}
-							</div>
-						</GridItem>
-						<GridItem
-							area="match-tabs"
-							layoutType={layoutType}
-							element="aside"
-						>
-							<div css={maxWidth}>
-								{isMatchReport && (
+								</div>
+								<div css={maxWidth}>
 									<Island
 										priority="critical"
 										defer={{ until: 'visible' }}
@@ -352,9 +334,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											format={format}
 										/>
 									</Island>
-								)}
-							</div>
-						</GridItem>
+								</div>
+							</GridItem>
+						)}
 						<GridItem
 							area="main-media"
 							layoutType={layoutType}
@@ -701,7 +683,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								${from.desktop} {
 									display: block;
 									padding-top: 6px;
-									${grid.column.right};
 									grid-row: 1 / span 999;
 								}
 							`}
