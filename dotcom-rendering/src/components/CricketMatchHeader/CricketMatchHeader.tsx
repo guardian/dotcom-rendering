@@ -4,6 +4,7 @@ import {
 	headlineBold20Object,
 	headlineBold24Object,
 	space,
+	textSans12Object,
 	textSans14Object,
 	textSans15Object,
 	textSansBold14Object,
@@ -44,7 +45,7 @@ type CricketMatch = {
 	series: string;
 	competition: string;
 	venue: string;
-	day: number;
+	day?: number;
 	matchDate: Date;
 	homeTeam: CricketTeam;
 	awayTeam: CricketTeam;
@@ -272,13 +273,29 @@ const Team = (props: {
 			>
 				<Crest name={team.name} paID={team.paID} />
 			</span>
-			{props.match.kind !== 'Fixture' ? (
-				innings ? (
-					<Score
-						runs={innings.runs}
-						fallOfWicket={innings.fallOfWicket}
-						matchKind={props.match.kind}
-					/>
+			{props.match.kind !== 'Fixture' &&
+				(innings ? (
+					<>
+						<Score
+							runs={innings.runs}
+							fallOfWicket={innings.fallOfWicket}
+							matchKind={props.match.kind}
+						/>
+						{!!innings.overs && (
+							<span
+								css={{
+									...textSans12Object,
+									display: 'inline-block',
+									marginTop: space[2],
+									padding: `0 ${space[1]}px 1px ${space[1]}px`,
+									border: '1px solid',
+									borderRadius: 30,
+								}}
+							>
+								{innings.overs} overs
+							</span>
+						)}
+					</>
 				) : (
 					<span
 						css={{
@@ -289,11 +306,7 @@ const Team = (props: {
 					>
 						Yet to bat
 					</span>
-				)
-			) : null}
-			{/* {props.match.kind !== 'Fixture' ? (
-			<Scorers scorers={props.match[props.team].scorers} />
-		) : null} */}
+				))}
 		</div>
 	);
 };
@@ -319,6 +332,7 @@ const Crest = (props: { name: string; paID: string }) => (
 			zIndex: 1,
 		}}
 	>
+		{/* TODO: Do we have cricket team crests? */}
 		<FootballCrest
 			teamId={props.paID}
 			altText={`${props.name} football crest`}
@@ -356,7 +370,7 @@ const Score = (props: {
 				fill: 'var(--svg-fill)',
 				height: 30,
 			},
-			// Adjust kerning between adjacent numbers
+			// Adjust kerning between adjacent digits
 			'& > * + *': {
 				marginLeft: -6,
 			},
@@ -369,6 +383,7 @@ const Score = (props: {
 		<ScoreNumber score={props.runs} />
 		{props.fallOfWicket !== undefined ? (
 			<>
+				{/* TODO: Convert dash to SVG? */}
 				<span
 					css={{
 						width: 12,
@@ -407,18 +422,3 @@ const ScoreNumber = (props: { score: number }) => {
 		);
 	}
 };
-
-// const Scorers = (props: { scorers: string[] }) =>
-// 	props.scorers.length === 0 ? null : (
-// 		<ul
-// 			css={{
-// 				...textSans14Object,
-// 				paddingTop: space[2],
-// 				[from.leftCol]: textSans15Object,
-// 			}}
-// 		>
-// 			{props.scorers.map((scorer) => (
-// 				<li key={scorer}>{scorer}</li>
-// 			))}
-// 		</ul>
-// 	);
