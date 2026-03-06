@@ -101,39 +101,27 @@ const GridItem = ({
 	customCss,
 	children,
 }: GridItemProps) => {
-	const mobileCol = 'centre';
-	const tabletCol = columns?.tablet ?? mobileCol;
-	const leftColCol = columns?.leftCol ?? mobileCol;
-	const desktopCol = columns?.desktop ?? mobileCol;
+	const columnCss = (columnsConfig?: GridItemProps['columns']) => [
+		grid.column.centre,
+		Object.entries({
+			tablet: columnsConfig?.tablet,
+			desktop: columnsConfig?.desktop,
+			leftCol: columnsConfig?.leftCol,
+		})
+			.filter(([, value]) => value != null)
+			.map(
+				([bp, col]) => css`
+					${from[bp as keyof typeof from]} {
+						${grid.column[col!]};
+					}
+				`,
+			),
+	];
 
 	return (
 		<Element
 			data-gu-name={area}
-			css={css([
-				grid.column[mobileCol],
-				rowCss(area, layoutType),
-				customCss,
-
-				// Override column at breakpoints if specified
-				columns?.tablet &&
-					css`
-						${from.tablet} {
-							${grid.column[tabletCol]};
-						}
-					`,
-				columns?.desktop &&
-					css`
-						${from.desktop} {
-							${grid.column[desktopCol]};
-						}
-					`,
-				columns?.leftCol &&
-					css`
-						${from.leftCol} {
-							${grid.column[leftColCol]};
-						}
-					`,
-			])}
+			css={css([columnCss(columns), rowCss(area, layoutType), customCss])}
 		>
 			{children}
 		</Element>
@@ -212,9 +200,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
-	const layoutType: LayoutType = isLabs
-		? 'labs'
-		: isMatchReport
+	const layoutType: LayoutType = isMatchReport
 		? 'matchReport'
 		: isMedia
 		? 'media'
@@ -633,7 +619,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								${from.desktop} {
 									display: block;
 									padding-top: 6px;
-									${grid.column.right};
 									grid-row: 1 / span 999;
 								}
 							`}
