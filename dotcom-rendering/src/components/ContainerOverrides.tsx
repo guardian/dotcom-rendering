@@ -28,9 +28,8 @@ const cardHeadlineLight: ContainerFunction = (
 			return sourcePalette.neutral[93];
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[100];
-		// TODO: @commercial-dev to update to neutral[7] when launching Redesigned Labs Containers
 		case 'Branded':
-			return sourcePalette.neutral[20];
+			return 'inherit';
 	}
 };
 const cardHeadlineDark: ContainerFunction = (
@@ -83,8 +82,7 @@ const cardTrailTextLight: ContainerFunction = (
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[100];
 		case 'Branded':
-			// TODO: @commercial-dev to update to palette('--card-trail-text') when launching Redesigned Labs Containers
-			return sourcePalette.neutral[20];
+			return 'inherit';
 	}
 };
 const cardTrailTextDark: ContainerFunction = (
@@ -110,8 +108,7 @@ const cardTrailTextDark: ContainerFunction = (
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[700];
 		case 'Branded':
-			// TODO: @commercial-dev to update to palette('--card-trail-text') when launching Redesigned Labs Containers
-			return sourcePalette.neutral[86];
+			return 'inherit';
 	}
 };
 
@@ -136,8 +133,7 @@ const cardKickerTextLight: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[100];
 		case 'Branded':
-			// TODO: @commercial-dev to update to labs[100] when launching Redesigned Labs Containers
-			return sourcePalette.labs[200];
+			return sourcePalette.labs[100];
 	}
 };
 const cardKickerTextDark: ContainerFunction = (containerPalette) => {
@@ -186,8 +182,7 @@ const cardQuoteIconLight: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[100];
 		case 'Branded':
-			// TODO: @commercial-dev to update to labs[100] when launching Redesigned Labs Containers
-			return sourcePalette.labs[200];
+			return sourcePalette.labs[100];
 	}
 };
 const cardQuoteIconDark: ContainerFunction = (containerPalette) => {
@@ -583,8 +578,7 @@ const cardMediaWaveformLight: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[800];
 		case 'Branded':
-			// TODO: @commercial-dev to update to palette('--card-media-waveform') when launching Redesigned Labs Containers
-			return sourcePalette.neutral[86];
+			return 'inherit';
 	}
 };
 
@@ -604,8 +598,7 @@ const cardMediaWaveformDark: ContainerFunction = (containerPalette) => {
 		case 'EventAltPalette':
 			return sourcePalette.culture[300];
 		case 'Branded':
-			// TODO: @commercial-dev to update to palette('--card-media-waveform') when launching Redesigned Labs Containers
-			return sourcePalette.neutral[38];
+			return 'inherit';
 	}
 };
 
@@ -630,7 +623,7 @@ const sectionBackgroundLight: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[800];
 		case 'Branded':
-			return palette('--section-background');
+			return 'inherit';
 	}
 };
 
@@ -654,7 +647,7 @@ const sectionBackgroundDark: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[100];
 		case 'Branded':
-			return palette('--section-background');
+			return 'inherit';
 	}
 };
 
@@ -712,8 +705,7 @@ const cardBorderSupportingLight: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return transparentColour(sourcePalette.neutral[46], 0.3);
 		case 'Branded':
-			// TODO: @commercial-dev to update to palette('--card-border-supporting') when launching Redesigned Labs Containers
-			return sourcePalette.neutral[73];
+			return 'inherit';
 	}
 };
 const cardBorderSupportingDark: ContainerFunction = (containerPalette) => {
@@ -735,8 +727,7 @@ const cardBorderSupportingDark: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return transparentColour(sourcePalette.neutral[46], 0.3);
 		case 'Branded':
-			// TODO: @commercial-dev to update to palette('--card-border-supporting') when launching Redesigned Labs Containers
-			return sourcePalette.neutral[46];
+			return 'inherit';
 	}
 };
 
