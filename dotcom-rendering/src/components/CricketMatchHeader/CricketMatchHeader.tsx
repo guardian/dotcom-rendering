@@ -5,6 +5,7 @@ import {
 	headlineBold24Object,
 	space,
 	textSans14Object,
+	textSans15Object,
 	textSansBold14Object,
 	textSansBold17Object,
 	until,
@@ -33,11 +34,9 @@ type CricketTeam = {
 };
 
 type Inning = {
-	order: number;
-	battingTeam: string;
 	runs: number;
-	overs: string;
-	fallOfWicket: { order: string }[];
+	overs?: string;
+	fallOfWicket?: number;
 };
 
 type CricketMatch = {
@@ -49,7 +48,10 @@ type CricketMatch = {
 	matchDate: Date;
 	homeTeam: CricketTeam;
 	awayTeam: CricketTeam;
-	innings: Inning[];
+	innings: {
+		homeTeam?: Inning;
+		awayTeam?: Inning;
+	};
 };
 
 type Props = {
@@ -236,47 +238,65 @@ const Teams = (props: { match: CricketMatch }) => (
 const Team = (props: {
 	team: 'homeTeam' | 'awayTeam';
 	match: CricketMatch;
-}) => (
-	<div
-		css={{
-			flex: '1 1 50%',
-			wordBreak: 'break-word',
-			borderLeftStyle: 'solid',
-			'&:last-of-type': {
-				paddingLeft: space[2],
-				borderLeftWidth: 1,
-			},
-			[from.leftCol]: {
-				paddingLeft: space[2],
-				borderLeftWidth: 1,
-				paddingTop: space[3],
-			},
-		}}
-		style={{
-			borderLeftColor: palette(border(props.match.kind)),
-		}}
-	>
-		<TeamName name={props.match[props.team].name} />
-		<span
+}) => {
+	const team = props.match[props.team];
+	const innings = props.match.innings[props.team];
+
+	return (
+		<div
 			css={{
-				display: 'flex',
-				// Creates a new stacking context for z-index.
-				isolation: 'isolate',
+				flex: '1 1 50%',
+				wordBreak: 'break-word',
+				borderLeftStyle: 'solid',
+				'&:last-of-type': {
+					paddingLeft: space[2],
+					borderLeftWidth: 1,
+				},
+				[from.leftCol]: {
+					paddingLeft: space[2],
+					borderLeftWidth: 1,
+					paddingTop: space[3],
+				},
+			}}
+			style={{
+				borderLeftColor: palette(border(props.match.kind)),
 			}}
 		>
-			<Crest
-				name={props.match[props.team].name}
-				paID={props.match[props.team].paID}
-			/>
-		</span>
-		{props.match.kind !== 'Fixture' ? (
-			<Score runs={169} fallOfWicket={8} matchKind={props.match.kind} />
-		) : null}
-		{/* {props.match.kind !== 'Fixture' ? (
+			<TeamName name={team.name} />
+			<span
+				css={{
+					display: 'flex',
+					// Creates a new stacking context for z-index.
+					isolation: 'isolate',
+				}}
+			>
+				<Crest name={team.name} paID={team.paID} />
+			</span>
+			{props.match.kind !== 'Fixture' ? (
+				innings ? (
+					<Score
+						runs={innings.runs}
+						fallOfWicket={innings.fallOfWicket}
+						matchKind={props.match.kind}
+					/>
+				) : (
+					<span
+						css={{
+							...textSans14Object,
+							paddingTop: space[2],
+							[from.leftCol]: textSans15Object,
+						}}
+					>
+						Yet to bat
+					</span>
+				)
+			) : null}
+			{/* {props.match.kind !== 'Fixture' ? (
 			<Scorers scorers={props.match[props.team].scorers} />
 		) : null} */}
-	</div>
-);
+		</div>
+	);
+};
 
 const TeamName = (props: { name: string }) => (
 	<p
@@ -322,7 +342,7 @@ const Crest = (props: { name: string; paID: string }) => (
  */
 const Score = (props: {
 	runs: number;
-	fallOfWicket: number;
+	fallOfWicket?: number;
 	matchKind: CricketMatch['kind'];
 }) => (
 	<span
@@ -347,16 +367,20 @@ const Score = (props: {
 		}}
 	>
 		<ScoreNumber score={props.runs} />
-		<span
-			css={{
-				width: 12,
-				height: 2,
-				marginLeft: -2,
-				marginRight: 6,
-				backgroundColor: palette(primaryText(props.matchKind)),
-			}}
-		></span>
-		<ScoreNumber score={props.fallOfWicket} />
+		{props.fallOfWicket !== undefined ? (
+			<>
+				<span
+					css={{
+						width: 12,
+						height: 2,
+						marginLeft: -2,
+						marginRight: 6,
+						backgroundColor: palette(primaryText(props.matchKind)),
+					}}
+				></span>
+				<ScoreNumber score={props.fallOfWicket} />
+			</>
+		) : null}
 	</span>
 );
 

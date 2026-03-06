@@ -27,31 +27,16 @@ export const Live = {
 				name: 'England',
 				paID: '997',
 			},
-			innings: [
-				{
-					order: 1,
-					battingTeam: 'Australia',
+			innings: {
+				homeTeam: {
 					runs: 169,
 					overs: '20.0',
-					fallOfWicket: [
-						{ order: '1' },
-						{ order: '2' },
-						{ order: '3' },
-						{ order: '4' },
-						{ order: '5' },
-						{ order: '6' },
-						{ order: '7' },
-						{ order: '8' },
-					],
+					fallOfWicket: 8,
 				},
-				{
-					order: 2,
-					battingTeam: 'England',
+				awayTeam: {
 					runs: 173,
-					overs: '12.5',
-					fallOfWicket: [{ order: '1' }],
 				},
-			],
+			},
 		},
 	},
 } satisfies Story;
