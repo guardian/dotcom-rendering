@@ -87,25 +87,25 @@ const paddedContainer = `
 
 // ----- Vertical Rules ----- //
 
+type VerticalRuleOptions = {
+	centre?: boolean;
+};
+
 /**
- * Optional vertical grid rules.
+ * Render Guardian grid vertical rules.
+ *
+ * Left and right rules are always present.
+ * A centre rule can optionally be enabled.
  *
  * Usage:
- * <div css={css`${grid.container} ${grid.verticalRules}`}>
- *   <div className="grid-rule rule-left" />
- *   <div className="grid-rule rule-centre" />
- *   <div className="grid-rule rule-right" />
- *   ...
- * </div>
+ * css([grid.container, grid.verticalRules()])
+ * css([grid.container, grid.verticalRules({ centre: true })])
  */
-const verticalRules = `
+const verticalRules = (options: VerticalRuleOptions = {}): string => `
   ${fromBreakpoint.tablet} {
     position: relative;
-	--centre-transform: translateX(-${columnGap});
 
-	${fromBreakpoint.leftCol} {
-		--centre-transform: translateX(calc(${columnGap} / -2));
-	}
+    --centre-transform: translateX(-${columnGap});
 
     .grid-rule {
 		position: absolute;
@@ -123,34 +123,51 @@ const verticalRules = `
 	  transform: translateX(-${columnGap});
     }
 
-    /* CENTRE RULE — start of centre column */
-    .rule-centre {
+    &::before,
+    &::after
+    ${options.centre ? ', & > *:first-child::before' : ''} {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background-color: ${themePalette('--article-border')};
+      pointer-events: none;
+      content: '';
+    }
+
+    /* LEFT OUTER RULE */
+    &::before {
       grid-column: centre-column-start;
       justify-self: start;
-      transform: var(--centre-transform); /* centre it in gap */
+      transform: translateX(-${columnGap});
+
+      ${fromBreakpoint.leftCol} {
+        grid-column: left-column-start;
+      }
     }
 
-    /* RIGHT OUTER RULE — end of right column */
-    .rule-right {
+    /* RIGHT OUTER RULE */
+    &::after {
       grid-column: right-column-end;
       justify-self: start;
-	  transform: translateX(-1px);
-	  ${betweenBreakpoint.tablet.and.desktop} {
-		grid-column: centre-column-end;
-	  }
-    }
-  }
+      transform: translateX(-1px);
 
-  ${fromBreakpoint.leftCol} {
-    .rule-left {
-      grid-column: left-column-start;
+      ${betweenBreakpoint.tablet.and.desktop} {
+        grid-column: centre-column-end;
+      }
     }
-  }
 
-  ${fromBreakpoint.wide} {
-    .rule-right {
-      grid-column: right-column-end;
-    }
+    ${
+		options.centre
+			? `
+    /* CENTRE RULE */
+    & > *:first-child::before {
+      grid-column: centre-column-start;
+      justify-self: start;
+      transform: var(--centre-transform);
+    }`
+			: ''
+	}
   }
 `;
 
