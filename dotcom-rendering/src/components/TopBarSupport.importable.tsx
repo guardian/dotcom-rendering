@@ -5,7 +5,6 @@
 import { css } from '@emotion/react';
 import { getCookie, isUndefined } from '@guardian/libs';
 import type { ComponentEvent } from '@guardian/ophan-tracker-js';
-import { getHeader } from '@guardian/support-dotcom-components';
 import type {
 	HeaderPayload,
 	ModuleData,
@@ -18,9 +17,11 @@ import type {
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import {
+	getAuthHeaders,
 	getPurchaseInfo,
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
+import { getHeader } from '../lib/sdcRequests';
 import { useBetaAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
@@ -90,7 +91,10 @@ const ReaderRevenueLinksRemote = ({
 			},
 		};
 
-		getHeader(contributionsServiceUrl, requestData)
+		getAuthHeaders()
+			.then((headers) =>
+				getHeader(contributionsServiceUrl, requestData, headers),
+			)
 			.then((response: ModuleDataResponse<HeaderProps>) => {
 				if (!response.data) {
 					return null;
