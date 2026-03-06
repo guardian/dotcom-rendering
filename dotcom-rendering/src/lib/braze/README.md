@@ -77,8 +77,10 @@ Because marketing teams have styling flexibility, there is a risk of campaigns t
 
 -   Parses the banner's HTML/CSS.
 -   Validates that every CSS selector matches at least one element.
--   Logs warnings (in development) if "dead" selectors are found.
-    This ensures broken creatives are caught during the QA process before launch.
+-   Logs warnings if "dead" selectors are found.
+-   On failure: emits a `brazeBannersSystemLogger.warn` and logs a Braze custom event `braze_banner_css_validation_failed` (with `placementId`) for Braze-side alerting. The banner is **not** blocked from rendering — it is shown regardless, but the failure is recorded for awareness and action.
+
+This ensures broken creatives are caught during the QA process before launch.
 
 #### B. JavaScript Isolation
 
@@ -103,7 +105,9 @@ To support more complex designs while maintaining consistency, the system suppor
 -   **Enabled via**: `wrapperModeEnabled` (Boolean) Key-Value pair.
 -   **Behavior**: When enabled, DCR applies specific styles to the **container** holding the Braze iframe, including:
     -   `max-height: 65svh` (prevents banners from taking over the full screen).
-    -   `border-top: 1px solid black` (provides visual separation).
+    -   `border-top: 1px solid black` (provides visual separation at all breakpoints — the previous phablet-level `border: none` override has been removed for consistency).
+    -   `overflow-y: auto` and `overflow-x: hidden` (allow vertical scrolling within the banner container on small/portrait screens).
+    -   `overscroll-behavior: none` (prevents scroll from propagating to the host page once the banner reaches its scroll boundary).
     -   Dynamic Background Color (see below).
 
 #### Automatic Color Contrast
@@ -118,13 +122,45 @@ When providing a background color in Wrapper Mode, DCR automatically calculates 
 
 The system automatically reads specific Key-Value pairs from the Braze Campaign to configure the banner wrapper.
 
-| Key                          | Type    | Description                                                                                |
-| :--------------------------- | :------ | :----------------------------------------------------------------------------------------- |
-| `minHeight`                  | String  | Sets the CSS `min-height` of the container (e.g., "300px") to minimize layout shift (CLS). |
-| `wrapperModeEnabled`         | Boolean | Activates Wrapper Mode (see above).                                                        |
-| `wrapperModeBackgroundColor` | String  | Sets the background color of the wrapper and triggers the auto-contrast calculation.       |
+| Key                          | Type    | Description                                                                                                           |
+| :--------------------------- | :------ | :-------------------------------------------------------------------------------------------------------------------- |
+| `minHeight`                  | String  | Sets the CSS `min-height` of the container (e.g., "300px") to minimize layout shift (CLS).                            |
+| `wrapperModeEnabled`         | Boolean | Activates Wrapper Mode (see above).                                                                                   |
+| `wrapperModeBackgroundColor` | String  | Sets the background color of the wrapper and triggers the auto-contrast calculation.                                  |
+| `ophanComponentId`           | String  | Overrides the Ophan component ID used when logging the `VIEW` impression event. Defaults to `placementId` if not set. |
 
 _Custom keys can also be retrieved by the banner creative using the `BRAZE_BANNERS_SYSTEM:GET_SETTINGS_PROPERTY_VALUE` message._
+
+### 8. Impression Tracking & Analytics
+
+The system tracks when the banner enters the viewport and logs impressions to multiple destinations.
+
+#### Visibility Detection
+
+`BrazeBannersSystemDisplay` uses the `useIsInView` hook (backed by `IntersectionObserver`) to detect when the banner first becomes visible. Impression logging fires **once** per mount when `hasBeenSeen` becomes `true`.
+
+#### On First View
+
+When the banner enters the viewport for the first time, the following actions are performed in sequence:
+
+1.  **Logger**: `brazeBannersSystemLogger.info` records the event with the banner's placement ID.
+2.  **DOM Event**: A `banner:open` custom event is dispatched on `document`, carrying `{ bannerId: meta.id }`. This allows other parts of the page to react to the banner becoming visible.
+3.  **Braze Impression**: `meta.braze.logBannerImpressions([placementId])` notifies Braze that the banner was shown (used for frequency capping and campaign reporting).
+4.  **Ophan VIEW**: A `VIEW` component event is submitted via `submitComponentEvent` with `componentType: 'RETENTION_ENGAGEMENT_BANNER'`. The component ID is read from the `ophanComponentId` Key-Value pair, falling back to `placementId` if not set.
+
+### 9. User Interaction Logging
+
+All user interactions with the banner are tracked with both a Braze banner click (`logBannerClick`) and a Braze custom event (`logCustomEvent`) containing contextual metadata.
+
+| Interaction          | Braze Click Label             | Braze Custom Event                   | Custom Event Properties                                                           |
+| :------------------- | :---------------------------- | :----------------------------------- | :-------------------------------------------------------------------------------- |
+| Newsletter Subscribe | `newsletter_subscribe_button` | `braze_banner_newsletter_subscribe`  | `placementId`, `newsletterId`, `success`                                          |
+| Reminder Subscribe   | `reminder_subscribe_button`   | `braze_banner_reminder_subscribe`    | `placementId`, `reminderPeriod`, `reminderComponent`, `reminderOption`, `success` |
+| Navigate to URL      | `navigate_to_url_button`      | `braze_banner_navigate_to_url`       | `placementId`, `url`, `target`                                                    |
+| Dismiss Banner       | `dismiss_button`              | `braze_banner_dismissed`             | `placementId`                                                                     |
+| CSS Validation Fail  | —                             | `braze_banner_css_validation_failed` | `placementId`                                                                     |
+
+> The Braze click (`logBannerClick`) feeds native Braze campaign reports, while the custom event (`logCustomEvent`) provides granular analytics available in Braze Data Export and BigQuery.
 
 ## Communication Protocol
 
@@ -663,4 +699,4 @@ const brazeCandidate = buildBrazeBannersSystemConfig(
 ---
 
 **Value Team**
-_Last Updated: February 2026_
+_Last Updated: March 2026_
