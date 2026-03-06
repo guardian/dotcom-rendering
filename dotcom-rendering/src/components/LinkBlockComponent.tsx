@@ -45,6 +45,7 @@ export const LinkBlockComponent = ({
 		case 'ProductButton': {
 			return (
 				<ProductLinkButton
+					xCustComponentId={'product-link-block'}
 					priority={buttonPriority}
 					label={label}
 					url={url}
