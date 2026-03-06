@@ -229,6 +229,9 @@ export const OneCardLayout = ({
 					headlinePosition={isSplashCard ? 'outer' : 'inner'}
 					subtitleSize={subtitleSize}
 					starRatingSize="medium"
+					isInSlimHomepageAbTestVariant={
+						isInSlimHomepageAbTestVariant
+					}
 				/>
 			</LI>
 		</UL>
@@ -319,6 +322,9 @@ const TwoOrFourCardLayout = ({
 									!isMediaCard(card.format))
 							}
 							canPlayInline={false}
+							isInSlimHomepageAbTestVariant={
+								isInSlimHomepageAbTestVariant
+							}
 						/>
 					</LI>
 				);

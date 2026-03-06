@@ -390,6 +390,9 @@ const SplashCardLayout = ({
 					headlinePosition={card.showLivePlayable ? 'outer' : 'inner'}
 					isStorylines={isStorylines}
 					starRatingSize="medium"
+					isInSlimHomepageAbTestVariant={
+						isInSlimHomepageAbTestVariant
+					}
 				/>
 			</LI>
 		</UL>
@@ -553,6 +556,9 @@ const FullWidthCardLayout = ({
 					subtitleSize={subtitleSize}
 					isStorylines={isStorylines}
 					starRatingSize="medium"
+					isInSlimHomepageAbTestVariant={
+						isInSlimHomepageAbTestVariant
+					}
 				/>
 			</LI>
 		</UL>
@@ -649,6 +655,9 @@ const HalfWidthCardLayout = ({
 							}
 							canPlayInline={false}
 							isStorylines={isStorylines}
+							isInSlimHomepageAbTestVariant={
+								isInSlimHomepageAbTestVariant
+							}
 						/>
 					</LI>
 				);
