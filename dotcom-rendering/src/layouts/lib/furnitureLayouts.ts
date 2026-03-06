@@ -1,7 +1,7 @@
 import { css, type SerializedStyles } from '@emotion/react';
 import { from, until } from '@guardian/source/foundations';
 
-export type LayoutType = 'standard' | 'matchReport' | 'media' | 'labs';
+export type LayoutType = 'standard' | 'matchReport' | 'media';
 
 export type Area =
 	// Common areas
@@ -13,8 +13,7 @@ export type Area =
 	| 'body'
 	| 'right-column'
 	// Match report specific areas
-	| 'match-nav'
-	| 'match-tabs';
+	| 'match-summary';
 
 type LayoutRows = Partial<
 	Record<
@@ -49,8 +48,7 @@ const furnitureRowLayouts: Record<LayoutType, LayoutDefinition> = {
 	},
 	matchReport: {
 		tablet: [
-			['match-nav'],
-			['match-tabs'],
+			['match-summary'],
 			['title'],
 			['headline'],
 			['standfirst'],
@@ -58,8 +56,7 @@ const furnitureRowLayouts: Record<LayoutType, LayoutDefinition> = {
 			['meta'],
 		],
 		leftCol: [
-			['title', 'match-nav'],
-			['match-tabs'],
+			['title', 'match-summary'],
 			['headline'],
 			['meta', 'main-media'],
 		],
@@ -83,20 +80,6 @@ const furnitureRowLayouts: Record<LayoutType, LayoutDefinition> = {
 			['title', 'headline'],
 			['meta', 'main-media'],
 			['standfirst'],
-		],
-	},
-	labs: {
-		tablet: [
-			['title'],
-			['headline'],
-			['standfirst'],
-			['main-media'],
-			['meta'],
-		],
-		leftCol: [
-			['title', 'headline'],
-			['standfirst'],
-			['meta', 'main-media'],
 		],
 	},
 };
