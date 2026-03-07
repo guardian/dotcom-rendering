@@ -85,8 +85,8 @@ const configs = [
 	{
 		pageIds: [
 			'sport/winter-paralympics-2026',
-			'sport/ng-interactive/2026/mar/04/2026-winter-paralympics-results',
-			'sport/ng-interactive/2026/mar/04/2026-winter-paralympics-medal-table',
+			'sport/ng-interactive/2026/mar/05/winter-paralympics-results-from-milano-cortina-2026',
+			'sport/ng-interactive/2026/mar/05/winter-paralympics-2026-latest-medal-table-for-milano-cortina',
 		],
 		tagIds: [],
 		textColor: palette.neutral[7],
@@ -98,11 +98,11 @@ const configs = [
 		links: [
 			{
 				label: 'Results',
-				id: 'sport/ng-interactive/2026/mar/04/2026-winter-paralympics-results',
+				id: 'sport/ng-interactive/2026/mar/05/winter-paralympics-results-from-milano-cortina-2026',
 			},
 			{
 				label: 'Medal table',
-				id: 'sport/ng-interactive/2026/mar/04/2026-winter-paralympics-medal-table',
+				id: 'sport/ng-interactive/2026/mar/05/winter-paralympics-2026-latest-medal-table-for-milano-cortina',
 			},
 			{
 				label: 'Full coverage',
