@@ -50,6 +50,7 @@ import { SubNav } from '../components/SubNav.importable';
 import { grid } from '../grid';
 import {
 	ArticleDesign,
+	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/articleFormat';
@@ -88,9 +89,10 @@ interface GridItemProps {
 	area: Area;
 	layoutType: LayoutType;
 	columns?: {
-		tablet?: 'left' | 'centre' | 'right';
-		desktop?: 'left' | 'centre' | 'right';
-		leftCol?: 'left' | 'centre' | 'right';
+		mobile?: string;
+		tablet?: string;
+		desktop?: string;
+		leftCol?: string;
 	};
 	element?: 'div' | 'article' | 'main' | 'aside' | 'section';
 	customCss?: SerializedStyles;
@@ -105,22 +107,40 @@ const GridItem = ({
 	customCss,
 	children,
 }: GridItemProps) => {
-	const columnCss = (columnsConfig?: GridItemProps['columns']) => [
-		grid.column.centre,
-		Object.entries({
-			tablet: columnsConfig?.tablet,
-			desktop: columnsConfig?.desktop,
-			leftCol: columnsConfig?.leftCol,
-		})
-			.filter(([, value]) => value != null)
-			.map(
-				([bp, col]) => css`
-					${from[bp as keyof typeof from]} {
-						${grid.column[col!]};
+	const columnCss = (columnsConfig?: GridItemProps['columns']) => {
+		const defaultCss = grid.column.centre;
+
+		if (!columnsConfig) return defaultCss;
+
+		return [
+			defaultCss,
+			...Object.entries(columnsConfig)
+				.map(([bp, col]) => {
+					if (!col) return null;
+
+					let columnValue: string;
+
+					if (typeof col === 'string') {
+						if (col.trim().startsWith('grid-column')) {
+							columnValue = col;
+						} else {
+							const gridColumnValue =
+								grid.column[col as keyof typeof grid.column];
+							columnValue = gridColumnValue || '';
+						}
+					} else {
+						columnValue = col;
 					}
-				`,
-			),
-	];
+
+					return css`
+						${from[bp as keyof typeof from]} {
+							${columnValue};
+						}
+					`;
+				})
+				.filter(Boolean),
+		];
+	};
 
 	return (
 		<Element
@@ -205,12 +225,16 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
+	const isShowcase = format.display === ArticleDisplay.Showcase;
+
 	const renderAds = canRenderAds(article);
 
 	const layoutType: LayoutType = isMatchReport
 		? 'matchReport'
 		: isMedia
 		? 'media'
+		: isShowcase
+		? 'showcase'
 		: 'standard';
 
 	return (
@@ -336,8 +360,18 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							area="main-media"
 							layoutType={layoutType}
 							element="div"
+							columns={
+								isShowcase
+									? {
+											leftCol: grid.between(
+												'centre-column-start',
+												'right-column-end',
+											),
+									  }
+									: undefined
+							}
 						>
-							<div css={!isMedia && maxWidth}>
+							<div css={!isMedia && !isShowcase && maxWidth}>
 								<MainMedia
 									format={format}
 									elements={article.mainMediaElements}
@@ -682,6 +716,12 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									padding-top: 6px;
 									grid-row: 1 / span 999;
 								}
+								${isShowcase &&
+								css`
+									${from.leftCol} {
+										grid-row: 3 / span 999;
+									}
+								`}
 							`}
 							element="aside"
 						>

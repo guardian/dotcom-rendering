@@ -1,7 +1,7 @@
 import { css, type SerializedStyles } from '@emotion/react';
 import { from, until } from '@guardian/source/foundations';
 
-export type LayoutType = 'standard' | 'matchReport' | 'media';
+export type LayoutType = 'standard' | 'showcase' | 'matchReport' | 'media';
 
 export type Area =
 	// Common areas
@@ -44,6 +44,22 @@ const furnitureRowLayouts: Record<LayoutType, LayoutDefinition> = {
 			['title', 'headline'],
 			['standfirst'],
 			['meta', 'main-media'],
+		],
+	},
+	showcase: {
+		tablet: [
+			['title'],
+			['headline'],
+			['standfirst'],
+			['main-media'],
+			['meta'],
+		],
+
+		leftCol: [
+			['title', 'headline'],
+			['meta', 'main-media'],
+			['standfirst'],
+			['right-column'],
 		],
 	},
 	matchReport: {
