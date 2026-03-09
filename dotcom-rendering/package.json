@@ -51,6 +51,7 @@
 		"@storybook/addon-docs": "10.2.13",
 		"@storybook/addon-webpack5-compiler-swc": "4.0.2",
 		"@storybook/react-webpack5": "10.2.13",
+		"@storybook/test-runner": "0.24.2",
 		"@svgr/webpack": "8.1.0",
 		"@swc/cli": "0.7.8",
 		"@swc/core": "1.13.5",
