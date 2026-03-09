@@ -16,7 +16,6 @@ type Props = {
 	mediaPositionOnMobile: MediaPositionType;
 	minWidthInPixels?: number;
 	gapSizes: GapSizes;
-	isBetaContainer: boolean;
 };
 
 const containerStyles = css`
@@ -35,14 +34,10 @@ const minWidth = (minWidthInPixels?: number) => {
 		width: 100%;
 	`;
 };
-
 /**
  * Cards with an avatar are a special case as these are rendered horizontally
  * on mobile and vertically on desktop by default, with the avatar on the right
  * or bottom of the card respectively.
- *
- * A boosted card in a `dynamic/slow` container is an exception to this as it is
- * rendered horizontally on desktop by overriding `mediaPositionOnDesktop`
  *
  * `scrollable/medium` is another exception as the medium cards require a
  * vertical layout at all breakpoints so we explicitly check that the media
@@ -52,7 +47,6 @@ const minWidth = (minWidthInPixels?: number) => {
 export const decideAvatarPosition = (
 	mediaPositionOnMobile: MediaPositionType,
 	mediaPositionOnDesktop: MediaPositionType,
-	isBetaContainer: boolean,
 ): { mobile: MediaPositionType; desktop: MediaPositionType } => {
 	if (
 		mediaPositionOnMobile === 'bottom' &&
@@ -68,7 +62,7 @@ export const decideAvatarPosition = (
 		mediaPositionOnDesktop === 'left' ||
 		mediaPositionOnDesktop === 'right'
 	) {
-		if (isBetaContainer && mediaPositionOnMobile === 'bottom') {
+		if (mediaPositionOnMobile === 'bottom') {
 			return {
 				mobile: 'bottom',
 				desktop: 'right',
@@ -97,7 +91,6 @@ const mediaPositionMap = {
 const decideFlexDirection = (
 	mediaPositionOnMobile: MediaPositionType,
 	mediaPositionOnDesktop: MediaPositionType,
-	isBetaContainer: boolean,
 	hasAvatar?: boolean,
 ) => {
 	if (!hasAvatar) {
@@ -110,7 +103,6 @@ const decideFlexDirection = (
 	const { mobile, desktop } = decideAvatarPosition(
 		mediaPositionOnMobile,
 		mediaPositionOnDesktop,
-		isBetaContainer,
 	);
 
 	return {
@@ -122,13 +114,11 @@ const decideFlexDirection = (
 const decidePosition = (
 	mediaPositionOnMobile: MediaPositionType,
 	mediaPositionOnDesktop: MediaPositionType,
-	isBetaContainer: boolean,
 	hasAvatar?: boolean,
 ) => {
 	const { mobile, desktop } = decideFlexDirection(
 		mediaPositionOnMobile,
 		mediaPositionOnDesktop,
-		isBetaContainer,
 		hasAvatar,
 	);
 
@@ -172,7 +162,6 @@ export const CardLayout = ({
 	minWidthInPixels,
 	mediaType,
 	gapSizes,
-	isBetaContainer,
 }: Props) => {
 	return (
 		<div
@@ -182,7 +171,6 @@ export const CardLayout = ({
 				decidePosition(
 					mediaPositionOnMobile,
 					mediaPositionOnDesktop,
-					isBetaContainer,
 					mediaType === 'avatar',
 				),
 				decideColumnGap(gapSizes.column),

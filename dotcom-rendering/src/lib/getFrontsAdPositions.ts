@@ -2,19 +2,9 @@ import { isUndefined } from '@guardian/libs';
 import type { DCRCollectionType, DCRGroupedTrails } from '../types/front';
 import {
 	MAX_FRONTS_BANNER_ADS,
-	MAX_FRONTS_BANNER_ADS_BETA,
 	MAX_FRONTS_MOBILE_ADS,
 } from './commercial-constants';
 import { frontsBannerExcludedCollections } from './frontsBannerAdExclusions';
-
-type GroupedCounts = {
-	snap: number;
-	huge: number;
-	veryBig: number;
-	big: number;
-	standard: number;
-	splash: number;
-};
 
 type FlexibleSpecialGroupedCounts = {
 	snap: number;
@@ -28,8 +18,6 @@ type FlexibleGeneralGroupedCounts = {
 	boostedSplash: number;
 	splash: number;
 	immersive: number;
-	veryBig: number;
-	big: number;
 	standardBoosted: number;
 	standard: number;
 };
@@ -124,11 +112,11 @@ const canInsertMobileAd =
 		];
 
 		/**
-		 * Additional rules exist for "beta" fronts which have primary and secondary level containers
+		 * Additional rules exist for fronts which have primary and secondary level containers
 		 * - Is NOT before a secondary level container OR is the top container and is large.
 		 * - Is NOT before a branded container
 		 */
-		const betaFrontRules = [
+		const secondaryFrontRules = [
 			!isBeforeSecondaryLevelContainer(index, collections) ||
 				(index === 0 && getCollectionHeight(collection) >= 3),
 			!isBeforeBrandedContainer(index, collections),
@@ -136,7 +124,7 @@ const canInsertMobileAd =
 
 		// Ad insertion is possible if every condition is met
 		return hasSecondaryContainers
-			? [...rules, ...betaFrontRules].every(Boolean)
+			? [...rules, ...secondaryFrontRules].every(Boolean)
 			: rules.every(Boolean);
 	};
 
@@ -207,12 +195,7 @@ const getFlexibleGeneralHeight = (grouped: DCRGroupedTrails) => {
 		).length,
 		immersive:
 			grouped.standard.filter(({ isImmersive }) => isImmersive).length +
-			grouped.veryBig.filter(({ isImmersive }) => isImmersive).length +
-			grouped.big.filter(({ isImmersive }) => isImmersive).length +
 			grouped.splash.filter(({ isImmersive }) => isImmersive).length,
-		veryBig: grouped.veryBig.filter(({ isImmersive }) => !isImmersive)
-			.length,
-		big: grouped.big.filter(({ isImmersive }) => !isImmersive).length,
 		standardBoosted: grouped.standard.filter(
 			({ boostLevel, isImmersive }) =>
 				boostLevel !== 'default' && !isImmersive,
@@ -271,16 +254,6 @@ const getFlexibleSpecialHeight = (grouped: DCRGroupedTrails) => {
 const getCollectionHeight = (collection: AdCandidate): number => {
 	const { collectionType, grouped } = collection;
 
-	// The height of some dynamic layouts depends on the sizes of the cards that are passed to them.
-	const groupedCounts = {
-		snap: grouped.snap.length,
-		huge: grouped.huge.length,
-		veryBig: grouped.veryBig.length,
-		big: grouped.big.length,
-		standard: grouped.standard.length,
-		splash: grouped.splash.length,
-	} satisfies GroupedCounts;
-
 	switch (collectionType) {
 		// Some thrashers are very small. Since we'd prefer to have ads above content rather than thrashers,
 		// err on the side of inserting fewer ads, by setting the number on the small side for thrashers
@@ -315,37 +288,6 @@ const getCollectionHeight = (collection: AdCandidate): number => {
 		case 'fixed/large/slow-XIV':
 			return 3;
 
-		case 'dynamic/slow':
-		case 'dynamic/fast':
-			if (groupedCounts.huge > 0 || groupedCounts.veryBig > 0) {
-				return 2.5;
-			}
-			return 1.5;
-
-		case 'dynamic/package':
-			if (groupedCounts.standard === 9) {
-				return 3;
-			} else if (
-				groupedCounts.standard === 5 ||
-				groupedCounts.standard === 6 ||
-				groupedCounts.standard === 7 ||
-				groupedCounts.standard === 8
-			) {
-				return 2.5;
-			} else if (
-				groupedCounts.standard === 1 ||
-				groupedCounts.standard === 3 ||
-				groupedCounts.standard === 4
-			) {
-				return 1.5;
-			} else if (groupedCounts.standard === 2) {
-				return 1;
-			}
-			return 1;
-
-		/**
-		 * - - - BETA collections below this line - - -
-		 */
 		case 'flexible/special':
 			return getFlexibleSpecialHeight(grouped);
 
@@ -418,9 +360,7 @@ const getDesktopAdPositions = (
 	collections: AdCandidate[],
 	pageId: string,
 ): number[] => {
-	const maxAdsAllowed = hasSecondaryLevelContainers(collections)
-		? MAX_FRONTS_BANNER_ADS_BETA
-		: MAX_FRONTS_BANNER_ADS;
+	const maxAdsAllowed = MAX_FRONTS_BANNER_ADS;
 
 	const adPositionsFromReducer = collections.reduce<{
 		heightSinceAd: number;
