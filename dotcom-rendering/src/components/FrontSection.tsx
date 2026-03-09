@@ -128,7 +128,7 @@ const borderColourStyles = (
 			return schemePalette('--section-border-opinion');
 		case 'Sport':
 		case 'Sports':
-		case 'Winter Olympics 2026':
+		case 'Winter Paralympics':
 			return schemePalette('--section-border-sport');
 		case 'Lifestyle':
 			return schemePalette('--section-border-lifestyle');
@@ -154,7 +154,7 @@ const articleSectionTitleStyles = (
 			return schemePalette('--article-section-title-opinion');
 		case 'Sport':
 		case 'Sports':
-		case 'Winter Olympics 2026':
+		case 'Winter Paralympics':
 			return schemePalette('--article-section-title-sport');
 		case 'Lifestyle':
 			return schemePalette('--article-section-title-lifestyle');
