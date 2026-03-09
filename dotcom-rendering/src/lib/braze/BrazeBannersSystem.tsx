@@ -955,7 +955,7 @@ export const BrazeBannersSystemDisplay = ({
 								position: relative;
 								display: grid;
 								margin: 0px auto;
-								padding: 12px 4px 0px 12px;
+								padding: 0px 4px 0px 12px;
 								bottom: 0px;
 								column-gap: 10px;
 								align-self: stretch;
@@ -981,7 +981,7 @@ export const BrazeBannersSystemDisplay = ({
 										'. copy-container close-button close-button'
 										/ minmax(0px, 0.5fr)
 										492px max-content minmax(0px, 0.5fr);
-									padding: 12px 12px 0px;
+									padding: 0px 12px 0px;
 								}
 								${until.phablet} {
 									max-width: 660px;
@@ -1042,18 +1042,17 @@ export const BrazeBannersSystemDisplay = ({
 									grid-area: copy-container;
 									padding-left: 12px;
 									padding-right: 12px;
-									padding-top: 24px;
+									padding-top: 18px;
 									padding-bottom: 12px;
 									${until.leftCol} {
 										padding-left: 0px;
 										padding-right: 0px;
 									}
-									${until.phablet} {
-										padding-top: 0px;
-										padding-bottom: 0px;
+									${until.desktop} {
+										padding-top: 12px;
 									}
 									${until.phablet} {
-										padding-top: 24px;
+										padding-bottom: 0px;
 									}
 							  `
 							: undefined
