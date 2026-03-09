@@ -18,6 +18,7 @@ import type { FEFootballMatchListPage } from '../frontend/feFootballMatchListPag
 import type { FEFootballTablesPage } from '../frontend/feFootballTablesPage';
 import { Pillar } from '../lib/articleFormat';
 import { safeParseURL } from '../lib/parse';
+import type { NavType } from '../model/extract-nav';
 import { extractNAV } from '../model/extract-nav';
 import {
 	validateAsCricketMatchPageType,
@@ -33,7 +34,9 @@ import type {
 	FootballTablesPage,
 	Region,
 } from '../sportDataPage';
+import type { FENavType } from '../types/frontend';
 import { makePrefetchHeader } from './lib/header';
+import { renderAppsSportPage } from './render.sportDataPage.app';
 import { renderSportPage } from './render.sportDataPage.web';
 
 const decideMatchListPageKind = (pageId: string): FootballMatchListPageKind => {
@@ -88,6 +91,13 @@ const getNextPageNoJsUrl = (isProd: boolean, nextPageNoJs?: string) => {
 	return `https://code.dev-theguardian.com${nextPageNoJs}`;
 };
 
+const parseNav = (nav: FENavType): NavType => {
+	return {
+		...extractNAV(nav),
+		selectedPillar: Pillar.Sport,
+	};
+};
+
 const parseFEFootballMatchList = (
 	data: FEFootballMatchListPage,
 ): FootballMatchListPage => {
@@ -112,10 +122,6 @@ const parseFEFootballMatchList = (
 		),
 		previousPage: data.previousPage,
 		regions: parseFEFootballCompetitionRegions(data.filters),
-		nav: {
-			...extractNAV(data.nav),
-			selectedPillar: Pillar.Sport,
-		},
 		editionId: data.editionId,
 		guardianBaseURL: data.guardianBaseURL,
 		config: data.config,
@@ -131,7 +137,10 @@ export const handleFootballMatchListPage: RequestHandler = ({ body }, res) => {
 		validateAsFootballMatchListPage(body);
 
 	const parsedFootballData = parseFEFootballMatchList(footballDataValidated);
-	const { html, prefetchScripts } = renderSportPage(parsedFootballData);
+	const { html, prefetchScripts } = renderSportPage({
+		sportData: parsedFootballData,
+		nav: parseNav(footballDataValidated.nav),
+	});
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
@@ -150,10 +159,6 @@ const parseFEFootballTables = (
 		tables: parsedFootballTables.value,
 		kind: 'FootballTables',
 		regions: parseFEFootballCompetitionRegions(data.filters),
-		nav: {
-			...extractNAV(data.nav),
-			selectedPillar: Pillar.Sport,
-		},
 		editionId: data.editionId,
 		guardianBaseURL: data.guardianBaseURL,
 		config: data.config,
@@ -171,7 +176,10 @@ export const handleFootballTablesPage: RequestHandler = ({ body }, res) => {
 	const parsedFootballTableData = parseFEFootballTables(
 		footballTablesPageValidated,
 	);
-	const { html, prefetchScripts } = renderSportPage(parsedFootballTableData);
+	const { html, prefetchScripts } = renderSportPage({
+		sportData: parsedFootballTableData,
+		nav: parseNav(footballTablesPageValidated.nav),
+	});
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
@@ -187,10 +195,7 @@ const parseFECricketMatch = (data: FECricketMatchPage): CricketMatchPage => {
 	return {
 		match: parsedCricketMatch.value,
 		kind: 'CricketMatch',
-		nav: {
-			...extractNAV(data.nav),
-			selectedPillar: Pillar.Sport,
-		},
+
 		editionId: data.editionId,
 		guardianBaseURL: data.guardianBaseURL,
 		config: data.config,
@@ -208,8 +213,10 @@ export const handleCricketMatchPage: RequestHandler = ({ body }, res) => {
 	const parsedCricketMatchData = parseFECricketMatch(
 		cricketMatchPageValidated,
 	);
-
-	const { html, prefetchScripts } = renderSportPage(parsedCricketMatchData);
+	const { html, prefetchScripts } = renderSportPage({
+		sportData: parsedCricketMatchData,
+		nav: parseNav(cricketMatchPageValidated.nav),
+	});
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
@@ -264,10 +271,6 @@ const parseFEFootballMatch = (
 		matchUrl: data.matchUrl,
 		matchHeaderUrl: headerUrl.value,
 		kind: 'FootballMatchSummary',
-		nav: {
-			...extractNAV(data.nav),
-			selectedPillar: Pillar.Sport,
-		},
 		editionId: data.editionId,
 		guardianBaseURL: data.guardianBaseURL,
 		config: data.config,
@@ -285,6 +288,22 @@ export const handleFootballMatchPage: RequestHandler = ({ body }, res) => {
 		footballMatchPageValidated,
 	);
 
-	const { html, prefetchScripts } = renderSportPage(parsedFootballMatchData);
+	const { html, prefetchScripts } = renderSportPage({
+		sportData: parsedFootballMatchData,
+		nav: parseNav(footballMatchPageValidated.nav),
+	});
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
+};
+
+export const handleAppsFootballMatchPage: RequestHandler = ({ body }, res) => {
+	const footballMatchPageValidated: FEFootballMatchInfoPage =
+		validateAsFootballMatchPageType(body);
+	const parsedFootballMatchData = parseFEFootballMatch(
+		footballMatchPageValidated,
+	);
+
+	const { html, prefetchScripts } = renderAppsSportPage(
+		parsedFootballMatchData,
+	);
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
