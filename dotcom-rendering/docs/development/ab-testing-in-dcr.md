@@ -8,7 +8,7 @@ Instructions for the legacy framework can still be found [here](./legacy-ab-test
 
 ### 1. Configure your A/B test
 
-Create an A/B test in [ab-testing/config/abTests.ts](../ab-testing/config/abTests.ts) **both server _and_ client side tests** are defined here.
+Create an A/B test in [ab-testing/config/abTests.ts](../../../ab-testing/config/abTests.ts) **both server _and_ client side tests** are defined here.
 
 Add your A/B tests to the `abTests` array in the `abTests.ts` file. Each test should have a unique name.
 
