@@ -260,8 +260,6 @@ const getCollectionHeight = (collection: AdCandidate): number => {
 		case 'fixed/thrasher':
 			return 0.5;
 
-		case 'fixed/small/slow-IV':
-		case 'fixed/small/slow-V-mpu':
 		case 'nav/list':
 		case 'nav/media-list':
 		case 'scrollable/small':
@@ -269,24 +267,11 @@ const getCollectionHeight = (collection: AdCandidate): number => {
 		case 'static/medium/4':
 			return 1;
 
-		case 'fixed/small/slow-I':
-		case 'fixed/small/slow-III':
-		case 'fixed/small/slow-V-third':
-		case 'fixed/small/slow-V-half':
-		case 'fixed/small/fast-VIII':
 		case 'scrollable/feature':
 			return 1.5;
 
-		case 'fixed/medium/slow-VI':
-		case 'fixed/medium/slow-VII':
-		case 'fixed/medium/slow-XII-mpu':
-		case 'fixed/medium/fast-XI':
-		case 'fixed/medium/fast-XII':
 		case 'static/feature/2':
 			return 2;
-
-		case 'fixed/large/slow-XIV':
-			return 3;
 
 		case 'flexible/special':
 			return getFlexibleSpecialHeight(grouped);
