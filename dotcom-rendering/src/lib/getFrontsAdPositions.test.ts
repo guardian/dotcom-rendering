@@ -17,7 +17,7 @@ import {
 } from './getFrontsAdPositions';
 
 const testCollection: AdCandidate = {
-	collectionType: 'fixed/large/slow-XIV',
+	collectionType: 'flexible/general',
 	displayName: 'Test Collection',
 	containerLevel: 'Primary',
 	containerPalette: 'EventPalette',
@@ -73,18 +73,18 @@ describe('Mobile Ads', () => {
 	// We used https://www.theguardian.com/uk/commentisfree as a blueprint
 	it('Non-network front, with more than 4 collections, without thrashers', () => {
 		const testCollections: AdCandidate[] = [
-			{ ...testCollection, collectionType: 'fixed/large/slow-XIV' }, // Ad position (0)
-			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' },
-			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (2)
-			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
-			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (4)
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (0)
 			{ ...testCollection, collectionType: 'flexible/general' },
-			{ ...testCollection, collectionType: 'fixed/small/slow-I' }, // Ad position (6)
-			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' },
-			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (8)
-			{ ...testCollection, collectionType: 'fixed/small/slow-III' },
-			{ ...testCollection, collectionType: 'fixed/medium/fast-XII' }, // Ignored - is before merch high position
-			{ ...testCollection, collectionType: 'fixed/small/fast-VIII' }, // Ignored - is merch high position
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (2)
+			{ ...testCollection, collectionType: 'static/medium/4' },
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (4)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (6)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (8)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - is before merch high position
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - is merch high position
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
@@ -97,28 +97,28 @@ describe('Mobile Ads', () => {
 	it('UK Network Front, with more than 4 collections, with thrashers at various places', () => {
 		const testCollections: AdCandidate[] = [
 			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (0)
-			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
+			{ ...testCollection, collectionType: 'static/medium/4' },
 			{ ...testCollection, collectionType: 'flexible/special' }, // Ad position (2)
 			{ ...testCollection, collectionType: 'flexible/special' },
-			{ ...testCollection, collectionType: 'fixed/small/slow-V-mpu' }, // Ad position (4)
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (4)
 			{ ...testCollection, collectionType: 'flexible/special' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
-			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (8)
 			{ ...testCollection, collectionType: 'flexible/general' },
 			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (11)
 			{ ...testCollection, collectionType: 'flexible/general' },
-			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (14)
 			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
 			{ ...testCollection, collectionType: 'scrollable/feature' }, // Ad position (17)
-			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
-			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (19)
+			{ ...testCollection, collectionType: 'static/medium/4' },
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (19)
 			{ ...testCollection, collectionType: 'flexible/general' },
-			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ignored - is before merch high position
-			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ignored - is merch high position
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ignored - is before merch high position
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - is merch high position
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
@@ -131,24 +131,24 @@ describe('Mobile Ads', () => {
 	it('International Network Front, with more than 4 collections, with thrashers at various places', () => {
 		const testCollections: AdCandidate[] = [
 			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (0)
-			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
+			{ ...testCollection, collectionType: 'static/medium/4' },
 			{ ...testCollection, collectionType: 'flexible/special' }, // Ad position (2)
 			{ ...testCollection, collectionType: 'flexible/general' },
 			{ ...testCollection, collectionType: 'flexible/special' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (5)
-			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
+			{ ...testCollection, collectionType: 'static/medium/4' },
 			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (7)
-			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
 			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (11)
 			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
 			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (14)
-			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
-			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (16)
+			{ ...testCollection, collectionType: 'static/medium/4' },
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (16)
 			{ ...testCollection, collectionType: 'scrollable/feature' },
-			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ignored - is merch high position
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - is merch high position
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
@@ -161,24 +161,24 @@ describe('Mobile Ads', () => {
 	it('US Network Front, with more than 4 collections, with thrashers at various places', () => {
 		const testCollections: AdCandidate[] = [
 			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (0)
-			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
-			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (2)
+			{ ...testCollection, collectionType: 'static/medium/4' },
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (2)
 			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
 			{ ...testCollection, collectionType: 'flexible/special' }, // Ad position (5)
 			{ ...testCollection, collectionType: 'flexible/special' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
-			{ ...testCollection, collectionType: 'fixed/small/slow-III' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (9)
-			{ ...testCollection, collectionType: 'fixed/small/slow-IV' },
+			{ ...testCollection, collectionType: 'static/medium/4' },
 			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (12)
-			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' },
+			{ ...testCollection, collectionType: 'flexible/general' },
 			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (14)
 			{ ...testCollection, collectionType: 'flexible/general' },
-			{ ...testCollection, collectionType: 'fixed/small/slow-V-mpu' }, // Ad position (16)
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (16)
 			{ ...testCollection, collectionType: 'scrollable/feature' },
-			{ ...testCollection, collectionType: 'fixed/small/slow-III' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ignored - is merch high position
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
@@ -192,20 +192,20 @@ describe('Mobile Ads', () => {
 	it('Lifeandstyle front, with more than 4 collections, with thrashers at various places', () => {
 		const testCollections: AdCandidate[] = [
 			{ ...testCollection, collectionType: 'flexible/special' }, // Ad position (0)
-			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
-			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ad position (3)
-			{ ...testCollection, collectionType: 'fixed/small/slow-V-third' },
-			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (3)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (6)
-			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' },
-			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ad position (9)
-			{ ...testCollection, collectionType: 'fixed/medium/slow-XII-mpu' },
-			{ ...testCollection, collectionType: 'fixed/small/fast-VIII' }, // Ignored - before thrasher
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (9)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - before thrasher
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ad position (12)
-			{ ...testCollection, collectionType: 'fixed/small/slow-III' },
-			{ ...testCollection, collectionType: 'fixed/small/slow-I' }, // Ignored - is merch high position
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - is merch high position
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
@@ -218,18 +218,18 @@ describe('Mobile Ads', () => {
 	it('Recipes front, with more than 4 collections, with thrasher at the first position', () => {
 		const testCollections: AdCandidate[] = [
 			{ ...testCollection, collectionType: 'fixed/thrasher' }, // Ignored - is first container and thrasher
-			{ ...testCollection, collectionType: 'fixed/medium/slow-VI' }, // Ad position (1)
-			{ ...testCollection, collectionType: 'fixed/small/slow-V-third' },
-			{ ...testCollection, collectionType: 'fixed/medium/slow-XII-mpu' }, // Ad position (3)
-			{ ...testCollection, collectionType: 'fixed/medium/fast-XII' },
-			{ ...testCollection, collectionType: 'fixed/small/slow-V-third' }, // Ad position (5)
-			{ ...testCollection, collectionType: 'fixed/small/fast-VIII' },
-			{ ...testCollection, collectionType: 'fixed/medium/fast-XI' }, // Ad position (7)
-			{ ...testCollection, collectionType: 'fixed/small/slow-III' },
-			{ ...testCollection, collectionType: 'fixed/small/slow-IV' }, // Ad position (9)
-			{ ...testCollection, collectionType: 'fixed/small/slow-V-half' },
-			{ ...testCollection, collectionType: 'fixed/small/slow-V-third' }, // Ignored - is before merch high position
-			{ ...testCollection, collectionType: 'fixed/small/fast-VIII' }, // Ignored - is merch high position
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (1)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (3)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (5)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ad position (7)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'static/medium/4' }, // Ad position (9)
+			{ ...testCollection, collectionType: 'flexible/general' },
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - is before merch high position
+			{ ...testCollection, collectionType: 'flexible/general' }, // Ignored - is merch high position
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
@@ -350,13 +350,13 @@ describe('Desktop Ads', () => {
 	it('calculates ad positions correctly for an example of the UK network front', () => {
 		const adPositions = getDesktopAdPositions(testCollectionsUk, 'uk');
 
-		expect(adPositions).toEqual([3, 6, 8, 11, 14, 17, 20]);
+		expect(adPositions).toEqual([3, 6, 8, 14, 17]);
 	});
 
 	it('calculates ad positions correctly for an example of the US network front', () => {
 		const adPositions = getDesktopAdPositions(testCollectionsUs, 'us');
 
-		expect(adPositions).toEqual([3, 6, 8, 11, 14, 18, 20, 22]);
+		expect(adPositions).toEqual([3, 6, 10, 12, 19]);
 	});
 
 	it('does NOT insert ads above or below branded content', () => {
