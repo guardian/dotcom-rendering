@@ -111,6 +111,13 @@ export const hasRequiredConsents = (): Promise<boolean> =>
 		.then(({ canTarget }: ConsentState) => canTarget)
 		.catch(() => false);
 
+const getBrowserId = (userConsent: boolean): string | undefined => {
+	if (!userConsent) {
+		return undefined;
+	}
+	return getCookie({ name: 'bwid', shouldMemoize: true }) ?? undefined;
+};
+
 const buildPayload = async ({
 	isSignedIn,
 	shouldHideReaderRevenue,
@@ -161,6 +168,7 @@ const buildPayload = async ({
 			),
 			pageId,
 			inHoldbackGroup,
+			browserId: getBrowserId(userConsent),
 		},
 	};
 };
