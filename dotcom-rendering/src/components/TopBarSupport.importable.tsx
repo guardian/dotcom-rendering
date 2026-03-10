@@ -21,10 +21,9 @@ import {
 	getPurchaseInfo,
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
-import { getOptionsHeaders } from '../lib/identity';
 import { getHeader } from '../lib/sdcRequests';
 import { useBetaAB } from '../lib/useAB';
-import { useAuthStatus, useIsSignedIn } from '../lib/useAuthStatus';
+import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
 import { useConfig } from './ConfigContext';
@@ -58,22 +57,10 @@ const ReaderRevenueLinksRemote = ({
 		useState<ModuleData<HeaderProps> | null>(null);
 	const [SupportHeader, setSupportHeader] =
 		useState<React.ElementType<HeaderProps> | null>(null);
-	const authStatus = useAuthStatus();
 	const isSignedIn = useIsSignedIn();
 
 	const { renderingTarget } = useConfig();
 	const abTests = useBetaAB();
-
-	const reportError = (error: unknown, context: string) => {
-		const msg = `Error importing RR header links for ${context}: ${String(
-			error,
-		)}`;
-		console.log(msg);
-		window.guardian.modules.sentry.reportError(
-			new Error(msg),
-			'rr-header-links',
-		);
-	};
 
 	useEffect((): void => {
 		if (isUndefined(countryCode) || isSignedIn === 'Pending') {
@@ -105,35 +92,9 @@ const ReaderRevenueLinksRemote = ({
 			},
 		};
 
-		const fallbackHeaders =
-			authStatus.kind === 'SignedIn'
-				? getOptionsHeaders(authStatus).headers
-				: undefined;
-
-		const fetchAuthHeadersWithTimeout = () => {
-			return Promise.race([
-				getAuthHeaders(),
-				new Promise<undefined>((resolve) => {
-					setTimeout(() => {
-						resolve(undefined);
-					}, 2000);
-				}),
-			]);
-		};
-
-		void fetchAuthHeadersWithTimeout()
-			.catch((error: unknown) => {
-				// Catch any errors from getAuthHeaders itself or the timeout
-				reportError(error, 'getAuthHeaders');
-				return undefined;
-			})
+		getAuthHeaders()
 			.then((headers) =>
-				// Fallback to fallbackHeaders if headers are not present
-				getHeader(
-					contributionsServiceUrl,
-					requestData,
-					headers ?? fallbackHeaders,
-				),
+				getHeader(contributionsServiceUrl, requestData, headers),
 			)
 			.then((response: ModuleDataResponse<HeaderProps>) => {
 				if (!response.data) {
@@ -160,7 +121,12 @@ const ReaderRevenueLinksRemote = ({
 				);
 			})
 			.catch((error) => {
-				reportError(error, 'fetching headers or importing component');
+				const msg = `Error importing RR header links: ${String(error)}`;
+				console.log(msg);
+				window.guardian.modules.sentry.reportError(
+					new Error(msg),
+					'rr-header-links',
+				);
 			});
 	}, [
 		countryCode,
@@ -169,7 +135,6 @@ const ReaderRevenueLinksRemote = ({
 		pageViewId,
 		pageUrl,
 		abTests,
-		authStatus,
 	]);
 
 	if (SupportHeader !== null && supportHeaderResponse) {
