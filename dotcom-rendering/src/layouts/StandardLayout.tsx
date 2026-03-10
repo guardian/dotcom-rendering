@@ -80,6 +80,26 @@ const stretchLines = css`
 	}
 `;
 
+const spanCentreToRightColumnFromDesktop = css`
+	${from.desktop} {
+		${grid.between('centre-column-start', 'right-column-start')};
+	}
+`;
+
+const rightColumnCss = (isMedia: boolean) => css`
+	display: none;
+
+	${from.desktop} {
+		display: block;
+		padding-top: 6px;
+		grid-row: ${isMedia ? 3 : 1} / span 999;
+	}
+
+	${from.leftCol} {
+		grid-row: ${isMedia ? 2 : 1} / span 999;
+	}
+`;
+
 interface GridItemProps {
 	area: Area;
 	layoutType: LayoutType;
@@ -88,10 +108,27 @@ interface GridItemProps {
 		desktop?: 'left' | 'centre' | 'right';
 		leftCol?: 'left' | 'centre' | 'right';
 	};
-	element?: 'div' | 'article' | 'main' | 'aside' | 'section';
+	element?: 'div' | 'aside';
 	customCss?: SerializedStyles;
 	children: React.ReactNode;
 }
+
+const columnCss = (columnsConfig?: GridItemProps['columns']) => [
+	grid.column.centre,
+	Object.entries({
+		tablet: columnsConfig?.tablet,
+		desktop: columnsConfig?.desktop,
+		leftCol: columnsConfig?.leftCol,
+	})
+		.filter(([, value]) => value != null)
+		.map(
+			([bp, col]) => css`
+				${from[bp as keyof typeof from]} {
+					${grid.column[col!]};
+				}
+			`,
+		),
+];
 
 const GridItem = ({
 	area,
@@ -100,33 +137,14 @@ const GridItem = ({
 	element: Element = 'div',
 	customCss,
 	children,
-}: GridItemProps) => {
-	const columnCss = (columnsConfig?: GridItemProps['columns']) => [
-		grid.column.centre,
-		Object.entries({
-			tablet: columnsConfig?.tablet,
-			desktop: columnsConfig?.desktop,
-			leftCol: columnsConfig?.leftCol,
-		})
-			.filter(([, value]) => value != null)
-			.map(
-				([bp, col]) => css`
-					${from[bp as keyof typeof from]} {
-						${grid.column[col!]};
-					}
-				`,
-			),
-	];
-
-	return (
-		<Element
-			data-gu-name={area}
-			css={css([columnCss(columns), rowCss(area, layoutType), customCss])}
-		>
-			{children}
-		</Element>
-	);
-};
+}: GridItemProps) => (
+	<Element
+		data-gu-name={area}
+		css={css([columnCss(columns), rowCss(area, layoutType), customCss])}
+	>
+		{children}
+	</Element>
+);
 
 interface Props {
 	article: ArticleDeprecated;
@@ -345,6 +363,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							area="standfirst"
 							layoutType={layoutType}
 							element="div"
+							customCss={
+								isMedia
+									? spanCentreToRightColumnFromDesktop
+									: undefined
+							}
 						>
 							<Standfirst
 								format={format}
@@ -473,6 +496,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							area="body"
 							layoutType={layoutType}
 							element="div"
+							customCss={
+								isMedia
+									? spanCentreToRightColumnFromDesktop
+									: undefined
+							}
 						>
 							{/* Only show Listen to Article button on App landscape views */}
 							{isApps && (
@@ -611,14 +639,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							area="right-column"
 							layoutType={layoutType}
 							columns={{ desktop: 'right' }}
-							customCss={css`
-								display: none;
-								${from.desktop} {
-									display: block;
-									padding-top: 6px;
-									grid-row: 1 / span 999;
-								}
-							`}
+							customCss={rightColumnCss(isMedia)}
 							element="aside"
 						>
 							<Island
