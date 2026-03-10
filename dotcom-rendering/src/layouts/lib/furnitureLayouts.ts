@@ -12,7 +12,7 @@ export type Area =
 	| 'meta'
 	| 'body'
 	| 'right-column'
-	// Match report specific areas
+	// Match report specific area
 	| 'match-summary';
 
 type LayoutRows = Partial<
