@@ -60,7 +60,7 @@ import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { type Area, type LayoutType, rowCss } from './lib/furnitureLayouts';
+import { type Area, gridCss, type LayoutType } from './lib/furnitureLayouts';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const maxWidth = css`
@@ -80,21 +80,13 @@ const stretchLines = css`
 	}
 `;
 
-const spanCentreToRightColumnFromDesktop = css`
-	${from.desktop} {
-		${grid.between('centre-column-start', 'right-column-start')};
-	}
-`;
-
 const rightColumnCss = (isMedia: boolean) => css`
 	display: none;
-
 	${from.desktop} {
 		display: block;
 		padding-top: 6px;
 		grid-row: ${isMedia ? 3 : 1} / span 999;
 	}
-
 	${from.leftCol} {
 		grid-row: ${isMedia ? 2 : 1} / span 999;
 	}
@@ -113,23 +105,6 @@ interface GridItemProps {
 	children: React.ReactNode;
 }
 
-const columnCss = (columnsConfig?: GridItemProps['columns']) => [
-	grid.column.centre,
-	Object.entries({
-		tablet: columnsConfig?.tablet,
-		desktop: columnsConfig?.desktop,
-		leftCol: columnsConfig?.leftCol,
-	})
-		.filter(([, value]) => value != null)
-		.map(
-			([bp, col]) => css`
-				${from[bp as keyof typeof from]} {
-					${grid.column[col!]};
-				}
-			`,
-		),
-];
-
 const GridItem = ({
 	area,
 	layoutType,
@@ -140,7 +115,7 @@ const GridItem = ({
 }: GridItemProps) => (
 	<Element
 		data-gu-name={area}
-		css={css([columnCss(columns), rowCss(area, layoutType), customCss])}
+		css={css([gridCss(area, layoutType, columns), customCss])}
 	>
 		{children}
 	</Element>
@@ -363,11 +338,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							area="standfirst"
 							layoutType={layoutType}
 							element="div"
-							customCss={
-								isMedia
-									? spanCentreToRightColumnFromDesktop
-									: undefined
-							}
 						>
 							<Standfirst
 								format={format}
@@ -496,11 +466,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							area="body"
 							layoutType={layoutType}
 							element="div"
-							customCss={
-								isMedia
-									? spanCentreToRightColumnFromDesktop
-									: undefined
-							}
 						>
 							{/* Only show Listen to Article button on App landscape views */}
 							{isApps && (
