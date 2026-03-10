@@ -1,7 +1,11 @@
 import { css, type SerializedStyles } from '@emotion/react';
 import { from, until } from '@guardian/source/foundations';
 
-export type LayoutType = 'standard' | 'matchReport' | 'media';
+export type FurnitureLayoutType =
+	| 'standard'
+	| 'matchReport'
+	| 'media'
+	| 'showcase';
 
 export type Area =
 	// Common areas
@@ -30,7 +34,7 @@ type LayoutDefinition = {
 	leftCol?: BreakpointRows;
 };
 
-const furnitureRowLayouts: Record<LayoutType, LayoutDefinition> = {
+const furnitureRowLayouts: Record<FurnitureLayoutType, LayoutDefinition> = {
 	standard: {
 		tablet: [
 			['title'],
@@ -44,6 +48,22 @@ const furnitureRowLayouts: Record<LayoutType, LayoutDefinition> = {
 			['title', 'headline'],
 			['standfirst'],
 			['meta', 'main-media'],
+		],
+	},
+	showcase: {
+		tablet: [
+			['title'],
+			['headline'],
+			['standfirst'],
+			['main-media'],
+			['meta'],
+		],
+
+		leftCol: [
+			['title', 'headline'],
+			['meta', 'main-media'],
+			['standfirst'],
+			['right-column'],
 		],
 	},
 	matchReport: {
@@ -115,7 +135,7 @@ const rowMaps = Object.fromEntries(
 		name,
 		buildRowMap(layout),
 	]),
-) as Record<LayoutType, LayoutRows>;
+) as Record<FurnitureLayoutType, LayoutRows>;
 
 const breakpointQueries = {
 	mobile: until.tablet,
@@ -126,7 +146,7 @@ const breakpointQueries = {
 
 export const rowCss = (
 	area: Area,
-	layoutType: LayoutType,
+	layoutType: FurnitureLayoutType,
 ): SerializedStyles => {
 	const rows = rowMaps[layoutType][area] ?? {};
 

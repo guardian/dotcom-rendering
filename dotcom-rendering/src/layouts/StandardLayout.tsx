@@ -50,6 +50,7 @@ import { SubNav } from '../components/SubNav.importable';
 import { grid } from '../grid';
 import {
 	ArticleDesign,
+	ArticleDisplay,
 	type ArticleFormat,
 	ArticleSpecial,
 } from '../lib/articleFormat';
@@ -64,7 +65,11 @@ import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { type Area, type LayoutType, rowCss } from './lib/furnitureLayouts';
+import {
+	type Area,
+	type FurnitureLayoutType,
+	rowCss,
+} from './lib/furnitureLayouts';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const maxWidth = css`
@@ -90,7 +95,7 @@ const spanCentreToRightColumnFromDesktop = css`
 	}
 `;
 
-const rightColumnCss = (isMedia: boolean) => css`
+const rightColumnCss = (isMedia: boolean, isShowcase: boolean) => css`
 	display: none;
 
 	${from.desktop} {
@@ -100,13 +105,13 @@ const rightColumnCss = (isMedia: boolean) => css`
 	}
 
 	${from.leftCol} {
-		grid-row: ${isMedia ? 2 : 1} / span 999;
+		grid-row: ${isShowcase ? 3 : isMedia ? 2 : 1} / span 999;
 	}
 `;
 
 interface GridItemProps {
 	area: Area;
-	layoutType: LayoutType;
+	layoutType: FurnitureLayoutType;
 	columns?: {
 		tablet?: 'left' | 'centre' | 'right';
 		desktop?: 'left' | 'centre' | 'right';
@@ -223,12 +228,16 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
+	const isShowcase = format.display === ArticleDisplay.Showcase;
+
 	const renderAds = canRenderAds(article);
 
-	const layoutType: LayoutType = isMatchReport
+	const layoutType: FurnitureLayoutType = isMatchReport
 		? 'matchReport'
 		: isMedia
 		? 'media'
+		: isShowcase
+		? 'showcase'
 		: 'standard';
 
 	return (
@@ -357,10 +366,19 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							customCss={
 								isMedia
 									? spanCentreToRightColumnFromDesktop
+									: isShowcase
+									? css`
+											${from.leftCol} {
+												${grid.between(
+													'centre-column-start',
+													'right-column-end',
+												)}
+											}
+									  `
 									: undefined
 							}
 						>
-							<div css={!isMedia && maxWidth}>
+							<div css={!isMedia && !isShowcase && maxWidth}>
 								<MainMedia
 									format={format}
 									elements={article.mainMediaElements}
@@ -708,7 +726,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							area="right-column"
 							layoutType={layoutType}
 							columns={{ desktop: 'right' }}
-							customCss={rightColumnCss(isMedia)}
+							customCss={rightColumnCss(isMedia, isShowcase)}
 							element="aside"
 						>
 							<Island
