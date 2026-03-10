@@ -158,6 +158,18 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
+	{
+		name: "commercial-hosted-content",
+		description: "Preview the Hosted Content pages using dotcom-rendering",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-07-01",
+		type: "server",
+		status: "ON",
+		audienceSize: 0 / 100,
+		audienceSpace: "A",
+		groups: ["preview"],
+		shouldForceMetricsCollection: false,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
