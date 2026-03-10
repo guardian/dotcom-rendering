@@ -165,6 +165,7 @@ export type Props = {
 	headlinePosition?: 'inner' | 'outer';
 	isStorylines?: boolean;
 	starRatingSize?: RatingSizeType;
+	isInSlimHomepageAbTestVariant?: boolean;
 };
 
 const waveformWrapper = (
@@ -403,6 +404,7 @@ export const Card = ({
 	isStorylines = false,
 	starRatingSize = 'small',
 	articleMedia,
+	isInSlimHomepageAbTestVariant,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -696,6 +698,14 @@ export const Card = ({
 			return <Sublinks />;
 		}
 
+		if (isInSlimHomepageAbTestVariant) {
+			return (
+				<Hide until="wide">
+					<Sublinks />
+				</Hide>
+			);
+		}
+
 		return (
 			<Hide from={isFlexSplash ? 'desktop' : 'tablet'}>
 				<Sublinks />
@@ -707,7 +717,7 @@ export const Card = ({
 		if (!hasSublinks) return null;
 		if (sublinkPosition !== 'inner') return null;
 
-		return (
+		const Sublinks = () => (
 			<Hide until={isFlexSplash ? 'desktop' : 'tablet'}>
 				{isStorylines ? (
 					<SupportingKeyStoriesContent
@@ -730,6 +740,16 @@ export const Card = ({
 				)}
 			</Hide>
 		);
+
+		if (isInSlimHomepageAbTestVariant) {
+			return (
+				<Hide from="wide">
+					<Sublinks />
+				</Hide>
+			);
+		}
+
+		return <Sublinks />;
 	};
 
 	const determinePadContent = (
