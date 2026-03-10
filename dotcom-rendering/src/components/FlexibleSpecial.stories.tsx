@@ -85,6 +85,7 @@ const meta = {
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
 		frontSectionTitle: 'Flexible special',
+		isInSlimHomepageAbTestVariant: false,
 	},
 	render: ({ frontSectionTitle, ...args }) => (
 		<FrontSection
@@ -92,6 +93,9 @@ const meta = {
 			discussionApiUrl={discussionApiUrl}
 			editionId={'UK'}
 			showTopBorder={true}
+			slimifySectionForSlimHomepageAbTest={
+				args.isInSlimHomepageAbTestVariant
+			}
 		>
 			<FlexibleSpecial {...args} />
 		</FrontSection>
@@ -155,6 +159,13 @@ export const Five: Story = {
 			standard: trails.slice(0, 5),
 		},
 		collectionId: 1,
+	},
+};
+export const FiveSlimHomepageAbTest: Story = {
+	name: 'With one splash card and four standard cards in the Slim Homepage AB Test',
+	args: {
+		...Five.args,
+		isInSlimHomepageAbTestVariant: true,
 	},
 };
 
