@@ -91,7 +91,7 @@ export const SportDataPageComponent = (props: Props) => {
 						<SetAdTargeting adTargeting={adTargeting} />
 					</Island>
 
-					{isWeb && darkModeAvailable && (
+					{darkModeAvailable && (
 						<DarkModeMessage>
 							Dark mode is a work-in-progress.
 							<br />

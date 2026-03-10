@@ -22,14 +22,17 @@ import type {
 	SportDataPage,
 	WebSportDataPage,
 } from '../sportDataPage';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const SportsPage = ({
 	sportData,
 	renderAds,
+	renderingTarget,
 }: {
 	sportData: SportDataPage;
 	renderAds: boolean;
+	renderingTarget: RenderingTarget;
 }) => {
 	const abTests = useBetaAB();
 	const isInVariantGroup =
@@ -76,7 +79,7 @@ const SportsPage = ({
 				/>
 			);
 		case 'FootballMatchSummary': {
-			if (isInVariantGroup) {
+			if (isInVariantGroup || renderingTarget === 'Apps') {
 				return (
 					<FootballMatchInfoPage
 						matchStats={sportData.matchStats}
@@ -144,7 +147,11 @@ export const SportDataPageLayout = (
 
 			{isWeb && renderAds && hasSurveyAd && <AdSlot position="survey" />}
 
-			<SportsPage sportData={sportData} renderAds={renderAds} />
+			<SportsPage
+				sportData={sportData}
+				renderAds={renderAds}
+				renderingTarget={props.renderingTarget}
+			/>
 
 			{isWeb && (
 				<>
