@@ -158,6 +158,19 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: false,
 	},
+	{
+		name: "commercial-loading-userids-async",
+		description:
+			"Testing whether the asynchronous loading of userIds will alleviate any potential blocking of downstream functions",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-03-20",
+		type: "client",
+		status: "ON",
+		audienceSize: 10 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: false,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
