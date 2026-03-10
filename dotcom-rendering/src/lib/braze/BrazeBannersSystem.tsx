@@ -1024,7 +1024,7 @@ export const BrazeBannersSystemDisplay = ({
 								background-color: ${wrapperModeForegroundColor};
 								width: 1px;
 								opacity: 0.2;
-								margin: 24px 8px 0px;
+								margin: 18px 8px 0px;
 
 								${until.leftCol} {
 									display: none;
@@ -1043,16 +1043,13 @@ export const BrazeBannersSystemDisplay = ({
 									padding-left: 12px;
 									padding-right: 12px;
 									padding-top: 18px;
-									padding-bottom: 12px;
+									padding-bottom: 24px;
 									${until.leftCol} {
 										padding-left: 0px;
 										padding-right: 0px;
 									}
 									${until.desktop} {
 										padding-top: 12px;
-									}
-									${until.phablet} {
-										padding-bottom: 0px;
 									}
 							  `
 							: undefined
