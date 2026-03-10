@@ -13,7 +13,7 @@ import { palette } from './palette';
  * Named CSS grid lines, based on the three columns commonly used for Guardian
  * layouts.
  */
-type Line =
+export type Line =
 	| 'grid-start'
 	| 'left-column-start'
 	| 'left-column-end'
