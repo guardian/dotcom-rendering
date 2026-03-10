@@ -1,5 +1,6 @@
 import { css, type SerializedStyles } from '@emotion/react';
 import { from, until } from '@guardian/source/foundations';
+import { grid, type Line } from '../../grid';
 
 export type LayoutType = 'standard' | 'matchReport' | 'media';
 
@@ -18,7 +19,7 @@ export type Area =
 type LayoutRows = Partial<
 	Record<
 		Area,
-		{ mobile?: number; tablet?: number; leftCol?: number; desktop?: number }
+		{ mobile?: number; tablet?: number; desktop?: number; leftCol?: number }
 	>
 >;
 
@@ -27,6 +28,7 @@ type BreakpointRows = Area[][];
 type LayoutDefinition = {
 	mobile?: BreakpointRows;
 	tablet?: BreakpointRows;
+	desktop?: BreakpointRows;
 	leftCol?: BreakpointRows;
 };
 
@@ -84,12 +86,37 @@ const furnitureRowLayouts: Record<LayoutType, LayoutDefinition> = {
 	},
 };
 
+type BreakpointColumns = Partial<
+	Record<
+		'mobile' | 'tablet' | 'desktop' | 'leftCol',
+		Column | [Line | number, Line | number]
+	>
+>;
+
+type ColumnLayoutMap = Partial<Record<Area, BreakpointColumns>>;
+
+const furnitureColumnLayouts: Record<LayoutType, ColumnLayoutMap> = {
+	standard: {},
+	media: {
+		'main-media': {
+			desktop: ['centre-column-start', 'right-column-start'],
+		},
+		standfirst: {
+			desktop: ['centre-column-start', 'right-column-start'],
+		},
+		body: {
+			desktop: ['centre-column-start', 'right-column-start'],
+		},
+	},
+	matchReport: {},
+};
+
 const buildRowMap = (layout: LayoutDefinition): LayoutRows => {
 	const map: LayoutRows = {} as LayoutRows;
 
 	const apply = (
 		rows: Area[][] | undefined,
-		breakpoint: 'mobile' | 'tablet' | 'leftCol',
+		breakpoint: 'mobile' | 'tablet' | 'desktop' | 'leftCol',
 	) => {
 		if (!rows) return;
 
@@ -105,6 +132,7 @@ const buildRowMap = (layout: LayoutDefinition): LayoutRows => {
 
 	apply(layout.mobile, 'mobile');
 	apply(layout.tablet, 'tablet');
+	apply(layout.desktop, 'desktop');
 	apply(layout.leftCol, 'leftCol');
 
 	return map;
@@ -124,13 +152,20 @@ const breakpointQueries = {
 	desktop: from.desktop,
 } as const;
 
-export const rowCss = (
+type Column = 'left' | 'centre' | 'right';
+
+type ColumnConfig = Partial<Record<'tablet' | 'desktop' | 'leftCol', Column>>;
+
+export const gridCss = (
 	area: Area,
 	layoutType: LayoutType,
+	columnsOverride?: ColumnConfig,
 ): SerializedStyles => {
 	const rows = rowMaps[layoutType][area] ?? {};
+	const columns = furnitureColumnLayouts[layoutType][area] ?? {};
 
-	return css(
+	return css([
+		grid.column.centre, // default
 		Object.entries(rows).map(
 			([bp, row]) => css`
 				${breakpointQueries[bp as keyof typeof breakpointQueries]} {
@@ -138,5 +173,24 @@ export const rowCss = (
 				}
 			`,
 		),
-	);
+		Object.entries(columns).map(([bp, colOrSpan]) => {
+			const colStyle = Array.isArray(colOrSpan)
+				? grid.between(colOrSpan[0], colOrSpan[1])
+				: grid.column[colOrSpan as keyof typeof grid.column];
+
+			return css`
+				${from[bp as keyof typeof from]} {
+					${colStyle};
+				}
+			`;
+		}),
+		columnsOverride &&
+			Object.entries(columnsOverride).map(
+				([bp, col]) => css`
+					${from[bp as keyof typeof from]} {
+						${grid.column[col as keyof typeof grid.column]};
+					}
+				`,
+			),
+	]);
 };
