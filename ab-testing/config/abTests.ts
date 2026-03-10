@@ -109,14 +109,14 @@ const ABTests: ABTest[] = [
 	{
 		name: "fronts-and-curation-slim-homepage",
 		description:
-			"Test slimming content and placing Most Popular components on the right-hand side on the UK front.",
+			"Test slimming content on the UK front and placing Most Popular components on the right-hand side.",
 		owners: ["fronts.and.curation@guardian.co.uk"],
 		status: "ON",
 		expirationDate: "2026-04-28",
 		type: "server",
 		audienceSize: 0 / 100,
 		audienceSpace: "A",
-		groups: ["control", "variant-one", "variant-two"],
+		groups: ["control", "variant-slim-empty", "variant-slim-content"],
 		shouldForceMetricsCollection: false,
 	},
 	{

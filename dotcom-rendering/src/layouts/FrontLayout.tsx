@@ -165,22 +165,23 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			pageId,
 			hasPageSkin,
 		);
-	const isInSlimHomepageAbTestVariantOne =
+	const isInSlimHomepageAbTestVariantEmpty =
 		(pageQualifiesForSlimHomepageAbTest &&
 			abTests?.isUserInTestGroup(
 				'fronts-and-curation-slim-homepage',
-				'variant-one',
+				'variant-slim-empty',
 			)) ??
 		false;
-	const isInSlimHomepageAbTestVariantTwo =
+	const isInSlimHomepageAbTestVariantContent =
 		(pageQualifiesForSlimHomepageAbTest &&
 			abTests?.isUserInTestGroup(
 				'fronts-and-curation-slim-homepage',
-				'variant-two',
+				'variant-slim-content',
 			)) ??
 		false;
 	const isInEitherSlimHomepageAbTestVariant =
-		isInSlimHomepageAbTestVariantOne || isInSlimHomepageAbTestVariantTwo;
+		isInSlimHomepageAbTestVariantEmpty ||
+		isInSlimHomepageAbTestVariantContent;
 
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
@@ -506,7 +507,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									index,
 									collection,
 									front.isNetworkFront,
-									isInSlimHomepageAbTestVariantTwo,
+									isInSlimHomepageAbTestVariantContent,
 								)}
 								leftContent={decideLeftContent(
 									front,
@@ -550,7 +551,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									isInEitherSlimHomepageAbTestVariant
 								}
 								showRightContentForSlimHomepageAbTest={
-									isInSlimHomepageAbTestVariantTwo
+									isInSlimHomepageAbTestVariantContent
 								}
 								mostViewed={front.mostViewed}
 								deeplyRead={front.deeplyRead}
