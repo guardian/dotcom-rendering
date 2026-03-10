@@ -3393,9 +3393,6 @@
         },
         "FEContainer": {
             "enum": [
-                "dynamic/fast",
-                "dynamic/package",
-                "dynamic/slow",
                 "fixed/large/slow-XIV",
                 "fixed/medium/fast-XI",
                 "fixed/medium/fast-XII",
@@ -3430,7 +3427,6 @@
                 "Breaking",
                 "BreakingPalette",
                 "Canonical",
-                "Dynamo",
                 "DynamoLike",
                 "EventAltPalette",
                 "EventPalette",

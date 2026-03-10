@@ -91,6 +91,7 @@ export const HorizontalSummaryProductCard = ({
 		<div css={horizontalCard}>
 			<div css={imageContainer}>
 				<ProductCardImage
+					xCustComponentId={'horizontal-summary-card'}
 					format={format}
 					image={product.image}
 					url={cardCta.url}
@@ -114,6 +115,7 @@ export const HorizontalSummaryProductCard = ({
 			<div css={buttonContainer}>
 				<ProductLinkButton
 					size="small"
+					xCustComponentId="horizontal-summary-card"
 					fullwidth={true}
 					minimisePadding={true}
 					label={'Buy at ' + cardCta.retailer}

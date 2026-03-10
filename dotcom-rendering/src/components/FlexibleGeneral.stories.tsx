@@ -28,9 +28,6 @@ import { FlexibleGeneral } from './FlexibleGeneral';
 import { FrontSection } from './FrontSection';
 
 const emptyGroupedTrails: DCRGroupedTrails = {
-	huge: [],
-	veryBig: [],
-	big: [],
 	standard: [],
 	snap: [],
 	splash: [],
