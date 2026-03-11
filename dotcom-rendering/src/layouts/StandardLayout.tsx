@@ -45,7 +45,7 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.island';
-import { grid } from '../grid';
+import { type ColumnPreset, grid } from '../grid';
 import {
 	ArticleDesign,
 	ArticleDisplay,
