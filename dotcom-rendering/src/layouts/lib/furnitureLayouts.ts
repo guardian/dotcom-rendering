@@ -1,6 +1,6 @@
 import { css, type SerializedStyles } from '@emotion/react';
 import { from, until } from '@guardian/source/foundations';
-import { grid, type Line } from '../../grid';
+import { type ColumnPreset, grid, type Line } from '../../grid';
 
 export type LayoutType = 'standard' | 'matchReport' | 'media';
 
@@ -108,10 +108,8 @@ const furnitureRowLayouts: Record<LayoutType, LayoutDefinition> = {
 	},
 };
 
-type Column = 'left' | 'centre' | 'right';
-
 type BreakpointColumns = Partial<
-	Record<Breakpoint, Column | [Line | number, Line | number]>
+	Record<Breakpoint, ColumnPreset | [Line | number, Line | number]>
 >;
 
 type ColumnLayoutMap = Partial<Record<Area, BreakpointColumns>>;
@@ -188,7 +186,7 @@ const breakpointQueries = {
 	desktop: from.desktop,
 } as const;
 
-type ColumnConfig = Partial<Record<'tablet' | 'desktop' | 'leftCol', Column>>;
+type ColumnConfig = Partial<Record<Breakpoint, ColumnPreset>>;
 
 export const gridCss = (
 	area: Area,
@@ -215,7 +213,7 @@ export const gridCss = (
 		Object.entries(columns).map(([bp, colOrSpan]) => {
 			const colStyle = Array.isArray(colOrSpan)
 				? grid.between(colOrSpan[0], colOrSpan[1])
-				: grid.column[colOrSpan as keyof typeof grid.column];
+				: grid.column[colOrSpan];
 
 			return css`
 				${from[bp as keyof typeof from]} {
@@ -227,7 +225,7 @@ export const gridCss = (
 			Object.entries(columnsOverride).map(
 				([bp, col]) => css`
 					${from[bp as keyof typeof from]} {
-						${grid.column[col as keyof typeof grid.column]};
+						${grid.column[col]};
 					}
 				`,
 			),

@@ -47,7 +47,7 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.island';
-import { grid } from '../grid';
+import { type ColumnPreset, grid } from '../grid';
 import {
 	ArticleDesign,
 	type ArticleFormat,
@@ -88,9 +88,9 @@ interface GridItemProps {
 	area: Area;
 	layoutType: LayoutType;
 	columns?: {
-		tablet?: 'left' | 'centre' | 'right';
-		desktop?: 'left' | 'centre' | 'right';
-		leftCol?: 'left' | 'centre' | 'right';
+		tablet?: ColumnPreset;
+		desktop?: ColumnPreset;
+		leftCol?: ColumnPreset;
 	};
 	element?: 'div' | 'aside';
 	customCss?: SerializedStyles;
@@ -281,7 +281,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						`,
 					])}
 				>
-					{applyFootballRedesign && (
+					{applyFootballRedesign && isMatchReport && (
 						<GridItem
 							area="match-summary"
 							layoutType={layoutType}
