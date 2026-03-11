@@ -241,8 +241,10 @@ const grid = {
 	verticalRules,
 } as const;
 
-export type { Line };
+// ----- Types ----- //
+type ColumnPreset = keyof typeof grid.column;
 
 // ----- Exports ----- //
 
+export type { Line, ColumnPreset };
 export { grid };
