@@ -10,7 +10,6 @@ import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.island';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
-import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { AppsEpic } from '../components/AppsEpic.island';
 import { AppsFooter } from '../components/AppsFooter.island';
 import { ArticleBody } from '../components/ArticleBody';
@@ -66,7 +65,6 @@ import {
 	type LayoutType,
 } from './lib/furnitureArrangements';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-import { Grid } from 'src/components/Masthead/Titlepiece/Grid';
 
 const stretchLines = css`
 	${until.phablet} {
