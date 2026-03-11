@@ -66,10 +66,19 @@ const furnitureRowLayouts: Record<LayoutType, LayoutDefinition> = {
 
 	matchReport: {
 		tablet: [['match-summary'], ...tabletVanillaRows],
+		desktop: [
+			['match-summary', 'right-column'],
+			['title', 'right-column'],
+			['headline', 'right-column'],
+			['standfirst', 'right-column'],
+			['main-media', 'right-column'],
+			['meta', 'right-column'],
+			['body', 'right-column'],
+		],
 		leftCol: [
-			['title', 'match-summary'],
-			['headline'],
-			['meta', 'main-media'],
+			['title', 'match-summary', 'right-column'],
+			['headline', 'right-column'],
+			['meta', 'main-media', 'right-column'],
 			['body', 'right-column'],
 		],
 	},
@@ -114,9 +123,16 @@ type BreakpointColumns = Partial<
 
 type ColumnLayoutMap = Partial<Record<Area, BreakpointColumns>>;
 
+const furnitureColumnDefaults: ColumnLayoutMap = {
+	title: { leftCol: 'left' },
+	meta: { leftCol: 'left' },
+	['right-column']: { desktop: 'right' },
+};
+
 const furnitureColumnLayouts: Record<LayoutType, ColumnLayoutMap> = {
-	standard: {},
+	standard: furnitureColumnDefaults,
 	media: {
+		...furnitureColumnDefaults,
 		'main-media': {
 			desktop: ['centre-column-start', 'right-column-start'],
 		},
@@ -127,7 +143,7 @@ const furnitureColumnLayouts: Record<LayoutType, ColumnLayoutMap> = {
 			desktop: ['centre-column-start', 'right-column-start'],
 		},
 	},
-	matchReport: {},
+	matchReport: furnitureColumnDefaults,
 };
 
 const buildRowMap = (layout: LayoutDefinition): LayoutRows => {
