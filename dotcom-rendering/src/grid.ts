@@ -13,7 +13,7 @@ import { palette } from './palette';
  * Named CSS grid lines, based on the three columns commonly used for Guardian
  * layouts.
  */
-export type Line =
+type Line =
 	| 'grid-start'
 	| 'left-column-start'
 	| 'left-column-end'
@@ -195,7 +195,7 @@ const verticalRules = (options: VerticalRuleOptions = {}): string => `
     --centre-transform: translateX(-${columnGap});
 
     ${fromBreakpoint.leftCol} {
-      --centre-transform: translateX(calc(${columnGap} / -2));
+      --centre-transform: translateX(calc(-${columnGap} / 2));
     }
 
     &::before,
@@ -205,7 +205,7 @@ const verticalRules = (options: VerticalRuleOptions = {}): string => `
       top: 0;
       bottom: 0;
       width: 1px;
-      background-color: ${themePalette('--article-border')};
+      background-color: ${palette('--article-border')};
       pointer-events: none;
       content: '';
     }
@@ -232,18 +232,7 @@ const verticalRules = (options: VerticalRuleOptions = {}): string => `
       }
     }
 
-    ${
-		options.centre
-			? `
-    /* CENTRE RULE */
-    & > *:first-child::before {
-      grid-column: centre-column-start;
-      justify-self: start;
-      transform: var(--centre-transform);
-    }`
-			: ''
-	}
-  }
+    ${options.centre ? optionalCentreRule : ''}
 `;
 
 // ----- API ----- //
