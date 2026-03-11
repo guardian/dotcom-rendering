@@ -256,15 +256,15 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				/>
 				<article
 					css={css([
-						grid.container,
-						grid.verticalRules({
-							centre: isLabs ? false : true,
-						}),
 						css`
 							background-color: ${themePalette(
 								'--article-background',
 							)};
 						`,
+						grid.container,
+						grid.verticalRules({
+							centre: isLabs ? false : true,
+						}),
 					])}
 				>
 					{applyFootballRedesign && isMatchReport && (
