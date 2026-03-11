@@ -322,209 +322,219 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							element="div"
 						>
 							<div css={maxWidth}>
-								<ArticleHeadline
-									format={format}
-									headlineString={article.headline}
-									tags={article.tags}
-									byline={article.byline}
-									webPublicationDateDeprecated={
-										article.webPublicationDateDeprecated
-									}
-									starRating={article.starRating}
-								/>
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
+									<GetMatchNav
+										matchUrl={footballMatchUrl}
+										format={format}
+										headlineString={article.headline}
+										tags={article.tags}
+										webPublicationDateDeprecated={
+											article.webPublicationDateDeprecated
+										}
+									/>
+								</Island>
+							</div>
+							<div css={maxWidth}>
+								<Island
+									priority="critical"
+									defer={{ until: 'visible' }}
+								>
+									<GetMatchTabs
+										matchUrl={footballMatchUrl}
+										format={format}
+									/>
+								</Island>
 							</div>
 						</GridItem>
-						<GridItem
-							area="standfirst"
-							layoutType={layoutType}
-							element="div"
-						>
-							<Standfirst
+					)}
+					<GridItem
+						area="main-media"
+						layoutType={layoutType}
+						element="div"
+					>
+						<div css={!isMedia && maxWidth}>
+							<MainMedia
 								format={format}
-								standfirst={article.standfirst}
+								elements={article.mainMediaElements}
+								host={host}
+								pageId={article.pageId}
+								webTitle={article.webTitle}
+								ajaxUrl={article.config.ajaxUrl}
+								abTests={article.config.abTests}
+								switches={article.config.switches}
+								isAdFreeUser={article.isAdFreeUser}
+								isSensitive={article.config.isSensitive}
+								editionId={article.editionId}
+								hideCaption={isMedia}
+								shouldHideAds={article.shouldHideAds}
+								contentType={article.contentType}
+								contentLayout="StandardLayout"
 							/>
-						</GridItem>
+						</div>
+					</GridItem>
+					{!applyFootballRedesign && (
 						<GridItem
-							area="meta"
+							area="title"
 							layoutType={layoutType}
 							columns={{ leftCol: 'left' }}
 							element="aside"
 						>
-							<div css={maxWidth}>
-								<div css={stretchLines}>
-									{isWeb &&
-									format.theme === ArticleSpecial.Labs &&
-									format.design !== ArticleDesign.Video ? (
-										<GuardianLabsLines />
-									) : (
-										<DecideLines
-											format={format}
-											color={themePalette(
-												'--article-border',
-											)}
-										/>
-									)}
-								</div>
-							</div>
-							{isApps ? (
-								<>
-									<Hide from="leftCol">
-										<div css={maxWidth}>
-											<ArticleMetaApps
-												branding={branding}
-												format={format}
-												byline={article.byline}
-												tags={article.tags}
-												primaryDateline={
-													article.webPublicationDateDisplay
-												}
-												secondaryDateline={
-													article.webPublicationSecondaryDateDisplay
-												}
-												isCommentable={
-													article.isCommentable
-												}
-												discussionApiUrl={
-													article.config
-														.discussionApiUrl
-												}
-												shortUrlId={
-													article.config.shortUrlId
-												}
-												pageId={article.config.pageId}
-											></ArticleMetaApps>
-										</div>
-									</Hide>
-									<Hide until="leftCol">
-										<div css={maxWidth}>
-											<ArticleMeta
-												branding={branding}
-												format={format}
-												pageId={article.pageId}
-												webTitle={article.webTitle}
-												byline={article.byline}
-												source={article.config.source}
-												tags={article.tags}
-												primaryDateline={
-													article.webPublicationDateDisplay
-												}
-												secondaryDateline={
-													article.webPublicationSecondaryDateDisplay
-												}
-												isCommentable={
-													article.isCommentable
-												}
-												discussionApiUrl={
-													article.config
-														.discussionApiUrl
-												}
-												shortUrlId={
-													article.config.shortUrlId
-												}
-												mainMediaElements={
-													article.mainMediaElements
-												}
-											/>
-										</div>
-										{!!article.affiliateLinksDisclaimer && (
-											<AffiliateDisclaimer />
-										)}
-									</Hide>
-								</>
-							) : (
-								<div css={maxWidth}>
-									<ArticleMeta
-										branding={branding}
+							<ArticleTitle
+								format={format}
+								tags={article.tags}
+								sectionLabel={article.sectionLabel}
+								sectionUrl={article.sectionUrl}
+								guardianBaseURL={article.guardianBaseURL}
+								isMatch={!!footballMatchUrl}
+							/>
+						</GridItem>
+					)}
+
+					<div css={css(grid.column.centre)}>
+						{format.theme === ArticleSpecial.Labs ? (
+							<></>
+						) : (
+							<Border />
+						)}
+					</div>
+					<GridItem
+						area="headline"
+						layoutType={layoutType}
+						element="div"
+					>
+						<div css={maxWidth}>
+							<ArticleHeadline
+								format={format}
+								headlineString={article.headline}
+								tags={article.tags}
+								byline={article.byline}
+								webPublicationDateDeprecated={
+									article.webPublicationDateDeprecated
+								}
+								starRating={article.starRating}
+							/>
+						</div>
+					</GridItem>
+					<GridItem
+						area="standfirst"
+						layoutType={layoutType}
+						element="div"
+					>
+						<Standfirst
+							format={format}
+							standfirst={article.standfirst}
+						/>
+					</GridItem>
+					<GridItem
+						area="meta"
+						layoutType={layoutType}
+						columns={{ leftCol: 'left' }}
+						element="aside"
+					>
+						<div css={maxWidth}>
+							<div css={stretchLines}>
+								{isWeb &&
+								format.theme === ArticleSpecial.Labs &&
+								format.design !== ArticleDesign.Video ? (
+									<GuardianLabsLines />
+								) : (
+									<DecideLines
 										format={format}
-										pageId={article.pageId}
-										webTitle={article.webTitle}
-										byline={article.byline}
-										source={article.config.source}
-										tags={article.tags}
-										primaryDateline={
-											article.webPublicationDateDisplay
-										}
-										secondaryDateline={
-											article.webPublicationSecondaryDateDisplay
-										}
-										isCommentable={article.isCommentable}
-										discussionApiUrl={
-											article.config.discussionApiUrl
-										}
-										shortUrlId={article.config.shortUrlId}
-										mainMediaElements={
-											article.mainMediaElements
-										}
+										color={themePalette('--article-border')}
 									/>
+								)}
+							</div>
+						</div>
+						{isApps ? (
+							<>
+								<Hide from="leftCol">
+									<div css={maxWidth}>
+										<ArticleMetaApps
+											branding={branding}
+											format={format}
+											byline={article.byline}
+											tags={article.tags}
+											primaryDateline={
+												article.webPublicationDateDisplay
+											}
+											secondaryDateline={
+												article.webPublicationSecondaryDateDisplay
+											}
+											isCommentable={
+												article.isCommentable
+											}
+											discussionApiUrl={
+												article.config.discussionApiUrl
+											}
+											shortUrlId={
+												article.config.shortUrlId
+											}
+											pageId={article.config.pageId}
+										></ArticleMetaApps>
+									</div>
+								</Hide>
+								<Hide until="leftCol">
+									<div css={maxWidth}>
+										<ArticleMeta
+											branding={branding}
+											format={format}
+											pageId={article.pageId}
+											webTitle={article.webTitle}
+											byline={article.byline}
+											source={article.config.source}
+											tags={article.tags}
+											primaryDateline={
+												article.webPublicationDateDisplay
+											}
+											secondaryDateline={
+												article.webPublicationSecondaryDateDisplay
+											}
+											isCommentable={
+												article.isCommentable
+											}
+											discussionApiUrl={
+												article.config.discussionApiUrl
+											}
+											shortUrlId={
+												article.config.shortUrlId
+											}
+											mainMediaElements={
+												article.mainMediaElements
+											}
+										/>
+									</div>
 									{!!article.affiliateLinksDisclaimer && (
 										<AffiliateDisclaimer />
 									)}
-								</div>
-							)}
-						</GridItem>
-						<GridItem
-							area="body"
-							layoutType={layoutType}
-							element="div"
-						>
-							{/* Only show Listen to Article button on App landscape views */}
-							{isApps && (
-								<Hide until="leftCol">
-									{!isVideo && (
-										<div
-											css={css`
-												margin-top: ${space[2]}px;
-											`}
-										>
-											<Island
-												priority="feature"
-												defer={{ until: 'visible' }}
-											>
-												<ListenToArticle
-													articleId={article.pageId}
-												/>
-											</Island>
-										</div>
-									)}
 								</Hide>
-							)}
-							<ArticleContainer format={format}>
-								<ArticleBody
+							</>
+						) : (
+							<div css={maxWidth}>
+								<ArticleMeta
+									branding={branding}
 									format={format}
-									blocks={article.blocks}
-									pinnedPost={article.pinnedPost}
-									host={host}
 									pageId={article.pageId}
 									webTitle={article.webTitle}
-									ajaxUrl={article.config.ajaxUrl}
-									switches={article.config.switches}
-									isSensitive={article.config.isSensitive}
-									isAdFreeUser={article.isAdFreeUser}
-									sectionId={article.config.section}
-									shouldHideReaderRevenue={
-										article.shouldHideReaderRevenue
-									}
+									byline={article.byline}
+									source={article.config.source}
 									tags={article.tags}
-									isPaidContent={
-										!!article.config.isPaidContent
+									primaryDateline={
+										article.webPublicationDateDisplay
 									}
-									contributionsServiceUrl={
-										contributionsServiceUrl
+									secondaryDateline={
+										article.webPublicationSecondaryDateDisplay
 									}
-									contentType={article.contentType}
-									isPreview={article.config.isPreview}
-									idUrl={article.config.idUrl ?? ''}
-									isDev={!!article.config.isDev}
-									keywordIds={article.config.keywordIds}
-									abTests={article.config.abTests}
-									tableOfContents={article.tableOfContents}
-									lang={article.lang}
-									isRightToLeftLang={
-										article.isRightToLeftLang
+									isCommentable={article.isCommentable}
+									discussionApiUrl={
+										article.config.discussionApiUrl
 									}
-									editionId={article.editionId}
-									shouldHideAds={article.shouldHideAds}
-									idApiUrl={article.config.idApiUrl}
+									shortUrlId={article.config.shortUrlId}
+									mainMediaElements={
+										article.mainMediaElements
+									}
 								/>
 								<MatchInfoContainer
 									isMatchReport={isMatchReport}
@@ -541,98 +551,167 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										<AppsEpic />
 									</Island>
 								)}
-
-								{showBodyEndSlot && (
-									<Island
-										priority="feature"
-										defer={{ until: 'visible' }}
+							</div>
+						)}
+					</GridItem>
+					<GridItem area="body" layoutType={layoutType} element="div">
+						{/* Only show Listen to Article button on App landscape views */}
+						{isApps && (
+							<Hide until="leftCol">
+								{!isVideo && (
+									<div
+										css={css`
+											margin-top: ${space[2]}px;
+										`}
 									>
-										<SlotBodyEnd
-											contentType={article.contentType}
-											contributionsServiceUrl={
-												contributionsServiceUrl
-											}
-											idApiUrl={article.config.idApiUrl}
-											isMinuteArticle={
-												article.pageType.isMinuteArticle
-											}
-											isPaidContent={
-												article.pageType.isPaidContent
-											}
-											pageId={article.pageId}
-											sectionId={article.config.section}
-											shouldHideReaderRevenue={
-												article.shouldHideReaderRevenue
-											}
-											tags={article.tags}
-											renderAds={renderAds}
-											isLabs={isLabs}
-											articleEndSlot={
-												!!article.config.switches
-													.articleEndSlot
-											}
-											isSensitive={
-												article.config.isSensitive
-											}
-										/>
-									</Island>
+										<Island
+											priority="feature"
+											defer={{ until: 'visible' }}
+										>
+											<ListenToArticle
+												articleId={article.pageId}
+											/>
+										</Island>
+									</div>
 								)}
-								<StraightLines
-									data-print-layout="hide"
-									count={4}
-									cssOverrides={css`
-										display: block;
-									`}
-									color={themePalette('--straight-lines')}
-								/>
-								<SubMeta
-									format={format}
-									subMetaKeywordLinks={
-										article.subMetaKeywordLinks
-									}
-									subMetaSectionLinks={
-										article.subMetaSectionLinks
-									}
-									pageId={article.pageId}
-									webUrl={article.webURL}
-									webTitle={article.webTitle}
-									showBottomSocialButtons={
-										article.showBottomSocialButtons &&
-										renderingTarget === 'Web'
-									}
-								/>
-							</ArticleContainer>
-						</GridItem>
-						<GridItem
-							area="right-column"
-							layoutType={layoutType}
-							columns={{ desktop: 'right' }}
-							customCss={rightColumnCss(isMedia)}
-							element="aside"
+							</Hide>
+						)}
+						<ArticleContainer format={format}>
+							<ArticleBody
+								format={format}
+								blocks={article.blocks}
+								pinnedPost={article.pinnedPost}
+								host={host}
+								pageId={article.pageId}
+								webTitle={article.webTitle}
+								ajaxUrl={article.config.ajaxUrl}
+								switches={article.config.switches}
+								isSensitive={article.config.isSensitive}
+								isAdFreeUser={article.isAdFreeUser}
+								sectionId={article.config.section}
+								shouldHideReaderRevenue={
+									article.shouldHideReaderRevenue
+								}
+								tags={article.tags}
+								isPaidContent={!!article.config.isPaidContent}
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
+								contentType={article.contentType}
+								isPreview={article.config.isPreview}
+								idUrl={article.config.idUrl ?? ''}
+								isDev={!!article.config.isDev}
+								keywordIds={article.config.keywordIds}
+								abTests={article.config.abTests}
+								tableOfContents={article.tableOfContents}
+								lang={article.lang}
+								isRightToLeftLang={article.isRightToLeftLang}
+								editionId={article.editionId}
+								shouldHideAds={article.shouldHideAds}
+								idApiUrl={article.config.idApiUrl}
+							/>
+							<MatchInfoContainer
+								isMatchReport={isMatchReport}
+								isInVariantGroup={applyFootballRedesign}
+								footballMatchUrl={footballMatchUrl}
+								footballMatchStatsUrl={footballMatchStatsUrl}
+								format={format}
+							/>
+
+							{isApps && (
+								<Island
+									priority="critical"
+									defer={{ until: 'visible' }}
+								>
+									<AppsEpic />
+								</Island>
+							)}
+
+							{showBodyEndSlot && (
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
+									<SlotBodyEnd
+										contentType={article.contentType}
+										contributionsServiceUrl={
+											contributionsServiceUrl
+										}
+										idApiUrl={article.config.idApiUrl}
+										isMinuteArticle={
+											article.pageType.isMinuteArticle
+										}
+										isPaidContent={
+											article.pageType.isPaidContent
+										}
+										pageId={article.pageId}
+										sectionId={article.config.section}
+										shouldHideReaderRevenue={
+											article.shouldHideReaderRevenue
+										}
+										tags={article.tags}
+										renderAds={renderAds}
+										isLabs={isLabs}
+										articleEndSlot={
+											!!article.config.switches
+												.articleEndSlot
+										}
+									/>
+								</Island>
+							)}
+							<StraightLines
+								data-print-layout="hide"
+								count={4}
+								cssOverrides={css`
+									display: block;
+								`}
+								color={themePalette('--straight-lines')}
+							/>
+							<SubMeta
+								format={format}
+								subMetaKeywordLinks={
+									article.subMetaKeywordLinks
+								}
+								subMetaSectionLinks={
+									article.subMetaSectionLinks
+								}
+								pageId={article.pageId}
+								webUrl={article.webURL}
+								webTitle={article.webTitle}
+								showBottomSocialButtons={
+									article.showBottomSocialButtons &&
+									renderingTarget === 'Web'
+								}
+							/>
+						</ArticleContainer>
+					</GridItem>
+					<GridItem
+						area="right-column"
+						layoutType={layoutType}
+						columns={{ desktop: 'right' }}
+						customCss={rightColumnCss(isMedia)}
+						element="aside"
+					>
+						<Island
+							priority="feature"
+							defer={{
+								until: 'visible',
+								// Provide a much higher value for the top margin for the intersection observer
+								// This is because the most viewed would otherwise only be lazy loaded when the
+								// bottom of the container intersects with the viewport
+								rootMargin: '700px 100px',
+							}}
 						>
-							<Island
-								priority="feature"
-								defer={{
-									until: 'visible',
-									// Provide a much higher value for the top margin for the intersection observer
-									// This is because the most viewed would otherwise only be lazy loaded when the
-									// bottom of the container intersects with the viewport
-									rootMargin: '700px 100px',
-								}}
-							>
-								<MostViewedRightWithAd
-									format={format}
-									isPaidContent={
-										article.pageType.isPaidContent
-									}
-									renderAds={isWeb && renderAds}
-									shouldHideReaderRevenue={
-										!!article.config.shouldHideReaderRevenue
-									}
-								/>
-							</Island>
-						</GridItem>
-					</div>
+							<MostViewedRightWithAd
+								format={format}
+								isPaidContent={article.pageType.isPaidContent}
+								renderAds={isWeb && renderAds}
+								shouldHideReaderRevenue={
+									!!article.config.shouldHideReaderRevenue
+								}
+							/>
+						</Island>
+					</GridItem>
 				</article>
 
 				{isWeb && renderAds && !isLabs && (
