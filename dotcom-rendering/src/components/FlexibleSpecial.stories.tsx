@@ -90,8 +90,7 @@ const meta = {
 	render: ({ frontSectionTitle, ...args }) => (
 		<FrontSection
 			title={frontSectionTitle}
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
+			editionId="UK"
 			showTopBorder={true}
 			slimifySectionForSlimHomepageAbTest={
 				args.isInSlimHomepageAbTestVariant
@@ -370,8 +369,7 @@ export const WithSpecialPaletteVariations = {
 		<>
 			{containerPalettes.map((containerPalette) => (
 				<FrontSection
-					discussionApiUrl={discussionApiUrl}
-					editionId={'UK'}
+					editionId="UK"
 					showTopBorder={true}
 					containerPalette={containerPalette}
 					key={containerPalette}

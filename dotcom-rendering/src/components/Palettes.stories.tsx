@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import type { ComponentProps } from 'react';
 import { allModes } from '../../.storybook/modes';
-import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import type { DCRGroupedTrails } from '../types/front';
 import { FlexibleGeneral } from './FlexibleGeneral';
@@ -54,7 +53,6 @@ export const EventPalette: Story = {
 			containerPalette: 'EventPalette',
 			showDateHeader: true,
 			editionId: 'UK',
-			discussionApiUrl,
 		},
 		flexibleGeneral: {
 			groupedTrails,
