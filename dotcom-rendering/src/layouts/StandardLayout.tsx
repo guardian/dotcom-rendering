@@ -65,7 +65,7 @@ import {
 	type Area,
 	gridItemCss,
 	type LayoutType,
-} from './lib/furnitureArrangements';
+} from './lib/furnitureLayouts';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const stretchLines = css`
