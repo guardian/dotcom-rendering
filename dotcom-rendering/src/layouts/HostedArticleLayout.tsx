@@ -8,7 +8,6 @@ import {
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
-import { CallToActionAtom } from '../components/CallToActionAtom';
 import { Caption } from '../components/Caption';
 import { HostedContentDisclaimer } from '../components/HostedContentDisclaimer';
 import { HostedContentHeader } from '../components/HostedContentHeader';
@@ -141,17 +140,6 @@ const onwardContentStyles = css`
 		grid-row: 1
 	}
 	margin-bottom: 24px;
-`;
-
-const ctaStyles = css`
-	${grid.column.all}
-	grid-row:auto;
-	overflow: hidden;
-	max-height: 400px;
-	${from.wide} {
-		width: ${breakpoints.wide}px;
-		margin: auto;
-	}
 `;
 
 const sideBorders = css`
@@ -323,15 +311,6 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 
 						<div css={onwardContentStyles}>
 							{'Placeholder - onward content'}
-						</div>
-
-						<div css={ctaStyles}>
-							<CallToActionAtom
-								linkUrl="https://safety.epicgames.com/en-US?lang=en-US"
-								backgroundImage="https://media.guim.co.uk/7fe58f11470360bc9f1e4b6bbcbf45d7cf06cfcf/0_0_1300_375/1300.jpg"
-								text="This is a call to action text"
-								buttonText="Learn more"
-							/>
 						</div>
 					</div>
 				</article>

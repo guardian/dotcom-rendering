@@ -4,6 +4,7 @@ import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
 import { CalloutEmbedBlockComponent } from '../components/CalloutEmbedBlockComponent.importable';
+import { CallToActionAtomWrapper } from '../components/CallToActionAtomWrapper';
 import { CaptionBlockComponent } from '../components/CaptionBlockComponent';
 import { CartoonComponent } from '../components/CartoonComponent';
 import { ChartAtom } from '../components/ChartAtom.importable';
@@ -225,6 +226,15 @@ export const renderElement = ({
 				);
 			}
 			return null;
+		case 'model.dotcomrendering.pageElements.CallToActionAtomBlockElement':
+			return (
+				<CallToActionAtomWrapper
+					url={element.url}
+					image={element.image}
+					label={element.label}
+					btnText={element.btnText}
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.ReporterCalloutBlockElement':
 			if (switches.callouts) {
 				return (
@@ -1003,6 +1013,7 @@ const bareElements = new Set<FEElement['_type']>([
 	'model.dotcomrendering.pageElements.TextBlockElement',
 	'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
 	'model.dotcomrendering.pageElements.InteractiveBlockElement',
+	'model.dotcomrendering.pageElements.CallToActionAtomBlockElement',
 ]);
 
 // RenderArticleElement is a wrapper for renderElement that wraps elements in a
