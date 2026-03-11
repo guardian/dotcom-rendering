@@ -80,18 +80,6 @@ const stretchLines = css`
 	}
 `;
 
-const rightColumnCss = (isMedia: boolean) => css`
-	display: none;
-	${from.desktop} {
-		display: block;
-		padding-top: 6px;
-		grid-row: ${isMedia ? 3 : 1} / span 999;
-	}
-	${from.leftCol} {
-		grid-row: ${isMedia ? 2 : 1} / span 999;
-	}
-`;
-
 interface GridItemProps {
 	area: Area;
 	layoutType: LayoutType;
@@ -692,28 +680,34 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						area="right-column"
 						layoutType={layoutType}
 						columns={{ desktop: 'right' }}
-						customCss={rightColumnCss(isMedia)}
+						customCss={css`
+							padding-top: 6px;
+						`}
 						element="aside"
 					>
-						<Island
-							priority="feature"
-							defer={{
-								until: 'visible',
-								// Provide a much higher value for the top margin for the intersection observer
-								// This is because the most viewed would otherwise only be lazy loaded when the
-								// bottom of the container intersects with the viewport
-								rootMargin: '700px 100px',
-							}}
-						>
-							<MostViewedRightWithAd
-								format={format}
-								isPaidContent={article.pageType.isPaidContent}
-								renderAds={isWeb && renderAds}
-								shouldHideReaderRevenue={
-									!!article.config.shouldHideReaderRevenue
-								}
-							/>
-						</Island>
+						<Hide until="desktop">
+							<Island
+								priority="feature"
+								defer={{
+									until: 'visible',
+									// Provide a much higher value for the top margin for the intersection observer
+									// This is because the most viewed would otherwise only be lazy loaded when the
+									// bottom of the container intersects with the viewport
+									rootMargin: '700px 100px',
+								}}
+							>
+								<MostViewedRightWithAd
+									format={format}
+									isPaidContent={
+										article.pageType.isPaidContent
+									}
+									renderAds={isWeb && renderAds}
+									shouldHideReaderRevenue={
+										!!article.config.shouldHideReaderRevenue
+									}
+								/>
+							</Island>
+						</Hide>
 					</GridItem>
 				</article>
 
