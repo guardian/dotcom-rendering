@@ -1,7 +1,6 @@
 import { css, type SerializedStyles } from '@emotion/react';
 import { log } from '@guardian/libs';
 import {
-	from,
 	palette as sourcePalette,
 	space,
 	until,
@@ -62,12 +61,6 @@ import type { RenderingTarget } from '../types/renderingTarget';
 import { type Area, gridCss, type LayoutType } from './lib/furnitureLayouts';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 import { Grid } from 'src/components/Masthead/Titlepiece/Grid';
-
-const maxWidth = css`
-	${from.desktop} {
-		max-width: 620px;
-	}
-`;
 
 const stretchLines = css`
 	${until.phablet} {
@@ -258,25 +251,23 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						layoutType={layoutType}
 						element="div"
 					>
-						<div css={!isMedia && maxWidth}>
-							<MainMedia
-								format={format}
-								elements={article.mainMediaElements}
-								host={host}
-								pageId={article.pageId}
-								webTitle={article.webTitle}
-								ajaxUrl={article.config.ajaxUrl}
-								abTests={article.config.abTests}
-								switches={article.config.switches}
-								isAdFreeUser={article.isAdFreeUser}
-								isSensitive={article.config.isSensitive}
-								editionId={article.editionId}
-								hideCaption={isMedia}
-								shouldHideAds={article.shouldHideAds}
-								contentType={article.contentType}
-								contentLayout="StandardLayout"
-							/>
-						</div>
+						<MainMedia
+							format={format}
+							elements={article.mainMediaElements}
+							host={host}
+							pageId={article.pageId}
+							webTitle={article.webTitle}
+							ajaxUrl={article.config.ajaxUrl}
+							abTests={article.config.abTests}
+							switches={article.config.switches}
+							isAdFreeUser={article.isAdFreeUser}
+							isSensitive={article.config.isSensitive}
+							editionId={article.editionId}
+							hideCaption={isMedia}
+							shouldHideAds={article.shouldHideAds}
+							contentType={article.contentType}
+							contentLayout="StandardLayout"
+						/>
 					</GridItem>
 					<GridItem
 						area="title"
@@ -297,18 +288,16 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						layoutType={layoutType}
 						element="div"
 					>
-						<div css={maxWidth}>
-							<ArticleHeadline
-								format={format}
-								headlineString={article.headline}
-								tags={article.tags}
-								byline={article.byline}
-								webPublicationDateDeprecated={
-									article.webPublicationDateDeprecated
-								}
-								starRating={article.starRating}
-							/>
-						</div>
+						<ArticleHeadline
+							format={format}
+							headlineString={article.headline}
+							tags={article.tags}
+							byline={article.byline}
+							webPublicationDateDeprecated={
+								article.webPublicationDateDeprecated
+							}
+							starRating={article.starRating}
+						/>
 					</GridItem>
 					<GridItem
 						area="standfirst"
@@ -325,85 +314,71 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						layoutType={layoutType}
 						element="aside"
 					>
-						<div css={maxWidth}>
-							<div css={stretchLines}>
-								{isWeb &&
-								format.theme === ArticleSpecial.Labs &&
-								format.design !== ArticleDesign.Video ? (
-									<GuardianLabsLines />
-								) : (
-									<DecideLines
-										format={format}
-										color={themePalette('--article-border')}
-									/>
-								)}
-							</div>
+						<div css={stretchLines}>
+							{isWeb &&
+							format.theme === ArticleSpecial.Labs &&
+							format.design !== ArticleDesign.Video ? (
+								<GuardianLabsLines />
+							) : (
+								<DecideLines
+									format={format}
+									color={themePalette('--article-border')}
+								/>
+							)}
 						</div>
 						{isApps ? (
 							<>
 								<Hide from="leftCol">
-									<div css={maxWidth}>
-										<ArticleMetaApps
-											branding={branding}
-											format={format}
-											byline={article.byline}
-											tags={article.tags}
-											primaryDateline={
-												article.webPublicationDateDisplay
-											}
-											secondaryDateline={
-												article.webPublicationSecondaryDateDisplay
-											}
-											isCommentable={
-												article.isCommentable
-											}
-											discussionApiUrl={
-												article.config.discussionApiUrl
-											}
-											shortUrlId={
-												article.config.shortUrlId
-											}
-											pageId={article.config.pageId}
-										></ArticleMetaApps>
-									</div>
+									<ArticleMetaApps
+										branding={branding}
+										format={format}
+										byline={article.byline}
+										tags={article.tags}
+										primaryDateline={
+											article.webPublicationDateDisplay
+										}
+										secondaryDateline={
+											article.webPublicationSecondaryDateDisplay
+										}
+										isCommentable={article.isCommentable}
+										discussionApiUrl={
+											article.config.discussionApiUrl
+										}
+										shortUrlId={article.config.shortUrlId}
+										pageId={article.config.pageId}
+									></ArticleMetaApps>
 								</Hide>
 								<Hide until="leftCol">
-									<div css={maxWidth}>
-										<ArticleMeta
-											branding={branding}
-											format={format}
-											pageId={article.pageId}
-											webTitle={article.webTitle}
-											byline={article.byline}
-											source={article.config.source}
-											tags={article.tags}
-											primaryDateline={
-												article.webPublicationDateDisplay
-											}
-											secondaryDateline={
-												article.webPublicationSecondaryDateDisplay
-											}
-											isCommentable={
-												article.isCommentable
-											}
-											discussionApiUrl={
-												article.config.discussionApiUrl
-											}
-											shortUrlId={
-												article.config.shortUrlId
-											}
-											mainMediaElements={
-												article.mainMediaElements
-											}
-										/>
-									</div>
+									<ArticleMeta
+										branding={branding}
+										format={format}
+										pageId={article.pageId}
+										webTitle={article.webTitle}
+										byline={article.byline}
+										source={article.config.source}
+										tags={article.tags}
+										primaryDateline={
+											article.webPublicationDateDisplay
+										}
+										secondaryDateline={
+											article.webPublicationSecondaryDateDisplay
+										}
+										isCommentable={article.isCommentable}
+										discussionApiUrl={
+											article.config.discussionApiUrl
+										}
+										shortUrlId={article.config.shortUrlId}
+										mainMediaElements={
+											article.mainMediaElements
+										}
+									/>
 									{!!article.affiliateLinksDisclaimer && (
 										<AffiliateDisclaimer />
 									)}
 								</Hide>
 							</>
 						) : (
-							<div css={maxWidth}>
+							<>
 								<ArticleMeta
 									branding={branding}
 									format={format}
@@ -442,7 +417,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										<AppsEpic />
 									</Island>
 								)}
-							</div>
+							</>
 						)}
 					</GridItem>
 					<GridItem area="body" layoutType={layoutType} element="div">
