@@ -770,13 +770,21 @@ export const renderElement = ({
 
 		case 'model.dotcomrendering.pageElements.TextBlockElement':
 			return (
-				<TextBlockComponent
-					key={index}
-					isFirstParagraph={index === 0}
-					html={element.html}
-					format={format}
-					forceDropCap={forceDropCap ?? element.dropCap}
-				/>
+				<>
+					<a href="https://m.code.dev-theguardian.com/football/match/2026/mar/09/espanyol-v-real-oviedo">
+						football link
+					</a>
+					<a href="https://m.code.dev-theguardian.com/business/2026/mar/10/cathay-pacific-offers-20000-sydney-to-london-flight-amid-disruption-in-gulf">
+						article link
+					</a>
+					<TextBlockComponent
+						key={index}
+						isFirstParagraph={index === 0}
+						html={element.html}
+						format={format}
+						forceDropCap={forceDropCap ?? element.dropCap}
+					/>
+				</>
 			);
 		case 'model.dotcomrendering.pageElements.TimelineAtomBlockElement':
 			return (
