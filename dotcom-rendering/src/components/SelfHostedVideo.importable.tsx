@@ -33,7 +33,7 @@ import type {
 	SubtitleSize,
 } from './SelfHostedVideoPlayer';
 import { SelfHostedVideoPlayer } from './SelfHostedVideoPlayer';
-import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
+import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
 const VISIBILITY_THRESHOLD = 0.5;
 
@@ -617,7 +617,11 @@ export const SelfHostedVideo = ({
 	const handlePlaying = () => {
 		if (hasTrackedPlay) return;
 
-		ophanTrackerWeb(atomId, 'loop')('play');
+		if (renderingTarget === 'Apps') {
+			ophanTrackerApps(atomId)('play');
+		} else {
+			ophanTrackerWeb(atomId, 'loop')('play');
+		}
 		setHasTrackedPlay(true);
 	};
 
