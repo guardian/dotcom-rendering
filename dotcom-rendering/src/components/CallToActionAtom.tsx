@@ -5,23 +5,17 @@ import {
 	textSansBold20,
 } from '@guardian/source/foundations';
 import { Button, SvgExternal } from '@guardian/source/react-components';
-
-type Props = {
-	linkUrl: string;
-	backgroundImage: string;
-	text: string;
-	buttonText: string;
-};
+import type { CallToActionProps } from './CallToActionAtomWrapper';
 
 export const CallToActionAtom = ({
-	linkUrl,
-	backgroundImage,
-	text,
-	buttonText,
-}: Props) => {
+	url,
+	image,
+	label,
+	btnText,
+}: CallToActionProps) => {
 	return (
 		<a
-			href={linkUrl}
+			href={url}
 			css={css`
 				text-decoration: none;
 			`}
@@ -33,7 +27,7 @@ export const CallToActionAtom = ({
 				`}
 			>
 				<img
-					src={backgroundImage}
+					src={image}
 					alt={''}
 					css={css`
 						height: 200px;
@@ -56,15 +50,17 @@ export const CallToActionAtom = ({
 						transform: translate(-10%, -10%);
 					`}
 				>
-					<h2
-						css={css`
-							${textSansBold20}
-							margin-bottom: 8px;
-							color: white;
-						`}
-					>
-						{text}
-					</h2>
+					{!!label && (
+						<h2
+							css={css`
+								${textSansBold20}
+								margin-bottom: 8px;
+								color: white;
+							`}
+						>
+							{label}
+						</h2>
+					)}
 					<Button
 						iconSide="right"
 						size="small"
@@ -75,7 +71,7 @@ export const CallToActionAtom = ({
 							backgroundPrimaryHover: sourcePalette.neutral[73],
 						}}
 					>
-						{buttonText}
+						{btnText}
 					</Button>
 				</div>
 			</picture>
