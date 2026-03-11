@@ -44,7 +44,7 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.island';
-import { grid } from '../grid';
+import { type ColumnPreset, grid } from '../grid';
 import {
 	ArticleDesign,
 	type ArticleFormat,
@@ -84,9 +84,9 @@ interface GridItemProps {
 	area: Area;
 	layoutType: LayoutType;
 	columns?: {
-		tablet?: 'left' | 'centre' | 'right';
-		desktop?: 'left' | 'centre' | 'right';
-		leftCol?: 'left' | 'centre' | 'right';
+		tablet?: ColumnPreset;
+		desktop?: ColumnPreset;
+		leftCol?: ColumnPreset;
 	};
 	element?: 'div' | 'aside';
 	customCss?: SerializedStyles;
@@ -261,91 +261,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					pageId={article.pageId}
 					pageTags={article.tags}
 				/>
-				<article>
-					<div css={css(grid.container)}>
-						<div css={css(grid.column.centre)}>
-							<div css={!isMedia && maxWidth}>
-								<MainMedia
-									format={format}
-									elements={article.mainMediaElements}
-									host={host}
-									pageId={article.pageId}
-									webTitle={article.webTitle}
-									ajaxUrl={article.config.ajaxUrl}
-									abTests={article.config.abTests}
-									switches={article.config.switches}
-									isAdFreeUser={article.isAdFreeUser}
-									isSensitive={article.config.isSensitive}
-									editionId={article.editionId}
-									hideCaption={isMedia}
-									shouldHideAds={article.shouldHideAds}
-									contentType={article.contentType}
-									contentLayout="StandardLayout"
-								/>
-							</div>
-						</div>
-						<aside
-							css={{
-								'&': css(grid.column.centre),
-								[from.desktop]: css(grid.column.left),
-							}}
-						>
-							<ArticleTitle
-								format={format}
-								tags={article.tags}
-								sectionLabel={article.sectionLabel}
-								sectionUrl={article.sectionUrl}
-								guardianBaseURL={article.guardianBaseURL}
-								isMatch={!!footballMatchUrl}
-							/>
-						</aside>
-
-						<div css={css(grid.column.centre)}>
-							{format.theme === ArticleSpecial.Labs ? (
-								<></>
-							) : (
-								<Border />
-							)}
-						</div>
-						<GridItem
-							area="headline"
-							layoutType={layoutType}
-							element="div"
-						>
-							<div css={maxWidth}>
-								<Island
-									priority="feature"
-									defer={{ until: 'visible' }}
-								>
-									<GetMatchNav
-										matchUrl={footballMatchUrl}
-										format={format}
-										headlineString={article.headline}
-										tags={article.tags}
-										webPublicationDateDeprecated={
-											article.webPublicationDateDeprecated
-										}
-									/>
-								</Island>
-							</div>
-							<div css={maxWidth}>
-								<Island
-									priority="critical"
-									defer={{ until: 'visible' }}
-								>
-									<GetMatchTabs
-										matchUrl={footballMatchUrl}
-										format={format}
-									/>
-								</Island>
-							</div>
-						</GridItem>
-					)}
-					<GridItem
-						area="main-media"
-						layoutType={layoutType}
-						element="div"
-					>
+				<article css={css(grid.container)}>
+					<div css={css(grid.column.centre)}>
 						<div css={!isMedia && maxWidth}>
 							<MainMedia
 								format={format}
@@ -365,32 +282,22 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								contentLayout="StandardLayout"
 							/>
 						</div>
-					</GridItem>
-					{!applyFootballRedesign && (
-						<GridItem
-							area="title"
-							layoutType={layoutType}
-							columns={{ leftCol: 'left' }}
-							element="aside"
-						>
-							<ArticleTitle
-								format={format}
-								tags={article.tags}
-								sectionLabel={article.sectionLabel}
-								sectionUrl={article.sectionUrl}
-								guardianBaseURL={article.guardianBaseURL}
-								isMatch={!!footballMatchUrl}
-							/>
-						</GridItem>
-					)}
-
-					<div css={css(grid.column.centre)}>
-						{format.theme === ArticleSpecial.Labs ? (
-							<></>
-						) : (
-							<Border />
-						)}
 					</div>
+					<GridItem
+						area="title"
+						layoutType={layoutType}
+						columns={{ leftCol: 'left' }}
+						element="aside"
+					>
+						<ArticleTitle
+							format={format}
+							tags={article.tags}
+							sectionLabel={article.sectionLabel}
+							sectionUrl={article.sectionUrl}
+							guardianBaseURL={article.guardianBaseURL}
+							isMatch={!!footballMatchUrl}
+						/>
+					</GridItem>
 					<GridItem
 						area="headline"
 						layoutType={layoutType}
@@ -603,10 +510,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							/>
 							<MatchInfoContainer
 								isMatchReport={isMatchReport}
-								isInVariantGroup={applyFootballRedesign}
-								footballMatchUrl={footballMatchUrl}
 								footballMatchStatsUrl={footballMatchStatsUrl}
-								format={format}
 							/>
 
 							{isApps && (
