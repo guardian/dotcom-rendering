@@ -159,6 +159,8 @@ const sideBorders = css`
 		position: relative;
 		::before {
 			position: absolute;
+			/** Negative z-index value to ensure the borders appear in the background */
+			z-index: -1;
 			top: 0;
 			bottom: 0;
 			content: '';
