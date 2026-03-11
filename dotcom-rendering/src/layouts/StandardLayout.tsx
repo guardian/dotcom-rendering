@@ -43,7 +43,7 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.island';
-import { type ColumnPreset, grid } from '../grid';
+import { grid } from '../grid';
 import {
 	ArticleDesign,
 	type ArticleFormat,
@@ -66,6 +66,7 @@ import {
 	type LayoutType,
 } from './lib/furnitureArrangements';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { Grid } from 'src/components/Masthead/Titlepiece/Grid';
 
 const stretchLines = css`
 	${until.phablet} {
