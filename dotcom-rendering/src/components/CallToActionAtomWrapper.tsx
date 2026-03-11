@@ -4,7 +4,7 @@ import { grid } from '../grid';
 import { CallToActionAtom } from './CallToActionAtom';
 
 export type CallToActionProps = {
-	url?: string;
+	url: string;
 	image?: string;
 	label?: string;
 	btnText?: string;
@@ -19,7 +19,7 @@ export const CallToActionAtomWrapper = ({
 	const ctaStyles = css`
 		${grid.container}
 		${grid.column.all}
-		grid-row-end: -1;
+		grid-row: 3;
 		overflow: hidden;
 		max-height: 400px;
 		${from.wide} {
@@ -28,13 +28,19 @@ export const CallToActionAtomWrapper = ({
 		}
 	`;
 	return (
-		<div css={ctaStyles}>
-			<CallToActionAtom
-				url={url}
-				image={image}
-				label={label}
-				btnText={btnText}
-			/>
+		<div
+			css={css`
+				${grid.container}
+			`}
+		>
+			<div css={ctaStyles}>
+				<CallToActionAtom
+					url={url}
+					image={image}
+					label={label}
+					btnText={btnText}
+				/>
+			</div>
 		</div>
 	);
 };
