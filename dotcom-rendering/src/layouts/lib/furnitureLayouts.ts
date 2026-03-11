@@ -16,11 +16,15 @@ export type Area =
 	// Match report specific area
 	| 'match-summary';
 
+type Breakpoint = 'mobile' | 'tablet' | 'desktop' | 'leftCol';
+
+type RowPlacement = {
+	start: number;
+	span?: number;
+};
+
 type LayoutRows = Partial<
-	Record<
-		Area,
-		{ mobile?: number; tablet?: number; desktop?: number; leftCol?: number }
-	>
+	Record<Area, Partial<Record<Breakpoint, RowPlacement>>>
 >;
 
 type BreakpointRows = Area[][];
@@ -32,37 +36,44 @@ type LayoutDefinition = {
 	leftCol?: BreakpointRows;
 };
 
+const tabletVanillaRows: BreakpointRows = [
+	['title'],
+	['headline'],
+	['standfirst'],
+	['main-media'],
+	['meta'],
+	['body'],
+];
+
 const furnitureRowLayouts: Record<LayoutType, LayoutDefinition> = {
 	standard: {
-		tablet: [
-			['title'],
-			['headline'],
-			['standfirst'],
-			['main-media'],
-			['meta'],
+		tablet: tabletVanillaRows,
+		desktop: [
+			['title', 'right-column'],
+			['headline', 'right-column'],
+			['standfirst', 'right-column'],
+			['main-media', 'right-column'],
+			['meta', 'right-column'],
+			['body', 'right-column'],
 		],
-
 		leftCol: [
-			['title', 'headline'],
-			['standfirst'],
-			['meta', 'main-media'],
+			['title', 'headline', 'right-column'],
+			['standfirst', 'right-column'],
+			['meta', 'main-media', 'right-column'],
+			['body', 'right-column'],
 		],
 	},
+
 	matchReport: {
-		tablet: [
-			['match-summary'],
-			['title'],
-			['headline'],
-			['standfirst'],
-			['main-media'],
-			['meta'],
-		],
+		tablet: [['match-summary'], ...tabletVanillaRows],
 		leftCol: [
 			['title', 'match-summary'],
 			['headline'],
 			['meta', 'main-media'],
+			['body', 'right-column'],
 		],
 	},
+
 	media: {
 		mobile: [
 			['title'],
@@ -70,6 +81,7 @@ const furnitureRowLayouts: Record<LayoutType, LayoutDefinition> = {
 			['main-media'],
 			['standfirst'],
 			['meta'],
+			['body'],
 		],
 		tablet: [
 			['title'],
@@ -77,20 +89,29 @@ const furnitureRowLayouts: Record<LayoutType, LayoutDefinition> = {
 			['main-media'],
 			['standfirst'],
 			['meta'],
+			['body'],
+		],
+		desktop: [
+			['title'],
+			['headline'],
+			['main-media', 'right-column'],
+			['standfirst', 'right-column'],
+			['meta', 'right-column'],
+			['body', 'right-column'],
 		],
 		leftCol: [
 			['title', 'headline'],
-			['meta', 'main-media'],
-			['standfirst'],
+			['meta', 'main-media', 'right-column'],
+			['meta', 'standfirst', 'right-column'],
+			['body', 'right-column'],
 		],
 	},
 };
 
+type Column = 'left' | 'centre' | 'right';
+
 type BreakpointColumns = Partial<
-	Record<
-		'mobile' | 'tablet' | 'desktop' | 'leftCol',
-		Column | [Line | number, Line | number]
-	>
+	Record<Breakpoint, Column | [Line | number, Line | number]>
 >;
 
 type ColumnLayoutMap = Partial<Record<Area, BreakpointColumns>>;
@@ -112,21 +133,36 @@ const furnitureColumnLayouts: Record<LayoutType, ColumnLayoutMap> = {
 };
 
 const buildRowMap = (layout: LayoutDefinition): LayoutRows => {
-	const map: LayoutRows = {} as LayoutRows;
+	const map: LayoutRows = {};
 
 	const apply = (
-		rows: Area[][] | undefined,
-		breakpoint: 'mobile' | 'tablet' | 'desktop' | 'leftCol',
+		rows: BreakpointRows | undefined,
+		breakpoint: Breakpoint,
 	) => {
 		if (!rows) return;
+
+		const areaRows: Record<string, number[]> = {};
 
 		for (const [index, areas] of rows.entries()) {
 			const row = index + 1;
 
 			for (const area of areas) {
-				map[area] ??= {};
-				map[area][breakpoint] = row;
+				areaRows[area] ??= [];
+				areaRows[area].push(row);
 			}
+		}
+
+		for (const [area, rowList] of Object.entries(areaRows) as [
+			Area,
+			number[],
+		][]) {
+			const start = rowList[0];
+			const span = rowList.length > 1 ? rowList.length : undefined;
+
+			if (start == null) continue;
+
+			map[area] ??= {};
+			map[area][breakpoint] = { start, span };
 		}
 	};
 
@@ -152,8 +188,6 @@ const breakpointQueries = {
 	desktop: from.desktop,
 } as const;
 
-type Column = 'left' | 'centre' | 'right';
-
 type ColumnConfig = Partial<Record<'tablet' | 'desktop' | 'leftCol', Column>>;
 
 export const gridCss = (
@@ -166,13 +200,18 @@ export const gridCss = (
 
 	return css([
 		grid.column.centre, // default
-		Object.entries(rows).map(
-			([bp, row]) => css`
-				${breakpointQueries[bp as keyof typeof breakpointQueries]} {
-					grid-row: ${row};
+		Object.entries(rows).map(([bp, placement]) => {
+			const rowValue =
+				placement.span != null
+					? `${placement.start} / span ${placement.span}`
+					: placement.start;
+
+			return css`
+				${breakpointQueries[bp as Breakpoint]} {
+					grid-row: ${rowValue};
 				}
-			`,
-		),
+			`;
+		}),
 		Object.entries(columns).map(([bp, colOrSpan]) => {
 			const colStyle = Array.isArray(colOrSpan)
 				? grid.between(colOrSpan[0], colOrSpan[1])
