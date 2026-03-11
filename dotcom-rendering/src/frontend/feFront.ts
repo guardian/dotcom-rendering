@@ -286,7 +286,7 @@ type FECollectionConfig = {
 	showLatestUpdate: boolean;
 	excludeFromRss: boolean;
 	showTimestamps: boolean;
-	hideShowMore: boolean;
+	hideShowMore?: boolean; // deprecated. Collections no longer show more content.
 	platform: string;
 	aspectRatio?: FEAspectRatio;
 };
@@ -309,7 +309,7 @@ export type FECollection = {
 	showDateHeader: boolean;
 	showLatestUpdate: boolean;
 	config: FECollectionConfig;
-	hasMore: boolean;
+	hasMore?: boolean; // deprecated. Collections no longer show more content.
 	targetedTerritory?: Territory;
 };
 
