@@ -19,7 +19,6 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.island';
 import { DecideLines } from '../components/DecideLines';
 import { DirectoryPageNav } from '../components/DirectoryPageNav';
@@ -44,7 +43,7 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.island';
-import { type ColumnPreset, grid } from '../grid';
+import { grid } from '../grid';
 import {
 	ArticleDesign,
 	type ArticleFormat,
@@ -62,6 +61,7 @@ import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { type Area, gridCss, type LayoutType } from './lib/furnitureLayouts';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { Grid } from 'src/components/Masthead/Titlepiece/Grid';
 
 const maxWidth = css`
 	${from.desktop} {
@@ -83,11 +83,6 @@ const stretchLines = css`
 interface GridItemProps {
 	area: Area;
 	layoutType: LayoutType;
-	columns?: {
-		tablet?: ColumnPreset;
-		desktop?: ColumnPreset;
-		leftCol?: ColumnPreset;
-	};
 	element?: 'div' | 'aside';
 	customCss?: SerializedStyles;
 	children: React.ReactNode;
@@ -96,14 +91,13 @@ interface GridItemProps {
 const GridItem = ({
 	area,
 	layoutType,
-	columns,
 	element: Element = 'div',
 	customCss,
 	children,
 }: GridItemProps) => (
 	<Element
 		data-gu-name={area}
-		css={css([gridCss(area, layoutType, columns), customCss])}
+		css={css([gridCss(area, layoutType), customCss])}
 	>
 		{children}
 	</Element>
@@ -262,7 +256,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					pageTags={article.tags}
 				/>
 				<article css={css(grid.container)}>
-					<div css={css(grid.column.centre)}>
+					<GridItem
+						area="main-media"
+						layoutType={layoutType}
+						element="div"
+					>
 						<div css={!isMedia && maxWidth}>
 							<MainMedia
 								format={format}
@@ -282,11 +280,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								contentLayout="StandardLayout"
 							/>
 						</div>
-					</div>
+					</GridItem>
 					<GridItem
 						area="title"
 						layoutType={layoutType}
-						columns={{ leftCol: 'left' }}
 						element="aside"
 					>
 						<ArticleTitle
@@ -329,7 +326,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<GridItem
 						area="meta"
 						layoutType={layoutType}
-						columns={{ leftCol: 'left' }}
 						element="aside"
 					>
 						<div css={maxWidth}>
@@ -583,7 +579,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<GridItem
 						area="right-column"
 						layoutType={layoutType}
-						columns={{ desktop: 'right' }}
 						customCss={css`
 							padding-top: 6px;
 						`}
