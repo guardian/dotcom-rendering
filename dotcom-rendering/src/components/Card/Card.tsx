@@ -13,7 +13,6 @@ import { appendLinkNameMedia } from '../../lib/getDataLinkName';
 import { getZIndex } from '../../lib/getZIndex';
 import { getOphanComponents } from '../../lib/labs';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
-import { BETA_CONTAINERS } from '../../model/enhanceCollections';
 import { palette } from '../../palette';
 import type { Branding } from '../../types/branding';
 import type { StarRating as Rating, RatingSizeType } from '../../types/content';
@@ -259,7 +258,6 @@ const getMedia = ({
 	slideshowImages,
 	mainMedia,
 	canPlayInline,
-	isBetaContainer,
 }: {
 	imageUrl?: string;
 	imageAltText?: string;
@@ -268,7 +266,6 @@ const getMedia = ({
 	slideshowImages?: DCRSlideshowImage[];
 	mainMedia?: MainMedia;
 	canPlayInline?: boolean;
-	isBetaContainer: boolean;
 }) => {
 	if (mainMedia?.type === 'SelfHostedVideo' && canPlayInline) {
 		let type: CardMediaType;
@@ -289,31 +286,33 @@ const getMedia = ({
 			mainMedia,
 		} as const;
 	}
+
 	if (mainMedia?.type === 'YoutubeVideo' && canPlayInline) {
 		return {
 			type: 'youtube-video',
 			mainMedia,
 		} as const;
 	}
+
 	if (slideshowImages && canPlayInline) {
 		return { type: 'slideshow', slideshowImages } as const;
 	}
+
 	if (avatarUrl) return { type: 'avatar', avatarUrl } as const;
-	if (
-		mainMedia?.type === 'Audio' &&
-		mainMedia.podcastImage &&
-		isBetaContainer
-	) {
+
+	if (mainMedia?.type === 'Audio' && mainMedia.podcastImage) {
 		return {
 			...mainMedia,
 			type: 'podcast',
 			trailImage: { src: imageUrl, altText: imageAltText },
 		} as const;
 	}
+
 	if (imageUrl) {
 		const type = isCrossword ? 'crossword' : 'picture';
 		return { type, imageUrl, imageAltText } as const;
 	}
+
 	return undefined;
 };
 
@@ -421,8 +420,6 @@ export const Card = ({
 		format.design === ArticleDesign.Editorial ||
 		format.design === ArticleDesign.Letter;
 
-	const isBetaContainer = BETA_CONTAINERS.includes(containerType ?? '');
-
 	/**
 	 * A "video article" refers to standalone video content presented as the main focus of the article.
 	 * It is treated as a media card in the design system.
@@ -521,7 +518,6 @@ export const Card = ({
 		slideshowImages,
 		mainMedia,
 		canPlayInline,
-		isBetaContainer,
 	});
 
 	const isSelfHostedVideo =
@@ -608,22 +604,6 @@ export const Card = ({
 			};
 		}
 
-		if (!isBetaContainer) {
-			/**
-			 * Media cards have 4px padding around the content so we have a
-			 * tiny (4px) gap to account for this and make it 8px total
-			 */
-			if (isMediaCardOrNewsletter) {
-				return {
-					row: 'tiny',
-					column: 'tiny',
-				};
-			}
-
-			// Current cards have small padding for everything
-			return { row: 'small', column: 'small' };
-		}
-
 		if (
 			containerType === 'scrollable/small' ||
 			containerType === 'scrollable/medium'
@@ -668,9 +648,7 @@ export const Card = ({
 					alignment="vertical"
 					isMedia={isMediaCard(format)}
 					fillBackgroundOnMobile={false}
-					fillBackgroundOnDesktop={
-						isBetaContainer && isMediaCardOrNewsletter
-					}
+					fillBackgroundOnDesktop={isMediaCardOrNewsletter}
 					isStorylines={true}
 					dataLinkName={dataLinkName}
 				/>
@@ -682,14 +660,11 @@ export const Card = ({
 					isMedia={isMediaCard(format)}
 					fillBackgroundOnMobile={
 						!!isFlexSplash ||
-						(isBetaContainer &&
-							!!image &&
+						(!!image &&
 							(mediaPositionOnMobile === 'bottom' ||
 								isMediaCard(format)))
 					}
-					fillBackgroundOnDesktop={
-						isBetaContainer && isMediaCardOrNewsletter
-					}
+					fillBackgroundOnDesktop={isMediaCardOrNewsletter}
 				/>
 			);
 		};
@@ -754,12 +729,11 @@ export const Card = ({
 
 	const determinePadContent = (
 		mediaCard: boolean,
-		betaContainer: boolean,
 		onwardContent: boolean,
 	): 'large' | 'small' | undefined => {
 		if (isInGalleryContext) return undefined;
-		if (mediaCard && betaContainer) return 'large';
-		if (mediaCard || onwardContent) return 'small';
+		if (mediaCard) return 'large';
+		if (onwardContent) return 'small';
 		return undefined;
 	};
 
@@ -914,11 +888,8 @@ export const Card = ({
 						mediaPositionOnDesktop={mediaPositionOnDesktop}
 						mediaPositionOnMobile={mediaPositionOnMobile}
 						padMedia={
-							isMediaCardOrNewsletter &&
-							isBetaContainer &&
-							!isGallerySecondaryOnward
+							isMediaCardOrNewsletter && !isGallerySecondaryOnward
 						}
-						isBetaContainer={isBetaContainer}
 						isSmallCard={isSmallCard}
 					>
 						{media.type === 'slideshow' && (
@@ -943,15 +914,12 @@ export const Card = ({
 								imageSize={mediaSize}
 								imagePositionOnDesktop={mediaPositionOnDesktop}
 								imagePositionOnMobile={mediaPositionOnMobile}
-								isBetaContainer={isBetaContainer}
 								isFlexibleContainer={isFlexibleContainer}
 							>
 								<Avatar
 									src={media.avatarUrl}
 									alt={byline ?? ''}
-									imageSize={
-										isBetaContainer ? mediaSize : undefined
-									}
+									imageSize={mediaSize}
 								/>
 							</AvatarContainer>
 						)}
@@ -1153,7 +1121,6 @@ export const Card = ({
 				<ContentWrapper
 					mediaType={media?.type}
 					mediaSize={mediaSize}
-					isBetaContainer={isBetaContainer}
 					mediaPositionOnDesktop={
 						media ? mediaPositionOnDesktop : 'none'
 					}
@@ -1162,7 +1129,6 @@ export const Card = ({
 					}
 					padContent={determinePadContent(
 						isMediaCardOrNewsletter,
-						isBetaContainer,
 						isOnwardContent,
 					)}
 				>
@@ -1293,7 +1259,6 @@ export const Card = ({
 				css={
 					/** We allow this area to take up more space so that cards without
 					 * sublinks next to cards with sublinks have the same meta alignment */
-					isBetaContainer &&
 					(mediaPositionOnDesktop === 'left' ||
 						mediaPositionOnDesktop === 'right') &&
 					css`

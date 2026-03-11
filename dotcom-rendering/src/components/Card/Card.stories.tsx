@@ -1812,7 +1812,7 @@ export const WithAVerticalGapWhenScrollableSmallContainer = () => {
 	);
 };
 
-export const WithBetaContainerAndSublinks = () => {
+export const WithinFlexibleGeneralAndSublinks = () => {
 	return (
 		<CardGroup>
 			<CardWrapper>
@@ -1827,7 +1827,7 @@ export const WithBetaContainerAndSublinks = () => {
 	);
 };
 
-export const WithBetaContainerAndSublinksNoImage = () => {
+export const WithinFlexibleGeneralAndSublinksNoImage = () => {
 	return (
 		<CardGroup>
 			<CardWrapper>

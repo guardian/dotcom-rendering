@@ -320,22 +320,6 @@ const sectionHeadlineUntilLeftCol = (isOpinion: boolean) => css`
 	}
 `;
 
-const sectionHeadlineFromLeftCol = (borderColour: string) => css`
-	${from.leftCol} {
-		position: relative;
-		::after {
-			content: '';
-			display: block;
-			width: 1px;
-			top: 0;
-			height: 1.875rem;
-			right: -10px;
-			position: absolute;
-			background-color: ${borderColour};
-		}
-	}
-`;
-
 const topPadding = css`
 	padding-top: ${space[2]}px;
 `;
@@ -459,15 +443,7 @@ const sideBorders = css`
 	}
 `;
 
-const topBorder = css`
-	border-top-style: solid;
-`;
-
-const bottomPadding = css`
-	padding-bottom: ${space[9]}px;
-`;
-
-const bottomPaddingBetaContainer = (
+const bottomPadding = (
 	useLargeSpacingMobile: boolean,
 	useLargeSpacingDesktop: boolean,
 ) => css`
@@ -641,9 +617,7 @@ export const FrontSection = ({
 }: Props) => {
 	const isToggleable = toggleable && !!sectionId;
 	const showVerticalRule = !hasPageSkin;
-	const isBetaContainer = !!containerLevel;
 
-	// These are for beta containers only
 	const useLargeSpacingMobile = !!isNextCollectionPrimary || isAboveMobileAd;
 	const useLargeSpacingDesktop =
 		!!isNextCollectionPrimary || isAboveDesktopAd;
@@ -681,7 +655,7 @@ export const FrontSection = ({
 					),
 				}}
 			>
-				{isBetaContainer && showTopBorder && (
+				{showTopBorder && (
 					<div
 						css={[
 							containerLevel === 'Secondary'
@@ -701,13 +675,7 @@ export const FrontSection = ({
 					/>
 				)}
 
-				<div
-					css={[
-						decoration,
-						sideBorders,
-						showTopBorder && !isBetaContainer && topBorder,
-					]}
-				/>
+				<div css={[decoration, sideBorders]} />
 
 				{isLabs ? (
 					<div
@@ -725,19 +693,12 @@ export const FrontSection = ({
 					</div>
 				) : (
 					<div
-						css={[
-							sectionHeadlineUntilLeftCol(
-								// TODO FIXME:
-								// This relies on sections called "opinion"
-								// only ever having <CPScott> as the leftContent
-								title?.toLowerCase() === 'opinion',
-							),
-							showVerticalRule &&
-								!isBetaContainer &&
-								sectionHeadlineFromLeftCol(
-									schemePalette('--section-border'),
-								),
-						]}
+						css={sectionHeadlineUntilLeftCol(
+							// TODO FIXME:
+							// This relies on sections called "opinion"
+							// only ever having <CPScott> as the leftContent
+							title?.toLowerCase() === 'opinion',
+						)}
 					>
 						<FrontSectionTitle
 							title={
@@ -796,9 +757,7 @@ export const FrontSection = ({
 						sectionContentHorizontalMargins,
 						sectionContentRow(toggleable),
 						topPadding,
-						showVerticalRule &&
-							isBetaContainer &&
-							sectionContentBorderFromLeftCol,
+						showVerticalRule && sectionContentBorderFromLeftCol,
 						slimifySectionForSlimHomepageAbTest &&
 							slimHomepageRightBorderStyles,
 					]}
@@ -850,12 +809,10 @@ export const FrontSection = ({
 					css={[
 						sectionContentHorizontalMargins,
 						sectionBottomContent,
-						isBetaContainer
-							? bottomPaddingBetaContainer(
-									useLargeSpacingMobile,
-									useLargeSpacingDesktop,
-							  )
-							: bottomPadding,
+						bottomPadding(
+							useLargeSpacingMobile,
+							useLargeSpacingDesktop,
+						),
 					]}
 				>
 					{isString(targetedTerritory) &&
