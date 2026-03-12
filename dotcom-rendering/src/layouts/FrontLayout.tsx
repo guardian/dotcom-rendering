@@ -40,7 +40,10 @@ import {
 } from '../lib/getFrontsAdPositions';
 import { hideAge } from '../lib/hideAge';
 import { ophanComponentId } from '../lib/ophan-helpers';
-import { doesPageQualifyForSlimHomepageAbTest } from '../lib/SlimHomepageAbTestHelpers';
+import {
+	calculateWhenToStartSlimming,
+	doesPageQualifyForSlimHomepageAbTest,
+} from '../lib/SlimHomepageAbTestHelpers';
 import { useBetaAB } from '../lib/useAB';
 import type { NavType } from '../model/extract-nav';
 import { palette as schemePalette } from '../palette';
@@ -181,6 +184,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		false;
 	const isInEitherSlimHomepageAbTestVariant =
 		isInSlimHomepageAbTestVariantOne || isInSlimHomepageAbTestVariantTwo;
+	// Don't slimify sections above the News container.
+	const indexToStartSlimmingFrom =
+		calculateWhenToStartSlimming(filteredCollections);
 
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
@@ -547,7 +553,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								)}
 								isLabs={isLabs(collection)}
 								slimifySectionForSlimHomepageAbTest={
-									isInEitherSlimHomepageAbTestVariant
+									isInEitherSlimHomepageAbTestVariant &&
+									index >= indexToStartSlimmingFrom
 								}
 								showRightContentForSlimHomepageAbTest={
 									isInSlimHomepageAbTestVariantTwo
