@@ -62,7 +62,7 @@ const furnitureRowLayouts: Record<LayoutType, LayoutDefinition> = {
 			['title', 'headline', 'right-column'],
 			['standfirst', 'right-column'],
 			['meta', 'main-media', 'right-column'],
-			['body', 'right-column'],
+			['meta', 'body', 'right-column'],
 		],
 	},
 
@@ -73,7 +73,7 @@ const furnitureRowLayouts: Record<LayoutType, LayoutDefinition> = {
 			['title', 'match-summary', 'right-column'],
 			['headline', 'right-column'],
 			['meta', 'main-media', 'right-column'],
-			['body', 'right-column'],
+			['meta', 'body', 'right-column'],
 		],
 	},
 
@@ -106,7 +106,7 @@ const furnitureRowLayouts: Record<LayoutType, LayoutDefinition> = {
 			['title', 'headline'],
 			['meta', 'main-media', 'right-column'],
 			['meta', 'standfirst', 'right-column'],
-			['body', 'right-column'],
+			['meta', 'body', 'right-column'],
 		],
 	},
 };
