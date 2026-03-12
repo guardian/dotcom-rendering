@@ -282,6 +282,33 @@ export const addChoiceCardsProductParams = (
 	return `${url}${alreadyHasQueryString ? '&' : '?'}${newParams}`;
 };
 
+const addChoiceCardDestinationTestParam = (
+	url: string,
+	destination: ChoiceCard['destination'],
+	destinationTest: ChoiceCard['destinationTest'],
+): string => {
+	if (!destinationTest || typeof destinationTest !== 'object') {
+		return url;
+	}
+	const parsedDestinationTest = destinationTest as Record<string, unknown>;
+	if (
+		typeof parsedDestinationTest.testName !== 'string' ||
+		typeof parsedDestinationTest.variantName !== 'string'
+	) {
+		return url;
+	}
+
+	const { testName, variantName } = parsedDestinationTest;
+	const paramKey =
+		destination === 'LandingPage'
+			? 'force-landing-page'
+			: 'force-one-time-checkout';
+	const newParam = `${paramKey}=${testName}:${variantName}`;
+	const alreadyHasQueryString = url.includes('?');
+
+	return `${url}${alreadyHasQueryString ? '&' : '?'}${newParam}`;
+};
+
 export const isProfileUrl = (baseUrl: string): boolean =>
 	/\bprofile\./.test(baseUrl);
 export const addTrackingParamsToProfileUrl = (
@@ -298,19 +325,32 @@ const SupportUrl = 'https://support.theguardian.com';
 export const getChoiceCardUrl = (choiceCard: ChoiceCard): string => {
 	const { product } = choiceCard;
 	const destination = choiceCard.destination ?? 'LandingPage';
+	const { destinationTest } = choiceCard;
 
 	if (product.supportTier === 'OneOff') {
 		if (destination === 'LandingPage') {
-			return addChoiceCardsOneTimeParams(`${SupportUrl}/contribute`);
+			return addChoiceCardDestinationTestParam(
+				addChoiceCardsOneTimeParams(`${SupportUrl}/contribute`),
+				destination,
+				destinationTest,
+			);
 		} else {
-			return `${SupportUrl}/one-time-checkout`;
+			return addChoiceCardDestinationTestParam(
+				`${SupportUrl}/one-time-checkout`,
+				destination,
+				destinationTest,
+			);
 		}
 	} else {
 		const path = destination === 'LandingPage' ? 'contribute' : 'checkout';
-		return addChoiceCardsProductParams(
-			`${SupportUrl}/${path}`,
-			product.supportTier,
-			product.ratePlan,
+		return addChoiceCardDestinationTestParam(
+			addChoiceCardsProductParams(
+				`${SupportUrl}/${path}`,
+				product.supportTier,
+				product.ratePlan,
+			),
+			destination,
+			destinationTest,
 		);
 	}
 };
