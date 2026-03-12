@@ -45,17 +45,19 @@ const tabletVanillaRows: BreakpointRows = [
 	['body'],
 ];
 
+const desktopVanillaRows: BreakpointRows = [
+	['title', 'right-column'],
+	['headline', 'right-column'],
+	['standfirst', 'right-column'],
+	['main-media', 'right-column'],
+	['meta', 'right-column'],
+	['body', 'right-column'],
+];
+
 const furnitureRowLayouts: Record<LayoutType, LayoutDefinition> = {
 	standard: {
 		tablet: tabletVanillaRows,
-		desktop: [
-			['title', 'right-column'],
-			['headline', 'right-column'],
-			['standfirst', 'right-column'],
-			['main-media', 'right-column'],
-			['meta', 'right-column'],
-			['body', 'right-column'],
-		],
+		desktop: desktopVanillaRows,
 		leftCol: [
 			['title', 'headline', 'right-column'],
 			['standfirst', 'right-column'],
@@ -66,15 +68,7 @@ const furnitureRowLayouts: Record<LayoutType, LayoutDefinition> = {
 
 	matchReport: {
 		tablet: [['match-summary'], ...tabletVanillaRows],
-		desktop: [
-			['match-summary', 'right-column'],
-			['title', 'right-column'],
-			['headline', 'right-column'],
-			['standfirst', 'right-column'],
-			['main-media', 'right-column'],
-			['meta', 'right-column'],
-			['body', 'right-column'],
-		],
+		desktop: [['match-summary', 'right-column'], ...desktopVanillaRows],
 		leftCol: [
 			['title', 'match-summary', 'right-column'],
 			['headline', 'right-column'],
