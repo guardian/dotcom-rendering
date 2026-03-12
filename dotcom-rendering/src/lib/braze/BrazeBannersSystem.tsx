@@ -935,7 +935,7 @@ export const BrazeBannersSystemDisplay = ({
 			css={
 				wrapperModeEnabled
 					? css`
-							max-height: 65svh;
+							max-height: 90svh;
 							border-top: 1px solid rgb(0, 0, 0);
 							background-color: ${wrapperModeBackgroundColor};
 							overflow-y: auto;
@@ -1043,7 +1043,7 @@ export const BrazeBannersSystemDisplay = ({
 									padding-left: 12px;
 									padding-right: 12px;
 									padding-top: 18px;
-									padding-bottom: 24px;
+									padding-bottom: 12px;
 									${until.leftCol} {
 										padding-left: 0px;
 										padding-right: 0px;
