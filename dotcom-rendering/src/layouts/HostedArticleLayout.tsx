@@ -8,6 +8,7 @@ import {
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
+import { CallToActionAtom } from '../components/CallToActionAtom';
 import { Caption } from '../components/Caption';
 import { HostedContentDisclaimer } from '../components/HostedContentDisclaimer';
 import { HostedContentHeader } from '../components/HostedContentHeader';
@@ -22,6 +23,7 @@ import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
 import { palette } from '../palette';
 import type { Article } from '../types/article';
+import type { Block } from '../types/blocks';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { Stuck } from './lib/stickiness';
 
@@ -142,6 +144,17 @@ const onwardContentStyles = css`
 	margin-bottom: 24px;
 `;
 
+const ctaStyles = css`
+	${grid.column.all}
+	grid-row:auto;
+	overflow: hidden;
+	max-height: 400px;
+	${from.wide} {
+		width: ${breakpoints.wide}px;
+		margin: auto;
+	}
+`;
+
 const sideBorders = css`
 	${from.desktop} {
 		position: relative;
@@ -179,6 +192,23 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 
 	const { branding } =
 		frontendData.commercialProperties[frontendData.editionId];
+
+	//The CTA block element is rendered separately at the end of the article body because otherwise we won't be able to have it at the end of the page.
+	const cta = frontendData.blocks[0]?.elements.find(
+		(element) =>
+			element._type ===
+			'model.dotcomrendering.pageElements.CallToActionAtomBlockElement',
+	);
+
+	//We need to remove the CTA block element from the blocks that are rendered in the article body, otherwise it will be rendered twice.
+	const blocks: Block[] = frontendData.blocks.map((block) => ({
+		...block,
+		elements: block.elements.filter(
+			(element) =>
+				element._type !==
+				'model.dotcomrendering.pageElements.CallToActionAtomBlockElement',
+		),
+	}));
 
 	return (
 		<>
@@ -272,7 +302,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}
-									blocks={frontendData.blocks}
+									blocks={blocks}
 									editionId={frontendData.editionId}
 									host={frontendData.config.host}
 									pageId={frontendData.pageId}
@@ -312,6 +342,17 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						<div css={onwardContentStyles}>
 							{'Placeholder - onward content'}
 						</div>
+
+						{cta && (
+							<div css={ctaStyles}>
+								<CallToActionAtom
+									url={cta.url}
+									image={cta.image}
+									label={cta.label}
+									btnText={cta.btnText}
+								/>
+							</div>
+						)}
 					</div>
 				</article>
 			</main>
