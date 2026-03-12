@@ -346,10 +346,10 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						{cta && (
 							<div css={ctaStyles}>
 								<CallToActionAtom
-									url={cta.url}
-									image={cta.image}
-									label={cta.label}
-									btnText={cta.btnText}
+									linkUrl={cta.url}
+									backgroundImage={cta.image}
+									text={cta.label}
+									buttonText={cta.btnText}
 								/>
 							</div>
 						)}

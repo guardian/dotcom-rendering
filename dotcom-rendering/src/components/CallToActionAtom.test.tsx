@@ -6,9 +6,9 @@ describe('CallToActionAtom', () => {
 	it('should render with url and button text', () => {
 		const { getByRole } = render(
 			<CallToActionAtom
-				url="https://example.com"
-				btnText="Click here"
-				image="https://example.com/image.jpg"
+				linkUrl="https://example.com"
+				backgroundImage="https://example.com/image.jpg"
+				buttonText="Click here"
 			/>,
 		);
 
@@ -23,10 +23,10 @@ describe('CallToActionAtom', () => {
 	it('should display the label when provided', () => {
 		const { getByRole } = render(
 			<CallToActionAtom
-				url="https://example.com"
-				btnText="Click here"
-				label="Label"
-				image="https://example.com/image.jpg"
+				linkUrl="https://example.com"
+				backgroundImage="https://example.com/image.jpg"
+				text="Label"
+				buttonText="Click here"
 			/>,
 		);
 
@@ -37,9 +37,9 @@ describe('CallToActionAtom', () => {
 	it('should not display a label when not provided', () => {
 		const { queryByRole } = render(
 			<CallToActionAtom
-				url="https://example.com"
-				btnText="Click here"
-				image="https://example.com/image.jpg"
+				linkUrl="https://example.com"
+				backgroundImage="https://example.com/image.jpg"
+				buttonText="Click here"
 			/>,
 		);
 
@@ -50,10 +50,10 @@ describe('CallToActionAtom', () => {
 	it('should have correct link wrapping the entire component', () => {
 		const { getByRole } = render(
 			<CallToActionAtom
-				url="https://example.com"
-				btnText="Learn more"
-				label="Important Info"
-				image="https://example.com/image.jpg"
+				linkUrl="https://example.com"
+				buttonText="Learn more"
+				text="Important Info"
+				backgroundImage="https://example.com/image.jpg"
 			/>,
 		);
 
