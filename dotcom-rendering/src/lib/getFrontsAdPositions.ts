@@ -105,13 +105,13 @@ const canInsertMobileAd =
 		 * Ad slots can only be inserted after positions that satisfy the following rules:
 		 * - Is NOT the slot used for the merch high position or the slot before that
 		 * - Is NOT a thrasher if it is the first container
-		 * - Is NOT before a thrasher OR pageId = uk/thefilter
+		 * - Is NOT before a thrasher OR pageId is one of uk/thefilter, thefilter-us
 		 * - Is NOT the most viewed container
 		 */
 		const rules = [
 			!isMerchHighPositionOrBefore(index, merchHighPosition),
 			!isFirstContainerAndThrasher(collection.collectionType, index),
-			// We avoid placing an ad above a thrasher unless we're on The Filter front
+			// We avoid placing an ad above a thrasher unless we're one of The Filter fronts
 			!isBeforeThrasher(index, collections) ||
 				['uk/thefilter', 'thefilter-us'].includes(pageId),
 			!isMostViewedContainer(collection),
