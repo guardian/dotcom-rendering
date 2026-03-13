@@ -12,6 +12,13 @@ const hasRequiredSlimHomepageAbTestCollections = (
 	);
 };
 
+export const calculateWhenToStartSlimming = (
+	filteredCollections: DCRCollectionType[],
+): number =>
+	filteredCollections.findIndex((collection) =>
+		collection.displayName.toLowerCase().includes('news'),
+	);
+
 export const doesPageQualifyForSlimHomepageAbTest = (
 	collections: DCRCollectionType[],
 	pageId: string,
