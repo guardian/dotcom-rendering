@@ -39,7 +39,7 @@ describe('Mobile Ads', () => {
 			...defaultTestCollections,
 		] satisfies AdCandidate[];
 
-		const mobileAdPositions = getMobileAdPositions(testCollections);
+		const mobileAdPositions = getMobileAdPositions(testCollections, 'uk');
 
 		expect(mobileAdPositions).not.toContain(0);
 	});
@@ -49,13 +49,13 @@ describe('Mobile Ads', () => {
 			...defaultTestCollections.slice(0, 3),
 			{ ...testCollection, collectionType: 'news/most-popular' },
 		] satisfies AdCandidate[];
-		const mobileAdPositions = getMobileAdPositions(testCollections);
+		const mobileAdPositions = getMobileAdPositions(testCollections, 'uk');
 		expect(mobileAdPositions).not.toContain(3);
 	});
 
 	it('Should not insert ad before a thrasher container', () => {
 		const testCollections = [...defaultTestCollections];
-		testCollections.splice(6, 0, {
+		testCollections.splice(5, 0, {
 			...testCollection,
 			collectionType: 'fixed/thrasher',
 		});
@@ -64,10 +64,30 @@ describe('Mobile Ads', () => {
 			collectionType: 'fixed/thrasher',
 		});
 
-		const mobileAdPositions = getMobileAdPositions(testCollections);
+		const mobileAdPositions = getMobileAdPositions(testCollections, 'uk');
 
-		expect(mobileAdPositions).not.toContain(5);
+		expect(mobileAdPositions).not.toContain(6);
 		expect(mobileAdPositions).not.toContain(8);
+	});
+
+	it(`Should allow inserting an ad before a thrasher container if it's a filter page`, () => {
+		const testCollections = [...defaultTestCollections];
+		testCollections.splice(5, 0, {
+			...testCollection,
+			collectionType: 'fixed/thrasher',
+		});
+		testCollections.splice(9, 0, {
+			...testCollection,
+			collectionType: 'fixed/thrasher',
+		});
+
+		const mobileAdPositions = getMobileAdPositions(
+			testCollections,
+			'uk/thefilter',
+		);
+
+		expect(mobileAdPositions).toContain(6);
+		expect(mobileAdPositions).toContain(8);
 	});
 
 	// We used https://www.theguardian.com/uk/commentisfree as a blueprint
@@ -88,7 +108,7 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
-		const mobileAdPositions = getMobileAdPositions(testCollections);
+		const mobileAdPositions = getMobileAdPositions(testCollections, 'uk');
 
 		expect(mobileAdPositions).toEqual([0, 2, 4, 6, 8]);
 	});
@@ -122,7 +142,7 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
-		const mobileAdPositions = getMobileAdPositions(testCollections);
+		const mobileAdPositions = getMobileAdPositions(testCollections, 'uk');
 
 		expect(mobileAdPositions).toEqual([0, 2, 4, 8, 11, 14, 17, 19]);
 	});
@@ -152,7 +172,7 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
-		const mobileAdPositions = getMobileAdPositions(testCollections);
+		const mobileAdPositions = getMobileAdPositions(testCollections, 'uk');
 
 		expect(mobileAdPositions).toEqual([0, 2, 5, 7, 11, 14, 16]);
 	});
@@ -183,7 +203,7 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
-		const mobileAdPositions = getMobileAdPositions(testCollections);
+		const mobileAdPositions = getMobileAdPositions(testCollections, 'uk');
 
 		expect(mobileAdPositions).toEqual([0, 2, 5, 9, 12, 14, 16]);
 	});
@@ -209,7 +229,7 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
-		const mobileAdPositions = getMobileAdPositions(testCollections);
+		const mobileAdPositions = getMobileAdPositions(testCollections, 'uk');
 
 		expect(mobileAdPositions).toEqual([0, 3, 6, 9, 12]);
 	});
@@ -233,7 +253,7 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
-		const mobileAdPositions = getMobileAdPositions(testCollections);
+		const mobileAdPositions = getMobileAdPositions(testCollections, 'uk');
 
 		expect(mobileAdPositions).toEqual([1, 3, 5, 7, 9]);
 	});
@@ -340,7 +360,7 @@ describe('Mobile Ads', () => {
 			{ ...testCollection, collectionType: 'news/most-popular' }, // Ignored - is most viewed container
 		];
 
-		const mobileAdPositions = getMobileAdPositions(testCollections);
+		const mobileAdPositions = getMobileAdPositions(testCollections, 'uk');
 
 		expect(mobileAdPositions).toEqual([4, 6, 8, 13, 18]);
 	});
@@ -390,65 +410,77 @@ describe('Desktop Ads', () => {
 describe('inserting an ad after the first collection', () => {
 	describe('on mobile', () => {
 		it('inserts an ad after the first collection if it is a LARGE flexible general container', () => {
-			const adPositions = getMobileAdPositions([
-				...largeFlexibleGeneralCollection,
-				{
-					...testCollection,
-					collectionType: 'scrollable/small',
-					containerLevel: 'Secondary',
-				},
-				{
-					...testCollection,
-					collectionType: 'scrollable/medium',
-					containerLevel: 'Secondary',
-				},
-			]);
+			const adPositions = getMobileAdPositions(
+				[
+					...largeFlexibleGeneralCollection,
+					{
+						...testCollection,
+						collectionType: 'scrollable/small',
+						containerLevel: 'Secondary',
+					},
+					{
+						...testCollection,
+						collectionType: 'scrollable/medium',
+						containerLevel: 'Secondary',
+					},
+				],
+				'uk',
+			);
 
 			expect(adPositions).toContain(0);
 			expect(adPositions).not.toContain(1);
 		});
 
 		it('inserts an ad after the first collection if it is a LARGE flexible special container', () => {
-			const adPositions = getMobileAdPositions([
-				...largeFlexibleSpecialCollection,
-				{
-					...testCollection,
-					collectionType: 'scrollable/small',
-					containerLevel: 'Secondary',
-				},
-				{
-					...testCollection,
-					collectionType: 'scrollable/medium',
-					containerLevel: 'Secondary',
-				},
-			]);
+			const adPositions = getMobileAdPositions(
+				[
+					...largeFlexibleSpecialCollection,
+					{
+						...testCollection,
+						collectionType: 'scrollable/small',
+						containerLevel: 'Secondary',
+					},
+					{
+						...testCollection,
+						collectionType: 'scrollable/medium',
+						containerLevel: 'Secondary',
+					},
+				],
+				'uk',
+			);
 
 			expect(adPositions).toContain(0);
 			expect(adPositions).not.toContain(1);
 		});
 
 		it('does NOT insert an ad after the first collection if it is a SMALL flexible general container', () => {
-			const adPositions = getMobileAdPositions([
-				...smallFlexibleGeneralCollection,
-				{
-					...testCollection,
-					collectionType: 'scrollable/small',
-					containerLevel: 'Secondary',
-				},
-			]);
+			const adPositions = getMobileAdPositions(
+				[
+					...smallFlexibleGeneralCollection,
+					{
+						...testCollection,
+						collectionType: 'scrollable/small',
+						containerLevel: 'Secondary',
+					},
+				],
+				'uk',
+			);
 
 			expect(adPositions).not.toContain(0);
 		});
 
 		it('does NOT insert an ad after the first collection if it is a SMALL flexible special container', () => {
-			const adPositions = getMobileAdPositions([
-				...smallFlexibleSpecialCollection,
-				{
-					...testCollection,
-					collectionType: 'scrollable/small',
-					containerLevel: 'Secondary',
-				},
-			]);
+			const adPositions = getMobileAdPositions(
+				[
+					...smallFlexibleSpecialCollection,
+					{
+						...testCollection,
+						collectionType: 'scrollable/small',
+						containerLevel: 'Secondary',
+					},
+				],
+				'uk',
+			);
 
 			expect(adPositions).not.toContain(0);
 		});

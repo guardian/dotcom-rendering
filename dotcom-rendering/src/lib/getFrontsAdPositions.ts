@@ -112,7 +112,8 @@ const canInsertMobileAd =
 			!isMerchHighPositionOrBefore(index, merchHighPosition),
 			!isFirstContainerAndThrasher(collection.collectionType, index),
 			// We avoid placing an ad above a thrasher unless we're on The Filter front
-			!isBeforeThrasher(index, collections) || pageId === 'uk/thefilter',
+			!isBeforeThrasher(index, collections) ||
+				['uk/thefilter', 'thefilter-us'].includes(pageId),
 			!isMostViewedContainer(collection),
 		];
 
