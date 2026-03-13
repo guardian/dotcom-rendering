@@ -10,6 +10,7 @@ import {
 } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { polyfillIO } from '../lib/polyfill.io';
+import type { NavType } from '../model/extract-nav';
 import { createGuardian } from '../model/guardian';
 import type {
 	CricketMatchPage,
@@ -23,7 +24,7 @@ import { htmlPageTemplate } from './htmlPageTemplate';
 const fromTheGuardian =
 	'from the Guardian, the world&#x27;s leading liberal voice';
 
-const decideDescription = (kind: SportPageKind) => {
+export const decideDescription = (kind: SportPageKind) => {
 	switch (kind) {
 		case 'FootballLiveScores':
 			return `Live football scores ${fromTheGuardian}`;
@@ -40,7 +41,7 @@ const decideDescription = (kind: SportPageKind) => {
 	}
 };
 
-const decideTitle = (sportPage: SportDataPage) => {
+export const decideTitle = (sportPage: SportDataPage) => {
 	switch (sportPage.kind) {
 		case 'FootballLiveScores':
 		case 'FootballResults':
@@ -97,7 +98,12 @@ const createCricketTitle = (sportPage: CricketMatchPage) => {
 	return `${sportPage.match.competitionName}, ${sportPage.match.venueName} | Cricket | The Guardian`;
 };
 
-export const renderSportPage = (sportData: SportDataPage) => {
+type Props = {
+	sportData: SportDataPage;
+	nav: NavType;
+};
+
+export const renderSportPage = ({ sportData, nav }: Props) => {
 	const renderingTarget = 'Web';
 
 	const darkModeAvailable =
@@ -114,7 +120,11 @@ export const renderSportPage = (sportData: SportDataPage) => {
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
-			<SportDataPageComponent sportData={sportData} />
+			<SportDataPageComponent
+				sportData={sportData}
+				nav={nav}
+				renderingTarget={renderingTarget}
+			/>
 		</ConfigProvider>,
 	);
 
