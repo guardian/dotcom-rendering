@@ -95,19 +95,24 @@ export const removeConsecutiveAdSlotsReducer = (
  * ' ------------------ '
  */
 const canInsertMobileAd =
-	(merchHighPosition: number, hasSecondaryContainers: boolean) =>
+	(
+		merchHighPosition: number,
+		hasSecondaryContainers: boolean,
+		pageId: string,
+	) =>
 	(collection: AdCandidate, index: number, collections: AdCandidate[]) => {
 		/**
 		 * Ad slots can only be inserted after positions that satisfy the following rules:
 		 * - Is NOT the slot used for the merch high position or the slot before that
 		 * - Is NOT a thrasher if it is the first container
-		 * - Is NOT before a thrasher
+		 * - Is NOT before a thrasher OR pageId = uk/thefilter
 		 * - Is NOT the most viewed container
 		 */
 		const rules = [
 			!isMerchHighPositionOrBefore(index, merchHighPosition),
 			!isFirstContainerAndThrasher(collection.collectionType, index),
-			!isBeforeThrasher(index, collections),
+			// We avoid placing an ad above a thrasher unless we're on The Filter front
+			!isBeforeThrasher(index, collections) || pageId === 'uk/thefilter',
 			!isMostViewedContainer(collection),
 		];
 
@@ -135,12 +140,21 @@ const isEvenIndex = (_collection: unknown, index: number): boolean =>
  * Filters out unsuitable positions then takes every other position for
  * possible ad insertion, up to a maximum of `MAX_FRONTS_MOBILE_ADS`.
  */
-const getMobileAdPositions = (collections: AdCandidate[]): number[] => {
+const getMobileAdPositions = (
+	collections: AdCandidate[],
+	pageId: string,
+): number[] => {
 	const merchHighPosition = getMerchHighPosition(collections);
 	const hasSecondaryContainers = hasSecondaryLevelContainers(collections);
 
 	const adPositions = collections
-		.filter(canInsertMobileAd(merchHighPosition, hasSecondaryContainers))
+		.filter(
+			canInsertMobileAd(
+				merchHighPosition,
+				hasSecondaryContainers,
+				pageId,
+			),
+		)
 		// Use every other ad position if the front has no secondary containers
 		.filter((c, i) => (hasSecondaryContainers ? true : isEvenIndex(c, i)))
 		.map((collection) => collections.indexOf(collection))
