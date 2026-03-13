@@ -138,7 +138,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const merchHighAdPosition = getMerchHighPosition(filteredCollections);
 
 	const mobileAdPositions = renderAds
-		? getMobileAdPositions(filteredCollections)
+		? getMobileAdPositions(filteredCollections, pageId)
 		: [];
 
 	const desktopAdPositions = renderAds
