@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { getNotificationsClient, getTagClient } from '../lib/bridgetApi';
 import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
 import { useIsMyGuardianEnabled } from '../lib/useIsMyGuardianEnabled';
+import { useConfig } from './ConfigContext';
 import { FollowNotificationsButton, FollowTagButton } from './FollowButtons';
 
 type Props = {
@@ -14,6 +15,7 @@ type Props = {
 };
 
 export const FollowWrapper = ({ id, displayName }: Props) => {
+	const { isDev } = useConfig();
 	const [isFollowingNotifications, setIsFollowingNotifications] = useState<
 		boolean | undefined
 	>(undefined);
@@ -31,9 +33,17 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 		return !blockList.includes(tagId);
 	};
 
-	if (isBridgetCompatible && isMyGuardianEnabled && isNotInBlockList(id)) {
-		setShowFollowTagButton(true);
-	}
+	useEffect(() => {
+		if (
+			isBridgetCompatible &&
+			isMyGuardianEnabled &&
+			isNotInBlockList(id)
+		) {
+			setShowFollowTagButton(true);
+		} else if (isDev) {
+			setShowFollowTagButton(true);
+		}
+	}, [isBridgetCompatible, isMyGuardianEnabled, id, isDev]);
 
 	useEffect(() => {
 		const topic = new Topic({
