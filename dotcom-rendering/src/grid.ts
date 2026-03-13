@@ -1,9 +1,11 @@
 // ----- Imports ----- //
 
 import {
+	between as betweenBreakpoint,
 	breakpoints,
 	from as fromBreakpoint,
 } from '@guardian/source/foundations';
+import { palette as themePalette } from './palette';
 
 // ----- Columns & Lines ----- //
 
@@ -83,25 +85,78 @@ const paddedContainer = `
     }
 `;
 
-// ----- API ----- //
+// ----- Vertical Rules ----- //
+
+type VerticalRuleOptions = {
+	centre?: boolean;
+};
 
 /**
- * Ask the element to span all grid columns between two grid lines. The lines
- * can be specified either by `Line` name or by number.
- * @param from The grid line to start from, either a `Line` name or a number.
- * @param to The grid line to end at, either a `Line` name or a number.
- * @returns {string} CSS to place the element on the grid.
+ * Render Guardian grid vertical rules.
  *
- * @example <caption>Will place the element in the centre column.</caption>
- * const styles = css`
- *   ${grid.between('centre-column-start', 'centre-column-end')}
- * `;
+ * Left and right rules are always present.
+ * A centre rule can optionally be enabled.
  *
- * @example <caption>Will place the element between lines 3 and 5.</caption>
- * const styles = css`
- *   ${grid.between(3, 5)}
- * `;
+ * Usage:
+ * css([grid.container, grid.verticalRules()])
+ * css([grid.container, grid.verticalRules({ centre: true })])
  */
+const optionalCentreRule = `/* CENTRE RULE */
+    & > *:first-child::before {
+      grid-column: centre-column-start;
+      justify-self: start;
+      transform: var(--centre-transform);
+    }`;
+
+const verticalRules = (options: VerticalRuleOptions = {}): string => `
+  ${fromBreakpoint.tablet} {
+    position: relative;
+
+    --centre-transform: translateX(-${columnGap});
+
+    ${fromBreakpoint.leftCol} {
+      --centre-transform: translateX(calc(-${columnGap} / 2));
+    }
+
+    &::before,
+    &::after
+    ${options.centre ? ', & > *:first-child::before' : ''} {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background-color: ${themePalette('--article-border')};
+      pointer-events: none;
+      content: '';
+    }
+
+    /* LEFT OUTER RULE */
+    &::before {
+      grid-column: centre-column-start;
+      justify-self: start;
+      transform: translateX(-${columnGap});
+
+      ${fromBreakpoint.leftCol} {
+        grid-column: left-column-start;
+      }
+    }
+
+    /* RIGHT OUTER RULE */
+    &::after {
+      grid-column: right-column-end;
+      justify-self: start;
+      transform: translateX(-1px);
+
+      ${betweenBreakpoint.tablet.and.desktop} {
+        grid-column: centre-column-end;
+      }
+    }
+
+    ${options.centre ? optionalCentreRule : ''}
+`;
+
+// ----- API ----- //
+
 const between = (from: Line | number, to: Line | number): string => `
     grid-column: ${from} / ${to};
 `;
@@ -182,8 +237,14 @@ const grid = {
 	 * breakpoint.
 	 */
 	mobileColumnGap,
+
+	verticalRules,
 } as const;
+
+// ----- Types ----- //
+type ColumnPreset = keyof typeof grid.column;
 
 // ----- Exports ----- //
 
+export type { Line, ColumnPreset };
 export { grid };
