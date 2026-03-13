@@ -1,73 +1,140 @@
 import { css } from '@emotion/react';
 import {
+	breakpoints,
 	from,
 	palette as sourcePalette,
 	space,
-	textSans15,
-	textSans17,
+	textSans14,
 	textSansBold12,
 	textSansBold14,
 	visuallyHidden,
 } from '@guardian/source/foundations';
-import { SvgGuardianLogo } from '@guardian/source/react-components';
+import {
+	LinkButton,
+	SvgArrowRightStraight,
+	SvgGuardianLogo,
+} from '@guardian/source/react-components';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { Branding } from '../types/branding';
 import { BrandingLabel } from './BrandingLabel';
+import { Details } from './Details';
+
+const BRANDING_WIDTH_MOBILE = '80px';
+const BRANDING_WIDTH_DESKTOP = '132px';
 
 export type Props = {
 	branding: Branding;
-	accentColor?: string;
 };
 
-const HOSTED_CONTENT_HEIGHT_MOBILE = 48;
-const HOSTED_CONTENT_HEIGHT_DESKTOP = 58;
-
 const headerWrapperStyles = css`
-	position: relative;
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
 	margin: 0 auto;
-	padding: 0;
-	height: ${HOSTED_CONTENT_HEIGHT_MOBILE}px;
+	padding: 0 10px;
+	height: 48px;
 	color: ${sourcePalette.neutral[100]};
 
+	${from.mobileLandscape} {
+		padding: 0 20px;
+	}
+
 	${from.tablet} {
-		height: ${HOSTED_CONTENT_HEIGHT_DESKTOP}px;
+		height: 58px;
+	}
+
+	${from.tablet} {
+		width: ${breakpoints.tablet}px;
 	}
 
 	${from.desktop} {
-		max-width: 61.25rem;
+		width: ${breakpoints.desktop}px;
 	}
 
 	${from.leftCol} {
-		max-width: 71.25rem;
+		width: ${breakpoints.leftCol}px;
 	}
 
 	${from.wide} {
-		max-width: 81.25rem;
+		width: ${breakpoints.wide}px;
 	}
 `;
 
-const hostedByStyles = css`
-	${textSansBold12};
-	display: block;
-	margin-left: -51px;
-	margin-bottom: -11px;
-	letter-spacing: 0.03125rem;
-	color: ${sourcePalette.neutral[73]};
+const leftContent = css`
+	display: flex;
+	position: relative;
+`;
 
+const brandingStyles = css`
+	display: flex;
+	width: ${BRANDING_WIDTH_MOBILE};
 	${from.tablet} {
-		${textSansBold14};
-		margin-left: -60px;
+		width: ${BRANDING_WIDTH_DESKTOP};
+	}
+`;
+
+const advertiserContentStyles = css`
+	min-height: 24px;
+	width: 100%;
+	align-self: flex-end;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	${textSans14};
+	padding: 0 2px;
+
+	button {
+		width: 16px;
+		height: 16px;
+	}
+`;
+
+const detailsLabelStyles = css`
+	margin-left: ${space[1]}px;
+	align-self: end;
+`;
+
+const detailsPositionStyles = css`
+	left: -(calc(100% + 132px));
+	top: calc(100% + 10px);
+`;
+
+const detailsContentStyles = css`
+	${textSans14};
+	background-color: ${sourcePalette.neutral[38]};
+	border-radius: ${space[2]}px;
+	border: none;
+
+	width: calc(100vw - 20px);
+	${from.tablet} {
+		width: 308px;
+	}
+	padding: ${space[3]}px;
+
+	/* Tooltip/popover arrow */
+	&::before {
+		content: '';
+		position: absolute;
+		top: -8px;
+		left: 24px;
+		width: 0;
+		height: 0;
+		border-left: 8px solid transparent;
+		border-right: 8px solid transparent;
+		border-bottom: 8px solid ${sourcePalette.neutral[38]};
 	}
 `;
 
 const logoStyles = css`
-	position: relative;
-	display: flex;
 	align-self: end;
-	margin-bottom: 1px;
+	padding-bottom: ${space[1]}px;
+
+	a {
+		cursor: pointer;
+		text-decoration: none;
+		display: flex;
+		align-items: flex-end;
+	}
 
 	svg {
 		width: 94px;
@@ -79,157 +146,36 @@ const logoStyles = css`
 	}
 `;
 
-const titleStyles = css`
-	${textSansBold14};
-	position: relative;
-	height: auto;
-	line-height: 0.945rem;
-	padding: 0.3125rem 0.375rem 0.25rem;
-	letter-spacing: 0.03125rem;
+const hostedByStyles = css`
+	${textSansBold12};
+	display: block;
+	color: ${sourcePalette.neutral[97]};
+	margin-right: ${space[1]}px;
 
-	${from.desktop} {
-		text-align: center;
-		margin: 2px 0;
+	${from.tablet} {
+		${textSansBold14};
 	}
 `;
 
 const badgeWrapperStyles = css`
 	position: absolute;
 	display: block;
-	width: 80px;
+	width: ${BRANDING_WIDTH_MOBILE};
+	${from.tablet} {
+		width: ${BRANDING_WIDTH_DESKTOP};
+	}
 	height: auto;
 	top: 100%;
 	text-align: center;
-	z-index: 10;
-
-	${from.desktop} {
-		width: 132px;
-		height: auto;
-	}
+	z-index: 1;
 `;
 
-const HeaderWrapper = ({ children }: { children: React.ReactNode }) => (
-	<div css={headerWrapperStyles}>{children}</div>
-);
-
-const Left = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			display: flex;
-		`}
-	>
-		{children}
-	</div>
-);
-
-const Right = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			display: flex;
-			padding: ${space[1]}px 0;
-			margin-right: 10px;
-
-			${from.mobileLandscape} {
-				margin-right: ${space[5]}px;
-			}
-		`}
-	>
-		{children}
-	</div>
-);
-
-const HeaderSection = ({
-	children,
-	isFirst,
-}: {
-	children: React.ReactNode;
-	isFirst?: boolean;
-}) => (
-	<div
-		css={css`
-			height: 100%;
-			display: flex;
-			align-items: center;
-			margin-left: 10px;
-
-			${from.mobileLandscape} {
-				${isFirst
-					? `margin-left: ${space[5]}px;`
-					: 'margin-left: 10px;'}
-			}
-
-			${from.leftCol} {
-				${isFirst ? null : `margin-left: ${space[8]}px;`}
-			}
-		`}
-	>
-		{children}
-	</div>
-);
-
-const TitleAndBadge = ({ accentColor, branding }: Props) => (
-	<>
-		<div
-			css={css`
-				box-sizing: border-box;
-				width: 80px;
-				align-self: flex-end;
-				background-color: ${accentColor};
-
-				${from.desktop} {
-					width: 132px;
-				}
-			`}
-		>
-			<p css={titleStyles}>Advertiser content</p>
-		</div>
-
-		<div css={badgeWrapperStyles}>
-			<BrandingLabel branding={branding} isHosted={true} />
-		</div>
-	</>
-);
-
-{
-	/* TODO: waiting for design confirmation so it's just a placeholder for now */
-}
-const About = () => (
-	<div
-		css={css`
-			color: ${sourcePalette.neutral[100]};
-			margin-top: 1.25rem;
-
-			${from.tablet} {
-				margin-top: 1.8rem;
-			}
-		`}
-	>
-		<p
-			css={css`
-				${textSans15};
-
-				${from.desktop} {
-					${textSans17};
-				}
-			`}
-		>
-			About
-		</p>
-	</div>
-);
-
-{
-	/* Can't reuse Logo.tsx until we add a new palette to work with hosted. The color doesn't work with palette --masthead-nav-link-text */
-}
+/**
+ * Can't reuse general Logo.tsx until we add a new palette to work with hosted.
+ * The color doesn't work with palette --masthead-nav-link-text
+ */
 const Logo = () => (
-	<a
-		href="/"
-		data-link-name={nestedOphanComponents('header', 'logo')}
-		css={css`
-			cursor: pointer;
-			text-decoration: none;
-		`}
-	>
+	<a href="/" data-link-name={nestedOphanComponents('hosted-header', 'logo')}>
 		<span
 			css={css`
 				${visuallyHidden};
@@ -243,36 +189,61 @@ const Logo = () => (
 	</a>
 );
 
-const HostedContentLogo = () => (
-	<div
-		css={css`
-			position: relative;
-			display: flex;
-		`}
-	>
-		<div css={logoStyles}>
-			<Logo />
-		</div>
-	</div>
-);
-
-export const HostedContentHeader = ({ branding, accentColor }: Props) => {
+export const HostedContentHeader = ({ branding }: Props) => {
+	const accentColor =
+		branding.hostedCampaignColour ?? sourcePalette.neutral[38];
 	return (
-		<HeaderWrapper>
-			<Left>
-				<HeaderSection isFirst={true}>
-					<TitleAndBadge
-						branding={branding}
-						accentColor={accentColor}
-					/>
-				</HeaderSection>
-				<HeaderSection>
-					<About />
-				</HeaderSection>
-			</Left>
-			<Right>
-				<HostedContentLogo />
-			</Right>
-		</HeaderWrapper>
+		<div css={headerWrapperStyles}>
+			<div css={leftContent}>
+				<div css={brandingStyles}>
+					<div
+						css={advertiserContentStyles}
+						style={{ backgroundColor: accentColor }}
+					>
+						<p>Advertiser content</p>
+					</div>
+
+					<div css={badgeWrapperStyles}>
+						<BrandingLabel branding={branding} isHosted={true} />
+					</div>
+				</div>
+
+				<div css={detailsLabelStyles}>
+					<Details
+						label="About"
+						labelSize="xsmall"
+						positionStyles={detailsPositionStyles}
+					>
+						<div css={detailsContentStyles}>
+							<span>
+								This article was paid for, produced and
+								controlled by the advertiser rather than the
+								publisher. It is subject to regulation by the
+								Advertising Standards Authority. This content is
+								produced by the advertiser with no involvement
+								from Guardian News and Media staff.
+							</span>
+							<br />
+							<LinkButton
+								iconSide="right"
+								size="xsmall"
+								priority="subdued"
+								theme={{
+									textSubdued: sourcePalette.neutral[100],
+								}}
+								icon={<SvgArrowRightStraight />}
+								href="https://www.theguardian.com/info/2016/jan/25/content-funding"
+							>
+								Learn more
+							</LinkButton>
+						</div>
+					</Details>
+				</div>
+			</div>
+
+			<div css={logoStyles}>
+				<Logo />
+			</div>
+		</div>
 	);
 };

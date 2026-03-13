@@ -103,12 +103,10 @@ const imageAdvertisingPartnerStyles = css`
 
 const hostedLogoImageStyles = css`
 	width: 80px;
-	height: auto;
-
-	${from.desktop} {
+	${from.tablet} {
 		width: 132px;
-		height: auto;
 	}
+	height: auto;
 `;
 
 /**
