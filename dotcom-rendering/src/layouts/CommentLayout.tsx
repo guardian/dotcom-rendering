@@ -277,7 +277,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 	const {
-		config: { isPaidContent, host },
+		config: { isPaidContent, host, isPreview },
 	} = article;
 
 	const showBodyEndSlot =
@@ -460,6 +460,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 										>
 											<ListenToArticle
 												articleId={article.pageId}
+												isPreview={isPreview}
 											/>
 										</Island>
 									</div>
@@ -493,6 +494,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 													article.config.shortUrlId
 												}
 												pageId={article.config.pageId}
+												isPreview={isPreview}
 											></ArticleMetaApps>
 										</Hide>
 										<Hide when="below" breakpoint="leftCol">

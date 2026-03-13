@@ -37,6 +37,7 @@ type Props = {
 	isCommentable: boolean;
 	pageId?: string;
 	headline?: string;
+	isPreview?: boolean;
 };
 
 const metaGridContainer = css`
@@ -230,6 +231,7 @@ export const ArticleMetaApps = ({
 	isCommentable,
 	pageId,
 	headline,
+	isPreview,
 }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
@@ -373,7 +375,7 @@ export const ArticleMetaApps = ({
 			</div>
 			{shouldShowListenToArticleButton && (
 				<Island priority="feature" defer={{ until: 'visible' }}>
-					<ListenToArticle articleId={pageId} />
+					<ListenToArticle articleId={pageId} isPreview={isPreview} />
 				</Island>
 			)}
 		</div>
