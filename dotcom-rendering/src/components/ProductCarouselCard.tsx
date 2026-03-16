@@ -118,7 +118,11 @@ export const ProductCarouselCard = ({
 					)}
 			</div>
 			<div css={imageArea}>
-				<ProductCardImage format={format} image={product.image} />
+				<ProductCardImage
+					format={format}
+					image={product.image}
+					xCustComponentId={'carousel-card-image'}
+				/>
 			</div>
 			<div css={belowImageArea}>
 				{!hasHeading && (
@@ -132,6 +136,7 @@ export const ProductCarouselCard = ({
 						<div css={priceStyle}>{firstCta.price}</div>
 						<div css={buttonWrapper}>
 							<ProductLinkButton
+								xCustComponentId={'carousel-card'}
 								label={`Buy at ${firstCta.retailer}`}
 								url={firstCta.url}
 								fullwidth={true}

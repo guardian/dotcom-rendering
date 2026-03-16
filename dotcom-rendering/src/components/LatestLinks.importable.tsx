@@ -21,7 +21,6 @@ type Props = {
 	id: string;
 	direction: Alignment;
 	serverTime?: number;
-	isDynamo?: boolean;
 	containerPalette?: DCRContainerPalette;
 	displayHeader?: boolean;
 	directionOnMobile?: Alignment;
@@ -42,7 +41,7 @@ const vertical = css`
 `;
 
 const linkStyles = css`
-	${textSans14}
+	${textSans14};
 	overflow: hidden;
 	flex: 1; /* Distribute space evenly.  */
 `;
@@ -116,7 +115,6 @@ const extractAboutThreeLines = (text: string) =>
 export const LatestLinks = ({
 	id,
 	direction,
-	isDynamo = false,
 	containerPalette,
 	serverTime,
 	displayHeader = false,
@@ -140,7 +138,7 @@ export const LatestLinks = ({
 	 * The value of 5.2em is calculated from:
 	 * 1.3 (regular line height) * 4 (number of lines of text)
 	 */
-	const minHeight = isDynamo ? `calc(${space[1]}px + 5.2em)` : `5.2em`;
+	const minHeight = `5.2em`;
 
 	const ulStyle = css`
 		display: flex;
@@ -165,9 +163,7 @@ export const LatestLinks = ({
 				css={[
 					ulStyle,
 					revealStyles,
-					!!isDynamo || direction === 'horizontal'
-						? horizontal
-						: vertical,
+					direction === 'horizontal' ? horizontal : vertical,
 					directionOnMobile &&
 						directionOnMobileStyles(directionOnMobile),
 					css`

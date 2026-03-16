@@ -15,7 +15,6 @@ type Props = {
 	/** Determines if the content is arranged vertically or horizontally */
 	alignment: Alignment;
 	containerPalette?: DCRContainerPalette;
-	isDynamo?: boolean;
 	isMedia?: boolean;
 	/** Allows sublinks container to have a background colour on mobile screen sizes */
 	fillBackgroundOnMobile?: boolean;
@@ -145,7 +144,6 @@ export const SupportingContent = ({
 	supportingContent,
 	alignment,
 	containerPalette,
-	isDynamo,
 	isMedia = false,
 	fillBackgroundOnMobile = false,
 	fillBackgroundOnDesktop = false,
@@ -158,7 +156,7 @@ export const SupportingContent = ({
 			css={[
 				wrapperStyles,
 				baseGrid,
-				(isDynamo ?? alignment === 'horizontal') && horizontalGrid,
+				alignment === 'horizontal' && horizontalGrid,
 				fillBackgroundOnMobile && backgroundFillMobile(isMedia),
 				fillBackgroundOnDesktop && backgroundFillDesktop(isMedia),
 			]}
@@ -181,7 +179,7 @@ export const SupportingContent = ({
 						key={subLink.url}
 						css={[
 							sublinkBaseStyles,
-							isDynamo ?? alignment === 'horizontal'
+							alignment === 'horizontal'
 								? horizontalSublinkStyles(columnSpan)
 								: verticalSublinkStyles,
 						]}

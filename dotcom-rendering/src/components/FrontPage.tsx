@@ -21,6 +21,7 @@ import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
 import { ShowHideContainers } from './ShowHideContainers.importable';
 import { SkipTo } from './SkipTo';
+import { SlimHomepageAbTest } from './SlimHomepageAbTest.importable';
 
 type Props = {
 	front: Front;
@@ -97,6 +98,9 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			<Island priority="feature" defer={{ until: 'idle' }}>
 				<ReaderRevenueDev shouldHideReaderRevenue={false} />
 			</Island>
+			<Island priority="enhancement" defer={{ until: 'idle' }}>
+				<SlimHomepageAbTest />
+			</Island>
 			{isGoogleOneTapEnabled(
 				front.config.abTests,
 				front.config.switches,
@@ -112,7 +116,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 					You can{' '}
 					<a
 						style={{ color: 'inherit' }}
-						href="/opt/out/dark-mode-web"
+						href="/ab-tests/opt-out/webx-dark-mode-web"
 					>
 						opt out anytime
 					</a>{' '}

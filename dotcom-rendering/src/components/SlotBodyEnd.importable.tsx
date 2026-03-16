@@ -20,7 +20,7 @@ import {
 } from '../lib/braze/BrazeBannersSystem';
 import type {
 	CandidateConfig,
-	MaybeFC,
+	PickMessageResult,
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
@@ -65,7 +65,7 @@ const buildReaderRevenueEpicConfig = (
 		candidate: {
 			id: 'reader-revenue-banner',
 			canShow: () => canShowReaderRevenueEpic(canShowData),
-			show: (data: ModuleData<EpicProps>) => () => {
+			show: (data: ModuleData<EpicProps>) => {
 				return <ReaderRevenueEpic {...data} />;
 			},
 		},
@@ -93,7 +93,7 @@ const buildBrazeEpicConfig = (
 					tags,
 					shouldHideReaderRevenue,
 				),
-			show: (meta: any) => () => (
+			show: (meta: any) => (
 				<MaybeBrazeEpic
 					meta={meta}
 					countryCode={countryCode}
@@ -125,9 +125,8 @@ export const SlotBodyEnd = ({
 	const isSignedIn = useIsSignedIn();
 	const ophanPageViewId = usePageViewId(renderingTarget);
 	const abTests = useBetaAB();
-	const [SelectedEpic, setSelectedEpic] = useState<
-		React.ElementType | null | undefined
-	>();
+	const [pickMessageResult, setPickMessageResult] =
+		useState<PickMessageResult | null>(null);
 	const [asyncArticleCount, setAsyncArticleCount] =
 		useState<Promise<WeeklyArticleHistory | undefined>>();
 
@@ -205,7 +204,11 @@ export const SlotBodyEnd = ({
 			name: 'slotBodyEnd',
 		};
 		pickMessage(epicConfig, renderingTarget)
-			.then((PickedEpic: () => MaybeFC) => setSelectedEpic(PickedEpic))
+			.then((result) => {
+				if (result.type === 'MessageSelected') {
+					setPickMessageResult(result);
+				}
+			})
 			.catch((e) =>
 				console.error(`SlotBodyEnd pickMessage - error: ${String(e)}`),
 			);
@@ -230,7 +233,10 @@ export const SlotBodyEnd = ({
 	]);
 
 	useEffect(() => {
-		if (SelectedEpic === null && showArticleEndSlot) {
+		if (
+			pickMessageResult?.type === 'NoMessageSelected' &&
+			showArticleEndSlot
+		) {
 			const additionalSizes = (): SizeMapping => {
 				return { mobile: [adSizes.fluid] }; // Public Good additional ad slot sizes
 			};
@@ -243,15 +249,22 @@ export const SlotBodyEnd = ({
 				}),
 			);
 		}
-	}, [SelectedEpic, showArticleEndSlot]);
+	}, [pickMessageResult, showArticleEndSlot]);
 
-	if (SelectedEpic !== null && !isUndefined(SelectedEpic)) {
+	if (
+		pickMessageResult?.type === 'MessageSelected' &&
+		!isUndefined(pickMessageResult.SelectedMessage)
+	) {
+		const { SelectedMessage } = pickMessageResult;
 		return (
 			<div id="slot-body-end" css={slotStyles}>
-				<SelectedEpic />
+				<SelectedMessage />
 			</div>
 		);
-	} else if (SelectedEpic === null && showArticleEndSlot) {
+	} else if (
+		pickMessageResult?.type === 'NoMessageSelected' &&
+		showArticleEndSlot
+	) {
 		return (
 			<div id="slot-body-end" css={slotStyles}>
 				<AdSlot data-print-layout="hide" position="article-end" />

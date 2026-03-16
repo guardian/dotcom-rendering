@@ -505,41 +505,47 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							isInFootballRedesignVariantGroup
 						}
 					>
-						<GridItem area="matchNav" element="aside">
-							<div css={maxWidth}>
-								{isMatchReport && (
-									<Island
-										priority="feature"
-										defer={{ until: 'visible' }}
-									>
-										<GetMatchNav
-											matchUrl={footballMatchUrl}
-											format={format}
-											headlineString={article.headline}
-											tags={article.tags}
-											webPublicationDateDeprecated={
-												article.webPublicationDateDeprecated
-											}
-										/>
-									</Island>
-								)}
-							</div>
-						</GridItem>
-						<GridItem area="matchtabs" element="aside">
-							<div css={maxWidth}>
-								{isMatchReport && (
-									<Island
-										priority="critical"
-										defer={{ until: 'visible' }}
-									>
-										<GetMatchTabs
-											matchUrl={footballMatchUrl}
-											format={format}
-										/>
-									</Island>
-								)}
-							</div>
-						</GridItem>
+						{!isInFootballRedesignVariantGroup && (
+							<>
+								<GridItem area="matchNav" element="aside">
+									<div css={maxWidth}>
+										{isMatchReport && (
+											<Island
+												priority="feature"
+												defer={{ until: 'visible' }}
+											>
+												<GetMatchNav
+													matchUrl={footballMatchUrl}
+													format={format}
+													headlineString={
+														article.headline
+													}
+													tags={article.tags}
+													webPublicationDateDeprecated={
+														article.webPublicationDateDeprecated
+													}
+												/>
+											</Island>
+										)}
+									</div>
+								</GridItem>
+								<GridItem area="matchtabs" element="aside">
+									<div css={maxWidth}>
+										{isMatchReport && (
+											<Island
+												priority="critical"
+												defer={{ until: 'visible' }}
+											>
+												<GetMatchTabs
+													matchUrl={footballMatchUrl}
+													format={format}
+												/>
+											</Island>
+										)}
+									</div>
+								</GridItem>
+							</>
+						)}
 						<GridItem area="media">
 							<div css={!isMedia && maxWidth}>
 								<MainMedia

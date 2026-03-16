@@ -210,9 +210,11 @@ const testName = 'growth-admiral-adblock-recovery';
 export const AdmiralScript = () => {
 	const { renderingTarget } = useConfig();
 	const abTests = useBetaAB();
-	const isInControlGroup =
-		abTests?.isUserInTestGroup(testName, 'control') ?? false;
-	const variantName = isInControlGroup ? 'control' : undefined;
+	const isInVariantDetectGroup =
+		abTests?.isUserInTestGroup(testName, 'variant-detect') ?? false;
+	const variantName = isInVariantDetectGroup
+		? 'variant-detect'
+		: 'variant-recover'; //We need to default to 'variant-recover' for users who are not in the AB test in order to show Admiral Modal to all users in the US who are not blocked by the CMP and meet the other criteria.
 
 	useEffect(() => {
 		/**
@@ -220,93 +222,104 @@ export const AdmiralScript = () => {
 		 *
 		 * - Should not run if the CMP is due to show
 		 * - Should only run in the US
-		 * - Should only run if in the AB test (control group)
 		 * - Should not run if the gu_hide_support_messaging cookie is set
 		 * - Should not run for content marked as: shouldHideAdverts, shouldHideReaderRevenue, isSensitive
 		 * - Should not run for paid-content sponsorship type (includes Hosted Content)
 		 * - Should not run for certain sections
 		 *
-		 * Control group loads the script but the modal will not be shown.
+		 * Variant-detect group loads the script but the modal will not be shown.
 		 */
 		const page = window.guardian.config.page;
+		if (!window.guardian.config.switches.consentManagement) return;
 
-		const shouldRun =
-			cmp.hasInitialised() &&
-			!cmp.willShowPrivacyMessageSync() &&
-			isInUsa() &&
-			isInControlGroup &&
-			!getCookie({
-				name: 'gu_hide_support_messaging',
-				shouldMemoize: true,
-			}) &&
-			!page.shouldHideAdverts &&
-			!page.shouldHideReaderRevenue &&
-			!page.isSensitive &&
-			page.sponsorshipType !== 'paid-content' &&
-			![
-				'about',
-				'info',
-				'membership',
-				'help',
-				'guardian-live-australia',
-				'gnm-archive',
-				'guardian-labs',
-				'thefilter',
-			].includes(page.section ?? '');
-		if (!shouldRun) return;
+		let admiralScript: HTMLScriptElement | undefined;
+		let isCancelled = false;
 
-		// Record INSERT Ophan event
-		void recordAdmiralOphanEvent(
-			variantName,
-			{
-				action: 'INSERT',
-			},
-			renderingTarget,
-		);
+		const initialiseAdmiral = async () => {
+			try {
+				const willShowPrivacyMessage =
+					await cmp.willShowPrivacyMessage();
 
-		// Initialize Admiral Adblock Recovery
-		log('dotcom', '🛡️ Initialising Admiral Adblock Recovery');
+				const shouldRun =
+					!willShowPrivacyMessage &&
+					isInUsa() &&
+					!getCookie({
+						name: 'gu_hide_support_messaging',
+						shouldMemoize: true,
+					}) &&
+					!page.shouldHideAdverts &&
+					!page.shouldHideReaderRevenue &&
+					!page.isSensitive &&
+					page.sponsorshipType !== 'paid-content' &&
+					![
+						'about',
+						'info',
+						'membership',
+						'help',
+						'guardian-live-australia',
+						'gnm-archive',
+						'guardian-labs',
+						'thefilter',
+					].includes(page.section ?? '');
 
-		// Set up window.admiral stub
-		// This initializes admiral before the bootstrap script loads
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required for Admiral stub initialization
-		type AdmiralStub = Admiral & { q?: any[] };
-		const w = window as Window & { admiral?: AdmiralStub };
+				if (!shouldRun || isCancelled) return;
 
-		if (!w.admiral) {
-			// Create the Admiral stub function with queue
-			const stub = function (...args: unknown[]) {
-				if (!stub.q) stub.q = [];
-				stub.q.push(args);
-			} as AdmiralStub;
-			w.admiral = stub;
-		}
+				void recordAdmiralOphanEvent(
+					variantName,
+					{
+						action: 'INSERT',
+					},
+					renderingTarget,
+				);
 
-		log('dotcom', '🛡️ Setting up Admiral event logger');
+				log('dotcom', '🛡️ Initialising Admiral Adblock Recovery');
 
-		// Set up Admiral event logging
-		setUpAdmiralEventLogger(w.admiral, variantName, renderingTarget);
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required for Admiral stub initialization
+				type AdmiralStub = Admiral & { q?: any[] };
+				const w = window as Window & { admiral?: AdmiralStub };
 
-		// Set AB test targeting
-		if (variantName) {
-			w.admiral('targeting', 'set', 'guAbTest', variantName);
-		}
+				if (!w.admiral) {
+					const stub = function (...args: unknown[]) {
+						if (!stub.q) stub.q = [];
+						stub.q.push(args);
+					} as AdmiralStub;
+					w.admiral = stub;
+				}
 
-		// Load Admiral bootstrap script
-		const BASE_AJAX_URL = window.guardian.config.page.ajaxUrl;
+				log('dotcom', '🛡️ Setting up Admiral event logger');
+				setUpAdmiralEventLogger(
+					w.admiral,
+					variantName,
+					renderingTarget,
+				);
 
-		const admiralScript = document.createElement('script');
-		admiralScript.src = `${BASE_AJAX_URL}/commercial/admiral-bootstrap.js`;
-		admiralScript.async = true;
-		document.head.appendChild(admiralScript);
+				if (variantName) {
+					w.admiral('targeting', 'set', 'guAbTest', variantName);
+				}
 
-		log('dotcom', '🛡️ Admiral initialization complete');
+				const BASE_AJAX_URL = window.guardian.config.page.ajaxUrl;
+				admiralScript = document.createElement('script');
+				admiralScript.src = `${BASE_AJAX_URL}/commercial/admiral-bootstrap.js`;
+				admiralScript.async = true;
+				document.head.appendChild(admiralScript);
+
+				log('dotcom', '🛡️ Admiral initialization complete');
+			} catch (error) {
+				log(
+					'dotcom',
+					'🛡️ Admiral - Error waiting for CMP readiness:',
+					error,
+				);
+			}
+		};
+
+		void initialiseAdmiral();
 
 		return () => {
-			// Clean up Admiral bootstrap script
-			admiralScript.parentNode?.removeChild(admiralScript);
+			isCancelled = true;
+			admiralScript?.parentNode?.removeChild(admiralScript);
 		};
-	}, [isInControlGroup, variantName, renderingTarget]);
+	}, [variantName, renderingTarget]);
 
 	return null;
 };
