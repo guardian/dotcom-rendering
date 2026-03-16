@@ -213,7 +213,7 @@ export const HostedVideoLayout = (props: WebProps | AppProps) => {
 				</Stuck>
 			) : null}
 
-			<main data-layout="HostedArticleLayout">
+			<main data-layout="HostedVideoLayout">
 				<article css={[grid.container, sideBorders]}>
 					<header css={headerStyles}>
 						<div css={mainMediaStyles}>
