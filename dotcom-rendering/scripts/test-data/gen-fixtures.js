@@ -4,9 +4,6 @@
 const { execFileSync } = require('node:child_process');
 const fs = require('node:fs/promises');
 const { resolve } = require('node:path');
-const { config } = require('../../fixtures/config');
-const { configOverrides } = require('../../fixtures/config-overrides');
-const { switchOverrides } = require('../../fixtures/switch-overrides');
 const {
 	validateAsCricketMatchPageType,
 	validateAsFEArticle,
@@ -156,22 +153,6 @@ const requests = articles.map((article) => {
 	return fetch(`${article.url}.json?dcr`)
 		.then((res) => res.json())
 		.then((frontendJson) => {
-			// Override config
-			frontendJson.config = { ...config, ...configOverrides };
-			// Override switches
-			frontendJson.config.switches = {
-				...frontendJson.config.switches,
-				...switchOverrides,
-			};
-
-			// Override this config property but only for Labs articles
-			// TODO: Remove this once we are fully typing the config property
-			// and no longer need to use a fixed `config.js` object to replace
-			// the live one
-			if (frontendJson.format.theme === 'Labs') {
-				frontendJson.config.isPaidContent = true;
-			}
-
 			// Manual hack for LiveBlog vs DeadBlog
 			if (
 				article.name === 'Live' ||
