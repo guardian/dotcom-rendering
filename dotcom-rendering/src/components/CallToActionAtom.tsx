@@ -84,13 +84,13 @@ const buttonWrapperStyles = css`
 
 	${from.tablet} {
 		flex-direction: row;
+		justify-content: start;
 		align-items: flex-end;
-		padding: ${space[8]}px ${space[9]}px;
+		padding: ${space[5]}px;
 	}
 
 	${from.desktop} {
-		justify-content: start;
-		padding: ${space[8]}px ${space[5]}px;
+		padding: ${space[6]}px;
 	}
 `;
 
@@ -103,12 +103,11 @@ const textStyles = css`
 	${from.tablet} {
 		${textSansBold28}
 		margin: 0;
-		padding-right: ${space[5]}px;
+		margin-right: ${space[5]}px;
 	}
 
 	${from.desktop} {
 		width: auto;
-		max-width: 621px;
 	}
 `;
 
