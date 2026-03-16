@@ -197,6 +197,7 @@ const offTargetCss = css`
 	background-color: var(--goal-attempt-off-target-bg);
 	border: 1px solid ${palette('--football-match-stat-border')};
 	border-radius: 4px;
+	display: grid;
 	${from.desktop} {
 		${textSans15};
 	}
