@@ -30,10 +30,6 @@ export const footballData: FEFootballMatchListPage = {
 						{
 							id: '4540277',
 							date: '2026-03-16T20:00:00Z[Europe/London]',
-							competition: {
-								id: '100',
-								name: 'Premier League 25/26',
-							},
 							stage: {
 								stageNumber: '1',
 							},
@@ -42,12 +38,6 @@ export const footballData: FEFootballMatchListPage = {
 								name: 'League',
 							},
 							leg: '1',
-							liveMatch: false,
-							result: false,
-							previewAvailable: false,
-							reportAvailable: false,
-							lineupsAvailable: false,
-							matchStatus: '-',
 							homeTeam: {
 								id: '48',
 								name: 'Brentford',
@@ -60,7 +50,7 @@ export const footballData: FEFootballMatchListPage = {
 								id: '93',
 								name: 'Brentford Community Stadium',
 							},
-							type: 'MatchDay',
+							type: 'Fixture',
 						},
 					],
 				},
@@ -76,10 +66,6 @@ export const footballData: FEFootballMatchListPage = {
 						{
 							id: '4545159',
 							date: '2026-03-16T19:45:00Z[Europe/London]',
-							competition: {
-								id: '635',
-								name: 'Italy Serie A 25/26',
-							},
 							stage: {
 								stageNumber: '1',
 							},
@@ -88,12 +74,6 @@ export const footballData: FEFootballMatchListPage = {
 								name: 'League',
 							},
 							leg: '1',
-							liveMatch: false,
-							result: false,
-							previewAvailable: false,
-							reportAvailable: false,
-							lineupsAvailable: false,
-							matchStatus: '-',
 							homeTeam: {
 								id: '27271',
 								name: 'Cremonese',
@@ -106,7 +86,7 @@ export const footballData: FEFootballMatchListPage = {
 								id: '964',
 								name: 'Stadio Giovanni Zini',
 							},
-							type: 'MatchDay',
+							type: 'Fixture',
 						},
 					],
 				},
@@ -122,10 +102,6 @@ export const footballData: FEFootballMatchListPage = {
 						{
 							id: '4544223',
 							date: '2026-03-16T20:00:00Z[Europe/London]',
-							competition: {
-								id: '650',
-								name: 'Spanish La Liga 25/26',
-							},
 							stage: {
 								stageNumber: '1',
 							},
@@ -134,12 +110,6 @@ export const footballData: FEFootballMatchListPage = {
 								name: 'League',
 							},
 							leg: '1',
-							liveMatch: false,
-							result: false,
-							previewAvailable: false,
-							reportAvailable: false,
-							lineupsAvailable: false,
-							matchStatus: '-',
 							homeTeam: {
 								id: '35724',
 								name: 'Rayo Vallecano',
@@ -152,7 +122,7 @@ export const footballData: FEFootballMatchListPage = {
 								id: '1517',
 								name: 'Vallecas',
 							},
-							type: 'MatchDay',
+							type: 'Fixture',
 						},
 					],
 				},
@@ -168,10 +138,6 @@ export const footballData: FEFootballMatchListPage = {
 						{
 							id: '4543304',
 							date: '2026-03-16T20:00:00Z[Europe/London]',
-							competition: {
-								id: '101',
-								name: 'Sky Bet Championship 25/26',
-							},
 							stage: {
 								stageNumber: '1',
 							},
@@ -180,12 +146,6 @@ export const footballData: FEFootballMatchListPage = {
 								name: 'League',
 							},
 							leg: '1',
-							liveMatch: false,
-							result: false,
-							previewAvailable: false,
-							reportAvailable: false,
-							lineupsAvailable: false,
-							matchStatus: '-',
 							homeTeam: {
 								id: '36',
 								name: 'Portsmouth',
@@ -198,7 +158,7 @@ export const footballData: FEFootballMatchListPage = {
 								id: '4',
 								name: 'Fratton Park',
 							},
-							type: 'MatchDay',
+							type: 'Fixture',
 						},
 					],
 				},
@@ -1130,7 +1090,7 @@ export const footballData: FEFootballMatchListPage = {
 		},
 		abTests: {},
 		serverSideABTests: {
-			'thefilter-at-a-glance-redesign': 'carousel',
+			'thefilter-at-a-glance-redesign': 'control',
 		},
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		stage: 'PROD',

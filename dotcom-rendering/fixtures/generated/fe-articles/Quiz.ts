@@ -95,7 +95,7 @@ export const Quiz: FEArticle = {
 					},
 				],
 			},
-			elementId: '01990d5a-cd6d-4444-b1a6-b567b42f9563',
+			elementId: '38f041af-a4ac-4296-9b4f-49a88a40c774',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -897,7 +897,7 @@ export const Quiz: FEArticle = {
 							minScore: 2,
 						},
 					],
-					elementId: '088248d1-3362-421c-986c-7daa1e09c8a4',
+					elementId: '2b173c0e-9042-442f-b0f6-205c647638fb',
 					quizType: 'knowledge',
 					id: '2c6bf552-2827-4256-b3a0-f557d215c394',
 				},

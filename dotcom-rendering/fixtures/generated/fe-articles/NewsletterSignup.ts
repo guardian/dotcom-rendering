@@ -97,7 +97,7 @@ export const NewsletterSignup: FEArticle = {
 					},
 				],
 			},
-			elementId: '64d7b367-c6db-4f5f-a5c0-9a21697e44f0',
+			elementId: 'a8ab3b39-13ca-43e1-9f91-b367db312f54',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -296,7 +296,7 @@ export const NewsletterSignup: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Join us as we delve deeper into the wonderful world of women’s football in our weekly newsletter. It is informative, entertaining, global, critical – when needed – and, above all, passionate. Written mainly by <a href="https://www.theguardian.com/profile/julia-belas-trindade">Júlia Belas Trindade</a> and <a href="https://www.theguardian.com/profile/sophie-downey">Sophie Downey</a>, expect guest appearances from stars such as Anita Asante, Ada Hegerberg and many more.</p>',
-					elementId: '5710fff5-dd6d-40cb-a058-f74efeae9649',
+					elementId: '7cc194f6-98d6-4712-902e-2bc6d42358c7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -305,24 +305,24 @@ export const NewsletterSignup: FEArticle = {
 					sourceDomain: 'theguardian.com',
 					safe: true,
 					alt: 'Sign up to Moving the Goalposts',
-					elementId: '3b403731-55fa-47a4-a97c-d2af0a1a1ab7',
+					elementId: '1dec3f97-9e5a-463e-a2c9-bc7b0e109522',
 					isThirdPartyTracking: false,
 					html: '<iframe id="moving-the-goalposts" name="moving-the-goalposts" src="https://www.theguardian.com/email/form/plaintone/moving-the-goalposts" scrolling="no" seamless="" class="iframed--overflow-hidden email-sub__iframe" height="52px" frameborder="0" data-component="email-embed--moving-the-goalposts"></iframe>',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li>\n  <p>Try our other sports emails: as well as the occasionally funny football email <a href="https://www.theguardian.com/info/2016/jan/05/the-fiver-email-sign-up">The Fiver </a>from Monday to Friday, there are weekly catch-ups for cricket in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-spin">The Spin</a> and rugby union in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-breakdown">The Breakdown</a>, and our seven-day roundup of the best of our sports journalism in <a href="https://www.theguardian.com/sport/2017/may/15/the-recap-sign-up-for-the-best-of-the-guardians-sport-coverage">The Recap</a>.</p></li>\n <li>\n  <p>Living in Australia? Try the <a href="https://www.theguardian.com/info/2015/jun/05/guardian-australia-sport-newsletter-subscribe-by-email">Guardian Australia’s daily sports newsletter</a></p></li>\n</ul>',
-					elementId: '8851c37d-6069-4370-a426-525667007aa7',
+					elementId: 'f12fbeab-e93f-460c-b1fc-cbcd85046f6c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>***</p>',
-					elementId: '721403da-eec6-4ae4-a88f-863142431509',
+					elementId: '931a3ca6-82a9-407f-a0e5-db98af559356',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong><a href="https://www.theguardian.com/email-newsletters">Explore all our newsletters:</a></strong><a href="https://www.theguardian.com/email-newsletters"> whether you love film, football, fashion or food, we’ve got something for you</a></p>',
-					elementId: '40af8fb3-d793-49d7-a9ad-02067126acbe',
+					elementId: 'da371e8f-9ad3-48c0-8b03-53065760e9cc',
 				},
 			],
 			attributes: {

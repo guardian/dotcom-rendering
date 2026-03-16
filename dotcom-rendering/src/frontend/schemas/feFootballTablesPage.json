@@ -429,6 +429,12 @@
                 "googleRecaptchaSiteKey": {
                     "type": "string"
                 },
+                "googleRecaptchaSiteKeyVisible": {
+                    "type": "string"
+                },
+                "hasPageSkin": {
+                    "type": "boolean"
+                },
                 "pageId": {
                     "type": "string"
                 },
@@ -537,9 +543,6 @@
                 },
                 "omnitureAmpAccount": {
                     "type": "string"
-                },
-                "hasPageSkin": {
-                    "type": "boolean"
                 },
                 "webTitle": {
                     "type": "string"

@@ -89,6 +89,7 @@ export interface ConfigType extends CommercialConfigType, LegacyConfig {
 	isPreview?: boolean;
 	googleRecaptchaSiteKey?: string;
 	googleRecaptchaSiteKeyVisible?: string;
+	hasPageSkin?: boolean;
 }
 
 /** Legacy fields seemingly not used in DCR */
@@ -173,7 +174,6 @@ interface LegacyConfig {
 	contentId?: string;
 	nonKeywordTagIds?: string;
 	mobileAppsAdUnitRoot?: string;
-	hasPageSkin?: boolean;
 	requiresMembershipAccess?: boolean;
 	optimizeEpicUrl?: string;
 	assetsPath?: string;

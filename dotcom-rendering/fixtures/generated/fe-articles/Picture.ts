@@ -94,7 +94,7 @@ export const Picture: FEArticle = {
 					},
 				],
 			},
-			elementId: 'f43392f8-b88c-4a5c-9130-008d51b83ad5',
+			elementId: '1a5b314e-1a5f-4940-832c-8333a288bb09',
 			imageSources: [
 				{
 					weighting: 'inline',

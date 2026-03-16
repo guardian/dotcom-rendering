@@ -97,7 +97,7 @@ export const Live: FEArticle = {
 					},
 				],
 			},
-			elementId: '4d596beb-0c8e-471d-a3b8-47baa298c2a1',
+			elementId: 'ea847492-0841-40bc-994f-814bcdff95dd',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -296,17 +296,17 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>That’s it for our live coverage of Nasa’s celebratory news conference and Q&amp;A following the successful landing of the rover Perseverance on Mars.</p>',
-					elementId: '745f2a2b-770b-4082-a690-b3ab05948ddb',
+					elementId: '0ed0ca79-b481-44c9-b120-7282995738ff',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>To recap:</p>',
-					elementId: '0352dd0d-ce24-4541-8e6c-f155e5584d2d',
+					elementId: '69591b58-85cf-47c3-bd87-3675e8045e85',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li>The rover is “healthy” and undergoing systems testing.</li>\n <li>It already has beamed back stunning photos from the surface of <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> promising significant scientific discoveries ahead.</li>\n <li>The images include the first color images beamed directly from Mars as opposed to images touched up later.</li>\n <li>The rover documented its own touchdown via an ingenious system of booster rockets and a “space crane”.</li>\n <li>It landed in a “pool-table flat” crater in a prime location for searching for traces of ancient life.</li>\n <li>The wheeled rover could begin to move around its new home as early as late February.</li>\n <li>The rover’s mini helicopter could launch as early as April.</li>\n <li>Its broad mission is to stay on Mars for a couple years, gather data and harvest samples to be collected and returned to Earth on a future mission.</li>\n <li>The point is to determine whether there was life on Mars and subsidiary questions.</li>\n <li>The team at Nasa is very happy and excited, “on cloud nine” in a “weird, dreamlike state”... with lots of work ahead.</li>\n</ul>',
-					elementId: '39a5520d-82cb-4c4d-ab08-2220e9835f9a',
+					elementId: '3cc885b4-1fc3-40be-8d26-fa37bc0c430c',
 				},
 			],
 			attributes: {
@@ -404,7 +404,7 @@ export const Live: FEArticle = {
 							},
 						],
 					},
-					elementId: '9bf65062-52b2-4f7b-bfa0-7b5ee2257954',
+					elementId: 'fc8d1cd2-61dc-451d-9a2e-c38d5104700b',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -668,12 +668,12 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Steltzner is showing some of the most fantastic images from space explorations past, from moonshots to the Hubble telescope.</p>',
-					elementId: 'e96f37b3-3df8-4289-9bbf-c764d41a5ec0',
+					elementId: '4d0096d5-0536-419e-a013-da76ce38a8af',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>He proposes an image of the dangling Perseverance Rover taken yesterday – it looks like a futuristic marionette – as the next entry in this cosmic scrapbook. <br></p>',
-					elementId: '8620a8a0-d397-45f8-a176-35946660187d',
+					elementId: 'c0ffb576-1f32-436f-b29c-a78f4f6b8464',
 				},
 			],
 			attributes: {
@@ -699,33 +699,33 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Members of the National Aeronautics and <a href="https://www.theguardian.com/science/space" data-component="auto-linked-tag">Space</a> Administration (Nasa) team that put a rover on Mars on Thursday are preparing to host a news conference and answer questions about the mission.</p>',
-					elementId: '9465293c-0188-41ba-89ab-c6c3cc9ac1ef',
+					elementId: '625c4282-a2a0-4084-b3d6-bce23e28a88a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The rover, called Perseverance or Percy for short, is on <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> to search for signs of ancient life and collect samples to be returned by a future mission. About the size of a car, the wheeled rover is equipped with cameras, microphones, drills and even a small helicopter.</p>',
-					elementId: 'c5c65a52-78d2-4221-b8e8-ae8ef4f8fbe8',
+					elementId: '4013b407-4d8e-49a2-bd3b-40b1cb34679e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Guardian science correspondent Natalie Grover reports of Percy’s mission:</p>',
-					elementId: '51025063-cf6d-4fbe-86b1-95ce5caa94d9',
+					elementId: '142e8d8f-6fd7-4955-996a-0a0638931240',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 					html: '<blockquote class="quoted">\n <p>Previous Mars missions including <a href="https://viewer.gutools.co.uk/science/2013/jul/28/curiosity-rover-descent-mars-nasa">Curiosity</a> and Opportunity have suggested Mars was once a wet planet with an environment likely to have been supportive of life billions of years ago. Astrobiologists hope this latest mission can offer some evidence to prove whether that was the case.</p>\n</blockquote>',
-					elementId: '24a6349e-05dc-4a5d-a381-d22d4233966d',
+					elementId: 'b5bd92bf-6973-4e5e-b665-3543a4034708',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The <a href="https://www.theguardian.com/science/nasa" data-component="auto-linked-tag">Nasa</a> scientists appear to feel they may be tantalizingly close to a discovery that could change the way we see the universe and our home in it. Here was the scene in the control room near Los Angeles just before 1pm local time on Thursday when Percy’s safe touchdown on Mars was confirmed:<br></p>',
-					elementId: 'd7e78f50-d32c-438b-932c-979b3be32b1b',
+					elementId: '1a5568be-6f3d-4585-9780-3b73733c625d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
 					source: 'YouTube',
 					originalUrl: 'https://www.youtube.com/watch?v=Ew24GrPKi3Y',
-					elementId: 'bde3b30f-8988-4275-ad8a-e16337291478',
+					elementId: '5b193a81-195a-4705-8dc1-7c3f1bf0b761',
 					width: 460,
 					embedUrl:
 						'https://www.youtube-nocookie.com/embed/Ew24GrPKi3Y?wmode=opaque&feature=oembed',
@@ -739,12 +739,12 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The robotic vehicle sailed through space for nearly seven months, covering 293m miles (472m km) before piercing the Martian atmosphere at 12,000mph (19,000km/h) to begin its approach to touchdown on the planet’s surface.</p>',
-					elementId: '34ec8712-3e50-4f21-a537-37d4a5fde093',
+					elementId: '37f06552-bdc0-4b53-bbe8-5e79dca575d0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Thank you for joining our live coverage.</p>',
-					elementId: '9dda08a7-e45b-40d4-8afb-f19b77a361ce',
+					elementId: '93950b7b-a091-4ac2-b1f5-963be176fccd',
 				},
 			],
 			attributes: {
@@ -773,17 +773,17 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>That’s it for our live coverage of Nasa’s celebratory news conference and Q&amp;A following the successful landing of the rover Perseverance on Mars.</p>',
-					elementId: '375e4381-1e60-4483-91d7-8adfa8762f99',
+					elementId: '4c40b76b-3481-4d66-ae8f-9b93a9e719ba',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>To recap:</p>',
-					elementId: '69b95a60-f84b-4aa2-99a3-ed8b3e0f0827',
+					elementId: '594794d4-d238-4aa3-a7db-825adc686df0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li>The rover is “healthy” and undergoing systems testing.</li>\n <li>It already has beamed back stunning photos from the surface of <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> promising significant scientific discoveries ahead.</li>\n <li>The images include the first color images beamed directly from Mars as opposed to images touched up later.</li>\n <li>The rover documented its own touchdown via an ingenious system of booster rockets and a “space crane”.</li>\n <li>It landed in a “pool-table flat” crater in a prime location for searching for traces of ancient life.</li>\n <li>The wheeled rover could begin to move around its new home as early as late February.</li>\n <li>The rover’s mini helicopter could launch as early as April.</li>\n <li>Its broad mission is to stay on Mars for a couple years, gather data and harvest samples to be collected and returned to Earth on a future mission.</li>\n <li>The point is to determine whether there was life on Mars and subsidiary questions.</li>\n <li>The team at Nasa is very happy and excited, “on cloud nine” in a “weird, dreamlike state”... with lots of work ahead.</li>\n</ul>',
-					elementId: '2b7795b6-0d73-47d2-a2c0-b932dd1836dc',
+					elementId: '5bb4642e-6430-4300-b427-a641e443d0e4',
 				},
 			],
 			attributes: {
@@ -809,7 +809,7 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>#TBT</p>',
-					elementId: 'cbf07b06-a565-4d5d-8b4b-4e4432011408',
+					elementId: '752af99e-dce8-40a3-9236-ffcbb6f9e447',
 				},
 				{
 					expired: false,
@@ -837,7 +837,7 @@ export const Live: FEArticle = {
 						},
 					],
 					id: '60606947-4f1f-4343-9bb7-000e91502129',
-					elementId: 'd2e77cc0-cd13-4154-ba13-7486c87fca5b',
+					elementId: '3ff2f46a-e2ca-46a9-bfb6-cde12055c8da',
 					duration: 142,
 					_type: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
 					mediaTitle:
@@ -867,13 +867,13 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>#FF</p>',
-					elementId: '61bc85a4-aba3-4cea-8783-bbcfc5dacec0',
+					elementId: '427fc68e-2c5c-439a-9c93-824318d6f081',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
 					source: 'Twitter',
 					id: '1362831783444717568',
-					elementId: '1bfe8ab8-a658-40c1-9b1a-030a002785d8',
+					elementId: 'e4449203-fb6a-4e9f-b1ee-f8020121b32b',
 					hasMedia: false,
 					role: 'inline',
 					url: 'https://twitter.com/NASAPersevere/status/1362831783444717568',
@@ -884,7 +884,7 @@ export const Live: FEArticle = {
 					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
 					source: 'Twitter',
 					id: '1362839907824136193',
-					elementId: 'b18e8107-d68f-4c7d-96d5-24646721db13',
+					elementId: '8342c702-7587-48ae-9cbc-6c4dad61e74e',
 					hasMedia: false,
 					role: 'inline',
 					url: 'https://twitter.com/NASAPersevere/status/1362839907824136193',
@@ -914,7 +914,7 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Have you typed “<a href="https://www.google.com/search?q=perseverance&amp;oq=pers&amp;aqs=chrome.0.69i59j69i57j0l3j46j69i60j69i61.1091j0j7&amp;sourceid=chrome&amp;ie=UTF-8">perseverance</a>” into Google today?</p>',
-					elementId: 'ea7052f2-db10-4d02-a75b-c577c6b42eb8',
+					elementId: '8b298a9f-0410-41fc-ac18-11a1696d607b',
 				},
 			],
 			attributes: {
@@ -939,12 +939,12 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Now that Perseverance persevered through the “seven minutes of terror” – a new era of space exploration has officially begun.</p>',
-					elementId: '41005bf0-e34b-4cf4-86b8-7d2846ba36f6',
+					elementId: 'acfa8e62-e934-435b-ba79-b697642c6277',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Next up, the science team will make crucial decisions on which direction to take the rover in as it kicks off its search for ancient life. <br></p>',
-					elementId: '01d30ef5-24df-423b-acbd-8716f61327fe',
+					elementId: '3714201d-9aa0-40ab-85e7-91fa28c09e6b',
 				},
 			],
 			attributes: {
@@ -973,17 +973,17 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The event is concluding. They’ll be back for a 2pm ET news conference on Monday. Mission updates can be found meanwhile on the <a href="https://mars.nasa.gov/mars2020/">Nasa web site</a>.</p>',
-					elementId: 'eb6b3d61-dcb4-4f02-9bca-c4507a719b29',
+					elementId: 'c09b6d36-e78f-45b4-b8a0-382d298a8498',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>McGregor signs off:</p>',
-					elementId: '8cf6735a-e4fb-49a6-8338-5ea5c4acfa77',
+					elementId: 'b9e97a38-d686-4482-bff3-cf895b054473',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“Everyone have a great day, on Earth and on <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a>.”</p>',
-					elementId: 'c371484d-80dd-46f7-a011-9eab05709828',
+					elementId: '522e142e-8c55-4cae-8535-a1e918b82bf6',
 				},
 			],
 			attributes: {
@@ -1008,12 +1008,12 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Nasa scientists have worked for years to support this mission, and kept things going despite the ongoing coronavirus disruption.</p>',
-					elementId: '528254e4-f1f7-4dfe-8c1d-98e52ce5cb55',
+					elementId: '4add92a5-6e86-48ba-9c68-36435af07ae4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>After the landing success yesterday, one team says they had a “socially distanced ice cream” event, while the engineering team had a virtual happy hour! <br></p>',
-					elementId: 'f6df6282-0834-4334-8d22-f154ca478e19',
+					elementId: '2d767787-9d69-480a-8b6d-736d9ca02a02',
 				},
 			],
 			attributes: {
@@ -1042,17 +1042,17 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Next question: <strong>How did you celebrate?</strong></p>',
-					elementId: 'b3c14395-aeda-4d48-bbc2-7aa18aa69535',
+					elementId: '05aed5ec-d304-440e-b389-1d7f5c19a872',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Answers include:</p>',
-					elementId: '7c55085d-dfbb-4942-8e7d-422d7b2b8c0f',
+					elementId: '72db9ff9-f29e-4a81-be10-1f7e9252c765',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li>Virtual happy hour</li>\n <li>“Socially distanced consumption of ice cream outdoors”</li>\n <li>“I went home and just passed out from just the excitement of the day”</li>\n <li>“In the coming days I’ll definitely be having a glass of wine”</li>\n <li>“It was super-exciting”</li>\n <li>“We’re working two shifts a day almost 20 hours a day... it is kind of a really cool thing”</li>\n <li>“Business as usual for a science team working on a <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> rover”</li>\n</ul>',
-					elementId: '40159d02-bdbf-424e-aa27-510fdb811d62',
+					elementId: '5931939c-e4cd-4f9f-83d4-0201fc844994',
 				},
 			],
 			attributes: {
@@ -1077,27 +1077,27 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Another key question: <strong>When will the rover drive? </strong></p>',
-					elementId: '5202c355-9d45-4f15-880b-d51febc31e9d',
+					elementId: 'd2c4acc8-829c-45f4-80e8-d922a0b372d9',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“We’re anticipating the earliest... would be sol 8 or 9... our current best estimate.</p>',
-					elementId: '7e021345-57d0-4dc8-b9f1-813c3635a26b',
+					elementId: '02d17165-0c8d-4cf7-84b6-854d3ecbc08f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“Maybe a short drive just to check everything out...</p>',
-					elementId: '3cac2869-d13d-487d-bed7-b93f99a5c559',
+					elementId: '597862f1-bfc6-43f7-a16a-5dc7ac796a4c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“We’ll also be figuring out the route and direction we need to go.”</p>',
-					elementId: 'f11e012a-5a2d-42f8-896d-407f9d8a8370',
+					elementId: 'cc54213a-ed0a-4300-a77d-fdc88a322eb8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>That means rover could rove before February is out.</p>',
-					elementId: '6b63aeca-7086-4f0b-9064-df09ad1be82f',
+					elementId: 'b187c289-6f21-4fe4-8308-0a6ac8408911',
 				},
 			],
 			attributes: {
@@ -1122,7 +1122,7 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The team members have described their fascination with the holes in the rocks visible next to the rover’s wheel in this photograph just released by <a href="https://www.theguardian.com/science/nasa" data-component="auto-linked-tag">Nasa</a>. It is unknown whether the holes indicate volcanic or sedimentary rock.</p>',
-					elementId: 'cd6b192d-3706-4753-a89b-8b9b2ba32957',
+					elementId: '019fbb24-dba5-4493-b1c8-d1296749fbf6',
 				},
 				{
 					displayCredit: true,
@@ -1193,7 +1193,7 @@ export const Live: FEArticle = {
 							},
 						],
 					},
-					elementId: '757ec536-e5c6-4f3b-921c-ea390c3fd698',
+					elementId: '1fe3e22f-5afa-4b6e-b8d4-113e757750f9',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -1456,12 +1456,12 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Attached to the rover’s belly is a diminutive helicopter called Ingenuity.</p>',
-					elementId: '14195e8a-d1dd-44bc-86ef-a2bb56a7e0d1',
+					elementId: 'ea61c9aa-d06a-433c-a270-0d1f7902c2aa',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The 1.8kg drone-like rotorcraft is the first flying machine ever sent to another planet — it has the ability to take colour pictures and video. The rover can also take images of Ingenuity. <br></p>',
-					elementId: '6903bed2-3355-46dc-8852-09993ef41b6b',
+					elementId: 'a71afaa9-7ebd-434e-abff-beb68f39d668',
 				},
 				{
 					displayCredit: true,
@@ -1532,7 +1532,7 @@ export const Live: FEArticle = {
 							},
 						],
 					},
-					elementId: '13b45ef5-f237-482e-a97b-281a0e312cea',
+					elementId: 'bae010e0-ab82-4141-8e55-2c3b904f8e5a',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -1799,12 +1799,12 @@ export const Live: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Key question: <strong>how long till they fly the helicopter?</strong></p>',
-					elementId: '4a11dbb3-1f02-456e-a3a0-cc9579baed97',
+					elementId: 'b5a4ac73-cdba-4d19-be21-09499f00e932',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“Caveat caveat caveat,” the scientist says. “Super-fast” would be “sol 60.” With a sol being 37 minutes longer than and earth days, that would be 60 earth days plus 37 hours = 61 days, 13 hours. Sometime in April. Best-case scenario.</p>',
-					elementId: 'e2761a93-fc97-4d51-8ae2-b9b6bd87e9de',
+					elementId: '76413b5b-518d-4831-85aa-eeefe2c9a961',
 				},
 			],
 			attributes: {
@@ -1895,7 +1895,7 @@ export const Live: FEArticle = {
 							},
 						],
 					},
-					elementId: 'c14ec04c-452f-475f-acd6-396d7c4901bb',
+					elementId: 'dc6dfaab-ad98-43fa-a637-de11ea192e85',
 					imageSources: [
 						{
 							weighting: 'inline',

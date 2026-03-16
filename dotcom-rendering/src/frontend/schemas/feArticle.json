@@ -5196,6 +5196,9 @@
                 "googleRecaptchaSiteKeyVisible": {
                     "type": "string"
                 },
+                "hasPageSkin": {
+                    "type": "boolean"
+                },
                 "pageId": {
                     "type": "string"
                 },
@@ -5486,9 +5489,6 @@
                 },
                 "mobileAppsAdUnitRoot": {
                     "type": "string"
-                },
-                "hasPageSkin": {
-                    "type": "boolean"
                 },
                 "requiresMembershipAccess": {
                     "type": "boolean"
