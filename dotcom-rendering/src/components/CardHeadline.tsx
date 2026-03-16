@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	between,
+	from,
 	headlineMedium14,
 	headlineMedium15,
 	headlineMedium17,
@@ -142,6 +143,7 @@ export enum FontFamily {
 export type HeadlineSize = keyof typeof fontFamilies.headlineMedium;
 
 export type ResponsiveFontSize = {
+	wide?: HeadlineSize;
 	desktop: HeadlineSize;
 	tablet?: HeadlineSize;
 	mobile?: HeadlineSize;
@@ -151,7 +153,7 @@ export type ResponsiveFontSize = {
 const getFontSize = (sizes: ResponsiveFontSize, family: FontFamily) => {
 	const font = fontFamilies[family];
 
-	const { desktop, tablet, mobileMedium, mobile } = sizes;
+	const { wide, desktop, tablet, mobileMedium, mobile } = sizes;
 
 	return css`
 		${font[desktop]};
@@ -174,6 +176,13 @@ const getFontSize = (sizes: ResponsiveFontSize, family: FontFamily) => {
 		css`
 			${between.mobileMedium.and.tablet} {
 				${font[mobileMedium]};
+			}
+		`}
+
+		${wide &&
+		css`
+			${from.wide} {
+				${font[wide]};
 			}
 		`}
 	`;
@@ -204,6 +213,15 @@ export const WithLink = ({
 	return <>{children}</>;
 };
 
+/**
+ * headline medium 20 on desktop and headline medium 17 on tablet and mobile
+ */
+export const defaultFontSizes: ResponsiveFontSize = {
+	desktop: 'xsmall',
+	tablet: 'xxsmall',
+	mobile: 'xxsmall',
+};
+
 export const CardHeadline = ({
 	headlineText,
 	format,
@@ -211,8 +229,7 @@ export const CardHeadline = ({
 	kickerText,
 	showPulsingDot,
 	hasInlineKicker,
-	/** headline medium 20 on desktop and headline medium 17 on tablet and mobile */
-	fontSizes = { desktop: 'xsmall', tablet: 'xxsmall', mobile: 'xxsmall' },
+	fontSizes = defaultFontSizes,
 	byline,
 	showByline,
 	linkTo,

@@ -4,9 +4,6 @@ import { trails } from './trails';
 const defaultGrouped = {
 	snap: [],
 	splash: [],
-	huge: [],
-	veryBig: [],
-	big: [],
 	standard: [],
 };
 
@@ -26,13 +23,13 @@ const defaultValues = {
 export const testCollectionsUk = [
 	{
 		...defaultValues,
-		collectionType: 'dynamic/package',
+		collectionType: 'static/medium/4',
 		containerPalette: 'EventPalette',
 		displayName: 'Israel-Hamas war',
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
+		collectionType: 'scrollable/feature',
 		displayName: 'Headlines',
 		grouped: defaultGrouped,
 	},
@@ -49,7 +46,7 @@ export const testCollectionsUk = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/slow',
+		collectionType: 'scrollable/feature',
 		displayName: 'Spotlight',
 	},
 	{
@@ -59,12 +56,12 @@ export const testCollectionsUk = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/slow',
+		collectionType: 'scrollable/feature',
 		displayName: 'Sport',
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/slow',
+		collectionType: 'scrollable/feature',
 		displayName: 'Opinion',
 	},
 	{
@@ -89,7 +86,7 @@ export const testCollectionsUk = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
+		collectionType: 'scrollable/feature',
 		displayName: 'Across the country',
 	},
 	{
@@ -99,7 +96,7 @@ export const testCollectionsUk = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
+		collectionType: 'scrollable/feature',
 		displayName: 'Around the world',
 	},
 	{
@@ -148,19 +145,19 @@ export const testCollectionsWithSecondaryLevel = [
 export const testCollectionsUs = [
 	{
 		...defaultValues,
-		collectionType: 'dynamic/package',
+		collectionType: 'static/medium/4',
 		containerPalette: 'EventPalette',
 		displayName: 'Israel-Hamas war',
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/package',
+		collectionType: 'static/medium/4',
 		containerPalette: 'EventPalette',
 		displayName: 'Israel-Hamas war',
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
+		collectionType: 'scrollable/feature',
 		displayName: 'Headlines',
 	},
 	{
@@ -170,7 +167,7 @@ export const testCollectionsUs = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/slow',
+		collectionType: 'scrollable/feature',
 		displayName: 'Spotlight',
 	},
 	{
@@ -186,7 +183,7 @@ export const testCollectionsUs = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/slow',
+		collectionType: 'scrollable/feature',
 		displayName: 'Sports',
 	},
 	{
@@ -201,16 +198,17 @@ export const testCollectionsUs = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
+		collectionType: 'scrollable/feature',
 		displayName: 'Across the country',
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
+		collectionType: 'flexible/special',
 		displayName: 'Around the world',
 		grouped: {
 			...defaultGrouped,
-			veryBig: [trails[0]],
+			splash: [trails[0]],
+			standard: [trails[1]],
 		},
 	},
 	{
@@ -279,7 +277,7 @@ export const testCollectionsUs = [
 export const brandedTestCollections = [
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
+		collectionType: 'scrollable/feature',
 		displayName: 'Headlines',
 	},
 	{
@@ -290,7 +288,7 @@ export const brandedTestCollections = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
+		collectionType: 'scrollable/feature',
 		displayName: 'Headlines',
 	},
 	{
@@ -301,7 +299,7 @@ export const brandedTestCollections = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
+		collectionType: 'scrollable/feature',
 		displayName: 'Headlines',
 	},
 	{
@@ -312,7 +310,7 @@ export const brandedTestCollections = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'dynamic/fast',
+		collectionType: 'scrollable/feature',
 		displayName: 'Headlines',
 	},
 ] satisfies DCRCollectionType[];
@@ -323,8 +321,6 @@ export const largeFlexibleGeneralCollection = [
 		grouped: {
 			...defaultGrouped,
 			splash: [trails[0]],
-			veryBig: [trails[1]],
-			big: [trails[2]],
 			standard: [trails[3], trails[4], trails[5], trails[6]],
 		},
 		collectionType: 'flexible/general',

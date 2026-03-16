@@ -40,6 +40,7 @@ import {
 } from '../lib/getFrontsAdPositions';
 import { hideAge } from '../lib/hideAge';
 import { ophanComponentId } from '../lib/ophan-helpers';
+import { doesPageQualifyForSlimHomepageAbTest } from '../lib/SlimHomepageAbTestHelpers';
 import { useBetaAB } from '../lib/useAB';
 import type { NavType } from '../model/extract-nav';
 import { palette as schemePalette } from '../palette';
@@ -78,25 +79,20 @@ const isToggleable = (
 	index: number,
 	collection: DCRCollectionType,
 	isNetworkFront: boolean,
-	isInSlimHomepageAbTestVariant: boolean,
+	/**
+	 * The show/hide button would be covered by the MostPopularFrontRight component
+	 * in the variant of the Slim Homepage AB test.
+	 */
+	isShowingRightContentForSlimHomepageAbTest: boolean,
 ) => {
-	if (isNetworkFront) {
-		/**
-		 * The show/hide button would be covered by the MostPopularFrontRight component
-		 * in the variant of the Slim Homepage AB test.
-		 */
-		const hideForSlimHomepageAbTest =
-			isInSlimHomepageAbTestVariant &&
-			(collection.displayName === 'News' ||
-				collection.displayName === 'Features' ||
-				collection.displayName === 'More features');
+	if (isShowingRightContentForSlimHomepageAbTest) return;
 
+	if (isNetworkFront) {
 		return (
 			collection.displayName.toLowerCase() !== 'headlines' &&
 			!isNavList(collection) &&
 			!isHighlights(collection) &&
-			!isLabs(collection) &&
-			!hideForSlimHomepageAbTest
+			!isLabs(collection)
 		);
 	}
 
@@ -142,7 +138,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const merchHighAdPosition = getMerchHighPosition(filteredCollections);
 
 	const mobileAdPositions = renderAds
-		? getMobileAdPositions(filteredCollections)
+		? getMobileAdPositions(filteredCollections, pageId)
 		: [];
 
 	const desktopAdPositions = renderAds
@@ -158,18 +154,33 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	/**
 	 * The Slim Homepage AB test only runs on /uk and on screen widths >=1300px.
-	 * In the variant of this test a Most Popular component is added to the right-hand side of the page.
-	 * Page skins require slim content and is incompatible with this test. We do not run this test
-	 * on pages where there is a page skin (a page skin takes precedence).
+	 * In variant one and two of this test, the content is slimmed down.
+	 * In variant two of this test, a Most Popular component is inserted into the right-hand side of the page.
+	 * Page skins require slim content and is incompatible with this test, so we do not run
+	 * this test on pages where there is a page skin (a page skin takes precedence).
 	 */
-	const isInSlimHomepageAbTestVariant =
-		(pageId === 'uk' &&
-			!hasPageSkin &&
+	const pageQualifiesForSlimHomepageAbTest =
+		doesPageQualifyForSlimHomepageAbTest(
+			front.pressedPage.collections,
+			pageId,
+			hasPageSkin,
+		);
+	const isInSlimHomepageAbTestVariantOne =
+		(pageQualifiesForSlimHomepageAbTest &&
 			abTests?.isUserInTestGroup(
 				'fronts-and-curation-slim-homepage',
-				'variant',
+				'variant-one',
 			)) ??
 		false;
+	const isInSlimHomepageAbTestVariantTwo =
+		(pageQualifiesForSlimHomepageAbTest &&
+			abTests?.isUserInTestGroup(
+				'fronts-and-curation-slim-homepage',
+				'variant-two',
+			)) ??
+		false;
+	const isInEitherSlimHomepageAbTestVariant =
+		isInSlimHomepageAbTestVariantOne || isInSlimHomepageAbTestVariantTwo;
 
 	const fallbackAspectRatio = (collectionType: DCRContainerType) => {
 		switch (collectionType) {
@@ -315,10 +326,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					 * We only shrink the content of certain sections to place the Most Popular
 					 * content on the right-hand side. Other sections remain full-width.
 					 */
-					const isTargetedContainerInSlimHomepageAbTest =
-						collection.displayName === 'News' ||
-						collection.displayName === 'Features' ||
-						collection.displayName === 'More features';
 
 					if (collection.collectionType === 'scrollable/highlights') {
 						// Highlights are rendered in the Masthead component
@@ -499,7 +506,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									index,
 									collection,
 									front.isNetworkFront,
-									isInSlimHomepageAbTestVariant,
+									isInSlimHomepageAbTestVariantTwo,
 								)}
 								leftContent={decideLeftContent(
 									front,
@@ -539,9 +546,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									index,
 								)}
 								isLabs={isLabs(collection)}
-								slimifySectionForAbTest={
-									isInSlimHomepageAbTestVariant &&
-									isTargetedContainerInSlimHomepageAbTest
+								slimifySectionForSlimHomepageAbTest={
+									isInEitherSlimHomepageAbTestVariant
+								}
+								showRightContentForSlimHomepageAbTest={
+									isInSlimHomepageAbTestVariantTwo
 								}
 								mostViewed={front.mostViewed}
 								deeplyRead={front.deeplyRead}
@@ -569,6 +578,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									sectionId={ophanName}
 									collectionId={index + 1}
 									containerLevel={collection.containerLevel}
+									isInSlimHomepageAbTestVariant={
+										isInEitherSlimHomepageAbTestVariant
+									}
 								/>
 							</FrontSection>
 

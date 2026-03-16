@@ -15,7 +15,6 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	discussionApiUrl: string;
 	discussionId: string;
-	isDynamo?: true;
 	/** Optional override of default comment count colour */
 	colour?: string;
 };
@@ -64,25 +63,16 @@ export const CardCommentCount = ({
 	containerPalette,
 	discussionApiUrl,
 	discussionId,
-	isDynamo,
 	colour = themePalette('--card-footer-text'),
 }: Props) => {
 	const count = useCommentCount(discussionApiUrl, discussionId);
 
 	const { long, short } = formatCount(count);
 
-	const getCommentCountColour = (): string => {
-		if (isDynamo) {
-			return themePalette('--card-trail-text');
-		} else {
-			return colour;
-		}
-	};
-
 	return (
 		<ContainerOverrides containerPalette={containerPalette}>
-			<div css={containerStyles(getCommentCountColour())}>
-				<div css={svgStyles(getCommentCountColour())}>
+			<div css={containerStyles(colour)}>
+				<div css={svgStyles(colour)}>
 					<CommentIcon />
 				</div>
 				<div css={longStyles}>{long}</div>

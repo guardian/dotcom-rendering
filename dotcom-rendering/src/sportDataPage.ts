@@ -81,6 +81,7 @@ export const cleanTeamName = (teamName: string): string => {
 	return teamName
 		.replace('Ladies', '')
 		.replace('Holland', 'The Netherlands')
+		.replace('Ivory Coast', 'Côte d’Ivoire')
 		.replace('Bialystock', 'Białystok')
 		.replace('Union Saint Gilloise', 'Union Saint-Gilloise');
 };

@@ -178,7 +178,7 @@ const sideBorders = css`
 	}
 `;
 
-export const HostedArticleLayout = (props: WebProps | AppProps) => {
+export const HostedVideoLayout = (props: WebProps | AppProps) => {
 	const {
 		content: { frontendData },
 		format,
@@ -213,7 +213,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 				</Stuck>
 			) : null}
 
-			<main data-layout="HostedArticleLayout">
+			<main data-layout="HostedVideoLayout">
 				<article css={[grid.container, sideBorders]}>
 					<header css={headerStyles}>
 						<div css={mainMediaStyles}>

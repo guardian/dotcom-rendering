@@ -97,7 +97,8 @@ type Props = {
 	 * The Slim Homepage AB test requires some sections to have reduced width so that
 	 * the Most Popular Front Right component can be placed on the right-hand side.
 	 */
-	slimifySectionForAbTest?: boolean;
+	slimifySectionForSlimHomepageAbTest?: boolean;
+	showRightContentForSlimHomepageAbTest?: boolean;
 	discussionApiUrl: string;
 	collectionBranding?: CollectionBranding;
 	isTagPage?: boolean;
@@ -128,7 +129,7 @@ const borderColourStyles = (
 			return schemePalette('--section-border-opinion');
 		case 'Sport':
 		case 'Sports':
-		case 'Winter Olympics 2026':
+		case 'Winter Paralympics':
 			return schemePalette('--section-border-sport');
 		case 'Lifestyle':
 			return schemePalette('--section-border-lifestyle');
@@ -154,7 +155,7 @@ const articleSectionTitleStyles = (
 			return schemePalette('--article-section-title-opinion');
 		case 'Sport':
 		case 'Sports':
-		case 'Winter Olympics 2026':
+		case 'Winter Paralympics':
 			return schemePalette('--article-section-title-sport');
 		case 'Lifestyle':
 			return schemePalette('--article-section-title-lifestyle');
@@ -650,7 +651,8 @@ export const FrontSection = ({
 	isOnPaidContentFront,
 	targetedTerritory,
 	hasPageSkin = false,
-	slimifySectionForAbTest = false,
+	slimifySectionForSlimHomepageAbTest = false,
+	showRightContentForSlimHomepageAbTest = false,
 	discussionApiUrl,
 	collectionBranding,
 	isTagPage = false,
@@ -724,10 +726,8 @@ export const FrontSection = ({
 										title,
 										showSectionColours,
 								  ),
-							// To reduce the width of the border line between Features
-							// and More features in the Slim Homepage AB test.
-							slimifySectionForAbTest &&
-								sectionId === 'more-features' &&
+							slimifySectionForSlimHomepageAbTest &&
+								containerLevel === 'Secondary' &&
 								css`
 									${from.wide} {
 										grid-column: 2 / 14;
@@ -827,14 +827,15 @@ export const FrontSection = ({
 				<div
 					css={[
 						sectionContent,
-						slimifySectionForAbTest && slimSectionContent,
+						slimifySectionForSlimHomepageAbTest &&
+							slimSectionContent,
 						sectionContentHorizontalMargins,
 						sectionContentRow(toggleable),
 						topPadding,
 						showVerticalRule &&
 							isBetaContainer &&
 							sectionContentBorderFromLeftCol,
-						slimifySectionForAbTest &&
+						slimifySectionForSlimHomepageAbTest &&
 							slimHomepageRightBorderStyles,
 					]}
 					id={`container-${sectionId}`}
@@ -842,42 +843,44 @@ export const FrontSection = ({
 					{children}
 				</div>
 
-				{slimifySectionForAbTest && sectionId === 'news' && (
-					<div
-						css={css`
-							${from.wide} {
-								grid-row: content-toggleable;
-								grid-column: 14 / 18;
-							}
-						`}
-					>
-						<Hide when="below" breakpoint="wide">
-							<MostPopularFrontRight
-								heading="Most viewed"
-								trails={mostViewed}
-							/>
-						</Hide>
-					</div>
-				)}
+				{showRightContentForSlimHomepageAbTest &&
+					sectionId === 'news' && (
+						<div
+							css={css`
+								${from.wide} {
+									grid-row: content-toggleable;
+									grid-column: 14 / 18;
+								}
+							`}
+						>
+							<Hide when="below" breakpoint="wide">
+								<MostPopularFrontRight
+									heading="Most viewed"
+									trails={mostViewed}
+								/>
+							</Hide>
+						</div>
+					)}
 
-				{slimifySectionForAbTest && sectionId === 'features' && (
-					<div
-						css={css`
-							${from.wide} {
-								grid-row: content-toggleable;
-								grid-column: 14 / 18;
-								position: relative;
-							}
-						`}
-					>
-						<Hide when="below" breakpoint="wide">
-							<MostPopularFrontRight
-								heading="Deeply read"
-								trails={deeplyRead}
-							/>
-						</Hide>
-					</div>
-				)}
+				{showRightContentForSlimHomepageAbTest &&
+					sectionId === 'features' && (
+						<div
+							css={css`
+								${from.wide} {
+									grid-row: content-toggleable;
+									grid-column: 14 / 18;
+									position: relative;
+								}
+							`}
+						>
+							<Hide when="below" breakpoint="wide">
+								<MostPopularFrontRight
+									heading="Deeply read"
+									trails={deeplyRead}
+								/>
+							</Hide>
+						</div>
+					)}
 
 				<div
 					css={[

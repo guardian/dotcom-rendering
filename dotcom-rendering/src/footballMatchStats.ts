@@ -62,6 +62,7 @@ export type FootballMatchTeamWithStatsSummary = FootballTeam & {
 type FootballPlayer = {
 	paID: string;
 	name: string;
+	lastName: string;
 	substitute: boolean;
 	shirtNumber: number;
 	events: PlayerEvent[];
@@ -137,6 +138,7 @@ const parseFootballPlayer = (
 			.map((shirtNumber) => ({
 				paID: feFootballMatchPlayer.id,
 				name: feFootballMatchPlayer.name,
+				lastName: feFootballMatchPlayer.lastName,
 				substitute: feFootballMatchPlayer.substitute,
 				shirtNumber,
 				events,

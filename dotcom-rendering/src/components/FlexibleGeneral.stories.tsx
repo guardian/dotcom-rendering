@@ -28,9 +28,6 @@ import { FlexibleGeneral } from './FlexibleGeneral';
 import { FrontSection } from './FrontSection';
 
 const emptyGroupedTrails: DCRGroupedTrails = {
-	huge: [],
-	veryBig: [],
-	big: [],
 	standard: [],
 	snap: [],
 	splash: [],
@@ -160,6 +157,7 @@ const meta = {
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
 		collectionId: 1,
+		isInSlimHomepageAbTestVariant: false,
 	},
 	render: ({ frontSectionTitle, ...args }) => (
 		<FrontSection
@@ -167,6 +165,9 @@ const meta = {
 			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
 			showTopBorder={true}
+			slimifySectionForSlimHomepageAbTest={
+				args.isInSlimHomepageAbTestVariant
+			}
 		>
 			<FlexibleGeneral {...args} />
 		</FrontSection>
@@ -190,6 +191,14 @@ export const SplashWithStandards: Story = {
 				boostLevel: index === 0 ? 'boost' : 'default',
 			})),
 		},
+	},
+};
+
+export const SplashWithStandardsInSlimHomepageAbTest: Story = {
+	name: 'Splash with big and standard cards in the Slim Homepage AB Test',
+	args: {
+		...SplashWithStandards.args,
+		isInSlimHomepageAbTestVariant: true,
 	},
 };
 

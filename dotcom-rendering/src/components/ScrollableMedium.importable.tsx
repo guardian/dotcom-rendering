@@ -17,6 +17,7 @@ type Props = {
 	imageLoading: 'lazy' | 'eager';
 	aspectRatio: AspectRatio;
 	sectionId: string;
+	isInSlimHomepageAbTestVariant?: boolean;
 };
 
 /**
@@ -34,6 +35,7 @@ export const ScrollableMedium = ({
 	showAge,
 	aspectRatio,
 	sectionId,
+	isInSlimHomepageAbTestVariant,
 }: Props) => {
 	const isBelowTabletBreakpoint = useMatchMedia(
 		removeMediaRulePrefix(until.tablet),
@@ -52,6 +54,11 @@ export const ScrollableMedium = ({
 					? 'top'
 					: 'bottom';
 
+				const headlineSizes = {
+					desktop: 'xsmall',
+					tablet: 'xxsmall',
+				} as const;
+
 				return (
 					<ScrollableCarousel.Item
 						key={trail.url}
@@ -65,8 +72,10 @@ export const ScrollableMedium = ({
 							containerType="scrollable/medium"
 							showAge={!!showAge}
 							headlineSizes={{
-								desktop: 'xsmall',
-								tablet: 'xxsmall',
+								...headlineSizes,
+								wide: isInSlimHomepageAbTestVariant
+									? headlineSizes.tablet
+									: headlineSizes.desktop,
 							}}
 							mediaPositionOnDesktop={imagePosition}
 							mediaPositionOnMobile={imagePosition}
