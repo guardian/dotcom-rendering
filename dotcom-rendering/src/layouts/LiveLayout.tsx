@@ -315,6 +315,12 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 		abTests?.isUserInTestGroup('webex-football-redesign', 'variant') ??
 		false;
 
+	const applyFootballRedesign = shouldApplyFootballRedesign(
+		!!footballMatchUrl,
+		isApps,
+		isInFootballRedesignTest,
+	);
+
 	return (
 		<>
 			{isWeb && (
@@ -379,7 +385,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					</Island>
 				)}
 				{footballMatchUrl ? (
-					isInFootballRedesignTest ? (
+					applyFootballRedesign ? (
 						footballMatchHeaderUrl && (
 							<Island
 								priority="feature"
@@ -668,7 +674,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						<LiveGrid>
 							<GridItem area="media">
 								<div css={maxWidth}>
-									{!isInFootballRedesignTest &&
+									{!applyFootballRedesign &&
 										!!footballMatchUrl && (
 											<Island
 												priority="critical"
@@ -770,7 +776,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								)}
 
 								{/* Match stats */}
-								{isInFootballRedesignTest
+								{applyFootballRedesign
 									? !!footballMatchStatsUrl && (
 											<Island
 												priority="feature"
@@ -800,7 +806,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									id="maincontent"
 									css={[
 										bodyWrapper,
-										isInFootballRedesignTest &&
+										applyFootballRedesign &&
 											footballRedesignBodyWrapper,
 									]}
 								>
@@ -1223,4 +1229,17 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			)}
 		</>
 	);
+};
+
+const shouldApplyFootballRedesign = (
+	isMatch: boolean,
+	isApps: boolean,
+	isInFootballVariantGroup: boolean,
+) => {
+	// For Apps we want to show the football redesign so we default to true if the abTest value is not variant
+	if (isMatch) {
+		return isApps || isInFootballVariantGroup;
+	}
+
+	return false;
 };

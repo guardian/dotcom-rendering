@@ -399,11 +399,14 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const abTests = useBetaAB();
 	const isInFootballRedesignVariantGroup =
-		(isMatchReport &&
-			abTests?.isUserInTestGroup('webex-football-redesign', 'variant') &&
-			isWeb) ??
+		abTests?.isUserInTestGroup('webex-football-redesign', 'variant') ??
 		false;
 
+	const applyFootballRedesign = shouldApplyFootballRedesign(
+		isMatchReport,
+		isApps,
+		isInFootballRedesignVariantGroup,
+	);
 	const isMedia =
 		format.design === ArticleDesign.Video ||
 		format.design === ArticleDesign.Audio;
@@ -470,7 +473,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 			<MatchHeaderContainer
 				isMatchReport={isMatchReport}
-				isInVariantGroup={isInFootballRedesignVariantGroup}
+				isInVariantGroup={applyFootballRedesign}
 				footballMatchHeaderUrl={footballMatchHeaderUrl}
 				editionId={editionId}
 			/>
@@ -502,11 +505,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<StandardGrid
 						isMatchReport={isMatchReport}
 						isMedia={isMedia}
-						isInFootballRedesignVariantGroup={
-							isInFootballRedesignVariantGroup
-						}
+						isInFootballRedesignVariantGroup={applyFootballRedesign}
 					>
-						{!isInFootballRedesignVariantGroup && (
+						{!applyFootballRedesign && (
 							<>
 								<GridItem area="matchNav" element="aside">
 									<div css={maxWidth}>
@@ -568,7 +569,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								/>
 							</div>
 						</GridItem>
-						{!isInFootballRedesignVariantGroup && (
+						{!applyFootballRedesign && (
 							<GridItem area="title" element="aside">
 								<ArticleTitle
 									format={format}
@@ -783,9 +784,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								/>
 								<MatchInfoContainer
 									isMatchReport={isMatchReport}
-									isInVariantGroup={
-										isInFootballRedesignVariantGroup
-									}
+									isInVariantGroup={applyFootballRedesign}
 									footballMatchUrl={footballMatchUrl}
 									footballMatchStatsUrl={
 										footballMatchStatsUrl
@@ -1136,6 +1135,18 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 			)}
 		</>
 	);
+};
+
+const shouldApplyFootballRedesign = (
+	isMatchReport: boolean,
+	isApps: boolean,
+	isInFootballVariantGroup: boolean,
+) => {
+	if (isMatchReport) {
+		return isApps || isInFootballVariantGroup;
+	}
+
+	return false;
 };
 
 const MatchHeaderContainer = ({
