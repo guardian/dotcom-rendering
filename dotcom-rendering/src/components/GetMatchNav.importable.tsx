@@ -4,6 +4,7 @@ import { from } from '@guardian/source/foundations';
 import type { SWRConfiguration } from 'swr';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { useApi } from '../lib/useApi';
+import { cleanTeamName } from '../sportDataPage';
 import type { TeamType } from '../types/sport';
 import type { TagType } from '../types/tag';
 import { ArticleHeadline } from './ArticleHeadline';
@@ -138,11 +139,23 @@ export const GetMatchNav = ({
 
 	const isDataValid = validateMatchData(data);
 	if (isDataValid) {
+		const cleanedData = {
+			...data,
+			homeTeam: {
+				...data.homeTeam,
+				name: cleanTeamName(data.homeTeam.name),
+			},
+			awayTeam: {
+				...data.awayTeam,
+				name: cleanTeamName(data.awayTeam.name),
+			},
+		};
+
 		return (
 			<MatchNav
-				homeTeam={data.homeTeam}
-				awayTeam={data.awayTeam}
-				comments={data.comments}
+				homeTeam={cleanedData.homeTeam}
+				awayTeam={cleanedData.awayTeam}
+				comments={cleanedData.comments}
 				usage="Article"
 			/>
 		);
