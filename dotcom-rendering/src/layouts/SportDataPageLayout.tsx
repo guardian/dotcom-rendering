@@ -79,6 +79,8 @@ const SportsPage = ({
 				/>
 			);
 		case 'FootballMatchSummary': {
+			// Since the football match info page is not yet available in the app,
+			// the AB test is ignored for app users.
 			if (isInVariantGroup || renderingTarget === 'Apps') {
 				return (
 					<FootballMatchInfoPage

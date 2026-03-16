@@ -1232,12 +1232,13 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 };
 
 const shouldApplyFootballRedesign = (
-	isMatch: boolean,
+	isFootballMatch: boolean,
 	isApps: boolean,
 	isInFootballVariantGroup: boolean,
 ) => {
-	// For Apps we want to show the football redesign so we default to true if the abTest value is not variant
-	if (isMatch) {
+	// Since the football blog page is not yet available in the app,
+	// the AB test can be ignored and we default to true
+	if (isFootballMatch) {
 		return isApps || isInFootballVariantGroup;
 	}
 

@@ -1142,6 +1142,8 @@ const shouldApplyFootballRedesign = (
 	isApps: boolean,
 	isInFootballVariantGroup: boolean,
 ) => {
+	// Since the football match report page is not yet available in the app,
+	// the AB test can be ignored and we default to true
 	if (isMatchReport) {
 		return isApps || isInFootballVariantGroup;
 	}
