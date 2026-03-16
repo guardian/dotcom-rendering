@@ -7,6 +7,7 @@ import {
 	ArticleSpecial,
 } from '../lib/articleFormat';
 import { enhanceArticleType } from '../types/article';
+import type { Branding } from '../types/branding';
 import { HostedArticleLayout } from './HostedArticleLayout';
 
 const meta = {
@@ -53,6 +54,38 @@ export const Apps = {
 export const Web = {
 	args: {
 		content: enhanceArticleType(hostedArticle, 'Web'),
+		format,
+		renderingTarget: 'Web',
+	},
+	parameters: {
+		config: {
+			renderingTarget: 'Web',
+		},
+	},
+} satisfies Story;
+
+export const WithoutAccentColour = {
+	args: {
+		content: {
+			...enhanceArticleType(hostedArticle, 'Web'),
+			frontendData: {
+				...enhanceArticleType(hostedArticle, 'Web').frontendData,
+				commercialProperties: {
+					...enhanceArticleType(hostedArticle, 'Web').frontendData
+						.commercialProperties,
+					UK: {
+						...enhanceArticleType(hostedArticle, 'Web').frontendData
+							.commercialProperties.UK,
+
+						branding: {
+							...enhanceArticleType(hostedArticle, 'Web')
+								.frontendData.commercialProperties.UK.branding,
+							hostedCampaignColour: undefined,
+						} as Branding,
+					},
+				},
+			},
+		},
 		format,
 		renderingTarget: 'Web',
 	},
