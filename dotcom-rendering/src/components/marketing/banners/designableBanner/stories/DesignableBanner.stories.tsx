@@ -477,6 +477,46 @@ export const CollapsableWithThreeTierChoiceCardsMaybeLaterVariant: Story = {
 	},
 };
 
+export const CollapsableWithThreeTierChoiceCardsMaybeLaterVariantDefaultExpanded: Story =
+	{
+		name: 'Collapsable with three tier choice cards - Maybe later variant (no default selection)',
+		args: {
+			...CollapsableWithThreeTierChoiceCardsMaybeLaterVariant.args,
+			tracking: {
+				...tracking,
+				abTestVariant: 'COLLAPSABLE_V2_MAYBE_LATER_DEFAULT_EXPANDED',
+			},
+			choiceCardsSettings: {
+				...choiceCardsSettings,
+				choiceCards: choiceCardsSettings.choiceCards.map((c) =>
+					c.product.supportTier === 'SupporterPlus'
+						? { ...c, isDefault: false, defaultExpanded: true }
+						: { ...c, isDefault: false },
+				),
+			},
+		},
+	};
+
+export const CollapsableWithThreeTierChoiceCardsNoneSelectedNoneExpanded: Story =
+	{
+		name: 'Collapsable with three tier choice cards - Maybe later variant (none selected, none expanded)',
+		args: {
+			...CollapsableWithThreeTierChoiceCardsMaybeLaterVariant.args,
+			tracking: {
+				...tracking,
+				abTestVariant: 'COLLAPSABLE_V2_MAYBE_LATER_NONE_EXPANDED',
+			},
+			choiceCardsSettings: {
+				...choiceCardsSettings,
+				choiceCards: choiceCardsSettings.choiceCards.map((c) => ({
+					...c,
+					isDefault: false,
+					defaultExpanded: false,
+				})),
+			},
+		},
+	};
+
 export const WithReminder: Story = {
 	name: 'With contributions reminder',
 	args: {

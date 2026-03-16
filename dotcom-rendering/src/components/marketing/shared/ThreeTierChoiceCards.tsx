@@ -18,7 +18,8 @@ import {
 } from '@guardian/source/react-components';
 import { hexColourToString } from '@guardian/support-dotcom-components';
 import type { HexColour } from '@guardian/support-dotcom-components/dist/shared/types';
-import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
+import type { ChoiceCard as _ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
+export type ChoiceCard = _ChoiceCard & { defaultExpanded?: boolean };
 import type { Dispatch, SetStateAction } from 'react';
 import { useEffect } from 'react';
 import sanitise from 'sanitize-html';
@@ -113,7 +114,7 @@ const SupportingBenefits = ({
 };
 
 type ThreeTierChoiceCardsProps = {
-	selectedChoiceCard: ChoiceCard;
+	selectedChoiceCard?: ChoiceCard;
 	setSelectedChoiceCard: Dispatch<SetStateAction<ChoiceCard | undefined>>;
 	choices: ChoiceCard[];
 	id: 'epic' | 'banner'; // uniquely identify this choice cards component to avoid conflicting with others
@@ -271,6 +272,9 @@ export const ThreeTierChoiceCards = ({
 						const { supportTier } = product;
 
 						const isSelected = (): boolean => {
+							if (!selectedChoiceCard) {
+								return false;
+							}
 							if (
 								product.supportTier ===
 								selectedChoiceCard.product.supportTier
@@ -293,12 +297,15 @@ export const ThreeTierChoiceCards = ({
 						};
 						const selected = isSelected();
 
-						// Each radioId must be unique to the component and choice, e.g. "choicecard-epic-Contribution-Monthly"
 						const radioId = `choicecard-${id}-${supportTier}${
 							supportTier !== 'OneOff'
 								? `-${product.ratePlan}`
 								: ''
 						}`;
+
+						const isExpanded =
+							selected ||
+							(!selectedChoiceCard && card.defaultExpanded);
 
 						return (
 							<div
@@ -327,7 +334,7 @@ export const ThreeTierChoiceCards = ({
 											selected,
 										)}
 										supporting={
-											selected && (
+											isExpanded && (
 												<SupportingBenefits
 													benefitsLabel={
 														benefitsLabel as

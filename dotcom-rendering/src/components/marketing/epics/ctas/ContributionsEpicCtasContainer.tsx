@@ -49,7 +49,7 @@ export const ContributionsEpicCtasContainer: ReactComponent<Props> = ({
 
 	return (
 		<>
-			{choiceCards && selectedChoiceCard && (
+			{choiceCards && (
 				<ThreeTierChoiceCards
 					selectedChoiceCard={selectedChoiceCard}
 					setSelectedChoiceCard={setSelectedChoiceCard}

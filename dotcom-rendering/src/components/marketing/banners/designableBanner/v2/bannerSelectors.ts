@@ -38,7 +38,6 @@ export const buildBannerSelectors = ({
 			: content.mobileContent;
 	const hasChoiceCards =
 		!!settings.choiceCardSettings && (choiceCards?.length ?? 0) > 0;
-	const hasSelectedChoiceCard = hasChoiceCards && !!selectedChoiceCard;
 	const customSecondaryCta =
 		copyForViewport.secondaryCta?.type === SecondaryCtaType.Custom
 			? copyForViewport.secondaryCta
@@ -48,10 +47,10 @@ export const buildBannerSelectors = ({
 		SecondaryCtaType.ContributionsReminder
 			? copyForViewport.secondaryCta
 			: null;
-	const showChoiceCardCtas = hasSelectedChoiceCard;
+	const showChoiceCardCtas = hasChoiceCards;
 	const showChoiceCardSelector = showChoiceCardCtas && !isCollapsed;
 	const showStandardCtas =
-		!hasSelectedChoiceCard &&
+		!hasChoiceCards &&
 		(!!copyForViewport.primaryCta ||
 			!!copyForViewport.secondaryCta ||
 			isCollapsed);
