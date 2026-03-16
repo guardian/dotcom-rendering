@@ -22,7 +22,6 @@ export const buildBannerSelectors = ({
 	isTabletOrAbove,
 	isCollapsed,
 	choiceCards,
-	selectedChoiceCard,
 	settings,
 	tickerSettings,
 	separateArticleCount,

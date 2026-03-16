@@ -19,12 +19,13 @@ import {
 import { hexColourToString } from '@guardian/support-dotcom-components';
 import type { HexColour } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ChoiceCard as _ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
-export type ChoiceCard = _ChoiceCard & { defaultExpanded?: boolean };
 import type { Dispatch, SetStateAction } from 'react';
 import { useEffect } from 'react';
 import sanitise from 'sanitize-html';
 import { useIsInView } from '../../../lib/useIsInView';
 import type { ChoiceCardDesignSettings } from '../banners/designableBanner/settings';
+
+export type ChoiceCard = _ChoiceCard & { defaultExpanded?: boolean };
 
 const benefitsStyles = css`
 	${textSans15};
