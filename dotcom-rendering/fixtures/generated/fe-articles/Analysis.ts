@@ -95,7 +95,7 @@ export const Analysis: FEArticle = {
 					},
 				],
 			},
-			elementId: '43010234-6fcf-4f3d-a125-4a265200901f',
+			elementId: '58d7bd55-b274-4599-a3cb-5d9ec78a0b0f',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -297,113 +297,113 @@ export const Analysis: FEArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Who won Ireland’s general election?</h2>',
-					elementId: '993cbbd8-ba41-43d4-ad9b-60690589f562',
+					elementId: 'e13f91af-515d-46a5-8736-a79790fe4e2c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Sinn Féin <a href="https://www.theguardian.com/world/2020/feb/09/sinn-fein-to-try-to-form-ruling-coalition-after-irish-election-success">won the most first-preference votes</a> – 24.5% – making it the most popular party and a strong contender to be included in the next government. <a href="https://www.theguardian.com/world/2020/jan/31/leo-varadkar-paradox-feted-abroad-can-pm-arrest-polls-slump-in-ireland-election">Leo Varadkar</a>’s ruling Fine Gael party slid to 20.8%, coming third, and Fianna Fáil, the main opposition party, also slipped, falling to 22.1% in second place. The rest of the vote was split between the Greens, on 7.1%, and small leftwing parties and independent candidates.</p>',
-					elementId: 'd1455ac6-3066-44f6-ad19-07295b17fc4f',
+					elementId: '761d40e7-48dc-43d4-8e9d-cdfc564d5f1d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Sinn Féin fielded too few candidates to fully translate its support into seats so Fianna Fáil is expected to be the biggest party in Dáil Éireann, the Irish parliament’s lower house, which has 160 members, when all seats are allocated under Ireland’s single transferrable vote system of proportional representation.</p>',
-					elementId: '64521ad8-51da-4b1e-a665-54d55dd0686d',
+					elementId: '3f44e6e9-4730-4e5a-abe5-25f4604eabd1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
 					prefix: 'Related: ',
 					text: 'Ireland election: latest results',
-					elementId: '9b267b3d-863c-4faa-ab92-71e71361e406',
+					elementId: '89d8932c-3f7b-4016-b44c-df4e75e8a444',
 					role: 'thumbnail',
 					url: 'https://www.theguardian.com/world/2020/feb/10/ireland-election-latest-results-live-sinn-fein-fine-gael-fianna-fail',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Current projections give Fianna Fáil around 42, with Sinn Féin and <a href="https://www.theguardian.com/world/fine-gael" data-component="auto-linked-tag">Fine Gael</a> each in the mid to high 30s. Full results are expected later on Monday or Tuesday.</p>',
-					elementId: '34a6f3fa-685c-4cbf-9039-e7040cf4f33c',
+					elementId: '22377f59-2273-4d27-9241-8b6af24fbcea',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Was Sinn Féin’s success a surprise?</h2>',
-					elementId: '54e031b5-4b7b-403a-9c86-920399388a84',
+					elementId: 'baf2251f-fa17-41b6-b214-e4d3dd3fe55e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>An opinion poll signalled it last week but the result is still a big shock. Fine Gael and Fianna Fáil, centrist rivals, dominated Irish politics for the past century, taking turns to rule. That era appears over.</p>',
-					elementId: 'e887bdfa-ecc1-4de8-81fa-08b51e582cdf',
+					elementId: 'e8a02ca8-582e-4cae-8f48-889bfbb15ddf',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Is Varadkar going to lose power?</h2>',
-					elementId: '4e5097a1-5eef-42dc-b63a-05053b806ea6',
+					elementId: 'f302a4cf-9767-4064-b555-38a766159c37',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Very possibly, but there’s a chance he could hang on as taoiseach after negotiations between party leaders to form a coalition with 80 seats, the magic number for a parliamentary majority. Varadkar says he would be willing to lead Fine Gael in opposition.</p>',
-					elementId: '10ae9d94-0e52-44f5-a3d4-9582b860b514',
+					elementId: '88ae0cfc-0c71-4337-bd09-fe23d40b3b30',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.QABlockElement',
 					credit: '',
 					id: '95c8ba09-ecce-4bfa-9140-a262990fbdce',
-					elementId: 'e8a42980-15de-42ac-b832-dc0512eb1819',
+					elementId: '98b0e9d7-c81f-4925-bae8-18ac52a53f1e',
 					title: 'What are the main political parties in Ireland?',
 					html: '<p><a href="https://www.theguardian.com/politics/fine-gael">Fine Gael</a><br></p><p>Its name can be translated as family or tribe of the Irish. A centre-right party with a socially progressive tilt. In office since 2011, first led by Enda Kenny, then&nbsp;<a href="https://www.theguardian.com/world/leo-varadkar">Leo Varadkar</a>, with support from smaller coalition partners. Traces roots to Michael Collins and the winning side in Ireland’s 1922-23 civil war. The party traditionally advocates market economics and fiscal discipline. Appeals to the urban middle class and well-off farmers.</p><p><a href="https://www.theguardian.com/politics/fianna-fail">Fianna Fáil</a></p><p>Its name means Soldiers of Destiny. A centrist, ideologically malleable party that dominated Irish politics until it steered the Celtic Tiger economy over a cliff, prompting decade-long banishment to opposition benches. Under Micheál Martin, a nimble political veteran, it has clawed back support and may overtake Fine Gael as the biggest party and lead the next coalition government. Founded by Éamon de Valera, who backed the civil war’s losing side but turned Fianna Fáil into an election-winning machine.</p><p><a href="https://www.theguardian.com/politics/sinn-fein">Sinn Féin</a></p><p>Its name means We Ourselves, signifying Irish sovereignty. A leftwing republican party that competes in Northern Ireland as well as the Republic. Traces roots to 1905. Emerged in current form during the Troubles, when it was linked to the IRA. Peace in Northern Ireland helped Sinn Féin rebrand as a working-class advocate opposed to austerity. Under Mary Lou McDonald, a Dubliner without paramilitary baggage, Sinn Féin has become the third-biggest party, and its vote share surged in the 2020 election.&nbsp;</p><p>Others</p><p>Partnership with Fine Gael during post-Celtic Tiger austerity tainted the centre-left <b>Labour</b> party. The political arm of the trade union movement, it is led by Brendan Howlin, a former teacher and government minister.</p><p>The <b>Social Democrats</b> and <b>Solidarity-People Before Profit</b> are part of an alphabet soup of smaller, more leftwing parties. The <b>Greens</b>, wiped out in 2011 after a ruinous coalition with Fianna Fáil, have campaigned on the back of climate crisis anxiety and youth-led protests. Independent TDs have prospered in recent elections, turning some into outsized players in ruling coalitions. <b>Rory Carroll</b></p>',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Why did Sinn Féin do so well?</h2>',
-					elementId: '85b63194-d919-4aee-8bcb-aad9a8d00c9a',
+					elementId: 'e95f0e6d-84ef-4944-95f8-d5c5f308a797',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>It rode a wave of anger over homelessness, soaring rents, hospital waiting lists and and fraying public services. Its leader, <a href="https://www.theguardian.com/politics/2020/feb/07/mary-lou-mcdonald-sinn-fein-leader-kingmaker-ireland-election-ireland">Mary Lou McDonald</a>, and party colleagues such as Eoin Ó Broin and Pearse Doherty offered leftwing solutions, such as an ambitious public housing building programme, that enthused voters, especially those under 50.</p>',
-					elementId: 'e69e2c53-70fc-4847-9d6e-bdda82b5a726',
+					elementId: '883b8726-497b-46cd-afd4-777cdcc73980',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Varadkar’s attempt to frame the election around his Brexit diplomacy and the humming economy fell flat. Fianna Fáil was contaminated by its confidence-and-supply deal that had propped up Varadkar’s minority administration, leaving Sinn Féin to cast itself as the agent of real change. Voters forgot, forgave or did not care about its past as the IRA’s political wing during the Troubles.</p>',
-					elementId: 'e7ba67a9-ff47-4afd-8da4-909f04230489',
+					elementId: '501115b8-5b6f-4b6f-b42b-ced03af0247d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>What happens next?</h2>',
-					elementId: 'e08cfb6e-2f0c-49c9-9170-703dc16d4e98',
+					elementId: '0f9f8bfa-a8b3-4ab8-9b5c-d83f7e3821e9',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Weeks – possibly months – of negotiations between party leaders. McDonald is floating an alliance of leftwing parties led by Sinn Féin but that’s unlikely – it would be far short of 80 seats. The only viable looking option entails an alliance between two of the three main parties plus perhaps the Greens.</p>',
-					elementId: '2dc7a03f-0d76-4fc0-88c5-ed6d0808caab',
+					elementId: 'f6181819-5a97-4d3d-9d0b-914cbb9fbb71',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Varadkar has ruled out a pact with Sinn Féin and floated a deal with Fianna Fáil. During the campaign the Fianna Fáil leader, Micheál Martin, ruled out entering government with Fine Gael or Sinn Féin but since Sunday has hinted he may do a deal with one or the other.</p>',
-					elementId: 'fb0ac512-1d19-422a-bb97-bf8679f407e6',
+					elementId: '58e92da3-cff0-4912-bd42-821587859cf5',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Expect shadow boxing. Sinn Féin will be very wary about entering government as a junior partner – a recipe for punishment at the next election, as other parties have discovered. Some suspect its preferred outcome is a Fianna Fáil-Fine Gael government – an unpopular continuation of the status quo that would consolidate Sinn Féin as leader-in-waiting of the subsequent government.</p>',
-					elementId: '8b26996b-801f-4ada-a6be-3696cefb7571',
+					elementId: 'd0c4f6a0-61aa-47d6-8dfe-79f36e20937a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>For that reason Fianna Fáil will hesitate to do a deal with Fine Gael. But Fianna Fáil may oust Martin if he does not become taoiseach.</p>',
-					elementId: '66d67d88-e117-4441-b2cf-ac4c6bad8832',
+					elementId: '95df4dfc-b8bd-4600-a4e2-02e2e12e77ca',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>One plausible outcome: deadlock, and another election.</p>',
-					elementId: '37af8abf-3383-4e18-83a6-5a3090091128',
+					elementId: '40c9fb07-ecc8-485c-8ab9-bb7c8a7b4bab',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Read more</strong></p>',
-					elementId: 'cf4a2bee-db99-4e68-843f-a5c7680ebe86',
+					elementId: '4fe21fc3-598a-445c-8de7-47fd7630149c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><a href="https://www.theguardian.com/politics/2020/feb/07/mary-lou-mcdonald-sinn-fein-leader-kingmaker-ireland-election-ireland">Mary Lou McDonald: Sinn Féin leader who may play Dublin kingmaker</a><br><a href="https://www.theguardian.com/world/2020/feb/08/sinn-fein-on-election-day-shane-obrien">‘It’s a sea change’: Sinn Féin dares to dream on election day</a><br><a href="https://www.theguardian.com/commentisfree/2020/jan/31/sinn-fein-ireland-left-election-ira">Opinion: Can Sinn Féin’s young voters finally pull Ireland to the left?</a><br><a href="https://www.theguardian.com/world/2020/jan/31/leo-varadkar-paradox-feted-abroad-can-pm-arrest-polls-slump-in-ireland-election">The Varadkar paradox: feted abroad, can PM arrest polls slump in Ireland?</a></p>',
-					elementId: '257c2121-8202-4bad-81f6-3580b46813ea',
+					elementId: 'ab24dab7-16c3-48dd-a365-35d94cd96e47',
 				},
 			],
 			attributes: {
@@ -863,6 +863,8 @@ export const Analysis: FEArticle = {
 					isClosedForComments: true,
 					discussionId: '/p/e79et',
 				},
+				trailText:
+					'Fianna Fáil leader forms government with Fine Gael and Greens vowing end to ‘civil war politics’<br>',
 			},
 			{
 				url: 'https://www.theguardian.com/world/2020/jun/26/irish-government-to-be-formed-after-greens-vote-yes-to-coalition',
@@ -895,6 +897,8 @@ export const Analysis: FEArticle = {
 					isClosedForComments: true,
 					discussionId: '/p/e7572',
 				},
+				trailText:
+					'Fine Gael and Fianna Fáil will now have a working majority in Irish parliament ',
 			},
 			{
 				url: 'https://www.theguardian.com/world/2020/jun/15/fine-gael-fianna-fail-and-greens-agree-deal-to-form-irish-coalition',
@@ -927,6 +931,8 @@ export const Analysis: FEArticle = {
 					isClosedForComments: true,
 					discussionId: '/p/e49gh',
 				},
+				trailText:
+					'Agreement between three parties to form government needs to be ratified by members',
 			},
 			{
 				url: 'https://www.theguardian.com/world/2020/may/26/irish-taoiseach-leo-varadkar-denies-picnic-with-friends-was-covid-19-rule-breach',
@@ -959,6 +965,8 @@ export const Analysis: FEArticle = {
 					isClosedForComments: true,
 					discussionId: '/p/evan3',
 				},
+				trailText:
+					'Spokesperson says PM broke no laws or regulations during meeting with friends in a Dublin park, despite guidance against picnics',
 			},
 			{
 				url: 'https://www.theguardian.com/world/2020/apr/14/ireland-fine-gael-fianna-fail-close-forming-coalition-government',
@@ -991,6 +999,8 @@ export const Analysis: FEArticle = {
 					isClosedForComments: true,
 					discussionId: '/p/dk7xx',
 				},
+				trailText:
+					'Party leaders agree to seek ‘full and equal partnership’ for five years and rotate taoiseach role',
 			},
 			{
 				url: 'https://www.theguardian.com/world/2020/feb/24/micheal-martin-faces-a-battle-of-conscience-to-form-irish-government',
@@ -1005,7 +1015,7 @@ export const Analysis: FEArticle = {
 					'300': 'https://i.guim.co.uk/img/media/d0d4465b4bcbe49a5dc173752c7c1a1d070d7b5c/0_81_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=90c72aef08c983e57113372b4c764ed2',
 					'460': 'https://i.guim.co.uk/img/media/d0d4465b4bcbe49a5dc173752c7c1a1d070d7b5c/0_81_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=37850ebf202911c3e6514774643da7f1',
 				},
-				ageWarning: '5 years',
+				ageWarning: '6 years',
 				isLiveBlog: false,
 				pillar: 'news',
 				designType: 'Analysis',
@@ -1023,6 +1033,8 @@ export const Analysis: FEArticle = {
 					isClosedForComments: true,
 					discussionId: '/p/dayh8',
 				},
+				trailText:
+					'Fianna Fáil leader is a key player in breaking parliamentary deadlock, but has ruled out working with Sinn Féin',
 			},
 			{
 				url: 'https://www.theguardian.com/world/2020/feb/20/irish-parliament-set-for-stalemate-in-attempt-to-form-new-government',
@@ -1037,7 +1049,7 @@ export const Analysis: FEArticle = {
 					'300': 'https://i.guim.co.uk/img/media/063c66e56d2758fa8f5b289e0200f3de7c68fd98/0_158_5568_3341/master/5568.jpg?width=300&quality=85&auto=format&fit=max&s=41b5c9371d1c654a683fd4579aa86f26',
 					'460': 'https://i.guim.co.uk/img/media/063c66e56d2758fa8f5b289e0200f3de7c68fd98/0_158_5568_3341/master/5568.jpg?width=460&quality=85&auto=format&fit=max&s=a184021c28b1447a010f3067860b29fa',
 				},
-				ageWarning: '5 years',
+				ageWarning: '6 years',
 				isLiveBlog: false,
 				pillar: 'news',
 				designType: 'Article',
@@ -1055,6 +1067,8 @@ export const Analysis: FEArticle = {
 					isClosedForComments: true,
 					discussionId: '/p/dayq6',
 				},
+				trailText:
+					'Taoiseach will continue as caretaker leader after inconclusive sitting of Dáil Éireann',
 			},
 			{
 				url: 'https://www.theguardian.com/world/2020/feb/17/fine-gael-fianna-fail-coalition-unthinkable-says-sinn-fein-leader-mary-lou-mcdonald',
@@ -1069,7 +1083,7 @@ export const Analysis: FEArticle = {
 					'300': 'https://i.guim.co.uk/img/media/0f11b4a5e5c30756ad66b6db895b4752178556d8/0_18_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=216097ca457fbb71772b7e4d4c9706f4',
 					'460': 'https://i.guim.co.uk/img/media/0f11b4a5e5c30756ad66b6db895b4752178556d8/0_18_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=46afd5a1dfecab703860022d16a77c9f',
 				},
-				ageWarning: '5 years',
+				ageWarning: '6 years',
 				isLiveBlog: false,
 				pillar: 'news',
 				designType: 'Article',
@@ -1087,6 +1101,8 @@ export const Analysis: FEArticle = {
 					isClosedForComments: true,
 					discussionId: '/p/da75n',
 				},
+				trailText:
+					'Irish parliament set to meet on Thursday despite no party having a majority',
 			},
 			{
 				url: 'https://www.theguardian.com/commentisfree/2020/feb/16/even-as-ireland-economy-booms-sinn-fein-win-is-bitter-cry-for-equality',
@@ -1118,6 +1134,8 @@ export const Analysis: FEArticle = {
 					isClosedForComments: true,
 					discussionId: '/p/d9kx7',
 				},
+				trailText:
+					'The economy is booming at last but an angry electorate showed Leo Varadker’s government that the good times are not rolling for all',
 			},
 		],
 	},
@@ -1532,11 +1550,6 @@ export const Analysis: FEArticle = {
 								url: '/football/teams',
 								longTitle: 'football/teams',
 							},
-							{
-								title: 'Euro 2025',
-								url: '/football/women-s-euro-2025',
-								longTitle: 'football/women-s-euro-2025',
-							},
 						],
 					},
 					{
@@ -1678,6 +1691,10 @@ export const Analysis: FEArticle = {
 				iconName: 'home',
 				children: [
 					{
+						title: 'Winter Paralympics',
+						url: '/sport/winter-paralympics',
+					},
+					{
 						title: 'Football',
 						url: '/football',
 						children: [
@@ -1710,11 +1727,6 @@ export const Analysis: FEArticle = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
-							},
-							{
-								title: 'Euro 2025',
-								url: '/football/women-s-euro-2025',
-								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -1965,6 +1977,10 @@ export const Analysis: FEArticle = {
 						url: '/crosswords/series/sunday-quick',
 					},
 					{
+						title: 'Mini',
+						url: '/crosswords/series/mini-crossword',
+					},
+					{
 						title: 'Quick cryptic',
 						url: '/crosswords/series/quick-cryptic',
 					},
@@ -2210,15 +2226,21 @@ export const Analysis: FEArticle = {
 					extraClasses: '',
 				},
 				{
-					text: 'SecureDrop',
-					url: 'https://www.theguardian.com/securedrop',
-					dataLinkName: 'securedrop',
+					text: 'Contact us',
+					url: '/help/contact-us',
+					dataLinkName: 'uk : footer : contact us',
 					extraClasses: '',
 				},
 				{
-					text: 'Work for us',
-					url: 'https://workforus.theguardian.com',
-					dataLinkName: 'uk : footer : work for us',
+					text: 'Tip us off',
+					url: 'https://www.theguardian.com/tips',
+					dataLinkName: 'uk : footer : tips',
+					extraClasses: '',
+				},
+				{
+					text: 'SecureDrop',
+					url: 'https://www.theguardian.com/securedrop',
+					dataLinkName: 'securedrop',
 					extraClasses: '',
 				},
 				{
@@ -2234,15 +2256,21 @@ export const Analysis: FEArticle = {
 					extraClasses: '',
 				},
 				{
-					text: 'Terms & conditions',
-					url: '/help/terms-of-service',
-					dataLinkName: 'terms',
+					text: 'Modern Slavery Act',
+					url: 'https://uploads.guim.co.uk/2025/09/05/Modern_Slavery_Statement_2025.pdf',
+					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
 				{
-					text: 'Contact us',
-					url: '/help/contact-us',
-					dataLinkName: 'uk : footer : contact us',
+					text: 'Tax strategy',
+					url: 'https://uploads.guim.co.uk/2025/09/05/Tax_strategy_for_the_year_ended_31_March_2025.pdf',
+					dataLinkName: 'uk : footer : tax strategy',
+					extraClasses: '',
+				},
+				{
+					text: 'Terms & conditions',
+					url: '/help/terms-of-service',
+					dataLinkName: 'terms',
 					extraClasses: '',
 				},
 			],
@@ -2260,15 +2288,9 @@ export const Analysis: FEArticle = {
 					extraClasses: '',
 				},
 				{
-					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2024/09/04/Modern_Slavery_Statement_2024_.pdf',
-					dataLinkName: 'uk : footer : modern slavery act statement',
-					extraClasses: '',
-				},
-				{
-					text: 'Tax strategy',
-					url: 'https://uploads.guim.co.uk/2024/08/27/TAX_STRATEGY_FOR_THE_YEAR_ENDED_31_MARCH_2025.pdf',
-					dataLinkName: 'uk : footer : tax strategy',
+					text: 'Newsletters',
+					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+					dataLinkName: 'uk : footer : newsletters',
 					extraClasses: '',
 				},
 				{
@@ -2278,33 +2300,45 @@ export const Analysis: FEArticle = {
 					extraClasses: '',
 				},
 				{
-					text: 'Facebook',
-					url: 'https://www.facebook.com/theguardian',
-					dataLinkName: 'uk : footer : facebook',
+					text: 'Bluesky',
+					url: 'https://bsky.app/profile/theguardian.com',
+					dataLinkName: 'uk : footer : Bluesky',
 					extraClasses: '',
 				},
 				{
-					text: 'YouTube',
-					url: 'https://www.youtube.com/user/TheGuardian',
-					dataLinkName: 'uk : footer : youtube',
+					text: 'Facebook',
+					url: 'https://www.facebook.com/theguardian',
+					dataLinkName: 'uk : footer : Facebook',
 					extraClasses: '',
 				},
 				{
 					text: 'Instagram',
 					url: 'https://www.instagram.com/guardian',
-					dataLinkName: 'uk : footer : instagram',
+					dataLinkName: 'uk : footer : Instagram',
 					extraClasses: '',
 				},
 				{
 					text: 'LinkedIn',
 					url: 'https://www.linkedin.com/company/theguardian',
-					dataLinkName: 'uk : footer : linkedin',
+					dataLinkName: 'uk : footer : LinkedIn',
 					extraClasses: '',
 				},
 				{
-					text: 'Newsletters',
-					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
-					dataLinkName: 'uk : footer : newsletters',
+					text: 'Threads',
+					url: 'https://www.threads.com/@guardian',
+					dataLinkName: 'uk : footer : Threads',
+					extraClasses: '',
+				},
+				{
+					text: 'TikTok',
+					url: 'https://www.tiktok.com/@guardian',
+					dataLinkName: 'uk : footer : TikTok',
+					extraClasses: '',
+				},
+				{
+					text: 'YouTube',
+					url: 'https://www.youtube.com/user/TheGuardian',
+					dataLinkName: 'uk : footer : YouTube',
 					extraClasses: '',
 				},
 			],
@@ -2334,9 +2368,9 @@ export const Analysis: FEArticle = {
 					extraClasses: '',
 				},
 				{
-					text: 'Tips',
-					url: 'https://www.theguardian.com/tips',
-					dataLinkName: 'uk : footer : tips',
+					text: 'Work with us',
+					url: 'https://workwithus.theguardian.com/',
+					dataLinkName: 'uk : footer : work with us',
 					extraClasses: '',
 				},
 				{

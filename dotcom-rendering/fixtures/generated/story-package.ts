@@ -29,7 +29,7 @@ export const storyPackage: FEStoryPackage = {
 				'300': 'https://i.guim.co.uk/img/media/af51ca2f6882f843b13137215eb1f7e5fdfad0ca/0_101_5000_2999/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=95029e0339ea030921a04c3b985b2b2f',
 				'460': 'https://i.guim.co.uk/img/media/af51ca2f6882f843b13137215eb1f7e5fdfad0ca/0_101_5000_2999/master/5000.jpg?width=460&quality=85&auto=format&fit=max&s=619a035d4b617b560bfe87ce8d22d082',
 			},
-			ageWarning: '4 months',
+			ageWarning: '11 months',
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
@@ -38,7 +38,7 @@ export const storyPackage: FEStoryPackage = {
 				theme: 'NewsPillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2022-01-01T11:00:47.000Z',
+			webPublicationDate: '2025-03-24T19:00:47.000Z',
 			headline:
 				'Nasa rover discovers largest organic compounds yet found on Mars',
 			shortUrl: 'https://www.theguardian.com/p/xxp8eq',
@@ -47,6 +47,8 @@ export const storyPackage: FEStoryPackage = {
 				isClosedForComments: true,
 				discussionId: '/p/xxp8eq',
 			},
+			trailText:
+				'Presence of long-chain alkanes in rock raises new questions about possible existence of life billions of years ago',
 		},
 		{
 			url: 'https://www.theguardian.com/science/2025/mar/13/passing-probe-captures-images-of-mysterious-mars-moon',
@@ -60,7 +62,7 @@ export const storyPackage: FEStoryPackage = {
 				'300': 'https://i.guim.co.uk/img/media/5b6e800d93c76bc1271d56123a8c9d110ba47674/117_0_1813_1088/master/1813.jpg?width=300&quality=85&auto=format&fit=max&s=169ff6115706bd01a071c45cb3b6ee53',
 				'460': 'https://i.guim.co.uk/img/media/5b6e800d93c76bc1271d56123a8c9d110ba47674/117_0_1813_1088/master/1813.jpg?width=460&quality=85&auto=format&fit=max&s=1e15dc6960917c9c6b5e4ee237a86c03',
 			},
-			ageWarning: '4 months',
+			ageWarning: '1 year',
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
@@ -69,7 +71,7 @@ export const storyPackage: FEStoryPackage = {
 				theme: 'NewsPillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2022-01-01T11:56:49.000Z',
+			webPublicationDate: '2025-03-13T11:56:49.000Z',
 			headline: 'Passing probe captures images of mysterious Mars moon',
 			shortUrl: 'https://www.theguardian.com/p/xxn2cq',
 			discussion: {
@@ -77,6 +79,8 @@ export const storyPackage: FEStoryPackage = {
 				isClosedForComments: true,
 				discussionId: '/p/xxn2cq',
 			},
+			trailText:
+				'Hera spacecraft takes photos of red planet’s second moon, Deimos, while en route to asteroids 110m miles away',
 		},
 		{
 			url: 'https://www.theguardian.com/science/2025/feb/24/mars-ocean-sandy-beaches-radar-data-suggests',
@@ -91,7 +95,7 @@ export const storyPackage: FEStoryPackage = {
 				'300': 'https://i.guim.co.uk/img/media/03a426971087db53b7c7205bb7d2302f6f3cf316/65_0_3918_2352/master/3918.jpg?width=300&quality=85&auto=format&fit=max&s=1df2ae2c2b299e58546c907fd4625d2f',
 				'460': 'https://i.guim.co.uk/img/media/03a426971087db53b7c7205bb7d2302f6f3cf316/65_0_3918_2352/master/3918.jpg?width=460&quality=85&auto=format&fit=max&s=622458b6cf927eee41d8910a120b01ca',
 			},
-			ageWarning: '5 months',
+			ageWarning: '1 year',
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
@@ -100,7 +104,7 @@ export const storyPackage: FEStoryPackage = {
 				theme: 'NewsPillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2021-02-24T23:35:09.000Z',
+			webPublicationDate: '2025-02-24T23:35:09.000Z',
 			headline:
 				'Mars once had an ocean with sandy beaches, researchers say',
 			shortUrl: 'https://www.theguardian.com/p/xxjy3h',
@@ -109,6 +113,8 @@ export const storyPackage: FEStoryPackage = {
 				isClosedForComments: true,
 				discussionId: '/p/xxjy3h',
 			},
+			trailText:
+				'China’s Zhurong rover finds evidence of shoreline buried deep underground',
 		},
 		{
 			url: 'https://www.theguardian.com/us-news/2025/mar/06/spacex-starship-explodes-musk',
@@ -123,7 +129,7 @@ export const storyPackage: FEStoryPackage = {
 				'300': 'https://i.guim.co.uk/img/media/90ad9605e403e2cd3bbbdc50099bf9c60493f290/0_486_2465_1478/master/2465.jpg?width=300&quality=85&auto=format&fit=max&s=21072c7f9ec779b369505e68486c593d',
 				'460': 'https://i.guim.co.uk/img/media/90ad9605e403e2cd3bbbdc50099bf9c60493f290/0_486_2465_1478/master/2465.jpg?width=460&quality=85&auto=format&fit=max&s=1a0819bca386721b448ff0db6828b1bd',
 			},
-			ageWarning: '4 months',
+			ageWarning: '1 year',
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
@@ -132,7 +138,7 @@ export const storyPackage: FEStoryPackage = {
 				theme: 'NewsPillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2021-03-01T02:59:44.000Z',
+			webPublicationDate: '2025-03-07T02:59:44.000Z',
 			headline:
 				'SpaceX’s Starship explodes in second failure for Musk’s Mars program',
 			shortUrl: 'https://www.theguardian.com/p/xxyyzx',
@@ -141,6 +147,8 @@ export const storyPackage: FEStoryPackage = {
 				isClosedForComments: true,
 				discussionId: '/p/xxyyzx',
 			},
+			trailText:
+				'Back-to-back mishaps indicate big setbacks for program to launch satellites and send humans to the moon and Mars',
 		},
 		{
 			url: 'https://www.theguardian.com/science/2025/jan/11/i-think-there-is-life-there-today-the-race-to-put-a-human-on-mars-in-pictures',
@@ -163,7 +171,7 @@ export const storyPackage: FEStoryPackage = {
 				theme: 'NewsPillar',
 				display: 'ImmersiveDisplay',
 			},
-			webPublicationDate: '2021-01-11T11:00:01.000Z',
+			webPublicationDate: '2025-01-11T11:00:01.000Z',
 			headline:
 				'‘I think there is life there. Today’: the race to put a human on Mars – in pictures',
 			shortUrl: 'https://www.theguardian.com/p/xx66cn',
@@ -172,6 +180,8 @@ export const storyPackage: FEStoryPackage = {
 				isClosedForComments: true,
 				discussionId: '/p/xx66cn',
 			},
+			trailText:
+				'Ever since the first fuzzy images of its surface were captured in 1964, Mars has sparked imaginations worldwide. As Nasa publishes its photographic archives of the red planet, will Elon Musk’s wild predictions of a crewed flight in four years come true?',
 		},
 		{
 			url: 'https://www.theguardian.com/science/2024/dec/16/our-martian-heritage-must-be-preserved-say-leading-scientists',
@@ -186,7 +196,7 @@ export const storyPackage: FEStoryPackage = {
 				'300': 'https://i.guim.co.uk/img/media/d4adfc46ea3dca163794ab3150083b4a2b5e01c2/2820_459_5372_3224/master/5372.jpg?width=300&quality=85&auto=format&fit=max&s=c658e3dff5140ca5ff63db21baf80a88',
 				'460': 'https://i.guim.co.uk/img/media/d4adfc46ea3dca163794ab3150083b4a2b5e01c2/2820_459_5372_3224/master/5372.jpg?width=460&quality=85&auto=format&fit=max&s=88a6c5f45ae4c9bd60bd44cf5ea7461f',
 			},
-			ageWarning: '7 months',
+			ageWarning: '1 year',
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
@@ -204,6 +214,8 @@ export const storyPackage: FEStoryPackage = {
 				isClosedForComments: true,
 				discussionId: '/p/xx65fh',
 			},
+			trailText:
+				'Academics agree that by protecting robotic vehicles and landing sites we will help archaeologists of the future',
 		},
 		{
 			url: 'https://www.theguardian.com/books/2024/oct/24/winner-of-royal-society-trivedi-science-book-prize-assesses-whether-humans-really-could-colonise-mars',
@@ -218,7 +230,7 @@ export const storyPackage: FEStoryPackage = {
 				'300': 'https://i.guim.co.uk/img/media/6a4802c7019c7820ede1b30a12e07f38f93996b0/0_193_1508_905/master/1508.jpg?width=300&quality=85&auto=format&fit=max&s=0295cb7c52637a1ded449de3b4d35e98',
 				'460': 'https://i.guim.co.uk/img/media/6a4802c7019c7820ede1b30a12e07f38f93996b0/0_193_1508_905/master/1508.jpg?width=460&quality=85&auto=format&fit=max&s=15e28135035fcd7e16a11a00a5bd8597',
 			},
-			ageWarning: '9 months',
+			ageWarning: '1 year',
 			isLiveBlog: false,
 			pillar: 'culture',
 			designType: 'Article',
@@ -236,6 +248,8 @@ export const storyPackage: FEStoryPackage = {
 				isClosedForComments: true,
 				discussionId: '/p/xvmbea',
 			},
+			trailText:
+				'Kelly and Zach Weinersmith’s book overturns Elon Musk’s claim that we could live on the red planet within years while stressing the good reasons to pursue space settlement',
 		},
 		{
 			url: 'https://www.theguardian.com/technology/2024/sep/15/musk-humans-live-on-mars-spacex',
@@ -267,6 +281,8 @@ export const storyPackage: FEStoryPackage = {
 				isClosedForComments: true,
 				discussionId: '/p/xvezn9',
 			},
+			trailText:
+				'The SpaceX boss has envisioned people staying on the red planet in a self-sustaining city in 20 years',
 		},
 		{
 			url: 'https://www.theguardian.com/business/article/2024/aug/13/from-the-seabed-to-the-moon-bp-and-nasa-swap-tips-on-hostile-environments',
@@ -281,7 +297,7 @@ export const storyPackage: FEStoryPackage = {
 				'300': 'https://i.guim.co.uk/img/media/cb104f179bfea5600302c686523eb10e1aeec8c4/0_116_2814_1688/master/2814.jpg?width=300&quality=85&auto=format&fit=max&s=0cdb18a1f56510b00729cdd2ade54724',
 				'460': 'https://i.guim.co.uk/img/media/cb104f179bfea5600302c686523eb10e1aeec8c4/0_116_2814_1688/master/2814.jpg?width=460&quality=85&auto=format&fit=max&s=d92e9b7657d8e48b720d7275e9e64d51',
 			},
-			ageWarning: '11 months',
+			ageWarning: '1 year',
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
@@ -299,6 +315,8 @@ export const storyPackage: FEStoryPackage = {
 				isClosedForComments: true,
 				discussionId: '/p/xv8qmx',
 			},
+			trailText:
+				'BP hopes deal will help develop earth technologies such as robotics and clean energy',
 		},
 		{
 			url: 'https://www.theguardian.com/science/article/2024/aug/12/new-hope-of-finding-life-on-mars-after-indication-of-water-scientists-say',
@@ -330,6 +348,8 @@ export const storyPackage: FEStoryPackage = {
 				isClosedForComments: true,
 				discussionId: '/p/xv87n4',
 			},
+			trailText:
+				'Liquid amounting to a 1-2km-deep ocean may be frozen up to 20km below surface, calculations suggest',
 		},
 	],
 };
