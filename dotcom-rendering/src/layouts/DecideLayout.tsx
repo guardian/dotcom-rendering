@@ -9,6 +9,7 @@ import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 import { GalleryLayout } from './GalleryLayout';
 import { HostedArticleLayout } from './HostedArticleLayout';
 import { HostedGalleryLayout } from './HostedGalleryLayout';
+import { HostedVideoLayout } from './HostedVideoLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
@@ -363,9 +364,16 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 						/>
 					);
 				case ArticleDesign.HostedArticle:
-				case ArticleDesign.HostedVideo:
 					return (
 						<HostedArticleLayout
+							content={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
+				case ArticleDesign.HostedVideo:
+					return (
+						<HostedVideoLayout
 							content={article}
 							format={format}
 							renderingTarget={renderingTarget}
