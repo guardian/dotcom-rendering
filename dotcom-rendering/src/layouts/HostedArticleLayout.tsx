@@ -21,7 +21,7 @@ import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
-import { palette } from '../palette';
+import { palette as themePalette } from '../palette';
 import type { Article } from '../types/article';
 import type { Block } from '../types/blocks';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -163,8 +163,8 @@ const sideBorders = css`
 			top: 0;
 			bottom: 0;
 			content: '';
-			border-left: 1px solid ${palette('--article-border')};
-			border-right: 1px solid ${palette('--article-border')};
+			border-left: 1px solid ${themePalette('--article-border')};
+			border-right: 1px solid ${themePalette('--article-border')};
 			left: -${grid.mobileColumnGap};
 			right: -${grid.mobileColumnGap};
 			${from.mobileLandscape} {
@@ -297,47 +297,55 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 								standfirst={frontendData.standfirst}
 							/>
 						</div>
-
-						<div css={articleBodyStyles}>
-							<ArticleContainer format={format}>
-								<ArticleBody
-									format={format}
-									blocks={blocks}
-									editionId={frontendData.editionId}
-									host={frontendData.config.host}
-									pageId={frontendData.pageId}
-									webTitle={frontendData.webTitle}
-									ajaxUrl={frontendData.config.ajaxUrl}
-									isAdFreeUser={frontendData.isAdFreeUser}
-									switches={frontendData.config.switches}
-									sectionId={frontendData.config.section}
-									shouldHideReaderRevenue={
-										frontendData.shouldHideReaderRevenue
-									}
-									tags={frontendData.tags}
-									isPaidContent={
-										!!frontendData.config.isPaidContent
-									}
-									contributionsServiceUrl={
-										contributionsServiceUrl
-									}
-									contentType={frontendData.contentType}
-									idUrl={frontendData.config.idUrl ?? ''}
-									isSensitive={
-										frontendData.config.isSensitive
-									}
-									isDev={!!frontendData.config.isDev}
-									keywordIds={frontendData.config.keywordIds}
-									abTests={frontendData.config.abTests}
-									shouldHideAds={frontendData.shouldHideAds}
-									lang={frontendData.lang}
-									isRightToLeftLang={
-										frontendData.isRightToLeftLang
-									}
-								/>
-								<HostedContentDisclaimer />
-							</ArticleContainer>
-						</div>
+						{branding && (
+							<div css={articleBodyStyles}>
+								<ArticleContainer format={format}>
+									<ArticleBody
+										format={format}
+										blocks={blocks}
+										editionId={frontendData.editionId}
+										host={frontendData.config.host}
+										pageId={frontendData.pageId}
+										webTitle={frontendData.webTitle}
+										ajaxUrl={frontendData.config.ajaxUrl}
+										isAdFreeUser={frontendData.isAdFreeUser}
+										switches={frontendData.config.switches}
+										sectionId={frontendData.config.section}
+										shouldHideReaderRevenue={
+											frontendData.shouldHideReaderRevenue
+										}
+										tags={frontendData.tags}
+										isPaidContent={
+											!!frontendData.config.isPaidContent
+										}
+										contributionsServiceUrl={
+											contributionsServiceUrl
+										}
+										contentType={frontendData.contentType}
+										idUrl={frontendData.config.idUrl ?? ''}
+										isSensitive={
+											frontendData.config.isSensitive
+										}
+										isDev={!!frontendData.config.isDev}
+										keywordIds={
+											frontendData.config.keywordIds
+										}
+										abTests={frontendData.config.abTests}
+										shouldHideAds={
+											frontendData.shouldHideAds
+										}
+										lang={frontendData.lang}
+										isRightToLeftLang={
+											frontendData.isRightToLeftLang
+										}
+										accentColor={
+											branding.hostedCampaignColour
+										}
+									/>
+									<HostedContentDisclaimer />
+								</ArticleContainer>
+							</div>
+						)}
 
 						<div css={onwardContentStyles}>
 							{'Placeholder - onward content'}
