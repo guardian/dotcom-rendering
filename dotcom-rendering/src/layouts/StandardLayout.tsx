@@ -476,6 +476,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				isInVariantGroup={applyFootballRedesign}
 				footballMatchHeaderUrl={footballMatchHeaderUrl}
 				editionId={editionId}
+				renderingTarget={renderingTarget}
 			/>
 
 			{isWeb && renderAds && hasSurveyAd && (
@@ -1156,11 +1157,13 @@ const MatchHeaderContainer = ({
 	isInVariantGroup,
 	footballMatchHeaderUrl,
 	editionId,
+	renderingTarget,
 }: {
 	isMatchReport: boolean;
 	isInVariantGroup: boolean;
 	footballMatchHeaderUrl: string | undefined;
 	editionId: EditionId;
+	renderingTarget: RenderingTarget;
 }) => {
 	if (isMatchReport && isInVariantGroup && !!footballMatchHeaderUrl) {
 		const parsedUrl = safeParseURL(footballMatchHeaderUrl);
@@ -1180,6 +1183,7 @@ const MatchHeaderContainer = ({
 					initialTab="report"
 					edition={editionId}
 					matchHeaderURL={footballMatchHeaderUrl}
+					renderingTarget={renderingTarget}
 				/>
 			</Island>
 		);

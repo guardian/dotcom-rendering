@@ -10,6 +10,7 @@ import {
 } from '../../frontend/feFootballMatchHeader';
 import { safeParseURL } from '../../lib/parse';
 import { error, fromValibot, ok, type Result } from '../../lib/result';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import type { Tabs } from './Tabs';
 
 export type HeaderData = {
@@ -19,7 +20,10 @@ export type HeaderData = {
 };
 
 export const parse =
-	(selected: HeaderData['tabs']['selected']) =>
+	(
+		selected: HeaderData['tabs']['selected'],
+		renderingTarget: RenderingTarget,
+	) =>
 	(json: unknown): Result<string, HeaderData> => {
 		const feData = fromValibot(
 			safeParse(feFootballMatchHeaderSchema, json),
@@ -39,6 +43,7 @@ export const parse =
 			selected,
 			feData.value,
 			parsedMatch.value.kind,
+			renderingTarget,
 		);
 
 		if (!maybeTabs.ok) {
@@ -58,10 +63,28 @@ type MatchURLError = {
 	kind: 'live' | 'report' | 'info';
 };
 
+const getInfoUrl = (
+	feData: FEFootballMatchHeader,
+	renderingTarget: RenderingTarget,
+): Result<MatchURLError, URL> => {
+	const parsedInfoURL = safeParseURL(feData.infoURL);
+
+	if (!parsedInfoURL.ok) {
+		return error({ kind: 'info' } as MatchURLError);
+	}
+
+	if (renderingTarget === 'Apps') {
+		return ok(new URL(feData.footballMatch.id, parsedInfoURL.value.origin));
+	}
+
+	return ok(parsedInfoURL.value);
+};
+
 const createTabs = (
 	selected: HeaderData['tabs']['selected'],
 	feData: FEFootballMatchHeader,
 	matchKind: FootballMatch['kind'],
+	renderingTarget: RenderingTarget,
 ): Result<MatchURLError, HeaderData['tabs']> => {
 	const reportURL =
 		feData.reportURL !== undefined
@@ -69,7 +92,7 @@ const createTabs = (
 			: undefined;
 	const liveURL =
 		feData.liveURL !== undefined ? safeParseURL(feData.liveURL) : undefined;
-	const infoURL = safeParseURL(feData.infoURL);
+	const infoURL = getInfoUrl(feData, renderingTarget);
 
 	if (reportURL !== undefined && !reportURL.ok) {
 		return error({ kind: 'report' });
@@ -82,6 +105,13 @@ const createTabs = (
 	if (!infoURL.ok) {
 		return error({ kind: 'info' });
 	}
+
+	console.log('test: ');
+	console.log({
+		reportURL: reportURL?.value,
+		infoURL: infoURL.value,
+		liveURL: liveURL?.value,
+	});
 
 	switch (selected) {
 		case 'info':

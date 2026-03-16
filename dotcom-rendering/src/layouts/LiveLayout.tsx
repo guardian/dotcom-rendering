@@ -395,6 +395,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									initialTab="live"
 									edition={article.editionId}
 									matchHeaderURL={footballMatchHeaderUrl}
+									renderingTarget={renderingTarget}
 								/>
 							</Island>
 						)
