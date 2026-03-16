@@ -40,19 +40,6 @@ interface FEPressedPage {
 /* This list of containers supported in DCR must be kept up to date with frontend **manually**.
  * @see https://github.com/guardian/frontend/blob/167dce23a8453ed13a97fbd23c7fc45ecb06e3fe/facia/app/services/dotcomrendering/FaciaPicker.scala#L21-L45 */
 export type FEContainer =
-	| 'fixed/large/slow-XIV'
-	| 'fixed/medium/fast-XI'
-	| 'fixed/medium/fast-XII'
-	| 'fixed/medium/slow-VI'
-	| 'fixed/medium/slow-VII'
-	| 'fixed/medium/slow-XII-mpu'
-	| 'fixed/small/fast-VIII'
-	| 'fixed/small/slow-I'
-	| 'fixed/small/slow-III'
-	| 'fixed/small/slow-IV'
-	| 'fixed/small/slow-V-half'
-	| 'fixed/small/slow-V-mpu'
-	| 'fixed/small/slow-V-third'
 	| 'fixed/thrasher'
 	| 'nav/list'
 	| 'nav/media-list'
