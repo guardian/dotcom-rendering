@@ -24,7 +24,7 @@ import {
 	handleFootballMatchListPage,
 	handleFootballMatchPage,
 	handleFootballTablesPage,
-} from './handler.sportDataPage.web';
+} from './handler.sportDataPage';
 import { handleAppsThrasher } from './handler.thrasher.apps';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { logger } from './lib/logging';

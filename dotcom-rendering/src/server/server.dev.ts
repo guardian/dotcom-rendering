@@ -23,7 +23,7 @@ import {
 	handleFootballMatchListPage,
 	handleFootballMatchPage,
 	handleFootballTablesPage,
-} from './handler.sportDataPage.web';
+} from './handler.sportDataPage';
 import { handleAppsThrasher } from './handler.thrasher.apps';
 import { getABTestsFromQueryParams } from './lib/get-abtests-from-query-params';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
