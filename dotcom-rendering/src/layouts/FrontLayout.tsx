@@ -448,9 +448,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									treats={collection.treats}
 									data-print-layout="hide"
 									hasPageSkin={hasPageSkin}
-									discussionApiUrl={
-										front.config.discussionApiUrl
-									}
 								>
 									<FrontMostViewed
 										displayName={collection.displayName}
@@ -513,19 +510,15 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collection,
 								)}
 								sectionId={ophanName}
-								collectionId={collection.id}
 								pageId={front.pressedPage.id}
 								showDateHeader={
 									collection.config.showDateHeader
 								}
 								editionId={front.editionId}
 								treats={collection.treats}
-								canShowMore={collection.canShowMore}
-								ajaxUrl={front.config.ajaxUrl}
 								isOnPaidContentFront={isPaidContent}
 								targetedTerritory={collection.targetedTerritory}
 								hasPageSkin={hasPageSkin}
-								discussionApiUrl={front.config.discussionApiUrl}
 								collectionBranding={
 									collection.collectionBranding
 								}

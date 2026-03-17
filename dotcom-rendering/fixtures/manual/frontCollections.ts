@@ -9,7 +9,7 @@ const defaultGrouped = {
 
 const defaultValues = {
 	backfill: [],
-	collectionType: 'fixed/small/slow-IV',
+	collectionType: 'static/medium/4',
 	config: {
 		showDateHeader: false,
 	},
@@ -35,13 +35,13 @@ export const testCollectionsUk = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		containerPalette: 'LongRunningAltPalette',
 		displayName: 'Ukraine invasion',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-V-mpu',
+		collectionType: 'static/medium/4',
 		displayName: 'News extra',
 	},
 	{
@@ -71,12 +71,12 @@ export const testCollectionsUk = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/medium/slow-VI',
+		collectionType: 'flexible/general',
 		displayName: 'Lifestyle',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/medium/slow-VII',
+		collectionType: 'flexible/general',
 		displayName: 'Culture',
 	},
 	{
@@ -91,7 +91,7 @@ export const testCollectionsUk = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		displayName: 'The rural network',
 	},
 	{
@@ -111,23 +111,23 @@ export const testCollectionsUk = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/medium/slow-VI',
+		collectionType: 'flexible/general',
 		displayName: 'Multimedia',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		containerPalette: 'Branded',
 		displayName: 'Guardian Labs',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/medium/slow-XII-mpu',
+		collectionType: 'flexible/general',
 		displayName: 'Explore',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-I',
+		collectionType: 'flexible/general',
 		displayName: 'The big picture',
 	},
 	{
@@ -162,7 +162,7 @@ export const testCollectionsUs = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		displayName: 'In depth',
 	},
 	{
@@ -172,13 +172,13 @@ export const testCollectionsUs = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		containerPalette: 'LongRunningAltPalette',
 		displayName: 'Ukraine invasion',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/medium/slow-VI',
+		collectionType: 'flexible/general',
 		displayName: 'Opinion',
 	},
 	{
@@ -193,7 +193,7 @@ export const testCollectionsUs = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		displayName: 'Climate crisis',
 	},
 	{
@@ -218,7 +218,7 @@ export const testCollectionsUs = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/medium/slow-VII',
+		collectionType: 'flexible/general',
 		displayName: 'Podcasts',
 	},
 	{
@@ -228,28 +228,28 @@ export const testCollectionsUs = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/medium/slow-VI',
+		collectionType: 'flexible/general',
 		displayName: 'Culture',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		containerPalette: 'Branded',
 		displayName: 'Business briefs',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/medium/slow-VI',
+		collectionType: 'flexible/general',
 		displayName: 'Lifestyle',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		displayName: 'Take part',
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/medium/slow-VI',
+		collectionType: 'flexible/general',
 		displayName: 'Explore',
 	},
 	{
@@ -259,7 +259,7 @@ export const testCollectionsUs = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/medium/slow-VI',
+		collectionType: 'flexible/general',
 		displayName: 'In pictures',
 	},
 	{
@@ -282,7 +282,7 @@ export const brandedTestCollections = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		containerPalette: 'Branded',
 		displayName: 'Guardian Labs',
 	},
@@ -293,7 +293,7 @@ export const brandedTestCollections = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		containerPalette: 'Branded',
 		displayName: 'Guardian Labs',
 	},
@@ -304,7 +304,7 @@ export const brandedTestCollections = [
 	},
 	{
 		...defaultValues,
-		collectionType: 'fixed/small/slow-IV',
+		collectionType: 'static/medium/4',
 		containerPalette: 'Branded',
 		displayName: 'Guardian Labs',
 	},

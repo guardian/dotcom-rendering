@@ -1,6 +1,5 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/highlights-trails';
 import {
 	audioTrails,
@@ -35,7 +34,6 @@ const meta = {
 	render: (args) => (
 		<FrontSection
 			title="Scrollable medium"
-			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
 			containerLevel="Secondary"
 			slimifySectionForSlimHomepageAbTest={
@@ -100,7 +98,6 @@ export const WithPrimaryContainer = {
 	render: (args) => (
 		<FrontSection
 			title="Scrollable medium"
-			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
 			containerLevel="Primary"
 		>
@@ -132,7 +129,6 @@ export const WithSpecialPaletteVariations = {
 			{containerPalettes.map((containerPalette) => (
 				<FrontSection
 					title={containerPalette}
-					discussionApiUrl={discussionApiUrl}
 					editionId="UK"
 					key={containerPalette}
 					containerPalette={containerPalette}
