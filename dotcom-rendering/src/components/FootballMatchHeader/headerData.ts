@@ -74,7 +74,8 @@ const getInfoUrl = (
 	}
 
 	if (renderingTarget === 'Apps') {
-		return ok(new URL(feData.footballMatch.id, parsedInfoURL.value.origin));
+		const path = `football/match/${feData.footballMatch.id}`;
+		return ok(new URL(path, parsedInfoURL.value.origin));
 	}
 
 	return ok(parsedInfoURL.value);
@@ -105,13 +106,6 @@ const createTabs = (
 	if (!infoURL.ok) {
 		return error({ kind: 'info' });
 	}
-
-	console.log('test: ');
-	console.log({
-		reportURL: reportURL?.value,
-		infoURL: infoURL.value,
-		liveURL: liveURL?.value,
-	});
 
 	switch (selected) {
 		case 'info':
