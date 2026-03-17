@@ -288,6 +288,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								hasPageSkinContentSelfConstrain={false}
 								pageId={article.pageId}
 							/>
+							{!!article.affiliateLinksDisclaimer && (
+								<AffiliateDisclaimer />
+							)}
 						</div>
 					) : (
 						// Else, this is a labs article so just show Nav and the Labs header
@@ -500,9 +503,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 													article.config.shortUrlId
 												}
 											/>
-											{!!article.affiliateLinksDisclaimer && (
-												<AffiliateDisclaimer />
-											)}
 										</Hide>
 									</>
 								) : (
@@ -530,9 +530,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 												article.config.shortUrlId
 											}
 										/>
-										{!!article.affiliateLinksDisclaimer && (
-											<AffiliateDisclaimer />
-										)}
 									</>
 								)}
 							</div>

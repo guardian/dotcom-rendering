@@ -215,13 +215,6 @@ export interface ContentAtomBlockElement {
 	atomId: string;
 }
 
-interface DisclaimerBlockElement {
-	_type: 'model.dotcomrendering.pageElements.DisclaimerBlockElement';
-	elementId: string;
-	html: string;
-	role?: RoleType;
-}
-
 export interface DividerBlockElement {
 	_type: 'model.dotcomrendering.pageElements.DividerBlockElement';
 	size?: 'full' | 'partial';
@@ -846,7 +839,6 @@ export type FEElement =
 	| CodeBlockElement
 	| CommentBlockElement
 	| ContentAtomBlockElement
-	| DisclaimerBlockElement
 	| DividerBlockElement
 	| DocumentBlockElement
 	| EmbedBlockElement

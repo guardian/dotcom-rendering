@@ -478,6 +478,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				<AdSlot position="survey" display={format.display} />
 			)}
 
+			{!!article.affiliateLinksDisclaimer && <AffiliateDisclaimer />}
+
 			<main data-layout="StandardLayout">
 				{isApps && renderAds && (
 					<Island priority="critical">
@@ -684,9 +686,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 												}
 											/>
 										</div>
-										{!!article.affiliateLinksDisclaimer && (
-											<AffiliateDisclaimer />
-										)}
 									</Hide>
 								</>
 							) : (
@@ -714,9 +713,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											article.mainMediaElements
 										}
 									/>
-									{!!article.affiliateLinksDisclaimer && (
-										<AffiliateDisclaimer />
-									)}
 								</div>
 							)}
 						</GridItem>

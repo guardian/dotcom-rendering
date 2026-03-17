@@ -431,6 +431,8 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 				<AdSlot position="survey" display={format.display} />
 			)}
 
+			{!!article.affiliateLinksDisclaimer && <AffiliateDisclaimer />}
+
 			<main data-layout="ImmersiveLayout">
 				{isApps && renderAds && (
 					<Island priority="critical">
@@ -615,9 +617,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 													article.config.shortUrlId
 												}
 											/>
-											{!!article.affiliateLinksDisclaimer && (
-												<AffiliateDisclaimer />
-											)}
 										</Hide>
 									</>
 								) : (
@@ -645,9 +644,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 												article.config.shortUrlId
 											}
 										/>
-										{!!article.affiliateLinksDisclaimer && (
-											<AffiliateDisclaimer />
-										)}
 									</>
 								)}
 							</div>

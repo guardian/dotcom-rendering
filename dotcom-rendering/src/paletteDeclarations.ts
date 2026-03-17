@@ -4797,30 +4797,13 @@ const affiliateDisclaimerBackgroundLight: PaletteFunction = ({ design }) => {
 };
 const affiliateDisclaimerBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
-const affiliateDisclaimerBackgroundHoverLight: PaletteFunction = ({
-	design,
-}) => {
-	return design === ArticleDesign.Analysis
-		? '#e9d9d5' //not available in colour palette. Check with design to update or change.
-		: sourcePalette.neutral[93];
-};
-const affiliateDisclaimerBackgroundHoverDark: PaletteFunction = () =>
-	sourcePalette.neutral[10];
 
 const affiliateDisclaimerTextLight: PaletteFunction = () => {
-	return sourcePalette.neutral[86];
+	return sourcePalette.neutral[38];
 };
 
 const affiliateDisclaimerTextDark: PaletteFunction = () => {
 	return sourcePalette.neutral[73];
-};
-
-const affiliateDisclaimerTextHoverLight: PaletteFunction = () => {
-	return sourcePalette.neutral[73];
-};
-
-const affiliateDisclaimerTextHoverDark: PaletteFunction = () => {
-	return sourcePalette.neutral[86];
 };
 
 const seriesTitleBackgroundLight: PaletteFunction = ({
@@ -6392,17 +6375,9 @@ const paletteColours = {
 		light: affiliateDisclaimerBackgroundLight,
 		dark: affiliateDisclaimerBackgroundDark,
 	},
-	'--affiliate-disclaimer-background-hover': {
-		light: affiliateDisclaimerBackgroundHoverLight,
-		dark: affiliateDisclaimerBackgroundHoverDark,
-	},
 	'--affiliate-disclaimer-text': {
 		light: affiliateDisclaimerTextLight,
 		dark: affiliateDisclaimerTextDark,
-	},
-	'--affiliate-disclaimer-text-hover': {
-		light: affiliateDisclaimerTextHoverLight,
-		dark: affiliateDisclaimerTextHoverDark,
 	},
 	'--age-warning-background': {
 		light: ageWarningBackgroundLight,

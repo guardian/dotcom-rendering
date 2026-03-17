@@ -205,6 +205,8 @@ export const AudioLayout = (props: WebProps) => {
 				<AdSlot position="survey" display={format.display} />
 			)}
 
+			{!!article.affiliateLinksDisclaimer && <AffiliateDisclaimer />}
+
 			<main data-layout="AudioLayout">
 				<Section
 					fullWidth={true}
@@ -271,9 +273,6 @@ export const AudioLayout = (props: WebProps) => {
 										article.mainMediaElements
 									}
 								/>
-								{!!article.affiliateLinksDisclaimer && (
-									<AffiliateDisclaimer />
-								)}
 							</div>
 						</GridItem>
 						<GridItem area="media">
