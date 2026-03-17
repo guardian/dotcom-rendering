@@ -493,6 +493,12 @@ export const CollapsableWithThreeTierChoiceCardsMaybeLaterVariantDefaultExpanded
 						? { ...c, isDefault: false, defaultExpanded: true }
 						: { ...c, isDefault: false },
 				),
+				mobileChoiceCards: choiceCardsSettings.mobileChoiceCards?.map(
+					(c) =>
+						c.product.supportTier === 'SupporterPlus'
+							? { ...c, isDefault: false, defaultExpanded: true }
+							: { ...c, isDefault: false },
+				),
 			},
 		},
 	};
@@ -513,6 +519,13 @@ export const CollapsableWithThreeTierChoiceCardsNoneSelectedNoneExpanded: Story 
 					isDefault: false,
 					defaultExpanded: false,
 				})),
+				mobileChoiceCards: choiceCardsSettings.mobileChoiceCards?.map(
+					(c) => ({
+						...c,
+						isDefault: false,
+						defaultExpanded: false,
+					}),
+				),
 			},
 		},
 	};

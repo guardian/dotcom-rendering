@@ -327,6 +327,12 @@ export const WithThreeTierChoiceCardsDefaultExpanded: Story = {
 						? { ...c, isDefault: false, defaultExpanded: true }
 						: { ...c, isDefault: false },
 				),
+				mobileChoiceCards: choiceCardsSettings.mobileChoiceCards?.map(
+					(c) =>
+						c.product.supportTier === 'SupporterPlus'
+							? { ...c, isDefault: false, defaultExpanded: true }
+							: { ...c, isDefault: false },
+				),
 			},
 		},
 	},
@@ -442,6 +448,17 @@ export const WithThreeTierChoiceCardsAndMixedDestinationsDefaultExpanded: Story 
 								  }
 								: { ...c, isDefault: false },
 						),
+					mobileChoiceCards:
+						choiceCardsWithMixedDestinations.mobileChoiceCards?.map(
+							(c) =>
+								c.product.supportTier === 'SupporterPlus'
+									? {
+											...c,
+											isDefault: false,
+											defaultExpanded: true,
+									  }
+									: { ...c, isDefault: false },
+						),
 				},
 			},
 		},
@@ -465,6 +482,14 @@ export const WithThreeTierChoiceCardsNoneSelectedNoneExpanded: Story = {
 						defaultExpanded: false,
 					}),
 				),
+				mobileChoiceCards:
+					choiceCardsWithMixedDestinations.mobileChoiceCards?.map(
+						(c) => ({
+							...c,
+							isDefault: false,
+							defaultExpanded: false,
+						}),
+					),
 			},
 		},
 	},
