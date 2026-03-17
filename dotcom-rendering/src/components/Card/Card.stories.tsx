@@ -1555,8 +1555,7 @@ export const WithSpecialPaletteVariations = () => {
 			{containerPalettes.map((containerPalette) => (
 				<FrontSection
 					title={containerPalette}
-					discussionApiUrl=""
-					editionId={'UK'}
+					editionId="UK"
 					containerPalette={containerPalette}
 					key={containerPalette}
 					isLabs={containerPalette === 'Branded'}

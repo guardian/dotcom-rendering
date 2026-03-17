@@ -45,7 +45,19 @@ export const hostedVideo: FEArticle = {
 	blocks: [
 		{
 			id: '5b7f28b7e4b0b69fd6c54fb0',
-			elements: [],
+			elements: [
+				{
+					_type: 'model.dotcomrendering.pageElements.CallToActionAtomBlockElement',
+					trackingCode: 'WASI-1',
+					url: 'https://www.wearestillin.com/contribute',
+					image: 'https://media.guim.co.uk/ff5fc7b83674d49054ce29f138bb3e851835233e/0_307_4867_2921/4867.jpg',
+					label: 'America is still in. Are you?',
+					elementId: 'e8e8b0a7-3dd8-43dc-ab01-a3f782bd95e4',
+					title: 'We Are Still In (1st CTA)',
+					btnText: 'Commit to climate action',
+					id: 'fd0fc947-f32c-4d71-a59a-ebddd49c3167',
+				},
+			],
 			attributes: { pinned: false, keyEvent: false, summary: false },
 			blockCreatedOn: 1535552321000,
 			blockCreatedOnDisplay: '15.18 BST',
