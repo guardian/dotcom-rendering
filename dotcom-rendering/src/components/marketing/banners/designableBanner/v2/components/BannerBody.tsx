@@ -41,7 +41,8 @@ export const BannerBody = ({
 }: {
 	bannerData: BannerData;
 }): JSX.Element | null => {
-	const textColour = bannerData.settings.containerSettings.textColor ?? '';
+	const textColour =
+		bannerData.settings.highlightedTextSettings.textColour ?? '';
 	const highlightColour =
 		bannerData.settings.highlightedTextSettings.highlightColour;
 
