@@ -21,8 +21,9 @@ import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
-import { palette } from '../palette';
+import { palette as themePalette } from '../palette';
 import type { Article } from '../types/article';
+import type { Block } from '../types/blocks';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { Stuck } from './lib/stickiness';
 
@@ -162,8 +163,8 @@ const sideBorders = css`
 			top: 0;
 			bottom: 0;
 			content: '';
-			border-left: 1px solid ${palette('--article-border')};
-			border-right: 1px solid ${palette('--article-border')};
+			border-left: 1px solid ${themePalette('--article-border')};
+			border-right: 1px solid ${themePalette('--article-border')};
 			left: -${grid.mobileColumnGap};
 			right: -${grid.mobileColumnGap};
 			${from.mobileLandscape} {
@@ -191,6 +192,23 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 
 	const { branding } =
 		frontendData.commercialProperties[frontendData.editionId];
+
+	//The CTA block element is rendered separately at the end of the article body because otherwise we won't be able to have it at the end of the page.
+	const cta = frontendData.blocks[0]?.elements.find(
+		(element) =>
+			element._type ===
+			'model.dotcomrendering.pageElements.CallToActionAtomBlockElement',
+	);
+
+	//We need to remove the CTA block element from the blocks that are rendered in the article body, otherwise it will be rendered twice.
+	const blocks: Block[] = frontendData.blocks.map((block) => ({
+		...block,
+		elements: block.elements.filter(
+			(element) =>
+				element._type !==
+				'model.dotcomrendering.pageElements.CallToActionAtomBlockElement',
+		),
+	}));
 
 	return (
 		<>
@@ -279,12 +297,11 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 								standfirst={frontendData.standfirst}
 							/>
 						</div>
-
 						<div css={articleBodyStyles}>
 							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}
-									blocks={frontendData.blocks}
+									blocks={blocks}
 									editionId={frontendData.editionId}
 									host={frontendData.config.host}
 									pageId={frontendData.pageId}
@@ -316,6 +333,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 									isRightToLeftLang={
 										frontendData.isRightToLeftLang
 									}
+									accentColor={branding?.hostedCampaignColour}
 								/>
 								<HostedContentDisclaimer />
 							</ArticleContainer>
@@ -325,14 +343,16 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 							{'Placeholder - onward content'}
 						</div>
 
-						<div css={ctaStyles}>
-							<CallToActionAtom
-								linkUrl="https://safety.epicgames.com/en-US?lang=en-US"
-								backgroundImage="https://media.guim.co.uk/7fe58f11470360bc9f1e4b6bbcbf45d7cf06cfcf/0_0_1300_375/1300.jpg"
-								text="This is a call to action text"
-								buttonText="Learn more"
-							/>
-						</div>
+						{cta && (
+							<div css={ctaStyles}>
+								<CallToActionAtom
+									linkUrl={cta.url}
+									backgroundImage={cta.image}
+									text={cta.label}
+									buttonText={cta.btnText}
+								/>
+							</div>
+						)}
 					</div>
 				</article>
 			</main>

@@ -162,7 +162,6 @@ const meta = {
 	render: ({ frontSectionTitle, ...args }) => (
 		<FrontSection
 			title={frontSectionTitle}
-			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
 			showTopBorder={true}
 			slimifySectionForSlimHomepageAbTest={
@@ -218,12 +217,7 @@ export const SplashWithSublinks: Story = {
 			title: string;
 			supportingContent?: DCRSupportingContent[];
 		}) => (
-			<FrontSection
-				title={title}
-				discussionApiUrl={discussionApiUrl}
-				editionId="UK"
-				showTopBorder={true}
-			>
+			<FrontSection title={title} editionId="UK" showTopBorder={true}>
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
@@ -313,12 +307,7 @@ export const SplashBoostLevels: Story = {
 			title: string;
 			boostLevel?: BoostLevel;
 		}) => (
-			<FrontSection
-				title={title}
-				discussionApiUrl={discussionApiUrl}
-				editionId="UK"
-				showTopBorder={true}
-			>
+			<FrontSection title={title} editionId="UK" showTopBorder={true}>
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
@@ -362,12 +351,7 @@ export const SplashWithImageSupression: Story = {
 			title: string;
 			boostLevel?: BoostLevel;
 		}) => (
-			<FrontSection
-				title={title}
-				discussionApiUrl={discussionApiUrl}
-				editionId="UK"
-				showTopBorder={true}
-			>
+			<FrontSection title={title} editionId="UK" showTopBorder={true}>
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
@@ -402,12 +386,7 @@ export const SplashWithLiveUpdates: Story = {
 			title: string;
 			boostLevel?: BoostLevel;
 		}) => (
-			<FrontSection
-				title={title}
-				discussionApiUrl={discussionApiUrl}
-				editionId="UK"
-				showTopBorder={true}
-			>
+			<FrontSection title={title} editionId="UK" showTopBorder={true}>
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
@@ -440,12 +419,7 @@ export const StandardBoostedWithLiveUpdates: Story = {
 			title: string;
 			boostLevel: BoostLevel;
 		}) => (
-			<FrontSection
-				title={title}
-				discussionApiUrl={discussionApiUrl}
-				editionId="UK"
-				showTopBorder={true}
-			>
+			<FrontSection title={title} editionId="UK" showTopBorder={true}>
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{
@@ -523,8 +497,7 @@ export const WithSpecialPaletteVariations = {
 		<>
 			{containerPalettes.map((containerPalette) => (
 				<FrontSection
-					discussionApiUrl={discussionApiUrl}
-					editionId={'UK'}
+					editionId="UK"
 					showTopBorder={true}
 					containerPalette={containerPalette}
 					key={containerPalette}
@@ -578,12 +551,7 @@ export const SelfHostedVideoCardsInSplashSlots: Story = {
 			video: DCRFrontCard;
 			boostLevel?: BoostLevel;
 		}) => (
-			<FrontSection
-				title={title}
-				discussionApiUrl={discussionApiUrl}
-				editionId="UK"
-				showTopBorder={true}
-			>
+			<FrontSection title={title} editionId="UK" showTopBorder={true}>
 				<FlexibleGeneral
 					{...args}
 					groupedTrails={{

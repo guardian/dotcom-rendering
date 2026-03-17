@@ -128,11 +128,7 @@ export const BannerChoiceCards = ({
 }: {
 	bannerData: BannerData;
 }): JSX.Element | null => {
-	if (
-		!bannerData.selectors.showChoiceCardCtas ||
-		!bannerData.selectedChoiceCard ||
-		!bannerData.choices
-	) {
+	if (!bannerData.selectors.showChoiceCardCtas || !bannerData.choices) {
 		return null;
 	}
 
@@ -165,9 +161,9 @@ export const BannerChoiceCards = ({
 			>
 				<LinkButton
 					href={enrichSupportUrl({
-						baseUrl: getChoiceCardUrl(
-							bannerData.selectedChoiceCard,
-						),
+						baseUrl: bannerData.selectedChoiceCard
+							? getChoiceCardUrl(bannerData.selectedChoiceCard)
+							: copyForViewport.primaryCta?.ctaUrl ?? '',
 						tracking: bannerData.tracking,
 						promoCodes: bannerData.promoCodes ?? [],
 						countryCode: bannerData.countryCode,
