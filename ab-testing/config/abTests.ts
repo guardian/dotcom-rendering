@@ -146,19 +146,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "commercial-mobile-sticky",
-		description:
-			"Testing restricting launch of the mobile-sticky to certain conditions",
-		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-03-31",
-		type: "client",
-		status: "ON",
-		audienceSize: 10 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "commercial-hosted-content",
 		description: "Preview the Hosted Content pages using dotcom-rendering",
 		owners: ["commercial.dev@guardian.co.uk"],
