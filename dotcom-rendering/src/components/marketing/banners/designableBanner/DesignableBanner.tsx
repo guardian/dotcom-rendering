@@ -391,7 +391,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 					</div>
 				)}
 
-				{!selectedChoiceCard && (
+				{!choiceCards && (
 					<div css={styles.outerImageCtaContainer}>
 						<div css={styles.innerImageCtaContainer}>
 							<DesignableBannerCtas
@@ -465,80 +465,73 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 					)}
 				</div>
 
-				{choiceCards &&
-					selectedChoiceCard &&
-					mainOrMobileContent.primaryCta && (
-						<div css={styles.threeTierChoiceCardsContainer}>
-							{(!isCollapsableBanner || !isCollapsed) && (
-								<ThreeTierChoiceCards
-									selectedChoiceCard={selectedChoiceCard}
-									setSelectedChoiceCard={
-										setSelectedChoiceCard
-									}
-									choices={choiceCards}
-									id={'banner'}
-									submitComponentEvent={submitComponentEvent}
-									choiceCardDesignSettings={
-										choiceCardSettings
-									}
-								/>
+				{choiceCards && mainOrMobileContent.primaryCta && (
+					<div css={styles.threeTierChoiceCardsContainer}>
+						{(!isCollapsableBanner || !isCollapsed) && (
+							<ThreeTierChoiceCards
+								selectedChoiceCard={selectedChoiceCard}
+								setSelectedChoiceCard={setSelectedChoiceCard}
+								choices={choiceCards}
+								id={'banner'}
+								submitComponentEvent={submitComponentEvent}
+								choiceCardDesignSettings={choiceCardSettings}
+							/>
+						)}
+						<div
+							css={styles.ctaContainer(
+								isCollapsed,
+								templateSettings.containerSettings
+									.backgroundColour,
 							)}
-							<div
-								css={styles.ctaContainer(
-									isCollapsed,
-									templateSettings.containerSettings
-										.backgroundColour,
+						>
+							<LinkButton
+								href={enrichSupportUrl({
+									baseUrl: selectedChoiceCard
+										? getChoiceCardUrl(selectedChoiceCard)
+										: mainOrMobileContent.primaryCta.ctaUrl,
+									tracking,
+									promoCodes: promoCodes ?? [],
+									countryCode,
+								})}
+								onClick={onCtaClick}
+								priority="primary"
+								cssOverrides={[styles.linkButtonStyles]}
+								theme={buttonThemes(
+									templateSettings.primaryCtaSettings,
+									'primary',
 								)}
+								icon={<SvgArrowRightStraight />}
+								iconSide="right"
+								target="_blank"
+								rel="noopener noreferrer"
 							>
-								<LinkButton
-									href={enrichSupportUrl({
-										baseUrl:
-											getChoiceCardUrl(
-												selectedChoiceCard,
-											),
-										tracking,
-										promoCodes: promoCodes ?? [],
-										countryCode,
-									})}
-									onClick={onCtaClick}
-									priority="primary"
-									cssOverrides={[styles.linkButtonStyles]}
-									theme={buttonThemes(
-										templateSettings.primaryCtaSettings,
-										'primary',
-									)}
-									icon={<SvgArrowRightStraight />}
-									iconSide="right"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									{isCollapsed
-										? mainOrMobileContent.primaryCta.ctaText
-										: 'Continue'}
-								</LinkButton>
-								{isCollapsed && (
-									<div css={styles.maybeLaterButtonSizing}>
-										<Button
-											onClick={onCloseClick}
-											priority="tertiary"
-											cssOverrides={[
-												buttonStyles(
-													templateSettings.secondaryCtaSettings,
-												),
-												styles.maybeLaterButton,
-											]}
-											theme={buttonThemes(
+								{isCollapsed
+									? mainOrMobileContent.primaryCta.ctaText
+									: 'Continue'}
+							</LinkButton>
+							{isCollapsed && (
+								<div css={styles.maybeLaterButtonSizing}>
+									<Button
+										onClick={onCloseClick}
+										priority="tertiary"
+										cssOverrides={[
+											buttonStyles(
 												templateSettings.secondaryCtaSettings,
-												'tertiary',
-											)}
-										>
-											Maybe later
-										</Button>
-									</div>
-								)}
-							</div>
+											),
+											styles.maybeLaterButton,
+										]}
+										theme={buttonThemes(
+											templateSettings.secondaryCtaSettings,
+											'tertiary',
+										)}
+									>
+										Maybe later
+									</Button>
+								</div>
+							)}
 						</div>
-					)}
+					</div>
+				)}
 			</div>
 		</div>
 	);
