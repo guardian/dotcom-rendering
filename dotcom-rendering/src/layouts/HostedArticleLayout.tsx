@@ -297,55 +297,47 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 								standfirst={frontendData.standfirst}
 							/>
 						</div>
-						{branding && (
-							<div css={articleBodyStyles}>
-								<ArticleContainer format={format}>
-									<ArticleBody
-										format={format}
-										blocks={blocks}
-										editionId={frontendData.editionId}
-										host={frontendData.config.host}
-										pageId={frontendData.pageId}
-										webTitle={frontendData.webTitle}
-										ajaxUrl={frontendData.config.ajaxUrl}
-										isAdFreeUser={frontendData.isAdFreeUser}
-										switches={frontendData.config.switches}
-										sectionId={frontendData.config.section}
-										shouldHideReaderRevenue={
-											frontendData.shouldHideReaderRevenue
-										}
-										tags={frontendData.tags}
-										isPaidContent={
-											!!frontendData.config.isPaidContent
-										}
-										contributionsServiceUrl={
-											contributionsServiceUrl
-										}
-										contentType={frontendData.contentType}
-										idUrl={frontendData.config.idUrl ?? ''}
-										isSensitive={
-											frontendData.config.isSensitive
-										}
-										isDev={!!frontendData.config.isDev}
-										keywordIds={
-											frontendData.config.keywordIds
-										}
-										abTests={frontendData.config.abTests}
-										shouldHideAds={
-											frontendData.shouldHideAds
-										}
-										lang={frontendData.lang}
-										isRightToLeftLang={
-											frontendData.isRightToLeftLang
-										}
-										accentColor={
-											branding.hostedCampaignColour
-										}
-									/>
-									<HostedContentDisclaimer />
-								</ArticleContainer>
-							</div>
-						)}
+						<div css={articleBodyStyles}>
+							<ArticleContainer format={format}>
+								<ArticleBody
+									format={format}
+									blocks={blocks}
+									editionId={frontendData.editionId}
+									host={frontendData.config.host}
+									pageId={frontendData.pageId}
+									webTitle={frontendData.webTitle}
+									ajaxUrl={frontendData.config.ajaxUrl}
+									isAdFreeUser={frontendData.isAdFreeUser}
+									switches={frontendData.config.switches}
+									sectionId={frontendData.config.section}
+									shouldHideReaderRevenue={
+										frontendData.shouldHideReaderRevenue
+									}
+									tags={frontendData.tags}
+									isPaidContent={
+										!!frontendData.config.isPaidContent
+									}
+									contributionsServiceUrl={
+										contributionsServiceUrl
+									}
+									contentType={frontendData.contentType}
+									idUrl={frontendData.config.idUrl ?? ''}
+									isSensitive={
+										frontendData.config.isSensitive
+									}
+									isDev={!!frontendData.config.isDev}
+									keywordIds={frontendData.config.keywordIds}
+									abTests={frontendData.config.abTests}
+									shouldHideAds={frontendData.shouldHideAds}
+									lang={frontendData.lang}
+									isRightToLeftLang={
+										frontendData.isRightToLeftLang
+									}
+									accentColor={branding?.hostedCampaignColour}
+								/>
+								<HostedContentDisclaimer />
+							</ArticleContainer>
+						</div>
 
 						<div css={onwardContentStyles}>
 							{'Placeholder - onward content'}

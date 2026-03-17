@@ -51,9 +51,11 @@ export const Apps = {
 	},
 } satisfies Story;
 
+const webHostedArticle = enhanceArticleType(hostedArticle, 'Web');
+
 export const Web = {
 	args: {
-		content: enhanceArticleType(hostedArticle, 'Web'),
+		content: webHostedArticle,
 		format,
 		renderingTarget: 'Web',
 	},
@@ -67,19 +69,18 @@ export const Web = {
 export const WithoutAccentColour = {
 	args: {
 		content: {
-			...enhanceArticleType(hostedArticle, 'Web'),
+			...webHostedArticle,
 			frontendData: {
-				...enhanceArticleType(hostedArticle, 'Web').frontendData,
+				...webHostedArticle.frontendData,
 				commercialProperties: {
-					...enhanceArticleType(hostedArticle, 'Web').frontendData
-						.commercialProperties,
+					...webHostedArticle.frontendData.commercialProperties,
 					UK: {
-						...enhanceArticleType(hostedArticle, 'Web').frontendData
-							.commercialProperties.UK,
+						...webHostedArticle.frontendData.commercialProperties
+							.UK,
 
 						branding: {
-							...enhanceArticleType(hostedArticle, 'Web')
-								.frontendData.commercialProperties.UK.branding,
+							...webHostedArticle.frontendData
+								.commercialProperties.UK.branding,
 							hostedCampaignColour: undefined,
 						} as Branding,
 					},
