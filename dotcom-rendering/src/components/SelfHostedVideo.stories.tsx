@@ -1,4 +1,4 @@
-import { breakpoints } from '@guardian/source/foundations';
+import { breakpoints, textSans17Object } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { expect, userEvent, within } from 'storybook/test';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
@@ -8,7 +8,22 @@ const meta = {
 	component: SelfHostedVideo,
 	title: 'Components/SelfHostedVideo',
 	decorators: [centreColumnDecorator],
-	render: (args) => <SelfHostedVideo {...args} />,
+	render: (args) => (
+		<div
+			style={{
+				display: 'flex',
+				flexDirection: 'column',
+				gap: '20px',
+				marginTop: '20px',
+			}}
+		>
+			<p style={{ ...textSans17Object }}>
+				Note: If the video is not playing, you may need to remove
+				crossOrigin="anonymous" from the video element
+			</p>
+			<SelfHostedVideo {...args} />,
+		</div>
+	),
 	parameters: {
 		chromatic: {
 			viewports: [breakpoints.mobile, breakpoints.wide],
