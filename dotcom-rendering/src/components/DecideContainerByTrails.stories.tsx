@@ -1,5 +1,4 @@
 import { breakpoints } from '@guardian/source/foundations';
-import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
 	multipleBrandedTrails,
 	singleBrandedTrails,
@@ -26,11 +25,7 @@ const ASPECT_RATIO = '5:4';
 
 export const OneCardFast = () => {
 	return (
-		<FrontSection
-			title="Fast - One card"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
+		<FrontSection title="Fast - One card" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 1)}
 				speed="fast"
@@ -44,11 +39,7 @@ OneCardFast.storyName = 'Fast - One card';
 
 export const TwoCardFast = () => {
 	return (
-		<FrontSection
-			title="Fast - Two cards"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
+		<FrontSection title="Fast - Two cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 2)}
 				speed="fast"
@@ -62,11 +53,7 @@ TwoCardFast.storyName = 'Fast - Two cards';
 
 export const ThreeCardFast = () => {
 	return (
-		<FrontSection
-			title="Fast - Three cards"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
+		<FrontSection title="Fast - Three cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 3)}
 				speed="fast"
@@ -80,11 +67,7 @@ ThreeCardFast.storyName = 'Fast - Three cards';
 
 export const FourCardFast = () => {
 	return (
-		<FrontSection
-			title="Fast - Four cards"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
+		<FrontSection title="Fast - Four cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 4)}
 				speed="fast"
@@ -98,11 +81,7 @@ FourCardFast.storyName = 'Fast - Four cards';
 
 export const FiveCardFast = () => {
 	return (
-		<FrontSection
-			title="Fast - Five cards"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
+		<FrontSection title="Fast - Five cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 5)}
 				speed="fast"
@@ -116,11 +95,7 @@ FiveCardFast.storyName = 'Fast - Five cards';
 
 export const SixCardFast = () => {
 	return (
-		<FrontSection
-			title="Fast - Six cards"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
+		<FrontSection title="Fast - Six cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 6)}
 				speed="fast"
@@ -134,11 +109,7 @@ SixCardFast.storyName = 'Fast - Six cards';
 
 export const SevenCardFast = () => {
 	return (
-		<FrontSection
-			title="Fast - Seven cards"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
+		<FrontSection title="Fast - Seven cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 7)}
 				speed="fast"
@@ -152,11 +123,7 @@ SevenCardFast.storyName = 'Fast - Seven cards';
 
 export const EightCardFast = () => {
 	return (
-		<FrontSection
-			title="Fast - Eight cards"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
+		<FrontSection title="Fast - Eight cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 8)}
 				speed="fast"
@@ -171,11 +138,7 @@ EightCardFast.storyName = 'Fast - Eight cards';
 
 export const TwelveCardFast = () => {
 	return (
-		<FrontSection
-			title="Fast - Twelve cards"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
+		<FrontSection title="Fast - Twelve cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 12)}
 				speed="fast"
@@ -189,11 +152,7 @@ TwelveCardFast.storyName = 'Fast - Twelve cards';
 
 export const OneCardSlow = () => {
 	return (
-		<FrontSection
-			title="Slow - One card"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
+		<FrontSection title="Slow - One card" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 1)}
 				speed="slow"
@@ -207,11 +166,7 @@ OneCardSlow.storyName = 'Slow - One card';
 
 export const TwoCardSlow = () => {
 	return (
-		<FrontSection
-			title="Slow - Two cards"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
+		<FrontSection title="Slow - Two cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 2)}
 				speed="slow"
@@ -225,11 +180,7 @@ TwoCardSlow.storyName = 'Slow - Two cards';
 
 export const ThreeCardSlow = () => {
 	return (
-		<FrontSection
-			title="Slow - Three cards"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
+		<FrontSection title="Slow - Three cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 3)}
 				speed="slow"
@@ -243,11 +194,7 @@ ThreeCardSlow.storyName = 'Slow - Three cards';
 
 export const FourCardSlow = () => {
 	return (
-		<FrontSection
-			title="Slow - Four cards"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
+		<FrontSection title="Slow - Four cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 4)}
 				speed="slow"
@@ -261,11 +208,7 @@ FourCardSlow.storyName = 'Slow - Four cards';
 
 export const FiveCardSlow = () => {
 	return (
-		<FrontSection
-			title="Slow - Five cards"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
+		<FrontSection title="Slow - Five cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 5)}
 				speed="slow"
@@ -279,11 +222,7 @@ FiveCardSlow.storyName = 'Slow - Five cards';
 
 export const SixCardSlow = () => {
 	return (
-		<FrontSection
-			title="Slow - Six cards"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
+		<FrontSection title="Slow - Six cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 6)}
 				speed="slow"
@@ -297,11 +236,7 @@ SixCardSlow.storyName = 'Slow - Six cards';
 
 export const SevenCardSlow = () => {
 	return (
-		<FrontSection
-			title="Slow - Seven cards"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
+		<FrontSection title="Slow - Seven cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 7)}
 				speed="slow"
@@ -315,11 +250,7 @@ SevenCardSlow.storyName = 'Slow - Seven cards';
 
 export const EightCardSlow = () => {
 	return (
-		<FrontSection
-			title="Slow - Eight cards"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
+		<FrontSection title="Slow - Eight cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 8)}
 				speed="slow"
@@ -334,11 +265,7 @@ EightCardSlow.storyName = 'Slow - Eight cards';
 
 export const TwelveCardSlow = () => {
 	return (
-		<FrontSection
-			title="Slow - Twelve cards"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
+		<FrontSection title="Slow - Twelve cards" editionId="UK">
 			<DecideContainerByTrails
 				trails={trails.slice(0, 12)}
 				speed="slow"
@@ -354,8 +281,7 @@ export const FiveCardWithSingleBranding = () => {
 	return (
 		<FrontSection
 			title="Five cards with single branding"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
+			editionId="UK"
 			collectionBranding={{
 				kind: 'paid-content',
 				isFrontBranding: false,
@@ -394,11 +320,7 @@ FiveCardWithSingleBranding.storyName = 'Five cards with single branding';
 
 export const FiveCardWithMultipleBranding = () => {
 	return (
-		<FrontSection
-			title="Five cards with multiple branding"
-			discussionApiUrl={discussionApiUrl}
-			editionId={'UK'}
-		>
+		<FrontSection title="Five cards with multiple branding" editionId="UK">
 			<DecideContainerByTrails
 				trails={multipleBrandedTrails}
 				speed="fast"

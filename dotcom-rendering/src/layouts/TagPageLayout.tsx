@@ -193,19 +193,14 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								toggleable={false}
 								pageId={tagPage.pageId}
 								editionId={tagPage.editionId}
-								canShowMore={false}
-								ajaxUrl={tagPage.config.ajaxUrl}
 								pagination={tagPagePagination}
-								discussionApiUrl={
-									tagPage.config.discussionApiUrl
-								}
 							>
 								<DecideContainerByTrails
 									trails={groupedTrails.trails}
 									speed={tagPage.speed}
 									imageLoading={imageLoading}
 									isTagPage={true}
-									aspectRatio={'5:4'}
+									aspectRatio="5:4"
 								/>
 							</FrontSection>
 							{insertStorylinesSection &&

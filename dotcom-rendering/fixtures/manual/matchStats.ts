@@ -14,6 +14,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '519035',
 				name: 'Ann-Katrin Berger',
+				lastName: 'Berger',
 				substitute: false,
 				shirtNumber: 1,
 				events: [],
@@ -21,6 +22,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '671576',
 				name: 'Carlotta Wamser',
+				lastName: 'Wamser',
 				substitute: false,
 				shirtNumber: 5,
 				events: [],
@@ -28,6 +30,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '669621',
 				name: 'Janina Minge',
+				lastName: 'Minge',
 				substitute: false,
 				shirtNumber: 6,
 				events: [],
@@ -35,6 +38,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '537641',
 				name: 'Rebecca Knaak',
+				lastName: 'Knaak',
 				substitute: false,
 				shirtNumber: 4,
 				events: [
@@ -47,6 +51,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '642145',
 				name: 'Sarai Linder',
+				lastName: 'Linder',
 				substitute: false,
 				shirtNumber: 2,
 				events: [],
@@ -54,6 +59,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '673131',
 				name: 'Elisa Senss',
+				lastName: 'Senss',
 				substitute: false,
 				shirtNumber: 20,
 				events: [],
@@ -61,6 +67,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '664723',
 				name: 'Sjoeke Nusken',
+				lastName: 'Nusken',
 				substitute: false,
 				shirtNumber: 9,
 				events: [],
@@ -68,6 +75,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '642149',
 				name: 'Jule Brand',
+				lastName: 'Brand',
 				substitute: false,
 				shirtNumber: 22,
 				events: [],
@@ -75,6 +83,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '465927',
 				name: 'Linda Dallmann',
+				lastName: 'Dallmann',
 				substitute: false,
 				shirtNumber: 16,
 				events: [],
@@ -82,6 +91,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '613923',
 				name: 'Klara Buehl',
+				lastName: 'Buehl',
 				substitute: false,
 				shirtNumber: 19,
 				events: [],
@@ -89,6 +99,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '613921',
 				name: 'Lea Schuller',
+				lastName: 'Schuller',
 				substitute: false,
 				shirtNumber: 11,
 				events: [],
@@ -96,6 +107,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '664721',
 				name: 'Stina Johannes',
+				lastName: 'Johannes',
 				substitute: true,
 				shirtNumber: 12,
 				events: [],
@@ -103,6 +115,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '404997',
 				name: 'Kathrin-Julia Hendrich',
+				lastName: 'Hendrich',
 				substitute: true,
 				shirtNumber: 3,
 				events: [
@@ -115,6 +128,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '628694',
 				name: 'Sydney Lohmann',
+				lastName: 'Lohmann',
 				substitute: true,
 				shirtNumber: 8,
 				events: [],
@@ -122,6 +136,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '653596',
 				name: 'Laura Freigang',
+				lastName: 'Freigang',
 				substitute: true,
 				shirtNumber: 10,
 				events: [
@@ -134,6 +149,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '512230',
 				name: 'Sara Dabritz',
+				lastName: 'Dabritz',
 				substitute: true,
 				shirtNumber: 13,
 				events: [],
@@ -141,6 +157,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '688664',
 				name: 'Cora Zicai',
+				lastName: 'Zicai',
 				substitute: true,
 				shirtNumber: 14,
 				events: [
@@ -153,6 +170,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '683596',
 				name: 'Selina Cerci',
+				lastName: 'Cerci',
 				substitute: true,
 				shirtNumber: 15,
 				events: [],
@@ -160,6 +178,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '650041',
 				name: 'Franziska Kett',
+				lastName: 'Kett',
 				substitute: true,
 				shirtNumber: 17,
 				events: [],
@@ -167,6 +186,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '683597',
 				name: 'Giovanna Hoffmann',
+				lastName: 'Hoffmann',
 				substitute: true,
 				shirtNumber: 18,
 				events: [
@@ -179,6 +199,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '653595',
 				name: 'Sophia Kleinherne',
+				lastName: 'Kleinherne',
 				substitute: true,
 				shirtNumber: 23,
 				events: [],
@@ -186,6 +207,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '664722',
 				name: 'Ena Mahmutovic',
+				lastName: 'Mahmutovic',
 				substitute: true,
 				shirtNumber: 21,
 				events: [],
@@ -206,6 +228,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '664928',
 				name: 'Maja Bay',
+				lastName: 'Bay',
 				substitute: false,
 				shirtNumber: 1,
 				events: [],
@@ -213,6 +236,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '642239',
 				name: 'Emma Faerge',
+				lastName: 'Faerge',
 				substitute: false,
 				shirtNumber: 4,
 				events: [],
@@ -220,6 +244,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '653587',
 				name: 'Stine Ballisager',
+				lastName: 'Ballisager',
 				substitute: false,
 				shirtNumber: 3,
 				events: [],
@@ -227,6 +252,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '381287',
 				name: 'Katrine Veje',
+				lastName: 'Veje',
 				substitute: false,
 				shirtNumber: 11,
 				events: [
@@ -239,6 +265,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '520582',
 				name: 'Frederikke Thogersen',
+				lastName: 'Thogersen',
 				substitute: false,
 				shirtNumber: 15,
 				events: [],
@@ -246,6 +273,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '653591',
 				name: 'Karen Holmgaard',
+				lastName: 'Holmgaard',
 				substitute: false,
 				shirtNumber: 6,
 				events: [],
@@ -253,6 +281,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '647619',
 				name: 'Emma Snerle',
+				lastName: 'Snerle',
 				substitute: false,
 				shirtNumber: 8,
 				events: [],
@@ -260,6 +289,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '653590',
 				name: 'Sara Holmgaard',
+				lastName: 'Holmgaard',
 				substitute: false,
 				shirtNumber: 18,
 				events: [],
@@ -267,6 +297,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '653588',
 				name: 'Janni Thomsen',
+				lastName: 'Thomsen',
 				substitute: false,
 				shirtNumber: 19,
 				events: [],
@@ -274,6 +305,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '663301',
 				name: 'Amalie Vangsgaard',
+				lastName: 'Vangsgaard',
 				substitute: false,
 				shirtNumber: 21,
 				events: [],
@@ -281,6 +313,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '404911',
 				name: 'Pernille Harder',
+				lastName: 'Harder',
 				substitute: false,
 				shirtNumber: 10,
 				events: [],
@@ -288,6 +321,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '664929',
 				name: 'Kathrine Larsen',
+				lastName: 'Larsen',
 				substitute: true,
 				shirtNumber: 16,
 				events: [],
@@ -295,6 +329,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '653589',
 				name: 'Sara Thrige',
+				lastName: 'Thrige',
 				substitute: true,
 				shirtNumber: 2,
 				events: [],
@@ -302,6 +337,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '642109',
 				name: 'Isabella Obaze',
+				lastName: 'Obaze',
 				substitute: true,
 				shirtNumber: 5,
 				events: [],
@@ -309,6 +345,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '381286',
 				name: 'Sanne Troelsgaard',
+				lastName: 'Troelsgaard',
 				substitute: true,
 				shirtNumber: 7,
 				events: [
@@ -321,6 +358,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '433273',
 				name: 'Nadia Nadim',
+				lastName: 'Nadim',
 				substitute: true,
 				shirtNumber: 9,
 				events: [
@@ -333,6 +371,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '653592',
 				name: 'Kathrine Kuhl',
+				lastName: 'Kuhl',
 				substitute: true,
 				shirtNumber: 12,
 				events: [],
@@ -340,6 +379,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '664932',
 				name: 'Josefine Hasbo',
+				lastName: 'Hasbo',
 				substitute: true,
 				shirtNumber: 13,
 				events: [
@@ -352,6 +392,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '653593',
 				name: 'Sofie Bredgaard',
+				lastName: 'Bredgaard',
 				substitute: true,
 				shirtNumber: 14,
 				events: [],
@@ -359,6 +400,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '653594',
 				name: 'Rikke Madsen',
+				lastName: 'Madsen',
 				substitute: true,
 				shirtNumber: 17,
 				events: [],
@@ -366,6 +408,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '628635',
 				name: 'Signe Bruun',
+				lastName: 'Bruun',
 				substitute: true,
 				shirtNumber: 20,
 				events: [
@@ -378,6 +421,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '642108',
 				name: 'Cornelia Kramer',
+				lastName: 'Kramer',
 				substitute: true,
 				shirtNumber: 23,
 				events: [
@@ -390,6 +434,7 @@ export const matchStats: FootballMatchStats = {
 			{
 				paID: '664930',
 				name: 'Alberte Vingum',
+				lastName: 'Vingum',
 				substitute: true,
 				shirtNumber: 22,
 				events: [],

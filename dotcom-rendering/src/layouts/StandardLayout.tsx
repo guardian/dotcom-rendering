@@ -370,12 +370,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
-	const abTests = useBetaAB();
-	const isInFootballRedesignVariantGroup =
-		(abTests?.isUserInTestGroup('webex-football-redesign', 'variant') &&
-			isWeb) ??
-		false;
-
 	const showBodyEndSlot =
 		isWeb &&
 		(parse(article.slotMachineFlags ?? '').showBodyEnd ||
@@ -402,6 +396,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const isMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
+
+	const abTests = useBetaAB();
+	const isInFootballRedesignVariantGroup =
+		(isMatchReport &&
+			abTests?.isUserInTestGroup('webex-football-redesign', 'variant') &&
+			isWeb) ??
+		false;
 
 	const isMedia =
 		format.design === ArticleDesign.Video ||

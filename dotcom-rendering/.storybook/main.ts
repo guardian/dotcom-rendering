@@ -125,10 +125,6 @@ const webpackConfig = (config: Configuration) => {
 			'./mocks/bridgetApi.ts',
 		),
 
-		// Mock contributions API so getAuthHeaders does not hang on consent state in Storybook
-		[`${path.resolve(__dirname, '../src/lib/contributions')}$`]:
-			path.resolve(__dirname, './mocks/contributions.ts'),
-
 		// Mock identity auth frontend to prevent Storybook components from hanging in Pending
 		'@guardian/identity-auth-frontend': path.resolve(
 			__dirname,

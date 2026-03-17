@@ -7,22 +7,6 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import { DynamicFast } from './DynamicFast';
-import { DynamicPackage } from './DynamicPackage';
-import { DynamicSlow } from './DynamicSlow';
-import { FixedLargeSlowXIV } from './FixedLargeSlowXIV';
-import { FixedMediumFastXI } from './FixedMediumFastXI';
-import { FixedMediumFastXII } from './FixedMediumFastXII';
-import { FixedMediumSlowVI } from './FixedMediumSlowVI';
-import { FixedMediumSlowVII } from './FixedMediumSlowVII';
-import { FixedMediumSlowXIIMPU } from './FixedMediumSlowXIIMPU';
-import { FixedSmallFastVIII } from './FixedSmallFastVIII';
-import { FixedSmallSlowI } from './FixedSmallSlowI';
-import { FixedSmallSlowIII } from './FixedSmallSlowIII';
-import { FixedSmallSlowIV } from './FixedSmallSlowIV';
-import { FixedSmallSlowVHalf } from './FixedSmallSlowVHalf';
-import { FixedSmallSlowVMPU } from './FixedSmallSlowVMPU';
-import { FixedSmallSlowVThird } from './FixedSmallSlowVThird';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FlexibleSpecial } from './FlexibleSpecial';
 import { Island } from './Island';
@@ -47,6 +31,7 @@ type Props = {
 	frontId?: string;
 	collectionId: number;
 	containerLevel?: DCRContainerLevel;
+	isInSlimHomepageAbTestVariant?: boolean;
 };
 
 export const DecideContainer = ({
@@ -62,168 +47,9 @@ export const DecideContainer = ({
 	frontId,
 	collectionId,
 	containerLevel,
+	isInSlimHomepageAbTestVariant = false,
 }: Props) => {
 	switch (containerType) {
-		case 'dynamic/fast':
-			return (
-				<DynamicFast
-					groupedTrails={groupedTrails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'dynamic/slow':
-			return (
-				<DynamicSlow
-					groupedTrails={groupedTrails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'dynamic/package':
-			return (
-				<DynamicPackage
-					groupedTrails={groupedTrails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/large/slow-XIV':
-			return (
-				<FixedLargeSlowXIV
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/small/slow-IV':
-			return (
-				<FixedSmallSlowIV
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/small/slow-V-mpu':
-			return (
-				<FixedSmallSlowVMPU
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/small/slow-III':
-			return (
-				<FixedSmallSlowIII
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/small/slow-I':
-			return (
-				<FixedSmallSlowI
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/small/slow-V-third':
-			return (
-				<FixedSmallSlowVThird
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/small/slow-V-half':
-			return (
-				<FixedSmallSlowVHalf
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/medium/slow-VI':
-			return (
-				<FixedMediumSlowVI
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/medium/slow-VII':
-			return (
-				<FixedMediumSlowVII
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/medium/slow-XII-mpu':
-			return (
-				<FixedMediumSlowXIIMPU
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/medium/fast-XII':
-			return (
-				<FixedMediumFastXII
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/medium/fast-XI':
-			return (
-				<FixedMediumFastXI
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
-		case 'fixed/small/fast-VIII':
-			return (
-				<FixedSmallFastVIII
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					serverTime={serverTime}
-					imageLoading={imageLoading}
-				/>
-			);
 		case 'nav/list':
 			return <NavList trails={trails} showImage={false} />;
 		case 'nav/media-list':
@@ -244,6 +70,9 @@ export const DecideContainer = ({
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
 					collectionId={collectionId}
+					isInSlimHomepageAbTestVariant={
+						isInSlimHomepageAbTestVariant
+					}
 				/>
 			);
 		case 'flexible/general':
@@ -257,6 +86,9 @@ export const DecideContainer = ({
 					aspectRatio={aspectRatio}
 					containerLevel={containerLevel}
 					collectionId={collectionId}
+					isInSlimHomepageAbTestVariant={
+						isInSlimHomepageAbTestVariant
+					}
 				/>
 			);
 		case 'scrollable/small':
@@ -284,6 +116,9 @@ export const DecideContainer = ({
 						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						sectionId={sectionId}
+						isInSlimHomepageAbTestVariant={
+							isInSlimHomepageAbTestVariant
+						}
 					/>
 				</Island>
 			);
@@ -296,6 +131,9 @@ export const DecideContainer = ({
 					serverTime={serverTime}
 					imageLoading={imageLoading}
 					aspectRatio={aspectRatio}
+					isInSlimHomepageAbTestVariant={
+						isInSlimHomepageAbTestVariant
+					}
 				/>
 			);
 		case 'scrollable/feature':
@@ -308,6 +146,9 @@ export const DecideContainer = ({
 						serverTime={serverTime}
 						aspectRatio={aspectRatio}
 						collectionId={collectionId}
+						isInSlimHomepageAbTestVariant={
+							isInSlimHomepageAbTestVariant
+						}
 					/>
 				</Island>
 			);

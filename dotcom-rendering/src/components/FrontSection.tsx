@@ -3,7 +3,6 @@ import { isString } from '@guardian/libs';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { type EditionId, isNetworkFront } from '../lib/edition';
-import { hideAge } from '../lib/hideAge';
 import { getOphanComponents } from '../lib/labs';
 import { palette as schemePalette } from '../palette';
 import type { CollectionBranding } from '../types/branding';
@@ -26,7 +25,6 @@ import { Island } from './Island';
 import { LabsSectionHeader } from './LabsSectionHeader';
 import { MostPopularFrontRight } from './MostPopularFrontRight';
 import { ShowHideButton } from './ShowHideButton';
-import { ShowMore } from './ShowMore.importable';
 import { Treats } from './Treats';
 
 type Props = {
@@ -38,7 +36,6 @@ type Props = {
 	url?: string;
 	/** The html `id` property of the element */
 	sectionId?: string;
-	collectionId?: string;
 	pageId?: string;
 	/** Defaults to `true`. If we should render the top border */
 	showTopBorder?: boolean;
@@ -75,9 +72,6 @@ type Props = {
 	editionId: EditionId;
 	/** A list of related links that appear in the bottom of the left column on fronts */
 	treats?: TreatType[];
-	/** Enable the "Show More" button on this container to allow readers to load more cards */
-	canShowMore?: boolean;
-	ajaxUrl?: string;
 	/** Puts pagination at the bottom of the container allowing the user to navigate to other pages,
 	 * usually used on the last container on a page */
 	pagination?: TagPagePagination;
@@ -97,8 +91,8 @@ type Props = {
 	 * The Slim Homepage AB test requires some sections to have reduced width so that
 	 * the Most Popular Front Right component can be placed on the right-hand side.
 	 */
-	slimifySectionForAbTest?: boolean;
-	discussionApiUrl: string;
+	slimifySectionForSlimHomepageAbTest?: boolean;
+	showRightContentForSlimHomepageAbTest?: boolean;
 	collectionBranding?: CollectionBranding;
 	isTagPage?: boolean;
 	hasNavigationButtons?: boolean;
@@ -128,7 +122,6 @@ const borderColourStyles = (
 			return schemePalette('--section-border-opinion');
 		case 'Sport':
 		case 'Sports':
-		case 'Winter Olympics 2026':
 			return schemePalette('--section-border-sport');
 		case 'Lifestyle':
 			return schemePalette('--section-border-lifestyle');
@@ -154,7 +147,6 @@ const articleSectionTitleStyles = (
 			return schemePalette('--article-section-title-opinion');
 		case 'Sport':
 		case 'Sports':
-		case 'Winter Olympics 2026':
 			return schemePalette('--article-section-title-sport');
 		case 'Lifestyle':
 			return schemePalette('--article-section-title-lifestyle');
@@ -552,8 +544,6 @@ const sponsoredContentLabelWrapper = css`
  * in the centre. Extra elements can be passed to `leftContent`, which will
  * automatically fall into the left column on larger breakpoints.
  *
- * Defaults to an HTML `section`, but the specific tag can be set.
- *
  * @example
  *
  * from `mobile` (320) to `phablet` (660)
@@ -563,9 +553,6 @@ const sponsoredContentLabelWrapper = css`
  * ├───────┤
  * │▒▒▒▒▒▒▒│
  * │▒▒▒▒▒▒▒│
- * ├───────┤
- * │Show   │
- * |More   │
  * └───────┘
  *
  * from `tablet` (740) to `desktop` (980)
@@ -577,8 +564,6 @@ const sponsoredContentLabelWrapper = css`
  * ├───────────────────────┤
  * │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * ├───────────────────────┤
- * │Show More              │
  * └───────────────────────┘
  *
  * on `leftCol` (1140) if component is toggleable
@@ -591,8 +576,6 @@ const sponsoredContentLabelWrapper = css`
  * │   │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │Tre│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │ats│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * ├───┼─────────────────────┤
- * │   │Show More            │
  * └───┴─────────────────────┘
  *
  * on `leftCol` (1140) if component is not toggleable
@@ -605,8 +588,6 @@ const sponsoredContentLabelWrapper = css`
  * │   │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │Tre│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │ats│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * ├───┼──────────────────────┤
- * │   │Show More             │
  * └───┴──────────────────────┘
  *
  * on `wide` (1300)
@@ -619,8 +600,6 @@ const sponsoredContentLabelWrapper = css`
  * │     │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
  * │     │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
  * │Treat│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
- * ├─────┼─────────────────────────┤
- * │     │Show More                │
  * └─────┴─────────────────────────┘
  *
  */
@@ -637,21 +616,18 @@ export const FrontSection = ({
 	ophanComponentLink,
 	ophanComponentName,
 	sectionId = '',
-	collectionId,
 	pageId,
 	showDateHeader = false,
 	showTopBorder = true,
 	toggleable = false,
 	treats,
 	url,
-	canShowMore,
-	ajaxUrl,
 	pagination,
 	isOnPaidContentFront,
 	targetedTerritory,
 	hasPageSkin = false,
-	slimifySectionForAbTest = false,
-	discussionApiUrl,
+	slimifySectionForSlimHomepageAbTest = false,
+	showRightContentForSlimHomepageAbTest = false,
 	collectionBranding,
 	isTagPage = false,
 	hasNavigationButtons = false,
@@ -664,14 +640,6 @@ export const FrontSection = ({
 	const isToggleable = toggleable && !!sectionId;
 	const showVerticalRule = !hasPageSkin;
 	const isBetaContainer = !!containerLevel;
-	const showMore =
-		canShowMore &&
-		!!title &&
-		!!sectionId &&
-		!!collectionId &&
-		!!pageId &&
-		!!ajaxUrl &&
-		!isBetaContainer;
 
 	// These are for beta containers only
 	const useLargeSpacingMobile = !!isNextCollectionPrimary || isAboveMobileAd;
@@ -687,10 +655,6 @@ export const FrontSection = ({
 		  })
 		: undefined;
 
-	/**
-	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
-	 * this id pre-existed showMore so is probably also being used for something else.
-	 */
 	return (
 		<ContainerOverrides containerPalette={containerPalette}>
 			<section
@@ -724,10 +688,8 @@ export const FrontSection = ({
 										title,
 										showSectionColours,
 								  ),
-							// To reduce the width of the border line between Features
-							// and More features in the Slim Homepage AB test.
-							slimifySectionForAbTest &&
-								sectionId === 'more-features' &&
+							slimifySectionForSlimHomepageAbTest &&
+								containerLevel === 'Secondary' &&
 								css`
 									${from.wide} {
 										grid-column: 2 / 14;
@@ -827,14 +789,15 @@ export const FrontSection = ({
 				<div
 					css={[
 						sectionContent,
-						slimifySectionForAbTest && slimSectionContent,
+						slimifySectionForSlimHomepageAbTest &&
+							slimSectionContent,
 						sectionContentHorizontalMargins,
 						sectionContentRow(toggleable),
 						topPadding,
 						showVerticalRule &&
 							isBetaContainer &&
 							sectionContentBorderFromLeftCol,
-						slimifySectionForAbTest &&
+						slimifySectionForSlimHomepageAbTest &&
 							slimHomepageRightBorderStyles,
 					]}
 					id={`container-${sectionId}`}
@@ -842,42 +805,44 @@ export const FrontSection = ({
 					{children}
 				</div>
 
-				{slimifySectionForAbTest && sectionId === 'news' && (
-					<div
-						css={css`
-							${from.wide} {
-								grid-row: content-toggleable;
-								grid-column: 14 / 18;
-							}
-						`}
-					>
-						<Hide when="below" breakpoint="wide">
-							<MostPopularFrontRight
-								heading="Most viewed"
-								trails={mostViewed}
-							/>
-						</Hide>
-					</div>
-				)}
+				{showRightContentForSlimHomepageAbTest &&
+					sectionId === 'news' && (
+						<div
+							css={css`
+								${from.wide} {
+									grid-row: content-toggleable;
+									grid-column: 14 / 18;
+								}
+							`}
+						>
+							<Hide when="below" breakpoint="wide">
+								<MostPopularFrontRight
+									heading="Most viewed"
+									trails={mostViewed}
+								/>
+							</Hide>
+						</div>
+					)}
 
-				{slimifySectionForAbTest && sectionId === 'features' && (
-					<div
-						css={css`
-							${from.wide} {
-								grid-row: content-toggleable;
-								grid-column: 14 / 18;
-								position: relative;
-							}
-						`}
-					>
-						<Hide when="below" breakpoint="wide">
-							<MostPopularFrontRight
-								heading="Deeply read"
-								trails={deeplyRead}
-							/>
-						</Hide>
-					</div>
-				)}
+				{showRightContentForSlimHomepageAbTest &&
+					sectionId === 'features' && (
+						<div
+							css={css`
+								${from.wide} {
+									grid-row: content-toggleable;
+									grid-column: 14 / 18;
+									position: relative;
+								}
+							`}
+						>
+							<Hide when="below" breakpoint="wide">
+								<MostPopularFrontRight
+									heading="Deeply read"
+									trails={deeplyRead}
+								/>
+							</Hide>
+						</div>
+					)}
 
 				<div
 					css={[
@@ -896,23 +861,6 @@ export const FrontSection = ({
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<AustralianTerritorySwitcher
 								targetedTerritory={targetedTerritory}
-							/>
-						</Island>
-					) : showMore ? (
-						<Island
-							priority="feature"
-							defer={{ until: 'interaction' }}
-						>
-							<ShowMore
-								title={title}
-								sectionId={sectionId}
-								collectionId={collectionId}
-								pageId={pageId}
-								ajaxUrl={ajaxUrl}
-								editionId={editionId}
-								containerPalette={containerPalette}
-								showAge={!hideAge.includes(title)}
-								discussionApiUrl={discussionApiUrl}
 							/>
 						</Island>
 					) : null}

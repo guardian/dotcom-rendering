@@ -6,14 +6,7 @@ import { enhanceCards } from './enhanceCards';
 /**
  * Groups cards based on their group specified in fronts tool
  *
- * For 'dynamic' container types in fronts tool, cards can be grouped by sizes:
- *  - Snap (dynamic/package only)
- *  - Huge
- *  - Very big
- *  - Big
- *  - Standard
- *
- * * For newer 'flexible' container types in fronts tool, cards can be grouped by sizes:
+ * For 'flexible' container types in fronts tool, cards can be grouped by sizes:
  *  - Snap (flexible/special only)
  *  - Splash (flexible/general only)
  *  - Standard
@@ -23,7 +16,7 @@ import { enhanceCards } from './enhanceCards';
  *
  * Backfilled cards are always considered 'standard'.
  *
- * @returns Card arrays grouped into 'snap', 'huge', 'veryBig', 'big' and 'standard'
+ * @returns Card arrays grouped into 'snap', 'splash' and 'standard'
  */
 export const groupCards = (
 	container: DCRContainerType,
@@ -34,50 +27,6 @@ export const groupCards = (
 	stripBranding: boolean = false,
 ): DCRGroupedTrails => {
 	switch (container) {
-		case 'dynamic/fast':
-		case 'dynamic/slow': {
-			const huge = curated.filter(({ card }) => card.group === '3');
-			const veryBig = curated.filter(({ card }) => card.group === '2');
-			const big = curated.filter(({ card }) => card.group === '1');
-			return {
-				// Snap is not supported on these container types
-				snap: [],
-				// Splash is not supported on these container types
-				splash: [],
-				huge: enhanceCards(huge, {
-					cardInTagPage: false,
-					editionId,
-					discussionApiUrl,
-					stripBranding,
-				}),
-				veryBig: enhanceCards(veryBig, {
-					cardInTagPage: false,
-					offset: huge.length,
-					editionId,
-					discussionApiUrl,
-					stripBranding,
-				}),
-				big: enhanceCards(big, {
-					cardInTagPage: false,
-					offset: huge.length + veryBig.length,
-					editionId,
-					discussionApiUrl,
-					stripBranding,
-				}),
-				standard: enhanceCards(
-					// Backfilled cards will always be treated as 'standard' cards
-					curated
-						.filter(({ card }) => card.group === '0')
-						.concat(backfill),
-					{
-						cardInTagPage: false,
-						offset: huge.length + veryBig.length + big.length,
-						editionId,
-						discussionApiUrl,
-					},
-				),
-			};
-		}
 		case 'flexible/general': {
 			const splash = [
 				...curated.filter(({ card }) => card.group === '3'),
@@ -100,15 +49,11 @@ export const groupCards = (
 
 			return {
 				snap: [],
-				huge: [],
-				veryBig: [],
-				big: [],
 				splash: enhanceCards(splash, enhanceOptions()),
 				standard: enhanceCards(standard, enhanceOptions(splash.length)),
 			};
 		}
-		case 'flexible/special':
-		case 'dynamic/package': {
+		case 'flexible/special': {
 			const snap = curated.filter(({ card }) => card.group === '1');
 
 			// Backfilled cards will always be treated as 'standard' cards
@@ -127,10 +72,7 @@ export const groupCards = (
 			return {
 				// Splash is not supported on these container types
 				splash: [],
-				huge: [],
-				veryBig: [],
-				big: [],
-				// Only 'snap' and 'standard' are supported by dynamic/package
+				// Only 'snap' and 'standard' are supported by flexible/special
 				snap: enhanceCards(snap, enhanceOptions()),
 				standard: enhanceCards(standard, enhanceOptions(snap.length)),
 			};
@@ -140,9 +82,6 @@ export const groupCards = (
 			return {
 				splash: [],
 				snap: [],
-				huge: [],
-				veryBig: [],
-				big: [],
 				standard: [],
 			};
 	}

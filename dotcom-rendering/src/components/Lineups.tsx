@@ -148,7 +148,8 @@ const PlayerList = ({
 					<li key={player.paID} css={listItem}>
 						<strong css={shirtNumber}>{player.shirtNumber}</strong>
 						<span css={playerName}>
-							{player.name.charAt(0).toUpperCase()}. {player.name}
+							{player.name.charAt(0).toUpperCase()}.{' '}
+							{player.lastName}
 						</span>
 						{player.events.map((event: PlayerEvent) => (
 							<Event

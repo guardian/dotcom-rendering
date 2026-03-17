@@ -1,6 +1,5 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
 	audioTrails,
 	galleryTrails,
@@ -81,13 +80,16 @@ const meta = {
 		imageLoading: 'eager',
 		aspectRatio: '4:5',
 		collectionId: 1,
+		isInSlimHomepageAbTestVariant: false,
 	},
 	render: (args) => (
 		<FrontSection
 			title="Scrollable feature"
-			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
 			containerLevel="Secondary"
+			slimifySectionForSlimHomepageAbTest={
+				args.isInSlimHomepageAbTestVariant
+			}
 		>
 			<ScrollableFeature {...args} />
 		</FrontSection>
@@ -99,6 +101,12 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {};
+
+export const WithSlimHomepageAbTest = {
+	args: {
+		isInSlimHomepageAbTestVariant: true,
+	},
+} satisfies Story;
 
 export const Media = {
 	args: {
@@ -121,12 +129,7 @@ export const SelfHostedVideo = {
 			title: string;
 			videos: DCRFrontCard[];
 		}) => (
-			<FrontSection
-				title={title}
-				discussionApiUrl={discussionApiUrl}
-				editionId="UK"
-				showTopBorder={true}
-			>
+			<FrontSection title={title} editionId="UK" showTopBorder={true}>
 				<ScrollableFeature {...args} trails={videos} />
 			</FrontSection>
 		);
@@ -193,7 +196,6 @@ export const WithPrimaryContainer = {
 	render: (args) => (
 		<FrontSection
 			title="Scrollable feature"
-			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
 			containerLevel="Primary"
 		>
@@ -225,7 +227,6 @@ export const WithSpecialPaletteVariations = {
 			{containerPalettes.map((containerPalette) => (
 				<FrontSection
 					title={containerPalette}
-					discussionApiUrl={discussionApiUrl}
 					editionId="UK"
 					key={containerPalette}
 					containerPalette={containerPalette}

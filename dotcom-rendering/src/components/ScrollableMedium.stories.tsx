@@ -1,6 +1,5 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/highlights-trails';
 import {
 	audioTrails,
@@ -30,13 +29,16 @@ const meta = {
 		showAge: true,
 		imageLoading: 'eager',
 		aspectRatio: '5:4',
+		isInSlimHomepageAbTestVariant: false,
 	},
 	render: (args) => (
 		<FrontSection
 			title="Scrollable medium"
-			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
 			containerLevel="Secondary"
+			slimifySectionForSlimHomepageAbTest={
+				args.isInSlimHomepageAbTestVariant
+			}
 		>
 			<ScrollableMedium {...args} />
 		</FrontSection>
@@ -52,6 +54,13 @@ export const WithEightCards = {} satisfies Story;
 export const WithFourCards = {
 	args: {
 		trails: trails.slice(0, 4),
+	},
+} satisfies Story;
+
+export const WithFourCardsInSlimHomepageAbTest = {
+	args: {
+		...WithFourCards.args,
+		isInSlimHomepageAbTestVariant: true,
 	},
 } satisfies Story;
 
@@ -89,7 +98,6 @@ export const WithPrimaryContainer = {
 	render: (args) => (
 		<FrontSection
 			title="Scrollable medium"
-			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
 			containerLevel="Primary"
 		>
@@ -121,7 +129,6 @@ export const WithSpecialPaletteVariations = {
 			{containerPalettes.map((containerPalette) => (
 				<FrontSection
 					title={containerPalette}
-					discussionApiUrl={discussionApiUrl}
 					editionId="UK"
 					key={containerPalette}
 					containerPalette={containerPalette}
