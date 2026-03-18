@@ -60,7 +60,6 @@ import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { type Area, gridCss, type LayoutType } from './lib/furnitureLayouts';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-import { Grid } from 'src/components/Masthead/Titlepiece/Grid';
 
 const stretchLines = css`
 	${until.phablet} {
@@ -168,11 +167,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = canRenderAds(article);
 
-	const layoutType: LayoutType = isMatchReport
-		? 'matchReport'
-		: isMedia
-		? 'media'
-		: 'standard';
+	const layoutType: LayoutType = isMedia ? 'media' : 'standard';
 
 	return (
 		<>
@@ -248,12 +243,20 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					pageId={article.pageId}
 					pageTags={article.tags}
 				/>
-				<article css={css(grid.container)}>
-					<GridItem
-						area="main-media"
-						layoutType={layoutType}
-						element="div"
-					>
+				<article
+					css={css([
+						css`
+							background-color: ${themePalette(
+								'--article-background',
+							)};
+						`,
+						grid.container,
+						grid.verticalRules({
+							centre: isLabs ? false : true,
+						}),
+					])}
+				>
+					<GridItem area="main-media" layoutType={layoutType}>
 						<MainMedia
 							format={format}
 							elements={article.mainMediaElements}
@@ -286,11 +289,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							isMatch={!!footballMatchUrl}
 						/>
 					</GridItem>
-					<GridItem
-						area="headline"
-						layoutType={layoutType}
-						element="div"
-					>
+					<GridItem area="headline" layoutType={layoutType}>
 						<ArticleHeadline
 							format={format}
 							headlineString={article.headline}
@@ -302,11 +301,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							starRating={article.starRating}
 						/>
 					</GridItem>
-					<GridItem
-						area="standfirst"
-						layoutType={layoutType}
-						element="div"
-					>
+					<GridItem area="standfirst" layoutType={layoutType}>
 						<Standfirst
 							format={format}
 							standfirst={article.standfirst}
@@ -405,25 +400,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										article.mainMediaElements
 									}
 								/>
-								<MatchInfoContainer
-									isMatchReport={isMatchReport}
-									footballMatchStatsUrl={
-										footballMatchStatsUrl
-									}
-								/>
-
-								{isApps && (
-									<Island
-										priority="critical"
-										defer={{ until: 'visible' }}
-									>
-										<AppsEpic />
-									</Island>
-								)}
 							</>
 						)}
 					</GridItem>
-					<GridItem area="body" layoutType={layoutType} element="div">
+					<GridItem area="body" layoutType={layoutType}>
 						{/* Only show Listen to Article button on App landscape views */}
 						{isApps && (
 							<Hide until="leftCol">
@@ -522,6 +502,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											!!article.config.switches
 												.articleEndSlot
 										}
+										isSensitive={article.config.isSensitive}
 									/>
 								</Island>
 							)}
