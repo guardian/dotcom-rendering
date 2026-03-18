@@ -51,8 +51,9 @@ type ABTest = {
 	 */
 	shouldForceMetricsCollection?: boolean;
 	/**
-	 * A function to determine if the test should be included in Ophan reporting.
-	 * Use this if you have a server-side test that would like to exclude certain
+	 * Determines whether the test should be included in Ophan reporting. This function
+	 * will be evaluated on the client before the Ophan network request is made.
+	 * Use this if you have a server-side test and would like to exclude certain
 	 * pageviews based on client-side information.
 	 *
 	 * On by default: if not provided, the test will report to Ophan as usual.
