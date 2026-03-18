@@ -18,8 +18,9 @@ const meta = {
 			}}
 		>
 			<p style={{ ...textSans17Object }}>
-				Note: If the video is not playing, you may need to remove
-				crossOrigin="anonymous" from the video element
+				Note: If the video is not playing, you may need to visit
+				https://storybook.thegulocal.com/ instead of localhost, as CORS
+				is enabled for self-hosted video.
 			</p>
 			<SelfHostedVideo {...args} />,
 		</div>
