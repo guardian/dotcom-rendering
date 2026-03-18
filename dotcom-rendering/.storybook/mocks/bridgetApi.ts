@@ -103,6 +103,11 @@ export const getListenToArticleClient: BridgetApi<
 	isPlaying: async () => false,
 });
 
+export const getAudioClient: BridgetApi<'getAudioClient'> = () => ({
+	isAvailable: async () => true,
+	isPlaying: async () => false,
+});
+
 export const getNativeABTestingClient: BridgetApi<
 	'getNativeABTestingClient'
 > = () => ({
@@ -127,6 +132,7 @@ export const ensure_all_exports_are_present = {
 	getInteractionClient,
 	getInteractivesClient,
 	getListenToArticleClient,
+	getAudioClient,
 	getNativeABTestingClient,
 } satisfies {
 	[Method in keyof BridgeModule]: BridgetApi<Method>;

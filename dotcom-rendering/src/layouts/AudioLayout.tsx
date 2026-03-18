@@ -9,6 +9,7 @@ import { StraightLines } from '@guardian/source-development-kitchen/react-compon
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
+import { AppsAudioPlayer } from '../components/AppsAudioPlayer.importable';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -25,6 +26,7 @@ import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
+import { formatAudioDuration } from '../components/ListenToArticle.importable';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
@@ -331,6 +333,23 @@ export const AudioLayout = (props: WebProps | AppProps) => {
 										}
 										src={audioData.audioDownloadUrl}
 										mediaId={audioData.mediaId}
+									/>
+								</Island>
+							)}
+							{isApps && (
+								<Island
+									priority="critical"
+									defer={{ until: 'visible' }}
+								>
+									<AppsAudioPlayer
+										audioDuration={
+											typeof audioData?.durationSeconds ===
+											'number'
+												? formatAudioDuration(
+														audioData.durationSeconds,
+												  )
+												: undefined
+										}
 									/>
 								</Island>
 							)}
