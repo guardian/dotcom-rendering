@@ -110,6 +110,29 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 						);
 					});
 			}
+
+			// If user is following but notifications aren't on,
+			// auto-enable notifications to keep states consistent
+			if (followingTag && !followingNotifications) {
+				void getNotificationsClient()
+					.follow(topic)
+					.then((success) => {
+						if (success) {
+							setIsFollowingNotifications(true);
+						}
+					})
+					.catch((error) => {
+						window.guardian.modules.sentry.reportError(
+							error,
+							'bridget-getNotificationsClient-auto-follow-error',
+						);
+						log(
+							'dotcom',
+							'Bridget getNotificationsClient.follow (auto) Error:',
+							error,
+						);
+					});
+			}
 		});
 	}, [id, displayName]);
 
