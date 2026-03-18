@@ -1,7 +1,8 @@
 import { css } from '@emotion/react';
 import { Topic } from '@guardian/bridget/Topic';
 import { isUndefined, log } from '@guardian/libs';
-import { from, space, textSans15 } from '@guardian/source/foundations';
+import { from, space, textSans12 } from '@guardian/source/foundations';
+import { SvgNotificationsOn } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import { getNotificationsClient, getTagClient } from '../lib/bridgetApi';
 import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
@@ -13,6 +14,17 @@ type Props = {
 	id: string;
 	displayName: string;
 };
+
+const notificationTextStyles = css`
+	${textSans12}
+	color: ${schemedPalette('--follow-text')};
+	fill: currentColor;
+	display: flex;
+	align-items: center;
+	column-gap: ${space[1]}px;
+	min-height: ${space[6]}px;
+	padding: 0;
+`;
 
 export const FollowWrapper = ({ id, displayName }: Props) => {
 	const [isFollowingNotifications, setIsFollowingNotifications] = useState<
@@ -214,15 +226,8 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 				/>
 			)}
 			{isFollowingTag && (
-				<span
-					css={css`
-						${textSans15}
-						color: ${schemedPalette('--follow-text')};
-						display: block;
-						min-height: ${space[6]}px;
-						padding: 0;
-					`}
-				>
+				<span css={notificationTextStyles}>
+					<SvgNotificationsOn size="small" />
 					Notifications turned on. Turn off anytime in Settings.
 				</span>
 			)}
