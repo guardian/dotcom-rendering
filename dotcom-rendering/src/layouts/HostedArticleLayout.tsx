@@ -350,9 +350,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 									backgroundImage={cta.image}
 									text={cta.label}
 									buttonText={cta.btnText}
-									accentColour={
-										branding?.hostedCampaignColour
-									}
+									accentColor={branding?.hostedCampaignColour}
 								/>
 							</div>
 						)}

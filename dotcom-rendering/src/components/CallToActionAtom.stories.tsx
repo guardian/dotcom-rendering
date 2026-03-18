@@ -25,7 +25,7 @@ export const WithAccentColour = () => {
 			backgroundImage="https://media.guim.co.uk/2c2ad59a167c43496ff709d0d9a83e8d46c30674/0_0_1300_375/1300.jpg"
 			text="Proactive security starts here"
 			buttonText="Explore more"
-			accentColour="#d71920"
+			accentColor="#d71920"
 		/>
 	);
 };

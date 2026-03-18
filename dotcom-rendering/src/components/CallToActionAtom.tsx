@@ -14,7 +14,7 @@ type CallToActionProps = {
 	backgroundImage?: string;
 	text?: string;
 	buttonText?: string;
-	accentColour?: string;
+	accentColor?: string;
 };
 
 const overlayMaskGradientStyles = (angle: string, startPosition: number) => {
@@ -117,7 +117,7 @@ export const CallToActionAtom = ({
 	backgroundImage,
 	text,
 	buttonText,
-	accentColour,
+	accentColor,
 }: CallToActionProps) => {
 	return (
 		<picture
@@ -151,18 +151,18 @@ export const CallToActionAtom = ({
 					icon={<SvgExternal />}
 					theme={{
 						// We also still need to implement the dark mode based on the provided designs which should be the same as not providing an accent colour.
-						textPrimary: accentColour
+						textPrimary: accentColor
 							? sourcePalette.neutral[100]
 							: sourcePalette.neutral[0],
 						backgroundPrimary:
-							accentColour ?? sourcePalette.neutral[100],
-						backgroundPrimaryHover: transparentColour(
-							accentColour ?? sourcePalette.neutral[100],
-							0.8,
-						),
+							accentColor ?? sourcePalette.neutral[100],
+						// This should be changed with `calculateHoverColour()` once we have the function available as DCR needs to upgrade Source to 12.1.0 to use it.
+						// Check https://github.com/guardian/csnx/blob/857116cf826dc700742f14c5a5f005bd6d39f1be/libs/%40guardian/source/CHANGELOG.md?plain=1#L20
+						backgroundPrimaryHover:
+							accentColor ?? sourcePalette.neutral[100],
 					}}
 				>
-					{buttonText}
+					{buttonText ?? 'Learn more'}
 				</LinkButton>
 			</div>
 		</picture>
