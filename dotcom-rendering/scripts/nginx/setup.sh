@@ -8,4 +8,4 @@ brew bundle --file=${DIR}/Brewfile
 
 dev-nginx setup-app ${DIR}/nginx-mappings.yaml
 
-echo "🌎 Successfully installed config. https://r.thegulocal.com is now setup."
+echo "🌎 Successfully installed config. https://r.thegulocal.com & https://storybook.thegulocal.com is now setup."
