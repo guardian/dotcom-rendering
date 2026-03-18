@@ -1,12 +1,13 @@
 import { css } from '@emotion/react';
 import { Topic } from '@guardian/bridget/Topic';
 import { isUndefined, log } from '@guardian/libs';
-import { from, space } from '@guardian/source/foundations';
+import { from, space, textSans15 } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import { getNotificationsClient, getTagClient } from '../lib/bridgetApi';
 import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
 import { useIsMyGuardianEnabled } from '../lib/useIsMyGuardianEnabled';
-import { FollowNotificationsButton, FollowTagButton } from './FollowButtons';
+import { palette as schemedPalette } from '../palette';
+import { FollowTagButton } from './FollowButtons';
 
 type Props = {
 	id: string;
@@ -184,54 +185,6 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 		}
 	};
 
-	const notificationsHandler = () => {
-		const topic = new Topic({
-			id,
-			displayName,
-			type: 'tag-contributor',
-		});
-
-		if (isFollowingNotifications) {
-			void getNotificationsClient()
-				.unfollow(topic)
-				.then((success) => {
-					if (success) {
-						setIsFollowingNotifications(false);
-					}
-				})
-				.catch((error) => {
-					window.guardian.modules.sentry.reportError(
-						error,
-						'briidget-getNotificationsClient-unfollow-error',
-					);
-					log(
-						'dotcom',
-						'Bridget getNotificationsClient.unfollow Error:',
-						error,
-					);
-				});
-		} else {
-			void getNotificationsClient()
-				.follow(topic)
-				.then((success) => {
-					if (success) {
-						setIsFollowingNotifications(true);
-					}
-				})
-				.catch((error) => {
-					window.guardian.modules.sentry.reportError(
-						error,
-						'bridget-getNotificationsClient-follow-error',
-					);
-					log(
-						'dotcom',
-						'Bridget getNotificationsClient.follow Error:',
-						error,
-					);
-				});
-		}
-	};
-
 	return (
 		<div
 			css={css`
@@ -261,14 +214,17 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 				/>
 			)}
 			{isFollowingTag && (
-				<FollowNotificationsButton
-					isFollowing={isFollowingNotifications ?? false}
-					onClickHandler={
-						!isUndefined(isFollowingNotifications)
-							? notificationsHandler
-							: () => undefined
-					}
-				/>
+				<span
+					css={css`
+						${textSans15}
+						color: ${schemedPalette('--follow-text')};
+						display: block;
+						min-height: ${space[6]}px;
+						padding: 0;
+					`}
+				>
+					Notifications turned on. Turn off anytime in Settings.
+				</span>
 			)}
 		</div>
 	);
