@@ -51,12 +51,13 @@ type ABTest = {
 	 */
 	shouldForceMetricsCollection?: boolean;
 	/**
-	 * A function to determine if the test should be included in Ophan reporting,
-	 * enabling server-side tests to exclude certain pageviews on the client
+	 * A function to determine if the test should be included in Ophan reporting.
+	 * Use this if you have a server-side test that would like to exclude certain
+	 * pageviews based on client-side information.
 	 *
 	 * On by default: if not provided, the test will report to Ophan as usual.
 	 */
-	reportToOphan?: () => boolean;
+	shouldReportToOphan?: () => boolean;
 };
 
 export type { ABTest, FastlyTestParams, AudienceSpace, AllSpace };

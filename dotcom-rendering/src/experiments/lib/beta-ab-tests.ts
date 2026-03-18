@@ -73,11 +73,6 @@ export class BetaABTests implements BetaABTestAPI {
 		return this.participations[testId] === groupId;
 	}
 
-	shouldReportToOphan(testId: string): boolean {
-		const activeTest = activeABtests.find(({ name }) => name === testId);
-		return activeTest?.reportToOphan ? activeTest.reportToOphan() : true;
-	}
-
 	trackABTests(
 		ophanRecord: OphanRecordFunction,
 		errorReporter: ErrorReporter,
@@ -85,6 +80,13 @@ export class BetaABTests implements BetaABTestAPI {
 		ophanRecord({
 			abTestRegister: this.buildOphanPayload(errorReporter),
 		});
+	}
+
+	private shouldReportToOphan(testId: string): boolean {
+		const activeTest = activeABtests.find(({ name }) => name === testId);
+		return activeTest?.shouldReportToOphan
+			? activeTest.shouldReportToOphan()
+			: true;
 	}
 
 	private buildOphanPayload(errorReporter: ErrorReporter): OphanABPayload {
