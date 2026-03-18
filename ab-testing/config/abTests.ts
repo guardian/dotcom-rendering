@@ -88,7 +88,7 @@ const ABTests: ABTest[] = [
 		expirationDate: "2026-04-01",
 		type: "server",
 		status: "ON",
-		audienceSize: 80 / 100,
+		audienceSize: 0 / 100,
 		audienceSpace: "C",
 		groups: ["control", "stacked", "carousel"],
 		shouldForceMetricsCollection: false,
@@ -156,6 +156,19 @@ const ABTests: ABTest[] = [
 		audienceSpace: "A",
 		groups: ["preview"],
 		shouldForceMetricsCollection: false,
+	},
+	{
+		name: "commercial-loading-userids-async",
+		description:
+			"Testing whether the asynchronous loading of userIds will alleviate any potential blocking of downstream functions",
+		owners: ["commercial.dev@guardian.co.uk"],
+		expirationDate: "2026-03-27",
+		type: "client",
+		status: "ON",
+		audienceSize: 10 / 100,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
 	},
 ];
 
