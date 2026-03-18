@@ -655,13 +655,12 @@ export const SelfHostedVideo = ({
 	const handleFullscreenClick = (event: React.SyntheticEvent) => {
 		if (isCinemagraph || isLoop) return;
 
-		{
-			if (singleClickTimerRef.current) {
-				clearTimeout(singleClickTimerRef.current);
-			}
+		if (singleClickTimerRef.current) {
+			clearTimeout(singleClickTimerRef.current);
 		}
 
 		void submitClickComponentEvent(event.currentTarget, renderingTarget);
+
 		event.stopPropagation(); // Don't pause the video
 		const video = vidRef.current;
 
