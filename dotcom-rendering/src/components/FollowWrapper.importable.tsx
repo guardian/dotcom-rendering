@@ -2,7 +2,10 @@ import { css } from '@emotion/react';
 import { Topic } from '@guardian/bridget/Topic';
 import { isUndefined, log } from '@guardian/libs';
 import { from, space, textSans12 } from '@guardian/source/foundations';
-import { SvgNotificationsOn } from '@guardian/source/react-components';
+import {
+	SvgNotificationsOff,
+	SvgNotificationsOn,
+} from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import { getNotificationsClient, getTagClient } from '../lib/bridgetApi';
 import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
@@ -44,9 +47,15 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 		return !blockList.includes(tagId);
 	};
 
-	if (isBridgetCompatible && isMyGuardianEnabled && isNotInBlockList(id)) {
-		setShowFollowTagButton(true);
-	}
+	useEffect(() => {
+		if (
+			isBridgetCompatible &&
+			isMyGuardianEnabled &&
+			isNotInBlockList(id)
+		) {
+			setShowFollowTagButton(true);
+		}
+	}, [isBridgetCompatible, isMyGuardianEnabled, id]);
 
 	useEffect(() => {
 		const topic = new Topic({
@@ -106,29 +115,6 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 						log(
 							'dotcom',
 							'Bridget getTagClient.follow (auto) Error:',
-							error,
-						);
-					});
-			}
-
-			// If user is following but notifications aren't on,
-			// auto-enable notifications to keep states consistent
-			if (followingTag && !followingNotifications) {
-				void getNotificationsClient()
-					.follow(topic)
-					.then((success) => {
-						if (success) {
-							setIsFollowingNotifications(true);
-						}
-					})
-					.catch((error) => {
-						window.guardian.modules.sentry.reportError(
-							error,
-							'bridget-getNotificationsClient-auto-follow-error',
-						);
-						log(
-							'dotcom',
-							'Bridget getNotificationsClient.follow (auto) Error:',
 							error,
 						);
 					});
@@ -250,8 +236,19 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 			)}
 			{isFollowingTag && (
 				<span css={notificationTextStyles}>
-					<SvgNotificationsOn size="small" />
-					Notifications turned on. Turn off anytime in Settings.
+					{isFollowingNotifications ? (
+						<>
+							<SvgNotificationsOn size="small" />
+							Notifications turned on. Turn off anytime in
+							Settings.
+						</>
+					) : (
+						<>
+							<SvgNotificationsOff size="small" />
+							Notifications turned off. Turn on anytime in
+							Settings.
+						</>
+					)}
 				</span>
 			)}
 		</div>
