@@ -6,7 +6,7 @@ import {
 	textSansBold24,
 	textSansBold28,
 } from '@guardian/source/foundations';
-import { Button, SvgExternal } from '@guardian/source/react-components';
+import { LinkButton, SvgExternal } from '@guardian/source/react-components';
 import { transparentColour } from '../lib/transparentColour';
 
 type CallToActionProps = {
@@ -120,58 +120,51 @@ export const CallToActionAtom = ({
 	accentColour,
 }: CallToActionProps) => {
 	return (
-		<a
-			href={linkUrl}
+		<picture
 			css={css`
-				text-decoration: none;
+				position: relative;
+				display: flex;
 			`}
 		>
-			<picture
+			<img
+				src={backgroundImage}
+				alt={''}
 				css={css`
-					position: relative;
-					display: flex;
-				`}
-			>
-				<img
-					src={backgroundImage}
-					alt={''}
-					css={css`
-						height: 200px;
-						object-fit: cover;
-						flex-grow: 1;
+					height: 200px;
+					object-fit: cover;
+					flex-grow: 1;
 
-						${from.tablet} {
-							height: 250px;
-						}
-						${from.leftCol} {
-							height: 375px;
-						}
-					`}
-				/>
-				<div css={buttonWrapperStyles}>
-					{!!text && <h2 css={textStyles}>{text}</h2>}
-					<Button
-						iconSide="right"
-						size="small"
-						icon={<SvgExternal />}
-						theme={{
-							// We also still need to implement the dark mode based on the provided designs which should be the same as not providing an accent colour.
-							textPrimary: accentColour
-								? sourcePalette.neutral[100]
-								: sourcePalette.neutral[0],
-							backgroundPrimary:
-								accentColour ?? sourcePalette.neutral[100],
-							//This is temporary as the behaviour we have in PROD is a lightbox when hover over the CTA.
-							backgroundPrimaryHover: transparentColour(
-								accentColour ?? sourcePalette.neutral[100],
-								0.8,
-							),
-						}}
-					>
-						{buttonText}
-					</Button>
-				</div>
-			</picture>
-		</a>
+					${from.tablet} {
+						height: 250px;
+					}
+					${from.leftCol} {
+						height: 375px;
+					}
+				`}
+			/>
+			<div css={buttonWrapperStyles}>
+				{!!text && <h2 css={textStyles}>{text}</h2>}
+				<LinkButton
+					href={linkUrl}
+					iconSide="right"
+					size="small"
+					icon={<SvgExternal />}
+					theme={{
+						// We also still need to implement the dark mode based on the provided designs which should be the same as not providing an accent colour.
+						textPrimary: accentColour
+							? sourcePalette.neutral[100]
+							: sourcePalette.neutral[0],
+						backgroundPrimary:
+							accentColour ?? sourcePalette.neutral[100],
+						backgroundPrimaryHover: transparentColour(
+							accentColour ?? sourcePalette.neutral[100],
+							0.8,
+						),
+					}}
+				>
+					{buttonText}
+				</LinkButton>
+			</div>
+		</picture>
 	);
 };
