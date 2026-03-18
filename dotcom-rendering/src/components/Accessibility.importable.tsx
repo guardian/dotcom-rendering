@@ -93,7 +93,7 @@ export const Accessibility = () => {
 	};
 
 	return (
-		<FrontSection title="Preferences" editionId="UK" discussionApiUrl="">
+		<FrontSection title="Preferences" editionId="UK">
 			<form>
 				<fieldset css={formStyle}>
 					<p>

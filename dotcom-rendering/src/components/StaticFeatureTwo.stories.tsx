@@ -1,6 +1,5 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import {
 	audioTrails,
 	galleryTrails,
@@ -36,7 +35,6 @@ const meta = {
 	render: (args) => (
 		<FrontSection
 			title="Static feature two"
-			discussionApiUrl={discussionApiUrl}
 			editionId="UK"
 			containerLevel="Primary"
 		>
@@ -97,12 +95,7 @@ export const SelfHostedVideo = {
 			title: string;
 			videos: DCRFrontCard[];
 		}) => (
-			<FrontSection
-				title={title}
-				discussionApiUrl={discussionApiUrl}
-				editionId="UK"
-				showTopBorder={true}
-			>
+			<FrontSection title={title} editionId="UK" showTopBorder={true}>
 				<StaticFeatureTwo {...args} trails={videos} />
 			</FrontSection>
 		);
@@ -175,7 +168,6 @@ export const WithSpecialPaletteVariations = {
 			{containerPalettes.map((containerPalette) => (
 				<FrontSection
 					title={containerPalette}
-					discussionApiUrl={discussionApiUrl}
 					editionId="UK"
 					key={containerPalette}
 					containerPalette={containerPalette}

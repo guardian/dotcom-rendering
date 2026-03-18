@@ -21,7 +21,7 @@ import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
-import { palette } from '../palette';
+import { palette as themePalette } from '../palette';
 import type { Article } from '../types/article';
 import type { Block } from '../types/blocks';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -163,8 +163,8 @@ const sideBorders = css`
 			top: 0;
 			bottom: 0;
 			content: '';
-			border-left: 1px solid ${palette('--article-border')};
-			border-right: 1px solid ${palette('--article-border')};
+			border-left: 1px solid ${themePalette('--article-border')};
+			border-right: 1px solid ${themePalette('--article-border')};
 			left: -${grid.mobileColumnGap};
 			right: -${grid.mobileColumnGap};
 			${from.mobileLandscape} {
@@ -297,7 +297,6 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 								standfirst={frontendData.standfirst}
 							/>
 						</div>
-
 						<div css={articleBodyStyles}>
 							<ArticleContainer format={format}>
 								<ArticleBody
@@ -334,6 +333,7 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 									isRightToLeftLang={
 										frontendData.isRightToLeftLang
 									}
+									accentColor={branding?.hostedCampaignColour}
 								/>
 								<HostedContentDisclaimer />
 							</ArticleContainer>
