@@ -98,7 +98,7 @@ export const AppsAudioPlayButton = ({
 				size="default"
 				cssOverrides={buttonCss(audioDuration)}
 			>
-				<span>Listen to this episode</span>
+				<span>Listen to this podcast</span>
 				{audioDuration !== undefined && audioDuration !== '' && (
 					<>
 						<span css={dividerCss}></span>
