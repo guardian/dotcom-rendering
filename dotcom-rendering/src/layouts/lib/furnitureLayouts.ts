@@ -2,19 +2,16 @@ import { css, type SerializedStyles } from '@emotion/react';
 import { from, until } from '@guardian/source/foundations';
 import { type ColumnPreset, grid, type Line } from '../../grid';
 
-export type LayoutType = 'standard' | 'matchReport' | 'media';
+export type LayoutType = 'standard' | 'media';
 
 export type Area =
-	// Common areas
 	| 'title'
 	| 'headline'
 	| 'standfirst'
 	| 'main-media'
 	| 'meta'
 	| 'body'
-	| 'right-column'
-	// Match report specific area
-	| 'match-summary';
+	| 'right-column';
 
 type Breakpoint = 'mobile' | 'tablet' | 'desktop' | 'leftCol';
 
@@ -57,18 +54,6 @@ const furnitureRowLayouts: Record<LayoutType, LayoutDefinition> = {
 			['meta', 'body', 'right-column'],
 		],
 	},
-
-	matchReport: {
-		tablet: [['match-summary'], ...tabletVanillaRows],
-		desktop: [['match-summary', 'right-column'], ...desktopVanillaRows],
-		leftCol: [
-			['title', 'match-summary', 'right-column'],
-			['headline', 'right-column'],
-			['meta', 'main-media', 'right-column'],
-			['meta', 'body', 'right-column'],
-		],
-	},
-
 	media: {
 		mobile: mediaRowsUntilDesktop,
 		tablet: mediaRowsUntilDesktop,
@@ -110,7 +95,6 @@ const furnitureColumnLayouts: Record<LayoutType, ColumnLayoutMap> = {
 			desktop: ['centre-column-start', 'right-column-start'],
 		},
 	},
-	matchReport: furnitureColumnDefaults,
 };
 
 // Types
