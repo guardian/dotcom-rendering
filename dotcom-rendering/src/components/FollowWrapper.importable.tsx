@@ -42,31 +42,62 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 			type: 'tag-contributor',
 		});
 
-		void getNotificationsClient()
-			.isFollowing(topic)
-			.then(setIsFollowingNotifications)
-			.catch((error) => {
-				window.guardian.modules.sentry.reportError(
-					error,
-					'bridget-getNotificationsClient-isFollowing-error',
-				);
-				log(
-					'dotcom',
-					'Bridget getNotificationsClient.isFollowing Error:',
-					error,
-				);
-			});
+		void Promise.all([
+			getNotificationsClient()
+				.isFollowing(topic)
+				.catch((error) => {
+					window.guardian.modules.sentry.reportError(
+						error,
+						'bridget-getNotificationsClient-isFollowing-error',
+					);
+					log(
+						'dotcom',
+						'Bridget getNotificationsClient.isFollowing Error:',
+						error,
+					);
+					return undefined;
+				}),
+			getTagClient()
+				.isFollowing(topic)
+				.catch((error) => {
+					window.guardian.modules.sentry.reportError(
+						error,
+						'bridget-getTagClient-isFollowing-error',
+					);
+					log(
+						'dotcom',
+						'Bridget getTagClient.isFollowing Error:',
+						error,
+					);
+					return undefined;
+				}),
+		]).then(([followingNotifications, followingTag]) => {
+			setIsFollowingNotifications(followingNotifications);
+			setIsFollowingTag(followingTag);
 
-		void getTagClient()
-			.isFollowing(topic)
-			.then(setIsFollowingTag)
-			.catch((error) => {
-				window.guardian.modules.sentry.reportError(
-					error,
-					'bridget-getTagClient-isFollowing-error',
-				);
-				log('dotcom', 'Bridget getTagClient.isFollowing Error:', error);
-			});
+			// Legacy: if user has notifications on but isn't following,
+			// auto-follow the tag to keep states consistent
+			if (followingNotifications && !followingTag) {
+				void getTagClient()
+					.follow(topic)
+					.then((success) => {
+						if (success) {
+							setIsFollowingTag(true);
+						}
+					})
+					.catch((error) => {
+						window.guardian.modules.sentry.reportError(
+							error,
+							'bridget-getTagClient-auto-follow-error',
+						);
+						log(
+							'dotcom',
+							'Bridget getTagClient.follow (auto) Error:',
+							error,
+						);
+					});
+			}
+		});
 	}, [id, displayName]);
 
 	const tagHandler = () => {
@@ -95,6 +126,26 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 						error,
 					);
 				});
+
+			// Turn off notifications when unfollowing
+			void getNotificationsClient()
+				.unfollow(topic)
+				.then((success) => {
+					if (success) {
+						setIsFollowingNotifications(false);
+					}
+				})
+				.catch((error) => {
+					window.guardian.modules.sentry.reportError(
+						error,
+						'bridget-getNotificationsClient-unfollow-error',
+					);
+					log(
+						'dotcom',
+						'Bridget getNotificationsClient.unfollow Error:',
+						error,
+					);
+				});
 		} else {
 			void getTagClient()
 				.follow(topic)
@@ -109,6 +160,26 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 						'bridget-getTagClient-follow-error',
 					);
 					log('dotcom', 'Bridget getTagClient.follow Error:', error);
+				});
+
+			// Enable notifications when following
+			void getNotificationsClient()
+				.follow(topic)
+				.then((success) => {
+					if (success) {
+						setIsFollowingNotifications(true);
+					}
+				})
+				.catch((error) => {
+					window.guardian.modules.sentry.reportError(
+						error,
+						'bridget-getNotificationsClient-follow-error',
+					);
+					log(
+						'dotcom',
+						'Bridget getNotificationsClient.follow Error:',
+						error,
+					);
 				});
 		}
 	};
@@ -189,14 +260,16 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 					withExtraBottomMargin={true}
 				/>
 			)}
-			<FollowNotificationsButton
-				isFollowing={isFollowingNotifications ?? false}
-				onClickHandler={
-					!isUndefined(isFollowingNotifications)
-						? notificationsHandler
-						: () => undefined
-				}
-			/>
+			{isFollowingTag && (
+				<FollowNotificationsButton
+					isFollowing={isFollowingNotifications ?? false}
+					onClickHandler={
+						!isUndefined(isFollowingNotifications)
+							? notificationsHandler
+							: () => undefined
+					}
+				/>
+			)}
 		</div>
 	);
 };
