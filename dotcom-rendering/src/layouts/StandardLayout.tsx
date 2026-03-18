@@ -597,7 +597,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						area="right-column"
 						layoutType={layoutType}
 						customCss={css`
-							padding-top: 6px;
+							padding-top: ${isMedia ? 0 : 6}px;
+							padding-bottom: ${isMedia ? 41 : 0}px;
 						`}
 						element="aside"
 					>
