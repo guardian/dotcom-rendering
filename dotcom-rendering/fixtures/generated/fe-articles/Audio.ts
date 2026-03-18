@@ -712,15 +712,10 @@ export const Audio: FEArticle = {
 				{
 					index: 1,
 					fields: {
-						displayCredit: 'true',
 						isMaster: 'true',
-						altText: 'Illustration: Anais Mims/Guardian Design',
-						mediaId: '5ef9f1435cd06589bf2a031119b64d38633d4197',
 						width: '3750',
 						source: 'Getty / Guardian Design',
-						photographer: 'Anaïs Mims',
 						height: '3000',
-						credit: 'Illustration: Anaïs Mims/Getty / Guardian Design',
 					},
 					mediaType: 'Image',
 					url: 'https://media.guim.co.uk/5ef9f1435cd06589bf2a031119b64d38633d4197/625_0_3750_3000/master/3750.jpg',
@@ -728,14 +723,9 @@ export const Audio: FEArticle = {
 				{
 					index: 1,
 					fields: {
-						displayCredit: 'true',
-						altText: 'Illustration: Anais Mims/Guardian Design',
-						mediaId: '5ef9f1435cd06589bf2a031119b64d38633d4197',
 						width: '3750',
 						source: 'Getty / Guardian Design',
-						photographer: 'Anaïs Mims',
 						height: '3000',
-						credit: 'Illustration: Anaïs Mims/Getty / Guardian Design',
 					},
 					mediaType: 'Image',
 					url: 'https://media.guim.co.uk/5ef9f1435cd06589bf2a031119b64d38633d4197/625_0_3750_3000/3750.jpg',
@@ -743,14 +733,9 @@ export const Audio: FEArticle = {
 				{
 					index: 1,
 					fields: {
-						displayCredit: 'true',
-						altText: 'Illustration: Anais Mims/Guardian Design',
-						mediaId: '5ef9f1435cd06589bf2a031119b64d38633d4197',
 						width: '500',
 						source: 'Getty / Guardian Design',
-						photographer: 'Anaïs Mims',
 						height: '400',
-						credit: 'Illustration: Anaïs Mims/Getty / Guardian Design',
 					},
 					mediaType: 'Image',
 					url: 'https://media.guim.co.uk/5ef9f1435cd06589bf2a031119b64d38633d4197/625_0_3750_3000/500.jpg',
