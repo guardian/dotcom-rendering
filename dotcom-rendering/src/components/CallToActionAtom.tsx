@@ -14,6 +14,7 @@ type CallToActionProps = {
 	backgroundImage?: string;
 	text?: string;
 	buttonText?: string;
+	accentColour?: string;
 };
 
 const overlayMaskGradientStyles = (angle: string, startPosition: number) => {
@@ -116,6 +117,7 @@ export const CallToActionAtom = ({
 	backgroundImage,
 	text,
 	buttonText,
+	accentColour,
 }: CallToActionProps) => {
 	return (
 		<a
@@ -153,9 +155,17 @@ export const CallToActionAtom = ({
 						size="small"
 						icon={<SvgExternal />}
 						theme={{
-							textPrimary: sourcePalette.neutral[7],
-							backgroundPrimary: sourcePalette.neutral[100],
-							backgroundPrimaryHover: sourcePalette.neutral[86],
+							// We also still need to implement the dark mode based on the provided designs which should be the same as not providing an accent colour.
+							textPrimary: accentColour
+								? sourcePalette.neutral[100]
+								: sourcePalette.neutral[0],
+							backgroundPrimary:
+								accentColour ?? sourcePalette.neutral[100],
+							//This is temporary as the behaviour we have in PROD is a lightbox when hover over the CTA.
+							backgroundPrimaryHover: transparentColour(
+								accentColour ?? sourcePalette.neutral[100],
+								0.8,
+							),
 						}}
 					>
 						{buttonText}
