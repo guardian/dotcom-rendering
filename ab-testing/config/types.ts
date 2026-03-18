@@ -50,6 +50,13 @@ type ABTest = {
 	 * See DCR Metrics component for end usage
 	 */
 	shouldForceMetricsCollection?: boolean;
+	/**
+	 * A function to determine if the test should be included in Ophan reporting,
+	 * enabling server-side tests to exclude certain pageviews on the client
+	 *
+	 * On by default: if not provided, the test will report to Ophan as usual.
+	 */
+	reportToOphan?: () => boolean;
 };
 
 export type { ABTest, FastlyTestParams, AudienceSpace, AllSpace };
