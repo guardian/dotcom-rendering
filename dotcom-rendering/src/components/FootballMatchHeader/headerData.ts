@@ -70,7 +70,7 @@ const getInfoUrl = (
 	const parsedInfoURL = safeParseURL(feData.infoURL);
 
 	if (!parsedInfoURL.ok) {
-		return error({ kind: 'info' } as MatchURLError);
+		return error({ kind: 'info' });
 	}
 
 	if (renderingTarget === 'Apps') {
