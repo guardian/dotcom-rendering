@@ -15,7 +15,6 @@ import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
 import { PictureLayout } from './PictureLayout';
-import { ShowcaseLayout } from './ShowcaseLayout';
 import { StandardLayout } from './StandardLayout';
 
 interface BaseProps {
@@ -103,7 +102,7 @@ const DecideLayoutApps = ({ article, renderingTarget }: AppProps) => {
 					);
 				default:
 					return (
-						<ShowcaseLayout
+						<StandardLayout
 							article={article.frontendData}
 							format={format}
 							renderingTarget={renderingTarget}
@@ -270,7 +269,7 @@ const DecideLayoutWeb = ({ article, NAV, renderingTarget }: WebProps) => {
 					);
 				default:
 					return (
-						<ShowcaseLayout
+						<StandardLayout
 							article={article.frontendData}
 							NAV={NAV}
 							format={format}
