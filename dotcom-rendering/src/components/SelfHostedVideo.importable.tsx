@@ -23,6 +23,7 @@ import {
 import { palette } from '../palette';
 import type { RoleType } from '../types/content';
 import type { VideoPlayerFormat } from '../types/mainMedia';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { Caption } from './Caption';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
@@ -32,7 +33,8 @@ import type {
 	SubtitleSize,
 } from './SelfHostedVideoPlayer';
 import { SelfHostedVideoPlayer } from './SelfHostedVideoPlayer';
-import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
+import type { OphanVideoStyle } from './YoutubeAtom/eventEmitters';
+import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
 const VISIBILITY_THRESHOLD = 0.5;
 
@@ -155,11 +157,13 @@ const logAndReportError = (src: string, error: Error) => {
 const trackAttention = async (
 	videoElement: HTMLVideoElement,
 	atomId: string,
+	renderingTarget: RenderingTarget,
+	videoStyle: OphanVideoStyle,
 ) => {
 	try {
-		const ophan = await getOphan('Web');
+		const ophan = await getOphan(renderingTarget);
 		ophan.trackComponentAttention(
-			`gu-video-loop-${atomId}`,
+			`gu-video-${videoStyle}-${atomId}`,
 			videoElement,
 			VISIBILITY_THRESHOLD,
 			true,
@@ -321,6 +325,8 @@ export const SelfHostedVideo = ({
 	 */
 	const isCinemagraph = videoStyle === 'Cinemagraph';
 
+	const ophanVideoStyle = videoStyle.toLowerCase() as OphanVideoStyle;
+
 	const [isInView, setNode] = useIsInView({
 		repeat: true,
 		threshold: VISIBILITY_THRESHOLD,
@@ -334,6 +340,7 @@ export const SelfHostedVideo = ({
 
 	const playVideo = useCallback(async () => {
 		const video = vidRef.current;
+		const isWeb = renderingTarget === 'Web';
 		if (!video) return;
 
 		/** https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay#example_handling_play_failures */
@@ -344,7 +351,9 @@ export const SelfHostedVideo = ({
 			await startPlayPromise
 				.then(() => {
 					// Autoplay succeeded
-					dispatchOphanAttentionEvent('videoPlaying');
+					if (isWeb) {
+						dispatchOphanAttentionEvent('videoPlaying');
+					}
 					setPlayerState('PLAYING');
 				})
 				.catch((error: Error) => {
@@ -354,7 +363,7 @@ export const SelfHostedVideo = ({
 					setPlayerState('PAUSED_BY_BROWSER');
 				});
 		}
-	}, []);
+	}, [renderingTarget]);
 
 	const pauseVideo = (
 		pauseReason: Extract<
@@ -372,7 +381,10 @@ export const SelfHostedVideo = ({
 		}
 
 		setPlayerState(pauseReason);
-		dispatchOphanAttentionEvent('videoPause');
+
+		if (renderingTarget === 'Web') {
+			dispatchOphanAttentionEvent('videoPause');
+		}
 
 		void video.pause();
 	};
@@ -430,7 +442,12 @@ export const SelfHostedVideo = ({
 		 * Initialise Ophan attention tracking
 		 */
 		if (vidRef.current) {
-			void trackAttention(vidRef.current, atomId);
+			void trackAttention(
+				vidRef.current,
+				atomId,
+				renderingTarget,
+				ophanVideoStyle,
+			);
 		}
 
 		/**
@@ -513,7 +530,7 @@ export const SelfHostedVideo = ({
 				handlePageBecomesVisible();
 			});
 		};
-	}, [uniqueId, atomId]);
+	}, [uniqueId, atomId, renderingTarget, ophanVideoStyle]);
 
 	/**
 	 * Track the first time the video comes into view.
@@ -600,8 +617,12 @@ export const SelfHostedVideo = ({
 	 */
 	const handlePlaying = () => {
 		if (hasTrackedPlay) return;
-
-		ophanTrackerWeb(atomId, 'loop')('play');
+		if (renderingTarget === 'Web') {
+			ophanTrackerWeb(atomId, ophanVideoStyle)('play');
+		}
+		if (renderingTarget === 'Apps') {
+			ophanTrackerApps(atomId, ophanVideoStyle)('play');
+		}
 		setHasTrackedPlay(true);
 	};
 
