@@ -267,7 +267,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						}),
 					])}
 				>
-					{applyFootballRedesign && isMatchReport && (
+					{!applyFootballRedesign && isMatchReport && (
 						<GridItem
 							area="match-summary"
 							layoutType={layoutType}

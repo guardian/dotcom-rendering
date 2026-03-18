@@ -57,7 +57,6 @@ const furnitureRowLayouts: Record<LayoutType, LayoutDefinition> = {
 			['meta', 'body', 'right-column'],
 		],
 	},
-
 	matchReport: {
 		tablet: [['match-summary'], ...tabletVanillaRows],
 		desktop: [['match-summary', 'right-column'], ...desktopVanillaRows],
@@ -68,7 +67,6 @@ const furnitureRowLayouts: Record<LayoutType, LayoutDefinition> = {
 			['meta', 'body', 'right-column'],
 		],
 	},
-
 	media: {
 		mobile: mediaRowsUntilDesktop,
 		tablet: mediaRowsUntilDesktop,
