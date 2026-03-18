@@ -42,16 +42,13 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 	const isMyGuardianEnabled = useIsMyGuardianEnabled();
 	const isBridgetCompatible = useIsBridgetCompatible('2.5.0');
 
-	const isNotInBlockList = (tagId: string) => {
-		const blockList = ['profile/anas-al-sharif'];
-		return !blockList.includes(tagId);
-	};
+	const blockList = ['profile/anas-al-sharif'];
 
 	useEffect(() => {
 		if (
 			isBridgetCompatible &&
 			isMyGuardianEnabled &&
-			isNotInBlockList(id)
+			!blockList.includes(id)
 		) {
 			setShowFollowTagButton(true);
 		}
