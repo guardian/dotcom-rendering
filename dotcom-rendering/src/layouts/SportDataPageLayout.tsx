@@ -90,6 +90,7 @@ const SportsPage = ({
 						edition={sportData.editionId}
 						matchHeaderUrl={sportData.matchHeaderUrl}
 						table={sportData.group}
+						renderingTarget={renderingTarget}
 					/>
 				);
 			}

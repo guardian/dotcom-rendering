@@ -7,6 +7,7 @@ import { type FootballTableSummary } from '../footballTables';
 import { grid } from '../grid';
 import { type EditionId } from '../lib/edition';
 import { palette } from '../palette';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { FootballMatchInfo } from './FootballMatchInfo';
 import { Island } from './Island';
 
@@ -16,6 +17,7 @@ export const FootballMatchInfoPage = ({
 	competitionName,
 	edition,
 	matchHeaderUrl,
+	renderingTarget,
 	table,
 }: {
 	matchStats: FootballMatchStats;
@@ -23,6 +25,7 @@ export const FootballMatchInfoPage = ({
 	competitionName: string;
 	edition: EditionId;
 	matchHeaderUrl: URL;
+	renderingTarget: RenderingTarget;
 	table?: FootballTableSummary;
 }) => {
 	return (
@@ -43,6 +46,7 @@ export const FootballMatchInfoPage = ({
 					}}
 					edition={edition}
 					matchHeaderURL={matchHeaderUrl.href}
+					renderingTarget={renderingTarget}
 				/>
 			</Island>
 			<div css={bodyGridStyles}>
