@@ -85,7 +85,9 @@ const headlineStyles = css`
 const metaStyles = css`
 	${grid.column.centre}
 	grid-row-start: 3;
+`;
 
+const shareButtonStyles = css`
 	margin-top: ${space[4]}px;
 	padding: ${space[1]}px;
 
@@ -275,21 +277,23 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						/>
 					</div>
 
-					{props.renderingTarget === 'Web' && (
-						<div data-print-layout="hide" css={metaStyles}>
-							<Island
-								priority="feature"
-								defer={{ until: 'visible' }}
-							>
-								<ShareButton
-									pageId={frontendData.pageId}
-									webTitle={frontendData.webTitle}
-									format={format}
-									context="ArticleMeta"
-								/>
-							</Island>
-						</div>
-					)}
+					<div data-print-layout="hide" css={metaStyles}>
+						{props.renderingTarget === 'Web' && (
+							<div css={shareButtonStyles}>
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
+									<ShareButton
+										pageId={frontendData.pageId}
+										webTitle={frontendData.webTitle}
+										format={format}
+										context="ArticleMeta"
+									/>
+								</Island>
+							</div>
+						)}
+					</div>
 
 					<div css={headlineStyles}>
 						<ArticleHeadline
