@@ -130,6 +130,11 @@ const buildPayload = async ({
 	pageId,
 	inHoldbackGroup,
 }: BuildPayloadProps): Promise<BannerPayload> => {
+	const getBrowserId = (): string | undefined => {
+		if (!userConsent) return undefined;
+		return getCookie({ name: 'bwid', shouldMemoize: true }) ?? undefined;
+	};
+
 	const articleCounts = await asyncArticleCounts;
 	const weeklyArticleHistory = articleCounts?.weeklyArticleHistory;
 	const articleCountToday = getArticleCountToday(articleCounts);
@@ -161,6 +166,7 @@ const buildPayload = async ({
 			),
 			pageId,
 			inHoldbackGroup,
+			browserId: getBrowserId(),
 		},
 	};
 };
