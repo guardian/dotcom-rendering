@@ -9,44 +9,54 @@ import {
 } from './enhanceCards';
 
 describe('Enhance Cards', () => {
+	const testMp4Asset: FEMediaAsset = {
+		id: 'https://guim-example.co.uk/atomID-1.mp4',
+		version: 1,
+		platform: 'Url',
+		mimeType: 'video/mp4',
+		assetType: 'Video',
+		dimensions: {
+			height: 400,
+			width: 500,
+		},
+	};
+
+	const testSubtitleAsset: FEMediaAsset = {
+		id: 'https://guim-example.co.uk/atomID-1.vtt',
+		version: 1,
+		platform: 'Url',
+		mimeType: 'text/vtt',
+		assetType: 'Subtitles',
+	};
+
+	const testM3u8Asset: FEMediaAsset = {
+		id: 'https://guim-example.co.uk/atomID-1.m3u8',
+		version: 1,
+		platform: 'Url',
+		mimeType: 'application/x-mpegURL',
+		assetType: 'Video',
+		dimensions: {
+			height: 400,
+			width: 500,
+		},
+	};
+
+	const testMediaAtom: FEMediaAtom = {
+		id: 'atomID',
+		assets: [testMp4Asset, testM3u8Asset],
+		title: 'Example video',
+		duration: 15,
+		source: '',
+		posterImage: { allImages: [] },
+		trailImage: { allImages: [] },
+		expired: false,
+		activeVersion: 1,
+	};
+
 	describe('getActiveMediaAtom', () => {
 		it('prioritises MP4 assets over m3u8 assets', () => {
 			const videoReplace = true;
-			const assets: FEMediaAsset[] = [
-				{
-					id: 'https://guim-example.co.uk/atomID-1.mp4',
-					version: 1,
-					platform: 'Url',
-					mimeType: 'video/mp4',
-					assetType: 'Video',
-					dimensions: {
-						height: 400,
-						width: 500,
-					},
-				},
-				{
-					id: 'https://guim-example.co.uk/atomID-1.m3u8',
-					version: 1,
-					platform: 'Url',
-					mimeType: 'application/x-mpegURL',
-					assetType: 'Video',
-					dimensions: {
-						height: 400,
-						width: 500,
-					},
-				},
-			];
-			const mediaAtom: FEMediaAtom = {
-				id: 'atomID',
-				assets,
-				title: 'Example video',
-				duration: 15,
-				source: '',
-				posterImage: { allImages: [] },
-				trailImage: { allImages: [] },
-				expired: false,
-				activeVersion: 1,
-			};
+			const mediaAtom = testMediaAtom;
 			const cardTrailImage = '';
 
 			expect(
@@ -73,49 +83,50 @@ describe('Enhance Cards', () => {
 			});
 		});
 
+		it('returns the larger of two MP4 assets', () => {
+			const videoReplace = true;
+			const mediaAtom: FEMediaAtom = {
+				...testMediaAtom,
+				assets: [
+					{
+						...testMp4Asset,
+						dimensions: { height: 400, width: 500 },
+						id: 'https://guim-example.co.uk/atomID-1.mp4',
+					},
+					{
+						...testMp4Asset,
+						dimensions: { height: 600, width: 750 },
+						id: 'https://guim-example.co.uk/atomID-2.mp4',
+					},
+				],
+			};
+			const cardTrailImage = '';
+
+			expect(
+				getActiveMediaAtom(videoReplace, mediaAtom, cardTrailImage),
+			).toEqual({
+				atomId: 'atomID',
+				duration: 15,
+				height: 400,
+				width: 500,
+				image: '',
+				type: 'SelfHostedVideo',
+				videoStyle: 'Loop',
+				subtitleSource: undefined,
+				sources: [
+					{
+						mimeType: 'video/mp4',
+						src: 'https://guim-example.co.uk/atomID-2.mp4',
+					},
+				],
+			});
+		});
+
 		it('filters out non-video assets', () => {
 			const videoReplace = true;
-			const assets: FEMediaAsset[] = [
-				{
-					id: 'https://guim-example.co.uk/atomID-1.vtt',
-					version: 1,
-					platform: 'Url',
-					mimeType: 'text/vtt',
-					assetType: 'Subtitles',
-				},
-				{
-					id: 'https://guim-example.co.uk/atomID-1.m3u8',
-					version: 1,
-					platform: 'Url',
-					mimeType: 'application/x-mpegURL',
-					assetType: 'Video',
-					dimensions: {
-						height: 400,
-						width: 500,
-					},
-				},
-				{
-					id: 'https://guim-example.co.uk/atomID-1.mp4',
-					version: 1,
-					platform: 'Url',
-					mimeType: 'video/mp4',
-					assetType: 'Video',
-					dimensions: {
-						height: 400,
-						width: 500,
-					},
-				},
-			];
 			const mediaAtom: FEMediaAtom = {
-				id: 'atomID',
-				assets,
-				title: 'Example video',
-				duration: 15,
-				source: '',
-				posterImage: { allImages: [] },
-				trailImage: { allImages: [] },
-				expired: false,
-				activeVersion: 1,
+				...testMediaAtom,
+				assets: [testSubtitleAsset, testM3u8Asset, testMp4Asset],
 			};
 			const cardTrailImage = '';
 
@@ -146,7 +157,7 @@ describe('Enhance Cards', () => {
 
 	describe('getMediaMetadata', () => {
 		it('extracts type, duration, and live status from a YouTube video media object', () => {
-			const media: MainMedia = {
+			const testYoutubeMainMedia: MainMedia = {
 				type: 'YoutubeVideo',
 				id: 'atomID',
 				videoId: 'videoID',
@@ -159,7 +170,7 @@ describe('Enhance Cards', () => {
 				isLive: false,
 			};
 
-			expect(getMediaMetadata(media)).toEqual({
+			expect(getMediaMetadata(testYoutubeMainMedia)).toEqual({
 				type: 'YoutubeVideo',
 				duration: 151,
 				isLive: false,
@@ -167,7 +178,7 @@ describe('Enhance Cards', () => {
 		});
 
 		it('extracts type and duration from a self-hosted video media object', () => {
-			const media: MainMedia = {
+			const testSelfHostedMainMedia: MainMedia = {
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
 				atomId: 'atomID',
@@ -177,7 +188,7 @@ describe('Enhance Cards', () => {
 				duration: 151,
 			};
 
-			expect(getMediaMetadata(media)).toEqual({
+			expect(getMediaMetadata(testSelfHostedMainMedia)).toEqual({
 				type: 'SelfHostedVideo',
 				duration: 151,
 			});
@@ -305,19 +316,7 @@ describe('Enhance Cards', () => {
 
 			const mediaAtom: FEMediaAtom = {
 				id: 'atomID',
-				assets: [
-					{
-						id: 'https://guim-example.co.uk/atomID-1.mp4',
-						version: 1,
-						platform: 'Url',
-						mimeType: 'video/mp4',
-						assetType: 'Video',
-						dimensions: {
-							height: 400,
-							width: 500,
-						},
-					},
-				],
+				assets: [testMp4Asset],
 				title: 'Example video',
 				duration: 15,
 				source: '',
@@ -360,19 +359,7 @@ describe('Enhance Cards', () => {
 		it('returns undefined if a mediaAtom is provided but showMainVideo and videoReplace are both false', () => {
 			const mediaAtom: FEMediaAtom = {
 				id: 'atomID',
-				assets: [
-					{
-						id: 'https://guim-example.co.uk/atomID-1.mp4',
-						version: 1,
-						platform: 'Url',
-						mimeType: 'video/mp4',
-						assetType: 'Video',
-						dimensions: {
-							height: 400,
-							width: 500,
-						},
-					},
-				],
+				assets: [testMp4Asset],
 				title: 'Example video',
 				duration: 15,
 				source: '',
@@ -391,19 +378,7 @@ describe('Enhance Cards', () => {
 		it('returns a video main media if a mediaAtom is provided and showMainVideo is set to true', () => {
 			const mediaAtom: FEMediaAtom = {
 				id: 'atomID',
-				assets: [
-					{
-						id: 'https://guim-example.co.uk/atomID-1.mp4',
-						version: 1,
-						platform: 'Url',
-						mimeType: 'video/mp4',
-						assetType: 'Video',
-						dimensions: {
-							height: 400,
-							width: 500,
-						},
-					},
-				],
+				assets: [testMp4Asset],
 				title: 'Example video',
 				duration: 15,
 				source: '',
@@ -432,22 +407,11 @@ describe('Enhance Cards', () => {
 				width: 500,
 			});
 		});
+
 		it('returns a video main media if a mediaAtom is provided and videoReplace is set to true', () => {
 			const mediaAtom: FEMediaAtom = {
 				id: 'atomID',
-				assets: [
-					{
-						id: 'https://guim-example.co.uk/atomID-1.mp4',
-						version: 1,
-						platform: 'Url',
-						mimeType: 'video/mp4',
-						assetType: 'Video',
-						dimensions: {
-							height: 400,
-							width: 500,
-						},
-					},
-				],
+				assets: [testMp4Asset],
 				title: 'Example video',
 				duration: 15,
 				source: '',

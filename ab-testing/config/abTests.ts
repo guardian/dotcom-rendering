@@ -32,18 +32,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "commercial-prebid-v10",
-		description: "Testing Prebid.js v10 integration on DCR",
-		owners: ["commercial.dev@guardian.co.uk"],
-		status: "OFF",
-		expirationDate: "2026-03-10",
-		type: "client",
-		audienceSize: 10 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: true,
-	},
-	{
 		name: "webex-football-redesign",
 		description: "Testing the Redesign for the football pages",
 		owners: ["dotcom.platform@theguardian.com"],
