@@ -222,12 +222,20 @@ export const getActiveMediaAtom = (
 		 * Therefore, we check the platform of the first asset and assume the rest are the same.
 		 */
 		if (firstVideoAsset.platform === 'Url') {
+			// Order the assets by largest width: for now, we only use the largest video, but there
+			// be a follow up PR to select the appropriate video source based on the users screen size.
+			const orderedSources = assets.sort(
+				(a, b) =>
+					Number(b.dimensions?.width ?? 0) -
+					Number(a.dimensions?.width ?? 0),
+			);
+
 			/**
 			 * Take one source for each supported video file type.
 			 */
 			const sources = supportedVideoFileTypes.reduce<typeof assets>(
 				(acc, type) => {
-					const source = assets.find(
+					const source = orderedSources.find(
 						({ mimeType }) => mimeType === type,
 					);
 					if (source) acc.push(source);
@@ -258,7 +266,7 @@ export const getActiveMediaAtom = (
 		}
 
 		/**
-		 * There should only be one asset for Youtube atoms.
+		 * There should only be one asset for Youtube atoms, so we use the first one.
 		 */
 		if (firstVideoAsset.platform === 'Youtube') {
 			return {
