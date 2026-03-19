@@ -306,6 +306,9 @@ export const AudioLayout = (props: WebProps | AppProps) => {
 											article.config.discussionApiUrl
 										}
 										shortUrlId={article.config.shortUrlId}
+										mainMediaElements={
+											article.mainMediaElements
+										}
 									/>
 								)}
 								{!!article.affiliateLinksDisclaimer && (
