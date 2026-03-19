@@ -3,7 +3,10 @@ import { from, space, textSans15 } from '@guardian/source/foundations';
 import { createBannerBodyCopy } from '../../components/BannerText';
 import type { BannerData } from '../BannerProps';
 
-const getStyles = (textColour: string, highlightColour?: string) => ({
+const getStyles = (
+	highlightedTextColour: string,
+	highlightColour?: string,
+) => ({
 	container: css`
 		margin-bottom: ${space[4]}px;
 
@@ -24,7 +27,7 @@ const getStyles = (textColour: string, highlightColour?: string) => ({
 	`,
 	highlightedText: css`
 		display: inline;
-		color: ${textColour};
+		color: ${highlightedTextColour};
 
 		${highlightColour
 			? `
@@ -41,12 +44,12 @@ export const BannerBody = ({
 }: {
 	bannerData: BannerData;
 }): JSX.Element | null => {
-	const textColour =
+	const highlightedTextColour =
 		bannerData.settings.highlightedTextSettings.textColour ?? '';
 	const highlightColour =
 		bannerData.settings.highlightedTextSettings.highlightColour;
 
-	const styles = getStyles(textColour, highlightColour);
+	const styles = getStyles(highlightedTextColour, highlightColour);
 	const { copyForViewport, showBody } = bannerData.selectors;
 
 	return (
