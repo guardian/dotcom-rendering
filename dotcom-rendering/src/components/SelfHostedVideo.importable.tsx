@@ -319,6 +319,9 @@ export const SelfHostedVideo = ({
 	const [width, setWidth] = useState(expectedWidth);
 	const [height, setHeight] = useState(expectedHeight);
 
+	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
+
 	/**
 	 * All controls on the video are hidden: the video looks like a GIF.
 	 * This includes but may not be limited to: audio icon, play/pause icon, subtitles, progress bar.
@@ -340,7 +343,6 @@ export const SelfHostedVideo = ({
 
 	const playVideo = useCallback(async () => {
 		const video = vidRef.current;
-		const isWeb = renderingTarget === 'Web';
 		if (!video) return;
 
 		/** https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay#example_handling_play_failures */
@@ -363,7 +365,7 @@ export const SelfHostedVideo = ({
 					setPlayerState('PAUSED_BY_BROWSER');
 				});
 		}
-	}, [renderingTarget]);
+	}, [isWeb]);
 
 	const pauseVideo = (
 		pauseReason: Extract<
@@ -382,7 +384,7 @@ export const SelfHostedVideo = ({
 
 		setPlayerState(pauseReason);
 
-		if (renderingTarget === 'Web') {
+		if (isWeb) {
 			dispatchOphanAttentionEvent('videoPause');
 		}
 
@@ -617,10 +619,10 @@ export const SelfHostedVideo = ({
 	 */
 	const handlePlaying = () => {
 		if (hasTrackedPlay) return;
-		if (renderingTarget === 'Web') {
+		if (isWeb) {
 			ophanTrackerWeb(atomId, ophanVideoStyle)('play');
 		}
-		if (renderingTarget === 'Apps') {
+		if (isApps) {
 			ophanTrackerApps(atomId, ophanVideoStyle)('play');
 		}
 		setHasTrackedPlay(true);
