@@ -49,6 +49,7 @@ type BaseProps = {
 	abandonedBasketBannerLastClosedAt?: string;
 	pageId?: string;
 	inHoldbackGroup?: boolean;
+	inAuxiaVariant?: boolean;
 };
 
 type BuildPayloadProps = BaseProps & {
@@ -129,8 +130,10 @@ const buildPayload = async ({
 	hideSupportMessagingForUser,
 	pageId,
 	inHoldbackGroup,
+	inAuxiaVariant,
 }: BuildPayloadProps): Promise<BannerPayload> => {
 	const getBrowserId = (): string | undefined => {
+		if (!inAuxiaVariant) return undefined;
 		if (!userConsent) return undefined;
 		return getCookie({ name: 'bwid', shouldMemoize: true }) ?? undefined;
 	};
@@ -195,6 +198,7 @@ export const canShowRRBanner: CanShowFunctionType<
 	ophanPageViewId,
 	pageId,
 	inHoldbackGroup,
+	inAuxiaVariant,
 }) => {
 	if (!remoteBannerConfig) return { show: false };
 
@@ -258,6 +262,7 @@ export const canShowRRBanner: CanShowFunctionType<
 		hideSupportMessagingForUser,
 		pageId,
 		inHoldbackGroup,
+		inAuxiaVariant,
 	});
 
 	const headers = await getAuthHeaders();

@@ -158,6 +158,18 @@ const ABTests: ABTest[] = [
 		groups: ["control", "variant"],
 		shouldForceMetricsCollection: true,
 	},
+	{
+		name: "growth-auxia-banner",
+		description: "Use Auxia API for deciding when to show a RR banner",
+		owners: ["growth.dev@guardian.co.uk"],
+		expirationDate: "2026-09-01",
+		type: "client",
+		status: "ON",
+		audienceSize: 1,
+		audienceSpace: "A",
+		groups: ["control", "variant"],
+		shouldForceMetricsCollection: true,
+	},
 ];
 
 const activeABtests = ABTests.filter((test) => test.status === "ON");
