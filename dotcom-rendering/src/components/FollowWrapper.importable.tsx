@@ -29,6 +29,8 @@ const notificationTextStyles = css`
 	padding: 0;
 `;
 
+const blockList = ['profile/anas-al-sharif'];
+
 export const FollowWrapper = ({ id, displayName }: Props) => {
 	const [isFollowingNotifications, setIsFollowingNotifications] = useState<
 		boolean | undefined
@@ -41,8 +43,6 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 
 	const isMyGuardianEnabled = useIsMyGuardianEnabled();
 	const isBridgetCompatible = useIsBridgetCompatible('2.5.0');
-
-	const blockList = ['profile/anas-al-sharif'];
 
 	useEffect(() => {
 		if (
