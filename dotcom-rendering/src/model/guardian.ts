@@ -1,3 +1,4 @@
+import type { Jsonify } from 'type-fest';
 import type { EditionId } from '../lib/edition';
 import type {
 	ConfigType,
@@ -58,7 +59,7 @@ export interface Guardian {
 		};
 	};
 	modules: {
-		sentry: {
+		sentry?: {
 			reportError: ReportError;
 		};
 		/**
@@ -72,7 +73,10 @@ export interface Guardian {
 			isUserInTestGroup: (testId: string, variantId: string) => boolean;
 		};
 	};
-	adBlockers: unknown;
+	adBlockers: {
+		active: boolean | undefined;
+		onDetect: Array<(active: boolean) => void>;
+	};
 }
 
 /**
@@ -134,7 +138,7 @@ export const createGuardian = ({
 	 * commercial code failing because it depended on a property we removed
 	 */
 	unknownConfig?: ConfigType | object;
-}): Guardian => {
+}): Jsonify<Guardian> => {
 	return {
 		config: {
 			// This indicates to the client side code that we are running a dotcom-rendering rendered page.
@@ -165,7 +169,12 @@ export const createGuardian = ({
 			libs: {
 				googletag: googletagUrl,
 			},
-			switches,
+			switches: Object.fromEntries(
+				Object.entries(switches).map(([key, value]) => [
+					key,
+					value ?? false,
+				]),
+			),
 			tests: abTests,
 			serverSideABTests,
 			ophan: {
@@ -179,14 +188,10 @@ export const createGuardian = ({
 			onDetect: [],
 		},
 		modules: {
-			sentry: {
-				reportError: () => null,
-			},
-			abTests: {
-				getParticipations: () => ({}),
-				isUserInTest: () => false,
-				isUserInTestGroup: () => false,
-			},
+			// This is a stub for the sentry module, which is later initialised on the client with the `reportError` function.
+			sentry: undefined,
+			// This is a stub for the abTests module, which is later initialised on the client with the `getParticipations`, `isUserInTest` and `isUserInTestGroup` functions.
+			abTests: undefined,
 		},
 	};
 };
