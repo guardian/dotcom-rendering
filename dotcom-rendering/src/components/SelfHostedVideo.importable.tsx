@@ -233,9 +233,8 @@ type Props = {
 	sources: Source[];
 	atomId: string;
 	uniqueId: string;
-	height: number;
-	width: number;
 	videoStyle: VideoPlayerFormat;
+	aspectRatio: number;
 	posterImage: string;
 	fallbackImage: CardPictureProps['mainImage'];
 	fallbackImageSize: CardPictureProps['imageSize'];
@@ -270,9 +269,8 @@ export const SelfHostedVideo = ({
 	sources,
 	atomId,
 	uniqueId,
-	height: expectedHeight,
-	width: expectedWidth,
 	videoStyle,
+	aspectRatio,
 	posterImage,
 	fallbackImage,
 	fallbackImageSize,
@@ -308,12 +306,8 @@ export const SelfHostedVideo = ({
 	);
 	const [hasPageBecomeActive, setHasPageBecomeActive] = useState(false);
 	const [hasTrackedPlay, setHasTrackedPlay] = useState(false);
-	/**
-	 * The actual video is a better source of truth of its dimensions.
-	 * The width and height from props are useful to prevent CLS.
-	 */
-	const [width, setWidth] = useState(expectedWidth);
-	const [height, setHeight] = useState(expectedHeight);
+	const [width, setWidth] = useState<number | undefined>();
+	const [height, setHeight] = useState<number | undefined>();
 
 	/**
 	 * All controls on the video are hidden: the video looks like a GIF.
@@ -780,8 +774,6 @@ export const SelfHostedVideo = ({
 		playerState === 'PAUSED_BY_BROWSER' ||
 		(playerState === 'NOT_STARTED' && !isAutoplayAllowed);
 
-	const aspectRatio = width / height;
-
 	/** The aspect ratio of the video will be clamped within the specified range */
 	const aspectRatioOfVisibleVideo = getAspectRatioOfVisibleVideo(
 		aspectRatio,
@@ -845,6 +837,7 @@ export const SelfHostedVideo = ({
 						sources={sources}
 						atomId={atomId}
 						uniqueId={uniqueId}
+						aspectRatio={aspectRatio}
 						width={width}
 						height={height}
 						videoStyle={videoStyle}
