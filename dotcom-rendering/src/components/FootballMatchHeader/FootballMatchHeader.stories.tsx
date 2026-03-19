@@ -70,6 +70,7 @@ export const Fixture = {
 		refreshInterval: 3_000,
 		matchHeaderURL:
 			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
+		renderingTarget: 'Web',
 	},
 	play: async ({ canvas, canvasElement, step }) => {
 		const nav = canvas.getByRole('navigation');
@@ -115,6 +116,7 @@ export const Live = {
 				footballMatch: matchDayLive,
 				reportURL: undefined,
 			}),
+		renderingTarget: 'Web',
 	},
 	play: async ({ canvas, canvasElement, step }) => {
 		await step(
@@ -158,6 +160,7 @@ export const Result = {
 				...feHeaderData,
 				footballMatch: matchResult,
 			}),
+		renderingTarget: 'Web',
 	},
 
 	play: async ({ canvas, canvasElement, step }) => {
@@ -184,6 +187,49 @@ export const Result = {
 			void expect(tabs[0]).toHaveTextContent('Match report');
 			void expect(tabs[1]).toHaveTextContent('Live feed');
 			void expect(tabs[2]).toHaveTextContent('Match info');
+		});
+	},
+} satisfies Story;
+
+export const AppsResult = {
+	args: {
+		initialTab: 'report',
+		edition: 'AU',
+		matchHeaderURL:
+			'https://api.nextgen.guardianapps.co.uk/football/api/match-header/2026/02/08/26247/48490.json',
+		refreshInterval: Fixture.args.refreshInterval,
+		getHeaderData: () =>
+			getMockData({
+				...feHeaderData,
+				footballMatch: matchResult,
+			}),
+		renderingTarget: 'Apps',
+	},
+
+	play: async ({ canvas, canvasElement, step }) => {
+		await step(
+			'Placeholder shown whilst header data is being fetched',
+			async () => {
+				void expect(
+					canvasElement.querySelector('[data-name="placeholder"]'),
+				).toBeInTheDocument();
+			},
+		);
+
+		await step('Fetch match header data and render UI', async () => {
+			// Wait for 'Premier League' to appear which signals match header
+			// data has been fetched and the UI rendered on the client
+			await canvas.findByText('Premier League');
+
+			const nav = canvas.getByRole('navigation');
+			const matchInfoLink = within(nav).getByRole('link', {
+				name: 'Match info',
+			});
+
+			void expect(matchInfoLink).toHaveAttribute(
+				'href',
+				expect.stringContaining('/football/match/1'),
+			);
 		});
 	},
 } satisfies Story;

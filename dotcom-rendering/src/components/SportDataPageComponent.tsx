@@ -5,7 +5,7 @@ import { buildAdTargeting } from '../lib/ad-targeting';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
 import { filterABTestSwitches } from '../model/enhance-switches';
-import type { SportDataPage } from '../sportDataPage';
+import type { AppSportDataPage, WebSportDataPage } from '../sportDataPage';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
@@ -16,9 +16,7 @@ import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
 import { SkipTo } from './SkipTo';
 
-type Props = {
-	sportData: SportDataPage;
-};
+type Props = AppSportDataPage | WebSportDataPage;
 
 /**
  * @description
@@ -26,7 +24,9 @@ type Props = {
  *
  * @param {Props} props
  * */
-export const SportDataPageComponent = ({ sportData }: Props) => {
+export const SportDataPageComponent = (props: Props) => {
+	const { sportData, renderingTarget } = props;
+
 	const adTargeting = buildAdTargeting({
 		isAdFreeUser: sportData.isAdFreeUser,
 		isSensitive: sportData.config.isSensitive,
@@ -35,6 +35,9 @@ export const SportDataPageComponent = ({ sportData }: Props) => {
 		sharedAdTargeting: sportData.config.sharedAdTargeting,
 		adUnit: sportData.config.adUnit,
 	});
+
+	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
 
 	/* We use this as our "base" or default format */
 	const format = {
@@ -48,51 +51,76 @@ export const SportDataPageComponent = ({ sportData }: Props) => {
 	return (
 		<StrictMode>
 			<Global styles={rootStyles(format, darkModeAvailable)} />
-			<SkipTo id="maincontent" label="Skip to main content" />
-			<SkipTo id="navigation" label="Skip to navigation" />
-			<Island priority="feature" defer={{ until: 'idle' }}>
-				<AlreadyVisited />
-			</Island>
+			{isWeb && (
+				<>
+					<SkipTo id="maincontent" label="Skip to main content" />
+					<SkipTo id="navigation" label="Skip to navigation" />
+				</>
+			)}
 			<Island priority="feature" defer={{ until: 'idle' }}>
 				<FocusStyles />
 			</Island>
-			<Island priority="critical">
-				<Metrics
-					commercialMetricsEnabled={
-						!!sportData.config.switches.commercialMetrics
-					}
-					tests={sportData.config.abTests}
-				/>
-			</Island>
-			<Island priority="critical">
-				<SetABTests
-					abTestSwitches={filterABTestSwitches(
-						sportData.config.switches,
+			{/* web */}
+			{isWeb && (
+				<>
+					<Island priority="feature" defer={{ until: 'idle' }}>
+						<AlreadyVisited />
+					</Island>
+					<Island priority="critical">
+						<Metrics
+							commercialMetricsEnabled={
+								!!sportData.config.switches.commercialMetrics
+							}
+							tests={sportData.config.abTests}
+						/>
+					</Island>
+					<Island priority="critical">
+						<SetABTests
+							abTestSwitches={filterABTestSwitches(
+								sportData.config.switches,
+							)}
+							pageIsSensitive={sportData.config.isSensitive}
+							isDev={!!sportData.config.isDev}
+							serverSideTests={sportData.config.abTests}
+							serverSideABTests={
+								sportData.config.serverSideABTests
+							}
+						/>
+					</Island>
+					<Island priority="critical">
+						<SetAdTargeting adTargeting={adTargeting} />
+					</Island>
+
+					{darkModeAvailable && (
+						<DarkModeMessage>
+							Dark mode is a work-in-progress.
+							<br />
+							You can{' '}
+							<a
+								style={{ color: 'inherit' }}
+								href="/ab-tests/opt-out/webx-dark-mode-web"
+							>
+								opt out anytime
+							</a>{' '}
+							if anything is unreadable or odd.
+						</DarkModeMessage>
 					)}
-					pageIsSensitive={sportData.config.isSensitive}
-					isDev={!!sportData.config.isDev}
-					serverSideTests={sportData.config.abTests}
-					serverSideABTests={sportData.config.serverSideABTests}
-				/>
-			</Island>
-			<Island priority="critical">
-				<SetAdTargeting adTargeting={adTargeting} />
-			</Island>
-			{darkModeAvailable && (
-				<DarkModeMessage>
-					Dark mode is a work-in-progress.
-					<br />
-					You can{' '}
-					<a
-						style={{ color: 'inherit' }}
-						href="/ab-tests/opt-out/webx-dark-mode-web"
-					>
-						opt out anytime
-					</a>{' '}
-					if anything is unreadable or odd.
-				</DarkModeMessage>
+				</>
 			)}
-			<SportDataPageLayout sportData={sportData} />,
+			{isWeb && (
+				<SportDataPageLayout
+					sportData={sportData}
+					nav={props.nav}
+					renderingTarget={renderingTarget}
+				/>
+			)}
+
+			{isApps && (
+				<SportDataPageLayout
+					sportData={sportData}
+					renderingTarget={renderingTarget}
+				/>
+			)}
 		</StrictMode>
 	);
 };

@@ -22,6 +22,7 @@ import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
+import { FootballMatchHeaderFallback } from '../components/FootballMatchHeader/FootballMatchHeaderFallback';
 import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.importable';
 import { FootballMiniMatchStatsWrapper } from '../components/FootballMiniMatchStatsWrapper.importable';
 import { Footer } from '../components/Footer';
@@ -315,6 +316,12 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 		abTests?.isUserInTestGroup('webex-football-redesign', 'variant') ??
 		false;
 
+	const applyFootballRedesign = shouldApplyFootballRedesign(
+		!!footballMatchUrl,
+		isApps,
+		isInFootballRedesignTest,
+	);
+
 	return (
 		<>
 			{isWeb && (
@@ -379,18 +386,29 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					</Island>
 				)}
 				{footballMatchUrl ? (
-					isInFootballRedesignTest ? (
+					applyFootballRedesign ? (
 						footballMatchHeaderUrl && (
-							<Island
-								priority="feature"
-								defer={{ until: 'visible' }}
-							>
-								<FootballMatchHeaderWrapper
-									initialTab="live"
-									edition={article.editionId}
-									matchHeaderURL={footballMatchHeaderUrl}
-								/>
-							</Island>
+							<>
+								<noscript>
+									<FootballMatchHeaderFallback
+										format={format}
+										article={article}
+									/>
+								</noscript>
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
+									<FootballMatchHeaderWrapper
+										initialTab="live"
+										edition={article.editionId}
+										matchHeaderURL={footballMatchHeaderUrl}
+										renderingTarget={renderingTarget}
+										article={article}
+										format={format}
+									/>
+								</Island>
+							</>
 						)
 					) : (
 						<Section
@@ -668,7 +686,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						<LiveGrid>
 							<GridItem area="media">
 								<div css={maxWidth}>
-									{!isInFootballRedesignTest &&
+									{!applyFootballRedesign &&
 										!!footballMatchUrl && (
 											<Island
 												priority="critical"
@@ -770,7 +788,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								)}
 
 								{/* Match stats */}
-								{isInFootballRedesignTest
+								{applyFootballRedesign
 									? !!footballMatchStatsUrl && (
 											<Island
 												priority="feature"
@@ -800,7 +818,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									id="maincontent"
 									css={[
 										bodyWrapper,
-										isInFootballRedesignTest &&
+										applyFootballRedesign &&
 											footballRedesignBodyWrapper,
 									]}
 								>
@@ -1223,4 +1241,18 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			)}
 		</>
 	);
+};
+
+const shouldApplyFootballRedesign = (
+	isFootballMatch: boolean,
+	isApps: boolean,
+	isInFootballVariantGroup: boolean,
+) => {
+	// Since the football blog page is not yet available in the app,
+	// the AB test can be ignored and we default to true
+	if (isFootballMatch) {
+		return isApps || isInFootballVariantGroup;
+	}
+
+	return false;
 };
