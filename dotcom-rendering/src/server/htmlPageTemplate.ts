@@ -5,14 +5,14 @@ import he from 'he';
 import { ASSET_ORIGIN } from '../lib/assets';
 import { escapeData } from '../lib/escapeData';
 import { rawFontsCss } from '../lib/fonts-css';
-import type { Guardian } from '../model/guardian';
+import type { JsonGuardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
 import { GIT_COMMIT_HASH } from './prout';
 
 type BaseProps = {
 	css: string;
 	html: string;
-	guardian: Guardian;
+	guardian: JsonGuardian;
 	scriptTags: string[];
 	title?: string;
 	description?: string;

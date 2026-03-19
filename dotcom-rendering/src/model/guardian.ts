@@ -59,7 +59,7 @@ export interface Guardian {
 		};
 	};
 	modules: {
-		sentry?: {
+		sentry: {
 			reportError: ReportError;
 		};
 		/**
@@ -67,7 +67,7 @@ export interface Guardian {
 		 * access A/B test information. Do not use this directly
 		 * in DCR, instead use the `useAB` hook as it is csr/ssr aware.
 		 */
-		abTests?: {
+		abTests: {
 			getParticipations: () => Record<string, string>;
 			isUserInTest: (testId: string) => boolean;
 			isUserInTestGroup: (testId: string, variantId: string) => boolean;
@@ -78,6 +78,8 @@ export interface Guardian {
 		onDetect: Array<(active: boolean) => void>;
 	};
 }
+
+export type JsonGuardian = Jsonify<Guardian>;
 
 /**
  * This function constructs the `Guardian` data object
@@ -138,7 +140,7 @@ export const createGuardian = ({
 	 * commercial code failing because it depended on a property we removed
 	 */
 	unknownConfig?: ConfigType | object;
-}): Jsonify<Guardian> => {
+}): JsonGuardian => {
 	return {
 		config: {
 			// This indicates to the client side code that we are running a dotcom-rendering rendered page.
@@ -189,9 +191,15 @@ export const createGuardian = ({
 		},
 		modules: {
 			// This is a stub for the sentry module, which is later initialised on the client with the `reportError` function.
-			sentry: undefined,
+			sentry: {
+				reportError: undefined,
+			},
 			// This is a stub for the abTests module, which is later initialised on the client with the `getParticipations`, `isUserInTest` and `isUserInTestGroup` functions.
-			abTests: undefined,
+			abTests: {
+				getParticipations: undefined,
+				isUserInTest: undefined,
+				isUserInTestGroup: undefined,
+			},
 		},
 	};
 };
