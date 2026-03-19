@@ -119,6 +119,8 @@ const badgeWrapperStyles = css`
 	top: 100%;
 	text-align: center;
 	z-index: 1;
+	background-color: ${sourcePalette.neutral[100]};
+	padding: ${space[1]}px 0;
 `;
 
 /**
