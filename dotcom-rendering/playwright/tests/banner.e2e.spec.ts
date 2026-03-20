@@ -127,7 +127,16 @@ test.describe('Banner browserId targeting', function () {
 		inAuxiaVariant: boolean;
 	}) => {
 		if (!acceptConsent) {
+			// First load the page and interact with consent banner
 			await allowRejectAll(context);
+			await loadPage({
+				page,
+				path: ARTICLE_PATH,
+				waitUntil: 'domcontentloaded',
+				region: 'GB',
+				preventSupportBanner: false,
+			});
+			await cmpRejectAll(page);
 		}
 		await optOutOfArticleCountConsent(context);
 		await setBwidCookie(context);
@@ -151,8 +160,6 @@ test.describe('Banner browserId targeting', function () {
 
 		if (acceptConsent) {
 			await cmpAcceptAll(page);
-		} else {
-			await cmpRejectAll(page);
 		}
 
 		return bannerRequestPromise;
