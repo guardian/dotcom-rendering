@@ -11,11 +11,13 @@ import {
 	textSansBold17Object,
 	until,
 } from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { type ComponentProps, type ReactNode, useMemo } from 'react';
 import type { SWRConfiguration } from 'swr';
 import useSWR from 'swr';
 import type { FootballMatch } from '../../footballMatchV2';
 import { grid } from '../../grid';
+import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import {
 	type EditionId,
 	getLocaleFromEdition,
@@ -23,10 +25,14 @@ import {
 } from '../../lib/edition';
 import { palette } from '../../palette';
 import type { ColourName } from '../../paletteDeclarations';
+import type { ArticleDeprecated } from '../../types/article';
 import type { RenderingTarget } from '../../types/renderingTarget';
+import { ArticleHeadline } from '../ArticleHeadline';
+import { ArticleTitle } from '../ArticleTitle';
 import { BigNumber } from '../BigNumber';
 import { FootballCrest } from '../FootballCrest';
 import { Placeholder } from '../Placeholder';
+import { Section } from '../Section';
 import { background, border, primaryText, secondaryText } from './colours';
 import { type HeaderData, parse as parseHeaderData } from './headerData';
 import { Tabs } from './Tabs';
@@ -37,6 +43,8 @@ export type FootballMatchHeaderProps = {
 	edition: EditionId;
 	matchHeaderURL: string;
 	renderingTarget: RenderingTarget;
+	format?: ArticleFormat;
+	article?: ArticleDeprecated;
 };
 
 type Props = FootballMatchHeaderProps & {
@@ -45,7 +53,7 @@ type Props = FootballMatchHeaderProps & {
 };
 
 export const FootballMatchHeader = (props: Props) => {
-	const { data } = useSWR<HeaderData, string>(
+	const { data, error } = useSWR<HeaderData, Error>(
 		props.matchHeaderURL,
 		fetcher(props.initialTab, props.renderingTarget, props.getHeaderData),
 		swrOptions(props.refreshInterval),
@@ -54,6 +62,23 @@ export const FootballMatchHeader = (props: Props) => {
 	const match = data?.match ?? props.initialData?.match;
 	const tabs = data?.tabs ?? props.initialData?.tabs;
 	const leagueName = data?.leagueName ?? props.initialData?.leagueName;
+
+	if (error) {
+		if (
+			props.article &&
+			props.format &&
+			(props.format.design === ArticleDesign.LiveBlog ||
+				props.format.design === ArticleDesign.DeadBlog)
+		) {
+			return (
+				<FootballMatchHeaderFallback
+					format={props.format}
+					article={props.article}
+				/>
+			);
+		}
+		return null;
+	}
 
 	if (match === undefined || tabs === undefined || leagueName === undefined) {
 		return (
@@ -435,3 +460,61 @@ const Scorers = (props: { scorers: string[] }) =>
 			))}
 		</ul>
 	);
+
+export const FootballMatchHeaderFallback = ({
+	format,
+	article,
+}: {
+	format: ArticleFormat;
+	article: ArticleDeprecated;
+}) => (
+	<Section
+		showTopBorder={false}
+		backgroundColour={palette(background('Live'))}
+		borderColour={palette(border('Live'))}
+		leftContent={
+			<ArticleTitle
+				format={format}
+				tags={article.tags}
+				sectionLabel={article.sectionLabel}
+				sectionUrl={article.sectionUrl}
+				guardianBaseURL={article.guardianBaseURL}
+				isMatch={true}
+			/>
+		}
+		leftColSize="wide"
+		padContent={false}
+		verticalMargins={false}
+	>
+		<Hide from="leftCol">
+			<ArticleTitle
+				format={format}
+				tags={article.tags}
+				sectionLabel={article.sectionLabel}
+				sectionUrl={article.sectionUrl}
+				guardianBaseURL={article.guardianBaseURL}
+				isMatch={true}
+			/>
+		</Hide>
+		<div
+			css={css`
+				${from.leftCol} {
+					margin-left: 10px;
+				}
+				${from.desktop} {
+					max-width: 700px;
+				}
+			`}
+		>
+			<ArticleHeadline
+				headlineString={article.headline}
+				format={format}
+				tags={article.tags}
+				webPublicationDateDeprecated={
+					article.webPublicationDateDeprecated
+				}
+				isMatch={true}
+			/>
+		</div>
+	</Section>
+);
