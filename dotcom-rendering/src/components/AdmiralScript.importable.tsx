@@ -205,7 +205,7 @@ const setUpAdmiralEventLogger = (
 	});
 };
 
-const testName = 'growth-admiral-adblock-recovery';
+const testName = 'growth-admiral-adblock-detect';
 
 export const AdmiralScript = () => {
 	const { renderingTarget } = useConfig();
