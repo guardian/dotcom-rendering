@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import type { ConsentState, CountryCode } from '@guardian/libs';
-import { getCookie, onConsent } from '@guardian/libs';
+import type { CountryCode } from '@guardian/libs';
+import { getCookie } from '@guardian/libs';
 import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { abandonedBasketSchema } from '@guardian/support-dotcom-components';
 import type {
@@ -108,9 +108,10 @@ function parseAbandonedBasket(
 }
 
 export const hasRequiredConsents = (): Promise<boolean> =>
-	onConsent()
-		.then(({ canTarget }: ConsentState) => canTarget)
-		.catch(() => false);
+	Promise.resolve(false);
+// onConsent()
+// 	.then(({ canTarget }: ConsentState) => canTarget)
+// 	.catch(() => false);
 
 const buildPayload = async ({
 	isSignedIn,
