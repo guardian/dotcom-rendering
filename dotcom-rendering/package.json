@@ -31,7 +31,7 @@
 		"@guardian/braze-components": "22.2.0",
 		"@guardian/bridget": "8.7.0",
 		"@guardian/browserslist-config": "6.1.0",
-		"@guardian/cdk": "62.3.5",
+		"@guardian/cdk": "62.6.1",
 		"@guardian/commercial-core": "29.0.0",
 		"@guardian/core-web-vitals": "7.0.0",
 		"@guardian/eslint-config-typescript": "12.0.0",
