@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 
 /**
+ * This component is used exclusively for the Slim Homepage AB test to conditionally hide the "Deeply read" container.
+ *
  * If the "Deeply read" container is taller than the combined height of the "Features" and "More features"
  * containers, hide the "Deeply read" container to prevent this absolute positioned component from
  * overlapping the container or advert below it.

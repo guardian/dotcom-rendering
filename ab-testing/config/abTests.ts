@@ -106,6 +106,7 @@ const ABTests: ABTest[] = [
 		audienceSpace: "A",
 		groups: ["control", "variant-one", "variant-two"],
 		shouldForceMetricsCollection: false,
+		shouldReportToOphan: () => window.innerWidth >= 1300,
 	},
 	{
 		name: "growth-holdback-group",
