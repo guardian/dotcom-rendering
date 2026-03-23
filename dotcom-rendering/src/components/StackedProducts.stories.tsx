@@ -15,6 +15,7 @@ const meta = {
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Lifestyle,
 		},
+		showAllProducts: false,
 	},
 	decorators: [centreColumnDecorator],
 } satisfies Meta<typeof StackedProducts>;
@@ -34,5 +35,6 @@ export const FourProducts = {
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Lifestyle,
 		},
+		showAllProducts: false,
 	},
 } satisfies Story;

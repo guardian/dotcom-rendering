@@ -526,7 +526,7 @@ export interface ProductBlockElement {
 export interface ProductSummaryElement {
 	_type: 'model.dotcomrendering.pageElements.ProductSummaryElement';
 	matchedProducts: ProductBlockElement[];
-	variant: 'carousel' | 'stacked';
+	variant: 'carousel' | 'stacked-default' | 'stacked-expanded';
 }
 
 interface ProfileAtomBlockElement {

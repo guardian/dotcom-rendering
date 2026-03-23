@@ -48,12 +48,22 @@ export const findCarousel = (
 			el.variant === 'carousel',
 	);
 
-export const findStacked = (
+export const findStackedDefault = (
 	elements: FEElement[],
 ): ProductSummaryElement | undefined =>
 	elements.find(
 		(el): el is ProductSummaryElement =>
 			el._type ===
 				'model.dotcomrendering.pageElements.ProductSummaryElement' &&
-			el.variant === 'stacked',
+			el.variant === 'stacked-default',
+	);
+
+export const findStackedExpanded = (
+	elements: FEElement[],
+): ProductSummaryElement | undefined =>
+	elements.find(
+		(el): el is ProductSummaryElement =>
+			el._type ===
+				'model.dotcomrendering.pageElements.ProductSummaryElement' &&
+			el.variant === 'stacked-expanded',
 	);

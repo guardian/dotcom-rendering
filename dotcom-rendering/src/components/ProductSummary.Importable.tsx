@@ -22,12 +22,26 @@ export const ProductSummary = ({
 		);
 	}
 
+	if (variant === 'stacked-default') {
+		return (
+			<Island priority="feature" defer={{ until: 'idle' }}>
+				<StackedProducts
+					products={products}
+					heading={'At a glance'}
+					format={format}
+					showAllProducts={false}
+				/>
+			</Island>
+		);
+	}
+
 	return (
 		<Island priority="feature" defer={{ until: 'idle' }}>
 			<StackedProducts
 				products={products}
 				heading={'At a glance'}
 				format={format}
+				showAllProducts={true}
 			/>
 		</Island>
 	);

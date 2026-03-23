@@ -3,7 +3,7 @@ import {
 	atAGlanceHeading,
 	dividerElement,
 	findCarousel,
-	findStacked,
+	findStackedDefault,
 	linkElement,
 	productElement,
 	textElement,
@@ -222,7 +222,9 @@ describe('enhanceProductSummary', () => {
 
 		const output = enhanceProductSummary({
 			pageId: allowedPageId,
-			serverSideABTests: { 'thefilter-at-a-glance-redesign': 'carousel' },
+			serverSideABTests: {
+				'thefilter-at-a-glance-redesign': 'carousel',
+			},
 			renderingTarget: 'Web',
 			filterAtAGlanceEnabled: true,
 		})(input);
@@ -264,14 +266,16 @@ describe('enhanceProductSummary', () => {
 
 		const output = enhanceProductSummary({
 			pageId: allowedPageId,
-			serverSideABTests: { 'thefilter-at-a-glance-redesign': 'stacked' },
+			serverSideABTests: {
+				'thefilter-at-a-glance-redesign': 'stacked-default',
+			},
 			renderingTarget: 'Web',
 			filterAtAGlanceEnabled: true,
 		})(input);
 
-		const stacked = findStacked(output);
+		const stackedDefault = findStackedDefault(output);
 
-		expect(stacked).toBeDefined();
+		expect(stackedDefault).toBeDefined();
 	});
 
 	it('does not return stacked cards when the rendering target is apps', () => {
@@ -306,14 +310,16 @@ describe('enhanceProductSummary', () => {
 
 		const output = enhanceProductSummary({
 			pageId: allowedPageId,
-			serverSideABTests: { 'thefilter-at-a-glance-redesign': 'stacked' },
+			serverSideABTests: {
+				'thefilter-at-a-glance-redesign': 'stacked-default',
+			},
 			renderingTarget: 'Apps',
 			filterAtAGlanceEnabled: true,
 		})(input);
 
-		const stacked = findStacked(output);
+		const stackedDefault = findStackedDefault(output);
 
-		expect(stacked).toBeUndefined();
+		expect(stackedDefault).toBeUndefined();
 	});
 
 	it('does not return stacked cards when the filterAtAGlance switch is OFF', () => {
@@ -348,13 +354,15 @@ describe('enhanceProductSummary', () => {
 
 		const output = enhanceProductSummary({
 			pageId: allowedPageId,
-			serverSideABTests: { 'thefilter-at-a-glance-redesign': 'stacked' },
+			serverSideABTests: {
+				'thefilter-at-a-glance-redesign': 'stacked-default',
+			},
 			renderingTarget: 'Web',
 			filterAtAGlanceEnabled: false,
 		})(input);
 
-		const stacked = findStacked(output);
+		const stackedDefault = findStackedDefault(output);
 
-		expect(stacked).toBeUndefined();
+		expect(stackedDefault).toBeUndefined();
 	});
 });
