@@ -9,7 +9,7 @@ import { generateId } from './enhance-H2s';
  * further up the rendering pipeline.
  */
 
-export type ABTestVariant = 'carousel' | 'stacked';
+export type ABTestVariant = 'carousel' | 'stacked-default' | 'stacked-expanded';
 
 /**
  * List of page IDs eligible for product carousel enhancement.
@@ -60,7 +60,11 @@ const isEligibleForSummary = (pageId: string) => {
 };
 
 const isCarouselOrStacked = (string: string) => {
-	return string === 'carousel' || string === 'stacked';
+	return (
+		string === 'carousel' ||
+		string === 'stacked-default' ||
+		string === 'stacked-expanded'
+	);
 };
 
 // Extract URLs from 'At a glance' section elements

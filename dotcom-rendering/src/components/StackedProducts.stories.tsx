@@ -15,6 +15,7 @@ const meta = preview.meta({
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Lifestyle,
 		},
+		showAllProducts: false,
 	},
 	decorators: [centreColumnDecorator],
 });
@@ -30,5 +31,6 @@ export const FourProducts = meta.story({
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Lifestyle,
 		},
+		showAllProducts: false,
 	},
 });

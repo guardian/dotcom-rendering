@@ -67,7 +67,7 @@ const ABTests: ABTest[] = [
 		status: "ON",
 		audienceSize: 0 / 100,
 		audienceSpace: "C",
-		groups: ["control", "stacked", "carousel"],
+		groups: ["control", "carousel", "stacked-default", "stacked-expanded"],
 		shouldForceMetricsCollection: false,
 	},
 	{
