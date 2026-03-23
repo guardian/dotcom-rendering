@@ -337,6 +337,7 @@ export const ThreeTierChoiceCards = ({
 										}
 										id={radioId}
 										value={radioId}
+										name={`choice-cards-${id}`}
 										cssOverrides={labelOverrideStyles(
 											selected,
 										)}
