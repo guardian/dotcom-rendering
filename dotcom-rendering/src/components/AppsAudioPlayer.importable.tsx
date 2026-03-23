@@ -4,7 +4,7 @@ import { getAudioClient } from '../lib/bridgetApi';
 import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
 import { AppsAudioPlayButton } from './AppsAudioPlayButton';
 
-const AUDIO_BRIDGET_VERSION = '8.7.7';
+const AUDIO_BRIDGET_VERSION = '8.7.7-2026-03-05';
 
 type Props = {
 	audioDuration?: string;
