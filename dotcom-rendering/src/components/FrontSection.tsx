@@ -471,7 +471,7 @@ const bottomPadding = css`
 	padding-bottom: ${space[9]}px;
 `;
 
-const bottomPaddingBetaContainer = (
+const bottomPaddingFrontContainer = (
 	useLargeSpacingMobile: boolean,
 	useLargeSpacingDesktop: boolean,
 ) => css`
@@ -645,9 +645,8 @@ export const FrontSection = ({
 }: Props) => {
 	const isToggleable = toggleable && !!sectionId;
 	const showVerticalRule = !hasPageSkin;
-	const isBetaContainer = !!containerLevel;
+	const isFrontContainer = containerLevel !== undefined;
 
-	// These are for beta containers only
 	const useLargeSpacingMobile = !!isNextCollectionPrimary || isAboveMobileAd;
 	const useLargeSpacingDesktop =
 		!!isNextCollectionPrimary || isAboveDesktopAd;
@@ -685,15 +684,16 @@ export const FrontSection = ({
 					),
 				}}
 			>
-				{isBetaContainer && showTopBorder && (
+				{isFrontContainer && showTopBorder && (
 					<div
 						css={[
-							containerLevel === 'Secondary'
-								? secondaryLevelTopBorder
-								: primaryLevelTopBorder(
-										title,
-										showSectionColours,
-								  ),
+							containerLevel === 'Primary' &&
+								primaryLevelTopBorder(
+									title,
+									showSectionColours,
+								),
+							containerLevel === 'Secondary' &&
+								secondaryLevelTopBorder,
 							slimifySectionForSlimHomepageAbTest &&
 								containerLevel === 'Secondary' &&
 								css`
@@ -709,7 +709,7 @@ export const FrontSection = ({
 					css={[
 						decoration,
 						sideBorders,
-						showTopBorder && !isBetaContainer && topBorder,
+						showTopBorder && !isFrontContainer && topBorder,
 					]}
 				/>
 
@@ -737,7 +737,7 @@ export const FrontSection = ({
 								title?.toLowerCase() === 'opinion',
 							),
 							showVerticalRule &&
-								!isBetaContainer &&
+								!isFrontContainer &&
 								sectionHeadlineFromLeftCol(
 									schemePalette('--section-border'),
 								),
@@ -801,7 +801,7 @@ export const FrontSection = ({
 						sectionContentRow(toggleable),
 						topPadding,
 						showVerticalRule &&
-							isBetaContainer &&
+							isFrontContainer &&
 							sectionContentBorderFromLeftCol,
 						slimifySectionForSlimHomepageAbTest &&
 							slimHomepageRightBorderStyles,
@@ -856,8 +856,8 @@ export const FrontSection = ({
 						sectionBottomContent,
 						slimifySectionForSlimHomepageAbTest &&
 							slimSectionBottomContent,
-						isBetaContainer
-							? bottomPaddingBetaContainer(
+						isFrontContainer
+							? bottomPaddingFrontContainer(
 									useLargeSpacingMobile,
 									useLargeSpacingDesktop,
 							  )
