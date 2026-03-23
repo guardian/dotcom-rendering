@@ -4,6 +4,7 @@ import {
 	dividerElement,
 	findCarousel,
 	findStackedDefault,
+	findStackedExpanded,
 	linkElement,
 	productElement,
 	textElement,
@@ -234,7 +235,7 @@ describe('enhanceProductSummary', () => {
 		expect(carousel).toBeDefined();
 	});
 
-	it('enhances elements with a stacked product for allowlisted pages', () => {
+	it('enhances elements with a default stacked product component for allowlisted pages', () => {
 		const allowedPageId =
 			'thefilter/test-article-example-for-product-summary';
 
@@ -276,6 +277,50 @@ describe('enhanceProductSummary', () => {
 		const stackedDefault = findStackedDefault(output);
 
 		expect(stackedDefault).toBeDefined();
+	});
+
+	it('enhances elements with an expanded stacked product component for allowlisted pages', () => {
+		const allowedPageId =
+			'thefilter/test-article-example-for-product-summary';
+
+		const input = [
+			atAGlanceHeading(),
+			linkElement(
+				'https://www.homebase.co.uk/en-uk/tower-airx-t17166-5l-grey-single-basket-air-fryer-digital-air-fryer/p/0757395',
+				'Buy now',
+			),
+			linkElement(
+				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
+				'Buy now',
+			),
+			linkElement(
+				'https://ninjakitchen.co.uk/product/ninja-double-stack-xl-9-5l-air-fryer-sl400uk-zidSL400UK',
+				'Buy now',
+			),
+			dividerElement(),
+			productElement([
+				'https://www.homebase.co.uk/en-uk/tower-airx-t17166-5l-grey-single-basket-air-fryer-digital-air-fryer/p/0757395',
+			]),
+			productElement([
+				'https://www.lakeland.co.uk/27537/lakeland-slimline-air-fryer-black-8l',
+			]),
+			productElement([
+				'https://ninjakitchen.co.uk/product/ninja-double-stack-xl-9-5l-air-fryer-sl400uk-zidSL400UK',
+			]),
+		];
+
+		const output = enhanceProductSummary({
+			pageId: allowedPageId,
+			serverSideABTests: {
+				'thefilter-at-a-glance-redesign-v2': 'stacked-expanded',
+			},
+			renderingTarget: 'Web',
+			filterAtAGlanceEnabled: true,
+		})(input);
+
+		const stackedExpanded = findStackedExpanded(output);
+
+		expect(stackedExpanded).toBeDefined();
 	});
 
 	it('does not return stacked cards when the rendering target is apps', () => {
