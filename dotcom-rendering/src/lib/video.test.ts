@@ -30,11 +30,15 @@ const unsupportedAsset: VideoAssets = {
 const mp4Src: Source = {
 	src: 'https://guim-example.co.uk/atomID-1.mp4',
 	mimeType: 'video/mp4',
+	height: 720,
+	width: 1280,
 };
 
 const m3u8Src: Source = {
 	src: 'https://guim-example.co.uk/atomID-1.m3u8',
 	mimeType: 'application/x-mpegURL',
+	height: 720,
+	width: 1280,
 };
 
 describe('convertAssetsToVideoSources', () => {
