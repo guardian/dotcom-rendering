@@ -223,7 +223,7 @@ describe('enhanceProductSummary', () => {
 		const output = enhanceProductSummary({
 			pageId: allowedPageId,
 			serverSideABTests: {
-				'thefilter-at-a-glance-redesign': 'carousel',
+				'thefilter-at-a-glance-redesign-v2': 'carousel',
 			},
 			renderingTarget: 'Web',
 			filterAtAGlanceEnabled: true,
@@ -267,7 +267,7 @@ describe('enhanceProductSummary', () => {
 		const output = enhanceProductSummary({
 			pageId: allowedPageId,
 			serverSideABTests: {
-				'thefilter-at-a-glance-redesign': 'stacked-default',
+				'thefilter-at-a-glance-redesign-v2': 'stacked-default',
 			},
 			renderingTarget: 'Web',
 			filterAtAGlanceEnabled: true,
@@ -311,7 +311,7 @@ describe('enhanceProductSummary', () => {
 		const output = enhanceProductSummary({
 			pageId: allowedPageId,
 			serverSideABTests: {
-				'thefilter-at-a-glance-redesign': 'stacked-default',
+				'thefilter-at-a-glance-redesign-v2': 'stacked-default',
 			},
 			renderingTarget: 'Apps',
 			filterAtAGlanceEnabled: true,
@@ -355,7 +355,7 @@ describe('enhanceProductSummary', () => {
 		const output = enhanceProductSummary({
 			pageId: allowedPageId,
 			serverSideABTests: {
-				'thefilter-at-a-glance-redesign': 'stacked-default',
+				'thefilter-at-a-glance-redesign-v2': 'stacked-default',
 			},
 			renderingTarget: 'Web',
 			filterAtAGlanceEnabled: false,
