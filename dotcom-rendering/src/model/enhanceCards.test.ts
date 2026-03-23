@@ -64,7 +64,7 @@ describe('Enhance Cards', () => {
 			).toEqual({
 				atomId: 'atomID',
 				duration: 15,
-				aspectRatio: 5 / 4,
+				height: 400,
 				image: '',
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
@@ -73,16 +73,13 @@ describe('Enhance Cards', () => {
 					{
 						mimeType: 'video/mp4',
 						src: 'https://guim-example.co.uk/atomID-1.mp4',
-						height: 400,
-						width: 500,
 					},
 					{
 						mimeType: 'application/x-mpegURL',
 						src: 'https://guim-example.co.uk/atomID-1.m3u8',
-						height: 400,
-						width: 500,
 					},
 				],
+				width: 500,
 			});
 		});
 
@@ -101,11 +98,6 @@ describe('Enhance Cards', () => {
 						dimensions: { height: 600, width: 750 },
 						id: 'https://guim-example.co.uk/atomID-2.mp4',
 					},
-					{
-						...testMp4Asset,
-						dimensions: { height: 500, width: 625 },
-						id: 'https://guim-example.co.uk/atomID-3.mp4',
-					},
 				],
 			};
 			const cardTrailImage = '';
@@ -115,7 +107,8 @@ describe('Enhance Cards', () => {
 			).toEqual({
 				atomId: 'atomID',
 				duration: 15,
-				aspectRatio: 5 / 4,
+				height: 400,
+				width: 500,
 				image: '',
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
@@ -124,8 +117,6 @@ describe('Enhance Cards', () => {
 					{
 						mimeType: 'video/mp4',
 						src: 'https://guim-example.co.uk/atomID-2.mp4',
-						height: 600,
-						width: 750,
 					},
 				],
 			});
@@ -144,7 +135,7 @@ describe('Enhance Cards', () => {
 			).toEqual({
 				atomId: 'atomID',
 				duration: 15,
-				aspectRatio: 5 / 4,
+				height: 400,
 				image: '',
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
@@ -153,16 +144,13 @@ describe('Enhance Cards', () => {
 					{
 						mimeType: 'video/mp4',
 						src: 'https://guim-example.co.uk/atomID-1.mp4',
-						height: 400,
-						width: 500,
 					},
 					{
 						mimeType: 'application/x-mpegURL',
 						src: 'https://guim-example.co.uk/atomID-1.m3u8',
-						height: 400,
-						width: 500,
 					},
 				],
+				width: 500,
 			});
 		});
 	});
@@ -195,7 +183,8 @@ describe('Enhance Cards', () => {
 				videoStyle: 'Loop',
 				atomId: 'atomID',
 				sources: [],
-				aspectRatio: 5 / 4,
+				height: 400,
+				width: 500,
 				duration: 151,
 			};
 
@@ -350,17 +339,16 @@ describe('Enhance Cards', () => {
 				type: 'SelfHostedVideo',
 				atomId: 'atomID',
 				duration: 15,
-				aspectRatio: 5 / 4,
+				height: 400,
 				image: 'https://guim-example.co.uk/video-image',
 				sources: [
 					{
 						mimeType: 'video/mp4',
 						src: 'https://guim-example.co.uk/atomID-1.mp4',
-						height: 400,
-						width: 500,
 					},
 				],
 				videoStyle: 'Loop',
+				width: 500,
 			});
 		});
 	});
@@ -407,17 +395,16 @@ describe('Enhance Cards', () => {
 			).toEqual({
 				atomId: 'atomID',
 				duration: 15,
-				aspectRatio: 5 / 4,
+				height: 400,
 				sources: [
 					{
 						mimeType: 'video/mp4',
 						src: 'https://guim-example.co.uk/atomID-1.mp4',
-						height: 400,
-						width: 500,
 					},
 				],
 				type: 'SelfHostedVideo',
 				videoStyle: 'Loop',
+				width: 500,
 			});
 		});
 
@@ -442,18 +429,17 @@ describe('Enhance Cards', () => {
 				type: 'SelfHostedVideo',
 				atomId: 'atomID',
 				duration: 15,
-				aspectRatio: 5 / 4,
+				height: 400,
 				image: undefined,
 				sources: [
 					{
 						mimeType: 'video/mp4',
 						src: 'https://guim-example.co.uk/atomID-1.mp4',
-						height: 400,
-						width: 500,
 					},
 				],
 				subtitleSource: undefined,
 				videoStyle: 'Loop',
+				width: 500,
 			});
 		});
 	});

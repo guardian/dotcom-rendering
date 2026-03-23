@@ -111,9 +111,8 @@ type Props = {
 	sources: Source[];
 	atomId: string;
 	uniqueId: string;
-	height?: number;
-	width?: number;
-	aspectRatio: number;
+	height: number;
+	width: number;
 	videoStyle: VideoPlayerFormat;
 	FallbackImageComponent: ReactElement;
 	isPlayable: boolean;
@@ -158,7 +157,6 @@ export const SelfHostedVideoPlayer = forwardRef(
 			uniqueId,
 			height,
 			width,
-			aspectRatio,
 			videoStyle,
 			FallbackImageComponent,
 			posterImage,
@@ -205,6 +203,8 @@ export const SelfHostedVideoPlayer = forwardRef(
 		const dataLinkName = `gu-video-${videoStyle}-${
 			showPlayIcon ? 'play' : 'pause'
 		}-${atomId}`;
+
+		const aspectRatio = width / height;
 
 		return (
 			<>
