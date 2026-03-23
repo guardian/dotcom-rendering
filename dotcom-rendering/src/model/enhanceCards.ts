@@ -15,7 +15,7 @@ import type { Group } from '../lib/getDataLinkName';
 import { getDataLinkNameCard } from '../lib/getDataLinkName';
 import { getLargestImageSize } from '../lib/image';
 import type { SupportedVideoFileType } from '../lib/video';
-import { DEFAULT_ASPECT_RATIO, supportedVideoFileTypes } from '../lib/video';
+import { supportedVideoFileTypes } from '../lib/video';
 import type { Image } from '../types/content';
 import type {
 	DCRFrontCard,
@@ -249,24 +249,18 @@ export const getActiveMediaAtom = (
 				({ assetType }) => assetType === 'Subtitles',
 			);
 
-			const aspectRatio = firstVideoAsset.dimensions
-				? firstVideoAsset.dimensions.width /
-				  firstVideoAsset.dimensions.height
-				: DEFAULT_ASPECT_RATIO;
-
 			return {
 				type: 'SelfHostedVideo',
 				videoStyle: mediaAtom.videoPlayerFormat ?? 'Loop',
 				atomId: mediaAtom.id,
-				sources: sources.map(({ id, mimeType, dimensions }) => ({
-					src: id,
-					mimeType: mimeType as SupportedVideoFileType,
-					height: dimensions?.height,
-					width: dimensions?.width,
+				sources: sources.map((source) => ({
+					src: source.id,
+					mimeType: source.mimeType as SupportedVideoFileType,
 				})),
 				subtitleSource: subtitleAsset?.id,
-				aspectRatio,
 				duration: mediaAtom.duration ?? 0,
+				width: firstVideoAsset.dimensions?.width ?? 500,
+				height: firstVideoAsset.dimensions?.height ?? 400,
 				image,
 			};
 		}

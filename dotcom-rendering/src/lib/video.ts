@@ -2,9 +2,6 @@ import type { VideoAssets } from '../types/content';
 
 export type CustomPlayEventDetail = { uniqueId: string };
 
-/** We expect all videos to include dimensions since the field was added to FEMediaAsset */
-export const DEFAULT_ASPECT_RATIO = 5 / 4;
-
 export const customSelfHostedVideoPlayAudioEventName =
 	'self-hosted-video:play-with-audio';
 export const customYoutubePlayEventName = 'youtube-video:play';
@@ -12,8 +9,6 @@ export const customYoutubePlayEventName = 'youtube-video:play';
 export type Source = {
 	src: string;
 	mimeType: SupportedVideoFileType;
-	height?: number;
-	width?: number;
 };
 
 /**
@@ -56,8 +51,6 @@ export const convertAssetsToVideoSources = (assets: VideoAssets[]): Source[] =>
 		.map((asset) => ({
 			src: asset.url,
 			mimeType: asset.mimeType as Source['mimeType'],
-			height: asset.dimensions?.height ?? 0,
-			width: asset.dimensions?.width ?? 0,
 		}));
 
 export const getSubtitleAsset = (assets: VideoAssets[]): string | undefined =>
