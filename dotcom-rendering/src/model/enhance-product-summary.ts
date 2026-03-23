@@ -206,7 +206,7 @@ export const enhanceProductSummary =
 	}) =>
 	(elements: FEElement[]): FEElement[] => {
 		const abTestVariant =
-			serverSideABTests?.['thefilter-at-a-glance-redesign'];
+			serverSideABTests?.['thefilter-at-a-glance-redesign-v2'];
 
 		// do nothing if article is not on allow list / not in the test / variant is 'control' / renderingTarget is Apps / filterAtAGlance switch is OFF
 		if (
