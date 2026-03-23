@@ -15,8 +15,8 @@ const hasRequiredSlimHomepageAbTestCollections = (
 export const calculateWhenToStartSlimming = (
 	filteredCollections: DCRCollectionType[],
 ): number =>
-	filteredCollections.findIndex((collection) =>
-		collection.displayName.toLowerCase().includes('news'),
+	filteredCollections.findIndex(
+		({ displayName }) => displayName.toLowerCase() === 'news',
 	);
 
 export const doesPageQualifyForSlimHomepageAbTest = (
