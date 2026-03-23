@@ -38,21 +38,11 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 	const [isFollowingTag, setIsFollowingTag] = useState<boolean | undefined>(
 		undefined,
 	);
-	const [showFollowTagButton, setShowFollowTagButton] =
-		useState<boolean>(false);
-
 	const isMyGuardianEnabled = useIsMyGuardianEnabled();
 	const isBridgetCompatible = useIsBridgetCompatible('2.5.0');
 
-	useEffect(() => {
-		if (
-			isBridgetCompatible &&
-			isMyGuardianEnabled &&
-			!blockList.includes(id)
-		) {
-			setShowFollowTagButton(true);
-		}
-	}, [isBridgetCompatible, isMyGuardianEnabled, id]);
+	const showFollowTagButton =
+		isBridgetCompatible && isMyGuardianEnabled && !blockList.includes(id);
 
 	useEffect(() => {
 		const topic = new Topic({
