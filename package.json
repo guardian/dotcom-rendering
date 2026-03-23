@@ -11,7 +11,8 @@
 		"prepare": "husky",
 		"lint-staged": "lint-staged",
 		"prettier:check": "prettier --ignore-unknown --check --cache .",
-		"prettier:write": "prettier --ignore-unknown --write --cache ."
+		"prettier:write": "prettier --ignore-unknown --write --cache .",
+		"test-storybook": "test-storybook"
 	},
 	"lint-staged": {
 		"*": "prettier --ignore-unknown --write",
