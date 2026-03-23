@@ -67,10 +67,12 @@ const supportingTextStyles = css`
 const SupportingBenefits = ({
 	benefitsLabel,
 	benefits,
+	benefitsTickColour,
 	choiceCardDesignSettings,
 }: {
 	benefitsLabel?: string;
 	benefits: ChoiceCard['benefits'];
+	benefitsTickColour?: string;
 	choiceCardDesignSettings?: ChoiceCardDesignSettings;
 }) => {
 	const showTicks = benefits.length > 1;
@@ -94,6 +96,7 @@ const SupportingBenefits = ({
 								size="xsmall"
 								theme={{
 									fill:
+										benefitsTickColour ??
 										choiceCardDesignSettings?.buttonSelectMarkerColour ??
 										palette.brand[400],
 								}}
@@ -187,16 +190,19 @@ export const ThreeTierChoiceCards = ({
 			palette.brand[400],
 	};
 
+	const getPillBackgroundColour = (
+		pill: NonNullable<ChoiceCard['pill']>,
+	): string => {
+		if (choiceCardDesignSettings?.pillBackgroundColour) {
+			return choiceCardDesignSettings.pillBackgroundColour;
+		}
+		if (pill.backgroundColour) {
+			return hexColourToString(pill.backgroundColour as HexColour);
+		}
+		return palette.brandAlt[400];
+	};
+
 	const pillStyles = (pill: NonNullable<ChoiceCard['pill']>) => {
-		const buildBackgroundColour = (): string => {
-			if (choiceCardDesignSettings?.pillBackgroundColour) {
-				return choiceCardDesignSettings.pillBackgroundColour;
-			}
-			if (pill.backgroundColour) {
-				return hexColourToString(pill.backgroundColour as HexColour);
-			}
-			return palette.brandAlt[400];
-		};
 		const buildTextColour = (): string => {
 			if (choiceCardDesignSettings?.pillTextColour) {
 				return choiceCardDesignSettings.pillTextColour;
@@ -210,7 +216,7 @@ export const ThreeTierChoiceCards = ({
 		return css`
 			border-radius: 4px;
 			padding: ${space[1]}px ${space[2]}px;
-			background-color: ${buildBackgroundColour()};
+			background-color: ${getPillBackgroundColour(pill)};
 			${textSansBold14};
 			color: ${buildTextColour()};
 			position: absolute;
@@ -344,6 +350,13 @@ export const ThreeTierChoiceCards = ({
 															| undefined
 													}
 													benefits={benefits}
+													benefitsTickColour={
+														pill
+															? getPillBackgroundColour(
+																	pill,
+															  )
+															: undefined
+													}
 													choiceCardDesignSettings={
 														choiceCardDesignSettings
 													}

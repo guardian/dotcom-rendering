@@ -23,6 +23,7 @@ import {
 } from '../../lib/edition';
 import { palette } from '../../palette';
 import type { ColourName } from '../../paletteDeclarations';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import { BigNumber } from '../BigNumber';
 import { FootballCrest } from '../FootballCrest';
 import { Placeholder } from '../Placeholder';
@@ -35,6 +36,7 @@ export type FootballMatchHeaderProps = {
 	initialData?: HeaderData;
 	edition: EditionId;
 	matchHeaderURL: string;
+	renderingTarget: RenderingTarget;
 };
 
 type Props = FootballMatchHeaderProps & {
@@ -45,7 +47,7 @@ type Props = FootballMatchHeaderProps & {
 export const FootballMatchHeader = (props: Props) => {
 	const { data } = useSWR<HeaderData, string>(
 		props.matchHeaderURL,
-		fetcher(props.initialTab, props.getHeaderData),
+		fetcher(props.initialTab, props.renderingTarget, props.getHeaderData),
 		swrOptions(props.refreshInterval),
 	);
 
@@ -111,10 +113,14 @@ const swrOptions = (refreshInterval: number): SWRConfiguration<HeaderData> => ({
 });
 
 const fetcher =
-	(selected: Props['initialTab'], getHeaderData: Props['getHeaderData']) =>
+	(
+		selected: Props['initialTab'],
+		renderingTarget: RenderingTarget,
+		getHeaderData: Props['getHeaderData'],
+	) =>
 	(url: string): Promise<HeaderData> =>
 		getHeaderData(url)
-			.then(parseHeaderData(selected))
+			.then(parseHeaderData(selected, renderingTarget))
 			.then((result) => {
 				if (!result.ok) {
 					log('dotcom', result.error);
