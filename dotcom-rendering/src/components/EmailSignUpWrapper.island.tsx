@@ -30,7 +30,7 @@ interface EmailSignUpWrapperProps extends EmailSignUpProps {
 }
 
 /**
- * EmailSignUpWrapper as an importable island component.
+ * EmailSignUpWrapper as an island component.
  *
  * This component needs to be hydrated client-side because it uses
  * the useNewsletterSubscription hook which depends on auth status
