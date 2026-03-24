@@ -1,4 +1,4 @@
-import { firstPopularTag } from './OnwardsUpper.importable';
+import { firstPopularTag } from './OnwardsUpper.island';
 
 describe('firstPopularTag', () => {
 	it('finds a matching tag', () => {

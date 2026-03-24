@@ -14,7 +14,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '../lib/articleFormat';
-import { KnowledgeQuizAtom } from './KnowledgeQuizAtom.importable';
+import { KnowledgeQuizAtom } from './KnowledgeQuizAtom.island';
 
 const meta = {
 	title: 'Components/KnowledgeQuizAtom',

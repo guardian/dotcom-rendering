@@ -6,7 +6,7 @@ import {
 	type ArticleFormat,
 	Pillar,
 } from '../lib/articleFormat';
-import { ProfileAtom } from './ProfileAtom.importable';
+import { ProfileAtom } from './ProfileAtom.island';
 
 const meta = {
 	title: 'Components/ProfileAtom',

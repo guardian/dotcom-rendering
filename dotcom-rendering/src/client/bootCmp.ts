@@ -42,7 +42,7 @@ const initialiseCmp = async () => {
  */
 const eagerlyImportPrivacySettingsLinkIsland = () =>
 	import(
-		/* webpackMode: 'eager' */ '../components/PrivacySettingsLink.importable'
+		/* webpackMode: 'eager' */ '../components/PrivacySettingsLink.island'
 	);
 
 /**

@@ -4,7 +4,7 @@ import { NumberedList } from '../../fixtures/generated/fe-articles/NumberedList'
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { enhanceInteractiveContentsElements } from '../model/enhance-interactive-contents-elements';
 import type { InteractiveContentsBlockElement } from '../types/content';
-import { InteractiveContentsBlockComponent } from './InteractiveContentsBlockComponent.importable';
+import { InteractiveContentsBlockComponent } from './InteractiveContentsBlockComponent.island';
 
 const interactiveContentsBlock = enhanceInteractiveContentsElements(
 	NumberedList.blocks[0]?.elements ?? [],

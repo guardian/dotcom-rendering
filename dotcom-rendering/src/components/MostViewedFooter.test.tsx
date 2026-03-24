@@ -2,7 +2,7 @@ import { fireEvent, render } from '@testing-library/react';
 import { useApi as useApi_ } from '../lib/useApi';
 import { ConfigProvider } from './ConfigContext';
 import { responseWithTwoTabs } from './MostViewed.mocks';
-import { MostViewedFooterData } from './MostViewedFooterData.importable';
+import { MostViewedFooterData } from './MostViewedFooterData.island';
 
 const useApi: { [key: string]: any } = useApi_;
 

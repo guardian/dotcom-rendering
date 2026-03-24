@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
 import { useBetaAB } from '../lib/useAB';
-import { EnhanceAffiliateLinks } from './EnhanceAffiliateLinks.importable';
+import { EnhanceAffiliateLinks } from './EnhanceAffiliateLinks.island';
 
 // Mock the useAB module
 jest.mock('../lib/useAB', () => ({

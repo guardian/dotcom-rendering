@@ -6,7 +6,7 @@ import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { Island } from './Island';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { Placeholder } from './Placeholder';
-import { SecureSignup } from './SecureSignup.importable';
+import { SecureSignup } from './SecureSignup.island';
 
 /**
  * Approximate heights of the EmailSignup component at different breakpoints.

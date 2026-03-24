@@ -11,7 +11,7 @@ import {
 	getAllThemes,
 	Pillar,
 } from '../lib/articleFormat';
-import { QandaAtom as QandaAtomComponent } from './QandaAtom.importable';
+import { QandaAtom as QandaAtomComponent } from './QandaAtom.island';
 
 const meta: Meta<typeof QandaAtomComponent> = {
 	title: 'Components/Q and A Atom',

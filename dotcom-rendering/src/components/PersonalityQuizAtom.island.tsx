@@ -20,7 +20,7 @@ import type {
 	ResultsBucketType,
 } from '../types/content';
 import { radioButtonWrapperStyles } from './Answers';
-import { ShareButton } from './ShareButton.importable';
+import { ShareButton } from './ShareButton.island';
 
 const answersWrapperStyle = (theme: ArticleTheme) => css`
 	margin-bottom: 12px;

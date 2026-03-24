@@ -9,7 +9,7 @@ import {
 } from '../../fixtures/manual/trails';
 import type { DCRContainerPalette } from '../types/front';
 import { FrontSection } from './FrontSection';
-import { ScrollableMedium } from './ScrollableMedium.importable';
+import { ScrollableMedium } from './ScrollableMedium.island';
 
 const meta = {
 	title: 'Front Containers/ScrollableMedium',
