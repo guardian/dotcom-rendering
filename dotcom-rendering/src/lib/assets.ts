@@ -9,7 +9,7 @@ interface AssetHash {
 	[key: string]: string;
 }
 
-export const BASE_URL_DEV = 'http://localhost:3030/';
+export const BASE_URL_DEV = '/';
 
 export type AssetOrigin =
 	| 'https://assets.guim.co.uk/'
