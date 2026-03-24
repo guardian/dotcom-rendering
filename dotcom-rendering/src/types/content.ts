@@ -619,6 +619,15 @@ export interface TextBlockElement {
 	html: string;
 }
 
+export interface ContributorFollowBlockElement {
+	_type: 'model.dotcomrendering.pageElements.ContributorFollowBlockElement';
+	elementId: string;
+	contributorId: string;
+	displayName: string;
+	avatarUrl?: string;
+	bio?: string;
+}
+
 export type DCRTimelineEvent = {
 	date: string;
 	title?: string;
@@ -846,6 +855,7 @@ export type FEElement =
 	| CodeBlockElement
 	| CommentBlockElement
 	| ContentAtomBlockElement
+	| ContributorFollowBlockElement
 	| DisclaimerBlockElement
 	| DividerBlockElement
 	| DocumentBlockElement
