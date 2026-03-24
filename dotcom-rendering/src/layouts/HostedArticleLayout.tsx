@@ -237,13 +237,10 @@ export const HostedArticleLayout = (props: WebProps | AppProps) => {
 						showTopBorder={false}
 						shouldCenter={false}
 						backgroundColour={sourcePalette.neutral[7]}
-						padSides={true}
+						padSides={false}
 						element="header"
 					>
-						<HostedContentHeader
-							branding={branding}
-							accentColor={branding.hostedCampaignColour}
-						/>
+						<HostedContentHeader branding={branding} />
 					</Section>
 				</Stuck>
 			) : null}
