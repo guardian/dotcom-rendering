@@ -261,8 +261,8 @@ export const getActiveMediaAtom = (
 				sources: sources.map(({ id, mimeType, dimensions }) => ({
 					src: id,
 					mimeType: mimeType as SupportedVideoFileType,
-					height: dimensions?.height,
-					width: dimensions?.width,
+					height: dimensions?.height ?? 0,
+					width: dimensions?.width ?? 0,
 				})),
 				subtitleSource: subtitleAsset?.id,
 				aspectRatio,
