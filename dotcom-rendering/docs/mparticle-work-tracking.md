@@ -7,12 +7,12 @@
 
 ## Status snapshot (as of 2026-03-24)
 
-| Repo | Status |
-|||
+| Repo                           | Status                                                                                                  |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------- |
 | `dotcom-rendering` (this repo) | ✅ [PR open](https://github.com/guardian/dotcom-rendering/pull/15581) - pending PR description + review |
-| `frontend` (Scala) | ⏳ Needs switch + URL injection |
-| `csnx` (`@guardian/libs`) | ⏳ Needs `mparticle` added to `VendorIDs` |
-| backend (`mparticle-api`) | ⏳ Draft - needs deployment to CODE |
+| `frontend` (Scala)             | ⏳ Needs switch + URL injection                                                                         |
+| `csnx` (`@guardian/libs`)      | ⏳ Needs `mparticle` added to `VendorIDs`                                                               |
+| backend (`mparticle-api`)      | ⏳ Draft - needs deployment to CODE                                                                     |
 
 ## Tasks
 
