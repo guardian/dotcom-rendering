@@ -3,7 +3,6 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import {
 	convertAssetsToVideoSources,
 	DEFAULT_ASPECT_RATIO,
-	getFirstVideoAsset,
 	getSubtitleAsset,
 } from '../lib/video';
 import type { MediaAtomBlockElement, RoleType } from '../types/content';
@@ -28,7 +27,9 @@ export const SelfHostedVideoInArticle = ({
 }: SelfHostedVideoInArticleProps) => {
 	const posterImageUrl = element.posterImage?.[0]?.url;
 	const caption = element.title;
-	const firstVideoAsset = getFirstVideoAsset(element.assets);
+
+	const sources = convertAssetsToVideoSources(element.assets);
+	const firstVideoSource = sources[0];
 
 	if (!posterImageUrl) {
 		return null;
@@ -41,19 +42,18 @@ export const SelfHostedVideoInArticle = ({
 				fallbackImage={posterImageUrl}
 				fallbackImageAlt={caption}
 				fallbackImageAspectRatio={
-					(firstVideoAsset?.aspectRatio ?? '5:4') as FEAspectRatio
+					(firstVideoSource?.aspectRatio ?? '5:4') as FEAspectRatio
 				}
 				fallbackImageLoading="lazy"
 				fallbackImageSize="small"
 				aspectRatio={
-					firstVideoAsset?.dimensions
-						? firstVideoAsset.dimensions.width /
-						  firstVideoAsset.dimensions.height
+					firstVideoSource
+						? firstVideoSource.width / firstVideoSource.height
 						: DEFAULT_ASPECT_RATIO
 				}
 				linkTo="Article-embed-MediaAtomBlockElement"
 				posterImage={posterImageUrl}
-				sources={convertAssetsToVideoSources(element.assets)}
+				sources={sources}
 				subtitleSize="medium"
 				subtitleSource={getSubtitleAsset(element.assets)}
 				videoStyle={videoStyle}
