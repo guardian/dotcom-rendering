@@ -39,6 +39,7 @@ export interface Guardian {
 			isPaidContent?: boolean;
 			isDev?: boolean;
 			userBenefitsApiUrl?: string;
+			mparticleApiUrl?: string;
 			idApiUrl?: string;
 			isPodcast?: boolean;
 			shouldHideAdverts?: boolean;

@@ -21,6 +21,170 @@ dotcom-rendering is the primary front-end renderer for theguardian.com. It alrea
 
 All of these primitives already exist and are reusable. The mParticle sync is a new, independent task that fits naturally alongside `userFeatures`.
 
+## How existing flows work — and where we fit in
+
+### Page startup pipeline
+
+Every page load, `main.web.ts` fires a set of `startup()` tasks concurrently. Each task is a named, prioritised async module load. `critical` tasks run immediately; `feature` tasks are deferred.
+
+```mermaid
+flowchart TD
+    A["Browser loads page\nwindow.guardian.config is set\n(page, switches, ophan, …)"] --> B["main.web.ts\nvoid startup(…) ×N"]
+
+    B --> C["bootCmp\npriority: critical"]
+    B --> D["userFeatures\npriority: critical"]
+    B --> E["abTesting / sentryLoader\n/ islands / …\npriority: critical"]
+    B --> F["atomIframe / embedIframe\n/ discussion / …\npriority: feature"]
+    B --> NEW["🆕 mparticleConsentSync\npriority: critical\n(switch-gated)"]
+
+    style NEW fill:#d4edda,stroke:#28a745
+```
+
+---
+
+### Existing flow 1 — CMP boot (`bootCmp`)
+
+`bootCmp` owns the consent management lifecycle. It initialises Sourcepoint with the user's locale, browser ID and page view ID. After that, Sourcepoint reads the stored consent from the browser and fires `onConsentChange` once immediately; it fires again whenever the user changes their choices in the privacy modal.
+
+```mermaid
+sequenceDiagram
+    participant MW as main.web.ts
+    participant B as bootCmp.ts
+    participant SP as Sourcepoint (CMP)
+    participant O as Ophan
+    participant Libs as @guardian/libs
+
+    MW->>B: startup('bootCmp')
+    B->>B: getLocaleCode()
+    B->>B: getCookie('bwid')
+    B->>B: isUserLoggedIn()
+    B->>SP: cmp.init({ browserId, pageViewId, country, … })
+    Note over SP: Sourcepoint reads stored consent<br/>from browser storage
+    SP-->>Libs: fires onConsentChange(state) immediately
+    SP-->>Libs: fires onConsentChange(state) again on any user change
+    B->>O: ophan.record(getConsentDetailsForOphan(state))
+```
+
+`onConsentChange` is a _pub/sub_: any module can register a callback with `onConsentChange(cb)` and will be called (1) once on page load with the current stored state, and (2) again each time the user changes their consent in the modal.
+
+---
+
+### Existing flow 2 — User features refresh (`userFeatures`)
+
+`userFeatures` decides whether to call the `user-benefits` API. It avoids calling on every page load using a staleness cookie (`gu_user_benefits_expiry`). The API returns the user's benefits (ad-free, hideSupportMessaging, allowRejectAll), which are persisted to short-lived cookies read by other scripts.
+
+```mermaid
+flowchart TD
+    MW["main.web.ts\nstartup('userFeatures')"] --> R["user-features.ts\nrefresh()"]
+
+    R --> Q{"isUserLoggedIn()\n&& userBenefitsDataNeedsRefreshing()\n(checks gu_user_benefits_expiry cookie)"}
+
+    Q -- "No (signed out\nOR cookie fresh)" --> SKIP["↩ return — no API call"]
+    Q -- "Yes" --> AUTH["getAuthStatus()\n→ SignedIn { accessToken, idToken }"]
+
+    AUTH --> API["GET user-benefits.guardianapis.com\nAuthorization: Bearer …"]
+    API --> PERSIST["Set cookies:\n• gu_ad_free\n• gu_hide_support_messaging\n• gu_allow_reject_all\n• gu_user_benefits_expiry (+30 days)"]
+```
+
+---
+
+### New flow — mParticle consent sync (`mparticleConsentSync`)
+
+This is the new module. It is structurally identical to `userFeatures` but hooks into `onConsentChange` instead of running once on startup, and calls a different API endpoint.
+
+```mermaid
+flowchart TD
+    MW["main.web.ts\nif switch mparticleConsentSync\nstartup('mparticleConsentSync')"] --> SYNC["mparticle-consent.ts\nsyncMparticleConsent()"]
+
+    SYNC --> REG["onConsentChange(callback)\nRegisters callback with @guardian/libs\n— fires immediately on page load\n— fires again on user privacy-modal change"]
+
+    REG --> CB["callback(state) fires"]
+
+    CB --> STALE{"mparticleConsentNeedsSync()\nchecks gu_mparticle_consent_synced cookie\n(30-min TTL, value = expiry timestamp)"}
+    STALE -- "Cookie fresh → skip" --> NOOP["↩ return — no API call"]
+    STALE -- "Cookie absent/expired" --> AUTHCHECK["getAuthStatus()"]
+
+    AUTHCHECK -- "SignedOut" --> NOOP2["↩ return — no API call"]
+    AUTHCHECK -- "SignedIn" --> BWID["getCookie('bwid')\n(browser ID from bwid cookie)"]
+
+    BWID -- "No cookie" --> NOOP3["↩ return — no API call"]
+    BWID -- "Has bwid" --> CONSENT["getConsentFor('mparticle', state)\n→ boolean"]
+
+    CONSENT --> API["mparticleConsentApi.ts\nPATCH mparticle-api.guardianapis.com\n/consents/{browserId}\n{ consented, pageviewId }\nAuthorization: Bearer …"]
+
+    API -- "ok" --> MARK["markMparticleConsentSynced()\nsets gu_mparticle_consent_synced\n(30-min TTL)"]
+    API -- "!ok" --> ERR["throw Error\n→ surfaces in Sentry"]
+```
+
+---
+
+### Parallel view — all three flows on the same page load
+
+The three `critical` tasks all start concurrently. `bootCmp` and `mparticleConsentSync` both depend on `onConsentChange`, which Sourcepoint fires only after `cmp.init()` completes. The mParticle callback therefore always runs _after_ consent is available from Sourcepoint, regardless of the startup ordering.
+
+```mermaid
+sequenceDiagram
+    participant MW as main.web.ts
+    participant B as bootCmp
+    participant UF as userFeatures
+    participant MP as mparticleConsentSync
+    participant SP as Sourcepoint
+    participant Libs as @guardian/libs
+    participant BAPI as user-benefits API
+    participant MPAPI as mparticle-api
+
+    par All critical tasks fire concurrently
+        MW->>B: startup('bootCmp')
+        MW->>UF: startup('userFeatures')
+        MW->>MP: startup('mparticleConsentSync')
+    end
+
+    B->>SP: cmp.init(…)
+    SP-->>Libs: onConsentChange fires (stored consent)
+
+    Note over MP: MP registered its callback<br/>before cmp.init completed,<br/>so it fires now too
+
+    Libs-->>MP: callback(consentState)
+
+    UF->>UF: isUserLoggedIn() && needs refresh?
+    UF->>BAPI: GET /benefits (Bearer token)
+    BAPI-->>UF: { benefits: […] }
+    UF->>UF: set benefit cookies
+
+    MP->>MP: needsSync? signed in? has bwid?
+    MP->>MPAPI: PATCH /consents/{bwid} (Bearer token)
+    MPAPI-->>MP: 200 OK
+    MP->>MP: set gu_mparticle_consent_synced cookie
+
+    Note over SP: Later: user opens privacy modal<br/>and changes consent
+
+    SP-->>Libs: onConsentChange fires again
+    Libs-->>MP: callback(newConsentState)
+    Note over MP: Staleness cookie cleared/expired?<br/>If yes → fires PATCH again
+```
+
+---
+
+### mParticle identity model — why `browserId` matters
+
+Understanding _which_ mParticle profile receives the consent write is important. mParticle has three profile types:
+
+```mermaid
+flowchart LR
+    subgraph mParticle profiles
+        MAIN["Main profile\nCustomer ID = identity_id\n(signed-in user)\nContains full history\nof all browser IDs"]
+        LITE["Lite profile\nCustomer ID = browserId\nCreated by IDSync\nfor browsers resolved\nbut not yet linked"]
+        DANGLE["Dangling tentacle\nNo Customer ID\nbrowserId in other_id_2\nMagically merges into\nMain on sign-in"]
+    end
+
+    BROWSER["Browser\n(bwid cookie)"] -->|"sends browserId\nto backend"| BACKEND["mparticle-api\n(backend)"]
+    BACKEND -->|"writes consent\nto Lite profile\nfor this browserId"| LITE
+    LITE -.->|"IDSync links\nLite → Main\non sign-in"| MAIN
+    DANGLE -.->|"merges automatically\nwhen identity_id\nbecomes known"| MAIN
+```
+
+The backend uses the **`identity_id` from the Bearer token JWT** (not the browser ID) to confirm who the signed-in user is. It then writes the consent to the Lite profile keyed by `browserId`. The Lite profile is the source of truth for browser-consent state until IDSync merges it into the Main profile.
+
 ## Scope of frontend work
 
 The frontend is **only** responsible for:
@@ -82,7 +246,9 @@ The simplest acceptable implementation: use the same cookie-expiry approach as `
 
 > **TBC with MRR/Data Privacy team** – the exact GDPR purpose name must be confirmed.
 
-The consent framework uses named "purposes". Our Braze integration, for example, uses the purpose `'braze'` (see [`lib/braze/hasRequiredConsents.ts`](../src/lib/braze/hasRequiredConsents.ts)):
+The consent framework maps named vendors to IAB TCF vendor IDs via the `VendorIDs` registry in `@guardian/libs`. `getConsentFor` only accepts a `VendorName` — a key of that registry. The current registry does not include `mparticle`, so **before this feature ships, a PR must be raised against the [csnx repo](https://github.com/guardian/csnx)** to add `mparticle` (or whatever the agreed purpose name turns out to be) to `VendorIDs`.
+
+For example, the Braze integration uses:
 
 ```ts
 import { getConsentFor, onConsentChange } from '@guardian/libs';
@@ -93,7 +259,15 @@ onConsentChange((state) => {
 });
 ```
 
-The mParticle integration will follow the same pattern, substituting the correct purpose key (likely something like `'personalisedAdvertising'` or a new dedicated purpose – to be confirmed).
+`'braze'` is a key in `VendorIDs` and maps to a list of IAB TCF vendor IDs that Sourcepoint checks consent against.
+
+Until the `@guardian/libs` PR is merged and the package version is bumped here, the implementation casts the purpose key:
+
+```ts
+export const MPARTICLE_CONSENT_PURPOSE = 'mparticle' as VendorName;
+```
+
+This keeps TypeScript happy temporarily, but the cast must be removed once `mparticle` is a real entry in `VendorIDs`.
 
 ## Implementation plan
 
@@ -139,22 +313,30 @@ Create `src/client/mparticle/cookies/mparticleConsentSynced.ts`:
 ```ts
 import { getCookie, setCookie } from '@guardian/libs';
 
-const COOKIE_NAME = 'gu_mparticle_consent_synced';
-// Re-sync at most once per 30 minutes (adjust based on session definition)
-const EXPIRY_MINUTES = 30;
+export const MPARTICLE_CONSENT_SYNCED_COOKIE = 'gu_mparticle_consent_synced';
 
-export const mparticleConsentNeedsSync = (): boolean =>
-	!getCookie({ name: COOKIE_NAME });
+// Re-sync at most once per 30 minutes
+const EXPIRY_MINUTES = 30;
+const EXPIRY_DAYS = EXPIRY_MINUTES / (60 * 24);
+
+export const mparticleConsentNeedsSync = (): boolean => {
+	const cookieValue = getCookie({ name: MPARTICLE_CONSENT_SYNCED_COOKIE });
+	if (!cookieValue) return true;
+	const expiryTime = parseInt(cookieValue, 10);
+	return Date.now() >= expiryTime;
+};
 
 export const markMparticleConsentSynced = (): void => {
 	const expiryMs = Date.now() + EXPIRY_MINUTES * 60 * 1000;
 	setCookie({
-		name: COOKIE_NAME,
+		name: MPARTICLE_CONSENT_SYNCED_COOKIE,
 		value: String(expiryMs),
-		daysToLive: EXPIRY_MINUTES / (60 * 24),
+		daysToLive: EXPIRY_DAYS,
 	});
 };
 ```
+
+Note: the cookie stores the expiry timestamp as its value and checks `Date.now() >= expiryTime` rather than relying solely on cookie presence. This is consistent with the `userBenefitsExpiry` pattern and works correctly in environments where sub-day cookie expiry is unreliable (e.g. JSDOM in tests).
 
 ### 3. Orchestration module
 
@@ -214,13 +396,30 @@ Using `priority: 'critical'` ensures it runs alongside CMP boot and user feature
 
 ### 5. Add `mparticleApiUrl` to the page config
 
-In [`src/model/guardian.ts`](../src/model/guardian.ts), add to the `config.page` interface:
+`mparticleApiUrl` is environment-specific and must be injected server-side into the page config, exactly as `userBenefitsApiUrl` already is. It is not hardcoded in the frontend bundle.
+
+The type is already declared in [`src/model/guardian.ts`](../src/model/guardian.ts):
 
 ```ts
 mparticleApiUrl?: string;
 ```
 
-The URL value (`https://mparticle-api.guardianapis.com`) will be injected server-side by the rendering layer, as `userBenefitsApiUrl` already is.
+The property is carried through `unknownConfig` in `createGuardian` (the same pass-through mechanism used by all other page config values that originate from the backend/Frontend app). The backend team needs to include `mparticleApiUrl` in the page config response.
+
+Expected values by environment:
+
+| Environment | Value                                             |
+| ----------- | ------------------------------------------------- |
+| PROD        | `https://mparticle-api.guardianapis.com`          |
+| CODE        | `https://mparticle-api.code.dev-guardianapis.com` |
+
+For local development, the value is already set in [`fixtures/config.js`](../fixtures/config.js):
+
+```js
+mparticleApiUrl: 'https://mparticle-api.guardianapis.com',
+```
+
+This fixture config is used by the local dev server and Storybook. It uses the PROD URL, consistent with all other API URLs in that file (`idapi.theguardian.com`, `discussion.theguardian.com`, etc.).
 
 ### 6. Feature switch
 
@@ -248,16 +447,27 @@ This allows the feature to be toggled via the existing switch infrastructure wit
 
 ## Tests
 
-Mirror the test approach in [`src/client/userFeatures/user-features.test.ts`](../src/client/userFeatures/user-features.test.ts):
+`mparticle-consent.test.ts` is a **pure orchestration test**. All sub-modules and external dependencies are mocked so that the tests verify only the branching logic in the orchestrator, not the internals of any individual module.
 
--   Mock `@guardian/libs` (`onConsentChange`, `getConsentFor`, `getCookie`)
--   Mock `../../lib/identity` (`getAuthStatus`)
--   Mock the `fetch` global
--   Assert: when user is signed out → no fetch call
--   Assert: when `mparticleConsentNeedsSync()` is false → no fetch call
--   Assert: when signed in and needs sync → fetch called with correct URL, method, headers, and body
--   Assert: after successful sync, `markMparticleConsentSynced()` is called (cookie is set)
--   Assert: on `fetch` failure → error is thrown (so it surfaces in Sentry)
+Mock boundaries:
+
+-   `@guardian/libs` — `onConsentChange`, `getConsentFor`, `getCookie` all mocked individually. `onConsentChange` captures its callback so tests can invoke it directly.
+-   `../../lib/identity` — `getAuthStatus` mocked
+-   `./mparticleConsentApi` — `syncConsentToMparticle` mocked
+-   `./cookies/mparticleConsentSynced` — `mparticleConsentNeedsSync`, `markMparticleConsentSynced` mocked
+
+Use `jest.clearAllMocks()` (not `jest.resetAllMocks()`) in `beforeEach`. `clearAllMocks` resets call history and per-test return values but preserves the mock factory implementations supplied to `jest.mock()` — which is required for the `onConsentChange` callback capture to keep working across tests.
+
+Test cases:
+
+-   When user is signed out → `syncConsentToMparticle` not called
+-   When `mparticleConsentNeedsSync()` returns false → `syncConsentToMparticle` not called
+-   When `bwid` cookie is absent → `syncConsentToMparticle` not called
+-   When signed in, needs sync, bwid present → `syncConsentToMparticle` called with correct `SignedIn` auth status, `browserId`, `consented: true`, and `pageviewId`
+-   When consent is false → `syncConsentToMparticle` called with `consented: false`
+-   Correct consent purpose key is passed to `getConsentFor`
+-   After successful sync → `markMparticleConsentSynced` called
+-   On API failure → `markMparticleConsentSynced` not called, error propagates (surfaces in Sentry)
 
 ## Key architectural decisions and their rationale
 
@@ -289,11 +499,41 @@ The URL is environment-specific (different for CODE, PROD, and DEV). Injecting i
 
 | Question | Status |
 |||
-| Which exact GDPR purpose name should be used with `getConsentFor()`? | **Needs confirmation from Data Privacy / MRR** |
+| Which exact GDPR purpose name should be used with `getConsentFor()`? | **Needs confirmation from Data Privacy / MRR. Drives the `csnx` PR.** |
 | What should the staleness cookie TTL be? (session-length vs. fixed minutes) | To agree with backend/MRR |
 | Should the call also be made on `apps` rendering target (`main.apps.ts`)? | Likely no – scoped to web for now |
 | Should failures be silently swallowed or surfaced to Sentry? | Recommend surfacing via existing Sentry integration |
-| Does the switch need to be in the `Switches` type definition (fully typed) or is the index signature sufficient? | Low priority, can use index signature and revisit |
+
+## Manual testing (local)
+
+### Prerequisites
+
+1. **Backend endpoint is deployed to CODE** — the frontend can't test end-to-end before the `PATCH /consents/{browserId}` endpoint is live.
+2. **mParticle `mparticle` vendor added to `@guardian/libs`** — until this is done, the consent lookup will not work correctly. For pre-check testing the cast is in place temporarily.
+3. **Feature switch enabled** — the startup entry is guarded by `window.guardian.config.switches.mparticleConsentSync`. Enable it in [`fixtures/switch-overrides.js`](../fixtures/switch-overrides.js) to ungate it locally:
+
+```js
+mparticleConsentSync: true,
+```
+
+### Steps
+
+1. Start the local dev server (`make dev` or `pnpm dev`).
+2. In the browser, open DevTools → Application → Cookies. **Delete** the `gu_mparticle_consent_synced` cookie if present (this resets the staleness gate).
+3. Sign in to theguardian.com (you must be signed in — the call is gated on auth status).
+4. Open any article page.
+5. In the **Network** tab, filter by `consents`. You should see a `PATCH` request to `https://mparticle-api.code.dev-guardianapis.com/consents/<your-bwid>` with:
+    - Status `200` (or appropriate success code from the backend)
+    - `Authorization: Bearer ...` header present
+    - Body: `{ "consented": true/false, "pageviewId": "..." }`
+6. Reload the page. Because `gu_mparticle_consent_synced` is now set, **no second request** should fire.
+7. Delete `gu_mparticle_consent_synced` again. Reload. The request fires again.
+8. To test the consent-change path: open the CMP modal (via the Privacy Settings link in the footer), toggle consent, and save. A new request should fire (the CMP will trigger `onConsentChange` again, and the staleness cookie should have been cleared or will be overwritten).
+9. Sign out. Reload. No request should fire.
+
+### Confirming the right mParticle profile was updated
+
+After a successful call, ask a backend engineer or check the mParticle sandbox UI to verify the consent attribute was written to the Lite profile for your `bwid` value.
 
 ## Relationship to other work
 
