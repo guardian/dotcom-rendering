@@ -3,7 +3,20 @@ import '@testing-library/jest-dom';
 import { CallToActionAtom } from './CallToActionAtom';
 
 describe('CallToActionAtom', () => {
-	it('should render with url and button text', () => {
+	it('should render with url and a default button text when not provided', () => {
+		const { getByRole } = render(
+			<CallToActionAtom
+				linkUrl="https://example.com"
+				backgroundImage="https://example.com/image.jpg"
+			/>,
+		);
+
+		const link = getByRole('link', { name: 'Learn more' });
+		expect(link).toBeInTheDocument();
+		expect(link).toHaveAttribute('href', 'https://example.com');
+	});
+
+	it('should display custom button text when provided', () => {
 		const { getByRole } = render(
 			<CallToActionAtom
 				linkUrl="https://example.com"
@@ -12,12 +25,9 @@ describe('CallToActionAtom', () => {
 			/>,
 		);
 
-		const link = getByRole('link');
+		const link = getByRole('link', { name: 'Click here' });
 		expect(link).toBeInTheDocument();
 		expect(link).toHaveAttribute('href', 'https://example.com');
-
-		const button = getByRole('button', { name: 'Click here' });
-		expect(button).toBeInTheDocument();
 	});
 
 	it('should display the label when provided', () => {
@@ -47,21 +57,34 @@ describe('CallToActionAtom', () => {
 		expect(heading).not.toBeInTheDocument();
 	});
 
-	it('should have correct link wrapping the entire component', () => {
+	it('should apply the accent colour to the button when provided', () => {
 		const { getByRole } = render(
 			<CallToActionAtom
 				linkUrl="https://example.com"
-				buttonText="Learn more"
-				text="Important Info"
 				backgroundImage="https://example.com/image.jpg"
+				buttonText="Click here"
+				accentColor="#d71920"
 			/>,
 		);
 
-		const link = getByRole('link');
-		expect(link).toHaveAttribute('href', 'https://example.com');
+		const link = getByRole('link', { name: 'Click here' });
+		const computedStyle = window.getComputedStyle(link);
+		expect(computedStyle.color).toBe('rgb(255, 255, 255)');
+		expect(computedStyle.backgroundColor).toBe('rgb(215, 25, 32)');
+	});
 
-		// Check that the button is within the link
-		const button = getByRole('button', { name: 'Learn more' });
-		expect(link).toContainElement(button);
+	it('should apply the default theme to the button when no accent colour is provided', () => {
+		const { getByRole } = render(
+			<CallToActionAtom
+				linkUrl="https://example.com"
+				backgroundImage="https://example.com/image.jpg"
+				buttonText="Click here"
+			/>,
+		);
+
+		const link = getByRole('link', { name: 'Click here' });
+		const computedStyle = window.getComputedStyle(link);
+		expect(computedStyle.color).toBe('rgb(0, 0, 0)');
+		expect(computedStyle.backgroundColor).toBe('rgb(255, 255, 255)');
 	});
 });
