@@ -4,7 +4,7 @@ import {
 	from,
 	palette as sourcePalette,
 	space,
-	textSans14,
+	textSans12,
 	textSansBold12,
 	textSansBold14,
 	visuallyHidden,
@@ -58,7 +58,9 @@ const headerWrapperStyles = css`
 
 const brandingStyles = css`
 	display: flex;
+	position: relative;
 	width: 132px;
+	min-width: 132px;
 `;
 
 const advertiserContentStyles = css`
@@ -68,9 +70,7 @@ const advertiserContentStyles = css`
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-	${textSans14};
-	/** Hard-coded to fit. TODO - address this */
-	font-size: 13px;
+	${textSans12};
 	padding: 0 2px;
 
 	button {
@@ -81,14 +81,18 @@ const advertiserContentStyles = css`
 
 const logoStyles = css`
 	align-self: end;
-	padding-bottom: ${space[1]}px;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 2px;
 
-	a {
-		cursor: pointer;
-		text-decoration: none;
-		display: flex;
+	${from.mobileMedium} {
+		flex-direction: row;
 		align-items: flex-end;
+		margin-bottom: ${space[1]}px;
 	}
+
+	cursor: pointer;
+	text-decoration: none;
 
 	svg {
 		width: 94px;
@@ -120,15 +124,18 @@ const badgeWrapperStyles = css`
 	text-align: center;
 	z-index: 1;
 	background-color: ${sourcePalette.neutral[100]};
-	padding: ${space[1]}px 0;
 `;
 
 /**
  * Can't reuse general Logo.tsx until we add a new palette to work with hosted.
  * The color doesn't work with palette --masthead-nav-link-text
  */
-const Logo = () => (
-	<a href="/" data-link-name={nestedOphanComponents('hosted-header', 'logo')}>
+const GuardianLogo = () => (
+	<a
+		href="/"
+		data-link-name={nestedOphanComponents('hosted-header', 'logo')}
+		css={logoStyles}
+	>
 		<span
 			css={css`
 				${visuallyHidden};
@@ -170,9 +177,7 @@ export const HostedContentHeader = ({ branding }: Props) => {
 				</div>
 			</div>
 
-			<div css={logoStyles}>
-				<Logo />
-			</div>
+			<GuardianLogo />
 		</div>
 	);
 };
