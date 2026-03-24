@@ -85,11 +85,6 @@ const headlineStyles = css`
 const metaStyles = css`
 	${grid.column.centre}
 	grid-row-start: 3;
-`;
-
-const shareButtonStyles = css`
-	margin-top: ${space[4]}px;
-	padding: ${space[1]}px;
 
 	${from.desktop} {
 		grid-row-start: 2;
@@ -98,6 +93,11 @@ const shareButtonStyles = css`
 	${from.leftCol} {
 		${grid.column.left}
 	}
+`;
+
+const shareButtonStyles = css`
+	margin-top: ${space[4]}px;
+	padding: ${space[1]}px;
 `;
 
 const standfirstStyles = css`
