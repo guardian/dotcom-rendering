@@ -47,7 +47,7 @@ const ABTests: ABTest[] = [
 		name: "commercial-enable-spacefinder-on-interactives",
 		description: "Enable spacefinder on interactive articles on mobile web",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: `2026-03-25`,
+		expirationDate: "2026-04-09",
 		type: "client",
 		status: "ON",
 		audienceSize: 0 / 100,
