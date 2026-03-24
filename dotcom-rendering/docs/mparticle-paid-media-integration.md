@@ -222,10 +222,10 @@ The spec says: **when a user signs in**, **when a signed-in user starts a new se
 
 Practically, the cleanest mapping onto the existing architecture is:
 
-| Trigger | Mechanism |
-|||
+| Trigger                     | Mechanism                                                                                                                      |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | User signs in / new session | Already handled by the `userFeatures` refresh gate. Mirror the same "needs refreshing?" staleness-cookie approach (see below). |
-| Consent changes | `onConsentChange` callback from `@guardian/libs`, but _only_ when the user is signed in. |
+| Consent changes             | `onConsentChange` callback from `@guardian/libs`, but _only_ when the user is signed in.                                       |
 
 ### Avoiding API hammering
 
@@ -435,14 +435,14 @@ This allows the feature to be toggled via the existing switch infrastructure wit
 
 ## Files to create / modify
 
-| Action | File |
-|||
-| **Create** | `src/client/mparticle/mparticleConsentApi.ts` |
-| **Create** | `src/client/mparticle/cookies/mparticleConsentSynced.ts` |
-| **Create** | `src/client/mparticle/mparticle-consent.ts` |
-| **Create** | `src/client/mparticle/mparticle-consent.test.ts` |
-| **Modify** | `src/client/main.web.ts` – add startup entry |
-| **Modify** | `src/model/guardian.ts` – add `mparticleApiUrl` to `config.page` |
+| Action     | File                                                                                             |
+| ---------- | ------------------------------------------------------------------------------------------------ |
+| **Create** | `src/client/mparticle/mparticleConsentApi.ts`                                                    |
+| **Create** | `src/client/mparticle/cookies/mparticleConsentSynced.ts`                                         |
+| **Create** | `src/client/mparticle/mparticle-consent.ts`                                                      |
+| **Create** | `src/client/mparticle/mparticle-consent.test.ts`                                                 |
+| **Modify** | `src/client/main.web.ts` – add startup entry                                                     |
+| **Modify** | `src/model/guardian.ts` – add `mparticleApiUrl` to `config.page`                                 |
 | **Modify** | `src/types/config.ts` – add `mparticleConsentSync` switch (optional, or rely on index signature) |
 
 ## Tests
@@ -497,12 +497,12 @@ The URL is environment-specific (different for CODE, PROD, and DEV). Injecting i
 
 ## Open questions (frontend-relevant)
 
-| Question | Status |
-|||
-| Which exact GDPR purpose name should be used with `getConsentFor()`? | **Needs confirmation from Data Privacy / MRR. Drives the `csnx` PR.** |
-| What should the staleness cookie TTL be? (session-length vs. fixed minutes) | To agree with backend/MRR |
-| Should the call also be made on `apps` rendering target (`main.apps.ts`)? | Likely no – scoped to web for now |
-| Should failures be silently swallowed or surfaced to Sentry? | Recommend surfacing via existing Sentry integration |
+| Question                                                                    | Status                                                                |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| Which exact GDPR purpose name should be used with `getConsentFor()`?        | **Needs confirmation from Data Privacy / MRR. Drives the `csnx` PR.** |
+| What should the staleness cookie TTL be? (session-length vs. fixed minutes) | To agree with backend/MRR                                             |
+| Should the call also be made on `apps` rendering target (`main.apps.ts`)?   | Likely no – scoped to web for now                                     |
+| Should failures be silently swallowed or surfaced to Sentry?                | Recommend surfacing via existing Sentry integration                   |
 
 ## Manual testing (local)
 
@@ -543,13 +543,13 @@ After a successful call, ask a backend engineer or check the mParticle sandbox U
 
 ## Reference: existing patterns used
 
-| Pattern | Source in this repo |
-|||
-| `onConsentChange` usage | [`src/lib/braze/hasRequiredConsents.ts`](../src/lib/braze/hasRequiredConsents.ts) |
-| Authenticated API call | [`src/client/userFeatures/userBenefitsApi.ts`](../src/client/userFeatures/userBenefitsApi.ts) |
-| Staleness cookie | [`src/client/userFeatures/cookies/userBenefitsExpiry.ts`](../src/client/userFeatures/cookies/userBenefitsExpiry.ts) |
-| `isUserLoggedIn` / `getAuthStatus` | [`src/lib/identity.ts`](../src/lib/identity.ts) |
-| `bwid` cookie read | [`src/client/bootCmp.ts`](../src/client/bootCmp.ts) |
-| `pageViewId` | `window.guardian.config.ophan.pageViewId` |
-| Startup wiring | [`src/client/main.web.ts`](../src/client/main.web.ts) |
-| Per-page config URL injection | [`src/model/guardian.ts`](../src/model/guardian.ts) (`config.page.userBenefitsApiUrl`) |
+| Pattern                            | Source in this repo                                                                                                 |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `onConsentChange` usage            | [`src/lib/braze/hasRequiredConsents.ts`](../src/lib/braze/hasRequiredConsents.ts)                                   |
+| Authenticated API call             | [`src/client/userFeatures/userBenefitsApi.ts`](../src/client/userFeatures/userBenefitsApi.ts)                       |
+| Staleness cookie                   | [`src/client/userFeatures/cookies/userBenefitsExpiry.ts`](../src/client/userFeatures/cookies/userBenefitsExpiry.ts) |
+| `isUserLoggedIn` / `getAuthStatus` | [`src/lib/identity.ts`](../src/lib/identity.ts)                                                                     |
+| `bwid` cookie read                 | [`src/client/bootCmp.ts`](../src/client/bootCmp.ts)                                                                 |
+| `pageViewId`                       | `window.guardian.config.ophan.pageViewId`                                                                           |
+| Startup wiring                     | [`src/client/main.web.ts`](../src/client/main.web.ts)                                                               |
+| Per-page config URL injection      | [`src/model/guardian.ts`](../src/model/guardian.ts) (`config.page.userBenefitsApiUrl`)                              |
