@@ -16,6 +16,7 @@ import type { SWRConfiguration } from 'swr';
 import useSWR from 'swr';
 import type { FootballMatch } from '../../footballMatchV2';
 import { grid } from '../../grid';
+import { ArticleDesign, type ArticleFormat } from '../../lib/articleFormat';
 import {
 	type EditionId,
 	getLocaleFromEdition,
@@ -23,11 +24,13 @@ import {
 } from '../../lib/edition';
 import { palette } from '../../palette';
 import type { ColourName } from '../../paletteDeclarations';
+import type { ArticleDeprecated } from '../../types/article';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import { BigNumber } from '../BigNumber';
 import { FootballCrest } from '../FootballCrest';
 import { Placeholder } from '../Placeholder';
 import { background, border, primaryText, secondaryText } from './colours';
+import { FootballMatchHeaderFallback } from './FootballMatchHeaderFallback';
 import { type HeaderData, parse as parseHeaderData } from './headerData';
 import { Tabs } from './Tabs';
 
@@ -37,6 +40,8 @@ export type FootballMatchHeaderProps = {
 	edition: EditionId;
 	matchHeaderURL: string;
 	renderingTarget: RenderingTarget;
+	format?: ArticleFormat;
+	article?: ArticleDeprecated;
 };
 
 type Props = FootballMatchHeaderProps & {
@@ -45,7 +50,7 @@ type Props = FootballMatchHeaderProps & {
 };
 
 export const FootballMatchHeader = (props: Props) => {
-	const { data } = useSWR<HeaderData, string>(
+	const { data, error } = useSWR<HeaderData, Error>(
 		props.matchHeaderURL,
 		fetcher(props.initialTab, props.renderingTarget, props.getHeaderData),
 		swrOptions(props.refreshInterval),
@@ -54,6 +59,23 @@ export const FootballMatchHeader = (props: Props) => {
 	const match = data?.match ?? props.initialData?.match;
 	const tabs = data?.tabs ?? props.initialData?.tabs;
 	const leagueName = data?.leagueName ?? props.initialData?.leagueName;
+
+	if (error) {
+		if (
+			props.article &&
+			props.format &&
+			(props.format.design === ArticleDesign.LiveBlog ||
+				props.format.design === ArticleDesign.DeadBlog)
+		) {
+			return (
+				<FootballMatchHeaderFallback
+					format={props.format}
+					article={props.article}
+				/>
+			);
+		}
+		return null;
+	}
 
 	if (match === undefined || tabs === undefined || leagueName === undefined) {
 		return (
