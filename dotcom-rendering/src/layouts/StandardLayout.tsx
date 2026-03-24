@@ -829,6 +829,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 												!!article.config.switches
 													.articleEndSlot
 											}
+											isSensitive={
+												article.config.isSensitive
+											}
 										/>
 									</Island>
 								)}

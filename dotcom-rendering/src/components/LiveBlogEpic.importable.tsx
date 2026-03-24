@@ -33,6 +33,7 @@ type Props = {
 	pageId: string;
 	keywordIds: string;
 	renderingTarget: RenderingTarget;
+	isSensitive: boolean;
 };
 
 const useEpic = ({ name }: { name: string }) => {
@@ -90,6 +91,7 @@ const usePayload = ({
 	isPaidContent,
 	tags,
 	pageId,
+	isSensitive,
 }: {
 	shouldHideReaderRevenue: boolean;
 	sectionId: string;
@@ -97,6 +99,7 @@ const usePayload = ({
 	tags: TagType[];
 	pageId: string;
 	keywordIds: string;
+	isSensitive: boolean;
 }): EpicPayload | undefined => {
 	const articleCounts = useArticleCounts(pageId, tags, 'LiveBlog');
 	const hasOptedOutOfArticleCount = useHasOptedOutOfArticleCount();
@@ -134,6 +137,7 @@ const usePayload = ({
 			isSignedIn,
 			pageId,
 			inHoldbackGroup,
+			isSensitive,
 		},
 	};
 };
@@ -243,6 +247,7 @@ export const LiveBlogEpic = ({
 	pageId,
 	keywordIds,
 	renderingTarget,
+	isSensitive,
 }: Props) => {
 	log('dotcom', 'LiveBlogEpic started');
 
@@ -262,6 +267,7 @@ export const LiveBlogEpic = ({
 		tags,
 		pageId,
 		keywordIds,
+		isSensitive,
 	});
 	if (!ophanPageViewId || !payload || !pageUrl) return null;
 

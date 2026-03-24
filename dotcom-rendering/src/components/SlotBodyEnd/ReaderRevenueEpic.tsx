@@ -53,6 +53,7 @@ export type CanShowData = {
 	ophanPageViewId: string;
 	pageId?: string;
 	inHoldbackGroup?: boolean;
+	isSensitive: boolean;
 };
 
 const buildPayload = async (
@@ -75,6 +76,7 @@ const buildPayload = async (
 		isSignedIn: data.isSignedIn,
 		pageId: data.pageId,
 		inHoldbackGroup: data.inHoldbackGroup,
+		isSensitive: data.isSensitive,
 	},
 });
 

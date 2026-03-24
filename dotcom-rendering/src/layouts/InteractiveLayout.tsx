@@ -565,6 +565,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 								articleEndSlot={
 									!!article.config.switches.articleEndSlot
 								}
+								isSensitive={article.config.isSensitive}
 							/>
 						</Island>
 					</div>

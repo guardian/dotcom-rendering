@@ -287,6 +287,7 @@ describe('Island: server-side rendering', () => {
 					pageId={''}
 					keywordIds={''}
 					renderingTarget={'Web'}
+					isSensitive={false}
 				/>,
 			),
 		).not.toThrow();
@@ -430,6 +431,7 @@ describe('Island: server-side rendering', () => {
 						renderAds={true}
 						isLabs={false}
 						articleEndSlot={true}
+						isSensitive={false}
 					/>
 				</WithConfig>,
 			),

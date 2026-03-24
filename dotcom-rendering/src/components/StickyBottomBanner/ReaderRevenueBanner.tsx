@@ -129,6 +129,7 @@ const buildPayload = async ({
 	hideSupportMessagingForUser,
 	pageId,
 	inHoldbackGroup,
+	isSensitive,
 }: BuildPayloadProps): Promise<BannerPayload> => {
 	const articleCounts = await asyncArticleCounts;
 	const weeklyArticleHistory = articleCounts?.weeklyArticleHistory;
@@ -161,6 +162,7 @@ const buildPayload = async ({
 			),
 			pageId,
 			inHoldbackGroup,
+			isSensitive,
 		},
 	};
 };
