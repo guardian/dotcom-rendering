@@ -4,7 +4,7 @@ export const syncConsentToMparticle = async (
 	signedInAuthStatus: SignedIn,
 	browserId: string,
 	consented: boolean,
-	pageviewId: string,
+	pageViewId: string,
 ): Promise<void> => {
 	const baseUrl = window.guardian.config.page.mparticleApiUrl;
 	if (!baseUrl) throw new Error('mparticleApiUrl is not defined');
@@ -17,7 +17,7 @@ export const syncConsentToMparticle = async (
 			'Content-Type': 'application/json',
 			...getOptionsHeaders(signedInAuthStatus).headers,
 		},
-		body: JSON.stringify({ consented, pageviewId }),
+		body: JSON.stringify({ consented, pageViewId }),
 	});
 
 	if (!response.ok) {

@@ -110,7 +110,7 @@ flowchart TD
     BWID -- "No cookie" --> NOOP3["↩ return — no API call"]
     BWID -- "Has bwid" --> CONSENT["getConsentFor('mparticle', state)\n→ boolean"]
 
-    CONSENT --> API["mparticleConsentApi.ts\nPATCH mparticle-api.guardianapis.com\n/consents/{browserId}\n{ consented, pageviewId }\nAuthorization: Bearer …"]
+    CONSENT --> API["mparticleConsentApi.ts\nPATCH mparticle-api.guardianapis.com\n/consents/{browserId}\n{ consented, pageViewId }\nAuthorization: Bearer …"]
 
     API -- "ok" --> MARK["markMparticleConsentSynced()\nsets gu_mparticle_consent_synced\n(30-min TTL)"]
     API -- "!ok" --> ERR["throw Error\n→ surfaces in Sentry"]
@@ -206,13 +206,13 @@ Content-Type: application/json
 
 {
   "consented": true | false,
-  "pageviewId": "<ophan pageViewId>"
+  "pageViewId": "<ophan pageViewId>"
 }
 ```
 
 -   `browserId` – the value of the `bwid` cookie (string). This is the identifier that mParticle stores in the `other_id_2` / `Other ID 2` user identity field.
 -   `consented` – boolean reflecting whether the user has consented to the relevant GDPR purpose.
--   `pageviewId` – taken from `window.guardian.config.ophan.pageViewId`. Useful as an audit trail / evidence of the user's choice.
+-   `pageViewId` – taken from `window.guardian.config.ophan.pageViewId`. Useful as an audit trail / evidence of the user's choice.
 
 Authentication follows the same pattern as `userBenefitsApi`: attach `Authorization: Bearer <access_token>` and `X-GU-IS-OAUTH: true` from `getOptionsHeaders(signedInAuthStatus)` in [`lib/identity.ts`](../src/lib/identity.ts).
 
@@ -282,7 +282,7 @@ export const syncConsentToMparticle = async (
 	signedInAuthStatus: SignedIn,
 	browserId: string,
 	consented: boolean,
-	pageviewId: string,
+	pageViewId: string,
 ): Promise<void> => {
 	const baseUrl = window.guardian.config.page.mparticleApiUrl;
 	if (!baseUrl) throw new Error('mparticleApiUrl is not defined');
@@ -295,7 +295,7 @@ export const syncConsentToMparticle = async (
 			'Content-Type': 'application/json',
 			...getOptionsHeaders(signedInAuthStatus).headers,
 		},
-		body: JSON.stringify({ consented, pageviewId }),
+		body: JSON.stringify({ consented, pageViewId }),
 	});
 
 	if (!response.ok) {
@@ -363,14 +363,14 @@ export const syncMparticleConsent = (): void => {
 		const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 		if (!browserId) return;
 
-		const pageviewId = window.guardian.config.ophan.pageViewId;
+		const pageViewId = window.guardian.config.ophan.pageViewId;
 		const consented = getConsentFor(MPARTICLE_CONSENT_PURPOSE, state);
 
 		await syncConsentToMparticle(
 			authStatus,
 			browserId,
 			consented,
-			pageviewId,
+			pageViewId,
 		);
 		markMparticleConsentSynced();
 	});
@@ -463,7 +463,7 @@ Test cases:
 -   When user is signed out → `syncConsentToMparticle` not called
 -   When `mparticleConsentNeedsSync()` returns false → `syncConsentToMparticle` not called
 -   When `bwid` cookie is absent → `syncConsentToMparticle` not called
--   When signed in, needs sync, bwid present → `syncConsentToMparticle` called with correct `SignedIn` auth status, `browserId`, `consented: true`, and `pageviewId`
+-   When signed in, needs sync, bwid present → `syncConsentToMparticle` called with correct `SignedIn` auth status, `browserId`, `consented: true`, and `pageViewId`
 -   When consent is false → `syncConsentToMparticle` called with `consented: false`
 -   Correct consent purpose key is passed to `getConsentFor`
 -   After successful sync → `markMparticleConsentSynced` called
@@ -525,7 +525,7 @@ mparticleConsentSync: true,
 5. In the **Network** tab, filter by `consents`. You should see a `PATCH` request to `https://mparticle-api.code.dev-guardianapis.com/consents/<your-bwid>` with:
     - Status `200` (or appropriate success code from the backend)
     - `Authorization: Bearer ...` header present
-    - Body: `{ "consented": true/false, "pageviewId": "..." }`
+    - Body: `{ "consented": true/false, "pageViewId": "..." }`
 6. Reload the page. Because `gu_mparticle_consent_synced` is now set, **no second request** should fire.
 7. Delete `gu_mparticle_consent_synced` again. Reload. The request fires again.
 8. To test the consent-change path: open the CMP modal (via the Privacy Settings link in the footer), toggle consent, and save. A new request should fire (the CMP will trigger `onConsentChange` again, and the staleness cookie should have been cleared or will be overwritten).

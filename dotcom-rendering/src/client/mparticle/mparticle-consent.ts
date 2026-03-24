@@ -22,14 +22,14 @@ export const syncMparticleConsent = (): void => {
 		const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 		if (!browserId) return;
 
-		const pageviewId = window.guardian.config.ophan.pageViewId;
+		const pageViewId = window.guardian.config.ophan.pageViewId;
 		const consented = getConsentFor(MPARTICLE_CONSENT_PURPOSE, state);
 
 		await syncConsentToMparticle(
 			authStatus,
 			browserId,
 			consented,
-			pageviewId,
+			pageViewId,
 		);
 		markMparticleConsentSynced();
 	});
