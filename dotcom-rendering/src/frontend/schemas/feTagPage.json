@@ -2265,11 +2265,16 @@
                                     },
                                     "width": {
                                         "type": "number"
+                                    },
+                                    "aspectRatio": {
+                                        "type": "string"
                                     }
                                 },
                                 "required": [
+                                    "height",
                                     "mimeType",
-                                    "src"
+                                    "src",
+                                    "width"
                                 ]
                             }
                         },
