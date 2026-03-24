@@ -39,6 +39,15 @@ const isSupportedMimeType = (
 export const convertAssetsToVideoSources = (assets: VideoAssets[]): Source[] =>
 	assets
 		.filter((asset) => isSupportedMimeType(asset.mimeType))
+		.sort(
+			(a, b) =>
+				supportedVideoFileTypes.indexOf(
+					a.mimeType as SupportedVideoFileType,
+				) -
+				supportedVideoFileTypes.indexOf(
+					b.mimeType as SupportedVideoFileType,
+				),
+		)
 		.map((asset) => ({
 			src: asset.url,
 			mimeType: asset.mimeType as Source['mimeType'],

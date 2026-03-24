@@ -11,6 +11,7 @@ import type { FESportPageConfig } from './frontend/feFootballDataPage';
 import type { EditionId } from './lib/edition';
 import type { NavType } from './model/extract-nav';
 import type { FooterType } from './types/footer';
+import type { RenderingTarget } from './types/renderingTarget';
 
 export type Region = {
 	name: string;
@@ -22,7 +23,6 @@ export type FootballData = SportPageConfig & {
 };
 
 export type SportPageConfig = {
-	nav: NavType;
 	editionId: EditionId;
 	guardianBaseURL: string;
 	config: FESportPageConfig;
@@ -77,10 +77,26 @@ export type SportDataPage =
 
 export type SportPageKind = SportDataPage['kind'];
 
+interface BaseSportDataPage {
+	sportData: SportDataPage;
+	renderingTarget: RenderingTarget;
+}
+
+export interface AppSportDataPage extends BaseSportDataPage {
+	sportData: FootballMatchInfoPage;
+	renderingTarget: 'Apps';
+}
+
+export interface WebSportDataPage extends BaseSportDataPage {
+	nav: NavType;
+	renderingTarget: 'Web';
+}
+
 export const cleanTeamName = (teamName: string): string => {
 	return teamName
 		.replace('Ladies', '')
 		.replace('Holland', 'The Netherlands')
+		.replace('Ivory Coast', 'Côte d’Ivoire')
 		.replace('Bialystock', 'Białystok')
 		.replace('Union Saint Gilloise', 'Union Saint-Gilloise');
 };

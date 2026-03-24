@@ -133,8 +133,6 @@ export type Props = {
 	showAge?: boolean;
 	discussionApiUrl: string;
 	discussionId?: string;
-	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
-	isDynamo?: boolean;
 	isExternalLink: boolean;
 	slideshowImages?: DCRSlideshowImage[];
 	/** Determines if liveblog update links are displayed on a card */
@@ -167,6 +165,7 @@ export type Props = {
 	headlinePosition?: 'inner' | 'outer';
 	isStorylines?: boolean;
 	starRatingSize?: RatingSizeType;
+	isInSlimHomepageAbTestVariant?: boolean;
 };
 
 const waveformWrapper = (
@@ -379,7 +378,6 @@ export const Card = ({
 	showAge = true,
 	discussionApiUrl,
 	discussionId,
-	isDynamo,
 	isCrossword,
 	isNewsletter = false,
 	isOnwardContent = false,
@@ -406,6 +404,7 @@ export const Card = ({
 	isStorylines = false,
 	starRatingSize = 'small',
 	articleMedia,
+	isInSlimHomepageAbTestVariant,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -549,7 +548,6 @@ export const Card = ({
 	const avatarPosition = decideAvatarPosition(
 		mediaPositionOnMobile,
 		mediaPositionOnDesktop,
-		isBetaContainer,
 	);
 
 	const backgroundColour = () => {
@@ -681,7 +679,6 @@ export const Card = ({
 					supportingContent={supportingContent}
 					containerPalette={containerPalette}
 					alignment={supportingContentAlignment}
-					isDynamo={isDynamo}
 					isMedia={isMediaCard(format)}
 					fillBackgroundOnMobile={
 						!!isFlexSplash ||
@@ -701,6 +698,14 @@ export const Card = ({
 			return <Sublinks />;
 		}
 
+		if (isInSlimHomepageAbTestVariant) {
+			return (
+				<Hide until="wide">
+					<Sublinks />
+				</Hide>
+			);
+		}
+
 		return (
 			<Hide from={isFlexSplash ? 'desktop' : 'tablet'}>
 				<Sublinks />
@@ -712,7 +717,7 @@ export const Card = ({
 		if (!hasSublinks) return null;
 		if (sublinkPosition !== 'inner') return null;
 
-		return (
+		const Sublinks = () => (
 			<Hide until={isFlexSplash ? 'desktop' : 'tablet'}>
 				{isStorylines ? (
 					<SupportingKeyStoriesContent
@@ -730,12 +735,21 @@ export const Card = ({
 						/* inner links are always vertically stacked */
 						alignment="vertical"
 						containerPalette={containerPalette}
-						isDynamo={isDynamo}
 						fillBackgroundOnMobile={isFlexSplash}
 					/>
 				)}
 			</Hide>
 		);
+
+		if (isInSlimHomepageAbTestVariant) {
+			return (
+				<Hide from="wide">
+					<Sublinks />
+				</Hide>
+			);
+		}
+
+		return <Sublinks />;
 	};
 
 	const determinePadContent = (
@@ -878,7 +892,6 @@ export const Card = ({
 				minWidthInPixels={minWidthInPixels}
 				mediaType={media?.type}
 				gapSizes={getGapSizes()}
-				isBetaContainer={isBetaContainer}
 			>
 				{/**
 				 * Waveform for podcasts is absolutely positioned at bottom of
@@ -1243,7 +1256,6 @@ export const Card = ({
 									>
 										<LatestLinks
 											id={linkTo}
-											isDynamo={isDynamo}
 											direction={
 												isFlexibleContainer
 													? liveUpdatesAlignment
@@ -1302,7 +1314,6 @@ export const Card = ({
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<LatestLinks
 							id={linkTo}
-							isDynamo={isDynamo}
 							direction={
 								isFlexibleContainer
 									? liveUpdatesAlignment

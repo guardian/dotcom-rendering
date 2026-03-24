@@ -204,6 +204,11 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 	const cleanHeading =
 		replaceNonArticleCountPlaceholders(variant.heading) ||
 		'Support the Guardian';
+	const headingElements = replaceArticleCount(
+		cleanHeading,
+		articleCounts.forTargetedWeeks,
+		'epic',
+	);
 
 	if (
 		cleanParagraphs.some(containsNonArticleCountPlaceholder) ||
@@ -220,7 +225,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 				setNodeAt40Percent(node);
 			}}
 		>
-			{!!cleanHeading && <div css={yellowHeading}>{cleanHeading}</div>}
+			{!!cleanHeading && <div css={yellowHeading}>{headingElements}</div>}
 			<section css={container}>
 				<LiveblogEpicBody
 					paragraphs={cleanParagraphs}

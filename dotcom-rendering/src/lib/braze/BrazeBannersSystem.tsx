@@ -7,12 +7,15 @@ import type {
 	ReminderComponent,
 } from '@guardian/support-dotcom-components/dist/shared/types/reminders';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { submitComponentEvent } from '../../client/ophan/ophan';
+import { useConfig } from '../../components/ConfigContext';
 import { isProd } from '../../components/marketing/lib/stage';
 import type { StageType } from '../../types/config';
 import type { TagType } from '../../types/tag';
 import { getAuthState, getOptionsHeaders } from '../identity';
 import type { CandidateConfig, CanShowResult } from '../messagePicker';
 import { useAuthStatus } from '../useAuthStatus';
+import { useIsInView } from '../useIsInView';
 import type { BrazeInstance } from './initialiseBraze';
 import { suppressForTaylorReport } from './taylorReport';
 
@@ -150,12 +153,14 @@ export function refreshBanners(braze: BrazeInstance): Promise<void> {
  * Meta information required to display a Braze Banner.
  */
 export type BrazeBannersSystemMeta = {
+	id: string;
 	braze: BrazeInstance;
 	banner: Banner;
 };
 
 /**
  * Checks if a Braze Banner for the given placement ID can be shown.
+ * @param id Unique ID for the message candidate, used for logging and debugging
  * @param braze Braze instance
  * @param placementId Placement ID to check for a banner
  * @param contentType Content type of the article
@@ -164,6 +169,7 @@ export type BrazeBannersSystemMeta = {
  * @returns CanShowResult with the Banner meta if it can be shown
  */
 export const canShowBrazeBannersSystem = async (
+	id: string,
 	braze: BrazeInstance | null,
 	placementId: BrazeBannersSystemPlacementId,
 	contentType: string,
@@ -228,6 +234,7 @@ export const canShowBrazeBannersSystem = async (
 		return {
 			show: true,
 			meta: {
+				id,
 				braze,
 				banner,
 			},
@@ -266,6 +273,7 @@ export const buildBrazeBannersSystemConfig = (
 			id,
 			canShow: () => {
 				return canShowBrazeBannersSystem(
+					id,
 					braze,
 					placementId,
 					contentType,
@@ -273,7 +281,7 @@ export const buildBrazeBannersSystemConfig = (
 					tags,
 				);
 			},
-			show: (meta: BrazeBannersSystemMeta) => () => (
+			show: (meta: BrazeBannersSystemMeta) => (
 				<BrazeBannersSystemDisplay
 					meta={meta}
 					idApiUrl={idApiUrl}
@@ -448,6 +456,9 @@ export const BrazeBannersSystemDisplay = ({
 	const authStatus = useAuthStatus();
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [showBanner, setShowBanner] = useState(true);
+	// Tracks whether banner:open has been dispatched so we only fire banner:close if the open event was sent first.
+	const hasDispatchedOpenRef = useRef(false);
+
 	const [minHeight, setMinHeight] = useState<string>('0px');
 	const [wrapperModeEnabled, setWrapperModeEnabled] =
 		useState<boolean>(false);
@@ -455,6 +466,11 @@ export const BrazeBannersSystemDisplay = ({
 		useState<string>('#ffffff');
 	const [wrapperModeForegroundColor, setWrapperModeForegroundColor] =
 		useState<string>('#000000');
+	const { renderingTarget } = useConfig();
+	const [hasBeenSeen, setNode] = useIsInView({
+		debounce: true,
+		threshold: 0,
+	});
 
 	/**
 	 * Subscribes the user to a newsletter via the Identity API.
@@ -578,10 +594,23 @@ export const BrazeBannersSystemDisplay = ({
 
 	/**
 	 * Dismisses the banner by setting the showBanner state to false, which will remove it from the DOM.
+	 * Also dispatches a banner:close custom event if banner:open was previously dispatched, so that
+	 * commercial code can release the mobile sticky ad slot.
 	 */
 	const dismissBanner = useCallback(() => {
 		setShowBanner(false);
-	}, []);
+		meta.braze.logBannerClick(meta.banner, 'dismiss_button');
+		if (hasDispatchedOpenRef.current) {
+			document.dispatchEvent(
+				new CustomEvent('banner:close', {
+					detail: { bannerId: meta.id },
+				}),
+			);
+		}
+		meta.braze.logCustomEvent('braze_banner_dismissed', {
+			placementId: meta.banner.placementId,
+		});
+	}, [meta.id, meta.braze, meta.banner]);
 
 	/**
 	 * Sets the background and foreground colors for wrapper mode based on a given background color.
@@ -657,7 +686,19 @@ export const BrazeBannersSystemDisplay = ({
 			meta.braze.insertBanner(meta.banner, containerRef.current);
 
 			// CSS Checker
-			runCssCheckerOnBrazeBanner(meta);
+			const cssValidationResult = runCssCheckerOnBrazeBanner(meta);
+			if (!cssValidationResult) {
+				brazeBannersSystemLogger.warn(
+					'CSS validation failed for the Braze Banner. This may indicate broken styles. Check UI/UX ASAP!',
+				);
+				meta.braze.logCustomEvent(
+					'braze_banner_css_validation_failed',
+					{
+						placementId: meta.banner.placementId,
+					},
+				);
+				// We don't want to block the display of the banner if the CSS is broken, but we log it for awareness and action.
+			}
 		}
 	}, [showBanner, meta, meta.banner, meta.braze, setWrapperModeColors]);
 
@@ -729,6 +770,10 @@ export const BrazeBannersSystemDisplay = ({
 					});
 					break;
 				case BrazeBannersSystemMessageType.NewsletterSubscribe:
+					meta.braze.logBannerClick(
+						meta.banner,
+						'newsletter_subscribe_button',
+					);
 					const { newsletterId } = event.data;
 					if (newsletterId) {
 						void subscribeToNewsletter(newsletterId).then(
@@ -739,11 +784,23 @@ export const BrazeBannersSystemDisplay = ({
 										success,
 									},
 								);
+								meta.braze.logCustomEvent(
+									'braze_banner_newsletter_subscribe',
+									{
+										placementId: meta.banner.placementId,
+										newsletterId,
+										success,
+									},
+								);
 							},
 						);
 					}
 					break;
 				case BrazeBannersSystemMessageType.ReminderSubscribe:
+					meta.braze.logBannerClick(
+						meta.banner,
+						'reminder_subscribe_button',
+					);
 					const {
 						reminderPeriod,
 						reminderComponent,
@@ -761,6 +818,16 @@ export const BrazeBannersSystemDisplay = ({
 									success,
 								},
 							);
+							meta.braze.logCustomEvent(
+								'braze_banner_reminder_subscribe',
+								{
+									placementId: meta.banner.placementId,
+									reminderPeriod,
+									reminderComponent,
+									reminderOption,
+									success,
+								},
+							);
 						});
 					}
 					break;
@@ -771,8 +838,20 @@ export const BrazeBannersSystemDisplay = ({
 					);
 					break;
 				case BrazeBannersSystemMessageType.NavigateToUrl:
+					meta.braze.logBannerClick(
+						meta.banner,
+						'navigate_to_url_button',
+					);
 					const { url, target } = event.data;
 					if (url) {
+						meta.braze.logCustomEvent(
+							'braze_banner_navigate_to_url',
+							{
+								placementId: meta.banner.placementId,
+								url,
+								target,
+							},
+						);
 						if (target === 'blank') {
 							window.open(url, '_blank');
 						} else {
@@ -797,7 +876,6 @@ export const BrazeBannersSystemDisplay = ({
 					}
 					break;
 				case BrazeBannersSystemMessageType.DismissBanner:
-					// Remove the banner from the DOM
 					dismissBanner();
 					break;
 			}
@@ -818,8 +896,39 @@ export const BrazeBannersSystemDisplay = ({
 		postMessageToBrazeBanner,
 	]);
 
-	// Log Impressions with Braze and Button Clicks with Ophan
-	// TODO
+	// Log Impressions when the banner is seen, using the hasBeenSeen value from the useIsInView hook
+	useEffect(() => {
+		if (hasBeenSeen) {
+			brazeBannersSystemLogger.info(
+				`Banner with placement ID "${meta.banner.placementId}" has been seen. Logging impression.`,
+			);
+
+			// Dispatch a custom event
+			document.dispatchEvent(
+				new CustomEvent('banner:open', {
+					detail: { bannerId: meta.id },
+				}),
+			);
+			hasDispatchedOpenRef.current = true;
+
+			// Log the impression with Braze
+			meta.braze.logBannerImpressions([meta.banner.placementId]);
+
+			// Log VIEW event with Ophan
+			void submitComponentEvent(
+				{
+					component: {
+						componentType: 'RETENTION_ENGAGEMENT_BANNER',
+						id:
+							meta.banner.getStringProperty('ophanComponentId') ??
+							meta.banner.placementId,
+					},
+					action: 'VIEW',
+				},
+				renderingTarget,
+			);
+		}
+	}, [hasBeenSeen, meta.banner, meta.id, meta.braze, renderingTarget]);
 
 	/**
 	 * If showBanner is false, we return null to unmount the component and remove the banner from the DOM.
@@ -831,6 +940,7 @@ export const BrazeBannersSystemDisplay = ({
 
 	return (
 		<div
+			ref={setNode}
 			className="braze-banner"
 			style={{
 				minHeight,
@@ -838,12 +948,12 @@ export const BrazeBannersSystemDisplay = ({
 			css={
 				wrapperModeEnabled
 					? css`
-							max-height: 65svh;
+							max-height: 90svh;
 							border-top: 1px solid rgb(0, 0, 0);
 							background-color: ${wrapperModeBackgroundColor};
-							${until.phablet} {
-								border: none;
-							}
+							overflow-y: auto;
+							overflow-x: hidden;
+							overscroll-behavior: none;
 					  `
 					: undefined
 			}
@@ -858,7 +968,7 @@ export const BrazeBannersSystemDisplay = ({
 								position: relative;
 								display: grid;
 								margin: 0px auto;
-								padding: 12px 4px 0px 12px;
+								padding: 0px 4px 0px 12px;
 								bottom: 0px;
 								column-gap: 10px;
 								align-self: stretch;
@@ -884,13 +994,13 @@ export const BrazeBannersSystemDisplay = ({
 										'. copy-container close-button close-button'
 										/ minmax(0px, 0.5fr)
 										492px max-content minmax(0px, 0.5fr);
-									padding: 12px 12px 0px;
+									padding: 0px 12px 0px;
 								}
 								${until.phablet} {
 									max-width: 660px;
 									grid-template:
 										'. .'
-										'copy-container close-button' / auto 0px;
+										'copy-container close-button' / 100% 0px;
 								}
 						  `
 						: undefined
@@ -927,7 +1037,7 @@ export const BrazeBannersSystemDisplay = ({
 								background-color: ${wrapperModeForegroundColor};
 								width: 1px;
 								opacity: 0.2;
-								margin: 24px 8px 0px;
+								margin: 18px 8px 0px;
 
 								${until.leftCol} {
 									display: none;
@@ -945,18 +1055,14 @@ export const BrazeBannersSystemDisplay = ({
 									grid-area: copy-container;
 									padding-left: 12px;
 									padding-right: 12px;
-									padding-top: 24px;
+									padding-top: 18px;
 									padding-bottom: 12px;
 									${until.leftCol} {
 										padding-left: 0px;
 										padding-right: 0px;
 									}
-									${until.phablet} {
-										padding-top: 0px;
-										padding-bottom: 0px;
-									}
-									${until.phablet} {
-										padding-top: 24px;
+									${until.desktop} {
+										padding-top: 12px;
 									}
 							  `
 							: undefined

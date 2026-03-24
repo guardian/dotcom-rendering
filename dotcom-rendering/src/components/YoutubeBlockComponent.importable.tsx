@@ -200,7 +200,7 @@ export const YoutubeBlockComponent = ({
 				eventEmitters={
 					renderingTarget === 'Web'
 						? [ophanTrackerWeb(id, 'youtube')]
-						: [ophanTrackerApps(id)]
+						: [ophanTrackerApps(id, 'youtube')]
 				}
 				format={format}
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}

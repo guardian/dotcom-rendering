@@ -370,12 +370,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
-	const abTests = useBetaAB();
-	const isInFootballRedesignVariantGroup =
-		(abTests?.isUserInTestGroup('webex-football-redesign', 'variant') &&
-			isWeb) ??
-		false;
-
 	const showBodyEndSlot =
 		isWeb &&
 		(parse(article.slotMachineFlags ?? '').showBodyEnd ||
@@ -403,6 +397,16 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
+	const abTests = useBetaAB();
+	const isInFootballRedesignVariantGroup =
+		abTests?.isUserInTestGroup('webex-football-redesign', 'variant') ??
+		false;
+
+	const applyFootballRedesign = shouldApplyFootballRedesign(
+		isMatchReport,
+		isApps,
+		isInFootballRedesignVariantGroup,
+	);
 	const isMedia =
 		format.design === ArticleDesign.Video ||
 		format.design === ArticleDesign.Audio;
@@ -469,9 +473,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 			<MatchHeaderContainer
 				isMatchReport={isMatchReport}
-				isInVariantGroup={isInFootballRedesignVariantGroup}
+				isInVariantGroup={applyFootballRedesign}
 				footballMatchHeaderUrl={footballMatchHeaderUrl}
 				editionId={editionId}
+				renderingTarget={renderingTarget}
 			/>
 
 			{isWeb && renderAds && hasSurveyAd && (
@@ -501,11 +506,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<StandardGrid
 						isMatchReport={isMatchReport}
 						isMedia={isMedia}
-						isInFootballRedesignVariantGroup={
-							isInFootballRedesignVariantGroup
-						}
+						isInFootballRedesignVariantGroup={applyFootballRedesign}
 					>
-						{!isInFootballRedesignVariantGroup && (
+						{!applyFootballRedesign && (
 							<>
 								<GridItem area="matchNav" element="aside">
 									<div css={maxWidth}>
@@ -567,18 +570,16 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								/>
 							</div>
 						</GridItem>
-						{!isInFootballRedesignVariantGroup && (
-							<GridItem area="title" element="aside">
-								<ArticleTitle
-									format={format}
-									tags={article.tags}
-									sectionLabel={article.sectionLabel}
-									sectionUrl={article.sectionUrl}
-									guardianBaseURL={article.guardianBaseURL}
-									isMatch={!!footballMatchUrl}
-								/>
-							</GridItem>
-						)}
+						<GridItem area="title" element="aside">
+							<ArticleTitle
+								format={format}
+								tags={article.tags}
+								sectionLabel={article.sectionLabel}
+								sectionUrl={article.sectionUrl}
+								guardianBaseURL={article.guardianBaseURL}
+								isMatch={!!footballMatchUrl}
+							/>
+						</GridItem>
 
 						<GridItem area="border">
 							{format.theme === ArticleSpecial.Labs ? (
@@ -782,9 +783,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								/>
 								<MatchInfoContainer
 									isMatchReport={isMatchReport}
-									isInVariantGroup={
-										isInFootballRedesignVariantGroup
-									}
+									isInVariantGroup={applyFootballRedesign}
 									footballMatchUrl={footballMatchUrl}
 									footballMatchStatsUrl={
 										footballMatchStatsUrl
@@ -1137,16 +1136,32 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	);
 };
 
+const shouldApplyFootballRedesign = (
+	isMatchReport: boolean,
+	isApps: boolean,
+	isInFootballVariantGroup: boolean,
+) => {
+	// Since the football match report page is not yet available in the app,
+	// the AB test can be ignored and we default to true
+	if (isMatchReport) {
+		return isApps || isInFootballVariantGroup;
+	}
+
+	return false;
+};
+
 const MatchHeaderContainer = ({
 	isMatchReport,
 	isInVariantGroup,
 	footballMatchHeaderUrl,
 	editionId,
+	renderingTarget,
 }: {
 	isMatchReport: boolean;
 	isInVariantGroup: boolean;
 	footballMatchHeaderUrl: string | undefined;
 	editionId: EditionId;
+	renderingTarget: RenderingTarget;
 }) => {
 	if (isMatchReport && isInVariantGroup && !!footballMatchHeaderUrl) {
 		const parsedUrl = safeParseURL(footballMatchHeaderUrl);
@@ -1166,6 +1181,7 @@ const MatchHeaderContainer = ({
 					initialTab="report"
 					edition={editionId}
 					matchHeaderURL={footballMatchHeaderUrl}
+					renderingTarget={renderingTarget}
 				/>
 			</Island>
 		);

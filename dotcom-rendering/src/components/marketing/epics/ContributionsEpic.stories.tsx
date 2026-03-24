@@ -311,6 +311,33 @@ export const WithThreeTierChoiceCards: Story = {
 	},
 };
 
+export const WithThreeTierChoiceCardsDefaultExpanded: Story = {
+	name: 'ContributionsEpic with default-expanded choice cards (no default selection)',
+	args: {
+		...meta.args,
+		variant: {
+			...props.variant,
+			name: 'THREE_TIER_CHOICE_CARDS_DEFAULT_EXPANDED',
+			secondaryCta: undefined,
+			showChoiceCards: true,
+			choiceCardsSettings: {
+				...choiceCardsSettings,
+				choiceCards: choiceCardsSettings.choiceCards.map((c) =>
+					c.product.supportTier === 'SupporterPlus'
+						? { ...c, isDefault: false, defaultExpanded: true }
+						: { ...c, isDefault: false },
+				),
+				mobileChoiceCards: choiceCardsSettings.mobileChoiceCards?.map(
+					(c) =>
+						c.product.supportTier === 'SupporterPlus'
+							? { ...c, isDefault: false, defaultExpanded: true }
+							: { ...c, isDefault: false },
+				),
+			},
+		},
+	},
+};
+
 export const WithChoiceCardsAndSignInLink: Story = {
 	name: 'ContributionsEpic with choice cards and sign-in link',
 	args: {
@@ -395,6 +422,75 @@ export const WithThreeTierChoiceCardsAndMixedDestinations: Story = {
 			secondaryCta: undefined,
 			showChoiceCards: true,
 			choiceCardsSettings: choiceCardsWithMixedDestinations,
+		},
+	},
+};
+
+export const WithThreeTierChoiceCardsAndMixedDestinationsDefaultExpanded: Story =
+	{
+		name: 'ContributionsEpic with three tier choice cards and mixed destinations (no default selection)',
+		args: {
+			...WithThreeTierChoiceCardsAndMixedDestinations.args,
+			variant: {
+				...props.variant,
+				name: 'THREE_TIER_CHOICE_CARDS_MIXED_DESTINATIONS_DEFAULT_EXPANDED',
+				secondaryCta: undefined,
+				showChoiceCards: true,
+				choiceCardsSettings: {
+					...choiceCardsWithMixedDestinations,
+					choiceCards:
+						choiceCardsWithMixedDestinations.choiceCards.map((c) =>
+							c.product.supportTier === 'SupporterPlus'
+								? {
+										...c,
+										isDefault: false,
+										defaultExpanded: true,
+								  }
+								: { ...c, isDefault: false },
+						),
+					mobileChoiceCards:
+						choiceCardsWithMixedDestinations.mobileChoiceCards?.map(
+							(c) =>
+								c.product.supportTier === 'SupporterPlus'
+									? {
+											...c,
+											isDefault: false,
+											defaultExpanded: true,
+									  }
+									: { ...c, isDefault: false },
+						),
+				},
+			},
+		},
+	};
+
+export const WithThreeTierChoiceCardsNoneSelectedNoneExpanded: Story = {
+	name: 'ContributionsEpic with three tier choice cards (none selected, none expanded)',
+	args: {
+		...WithThreeTierChoiceCardsAndMixedDestinations.args,
+		variant: {
+			...props.variant,
+			name: 'THREE_TIER_CHOICE_CARDS_NONE_SELECTED_NONE_EXPANDED',
+			secondaryCta: undefined,
+			showChoiceCards: true,
+			choiceCardsSettings: {
+				...choiceCardsWithMixedDestinations,
+				choiceCards: choiceCardsWithMixedDestinations.choiceCards.map(
+					(c) => ({
+						...c,
+						isDefault: false,
+						defaultExpanded: false,
+					}),
+				),
+				mobileChoiceCards:
+					choiceCardsWithMixedDestinations.mobileChoiceCards?.map(
+						(c) => ({
+							...c,
+							isDefault: false,
+							defaultExpanded: false,
+						}),
+					),
+			},
 		},
 	},
 };

@@ -18,8 +18,11 @@ export const FootballMatchHeaderWrapper = (props: Props) => (
 		initialData={props.initialData}
 		edition={props.edition}
 		matchHeaderURL={props.matchHeaderURL}
+		article={props.article}
+		format={props.format}
 		getHeaderData={getHeaderData}
 		refreshInterval={16_000}
+		renderingTarget={props.renderingTarget}
 	/>
 );
 

@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import type { ReactNode } from 'react';
-import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { LI } from './Card/components/LI';
 import { FrontSection } from './FrontSection';
 
@@ -82,7 +81,6 @@ export default {
 	},
 
 	args: {
-		discussionApiUrl,
 		editionId: 'UK',
 		children: <Placeholder />,
 		url: '/',
@@ -171,49 +169,29 @@ export const MultipleStory = {
 			<FrontSection
 				title="Page Title"
 				showTopBorder={false}
-				discussionApiUrl={discussionApiUrl}
-				editionId={'UK'}
+				editionId="UK"
 			/>
-			<FrontSection
-				title="Headlines"
-				discussionApiUrl={discussionApiUrl}
-				editionId={'UK'}
-			>
+			<FrontSection title="Headlines" editionId="UK">
 				<Placeholder />
 			</FrontSection>
-			<FrontSection
-				title="Useful links"
-				discussionApiUrl={discussionApiUrl}
-				editionId={'UK'}
-			/>
+			<FrontSection title="Useful links" editionId="UK" />
 			<FrontSection
 				title="Around the World - I'm a link"
 				url="https://www.theguardian.com/world"
-				discussionApiUrl={discussionApiUrl}
-				editionId={'UK'}
+				editionId="UK"
 			>
 				<Placeholder />
 			</FrontSection>
-			<FrontSection
-				showTopBorder={false}
-				discussionApiUrl={discussionApiUrl}
-				editionId={'UK'}
-			>
+			<FrontSection showTopBorder={false} editionId="UK">
 				<h2>Insert call to action here</h2>
 			</FrontSection>
-			<FrontSection
-				title="Videos"
-				showTopBorder={false}
-				discussionApiUrl={discussionApiUrl}
-				editionId={'UK'}
-			>
+			<FrontSection title="Videos" showTopBorder={false} editionId="UK">
 				<Placeholder />
 			</FrontSection>
 			<FrontSection
 				title="Coronavirus"
 				description="A collection of stories about Coronavirus"
-				discussionApiUrl={discussionApiUrl}
-				editionId={'UK'}
+				editionId="UK"
 			>
 				<Placeholder />
 			</FrontSection>

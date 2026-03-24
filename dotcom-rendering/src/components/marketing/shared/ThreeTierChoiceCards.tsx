@@ -18,12 +18,14 @@ import {
 } from '@guardian/source/react-components';
 import { hexColourToString } from '@guardian/support-dotcom-components';
 import type { HexColour } from '@guardian/support-dotcom-components/dist/shared/types';
-import type { ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
+import type { ChoiceCard as _ChoiceCard } from '@guardian/support-dotcom-components/dist/shared/types/props/choiceCards';
 import type { Dispatch, SetStateAction } from 'react';
 import { useEffect } from 'react';
 import sanitise from 'sanitize-html';
 import { useIsInView } from '../../../lib/useIsInView';
 import type { ChoiceCardDesignSettings } from '../banners/designableBanner/settings';
+
+export type ChoiceCard = _ChoiceCard & { defaultExpanded?: boolean };
 
 const benefitsStyles = css`
 	${textSans15};
@@ -65,10 +67,12 @@ const supportingTextStyles = css`
 const SupportingBenefits = ({
 	benefitsLabel,
 	benefits,
+	benefitsTickColour,
 	choiceCardDesignSettings,
 }: {
 	benefitsLabel?: string;
 	benefits: ChoiceCard['benefits'];
+	benefitsTickColour?: string;
 	choiceCardDesignSettings?: ChoiceCardDesignSettings;
 }) => {
 	const showTicks = benefits.length > 1;
@@ -92,6 +96,7 @@ const SupportingBenefits = ({
 								size="xsmall"
 								theme={{
 									fill:
+										benefitsTickColour ??
 										choiceCardDesignSettings?.buttonSelectMarkerColour ??
 										palette.brand[400],
 								}}
@@ -113,7 +118,7 @@ const SupportingBenefits = ({
 };
 
 type ThreeTierChoiceCardsProps = {
-	selectedChoiceCard: ChoiceCard;
+	selectedChoiceCard?: ChoiceCard;
 	setSelectedChoiceCard: Dispatch<SetStateAction<ChoiceCard | undefined>>;
 	choices: ChoiceCard[];
 	id: 'epic' | 'banner'; // uniquely identify this choice cards component to avoid conflicting with others
@@ -185,16 +190,19 @@ export const ThreeTierChoiceCards = ({
 			palette.brand[400],
 	};
 
+	const getPillBackgroundColour = (
+		pill: NonNullable<ChoiceCard['pill']>,
+	): string => {
+		if (choiceCardDesignSettings?.pillBackgroundColour) {
+			return choiceCardDesignSettings.pillBackgroundColour;
+		}
+		if (pill.backgroundColour) {
+			return hexColourToString(pill.backgroundColour as HexColour);
+		}
+		return palette.brandAlt[400];
+	};
+
 	const pillStyles = (pill: NonNullable<ChoiceCard['pill']>) => {
-		const buildBackgroundColour = (): string => {
-			if (choiceCardDesignSettings?.pillBackgroundColour) {
-				return choiceCardDesignSettings.pillBackgroundColour;
-			}
-			if (pill.backgroundColour) {
-				return hexColourToString(pill.backgroundColour as HexColour);
-			}
-			return palette.brandAlt[400];
-		};
 		const buildTextColour = (): string => {
 			if (choiceCardDesignSettings?.pillTextColour) {
 				return choiceCardDesignSettings.pillTextColour;
@@ -208,7 +216,7 @@ export const ThreeTierChoiceCards = ({
 		return css`
 			border-radius: 4px;
 			padding: ${space[1]}px ${space[2]}px;
-			background-color: ${buildBackgroundColour()};
+			background-color: ${getPillBackgroundColour(pill)};
 			${textSansBold14};
 			color: ${buildTextColour()};
 			position: absolute;
@@ -271,6 +279,9 @@ export const ThreeTierChoiceCards = ({
 						const { supportTier } = product;
 
 						const isSelected = (): boolean => {
+							if (!selectedChoiceCard) {
+								return false;
+							}
 							if (
 								product.supportTier ===
 								selectedChoiceCard.product.supportTier
@@ -293,12 +304,15 @@ export const ThreeTierChoiceCards = ({
 						};
 						const selected = isSelected();
 
-						// Each radioId must be unique to the component and choice, e.g. "choicecard-epic-Contribution-Monthly"
 						const radioId = `choicecard-${id}-${supportTier}${
 							supportTier !== 'OneOff'
 								? `-${product.ratePlan}`
 								: ''
 						}`;
+
+						const isExpanded =
+							selected ||
+							(!selectedChoiceCard && card.defaultExpanded);
 
 						return (
 							<div
@@ -323,11 +337,12 @@ export const ThreeTierChoiceCards = ({
 										}
 										id={radioId}
 										value={radioId}
+										name={`choice-cards-${id}`}
 										cssOverrides={labelOverrideStyles(
 											selected,
 										)}
 										supporting={
-											selected && (
+											isExpanded && (
 												<SupportingBenefits
 													benefitsLabel={
 														benefitsLabel as
@@ -335,6 +350,13 @@ export const ThreeTierChoiceCards = ({
 															| undefined
 													}
 													benefits={benefits}
+													benefitsTickColour={
+														pill
+															? getPillBackgroundColour(
+																	pill,
+															  )
+															: undefined
+													}
 													choiceCardDesignSettings={
 														choiceCardDesignSettings
 													}

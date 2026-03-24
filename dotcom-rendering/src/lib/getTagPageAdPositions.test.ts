@@ -16,8 +16,10 @@ describe('Tag page fronts-banner ad slots', () => {
 		expect(getTagPageBannerAdPositions(9)).toEqual([2, 5]);
 	});
 
-	it('should insert no more than 6 ads if there are more than 18 containers', () => {
+	it('should insert no more than 8 ads if there are more than 18 containers', () => {
 		expect(getTagPageBannerAdPositions(19)).toEqual([2, 5, 8, 11, 14, 17]);
-		expect(getTagPageBannerAdPositions(25)).toEqual([2, 5, 8, 11, 14, 17]);
+		expect(getTagPageBannerAdPositions(25)).toEqual([
+			2, 5, 8, 11, 14, 17, 20, 23,
+		]);
 	});
 });

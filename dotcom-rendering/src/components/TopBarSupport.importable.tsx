@@ -5,7 +5,6 @@
 import { css } from '@emotion/react';
 import { getCookie, isUndefined } from '@guardian/libs';
 import type { ComponentEvent } from '@guardian/ophan-tracker-js';
-import { getHeader } from '@guardian/support-dotcom-components';
 import type {
 	HeaderPayload,
 	ModuleData,
@@ -18,9 +17,11 @@ import type {
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import {
+	getAuthHeaders,
 	getPurchaseInfo,
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
+import { getHeader } from '../lib/sdcRequests';
 import { useBetaAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
@@ -68,6 +69,7 @@ const ReaderRevenueLinksRemote = ({
 
 		const hideSupportMessagingForUser =
 			shouldHideSupportMessaging(isSignedIn);
+
 		if (hideSupportMessagingForUser === 'Pending') {
 			// We don't yet know the user's supporter status
 			return;
@@ -90,7 +92,10 @@ const ReaderRevenueLinksRemote = ({
 			},
 		};
 
-		getHeader(contributionsServiceUrl, requestData)
+		getAuthHeaders()
+			.then((headers) =>
+				getHeader(contributionsServiceUrl, requestData, headers),
+			)
 			.then((response: ModuleDataResponse<HeaderProps>) => {
 				if (!response.data) {
 					return null;
@@ -102,9 +107,9 @@ const ReaderRevenueLinksRemote = ({
 				return (
 					module.name === 'SignInPromptHeader'
 						? /* webpackChunkName: "sign-in-prompt-header" */
-						  import(`./marketing/header/SignInPromptHeader`)
+						  import('./marketing/header/SignInPromptHeader')
 						: /* webpackChunkName: "header" */
-						  import(`./marketing/header/Header`)
+						  import('./marketing/header/Header')
 				).then(
 					(headerModule: {
 						[key: string]: React.ElementType<HeaderProps>;
@@ -117,7 +122,6 @@ const ReaderRevenueLinksRemote = ({
 			})
 			.catch((error) => {
 				const msg = `Error importing RR header links: ${String(error)}`;
-
 				console.log(msg);
 				window.guardian.modules.sentry.reportError(
 					new Error(msg),

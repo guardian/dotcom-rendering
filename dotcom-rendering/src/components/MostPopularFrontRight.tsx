@@ -89,9 +89,17 @@ type Props = {
 export const MostPopularFrontRight = ({ heading, trails }: Props) => {
 	if (trails.length === 0) return null;
 
+	const containerId = `${heading
+		.toLowerCase()
+		.replace(' ', '-')}-front-right-container`;
+
+	const dataComponent =
+		heading === 'Most viewed' ? 'most-viewed-right' : 'deeply-read-right';
+
 	return (
 		<section
-			data-component="most-popular-front-right"
+			id={containerId}
+			data-component={dataComponent}
 			css={[
 				containerStyles,
 				heading === 'Deeply read' && absolutePositionStyles,
