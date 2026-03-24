@@ -4,11 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-patchedDependencies:
-  webpack-manifest-plugin@5.0.0:
-    hash: zao44j4xgexeap52664hqknxfu
-    path: patches/webpack-manifest-plugin@5.0.0.patch
-
 importers:
 
   .:
@@ -716,8 +711,8 @@ importers:
         specifier: 0.6.1
         version: 0.6.1(webpack@5.104.1)
       webpack-manifest-plugin:
-        specifier: 5.0.0
-        version: 5.0.0(patch_hash=zao44j4xgexeap52664hqknxfu)(webpack@5.104.1)
+        specifier: 6.0.1
+        version: 6.0.1(webpack@5.104.1)
       webpack-merge:
         specifier: 6.0.1
         version: 6.0.1
@@ -5878,8 +5873,8 @@ packages:
     resolution: {integrity: sha512-b6suED+5/3rTpUBdG1gupIl8MPFCAMA0QXwmljLhvCUKcUvdE4gWky9zpuGCcXHOsz4J9wPGNWq6OKpmIzz3hQ==}
     hasBin: true
 
-  flatted@3.4.1:
-    resolution: {integrity: sha512-IxfVbRFVlV8V/yRaGzk0UVIcsKKHMSfYw66T/u4nTwlWteQePsxe//LjudR1AMX4tZW3WFCh3Zqa/sjlqpbURQ==}
+  flatted@3.4.2:
+    resolution: {integrity: sha512-PjDse7RzhcPkIJwy5t7KPWQSZ9cAbzQXcafsetQoD7sOJRQlGikNbx7yZp2OotDnJyrDcbyRq3Ttb18iYOqkxA==}
 
   follow-redirects@1.15.11:
     resolution: {integrity: sha512-deG2P0JfjrTxl50XGCDyfI97ZGVCxIpfKYmfyrQ54n5FO/0gfIES8C/Psl6kWVDolizcaaxZJnTS0QSMxvnsBQ==}
@@ -8235,9 +8230,6 @@ packages:
     resolution: {integrity: sha512-vzn8aSqKgytVik0iwdBEi+zevbTYZogewTUM6dtpmGwEcdzbub/TX4bCzRhebDCRC3QzXgJsLRKB2V/Oof7HXg==}
     engines: {node: '>=0.10.0'}
 
-  source-list-map@2.0.1:
-    resolution: {integrity: sha512-qnQ7gVMxGNxsiL4lEuJwe/To8UnK7fAnmbGEEH8RpLouuKbeEm0lhbQVFIrNSuB+G7tVrAlVsZgETT5nljf+Iw==}
-
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
     engines: {node: '>=0.10.0'}
@@ -9066,11 +9058,11 @@ packages:
     peerDependencies:
       webpack: '*'
 
-  webpack-manifest-plugin@5.0.0:
-    resolution: {integrity: sha512-8RQfMAdc5Uw3QbCQ/CBV/AXqOR8mt03B6GJmRbhWopE8GzRfEpn+k0ZuWywxW+5QZsffhmFDY1J6ohqJo+eMuw==}
-    engines: {node: '>=12.22.0'}
+  webpack-manifest-plugin@6.0.1:
+    resolution: {integrity: sha512-R0p/8/IJVY5hIhQtkeWUQugalVpIwojc09eb14zGq+oiZOCmN5paAz2NBJfd+6v9eBbxAS3YMjc2ov8UMlCDLQ==}
+    engines: {node: '>=20.19.0'}
     peerDependencies:
-      webpack: ^5.47.0
+      webpack: ^5.75.0
 
   webpack-merge@6.0.1:
     resolution: {integrity: sha512-hXXvrjtx2PLYx4qruKl+kyRSLc52V+cCvMxRjmKwoA+CBbbF5GfIBtR6kCvl0fYGqTUPKB+1ktVmTHqMOzgCBg==}
@@ -9083,10 +9075,6 @@ packages:
   webpack-node-externals@3.0.0:
     resolution: {integrity: sha512-LnL6Z3GGDPht/AigwRh2dvL9PQPFQ8skEpVrWZXLWBYmqcaojHNN0onvHzie6rq7EWKrrBfPYqNEzTJgiwEQDQ==}
     engines: {node: '>=6'}
-
-  webpack-sources@2.3.1:
-    resolution: {integrity: sha512-y9EI9AO42JjEcrTJFOYmVywVZdKVUfOvDUPsJea5GIr1JOEGFVqwlY2K098fFoIjOkDzHn2AjRvM8dsBZu+gCA==}
-    engines: {node: '>=10.13.0'}
 
   webpack-sources@3.3.3:
     resolution: {integrity: sha512-yd1RBzSGanHkitROoPFd6qsrxt+oFhg/129YzheDGqeustzX0vTZJZsSsQjVQC4yzBQ56K55XU8gaNCtIzOnTg==}
@@ -16030,24 +16018,24 @@ snapshots:
 
   flat-cache@3.2.0:
     dependencies:
-      flatted: 3.4.1
+      flatted: 3.4.2
       keyv: 4.5.4
       rimraf: 3.0.2
 
   flat-cache@4.0.1:
     dependencies:
-      flatted: 3.4.1
+      flatted: 3.4.2
       keyv: 4.5.4
 
   flat-cache@6.1.21:
     dependencies:
       cacheable: 2.3.4
-      flatted: 3.4.1
+      flatted: 3.4.2
       hookified: 1.15.1
 
   flat@5.0.2: {}
 
-  flatted@3.4.1: {}
+  flatted@3.4.2: {}
 
   follow-redirects@1.15.11: {}
 
@@ -17443,7 +17431,7 @@ snapshots:
     dependencies:
       date-format: 4.0.14
       debug: 4.4.3(supports-color@8.1.1)
-      flatted: 3.4.1
+      flatted: 3.4.2
       rfdc: 1.3.0
       streamroller: 3.1.5
     transitivePeerDependencies:
@@ -18878,8 +18866,6 @@ snapshots:
     dependencies:
       is-plain-obj: 1.1.0
 
-  source-list-map@2.0.1: {}
-
   source-map-js@1.2.1: {}
 
   source-map-support@0.5.13:
@@ -19885,11 +19871,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  webpack-manifest-plugin@5.0.0(patch_hash=zao44j4xgexeap52664hqknxfu)(webpack@5.104.1):
+  webpack-manifest-plugin@6.0.1(webpack@5.104.1):
     dependencies:
       tapable: 2.3.0
       webpack: 5.104.1(@swc/core@1.13.5)(esbuild@0.27.3)(webpack-cli@6.0.1)
-      webpack-sources: 2.3.1
+      webpack-sources: 3.3.3
 
   webpack-merge@6.0.1:
     dependencies:
@@ -19904,11 +19890,6 @@ snapshots:
       webpack-format-messages: 2.0.6
 
   webpack-node-externals@3.0.0: {}
-
-  webpack-sources@2.3.1:
-    dependencies:
-      source-list-map: 2.0.1
-      source-map: 0.6.1
 
   webpack-sources@3.3.3: {}
 

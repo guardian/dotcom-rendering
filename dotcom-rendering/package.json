@@ -168,7 +168,7 @@
 		"webpack-dev-server": "5.2.2",
 		"webpack-hot-middleware": "2.26.1",
 		"webpack-hot-server-middleware": "0.6.1",
-		"webpack-manifest-plugin": "5.0.0",
+		"webpack-manifest-plugin": "6.0.1",
 		"webpack-merge": "6.0.1",
 		"webpack-messages": "2.0.4",
 		"webpack-node-externals": "3.0.0",
