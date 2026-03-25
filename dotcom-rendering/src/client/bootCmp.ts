@@ -38,11 +38,11 @@ const initialiseCmp = async () => {
 };
 /**
  * Hydrating this island is so critical that it should not be imported
- * as a separate chunk. @see {PrivacySettingsLink.importable.tsx}
+ * as a separate chunk. @see {PrivacySettingsLink.island.tsx}
  */
 const eagerlyImportPrivacySettingsLinkIsland = () =>
 	import(
-		/* webpackMode: 'eager' */ '../components/PrivacySettingsLink.importable'
+		/* webpackMode: 'eager' */ '../components/PrivacySettingsLink.island'
 	);
 
 /**

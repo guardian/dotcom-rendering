@@ -23,7 +23,7 @@ import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { Hide } from './Hide';
 import { Island } from './Island';
-import { PulsingDot } from './PulsingDot.importable';
+import { PulsingDot } from './PulsingDot.island';
 
 type Props = {
 	format: ArticleFormat;

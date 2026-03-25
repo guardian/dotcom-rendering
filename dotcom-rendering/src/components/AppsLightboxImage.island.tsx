@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { type RoleType } from '../types/content';
-import { openLightboxForImageId } from './AppsLightboxImageStore.importable';
+import { openLightboxForImageId } from './AppsLightboxImageStore.island';
 import type { Loading } from './CardPicture';
 import { Picture } from './Picture';
 

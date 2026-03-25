@@ -3,7 +3,7 @@ import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { trails } from '../../fixtures/manual/trails';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { palette } from '../palette';
-import { MostViewedFooter } from './MostViewedFooter.importable';
+import { MostViewedFooter } from './MostViewedFooter.island';
 import { MostViewedFooterLayout } from './MostViewedFooterLayout';
 import { Section } from './Section';
 

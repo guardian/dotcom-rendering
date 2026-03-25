@@ -7,14 +7,14 @@ import {
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import { InteractivesDisableArticleSwipe } from '../components/InteractivesDisableArticleSwipe.importable';
-import { InteractivesNativePlatformWrapper } from '../components/InteractivesNativePlatformWrapper.importable';
+import { InteractivesDisableArticleSwipe } from '../components/InteractivesDisableArticleSwipe.island';
+import { InteractivesNativePlatformWrapper } from '../components/InteractivesNativePlatformWrapper.island';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
-import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
-import { SubNav } from '../components/SubNav.importable';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
+import { SubNav } from '../components/SubNav.island';
 import { type ArticleFormat, ArticleSpecial } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import type { EditionId } from '../lib/edition';

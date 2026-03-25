@@ -22,7 +22,7 @@ import type { ServerSideTests, Switches } from '../types/config';
 import type { TagType } from '../types/tag';
 import { Island } from './Island';
 import { LiveBlogRenderer } from './LiveBlogRenderer';
-import { TableOfContents } from './TableOfContents.importable';
+import { TableOfContents } from './TableOfContents.island';
 import { textBlockStyles } from './TextBlockComponent';
 
 type Props = {

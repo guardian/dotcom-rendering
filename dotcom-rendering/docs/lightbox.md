@@ -61,7 +61,7 @@ We use React.createPortal to insert the resulting html from the `LightboxImages`
 
 Captions in lightbox have sufficient deviation in style to have their own component.
 
-### `LightboxHash.importable`
+### `LightboxHash.island`
 
 This small file is placed in an `Island` inside `ArticlePage` and executed immediately. It is not deferred.
 
@@ -72,7 +72,7 @@ Because we use the url as the source of truth for lightbox it means we close the
 
 The fix here is to mutate the history state by adding a new entry so that when `history.back()` gets fired the reader ends up on the article.
 
-### `LightboxJavascript.importable`
+### `LightboxJavascript`
 
 This file contains the logic for how lightbox operates.
 

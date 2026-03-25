@@ -2,7 +2,7 @@ import { breakpoints, textSans17Object } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { expect, userEvent, within } from 'storybook/test';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
-import { SelfHostedVideo } from './SelfHostedVideo.importable';
+import { SelfHostedVideo } from './SelfHostedVideo.island';
 
 const meta = {
 	component: SelfHostedVideo,
@@ -43,13 +43,14 @@ export const Loop5to4: Story = {
 			{
 				src: 'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
 				mimeType: 'video/mp4',
+				width: 900,
+				height: 720,
 			},
 		],
 		uniqueId: 'test-video-1',
 		atomId: 'test-atom-1',
 		videoStyle: 'Loop',
-		height: 720,
-		width: 900,
+		aspectRatio: 5 / 4,
 		posterImage:
 			'https://media.guim.co.uk/9bdb802e6da5d3fd249b5060f367b3a817965f0c/0_0_1800_1080/master/1800.jpg',
 		fallbackImage: '',
@@ -64,10 +65,14 @@ export const WithM3U8File = {
 			{
 				src: 'https://uploads.guimcode.co.uk/2025/09/01/Loop__Japan_fireball--ace3fcf6-1378-41db-9d21-f3fc07072ab2-1.10.m3u8',
 				mimeType: 'application/x-mpegURL',
+				width: 900,
+				height: 720,
 			},
 			{
 				src: 'https://uploads.guim.co.uk/2025%2F06%2F20%2Ftesting+only%2C+please+ignore--3cb22b60-2c3f-48d6-8bce-38c956907cce-3.mp4',
 				mimeType: 'video/mp4',
+				width: 900,
+				height: 720,
 			},
 		],
 	},
@@ -81,10 +86,11 @@ export const Loop16to9 = {
 			{
 				src: 'https://uploads.guim.co.uk/2024/10/01/241001HeleneLoop_2.mp4',
 				mimeType: 'video/mp4',
+				width: 1920,
+				height: 1080,
 			},
 		],
-		height: 1080,
-		width: 1920,
+		aspectRatio: 16 / 9,
 	},
 } satisfies Story;
 

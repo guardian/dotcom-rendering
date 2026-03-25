@@ -6,10 +6,10 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
-import { AdPortals } from '../components/AdPortals.importable';
+import { AdPortals } from '../components/AdPortals.island';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
-import { AppsFooter } from '../components/AppsFooter.importable';
+import { AppsFooter } from '../components/AppsFooter.island';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -18,7 +18,7 @@ import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
-import { Carousel } from '../components/Carousel.importable';
+import { Carousel } from '../components/Carousel.island';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
@@ -28,20 +28,20 @@ import { HeadlineByline } from '../components/HeadlineByline';
 import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
-import { ListenToArticle } from '../components/ListenToArticle.importable';
+import { ListenToArticle } from '../components/ListenToArticle.island';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { minHeaderHeightPx } from '../components/Masthead/Titlepiece/constants';
-import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
+import { MostViewedFooterData } from '../components/MostViewedFooterData.island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { OnwardsUpper } from '../components/OnwardsUpper.island';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
-import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
+import { SlotBodyEnd } from '../components/SlotBodyEnd.island';
 import { Standfirst } from '../components/Standfirst';
-import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubMeta } from '../components/SubMeta';
-import { SubNav } from '../components/SubNav.importable';
+import { SubNav } from '../components/SubNav.island';
 import {
 	ArticleDesign,
 	type ArticleFormat,
