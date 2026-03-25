@@ -1,3 +1,4 @@
+import { activeABtests } from '@guardian/ab-testing-config';
 import { isUndefined } from '@guardian/libs';
 import { getABTestParticipations } from '../../client/abTesting';
 
@@ -81,9 +82,18 @@ export class BetaABTests implements BetaABTestAPI {
 		});
 	}
 
-	private buildOphanPayload(errorReporter: ErrorReporter) {
+	private shouldReportToOphan(testId: string): boolean {
+		const activeTest = activeABtests.find(({ name }) => name === testId);
+		return activeTest?.shouldReportToOphan
+			? activeTest.shouldReportToOphan()
+			: true;
+	}
+
+	private buildOphanPayload(errorReporter: ErrorReporter): OphanABPayload {
 		try {
-			const testAndVariantIds = Object.entries(this.participations);
+			const testAndVariantIds = Object.entries(
+				this.participations,
+			).filter(([testId]) => this.shouldReportToOphan(testId));
 
 			return testAndVariantIds.reduce<OphanABPayload>(
 				(eventLog, [testId, variantId]) => {
