@@ -15,7 +15,8 @@ import type { Group } from '../lib/getDataLinkName';
 import { getDataLinkNameCard } from '../lib/getDataLinkName';
 import { getLargestImageSize } from '../lib/image';
 import {
-	convertFEMediaAssetsToVideoSources,
+	convertFEMediaAssetsToVideoAssets,
+	extractValidSourcesFromAssets,
 	getAspectRatioFromSources,
 } from '../lib/video';
 import type { Image } from '../types/content';
@@ -231,8 +232,9 @@ export const getActiveMediaAtom = (
 				({ assetType }) => assetType === 'Subtitles',
 			);
 
-			const sources =
-				convertFEMediaAssetsToVideoSources(selfHostedAssets);
+			const videoAssets =
+				convertFEMediaAssetsToVideoAssets(selfHostedAssets);
+			const sources = extractValidSourcesFromAssets(videoAssets);
 
 			const aspectRatio = getAspectRatioFromSources(sources);
 
