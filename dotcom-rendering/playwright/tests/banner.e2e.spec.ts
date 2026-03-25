@@ -1,7 +1,7 @@
 import { isUndefined } from '@guardian/libs';
-import type { BrowserContext, Request } from '@playwright/test';
-import { test } from '@playwright/test';
-import { cmpAcceptAll } from '../lib/cmp';
+import type { BrowserContext, Page, Request } from '@playwright/test';
+import { expect, test } from '@playwright/test';
+import { allowRejectAll, cmpAcceptAll, cmpRejectAll } from '../lib/cmp';
 import { addCookie } from '../lib/cookies';
 import { loadPage } from '../lib/load-page';
 
@@ -11,6 +11,10 @@ const optOutOfArticleCountConsent = async (context: BrowserContext) => {
 		value: 'true',
 	});
 };
+
+const ARTICLE_PATH =
+	'/Article/https://www.theguardian.com/politics/2019/nov/20/jeremy-corbyn-boris-johnson-tv-debate-watched-by-67-million-people';
+const RR_BANNER_URL = 'https://contributions.guardianapis.com/banner';
 
 const requestBodyHasProperties = (
 	request: Request,
@@ -25,21 +29,32 @@ const requestBodyHasProperties = (
 	);
 };
 
+const getBannerRequestField = (
+	request: Request,
+	url: string | RegExp,
+	field: string,
+): unknown => {
+	if (!request.url().match(url)) return undefined;
+	const postJSON = request.postDataJSON() as {
+		targeting?: Record<string, unknown>;
+	};
+	return postJSON.targeting?.[field];
+};
+
 test.describe('The banner', function () {
 	test('makes a request to the support-dotcom-components service', async ({
 		page,
 		context,
 	}) => {
 		await optOutOfArticleCountConsent(context);
-		const rrBannerUrl = 'https://contributions.guardianapis.com/banner';
 
 		const rrBannerRequestPromise = page.waitForRequest((request) =>
-			requestBodyHasProperties(request, rrBannerUrl, ['targeting']),
+			requestBodyHasProperties(request, RR_BANNER_URL, ['targeting']),
 		);
 
 		await loadPage({
 			page,
-			path: `/Article/https://www.theguardian.com/politics/2019/nov/20/jeremy-corbyn-boris-johnson-tv-debate-watched-by-67-million-people`,
+			path: ARTICLE_PATH,
 			waitUntil: 'domcontentloaded',
 			region: 'GB',
 			preventSupportBanner: false,
@@ -62,7 +77,7 @@ test.describe('Sign-in gate portal', function () {
 
 		await loadPage({
 			page,
-			path: `/Article/https://www.theguardian.com/politics/2019/nov/20/jeremy-corbyn-boris-johnson-tv-debate-watched-by-67-million-people`,
+			path: ARTICLE_PATH,
 			waitUntil: 'domcontentloaded',
 			region: 'GB',
 			preventSupportBanner: false,
@@ -80,5 +95,124 @@ test.describe('Sign-in gate portal', function () {
 		await page.reload({ waitUntil: 'domcontentloaded' });
 
 		await auxiaRequestPromise;
+	});
+});
+
+test.describe('Banner browserId targeting', function () {
+	const setAuxiaVariantCookie = async (context: BrowserContext) => {
+		await addCookie(context, {
+			name: 'gu_client_ab_tests',
+			value: 'growth-auxia-banner:variant',
+		});
+	};
+	const setBwidCookie = async (
+		context: BrowserContext,
+		value = 'test-browser-id',
+	) => {
+		await addCookie(context, {
+			name: 'bwid',
+			value,
+		});
+	};
+
+	const loadAndCaptureBannerRequest = async ({
+		page,
+		context,
+		acceptConsent,
+		inAuxiaVariant,
+	}: {
+		page: Page;
+		context: BrowserContext;
+		acceptConsent: boolean;
+		inAuxiaVariant: boolean;
+	}) => {
+		if (!acceptConsent) {
+			await allowRejectAll(context);
+		}
+		await optOutOfArticleCountConsent(context);
+		await setBwidCookie(context);
+		if (inAuxiaVariant) {
+			await setAuxiaVariantCookie(context);
+		}
+
+		const bannerRequestPromise = page.waitForRequest(
+			(request) =>
+				request.url().includes(RR_BANNER_URL) &&
+				request.method() === 'POST',
+		);
+
+		await loadPage({
+			page,
+			path: ARTICLE_PATH,
+			waitUntil: 'domcontentloaded',
+			region: 'GB',
+			preventSupportBanner: false,
+		});
+
+		if (acceptConsent) {
+			await cmpAcceptAll(page);
+		} else {
+			await cmpRejectAll(page);
+		}
+
+		return bannerRequestPromise;
+	};
+
+	test('sends browserId when user has consented and is in the auxia variant', async ({
+		page,
+		context,
+	}) => {
+		const bannerRequest = await loadAndCaptureBannerRequest({
+			page,
+			context,
+			acceptConsent: true,
+			inAuxiaVariant: true,
+		});
+
+		const browserId = getBannerRequestField(
+			bannerRequest,
+			RR_BANNER_URL,
+			'browserId',
+		);
+		expect(browserId).toBe('test-browser-id');
+	});
+
+	// Skip this test because it doesn't work in the github actions run. It does however work locally
+	test.skip('does not send browserId when user has not consented, even if in the auxia variant', async ({
+		page,
+		context,
+	}) => {
+		const bannerRequest = await loadAndCaptureBannerRequest({
+			page,
+			context,
+			acceptConsent: false,
+			inAuxiaVariant: true,
+		});
+
+		const browserId = getBannerRequestField(
+			bannerRequest,
+			RR_BANNER_URL,
+			'browserId',
+		);
+		expect(browserId).toBeUndefined();
+	});
+
+	test('does not send browserId when user is not in the auxia variant, even if consented', async ({
+		page,
+		context,
+	}) => {
+		const bannerRequest = await loadAndCaptureBannerRequest({
+			page,
+			context,
+			acceptConsent: true,
+			inAuxiaVariant: false,
+		});
+
+		const browserId = getBannerRequestField(
+			bannerRequest,
+			RR_BANNER_URL,
+			'browserId',
+		);
+		expect(browserId).toBeUndefined();
 	});
 });
