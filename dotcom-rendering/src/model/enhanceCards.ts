@@ -222,27 +222,27 @@ export const getActiveMediaAtom = (
 		 * Therefore, we check the platform of the first asset and assume the rest are the same.
 		 */
 		if (firstVideoAsset.platform === 'Url') {
-			// Order the assets by largest width: for now, we only use the largest video, but there
-			// be a follow up PR to select the appropriate video source based on the users screen size.
-			const orderedSources = assets.sort(
-				(a, b) =>
-					Number(b.dimensions?.width ?? 0) -
-					Number(a.dimensions?.width ?? 0),
-			);
-
 			/**
-			 * Take one source for each supported video file type.
+			 * Ensure sources are ordered by the order that MIME types are specified in
+			 * `supportedVideoFileTypes` as the browser picks the first one that it supports.
 			 */
-			const sources = supportedVideoFileTypes.reduce<typeof assets>(
-				(acc, type) => {
-					const source = orderedSources.find(
+			const sources = supportedVideoFileTypes
+				.reduce<typeof assets>((acc, type) => {
+					const sourcesByType = assets.filter(
 						({ mimeType }) => mimeType === type,
 					);
-					if (source) acc.push(source);
+
+					if (sourcesByType.length) acc.push(...sourcesByType);
+
 					return acc;
-				},
-				[],
-			);
+				}, [])
+				.filter(({ platform }) => platform === 'Url')
+				.map(({ id, mimeType, dimensions }) => ({
+					src: id,
+					mimeType: mimeType as SupportedVideoFileType,
+					height: dimensions?.height ?? 0,
+					width: dimensions?.width ?? 0,
+				}));
 			if (!sources.length) return undefined;
 
 			const subtitleAsset = assets.find(
@@ -258,12 +258,7 @@ export const getActiveMediaAtom = (
 				type: 'SelfHostedVideo',
 				videoStyle: mediaAtom.videoPlayerFormat ?? 'Loop',
 				atomId: mediaAtom.id,
-				sources: sources.map(({ id, mimeType, dimensions }) => ({
-					src: id,
-					mimeType: mimeType as SupportedVideoFileType,
-					height: dimensions?.height ?? 0,
-					width: dimensions?.width ?? 0,
-				})),
+				sources,
 				subtitleSource: subtitleAsset?.id,
 				aspectRatio,
 				duration: mediaAtom.duration ?? 0,
@@ -288,7 +283,7 @@ export const getActiveMediaAtom = (
 				expired: !!mediaAtom.expired,
 				/**
 				 * We infer that a video is a livestream if the duration is set to 0. This is
-				 * a soft contract with Editorial who manual set the duration of videos
+				 * a soft contract with Editorial who manually set the duration of videos.
 				 */
 				isLive: mediaAtom.duration === 0,
 				image,
