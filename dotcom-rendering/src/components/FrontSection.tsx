@@ -422,6 +422,12 @@ const sectionBottomContent = css`
 	}
 `;
 
+const slimSectionBottomContent = css`
+	${from.wide} {
+		grid-column: 5 / 14;
+	}
+`;
+
 const sectionTreats = css`
 	display: none;
 
@@ -848,6 +854,8 @@ export const FrontSection = ({
 					css={[
 						sectionContentHorizontalMargins,
 						sectionBottomContent,
+						slimifySectionForSlimHomepageAbTest &&
+							slimSectionBottomContent,
 						isBetaContainer
 							? bottomPaddingBetaContainer(
 									useLargeSpacingMobile,

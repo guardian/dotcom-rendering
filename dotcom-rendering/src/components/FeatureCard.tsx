@@ -570,8 +570,9 @@ export const FeatureCard = ({
 											sources={media.mainMedia.sources}
 											atomId={media.mainMedia.atomId}
 											uniqueId={uniqueId}
-											height={media.mainMedia.height}
-											width={media.mainMedia.width}
+											aspectRatio={
+												media.mainMedia.aspectRatio
+											}
 											videoStyle={
 												media.mainMedia.videoStyle
 											}

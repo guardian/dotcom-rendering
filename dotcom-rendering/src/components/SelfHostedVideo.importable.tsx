@@ -23,6 +23,7 @@ import {
 import { palette } from '../palette';
 import type { RoleType } from '../types/content';
 import type { VideoPlayerFormat } from '../types/mainMedia';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { Caption } from './Caption';
 import { CardPicture, type Props as CardPictureProps } from './CardPicture';
 import { useConfig } from './ConfigContext';
@@ -32,7 +33,8 @@ import type {
 	SubtitleSize,
 } from './SelfHostedVideoPlayer';
 import { SelfHostedVideoPlayer } from './SelfHostedVideoPlayer';
-import { ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
+import type { OphanVideoStyle } from './YoutubeAtom/eventEmitters';
+import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 
 const VISIBILITY_THRESHOLD = 0.5;
 
@@ -155,11 +157,13 @@ const logAndReportError = (src: string, error: Error) => {
 const trackAttention = async (
 	videoElement: HTMLVideoElement,
 	atomId: string,
+	renderingTarget: RenderingTarget,
+	videoStyle: OphanVideoStyle,
 ) => {
 	try {
-		const ophan = await getOphan('Web');
+		const ophan = await getOphan(renderingTarget);
 		ophan.trackComponentAttention(
-			`gu-video-loop-${atomId}`,
+			`gu-video-${videoStyle}-${atomId}`,
 			videoElement,
 			VISIBILITY_THRESHOLD,
 			true,
@@ -233,9 +237,8 @@ type Props = {
 	sources: Source[];
 	atomId: string;
 	uniqueId: string;
-	height: number;
-	width: number;
 	videoStyle: VideoPlayerFormat;
+	aspectRatio: number;
 	posterImage: string;
 	fallbackImage: CardPictureProps['mainImage'];
 	fallbackImageSize: CardPictureProps['imageSize'];
@@ -270,9 +273,8 @@ export const SelfHostedVideo = ({
 	sources,
 	atomId,
 	uniqueId,
-	height: expectedHeight,
-	width: expectedWidth,
 	videoStyle,
+	aspectRatio,
 	posterImage,
 	fallbackImage,
 	fallbackImageSize,
@@ -308,18 +310,19 @@ export const SelfHostedVideo = ({
 	);
 	const [hasPageBecomeActive, setHasPageBecomeActive] = useState(false);
 	const [hasTrackedPlay, setHasTrackedPlay] = useState(false);
-	/**
-	 * The actual video is a better source of truth of its dimensions.
-	 * The width and height from props are useful to prevent CLS.
-	 */
-	const [width, setWidth] = useState(expectedWidth);
-	const [height, setHeight] = useState(expectedHeight);
+	const [width, setWidth] = useState<number | undefined>();
+	const [height, setHeight] = useState<number | undefined>();
+
+	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
 
 	/**
 	 * All controls on the video are hidden: the video looks like a GIF.
 	 * This includes but may not be limited to: audio icon, play/pause icon, subtitles, progress bar.
 	 */
 	const isCinemagraph = videoStyle === 'Cinemagraph';
+
+	const ophanVideoStyle = videoStyle.toLowerCase() as OphanVideoStyle;
 
 	const [isInView, setNode] = useIsInView({
 		repeat: true,
@@ -344,7 +347,9 @@ export const SelfHostedVideo = ({
 			await startPlayPromise
 				.then(() => {
 					// Autoplay succeeded
-					dispatchOphanAttentionEvent('videoPlaying');
+					if (isWeb) {
+						dispatchOphanAttentionEvent('videoPlaying');
+					}
 					setPlayerState('PLAYING');
 				})
 				.catch((error: Error) => {
@@ -354,7 +359,7 @@ export const SelfHostedVideo = ({
 					setPlayerState('PAUSED_BY_BROWSER');
 				});
 		}
-	}, []);
+	}, [isWeb]);
 
 	const pauseVideo = (
 		pauseReason: Extract<
@@ -372,7 +377,10 @@ export const SelfHostedVideo = ({
 		}
 
 		setPlayerState(pauseReason);
-		dispatchOphanAttentionEvent('videoPause');
+
+		if (isWeb) {
+			dispatchOphanAttentionEvent('videoPause');
+		}
 
 		void video.pause();
 	};
@@ -430,7 +438,12 @@ export const SelfHostedVideo = ({
 		 * Initialise Ophan attention tracking
 		 */
 		if (vidRef.current) {
-			void trackAttention(vidRef.current, atomId);
+			void trackAttention(
+				vidRef.current,
+				atomId,
+				renderingTarget,
+				ophanVideoStyle,
+			);
 		}
 
 		/**
@@ -513,7 +526,7 @@ export const SelfHostedVideo = ({
 				handlePageBecomesVisible();
 			});
 		};
-	}, [uniqueId, atomId]);
+	}, [uniqueId, atomId, renderingTarget, ophanVideoStyle]);
 
 	/**
 	 * Track the first time the video comes into view.
@@ -600,8 +613,12 @@ export const SelfHostedVideo = ({
 	 */
 	const handlePlaying = () => {
 		if (hasTrackedPlay) return;
-
-		ophanTrackerWeb(atomId, 'loop')('play');
+		if (isWeb) {
+			ophanTrackerWeb(atomId, ophanVideoStyle)('play');
+		}
+		if (isApps) {
+			ophanTrackerApps(atomId, ophanVideoStyle)('play');
+		}
 		setHasTrackedPlay(true);
 	};
 
@@ -780,8 +797,6 @@ export const SelfHostedVideo = ({
 		playerState === 'PAUSED_BY_BROWSER' ||
 		(playerState === 'NOT_STARTED' && !isAutoplayAllowed);
 
-	const aspectRatio = width / height;
-
 	/** The aspect ratio of the video will be clamped within the specified range */
 	const aspectRatioOfVisibleVideo = getAspectRatioOfVisibleVideo(
 		aspectRatio,
@@ -845,6 +860,7 @@ export const SelfHostedVideo = ({
 						sources={sources}
 						atomId={atomId}
 						uniqueId={uniqueId}
+						aspectRatio={aspectRatio}
 						width={width}
 						height={height}
 						videoStyle={videoStyle}

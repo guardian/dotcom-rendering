@@ -22,6 +22,7 @@ import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
+import { FootballMatchHeaderFallback } from '../components/FootballMatchHeader/FootballMatchHeaderFallback';
 import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.importable';
 import { FootballMiniMatchStatsWrapper } from '../components/FootballMiniMatchStatsWrapper.importable';
 import { Footer } from '../components/Footer';
@@ -387,17 +388,27 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 				{footballMatchUrl ? (
 					applyFootballRedesign ? (
 						footballMatchHeaderUrl && (
-							<Island
-								priority="feature"
-								defer={{ until: 'visible' }}
-							>
-								<FootballMatchHeaderWrapper
-									initialTab="live"
-									edition={article.editionId}
-									matchHeaderURL={footballMatchHeaderUrl}
-									renderingTarget={renderingTarget}
-								/>
-							</Island>
+							<>
+								<noscript>
+									<FootballMatchHeaderFallback
+										format={format}
+										article={article}
+									/>
+								</noscript>
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
+									<FootballMatchHeaderWrapper
+										initialTab="live"
+										edition={article.editionId}
+										matchHeaderURL={footballMatchHeaderUrl}
+										renderingTarget={renderingTarget}
+										article={article}
+										format={format}
+									/>
+								</Island>
+							</>
 						)
 					) : (
 						<Section
