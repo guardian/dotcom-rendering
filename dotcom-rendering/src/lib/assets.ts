@@ -9,12 +9,9 @@ interface AssetHash {
 	[key: string]: string;
 }
 
-export const BASE_URL_DEV = 'http://localhost:3030/';
-
 export type AssetOrigin =
 	| 'https://assets.guim.co.uk/'
 	| 'https://assets-code.guim.co.uk/'
-	| typeof BASE_URL_DEV
 	| '/';
 
 /**
@@ -29,7 +26,7 @@ export const decideAssetOrigin = (
 	isDev?: boolean,
 ): AssetOrigin => {
 	if (isDev) {
-		return BASE_URL_DEV;
+		return '/';
 	}
 	switch (stage?.toUpperCase()) {
 		case 'PROD':
