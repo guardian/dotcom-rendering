@@ -90,7 +90,7 @@ export const getSubtitleAsset = (assets: VideoAssets[]): string | undefined =>
 	assets.find((asset) => asset.mimeType === 'text/vtt')?.url;
 
 /**
- * Returns the smallest source that is larger than the screen width.
+ * Returns the smallest source that is larger than or equal to the screen width.
  * If all sources are smaller than the screen width, take the largest.
  */
 const findOptimalSource = (
@@ -100,13 +100,22 @@ const findOptimalSource = (
 	if (sources.length === 0) return undefined;
 
 	const orderedSources = sources.sort((a, b) => {
-		if (a.width < screenWidth && b.width < screenWidth) {
-			return a.width < b.width ? 1 : -1;
+		const bothLargerThanScreenWidth =
+			a.width >= screenWidth && b.width >= screenWidth;
+		const bothSmallerThanScreenWidth =
+			a.width <= screenWidth && b.width <= screenWidth;
+
+		if (bothLargerThanScreenWidth) {
+			return a.width > b.width ? 1 : -1; // take the smaller source
 		}
-		if (a.width > screenWidth && b.width > screenWidth) {
-			return a.width > b.width ? 1 : -1;
+
+		if (bothSmallerThanScreenWidth) {
+			return a.width < b.width ? 1 : -1; // take the larger source
 		}
-		return a.width < screenWidth ? 1 : -1;
+
+		// If we have reached this point, we know that one source is larger than the screen width
+		// and the other is smaller. We take the source that is larger than the screen width.
+		return a.width <= screenWidth ? 1 : -1;
 	});
 
 	return orderedSources[0];
