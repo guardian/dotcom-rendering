@@ -9,12 +9,13 @@ interface AssetHash {
 	[key: string]: string;
 }
 
-export const BASE_URL_DEV = '/';
+export const BASE_URL_DEV = 'http://localhost:3030/';
 
 export type AssetOrigin =
 	| 'https://assets.guim.co.uk/'
 	| 'https://assets-code.guim.co.uk/'
-	| typeof BASE_URL_DEV;
+	| typeof BASE_URL_DEV
+	| '/';
 
 /**
  * Decides the url to use for fetching assets
