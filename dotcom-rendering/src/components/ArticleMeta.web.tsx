@@ -310,17 +310,17 @@ const metaNumbersExtrasLiveBlog = css`
 	}
 `;
 
-const getSeriesTag = (tags: TagType[]): TagType | undefined => {
+export const getSeriesTag = (tags: TagType[]): TagType | undefined => {
 	return tags.find((tag) => tag.type === 'Series' && tag.podcast);
 };
 
-const getPodcast = (tags: TagType[]): Podcast | undefined => {
+export const getPodcast = (tags: TagType[]): Podcast | undefined => {
 	const seriesTag = getSeriesTag(tags);
 
 	return seriesTag?.podcast;
 };
 
-const getRssFeedUrl = (tags: TagType[]): string => {
+export const getRssFeedUrl = (tags: TagType[]): string => {
 	const seriesTag = getSeriesTag(tags);
 
 	return `/${seriesTag?.id}/podcast.xml`;
