@@ -1,10 +1,11 @@
 import { log } from '@guardian/libs';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { getAudioClient } from '../lib/bridgetApi';
 import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
 import { AppsAudioPlayButton } from './AppsAudioPlayButton';
 
 const AUDIO_BRIDGET_VERSION = '8.7.7-2026-03-05';
+const POLLING_INTERVAL_MS = 3000;
 
 type Props = {
 	audioDuration?: string;
@@ -12,8 +13,20 @@ type Props = {
 
 export const AppsAudioPlayer = ({ audioDuration }: Props) => {
 	const [showButton, setShowButton] = useState<boolean>(false);
+	const pollingRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
 	const isBridgetCompatible = useIsBridgetCompatible(AUDIO_BRIDGET_VERSION);
+
+	const checkIsPlaying = useCallback(() => {
+		getAudioClient()
+			.isPlaying()
+			.then((isPlaying) => {
+				setShowButton(!isPlaying);
+			})
+			.catch((error: Error) => {
+				log('dotcom', 'Error polling isPlaying: ', error);
+			});
+	}, []);
 
 	useEffect(() => {
 		if (isBridgetCompatible) {
@@ -23,13 +36,26 @@ export const AppsAudioPlayer = ({ audioDuration }: Props) => {
 			])
 				.then(([isAvailable, isPlaying]) => {
 					setShowButton(isAvailable && !isPlaying);
+
+					if (isAvailable) {
+						pollingRef.current = setInterval(
+							checkIsPlaying,
+							POLLING_INTERVAL_MS,
+						);
+					}
 				})
 				.catch((error: Error) => {
 					log('dotcom', 'Error fetching audio status: ', error);
 					setShowButton(false);
 				});
 		}
-	}, [isBridgetCompatible]);
+
+		return () => {
+			if (pollingRef.current) {
+				clearInterval(pollingRef.current);
+			}
+		};
+	}, [isBridgetCompatible, checkIsPlaying]);
 
 	const playHandler = () => {
 		void getAudioClient()
