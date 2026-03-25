@@ -14,8 +14,7 @@ export const BASE_URL_DEV = '/';
 export type AssetOrigin =
 	| 'https://assets.guim.co.uk/'
 	| 'https://assets-code.guim.co.uk/'
-	| typeof BASE_URL_DEV
-	| '/';
+	| typeof BASE_URL_DEV;
 
 /**
  * Decides the url to use for fetching assets
