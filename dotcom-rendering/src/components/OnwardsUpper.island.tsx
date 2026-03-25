@@ -12,7 +12,7 @@ import { palette } from '../palette';
 import type { OnwardsSource } from '../types/onwards';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { TagType } from '../types/tag';
-import { FetchOnwardsData } from './FetchOnwardsData.importable';
+import { FetchOnwardsData } from './FetchOnwardsData.island';
 import { Section } from './Section';
 
 type PillarForContainer =

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { exampleProduct } from '../../fixtures/manual/productBlockElement';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { ScrollableProduct } from './ScrollableProduct.importable';
+import { ScrollableProduct } from './ScrollableProduct.island';
 
 const meta = {
 	title: 'Components/Scrollable Products',

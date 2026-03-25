@@ -27,8 +27,8 @@ import { palette as themePalette } from '../palette';
 import ProfileIcon from '../static/icons/profile.svg';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
-import type { DropdownLinkType } from './Dropdown.importable';
-import { Dropdown } from './Dropdown.importable';
+import type { DropdownLinkType } from './Dropdown.island';
+import { Dropdown } from './Dropdown.island';
 
 interface MyAccountProps {
 	mmaUrl: string;

@@ -2,7 +2,7 @@ import { breakpoints, textSans17Object } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { expect, userEvent, within } from 'storybook/test';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
-import { SelfHostedVideo } from './SelfHostedVideo.importable';
+import { SelfHostedVideo } from './SelfHostedVideo.island';
 
 const meta = {
 	component: SelfHostedVideo,

@@ -6,7 +6,7 @@ import { type ArticleFormat } from '../lib/articleFormat';
 import { getImage } from '../lib/image';
 import { type ImageBlockElement } from '../types/content';
 import { type RenderingTarget } from '../types/renderingTarget';
-import { AppsLightboxImage } from './AppsLightboxImage.importable';
+import { AppsLightboxImage } from './AppsLightboxImage.island';
 import { Island } from './Island';
 import { LightboxLink } from './LightboxLink';
 import { Picture } from './Picture';
