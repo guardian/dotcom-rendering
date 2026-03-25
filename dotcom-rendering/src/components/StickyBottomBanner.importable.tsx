@@ -121,6 +121,7 @@ const buildRRBannerConfigWith = ({
 		ophanPageViewId,
 		pageId,
 		inHoldbackGroup,
+		inAuxiaVariant,
 	}: {
 		isSignedIn: boolean;
 		countryCode: CountryCode;
@@ -139,6 +140,7 @@ const buildRRBannerConfigWith = ({
 		ophanPageViewId: string;
 		pageId?: string;
 		inHoldbackGroup?: boolean;
+		inAuxiaVariant?: boolean;
 	}): CandidateConfig<ModuleData<BannerProps>> => {
 		return {
 			candidate: {
@@ -176,6 +178,7 @@ const buildRRBannerConfigWith = ({
 						ophanPageViewId,
 						pageId,
 						inHoldbackGroup,
+						inAuxiaVariant,
 					}),
 				show: ({ name, props }: ModuleData<BannerProps>) => (
 					<BannerComponent name={name} props={props} />
@@ -281,6 +284,8 @@ export const StickyBottomBanner = ({
 		'NoAuxiaSignInGate',
 		'control',
 	);
+	const inAuxiaVariant =
+		abTests?.isUserInTestGroup('growth-auxia-banner', 'variant') ?? false;
 
 	const [pickMessageResult, setPickMessageResult] =
 		useState<PickMessageResult | null>(null);
@@ -330,6 +335,7 @@ export const StickyBottomBanner = ({
 					'growth-holdback-group',
 					'control',
 				) ?? false,
+			inAuxiaVariant,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionId,
@@ -433,6 +439,7 @@ export const StickyBottomBanner = ({
 		isInAuxiaControlGroup,
 		braze,
 		abTests,
+		inAuxiaVariant,
 	]);
 
 	/**
