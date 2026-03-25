@@ -27,7 +27,6 @@ import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.island';
 import { FootballMatchInfoWrapper } from '../components/FootballMatchInfoWrapper.island';
 import { Footer } from '../components/Footer';
-import { GetMatchStats } from '../components/GetMatchStats.island';
 import { GridItem } from '../components/GridItem';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -700,11 +699,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								/>
 								<MatchInfoContainer
 									isMatchReport={isMatchReport}
-									footballMatchUrl={footballMatchUrl}
 									footballMatchStatsUrl={
 										footballMatchStatsUrl
 									}
-									format={format}
 								/>
 
 								{isApps && (
@@ -1092,14 +1089,10 @@ const MatchHeaderContainer = ({
 
 const MatchInfoContainer = ({
 	isMatchReport,
-	footballMatchUrl,
 	footballMatchStatsUrl,
-	format,
 }: {
 	isMatchReport: boolean;
-	footballMatchUrl: string | undefined;
 	footballMatchStatsUrl: string | undefined;
-	format: ArticleFormat;
 }) => {
 	if (isMatchReport && !!footballMatchStatsUrl) {
 		const parsedUrl = safeParseURL(footballMatchStatsUrl);
@@ -1118,14 +1111,6 @@ const MatchInfoContainer = ({
 				<FootballMatchInfoWrapper
 					matchStatsUrl={footballMatchStatsUrl}
 				/>
-			</Island>
-		);
-	}
-
-	if (isMatchReport && !!footballMatchUrl) {
-		return (
-			<Island priority="feature" defer={{ until: 'visible' }}>
-				<GetMatchStats matchUrl={footballMatchUrl} format={format} />
 			</Island>
 		);
 	}
