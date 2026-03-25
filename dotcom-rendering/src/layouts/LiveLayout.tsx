@@ -8,9 +8,9 @@ import {
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { RightAdsPlaceholder } from '../components/AdPlaceholder.apps';
-import { AdPortals } from '../components/AdPortals.importable';
+import { AdPortals } from '../components/AdPortals.island';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
-import { AppsFooter } from '../components/AppsFooter.importable';
+import { AppsFooter } from '../components/AppsFooter.island';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -18,35 +18,36 @@ import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { Carousel } from '../components/Carousel.importable';
+import { Carousel } from '../components/Carousel.island';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
-import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.importable';
-import { FootballMiniMatchStatsWrapper } from '../components/FootballMiniMatchStatsWrapper.importable';
+import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.island';
+import { FootballMatchHeaderFallback } from '../components/FootballMatchHeader/FootballMatchHeaderFallback';
+import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.island';
+import { FootballMiniMatchStatsWrapper } from '../components/FootballMiniMatchStatsWrapper.island';
 import { Footer } from '../components/Footer';
-import { GetCricketScoreboard } from '../components/GetCricketScoreboard.importable';
-import { GetMatchNav } from '../components/GetMatchNav.importable';
-import { GetMatchStats } from '../components/GetMatchStats.importable';
-import { GetMatchTabs } from '../components/GetMatchTabs.importable';
+import { GetCricketScoreboard } from '../components/GetCricketScoreboard.island';
+import { GetMatchNav } from '../components/GetMatchNav.island';
+import { GetMatchStats } from '../components/GetMatchStats.island';
+import { GetMatchTabs } from '../components/GetMatchTabs.island';
 import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
-import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
-import { LiveblogGutterAskWrapper } from '../components/LiveblogGutterAskWrapper.importable';
-import { Liveness } from '../components/Liveness.importable';
+import { KeyEventsCarousel } from '../components/KeyEventsCarousel.island';
+import { LiveblogGutterAskWrapper } from '../components/LiveblogGutterAskWrapper.island';
+import { Liveness } from '../components/Liveness.island';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
-import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
+import { MostViewedFooterData } from '../components/MostViewedFooterData.island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { OnwardsUpper } from '../components/OnwardsUpper.island';
 import { Pagination } from '../components/Pagination';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
-import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubMeta } from '../components/SubMeta';
-import { SubNav } from '../components/SubNav.importable';
+import { SubNav } from '../components/SubNav.island';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
@@ -387,17 +388,27 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 				{footballMatchUrl ? (
 					applyFootballRedesign ? (
 						footballMatchHeaderUrl && (
-							<Island
-								priority="feature"
-								defer={{ until: 'visible' }}
-							>
-								<FootballMatchHeaderWrapper
-									initialTab="live"
-									edition={article.editionId}
-									matchHeaderURL={footballMatchHeaderUrl}
-									renderingTarget={renderingTarget}
-								/>
-							</Island>
+							<>
+								<noscript>
+									<FootballMatchHeaderFallback
+										format={format}
+										article={article}
+									/>
+								</noscript>
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
+									<FootballMatchHeaderWrapper
+										initialTab="live"
+										edition={article.editionId}
+										matchHeaderURL={footballMatchHeaderUrl}
+										renderingTarget={renderingTarget}
+										article={article}
+										format={format}
+									/>
+								</Island>
+							</>
 						)
 					) : (
 						<Section

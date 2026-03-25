@@ -12,7 +12,7 @@ import type { AuxiaGateDisplayData } from '../SignInGate/types';
 import {
 	getAuxiaGateVersion,
 	SignInGateSelector,
-} from '../SignInGateSelector.importable';
+} from '../SignInGateSelector.island';
 
 /**
  * SignInGatePortal - Portal wrapper for SignInGateSelector

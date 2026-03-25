@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space } from '@guardian/source/foundations';
-import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.importable';
+import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.island';
 import { type FootballMatchStats } from '../footballMatchStats';
 import { type FootballMatch } from '../footballMatchV2';
 import { type FootballTableSummary } from '../footballTables';

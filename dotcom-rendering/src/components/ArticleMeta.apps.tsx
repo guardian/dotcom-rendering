@@ -16,14 +16,14 @@ import type { Branding as BrandingType } from '../types/branding';
 import type { TagType } from '../types/tag';
 import { shouldShowAvatar, shouldShowContributor } from './ArticleMeta.web';
 import { Avatar } from './Avatar';
-import { Branding } from './Branding.importable';
-import { CommentCount } from './CommentCount.importable';
+import { Branding } from './Branding.island';
+import { CommentCount } from './CommentCount.island';
 import { Contributor } from './Contributor';
 import { Dateline } from './Dateline';
-import { FollowWrapper } from './FollowWrapper.importable';
+import { FollowWrapper } from './FollowWrapper.island';
 import { Island } from './Island';
-import { ListenToArticle } from './ListenToArticle.importable';
-import { NotificationsToggle } from './NotificationsToggle.importable';
+import { ListenToArticle } from './ListenToArticle.island';
+import { NotificationsToggle } from './NotificationsToggle.island';
 
 type Props = {
 	format: ArticleFormat;

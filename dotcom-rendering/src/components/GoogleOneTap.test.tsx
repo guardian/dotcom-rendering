@@ -4,7 +4,7 @@ import {
 	extractEmailFromToken,
 	getRedirectUrl,
 	initializeFedCM,
-} from './GoogleOneTap.importable';
+} from './GoogleOneTap.island';
 
 jest.mock('../client/ophan/ophan', () => ({
 	submitComponentEvent: jest.fn(),

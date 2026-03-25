@@ -3959,18 +3959,26 @@
                                     },
                                     "mimeType": {
                                         "$ref": "#/definitions/SupportedVideoFileType"
+                                    },
+                                    "height": {
+                                        "type": "number"
+                                    },
+                                    "width": {
+                                        "type": "number"
+                                    },
+                                    "aspectRatio": {
+                                        "type": "string"
                                     }
                                 },
                                 "required": [
+                                    "height",
                                     "mimeType",
-                                    "src"
+                                    "src",
+                                    "width"
                                 ]
                             }
                         },
-                        "height": {
-                            "type": "number"
-                        },
-                        "width": {
+                        "aspectRatio": {
                             "type": "number"
                         },
                         "duration": {
@@ -3984,13 +3992,12 @@
                         }
                     },
                     "required": [
+                        "aspectRatio",
                         "atomId",
                         "duration",
-                        "height",
                         "sources",
                         "type",
-                        "videoStyle",
-                        "width"
+                        "videoStyle"
                     ]
                 }
             ]

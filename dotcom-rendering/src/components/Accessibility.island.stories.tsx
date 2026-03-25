@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { Accessibility as AccessibilityComponent } from './Accessibility.importable';
+import { Accessibility as AccessibilityComponent } from './Accessibility.island';
 
 const meta = {
 	component: AccessibilityComponent,

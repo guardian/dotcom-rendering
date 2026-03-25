@@ -4,7 +4,7 @@ import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { RightColumn } from './RightColumn';
 import { Section } from './Section';
-import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
+import { YoutubeBlockComponent } from './YoutubeBlockComponent.island';
 
 export default {
 	component: YoutubeBlockComponent,

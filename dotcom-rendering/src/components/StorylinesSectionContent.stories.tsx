@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { mockStorylinesSectionContent } from '../../fixtures/manual/storylines-section';
-import { StorylinesSectionContent } from './StorylinesSectionContent.importable';
+import { StorylinesSectionContent } from './StorylinesSectionContent.island';
 
 const meta = {
 	component: StorylinesSectionContent,
