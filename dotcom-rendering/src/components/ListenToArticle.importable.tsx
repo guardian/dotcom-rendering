@@ -2,6 +2,7 @@ import { log } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { getListenToArticleClient } from '../lib/bridgetApi';
 import { useIsBridgetCompatible } from '../lib/useIsBridgetCompatible';
+import { useConfig } from './ConfigContext';
 import { ListenToArticleButton } from './ListenToArticleButton';
 
 type Props = {
@@ -25,6 +26,7 @@ export const formatAudioDuration = (
 };
 
 export const ListenToArticle = ({ articleId }: Props) => {
+	const { isDev } = useConfig();
 	const [showButton, setShowButton] = useState<boolean>(false);
 	const [audioDurationSeconds, setAudioDurationSeconds] = useState<
 		number | undefined
@@ -55,8 +57,12 @@ export const ListenToArticle = ({ articleId }: Props) => {
 
 					setShowButton(false);
 				});
+		} else if (isDev) {
+			// To facilitate design and development in non-Bridget compatible environments,
+			// we want to show the button if we're in development mode
+			setShowButton(true);
 		}
-	}, [articleId, isBridgetCompatible]);
+	}, [articleId, isDev, isBridgetCompatible]);
 
 	const listenToArticleHandler = () => {
 		void getListenToArticleClient()
