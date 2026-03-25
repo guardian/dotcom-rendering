@@ -1,7 +1,7 @@
 import type { FEAspectRatio } from '../frontend/feFront';
 import type { ArticleFormat } from '../lib/articleFormat';
 import {
-	convertAssetsToVideoSources,
+	extractValidSourcesFromAssets,
 	getAspectRatioFromSources,
 	getSubtitleAsset,
 } from '../lib/video';
@@ -28,7 +28,7 @@ export const SelfHostedVideoInArticle = ({
 	const posterImageUrl = element.posterImage?.[0]?.url;
 	const caption = element.title;
 
-	const sources = convertAssetsToVideoSources(element.assets);
+	const sources = extractValidSourcesFromAssets(element.assets);
 	const aspectRatio = getAspectRatioFromSources(sources);
 	const firstVideoSource = sources[0];
 

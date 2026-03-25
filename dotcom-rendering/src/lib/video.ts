@@ -35,7 +35,9 @@ export type SupportedVideoFileType = (typeof supportedVideoFileTypes)[number];
  * their `assets` as `VideoAssets`. Which means that we need to alter the shape
  * of the incoming `assets` to match the requirements of the outgoing `sources`.
  */
-export const convertAssetsToVideoSources = (assets: VideoAssets[]): Source[] =>
+export const extractValidSourcesFromAssets = (
+	assets: VideoAssets[],
+): Source[] =>
 	/**
 	 * Ensure sources are ordered by the order that MIME types are specified in
 	 * `supportedVideoFileTypes` as the browser picks the first one that it supports.
@@ -58,19 +60,14 @@ export const convertAssetsToVideoSources = (assets: VideoAssets[]): Source[] =>
 			aspectRatio: asset.aspectRatio,
 		}));
 
-export const convertFEMediaAssetsToVideoSources = (
+export const convertFEMediaAssetsToVideoAssets = (
 	assets: FEMediaAsset[],
-): Source[] => {
-	const videoAssets: VideoAssets[] = assets.map(
-		({ id, mimeType, dimensions }) => ({
-			url: id,
-			mimeType,
-			dimensions,
-		}),
-	);
-
-	return convertAssetsToVideoSources(videoAssets);
-};
+): VideoAssets[] =>
+	assets.map(({ id, mimeType, dimensions }) => ({
+		url: id,
+		mimeType,
+		dimensions,
+	}));
 
 /**
  * Aspect ratio is needed for self-hosted video so that the browser knows how much

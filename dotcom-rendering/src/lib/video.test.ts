@@ -1,6 +1,8 @@
+import type { FEMediaAsset } from '../frontend/feFront';
 import type { VideoAssets } from '../types/content';
 import {
-	convertAssetsToVideoSources,
+	convertFEMediaAssetsToVideoAssets,
+	extractValidSourcesFromAssets,
 	findOptimisedSourcePerMimeType,
 } from './video';
 import type { Source } from './video';
@@ -20,12 +22,12 @@ const mp4Asset720h: VideoAssets = {
 	mimeType: 'video/mp4',
 	dimensions: {
 		height: 720,
-		width: 898,
+		width: 900,
 	},
 	aspectRatio: '5:4',
 };
 
-const m3u8Asset: VideoAssets = {
+const m3u8Asset720h: VideoAssets = {
 	url: 'https://guim-example.co.uk/atomID-1.m3u8',
 	mimeType: 'application/x-mpegURL',
 	dimensions: {
@@ -55,7 +57,7 @@ const mp4Src720h: Source = {
 	src: 'https://guim-example.co.uk/atomID-1_720h.mp4',
 	mimeType: 'video/mp4',
 	height: 720,
-	width: 898,
+	width: 900,
 	aspectRatio: '5:4',
 };
 const m3u8Src480w: Source = {
@@ -74,20 +76,20 @@ const m3u8Src720h: Source = {
 };
 
 describe('video', () => {
-	describe('convertAssetsToVideoSources', () => {
+	describe('extractValidSourcesFromAssets', () => {
 		it('should drop unsupported assets', () => {
-			const assets = [mp4Asset480w, m3u8Asset, unsupportedAsset];
+			const assets = [mp4Asset480w, m3u8Asset720h, unsupportedAsset];
 			const expected = [mp4Src480w, m3u8Src720h];
-			expect(convertAssetsToVideoSources(assets)).toEqual(expected);
+			expect(extractValidSourcesFromAssets(assets)).toEqual(expected);
 		});
 
 		it('should reorder sources by supportedVideoFileTypes order', () => {
 			const assets = [
-				m3u8Asset,
+				m3u8Asset720h,
 				mp4Asset480w,
-				m3u8Asset,
+				m3u8Asset720h,
 				mp4Asset720h,
-				m3u8Asset,
+				m3u8Asset720h,
 			];
 			const expected = [
 				mp4Src480w,
@@ -96,7 +98,62 @@ describe('video', () => {
 				m3u8Src720h,
 				m3u8Src720h,
 			];
-			expect(convertAssetsToVideoSources(assets)).toEqual(expected);
+			expect(extractValidSourcesFromAssets(assets)).toEqual(expected);
+		});
+	});
+
+	describe('convertFEMediaAssetsToVideoAssets', () => {
+		const feMediaAsset480w: FEMediaAsset = {
+			id: 'https://guim-example.co.uk/atomID-1_480w.mp4',
+			version: 1,
+			platform: 'Url',
+			assetType: 'video',
+			mimeType: 'video/mp4',
+			dimensions: {
+				height: 384,
+				width: 480,
+			},
+		};
+		const feMediaAsset720h: FEMediaAsset = {
+			id: 'https://guim-example.co.uk/atomID-1_720h.mp4',
+			version: 1,
+			platform: 'Url',
+			assetType: 'video',
+			mimeType: 'video/mp4',
+			dimensions: {
+				height: 720,
+				width: 900,
+			},
+		};
+
+		it('should convert FE media assets to video assets', () => {
+			expect(
+				convertFEMediaAssetsToVideoAssets([
+					feMediaAsset480w,
+					feMediaAsset720h,
+				]),
+			).toEqual([
+				{
+					url: 'https://guim-example.co.uk/atomID-1_480w.mp4',
+					mimeType: 'video/mp4',
+					dimensions: {
+						height: 384,
+						width: 480,
+					},
+				},
+				{
+					url: 'https://guim-example.co.uk/atomID-1_720h.mp4',
+					mimeType: 'video/mp4',
+					dimensions: {
+						height: 720,
+						width: 900,
+					},
+				},
+			]);
+		});
+
+		it('should return an empty array when given an empty array', () => {
+			expect(convertFEMediaAssetsToVideoAssets([])).toEqual([]);
 		});
 	});
 
