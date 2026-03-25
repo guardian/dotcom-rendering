@@ -8,7 +8,7 @@ import type { ServerSideTests, Switches } from '../types/config';
 import { Island } from './Island';
 import { LastUpdated } from './LastUpdated';
 import { LiveBlockContainer } from './LiveBlockContainer';
-import { ShareButton } from './ShareButton.importable';
+import { ShareButton } from './ShareButton.island';
 
 type Props = {
 	format: ArticleFormat;

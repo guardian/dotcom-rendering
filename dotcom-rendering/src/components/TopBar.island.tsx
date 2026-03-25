@@ -19,7 +19,7 @@ import { useConfig } from './ConfigContext';
 import { Grid } from './Masthead/Titlepiece/Grid';
 import { TopBarLink } from './TopBarLink';
 import { TopBarMyAccount } from './TopBarMyAccount';
-import { TopBarSupport } from './TopBarSupport.importable';
+import { TopBarSupport } from './TopBarSupport.island';
 
 interface Props {
 	editionId: EditionId;

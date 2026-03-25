@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
-import { AppsEpic as AppsEpicComponent } from './AppsEpic.importable';
+import { AppsEpic as AppsEpicComponent } from './AppsEpic.island';
 
 const meta = {
 	component: AppsEpicComponent,

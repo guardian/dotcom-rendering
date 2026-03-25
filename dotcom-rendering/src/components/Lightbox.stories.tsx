@@ -9,7 +9,7 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import type { ImageForLightbox } from '../types/content';
-import { LightboxLayout } from './LightboxLayout.importable';
+import { LightboxLayout } from './LightboxLayout.island';
 
 const Initialise = ({ children }: { children: React.ReactNode }) => {
 	useEffect(() => {

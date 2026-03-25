@@ -1,6 +1,6 @@
 import { palette } from '@guardian/source/foundations';
 import type { GroupedNewsletters } from '../types/newslettersPage';
-import { CarouselForNewsletters } from './CarouselForNewsletters.importable';
+import { CarouselForNewsletters } from './CarouselForNewsletters.island';
 import { Island } from './Island';
 import { Section } from './Section';
 

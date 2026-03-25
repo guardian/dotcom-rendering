@@ -14,7 +14,7 @@ import type {
 import type { TagPagePagination } from '../types/tagPage';
 import { isAustralianTerritory, type Territory } from '../types/territory';
 import type { TrailType } from '../types/trails';
-import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
+import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.island';
 import { BrandingLabel } from './BrandingLabel';
 import { ContainerOverrides } from './ContainerOverrides';
 import { ContainerTitle } from './ContainerTitle';

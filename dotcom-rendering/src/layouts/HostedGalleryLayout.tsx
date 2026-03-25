@@ -7,7 +7,7 @@ import {
 import { HostedContentHeader } from '../components/HostedContentHeader';
 import { Island } from '../components/Island';
 import { Section } from '../components/Section';
-import { ShareButton } from '../components/ShareButton.importable';
+import { ShareButton } from '../components/ShareButton.island';
 import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
 import type { Article } from '../types/article';
@@ -58,13 +58,10 @@ export const HostedGalleryLayout = (props: WebProps | AppProps) => {
 						showTopBorder={false}
 						shouldCenter={false}
 						backgroundColour={sourcePalette.neutral[7]}
-						padSides={false}
-						element="aside"
+						padSides={true}
+						element="header"
 					>
-						<HostedContentHeader
-							branding={branding}
-							accentColor={branding.hostedCampaignColour}
-						/>
+						<HostedContentHeader branding={branding} />
 					</Section>
 				</Stuck>
 			) : null}

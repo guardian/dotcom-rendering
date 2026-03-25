@@ -6,7 +6,7 @@ import { useAB } from '../lib/useAB';
 import { useApi } from '../lib/useApi';
 import { palette } from '../palette';
 import type { FETrailTabType, TrailTabType } from '../types/trails';
-import { MostViewedFooter } from './MostViewedFooter.importable';
+import { MostViewedFooter } from './MostViewedFooter.island';
 import { MostViewedFooterPlaceholder } from './MostViewedFooterPlaceholder';
 
 interface Props {
