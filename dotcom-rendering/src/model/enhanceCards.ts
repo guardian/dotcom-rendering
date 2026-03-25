@@ -16,7 +16,7 @@ import { getDataLinkNameCard } from '../lib/getDataLinkName';
 import { getLargestImageSize } from '../lib/image';
 import {
 	convertFEMediaAssetsToVideoSources,
-	DEFAULT_ASPECT_RATIO,
+	getAspectRatioFromSources,
 } from '../lib/video';
 import type { Image } from '../types/content';
 import type {
@@ -231,16 +231,16 @@ export const getActiveMediaAtom = (
 				({ assetType }) => assetType === 'Subtitles',
 			);
 
-			const aspectRatio = firstVideoAsset.dimensions
-				? firstVideoAsset.dimensions.width /
-				  firstVideoAsset.dimensions.height
-				: DEFAULT_ASPECT_RATIO;
+			const sources =
+				convertFEMediaAssetsToVideoSources(selfHostedAssets);
+
+			const aspectRatio = getAspectRatioFromSources(sources);
 
 			return {
 				type: 'SelfHostedVideo',
 				videoStyle: mediaAtom.videoPlayerFormat ?? 'Loop',
 				atomId: mediaAtom.id,
-				sources: convertFEMediaAssetsToVideoSources(selfHostedAssets),
+				sources,
 				subtitleSource: subtitleAsset?.id,
 				aspectRatio,
 				duration: mediaAtom.duration ?? 0,

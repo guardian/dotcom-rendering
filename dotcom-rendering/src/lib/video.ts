@@ -46,12 +46,7 @@ export const convertAssetsToVideoSources = (assets: VideoAssets[]): Source[] =>
 				({ mimeType }) => mimeType === type,
 			);
 			if (sourcesByType.length) {
-				const sourcesOrderedByWidthDescending = sourcesByType.sort(
-					(a, b) =>
-						Number(b.dimensions?.width) -
-						Number(a.dimensions?.width),
-				);
-				acc.push(...sourcesOrderedByWidthDescending);
+				acc.push(...sourcesByType);
 			}
 			return acc;
 		}, [])
@@ -75,6 +70,23 @@ export const convertFEMediaAssetsToVideoSources = (
 	);
 
 	return convertAssetsToVideoSources(videoAssets);
+};
+
+/**
+ * Aspect ratio is needed for self-hosted video so that the browser knows how much
+ * space the video will take up: width and height are unknown when the page first
+ * renders, as there can be multiple sources available with different dimensions.
+ *
+ * We use the first source to calculate aspect ratio, but we could use any of the sources.
+ * We make an assumption that all sources will have the same aspect ratio.
+ */
+export const getAspectRatioFromSources = (sources: Source[]): number => {
+	const firstSource = sources[0];
+	if (!firstSource || firstSource.width === 0 || firstSource.height === 0) {
+		return DEFAULT_ASPECT_RATIO;
+	}
+
+	return firstSource.width / firstSource.height;
 };
 
 export const getSubtitleAsset = (assets: VideoAssets[]): string | undefined =>

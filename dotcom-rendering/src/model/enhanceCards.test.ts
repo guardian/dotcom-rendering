@@ -186,19 +186,13 @@ describe('Enhance Cards', () => {
 				sources: [
 					{
 						mimeType: 'video/mp4',
-						src: 'https://guim-example.co.uk/atomID-2.mp4',
-						height: 900,
-						width: 720,
-					},
-					{
-						mimeType: 'video/mp4',
 						src: 'https://guim-example.co.uk/atomID-1.mp4',
 						height: 400,
 						width: 500,
 					},
 					{
-						mimeType: 'application/x-mpegURL',
-						src: 'https://guim-example.co.uk/atomID-2.m3u8',
+						mimeType: 'video/mp4',
+						src: 'https://guim-example.co.uk/atomID-2.mp4',
 						height: 900,
 						width: 720,
 					},
@@ -207,6 +201,12 @@ describe('Enhance Cards', () => {
 						src: 'https://guim-example.co.uk/atomID-1.m3u8',
 						height: 400,
 						width: 500,
+					},
+					{
+						mimeType: 'application/x-mpegURL',
+						src: 'https://guim-example.co.uk/atomID-2.m3u8',
+						height: 900,
+						width: 720,
 					},
 				],
 			});
