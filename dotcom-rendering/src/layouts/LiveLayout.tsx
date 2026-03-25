@@ -231,7 +231,7 @@ const bodyWrapper = css`
 	}
 `;
 
-const footballRedesignBodyWrapper = css`
+const footballMatchBodyWrapper = css`
 	padding-top: 0;
 	margin-top: 10px;
 	border-top: 1px solid ${themePalette('--article-border')};
@@ -730,7 +730,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									id="maincontent"
 									css={[
 										bodyWrapper,
-										footballRedesignBodyWrapper,
+										!!footballMatchUrl &&
+											footballMatchBodyWrapper,
 									]}
 								>
 									{hasKeyEvents ? (
