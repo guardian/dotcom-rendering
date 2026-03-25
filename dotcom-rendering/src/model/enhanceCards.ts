@@ -14,8 +14,10 @@ import type { EditionId } from '../lib/edition';
 import type { Group } from '../lib/getDataLinkName';
 import { getDataLinkNameCard } from '../lib/getDataLinkName';
 import { getLargestImageSize } from '../lib/image';
-import type { SupportedVideoFileType } from '../lib/video';
-import { DEFAULT_ASPECT_RATIO, supportedVideoFileTypes } from '../lib/video';
+import {
+	convertFEMediaAssetsToVideoSources,
+	DEFAULT_ASPECT_RATIO,
+} from '../lib/video';
 import type { Image } from '../types/content';
 import type {
 	DCRFrontCard,
@@ -222,29 +224,9 @@ export const getActiveMediaAtom = (
 		 * Therefore, we check the platform of the first asset and assume the rest are the same.
 		 */
 		if (firstVideoAsset.platform === 'Url') {
-			/**
-			 * Ensure sources are ordered by the order that MIME types are specified in
-			 * `supportedVideoFileTypes` as the browser picks the first one that it supports.
-			 */
-			const sources = supportedVideoFileTypes
-				.reduce<typeof assets>((acc, type) => {
-					const sourcesByType = assets.filter(
-						({ mimeType }) => mimeType === type,
-					);
-
-					if (sourcesByType.length) acc.push(...sourcesByType);
-
-					return acc;
-				}, [])
-				.filter(({ platform }) => platform === 'Url')
-				.map(({ id, mimeType, dimensions }) => ({
-					src: id,
-					mimeType: mimeType as SupportedVideoFileType,
-					height: dimensions?.height ?? 0,
-					width: dimensions?.width ?? 0,
-				}));
-			if (!sources.length) return undefined;
-
+			const selfHostedAssets = assets.filter(
+				({ platform }) => platform === 'Url',
+			);
 			const subtitleAsset = assets.find(
 				({ assetType }) => assetType === 'Subtitles',
 			);
@@ -258,7 +240,7 @@ export const getActiveMediaAtom = (
 				type: 'SelfHostedVideo',
 				videoStyle: mediaAtom.videoPlayerFormat ?? 'Loop',
 				atomId: mediaAtom.id,
-				sources,
+				sources: convertFEMediaAssetsToVideoSources(selfHostedAssets),
 				subtitleSource: subtitleAsset?.id,
 				aspectRatio,
 				duration: mediaAtom.duration ?? 0,
