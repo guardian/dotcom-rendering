@@ -1,3 +1,4 @@
+import type { FEMediaAsset } from '../frontend/feFront';
 import type { VideoAssets } from '../types/content';
 
 export type CustomPlayEventDetail = { uniqueId: string };
@@ -28,14 +29,6 @@ export const supportedVideoFileTypes = [
 
 export type SupportedVideoFileType = (typeof supportedVideoFileTypes)[number];
 
-const isSupportedMimeType = (
-	mime: string | undefined,
-): mime is SupportedVideoFileType => {
-	if (!mime) return false;
-
-	return (supportedVideoFileTypes as readonly string[]).includes(mime);
-};
-
 /**
  * The looping video player types its `sources` attribute as `Sources`.
  * However, looping videos in articles are delivered as media atoms, which type
@@ -43,22 +36,46 @@ const isSupportedMimeType = (
  * of the incoming `assets` to match the requirements of the outgoing `sources`.
  */
 export const convertAssetsToVideoSources = (assets: VideoAssets[]): Source[] =>
-	assets
-		.filter((asset) => isSupportedMimeType(asset.mimeType))
+	/**
+	 * Ensure sources are ordered by the order that MIME types are specified in
+	 * `supportedVideoFileTypes` as the browser picks the first one that it supports.
+	 */
+	supportedVideoFileTypes
+		.reduce<typeof assets>((acc, type) => {
+			const sourcesByType = assets.filter(
+				({ mimeType }) => mimeType === type,
+			);
+			if (sourcesByType.length) {
+				const sourcesOrderedByWidthDescending = sourcesByType.sort(
+					(a, b) =>
+						Number(b.dimensions?.width) -
+						Number(a.dimensions?.width),
+				);
+				acc.push(...sourcesOrderedByWidthDescending);
+			}
+			return acc;
+		}, [])
 		.map((asset) => ({
 			src: asset.url,
 			mimeType: asset.mimeType as Source['mimeType'],
 			height: asset.dimensions?.height ?? 0,
 			width: asset.dimensions?.width ?? 0,
 			aspectRatio: asset.aspectRatio,
-		}))
-		.sort((a, b) => {
-			const typeOrder =
-				supportedVideoFileTypes.indexOf(a.mimeType) -
-				supportedVideoFileTypes.indexOf(b.mimeType);
-			/** Sort by type then by width */
-			return typeOrder || Number(b.width) - Number(a.width);
-		});
+		}));
+
+export const convertFEMediaAssetsToVideoSources = (
+	assets: FEMediaAsset[],
+): Source[] => {
+	const videoAssets: VideoAssets[] = assets.map(
+		({ id, mimeType, dimensions }) => ({
+			url: id,
+			mimeType,
+			dimensions,
+		}),
+	);
+
+	return convertAssetsToVideoSources(videoAssets);
+};
 
 export const getSubtitleAsset = (assets: VideoAssets[]): string | undefined =>
 	assets.find((asset) => asset.mimeType === 'text/vtt')?.url;
