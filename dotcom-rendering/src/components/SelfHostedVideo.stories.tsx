@@ -22,7 +22,7 @@ const meta = {
 				https://storybook.thegulocal.com/ instead of localhost, as CORS
 				is enabled for self-hosted video.
 			</p>
-			<SelfHostedVideo {...args} />,
+			<SelfHostedVideo {...args} />
 		</div>
 	),
 	parameters: {

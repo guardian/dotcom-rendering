@@ -62,3 +62,47 @@ export const convertAssetsToVideoSources = (assets: VideoAssets[]): Source[] =>
 
 export const getSubtitleAsset = (assets: VideoAssets[]): string | undefined =>
 	assets.find((asset) => asset.mimeType === 'text/vtt')?.url;
+
+/**
+ * Returns the smallest source that is larger than the screen width.
+ * If all sources are smaller than the screen width, take the largest.
+ */
+const findOptimalSource = (
+	sources: Source[],
+	screenWidth: number,
+): Source | undefined => {
+	if (sources.length === 0) return undefined;
+
+	const orderedSources = sources.sort((a, b) => {
+		if (a.width < screenWidth && b.width < screenWidth) {
+			return a.width < b.width ? 1 : -1;
+		}
+		if (a.width > screenWidth && b.width > screenWidth) {
+			return a.width > b.width ? 1 : -1;
+		}
+		return a.width < screenWidth ? 1 : -1;
+	});
+
+	return orderedSources[0];
+};
+
+export const findOptimisedSourcePerMimeType = (
+	sources: Source[],
+	screenWidth: number,
+): Source[] => {
+	return supportedVideoFileTypes.reduce<Source[]>((acc, type) => {
+		const sourcesForMimeType = sources.filter(
+			({ mimeType }) => mimeType === type,
+		);
+		if (sourcesForMimeType.length === 0) return acc;
+
+		// Pick the source with the most appropriate width based on the users screen size
+		const optimisedSource = findOptimalSource(
+			sourcesForMimeType,
+			screenWidth,
+		);
+
+		if (optimisedSource) acc.push(optimisedSource);
+		return acc;
+	}, []);
+};
