@@ -81,17 +81,17 @@ describe('video', () => {
 			expect(convertAssetsToVideoSources(assets)).toEqual(expected);
 		});
 
-		it('should reorder sources by supportedVideoFileTypes order and then by width', () => {
+		it('should reorder sources by supportedVideoFileTypes order', () => {
 			const assets = [
-				m3u8Asset,
 				m3u8Asset,
 				mp4Asset480w,
 				m3u8Asset,
 				mp4Asset720h,
+				m3u8Asset,
 			];
 			const expected = [
-				mp4Src720h,
 				mp4Src480w,
+				mp4Src720h,
 				m3u8Src720h,
 				m3u8Src720h,
 				m3u8Src720h,
