@@ -13,7 +13,7 @@ import {
 	textSansItalic15Object,
 	until,
 } from '@guardian/source/foundations';
-import { type ComponentProps, type ReactNode, useMemo } from 'react';
+import { type ComponentProps, useMemo } from 'react';
 import type { SWRConfiguration } from 'swr';
 import useSWR from 'swr';
 import type { FootballMatch } from '../../footballMatchV2';
@@ -179,7 +179,7 @@ const StatusLine = (props: {
 			color: palette(secondaryText(props.match.kind)),
 		}}
 	>
-		<LeagueName matchKind={props.match.kind}>{props.leagueName}</LeagueName>
+		<LeagueName matchKind={props.match.kind} name={props.leagueName} />
 		{props.match.venue ? `${props.match.venue} • ` : null}
 		<MatchStatus edition={props.edition} match={props.match} />
 	</p>
@@ -187,7 +187,8 @@ const StatusLine = (props: {
 
 const LeagueName = (props: {
 	matchKind: FootballMatch['kind'];
-	children: ReactNode;
+	name: string;
+	href?: string;
 }) => (
 	<>
 		<span
@@ -220,7 +221,20 @@ const LeagueName = (props: {
 				},
 			}}
 		>
-			{props.children}
+			{props.href ? (
+				<a
+					href={props.href}
+					css={{
+						color: 'inherit',
+						textDecoration: 'none',
+						'&:hover': { textDecoration: 'underline' },
+					}}
+				>
+					{props.name}
+				</a>
+			) : (
+				props.name
+			)}
 		</span>
 		<span
 			css={{
