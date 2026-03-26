@@ -15,6 +15,7 @@ import {
 	trails,
 	youtubeVideoTrails,
 } from '../../fixtures/manual/trails';
+import type { ArticleFormat } from '../lib/articleFormat';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { customMockFetch } from '../lib/mockRESTCalls';
 import type { BoostLevel } from '../types/content';
@@ -24,6 +25,7 @@ import type {
 	DCRGroupedTrails,
 	DCRSupportingContent,
 } from '../types/front';
+import type { ArticleMedia, MainMedia } from '../types/mainMedia';
 import { FlexibleGeneral } from './FlexibleGeneral';
 import { FrontSection } from './FrontSection';
 
@@ -625,7 +627,6 @@ export const StandardBoostedMediaCardWithSublinks: Story = {
 export const SplashWithSlideshow: Story = {
 	name: 'Splash with a slideshow',
 	args: {
-		frontSectionTitle: 'Flexible General Splash card with a slideshow',
 		groupedTrails: {
 			...emptyGroupedTrails,
 			splash: [
@@ -638,13 +639,79 @@ export const SplashWithSlideshow: Story = {
 		},
 		collectionId: 1,
 	},
+	render: (args) => {
+		const Section = ({
+			title,
+			format,
+			mainMedia,
+			articleMedia,
+		}: {
+			title: string;
+			format: ArticleFormat;
+			mainMedia?: MainMedia;
+			articleMedia?: ArticleMedia;
+		}) => (
+			<FrontSection title={title} editionId="UK" showTopBorder={true}>
+				<FlexibleGeneral
+					{...args}
+					groupedTrails={{
+						...emptyGroupedTrails,
+						splash: [
+							{
+								...slideshowCard,
+								boostLevel: 'default',
+								headline:
+									'Default splash card with a slideshow',
+								format,
+								mainMedia,
+								articleMedia,
+							},
+						],
+					}}
+				/>
+			</FrontSection>
+		);
+
+		return (
+			<>
+				<Section
+					title="Slideshow"
+					format={{
+						design: ArticleDesign.Standard,
+						display: ArticleDisplay.Standard,
+						theme: Pillar.News,
+					}}
+				/>
+				<Section
+					title="Slideshow podcast"
+					format={{
+						design: ArticleDesign.Audio,
+						display: ArticleDisplay.Standard,
+						theme: Pillar.Sport,
+					}}
+					mainMedia={{
+						type: 'Audio',
+						duration: '46:12',
+						podcastImage: {
+							src: 'https://uploads.guim.co.uk/2021/01/22/AudioLongReadJan2021.jpg',
+							altText: 'The Audio Long Read',
+						},
+					}}
+					articleMedia={{
+						type: 'Audio',
+						duration: '46:12',
+					}}
+				/>
+			</>
+		);
+	},
 };
 
-export const StandardCardWithSlideshow: Story = {
-	name: 'Standard card with a slideshow',
+export const StandardCardsWithSlideshow: Story = {
+	name: 'Standard cards with a slideshow',
 	args: {
 		frontSectionTitle:
-			'Flexible General standard card with a slideshow at each boost level',
+			'Standard cards with a slideshow at each boost level',
 		groupedTrails: {
 			...emptyGroupedTrails,
 			standard: [
@@ -661,11 +728,56 @@ export const StandardCardWithSlideshow: Story = {
 				},
 				{
 					...slideshowCard,
+					boostLevel: 'boost',
+					headline: 'Boosted card with an audio slideshow',
+					mainMedia: {
+						type: 'Audio',
+						duration: '46:12',
+						podcastImage: {
+							src: 'https://uploads.guim.co.uk/2021/01/22/AudioLongReadJan2021.jpg',
+							altText: 'The Audio Long Read',
+						},
+					},
+					articleMedia: {
+						type: 'Audio',
+						duration: '46:12',
+					},
+					format: {
+						design: ArticleDesign.Audio,
+						display: ArticleDisplay.Standard,
+						theme: Pillar.Sport,
+					},
+				},
+				{
+					...slideshowCard,
 					boostLevel: 'megaboost',
 					headline: 'MegaBoosted card with a slideshow',
+				},
+				{
+					...slideshowCard,
+					boostLevel: 'megaboost',
+					headline: 'MegaBoosted card with an audio slideshow',
+					mainMedia: {
+						type: 'Audio',
+						duration: '46:12',
+						podcastImage: {
+							src: 'https://uploads.guim.co.uk/2021/01/22/AudioLongReadJan2021.jpg',
+							altText: 'The Audio Long Read',
+						},
+					},
+					articleMedia: {
+						type: 'Audio',
+						duration: '46:12',
+					},
+					format: {
+						design: ArticleDesign.Audio,
+						display: ArticleDisplay.Standard,
+						theme: Pillar.Sport,
+					},
 				},
 			],
 		},
 		collectionId: 1,
+		containerLevel: 'Primary',
 	},
 };
