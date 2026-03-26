@@ -140,7 +140,10 @@ const decideImageWidths = ({
 	if (isMainMedia) {
 		if (
 			format.display === ArticleDisplay.Immersive ||
-			format.design === ArticleDesign.Gallery
+			format.design === ArticleDesign.Gallery ||
+			format.design === ArticleDesign.HostedArticle ||
+			format.design === ArticleDesign.HostedVideo ||
+			format.design === ArticleDesign.HostedGallery
 		) {
 			// If display is Immersive then main media should *always*
 			// use these larger image sources
