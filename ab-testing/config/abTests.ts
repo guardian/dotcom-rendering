@@ -32,18 +32,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "webex-football-redesign",
-		description: "Testing the Redesign for the football pages",
-		owners: ["dotcom.platform@theguardian.com"],
-		expirationDate: `2026-04-22`,
-		type: "server",
-		status: "ON",
-		audienceSize: 0 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "commercial-enable-spacefinder-on-interactives",
 		description: "Enable spacefinder on interactive articles on mobile web",
 		owners: ["commercial.dev@guardian.co.uk"],
