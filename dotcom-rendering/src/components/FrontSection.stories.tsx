@@ -67,7 +67,6 @@ const PageSkinWrapper = ({ children }: { children: ReactNode }) => (
 export default {
 	component: FrontSection,
 	title: 'Components/FrontSection',
-
 	parameters: {
 		chromatic: {
 			viewports: [
@@ -79,15 +78,12 @@ export default {
 			],
 		},
 	},
-
 	args: {
 		editionId: 'UK',
 		children: <Placeholder />,
 		url: '/',
 	},
-
 	render: (args) => <FrontSection {...args} />,
-
 	globals: {
 		viewport: {
 			// This has the effect of turning off the viewports addon by default

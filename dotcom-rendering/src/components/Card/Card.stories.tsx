@@ -321,9 +321,8 @@ export const WithExternalLink = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					mediaPositionOnDesktop="right"
+					mediaPositionOnDesktop="left"
 					kickerText="Instagram"
-					headlineSizes={{ desktop: 'medium', tablet: 'small' }}
 					headlineText="Follow The Guardian now"
 					isExternalLink={true}
 				/>
@@ -1813,7 +1812,7 @@ export const WithAVerticalGapWhenScrollableSmallContainer = () => {
 	);
 };
 
-export const WithBetaContainerAndSublinks = () => {
+export const WithinFlexibleGeneralAndSublinks = () => {
 	return (
 		<CardGroup>
 			<CardWrapper>
@@ -1828,7 +1827,7 @@ export const WithBetaContainerAndSublinks = () => {
 	);
 };
 
-export const WithBetaContainerAndSublinksNoImage = () => {
+export const WithinFlexibleGeneralAndSublinksNoImage = () => {
 	return (
 		<CardGroup>
 			<CardWrapper>
