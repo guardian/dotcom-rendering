@@ -51,6 +51,7 @@ export const Loop5to4: Story = {
 		atomId: 'test-atom-1',
 		videoStyle: 'Loop',
 		aspectRatio: 5 / 4,
+		enableCors: false,
 		posterImage:
 			'https://media.guim.co.uk/9bdb802e6da5d3fd249b5060f367b3a817965f0c/0_0_1800_1080/master/1800.jpg',
 		fallbackImage: '',

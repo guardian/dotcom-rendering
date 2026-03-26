@@ -247,6 +247,10 @@ type Props = {
 	fallbackImageAspectRatio: CardPictureProps['aspectRatio'];
 	linkTo: string;
 	showProgressBar?: boolean;
+	/**
+	 * If CORS are enabled, the video request will include CORS headers.
+	 */
+	enableCors?: boolean;
 	subtitleSource?: string;
 	subtitleSize: SubtitleSize;
 	/** The position of subtitles and the audio icon. Usually at the bottom, with the exception of Feature Cards. */
@@ -283,6 +287,7 @@ export const SelfHostedVideo = ({
 	fallbackImageAspectRatio,
 	linkTo,
 	showProgressBar = true,
+	enableCors = true,
 	subtitleSource,
 	subtitleSize,
 	controlsPosition = 'bottom',
@@ -885,6 +890,7 @@ export const SelfHostedVideo = ({
 						AudioIcon={hasAudio ? AudioIcon : null}
 						preloadPartialData={preloadPartialData}
 						showPlayIcon={showPlayIcon}
+						enableCors={enableCors}
 						showProgressBar={showProgressBar}
 						subtitleSource={subtitleSource}
 						subtitleSize={subtitleSize}

@@ -136,6 +136,7 @@ type Props = {
 	preloadPartialData: boolean;
 	showPlayIcon: boolean;
 	showProgressBar: boolean;
+	enableCors?: boolean;
 	subtitleSource?: string;
 	subtitleSize?: SubtitleSize;
 	controlsPosition: ControlsPosition;
@@ -181,6 +182,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 			preloadPartialData,
 			showPlayIcon,
 			showProgressBar,
+			enableCors = true,
 			subtitleSource,
 			subtitleSize,
 			controlsPosition,
@@ -215,7 +217,7 @@ export const SelfHostedVideoPlayer = forwardRef(
 						videoStyles(aspectRatio, isCinemagraph),
 						showSubtitles && subtitleStyles(subtitleSize),
 					]}
-					crossOrigin="anonymous"
+					crossOrigin={enableCors ? 'anonymous' : undefined}
 					ref={ref}
 					tabIndex={0}
 					data-testid="self-hosted-video-player"
