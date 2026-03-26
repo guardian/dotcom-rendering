@@ -166,72 +166,57 @@ describe('video', () => {
 		];
 
 		it('selects the smaller videos when there are multiple and all are larger than the screen width.', () => {
-			// Arrange
 			const screenWidth = 400;
 
-			// Act
 			const sources = findOptimisedSourcePerMimeType(
 				testSources,
 				screenWidth,
 			);
 
-			// Assert
 			expect(sources).toEqual([mp4Src480w, m3u8Src480w]);
 		});
 
 		it('selects the larger videos when there are two and one is larger than the screen width and one is smaller.', () => {
-			// Arrange
 			const screenWidth = 600;
 
-			// Act
 			const sources = findOptimisedSourcePerMimeType(
 				testSources,
 				screenWidth,
 			);
 
-			// Assert
 			expect(sources).toEqual([mp4Src720h, m3u8Src720h]);
 		});
 
 		it('selects the larger videos when there are multiple and all are smaller than the screen width.', () => {
-			// Arrange
 			const screenWidth = 800;
 
-			// Act
 			const sources = findOptimisedSourcePerMimeType(
 				testSources,
 				screenWidth,
 			);
 
-			// Assert
 			expect(sources).toEqual([mp4Src720h, m3u8Src720h]);
 		});
 
 		it('selects the smaller videos when some are equal to the screen width and others are larger.', () => {
-			// Arrange
 			const screenWidth = 480;
 
-			// Act
 			const sources = findOptimisedSourcePerMimeType(
 				testSources,
 				screenWidth,
 			);
 
-			// Assert
 			expect(sources).toEqual([mp4Src480w, m3u8Src480w]);
 		});
 
 		it('selects the larger videos when some are equal to the screen width and others are smaller.', () => {
-			// Arrange
 			const screenWidth = 720;
 
-			// Act
 			const sources = findOptimisedSourcePerMimeType(
 				testSources,
 				screenWidth,
 			);
 
-			// Assert
 			expect(sources).toEqual([mp4Src720h, m3u8Src720h]);
 		});
 	});
