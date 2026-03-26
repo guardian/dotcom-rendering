@@ -178,33 +178,33 @@ const decideImageWidths = ({
 			return [
 				{
 					breakpoint: breakpoints.mobile,
-					width: 660,
+					width: breakpoints.mobileLandscape,
 					aspectRatio: '5:4',
 				},
 				{
 					breakpoint: breakpoints.mobileLandscape,
-					width: 660,
+					width: breakpoints.phablet,
 					aspectRatio: '5:3',
 				},
 				{
 					breakpoint: breakpoints.phablet,
-					width: 740,
+					width: breakpoints.tablet,
 					aspectRatio: '5:3',
 				},
 				{
 					breakpoint: breakpoints.tablet,
-					width: 980,
+					width: breakpoints.desktop,
 					aspectRatio: '5:3',
 				},
 				{
 					breakpoint: breakpoints.desktop,
-					width: 1140,
+					width: breakpoints.leftCol,
 				},
 				{
 					breakpoint: breakpoints.leftCol,
-					width: 1300,
+					width: breakpoints.wide,
 				},
-				{ breakpoint: breakpoints.wide, width: 1300 },
+				{ breakpoint: breakpoints.wide, width: breakpoints.wide },
 			];
 		}
 		switch (format.display) {
