@@ -32,7 +32,7 @@ type Props = {
 	mediaType?: CardMediaType;
 	mediaPositionOnDesktop: MediaPositionType;
 	mediaPositionOnMobile: MediaPositionType;
-	isBetaContainer: boolean;
+	isFrontContainerOrGallerySecondaryOnward: boolean;
 	isSmallCard: boolean;
 	padMedia?: boolean;
 };
@@ -77,14 +77,14 @@ const flexBasisStyles = ({
 	mediaSize,
 	mediaType,
 	isSmallCard,
-	isBetaContainer,
+	isFrontContainerOrGallerySecondaryOnward,
 }: {
 	mediaSize: MediaSizeType;
 	mediaType: CardMediaType;
 	isSmallCard: boolean;
-	isBetaContainer: boolean;
+	isFrontContainerOrGallerySecondaryOnward: boolean;
 }): SerializedStyles => {
-	if (!isBetaContainer) {
+	if (!isFrontContainerOrGallerySecondaryOnward) {
 		switch (mediaSize) {
 			default:
 			case 'small':
@@ -167,10 +167,10 @@ const fixMediaWidthStyles = (width: number) => css`
 `;
 
 const fixMobileMediaWidth = (
-	isBetaContainer: boolean,
+	isFrontContainerOrGallerySecondaryOnward: boolean,
 	isSmallCard: boolean,
 ) => {
-	if (!isBetaContainer) {
+	if (!isFrontContainerOrGallerySecondaryOnward) {
 		return css`
 			${until.tablet} {
 				${fixMediaWidthStyles(mediaFixedSize.medium)}
@@ -201,7 +201,7 @@ export const MediaWrapper = ({
 	mediaType,
 	mediaPositionOnDesktop,
 	mediaPositionOnMobile,
-	isBetaContainer,
+	isFrontContainerOrGallerySecondaryOnward,
 	isSmallCard,
 	padMedia,
 }: Props) => {
@@ -225,7 +225,7 @@ export const MediaWrapper = ({
 						mediaSize,
 						mediaType,
 						isSmallCard,
-						isBetaContainer,
+						isFrontContainerOrGallerySecondaryOnward,
 					}),
 				mediaType === 'avatar' &&
 					css`
@@ -241,7 +241,10 @@ export const MediaWrapper = ({
 					`,
 				isHorizontalOnMobile &&
 					mediaType !== 'podcast' &&
-					fixMobileMediaWidth(isBetaContainer, isSmallCard),
+					fixMobileMediaWidth(
+						isFrontContainerOrGallerySecondaryOnward,
+						isSmallCard,
+					),
 				isSmallCard && fixDesktopMediaWidth(),
 				isHorizontalOnDesktop &&
 					css`
