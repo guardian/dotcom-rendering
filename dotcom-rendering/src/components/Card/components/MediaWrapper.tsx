@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { getZIndex } from '../../../lib/getZIndex';
 import type { CardMediaType } from '../../../types/layout';
+import type { ArticleMedia } from '../../../types/mainMedia';
 
 const mediaFixedSize = {
 	tiny: 86,
@@ -30,6 +31,7 @@ type Props = {
 	children: React.ReactNode;
 	mediaSize: MediaSizeType;
 	mediaType?: CardMediaType;
+	articleMedia?: ArticleMedia;
 	mediaPositionOnDesktop: MediaPositionType;
 	mediaPositionOnMobile: MediaPositionType;
 	isFrontContainerOrGallerySecondaryOnward: boolean;
@@ -199,6 +201,7 @@ export const MediaWrapper = ({
 	children,
 	mediaSize,
 	mediaType,
+	articleMedia,
 	mediaPositionOnDesktop,
 	mediaPositionOnMobile,
 	isFrontContainerOrGallerySecondaryOnward,
@@ -265,6 +268,14 @@ export const MediaWrapper = ({
 						mediaPositionOnDesktop,
 						mediaPositionOnMobile,
 					),
+				// Edge case: The slideshow carousel buttons and the podcast waveform overlap
+				mediaType === 'slideshow' &&
+					articleMedia?.type === 'Audio' &&
+					css`
+						${from.tablet} {
+							padding-bottom: ${space[10]}px;
+						}
+					`,
 			]}
 		>
 			<>
