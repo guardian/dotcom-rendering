@@ -463,15 +463,7 @@ const sideBorders = css`
 	}
 `;
 
-const topBorder = css`
-	border-top-style: solid;
-`;
-
-const bottomPadding = css`
-	padding-bottom: ${space[9]}px;
-`;
-
-const bottomPaddingFrontContainer = (
+const bottomPadding = (
 	useLargeSpacingMobile: boolean,
 	useLargeSpacingDesktop: boolean,
 ) => css`
@@ -645,7 +637,6 @@ export const FrontSection = ({
 }: Props) => {
 	const isToggleable = toggleable && !!sectionId;
 	const showVerticalRule = !hasPageSkin;
-	const isFrontContainer = containerLevel !== undefined;
 
 	const useLargeSpacingMobile = !!isNextCollectionPrimary || isAboveMobileAd;
 	const useLargeSpacingDesktop =
@@ -684,7 +675,7 @@ export const FrontSection = ({
 					),
 				}}
 			>
-				{isFrontContainer && showTopBorder && (
+				{showTopBorder && (
 					<div
 						css={[
 							containerLevel === 'Primary' &&
@@ -705,13 +696,7 @@ export const FrontSection = ({
 					/>
 				)}
 
-				<div
-					css={[
-						decoration,
-						sideBorders,
-						showTopBorder && !isFrontContainer && topBorder,
-					]}
-				/>
+				<div css={[decoration, sideBorders]} />
 
 				{isLabs ? (
 					<div
@@ -737,7 +722,6 @@ export const FrontSection = ({
 								title?.toLowerCase() === 'opinion',
 							),
 							showVerticalRule &&
-								!isFrontContainer &&
 								sectionHeadlineFromLeftCol(
 									schemePalette('--section-border'),
 								),
@@ -800,9 +784,7 @@ export const FrontSection = ({
 						sectionContentHorizontalMargins,
 						sectionContentRow(toggleable),
 						topPadding,
-						showVerticalRule &&
-							isFrontContainer &&
-							sectionContentBorderFromLeftCol,
+						showVerticalRule && sectionContentBorderFromLeftCol,
 						slimifySectionForSlimHomepageAbTest &&
 							slimHomepageRightBorderStyles,
 					]}
@@ -856,12 +838,10 @@ export const FrontSection = ({
 						sectionBottomContent,
 						slimifySectionForSlimHomepageAbTest &&
 							slimSectionBottomContent,
-						isFrontContainer
-							? bottomPaddingFrontContainer(
-									useLargeSpacingMobile,
-									useLargeSpacingDesktop,
-							  )
-							: bottomPadding,
+						bottomPadding(
+							useLargeSpacingMobile,
+							useLargeSpacingDesktop,
+						),
 					]}
 				>
 					{isString(targetedTerritory) &&
