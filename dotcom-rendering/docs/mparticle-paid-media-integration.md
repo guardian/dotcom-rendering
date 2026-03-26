@@ -248,6 +248,20 @@ The simplest acceptable implementation: use the same cookie-expiry approach as `
 
 The consent framework maps named vendors to IAB TCF vendor IDs via the `VendorIDs` registry in `@guardian/libs`. `getConsentFor` only accepts a `VendorName` — a key of that registry. The current registry does not include `mparticle`, so **before this feature ships, a PR must be raised against the [csnx repo](https://github.com/guardian/csnx)** to add `mparticle` (or whatever the agreed purpose name turns out to be) to `VendorIDs`.
 
+> ⚠️ **This is a runtime throw, not just a TypeScript error.** The `getConsentFor` implementation looks up the vendor in `VendorIDs` at runtime and throws if it is not found:
+>
+> ```js
+> if (typeof sourcepointIds === 'undefined' || sourcepointIds.length === 0) {
+> 	throw new Error(
+> 		`Vendor '${vendor}' not found, or with no Sourcepoint ID…`,
+> 	);
+> }
+> ```
+>
+> The `as VendorName` cast silences the compiler but does not prevent this throw. **The `mparticleConsentSync` switch must not be enabled in any environment until the `csnx` PR is merged, `@guardian/libs` is bumped in DCR, and the mParticle vendor has been added to the Sourcepoint dashboard by Data Privacy.**
+
+The Sourcepoint vendor ID (a string like `"5ed8c49c4b8ce4571c7ad801"`) is assigned when Data Privacy adds mParticle as a vendor in the Sourcepoint dashboard. That ID feeds into the `csnx` PR — both steps must happen together.
+
 For example, the Braze integration uses:
 
 ```ts
