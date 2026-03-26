@@ -12,6 +12,7 @@ import type { ArticleFormat } from '../lib/articleFormat';
 import { getVideoClient } from '../lib/bridgetApi';
 import { getZIndex } from '../lib/getZIndex';
 import { generateImageURL } from '../lib/image';
+import { hasMinimumBridgetVersion } from '../lib/useIsBridgetCompatible';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
 import { useShouldAdapt } from '../lib/useShouldAdapt';
@@ -287,8 +288,24 @@ const doesUserPermitAutoplayOnWeb = (): boolean => {
 };
 
 const doesUserPermitAutoplayOnApps = async (): Promise<boolean> => {
-	const videoClient = getVideoClient();
-	return videoClient.isAutoplayEnabled();
+	/* isAutoplayEnabled is available on the video client from 8.8.0 onwards */
+	const isBridgetCompatible = await hasMinimumBridgetVersion('8.8.0');
+
+	if (!isBridgetCompatible) return true;
+
+	try {
+		const videoClient = getVideoClient();
+		return await videoClient.isAutoplayEnabled();
+	} catch (error) {
+		if (error instanceof Error) {
+			window.guardian.modules.sentry.reportError(
+				error,
+				'self-hosted-video',
+			);
+		}
+		log('dotcom', 'Failed to set app autoplay user preference:', error);
+		return true;
+	}
 };
 
 export const SelfHostedVideo = ({
