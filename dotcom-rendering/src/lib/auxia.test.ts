@@ -83,6 +83,61 @@ describe('ensureValidCtaUrl', () => {
 		});
 	});
 
+	describe('CRITICAL: Protocol bypass vulnerabilities', () => {
+		it('should reject ftp:// URLs (SECURITY VULNERABILITY: currently fails hostname check)', () => {
+			// This test exposes a critical security vulnerability
+			// ftp://www.theguardian.com becomes https://ftp//www.theguardian.com
+			// hostname becomes 'ftp' instead of 'www.theguardian.com'
+			expect(
+				ensureValidCtaUrl('ftp://www.theguardian.com'),
+			).toBeUndefined();
+		});
+
+		it('should reject ftp:// URLs with subdomains (SECURITY VULNERABILITY)', () => {
+			expect(
+				ensureValidCtaUrl('ftp://code.theguardian.com'),
+			).toBeUndefined();
+		});
+
+		it('should reject javascript:// URLs (SECURITY VULNERABILITY: currently fails hostname check)', () => {
+			// javascript://www.theguardian.com becomes https://javascript//www.theguardian.com
+			// hostname becomes 'javascript' instead of 'www.theguardian.com'
+			expect(
+				ensureValidCtaUrl('javascript://www.theguardian.com'),
+			).toBeUndefined();
+		});
+
+		it('should reject data:// URLs (SECURITY VULNERABILITY: currently fails hostname check)', () => {
+			// data://www.theguardian.com becomes https://data//www.theguardian.com
+			// hostname becomes 'data' instead of 'www.theguardian.com'
+			expect(
+				ensureValidCtaUrl('data://www.theguardian.com'),
+			).toBeUndefined();
+		});
+
+		it('should reject file:// URLs (SECURITY VULNERABILITY: currently fails hostname check)', () => {
+			// file://www.theguardian.com becomes https://file//www.theguardian.com
+			// hostname becomes 'file' instead of 'www.theguardian.com'
+			expect(
+				ensureValidCtaUrl('file://www.theguardian.com'),
+			).toBeUndefined();
+		});
+
+		it('should reject malicious protocol injection with Guardian domain', () => {
+			// Attacker tries to inject protocol but include Guardian domain
+			expect(
+				ensureValidCtaUrl('evil://www.theguardian.com'),
+			).toBeUndefined();
+		});
+
+		it('should reject protocol injection with path traversal', () => {
+			// Attacker tries to use protocol to bypass domain checks
+			expect(
+				ensureValidCtaUrl('ftp://theguardian.com@evil.com'),
+			).toBeUndefined();
+		});
+	});
+
 	describe('Invalid protocols - should return undefined', () => {
 		it('should reject ftp:// URLs', () => {
 			expect(ensureValidCtaUrl('ftp://theguardian.com')).toBeUndefined();

@@ -21,6 +21,13 @@ export const ensureValidCtaUrl = (rawUrl: string): string | undefined => {
 	}
 
 	try {
+		// SECURITY: First check for malicious protocols BEFORE any transformation
+		// This prevents protocol bypass attacks like ftp:// → https://ftp//
+		// Note: http:// is allowed here because it gets converted to https:// below
+		if (/^(ftp|javascript|data|file|mailto|tel):/i.test(rawUrl)) {
+			return undefined;
+		}
+
 		// If it looks like a bare domain (no protocol), prepend https://
 		// If it starts with http://, replace with https://
 		let urlString: string;
@@ -34,7 +41,7 @@ export const ensureValidCtaUrl = (rawUrl: string): string | undefined => {
 
 		const parsed = new URL(urlString);
 
-		// Only allow https (block javascript:, data:, etc.)
+		// Double-check protocol (should always be https: at this point)
 		if (parsed.protocol !== 'https:') {
 			return undefined;
 		}
