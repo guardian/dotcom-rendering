@@ -11,6 +11,8 @@ import {
 	textSansBold17Object,
 	until,
 } from '@guardian/source/foundations';
+import { SvgNotificationsOn } from '@guardian/source/react-components';
+import { ToggleSwitch } from '@guardian/source-development-kitchen/react-components';
 import { type ReactNode, useMemo } from 'react';
 import { grid } from '../../grid';
 import {
@@ -29,15 +31,14 @@ import {
 	secondaryText,
 } from '../FootballMatchHeader/colours';
 
-type CricketTeam = {
-	name: string;
-	paID: string;
-};
-
 type Inning = {
-	runs: number;
-	overs?: string;
-	fallOfWicket?: number;
+	order: number;
+	battingTeam: string;
+	runsScored: number;
+	overs: string;
+	declared: boolean;
+	forfeited: boolean;
+	fallOfWicket: { order: number }[];
 };
 
 type CricketMatch = {
@@ -47,17 +48,15 @@ type CricketMatch = {
 	venue: string;
 	day?: number;
 	matchDate: Date;
-	homeTeam: CricketTeam;
-	awayTeam: CricketTeam;
-	innings: {
-		homeTeam?: Inning;
-		awayTeam?: Inning;
-	};
+	homeTeam: string;
+	awayTeam: string;
+	innings: Inning[];
 };
 
 type Props = {
 	edition: EditionId;
 	match: CricketMatch;
+	isApp?: boolean;
 };
 
 export const CricketMatchHeader = (props: Props) => {
@@ -88,6 +87,46 @@ export const CricketMatchHeader = (props: Props) => {
 				<Teams match={match} />
 				<Hr borderStyle="solid" borderColour={border(match.kind)} />
 			</div>
+			{props.isApp && match.kind !== 'Result' && (
+				<div
+					css={{
+						paddingLeft: space[4],
+						paddingRight: space[4],
+						paddingTop: space[2],
+						paddingBottom: space[2],
+					}}
+				>
+					<div css={{ ...textSans14Object }}>
+						Be notified about start times, wickets, run outs, alien
+						invasions and final scores
+					</div>
+					<div
+						css={{
+							...textSans15Object,
+							display: 'flex',
+							alignItems: 'center',
+							gap: space[1],
+							paddingTop: space[2],
+							paddingBottom: space[2],
+						}}
+					>
+						<SvgNotificationsOn
+							theme={{
+								fill:
+									match.kind === 'Fixture'
+										? '#ffffff'
+										: '#000000',
+							}}
+							size="small"
+						/>{' '}
+						Get match notifications
+						<span css={{ marginLeft: 'auto' }}>
+							{/* TODO: Wire toggle up for app notifications */}
+							<ToggleSwitch />
+						</span>
+					</div>
+				</div>
+			)}
 		</section>
 	);
 };
@@ -231,17 +270,26 @@ const Teams = (props: { match: CricketMatch }) => (
 			},
 		}}
 	>
-		<Team team="homeTeam" match={props.match} />
-		<Team team="awayTeam" match={props.match} />
+		<Team team={props.match.homeTeam} match={props.match} />
+		<Team team={props.match.awayTeam} match={props.match} />
 	</div>
 );
 
-const Team = (props: {
-	team: 'homeTeam' | 'awayTeam';
-	match: CricketMatch;
-}) => {
-	const team = props.match[props.team];
-	const innings = props.match.innings[props.team];
+const Team = (props: { team: string; match: CricketMatch }) => {
+	const innings = props.match.innings.filter(
+		(inning) => inning.battingTeam === props.team,
+	);
+	{
+		/* TODO: Calculate if team won and margin/nature of victory */
+	}
+	const teamIsWinner = Math.random() < 0.5 && props.match.kind === 'Result';
+	const marginOfVictory: {
+		number: number;
+		unit: 'runs' | 'wickets';
+	} = {
+		number: 4,
+		unit: 'runs',
+	};
 
 	return (
 		<div
@@ -263,7 +311,7 @@ const Team = (props: {
 				borderLeftColor: palette(border(props.match.kind)),
 			}}
 		>
-			<TeamName name={team.name} />
+			<TeamName name={props.team} />
 			<span
 				css={{
 					display: 'flex',
@@ -271,31 +319,46 @@ const Team = (props: {
 					isolation: 'isolate',
 				}}
 			>
-				<Crest name={team.name} paID={team.paID} />
+				<Crest name={props.team} paID={props.team} />
 			</span>
 			{props.match.kind !== 'Fixture' &&
-				(innings ? (
-					<>
-						<Score
-							runs={innings.runs}
-							fallOfWicket={innings.fallOfWicket}
-							matchKind={props.match.kind}
-						/>
-						{!!innings.overs && (
-							<span
-								css={{
-									...textSans12Object,
-									display: 'inline-block',
-									marginTop: space[2],
-									padding: `0 ${space[1]}px 1px ${space[1]}px`,
-									border: '1px solid',
-									borderRadius: 30,
-								}}
-							>
-								{innings.overs} overs
-							</span>
-						)}
-					</>
+				(innings.length > 0 ? (
+					innings.map((inning) => (
+						<>
+							<Score
+								runs={inning.runsScored}
+								fallOfWicket={inning.fallOfWicket}
+								matchKind={props.match.kind}
+							/>
+							{!!inning.overs &&
+								props.match.kind !== 'Result' && (
+									<>
+										<span
+											css={{
+												...textSans14Object,
+												marginRight: space[1],
+											}}
+										>
+											{inning.fallOfWicket.length === 10
+												? 'All out'
+												: ''}
+										</span>
+										<span
+											css={{
+												...textSans12Object,
+												display: 'inline-block',
+												marginTop: space[2],
+												padding: `0 ${space[1]}px 1px ${space[1]}px`,
+												border: '1px solid',
+												borderRadius: 30,
+											}}
+										>
+											{inning.overs} overs
+										</span>
+									</>
+								)}
+						</>
+					))
 				) : (
 					<span
 						css={{
@@ -307,6 +370,19 @@ const Team = (props: {
 						Yet to bat
 					</span>
 				))}
+			{teamIsWinner && (
+				<div
+					css={{
+						...textSans14Object,
+						paddingTop: space[2],
+					}}
+				>
+					Won by{' '}
+					<span css={{ ...textSansBold14Object }}>
+						{marginOfVictory.number} {marginOfVictory.unit}
+					</span>
+				</div>
+			)}
 		</div>
 	);
 };
@@ -356,7 +432,9 @@ const Crest = (props: { name: string; paID: string }) => (
  */
 const Score = (props: {
 	runs: number;
-	fallOfWicket?: number;
+	fallOfWicket?: {
+		order: number;
+	}[];
 	matchKind: CricketMatch['kind'];
 }) => (
 	<span
@@ -393,7 +471,7 @@ const Score = (props: {
 						backgroundColor: palette(primaryText(props.matchKind)),
 					}}
 				></span>
-				<ScoreNumber score={props.fallOfWicket} />
+				<ScoreNumber score={props.fallOfWicket.length} />
 			</>
 		) : null}
 	</span>
