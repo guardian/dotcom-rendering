@@ -140,10 +140,7 @@ const decideImageWidths = ({
 	if (isMainMedia) {
 		if (
 			format.display === ArticleDisplay.Immersive ||
-			format.design === ArticleDesign.Gallery ||
-			format.design === ArticleDesign.HostedArticle ||
-			format.design === ArticleDesign.HostedVideo ||
-			format.design === ArticleDesign.HostedGallery
+			format.design === ArticleDesign.Gallery
 		) {
 			// If display is Immersive then main media should *always*
 			// use these larger image sources
@@ -167,6 +164,47 @@ const decideImageWidths = ({
 					width: 1300,
 				},
 				{ breakpoint: breakpoints.wide, width: 1900 },
+			];
+		}
+		/**
+		 * We allow larger images for Hosted Content pages due to
+		 * the design of these being wider
+		 */
+		if (
+			format.design === ArticleDesign.HostedArticle ||
+			format.design === ArticleDesign.HostedVideo ||
+			format.design === ArticleDesign.HostedGallery
+		) {
+			return [
+				{
+					breakpoint: breakpoints.mobile,
+					width: 660,
+					aspectRatio: '5:4',
+				},
+				{
+					breakpoint: breakpoints.mobileLandscape,
+					width: 660,
+					aspectRatio: '5:3',
+				},
+				{
+					breakpoint: breakpoints.phablet,
+					width: 740,
+					aspectRatio: '5:3',
+				},
+				{
+					breakpoint: breakpoints.tablet,
+					width: 980,
+					aspectRatio: '5:3',
+				},
+				{
+					breakpoint: breakpoints.desktop,
+					width: 1140,
+				},
+				{
+					breakpoint: breakpoints.leftCol,
+					width: 1300,
+				},
+				{ breakpoint: breakpoints.wide, width: 1300 },
 			];
 		}
 		switch (format.display) {
