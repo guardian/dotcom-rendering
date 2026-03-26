@@ -4,6 +4,7 @@ import {
 	convertFEMediaAssetsToVideoAssets,
 	extractValidSourcesFromAssets,
 	findOptimisedSourcePerMimeType,
+	getAspectRatioFromSources,
 } from './video';
 import type { Source } from './video';
 
@@ -154,6 +155,48 @@ describe('video', () => {
 
 		it('should return an empty array when given an empty array', () => {
 			expect(convertFEMediaAssetsToVideoAssets([])).toEqual([]);
+		});
+	});
+
+	describe('getAspectRatioFromSources', () => {
+		it('should return the aspect ratio from the first source if it is defined', () => {
+			const testSource: Source = {
+				...mp4Src480w,
+				height: 720,
+				width: 480,
+				aspectRatio: '5:3',
+			};
+			expect(getAspectRatioFromSources([testSource])).toEqual(5 / 3);
+		});
+
+		it('should calculate the aspect ratio from the width and height if aspect ratio is missing', () => {
+			const testSource: Source = {
+				...mp4Src480w,
+				height: 720,
+				width: 480,
+				aspectRatio: undefined,
+			};
+			expect(getAspectRatioFromSources([testSource])).toEqual(2 / 3);
+		});
+
+		it('should return the default aspect ratio if the aspect ratio is undefined and width is 0', () => {
+			const testSource: Source = {
+				...mp4Src480w,
+				height: 720,
+				width: 0,
+				aspectRatio: undefined,
+			};
+			expect(getAspectRatioFromSources([testSource])).toEqual(5 / 4);
+		});
+
+		it('should return the default aspect ratio if the aspect ratio is undefined and height is 0', () => {
+			const testSource: Source = {
+				...mp4Src480w,
+				height: 0,
+				width: 480,
+				aspectRatio: undefined,
+			};
+			expect(getAspectRatioFromSources([testSource])).toEqual(5 / 4);
 		});
 	});
 

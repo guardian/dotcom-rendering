@@ -79,6 +79,19 @@ export const convertFEMediaAssetsToVideoAssets = (
  */
 export const getAspectRatioFromSources = (sources: Source[]): number => {
 	const firstSource = sources[0];
+
+	if (firstSource?.aspectRatio !== undefined) {
+		const [width, height] = firstSource.aspectRatio.split(':').map(Number);
+		if (
+			width !== undefined &&
+			height !== undefined &&
+			width > 0 &&
+			height > 0
+		) {
+			return width / height;
+		}
+	}
+
 	if (!firstSource || firstSource.width === 0 || firstSource.height === 0) {
 		return DEFAULT_ASPECT_RATIO;
 	}
