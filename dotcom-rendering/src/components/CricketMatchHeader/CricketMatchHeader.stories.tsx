@@ -18,15 +18,9 @@ export const Fixture = {
 			competition: 'Second Test Match',
 			venue: 'Brisbane Cricket Ground',
 			matchDate: new Date('2026-01-26'),
-			homeTeam: {
-				name: 'Australia',
-				paID: '44',
-			},
-			awayTeam: {
-				name: 'England',
-				paID: '997',
-			},
-			innings: {},
+			homeTeam: 'Australia',
+			awayTeam: 'England',
+			innings: [],
 		},
 	},
 } satisfies Story;
@@ -38,18 +32,26 @@ export const Live = {
 			...Fixture.args.match,
 			kind: 'Live',
 			day: 2,
-			innings: {
-				homeTeam: {
-					runs: 169,
+			innings: [
+				{
+					order: 1,
+					declared: false,
+					forfeited: false,
+					battingTeam: 'home',
+					runsScored: 169,
 					overs: '20.0',
-					fallOfWicket: 8,
+					fallOfWicket: [],
 				},
-				awayTeam: {
-					runs: 173,
+				{
+					order: 2,
+					declared: false,
+					forfeited: false,
+					battingTeam: 'away',
+					runsScored: 173,
 					overs: '19.3',
-					fallOfWicket: 5,
+					fallOfWicket: [],
 				},
-			},
+			],
 		},
 	},
 } satisfies Story;
