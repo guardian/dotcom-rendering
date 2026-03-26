@@ -462,9 +462,14 @@ const Scorers = (props: { scorers: string[] }) =>
 	);
 
 const Comment = (props: { match: FootballMatch }) => {
-	if (props.match.kind === 'Fixture' || props.match.comment === undefined) {
+	if (props.match.kind === 'Fixture') {
 		return null;
 	}
+
+	if (props.match.comment === undefined || props.match.comment === '') {
+		return null;
+	}
+
 	return (
 		<div
 			css={{
