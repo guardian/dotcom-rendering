@@ -12,7 +12,7 @@ import {
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import { FrontSection } from './FrontSection';
-import { ScrollableFeature } from './ScrollableFeature.importable';
+import { ScrollableFeature } from './ScrollableFeature.island';
 
 const imageUrls = [
 	'https://media.guim.co.uk/2d214bdf3ed8e014360e8fde41b471973e4bad44/948_2222_2703_3378/800.jpg',

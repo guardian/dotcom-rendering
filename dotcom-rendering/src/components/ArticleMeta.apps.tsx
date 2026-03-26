@@ -24,14 +24,14 @@ import {
 	shouldShowContributor,
 } from './ArticleMeta.web';
 import { Avatar } from './Avatar';
-import { Branding } from './Branding.importable';
-import { CommentCount } from './CommentCount.importable';
+import { Branding } from './Branding.island';
+import { CommentCount } from './CommentCount.island';
 import { Contributor } from './Contributor';
 import { Dateline } from './Dateline';
-import { FollowWrapper } from './FollowWrapper.importable';
+import { FollowWrapper } from './FollowWrapper.island';
 import { Island } from './Island';
-import { ListenToArticle } from './ListenToArticle.importable';
-import { LiveblogNotifications } from './LiveblogNotifications.importable';
+import { ListenToArticle } from './ListenToArticle.island';
+import { LiveblogNotifications } from './LiveblogNotifications.island';
 import { PodcastMeta } from './PodcastMeta';
 
 type Props = {

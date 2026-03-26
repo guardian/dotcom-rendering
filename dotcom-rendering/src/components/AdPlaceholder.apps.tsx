@@ -12,7 +12,7 @@ const rightAdsStyles = css`
 
 /**
  * A server-side ad placeholder for apps, into which ads are inserted
- * client-side. See `AdPortals.importable.tsx` for more details.
+ * client-side. See `AdPortals.island.tsx` for more details.
  */
 const RightAdsPlaceholder = () => (
 	<div className={rightAdsPlaceholderClass} css={rightAdsStyles}></div>
@@ -20,7 +20,7 @@ const RightAdsPlaceholder = () => (
 
 /**
  * A server-side ad placeholder for apps, into which ads are inserted
- * client-side. See `AdPortals.importable.tsx` for more details.
+ * client-side. See `AdPortals.island.tsx` for more details.
  */
 const AdPlaceholder = () => <div className={adPlaceholderClass} />;
 

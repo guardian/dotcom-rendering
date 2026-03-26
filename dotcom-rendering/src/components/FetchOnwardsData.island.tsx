@@ -17,7 +17,7 @@ import { palette } from '../palette';
 import type { OnwardsSource } from '../types/onwards';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { FETrailType, TrailType } from '../types/trails';
-import { Carousel } from './Carousel.importable';
+import { Carousel } from './Carousel.island';
 import { Placeholder } from './Placeholder';
 import { ScrollableSmallOnwards } from './ScrollableSmallOnwards';
 

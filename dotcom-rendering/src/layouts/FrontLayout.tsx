@@ -9,7 +9,7 @@ import { AdSlot } from '../components/AdSlot.web';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
 import { DirectoryPageNav } from '../components/DirectoryPageNav';
-import { EditionSwitcherBanner } from '../components/EditionSwitcherBanner.importable';
+import { EditionSwitcherBanner } from '../components/EditionSwitcherBanner.island';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
 import {
@@ -26,8 +26,8 @@ import { Masthead } from '../components/Masthead/Masthead';
 import { Section } from '../components/Section';
 import { Snap } from '../components/Snap';
 import { SnapCssSandbox } from '../components/SnapCssSandbox';
-import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
-import { SubNav } from '../components/SubNav.importable';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
+import { SubNav } from '../components/SubNav.island';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { ArticleDisplay } from '../lib/articleFormat';
 import { canRenderAds } from '../lib/canRenderAds';
@@ -99,7 +99,7 @@ const isToggleable = (
 		);
 	}
 
-	return index != 0 && !isNavList(collection) && !isLabs(collection);
+	return index !== 0 && !isNavList(collection) && !isLabs(collection);
 };
 
 const decideLeftContent = (front: Front, collection: DCRCollectionType) => {

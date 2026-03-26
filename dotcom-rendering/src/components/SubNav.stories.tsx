@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { navInternational } from '../../fixtures/manual/nav-international';
 import { navWorld } from '../../fixtures/manual/nav-world';
 import { extractNAV } from '../model/extract-nav';
-import { SubNav as SubNavComponent } from './SubNav.importable';
+import { SubNav as SubNavComponent } from './SubNav.island';
 
 const meta = {
 	component: SubNavComponent,

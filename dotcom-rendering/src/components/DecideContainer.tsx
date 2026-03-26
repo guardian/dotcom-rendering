@@ -11,10 +11,10 @@ import { FlexibleGeneral } from './FlexibleGeneral';
 import { FlexibleSpecial } from './FlexibleSpecial';
 import { Island } from './Island';
 import { NavList } from './NavList';
-import { ScrollableFeature } from './ScrollableFeature.importable';
-import { ScrollableHighlights } from './ScrollableHighlights.importable';
-import { ScrollableMedium } from './ScrollableMedium.importable';
-import { ScrollableSmall } from './ScrollableSmall.importable';
+import { ScrollableFeature } from './ScrollableFeature.island';
+import { ScrollableHighlights } from './ScrollableHighlights.island';
+import { ScrollableMedium } from './ScrollableMedium.island';
+import { ScrollableSmall } from './ScrollableSmall.island';
 import { StaticFeatureTwo } from './StaticFeatureTwo';
 import { StaticMediumFour } from './StaticMediumFour';
 
@@ -164,6 +164,6 @@ export const DecideContainer = ({
 				/>
 			);
 		default:
-			return <p>{containerType} is not yet supported</p>;
+			return null;
 	}
 };

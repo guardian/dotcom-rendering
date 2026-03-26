@@ -21,18 +21,18 @@ import type {
 	VineBlockElement,
 } from '../types/content';
 import { ClickToView } from './ClickToView';
-import { DocumentBlockComponent } from './DocumentBlockComponent.importable';
-import { EmbedBlockComponent } from './EmbedBlockComponent.importable';
+import { DocumentBlockComponent } from './DocumentBlockComponent.island';
+import { EmbedBlockComponent } from './EmbedBlockComponent.island';
 import { Figure } from './Figure';
-import { InstagramBlockComponent } from './InstagramBlockComponent.importable';
-import { MapEmbedBlockComponent } from './MapEmbedBlockComponent.importable';
+import { InstagramBlockComponent } from './InstagramBlockComponent.island';
+import { MapEmbedBlockComponent } from './MapEmbedBlockComponent.island';
 import { Section } from './Section';
 import { SoundcloudBlockComponent } from './SoundcloudBlockComponent';
-import { SpotifyBlockComponent } from './SpotifyBlockComponent.importable';
-import { TweetBlockComponent } from './TweetBlockComponent.importable';
-import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent.importable';
+import { SpotifyBlockComponent } from './SpotifyBlockComponent.island';
+import { TweetBlockComponent } from './TweetBlockComponent.island';
+import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent.island';
 import { VimeoBlockComponent } from './VimeoBlockComponent';
-import { VineBlockComponent } from './VineBlockComponent.importable';
+import { VineBlockComponent } from './VineBlockComponent.island';
 
 export default {
 	component: ClickToView,

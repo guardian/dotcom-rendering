@@ -4,7 +4,7 @@ import { textSans15, textSansBold15 } from '@guardian/source/foundations';
 import { ArticleDesign, type ArticleFormat } from '../lib/articleFormat';
 import { palette } from '../palette';
 import { Island } from './Island';
-import { PulsingDot } from './PulsingDot.importable';
+import { PulsingDot } from './PulsingDot.island';
 
 const lastUpdatedStyles = css`
 	${textSans15}
