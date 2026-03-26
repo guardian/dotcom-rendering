@@ -44,16 +44,17 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "commercial-enable-spacefinder-on-interactives",
-		description: "Enable spacefinder on interactive articles on mobile web",
+		name: "commercial-holdback-spacefinder-on-interactives",
+		description:
+			"Holdback proportion of the audience without new spacefinder logic on interactive pages",
 		owners: ["commercial.dev@guardian.co.uk"],
 		expirationDate: "2026-04-09",
 		type: "client",
 		status: "ON",
-		audienceSize: 0 / 100,
+		audienceSize: 10 / 100,
 		audienceSpace: "A",
-		groups: ["true"],
-		shouldForceMetricsCollection: false,
+		groups: ["control", "holdback"],
+		shouldForceMetricsCollection: true,
 	},
 	{
 		name: "commercial-mobile-inline1-halfpage",
