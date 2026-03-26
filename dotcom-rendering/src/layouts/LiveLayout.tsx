@@ -385,6 +385,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							>
 								<FootballMatchHeaderWrapper
 									initialTab="live"
+									leagueName={article.sectionLabel}
+									leagueURL={`${article.guardianBaseURL}/${article.sectionUrl}`}
 									edition={article.editionId}
 									matchHeaderURL={footballMatchHeaderUrl}
 									renderingTarget={renderingTarget}

@@ -433,6 +433,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 			<MatchHeaderContainer
 				isMatchReport={isMatchReport}
 				footballMatchHeaderUrl={footballMatchHeaderUrl}
+				leagueName={article.sectionLabel}
+				leagueUrl={`${article.guardianBaseURL}/${article.sectionUrl}`}
 				editionId={editionId}
 				renderingTarget={renderingTarget}
 			/>
@@ -1052,11 +1054,15 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 const MatchHeaderContainer = ({
 	isMatchReport,
 	footballMatchHeaderUrl,
+	leagueName,
+	leagueUrl,
 	editionId,
 	renderingTarget,
 }: {
 	isMatchReport: boolean;
 	footballMatchHeaderUrl: string | undefined;
+	leagueName: string;
+	leagueUrl: string;
 	editionId: EditionId;
 	renderingTarget: RenderingTarget;
 }) => {
@@ -1076,6 +1082,8 @@ const MatchHeaderContainer = ({
 			<Island priority="feature" defer={{ until: 'visible' }}>
 				<FootballMatchHeaderWrapper
 					initialTab="report"
+					leagueName={leagueName}
+					leagueURL={leagueUrl}
 					edition={editionId}
 					matchHeaderURL={footballMatchHeaderUrl}
 					renderingTarget={renderingTarget}

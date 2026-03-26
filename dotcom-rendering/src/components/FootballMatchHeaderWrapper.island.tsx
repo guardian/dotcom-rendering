@@ -16,6 +16,8 @@ export const FootballMatchHeaderWrapper = (props: Props) => (
 	<FootballMatchHeader
 		initialTab={props.initialTab}
 		initialData={props.initialData}
+		leagueName={props.leagueName}
+		leagueURL={props.leagueURL}
 		edition={props.edition}
 		matchHeaderURL={props.matchHeaderURL}
 		article={props.article}
