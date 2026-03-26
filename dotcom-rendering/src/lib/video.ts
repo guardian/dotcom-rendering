@@ -42,23 +42,23 @@ export const extractValidSourcesFromAssets = (
 	 * Ensure sources are ordered by the order that MIME types are specified in
 	 * `supportedVideoFileTypes` as the browser picks the first one that it supports.
 	 */
-	supportedVideoFileTypes
-		.reduce<typeof assets>((acc, type) => {
-			const sourcesByType = assets.filter(
-				({ mimeType }) => mimeType === type,
+	supportedVideoFileTypes.reduce<Source[]>((acc, type) => {
+		const sourcesByType = assets.filter(
+			({ mimeType }) => mimeType === type,
+		);
+		if (sourcesByType.length) {
+			acc.push(
+				...sourcesByType.map((asset) => ({
+					src: asset.url,
+					mimeType: asset.mimeType as Source['mimeType'],
+					height: asset.dimensions?.height ?? 0,
+					width: asset.dimensions?.width ?? 0,
+					aspectRatio: asset.aspectRatio,
+				})),
 			);
-			if (sourcesByType.length) {
-				acc.push(...sourcesByType);
-			}
-			return acc;
-		}, [])
-		.map((asset) => ({
-			src: asset.url,
-			mimeType: asset.mimeType as Source['mimeType'],
-			height: asset.dimensions?.height ?? 0,
-			width: asset.dimensions?.width ?? 0,
-			aspectRatio: asset.aspectRatio,
-		}));
+		}
+		return acc;
+	}, []);
 
 export const convertFEMediaAssetsToVideoAssets = (
 	assets: FEMediaAsset[],
