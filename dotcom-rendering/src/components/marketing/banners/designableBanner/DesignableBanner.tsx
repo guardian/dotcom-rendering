@@ -888,16 +888,23 @@ const styles = {
 	bannerVisualContainer: css`
 		grid-area: main-image;
 
-		margin-left: ${space[2]}px;
-		margin-right: ${space[2]}px;
+		margin: 0;
+		padding: 0;
+
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
 
 		${from.phablet} {
 			max-width: ${phabletContentMaxWidth};
 			justify-self: center;
 		}
+		${from.tablet} {
+			height: 100%;
+			width: 100%;
+		}
 		${from.desktop} {
-			margin-top: ${space[6]}px;
-			padding-left: ${space[2]}px;
 			justify-self: end;
 		}
 		${between.desktop.and.wide} {
