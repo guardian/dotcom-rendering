@@ -3,7 +3,7 @@ import { mocked } from 'storybook/test';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useNewsletterSubscription } from '../lib/useNewsletterSubscription';
-import { EmailSignUpWrapper } from './EmailSignUpWrapper.importable';
+import { EmailSignUpWrapper } from './EmailSignUpWrapper.island';
 
 const meta: Meta<typeof EmailSignUpWrapper> = {
 	title: 'Components/EmailSignUpWrapper',

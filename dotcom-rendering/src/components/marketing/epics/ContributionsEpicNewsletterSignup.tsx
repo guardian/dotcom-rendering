@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
 import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/types/props/shared';
 import { NewsletterPrivacyMessage } from '../../NewsletterPrivacyMessage';
-import { SecureSignup } from '../../SecureSignup.importable';
+import { SecureSignup } from '../../SecureSignup.island';
 
 const containerStyles = css`
 	margin: ${space[6]}px ${space[2]}px ${space[1]}px 0;

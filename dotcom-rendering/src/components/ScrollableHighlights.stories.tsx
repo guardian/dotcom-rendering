@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { defaultCard, trails } from '../../fixtures/manual/highlights-trails';
-import { ScrollableHighlights } from './ScrollableHighlights.importable';
+import { ScrollableHighlights } from './ScrollableHighlights.island';
 import { Section } from './Section';
 
 const meta: Meta<typeof ScrollableHighlights> = {

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { userEvent, within } from 'storybook/test';
-import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
+import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.island';
 
 const meta = {
 	component: AustralianTerritorySwitcher,

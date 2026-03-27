@@ -5,7 +5,7 @@ import { useEditionSwitcherBanner } from '../lib/useEditionSwitcherBanner';
 import type { SubNavType } from '../model/extract-nav';
 import { palette } from '../palette';
 import { Section } from './Section';
-import { SubNav } from './SubNav.importable';
+import { SubNav } from './SubNav.island';
 
 type Props = {
 	subNavSections: SubNavType;

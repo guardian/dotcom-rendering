@@ -10,7 +10,7 @@ import { palette } from '../palette';
 import type { PodcastSeriesImage } from '../types/tag';
 import { CardPicture } from './CardPicture';
 import { Island } from './Island';
-import { PulsingDot } from './PulsingDot.importable';
+import { PulsingDot } from './PulsingDot.island';
 
 type Props = {
 	text: string;

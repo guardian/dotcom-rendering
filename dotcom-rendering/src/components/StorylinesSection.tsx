@@ -249,7 +249,7 @@ const sectionPagination = css`
 	}
 `;
 
-const bottomPaddingBetaContainer = css`
+const bottomPadding = css`
 	padding-bottom: ${space[10]}px;
 `;
 
@@ -503,7 +503,7 @@ export const StorylinesSection = ({
 							css={[
 								sectionContentHorizontalMargins,
 								sectionPagination,
-								bottomPaddingBetaContainer,
+								bottomPadding,
 							]}
 						>
 							<FrontPagination

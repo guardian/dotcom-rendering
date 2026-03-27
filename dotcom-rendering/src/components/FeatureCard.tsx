@@ -42,11 +42,11 @@ import { FeatureCardCommentCount } from './FeatureCardCommentCount';
 import { FormatBoundary } from './FormatBoundary';
 import { Island } from './Island';
 import { Pill } from './Pill';
-import { SelfHostedVideo } from './SelfHostedVideo.importable';
+import { SelfHostedVideo } from './SelfHostedVideo.island';
 import { StarRating } from './StarRating/StarRating';
 import { SupportingContent } from './SupportingContent';
 import { WaveForm } from './WaveForm';
-import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
+import { YoutubeBlockComponent } from './YoutubeBlockComponent.island';
 
 const baseCardStyles = css`
 	display: flex;

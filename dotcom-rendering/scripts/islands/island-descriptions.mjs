@@ -73,7 +73,7 @@ const getIslands = async (report) => {
 	const components = await readdir(componentsDirectory);
 
 	const filenames = components.filter((component) =>
-		component.endsWith('.importable.tsx'),
+		component.endsWith('.island.tsx'),
 	);
 
 	const files = await Promise.all(
@@ -88,10 +88,10 @@ const getIslands = async (report) => {
 
 	const islandsData = await Promise.all(
 		files.map(async ({ filename, content }) => {
-			const name = filename.replace('.importable.tsx', '');
+			const name = filename.replace('.island.tsx', '');
 			const { gzipSize = 0, parsedSize = 0 } =
 				report.find(({ label }) =>
-					label.startsWith(name + '-importable.'),
+					label.startsWith(name + '-island.'),
 				) ?? {};
 
 			const matched = content.match(getRegExForIsland(name));

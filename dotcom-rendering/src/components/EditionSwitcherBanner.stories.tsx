@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { EditionSwitcherBanner as EditionSwitcherBannerComponent } from './EditionSwitcherBanner.importable';
+import { EditionSwitcherBanner as EditionSwitcherBannerComponent } from './EditionSwitcherBanner.island';
 
 const meta = {
 	title: 'Components/EditionSwitcherBanner',

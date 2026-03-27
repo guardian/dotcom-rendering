@@ -2,7 +2,7 @@ import { palette as sourcePalette } from '@guardian/source/foundations';
 import { Footer } from '../components/Footer';
 import { GroupedNewslettersList } from '../components/GroupedNewsletterList';
 import { Island } from '../components/Island';
-import { ManyNewsletterSignUp } from '../components/ManyNewsletterSignUp.importable';
+import { ManyNewsletterSignUp } from '../components/ManyNewsletterSignUp.island';
 import { Masthead } from '../components/Masthead/Masthead';
 import { NewslettersPageHeading } from '../components/NewsletterPageHeading';
 import { Section } from '../components/Section';

@@ -1,6 +1,6 @@
 import { space } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { CardCommentCount as CardCommentCountComponent } from './CardCommentCount.importable';
+import { CardCommentCount as CardCommentCountComponent } from './CardCommentCount.island';
 
 const meta = {
 	component: CardCommentCountComponent,

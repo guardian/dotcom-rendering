@@ -18,8 +18,8 @@ import type { Branding as BrandingType } from '../types/branding';
 import type { FEElement } from '../types/content';
 import type { Podcast, TagType } from '../types/tag';
 import { Avatar } from './Avatar';
-import { Branding } from './Branding.importable';
-import { CommentCount } from './CommentCount.importable';
+import { Branding } from './Branding.island';
+import { CommentCount } from './CommentCount.island';
 import { useConfig } from './ConfigContext';
 import { Contributor } from './Contributor';
 import { CrosswordSetter } from './CrosswordSetter';
@@ -27,7 +27,7 @@ import { Dateline } from './Dateline';
 import { Island } from './Island';
 import { PodcastMeta } from './PodcastMeta';
 import { PreferredSourceButton } from './PreferredSourceButton';
-import { ShareButton } from './ShareButton.importable';
+import { ShareButton } from './ShareButton.island';
 
 type Props = {
 	format: ArticleFormat;

@@ -20,7 +20,7 @@ const showHideButtonCss = css`
 
 /**
  * This component creates the styled button for showing & hiding a container,
- * The functionality for this is implemented in a single island 'ShowHideContainers.importable'
+ * The functionality for this is implemented in a single island 'ShowHideContainers.island'
  **/
 export const ShowHideButton = ({ sectionId }: Props) => {
 	return (

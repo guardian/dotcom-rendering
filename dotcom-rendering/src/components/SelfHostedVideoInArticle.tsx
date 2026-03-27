@@ -8,7 +8,7 @@ import {
 import type { MediaAtomBlockElement, RoleType } from '../types/content';
 import type { VideoPlayerFormat } from '../types/mainMedia';
 import { Island } from './Island';
-import { SelfHostedVideo } from './SelfHostedVideo.importable';
+import { SelfHostedVideo } from './SelfHostedVideo.island';
 
 type SelfHostedVideoInArticleProps = {
 	element: MediaAtomBlockElement;

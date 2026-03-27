@@ -26,7 +26,7 @@ import {
 	radioButtonWrapperStyles,
 	UnselectedAnswer,
 } from './Answers';
-import { ShareButton } from './ShareButton.importable';
+import { ShareButton } from './ShareButton.island';
 
 const fieldsetStyle = css`
 	margin-bottom: 12px;

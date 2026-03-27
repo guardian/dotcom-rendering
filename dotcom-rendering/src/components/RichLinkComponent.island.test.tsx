@@ -5,7 +5,7 @@ import {
 	ArticleSpecial,
 } from '../lib/articleFormat';
 import { ConfigProvider } from './ConfigContext';
-import { RichLinkComponent } from './RichLinkComponent.importable';
+import { RichLinkComponent } from './RichLinkComponent.island';
 
 describe('RichLinkComponent', () => {
 	it('does not fail on the server with an empty URL', () => {

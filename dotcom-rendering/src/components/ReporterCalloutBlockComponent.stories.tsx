@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import type { ReporterCalloutBlockElement } from '../types/content';
-import { ReporterCalloutBlockComponent } from './ReporterCalloutBlockComponent.importable';
+import { ReporterCalloutBlockComponent } from './ReporterCalloutBlockComponent.island';
 
 const meta: Meta<typeof ReporterCalloutBlockComponent> = {
 	title: 'Components/Reporter Callout Block',

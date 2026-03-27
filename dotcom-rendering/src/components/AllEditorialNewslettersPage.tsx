@@ -5,12 +5,12 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '../lib/articleFormat';
 import { rootStyles } from '../lib/rootStyles';
 import type { NavType } from '../model/extract-nav';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';
-import { AdmiralScript } from './AdmiralScript.importable';
-import { AlreadyVisited } from './AlreadyVisited.importable';
+import { AdmiralScript } from './AdmiralScript.island';
+import { AlreadyVisited } from './AlreadyVisited.island';
 import { useConfig } from './ConfigContext';
-import { FocusStyles } from './FocusStyles.importable';
+import { FocusStyles } from './FocusStyles.island';
 import { Island } from './Island';
-import { Metrics } from './Metrics.importable';
+import { Metrics } from './Metrics.island';
 import { SkipTo } from './SkipTo';
 
 type Props = {

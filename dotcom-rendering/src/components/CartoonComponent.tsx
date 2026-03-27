@@ -8,7 +8,7 @@ import {
 	Pillar,
 } from '../lib/articleFormat';
 import type { CartoonBlockElement, Image } from '../types/content';
-import { AppsLightboxImage } from './AppsLightboxImage.importable';
+import { AppsLightboxImage } from './AppsLightboxImage.island';
 import { Caption } from './Caption';
 import { useConfig } from './ConfigContext';
 import { Island } from './Island';

@@ -9,6 +9,8 @@ import {
 	textSans15Object,
 	textSansBold14Object,
 	textSansBold17Object,
+	textSansItalic14Object,
+	textSansItalic15Object,
 	until,
 } from '@guardian/source/foundations';
 import { type ComponentProps, type ReactNode, useMemo } from 'react';
@@ -117,6 +119,7 @@ export const FootballMatchHeader = (props: Props) => {
 				/>
 				<Hr borderStyle="dotted" borderColour={border(match.kind)} />
 				<Teams match={match} />
+				<Comment match={match} />
 				<Hr borderStyle="solid" borderColour={border(match.kind)} />
 				<Tabs {...tabs} />
 			</div>
@@ -457,3 +460,35 @@ const Scorers = (props: { scorers: string[] }) =>
 			))}
 		</ul>
 	);
+
+const Comment = (props: { match: FootballMatch }) => {
+	if (props.match.kind === 'Fixture') {
+		return null;
+	}
+
+	if (props.match.comment === undefined || props.match.comment === '') {
+		return null;
+	}
+
+	return (
+		<div
+			css={{
+				'&': css(grid.column.centre),
+				paddingBottom: space[3],
+				[from.leftCol]: {
+					paddingLeft: 10,
+					paddingBottom: space[5],
+				},
+			}}
+		>
+			<p
+				css={{
+					...textSansItalic14Object,
+					[from.leftCol]: textSansItalic15Object,
+				}}
+			>
+				{props.match.comment}
+			</p>
+		</div>
+	);
+};
