@@ -1,8 +1,8 @@
 import type { FEAspectRatio } from '../frontend/feFront';
 import type { ArticleFormat } from '../lib/articleFormat';
 import {
-	convertAssetsToVideoSources,
-	DEFAULT_ASPECT_RATIO,
+	extractValidSourcesFromAssets,
+	getAspectRatioFromSources,
 	getSubtitleAsset,
 } from '../lib/video';
 import type { MediaAtomBlockElement, RoleType } from '../types/content';
@@ -28,7 +28,8 @@ export const SelfHostedVideoInArticle = ({
 	const posterImageUrl = element.posterImage?.[0]?.url;
 	const caption = element.title;
 
-	const sources = convertAssetsToVideoSources(element.assets);
+	const sources = extractValidSourcesFromAssets(element.assets);
+	const aspectRatio = getAspectRatioFromSources(sources);
 	const firstVideoSource = sources[0];
 
 	if (!posterImageUrl) {
@@ -46,11 +47,7 @@ export const SelfHostedVideoInArticle = ({
 				}
 				fallbackImageLoading="lazy"
 				fallbackImageSize="small"
-				aspectRatio={
-					firstVideoSource
-						? firstVideoSource.width / firstVideoSource.height
-						: DEFAULT_ASPECT_RATIO
-				}
+				aspectRatio={aspectRatio}
 				linkTo="Article-embed-MediaAtomBlockElement"
 				posterImage={posterImageUrl}
 				sources={sources}
