@@ -932,6 +932,7 @@ export const Card = ({
 					<MediaWrapper
 						mediaSize={mediaSize}
 						mediaType={media.type}
+						articleMedia={articleMedia}
 						mediaPositionOnDesktop={mediaPositionOnDesktop}
 						mediaPositionOnMobile={mediaPositionOnMobile}
 						padMedia={

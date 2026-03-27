@@ -15,6 +15,53 @@ import { getDailyArticleCount, getToday } from './dailyArticleCount';
 import type { EditionId } from './edition';
 import { getLocaleCode } from './getCountryCode';
 
+export const ensureValidCtaUrl = (rawUrl: string): string | undefined => {
+	if (!rawUrl || typeof rawUrl !== 'string') {
+		return undefined;
+	}
+
+	try {
+		// SECURITY: First check for malicious protocols BEFORE any transformation
+		// This prevents protocol bypass attacks like ftp:// → https://ftp//
+		// Note: http:// is allowed here because it gets converted to https:// below
+		if (/^(ftp|javascript|data|file|mailto|tel):/i.test(rawUrl)) {
+			return undefined;
+		}
+
+		// If it looks like a bare domain (no protocol), prepend https://
+		// If it starts with http://, replace with https://
+		let urlString: string;
+		if (/^https?:\/\//.test(rawUrl)) {
+			urlString = rawUrl.startsWith('http://')
+				? `https://${rawUrl.slice(7)}` // Remove http:// and add https://
+				: rawUrl;
+		} else {
+			urlString = `https://${rawUrl}`;
+		}
+
+		const parsed = new URL(urlString);
+
+		// Double-check protocol (should always be https: at this point)
+		if (parsed.protocol !== 'https:') {
+			return undefined;
+		}
+
+		// Only allow Guardian domains: theguardian.com or any subdomain
+		const hostname = parsed.hostname;
+		const isGuardianDomain =
+			hostname === 'theguardian.com' ||
+			hostname.endsWith('.theguardian.com');
+
+		if (!isGuardianDomain) {
+			return undefined;
+		}
+
+		return parsed.href;
+	} catch {
+		return undefined;
+	}
+};
+
 const decideIsSupporter = (): boolean => {
 	// nb: We will not be calling the Auxia API if the user is signed in, so we can set isSignedIn to false.
 	const isSignedIn = false;
