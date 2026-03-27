@@ -99,7 +99,7 @@ const isToggleable = (
 		);
 	}
 
-	return index != 0 && !isNavList(collection) && !isLabs(collection);
+	return index !== 0 && !isNavList(collection) && !isLabs(collection);
 };
 
 const decideLeftContent = (front: Front, collection: DCRCollectionType) => {

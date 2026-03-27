@@ -166,6 +166,47 @@ const decideImageWidths = ({
 				{ breakpoint: breakpoints.wide, width: 1900 },
 			];
 		}
+		/**
+		 * We allow larger images for Hosted Content pages due to
+		 * the design of these being wider
+		 */
+		if (
+			format.design === ArticleDesign.HostedArticle ||
+			format.design === ArticleDesign.HostedVideo ||
+			format.design === ArticleDesign.HostedGallery
+		) {
+			return [
+				{
+					breakpoint: breakpoints.mobile,
+					width: breakpoints.mobileLandscape,
+					aspectRatio: '5:4',
+				},
+				{
+					breakpoint: breakpoints.mobileLandscape,
+					width: breakpoints.phablet,
+					aspectRatio: '5:3',
+				},
+				{
+					breakpoint: breakpoints.phablet,
+					width: breakpoints.tablet,
+					aspectRatio: '5:3',
+				},
+				{
+					breakpoint: breakpoints.tablet,
+					width: breakpoints.desktop,
+					aspectRatio: '5:3',
+				},
+				{
+					breakpoint: breakpoints.desktop,
+					width: breakpoints.leftCol,
+				},
+				{
+					breakpoint: breakpoints.leftCol,
+					width: breakpoints.wide,
+				},
+				{ breakpoint: breakpoints.wide, width: breakpoints.wide },
+			];
+		}
 		switch (format.display) {
 			case ArticleDisplay.Showcase:
 			case ArticleDisplay.NumberedList: {

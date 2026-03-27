@@ -27,9 +27,6 @@ import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWrapper.island';
 import { FootballMatchInfoWrapper } from '../components/FootballMatchInfoWrapper.island';
 import { Footer } from '../components/Footer';
-import { GetMatchNav } from '../components/GetMatchNav.island';
-import { GetMatchStats } from '../components/GetMatchStats.island';
-import { GetMatchTabs } from '../components/GetMatchTabs.island';
 import { GridItem } from '../components/GridItem';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -60,7 +57,6 @@ import { decideStoryPackageTrails } from '../lib/decideTrail';
 import type { EditionId } from '../lib/edition';
 import { safeParseURL } from '../lib/parse';
 import { parse } from '../lib/slot-machine-flags';
-import { useBetaAB } from '../lib/useAB';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -71,12 +67,10 @@ const StandardGrid = ({
 	children,
 	isMatchReport,
 	isMedia,
-	isInFootballRedesignVariantGroup,
 }: {
 	children: React.ReactNode;
 	isMatchReport: boolean;
 	isMedia: boolean;
-	isInFootballRedesignVariantGroup: boolean;
 }) => (
 	<div
 		css={css`
@@ -113,11 +107,6 @@ const StandardGrid = ({
 					${isMatchReport
 						? css`
 								grid-template-areas:
-									${!isInFootballRedesignVariantGroup &&
-									`
-									'title  border  matchNav   . right-column'
-             						'title  border  matchtabs  . right-column'
-									`}
 									'title  border  headline   . right-column'
 									'.      border  standfirst . right-column'
 									'meta   border  media      . right-column'
@@ -159,11 +148,6 @@ const StandardGrid = ({
 				${isMatchReport
 					? css`
 							grid-template-areas:
-								${!isInFootballRedesignVariantGroup &&
-								`
-								'title  border  matchNav     right-column'
-								'title  border  matchtabs    right-column'
-								`}
 								'title  border  headline     right-column'
 								'.      border  standfirst   right-column'
 								'meta   border  media        right-column'
@@ -202,11 +186,6 @@ const StandardGrid = ({
 				${isMatchReport
 					? css`
 							grid-template-areas:
-								${!isInFootballRedesignVariantGroup &&
-								`
-								'matchNav      right-column'
-								'matchtabs	   right-column'
-								`}
 								'title         right-column'
 								'headline      right-column'
 								'standfirst    right-column'
@@ -245,11 +224,6 @@ const StandardGrid = ({
 				${isMatchReport
 					? css`
 							grid-template-areas:
-								${!isInFootballRedesignVariantGroup &&
-								`
-								'matchNav'
-								'matchtabs'
-								`}
 								'title'
 								'headline'
 								'standfirst'
@@ -287,11 +261,6 @@ const StandardGrid = ({
 				${isMatchReport
 					? css`
 							grid-template-areas:
-								${!isInFootballRedesignVariantGroup &&
-								`
-								'matchNav'
-								'matchtabs'
-								`}
 								'media'
 								'title'
 								'headline'
@@ -397,16 +366,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
-	const abTests = useBetaAB();
-	const isInFootballRedesignVariantGroup =
-		abTests?.isUserInTestGroup('webex-football-redesign', 'variant') ??
-		false;
-
-	const applyFootballRedesign = shouldApplyFootballRedesign(
-		isMatchReport,
-		isApps,
-		isInFootballRedesignVariantGroup,
-	);
 	const isMedia =
 		format.design === ArticleDesign.Video ||
 		format.design === ArticleDesign.Audio;
@@ -473,7 +432,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 			<MatchHeaderContainer
 				isMatchReport={isMatchReport}
-				isInVariantGroup={applyFootballRedesign}
 				footballMatchHeaderUrl={footballMatchHeaderUrl}
 				editionId={editionId}
 				renderingTarget={renderingTarget}
@@ -506,49 +464,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<StandardGrid
 						isMatchReport={isMatchReport}
 						isMedia={isMedia}
-						isInFootballRedesignVariantGroup={applyFootballRedesign}
 					>
-						{!applyFootballRedesign && (
-							<>
-								<GridItem area="matchNav" element="aside">
-									<div css={maxWidth}>
-										{isMatchReport && (
-											<Island
-												priority="feature"
-												defer={{ until: 'visible' }}
-											>
-												<GetMatchNav
-													matchUrl={footballMatchUrl}
-													format={format}
-													headlineString={
-														article.headline
-													}
-													tags={article.tags}
-													webPublicationDateDeprecated={
-														article.webPublicationDateDeprecated
-													}
-												/>
-											</Island>
-										)}
-									</div>
-								</GridItem>
-								<GridItem area="matchtabs" element="aside">
-									<div css={maxWidth}>
-										{isMatchReport && (
-											<Island
-												priority="critical"
-												defer={{ until: 'visible' }}
-											>
-												<GetMatchTabs
-													matchUrl={footballMatchUrl}
-													format={format}
-												/>
-											</Island>
-										)}
-									</div>
-								</GridItem>
-							</>
-						)}
 						<GridItem area="media">
 							<div css={!isMedia && maxWidth}>
 								<MainMedia
@@ -783,12 +699,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								/>
 								<MatchInfoContainer
 									isMatchReport={isMatchReport}
-									isInVariantGroup={applyFootballRedesign}
-									footballMatchUrl={footballMatchUrl}
 									footballMatchStatsUrl={
 										footballMatchStatsUrl
 									}
-									format={format}
 								/>
 
 								{isApps && (
@@ -1136,34 +1049,18 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	);
 };
 
-const shouldApplyFootballRedesign = (
-	isMatchReport: boolean,
-	isApps: boolean,
-	isInFootballVariantGroup: boolean,
-) => {
-	// Since the football match report page is not yet available in the app,
-	// the AB test can be ignored and we default to true
-	if (isMatchReport) {
-		return isApps || isInFootballVariantGroup;
-	}
-
-	return false;
-};
-
 const MatchHeaderContainer = ({
 	isMatchReport,
-	isInVariantGroup,
 	footballMatchHeaderUrl,
 	editionId,
 	renderingTarget,
 }: {
 	isMatchReport: boolean;
-	isInVariantGroup: boolean;
 	footballMatchHeaderUrl: string | undefined;
 	editionId: EditionId;
 	renderingTarget: RenderingTarget;
 }) => {
-	if (isMatchReport && isInVariantGroup && !!footballMatchHeaderUrl) {
+	if (isMatchReport && !!footballMatchHeaderUrl) {
 		const parsedUrl = safeParseURL(footballMatchHeaderUrl);
 		if (!parsedUrl.ok) {
 			log(
@@ -1192,18 +1089,12 @@ const MatchHeaderContainer = ({
 
 const MatchInfoContainer = ({
 	isMatchReport,
-	isInVariantGroup,
-	footballMatchUrl,
 	footballMatchStatsUrl,
-	format,
 }: {
 	isMatchReport: boolean;
-	isInVariantGroup: boolean;
-	footballMatchUrl: string | undefined;
 	footballMatchStatsUrl: string | undefined;
-	format: ArticleFormat;
 }) => {
-	if (isMatchReport && isInVariantGroup && !!footballMatchStatsUrl) {
+	if (isMatchReport && !!footballMatchStatsUrl) {
 		const parsedUrl = safeParseURL(footballMatchStatsUrl);
 		if (!parsedUrl.ok) {
 			log(
@@ -1220,14 +1111,6 @@ const MatchInfoContainer = ({
 				<FootballMatchInfoWrapper
 					matchStatsUrl={footballMatchStatsUrl}
 				/>
-			</Island>
-		);
-	}
-
-	if (isMatchReport && !!footballMatchUrl) {
-		return (
-			<Island priority="feature" defer={{ until: 'visible' }}>
-				<GetMatchStats matchUrl={footballMatchUrl} format={format} />
 			</Island>
 		);
 	}

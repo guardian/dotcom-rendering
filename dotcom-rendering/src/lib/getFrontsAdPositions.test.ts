@@ -258,7 +258,7 @@ describe('Mobile Ads', () => {
 		expect(mobileAdPositions).toEqual([1, 3, 5, 7, 9]);
 	});
 
-	it('Europe Network Front, with beta containers and more than 4 collections, with thrashers in various places', () => {
+	it('Europe Network Front, with more than 4 collections and thrashers in various places', () => {
 		const testCollections: AdCandidate[] = [
 			{
 				...testCollection,

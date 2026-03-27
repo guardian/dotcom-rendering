@@ -4,7 +4,6 @@ import { AppsFooter } from '../components/AppsFooter.island';
 import { CricketScorecardPage } from '../components/CricketScorecardPage';
 import { FootballMatchesPageWrapper } from '../components/FootballMatchesPageWrapper.island';
 import { FootballMatchInfoPage } from '../components/FootballMatchInfoPage';
-import { FootballMatchSummary } from '../components/FootballMatchSummary';
 import { FootballTablesPage } from '../components/FootballTablesPage';
 import { Footer } from '../components/Footer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -15,7 +14,6 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.island';
 import { SubNav } from '../components/SubNav.island';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { useBetaAB } from '../lib/useAB';
 import { palette as themePalette } from '../palette';
 import type {
 	AppSportDataPage,
@@ -34,11 +32,6 @@ const SportsPage = ({
 	renderAds: boolean;
 	renderingTarget: RenderingTarget;
 }) => {
-	const abTests = useBetaAB();
-	const isInVariantGroup =
-		abTests?.isUserInTestGroup('webex-football-redesign', 'variant') ??
-		false;
-
 	switch (sportData.kind) {
 		case 'FootballFixtures':
 		case 'FootballLiveScores':
@@ -78,25 +71,18 @@ const SportsPage = ({
 					guardianBaseUrl={sportData.guardianBaseURL}
 				/>
 			);
-		case 'FootballMatchSummary': {
-			// Since the football match info page is not yet available in the app,
-			// the AB test is ignored for app users.
-			if (isInVariantGroup || renderingTarget === 'Apps') {
-				return (
-					<FootballMatchInfoPage
-						matchStats={sportData.matchStats}
-						matchInfo={sportData.matchInfo}
-						competitionName={sportData.competitionName}
-						edition={sportData.editionId}
-						matchHeaderUrl={sportData.matchHeaderUrl}
-						table={sportData.group}
-						renderingTarget={renderingTarget}
-					/>
-				);
-			}
-
-			return <FootballMatchSummary match={sportData.match} />;
-		}
+		case 'FootballMatchSummary':
+			return (
+				<FootballMatchInfoPage
+					matchStats={sportData.matchStats}
+					matchInfo={sportData.matchInfo}
+					competitionName={sportData.competitionName}
+					edition={sportData.editionId}
+					matchHeaderUrl={sportData.matchHeaderUrl}
+					table={sportData.group}
+					renderingTarget={renderingTarget}
+				/>
+			);
 	}
 };
 
