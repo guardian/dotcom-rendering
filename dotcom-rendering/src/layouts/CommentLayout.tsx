@@ -629,6 +629,9 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 													!!article.config.switches
 														.articleEndSlot
 												}
+												isSensitive={
+													article.config.isSensitive
+												}
 											/>
 										</Island>
 									)}

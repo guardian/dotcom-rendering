@@ -377,6 +377,9 @@ export const AudioLayout = (props: WebProps) => {
 												!!article.config.switches
 													.articleEndSlot
 											}
+											isSensitive={
+												article.config.isSensitive
+											}
 										/>
 									</Island>
 								)}
