@@ -108,6 +108,17 @@ void (async () => {
 		{ priority: 'critical' },
 	);
 
+	if (window.guardian.config.switches.mparticleConsentSync) {
+		void startup(
+			'mparticleConsentSync',
+			() =>
+				import(
+					/* webpackMode: 'eager' */ './mparticle/mparticle-consent'
+				).then(({ syncMparticleConsent }) => syncMparticleConsent()),
+			{ priority: 'critical' },
+		);
+	}
+
 	/*************************************************************
 	 *
 	 * The following modules are lazy loaded,
