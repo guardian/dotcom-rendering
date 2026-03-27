@@ -160,9 +160,8 @@ const ctaStyles = css`
 const sideBorders = css`
 	${from.desktop} {
 		position: relative;
-
-		&::before {
-			z-index: 1;
+		::before {
+			z-index: 0;
 			position: absolute;
 			top: 0;
 			bottom: 0;
@@ -175,10 +174,11 @@ const sideBorders = css`
 				left: -${grid.columnGap};
 			}
 
-			grid-column-start: left-column-start;
+			grid-column-start: 2;
 		}
 
-		&::after {
+		::after {
+			z-index: -1;
 			position: absolute;
 			top: 0;
 			bottom: 0;
@@ -191,7 +191,7 @@ const sideBorders = css`
 				right: -${grid.columnGap};
 			}
 
-			grid-column-end: right-column-end;
+			grid-column-end: -2;
 		}
 	}
 `;

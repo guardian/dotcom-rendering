@@ -21,7 +21,7 @@ import { grid } from '../grid';
 import type { ArticleFormat } from '../lib/articleFormat';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideMainMediaCaption } from '../lib/decide-caption';
-import { palette } from '../palette';
+import { palette as themePalette } from '../palette';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { Stuck } from './lib/stickiness';
@@ -158,22 +158,37 @@ const sideBorders = css`
 	${from.desktop} {
 		position: relative;
 		::before {
+			z-index: 0;
 			position: absolute;
 			top: 0;
 			bottom: 0;
 			content: '';
-			border-left: 1px solid ${palette('--article-border')};
-			border-right: 1px solid ${palette('--article-border')};
+			width: 1px;
+			background-color: ${themePalette('--article-border')};
+
 			left: -${grid.mobileColumnGap};
-			right: -${grid.mobileColumnGap};
 			${from.mobileLandscape} {
 				left: -${grid.columnGap};
+			}
+
+			grid-column-start: 2;
+		}
+
+		::after {
+			z-index: -1;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			content: '';
+			width: 1px;
+			background-color: ${themePalette('--article-border')};
+
+			right: -${grid.mobileColumnGap};
+			${from.mobileLandscape} {
 				right: -${grid.columnGap};
 			}
-			${grid.between('centre-column-start', 'right-column-end')}
-			${from.leftCol} {
-				${grid.between('left-column-start', 'right-column-end')}
-			}
+
+			grid-column-end: -2;
 		}
 	}
 `;
