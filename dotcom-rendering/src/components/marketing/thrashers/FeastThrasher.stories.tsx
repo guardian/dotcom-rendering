@@ -9,4 +9,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const FeastThrasher: Story = {};
+export const FeastThrasher: Story = {
+	args: {
+		renderingTarget: 'Web',
+	},
+};
+
+export const FeastThrasherApps: Story = {
+	args: {
+		renderingTarget: 'Apps',
+	},
+};
