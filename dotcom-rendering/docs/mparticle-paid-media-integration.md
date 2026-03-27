@@ -260,7 +260,7 @@ The consent framework maps named vendors to IAB TCF vendor IDs via the `VendorID
 >
 > The `as VendorName` cast silences the compiler but does not prevent this throw. **The `mparticleConsentSync` switch must not be enabled in any environment until the `csnx` PR is merged, `@guardian/libs` is bumped in DCR, and the mParticle vendor has been added to the Sourcepoint dashboard by Data Privacy.**
 
-The Sourcepoint vendor ID (a string like `"5ed8c49c4b8ce4571c7ad801"`) is assigned when Data Privacy adds mParticle as a vendor in the Sourcepoint dashboard. That ID feeds into the `csnx` PR — both steps must happen together.
+The mParticle Sourcepoint vendor ID is **`62470f577e1e3605d5bc0b8a`** (confirmed from the Guardian's Sourcepoint privacy-manager-view API, 2026-03-27, `vendorType: CUSTOM`). This ID feeds directly into the `csnx` PR.
 
 For example, the Braze integration uses:
 

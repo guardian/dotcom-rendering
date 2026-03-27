@@ -5,13 +5,13 @@
 > **Backend Asana task:** [Backend task](https://app.asana.com/0/0/1213430985786431)  
 > **Connection Asana task:** [Connection task](https://app.asana.com/0/0/1213430985786437)
 
-## Status snapshot (as of 2026-03-24)
+## Status snapshot (as of 2026-03-27)
 
 | Repo                           | Status                                                                                                  |
 | ------------------------------ | ------------------------------------------------------------------------------------------------------- |
 | `dotcom-rendering` (this repo) | ✅ [PR open](https://github.com/guardian/dotcom-rendering/pull/15581) - pending PR description + review |
 | `frontend` (Scala)             | ⏳ Needs switch + URL injection                                                                         |
-| `csnx` (`@guardian/libs`)      | ⏳ Needs `mparticle` added to `VendorIDs` — **blocked on Sourcepoint vendor ID from Data Privacy**      |
+| `csnx` (`@guardian/libs`)      | ⏳ Needs `mparticle` added to `VendorIDs` — vendor ID now known, PR ready to open                       |
 | backend (`mparticle-api`)      | ⏳ Draft - needs deployment to CODE                                                                     |
 
 ## Tasks
@@ -37,14 +37,16 @@
 
 **PR description to write (once code is final):** Summarise: feature is behind `switches.mparticleConsentSync` (off by default); code is complete and all 8 tests pass; links to [docs/mparticle-paid-media-integration.md](./mparticle-paid-media-integration.md) for design and [docs/mparticle-work-tracking.md](./mparticle-work-tracking.md) for remaining work across other repos.
 
-### 2. Confirm Sourcepoint vendor ID with Data Privacy / MRR — **critical blocker**
+### 2. Confirm Sourcepoint vendor ID with Data Privacy / MRR
 
--   [ ] **Status:** Not started — needs human action (conversation with Data Privacy / MRR team)
+-   [x] **Status:** Vendor ID confirmed — `62470f577e1e3605d5bc0b8a` (found in the Guardian's Sourcepoint privacy-manager-view API response, 2026-03-27)
+-   [ ] **Remaining:** Confirm the exact GDPR purpose key name to use in `VendorIDs` (e.g. `'mparticle'`) with Data Privacy / MRR
 
-**What:** Ask Data Privacy / MRR two questions:
+**mParticle Sourcepoint vendor ID:** `62470f577e1e3605d5bc0b8a` (CUSTOM type, confirmed from `https://sourcepoint.theguardian.com/consent/tcfv2/privacy-manager/privacy-manager-view?siteId=38161`)
 
-1. **What is the exact GDPR purpose name** we should check consent against? (It may not be `'mparticle'` — it could be a more specific purpose such as `'marketing-analysis'`.)
-2. **Has mParticle been added as a vendor in the Sourcepoint dashboard**, and if so, what is its Sourcepoint vendor ID (a string like `"5ed8c49c4b8ce4571c7ad801"`)?
+**Outstanding question for Data Privacy / MRR:**
+
+1. **What is the exact key name** to use in `VendorIDs`? The code currently uses `'mparticle'` — confirm this is correct or supply the agreed name.
 
 **Why this is critical — runtime throw, not just a TypeScript error:**
 
@@ -69,19 +71,14 @@ The current `'mparticle' as VendorName` cast only silences the TypeScript compil
 
 ### 3. Add the confirmed vendor to `VendorIDs` in `@guardian/libs` (`csnx` repo)
 
--   [ ] **Status:** Not started — blocked on task 2
+-   [ ] **Status:** Ready to open — vendor ID confirmed, pending agreement of key name with Data Privacy
 
 **What:** Open a PR in the [`csnx` repository](https://github.com/guardian/csnx) to add the confirmed vendor name and its Sourcepoint ID to the `VendorIDs` registry. This is the map from vendor name string to IAB TCF ID that `@guardian/libs` exports. `VendorName` is a strict union type derived from the keys of this registry.
-
-**Input needed from task 2:**
-
--   The agreed vendor key name (e.g. `'mparticle'`)
--   The Sourcepoint vendor ID string for that vendor
 
 The entry to add to `TCFV2VendorIDs` in `csnx` will look like:
 
 ```ts
-mparticle: ['<sourcepoint-vendor-id-from-dashboard>'],
+mparticle: ['62470f577e1e3605d5bc0b8a'],
 ```
 
 Currently the code uses a temporary workaround that must be removed (see task 8):
