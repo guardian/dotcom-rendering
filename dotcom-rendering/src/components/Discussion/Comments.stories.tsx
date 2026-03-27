@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { parse } from 'valibot';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import preview from '../../../.storybook/preview';
 import { discussion } from '../../../fixtures/manual/discussion';
 import { discussionWithTwoComments as discussionWithTwoCommentsMock } from '../../../fixtures/manual/discussionWithTwoComments';
 import { legacyDiscussionWithoutThreading } from '../../../fixtures/manual/legacyDiscussionWithoutThreading';
@@ -15,7 +15,7 @@ import { discussionApiResponseSchema } from '../../lib/discussion';
 import { error, ok, type Result } from '../../lib/result';
 import { Comments } from './Comments';
 
-const meta = {
+const meta = preview.meta({
 	component: Comments,
 	title: 'Discussion/App',
 	decorators: [
@@ -30,11 +30,7 @@ const meta = {
 			</div>
 		),
 	],
-} satisfies Meta<typeof Comments>;
-
-export default meta;
-
-type Story = StoryObj<typeof meta>;
+});
 
 const discussionMock = parse(discussionApiResponseSchema, discussion);
 if (discussionMock.status !== 'ok') throw new Error('Invalid mock');
@@ -91,7 +87,7 @@ const defaultCommentForm = {
 	previewBody: '',
 } satisfies CommentFormProps;
 
-export const LoggedOutHiddenPicks = {
+export const LoggedOutHiddenPicks = meta.story({
 	name: 'When logged out, unexpanded and with picks',
 	args: {
 		shortUrl: discussionMock.discussion.key,
@@ -124,13 +120,13 @@ export const LoggedOutHiddenPicks = {
 			},
 		]),
 	],
-} satisfies Story;
+});
 
-export const InitialPage = {
-	...LoggedOutHiddenPicks,
+export const InitialPage = meta.story({
+	...LoggedOutHiddenPicks.input,
 	name: 'With initial page set to 1',
 	args: {
-		...LoggedOutHiddenPicks.args,
+		...LoggedOutHiddenPicks.input.args,
 		expanded: true,
 		page: 1,
 	},
@@ -142,7 +138,7 @@ export const InitialPage = {
 			},
 		]),
 	],
-} satisfies Story;
+});
 
 /**
  * Skipped (flaky).
@@ -152,11 +148,11 @@ export const InitialPage = {
  *
  * Example: https://www.chromatic.com/test?appId=63e251470cfbe61776b0ef19&id=6659d8e7fde909fdd4dbf8b9
  */
-export const LoggedInHiddenNoPicks = {
-	...LoggedOutHiddenPicks,
+export const LoggedInHiddenNoPicks = meta.story({
+	...LoggedOutHiddenPicks.input,
 	name: 'When logged in, with no picks and not expanded',
 	args: {
-		...LoggedOutHiddenPicks.args,
+		...LoggedOutHiddenPicks.input.args,
 		shortUrl: 'p/abc123',
 		user: aUser,
 	},
@@ -164,22 +160,22 @@ export const LoggedInHiddenNoPicks = {
 	parameters: {
 		chromatic: { disableSnapshot: true },
 	},
-} satisfies Story;
+});
 
-export const LoggedIn = {
-	...LoggedInHiddenNoPicks,
+export const LoggedIn = meta.story({
+	...LoggedInHiddenNoPicks.input,
 	name: 'When logged in and expanded',
 	args: {
-		...LoggedOutHiddenPicks.args,
+		...LoggedOutHiddenPicks.input.args,
 		expanded: true,
 	},
 	decorators: [splitTheme([format])],
-} satisfies Story;
+});
 
-export const LoggedInShortDiscussion = {
-	...LoggedInHiddenNoPicks,
+export const LoggedInShortDiscussion = meta.story({
+	...LoggedInHiddenNoPicks.input,
 	args: {
-		...LoggedInHiddenNoPicks.args,
+		...LoggedInHiddenNoPicks.input.args,
 		shortUrl: discussionWithTwoComments.discussion.key,
 		expanded: true,
 		topLevelCommentCount:
@@ -187,12 +183,12 @@ export const LoggedInShortDiscussion = {
 		comments: discussionWithTwoComments.discussion.comments,
 	},
 	decorators: [splitTheme([format])],
-} satisfies Story;
+});
 
-export const LoggedOutHiddenNoPicks = {
-	...LoggedOutHiddenPicks,
+export const LoggedOutHiddenNoPicks = meta.story({
+	...LoggedOutHiddenPicks.input,
 	args: {
-		...LoggedOutHiddenPicks.args,
+		...LoggedOutHiddenPicks.input.args,
 		shortUrl: 'p/abc123',
 	},
 	name: 'When logged out, with no picks and not expanded',
@@ -204,12 +200,12 @@ export const LoggedOutHiddenNoPicks = {
 			},
 		]),
 	],
-} satisfies Story;
+});
 
-export const Closed = {
-	...LoggedOutHiddenPicks,
+export const Closed = meta.story({
+	...LoggedOutHiddenPicks.input,
 	args: {
-		...LoggedOutHiddenPicks.args,
+		...LoggedOutHiddenPicks.input.args,
 		isClosedForComments: true,
 		user: aUser,
 		expanded: true,
@@ -223,12 +219,12 @@ export const Closed = {
 			},
 		]),
 	],
-} satisfies Story;
+});
 
-export const NoComments = {
-	...LoggedOutHiddenPicks,
+export const NoComments = meta.story({
+	...LoggedOutHiddenPicks.input,
 	args: {
-		...LoggedOutHiddenPicks.args,
+		...LoggedOutHiddenPicks.input.args,
 		shortUrl: 'p/39f5x',
 		topLevelCommentCount: 0,
 		comments: [],
@@ -241,12 +237,12 @@ export const NoComments = {
 			},
 		]),
 	],
-} satisfies Story;
+});
 
-export const LegacyDiscussion = {
-	...LoggedOutHiddenPicks,
+export const LegacyDiscussion = meta.story({
+	...LoggedOutHiddenPicks.input,
 	args: {
-		...LoggedOutHiddenPicks.args,
+		...LoggedOutHiddenPicks.input.args,
 		shortUrl: legacyDiscussionWithoutThreading.discussion.key,
 		page: 2,
 		topLevelCommentCount:
@@ -262,4 +258,4 @@ export const LegacyDiscussion = {
 			},
 		]),
 	],
-} satisfies Story;
+});

@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { expect, fn, userEvent, waitFor, within } from 'storybook/test';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import { regions } from '../../fixtures/manual/footballData';
 import { FootballCompetitionSelect as FootballCompetitionSelectComponent } from './FootballCompetitionSelect';
 
-const meta = {
+const meta = preview.meta({
 	title: 'Components/Football Competition Select',
 	component: FootballCompetitionSelectComponent,
 	parameters: {
@@ -14,12 +14,9 @@ const meta = {
 			},
 		},
 	},
-} satisfies Meta<typeof FootballCompetitionSelectComponent>;
+});
 
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const FootballCompetitionSelect = {
+export const FootballCompetitionSelect = meta.story({
 	args: {
 		regions,
 		kind: 'FootballResults',
@@ -43,4 +40,4 @@ export const FootballCompetitionSelect = {
 			);
 		}
 	},
-} satisfies Story;
+});

@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { rightColumnDecorator } from '../../.storybook/decorators/gridDecorators';
+import preview from '../../.storybook/preview';
 import { trails } from '../../fixtures/manual/trails';
 import { MostPopularFrontRight } from './MostPopularFrontRight';
 
-const meta = {
+const meta = preview.meta({
 	component: MostPopularFrontRight,
 	title: 'Components/MostPopularFrontRight',
 	decorators: [rightColumnDecorator],
@@ -12,22 +12,18 @@ const meta = {
 			<MostPopularFrontRight {...args} />
 		</div>
 	),
-} satisfies Meta<typeof MostPopularFrontRight>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const MostViewed = {
+export const MostViewed = meta.story({
 	args: {
 		heading: 'Most viewed',
 		trails: trails.slice(0, 10),
 	},
-} satisfies Story;
+});
 
-export const DeeplyRead = {
+export const DeeplyRead = meta.story({
 	args: {
 		heading: 'Deeply read',
 		trails: trails.slice(10, 20),
 	},
-} satisfies Story;
+});

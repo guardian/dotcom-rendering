@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { leftColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { defaultFormats } from '../../.storybook/decorators/splitThemeDecorator';
 import { allModes } from '../../.storybook/modes';
+import preview from '../../.storybook/preview';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -11,7 +11,7 @@ import {
 } from '../lib/articleFormat';
 import { ArticleTitle } from './ArticleTitle';
 
-const meta = {
+const meta = preview.meta({
 	component: ArticleTitle,
 	title: 'Components/Article Title',
 	decorators: [leftColumnDecorator],
@@ -22,13 +22,9 @@ const meta = {
 			},
 		},
 	},
-} satisfies Meta<typeof ArticleTitle>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const StandardDesign = {
+export const StandardDesign = meta.story({
 	args: {
 		tags: [],
 		guardianBaseURL: 'https://theguardian.com',
@@ -40,11 +36,11 @@ export const StandardDesign = {
 			design: ArticleDesign.Standard,
 		},
 	},
-} satisfies Story;
+});
 
-export const StandardDesignWithBlogTag = {
+export const StandardDesignWithBlogTag = meta.story({
 	args: {
-		...StandardDesign.args,
+		...StandardDesign.input.args,
 		tags: [
 			{
 				id: '',
@@ -54,11 +50,11 @@ export const StandardDesignWithBlogTag = {
 		],
 	},
 	name: 'Standard Design, with blog tag',
-} satisfies Story;
+});
 
-export const StandardDesignWithOpinionTag = {
+export const StandardDesignWithOpinionTag = meta.story({
 	args: {
-		...StandardDesign.args,
+		...StandardDesign.input.args,
 		tags: [
 			{
 				id: '',
@@ -68,11 +64,11 @@ export const StandardDesignWithOpinionTag = {
 		],
 	},
 	name: 'Standard Design, with opinion tag',
-} satisfies Story;
+});
 
-export const StandardDesignWithSeriesTag = {
+export const StandardDesignWithSeriesTag = meta.story({
 	args: {
-		...StandardDesign.args,
+		...StandardDesign.input.args,
 		tags: [
 			{
 				id: '',
@@ -82,44 +78,44 @@ export const StandardDesignWithSeriesTag = {
 		],
 	},
 	name: 'Standard Design, with series tag',
-} satisfies Story;
+});
 
-export const StandardDesignSpecialReportThemeWithSeriesTag = {
+export const StandardDesignSpecialReportThemeWithSeriesTag = meta.story({
 	args: {
-		...StandardDesignWithSeriesTag.args,
+		...StandardDesignWithSeriesTag.input.args,
 		format: {
-			...StandardDesignWithSeriesTag.args.format,
+			...StandardDesignWithSeriesTag.input.args.format,
 			theme: ArticleSpecial.SpecialReport,
 		},
 	},
 	name: 'Standard Design, Special Report Theme, with series tag',
-} satisfies Story;
+});
 
-export const StandardDesignSpecialReportAltThemeWithSeriesTag = {
+export const StandardDesignSpecialReportAltThemeWithSeriesTag = meta.story({
 	args: {
-		...StandardDesignWithSeriesTag.args,
+		...StandardDesignWithSeriesTag.input.args,
 		format: {
-			...StandardDesignWithSeriesTag.args.format,
+			...StandardDesignWithSeriesTag.input.args.format,
 			theme: ArticleSpecial.SpecialReportAlt,
 		},
 	},
 	name: 'Standard Design, Special Report Alt Theme, with series tag',
-} satisfies Story;
+});
 
-export const StandardDesignLabsThemeWithSeriesTag = {
+export const StandardDesignLabsThemeWithSeriesTag = meta.story({
 	args: {
-		...StandardDesignWithSeriesTag.args,
+		...StandardDesignWithSeriesTag.input.args,
 		format: {
-			...StandardDesignWithSeriesTag.args.format,
+			...StandardDesignWithSeriesTag.input.args.format,
 			theme: ArticleSpecial.Labs,
 		},
 	},
 	name: 'Standard Design, Labs Theme, with series tag',
-} satisfies Story;
+});
 
-export const StandardDesignWithSeriesTagAndLongTitle = {
+export const StandardDesignWithSeriesTagAndLongTitle = meta.story({
 	args: {
-		...StandardDesign.args,
+		...StandardDesign.input.args,
 		tags: [
 			{
 				id: '',
@@ -129,11 +125,11 @@ export const StandardDesignWithSeriesTagAndLongTitle = {
 		],
 	},
 	name: 'Standard Design, with series tag and long title',
-} satisfies Story;
+});
 
-export const StandardDesignWithSeriesTagAndLongWord = {
+export const StandardDesignWithSeriesTagAndLongWord = meta.story({
 	args: {
-		...StandardDesign.args,
+		...StandardDesign.input.args,
 		tags: [
 			{
 				id: '',
@@ -143,11 +139,11 @@ export const StandardDesignWithSeriesTagAndLongWord = {
 		],
 	},
 	name: 'Standard Design, with series tag and long word',
-} satisfies Story;
+});
 
-export const CommentDesignImmersiveDisplay = {
+export const CommentDesignImmersiveDisplay = meta.story({
 	args: {
-		...StandardDesign.args,
+		...StandardDesign.input.args,
 		format: {
 			display: ArticleDisplay.Immersive,
 			theme: Pillar.Sport,
@@ -155,38 +151,40 @@ export const CommentDesignImmersiveDisplay = {
 		},
 	},
 	name: 'Comment Design, Immersive Display',
-} satisfies Story;
+});
 
-export const CommentDesignImmersiveDisplayWithBlogTag = {
+export const CommentDesignImmersiveDisplayWithBlogTag = meta.story({
 	args: {
-		...CommentDesignImmersiveDisplay.args,
-		tags: StandardDesignWithBlogTag.args.tags,
+		...CommentDesignImmersiveDisplay.input.args,
+		tags: StandardDesignWithBlogTag.input.args.tags,
 	},
 	name: 'Comment Design, Immersive Display, with blog tag',
-} satisfies Story;
+});
 
-export const ReviewDesignImmersiveDisplayWithSeriesTagAndLongTitle = {
-	args: {
-		...StandardDesign.args,
-		format: {
-			display: ArticleDisplay.Immersive,
-			theme: Pillar.Sport,
-			design: ArticleDesign.Review,
-		},
-		tags: [
-			{
-				id: '',
-				title: 'Series title with the addition of some more text to see how this wraps',
-				type: 'Series',
+export const ReviewDesignImmersiveDisplayWithSeriesTagAndLongTitle = meta.story(
+	{
+		args: {
+			...StandardDesign.input.args,
+			format: {
+				display: ArticleDisplay.Immersive,
+				theme: Pillar.Sport,
+				design: ArticleDesign.Review,
 			},
-		],
+			tags: [
+				{
+					id: '',
+					title: 'Series title with the addition of some more text to see how this wraps',
+					type: 'Series',
+				},
+			],
+		},
+		name: 'Review Design, Immersive Display, with series tag and long title',
 	},
-	name: 'Review Design, Immersive Display, with series tag and long title',
-} satisfies Story;
+);
 
-export const LiveBlogDesignWithBlogTag = {
+export const LiveBlogDesignWithBlogTag = meta.story({
 	args: {
-		...StandardDesignWithBlogTag.args,
+		...StandardDesignWithBlogTag.input.args,
 		format: {
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Sport,
@@ -204,11 +202,11 @@ export const LiveBlogDesignWithBlogTag = {
 		},
 	},
 	name: 'LiveBlog Design, with blog tag',
-} satisfies Story;
+});
 
-export const LiveBlogDesignWithBlogTagAndMatch = {
+export const LiveBlogDesignWithBlogTagAndMatch = meta.story({
 	args: {
-		...LiveBlogDesignWithBlogTag.args,
+		...LiveBlogDesignWithBlogTag.input.args,
 		isMatch: true,
 	},
 	parameters: {
@@ -221,11 +219,11 @@ export const LiveBlogDesignWithBlogTagAndMatch = {
 		},
 	},
 	name: 'LiveBlog Design, with blog tag and match',
-} satisfies Story;
+});
 
-export const DeadBlogDesignMultipleThemesWithBlogTag = {
+export const DeadBlogDesignMultipleThemesWithBlogTag = meta.story({
 	args: {
-		...LiveBlogDesignWithBlogTag.args,
+		...LiveBlogDesignWithBlogTag.input.args,
 	},
 	parameters: {
 		formats: getAllThemes({
@@ -234,19 +232,19 @@ export const DeadBlogDesignMultipleThemesWithBlogTag = {
 		}),
 	},
 	name: 'DeadBlog Design, Multiple Themes, with blog tag',
-} satisfies Story;
+});
 
-export const MultipleFormatsWithBlogTag = {
-	...StandardDesignWithBlogTag,
+export const MultipleFormatsWithBlogTag = meta.story({
+	...StandardDesignWithBlogTag.input,
 	parameters: {
 		formats: defaultFormats,
 	},
 	name: 'Multiple Formats, with blog tag',
-} satisfies Story;
+});
 
-export const GalleryDesignWithSeries = {
+export const GalleryDesignWithSeries = meta.story({
 	args: {
-		...StandardDesign.args,
+		...StandardDesign.input.args,
 		tags: [
 			{
 				id: '',
@@ -261,15 +259,15 @@ export const GalleryDesignWithSeries = {
 			display: ArticleDisplay.Standard,
 		}),
 	},
-} satisfies Story;
+});
 
-export const GalleryDesignLabThemeWithoutSeries = {
+export const GalleryDesignLabThemeWithoutSeries = meta.story({
 	args: {
-		...StandardDesign.args,
+		...StandardDesign.input.args,
 		format: {
 			display: ArticleDisplay.Standard,
 			theme: ArticleSpecial.Labs,
 			design: ArticleDesign.Gallery,
 		},
 	},
-} satisfies Story;
+});
