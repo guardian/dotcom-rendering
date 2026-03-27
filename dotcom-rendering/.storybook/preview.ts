@@ -1,3 +1,5 @@
+import addonA11y from '@storybook/addon-a11y';
+import addonDocs from '@storybook/addon-docs';
 import { setCookie, storage } from '@guardian/libs';
 import { AB } from '@guardian/ab-core';
 
@@ -13,7 +15,7 @@ import { mockFetch } from '../src/lib/mockRESTCalls';
 import { setABTests } from '../src/lib/useAB';
 import { ConfigContextDecorator } from './decorators/configContextDecorator';
 import { sb } from 'storybook/test';
-import { Preview } from '@storybook/react-webpack5';
+import { definePreview } from '@storybook/react-webpack5';
 import {
 	globalColourScheme,
 	globalColourSchemeDecorator,
@@ -149,7 +151,7 @@ const guardianViewports = {
 	},
 };
 
-export default {
+export default definePreview({
 	args: {
 		config: { renderingTarget: 'Web', darkModeAvailable: false },
 	},
@@ -189,4 +191,6 @@ export default {
 			isRotated: false,
 		},
 	},
-} satisfies Preview;
+
+	addons: [addonDocs(), addonA11y()],
+});
