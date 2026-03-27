@@ -9,9 +9,11 @@ import { renderBlocks, renderHtml } from './render.article.web';
 
 export const handleArticle: RequestHandler = ({ body }, res) => {
 	const frontendData = validateAsFEArticle(body);
+	const isPreview = frontendData.config.isPreview;
 	const article = enhanceArticleType(frontendData, 'Web');
 	const { html, prefetchScripts } = renderHtml({
 		article,
+		isPreview,
 	});
 
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
