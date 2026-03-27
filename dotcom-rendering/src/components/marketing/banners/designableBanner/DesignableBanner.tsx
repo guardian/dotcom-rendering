@@ -901,10 +901,10 @@ const styles = {
 			justify-self: center;
 		}
 		${from.tablet} {
-			height: 100%;
 			width: 100%;
 		}
 		${from.desktop} {
+			margin: ${space[6]}px 0;
 			justify-self: end;
 		}
 		${between.desktop.and.wide} {

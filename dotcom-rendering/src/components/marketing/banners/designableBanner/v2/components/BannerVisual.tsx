@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { between, from } from '@guardian/source/foundations';
+import { between, from, space } from '@guardian/source/foundations';
 import type { Image } from '@guardian/support-dotcom-components/dist/shared/types';
 import type { ImageAttrs } from '../../../../shared/ResponsiveImage';
 import { ResponsiveImage } from '../../../../shared/ResponsiveImage';
@@ -58,10 +58,10 @@ const getStyles = (isHeaderImage = false) => {
 				justify-self: center;
 			}
 			${from.tablet} {
-				height: 100%;
 				width: 100%;
 			}
 			${from.desktop} {
+				margin: ${space[6]}px 0;
 				justify-self: end;
 			}
 			${between.desktop.and.wide} {
