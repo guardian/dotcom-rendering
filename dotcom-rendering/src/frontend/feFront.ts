@@ -392,6 +392,7 @@ export type FEFrontConfig = {
 	thirdPartyAppsAccount?: string;
 	avatarImagesUrl: string;
 	fbAppId: string;
+	googleRecaptchaSiteKeyVisible?: string;
 };
 
 export type FESeoData = {

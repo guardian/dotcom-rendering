@@ -16,8 +16,44 @@ import type { FEFootballMatchListPage } from '../../src/frontend/feFootballMatch
 export const footballData: FEFootballMatchListPage = {
 	matchesList: [
 		{
-			date: '2025-04-28',
+			date: '2026-03-16',
 			competitionMatches: [
+				{
+					competitionSummary: {
+						id: '100',
+						url: '/football/premierleague',
+						fullName: 'Premier League',
+						nation: 'English',
+						tableDividers: [4, 5, 17],
+					},
+					matches: [
+						{
+							id: '4540277',
+							date: '2026-03-16T20:00:00Z[Europe/London]',
+							stage: {
+								stageNumber: '1',
+							},
+							round: {
+								roundNumber: '1',
+								name: 'League',
+							},
+							leg: '1',
+							homeTeam: {
+								id: '48',
+								name: 'Brentford',
+							},
+							awayTeam: {
+								id: '44',
+								name: 'Wolves',
+							},
+							venue: {
+								id: '93',
+								name: 'Brentford Community Stadium',
+							},
+							type: 'Fixture',
+						},
+					],
+				},
 				{
 					competitionSummary: {
 						id: '635',
@@ -28,8 +64,8 @@ export const footballData: FEFootballMatchListPage = {
 					},
 					matches: [
 						{
-							id: '4496403',
-							date: '2025-04-28T17:30:00+01:00[Europe/London]',
+							id: '4545159',
+							date: '2026-03-16T19:45:00Z[Europe/London]',
 							stage: {
 								stageNumber: '1',
 							},
@@ -39,22 +75,33 @@ export const footballData: FEFootballMatchListPage = {
 							},
 							leg: '1',
 							homeTeam: {
-								id: '26360',
-								name: 'Udinese',
+								id: '27271',
+								name: 'Cremonese',
 							},
 							awayTeam: {
-								id: '26371',
-								name: 'Bologna',
+								id: '26366',
+								name: 'Fiorentina',
 							},
 							venue: {
-								id: '503',
-								name: 'Stadio Friuli',
+								id: '964',
+								name: 'Stadio Giovanni Zini',
 							},
 							type: 'Fixture',
 						},
+					],
+				},
+				{
+					competitionSummary: {
+						id: '650',
+						url: '/football/laligafootball',
+						fullName: 'La Liga',
+						nation: 'European',
+						tableDividers: [4, 6, 17],
+					},
+					matches: [
 						{
-							id: '4496764',
-							date: '2025-04-28T19:45:00+01:00[Europe/London]',
+							id: '4544223',
+							date: '2026-03-16T20:00:00Z[Europe/London]',
 							stage: {
 								stageNumber: '1',
 							},
@@ -64,41 +111,16 @@ export const footballData: FEFootballMatchListPage = {
 							},
 							leg: '1',
 							homeTeam: {
-								id: '26362',
-								name: 'Lazio',
+								id: '35724',
+								name: 'Rayo Vallecano',
 							},
 							awayTeam: {
-								id: '26358',
-								name: 'Parma',
+								id: '37454',
+								name: 'Levante',
 							},
 							venue: {
-								id: '7617',
-								name: 'Stadio Olimpico',
-							},
-							type: 'Fixture',
-						},
-						{
-							id: '4496404',
-							date: '2025-04-28T19:45:00+01:00[Europe/London]',
-							stage: {
-								stageNumber: '1',
-							},
-							round: {
-								roundNumber: '1',
-								name: 'League',
-							},
-							leg: '1',
-							homeTeam: {
-								id: '27648',
-								name: 'Verona',
-							},
-							awayTeam: {
-								id: '26474',
-								name: 'Cagliari',
-							},
-							venue: {
-								id: '963',
-								name: 'Marcantonio Bentegodi',
+								id: '1517',
+								name: 'Vallecas',
 							},
 							type: 'Fixture',
 						},
@@ -114,8 +136,8 @@ export const footballData: FEFootballMatchListPage = {
 					},
 					matches: [
 						{
-							id: '4494466',
-							date: '2025-04-28T20:00:00+01:00[Europe/London]',
+							id: '4543304',
+							date: '2026-03-16T20:00:00Z[Europe/London]',
 							stage: {
 								stageNumber: '1',
 							},
@@ -125,16 +147,16 @@ export const footballData: FEFootballMatchListPage = {
 							},
 							leg: '1',
 							homeTeam: {
-								id: '28',
-								name: 'Leeds',
+								id: '36',
+								name: 'Portsmouth',
 							},
 							awayTeam: {
-								id: '49',
-								name: 'Bristol City',
+								id: '7',
+								name: 'Derby',
 							},
 							venue: {
-								id: '86',
-								name: 'Elland Road',
+								id: '4',
+								name: 'Fratton Park',
 							},
 							type: 'Fixture',
 						},
@@ -146,6 +168,10 @@ export const footballData: FEFootballMatchListPage = {
 	filters: {
 		English: [
 			{
+				name: 'Premier League',
+				url: '/football/premierleague/live',
+			},
+			{
 				name: 'Championship',
 				url: '/football/championship/live',
 			},
@@ -154,6 +180,10 @@ export const footballData: FEFootballMatchListPage = {
 			{
 				name: 'Serie A',
 				url: '/football/serieafootball/live',
+			},
+			{
+				name: 'La Liga',
+				url: '/football/laligafootball/live',
 			},
 		],
 	},
@@ -237,7 +267,7 @@ export const footballData: FEFootballMatchListPage = {
 								url: '/world/europe-news',
 							},
 							{
-								title: 'US',
+								title: 'US news',
 								url: '/us-news',
 								longTitle: 'US news',
 							},
@@ -458,6 +488,10 @@ export const footballData: FEFootballMatchListPage = {
 				longTitle: 'Sport home',
 				iconName: 'home',
 				children: [
+					{
+						title: 'Winter Paralympics',
+						url: '/sport/winter-paralympics',
+					},
 					{
 						title: 'Football',
 						url: '/football',
@@ -741,6 +775,10 @@ export const footballData: FEFootballMatchListPage = {
 						url: '/crosswords/series/sunday-quick',
 					},
 					{
+						title: 'Mini',
+						url: '/crosswords/series/mini-crossword',
+					},
+					{
 						title: 'Quick cryptic',
 						url: '/crosswords/series/quick-cryptic',
 					},
@@ -777,6 +815,10 @@ export const footballData: FEFootballMatchListPage = {
 			{
 				title: 'Corrections',
 				url: '/theguardian/series/corrections-and-clarifications',
+			},
+			{
+				title: 'Tips',
+				url: 'https://www.theguardian.com/tips',
 			},
 		],
 		brandExtensions: [
@@ -946,10 +988,11 @@ export const footballData: FEFootballMatchListPage = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	config: {
 		switches: {
-			lightbox: true,
+			prebidCriteo: true,
 			externalVideoEmbeds: true,
-			personaliseSignInGateAfterCheckout: true,
-			abSignInGateMainVariant: true,
+			lightbox: true,
+			googleOneTapSwitch: true,
+			hideNewsletterSignupComponentForSubscribers: true,
 			prebidAppnexusUkRow: true,
 			prebidMagnite: true,
 			commercialMetrics: true,
@@ -958,39 +1001,35 @@ export const footballData: FEFootballMatchListPage = {
 			adaptiveSite: true,
 			prebidPermutiveAudience: true,
 			compareVariantDecision: false,
+			manyNewsletterVisibleRecaptcha: false,
 			enableSentryReporting: true,
 			lazyLoadContainers: true,
+			filterAtAGlance: true,
 			ampArticleSwitch: false,
 			remarketing: true,
 			articleEndSlot: true,
 			keyEventsCarousel: true,
 			registerWithPhone: false,
-			darkModeWeb: true,
 			targeting: true,
 			remoteHeader: true,
-			slotBodyEnd: true,
 			ampPrebidOzone: false,
-			extendedMostPopularFronts: true,
+			slotBodyEnd: true,
 			emailInlineInFooter: true,
 			showNewPrivacyWordingOnEmailSignupEmbeds: true,
 			prebidAnalytics: true,
 			extendedMostPopular: true,
 			ampContentAbTesting: false,
-			prebidCriteo: true,
-			abPrebidMultibid: true,
 			imrWorldwide: true,
 			acast: true,
 			twitterUwt: true,
-			abAuxiaSignInGate: true,
+			abNoAuxiaSignInGate: true,
 			prebidAppnexusInvcode: true,
 			ampPrebidPubmatic: false,
 			a9HeaderBidding: true,
 			prebidAppnexus: true,
-			europeBetaFrontTest2: true,
 			enableDiscussionSwitch: true,
 			prebidXaxis: true,
 			stickyVideos: true,
-			interactiveFullHeaderSwitch: true,
 			discussionAllPageSize: true,
 			prebidUserSync: true,
 			audioOnwardJourneySwitch: true,
@@ -1005,20 +1044,23 @@ export const footballData: FEFootballMatchListPage = {
 			ampLiveblogSwitch: false,
 			ampAmazon: false,
 			mostViewedFronts: true,
-			abA9BidResponseWinner: true,
 			optOutAdvertising: true,
-			abSignInGateMainControl: true,
 			googleSearch: true,
 			brazeSwitch: true,
+			signInGate: true,
 			prebidKargo: true,
+			disableChildDirected: true,
+			abAdmiralAdblockRecovery: true,
 			consentManagement: true,
+			productLeftColCards: true,
+			personaliseSignInGateAfterCheckout: true,
 			idProfileNavigation: true,
 			confiantAdVerification: true,
 			discussionAllowAnonymousRecommendsSwitch: false,
-			absoluteServerTimes: false,
 			permutive: true,
 			comscore: true,
 			ampPrebidCriteo: false,
+			prebidLiveramp: true,
 			prebidTheTradeDesk: true,
 			newsletterOnwards: false,
 			youtubeIma: true,
@@ -1045,19 +1087,17 @@ export const footballData: FEFootballMatchListPage = {
 			prebidSmart: true,
 			shouldLoadGoogletag: true,
 			inizio: true,
-			europeBetaFront: true,
-			prebidBidCache: true,
 		},
-		abTests: {
-			europeBetaFrontTest2Variant: 'variant',
+		abTests: {},
+		serverSideABTests: {
+			'thefilter-at-a-glance-redesign': 'control',
 		},
-		serverSideABTests: {},
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		stage: 'PROD',
 		frontendAssetsFullURL: 'https://assets.guim.co.uk/',
 		ampIframeUrl:
 			'https://assets.guim.co.uk/data/vendor/2533d5cb94302889e6a8f1b24b5329e7/amp-iframe.html',
-		googleRecaptchaSiteKey: '6LdzlmsdAAAAALFH63cBVagSFPuuHXQ9OfpIDdMc',
+		googleRecaptchaSiteKey: '6Le7mFsrAAAAAD07aRCTHZe9u0EfvOiNe8Y0DMMV',
 		fbAppId: '180444840287',
 		facebookIaAdUnitRoot: 'facebook-instant-articles',
 		locationapiurl: '/weatherapi/locations?query=',
@@ -1071,7 +1111,7 @@ export const footballData: FEFootballMatchListPage = {
 		forecastsapiurl: '/weatherapi/forecast',
 		supportUrl: 'https://support.theguardian.com',
 		commercialBundleUrl:
-			'https://assets.guim.co.uk/commercial/3047aee80994211e1b89/graun.standalone.commercial.js',
+			'https://assets.guim.co.uk/commercial/8ea2ef631f08750c0a3c/graun.standalone.commercial.js',
 		idOAuthUrl: 'https://oauth.theguardian.com',
 		webTitle: 'Live matches',
 		isFront: false,
@@ -1104,6 +1144,8 @@ export const footballData: FEFootballMatchListPage = {
 		beaconUrl: '//phar.gu-web.net',
 		discussionD2Uid: 'zHoBy6HNKsk',
 		ophanJsUrl: '//j.ophan.co.uk/ophan.ng',
+		googleRecaptchaSiteKeyVisible:
+			'6LcTl8srAAAAAKwyUhd4nJHHe2-hCrPKcWnawY0F',
 		contentType: '',
 		isDev: false,
 		stripePublicToken: 'pk_live_2O6zPMHXNs2AGea4bAmq5R7Z',
@@ -1173,15 +1215,21 @@ export const footballData: FEFootballMatchListPage = {
 					extraClasses: '',
 				},
 				{
-					text: 'SecureDrop',
-					url: 'https://www.theguardian.com/securedrop',
-					dataLinkName: 'securedrop',
+					text: 'Contact us',
+					url: '/help/contact-us',
+					dataLinkName: 'uk : footer : contact us',
 					extraClasses: '',
 				},
 				{
-					text: 'Work for us',
-					url: 'https://workforus.theguardian.com',
-					dataLinkName: 'uk : footer : work for us',
+					text: 'Tip us off',
+					url: 'https://www.theguardian.com/tips',
+					dataLinkName: 'uk : footer : tips',
+					extraClasses: '',
+				},
+				{
+					text: 'SecureDrop',
+					url: 'https://www.theguardian.com/securedrop',
+					dataLinkName: 'securedrop',
 					extraClasses: '',
 				},
 				{
@@ -1197,15 +1245,21 @@ export const footballData: FEFootballMatchListPage = {
 					extraClasses: '',
 				},
 				{
-					text: 'Terms & conditions',
-					url: '/help/terms-of-service',
-					dataLinkName: 'terms',
+					text: 'Modern Slavery Act',
+					url: 'https://uploads.guim.co.uk/2025/09/05/Modern_Slavery_Statement_2025.pdf',
+					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
 				{
-					text: 'Contact us',
-					url: '/help/contact-us',
-					dataLinkName: 'uk : footer : contact us',
+					text: 'Tax strategy',
+					url: 'https://uploads.guim.co.uk/2025/09/05/Tax_strategy_for_the_year_ended_31_March_2025.pdf',
+					dataLinkName: 'uk : footer : tax strategy',
+					extraClasses: '',
+				},
+				{
+					text: 'Terms & conditions',
+					url: '/help/terms-of-service',
+					dataLinkName: 'terms',
 					extraClasses: '',
 				},
 			],
@@ -1223,15 +1277,9 @@ export const footballData: FEFootballMatchListPage = {
 					extraClasses: '',
 				},
 				{
-					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2024/09/04/Modern_Slavery_Statement_2024_.pdf',
-					dataLinkName: 'uk : footer : modern slavery act statement',
-					extraClasses: '',
-				},
-				{
-					text: 'Tax strategy',
-					url: 'https://uploads.guim.co.uk/2024/08/27/TAX_STRATEGY_FOR_THE_YEAR_ENDED_31_MARCH_2025.pdf',
-					dataLinkName: 'uk : footer : tax strategy',
+					text: 'Newsletters',
+					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+					dataLinkName: 'uk : footer : newsletters',
 					extraClasses: '',
 				},
 				{
@@ -1241,33 +1289,45 @@ export const footballData: FEFootballMatchListPage = {
 					extraClasses: '',
 				},
 				{
-					text: 'Facebook',
-					url: 'https://www.facebook.com/theguardian',
-					dataLinkName: 'uk : footer : facebook',
+					text: 'Bluesky',
+					url: 'https://bsky.app/profile/theguardian.com',
+					dataLinkName: 'uk : footer : Bluesky',
 					extraClasses: '',
 				},
 				{
-					text: 'YouTube',
-					url: 'https://www.youtube.com/user/TheGuardian',
-					dataLinkName: 'uk : footer : youtube',
+					text: 'Facebook',
+					url: 'https://www.facebook.com/theguardian',
+					dataLinkName: 'uk : footer : Facebook',
 					extraClasses: '',
 				},
 				{
 					text: 'Instagram',
 					url: 'https://www.instagram.com/guardian',
-					dataLinkName: 'uk : footer : instagram',
+					dataLinkName: 'uk : footer : Instagram',
 					extraClasses: '',
 				},
 				{
 					text: 'LinkedIn',
 					url: 'https://www.linkedin.com/company/theguardian',
-					dataLinkName: 'uk : footer : linkedin',
+					dataLinkName: 'uk : footer : LinkedIn',
 					extraClasses: '',
 				},
 				{
-					text: 'Newsletters',
-					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
-					dataLinkName: 'uk : footer : newsletters',
+					text: 'Threads',
+					url: 'https://www.threads.com/@guardian',
+					dataLinkName: 'uk : footer : Threads',
+					extraClasses: '',
+				},
+				{
+					text: 'TikTok',
+					url: 'https://www.tiktok.com/@guardian',
+					dataLinkName: 'uk : footer : TikTok',
+					extraClasses: '',
+				},
+				{
+					text: 'YouTube',
+					url: 'https://www.youtube.com/user/TheGuardian',
+					dataLinkName: 'uk : footer : YouTube',
 					extraClasses: '',
 				},
 			],
@@ -1294,6 +1354,18 @@ export const footballData: FEFootballMatchListPage = {
 					text: 'Patrons',
 					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
 					dataLinkName: 'uk : footer : patrons',
+					extraClasses: '',
+				},
+				{
+					text: 'Work with us',
+					url: 'https://workwithus.theguardian.com/',
+					dataLinkName: 'uk : footer : work with us',
+					extraClasses: '',
+				},
+				{
+					text: 'Accessibility settings',
+					url: '/help/accessibility-help',
+					dataLinkName: 'accessibility settings',
 					extraClasses: '',
 				},
 			],

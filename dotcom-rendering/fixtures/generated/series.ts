@@ -19,17 +19,17 @@ export const series = {
 	url: 'https://www.theguardian.com/tv-and-radio/series/tv-review',
 	trails: [
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2025/aug/06/wednesday-season-two-review-jenna-ortega-netflix-tim-burton-steve-buscemi',
+			url: 'https://www.theguardian.com/tv-and-radio/2026/mar/16/boarders-season-three-review-bbc-three-iplayer',
 			linkText:
-				'Wednesday season two review – Jenna Ortega’s charisma could power 1,000 hearses',
+				'Boarders season three review – the brilliant school satire bows out at the perfect time ',
 			showByline: false,
-			byline: 'Sarah Dempster',
+			byline: 'Micha Frazer-Carroll',
 			masterImage:
-				'https://media.guim.co.uk/c258e50a6056de19d992f2a43197d602fcee8785/222_0_3000_2400/master/3000.jpg',
-			image: 'https://i.guim.co.uk/img/media/c258e50a6056de19d992f2a43197d602fcee8785/222_0_3000_2400/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=b2309ec5c8e861afb8a637f700ed48e9',
+				'https://media.guim.co.uk/45cb8ed11573b2ffdd568f752ba2af7ded8ffda2/137_0_3953_3162/master/3953.jpg',
+			image: 'https://i.guim.co.uk/img/media/45cb8ed11573b2ffdd568f752ba2af7ded8ffda2/137_0_3953_3162/master/3953.jpg?width=300&quality=85&auto=format&fit=max&s=aed760b924068d1ef94ef2e48a65e6c7',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/c258e50a6056de19d992f2a43197d602fcee8785/222_0_3000_2400/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=b2309ec5c8e861afb8a637f700ed48e9',
-				'460': 'https://i.guim.co.uk/img/media/c258e50a6056de19d992f2a43197d602fcee8785/222_0_3000_2400/master/3000.jpg?width=460&quality=85&auto=format&fit=max&s=a6aef368f12e5e652cfd5e00bf3b8016',
+				'300': 'https://i.guim.co.uk/img/media/45cb8ed11573b2ffdd568f752ba2af7ded8ffda2/137_0_3953_3162/master/3953.jpg?width=300&quality=85&auto=format&fit=max&s=aed760b924068d1ef94ef2e48a65e6c7',
+				'460': 'https://i.guim.co.uk/img/media/45cb8ed11573b2ffdd568f752ba2af7ded8ffda2/137_0_3953_3162/master/3953.jpg?width=460&quality=85&auto=format&fit=max&s=0556e54a7e57ea00478a357b8e767e57',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -39,157 +39,31 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2025-08-06T07:01:48.000Z',
+			webPublicationDate: '2026-03-16T12:17:24.000Z',
 			headline:
-				'Wednesday season two review – Jenna Ortega’s charisma could power 1,000 hearses',
-			shortUrl: 'https://www.theguardian.com/p/x2qdcv',
+				'Boarders season three review – the brilliant school satire bows out at the perfect time ',
+			shortUrl: 'https://www.theguardian.com/p/x4t3xz',
 			starRating: 4,
 			discussion: {
 				isCommentable: false,
 				isClosedForComments: true,
-				discussionId: '/p/x2qdcv',
+				discussionId: '/p/x4t3xz',
 			},
+			trailText:
+				'The final series of the BBC’s sharp sendup of boarding school in the UK is a riot of sex, scandals and final exams. This is striking, charming TV that has been impressive from first to last',
 		},
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2025/aug/06/platonic-season-two-review-seth-rogen-and-rose-byrne',
+			url: 'https://www.theguardian.com/tv-and-radio/2026/mar/16/the-plastic-detox-review-a-film-so-terrifying-you-will-want-to-change-your-life-immediately',
 			linkText:
-				'Platonic season two review: Seth Rogen and Rose Byrne stop at nothing to make you laugh – and it’s joyful TV',
-			showByline: false,
-			byline: 'Rachel Aroesti',
-			masterImage:
-				'https://media.guim.co.uk/83a262e6cda69af5b46585c6cdac347c24ecd015/58_0_5000_4000/master/5000.jpg',
-			image: 'https://i.guim.co.uk/img/media/83a262e6cda69af5b46585c6cdac347c24ecd015/58_0_5000_4000/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=6372c09c64b113ffa54bc83a5c2ddab6',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/83a262e6cda69af5b46585c6cdac347c24ecd015/58_0_5000_4000/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=6372c09c64b113ffa54bc83a5c2ddab6',
-				'460': 'https://i.guim.co.uk/img/media/83a262e6cda69af5b46585c6cdac347c24ecd015/58_0_5000_4000/master/5000.jpg?width=460&quality=85&auto=format&fit=max&s=2f75173584f7680ae69ceee3fd38a03f',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2025-08-06T04:00:46.000Z',
-			headline:
-				'Platonic season two review: Seth Rogen and Rose Byrne stop at nothing to make you laugh – and it’s joyful TV',
-			shortUrl: 'https://www.theguardian.com/p/x2p6x7',
-			starRating: 4,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/x2p6x7',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2025/aug/05/king-of-the-hill-review-cartoon-comedy-returns-disney',
-			linkText:
-				'King of the Hill review – this charming comedy returns after 15 years … and it’s more welcome than ever',
-			showByline: false,
-			byline: 'Phil Harrison',
-			masterImage:
-				'https://media.guim.co.uk/51a41192ac56057c535c639b0bcdf1f859d9e13f/268_0_1350_1080/master/1350.jpg',
-			image: 'https://i.guim.co.uk/img/media/51a41192ac56057c535c639b0bcdf1f859d9e13f/268_0_1350_1080/master/1350.jpg?width=300&quality=85&auto=format&fit=max&s=1ebf44e21f5a51bc8540861f08ccc5a7',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/51a41192ac56057c535c639b0bcdf1f859d9e13f/268_0_1350_1080/master/1350.jpg?width=300&quality=85&auto=format&fit=max&s=1ebf44e21f5a51bc8540861f08ccc5a7',
-				'460': 'https://i.guim.co.uk/img/media/51a41192ac56057c535c639b0bcdf1f859d9e13f/268_0_1350_1080/master/1350.jpg?width=460&quality=85&auto=format&fit=max&s=9067ab56673a6f71b002426fbfed26c2',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2025-08-05T14:24:37.000Z',
-			headline:
-				'King of the Hill review – this charming comedy returns after 15 years … and it’s more welcome than ever',
-			shortUrl: 'https://www.theguardian.com/p/x2qhfd',
-			starRating: 4,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/x2qhfd',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2025/aug/04/what-happened-at-hiroshima-review-this-rushed-flimsy-look-at-a-world-changing-atrocity-isnt-good-enough',
-			linkText:
-				'What Happened at Hiroshima review – this rushed, flimsy look at a world-changing atrocity isn’t good enough',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			masterImage:
-				'https://media.guim.co.uk/4ca67545386b246d53faf98c7030c40a849f69f9/327_0_1844_1475/master/1844.jpg',
-			image: 'https://i.guim.co.uk/img/media/4ca67545386b246d53faf98c7030c40a849f69f9/327_0_1844_1475/master/1844.jpg?width=300&quality=85&auto=format&fit=max&s=8e713fbe07c92f5cfdb451316f627f25',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/4ca67545386b246d53faf98c7030c40a849f69f9/327_0_1844_1475/master/1844.jpg?width=300&quality=85&auto=format&fit=max&s=8e713fbe07c92f5cfdb451316f627f25',
-				'460': 'https://i.guim.co.uk/img/media/4ca67545386b246d53faf98c7030c40a849f69f9/327_0_1844_1475/master/1844.jpg?width=460&quality=85&auto=format&fit=max&s=e48b3f3d35c17bc0d4b8809272ea4f35',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2025-08-04T20:00:31.000Z',
-			headline:
-				'What Happened at Hiroshima review – this rushed, flimsy look at a world-changing atrocity isn’t good enough',
-			shortUrl: 'https://www.theguardian.com/p/x2qce2',
-			starRating: 2,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/x2qce2',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2025/aug/03/lucy-letby-beyond-reasonable-doubt-review-documentary-itv1-itvx',
-			linkText:
-				'Lucy Letby: Beyond Reasonable Doubt? review – one of the most meticulous documentaries in years',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			masterImage:
-				'https://media.guim.co.uk/6707939a5c48b3b9ce4359a5b81126e809e5962b/126_353_1219_974/master/1219.jpg',
-			image: 'https://i.guim.co.uk/img/media/6707939a5c48b3b9ce4359a5b81126e809e5962b/126_353_1219_974/master/1219.jpg?width=300&quality=85&auto=format&fit=max&s=b3c35238fd501a9cc1c42a44bd5d8fc8',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/6707939a5c48b3b9ce4359a5b81126e809e5962b/126_353_1219_974/master/1219.jpg?width=300&quality=85&auto=format&fit=max&s=b3c35238fd501a9cc1c42a44bd5d8fc8',
-				'460': 'https://i.guim.co.uk/img/media/6707939a5c48b3b9ce4359a5b81126e809e5962b/126_353_1219_974/master/1219.jpg?width=460&quality=85&auto=format&fit=max&s=dfe96b16af70ad6e3d03b675296dc777',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2025-08-03T22:30:52.000Z',
-			headline:
-				'Lucy Letby: Beyond Reasonable Doubt? review – one of the most meticulous documentaries in years',
-			shortUrl: 'https://www.theguardian.com/p/x2ph5g',
-			starRating: 5,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/x2ph5g',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2025/aug/03/parenthood-review-david-attenborough-bbc',
-			linkText:
-				'Parenthood review – one of the crabs in David Attenborough’s new naturefest is like a 1940s movie villain',
+				'The Plastic Detox review – a film so terrifying you will want to change your life immediately ',
 			showByline: false,
 			byline: 'Jack Seale',
 			masterImage:
-				'https://media.guim.co.uk/c25e8f0b7d8108ce1fe7e779f1112d022790498f/654_0_3571_2857/master/3571.jpg',
-			image: 'https://i.guim.co.uk/img/media/c25e8f0b7d8108ce1fe7e779f1112d022790498f/654_0_3571_2857/master/3571.jpg?width=300&quality=85&auto=format&fit=max&s=b62909c555bb7dd3c8d7fa6bbbdf252f',
+				'https://media.guim.co.uk/4f4787ad6fa85f41ac8dd499a4a63da79c0c0b5a/236_0_2700_2160/master/2700.jpg',
+			image: 'https://i.guim.co.uk/img/media/4f4787ad6fa85f41ac8dd499a4a63da79c0c0b5a/236_0_2700_2160/master/2700.jpg?width=300&quality=85&auto=format&fit=max&s=c34f3d18fa01158c99c39966c1e02d3b',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/c25e8f0b7d8108ce1fe7e779f1112d022790498f/654_0_3571_2857/master/3571.jpg?width=300&quality=85&auto=format&fit=max&s=b62909c555bb7dd3c8d7fa6bbbdf252f',
-				'460': 'https://i.guim.co.uk/img/media/c25e8f0b7d8108ce1fe7e779f1112d022790498f/654_0_3571_2857/master/3571.jpg?width=460&quality=85&auto=format&fit=max&s=b2ee2aa82cd3f7177d41fe4806d23d8d',
+				'300': 'https://i.guim.co.uk/img/media/4f4787ad6fa85f41ac8dd499a4a63da79c0c0b5a/236_0_2700_2160/master/2700.jpg?width=300&quality=85&auto=format&fit=max&s=c34f3d18fa01158c99c39966c1e02d3b',
+				'460': 'https://i.guim.co.uk/img/media/4f4787ad6fa85f41ac8dd499a4a63da79c0c0b5a/236_0_2700_2160/master/2700.jpg?width=460&quality=85&auto=format&fit=max&s=dc0ee1d56db4015536b6a4467d39d064',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -199,29 +73,65 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2025-08-03T19:20:48.000Z',
+			webPublicationDate: '2026-03-16T08:00:11.000Z',
 			headline:
-				'Parenthood review – one of the crabs in David Attenborough’s new naturefest is like a 1940s movie villain',
-			shortUrl: 'https://www.theguardian.com/p/x2papx',
+				'The Plastic Detox review – a film so terrifying you will want to change your life immediately ',
+			shortUrl: 'https://www.theguardian.com/p/x4txee',
+			starRating: 4,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/x4txee',
+			},
+			trailText:
+				'In this affecting documentary, an epidemiologist asks six couples struggling to conceive to reduce their exposure to plastics and see if it helps. The results are startling – and prove that we should all make changes now',
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2026/mar/15/the-other-bennet-sister-review-bbc-one-iplayer',
+			linkText:
+				'The Other Bennet Sister review – the bookish Pride and Prejudice sister gets her turn in the spotlight',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			masterImage:
+				'https://media.guim.co.uk/fa15504ed3989eddaf755540485bf0d66ad3dfe6/345_0_4267_3414/master/4267.jpg',
+			image: 'https://i.guim.co.uk/img/media/fa15504ed3989eddaf755540485bf0d66ad3dfe6/345_0_4267_3414/master/4267.jpg?width=300&quality=85&auto=format&fit=max&s=663617d79290ea99c2acfb4bb6293457',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/fa15504ed3989eddaf755540485bf0d66ad3dfe6/345_0_4267_3414/master/4267.jpg?width=300&quality=85&auto=format&fit=max&s=663617d79290ea99c2acfb4bb6293457',
+				'460': 'https://i.guim.co.uk/img/media/fa15504ed3989eddaf755540485bf0d66ad3dfe6/345_0_4267_3414/master/4267.jpg?width=460&quality=85&auto=format&fit=max&s=3b16a4361b32a0c30aff5c85a103cf9a',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2026-03-15T20:30:33.000Z',
+			headline:
+				'The Other Bennet Sister review – the bookish Pride and Prejudice sister gets her turn in the spotlight',
+			shortUrl: 'https://www.theguardian.com/p/x4hhqx',
 			starRating: 3,
 			discussion: {
 				isCommentable: false,
 				isClosedForComments: true,
-				discussionId: '/p/x2papx',
+				discussionId: '/p/x4hhqx',
 			},
+			trailText:
+				'Ella Bruccoleri’s performance as Mary is absolutely lovely. It’s a shame this overly slight drama labours the jokes about her marriage prospects, though',
 		},
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2025/aug/02/the-count-of-monte-cristo-review-series-jeremy-irons-sam-claflin',
+			url: 'https://www.theguardian.com/tv-and-radio/2026/mar/14/the-madison-review-michelle-pfeiffer-yellowstone-paramount',
 			linkText:
-				'The Count of Monte Cristo review – you’ll have to pause every 45 seconds to shake your head at its daftness',
+				'The Madison review – Michelle Pfeiffer’s new drama is thuddingly simplistic ',
 			showByline: false,
-			byline: 'Lucy Mangan',
+			byline: 'Sarah Dempster',
 			masterImage:
-				'https://media.guim.co.uk/1f7ca5bec87f2d632213ebb9c7e6ed8bc6a28913/334_0_5200_4160/master/5200.jpg',
-			image: 'https://i.guim.co.uk/img/media/1f7ca5bec87f2d632213ebb9c7e6ed8bc6a28913/334_0_5200_4160/master/5200.jpg?width=300&quality=85&auto=format&fit=max&s=08ffffb29c375fc20705bd4f5923bd15',
+				'https://media.guim.co.uk/7b9f91c2de9850f676a20c71b948e184c518102a/564_51_2991_2394/master/2991.jpg',
+			image: 'https://i.guim.co.uk/img/media/7b9f91c2de9850f676a20c71b948e184c518102a/564_51_2991_2394/master/2991.jpg?width=300&quality=85&auto=format&fit=max&s=ffff59795627186298cd516669db2f39',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/1f7ca5bec87f2d632213ebb9c7e6ed8bc6a28913/334_0_5200_4160/master/5200.jpg?width=300&quality=85&auto=format&fit=max&s=08ffffb29c375fc20705bd4f5923bd15',
-				'460': 'https://i.guim.co.uk/img/media/1f7ca5bec87f2d632213ebb9c7e6ed8bc6a28913/334_0_5200_4160/master/5200.jpg?width=460&quality=85&auto=format&fit=max&s=31a2b98d1127e9412339aac5f06edb1c',
+				'300': 'https://i.guim.co.uk/img/media/7b9f91c2de9850f676a20c71b948e184c518102a/564_51_2991_2394/master/2991.jpg?width=300&quality=85&auto=format&fit=max&s=ffff59795627186298cd516669db2f39',
+				'460': 'https://i.guim.co.uk/img/media/7b9f91c2de9850f676a20c71b948e184c518102a/564_51_2991_2394/master/2991.jpg?width=460&quality=85&auto=format&fit=max&s=eec2929e43c8a72752e54a12d99fd041',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -231,29 +141,31 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2025-08-02T21:10:21.000Z',
+			webPublicationDate: '2026-03-14T05:00:10.000Z',
 			headline:
-				'The Count of Monte Cristo review – you’ll have to pause every 45 seconds to shake your head at its daftness',
-			shortUrl: 'https://www.theguardian.com/p/x2pgeh',
+				'The Madison review – Michelle Pfeiffer’s new drama is thuddingly simplistic ',
+			shortUrl: 'https://www.theguardian.com/p/x4ht7n',
 			starRating: 2,
 			discussion: {
 				isCommentable: false,
 				isClosedForComments: true,
-				discussionId: '/p/x2pgeh',
+				discussionId: '/p/x4ht7n',
 			},
+			trailText:
+				'This yawnsome homespun six-parter from the creator of Yellowstone aims to teach the womenfolk a lesson by dropping them into untamed, plain-talkin’ Montana. It’s full of terrible jokes and cloying aphorisms',
 		},
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2025/aug/01/chief-of-war-review-jason-momoa-is-an-underwater-shark-wrestler-in-this-gory-historical-epic',
+			url: 'https://www.theguardian.com/tv-and-radio/2026/mar/13/the-claudia-winkleman-show-review-bbc',
 			linkText:
-				'Chief of War review – Jason Momoa is an underwater shark wrestler in this gory historical epic',
+				'The Claudia Winkleman Show review – yes we love her, but this chatshow is a mess',
 			showByline: false,
 			byline: 'Lucy Mangan',
 			masterImage:
-				'https://media.guim.co.uk/459eb52f15ee253425e7eae54cb971cced40bec8/995_0_4956_3967/master/4956.jpg',
-			image: 'https://i.guim.co.uk/img/media/459eb52f15ee253425e7eae54cb971cced40bec8/995_0_4956_3967/master/4956.jpg?width=300&quality=85&auto=format&fit=max&s=cda362068310c5d792ea5bec88ec84bc',
+				'https://media.guim.co.uk/72c5b10baf5d2ddc2fb1f179152fed2a7385a936/166_0_3331_2664/master/3331.jpg',
+			image: 'https://i.guim.co.uk/img/media/72c5b10baf5d2ddc2fb1f179152fed2a7385a936/166_0_3331_2664/master/3331.jpg?width=300&quality=85&auto=format&fit=max&s=6f1dfdceb2bbf9c42e06ba6b1ce37665',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/459eb52f15ee253425e7eae54cb971cced40bec8/995_0_4956_3967/master/4956.jpg?width=300&quality=85&auto=format&fit=max&s=cda362068310c5d792ea5bec88ec84bc',
-				'460': 'https://i.guim.co.uk/img/media/459eb52f15ee253425e7eae54cb971cced40bec8/995_0_4956_3967/master/4956.jpg?width=460&quality=85&auto=format&fit=max&s=8ef63d9528419841108684a5071ef079',
+				'300': 'https://i.guim.co.uk/img/media/72c5b10baf5d2ddc2fb1f179152fed2a7385a936/166_0_3331_2664/master/3331.jpg?width=300&quality=85&auto=format&fit=max&s=6f1dfdceb2bbf9c42e06ba6b1ce37665',
+				'460': 'https://i.guim.co.uk/img/media/72c5b10baf5d2ddc2fb1f179152fed2a7385a936/166_0_3331_2664/master/3331.jpg?width=460&quality=85&auto=format&fit=max&s=6e5ed67f45012878fb2123fa29281f86',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -263,29 +175,31 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2025-08-01T04:00:16.000Z',
+			webPublicationDate: '2026-03-13T23:25:02.000Z',
 			headline:
-				'Chief of War review – Jason Momoa is an underwater shark wrestler in this gory historical epic',
-			shortUrl: 'https://www.theguardian.com/p/x2papb',
-			starRating: 3,
+				'The Claudia Winkleman Show review – yes we love her, but this chatshow is a mess',
+			shortUrl: 'https://www.theguardian.com/p/x4tx57',
+			starRating: 2,
 			discussion: {
 				isCommentable: false,
 				isClosedForComments: true,
-				discussionId: '/p/x2papb',
+				discussionId: '/p/x4tx57',
 			},
+			trailText:
+				'It’s only the first episode, but alongside Jeff Goldblum’s non-anecdotes about pencils the guests are reduced to discussing the colour of the sofa',
 		},
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2025/jul/31/leanne-review-sitcom-netflix',
+			url: 'https://www.theguardian.com/tv-and-radio/2026/mar/13/twisted-yoga-review-tantra-apple-tv',
 			linkText:
-				'Leanne review – you can’t help but love the star of this terribly written, joke-free sitcom',
+				'Twisted Yoga review – a wild exposé of a tantric sex cult',
 			showByline: false,
-			byline: 'Lucy Mangan',
+			byline: 'Rachel Aroesti',
 			masterImage:
-				'https://media.guim.co.uk/a142cf6c8d001b704d258d3532b20936a7028953/527_190_3511_2809/master/3511.jpg',
-			image: 'https://i.guim.co.uk/img/media/a142cf6c8d001b704d258d3532b20936a7028953/527_190_3511_2809/master/3511.jpg?width=300&quality=85&auto=format&fit=max&s=9b04f9952a9ec6109f3403f520a76192',
+				'https://media.guim.co.uk/9340a87b325df92a7caf3e3916145360c95eaae9/1031_497_1779_1423/master/1779.jpg',
+			image: 'https://i.guim.co.uk/img/media/9340a87b325df92a7caf3e3916145360c95eaae9/1031_497_1779_1423/master/1779.jpg?width=300&quality=85&auto=format&fit=max&s=6e52b7bb0ddca126ded994d0ac37921a',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/a142cf6c8d001b704d258d3532b20936a7028953/527_190_3511_2809/master/3511.jpg?width=300&quality=85&auto=format&fit=max&s=9b04f9952a9ec6109f3403f520a76192',
-				'460': 'https://i.guim.co.uk/img/media/a142cf6c8d001b704d258d3532b20936a7028953/527_190_3511_2809/master/3511.jpg?width=460&quality=85&auto=format&fit=max&s=a835b5dc62447b6cb21806d7daac4b0e',
+				'300': 'https://i.guim.co.uk/img/media/9340a87b325df92a7caf3e3916145360c95eaae9/1031_497_1779_1423/master/1779.jpg?width=300&quality=85&auto=format&fit=max&s=6e52b7bb0ddca126ded994d0ac37921a',
+				'460': 'https://i.guim.co.uk/img/media/9340a87b325df92a7caf3e3916145360c95eaae9/1031_497_1779_1423/master/1779.jpg?width=460&quality=85&auto=format&fit=max&s=fef614b4b5c8f6f5a46ec4b0b95f1c96',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -295,29 +209,31 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2025-07-31T07:01:41.000Z',
+			webPublicationDate: '2026-03-13T12:32:37.000Z',
 			headline:
-				'Leanne review – you can’t help but love the star of this terribly written, joke-free sitcom',
-			shortUrl: 'https://www.theguardian.com/p/x2p6ab',
-			starRating: 3,
+				'Twisted Yoga review – a wild exposé of a tantric sex cult',
+			shortUrl: 'https://www.theguardian.com/p/x4h7dq',
+			starRating: 4,
 			discussion: {
 				isCommentable: false,
 				isClosedForComments: true,
-				discussionId: '/p/x2p6ab',
+				discussionId: '/p/x4h7dq',
 			},
+			trailText:
+				'This three-part documentary about women who were exploited and duped into sex work is filled with astonishing detail – while being sensitive to its interviewees',
 		},
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2025/jul/30/destination-x-review-rob-brydon-the-traitors-meets-race-across-the-world',
+			url: 'https://www.theguardian.com/tv-and-radio/2026/mar/13/dynasty-the-murdochs-review-rupert-children-netflix-documentary',
 			linkText:
-				'Destination X review – the BBC’s big new reality competition will make you feel like you’re hallucinating',
+				'Dynasty: The Murdochs review – who cares which billionaire will control even more billions?',
 			showByline: false,
-			byline: 'Lucy Mangan',
+			byline: 'Lucinda Everett',
 			masterImage:
-				'https://media.guim.co.uk/0da011a4ebfad26a5b3d3e72dd17ea9f9dd81138/436_0_3535_2828/master/3535.jpg',
-			image: 'https://i.guim.co.uk/img/media/0da011a4ebfad26a5b3d3e72dd17ea9f9dd81138/436_0_3535_2828/master/3535.jpg?width=300&quality=85&auto=format&fit=max&s=b0d15241d16dd75994376589fc19e408',
+				'https://media.guim.co.uk/3b8503f4537fd972b156233eabbd4d1bdbaad2a2/413_0_3724_2980/master/3724.jpg',
+			image: 'https://i.guim.co.uk/img/media/3b8503f4537fd972b156233eabbd4d1bdbaad2a2/413_0_3724_2980/master/3724.jpg?width=300&quality=85&auto=format&fit=max&s=b1cb7ed3c404a685f38a5c63c0ffe4b1',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/0da011a4ebfad26a5b3d3e72dd17ea9f9dd81138/436_0_3535_2828/master/3535.jpg?width=300&quality=85&auto=format&fit=max&s=b0d15241d16dd75994376589fc19e408',
-				'460': 'https://i.guim.co.uk/img/media/0da011a4ebfad26a5b3d3e72dd17ea9f9dd81138/436_0_3535_2828/master/3535.jpg?width=460&quality=85&auto=format&fit=max&s=e569593a7771203424604c2709525987',
+				'300': 'https://i.guim.co.uk/img/media/3b8503f4537fd972b156233eabbd4d1bdbaad2a2/413_0_3724_2980/master/3724.jpg?width=300&quality=85&auto=format&fit=max&s=b1cb7ed3c404a685f38a5c63c0ffe4b1',
+				'460': 'https://i.guim.co.uk/img/media/3b8503f4537fd972b156233eabbd4d1bdbaad2a2/413_0_3724_2980/master/3724.jpg?width=460&quality=85&auto=format&fit=max&s=e02eb3fae7b0265339a709ff26bdfeb9',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -327,16 +243,120 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2025-07-30T21:00:29.000Z',
+			webPublicationDate: '2026-03-13T08:01:43.000Z',
 			headline:
-				'Destination X review – the BBC’s big new reality competition will make you feel like you’re hallucinating',
-			shortUrl: 'https://www.theguardian.com/p/x2zqzy',
+				'Dynasty: The Murdochs review – who cares which billionaire will control even more billions?',
+			shortUrl: 'https://www.theguardian.com/p/x4hcam',
 			starRating: 3,
 			discussion: {
 				isCommentable: false,
 				isClosedForComments: true,
-				discussionId: '/p/x2zqzy',
+				discussionId: '/p/x4hcam',
 			},
+			trailText:
+				'This Netflix’s documentary about Rupert’s warring children blurs the lines with HBO drama Succession. But, ultimately, it’s a depressing catalogue of nepotism that it’s hard to be enthused about',
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2026/mar/12/dunblane-how-britain-banned-handguns-review-bbc-two',
+			linkText:
+				'Dunblane: How Britain Banned Handguns review – the moving tale of brave parents who made the UK safer',
+			showByline: false,
+			byline: 'Rachel Aroesti',
+			masterImage:
+				'https://media.guim.co.uk/caa72d67c56ee3de0336572ecfa2745b475a96ed/2153_450_1669_1336/master/1669.jpg',
+			image: 'https://i.guim.co.uk/img/media/caa72d67c56ee3de0336572ecfa2745b475a96ed/2153_450_1669_1336/master/1669.jpg?width=300&quality=85&auto=format&fit=max&s=daefe9654e5eae06c620a921a71abcf6',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/caa72d67c56ee3de0336572ecfa2745b475a96ed/2153_450_1669_1336/master/1669.jpg?width=300&quality=85&auto=format&fit=max&s=daefe9654e5eae06c620a921a71abcf6',
+				'460': 'https://i.guim.co.uk/img/media/caa72d67c56ee3de0336572ecfa2745b475a96ed/2153_450_1669_1336/master/1669.jpg?width=460&quality=85&auto=format&fit=max&s=3d571816e71cea3b556f74de8d8daead',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2026-03-12T22:00:31.000Z',
+			headline:
+				'Dunblane: How Britain Banned Handguns review – the moving tale of brave parents who made the UK safer',
+			shortUrl: 'https://www.theguardian.com/p/x4ghte',
+			starRating: 4,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/x4ghte',
+			},
+			trailText:
+				'In the aftermath of the Dunblane shooting, a group of campaigners started a petition to change the law – and succeeded. They tell their courageous story',
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2026/mar/11/a-woman-of-substance-review-a-lavishly-absurd-cliche-packed-tribute-to-simpler-times',
+			linkText:
+				'A Woman of Substance review – a lavishly absurd, cliche-packed tribute to simpler times',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			masterImage:
+				'https://media.guim.co.uk/a526a2c3cfac6215d784dbb8ee6bf4ef4ad37a7e/51_0_3833_3067/master/3833.jpg',
+			image: 'https://i.guim.co.uk/img/media/a526a2c3cfac6215d784dbb8ee6bf4ef4ad37a7e/51_0_3833_3067/master/3833.jpg?width=300&quality=85&auto=format&fit=max&s=dc69c015b67fef5e3d8614aef4097514',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/a526a2c3cfac6215d784dbb8ee6bf4ef4ad37a7e/51_0_3833_3067/master/3833.jpg?width=300&quality=85&auto=format&fit=max&s=dc69c015b67fef5e3d8614aef4097514',
+				'460': 'https://i.guim.co.uk/img/media/a526a2c3cfac6215d784dbb8ee6bf4ef4ad37a7e/51_0_3833_3067/master/3833.jpg?width=460&quality=85&auto=format&fit=max&s=b36a784d2ecd84b78ed766dfb24b84a8',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2026-03-11T22:00:00.000Z',
+			headline:
+				'A Woman of Substance review – a lavishly absurd, cliche-packed tribute to simpler times',
+			shortUrl: 'https://www.theguardian.com/p/x4hc9j',
+			starRating: 3,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/x4hc9j',
+			},
+			trailText:
+				'Barbara Taylor Bradford’s 1979 novel became a massive TV hit in the 1980s. Now, Brenda Blethyn has donned a fabulous wig to whisk us back to the age of excess and escapism',
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2026/mar/11/scarpetta-review-nicole-kidman-dire-mess-ai-chatbot',
+			linkText:
+				'Scarpetta review – this Nicole Kidman show is a dire mess … with an AI chatbot as a main character',
+			showByline: false,
+			byline: 'Hannah J Davies',
+			masterImage:
+				'https://media.guim.co.uk/45c46617fdec7f4650a679ebd32e059d4fc68a12/386_0_2500_2000/master/2500.jpg',
+			image: 'https://i.guim.co.uk/img/media/45c46617fdec7f4650a679ebd32e059d4fc68a12/386_0_2500_2000/master/2500.jpg?width=300&quality=85&auto=format&fit=max&s=6373f5c59267d6d63f0a8866278b31bf',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/45c46617fdec7f4650a679ebd32e059d4fc68a12/386_0_2500_2000/master/2500.jpg?width=300&quality=85&auto=format&fit=max&s=6373f5c59267d6d63f0a8866278b31bf',
+				'460': 'https://i.guim.co.uk/img/media/45c46617fdec7f4650a679ebd32e059d4fc68a12/386_0_2500_2000/master/2500.jpg?width=460&quality=85&auto=format&fit=max&s=3614dd9798ad2d61ddc6c07cafc3c614',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2026-03-11T05:00:09.000Z',
+			headline:
+				'Scarpetta review – this Nicole Kidman show is a dire mess … with an AI chatbot as a main character',
+			shortUrl: 'https://www.theguardian.com/p/x4h6zf',
+			starRating: 2,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/x4h6zf',
+			},
+			trailText:
+				'Nicole Kidman and Jamie Lee Curtis – who exec produced this adaptation of Patricia Cornwell’s novels – have terrific chemistry. But this trashy drama is just weird',
 		},
 	],
 };

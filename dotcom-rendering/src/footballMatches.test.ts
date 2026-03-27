@@ -34,13 +34,13 @@ describe('footballMatches', () => {
 		expect(result.length).toBe(1);
 
 		const day = result[0];
-		expect(day?.dateISOString).toBe('2025-04-28T00:00:00.000Z');
-		expect(day?.competitions.length).toBe(2);
+		expect(day?.dateISOString).toBe('2026-03-16T00:00:00.000Z');
+		expect(day?.competitions.length).toBe(4);
 
 		const competition = day?.competitions[0];
-		expect(competition?.name).toBe('Serie A');
+		expect(competition?.name).toBe('Premier League');
 		expect(competition?.matches[0]?.kind).toBe('Fixture');
-		expect(competition?.tag).toBe('football/serieafootball');
+		expect(competition?.tag).toBe('football/premierleague');
 	});
 
 	it('should return an error when football days have invalid dates', () => {

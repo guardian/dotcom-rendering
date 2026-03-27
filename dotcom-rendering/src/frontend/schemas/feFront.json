@@ -267,6 +267,9 @@
                 },
                 "fbAppId": {
                     "type": "string"
+                },
+                "googleRecaptchaSiteKeyVisible": {
+                    "type": "string"
                 }
             },
             "required": [

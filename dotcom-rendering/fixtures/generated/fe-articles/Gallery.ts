@@ -89,7 +89,7 @@ export const Gallery: FEArticle = {
 					},
 				],
 			},
-			elementId: 'bb9f7669-5158-44e5-9260-4092cf36f483',
+			elementId: 'd51ba4b7-20da-4f62-9ad3-7a96fff8498c',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -273,8 +273,7 @@ export const Gallery: FEArticle = {
 			],
 			data: {
 				alt: 'People take cover as smoke erupts and debris flies off a building',
-				caption:
-					'<h2></h2>An Israeli strike hits a building in Gaza City.',
+				caption: 'An Israeli strike hits a building in Gaza City.',
 				credit: 'Photograph: Jehad Alshrafi/AP',
 			},
 		},
@@ -355,7 +354,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '18bddf90-8f0d-414e-987e-f86a723705b2',
+					elementId: '487f01d8-6fd3-4199-8510-e4de70d756ee',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -664,7 +663,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '18156cdb-7465-4715-8040-4807364b68f4',
+					elementId: 'e2d5af55-4f6f-436b-b3f1-453ef04cca72',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -973,7 +972,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '46f233b8-8980-4b2c-ad36-b91b14dbd162',
+					elementId: '37dd9744-7cbc-4346-978b-0c35dd74fbc3',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -1282,7 +1281,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '6d5d16df-ac3c-449b-bf05-e3c4b489b866',
+					elementId: 'c0dd8ab0-8974-4f2f-902f-43cd6e029619',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -1591,7 +1590,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '71a0243b-bf62-4d1f-a7ef-67505925fc1e',
+					elementId: 'db69b224-7fe3-4786-bec1-822d3c8d1ad4',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -1900,7 +1899,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '37086e2e-1447-4d3e-8643-e75450ce0ca2',
+					elementId: '2a683a97-f4d9-4cf3-9446-ff4ceb2e48c4',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2209,7 +2208,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '8fcbbb62-e471-4095-9def-e9f6c83c1fa2',
+					elementId: 'c33b6e60-830a-4128-af46-fa89fac2f5c2',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2518,7 +2517,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '72847404-1736-4d54-bca4-114102aa033b',
+					elementId: 'be640d06-e3cf-4fb3-bb85-aab7fe4e9b2e',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -2817,7 +2816,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: 'd384bd09-1201-4075-9554-9df02166f691',
+					elementId: '833144ca-6f28-481e-afb8-9d38a504bc69',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -3126,7 +3125,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: 'c28a4346-9e54-44d2-ab65-225776141b5c',
+					elementId: '9730c42d-9fbc-4a30-8fb3-ba6b547a3047',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -3435,7 +3434,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '808a4ed8-22df-4060-b4d5-dc1caf8703ee',
+					elementId: '210a58df-5fbe-48c8-b45a-7d08df7afc98',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -3744,7 +3743,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '7d85db6b-e9dd-4231-b4ba-099e4f3ba38c',
+					elementId: '0034832d-8dba-421c-b4d3-0f13d17d8e8e',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -4053,7 +4052,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '4409674e-0cc2-414e-84a4-14c568b51eb2',
+					elementId: '01e8ec84-48a2-47a9-87fb-94778300a61f',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -4362,7 +4361,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '8b03ca69-51c4-49c8-8086-c1e41eb8b5fa',
+					elementId: '42357481-7ec8-4c85-a58a-f2033ee164e3',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -4671,7 +4670,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '1415aa6c-780a-4463-8822-452b6059bce1',
+					elementId: '881bada6-e397-4f9d-9e33-8704ea474ff5',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -4980,7 +4979,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '574a3365-d8ef-4e29-b39c-23041da02ea3',
+					elementId: 'aefdebf0-9790-4aba-b284-a1d2bbb86166',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -5289,7 +5288,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: 'a0091116-c89a-4f5e-829f-2f428174a75c',
+					elementId: '6239566a-6221-4127-a4d5-b3c69fcfc838',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -5598,7 +5597,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '39811db4-8883-42e4-bde5-07316abae9fc',
+					elementId: 'b458405c-ad42-48a7-9cdc-3d1998bcb54e',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -5907,7 +5906,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '246fc0c5-465b-4d3c-b8eb-e5f762fd5ece',
+					elementId: '255de214-9636-40cb-b61b-145c105e6765',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -6206,7 +6205,7 @@ export const Gallery: FEArticle = {
 							},
 						],
 					},
-					elementId: '06126bb0-32e9-4f89-8769-bd64293b6227',
+					elementId: '87924b3e-ad0c-4888-9927-c4bf0dcdb727',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -6461,7 +6460,7 @@ export const Gallery: FEArticle = {
 			blockFirstPublishedDisplayNoTimezone: '19.56',
 			contributors: [],
 			primaryDateLine: 'Fri 6 Jun 2025 19.55 BST',
-			secondaryDateLine: 'Last modified on Fri 6 Jun 2025 21.56 BST',
+			secondaryDateLine: 'Last modified on Thu 12 Jun 2025 21.17 BST',
 		},
 	],
 	author: {
@@ -6472,7 +6471,7 @@ export const Gallery: FEArticle = {
 	webPublicationDateDeprecated: '2025-06-06T18:55:24.000Z',
 	webPublicationDateDisplay: 'Fri 6 Jun 2025 19.55 BST',
 	webPublicationSecondaryDateDisplay:
-		'Last modified on Fri 6 Jun 2025 21.56 BST',
+		'Last modified on Thu 12 Jun 2025 21.17 BST',
 	editionLongForm: 'UK edition',
 	editionId: 'UK',
 	pageId: 'artanddesign/gallery/2025/jun/06/the-week-around-the-world-in-20-pictures',
@@ -6595,7 +6594,7 @@ export const Gallery: FEArticle = {
 			],
 			datePublished: '2025-06-06T18:55:24.000Z',
 			headline: 'The week around the world in 20 pictures',
-			dateModified: '2025-06-06T20:56:49.000Z',
+			dateModified: '2025-06-12T20:17:04.000Z',
 			mainEntityOfPage:
 				'https://www.theguardian.com/artanddesign/gallery/2025/jun/06/the-week-around-the-world-in-20-pictures',
 		},
@@ -6620,7 +6619,7 @@ export const Gallery: FEArticle = {
 			'gnmguardian://artanddesign/gallery/2025/jun/06/the-week-around-the-world-in-20-pictures?contenttype=Article&source=applinks',
 		'og:title': 'The week around the world in 20 pictures',
 		'fb:app_id': '180444840287',
-		'article:modified_time': '2025-06-06T20:56:49.000Z',
+		'article:modified_time': '2025-06-12T20:17:04.000Z',
 		'og:image:height': '960',
 		'og:description':
 			'Israeli airstrikes in Gaza, wildfires in Canada, the first day of Eid al-Adha, and the Champions League final in Munich: the past seven days as captured by the world’s leading photojournalists',
@@ -7104,7 +7103,7 @@ export const Gallery: FEArticle = {
 				},
 			],
 		},
-		elementId: 'f66f2172-93ff-4877-9571-babf956c928b',
+		elementId: 'a4fadd6b-4a8f-45ff-8c23-2e94d51fc22c',
 		imageSources: [],
 		data: {
 			copyright: '',
@@ -7276,11 +7275,6 @@ export const Gallery: FEArticle = {
 								url: '/football/teams',
 								longTitle: 'football/teams',
 							},
-							{
-								title: 'Euro 2025',
-								url: '/football/women-s-euro-2025',
-								longTitle: 'football/women-s-euro-2025',
-							},
 						],
 					},
 					{
@@ -7422,6 +7416,10 @@ export const Gallery: FEArticle = {
 				iconName: 'home',
 				children: [
 					{
+						title: 'Winter Paralympics',
+						url: '/sport/winter-paralympics',
+					},
+					{
 						title: 'Football',
 						url: '/football',
 						children: [
@@ -7454,11 +7452,6 @@ export const Gallery: FEArticle = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
-							},
-							{
-								title: 'Euro 2025',
-								url: '/football/women-s-euro-2025',
-								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -7709,6 +7702,10 @@ export const Gallery: FEArticle = {
 						url: '/crosswords/series/sunday-quick',
 					},
 					{
+						title: 'Mini',
+						url: '/crosswords/series/mini-crossword',
+					},
+					{
 						title: 'Quick cryptic',
 						url: '/crosswords/series/quick-cryptic',
 					},
@@ -7903,15 +7900,21 @@ export const Gallery: FEArticle = {
 					extraClasses: '',
 				},
 				{
-					text: 'SecureDrop',
-					url: 'https://www.theguardian.com/securedrop',
-					dataLinkName: 'securedrop',
+					text: 'Contact us',
+					url: '/help/contact-us',
+					dataLinkName: 'uk : footer : contact us',
 					extraClasses: '',
 				},
 				{
-					text: 'Work for us',
-					url: 'https://workforus.theguardian.com',
-					dataLinkName: 'uk : footer : work for us',
+					text: 'Tip us off',
+					url: 'https://www.theguardian.com/tips',
+					dataLinkName: 'uk : footer : tips',
+					extraClasses: '',
+				},
+				{
+					text: 'SecureDrop',
+					url: 'https://www.theguardian.com/securedrop',
+					dataLinkName: 'securedrop',
 					extraClasses: '',
 				},
 				{
@@ -7927,15 +7930,21 @@ export const Gallery: FEArticle = {
 					extraClasses: '',
 				},
 				{
-					text: 'Terms & conditions',
-					url: '/help/terms-of-service',
-					dataLinkName: 'terms',
+					text: 'Modern Slavery Act',
+					url: 'https://uploads.guim.co.uk/2025/09/05/Modern_Slavery_Statement_2025.pdf',
+					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
 				{
-					text: 'Contact us',
-					url: '/help/contact-us',
-					dataLinkName: 'uk : footer : contact us',
+					text: 'Tax strategy',
+					url: 'https://uploads.guim.co.uk/2025/09/05/Tax_strategy_for_the_year_ended_31_March_2025.pdf',
+					dataLinkName: 'uk : footer : tax strategy',
+					extraClasses: '',
+				},
+				{
+					text: 'Terms & conditions',
+					url: '/help/terms-of-service',
+					dataLinkName: 'terms',
 					extraClasses: '',
 				},
 			],
@@ -7953,15 +7962,9 @@ export const Gallery: FEArticle = {
 					extraClasses: '',
 				},
 				{
-					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2024/09/04/Modern_Slavery_Statement_2024_.pdf',
-					dataLinkName: 'uk : footer : modern slavery act statement',
-					extraClasses: '',
-				},
-				{
-					text: 'Tax strategy',
-					url: 'https://uploads.guim.co.uk/2024/08/27/TAX_STRATEGY_FOR_THE_YEAR_ENDED_31_MARCH_2025.pdf',
-					dataLinkName: 'uk : footer : tax strategy',
+					text: 'Newsletters',
+					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+					dataLinkName: 'uk : footer : newsletters',
 					extraClasses: '',
 				},
 				{
@@ -7971,33 +7974,45 @@ export const Gallery: FEArticle = {
 					extraClasses: '',
 				},
 				{
-					text: 'Facebook',
-					url: 'https://www.facebook.com/theguardian',
-					dataLinkName: 'uk : footer : facebook',
+					text: 'Bluesky',
+					url: 'https://bsky.app/profile/theguardian.com',
+					dataLinkName: 'uk : footer : Bluesky',
 					extraClasses: '',
 				},
 				{
-					text: 'YouTube',
-					url: 'https://www.youtube.com/user/TheGuardian',
-					dataLinkName: 'uk : footer : youtube',
+					text: 'Facebook',
+					url: 'https://www.facebook.com/theguardian',
+					dataLinkName: 'uk : footer : Facebook',
 					extraClasses: '',
 				},
 				{
 					text: 'Instagram',
 					url: 'https://www.instagram.com/guardian',
-					dataLinkName: 'uk : footer : instagram',
+					dataLinkName: 'uk : footer : Instagram',
 					extraClasses: '',
 				},
 				{
 					text: 'LinkedIn',
 					url: 'https://www.linkedin.com/company/theguardian',
-					dataLinkName: 'uk : footer : linkedin',
+					dataLinkName: 'uk : footer : LinkedIn',
 					extraClasses: '',
 				},
 				{
-					text: 'Newsletters',
-					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
-					dataLinkName: 'uk : footer : newsletters',
+					text: 'Threads',
+					url: 'https://www.threads.com/@guardian',
+					dataLinkName: 'uk : footer : Threads',
+					extraClasses: '',
+				},
+				{
+					text: 'TikTok',
+					url: 'https://www.tiktok.com/@guardian',
+					dataLinkName: 'uk : footer : TikTok',
+					extraClasses: '',
+				},
+				{
+					text: 'YouTube',
+					url: 'https://www.youtube.com/user/TheGuardian',
+					dataLinkName: 'uk : footer : YouTube',
 					extraClasses: '',
 				},
 			],
@@ -8027,9 +8042,9 @@ export const Gallery: FEArticle = {
 					extraClasses: '',
 				},
 				{
-					text: 'Tips',
-					url: 'https://www.theguardian.com/tips',
-					dataLinkName: 'uk : footer : tips',
+					text: 'Work with us',
+					url: 'https://workwithus.theguardian.com/',
+					dataLinkName: 'uk : footer : work with us',
 					extraClasses: '',
 				},
 				{
