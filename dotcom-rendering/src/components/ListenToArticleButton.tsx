@@ -45,7 +45,7 @@ const themeIcon: ThemeIcon = {
 	fill: palette('--follow-icon-background'),
 };
 
-const waveFormContainerCss = css`
+export const waveFormContainerCss = css`
 	height: ${space[12]}px;
 	border-top: 1px solid ${palette('--article-meta-lines')};
 	position: relative;
