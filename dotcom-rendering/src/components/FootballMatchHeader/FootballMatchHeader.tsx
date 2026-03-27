@@ -13,7 +13,7 @@ import {
 	textSansItalic15Object,
 	until,
 } from '@guardian/source/foundations';
-import { type ComponentProps, type ReactNode, useMemo } from 'react';
+import { type ComponentProps, useMemo } from 'react';
 import type { SWRConfiguration } from 'swr';
 import useSWR from 'swr';
 import type { FootballMatch } from '../../footballMatchV2';
@@ -39,6 +39,8 @@ import { Tabs } from './Tabs';
 export type FootballMatchHeaderProps = {
 	initialTab: ComponentProps<typeof Tabs>['selected'];
 	initialData?: HeaderData;
+	leagueName: string;
+	leagueURL?: string;
 	edition: EditionId;
 	matchHeaderURL: string;
 	renderingTarget: RenderingTarget;
@@ -60,7 +62,6 @@ export const FootballMatchHeader = (props: Props) => {
 
 	const match = data?.match ?? props.initialData?.match;
 	const tabs = data?.tabs ?? props.initialData?.tabs;
-	const leagueName = data?.leagueName ?? props.initialData?.leagueName;
 
 	if (error) {
 		if (
@@ -79,7 +80,7 @@ export const FootballMatchHeader = (props: Props) => {
 		return null;
 	}
 
-	if (match === undefined || tabs === undefined || leagueName === undefined) {
+	if (match === undefined || tabs === undefined) {
 		return (
 			<Placeholder
 				heights={
@@ -113,7 +114,8 @@ export const FootballMatchHeader = (props: Props) => {
 				}}
 			>
 				<StatusLine
-					leagueName={leagueName}
+					leagueName={props.leagueName}
+					leagueURL={props.leagueURL}
 					match={match}
 					edition={props.edition}
 				/>
@@ -161,6 +163,7 @@ const fetcher =
 
 const StatusLine = (props: {
 	leagueName: string;
+	leagueURL?: string;
 	match: FootballMatch;
 	edition: EditionId;
 }) => (
@@ -179,7 +182,11 @@ const StatusLine = (props: {
 			color: palette(secondaryText(props.match.kind)),
 		}}
 	>
-		<LeagueName matchKind={props.match.kind}>{props.leagueName}</LeagueName>
+		<LeagueName
+			matchKind={props.match.kind}
+			name={props.leagueName}
+			url={props.leagueURL}
+		/>
 		{props.match.venue ? `${props.match.venue} • ` : null}
 		<MatchStatus edition={props.edition} match={props.match} />
 	</p>
@@ -187,7 +194,8 @@ const StatusLine = (props: {
 
 const LeagueName = (props: {
 	matchKind: FootballMatch['kind'];
-	children: ReactNode;
+	name: string;
+	url?: string;
 }) => (
 	<>
 		<span
@@ -220,7 +228,20 @@ const LeagueName = (props: {
 				},
 			}}
 		>
-			{props.children}
+			{props.url ? (
+				<a
+					href={props.url}
+					css={{
+						color: 'inherit',
+						textDecoration: 'none',
+						'&:hover': { textDecoration: 'underline' },
+					}}
+				>
+					{props.name}
+				</a>
+			) : (
+				props.name
+			)}
 		</span>
 		<span
 			css={{
