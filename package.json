@@ -18,9 +18,13 @@
 		"ab-testing/**/*": "pnpm --filter @guardian/ab-testing-* lint-staged"
 	},
 	"dependencies": {
+		"@guardian/cdk": "62.6.1",
 		"@guardian/prettier": "5.0.0",
 		"@types/chai": "5.2.2",
+		"aws-cdk": "2.1110.0",
+		"aws-cdk-lib": "2.241.0",
 		"chromatic": "13.3.4",
+		"constructs": "10.5.1",
 		"husky": "9.1.7",
 		"lint-staged": "15.2.0",
 		"prettier": "3.0.3",

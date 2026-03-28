@@ -1,3 +1,9 @@
 packages:
   - 'dotcom-rendering'
   - 'ab-testing/*'
+
+catalog:
+  '@guardian/cdk': '62.6.1'
+  'aws-cdk': '2.1110.0'
+  'aws-cdk-lib': '2.241.0'
+  'constructs': '10.5.1'
