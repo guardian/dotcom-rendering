@@ -53,6 +53,7 @@ export const EventPalette: Story = {
 			containerPalette: 'EventPalette',
 			showDateHeader: true,
 			editionId: 'UK',
+			showTopBorder: false,
 		},
 		flexibleGeneral: {
 			groupedTrails,

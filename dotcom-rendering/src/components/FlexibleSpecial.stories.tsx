@@ -91,7 +91,7 @@ const meta = {
 		<FrontSection
 			title={frontSectionTitle}
 			editionId="UK"
-			showTopBorder={true}
+			showTopBorder={false}
 			slimifySectionForSlimHomepageAbTest={
 				args.isInSlimHomepageAbTestVariant
 			}
@@ -367,12 +367,12 @@ export const WithSpecialPaletteVariations = {
 	},
 	render: (args) => (
 		<>
-			{containerPalettes.map((containerPalette) => (
+			{containerPalettes.map((containerPalette, index) => (
 				<FrontSection
-					editionId="UK"
-					showTopBorder={true}
-					containerPalette={containerPalette}
 					key={containerPalette}
+					editionId="UK"
+					showTopBorder={index > 0}
+					containerPalette={containerPalette}
 					title={containerPalette}
 				>
 					<FlexibleSpecial
