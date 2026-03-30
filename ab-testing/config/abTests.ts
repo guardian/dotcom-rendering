@@ -36,7 +36,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Holdback proportion of the audience without new spacefinder logic on interactive pages",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-04-09",
+		expirationDate: "2026-04-30",
 		type: "client",
 		status: "ON",
 		audienceSize: 10 / 100,
