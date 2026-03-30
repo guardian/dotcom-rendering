@@ -16,376 +16,40 @@ import type { FEArticle } from '../../../src/frontend/feArticle';
 export const Audio: FEArticle = {
 	version: 3,
 	headline:
-		'NSA collecting phone records of millions of Verizon customers daily',
+		'‘What I see in clinic is never a set of labels’: are we in danger of overdiagnosing mental illness? -podcast',
 	standfirst:
-		'<strong>Exclusive:</strong> Top secret court order requiring Verizon to hand over all call data shows scale of domestic surveillance under Obama\n<br>\n<br>\n• <a href="http://www.guardian.co.uk/world/interactive/2013/jun/06/verizon-telephone-data-court-order">Read the Verizon court order in full here</a>\n<br>\n• <a href="http://www.guardian.co.uk/world/2013/jun/06/obama-administration-nsa-verizon-records">Obama administration justifies surveillance</a>',
+		'<p>Our current approach to mental health labelling and diagnosis has brought benefits. But as a practising doctor, I am concerned that it may be doing more harm than good</p><p>By Gavin Francis. Read by Noof Ousellam</p>',
 	webTitle:
-		'NSA collecting phone records of millions of Verizon customers daily',
+		'‘What I see in clinic is never a set of labels’: are we in danger of overdiagnosing mental illness? -podcast',
 	mainMediaElements: [
 		{
-			displayCredit: false,
-			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			role: 'inline',
-			media: {
-				allImages: [
-					{
-						index: 0,
-						fields: {
-							height: '276',
-							width: '460',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'http://static.guim.co.uk/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg',
+			_type: 'model.dotcomrendering.pageElements.AudioBlockElement',
+			assets: [
+				{
+					fields: {
+						durationMinutes: '26',
+						durationSeconds: '24',
+						source: 'The Guardian',
 					},
-				],
-			},
-			elementId: '38122516-c068-4549-b00e-2ace86fa1756',
-			imageSources: [
-				{
-					weighting: 'inline',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=620&quality=85&auto=format&fit=max&s=2f0303e3a6cfa368bb76b5aa1fe40ba1',
-							width: 620,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=ac282714e74da98178e57aed900667b3',
-							width: 1240,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=85&auto=format&fit=max&s=214ade1ddb558bcda2ebfb4f250a7bad',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=69add9eb81396bb095281d8180827dd9',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=620&quality=85&auto=format&fit=max&s=2f0303e3a6cfa368bb76b5aa1fe40ba1',
-							width: 620,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=ac282714e74da98178e57aed900667b3',
-							width: 1240,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=645&quality=85&auto=format&fit=max&s=b8c14cbb95296c6ce2c47afd1c74caef',
-							width: 645,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=db791719b428c3726dd025373b5715c8',
-							width: 1290,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=465&quality=85&auto=format&fit=max&s=f4afb47d8116bd1c2f9fb126ab2d09ca',
-							width: 465,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=7913b6ad76e99a6811ffc359ead3f1c9',
-							width: 930,
-						},
-					],
-				},
-				{
-					weighting: 'thumbnail',
-					srcSet: [],
-				},
-				{
-					weighting: 'supporting',
-					srcSet: [],
-				},
-				{
-					weighting: 'showcase',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1020&quality=85&auto=format&fit=max&s=bb0557a68adb7d01d0294de4ff7c9a38',
-							width: 1020,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=07925e22da45fa157dd39104bea25b07',
-							width: 2040,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=940&quality=85&auto=format&fit=max&s=9e51b0e35b15bda73be0d1cf2a816b06',
-							width: 940,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=c91a29662a3b09d053d4d1fd1080db3c',
-							width: 1880,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=85&auto=format&fit=max&s=214ade1ddb558bcda2ebfb4f250a7bad',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=69add9eb81396bb095281d8180827dd9',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=85&auto=format&fit=max&s=214ade1ddb558bcda2ebfb4f250a7bad',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=69add9eb81396bb095281d8180827dd9',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=660&quality=85&auto=format&fit=max&s=f6f422301d42da7f16fdf0099e5d2abb',
-							width: 660,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=cd24eea3ca1f24fdeac108251502e520',
-							width: 1320,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=645&quality=85&auto=format&fit=max&s=b8c14cbb95296c6ce2c47afd1c74caef',
-							width: 645,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=db791719b428c3726dd025373b5715c8',
-							width: 1290,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=465&quality=85&auto=format&fit=max&s=f4afb47d8116bd1c2f9fb126ab2d09ca',
-							width: 465,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=7913b6ad76e99a6811ffc359ead3f1c9',
-							width: 930,
-						},
-					],
-				},
-				{
-					weighting: 'halfwidth',
-					srcSet: [],
-				},
-				{
-					weighting: 'immersive',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1900&quality=85&auto=format&fit=max&s=23200f4fbf312d4cc329b375882540e7',
-							width: 1900,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=5314e4ad4795ffd3aaf1a5c8cfd97be4',
-							width: 3800,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1300&quality=85&auto=format&fit=max&s=ce24ae26bde4f0d84db39460758409d1',
-							width: 1300,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=0f9d8d9013a7e589b772d94a3626c6bb',
-							width: 2600,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1140&quality=85&auto=format&fit=max&s=8501c0e4d7abeb6dbc054c78276f3d0e',
-							width: 1140,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=3267023b74d0d6b9076ece455c939b03',
-							width: 2280,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=980&quality=85&auto=format&fit=max&s=e13cdce4024f0740056c3ca1a00944f1',
-							width: 980,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=7e73c17e8b531b5470a4f312d76851df',
-							width: 1960,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=740&quality=85&auto=format&fit=max&s=3d0f43f5906111bd1d8239acdcf67a9c',
-							width: 740,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=4d1e34d5a6d635b6fec68eb0aabeb97c',
-							width: 1480,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=660&quality=85&auto=format&fit=max&s=f6f422301d42da7f16fdf0099e5d2abb',
-							width: 660,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=cd24eea3ca1f24fdeac108251502e520',
-							width: 1320,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=480&quality=85&auto=format&fit=max&s=a9b086c50aea4bdc186c8e78983a10b9',
-							width: 480,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=3db6a06f16d14b55a9c41b96fb84a2aa',
-							width: 960,
-						},
-					],
+					url: 'https://audio.guim.co.uk/2026/02/27-42462-gdn.alr.060326.NA_GAVIN_FRANCIS_MENTALILLNESS.mp3',
+					mimeType: 'audio/mpeg',
 				},
 			],
-			data: {
-				alt: 'Phone records data',
-				caption:
-					'Under the terms of the order, the numbers of both parties on a call are handed over, as is location data and the time and duration of all calls. Photograph: Matt Rourke/AP',
-				credit: 'Photograph: Matt Rourke/AP',
-			},
+			id: 'gu-audio-69a065c68f082be2de6a7ce1',
+			elementId: '983b569d-9dfb-4c30-b3b3-0fafdb75a79e',
 		},
 	],
-	main: '<figure class="element element-image" data-media-id="gu-image-410269952"> <img src="http://static.guim.co.uk/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg" alt="Phone records data" width="460" height="276" class="gu-image" /> <figcaption> <span class="element-image__caption">Under the terms of the order, the numbers of both parties on a call are handed over, as is location data and the time and duration of all calls. Photograph: Matt Rourke/AP</span> <span class="element-image__credit">Photograph: Matt Rourke/AP</span> </figcaption> </figure>',
+	main: '<!-- Invalid audio element without "html" field -->',
 	filterKeyEvents: false,
 	keyEvents: [],
 	blocks: [
 		{
-			id: 'ed4dfa13-125b-4c94-8b82-cc1e2bbb0553',
+			id: '69a0665b8f082be2de6a7cf5',
 			elements: [
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: "<p>The National Security Agency is currently collecting the telephone records of millions of US customers of Verizon, one of America's largest telecoms providers, under a top secret court order issued in April.</p>",
-					elementId: '3e83c465-58b8-40e9-838f-7c1217781cee',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The order, a copy of which has been obtained by the Guardian, <a href="https://www.theguardian.com/world/interactive/2013/jun/06/verizon-telephone-data-court-order">requires Verizon on an "ongoing, daily basis" to give the NSA information on all telephone calls in its systems</a>, both within the US and between the US and other countries.</p>',
-					elementId: 'c84dded0-6a51-4d05-915e-b32a527c27e7',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The document shows for the first time that under the Obama administration the communication records of millions of US citizens are being collected indiscriminately and in bulk – regardless of whether they are suspected of any wrongdoing.</p>',
-					elementId: 'a6c47079-8e49-4fa1-87b4-cddc15ef243d',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The secret Foreign Intelligence Surveillance Court (Fisa) granted the order to the FBI on April 25, giving the government unlimited authority to obtain the data for a specified three-month period ending on July 19.</p>',
-					elementId: '028d4c5b-c417-434d-8113-1920ff2f3a3d',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Under the terms of the blanket order, the numbers of both parties on a call are handed over, as is location data, call duration, unique identifiers, and the time and duration of all calls. The contents of the conversation itself are not covered.</p>',
-					elementId: 'fe7fb568-9962-419f-ab0e-cb47be19e1b8',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: "<p>The disclosure is likely to reignite longstanding debates in the US over the proper extent of the government's domestic spying powers.</p>",
-					elementId: 'aa4c82e2-3fed-4c51-9b9d-2ad1744202e9',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Under the Bush administration, officials in security agencies had disclosed to reporters the large-scale collection of call records data by the <a href="https://www.theguardian.com/us-news/nsa" data-component="auto-linked-tag">NSA</a>, but this is the first time significant and top-secret documents have revealed the continuation of the practice on a massive scale under President Obama.</p>',
-					elementId: '314f0233-8197-476f-a608-7682d324970e',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The unlimited nature of the records being handed over to the NSA is extremely unusual. Fisa court orders typically direct the production of records pertaining to a specific named target who is suspected of being an agent of a terrorist group or foreign state, or a finite set of individually named targets.</p>',
-					elementId: 'a96ca93b-46e7-4a1b-8643-64819c756500',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The Guardian approached the National Security Agency, the White House and the Department of Justice for comment in advance of publication on Wednesday. All declined. The agencies were also offered the opportunity to raise specific security concerns regarding the publication of the court order.</p>',
-					elementId: '461c7c71-b9d4-4e6c-a4c4-db28e2d562cd',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: "<p>The court order expressly bars Verizon from disclosing to the public either the existence of the FBI's request for its customers' records, or the court order itself.</p>",
-					elementId: '91388831-d1b0-4a33-b695-f11c63fdbdd1',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>"We decline comment," said Ed McFadden, a Washington-based Verizon spokesman.</p>',
-					elementId: 'b74f2639-82cd-4f5d-93e0-86387ef017c8',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The order, signed by Judge Roger Vinson, compels Verizon to produce to the NSA electronic copies of "all call detail records or \'telephony metadata\' created by Verizon for communications between the United States and abroad" or "wholly within the United States, including local telephone calls".</p>',
-					elementId: '63c47275-b0a0-4053-bd87-64e98af1f616',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The order directs Verizon to "continue production on an ongoing daily basis thereafter for the duration of this order". It specifies that the records to be produced include "session identifying information", such as "originating and terminating number", the duration of each call, telephone calling card numbers, trunk identifiers, International Mobile Subscriber Identity (IMSI) number, and "comprehensive communication routing information".</p>',
-					elementId: '9f807456-9f6e-490d-a653-28f8c2cfe1d7',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The information is classed as "metadata", or transactional information, rather than communications, and so does not require individual warrants to access. The document also specifies that such "metadata" is not limited to the aforementioned items. A 2005 court ruling judged that cell site location data – the nearest cell tower a phone was connected to – was also transactional data, and so could potentially fall under the scope of the order.</p>',
-					elementId: '0953c1ff-dd01-4eb3-97cf-89cf9ce8ef4d',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>While the order itself does not include either the contents of messages or the personal information of the subscriber of any particular cell number, its collection would allow the NSA to build easily a comprehensive picture of who any individual contacted, how and when, and possibly from where, retrospectively.</p>',
-					elementId: '21a6e5ec-cb6d-4bfa-b2f3-91770f08f3e2',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>It is not known whether Verizon is the only cell-phone provider to be targeted with such an order, although previous reporting has suggested the NSA has collected cell records from all major mobile networks. It is also unclear from the leaked document whether the three-month order was a one-off, or the latest in a series of similar orders.</p>',
-					elementId: 'd2febc1e-6698-41ee-929c-414e59621a25',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: "<p>The court order appears to explain the numerous cryptic public warnings by two US senators, Ron Wyden and Mark Udall, about the scope of the Obama administration's surveillance activities.</p>",
-					elementId: 'ebb464e1-a280-4a43-83a7-8842020f7472',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>For roughly two years, the two Democrats have been stridently advising the public that the US government is relying on "secret legal interpretations" to claim surveillance powers so broad that the American public would be "stunned" to learn of the kind of domestic spying being conducted.</p>',
-					elementId: '534a2ee1-0e39-4f54-80f8-bb3b388fb282',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Because those activities are classified, the senators, both members of the Senate intelligence committee, have been prevented from specifying which domestic surveillance programs they find so alarming. But the information they have been able to disclose in their public warnings perfectly tracks both the specific law cited by the April 25 court order as well as the vast scope of record-gathering it authorized.</p>',
-					elementId: '659821fa-b2a0-40a4-8382-a2f87d90737c',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: "<p>Julian Sanchez, a surveillance expert with the Cato Institute, explained: \"We've certainly seen the government increasingly strain the bounds of 'relevance' to collect large numbers of records at once — everyone at one or two degrees of separation from a target — but vacuuming all metadata up indiscriminately would be an extraordinary repudiation of any pretence of constraint or particularized suspicion.\" The April order requested by the FBI and NSA does precisely that.</p>",
-					elementId: '69b2a72c-b1a6-4aaf-ac95-f296b73c04f4',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The law on which the order explicitly relies is the so-called "business records" provision of the Patriot Act, 50 USC section 1861. That is the provision which Wyden and Udall have repeatedly cited when warning the public of what they believe is the Obama administration\'s extreme interpretation of the law to engage in excessive domestic surveillance.</p>',
-					elementId: '917ef1fd-2257-426d-ba9c-29a877d18484',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>In a letter to attorney general Eric Holder last year, they argued that "there is now a significant gap between what most Americans <em>think</em> the law allows and what the government secretly <em>claims</em> the law allows."</p>',
-					elementId: '1a2d7356-7d1b-4d85-943d-81209415cfd8',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>"We believe," they wrote, "that most Americans would be stunned to learn the details of how these secret court opinions have interpreted" the "business records" provision of the Patriot Act.</p>',
-					elementId: '2904e1ce-de96-4b58-8aec-9b6618e1e440',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Privacy advocates have long warned that allowing the government to collect and store unlimited "metadata" is a highly invasive form of surveillance of citizens\' communications activities. Those records enable the government to know the identity of every person with whom an individual communicates electronically, how long they spoke, and their location at the time of the communication.</p>',
-					elementId: '986f6db4-a3e4-4770-a0d1-34479bb3a8c5',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: "<p>Such metadata is what the US government has long attempted to obtain in order to discover an individual's network of associations and communication patterns. The request for the bulk collection of all Verizon domestic telephone records indicates that the agency is continuing some version of the data-mining program begun by the Bush administration in the immediate aftermath of the 9/11 attack.</p>",
-					elementId: 'e08682c0-bb7a-4b83-9ad1-958a6ca84f71',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The NSA, as part of a program secretly authorized by President Bush on 4 October 2001, implemented a bulk collection program of domestic telephone, internet and email records. A furore erupted in 2006 when USA Today reported that the NSA had "been secretly collecting the phone call records of tens of millions of Americans, using data provided by AT&amp;T, Verizon and BellSouth" and was "using the data to analyze calling patterns in an effort to detect terrorist activity." Until now, there has been no indication that the Obama administration implemented a similar program.</p>',
-					elementId: '600497eb-c849-4b70-8af1-a8d2770a28cd',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: "<p>These recent events reflect how profoundly the NSA's mission has transformed from an agency exclusively devoted to foreign intelligence gathering, into one that focuses increasingly on domestic communications. A 30-year employee of the NSA, William Binney, resigned from the agency shortly after 9/11 in protest at the agency's focus on domestic activities.</p>",
-					elementId: '9ffbda8e-8fb4-4841-938b-91bb19e46fe7',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>In the mid-1970s, Congress, for the first time, investigated the surveillance activities of the US government. Back then, the mandate of the NSA was that it would never direct its surveillance apparatus domestically.</p>',
-					elementId: '722b38a0-22c5-4eb6-ace0-01017863d128',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>At the conclusion of that investigation, Frank Church, the Democratic senator from Idaho who chaired the investigative committee, warned: "The NSA\'s capability at any time could be turned around on the American people, and no American would have any privacy left, such is the capability to monitor everything: telephone conversations, telegrams, it doesn\'t matter."</p>',
-					elementId: '6ef7b160-8070-412b-8c27-f4654498f2f2',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p><em>Additional reporting by Ewen MacAskill and Spencer Ackerman</em></p>',
-					elementId: '4ae92bef-67f8-47a1-b56c-790f9c891867',
+					html: '<ul>\n <li><strong><a href="https://www.theguardian.com/news/2026/feb/10/what-i-see-in-clinic-is-never-a-set-of-labels-are-we-in-danger-of-overdiagnosing-mental-illness">Read the text version here</a></strong></li>\n <li><strong>Support the Guardian today: <a href="https://theguardian.com/longreadpod">theguardian.com/longreadpod</a></strong></li>\n</ul>',
+					elementId: '4b2a79d5-43cb-4e17-a2df-3121fdd58cbc',
 				},
 			],
 			attributes: {
@@ -393,193 +57,144 @@ export const Audio: FEArticle = {
 				keyEvent: false,
 				summary: false,
 			},
-			blockCreatedOn: 1452843129000,
-			blockCreatedOnDisplay: '07.32 GMT',
-			blockLastUpdated: 1452843129000,
-			blockLastUpdatedDisplay: '07.32 GMT',
+			blockCreatedOn: 1772773211000,
+			blockCreatedOnDisplay: '05.00 GMT',
+			blockLastUpdated: 1772119661000,
+			blockLastUpdatedDisplay: '15.27 GMT',
+			blockFirstPublished: 1772773211000,
+			blockFirstPublishedDisplay: '05.00 GMT',
+			blockFirstPublishedDisplayNoTimezone: '05.00',
 			contributors: [],
-			primaryDateLine: 'Thu 6 Jun 2013 11.05 BST',
-			secondaryDateLine: 'First published on Thu 6 Jun 2013 11.05 BST',
+			primaryDateLine: 'Fri 6 Mar 2026 05.00 GMT',
+			secondaryDateLine: 'Last modified on Fri 6 Mar 2026 05.00 GMT',
 		},
 	],
 	author: {
-		byline: 'Glenn Greenwald',
+		byline: 'Written by Gavin Francis and read by Noof Ousellam. Produced by Nicola Alexandrou. The executive producer was Ellie Bury',
+		twitterHandle: 'gavinfranc',
 	},
-	byline: 'Glenn Greenwald',
-	webPublicationDate: '2013-06-06T10:05:00.000Z',
-	webPublicationDateDeprecated: '2013-06-06T10:05:00.000Z',
-	webPublicationDateDisplay: 'Thu 6 Jun 2013 11.05 BST',
+	byline: 'Written by Gavin Francis and read by Noof Ousellam. Produced by Nicola Alexandrou. The executive producer was Ellie Bury',
+	webPublicationDate: '2026-03-06T05:00:11.000Z',
+	webPublicationDateDeprecated: '2026-03-06T05:00:11.000Z',
+	webPublicationDateDisplay: 'Fri 6 Mar 2026 05.00 GMT',
 	webPublicationSecondaryDateDisplay:
-		'First published on Thu 6 Jun 2013 11.05 BST',
+		'Last modified on Fri 6 Mar 2026 05.00 GMT',
 	editionLongForm: 'UK edition',
 	editionId: 'UK',
-	pageId: 'world/2013/jun/06/nsa-phone-records-verizon-court-order',
+	pageId: 'news/audio/2026/mar/06/what-i-see-in-clinic-is-never-a-set-of-labels-are-we-in-danger-of-overdiagnosing-mental-illness--podcast',
 	canonicalUrl:
-		'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+		'https://www.theguardian.com/news/audio/2026/mar/06/what-i-see-in-clinic-is-never-a-set-of-labels-are-we-in-danger-of-overdiagnosing-mental-illness--podcast',
 	format: {
-		design: 'ArticleDesign',
+		design: 'AudioDesign',
 		theme: 'NewsPillar',
 		display: 'StandardDisplay',
 	},
-	designType: 'Article',
+	designType: 'Media',
 	tags: [
 		{
-			id: 'us-news/us-national-security',
-			type: 'Keyword',
-			title: 'US national security',
-		},
-		{
-			id: 'us-news/us-politics',
-			type: 'Keyword',
-			title: 'US politics',
-		},
-		{
-			id: 'world/privacy',
-			type: 'Keyword',
-			title: 'Privacy',
-		},
-		{
-			id: 'business/telecoms',
-			type: 'Keyword',
-			title: 'Telecommunications industry',
-		},
-		{
-			id: 'technology/telecoms',
-			type: 'Keyword',
-			title: 'Telecoms',
-		},
-		{
-			id: 'business/verizon-communications',
-			type: 'Keyword',
-			title: 'Verizon Communications',
-		},
-		{
-			id: 'technology/data-protection',
-			type: 'Keyword',
-			title: 'Data protection',
-		},
-		{
-			id: 'technology/technology',
-			type: 'Keyword',
-			title: 'Technology',
-		},
-		{
-			id: 'business/business',
-			type: 'Keyword',
-			title: 'Business',
-		},
-		{
-			id: 'world/world',
-			type: 'Keyword',
-			title: 'World news',
-		},
-		{
-			id: 'tone/news',
-			type: 'Tone',
-			title: 'News',
-		},
-		{
-			id: 'us-news/us-news',
-			type: 'Keyword',
-			title: 'US news',
-		},
-		{
-			id: 'commentisfree/series/glenn-greenwald-security-liberty',
+			id: 'news/series/the-audio-long-read',
 			type: 'Series',
-			title: 'Glenn Greenwald on security and liberty',
+			title: 'The Audio Long Read',
+			podcast: {
+				subscriptionUrl:
+					'https://itunes.apple.com/gb/podcast/the-guardian-long-read/id587347784?mt=2',
+				spotifyUrl:
+					'https://open.spotify.com/show/0jG1HXr3tGoGorW1ieytRS',
+				image: 'https://uploads.guim.co.uk/2021/01/22/AudioLongReadJan2021.jpg',
+			},
 		},
 		{
-			id: 'us-news/nsa',
+			id: 'news/series/the-long-read',
+			type: 'Series',
+			title: 'The long read',
+		},
+		{
+			id: 'society/mental-health',
 			type: 'Keyword',
-			title: 'NSA',
+			title: 'Mental health',
 		},
 		{
-			id: 'us-news/the-nsa-files',
+			id: 'society/health',
 			type: 'Keyword',
-			title: 'The NSA files',
+			title: 'Health',
 		},
 		{
-			id: 'type/article',
+			id: 'society/society',
+			type: 'Keyword',
+			title: 'Society',
+		},
+		{
+			id: 'type/audio',
 			type: 'Type',
-			title: 'Article',
+			title: 'Audio',
 		},
 		{
-			id: 'profile/glenn-greenwald',
+			id: 'tone/features',
+			type: 'Tone',
+			title: 'Features',
+		},
+		{
+			id: 'type/podcast',
+			type: 'Type',
+			title: 'Podcast',
+		},
+		{
+			id: 'profile/gavin-francis',
 			type: 'Contributor',
-			title: 'Glenn Greenwald',
-			bylineImageUrl:
-				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2012/8/16/1345126789538/Gleen_Greenwald-140.jpg?width=300&quality=85&auto=format&fit=max&s=e67b2ebc5cf82a3ed2ea1d3cb2f0b268',
+			title: 'Gavin Francis',
+			twitterHandle: 'gavinfranc',
 		},
 		{
-			id: 'publication/theguardian',
-			type: 'Publication',
-			title: 'The Guardian',
+			id: 'profile/nicola-alexandrou',
+			type: 'Contributor',
+			title: 'Nicola Alexandrou',
 		},
 		{
-			id: 'theguardian/mainsection',
-			type: 'NewspaperBook',
-			title: 'Main section',
+			id: 'profile/ellie-bury',
+			type: 'Contributor',
+			title: 'Ellie Bury',
 		},
 		{
-			id: 'theguardian/mainsection/topstories',
-			type: 'NewspaperBookSection',
-			title: 'Top stories',
+			id: 'tracking/commissioningdesk/uk-audio',
+			type: 'Tracking',
+			title: 'UK Audio',
+		},
+		{
+			id: 'tracking/commissioningdesk/long-read',
+			type: 'Tracking',
+			title: 'UK Long Read',
 		},
 	],
 	pillar: 'news',
 	isLegacyInteractive: false,
 	isImmersive: false,
-	sectionLabel: 'US national security',
-	sectionUrl: 'us-news/us-national-security',
-	sectionName: 'us-news',
+	sectionLabel: 'Mental health',
+	sectionUrl: 'society/mental-health',
+	sectionName: 'news',
 	subMetaSectionLinks: [
 		{
-			url: '/us-news/us-national-security',
-			title: 'US national security',
+			url: '/society/mental-health',
+			title: 'Mental health',
 		},
 		{
-			url: '/commentisfree/series/glenn-greenwald-security-liberty',
-			title: 'Glenn Greenwald on security and liberty',
+			url: '/news/series/the-audio-long-read',
+			title: 'The Audio Long Read',
 		},
 	],
 	subMetaKeywordLinks: [
 		{
-			url: '/us-news/us-politics',
-			title: 'US politics',
-		},
-		{
-			url: '/world/privacy',
-			title: 'Privacy',
-		},
-		{
-			url: '/business/telecoms',
-			title: 'Telecommunications industry',
-		},
-		{
-			url: '/technology/telecoms',
-			title: 'Telecoms',
-		},
-		{
-			url: '/business/verizon-communications',
-			title: 'Verizon Communications',
-		},
-		{
-			url: '/technology/data-protection',
-			title: 'Data protection',
-		},
-		{
-			url: '/tone/news',
-			title: 'news',
+			url: '/society/health',
+			title: 'Health',
 		},
 	],
 	shouldHideAds: false,
 	isAdFreeUser: false,
-	webURL: 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+	webURL: 'https://www.theguardian.com/news/audio/2026/mar/06/what-i-see-in-clinic-is-never-a-set-of-labels-are-we-in-danger-of-overdiagnosing-mental-illness--podcast',
 	linkedData: [
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+			'@id': 'https://www.theguardian.com/news/audio/2026/mar/06/what-i-see-in-clinic-is-never-a-set-of-labels-are-we-in-danger-of-overdiagnosing-mental-illness--podcast',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -605,58 +220,65 @@ export const Audio: FEArticle = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTMucG5n&enable=upscale&s=cc877710aa4399e5295407faaefca3b2',
-				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
-				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
-				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
+				'https://i.guim.co.uk/img/media/5ef9f1435cd06589bf2a031119b64d38633d4197/625_0_3750_3000/master/3750.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=fb38271a003654a1f9f9f571ae2bae5a',
+				'https://i.guim.co.uk/img/media/5ef9f1435cd06589bf2a031119b64d38633d4197/625_0_3750_3000/master/3750.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=9dbedb17a7e864db69dafbd83a250921',
+				'https://i.guim.co.uk/img/media/5ef9f1435cd06589bf2a031119b64d38633d4197/625_0_3750_3000/master/3750.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=181f1359f2866b463c920b03d79fff9d',
+				'https://i.guim.co.uk/img/media/5ef9f1435cd06589bf2a031119b64d38633d4197/625_0_3750_3000/master/3750.jpg?width=1200&quality=85&auto=format&fit=max&s=5a969034ad587991d9adcb755a70101d',
 			],
 			author: [
 				{
 					'@type': 'Person',
-					name: 'Glenn Greenwald',
-					sameAs: 'https://www.theguardian.com/profile/glenn-greenwald',
+					name: 'Gavin Francis',
+					sameAs: 'https://www.theguardian.com/profile/gavin-francis',
+				},
+				{
+					'@type': 'Person',
+					name: 'Nicola Alexandrou',
+					sameAs: 'https://www.theguardian.com/profile/nicola-alexandrou',
+				},
+				{
+					'@type': 'Person',
+					name: 'Ellie Bury',
+					sameAs: 'https://www.theguardian.com/profile/ellie-bury',
 				},
 			],
-			datePublished: '2013-06-06T10:05:00.000Z',
+			datePublished: '2026-03-06T05:00:11.000Z',
 			headline:
-				'NSA collecting phone records of millions of Verizon customers daily',
-			dateModified: '2019-05-01T17:16:49.000Z',
+				'‘What I see in clinic is never a set of labels’: are we in danger of overdiagnosing mental illness? -podcast',
+			dateModified: '2026-03-06T05:00:11.000Z',
 			mainEntityOfPage:
-				'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+				'https://www.theguardian.com/news/audio/2026/mar/06/what-i-see-in-clinic-is-never-a-set-of-labels-are-we-in-danger-of-overdiagnosing-mental-illness--podcast',
 		},
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+			'@id': 'https://www.theguardian.com/news/audio/2026/mar/06/what-i-see-in-clinic-is-never-a-set-of-labels-are-we-in-danger-of-overdiagnosing-mental-illness--podcast',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+				target: 'android-app://com.guardian/https/www.theguardian.com/news/audio/2026/mar/06/what-i-see-in-clinic-is-never-a-set-of-labels-are-we-in-danger-of-overdiagnosing-mental-illness--podcast',
 			},
 		},
 	],
 	openGraphData: {
 		'og:url':
-			'http://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
-		'article:author': 'https://www.theguardian.com/profile/glenn-greenwald',
+			'https://www.theguardian.com/news/audio/2026/mar/06/what-i-see-in-clinic-is-never-a-set-of-labels-are-we-in-danger-of-overdiagnosing-mental-illness--podcast',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTMucG5n&enable=upscale&s=cc877710aa4399e5295407faaefca3b2',
+			'https://i.guim.co.uk/img/media/5ef9f1435cd06589bf2a031119b64d38633d4197/625_0_3750_3000/master/3750.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=fb38271a003654a1f9f9f571ae2bae5a',
 		'al:ios:url':
-			'gnmguardian://world/2013/jun/06/nsa-phone-records-verizon-court-order?contenttype=Article&source=applinks',
-		'article:publisher': 'https://www.facebook.com/theguardian',
+			'gnmguardian://news/audio/2026/mar/06/what-i-see-in-clinic-is-never-a-set-of-labels-are-we-in-danger-of-overdiagnosing-mental-illness--podcast?contenttype=Article&source=applinks',
 		'og:title':
-			'NSA collecting phone records of millions of Verizon customers daily',
+			'‘What I see in clinic is never a set of labels’: are we in danger of overdiagnosing mental illness? -podcast',
 		'fb:app_id': '180444840287',
-		'article:modified_time': '2019-05-01T17:16:49.000Z',
-		'og:image:height': '720',
+		'article:modified_time': '2026-03-06T05:00:11.000Z',
+		'og:image:height': '960',
 		'og:description':
-			'Exclusive: Top secret court order requiring Verizon to hand over all call data shows scale of domestic surveillance under Obama administration',
+			'Our current approach to mental health labelling and diagnosis has brought benefits. But as a practising doctor, I am concerned that it may be doing more harm than goodBy Gavin Francis. Read by Noof Ousellam',
 		'og:type': 'article',
 		'al:ios:app_store_id': '409128287',
-		'article:section': 'US news',
-		'article:published_time': '2013-06-06T10:05:00.000Z',
-		'article:tag':
-			'US national security,US politics,Privacy,Telecommunications industry,Telecoms,Verizon Communications,Data protection,Technology,Business,World news,US news,NSA,The NSA files',
+		'article:section': 'News',
+		'article:published_time': '2026-03-06T05:00:11.000Z',
+		'article:tag': 'Mental health,Health,Society',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
 	},
@@ -666,17 +288,18 @@ export const Audio: FEArticle = {
 		'twitter:app:name:ipad': 'The Guardian',
 		'twitter:card': 'summary_large_image',
 		'twitter:app:name:iphone': 'The Guardian',
+		'twitter:creator': '@gavinfranc',
 		'twitter:app:id:ipad': '409128287',
 		'twitter:app:id:googleplay': 'com.guardian',
 		'twitter:app:url:googleplay':
-			'guardian://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+			'guardian://www.theguardian.com/news/audio/2026/mar/06/what-i-see-in-clinic-is-never-a-set-of-labels-are-we-in-danger-of-overdiagnosing-mental-illness--podcast',
 		'twitter:app:url:iphone':
-			'gnmguardian://world/2013/jun/06/nsa-phone-records-verizon-court-order?contenttype=Article&source=twitter',
+			'gnmguardian://news/audio/2026/mar/06/what-i-see-in-clinic-is-never-a-set-of-labels-are-we-in-danger-of-overdiagnosing-mental-illness--podcast?contenttype=Article&source=twitter',
 		'twitter:image':
-			'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTMucG5n&s=dd2482dfcbf026416320a4ad45e45237',
+			'https://i.guim.co.uk/img/media/5ef9f1435cd06589bf2a031119b64d38633d4197/625_0_3750_3000/master/3750.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=1d3f84aca5d5bd7ea6b85329ad238432',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
-			'gnmguardian://world/2013/jun/06/nsa-phone-records-verizon-court-order?contenttype=Article&source=twitter',
+			'gnmguardian://news/audio/2026/mar/06/what-i-see-in-clinic-is-never-a-set-of-labels-are-we-in-danger-of-overdiagnosing-mental-illness--podcast?contenttype=Article&source=twitter',
 	},
 	config: {
 		references: [
@@ -844,11 +467,11 @@ export const Audio: FEArticle = {
 		discussionD2Uid: 'zHoBy6HNKsk',
 	},
 	guardianBaseURL: 'https://www.theguardian.com',
-	contentType: 'Article',
+	contentType: 'Audio',
 	hasRelated: true,
 	hasStoryPackage: false,
 	beaconURL: '//phar.gu-web.net',
-	isCommentable: true,
+	isCommentable: false,
 	commercialProperties: {
 		US: {
 			adTargeting: [
@@ -857,53 +480,40 @@ export const Audio: FEArticle = {
 					value: ['0'],
 				},
 				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'tn',
-					value: ['news'],
-				},
-				{
-					name: 'co',
-					value: ['glenn-greenwald'],
-				},
-				{
-					name: 'k',
-					value: [
-						'business',
-						'us-national-security',
-						'world',
-						'data-protection',
-						'us-politics',
-						'technology',
-						'nsa',
-						'telecoms',
-						'privacy',
-						'the-nsa-files',
-						'verizon-communications',
-						'us-news',
-					],
+					name: 'edition',
+					value: 'us',
 				},
 				{
 					name: 'url',
-					value: '/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+					value: '/news/audio/2026/mar/06/what-i-see-in-clinic-is-never-a-set-of-labels-are-we-in-danger-of-overdiagnosing-mental-illness--podcast',
+				},
+				{
+					name: 'tn',
+					value: ['features'],
+				},
+				{
+					name: 'co',
+					value: ['gavin-francis', 'ellie-bury', 'nicola-alexandrou'],
+				},
+				{
+					name: 'ct',
+					value: 'audio',
+				},
+				{
+					name: 'se',
+					value: ['the-long-read', 'the-audio-long-read'],
+				},
+				{
+					name: 'k',
+					value: ['health', 'society', 'mental-health'],
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/x4f2pp',
 				},
 				{
 					name: 'p',
 					value: 'ng',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/3gc62',
-				},
-				{
-					name: 'se',
-					value: ['glenn-greenwald-security-liberty'],
-				},
-				{
-					name: 'edition',
-					value: 'us',
 				},
 			],
 		},
@@ -918,49 +528,36 @@ export const Audio: FEArticle = {
 					value: 'au',
 				},
 				{
-					name: 'se',
-					value: ['glenn-greenwald-security-liberty'],
-				},
-				{
-					name: 'ct',
-					value: 'article',
+					name: 'url',
+					value: '/news/audio/2026/mar/06/what-i-see-in-clinic-is-never-a-set-of-labels-are-we-in-danger-of-overdiagnosing-mental-illness--podcast',
 				},
 				{
 					name: 'tn',
-					value: ['news'],
+					value: ['features'],
 				},
 				{
 					name: 'co',
-					value: ['glenn-greenwald'],
+					value: ['gavin-francis', 'ellie-bury', 'nicola-alexandrou'],
+				},
+				{
+					name: 'ct',
+					value: 'audio',
+				},
+				{
+					name: 'se',
+					value: ['the-long-read', 'the-audio-long-read'],
 				},
 				{
 					name: 'k',
-					value: [
-						'business',
-						'us-national-security',
-						'world',
-						'data-protection',
-						'us-politics',
-						'technology',
-						'nsa',
-						'telecoms',
-						'privacy',
-						'the-nsa-files',
-						'verizon-communications',
-						'us-news',
-					],
+					value: ['health', 'society', 'mental-health'],
 				},
 				{
-					name: 'url',
-					value: '/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/x4f2pp',
 				},
 				{
 					name: 'p',
 					value: 'ng',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/3gc62',
 				},
 			],
 		},
@@ -971,53 +568,40 @@ export const Audio: FEArticle = {
 					value: ['0'],
 				},
 				{
-					name: 'se',
-					value: ['glenn-greenwald-security-liberty'],
-				},
-				{
 					name: 'edition',
 					value: 'uk',
 				},
 				{
-					name: 'ct',
-					value: 'article',
+					name: 'url',
+					value: '/news/audio/2026/mar/06/what-i-see-in-clinic-is-never-a-set-of-labels-are-we-in-danger-of-overdiagnosing-mental-illness--podcast',
 				},
 				{
 					name: 'tn',
-					value: ['news'],
+					value: ['features'],
 				},
 				{
 					name: 'co',
-					value: ['glenn-greenwald'],
+					value: ['gavin-francis', 'ellie-bury', 'nicola-alexandrou'],
+				},
+				{
+					name: 'ct',
+					value: 'audio',
+				},
+				{
+					name: 'se',
+					value: ['the-long-read', 'the-audio-long-read'],
 				},
 				{
 					name: 'k',
-					value: [
-						'business',
-						'us-national-security',
-						'world',
-						'data-protection',
-						'us-politics',
-						'technology',
-						'nsa',
-						'telecoms',
-						'privacy',
-						'the-nsa-files',
-						'verizon-communications',
-						'us-news',
-					],
+					value: ['health', 'society', 'mental-health'],
 				},
 				{
-					name: 'url',
-					value: '/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/x4f2pp',
 				},
 				{
 					name: 'p',
 					value: 'ng',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/3gc62',
 				},
 			],
 		},
@@ -1028,53 +612,40 @@ export const Audio: FEArticle = {
 					value: ['0'],
 				},
 				{
-					name: 'se',
-					value: ['glenn-greenwald-security-liberty'],
-				},
-				{
-					name: 'ct',
-					value: 'article',
+					name: 'url',
+					value: '/news/audio/2026/mar/06/what-i-see-in-clinic-is-never-a-set-of-labels-are-we-in-danger-of-overdiagnosing-mental-illness--podcast',
 				},
 				{
 					name: 'tn',
-					value: ['news'],
+					value: ['features'],
 				},
 				{
 					name: 'co',
-					value: ['glenn-greenwald'],
+					value: ['gavin-francis', 'ellie-bury', 'nicola-alexandrou'],
+				},
+				{
+					name: 'ct',
+					value: 'audio',
+				},
+				{
+					name: 'se',
+					value: ['the-long-read', 'the-audio-long-read'],
 				},
 				{
 					name: 'k',
-					value: [
-						'business',
-						'us-national-security',
-						'world',
-						'data-protection',
-						'us-politics',
-						'technology',
-						'nsa',
-						'telecoms',
-						'privacy',
-						'the-nsa-files',
-						'verizon-communications',
-						'us-news',
-					],
-				},
-				{
-					name: 'url',
-					value: '/world/2013/jun/06/nsa-phone-records-verizon-court-order',
-				},
-				{
-					name: 'edition',
-					value: 'int',
+					value: ['health', 'society', 'mental-health'],
 				},
 				{
 					name: 'p',
 					value: 'ng',
 				},
 				{
+					name: 'edition',
+					value: 'int',
+				},
+				{
 					name: 'sh',
-					value: 'https://www.theguardian.com/p/3gc62',
+					value: 'https://www.theguardian.com/p/x4f2pp',
 				},
 			],
 		},
@@ -1085,49 +656,36 @@ export const Audio: FEArticle = {
 					value: ['0'],
 				},
 				{
-					name: 'se',
-					value: ['glenn-greenwald-security-liberty'],
-				},
-				{
-					name: 'ct',
-					value: 'article',
+					name: 'url',
+					value: '/news/audio/2026/mar/06/what-i-see-in-clinic-is-never-a-set-of-labels-are-we-in-danger-of-overdiagnosing-mental-illness--podcast',
 				},
 				{
 					name: 'tn',
-					value: ['news'],
+					value: ['features'],
 				},
 				{
 					name: 'co',
-					value: ['glenn-greenwald'],
+					value: ['gavin-francis', 'ellie-bury', 'nicola-alexandrou'],
 				},
 				{
-					name: 'url',
-					value: '/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+					name: 'ct',
+					value: 'audio',
+				},
+				{
+					name: 'k',
+					value: ['health', 'society', 'mental-health'],
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/x4f2pp',
 				},
 				{
 					name: 'p',
 					value: 'ng',
 				},
 				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/3gc62',
-				},
-				{
-					name: 'k',
-					value: [
-						'business',
-						'us-national-security',
-						'world',
-						'data-protection',
-						'us-politics',
-						'technology',
-						'nsa',
-						'telecoms',
-						'privacy',
-						'the-nsa-files',
-						'verizon-communications',
-						'us-news',
-					],
+					name: 'se',
+					value: ['the-long-read', 'the-audio-long-read'],
 				},
 				{
 					name: 'edition',
@@ -1145,10 +703,58 @@ export const Audio: FEArticle = {
 		isPreview: false,
 		isSensitive: false,
 	},
+	audioArticleImage: {
+		displayCredit: true,
+		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		role: 'inline',
+		media: {
+			allImages: [
+				{
+					index: 1,
+					fields: {
+						isMaster: 'true',
+						width: '3750',
+						source: 'Getty / Guardian Design',
+						height: '3000',
+					},
+					mediaType: 'Image',
+					url: 'https://media.guim.co.uk/5ef9f1435cd06589bf2a031119b64d38633d4197/625_0_3750_3000/master/3750.jpg',
+				},
+				{
+					index: 1,
+					fields: {
+						width: '3750',
+						source: 'Getty / Guardian Design',
+						height: '3000',
+					},
+					mediaType: 'Image',
+					url: 'https://media.guim.co.uk/5ef9f1435cd06589bf2a031119b64d38633d4197/625_0_3750_3000/3750.jpg',
+				},
+				{
+					index: 1,
+					fields: {
+						width: '500',
+						source: 'Getty / Guardian Design',
+						height: '400',
+					},
+					mediaType: 'Image',
+					url: 'https://media.guim.co.uk/5ef9f1435cd06589bf2a031119b64d38633d4197/625_0_3750_3000/500.jpg',
+				},
+			],
+		},
+		elementId: '8f1d3dc4-f0a6-4594-9a70-83489d6a8b7d',
+		imageSources: [],
+		data: {
+			copyright: '',
+			alt: 'Illustration: Anais Mims/Guardian Design',
+			caption: '',
+			credit: 'Illustration: Anaïs Mims/Getty / Guardian Design',
+		},
+	},
 	trailText:
-		'<p><strong>Exclusive:</strong> Top secret court order requiring Verizon to hand over all call data shows scale of domestic surveillance under Obama administration</p>',
+		'Our current approach to mental health labelling and diagnosis has brought benefits. But as a practising doctor, I am concerned that it may be doing more harm than good<br><br>By Gavin Francis. Read by Noof Ousellam',
 	nav: {
-		currentUrl: '/us-news',
+		currentUrl: '/news',
 		pillars: [
 			{
 				title: 'News',
@@ -1308,11 +914,6 @@ export const Audio: FEArticle = {
 								url: '/football/teams',
 								longTitle: 'football/teams',
 							},
-							{
-								title: 'Euro 2025',
-								url: '/football/women-s-euro-2025',
-								longTitle: 'football/women-s-euro-2025',
-							},
 						],
 					},
 					{
@@ -1454,6 +1055,10 @@ export const Audio: FEArticle = {
 				iconName: 'home',
 				children: [
 					{
+						title: 'Winter Paralympics',
+						url: '/sport/winter-paralympics',
+					},
+					{
 						title: 'Football',
 						url: '/football',
 						children: [
@@ -1486,11 +1091,6 @@ export const Audio: FEArticle = {
 								title: 'Clubs',
 								url: '/football/teams',
 								longTitle: 'football/teams',
-							},
-							{
-								title: 'Euro 2025',
-								url: '/football/women-s-euro-2025',
-								longTitle: 'football/women-s-euro-2025',
 							},
 						],
 					},
@@ -1741,6 +1341,10 @@ export const Audio: FEArticle = {
 						url: '/crosswords/series/sunday-quick',
 					},
 					{
+						title: 'Mini',
+						url: '/crosswords/series/mini-crossword',
+					},
+					{
 						title: 'Quick cryptic',
 						url: '/crosswords/series/quick-cryptic',
 					},
@@ -1821,95 +1425,6 @@ export const Audio: FEArticle = {
 				url: 'https://licensing.theguardian.com/',
 			},
 		],
-		currentNavLinkTitle: 'US news',
-		currentPillarTitle: 'News',
-		subNavSections: {
-			parent: {
-				title: 'World',
-				url: '/world',
-				longTitle: 'World news',
-				children: [
-					{
-						title: 'Europe',
-						url: '/world/europe-news',
-					},
-					{
-						title: 'US news',
-						url: '/us-news',
-						longTitle: 'US news',
-					},
-					{
-						title: 'Americas',
-						url: '/world/americas',
-					},
-					{
-						title: 'Asia',
-						url: '/world/asia',
-					},
-					{
-						title: 'Australia',
-						url: '/australia-news',
-						longTitle: 'Australia news',
-					},
-					{
-						title: 'Middle East',
-						url: '/world/middleeast',
-					},
-					{
-						title: 'Africa',
-						url: '/world/africa',
-					},
-					{
-						title: 'Inequality',
-						url: '/inequality',
-					},
-					{
-						title: 'Global development',
-						url: '/global-development',
-					},
-				],
-			},
-			links: [
-				{
-					title: 'Europe',
-					url: '/world/europe-news',
-				},
-				{
-					title: 'US news',
-					url: '/us-news',
-					longTitle: 'US news',
-				},
-				{
-					title: 'Americas',
-					url: '/world/americas',
-				},
-				{
-					title: 'Asia',
-					url: '/world/asia',
-				},
-				{
-					title: 'Australia',
-					url: '/australia-news',
-					longTitle: 'Australia news',
-				},
-				{
-					title: 'Middle East',
-					url: '/world/middleeast',
-				},
-				{
-					title: 'Africa',
-					url: '/world/africa',
-				},
-				{
-					title: 'Inequality',
-					url: '/inequality',
-				},
-				{
-					title: 'Global development',
-					url: '/global-development',
-				},
-			],
-		},
 		readerRevenueLinks: {
 			header: {
 				contribute:
@@ -1963,7 +1478,7 @@ export const Audio: FEArticle = {
 			},
 		},
 	},
-	showBottomSocialButtons: true,
+	showBottomSocialButtons: false,
 	pageFooter: {
 		footerLinks: [
 			[
@@ -1986,15 +1501,21 @@ export const Audio: FEArticle = {
 					extraClasses: '',
 				},
 				{
-					text: 'SecureDrop',
-					url: 'https://www.theguardian.com/securedrop',
-					dataLinkName: 'securedrop',
+					text: 'Contact us',
+					url: '/help/contact-us',
+					dataLinkName: 'uk : footer : contact us',
 					extraClasses: '',
 				},
 				{
-					text: 'Work for us',
-					url: 'https://workforus.theguardian.com',
-					dataLinkName: 'uk : footer : work for us',
+					text: 'Tip us off',
+					url: 'https://www.theguardian.com/tips',
+					dataLinkName: 'uk : footer : tips',
+					extraClasses: '',
+				},
+				{
+					text: 'SecureDrop',
+					url: 'https://www.theguardian.com/securedrop',
+					dataLinkName: 'securedrop',
 					extraClasses: '',
 				},
 				{
@@ -2010,15 +1531,21 @@ export const Audio: FEArticle = {
 					extraClasses: '',
 				},
 				{
-					text: 'Terms & conditions',
-					url: '/help/terms-of-service',
-					dataLinkName: 'terms',
+					text: 'Modern Slavery Act',
+					url: 'https://uploads.guim.co.uk/2025/09/05/Modern_Slavery_Statement_2025.pdf',
+					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
 				{
-					text: 'Contact us',
-					url: '/help/contact-us',
-					dataLinkName: 'uk : footer : contact us',
+					text: 'Tax strategy',
+					url: 'https://uploads.guim.co.uk/2025/09/05/Tax_strategy_for_the_year_ended_31_March_2025.pdf',
+					dataLinkName: 'uk : footer : tax strategy',
+					extraClasses: '',
+				},
+				{
+					text: 'Terms & conditions',
+					url: '/help/terms-of-service',
+					dataLinkName: 'terms',
 					extraClasses: '',
 				},
 			],
@@ -2036,15 +1563,9 @@ export const Audio: FEArticle = {
 					extraClasses: '',
 				},
 				{
-					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2024/09/04/Modern_Slavery_Statement_2024_.pdf',
-					dataLinkName: 'uk : footer : modern slavery act statement',
-					extraClasses: '',
-				},
-				{
-					text: 'Tax strategy',
-					url: 'https://uploads.guim.co.uk/2024/08/27/TAX_STRATEGY_FOR_THE_YEAR_ENDED_31_MARCH_2025.pdf',
-					dataLinkName: 'uk : footer : tax strategy',
+					text: 'Newsletters',
+					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+					dataLinkName: 'uk : footer : newsletters',
 					extraClasses: '',
 				},
 				{
@@ -2054,33 +1575,45 @@ export const Audio: FEArticle = {
 					extraClasses: '',
 				},
 				{
-					text: 'Facebook',
-					url: 'https://www.facebook.com/theguardian',
-					dataLinkName: 'uk : footer : facebook',
+					text: 'Bluesky',
+					url: 'https://bsky.app/profile/theguardian.com',
+					dataLinkName: 'uk : footer : Bluesky',
 					extraClasses: '',
 				},
 				{
-					text: 'YouTube',
-					url: 'https://www.youtube.com/user/TheGuardian',
-					dataLinkName: 'uk : footer : youtube',
+					text: 'Facebook',
+					url: 'https://www.facebook.com/theguardian',
+					dataLinkName: 'uk : footer : Facebook',
 					extraClasses: '',
 				},
 				{
 					text: 'Instagram',
 					url: 'https://www.instagram.com/guardian',
-					dataLinkName: 'uk : footer : instagram',
+					dataLinkName: 'uk : footer : Instagram',
 					extraClasses: '',
 				},
 				{
 					text: 'LinkedIn',
 					url: 'https://www.linkedin.com/company/theguardian',
-					dataLinkName: 'uk : footer : linkedin',
+					dataLinkName: 'uk : footer : LinkedIn',
 					extraClasses: '',
 				},
 				{
-					text: 'Newsletters',
-					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
-					dataLinkName: 'uk : footer : newsletters',
+					text: 'Threads',
+					url: 'https://www.threads.com/@guardian',
+					dataLinkName: 'uk : footer : Threads',
+					extraClasses: '',
+				},
+				{
+					text: 'TikTok',
+					url: 'https://www.tiktok.com/@guardian',
+					dataLinkName: 'uk : footer : TikTok',
+					extraClasses: '',
+				},
+				{
+					text: 'YouTube',
+					url: 'https://www.youtube.com/user/TheGuardian',
+					dataLinkName: 'uk : footer : YouTube',
 					extraClasses: '',
 				},
 			],
@@ -2110,9 +1643,9 @@ export const Audio: FEArticle = {
 					extraClasses: '',
 				},
 				{
-					text: 'Tips',
-					url: 'https://www.theguardian.com/tips',
-					dataLinkName: 'uk : footer : tips',
+					text: 'Work with us',
+					url: 'https://workwithus.theguardian.com/',
+					dataLinkName: 'uk : footer : work with us',
 					extraClasses: '',
 				},
 				{
@@ -2124,7 +1657,7 @@ export const Audio: FEArticle = {
 			],
 		],
 	},
-	publication: 'The Guardian',
+	publication: 'theguardian.com',
 	shouldHideReaderRevenue: false,
 	slotMachineFlags: '',
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
