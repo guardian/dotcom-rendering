@@ -2,7 +2,7 @@ import { isString } from '@guardian/libs';
 import { ConfigProvider } from '../components/ConfigContext';
 import { SportDataPageComponent } from '../components/SportDataPageComponent';
 import {
-	ASSET_ORIGIN,
+	ASSET_ORIGIN_APPS,
 	generateScriptTags,
 	getPathFromManifest,
 } from '../lib/assets';
@@ -19,7 +19,7 @@ export const renderAppsSportPage = (sportData: FootballMatchInfoPage) => {
 	const config: Config = {
 		renderingTarget,
 		darkModeAvailable: true,
-		assetOrigin: ASSET_ORIGIN,
+		assetOrigin: ASSET_ORIGIN_APPS,
 		editionId: sportData.editionId,
 	};
 
@@ -36,7 +36,7 @@ export const renderAppsSportPage = (sportData: FootballMatchInfoPage) => {
 	);
 
 	const clientScripts = [
-		getPathFromManifest('client.apps', 'index.js'),
+		getPathFromManifest('client.apps', 'index.js', ASSET_ORIGIN_APPS),
 	].filter(isString);
 	const scriptTags = generateScriptTags([...clientScripts]);
 

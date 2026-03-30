@@ -9,7 +9,7 @@ import {
 	getArticleThemeString,
 } from '../lib/articleFormat';
 import {
-	ASSET_ORIGIN,
+	ASSET_ORIGIN_APPS,
 	generateScriptTags,
 	getPathFromManifest,
 } from '../lib/assets';
@@ -33,7 +33,7 @@ export const renderArticle = (
 	const config: Config = {
 		renderingTarget,
 		darkModeAvailable: true,
-		assetOrigin: ASSET_ORIGIN,
+		assetOrigin: ASSET_ORIGIN_APPS,
 		editionId: frontendData.editionId,
 	};
 
@@ -62,9 +62,9 @@ export const renderArticle = (
 	);
 
 	const clientScripts = [
-		getPathFromManifest('client.apps', 'index.js'),
+		getPathFromManifest('client.apps', 'index.js', ASSET_ORIGIN_APPS),
 		pageHasNonBootInteractiveElements &&
-			`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
+			`${ASSET_ORIGIN_APPS}static/frontend/js/curl-with-js-and-domReady.js`,
 	].filter(isString);
 	const scriptTags = generateScriptTags([...clientScripts]);
 
@@ -167,7 +167,7 @@ export const renderAppsBlocks = ({
 	const config: Config = {
 		renderingTarget: 'Apps',
 		darkModeAvailable: true,
-		assetOrigin: ASSET_ORIGIN,
+		assetOrigin: ASSET_ORIGIN_APPS,
 		editionId,
 	};
 
