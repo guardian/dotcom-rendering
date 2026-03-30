@@ -27,9 +27,6 @@ import { FootballMatchHeaderWrapper } from '../components/FootballMatchHeaderWra
 import { FootballMiniMatchStatsWrapper } from '../components/FootballMiniMatchStatsWrapper.island';
 import { Footer } from '../components/Footer';
 import { GetCricketScoreboard } from '../components/GetCricketScoreboard.island';
-import { GetMatchNav } from '../components/GetMatchNav.island';
-import { GetMatchStats } from '../components/GetMatchStats.island';
-import { GetMatchTabs } from '../components/GetMatchTabs.island';
 import { GridItem } from '../components/GridItem';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
@@ -53,7 +50,6 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideStoryPackageTrails } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
-import { useBetaAB } from '../lib/useAB';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ArticleDeprecated } from '../types/article';
@@ -235,7 +231,7 @@ const bodyWrapper = css`
 	}
 `;
 
-const footballRedesignBodyWrapper = css`
+const footballMatchBodyWrapper = css`
 	padding-top: 0;
 	margin-top: 10px;
 	border-top: 1px solid ${themePalette('--article-border')};
@@ -311,17 +307,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const showComments = article.isCommentable && !isPaidContent;
 
-	const abTests = useBetaAB();
-	const isInFootballRedesignTest =
-		abTests?.isUserInTestGroup('webex-football-redesign', 'variant') ??
-		false;
-
-	const applyFootballRedesign = shouldApplyFootballRedesign(
-		!!footballMatchUrl,
-		isApps,
-		isInFootballRedesignTest,
-	);
-
 	return (
 		<>
 			{isWeb && (
@@ -386,77 +371,28 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					</Island>
 				)}
 				{footballMatchUrl ? (
-					applyFootballRedesign ? (
-						footballMatchHeaderUrl && (
-							<>
-								<noscript>
-									<FootballMatchHeaderFallback
-										format={format}
-										article={article}
-									/>
-								</noscript>
-								<Island
-									priority="feature"
-									defer={{ until: 'visible' }}
-								>
-									<FootballMatchHeaderWrapper
-										initialTab="live"
-										edition={article.editionId}
-										matchHeaderURL={footballMatchHeaderUrl}
-										renderingTarget={renderingTarget}
-										article={article}
-										format={format}
-									/>
-								</Island>
-							</>
-						)
-					) : (
-						<Section
-							showTopBorder={false}
-							backgroundColour={themePalette(
-								'--match-nav-background',
-							)}
-							borderColour={themePalette('--headline-border')}
-							leftContent={
-								<ArticleTitle
+					footballMatchHeaderUrl && (
+						<>
+							<noscript>
+								<FootballMatchHeaderFallback
 									format={format}
-									tags={article.tags}
-									sectionLabel={article.sectionLabel}
-									sectionUrl={article.sectionUrl}
-									guardianBaseURL={article.guardianBaseURL}
-									isMatch={true}
+									article={article}
 								/>
-							}
-							leftColSize="wide"
-							padContent={false}
-							verticalMargins={false}
-						>
-							<Hide above="leftCol">
-								<ArticleTitle
-									format={format}
-									tags={article.tags}
-									sectionLabel={article.sectionLabel}
-									sectionUrl={article.sectionUrl}
-									guardianBaseURL={article.guardianBaseURL}
-									isMatch={true}
-								/>
-							</Hide>
-
+							</noscript>
 							<Island
 								priority="feature"
 								defer={{ until: 'visible' }}
 							>
-								<GetMatchNav
-									matchUrl={footballMatchUrl}
+								<FootballMatchHeaderWrapper
+									initialTab="live"
+									edition={article.editionId}
+									matchHeaderURL={footballMatchHeaderUrl}
+									renderingTarget={renderingTarget}
+									article={article}
 									format={format}
-									headlineString={article.headline}
-									tags={article.tags}
-									webPublicationDateDeprecated={
-										article.webPublicationDateDeprecated
-									}
 								/>
 							</Island>
-						</Section>
+						</>
 					)
 				) : (
 					<Section
@@ -686,18 +622,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						<LiveGrid>
 							<GridItem area="media">
 								<div css={maxWidth}>
-									{!applyFootballRedesign &&
-										!!footballMatchUrl && (
-											<Island
-												priority="critical"
-												defer={{ until: 'visible' }}
-											>
-												<GetMatchTabs
-													matchUrl={footballMatchUrl}
-													format={format}
-												/>
-											</Island>
-										)}
 									{!!cricketMatchUrl && (
 										<Island
 											priority="critical"
@@ -788,38 +712,26 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								)}
 
 								{/* Match stats */}
-								{applyFootballRedesign
-									? !!footballMatchStatsUrl && (
-											<Island
-												priority="feature"
-												defer={{ until: 'visible' }}
-											>
-												<FootballMiniMatchStatsWrapper
-													matchStatsUrl={
-														footballMatchStatsUrl
-													}
-												/>
-											</Island>
-									  )
-									: !!footballMatchUrl && (
-											<Island
-												priority="feature"
-												defer={{ until: 'visible' }}
-											>
-												<GetMatchStats
-													matchUrl={footballMatchUrl}
-													format={format}
-												/>
-											</Island>
-									  )}
+								{!!footballMatchStatsUrl && (
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
+										<FootballMiniMatchStatsWrapper
+											matchStatsUrl={
+												footballMatchStatsUrl
+											}
+										/>
+									</Island>
+								)}
 							</GridItem>
 							<GridItem area="body">
 								<div
 									id="maincontent"
 									css={[
 										bodyWrapper,
-										applyFootballRedesign &&
-											footballRedesignBodyWrapper,
+										!!footballMatchUrl &&
+											footballMatchBodyWrapper,
 									]}
 								>
 									{hasKeyEvents ? (
@@ -1241,18 +1153,4 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			)}
 		</>
 	);
-};
-
-const shouldApplyFootballRedesign = (
-	isFootballMatch: boolean,
-	isApps: boolean,
-	isInFootballVariantGroup: boolean,
-) => {
-	// Since the football blog page is not yet available in the app,
-	// the AB test can be ignored and we default to true
-	if (isFootballMatch) {
-		return isApps || isInFootballVariantGroup;
-	}
-
-	return false;
 };

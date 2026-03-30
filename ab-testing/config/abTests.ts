@@ -32,18 +32,6 @@ const ABTests: ABTest[] = [
 		shouldForceMetricsCollection: false,
 	},
 	{
-		name: "webex-football-redesign",
-		description: "Testing the Redesign for the football pages",
-		owners: ["dotcom.platform@theguardian.com"],
-		expirationDate: `2026-04-22`,
-		type: "server",
-		status: "ON",
-		audienceSize: 0 / 100,
-		audienceSpace: "A",
-		groups: ["control", "variant"],
-		shouldForceMetricsCollection: false,
-	},
-	{
 		name: "commercial-holdback-spacefinder-on-interactives",
 		description:
 			"Holdback proportion of the audience without new spacefinder logic on interactive pages",
@@ -152,7 +140,7 @@ const ABTests: ABTest[] = [
 		description:
 			"Testing whether the asynchronous loading of userIds will alleviate any potential blocking of downstream functions",
 		owners: ["commercial.dev@guardian.co.uk"],
-		expirationDate: "2026-03-27",
+		expirationDate: "2026-04-02",
 		type: "client",
 		status: "ON",
 		audienceSize: 10 / 100,
